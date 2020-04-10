@@ -1,12 +1,12 @@
-import gql from 'graphql-tag'
-import { useState } from 'react'
+import gql from 'graphql-tag';
+import { useState } from 'react';
 
-import { Dialog, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
+import { Dialog, Translate } from '~/components';
+import { useMutation } from '~/components/GQL';
 
-import { ADD_TOAST } from '~/common/enums'
+import { ADD_TOAST } from '~/common/enums';
 
-import { CollapseComment } from './__generated__/CollapseComment'
+import { CollapseComment } from './__generated__/CollapseComment';
 
 const COLLAPSE_COMMENT = gql`
   mutation CollapseComment($id: ID!, $state: CommentState!) {
@@ -15,20 +15,20 @@ const COLLAPSE_COMMENT = gql`
       state
     }
   }
-`
+`;
 
 interface CollapseCommentDialogProps {
-  commentId: string
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  commentId: string;
+  children: ({ open }: { open: () => void }) => React.ReactNode;
 }
 
 const CollapseCommentDialog = ({
   commentId,
   children,
 }: CollapseCommentDialogProps) => {
-  const [showDialog, setShowDialog] = useState(false)
-  const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
+  const [showDialog, setShowDialog] = useState(false);
+  const open = () => setShowDialog(true);
+  const close = () => setShowDialog(false);
 
   const [collapseComment] = useMutation<CollapseComment>(COLLAPSE_COMMENT, {
     variables: { id: commentId, state: 'collapsed' },
@@ -41,10 +41,10 @@ const CollapseCommentDialog = ({
         },
       ],
     },
-  })
+  });
 
   const onCollapse = async () => {
-    await collapseComment()
+    await collapseComment();
 
     window.dispatchEvent(
       new CustomEvent(ADD_TOAST, {
@@ -53,8 +53,8 @@ const CollapseCommentDialog = ({
           content: <Translate id="successCollapseComment" />,
         },
       })
-    )
-  }
+    );
+  };
 
   return (
     <>
@@ -83,8 +83,8 @@ const CollapseCommentDialog = ({
           <Dialog.Footer.Button
             bgColor="green"
             onClick={() => {
-              onCollapse()
-              close()
+              onCollapse();
+              close();
             }}
           >
             <Translate id="confirm" />
@@ -99,7 +99,7 @@ const CollapseCommentDialog = ({
         </Dialog.Footer>
       </Dialog>
     </>
-  )
-}
+  );
+};
 
-export default CollapseCommentDialog
+export default CollapseCommentDialog;

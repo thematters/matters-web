@@ -1,11 +1,11 @@
-import { Card, Icon, TextIcon, Translate } from '~/components'
+import { Card, Icon, TextIcon, Translate } from '~/components';
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
-import { analytics, toPath } from '~/common/utils'
+import { ANALYTICS_EVENTS } from '~/common/enums';
+import { analytics, toPath } from '~/common/utils';
 
 interface ViewMoreButtonProps {
-  q: string
-  type: 'article' | 'tag' | 'user'
+  q: string;
+  type: 'article' | 'tag' | 'user';
 }
 
 const ViewMoreButton = ({ q, type }: ViewMoreButtonProps) => {
@@ -16,7 +16,7 @@ const ViewMoreButton = ({ q, type }: ViewMoreButtonProps) => {
       <Translate zh_hant="更多用戶搜索結果" zh_hans="更多用户搜索结果" />
     ) : (
       <Translate zh_hant="更多作品搜索結果" zh_hans="更多作品搜索结果" />
-    )
+    );
 
   return (
     <Card
@@ -29,7 +29,7 @@ const ViewMoreButton = ({ q, type }: ViewMoreButtonProps) => {
       onClick={() => {
         analytics.trackEvent(ANALYTICS_EVENTS.DISPLAY_ALL, {
           type: `${type}-search`,
-        })
+        });
       }}
     >
       <TextIcon
@@ -40,7 +40,7 @@ const ViewMoreButton = ({ q, type }: ViewMoreButtonProps) => {
         {text}
       </TextIcon>
     </Card>
-  )
-}
+  );
+};
 
-export default ViewMoreButton
+export default ViewMoreButton;

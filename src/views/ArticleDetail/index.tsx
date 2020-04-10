@@ -1,11 +1,11 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
-import jump from 'jump.js'
-import _merge from 'lodash/merge'
-import dynamic from 'next/dynamic'
-import { useRouter } from 'next/router'
-import { useContext, useEffect, useState } from 'react'
-import { Waypoint } from 'react-waypoint'
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
+import jump from 'jump.js';
+import _merge from 'lodash/merge';
+import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
+import { useContext, useEffect, useState } from 'react';
+import { Waypoint } from 'react-waypoint';
 
 import {
   BackToHomeButton,
@@ -20,24 +20,24 @@ import {
   Translate,
   useResponsive,
   ViewerContext,
-} from '~/components'
-import { QueryError } from '~/components/GQL'
-import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
-import { UserDigest } from '~/components/UserDigest'
+} from '~/components';
+import { QueryError } from '~/components/GQL';
+import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference';
+import { UserDigest } from '~/components/UserDigest';
 
-import { getQuery } from '~/common/utils'
+import { getQuery } from '~/common/utils';
 
-import Collection from './Collection'
-import Content from './Content'
-import RelatedArticles from './RelatedArticles'
-import State from './State'
-import styles from './styles.css'
-import TagList from './TagList'
-import Toolbar from './Toolbar'
-import Wall from './Wall'
+import Collection from './Collection';
+import Content from './Content';
+import RelatedArticles from './RelatedArticles';
+import State from './State';
+import styles from './styles.css';
+import TagList from './TagList';
+import Toolbar from './Toolbar';
+import Wall from './Wall';
 
-import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
-import { ArticleDetail as ArticleDetailType } from './__generated__/ArticleDetail'
+import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference';
+import { ArticleDetail as ArticleDetailType } from './__generated__/ArticleDetail';
 
 const ARTICLE_DETAIL = gql`
   query ArticleDetail($mediaHash: String) {
@@ -69,56 +69,56 @@ const ARTICLE_DETAIL = gql`
   ${TagList.fragments.article}
   ${RelatedArticles.fragments.article}
   ${State.fragments.article}
-`
+`;
 
 const DynamicResponse = dynamic(() => import('./Responses'), {
   ssr: false,
   loading: Spinner,
-})
+});
 
 const EmptyLayout: React.FC = ({ children }) => (
   <Layout.Main>
     <Layout.Header left={<Layout.Header.BackButton />} />
     {children}
   </Layout.Main>
-)
+);
 
 const ArticleDetail = () => {
-  const isLargeUp = useResponsive('lg-up')
-  const router = useRouter()
-  const mediaHash = getQuery({ router, key: 'mediaHash' })
-  const viewer = useContext(ViewerContext)
-  const [fixedWall, setFixedWall] = useState(false)
+  const isLargeUp = useResponsive('lg-up');
+  const router = useRouter();
+  const mediaHash = getQuery({ router, key: 'mediaHash' });
+  const viewer = useContext(ViewerContext);
+  const [fixedWall, setFixedWall] = useState(false);
   const { data, loading, error } = useQuery<ArticleDetailType>(ARTICLE_DETAIL, {
     variables: { mediaHash },
-  })
+  });
 
   const { data: clientPreferenceData } = useQuery<ClientPreference>(
     CLIENT_PREFERENCE,
     {
       variables: { id: 'local' },
     }
-  )
-  const { wall } = clientPreferenceData?.clientPreference || { wall: true }
+  );
+  const { wall } = clientPreferenceData?.clientPreference || { wall: true };
 
-  const shouldShowWall = !viewer.isAuthed && wall
-  const article = data?.article
-  const authorId = article && article.author.id
-  const collectionCount = (article && article.collection.totalCount) || 0
-  const canEditCollection = viewer.id === authorId
+  const shouldShowWall = !viewer.isAuthed && wall;
+  const article = data?.article;
+  const authorId = article && article.author.id;
+  const collectionCount = (article && article.collection.totalCount) || 0;
+  const canEditCollection = viewer.id === authorId;
 
   useEffect(() => {
     if (shouldShowWall && window.location.hash && article) {
-      jump('#comments', { offset: -10 })
+      jump('#comments', { offset: -10 });
     }
-  }, [article])
+  }, [article]);
 
   if (loading) {
     return (
       <EmptyLayout>
         <Spinner />
       </EmptyLayout>
-    )
+    );
   }
 
   if (error) {
@@ -126,7 +126,7 @@ const ArticleDetail = () => {
       <EmptyLayout>
         <QueryError error={error} />
       </EmptyLayout>
-    )
+    );
   }
 
   if (!article) {
@@ -134,7 +134,7 @@ const ArticleDetail = () => {
       <EmptyLayout>
         <Throw404 />
       </EmptyLayout>
-    )
+    );
   }
 
   if (article.state !== 'active' && viewer.id !== authorId) {
@@ -159,7 +159,7 @@ const ArticleDetail = () => {
           <BackToHomeButton />
         </Error>
       </EmptyLayout>
-    )
+    );
   }
 
   return (
@@ -213,7 +213,7 @@ const ArticleDetail = () => {
         <Waypoint
           onPositionChange={({ currentPosition }) => {
             if (shouldShowWall) {
-              setFixedWall(currentPosition === 'inside')
+              setFixedWall(currentPosition === 'inside');
             }
           }}
         />
@@ -238,7 +238,7 @@ const ArticleDetail = () => {
 
       <style jsx>{styles}</style>
     </Layout.Main>
-  )
-}
+  );
+};
 
-export default ArticleDetail
+export default ArticleDetail;

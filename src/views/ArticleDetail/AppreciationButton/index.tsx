@@ -1,25 +1,25 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
-import { useContext, useState } from 'react'
-import { useDebouncedCallback } from 'use-debounce'
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
+import { useContext, useState } from 'react';
+import { useDebouncedCallback } from 'use-debounce';
 
-import { Tooltip, Translate, ViewerContext } from '~/components'
-import { useMutation } from '~/components/GQL'
-import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
+import { Tooltip, Translate, ViewerContext } from '~/components';
+import { useMutation } from '~/components/GQL';
+import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference';
 
-import { APPRECIATE_DEBOUNCE } from '~/common/enums'
+import { APPRECIATE_DEBOUNCE } from '~/common/enums';
 
-import Appreciators from '../Toolbar/Appreciators'
-import AppreciateButton from './AppreciateButton'
-import CivicLikerButton from './CivicLikerButton'
-import SetupLikerIdAppreciateButton from './SetupLikerIdAppreciateButton'
+import Appreciators from '../Toolbar/Appreciators';
+import AppreciateButton from './AppreciateButton';
+import CivicLikerButton from './CivicLikerButton';
+import SetupLikerIdAppreciateButton from './SetupLikerIdAppreciateButton';
 
-import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
+import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference';
 import {
   AppreciateArticle,
   AppreciateArticle_appreciateArticle,
-} from './__generated__/AppreciateArticle'
-import { AppreciationButtonArticle } from './__generated__/AppreciationButtonArticle'
+} from './__generated__/AppreciateArticle';
+import { AppreciationButtonArticle } from './__generated__/AppreciationButtonArticle';
 
 const fragments = {
   article: gql`
@@ -34,7 +34,7 @@ const fragments = {
       appreciateLeft
     }
   `,
-}
+};
 
 const APPRECIATE_ARTICLE = gql`
   mutation AppreciateArticle($id: ID!, $amount: Int!) {
@@ -47,30 +47,30 @@ const APPRECIATE_ARTICLE = gql`
     }
   }
   ${Appreciators.fragments.article}
-`
+`;
 
 const AppreciationButton = ({
   article,
 }: {
-  article: AppreciationButtonArticle
+  article: AppreciationButtonArticle;
 }) => {
-  const viewer = useContext(ViewerContext)
+  const viewer = useContext(ViewerContext);
   const { data, client } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
     variables: { id: 'local' },
-  })
+  });
 
   // bundle appreciations
-  const [amount, setAmount] = useState(0)
-  const [sendAppreciation] = useMutation<AppreciateArticle>(APPRECIATE_ARTICLE)
+  const [amount, setAmount] = useState(0);
+  const [sendAppreciation] = useMutation<AppreciateArticle>(APPRECIATE_ARTICLE);
   const {
     appreciateLimit,
     appreciateLeft,
     appreciationsReceivedTotal,
-  } = article
-  const limit = appreciateLimit
-  const left = appreciateLeft - amount
-  const total = article.appreciationsReceivedTotal + amount
-  const appreciatedCount = limit - left
+  } = article;
+  const limit = appreciateLimit;
+  const left = appreciateLeft - amount;
+  const total = article.appreciationsReceivedTotal + amount;
+  const appreciatedCount = limit - left;
   const [debouncedSendAppreciation] = useDebouncedCallback(async () => {
     try {
       await sendAppreciation({
@@ -84,32 +84,32 @@ const AppreciationButton = ({
             __typename: 'Article',
           } as AppreciateArticle_appreciateArticle,
         },
-      })
+      });
     } catch (e) {
-      console.error(e)
+      console.error(e);
     }
 
-    setAmount(0)
-  }, APPRECIATE_DEBOUNCE)
+    setAmount(0);
+  }, APPRECIATE_DEBOUNCE);
   const appreciate = () => {
-    setAmount(amount + 1)
-    debouncedSendAppreciation()
-  }
+    setAmount(amount + 1);
+    debouncedSendAppreciation();
+  };
 
   // UI
-  const isReachLimit = left <= 0
-  const isMe = article.author.id === viewer.id
+  const isReachLimit = left <= 0;
+  const isMe = article.author.id === viewer.id;
   const readCivicLikerDialog =
-    viewer.isCivicLiker || data?.clientPreference.readCivicLikerDialog
+    viewer.isCivicLiker || data?.clientPreference.readCivicLikerDialog;
   const canAppreciate =
     (!isReachLimit && !isMe && !viewer.isInactive && viewer.liker.likerId) ||
-    !viewer.isAuthed
+    !viewer.isAuthed;
 
   /**
    * Setup Liker Id Button
    */
   if (viewer.shouldSetupLikerID) {
-    return <SetupLikerIdAppreciateButton total={total} />
+    return <SetupLikerIdAppreciateButton total={total} />;
   }
 
   /**
@@ -124,7 +124,7 @@ const AppreciationButton = ({
         }
         total={total}
       />
-    )
+    );
   }
 
   /**
@@ -137,21 +137,21 @@ const AppreciationButton = ({
           client.writeData({
             id: 'ClientPreference:local',
             data: { readCivicLikerDialog: true },
-          })
+          });
         }}
         count={
           viewer.isAuthed && appreciatedCount > 0 ? appreciatedCount : undefined
         }
         total={total}
       />
-    )
+    );
   }
 
   /**
    * MAX Button
    */
   if (!canAppreciate && isReachLimit) {
-    return <AppreciateButton count="MAX" total={total} />
+    return <AppreciateButton count="MAX" total={total} />;
   }
 
   /**
@@ -186,9 +186,9 @@ const AppreciationButton = ({
         />
       </div>
     </Tooltip>
-  )
-}
+  );
+};
 
-AppreciationButton.fragments = fragments
+AppreciationButton.fragments = fragments;
 
-export default AppreciationButton
+export default AppreciationButton;

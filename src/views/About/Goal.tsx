@@ -1,8 +1,8 @@
-import { Translate } from '~/components'
+import { Translate } from '~/components';
 
-import IMAGE_GOAL from '~/static/images/about-2.svg'
+import IMAGE_GOAL from '~/static/images/about-2.svg';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 const Goal = () => (
   <section className="goal">
@@ -44,6 +44,6 @@ const Goal = () => (
 
     <style jsx>{styles}</style>
   </section>
-)
+);
 
-export default Goal
+export default Goal;

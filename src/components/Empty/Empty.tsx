@@ -1,10 +1,10 @@
-import Alert from '@reach/alert'
+import Alert from '@reach/alert';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 interface EmptyProps {
-  icon: React.ReactNode
-  description: string | React.ReactNode
+  icon: React.ReactNode;
+  description: string | React.ReactNode;
 }
 
 export const Empty = ({ icon, description }: EmptyProps) => {
@@ -18,5 +18,5 @@ export const Empty = ({ icon, description }: EmptyProps) => {
 
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};

@@ -1,10 +1,10 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
-import _get from 'lodash/get'
-import _some from 'lodash/some'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { useContext } from 'react'
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
+import _get from 'lodash/get';
+import _some from 'lodash/some';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useContext } from 'react';
 
 import {
   Avatar,
@@ -17,18 +17,18 @@ import {
   Translate,
   useResponsive,
   ViewerContext,
-} from '~/components'
+} from '~/components';
 
-import { getQuery, numAbbr, toPath } from '~/common/utils'
+import { getQuery, numAbbr, toPath } from '~/common/utils';
 
-import { CivicLikerBadge, SeedBadge } from './Badges'
-import Cover from './Cover'
-import DropdownActions from './DropdownActions'
-import EditProfileButton from './EditProfileButton'
-import styles from './styles.css'
+import { CivicLikerBadge, SeedBadge } from './Badges';
+import Cover from './Cover';
+import DropdownActions from './DropdownActions';
+import EditProfileButton from './EditProfileButton';
+import styles from './styles.css';
 
-import { MeProfileUser } from './__generated__/MeProfileUser'
-import { UserProfileUser } from './__generated__/UserProfileUser'
+import { MeProfileUser } from './__generated__/MeProfileUser';
+import { UserProfileUser } from './__generated__/UserProfileUser';
 
 const fragments = {
   user: gql`
@@ -63,7 +63,7 @@ const fragments = {
     ${FollowButton.fragments.user}
     ${DropdownActions.fragments.user}
   `,
-}
+};
 
 const USER_PROFILE = gql`
   query UserProfileUser($userName: String!, $isMe: Boolean = false) {
@@ -72,7 +72,7 @@ const USER_PROFILE = gql`
     }
   }
   ${fragments.user}
-`
+`;
 
 const ME_PROFILE = gql`
   query MeProfileUser($isMe: Boolean = true) {
@@ -81,21 +81,21 @@ const ME_PROFILE = gql`
     }
   }
   ${fragments.user}
-`
+`;
 
 export const UserProfile = () => {
-  const isSmallUp = useResponsive('sm-up')
-  const router = useRouter()
-  const viewer = useContext(ViewerContext)
-  const userName = getQuery({ router, key: 'userName' })
-  const isMe = !userName || viewer.userName === userName
+  const isSmallUp = useResponsive('sm-up');
+  const router = useRouter();
+  const viewer = useContext(ViewerContext);
+  const userName = getQuery({ router, key: 'userName' });
+  const isMe = !userName || viewer.userName === userName;
   const { data, loading } = useQuery<MeProfileUser | UserProfileUser>(
     isMe ? ME_PROFILE : USER_PROFILE,
     {
       variables: isMe ? {} : { userName },
     }
-  )
-  const user = isMe ? _get(data, 'viewer') : _get(data, 'user')
+  );
+  const user = isMe ? _get(data, 'viewer') : _get(data, 'user');
 
   const LayoutHeader = () => (
     <Layout.Header
@@ -113,7 +113,7 @@ export const UserProfile = () => {
       mode={isSmallUp ? 'solid-fixed' : 'transparent-absolute'}
       marginBottom={0}
     />
-  )
+  );
 
   if (loading) {
     return (
@@ -121,7 +121,7 @@ export const UserProfile = () => {
         <LayoutHeader />
         <Spinner />
       </>
-    )
+    );
   }
 
   if (!user) {
@@ -130,7 +130,7 @@ export const UserProfile = () => {
         <LayoutHeader />
         <Throw404 />
       </>
-    )
+    );
   }
 
   if (user?.status?.state === 'archived') {
@@ -147,25 +147,25 @@ export const UserProfile = () => {
           }
         />
       </>
-    )
+    );
   }
 
   const userFollowersPath = toPath({
     page: 'userFollowers',
     userName: user.userName,
-  })
+  });
   const userFolloweesPath = toPath({
     page: 'userFollowees',
     userName: user.userName,
-  })
-  const badges = user.info.badges || []
-  const hasSeedBadge = _some(badges, { type: 'seed' })
-  const profileCover = user.info.profileCover || ''
-  const isCivicLiker = user.liker.civicLiker
-  const isUserArchived = user.status.state === 'archived'
-  const isUserBanned = user.status.state === 'banned'
-  const isUserFrozen = user.status.state === 'frozen'
-  const isUserInactive = isUserArchived || isUserBanned || isUserFrozen
+  });
+  const badges = user.info.badges || [];
+  const hasSeedBadge = _some(badges, { type: 'seed' });
+  const profileCover = user.info.profileCover || '';
+  const isCivicLiker = user.liker.civicLiker;
+  const isUserArchived = user.status.state === 'archived';
+  const isUserBanned = user.status.state === 'banned';
+  const isUserFrozen = user.status.state === 'frozen';
+  const isUserInactive = isUserArchived || isUserBanned || isUserFrozen;
 
   /**
    * Inactive User
@@ -197,7 +197,7 @@ export const UserProfile = () => {
           <style jsx>{styles}</style>
         </section>
       </>
-    )
+    );
   }
 
   /**
@@ -262,5 +262,5 @@ export const UserProfile = () => {
         <style jsx>{styles}</style>
       </section>
     </>
-  )
-}
+  );
+};

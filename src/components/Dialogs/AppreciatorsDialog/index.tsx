@@ -1,15 +1,15 @@
-import gql from 'graphql-tag'
-import { useState } from 'react'
+import gql from 'graphql-tag';
+import { useState } from 'react';
 
-import { Dialog } from '~/components'
+import { Dialog } from '~/components';
 
-import Content from './Content'
+import Content from './Content';
 
-import { AppreciatorsDialogArticle } from './__generated__/AppreciatorsDialogArticle'
+import { AppreciatorsDialogArticle } from './__generated__/AppreciatorsDialogArticle';
 
 interface AppreciatorsDialogProps {
-  article: AppreciatorsDialogArticle
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  article: AppreciatorsDialogArticle;
+  children: ({ open }: { open: () => void }) => React.ReactNode;
 }
 
 const fragments = {
@@ -22,15 +22,15 @@ const fragments = {
       }
     }
   `,
-}
+};
 
 export const AppreciatorsDialog = ({
   article,
   children,
 }: AppreciatorsDialogProps) => {
-  const [showDialog, setShowDialog] = useState(false)
-  const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
+  const [showDialog, setShowDialog] = useState(false);
+  const open = () => setShowDialog(true);
+  const close = () => setShowDialog(false);
 
   return (
     <>
@@ -40,7 +40,7 @@ export const AppreciatorsDialog = ({
         <Content mediaHash={article.mediaHash || ''} closeDialog={close} />
       </Dialog>
     </>
-  )
-}
+  );
+};
 
-AppreciatorsDialog.fragments = fragments
+AppreciatorsDialog.fragments = fragments;

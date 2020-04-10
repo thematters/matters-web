@@ -1,9 +1,9 @@
-import { Empty, Icon } from '~/components'
+import { Empty, Icon } from '~/components';
 
 export const EmptyWarning = ({
   description,
 }: {
-  description: React.ReactNode
+  description: React.ReactNode;
 }) => (
   <Empty icon={<Icon.EmptyWarning size="xxl" />} description={description} />
-)
+);

@@ -1,11 +1,11 @@
-import classNames from 'classnames'
-import React from 'react'
+import classNames from 'classnames';
+import React from 'react';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 interface MenuHeaderProps {
-  title: string | React.ReactNode
-  size?: 'md-s' | 'lg'
+  title: string | React.ReactNode;
+  size?: 'md-s' | 'lg';
 }
 
 const MenuHeader: React.FC<MenuHeaderProps> = ({
@@ -15,7 +15,7 @@ const MenuHeader: React.FC<MenuHeaderProps> = ({
 }) => {
   const titleClass = classNames({
     [`size-${size}`]: !!size,
-  })
+  });
 
   return (
     <header>
@@ -24,7 +24,7 @@ const MenuHeader: React.FC<MenuHeaderProps> = ({
 
       <style jsx>{styles}</style>
     </header>
-  )
-}
+  );
+};
 
-export default MenuHeader
+export default MenuHeader;

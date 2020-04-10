@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
 export const fragments = {
   draft: gql`
@@ -9,4 +9,4 @@ export const fragments = {
       content
     }
   `,
-}
+};

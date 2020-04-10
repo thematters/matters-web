@@ -1,44 +1,44 @@
-import { CachePersistor } from 'apollo-cache-persist'
-import getConfig from 'next/config'
+import { CachePersistor } from 'apollo-cache-persist';
+import getConfig from 'next/config';
 
 const {
   publicRuntimeConfig: { ENV },
-} = getConfig()
-const isProd = ENV === 'production'
+} = getConfig();
+const isProd = ENV === 'production';
 
-const APP_VERSION = process.env.app_version || '__UNVERSIONING__'
-const APP_VERSION_KEY = 'app-version'
+const APP_VERSION = process.env.app_version || '__UNVERSIONING__';
+const APP_VERSION_KEY = 'app-version';
 
-let persistor: any = null
+let persistor: any = null;
 
 export const clearPersistCache = async () => {
   if (!persistor || !process.browser) {
-    return
+    return;
   }
 
   try {
-    persistor.pause()
-    await persistor.purge()
-    console.log(`[apollo-cache-persist] purge`)
+    persistor.pause();
+    await persistor.purge();
+    console.log(`[apollo-cache-persist] purge`);
 
     // ref: https://github.com/apollographql/apollo-cache-persist/issues/34#issuecomment-371177206
     // need to reload page to clear in memory cache
     // persistor.resume()
   } catch (error) {
-    console.error('Failed to clearPersistCache', error)
+    console.error('Failed to clearPersistCache', error);
   }
-}
+};
 
 export const setupPersistCache = async (inMemoryCache: any) => {
   if (!process.browser) {
-    return
+    return;
   }
 
   persistor = new CachePersistor({
     cache: inMemoryCache,
     storage: window.localStorage as any,
     debug: !isProd,
-  })
+  });
 
   try {
     /**
@@ -48,21 +48,21 @@ export const setupPersistCache = async (inMemoryCache: any) => {
      */
 
     // Read the current app version from LocalStorage.
-    const currentVersion = await window.localStorage.getItem(APP_VERSION_KEY)
+    const currentVersion = await window.localStorage.getItem(APP_VERSION_KEY);
 
     if (currentVersion === APP_VERSION) {
       console.log(
         `[apollo-cache-persist] current app version is ${currentVersion}, restore`
-      )
-      await persistor.restore()
+      );
+      await persistor.restore();
     } else {
       console.log(
         `[apollo-cache-persist] ${currentVersion} is outdated (latest ${APP_VERSION}), purge`
-      )
-      await persistor.purge()
-      await window.localStorage.setItem(APP_VERSION_KEY, APP_VERSION)
+      );
+      await persistor.purge();
+      await window.localStorage.setItem(APP_VERSION_KEY, APP_VERSION);
     }
   } catch (error) {
-    console.error('Failed to setupPersistCache', error)
+    console.error('Failed to setupPersistCache', error);
   }
-}
+};

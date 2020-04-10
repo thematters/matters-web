@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react'
+import { ReactNode, useState } from 'react';
 import {
   AutoSizer,
   CellMeasurer,
@@ -8,24 +8,24 @@ import {
   InfiniteLoader,
   List,
   ListRowProps,
-} from 'react-virtualized'
+} from 'react-virtualized';
 
 export interface RowRendererProps<T> {
-  datum: T
-  index: number
+  datum: T;
+  index: number;
 }
 
 interface Props<T> {
-  data: T[]
-  loader: ReactNode
-  loadMore: (callback: () => void) => Promise<any>
-  renderer: (props: RowRendererProps<T>) => ReactNode
-  totalCount: number
+  data: T[];
+  loader: ReactNode;
+  loadMore: (callback: () => void) => Promise<any>;
+  renderer: (props: RowRendererProps<T>) => ReactNode;
+  totalCount: number;
 
-  defaultListHeight?: number
-  defaultListMaxHeight?: number
-  defaultRowHeight?: number
-  threshold?: number
+  defaultListHeight?: number;
+  defaultListMaxHeight?: number;
+  defaultRowHeight?: number;
+  threshold?: number;
 }
 
 export const InfiniteList = <T extends object>({
@@ -43,51 +43,51 @@ export const InfiniteList = <T extends object>({
   const cache: CellMeasurerCache = new CellMeasurerCache({
     fixedWidth: true,
     defaultHeight: defaultListHeight,
-  })
+  });
 
   const [listHeight, setListHeight] = useState(
     defaultRowHeight ? defaultRowHeight * data.length : defaultListHeight
-  )
+  );
 
   const [maxHeight] = useState(
     defaultListMaxHeight || window?.innerHeight || defaultListHeight
-  )
+  );
 
-  const isRowLoaded = ({ index }: Index) => !!data[index]
+  const isRowLoaded = ({ index }: Index) => !!data[index];
 
   const loadMoreRows = ({ startIndex }: IndexRange) =>
-    loadMore(() => cache.clear(startIndex, 0))
+    loadMore(() => cache.clear(startIndex, 0));
 
   const rowRenderer = ({ index, key, parent, style }: ListRowProps) => {
-    const datum = data[index]
-    const props = { cache, columnIndex: 0, key, parent, rowIndex: index }
+    const datum = data[index];
+    const props = { cache, columnIndex: 0, key, parent, rowIndex: index };
     return (
       <CellMeasurer {...props}>
         <div style={style}>{datum ? renderer({ index, datum }) : loader}</div>
       </CellMeasurer>
-    )
-  }
+    );
+  };
 
   const calculate = () =>
     [...Array(data.length).keys()].reduce(
       (sum, index) => sum + cache.getHeight(index, 0),
       0
-    )
+    );
 
   const onRowsHaveRendered = () => {
     if (listHeight < maxHeight) {
-      const current = calculate()
+      const current = calculate();
       if (listHeight < current) {
-        setListHeight(Math.min(maxHeight, current))
+        setListHeight(Math.min(maxHeight, current));
       }
     }
-  }
+  };
 
-  const count = data?.length || 0
+  const count = data?.length || 0;
 
-  const rowCount = (totalCount || 0) > count ? count + 1 : count
+  const rowCount = (totalCount || 0) > count ? count + 1 : count;
 
-  const listStyle = { height: `${Math.min(maxHeight, listHeight)}px` }
+  const listStyle = { height: `${Math.min(maxHeight, listHeight)}px` };
 
   return (
     <div className="infinite-list" style={listStyle}>
@@ -109,8 +109,8 @@ export const InfiniteList = <T extends object>({
                 rowRenderer={rowRenderer}
                 rowCount={rowCount}
                 onRowsRendered={(params) => {
-                  onRowsRendered(params)
-                  onRowsHaveRendered()
+                  onRowsRendered(params);
+                  onRowsHaveRendered();
                 }}
                 overscanRowCount={0}
               />
@@ -119,5 +119,5 @@ export const InfiniteList = <T extends object>({
         )}
       </InfiniteLoader>
     </div>
-  )
-}
+  );
+};

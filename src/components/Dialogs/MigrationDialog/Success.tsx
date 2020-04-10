@@ -1,12 +1,12 @@
-import { Dialog, Translate } from '~/components'
+import { Dialog, Translate } from '~/components';
 
-import { PATHS } from '~/common/enums'
+import { PATHS } from '~/common/enums';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 const texts: {
-  zh_hant: Record<string, string>
-  zh_hans: Record<string, string>
+  zh_hant: Record<string, string>;
+  zh_hans: Record<string, string>;
 } = {
   zh_hant: {
     content_1: '搬家已經開始！',
@@ -18,10 +18,10 @@ const texts: {
     content_2: '你无需守候在电脑旁，搬家完成后你会收到邮件通知，请你上站查看。',
     back: '返回首页',
   },
-}
+};
 
 const MigrationDialogSuccess = () => {
-  const { zh_hant, zh_hans } = texts
+  const { zh_hant, zh_hans } = texts;
 
   return (
     <>
@@ -40,7 +40,7 @@ const MigrationDialogSuccess = () => {
       </Dialog.Footer>
       <style jsx>{styles}</style>
     </>
-  )
-}
+  );
+};
 
-export default MigrationDialogSuccess
+export default MigrationDialogSuccess;

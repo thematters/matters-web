@@ -1,17 +1,17 @@
-import gql from 'graphql-tag'
-import { useEffect } from 'react'
+import gql from 'graphql-tag';
+import { useEffect } from 'react';
 
-import { Dialog, Icon, Spinner, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
+import { Dialog, Icon, Spinner, Translate } from '~/components';
+import { useMutation } from '~/components/GQL';
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
-import { analytics } from '~/common/utils'
+import { ANALYTICS_EVENTS } from '~/common/enums';
+import { analytics } from '~/common/utils';
 
-import { GenerateLikerId } from './__generated__/GenerateLikerId'
+import { GenerateLikerId } from './__generated__/GenerateLikerId';
 
 interface Props {
-  prevStep: () => void
-  nextStep: () => void
+  prevStep: () => void;
+  nextStep: () => void;
 }
 
 const GENERATE_LIKER_ID = gql`
@@ -26,21 +26,21 @@ const GENERATE_LIKER_ID = gql`
       }
     }
   }
-`
+`;
 
 const Generating: React.FC<Props> = ({ prevStep, nextStep }) => {
-  const [generate, { error }] = useMutation<GenerateLikerId>(GENERATE_LIKER_ID)
+  const [generate, { error }] = useMutation<GenerateLikerId>(GENERATE_LIKER_ID);
 
   useEffect(() => {
     generate().then((result) => {
-      const likerId = result?.data?.generateLikerId.liker.likerId
+      const likerId = result?.data?.generateLikerId.liker.likerId;
 
       if (likerId) {
-        nextStep()
-        return null
+        nextStep();
+        return null;
       }
-    })
-  }, [])
+    });
+  }, []);
 
   return (
     <>
@@ -80,15 +80,15 @@ const Generating: React.FC<Props> = ({ prevStep, nextStep }) => {
         <Dialog.Footer.Button
           disabled={!error}
           onClick={() => {
-            prevStep()
-            analytics.trackEvent(ANALYTICS_EVENTS.LIKECOIN_STEP_RETRY)
+            prevStep();
+            analytics.trackEvent(ANALYTICS_EVENTS.LIKECOIN_STEP_RETRY);
           }}
         >
           <Translate id={error ? 'retry' : 'continue'} />
         </Dialog.Footer.Button>
       </Dialog.Footer>
     </>
-  )
-}
+  );
+};
 
-export default Generating
+export default Generating;

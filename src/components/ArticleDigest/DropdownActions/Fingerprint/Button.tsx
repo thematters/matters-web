@@ -1,7 +1,7 @@
-import { Icon, Menu, TextIcon, Translate } from '~/components'
+import { Icon, Menu, TextIcon, Translate } from '~/components';
 
 interface FingerprintButtonProps {
-  openDialog: () => void
+  openDialog: () => void;
 }
 
 const FingerprintButton = ({ openDialog }: FingerprintButtonProps) => {
@@ -11,7 +11,7 @@ const FingerprintButton = ({ openDialog }: FingerprintButtonProps) => {
         <Translate id="IPFSEntrance" />
       </TextIcon>
     </Menu.Item>
-  )
-}
+  );
+};
 
-export default FingerprintButton
+export default FingerprintButton;

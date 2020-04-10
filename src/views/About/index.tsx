@@ -1,15 +1,15 @@
-import Link from 'next/link'
+import Link from 'next/link';
 
-import { Head, Icon } from '~/components'
-import Footer from '~/components/Standalone/Footer'
+import { Head, Icon } from '~/components';
+import Footer from '~/components/Standalone/Footer';
 
-import { PATHS, TEXT } from '~/common/enums'
+import { PATHS, TEXT } from '~/common/enums';
 
-import Features from './Features'
-import Goal from './Goal'
-import Reports from './Reports'
-import Slogan from './Slogan'
-import styles from './styles.css'
+import Features from './Features';
+import Goal from './Goal';
+import Reports from './Reports';
+import Slogan from './Slogan';
+import styles from './styles.css';
 
 const About = () => {
   return (
@@ -34,7 +34,7 @@ const About = () => {
 
       <style jsx>{styles}</style>
     </main>
-  )
-}
+  );
+};
 
-export default About
+export default About;

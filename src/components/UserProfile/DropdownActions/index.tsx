@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
 import {
   Button,
@@ -9,12 +9,12 @@ import {
   TextIcon,
   Translate,
   useResponsive,
-} from '~/components'
-import { BlockUser } from '~/components/BlockUser'
+} from '~/components';
+import { BlockUser } from '~/components/BlockUser';
 
-import { TEXT } from '~/common/enums'
+import { TEXT } from '~/common/enums';
 
-import { DropdownActionsUser } from './__generated__/DropdownActionsUser'
+import { DropdownActionsUser } from './__generated__/DropdownActionsUser';
 
 const fragments = {
   user: gql`
@@ -24,19 +24,19 @@ const fragments = {
     }
     ${BlockUser.fragments.user}
   `,
-}
+};
 
 interface DropdownActionsProps {
-  user: DropdownActionsUser
-  isMe: boolean
+  user: DropdownActionsUser;
+  isMe: boolean;
 }
 
 interface DialogProps {
-  openShareDialog: () => void
-  openBlockUserDialog: () => void
+  openShareDialog: () => void;
+  openBlockUserDialog: () => void;
 }
 
-type BaseDropdownActionsProps = DropdownActionsProps & DialogProps
+type BaseDropdownActionsProps = DropdownActionsProps & DialogProps;
 
 const BaseDropdownActions = ({
   user,
@@ -44,7 +44,7 @@ const BaseDropdownActions = ({
   openShareDialog,
   openBlockUserDialog,
 }: BaseDropdownActionsProps) => {
-  const isSmallUp = useResponsive('sm-up')
+  const isSmallUp = useResponsive('sm-up');
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
     <Menu width={isInDropdown ? 'sm' : undefined}>
       <Menu.Item onClick={openShareDialog}>
@@ -57,7 +57,7 @@ const BaseDropdownActions = ({
         <BlockUser.Button user={user} openDialog={openBlockUserDialog} />
       )}
     </Menu>
-  )
+  );
 
   return (
     <DropdownDialog
@@ -82,8 +82,8 @@ const BaseDropdownActions = ({
         </Button>
       )}
     </DropdownDialog>
-  )
-}
+  );
+};
 
 const DropdownActions = ({ user, isMe }: DropdownActionsProps) => {
   return (
@@ -101,9 +101,9 @@ const DropdownActions = ({ user, isMe }: DropdownActionsProps) => {
         </BlockUser.Dialog>
       )}
     </ShareDialog>
-  )
-}
+  );
+};
 
-DropdownActions.fragments = fragments
+DropdownActions.fragments = fragments;
 
-export default DropdownActions
+export default DropdownActions;

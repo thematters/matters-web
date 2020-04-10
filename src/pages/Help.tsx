@@ -1,3 +1,3 @@
-import Help from '~/views/Help'
+import Help from '~/views/Help';
 
-export default () => <Help />
+export default () => <Help />;

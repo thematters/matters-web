@@ -1,27 +1,27 @@
-import { useLazyQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
-import _get from 'lodash/get'
+import { useLazyQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
+import _get from 'lodash/get';
 
-import { AvatarSize, UserDigest } from '~/components'
+import { AvatarSize, UserDigest } from '~/components';
 
-import Content from '../Content'
-import DropdownActions from '../DropdownActions'
-import FooterActions, { FooterActionsControls } from '../FooterActions'
-import PinnedLabel from '../PinnedLabel'
-import ReplyTo from '../ReplyTo'
-import styles from './styles.css'
+import Content from '../Content';
+import DropdownActions from '../DropdownActions';
+import FooterActions, { FooterActionsControls } from '../FooterActions';
+import PinnedLabel from '../PinnedLabel';
+import ReplyTo from '../ReplyTo';
+import styles from './styles.css';
 
-import { FeedComment } from './__generated__/FeedComment'
-import { RefetchComment } from './__generated__/RefetchComment'
+import { FeedComment } from './__generated__/FeedComment';
+import { RefetchComment } from './__generated__/RefetchComment';
 
 export type CommentControls = {
-  avatarSize?: Extract<AvatarSize, 'md' | 'lg'>
-  hasUserName?: boolean
-} & FooterActionsControls
+  avatarSize?: Extract<AvatarSize, 'md' | 'lg'>;
+  hasUserName?: boolean;
+} & FooterActionsControls;
 
 export type CommentProps = {
-  comment: FeedComment
-} & CommentControls
+  comment: FeedComment;
+} & CommentControls;
 
 const fragments = {
   comment: gql`
@@ -51,7 +51,7 @@ const fragments = {
     ${DropdownActions.fragments.comment}
     ${FooterActions.fragments.comment}
   `,
-}
+};
 
 const REFETCH_COMMENT = gql`
   query RefetchComment($id: ID!) {
@@ -71,7 +71,7 @@ const REFETCH_COMMENT = gql`
     }
   }
   ${fragments.comment}
-`
+`;
 
 export const Feed = ({
   comment,
@@ -80,18 +80,18 @@ export const Feed = ({
   commentCallback,
   ...actionControls
 }: CommentProps) => {
-  const [refetchComment] = useLazyQuery<RefetchComment>(REFETCH_COMMENT)
+  const [refetchComment] = useLazyQuery<RefetchComment>(REFETCH_COMMENT);
 
-  const { id, replyTo, author, parentComment } = comment
-  const nodeId = parentComment ? `${parentComment.id}-${id}` : id
+  const { id, replyTo, author, parentComment } = comment;
+  const nodeId = parentComment ? `${parentComment.id}-${id}` : id;
 
   const footerCommentCallback = () => {
     if (commentCallback) {
-      commentCallback()
+      commentCallback();
     }
 
-    refetchComment({ variables: { id: parentComment?.id || id } })
-  }
+    refetchComment({ variables: { id: parentComment?.id || id } });
+  };
 
   return (
     <article id={actionControls.hasLink ? nodeId : ''}>
@@ -129,9 +129,9 @@ export const Feed = ({
 
       <style jsx>{styles}</style>
     </article>
-  )
-}
+  );
+};
 
-Feed.fragments = fragments
+Feed.fragments = fragments;
 
-export default Feed
+export default Feed;

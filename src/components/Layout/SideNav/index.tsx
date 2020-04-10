@@ -1,6 +1,6 @@
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { useContext } from 'react'
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useContext } from 'react';
 
 import {
   Dropdown,
@@ -11,32 +11,32 @@ import {
   useResponsive,
   ViewerContext,
   WriteButton,
-} from '~/components'
+} from '~/components';
 
-import { PATHS, TEXT, Z_INDEX } from '~/common/enums'
+import { PATHS, TEXT, Z_INDEX } from '~/common/enums';
 
-import MeAvatar from '../MeAvatar'
-import NavMenu from '../NavMenu'
-import UnreadIcon from '../UnreadIcon'
-import NavListItem from './NavListItem'
-import styles from './styles.css'
+import MeAvatar from '../MeAvatar';
+import NavMenu from '../NavMenu';
+import UnreadIcon from '../UnreadIcon';
+import NavListItem from './NavListItem';
+import styles from './styles.css';
 
 const SideNav = () => {
-  const isMediumUp = useResponsive('md-up')
-  const isLargeUp = useResponsive('lg-up')
-  const router = useRouter()
-  const viewer = useContext(ViewerContext)
-  const viewerUserName = viewer.userName || ''
+  const isMediumUp = useResponsive('md-up');
+  const isLargeUp = useResponsive('lg-up');
+  const router = useRouter();
+  const viewer = useContext(ViewerContext);
+  const viewerUserName = viewer.userName || '';
 
-  const isInHome = router.pathname === PATHS.HOME.href
-  const isInFollow = router.pathname === PATHS.FOLLOW.href
-  const isInNotification = router.pathname === PATHS.ME_NOTIFICATIONS.href
-  const isInSearch = router.pathname === PATHS.SEARCH.href
+  const isInHome = router.pathname === PATHS.HOME.href;
+  const isInFollow = router.pathname === PATHS.FOLLOW.href;
+  const isInNotification = router.pathname === PATHS.ME_NOTIFICATIONS.href;
+  const isInSearch = router.pathname === PATHS.SEARCH.href;
   const isInMe =
     router.asPath !== PATHS.ME_NOTIFICATIONS.as &&
     (router.asPath.indexOf('/me') >= 0 ||
-      router.query.userName === viewerUserName)
-  const isInDraftDetail = router.pathname === PATHS.ME_DRAFT_DETAIL.href
+      router.query.userName === viewerUserName);
+  const isInDraftDetail = router.pathname === PATHS.ME_DRAFT_DETAIL.href;
 
   return (
     <section className="side-nav">
@@ -105,7 +105,7 @@ const SideNav = () => {
             appendTo={process.browser ? document.body : undefined}
             zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
             onShown={(i) => {
-              hidePopperOnClick(i)
+              hidePopperOnClick(i);
             }}
           >
             <NavListItem
@@ -132,7 +132,7 @@ const SideNav = () => {
 
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 
-export default SideNav
+export default SideNav;

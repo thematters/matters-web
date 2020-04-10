@@ -1,27 +1,27 @@
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 
-import { Layout, Translate } from '~/components'
+import { Layout, Translate } from '~/components';
 
-import { OAUTH_PROVIDER, PATHS } from '~/common/enums'
-import { getQuery, routerPush } from '~/common/utils'
-import ICON_LIKECOIN from '~/static/icons/likecoin.svg'
+import { OAUTH_PROVIDER, PATHS } from '~/common/enums';
+import { getQuery, routerPush } from '~/common/utils';
+import ICON_LIKECOIN from '~/static/icons/likecoin.svg';
 
-import { Box } from '../../Box'
-import styles from '../styles.css'
+import { Box } from '../../Box';
+import styles from '../styles.css';
 
 const OAuthCallbackSuccess = () => {
-  const router = useRouter()
-  const provider = getQuery({ router, key: 'provider' })
+  const router = useRouter();
+  const provider = getQuery({ router, key: 'provider' });
   const title: { [key: string]: any } = {
     likecoin: <Translate zh_hant="設置 Liker ID" zh_hans="设置 Liker ID" />,
-  }
+  };
   const avatar: { [key: string]: any } = {
     likecoin: ICON_LIKECOIN,
-  }
+  };
 
   if (!provider || OAUTH_PROVIDER.indexOf(provider) < 0) {
-    routerPush(PATHS.HOME.href, PATHS.HOME.as)
-    return null
+    routerPush(PATHS.HOME.href, PATHS.HOME.as);
+    return null;
   }
 
   return (
@@ -47,7 +47,7 @@ const OAuthCallbackSuccess = () => {
         </Box>
       </Layout.Spacing>
     </Layout.Main>
-  )
-}
+  );
+};
 
-export default OAuthCallbackSuccess
+export default OAuthCallbackSuccess;

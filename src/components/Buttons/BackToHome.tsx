@@ -1,6 +1,6 @@
-import { Button, TextIcon, Translate } from '~/components'
+import { Button, TextIcon, Translate } from '~/components';
 
-import { PATHS } from '~/common/enums'
+import { PATHS } from '~/common/enums';
 
 export const BackToHomeButton = () => (
   <Button
@@ -13,4 +13,4 @@ export const BackToHomeButton = () => (
       <Translate id="backToDiscover" />
     </TextIcon>
   </Button>
-)
+);

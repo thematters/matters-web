@@ -1,14 +1,14 @@
-import gql from 'graphql-tag'
-import { useRouter } from 'next/router'
+import gql from 'graphql-tag';
+import { useRouter } from 'next/router';
 
-import { Tabs, Translate } from '~/components'
+import { Tabs, Translate } from '~/components';
 
-import { PATHS } from '~/common/enums'
+import { PATHS } from '~/common/enums';
 
-import { AppreciationTabsUserActivity } from './__generated__/AppreciationTabsUserActivity'
+import { AppreciationTabsUserActivity } from './__generated__/AppreciationTabsUserActivity';
 
 interface AppreciationTabsProps {
-  activity: AppreciationTabsUserActivity
+  activity: AppreciationTabsUserActivity;
 }
 
 const fragments = {
@@ -18,12 +18,12 @@ const fragments = {
       appreciationsReceivedTotal
     }
   `,
-}
+};
 
 const AppreciationTabs: React.FC<AppreciationTabsProps> & {
-  fragments: typeof fragments
+  fragments: typeof fragments;
 } = ({ activity }) => {
-  const router = useRouter()
+  const router = useRouter();
 
   return (
     <Tabs spacingBottom={0}>
@@ -43,9 +43,9 @@ const AppreciationTabs: React.FC<AppreciationTabsProps> & {
         <Translate id="appreciationsReceived" />
       </Tabs.Tab>
     </Tabs>
-  )
-}
+  );
+};
 
-AppreciationTabs.fragments = fragments
+AppreciationTabs.fragments = fragments;
 
-export default AppreciationTabs
+export default AppreciationTabs;

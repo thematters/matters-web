@@ -1,19 +1,19 @@
-import { Icon } from '~/components'
+import { Icon } from '~/components';
 
-import { randomString } from '~/common/utils'
+import { randomString } from '~/common/utils';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 export const Switch = ({
   onChange,
   checked,
   loading,
 }: {
-  onChange: () => void
-  checked: boolean
-  loading?: boolean
+  onChange: () => void;
+  checked: boolean;
+  loading?: boolean;
 }) => {
-  const fieldId = randomString()
+  const fieldId = randomString();
 
   return (
     <label className="switch" htmlFor={fieldId}>
@@ -34,5 +34,5 @@ export const Switch = ({
 
       <style jsx>{styles}</style>
     </label>
-  )
-}
+  );
+};

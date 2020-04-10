@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
 
-import { translate, TranslateArgs } from '~/common/utils'
+import { translate, TranslateArgs } from '~/common/utils';
 
-import { LanguageConsumer } from './LanguageContext'
+import { LanguageConsumer } from './LanguageContext';
 
 /**
  * Translate in a given language or current language
@@ -20,18 +20,18 @@ import { LanguageConsumer } from './LanguageContext'
  * <Translate zh_hant='排序' zh_hans='排序' en='Sort By' lang="en" />
  * ```
  */
-export type TranslateProps = TranslateArgs
+export type TranslateProps = TranslateArgs;
 
 export const Translate = React.memo((props: TranslateProps) => {
-  const { lang } = props
+  const { lang } = props;
 
   if (lang) {
-    return <>{translate({ lang, ...props })}</>
+    return <>{translate({ lang, ...props })}</>;
   }
 
   return (
     <LanguageConsumer>
       {({ lang: currentLang }) => translate({ lang: currentLang, ...props })}
     </LanguageConsumer>
-  )
-})
+  );
+});

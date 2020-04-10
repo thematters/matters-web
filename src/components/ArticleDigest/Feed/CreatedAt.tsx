@@ -1,11 +1,11 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import { DateTime } from '~/components'
+import { DateTime } from '~/components';
 
-import { CreatedAtArticle } from './__generated__/CreatedAtArticle'
+import { CreatedAtArticle } from './__generated__/CreatedAtArticle';
 
 export interface CreatedAtProps {
-  article: CreatedAtArticle
+  article: CreatedAtArticle;
 }
 
 const fragments = {
@@ -15,12 +15,12 @@ const fragments = {
       createdAt
     }
   `,
-}
+};
 
 const CreatedAt = ({ article }: CreatedAtProps) => {
-  return <DateTime date={article.createdAt} />
-}
+  return <DateTime date={article.createdAt} />;
+};
 
-CreatedAt.fragments = fragments
+CreatedAt.fragments = fragments;
 
-export default CreatedAt
+export default CreatedAt;

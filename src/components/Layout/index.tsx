@@ -1,24 +1,24 @@
-import classNames from 'classnames'
-import { useRouter } from 'next/router'
+import classNames from 'classnames';
+import { useRouter } from 'next/router';
 
-import { Head, SearchBar } from '~/components'
+import { Head, SearchBar } from '~/components';
 
-import { PATHS } from '~/common/enums'
+import { PATHS } from '~/common/enums';
 
-import Header from './Header'
-import NavBar from './NavBar'
-import SideFooter from './SideFooter'
-import SideNav from './SideNav'
-import Spacing from './Spacing'
-import styles from './styles.css'
+import Header from './Header';
+import NavBar from './NavBar';
+import SideFooter from './SideFooter';
+import SideNav from './SideNav';
+import Spacing from './Spacing';
+import styles from './styles.css';
 
 export const Layout: React.FC & {
-  Main: typeof Main
-  Header: typeof Header
-  Spacing: typeof Spacing
+  Main: typeof Main;
+  Header: typeof Header;
+  Spacing: typeof Spacing;
 } = ({ children }) => {
-  const router = useRouter()
-  const isInDraftDetail = router.pathname === PATHS.ME_DRAFT_DETAIL.href
+  const router = useRouter();
+  const isInDraftDetail = router.pathname === PATHS.ME_DRAFT_DETAIL.href;
 
   return (
     <>
@@ -40,30 +40,30 @@ export const Layout: React.FC & {
 
       <style jsx>{styles}</style>
     </>
-  )
-}
+  );
+};
 
 interface MainProps {
-  aside?: React.ReactNode
-  bgColor?: 'grey-lighter'
+  aside?: React.ReactNode;
+  bgColor?: 'grey-lighter';
   // TODO: this prop only temporally used by DraftDetail,
   // would be removed after revamped
-  keepAside?: boolean
+  keepAside?: boolean;
 }
 
 const Main: React.FC<MainProps> = ({ aside, bgColor, keepAside, children }) => {
-  const router = useRouter()
-  const isInSearch = router.pathname === PATHS.SEARCH.href
+  const router = useRouter();
+  const isInSearch = router.pathname === PATHS.SEARCH.href;
 
   const articleClass = classNames({
     'l-col-three-mid': true,
     [`bg-${bgColor}`]: !!bgColor,
     keepAside,
-  })
+  });
   const asideClass = classNames({
     'l-col-three-right': true,
     'u-lg-down-hide': !keepAside,
-  })
+  });
 
   return (
     <>
@@ -83,9 +83,9 @@ const Main: React.FC<MainProps> = ({ aside, bgColor, keepAside, children }) => {
 
       <style jsx>{styles}</style>
     </>
-  )
-}
+  );
+};
 
-Layout.Main = Main
-Layout.Header = Header
-Layout.Spacing = Spacing
+Layout.Main = Main;
+Layout.Header = Header;
+Layout.Spacing = Spacing;

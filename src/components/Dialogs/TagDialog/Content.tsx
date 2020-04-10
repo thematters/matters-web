@@ -1,6 +1,6 @@
-import { useFormik } from 'formik'
-import gql from 'graphql-tag'
-import { useContext } from 'react'
+import { useFormik } from 'formik';
+import gql from 'graphql-tag';
+import { useContext } from 'react';
 
 import {
   Dialog,
@@ -9,22 +9,22 @@ import {
   Menu,
   Spinner,
   Translate,
-} from '~/components'
-import { useMutation } from '~/components/GQL'
-import SEARCH_TAGS from '~/components/GQL/queries/searchTags'
+} from '~/components';
+import { useMutation } from '~/components/GQL';
+import SEARCH_TAGS from '~/components/GQL/queries/searchTags';
 
-import { ADD_TOAST } from '~/common/enums'
+import { ADD_TOAST } from '~/common/enums';
 import {
   numAbbr,
   parseFormSubmitErrors,
   routerPush,
   toPath,
   translate,
-} from '~/common/utils'
+} from '~/common/utils';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
-import { PutTag } from './__generated__/PutTag'
+import { PutTag } from './__generated__/PutTag';
 
 const PUT_TAG = gql`
   mutation PutTag($id: ID, $content: String, $description: String) {
@@ -34,7 +34,7 @@ const PUT_TAG = gql`
       description
     }
   }
-`
+`;
 
 const DropdownDefaultItem = ({ search }: { search: string }) => {
   return (
@@ -45,13 +45,13 @@ const DropdownDefaultItem = ({ search }: { search: string }) => {
         <style jsx>{styles}</style>
       </span>
     </Menu.Item>
-  )
-}
+  );
+};
 
 interface DropdownListBaseProps {
-  items: any[]
-  loading: boolean
-  search: string
+  items: any[];
+  loading: boolean;
+  search: string;
 }
 
 const DropdownList = ({
@@ -67,11 +67,11 @@ const DropdownList = ({
           <Spinner />
         </Menu.Item>
       </Menu>
-    )
+    );
   }
 
   if ((!items || items.length === 0) && !children) {
-    return null
+    return null;
   }
 
   return (
@@ -90,27 +90,27 @@ const DropdownList = ({
       </Menu>
       <style jsx>{styles}</style>
     </>
-  )
-}
+  );
+};
 
 const DropdownListWithDefaultItem = (props: DropdownListBaseProps) => {
   return (
     <DropdownList {...props}>
       <DropdownDefaultItem search={props.search} />
     </DropdownList>
-  )
-}
+  );
+};
 
 interface TagDialogContentProps {
-  id?: string
-  content?: string
-  description?: string
-  closeDialog: () => void
+  id?: string;
+  content?: string;
+  description?: string;
+  closeDialog: () => void;
 }
 
 interface FormValues {
-  newContent: string
-  newDescription: string
+  newContent: string;
+  newDescription: string;
 }
 
 const TagDialogContent: React.FC<TagDialogContentProps> = ({
@@ -119,10 +119,10 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
   description,
   closeDialog,
 }) => {
-  const [update] = useMutation<PutTag>(PUT_TAG)
-  const { lang } = useContext(LanguageContext)
+  const [update] = useMutation<PutTag>(PUT_TAG);
+  const { lang } = useContext(LanguageContext);
 
-  const formId = 'put-tag-form'
+  const formId = 'put-tag-form';
 
   const {
     values,
@@ -147,7 +147,7 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
             zh_hans: '請输入标签名称',
             lang,
           }),
-        }
+        };
       }
     },
     onSubmit: async (
@@ -157,7 +157,7 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
       try {
         const result = await update({
           variables: { id, content: newContent, description: newDescription },
-        })
+        });
 
         window.dispatchEvent(
           new CustomEvent(ADD_TOAST, {
@@ -167,27 +167,27 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
               duration: 2000,
             },
           })
-        )
+        );
 
-        const returnedTagId = result?.data?.putTag?.id
+        const returnedTagId = result?.data?.putTag?.id;
 
         if (!id) {
           // if created, then redirect to tag detail page
-          const path = toPath({ page: 'tagDetail', id: returnedTagId || '' })
-          routerPush(path.href, path.as)
+          const path = toPath({ page: 'tagDetail', id: returnedTagId || '' });
+          routerPush(path.href, path.as);
         } else {
-          closeDialog()
+          closeDialog();
         }
       } catch (error) {
-        const [messages, codes] = parseFormSubmitErrors(error, lang)
-        setFieldError('newContent', messages[codes[0]])
+        const [messages, codes] = parseFormSubmitErrors(error, lang);
+        setFieldError('newContent', messages[codes[0]]);
       }
 
-      setSubmitting(false)
+      setSubmitting(false);
     },
-  })
+  });
 
-  const DropdownContent = id ? DropdownList : DropdownListWithDefaultItem
+  const DropdownContent = id ? DropdownList : DropdownListWithDefaultItem;
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
@@ -199,8 +199,8 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
         value={values.newContent}
         error={touched.newContent && errors.newContent}
         onBlur={(e) => {
-          setFieldValue('content', e.target.value.trim())
-          handleBlur(e)
+          setFieldValue('content', e.target.value.trim());
+          handleBlur(e);
         }}
         onChange={handleChange}
         dropdownAppendTo={formId}
@@ -220,7 +220,7 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
         required
       />
     </Form>
-  )
+  );
 
   const SubmitButton = (
     <Dialog.Header.RightButton
@@ -230,7 +230,7 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
       disabled={!isValid || isSubmitting}
       loading={isSubmitting}
     />
-  )
+  );
 
   return (
     <>
@@ -244,7 +244,7 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
         {InnerForm}
       </Dialog.Content>
     </>
-  )
-}
+  );
+};
 
-export default TagDialogContent
+export default TagDialogContent;

@@ -685,6 +685,6 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
 
 </details>
 `,
-}
+};
 
-export default ToS
+export default ToS;

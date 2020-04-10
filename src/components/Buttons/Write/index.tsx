@@ -1,5 +1,5 @@
-import gql from 'graphql-tag'
-import { useContext } from 'react'
+import gql from 'graphql-tag';
+import { useContext } from 'react';
 
 import {
   Button,
@@ -8,23 +8,23 @@ import {
   LikeCoinDialog,
   TextIcon,
   Translate,
-} from '~/components'
-import { useMutation } from '~/components/GQL'
+} from '~/components';
+import { useMutation } from '~/components/GQL';
 
-import { ADD_TOAST, ANALYTICS_EVENTS, TEXT } from '~/common/enums'
+import { ADD_TOAST, ANALYTICS_EVENTS, TEXT } from '~/common/enums';
 import {
   analytics,
   parseFormSubmitErrors,
   routerPush,
   toPath,
   translate,
-} from '~/common/utils'
+} from '~/common/utils';
 
-import { CreateDraft } from './__generated__/CreateDraft'
+import { CreateDraft } from './__generated__/CreateDraft';
 
 interface Props {
-  allowed: boolean
-  isLarge?: boolean
+  allowed: boolean;
+  isLarge?: boolean;
 }
 
 export const CREATE_DRAFT = gql`
@@ -34,22 +34,22 @@ export const CREATE_DRAFT = gql`
       slug
     }
   }
-`
+`;
 
 const BaseWriteButton = ({
   onClick,
   loading,
   isLarge,
 }: {
-  onClick: () => any
-  loading?: boolean
-  isLarge?: boolean
+  onClick: () => any;
+  loading?: boolean;
+  isLarge?: boolean;
 }) => {
   const WriteIcon = loading ? (
     <Icon.Spinner size="sm" color="white" />
   ) : (
     <Icon.Pen size="sm" color="white" />
-  )
+  );
 
   return (
     <>
@@ -64,23 +64,23 @@ const BaseWriteButton = ({
         </TextIcon>
       </Button>
     </>
-  )
-}
+  );
+};
 
 export const WriteButton = ({ allowed, isLarge }: Props) => {
-  const { lang } = useContext(LanguageContext)
+  const { lang } = useContext(LanguageContext);
   const [putDraft, { loading }] = useMutation<CreateDraft>(CREATE_DRAFT, {
     variables: {
       title: translate({ id: 'untitle', lang }),
     },
-  })
+  });
 
   if (!allowed) {
     return (
       <LikeCoinDialog>
         {({ open }) => <BaseWriteButton onClick={open} isLarge={isLarge} />}
       </LikeCoinDialog>
-    )
+    );
   }
 
   return (
@@ -88,16 +88,16 @@ export const WriteButton = ({ allowed, isLarge }: Props) => {
       isLarge={isLarge}
       onClick={async () => {
         try {
-          analytics.trackEvent(ANALYTICS_EVENTS.CLICK_WRITE_BUTTON)
-          const result = await putDraft()
-          const { slug, id } = result?.data?.putDraft || {}
+          analytics.trackEvent(ANALYTICS_EVENTS.CLICK_WRITE_BUTTON);
+          const result = await putDraft();
+          const { slug, id } = result?.data?.putDraft || {};
 
           if (slug && id) {
-            const path = toPath({ page: 'draftDetail', slug, id })
-            routerPush(path.href, path.as)
+            const path = toPath({ page: 'draftDetail', slug, id });
+            routerPush(path.href, path.as);
           }
         } catch (error) {
-          const [messages, codes] = parseFormSubmitErrors(error, lang)
+          const [messages, codes] = parseFormSubmitErrors(error, lang);
           window.dispatchEvent(
             new CustomEvent(ADD_TOAST, {
               detail: {
@@ -105,10 +105,10 @@ export const WriteButton = ({ allowed, isLarge }: Props) => {
                 content: messages[codes[0]],
               },
             })
-          )
+          );
         }
       }}
       loading={loading}
     />
-  )
-}
+  );
+};

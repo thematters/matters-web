@@ -1,27 +1,27 @@
-import gql from 'graphql-tag'
-import Link from 'next/link'
+import gql from 'graphql-tag';
+import Link from 'next/link';
 
-import { Avatar } from '~/components/Avatar'
+import { Avatar } from '~/components/Avatar';
 
-import { toPath } from '~/common/utils'
+import { toPath } from '~/common/utils';
 
-import { NoticeActorAvatarUser } from './__generated__/NoticeActorAvatarUser'
+import { NoticeActorAvatarUser } from './__generated__/NoticeActorAvatarUser';
 
 const NoticeActorAvatar = ({
   user,
   size = 'lg',
 }: {
-  user: NoticeActorAvatarUser | null
-  size?: 'md' | 'lg'
+  user: NoticeActorAvatarUser | null;
+  size?: 'md' | 'lg';
 }) => {
   if (!user) {
-    return null
+    return null;
   }
 
   const path = toPath({
     page: 'userProfile',
     userName: user.userName || '',
-  })
+  });
 
   return (
     <Link {...path}>
@@ -29,8 +29,8 @@ const NoticeActorAvatar = ({
         <Avatar user={user} size={size} />
       </a>
     </Link>
-  )
-}
+  );
+};
 
 NoticeActorAvatar.fragments = {
   user: gql`
@@ -41,6 +41,6 @@ NoticeActorAvatar.fragments = {
     }
     ${Avatar.fragments.user}
   `,
-}
+};
 
-export default NoticeActorAvatar
+export default NoticeActorAvatar;

@@ -1,16 +1,16 @@
-import classNames from 'classnames'
-import React from 'react'
+import classNames from 'classnames';
+import React from 'react';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
-type TitleType = 'article' | 'feed' | 'sidebar' | 'nav'
+type TitleType = 'article' | 'feed' | 'sidebar' | 'nav';
 
-type TitleIs = 'h1' | 'h2' | 'h3'
+type TitleIs = 'h1' | 'h2' | 'h3';
 
 interface TitleProps {
-  type: TitleType
-  is?: TitleIs
-  className?: string
+  type: TitleType;
+  is?: TitleIs;
+  className?: string;
 }
 
 /**
@@ -32,7 +32,7 @@ export const Title: React.FC<TitleProps> = ({
   const titleClasses = classNames({
     [type]: true,
     [className || '']: !!className,
-  })
+  });
 
   return (
     <>
@@ -46,5 +46,5 @@ export const Title: React.FC<TitleProps> = ({
 
       <style jsx>{styles}</style>
     </>
-  )
-}
+  );
+};

@@ -1,9 +1,9 @@
-import { Button, Icon, TagDialog, TextIcon, Translate } from '~/components'
+import { Button, Icon, TagDialog, TextIcon, Translate } from '~/components';
 
 interface EditTagButtonProps {
-  id?: string
-  content?: string
-  description?: string
+  id?: string;
+  content?: string;
+  description?: string;
 }
 
 const EditTagButton = (props: EditTagButtonProps) => (
@@ -26,6 +26,6 @@ const EditTagButton = (props: EditTagButtonProps) => (
       </Button>
     )}
   </TagDialog>
-)
+);
 
-export default EditTagButton
+export default EditTagButton;

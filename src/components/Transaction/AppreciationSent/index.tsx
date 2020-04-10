@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
 import {
   ArticleDigestTitle,
@@ -6,13 +6,13 @@ import {
   Icon,
   TextIcon,
   UserDigest,
-} from '~/components'
+} from '~/components';
 
-import { toPath } from '~/common/utils'
+import { toPath } from '~/common/utils';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
-import { AppreciationSentTransaction } from './__generated__/AppreciationSentTransaction'
+import { AppreciationSentTransaction } from './__generated__/AppreciationSentTransaction';
 
 const fragments = {
   transaction: gql`
@@ -30,14 +30,14 @@ const fragments = {
     ${UserDigest.Mini.fragments.user}
     ${ArticleDigestTitle.fragments.article}
   `,
-}
+};
 
 const AppreciationSent = ({ tx }: { tx: AppreciationSentTransaction }) => {
-  const { amount, content, purpose, recipient, target } = tx
-  const isUseContent = purpose !== 'appreciate'
+  const { amount, content, purpose, recipient, target } = tx;
+  const isUseContent = purpose !== 'appreciate';
   const path = target
     ? toPath({ page: 'articleDetail', article: target })
-    : null
+    : null;
 
   return (
     <Card {...path} spacing={['base', 'base']}>
@@ -79,9 +79,9 @@ const AppreciationSent = ({ tx }: { tx: AppreciationSentTransaction }) => {
         <style jsx>{styles}</style>
       </section>
     </Card>
-  )
-}
+  );
+};
 
-AppreciationSent.fragments = fragments
+AppreciationSent.fragments = fragments;
 
-export default AppreciationSent
+export default AppreciationSent;

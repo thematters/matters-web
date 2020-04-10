@@ -1,23 +1,23 @@
-import { useContext } from 'react'
+import { useContext } from 'react';
 
-import { Dialog, LanguageContext, Translate } from '~/components'
+import { Dialog, LanguageContext, Translate } from '~/components';
 
-import contentStyles from '~/common/styles/utils/content.article.css'
-import { translate } from '~/common/utils'
+import contentStyles from '~/common/styles/utils/content.article.css';
+import { translate } from '~/common/utils';
 
-import content from './content'
-import styles from './styles.css'
+import content from './content';
+import styles from './styles.css';
 
 interface LikeCoinTermProps {
-  nextStep: () => void
-  closeDialog: () => void
+  nextStep: () => void;
+  closeDialog: () => void;
 }
 
 const LikeCoinTerm: React.FC<LikeCoinTermProps> = ({
   nextStep,
   closeDialog,
 }) => {
-  const { lang } = useContext(LanguageContext)
+  const { lang } = useContext(LanguageContext);
 
   return (
     <>
@@ -52,7 +52,7 @@ const LikeCoinTerm: React.FC<LikeCoinTermProps> = ({
       <style jsx>{styles}</style>
       <style jsx>{contentStyles}</style>
     </>
-  )
-}
+  );
+};
 
-export default LikeCoinTerm
+export default LikeCoinTerm;

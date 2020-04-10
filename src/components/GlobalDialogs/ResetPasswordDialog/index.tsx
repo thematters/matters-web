@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useState } from 'react';
 
 import {
   Dialog,
@@ -7,13 +7,16 @@ import {
   PasswordChangeRequestForm,
   useEventListener,
   ViewerContext,
-} from '~/components'
+} from '~/components';
 
-import { CLOSE_ACTIVE_DIALOG, OPEN_RESET_PASSWORD_DIALOG } from '~/common/enums'
+import {
+  CLOSE_ACTIVE_DIALOG,
+  OPEN_RESET_PASSWORD_DIALOG,
+} from '~/common/enums';
 
 const ResetPasswordDialog = () => {
-  const viewer = useContext(ViewerContext)
-  const [step, setStep] = useState('request')
+  const viewer = useContext(ViewerContext);
+  const [step, setStep] = useState('request');
   const [data, setData] = useState<{ [key: string]: any }>({
     request: {
       prev: 'login',
@@ -25,10 +28,10 @@ const ResetPasswordDialog = () => {
       next: 'complete',
     },
     complete: {},
-  })
+  });
 
   const requestCodeCallback = (params: any) => {
-    const { email, codeId } = params
+    const { email, codeId } = params;
     setData((prev) => {
       return {
         ...prev,
@@ -37,20 +40,20 @@ const ResetPasswordDialog = () => {
           email,
           codeId,
         },
-      }
-    })
-    setStep('reset')
-  }
+      };
+    });
+    setStep('reset');
+  };
 
-  const [showDialog, setShowDialog] = useState(false)
+  const [showDialog, setShowDialog] = useState(false);
   const open = () => {
-    setStep('request')
-    setShowDialog(true)
-  }
-  const close = () => setShowDialog(false)
+    setStep('request');
+    setShowDialog(true);
+  };
+  const close = () => setShowDialog(false);
 
-  useEventListener(CLOSE_ACTIVE_DIALOG, close)
-  useEventListener(OPEN_RESET_PASSWORD_DIALOG, open)
+  useEventListener(CLOSE_ACTIVE_DIALOG, close);
+  useEventListener(OPEN_RESET_PASSWORD_DIALOG, open);
 
   return (
     <Dialog
@@ -87,7 +90,7 @@ const ResetPasswordDialog = () => {
         />
       )}
     </Dialog>
-  )
-}
+  );
+};
 
-export default ResetPasswordDialog
+export default ResetPasswordDialog;

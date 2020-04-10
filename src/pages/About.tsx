@@ -1,3 +1,3 @@
-import About from '~/views/About'
+import About from '~/views/About';
 
-export default () => <About />
+export default () => <About />;

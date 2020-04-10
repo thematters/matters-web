@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext } from 'react';
 
 import {
   CardSpacing,
@@ -7,32 +7,32 @@ import {
   TextIcon,
   Translate,
   ViewerContext,
-} from '~/components'
-import { useMutation } from '~/components/GQL'
-import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
+} from '~/components';
+import { useMutation } from '~/components/GQL';
+import USER_LOGOUT from '~/components/GQL/mutations/userLogout';
 
-import { ADD_TOAST, ANALYTICS_EVENTS, PATHS } from '~/common/enums'
+import { ADD_TOAST, ANALYTICS_EVENTS, PATHS } from '~/common/enums';
 import {
   analytics,
   // clearPersistCache,
   redirectToTarget,
   unsubscribePush,
-} from '~/common/utils'
+} from '~/common/utils';
 
-import { UserLogout } from '~/components/GQL/mutations/__generated__/UserLogout'
+import { UserLogout } from '~/components/GQL/mutations/__generated__/UserLogout';
 
 interface NavMenuBottomProps {
-  isInSideDrawerNav?: boolean
+  isInSideDrawerNav?: boolean;
 }
 
 const NavMenuBottom: React.FC<NavMenuBottomProps> = ({ isInSideDrawerNav }) => {
-  const [logout] = useMutation<UserLogout>(USER_LOGOUT)
-  const viewer = useContext(ViewerContext)
+  const [logout] = useMutation<UserLogout>(USER_LOGOUT);
+  const viewer = useContext(ViewerContext);
   const onClickLogout = async () => {
     try {
-      await logout()
+      await logout();
 
-      analytics.trackEvent(ANALYTICS_EVENTS.LOG_OUT, { id: viewer.id })
+      analytics.trackEvent(ANALYTICS_EVENTS.LOG_OUT, { id: viewer.id });
 
       window.dispatchEvent(
         new CustomEvent(ADD_TOAST, {
@@ -41,16 +41,16 @@ const NavMenuBottom: React.FC<NavMenuBottomProps> = ({ isInSideDrawerNav }) => {
             content: <Translate id="successLogout" />,
           },
         })
-      )
+      );
 
       try {
-        await unsubscribePush({ silent: true })
+        await unsubscribePush({ silent: true });
         // await clearPersistCache()
       } catch (e) {
-        console.error('Failed to unsubscribePush after logged out')
+        console.error('Failed to unsubscribePush after logged out');
       }
 
-      redirectToTarget()
+      redirectToTarget();
     } catch (e) {
       window.dispatchEvent(
         new CustomEvent(ADD_TOAST, {
@@ -59,14 +59,14 @@ const NavMenuBottom: React.FC<NavMenuBottomProps> = ({ isInSideDrawerNav }) => {
             content: <Translate id="failureLogout" />,
           },
         })
-      )
+      );
     }
-  }
+  };
 
   const menuItemSpacing = isInSideDrawerNav
     ? (['base', 'loose'] as [CardSpacing, CardSpacing])
-    : undefined
-  const menuItemSize = isInSideDrawerNav ? 'xm' : 'md'
+    : undefined;
+  const menuItemSize = isInSideDrawerNav ? 'xm' : 'md';
 
   return (
     <Menu spacingY={isInSideDrawerNav ? 0 : undefined}>
@@ -100,7 +100,7 @@ const NavMenuBottom: React.FC<NavMenuBottomProps> = ({ isInSideDrawerNav }) => {
         </TextIcon>
       </Menu.Item>
     </Menu>
-  )
-}
+  );
+};
 
-export default NavMenuBottom
+export default NavMenuBottom;

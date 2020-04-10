@@ -1,14 +1,14 @@
-import gql from 'graphql-tag'
-import _isArray from 'lodash/isArray'
-import { useRouter } from 'next/router'
+import gql from 'graphql-tag';
+import _isArray from 'lodash/isArray';
+import { useRouter } from 'next/router';
 
-import { Icon, Menu, TextIcon, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
+import { Icon, Menu, TextIcon, Translate } from '~/components';
+import { useMutation } from '~/components/GQL';
 
-import { REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
+import { REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums';
 
-import { DeleteArticlesTags } from './__generated__/DeleteArticlesTags'
-import { RemoveTagButtonArticle } from './__generated__/RemoveTagButtonArticle'
+import { DeleteArticlesTags } from './__generated__/DeleteArticlesTags';
+import { RemoveTagButtonArticle } from './__generated__/RemoveTagButtonArticle';
 
 const DELETE_ARTICLES_TAGS = gql`
   mutation DeleteArticlesTags($id: ID!, $articles: [ID!]) {
@@ -19,7 +19,7 @@ const DELETE_ARTICLES_TAGS = gql`
       }
     }
   }
-`
+`;
 
 const fragments = {
   article: gql`
@@ -27,24 +27,24 @@ const fragments = {
       id
     }
   `,
-}
+};
 
 const RemoveTagButton = ({ article }: { article: RemoveTagButtonArticle }) => {
-  const router = useRouter()
+  const router = useRouter();
   const {
     query: { id },
-  } = router
-  const tagId = _isArray(id) ? id[0] : id
+  } = router;
+  const tagId = _isArray(id) ? id[0] : id;
 
   const [deleteArticlesTags] = useMutation<DeleteArticlesTags>(
     DELETE_ARTICLES_TAGS,
     { variables: { id: tagId, articles: [article.id] } }
-  )
+  );
 
   return (
     <Menu.Item
       onClick={async () => {
-        await deleteArticlesTags()
+        await deleteArticlesTags();
 
         window.dispatchEvent(
           new CustomEvent(REFETCH_TAG_DETAIL_ARTICLES, {
@@ -52,16 +52,16 @@ const RemoveTagButton = ({ article }: { article: RemoveTagButtonArticle }) => {
               event: 'delete',
             },
           })
-        )
+        );
       }}
     >
       <TextIcon icon={<Icon.RemoveMedium size="md" />} size="md" spacing="base">
         <Translate zh_hant="取消標籤" zh_hans="取消标签" />
       </TextIcon>
     </Menu.Item>
-  )
-}
+  );
+};
 
-RemoveTagButton.fragments = fragments
+RemoveTagButton.fragments = fragments;
 
-export default RemoveTagButton
+export default RemoveTagButton;

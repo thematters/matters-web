@@ -1,4 +1,4 @@
-import { Empty, Icon, Translate } from '~/components'
+import { Empty, Icon, Translate } from '~/components';
 
 export const EmptyHistory = () => (
   <Empty
@@ -7,4 +7,4 @@ export const EmptyHistory = () => (
       <Translate zh_hant="還沒有瀏覽內容" zh_hans="还没有浏览内容" />
     }
   />
-)
+);

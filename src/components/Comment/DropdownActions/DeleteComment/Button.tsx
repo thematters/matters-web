@@ -1,4 +1,4 @@
-import { Icon, Menu, TextIcon, Translate } from '~/components'
+import { Icon, Menu, TextIcon, Translate } from '~/components';
 
 const DeleteCommentButton = ({ openDialog }: { openDialog: () => void }) => {
   return (
@@ -7,7 +7,7 @@ const DeleteCommentButton = ({ openDialog }: { openDialog: () => void }) => {
         <Translate id="delete" />
       </TextIcon>
     </Menu.Item>
-  )
-}
+  );
+};
 
-export default DeleteCommentButton
+export default DeleteCommentButton;

@@ -1,25 +1,25 @@
-import { useState } from 'react'
+import { useState } from 'react';
 
-import { Dialog, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
-import BLOCK_USER from '~/components/GQL/mutations/blockUser'
+import { Dialog, Translate } from '~/components';
+import { useMutation } from '~/components/GQL';
+import BLOCK_USER from '~/components/GQL/mutations/blockUser';
 
-import { ADD_TOAST } from '~/common/enums'
+import { ADD_TOAST } from '~/common/enums';
 
-import ViewBlocksButton from './ViewBlocksButton'
+import ViewBlocksButton from './ViewBlocksButton';
 
-import { BlockUser } from '~/components/GQL/fragments/__generated__/BlockUser'
-import { BlockUser as BlockUserMutate } from '~/components/GQL/mutations/__generated__/BlockUser'
+import { BlockUser } from '~/components/GQL/fragments/__generated__/BlockUser';
+import { BlockUser as BlockUserMutate } from '~/components/GQL/mutations/__generated__/BlockUser';
 
 interface BlockUserDialogProps {
-  user: BlockUser
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  user: BlockUser;
+  children: ({ open }: { open: () => void }) => React.ReactNode;
 }
 
 const BlockUserDialog = ({ user, children }: BlockUserDialogProps) => {
-  const [showDialog, setShowDialog] = useState(false)
-  const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
+  const [showDialog, setShowDialog] = useState(false);
+  const open = () => setShowDialog(true);
+  const close = () => setShowDialog(false);
 
   const [blockUser] = useMutation<BlockUserMutate>(BLOCK_USER, {
     variables: { id: user.id },
@@ -30,10 +30,10 @@ const BlockUserDialog = ({ user, children }: BlockUserDialogProps) => {
         __typename: 'User',
       },
     },
-  })
+  });
 
   const onBlock = async () => {
-    await blockUser()
+    await blockUser();
 
     window.dispatchEvent(
       new CustomEvent(ADD_TOAST, {
@@ -44,8 +44,8 @@ const BlockUserDialog = ({ user, children }: BlockUserDialogProps) => {
           buttonPlacement: 'center',
         },
       })
-    )
-  }
+    );
+  };
 
   return (
     <>
@@ -75,8 +75,8 @@ const BlockUserDialog = ({ user, children }: BlockUserDialogProps) => {
           <Dialog.Footer.Button
             bgColor="red"
             onClick={() => {
-              onBlock()
-              close()
+              onBlock();
+              close();
             }}
           >
             <Translate id="block" />
@@ -92,7 +92,7 @@ const BlockUserDialog = ({ user, children }: BlockUserDialogProps) => {
         </Dialog.Footer>
       </Dialog>
     </>
-  )
-}
+  );
+};
 
-export default BlockUserDialog
+export default BlockUserDialog;

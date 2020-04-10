@@ -1,6 +1,6 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
-import { useContext } from 'react'
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
+import { useContext } from 'react';
 
 import {
   Button,
@@ -10,11 +10,11 @@ import {
   TextIcon,
   Translate,
   ViewerContext,
-} from '~/components'
+} from '~/components';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
-import { ViewerLikeInfo } from './__generated__/ViewerLikeInfo'
+import { ViewerLikeInfo } from './__generated__/ViewerLikeInfo';
 
 const VIEWER_LIKE_INFO = gql`
   query ViewerLikeInfo {
@@ -28,7 +28,7 @@ const VIEWER_LIKE_INFO = gql`
       }
     }
   }
-`
+`;
 
 const SetupLikerIdButton = () => {
   return (
@@ -41,22 +41,22 @@ const SetupLikerIdButton = () => {
         </Button>
       )}
     </LikeCoinDialog>
-  )
-}
+  );
+};
 
 const WalletSetting = () => {
-  const viewer = useContext(ViewerContext)
-  const likerId = viewer.liker.likerId
+  const viewer = useContext(ViewerContext);
+  const likerId = viewer.liker.likerId;
   const { data, loading, error } = useQuery<ViewerLikeInfo>(VIEWER_LIKE_INFO, {
     errorPolicy: 'none',
-  })
-  const LIKE = data?.viewer?.status && data.viewer.status.LIKE
+  });
+  const LIKE = data?.viewer?.status && data.viewer.status.LIKE;
 
   if (loading || error || !LIKE) {
-    return null
+    return null;
   }
 
-  const USDPrice = (LIKE.rateUSD * LIKE.total).toFixed(2)
+  const USDPrice = (LIKE.rateUSD * LIKE.total).toFixed(2);
 
   return (
     <section className="setting-section">
@@ -100,12 +100,12 @@ const WalletSetting = () => {
 
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 
 const WalletSettings = () => {
-  const viewer = useContext(ViewerContext)
-  const likerId = viewer.liker.likerId
+  const viewer = useContext(ViewerContext);
+  const likerId = viewer.liker.likerId;
 
   return (
     <section className="section-container">
@@ -123,7 +123,7 @@ const WalletSettings = () => {
 
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 
-export default WalletSettings
+export default WalletSettings;

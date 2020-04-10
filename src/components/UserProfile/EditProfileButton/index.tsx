@@ -1,19 +1,19 @@
-import { useState } from 'react'
+import { useState } from 'react';
 
-import { Button, Dialog, TextIcon, Translate } from '~/components'
+import { Button, Dialog, TextIcon, Translate } from '~/components';
 
-import { TEXT } from '~/common/enums'
+import { TEXT } from '~/common/enums';
 
-import ProfileEditor, { ProfileEditorUser } from './ProfileEditor'
+import ProfileEditor, { ProfileEditorUser } from './ProfileEditor';
 
 interface EditProfileButtonProps {
-  user: ProfileEditorUser
+  user: ProfileEditorUser;
 }
 
 const EditProfileButton: React.FC<EditProfileButtonProps> = ({ user }) => {
-  const [showDialog, setShowDialog] = useState(false)
-  const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
+  const [showDialog, setShowDialog] = useState(false);
+  const open = () => setShowDialog(true);
+  const close = () => setShowDialog(false);
 
   return (
     <>
@@ -38,7 +38,7 @@ const EditProfileButton: React.FC<EditProfileButtonProps> = ({ user }) => {
         <ProfileEditor user={user} closeDialog={close} />
       </Dialog>
     </>
-  )
-}
+  );
+};
 
-export default EditProfileButton
+export default EditProfileButton;

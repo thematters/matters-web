@@ -1,14 +1,14 @@
-import { useContext } from 'react'
+import { useContext } from 'react';
 
-import { Head, LanguageContext, Layout } from '~/components'
+import { Head, LanguageContext, Layout } from '~/components';
 
-import contentStyles from '~/common/styles/utils/content.article.css'
-import { translate } from '~/common/utils'
+import contentStyles from '~/common/styles/utils/content.article.css';
+import { translate } from '~/common/utils';
 
-import content from './content'
+import content from './content';
 
 const Community = () => {
-  const { lang } = useContext(LanguageContext)
+  const { lang } = useContext(LanguageContext);
 
   return (
     <Layout.Main>
@@ -34,7 +34,7 @@ const Community = () => {
 
       <style jsx>{contentStyles}</style>
     </Layout.Main>
-  )
-}
+  );
+};
 
-export default Community
+export default Community;

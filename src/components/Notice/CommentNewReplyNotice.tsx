@@ -1,27 +1,27 @@
-import gql from 'graphql-tag'
-import { Fragment } from 'react'
+import gql from 'graphql-tag';
+import { Fragment } from 'react';
 
-import { Translate } from '~/components'
+import { Translate } from '~/components';
 
-import { numAbbr } from '~/common/utils'
+import { numAbbr } from '~/common/utils';
 
-import NoticeActorAvatar from './NoticeActorAvatar'
-import NoticeActorName from './NoticeActorName'
-import NoticeArticle from './NoticeArticle'
-import NoticeComment from './NoticeComment'
-import NoticeHead from './NoticeHead'
-import NoticeTypeIcon from './NoticeTypeIcon'
-import styles from './styles.css'
+import NoticeActorAvatar from './NoticeActorAvatar';
+import NoticeActorName from './NoticeActorName';
+import NoticeArticle from './NoticeArticle';
+import NoticeComment from './NoticeComment';
+import NoticeHead from './NoticeHead';
+import NoticeTypeIcon from './NoticeTypeIcon';
+import styles from './styles.css';
 
-import { CommentNewReplyNotice as NoticeType } from './__generated__/CommentNewReplyNotice'
+import { CommentNewReplyNotice as NoticeType } from './__generated__/CommentNewReplyNotice';
 
 const CommentNewReplyNotice = ({ notice }: { notice: NoticeType }) => {
   if (!notice || !notice.actors) {
-    return null
+    return null;
   }
 
-  const actorsCount = notice.actors.length
-  const isMultiActors = actorsCount > 1
+  const actorsCount = notice.actors.length;
+  const isMultiActors = actorsCount > 1;
 
   return (
     <section className="container">
@@ -65,8 +65,8 @@ const CommentNewReplyNotice = ({ notice }: { notice: NoticeType }) => {
 
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 CommentNewReplyNotice.fragments = {
   notice: gql`
     fragment CommentNewReplyNotice on CommentNewReplyNotice {
@@ -94,6 +94,6 @@ CommentNewReplyNotice.fragments = {
     ${NoticeComment.fragments.comment}
     ${NoticeHead.fragments.date}
   `,
-}
+};
 
-export default CommentNewReplyNotice
+export default CommentNewReplyNotice;

@@ -1,7 +1,7 @@
-import { Dialog, Translate } from '~/components'
+import { Dialog, Translate } from '~/components';
 
 interface CompleteProps {
-  closeDialog: () => void
+  closeDialog: () => void;
 }
 
 const Complete = ({ closeDialog }: CompleteProps) => (
@@ -18,6 +18,6 @@ const Complete = ({ closeDialog }: CompleteProps) => (
       </Dialog.Footer.Button>
     </Dialog.Footer>
   </>
-)
+);
 
-export default Complete
+export default Complete;

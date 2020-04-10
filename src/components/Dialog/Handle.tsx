@@ -1,9 +1,9 @@
-import { TEXT } from '~/common/enums'
+import { TEXT } from '~/common/enums';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 interface HandleProps {
-  close: () => void
+  close: () => void;
 }
 
 const Handle: React.FC<HandleProps> = ({ close, ...props }) => (
@@ -18,6 +18,6 @@ const Handle: React.FC<HandleProps> = ({ close, ...props }) => (
 
     <style jsx>{styles}</style>
   </button>
-)
+);
 
-export default Handle
+export default Handle;

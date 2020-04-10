@@ -5,4 +5,4 @@ export const KEYCODES = {
   up: 38,
   down: 40,
   v: 86,
-}
+};

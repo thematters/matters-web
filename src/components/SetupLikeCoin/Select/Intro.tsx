@@ -1,6 +1,6 @@
-import { Translate } from '~/components'
+import { Translate } from '~/components';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 const Intro = () => (
   <section className="intro">
@@ -21,6 +21,6 @@ const Intro = () => (
 
     <style jsx>{styles}</style>
   </section>
-)
+);
 
-export default Intro
+export default Intro;

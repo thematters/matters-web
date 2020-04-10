@@ -1,17 +1,17 @@
-import VisuallyHidden from '@reach/visually-hidden'
+import VisuallyHidden from '@reach/visually-hidden';
 
-import { Translate } from '~/components'
+import { Translate } from '~/components';
 
-import { TextId } from '~/common/enums'
+import { TextId } from '~/common/enums';
 
-import { CloseButton, RightButton } from './Button'
-import styles from './styles.css'
+import { CloseButton, RightButton } from './Button';
+import styles from './styles.css';
 
 export interface HeaderProps {
-  title: TextId | React.ReactElement
-  close: () => void
-  headerHidden?: boolean
-  rightButton?: React.ReactNode | string
+  title: TextId | React.ReactElement;
+  close: () => void;
+  headerHidden?: boolean;
+  rightButton?: React.ReactNode | string;
 }
 
 const BaseHeader = ({ title, close, rightButton }: HeaderProps) => (
@@ -30,14 +30,14 @@ const BaseHeader = ({ title, close, rightButton }: HeaderProps) => (
 
     <style jsx>{styles}</style>
   </header>
-)
+);
 
 const Header: React.FC<HeaderProps> & { RightButton: typeof RightButton } = ({
   headerHidden,
   ...restProps
 }) => {
   if (!headerHidden) {
-    return <BaseHeader {...restProps} />
+    return <BaseHeader {...restProps} />;
   }
 
   return (
@@ -50,9 +50,9 @@ const Header: React.FC<HeaderProps> & { RightButton: typeof RightButton } = ({
 
       <style jsx>{styles}</style>
     </>
-  )
-}
+  );
+};
 
-Header.RightButton = RightButton
+Header.RightButton = RightButton;
 
-export default Header
+export default Header;

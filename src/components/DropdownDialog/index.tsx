@@ -1,5 +1,5 @@
-import VisuallyHidden from '@reach/visually-hidden'
-import { forwardRef, useState } from 'react'
+import VisuallyHidden from '@reach/visually-hidden';
+import { forwardRef, useState } from 'react';
 
 import {
   Button,
@@ -11,9 +11,9 @@ import {
   PopperProps,
   Translate,
   useResponsive,
-} from '~/components'
+} from '~/components';
 
-import { KEYCODES, TEXT, TextId } from '~/common/enums'
+import { KEYCODES, TEXT, TextId } from '~/common/enums';
 
 /**
  * This is a responsive component which will show
@@ -45,71 +45,71 @@ type DropdownDialogNode = ({
   close,
   ref,
 }: {
-  open: () => void
-  close: () => void
-  ref?: React.Ref<any>
-}) => React.ReactChild | React.ReactChild[]
+  open: () => void;
+  close: () => void;
+  ref?: React.Ref<any>;
+}) => React.ReactChild | React.ReactChild[];
 
 interface DropdownDialogChildren {
-  children: DropdownDialogNode
+  children: DropdownDialogNode;
 }
 
 type DropdownDialogProps = {
-  dropdown: Omit<PopperProps, 'children'>
+  dropdown: Omit<PopperProps, 'children'>;
   dialog: Omit<DialogProps, keyof DialogOverlayProps> & {
-    content: React.ReactNode
-    title: React.ReactElement | TextId
-  }
-} & DropdownDialogChildren
+    content: React.ReactNode;
+    title: React.ReactElement | TextId;
+  };
+} & DropdownDialogChildren;
 
 type ForwardChildrenProps = {
-  open: () => void
-  close: () => void
-} & DropdownDialogChildren
+  open: () => void;
+  close: () => void;
+} & DropdownDialogChildren;
 
 const ForwardChildren = forwardRef(
   ({ open, close, children }: ForwardChildrenProps, ref) => (
     <>{children({ open, close, ref })}</>
   )
-)
+);
 
 export const DropdownDialog = ({
   dropdown,
   dialog,
   children,
 }: DropdownDialogProps) => {
-  const isSmallUp = useResponsive('sm-up')
+  const isSmallUp = useResponsive('sm-up');
   const [
     dropdownInstance,
     setDropdownInstance,
-  ] = useState<PopperInstance | null>(null)
-  const [showDialog, setShowDialog] = useState(false)
-  const open = () => setShowDialog(true)
+  ] = useState<PopperInstance | null>(null);
+  const [showDialog, setShowDialog] = useState(false);
+  const open = () => setShowDialog(true);
   const close = () => {
     // dropdown
     if (dropdownInstance) {
-      dropdownInstance.hide()
+      dropdownInstance.hide();
     }
 
     // dialog
-    setShowDialog(false)
-  }
+    setShowDialog(false);
+  };
   const closeOnClick = (event: React.MouseEvent | React.KeyboardEvent) => {
-    const target = event.target as HTMLElement
+    const target = event.target as HTMLElement;
     if (target?.closest && target.closest('[data-clickable], a, button')) {
-      close()
+      close();
     }
-    event.stopPropagation()
-  }
+    event.stopPropagation();
+  };
 
   const Content: React.FC = ({ children: contentChildren }) => {
     return (
       <section
         onKeyDown={(event) => {
           if (event.keyCode !== KEYCODES.enter) {
-            return
+            return;
           }
-          closeOnClick(event)
+          closeOnClick(event);
         }}
         onClick={closeOnClick}
       >
@@ -119,8 +119,8 @@ export const DropdownDialog = ({
 
         {contentChildren}
       </section>
-    )
-  }
+    );
+  };
 
   /**
    * Desktop: <Dropdown>
@@ -134,7 +134,7 @@ export const DropdownDialog = ({
       >
         <ForwardChildren open={open} close={close} children={children} />
       </Dropdown>
-    )
+    );
   }
 
   /**
@@ -160,5 +160,5 @@ export const DropdownDialog = ({
         </Dialog.Footer>
       </Dialog>
     </>
-  )
-}
+  );
+};

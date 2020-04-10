@@ -1,15 +1,15 @@
-import gql from 'graphql-tag'
-import { useState } from 'react'
+import gql from 'graphql-tag';
+import { useState } from 'react';
 
-import { Dialog } from '~/components'
+import { Dialog } from '~/components';
 
-import Content from './Content'
+import Content from './Content';
 
-import { FingerprintArticle } from './__generated__/FingerprintArticle'
+import { FingerprintArticle } from './__generated__/FingerprintArticle';
 
 interface FingerprintDialogProps {
-  article: FingerprintArticle
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  article: FingerprintArticle;
+  children: ({ open }: { open: () => void }) => React.ReactNode;
 }
 
 const fragments = {
@@ -19,12 +19,12 @@ const fragments = {
       dataHash
     }
   `,
-}
+};
 
 const FingerprintDialog = ({ article, children }: FingerprintDialogProps) => {
-  const [showDialog, setShowDialog] = useState(false)
-  const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
+  const [showDialog, setShowDialog] = useState(false);
+  const open = () => setShowDialog(true);
+  const close = () => setShowDialog(false);
 
   return (
     <>
@@ -38,9 +38,9 @@ const FingerprintDialog = ({ article, children }: FingerprintDialogProps) => {
         </Dialog.Content>
       </Dialog>
     </>
-  )
-}
+  );
+};
 
-FingerprintDialog.fragments = fragments
+FingerprintDialog.fragments = fragments;
 
-export default FingerprintDialog
+export default FingerprintDialog;

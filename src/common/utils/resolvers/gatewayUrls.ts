@@ -1,6 +1,6 @@
-import fetch from 'isomorphic-unfetch'
+import fetch from 'isomorphic-unfetch';
 
-const TEST_HASH = 'Qmaisz6NMhDB51cCvNWa1GMS7LU1pAxdF4Ld6Ft9kZEP2a'
+const TEST_HASH = 'Qmaisz6NMhDB51cCvNWa1GMS7LU1pAxdF4Ld6Ft9kZEP2a';
 const PUBLIC_GATEWAYS: string[] = [
   'https://d26g9c7mfuzstv.cloudfront.net/ipfs/:hash',
   'https://ipfs.io/ipfs/:hash',
@@ -25,15 +25,15 @@ const PUBLIC_GATEWAYS: string[] = [
   'https://ipfs.best-practice.se/ipfs/:hash',
   'https://:hash.ipfs.2read.net',
   'https://ipfs.2read.net/ipfs/:hash',
-]
+];
 
 function timeout(ms: number, promise: any) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      reject(new Error('timeout'))
-    }, ms)
-    promise.then(resolve, reject)
-  })
+      reject(new Error('timeout'));
+    }, ms);
+    promise.then(resolve, reject);
+  });
 }
 
 // check accessbility for a given hash and gateway
@@ -44,29 +44,29 @@ const checkGateway = async (
   const testUrl = `${gatewayUrl.replace(
     ':hash',
     hash
-  )}#x-ipfs-companion-no-redirect`
+  )}#x-ipfs-companion-no-redirect`;
 
   try {
     // const res = await fetch(testUrl)
     const res = (await timeout(
       2000,
       fetch(testUrl)
-    )) as fetch.IsomorphicResponse
+    )) as fetch.IsomorphicResponse;
     if (res && res.ok) {
-      return true
+      return true;
     }
-    return false
+    return false;
   } catch (err) {
-    console.log(`Gateway not alive, skipping: ${gatewayUrl}`)
-    return false
+    console.log(`Gateway not alive, skipping: ${gatewayUrl}`);
+    return false;
   }
-}
+};
 
 export default async () => {
   const checkers = await Promise.all(
     PUBLIC_GATEWAYS.map((url) =>
       checkGateway(TEST_HASH, url).then((alive: boolean) => ({ url, alive }))
     )
-  )
-  return checkers.filter(({ alive }) => alive).map(({ url }) => url)
-}
+  );
+  return checkers.filter(({ alive }) => alive).map(({ url }) => url);
+};

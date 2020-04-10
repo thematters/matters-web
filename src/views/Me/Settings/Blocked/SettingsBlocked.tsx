@@ -1,5 +1,5 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
 
 import {
   EmptyWarning,
@@ -8,14 +8,14 @@ import {
   List,
   Spinner,
   Translate,
-} from '~/components'
-import { QueryError } from '~/components/GQL'
-import { UserDigest } from '~/components/UserDigest'
+} from '~/components';
+import { QueryError } from '~/components/GQL';
+import { UserDigest } from '~/components/UserDigest';
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
-import { analytics, mergeConnections } from '~/common/utils'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums';
+import { analytics, mergeConnections } from '~/common/utils';
 
-import { ViewerBlockList } from './__generated__/ViewerBlockList'
+import { ViewerBlockList } from './__generated__/ViewerBlockList';
 
 const VIEWER_BLOCK_LIST = gql`
   query ViewerBlockList($after: String) {
@@ -37,25 +37,25 @@ const VIEWER_BLOCK_LIST = gql`
     }
   }
   ${UserDigest.Rich.fragments.user}
-`
+`;
 
 const SettingsBlocked = () => {
   const { data, loading, error, fetchMore } = useQuery<ViewerBlockList>(
     VIEWER_BLOCK_LIST
-  )
+  );
 
   if (loading) {
-    return <Spinner />
+    return <Spinner />;
   }
 
   if (error) {
-    return <QueryError error={error} />
+    return <QueryError error={error} />;
   }
 
-  const connectionPath = 'viewer.blockList'
-  const { edges, pageInfo } = data?.viewer?.blockList || {}
+  const connectionPath = 'viewer.blockList';
+  const { edges, pageInfo } = data?.viewer?.blockList || {};
 
-  const filteredUsers = (edges || []).filter(({ node }) => node.isBlocked)
+  const filteredUsers = (edges || []).filter(({ node }) => node.isBlocked);
 
   if (!edges || edges.length <= 0 || filteredUsers.length <= 0 || !pageInfo) {
     return (
@@ -64,14 +64,14 @@ const SettingsBlocked = () => {
           <Translate zh_hant="還沒有封鎖用戶" zh_hans="还没有屏蔽用户" />
         }
       />
-    )
+    );
   }
 
   const loadMore = () => {
     analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
       type: FEED_TYPE.ALL_AUTHORS,
       location: edges.length,
-    })
+    });
     return fetchMore({
       variables: {
         after: pageInfo.endCursor,
@@ -82,8 +82,8 @@ const SettingsBlocked = () => {
           newData: fetchMoreResult,
           path: connectionPath,
         }),
-    })
-  }
+    });
+  };
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
@@ -105,8 +105,8 @@ const SettingsBlocked = () => {
         ))}
       </List>
     </InfiniteScroll>
-  )
-}
+  );
+};
 
 export default () => (
   <>
@@ -114,4 +114,4 @@ export default () => (
 
     <SettingsBlocked />
   </>
-)
+);

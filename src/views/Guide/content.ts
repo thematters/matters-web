@@ -21,4 +21,4 @@ export default {
 
 <p>如果你还有其他疑问或建议，请写信到 <a className="u-link-green" href="mailto:ask@matters.news" target="_blank">ask@matters.news</a>，我们会尽快回复！</p>
   `,
-}
+};

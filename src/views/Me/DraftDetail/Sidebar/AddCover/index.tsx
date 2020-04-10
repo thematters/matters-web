@@ -1,18 +1,18 @@
-import classNames from 'classnames'
-import gql from 'graphql-tag'
-import _uniqBy from 'lodash/uniqBy'
+import classNames from 'classnames';
+import gql from 'graphql-tag';
+import _uniqBy from 'lodash/uniqBy';
 
-import { Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
+import { Translate } from '~/components';
+import { useMutation } from '~/components/GQL';
 
-import Collapsable from '../Collapsable'
-import styles from './styles.css'
+import Collapsable from '../Collapsable';
+import styles from './styles.css';
 
 import {
   AddCoverDraft,
   AddCoverDraft_assets,
-} from './__generated__/AddCoverDraft'
-import { UpdateDraftCover } from './__generated__/UpdateDraftCover'
+} from './__generated__/AddCoverDraft';
+import { UpdateDraftCover } from './__generated__/UpdateDraftCover';
 
 const fragments = {
   draft: gql`
@@ -27,7 +27,7 @@ const fragments = {
       }
     }
   `,
-}
+};
 
 const UPDATE_COVER = gql`
   mutation UpdateDraftCover($id: ID!, $coverAssetId: ID) {
@@ -37,31 +37,31 @@ const UPDATE_COVER = gql`
     }
   }
   ${fragments.draft}
-`
+`;
 
 interface AddCover {
-  draft: AddCoverDraft
-  setSaveStatus: (status: 'saved' | 'saving' | 'saveFailed') => void
+  draft: AddCoverDraft;
+  setSaveStatus: (status: 'saved' | 'saving' | 'saveFailed') => void;
 }
 
 type CoverListProps = AddCover & {
-  assets: AddCoverDraft_assets[]
-  setSaveStatus: (status: 'saved' | 'saving' | 'saveFailed') => void
-}
+  assets: AddCoverDraft_assets[];
+  setSaveStatus: (status: 'saved' | 'saving' | 'saveFailed') => void;
+};
 
 const CoverList = ({ draft, assets, setSaveStatus }: CoverListProps) => {
-  const { cover, id } = draft
-  const [update] = useMutation<UpdateDraftCover>(UPDATE_COVER)
-  const uniqAssets = _uniqBy(assets, 'path')
+  const { cover, id } = draft;
+  const [update] = useMutation<UpdateDraftCover>(UPDATE_COVER);
+  const uniqAssets = _uniqBy(assets, 'path');
 
   return (
     <section>
       {uniqAssets.map((asset, index) => {
-        const isSelected = asset.path === cover
+        const isSelected = asset.path === cover;
         const coverItemClass = classNames({
           'cover-image': true,
           selected: isSelected,
-        })
+        });
 
         return (
           <section
@@ -71,40 +71,40 @@ const CoverList = ({ draft, assets, setSaveStatus }: CoverListProps) => {
             aria-label={`選擇圖 ${index + 1} 作爲作品封面`}
             key={asset.path}
             onClick={async () => {
-              setSaveStatus('saving')
+              setSaveStatus('saving');
               try {
                 await update({
                   variables: {
                     id,
                     coverAssetId: asset.id,
                   },
-                })
-                setSaveStatus('saved')
+                });
+                setSaveStatus('saved');
               } catch (error) {
-                setSaveStatus('saveFailed')
+                setSaveStatus('saveFailed');
               }
             }}
           >
             <style jsx>{styles}</style>
           </section>
-        )
+        );
       })}
     </section>
-  )
-}
+  );
+};
 
 const AddCover = ({ draft, ...props }: AddCover) => {
-  const { assets } = draft
+  const { assets } = draft;
   const imageAssets = assets.filter(
     ({ type }: { type: string }) => type === 'embed'
-  )
-  const hasAssets = imageAssets && imageAssets.length > 0
-  const isPending = draft.publishState === 'pending'
-  const isPublished = draft.publishState === 'published'
+  );
+  const hasAssets = imageAssets && imageAssets.length > 0;
+  const isPending = draft.publishState === 'pending';
+  const isPublished = draft.publishState === 'published';
   const containerStyle = classNames({
     'cover-container': true,
     'u-area-disable': isPending || isPublished,
-  })
+  });
 
   return (
     <Collapsable
@@ -131,9 +131,9 @@ const AddCover = ({ draft, ...props }: AddCover) => {
 
       <style jsx>{styles}</style>
     </Collapsable>
-  )
-}
+  );
+};
 
-AddCover.fragments = fragments
+AddCover.fragments = fragments;
 
-export default AddCover
+export default AddCover;

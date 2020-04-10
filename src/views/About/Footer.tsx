@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext } from 'react';
 
 import {
   Button,
@@ -7,21 +7,21 @@ import {
   Tooltip,
   Translate,
   withIcon,
-} from '~/components'
+} from '~/components';
 
-import { translate } from '~/common/utils'
-import { ReactComponent as IconFooterFacebook } from '~/static/icons/footer-facebook.svg'
-import { ReactComponent as IconFooterInstagram } from '~/static/icons/footer-instagram.svg'
-import { ReactComponent as IconFooterMedium } from '~/static/icons/footer-medium.svg'
-import { ReactComponent as IconFooterTelegram } from '~/static/icons/footer-telegram.svg'
-import { ReactComponent as IconFooterTwitter } from '~/static/icons/footer-twitter.svg'
-import { ReactComponent as IconFooterWeChat } from '~/static/icons/footer-wechat.svg'
+import { translate } from '~/common/utils';
+import { ReactComponent as IconFooterFacebook } from '~/static/icons/footer-facebook.svg';
+import { ReactComponent as IconFooterInstagram } from '~/static/icons/footer-instagram.svg';
+import { ReactComponent as IconFooterMedium } from '~/static/icons/footer-medium.svg';
+import { ReactComponent as IconFooterTelegram } from '~/static/icons/footer-telegram.svg';
+import { ReactComponent as IconFooterTwitter } from '~/static/icons/footer-twitter.svg';
+import { ReactComponent as IconFooterWeChat } from '~/static/icons/footer-wechat.svg';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 const Footer = () => {
-  const { lang } = useContext(LanguageContext)
-  const year = new Date().getFullYear()
+  const { lang } = useContext(LanguageContext);
+  const year = new Date().getFullYear();
 
   return (
     <footer className="footer">
@@ -139,7 +139,7 @@ const Footer = () => {
 
       <style jsx>{styles}</style>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

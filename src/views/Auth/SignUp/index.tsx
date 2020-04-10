@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from 'react';
 
 import {
   Head,
@@ -7,12 +7,12 @@ import {
   SignUpComplete,
   SignUpInitForm,
   SignUpProfileForm,
-} from '~/components'
+} from '~/components';
 
-type Step = 'signUp' | 'profile' | 'setupLikeCoin' | 'complete'
+type Step = 'signUp' | 'profile' | 'setupLikeCoin' | 'complete';
 
 const SignUp = () => {
-  const [step, setStep] = useState<Step>('signUp')
+  const [step, setStep] = useState<Step>('signUp');
 
   return (
     <Layout.Main bgColor="grey-lighter">
@@ -22,7 +22,7 @@ const SignUp = () => {
         <SignUpInitForm
           purpose="page"
           submitCallback={() => {
-            setStep('profile')
+            setStep('profile');
           }}
         />
       )}
@@ -31,7 +31,7 @@ const SignUp = () => {
         <SignUpProfileForm
           purpose="page"
           submitCallback={() => {
-            setStep('setupLikeCoin')
+            setStep('setupLikeCoin');
           }}
         />
       )}
@@ -40,14 +40,14 @@ const SignUp = () => {
         <SetupLikeCoin
           purpose="page"
           submitCallback={() => {
-            setStep('complete')
+            setStep('complete');
           }}
         />
       )}
 
       {step === 'complete' && <SignUpComplete purpose="page" />}
     </Layout.Main>
-  )
-}
+  );
+};
 
-export default SignUp
+export default SignUp;

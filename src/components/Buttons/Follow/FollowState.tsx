@@ -1,12 +1,12 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import { Button, TextIcon, Translate } from '~/components'
+import { Button, TextIcon, Translate } from '~/components';
 
-import { FollowStateUser } from './__generated__/FollowStateUser'
+import { FollowStateUser } from './__generated__/FollowStateUser';
 
 const FollowState = ({ user }: { user: FollowStateUser }) => {
   if (!user.isFollower) {
-    return null
+    return null;
   }
 
   return (
@@ -25,8 +25,8 @@ const FollowState = ({ user }: { user: FollowStateUser }) => {
         )}
       </TextIcon>
     </Button>
-  )
-}
+  );
+};
 
 FollowState.fragments = {
   user: gql`
@@ -36,6 +36,6 @@ FollowState.fragments = {
       isFollowee
     }
   `,
-}
+};
 
-export default FollowState
+export default FollowState;

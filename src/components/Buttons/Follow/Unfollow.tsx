@@ -1,6 +1,6 @@
-import gql from 'graphql-tag'
-import _get from 'lodash/get'
-import { useState } from 'react'
+import gql from 'graphql-tag';
+import _get from 'lodash/get';
+import { useState } from 'react';
 
 import {
   Button,
@@ -8,18 +8,18 @@ import {
   ButtonWidth,
   TextIcon,
   Translate,
-} from '~/components'
-import { useMutation } from '~/components/GQL'
-import updateUserFollowerCount from '~/components/GQL/updates/userFollowerCount'
-import updateViewerFolloweeCount from '~/components/GQL/updates/viewerFolloweeCount'
+} from '~/components';
+import { useMutation } from '~/components/GQL';
+import updateUserFollowerCount from '~/components/GQL/updates/userFollowerCount';
+import updateViewerFolloweeCount from '~/components/GQL/updates/viewerFolloweeCount';
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
-import { analytics } from '~/common/utils'
+import { ANALYTICS_EVENTS } from '~/common/enums';
+import { analytics } from '~/common/utils';
 
-import { FollowButtonSize } from './index'
+import { FollowButtonSize } from './index';
 
-import { FollowButtonUser } from './__generated__/FollowButtonUser'
-import { UnfollowUser } from './__generated__/UnfollowUser'
+import { FollowButtonUser } from './__generated__/FollowButtonUser';
+import { UnfollowUser } from './__generated__/UnfollowUser';
 
 const UNFOLLOW_USER = gql`
   mutation UnfollowUser($id: ID!) {
@@ -29,16 +29,16 @@ const UNFOLLOW_USER = gql`
       isFollower
     }
   }
-`
+`;
 
 const Unfollow = ({
   user,
   size,
 }: {
-  user: FollowButtonUser
-  size: FollowButtonSize
+  user: FollowButtonUser;
+  size: FollowButtonSize;
 }) => {
-  const [hover, setHover] = useState(false)
+  const [hover, setHover] = useState(false);
   const [unfollow] = useMutation<UnfollowUser>(UNFOLLOW_USER, {
     variables: { id: user.id },
     optimisticResponse: {
@@ -50,17 +50,17 @@ const Unfollow = ({
       },
     },
     update: (cache) => {
-      const userName = _get(user, 'userName', null)
-      updateUserFollowerCount({ cache, type: 'decrement', userName })
-      updateViewerFolloweeCount({ cache, type: 'decrement' })
+      const userName = _get(user, 'userName', null);
+      updateUserFollowerCount({ cache, type: 'decrement', userName });
+      updateViewerFolloweeCount({ cache, type: 'decrement' });
     },
-  })
+  });
 
   const sizes: Record<FollowButtonSize, [ButtonWidth, ButtonHeight]> = {
     lg: ['6rem', '2rem'],
     md: ['4rem', '1.5rem'],
     'md-s': ['3.25rem', '1.5rem'],
-  }
+  };
 
   return (
     <Button
@@ -69,8 +69,8 @@ const Unfollow = ({
       bgColor="green"
       bgActiveColor="red"
       onClick={() => {
-        unfollow()
-        analytics.trackEvent(ANALYTICS_EVENTS.UNFOLLOW_USER, { id: user.id })
+        unfollow();
+        analytics.trackEvent(ANALYTICS_EVENTS.UNFOLLOW_USER, { id: user.id });
       }}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
@@ -79,7 +79,7 @@ const Unfollow = ({
         {hover ? <Translate id="unfollow" /> : <Translate id="followed" />}
       </TextIcon>
     </Button>
-  )
-}
+  );
+};
 
-export default Unfollow
+export default Unfollow;

@@ -1,27 +1,27 @@
-import classNames from 'classnames'
-import gql from 'graphql-tag'
+import classNames from 'classnames';
+import gql from 'graphql-tag';
 
-import { Card, CardProps } from '~/components'
-import { UserDigest } from '~/components/UserDigest'
+import { Card, CardProps } from '~/components';
+import { UserDigest } from '~/components/UserDigest';
 
-import { toPath } from '~/common/utils'
+import { toPath } from '~/common/utils';
 
-import { ArticleDigestTitle, ArticleDigestTitleTextSize } from '../Title'
-import OpenExternalLink from './OpenExternalLink'
-import styles from './styles.css'
+import { ArticleDigestTitle, ArticleDigestTitleTextSize } from '../Title';
+import OpenExternalLink from './OpenExternalLink';
+import styles from './styles.css';
 
-import { ArticleDigestDropdownArticle } from './__generated__/ArticleDigestDropdownArticle'
+import { ArticleDigestDropdownArticle } from './__generated__/ArticleDigestDropdownArticle';
 
 type ArticleDigestDropdownProps = {
-  article: ArticleDigestDropdownArticle
+  article: ArticleDigestDropdownArticle;
 
-  titleTextSize?: ArticleDigestTitleTextSize
-  disabled?: boolean
-  extraButton?: React.ReactNode
+  titleTextSize?: ArticleDigestTitleTextSize;
+  disabled?: boolean;
+  extraButton?: React.ReactNode;
 } & Pick<
   CardProps,
   'spacing' | 'bgColor' | 'bgActiveColor' | 'borderRadius' | 'onClick'
->
+>;
 
 const fragments = {
   article: gql`
@@ -42,7 +42,7 @@ const fragments = {
     ${UserDigest.Mini.fragments.user}
     ${ArticleDigestTitle.fragments.article}
   `,
-}
+};
 
 export const ArticleDigestDropdown = ({
   article,
@@ -54,17 +54,17 @@ export const ArticleDigestDropdown = ({
   // Card Props
   ...cardProps
 }: ArticleDigestDropdownProps) => {
-  const { articleState: state } = article
-  const isBanned = state === 'banned'
+  const { articleState: state } = article;
+  const isBanned = state === 'banned';
   const containerClass = classNames({
     container: true,
     'has-extra-button': !!extraButton,
-  })
+  });
   const path = toPath({
     page: 'articleDetail',
     article,
-  })
-  const cardDisabled = isBanned || disabled
+  });
+  const cardDisabled = isBanned || disabled;
 
   return (
     <Card
@@ -99,8 +99,8 @@ export const ArticleDigestDropdown = ({
         <style jsx>{styles}</style>
       </section>
     </Card>
-  )
-}
+  );
+};
 
-ArticleDigestDropdown.fragments = fragments
-ArticleDigestDropdown.OpenExternalLink = OpenExternalLink
+ArticleDigestDropdown.fragments = fragments;
+ArticleDigestDropdown.OpenExternalLink = OpenExternalLink;

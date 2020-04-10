@@ -1,6 +1,6 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
-import _chunk from 'lodash/chunk'
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
+import _chunk from 'lodash/chunk';
 
 import {
   Button,
@@ -10,15 +10,15 @@ import {
   TextIcon,
   Translate,
   UserDigest,
-} from '~/components'
-import { QueryError } from '~/components/GQL'
+} from '~/components';
+import { QueryError } from '~/components/GQL';
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
-import { analytics } from '~/common/utils'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums';
+import { analytics } from '~/common/utils';
 
-import SectionHeader from '../../SectionHeader'
+import SectionHeader from '../../SectionHeader';
 
-import { FeedAuthors as FeedAuthorsType } from './__generated__/FeedAuthors'
+import { FeedAuthors as FeedAuthorsType } from './__generated__/FeedAuthors';
 
 const FEED_AUTHORS = gql`
   query FeedAuthors {
@@ -39,21 +39,21 @@ const FEED_AUTHORS = gql`
     }
   }
   ${UserDigest.Rich.fragments.user}
-`
+`;
 
 const FeedAuthors = () => {
   const { data, loading, error, refetch } = useQuery<FeedAuthorsType>(
     FEED_AUTHORS,
     { notifyOnNetworkStatusChange: true }
-  )
-  const edges = data?.viewer?.recommendation.authors.edges
+  );
+  const edges = data?.viewer?.recommendation.authors.edges;
 
   if (error) {
-    return <QueryError error={error} />
+    return <QueryError error={error} />;
   }
 
   if (!edges || edges.length <= 0) {
-    return null
+    return null;
   }
 
   const SlidesHeader = (
@@ -77,7 +77,7 @@ const FeedAuthors = () => {
         </Button>
       }
     />
-  )
+  );
 
   return (
     <Slides bgColor="yellow-lighter" header={SlidesHeader}>
@@ -109,7 +109,7 @@ const FeedAuthors = () => {
           </Slides.Item>
         ))}
     </Slides>
-  )
-}
+  );
+};
 
-export default FeedAuthors
+export default FeedAuthors;

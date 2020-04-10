@@ -1,13 +1,13 @@
-import { useRef } from 'react'
+import { useRef } from 'react';
 
-import { Button, CopyToClipboard, Icon } from '~/components'
+import { Button, CopyToClipboard, Icon } from '~/components';
 
-import { TEXT } from '~/common/enums'
+import { TEXT } from '~/common/enums';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 const Copy = ({ link }: { link: string }) => {
-  const inputRef: React.RefObject<any> | null = useRef(null)
+  const inputRef: React.RefObject<any> | null = useRef(null);
 
   return (
     <section className="copy">
@@ -27,7 +27,7 @@ const Copy = ({ link }: { link: string }) => {
 
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 
-export default Copy
+export default Copy;

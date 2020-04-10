@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext } from 'react';
 
 import {
   LanguageContext,
@@ -6,17 +6,17 @@ import {
   TextIcon,
   Translate,
   useResponsive,
-} from '~/components'
+} from '~/components';
 
-import { translate } from '~/common/utils'
-import IMAGE_BANNER from '~/static/images/migration-banner.svg'
+import { translate } from '~/common/utils';
+import IMAGE_BANNER from '~/static/images/migration-banner.svg';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 const Banner = () => {
-  const { lang } = useContext(LanguageContext)
+  const { lang } = useContext(LanguageContext);
 
-  const isSmallUp = useResponsive('sm-up')
+  const isSmallUp = useResponsive('sm-up');
 
   return (
     <section className="l-row banner">
@@ -58,7 +58,7 @@ const Banner = () => {
         }
       `}</style>
     </section>
-  )
-}
+  );
+};
 
-export default Banner
+export default Banner;

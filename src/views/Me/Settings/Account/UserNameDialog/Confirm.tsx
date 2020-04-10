@@ -1,28 +1,28 @@
-import { useFormik } from 'formik'
-import gql from 'graphql-tag'
-import _pickBy from 'lodash/pickBy'
-import React, { useContext } from 'react'
+import { useFormik } from 'formik';
+import gql from 'graphql-tag';
+import _pickBy from 'lodash/pickBy';
+import React, { useContext } from 'react';
 
-import { Dialog, Form, LanguageContext, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
+import { Dialog, Form, LanguageContext, Translate } from '~/components';
+import { useMutation } from '~/components/GQL';
 
 import {
   parseFormSubmitErrors,
   translate,
   validateComparedUserName,
   validateUserName,
-} from '~/common/utils'
+} from '~/common/utils';
 
-import { UpdateUserInfoUserName } from './__generated__/UpdateUserInfoUserName'
+import { UpdateUserInfoUserName } from './__generated__/UpdateUserInfoUserName';
 
 interface FormProps {
-  submitCallback: () => void
-  closeDialog: () => void
+  submitCallback: () => void;
+  closeDialog: () => void;
 }
 
 interface FormValues {
-  userName: string
-  comparedUserName: string
+  userName: string;
+  comparedUserName: string;
 }
 
 const UPDATE_USER_INFO = gql`
@@ -32,13 +32,13 @@ const UPDATE_USER_INFO = gql`
       userName
     }
   }
-`
+`;
 
 const Confirm: React.FC<FormProps> = ({ submitCallback, closeDialog }) => {
-  const [update] = useMutation<UpdateUserInfoUserName>(UPDATE_USER_INFO)
-  const { lang } = useContext(LanguageContext)
+  const [update] = useMutation<UpdateUserInfoUserName>(UPDATE_USER_INFO);
+  const { lang } = useContext(LanguageContext);
 
-  const formId = 'username-confirm-form'
+  const formId = 'username-confirm-form';
 
   const {
     values,
@@ -65,19 +65,19 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, closeDialog }) => {
       }),
     onSubmit: async ({ userName }, { setFieldError, setSubmitting }) => {
       try {
-        await update({ variables: { input: { userName } } })
+        await update({ variables: { input: { userName } } });
 
         if (submitCallback) {
-          submitCallback()
+          submitCallback();
         }
       } catch (error) {
-        const [messages, codes] = parseFormSubmitErrors(error, lang)
-        setFieldError('userName', messages[codes[0]])
+        const [messages, codes] = parseFormSubmitErrors(error, lang);
+        setFieldError('userName', messages[codes[0]]);
       }
 
-      setSubmitting(false)
+      setSubmitting(false);
     },
-  })
+  });
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
@@ -110,7 +110,7 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, closeDialog }) => {
         hint={<Translate id="hintUserName" />}
       />
     </Form>
-  )
+  );
 
   const SubmitButton = (
     <Dialog.Header.RightButton
@@ -120,7 +120,7 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, closeDialog }) => {
       text={<Translate id="nextStep" />}
       loading={isSubmitting}
     />
-  )
+  );
 
   return (
     <>
@@ -134,7 +134,7 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, closeDialog }) => {
         {InnerForm}
       </Dialog.Content>
     </>
-  )
-}
+  );
+};
 
-export default Confirm
+export default Confirm;

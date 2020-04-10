@@ -1,22 +1,22 @@
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 
-import { Tabs, Translate } from '~/components'
+import { Tabs, Translate } from '~/components';
 
-import { PATHS } from '~/common/enums'
-import { getQuery, toPath } from '~/common/utils'
+import { PATHS } from '~/common/enums';
+import { getQuery, toPath } from '~/common/utils';
 
 const MeTabs = () => {
-  const router = useRouter()
-  const userName = getQuery({ router, key: 'userName' }) || ''
+  const router = useRouter();
+  const userName = getQuery({ router, key: 'userName' }) || '';
 
   const userArticlePath = toPath({
     page: 'userProfile',
     userName,
-  })
+  });
   const userCommentsPath = toPath({
     page: 'userComments',
     userName,
-  })
+  });
 
   return (
     <Tabs>
@@ -34,7 +34,7 @@ const MeTabs = () => {
         <Translate id="comment" />
       </Tabs.Tab>
     </Tabs>
-  )
-}
+  );
+};
 
-export default MeTabs
+export default MeTabs;

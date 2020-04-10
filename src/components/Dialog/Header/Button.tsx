@@ -1,14 +1,14 @@
-import { Button, ButtonProps, Icon, TextIcon, Translate } from '~/components'
-import { useResponsive } from '~/components/Hook'
+import { Button, ButtonProps, Icon, TextIcon, Translate } from '~/components';
+import { useResponsive } from '~/components/Hook';
 
-import { TEXT } from '~/common/enums'
+import { TEXT } from '~/common/enums';
 
 interface CloseButtonProps {
-  close: () => void
+  close: () => void;
 }
 
 export const CloseButton = ({ close }: CloseButtonProps) => {
-  const isSmallUp = useResponsive('sm-up')
+  const isSmallUp = useResponsive('sm-up');
 
   return (
     <Button
@@ -24,20 +24,20 @@ export const CloseButton = ({ close }: CloseButtonProps) => {
       )}
       {isSmallUp && <Icon.CloseLarge size="lg" color="green" />}
     </Button>
-  )
-}
+  );
+};
 
 type RightButtonProps = {
-  text: string | React.ReactNode
-  loading?: boolean
-} & ButtonProps
+  text: string | React.ReactNode;
+  loading?: boolean;
+} & ButtonProps;
 
 export const RightButton: React.FC<RightButtonProps> = ({
   text,
   loading,
   ...buttonProps
 }) => {
-  const isSmallUp = useResponsive('sm-up')
+  const isSmallUp = useResponsive('sm-up');
 
   return (
     <Button
@@ -55,5 +55,5 @@ export const RightButton: React.FC<RightButtonProps> = ({
         {loading ? null : text}
       </TextIcon>
     </Button>
-  )
-}
+  );
+};

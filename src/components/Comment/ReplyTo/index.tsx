@@ -1,14 +1,14 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import { Translate } from '~/components'
-import { UserDigest } from '~/components/UserDigest'
+import { Translate } from '~/components';
+import { UserDigest } from '~/components/UserDigest';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
-import { ReplyToUser } from './__generated__/ReplyToUser'
+import { ReplyToUser } from './__generated__/ReplyToUser';
 
 export interface ReplyToProps {
-  user: ReplyToUser
+  user: ReplyToUser;
 }
 
 const fragments = {
@@ -20,7 +20,7 @@ const fragments = {
 
     ${UserDigest.Mini.fragments.user}
   `,
-}
+};
 const ReplyTo = ({ user }: ReplyToProps) => (
   <section className="container">
     <span className="reply-to">
@@ -37,8 +37,8 @@ const ReplyTo = ({ user }: ReplyToProps) => (
 
     <style jsx>{styles}</style>
   </section>
-)
+);
 
-ReplyTo.fragments = fragments
+ReplyTo.fragments = fragments;
 
-export default ReplyTo
+export default ReplyTo;

@@ -1,13 +1,13 @@
-import { Button, Icon, TextIcon, Translate } from '~/components'
+import { Button, Icon, TextIcon, Translate } from '~/components';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 const ExpandButton = ({
   onClick,
   restCount,
 }: {
-  onClick: () => any
-  restCount: number
+  onClick: () => any;
+  restCount: number;
 }) => (
   <Button
     size={[null, '1.25rem']}
@@ -29,5 +29,5 @@ const ExpandButton = ({
 
     <style jsx>{styles}</style>
   </Button>
-)
-export default ExpandButton
+);
+export default ExpandButton;

@@ -1,12 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react';
 
-import { Button, Icon, TextIcon, Translate } from '~/components'
+import { Button, Icon, TextIcon, Translate } from '~/components';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 interface ExpandableProps {
-  limit?: number
-  buffer?: number
+  limit?: number;
+  buffer?: number;
 }
 
 export const Expandable: React.FC<ExpandableProps> = ({
@@ -14,25 +14,25 @@ export const Expandable: React.FC<ExpandableProps> = ({
   limit = 3,
   buffer = 0,
 }) => {
-  const [expandable, setExpandable] = useState(false)
-  const [expand, setExpand] = useState(true)
+  const [expandable, setExpandable] = useState(false);
+  const [expand, setExpand] = useState(true);
 
-  const node: React.RefObject<HTMLParagraphElement> | null = useRef(null)
+  const node: React.RefObject<HTMLParagraphElement> | null = useRef(null);
 
   useEffect(() => {
     if (node?.current) {
-      const height = node.current.clientHeight
+      const height = node.current.clientHeight;
       const lineHeight = window
         .getComputedStyle(node.current, null)
-        .getPropertyValue('line-height')
-      const lines = Math.max(Math.ceil(height / parseInt(lineHeight, 10)), 0)
+        .getPropertyValue('line-height');
+      const lines = Math.max(Math.ceil(height / parseInt(lineHeight, 10)), 0);
 
       if (lines > limit + buffer) {
-        setExpandable(true)
-        setExpand(false)
+        setExpandable(true);
+        setExpand(false);
       }
     }
-  }, [])
+  }, []);
 
   return (
     <section
@@ -49,7 +49,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
           bgColor="green-lighter"
           textColor="green"
           onClick={() => {
-            setExpand(true)
+            setExpand(true);
           }}
         >
           <TextIcon icon={<Icon.Expand size="xs" />}>
@@ -59,5 +59,5 @@ export const Expandable: React.FC<ExpandableProps> = ({
       )}
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};

@@ -3,5 +3,5 @@ export default (root: any, { input: { id } }: { input: { id: string } }) => {
     id,
     content: root?.commentDraft?.content || '',
     __typename: 'CommentDraft',
-  }
-}
+  };
+};

@@ -1,18 +1,18 @@
-import { DialogContent, DialogOverlay } from '@reach/dialog'
-import { useRef } from 'react'
-import { animated, useTransition } from 'react-spring'
+import { DialogContent, DialogOverlay } from '@reach/dialog';
+import { useRef } from 'react';
+import { animated, useTransition } from 'react-spring';
 
-import DrawerContent from './DrawerContent'
-import Overlay from './Overlay'
-import globalStyles from './styles.global.css'
+import DrawerContent from './DrawerContent';
+import Overlay from './Overlay';
+import globalStyles from './styles.global.css';
 
 export interface SideDrawerNavProps {
-  isOpen: boolean | undefined
-  onDismiss: () => void
+  isOpen: boolean | undefined;
+  onDismiss: () => void;
 }
 
 const SideDrawerNav: React.FC<SideDrawerNavProps> = ({ isOpen, onDismiss }) => {
-  const closeButtonRef: React.RefObject<any> | null = useRef(null)
+  const closeButtonRef: React.RefObject<any> | null = useRef(null);
 
   const transitions = useTransition(isOpen, null, {
     from: {
@@ -25,17 +25,17 @@ const SideDrawerNav: React.FC<SideDrawerNavProps> = ({ isOpen, onDismiss }) => {
       transform: `translateX(-100%)`,
     },
     config: { tension: 270, friction: 30 },
-  })
+  });
 
-  const AnimatedDrawerOverlay = animated(DialogOverlay)
-  const AnimatedDrawerContent = animated(DrawerContent)
-  const AnimatedOverlay = animated(Overlay)
+  const AnimatedDrawerOverlay = animated(DialogOverlay);
+  const AnimatedDrawerContent = animated(DrawerContent);
+  const AnimatedOverlay = animated(Overlay);
 
   return (
     <>
       {transitions.map(({ item, key, props: { opacity, transform } }) => {
         if (!item) {
-          return
+          return;
         }
 
         return (
@@ -53,14 +53,14 @@ const SideDrawerNav: React.FC<SideDrawerNavProps> = ({ isOpen, onDismiss }) => {
               />
             </DialogContent>
           </AnimatedDrawerOverlay>
-        )
+        );
       })}
 
       <style jsx global>
         {globalStyles}
       </style>
     </>
-  )
-}
+  );
+};
 
-export default SideDrawerNav
+export default SideDrawerNav;

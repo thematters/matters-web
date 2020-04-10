@@ -1,6 +1,6 @@
-import { useFormik } from 'formik'
-import _pickBy from 'lodash/pickBy'
-import { useContext } from 'react'
+import { useFormik } from 'formik';
+import _pickBy from 'lodash/pickBy';
+import { useContext } from 'react';
 
 import {
   Dialog,
@@ -9,30 +9,30 @@ import {
   Layout,
   SendCodeButton,
   Translate,
-} from '~/components'
-import { useMutation } from '~/components/GQL'
-import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
+} from '~/components';
+import { useMutation } from '~/components/GQL';
+import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode';
 
 import {
   parseFormSubmitErrors,
   translate,
   validateCode,
   validateEmail,
-} from '~/common/utils'
+} from '~/common/utils';
 
-import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
+import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode';
 
 interface FormProps {
-  defaultEmail: string
-  type: 'forget' | 'change'
-  purpose: 'dialog' | 'page'
-  submitCallback?: (params: any) => void
-  closeDialog?: () => void
+  defaultEmail: string;
+  type: 'forget' | 'change';
+  purpose: 'dialog' | 'page';
+  submitCallback?: (params: any) => void;
+  closeDialog?: () => void;
 }
 
 interface FormValues {
-  email: string
-  code: string
+  email: string;
+  code: string;
 }
 
 export const PasswordChangeRequestForm: React.FC<FormProps> = ({
@@ -42,13 +42,13 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = ({
   submitCallback,
   closeDialog,
 }) => {
-  const [confirmCode] = useMutation<ConfirmVerificationCode>(CONFIRM_CODE)
-  const { lang } = useContext(LanguageContext)
+  const [confirmCode] = useMutation<ConfirmVerificationCode>(CONFIRM_CODE);
+  const { lang } = useContext(LanguageContext);
 
-  const isForget = type === 'forget'
-  const isInPage = purpose === 'page'
-  const formId = `password-change-request-form`
-  const titleId = isForget ? 'resetPassword' : 'changePassword'
+  const isForget = type === 'forget';
+  const isInPage = purpose === 'page';
+  const formId = `password-change-request-form`;
+  const titleId = isForget ? 'resetPassword' : 'changePassword';
 
   const {
     values,
@@ -73,26 +73,26 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = ({
       try {
         const { data } = await confirmCode({
           variables: { input: { email, type: 'password_reset', code } },
-        })
-        const confirmVerificationCode = data?.confirmVerificationCode
+        });
+        const confirmVerificationCode = data?.confirmVerificationCode;
 
         if (submitCallback && confirmVerificationCode) {
-          submitCallback({ email, codeId: confirmVerificationCode })
+          submitCallback({ email, codeId: confirmVerificationCode });
         }
       } catch (error) {
-        const [messages, codes] = parseFormSubmitErrors(error, lang)
+        const [messages, codes] = parseFormSubmitErrors(error, lang);
         codes.forEach((c) => {
           if (c.includes('CODE_')) {
-            setFieldError('code', messages[c])
+            setFieldError('code', messages[c]);
           } else {
-            setFieldError('email', messages[c])
+            setFieldError('email', messages[c]);
           }
-        })
+        });
       }
 
-      setSubmitting(false)
+      setSubmitting(false);
     },
-  })
+  });
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
@@ -132,7 +132,7 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = ({
         autoFocus
       />
     </Form>
-  )
+  );
 
   const SubmitButton = (
     <Dialog.Header.RightButton
@@ -142,7 +142,7 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = ({
       text={<Translate id="nextStep" />}
       loading={isSubmitting}
     />
-  )
+  );
 
   if (isInPage) {
     return (
@@ -159,7 +159,7 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = ({
 
         {InnerForm}
       </>
-    )
+    );
   }
 
   return (
@@ -176,5 +176,5 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = ({
         {InnerForm}
       </Dialog.Content>
     </>
-  )
-}
+  );
+};

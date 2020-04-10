@@ -1,7 +1,7 @@
-import { Icon, Menu, TextIcon, Translate } from '~/components'
+import { Icon, Menu, TextIcon, Translate } from '~/components';
 
 interface AppreciatorsButtonProps {
-  openDialog: () => void
+  openDialog: () => void;
 }
 
 const AppreciatorsButton = ({ openDialog }: AppreciatorsButtonProps) => {
@@ -11,7 +11,7 @@ const AppreciatorsButton = ({ openDialog }: AppreciatorsButtonProps) => {
         <Translate id="viewAppreciators" />
       </TextIcon>
     </Menu.Item>
-  )
-}
+  );
+};
 
-export default AppreciatorsButton
+export default AppreciatorsButton;

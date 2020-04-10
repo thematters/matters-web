@@ -1,5 +1,5 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
 
 import {
   ArticleDigestFeed,
@@ -9,13 +9,13 @@ import {
   Layout,
   List,
   Spinner,
-} from '~/components'
-import { QueryError } from '~/components/GQL'
+} from '~/components';
+import { QueryError } from '~/components/GQL';
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
-import { analytics, mergeConnections } from '~/common/utils'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums';
+import { analytics, mergeConnections } from '~/common/utils';
 
-import { MeHistoryFeed } from './__generated__/MeHistoryFeed'
+import { MeHistoryFeed } from './__generated__/MeHistoryFeed';
 
 const ME_HISTORY_FEED = gql`
   query MeHistoryFeed($after: String) {
@@ -41,33 +41,33 @@ const ME_HISTORY_FEED = gql`
     }
   }
   ${ArticleDigestFeed.fragments.article}
-`
+`;
 
 const MeHistory = () => {
   const { data, loading, error, fetchMore } = useQuery<MeHistoryFeed>(
     ME_HISTORY_FEED
-  )
+  );
 
   if (loading) {
-    return <Spinner />
+    return <Spinner />;
   }
 
   if (error) {
-    return <QueryError error={error} />
+    return <QueryError error={error} />;
   }
 
-  const connectionPath = 'viewer.activity.history'
-  const { edges, pageInfo } = data?.viewer?.activity.history || {}
+  const connectionPath = 'viewer.activity.history';
+  const { edges, pageInfo } = data?.viewer?.activity.history || {};
 
   if (!edges || edges.length <= 0 || !pageInfo) {
-    return <EmptyHistory />
+    return <EmptyHistory />;
   }
 
   const loadMore = () => {
     analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
       type: FEED_TYPE.READ_HISTORY,
       location: edges.length,
-    })
+    });
     return fetchMore({
       variables: {
         after: pageInfo.endCursor,
@@ -78,8 +78,8 @@ const MeHistory = () => {
           newData: fetchMoreResult,
           path: connectionPath,
         }),
-    })
-  }
+    });
+  };
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
@@ -99,8 +99,8 @@ const MeHistory = () => {
         ))}
       </List>
     </InfiniteScroll>
-  )
-}
+  );
+};
 
 export default () => (
   <Layout.Main>
@@ -114,4 +114,4 @@ export default () => (
 
     <MeHistory />
   </Layout.Main>
-)
+);

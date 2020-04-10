@@ -1,6 +1,6 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
-import { useRouter } from 'next/router'
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
+import { useRouter } from 'next/router';
 
 import {
   InfiniteScroll,
@@ -8,14 +8,14 @@ import {
   Spinner,
   Translate,
   UserDigest,
-} from '~/components'
+} from '~/components';
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
-import { analytics, getQuery, mergeConnections } from '~/common/utils'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums';
+import { analytics, getQuery, mergeConnections } from '~/common/utils';
 
-import EmptySearch from '../EmptySearch'
+import EmptySearch from '../EmptySearch';
 
-import { SeachUsers } from './__generated__/SeachUsers'
+import { SeachUsers } from './__generated__/SeachUsers';
 
 const SEARCH_USERS = gql`
   query SeachUsers($key: String!, $after: String) {
@@ -36,25 +36,25 @@ const SEARCH_USERS = gql`
     }
   }
   ${UserDigest.Rich.fragments.user}
-`
+`;
 
 const SearchUser = () => {
-  const router = useRouter()
-  const q = getQuery({ router, key: 'q' })
+  const router = useRouter();
+  const q = getQuery({ router, key: 'q' });
 
   const { data, loading, fetchMore } = useQuery<SeachUsers>(SEARCH_USERS, {
     variables: { key: q },
-  })
+  });
 
   if (loading) {
-    return <Spinner />
+    return <Spinner />;
   }
 
-  const connectionPath = 'search'
-  const { edges, pageInfo } = data?.search || {}
+  const connectionPath = 'search';
+  const { edges, pageInfo } = data?.search || {};
 
   if (!edges || edges.length <= 0 || !pageInfo) {
-    return <EmptySearch description={<Translate id="emptySearchResults" />} />
+    return <EmptySearch description={<Translate id="emptySearchResults" />} />;
   }
 
   const loadMore = () => {
@@ -62,7 +62,7 @@ const SearchUser = () => {
       type: FEED_TYPE.SEARCH_USER,
       location: edges.length,
       entrance: q,
-    })
+    });
     return fetchMore({
       variables: {
         after: pageInfo.endCursor,
@@ -73,8 +73,8 @@ const SearchUser = () => {
           newData: fetchMoreResult,
           path: connectionPath,
         }),
-    })
-  }
+    });
+  };
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
@@ -98,7 +98,7 @@ const SearchUser = () => {
         )}
       </List>
     </InfiniteScroll>
-  )
-}
+  );
+};
 
-export default SearchUser
+export default SearchUser;

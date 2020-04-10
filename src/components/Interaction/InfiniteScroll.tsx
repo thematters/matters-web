@@ -1,8 +1,8 @@
-import { ApolloQueryResult } from 'apollo-client'
-import { forwardRef, Ref } from 'react'
-import { Waypoint } from 'react-waypoint'
+import { ApolloQueryResult } from 'apollo-client';
+import { forwardRef, Ref } from 'react';
+import { Waypoint } from 'react-waypoint';
 
-import { Spinner } from '~/components'
+import { Spinner } from '~/components';
 
 /**
  *  Usage:
@@ -29,17 +29,17 @@ interface Props {
   /**
    * Does the resource have more entities
    */
-  hasNextPage: boolean
+  hasNextPage: boolean;
 
   /**
    * Callback to load more entities
    */
-  loadMore: () => Promise<ApolloQueryResult<any>>
+  loadMore: () => Promise<ApolloQueryResult<any>>;
 
   /**
    * A React component to act as loader
    */
-  loader?: React.ReactNode
+  loader?: React.ReactNode;
 }
 
 export const InfiniteScroll: React.FC<Props> = ({
@@ -50,10 +50,10 @@ export const InfiniteScroll: React.FC<Props> = ({
 }) => {
   const Loader = ({ innerRef }: { innerRef: Ref<HTMLDivElement> }) => (
     <div ref={innerRef}>{loader || <Spinner />}</div>
-  )
+  );
   const LoaderWithRef = forwardRef((props, ref: Ref<HTMLDivElement>) => (
     <Loader innerRef={ref} />
-  ))
+  ));
   return (
     <div>
       {children}
@@ -63,5 +63,5 @@ export const InfiniteScroll: React.FC<Props> = ({
         </Waypoint>
       )}
     </div>
-  )
-}
+  );
+};

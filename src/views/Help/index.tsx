@@ -1,12 +1,12 @@
-import { Form, Layout, Translate } from '~/components'
+import { Form, Layout, Translate } from '~/components';
 
-import { PATHS } from '~/common/enums'
-import { toPath } from '~/common/utils'
+import { PATHS } from '~/common/enums';
+import { toPath } from '~/common/utils';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 const Help = () => {
-  const year = new Date().getFullYear()
+  const year = new Date().getFullYear();
   const downloadAppLink = toPath({
     page: 'articleDetail',
     article: {
@@ -14,7 +14,7 @@ const Help = () => {
       mediaHash: 'bafyreiayiuxi4qc2a7qpgjp3fe42wmaoppqykckcvtq4hiukl5pgs3dn2m',
       author: { userName: '1ampa55ag3' },
     },
-  })
+  });
 
   return (
     <>
@@ -69,8 +69,8 @@ const Help = () => {
 
       <style jsx>{styles}</style>
     </>
-  )
-}
+  );
+};
 
 export default () => (
   <Layout.Main bgColor="grey-lighter">
@@ -81,4 +81,4 @@ export default () => (
 
     <Help />
   </Layout.Main>
-)
+);

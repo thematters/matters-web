@@ -1,6 +1,6 @@
-import { useFormik } from 'formik'
-import _pickBy from 'lodash/pickBy'
-import { useContext } from 'react'
+import { useFormik } from 'formik';
+import _pickBy from 'lodash/pickBy';
+import { useContext } from 'react';
 
 import {
   Dialog,
@@ -8,28 +8,28 @@ import {
   LanguageContext,
   SendCodeButton,
   Translate,
-} from '~/components'
-import { useMutation } from '~/components/GQL'
-import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
+} from '~/components';
+import { useMutation } from '~/components/GQL';
+import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode';
 
 import {
   parseFormSubmitErrors,
   translate,
   validateCode,
   validateEmail,
-} from '~/common/utils'
+} from '~/common/utils';
 
-import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
+import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode';
 
 interface FormProps {
-  defaultEmail: string
-  submitCallback?: (codeId: string) => void
-  closeDialog: () => void
+  defaultEmail: string;
+  submitCallback?: (codeId: string) => void;
+  closeDialog: () => void;
 }
 
 interface FormValues {
-  email: string
-  code: string
+  email: string;
+  code: string;
 }
 
 const Request: React.FC<FormProps> = ({
@@ -37,9 +37,9 @@ const Request: React.FC<FormProps> = ({
   submitCallback,
   closeDialog,
 }) => {
-  const [confirmCode] = useMutation<ConfirmVerificationCode>(CONFIRM_CODE)
-  const { lang } = useContext(LanguageContext)
-  const formId = 'change-email-request-form'
+  const [confirmCode] = useMutation<ConfirmVerificationCode>(CONFIRM_CODE);
+  const { lang } = useContext(LanguageContext);
+  const formId = 'change-email-request-form';
 
   const {
     values,
@@ -64,26 +64,26 @@ const Request: React.FC<FormProps> = ({
       try {
         const { data } = await confirmCode({
           variables: { input: { email, type: 'email_reset', code } },
-        })
-        const confirmVerificationCode = data?.confirmVerificationCode
+        });
+        const confirmVerificationCode = data?.confirmVerificationCode;
 
         if (submitCallback && confirmVerificationCode) {
-          submitCallback(confirmVerificationCode)
+          submitCallback(confirmVerificationCode);
         }
       } catch (error) {
-        const [messages, codes] = parseFormSubmitErrors(error, lang)
+        const [messages, codes] = parseFormSubmitErrors(error, lang);
         codes.forEach((c) => {
           if (c.includes('CODE_')) {
-            setFieldError('code', messages[c])
+            setFieldError('code', messages[c]);
           } else {
-            setFieldError('email', messages[c])
+            setFieldError('email', messages[c]);
           }
-        })
+        });
       }
 
-      setSubmitting(false)
+      setSubmitting(false);
     },
-  })
+  });
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
@@ -119,7 +119,7 @@ const Request: React.FC<FormProps> = ({
         }
       />
     </Form>
-  )
+  );
 
   const SubmitButton = (
     <Dialog.Header.RightButton
@@ -129,7 +129,7 @@ const Request: React.FC<FormProps> = ({
       text={<Translate id="nextStep" />}
       loading={isSubmitting}
     />
-  )
+  );
 
   return (
     <>
@@ -143,7 +143,7 @@ const Request: React.FC<FormProps> = ({
         {InnerForm}
       </Dialog.Content>
     </>
-  )
-}
+  );
+};
 
-export default Request
+export default Request;

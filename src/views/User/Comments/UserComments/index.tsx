@@ -1,6 +1,6 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
-import { useRouter } from 'next/router'
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
+import { useRouter } from 'next/router';
 
 import {
   ArticleDigestTitle,
@@ -11,24 +11,24 @@ import {
   InfiniteScroll,
   List,
   Spinner,
-} from '~/components'
-import { QueryError } from '~/components/GQL'
+} from '~/components';
+import { QueryError } from '~/components/GQL';
 
 import {
   filterComments,
   getQuery,
   mergeConnections,
   toPath,
-} from '~/common/utils'
-import IMAGE_LOGO_192 from '~/static/icon-192x192.png?url'
+} from '~/common/utils';
+import IMAGE_LOGO_192 from '~/static/icon-192x192.png?url';
 
-import UserTabs from '../../UserTabs'
+import UserTabs from '../../UserTabs';
 
 import {
   UserCommentFeed,
   UserCommentFeed_node_User_commentedArticles_edges_node_comments_edges_node,
-} from './__generated__/UserCommentFeed'
-import { UserIdUser } from './__generated__/UserIdUser'
+} from './__generated__/UserCommentFeed';
+import { UserIdUser } from './__generated__/UserIdUser';
 
 const USER_ID = gql`
   query UserIdUser($userName: String!) {
@@ -43,7 +43,7 @@ const USER_ID = gql`
       }
     }
   }
-`
+`;
 
 const USER_COMMENT_FEED = gql`
   query UserCommentFeed($id: ID!, $after: String) {
@@ -77,27 +77,27 @@ const USER_COMMENT_FEED = gql`
   }
   ${ArticleDigestTitle.fragments.article}
   ${Comment.Feed.fragments.comment}
-`
+`;
 
 const UserCommentsWrap = () => {
-  const router = useRouter()
-  const userName = getQuery({ router, key: 'userName' })
+  const router = useRouter();
+  const userName = getQuery({ router, key: 'userName' });
 
   const { data, loading, error } = useQuery<UserIdUser>(USER_ID, {
     variables: { userName },
-  })
-  const user = data?.user
+  });
+  const user = data?.user;
 
   if (loading) {
-    return <Spinner />
+    return <Spinner />;
   }
 
   if (error) {
-    return <QueryError error={error} />
+    return <QueryError error={error} />;
   }
 
   if (!user || user?.status?.state === 'archived') {
-    return null
+    return null;
   }
 
   return (
@@ -113,8 +113,8 @@ const UserCommentsWrap = () => {
       <UserTabs />
       <UserComments user={user} />
     </>
-  )
-}
+  );
+};
 
 const UserComments = ({ user }: UserIdUser) => {
   const { data, loading, error, fetchMore } = useQuery<UserCommentFeed>(
@@ -122,31 +122,31 @@ const UserComments = ({ user }: UserIdUser) => {
     {
       variables: { id: user?.id },
     }
-  )
+  );
 
   if (!user || !user.id) {
-    return null
+    return null;
   }
 
   if (loading) {
-    return <Spinner />
+    return <Spinner />;
   }
 
   if (error) {
-    return <QueryError error={error} />
+    return <QueryError error={error} />;
   }
 
-  const connectionPath = 'node.commentedArticles'
+  const connectionPath = 'node.commentedArticles';
   const { edges, pageInfo } =
     (data &&
       data.node &&
       data.node.__typename === 'User' &&
       data.node.commentedArticles &&
       data.node.commentedArticles) ||
-    {}
+    {};
 
   if (!edges || edges.length <= 0 || !pageInfo) {
-    return <EmptyComment />
+    return <EmptyComment />;
   }
 
   const loadMore = () =>
@@ -160,19 +160,19 @@ const UserComments = ({ user }: UserIdUser) => {
           newData: fetchMoreResult,
           path: connectionPath,
         }),
-    })
+    });
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
       <List spacing={['loose', 0]}>
         {edges.map((articleEdge) => {
-          const commentEdges = articleEdge.node.comments.edges
+          const commentEdges = articleEdge.node.comments.edges;
           const filteredComments = filterComments(
             (commentEdges || []).map(({ node }) => node)
-          ) as UserCommentFeed_node_User_commentedArticles_edges_node_comments_edges_node[]
+          ) as UserCommentFeed_node_User_commentedArticles_edges_node_comments_edges_node[];
 
           if (filteredComments.length <= 0) {
-            return null
+            return null;
           }
 
           return (
@@ -205,11 +205,11 @@ const UserComments = ({ user }: UserIdUser) => {
                 ))}
               </List>
             </List.Item>
-          )
+          );
         })}
       </List>
     </InfiniteScroll>
-  )
-}
+  );
+};
 
-export default UserCommentsWrap
+export default UserCommentsWrap;

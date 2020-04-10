@@ -1,4 +1,4 @@
-import { Empty, Icon, Translate } from '~/components'
+import { Empty, Icon, Translate } from '~/components';
 
 export const EmptyAppreciation = () => (
   <Empty
@@ -7,4 +7,4 @@ export const EmptyAppreciation = () => (
       <Translate zh_hant="還沒有讚賞紀錄" zh_hans="还没有赞赏纪录" />
     }
   />
-)
+);

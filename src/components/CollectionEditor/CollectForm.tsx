@@ -1,6 +1,6 @@
-import { useQuery } from '@apollo/react-hooks'
-import { useContext, useEffect, useRef, useState } from 'react'
-import { useDebounce } from 'use-debounce'
+import { useQuery } from '@apollo/react-hooks';
+import { useContext, useEffect, useRef, useState } from 'react';
+import { useDebounce } from 'use-debounce';
 
 import {
   Dropdown,
@@ -8,66 +8,66 @@ import {
   hidePopperOnClick,
   LanguageContext,
   PopperInstance,
-} from '~/components'
-import SEARCH_ARTICLES from '~/components/GQL/queries/searchArticles'
+} from '~/components';
+import SEARCH_ARTICLES from '~/components/GQL/queries/searchArticles';
 
-import { INPUT_DEBOUNCE } from '~/common/enums'
-import { translate } from '~/common/utils'
+import { INPUT_DEBOUNCE } from '~/common/enums';
+import { translate } from '~/common/utils';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 import {
   SearchArticles,
   SearchArticles_search_edges_node_Article,
-} from '~/components/GQL/queries/__generated__/SearchArticles'
+} from '~/components/GQL/queries/__generated__/SearchArticles';
 
 interface Props {
-  onAdd: (article: SearchArticles_search_edges_node_Article) => void
+  onAdd: (article: SearchArticles_search_edges_node_Article) => void;
 }
 
 const CollectForm: React.FC<Props> = ({ onAdd }) => {
-  const { lang } = useContext(LanguageContext)
-  const [search, setSearch] = useState('')
-  const [debouncedSearch] = useDebounce(search, INPUT_DEBOUNCE)
-  const [instance, setInstance] = useState<PopperInstance | null>(null)
-  const inputNode: React.RefObject<HTMLInputElement> | null = useRef(null)
+  const { lang } = useContext(LanguageContext);
+  const [search, setSearch] = useState('');
+  const [debouncedSearch] = useDebounce(search, INPUT_DEBOUNCE);
+  const [instance, setInstance] = useState<PopperInstance | null>(null);
+  const inputNode: React.RefObject<HTMLInputElement> | null = useRef(null);
 
   // query
   const { loading, data } = useQuery<SearchArticles>(SEARCH_ARTICLES, {
     variables: { search: debouncedSearch },
     skip: !debouncedSearch,
-  })
+  });
   const articles = (data?.search.edges || [])
     .filter(({ node }) => node.__typename === 'Article')
-    .map(({ node }) => node) as SearchArticles_search_edges_node_Article[]
+    .map(({ node }) => node) as SearchArticles_search_edges_node_Article[];
 
   // dropdown
   const hideDropdown = () => {
     if (instance) {
-      instance.hide()
+      instance.hide();
     }
-  }
+  };
   const showDropdown = () => {
     if (instance) {
-      instance.show()
+      instance.show();
     }
-  }
-  const isShowDropdown = (articles && articles.length) || loading
+  };
+  const isShowDropdown = (articles && articles.length) || loading;
 
   useEffect(() => {
     if (isShowDropdown) {
-      showDropdown()
+      showDropdown();
     } else {
-      hideDropdown()
+      hideDropdown();
     }
-  })
+  });
 
   return (
     <>
       <Dropdown
         trigger="manual"
         onShown={(i) => {
-          hidePopperOnClick(i)
+          hidePopperOnClick(i);
         }}
         placement="bottom-start"
         onCreate={setInstance}
@@ -76,10 +76,10 @@ const CollectForm: React.FC<Props> = ({ onAdd }) => {
             articles={articles}
             loading={loading}
             onClick={(article) => {
-              onAdd(article)
-              setSearch('')
+              onAdd(article);
+              setSearch('');
               if (inputNode && inputNode.current) {
-                inputNode.current.value = ''
+                inputNode.current.value = '';
               }
             }}
           />
@@ -94,12 +94,12 @@ const CollectForm: React.FC<Props> = ({ onAdd }) => {
             lang,
           })}
           onChange={(event) => {
-            const value = event.target.value
-            setSearch(value)
+            const value = event.target.value;
+            setSearch(value);
           }}
           onFocus={() => {
             if (isShowDropdown) {
-              showDropdown()
+              showDropdown();
             }
           }}
         />
@@ -107,7 +107,7 @@ const CollectForm: React.FC<Props> = ({ onAdd }) => {
 
       <style jsx>{styles}</style>
     </>
-  )
-}
+  );
+};
 
-export default CollectForm
+export default CollectForm;

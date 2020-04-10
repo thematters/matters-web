@@ -1,35 +1,35 @@
-import { createUploadLink } from '@matters/apollo-upload-client'
+import { createUploadLink } from '@matters/apollo-upload-client';
 import {
   InMemoryCache,
   IntrospectionFragmentMatcher,
-} from 'apollo-cache-inmemory'
-import { ApolloClient } from 'apollo-client'
-import { ApolloLink, split } from 'apollo-link'
-import { setContext } from 'apollo-link-context'
-import { onError } from 'apollo-link-error'
-import { createPersistedQueryLink } from 'apollo-link-persisted-queries'
-import { WebSocketLink } from 'apollo-link-ws'
-import { getMainDefinition } from 'apollo-utilities'
-import http from 'http'
-import https from 'https'
-import withApollo from 'next-with-apollo'
-import getConfig from 'next/config'
+} from 'apollo-cache-inmemory';
+import { ApolloClient } from 'apollo-client';
+import { ApolloLink, split } from 'apollo-link';
+import { setContext } from 'apollo-link-context';
+import { onError } from 'apollo-link-error';
+import { createPersistedQueryLink } from 'apollo-link-persisted-queries';
+import { WebSocketLink } from 'apollo-link-ws';
+import { getMainDefinition } from 'apollo-utilities';
+import http from 'http';
+import https from 'https';
+import withApollo from 'next-with-apollo';
+import getConfig from 'next/config';
 
-import introspectionQueryResultData from '~/common/gql/fragmentTypes.json'
-import { randomString } from '~/common/utils'
+import introspectionQueryResultData from '~/common/gql/fragmentTypes.json';
+import { randomString } from '~/common/utils';
 
 // import { setupPersistCache } from './cache'
-import resolvers from './resolvers'
-import typeDefs from './types'
+import resolvers from './resolvers';
+import typeDefs from './types';
 
 const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData,
-})
+});
 
 const {
   publicRuntimeConfig: { ENV, API_URL, WS_URL },
-} = getConfig()
-const isProd = ENV === 'production'
+} = getConfig();
+const isProd = ENV === 'production';
 
 // toggle http for local dev
 const agent =
@@ -37,12 +37,12 @@ const agent =
     ? new http.Agent()
     : new https.Agent({
         rejectUnauthorized: isProd, // allow access to https:...matters.news in localhost
-      })
+      });
 
 // links
 const persistedQueryLink = createPersistedQueryLink({
   useGETForHashedQueries: true,
-})
+});
 
 const httpLink = ({ headers }: { [key: string]: any }) =>
   createUploadLink({
@@ -52,7 +52,7 @@ const httpLink = ({ headers }: { [key: string]: any }) =>
     fetchOptions: {
       agent,
     },
-  })
+  });
 
 // only do ws with browser
 const wsLink = process.browser
@@ -62,23 +62,23 @@ const wsLink = process.browser
         reconnect: true,
       },
     })
-  : null
+  : null;
 
 const dataLink = process.browser
   ? ({ headers }: { [key: string]: any }) =>
       split(
         // split based on operation type
         ({ query }) => {
-          const definition = getMainDefinition(query)
+          const definition = getMainDefinition(query);
           return (
             definition.kind === 'OperationDefinition' &&
             definition.operation === 'subscription'
-          )
+          );
         },
         wsLink as WebSocketLink,
         httpLink({ headers })
       )
-  : httpLink
+  : httpLink;
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
@@ -90,12 +90,12 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
           extensions && extensions.code
         }`
       )
-    )
+    );
   }
   if (networkError) {
-    console.log(`[Network error]: ${networkError}`)
+    console.log(`[Network error]: ${networkError}`);
   }
-})
+});
 
 const authLink = setContext((_, { headers }) => {
   return {
@@ -103,30 +103,30 @@ const authLink = setContext((_, { headers }) => {
       ...headers,
       'x-client-name': 'web',
     },
-  }
-})
+  };
+});
 
 const sentryLink = setContext((_, { headers }) => {
   // Add action id for Sentry
-  const actionId = randomString()
+  const actionId = randomString();
 
   import('@sentry/browser').then((Sentry) => {
     Sentry.configureScope((scope: any) => {
-      scope.setTag('action-id', actionId)
-    })
-  })
+      scope.setTag('action-id', actionId);
+    });
+  });
 
   return {
     headers: {
       ...headers,
       'x-sentry-action-id': actionId,
     },
-  }
-})
+  };
+});
 
 export default withApollo(({ ctx, headers, initialState }) => {
-  const cache = new InMemoryCache({ fragmentMatcher })
-  cache.restore(initialState || {})
+  const cache = new InMemoryCache({ fragmentMatcher });
+  cache.restore(initialState || {});
 
   // setupPersistCache(cache)
 
@@ -144,20 +144,20 @@ export default withApollo(({ ctx, headers, initialState }) => {
       Query: {
         ...resolvers.Query,
         clientInfo: () => {
-          const data = resolvers.Query.clientInfo()
+          const data = resolvers.Query.clientInfo();
 
           // @ts-ignore
-          const clientInfo = ctx?.req?.clientInfo || {}
+          const clientInfo = ctx?.req?.clientInfo || {};
 
           return {
             ...data,
             ...clientInfo,
-          }
+          };
         },
       },
     },
     typeDefs,
-  })
+  });
 
-  return client
-})
+  return client;
+});

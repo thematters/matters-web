@@ -1,8 +1,8 @@
-import { Button, ButtonProps, Icon, TextIcon, Translate } from '~/components'
+import { Button, ButtonProps, Icon, TextIcon, Translate } from '~/components';
 
 type ViewAllButtonProps = {
-  arrowIconDirection?: 'down' | 'right'
-} & ButtonProps
+  arrowIconDirection?: 'down' | 'right';
+} & ButtonProps;
 
 export const ViewAllButton: React.FC<ViewAllButtonProps> = ({
   arrowIconDirection = 'right',
@@ -13,7 +13,7 @@ export const ViewAllButton: React.FC<ViewAllButtonProps> = ({
       <Icon.Right size="xs" />
     ) : (
       <Icon.Down size="xs" />
-    )
+    );
 
   return (
     <Button
@@ -32,5 +32,5 @@ export const ViewAllButton: React.FC<ViewAllButtonProps> = ({
         <Translate id="viewAll" />
       </TextIcon>
     </Button>
-  )
-}
+  );
+};

@@ -1,7 +1,7 @@
-import LikeCoinTermAlertDialog from './LikeCoinTermAlertDialog'
-import LoginDialog from './LoginDialog'
-import ResetPasswordDialog from './ResetPasswordDialog'
-import SignUpDialog from './SignUpDialog'
+import LikeCoinTermAlertDialog from './LikeCoinTermAlertDialog';
+import LoginDialog from './LoginDialog';
+import ResetPasswordDialog from './ResetPasswordDialog';
+import SignUpDialog from './SignUpDialog';
 // import TermAlertDialog from './TermAlertDialog'
 
 export const GlobalDialogs = () => {
@@ -14,5 +14,5 @@ export const GlobalDialogs = () => {
       <SignUpDialog />
       <ResetPasswordDialog />
     </>
-  )
-}
+  );
+};

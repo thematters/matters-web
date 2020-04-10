@@ -1,32 +1,32 @@
-import { useFormik } from 'formik'
-import gql from 'graphql-tag'
-import _pickBy from 'lodash/pickBy'
-import { useContext } from 'react'
+import { useFormik } from 'formik';
+import gql from 'graphql-tag';
+import _pickBy from 'lodash/pickBy';
+import { useContext } from 'react';
 
-import { Dialog, Form, LanguageContext, Layout, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
+import { Dialog, Form, LanguageContext, Layout, Translate } from '~/components';
+import { useMutation } from '~/components/GQL';
 
 import {
   translate,
   validateAvatar,
   validateDescription,
   validateDisplayName,
-} from '~/common/utils'
+} from '~/common/utils';
 
-import AvatarUploadField from './AvatarUploadField'
+import AvatarUploadField from './AvatarUploadField';
 
-import { UpdateUserInfoProfileInit } from './__generated__/UpdateUserInfoProfileInit'
+import { UpdateUserInfoProfileInit } from './__generated__/UpdateUserInfoProfileInit';
 
 interface FormProps {
-  purpose: 'dialog' | 'page'
-  submitCallback?: () => void
-  closeDialog?: () => void
+  purpose: 'dialog' | 'page';
+  submitCallback?: () => void;
+  closeDialog?: () => void;
 }
 
 interface FormValues {
-  avatar: null | string
-  displayName: string
-  description: string
+  avatar: null | string;
+  displayName: string;
+  description: string;
 }
 
 const UPDATE_USER_INFO = gql`
@@ -39,17 +39,17 @@ const UPDATE_USER_INFO = gql`
       }
     }
   }
-`
+`;
 
 export const SignUpProfileForm: React.FC<FormProps> = ({
   purpose,
   submitCallback,
   closeDialog,
 }) => {
-  const [update] = useMutation<UpdateUserInfoProfileInit>(UPDATE_USER_INFO)
-  const { lang } = useContext(LanguageContext)
-  const isInPage = purpose === 'page'
-  const formId = 'sign-up-profile-form'
+  const [update] = useMutation<UpdateUserInfoProfileInit>(UPDATE_USER_INFO);
+  const { lang } = useContext(LanguageContext);
+  const isInPage = purpose === 'page';
+  const formId = 'sign-up-profile-form';
 
   const {
     values,
@@ -86,19 +86,19 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
               ...(avatar ? { avatar } : {}),
             },
           },
-        })
+        });
       } catch (e) {
         // do not block the next step since register is successfully
-        console.error(e)
+        console.error(e);
       }
 
       if (submitCallback) {
-        submitCallback()
+        submitCallback();
       }
 
-      setSubmitting(false)
+      setSubmitting(false);
     },
-  })
+  });
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
@@ -138,7 +138,7 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
         onChange={handleChange}
       />
     </Form>
-  )
+  );
 
   const SubmitButton = (
     <Dialog.Header.RightButton
@@ -149,7 +149,7 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
       text={<Translate id="nextStep" />}
       loading={isSubmitting}
     />
-  )
+  );
 
   if (isInPage) {
     return (
@@ -166,7 +166,7 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
 
         {InnerForm}
       </>
-    )
+    );
   }
   return (
     <>
@@ -182,5 +182,5 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
         {InnerForm}
       </Dialog.Content>
     </>
-  )
-}
+  );
+};

@@ -1,5 +1,5 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
 
 import {
   Dialog,
@@ -8,23 +8,23 @@ import {
   Spinner,
   Translate,
   useResponsive,
-} from '~/components'
-import { QueryError } from '~/components/GQL'
-import { UserDigest } from '~/components/UserDigest'
+} from '~/components';
+import { QueryError } from '~/components/GQL';
+import { UserDigest } from '~/components/UserDigest';
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
-import { analytics, mergeConnections } from '~/common/utils'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums';
+import { analytics, mergeConnections } from '~/common/utils';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 import {
   ArticleAppreciators,
   ArticleAppreciators_article_appreciationsReceived_edges,
-} from './__generated__/ArticleAppreciators'
+} from './__generated__/ArticleAppreciators';
 
 interface AppreciatorsDialogContentProps {
-  mediaHash: string
-  closeDialog: () => void
+  mediaHash: string;
+  closeDialog: () => void;
 }
 
 const ARTICLE_APPRECIATORS = gql`
@@ -53,32 +53,32 @@ const ARTICLE_APPRECIATORS = gql`
     }
   }
   ${UserDigest.Rich.fragments.user}
-`
+`;
 
 const AppreciatorsDialogContent = ({
   mediaHash,
   closeDialog,
 }: AppreciatorsDialogContentProps) => {
-  const isSmallUp = useResponsive('sm-up')
+  const isSmallUp = useResponsive('sm-up');
   const { data, loading, error, fetchMore } = useQuery<ArticleAppreciators>(
     ARTICLE_APPRECIATORS,
     { variables: { mediaHash } }
-  )
+  );
 
-  const article = data?.article
-  const connectionPath = 'article.appreciationsReceived'
-  const { edges, pageInfo } = data?.article?.appreciationsReceived || {}
+  const article = data?.article;
+  const connectionPath = 'article.appreciationsReceived';
+  const { edges, pageInfo } = data?.article?.appreciationsReceived || {};
 
   if (loading) {
-    return <Spinner />
+    return <Spinner />;
   }
 
   if (error) {
-    return <QueryError error={error} />
+    return <QueryError error={error} />;
   }
 
   if (!edges || edges.length <= 0 || !pageInfo || !article) {
-    return null
+    return null;
   }
 
   const ListRow = ({
@@ -87,7 +87,7 @@ const AppreciatorsDialogContent = ({
   }: RowRendererProps<
     ArticleAppreciators_article_appreciationsReceived_edges
   >) => {
-    const { node, cursor } = datum
+    const { node, cursor } = datum;
     return (
       <div className="appreciator-item" key={cursor}>
         {node.sender && (
@@ -102,50 +102,50 @@ const AppreciatorsDialogContent = ({
                 type: FEED_TYPE.APPRECIATOR,
                 location: index,
                 entrance: article.id,
-              })
+              });
             }}
           />
         )}
         <style jsx>{styles}</style>
       </div>
-    )
-  }
+    );
+  };
 
   const loadMore = (callback: () => void) => {
     analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
       type: FEED_TYPE.APPRECIATOR,
       location: edges.length,
       entrance: article.id,
-    })
+    });
     return fetchMore({
       variables: {
         after: pageInfo.endCursor,
       },
       updateQuery: (previousResult, { fetchMoreResult }) => {
-        callback()
+        callback();
         return mergeConnections({
           oldData: previousResult,
           newData: fetchMoreResult,
           path: connectionPath,
-        })
+        });
       },
-    })
-  }
+    });
+  };
 
-  const totalCount = data?.article?.appreciationsReceived.totalCount || 0
+  const totalCount = data?.article?.appreciationsReceived.totalCount || 0;
 
   // estimate a safe default height
   const calcContentMaxHeight = () => {
     if (window) {
-      const dialogMaxHeight = window.innerHeight * 0.01 * 90
-      const head = 1.5 + (isSmallUp ? 2 + 0.5 : 0.75 * 2)
-      const spacing = 0.75 * 2
-      return dialogMaxHeight - (head + spacing + 1) * 16
+      const dialogMaxHeight = window.innerHeight * 0.01 * 90;
+      const head = 1.5 + (isSmallUp ? 2 + 0.5 : 0.75 * 2);
+      const spacing = 0.75 * 2;
+      return dialogMaxHeight - (head + spacing + 1) * 16;
     }
-    return
-  }
+    return;
+  };
 
-  const defaultListMaxHeight = calcContentMaxHeight()
+  const defaultListMaxHeight = calcContentMaxHeight();
 
   return (
     <>
@@ -174,7 +174,7 @@ const AppreciatorsDialogContent = ({
         <style jsx>{styles}</style>
       </Dialog.Content>
     </>
-  )
-}
+  );
+};
 
-export default AppreciatorsDialogContent
+export default AppreciatorsDialogContent;

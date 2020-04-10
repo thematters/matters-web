@@ -1,18 +1,18 @@
-import getConfig from 'next/config'
+import getConfig from 'next/config';
 
-import { Dialog, Form, Translate } from '~/components'
+import { Dialog, Form, Translate } from '~/components';
 
-import Hint from './Hint'
-import Intro from './Intro'
+import Hint from './Hint';
+import Intro from './Intro';
 
 interface SelectProps {
-  startGenerate: () => void
-  startBind: (windowRef: Window) => void
+  startGenerate: () => void;
+  startBind: (windowRef: Window) => void;
 }
 
 const {
   publicRuntimeConfig: { OAUTH_URL },
-} = getConfig()
+} = getConfig();
 
 const Select: React.FC<SelectProps> = ({ startGenerate, startBind }) => {
   return (
@@ -39,11 +39,11 @@ const Select: React.FC<SelectProps> = ({ startGenerate, startBind }) => {
             />
           }
           onClick={() => {
-            const url = `${OAUTH_URL}/likecoin`
-            const windowRef = window.open(url, '_blank')
+            const url = `${OAUTH_URL}/likecoin`;
+            const windowRef = window.open(url, '_blank');
 
             if (windowRef) {
-              startBind(windowRef)
+              startBind(windowRef);
             }
           }}
         />
@@ -51,7 +51,7 @@ const Select: React.FC<SelectProps> = ({ startGenerate, startBind }) => {
 
       <Intro />
     </Dialog.Content>
-  )
-}
+  );
+};
 
-export default Select
+export default Select;

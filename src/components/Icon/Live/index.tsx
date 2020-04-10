@@ -1,8 +1,8 @@
-import { Tooltip, Translate } from '~/components'
+import { Tooltip, Translate } from '~/components';
 
-import { ReactComponent as IconLive } from '~/static/icons/label-live.svg'
+import { ReactComponent as IconLive } from '~/static/icons/label-live.svg';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 const Live = () => (
   <Tooltip
@@ -14,6 +14,6 @@ const Live = () => (
       <style jsx>{styles}</style>
     </span>
   </Tooltip>
-)
+);
 
-export default Live
+export default Live;

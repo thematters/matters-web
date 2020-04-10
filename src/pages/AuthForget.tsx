@@ -1,3 +1,3 @@
-import AuthForget from '~/views/Auth/Forget'
+import AuthForget from '~/views/Auth/Forget';
 
-export default () => <AuthForget />
+export default () => <AuthForget />;

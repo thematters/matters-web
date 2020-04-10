@@ -1,14 +1,14 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
 
-import { ArticleDigestSidebar, List, Spinner } from '~/components'
+import { ArticleDigestSidebar, List, Spinner } from '~/components';
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
-import { analytics } from '~/common/utils'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums';
+import { analytics } from '~/common/utils';
 
-import SectionHeader from '../../SectionHeader'
+import SectionHeader from '../../SectionHeader';
 
-import { SidebarIcymi } from './__generated__/SidebarIcymi'
+import { SidebarIcymi } from './__generated__/SidebarIcymi';
 
 export const SIDEBAR_ICYMI = gql`
   query SidebarIcymi {
@@ -27,18 +27,18 @@ export const SIDEBAR_ICYMI = gql`
     }
   }
   ${ArticleDigestSidebar.fragments.article}
-`
+`;
 
 const ICYMI = () => {
-  const { data, loading } = useQuery<SidebarIcymi>(SIDEBAR_ICYMI)
-  const edges = data?.viewer?.recommendation.icymi.edges
+  const { data, loading } = useQuery<SidebarIcymi>(SIDEBAR_ICYMI);
+  const edges = data?.viewer?.recommendation.icymi.edges;
 
   if (loading) {
-    return <Spinner />
+    return <Spinner />;
   }
 
   if (!edges || edges.length <= 0) {
-    return null
+    return null;
   }
 
   return (
@@ -63,7 +63,7 @@ const ICYMI = () => {
         ))}
       </List>
     </section>
-  )
-}
+  );
+};
 
-export default ICYMI
+export default ICYMI;

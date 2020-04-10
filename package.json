@@ -166,8 +166,7 @@
     "exec": "npm run build:server && node build/production-server/server.js"
   },
   "prettier": {
-    "singleQuote": true,
-    "semi": false
+    "singleQuote": true
   },
   "husky": {
     "hooks": {

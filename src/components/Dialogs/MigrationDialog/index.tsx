@@ -1,27 +1,27 @@
-import { useState } from 'react'
+import { useState } from 'react';
 
-import { Dialog } from '~/components'
+import { Dialog } from '~/components';
 
-import styles from './styles.css'
-import Success from './Success'
-import Upload from './Upload'
+import styles from './styles.css';
+import Success from './Success';
+import Upload from './Upload';
 
-type Step = 'upload' | 'success'
+type Step = 'upload' | 'success';
 
 interface MigrationDialogProps {
-  children: ({ open }: { open: () => void }) => React.ReactNode
-  defaultStep?: Step
+  children: ({ open }: { open: () => void }) => React.ReactNode;
+  defaultStep?: Step;
 }
 
 export const MigrationDialog = ({
   children,
   defaultStep = 'upload',
 }: MigrationDialogProps) => {
-  const [showDialog, setShowDialog] = useState(false)
-  const [step, setStep] = useState<Step>(defaultStep)
-  const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
-  const nextStep = () => setStep('success')
+  const [showDialog, setShowDialog] = useState(false);
+  const [step, setStep] = useState<Step>(defaultStep);
+  const open = () => setShowDialog(true);
+  const close = () => setShowDialog(false);
+  const nextStep = () => setStep('success');
 
   return (
     <>
@@ -33,5 +33,5 @@ export const MigrationDialog = ({
       </Dialog>
       <style jsx>{styles}</style>
     </>
-  )
-}
+  );
+};

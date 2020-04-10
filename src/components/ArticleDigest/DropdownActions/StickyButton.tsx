@@ -1,11 +1,11 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import { Icon, Menu, TextIcon, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
-import updateUserArticles from '~/components/GQL/updates/userArticles'
+import { Icon, Menu, TextIcon, Translate } from '~/components';
+import { useMutation } from '~/components/GQL';
+import updateUserArticles from '~/components/GQL/updates/userArticles';
 
-import { StickyButtonArticle } from './__generated__/StickyButtonArticle'
-import { UpdateArticleInfo } from './__generated__/UpdateArticleInfo'
+import { StickyButtonArticle } from './__generated__/StickyButtonArticle';
+import { UpdateArticleInfo } from './__generated__/UpdateArticleInfo';
 
 const UPDATE_ARTICLE_INFO = gql`
   mutation UpdateArticleInfo($id: ID!, $sticky: Boolean!) {
@@ -14,7 +14,7 @@ const UPDATE_ARTICLE_INFO = gql`
       sticky
     }
   }
-`
+`;
 
 const fragments = {
   article: gql`
@@ -27,7 +27,7 @@ const fragments = {
       }
     }
   `,
-}
+};
 
 const StickyButton = ({ article }: { article: StickyButtonArticle }) => {
   const [update] = useMutation<UpdateArticleInfo>(UPDATE_ARTICLE_INFO, {
@@ -45,14 +45,14 @@ const StickyButton = ({ article }: { article: StickyButtonArticle }) => {
         articleId: article.id,
         userName: article.author.userName,
         type: article.sticky ? 'unsticky' : 'sticky',
-      })
+      });
     },
-  })
+  });
 
   return (
     <Menu.Item
       onClick={() => {
-        update()
+        update();
       }}
     >
       {article.sticky ? (
@@ -69,9 +69,9 @@ const StickyButton = ({ article }: { article: StickyButtonArticle }) => {
         </TextIcon>
       )}
     </Menu.Item>
-  )
-}
+  );
+};
 
-StickyButton.fragments = fragments
+StickyButton.fragments = fragments;
 
-export default StickyButton
+export default StickyButton;

@@ -1,15 +1,15 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
 
-import { Head, PageHeader, Spinner, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
+import { Head, PageHeader, Spinner, Translate } from '~/components';
+import { useMutation } from '~/components/GQL';
 
-import PushSwitch from './PushSwitch'
-import SettingItem from './SettingItem'
-import styles from './styles.css'
+import PushSwitch from './PushSwitch';
+import SettingItem from './SettingItem';
+import styles from './styles.css';
 
-import { UpdateViewerNotification } from './__generated__/UpdateViewerNotification'
-import { ViewerNotificationSettings } from './__generated__/ViewerNotificationSettings'
+import { UpdateViewerNotification } from './__generated__/UpdateViewerNotification';
+import { ViewerNotificationSettings } from './__generated__/ViewerNotificationSettings';
 
 const VIEWER_NOTIFICATION_SETTINGS = gql`
   query ViewerNotificationSettings {
@@ -34,7 +34,7 @@ const VIEWER_NOTIFICATION_SETTINGS = gql`
       }
     }
   }
-`
+`;
 
 const UPDATE_VIEWER_NOTIFICATION = gql`
   mutation UpdateViewerNotification(
@@ -61,7 +61,7 @@ const UPDATE_VIEWER_NOTIFICATION = gql`
       }
     }
   }
-`
+`;
 
 type SettingItemKey =
   | 'enable'
@@ -75,20 +75,20 @@ type SettingItemKey =
   | 'downstream'
   | 'commentPinned'
   | 'officialNotice'
-  | 'reportFeedback'
+  | 'reportFeedback';
 
 interface SettingItem {
-  key: SettingItemKey
-  title: React.ReactNode
-  description?: React.ReactNode
+  key: SettingItemKey;
+  title: React.ReactNode;
+  description?: React.ReactNode;
 }
 
 const settingsMap: {
-  me: SettingItem[]
-  article: SettingItem[]
-  comment: SettingItem[]
-  preference: SettingItem[]
-  others: SettingItem[]
+  me: SettingItem[];
+  article: SettingItem[];
+  comment: SettingItem[];
+  preference: SettingItem[];
+  others: SettingItem[];
 } = {
   me: [
     {
@@ -148,24 +148,24 @@ const settingsMap: {
       title: <Translate zh_hant="檢舉反饋" zh_hans="检举反馈" />,
     },
   ],
-}
+};
 
 const SettingsNotification = () => {
   const [updateNotification] = useMutation<UpdateViewerNotification>(
     UPDATE_VIEWER_NOTIFICATION
-  )
+  );
   const { data, loading } = useQuery<ViewerNotificationSettings>(
     VIEWER_NOTIFICATION_SETTINGS
-  )
-  const settings = data?.viewer?.settings.notification
-  const id = data?.viewer?.id
+  );
+  const settings = data?.viewer?.settings.notification;
+  const id = data?.viewer?.id;
 
   if (loading) {
-    return <Spinner />
+    return <Spinner />;
   }
 
   if (!id || !settings) {
-    return null
+    return null;
   }
 
   const handleOnChange = (type: SettingItemKey) => {
@@ -188,8 +188,8 @@ const SettingsNotification = () => {
           __typename: 'User',
         },
       },
-    })
-  }
+    });
+  };
 
   return (
     <>
@@ -290,6 +290,6 @@ const SettingsNotification = () => {
 
       <style jsx>{styles}</style>
     </>
-  )
-}
-export default SettingsNotification
+  );
+};
+export default SettingsNotification;

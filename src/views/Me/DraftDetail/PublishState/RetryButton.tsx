@@ -1,9 +1,9 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import { Button, Icon, TextIcon, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
+import { Button, Icon, TextIcon, Translate } from '~/components';
+import { useMutation } from '~/components/GQL';
 
-import { RetryPublish } from './__generated__/RetryPublish'
+import { RetryPublish } from './__generated__/RetryPublish';
 
 const RETRY_PUBLISH = gql`
   mutation RetryPublish($id: ID!) {
@@ -13,7 +13,7 @@ const RETRY_PUBLISH = gql`
       publishState
     }
   }
-`
+`;
 
 const RetryButton = ({ id }: { id: string }) => {
   const [retry] = useMutation<RetryPublish>(RETRY_PUBLISH, {
@@ -26,7 +26,7 @@ const RetryButton = ({ id }: { id: string }) => {
         __typename: 'Draft',
       },
     },
-  })
+  });
 
   return (
     <Button
@@ -43,7 +43,7 @@ const RetryButton = ({ id }: { id: string }) => {
         <Translate id="retry" />
       </TextIcon>
     </Button>
-  )
-}
+  );
+};
 
-export default RetryButton
+export default RetryButton;

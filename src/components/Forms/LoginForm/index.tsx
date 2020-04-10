@@ -1,12 +1,12 @@
-import { useFormik } from 'formik'
-import gql from 'graphql-tag'
-import _pickBy from 'lodash/pickBy'
-import { useContext } from 'react'
+import { useFormik } from 'formik';
+import gql from 'graphql-tag';
+import _pickBy from 'lodash/pickBy';
+import { useContext } from 'react';
 
-import { Dialog, Form, LanguageContext, Layout, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
+import { Dialog, Form, LanguageContext, Layout, Translate } from '~/components';
+import { useMutation } from '~/components/GQL';
 
-import { ADD_TOAST, ANALYTICS_EVENTS } from '~/common/enums'
+import { ADD_TOAST, ANALYTICS_EVENTS } from '~/common/enums';
 import {
   analytics,
   // clearPersistCache,
@@ -15,26 +15,26 @@ import {
   translate,
   validateEmail,
   validatePassword,
-} from '~/common/utils'
+} from '~/common/utils';
 
 import {
   PasswordResetDialogButton,
   PasswordResetRedirectButton,
   SignUpDialogButton,
   SignUpRedirectionButton,
-} from './Buttons'
+} from './Buttons';
 
-import { UserLogin } from './__generated__/UserLogin'
+import { UserLogin } from './__generated__/UserLogin';
 
 interface FormProps {
-  purpose: 'dialog' | 'page'
-  submitCallback?: () => void
-  closeDialog?: () => void
+  purpose: 'dialog' | 'page';
+  submitCallback?: () => void;
+  closeDialog?: () => void;
 }
 
 interface FormValues {
-  email: string
-  password: ''
+  email: string;
+  password: '';
 }
 
 export const USER_LOGIN = gql`
@@ -43,19 +43,19 @@ export const USER_LOGIN = gql`
       auth
     }
   }
-`
+`;
 
 export const LoginForm: React.FC<FormProps> = ({
   purpose,
   submitCallback,
   closeDialog,
 }) => {
-  const [login] = useMutation<UserLogin>(USER_LOGIN)
-  const { lang } = useContext(LanguageContext)
+  const [login] = useMutation<UserLogin>(USER_LOGIN);
+  const { lang } = useContext(LanguageContext);
 
-  const isInDialog = purpose === 'dialog'
-  const isInPage = purpose === 'page'
-  const formId = 'login-form'
+  const isInDialog = purpose === 'dialog';
+  const isInPage = purpose === 'page';
+  const formId = 'login-form';
 
   const {
     values,
@@ -78,10 +78,10 @@ export const LoginForm: React.FC<FormProps> = ({
       }),
     onSubmit: async ({ email, password }, { setFieldError, setSubmitting }) => {
       try {
-        await login({ variables: { input: { email, password } } })
+        await login({ variables: { input: { email, password } } });
 
         if (submitCallback) {
-          submitCallback()
+          submitCallback();
         }
 
         window.dispatchEvent(
@@ -91,36 +91,36 @@ export const LoginForm: React.FC<FormProps> = ({
               content: <Translate id="successLogin" />,
             },
           })
-        )
-        analytics.identifyUser()
-        analytics.trackEvent(ANALYTICS_EVENTS.LOG_IN)
+        );
+        analytics.identifyUser();
+        analytics.trackEvent(ANALYTICS_EVENTS.LOG_IN);
 
         // await clearPersistCache()
 
         redirectToTarget({
           fallback: !!isInPage ? 'homepage' : 'current',
-        })
+        });
       } catch (error) {
-        const [messages, codes] = parseFormSubmitErrors(error, lang)
+        const [messages, codes] = parseFormSubmitErrors(error, lang);
         codes.forEach((code) => {
           if (code.includes('USER_EMAIL_')) {
-            setFieldError('email', messages[code])
+            setFieldError('email', messages[code]);
           } else if (code.indexOf('USER_PASSWORD_') >= 0) {
-            setFieldError('password', messages[code])
+            setFieldError('password', messages[code]);
           } else {
-            setFieldError('email', messages[code])
+            setFieldError('email', messages[code]);
           }
-        })
+        });
 
         analytics.trackEvent(ANALYTICS_EVENTS.LOG_IN_FAILED, {
           email,
           error,
-        })
+        });
       }
 
-      setSubmitting(false)
+      setSubmitting(false);
     },
-  })
+  });
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
@@ -158,7 +158,7 @@ export const LoginForm: React.FC<FormProps> = ({
       {isInDialog && <SignUpDialogButton />}
       {isInPage && <SignUpRedirectionButton />}
     </Form>
-  )
+  );
 
   const SubmitButton = (
     <Dialog.Header.RightButton
@@ -168,7 +168,7 @@ export const LoginForm: React.FC<FormProps> = ({
       text={<Translate id="confirm" />}
       loading={isSubmitting}
     />
-  )
+  );
 
   if (isInPage) {
     return (
@@ -185,7 +185,7 @@ export const LoginForm: React.FC<FormProps> = ({
 
         {InnerForm}
       </>
-    )
+    );
   }
 
   return (
@@ -202,5 +202,5 @@ export const LoginForm: React.FC<FormProps> = ({
         {InnerForm}
       </Dialog.Content>
     </>
-  )
-}
+  );
+};

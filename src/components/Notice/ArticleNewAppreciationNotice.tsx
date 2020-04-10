@@ -1,26 +1,26 @@
-import gql from 'graphql-tag'
-import { Fragment } from 'react'
+import gql from 'graphql-tag';
+import { Fragment } from 'react';
 
-import { Translate } from '~/components'
+import { Translate } from '~/components';
 
-import { numAbbr } from '~/common/utils'
+import { numAbbr } from '~/common/utils';
 
-import NoticeActorAvatar from './NoticeActorAvatar'
-import NoticeActorName from './NoticeActorName'
-import NoticeArticle from './NoticeArticle'
-import NoticeHead from './NoticeHead'
-import NoticeTypeIcon from './NoticeTypeIcon'
-import styles from './styles.css'
+import NoticeActorAvatar from './NoticeActorAvatar';
+import NoticeActorName from './NoticeActorName';
+import NoticeArticle from './NoticeArticle';
+import NoticeHead from './NoticeHead';
+import NoticeTypeIcon from './NoticeTypeIcon';
+import styles from './styles.css';
 
-import { ArticleNewAppreciationNotice as NoticeType } from './__generated__/ArticleNewAppreciationNotice'
+import { ArticleNewAppreciationNotice as NoticeType } from './__generated__/ArticleNewAppreciationNotice';
 
 const ArticleNewAppreciationNotice = ({ notice }: { notice: NoticeType }) => {
   if (!notice || !notice.actors) {
-    return null
+    return null;
   }
 
-  const actorsCount = notice.actors.length
-  const isMultiActors = actorsCount > 1
+  const actorsCount = notice.actors.length;
+  const isMultiActors = actorsCount > 1;
 
   return (
     <section className="container">
@@ -65,8 +65,8 @@ const ArticleNewAppreciationNotice = ({ notice }: { notice: NoticeType }) => {
 
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 
 ArticleNewAppreciationNotice.fragments = {
   notice: gql`
@@ -88,6 +88,6 @@ ArticleNewAppreciationNotice.fragments = {
     ${NoticeArticle.fragments.article}
     ${NoticeHead.fragments.date}
   `,
-}
+};
 
-export default ArticleNewAppreciationNotice
+export default ArticleNewAppreciationNotice;

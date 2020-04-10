@@ -1,18 +1,18 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
 
-import { ArticleDigestCard, Slides, Spinner } from '~/components'
+import { ArticleDigestCard, Slides, Spinner } from '~/components';
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
-import { analytics } from '~/common/utils'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums';
+import { analytics } from '~/common/utils';
 
-import SectionHeader from '../../SectionHeader'
+import SectionHeader from '../../SectionHeader';
 
-import { IcymiFeed } from './__generated__/IcymiFeed'
-import { TopicsFeed } from './__generated__/TopicsFeed'
+import { IcymiFeed } from './__generated__/IcymiFeed';
+import { TopicsFeed } from './__generated__/TopicsFeed';
 
 interface FeedArticlesProps {
-  type?: 'icymi' | 'topics'
+  type?: 'icymi' | 'topics';
 }
 
 const FEED_ARTICLES = {
@@ -52,20 +52,20 @@ const FEED_ARTICLES = {
     }
     ${ArticleDigestCard.fragments.article}
   `,
-}
+};
 
 const FeedArticles = ({ type = 'icymi' }: FeedArticlesProps) => {
   const { data, loading } = useQuery<IcymiFeed | TopicsFeed>(
     FEED_ARTICLES[type]
-  )
-  const edges = data?.viewer?.recommendation.articles.edges
+  );
+  const edges = data?.viewer?.recommendation.articles.edges;
 
   if (loading) {
-    return <Spinner />
+    return <Spinner />;
   }
 
   if (!edges || edges.length <= 0) {
-    return null
+    return null;
   }
 
   return (
@@ -86,7 +86,7 @@ const FeedArticles = ({ type = 'icymi' }: FeedArticlesProps) => {
         </Slides.Item>
       ))}
     </Slides>
-  )
-}
+  );
+};
 
-export default FeedArticles
+export default FeedArticles;

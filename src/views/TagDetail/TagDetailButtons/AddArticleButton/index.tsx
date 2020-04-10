@@ -1,9 +1,9 @@
-import { Button, Icon, TextIcon, Translate } from '~/components'
+import { Button, Icon, TextIcon, Translate } from '~/components';
 
-import TagArticleDialog from './TagArticleDialog'
+import TagArticleDialog from './TagArticleDialog';
 
 interface AddArticleButtonProps {
-  id?: string
+  id?: string;
 }
 
 const AddArticleButton: React.FC<AddArticleButtonProps> = ({ id }) => {
@@ -23,7 +23,7 @@ const AddArticleButton: React.FC<AddArticleButtonProps> = ({ id }) => {
         </Button>
       )}
     </TagArticleDialog>
-  )
-}
+  );
+};
 
-export default AddArticleButton
+export default AddArticleButton;

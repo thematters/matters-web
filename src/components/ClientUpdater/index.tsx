@@ -1,13 +1,13 @@
-import { useQuery } from '@apollo/react-hooks'
-import { Router } from 'next/router'
-import { useEffect, useRef } from 'react'
+import { useQuery } from '@apollo/react-hooks';
+import { Router } from 'next/router';
+import { useEffect, useRef } from 'react';
 
-import { useWindowResize } from '~/components'
-import CLIENT_INFO from '~/components/GQL/queries/clientInfo'
+import { useWindowResize } from '~/components';
+import CLIENT_INFO from '~/components/GQL/queries/clientInfo';
 
-import { STORE_KEY_VIEW_MODE } from '~/common/enums'
+import { STORE_KEY_VIEW_MODE } from '~/common/enums';
 
-import { ClientInfo } from '~/components/GQL/queries/__generated__/ClientInfo'
+import { ClientInfo } from '~/components/GQL/queries/__generated__/ClientInfo';
 
 export const ClientUpdater = () => {
   /**
@@ -15,12 +15,12 @@ export const ClientUpdater = () => {
    */
   const { client } = useQuery<ClientInfo>(CLIENT_INFO, {
     variables: { id: 'local' },
-  })
-  const [width, height] = useWindowResize()
+  });
+  const [width, height] = useWindowResize();
 
   useEffect(() => {
     if (!client?.writeData || !width || !height) {
-      return
+      return;
     }
 
     client.writeData({
@@ -32,47 +32,47 @@ export const ClientUpdater = () => {
           __typename: 'ViewportSize',
         },
       },
-    })
-  })
+    });
+  });
 
   /**
    * Update routeHistory
    */
-  const routeHistoryRef = useRef<string[]>([])
+  const routeHistoryRef = useRef<string[]>([]);
   const routeChangeComplete = (url: string) => {
     if (!client?.writeData) {
-      return
+      return;
     }
 
-    const newRouteHistory = [...routeHistoryRef.current, url]
-    routeHistoryRef.current = newRouteHistory
+    const newRouteHistory = [...routeHistoryRef.current, url];
+    routeHistoryRef.current = newRouteHistory;
 
     client.writeData({
       id: 'ClientPreference:local',
       data: { routeHistory: newRouteHistory },
-    })
-  }
+    });
+  };
 
   useEffect(() => {
-    Router.events.on('routeChangeComplete', routeChangeComplete)
-    return () => Router.events.off('routeChangeComplete', routeChangeComplete)
-  }, [])
+    Router.events.on('routeChangeComplete', routeChangeComplete);
+    return () => Router.events.off('routeChangeComplete', routeChangeComplete);
+  }, []);
 
   /**
    * Restore View Mode from localStorage
    */
   useEffect(() => {
-    const storedViewMode = localStorage.getItem(STORE_KEY_VIEW_MODE)
+    const storedViewMode = localStorage.getItem(STORE_KEY_VIEW_MODE);
 
     if (!client?.writeData || !storedViewMode) {
-      return
+      return;
     }
 
     client.writeData({
       id: 'ClientPreference:local',
       data: { viewMode: storedViewMode },
-    })
-  }, [])
+    });
+  }, []);
 
-  return null
-}
+  return null;
+};

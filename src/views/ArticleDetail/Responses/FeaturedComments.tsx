@@ -1,18 +1,18 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
-import { useRouter } from 'next/router'
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
+import { useRouter } from 'next/router';
 
-import { List, Spinner, Title, Translate, ViewMoreButton } from '~/components'
+import { List, Spinner, Title, Translate, ViewMoreButton } from '~/components';
 
-import { filterComments, getQuery, mergeConnections } from '~/common/utils'
+import { filterComments, getQuery, mergeConnections } from '~/common/utils';
 
-import ResponseComment from './ResponseComment'
-import styles from './styles.css'
+import ResponseComment from './ResponseComment';
+import styles from './styles.css';
 
 import {
   ArticleFeaturedComments,
   ArticleFeaturedComments_article_featuredComments_edges_node,
-} from './__generated__/ArticleFeaturedComments'
+} from './__generated__/ArticleFeaturedComments';
 
 const FEATURED_COMMENTS = gql`
   query ArticleFeaturedComments(
@@ -39,31 +39,31 @@ const FEATURED_COMMENTS = gql`
     }
   }
   ${ResponseComment.fragments.comment}
-`
+`;
 
 const FeaturedComments = () => {
-  const router = useRouter()
-  const mediaHash = getQuery({ router, key: 'mediaHash' })
+  const router = useRouter();
+  const mediaHash = getQuery({ router, key: 'mediaHash' });
   const { data, loading, fetchMore } = useQuery<ArticleFeaturedComments>(
     FEATURED_COMMENTS,
     {
       variables: { mediaHash },
       notifyOnNetworkStatusChange: true,
     }
-  )
+  );
 
-  const connectionPath = 'article.featuredComments'
-  const { edges, pageInfo } = data?.article?.featuredComments || {}
+  const connectionPath = 'article.featuredComments';
+  const { edges, pageInfo } = data?.article?.featuredComments || {};
   const comments = filterComments(
     (edges || []).map(({ node }) => node)
-  ) as ArticleFeaturedComments_article_featuredComments_edges_node[]
+  ) as ArticleFeaturedComments_article_featuredComments_edges_node[];
 
   if (loading && !data) {
-    return <Spinner />
+    return <Spinner />;
   }
 
   if (!edges || edges.length <= 0 || !pageInfo || comments.length <= 0) {
-    return null
+    return null;
   }
 
   const loadMore = () => {
@@ -77,8 +77,8 @@ const FeaturedComments = () => {
           newData: fetchMoreResult,
           path: connectionPath,
         }),
-    })
-  }
+    });
+  };
 
   return (
     <section className="featured-comments" id="featured-comments">
@@ -102,7 +102,7 @@ const FeaturedComments = () => {
 
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 
-export default FeaturedComments
+export default FeaturedComments;

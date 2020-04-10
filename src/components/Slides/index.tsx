@@ -1,28 +1,28 @@
-import classNames from 'classnames'
+import classNames from 'classnames';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 interface SlidesProps {
-  bgColor: 'yellow-lighter' | 'green-lighter' | 'grey-lighter'
-  header: React.ReactNode
+  bgColor: 'yellow-lighter' | 'green-lighter' | 'grey-lighter';
+  header: React.ReactNode;
 }
 
 interface SlideItemProps {
-  size?: 'sm' | 'md'
+  size?: 'sm' | 'md';
 }
 
 const SlideItem: React.FC<SlideItemProps> = ({ size = 'sm', children }) => {
   const slidesItemClass = classNames({
     [`size-${size}`]: !!size,
-  })
+  });
 
   return (
     <li className={slidesItemClass}>
       {children}
       <style jsx>{styles}</style>
     </li>
-  )
-}
+  );
+};
 
 export const Slides: React.FC<SlidesProps> & { Item: typeof SlideItem } = ({
   bgColor,
@@ -32,7 +32,7 @@ export const Slides: React.FC<SlidesProps> & { Item: typeof SlideItem } = ({
   const slidesClass = classNames({
     slides: true,
     [`bg-${bgColor}`]: !!bgColor,
-  })
+  });
 
   return (
     <section className={slidesClass}>
@@ -42,7 +42,7 @@ export const Slides: React.FC<SlidesProps> & { Item: typeof SlideItem } = ({
 
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 
-Slides.Item = SlideItem
+Slides.Item = SlideItem;

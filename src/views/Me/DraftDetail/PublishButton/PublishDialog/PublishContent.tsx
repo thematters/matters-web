@@ -1,18 +1,18 @@
-import gql from 'graphql-tag'
-import { useRouter } from 'next/router'
+import gql from 'graphql-tag';
+import { useRouter } from 'next/router';
 
-import { Dialog, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
+import { Dialog, Translate } from '~/components';
+import { useMutation } from '~/components/GQL';
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
-import { analytics, getQuery } from '~/common/utils'
+import { ANALYTICS_EVENTS } from '~/common/enums';
+import { analytics, getQuery } from '~/common/utils';
 
-import PublishSlide from './PublishSlide'
+import PublishSlide from './PublishSlide';
 
-import { PublishArticle } from './__generated__/PublishArticle'
+import { PublishArticle } from './__generated__/PublishArticle';
 
 interface PublishContentProps {
-  closeDialog: () => void
+  closeDialog: () => void;
 }
 
 const PUBLISH_ARTICLE = gql`
@@ -23,11 +23,11 @@ const PUBLISH_ARTICLE = gql`
       scheduledAt
     }
   }
-`
+`;
 
 const PublishContent: React.FC<PublishContentProps> = ({ closeDialog }) => {
-  const router = useRouter()
-  const id = getQuery({ router, key: 'id' })
+  const router = useRouter();
+  const id = getQuery({ router, key: 'id' });
   const [publish] = useMutation<PublishArticle>(PUBLISH_ARTICLE, {
     optimisticResponse: {
       publishArticle: {
@@ -37,26 +37,26 @@ const PublishContent: React.FC<PublishContentProps> = ({ closeDialog }) => {
         __typename: 'Draft',
       },
     },
-  })
+  });
 
   const onPublish = async () => {
-    const { data: publishData } = await publish({ variables: { id } })
+    const { data: publishData } = await publish({ variables: { id } });
 
-    const state = publishData?.publishArticle.publishState || 'unpublished'
+    const state = publishData?.publishArticle.publishState || 'unpublished';
 
     if (state === 'pending' || state === 'published') {
-      closeDialog()
+      closeDialog();
     }
 
-    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_PUBLISH_IN_MODAL)
-  }
+    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_PUBLISH_IN_MODAL);
+  };
 
   const SubmitButton = (
     <Dialog.Header.RightButton
       text={<Translate id="publish" />}
       onClick={onPublish}
     />
-  )
+  );
 
   return (
     <>
@@ -70,7 +70,7 @@ const PublishContent: React.FC<PublishContentProps> = ({ closeDialog }) => {
         <PublishSlide />
       </Dialog.Content>
     </>
-  )
-}
+  );
+};
 
-export default PublishContent
+export default PublishContent;

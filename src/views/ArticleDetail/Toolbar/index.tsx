@@ -1,15 +1,15 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
 
-import { BookmarkButton, ShareButton, useResponsive } from '~/components'
-import DropdownActions from '~/components/ArticleDigest/DropdownActions'
+import { BookmarkButton, ShareButton, useResponsive } from '~/components';
+import DropdownActions from '~/components/ArticleDigest/DropdownActions';
 
-import AppreciationButton from '../AppreciationButton'
-import Appreciators from './Appreciators'
-import CommentBar from './CommentBar'
-import styles from './styles.css'
+import AppreciationButton from '../AppreciationButton';
+import Appreciators from './Appreciators';
+import CommentBar from './CommentBar';
+import styles from './styles.css';
 
-import { ArticleToolbar } from './__generated__/ArticleToolbar'
+import { ArticleToolbar } from './__generated__/ArticleToolbar';
 
 const ARTICLE_TOOLBAR = gql`
   query ArticleToolbar($mediaHash: String) {
@@ -27,19 +27,19 @@ const ARTICLE_TOOLBAR = gql`
   ${CommentBar.fragments.article}
   ${BookmarkButton.fragments.article}
   ${DropdownActions.fragments.article}
-`
+`;
 
 const Toolbar = ({ mediaHash }: { mediaHash: string }) => {
-  const isSmallUp = useResponsive('sm-up')
+  const isSmallUp = useResponsive('sm-up');
   const { data, loading } = useQuery<ArticleToolbar>(ARTICLE_TOOLBAR, {
     variables: { mediaHash },
-  })
+  });
 
   if (loading || !data || !data.article) {
-    return null
+    return null;
   }
 
-  const { article } = data
+  const { article } = data;
 
   return (
     <section className="toolbar">
@@ -65,7 +65,7 @@ const Toolbar = ({ mediaHash }: { mediaHash: string }) => {
 
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 
-export default Toolbar
+export default Toolbar;

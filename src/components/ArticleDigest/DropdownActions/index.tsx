@@ -1,7 +1,7 @@
-import gql from 'graphql-tag'
-import _isEmpty from 'lodash/isEmpty'
-import _pickBy from 'lodash/pickBy'
-import { useContext } from 'react'
+import gql from 'graphql-tag';
+import _isEmpty from 'lodash/isEmpty';
+import _pickBy from 'lodash/pickBy';
+import { useContext } from 'react';
 
 import {
   AppreciatorsDialog,
@@ -12,52 +12,52 @@ import {
   IconSize,
   Menu,
   ViewerContext,
-} from '~/components'
+} from '~/components';
 
-import { TEXT } from '~/common/enums'
+import { TEXT } from '~/common/enums';
 
-import AppreciatorsButton from './AppreciatorsButton'
-import ArchiveArticle from './ArchiveArticle'
-import ExtendButton from './ExtendButton'
-import Fingerprint from './Fingerprint'
-import RemoveTagButton from './RemoveTagButton'
-import SetTagSelectedButton from './SetTagSelectedButton'
-import SetTagUnselectedButton from './SetTagUnselectedButton'
-import StickyButton from './StickyButton'
+import AppreciatorsButton from './AppreciatorsButton';
+import ArchiveArticle from './ArchiveArticle';
+import ExtendButton from './ExtendButton';
+import Fingerprint from './Fingerprint';
+import RemoveTagButton from './RemoveTagButton';
+import SetTagSelectedButton from './SetTagSelectedButton';
+import SetTagUnselectedButton from './SetTagUnselectedButton';
+import StickyButton from './StickyButton';
 
-import { DropdownActionsArticle } from './__generated__/DropdownActionsArticle'
+import { DropdownActionsArticle } from './__generated__/DropdownActionsArticle';
 
 export interface DropdownActionsControls {
-  color?: IconColor
-  size?: IconSize
-  inCard?: boolean
-  inUserArticles?: boolean
-  inTagDetailLatest?: boolean
-  inTagDetailSelected?: boolean
+  color?: IconColor;
+  size?: IconSize;
+  inCard?: boolean;
+  inUserArticles?: boolean;
+  inTagDetailLatest?: boolean;
+  inTagDetailSelected?: boolean;
 }
 
 type DropdownActionsProps = {
-  article: DropdownActionsArticle
-} & DropdownActionsControls
+  article: DropdownActionsArticle;
+} & DropdownActionsControls;
 
 interface Controls {
-  hasAppreciators: boolean
-  hasFingerprint: boolean
-  hasExtend: boolean
-  hasSticky: boolean
-  hasArchive: boolean
-  hasSetTagSelected: boolean
-  hasSetTagUnSelected: boolean
-  hasRemoveTag: boolean
+  hasAppreciators: boolean;
+  hasFingerprint: boolean;
+  hasExtend: boolean;
+  hasSticky: boolean;
+  hasArchive: boolean;
+  hasSetTagSelected: boolean;
+  hasSetTagUnSelected: boolean;
+  hasRemoveTag: boolean;
 }
 
 interface DialogProps {
-  openFingerprintDialog: () => void
-  openAppreciatorsDialog: () => void
-  openArchiveDialog: () => void
+  openFingerprintDialog: () => void;
+  openAppreciatorsDialog: () => void;
+  openArchiveDialog: () => void;
 }
 
-type BaseDropdownActionsProps = DropdownActionsProps & Controls & DialogProps
+type BaseDropdownActionsProps = DropdownActionsProps & Controls & DialogProps;
 
 const fragments = {
   article: gql`
@@ -75,7 +75,7 @@ const fragments = {
     ${ArchiveArticle.fragments.article}
     ${ExtendButton.fragments.article}
   `,
-}
+};
 
 const BaseDropdownActions = ({
   article,
@@ -119,7 +119,7 @@ const BaseDropdownActions = ({
       {hasSetTagUnSelected && <SetTagUnselectedButton article={article} />}
       {hasRemoveTag && <RemoveTagButton article={article} />}
     </Menu>
-  )
+  );
 
   return (
     <DropdownDialog
@@ -145,8 +145,8 @@ const BaseDropdownActions = ({
         </Button>
       )}
     </DropdownDialog>
-  )
-}
+  );
+};
 
 const DropdownActions = (props: DropdownActionsProps) => {
   const {
@@ -154,13 +154,13 @@ const DropdownActions = (props: DropdownActionsProps) => {
     inUserArticles,
     inTagDetailLatest,
     inTagDetailSelected,
-  } = props
-  const viewer = useContext(ViewerContext)
+  } = props;
+  const viewer = useContext(ViewerContext);
 
-  const isArticleAuthor = viewer.id === article.author.id
-  const isMattyUser = viewer.isAdmin && viewer.info.email === 'hi@matters.news'
-  const isActive = article.articleState === 'active'
-  const isInTagDetail = inTagDetailLatest || inTagDetailSelected
+  const isArticleAuthor = viewer.id === article.author.id;
+  const isMattyUser = viewer.isAdmin && viewer.info.email === 'hi@matters.news';
+  const isActive = article.articleState === 'active';
+  const isInTagDetail = inTagDetailLatest || inTagDetailSelected;
 
   const controls = {
     hasAppreciators: article.appreciationsReceived.totalCount > 0,
@@ -176,10 +176,10 @@ const DropdownActions = (props: DropdownActionsProps) => {
     hasSetTagSelected: !!(inTagDetailLatest && isMattyUser),
     hasSetTagUnSelected: !!(inTagDetailSelected && isMattyUser),
     hasRemoveTag: !!(isInTagDetail && isMattyUser),
-  }
+  };
 
   if (_isEmpty(_pickBy(controls))) {
-    return null
+    return null;
   }
 
   return (
@@ -202,9 +202,9 @@ const DropdownActions = (props: DropdownActionsProps) => {
         </AppreciatorsDialog>
       )}
     </Fingerprint.Dialog>
-  )
-}
+  );
+};
 
-DropdownActions.fragments = fragments
+DropdownActions.fragments = fragments;
 
-export default DropdownActions
+export default DropdownActions;

@@ -1,14 +1,14 @@
-import gql from 'graphql-tag'
-import { useState } from 'react'
+import gql from 'graphql-tag';
+import { useState } from 'react';
 
-import { Dialog, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
-import updateUserArticles from '~/components/GQL/updates/userArticles'
+import { Dialog, Translate } from '~/components';
+import { useMutation } from '~/components/GQL';
+import updateUserArticles from '~/components/GQL/updates/userArticles';
 
-import { ADD_TOAST } from '~/common/enums'
+import { ADD_TOAST } from '~/common/enums';
 
-import { ArchiveArticle } from './__generated__/ArchiveArticle'
-import { ArchiveArticleArticle } from './__generated__/ArchiveArticleArticle'
+import { ArchiveArticle } from './__generated__/ArchiveArticle';
+import { ArchiveArticleArticle } from './__generated__/ArchiveArticleArticle';
 
 const ARCHIVE_ARTICLE = gql`
   mutation ArchiveArticle($id: ID!) {
@@ -18,20 +18,20 @@ const ARCHIVE_ARTICLE = gql`
       sticky
     }
   }
-`
+`;
 
 interface ArchiveArticleDialogProps {
-  article: ArchiveArticleArticle
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  article: ArchiveArticleArticle;
+  children: ({ open }: { open: () => void }) => React.ReactNode;
 }
 
 const ArchiveArticleDialog = ({
   article,
   children,
 }: ArchiveArticleDialogProps) => {
-  const [showDialog, setShowDialog] = useState(false)
-  const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
+  const [showDialog, setShowDialog] = useState(false);
+  const open = () => setShowDialog(true);
+  const close = () => setShowDialog(false);
 
   const [archiveArticle] = useMutation<ArchiveArticle>(ARCHIVE_ARTICLE, {
     variables: { id: article.id },
@@ -49,12 +49,12 @@ const ArchiveArticleDialog = ({
         articleId: article.id,
         userName: article.author.userName,
         type: 'archive',
-      })
+      });
     },
-  })
+  });
 
   const onArchive = async () => {
-    await archiveArticle()
+    await archiveArticle();
 
     window.dispatchEvent(
       new CustomEvent(ADD_TOAST, {
@@ -64,8 +64,8 @@ const ArchiveArticleDialog = ({
           buttonPlacement: 'center',
         },
       })
-    )
-  }
+    );
+  };
 
   return (
     <>
@@ -95,8 +95,8 @@ const ArchiveArticleDialog = ({
           <Dialog.Footer.Button
             bgColor="red"
             onClick={() => {
-              onArchive()
-              close()
+              onArchive();
+              close();
             }}
           >
             <Translate id="archived" />
@@ -112,7 +112,7 @@ const ArchiveArticleDialog = ({
         </Dialog.Footer>
       </Dialog>
     </>
-  )
-}
+  );
+};
 
-export default ArchiveArticleDialog
+export default ArchiveArticleDialog;

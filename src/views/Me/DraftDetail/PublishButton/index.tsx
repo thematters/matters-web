@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext } from 'react';
 
 import {
   Button,
@@ -6,26 +6,26 @@ import {
   TextIcon,
   Translate,
   ViewerContext,
-} from '~/components'
+} from '~/components';
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
-import { analytics } from '~/common/utils'
+import { ANALYTICS_EVENTS } from '~/common/enums';
+import { analytics } from '~/common/utils';
 
-import { PublishDialog } from './PublishDialog'
+import { PublishDialog } from './PublishDialog';
 
 const PublishButton = ({
   open,
   disabled,
 }: {
-  open: () => void
-  disabled?: boolean
+  open: () => void;
+  disabled?: boolean;
 }) => (
   <Button
     size={['4rem', '2rem']}
     bgColor="green"
     onClick={() => {
-      analytics.trackEvent(ANALYTICS_EVENTS.CLICK_PUBLISH_BUTTON)
-      open()
+      analytics.trackEvent(ANALYTICS_EVENTS.CLICK_PUBLISH_BUTTON);
+      open();
     }}
     disabled={disabled}
     aria-haspopup="true"
@@ -34,24 +34,24 @@ const PublishButton = ({
       <Translate id="publish" />
     </TextIcon>
   </Button>
-)
+);
 
 const PublishButtonWithEffect = ({ disabled }: { disabled?: boolean }) => {
-  const viewer = useContext(ViewerContext)
+  const viewer = useContext(ViewerContext);
 
   if (!viewer.shouldSetupLikerID) {
     return (
       <PublishDialog>
         {({ open }) => <PublishButton open={open} disabled={disabled} />}
       </PublishDialog>
-    )
+    );
   }
 
   return (
     <LikeCoinDialog>
       {({ open }) => <PublishButton open={open} disabled={disabled} />}
     </LikeCoinDialog>
-  )
-}
+  );
+};
 
-export default PublishButtonWithEffect
+export default PublishButtonWithEffect;

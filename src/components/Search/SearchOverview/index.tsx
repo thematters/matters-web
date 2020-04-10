@@ -1,22 +1,22 @@
-import { useQuery } from '@apollo/react-hooks'
-import classNames from 'classnames'
-import gql from 'graphql-tag'
-import Link from 'next/link'
-import { Fragment } from 'react'
+import { useQuery } from '@apollo/react-hooks';
+import classNames from 'classnames';
+import gql from 'graphql-tag';
+import Link from 'next/link';
+import { Fragment } from 'react';
 
-import { Menu, Translate } from '~/components'
-import { Spinner } from '~/components/Spinner'
+import { Menu, Translate } from '~/components';
+import { Spinner } from '~/components/Spinner';
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
-import { analytics, toPath } from '~/common/utils'
+import { ANALYTICS_EVENTS } from '~/common/enums';
+import { analytics, toPath } from '~/common/utils';
 
-import ClearHistoryButton from './ClearHistoryButton'
-import styles from './styles.css'
+import ClearHistoryButton from './ClearHistoryButton';
+import styles from './styles.css';
 
-import { SearchOverview as SearchOverviewType } from './__generated__/SearchOverview'
+import { SearchOverview as SearchOverviewType } from './__generated__/SearchOverview';
 
 interface SearchOverviewProps {
-  inPage?: boolean
+  inPage?: boolean;
 }
 
 const SEARCH_AUTOCOMPLETE = gql`
@@ -28,36 +28,36 @@ const SEARCH_AUTOCOMPLETE = gql`
     }
   }
   ${ClearHistoryButton.fragments.user}
-`
+`;
 
 export const SearchOverview = ({ inPage }: SearchOverviewProps) => {
-  const { data, loading } = useQuery<SearchOverviewType>(SEARCH_AUTOCOMPLETE)
+  const { data, loading } = useQuery<SearchOverviewType>(SEARCH_AUTOCOMPLETE);
 
-  const frequentSearch = data?.frequentSearch || []
-  const recentSearches = data?.viewer?.activity.recentSearches.edges || []
-  const showFrequentSearch = frequentSearch.length > 0
-  const showSearchHistory = recentSearches.length > 0
+  const frequentSearch = data?.frequentSearch || [];
+  const recentSearches = data?.viewer?.activity.recentSearches.edges || [];
+  const showFrequentSearch = frequentSearch.length > 0;
+  const showSearchHistory = recentSearches.length > 0;
 
   const recentSearchesClass = classNames({
     'recent-searches': true,
     inPage,
-  })
+  });
   const frequentSearchesClass = classNames({
     'frequent-searches': true,
     inPage,
-  })
+  });
 
   if (loading) {
     return (
       <Menu width={inPage ? undefined : 'md'}>
         <Spinner />
       </Menu>
-    )
+    );
   }
 
   if (!showFrequentSearch && !showSearchHistory) {
     // TODO: Empty Notice
-    return null
+    return null;
   }
 
   return (
@@ -89,7 +89,7 @@ export const SearchOverview = ({ inPage }: SearchOverviewProps) => {
                           location: i,
                           entrance: key,
                         }
-                      )
+                      );
                     }}
                   >
                     {key}
@@ -122,7 +122,7 @@ export const SearchOverview = ({ inPage }: SearchOverviewProps) => {
                   analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FREQUENT_SEARCH, {
                     location: i,
                     entrance: key,
-                  })
+                  });
                 }}
                 key={key}
               >
@@ -135,5 +135,5 @@ export const SearchOverview = ({ inPage }: SearchOverviewProps) => {
         </section>
       )}
     </Menu>
-  )
-}
+  );
+};

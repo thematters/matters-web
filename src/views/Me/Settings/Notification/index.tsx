@@ -1,7 +1,7 @@
-import { Layout } from '~/components'
+import { Layout } from '~/components';
 
-import SettingsTab from '../SettingsTab'
-import SettingsNotification from './SettingsNotification'
+import SettingsTab from '../SettingsTab';
+import SettingsNotification from './SettingsNotification';
 
 export default () => (
   <Layout.Main>
@@ -14,4 +14,4 @@ export default () => (
 
     <SettingsNotification />
   </Layout.Main>
-)
+);

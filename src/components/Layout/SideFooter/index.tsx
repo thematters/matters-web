@@ -1,14 +1,14 @@
-import Link from 'next/link'
+import Link from 'next/link';
 
-import { Translate } from '~/components'
+import { Translate } from '~/components';
 
-import { PATHS } from '~/common/enums'
-import { toPath } from '~/common/utils'
+import { PATHS } from '~/common/enums';
+import { toPath } from '~/common/utils';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 const SideFooter = () => {
-  const year = new Date().getFullYear()
+  const year = new Date().getFullYear();
 
   const downloadAppLink = toPath({
     page: 'articleDetail',
@@ -17,7 +17,7 @@ const SideFooter = () => {
       mediaHash: 'bafyreiayiuxi4qc2a7qpgjp3fe42wmaoppqykckcvtq4hiukl5pgs3dn2m',
       author: { userName: '1ampa55ag3' },
     },
-  })
+  });
 
   return (
     <footer>
@@ -72,7 +72,7 @@ const SideFooter = () => {
 
       <style jsx>{styles}</style>
     </footer>
-  )
-}
+  );
+};
 
-export default SideFooter
+export default SideFooter;

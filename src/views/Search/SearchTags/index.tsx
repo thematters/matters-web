@@ -1,6 +1,6 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
-import { useRouter } from 'next/router'
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
+import { useRouter } from 'next/router';
 
 import {
   Card,
@@ -9,14 +9,14 @@ import {
   Spinner,
   Tag,
   Translate,
-} from '~/components'
+} from '~/components';
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
-import { analytics, getQuery, mergeConnections, toPath } from '~/common/utils'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums';
+import { analytics, getQuery, mergeConnections, toPath } from '~/common/utils';
 
-import EmptySearch from '../EmptySearch'
+import EmptySearch from '../EmptySearch';
 
-import { SeachTags } from './__generated__/SeachTags'
+import { SeachTags } from './__generated__/SeachTags';
 
 const SEARCH_TAGS = gql`
   query SeachTags($key: String!, $after: String) {
@@ -37,32 +37,32 @@ const SEARCH_TAGS = gql`
     }
   }
   ${Tag.fragments.tag}
-`
+`;
 
 const SearchTag = () => {
-  const router = useRouter()
-  const q = getQuery({ router, key: 'q' })
+  const router = useRouter();
+  const q = getQuery({ router, key: 'q' });
 
   const { data, loading, fetchMore } = useQuery<SeachTags>(SEARCH_TAGS, {
     variables: { key: q },
-  })
+  });
 
   if (loading) {
-    return <Spinner />
+    return <Spinner />;
   }
 
-  const connectionPath = 'search'
-  const { edges, pageInfo } = data?.search || {}
+  const connectionPath = 'search';
+  const { edges, pageInfo } = data?.search || {};
 
   if (!edges || edges.length <= 0 || !pageInfo) {
-    return null
+    return null;
   }
 
   const loadMore = () => {
     analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
       type: FEED_TYPE.SEARCH_TAG,
       location: edges.length,
-    })
+    });
     return fetchMore({
       variables: {
         after: pageInfo.endCursor,
@@ -73,11 +73,11 @@ const SearchTag = () => {
           newData: fetchMoreResult,
           path: connectionPath,
         }),
-    })
-  }
+    });
+  };
 
   if (edges.length <= 0) {
-    return <EmptySearch description={<Translate id="emptySearchResults" />} />
+    return <EmptySearch description={<Translate id="emptySearchResults" />} />;
   }
 
   return (
@@ -108,7 +108,7 @@ const SearchTag = () => {
         )}
       </List>
     </InfiniteScroll>
-  )
-}
+  );
+};
 
-export default SearchTag
+export default SearchTag;

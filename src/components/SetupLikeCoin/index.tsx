@@ -1,20 +1,20 @@
-import { useState } from 'react'
+import { useState } from 'react';
 
-import { Dialog, Layout, SignUpComplete } from '~/components'
+import { Dialog, Layout, SignUpComplete } from '~/components';
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
-import { analytics } from '~/common/utils'
+import { ANALYTICS_EVENTS } from '~/common/enums';
+import { analytics } from '~/common/utils';
 
-import Binding from './Binding'
-import Generating from './Generating'
-import Select from './Select'
+import Binding from './Binding';
+import Generating from './Generating';
+import Select from './Select';
 
-type Step = 'select' | 'binding' | 'generating' | 'complete'
+type Step = 'select' | 'binding' | 'generating' | 'complete';
 
 interface Props {
-  purpose: 'dialog' | 'page'
-  submitCallback?: () => void
-  closeDialog?: () => void
+  purpose: 'dialog' | 'page';
+  submitCallback?: () => void;
+  closeDialog?: () => void;
 }
 
 export const SetupLikeCoin: React.FC<Props> = ({
@@ -22,29 +22,29 @@ export const SetupLikeCoin: React.FC<Props> = ({
   submitCallback,
   closeDialog,
 }) => {
-  const isInDialog = purpose === 'dialog'
-  const isInPage = purpose === 'page'
+  const isInDialog = purpose === 'dialog';
+  const isInPage = purpose === 'page';
 
-  const [step, setStepState] = useState<Step>('select')
+  const [step, setStepState] = useState<Step>('select');
   const setStep = (newStep: Step) => {
-    setStepState(newStep)
+    setStepState(newStep);
     analytics.trackEvent(ANALYTICS_EVENTS.LIKECOIN_STEP_CHANGE, {
       from: step,
       to: newStep,
-    })
-  }
+    });
+  };
 
   const [bindingWindowRef, setBindingWindowRef] = useState<Window | undefined>(
     undefined
-  )
-  const backToSelect = () => setStep('select')
+  );
+  const backToSelect = () => setStep('select');
   const complete = () => {
     if (submitCallback) {
-      submitCallback()
+      submitCallback();
     } else {
-      setStep('complete')
+      setStep('complete');
     }
-  }
+  };
 
   return (
     <>
@@ -63,9 +63,9 @@ export const SetupLikeCoin: React.FC<Props> = ({
         <Select
           startGenerate={() => setStep('generating')}
           startBind={(windowRef?: Window) => {
-            setStep('binding')
+            setStep('binding');
             if (windowRef) {
-              setBindingWindowRef(windowRef)
+              setBindingWindowRef(windowRef);
             }
           }}
         />
@@ -85,5 +85,5 @@ export const SetupLikeCoin: React.FC<Props> = ({
 
       {step === 'complete' && <SignUpComplete />}
     </>
-  )
-}
+  );
+};

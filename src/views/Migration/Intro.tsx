@@ -1,18 +1,18 @@
-import jump from 'jump.js'
+import jump from 'jump.js';
 
-import { Button, TextIcon, Translate } from '~/components'
+import { Button, TextIcon, Translate } from '~/components';
 
-import IMAGE_MIGRATION_LG from '~/static/images/migration-intro-lg.svg'
-import IMAGE_MIGRATION_MD from '~/static/images/migration-intro-md.svg'
-import IMAGE_MIGRATION_SM from '~/static/images/migration-intro-sm.svg'
-import IMAGE_MIGRATION_XL from '~/static/images/migration-intro-xl.svg'
-import IMAGE_MIGRATION_XS from '~/static/images/migration-intro-xs.svg'
+import IMAGE_MIGRATION_LG from '~/static/images/migration-intro-lg.svg';
+import IMAGE_MIGRATION_MD from '~/static/images/migration-intro-md.svg';
+import IMAGE_MIGRATION_SM from '~/static/images/migration-intro-sm.svg';
+import IMAGE_MIGRATION_XL from '~/static/images/migration-intro-xl.svg';
+import IMAGE_MIGRATION_XS from '~/static/images/migration-intro-xs.svg';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 const texts: {
-  zh_hant: Record<string, string>
-  zh_hans: Record<string, string>
+  zh_hant: Record<string, string>;
+  zh_hans: Record<string, string>;
 } = {
   zh_hant: {
     intro: '搬家到 Matters',
@@ -28,10 +28,10 @@ const texts: {
       '从今天开始，只要三个步骤，就可以将你在 Medium 的文章轻松搬到 Matters。',
     start: '开始搬家',
   },
-}
+};
 
 const Intro = () => {
-  const { zh_hant, zh_hans } = texts
+  const { zh_hant, zh_hans } = texts;
 
   return (
     <section className="intro-wrap">
@@ -82,7 +82,7 @@ const Intro = () => {
         }
       `}</style>
     </section>
-  )
-}
+  );
+};
 
-export default Intro
+export default Intro;

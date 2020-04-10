@@ -1,5 +1,5 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
 
 import {
   ArticleDigestFeed,
@@ -9,12 +9,12 @@ import {
   Layout,
   List,
   Spinner,
-} from '~/components'
-import { QueryError } from '~/components/GQL'
+} from '~/components';
+import { QueryError } from '~/components/GQL';
 
-import { mergeConnections } from '~/common/utils'
+import { mergeConnections } from '~/common/utils';
 
-import { MeBookmarkFeed } from './__generated__/MeBookmarkFeed'
+import { MeBookmarkFeed } from './__generated__/MeBookmarkFeed';
 
 const ME_BOOKMARK_FEED = gql`
   query MeBookmarkFeed($after: String) {
@@ -36,26 +36,26 @@ const ME_BOOKMARK_FEED = gql`
     }
   }
   ${ArticleDigestFeed.fragments.article}
-`
+`;
 
 const MeBookmarks = () => {
   const { data, loading, error, fetchMore } = useQuery<MeBookmarkFeed>(
     ME_BOOKMARK_FEED
-  )
+  );
 
   if (loading) {
-    return <Spinner />
+    return <Spinner />;
   }
 
   if (error) {
-    return <QueryError error={error} />
+    return <QueryError error={error} />;
   }
 
-  const connectionPath = 'viewer.subscriptions'
-  const { edges, pageInfo } = data?.viewer?.subscriptions || {}
+  const connectionPath = 'viewer.subscriptions';
+  const { edges, pageInfo } = data?.viewer?.subscriptions || {};
 
   if (!edges || edges.length <= 0 || !pageInfo) {
-    return <EmptyBookmark />
+    return <EmptyBookmark />;
   }
 
   const loadMore = () =>
@@ -69,7 +69,7 @@ const MeBookmarks = () => {
           newData: fetchMoreResult,
           path: connectionPath,
         }),
-    })
+    });
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
@@ -81,8 +81,8 @@ const MeBookmarks = () => {
         ))}
       </List>
     </InfiniteScroll>
-  )
-}
+  );
+};
 
 export default () => (
   <Layout.Main>
@@ -96,4 +96,4 @@ export default () => (
 
     <MeBookmarks />
   </Layout.Main>
-)
+);

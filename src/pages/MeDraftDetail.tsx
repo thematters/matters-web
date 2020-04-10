@@ -1,9 +1,9 @@
-import MeDraftDetail from '~/views/Me/DraftDetail'
+import MeDraftDetail from '~/views/Me/DraftDetail';
 
-import { Protected } from '~/components'
+import { Protected } from '~/components';
 
 export default () => (
   <Protected>
     <MeDraftDetail />
   </Protected>
-)
+);

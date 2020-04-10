@@ -1,14 +1,14 @@
-import classNames from 'classnames'
+import classNames from 'classnames';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
-type SpacingX = 0 | 'base' | 'xloose' | 'xxxloose'
-type SpacingY = 0 | 'base' | 'xloose' | 'xxxloose'
+type SpacingX = 0 | 'base' | 'xloose' | 'xxxloose';
+type SpacingY = 0 | 'base' | 'xloose' | 'xxxloose';
 
 interface DialogContentProps {
   // Note: only apply in "sm-up" if the spacing is large than "base"
-  spacing?: [SpacingY, SpacingX]
-  hasGrow?: boolean
+  spacing?: [SpacingY, SpacingX];
+  hasGrow?: boolean;
 }
 
 const DialogContent: React.FC<DialogContentProps> = ({
@@ -22,7 +22,7 @@ const DialogContent: React.FC<DialogContentProps> = ({
     'has-grow': !!hasGrow,
     [`spacing-y-${spacing[0]}`]: true,
     [`spacing-x-${spacing[1]}`]: true,
-  })
+  });
 
   return (
     <section className={contentClass}>
@@ -30,7 +30,7 @@ const DialogContent: React.FC<DialogContentProps> = ({
 
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 
-export default DialogContent
+export default DialogContent;

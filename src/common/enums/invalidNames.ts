@@ -21,4 +21,4 @@ export const INVALID_NAMES = [
   'matters团队',
   'matters管理員',
   'matters管理员',
-]
+];

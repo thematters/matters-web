@@ -1,10 +1,10 @@
 const base = {
   launch: 'http://localhost:3000',
-}
+};
 
 const baseDriver = {
   start_process: true,
-}
+};
 
 module.exports = {
   src_folders: ['bdd/steps'],
@@ -49,4 +49,4 @@ module.exports = {
       },
     },
   },
-}
+};

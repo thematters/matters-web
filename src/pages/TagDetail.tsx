@@ -1,3 +1,3 @@
-import TagDetail from '~/views/TagDetail'
+import TagDetail from '~/views/TagDetail';
 
-export default () => <TagDetail />
+export default () => <TagDetail />;

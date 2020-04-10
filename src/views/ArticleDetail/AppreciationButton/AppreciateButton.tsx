@@ -1,19 +1,19 @@
-import classNames from 'classnames'
-import { useRef } from 'react'
+import classNames from 'classnames';
+import { useRef } from 'react';
 
-import { Icon } from '~/components'
+import { Icon } from '~/components';
 
-import { numAbbr } from '~/common/utils'
+import { numAbbr } from '~/common/utils';
 
-import * as clap from './clap'
-import clapStyles from './styles.clap.css'
-import styles from './styles.css'
+import * as clap from './clap';
+import clapStyles from './styles.clap.css';
+import styles from './styles.css';
 
 interface AppreciateButtonProps {
-  disabled?: boolean
-  onClick?: () => void
-  count?: number | 'MAX'
-  total: number
+  disabled?: boolean;
+  onClick?: () => void;
+  count?: number | 'MAX';
+  total: number;
 }
 
 const AppreciateButton: React.FC<AppreciateButtonProps> = ({
@@ -22,11 +22,11 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
   count,
   total,
 }) => {
-  const btnRef = useRef<HTMLButtonElement>(null)
+  const btnRef = useRef<HTMLButtonElement>(null);
   const buttonClass = classNames({
     'appreciate-button': true,
     clap: true,
-  })
+  });
 
   return (
     <>
@@ -37,17 +37,17 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
         disabled={disabled}
         onClick={() => {
           if (btnRef.current) {
-            clap.clap(btnRef.current)
+            clap.clap(btnRef.current);
           }
 
           if (onClick) {
-            onClick()
+            onClick();
           }
         }}
         aria-label="讚賞作品"
         onTransitionEnd={(e) => {
           if (e.propertyName === 'transform' && btnRef.current) {
-            clap.handZoomOut(btnRef.current)
+            clap.handZoomOut(btnRef.current);
           }
         }}
       >
@@ -65,7 +65,7 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
         {clapStyles}
       </style>
     </>
-  )
-}
+  );
+};
 
-export default AppreciateButton
+export default AppreciateButton;

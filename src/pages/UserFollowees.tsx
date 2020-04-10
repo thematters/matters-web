@@ -1,3 +1,3 @@
-import UserFollowees from '~/views/User/Followees'
+import UserFollowees from '~/views/User/Followees';
 
-export default () => <UserFollowees />
+export default () => <UserFollowees />;

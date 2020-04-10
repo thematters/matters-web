@@ -1,17 +1,17 @@
-import { DataProxy } from 'apollo-cache'
+import { DataProxy } from 'apollo-cache';
 
-import UNREAD_FOLLOWEE_ARTICLES from '~/components/GQL/queries/unreadFolloweeArticles'
+import UNREAD_FOLLOWEE_ARTICLES from '~/components/GQL/queries/unreadFolloweeArticles';
 
-import { UnreadFolloweeArticles } from '~/components/GQL/queries/__generated__/UnreadFolloweeArticles'
+import { UnreadFolloweeArticles } from '~/components/GQL/queries/__generated__/UnreadFolloweeArticles';
 
 const update = (cache: DataProxy) => {
   try {
     const data = cache.readQuery<UnreadFolloweeArticles>({
       query: UNREAD_FOLLOWEE_ARTICLES,
-    })
+    });
 
     if (!data?.viewer?.status?.unreadFolloweeArticles) {
-      return
+      return;
     }
 
     cache.writeQuery({
@@ -25,10 +25,10 @@ const update = (cache: DataProxy) => {
           },
         },
       },
-    })
+    });
   } catch (e) {
-    console.error(e)
+    console.error(e);
   }
-}
+};
 
-export default update
+export default update;

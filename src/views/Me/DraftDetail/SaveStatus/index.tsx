@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 
-import { TextIcon, Translate } from '~/components'
+import { TextIcon, Translate } from '~/components';
 
 interface SaveStatus {
-  status?: 'saved' | 'saving' | 'saveFailed'
+  status?: 'saved' | 'saving' | 'saveFailed';
 }
 
 const SaveStatus: React.FC<SaveStatus> = ({ status }) => {
@@ -19,7 +19,7 @@ const SaveStatus: React.FC<SaveStatus> = ({ status }) => {
         <Translate zh_hans="草稿保存失敗" zh_hant="草稿保存失败" />
       )}
     </TextIcon>
-  )
-}
+  );
+};
 
-export default SaveStatus
+export default SaveStatus;

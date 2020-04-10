@@ -1,4 +1,4 @@
-import { Head, Layout, LoginForm } from '~/components'
+import { Head, Layout, LoginForm } from '~/components';
 
 const Login = () => {
   return (
@@ -7,7 +7,7 @@ const Login = () => {
 
       <LoginForm purpose="page" />
     </Layout.Main>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

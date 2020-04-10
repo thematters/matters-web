@@ -1,8 +1,8 @@
-import { AvatarUploader, AvatarUploaderProps, Translate } from '~/components'
+import { AvatarUploader, AvatarUploaderProps, Translate } from '~/components';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
-type AvatarUploadFieldProps = AvatarUploaderProps
+type AvatarUploadFieldProps = AvatarUploaderProps;
 
 const AvatarUploadField: React.FC<AvatarUploadFieldProps> = (props) => {
   return (
@@ -18,7 +18,7 @@ const AvatarUploadField: React.FC<AvatarUploadFieldProps> = (props) => {
 
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 
-export default AvatarUploadField
+export default AvatarUploadField;

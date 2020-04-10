@@ -1,18 +1,18 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import { Translate } from '~/components'
+import { Translate } from '~/components';
 
-import NoticeArticle from './NoticeArticle'
-import NoticeHead from './NoticeHead'
-import NoticeTypeIcon from './NoticeTypeIcon'
-import styles from './styles.css'
+import NoticeArticle from './NoticeArticle';
+import NoticeHead from './NoticeHead';
+import NoticeTypeIcon from './NoticeTypeIcon';
+import styles from './styles.css';
 
-import { DownstreamArticleArchivedNotice as NoticeType } from './__generated__/DownstreamArticleArchivedNotice'
+import { DownstreamArticleArchivedNotice as NoticeType } from './__generated__/DownstreamArticleArchivedNotice';
 
 const DownstreamArticleArchivedNotice = ({
   notice,
 }: {
-  notice: NoticeType
+  notice: NoticeType;
 }) => {
   return (
     <section className="container">
@@ -35,8 +35,8 @@ const DownstreamArticleArchivedNotice = ({
 
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 
 DownstreamArticleArchivedNotice.fragments = {
   notice: gql`
@@ -55,6 +55,6 @@ DownstreamArticleArchivedNotice.fragments = {
     ${NoticeArticle.fragments.article}
     ${NoticeHead.fragments.date}
   `,
-}
+};
 
-export default DownstreamArticleArchivedNotice
+export default DownstreamArticleArchivedNotice;

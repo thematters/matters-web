@@ -1,33 +1,33 @@
-import { useQuery } from '@apollo/react-hooks'
-import classNames from 'classnames'
-import gql from 'graphql-tag'
+import { useQuery } from '@apollo/react-hooks';
+import classNames from 'classnames';
+import gql from 'graphql-tag';
 
-import { Card, Icon, TextIcon, Translate } from '~/components'
-import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
-import { UserDigest } from '~/components/UserDigest'
+import { Card, Icon, TextIcon, Translate } from '~/components';
+import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference';
+import { UserDigest } from '~/components/UserDigest';
 
-import { stripHtml, toPath } from '~/common/utils'
+import { stripHtml, toPath } from '~/common/utils';
 
-import DropdownActions from '../DropdownActions'
-import FooterActions, { FooterActionsControls } from '../FooterActions'
-import { ArticleDigestTitle } from '../Title'
-import CreatedAt from './CreatedAt'
-import InactiveState from './InactiveState'
-import Live from './Live'
-import styles from './styles.css'
+import DropdownActions from '../DropdownActions';
+import FooterActions, { FooterActionsControls } from '../FooterActions';
+import { ArticleDigestTitle } from '../Title';
+import CreatedAt from './CreatedAt';
+import InactiveState from './InactiveState';
+import Live from './Live';
+import styles from './styles.css';
 
-import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
-import { ArticleDigestFeedArticle } from './__generated__/ArticleDigestFeedArticle'
+import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference';
+import { ArticleDigestFeedArticle } from './__generated__/ArticleDigestFeedArticle';
 
 export type ArticleDigestFeedControls = {
-  onClick?: () => any
+  onClick?: () => any;
 
-  inFollowFeed?: boolean
-} & FooterActionsControls
+  inFollowFeed?: boolean;
+} & FooterActionsControls;
 
 type ArticleDigestFeedProps = {
-  article: ArticleDigestFeedArticle
-} & ArticleDigestFeedControls
+  article: ArticleDigestFeedArticle;
+} & ArticleDigestFeedControls;
 
 const fragments = {
   article: gql`
@@ -60,7 +60,7 @@ const fragments = {
     ${FooterActions.fragments.article}
     ${DropdownActions.fragments.article}
   `,
-}
+};
 
 export const ArticleDigestFeed = ({
   article,
@@ -74,34 +74,34 @@ export const ArticleDigestFeed = ({
 }: ArticleDigestFeedProps) => {
   const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
     variables: { id: 'local' },
-  })
-  const { viewMode } = data?.clientPreference || { viewMode: 'default' }
-  const isCompactMode = viewMode === 'compact'
+  });
+  const { viewMode } = data?.clientPreference || { viewMode: 'default' };
+  const isCompactMode = viewMode === 'compact';
 
-  const { author, summary, sticky } = article
-  const isBanned = article.articleState === 'banned'
-  const cover = !isBanned ? article.cover : null
-  const cleanedSummary = isBanned ? '' : stripHtml(summary)
+  const { author, summary, sticky } = article;
+  const isBanned = article.articleState === 'banned';
+  const cover = !isBanned ? article.cover : null;
+  const cleanedSummary = isBanned ? '' : stripHtml(summary);
   const path = toPath({
     page: 'articleDetail',
     article,
-  })
+  });
   const containerClass = classNames({
     [`mode-${viewMode}`]: !!viewMode,
-  })
+  });
 
-  let userDigestProps = {}
+  let userDigestProps = {};
   if (isCompactMode) {
     userDigestProps = {
       avatarSize: 'sm',
       textSize: 'sm',
-    }
+    };
   } else {
     userDigestProps = {
       avatarSize: 'lg',
       textSize: 'md-s',
       textWeight: 'md',
-    }
+    };
   }
 
   return (
@@ -172,7 +172,7 @@ export const ArticleDigestFeed = ({
         <style jsx>{styles}</style>
       </section>
     </Card>
-  )
-}
+  );
+};
 
-ArticleDigestFeed.fragments = fragments
+ArticleDigestFeed.fragments = fragments;

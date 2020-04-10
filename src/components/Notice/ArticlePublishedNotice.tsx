@@ -1,13 +1,13 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import { Translate } from '~/components'
+import { Translate } from '~/components';
 
-import NoticeArticle from './NoticeArticle'
-import NoticeHead from './NoticeHead'
-import NoticeTypeIcon from './NoticeTypeIcon'
-import styles from './styles.css'
+import NoticeArticle from './NoticeArticle';
+import NoticeHead from './NoticeHead';
+import NoticeTypeIcon from './NoticeTypeIcon';
+import styles from './styles.css';
 
-import { ArticlePublishedNotice as NoticeType } from './__generated__/ArticlePublishedNotice'
+import { ArticlePublishedNotice as NoticeType } from './__generated__/ArticlePublishedNotice';
 
 const ArticlePublishedNotice = ({ notice }: { notice: NoticeType }) => {
   return (
@@ -29,8 +29,8 @@ const ArticlePublishedNotice = ({ notice }: { notice: NoticeType }) => {
 
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 
 ArticlePublishedNotice.fragments = {
   notice: gql`
@@ -46,6 +46,6 @@ ArticlePublishedNotice.fragments = {
     ${NoticeArticle.fragments.article}
     ${NoticeHead.fragments.date}
   `,
-}
+};
 
-export default ArticlePublishedNotice
+export default ArticlePublishedNotice;

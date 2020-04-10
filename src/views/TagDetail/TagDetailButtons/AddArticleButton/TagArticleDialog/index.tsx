@@ -1,18 +1,18 @@
-import { useState } from 'react'
+import { useState } from 'react';
 
-import { Dialog } from '~/components'
+import { Dialog } from '~/components';
 
-import Content from './Content'
+import Content from './Content';
 
 interface TagArticleDialogProps {
-  id?: string
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  id?: string;
+  children: ({ open }: { open: () => void }) => React.ReactNode;
 }
 
 const TagArticleDialog = ({ id, children }: TagArticleDialogProps) => {
-  const [showDialog, setShowDialog] = useState(false)
-  const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
+  const [showDialog, setShowDialog] = useState(false);
+  const open = () => setShowDialog(true);
+  const close = () => setShowDialog(false);
 
   return (
     <>
@@ -22,7 +22,7 @@ const TagArticleDialog = ({ id, children }: TagArticleDialogProps) => {
         <Content closeDialog={close} id={id} />
       </Dialog>
     </>
-  )
-}
+  );
+};
 
-export default TagArticleDialog
+export default TagArticleDialog;

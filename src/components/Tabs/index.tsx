@@ -1,20 +1,20 @@
-import classNames from 'classnames'
-import Link from 'next/link'
+import classNames from 'classnames';
+import Link from 'next/link';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 interface TabProps {
-  href?: string
-  as?: string
+  href?: string;
+  as?: string;
 
-  disable?: boolean
-  selected?: boolean
+  disable?: boolean;
+  selected?: boolean;
 
-  sup?: React.ReactNode | string
+  sup?: React.ReactNode | string;
 }
 
 interface TabsProps {
-  spacingBottom?: 0 | 'xtight' | 'tight' | 'base' | 'loose' | 'xxloose'
+  spacingBottom?: 0 | 'xtight' | 'tight' | 'base' | 'loose' | 'xxloose';
 }
 
 const Tab: React.FC<TabProps> = ({
@@ -38,7 +38,7 @@ const Tab: React.FC<TabProps> = ({
         </Link>
         <style jsx>{styles}</style>
       </li>
-    )
+    );
   }
 
   return (
@@ -48,15 +48,15 @@ const Tab: React.FC<TabProps> = ({
 
       <style jsx>{styles}</style>
     </li>
-  )
-}
+  );
+};
 
 export const Tabs: React.FC<TabsProps> & {
-  Tab: typeof Tab
+  Tab: typeof Tab;
 } = ({ spacingBottom = 'xtight', children }) => {
   const navClass = classNames({
     [`spacing-bottom-${spacingBottom}`]: !!spacingBottom,
-  })
+  });
 
   return (
     <nav className={navClass}>
@@ -64,7 +64,7 @@ export const Tabs: React.FC<TabsProps> & {
 
       <style jsx>{styles}</style>
     </nav>
-  )
-}
+  );
+};
 
-Tabs.Tab = Tab
+Tabs.Tab = Tab;

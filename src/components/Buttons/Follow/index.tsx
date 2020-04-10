@@ -1,13 +1,13 @@
-import gql from 'graphql-tag'
-import { useContext } from 'react'
+import gql from 'graphql-tag';
+import { useContext } from 'react';
 
-import { ViewerContext } from '~/components'
+import { ViewerContext } from '~/components';
 
-import Follow from './Follow'
-import FollowState from './FollowState'
-import Unfollow from './Unfollow'
+import Follow from './Follow';
+import FollowState from './FollowState';
+import Unfollow from './Unfollow';
 
-import { FollowButtonUser } from './__generated__/FollowButtonUser'
+import { FollowButtonUser } from './__generated__/FollowButtonUser';
 
 const fragments = {
   user: gql`
@@ -17,29 +17,29 @@ const fragments = {
       isFollowee
     }
   `,
-}
+};
 
-export type FollowButtonSize = 'lg' | 'md' | 'md-s'
+export type FollowButtonSize = 'lg' | 'md' | 'md-s';
 
 export const FollowButton = ({
   user,
   size = 'md',
 }: {
-  user: FollowButtonUser
-  size?: FollowButtonSize
+  user: FollowButtonUser;
+  size?: FollowButtonSize;
 }) => {
-  const viewer = useContext(ViewerContext)
+  const viewer = useContext(ViewerContext);
 
   if (viewer.isInactive || viewer.id === user.id) {
-    return <span />
+    return <span />;
   }
 
   if (user.isFollowee) {
-    return <Unfollow user={user} size={size} />
+    return <Unfollow user={user} size={size} />;
   } else {
-    return <Follow user={user} size={size} />
+    return <Follow user={user} size={size} />;
   }
-}
+};
 
-FollowButton.fragments = fragments
-FollowButton.State = FollowState
+FollowButton.fragments = fragments;
+FollowButton.State = FollowState;

@@ -1,6 +1,6 @@
-import _get from 'lodash/get'
+import _get from 'lodash/get';
 
-import { TEXT, TextId } from '~/common/enums'
+import { TEXT, TextId } from '~/common/enums';
 
 /**
  *
@@ -24,32 +24,32 @@ import { TEXT, TextId } from '~/common/enums'
  */
 
 interface TranslateStrings {
-  zh_hant: string
-  zh_hans?: string
-  en?: string
-  lang?: Language
+  zh_hant: string;
+  zh_hans?: string;
+  en?: string;
+  lang?: Language;
 }
 
 interface TranslateKey {
-  id: TextId
-  lang?: Language
+  id: TextId;
+  lang?: Language;
 }
 
-export type TranslateArgs = TranslateStrings | TranslateKey
+export type TranslateArgs = TranslateStrings | TranslateKey;
 
 export const translate = ({ lang, ...props }: TranslateArgs): string => {
-  let translations: { zh_hant: string; zh_hans?: string; en?: string }
+  let translations: { zh_hant: string; zh_hans?: string; en?: string };
 
   if ('id' in props) {
-    const { id } = props
+    const { id } = props;
     translations = {
       zh_hant: TEXT.zh_hant[id],
       zh_hans: TEXT.zh_hans[id],
-    }
+    };
   } else {
-    const { zh_hant, zh_hans, en } = props
-    translations = { zh_hant, zh_hans, en }
+    const { zh_hant, zh_hans, en } = props;
+    translations = { zh_hant, zh_hans, en };
   }
 
-  return translations[lang || 'zh_hant'] || translations.zh_hant
-}
+  return translations[lang || 'zh_hant'] || translations.zh_hant;
+};

@@ -10,5 +10,5 @@ export default () => {
     isTablet: false,
     isMobile: false,
     __typename: 'ClientInfo',
-  }
-}
+  };
+};

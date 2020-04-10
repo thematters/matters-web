@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext } from 'react';
 
 import {
   Avatar,
@@ -10,18 +10,18 @@ import {
   TextIcon,
   Translate,
   ViewerContext,
-} from '~/components'
+} from '~/components';
 
-import { SIGNUP_TYPE } from '~/common/enums'
-import IMAGE_STEP_1 from '~/static/images/migration-step-1.svg'
-import IMAGE_STEP_2 from '~/static/images/migration-step-2.svg'
-import IMAGE_STEP_3 from '~/static/images/migration-step-3.svg'
+import { SIGNUP_TYPE } from '~/common/enums';
+import IMAGE_STEP_1 from '~/static/images/migration-step-1.svg';
+import IMAGE_STEP_2 from '~/static/images/migration-step-2.svg';
+import IMAGE_STEP_3 from '~/static/images/migration-step-3.svg';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 const texts: {
-  zh_hant: Record<string, string>
-  zh_hans: Record<string, string>
+  zh_hant: Record<string, string>;
+  zh_hans: Record<string, string>;
 } = {
   zh_hant: {
     header: '三個步驟，立即搬家',
@@ -49,20 +49,20 @@ const texts: {
     title_3: '导入作品',
     content_3: '选中想要搬家的作品文件并上传，搬家成功的作品会导入你的草稿箱。',
   },
-}
+};
 
 const Step = ({
   children,
   src,
   step,
 }: {
-  children: React.ReactNode
-  src: string
-  step: number
+  children: React.ReactNode;
+  src: string;
+  step: number;
 }) => {
-  const { zh_hant, zh_hans } = texts
-  const titleId = `title_${step}`
-  const contentId = `content_${step}`
+  const { zh_hant, zh_hans } = texts;
+  const titleId = `title_${step}`;
+  const contentId = `content_${step}`;
 
   return (
     <section className="step">
@@ -77,17 +77,17 @@ const Step = ({
       {children}
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 
 const Steps = () => {
-  const viewer = useContext(ViewerContext)
-  const { zh_hant, zh_hans } = texts
+  const viewer = useContext(ViewerContext);
+  const { zh_hant, zh_hans } = texts;
 
   const buttonProps: ButtonProps = {
     size: ['7rem', '2.5rem'],
     spacing: [0, 0],
-  }
+  };
 
   return (
     <section id="steps" className="steps-wrap">
@@ -173,7 +173,7 @@ const Steps = () => {
 
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 
-export default Steps
+export default Steps;

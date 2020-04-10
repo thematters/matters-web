@@ -1,27 +1,27 @@
-import Link from 'next/link'
-import { useContext } from 'react'
+import Link from 'next/link';
+import { useContext } from 'react';
 
-import { Avatar, Translate, ViewerContext } from '~/components'
+import { Avatar, Translate, ViewerContext } from '~/components';
 
-import { numAbbr, toPath } from '~/common/utils'
+import { numAbbr, toPath } from '~/common/utils';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 const MeDigest = () => {
-  const viewer = useContext(ViewerContext)
+  const viewer = useContext(ViewerContext);
 
   const viewerPath = toPath({
     page: 'userProfile',
     userName: viewer.userName || '',
-  })
+  });
   const viewerFollowersPath = toPath({
     page: 'userFollowers',
     userName: viewer.userName || '',
-  })
+  });
   const viewerFolloweesPath = toPath({
     page: 'userFollowees',
     userName: viewer.userName || '',
-  })
+  });
 
   return (
     <section className="me-digest">
@@ -58,7 +58,7 @@ const MeDigest = () => {
 
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 
-export default MeDigest
+export default MeDigest;

@@ -1,11 +1,11 @@
-import dynamic from 'next/dynamic'
+import dynamic from 'next/dynamic';
 
-import { Z_INDEX } from '~/common/enums'
+import { Z_INDEX } from '~/common/enums';
 
-export type PopperInstance = import('tippy.js').Instance
-export type PopperProps = import('@tippy.js/react').TippyProps
+export type PopperInstance = import('tippy.js').Instance;
+export type PopperProps = import('@tippy.js/react').TippyProps;
 
-const DynamicTippy = dynamic(() => import('@tippy.js/react'), { ssr: true })
+const DynamicTippy = dynamic(() => import('@tippy.js/react'), { ssr: true });
 
 /**
  * Wrappers of <Tippy> with customize themes
@@ -28,7 +28,7 @@ const DynamicTippy = dynamic(() => import('@tippy.js/react'), { ssr: true })
 
 export const Dropdown: React.FC<PopperProps> = (props) => (
   <DynamicTippy {...props} />
-)
+);
 Dropdown.defaultProps = {
   arrow: false,
   trigger: 'click',
@@ -40,11 +40,11 @@ Dropdown.defaultProps = {
   theme: 'dropdown',
   boundary: 'window',
   zIndex: Z_INDEX.UNDER_GLOBAL_HEADER,
-}
+};
 
 export const Tooltip: React.FC<PopperProps> = (props) => (
   <DynamicTippy {...props} />
-)
+);
 Tooltip.defaultProps = {
   arrow: true,
   interactive: false,
@@ -54,20 +54,20 @@ Tooltip.defaultProps = {
   theme: 'tooltip',
   boundary: 'window',
   zIndex: Z_INDEX.UNDER_GLOBAL_HEADER,
-}
+};
 
 /**
  * Hide popper when inside button was clicked
  * @param instance
  */
 export const hidePopperOnClick = (instance: PopperInstance) => {
-  const popper = instance.popperChildren.tooltip
+  const popper = instance.popperChildren.tooltip;
 
   popper.addEventListener('click', (event) => {
-    const target = event.target as HTMLElement
+    const target = event.target as HTMLElement;
 
     if (target?.closest && target.closest('[data-clickable], a, button')) {
-      instance.hide()
+      instance.hide();
     }
-  })
-}
+  });
+};

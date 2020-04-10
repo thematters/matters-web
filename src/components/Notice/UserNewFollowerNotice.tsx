@@ -1,26 +1,26 @@
-import gql from 'graphql-tag'
-import { Fragment } from 'react'
+import gql from 'graphql-tag';
+import { Fragment } from 'react';
 
-import { Translate } from '~/components'
+import { Translate } from '~/components';
 
-import { numAbbr } from '~/common/utils'
+import { numAbbr } from '~/common/utils';
 
-import NoticeActorAvatar from './NoticeActorAvatar'
-import NoticeActorName from './NoticeActorName'
-import NoticeFollower from './NoticeFollower'
-import NoticeHead from './NoticeHead'
-import NoticeTypeIcon from './NoticeTypeIcon'
-import styles from './styles.css'
+import NoticeActorAvatar from './NoticeActorAvatar';
+import NoticeActorName from './NoticeActorName';
+import NoticeFollower from './NoticeFollower';
+import NoticeHead from './NoticeHead';
+import NoticeTypeIcon from './NoticeTypeIcon';
+import styles from './styles.css';
 
-import { UserNewFollowerNotice as NoticeType } from './__generated__/UserNewFollowerNotice'
+import { UserNewFollowerNotice as NoticeType } from './__generated__/UserNewFollowerNotice';
 
 const UserNewFollowerNotice = ({ notice }: { notice: NoticeType }) => {
   if (!notice || !notice.actors) {
-    return null
+    return null;
   }
 
-  const actorsCount = notice.actors.length
-  const isMultiActors = actorsCount > 1
+  const actorsCount = notice.actors.length;
+  const isMultiActors = actorsCount > 1;
 
   return (
     <section className="container">
@@ -58,8 +58,8 @@ const UserNewFollowerNotice = ({ notice }: { notice: NoticeType }) => {
 
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 
 UserNewFollowerNotice.fragments = {
   notice: gql`
@@ -79,6 +79,6 @@ UserNewFollowerNotice.fragments = {
     ${NoticeFollower.fragments.follower}
     ${NoticeHead.fragments.date}
   `,
-}
+};
 
-export default UserNewFollowerNotice
+export default UserNewFollowerNotice;

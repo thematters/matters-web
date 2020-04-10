@@ -1,25 +1,25 @@
-import { ApolloError } from 'apollo-client'
+import { ApolloError } from 'apollo-client';
 
-import { Error, LoginButton, Translate } from '~/components'
+import { Error, LoginButton, Translate } from '~/components';
 
-import { ADD_TOAST, ERROR_CODES, ErrorCodeKeys } from '~/common/enums'
+import { ADD_TOAST, ERROR_CODES, ErrorCodeKeys } from '~/common/enums';
 
 export const getErrorCodes = (error: ApolloError): ErrorCodeKeys[] => {
-  const errorCodes: ErrorCodeKeys[] = []
+  const errorCodes: ErrorCodeKeys[] = [];
 
   if (!error || !error.graphQLErrors) {
-    return errorCodes
+    return errorCodes;
   }
 
   error.graphQLErrors.forEach((e) => {
-    const code = e.extensions?.code
+    const code = e.extensions?.code;
     if (code) {
-      errorCodes.push(code)
+      errorCodes.push(code);
     }
-  })
+  });
 
-  return errorCodes
-}
+  return errorCodes;
+};
 
 /**
  * Check mutation on error to throw a `<Toast>`
@@ -27,39 +27,39 @@ export const getErrorCodes = (error: ApolloError): ErrorCodeKeys[] => {
 export const mutationOnError = (error: ApolloError) => {
   // Add info to Sentry
   import('@sentry/browser').then((Sentry) => {
-    Sentry.captureException(error)
-  })
+    Sentry.captureException(error);
+  });
 
   if (!process.browser) {
-    throw error
+    throw error;
   }
 
-  const errorCodes = getErrorCodes(error)
-  const errorMap: { [key: string]: boolean } = {}
+  const errorCodes = getErrorCodes(error);
+  const errorMap: { [key: string]: boolean } = {};
   errorCodes.forEach((code) => {
-    errorMap[code] = true
-  })
+    errorMap[code] = true;
+  });
 
   /**
    * Catch auth errors
    */
-  const isUnauthenticated = errorMap[ERROR_CODES.UNAUTHENTICATED]
-  const isForbidden = errorMap[ERROR_CODES.FORBIDDEN]
-  const isTokenInvalid = errorMap[ERROR_CODES.TOKEN_INVALID]
+  const isUnauthenticated = errorMap[ERROR_CODES.UNAUTHENTICATED];
+  const isForbidden = errorMap[ERROR_CODES.FORBIDDEN];
+  const isTokenInvalid = errorMap[ERROR_CODES.TOKEN_INVALID];
 
   if (isUnauthenticated || isForbidden || isTokenInvalid) {
-    let errorMessage: React.ReactNode
+    let errorMessage: React.ReactNode;
 
     if (isUnauthenticated) {
-      errorMessage = <Translate id="UNAUTHENTICATED" />
+      errorMessage = <Translate id="UNAUTHENTICATED" />;
     }
 
     if (isForbidden) {
-      errorMessage = <Translate id="FORBIDDEN" />
+      errorMessage = <Translate id="FORBIDDEN" />;
     }
 
     if (isTokenInvalid) {
-      errorMessage = <Translate id="TOKEN_INVALID" />
+      errorMessage = <Translate id="TOKEN_INVALID" />;
     }
 
     return window.dispatchEvent(
@@ -71,13 +71,13 @@ export const mutationOnError = (error: ApolloError) => {
           buttonPlacement: 'center',
         },
       })
-    )
+    );
   }
 
   /**
    * Catch common errors
    */
-  let isCatched = false
+  let isCatched = false;
   const CATCH_CODES = [
     ERROR_CODES.UNKNOWN_ERROR,
     ERROR_CODES.NETWORK_ERROR,
@@ -98,10 +98,10 @@ export const mutationOnError = (error: ApolloError) => {
     ERROR_CODES.LIKER_USER_ID_EXISTS,
     ERROR_CODES.LIKER_EMAIL_EXISTS,
     ERROR_CODES.MIGRATION_REACH_LIMIT,
-  ] as ErrorCodeKeys[]
+  ] as ErrorCodeKeys[];
   CATCH_CODES.forEach((code) => {
     if (errorMap[code]) {
-      isCatched = true
+      isCatched = true;
       window.dispatchEvent(
         new CustomEvent(ADD_TOAST, {
           detail: {
@@ -109,18 +109,18 @@ export const mutationOnError = (error: ApolloError) => {
             content: <Translate id={code} />,
           },
         })
-      )
+      );
     }
-  })
+  });
   if (isCatched) {
-    return
+    return;
   }
 
   /**
    * Throw error
    */
-  throw error
-}
+  throw error;
+};
 
 /**
  * Pass an `useQuery` or `useLazyQuery` error and return `<Error>`
@@ -129,10 +129,10 @@ export const mutationOnError = (error: ApolloError) => {
 export const QueryError = ({ error }: { error: ApolloError }) => {
   // Add info to Sentry
   import('@sentry/browser').then((Sentry) => {
-    Sentry.captureException(error)
-  })
+    Sentry.captureException(error);
+  });
 
-  const errorCodes = getErrorCodes(error)
+  const errorCodes = getErrorCodes(error);
 
-  return <Error statusCode={errorCodes[0]} type="network" error={error} />
-}
+  return <Error statusCode={errorCodes[0]} type="network" error={error} />;
+};

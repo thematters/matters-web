@@ -1,11 +1,11 @@
-import { Button, TextIcon, Translate } from '~/components'
+import { Button, TextIcon, Translate } from '~/components';
 
-import { PATHS } from '~/common/enums'
-import IMAGE_SLOGAN_LG from '~/static/images/about-1-lg.svg'
-import IMAGE_SLOGAN_MD from '~/static/images/about-1-md.svg'
-import IMAGE_SLOGAN_SM from '~/static/images/about-1-sm.svg'
+import { PATHS } from '~/common/enums';
+import IMAGE_SLOGAN_LG from '~/static/images/about-1-lg.svg';
+import IMAGE_SLOGAN_MD from '~/static/images/about-1-md.svg';
+import IMAGE_SLOGAN_SM from '~/static/images/about-1-sm.svg';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 const Slogan = () => {
   return (
@@ -56,7 +56,7 @@ const Slogan = () => {
         }
       `}</style>
     </section>
-  )
-}
+  );
+};
 
-export default Slogan
+export default Slogan;

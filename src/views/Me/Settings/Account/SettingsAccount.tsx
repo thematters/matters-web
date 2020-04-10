@@ -1,8 +1,8 @@
-import { Head } from '~/components'
+import { Head } from '~/components';
 
-import AccountSettings from './AccountSettings'
-import UISettings from './UISettings'
-import WalletSettings from './WalletSettings'
+import AccountSettings from './AccountSettings';
+import UISettings from './UISettings';
+import WalletSettings from './WalletSettings';
 
 const SettingsAccount = () => {
   return (
@@ -15,7 +15,7 @@ const SettingsAccount = () => {
 
       <UISettings />
     </>
-  )
-}
+  );
+};
 
-export default SettingsAccount
+export default SettingsAccount;

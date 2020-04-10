@@ -1,13 +1,13 @@
-import classNames from 'classnames'
+import classNames from 'classnames';
 
-import { Avatar, AvatarProps, Viewer } from '~/components'
+import { Avatar, AvatarProps, Viewer } from '~/components';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 type MeAvatarProps = {
-  active?: boolean
-  user: Viewer
-} & AvatarProps
+  active?: boolean;
+  user: Viewer;
+} & AvatarProps;
 
 const MeAvatar: React.FC<MeAvatarProps> = ({
   active,
@@ -18,7 +18,7 @@ const MeAvatar: React.FC<MeAvatarProps> = ({
   const meAvatarClass = classNames({
     'me-avatar': true,
     active: !user.isInactive && active,
-  })
+  });
 
   return (
     <div className={meAvatarClass}>
@@ -29,7 +29,7 @@ const MeAvatar: React.FC<MeAvatarProps> = ({
       />
       <style jsx>{styles}</style>
     </div>
-  )
-}
+  );
+};
 
-export default MeAvatar
+export default MeAvatar;

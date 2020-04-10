@@ -1,7 +1,7 @@
-import gql from 'graphql-tag'
-import _isEmpty from 'lodash/isEmpty'
-import _pickBy from 'lodash/pickBy'
-import { useContext } from 'react'
+import gql from 'graphql-tag';
+import _isEmpty from 'lodash/isEmpty';
+import _pickBy from 'lodash/pickBy';
+import { useContext } from 'react';
 
 import {
   Button,
@@ -10,41 +10,41 @@ import {
   Icon,
   Menu,
   ViewerContext,
-} from '~/components'
-import { BlockUser } from '~/components/BlockUser'
+} from '~/components';
+import { BlockUser } from '~/components/BlockUser';
 
-import { TEXT } from '~/common/enums'
+import { TEXT } from '~/common/enums';
 
-import CollapseComment from './CollapseComment'
-import DeleteComment from './DeleteComment'
-import EditButton from './EditButton'
-import PinButton from './PinButton'
-import UncollapseButton from './UncollapseButton'
+import CollapseComment from './CollapseComment';
+import DeleteComment from './DeleteComment';
+import EditButton from './EditButton';
+import PinButton from './PinButton';
+import UncollapseButton from './UncollapseButton';
 
-import { DropdownActionsComment } from './__generated__/DropdownActionsComment'
+import { DropdownActionsComment } from './__generated__/DropdownActionsComment';
 
 interface DropdownActionsProps {
-  comment: DropdownActionsComment
-  inCard?: boolean
+  comment: DropdownActionsComment;
+  inCard?: boolean;
 }
 
 interface Controls {
-  hasPin: boolean
-  hasEdit: boolean
-  hasDelete: boolean
-  hasBlockUser: boolean
-  hasCollapse: boolean
-  hasUncollapse: boolean
+  hasPin: boolean;
+  hasEdit: boolean;
+  hasDelete: boolean;
+  hasBlockUser: boolean;
+  hasCollapse: boolean;
+  hasUncollapse: boolean;
 }
 
 interface DialogProps {
-  openEditCommentDialog: () => void
-  openDeleteCommentDialog: () => void
-  openBlockUserDialog: () => void
-  openCollapseCommentDialog: () => void
+  openEditCommentDialog: () => void;
+  openDeleteCommentDialog: () => void;
+  openBlockUserDialog: () => void;
+  openCollapseCommentDialog: () => void;
 }
 
-type BaseDropdownActionsProps = DropdownActionsProps & Controls & DialogProps
+type BaseDropdownActionsProps = DropdownActionsProps & Controls & DialogProps;
 
 const fragments = {
   comment: gql`
@@ -72,7 +72,7 @@ const fragments = {
     ${PinButton.fragments.comment}
     ${BlockUser.fragments.user}
   `,
-}
+};
 
 const BaseDropdownActions = ({
   comment,
@@ -108,7 +108,7 @@ const BaseDropdownActions = ({
       )}
       {hasUncollapse && <UncollapseButton commentId={comment.id} />}
     </Menu>
-  )
+  );
 
   return (
     <DropdownDialog
@@ -135,20 +135,20 @@ const BaseDropdownActions = ({
         </Button>
       )}
     </DropdownDialog>
-  )
-}
+  );
+};
 
 const DropdownActions = (props: DropdownActionsProps) => {
-  const { comment } = props
-  const viewer = useContext(ViewerContext)
+  const { comment } = props;
+  const viewer = useContext(ViewerContext);
 
-  const isArticleAuthor = viewer.id === comment.article.author.id
-  const isCommentAuthor = viewer.id === comment.author.id
-  const isActive = comment.state === 'active'
-  const isAbleCollapse = isArticleAuthor && !isCommentAuthor
-  const isCollapsed = comment.state === 'collapsed'
-  const isBlocked = comment.article.author.isBlocking
-  const isDescendantComment = comment.parentComment
+  const isArticleAuthor = viewer.id === comment.article.author.id;
+  const isCommentAuthor = viewer.id === comment.author.id;
+  const isActive = comment.state === 'active';
+  const isAbleCollapse = isArticleAuthor && !isCommentAuthor;
+  const isCollapsed = comment.state === 'collapsed';
+  const isBlocked = comment.article.author.isBlocking;
+  const isDescendantComment = comment.parentComment;
 
   const controls = {
     hasPin: !!(isArticleAuthor && isActive && !isDescendantComment),
@@ -157,10 +157,10 @@ const DropdownActions = (props: DropdownActionsProps) => {
     hasBlockUser: !isCommentAuthor,
     hasCollapse: !!(isAbleCollapse && isActive),
     hasUncollapse: !!(isAbleCollapse && isCollapsed),
-  }
+  };
 
   if (_isEmpty(_pickBy(controls)) || viewer.isInactive) {
-    return null
+    return null;
   }
 
   return (
@@ -193,9 +193,9 @@ const DropdownActions = (props: DropdownActionsProps) => {
         </DeleteComment.Dialog>
       )}
     </CommentFormDialog>
-  )
-}
+  );
+};
 
-DropdownActions.fragments = fragments
+DropdownActions.fragments = fragments;
 
-export default DropdownActions
+export default DropdownActions;

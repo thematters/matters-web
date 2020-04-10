@@ -1,6 +1,6 @@
-import { Icon } from '~/components'
+import { Icon } from '~/components';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 export const Spinner = () => (
   <div className="spinner" aria-label="加載中">
@@ -8,4 +8,4 @@ export const Spinner = () => (
 
     <style jsx>{styles}</style>
   </div>
-)
+);

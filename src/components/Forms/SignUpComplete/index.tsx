@@ -1,16 +1,16 @@
-import { Dialog, Layout, Translate } from '~/components'
+import { Dialog, Layout, Translate } from '~/components';
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
-import { analytics, redirectToTarget } from '~/common/utils'
+import { ANALYTICS_EVENTS } from '~/common/enums';
+import { analytics, redirectToTarget } from '~/common/utils';
 
 export const SignUpComplete = ({
   purpose,
   closeDialog,
 }: {
-  purpose?: 'dialog' | 'page'
-  closeDialog?: () => void
+  purpose?: 'dialog' | 'page';
+  closeDialog?: () => void;
 }) => {
-  const isInPage = purpose === 'page'
+  const isInPage = purpose === 'page';
 
   return (
     <>
@@ -71,15 +71,15 @@ export const SignUpComplete = ({
       <Dialog.Footer>
         <Dialog.Footer.Button
           onClick={() => {
-            analytics.trackEvent(ANALYTICS_EVENTS.CLICK_ENTER_AFTER_SIGNUP)
+            analytics.trackEvent(ANALYTICS_EVENTS.CLICK_ENTER_AFTER_SIGNUP);
             redirectToTarget({
               fallback: isInPage ? 'homepage' : 'current',
-            })
+            });
           }}
         >
           <Translate zh_hant="進入社區" zh_hans="进入社区" />
         </Dialog.Footer.Button>
       </Dialog.Footer>
     </>
-  )
-}
+  );
+};

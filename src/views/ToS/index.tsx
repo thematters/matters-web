@@ -1,4 +1,4 @@
-import { Head, Layout, Term } from '~/components'
+import { Head, Layout, Term } from '~/components';
 
 export default () => (
   <Layout.Main>
@@ -14,4 +14,4 @@ export default () => (
       <Term />
     </Layout.Spacing>
   </Layout.Main>
-)
+);

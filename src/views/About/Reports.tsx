@@ -1,6 +1,6 @@
-import { Translate } from '~/components'
+import { Translate } from '~/components';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 const Reports = () => (
   <section className="reports">
@@ -88,6 +88,6 @@ const Reports = () => (
 
     <style jsx>{styles}</style>
   </section>
-)
+);
 
-export default Reports
+export default Reports;

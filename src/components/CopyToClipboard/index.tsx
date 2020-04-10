@@ -1,11 +1,11 @@
-import C2C from 'react-copy-to-clipboard'
+import C2C from 'react-copy-to-clipboard';
 
-import { Translate } from '~/components'
+import { Translate } from '~/components';
 
-import { ADD_TOAST } from '~/common/enums'
+import { ADD_TOAST } from '~/common/enums';
 
 interface CopyToClipboardProps {
-  text: string
+  text: string;
 }
 
 export const CopyToClipboard: React.FC<CopyToClipboardProps> = ({
@@ -24,8 +24,8 @@ export const CopyToClipboard: React.FC<CopyToClipboardProps> = ({
                 content: <Translate id="failureCopy" />,
               },
             })
-          )
-          return
+          );
+          return;
         }
 
         window.dispatchEvent(
@@ -35,10 +35,10 @@ export const CopyToClipboard: React.FC<CopyToClipboardProps> = ({
               content: <Translate id="successCopy" />,
             },
           })
-        )
+        );
       }}
     >
       {children}
     </C2C>
-  )
-}
+  );
+};

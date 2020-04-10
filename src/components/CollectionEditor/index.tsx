@@ -1,88 +1,90 @@
-import classNames from 'classnames'
-import _isEqual from 'lodash/isEqual'
-import React from 'react'
+import classNames from 'classnames';
+import _isEqual from 'lodash/isEqual';
+import React from 'react';
 import {
   DragDropContext,
   Draggable,
   Droppable,
   DropResult,
-} from 'react-beautiful-dnd'
+} from 'react-beautiful-dnd';
 
-import { ArticleDigestDropdown, Button, Icon } from '~/components'
+import { ArticleDigestDropdown, Button, Icon } from '~/components';
 
-import { TEXT } from '~/common/enums'
+import { TEXT } from '~/common/enums';
 
-import CollectForm from './CollectForm'
-import styles from './styles.css'
+import CollectForm from './CollectForm';
+import styles from './styles.css';
 
-import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
+import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle';
 
 interface State {
-  articles: ArticleDigestDropdownArticle[]
+  articles: ArticleDigestDropdownArticle[];
 }
 
 interface Props {
-  articles: ArticleDigestDropdownArticle[]
-  onEdit: (articles: ArticleDigestDropdownArticle[]) => void
+  articles: ArticleDigestDropdownArticle[];
+  onEdit: (articles: ArticleDigestDropdownArticle[]) => void;
 }
 
 const reorder = (list: any[], startIndex: number, endIndex: number) => {
-  const result = Array.from(list)
-  const [removed] = result.splice(startIndex, 1)
-  result.splice(endIndex, 0, removed)
+  const result = Array.from(list);
+  const [removed] = result.splice(startIndex, 1);
+  result.splice(endIndex, 0, removed);
 
-  return result
-}
+  return result;
+};
 
 class CollectionEditor extends React.Component<Props, State> {
   constructor(props: Props) {
-    super(props)
+    super(props);
 
     this.state = {
       articles: this.props.articles,
-    }
+    };
   }
 
   componentDidUpdate() {
     // only update state from prop only if added or deleted
     if (this.state.articles.length === this.props.articles.length) {
-      return
+      return;
     }
 
-    this.setState({ articles: this.props.articles })
+    this.setState({ articles: this.props.articles });
   }
 
   onAdd = (article: any) => {
-    this.props.onEdit([...this.state.articles, article])
-  }
+    this.props.onEdit([...this.state.articles, article]);
+  };
 
   onDelete = (article: any) => {
-    this.props.onEdit(this.state.articles.filter(({ id }) => id !== article.id))
-  }
+    this.props.onEdit(
+      this.state.articles.filter(({ id }) => id !== article.id)
+    );
+  };
 
   onDragEnd = (result: DropResult) => {
     if (!result.destination) {
-      return
+      return;
     }
 
-    const sourceIndex = result.source.index
-    const destinationIndex = result.destination.index
+    const sourceIndex = result.source.index;
+    const destinationIndex = result.destination.index;
 
     if (sourceIndex === destinationIndex) {
-      return
+      return;
     }
 
     const newItems = reorder(
       this.state.articles,
       result.source.index,
       result.destination.index
-    )
-    this.setState({ articles: newItems })
-    this.props.onEdit(newItems)
-  }
+    );
+    this.setState({ articles: newItems });
+    this.props.onEdit(newItems);
+  };
 
   render() {
-    const { articles } = this.state
+    const { articles } = this.state;
 
     return (
       <>
@@ -147,8 +149,8 @@ class CollectionEditor extends React.Component<Props, State> {
 
         <style jsx>{styles}</style>
       </>
-    )
+    );
   }
 }
 
-export default CollectionEditor
+export default CollectionEditor;

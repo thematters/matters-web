@@ -1,14 +1,14 @@
-import classNames from 'classnames'
+import classNames from 'classnames';
 
-import { Title } from '~/components'
+import { Title } from '~/components';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 export interface PageHeaderProps {
-  title: string | React.ReactNode
+  title: string | React.ReactNode;
 
-  is?: 'h1' | 'h2' | 'h3'
-  hasNoBorder?: boolean
+  is?: 'h1' | 'h2' | 'h3';
+  hasNoBorder?: boolean;
 }
 
 export const PageHeader: React.FC<PageHeaderProps> = ({
@@ -20,7 +20,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
 }) => {
   const headerClass = classNames({
     hasNoBorder: !!hasNoBorder,
-  })
+  });
 
   return (
     <header className={headerClass}>
@@ -34,5 +34,5 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
 
       <style jsx>{styles}</style>
     </header>
-  )
-}
+  );
+};

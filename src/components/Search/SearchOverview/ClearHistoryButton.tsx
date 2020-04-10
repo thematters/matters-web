@@ -1,12 +1,12 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import { Button, TextIcon, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
+import { Button, TextIcon, Translate } from '~/components';
+import { useMutation } from '~/components/GQL';
 
-import { ADD_TOAST } from '~/common/enums'
+import { ADD_TOAST } from '~/common/enums';
 
-import { ClearHistory } from './__generated__/ClearHistory'
-import { ViewerRecentSearches } from './__generated__/ViewerRecentSearches'
+import { ClearHistory } from './__generated__/ClearHistory';
+import { ViewerRecentSearches } from './__generated__/ViewerRecentSearches';
 
 const fragments = {
   user: gql`
@@ -26,13 +26,13 @@ const fragments = {
       }
     }
   `,
-}
+};
 
 const CLEAR_HISTORY = gql`
   mutation ClearHistory {
     clearSearchHistory
   }
-`
+`;
 
 const VIEWER_RECENT_SEARCHES = gql`
   query ViewerRecentSearches {
@@ -42,7 +42,7 @@ const VIEWER_RECENT_SEARCHES = gql`
     }
   }
   ${fragments.user}
-`
+`;
 
 const ClearHistoryButton = () => {
   const [clear] = useMutation<ClearHistory>(CLEAR_HISTORY, {
@@ -50,7 +50,7 @@ const ClearHistoryButton = () => {
       try {
         const data = cache.readQuery<ViewerRecentSearches>({
           query: VIEWER_RECENT_SEARCHES,
-        })
+        });
 
         if (
           !data ||
@@ -58,7 +58,7 @@ const ClearHistoryButton = () => {
           !data.viewer.activity ||
           !data.viewer.activity.recentSearches
         ) {
-          return
+          return;
         }
 
         cache.writeQuery({
@@ -75,12 +75,12 @@ const ClearHistoryButton = () => {
               },
             },
           },
-        })
+        });
       } catch (e) {
-        console.error(e)
+        console.error(e);
       }
     },
-  })
+  });
 
   return (
     <Button
@@ -89,7 +89,7 @@ const ClearHistoryButton = () => {
       borderColor="grey-light"
       borderWidth="sm"
       onClick={async () => {
-        await clear()
+        await clear();
         window.dispatchEvent(
           new CustomEvent(ADD_TOAST, {
             detail: {
@@ -99,16 +99,16 @@ const ClearHistoryButton = () => {
               ),
             },
           })
-        )
+        );
       }}
     >
       <TextIcon size="xs" weight="normal" color="grey">
         <Translate zh_hant="清空" zh_hans="清空" />
       </TextIcon>
     </Button>
-  )
-}
+  );
+};
 
-ClearHistoryButton.fragments = fragments
+ClearHistoryButton.fragments = fragments;
 
-export default ClearHistoryButton
+export default ClearHistoryButton;

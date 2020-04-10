@@ -1,31 +1,31 @@
-import { useApolloClient } from '@apollo/react-hooks'
-import classNames from 'classnames'
+import { useApolloClient } from '@apollo/react-hooks';
+import classNames from 'classnames';
 
-import { Button, Icon, SignUpButton, Translate } from '~/components'
+import { Button, Icon, SignUpButton, Translate } from '~/components';
 
-import { SIGNUP_TYPE } from '~/common/enums'
-import IMG_AD from '~/static/images/ad.svg'
+import { SIGNUP_TYPE } from '~/common/enums';
+import IMG_AD from '~/static/images/ad.svg';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
-const bgStyle = { backgroundImage: `url(${IMG_AD})` }
+const bgStyle = { backgroundImage: `url(${IMG_AD})` };
 
 interface WallProps {
-  show: boolean
+  show: boolean;
 }
 
 const Wall = ({ show }: WallProps) => {
-  const client = useApolloClient()
-  const outerClasses = classNames({ outer: true, show })
+  const client = useApolloClient();
+  const outerClasses = classNames({ outer: true, show });
 
   const close = () => {
     if (client?.writeData) {
       client.writeData({
         id: 'ClientPreference:local',
         data: { wall: false },
-      })
+      });
     }
-  }
+  };
 
   return (
     <section className={outerClasses}>
@@ -59,7 +59,7 @@ const Wall = ({ show }: WallProps) => {
 
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 
-export default Wall
+export default Wall;

@@ -1,7 +1,7 @@
-import classNames from 'classnames'
+import classNames from 'classnames';
 
-import Item from './Item'
-import styles from './styles.css'
+import Item from './Item';
+import styles from './styles.css';
 
 /**
  * iOS-like UI component
@@ -11,7 +11,7 @@ import styles from './styles.css'
  */
 
 interface ListProps {
-  spacing?: 0 | 'xloose'
+  spacing?: 0 | 'xloose';
 }
 
 const List: React.FC<ListProps> & { Item: typeof Item } = ({
@@ -20,16 +20,16 @@ const List: React.FC<ListProps> & { Item: typeof Item } = ({
 }) => {
   const listClass = classNames({
     [`spacing-${spacing}`]: !!spacing,
-  })
+  });
 
   return (
     <ul className={listClass}>
       {children}
       <style jsx>{styles}</style>
     </ul>
-  )
-}
+  );
+};
 
-List.Item = Item
+List.Item = Item;
 
-export default List
+export default List;

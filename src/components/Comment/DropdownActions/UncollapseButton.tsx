@@ -1,9 +1,9 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import { Icon, Menu, TextIcon, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
+import { Icon, Menu, TextIcon, Translate } from '~/components';
+import { useMutation } from '~/components/GQL';
 
-import { UncollapseComment } from './__generated__/UncollapseComment'
+import { UncollapseComment } from './__generated__/UncollapseComment';
 
 const UNCOLLAPSE_COMMENT = gql`
   mutation UncollapseComment($id: ID!, $state: CommentState!) {
@@ -12,7 +12,7 @@ const UNCOLLAPSE_COMMENT = gql`
       state
     }
   }
-`
+`;
 
 const UncollapseButton = ({ commentId }: { commentId: string }) => {
   const [uncollapseComment] = useMutation<UncollapseComment>(
@@ -29,7 +29,7 @@ const UncollapseButton = ({ commentId }: { commentId: string }) => {
         ],
       },
     }
-  )
+  );
 
   return (
     <Menu.Item onClick={uncollapseComment}>
@@ -37,7 +37,7 @@ const UncollapseButton = ({ commentId }: { commentId: string }) => {
         <Translate id="uncollapseComment" />
       </TextIcon>
     </Menu.Item>
-  )
-}
+  );
+};
 
-export default UncollapseButton
+export default UncollapseButton;

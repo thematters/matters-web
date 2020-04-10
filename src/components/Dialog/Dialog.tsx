@@ -1,25 +1,25 @@
-import { DialogContent, DialogOverlay } from '@reach/dialog'
-import classNames from 'classnames'
-import { useRef } from 'react'
-import { animated, useSpring, useTransition } from 'react-spring'
-import { useDrag } from 'react-use-gesture'
+import { DialogContent, DialogOverlay } from '@reach/dialog';
+import classNames from 'classnames';
+import { useRef } from 'react';
+import { animated, useSpring, useTransition } from 'react-spring';
+import { useDrag } from 'react-use-gesture';
 
-import { useOutsideClick, useResponsive } from '~/components'
+import { useOutsideClick, useResponsive } from '~/components';
 
-import Handle from './Handle'
-import Overlay from './Overlay'
-import styles from './styles.css'
-import globalStyles from './styles.global.css'
+import Handle from './Handle';
+import Overlay from './Overlay';
+import styles from './styles.css';
+import globalStyles from './styles.global.css';
 
 export interface DialogOverlayProps {
-  isOpen: boolean | undefined
-  onDismiss: () => void
+  isOpen: boolean | undefined;
+  onDismiss: () => void;
 }
 
 export type DialogProps = {
-  size?: 'sm' | 'lg'
-  fixedHeight?: boolean
-} & DialogOverlayProps
+  size?: 'sm' | 'lg';
+  fixedHeight?: boolean;
+} & DialogOverlayProps;
 
 const Dialog: React.FC<DialogProps> = ({
   size = 'lg',
@@ -30,14 +30,14 @@ const Dialog: React.FC<DialogProps> = ({
 
   children,
 }) => {
-  const node: React.RefObject<any> | null = useRef(null)
+  const node: React.RefObject<any> | null = useRef(null);
 
   // drag animation
   const [{ top }, setDragGoal] = useSpring(() => ({
     top: 0,
-  }))
+  }));
 
-  const isSmallUp = useResponsive('sm-up')
+  const isSmallUp = useResponsive('sm-up');
   const transitions = useTransition(isOpen, null, {
     from: {
       opacity: 0,
@@ -50,14 +50,14 @@ const Dialog: React.FC<DialogProps> = ({
     },
     config: { tension: 270, friction: isSmallUp ? undefined : 30 },
     onDestroyed: () => {
-      setDragGoal({ top: 0 })
+      setDragGoal({ top: 0 });
     },
-  })
+  });
 
-  useOutsideClick(node, onDismiss)
+  useOutsideClick(node, onDismiss);
 
   const Container: React.FC<{
-    style?: React.CSSProperties
+    style?: React.CSSProperties;
   }> = ({ ...props }) => {
     const containerClass = classNames({
       container: true,
@@ -66,15 +66,15 @@ const Dialog: React.FC<DialogProps> = ({
         size === 'lg',
       'l-col-4 l-col-sm-4 l-offset-sm-2 l-col-lg-4 l-offset-lg-4':
         size === 'sm',
-    })
+    });
 
     const bind = useDrag(({ down, movement: [, my] }) => {
       if (!down && my > 30) {
-        onDismiss()
+        onDismiss();
       } else {
-        setDragGoal({ top: down ? Math.max(my, -30) : 0 })
+        setDragGoal({ top: down ? Math.max(my, -30) : 0 });
       }
-    })
+    });
 
     return (
       <div ref={node} className={containerClass} {...props}>
@@ -84,18 +84,18 @@ const Dialog: React.FC<DialogProps> = ({
 
         <style jsx>{styles}</style>
       </div>
-    )
-  }
+    );
+  };
 
-  const AnimatedDialogOverlay = animated(DialogOverlay)
-  const AnimatedContainer = animated(Container)
-  const AnimatedOverlay = animated(Overlay)
+  const AnimatedDialogOverlay = animated(DialogOverlay);
+  const AnimatedContainer = animated(Container);
+  const AnimatedOverlay = animated(Overlay);
 
   return (
     <>
       {transitions.map(({ item, key, props: { opacity, transform } }) => {
         if (!item) {
-          return
+          return;
         }
 
         return (
@@ -115,14 +115,14 @@ const Dialog: React.FC<DialogProps> = ({
               />
             </DialogContent>
           </AnimatedDialogOverlay>
-        )
+        );
       })}
 
       <style jsx global>
         {globalStyles}
       </style>
     </>
-  )
-}
+  );
+};
 
-export default Dialog
+export default Dialog;

@@ -1,9 +1,9 @@
-import { Head, Layout, Translate } from '~/components'
+import { Head, Layout, Translate } from '~/components';
 
-import IMAGE_ILLUSTRATION_AVATAR from '~/static/images/illustration-avatar.svg'
+import IMAGE_ILLUSTRATION_AVATAR from '~/static/images/illustration-avatar.svg';
 
-import { AuthorPicker } from './AuthorPicker'
-import styles from './styles.css'
+import { AuthorPicker } from './AuthorPicker';
+import styles from './styles.css';
 
 const PickIntroHeader = () => {
   return (
@@ -33,8 +33,8 @@ const PickIntroHeader = () => {
 
       <style jsx>{styles}</style>
     </header>
-  )
-}
+  );
+};
 
 const PickAuthors = () => (
   <>
@@ -46,6 +46,6 @@ const PickAuthors = () => (
 
     <AuthorPicker title={<Translate id="followAuthor" />} />
   </>
-)
+);
 
-export default PickAuthors
+export default PickAuthors;

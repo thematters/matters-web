@@ -1,7 +1,7 @@
-import { useFormik } from 'formik'
-import gql from 'graphql-tag'
-import _pickBy from 'lodash/pickBy'
-import { useContext } from 'react'
+import { useFormik } from 'formik';
+import gql from 'graphql-tag';
+import _pickBy from 'lodash/pickBy';
+import { useContext } from 'react';
 
 import {
   AvatarUploader,
@@ -10,37 +10,37 @@ import {
   LanguageContext,
   Translate,
   ViewerContext,
-} from '~/components'
-import { useMutation } from '~/components/GQL'
+} from '~/components';
+import { useMutation } from '~/components/GQL';
 
-import { ADD_TOAST } from '~/common/enums'
+import { ADD_TOAST } from '~/common/enums';
 import {
   parseFormSubmitErrors,
   translate,
   validateDescription,
   validateDisplayName,
-} from '~/common/utils'
+} from '~/common/utils';
 
-import ProfileCoverUploader from './ProfileCoverUploader'
-import styles from './styles.css'
+import ProfileCoverUploader from './ProfileCoverUploader';
+import styles from './styles.css';
 
 import {
   UpdateUserInfoProfile,
   UpdateUserInfoProfile_updateUserInfo,
-} from './__generated__/UpdateUserInfoProfile'
+} from './__generated__/UpdateUserInfoProfile';
 
-export type ProfileEditorUser = UpdateUserInfoProfile_updateUserInfo
+export type ProfileEditorUser = UpdateUserInfoProfile_updateUserInfo;
 
 interface FormProps {
-  user: ProfileEditorUser
-  closeDialog: () => void
+  user: ProfileEditorUser;
+  closeDialog: () => void;
 }
 
 interface FormValues {
-  avatar: string | null
-  profileCover: string | null
-  displayName: string
-  description: string
+  avatar: string | null;
+  profileCover: string | null;
+  displayName: string;
+  description: string;
 }
 
 const UPDATE_USER_INFO = gql`
@@ -55,19 +55,19 @@ const UPDATE_USER_INFO = gql`
       }
     }
   }
-`
+`;
 
 /**
  * To identify `profileCover` is changed since it may be `null`
  */
-const UNCHANGED_FIELD = 'UNCHANGED_FIELD'
+const UNCHANGED_FIELD = 'UNCHANGED_FIELD';
 
 const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
-  const [update] = useMutation<UpdateUserInfoProfile>(UPDATE_USER_INFO)
-  const { lang } = useContext(LanguageContext)
-  const viewer = useContext(ViewerContext)
+  const [update] = useMutation<UpdateUserInfoProfile>(UPDATE_USER_INFO);
+  const { lang } = useContext(LanguageContext);
+  const viewer = useContext(ViewerContext);
 
-  const formId = 'edit-profile-form'
+  const formId = 'edit-profile-form';
 
   const {
     values,
@@ -105,7 +105,7 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
               description,
             },
           },
-        })
+        });
 
         window.dispatchEvent(
           new CustomEvent(ADD_TOAST, {
@@ -114,23 +114,23 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
               content: <Translate id="successEditUserProfile" />,
             },
           })
-        )
+        );
 
-        closeDialog()
+        closeDialog();
       } catch (error) {
-        const [messages, codes] = parseFormSubmitErrors(error, lang)
+        const [messages, codes] = parseFormSubmitErrors(error, lang);
         codes.forEach((code) => {
           if (code.includes('USER_DISPLAYNAME_INVALID')) {
-            setFieldError('displayName', messages[code])
+            setFieldError('displayName', messages[code]);
           } else {
-            setFieldError('description', messages[code])
+            setFieldError('description', messages[code]);
           }
-        })
+        });
       }
 
-      setSubmitting(false)
+      setSubmitting(false);
     },
-  })
+  });
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
@@ -183,7 +183,7 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
 
       <style jsx>{styles}</style>
     </Form>
-  )
+  );
 
   const SubmitButton = (
     <Dialog.Header.RightButton
@@ -193,7 +193,7 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
       text={<Translate id="save" />}
       loading={isSubmitting}
     />
-  )
+  );
 
   return (
     <>
@@ -207,7 +207,7 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
         {InnerForm}
       </Dialog.Content>
     </>
-  )
-}
+  );
+};
 
-export default ProfileEditor
+export default ProfileEditor;

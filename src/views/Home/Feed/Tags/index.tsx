@@ -1,16 +1,16 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
 
-import { Slides, Spinner } from '~/components'
-import { QueryError } from '~/components/GQL'
+import { Slides, Spinner } from '~/components';
+import { QueryError } from '~/components/GQL';
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
-import { analytics } from '~/common/utils'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums';
+import { analytics } from '~/common/utils';
 
-import SectionHeader from '../../SectionHeader'
-import TagFeedDigest from './TagFeedDigest'
+import SectionHeader from '../../SectionHeader';
+import TagFeedDigest from './TagFeedDigest';
 
-import { FeedTags } from './__generated__/FeedTags'
+import { FeedTags } from './__generated__/FeedTags';
 
 const FEED_TAGS = gql`
   query FeedTags {
@@ -29,18 +29,18 @@ const FEED_TAGS = gql`
     }
   }
   ${TagFeedDigest.fragments.tag}
-`
+`;
 
 const TagsFeed = () => {
-  const { data, loading, error } = useQuery<FeedTags>(FEED_TAGS)
-  const edges = data?.viewer?.recommendation.tags.edges
+  const { data, loading, error } = useQuery<FeedTags>(FEED_TAGS);
+  const edges = data?.viewer?.recommendation.tags.edges;
 
   if (error) {
-    return <QueryError error={error} />
+    return <QueryError error={error} />;
   }
 
   if (!edges || edges.length <= 0) {
-    return null
+    return null;
   }
 
   return (
@@ -65,7 +65,7 @@ const TagsFeed = () => {
         </Slides.Item>
       ))}
     </Slides>
-  )
-}
+  );
+};
 
-export default TagsFeed
+export default TagsFeed;

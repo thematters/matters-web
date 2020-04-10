@@ -1,14 +1,14 @@
-import { useState } from 'react'
+import { useState } from 'react';
 
-import { Dialog } from '~/components'
+import { Dialog } from '~/components';
 
-import Content from './Content'
+import Content from './Content';
 
 interface TagDialogProps {
-  id?: string
-  content?: string
-  description?: string
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  id?: string;
+  content?: string;
+  description?: string;
+  children: ({ open }: { open: () => void }) => React.ReactNode;
 }
 
 export const TagDialog = ({
@@ -16,9 +16,9 @@ export const TagDialog = ({
   content,
   ...restProps
 }: TagDialogProps) => {
-  const [showDialog, setShowDialog] = useState(false)
-  const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
+  const [showDialog, setShowDialog] = useState(false);
+  const open = () => setShowDialog(true);
+  const close = () => setShowDialog(false);
 
   return (
     <>
@@ -28,5 +28,5 @@ export const TagDialog = ({
         <Content closeDialog={close} content={content} {...restProps} />
       </Dialog>
     </>
-  )
-}
+  );
+};

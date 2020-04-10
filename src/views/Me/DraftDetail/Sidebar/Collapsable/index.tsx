@@ -1,21 +1,21 @@
-import { ReactNode, useState } from 'react'
+import { ReactNode, useState } from 'react';
 
-import { Button, Icon, TextIcon } from '~/components'
+import { Button, Icon, TextIcon } from '~/components';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 const Collapsable: React.FC<{
-  title: ReactNode
-  defaultCollapsed?: boolean
+  title: ReactNode;
+  defaultCollapsed?: boolean;
 }> = ({ children, title, defaultCollapsed = true }) => {
-  const [collapsed, toggleCollapse] = useState(defaultCollapsed)
+  const [collapsed, toggleCollapse] = useState(defaultCollapsed);
 
   return (
     <section className={collapsed ? 'collapsed' : 'expanded'}>
       <div>
         <Button
           onClick={() => {
-            toggleCollapse(!collapsed)
+            toggleCollapse(!collapsed);
           }}
         >
           <TextIcon
@@ -40,7 +40,7 @@ const Collapsable: React.FC<{
 
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 
-export default Collapsable
+export default Collapsable;

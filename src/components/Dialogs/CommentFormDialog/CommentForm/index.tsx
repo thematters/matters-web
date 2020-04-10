@@ -1,31 +1,31 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
-import dynamic from 'next/dynamic'
-import { useState } from 'react'
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
+import dynamic from 'next/dynamic';
+import { useState } from 'react';
 
-import { Button, Dialog, Spinner, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
-import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
+import { Button, Dialog, Spinner, Translate } from '~/components';
+import { useMutation } from '~/components/GQL';
+import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference';
 
-import { ADD_TOAST, ANALYTICS_EVENTS, TEXT, TextId } from '~/common/enums'
+import { ADD_TOAST, ANALYTICS_EVENTS, TEXT, TextId } from '~/common/enums';
 import {
   analytics,
   dom,
   stripHtml,
   subscribePush,
   trimLineBreaks,
-} from '~/common/utils'
+} from '~/common/utils';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
-import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
-import { CommentDraft } from './__generated__/CommentDraft'
-import { PutComment } from './__generated__/PutComment'
+import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference';
+import { CommentDraft } from './__generated__/CommentDraft';
+import { PutComment } from './__generated__/PutComment';
 
 const CommentEditor = dynamic(() => import('~/components/Editor/Comment'), {
   ssr: false,
   loading: Spinner,
-})
+});
 
 export const PUT_COMMENT = gql`
   mutation PutComment($input: PutCommentInput!) {
@@ -34,7 +34,7 @@ export const PUT_COMMENT = gql`
       content
     }
   }
-`
+`;
 
 const COMMENT_DRAFT = gql`
   query CommentDraft($id: ID!) {
@@ -43,19 +43,19 @@ const COMMENT_DRAFT = gql`
       content
     }
   }
-`
+`;
 
 export interface CommentFormProps {
-  commentId?: string
-  articleId: string
-  replyToId?: string
-  parentId?: string
+  commentId?: string;
+  articleId: string;
+  replyToId?: string;
+  parentId?: string;
 
-  defaultContent?: string | null
-  submitCallback?: () => void
-  closeDialog: () => void
-  title?: TextId
-  context?: React.ReactNode
+  defaultContent?: string | null;
+  submitCallback?: () => void;
+  closeDialog: () => void;
+  title?: TextId;
+  context?: React.ReactNode;
 }
 
 const CommentForm: React.FC<CommentFormProps> = ({
@@ -72,25 +72,25 @@ const CommentForm: React.FC<CommentFormProps> = ({
 }) => {
   const commentDraftId = `${articleId}:${commentId || 0}:${parentId || 0}:${
     replyToId || 0
-  }`
-  const formId = `comment-form-${commentDraftId}`
+  }`;
+  const formId = `comment-form-${commentDraftId}`;
 
   const { data, client } = useQuery<CommentDraft>(COMMENT_DRAFT, {
     variables: { id: commentDraftId },
-  })
+  });
   const { data: clientPreferenceData } = useQuery<ClientPreference>(
     CLIENT_PREFERENCE
-  )
+  );
 
-  const [putComment] = useMutation<PutComment>(PUT_COMMENT)
-  const [isSubmitting, setSubmitting] = useState(false)
+  const [putComment] = useMutation<PutComment>(PUT_COMMENT);
+  const [isSubmitting, setSubmitting] = useState(false);
   const [content, setContent] = useState(
     data?.commentDraft.content || defaultContent || ''
-  )
-  const isValid = stripHtml(content).trim().length > 0
+  );
+  const isValid = stripHtml(content).trim().length > 0;
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    const mentions = dom.getAttributes('data-id', content)
+    const mentions = dom.getAttributes('data-id', content);
     const input = {
       id: commentId,
       comment: {
@@ -100,18 +100,18 @@ const CommentForm: React.FC<CommentFormProps> = ({
         parentId,
         mentions,
       },
-    }
+    };
 
-    const push = clientPreferenceData?.clientPreference.push
-    const skipPushButton = !push || !push.supported || push.enabled
+    const push = clientPreferenceData?.clientPreference.push;
+    const skipPushButton = !push || !push.supported || push.enabled;
 
-    event.preventDefault()
-    setSubmitting(true)
+    event.preventDefault();
+    setSubmitting(true);
 
     try {
-      await putComment({ variables: { input } })
-      setContent('')
-      closeDialog()
+      await putComment({ variables: { input } });
+      setContent('');
+      closeDialog();
 
       window.dispatchEvent(
         new CustomEvent(ADD_TOAST, {
@@ -130,26 +130,26 @@ const CommentForm: React.FC<CommentFormProps> = ({
             buttonPlacement: 'center',
           },
         })
-      )
+      );
 
       if (submitCallback) {
-        submitCallback()
+        submitCallback();
       }
     } catch (e) {
-      console.error(e)
+      console.error(e);
     }
 
-    setSubmitting(false)
-  }
+    setSubmitting(false);
+  };
 
   const onUpdate = ({ content: newContent }: { content: string }) => {
-    setContent(newContent)
+    setContent(newContent);
 
     client.writeData({
       id: `CommentDraft:${commentDraftId}`,
       data: { content: newContent },
-    })
-  }
+    });
+  };
 
   return (
     <>
@@ -178,14 +178,14 @@ const CommentForm: React.FC<CommentFormProps> = ({
               state: 'focus',
               level: parentId ? 2 : 1,
               operation: commentId ? 'edit' : 'create',
-            })
+            });
           }}
           onBlur={() => {
             analytics.trackEvent(ANALYTICS_EVENTS.COMMENT_EDITOR_CHANGE, {
               state: 'blur',
               level: parentId ? 2 : 1,
               operation: commentId ? 'update' : 'create',
-            })
+            });
           }}
           aria-label={TEXT.zh_hant.putComment}
         >
@@ -195,7 +195,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
 
       <style jsx>{styles}</style>
     </>
-  )
-}
+  );
+};
 
-export default CommentForm
+export default CommentForm;

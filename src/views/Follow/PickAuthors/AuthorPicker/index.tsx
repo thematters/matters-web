@@ -1,5 +1,5 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
 
 import {
   Button,
@@ -10,12 +10,12 @@ import {
   TextIcon,
   Translate,
   UserDigest,
-} from '~/components'
-import { QueryError } from '~/components/GQL'
+} from '~/components';
+import { QueryError } from '~/components/GQL';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
-import { AuthorPicker as AuthorPickerType } from './__generated__/AuthorPicker'
+import { AuthorPicker as AuthorPickerType } from './__generated__/AuthorPicker';
 
 const AUTHOR_PICKER = gql`
   query AuthorPicker {
@@ -37,7 +37,7 @@ const AUTHOR_PICKER = gql`
     }
   }
   ${UserDigest.Rich.fragments.user}
-`
+`;
 
 export const AuthorPicker = ({ title }: { title: React.ReactNode }) => {
   const { loading, data, error, refetch } = useQuery<AuthorPickerType>(
@@ -45,9 +45,9 @@ export const AuthorPicker = ({ title }: { title: React.ReactNode }) => {
     {
       notifyOnNetworkStatusChange: true,
     }
-  )
-  const edges = data?.viewer?.recommendation.authors.edges || []
-  const followeeCount = data?.viewer?.followees.totalCount || 0
+  );
+  const edges = data?.viewer?.recommendation.authors.edges || [];
+  const followeeCount = data?.viewer?.followees.totalCount || 0;
 
   return (
     <section className="container">
@@ -88,5 +88,5 @@ export const AuthorPicker = ({ title }: { title: React.ReactNode }) => {
 
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};

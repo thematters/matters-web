@@ -1,18 +1,18 @@
-import jump from 'jump.js'
-import { forwardRef } from 'react'
+import jump from 'jump.js';
+import { forwardRef } from 'react';
 
-import { Button, ButtonProps, TextIcon } from '~/components'
+import { Button, ButtonProps, TextIcon } from '~/components';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 type NavListItemProps = {
-  name: React.ReactNode
-  icon: React.ReactNode
-  activeIcon: React.ReactNode
-  active: boolean
-  isMediumUp: boolean
-  canScrollTop?: boolean
-} & ButtonProps
+  name: React.ReactNode;
+  icon: React.ReactNode;
+  activeIcon: React.ReactNode;
+  active: boolean;
+  isMediumUp: boolean;
+  canScrollTop?: boolean;
+} & ButtonProps;
 
 const NavListItem = forwardRef(
   (
@@ -27,19 +27,19 @@ const NavListItem = forwardRef(
     }: NavListItemProps,
     ref
   ) => {
-    const { onClick: baseOnClick } = props
+    const { onClick: baseOnClick } = props;
     const onClick = (
       event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
     ) => {
       if (baseOnClick) {
-        baseOnClick()
+        baseOnClick();
       }
 
       if (active && canScrollTop) {
-        event.preventDefault()
-        jump(document.body)
+        event.preventDefault();
+        jump(document.body);
       }
-    }
+    };
 
     return (
       <li>
@@ -64,8 +64,8 @@ const NavListItem = forwardRef(
 
         <style jsx>{styles}</style>
       </li>
-    )
+    );
   }
-)
+);
 
-export default NavListItem
+export default NavListItem;

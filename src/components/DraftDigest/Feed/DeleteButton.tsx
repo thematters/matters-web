@@ -1,24 +1,24 @@
-import gql from 'graphql-tag'
-import { useState } from 'react'
+import gql from 'graphql-tag';
+import { useState } from 'react';
 
-import { Button, Dialog, Icon, TextIcon, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
+import { Button, Dialog, Icon, TextIcon, Translate } from '~/components';
+import { useMutation } from '~/components/GQL';
 
-import { ADD_TOAST } from '~/common/enums'
+import { ADD_TOAST } from '~/common/enums';
 
-import { DeleteButtonDraft } from './__generated__/DeleteButtonDraft'
-import { DeleteDraft } from './__generated__/DeleteDraft'
-import { ViewerDrafts } from './__generated__/ViewerDrafts'
+import { DeleteButtonDraft } from './__generated__/DeleteButtonDraft';
+import { DeleteDraft } from './__generated__/DeleteDraft';
+import { ViewerDrafts } from './__generated__/ViewerDrafts';
 
 interface DeleteButtonProps {
-  draft: DeleteButtonDraft
+  draft: DeleteButtonDraft;
 }
 
 const DELETE_DRAFT = gql`
   mutation DeleteDraft($id: ID!) {
     deleteDraft(input: { id: $id })
   }
-`
+`;
 
 const ME_DRADTS = gql`
   query ViewerDrafts {
@@ -33,7 +33,7 @@ const ME_DRADTS = gql`
       }
     }
   }
-`
+`;
 
 const fragments = {
   draft: gql`
@@ -41,18 +41,18 @@ const fragments = {
       id
     }
   `,
-}
+};
 
 const DeleteButton = ({ draft }: DeleteButtonProps) => {
-  const [showDialog, setShowDialog] = useState(false)
-  const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
+  const [showDialog, setShowDialog] = useState(false);
+  const open = () => setShowDialog(true);
+  const close = () => setShowDialog(false);
 
   const [deleteDraft] = useMutation<DeleteDraft>(DELETE_DRAFT, {
     variables: { id: draft.id },
     update: (cache) => {
       try {
-        const data = cache.readQuery<ViewerDrafts>({ query: ME_DRADTS })
+        const data = cache.readQuery<ViewerDrafts>({ query: ME_DRADTS });
 
         if (
           !data ||
@@ -60,12 +60,12 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
           !data.viewer.drafts ||
           !data.viewer.drafts.edges
         ) {
-          return
+          return;
         }
 
         const edges = data.viewer.drafts.edges.filter(
           ({ node }) => node.id !== draft.id
-        )
+        );
 
         cache.writeQuery({
           query: ME_DRADTS,
@@ -78,15 +78,15 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
               },
             },
           },
-        })
+        });
       } catch (e) {
-        console.error(e)
+        console.error(e);
       }
     },
-  })
+  });
 
   const onDelete = async () => {
-    await deleteDraft()
+    await deleteDraft();
 
     window.dispatchEvent(
       new CustomEvent(ADD_TOAST, {
@@ -96,8 +96,8 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
           buttonPlacement: 'center',
         },
       })
-    )
-  }
+    );
+  };
 
   return (
     <>
@@ -136,8 +136,8 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
           <Dialog.Footer.Button
             bgColor="red"
             onClick={() => {
-              onDelete()
-              close()
+              onDelete();
+              close();
             }}
           >
             <Translate id="confirm" />
@@ -153,9 +153,9 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
         </Dialog.Footer>
       </Dialog>
     </>
-  )
-}
+  );
+};
 
-DeleteButton.fragments = fragments
+DeleteButton.fragments = fragments;
 
-export default DeleteButton
+export default DeleteButton;

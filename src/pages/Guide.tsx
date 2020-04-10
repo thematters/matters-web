@@ -1,3 +1,3 @@
-import Guide from '~/views/Guide'
+import Guide from '~/views/Guide';
 
-export default () => <Guide />
+export default () => <Guide />;

@@ -1,10 +1,10 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import { Toast, Translate } from '~/components'
+import { Toast, Translate } from '~/components';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
-import { StateArticle } from './__generated__/StateArticle'
+import { StateArticle } from './__generated__/StateArticle';
 
 const fragments = {
   article: gql`
@@ -17,24 +17,24 @@ const fragments = {
       articleState: state
     }
   `,
-}
+};
 
 const BannedHeader = () => (
   <Translate
     zh_hant="此作品因違反用戶協定而被強制隱藏。"
     zh_hans="此作品因违反用户协定而被强制隐藏。"
   />
-)
+);
 const ArchivedHeader = () => (
   <Translate zh_hant="此作品已在站內隱藏。" zh_hans="此作品已在站內隐藏。" />
-)
+);
 
 const State = ({ article }: { article: StateArticle }) => {
-  const isBanned = article.state === 'banned'
-  const isArchived = article.state === 'archived'
+  const isBanned = article.state === 'banned';
+  const isArchived = article.state === 'archived';
 
   if (article.state === 'active') {
-    return null
+    return null;
   }
 
   return (
@@ -45,9 +45,9 @@ const State = ({ article }: { article: StateArticle }) => {
       )}
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 
-State.fragments = fragments
+State.fragments = fragments;
 
-export default State
+export default State;

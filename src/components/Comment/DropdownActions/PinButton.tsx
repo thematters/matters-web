@@ -1,11 +1,11 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import { Icon, Menu, TextIcon, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
+import { Icon, Menu, TextIcon, Translate } from '~/components';
+import { useMutation } from '~/components/GQL';
 
-import { PinButtonComment } from './__generated__/PinButtonComment'
-import { PinComment } from './__generated__/PinComment'
-import { UnpinComment } from './__generated__/UnpinComment'
+import { PinButtonComment } from './__generated__/PinButtonComment';
+import { PinComment } from './__generated__/PinComment';
+import { UnpinComment } from './__generated__/UnpinComment';
 
 const PIN_COMMENT = gql`
   mutation PinComment($id: ID!) {
@@ -19,7 +19,7 @@ const PIN_COMMENT = gql`
       }
     }
   }
-`
+`;
 
 const UNPIN_COMMENT = gql`
   mutation UnpinComment($id: ID!) {
@@ -33,7 +33,7 @@ const UNPIN_COMMENT = gql`
       }
     }
   }
-`
+`;
 
 const fragments = {
   comment: gql`
@@ -48,10 +48,10 @@ const fragments = {
       }
     }
   `,
-}
+};
 
 const PinButton = ({ comment }: { comment: PinButtonComment }) => {
-  const canPin = comment.article.pinCommentLeft > 0
+  const canPin = comment.article.pinCommentLeft > 0;
   const [unpinComment] = useMutation<UnpinComment>(UNPIN_COMMENT, {
     variables: { id: comment.id },
     optimisticResponse: {
@@ -64,7 +64,7 @@ const PinButton = ({ comment }: { comment: PinButtonComment }) => {
         __typename: 'Comment',
       },
     },
-  })
+  });
   const [pinComment] = useMutation<PinComment>(PIN_COMMENT, {
     variables: { id: comment.id },
     optimisticResponse: {
@@ -77,7 +77,7 @@ const PinButton = ({ comment }: { comment: PinButtonComment }) => {
         __typename: 'Comment',
       },
     },
-  })
+  });
 
   if (comment.pinned) {
     return (
@@ -90,7 +90,7 @@ const PinButton = ({ comment }: { comment: PinButtonComment }) => {
           <Translate id="unpin" />
         </TextIcon>
       </Menu.Item>
-    )
+    );
   }
 
   return (
@@ -99,9 +99,9 @@ const PinButton = ({ comment }: { comment: PinButtonComment }) => {
         <Translate id="pin" />
       </TextIcon>
     </Menu.Item>
-  )
-}
+  );
+};
 
-PinButton.fragments = fragments
+PinButton.fragments = fragments;
 
-export default PinButton
+export default PinButton;

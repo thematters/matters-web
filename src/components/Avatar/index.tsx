@@ -1,20 +1,20 @@
-import classNames from 'classnames'
-import gql from 'graphql-tag'
+import classNames from 'classnames';
+import gql from 'graphql-tag';
 
-import ICON_AVATAR_DEFAULT from '~/static/icons/avatar-default.svg'
-import IMAGE_CIVIC_LIKER_RING from '~/static/icons/civic-liker-ring.svg'
+import ICON_AVATAR_DEFAULT from '~/static/icons/avatar-default.svg';
+import IMAGE_CIVIC_LIKER_RING from '~/static/icons/civic-liker-ring.svg';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
-import { AvatarUser } from './__generated__/AvatarUser'
+import { AvatarUser } from './__generated__/AvatarUser';
 
-export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
+export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 
 export interface AvatarProps {
-  user?: AvatarUser
-  size?: AvatarSize
-  src?: string
-  hasCivicLikerRing?: boolean
+  user?: AvatarUser;
+  size?: AvatarSize;
+  src?: string;
+  hasCivicLikerRing?: boolean;
 }
 
 const fragments = {
@@ -23,15 +23,15 @@ const fragments = {
       avatar
     }
   `,
-}
+};
 
 export const Avatar = (props: AvatarProps) => {
-  const { user, size = '', src, hasCivicLikerRing } = props
-  const source = src || user?.avatar || ICON_AVATAR_DEFAULT
+  const { user, size = '', src, hasCivicLikerRing } = props;
+  const source = src || user?.avatar || ICON_AVATAR_DEFAULT;
   const avatarClasses = classNames({
     avatar: true,
     [size]: !!size,
-  })
+  });
 
   return (
     <>
@@ -51,7 +51,7 @@ export const Avatar = (props: AvatarProps) => {
         }
       `}</style>
     </>
-  )
-}
+  );
+};
 
-Avatar.fragments = fragments
+Avatar.fragments = fragments;

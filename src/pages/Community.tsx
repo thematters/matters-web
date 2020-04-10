@@ -1,3 +1,3 @@
-import Community from '~/views/Community'
+import Community from '~/views/Community';
 
-export default () => <Community />
+export default () => <Community />;

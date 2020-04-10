@@ -1,14 +1,14 @@
-import React, { useContext } from 'react'
+import React, { useContext } from 'react';
 
-import { LanguageContext } from '~/components'
+import { LanguageContext } from '~/components';
 
-import { datetimeFormat } from '~/common/utils'
+import { datetimeFormat } from '~/common/utils';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 interface DateTimeProps {
-  date: Date | string | number
-  type?: 'absolute' | 'relative' | 'standard'
+  date: Date | string | number;
+  type?: 'absolute' | 'relative' | 'standard';
 }
 
 /**
@@ -29,7 +29,7 @@ interface DateTimeProps {
 
 export const DateTime = React.memo(
   ({ date, type = 'absolute' }: DateTimeProps) => {
-    const { lang } = useContext(LanguageContext)
+    const { lang } = useContext(LanguageContext);
 
     return (
       <time dateTime={new Date(date).toISOString()}>
@@ -37,6 +37,6 @@ export const DateTime = React.memo(
 
         <style jsx>{styles}</style>
       </time>
-    )
+    );
   }
-)
+);

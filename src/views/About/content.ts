@@ -69,4 +69,4 @@ export default {
   <li>微博: MattersLab</li>
 </ul>
   `,
-}
+};

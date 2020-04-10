@@ -1,12 +1,12 @@
-import { Dialog, Layout, Translate } from '~/components'
+import { Dialog, Layout, Translate } from '~/components';
 
-import { PATHS } from '~/common/enums'
-import { appendTarget } from '~/common/utils'
+import { PATHS } from '~/common/enums';
+import { appendTarget } from '~/common/utils';
 
 interface Props {
-  type: 'forget' | 'change'
-  purpose: 'dialog' | 'page'
-  closeDialog?: () => void
+  type: 'forget' | 'change';
+  purpose: 'dialog' | 'page';
+  closeDialog?: () => void;
 }
 
 export const PasswordChangeComplete: React.FC<Props> = ({
@@ -14,11 +14,11 @@ export const PasswordChangeComplete: React.FC<Props> = ({
   purpose,
   closeDialog,
 }) => {
-  const isForget = type === 'forget'
-  const titleId = isForget ? 'resetPassword' : 'changePassword'
+  const isForget = type === 'forget';
+  const titleId = isForget ? 'resetPassword' : 'changePassword';
   const descriptionId = isForget
     ? 'successResetPassword'
-    : 'successChangePassword'
+    : 'successChangePassword';
 
   return (
     <>
@@ -48,5 +48,5 @@ export const PasswordChangeComplete: React.FC<Props> = ({
         )}
       </Dialog.Footer>
     </>
-  )
-}
+  );
+};

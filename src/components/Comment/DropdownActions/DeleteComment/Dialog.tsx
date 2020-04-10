@@ -1,12 +1,12 @@
-import gql from 'graphql-tag'
-import { useState } from 'react'
+import gql from 'graphql-tag';
+import { useState } from 'react';
 
-import { Dialog, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
+import { Dialog, Translate } from '~/components';
+import { useMutation } from '~/components/GQL';
 
-import { ADD_TOAST } from '~/common/enums'
+import { ADD_TOAST } from '~/common/enums';
 
-import { DeleteComment } from './__generated__/DeleteComment'
+import { DeleteComment } from './__generated__/DeleteComment';
 
 const DELETE_COMMENT = gql`
   mutation DeleteComment($id: ID!) {
@@ -15,20 +15,20 @@ const DELETE_COMMENT = gql`
       state
     }
   }
-`
+`;
 
 interface DeleteCommentDialogProps {
-  commentId: string
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  commentId: string;
+  children: ({ open }: { open: () => void }) => React.ReactNode;
 }
 
 const DeleteCommentDialog = ({
   commentId,
   children,
 }: DeleteCommentDialogProps) => {
-  const [showDialog, setShowDialog] = useState(false)
-  const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
+  const [showDialog, setShowDialog] = useState(false);
+  const open = () => setShowDialog(true);
+  const close = () => setShowDialog(false);
 
   const [deleteComment] = useMutation<DeleteComment>(DELETE_COMMENT, {
     variables: { id: commentId },
@@ -39,10 +39,10 @@ const DeleteCommentDialog = ({
         __typename: 'Comment',
       },
     },
-  })
+  });
 
   const onDelete = async () => {
-    await deleteComment()
+    await deleteComment();
 
     window.dispatchEvent(
       new CustomEvent(ADD_TOAST, {
@@ -52,8 +52,8 @@ const DeleteCommentDialog = ({
           buttonPlacement: 'center',
         },
       })
-    )
-  }
+    );
+  };
 
   return (
     <>
@@ -78,8 +78,8 @@ const DeleteCommentDialog = ({
           <Dialog.Footer.Button
             bgColor="red"
             onClick={() => {
-              onDelete()
-              close()
+              onDelete();
+              close();
             }}
           >
             <Translate id="confirm" />
@@ -95,7 +95,7 @@ const DeleteCommentDialog = ({
         </Dialog.Footer>
       </Dialog>
     </>
-  )
-}
+  );
+};
 
-export default DeleteCommentDialog
+export default DeleteCommentDialog;

@@ -1,17 +1,17 @@
-import { useContext } from 'react'
+import { useContext } from 'react';
 
-import { LanguageContext } from '~/components'
+import { LanguageContext } from '~/components';
 
-import termStyles from '~/common/styles/utils/content.article.css'
-import detailsStyles from '~/common/styles/utils/details.css'
-import { translate } from '~/common/utils'
+import termStyles from '~/common/styles/utils/content.article.css';
+import detailsStyles from '~/common/styles/utils/details.css';
+import { translate } from '~/common/utils';
 
-import Privacy from './privacy'
-import styles from './styles.css'
-import ToS from './tos'
+import Privacy from './privacy';
+import styles from './styles.css';
+import ToS from './tos';
 
 export const Term = () => {
-  const { lang } = useContext(LanguageContext)
+  const { lang } = useContext(LanguageContext);
 
   return (
     <section className="term">
@@ -59,5 +59,5 @@ export const Term = () => {
         {detailsStyles}
       </style>
     </section>
-  )
-}
+  );
+};

@@ -1,15 +1,15 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
 
-import { Card, List, Spinner, Tag } from '~/components'
-import { QueryError } from '~/components/GQL'
+import { Card, List, Spinner, Tag } from '~/components';
+import { QueryError } from '~/components/GQL';
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
-import { analytics, toPath } from '~/common/utils'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums';
+import { analytics, toPath } from '~/common/utils';
 
-import SectionHeader from '../../SectionHeader'
+import SectionHeader from '../../SectionHeader';
 
-import { SidebarTags } from './__generated__/SidebarTags'
+import { SidebarTags } from './__generated__/SidebarTags';
 
 const SIDEBAR_TAGS = gql`
   query SidebarTags {
@@ -28,18 +28,18 @@ const SIDEBAR_TAGS = gql`
     }
   }
   ${Tag.fragments.tag}
-`
+`;
 
 const Tags = () => {
-  const { data, loading, error } = useQuery<SidebarTags>(SIDEBAR_TAGS)
-  const edges = data?.viewer?.recommendation.tags.edges
+  const { data, loading, error } = useQuery<SidebarTags>(SIDEBAR_TAGS);
+  const edges = data?.viewer?.recommendation.tags.edges;
 
   if (error) {
-    return <QueryError error={error} />
+    return <QueryError error={error} />;
   }
 
   if (!edges || edges.length <= 0) {
-    return null
+    return null;
   }
 
   return (
@@ -73,7 +73,7 @@ const Tags = () => {
         )}
       </List>
     </section>
-  )
-}
+  );
+};
 
-export default Tags
+export default Tags;

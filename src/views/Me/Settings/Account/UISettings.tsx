@@ -1,7 +1,7 @@
-import { PageHeader, Translate } from '~/components'
+import { PageHeader, Translate } from '~/components';
 
-import { LanguageSwitch } from './LanguageSwitch'
-import styles from './styles.css'
+import { LanguageSwitch } from './LanguageSwitch';
+import styles from './styles.css';
 
 export default () => {
   return (
@@ -19,5 +19,5 @@ export default () => {
 
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};

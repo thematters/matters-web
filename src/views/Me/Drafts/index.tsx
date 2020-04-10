@@ -1,5 +1,5 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
 
 import {
   DraftDigest,
@@ -9,12 +9,12 @@ import {
   Layout,
   List,
   Spinner,
-} from '~/components'
-import { QueryError } from '~/components/GQL'
+} from '~/components';
+import { QueryError } from '~/components/GQL';
 
-import { mergeConnections } from '~/common/utils'
+import { mergeConnections } from '~/common/utils';
 
-import { MeDraftFeed } from './__generated__/MeDraftFeed'
+import { MeDraftFeed } from './__generated__/MeDraftFeed';
 
 const ME_DRAFTS_FEED = gql`
   query MeDraftFeed($after: String) {
@@ -37,26 +37,26 @@ const ME_DRAFTS_FEED = gql`
     }
   }
   ${DraftDigest.Feed.fragments.draft}
-`
+`;
 
 const MeDrafts = () => {
   const { data, loading, error, fetchMore } = useQuery<MeDraftFeed>(
     ME_DRAFTS_FEED
-  )
+  );
 
   if (loading) {
-    return <Spinner />
+    return <Spinner />;
   }
 
   if (error) {
-    return <QueryError error={error} />
+    return <QueryError error={error} />;
   }
 
-  const connectionPath = 'viewer.drafts'
-  const { edges, pageInfo } = data?.viewer?.drafts || {}
+  const connectionPath = 'viewer.drafts';
+  const { edges, pageInfo } = data?.viewer?.drafts || {};
 
   if (!edges || edges.length <= 0 || !pageInfo) {
-    return <EmptyDraft />
+    return <EmptyDraft />;
   }
 
   const loadMore = () =>
@@ -70,7 +70,7 @@ const MeDrafts = () => {
           newData: fetchMoreResult,
           path: connectionPath,
         }),
-    })
+    });
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
@@ -82,8 +82,8 @@ const MeDrafts = () => {
         ))}
       </List>
     </InfiniteScroll>
-  )
-}
+  );
+};
 
 export default () => (
   <Layout.Main>
@@ -97,4 +97,4 @@ export default () => (
 
     <MeDrafts />
   </Layout.Main>
-)
+);

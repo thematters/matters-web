@@ -1,8 +1,8 @@
-import classNames from 'classnames'
-import Link from 'next/link'
-import { forwardRef } from 'react'
+import classNames from 'classnames';
+import Link from 'next/link';
+import { forwardRef } from 'react';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 export type ButtonWidth =
   | '2rem'
@@ -15,7 +15,7 @@ export type ButtonWidth =
   | '8rem'
   | '100%'
   | undefined
-  | null
+  | null;
 
 export type ButtonHeight =
   | '1rem'
@@ -26,9 +26,9 @@ export type ButtonHeight =
   | '2.5rem'
   | '3rem'
   | undefined
-  | null
+  | null;
 
-export type ButtonSpacingY = 0 | 'xxtight' | 'xtight' | 'tight' | 'base'
+export type ButtonSpacingY = 0 | 'xxtight' | 'xtight' | 'tight' | 'base';
 
 export type ButtonSpacingX =
   | 0
@@ -36,7 +36,7 @@ export type ButtonSpacingX =
   | 'xtight'
   | 'tight'
   | 'base'
-  | 'loose'
+  | 'loose';
 
 type ButtonColor =
   | 'white'
@@ -49,9 +49,12 @@ type ButtonColor =
   | 'green-lighter'
   | 'green'
   | 'gold'
-  | 'red'
+  | 'red';
 
-type ButtonTextColor = Extract<ButtonColor, 'white' | 'black' | 'green' | 'red'>
+type ButtonTextColor = Extract<
+  ButtonColor,
+  'white' | 'black' | 'green' | 'red'
+>;
 
 export type ButtonBgColor = Extract<
   ButtonColor,
@@ -63,33 +66,33 @@ export type ButtonBgColor = Extract<
   | 'red'
   | 'white'
   | 'half-black'
->
+>;
 
 type ButtonBgActiveColor = Extract<
   ButtonColor,
   'grey-lighter' | 'green-lighter' | 'grey-lighter-active' | 'green' | 'red'
->
+>;
 
 export interface ButtonProps {
-  size?: [ButtonWidth, ButtonHeight]
-  spacing?: [ButtonSpacingY, ButtonSpacingX]
+  size?: [ButtonWidth, ButtonHeight];
+  spacing?: [ButtonSpacingY, ButtonSpacingX];
 
-  textColor?: ButtonTextColor
-  textActiveColor?: ButtonTextColor
+  textColor?: ButtonTextColor;
+  textActiveColor?: ButtonTextColor;
 
-  bgColor?: ButtonBgColor
-  bgActiveColor?: ButtonBgActiveColor
+  bgColor?: ButtonBgColor;
+  bgActiveColor?: ButtonBgActiveColor;
 
-  borderColor?: ButtonColor
-  borderWidth?: 'sm' | 'md'
-  borderRadius?: 0 | '5rem'
+  borderColor?: ButtonColor;
+  borderWidth?: 'sm' | 'md';
+  borderRadius?: 0 | '5rem';
 
-  href?: string
-  as?: string
+  href?: string;
+  as?: string;
 
-  is?: 'span'
+  is?: 'span';
 
-  [key: string]: any
+  [key: string]: any;
 }
 
 /**
@@ -149,10 +152,10 @@ export const Button: React.FC<ButtonProps> = forwardRef(
     },
     ref
   ) => {
-    const isClickable = is !== 'span' && !restProps.disabled
-    const isTransparent = !bgColor && !borderColor
-    const [width, height] = size
-    const [spacingY, spacingX] = spacing
+    const isClickable = is !== 'span' && !restProps.disabled;
+    const isTransparent = !bgColor && !borderColor;
+    const [width, height] = size;
+    const [spacingY, spacingX] = spacing;
 
     // container
     const containerClass = classNames({
@@ -169,25 +172,25 @@ export const Button: React.FC<ButtonProps> = forwardRef(
       [`text-${textColor}`]: !!textColor,
       [`text-active-${textActiveColor}`]: !!textActiveColor && isClickable,
       [className]: !!className,
-    })
+    });
     const containerProps = {
       ...restProps,
       ref: ref as React.RefObject<any>,
       className: containerClass,
-    }
+    };
 
     // content
     const contentStyle = {
       width: (!isTransparent && width) || undefined,
       height: (!isTransparent && height) || undefined,
-    }
+    };
 
     // hotarea
     const hotAreaStyle = {
       width: width || undefined,
       height: height || undefined,
       borderRadius,
-    }
+    };
 
     // span
     if (is === 'span') {
@@ -199,7 +202,7 @@ export const Button: React.FC<ButtonProps> = forwardRef(
           </div>
           <style jsx>{styles}</style>
         </span>
-      )
+      );
     }
 
     // anchor
@@ -212,7 +215,7 @@ export const Button: React.FC<ButtonProps> = forwardRef(
           </div>
           <style jsx>{styles}</style>
         </a>
-      )
+      );
     }
 
     // link
@@ -227,7 +230,7 @@ export const Button: React.FC<ButtonProps> = forwardRef(
             <style jsx>{styles}</style>
           </a>
         </Link>
-      )
+      );
     }
 
     // button
@@ -239,6 +242,6 @@ export const Button: React.FC<ButtonProps> = forwardRef(
         </div>
         <style jsx>{styles}</style>
       </button>
-    )
+    );
   }
-)
+);

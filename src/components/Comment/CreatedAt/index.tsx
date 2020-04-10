@@ -1,18 +1,18 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import { DateTime, LinkWrapper } from '~/components'
+import { DateTime, LinkWrapper } from '~/components';
 
-import { toPath } from '~/common/utils'
+import { toPath } from '~/common/utils';
 
-import { CreatedAtComment } from './__generated__/CreatedAtComment'
+import { CreatedAtComment } from './__generated__/CreatedAtComment';
 
 export interface CreatedAtControls {
-  hasLink?: boolean
+  hasLink?: boolean;
 }
 
 export type CreatedAtProps = {
-  comment: CreatedAtComment
-} & CreatedAtControls
+  comment: CreatedAtComment;
+} & CreatedAtControls;
 
 const fragments = {
   comment: gql`
@@ -32,18 +32,18 @@ const fragments = {
       createdAt
     }
   `,
-}
+};
 
 const CreatedAt = ({ comment, hasLink }: CreatedAtProps) => {
-  const path = toPath({ page: 'commentDetail', comment })
+  const path = toPath({ page: 'commentDetail', comment });
 
   return (
     <LinkWrapper {...path} disabled={!hasLink}>
       <DateTime date={comment.createdAt} />
     </LinkWrapper>
-  )
-}
+  );
+};
 
-CreatedAt.fragments = fragments
+CreatedAt.fragments = fragments;
 
-export default CreatedAt
+export default CreatedAt;

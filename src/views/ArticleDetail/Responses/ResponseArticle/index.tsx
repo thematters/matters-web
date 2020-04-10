@@ -1,18 +1,18 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import { ArticleDigestSidebar, Translate, UserDigest } from '~/components'
+import { ArticleDigestSidebar, Translate, UserDigest } from '~/components';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
-import { ResponseArticleArticle } from './__generated__/ResponseArticleArticle'
+import { ResponseArticleArticle } from './__generated__/ResponseArticleArticle';
 
 interface ResponseArticleControls {
-  hasCover?: boolean
+  hasCover?: boolean;
 }
 
 type ResponseArticleProps = {
-  article: ResponseArticleArticle
-} & ResponseArticleControls
+  article: ResponseArticleArticle;
+} & ResponseArticleControls;
 
 const fragments = {
   article: gql`
@@ -28,7 +28,7 @@ const fragments = {
     ${UserDigest.Mini.fragments.user}
     ${ArticleDigestSidebar.fragments.article}
   `,
-}
+};
 
 const ResponseArticle = ({ hasCover, article }: ResponseArticleProps) => {
   return (
@@ -58,9 +58,9 @@ const ResponseArticle = ({ hasCover, article }: ResponseArticleProps) => {
 
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 
-ResponseArticle.fragments = fragments
+ResponseArticle.fragments = fragments;
 
-export default ResponseArticle
+export default ResponseArticle;

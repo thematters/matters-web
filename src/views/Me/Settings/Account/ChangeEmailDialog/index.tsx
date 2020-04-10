@@ -1,20 +1,20 @@
-import { useContext, useState } from 'react'
+import { useContext, useState } from 'react';
 
-import { Dialog, ViewerContext } from '~/components'
+import { Dialog, ViewerContext } from '~/components';
 
-import Complete from './Complete'
-import Confirm from './Confirm'
-import Request from './Request'
+import Complete from './Complete';
+import Confirm from './Confirm';
+import Request from './Request';
 
 interface ChangeEmailDialogProps {
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  children: ({ open }: { open: () => void }) => React.ReactNode;
 }
 
-type Step = 'request' | 'confirm' | 'complete'
+type Step = 'request' | 'confirm' | 'complete';
 
 export const ChangeEmailDialog = ({ children }: ChangeEmailDialogProps) => {
-  const viewer = useContext(ViewerContext)
-  const [step, setStep] = useState<Step>('request')
+  const viewer = useContext(ViewerContext);
+  const [step, setStep] = useState<Step>('request');
   const [data, setData] = useState<{ [key: string]: any }>({
     request: {
       next: 'confirm',
@@ -23,7 +23,7 @@ export const ChangeEmailDialog = ({ children }: ChangeEmailDialogProps) => {
     confirm: {
       next: 'complete',
     },
-  })
+  });
   const requestCallback = (codeId: string) => {
     setData((prev) => {
       return {
@@ -32,17 +32,17 @@ export const ChangeEmailDialog = ({ children }: ChangeEmailDialogProps) => {
           ...prev.request,
           codeId,
         },
-      }
-    })
-    setStep('confirm')
-  }
+      };
+    });
+    setStep('confirm');
+  };
 
-  const [showDialog, setShowDialog] = useState(false)
+  const [showDialog, setShowDialog] = useState(false);
   const open = () => {
-    setStep('request')
-    setShowDialog(true)
-  }
-  const close = () => setShowDialog(false)
+    setStep('request');
+    setShowDialog(true);
+  };
+  const close = () => setShowDialog(false);
 
   return (
     <>
@@ -73,5 +73,5 @@ export const ChangeEmailDialog = ({ children }: ChangeEmailDialogProps) => {
         {step === 'complete' && <Complete closeDialog={close} />}
       </Dialog>
     </>
-  )
-}
+  );
+};

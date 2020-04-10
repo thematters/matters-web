@@ -1,18 +1,18 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import { Card, DateTime, LinkWrapper, Title, Translate } from '~/components'
+import { Card, DateTime, LinkWrapper, Title, Translate } from '~/components';
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
-import { analytics, toPath } from '~/common/utils'
+import { ANALYTICS_EVENTS } from '~/common/enums';
+import { analytics, toPath } from '~/common/utils';
 
-import DeleteButton from './DeleteButton'
-import EditButton from './EditButton'
-import styles from './styles.css'
+import DeleteButton from './DeleteButton';
+import EditButton from './EditButton';
+import styles from './styles.css';
 
-import { DraftDigestFeedDraft } from './__generated__/DraftDigestFeedDraft'
+import { DraftDigestFeedDraft } from './__generated__/DraftDigestFeedDraft';
 
 interface DraftDigestFeedProps {
-  draft: DraftDigestFeedDraft
+  draft: DraftDigestFeedDraft;
 }
 
 const fragments = {
@@ -28,15 +28,15 @@ const fragments = {
     ${EditButton.fragments.draft}
     ${DeleteButton.fragments.draft}
   `,
-}
+};
 
 const DraftDigestFeed = ({ draft }: DraftDigestFeedProps) => {
-  const { id, title, updatedAt, slug } = draft
+  const { id, title, updatedAt, slug } = draft;
   const path = toPath({
     page: 'draftDetail',
     slug,
     id,
-  })
+  });
 
   return (
     <Card
@@ -65,9 +65,9 @@ const DraftDigestFeed = ({ draft }: DraftDigestFeedProps) => {
 
       <style jsx>{styles}</style>
     </Card>
-  )
-}
+  );
+};
 
-DraftDigestFeed.fragments = fragments
+DraftDigestFeed.fragments = fragments;
 
-export default DraftDigestFeed
+export default DraftDigestFeed;

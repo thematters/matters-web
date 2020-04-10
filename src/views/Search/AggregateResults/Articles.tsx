@@ -1,17 +1,17 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
-import _get from 'lodash/get'
-import { useRouter } from 'next/router'
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
+import _get from 'lodash/get';
+import { useRouter } from 'next/router';
 
-import { ArticleDigestTitle, Card, List, Spinner } from '~/components'
+import { ArticleDigestTitle, Card, List, Spinner } from '~/components';
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
-import { analytics, getQuery, toPath } from '~/common/utils'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums';
+import { analytics, getQuery, toPath } from '~/common/utils';
 
-import styles from './styles.css'
-import ViewMoreButton from './ViewMoreButton'
+import styles from './styles.css';
+import ViewMoreButton from './ViewMoreButton';
 
-import { SeachAggregateArticles } from './__generated__/SeachAggregateArticles'
+import { SeachAggregateArticles } from './__generated__/SeachAggregateArticles';
 
 const SEARCH_AGGREGATE_ARTICLES = gql`
   query SeachAggregateArticles($key: String!) {
@@ -32,25 +32,25 @@ const SEARCH_AGGREGATE_ARTICLES = gql`
     }
   }
   ${ArticleDigestTitle.fragments.article}
-`
+`;
 
 const AggregateArticleResults = () => {
-  const router = useRouter()
-  const q = getQuery({ router, key: 'q' })
+  const router = useRouter();
+  const q = getQuery({ router, key: 'q' });
 
   const { data, loading } = useQuery<SeachAggregateArticles>(
     SEARCH_AGGREGATE_ARTICLES,
     { variables: { key: q } }
-  )
+  );
 
   if (loading) {
-    return <Spinner />
+    return <Spinner />;
   }
 
-  const { edges, pageInfo } = data?.search || {}
+  const { edges, pageInfo } = data?.search || {};
 
   if (!edges || edges.length <= 0 || !pageInfo) {
-    return null
+    return null;
   }
 
   return (
@@ -90,7 +90,7 @@ const AggregateArticleResults = () => {
 
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 
-export default AggregateArticleResults
+export default AggregateArticleResults;

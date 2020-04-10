@@ -1,7 +1,7 @@
-import { Formik } from 'formik'
-import { useRouter } from 'next/router'
-import { useContext, useEffect, useRef, useState } from 'react'
-import { useDebounce } from 'use-debounce'
+import { Formik } from 'formik';
+import { useRouter } from 'next/router';
+import { useContext, useEffect, useRef, useState } from 'react';
+import { useDebounce } from 'use-debounce';
 
 import {
   Button,
@@ -9,18 +9,18 @@ import {
   Icon,
   LanguageContext,
   PopperInstance,
-} from '~/components'
+} from '~/components';
 
-import { INPUT_DEBOUNCE, TEXT, Z_INDEX } from '~/common/enums'
-import { getQuery, routerPush, toPath, translate } from '~/common/utils'
+import { INPUT_DEBOUNCE, TEXT, Z_INDEX } from '~/common/enums';
+import { getQuery, routerPush, toPath, translate } from '~/common/utils';
 
-import { SearchAutoComplete } from '../SearchAutoComplete'
-import { SearchOverview } from '../SearchOverview'
-import styles from './styles.css'
+import { SearchAutoComplete } from '../SearchAutoComplete';
+import { SearchOverview } from '../SearchOverview';
+import styles from './styles.css';
 
 interface SearchBarProps {
-  onChange?: (key: string) => void
-  hasDropdown?: boolean
+  onChange?: (key: string) => void;
+  hasDropdown?: boolean;
 }
 
 const SearchButton = () => (
@@ -31,38 +31,38 @@ const SearchButton = () => (
   >
     <Icon.SearchMedium size="md" color="grey-dark" />
   </Button>
-)
+);
 
 export const SearchBar: React.FC<SearchBarProps> = ({
   onChange,
   hasDropdown = true,
 }) => {
-  const router = useRouter()
-  const q = getQuery({ router, key: 'q' }) || ''
-  const { lang } = useContext(LanguageContext)
-  const [search, setSearch] = useState('')
-  const [debouncedSearch] = useDebounce(search, INPUT_DEBOUNCE)
-  const textAriaLabel = translate({ id: 'search', lang })
+  const router = useRouter();
+  const q = getQuery({ router, key: 'q' }) || '';
+  const { lang } = useContext(LanguageContext);
+  const [search, setSearch] = useState('');
+  const [debouncedSearch] = useDebounce(search, INPUT_DEBOUNCE);
+  const textAriaLabel = translate({ id: 'search', lang });
   const textPlaceholder = translate({
     zh_hant: '搜尋作品、標籤、作者',
     zh_hans: '搜索作品、标签、作者',
     lang,
-  })
+  });
 
   // dropdown
-  const instanceRef = useRef<PopperInstance>()
+  const instanceRef = useRef<PopperInstance>();
   const hideDropdown = () => {
-    instanceRef.current?.hide()
-  }
+    instanceRef.current?.hide();
+  };
   const showDropdown = () => {
-    instanceRef.current?.show()
-  }
+    instanceRef.current?.show();
+  };
 
   useEffect(() => {
     if (onChange) {
-      onChange(debouncedSearch)
+      onChange(debouncedSearch);
     }
-  }, [debouncedSearch])
+  }, [debouncedSearch]);
 
   return (
     <Formik
@@ -72,9 +72,9 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         const path = toPath({
           page: 'search',
           q: values.q.slice(0, 100),
-        })
-        routerPush(path.href, path.as)
-        hideDropdown()
+        });
+        routerPush(path.href, path.as);
+        hideDropdown();
       }}
     >
       {({ values, handleSubmit, handleChange }) => {
@@ -93,8 +93,8 @@ export const SearchBar: React.FC<SearchBarProps> = ({
                 placeholder={textPlaceholder}
                 autoCorrect="off"
                 onChange={(e) => {
-                  handleChange(e)
-                  setSearch(e.target.value)
+                  handleChange(e);
+                  setSearch(e.target.value);
                 }}
                 value={values.q}
               />
@@ -103,7 +103,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
 
               <style jsx>{styles}</style>
             </form>
-          )
+          );
         }
 
         return (
@@ -129,9 +129,9 @@ export const SearchBar: React.FC<SearchBarProps> = ({
                 placeholder={textPlaceholder}
                 value={values.q}
                 onChange={(e) => {
-                  handleChange(e)
-                  setSearch(e.target.value)
-                  showDropdown()
+                  handleChange(e);
+                  setSearch(e.target.value);
+                  showDropdown();
                 }}
                 onFocus={showDropdown}
                 onClick={showDropdown}
@@ -143,8 +143,8 @@ export const SearchBar: React.FC<SearchBarProps> = ({
               <style jsx>{styles}</style>
             </form>
           </Dropdown>
-        )
+        );
       }}
     </Formik>
-  )
-}
+  );
+};

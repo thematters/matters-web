@@ -1,6 +1,6 @@
-import { Switch } from '~/components'
+import { Switch } from '~/components';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 const SettingItem = ({
   enabled,
@@ -9,11 +9,11 @@ const SettingItem = ({
   description,
   onChange,
 }: {
-  enabled: boolean
-  loading?: boolean
-  title: string | React.ReactNode
-  description?: string | React.ReactNode
-  onChange: () => void
+  enabled: boolean;
+  loading?: boolean;
+  title: string | React.ReactNode;
+  description?: string | React.ReactNode;
+  onChange: () => void;
 }) => {
   return (
     <section className="setting-item">
@@ -26,7 +26,7 @@ const SettingItem = ({
 
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 
-export default SettingItem
+export default SettingItem;

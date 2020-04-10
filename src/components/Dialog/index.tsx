@@ -1,9 +1,9 @@
-import dynamic from 'next/dynamic'
+import dynamic from 'next/dynamic';
 
-import Content from './Content'
-import Footer from './Footer'
-import Header from './Header'
-import Message from './Message'
+import Content from './Content';
+import Footer from './Footer';
+import Header from './Header';
+import Message from './Message';
 
 /**
  * This is a responsive component which will show
@@ -28,23 +28,23 @@ import Message from './Message'
  * </Dialog>
  * ```
  */
-export type DialogOverlayProps = import('./Dialog').DialogOverlayProps
-export type DialogProps = import('./Dialog').DialogProps
+export type DialogOverlayProps = import('./Dialog').DialogOverlayProps;
+export type DialogProps = import('./Dialog').DialogProps;
 
 type DynamicDialogProps = React.ComponentType<DialogProps> & {
-  Header: typeof Header
-  Content: typeof Content
-  Footer: typeof Footer
-  Message: typeof Message
-}
+  Header: typeof Header;
+  Content: typeof Content;
+  Footer: typeof Footer;
+  Message: typeof Message;
+};
 
 const DynamicDialog = dynamic(() => import('./Dialog'), {
   ssr: false,
-}) as DynamicDialogProps
+}) as DynamicDialogProps;
 
-DynamicDialog.Header = Header
-DynamicDialog.Content = Content
-DynamicDialog.Footer = Footer
-DynamicDialog.Message = Message
+DynamicDialog.Header = Header;
+DynamicDialog.Content = Content;
+DynamicDialog.Footer = Footer;
+DynamicDialog.Message = Message;
 
-export const Dialog = DynamicDialog
+export const Dialog = DynamicDialog;

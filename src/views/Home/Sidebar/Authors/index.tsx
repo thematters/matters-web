@@ -1,5 +1,5 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
 
 import {
   Button,
@@ -9,15 +9,15 @@ import {
   TextIcon,
   Translate,
   UserDigest,
-} from '~/components'
-import { QueryError } from '~/components/GQL'
+} from '~/components';
+import { QueryError } from '~/components/GQL';
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
-import { analytics } from '~/common/utils'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums';
+import { analytics } from '~/common/utils';
 
-import SectionHeader from '../../SectionHeader'
+import SectionHeader from '../../SectionHeader';
 
-import { SidebarAuthors } from './__generated__/SidebarAuthors'
+import { SidebarAuthors } from './__generated__/SidebarAuthors';
 
 const SIDEBAR_AUTHORS = gql`
   query SidebarAuthors {
@@ -38,21 +38,21 @@ const SIDEBAR_AUTHORS = gql`
     }
   }
   ${UserDigest.Rich.fragments.user}
-`
+`;
 
 const Authors = () => {
   const { data, loading, error, refetch } = useQuery<SidebarAuthors>(
     SIDEBAR_AUTHORS,
     { notifyOnNetworkStatusChange: true }
-  )
-  const edges = data?.viewer?.recommendation.authors.edges
+  );
+  const edges = data?.viewer?.recommendation.authors.edges;
 
   if (error) {
-    return <QueryError error={error} />
+    return <QueryError error={error} />;
   }
 
   if (!edges || edges.length <= 0) {
-    return null
+    return null;
   }
 
   return (
@@ -100,7 +100,7 @@ const Authors = () => {
         </List>
       )}
     </section>
-  )
-}
+  );
+};
 
-export default Authors
+export default Authors;

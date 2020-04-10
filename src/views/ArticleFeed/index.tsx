@@ -1,5 +1,5 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
 
 import {
   ArticleDigestFeed,
@@ -9,17 +9,17 @@ import {
   Layout,
   List,
   Spinner,
-} from '~/components'
-import { QueryError } from '~/components/GQL'
+} from '~/components';
+import { QueryError } from '~/components/GQL';
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
-import { analytics, mergeConnections } from '~/common/utils'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums';
+import { analytics, mergeConnections } from '~/common/utils';
 
-import { AllIcymis } from './__generated__/AllIcymis'
-import { AllTopics } from './__generated__/AllTopics'
+import { AllIcymis } from './__generated__/AllIcymis';
+import { AllTopics } from './__generated__/AllTopics';
 
 interface ArticleFeedProp {
-  type?: 'icymi' | 'topic'
+  type?: 'icymi' | 'topic';
 }
 
 const QUERIES = {
@@ -69,33 +69,33 @@ const QUERIES = {
     }
     ${ArticleDigestFeed.fragments.article}
   `,
-}
+};
 
 const Feed = ({ type = 'topic' }: ArticleFeedProp) => {
   const { data, loading, error, fetchMore } = useQuery<AllTopics | AllIcymis>(
     QUERIES[type]
-  )
+  );
 
   if (loading) {
-    return <Spinner />
+    return <Spinner />;
   }
 
   if (error) {
-    return <QueryError error={error} />
+    return <QueryError error={error} />;
   }
 
-  const connectionPath = 'viewer.recommendation.articles'
-  const { edges, pageInfo } = data?.viewer?.recommendation.articles || {}
+  const connectionPath = 'viewer.recommendation.articles';
+  const { edges, pageInfo } = data?.viewer?.recommendation.articles || {};
 
   if (!edges || edges.length <= 0 || !pageInfo) {
-    return <EmptyArticle />
+    return <EmptyArticle />;
   }
 
   const loadMore = () => {
     analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
       type: type === 'topic' ? FEED_TYPE.ALL_TOPICS : FEED_TYPE.ALL_ICYMI,
       location: edges.length,
-    })
+    });
     return fetchMore({
       variables: {
         after: pageInfo.endCursor,
@@ -106,8 +106,8 @@ const Feed = ({ type = 'topic' }: ArticleFeedProp) => {
           newData: fetchMoreResult,
           path: connectionPath,
         }),
-    })
-  }
+    });
+  };
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
@@ -130,8 +130,8 @@ const Feed = ({ type = 'topic' }: ArticleFeedProp) => {
         ))}
       </List>
     </InfiniteScroll>
-  )
-}
+  );
+};
 
 export default ({ type = 'topic' }: ArticleFeedProp) => (
   <Layout.Main>
@@ -147,4 +147,4 @@ export default ({ type = 'topic' }: ArticleFeedProp) => (
 
     <Feed type={type} />
   </Layout.Main>
-)
+);

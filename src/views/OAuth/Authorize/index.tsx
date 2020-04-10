@@ -1,10 +1,10 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
-import getConfig from 'next/config'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import queryString from 'query-string'
-import { useContext } from 'react'
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
+import getConfig from 'next/config';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import queryString from 'query-string';
+import { useContext } from 'react';
 
 import {
   Dialog,
@@ -15,20 +15,20 @@ import {
   Translate,
   UserDigest,
   ViewerContext,
-} from '~/components'
+} from '~/components';
 
-import { PATHS } from '~/common/enums'
-import { appendTarget, getQuery, toReadableScope } from '~/common/utils'
+import { PATHS } from '~/common/enums';
+import { appendTarget, getQuery, toReadableScope } from '~/common/utils';
 
-import { Box } from '../Box'
-import styles from './styles.css'
+import { Box } from '../Box';
+import styles from './styles.css';
 
-import { OAuthClientInfo } from './__generated__/OAuthClientInfo'
+import { OAuthClientInfo } from './__generated__/OAuthClientInfo';
 
 const {
   publicRuntimeConfig: { OAUTH_URL },
-} = getConfig()
-const OAUTH_AUTHORIZE_ENDPOINT = `${OAUTH_URL}/authorize`
+} = getConfig();
+const OAUTH_AUTHORIZE_ENDPOINT = `${OAUTH_URL}/authorize`;
 
 const OAUTH_CLIENT_INFO = gql`
   query OAuthClientInfo($id: ID!) {
@@ -40,26 +40,26 @@ const OAUTH_CLIENT_INFO = gql`
       scope
     }
   }
-`
+`;
 
 const OAuthAuthorize = () => {
-  const router = useRouter()
-  const viewer = useContext(ViewerContext)
-  const { lang } = useContext(LanguageContext)
+  const router = useRouter();
+  const viewer = useContext(ViewerContext);
+  const { lang } = useContext(LanguageContext);
   const actionUrl = `${OAUTH_AUTHORIZE_ENDPOINT}?${queryString.stringify(
     router.query
-  )}`
-  const clientId = getQuery({ router, key: 'client_id' })
-  const state = getQuery({ router, key: 'state' })
-  const scope = getQuery({ router, key: 'scope' })
-  const redirectUri = getQuery({ router, key: 'redirect_uri' })
+  )}`;
+  const clientId = getQuery({ router, key: 'client_id' });
+  const state = getQuery({ router, key: 'state' });
+  const scope = getQuery({ router, key: 'scope' });
+  const redirectUri = getQuery({ router, key: 'redirect_uri' });
 
   const { data, loading } = useQuery<OAuthClientInfo>(OAUTH_CLIENT_INFO, {
     variables: { id: clientId },
-  })
+  });
 
   if (!clientId) {
-    return <Throw404 />
+    return <Throw404 />;
   }
 
   if (loading) {
@@ -67,14 +67,14 @@ const OAuthAuthorize = () => {
       <Box>
         <Spinner />
       </Box>
-    )
+    );
   }
 
   if (!data || !data.oauthClient || !data.oauthClient.id) {
-    return <Throw404 />
+    return <Throw404 />;
   }
 
-  const { avatar, website, name, scope: scopes } = data.oauthClient
+  const { avatar, website, name, scope: scopes } = data.oauthClient;
 
   return (
     <Box
@@ -114,13 +114,13 @@ const OAuthAuthorize = () => {
                 const readableScope = toReadableScope({
                   scope: s,
                   lang,
-                })
+                });
 
                 if (!readableScope) {
-                  return null
+                  return null;
                 }
 
-                return <li key={scope}>{readableScope}</li>
+                return <li key={scope}>{readableScope}</li>;
               })}
           </ul>
 
@@ -174,8 +174,8 @@ const OAuthAuthorize = () => {
 
       <style jsx>{styles}</style>
     </Box>
-  )
-}
+  );
+};
 
 export default () => (
   <Layout.Main>
@@ -185,4 +185,4 @@ export default () => (
       <OAuthAuthorize />
     </Layout.Spacing>
   </Layout.Main>
-)
+);

@@ -1,5 +1,5 @@
-import classNames from 'classnames'
-import gql from 'graphql-tag'
+import classNames from 'classnames';
+import gql from 'graphql-tag';
 
 import {
   ArticleDigestCard,
@@ -7,18 +7,18 @@ import {
   PageHeader,
   Slides,
   Translate,
-} from '~/components'
+} from '~/components';
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
-import { analytics } from '~/common/utils'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums';
+import { analytics } from '~/common/utils';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
-import { RelatedArticles as RelatedArticlesType } from './__generated__/RelatedArticles'
+import { RelatedArticles as RelatedArticlesType } from './__generated__/RelatedArticles';
 
 interface RelatedArticlesProps {
-  article: RelatedArticlesType
-  inSidebar?: boolean
+  article: RelatedArticlesType;
+  inSidebar?: boolean;
 }
 
 const fragments = {
@@ -38,33 +38,33 @@ const fragments = {
     ${ArticleDigestSidebar.fragments.article}
     ${ArticleDigestCard.fragments.article}
   `,
-}
+};
 
 const RelatedArticles = ({ article, inSidebar }: RelatedArticlesProps) => {
-  const edges = article.relatedArticles.edges
+  const edges = article.relatedArticles.edges;
 
   if (!edges || edges.length <= 0) {
-    return null
+    return null;
   }
 
   const relatedArticlesClass = classNames({
     'related-articles': true,
     inSidebar,
-  })
+  });
 
   const onClick = (i: number) => () =>
     analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
       type: FEED_TYPE.RELATED_ARTICLE,
       location: i,
       entrance: article.id,
-    })
+    });
 
   const Header = (
     <PageHeader
       title={<Translate zh_hant="推薦閱讀" zh_hans="推荐阅读" />}
       hasNoBorder
     />
-  )
+  );
 
   if (!inSidebar) {
     return (
@@ -78,7 +78,7 @@ const RelatedArticles = ({ article, inSidebar }: RelatedArticlesProps) => {
         </Slides>
         <style jsx>{styles}</style>
       </section>
-    )
+    );
   }
 
   return (
@@ -100,9 +100,9 @@ const RelatedArticles = ({ article, inSidebar }: RelatedArticlesProps) => {
 
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 
-RelatedArticles.fragments = fragments
+RelatedArticles.fragments = fragments;
 
-export default RelatedArticles
+export default RelatedArticles;

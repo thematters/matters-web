@@ -1,19 +1,19 @@
-import { Button, ButtonProps, TextIcon, Translate } from '~/components'
+import { Button, ButtonProps, TextIcon, Translate } from '~/components';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 interface SortByProps {
-  sortBy: 'hottest' | 'newest'
-  setSortBy: (sortBy: 'hottest' | 'newest') => void
+  sortBy: 'hottest' | 'newest';
+  setSortBy: (sortBy: 'hottest' | 'newest') => void;
 }
 
 const SortBy: React.FC<SortByProps> = ({ sortBy, setSortBy }) => {
-  const isHottest = sortBy === 'hottest'
-  const isNewset = sortBy === 'newest'
+  const isHottest = sortBy === 'hottest';
+  const isNewset = sortBy === 'newest';
 
   const buttonProps = {
     size: ['6rem', '2rem'],
-  } as ButtonProps
+  } as ButtonProps;
 
   return (
     <ul role="tablist">
@@ -53,7 +53,7 @@ const SortBy: React.FC<SortByProps> = ({ sortBy, setSortBy }) => {
 
       <style jsx>{styles}</style>
     </ul>
-  )
-}
+  );
+};
 
-export default SortBy
+export default SortBy;

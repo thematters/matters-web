@@ -1,6 +1,6 @@
-import classNames from 'classnames'
+import classNames from 'classnames';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 type TextIconColor =
   | 'black'
@@ -11,17 +11,17 @@ type TextIconColor =
   | 'grey-darker'
   | 'grey-dark'
   | 'white'
-  | 'red'
+  | 'red';
 
 export interface TextIconProps {
-  icon?: React.ReactNode
+  icon?: React.ReactNode;
 
-  color?: TextIconColor
-  size?: 'xs' | 'sm' | 'md-s' | 'md' | 'xm' | 'lg'
-  spacing?: 0 | 'xxxtight' | 'xxtight' | 'xtight' | 'tight' | 'base'
-  weight?: 'light' | 'normal' | 'md' | 'semibold' | 'bold'
+  color?: TextIconColor;
+  size?: 'xs' | 'sm' | 'md-s' | 'md' | 'xm' | 'lg';
+  spacing?: 0 | 'xxxtight' | 'xxtight' | 'xtight' | 'tight' | 'base';
+  weight?: 'light' | 'normal' | 'md' | 'semibold' | 'bold';
 
-  textPlacement?: 'bottom' | 'left' | 'right'
+  textPlacement?: 'bottom' | 'left' | 'right';
 }
 
 /**
@@ -59,7 +59,7 @@ export const TextIcon: React.FC<TextIconProps> = ({
     [spacing ? `spacing-${spacing}` : '']: !!spacing,
     [weight ? `weight-${weight}` : '']: !!weight,
     hasIcon: !!icon,
-  })
+  });
 
   if (textPlacement === 'left') {
     return (
@@ -70,7 +70,7 @@ export const TextIcon: React.FC<TextIconProps> = ({
 
         <style jsx>{styles}</style>
       </span>
-    )
+    );
   }
 
   return (
@@ -81,5 +81,5 @@ export const TextIcon: React.FC<TextIconProps> = ({
 
       <style jsx>{styles}</style>
     </span>
-  )
-}
+  );
+};

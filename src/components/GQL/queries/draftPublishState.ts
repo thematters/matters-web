@@ -1,6 +1,6 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import draftFragments from '~/components/GQL/fragments/draft'
+import draftFragments from '~/components/GQL/fragments/draft';
 
 export default gql`
   query DraftPublishState($id: ID!) {
@@ -11,4 +11,4 @@ export default gql`
     }
   }
   ${draftFragments.publishState}
-`
+`;

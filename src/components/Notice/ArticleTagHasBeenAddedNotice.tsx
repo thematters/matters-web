@@ -1,19 +1,19 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import { Translate } from '~/components'
+import { Translate } from '~/components';
 
-import NoticeActorAvatar from './NoticeActorAvatar'
-import NoticeActorName from './NoticeActorName'
-import NoticeArticle from './NoticeArticle'
-import NoticeHead from './NoticeHead'
-import NoticeTag from './NoticeTag'
-import styles from './styles.css'
+import NoticeActorAvatar from './NoticeActorAvatar';
+import NoticeActorName from './NoticeActorName';
+import NoticeArticle from './NoticeArticle';
+import NoticeHead from './NoticeHead';
+import NoticeTag from './NoticeTag';
+import styles from './styles.css';
 
-import { ArticleTagHasBeenAddedNotice as NoticeType } from './__generated__/ArticleTagHasBeenAddedNotice'
+import { ArticleTagHasBeenAddedNotice as NoticeType } from './__generated__/ArticleTagHasBeenAddedNotice';
 
 const ArticleTagHasBeenAddedNotice = ({ notice }: { notice: NoticeType }) => {
   if (!notice || !notice.actor) {
-    return null
+    return null;
   }
 
   return (
@@ -38,8 +38,8 @@ const ArticleTagHasBeenAddedNotice = ({ notice }: { notice: NoticeType }) => {
 
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 
 ArticleTagHasBeenAddedNotice.fragments = {
   notice: gql`
@@ -65,6 +65,6 @@ ArticleTagHasBeenAddedNotice.fragments = {
     ${NoticeHead.fragments.date}
     ${NoticeTag.fragments.tag}
   `,
-}
+};
 
-export default ArticleTagHasBeenAddedNotice
+export default ArticleTagHasBeenAddedNotice;

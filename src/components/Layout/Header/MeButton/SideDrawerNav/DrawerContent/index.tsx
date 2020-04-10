@@ -1,33 +1,33 @@
-import VisuallyHidden from '@reach/visually-hidden'
-import { useRef } from 'react'
+import VisuallyHidden from '@reach/visually-hidden';
+import { useRef } from 'react';
 
-import { Button, Menu, useOutsideClick } from '~/components'
+import { Button, Menu, useOutsideClick } from '~/components';
 
-import { KEYCODES, TEXT } from '~/common/enums'
+import { KEYCODES, TEXT } from '~/common/enums';
 
-import NavMenu from '../../../../NavMenu'
-import MeDigest from './MeDigest'
-import styles from './styles.css'
+import NavMenu from '../../../../NavMenu';
+import MeDigest from './MeDigest';
+import styles from './styles.css';
 
 interface DrawerContentProps {
-  style: React.CSSProperties
-  onDismiss: () => void
+  style: React.CSSProperties;
+  onDismiss: () => void;
 }
 
 const DrawerContent: React.FC<DrawerContentProps> = ({
   onDismiss,
   ...props
 }) => {
-  const node: React.RefObject<any> | null = useRef(null)
+  const node: React.RefObject<any> | null = useRef(null);
   const closeOnClick = (event: React.MouseEvent | React.KeyboardEvent) => {
-    const target = event.target as HTMLElement
+    const target = event.target as HTMLElement;
     if (target?.closest && target.closest('[data-clickable], a, button')) {
-      onDismiss()
+      onDismiss();
     }
-    event.stopPropagation()
-  }
+    event.stopPropagation();
+  };
 
-  useOutsideClick(node, onDismiss)
+  useOutsideClick(node, onDismiss);
 
   return (
     <nav
@@ -35,9 +35,9 @@ const DrawerContent: React.FC<DrawerContentProps> = ({
       {...props}
       onKeyDown={(event) => {
         if (event.keyCode !== KEYCODES.enter) {
-          return
+          return;
         }
-        closeOnClick(event)
+        closeOnClick(event);
       }}
       onClick={closeOnClick}
     >
@@ -58,7 +58,7 @@ const DrawerContent: React.FC<DrawerContentProps> = ({
       </footer>
       <style jsx>{styles}</style>
     </nav>
-  )
-}
+  );
+};
 
-export default DrawerContent
+export default DrawerContent;

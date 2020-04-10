@@ -1,3 +1,3 @@
-import Authors from '~/views/Authors'
+import Authors from '~/views/Authors';
 
-export default () => <Authors />
+export default () => <Authors />;

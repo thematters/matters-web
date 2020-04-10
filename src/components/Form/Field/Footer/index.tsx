@@ -1,9 +1,9 @@
-import styles from './styles.css'
+import styles from './styles.css';
 
 export interface FooterProps {
-  fieldMsgId: string
-  hint?: string | React.ReactNode
-  error?: string | React.ReactNode
+  fieldMsgId: string;
+  hint?: string | React.ReactNode;
+  error?: string | React.ReactNode;
 }
 
 const Footer: React.FC<FooterProps> = ({ fieldMsgId, hint, error }) => (
@@ -17,6 +17,6 @@ const Footer: React.FC<FooterProps> = ({ fieldMsgId, hint, error }) => (
 
     <style jsx>{styles}</style>
   </footer>
-)
+);
 
-export default Footer
+export default Footer;

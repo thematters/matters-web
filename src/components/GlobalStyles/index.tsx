@@ -1,32 +1,32 @@
-import { useEffect } from 'react'
+import { useEffect } from 'react';
 
-import { useWindowResize } from '~/components'
+import { useWindowResize } from '~/components';
 
-import defaultsStyles from '~/common/styles/bases/defaults.css'
-import resetStyles from '~/common/styles/bases/reset.css'
-import gridsStyles from '~/common/styles/layouts/grids.css'
-import displayStyles from '~/common/styles/utils/display.css'
-import interactionStyles from '~/common/styles/utils/interaction.css'
-import linkStyles from '~/common/styles/utils/link.css'
-import motionStyles from '~/common/styles/utils/motion.css'
-import tippyStyles from '~/common/styles/vendors/tippy.css'
+import defaultsStyles from '~/common/styles/bases/defaults.css';
+import resetStyles from '~/common/styles/bases/reset.css';
+import gridsStyles from '~/common/styles/layouts/grids.css';
+import displayStyles from '~/common/styles/utils/display.css';
+import interactionStyles from '~/common/styles/utils/interaction.css';
+import linkStyles from '~/common/styles/utils/link.css';
+import motionStyles from '~/common/styles/utils/motion.css';
+import tippyStyles from '~/common/styles/vendors/tippy.css';
 
 export const GlobalStyles = () => {
-  const size = useWindowResize()
-  const height = size[1]
+  const size = useWindowResize();
+  const height = size[1];
 
   useEffect(() => {
     if (height) {
       // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
-      const vh = height * 0.01
+      const vh = height * 0.01;
       // Then we set the value in the --vh custom property to the root of the document
-      document.documentElement.style.setProperty('--vh', `${vh}px`)
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
     }
-  })
+  });
 
   useEffect(() => {
-    document.documentElement.style.setProperty('--reach-dialog', '1')
-  }, [])
+    document.documentElement.style.setProperty('--reach-dialog', '1');
+  }, []);
 
   return (
     <>
@@ -61,5 +61,5 @@ export const GlobalStyles = () => {
         {tippyStyles}
       </style>
     </>
-  )
-}
+  );
+};

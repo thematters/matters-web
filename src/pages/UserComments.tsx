@@ -1,3 +1,3 @@
-import UserComments from '~/views/User/Comments'
+import UserComments from '~/views/User/Comments';
 
-export default () => <UserComments />
+export default () => <UserComments />;

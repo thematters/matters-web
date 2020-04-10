@@ -1,6 +1,6 @@
-import { useQuery } from '@apollo/react-hooks'
-import { NetworkStatus } from 'apollo-client'
-import gql from 'graphql-tag'
+import { useQuery } from '@apollo/react-hooks';
+import { NetworkStatus } from 'apollo-client';
+import gql from 'graphql-tag';
 
 import {
   ArticleDigestFeed,
@@ -8,12 +8,12 @@ import {
   InfiniteScroll,
   Layout,
   Spinner,
-} from '~/components'
-import { QueryError } from '~/components/GQL'
+} from '~/components';
+import { QueryError } from '~/components/GQL';
 
-import { mergeConnections } from '~/common/utils'
+import { mergeConnections } from '~/common/utils';
 
-import { RecommendationArticles } from './__generated__/RecommendationArticles'
+import { RecommendationArticles } from './__generated__/RecommendationArticles';
 
 const query = gql`
   query RecommendationArticles($after: String) {
@@ -38,30 +38,30 @@ const query = gql`
     }
   }
   ${ArticleDigestFeed.fragments.article}
-`
+`;
 
 const Feed = () => {
   const { data, error, loading, fetchMore, networkStatus } = useQuery<
     RecommendationArticles
   >(query, {
     notifyOnNetworkStatusChange: true,
-  })
+  });
 
-  const connectionPath = 'viewer.recommendation.recommendArticles'
-  const result = data?.viewer?.recommendation.recommendArticles
-  const { edges, pageInfo } = result || {}
-  const isNewLoading = networkStatus === NetworkStatus.loading
+  const connectionPath = 'viewer.recommendation.recommendArticles';
+  const result = data?.viewer?.recommendation.recommendArticles;
+  const { edges, pageInfo } = result || {};
+  const isNewLoading = networkStatus === NetworkStatus.loading;
 
   if (loading && (!result || isNewLoading)) {
-    return <Spinner />
+    return <Spinner />;
   }
 
   if (error) {
-    return <QueryError error={error} />
+    return <QueryError error={error} />;
   }
 
   if (!edges || edges.length <= 0 || !pageInfo) {
-    return <EmptyArticle />
+    return <EmptyArticle />;
   }
 
   return (
@@ -90,11 +90,11 @@ const Feed = () => {
         ))}
       </ul>
     </InfiniteScroll>
-  )
-}
+  );
+};
 
 export default () => (
   <Layout.Main>
     <Feed />
   </Layout.Main>
-)
+);

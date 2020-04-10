@@ -1,13 +1,13 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import { Card, Expandable } from '~/components'
-import CommentContent from '~/components/Comment/Content'
+import { Card, Expandable } from '~/components';
+import CommentContent from '~/components/Comment/Content';
 
-import { toPath } from '~/common/utils'
+import { toPath } from '~/common/utils';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
-import { NoticeComment as NoticeCommentType } from './__generated__/NoticeComment'
+import { NoticeComment as NoticeCommentType } from './__generated__/NoticeComment';
 
 const fragments = {
   comment: gql`
@@ -32,11 +32,11 @@ const fragments = {
 
     ${CommentContent.fragments.comment}
   `,
-}
+};
 
 const NoticeComment = ({ comment }: { comment: NoticeCommentType | null }) => {
   if (!comment) {
-    return null
+    return null;
   }
 
   const path =
@@ -45,7 +45,7 @@ const NoticeComment = ({ comment }: { comment: NoticeCommentType | null }) => {
           page: 'commentDetail',
           comment,
         })
-      : {}
+      : {};
 
   return (
     <section className="sub-content">
@@ -62,9 +62,9 @@ const NoticeComment = ({ comment }: { comment: NoticeCommentType | null }) => {
 
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 
-NoticeComment.fragments = fragments
+NoticeComment.fragments = fragments;
 
-export default NoticeComment
+export default NoticeComment;

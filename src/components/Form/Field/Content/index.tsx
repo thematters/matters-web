@@ -1,4 +1,4 @@
-import styles from './styles.css'
+import styles from './styles.css';
 
 const Content: React.FC = ({ children }) => (
   <section>
@@ -6,6 +6,6 @@ const Content: React.FC = ({ children }) => (
 
     <style jsx>{styles}</style>
   </section>
-)
+);
 
-export default Content
+export default Content;

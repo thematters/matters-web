@@ -1,15 +1,15 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import { ArticleDigestTitle, Card, CardProps, Tag } from '~/components'
+import { ArticleDigestTitle, Card, CardProps, Tag } from '~/components';
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
-import { analytics, toPath } from '~/common/utils'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums';
+import { analytics, toPath } from '~/common/utils';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
-import { TagFeedDigestTag } from './__generated__/TagFeedDigestTag'
+import { TagFeedDigestTag } from './__generated__/TagFeedDigestTag';
 
-type TagFeedDigestProps = { tag: TagFeedDigestTag } & CardProps
+type TagFeedDigestProps = { tag: TagFeedDigestTag } & CardProps;
 
 const fragments = {
   tag: gql`
@@ -30,13 +30,13 @@ const fragments = {
     ${Tag.fragments.tag}
     ${ArticleDigestTitle.fragments.article}
   `,
-}
+};
 
 const TagFeedDigest = ({ tag, ...cardProps }: TagFeedDigestProps) => {
   const path = toPath({
     page: 'tagDetail',
     id: tag.id,
-  })
+  });
 
   return (
     <section className="container">
@@ -71,9 +71,9 @@ const TagFeedDigest = ({ tag, ...cardProps }: TagFeedDigestProps) => {
 
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 
-TagFeedDigest.fragments = fragments
+TagFeedDigest.fragments = fragments;
 
-export default TagFeedDigest
+export default TagFeedDigest;

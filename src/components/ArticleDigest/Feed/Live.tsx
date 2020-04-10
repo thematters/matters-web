@@ -1,8 +1,8 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import { Icon } from '~/components'
+import { Icon } from '~/components';
 
-import { LiveArticle } from './__generated__/LiveArticle'
+import { LiveArticle } from './__generated__/LiveArticle';
 
 const fragments = {
   article: gql`
@@ -11,16 +11,16 @@ const fragments = {
       live
     }
   `,
-}
+};
 
 const Live = ({ article }: { article: LiveArticle }) => {
   if (!article.live) {
-    return null
+    return null;
   }
 
-  return <Icon.Live />
-}
+  return <Icon.Live />;
+};
 
-Live.fragments = fragments
+Live.fragments = fragments;
 
-export default Live
+export default Live;

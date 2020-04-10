@@ -1,4 +1,4 @@
-import { Button, TextIcon, Translate } from '~/components'
+import { Button, TextIcon, Translate } from '~/components';
 
 const CancelEditButton = ({ onClick }: { onClick: () => void }) => (
   <Button
@@ -11,6 +11,6 @@ const CancelEditButton = ({ onClick }: { onClick: () => void }) => (
       <Translate id="cancel" />
     </TextIcon>
   </Button>
-)
+);
 
-export default CancelEditButton
+export default CancelEditButton;

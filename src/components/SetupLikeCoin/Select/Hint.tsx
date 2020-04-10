@@ -1,6 +1,6 @@
-import { Translate } from '~/components'
+import { Translate } from '~/components';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 const Hint = () => (
   <p className="hint">
@@ -11,6 +11,6 @@ const Hint = () => (
 
     <style jsx>{styles}</style>
   </p>
-)
+);
 
-export default Hint
+export default Hint;

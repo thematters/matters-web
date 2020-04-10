@@ -1,26 +1,26 @@
-import classNames from 'classnames'
-import gql from 'graphql-tag'
+import classNames from 'classnames';
+import gql from 'graphql-tag';
 
-import { LinkWrapper, LinkWrapperProps, Translate } from '~/components'
+import { LinkWrapper, LinkWrapperProps, Translate } from '~/components';
 
-import { toPath } from '~/common/utils'
+import { toPath } from '~/common/utils';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
-import { ArticleDigestTitleArticle } from './__generated__/ArticleDigestTitleArticle'
+import { ArticleDigestTitleArticle } from './__generated__/ArticleDigestTitleArticle';
 
-export type ArticleDigestTitleTextSize = 'sm' | 'md-s' | 'md' | 'xm' | 'xl'
-export type ArticleDigestTitleTextWeight = 'normal' | 'md' | 'semibold'
-export type ArticleDigestTitleIs = 'h2' | 'h3' | 'h4'
+export type ArticleDigestTitleTextSize = 'sm' | 'md-s' | 'md' | 'xm' | 'xl';
+export type ArticleDigestTitleTextWeight = 'normal' | 'md' | 'semibold';
+export type ArticleDigestTitleIs = 'h2' | 'h3' | 'h4';
 
 type ArticleDigestTitleProps = {
-  article: ArticleDigestTitleArticle
+  article: ArticleDigestTitleArticle;
 
-  textSize?: ArticleDigestTitleTextSize
-  textWeight?: ArticleDigestTitleTextWeight
-  is?: ArticleDigestTitleIs
-  disabled?: boolean
-} & Pick<LinkWrapperProps, 'onClick'>
+  textSize?: ArticleDigestTitleTextSize;
+  textWeight?: ArticleDigestTitleTextWeight;
+  is?: ArticleDigestTitleIs;
+  disabled?: boolean;
+} & Pick<LinkWrapperProps, 'onClick'>;
 
 const fragments = {
   article: gql`
@@ -36,7 +36,7 @@ const fragments = {
       }
     }
   `,
-}
+};
 
 export const ArticleDigestTitle = ({
   article,
@@ -48,19 +48,19 @@ export const ArticleDigestTitle = ({
 
   ...restProps
 }: ArticleDigestTitleProps) => {
-  const { articleState: state } = article
+  const { articleState: state } = article;
   const path = toPath({
     page: 'articleDetail',
     article,
-  })
-  const isBanned = state === 'banned'
-  const title = isBanned ? <Translate id="articleBanned" /> : article.title
+  });
+  const isBanned = state === 'banned';
+  const title = isBanned ? <Translate id="articleBanned" /> : article.title;
   const titleClasses = classNames({
     title: true,
     [`text-size-${textSize}`]: !!textSize,
     [`text-weight-${textWeight}`]: !!textWeight,
-  })
-  const isClickable = !disabled && !isBanned
+  });
+  const isClickable = !disabled && !isBanned;
 
   return (
     <LinkWrapper
@@ -81,7 +81,7 @@ export const ArticleDigestTitle = ({
         <style jsx>{styles}</style>
       </>
     </LinkWrapper>
-  )
-}
+  );
+};
 
-ArticleDigestTitle.fragments = fragments
+ArticleDigestTitle.fragments = fragments;

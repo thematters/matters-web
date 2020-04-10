@@ -22,4 +22,4 @@ module.exports = {
     require('postcss-calc'),
     require('postcss-color-function'),
   ],
-}
+};

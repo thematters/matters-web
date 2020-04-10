@@ -1,16 +1,16 @@
-import ApolloClient from 'apollo-client'
-import gql from 'graphql-tag'
-import getConfig from 'next/config'
+import ApolloClient from 'apollo-client';
+import gql from 'graphql-tag';
+import getConfig from 'next/config';
 
-import { Translate, Viewer } from '~/components'
+import { Translate, Viewer } from '~/components';
 
-import { ADD_TOAST, STORE_KEY_PUSH } from '~/common/enums'
+import { ADD_TOAST, STORE_KEY_PUSH } from '~/common/enums';
 
-import { ToggleSubscribePush } from './__generated__/ToggleSubscribePush'
+import { ToggleSubscribePush } from './__generated__/ToggleSubscribePush';
 
 const {
   publicRuntimeConfig: { FIREBASE_CONFIG, FCM_VAPID_KEY },
-} = getConfig()
+} = getConfig();
 
 const TOGGLE_SUBSCRIBE_PUSH = gql`
   mutation ToggleSubscribePush($id: ID!, $enabled: Boolean!) {
@@ -18,28 +18,28 @@ const TOGGLE_SUBSCRIBE_PUSH = gql`
       id
     }
   }
-`
+`;
 
-let cachedClient: ApolloClient<any> | null = null
+let cachedClient: ApolloClient<any> | null = null;
 
 export const initializePush = async ({
   client,
   viewer,
 }: {
-  client: ApolloClient<any>
-  viewer: Viewer
+  client: ApolloClient<any>;
+  viewer: Viewer;
 }) => {
-  const firebase = await import('firebase/app')
-  await import('firebase/messaging')
+  const firebase = await import('firebase/app');
+  await import('firebase/messaging');
 
-  cachedClient = client
+  cachedClient = client;
 
   /**
    * Init Firebase
    */
   // FIXME: https://github.com/zeit/next.js/issues/1999
   if (firebase.apps.length || !process.browser) {
-    return
+    return;
   }
 
   if (firebase.messaging.isSupported()) {
@@ -51,54 +51,54 @@ export const initializePush = async ({
           __typename: 'Push',
         },
       },
-    })
+    });
   } else {
-    return
+    return;
   }
 
   // Init Firebase App
-  firebase.initializeApp(FIREBASE_CONFIG)
+  firebase.initializeApp(FIREBASE_CONFIG);
 
   // Init FCM
-  const messaging = firebase.messaging()
-  messaging.usePublicVapidKey(FCM_VAPID_KEY)
+  const messaging = firebase.messaging();
+  messaging.usePublicVapidKey(FCM_VAPID_KEY);
 
   // Register our custom path service worker
   const registration = await window.navigator.serviceWorker.register(
     '/service-worker.js'
-  )
-  console.log('[Push] SW registered: ', registration)
-  messaging.useServiceWorker(registration)
+  );
+  console.log('[Push] SW registered: ', registration);
+  messaging.useServiceWorker(registration);
 
   // Handle incoming messages. Called when:
   // - a message is received while the app has focus
   // - the user clicks on an app notification created by a service worker
   //   `messaging.setBackgroundMessageHandler` handler.
   messaging.onMessage((payload) => {
-    console.log('[Push] Message received. ', payload)
+    console.log('[Push] Message received. ', payload);
     // ...
-  })
+  });
 
   // Callback fired if Instance ID token is updated.
   messaging.onTokenRefresh(async () => {
-    await unsubscribePush()
-    await subscribePush({ silent: true })
-  })
+    await unsubscribePush();
+    await subscribePush({ silent: true });
+  });
 
   /**
    * Init push setting in local
    */
-  const push = JSON.parse(localStorage.getItem(STORE_KEY_PUSH) || '{}')
-  const isViewerPush = viewer.id === push.userId
-  const isNotificationGranted = Notification.permission === 'granted'
+  const push = JSON.parse(localStorage.getItem(STORE_KEY_PUSH) || '{}');
+  const isViewerPush = viewer.id === push.userId;
+  const isNotificationGranted = Notification.permission === 'granted';
 
   if (!viewer.id || !isNotificationGranted) {
-    return
+    return;
   }
 
   if (!isViewerPush) {
-    const token = await getToken()
-    await unsubscribePushLocally(token)
+    const token = await getToken();
+    await unsubscribePushLocally(token);
   }
 
   client.writeData({
@@ -109,20 +109,20 @@ export const initializePush = async ({
         __typename: 'Push',
       },
     },
-  })
-}
+  });
+};
 
 export const subscribePush = async (options?: { silent?: boolean }) => {
-  const { silent } = options || { silent: false }
+  const { silent } = options || { silent: false };
 
   // Request token
   if (!silent) {
-    await requestPermission()
+    await requestPermission();
   }
 
-  let token
+  let token;
   try {
-    token = await getToken()
+    token = await getToken();
   } catch (e) {
     if (!silent) {
       window.dispatchEvent(
@@ -137,20 +137,20 @@ export const subscribePush = async (options?: { silent?: boolean }) => {
             ),
           },
         })
-      )
+      );
     }
   }
 
   try {
     if (!cachedClient) {
-      throw new Error('[Push] `cachedClient` is required')
+      throw new Error('[Push] `cachedClient` is required');
     }
 
     // Send to server
     const { data } = await cachedClient.mutate<ToggleSubscribePush>({
       mutation: TOGGLE_SUBSCRIBE_PUSH,
       variables: { id: token, enabled: true },
-    })
+    });
 
     // Update local state
     cachedClient.writeData({
@@ -161,7 +161,7 @@ export const subscribePush = async (options?: { silent?: boolean }) => {
           __typename: 'Push',
         },
       },
-    })
+    });
     localStorage.setItem(
       STORE_KEY_PUSH,
       JSON.stringify({
@@ -169,7 +169,7 @@ export const subscribePush = async (options?: { silent?: boolean }) => {
         enabled: true,
         token,
       })
-    )
+    );
 
     if (!silent) {
       window.dispatchEvent(
@@ -179,7 +179,7 @@ export const subscribePush = async (options?: { silent?: boolean }) => {
             content: <Translate zh_hant="推送已開啓" zh_hans="推送已开启" />,
           },
         })
-      )
+      );
     }
   } catch (e) {
     if (!silent) {
@@ -195,23 +195,23 @@ export const subscribePush = async (options?: { silent?: boolean }) => {
             ),
           },
         })
-      )
-      console.error('[Push] Failed to subscribe push')
+      );
+      console.error('[Push] Failed to subscribe push');
     }
   }
 
-  console.log('[Push] Subscribed')
-}
+  console.log('[Push] Subscribed');
+};
 
 export const unsubscribePush = async (options?: { silent?: boolean }) => {
-  const { silent } = options || { silent: false }
-  const token = await getToken()
+  const { silent } = options || { silent: false };
+  const token = await getToken();
 
   // Delete token in local
   try {
-    await unsubscribePushLocally(token)
+    await unsubscribePushLocally(token);
   } catch (e) {
-    console.error('[Push] Failed to deleteToken in local')
+    console.error('[Push] Failed to deleteToken in local');
 
     if (!silent) {
       window.dispatchEvent(
@@ -226,10 +226,10 @@ export const unsubscribePush = async (options?: { silent?: boolean }) => {
             ),
           },
         })
-      )
+      );
     }
 
-    throw new Error('[Push] Failed to unsubscribe push')
+    throw new Error('[Push] Failed to unsubscribe push');
   }
 
   // Update local state
@@ -242,7 +242,7 @@ export const unsubscribePush = async (options?: { silent?: boolean }) => {
           __typename: 'Push',
         },
       },
-    })
+    });
   }
 
   // Delete token from server
@@ -250,54 +250,54 @@ export const unsubscribePush = async (options?: { silent?: boolean }) => {
     await cachedClient.mutate<ToggleSubscribePush>({
       mutation: TOGGLE_SUBSCRIBE_PUSH,
       variables: { id: token, enabled: false },
-    })
+    });
   }
 
-  console.log('[Push] Unsubscribed')
-}
+  console.log('[Push] Unsubscribed');
+};
 
 const unsubscribePushLocally = async (token?: string) => {
-  const firebase = await import('firebase/app')
-  const messaging = firebase.messaging()
+  const firebase = await import('firebase/app');
+  const messaging = firebase.messaging();
 
   if (token) {
-    await messaging.deleteToken(token)
+    await messaging.deleteToken(token);
   }
 
-  localStorage.removeItem(STORE_KEY_PUSH)
+  localStorage.removeItem(STORE_KEY_PUSH);
 
-  return token
-}
+  return token;
+};
 
 // Get Instance ID token. Initially this makes a network call, once retrieved
 // subsequent calls to getToken will return from cache.
 const getToken = async () => {
-  const firebase = await import('firebase/app')
-  const messaging = firebase.messaging()
+  const firebase = await import('firebase/app');
+  const messaging = firebase.messaging();
 
   try {
-    const token = await messaging.getToken()
+    const token = await messaging.getToken();
     if (token) {
-      console.log('[Push] Token: ', token)
-      return token
+      console.log('[Push] Token: ', token);
+      return token;
     } else {
       console.log(
         '[Push] No Instance ID token available. Request permission to generate one.'
-      )
+      );
     }
   } catch (e) {
-    console.error('[Push] An error occurred while retrieving token. ', e)
-    throw e
+    console.error('[Push] An error occurred while retrieving token. ', e);
+    throw e;
   }
-}
+};
 
 const requestPermission = async () => {
-  const permission = await Notification.requestPermission()
+  const permission = await Notification.requestPermission();
 
   if (permission === 'granted') {
-    console.log('[Push] Notification permission granted.')
+    console.log('[Push] Notification permission granted.');
   } else {
-    console.log('[Push] Unable to get permission to notify.')
+    console.log('[Push] Unable to get permission to notify.');
     window.dispatchEvent(
       new CustomEvent(ADD_TOAST, {
         detail: {
@@ -310,7 +310,7 @@ const requestPermission = async () => {
           ),
         },
       })
-    )
-    throw new Error('[Push] Need to grant permission')
+    );
+    throw new Error('[Push] Need to grant permission');
   }
-}
+};

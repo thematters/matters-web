@@ -1,5 +1,5 @@
-import gql from 'graphql-tag'
-import { useContext, useState } from 'react'
+import gql from 'graphql-tag';
+import { useContext, useState } from 'react';
 
 import {
   Button,
@@ -7,16 +7,16 @@ import {
   TextIcon,
   Translate,
   useCountdown,
-} from '~/components'
-import { useMutation } from '~/components/GQL'
-import { LanguageContext } from '~/components/Language'
+} from '~/components';
+import { useMutation } from '~/components/GQL';
+import { LanguageContext } from '~/components/Language';
 
-import { ADD_TOAST, SEND_CODE_COUNTDOWN } from '~/common/enums'
-import { parseFormSubmitErrors } from '~/common/utils'
+import { ADD_TOAST, SEND_CODE_COUNTDOWN } from '~/common/enums';
+import { parseFormSubmitErrors } from '~/common/utils';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
-import { SendVerificationCode } from './__generated__/SendVerificationCode'
+import { SendVerificationCode } from './__generated__/SendVerificationCode';
 
 /**
  * This component is for sending verification code to user with built-in mutation.
@@ -32,46 +32,46 @@ import { SendVerificationCode } from './__generated__/SendVerificationCode'
  */
 
 interface SendCodeButtonProps {
-  email: string
+  email: string;
   type:
     | 'register'
     | 'email_reset'
     | 'email_reset_confirm'
     | 'password_reset'
-    | 'email_verify'
-  disabled?: boolean
+    | 'email_verify';
+  disabled?: boolean;
 }
 
 export const SEND_CODE = gql`
   mutation SendVerificationCode($input: SendVerificationCodeInput!) {
     sendVerificationCode(input: $input)
   }
-`
+`;
 
 export const SendCodeButton: React.FC<SendCodeButtonProps> = ({
   email,
   type,
   disabled,
 }) => {
-  const { lang } = useContext(LanguageContext)
-  const { token } = useContext(ReCaptchaContext)
+  const { lang } = useContext(LanguageContext);
+  const { token } = useContext(ReCaptchaContext);
 
-  const [send] = useMutation<SendVerificationCode>(SEND_CODE)
-  const [sent, setSent] = useState(false)
+  const [send] = useMutation<SendVerificationCode>(SEND_CODE);
+  const [sent, setSent] = useState(false);
 
   const { countdown, setCountdown, formattedTimeLeft } = useCountdown({
     timeLeft: 0,
-  })
+  });
 
   const sendCode = async () => {
     try {
       await send({
         variables: { input: { email, type, token } },
-      })
-      setCountdown({ timeLeft: SEND_CODE_COUNTDOWN })
-      setSent(true)
+      });
+      setCountdown({ timeLeft: SEND_CODE_COUNTDOWN });
+      setSent(true);
     } catch (error) {
-      const [messages, codes] = parseFormSubmitErrors(error, lang)
+      const [messages, codes] = parseFormSubmitErrors(error, lang);
       window.dispatchEvent(
         new CustomEvent(ADD_TOAST, {
           detail: {
@@ -79,9 +79,9 @@ export const SendCodeButton: React.FC<SendCodeButtonProps> = ({
             content: messages[codes[0]],
           },
         })
-      )
+      );
     }
-  }
+  };
 
   return (
     <Button
@@ -105,5 +105,5 @@ export const SendCodeButton: React.FC<SendCodeButtonProps> = ({
         )}
       </TextIcon>
     </Button>
-  )
-}
+  );
+};

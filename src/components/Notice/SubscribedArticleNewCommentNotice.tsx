@@ -1,31 +1,31 @@
-import gql from 'graphql-tag'
-import { Fragment } from 'react'
+import gql from 'graphql-tag';
+import { Fragment } from 'react';
 
-import { Translate } from '~/components'
+import { Translate } from '~/components';
 
-import { numAbbr } from '~/common/utils'
+import { numAbbr } from '~/common/utils';
 
-import NoticeActorAvatar from './NoticeActorAvatar'
-import NoticeActorName from './NoticeActorName'
-import NoticeArticle from './NoticeArticle'
-import NoticeComment from './NoticeComment'
-import NoticeHead from './NoticeHead'
-import NoticeTypeIcon from './NoticeTypeIcon'
-import styles from './styles.css'
+import NoticeActorAvatar from './NoticeActorAvatar';
+import NoticeActorName from './NoticeActorName';
+import NoticeArticle from './NoticeArticle';
+import NoticeComment from './NoticeComment';
+import NoticeHead from './NoticeHead';
+import NoticeTypeIcon from './NoticeTypeIcon';
+import styles from './styles.css';
 
-import { SubscribedArticleNewCommentNotice as NoticeType } from './__generated__/SubscribedArticleNewCommentNotice'
+import { SubscribedArticleNewCommentNotice as NoticeType } from './__generated__/SubscribedArticleNewCommentNotice';
 
 const SubscribedArticleNewCommentNotice = ({
   notice,
 }: {
-  notice: NoticeType
+  notice: NoticeType;
 }) => {
   if (!notice || !notice.actors) {
-    return null
+    return null;
   }
 
-  const actorsCount = notice.actors.length
-  const isMultiActors = actorsCount > 1
+  const actorsCount = notice.actors.length;
+  const isMultiActors = actorsCount > 1;
 
   return (
     <section className="container">
@@ -71,8 +71,8 @@ const SubscribedArticleNewCommentNotice = ({
 
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 
 SubscribedArticleNewCommentNotice.fragments = {
   notice: gql`
@@ -98,6 +98,6 @@ SubscribedArticleNewCommentNotice.fragments = {
     ${NoticeComment.fragments.comment}
     ${NoticeHead.fragments.date}
   `,
-}
+};
 
-export default SubscribedArticleNewCommentNotice
+export default SubscribedArticleNewCommentNotice;

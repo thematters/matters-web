@@ -1,20 +1,20 @@
-import { useState } from 'react'
+import { useState } from 'react';
 
-import { Dialog } from '~/components'
+import { Dialog } from '~/components';
 
-import CommentForm, { CommentFormProps } from './CommentForm'
+import CommentForm, { CommentFormProps } from './CommentForm';
 
 type CommentFormDialogProps = {
-  children: ({ open }: { open: () => void }) => React.ReactNode
-} & Omit<CommentFormProps, 'closeDialog'>
+  children: ({ open }: { open: () => void }) => React.ReactNode;
+} & Omit<CommentFormProps, 'closeDialog'>;
 
 export const CommentFormDialog = ({
   children,
   ...props
 }: CommentFormDialogProps) => {
-  const [showDialog, setShowDialog] = useState(false)
-  const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
+  const [showDialog, setShowDialog] = useState(false);
+  const open = () => setShowDialog(true);
+  const close = () => setShowDialog(false);
 
   return (
     <>
@@ -24,5 +24,5 @@ export const CommentFormDialog = ({
         <CommentForm {...props} closeDialog={close} />
       </Dialog>
     </>
-  )
-}
+  );
+};

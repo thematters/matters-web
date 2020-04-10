@@ -1,6 +1,6 @@
-import { useQuery } from '@apollo/react-hooks'
-import { NetworkStatus } from 'apollo-client'
-import _get from 'lodash/get'
+import { useQuery } from '@apollo/react-hooks';
+import { NetworkStatus } from 'apollo-client';
+import _get from 'lodash/get';
 
 import {
   ArticleDigestFeed,
@@ -9,21 +9,21 @@ import {
   List,
   Spinner,
   useEventListener,
-} from '~/components'
-import { QueryError } from '~/components/GQL'
-import TAG_ARTICLES from '~/components/GQL/queries/tagArticles'
+} from '~/components';
+import { QueryError } from '~/components/GQL';
+import TAG_ARTICLES from '~/components/GQL/queries/tagArticles';
 
 import {
   ANALYTICS_EVENTS,
   FEED_TYPE,
   REFETCH_TAG_DETAIL_ARTICLES,
-} from '~/common/enums'
-import { analytics, mergeConnections } from '~/common/utils'
+} from '~/common/enums';
+import { analytics, mergeConnections } from '~/common/utils';
 
 import {
   TagArticles,
   TagArticles_node_Tag_articles,
-} from '~/components/GQL/queries/__generated__/TagArticles'
+} from '~/components/GQL/queries/__generated__/TagArticles';
 
 const LatestArticles = ({ id }: { id: string }) => {
   const { data, loading, error, fetchMore, refetch, networkStatus } = useQuery<
@@ -32,20 +32,20 @@ const LatestArticles = ({ id }: { id: string }) => {
     variables: { id },
     fetchPolicy: 'cache-and-network',
     notifyOnNetworkStatusChange: true,
-  })
+  });
 
-  const connectionPath = 'node.articles'
-  const articles = _get(data, connectionPath) as TagArticles_node_Tag_articles
-  const { edges, pageInfo } = articles || { edges: [], pageInfo: {} }
-  const isNewLoading = networkStatus === NetworkStatus.loading
-  const hasArticles = edges && edges.length > 0 && pageInfo
+  const connectionPath = 'node.articles';
+  const articles = _get(data, connectionPath) as TagArticles_node_Tag_articles;
+  const { edges, pageInfo } = articles || { edges: [], pageInfo: {} };
+  const isNewLoading = networkStatus === NetworkStatus.loading;
+  const hasArticles = edges && edges.length > 0 && pageInfo;
 
   const loadMore = () => {
     analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
       type: FEED_TYPE.TAG_DETAIL,
       location: edges ? edges.length : 0,
       entrance: id,
-    })
+    });
     return fetchMore({
       variables: {
         after: pageInfo.endCursor,
@@ -56,17 +56,17 @@ const LatestArticles = ({ id }: { id: string }) => {
           newData: fetchMoreResult,
           path: connectionPath,
         }),
-    })
-  }
+    });
+  };
 
   const sync = ({
     event,
     differences = 0,
   }: {
-    event: 'add' | 'delete'
-    differences?: number
+    event: 'add' | 'delete';
+    differences?: number;
   }) => {
-    const { edges: items } = _get(data, connectionPath, { edges: [] })
+    const { edges: items } = _get(data, connectionPath, { edges: [] });
     switch (event) {
       case 'add':
         refetch({
@@ -74,35 +74,35 @@ const LatestArticles = ({ id }: { id: string }) => {
             id,
             first: items.length + differences,
           },
-        })
-        break
+        });
+        break;
       case 'delete':
         refetch({
           variables: {
             id,
             first: Math.max(items.length - 1, 0),
           },
-        })
-        break
+        });
+        break;
     }
-  }
+  };
 
-  useEventListener(REFETCH_TAG_DETAIL_ARTICLES, sync)
+  useEventListener(REFETCH_TAG_DETAIL_ARTICLES, sync);
 
   if (loading && (!articles || isNewLoading)) {
-    return <Spinner />
+    return <Spinner />;
   }
 
   if (error) {
-    return <QueryError error={error} />
+    return <QueryError error={error} />;
   }
 
   if (!data || !data.node || data.node.__typename !== 'Tag') {
-    return <EmptyTagArticles />
+    return <EmptyTagArticles />;
   }
 
   if (!hasArticles) {
-    return <EmptyTagArticles />
+    return <EmptyTagArticles />;
   }
 
   return (
@@ -125,7 +125,7 @@ const LatestArticles = ({ id }: { id: string }) => {
         ))}
       </List>
     </InfiniteScroll>
-  )
-}
+  );
+};
 
-export default LatestArticles
+export default LatestArticles;

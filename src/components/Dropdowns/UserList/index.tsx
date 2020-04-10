@@ -1,15 +1,15 @@
-import { Menu, Spinner, UserDigest } from '~/components'
+import { Menu, Spinner, UserDigest } from '~/components';
 
-import { UserDigestMiniUser } from '~/components/UserDigest/Mini/__generated__/UserDigestMiniUser'
+import { UserDigestMiniUser } from '~/components/UserDigest/Mini/__generated__/UserDigestMiniUser';
 
 export const DropdownUserList = ({
   users,
   onClick,
   loading,
 }: {
-  users: UserDigestMiniUser[]
-  onClick: (user: UserDigestMiniUser) => void
-  loading?: boolean
+  users: UserDigestMiniUser[];
+  onClick: (user: UserDigestMiniUser) => void;
+  loading?: boolean;
 }) => {
   if (loading) {
     return (
@@ -18,7 +18,7 @@ export const DropdownUserList = ({
           <Spinner />
         </Menu.Item>
       </Menu>
-    )
+    );
   }
 
   return (
@@ -27,7 +27,7 @@ export const DropdownUserList = ({
         <Menu.Item
           spacing={['xtight', 'base']}
           onClick={() => {
-            onClick(user)
+            onClick(user);
           }}
           key={user.id}
         >
@@ -42,5 +42,5 @@ export const DropdownUserList = ({
         </Menu.Item>
       ))}
     </Menu>
-  )
-}
+  );
+};

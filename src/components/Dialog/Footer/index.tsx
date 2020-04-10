@@ -1,5 +1,5 @@
-import Button from './Button'
-import styles from './styles.css'
+import Button from './Button';
+import styles from './styles.css';
 
 const Footer: React.FC & { Button: typeof Button } = ({ children }) => (
   <footer>
@@ -7,8 +7,8 @@ const Footer: React.FC & { Button: typeof Button } = ({ children }) => (
 
     <style jsx>{styles}</style>
   </footer>
-)
+);
 
-Footer.Button = Button
+Footer.Button = Button;
 
-export default Footer
+export default Footer;

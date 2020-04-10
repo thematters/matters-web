@@ -1,20 +1,20 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
-import _uniqBy from 'lodash/uniqBy'
-import dynamic from 'next/dynamic'
-import { useEffect } from 'react'
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
+import _uniqBy from 'lodash/uniqBy';
+import dynamic from 'next/dynamic';
+import { useEffect } from 'react';
 
-import { Spinner } from '~/components'
-import { QueryError } from '~/components/GQL'
-import articleFragments from '~/components/GQL/fragments/article'
+import { Spinner } from '~/components';
+import { QueryError } from '~/components/GQL';
+import articleFragments from '~/components/GQL/fragments/article';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
-import { ArticleDetail_article } from '../__generated__/ArticleDetail'
+import { ArticleDetail_article } from '../__generated__/ArticleDetail';
 import {
   EditorCollection,
   EditorCollection_article_collection_edges_node,
-} from './__generated__/EditorCollection'
+} from './__generated__/EditorCollection';
 
 const EDITOR_COLLECTION = gql`
   query EditorCollection($mediaHash: String) {
@@ -23,7 +23,7 @@ const EDITOR_COLLECTION = gql`
     }
   }
   ${articleFragments.editorCollection}
-`
+`;
 
 const CollectionEditor = dynamic(
   () => import('~/components/CollectionEditor'),
@@ -31,18 +31,18 @@ const CollectionEditor = dynamic(
     ssr: false,
     loading: Spinner,
   }
-)
+);
 
 const EditingList = ({
   article,
   editingArticles,
   setEditingArticles,
 }: {
-  article: ArticleDetail_article
-  editingArticles: EditorCollection_article_collection_edges_node[]
+  article: ArticleDetail_article;
+  editingArticles: EditorCollection_article_collection_edges_node[];
   setEditingArticles: (
     articles: EditorCollection_article_collection_edges_node[]
-  ) => void
+  ) => void;
 }) => {
   const { data, loading, error } = useQuery<EditorCollection>(
     EDITOR_COLLECTION,
@@ -50,21 +50,21 @@ const EditingList = ({
       variables: { mediaHash: article.mediaHash },
       fetchPolicy: 'no-cache',
     }
-  )
-  const edges = data?.article?.collection.edges || []
+  );
+  const edges = data?.article?.collection.edges || [];
 
   // init `editingArticles` when network collection is received
-  const edgesKeys = edges.map(({ node }) => node.id).join(',') || ''
+  const edgesKeys = edges.map(({ node }) => node.id).join(',') || '';
   useEffect(() => {
-    setEditingArticles(edges.map(({ node }) => node))
-  }, [edgesKeys])
+    setEditingArticles(edges.map(({ node }) => node));
+  }, [edgesKeys]);
 
   if (loading) {
-    return <Spinner />
+    return <Spinner />;
   }
 
   if (error) {
-    return <QueryError error={error} />
+    return <QueryError error={error} />;
   }
 
   return (
@@ -76,7 +76,7 @@ const EditingList = ({
 
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 
-export default EditingList
+export default EditingList;

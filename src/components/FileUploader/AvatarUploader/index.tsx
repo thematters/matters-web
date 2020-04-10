@@ -1,47 +1,47 @@
-import VisuallyHidden from '@reach/visually-hidden'
-import classNames from 'classnames'
-import { useState } from 'react'
+import VisuallyHidden from '@reach/visually-hidden';
+import classNames from 'classnames';
+import { useState } from 'react';
 
-import { Avatar, AvatarProps, Spinner, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
-import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
-import { Icon } from '~/components/Icon'
+import { Avatar, AvatarProps, Spinner, Translate } from '~/components';
+import { useMutation } from '~/components/GQL';
+import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile';
+import { Icon } from '~/components/Icon';
 
 import {
   ACCEPTED_UPLOAD_IMAGE_TYPES,
   ADD_TOAST,
   UPLOAD_IMAGE_SIZE_LIMIT,
-} from '~/common/enums'
+} from '~/common/enums';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
-import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
+import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload';
 
 export type AvatarUploaderProps = {
-  onUpload: (assetId: string) => void
-  hasBorder?: boolean
-} & AvatarProps
+  onUpload: (assetId: string) => void;
+  hasBorder?: boolean;
+} & AvatarProps;
 
 export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
   onUpload,
   hasBorder,
   ...avatarProps
 }) => {
-  const [upload, { loading }] = useMutation<SingleFileUpload>(UPLOAD_FILE)
-  const [avatar, setAvatar] = useState<string | undefined>(avatarProps.src)
+  const [upload, { loading }] = useMutation<SingleFileUpload>(UPLOAD_FILE);
+  const [avatar, setAvatar] = useState<string | undefined>(avatarProps.src);
 
-  const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
-  const fieldId = 'avatar-upload-form'
+  const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',');
+  const fieldId = 'avatar-upload-form';
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    event.stopPropagation()
+    event.stopPropagation();
 
     if (!upload || !event.target || !event.target.files) {
-      return
+      return;
     }
 
-    const file = event.target.files[0]
-    event.target.value = ''
+    const file = event.target.files[0];
+    event.target.value = '';
 
     if (file?.size > UPLOAD_IMAGE_SIZE_LIMIT) {
       window.dispatchEvent(
@@ -56,22 +56,22 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
             ),
           },
         })
-      )
-      return
+      );
+      return;
     }
 
     try {
       const { data } = await upload({
         variables: { input: { file, type: 'avatar', entityType: 'user' } },
-      })
-      const id = data?.singleFileUpload.id
-      const path = data?.singleFileUpload.path
+      });
+      const id = data?.singleFileUpload.id;
+      const path = data?.singleFileUpload.path;
 
       if (id && path) {
-        setAvatar(path)
-        onUpload(id)
+        setAvatar(path);
+        onUpload(id);
       } else {
-        throw new Error()
+        throw new Error();
       }
     } catch (e) {
       window.dispatchEvent(
@@ -81,13 +81,13 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
             content: <Translate id="failureUploadImage" />,
           },
         })
-      )
+      );
     }
-  }
+  };
 
   const labelClass = classNames({
     'has-border': hasBorder,
-  })
+  });
 
   return (
     <label className={labelClass} htmlFor={fieldId}>
@@ -111,5 +111,5 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
 
       <style jsx>{styles}</style>
     </label>
-  )
-}
+  );
+};

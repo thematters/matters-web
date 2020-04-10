@@ -1,4 +1,4 @@
-import { Empty, Icon, Translate } from '~/components'
+import { Empty, Icon, Translate } from '~/components';
 
 export const EmptyBookmark = () => (
   <Empty
@@ -11,4 +11,4 @@ export const EmptyBookmark = () => (
       </>
     }
   />
-)
+);

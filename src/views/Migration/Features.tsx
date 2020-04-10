@@ -1,16 +1,16 @@
-import chunk from 'lodash/chunk'
+import chunk from 'lodash/chunk';
 
-import { Translate, useResponsive } from '~/components'
+import { Translate, useResponsive } from '~/components';
 
-import IMAGE_FEATURE_1 from '~/static/images/migration-feature-1.svg'
-import IMAGE_FEATURE_2 from '~/static/images/migration-feature-2.svg'
-import IMAGE_FEATURE_3 from '~/static/images/migration-feature-3.svg'
+import IMAGE_FEATURE_1 from '~/static/images/migration-feature-1.svg';
+import IMAGE_FEATURE_2 from '~/static/images/migration-feature-2.svg';
+import IMAGE_FEATURE_3 from '~/static/images/migration-feature-3.svg';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 const texts: {
-  zh_hant: Record<string, string>
-  zh_hans: Record<string, string>
+  zh_hant: Record<string, string>;
+  zh_hans: Record<string, string>;
 } = {
   zh_hant: {
     header: '搬家完成後，你將立刻獲得以下功能',
@@ -44,30 +44,30 @@ const texts: {
     likecoin: '了解什么是 LikeCoin →',
     examples: '有多优质，请看这里 →',
   },
-}
+};
 
 const likeCoinLink =
   'https://matters.news/@likecoin/' +
   '%E5%8C%96%E8%AE%9A%E7%82%BA%E8%B3%9E-%E8%AE%9A%E8%B3%9E%E5%85%AC%E6%B0%91%E6%87%B6%E4%BA%BA%E5%8C%85-' +
-  'zdpuAtWT6a2rjr75JZBzwnvy67vrxw5cBRqwnHbkFehRYHLXx'
+  'zdpuAtWT6a2rjr75JZBzwnvy67vrxw5cBRqwnHbkFehRYHLXx';
 
 const communityLink =
   'https://matters.news/@Nikko/' +
   '%E8%AE%A9%E4%B8%A7%E5%AE%B6%E4%B9%8B%E7%8A%AC%E5%86%8D%E8%B7%91%E4%B8%80%E4%BC%9A%E5%84%BF-' +
-  'zdpuB2uXYrM44Q4KfzpdAsUtiqCH7vccj79m3iqvXTJH4ZS5s'
+  'zdpuB2uXYrM44Q4KfzpdAsUtiqCH7vccj79m3iqvXTJH4ZS5s';
 
 const Feature = ({
   children,
   index,
   src,
 }: {
-  children?: React.ReactNode
-  index: number
-  src?: string
+  children?: React.ReactNode;
+  index: number;
+  src?: string;
 }) => {
-  const { zh_hant, zh_hans } = texts
-  const titleId = `title_${index}`
-  const contentId = `content_${index}`
+  const { zh_hant, zh_hans } = texts;
+  const titleId = `title_${index}`;
+  const contentId = `content_${index}`;
 
   return (
     <section className="l-col-4 l-col-md-4 l-col-lg-6 feature">
@@ -89,13 +89,13 @@ const Feature = ({
       <section className="link">{children}</section>
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 
 const Features = () => {
-  const { zh_hant, zh_hans } = texts
+  const { zh_hant, zh_hans } = texts;
 
-  const isMediumUp = useResponsive('md-up')
+  const isMediumUp = useResponsive('md-up');
 
   const items: Array<{ index: number; src?: string; children?: any }> = [
     { index: 1 },
@@ -118,12 +118,12 @@ const Features = () => {
       ),
     },
     { index: 6, src: IMAGE_FEATURE_3 },
-  ]
+  ];
 
   if (!isMediumUp) {
-    const temp = items[3]
-    items[3] = items[2]
-    items[2] = temp
+    const temp = items[3];
+    items[3] = items[2];
+    items[2] = temp;
   }
 
   return (
@@ -143,7 +143,7 @@ const Features = () => {
 
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 
-export default Features
+export default Features;

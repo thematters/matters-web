@@ -1,6 +1,6 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
-import _get from 'lodash/get'
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
+import _get from 'lodash/get';
 
 import {
   ArticleDigestTitle,
@@ -9,15 +9,15 @@ import {
   Expandable,
   Translate,
   UserDigest,
-} from '~/components'
-import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
+} from '~/components';
+import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference';
 
-import { toPath } from '~/common/utils'
+import { toPath } from '~/common/utils';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
-import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
-import { FollowComment as FollowCommentType } from './__generated__/FollowComment'
+import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference';
+import { FollowComment as FollowCommentType } from './__generated__/FollowComment';
 
 const fragments = {
   comment: gql`
@@ -42,42 +42,42 @@ const fragments = {
     ${Comment.Content.fragments.comment}
     ${Comment.FooterActions.fragments.comment}
   `,
-}
+};
 const FollowComment = ({
   comment,
   onClick,
 }: {
-  comment: FollowCommentType
-  onClick?: () => any
+  comment: FollowCommentType;
+  onClick?: () => any;
 }) => {
   const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
     variables: { id: 'local' },
-  })
-  const { viewMode } = data?.clientPreference || { viewMode: 'default' }
-  const isDefaultMode = viewMode === 'default'
+  });
+  const { viewMode } = data?.clientPreference || { viewMode: 'default' };
+  const isDefaultMode = viewMode === 'default';
 
-  const { article, author } = comment
-  const articlePath = toPath({ page: 'articleDetail', article })
+  const { article, author } = comment;
+  const articlePath = toPath({ page: 'articleDetail', article });
   const path =
     comment.state === 'active'
       ? toPath({
           page: 'commentDetail',
           comment,
         })
-      : {}
+      : {};
 
-  let userDigestProps = {}
+  let userDigestProps = {};
   if (isDefaultMode) {
     userDigestProps = {
       avatarSize: 'lg',
       textSize: 'md-s',
       textWeight: 'md',
-    }
+    };
   } else {
     userDigestProps = {
       avatarSize: 'sm',
       textSize: 'sm',
-    }
+    };
   }
 
   return (
@@ -122,9 +122,9 @@ const FollowComment = ({
 
       <style jsx>{styles}</style>
     </Card>
-  )
-}
+  );
+};
 
-FollowComment.fragments = fragments
+FollowComment.fragments = fragments;
 
-export default FollowComment
+export default FollowComment;

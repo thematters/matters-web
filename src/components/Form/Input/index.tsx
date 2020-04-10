@@ -1,5 +1,5 @@
-import Field, { FieldProps } from '../Field'
-import styles from './styles.css'
+import Field, { FieldProps } from '../Field';
+import styles from './styles.css';
 
 /**
  * Pure UI component for <input> element
@@ -18,13 +18,13 @@ import styles from './styles.css'
  */
 
 type InputProps = {
-  type: 'text' | 'password' | 'email' | 'number'
-  name: string
+  type: 'text' | 'password' | 'email' | 'number';
+  name: string;
 } & Omit<FieldProps, 'fieldMsgId'> &
   React.DetailedHTMLProps<
     React.InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
-  >
+  >;
 
 const Input: React.FC<InputProps> = ({
   type,
@@ -38,8 +38,8 @@ const Input: React.FC<InputProps> = ({
 
   ...inputProps
 }) => {
-  const fieldId = `field-${name}`
-  const fieldMsgId = `field-msg-${name}`
+  const fieldId = `field-${name}`;
+  const fieldMsgId = `field-msg-${name}`;
 
   return (
     <Field>
@@ -62,7 +62,7 @@ const Input: React.FC<InputProps> = ({
 
       <style jsx>{styles}</style>
     </Field>
-  )
-}
+  );
+};
 
-export default Input
+export default Input;

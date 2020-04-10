@@ -1,18 +1,18 @@
-import VisuallyHidden from '@reach/visually-hidden'
+import VisuallyHidden from '@reach/visually-hidden';
 
-import { Icon } from '~/components'
-import { TextIcon } from '~/components/TextIcon'
+import { Icon } from '~/components';
+import { TextIcon } from '~/components/TextIcon';
 
-import Field, { FieldProps } from '../Field'
-import styles from './styles.css'
+import Field, { FieldProps } from '../Field';
+import styles from './styles.css';
 
 type CheckBoxProps = {
-  name: string
+  name: string;
 } & Omit<FieldProps, 'fieldMsgId'> &
   React.DetailedHTMLProps<
     React.InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
-  >
+  >;
 
 const CheckBox: React.FC<CheckBoxProps> = ({
   name,
@@ -22,8 +22,8 @@ const CheckBox: React.FC<CheckBoxProps> = ({
 
   ...inputProps
 }) => {
-  const fieldId = `field-${name}`
-  const fieldMsgId = `field-msg-${name}`
+  const fieldId = `field-${name}`;
+  const fieldMsgId = `field-msg-${name}`;
 
   return (
     <Field>
@@ -57,7 +57,7 @@ const CheckBox: React.FC<CheckBoxProps> = ({
 
       <style jsx>{styles}</style>
     </Field>
-  )
-}
+  );
+};
 
-export default CheckBox
+export default CheckBox;

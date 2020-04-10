@@ -1,10 +1,10 @@
-import { Button, Icon } from '~/components'
+import { Button, Icon } from '~/components';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 interface TagProps {
-  tag: string
-  deleteTag: (tag: string) => void
+  tag: string;
+  deleteTag: (tag: string) => void;
 }
 
 const Tag = ({ tag, deleteTag }: TagProps) => (
@@ -17,6 +17,6 @@ const Tag = ({ tag, deleteTag }: TagProps) => (
 
     <style jsx>{styles}</style>
   </span>
-)
+);
 
-export default Tag
+export default Tag;

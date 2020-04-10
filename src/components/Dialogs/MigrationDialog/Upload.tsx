@@ -1,24 +1,24 @@
-import VisuallyHidden from '@reach/visually-hidden'
-import { useContext } from 'react'
+import VisuallyHidden from '@reach/visually-hidden';
+import { useContext } from 'react';
 
-import { Dialog, LoginButton, Translate, ViewerContext } from '~/components'
-import { useMutation } from '~/components/GQL'
-import MIGRATION from '~/components/GQL/mutations/migration'
+import { Dialog, LoginButton, Translate, ViewerContext } from '~/components';
+import { useMutation } from '~/components/GQL';
+import MIGRATION from '~/components/GQL/mutations/migration';
 
 import {
   ACCEPTED_UPLOAD_MIGRATION_TYPES,
   ADD_TOAST,
   UPLOAD_FILE_COUNT_LIMIT,
   UPLOAD_MIGRATION_SIZE_LIMIT,
-} from '~/common/enums'
+} from '~/common/enums';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
-import { Migration } from '~/components/GQL/mutations/__generated__/Migration'
+import { Migration } from '~/components/GQL/mutations/__generated__/Migration';
 
 const texts: {
-  zh_hant: Record<string, string>
-  zh_hans: Record<string, string>
+  zh_hant: Record<string, string>;
+  zh_hans: Record<string, string>;
 } = {
   zh_hant: {
     content_1: '選擇並上傳檔案',
@@ -38,21 +38,21 @@ const texts: {
     count_limit: '上传档案数量已达上限，最多 50 个档案',
     success: '文件上传完成',
   },
-}
+};
 
 interface MigrationDialogUploadProps {
-  nextStep: () => void
+  nextStep: () => void;
 }
 
 const MigrationDialogUpload = ({ nextStep }: MigrationDialogUploadProps) => {
-  const { zh_hant, zh_hans } = texts
-  const acceptTypes = ACCEPTED_UPLOAD_MIGRATION_TYPES.join(',')
+  const { zh_hant, zh_hans } = texts;
+  const acceptTypes = ACCEPTED_UPLOAD_MIGRATION_TYPES.join(',');
 
-  const viewer = useContext(ViewerContext)
-  const [migration, { loading }] = useMutation<Migration>(MIGRATION)
+  const viewer = useContext(ViewerContext);
+  const [migration, { loading }] = useMutation<Migration>(MIGRATION);
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    event.stopPropagation()
+    event.stopPropagation();
 
     if (!viewer.isAuthed) {
       window.dispatchEvent(
@@ -64,12 +64,12 @@ const MigrationDialogUpload = ({ nextStep }: MigrationDialogUploadProps) => {
             buttonPlacement: 'center',
           },
         })
-      )
-      return
+      );
+      return;
     }
 
     if (!migration || !event.target || !event.target.files) {
-      return
+      return;
     }
 
     if (event.target.files.length > UPLOAD_FILE_COUNT_LIMIT) {
@@ -85,18 +85,18 @@ const MigrationDialogUpload = ({ nextStep }: MigrationDialogUploadProps) => {
             ),
           },
         })
-      )
-      return
+      );
+      return;
     }
 
     // gather files
-    const items = event.target.files
-    const counter = [...Array(event.target.files.length).keys()]
-    const files: File[] = counter.map((index) => items[index])
-    event.target.value = ''
+    const items = event.target.files;
+    const counter = [...Array(event.target.files.length).keys()];
+    const files: File[] = counter.map((index) => items[index]);
+    event.target.value = '';
 
     // calculate file sizes
-    const sizes = files.reduce((sum, file) => sum + file.size, 0)
+    const sizes = files.reduce((sum, file) => sum + file.size, 0);
 
     if (sizes > UPLOAD_MIGRATION_SIZE_LIMIT) {
       window.dispatchEvent(
@@ -106,14 +106,14 @@ const MigrationDialogUpload = ({ nextStep }: MigrationDialogUploadProps) => {
             content: <Translate id="MIGRATION_REACH_LIMIT" />,
           },
         })
-      )
-      return
+      );
+      return;
     }
 
     try {
       await migration({
         variables: { input: { type: 'medium', files } },
-      })
+      });
 
       window.dispatchEvent(
         new CustomEvent(ADD_TOAST, {
@@ -124,14 +124,14 @@ const MigrationDialogUpload = ({ nextStep }: MigrationDialogUploadProps) => {
             ),
           },
         })
-      )
-      nextStep()
+      );
+      nextStep();
     } catch (error) {
       // TODO: handle other exception
     }
-  }
+  };
 
-  const fieldId = 'migration-uploader'
+  const fieldId = 'migration-uploader';
 
   return (
     <>
@@ -148,9 +148,9 @@ const MigrationDialogUpload = ({ nextStep }: MigrationDialogUploadProps) => {
           <Dialog.Footer.Button
             loading={loading}
             onClick={() => {
-              const element = document.getElementById(fieldId)
+              const element = document.getElementById(fieldId);
               if (element) {
-                element.click()
+                element.click();
               }
             }}
           >
@@ -171,7 +171,7 @@ const MigrationDialogUpload = ({ nextStep }: MigrationDialogUploadProps) => {
       </label>
       <style jsx>{styles}</style>
     </>
-  )
-}
+  );
+};
 
-export default MigrationDialogUpload
+export default MigrationDialogUpload;

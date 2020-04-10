@@ -1,11 +1,11 @@
-import { Button, ButtonProps, Icon, TextIcon } from '~/components'
+import { Button, ButtonProps, Icon, TextIcon } from '~/components';
 
 type DialogFooterButtonProps = {
-  textColor?: 'black' | 'white'
-  bgColor?: 'green' | 'grey-lighter' | 'red'
+  textColor?: 'black' | 'white';
+  bgColor?: 'green' | 'grey-lighter' | 'red';
 
-  loading?: boolean
-} & ButtonProps
+  loading?: boolean;
+} & ButtonProps;
 
 const DialogFooterButton: React.FC<DialogFooterButtonProps> = ({
   loading,
@@ -31,6 +31,6 @@ const DialogFooterButton: React.FC<DialogFooterButtonProps> = ({
       {loading ? null : children}
     </TextIcon>
   </Button>
-)
+);
 
-export default DialogFooterButton
+export default DialogFooterButton;

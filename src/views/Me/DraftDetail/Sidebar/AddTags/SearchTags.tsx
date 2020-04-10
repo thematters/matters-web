@@ -1,6 +1,6 @@
-import { useQuery } from '@apollo/react-hooks'
-import { useContext, useState } from 'react'
-import { useDebounce } from 'use-debounce/lib'
+import { useQuery } from '@apollo/react-hooks';
+import { useContext, useState } from 'react';
+import { useDebounce } from 'use-debounce/lib';
 
 import {
   Dropdown,
@@ -10,18 +10,18 @@ import {
   PopperInstance,
   Spinner,
   Translate,
-} from '~/components'
-import SEARCH_TAGS from '~/components/GQL/queries/searchTags'
+} from '~/components';
+import SEARCH_TAGS from '~/components/GQL/queries/searchTags';
 
-import { INPUT_DEBOUNCE } from '~/common/enums'
-import { numAbbr, translate } from '~/common/utils'
+import { INPUT_DEBOUNCE } from '~/common/enums';
+import { numAbbr, translate } from '~/common/utils';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 import {
   SearchTagsQuery,
   SearchTagsQuery_search_edges_node_Tag,
-} from '~/components/GQL/queries/__generated__/SearchTagsQuery'
+} from '~/components/GQL/queries/__generated__/SearchTagsQuery';
 
 const DropdownContent = ({
   tags,
@@ -29,10 +29,10 @@ const DropdownContent = ({
   addTag,
   loading,
 }: {
-  tags: SearchTagsQuery_search_edges_node_Tag[]
-  search: string
-  addTag: (tag: string) => void
-  loading: boolean
+  tags: SearchTagsQuery_search_edges_node_Tag[];
+  search: string;
+  addTag: (tag: string) => void;
+  loading: boolean;
 }) =>
   loading ? (
     <Menu width="sm">
@@ -46,7 +46,7 @@ const DropdownContent = ({
         {tags.map((tag) => (
           <Menu.Item
             onClick={() => {
-              addTag(tag.content)
+              addTag(tag.content);
             }}
             key={tag.content}
           >
@@ -61,7 +61,7 @@ const DropdownContent = ({
 
         <Menu.Item
           onClick={() => {
-            addTag(search)
+            addTag(search);
           }}
         >
           <span className="search-tag-item">
@@ -73,28 +73,28 @@ const DropdownContent = ({
 
       <style jsx>{styles}</style>
     </>
-  )
+  );
 
 const SearchTags = ({ addTag }: { addTag: (tag: string) => void }) => {
-  const { lang } = useContext(LanguageContext)
-  const [search, setSearch] = useState('')
-  const [debouncedSearch] = useDebounce(search, INPUT_DEBOUNCE)
-  const [instance, setInstance] = useState<PopperInstance | null>(null)
+  const { lang } = useContext(LanguageContext);
+  const [search, setSearch] = useState('');
+  const [debouncedSearch] = useDebounce(search, INPUT_DEBOUNCE);
+  const [instance, setInstance] = useState<PopperInstance | null>(null);
   const hideDropdown = () => {
     if (instance) {
-      instance.hide()
+      instance.hide();
     }
-  }
+  };
   const showDropdown = () => {
     if (instance) {
-      instance.show()
+      instance.show();
     }
-  }
+  };
 
   const { data, loading } = useQuery<SearchTagsQuery>(SEARCH_TAGS, {
     variables: { search: debouncedSearch },
     skip: !debouncedSearch,
-  })
+  });
 
   return (
     <>
@@ -102,7 +102,7 @@ const SearchTags = ({ addTag }: { addTag: (tag: string) => void }) => {
         trigger="manual"
         onCreate={setInstance}
         onShown={(i) => {
-          hidePopperOnClick(i)
+          hidePopperOnClick(i);
         }}
         content={
           <DropdownContent
@@ -114,8 +114,8 @@ const SearchTags = ({ addTag }: { addTag: (tag: string) => void }) => {
               ) as SearchTagsQuery_search_edges_node_Tag[]
             }
             addTag={(tag: string) => {
-              addTag(tag)
-              setSearch('')
+              addTag(tag);
+              setSearch('');
             }}
           />
         }
@@ -123,12 +123,12 @@ const SearchTags = ({ addTag }: { addTag: (tag: string) => void }) => {
         <input
           className="search-tag-input"
           onChange={(e) => {
-            const value = e.target.value
-            setSearch(value)
+            const value = e.target.value;
+            setSearch(value);
             if (value) {
-              showDropdown()
+              showDropdown();
             } else {
-              hideDropdown()
+              hideDropdown();
             }
           }}
           onFocus={() => search && showDropdown()}
@@ -144,7 +144,7 @@ const SearchTags = ({ addTag }: { addTag: (tag: string) => void }) => {
 
       <style jsx>{styles}</style>
     </>
-  )
-}
+  );
+};
 
-export default SearchTags
+export default SearchTags;

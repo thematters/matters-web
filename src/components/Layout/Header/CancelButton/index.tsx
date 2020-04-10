@@ -5,12 +5,12 @@ import {
   TextIcon,
   Translate,
   useResponsive,
-} from '~/components'
+} from '~/components';
 
-import { TEXT } from '~/common/enums'
+import { TEXT } from '~/common/enums';
 
 const CancelButton = (props: ButtonProps) => {
-  const isSmallUp = useResponsive('sm-up')
+  const isSmallUp = useResponsive('sm-up');
 
   return (
     <Button
@@ -26,7 +26,7 @@ const CancelButton = (props: ButtonProps) => {
       )}
       {isSmallUp && <Icon.CloseLarge size="lg" color="green" />}
     </Button>
-  )
-}
+  );
+};
 
-export default CancelButton
+export default CancelButton;

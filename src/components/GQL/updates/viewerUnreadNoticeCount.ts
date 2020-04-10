@@ -1,17 +1,17 @@
-import { DataProxy } from 'apollo-cache'
+import { DataProxy } from 'apollo-cache';
 
-import { UNREAD_NOTICE_COUNT } from '~/components/GQL/queries/notice'
+import { UNREAD_NOTICE_COUNT } from '~/components/GQL/queries/notice';
 
-import { UnreadNoticeCount } from '~/components/GQL/queries/__generated__/UnreadNoticeCount'
+import { UnreadNoticeCount } from '~/components/GQL/queries/__generated__/UnreadNoticeCount';
 
 const update = (cache: DataProxy) => {
   try {
     const cacheData = cache.readQuery<UnreadNoticeCount>({
       query: UNREAD_NOTICE_COUNT,
-    })
+    });
 
     if (!cacheData?.viewer?.status?.unreadNoticeCount) {
-      return
+      return;
     }
 
     cache.writeQuery({
@@ -25,10 +25,10 @@ const update = (cache: DataProxy) => {
           },
         },
       },
-    })
+    });
   } catch (e) {
-    console.error(e)
+    console.error(e);
   }
-}
+};
 
-export default update
+export default update;

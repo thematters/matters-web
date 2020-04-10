@@ -1,3 +1,3 @@
-import AuthLogin from '~/views/Auth/Login'
+import AuthLogin from '~/views/Auth/Login';
 
-export default () => <AuthLogin />
+export default () => <AuthLogin />;

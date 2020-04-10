@@ -1,26 +1,26 @@
-import gql from 'graphql-tag'
-import { useContext } from 'react'
+import gql from 'graphql-tag';
+import { useContext } from 'react';
 
-import { LikeCoinDialog, ViewerContext } from '~/components'
+import { LikeCoinDialog, ViewerContext } from '~/components';
 
-import CreatedAt, { CreatedAtControls } from '../CreatedAt'
-import DownvoteButton from './DownvoteButton'
-import ReplyButton, { ReplyButtonProps } from './ReplyButton'
-import styles from './styles.css'
-import UpvoteButton from './UpvoteButton'
+import CreatedAt, { CreatedAtControls } from '../CreatedAt';
+import DownvoteButton from './DownvoteButton';
+import ReplyButton, { ReplyButtonProps } from './ReplyButton';
+import styles from './styles.css';
+import UpvoteButton from './UpvoteButton';
 
-import { FooterActionsComment } from './__generated__/FooterActionsComment'
+import { FooterActionsComment } from './__generated__/FooterActionsComment';
 
 export type FooterActionsControls = {
-  hasReply?: boolean
-  hasCreatedAt?: boolean
-  inCard?: boolean
+  hasReply?: boolean;
+  hasCreatedAt?: boolean;
+  inCard?: boolean;
 } & CreatedAtControls &
-  Pick<ReplyButtonProps, 'commentCallback'>
+  Pick<ReplyButtonProps, 'commentCallback'>;
 
 export type FooterActionsProps = {
-  comment: FooterActionsComment
-} & FooterActionsControls
+  comment: FooterActionsComment;
+} & FooterActionsControls;
 
 const fragments = {
   comment: gql`
@@ -38,7 +38,7 @@ const fragments = {
     ${DownvoteButton.fragments.comment}
     ${CreatedAt.fragments.comment}
   `,
-}
+};
 
 const FooterActions = ({
   comment,
@@ -49,12 +49,12 @@ const FooterActions = ({
 
   ...replyButtonProps
 }: FooterActionsProps) => {
-  const viewer = useContext(ViewerContext)
+  const viewer = useContext(ViewerContext);
 
-  const { state } = comment
-  const isActive = state === 'active'
-  const isCollapsed = state === 'collapsed'
-  const isDisabled = !isActive && !isCollapsed
+  const { state } = comment;
+  const isActive = state === 'active';
+  const isCollapsed = state === 'collapsed';
+  const isDisabled = !isActive && !isCollapsed;
 
   return (
     <footer aira-label={`${comment.upvotes} 點讚、${comment.downvotes} 點踩`}>
@@ -94,9 +94,9 @@ const FooterActions = ({
       {hasCreatedAt && <CreatedAt comment={comment} hasLink={hasLink} />}
       <style jsx>{styles}</style>
     </footer>
-  )
-}
+  );
+};
 
-FooterActions.fragments = fragments
+FooterActions.fragments = fragments;
 
-export default FooterActions
+export default FooterActions;

@@ -1,13 +1,13 @@
-import classNames from 'classnames'
-import { useRouter } from 'next/router'
-import { useState } from 'react'
+import classNames from 'classnames';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 
-import { useEventListener } from '~/components'
+import { useEventListener } from '~/components';
 
-import { ADD_TOAST, PATHS, REMOVE_TOAST } from '~/common/enums'
+import { ADD_TOAST, PATHS, REMOVE_TOAST } from '~/common/enums';
 
-import { ToastWithEffect } from '../Instance'
-import styles from './styles.css'
+import { ToastWithEffect } from '../Instance';
+import styles from './styles.css';
 
 /**
  * ToastContainer is a place for managing Toast components. Use event system to
@@ -20,29 +20,32 @@ import styles from './styles.css'
  * ```
  */
 
-const prefix = 'toast-'
+const prefix = 'toast-';
 
 const Container = () => {
-  const [toasts, setToasts] = useState<any[]>([])
-  const router = useRouter()
-  const isMiscPage = router.pathname === PATHS.MIGRATION.href
+  const [toasts, setToasts] = useState<any[]>([]);
+  const router = useRouter();
+  const isMiscPage = router.pathname === PATHS.MIGRATION.href;
 
   const add = (payload: { [key: string]: any }) => {
     if (!payload || Object.keys(payload).length === 0) {
-      return false
+      return false;
     }
-    setToasts((prev) => [{ id: `${prefix}${Date.now()}`, ...payload }, ...prev])
-  }
+    setToasts((prev) => [
+      { id: `${prefix}${Date.now()}`, ...payload },
+      ...prev,
+    ]);
+  };
 
   const remove = ({ id }: { id: string }) => {
     if (!id || !id.startsWith(prefix)) {
-      return
+      return;
     }
-    setToasts((prev) => prev.filter((toast) => toast.id !== id))
-  }
+    setToasts((prev) => prev.filter((toast) => toast.id !== id));
+  };
 
-  useEventListener(ADD_TOAST, add)
-  useEventListener(REMOVE_TOAST, remove)
+  useEventListener(ADD_TOAST, add);
+  useEventListener(REMOVE_TOAST, remove);
 
   const instanceClass = isMiscPage
     ? classNames(
@@ -54,7 +57,7 @@ const Container = () => {
         'l-col-lg-6',
         'l-offset-lg-3'
       )
-    : classNames('l-col-three-mid')
+    : classNames('l-col-three-mid');
 
   return (
     <>
@@ -70,7 +73,7 @@ const Container = () => {
       </section>
       <style jsx>{styles}</style>
     </>
-  )
-}
+  );
+};
 
-export default Container
+export default Container;

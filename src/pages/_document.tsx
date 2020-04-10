@@ -1,46 +1,46 @@
-import _get from 'lodash/get'
-import getConfig from 'next/config'
+import _get from 'lodash/get';
+import getConfig from 'next/config';
 import Document, {
   DocumentContext,
   Head,
   Main,
   NextScript,
-} from 'next/document'
-import React from 'react'
+} from 'next/document';
+import React from 'react';
 
-import { GA_TRACKING_ID } from '~/common/enums'
-import { langConvert } from '~/common/utils'
+import { GA_TRACKING_ID } from '~/common/enums';
+import { langConvert } from '~/common/utils';
 
 const {
   publicRuntimeConfig: { SEGMENT_KEY },
-} = getConfig()
+} = getConfig();
 
 interface MattersDocumentProps {
-  lang: HTMLLanguage
+  lang: HTMLLanguage;
 }
 
 class MattersDocument extends Document<MattersDocumentProps> {
   public static async getInitialProps(ctx: DocumentContext) {
-    const initialProps = await Document.getInitialProps(ctx)
-    const heads = initialProps.head
+    const initialProps = await Document.getInitialProps(ctx);
+    const heads = initialProps.head;
 
-    let lang: HTMLLanguage = 'zh-Hant'
+    let lang: HTMLLanguage = 'zh-Hant';
     if (heads) {
       heads.every((head) => {
-        const property = _get(head, 'props.property')
-        const content = _get(head, 'props.content')
+        const property = _get(head, 'props.property');
+        const content = _get(head, 'props.content');
         if (property === 'og:locale') {
-          lang = langConvert.og2html(content)
-          return false
+          lang = langConvert.og2html(content);
+          return false;
         }
-        return true
-      })
+        return true;
+      });
     }
 
     return {
       lang,
       ...initialProps,
-    }
+    };
   }
 
   public render() {
@@ -80,8 +80,8 @@ class MattersDocument extends Document<MattersDocumentProps> {
           <NextScript />
         </body>
       </html>
-    )
+    );
   }
 }
 
-export default MattersDocument
+export default MattersDocument;

@@ -6,19 +6,19 @@ import {
   IconSize,
   ShareDialog,
   ShareDialogProps,
-} from '~/components'
+} from '~/components';
 
-import { TEXT } from '~/common/enums'
+import { TEXT } from '~/common/enums';
 
 type ShareButtonBaseProps = {
-  hasIcon?: boolean
-  iconSize?: Extract<IconSize, 'md-s'>
-  iconColor?: Extract<IconColor, 'grey' | 'black'>
-  inCard: boolean
-} & Omit<ShareDialogProps, 'children'>
+  hasIcon?: boolean;
+  iconSize?: Extract<IconSize, 'md-s'>;
+  iconColor?: Extract<IconColor, 'grey' | 'black'>;
+  inCard: boolean;
+} & Omit<ShareDialogProps, 'children'>;
 
 type ShareButtonProps = ShareButtonBaseProps &
-  Pick<ButtonProps, 'bgColor' | 'size' | 'spacing'>
+  Pick<ButtonProps, 'bgColor' | 'size' | 'spacing'>;
 
 export const ShareButton: React.FC<ShareButtonProps> = ({
   children,
@@ -32,13 +32,13 @@ export const ShareButton: React.FC<ShareButtonProps> = ({
   spacing,
   ...props
 }) => {
-  const isGreen = bgColor === 'green'
+  const isGreen = bgColor === 'green';
   const buttonBgActiveColor = isGreen
     ? undefined
     : inCard
     ? 'grey-lighter-active'
-    : 'grey-lighter'
-  const buttonSpacing = spacing || ['xtight', 'xtight']
+    : 'grey-lighter';
+  const buttonSpacing = spacing || ['xtight', 'xtight'];
 
   return (
     <ShareDialog {...props}>
@@ -57,5 +57,5 @@ export const ShareButton: React.FC<ShareButtonProps> = ({
         </Button>
       )}
     </ShareDialog>
-  )
-}
+  );
+};

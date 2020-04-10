@@ -1,6 +1,6 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
-import { useEffect } from 'react'
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
+import { useEffect } from 'react';
 
 import {
   EmptyNotice,
@@ -11,14 +11,14 @@ import {
   Notice,
   Spinner,
   useResponsive,
-} from '~/components'
-import { useMutation } from '~/components/GQL'
-import updateViewerUnreadNoticeCount from '~/components/GQL/updates/viewerUnreadNoticeCount'
+} from '~/components';
+import { useMutation } from '~/components/GQL';
+import updateViewerUnreadNoticeCount from '~/components/GQL/updates/viewerUnreadNoticeCount';
 
-import { mergeConnections } from '~/common/utils'
+import { mergeConnections } from '~/common/utils';
 
-import { MarkAllNoticesAsRead } from './__generated__/MarkAllNoticesAsRead'
-import { MeNotifications } from './__generated__/MeNotifications'
+import { MarkAllNoticesAsRead } from './__generated__/MarkAllNoticesAsRead';
+import { MeNotifications } from './__generated__/MeNotifications';
 
 const ME_NOTIFICATIONS = gql`
   query MeNotifications($after: String) {
@@ -40,13 +40,13 @@ const ME_NOTIFICATIONS = gql`
     }
   }
   ${Notice.fragments.notice}
-`
+`;
 
 const MARK_ALL_NOTICES_AS_READ = gql`
   mutation MarkAllNoticesAsRead {
     markAllNoticesAsRead
   }
-`
+`;
 
 const BaseNotifications = () => {
   const [markAllNoticesAsRead] = useMutation<MarkAllNoticesAsRead>(
@@ -54,25 +54,25 @@ const BaseNotifications = () => {
     {
       update: updateViewerUnreadNoticeCount,
     }
-  )
+  );
   const { data, loading, fetchMore } = useQuery<
     MeNotifications,
     { first: number; after?: number }
-  >(ME_NOTIFICATIONS)
+  >(ME_NOTIFICATIONS);
 
   useEffect(() => {
-    markAllNoticesAsRead()
-  }, [])
+    markAllNoticesAsRead();
+  }, []);
 
-  const connectionPath = 'viewer.notices'
-  const { edges, pageInfo } = data?.viewer?.notices || {}
+  const connectionPath = 'viewer.notices';
+  const { edges, pageInfo } = data?.viewer?.notices || {};
 
   if (loading) {
-    return <Spinner />
+    return <Spinner />;
   }
 
   if (!edges || edges.length <= 0 || !pageInfo) {
-    return <EmptyNotice />
+    return <EmptyNotice />;
   }
 
   const loadMore = () =>
@@ -87,7 +87,7 @@ const BaseNotifications = () => {
           newData: fetchMoreResult,
           path: connectionPath,
         }),
-    })
+    });
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
@@ -99,11 +99,11 @@ const BaseNotifications = () => {
         ))}
       </List>
     </InfiniteScroll>
-  )
-}
+  );
+};
 
 const Notifications = () => {
-  const isSmallUp = useResponsive('sm-up')
+  const isSmallUp = useResponsive('sm-up');
 
   return (
     <Layout.Main>
@@ -118,7 +118,7 @@ const Notifications = () => {
 
       <BaseNotifications />
     </Layout.Main>
-  )
-}
+  );
+};
 
-export default Notifications
+export default Notifications;

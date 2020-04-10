@@ -1,15 +1,15 @@
-import gql from 'graphql-tag'
-import _get from 'lodash/get'
+import gql from 'graphql-tag';
+import _get from 'lodash/get';
 
-import { AppreciatorsDialog, Translate } from '~/components'
-import { Avatar } from '~/components/Avatar'
+import { AppreciatorsDialog, Translate } from '~/components';
+import { Avatar } from '~/components/Avatar';
 
-import { TEXT } from '~/common/enums'
-import { numAbbr } from '~/common/utils'
+import { TEXT } from '~/common/enums';
+import { numAbbr } from '~/common/utils';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
-import { AppreciatorsArticle } from './__generated__/AppreciatorsArticle'
+import { AppreciatorsArticle } from './__generated__/AppreciatorsArticle';
 
 const fragments = {
   article: gql`
@@ -35,19 +35,19 @@ const fragments = {
     ${AppreciatorsDialog.fragments.article}
     ${Avatar.fragments.user}
   `,
-}
+};
 
 const Appreciators = ({ article }: { article: AppreciatorsArticle }) => {
-  const edges = article.received.edges
-  const totalReceivedCount = article.appreciationsReceivedTotal
-  const appreciatorCount = Math.min(article.received.totalCount, 99)
+  const edges = article.received.edges;
+  const totalReceivedCount = article.appreciationsReceivedTotal;
+  const appreciatorCount = Math.min(article.received.totalCount, 99);
   const appreciators = [
     ...(edges?.map(({ node }) => node.sender).filter((user) => !!user) || []),
     null,
     null,
     null,
     null,
-  ].slice(0, appreciatorCount > 4 ? 3 : 4)
+  ].slice(0, appreciatorCount > 4 ? 3 : 4);
 
   return (
     <AppreciatorsDialog article={article}>
@@ -90,9 +90,9 @@ const Appreciators = ({ article }: { article: AppreciatorsArticle }) => {
         </button>
       )}
     </AppreciatorsDialog>
-  )
-}
+  );
+};
 
-Appreciators.fragments = fragments
+Appreciators.fragments = fragments;
 
-export default Appreciators
+export default Appreciators;

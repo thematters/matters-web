@@ -1,69 +1,69 @@
-import { useQuery } from '@apollo/react-hooks'
-import { useState } from 'react'
+import { useQuery } from '@apollo/react-hooks';
+import { useState } from 'react';
 
-import { Dialog, Translate } from '~/components'
-import CLIENT_INFO from '~/components/GQL/queries/clientInfo'
+import { Dialog, Translate } from '~/components';
+import CLIENT_INFO from '~/components/GQL/queries/clientInfo';
 
-import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
-import { analytics } from '~/common/utils'
+import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums';
+import { analytics } from '~/common/utils';
 
-import Copy from './Copy'
-import Douban from './Douban'
-import Email from './Email'
-import Facebook from './Facebook'
-import LINE from './LINE'
-import styles from './styles.css'
-import Telegram from './Telegram'
-import Twitter from './Twitter'
-import Weibo from './Weibo'
-import WhatsApp from './WhatsApp'
+import Copy from './Copy';
+import Douban from './Douban';
+import Email from './Email';
+import Facebook from './Facebook';
+import LINE from './LINE';
+import styles from './styles.css';
+import Telegram from './Telegram';
+import Twitter from './Twitter';
+import Weibo from './Weibo';
+import WhatsApp from './WhatsApp';
 
-import { ClientInfo } from '~/components/GQL/queries/__generated__/ClientInfo'
+import { ClientInfo } from '~/components/GQL/queries/__generated__/ClientInfo';
 
 export interface ShareDialogProps {
-  title?: string
-  path?: string
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  title?: string;
+  path?: string;
+  children: ({ open }: { open: () => void }) => React.ReactNode;
 }
 
 export const ShareDialog = ({ title, path, children }: ShareDialogProps) => {
-  const [showDialog, setShowDialog] = useState(false)
-  const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
+  const [showDialog, setShowDialog] = useState(false);
+  const open = () => setShowDialog(true);
+  const close = () => setShowDialog(false);
 
   const { data } = useQuery<ClientInfo>(CLIENT_INFO, {
     variables: { id: 'local' },
-  })
-  const isMobile = data?.clientInfo.isMobile
+  });
+  const isMobile = data?.clientInfo.isMobile;
   const shareLink = process.browser
     ? path
       ? `${window.location.origin}${path}`
       : window.location.href
-    : ''
+    : '';
   const shareTitle =
-    title || (process.browser ? window.document.title || '' : '')
+    title || (process.browser ? window.document.title || '' : '');
 
   const onShare = async () => {
-    const navigator = window.navigator as any
+    const navigator = window.navigator as any;
 
     if (navigator.share && isMobile) {
       try {
         await navigator.share({
           title: shareTitle,
           url: shareLink,
-        })
+        });
       } catch (e) {
-        console.error(e)
+        console.error(e);
       }
     } else {
-      open()
+      open();
     }
 
     analytics.trackEvent(ANALYTICS_EVENTS, {
       type: SHARE_TYPE.ROOT,
       url: shareLink,
-    })
-  }
+    });
+  };
 
   return (
     <>
@@ -105,5 +105,5 @@ export const ShareDialog = ({ title, path, children }: ShareDialogProps) => {
         </Dialog.Footer>
       </Dialog>
     </>
-  )
-}
+  );
+};

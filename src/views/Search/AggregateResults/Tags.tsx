@@ -1,17 +1,17 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
-import _get from 'lodash/get'
-import { useRouter } from 'next/router'
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
+import _get from 'lodash/get';
+import { useRouter } from 'next/router';
 
-import { Card, List, Spinner, Tag } from '~/components'
+import { Card, List, Spinner, Tag } from '~/components';
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
-import { analytics, getQuery, toPath } from '~/common/utils'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums';
+import { analytics, getQuery, toPath } from '~/common/utils';
 
-import styles from './styles.css'
-import ViewMoreButton from './ViewMoreButton'
+import styles from './styles.css';
+import ViewMoreButton from './ViewMoreButton';
 
-import { SeachAggregateTags } from './__generated__/SeachAggregateTags'
+import { SeachAggregateTags } from './__generated__/SeachAggregateTags';
 
 const SEARCH_AGGREGATE_TAGS = gql`
   query SeachAggregateTags($key: String!) {
@@ -32,25 +32,25 @@ const SEARCH_AGGREGATE_TAGS = gql`
     }
   }
   ${Tag.fragments.tag}
-`
+`;
 
 const AggregateTagResults = () => {
-  const router = useRouter()
-  const q = getQuery({ router, key: 'q' })
+  const router = useRouter();
+  const q = getQuery({ router, key: 'q' });
 
   const { data, loading } = useQuery<SeachAggregateTags>(
     SEARCH_AGGREGATE_TAGS,
     { variables: { key: q } }
-  )
+  );
 
   if (loading) {
-    return <Spinner />
+    return <Spinner />;
   }
 
-  const { edges, pageInfo } = data?.search || {}
+  const { edges, pageInfo } = data?.search || {};
 
   if (!edges || edges.length <= 0 || !pageInfo) {
-    return null
+    return null;
   }
 
   return (
@@ -85,7 +85,7 @@ const AggregateTagResults = () => {
 
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 
-export default AggregateTagResults
+export default AggregateTagResults;

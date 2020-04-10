@@ -1,27 +1,27 @@
-import { useQuery } from '@apollo/react-hooks'
-import { useContext } from 'react'
+import { useQuery } from '@apollo/react-hooks';
+import { useContext } from 'react';
 
-import { Button, Icon, IconSize, Translate, ViewerContext } from '~/components'
-import { useMutation } from '~/components/GQL'
-import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
+import { Button, Icon, IconSize, Translate, ViewerContext } from '~/components';
+import { useMutation } from '~/components/GQL';
+import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference';
 
-import { ADD_TOAST } from '~/common/enums'
-import { subscribePush } from '~/common/utils'
+import { ADD_TOAST } from '~/common/enums';
+import { subscribePush } from '~/common/utils';
 
-import TOGGLE_SUBSCRIBE_ARTICLE from '../../GQL/mutations/toggleSubscribeArticle'
+import TOGGLE_SUBSCRIBE_ARTICLE from '../../GQL/mutations/toggleSubscribeArticle';
 
-import { ToggleSubscribeArticle } from '~/components/GQL/mutations/__generated__/ToggleSubscribeArticle'
-import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
+import { ToggleSubscribeArticle } from '~/components/GQL/mutations/__generated__/ToggleSubscribeArticle';
+import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference';
 
 interface SubscribeProps {
-  articleId: string
-  size?: Extract<IconSize, 'md-s'>
-  disabled?: boolean
-  inCard: boolean
+  articleId: string;
+  size?: Extract<IconSize, 'md-s'>;
+  disabled?: boolean;
+  inCard: boolean;
 }
 
 const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
-  const viewer = useContext(ViewerContext)
+  const viewer = useContext(ViewerContext);
   const [subscribe] = useMutation<ToggleSubscribeArticle>(
     TOGGLE_SUBSCRIBE_ARTICLE,
     {
@@ -34,18 +34,18 @@ const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
         },
       },
     }
-  )
+  );
   const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
     variables: { id: 'local' },
-  })
-  const push = data?.clientPreference.push
+  });
+  const push = data?.clientPreference.push;
 
   const onClick = async () => {
-    await subscribe()
+    await subscribe();
 
     // skip
     if (!push || !push.supported || push.enabled || !viewer.isAuthed) {
-      return
+      return;
     }
 
     // show toast to subscribe push
@@ -62,8 +62,8 @@ const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
           buttonPlacement: 'center',
         },
       })
-    )
-  }
+    );
+  };
 
   return (
     <Button
@@ -75,7 +75,7 @@ const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
     >
       <Icon.Bookmark size={size} />
     </Button>
-  )
-}
+  );
+};
 
-export default Subscribe
+export default Subscribe;

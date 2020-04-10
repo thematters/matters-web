@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext } from 'react';
 
 import {
   CardSpacing,
@@ -7,26 +7,26 @@ import {
   TextIcon,
   Translate,
   ViewerContext,
-} from '~/components'
+} from '~/components';
 
-import { PATHS } from '~/common/enums'
-import { toPath } from '~/common/utils'
+import { PATHS } from '~/common/enums';
+import { toPath } from '~/common/utils';
 
 interface NavMenuTopProps {
-  isInSideDrawerNav?: boolean
+  isInSideDrawerNav?: boolean;
 }
 
 const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
-  const viewer = useContext(ViewerContext)
+  const viewer = useContext(ViewerContext);
   const viewerPath = toPath({
     page: 'userProfile',
     userName: viewer.userName || '',
-  })
+  });
 
   const menuItemSpacing = isInSideDrawerNav
     ? (['base', 'loose'] as [CardSpacing, CardSpacing])
-    : undefined
-  const menuItemSize = isInSideDrawerNav ? 'xm' : 'md'
+    : undefined;
+  const menuItemSize = isInSideDrawerNav ? 'xm' : 'md';
 
   return (
     <Menu spacingY={isInSideDrawerNav ? 0 : undefined}>
@@ -80,7 +80,7 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
         </TextIcon>
       </Menu.Item>
     </Menu>
-  )
-}
+  );
+};
 
-export default NavMenuTop
+export default NavMenuTop;

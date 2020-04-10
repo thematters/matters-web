@@ -1,6 +1,6 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
-import { useRouter } from 'next/router'
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
+import { useRouter } from 'next/router';
 
 import {
   EmptyWarning,
@@ -9,14 +9,14 @@ import {
   List,
   Spinner,
   Translate,
-} from '~/components'
-import { QueryError } from '~/components/GQL'
-import { UserDigest } from '~/components/UserDigest'
+} from '~/components';
+import { QueryError } from '~/components/GQL';
+import { UserDigest } from '~/components/UserDigest';
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
-import { analytics, getQuery, mergeConnections } from '~/common/utils'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums';
+import { analytics, getQuery, mergeConnections } from '~/common/utils';
 
-import { UserFollowerFeed } from './__generated__/UserFollowerFeed'
+import { UserFollowerFeed } from './__generated__/UserFollowerFeed';
 
 const USER_FOLLOWERS_FEED = gql`
   query UserFollowerFeed($userName: String!, $after: String) {
@@ -39,29 +39,29 @@ const USER_FOLLOWERS_FEED = gql`
     }
   }
   ${UserDigest.Rich.fragments.user}
-`
+`;
 
 const UserFollowers = () => {
-  const router = useRouter()
-  const userName = getQuery({ router, key: 'userName' })
+  const router = useRouter();
+  const userName = getQuery({ router, key: 'userName' });
   const { data, loading, error, fetchMore } = useQuery<UserFollowerFeed>(
     USER_FOLLOWERS_FEED,
     {
       variables: { userName },
     }
-  )
+  );
 
   if (loading || !data || !data.user) {
-    return <Spinner />
+    return <Spinner />;
   }
 
   if (error) {
-    return <QueryError error={error} />
+    return <QueryError error={error} />;
   }
 
-  const user = data.user
-  const connectionPath = 'user.followers'
-  const { edges, pageInfo } = user.followers
+  const user = data.user;
+  const connectionPath = 'user.followers';
+  const { edges, pageInfo } = user.followers;
 
   if (!edges || edges.length <= 0 || !pageInfo) {
     return (
@@ -70,7 +70,7 @@ const UserFollowers = () => {
           <Translate zh_hant="還沒有追蹤者" zh_hans="还没有追踪者" />
         }
       />
-    )
+    );
   }
 
   const loadMore = () => {
@@ -78,7 +78,7 @@ const UserFollowers = () => {
       type: FEED_TYPE.FOLLOWER,
       location: edges.length,
       entrance: user.id,
-    })
+    });
     return fetchMore({
       variables: {
         after: pageInfo.endCursor,
@@ -89,8 +89,8 @@ const UserFollowers = () => {
           newData: fetchMoreResult,
           path: connectionPath,
         }),
-    })
-  }
+    });
+  };
 
   return (
     <>
@@ -120,7 +120,7 @@ const UserFollowers = () => {
         </List>
       </InfiniteScroll>
     </>
-  )
-}
+  );
+};
 
-export default UserFollowers
+export default UserFollowers;

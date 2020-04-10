@@ -1,12 +1,12 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import { ArticleDigestTitle, Card } from '~/components'
+import { ArticleDigestTitle, Card } from '~/components';
 
-import { numAbbr, toPath } from '~/common/utils'
+import { numAbbr, toPath } from '~/common/utils';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
-import { TopicSidebarArticleDigestArticle } from './__generated__/TopicSidebarArticleDigestArticle'
+import { TopicSidebarArticleDigestArticle } from './__generated__/TopicSidebarArticleDigestArticle';
 
 const fragments = {
   article: gql`
@@ -18,13 +18,13 @@ const fragments = {
 
     ${ArticleDigestTitle.fragments.article}
   `,
-}
+};
 const TopicSidebarArticleDigest = ({
   article,
 }: {
-  article: TopicSidebarArticleDigestArticle
+  article: TopicSidebarArticleDigestArticle;
 }) => {
-  const path = toPath({ page: 'articleDetail', article })
+  const path = toPath({ page: 'articleDetail', article });
 
   return (
     <Card {...path} spacing={['xtight', 0]} bgColor="none">
@@ -43,9 +43,9 @@ const TopicSidebarArticleDigest = ({
 
       <style jsx>{styles}</style>
     </Card>
-  )
-}
+  );
+};
 
-TopicSidebarArticleDigest.fragments = fragments
+TopicSidebarArticleDigest.fragments = fragments;
 
-export default TopicSidebarArticleDigest
+export default TopicSidebarArticleDigest;

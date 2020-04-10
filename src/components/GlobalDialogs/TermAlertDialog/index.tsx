@@ -1,7 +1,7 @@
-import { useFormik } from 'formik'
-import gql from 'graphql-tag'
-import Router from 'next/router'
-import { useContext, useState } from 'react'
+import { useFormik } from 'formik';
+import gql from 'graphql-tag';
+import Router from 'next/router';
+import { useContext, useState } from 'react';
 
 import {
   Dialog,
@@ -9,20 +9,20 @@ import {
   Term,
   Translate,
   ViewerContext,
-} from '~/components'
-import { useMutation } from '~/components/GQL'
-import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
+} from '~/components';
+import { useMutation } from '~/components/GQL';
+import USER_LOGOUT from '~/components/GQL/mutations/userLogout';
 
-import { ADD_TOAST } from '~/common/enums'
-import { parseFormSubmitErrors, unsubscribePush } from '~/common/utils'
+import { ADD_TOAST } from '~/common/enums';
+import { parseFormSubmitErrors, unsubscribePush } from '~/common/utils';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
-import { UserLogout } from '~/components/GQL/mutations/__generated__/UserLogout'
-import { UpdateUserInfoAgreeOn } from './__generated__/UpdateUserInfoAgreeOn'
+import { UserLogout } from '~/components/GQL/mutations/__generated__/UserLogout';
+import { UpdateUserInfoAgreeOn } from './__generated__/UpdateUserInfoAgreeOn';
 
 interface TermContentProps {
-  closeDialog: () => void
+  closeDialog: () => void;
 }
 
 const UPDATE_AGREE_ON = gql`
@@ -34,21 +34,21 @@ const UPDATE_AGREE_ON = gql`
       }
     }
   }
-`
+`;
 
 const TermContent: React.FC<TermContentProps> = ({ closeDialog }) => {
-  const [logout] = useMutation<UserLogout>(USER_LOGOUT)
-  const [update] = useMutation<UpdateUserInfoAgreeOn>(UPDATE_AGREE_ON)
-  const { lang } = useContext(LanguageContext)
+  const [logout] = useMutation<UserLogout>(USER_LOGOUT);
+  const [update] = useMutation<UpdateUserInfoAgreeOn>(UPDATE_AGREE_ON);
+  const { lang } = useContext(LanguageContext);
 
   const { handleSubmit, isSubmitting } = useFormik({
     initialValues: {},
     onSubmit: async (values, { setSubmitting, setFieldError }) => {
       try {
-        await update({ variables: { input: { agreeOn: true } } })
-        closeDialog()
+        await update({ variables: { input: { agreeOn: true } } });
+        closeDialog();
       } catch (error) {
-        const [messages, codes] = parseFormSubmitErrors(error, lang)
+        const [messages, codes] = parseFormSubmitErrors(error, lang);
         window.dispatchEvent(
           new CustomEvent(ADD_TOAST, {
             detail: {
@@ -56,26 +56,26 @@ const TermContent: React.FC<TermContentProps> = ({ closeDialog }) => {
               content: messages[codes[0]],
             },
           })
-        )
+        );
       }
-      setSubmitting(false)
+      setSubmitting(false);
     },
-  })
+  });
 
   const onLogout = async () => {
     try {
-      await logout()
+      await logout();
 
       try {
-        await unsubscribePush({ silent: true })
+        await unsubscribePush({ silent: true });
         // await clearPersistCache()
       } catch (e) {
-        console.error('Failed to unsubscribePush after logged out')
+        console.error('Failed to unsubscribePush after logged out');
       }
 
-      closeDialog()
+      closeDialog();
 
-      Router.replace('/')
+      Router.replace('/');
     } catch (e) {
       window.dispatchEvent(
         new CustomEvent(ADD_TOAST, {
@@ -84,9 +84,9 @@ const TermContent: React.FC<TermContentProps> = ({ closeDialog }) => {
             content: <Translate id="failureLogout" />,
           },
         })
-      )
+      );
     }
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -125,21 +125,21 @@ const TermContent: React.FC<TermContentProps> = ({ closeDialog }) => {
 
       <style jsx>{styles}</style>
     </form>
-  )
-}
+  );
+};
 
 const TermAlertDialog = () => {
-  const viewer = useContext(ViewerContext)
-  const disagreedToS = viewer.info.agreeOn === null
+  const viewer = useContext(ViewerContext);
+  const disagreedToS = viewer.info.agreeOn === null;
 
-  const close = () => setShowDialog(false)
-  const [showDialog, setShowDialog] = useState(disagreedToS)
+  const close = () => setShowDialog(false);
+  const [showDialog, setShowDialog] = useState(disagreedToS);
 
   return (
     <Dialog isOpen={showDialog} onDismiss={close}>
       <TermContent closeDialog={close} />
     </Dialog>
-  )
-}
+  );
+};
 
-export default TermAlertDialog
+export default TermAlertDialog;

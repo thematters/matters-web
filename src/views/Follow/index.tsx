@@ -1,22 +1,22 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
-import { useContext, useEffect } from 'react'
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
+import { useContext, useEffect } from 'react';
 
-import { Layout, Spinner, useResponsive, ViewerContext } from '~/components'
-import { useMutation } from '~/components/GQL'
-import viewerUnreadFolloweeArticles from '~/components/GQL/updates/viewerUnreadFolloweeArticles'
+import { Layout, Spinner, useResponsive, ViewerContext } from '~/components';
+import { useMutation } from '~/components/GQL';
+import viewerUnreadFolloweeArticles from '~/components/GQL/updates/viewerUnreadFolloweeArticles';
 
-import FollowFeed from './FollowFeed'
-import PickAuthors from './PickAuthors'
+import FollowFeed from './FollowFeed';
+import PickAuthors from './PickAuthors';
 
-import { MeFollow } from './__generated__/MeFollow'
-import { ReadFolloweeArticles } from './__generated__/ReadFolloweeArticles'
+import { MeFollow } from './__generated__/MeFollow';
+import { ReadFolloweeArticles } from './__generated__/ReadFolloweeArticles';
 
 const READ_FOLLOWEE_ARTICLES = gql`
   mutation ReadFolloweeArticles {
     logRecord(input: { type: ReadFolloweeArticles })
   }
-`
+`;
 
 const ME_FOLLOW = gql`
   query MeFollow {
@@ -27,43 +27,43 @@ const ME_FOLLOW = gql`
       }
     }
   }
-`
+`;
 
 const BaseFollow = () => {
-  const viewer = useContext(ViewerContext)
+  const viewer = useContext(ViewerContext);
   const [readFolloweeArticles] = useMutation<ReadFolloweeArticles>(
     READ_FOLLOWEE_ARTICLES,
     {
       update: viewerUnreadFolloweeArticles,
     }
-  )
-  const { data, loading } = useQuery<MeFollow>(ME_FOLLOW)
+  );
+  const { data, loading } = useQuery<MeFollow>(ME_FOLLOW);
 
   useEffect(() => {
     if (viewer.isAuthed) {
-      readFolloweeArticles()
+      readFolloweeArticles();
     }
-  }, [])
+  }, []);
 
   if (loading) {
-    return <Spinner />
+    return <Spinner />;
   }
 
   if (!data) {
-    return null
+    return null;
   }
 
-  const followeeCount = data?.viewer?.followees.totalCount || 0
+  const followeeCount = data?.viewer?.followees.totalCount || 0;
 
   if (followeeCount < 5) {
-    return <PickAuthors />
+    return <PickAuthors />;
   } else {
-    return <FollowFeed />
+    return <FollowFeed />;
   }
-}
+};
 
 const Follow = () => {
-  const isSmallUp = useResponsive('sm-up')
+  const isSmallUp = useResponsive('sm-up');
 
   return (
     <Layout.Main>
@@ -77,7 +77,7 @@ const Follow = () => {
 
       <BaseFollow />
     </Layout.Main>
-  )
-}
+  );
+};
 
-export default Follow
+export default Follow;

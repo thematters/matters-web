@@ -1,26 +1,26 @@
-import { useState } from 'react'
+import { useState } from 'react';
 
-import { Dialog, Translate } from '~/components'
+import { Dialog, Translate } from '~/components';
 
-import { ANALYTICS_EVENTS, EXTERNAL_LINKS } from '~/common/enums'
-import { analytics } from '~/common/utils'
+import { ANALYTICS_EVENTS, EXTERNAL_LINKS } from '~/common/enums';
+import { analytics } from '~/common/utils';
 
 interface CivicLikerDialogProps {
-  onClose: () => void
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  onClose: () => void;
+  children: ({ open }: { open: () => void }) => React.ReactNode;
 }
 
 const CivicLikerDialog = ({ onClose, children }: CivicLikerDialogProps) => {
-  const [showDialog, setShowDialog] = useState(false)
+  const [showDialog, setShowDialog] = useState(false);
   const open = () => {
-    setShowDialog(true)
-    analytics.trackEvent(ANALYTICS_EVENTS.OPEN_CIVIC_LIKER_MODAL)
-  }
+    setShowDialog(true);
+    analytics.trackEvent(ANALYTICS_EVENTS.OPEN_CIVIC_LIKER_MODAL);
+  };
   const close = () => {
-    setShowDialog(false)
-    analytics.trackEvent(ANALYTICS_EVENTS.CLOSE_CIVIC_LIKER_MODAL)
-    onClose()
-  }
+    setShowDialog(false);
+    analytics.trackEvent(ANALYTICS_EVENTS.CLOSE_CIVIC_LIKER_MODAL);
+    onClose();
+  };
 
   return (
     <>
@@ -75,7 +75,7 @@ const CivicLikerDialog = ({ onClose, children }: CivicLikerDialogProps) => {
         </Dialog.Footer>
       </Dialog>
     </>
-  )
-}
+  );
+};
 
-export default CivicLikerDialog
+export default CivicLikerDialog;

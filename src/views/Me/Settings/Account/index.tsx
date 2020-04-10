@@ -1,7 +1,7 @@
-import { Layout } from '~/components'
+import { Layout } from '~/components';
 
-import SettingsTab from '../SettingsTab'
-import SettingsAccount from './SettingsAccount'
+import SettingsTab from '../SettingsTab';
+import SettingsAccount from './SettingsAccount';
 
 export default () => (
   <Layout.Main>
@@ -16,4 +16,4 @@ export default () => (
       <SettingsAccount />
     </Layout.Spacing>
   </Layout.Main>
-)
+);

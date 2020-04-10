@@ -1,10 +1,10 @@
-import queryString from 'query-string'
+import queryString from 'query-string';
 
-import { TextIcon, withIcon } from '~/components'
+import { TextIcon, withIcon } from '~/components';
 
-import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
-import { analytics } from '~/common/utils'
-import { ReactComponent as IconShareTelegram } from '~/static/icons/share-telegram.svg'
+import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums';
+import { analytics } from '~/common/utils';
+import { ReactComponent as IconShareTelegram } from '~/static/icons/share-telegram.svg';
 
 const Telegram = ({ title, link }: { title: string; link: string }) => (
   <button
@@ -15,18 +15,18 @@ const Telegram = ({ title, link }: { title: string; link: string }) => (
         queryString.stringify({
           url: link,
           text: title,
-        })
+        });
       analytics.trackEvent(ANALYTICS_EVENTS.SHARE, {
         type: SHARE_TYPE.TELEGRAM,
         url: link,
-      })
-      return window.open(shareUrl, 'Share to Telegram')
+      });
+      return window.open(shareUrl, 'Share to Telegram');
     }}
   >
     <TextIcon icon={withIcon(IconShareTelegram)({})} spacing="base">
       Telegram
     </TextIcon>
   </button>
-)
+);
 
-export default Telegram
+export default Telegram;

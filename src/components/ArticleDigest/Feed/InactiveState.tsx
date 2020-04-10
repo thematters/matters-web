@@ -1,10 +1,10 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import { Icon, TextIcon, Translate } from '~/components'
+import { Icon, TextIcon, Translate } from '~/components';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
-import { InactiveStateArticle } from './__generated__/InactiveStateArticle'
+import { InactiveStateArticle } from './__generated__/InactiveStateArticle';
 
 const fragments = {
   article: gql`
@@ -13,11 +13,11 @@ const fragments = {
       articleState: state
     }
   `,
-}
+};
 
 const InactiveState = ({ article }: { article: InactiveStateArticle }) => {
   if (article.articleState === 'active') {
-    return null
+    return null;
   }
 
   return (
@@ -28,9 +28,9 @@ const InactiveState = ({ article }: { article: InactiveStateArticle }) => {
 
       <style jsx>{styles}</style>
     </span>
-  )
-}
+  );
+};
 
-InactiveState.fragments = fragments
+InactiveState.fragments = fragments;
 
-export default InactiveState
+export default InactiveState;

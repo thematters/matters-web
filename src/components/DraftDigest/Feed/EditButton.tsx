@@ -1,13 +1,13 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import { Button, Icon, TextIcon, Translate } from '~/components'
+import { Button, Icon, TextIcon, Translate } from '~/components';
 
-import { toPath } from '~/common/utils'
+import { toPath } from '~/common/utils';
 
-import { EditButtonDraft } from './__generated__/EditButtonDraft'
+import { EditButtonDraft } from './__generated__/EditButtonDraft';
 
 interface EditButtonProps {
-  draft: EditButtonDraft
+  draft: EditButtonDraft;
 }
 
 const fragments = {
@@ -18,15 +18,15 @@ const fragments = {
       title
     }
   `,
-}
+};
 
 const EditButton = ({ draft }: EditButtonProps) => {
-  const { id, slug } = draft
+  const { id, slug } = draft;
   const path = toPath({
     page: 'draftDetail',
     slug,
     id,
-  })
+  });
 
   return (
     <Button
@@ -44,9 +44,9 @@ const EditButton = ({ draft }: EditButtonProps) => {
         <Translate id="edit" />
       </TextIcon>
     </Button>
-  )
-}
+  );
+};
 
-EditButton.fragments = fragments
+EditButton.fragments = fragments;
 
-export default EditButton
+export default EditButton;

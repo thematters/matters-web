@@ -1,11 +1,11 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
-import jump from 'jump.js'
-import _differenceBy from 'lodash/differenceBy'
-import _get from 'lodash/get'
-import _merge from 'lodash/merge'
-import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
+import jump from 'jump.js';
+import _differenceBy from 'lodash/differenceBy';
+import _get from 'lodash/get';
+import _merge from 'lodash/merge';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
 import {
   EmptyResponse,
@@ -17,32 +17,32 @@ import {
   useEventListener,
   useResponsive,
   ViewMoreButton,
-} from '~/components'
-import { QueryError } from '~/components/GQL'
+} from '~/components';
+import { QueryError } from '~/components/GQL';
 
-import { REFETCH_RESPONSES, UrlFragments } from '~/common/enums'
+import { REFETCH_RESPONSES, UrlFragments } from '~/common/enums';
 import {
   dom,
   filterResponses,
   getQuery,
   mergeConnections,
   unshiftConnections,
-} from '~/common/utils'
+} from '~/common/utils';
 
-import ResponseArticle from './ResponseArticle'
-import ResponseComment from './ResponseComment'
-import styles from './styles.css'
+import ResponseArticle from './ResponseArticle';
+import ResponseComment from './ResponseComment';
+import styles from './styles.css';
 
 import {
   LatestResponses as LatestResponsesType,
   LatestResponses_article_responses_edges_node,
-} from './__generated__/LatestResponses'
+} from './__generated__/LatestResponses';
 import {
   ResponseAdded,
   ResponseAdded_nodeEdited_Article,
-} from './__generated__/ResponseAdded'
+} from './__generated__/ResponseAdded';
 
-const RESPONSES_COUNT = 15
+const RESPONSES_COUNT = 15;
 
 const LatestResponsesArticle = gql`
   fragment LatestResponsesArticle on Article {
@@ -78,7 +78,7 @@ const LatestResponsesArticle = gql`
   }
   ${ResponseArticle.fragments.article}
   ${ResponseComment.fragments.comment}
-`
+`;
 
 const LATEST_RESPONSES = gql`
   query LatestResponses(
@@ -98,7 +98,7 @@ const LATEST_RESPONSES = gql`
     }
   }
   ${LatestResponsesArticle}
-`
+`;
 
 const SUBSCRIBE_RESPONSE_ADDED = gql`
   subscription ResponseAdded(
@@ -119,14 +119,14 @@ const SUBSCRIBE_RESPONSE_ADDED = gql`
     }
   }
   ${LatestResponsesArticle}
-`
+`;
 
 const LatestResponses = () => {
-  const isMediumUp = useResponsive('md-up')
-  const router = useRouter()
-  const mediaHash = getQuery({ router, key: 'mediaHash' })
-  const [articleOnlyMode, setArticleOnlyMode] = useState<boolean>(false)
-  const [storedCursor, setStoredCursor] = useState<string | null>(null)
+  const isMediumUp = useResponsive('md-up');
+  const router = useRouter();
+  const mediaHash = getQuery({ router, key: 'mediaHash' });
+  const [articleOnlyMode, setArticleOnlyMode] = useState<boolean>(false);
+  const [storedCursor, setStoredCursor] = useState<string | null>(null);
 
   /**
    * Fragment Patterns
@@ -135,13 +135,13 @@ const LatestResponses = () => {
    * 2. `#parentCommentId`
    * 3. `#parentComemntId-childCommentId`
    */
-  let fragment = ''
-  let parentId = ''
-  let descendantId = ''
+  let fragment = '';
+  let parentId = '';
+  let descendantId = '';
   if (process.browser) {
-    fragment = window.location.hash.replace('#', '')
-    parentId = fragment.split('-')[0]
-    descendantId = fragment.split('-')[1]
+    fragment = window.location.hash.replace('#', '');
+    parentId = fragment.split('-')[0];
+    descendantId = fragment.split('-')[1];
   }
 
   const {
@@ -158,15 +158,15 @@ const LatestResponses = () => {
       articleOnly: articleOnlyMode,
     },
     notifyOnNetworkStatusChange: true,
-  })
-  const connectionPath = 'article.responses'
-  const article = data?.article
-  const { edges, pageInfo } = (article && article.responses) || {}
-  const articleId = article && article.id
+  });
+  const connectionPath = 'article.responses';
+  const article = data?.article;
+  const { edges, pageInfo } = (article && article.responses) || {};
+  const articleId = article && article.id;
 
   const loadMore = (params?: { before: string }) => {
-    const loadBefore = (params && params.before) || null
-    const noLimit = loadBefore && pageInfo && pageInfo.endCursor
+    const loadBefore = (params && params.before) || null;
+    const noLimit = loadBefore && pageInfo && pageInfo.endCursor;
 
     return fetchMore({
       variables: {
@@ -182,8 +182,8 @@ const LatestResponses = () => {
           newData: fetchMoreResult,
           path: connectionPath,
         }),
-    })
-  }
+    });
+  };
 
   const commentCallback = () =>
     fetchMore({
@@ -193,9 +193,9 @@ const LatestResponses = () => {
         articleOnly: articleOnlyMode,
       },
       updateQuery: (previousResult, { fetchMoreResult }) => {
-        const newEdges = _get(fetchMoreResult, `${connectionPath}.edges`, [])
-        const newResponseCount = _get(fetchMoreResult, 'article.responseCount')
-        const oldResponseCount = _get(previousResult, 'article.responseCount')
+        const newEdges = _get(fetchMoreResult, `${connectionPath}.edges`, []);
+        const newResponseCount = _get(fetchMoreResult, 'article.responseCount');
+        const oldResponseCount = _get(previousResult, 'article.responseCount');
 
         // update if response count has changed
         if (newEdges.length === 0) {
@@ -206,9 +206,9 @@ const LatestResponses = () => {
                 ...previousResult.article,
                 responseCount: newResponseCount,
               },
-            }
+            };
           }
-          return previousResult
+          return previousResult;
         }
 
         // update if there are new items in responses.edges
@@ -216,22 +216,22 @@ const LatestResponses = () => {
           oldData: previousResult,
           newData: fetchMoreResult,
           path: connectionPath,
-        })
+        });
         const newStartCursor = _get(
           newResult,
           `${connectionPath}.pageInfo.startCursor`,
           null
-        )
+        );
         if (newStartCursor) {
-          setStoredCursor(newStartCursor)
+          setStoredCursor(newStartCursor);
         }
-        return newResult
+        return newResult;
       },
-    })
+    });
 
   const responses = filterResponses(
     (edges || []).map(({ node }) => node)
-  ) as LatestResponses_article_responses_edges_node[]
+  ) as LatestResponses_article_responses_edges_node[];
 
   // real time update with websocket
   useEffect(() => {
@@ -246,16 +246,16 @@ const LatestResponses = () => {
         },
         updateQuery: (prev, { subscriptionData }) => {
           if (!prev.article) {
-            return prev
+            return prev;
           }
-          const oldData = prev.article
+          const oldData = prev.article;
           const newData = subscriptionData.data
-            .nodeEdited as ResponseAdded_nodeEdited_Article
+            .nodeEdited as ResponseAdded_nodeEdited_Article;
           const diff = _differenceBy(
             newData.responses.edges,
             oldData.responses.edges || [],
             'node.id'
-          )
+          );
           return {
             article: {
               ...oldData,
@@ -268,46 +268,46 @@ const LatestResponses = () => {
                 },
               },
             },
-          }
+          };
         },
-      })
+      });
     }
-  }, [articleId])
+  }, [articleId]);
 
   // scroll to comment
   useEffect(() => {
     if (!fragment || !articleId) {
-      return
+      return;
     }
 
     const jumpToFragment = () => {
       jump(`#${fragment}`, {
         offset: fragment === UrlFragments.COMMENTS ? -10 : -64,
-      })
-    }
-    const element = dom.$(`#${fragment}`)
+      });
+    };
+    const element = dom.$(`#${fragment}`);
 
     if (!element) {
-      loadMore({ before: parentId }).then(jumpToFragment)
+      loadMore({ before: parentId }).then(jumpToFragment);
     } else {
-      jumpToFragment()
+      jumpToFragment();
     }
-  }, [articleId])
+  }, [articleId]);
 
-  useEventListener(REFETCH_RESPONSES, refetch)
+  useEventListener(REFETCH_RESPONSES, refetch);
 
   useEffect(() => {
     if (pageInfo && pageInfo.startCursor) {
-      setStoredCursor(pageInfo.startCursor)
+      setStoredCursor(pageInfo.startCursor);
     }
-  }, [pageInfo && pageInfo.startCursor])
+  }, [pageInfo && pageInfo.startCursor]);
 
   if (loading && !data) {
-    return <Spinner />
+    return <Spinner />;
   }
 
   if (error) {
-    return <QueryError error={error} />
+    return <QueryError error={error} />;
   }
 
   return (
@@ -357,7 +357,7 @@ const LatestResponses = () => {
 
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 
-export default LatestResponses
+export default LatestResponses;

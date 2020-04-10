@@ -1,13 +1,13 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import NoticeDate from './NoticeDate'
-import NoticeTypeIcon from './NoticeTypeIcon'
-import styles from './styles.css'
+import NoticeDate from './NoticeDate';
+import NoticeTypeIcon from './NoticeTypeIcon';
+import styles from './styles.css';
 
-import { OfficialAnnouncementNotice as NoticeType } from './__generated__/OfficialAnnouncementNotice'
+import { OfficialAnnouncementNotice as NoticeType } from './__generated__/OfficialAnnouncementNotice';
 
 const OfficialAnnouncementNotice = ({ notice }: { notice: NoticeType }) => {
-  const Message = () => <p>{notice.message}</p>
+  const Message = () => <p>{notice.message}</p>;
 
   return (
     <section className="container">
@@ -29,8 +29,8 @@ const OfficialAnnouncementNotice = ({ notice }: { notice: NoticeType }) => {
 
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 
 OfficialAnnouncementNotice.fragments = {
   notice: gql`
@@ -44,6 +44,6 @@ OfficialAnnouncementNotice.fragments = {
     }
     ${NoticeDate.fragments.notice}
   `,
-}
+};
 
-export default OfficialAnnouncementNotice
+export default OfficialAnnouncementNotice;

@@ -1,15 +1,15 @@
-import classNames from 'classnames'
+import classNames from 'classnames';
 
-import { Dialog, Translate } from '~/components'
+import { Dialog, Translate } from '~/components';
 
-import { TextId } from '~/common/enums'
+import { TextId } from '~/common/enums';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 interface DialogMessageProps {
-  headline?: React.ReactElement | TextId
-  description?: React.ReactElement | TextId
-  textAlign?: 'left'
+  headline?: React.ReactElement | TextId;
+  description?: React.ReactElement | TextId;
+  textAlign?: 'left';
 }
 
 const DialogMessage: React.FC<DialogMessageProps> = ({
@@ -22,7 +22,7 @@ const DialogMessage: React.FC<DialogMessageProps> = ({
   const descriptionClass = classNames({
     description: true,
     [`${textAlign}`]: !!textAlign,
-  })
+  });
 
   return (
     <Dialog.Content spacing={['xloose', 'base']}>
@@ -50,7 +50,7 @@ const DialogMessage: React.FC<DialogMessageProps> = ({
 
       <style jsx>{styles}</style>
     </Dialog.Content>
-  )
-}
+  );
+};
 
-export default DialogMessage
+export default DialogMessage;

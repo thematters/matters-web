@@ -1,10 +1,10 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import { Tag } from '~/components'
+import { Tag } from '~/components';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
-import { TagListArticle } from './__generated__/TagListArticle'
+import { TagListArticle } from './__generated__/TagListArticle';
 
 const fragments = {
   article: gql`
@@ -16,11 +16,11 @@ const fragments = {
     }
     ${Tag.fragments.tag}
   `,
-}
+};
 
 const TagList = ({ article }: { article: TagListArticle }) => {
   if (!article || !article.tags || article.tags.length <= 0) {
-    return null
+    return null;
   }
 
   return (
@@ -35,9 +35,9 @@ const TagList = ({ article }: { article: TagListArticle }) => {
 
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 
-TagList.fragments = fragments
+TagList.fragments = fragments;
 
-export default TagList
+export default TagList;

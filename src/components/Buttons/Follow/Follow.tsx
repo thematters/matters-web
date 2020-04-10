@@ -1,5 +1,5 @@
-import gql from 'graphql-tag'
-import _get from 'lodash/get'
+import gql from 'graphql-tag';
+import _get from 'lodash/get';
 
 import {
   Button,
@@ -7,18 +7,18 @@ import {
   ButtonWidth,
   TextIcon,
   Translate,
-} from '~/components'
-import { useMutation } from '~/components/GQL'
-import updateUserFollowerCount from '~/components/GQL/updates/userFollowerCount'
-import updateViewerFolloweeCount from '~/components/GQL/updates/viewerFolloweeCount'
+} from '~/components';
+import { useMutation } from '~/components/GQL';
+import updateUserFollowerCount from '~/components/GQL/updates/userFollowerCount';
+import updateViewerFolloweeCount from '~/components/GQL/updates/viewerFolloweeCount';
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
-import { analytics } from '~/common/utils'
+import { ANALYTICS_EVENTS } from '~/common/enums';
+import { analytics } from '~/common/utils';
 
-import { FollowButtonSize } from './index'
+import { FollowButtonSize } from './index';
 
-import { FollowButtonUser } from './__generated__/FollowButtonUser'
-import { FollowUser } from './__generated__/FollowUser'
+import { FollowButtonUser } from './__generated__/FollowButtonUser';
+import { FollowUser } from './__generated__/FollowUser';
 
 const FOLLOW_USER = gql`
   mutation FollowUser($id: ID!) {
@@ -28,14 +28,14 @@ const FOLLOW_USER = gql`
       isFollower
     }
   }
-`
+`;
 
 const Follow = ({
   user,
   size,
 }: {
-  user: FollowButtonUser
-  size: FollowButtonSize
+  user: FollowButtonUser;
+  size: FollowButtonSize;
 }) => {
   const [follow] = useMutation<FollowUser>(FOLLOW_USER, {
     variables: { id: user.id },
@@ -48,17 +48,17 @@ const Follow = ({
       },
     },
     update: (cache) => {
-      const userName = _get(user, 'userName', null)
-      updateUserFollowerCount({ cache, type: 'increment', userName })
-      updateViewerFolloweeCount({ cache, type: 'increment' })
+      const userName = _get(user, 'userName', null);
+      updateUserFollowerCount({ cache, type: 'increment', userName });
+      updateViewerFolloweeCount({ cache, type: 'increment' });
     },
-  })
+  });
 
   const sizes: Record<FollowButtonSize, [ButtonWidth, ButtonHeight]> = {
     lg: ['6rem', '2rem'],
     md: ['4rem', '1.5rem'],
     'md-s': ['3rem', '1.5rem'],
-  }
+  };
 
   return (
     <Button
@@ -68,15 +68,15 @@ const Follow = ({
       bgActiveColor="green"
       borderColor="green"
       onClick={() => {
-        follow()
-        analytics.trackEvent(ANALYTICS_EVENTS.FOLLOW_USER, { id: user.id })
+        follow();
+        analytics.trackEvent(ANALYTICS_EVENTS.FOLLOW_USER, { id: user.id });
       }}
     >
       <TextIcon weight="md" size={size === 'lg' ? 'sm' : 'xs'}>
         <Translate id="follow" />
       </TextIcon>
     </Button>
-  )
-}
+  );
+};
 
-export default Follow
+export default Follow;

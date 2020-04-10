@@ -1,9 +1,9 @@
-import { Button, Icon, TextIcon, Translate, useResponsive } from '~/components'
+import { Button, Icon, TextIcon, Translate, useResponsive } from '~/components';
 
-import { PATHS } from '~/common/enums'
+import { PATHS } from '~/common/enums';
 
 const ViewBlocksButton = () => {
-  const isMediumUp = useResponsive('md-up')
+  const isMediumUp = useResponsive('md-up');
 
   return (
     <Button
@@ -22,7 +22,7 @@ const ViewBlocksButton = () => {
         )}
       </TextIcon>
     </Button>
-  )
-}
+  );
+};
 
-export default ViewBlocksButton
+export default ViewBlocksButton;

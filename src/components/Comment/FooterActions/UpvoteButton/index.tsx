@@ -1,23 +1,23 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import { Button, Icon, TextIcon } from '~/components'
-import { useMutation } from '~/components/GQL'
+import { Button, Icon, TextIcon } from '~/components';
+import { useMutation } from '~/components/GQL';
 import {
   UNVOTE_COMMENT,
   VOTE_COMMENT,
-} from '~/components/GQL/mutations/voteComment'
+} from '~/components/GQL/mutations/voteComment';
 
-import { numAbbr } from '~/common/utils'
+import { numAbbr } from '~/common/utils';
 
-import { UnvoteComment } from '~/components/GQL/mutations/__generated__/UnvoteComment'
-import { VoteComment } from '~/components/GQL/mutations/__generated__/VoteComment'
-import { UpvoteComment } from './__generated__/UpvoteComment'
+import { UnvoteComment } from '~/components/GQL/mutations/__generated__/UnvoteComment';
+import { VoteComment } from '~/components/GQL/mutations/__generated__/VoteComment';
+import { UpvoteComment } from './__generated__/UpvoteComment';
 
 interface UpvoteButtonProps {
-  comment: UpvoteComment
-  onClick?: () => void
-  disabled?: boolean
-  inCard: boolean
+  comment: UpvoteComment;
+  onClick?: () => void;
+  disabled?: boolean;
+  inCard: boolean;
 }
 
 const fragments = {
@@ -29,7 +29,7 @@ const fragments = {
       myVote
     }
   `,
-}
+};
 
 const UpvoteButton = ({
   comment,
@@ -48,7 +48,7 @@ const UpvoteButton = ({
         __typename: 'Comment',
       },
     },
-  })
+  });
   const [upvote] = useMutation<VoteComment>(VOTE_COMMENT, {
     variables: { id: comment.id, vote: 'up' },
     optimisticResponse: {
@@ -61,7 +61,7 @@ const UpvoteButton = ({
         __typename: 'Comment',
       },
     },
-  })
+  });
 
   if (comment.myVote === 'up') {
     return (
@@ -69,7 +69,7 @@ const UpvoteButton = ({
         spacing={['xtight', 'xtight']}
         bgActiveColor={inCard ? 'grey-lighter-active' : 'grey-lighter'}
         onClick={() => {
-          onClick ? onClick() : unvote()
+          onClick ? onClick() : unvote();
         }}
         disabled={disabled}
         aira-label="取消點讚"
@@ -78,7 +78,7 @@ const UpvoteButton = ({
           {comment.upvotes > 0 ? numAbbr(comment.upvotes) : undefined}
         </TextIcon>
       </Button>
-    )
+    );
   }
 
   return (
@@ -86,7 +86,7 @@ const UpvoteButton = ({
       spacing={['xtight', 'xtight']}
       bgActiveColor={inCard ? 'grey-lighter-active' : 'grey-lighter'}
       onClick={() => {
-        onClick ? onClick() : upvote()
+        onClick ? onClick() : upvote();
       }}
       disabled={disabled}
       aira-label="點讚"
@@ -95,9 +95,9 @@ const UpvoteButton = ({
         {comment.upvotes > 0 ? numAbbr(comment.upvotes) : undefined}
       </TextIcon>
     </Button>
-  )
-}
+  );
+};
 
-UpvoteButton.fragments = fragments
+UpvoteButton.fragments = fragments;
 
-export default UpvoteButton
+export default UpvoteButton;

@@ -1,20 +1,20 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
-import { useRouter } from 'next/router'
-import { useState } from 'react'
-import { Waypoint } from 'react-waypoint'
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import { Waypoint } from 'react-waypoint';
 
-import { Title, Translate } from '~/components'
+import { Title, Translate } from '~/components';
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
-import { analytics, getQuery } from '~/common/utils'
+import { ANALYTICS_EVENTS } from '~/common/enums';
+import { analytics, getQuery } from '~/common/utils';
 
-import FeatureComments from './FeaturedComments'
-import LatestResponses from './LatestResponses'
-import ResponseCount from './ResponseCount'
-import styles from './styles.css'
+import FeatureComments from './FeaturedComments';
+import LatestResponses from './LatestResponses';
+import ResponseCount from './ResponseCount';
+import styles from './styles.css';
 
-import { ArticleResponse } from './__generated__/ArticleResponse'
+import { ArticleResponse } from './__generated__/ArticleResponse';
 
 const ARTICLE_RESPONSE = gql`
   query ArticleResponse(
@@ -31,22 +31,22 @@ const ARTICLE_RESPONSE = gql`
     }
   }
   ${ResponseCount.fragments.article}
-`
+`;
 
 const Responses = () => {
-  const [trackedFinish, setTrackedFinish] = useState(false)
-  const router = useRouter()
-  const mediaHash = getQuery({ router, key: 'mediaHash' })
+  const [trackedFinish, setTrackedFinish] = useState(false);
+  const router = useRouter();
+  const mediaHash = getQuery({ router, key: 'mediaHash' });
 
   const { data, loading } = useQuery<ArticleResponse>(ARTICLE_RESPONSE, {
     variables: { mediaHash },
-  })
+  });
 
   if (loading || !data || !data.article) {
-    return null
+    return null;
   }
 
-  const { article } = data
+  const { article } = data;
 
   return (
     <section className="responses" id="comments">
@@ -65,16 +65,16 @@ const Responses = () => {
           if (!trackedFinish) {
             analytics.trackEvent(ANALYTICS_EVENTS.FINISH_COMMENTS, {
               entrance: article.id,
-            })
-            setTrackedFinish(true)
+            });
+            setTrackedFinish(true);
           }
         }}
       />
 
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 
 Responses.fragments = {
   article: gql`
@@ -89,6 +89,6 @@ Responses.fragments = {
     }
     ${ResponseCount.fragments.article}
   `,
-}
+};
 
-export default Responses
+export default Responses;

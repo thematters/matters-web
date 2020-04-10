@@ -1,6 +1,6 @@
-import { useQuery } from '@apollo/react-hooks'
-import { useRouter } from 'next/router'
-import { useContext } from 'react'
+import { useQuery } from '@apollo/react-hooks';
+import { useRouter } from 'next/router';
+import { useContext } from 'react';
 
 import {
   ArticleDigestFeed,
@@ -12,27 +12,27 @@ import {
   Spinner,
   Translate,
   ViewerContext,
-} from '~/components'
-import { QueryError } from '~/components/GQL'
-import USER_ARTICLES from '~/components/GQL/queries/userArticles'
+} from '~/components';
+import { QueryError } from '~/components/GQL';
+import USER_ARTICLES from '~/components/GQL/queries/userArticles';
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
-import { analytics, getQuery, mergeConnections } from '~/common/utils'
-import IMAGE_LOGO_192 from '~/static/icon-192x192.png?url'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums';
+import { analytics, getQuery, mergeConnections } from '~/common/utils';
+import IMAGE_LOGO_192 from '~/static/icon-192x192.png?url';
 
-import UserTabs from '../UserTabs'
-import styles from './styles.css'
+import UserTabs from '../UserTabs';
+import styles from './styles.css';
 
 import {
   UserArticles as UserArticlesTypes,
   UserArticles_user,
-} from '~/components/GQL/queries/__generated__/UserArticles'
+} from '~/components/GQL/queries/__generated__/UserArticles';
 
 const ArticleSummaryInfo = ({ user }: { user: UserArticles_user }) => {
   const { articleCount: articles, totalWordCount: words } = user.status || {
     articleCount: 0,
     totalWordCount: 0,
-  }
+  };
 
   return (
     <div className="info">
@@ -48,34 +48,34 @@ const ArticleSummaryInfo = ({ user }: { user: UserArticles_user }) => {
 
       <style jsx>{styles}</style>
     </div>
-  )
-}
+  );
+};
 
 const UserArticles = () => {
-  const viewer = useContext(ViewerContext)
-  const router = useRouter()
-  const userName = getQuery({ router, key: 'userName' })
+  const viewer = useContext(ViewerContext);
+  const router = useRouter();
+  const userName = getQuery({ router, key: 'userName' });
 
   const { data, loading, error, fetchMore } = useQuery<UserArticlesTypes>(
     USER_ARTICLES,
     { variables: { userName } }
-  )
-  const user = data?.user
+  );
+  const user = data?.user;
 
   if (loading) {
-    return <Spinner />
+    return <Spinner />;
   }
 
   if (error) {
-    return <QueryError error={error} />
+    return <QueryError error={error} />;
   }
 
   if (!user || user?.status?.state === 'archived') {
-    return null
+    return null;
   }
 
-  const connectionPath = 'user.articles'
-  const { edges, pageInfo } = user.articles
+  const connectionPath = 'user.articles';
+  const { edges, pageInfo } = user.articles;
 
   const CustomHead = () => (
     <Head
@@ -86,7 +86,7 @@ const UserArticles = () => {
       description={user.info.description || ''}
       image={user.info.profileCover || IMAGE_LOGO_192}
     />
-  )
+  );
 
   if (!edges || edges.length <= 0 || !pageInfo) {
     return (
@@ -95,14 +95,14 @@ const UserArticles = () => {
         <UserTabs />
         <EmptyArticle />
       </>
-    )
+    );
   }
 
   const loadMore = () => {
     analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
       type: FEED_TYPE.USER_ARTICLE,
       location: edges.length,
-    })
+    });
     return fetchMore({
       variables: {
         after: pageInfo.endCursor,
@@ -113,8 +113,8 @@ const UserArticles = () => {
           newData: fetchMoreResult,
           path: connectionPath,
         }),
-    })
-  }
+    });
+  };
 
   return (
     <>
@@ -132,7 +132,7 @@ const UserArticles = () => {
               viewer.id !== node.author.id &&
               viewer.isAdmin
             ) {
-              return null
+              return null;
             }
 
             return (
@@ -148,12 +148,12 @@ const UserArticles = () => {
                   }
                 />
               </List.Item>
-            )
+            );
           })}
         </List>
       </InfiniteScroll>
     </>
-  )
-}
+  );
+};
 
-export default UserArticles
+export default UserArticles;

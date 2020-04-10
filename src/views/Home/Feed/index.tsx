@@ -1,6 +1,6 @@
-import { useQuery } from '@apollo/react-hooks'
-import { NetworkStatus } from 'apollo-client'
-import gql from 'graphql-tag'
+import { useQuery } from '@apollo/react-hooks';
+import { NetworkStatus } from 'apollo-client';
+import gql from 'graphql-tag';
 
 import {
   ArticleDigestFeed,
@@ -9,41 +9,41 @@ import {
   List,
   Spinner,
   useResponsive,
-} from '~/components'
-import { QueryError } from '~/components/GQL'
-import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
+} from '~/components';
+import { QueryError } from '~/components/GQL';
+import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference';
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
-import { analytics, mergeConnections } from '~/common/utils'
+import { ANALYTICS_EVENTS } from '~/common/enums';
+import { analytics, mergeConnections } from '~/common/utils';
 
-import Articles from './Articles'
-import Authors from './Authors'
-import SortBy from './SortBy'
-import styles from './styles.css'
-import Tags from './Tags'
-import ViewMode from './ViewMode'
+import Articles from './Articles';
+import Authors from './Authors';
+import SortBy from './SortBy';
+import styles from './styles.css';
+import Tags from './Tags';
+import ViewMode from './ViewMode';
 
-import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
+import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference';
 import {
   HottestFeed,
   HottestFeed_viewer_recommendation_feed_edges,
-} from './__generated__/HottestFeed'
+} from './__generated__/HottestFeed';
 import {
   NewestFeed,
   NewestFeed_viewer_recommendation_feed_edges,
-} from './__generated__/NewestFeed'
+} from './__generated__/NewestFeed';
 
-type SortBy = 'hottest' | 'newest'
+type SortBy = 'hottest' | 'newest';
 
-type HorizontalFeed = React.FC<{ after?: string; first?: number }>
+type HorizontalFeed = React.FC<{ after?: string; first?: number }>;
 
 interface FeedEdge {
-  __typename: 'HorizontalFeed'
-  Feed: HorizontalFeed
+  __typename: 'HorizontalFeed';
+  Feed: HorizontalFeed;
 }
 
 interface FeedLocation {
-  [key: number]: HorizontalFeed
+  [key: number]: HorizontalFeed;
 }
 
 const horizontalFeeds: FeedLocation = {
@@ -51,7 +51,7 @@ const horizontalFeeds: FeedLocation = {
   5: () => <Articles type="topics" />,
   8: () => <Tags />,
   11: () => <Authors />,
-}
+};
 
 const feedFragment = gql`
   fragment FeedArticleConnection on ArticleConnection {
@@ -68,7 +68,7 @@ const feedFragment = gql`
     }
   }
   ${ArticleDigestFeed.fragments.article}
-`
+`;
 
 export const queries = {
   hottest: gql`
@@ -97,11 +97,11 @@ export const queries = {
     }
     ${feedFragment}
   `,
-}
+};
 
 const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
-  const isLargeUp = useResponsive('lg-up')
-  const isHottestFeed = sortBy === 'hottest'
+  const isLargeUp = useResponsive('lg-up');
+  const isHottestFeed = sortBy === 'hottest';
   const {
     data,
     error,
@@ -110,30 +110,30 @@ const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
     networkStatus,
   } = useQuery<HottestFeed | NewestFeed>(queries[sortBy], {
     notifyOnNetworkStatusChange: true,
-  })
+  });
 
-  const connectionPath = 'viewer.recommendation.feed'
-  const result = data?.viewer?.recommendation.feed
-  const { edges, pageInfo } = result || {}
-  const isNewLoading = networkStatus === NetworkStatus.loading
+  const connectionPath = 'viewer.recommendation.feed';
+  const result = data?.viewer?.recommendation.feed;
+  const { edges, pageInfo } = result || {};
+  const isNewLoading = networkStatus === NetworkStatus.loading;
 
   if (loading && (!result || isNewLoading)) {
-    return <Spinner />
+    return <Spinner />;
   }
 
   if (error) {
-    return <QueryError error={error} />
+    return <QueryError error={error} />;
   }
 
   if (!edges || edges.length <= 0 || !pageInfo) {
-    return <EmptyArticle />
+    return <EmptyArticle />;
   }
 
   const loadMore = () => {
     analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
       type: sortBy,
       location: edges.length,
-    })
+    });
     return fetchMoreMainFeed({
       variables: {
         after: pageInfo.endCursor,
@@ -148,23 +148,23 @@ const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
               dedupe: true,
             })
           : fetchMoreResult,
-    })
-  }
+    });
+  };
 
   // insert other feeds
   let mixFeed: Array<
     | FeedEdge
     | HottestFeed_viewer_recommendation_feed_edges
     | NewestFeed_viewer_recommendation_feed_edges
-  > = edges
+  > = edges;
 
   if (!isLargeUp && isHottestFeed) {
     // get copy
-    mixFeed = JSON.parse(JSON.stringify(edges))
+    mixFeed = JSON.parse(JSON.stringify(edges));
 
     // get insert entries
-    const locs = Object.keys(horizontalFeeds).map((loc) => parseInt(loc, 10))
-    locs.sort((a, b) => a - b)
+    const locs = Object.keys(horizontalFeeds).map((loc) => parseInt(loc, 10));
+    locs.sort((a, b) => a - b);
 
     // insert feed
     locs.map((loc) => {
@@ -172,9 +172,9 @@ const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
         mixFeed.splice(loc, 0, {
           Feed: horizontalFeeds[loc],
           __typename: 'HorizontalFeed',
-        })
+        });
       }
-    })
+    });
   }
 
   return (
@@ -182,8 +182,8 @@ const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
       <List>
         {mixFeed.map((edge, i) => {
           if (edge.__typename === 'HorizontalFeed') {
-            const { Feed } = edge
-            return <Feed key={i} />
+            const { Feed } = edge;
+            return <Feed key={i} />;
           } else {
             return (
               <List.Item key={i}>
@@ -197,29 +197,29 @@ const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
                   }
                 />
               </List.Item>
-            )
+            );
           }
         })}
       </List>
     </InfiniteScroll>
-  )
-}
+  );
+};
 
 const HomeFeed = () => {
   const { data, client } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
     variables: { id: 'local' },
-  })
+  });
   const { feedSortType } = data?.clientPreference || {
     feedSortType: 'hottest',
-  }
+  };
   const setSortBy = (type: SortBy) => {
     if (client) {
       client.writeData({
         id: 'ClientPreference:local',
         data: { feedSortType: type },
-      })
+      });
     }
-  }
+  };
 
   return (
     <>
@@ -232,7 +232,7 @@ const HomeFeed = () => {
 
       <style jsx>{styles}</style>
     </>
-  )
-}
+  );
+};
 
-export default HomeFeed
+export default HomeFeed;

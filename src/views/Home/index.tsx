@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext } from 'react';
 
 import {
   Icon,
@@ -7,18 +7,18 @@ import {
   SignUpButton,
   useResponsive,
   ViewerContext,
-} from '~/components'
+} from '~/components';
 
-import { SIGNUP_TYPE } from '~/common/enums'
+import { SIGNUP_TYPE } from '~/common/enums';
 
-import Feed from './Feed'
-import Sidebar from './Sidebar'
-import styles from './styles.css'
+import Feed from './Feed';
+import Sidebar from './Sidebar';
+import styles from './styles.css';
 
 const Home = () => {
-  const isSmallUp = useResponsive('sm-up')
-  const viewer = useContext(ViewerContext)
-  const hasLogo = !viewer.isAuthed && !isSmallUp
+  const isSmallUp = useResponsive('sm-up');
+  const viewer = useContext(ViewerContext);
+  const hasLogo = !viewer.isAuthed && !isSmallUp;
 
   return (
     <Layout.Main
@@ -59,7 +59,7 @@ const Home = () => {
 
       <style jsx>{styles}</style>
     </Layout.Main>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

@@ -1,10 +1,10 @@
-import Alert from '@reach/alert'
-import classNames from 'classnames'
-import { useEffect } from 'react'
+import Alert from '@reach/alert';
+import classNames from 'classnames';
+import { useEffect } from 'react';
 
-import { REMOVE_TOAST, TOAST_DURATION } from '~/common/enums'
+import { REMOVE_TOAST, TOAST_DURATION } from '~/common/enums';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 /**
  * Toast instance.
@@ -17,12 +17,12 @@ import styles from './styles.css'
  */
 
 interface ToastProps {
-  color: 'green' | 'grey' | 'red'
-  content?: string | React.ReactNode
-  subDescription?: string | React.ReactNode
+  color: 'green' | 'grey' | 'red';
+  content?: string | React.ReactNode;
+  subDescription?: string | React.ReactNode;
 
-  buttonPlacement?: 'top' | 'bottom' | 'center'
-  customButton?: React.ReactNode
+  buttonPlacement?: 'top' | 'bottom' | 'center';
+  customButton?: React.ReactNode;
 }
 
 export const ToastInstance = ({
@@ -37,8 +37,8 @@ export const ToastInstance = ({
     [buttonPlacement]: buttonPlacement,
     [color]: !!color,
     'center-x': !customButton,
-  })
-  const alertType = color === 'red' ? 'assertive' : 'polite'
+  });
+  const alertType = color === 'red' ? 'assertive' : 'polite';
 
   return (
     <section className={mainClass}>
@@ -56,8 +56,8 @@ export const ToastInstance = ({
       )}
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 
 /**
  * ToastWithEffect is a wrapper of toast insatnce. Use event system to
@@ -85,19 +85,19 @@ export const ToastWithEffect = ({
   fixed,
   ...toastProps
 }: {
-  id: string
-  duration?: number
-  fixed?: boolean
+  id: string;
+  duration?: number;
+  fixed?: boolean;
 } & ToastProps) => {
   const remove = () => {
-    window.dispatchEvent(new CustomEvent(REMOVE_TOAST, { detail: { id } }))
-  }
+    window.dispatchEvent(new CustomEvent(REMOVE_TOAST, { detail: { id } }));
+  };
 
   useEffect(() => {
     if (!fixed) {
-      setTimeout(remove, duration)
+      setTimeout(remove, duration);
     }
-  }, [])
+  }, []);
 
-  return <ToastInstance {...toastProps} />
-}
+  return <ToastInstance {...toastProps} />;
+};

@@ -1,6 +1,6 @@
-import { useFormik } from 'formik'
-import gql from 'graphql-tag'
-import { useContext, useState } from 'react'
+import { useFormik } from 'formik';
+import gql from 'graphql-tag';
+import { useContext, useState } from 'react';
 
 import {
   ArticleDigestDropdown,
@@ -11,16 +11,16 @@ import {
   Icon,
   LanguageContext,
   Translate,
-} from '~/components'
-import { useMutation } from '~/components/GQL'
-import SEARCH_ARTICLES from '~/components/GQL/queries/searchArticles'
+} from '~/components';
+import { useMutation } from '~/components/GQL';
+import SEARCH_ARTICLES from '~/components/GQL/queries/searchArticles';
 
-import { ADD_TOAST, REFETCH_TAG_DETAIL_ARTICLES, TEXT } from '~/common/enums'
-import { parseFormSubmitErrors, translate } from '~/common/utils'
+import { ADD_TOAST, REFETCH_TAG_DETAIL_ARTICLES, TEXT } from '~/common/enums';
+import { parseFormSubmitErrors, translate } from '~/common/utils';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
-import { PutArticlesTags } from './__generated__/PutArticlesTags'
+import { PutArticlesTags } from './__generated__/PutArticlesTags';
 
 const PUT_ARTICLES_TAGS = gql`
   mutation PutArticlesTags($id: ID!, $articles: [ID!]) {
@@ -31,50 +31,50 @@ const PUT_ARTICLES_TAGS = gql`
       }
     }
   }
-`
+`;
 
 const DropdownContent = ({
   callback,
   items,
   loading,
 }: {
-  callback: (params: any) => void
-  items: any
-  loading: boolean
+  callback: (params: any) => void;
+  items: any;
+  loading: boolean;
 }) => {
   const articles = (items || []).filter(
     (node: any) => node.__typename === 'Article'
-  )
+  );
   return (
     <DropdownArticleList
       articles={articles}
       loading={loading}
       onClick={(article) => {
-        callback(article)
+        callback(article);
       }}
     />
-  )
-}
+  );
+};
 
 interface TagArticleDialogContentProps {
-  id?: string
-  closeDialog: () => void
+  id?: string;
+  closeDialog: () => void;
 }
 
 interface FormValues {
-  name: string
-  articles: string[]
+  name: string;
+  articles: string[];
 }
 
 const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
   closeDialog,
   id,
 }) => {
-  const [selectedArticles, setSelectedArticles] = useState<any[]>([])
-  const [update] = useMutation<PutArticlesTags>(PUT_ARTICLES_TAGS)
-  const { lang } = useContext(LanguageContext)
+  const [selectedArticles, setSelectedArticles] = useState<any[]>([]);
+  const [update] = useMutation<PutArticlesTags>(PUT_ARTICLES_TAGS);
+  const { lang } = useContext(LanguageContext);
 
-  const formId = 'put-article-tag-form'
+  const formId = 'put-article-tag-form';
 
   const {
     values,
@@ -99,18 +99,18 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
             zh_hans: '至少添加一篇作品',
             lang,
           }),
-        }
+        };
       }
     },
     onSubmit: async ({ name, articles }, { setFieldError, setSubmitting }) => {
       try {
         if (!id) {
-          return
+          return;
         }
 
-        await update({ variables: { id, articles } })
+        await update({ variables: { id, articles } });
 
-        setSubmitting(false)
+        setSubmitting(false);
 
         window.dispatchEvent(
           new CustomEvent(ADD_TOAST, {
@@ -120,7 +120,7 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
               duration: 2000,
             },
           })
-        )
+        );
 
         window.dispatchEvent(
           new CustomEvent(REFETCH_TAG_DETAIL_ARTICLES, {
@@ -129,32 +129,32 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
               differences: articles.length,
             },
           })
-        )
+        );
 
-        closeDialog()
+        closeDialog();
       } catch (error) {
-        const [messages, codes] = parseFormSubmitErrors(error, lang)
-        setFieldError('name', messages[codes[0]])
-        setSubmitting(false)
+        const [messages, codes] = parseFormSubmitErrors(error, lang);
+        setFieldError('name', messages[codes[0]]);
+        setSubmitting(false);
       }
     },
-  })
+  });
 
   const onClickMenuItem = (params: any) => {
-    setFieldValue('name', '')
-    setFieldValue('articles', [...values.articles, params.id])
-    setSelectedArticles([...selectedArticles, params])
-  }
+    setFieldValue('name', '');
+    setFieldValue('articles', [...values.articles, params.id]);
+    setSelectedArticles([...selectedArticles, params]);
+  };
 
   const onDelete = (article: any) => {
     setFieldValue(
       'articles',
       values.articles.filter((articleId) => articleId !== article.id)
-    )
+    );
     setSelectedArticles(
       selectedArticles.filter(({ id: articleId }) => articleId !== article.id)
-    )
-  }
+    );
+  };
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
@@ -207,7 +207,7 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
         <style jsx>{styles}</style>
       </ul>
     </Form>
-  )
+  );
 
   const SubmitButton = (
     <Dialog.Header.RightButton
@@ -217,7 +217,7 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
       disabled={!isValid || isSubmitting}
       loading={isSubmitting}
     />
-  )
+  );
 
   return (
     <>
@@ -231,7 +231,7 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
         {InnerForm}
       </Dialog.Content>
     </>
-  )
-}
+  );
+};
 
-export default TagArticleDialogContent
+export default TagArticleDialogContent;

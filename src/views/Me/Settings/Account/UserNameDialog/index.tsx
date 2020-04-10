@@ -1,28 +1,28 @@
-import { useState } from 'react'
+import { useState } from 'react';
 
-import { Dialog } from '~/components'
+import { Dialog } from '~/components';
 
-import Ask from './Ask'
-import Complete from './Complete'
-import Confirm from './Confirm'
+import Ask from './Ask';
+import Complete from './Complete';
+import Confirm from './Confirm';
 
-type Step = 'ask' | 'confirm' | 'complete'
+type Step = 'ask' | 'confirm' | 'complete';
 
 interface UserNameDialogProps {
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  children: ({ open }: { open: () => void }) => React.ReactNode;
 }
 
 export const UserNameDialog = ({ children }: UserNameDialogProps) => {
-  const [step, setStep] = useState<Step>('ask')
-  const [showDialog, setShowDialog] = useState(false)
+  const [step, setStep] = useState<Step>('ask');
+  const [showDialog, setShowDialog] = useState(false);
 
   const open = () => {
-    setStep('ask')
-    setShowDialog(true)
-  }
+    setStep('ask');
+    setShowDialog(true);
+  };
   const close = () => {
-    setShowDialog(false)
-  }
+    setShowDialog(false);
+  };
 
   return (
     <>
@@ -48,5 +48,5 @@ export const UserNameDialog = ({ children }: UserNameDialogProps) => {
         {step === 'complete' && <Complete closeDialog={close} />}
       </Dialog>
     </>
-  )
-}
+  );
+};

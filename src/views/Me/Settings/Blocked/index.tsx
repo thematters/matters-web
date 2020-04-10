@@ -1,7 +1,7 @@
-import { Layout } from '~/components'
+import { Layout } from '~/components';
 
-import SettingsTab from '../SettingsTab'
-import SettingsBlocked from './SettingsBlocked'
+import SettingsTab from '../SettingsTab';
+import SettingsBlocked from './SettingsBlocked';
 
 export default () => (
   <Layout.Main>
@@ -14,4 +14,4 @@ export default () => (
 
     <SettingsBlocked />
   </Layout.Main>
-)
+);

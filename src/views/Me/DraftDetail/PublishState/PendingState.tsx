@@ -1,20 +1,20 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/react-hooks';
 
-import { Toast, Translate, useCountdown } from '~/components'
-import DRAFT_PUBLISH_STATE from '~/components/GQL/queries/draftPublishState'
+import { Toast, Translate, useCountdown } from '~/components';
+import DRAFT_PUBLISH_STATE from '~/components/GQL/queries/draftPublishState';
 
-import { TEXT } from '~/common/enums'
+import { TEXT } from '~/common/enums';
 
-import { PublishStateDraft } from '~/components/GQL/fragments/__generated__/PublishStateDraft'
-import { DraftPublishState } from '~/components/GQL/queries/__generated__/DraftPublishState'
+import { PublishStateDraft } from '~/components/GQL/fragments/__generated__/PublishStateDraft';
+import { DraftPublishState } from '~/components/GQL/queries/__generated__/DraftPublishState';
 
 const PendingState = ({ draft }: { draft: PublishStateDraft }) => {
-  const scheduledAt = draft.scheduledAt
+  const scheduledAt = draft.scheduledAt;
   const {
     countdown: { timeLeft },
     formattedTimeLeft,
-  } = useCountdown({ timeLeft: Date.parse(scheduledAt) - Date.now() })
-  const isPublishing = !scheduledAt || !timeLeft || timeLeft <= 0
+  } = useCountdown({ timeLeft: Date.parse(scheduledAt) - Date.now() });
+  const isPublishing = !scheduledAt || !timeLeft || timeLeft <= 0;
 
   useQuery<DraftPublishState>(DRAFT_PUBLISH_STATE, {
     variables: { id: draft.id },
@@ -22,7 +22,7 @@ const PendingState = ({ draft }: { draft: PublishStateDraft }) => {
     errorPolicy: 'none',
     fetchPolicy: 'network-only',
     skip: !process.browser || !isPublishing,
-  })
+  });
 
   return (
     <Toast.Instance
@@ -44,7 +44,7 @@ const PendingState = ({ draft }: { draft: PublishStateDraft }) => {
         />
       }
     />
-  )
-}
+  );
+};
 
-export default PendingState
+export default PendingState;

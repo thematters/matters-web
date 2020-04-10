@@ -1,22 +1,22 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import { BookmarkButton } from '~/components/Buttons/Bookmark'
-import { ShareButton } from '~/components/Buttons/Share'
+import { BookmarkButton } from '~/components/Buttons/Bookmark';
+import { ShareButton } from '~/components/Buttons/Share';
 
-import { toPath } from '~/common/utils'
+import { toPath } from '~/common/utils';
 
-import DropdownActions, { DropdownActionsControls } from '../DropdownActions'
-import Appreciation from './Appreciation'
-import ResponseCount from './ResponseCount'
-import styles from './styles.css'
+import DropdownActions, { DropdownActionsControls } from '../DropdownActions';
+import Appreciation from './Appreciation';
+import ResponseCount from './ResponseCount';
+import styles from './styles.css';
 
-import { FooterActionsArticle } from './__generated__/FooterActionsArticle'
+import { FooterActionsArticle } from './__generated__/FooterActionsArticle';
 
-export type FooterActionsControls = DropdownActionsControls
+export type FooterActionsControls = DropdownActionsControls;
 
 type FooterActionsProps = {
-  article: FooterActionsArticle
-} & FooterActionsControls
+  article: FooterActionsArticle;
+} & FooterActionsControls;
 
 const fragments = {
   article: gql`
@@ -39,18 +39,18 @@ const fragments = {
     ${BookmarkButton.fragments.article}
     ${DropdownActions.fragments.article}
   `,
-}
+};
 
 const FooterActions = ({
   article,
   inCard = false,
   ...controls
 }: FooterActionsProps) => {
-  const { title } = article
+  const { title } = article;
   const path = toPath({
     page: 'articleDetail',
     article,
-  })
+  });
 
   return (
     <footer
@@ -74,9 +74,9 @@ const FooterActions = ({
 
       <style jsx>{styles}</style>
     </footer>
-  )
-}
+  );
+};
 
-FooterActions.fragments = fragments
+FooterActions.fragments = fragments;
 
-export default FooterActions
+export default FooterActions;

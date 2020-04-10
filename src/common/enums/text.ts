@@ -1,4 +1,4 @@
-export type TextId = keyof typeof TEXT.zh_hant
+export type TextId = keyof typeof TEXT.zh_hant;
 
 export const TEXT = {
   zh_hant: {
@@ -479,4 +479,4 @@ export const TEXT = {
     write: '创作',
     yourEmail: '你的邮箱',
   },
-}
+};

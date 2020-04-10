@@ -1,17 +1,17 @@
-import { Button, TextIcon, useResponsive } from '~/components'
-import { Translate } from '~/components/Language'
+import { Button, TextIcon, useResponsive } from '~/components';
+import { Translate } from '~/components/Language';
 
 import {
   ANALYTICS_EVENTS,
   CLOSE_ACTIVE_DIALOG,
   OPEN_SIGNUP_DIALOG,
   PATHS,
-} from '~/common/enums'
-import { analytics, appendTarget } from '~/common/utils'
+} from '~/common/enums';
+import { analytics, appendTarget } from '~/common/utils';
 
 interface SignUpButtonProps {
-  isPlain?: boolean
-  trackType: string
+  isPlain?: boolean;
+  trackType: string;
 }
 
 export const SignUpButton: React.FC<SignUpButtonProps> = ({
@@ -19,16 +19,16 @@ export const SignUpButton: React.FC<SignUpButtonProps> = ({
   isPlain,
   trackType,
 }) => {
-  const isSmallUp = useResponsive('sm-up')
+  const isSmallUp = useResponsive('sm-up');
 
   const clickProps = isSmallUp
     ? {
         onClick: () => {
           analytics.trackEvent(ANALYTICS_EVENTS.SIGNUP_START, {
             type: trackType,
-          })
-          window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
-          window.dispatchEvent(new CustomEvent(OPEN_SIGNUP_DIALOG))
+          });
+          window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG));
+          window.dispatchEvent(new CustomEvent(OPEN_SIGNUP_DIALOG));
         },
       }
     : {
@@ -36,16 +36,16 @@ export const SignUpButton: React.FC<SignUpButtonProps> = ({
         onClick: () => {
           analytics.trackEvent(ANALYTICS_EVENTS.SIGNUP_START, {
             type: trackType,
-          })
+          });
         },
-      }
+      };
 
   if (isPlain) {
     return (
       <Button aria-haspopup="true" {...clickProps}>
         {children}
       </Button>
-    )
+    );
   }
 
   return (
@@ -60,5 +60,5 @@ export const SignUpButton: React.FC<SignUpButtonProps> = ({
         <Translate id="register" />
       </TextIcon>
     </Button>
-  )
-}
+  );
+};

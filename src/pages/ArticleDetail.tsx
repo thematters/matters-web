@@ -1,3 +1,3 @@
-import ArticleDetail from '~/views/ArticleDetail'
+import ArticleDetail from '~/views/ArticleDetail';
 
-export default () => <ArticleDetail />
+export default () => <ArticleDetail />;

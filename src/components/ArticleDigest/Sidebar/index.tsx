@@ -1,23 +1,23 @@
-import classNames from 'classnames'
-import gql from 'graphql-tag'
+import classNames from 'classnames';
+import gql from 'graphql-tag';
 
-import { Card } from '~/components'
-import { UserDigest } from '~/components/UserDigest'
+import { Card } from '~/components';
+import { UserDigest } from '~/components/UserDigest';
 
-import { toPath } from '~/common/utils'
+import { toPath } from '~/common/utils';
 
-import { ArticleDigestTitle, ArticleDigestTitleTextSize } from '../Title'
-import styles from './styles.css'
+import { ArticleDigestTitle, ArticleDigestTitleTextSize } from '../Title';
+import styles from './styles.css';
 
-import { ArticleDigestSidebarArticle } from './__generated__/ArticleDigestSidebarArticle'
+import { ArticleDigestSidebarArticle } from './__generated__/ArticleDigestSidebarArticle';
 
 interface ArticleDigestSidebarProps {
-  article: ArticleDigestSidebarArticle
+  article: ArticleDigestSidebarArticle;
 
-  titleTextSize?: ArticleDigestTitleTextSize
-  hasBackground?: boolean
-  hasCover?: boolean
-  onClick?: () => any
+  titleTextSize?: ArticleDigestTitleTextSize;
+  hasBackground?: boolean;
+  hasCover?: boolean;
+  onClick?: () => any;
 }
 
 const fragments = {
@@ -39,7 +39,7 @@ const fragments = {
     ${UserDigest.Mini.fragments.user}
     ${ArticleDigestTitle.fragments.article}
   `,
-}
+};
 
 export const ArticleDigestSidebar = ({
   article,
@@ -49,18 +49,18 @@ export const ArticleDigestSidebar = ({
   hasCover,
   onClick,
 }: ArticleDigestSidebarProps) => {
-  const { articleState: state } = article
-  const isBanned = state === 'banned'
-  const cover = !isBanned && hasCover ? article.cover : null
+  const { articleState: state } = article;
+  const isBanned = state === 'banned';
+  const cover = !isBanned && hasCover ? article.cover : null;
   const containerClass = classNames({
     container: true,
     'has-cover': !!cover,
     'has-background': !!hasBackground,
-  })
+  });
   const path = toPath({
     page: 'articleDetail',
     article,
-  })
+  });
 
   return (
     <Card
@@ -100,7 +100,7 @@ export const ArticleDigestSidebar = ({
         <style jsx>{styles}</style>
       </section>
     </Card>
-  )
-}
+  );
+};
 
-ArticleDigestSidebar.fragments = fragments
+ArticleDigestSidebar.fragments = fragments;

@@ -1,3 +1,3 @@
-import AuthSignUp from '~/views/Auth/SignUp'
+import AuthSignUp from '~/views/Auth/SignUp';
 
-export default () => <AuthSignUp />
+export default () => <AuthSignUp />;

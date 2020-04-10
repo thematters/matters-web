@@ -1,25 +1,25 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import ArticleMentionedYouNotice from './ArticleMentionedYouNotice'
-import ArticleNewAppreciationNotice from './ArticleNewAppreciationNotice'
-import ArticleNewCollectedNotice from './ArticleNewCollectedNotice'
-import ArticleNewCommentNotice from './ArticleNewCommentNotice'
-import ArticleNewDownstreamNotice from './ArticleNewDownstreamNotice'
-import ArticleNewSubscriberNotice from './ArticleNewSubscriberNotice'
-import ArticlePublishedNotice from './ArticlePublishedNotice'
-import ArticleTagHasBeenAddedNotice from './ArticleTagHasBeenAddedNotice'
-import ArticleTagHasBeenRemovedNotice from './ArticleTagHasBeenRemovedNotice'
-import ArticleTagHasBeenUnselectedNotice from './ArticleTagHasBeenUnselectedNotice'
-import CommentMentionedYouNotice from './CommentMentionedYouNotice'
-import CommentNewReplyNotice from './CommentNewReplyNotice'
-import CommentPinnedNotice from './CommentPinnedNotice'
-import DownstreamArticleArchivedNotice from './DownstreamArticleArchivedNotice'
-import OfficialAnnouncementNotice from './OfficialAnnouncementNotice'
-import SubscribedArticleNewCommentNotice from './SubscribedArticleNewCommentNotice'
-import UpstreamArticleArchivedNotice from './UpstreamArticleArchivedNotice'
-import UserNewFollowerNotice from './UserNewFollowerNotice'
+import ArticleMentionedYouNotice from './ArticleMentionedYouNotice';
+import ArticleNewAppreciationNotice from './ArticleNewAppreciationNotice';
+import ArticleNewCollectedNotice from './ArticleNewCollectedNotice';
+import ArticleNewCommentNotice from './ArticleNewCommentNotice';
+import ArticleNewDownstreamNotice from './ArticleNewDownstreamNotice';
+import ArticleNewSubscriberNotice from './ArticleNewSubscriberNotice';
+import ArticlePublishedNotice from './ArticlePublishedNotice';
+import ArticleTagHasBeenAddedNotice from './ArticleTagHasBeenAddedNotice';
+import ArticleTagHasBeenRemovedNotice from './ArticleTagHasBeenRemovedNotice';
+import ArticleTagHasBeenUnselectedNotice from './ArticleTagHasBeenUnselectedNotice';
+import CommentMentionedYouNotice from './CommentMentionedYouNotice';
+import CommentNewReplyNotice from './CommentNewReplyNotice';
+import CommentPinnedNotice from './CommentPinnedNotice';
+import DownstreamArticleArchivedNotice from './DownstreamArticleArchivedNotice';
+import OfficialAnnouncementNotice from './OfficialAnnouncementNotice';
+import SubscribedArticleNewCommentNotice from './SubscribedArticleNewCommentNotice';
+import UpstreamArticleArchivedNotice from './UpstreamArticleArchivedNotice';
+import UserNewFollowerNotice from './UserNewFollowerNotice';
 
-import { DigestNotice } from './__generated__/DigestNotice'
+import { DigestNotice } from './__generated__/DigestNotice';
 
 const fragments = {
   notice: gql`
@@ -98,49 +98,49 @@ const fragments = {
     ${ArticleTagHasBeenRemovedNotice.fragments.notice}
     ${ArticleTagHasBeenUnselectedNotice.fragments.notice}
   `,
-}
+};
 
 export const Notice = ({ notice }: { notice: DigestNotice }) => {
   switch (notice.__typename) {
     case 'ArticleNewAppreciationNotice':
-      return <ArticleNewAppreciationNotice notice={notice} />
+      return <ArticleNewAppreciationNotice notice={notice} />;
     case 'ArticleNewCommentNotice':
-      return <ArticleNewCommentNotice notice={notice} />
+      return <ArticleNewCommentNotice notice={notice} />;
     case 'ArticleNewDownstreamNotice':
-      return <ArticleNewDownstreamNotice notice={notice} />
+      return <ArticleNewDownstreamNotice notice={notice} />;
     case 'ArticleNewCollectedNotice':
-      return <ArticleNewCollectedNotice notice={notice} />
+      return <ArticleNewCollectedNotice notice={notice} />;
     case 'ArticleNewSubscriberNotice':
-      return <ArticleNewSubscriberNotice notice={notice} />
+      return <ArticleNewSubscriberNotice notice={notice} />;
     case 'ArticlePublishedNotice':
-      return <ArticlePublishedNotice notice={notice} />
+      return <ArticlePublishedNotice notice={notice} />;
     case 'ArticleMentionedYouNotice':
-      return <ArticleMentionedYouNotice notice={notice} />
+      return <ArticleMentionedYouNotice notice={notice} />;
     case 'CommentMentionedYouNotice':
-      return <CommentMentionedYouNotice notice={notice} />
+      return <CommentMentionedYouNotice notice={notice} />;
     case 'CommentNewReplyNotice':
-      return <CommentNewReplyNotice notice={notice} />
+      return <CommentNewReplyNotice notice={notice} />;
     case 'CommentPinnedNotice':
-      return <CommentPinnedNotice notice={notice} />
+      return <CommentPinnedNotice notice={notice} />;
     case 'DownstreamArticleArchivedNotice':
-      return <DownstreamArticleArchivedNotice notice={notice} />
+      return <DownstreamArticleArchivedNotice notice={notice} />;
     case 'OfficialAnnouncementNotice':
-      return <OfficialAnnouncementNotice notice={notice} />
+      return <OfficialAnnouncementNotice notice={notice} />;
     case 'SubscribedArticleNewCommentNotice':
-      return <SubscribedArticleNewCommentNotice notice={notice} />
+      return <SubscribedArticleNewCommentNotice notice={notice} />;
     case 'UpstreamArticleArchivedNotice':
-      return <UpstreamArticleArchivedNotice notice={notice} />
+      return <UpstreamArticleArchivedNotice notice={notice} />;
     case 'UserNewFollowerNotice':
-      return <UserNewFollowerNotice notice={notice} />
+      return <UserNewFollowerNotice notice={notice} />;
     case 'ArticleTagHasBeenAddedNotice':
-      return <ArticleTagHasBeenAddedNotice notice={notice} />
+      return <ArticleTagHasBeenAddedNotice notice={notice} />;
     case 'ArticleTagHasBeenRemovedNotice':
-      return <ArticleTagHasBeenRemovedNotice notice={notice} />
+      return <ArticleTagHasBeenRemovedNotice notice={notice} />;
     case 'ArticleTagHasBeenUnselectedNotice':
-      return <ArticleTagHasBeenUnselectedNotice notice={notice} />
+      return <ArticleTagHasBeenUnselectedNotice notice={notice} />;
     default:
-      return null
+      return null;
   }
-}
+};
 
-Notice.fragments = fragments
+Notice.fragments = fragments;

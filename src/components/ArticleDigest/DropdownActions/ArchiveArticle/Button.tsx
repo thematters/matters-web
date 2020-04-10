@@ -1,4 +1,4 @@
-import { Icon, Menu, TextIcon, Translate } from '~/components'
+import { Icon, Menu, TextIcon, Translate } from '~/components';
 
 const ArchiveArticleButton = ({ openDialog }: { openDialog: () => void }) => {
   return (
@@ -11,7 +11,7 @@ const ArchiveArticleButton = ({ openDialog }: { openDialog: () => void }) => {
         <Translate id="hide" />
       </TextIcon>
     </Menu.Item>
-  )
-}
+  );
+};
 
-export default ArchiveArticleButton
+export default ArchiveArticleButton;

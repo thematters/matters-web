@@ -1,14 +1,14 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import { Tag } from '~/components'
+import { Tag } from '~/components';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
-import { NoticeTag as NoticeTagType } from './__generated__/NoticeTag'
+import { NoticeTag as NoticeTagType } from './__generated__/NoticeTag';
 
 const NoticeTag = ({ tag }: { tag: NoticeTagType | null }) => {
   if (!tag) {
-    return null
+    return null;
   }
 
   return (
@@ -17,8 +17,8 @@ const NoticeTag = ({ tag }: { tag: NoticeTagType | null }) => {
 
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 
 NoticeTag.fragments = {
   tag: gql`
@@ -28,6 +28,6 @@ NoticeTag.fragments = {
     }
     ${Tag.fragments.tag}
   `,
-}
+};
 
-export default NoticeTag
+export default NoticeTag;

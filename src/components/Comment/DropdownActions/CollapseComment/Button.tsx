@@ -1,4 +1,4 @@
-import { Icon, Menu, TextIcon, Translate } from '~/components'
+import { Icon, Menu, TextIcon, Translate } from '~/components';
 
 const CollapseCommentButton = ({ openDialog }: { openDialog: () => void }) => {
   return (
@@ -7,7 +7,7 @@ const CollapseCommentButton = ({ openDialog }: { openDialog: () => void }) => {
         <Translate id="collapseComment" />
       </TextIcon>
     </Menu.Item>
-  )
-}
+  );
+};
 
-export default CollapseCommentButton
+export default CollapseCommentButton;

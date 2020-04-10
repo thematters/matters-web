@@ -1,14 +1,14 @@
-import classNames from 'classnames'
-import gql from 'graphql-tag'
+import classNames from 'classnames';
+import gql from 'graphql-tag';
 
-import { LinkWrapper, Translate } from '~/components'
-import { Avatar, AvatarSize } from '~/components/Avatar'
+import { LinkWrapper, Translate } from '~/components';
+import { Avatar, AvatarSize } from '~/components/Avatar';
 
-import { toPath } from '~/common/utils'
+import { toPath } from '~/common/utils';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
-import { UserDigestMiniUser } from './__generated__/UserDigestMiniUser'
+import { UserDigestMiniUser } from './__generated__/UserDigestMiniUser';
 
 /**
  * UserDigest.Mini is a component for presenting user's:
@@ -23,18 +23,18 @@ import { UserDigestMiniUser } from './__generated__/UserDigestMiniUser'
  */
 
 export interface UserDigestMiniProps {
-  user: UserDigestMiniUser
+  user: UserDigestMiniUser;
 
-  avatarSize?: Extract<AvatarSize, 'xs' | 'sm' | 'md' | 'lg'>
-  textSize?: 'xs' | 'sm-s' | 'sm' | 'md-s' | 'md'
-  textWeight?: 'md'
-  nameColor?: 'black' | 'white' | 'grey-darker'
-  direction?: 'row' | 'column'
+  avatarSize?: Extract<AvatarSize, 'xs' | 'sm' | 'md' | 'lg'>;
+  textSize?: 'xs' | 'sm-s' | 'sm' | 'md-s' | 'md';
+  textWeight?: 'md';
+  nameColor?: 'black' | 'white' | 'grey-darker';
+  direction?: 'row' | 'column';
 
-  hasAvatar?: boolean
-  hasDisplayName?: boolean
-  hasUserName?: boolean
-  disabled?: boolean
+  hasAvatar?: boolean;
+  hasDisplayName?: boolean;
+  hasUserName?: boolean;
+  disabled?: boolean;
 }
 
 const fragments = {
@@ -50,7 +50,7 @@ const fragments = {
     }
     ${Avatar.fragments.user}
   `,
-}
+};
 
 const Mini = ({
   user,
@@ -66,11 +66,11 @@ const Mini = ({
   hasUserName,
   disabled,
 }: UserDigestMiniProps) => {
-  const isArchived = user?.status?.state === 'archived'
+  const isArchived = user?.status?.state === 'archived';
   const path = toPath({
     page: 'userProfile',
     userName: user.userName || '',
-  })
+  });
   const containerClass = classNames({
     container: true,
     [`text-size-${textSize}`]: !!textSize,
@@ -78,11 +78,11 @@ const Mini = ({
     [`name-color-${nameColor}`]: !!nameColor,
     hasAvatar,
     disabled: disabled || isArchived,
-  })
+  });
   const nameClass = classNames({
     name: true,
     [`direction-${direction}`]: !!direction,
-  })
+  });
 
   if (isArchived) {
     return (
@@ -99,7 +99,7 @@ const Mini = ({
 
         <style jsx>{styles}</style>
       </span>
-    )
+    );
   }
 
   return (
@@ -117,9 +117,9 @@ const Mini = ({
         <style jsx>{styles}</style>
       </section>
     </LinkWrapper>
-  )
-}
+  );
+};
 
-Mini.fragments = fragments
+Mini.fragments = fragments;
 
-export default Mini
+export default Mini;

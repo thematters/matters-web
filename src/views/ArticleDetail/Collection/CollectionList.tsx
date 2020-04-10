@@ -1,24 +1,24 @@
-import { ApolloError } from 'apollo-client'
-import _get from 'lodash/get'
-import _uniq from 'lodash/uniq'
+import { ApolloError } from 'apollo-client';
+import _get from 'lodash/get';
+import _uniq from 'lodash/uniq';
 
 import {
   ArticleDigestSidebar,
   List,
   Spinner,
   useResponsive,
-} from '~/components'
-import { QueryError } from '~/components/GQL'
+} from '~/components';
+import { QueryError } from '~/components/GQL';
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
-import { analytics } from '~/common/utils'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums';
+import { analytics } from '~/common/utils';
 
-import { CollectionList as CollectionListTypes } from './__generated__/CollectionList'
+import { CollectionList as CollectionListTypes } from './__generated__/CollectionList';
 
 interface CollectionListProps {
-  data?: CollectionListTypes
-  loading: boolean
-  error?: ApolloError | null
+  data?: CollectionListTypes;
+  loading: boolean;
+  error?: ApolloError | null;
 }
 
 const CollectionList: React.FC<CollectionListProps> = ({
@@ -26,19 +26,19 @@ const CollectionList: React.FC<CollectionListProps> = ({
   loading,
   error,
 }) => {
-  const isMediumUp = useResponsive('md-up')
-  const { edges, pageInfo } = data?.article?.collection || {}
+  const isMediumUp = useResponsive('md-up');
+  const { edges, pageInfo } = data?.article?.collection || {};
 
   if (loading) {
-    return <Spinner />
+    return <Spinner />;
   }
 
   if (error) {
-    return <QueryError error={error} />
+    return <QueryError error={error} />;
   }
 
   if (!edges || !pageInfo) {
-    return null
+    return null;
   }
 
   return (
@@ -59,7 +59,7 @@ const CollectionList: React.FC<CollectionListProps> = ({
         </List.Item>
       ))}
     </List>
-  )
-}
+  );
+};
 
-export default CollectionList
+export default CollectionList;

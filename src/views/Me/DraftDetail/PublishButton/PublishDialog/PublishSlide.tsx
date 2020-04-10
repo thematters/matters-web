@@ -1,11 +1,11 @@
-import { useContext } from 'react'
+import { useContext } from 'react';
 
-import { LanguageContext } from '~/components'
+import { LanguageContext } from '~/components';
 
-import { translate } from '~/common/utils'
-import PUBLISH_IMAGE from '~/static/images/publish-1.svg'
+import { translate } from '~/common/utils';
+import PUBLISH_IMAGE from '~/static/images/publish-1.svg';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 const Descriptions = ({ data }: any) => (
   <div className="descriptions">
@@ -17,16 +17,16 @@ const Descriptions = ({ data }: any) => (
 
     <style jsx>{styles}</style>
   </div>
-)
+);
 
 const PublishSlide = () => {
-  const { lang } = useContext(LanguageContext)
+  const { lang } = useContext(LanguageContext);
 
   const title = translate({
     zh_hant: '歡迎上船！',
     zh_hans: '欢迎上船！',
     lang,
-  })
+  });
 
   const subTitle = translate({
     zh_hant:
@@ -34,7 +34,7 @@ const PublishSlide = () => {
     zh_hans:
       '你的作品即将永久存储在星际文件系统（IPFS）分布式节点中。在 IPFS 的存储费用目前由 Matters 平台支付。',
     lang,
-  })
+  });
 
   const descriptions = [
     translate({
@@ -54,7 +54,7 @@ const PublishSlide = () => {
         '如需修订你的作品，请将该作品从站上隐藏，并将修订后的作品重新发布，隐藏后的作品仅作者本人可见。',
       lang,
     }),
-  ]
+  ];
 
   return (
     <>
@@ -76,7 +76,7 @@ const PublishSlide = () => {
 
       <style jsx>{styles}</style>
     </>
-  )
-}
+  );
+};
 
-export default PublishSlide
+export default PublishSlide;

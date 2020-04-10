@@ -1,10 +1,10 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import { Translate } from '~/components'
+import { Translate } from '~/components';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
-import { PinnedLabelComment } from './__generated__/PinnedLabelComment'
+import { PinnedLabelComment } from './__generated__/PinnedLabelComment';
 
 const fragments = {
   comment: gql`
@@ -13,10 +13,10 @@ const fragments = {
       pinned
     }
   `,
-}
+};
 const PinnedLabel = ({ comment }: { comment: PinnedLabelComment }) => {
   if (!comment.pinned) {
-    return null
+    return null;
   }
 
   return (
@@ -25,9 +25,9 @@ const PinnedLabel = ({ comment }: { comment: PinnedLabelComment }) => {
 
       <style jsx>{styles}</style>
     </span>
-  )
-}
+  );
+};
 
-PinnedLabel.fragments = fragments
+PinnedLabel.fragments = fragments;
 
-export default PinnedLabel
+export default PinnedLabel;

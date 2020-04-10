@@ -1,17 +1,17 @@
-import { useContext, useState } from 'react'
+import { useContext, useState } from 'react';
 
-import { Button, ViewerContext } from '~/components'
+import { Button, ViewerContext } from '~/components';
 
-import MeAvatar from '../../MeAvatar'
-import SideDrawerNav from './SideDrawerNav'
+import MeAvatar from '../../MeAvatar';
+import SideDrawerNav from './SideDrawerNav';
 
 const MeButton = () => {
-  const viewer = useContext(ViewerContext)
-  const [showNav, setShowNav] = useState(false)
-  const close = () => setShowNav(false)
+  const viewer = useContext(ViewerContext);
+  const [showNav, setShowNav] = useState(false);
+  const close = () => setShowNav(false);
 
   if (!viewer.isAuthed) {
-    return null
+    return null;
   }
 
   return (
@@ -22,7 +22,7 @@ const MeButton = () => {
 
       <SideDrawerNav isOpen={showNav} onDismiss={close} />
     </>
-  )
-}
+  );
+};
 
-export default MeButton
+export default MeButton;

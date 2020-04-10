@@ -1,55 +1,55 @@
-import { useLazyQuery } from '@apollo/react-hooks'
-import { MattersArticleEditor } from '@matters/matters-editor'
-import getConfig from 'next/config'
-import { FC, useContext } from 'react'
+import { useLazyQuery } from '@apollo/react-hooks';
+import { MattersArticleEditor } from '@matters/matters-editor';
+import getConfig from 'next/config';
+import { FC, useContext } from 'react';
 
-import { LanguageContext } from '~/components'
-import SEARCH_USERS from '~/components/GQL/queries/searchUsers'
+import { LanguageContext } from '~/components';
+import SEARCH_USERS from '~/components/GQL/queries/searchUsers';
 
-import { ADD_TOAST } from '~/common/enums'
-import editorStyles from '~/common/styles/utils/content.article.css'
-import themeStyles from '~/common/styles/vendors/quill.bubble.css'
+import { ADD_TOAST } from '~/common/enums';
+import editorStyles from '~/common/styles/utils/content.article.css';
+import themeStyles from '~/common/styles/vendors/quill.bubble.css';
 
-import MentionUserList from '../MentionUserList'
-import styles from './styles.css'
+import MentionUserList from '../MentionUserList';
+import styles from './styles.css';
 
 import {
   SearchUsers,
   SearchUsers_search_edges_node_User,
-} from '~/components/GQL/queries/__generated__/SearchUsers'
-import { EditorDraft } from '../__generated__/EditorDraft'
+} from '~/components/GQL/queries/__generated__/SearchUsers';
+import { EditorDraft } from '../__generated__/EditorDraft';
 
 const {
   publicRuntimeConfig: { ASSET_DOMAIN },
-} = getConfig()
+} = getConfig();
 
 interface Props {
-  draft: EditorDraft
+  draft: EditorDraft;
   update: (draft: {
-    title?: string | null
-    content?: string | null
-    coverAssetId?: string | null
-  }) => Promise<void>
-  upload: DraftAssetUpload
+    title?: string | null;
+    content?: string | null;
+    coverAssetId?: string | null;
+  }) => Promise<void>;
+  upload: DraftAssetUpload;
 }
 
 const ArticleEditor: FC<Props> = ({ draft, update, upload }) => {
-  const [search, searchResult] = useLazyQuery<SearchUsers>(SEARCH_USERS)
-  const { lang } = useContext(LanguageContext)
+  const [search, searchResult] = useLazyQuery<SearchUsers>(SEARCH_USERS);
+  const { lang } = useContext(LanguageContext);
 
-  const { id, content, publishState, title } = draft
-  const isPending = publishState === 'pending'
-  const isPublished = publishState === 'published'
-  const readyOnly = isPending || isPublished
-  const { data, loading } = searchResult
+  const { id, content, publishState, title } = draft;
+  const isPending = publishState === 'pending';
+  const isPublished = publishState === 'published';
+  const readyOnly = isPending || isPublished;
+  const { data, loading } = searchResult;
 
   const mentionUsers = (data?.search.edges || []).map(
     ({ node }: any) => node
-  ) as SearchUsers_search_edges_node_User[]
+  ) as SearchUsers_search_edges_node_User[];
 
   const mentionKeywordChange = (keyword: string) => {
-    search({ variables: { search: keyword } })
-  }
+    search({ variables: { search: keyword } });
+  };
 
   return (
     <>
@@ -76,7 +76,7 @@ const ArticleEditor: FC<Props> = ({ draft, update, upload }) => {
       <style jsx>{editorStyles}</style>
       <style jsx>{styles}</style>
     </>
-  )
-}
+  );
+};
 
-export default ArticleEditor
+export default ArticleEditor;

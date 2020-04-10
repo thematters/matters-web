@@ -1,18 +1,18 @@
-import { Icon, Menu, TextIcon, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
-import UNBLOCK_USER from '~/components/GQL/mutations/unblockUser'
+import { Icon, Menu, TextIcon, Translate } from '~/components';
+import { useMutation } from '~/components/GQL';
+import UNBLOCK_USER from '~/components/GQL/mutations/unblockUser';
 
-import { ADD_TOAST } from '~/common/enums'
+import { ADD_TOAST } from '~/common/enums';
 
-import { BlockUser } from '~/components/GQL/fragments/__generated__/BlockUser'
-import { UnblockUser } from '~/components/GQL/mutations/__generated__/UnblockUser'
+import { BlockUser } from '~/components/GQL/fragments/__generated__/BlockUser';
+import { UnblockUser } from '~/components/GQL/mutations/__generated__/UnblockUser';
 
 const BlockUserButton = ({
   user,
   openDialog,
 }: {
-  user: BlockUser
-  openDialog: () => void
+  user: BlockUser;
+  openDialog: () => void;
 }) => {
   const [unblockUser] = useMutation<UnblockUser>(UNBLOCK_USER, {
     variables: { id: user.id },
@@ -23,9 +23,9 @@ const BlockUserButton = ({
         __typename: 'User',
       },
     },
-  })
+  });
   const onUnblock = async () => {
-    await unblockUser()
+    await unblockUser();
     window.dispatchEvent(
       new CustomEvent(ADD_TOAST, {
         detail: {
@@ -33,8 +33,8 @@ const BlockUserButton = ({
           content: <Translate id="successUnblock" />,
         },
       })
-    )
-  }
+    );
+  };
 
   if (user.isBlocked) {
     return (
@@ -47,7 +47,7 @@ const BlockUserButton = ({
           <Translate id="unblockUser" />
         </TextIcon>
       </Menu.Item>
-    )
+    );
   }
 
   return (
@@ -56,7 +56,7 @@ const BlockUserButton = ({
         <Translate id="blockUser" />
       </TextIcon>
     </Menu.Item>
-  )
-}
+  );
+};
 
-export default BlockUserButton
+export default BlockUserButton;

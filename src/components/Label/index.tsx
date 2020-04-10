@@ -1,11 +1,11 @@
-import classNames from 'classnames'
+import classNames from 'classnames';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
-type LabelSize = 'sm' | 'default'
+type LabelSize = 'sm' | 'default';
 
 interface LabelProps {
-  size?: LabelSize
+  size?: LabelSize;
 }
 
 /**
@@ -21,7 +21,7 @@ export const Label: React.FC<LabelProps> = ({ size = 'default', children }) => {
   const labelClasses = classNames({
     label: true,
     [size]: true,
-  })
+  });
 
   return (
     <span className={labelClasses}>
@@ -29,5 +29,5 @@ export const Label: React.FC<LabelProps> = ({ size = 'default', children }) => {
 
       <style jsx>{styles}</style>
     </span>
-  )
-}
+  );
+};

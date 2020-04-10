@@ -12,5 +12,5 @@ export default (_: any) => {
     },
     routeHistory: [],
     __typename: 'ClientPreference',
-  }
-}
+  };
+};

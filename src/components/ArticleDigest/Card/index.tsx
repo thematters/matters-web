@@ -1,25 +1,25 @@
-import classNames from 'classnames'
-import gql from 'graphql-tag'
+import classNames from 'classnames';
+import gql from 'graphql-tag';
 
-import { Card } from '~/components'
-import { UserDigest } from '~/components/UserDigest'
+import { Card } from '~/components';
+import { UserDigest } from '~/components/UserDigest';
 
 import {
   countWordsLength,
   makeSummary,
   makeTitle,
   toPath,
-} from '~/common/utils'
+} from '~/common/utils';
 
-import { ArticleDigestTitle } from '../Title'
-import styles from './styles.css'
+import { ArticleDigestTitle } from '../Title';
+import styles from './styles.css';
 
-import { ArticleDigestCardArticle } from './__generated__/ArticleDigestCardArticle'
+import { ArticleDigestCardArticle } from './__generated__/ArticleDigestCardArticle';
 
 interface ArticleDigestCardProps {
-  article: ArticleDigestCardArticle
+  article: ArticleDigestCardArticle;
 
-  onClick?: () => any
+  onClick?: () => any;
 }
 
 const fragments = {
@@ -42,27 +42,27 @@ const fragments = {
     ${UserDigest.Mini.fragments.user}
     ${ArticleDigestTitle.fragments.article}
   `,
-}
+};
 
 export const ArticleDigestCard = ({
   article,
   onClick,
 }: ArticleDigestCardProps) => {
-  const { summary, state } = article
-  const isBanned = state === 'banned'
-  const cover = !isBanned ? article.cover : null
-  const title = makeTitle(article.title, 70)
+  const { summary, state } = article;
+  const isBanned = state === 'banned';
+  const cover = !isBanned ? article.cover : null;
+  const title = makeTitle(article.title, 70);
   const cleanedSummary = isBanned
     ? ''
-    : makeSummary(summary, countWordsLength(article.title) > 40 ? 50 : 70)
+    : makeSummary(summary, countWordsLength(article.title) > 40 ? 50 : 70);
   const containerClass = classNames({
     container: true,
     'has-cover': !!cover,
-  })
+  });
   const path = toPath({
     page: 'articleDetail',
     article,
-  })
+  });
 
   return (
     <Card
@@ -104,7 +104,7 @@ export const ArticleDigestCard = ({
         <style jsx>{styles}</style>
       </section>
     </Card>
-  )
-}
+  );
+};
 
-ArticleDigestCard.fragments = fragments
+ArticleDigestCard.fragments = fragments;

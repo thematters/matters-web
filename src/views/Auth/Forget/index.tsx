@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from 'react';
 
 import {
   Head,
@@ -6,10 +6,10 @@ import {
   PasswordChangeComplete,
   PasswordChangeConfirmForm,
   PasswordChangeRequestForm,
-} from '~/components'
+} from '~/components';
 
 const Forget = () => {
-  const [step, setStep] = useState('request')
+  const [step, setStep] = useState('request');
   const [data, setData] = useState<{ [key: string]: any }>({
     request: {
       next: 'confirm',
@@ -18,10 +18,10 @@ const Forget = () => {
       prev: 'request',
       next: 'complete',
     },
-  })
+  });
 
   const requestCodeCallback = (params: any) => {
-    const { email, codeId } = params
+    const { email, codeId } = params;
     setData((prev) => {
       return {
         ...prev,
@@ -30,10 +30,10 @@ const Forget = () => {
           email,
           codeId,
         },
-      }
-    })
-    setStep('confirm')
-  }
+      };
+    });
+    setStep('confirm');
+  };
 
   return (
     <Layout.Main bgColor="grey-lighter">
@@ -61,7 +61,7 @@ const Forget = () => {
         <PasswordChangeComplete type="forget" purpose="page" />
       )}
     </Layout.Main>
-  )
-}
+  );
+};
 
-export default Forget
+export default Forget;

@@ -1,10 +1,10 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import { Button, Icon, TextIcon } from '~/components'
+import { Button, Icon, TextIcon } from '~/components';
 
-import { numAbbr } from '~/common/utils'
+import { numAbbr } from '~/common/utils';
 
-import { AppreciationArticle } from './__generated__/AppreciationArticle'
+import { AppreciationArticle } from './__generated__/AppreciationArticle';
 
 const fragments = {
   article: gql`
@@ -12,14 +12,14 @@ const fragments = {
       appreciationsReceivedTotal
     }
   `,
-}
+};
 
 const Appreciation = ({
   article,
   size = 'sm',
 }: {
-  article: AppreciationArticle
-  size?: 'sm' | 'xs'
+  article: AppreciationArticle;
+  size?: 'sm' | 'xs';
 }) => (
   <Button spacing={['xtight', 'xtight']} is="span">
     <TextIcon
@@ -33,8 +33,8 @@ const Appreciation = ({
         : undefined}
     </TextIcon>
   </Button>
-)
+);
 
-Appreciation.fragments = fragments
+Appreciation.fragments = fragments;
 
-export default Appreciation
+export default Appreciation;

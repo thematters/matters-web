@@ -1,3 +1,3 @@
-import Tags from '~/views/Tags'
+import Tags from '~/views/Tags';
 
-export default () => <Tags />
+export default () => <Tags />;

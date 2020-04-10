@@ -1,13 +1,13 @@
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 
-import { Tabs, Translate } from '~/components'
+import { Tabs, Translate } from '~/components';
 
-import { PATHS } from '~/common/enums'
+import { PATHS } from '~/common/enums';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 const SettingsTabs = () => {
-  const router = useRouter()
+  const router = useRouter();
 
   return (
     <section className="settings-tab">
@@ -36,7 +36,7 @@ const SettingsTabs = () => {
 
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 
-export default SettingsTabs
+export default SettingsTabs;

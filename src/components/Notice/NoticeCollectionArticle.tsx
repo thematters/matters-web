@@ -1,18 +1,18 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import { ArticleDigestSidebar } from '~/components'
+import { ArticleDigestSidebar } from '~/components';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
-import { NoticeCollectionArticle as NoticeCollectionArticleType } from './__generated__/NoticeCollectionArticle'
+import { NoticeCollectionArticle as NoticeCollectionArticleType } from './__generated__/NoticeCollectionArticle';
 
 const NoticeCollectionArticle = ({
   article,
 }: {
-  article: NoticeCollectionArticleType | null
+  article: NoticeCollectionArticleType | null;
 }) => {
   if (!article) {
-    return null
+    return null;
   }
 
   return (
@@ -20,8 +20,8 @@ const NoticeCollectionArticle = ({
       <ArticleDigestSidebar article={article} hasCover={false} hasBackground />
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 
 NoticeCollectionArticle.fragments = {
   article: gql`
@@ -31,6 +31,6 @@ NoticeCollectionArticle.fragments = {
     }
     ${ArticleDigestSidebar.fragments.article}
   `,
-}
+};
 
-export default NoticeCollectionArticle
+export default NoticeCollectionArticle;

@@ -1,10 +1,10 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import { DateTime } from '~/components'
+import { DateTime } from '~/components';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
-import { NoticeDate as NoticeDateType } from './__generated__/NoticeDate'
+import { NoticeDate as NoticeDateType } from './__generated__/NoticeDate';
 
 const NoticeDate = ({ notice }: { notice: NoticeDateType }) => (
   <section className="date">
@@ -12,7 +12,7 @@ const NoticeDate = ({ notice }: { notice: NoticeDateType }) => (
 
     <style jsx>{styles}</style>
   </section>
-)
+);
 
 NoticeDate.fragments = {
   notice: gql`
@@ -21,6 +21,6 @@ NoticeDate.fragments = {
       createdAt
     }
   `,
-}
+};
 
-export default NoticeDate
+export default NoticeDate;

@@ -1,4 +1,4 @@
-export type ErrorCodeKeys = keyof typeof ERROR_CODES
+export type ErrorCodeKeys = keyof typeof ERROR_CODES;
 
 export const ERROR_CODES = {
   // Common
@@ -58,4 +58,4 @@ export const ERROR_CODES = {
 
   // Migration
   MIGRATION_REACH_LIMIT: 'MIGRATION_REACH_LIMIT',
-}
+};

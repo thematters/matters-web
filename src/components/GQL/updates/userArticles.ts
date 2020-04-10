@@ -1,9 +1,9 @@
-import { DataProxy } from 'apollo-cache'
+import { DataProxy } from 'apollo-cache';
 
 import {
   UserArticles,
   UserArticles_user_articles_edges,
-} from '~/components/GQL/queries/__generated__/UserArticles'
+} from '~/components/GQL/queries/__generated__/UserArticles';
 
 const sortEdgesByCreatedAtDesc = (
   edges: UserArticles_user_articles_edges[]
@@ -11,8 +11,8 @@ const sortEdgesByCreatedAtDesc = (
   return edges.sort(
     ({ node: n1 }, { node: n2 }) =>
       Date.parse(n2.createdAt) - Date.parse(n1.createdAt)
-  )
-}
+  );
+};
 
 const update = ({
   cache,
@@ -20,55 +20,56 @@ const update = ({
   userName,
   type,
 }: {
-  cache: DataProxy
-  articleId: string
-  userName: string | null
-  type: 'sticky' | 'unsticky' | 'archive'
+  cache: DataProxy;
+  articleId: string;
+  userName: string | null;
+  type: 'sticky' | 'unsticky' | 'archive';
 }) => {
   // FIXME: circular dependencies
-  const USER_ARTICLES = require('~/components/GQL/queries/userArticles').default
+  const USER_ARTICLES = require('~/components/GQL/queries/userArticles')
+    .default;
 
   if (!userName) {
-    return
+    return;
   }
 
   try {
     const data = cache.readQuery<UserArticles>({
       query: USER_ARTICLES,
       variables: { userName },
-    })
+    });
 
     if (!data || !data.user || !data.user.status || !data.user.articles.edges) {
-      return
+      return;
     }
 
-    let edges = data.user.articles.edges
-    let { articleCount, totalWordCount } = data.user.status
-    const targetEdge = edges.filter(({ node }) => node.id === articleId)[0]
+    let edges = data.user.articles.edges;
+    let { articleCount, totalWordCount } = data.user.status;
+    const targetEdge = edges.filter(({ node }) => node.id === articleId)[0];
 
     switch (type) {
       case 'sticky':
         // unsticky rest articles
         const restEdges = edges.filter(({ node }) => {
           if (node.id !== articleId) {
-            node.sticky = false
-            return true
+            node.sticky = false;
+            return true;
           }
-        })
-        edges = [targetEdge, ...sortEdgesByCreatedAtDesc(restEdges)]
-        break
+        });
+        edges = [targetEdge, ...sortEdgesByCreatedAtDesc(restEdges)];
+        break;
       case 'unsticky':
         // unsticky all articles
         edges = edges.map((edge) => {
-          edge.node.sticky = false
-          return edge
-        })
-        edges = sortEdgesByCreatedAtDesc(edges)
-        break
+          edge.node.sticky = false;
+          return edge;
+        });
+        edges = sortEdgesByCreatedAtDesc(edges);
+        break;
       case 'archive':
-        articleCount = articleCount - 1
-        totalWordCount = totalWordCount - (targetEdge.node.wordCount || 0)
-        break
+        articleCount = articleCount - 1;
+        totalWordCount = totalWordCount - (targetEdge.node.wordCount || 0);
+        break;
     }
 
     cache.writeQuery({
@@ -88,10 +89,10 @@ const update = ({
           },
         },
       },
-    })
+    });
   } catch (e) {
-    console.error(e)
+    console.error(e);
   }
-}
+};
 
-export default update
+export default update;

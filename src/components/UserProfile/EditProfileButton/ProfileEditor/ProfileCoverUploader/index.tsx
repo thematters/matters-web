@@ -1,20 +1,20 @@
-import VisuallyHidden from '@reach/visually-hidden'
-import { useState } from 'react'
+import VisuallyHidden from '@reach/visually-hidden';
+import { useState } from 'react';
 
-import { Button, Icon, Spinner, TextIcon, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
-import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
+import { Button, Icon, Spinner, TextIcon, Translate } from '~/components';
+import { useMutation } from '~/components/GQL';
+import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile';
 
 import {
   ACCEPTED_UPLOAD_IMAGE_TYPES,
   ADD_TOAST,
   UPLOAD_IMAGE_SIZE_LIMIT,
-} from '~/common/enums'
+} from '~/common/enums';
 
-import Cover from '../../../Cover'
-import styles from './styles.css'
+import Cover from '../../../Cover';
+import styles from './styles.css';
 
-import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
+import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload';
 
 /**
  * This component is for uploading profile cover.
@@ -27,26 +27,26 @@ import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/Singl
  */
 
 interface Props {
-  user: any
-  onUpload: (assetId: string | null) => void
+  user: any;
+  onUpload: (assetId: string | null) => void;
 }
 
 export const ProfileCoverUploader: React.FC<Props> = ({ user, onUpload }) => {
-  const [cover, setCover] = useState<string | null>(user.info.profileCover)
-  const [upload, { loading }] = useMutation<SingleFileUpload>(UPLOAD_FILE)
+  const [cover, setCover] = useState<string | null>(user.info.profileCover);
+  const [upload, { loading }] = useMutation<SingleFileUpload>(UPLOAD_FILE);
 
-  const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
-  const fieldId = 'profile-cover-upload-form'
+  const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',');
+  const fieldId = 'profile-cover-upload-form';
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    event.stopPropagation()
+    event.stopPropagation();
 
     if (!upload || !event.target || !event.target.files) {
-      return
+      return;
     }
 
-    const file = event.target.files[0]
-    event.target.value = ''
+    const file = event.target.files[0];
+    event.target.value = '';
 
     if (file?.size > UPLOAD_IMAGE_SIZE_LIMIT) {
       window.dispatchEvent(
@@ -61,8 +61,8 @@ export const ProfileCoverUploader: React.FC<Props> = ({ user, onUpload }) => {
             ),
           },
         })
-      )
-      return
+      );
+      return;
     }
 
     try {
@@ -70,15 +70,15 @@ export const ProfileCoverUploader: React.FC<Props> = ({ user, onUpload }) => {
         variables: {
           input: { file, type: 'profileCover', entityType: 'user' },
         },
-      })
-      const id = data?.singleFileUpload.id
-      const path = data?.singleFileUpload.path
+      });
+      const id = data?.singleFileUpload.id;
+      const path = data?.singleFileUpload.path;
 
       if (id && path) {
-        setCover(path)
-        onUpload(id)
+        setCover(path);
+        onUpload(id);
       } else {
-        throw new Error()
+        throw new Error();
       }
     } catch (e) {
       window.dispatchEvent(
@@ -88,14 +88,14 @@ export const ProfileCoverUploader: React.FC<Props> = ({ user, onUpload }) => {
             content: <Translate id="failureUploadImage" />,
           },
         })
-      )
+      );
     }
-  }
+  };
 
   const removeCover = () => {
-    setCover(null)
-    onUpload(null)
-  }
+    setCover(null);
+    onUpload(null);
+  };
 
   return (
     <label htmlFor={fieldId}>
@@ -135,7 +135,7 @@ export const ProfileCoverUploader: React.FC<Props> = ({ user, onUpload }) => {
 
       <style jsx>{styles}</style>
     </label>
-  )
-}
+  );
+};
 
-export default ProfileCoverUploader
+export default ProfileCoverUploader;

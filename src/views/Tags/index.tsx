@@ -1,6 +1,6 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
-import { useContext } from 'react'
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
+import { useContext } from 'react';
 
 import {
   Button,
@@ -17,13 +17,13 @@ import {
   TextIcon,
   Translate,
   ViewerContext,
-} from '~/components'
-import { QueryError } from '~/components/GQL'
+} from '~/components';
+import { QueryError } from '~/components/GQL';
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
-import { analytics, mergeConnections, toPath } from '~/common/utils'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums';
+import { analytics, mergeConnections, toPath } from '~/common/utils';
 
-import { AllTags } from './__generated__/AllTags'
+import { AllTags } from './__generated__/AllTags';
 
 const ALL_TAGS = gql`
   query AllTags($after: String) {
@@ -47,16 +47,16 @@ const ALL_TAGS = gql`
     }
   }
   ${Tag.fragments.tag}
-`
+`;
 
 const CreateTagButton = () => {
-  const viewer = useContext(ViewerContext)
+  const viewer = useContext(ViewerContext);
 
   // temporarily safety check
-  const canEdit = viewer.isAdmin && viewer.info.email === 'hi@matters.news'
+  const canEdit = viewer.isAdmin && viewer.info.email === 'hi@matters.news';
 
   if (!canEdit) {
-    return null
+    return null;
   }
 
   return (
@@ -74,32 +74,32 @@ const CreateTagButton = () => {
         </Button>
       )}
     </TagDialog>
-  )
-}
+  );
+};
 
 const Tags = () => {
-  const { data, loading, error, fetchMore } = useQuery<AllTags>(ALL_TAGS)
+  const { data, loading, error, fetchMore } = useQuery<AllTags>(ALL_TAGS);
 
   if (loading) {
-    return <Spinner />
+    return <Spinner />;
   }
 
   if (error) {
-    return <QueryError error={error} />
+    return <QueryError error={error} />;
   }
 
-  const connectionPath = 'viewer.recommendation.tags'
-  const { edges, pageInfo } = data?.viewer?.recommendation.tags || {}
+  const connectionPath = 'viewer.recommendation.tags';
+  const { edges, pageInfo } = data?.viewer?.recommendation.tags || {};
 
   if (!edges || edges.length <= 0 || !pageInfo) {
-    return <EmptyTag />
+    return <EmptyTag />;
   }
 
   const loadMore = () => {
     analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
       type: FEED_TYPE.TAGS,
       location: edges.length,
-    })
+    });
     return fetchMore({
       variables: {
         after: pageInfo.endCursor,
@@ -111,8 +111,8 @@ const Tags = () => {
           path: connectionPath,
           dedupe: true,
         }),
-    })
-  }
+    });
+  };
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
@@ -141,8 +141,8 @@ const Tags = () => {
         )}
       </List>
     </InfiniteScroll>
-  )
-}
+  );
+};
 
 export default () => (
   <Layout.Main>
@@ -161,4 +161,4 @@ export default () => (
 
     <Tags />
   </Layout.Main>
-)
+);

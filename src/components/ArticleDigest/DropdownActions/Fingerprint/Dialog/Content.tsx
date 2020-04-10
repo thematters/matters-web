@@ -1,13 +1,19 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
 
-import { Button, CopyToClipboard, Icon, Spinner, Translate } from '~/components'
+import {
+  Button,
+  CopyToClipboard,
+  Icon,
+  Spinner,
+  Translate,
+} from '~/components';
 
-import { TEXT } from '~/common/enums'
+import { TEXT } from '~/common/enums';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
-import { Gateways } from './__generated__/Gateways'
+import { Gateways } from './__generated__/Gateways';
 
 const GATEWAYS = gql`
   query Gateways {
@@ -15,7 +21,7 @@ const GATEWAYS = gql`
       gatewayUrls @client
     }
   }
-`
+`;
 
 const CopyButton = ({ text }: { text: string }) => {
   return (
@@ -28,13 +34,13 @@ const CopyButton = ({ text }: { text: string }) => {
         <Icon.Link color="grey" />
       </Button>
     </CopyToClipboard>
-  )
-}
+  );
+};
 
 const FingerprintDialogContent = ({ dataHash }: { dataHash: string }) => {
-  const { loading, data } = useQuery<Gateways>(GATEWAYS)
+  const { loading, data } = useQuery<Gateways>(GATEWAYS);
 
-  const gateways = data?.official.gatewayUrls || []
+  const gateways = data?.official.gatewayUrls || [];
 
   return (
     <section className="container">
@@ -74,8 +80,8 @@ const FingerprintDialogContent = ({ dataHash }: { dataHash: string }) => {
           {(!data || loading) && <Spinner />}
 
           {gateways.map((url, i) => {
-            const gatewayUrl = url.replace(':hash', dataHash)
-            const hostname = url.replace(/(https:\/\/|\/ipfs\/|:hash.?)/g, '')
+            const gatewayUrl = url.replace(':hash', dataHash);
+            const hostname = url.replace(/(https:\/\/|\/ipfs\/|:hash.?)/g, '');
 
             return (
               <li key={i}>
@@ -89,7 +95,7 @@ const FingerprintDialogContent = ({ dataHash }: { dataHash: string }) => {
 
                 <CopyButton text={gatewayUrl} />
               </li>
-            )
+            );
           })}
         </ul>
       </section>
@@ -125,7 +131,7 @@ const FingerprintDialogContent = ({ dataHash }: { dataHash: string }) => {
 
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 
-export default FingerprintDialogContent
+export default FingerprintDialogContent;

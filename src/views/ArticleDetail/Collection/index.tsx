@@ -1,20 +1,20 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
-import _uniq from 'lodash/uniq'
-import { useState } from 'react'
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
+import _uniq from 'lodash/uniq';
+import { useState } from 'react';
 
-import { Title, Translate, ViewAllButton } from '~/components'
-import articleFragments from '~/components/GQL/fragments/article'
+import { Title, Translate, ViewAllButton } from '~/components';
+import articleFragments from '~/components/GQL/fragments/article';
 
-import { mergeConnections } from '~/common/utils'
+import { mergeConnections } from '~/common/utils';
 
-import CollectionList from './CollectionList'
-import EditButton from './EditButton'
-import EditingList from './EditingList'
-import styles from './styles.css'
+import CollectionList from './CollectionList';
+import EditButton from './EditButton';
+import EditingList from './EditingList';
+import styles from './styles.css';
 
-import { ArticleDetail_article } from '../__generated__/ArticleDetail'
-import { CollectionList as CollectionListTypes } from './__generated__/CollectionList'
+import { ArticleDetail_article } from '../__generated__/ArticleDetail';
+import { CollectionList as CollectionListTypes } from './__generated__/CollectionList';
 
 const COLLECTION_LIST = gql`
   query CollectionList($mediaHash: String, $after: String, $first: Int) {
@@ -24,22 +24,22 @@ const COLLECTION_LIST = gql`
     }
   }
   ${articleFragments.articleCollection}
-`
+`;
 
 const Collection: React.FC<{
-  article: ArticleDetail_article
-  collectionCount?: number
-  canEdit?: boolean
+  article: ArticleDetail_article;
+  collectionCount?: number;
+  canEdit?: boolean;
 }> = ({ article, collectionCount, canEdit }) => {
-  const [editing, setEditing] = useState<boolean>(false)
-  const [editingArticles, setEditingArticles] = useState<any[]>([])
+  const [editing, setEditing] = useState<boolean>(false);
+  const [editingArticles, setEditingArticles] = useState<any[]>([]);
 
   const { data, loading, error, fetchMore } = useQuery<CollectionListTypes>(
     COLLECTION_LIST,
     { variables: { mediaHash: article.mediaHash, first: 3 } }
-  )
-  const connectionPath = 'article.collection'
-  const { pageInfo } = data?.article?.collection || {}
+  );
+  const connectionPath = 'article.collection';
+  const { pageInfo } = data?.article?.collection || {};
   const loadAll = () =>
     fetchMore({
       variables: {
@@ -53,7 +53,7 @@ const Collection: React.FC<{
           newData: fetchMoreResult,
           path: connectionPath,
         }),
-    })
+    });
 
   return (
     <section className="collection">
@@ -96,7 +96,7 @@ const Collection: React.FC<{
 
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 
-export default Collection
+export default Collection;

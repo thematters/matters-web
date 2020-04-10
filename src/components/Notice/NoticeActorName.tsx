@@ -1,26 +1,26 @@
-import gql from 'graphql-tag'
-import Link from 'next/link'
+import gql from 'graphql-tag';
+import Link from 'next/link';
 
-import { toPath } from '~/common/utils'
+import { toPath } from '~/common/utils';
 
-import { NoticeActorNameUser } from './__generated__/NoticeActorNameUser'
+import { NoticeActorNameUser } from './__generated__/NoticeActorNameUser';
 
 const NoticeActorName = ({ user }: { user: NoticeActorNameUser | null }) => {
   if (!user) {
-    return null
+    return null;
   }
 
   const path = toPath({
     page: 'userProfile',
     userName: user.userName || '',
-  })
+  });
 
   return (
     <Link {...path}>
       <a>{user.displayName}</a>
     </Link>
-  )
-}
+  );
+};
 
 NoticeActorName.fragments = {
   user: gql`
@@ -30,6 +30,6 @@ NoticeActorName.fragments = {
       displayName
     }
   `,
-}
+};
 
-export default NoticeActorName
+export default NoticeActorName;

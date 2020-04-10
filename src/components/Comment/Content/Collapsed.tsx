@@ -1,15 +1,15 @@
-import { useState } from 'react'
+import { useState } from 'react';
 
-import { Button, Icon, TextIcon, Translate } from '~/components'
+import { Button, Icon, TextIcon, Translate } from '~/components';
 
-import contentCommentStyles from '~/common/styles/utils/content.comment.css'
+import contentCommentStyles from '~/common/styles/utils/content.comment.css';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 interface CollapsedProps {
-  content: string | null
-  collapsedContent: React.ReactNode | string
-  className: string
+  content: string | null;
+  collapsedContent: React.ReactNode | string;
+  className: string;
 }
 
 const Collapsed = ({
@@ -17,7 +17,7 @@ const Collapsed = ({
   collapsedContent,
   className,
 }: CollapsedProps) => {
-  const [collapsed, setCollapsed] = useState(true)
+  const [collapsed, setCollapsed] = useState(true);
 
   if (!collapsed) {
     return (
@@ -32,7 +32,7 @@ const Collapsed = ({
         <style jsx>{styles}</style>
         <style jsx>{contentCommentStyles}</style>
       </>
-    )
+    );
   }
 
   return (
@@ -44,7 +44,7 @@ const Collapsed = ({
           spacing={['xxtight', 'xtight']}
           bgActiveColor="grey-lighter"
           onClick={() => {
-            setCollapsed(false)
+            setCollapsed(false);
           }}
         >
           <TextIcon
@@ -60,7 +60,7 @@ const Collapsed = ({
 
       <style jsx>{styles}</style>
     </p>
-  )
-}
+  );
+};
 
-export default Collapsed
+export default Collapsed;

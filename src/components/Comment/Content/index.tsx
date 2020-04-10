@@ -1,19 +1,19 @@
-import classNames from 'classnames'
-import gql from 'graphql-tag'
+import classNames from 'classnames';
+import gql from 'graphql-tag';
 
-import { Translate } from '~/components'
+import { Translate } from '~/components';
 
-import contentCommentStyles from '~/common/styles/utils/content.comment.css'
+import contentCommentStyles from '~/common/styles/utils/content.comment.css';
 
-import Collapsed from './Collapsed'
-import styles from './styles.css'
+import Collapsed from './Collapsed';
+import styles from './styles.css';
 
-import { ContentComment } from './__generated__/ContentComment'
+import { ContentComment } from './__generated__/ContentComment';
 
 interface ContentProps {
-  comment: ContentComment
+  comment: ContentComment;
 
-  size?: 'sm' | 'md-s'
+  size?: 'sm' | 'md-s';
 }
 
 const fragments = {
@@ -28,19 +28,19 @@ const fragments = {
       }
     }
   `,
-}
+};
 
 const Content = ({ comment, size }: ContentProps) => {
   const {
     content,
     state,
     author: { isBlocked },
-  } = comment
+  } = comment;
 
   const contentClass = classNames({
     content: true,
     [`size-${size}`]: !!size,
-  })
+  });
 
   if (state === 'collapsed' || isBlocked) {
     return (
@@ -55,7 +55,7 @@ const Content = ({ comment, size }: ContentProps) => {
         }
         className={contentClass}
       />
-    )
+    );
   }
 
   if (state === 'active') {
@@ -71,7 +71,7 @@ const Content = ({ comment, size }: ContentProps) => {
         <style jsx>{styles}</style>
         <style jsx>{contentCommentStyles}</style>
       </>
-    )
+    );
   }
 
   if (state === 'banned') {
@@ -84,7 +84,7 @@ const Content = ({ comment, size }: ContentProps) => {
 
         <style jsx>{styles}</style>
       </p>
-    )
+    );
   }
 
   if (state === 'archived') {
@@ -94,12 +94,12 @@ const Content = ({ comment, size }: ContentProps) => {
 
         <style jsx>{styles}</style>
       </p>
-    )
+    );
   }
 
-  return null
-}
+  return null;
+};
 
-Content.fragments = fragments
+Content.fragments = fragments;
 
-export default Content
+export default Content;

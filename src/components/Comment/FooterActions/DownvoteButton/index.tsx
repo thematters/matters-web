@@ -1,23 +1,23 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import { Button, Icon, TextIcon } from '~/components'
-import { useMutation } from '~/components/GQL'
+import { Button, Icon, TextIcon } from '~/components';
+import { useMutation } from '~/components/GQL';
 import {
   UNVOTE_COMMENT,
   VOTE_COMMENT,
-} from '~/components/GQL/mutations/voteComment'
+} from '~/components/GQL/mutations/voteComment';
 
-import { numAbbr } from '~/common/utils'
+import { numAbbr } from '~/common/utils';
 
-import { UnvoteComment } from '~/components/GQL/mutations/__generated__/UnvoteComment'
-import { VoteComment } from '~/components/GQL/mutations/__generated__/VoteComment'
-import { DownvoteComment } from './__generated__/DownvoteComment'
+import { UnvoteComment } from '~/components/GQL/mutations/__generated__/UnvoteComment';
+import { VoteComment } from '~/components/GQL/mutations/__generated__/VoteComment';
+import { DownvoteComment } from './__generated__/DownvoteComment';
 
 interface DownvoteButtonProps {
-  comment: DownvoteComment
-  onClick?: () => void
-  disabled?: boolean
-  inCard: boolean
+  comment: DownvoteComment;
+  onClick?: () => void;
+  disabled?: boolean;
+  inCard: boolean;
 }
 
 const fragments = {
@@ -29,7 +29,7 @@ const fragments = {
       myVote
     }
   `,
-}
+};
 
 const DownvoteButton = ({
   comment,
@@ -48,7 +48,7 @@ const DownvoteButton = ({
         __typename: 'Comment',
       },
     },
-  })
+  });
   const [downvote] = useMutation<VoteComment>(VOTE_COMMENT, {
     variables: { id: comment.id, vote: 'down' },
     optimisticResponse: {
@@ -61,7 +61,7 @@ const DownvoteButton = ({
         __typename: 'Comment',
       },
     },
-  })
+  });
 
   if (comment.myVote === 'down') {
     return (
@@ -69,7 +69,7 @@ const DownvoteButton = ({
         spacing={['xtight', 'xtight']}
         bgActiveColor={inCard ? 'grey-lighter-active' : 'grey-lighter'}
         onClick={() => {
-          onClick ? onClick() : unvote()
+          onClick ? onClick() : unvote();
         }}
         disabled={disabled}
         aria-label="取消點踩"
@@ -78,7 +78,7 @@ const DownvoteButton = ({
           {comment.downvotes > 0 ? numAbbr(comment.downvotes) : undefined}
         </TextIcon>
       </Button>
-    )
+    );
   }
 
   return (
@@ -86,7 +86,7 @@ const DownvoteButton = ({
       spacing={['xtight', 'xtight']}
       bgActiveColor={inCard ? 'grey-lighter-active' : 'grey-lighter'}
       onClick={() => {
-        onClick ? onClick() : downvote()
+        onClick ? onClick() : downvote();
       }}
       disabled={disabled}
       aria-label="點踩"
@@ -95,9 +95,9 @@ const DownvoteButton = ({
         {comment.downvotes > 0 ? numAbbr(comment.downvotes) : undefined}
       </TextIcon>
     </Button>
-  )
-}
+  );
+};
 
-DownvoteButton.fragments = fragments
+DownvoteButton.fragments = fragments;
 
-export default DownvoteButton
+export default DownvoteButton;

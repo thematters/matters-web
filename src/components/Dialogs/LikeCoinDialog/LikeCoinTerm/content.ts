@@ -21,6 +21,6 @@ const LikeCoinTerm: { zh_hant: string; zh_hans: string } = {
 
   <p>了解更多创作收益的管理细节，请参考我们的 <a href="/faq" class="u-link-green" target="_blank" >新手指南</a>。</p>
   `,
-}
+};
 
-export default LikeCoinTerm
+export default LikeCoinTerm;

@@ -1,25 +1,25 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect } from 'react';
 
-import { Spinner, ViewerContext } from '~/components'
+import { Spinner, ViewerContext } from '~/components';
 
-import { redirectToLogin } from '~/common/utils'
+import { redirectToLogin } from '~/common/utils';
 
 export const Protected: React.FC = ({ children }) => {
-  const viewer = useContext(ViewerContext)
+  const viewer = useContext(ViewerContext);
 
   useEffect(() => {
     if (!viewer.isAuthed && process.browser) {
-      redirectToLogin()
+      redirectToLogin();
     }
-  }, [])
+  }, []);
 
   if (viewer.isAuthed) {
-    return <>{children}</>
+    return <>{children}</>;
   }
 
   if (!process.browser) {
-    return <Spinner />
+    return <Spinner />;
   }
 
-  return <Spinner />
-}
+  return <Spinner />;
+};

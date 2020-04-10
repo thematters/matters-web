@@ -1,35 +1,35 @@
-import { useQuery } from '@apollo/react-hooks'
-import { useState } from 'react'
+import { useQuery } from '@apollo/react-hooks';
+import { useState } from 'react';
 
-import { Translate } from '~/components'
-import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
+import { Translate } from '~/components';
+import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference';
 
-import { subscribePush, unsubscribePush } from '~/common/utils'
+import { subscribePush, unsubscribePush } from '~/common/utils';
 
-import SettingItem from './SettingItem'
+import SettingItem from './SettingItem';
 
-import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
+import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference';
 
 const PushSwitch = () => {
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
     variables: { id: 'local' },
-  })
-  const push = data?.clientPreference.push
+  });
+  const push = data?.clientPreference.push;
 
   if (!push || !push.supported) {
-    return null
+    return null;
   }
 
   const onClick = async () => {
-    setLoading(true)
+    setLoading(true);
     if (push.enabled) {
-      await unsubscribePush()
+      await unsubscribePush();
     } else {
-      await subscribePush()
+      await subscribePush();
     }
-    setLoading(false)
-  }
+    setLoading(false);
+  };
 
   return (
     <SettingItem
@@ -44,7 +44,7 @@ const PushSwitch = () => {
       }
       onChange={onClick}
     />
-  )
-}
+  );
+};
 
-export default PushSwitch
+export default PushSwitch;

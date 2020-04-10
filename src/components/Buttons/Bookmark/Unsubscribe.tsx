@@ -1,15 +1,15 @@
-import { Button, Icon, IconSize } from '~/components'
-import { useMutation } from '~/components/GQL'
+import { Button, Icon, IconSize } from '~/components';
+import { useMutation } from '~/components/GQL';
 
-import TOGGLE_SUBSCRIBE_ARTICLE from '../../GQL/mutations/toggleSubscribeArticle'
+import TOGGLE_SUBSCRIBE_ARTICLE from '../../GQL/mutations/toggleSubscribeArticle';
 
-import { ToggleSubscribeArticle } from '~/components/GQL/mutations/__generated__/ToggleSubscribeArticle'
+import { ToggleSubscribeArticle } from '~/components/GQL/mutations/__generated__/ToggleSubscribeArticle';
 
 interface UnsubscribeProps {
-  articleId: string
-  size?: Extract<IconSize, 'md-s'>
-  disabled?: boolean
-  inCard: boolean
+  articleId: string;
+  size?: Extract<IconSize, 'md-s'>;
+  disabled?: boolean;
+  inCard: boolean;
 }
 
 const Unsubscribe = ({
@@ -30,7 +30,7 @@ const Unsubscribe = ({
         },
       },
     }
-  )
+  );
 
   return (
     <Button
@@ -42,7 +42,7 @@ const Unsubscribe = ({
     >
       <Icon.BookmarkActive color="black" size={size} />
     </Button>
-  )
-}
+  );
+};
 
-export default Unsubscribe
+export default Unsubscribe;

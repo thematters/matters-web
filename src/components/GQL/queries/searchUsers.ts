@@ -1,6 +1,6 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import { UserDigest } from '~/components/UserDigest'
+import { UserDigest } from '~/components/UserDigest';
 
 export default gql`
   query SearchUsers($search: String!) {
@@ -15,4 +15,4 @@ export default gql`
     }
   }
   ${UserDigest.Mini.fragments.user}
-`
+`;

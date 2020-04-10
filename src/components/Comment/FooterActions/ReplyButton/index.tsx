@@ -1,5 +1,5 @@
-import gql from 'graphql-tag'
-import { useContext } from 'react'
+import gql from 'graphql-tag';
+import { useContext } from 'react';
 
 import {
   Button,
@@ -8,25 +8,25 @@ import {
   Icon,
   useResponsive,
   ViewerContext,
-} from '~/components'
+} from '~/components';
 
 import {
   CLOSE_ACTIVE_DIALOG,
   OPEN_LOGIN_DIALOG,
   PATHS,
   TEXT,
-} from '~/common/enums'
-import { appendTarget } from '~/common/utils'
+} from '~/common/enums';
+import { appendTarget } from '~/common/utils';
 
-import ReplyTo from '../../ReplyTo'
+import ReplyTo from '../../ReplyTo';
 
-import { ReplyComemnt } from './__generated__/ReplyComemnt'
+import { ReplyComemnt } from './__generated__/ReplyComemnt';
 
 export interface ReplyButtonProps {
-  comment: ReplyComemnt
-  openLikeCoinDialog: () => void
-  commentCallback?: () => void
-  inCard: boolean
+  comment: ReplyComemnt;
+  openLikeCoinDialog: () => void;
+  commentCallback?: () => void;
+  inCard: boolean;
 }
 
 const fragments = {
@@ -51,7 +51,7 @@ const fragments = {
     }
     ${ReplyTo.fragments.user}
   `,
-}
+};
 
 const CommentButton: React.FC<ButtonProps> = ({ inCard, ...props }) => (
   <Button
@@ -62,7 +62,7 @@ const CommentButton: React.FC<ButtonProps> = ({ inCard, ...props }) => (
   >
     <Icon.Comment />
   </Button>
-)
+);
 
 const ReplyButton = ({
   comment,
@@ -70,41 +70,41 @@ const ReplyButton = ({
   commentCallback,
   inCard,
 }: ReplyButtonProps) => {
-  const viewer = useContext(ViewerContext)
-  const isSmallUp = useResponsive('sm-up')
+  const viewer = useContext(ViewerContext);
+  const isSmallUp = useResponsive('sm-up');
 
-  const { id, parentComment, author, state, article } = comment
-  const isActive = state === 'active'
-  const isCollapsed = state === 'collapsed'
-  const isOnboarding = viewer.isOnboarding && article.author.id !== viewer.id
-  const isBlocked = article.author.isBlocking
-  const isDisabled = !isActive && !isCollapsed && !isOnboarding && !isBlocked
+  const { id, parentComment, author, state, article } = comment;
+  const isActive = state === 'active';
+  const isCollapsed = state === 'collapsed';
+  const isOnboarding = viewer.isOnboarding && article.author.id !== viewer.id;
+  const isBlocked = article.author.isBlocking;
+  const isDisabled = !isActive && !isCollapsed && !isOnboarding && !isBlocked;
 
   const submitCallback = () => {
     if (commentCallback) {
-      commentCallback()
+      commentCallback();
     }
-  }
+  };
 
   if (isDisabled) {
-    return <CommentButton disabled inCard={inCard} />
+    return <CommentButton disabled inCard={inCard} />;
   }
 
   if (viewer.shouldSetupLikerID) {
-    return <CommentButton onClick={openLikeCoinDialog} inCard={inCard} />
+    return <CommentButton onClick={openLikeCoinDialog} inCard={inCard} />;
   }
 
   if (!viewer.isAuthed) {
     const clickProps = isSmallUp
       ? {
           onClick: () => {
-            window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
-            window.dispatchEvent(new CustomEvent(OPEN_LOGIN_DIALOG))
+            window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG));
+            window.dispatchEvent(new CustomEvent(OPEN_LOGIN_DIALOG));
           },
         }
-      : appendTarget({ ...PATHS.AUTH_LOGIN, fallbackCurrent: true })
+      : appendTarget({ ...PATHS.AUTH_LOGIN, fallbackCurrent: true });
 
-    return <CommentButton {...clickProps} inCard={inCard} />
+    return <CommentButton {...clickProps} inCard={inCard} />;
   }
 
   return (
@@ -120,9 +120,9 @@ const ReplyButton = ({
         <CommentButton onClick={openCommentFormDialog} inCard={inCard} />
       )}
     </CommentFormDialog>
-  )
-}
+  );
+};
 
-ReplyButton.fragments = fragments
+ReplyButton.fragments = fragments;
 
-export default ReplyButton
+export default ReplyButton;

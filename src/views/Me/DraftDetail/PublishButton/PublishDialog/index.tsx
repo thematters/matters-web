@@ -1,18 +1,18 @@
-import { useState } from 'react'
+import { useState } from 'react';
 
-import { Dialog } from '~/components'
+import { Dialog } from '~/components';
 
-import PublishContent from './PublishContent'
-import styles from './styles.css'
+import PublishContent from './PublishContent';
+import styles from './styles.css';
 
 interface PublishDialogProps {
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  children: ({ open }: { open: () => void }) => React.ReactNode;
 }
 
 export const PublishDialog = ({ children }: PublishDialogProps) => {
-  const [showDialog, setShowDialog] = useState(false)
-  const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
+  const [showDialog, setShowDialog] = useState(false);
+  const open = () => setShowDialog(true);
+  const close = () => setShowDialog(false);
 
   return (
     <>
@@ -24,5 +24,5 @@ export const PublishDialog = ({ children }: PublishDialogProps) => {
 
       <style jsx>{styles}</style>
     </>
-  )
-}
+  );
+};

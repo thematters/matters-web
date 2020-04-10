@@ -1,26 +1,26 @@
-import gql from 'graphql-tag'
-import { useState } from 'react'
+import gql from 'graphql-tag';
+import { useState } from 'react';
 
-import { Comment } from '~/components'
+import { Comment } from '~/components';
 
-import { filterComments } from '~/common/utils'
+import { filterComments } from '~/common/utils';
 
-import ExpandButton from './ExpandButton'
-import styles from './styles.css'
+import ExpandButton from './ExpandButton';
+import styles from './styles.css';
 
-import { ResponseCommentComment } from './__generated__/ResponseCommentComment'
+import { ResponseCommentComment } from './__generated__/ResponseCommentComment';
 
-const COLLAPSE_COUNT = 2
+const COLLAPSE_COUNT = 2;
 
 interface ResponseCommentControls {
-  defaultExpand?: boolean
-  hasLink?: boolean
-  commentCallback?: () => void
+  defaultExpand?: boolean;
+  hasLink?: boolean;
+  commentCallback?: () => void;
 }
 
 type ResponseCommentProps = {
-  comment: ResponseCommentComment
-} & ResponseCommentControls
+  comment: ResponseCommentComment;
+} & ResponseCommentControls;
 
 const fragments = {
   comment: gql`
@@ -39,7 +39,7 @@ const fragments = {
 
     ${Comment.Feed.fragments.comment}
   `,
-}
+};
 
 const ResponseComment = ({
   comment,
@@ -49,9 +49,9 @@ const ResponseComment = ({
 }: ResponseCommentProps) => {
   const descendants = filterComments(
     (comment.comments?.edges || []).map(({ node }) => node)
-  ) as ResponseCommentComment[]
-  const restCount = descendants.length - COLLAPSE_COUNT
-  const [expand, setExpand] = useState(defaultExpand || restCount <= 0)
+  ) as ResponseCommentComment[];
+  const restCount = descendants.length - COLLAPSE_COUNT;
+  const [expand, setExpand] = useState(defaultExpand || restCount <= 0);
 
   return (
     <section className="container">
@@ -92,9 +92,9 @@ const ResponseComment = ({
       )}
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 
-ResponseComment.fragments = fragments
+ResponseComment.fragments = fragments;
 
-export default ResponseComment
+export default ResponseComment;

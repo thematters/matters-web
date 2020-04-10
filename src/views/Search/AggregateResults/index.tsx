@@ -1,6 +1,6 @@
-import Articles from './Articles'
-import Tags from './Tags'
-import Users from './Users'
+import Articles from './Articles';
+import Tags from './Tags';
+import Users from './Users';
 
 const AggregateResults = () => {
   return (
@@ -9,7 +9,7 @@ const AggregateResults = () => {
       <Users />
       <Articles />
     </>
-  )
-}
+  );
+};
 
-export default AggregateResults
+export default AggregateResults;

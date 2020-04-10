@@ -1,5 +1,5 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
 
 import {
   EmptyAppreciation,
@@ -9,14 +9,14 @@ import {
   List,
   Spinner,
   Transaction,
-} from '~/components'
+} from '~/components';
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
-import { analytics, mergeConnections } from '~/common/utils'
+import { ANALYTICS_EVENTS } from '~/common/enums';
+import { analytics, mergeConnections } from '~/common/utils';
 
-import AppreciationTabs from '../AppreciationTabs'
+import AppreciationTabs from '../AppreciationTabs';
 
-import { MeAppreciationsReceived } from './__generated__/MeAppreciationsReceived'
+import { MeAppreciationsReceived } from './__generated__/MeAppreciationsReceived';
 
 const ME_APPRECIATED_RECEIVED = gql`
   query MeAppreciationsReceived($after: String) {
@@ -42,23 +42,23 @@ const ME_APPRECIATED_RECEIVED = gql`
   }
   ${Transaction.AppreciationReceived.fragments.transaction}
   ${AppreciationTabs.fragments.userActivity}
-`
+`;
 
 const AppreciationsReceived = () => {
   const { data, loading, fetchMore } = useQuery<MeAppreciationsReceived>(
     ME_APPRECIATED_RECEIVED
-  )
+  );
 
   if (loading) {
-    return <Spinner />
+    return <Spinner />;
   }
 
   if (!data || !data.viewer) {
-    return null
+    return null;
   }
 
-  const connectionPath = 'viewer.activity.appreciationsReceived'
-  const { edges, pageInfo } = data.viewer.activity.appreciationsReceived
+  const connectionPath = 'viewer.activity.appreciationsReceived';
+  const { edges, pageInfo } = data.viewer.activity.appreciationsReceived;
 
   if (!edges || edges.length <= 0 || !pageInfo) {
     return (
@@ -66,14 +66,14 @@ const AppreciationsReceived = () => {
         <AppreciationTabs activity={data.viewer.activity} />
         <EmptyAppreciation />
       </>
-    )
+    );
   }
 
   const loadMore = () => {
     analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
       type: 'appreciationsReceived',
       location: edges.length,
-    })
+    });
     return fetchMore({
       variables: {
         after: pageInfo.endCursor,
@@ -84,8 +84,8 @@ const AppreciationsReceived = () => {
           newData: fetchMoreResult,
           path: connectionPath,
         }),
-    })
-  }
+    });
+  };
 
   return (
     <>
@@ -101,8 +101,8 @@ const AppreciationsReceived = () => {
         </List>
       </InfiniteScroll>
     </>
-  )
-}
+  );
+};
 
 export default () => (
   <Layout.Main>
@@ -115,4 +115,4 @@ export default () => (
 
     <AppreciationsReceived />
   </Layout.Main>
-)
+);

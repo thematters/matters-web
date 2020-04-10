@@ -1,5 +1,5 @@
-import gql from 'graphql-tag'
-import { useContext } from 'react'
+import gql from 'graphql-tag';
+import { useContext } from 'react';
 
 import {
   Card,
@@ -9,19 +9,19 @@ import {
   Translate,
   useResponsive,
   ViewerContext,
-} from '~/components'
+} from '~/components';
 
 import {
   CLOSE_ACTIVE_DIALOG,
   OPEN_LOGIN_DIALOG,
   PATHS,
   REFETCH_RESPONSES,
-} from '~/common/enums'
-import { appendTarget } from '~/common/utils'
+} from '~/common/enums';
+import { appendTarget } from '~/common/utils';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
-import { CommentBarArticle } from './__generated__/CommentBarArticle'
+import { CommentBarArticle } from './__generated__/CommentBarArticle';
 
 const fragments = {
   article: gql`
@@ -34,24 +34,24 @@ const fragments = {
       }
     }
   `,
-}
+};
 
 const CommentBar = ({ article }: { article: CommentBarArticle }) => {
-  const viewer = useContext(ViewerContext)
-  const isSmallUp = useResponsive('sm-up')
+  const viewer = useContext(ViewerContext);
+  const isSmallUp = useResponsive('sm-up');
 
   const refetchResponses = () => {
     if (article.live) {
-      return
+      return;
     }
-    window.dispatchEvent(new CustomEvent(REFETCH_RESPONSES, {}))
-  }
+    window.dispatchEvent(new CustomEvent(REFETCH_RESPONSES, {}));
+  };
 
   const cardProps: CardProps = {
     bgColor: 'grey-lighter',
     spacing: [0, 0],
     borderRadius: 'base',
-  }
+  };
 
   if (viewer.shouldSetupLikerID) {
     return (
@@ -68,7 +68,7 @@ const CommentBar = ({ article }: { article: CommentBarArticle }) => {
           </Card>
         )}
       </LikeCoinDialog>
-    )
+    );
   }
 
   if (viewer.isOnboarding && article.author.id !== viewer.id) {
@@ -82,7 +82,7 @@ const CommentBar = ({ article }: { article: CommentBarArticle }) => {
           <style jsx>{styles}</style>
         </p>
       </Card>
-    )
+    );
   }
 
   if (article.author.isBlocking) {
@@ -96,18 +96,18 @@ const CommentBar = ({ article }: { article: CommentBarArticle }) => {
           <style jsx>{styles}</style>
         </p>
       </Card>
-    )
+    );
   }
 
   if (!viewer.isAuthed) {
     const clickProps = isSmallUp
       ? {
           onClick: () => {
-            window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
-            window.dispatchEvent(new CustomEvent(OPEN_LOGIN_DIALOG))
+            window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG));
+            window.dispatchEvent(new CustomEvent(OPEN_LOGIN_DIALOG));
           },
         }
-      : appendTarget({ ...PATHS.AUTH_LOGIN, fallbackCurrent: true })
+      : appendTarget({ ...PATHS.AUTH_LOGIN, fallbackCurrent: true });
 
     return (
       <Card {...clickProps} {...cardProps}>
@@ -118,7 +118,7 @@ const CommentBar = ({ article }: { article: CommentBarArticle }) => {
           <style jsx>{styles}</style>
         </p>
       </Card>
-    )
+    );
   }
 
   return (
@@ -133,9 +133,9 @@ const CommentBar = ({ article }: { article: CommentBarArticle }) => {
         </Card>
       )}
     </CommentFormDialog>
-  )
-}
+  );
+};
 
-CommentBar.fragments = fragments
+CommentBar.fragments = fragments;
 
-export default CommentBar
+export default CommentBar;

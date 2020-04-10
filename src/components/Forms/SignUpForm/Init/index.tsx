@@ -1,8 +1,8 @@
-import { useFormik } from 'formik'
-import gql from 'graphql-tag'
-import _pickBy from 'lodash/pickBy'
-import Link from 'next/link'
-import { useContext } from 'react'
+import { useFormik } from 'formik';
+import gql from 'graphql-tag';
+import _pickBy from 'lodash/pickBy';
+import Link from 'next/link';
+import { useContext } from 'react';
 
 import {
   Dialog,
@@ -12,16 +12,16 @@ import {
   ReCaptchaProvider,
   SendCodeButton,
   Translate,
-} from '~/components'
-import { useMutation } from '~/components/GQL'
-import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
+} from '~/components';
+import { useMutation } from '~/components/GQL';
+import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode';
 
 import {
   ANALYTICS_EVENTS,
   CLOSE_ACTIVE_DIALOG,
   OPEN_LOGIN_DIALOG,
   PATHS,
-} from '~/common/enums'
+} from '~/common/enums';
 import {
   analytics,
   appendTarget,
@@ -32,24 +32,24 @@ import {
   validatePassword,
   validateToS,
   validateUserName,
-} from '~/common/utils'
+} from '~/common/utils';
 
-import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
-import { UserRegister } from './__generated__/UserRegister'
+import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode';
+import { UserRegister } from './__generated__/UserRegister';
 
 interface FormProps {
-  defaultEmail?: string
-  purpose: 'dialog' | 'page'
-  submitCallback?: (params: any) => void
-  closeDialog?: () => void
+  defaultEmail?: string;
+  purpose: 'dialog' | 'page';
+  submitCallback?: (params: any) => void;
+  closeDialog?: () => void;
 }
 
 interface FormValues {
-  email: string
-  code: string
-  userName: string
-  password: string
-  tos: boolean
+  email: string;
+  code: string;
+  userName: string;
+  password: string;
+  tos: boolean;
 }
 
 const USER_REGISTER = gql`
@@ -58,7 +58,7 @@ const USER_REGISTER = gql`
       auth
     }
   }
-`
+`;
 
 const LoginDialogButton = () => (
   <Form.List spacing="xloose">
@@ -66,12 +66,12 @@ const LoginDialogButton = () => (
       title={<Translate zh_hant="已有帳號？" zh_hans="已有帐号？" />}
       rightText={<Translate id="login" />}
       onClick={() => {
-        window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
-        window.dispatchEvent(new CustomEvent(OPEN_LOGIN_DIALOG))
+        window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG));
+        window.dispatchEvent(new CustomEvent(OPEN_LOGIN_DIALOG));
       }}
     />
   </Form.List>
-)
+);
 
 const LoginRedirectionButton = () => (
   <Form.List spacing="xloose">
@@ -81,7 +81,7 @@ const LoginRedirectionButton = () => (
       {...appendTarget(PATHS.AUTH_LOGIN)}
     />
   </Form.List>
-)
+);
 
 export const SignUpInitForm: React.FC<FormProps> = ({
   defaultEmail = '',
@@ -89,12 +89,12 @@ export const SignUpInitForm: React.FC<FormProps> = ({
   submitCallback,
   closeDialog,
 }) => {
-  const [confirm] = useMutation<ConfirmVerificationCode>(CONFIRM_CODE)
-  const [register] = useMutation<UserRegister>(USER_REGISTER)
-  const { lang } = useContext(LanguageContext)
-  const isInDialog = purpose === 'dialog'
-  const isInPage = purpose === 'page'
-  const formId = 'sign-up-init-form'
+  const [confirm] = useMutation<ConfirmVerificationCode>(CONFIRM_CODE);
+  const [register] = useMutation<UserRegister>(USER_REGISTER);
+  const { lang } = useContext(LanguageContext);
+  const isInDialog = purpose === 'dialog';
+  const isInPage = purpose === 'page';
+  const formId = 'sign-up-init-form';
 
   const {
     values,
@@ -128,39 +128,39 @@ export const SignUpInitForm: React.FC<FormProps> = ({
       try {
         const { data } = await confirm({
           variables: { input: { email, code, type: 'register' } },
-        })
-        const codeId = data?.confirmVerificationCode
+        });
+        const codeId = data?.confirmVerificationCode;
 
         await register({
           variables: {
             input: { email, codeId, userName, displayName: userName, password },
           },
-        })
+        });
 
-        analytics.identifyUser()
-        analytics.trackEvent(ANALYTICS_EVENTS.SIGNUP_SUCCESS)
+        analytics.identifyUser();
+        analytics.trackEvent(ANALYTICS_EVENTS.SIGNUP_SUCCESS);
 
         if (submitCallback) {
-          submitCallback({ email, codeId, password })
+          submitCallback({ email, codeId, password });
         }
       } catch (error) {
-        const [messages, codes] = parseFormSubmitErrors(error, lang)
+        const [messages, codes] = parseFormSubmitErrors(error, lang);
         codes.forEach((c) => {
           if (c.includes('USER_EMAIL_')) {
-            setFieldError('email', messages[c])
+            setFieldError('email', messages[c]);
           } else if (c.indexOf('CODE_') >= 0) {
-            setFieldError('code', messages[c])
+            setFieldError('code', messages[c]);
           } else if (c.indexOf('USER_PASSWORD_') >= 0) {
-            setFieldError('password', messages[c])
+            setFieldError('password', messages[c]);
           } else {
-            setFieldError('userName', messages[c])
+            setFieldError('userName', messages[c]);
           }
-        })
+        });
 
-        setSubmitting(false)
+        setSubmitting(false);
       }
     },
-  })
+  });
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
@@ -264,7 +264,7 @@ export const SignUpInitForm: React.FC<FormProps> = ({
       {isInDialog && <LoginDialogButton />}
       {isInPage && <LoginRedirectionButton />}
     </Form>
-  )
+  );
 
   const SubmitButton = (
     <Dialog.Header.RightButton
@@ -274,7 +274,7 @@ export const SignUpInitForm: React.FC<FormProps> = ({
       text={<Translate id="nextStep" />}
       loading={isSubmitting}
     />
-  )
+  );
 
   if (isInPage) {
     return (
@@ -290,7 +290,7 @@ export const SignUpInitForm: React.FC<FormProps> = ({
         />
         {InnerForm}
       </ReCaptchaProvider>
-    )
+    );
   }
 
   return (
@@ -307,5 +307,5 @@ export const SignUpInitForm: React.FC<FormProps> = ({
         {InnerForm}
       </Dialog.Content>
     </ReCaptchaProvider>
-  )
-}
+  );
+};

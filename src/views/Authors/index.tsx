@@ -1,5 +1,5 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
 
 import {
   EmptyWarning,
@@ -10,13 +10,13 @@ import {
   Spinner,
   Translate,
   UserDigest,
-} from '~/components'
-import { QueryError } from '~/components/GQL'
+} from '~/components';
+import { QueryError } from '~/components/GQL';
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
-import { analytics, mergeConnections } from '~/common/utils'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums';
+import { analytics, mergeConnections } from '~/common/utils';
 
-import { AllAuthors } from './__generated__/AllAuthors'
+import { AllAuthors } from './__generated__/AllAuthors';
 
 const ALL_AUTHORSS = gql`
   query AllAuthors($after: String) {
@@ -40,35 +40,37 @@ const ALL_AUTHORSS = gql`
     }
   }
   ${UserDigest.Rich.fragments.user}
-`
+`;
 
 const Authors = () => {
-  const { data, loading, error, fetchMore } = useQuery<AllAuthors>(ALL_AUTHORSS)
+  const { data, loading, error, fetchMore } = useQuery<AllAuthors>(
+    ALL_AUTHORSS
+  );
 
   if (loading) {
-    return <Spinner />
+    return <Spinner />;
   }
 
   if (error) {
-    return <QueryError error={error} />
+    return <QueryError error={error} />;
   }
 
-  const connectionPath = 'viewer.recommendation.authors'
-  const { edges, pageInfo } = data?.viewer?.recommendation.authors || {}
+  const connectionPath = 'viewer.recommendation.authors';
+  const { edges, pageInfo } = data?.viewer?.recommendation.authors || {};
 
   if (!edges || edges.length <= 0 || !pageInfo) {
     return (
       <EmptyWarning
         description={<Translate zh_hant="還沒有作者" zh_hans="还没有作者" />}
       />
-    )
+    );
   }
 
   const loadMore = () => {
     analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
       type: FEED_TYPE.ALL_AUTHORS,
       location: edges.length,
-    })
+    });
     return fetchMore({
       variables: {
         after: pageInfo.endCursor,
@@ -80,8 +82,8 @@ const Authors = () => {
           path: connectionPath,
           dedupe: true,
         }),
-    })
-  }
+    });
+  };
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
@@ -102,8 +104,8 @@ const Authors = () => {
         ))}
       </List>
     </InfiniteScroll>
-  )
-}
+  );
+};
 
 export default () => (
   <Layout.Main>
@@ -117,4 +119,4 @@ export default () => (
 
     <Authors />
   </Layout.Main>
-)
+);

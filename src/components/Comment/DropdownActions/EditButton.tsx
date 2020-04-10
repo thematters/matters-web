@@ -1,9 +1,9 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import { Icon, Menu, TextIcon, Translate } from '~/components'
+import { Icon, Menu, TextIcon, Translate } from '~/components';
 
 interface EditButtonProps {
-  openEditCommentDialog: () => void
+  openEditCommentDialog: () => void;
 }
 
 const fragments = {
@@ -24,7 +24,7 @@ const fragments = {
       }
     }
   `,
-}
+};
 
 const EditButton = ({ openEditCommentDialog }: EditButtonProps) => {
   return (
@@ -33,9 +33,9 @@ const EditButton = ({ openEditCommentDialog }: EditButtonProps) => {
         <Translate id="edit" />
       </TextIcon>
     </Menu.Item>
-  )
-}
+  );
+};
 
-EditButton.fragments = fragments
+EditButton.fragments = fragments;
 
-export default EditButton
+export default EditButton;

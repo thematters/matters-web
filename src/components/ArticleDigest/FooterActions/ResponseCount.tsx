@@ -1,17 +1,17 @@
-import gql from 'graphql-tag'
-import _get from 'lodash/get'
+import gql from 'graphql-tag';
+import _get from 'lodash/get';
 
-import { Button, Icon, TextIcon } from '~/components'
+import { Button, Icon, TextIcon } from '~/components';
 
-import { ANALYTICS_EVENTS, UrlFragments } from '~/common/enums'
-import { analytics, numAbbr, toPath } from '~/common/utils'
+import { ANALYTICS_EVENTS, UrlFragments } from '~/common/enums';
+import { analytics, numAbbr, toPath } from '~/common/utils';
 
-import { ActionsResponseCountArticle } from './__generated__/ActionsResponseCountArticle'
+import { ActionsResponseCountArticle } from './__generated__/ActionsResponseCountArticle';
 
 interface ResponseCountProps {
-  article: ActionsResponseCountArticle
-  size?: 'sm' | 'xs'
-  inCard: boolean
+  article: ActionsResponseCountArticle;
+  size?: 'sm' | 'xs';
+  inCard: boolean;
 }
 
 const fragments = {
@@ -27,20 +27,20 @@ const fragments = {
       }
     }
   `,
-}
+};
 
 const ResponseCount = ({
   article,
   size = 'sm',
   inCard,
 }: ResponseCountProps) => {
-  const { articleState: state } = article
+  const { articleState: state } = article;
   const path = toPath({
     page: 'articleDetail',
     article,
     fragment: UrlFragments.COMMENTS,
-  })
-  const isBanned = state === 'banned'
+  });
+  const isBanned = state === 'banned';
 
   return (
     <Button
@@ -52,7 +52,7 @@ const ResponseCount = ({
         analytics.trackEvent(ANALYTICS_EVENTS.OPEN_COMMENTS, {
           entrance: article.id,
           type: 'article-digest',
-        })
+        });
       }}
       aira-label="查看評論"
     >
@@ -65,9 +65,9 @@ const ResponseCount = ({
         {article.responseCount > 0 ? numAbbr(article.responseCount) : undefined}
       </TextIcon>
     </Button>
-  )
-}
+  );
+};
 
-ResponseCount.fragments = fragments
+ResponseCount.fragments = fragments;
 
-export default ResponseCount
+export default ResponseCount;

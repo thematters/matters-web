@@ -1,9 +1,9 @@
-import MeBookmarks from '~/views/Me/Bookmarks'
+import MeBookmarks from '~/views/Me/Bookmarks';
 
-import { Protected } from '~/components'
+import { Protected } from '~/components';
 
 export default () => (
   <Protected>
     <MeBookmarks />
   </Protected>
-)
+);

@@ -1,14 +1,14 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import AddCover from './AddCover'
-import AddTags from './AddTags'
-import CollectArticles from './CollectArticles'
+import AddCover from './AddCover';
+import AddTags from './AddTags';
+import CollectArticles from './CollectArticles';
 
-import { DraftSidebarDraft } from './__generated__/DraftSidebarDraft'
+import { DraftSidebarDraft } from './__generated__/DraftSidebarDraft';
 
 interface SidebarProps {
-  draft: DraftSidebarDraft
-  setSaveStatus: (status: 'saved' | 'saving' | 'saveFailed') => void
+  draft: DraftSidebarDraft;
+  setSaveStatus: (status: 'saved' | 'saving' | 'saveFailed') => void;
 }
 
 const Sidebar = ({ draft, setSaveStatus }: SidebarProps) => (
@@ -17,7 +17,7 @@ const Sidebar = ({ draft, setSaveStatus }: SidebarProps) => (
     <AddTags draft={draft} setSaveStatus={setSaveStatus} />
     <CollectArticles draft={draft} setSaveStatus={setSaveStatus} />
   </>
-)
+);
 
 Sidebar.fragments = {
   draft: gql`
@@ -31,6 +31,6 @@ Sidebar.fragments = {
     ${AddTags.fragments.draft}
     ${CollectArticles.fragments.draft}
   `,
-}
+};
 
-export default Sidebar
+export default Sidebar;

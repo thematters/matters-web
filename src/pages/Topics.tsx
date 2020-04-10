@@ -1,3 +1,3 @@
-import ArticleFeed from '~/views/ArticleFeed'
+import ArticleFeed from '~/views/ArticleFeed';
 
-export default () => <ArticleFeed type="topic" />
+export default () => <ArticleFeed type="topic" />;

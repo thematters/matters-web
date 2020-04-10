@@ -1,10 +1,10 @@
-import { Layout, UserProfile } from '~/components'
+import { Layout, UserProfile } from '~/components';
 
-import UserComments from './UserComments'
+import UserComments from './UserComments';
 
 export default () => (
   <Layout.Main>
     <UserProfile />
     <UserComments />
   </Layout.Main>
-)
+);

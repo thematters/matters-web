@@ -1,19 +1,19 @@
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 
-import { Layout, Translate } from '~/components'
+import { Layout, Translate } from '~/components';
 
-import { OAUTH_PROVIDER, PATHS } from '~/common/enums'
-import { getQuery, routerPush } from '~/common/utils'
-import ICON_LIKECOIN from '~/static/icons/likecoin.svg'
+import { OAUTH_PROVIDER, PATHS } from '~/common/enums';
+import { getQuery, routerPush } from '~/common/utils';
+import ICON_LIKECOIN from '~/static/icons/likecoin.svg';
 
-import { Box } from '../../Box'
-import styles from '../styles.css'
+import { Box } from '../../Box';
+import styles from '../styles.css';
 
 const OAUTH_CALLBACK_ERROR_CODE = {
   userNotFound: 1,
   likerNotFound: 2,
   likerExists: 3,
-}
+};
 
 const ERROR_TEXT = {
   [OAUTH_CALLBACK_ERROR_CODE.userNotFound]: {
@@ -28,23 +28,23 @@ const ERROR_TEXT = {
     zh_hant: '此 Liker ID 已與 Matters ID 綁定',
     zh_hans: '此 Liker ID 已与 Matters ID 绑定',
   },
-}
+};
 
 const OAuthCallbackFailure = () => {
-  const router = useRouter()
-  const code = getQuery({ router, key: 'code' })
-  const provider = getQuery({ router, key: 'provider' })
+  const router = useRouter();
+  const code = getQuery({ router, key: 'code' });
+  const provider = getQuery({ router, key: 'provider' });
   const title: { [key: string]: any } = {
     likecoin: <Translate zh_hant="設置 Liker ID" zh_hans="设置 Liker ID" />,
-  }
+  };
   const avatar: { [key: string]: any } = {
     likecoin: ICON_LIKECOIN,
-  }
-  const errorDetail = ERROR_TEXT[code as any]
+  };
+  const errorDetail = ERROR_TEXT[code as any];
 
   if (!provider || OAUTH_PROVIDER.indexOf(provider) < 0) {
-    routerPush(PATHS.HOME.href, PATHS.HOME.as)
-    return null
+    routerPush(PATHS.HOME.href, PATHS.HOME.as);
+    return null;
   }
 
   return (
@@ -69,7 +69,7 @@ const OAuthCallbackFailure = () => {
         </Box>
       </Layout.Spacing>
     </Layout.Main>
-  )
-}
+  );
+};
 
-export default OAuthCallbackFailure
+export default OAuthCallbackFailure;

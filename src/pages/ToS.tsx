@@ -1,3 +1,3 @@
-import ToS from '~/views/ToS'
+import ToS from '~/views/ToS';
 
-export default () => <ToS />
+export default () => <ToS />;

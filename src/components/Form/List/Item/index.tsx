@@ -1,12 +1,12 @@
-import { Card, CardProps, Icon, TextIcon, useResponsive } from '~/components'
+import { Card, CardProps, Icon, TextIcon, useResponsive } from '~/components';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 type ItemProps = {
-  title: string | React.ReactNode
-  subtitle?: string | React.ReactNode
-  rightText?: string | React.ReactNode
-} & CardProps
+  title: string | React.ReactNode;
+  subtitle?: string | React.ReactNode;
+  rightText?: string | React.ReactNode;
+} & CardProps;
 
 const Item: React.FC<ItemProps> = ({
   title,
@@ -15,7 +15,7 @@ const Item: React.FC<ItemProps> = ({
 
   ...cardProps
 }) => {
-  const isSmallUp = useResponsive('sm-up')
+  const isSmallUp = useResponsive('sm-up');
 
   return (
     <li>
@@ -43,7 +43,7 @@ const Item: React.FC<ItemProps> = ({
 
       <style jsx>{styles}</style>
     </li>
-  )
-}
+  );
+};
 
-export default Item
+export default Item;

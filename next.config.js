@@ -1,28 +1,28 @@
 // load environment variables from .env
 try {
-  const dotEnvResult = require('dotenv').config()
+  const dotEnvResult = require('dotenv').config();
   if (dotEnvResult.error) {
-    console.log('error loading .env', dotEnvResult.error)
+    console.log('error loading .env', dotEnvResult.error);
   }
 } catch (err) {
-  console.log('error loading .env', err)
+  console.log('error loading .env', err);
 }
 
-const withPlugins = require('next-compose-plugins')
-const withBundleAnalyzer = require('@zeit/next-bundle-analyzer')
-const optimizedImages = require('next-optimized-images')
-const withOffline = require('next-offline')
+const withPlugins = require('next-compose-plugins');
+const withBundleAnalyzer = require('@zeit/next-bundle-analyzer');
+const optimizedImages = require('next-optimized-images');
+const withOffline = require('next-offline');
 
-const packageJson = require('./package.json')
+const packageJson = require('./package.json');
 
-const isProd = process.env.ENV === 'production'
+const isProd = process.env.ENV === 'production';
 const FIREBASE_CONFIG = process.env.FIREBASE_CONFIG
   ? JSON.parse(Buffer.from(process.env.FIREBASE_CONFIG, 'base64').toString())
-  : {}
+  : {};
 
 const URL_PUSH_SW = isProd
   ? './firebase-messaging-sw-production.js'
-  : './firebase-messaging-sw-develop.js'
+  : './firebase-messaging-sw-develop.js';
 
 const nextConfig = {
   /**
@@ -73,7 +73,7 @@ const nextConfig = {
           loader: require('styled-jsx/webpack').loader,
         },
       ],
-    })
+    });
 
     config.module.rules.push({
       test: /\.svg$/,
@@ -94,7 +94,7 @@ const nextConfig = {
           },
         },
       ],
-    })
+    });
 
     /***
      * Import files as URL
@@ -113,16 +113,16 @@ const nextConfig = {
     //   ]
     // })
 
-    return config
+    return config;
   },
   exportPathMap: async function (defaultPathMap) {
     return {
       '/': {
         page: '/_error',
       },
-    }
+    };
   },
-}
+};
 
 module.exports = withPlugins(
   [
@@ -190,4 +190,4 @@ module.exports = withPlugins(
     ],
   ],
   nextConfig
-)
+);

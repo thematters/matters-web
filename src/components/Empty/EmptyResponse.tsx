@@ -1,9 +1,9 @@
-import { Empty, Icon, Translate } from '~/components'
+import { Empty, Icon, Translate } from '~/components';
 
 export const EmptyResponse = ({
   articleOnlyMode,
 }: {
-  articleOnlyMode?: boolean
+  articleOnlyMode?: boolean;
 }) => {
   return (
     <Empty
@@ -16,5 +16,5 @@ export const EmptyResponse = ({
         )
       }
     />
-  )
-}
+  );
+};

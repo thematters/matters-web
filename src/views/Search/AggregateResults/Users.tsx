@@ -1,17 +1,17 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
-import _get from 'lodash/get'
-import { useRouter } from 'next/router'
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
+import _get from 'lodash/get';
+import { useRouter } from 'next/router';
 
-import { Card, List, Spinner, UserDigest } from '~/components'
+import { Card, List, Spinner, UserDigest } from '~/components';
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
-import { analytics, getQuery, toPath } from '~/common/utils'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums';
+import { analytics, getQuery, toPath } from '~/common/utils';
 
-import styles from './styles.css'
-import ViewMoreButton from './ViewMoreButton'
+import styles from './styles.css';
+import ViewMoreButton from './ViewMoreButton';
 
-import { SeachAggregateUsers } from './__generated__/SeachAggregateUsers'
+import { SeachAggregateUsers } from './__generated__/SeachAggregateUsers';
 
 const SEARCH_AGGREGATE_USERS = gql`
   query SeachAggregateUsers($key: String!) {
@@ -32,25 +32,25 @@ const SEARCH_AGGREGATE_USERS = gql`
     }
   }
   ${UserDigest.Mini.fragments.user}
-`
+`;
 
 const AggregateUserResults = () => {
-  const router = useRouter()
-  const q = getQuery({ router, key: 'q' })
+  const router = useRouter();
+  const q = getQuery({ router, key: 'q' });
 
   const { data, loading } = useQuery<SeachAggregateUsers>(
     SEARCH_AGGREGATE_USERS,
     { variables: { key: q } }
-  )
+  );
 
   if (loading) {
-    return <Spinner />
+    return <Spinner />;
   }
 
-  const { edges, pageInfo } = data?.search || {}
+  const { edges, pageInfo } = data?.search || {};
 
   if (!edges || edges.length <= 0 || !pageInfo) {
-    return null
+    return null;
   }
 
   return (
@@ -90,7 +90,7 @@ const AggregateUserResults = () => {
 
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 
-export default AggregateUserResults
+export default AggregateUserResults;

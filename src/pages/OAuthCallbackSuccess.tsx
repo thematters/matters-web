@@ -1,3 +1,3 @@
-import OAuthCallbackSuccess from '~/views/OAuth/Callback/Success'
+import OAuthCallbackSuccess from '~/views/OAuth/Callback/Success';
 
-export default () => <OAuthCallbackSuccess />
+export default () => <OAuthCallbackSuccess />;

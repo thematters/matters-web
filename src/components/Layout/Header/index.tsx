@@ -1,25 +1,25 @@
-import classNames from 'classnames'
+import classNames from 'classnames';
 
-import BackButton from './BackButton'
-import CancelButton from './CancelButton'
-import MeButton from './MeButton'
-import styles from './styles.css'
-import Title from './Title'
+import BackButton from './BackButton';
+import CancelButton from './CancelButton';
+import MeButton from './MeButton';
+import styles from './styles.css';
+import Title from './Title';
 
 interface HeaderProps {
-  left?: React.ReactNode
-  right?: React.ReactNode
+  left?: React.ReactNode;
+  right?: React.ReactNode;
 
-  mode?: 'solid-fixed' | 'transparent-absolute'
-  marginBottom?: 0 | 'base' | 'loose'
-  className?: string
+  mode?: 'solid-fixed' | 'transparent-absolute';
+  marginBottom?: 0 | 'base' | 'loose';
+  className?: string;
 }
 
 const Header: React.FC<HeaderProps> & {
-  BackButton: typeof BackButton
-  CancelButton: typeof CancelButton
-  MeButton: typeof MeButton
-  Title: typeof Title
+  BackButton: typeof BackButton;
+  CancelButton: typeof CancelButton;
+  MeButton: typeof MeButton;
+  Title: typeof Title;
 } = ({
   left,
   right,
@@ -31,7 +31,7 @@ const Header: React.FC<HeaderProps> & {
     [mode]: true,
     [`margin-${marginBottom}`]: marginBottom,
     [`${className}`]: !!className,
-  })
+  });
 
   return (
     <header className={headerClass}>
@@ -42,12 +42,12 @@ const Header: React.FC<HeaderProps> & {
 
       <style jsx>{styles}</style>
     </header>
-  )
-}
+  );
+};
 
-Header.BackButton = BackButton
-Header.CancelButton = CancelButton
-Header.MeButton = MeButton
-Header.Title = Title
+Header.BackButton = BackButton;
+Header.CancelButton = CancelButton;
+Header.MeButton = MeButton;
+Header.Title = Title;
 
-export default Header
+export default Header;

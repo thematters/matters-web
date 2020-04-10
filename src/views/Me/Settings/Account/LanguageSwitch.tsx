@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext } from 'react';
 
 import {
   Button,
@@ -9,25 +9,25 @@ import {
   Menu,
   TextIcon,
   Translate,
-} from '~/components'
+} from '~/components';
 
 const textMap = {
   zh_hant: '繁體中文',
   zh_hans: '简体中文',
   en: 'English',
-}
+};
 
 const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
   <LanguageConsumer>
     {({ lang, setLang }) => {
-      const isZhHantActive = lang === 'zh_hant'
-      const isZhHansActive = lang === 'zh_hans'
+      const isZhHantActive = lang === 'zh_hant';
+      const isZhHansActive = lang === 'zh_hans';
 
       return (
         <Menu width={isInDropdown ? 'sm' : undefined}>
           <Menu.Item
             onClick={() => {
-              setLang('zh_hant')
+              setLang('zh_hant');
             }}
           >
             <TextIcon
@@ -41,7 +41,7 @@ const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
 
           <Menu.Item
             onClick={() => {
-              setLang('zh_hans')
+              setLang('zh_hans');
             }}
           >
             <TextIcon
@@ -53,13 +53,13 @@ const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
             </TextIcon>
           </Menu.Item>
         </Menu>
-      )
+      );
     }}
   </LanguageConsumer>
-)
+);
 
 export const LanguageSwitch = () => {
-  const { lang } = useContext(LanguageContext)
+  const { lang } = useContext(LanguageContext);
 
   return (
     <DropdownDialog
@@ -86,5 +86,5 @@ export const LanguageSwitch = () => {
         </Button>
       )}
     </DropdownDialog>
-  )
-}
+  );
+};

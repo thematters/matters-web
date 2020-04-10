@@ -1,15 +1,15 @@
-import jump from 'jump.js'
+import jump from 'jump.js';
 
-import { Button, ButtonProps } from '~/components'
+import { Button, ButtonProps } from '~/components';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 type NavListItemProps = {
-  name: React.ReactNode
-  icon: React.ReactNode
-  activeIcon: React.ReactNode
-  active: boolean
-} & ButtonProps
+  name: React.ReactNode;
+  icon: React.ReactNode;
+  activeIcon: React.ReactNode;
+  active: boolean;
+} & ButtonProps;
 
 const NavListItem = ({
   name,
@@ -18,17 +18,17 @@ const NavListItem = ({
   active,
   ...props
 }: NavListItemProps) => {
-  const { onClick: baseOnClick } = props
+  const { onClick: baseOnClick } = props;
   const onClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     if (baseOnClick) {
-      baseOnClick()
+      baseOnClick();
     }
 
     if (active) {
-      event.preventDefault()
-      jump(document.body)
+      event.preventDefault();
+      jump(document.body);
     }
-  }
+  };
 
   return (
     <li>
@@ -44,7 +44,7 @@ const NavListItem = ({
 
       <style jsx>{styles}</style>
     </li>
-  )
-}
+  );
+};
 
-export default NavListItem
+export default NavListItem;

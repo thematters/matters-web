@@ -1,12 +1,12 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import { UserDigest } from '~/components'
+import { UserDigest } from '~/components';
 
-import { NoticeFollower as NoticeFollowerType } from './__generated__/NoticeFollower'
+import { NoticeFollower as NoticeFollowerType } from './__generated__/NoticeFollower';
 
 const NoticeFollower = ({ user }: { user: NoticeFollowerType | null }) => {
   if (!user) {
-    return null
+    return null;
   }
 
   return (
@@ -18,8 +18,8 @@ const NoticeFollower = ({ user }: { user: NoticeFollowerType | null }) => {
       hasState={false}
       hasFollow
     />
-  )
-}
+  );
+};
 
 NoticeFollower.fragments = {
   follower: gql`
@@ -28,6 +28,6 @@ NoticeFollower.fragments = {
     }
     ${UserDigest.Rich.fragments.user}
   `,
-}
+};
 
-export default NoticeFollower
+export default NoticeFollower;

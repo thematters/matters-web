@@ -1,7 +1,7 @@
-import { NextFunction, Request, Response } from 'express'
-import fetch from 'isomorphic-unfetch'
-import _get from 'lodash/get'
-import getConfig from 'next/config'
+import { NextFunction, Request, Response } from 'express';
+import fetch from 'isomorphic-unfetch';
+import _get from 'lodash/get';
+import getConfig from 'next/config';
 
 /**
  * Route paths for Next.js custom routing
@@ -48,13 +48,13 @@ type ROUTE_KEY =
   | 'ABOUT'
   | 'GUIDE'
   | 'COMMUNITY'
-  | 'TOS'
+  | 'TOS';
 
 export const ROUTES: Array<{
-  key: ROUTE_KEY
-  href: string
-  as: string
-  handler?: (req: Request, res: Response, next: NextFunction) => any
+  key: ROUTE_KEY;
+  href: string;
+  as: string;
+  handler?: (req: Request, res: Response, next: NextFunction) => any;
 }> = [
   {
     key: 'HOME',
@@ -139,12 +139,12 @@ export const ROUTES: Array<{
     as: '/forum',
     handler: async (req, res) => {
       if (!req.query || !req.query.post) {
-        return res.redirect(302, '/')
+        return res.redirect(302, '/');
       }
 
       const {
         publicRuntimeConfig: { API_URL },
-      } = getConfig()
+      } = getConfig();
 
       try {
         const response = await fetch(API_URL, {
@@ -165,20 +165,20 @@ export const ROUTES: Array<{
               }
             `,
           }),
-        })
-        const data = await response.json()
-        const slug = _get(data, 'data.article.slug')
-        const mediaHash = _get(data, 'data.article.mediaHash')
-        const userName = _get(data, 'data.article.author.userName')
+        });
+        const data = await response.json();
+        const slug = _get(data, 'data.article.slug');
+        const mediaHash = _get(data, 'data.article.mediaHash');
+        const userName = _get(data, 'data.article.author.userName');
 
         if (mediaHash && userName) {
-          return res.redirect(301, `/@${userName}/${slug}-${mediaHash}`)
+          return res.redirect(301, `/@${userName}/${slug}-${mediaHash}`);
         } else {
-          return res.redirect(302, '/')
+          return res.redirect(302, '/');
         }
       } catch (e) {
-        console.error(e)
-        return res.redirect(302, '/')
+        console.error(e);
+        return res.redirect(302, '/');
       }
     },
   },
@@ -309,13 +309,13 @@ export const ROUTES: Array<{
     href: '/ToS',
     as: '/tos',
   },
-]
+];
 
 export const UrlFragments = {
   COMMENTS: 'comments',
-}
+};
 
-export const PATHS = {} as { [key in ROUTE_KEY]: { href: string; as: string } }
+export const PATHS = {} as { [key in ROUTE_KEY]: { href: string; as: string } };
 ROUTES.forEach(({ key, as, href }) => {
-  PATHS[key] = { href, as }
-})
+  PATHS[key] = { href, as };
+});

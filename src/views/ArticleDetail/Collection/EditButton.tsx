@@ -1,17 +1,17 @@
-import classNames from 'classnames'
-import gql from 'graphql-tag'
-import _uniq from 'lodash/uniq'
+import classNames from 'classnames';
+import gql from 'graphql-tag';
+import _uniq from 'lodash/uniq';
 
-import { Button, ButtonProps, Icon, TextIcon, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
-import articleFragments from '~/components/GQL/fragments/article'
+import { Button, ButtonProps, Icon, TextIcon, Translate } from '~/components';
+import { useMutation } from '~/components/GQL';
+import articleFragments from '~/components/GQL/fragments/article';
 
-import { ADD_TOAST } from '~/common/enums'
+import { ADD_TOAST } from '~/common/enums';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
-import { ArticleDetail_article } from '../__generated__/ArticleDetail'
-import { EditorSetCollection } from './__generated__/EditorSetCollection'
+import { ArticleDetail_article } from '../__generated__/ArticleDetail';
+import { EditorSetCollection } from './__generated__/EditorSetCollection';
 
 /**
  * Note:
@@ -31,7 +31,7 @@ const EDITOR_SET_COLLECTION = gql`
     }
   }
   ${articleFragments.articleCollection}
-`
+`;
 
 const EditButton = ({
   article,
@@ -39,14 +39,14 @@ const EditButton = ({
   setEditing,
   editingArticles,
 }: {
-  article: ArticleDetail_article
-  editing: boolean
-  setEditing: any
-  editingArticles: string[]
+  article: ArticleDetail_article;
+  editing: boolean;
+  setEditing: any;
+  editingArticles: string[];
 }) => {
   const [setCollection, { loading }] = useMutation<EditorSetCollection>(
     EDITOR_SET_COLLECTION
-  )
+  );
   const onSave = async () => {
     try {
       await setCollection({
@@ -55,7 +55,7 @@ const EditButton = ({
           collection: _uniq(editingArticles.map((item: any) => item.id)),
           first: null,
         },
-      })
+      });
 
       window.dispatchEvent(
         new CustomEvent(ADD_TOAST, {
@@ -65,7 +65,7 @@ const EditButton = ({
             duration: 2000,
           },
         })
-      )
+      );
     } catch (error) {
       window.dispatchEvent(
         new CustomEvent(ADD_TOAST, {
@@ -76,18 +76,18 @@ const EditButton = ({
             duration: 2000,
           },
         })
-      )
+      );
     }
-    setEditing(false)
-  }
+    setEditing(false);
+  };
   const editButtonClass = classNames({
     'edit-button': true,
-  })
+  });
 
   const buttonProps = {
     size: ['4rem', '1.25rem'],
     bgColor: 'grey-lighter',
-  } as ButtonProps
+  } as ButtonProps;
 
   if (!editing) {
     return (
@@ -105,7 +105,7 @@ const EditButton = ({
 
         <style jsx>{styles}</style>
       </span>
-    )
+    );
   }
 
   return (
@@ -129,7 +129,7 @@ const EditButton = ({
 
       <style jsx>{styles}</style>
     </span>
-  )
-}
+  );
+};
 
-export default EditButton
+export default EditButton;

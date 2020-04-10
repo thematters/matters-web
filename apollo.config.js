@@ -8,4 +8,4 @@ module.exports = {
     },
     includes: ['src/**/*.{ts,tsx}'],
   },
-}
+};

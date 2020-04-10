@@ -1,3 +1,3 @@
-import Follow from '~/views/Follow'
+import Follow from '~/views/Follow';
 
-export default () => <Follow />
+export default () => <Follow />;

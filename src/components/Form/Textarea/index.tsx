@@ -1,8 +1,8 @@
-import autosize from 'autosize'
-import { useEffect, useRef } from 'react'
+import autosize from 'autosize';
+import { useEffect, useRef } from 'react';
 
-import Field, { FieldProps } from '../Field'
-import styles from './styles.css'
+import Field, { FieldProps } from '../Field';
+import styles from './styles.css';
 
 /**
  * Pure UI component for <textarea> element
@@ -20,12 +20,12 @@ import styles from './styles.css'
  *
  */
 type TextareaProps = {
-  name: string
+  name: string;
 } & Omit<FieldProps, 'fieldMsgId'> &
   React.DetailedHTMLProps<
     React.TextareaHTMLAttributes<HTMLTextAreaElement>,
     HTMLTextAreaElement
-  >
+  >;
 
 const Textarea: React.FC<TextareaProps> = ({
   name,
@@ -37,15 +37,15 @@ const Textarea: React.FC<TextareaProps> = ({
 
   ...textareaProps
 }) => {
-  const node: React.RefObject<any> | null = useRef(null)
-  const fieldId = `field-${name}`
-  const fieldMsgId = `field-msg-${name}`
+  const node: React.RefObject<any> | null = useRef(null);
+  const fieldId = `field-${name}`;
+  const fieldMsgId = `field-msg-${name}`;
 
   useEffect(() => {
     if (node && node.current) {
-      autosize(node.current)
+      autosize(node.current);
     }
-  }, [])
+  }, []);
 
   return (
     <Field>
@@ -65,7 +65,7 @@ const Textarea: React.FC<TextareaProps> = ({
 
       <style jsx>{styles}</style>
     </Field>
-  )
-}
+  );
+};
 
-export default Textarea
+export default Textarea;

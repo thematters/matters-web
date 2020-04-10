@@ -1,5 +1,5 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
 
 import {
   EmptyAppreciation,
@@ -9,14 +9,14 @@ import {
   List,
   Spinner,
   Transaction,
-} from '~/components'
+} from '~/components';
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
-import { analytics, mergeConnections } from '~/common/utils'
+import { ANALYTICS_EVENTS } from '~/common/enums';
+import { analytics, mergeConnections } from '~/common/utils';
 
-import AppreciationTabs from '../AppreciationTabs'
+import AppreciationTabs from '../AppreciationTabs';
 
-import { MeAppreciationsSent } from './__generated__/MeAppreciationsSent'
+import { MeAppreciationsSent } from './__generated__/MeAppreciationsSent';
 
 const ME_APPRECIATIONS_SENT = gql`
   query MeAppreciationsSent($after: String) {
@@ -42,23 +42,23 @@ const ME_APPRECIATIONS_SENT = gql`
   }
   ${Transaction.AppreciationSent.fragments.transaction}
   ${AppreciationTabs.fragments.userActivity}
-`
+`;
 
 const AppreciationsSent = () => {
   const { data, loading, fetchMore } = useQuery<MeAppreciationsSent>(
     ME_APPRECIATIONS_SENT
-  )
+  );
 
   if (loading) {
-    return <Spinner />
+    return <Spinner />;
   }
 
   if (!data || !data.viewer) {
-    return null
+    return null;
   }
 
-  const connectionPath = 'viewer.activity.appreciationsSent'
-  const { edges, pageInfo } = data.viewer.activity.appreciationsSent
+  const connectionPath = 'viewer.activity.appreciationsSent';
+  const { edges, pageInfo } = data.viewer.activity.appreciationsSent;
 
   if (!edges || edges.length <= 0 || !pageInfo) {
     return (
@@ -66,14 +66,14 @@ const AppreciationsSent = () => {
         <AppreciationTabs activity={data.viewer.activity} />
         <EmptyAppreciation />
       </>
-    )
+    );
   }
 
   const loadMore = () => {
     analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
       type: 'appreciationsSent',
       location: edges.length,
-    })
+    });
     return fetchMore({
       variables: {
         after: pageInfo.endCursor,
@@ -84,8 +84,8 @@ const AppreciationsSent = () => {
           newData: fetchMoreResult,
           path: connectionPath,
         }),
-    })
-  }
+    });
+  };
 
   return (
     <>
@@ -101,8 +101,8 @@ const AppreciationsSent = () => {
         </List>
       </InfiniteScroll>
     </>
-  )
-}
+  );
+};
 
 export default () => (
   <Layout.Main>
@@ -115,4 +115,4 @@ export default () => (
 
     <AppreciationsSent />
   </Layout.Main>
-)
+);

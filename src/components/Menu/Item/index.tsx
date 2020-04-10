@@ -1,11 +1,11 @@
-import classNames from 'classnames'
-import React from 'react'
+import classNames from 'classnames';
+import React from 'react';
 
-import { Card, CardProps } from '~/components'
+import { Card, CardProps } from '~/components';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
-type MenuItemProps = CardProps
+type MenuItemProps = CardProps;
 
 const MenuItem: React.FC<MenuItemProps> = ({
   children,
@@ -14,7 +14,7 @@ const MenuItem: React.FC<MenuItemProps> = ({
 }) => {
   const menuItemClass = classNames({
     'menu-item': true,
-  })
+  });
 
   return (
     <li className={menuItemClass} role="menuitem">
@@ -24,7 +24,7 @@ const MenuItem: React.FC<MenuItemProps> = ({
 
       <style jsx>{styles}</style>
     </li>
-  )
-}
+  );
+};
 
-export default MenuItem
+export default MenuItem;

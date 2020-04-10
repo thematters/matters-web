@@ -1,17 +1,17 @@
-import classNames from 'classnames'
-import gql from 'graphql-tag'
-import Link from 'next/link'
+import classNames from 'classnames';
+import gql from 'graphql-tag';
+import Link from 'next/link';
 
-import { Card, CardProps, Translate } from '~/components'
-import { Avatar } from '~/components/Avatar'
-import { FollowButton } from '~/components/Buttons/Follow'
-import { UnblockUserButton } from '~/components/Buttons/UnblockUser'
+import { Card, CardProps, Translate } from '~/components';
+import { Avatar } from '~/components/Avatar';
+import { FollowButton } from '~/components/Buttons/Follow';
+import { UnblockUserButton } from '~/components/Buttons/UnblockUser';
 
-import { toPath } from '~/common/utils'
+import { toPath } from '~/common/utils';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
-import { UserDigestRichUser } from './__generated__/UserDigestRichUser'
+import { UserDigestRichUser } from './__generated__/UserDigestRichUser';
 
 /**
  * UeserDigest.Rich is a component for presenting user's avatar, display
@@ -23,15 +23,15 @@ import { UserDigestRichUser } from './__generated__/UserDigestRichUser'
  */
 
 type RichProps = {
-  user: UserDigestRichUser
+  user: UserDigestRichUser;
 
-  size?: 'sm' | 'lg'
-  avatarBadge?: React.ReactNode
+  size?: 'sm' | 'lg';
+  avatarBadge?: React.ReactNode;
 
-  hasFollow?: boolean
-  hasState?: boolean
-  hasUnblock?: boolean
-} & CardProps
+  hasFollow?: boolean;
+  hasState?: boolean;
+  hasUnblock?: boolean;
+} & CardProps;
 
 const fragments = {
   user: gql`
@@ -55,7 +55,7 @@ const fragments = {
     ${FollowButton.fragments.user}
     ${UnblockUserButton.fragments.user}
   `,
-}
+};
 
 const Rich = ({
   user,
@@ -72,13 +72,13 @@ const Rich = ({
   const path = toPath({
     page: 'userProfile',
     userName: user.userName || '',
-  })
-  const isArchived = user?.status?.state === 'archived'
+  });
+  const isArchived = user?.status?.state === 'archived';
   const containerClass = classNames({
     container: true,
     [`size-${size}`]: !!size,
     disabled: isArchived,
-  })
+  });
 
   if (isArchived) {
     return (
@@ -103,7 +103,7 @@ const Rich = ({
           <style jsx>{styles}</style>
         </section>
       </Card>
-    )
+    );
   }
 
   return (
@@ -137,9 +137,9 @@ const Rich = ({
         <style jsx>{styles}</style>
       </section>
     </Card>
-  )
-}
+  );
+};
 
-Rich.fragments = fragments
+Rich.fragments = fragments;
 
-export default Rich
+export default Rich;

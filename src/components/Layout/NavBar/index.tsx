@@ -1,23 +1,23 @@
-import { useRouter } from 'next/router'
-import { useContext } from 'react'
+import { useRouter } from 'next/router';
+import { useContext } from 'react';
 
-import { Icon, ViewerContext, WriteButton } from '~/components'
+import { Icon, ViewerContext, WriteButton } from '~/components';
 
-import { PATHS, TEXT } from '~/common/enums'
+import { PATHS, TEXT } from '~/common/enums';
 
-import UnreadIcon from '../UnreadIcon'
-import NavListItem from './NavListItem'
-import styles from './styles.css'
+import UnreadIcon from '../UnreadIcon';
+import NavListItem from './NavListItem';
+import styles from './styles.css';
 
 const NavBar = () => {
-  const router = useRouter()
-  const viewer = useContext(ViewerContext)
+  const router = useRouter();
+  const viewer = useContext(ViewerContext);
 
-  const isInHome = router.pathname === PATHS.HOME.href
-  const isInFollow = router.pathname === PATHS.FOLLOW.href
-  const isInNotification = router.pathname === PATHS.ME_NOTIFICATIONS.href
-  const isInSearch = router.pathname === PATHS.SEARCH.href
-  const isInDraftDetail = router.pathname.indexOf('/me/drafts') >= 0
+  const isInHome = router.pathname === PATHS.HOME.href;
+  const isInFollow = router.pathname === PATHS.FOLLOW.href;
+  const isInNotification = router.pathname === PATHS.ME_NOTIFICATIONS.href;
+  const isInSearch = router.pathname === PATHS.SEARCH.href;
+  const isInDraftDetail = router.pathname.indexOf('/me/drafts') >= 0;
 
   return (
     <section className="nav-bar" role="navigation">
@@ -63,7 +63,7 @@ const NavBar = () => {
 
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 
-export default NavBar
+export default NavBar;

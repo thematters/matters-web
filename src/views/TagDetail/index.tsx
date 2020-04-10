@@ -1,8 +1,8 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
-import _get from 'lodash/get'
-import { useRouter } from 'next/router'
-import { useContext, useState } from 'react'
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
+import _get from 'lodash/get';
+import { useRouter } from 'next/router';
+import { useContext, useState } from 'react';
 
 import {
   Button,
@@ -15,16 +15,16 @@ import {
   Throw404,
   Translate,
   ViewerContext,
-} from '~/components'
-import { getErrorCodes, QueryError } from '~/components/GQL'
+} from '~/components';
+import { getErrorCodes, QueryError } from '~/components/GQL';
 
-import { ERROR_CODES } from '~/common/enums'
+import { ERROR_CODES } from '~/common/enums';
 
-import styles from './styles.css'
-import { TagDetailArticles } from './TagDetailArticles'
-import { TagDetailButtons } from './TagDetailButtons'
+import styles from './styles.css';
+import { TagDetailArticles } from './TagDetailArticles';
+import { TagDetailButtons } from './TagDetailButtons';
 
-import { TagDetail as TagDetailType } from './__generated__/TagDetail'
+import { TagDetail as TagDetailType } from './__generated__/TagDetail';
 
 const TAG_DETAIL = gql`
   query TagDetail($id: ID!) {
@@ -39,29 +39,31 @@ const TAG_DETAIL = gql`
       }
     }
   }
-`
+`;
 
-type TagFeed = 'latest' | 'selected'
+type TagFeed = 'latest' | 'selected';
 
 const EmptyLayout: React.FC = ({ children }) => (
   <Layout.Main>
     <Layout.Header left={<Layout.Header.BackButton />} />
     {children}
   </Layout.Main>
-)
+);
 
 const TagDetail = ({ data }: { data: TagDetailType }) => {
-  const viewer = useContext(ViewerContext)
-  const hasSelected = _get(data, 'node.articles.totalCount', 0)
-  const [feed, setFeed] = useState<TagFeed>(hasSelected ? 'selected' : 'latest')
-  const canEdit = viewer.isAdmin && viewer.info.email === 'hi@matters.news'
+  const viewer = useContext(ViewerContext);
+  const hasSelected = _get(data, 'node.articles.totalCount', 0);
+  const [feed, setFeed] = useState<TagFeed>(
+    hasSelected ? 'selected' : 'latest'
+  );
+  const canEdit = viewer.isAdmin && viewer.info.email === 'hi@matters.news';
 
   if (!data || !data.node || data.node.__typename !== 'Tag') {
-    return <EmptyTag />
+    return <EmptyTag />;
   }
 
   if (hasSelected === 0 && feed === 'selected') {
-    setFeed('latest')
+    setFeed('latest');
   }
 
   return (
@@ -123,39 +125,39 @@ const TagDetail = ({ data }: { data: TagDetailType }) => {
 
       <style jsx>{styles}</style>
     </Layout.Main>
-  )
-}
+  );
+};
 
 const TagDetailContainer = () => {
-  const router = useRouter()
+  const router = useRouter();
   const { data, loading, error } = useQuery<TagDetailType>(TAG_DETAIL, {
     variables: { id: router.query.id },
-  })
+  });
 
   if (loading) {
     return (
       <EmptyLayout>
         <Spinner />
       </EmptyLayout>
-    )
+    );
   }
 
   if (error) {
-    const errorCodes = getErrorCodes(error)
+    const errorCodes = getErrorCodes(error);
 
     if (errorCodes[0] === ERROR_CODES.ENTITY_NOT_FOUND) {
       return (
         <EmptyLayout>
           <Throw404 />
         </EmptyLayout>
-      )
+      );
     }
 
     return (
       <EmptyLayout>
         <QueryError error={error} />
       </EmptyLayout>
-    )
+    );
   }
 
   if (!data || !data.node || data.node.__typename !== 'Tag') {
@@ -163,10 +165,10 @@ const TagDetailContainer = () => {
       <EmptyLayout>
         <EmptyTag />
       </EmptyLayout>
-    )
+    );
   }
 
-  return <TagDetail data={data} />
-}
+  return <TagDetail data={data} />;
+};
 
-export default TagDetailContainer
+export default TagDetailContainer;

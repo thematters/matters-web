@@ -1,3 +1,3 @@
-import Search from '~/views/Search'
+import Search from '~/views/Search';
 
-export default () => <Search />
+export default () => <Search />;

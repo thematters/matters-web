@@ -1,2 +1,2 @@
-export * from './ArticleList'
-export * from './UserList'
+export * from './ArticleList';
+export * from './UserList';

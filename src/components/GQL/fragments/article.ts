@@ -1,6 +1,6 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import { ArticleDigestDropdown, ArticleDigestSidebar } from '~/components'
+import { ArticleDigestDropdown, ArticleDigestSidebar } from '~/components';
 
 export default {
   editorCollection: gql`
@@ -44,4 +44,4 @@ export default {
     }
     ${ArticleDigestSidebar.fragments.article}
   `,
-}
+};

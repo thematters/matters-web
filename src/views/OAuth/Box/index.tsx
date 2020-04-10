@@ -1,11 +1,11 @@
-import { Avatar } from '~/components/Avatar'
+import { Avatar } from '~/components/Avatar';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 interface Props {
-  avatar?: string
-  title?: React.ReactNode | string
-  titleAlign?: 'left' | 'center'
+  avatar?: string;
+  title?: React.ReactNode | string;
+  titleAlign?: 'left' | 'center';
 }
 
 export const Box: React.FC<Props> = ({
@@ -25,5 +25,5 @@ export const Box: React.FC<Props> = ({
 
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};

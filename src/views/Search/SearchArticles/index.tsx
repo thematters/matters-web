@@ -1,8 +1,8 @@
-import { useQuery } from '@apollo/react-hooks'
-import { NetworkStatus } from 'apollo-client'
-import gql from 'graphql-tag'
-import _get from 'lodash/get'
-import { useRouter } from 'next/router'
+import { useQuery } from '@apollo/react-hooks';
+import { NetworkStatus } from 'apollo-client';
+import gql from 'graphql-tag';
+import _get from 'lodash/get';
+import { useRouter } from 'next/router';
 
 import {
   ArticleDigestFeed,
@@ -10,14 +10,14 @@ import {
   List,
   Spinner,
   Translate,
-} from '~/components'
+} from '~/components';
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
-import { analytics, getQuery, mergeConnections } from '~/common/utils'
+import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums';
+import { analytics, getQuery, mergeConnections } from '~/common/utils';
 
-import EmptySearch from '../EmptySearch'
+import EmptySearch from '../EmptySearch';
 
-import { SeachArticles } from './__generated__/SeachArticles'
+import { SeachArticles } from './__generated__/SeachArticles';
 
 const SEARCH_ARTICLES = gql`
   query SeachArticles($key: String!, $first: Int!, $after: String) {
@@ -38,11 +38,11 @@ const SEARCH_ARTICLES = gql`
     }
   }
   ${ArticleDigestFeed.fragments.article}
-`
+`;
 
 const SearchArticles = () => {
-  const router = useRouter()
-  const q = getQuery({ router, key: 'q' })
+  const router = useRouter();
+  const q = getQuery({ router, key: 'q' });
 
   const { data, loading, fetchMore, networkStatus } = useQuery<SeachArticles>(
     SEARCH_ARTICLES,
@@ -50,18 +50,18 @@ const SearchArticles = () => {
       variables: { key: q, first: 10 },
       notifyOnNetworkStatusChange: true,
     }
-  )
-  const isNewLoading = networkStatus === NetworkStatus.setVariables
+  );
+  const isNewLoading = networkStatus === NetworkStatus.setVariables;
 
   if (loading && (!data?.search || isNewLoading)) {
-    return <Spinner />
+    return <Spinner />;
   }
 
-  const connectionPath = 'search'
-  const { edges, pageInfo } = data?.search || {}
+  const connectionPath = 'search';
+  const { edges, pageInfo } = data?.search || {};
 
   if (!edges || edges.length <= 0 || !pageInfo) {
-    return <EmptySearch description={<Translate id="emptySearchResults" />} />
+    return <EmptySearch description={<Translate id="emptySearchResults" />} />;
   }
 
   const loadMore = () => {
@@ -69,7 +69,7 @@ const SearchArticles = () => {
       type: FEED_TYPE.SEARCH_ARTICLE,
       location: edges.length,
       entrance: q,
-    })
+    });
     return fetchMore({
       variables: {
         after: pageInfo.endCursor,
@@ -80,8 +80,8 @@ const SearchArticles = () => {
           newData: fetchMoreResult,
           path: connectionPath,
         }),
-    })
-  }
+    });
+  };
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
@@ -105,7 +105,7 @@ const SearchArticles = () => {
         )}
       </List>
     </InfiniteScroll>
-  )
-}
+  );
+};
 
-export default SearchArticles
+export default SearchArticles;

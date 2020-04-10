@@ -1,18 +1,18 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
-import { useState } from 'react'
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
+import { useState } from 'react';
 
-import { Dialog, Icon, Spinner, Translate } from '~/components'
+import { Dialog, Icon, Spinner, Translate } from '~/components';
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
-import { analytics } from '~/common/utils'
+import { ANALYTICS_EVENTS } from '~/common/enums';
+import { analytics } from '~/common/utils';
 
-import { ViewerLikerId } from './__generated__/ViewerLikerId'
+import { ViewerLikerId } from './__generated__/ViewerLikerId';
 
 interface Props {
-  prevStep: () => void
-  nextStep: () => void
-  windowRef?: Window
+  prevStep: () => void;
+  nextStep: () => void;
+  windowRef?: Window;
 }
 
 const VIEWER_LIKER_ID = gql`
@@ -24,32 +24,32 @@ const VIEWER_LIKER_ID = gql`
       }
     }
   }
-`
+`;
 
 const Binding: React.FC<Props> = ({ prevStep, nextStep, windowRef }) => {
-  const [polling, setPolling] = useState(true)
+  const [polling, setPolling] = useState(true);
   const { data, error } = useQuery<ViewerLikerId>(VIEWER_LIKER_ID, {
     pollInterval: polling ? 1000 : undefined,
     errorPolicy: 'none',
     fetchPolicy: 'network-only',
     skip: !process.browser,
-  })
-  const likerId = data?.viewer?.liker.likerId
+  });
+  const likerId = data?.viewer?.liker.likerId;
 
   if (likerId) {
-    nextStep()
+    nextStep();
 
     if (windowRef) {
       setTimeout(() => {
-        windowRef.close()
-      }, 5000)
+        windowRef.close();
+      }, 5000);
     }
 
-    return null
+    return null;
   }
 
   if (error) {
-    setPolling(false)
+    setPolling(false);
   }
 
   return (
@@ -88,15 +88,15 @@ const Binding: React.FC<Props> = ({ prevStep, nextStep, windowRef }) => {
         <Dialog.Footer.Button
           disabled={!error}
           onClick={() => {
-            prevStep()
-            analytics.trackEvent(ANALYTICS_EVENTS.LIKECOIN_STEP_RETRY)
+            prevStep();
+            analytics.trackEvent(ANALYTICS_EVENTS.LIKECOIN_STEP_RETRY);
           }}
         >
           <Translate id="retry" />
         </Dialog.Footer.Button>
       </Dialog.Footer>
     </>
-  )
-}
+  );
+};
 
-export default Binding
+export default Binding;

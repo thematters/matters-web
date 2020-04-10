@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect } from 'react';
 
 /**
  * This hook is for listening native events, such as MouseEvent. Recommend you
@@ -19,18 +19,18 @@ export function useNativeEventListener(
   toggle = true,
   element?: any
 ) {
-  const eventAction = (eventInstance: Event) => action(eventInstance)
+  const eventAction = (eventInstance: Event) => action(eventInstance);
 
   useEffect(() => {
-    const target = element || window
+    const target = element || window;
     if (!target) {
-      return
+      return;
     }
     if (toggle) {
-      target.addEventListener(event, eventAction)
+      target.addEventListener(event, eventAction);
     }
     return () => {
-      target.removeEventListener(event, eventAction)
-    }
-  })
+      target.removeEventListener(event, eventAction);
+    };
+  });
 }

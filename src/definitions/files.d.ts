@@ -1,4 +1,4 @@
 declare module '*.xml' {
-  const value: any
-  export = value
+  const value: any;
+  export = value;
 }

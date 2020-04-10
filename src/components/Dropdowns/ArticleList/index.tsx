@@ -1,15 +1,15 @@
-import { ArticleDigestDropdown, Menu, Spinner } from '~/components'
+import { ArticleDigestDropdown, Menu, Spinner } from '~/components';
 
-import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
+import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle';
 
 export const DropdownArticleList = ({
   articles,
   onClick,
   loading,
 }: {
-  articles: ArticleDigestDropdownArticle[]
-  onClick: (article: ArticleDigestDropdownArticle) => void
-  loading?: boolean
+  articles: ArticleDigestDropdownArticle[];
+  onClick: (article: ArticleDigestDropdownArticle) => void;
+  loading?: boolean;
 }) => {
   if (loading) {
     return (
@@ -18,7 +18,7 @@ export const DropdownArticleList = ({
           <Spinner />
         </Menu.Item>
       </Menu>
-    )
+    );
   }
 
   return (
@@ -39,5 +39,5 @@ export const DropdownArticleList = ({
         </Menu.Item>
       ))}
     </Menu>
-  )
-}
+  );
+};

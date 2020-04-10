@@ -1,17 +1,17 @@
-import classNames from 'classnames'
-import gql from 'graphql-tag'
-import _uniq from 'lodash/uniq'
+import classNames from 'classnames';
+import gql from 'graphql-tag';
+import _uniq from 'lodash/uniq';
 
-import { Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
+import { Translate } from '~/components';
+import { useMutation } from '~/components/GQL';
 
-import Collapsable from '../Collapsable'
-import SearchTags from './SearchTags'
-import styles from './styles.css'
-import Tag from './Tag'
+import Collapsable from '../Collapsable';
+import SearchTags from './SearchTags';
+import styles from './styles.css';
+import Tag from './Tag';
 
-import { AddTagsDraft } from './__generated__/AddTagsDraft'
-import { UpdateDraftTags } from './__generated__/UpdateDraftTags'
+import { AddTagsDraft } from './__generated__/AddTagsDraft';
+import { UpdateDraftTags } from './__generated__/UpdateDraftTags';
 
 const fragments = {
   draft: gql`
@@ -21,7 +21,7 @@ const fragments = {
       publishState
     }
   `,
-}
+};
 
 const UPDATE_TAGS = gql`
   mutation UpdateDraftTags($id: ID!, $tags: [String]!) {
@@ -31,46 +31,46 @@ const UPDATE_TAGS = gql`
     }
   }
   ${fragments.draft}
-`
+`;
 
 interface AddTagsProps {
-  draft: AddTagsDraft
-  setSaveStatus: (status: 'saved' | 'saving' | 'saveFailed') => void
+  draft: AddTagsDraft;
+  setSaveStatus: (status: 'saved' | 'saving' | 'saveFailed') => void;
 }
 
 const AddTags = ({ draft, setSaveStatus }: AddTagsProps) => {
-  const [updateTags] = useMutation<UpdateDraftTags>(UPDATE_TAGS)
+  const [updateTags] = useMutation<UpdateDraftTags>(UPDATE_TAGS);
   // const draftId = draft.id
-  const tags = draft.tags || []
-  const hasTags = tags.length > 0
-  const isPending = draft.publishState === 'pending'
-  const isPublished = draft.publishState === 'published'
+  const tags = draft.tags || [];
+  const hasTags = tags.length > 0;
+  const isPending = draft.publishState === 'pending';
+  const isPublished = draft.publishState === 'published';
   const tagsContainerClasses = classNames({
     'tags-container': true,
     'u-area-disable': isPending || isPublished,
-  })
+  });
   const addTag = async (tag: string) => {
-    setSaveStatus('saving')
+    setSaveStatus('saving');
     try {
       await updateTags({
         variables: { id: draft.id, tags: _uniq(tags.concat(tag)) },
-      })
-      setSaveStatus('saved')
+      });
+      setSaveStatus('saved');
     } catch (e) {
-      setSaveStatus('saveFailed')
+      setSaveStatus('saveFailed');
     }
-  }
+  };
   const deleteTag = async (tag: string) => {
-    setSaveStatus('saving')
+    setSaveStatus('saving');
     try {
       await updateTags({
         variables: { id: draft.id, tags: tags.filter((it) => it !== tag) },
-      })
-      setSaveStatus('saved')
+      });
+      setSaveStatus('saved');
     } catch (e) {
-      setSaveStatus('saveFailed')
+      setSaveStatus('saveFailed');
     }
-  }
+  };
 
   return (
     <Collapsable title={<Translate id="tag" />} defaultCollapsed={!hasTags}>
@@ -90,9 +90,9 @@ const AddTags = ({ draft, setSaveStatus }: AddTagsProps) => {
 
       <style jsx>{styles}</style>
     </Collapsable>
-  )
-}
+  );
+};
 
-AddTags.fragments = fragments
+AddTags.fragments = fragments;
 
-export default AddTags
+export default AddTags;

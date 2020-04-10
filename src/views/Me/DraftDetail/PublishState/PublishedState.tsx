@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext } from 'react';
 
 import {
   Button,
@@ -7,16 +7,16 @@ import {
   Toast,
   Translate,
   ViewerContext,
-} from '~/components'
+} from '~/components';
 
-import { toPath } from '~/common/utils'
+import { toPath } from '~/common/utils';
 
 const PublishedState = () => {
-  const viewer = useContext(ViewerContext)
+  const viewer = useContext(ViewerContext);
   const path = toPath({
     page: 'userProfile',
     userName: viewer.userName || '',
-  })
+  });
 
   return (
     <Toast.Instance
@@ -34,7 +34,7 @@ const PublishedState = () => {
       }
       buttonPlacement="center"
     />
-  )
-}
+  );
+};
 
-export default PublishedState
+export default PublishedState;

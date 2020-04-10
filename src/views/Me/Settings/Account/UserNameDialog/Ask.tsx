@@ -1,8 +1,8 @@
-import { Dialog, Translate } from '~/components'
+import { Dialog, Translate } from '~/components';
 
 interface AskProps {
-  nextStep: () => void
-  closeDialog: () => void
+  nextStep: () => void;
+  closeDialog: () => void;
 }
 
 const Ask = ({ nextStep, closeDialog }: AskProps) => (
@@ -33,6 +33,6 @@ const Ask = ({ nextStep, closeDialog }: AskProps) => (
       </Dialog.Footer.Button>
     </Dialog.Footer>
   </>
-)
+);
 
-export default Ask
+export default Ask;

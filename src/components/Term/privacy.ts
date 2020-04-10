@@ -314,6 +314,6 @@ const Privacy: { zh_hant: string; zh_hans: string; en: string } = {
 
 </details>
   `,
-}
+};
 
-export default Privacy
+export default Privacy;

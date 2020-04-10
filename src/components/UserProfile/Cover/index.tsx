@@ -1,6 +1,6 @@
-import IMAGE_COVER from '~/static/images/profile-cover.png'
+import IMAGE_COVER from '~/static/images/profile-cover.png';
 
-import styles from './styles.css'
+import styles from './styles.css';
 
 export const ProfileCover = ({ cover }: { cover?: string | null }) => (
   <>
@@ -11,6 +11,6 @@ export const ProfileCover = ({ cover }: { cover?: string | null }) => (
 
     <style jsx>{styles}</style>
   </>
-)
+);
 
-export default ProfileCover
+export default ProfileCover;

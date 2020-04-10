@@ -1,4 +1,4 @@
-import styles from './styles.css'
+import styles from './styles.css';
 
 const Spacing: React.FC = ({ children }) => {
   return (
@@ -7,7 +7,7 @@ const Spacing: React.FC = ({ children }) => {
 
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 
-export default Spacing
+export default Spacing;

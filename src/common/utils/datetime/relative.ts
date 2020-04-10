@@ -1,13 +1,13 @@
-import differenceInDays from 'date-fns/differenceInDays'
-import differenceInHours from 'date-fns/differenceInHours'
-import differenceInMinutes from 'date-fns/differenceInMinutes'
-import isThisHour from 'date-fns/isThisHour'
-import isThisMinute from 'date-fns/isThisMinute'
-import isThisWeek from 'date-fns/isThisWeek'
-import isToday from 'date-fns/isToday'
-import parseISO from 'date-fns/parseISO'
+import differenceInDays from 'date-fns/differenceInDays';
+import differenceInHours from 'date-fns/differenceInHours';
+import differenceInMinutes from 'date-fns/differenceInMinutes';
+import isThisHour from 'date-fns/isThisHour';
+import isThisMinute from 'date-fns/isThisMinute';
+import isThisWeek from 'date-fns/isThisWeek';
+import isToday from 'date-fns/isToday';
+import parseISO from 'date-fns/parseISO';
 
-import absolute from './absolute'
+import absolute from './absolute';
 
 const DIFFS = {
   zh_hant: {
@@ -37,33 +37,33 @@ const DIFFS = {
     dayAgo: ' day ago',
     daysAgo: ' days ago',
   },
-}
+};
 
 const relative = (date: Date | string | number, lang: Language = 'zh_hant') => {
   if (typeof date === 'string') {
-    date = parseISO(date)
+    date = parseISO(date);
   }
 
   if (isThisMinute(date)) {
-    return DIFFS[lang].justNow
+    return DIFFS[lang].justNow;
   }
 
   if (isThisHour(date)) {
-    const diffMins = differenceInMinutes(new Date(), date) || 1
-    return diffMins + DIFFS[lang][diffMins === 1 ? 'minuteAgo' : 'minuteAgo']
+    const diffMins = differenceInMinutes(new Date(), date) || 1;
+    return diffMins + DIFFS[lang][diffMins === 1 ? 'minuteAgo' : 'minuteAgo'];
   }
 
   if (isToday(date)) {
-    const diffHrs = differenceInHours(new Date(), date) || 1
-    return diffHrs + DIFFS[lang][diffHrs === 1 ? 'hourAgo' : 'hoursAgo']
+    const diffHrs = differenceInHours(new Date(), date) || 1;
+    return diffHrs + DIFFS[lang][diffHrs === 1 ? 'hourAgo' : 'hoursAgo'];
   }
 
   if (isThisWeek(date)) {
-    const diffDays = differenceInDays(new Date(), date) || 1
-    return diffDays + DIFFS[lang][diffDays === 1 ? 'dayAgo' : 'daysAgo']
+    const diffDays = differenceInDays(new Date(), date) || 1;
+    return diffDays + DIFFS[lang][diffDays === 1 ? 'dayAgo' : 'daysAgo'];
   }
 
-  return absolute(date, lang)
-}
+  return absolute(date, lang);
+};
 
-export default relative
+export default relative;

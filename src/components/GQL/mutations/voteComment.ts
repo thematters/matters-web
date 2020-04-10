@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
 export const VOTE_COMMENT = gql`
   mutation VoteComment($id: ID!, $vote: Vote!) {
@@ -9,7 +9,7 @@ export const VOTE_COMMENT = gql`
       myVote
     }
   }
-`
+`;
 
 export const UNVOTE_COMMENT = gql`
   mutation UnvoteComment($id: ID!) {
@@ -20,4 +20,4 @@ export const UNVOTE_COMMENT = gql`
       myVote
     }
   }
-`
+`;

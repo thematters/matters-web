@@ -1,7 +1,7 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
-import Button from './Button'
-import Dialog from './Dialog'
+import Button from './Button';
+import Dialog from './Dialog';
 
 const fragments = {
   article: gql`
@@ -14,12 +14,12 @@ const fragments = {
       }
     }
   `,
-}
+};
 
 const ArchiveArticle = {
   fragments,
   Dialog,
   Button,
-}
+};
 
-export default ArchiveArticle
+export default ArchiveArticle;

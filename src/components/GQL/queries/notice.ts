@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
 export const UNREAD_NOTICE_COUNT = gql`
   query UnreadNoticeCount {
@@ -9,4 +9,4 @@ export const UNREAD_NOTICE_COUNT = gql`
       }
     }
   }
-`
+`;

@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext } from 'react';
 
 import {
   Button,
@@ -7,18 +7,18 @@ import {
   TextIcon,
   Translate,
   ViewerContext,
-} from '~/components'
+} from '~/components';
 
-import { ChangeEmailDialog } from './ChangeEmailDialog'
-import styles from './styles.css'
-import { UserNameDialog } from './UserNameDialog'
+import { ChangeEmailDialog } from './ChangeEmailDialog';
+import styles from './styles.css';
+import { UserNameDialog } from './UserNameDialog';
 
 const EditButton = ({
   open,
   disabled,
 }: {
-  open: () => void
-  disabled?: boolean
+  open: () => void;
+  disabled?: boolean;
 }) => (
   <Button
     size={['4rem', '1.5rem']}
@@ -34,19 +34,19 @@ const EditButton = ({
       <Translate id="change" />
     </TextIcon>
   </Button>
-)
+);
 
 const ChangeEmailButton = () => (
   <ChangeEmailDialog>
     {({ open }) => <EditButton open={open} />}
   </ChangeEmailDialog>
-)
+);
 
 const ChangeUserNameButton = ({ disabled }: { disabled: boolean }) => (
   <UserNameDialog>
     {({ open }) => <EditButton open={open} disabled={disabled} />}
   </UserNameDialog>
-)
+);
 
 const ChangePasswrodButton = () => (
   <ChangePasswordDialog>
@@ -56,10 +56,10 @@ const ChangePasswrodButton = () => (
       </Button>
     )}
   </ChangePasswordDialog>
-)
+);
 
 const AccountSettings = () => {
-  const viewer = useContext(ViewerContext)
+  const viewer = useContext(ViewerContext);
 
   return (
     <section className="section-container">
@@ -97,7 +97,7 @@ const AccountSettings = () => {
       </section>
       <style jsx>{styles}</style>
     </section>
-  )
-}
+  );
+};
 
-export default AccountSettings
+export default AccountSettings;

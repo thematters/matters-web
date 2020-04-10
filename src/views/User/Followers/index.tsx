@@ -1,7 +1,7 @@
-import { Layout, UserProfile } from '~/components'
+import { Layout, UserProfile } from '~/components';
 
-import FollowerTabs from '../FollowerTabs'
-import UserFollowers from './UserFollowers'
+import FollowerTabs from '../FollowerTabs';
+import UserFollowers from './UserFollowers';
 
 export default () => (
   <Layout.Main>
@@ -9,4 +9,4 @@ export default () => (
     <FollowerTabs />
     <UserFollowers />
   </Layout.Main>
-)
+);
