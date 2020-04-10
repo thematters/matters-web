@@ -3,7 +3,7 @@ import { useContext, useEffect } from 'react'
 
 import { initializePush } from '~/common/utils'
 
-import { ViewerContext } from '../Viewer'
+import { ViewerContext } from '../Context'
 
 const PushInitializer = ({ client }: { client: ApolloClient<any> }) => {
   const viewer = useContext(ViewerContext)

@@ -60,7 +60,7 @@ const CollapseCommentDialog = ({
     <>
       {children({ open })}
 
-      <Dialog isOpen={showDialog} onDismiss={close} size="sm">
+      <Dialog isOpen={showDialog} onDismiss={close} size="sm" slideIn>
         <Dialog.Header
           title={<Translate id="collapseComment" />}
           close={close}

@@ -1,5 +1,4 @@
-import { Button, TextIcon, useResponsive } from '~/components'
-import { Translate } from '~/components/Language'
+import { Button, TextIcon, Translate, useResponsive } from '~/components'
 
 import {
   ANALYTICS_EVENTS,

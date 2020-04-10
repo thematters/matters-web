@@ -94,6 +94,7 @@ const Authors = () => {
                     location: i,
                   })
                 }
+                hasState={false}
               />
             </List.Item>
           ))}

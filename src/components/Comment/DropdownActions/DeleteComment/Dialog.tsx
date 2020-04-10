@@ -59,7 +59,7 @@ const DeleteCommentDialog = ({
     <>
       {children({ open })}
 
-      <Dialog isOpen={showDialog} onDismiss={close} size="sm">
+      <Dialog isOpen={showDialog} onDismiss={close} size="sm" slideIn>
         <Dialog.Header title="deleteComment" close={close} headerHidden />
 
         <Dialog.Message

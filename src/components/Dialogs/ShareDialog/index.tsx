@@ -26,50 +26,27 @@ export interface ShareDialogProps {
   children: ({ open }: { open: () => void }) => React.ReactNode
 }
 
-const BaseShareDialog = ({ title, path, children }: ShareDialogProps) => {
+type BaseShareDialogProps = {
+  onShare: (fallbackShare: () => void) => void
+  shareTitle: string
+  shareLink: string
+} & Pick<ShareDialogProps, 'children'>
+
+const BaseShareDialog = ({
+  onShare,
+  shareTitle,
+  shareLink,
+  children,
+}: BaseShareDialogProps) => {
   const [showDialog, setShowDialog] = useState(true)
   const open = () => setShowDialog(true)
   const close = () => setShowDialog(false)
 
-  const { data } = useQuery<ClientInfo>(CLIENT_INFO, {
-    variables: { id: 'local' },
-  })
-  const isMobile = data?.clientInfo.isMobile
-  const shareLink = process.browser
-    ? path
-      ? `${window.location.origin}${path}`
-      : window.location.href
-    : ''
-  const shareTitle =
-    title || (process.browser ? window.document.title || '' : '')
-
-  const onShare = async () => {
-    const navigator = window.navigator as any
-
-    if (navigator.share && isMobile) {
-      try {
-        await navigator.share({
-          title: shareTitle,
-          url: shareLink,
-        })
-      } catch (e) {
-        console.error(e)
-      }
-    } else {
-      open()
-    }
-
-    analytics.trackEvent(ANALYTICS_EVENTS, {
-      type: SHARE_TYPE.ROOT,
-      url: shareLink,
-    })
-  }
-
   return (
     <>
-      {children({ open: onShare })}
+      {children({ open: () => onShare(open) })}
 
-      <Dialog size="sm" isOpen={showDialog} onDismiss={close}>
+      <Dialog size="sm" isOpen={showDialog} onDismiss={close} slideIn>
         <Dialog.Header title="share" close={close} headerHidden />
 
         <Dialog.Content spacing={[0, 0]}>
@@ -108,10 +85,56 @@ const BaseShareDialog = ({ title, path, children }: ShareDialogProps) => {
   )
 }
 
-export const ShareDialog = (props: ShareDialogProps) => (
-  <Dialog.Lazy>
-    {({ open, mounted }) =>
-      mounted ? <BaseShareDialog {...props} /> : <>{props.children({ open })}</>
+export const ShareDialog = (props: ShareDialogProps) => {
+  const { title, path } = props
+  const { data } = useQuery<ClientInfo>(CLIENT_INFO, {
+    variables: { id: 'local' },
+  })
+  const isMobile = data?.clientInfo.isMobile
+  const shareLink = process.browser
+    ? path
+      ? `${window.location.origin}${path}`
+      : window.location.href
+    : ''
+  const shareTitle =
+    title || (process.browser ? window.document.title || '' : '')
+
+  const onShare = async (fallbackShare: () => void) => {
+    const navigator = window.navigator as any
+
+    if (navigator.share && isMobile) {
+      try {
+        await navigator.share({
+          title: shareTitle,
+          url: shareLink,
+        })
+      } catch (e) {
+        console.error(e)
+      }
+    } else {
+      fallbackShare()
     }
-  </Dialog.Lazy>
-)
+
+    analytics.trackEvent(ANALYTICS_EVENTS, {
+      type: SHARE_TYPE.ROOT,
+      url: shareLink,
+    })
+  }
+
+  return (
+    <Dialog.Lazy>
+      {({ open, mounted }) =>
+        mounted ? (
+          <BaseShareDialog
+            {...props}
+            onShare={onShare}
+            shareTitle={shareTitle}
+            shareLink={shareLink}
+          />
+        ) : (
+          <>{props.children({ open: () => onShare(open) })}</>
+        )
+      }
+    </Dialog.Lazy>
+  )
+}

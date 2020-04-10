@@ -3,13 +3,13 @@ import { useContext, useState } from 'react'
 
 import {
   Button,
+  LanguageContext,
   ReCaptchaContext,
   TextIcon,
   Translate,
   useCountdown,
+  useMutation,
 } from '~/components'
-import { useMutation } from '~/components/GQL'
-import { LanguageContext } from '~/components/Language'
 
 import { ADD_TOAST, SEND_CODE_COUNTDOWN } from '~/common/enums'
 import { parseFormSubmitErrors } from '~/common/utils'
@@ -54,7 +54,7 @@ export const SendCodeButton: React.FC<SendCodeButtonProps> = ({
   disabled,
 }) => {
   const { lang } = useContext(LanguageContext)
-  const { token } = useContext(ReCaptchaContext)
+  const { token, refreshToken } = useContext(ReCaptchaContext)
 
   const [send] = useMutation<SendVerificationCode>(SEND_CODE)
   const [sent, setSent] = useState(false)
@@ -68,8 +68,13 @@ export const SendCodeButton: React.FC<SendCodeButtonProps> = ({
       await send({
         variables: { input: { email, type, token } },
       })
+
       setCountdown({ timeLeft: SEND_CODE_COUNTDOWN })
       setSent(true)
+
+      if (refreshToken) {
+        refreshToken()
+      }
     } catch (error) {
       const [messages, codes] = parseFormSubmitErrors(error, lang)
       window.dispatchEvent(
