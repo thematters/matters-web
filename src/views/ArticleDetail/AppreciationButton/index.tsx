@@ -7,7 +7,7 @@ import { Tooltip, Translate, ViewerContext } from '~/components'
 import { useMutation } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
-import { APPRECIATE_DEBOUNCE } from '~/common/enums'
+import { APPRECIATE_DEBOUNCE, Z_INDEX } from '~/common/enums'
 
 import Appreciators from '../Toolbar/Appreciators'
 import AppreciateButton from './AppreciateButton'
@@ -159,7 +159,6 @@ const AppreciationButton = ({
    */
   return (
     <Tooltip
-      offset="-10, 0"
       content={
         <Translate
           {...(isMe
@@ -173,8 +172,9 @@ const AppreciationButton = ({
               })}
         />
       }
+      zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
     >
-      <div>
+      <span>
         <AppreciateButton
           disabled
           count={
@@ -184,7 +184,7 @@ const AppreciationButton = ({
           }
           total={total}
         />
-      </div>
+      </span>
     </Tooltip>
   )
 }

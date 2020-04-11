@@ -95,6 +95,9 @@ export const TEXT = {
     failureLogout: '登出失敗，請重試',
     failurePublish: '發佈失敗',
     failureUploadImage: '圖片上傳失敗',
+    failureCommentOnboarding:
+      '當你獲得 15 次讚賞或積極閱讀文章，即可獲得評論相關權限',
+    failureCommentBlocked: '因爲作者設置，你無法參與該作品下的討論。',
     featured: '精選',
     featuredComments: '社區精選',
     follow: '追蹤',
@@ -335,6 +338,9 @@ export const TEXT = {
     failureLogout: '登出失败，再来一次',
     failurePublish: '发布失败',
     failureUploadImage: '图片上传失败',
+    failureCommentOnboarding:
+      '当你获得 15 次赞赏或积极阅读文章，即可获得评论相关权限',
+    failureCommentBlocked: '因为作者设置，你无法参与该作品下的讨论。',
     featured: '精选',
     featuredComments: '社区精选',
     follow: '追踪',
