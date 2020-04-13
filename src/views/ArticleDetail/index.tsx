@@ -111,7 +111,7 @@ const ArticleDetail = () => {
     if (shouldShowWall && window.location.hash && article) {
       jump('#comments', { offset: -10 })
     }
-  }, [article])
+  }, [mediaHash])
 
   if (loading) {
     return (
