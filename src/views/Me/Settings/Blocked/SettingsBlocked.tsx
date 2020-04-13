@@ -110,7 +110,7 @@ const SettingsBlocked = () => {
 
 export default () => (
   <>
-    <Head title={{ id: 'blockedSetting' }} />
+    <Head title={{ id: 'settingsBlock' }} />
 
     <SettingsBlocked />
   </>

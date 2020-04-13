@@ -11,10 +11,12 @@ import styles from './styles.css'
  */
 
 interface ListProps {
+  groupName?: string | React.ReactNode
   spacing?: 0 | 'xloose'
 }
 
 const List: React.FC<ListProps> & { Item: typeof Item } = ({
+  groupName,
   spacing = 0,
   children,
 }) => {
@@ -23,10 +25,13 @@ const List: React.FC<ListProps> & { Item: typeof Item } = ({
   })
 
   return (
-    <ul className={listClass}>
-      {children}
+    <section className="group">
+      {groupName && <h4 className="name">{groupName}</h4>}
+
+      <ul className={listClass}>{children}</ul>
+
       <style jsx>{styles}</style>
-    </ul>
+    </section>
   )
 }
 

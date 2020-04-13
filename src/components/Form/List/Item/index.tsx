@@ -6,16 +6,21 @@ type ItemProps = {
   title: string | React.ReactNode
   subtitle?: string | React.ReactNode
   rightText?: string | React.ReactNode
+  rightTextColor?: 'green' | 'grey-darker'
+  rightSubText?: string | React.ReactNode
 } & CardProps
 
 const Item: React.FC<ItemProps> = ({
   title,
   subtitle,
   rightText,
+  rightTextColor = 'grey-darker',
+  rightSubText,
 
   ...cardProps
 }) => {
   const isSmallUp = useResponsive('sm-up')
+  const clickable = cardProps.as || cardProps.href || cardProps.onClick
 
   return (
     <li>
@@ -25,19 +30,23 @@ const Item: React.FC<ItemProps> = ({
         spacing={cardProps.spacing || [0, 0]}
       >
         <section className="container">
-          <section>
+          <section className="left">
             <h5 className="title">{title}</h5>
             {subtitle && <p className="subtitle">{subtitle}</p>}
           </section>
 
-          <TextIcon
-            icon={<Icon.Right size="xs" color="grey" />}
-            textPlacement="left"
-            spacing="xtight"
-            color="green"
-          >
-            {rightText}
-          </TextIcon>
+          <section className="right">
+            <TextIcon
+              icon={clickable && <Icon.Right color="grey" />}
+              size="md"
+              textPlacement="left"
+              spacing="xtight"
+              color={rightTextColor}
+            >
+              {rightText}
+              {rightSubText && <span className="subtext">{rightSubText}</span>}
+            </TextIcon>
+          </section>
         </section>
       </Card>
 

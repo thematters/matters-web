@@ -63,7 +63,7 @@ const AccountSettings = () => {
 
   return (
     <section className="section-container">
-      <PageHeader title={<Translate id="accountSetting" />} is="h2" />
+      <PageHeader title={<Translate id="settingsAccount" />} is="h2" />
 
       {/* password */}
       <section className="setting-section">

@@ -6,8 +6,8 @@ export const OAUTH_SCOPE_TREE = {
   query: {
     viewer: {
       __text__: {
-        zh_hant: ` Liker ID、${TEXT.zh_hant.email}、${TEXT.zh_hant.accountSetting}、${TEXT.zh_hant.draft}、收藏作品、${TEXT.zh_hant.readHistory}等`,
-        zh_hans: ` Liker ID、${TEXT.zh_hant.email}、${TEXT.zh_hant.accountSetting}、${TEXT.zh_hant.draft}、收藏作品、${TEXT.zh_hant.readHistory}等`,
+        zh_hant: ` Liker ID、${TEXT.zh_hant.email}、${TEXT.zh_hant.settingsAccount}、${TEXT.zh_hant.draft}、收藏作品、${TEXT.zh_hant.readHistory}等`,
+        zh_hans: ` Liker ID、${TEXT.zh_hant.email}、${TEXT.zh_hant.settingsAccount}、${TEXT.zh_hant.draft}、收藏作品、${TEXT.zh_hant.readHistory}等`,
       },
       likerId: {
         __text__: {

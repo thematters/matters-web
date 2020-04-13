@@ -193,7 +193,7 @@ const SettingsNotification = () => {
 
   return (
     <>
-      <Head title={{ id: 'notificationSetting' }} />
+      <Head title={{ id: 'settingsNotification' }} />
 
       <div className="block">
         <section className="item">
