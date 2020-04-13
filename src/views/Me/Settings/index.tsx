@@ -47,7 +47,6 @@ const UISettings = () => {
     <Form.List groupName={<Translate id="settingsUI" />}>
       <Form.List.Item
         title={<Translate id="settingsLanguage" />}
-        {...PATHS.ME_SETTINGS_USERNAME}
         rightText={LANG_TEXT_MAP[viewer.settings.language]}
       />
     </Form.List>
@@ -65,17 +64,17 @@ const AccountSettings = () => {
     <Form.List groupName={<Translate id="settingsAccount" />}>
       <Form.List.Item
         title="Matters ID"
-        {...PATHS.ME_SETTINGS_USERNAME}
+        {...PATHS.ME_SETTINGS_CHANGE_USERNAME}
         rightText={viewer.userName}
       />
       <Form.List.Item
         title={<Translate id="email" />}
-        {...PATHS.ME_SETTINGS_EMAIL}
+        {...PATHS.ME_SETTINGS_CHANGE_EMAIL}
         rightText={viewer.info.email}
       />
       <Form.List.Item
         title={<Translate id="loginPassword" />}
-        {...PATHS.ME_SETTINGS_PASSWORD}
+        {...PATHS.ME_SETTINGS_CHANGE_PASSWORD}
       />
       <Form.List.Item
         title={<Translate id="settingsNotification" />}

@@ -35,7 +35,7 @@ interface FormValues {
   code: string
 }
 
-export const PasswordChangeRequestForm: React.FC<FormProps> = ({
+const Request: React.FC<FormProps> = ({
   defaultEmail = '',
   type,
   purpose,
@@ -178,3 +178,5 @@ export const PasswordChangeRequestForm: React.FC<FormProps> = ({
     </>
   )
 }
+
+export default Request

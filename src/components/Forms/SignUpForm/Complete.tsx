@@ -3,7 +3,7 @@ import { Dialog, Layout, Translate } from '~/components'
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics, redirectToTarget } from '~/common/utils'
 
-export const SignUpComplete = ({
+const Complete = ({
   purpose,
   closeDialog,
 }: {
@@ -15,13 +15,7 @@ export const SignUpComplete = ({
   return (
     <>
       {isInPage && (
-        <Layout.Header
-          left={
-            <>
-              <Layout.Header.Title id="register" />
-            </>
-          }
-        />
+        <Layout.Header left={<Layout.Header.Title id="register" />} />
       )}
 
       {closeDialog && (
@@ -83,3 +77,5 @@ export const SignUpComplete = ({
     </>
   )
 }
+
+export default Complete

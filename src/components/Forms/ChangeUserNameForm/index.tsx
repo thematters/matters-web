@@ -8,11 +8,11 @@ import Confirm from './Confirm'
 
 type Step = 'ask' | 'confirm' | 'complete'
 
-interface UserNameDialogProps {
+interface UserNameDialogForm {
   children: ({ open }: { open: () => void }) => React.ReactNode
 }
 
-const BaseUserNameDialog = ({ children }: UserNameDialogProps) => {
+const BaseUserNameForm = ({ children }: UserNameDialogForm) => {
   const [step, setStep] = useState<Step>('ask')
   const [showDialog, setShowDialog] = useState(true)
 
@@ -52,11 +52,11 @@ const BaseUserNameDialog = ({ children }: UserNameDialogProps) => {
   )
 }
 
-export const UserNameDialog = (props: UserNameDialogProps) => (
+export const UserNameDialog = (props: UserNameDialogForm) => (
   <Dialog.Lazy>
     {({ open, mounted }) =>
       mounted ? (
-        <BaseUserNameDialog {...props} />
+        <BaseUserNameForm {...props} />
       ) : (
         <>{props.children({ open })}</>
       )

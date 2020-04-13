@@ -32,10 +32,9 @@ type ROUTE_KEY =
   | 'ME_APPRECIATIONS_RECEIVED'
   | 'ME_NOTIFICATIONS'
   | 'ME_SETTINGS'
-  | 'ME_SETTINGS_LANGUAGE'
-  | 'ME_SETTINGS_USERNAME'
-  | 'ME_SETTINGS_EMAIL'
-  | 'ME_SETTINGS_PASSWORD'
+  | 'ME_SETTINGS_CHANGE_USERNAME'
+  | 'ME_SETTINGS_CHANGE_EMAIL'
+  | 'ME_SETTINGS_CHANGE_PASSWORD'
   | 'ME_SETTINGS_NOTIFICATION'
   | 'ME_SETTINGS_BLOCKED'
   | 'ME_DRAFT_DETAIL'
@@ -226,24 +225,19 @@ export const ROUTES: Array<{
     as: '/me/settings',
   },
   {
-    key: 'ME_SETTINGS_LANGUAGE',
-    href: '/MeSettingsLanguage',
-    as: '/me/settings/language',
+    key: 'ME_SETTINGS_CHANGE_USERNAME',
+    href: '/MeSettingsChangeUserName',
+    as: '/me/settings/change-username',
   },
   {
-    key: 'ME_SETTINGS_USERNAME',
-    href: '/MeSettingsUserName',
-    as: '/me/settings/username',
+    key: 'ME_SETTINGS_CHANGE_EMAIL',
+    href: '/MeSettingsChangeEmail',
+    as: '/me/settings/change-email',
   },
   {
-    key: 'ME_SETTINGS_EMAIL',
-    href: '/MeSettingsEmail',
-    as: '/me/settings/email',
-  },
-  {
-    key: 'ME_SETTINGS_PASSWORD',
-    href: '/MeSettingsPassword',
-    as: '/me/settings/password',
+    key: 'ME_SETTINGS_CHANGE_PASSWORD',
+    href: '/MeSettingsChangePassword',
+    as: '/me/settings/change-password',
   },
   {
     key: 'ME_SETTINGS_NOTIFICATION',

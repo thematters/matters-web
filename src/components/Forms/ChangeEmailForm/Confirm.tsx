@@ -1,4 +1,5 @@
 import { useFormik } from 'formik'
+import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 
@@ -6,6 +7,7 @@ import {
   Dialog,
   Form,
   LanguageContext,
+  Layout,
   SendCodeButton,
   Translate,
 } from '~/components'
@@ -20,11 +22,13 @@ import {
 } from '~/common/utils'
 
 import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
+import { ChangeEmail } from './__generated__/ChangeEmail'
 
 interface FormProps {
-  defaultEmail: string
-  submitCallback?: (codeId: string) => void
-  closeDialog: () => void
+  oldData: { email: string; codeId: string }
+  purpose: 'dialog' | 'page'
+  submitCallback: () => void
+  closeDialog?: () => void
 }
 
 interface FormValues {
@@ -32,14 +36,29 @@ interface FormValues {
   code: string
 }
 
-const Request: React.FC<FormProps> = ({
-  defaultEmail = '',
+const CHANGE_EMAIL = gql`
+  mutation ChangeEmail($input: ChangeEmailInput!) {
+    changeEmail(input: $input) {
+      id
+      info {
+        email
+      }
+    }
+  }
+`
+
+const Confirm: React.FC<FormProps> = ({
+  oldData,
+  purpose,
   submitCallback,
   closeDialog,
 }) => {
   const [confirmCode] = useMutation<ConfirmVerificationCode>(CONFIRM_CODE)
+  const [changeEmail] = useMutation<ChangeEmail>(CHANGE_EMAIL)
   const { lang } = useContext(LanguageContext)
-  const formId = 'change-email-request-form'
+  const isInPage = purpose === 'page'
+
+  const formId = 'change-email-confirm-form'
 
   const {
     values,
@@ -52,23 +71,35 @@ const Request: React.FC<FormProps> = ({
     isValid,
   } = useFormik<FormValues>({
     initialValues: {
-      email: defaultEmail,
+      email: '',
       code: '',
     },
     validate: ({ email, code }) =>
       _pickBy({
-        email: validateEmail(email, lang, { allowPlusSign: true }),
+        email: validateEmail(email, lang, { allowPlusSign: false }),
         code: validateCode(code, lang),
       }),
     onSubmit: async ({ email, code }, { setFieldError, setSubmitting }) => {
       try {
         const { data } = await confirmCode({
-          variables: { input: { email, type: 'email_reset', code } },
+          variables: { input: { email, type: 'email_reset_confirm', code } },
         })
         const confirmVerificationCode = data?.confirmVerificationCode
+        const params = {
+          variables: {
+            input: {
+              oldEmail: oldData.email,
+              oldEmailCodeId: oldData.codeId,
+              newEmail: email,
+              newEmailCodeId: confirmVerificationCode,
+            },
+          },
+        }
 
-        if (submitCallback && confirmVerificationCode) {
-          submitCallback(confirmVerificationCode)
+        await changeEmail(params)
+
+        if (submitCallback) {
+          submitCallback()
         }
       } catch (error) {
         const [messages, codes] = parseFormSubmitErrors(error, lang)
@@ -91,12 +122,13 @@ const Request: React.FC<FormProps> = ({
         label={<Translate id="email" />}
         type="email"
         name="email"
-        disabled
         required
+        placeholder={translate({ id: 'enterNewEmail', lang })}
         value={values.email}
         error={touched.email && errors.email}
         onBlur={handleBlur}
         onChange={handleChange}
+        autoFocus
       />
 
       <Form.Input
@@ -109,11 +141,10 @@ const Request: React.FC<FormProps> = ({
         error={touched.code && errors.code}
         onBlur={handleBlur}
         onChange={handleChange}
-        autoFocus
         extraButton={
           <SendCodeButton
             email={values.email}
-            type="email_reset"
+            type="email_reset_confirm"
             disabled={!!errors.email}
           />
         }
@@ -126,18 +157,38 @@ const Request: React.FC<FormProps> = ({
       type="submit"
       form={formId}
       disabled={!isValid || isSubmitting}
-      text={<Translate id="nextStep" />}
+      text={<Translate id="confirm" />}
       loading={isSubmitting}
     />
   )
 
+  if (isInPage) {
+    return (
+      <>
+        <Layout.Header
+          left={<Layout.Header.BackButton />}
+          right={
+            <>
+              <Layout.Header.Title id="changeEmail" />
+              {SubmitButton}
+            </>
+          }
+        />
+
+        {InnerForm}
+      </>
+    )
+  }
+
   return (
     <>
-      <Dialog.Header
-        title="changeEmail"
-        close={closeDialog}
-        rightButton={SubmitButton}
-      />
+      {closeDialog && (
+        <Dialog.Header
+          title="changeEmail"
+          close={closeDialog}
+          rightButton={SubmitButton}
+        />
+      )}
 
       <Dialog.Content spacing={[0, 0]} hasGrow>
         {InnerForm}
@@ -146,4 +197,4 @@ const Request: React.FC<FormProps> = ({
   )
 }
 
-export default Request
+export default Confirm

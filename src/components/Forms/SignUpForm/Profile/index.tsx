@@ -41,7 +41,7 @@ const UPDATE_USER_INFO = gql`
   }
 `
 
-export const SignUpProfileForm: React.FC<FormProps> = ({
+const Profile: React.FC<FormProps> = ({
   purpose,
   submitCallback,
   closeDialog,
@@ -168,6 +168,7 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
       </>
     )
   }
+
   return (
     <>
       {closeDialog && (
@@ -184,3 +185,5 @@ export const SignUpProfileForm: React.FC<FormProps> = ({
     </>
   )
 }
+
+export default Profile

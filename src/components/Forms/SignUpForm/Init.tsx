@@ -85,7 +85,7 @@ const LoginRedirectionButton = () => (
   </Form.List>
 )
 
-export const SignUpInitForm: React.FC<FormProps> = ({
+const Init: React.FC<FormProps> = ({
   defaultEmail = '',
   purpose,
   submitCallback,
@@ -311,3 +311,5 @@ export const SignUpInitForm: React.FC<FormProps> = ({
     </ReCaptchaProvider>
   )
 }
+
+export default Init

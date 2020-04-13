@@ -1,17 +1,23 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 
-import { ChangePasswordForm, Head, Layout } from '~/components'
+import { ChangePasswordForm, Head, Layout, ViewerContext } from '~/components'
 
-const Forget = () => {
-  const [step, setStep] = useState('request')
+type Step = 'request' | 'confirm' | 'complete'
+
+const ChangePassword = () => {
+  const viewer = useContext(ViewerContext)
+  const [step, setStep] = useState<Step>('request')
   const [data, setData] = useState<{ [key: string]: any }>({
     request: {
+      prev: 'login',
       next: 'confirm',
+      email: viewer.info.email,
     },
     confirm: {
       prev: 'request',
       next: 'complete',
     },
+    complete: {},
   })
 
   const requestCodeCallback = (params: any) => {
@@ -31,12 +37,12 @@ const Forget = () => {
 
   return (
     <Layout.Main bgColor="grey-lighter">
-      <Head title={{ id: 'forgetPassword' }} />
+      <Head title={{ id: 'changePassword' }} />
 
       {step === 'request' && (
         <ChangePasswordForm.Request
           defaultEmail={data.request.email}
-          type="forget"
+          type="change"
           purpose="page"
           submitCallback={requestCodeCallback}
         />
@@ -45,17 +51,17 @@ const Forget = () => {
       {step === 'confirm' && (
         <ChangePasswordForm.Confirm
           codeId={data.request.codeId}
-          type="forget"
+          type="change"
           purpose="page"
           submitCallback={() => setStep('complete')}
         />
       )}
 
       {step === 'complete' && (
-        <ChangePasswordForm.Complete type="forget" purpose="page" />
+        <ChangePasswordForm.Complete type="change" purpose="page" />
       )}
     </Layout.Main>
   )
 }
 
-export default Forget
+export default ChangePassword

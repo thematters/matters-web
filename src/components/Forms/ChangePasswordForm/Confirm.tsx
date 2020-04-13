@@ -34,7 +34,7 @@ export const RESET_PASSWORD = gql`
   }
 `
 
-export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
+const Confirm: React.FC<FormProps> = ({
   codeId,
   type,
   purpose,
@@ -165,3 +165,5 @@ export const PasswordChangeConfirmForm: React.FC<FormProps> = ({
     </>
   )
 }
+
+export default Confirm
