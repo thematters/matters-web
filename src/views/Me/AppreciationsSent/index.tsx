@@ -2,13 +2,13 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
 import {
+  Appreciation,
   EmptyAppreciation,
   Head,
   InfiniteScroll,
   Layout,
   List,
   Spinner,
-  Appreciation,
 } from '~/components'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
