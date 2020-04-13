@@ -1,4 +1,4 @@
-import MeSettings from '~/views/Me/Settings'
+import MeSettings from '~/views/Me/Settings/Settings'
 
 import { Protected } from '~/components'
 
