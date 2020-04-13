@@ -7,6 +7,8 @@ footer {
   color: var(--color-grey);
 
   & .left {
+    @mixin inline-flex-center-all;
+
     & :global(> * + *) {
       padding-left: var(--spacing-loose);
     }
