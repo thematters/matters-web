@@ -33,6 +33,7 @@ header {
 }
 
 .left {
+  display: inline-flex;
   flex-shrink: 0;
   margin-right: var(--spacing-x-tight);
 

@@ -6,6 +6,8 @@ import { Form, Translate, ViewerContext } from '~/components'
 
 import { PATHS } from '~/common/enums'
 
+import ChangeUserNameAsk from './ChangeUserNameAsk'
+
 import { ViewerTotalBlockCount } from './__generated__/ViewerTotalBlockCount'
 
 const VIEWER_TOTAL_BLOCK_COUNT = gql`
@@ -25,14 +27,20 @@ const AccountSettings = () => {
     errorPolicy: 'none',
   })
   const totalBlockCount = data?.viewer?.blockList?.totalCount
+  const userNameEditable = viewer.info.userNameEditable
 
   return (
     <Form.List groupName={<Translate id="settingsAccount" />}>
-      <Form.List.Item
-        title="Matters ID"
-        {...PATHS.ME_SETTINGS_CHANGE_USERNAME}
-        rightText={viewer.userName}
-      />
+      <ChangeUserNameAsk>
+        {({ open }) => (
+          <Form.List.Item
+            title="Matters ID"
+            onClick={userNameEditable ? open : undefined}
+            rightText={viewer.userName}
+          />
+        )}
+      </ChangeUserNameAsk>
+
       <Form.List.Item
         title={<Translate id="email" />}
         {...PATHS.ME_SETTINGS_CHANGE_EMAIL}

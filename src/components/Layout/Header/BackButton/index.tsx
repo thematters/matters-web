@@ -19,6 +19,13 @@ export const BackButton: React.FC<BackButtonProps> = ({ mode, ...props }) => {
   })
 
   const onBack = () => {
+    if (props.as || props.href || props.onClick) {
+      if (props.onClick) {
+        props.onClick()
+      }
+      return
+    }
+
     const routeHistory = data?.clientPreference.routeHistory || []
 
     if (routeHistory.length > 0) {

@@ -1,10 +1,26 @@
-import { Layout } from '~/components'
+import { useState } from 'react'
 
-export default () => (
-  <Layout.Main>
-    <Layout.Header
-      left={<Layout.Header.BackButton />}
-      right={<Layout.Header.Title zh_hant="Matters ID" zh_hans="Matters ID" />}
-    />
-  </Layout.Main>
-)
+import { ChangeUserNameForm, Head, Layout } from '~/components'
+
+type Step = 'confirm' | 'complete'
+
+const ChangePassword = () => {
+  const [step, setStep] = useState<Step>('confirm')
+
+  return (
+    <Layout.Main bgColor="grey-lighter">
+      <Head title={{ id: 'changeUserName' }} />
+
+      {step === 'confirm' && (
+        <ChangeUserNameForm.Confirm
+          purpose="page"
+          submitCallback={() => setStep('complete')}
+        />
+      )}
+
+      {step === 'complete' && <ChangeUserNameForm.Complete purpose="page" />}
+    </Layout.Main>
+  )
+}
+
+export default ChangePassword

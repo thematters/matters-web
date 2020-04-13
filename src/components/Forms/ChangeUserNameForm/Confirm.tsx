@@ -3,9 +3,10 @@ import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import React, { useContext } from 'react'
 
-import { Dialog, Form, LanguageContext, Translate } from '~/components'
+import { Dialog, Form, LanguageContext, Layout, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
+import { PATHS } from '~/common/enums'
 import {
   parseFormSubmitErrors,
   translate,
@@ -16,8 +17,9 @@ import {
 import { UpdateUserInfoUserName } from './__generated__/UpdateUserInfoUserName'
 
 interface FormProps {
+  purpose: 'dialog' | 'page'
   submitCallback: () => void
-  closeDialog: () => void
+  closeDialog?: () => void
 }
 
 interface FormValues {
@@ -34,10 +36,14 @@ const UPDATE_USER_INFO = gql`
   }
 `
 
-const Confirm: React.FC<FormProps> = ({ submitCallback, closeDialog }) => {
+const Confirm: React.FC<FormProps> = ({
+  purpose,
+  submitCallback,
+  closeDialog,
+}) => {
   const [update] = useMutation<UpdateUserInfoUserName>(UPDATE_USER_INFO)
   const { lang } = useContext(LanguageContext)
-
+  const isInPage = purpose === 'page'
   const formId = 'username-confirm-form'
 
   const {
@@ -122,13 +128,33 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, closeDialog }) => {
     />
   )
 
+  if (isInPage) {
+    return (
+      <>
+        <Layout.Header
+          left={<Layout.Header.BackButton {...PATHS.ME_SETTINGS} />}
+          right={
+            <>
+              <Layout.Header.Title id="changeUserName" />
+              {SubmitButton}
+            </>
+          }
+        />
+
+        {InnerForm}
+      </>
+    )
+  }
+
   return (
     <>
-      <Dialog.Header
-        title="changeUserName"
-        close={closeDialog}
-        rightButton={SubmitButton}
-      />
+      {closeDialog && (
+        <Dialog.Header
+          title="changeUserName"
+          close={closeDialog}
+          rightButton={SubmitButton}
+        />
+      )}
 
       <Dialog.Content spacing={[0, 0]} hasGrow>
         {InnerForm}

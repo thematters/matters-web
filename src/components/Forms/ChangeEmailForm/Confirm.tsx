@@ -14,6 +14,7 @@ import {
 import { useMutation } from '~/components/GQL'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 
+import { PATHS } from '~/common/enums'
 import {
   parseFormSubmitErrors,
   translate,
@@ -166,7 +167,7 @@ const Confirm: React.FC<FormProps> = ({
     return (
       <>
         <Layout.Header
-          left={<Layout.Header.BackButton />}
+          left={<Layout.Header.BackButton {...PATHS.ME_SETTINGS} />}
           right={
             <>
               <Layout.Header.Title id="changeEmail" />
