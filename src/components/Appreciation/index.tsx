@@ -1,7 +1,7 @@
 import AppreciationReceived from './AppreciationReceived'
 import AppreciationSent from './AppreciationSent'
 
-export const Transaction = {
+export const Appreciation = {
   AppreciationSent,
   AppreciationReceived,
 }

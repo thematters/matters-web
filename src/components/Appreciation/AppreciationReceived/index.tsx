@@ -14,15 +14,15 @@ import { toPath } from '~/common/utils'
 
 import styles from './styles.css'
 
-import { AppreciationReceivedTransaction } from './__generated__/AppreciationReceivedTransaction'
+import { AppreciationReceivedAppreciation } from './__generated__/AppreciationReceivedAppreciation'
 
 interface AppreciationReceivedProps {
-  tx: AppreciationReceivedTransaction
+  tx: AppreciationReceivedAppreciation
 }
 
 const fragments = {
-  transaction: gql`
-    fragment AppreciationReceivedTransaction on Transaction {
+  appreciation: gql`
+    fragment AppreciationReceivedAppreciation on Appreciation {
       amount
       purpose
       content

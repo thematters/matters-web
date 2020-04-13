@@ -51,7 +51,7 @@ export * from './UserDigest'
 export * from './DraftDigest'
 export * from './Comment'
 export * from './Notice'
-export * from './Transaction'
+export * from './Appreciation'
 
 export * from './Search'
 export * from './UserProfile'
