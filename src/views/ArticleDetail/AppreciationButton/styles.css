@@ -12,6 +12,7 @@
     background: var(--color-white);
     box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.08),
       0 4px 12px 0 rgba(0, 0, 0, 0.08);
+    z-index: 5;
 
     &:hover,
     &:focus {
