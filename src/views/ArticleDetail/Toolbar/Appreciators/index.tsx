@@ -21,7 +21,7 @@ const fragments = {
         edges {
           cursor
           node {
-            ... on Transaction {
+            ... on Appreciation {
               sender {
                 id
                 ...AvatarUser

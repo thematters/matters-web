@@ -2,13 +2,13 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
 import {
+  Appreciation,
   EmptyAppreciation,
   Head,
   InfiniteScroll,
   Layout,
   List,
   Spinner,
-  Transaction,
 } from '~/components'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
@@ -33,14 +33,14 @@ const ME_APPRECIATED_RECEIVED = gql`
           edges {
             cursor
             node {
-              ...AppreciationReceivedTransaction
+              ...AppreciationReceivedAppreciation
             }
           }
         }
       }
     }
   }
-  ${Transaction.AppreciationReceived.fragments.transaction}
+  ${Appreciation.AppreciationReceived.fragments.appreciation}
   ${AppreciationTabs.fragments.userActivity}
 `
 
@@ -95,7 +95,7 @@ const AppreciationsReceived = () => {
         <List>
           {edges.map(({ node, cursor }) => (
             <List.Item key={cursor}>
-              <Transaction.AppreciationReceived tx={node} />
+              <Appreciation.AppreciationReceived tx={node} />
             </List.Item>
           ))}
         </List>
