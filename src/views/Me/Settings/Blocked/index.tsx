@@ -1,4 +1,4 @@
-import { Layout } from '~/components'
+import { Head, Layout } from '~/components'
 
 import { PATHS } from '~/common/enums'
 
@@ -10,6 +10,8 @@ export default () => (
       left={<Layout.Header.BackButton {...PATHS.ME_SETTINGS} />}
       right={<Layout.Header.Title id="settingsBlock" />}
     />
+
+    <Head title={{ id: 'settingsBlock' }} />
 
     <SettingsBlocked />
   </Layout.Main>

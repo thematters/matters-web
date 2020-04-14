@@ -1,4 +1,4 @@
-import { Layout, Spacer } from '~/components'
+import { Head, Layout, Spacer } from '~/components'
 
 import AccountSettings from './Account'
 import UISettings from './UI'
@@ -11,6 +11,8 @@ const Settings = () => {
         left={<Layout.Header.BackButton />}
         right={<Layout.Header.Title id="settings" />}
       />
+
+      <Head title={{ id: 'settings' }} />
 
       <Spacer />
 

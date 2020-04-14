@@ -3,7 +3,6 @@ import gql from 'graphql-tag'
 
 import {
   EmptyWarning,
-  Head,
   InfiniteScroll,
   List,
   Spinner,
@@ -108,10 +107,4 @@ const SettingsBlocked = () => {
   )
 }
 
-export default () => (
-  <>
-    <Head title={{ id: 'settingsBlock' }} />
-
-    <SettingsBlocked />
-  </>
-)
+export default SettingsBlocked
