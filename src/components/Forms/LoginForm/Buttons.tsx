@@ -36,7 +36,7 @@ export const SignUpDialogButton = () => (
     <Form.List.Item
       title={<Translate zh_hant="沒有帳號？" zh_hans="沒有帐号？" />}
       rightText={<Translate id="register" />}
-      rightSubText="green"
+      rightTextColor="green"
       onClick={() => {
         window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
         window.dispatchEvent(new CustomEvent(OPEN_SIGNUP_DIALOG))
@@ -50,7 +50,7 @@ export const SignUpRedirectionButton = () => (
     <Form.List.Item
       title={<Translate zh_hant="沒有帳號？" zh_hans="沒有帐号？" />}
       rightText={<Translate id="register" />}
-      rightSubText="green"
+      rightTextColor="green"
       {...appendTarget(PATHS.AUTH_SIGNUP)}
     />
   </Form.List>

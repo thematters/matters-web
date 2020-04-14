@@ -6,8 +6,12 @@
 }
 
 .left {
-  align-self: flex-start;
   display: inline-flex;
+  flex-direction: column;
+
+  &.top {
+    align-self: flex-start;
+  }
 
   & .title {
     font-size: var(--font-size-md);
@@ -37,7 +41,7 @@
     text-align: right;
   }
 
-  & :global(svg) {
+  & :global(.text-icon svg) {
     margin-right: calc(var(--spacing-x-tight) * -1);
   }
 }

@@ -2,7 +2,13 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
-import { Form, LikeCoinDialog, Translate, ViewerContext } from '~/components'
+import {
+  Form,
+  Icon,
+  LikeCoinDialog,
+  Translate,
+  ViewerContext,
+} from '~/components'
 
 import { ViewerLikeInfo } from './__generated__/ViewerLikeInfo'
 
@@ -23,7 +29,7 @@ const VIEWER_LIKE_INFO = gql`
 const WalletSettings = () => {
   const viewer = useContext(ViewerContext)
   const likerId = viewer.liker.likerId
-  const { data } = useQuery<ViewerLikeInfo>(VIEWER_LIKE_INFO, {
+  const { data, loading } = useQuery<ViewerLikeInfo>(VIEWER_LIKE_INFO, {
     errorPolicy: 'none',
   })
   const LIKE = data?.viewer?.status?.LIKE
@@ -46,6 +52,10 @@ const WalletSettings = () => {
         title={<Translate zh_hant="我的創作價值" zh_hans="我的创作价值" />}
         href="https://like.co/in"
         htmlTarget="_blank"
+        leftAlign="top"
+        right={
+          loading ? <Icon.Spinner color="grey-light" size="sm" /> : undefined
+        }
         rightText={
           likerId ? (
             `${LIKE?.total} LikeCoin`
