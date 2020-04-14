@@ -21,3 +21,5 @@ export const Z_INDEX = {
   DIALOG: 200,
   OVER_DIALOG: 201,
 }
+
+export const AGENT_HASH_PREFIX = 'v0__'

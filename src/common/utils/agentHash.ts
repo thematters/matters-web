@@ -1,7 +1,9 @@
 import XXH from 'xxhashjs'
 
+import { AGENT_HASH_PREFIX } from '~/common/enums'
+
 export const initAgentHash = (window: Window) => {
-  if (typeof window !== 'undefined') {
+  if (process.browser && typeof window !== 'undefined') {
     try {
       const canvas = window.document.createElement('canvas')
       const context = canvas.getContext('2d')
@@ -18,7 +20,7 @@ export const initAgentHash = (window: Window) => {
         context.fillStyle = '#333'
         context.fillText('MattersAgentHash', 2, 2)
         const dataURL = canvas.toDataURL().replace('data:image/png;base64,', '')
-        const hash = XXH.h64(dataURL, 0).toString(10)
+        const hash = AGENT_HASH_PREFIX + XXH.h64(dataURL, 0).toString(10)
         return hash
       }
     } catch (error) {
