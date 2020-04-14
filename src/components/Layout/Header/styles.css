@@ -15,10 +15,10 @@ header {
     position: absolute;
   }
 
-  &.margin-base {
+  &.spacing-base {
     margin-bottom: var(--spacing-base);
   }
-  &.margin-loose {
+  &.spacing-loose {
     margin-bottom: var(--spacing-loose);
   }
 }

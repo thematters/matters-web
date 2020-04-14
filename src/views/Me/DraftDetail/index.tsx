@@ -162,7 +162,7 @@ const DraftDetail = () => {
             {draft && <PublishButton disabled={!publishable} />}
           </>
         }
-        marginBottom={0}
+        spacing={0}
       />
 
       <Head title={{ zh_hant: '編輯草稿', zh_hans: '编辑草稿' }} />

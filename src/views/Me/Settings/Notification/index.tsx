@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { Head, Layout, Spinner } from '~/components'
+import { Head, Layout, Spacer, Spinner } from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import { PATHS } from '~/common/enums'
@@ -129,5 +129,7 @@ export default () => (
     <Head title={{ id: 'settingsNotification' }} />
 
     <NotificationSettings />
+
+    <Spacer size="xxxloose" />
   </Layout.Main>
 )

@@ -9,7 +9,7 @@ export default () => (
     <Layout.Header
       left={<Layout.Header.BackButton {...PATHS.ME_SETTINGS} />}
       right={<Layout.Header.Title id="settingsBlock" />}
-      marginBottom={0}
+      spacing={0}
     />
 
     <SettingsBlocked />

@@ -1,4 +1,4 @@
-import { Layout } from '~/components'
+import { Layout, Spacer } from '~/components'
 
 import AccountSettings from './Account'
 import UISettings from './UI'
@@ -15,6 +15,8 @@ const Settings = () => {
       <UISettings />
       <AccountSettings />
       <WalletSettings />
+
+      <Spacer size="xxxloose" />
     </Layout.Main>
   )
 }

@@ -57,10 +57,21 @@ export const InfiniteScroll: React.FC<Props> = ({
   return (
     <div>
       {children}
-      {hasNextPage && (
+      {hasNextPage ? (
         <Waypoint bottomOffset="-100%" onEnter={() => loadMore()}>
           <LoaderWithRef />
         </Waypoint>
+      ) : (
+        <section
+          style={{
+            textAlign: 'center',
+            fontSize: 32,
+            marginTop: 24,
+            opacity: 0.5,
+          }}
+        >
+          🔚
+        </section>
       )}
     </div>
   )

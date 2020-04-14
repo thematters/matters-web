@@ -1,0 +1,7 @@
+.loose {
+  padding-bottom: var(--spacing-loose);
+}
+
+.xxxloose {
+  padding-bottom: var(--spacing-xxx-loose);
+}

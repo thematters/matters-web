@@ -72,7 +72,7 @@ const Follow = () => {
           isSmallUp ? <Layout.Header.BackButton /> : <Layout.Header.MeButton />
         }
         right={<Layout.Header.Title id="follow" />}
-        marginBottom={0}
+        spacing={0}
       />
 
       <BaseFollow />
