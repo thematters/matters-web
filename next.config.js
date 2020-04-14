@@ -16,13 +16,13 @@ const withOffline = require('next-offline')
 const packageJson = require('./package.json')
 
 const isProd = process.env.ENV === 'production'
-const FIREBASE_CONFIG = process.env.FIREBASE_CONFIG ?
-  JSON.parse(Buffer.from(process.env.FIREBASE_CONFIG, 'base64').toString()) :
-  {}
+const FIREBASE_CONFIG = process.env.FIREBASE_CONFIG
+  ? JSON.parse(Buffer.from(process.env.FIREBASE_CONFIG, 'base64').toString())
+  : {}
 
-const URL_PUSH_SW = isProd ?
-  './firebase-messaging-sw-production.js' :
-  './firebase-messaging-sw-develop.js'
+const URL_PUSH_SW = isProd
+  ? './firebase-messaging-sw-production.js'
+  : './firebase-messaging-sw-develop.js'
 
 const nextConfig = {
   /**
@@ -63,10 +63,7 @@ const nextConfig = {
   },
   distDir: 'build',
   crossOrigin: 'anonymous',
-  webpack(config, {
-    defaultLoaders,
-    isServer
-  }) {
+  webpack(config, { defaultLoaders, isServer }) {
     /**
      * Styles in regular CSS files
      * @see {@url https://github.com/zeit/styled-jsx#styles-in-regular-css-files}
@@ -83,7 +80,8 @@ const nextConfig = {
 
     config.module.rules.push({
       test: /\.svg$/,
-      use: [{
+      use: [
+        {
           loader: '@svgr/webpack',
           options: {
             memo: true,
@@ -171,7 +169,8 @@ module.exports = withPlugins(
         workboxOpts: {
           // https://github.com/hanford/next-offline/issues/35
           importScripts: [URL_PUSH_SW],
-          runtimeCaching: [{
+          runtimeCaching: [
+            {
               urlPattern: '/',
               handler: 'NetworkFirst',
               options: {

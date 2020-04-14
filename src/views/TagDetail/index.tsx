@@ -98,7 +98,7 @@ const TagDetail = ({ data }: { data: TagDetailType }) => {
         <p className="description">{data.node.description}</p>
       )}
 
-      <Tabs spacingBottom={0}>
+      <Tabs>
         {hasSelected > 0 && (
           <Tabs.Tab selected={feed === 'selected'}>
             <Button onClick={() => setFeed('selected')}>
