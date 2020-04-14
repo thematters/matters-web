@@ -14,13 +14,6 @@ header {
   &.transparent-absolute {
     position: absolute;
   }
-
-  &.spacing-base {
-    margin-bottom: var(--spacing-base);
-  }
-  &.spacing-loose {
-    margin-bottom: var(--spacing-loose);
-  }
 }
 
 .content {

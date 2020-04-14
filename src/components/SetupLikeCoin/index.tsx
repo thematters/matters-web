@@ -49,10 +49,7 @@ export const SetupLikeCoin: React.FC<Props> = ({
   return (
     <>
       {isInPage && (
-        <Layout.Header
-          left={<Layout.Header.Title id="setupLikeCoin" />}
-          spacing={0}
-        />
+        <Layout.Header left={<Layout.Header.Title id="setupLikeCoin" />} />
       )}
 
       {isInDialog && closeDialog && (

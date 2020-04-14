@@ -79,6 +79,8 @@ export default () => (
       right={<Layout.Header.Title id="helpCenter" />}
     />
 
+    <Spacer />
+
     <Help />
 
     <Spacer size="xxxloose" />

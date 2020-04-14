@@ -73,7 +73,6 @@ const Search = () => {
             )}
           </>
         }
-        spacing={0}
       />
 
       <Head title={{ id: 'search' }} />

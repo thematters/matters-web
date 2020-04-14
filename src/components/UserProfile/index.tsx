@@ -111,7 +111,6 @@ export const UserProfile = () => {
         </>
       }
       mode={isSmallUp ? 'solid-fixed' : 'transparent-absolute'}
-      spacing={0}
     />
   )
 

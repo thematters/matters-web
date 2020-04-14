@@ -174,7 +174,6 @@ const ArticleDetail = () => {
             bgColor="none"
           />
         }
-        spacing={0}
       />
 
       <Head

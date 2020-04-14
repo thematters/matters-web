@@ -15,7 +15,6 @@ const Community = () => {
       <Layout.Header
         left={<Layout.Header.BackButton />}
         right={<Layout.Header.Title id="community" />}
-        spacing={0}
       />
 
       <Head title={{ id: 'community' }} />

@@ -156,7 +156,6 @@ export default () => (
           <CreateTagButton />
         </>
       }
-      spacing={0}
     />
 
     <Tags />

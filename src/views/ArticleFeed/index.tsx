@@ -140,7 +140,6 @@ export default ({ type = 'topic' }: ArticleFeedProp) => (
       right={
         <Layout.Header.Title id={type === 'topic' ? 'allTopics' : 'allIcymi'} />
       }
-      spacing={0}
     />
 
     <Head title={{ id: type === 'topic' ? 'allTopics' : 'allIcymi' }} />

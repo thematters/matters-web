@@ -12,6 +12,8 @@ const Settings = () => {
         right={<Layout.Header.Title id="settings" />}
       />
 
+      <Spacer />
+
       <UISettings />
       <AccountSettings />
       <WalletSettings />
