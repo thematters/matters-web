@@ -86,6 +86,7 @@ export interface ButtonProps {
 
   href?: string
   as?: string
+  replace?: boolean
 
   is?: 'span'
 
@@ -139,6 +140,7 @@ export const Button: React.FC<ButtonProps> = forwardRef(
 
       href,
       as,
+      replace,
 
       is,
       type,
@@ -235,7 +237,7 @@ export const Button: React.FC<ButtonProps> = forwardRef(
     // link
     if (href && as) {
       return (
-        <Link href={href} as={as}>
+        <Link href={href} as={as} replace={replace}>
           <a {...containerProps}>
             <div className="content" style={contentStyle}>
               <div className="hotarea" style={hotAreaStyle} />

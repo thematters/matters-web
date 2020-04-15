@@ -6,7 +6,6 @@ import React, { useContext } from 'react'
 import { Dialog, Form, LanguageContext, Layout, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
-import { PATHS } from '~/common/enums'
 import {
   parseFormSubmitErrors,
   translate,
@@ -132,7 +131,7 @@ const Confirm: React.FC<FormProps> = ({
     return (
       <>
         <Layout.Header
-          left={<Layout.Header.BackButton {...PATHS.ME_SETTINGS} />}
+          left={<Layout.Header.BackButton />}
           right={
             <>
               <Layout.Header.Title id="changeUserName" />

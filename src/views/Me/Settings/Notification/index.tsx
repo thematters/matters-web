@@ -4,8 +4,6 @@ import gql from 'graphql-tag'
 import { Head, Layout, Spacer, Spinner } from '~/components'
 import { useMutation } from '~/components/GQL'
 
-import { PATHS } from '~/common/enums'
-
 import ArticleSettings from './Article'
 import CommentSettings from './Comment'
 import MeSettings from './Me'
@@ -122,7 +120,7 @@ const NotificationSettings = () => {
 export default () => (
   <Layout.Main bgColor="grey-lighter">
     <Layout.Header
-      left={<Layout.Header.BackButton {...PATHS.ME_SETTINGS} />}
+      left={<Layout.Header.BackButton />}
       right={<Layout.Header.Title id="settingsNotification" />}
     />
 
