@@ -128,8 +128,6 @@ export default () => (
 
     <Head title={{ id: 'settingsNotification' }} />
 
-    <Spacer />
-
     <NotificationSettings />
 
     <Spacer size="xxxloose" />

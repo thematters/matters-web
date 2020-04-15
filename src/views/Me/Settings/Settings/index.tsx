@@ -11,15 +11,11 @@ const Settings = () => {
         left={<Layout.Header.BackButton />}
         right={<Layout.Header.Title id="settings" />}
       />
-
       <Head title={{ id: 'settings' }} />
-
-      <Spacer />
 
       <UISettings />
       <AccountSettings />
       <WalletSettings />
-
       <Spacer size="xxxloose" />
     </Layout.Main>
   )
