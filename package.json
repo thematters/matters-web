@@ -75,7 +75,7 @@
     "react-dom": "^16.13.1",
     "react-focus-lock": "^2.2.1",
     "react-spring": "^8.0.27",
-    "react-use-gesture": "^7.0.13",
+    "react-use-gesture": "^7.0.14",
     "react-virtualized": "^9.21.2",
     "react-waypoint": "^9.0.2",
     "subscriptions-transport-ws": "^0.9.16",
