@@ -3,7 +3,8 @@
   --switch-height: 1.25rem;
   --switch-border-radius: 0.75rem;
   --switch-spacing: 0.125rem;
-  --switch-background: #f7f7f7;
+  --switch-background: var(--color-grey-light);
+  --switch-thumb-width: calc(var(--switch-height) - var(--switch-spacing) * 2);
 }
 
 .switch {
@@ -48,8 +49,8 @@
   position: absolute;
   top: var(--switch-spacing);
   left: var(--switch-spacing);
-  width: calc(var(--switch-height) - var(--switch-spacing) * 2);
-  height: calc(var(--switch-height) - var(--switch-spacing) * 2);
+  width: var(--switch-thumb-width);
+  height: var(--switch-thumb-width);
 }
 
 .switch input:checked {
@@ -59,8 +60,9 @@
 }
 .switch input:checked + span:after,
 .switch input:checked + span + .loading :global(svg) {
-  left: auto;
-  right: var(--switch-spacing);
+  left: calc(
+    var(--switch-width) - var(--switch-thumb-width) - var(--switch-spacing)
+  );
 }
 
 .switch:hover,
