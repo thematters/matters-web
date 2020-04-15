@@ -15,7 +15,7 @@ import https from 'https'
 import withApollo from 'next-with-apollo'
 import getConfig from 'next/config'
 
-import { STORE_KEY_AGENT_HASH } from '~/common/enums'
+import { AGENT_HASH_PREFIX, STORE_KEY_AGENT_HASH } from '~/common/enums'
 import introspectionQueryResultData from '~/common/gql/fragmentTypes.json'
 import { initAgentHash, randomString } from '~/common/utils'
 
@@ -132,7 +132,7 @@ const agentHashLink = setContext((_, { headers }) => {
     const storedAgentHash = window.localStorage.getItem(STORE_KEY_AGENT_HASH)
     agentHash = storedAgentHash
 
-    if (!agentHash) {
+    if (!agentHash || !agentHash.startsWith(AGENT_HASH_PREFIX)) {
       agentHash = initAgentHash(window)
     }
     if (agentHash && storedAgentHash !== agentHash) {
