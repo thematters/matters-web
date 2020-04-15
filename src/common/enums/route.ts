@@ -31,7 +31,10 @@ type ROUTE_KEY =
   | 'ME_APPRECIATIONS_SENT'
   | 'ME_APPRECIATIONS_RECEIVED'
   | 'ME_NOTIFICATIONS'
-  | 'ME_SETTINGS_ACCOUNT'
+  | 'ME_SETTINGS'
+  | 'ME_SETTINGS_CHANGE_USERNAME'
+  | 'ME_SETTINGS_CHANGE_EMAIL'
+  | 'ME_SETTINGS_CHANGE_PASSWORD'
   | 'ME_SETTINGS_NOTIFICATION'
   | 'ME_SETTINGS_BLOCKED'
   | 'ME_DRAFT_DETAIL'
@@ -217,9 +220,24 @@ export const ROUTES: Array<{
 
   // Settings
   {
-    key: 'ME_SETTINGS_ACCOUNT',
-    href: '/MeSettingsAccount',
-    as: '/me/settings/account',
+    key: 'ME_SETTINGS',
+    href: '/MeSettings',
+    as: '/me/settings',
+  },
+  {
+    key: 'ME_SETTINGS_CHANGE_USERNAME',
+    href: '/MeSettingsChangeUserName',
+    as: '/me/settings/change-username',
+  },
+  {
+    key: 'ME_SETTINGS_CHANGE_EMAIL',
+    href: '/MeSettingsChangeEmail',
+    as: '/me/settings/change-email',
+  },
+  {
+    key: 'ME_SETTINGS_CHANGE_PASSWORD',
+    href: '/MeSettingsChangePassword',
+    as: '/me/settings/change-password',
   },
   {
     key: 'ME_SETTINGS_NOTIFICATION',

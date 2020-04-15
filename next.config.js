@@ -58,6 +58,9 @@ const nextConfig = {
     app_version: packageJson.version,
   },
   useFileSystemPublicRoutes: false,
+  typescript: {
+    ignoreDevErrors: true,
+  },
   distDir: 'build',
   crossOrigin: 'anonymous',
   webpack(config, { defaultLoaders, isServer }) {

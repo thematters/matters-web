@@ -3,9 +3,7 @@ import { useState } from 'react'
 import {
   Dialog,
   SetupLikeCoin,
-  SignUpComplete,
-  SignUpInitForm,
-  SignUpProfileForm,
+  SignUpForm,
   useEventListener,
 } from '~/components'
 
@@ -41,7 +39,7 @@ const SignUpDialog = () => {
       fixedHeight={step !== 'complete'}
     >
       {step === 'signUp' && (
-        <SignUpInitForm
+        <SignUpForm.Init
           purpose="dialog"
           submitCallback={() => {
             setStep('profile')
@@ -51,7 +49,7 @@ const SignUpDialog = () => {
         />
       )}
       {step === 'profile' && (
-        <SignUpProfileForm
+        <SignUpForm.Profile
           purpose="dialog"
           submitCallback={() => {
             setStep('setupLikeCoin')
@@ -70,7 +68,7 @@ const SignUpDialog = () => {
           closeDialog={close}
         />
       )}
-      {step === 'complete' && <SignUpComplete closeDialog={close} />}
+      {step === 'complete' && <SignUpForm.Complete closeDialog={close} />}
     </Dialog>
   )
 }

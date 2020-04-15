@@ -3,9 +3,11 @@
 
   display: flex;
   align-items: center;
+
   position: sticky;
   bottom: 0;
   margin: 0;
+
   padding: var(--spacing-base);
   padding-bottom: calc(constant(safe-area-inset-bottom) + var(--spacing-base));
   padding-bottom: calc(env(safe-area-inset-bottom) + var(--spacing-base));

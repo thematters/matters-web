@@ -19,6 +19,7 @@ export const Layout: React.FC & {
 } = ({ children }) => {
   const router = useRouter()
   const isInDraftDetail = router.pathname === PATHS.ME_DRAFT_DETAIL.href
+  const isInArticleDetail = router.pathname === PATHS.ARTICLE_DETAIL.href
 
   return (
     <>
@@ -32,7 +33,7 @@ export const Layout: React.FC & {
         {children}
       </main>
 
-      {!isInDraftDetail && (
+      {!isInDraftDetail && !isInArticleDetail && (
         <footer className="u-sm-up-hide">
           <NavBar />
         </footer>

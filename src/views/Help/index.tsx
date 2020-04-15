@@ -1,4 +1,4 @@
-import { Form, Layout, Translate } from '~/components'
+import { Form, Layout, Spacer, Translate } from '~/components'
 
 import { PATHS } from '~/common/enums'
 import { toPath } from '~/common/utils'
@@ -79,6 +79,10 @@ export default () => (
       right={<Layout.Header.Title id="helpCenter" />}
     />
 
+    <Spacer />
+
     <Help />
+
+    <Spacer size="xxxloose" />
   </Layout.Main>
 )

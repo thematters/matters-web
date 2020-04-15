@@ -174,7 +174,6 @@ const ArticleDetail = () => {
             bgColor="none"
           />
         }
-        marginBottom={0}
       />
 
       <Head
