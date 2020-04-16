@@ -64,7 +64,7 @@ type ToPathArgs =
  *
  * (works on SSR & CSR)
  */
-export const toPath = (args: ToPathArgs): { href: string; as: string } => {
+export const toPath = (args: ToPathArgs): { href: Url; as: string } => {
   switch (args.page) {
     case 'articleDetail': {
       const {
@@ -75,7 +75,10 @@ export const toPath = (args: ToPathArgs): { href: string; as: string } => {
       const asUrl = `/@${userName}/${slug}-${mediaHash}`
 
       return {
-        href: `${PATHS.ARTICLE_DETAIL}?userName=${userName}&slug=${slug}&mediaHash=${mediaHash}`,
+        href: {
+          pathname: PATHS.ARTICLE_DETAIL,
+          query: { userName, slug, mediaHash },
+        },
         as: args.fragment ? `${asUrl}#${args.fragment}` : asUrl,
       }
     }
@@ -91,37 +94,55 @@ export const toPath = (args: ToPathArgs): { href: string; as: string } => {
     }
     case 'draftDetail': {
       return {
-        href: `${PATHS.ME_DRAFT_DETAIL}?id=${args.id}&slug=${args.slug}`,
+        href: {
+          pathname: PATHS.ME_DRAFT_DETAIL,
+          query: { id: args.id, slug: args.slug },
+        },
         as: `/me/drafts/${args.slug}-${args.id}`,
       }
     }
     case 'tagDetail': {
       return {
-        href: `${PATHS.TAG_DETAIL}?id=${args.id}`,
+        href: {
+          pathname: PATHS.TAG_DETAIL,
+          query: { id: args.id },
+        },
         as: `/tags/${args.id}`,
       }
     }
     case 'userProfile': {
       return {
-        href: `${PATHS.USER_ARTICLES}?userName=${args.userName}`,
+        href: {
+          pathname: PATHS.USER_ARTICLES,
+          query: { userName: args.userName },
+        },
         as: `/@${args.userName}`,
       }
     }
     case 'userComments': {
       return {
-        href: `${PATHS.USER_COMMENTS}?userName=${args.userName}`,
+        href: {
+          pathname: PATHS.USER_COMMENTS,
+          query: { userName: args.userName },
+        },
         as: `/@${args.userName}/comments`,
       }
     }
     case 'userFollowers': {
       return {
-        href: `${PATHS.USER_FOLLOWERS}?userName=${args.userName}`,
+        href: {
+          pathname: PATHS.USER_FOLLOWERS,
+          query: { userName: args.userName },
+        },
         as: `/@${args.userName}/followers`,
       }
     }
     case 'userFollowees': {
       return {
-        href: `${PATHS.USER_FOLLOWEES}?userName=${args.userName}`,
+        href: {
+          pathname: PATHS.USER_FOLLOWEES,
+          query: { userName: args.userName },
+        },
         as: `/@${args.userName}/followees`,
       }
     }
