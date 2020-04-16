@@ -183,7 +183,7 @@ const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
         {mixFeed.map((edge, i) => {
           if (edge.__typename === 'HorizontalFeed') {
             const { Feed } = edge
-            return <Feed key={edge.__typename} />
+            return <Feed key={edge.__typename + i} />
           } else {
             return (
               <List.Item key={edge.cursor}>

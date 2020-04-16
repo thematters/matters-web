@@ -107,7 +107,6 @@ export default () => (
     <Layout.Header
       left={<Layout.Header.BackButton />}
       right={<Layout.Header.Title id="readHistory" />}
-      marginBottom={0}
     />
 
     <Head title={{ id: 'readHistory' }} />

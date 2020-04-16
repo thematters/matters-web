@@ -90,7 +90,6 @@ const Authors = () => {
           <List.Item key={cursor}>
             <UserDigest.Rich
               user={node}
-              hasFollow
               onClick={() =>
                 analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                   type: FEED_TYPE.ALL_AUTHORS,
@@ -110,7 +109,6 @@ export default () => (
     <Layout.Header
       left={<Layout.Header.BackButton />}
       right={<Layout.Header.Title id="allAuthors" />}
-      marginBottom={0}
     />
 
     <Head title={{ id: 'allAuthors' }} />

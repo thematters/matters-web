@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Dialog, Layout, SignUpComplete } from '~/components'
+import { Dialog, Layout, SignUpForm } from '~/components'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics } from '~/common/utils'
@@ -49,10 +49,7 @@ export const SetupLikeCoin: React.FC<Props> = ({
   return (
     <>
       {isInPage && (
-        <Layout.Header
-          left={<Layout.Header.Title id="setupLikeCoin" />}
-          marginBottom={0}
-        />
+        <Layout.Header left={<Layout.Header.Title id="setupLikeCoin" />} />
       )}
 
       {isInDialog && closeDialog && (
@@ -83,7 +80,7 @@ export const SetupLikeCoin: React.FC<Props> = ({
         />
       )}
 
-      {step === 'complete' && <SignUpComplete />}
+      {step === 'complete' && <SignUpForm.Complete />}
     </>
   )
 }

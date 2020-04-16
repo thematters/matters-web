@@ -71,7 +71,7 @@ const ArchiveArticleDialog = ({
     <>
       {children({ open })}
 
-      <Dialog isOpen={showDialog} onDismiss={close} size="sm">
+      <Dialog isOpen={showDialog} onDismiss={close} size="sm" slideIn>
         <Dialog.Header title="hide" close={close} headerHidden />
 
         <Dialog.Message

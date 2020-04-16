@@ -35,18 +35,25 @@ export const ReCaptchaProvider = ({
   const [recaptchaInterval, setRecaptchaInterval] = useState(0)
 
   const handleRecaptcha = () => {
-    // get and set token
-    const getToken = () => {
-      window.grecaptcha
-        .execute(RECAPTCHA_KEY, { action: 'homepage' })
-        .then((newToken) => {
-          setToken(newToken)
-        })
-    }
-
-    setRefreshToken(getToken)
-
     window.grecaptcha.ready(() => {
+      // function to get and set token
+      const getToken = () => {
+        if (window.grecaptcha && window.grecaptcha.execute) {
+          window.grecaptcha
+            .execute(RECAPTCHA_KEY, { action: 'homepage' })
+            .then((newToken) => {
+              setToken(newToken)
+            })
+        } else {
+          // try again after 2 seconds if script is not injected
+          setTimeout(getToken, 2000)
+        }
+      }
+
+      // used by children
+      setRefreshToken(getToken)
+
+      // get and set token
       getToken()
 
       // token expires after 2 minutes
