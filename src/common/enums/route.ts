@@ -1,7 +1,5 @@
 import { NextFunction, Request, Response } from 'express'
-import fetch from 'isomorphic-unfetch'
 import _get from 'lodash/get'
-import getConfig from 'next/config'
 
 /**
  * Route paths for Next.js custom routing
@@ -39,7 +37,6 @@ type ROUTE_KEY =
   | 'ME_SETTINGS_BLOCKED'
   | 'ME_DRAFT_DETAIL'
   | 'RECOMMENDATION'
-  // | 'EDITOR'
   | 'AUTH_LOGIN'
   | 'AUTH_SIGNUP'
   | 'AUTH_FORGET'
@@ -55,277 +52,183 @@ type ROUTE_KEY =
 
 export const ROUTES: Array<{
   key: ROUTE_KEY
-  href: string
-  as: string
+  pathname: string
   handler?: (req: Request, res: Response, next: NextFunction) => any
 }> = [
   {
     key: 'HOME',
-    href: '/Home',
-    as: '/',
+    pathname: '/',
   },
   {
     key: 'FOLLOW',
-    href: '/Follow',
-    as: '/follow',
+    pathname: '/follow',
   },
   {
     key: 'AUTHORS',
-    href: '/Authors',
-    as: '/authors',
+    pathname: '/authors',
   },
   {
     key: 'TOPICS',
-    href: '/Topics',
-    as: '/topics',
+    pathname: '/topics',
   },
   {
     key: 'ICYMI',
-    href: '/Icymi',
-    as: 'icymi',
+    pathname: '/icymi',
   },
   {
     key: 'SEARCH',
-    href: '/Search',
-    as: '/search',
+    pathname: '/search',
   },
   // experient page for recommendation engine testing
   {
     key: 'RECOMMENDATION',
-    href: '/Recommendation',
-    as: '/recommendation',
+    pathname: '/recommendation',
   },
 
   // Tag
   {
     key: 'TAGS',
-    href: '/Tags',
-    as: '/tags',
+    pathname: '/tags',
   },
   {
     key: 'TAG_DETAIL',
-    href: '/TagDetail',
-    as: '/tags/:id',
+    pathname: '/tags/[id]',
   },
 
   // User
   {
     key: 'USER_ARTICLES',
-    href: '/UserArticles',
-    as: '/@:userName',
+    pathname: '/@[username]',
   },
   {
     key: 'USER_COMMENTS',
-    href: '/UserComments',
-    as: '/@:userName/comments',
+    pathname: '/@[username]/comments',
   },
   {
     key: 'USER_FOLLOWERS',
-    href: '/UserFollowers',
-    as: '/@:userName/followers',
+    pathname: '/@[username]/followers',
   },
   {
     key: 'USER_FOLLOWEES',
-    href: '/UserFollowees',
-    as: '/@:userName/followees',
+    pathname: '/@[username]/followees',
   },
 
   // Article
   {
     key: 'ARTICLE_DETAIL',
-    href: '/ArticleDetail',
-    as: '/@:userName/*-:mediaHash',
-  },
-  {
-    key: 'ARTICLE_DETAIL_LEGACY',
-    href: '/ArticleDetail',
-    as: '/forum',
-    handler: async (req, res) => {
-      if (!req.query || !req.query.post) {
-        return res.redirect(302, '/')
-      }
-
-      const {
-        publicRuntimeConfig: { API_URL },
-      } = getConfig()
-
-      try {
-        const response = await fetch(API_URL, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            query: `
-              {
-                article(input: { uuid: "${req.query.post}" }) {
-                  slug
-                  mediaHash
-                  author {
-                    userName
-                  }
-                }
-              }
-            `,
-          }),
-        })
-        const data = await response.json()
-        const slug = _get(data, 'data.article.slug')
-        const mediaHash = _get(data, 'data.article.mediaHash')
-        const userName = _get(data, 'data.article.author.userName')
-
-        if (mediaHash && userName) {
-          return res.redirect(301, `/@${userName}/${slug}-${mediaHash}`)
-        } else {
-          return res.redirect(302, '/')
-        }
-      } catch (e) {
-        console.error(e)
-        return res.redirect(302, '/')
-      }
-    },
+    pathname: '/@[userName]/*-[mediaHash]',
   },
 
   // Me
   {
     key: 'ME_DRAFTS',
-    href: '/MeDrafts',
-    as: '/me/drafts',
+    pathname: '/me/drafts',
   },
   {
     key: 'ME_BOOKMARKS',
-    href: '/MeBookmarks',
-    as: '/me/bookmarks',
+    pathname: '/me/bookmarks',
   },
   {
     key: 'ME_HISTORY',
-    href: '/MeHistory',
-    as: '/me/history',
+    pathname: '/me/history',
   },
   {
     key: 'ME_APPRECIATIONS_SENT',
-    href: '/MeAppreciationsSent',
-    as: '/me/appreciations/sent',
+    pathname: '/me/appreciations/sent',
   },
   {
     key: 'ME_APPRECIATIONS_RECEIVED',
-    href: '/MeAppreciationsReceived',
-    as: '/me/appreciations/received',
+    pathname: '/me/appreciations/received',
   },
   {
     key: 'ME_NOTIFICATIONS',
-    href: '/MeNotifications',
-    as: '/me/notifications',
+    pathname: '/me/notifications',
   },
 
   // Settings
   {
     key: 'ME_SETTINGS',
-    href: '/MeSettings',
-    as: '/me/settings',
+    pathname: '/me/settings',
   },
   {
     key: 'ME_SETTINGS_CHANGE_USERNAME',
-    href: '/MeSettingsChangeUserName',
-    as: '/me/settings/change-username',
+    pathname: '/me/settings/change-username',
   },
   {
     key: 'ME_SETTINGS_CHANGE_EMAIL',
-    href: '/MeSettingsChangeEmail',
-    as: '/me/settings/change-email',
+    pathname: '/me/settings/change-email',
   },
   {
     key: 'ME_SETTINGS_CHANGE_PASSWORD',
-    href: '/MeSettingsChangePassword',
-    as: '/me/settings/change-password',
+    pathname: '/me/settings/change-password',
   },
   {
     key: 'ME_SETTINGS_NOTIFICATION',
-    href: '/MeSettingsNotification',
-    as: '/me/settings/notification',
+    pathname: '/me/settings/notification',
   },
   {
     key: 'ME_SETTINGS_BLOCKED',
-    href: '/MeSettingsBlocked',
-    as: '/me/settings/blocked',
+    pathname: '/me/settings/blocked',
   },
 
   // Draft
   {
     key: 'ME_DRAFT_DETAIL',
-    href: '/MeDraftDetail',
-    as: '/me/drafts/*-:id',
+    pathname: '/me/drafts/*-[id]',
   },
-  // {
-  //   key: 'EDITOR',
-  //   href: '/Editor',
-  //   as: '/editor'
-  // },
 
   // Auth
   {
     key: 'AUTH_LOGIN',
-    href: '/AuthLogin',
-    as: '/login',
+    pathname: '/login',
   },
   {
     key: 'AUTH_SIGNUP',
-    href: '/AuthSignUp',
-    as: '/signup',
+    pathname: '/signup',
   },
   {
     key: 'AUTH_FORGET',
-    href: '/AuthForget',
-    as: '/forget',
+    pathname: '/forget',
   },
 
   // OAuth
   {
     key: 'OAUTH_AUTHORIZE',
-    href: '/OAuthAuthorize',
-    as: '/oauth/authorize',
+    pathname: '/oauth/authorize',
   },
   {
     key: 'OAUTH_CALLBACK_SUCCESS',
-    href: '/OAuthCallbackSuccess',
-    as: '/oauth/:provider/success',
+    pathname: '/oauth/[provider]/success',
   },
   {
     key: 'OAUTH_CALLBACK_FAILURE',
-    href: '/OAuthCallbackFailure',
-    as: '/oauth/:provider/failure',
+    pathname: '/oauth/[provider]/failure',
   },
 
   // Misc
   {
     key: 'HELP',
-    href: '/Help',
-    as: '/help',
+    pathname: '/help',
   },
   {
     key: 'MIGRATION',
-    href: '/Migration',
-    as: '/migration',
+    pathname: '/migration',
   },
   {
     key: 'ABOUT',
-    href: '/About',
-    as: '/about',
+    pathname: '/about',
   },
   {
     key: 'GUIDE',
-    href: '/Guide',
-    as: '/guide',
+    pathname: '/guide',
   },
   {
     key: 'COMMUNITY',
-    href: '/Community',
-    as: '/community',
+    pathname: '/community',
   },
   {
     key: 'TOS',
-    href: '/ToS',
-    as: '/tos',
+    pathname: '/tos',
   },
 ]
 
@@ -333,7 +236,11 @@ export const UrlFragments = {
   COMMENTS: 'comments',
 }
 
-export const PATHS = {} as { [key in ROUTE_KEY]: { href: string; as: string } }
-ROUTES.forEach(({ key, as, href }) => {
-  PATHS[key] = { href, as }
+export const PATHS = {} as {
+  [key in ROUTE_KEY]: { href: string }
+}
+ROUTES.forEach(({ key, pathname }) => {
+  PATHS[key] = {
+    href: pathname,
+  }
 })
