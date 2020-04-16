@@ -1,8 +1,9 @@
 import Router, { NextRouter } from 'next/router'
+import pathToRegexp from 'path-to-regexp'
 import queryString from 'query-string'
 import { UrlObject } from 'url'
 
-import { PATHS, ROUTES } from '~/common/enums'
+import { PATHS, ROUTES, toExpressPath } from '~/common/enums'
 
 import { parseURL } from './url'
 
@@ -303,17 +304,36 @@ export const captureClicks = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
   el.blur()
   e.preventDefault()
 
-  // push if it's matched defined routes
-  let matched = false
-  ROUTES.some(({ regexp }) => {
-    if (regexp.test(url.pathname)) {
-      matched = true
+  /**
+   * Matching defined routes
+   *
+   * Note:
+   * We are using the same version (0.1.7) of `path-to-regexp` as Express.js 4.x,
+   * different from the version used by Next.js (6.x).
+   *
+   * They have different behaviors about wildcard asterisk (*), see below link.
+   *
+   * Although it can work here with custom routes (`src/server.ts`),
+   * it should be synchronized with Next.js once we deprecate the custom routes.
+   *
+   * @see {@url https://github.com/pillarjs/path-to-regexp#compatibility-with-express--4x}
+   */
+  let matched = {}
+  ROUTES.some(({ pathname }) => {
+    console.log({ pathname })
+    const keys: PathToRegExpKey[] = []
+    const regexp = pathToRegexp(toExpressPath(pathname), keys)
+    const result = regexp.exec(url.pathname)
+
+    if (result) {
+      const query: { [key: string]: string } = {}
+      keys.forEach((k, i) => (query[k.name] = result[i + 1]))
+      matched = { pathname, query }
       return true
     }
   })
 
   if (matched) {
-    // TODO: generate href & as
-    routerPush(url.pathname, el.href)
+    routerPush(matched, url.pathname)
   }
 }

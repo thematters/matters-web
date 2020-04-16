@@ -120,6 +120,10 @@ export const ROUTES: Array<{
   { key: 'TOS', pathname: '/tos' },
 ]
 
+// Convert Next.js pattern to Express pattern
+export const toExpressPath = (path: string) =>
+  path.replace(/\]/g, '').replace(/\[/g, ':')
+
 export const UrlFragments = {
   COMMENTS: 'comments',
 }
