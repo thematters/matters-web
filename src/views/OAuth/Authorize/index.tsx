@@ -153,7 +153,10 @@ const OAuthAuthorize = () => {
 
         <Dialog.Footer>
           {name === 'LikeCoin' && !viewer.liker.likerId ? (
-            <Dialog.Footer.Button href={PATHS.ME_SETTINGS}>
+            <Dialog.Footer.Button
+              href={PATHS.ME_SETTINGS}
+              as={PATHS.ME_SETTINGS}
+            >
               <Translate
                 zh_hant="請先設置 Liker ID"
                 zh_hans="请先设置 Liker ID"

@@ -41,7 +41,7 @@ const SideNav = () => {
   return (
     <section className="side-nav">
       <section className="logo">
-        <Link href={PATHS.HOME}>
+        <Link href={PATHS.HOME} as={PATHS.HOME}>
           <a aria-label={TEXT.zh_hant.discover}>
             {isMediumUp ? <Icon.Logo /> : <Icon.LogoGraph />}
           </a>
@@ -56,6 +56,7 @@ const SideNav = () => {
           active={isInHome}
           isMediumUp={isMediumUp}
           href={PATHS.HOME}
+          as={PATHS.HOME}
         />
 
         <NavListItem
@@ -65,6 +66,7 @@ const SideNav = () => {
           active={isInFollow}
           isMediumUp={isMediumUp}
           href={PATHS.FOLLOW}
+          as={PATHS.FOLLOW}
         />
 
         {viewer.isAuthed && (
@@ -75,6 +77,7 @@ const SideNav = () => {
             active={isInNotification}
             isMediumUp={isMediumUp}
             href={PATHS.ME_NOTIFICATIONS}
+            as={PATHS.ME_NOTIFICATIONS}
           />
         )}
 
@@ -86,6 +89,7 @@ const SideNav = () => {
             active={isInSearch}
             isMediumUp={isMediumUp}
             href={PATHS.SEARCH}
+            as={PATHS.SEARCH}
           />
         )}
 

@@ -31,6 +31,7 @@ const Slogan = () => {
                 spacing={[0, 'base']}
                 bgColor="green"
                 href={PATHS.HOME}
+                as={PATHS.HOME}
               >
                 <TextIcon color="white" weight="md">
                   <Translate zh_hant="開始創作" zh_hans="开始创作" />

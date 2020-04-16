@@ -28,6 +28,7 @@ const NavBar = () => {
           activeIcon={<Icon.NavHomeActive size="md" color="green" />}
           active={isInHome}
           href={PATHS.HOME}
+          as={PATHS.HOME}
         />
 
         <NavListItem
@@ -36,6 +37,7 @@ const NavBar = () => {
           activeIcon={<UnreadIcon.Follow active />}
           active={isInFollow}
           href={PATHS.FOLLOW}
+          as={PATHS.FOLLOW}
         />
 
         {!isInDraftDetail && (
@@ -50,6 +52,7 @@ const NavBar = () => {
           activeIcon={<Icon.NavSearch size="md" color="green" />}
           active={isInSearch}
           href={PATHS.SEARCH}
+          as={PATHS.SEARCH}
         />
 
         <NavListItem
@@ -58,6 +61,7 @@ const NavBar = () => {
           activeIcon={<UnreadIcon.Notification active />}
           active={isInNotification}
           href={PATHS.ME_NOTIFICATIONS}
+          as={PATHS.ME_NOTIFICATIONS}
         />
       </ul>
 
