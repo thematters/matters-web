@@ -2,6 +2,8 @@ import classNames from 'classnames'
 import Link from 'next/link'
 import { forwardRef, useRef } from 'react'
 
+import { Url } from '~/common/utils'
+
 import styles from './styles.css'
 
 export type ButtonWidth =
@@ -84,12 +86,15 @@ export interface ButtonProps {
   borderWidth?: 'sm' | 'md'
   borderRadius?: 0 | '5rem'
 
-  href?: string
+  href?: Url
   as?: string
   replace?: boolean
 
   is?: 'span'
 
+  // navtive props
+  htmlHref?: string
+  htmlTarget?: '_blank'
   [key: string]: any
 }
 
@@ -143,8 +148,9 @@ export const Button: React.FC<ButtonProps> = forwardRef(
       replace,
 
       is,
-      type,
 
+      htmlHref,
+      type = 'button',
       className,
       children,
       ...restProps
@@ -173,7 +179,7 @@ export const Button: React.FC<ButtonProps> = forwardRef(
       [`border-${borderWidth}`]: borderWidth && borderColor,
       [`text-${textColor}`]: !!textColor,
       [`text-active-${textActiveColor}`]: !!textActiveColor && isClickable,
-      [className]: !!className,
+      [`${className}`]: !!className,
     })
 
     // handle click
@@ -222,9 +228,9 @@ export const Button: React.FC<ButtonProps> = forwardRef(
     }
 
     // anchor
-    if (href && !as) {
+    if (htmlHref) {
       return (
-        <a href={href} {...containerProps}>
+        <a href={htmlHref} {...containerProps}>
           <div className="content" style={contentStyle}>
             <div className="hotarea" style={hotAreaStyle} />
             {children}
@@ -235,7 +241,7 @@ export const Button: React.FC<ButtonProps> = forwardRef(
     }
 
     // link
-    if (href && as) {
+    if (href) {
       return (
         <Link href={href} as={as} replace={replace}>
           <a {...containerProps}>
@@ -251,7 +257,7 @@ export const Button: React.FC<ButtonProps> = forwardRef(
 
     // button
     return (
-      <button {...containerProps} type={type || 'button'}>
+      <button {...containerProps} type={type}>
         <div className="content" style={contentStyle}>
           <div className="hotarea" style={hotAreaStyle} />
           {children}

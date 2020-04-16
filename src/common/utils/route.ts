@@ -1,7 +1,10 @@
 import Router, { NextRouter } from 'next/router'
 import queryString from 'query-string'
+import { UrlObject } from 'url'
 
 import { PATHS } from '~/common/enums'
+
+export type Url = string | UrlObject
 
 interface ArticleArgs {
   slug: string
@@ -219,8 +222,8 @@ export const appendTarget = (href: string, fallbackCurrent?: boolean) => {
  * @see {@url https://github.com/zeit/next.js/blob/canary/packages/next/client/link.tsx#L203-L211}
  * @see {@url https://github.com/zeit/next.js/issues/3249#issuecomment-574817539}
  */
-export const routerPush = (href: string, as?: string) => {
-  Router.push(href, as).then((success: boolean) => {
+export const routerPush = (url: Url, as?: string) => {
+  Router.push(url, as).then((success: boolean) => {
     if (!success) {
       return
     }
