@@ -72,7 +72,7 @@ export const toPath = (args: ToPathArgs): { href: string; as: string } => {
       const asUrl = `/@${userName}/${slug}-${mediaHash}`
 
       return {
-        href: `${PATHS.ARTICLE_DETAIL.href}?userName=${userName}&slug=${slug}&mediaHash=${mediaHash}`,
+        href: `${PATHS.ARTICLE_DETAIL}?userName=${userName}&slug=${slug}&mediaHash=${mediaHash}`,
         as: args.fragment ? `${asUrl}#${args.fragment}` : asUrl,
       }
     }
@@ -88,45 +88,45 @@ export const toPath = (args: ToPathArgs): { href: string; as: string } => {
     }
     case 'draftDetail': {
       return {
-        href: `${PATHS.ME_DRAFT_DETAIL.href}?id=${args.id}&slug=${args.slug}`,
+        href: `${PATHS.ME_DRAFT_DETAIL}?id=${args.id}&slug=${args.slug}`,
         as: `/me/drafts/${args.slug}-${args.id}`,
       }
     }
     case 'tagDetail': {
       return {
-        href: `${PATHS.TAG_DETAIL.href}?id=${args.id}`,
+        href: `${PATHS.TAG_DETAIL}?id=${args.id}`,
         as: `/tags/${args.id}`,
       }
     }
     case 'userProfile': {
       return {
-        href: `${PATHS.USER_ARTICLES.href}?userName=${args.userName}`,
+        href: `${PATHS.USER_ARTICLES}?userName=${args.userName}`,
         as: `/@${args.userName}`,
       }
     }
     case 'userComments': {
       return {
-        href: `${PATHS.USER_COMMENTS.href}?userName=${args.userName}`,
+        href: `${PATHS.USER_COMMENTS}?userName=${args.userName}`,
         as: `/@${args.userName}/comments`,
       }
     }
     case 'userFollowers': {
       return {
-        href: `${PATHS.USER_FOLLOWERS.href}?userName=${args.userName}`,
+        href: `${PATHS.USER_FOLLOWERS}?userName=${args.userName}`,
         as: `/@${args.userName}/followers`,
       }
     }
     case 'userFollowees': {
       return {
-        href: `${PATHS.USER_FOLLOWEES.href}?userName=${args.userName}`,
+        href: `${PATHS.USER_FOLLOWEES}?userName=${args.userName}`,
         as: `/@${args.userName}/followees`,
       }
     }
     case 'search': {
       const typeStr = args.type ? `&type=${args.type}` : ''
       return {
-        href: `${PATHS.SEARCH.href}?q=${args.q || ''}${typeStr}`,
-        as: `${PATHS.SEARCH.as}?q=${args.q || ''}${typeStr}`,
+        href: `${PATHS.SEARCH}?q=${args.q || ''}${typeStr}`,
+        as: `${PATHS.SEARCH}?q=${args.q || ''}${typeStr}`,
       }
     }
   }
@@ -186,26 +186,15 @@ export const redirectToTarget = ({
 export const redirectToLogin = () => {
   const target = getTarget() || getEncodedCurrent()
 
-  return routerPush(
-    `${PATHS.AUTH_LOGIN.href}?target=${target}`,
-    `${PATHS.AUTH_LOGIN.as}?target=${target}`
-  )
+  return routerPush(`${PATHS.AUTH_LOGIN}?target=${target}`)
 }
 
 /**
- * Append `?target` to `PATHS.xxx`.
+ * Append `?target` to the given path.
  *
  * (works on SSR & CSR)
  */
-export const appendTarget = ({
-  href,
-  as,
-  fallbackCurrent,
-}: {
-  href: string
-  as: string
-  fallbackCurrent?: boolean
-}) => {
+export const appendTarget = (href: string, fallbackCurrent?: boolean) => {
   let target = ''
 
   if (process.browser) {
@@ -216,12 +205,10 @@ export const appendTarget = ({
   if (target) {
     return {
       href: `${href}?target=${target}`,
-      as: `${as}?target=${target}`,
     }
   } else {
     return {
       href,
-      as,
     }
   }
 }

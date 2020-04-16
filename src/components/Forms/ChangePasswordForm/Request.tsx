@@ -151,7 +151,7 @@ const Request: React.FC<FormProps> = ({
         <Layout.Header
           left={
             <Layout.Header.BackButton
-              {...(!isForget ? PATHS.ME_SETTINGS : {})}
+              {...(!isForget ? { href: PATHS.ME_SETTINGS } : {})}
             />
           }
           right={

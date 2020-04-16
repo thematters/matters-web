@@ -31,7 +31,7 @@ export const BackButton: React.FC<BackButtonProps> = ({ mode, ...props }) => {
     if (routeHistory.length > 0) {
       Router.back()
     } else {
-      Router.push(PATHS.HOME.href, PATHS.HOME.as)
+      Router.push(PATHS.HOME)
     }
   }
 

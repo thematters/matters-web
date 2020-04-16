@@ -23,14 +23,14 @@ const MeTabs = () => {
       <Tabs>
         <Tabs.Tab
           {...userArticlePath}
-          selected={router.pathname === PATHS.USER_ARTICLES.href}
+          selected={router.pathname === PATHS.USER_ARTICLES}
         >
           <Translate id="article" />
         </Tabs.Tab>
 
         <Tabs.Tab
           {...userCommentsPath}
-          selected={router.pathname === PATHS.USER_COMMENTS.href}
+          selected={router.pathname === PATHS.USER_COMMENTS}
         >
           <Translate id="comment" />
         </Tabs.Tab>

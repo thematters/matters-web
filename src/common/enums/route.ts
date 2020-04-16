@@ -98,19 +98,19 @@ export const ROUTES: Array<{
   // User
   {
     key: 'USER_ARTICLES',
-    pathname: '/@[username]',
+    pathname: '/@[userName]',
   },
   {
     key: 'USER_COMMENTS',
-    pathname: '/@[username]/comments',
+    pathname: '/@[userName]/comments',
   },
   {
     key: 'USER_FOLLOWERS',
-    pathname: '/@[username]/followers',
+    pathname: '/@[userName]/followers',
   },
   {
     key: 'USER_FOLLOWEES',
-    pathname: '/@[username]/followees',
+    pathname: '/@[userName]/followees',
   },
 
   // Article
@@ -237,10 +237,8 @@ export const UrlFragments = {
 }
 
 export const PATHS = {} as {
-  [key in ROUTE_KEY]: { href: string }
+  [key in ROUTE_KEY]: string
 }
 ROUTES.forEach(({ key, pathname }) => {
-  PATHS[key] = {
-    href: pathname,
-  }
+  PATHS[key] = pathname
 })

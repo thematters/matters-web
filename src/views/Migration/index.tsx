@@ -33,7 +33,7 @@ const Migration = () => {
 
       <header>
         <section className="l-row">
-          <Link {...PATHS.HOME}>
+          <Link href={PATHS.HOME}>
             <a className="logo" aria-label={TEXT.zh_hant.discover}>
               <Icon.Logo />
             </a>

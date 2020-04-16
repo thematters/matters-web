@@ -7,7 +7,7 @@ const ViewBlocksButton = () => {
 
   return (
     <Button
-      href={PATHS.ME_SETTINGS_BLOCKED.as}
+      href={PATHS.ME_SETTINGS_BLOCKED}
       size={[null, '1.25rem']}
       spacing={[0, 0]}
     >

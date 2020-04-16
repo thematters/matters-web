@@ -91,7 +91,7 @@ const ReplyButton = ({
             window.dispatchEvent(new CustomEvent(OPEN_LOGIN_DIALOG))
           },
         }
-      : appendTarget({ ...PATHS.AUTH_LOGIN, fallbackCurrent: true })
+      : appendTarget(PATHS.AUTH_LOGIN, true)
 
     return <CommentButton {...clickProps} inCard={inCard} disabled={disabled} />
   }
