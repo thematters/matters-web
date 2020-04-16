@@ -313,8 +313,8 @@ export const captureClicks = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
    *
    * They have different behaviors about wildcard asterisk (*), see below link.
    *
-   * Although it can work here with custom routes (`src/server.ts`),
-   * it should be synchronized with Next.js once we deprecate the custom routes.
+   * Once the custom routes (`src/server.ts`) is deprecated,
+   * it should be synchronized with Next.js.
    *
    * @see {@url https://github.com/pillarjs/path-to-regexp#compatibility-with-express--4x}
    */

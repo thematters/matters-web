@@ -4,12 +4,12 @@ import gql from 'graphql-tag'
 import { Translate } from '~/components'
 
 import contentCommentStyles from '~/common/styles/utils/content.comment.css'
+import { captureClicks } from '~/common/utils'
 
 import Collapsed from './Collapsed'
 import styles from './styles.css'
 
 import { ContentComment } from './__generated__/ContentComment'
-import { captureClicks } from '~/common/utils'
 
 interface ContentProps {
   comment: ContentComment
