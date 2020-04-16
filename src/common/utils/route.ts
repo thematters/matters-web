@@ -326,14 +326,22 @@ export const captureClicks = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     const result = regexp.exec(url.pathname)
 
     if (result) {
-      const query: { [key: string]: string } = {}
-      keys.forEach((k, i) => (query[k.name] = result[i + 1]))
-      matched = { pathname, query }
+      const searchQuery = queryString.parse(url.search) || {}
+      const matchedQuery: { [key: string]: string } = {}
+      keys.forEach((k, i) => (matchedQuery[k.name] = result[i + 1]))
+
+      matched = {
+        pathname,
+        query: {
+          ...searchQuery,
+          ...matchedQuery,
+        },
+      }
       return true
     }
   })
 
   if (matched) {
-    routerPush(matched, url.pathname)
+    routerPush(matched, url)
   }
 }
