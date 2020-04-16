@@ -1,9 +1,12 @@
 import Router, { NextRouter } from 'next/router'
 import queryString from 'query-string'
+import { UrlObject } from 'url'
 
 import { PATHS, ROUTES } from '~/common/enums'
 
 import { parseURL } from './url'
+
+declare type Url = UrlObject | string
 
 interface ArticleArgs {
   slug: string
@@ -234,8 +237,8 @@ export const appendTarget = ({
  * @see {@url https://github.com/zeit/next.js/blob/canary/packages/next/client/link.tsx#L203-L211}
  * @see {@url https://github.com/zeit/next.js/issues/3249#issuecomment-574817539}
  */
-export const routerPush = (href: string, as?: string) => {
-  Router.push(href, as).then((success: boolean) => {
+export const routerPush = (url: Url, as?: Url, options?: {}) => {
+  Router.push(url, as, options).then((success: boolean) => {
     if (!success) {
       return
     }
@@ -275,35 +278,16 @@ export const captureClicks = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     return
   }
 
-  // Ignore the click if the element has a target.
-  // if (el.target && el.target !== '_self') {
-  //   return
-  // }
-
-  // Ignore the click if it's a download link. (We use this method of
-  // detecting the presence of the attribute for old IE versions.)
-  // @ts-ignore
-  if (el.attributes.download) {
-    return
-  }
-
   // Ignore hash (used often instead of javascript:void(0) in strict CSP envs)
   if (el.getAttribute('href') === '#') {
     return
   }
 
-  // Use a regular expression to parse URLs instead of relying on the browser
-  // to do it for us (because IE).
   const url = parseURL(el.href)
-  // const windowURL = parseURL(window.location.href)
+  const windowURL = parseURL(window.location.href)
 
   // Ignore links that don't share a protocol and host with ours.
-  // if (url.protocol !== windowURL.protocol || url.host !== windowURL.host) {
-  //   return
-  // }
-
-  // Ignore 'rel="external"' links.
-  if (el.rel && /(?:^|\s+)external(?:\s+|$)/.test(el.rel)) {
+  if (url.protocol !== windowURL.protocol || url.host !== windowURL.host) {
     return
   }
 
@@ -316,12 +300,12 @@ export const captureClicks = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
   ROUTES.some(({ regexp }) => {
     if (regexp.test(url.pathname)) {
       matched = true
-      console.log(regexp, 'matched')
       return true
     }
   })
 
   if (matched) {
+    // TODO: generate href & as
     routerPush(url.pathname, el.href)
   }
 }
