@@ -1,10 +1,12 @@
 import classNames from 'classnames'
 import Link from 'next/link'
 
+import { Url } from '~/common/utils'
+
 import styles from './styles.css'
 
 export interface LinkWrapperProps {
-  href: string
+  href: Url
   as: string
 
   textActiveColor?: 'green'

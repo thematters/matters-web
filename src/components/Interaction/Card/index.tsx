@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import { forwardRef, useRef } from 'react'
 
 import { KEYCODES } from '~/common/enums'
-import { routerPush } from '~/common/utils'
+import { routerPush, Url } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -21,8 +21,10 @@ export interface CardProps {
   borderColor?: CardBorderColor
   borderRadius?: CardBorderRadius
 
-  href?: string
+  href?: Url
   as?: string
+
+  htmlHref?: string
   htmlTarget?: '_blank'
 
   onClick?: () => any
@@ -43,6 +45,8 @@ export const Card: React.FC<CardProps> = forwardRef(
 
       href,
       as,
+
+      htmlHref,
       htmlTarget,
 
       onClick,
@@ -51,7 +55,7 @@ export const Card: React.FC<CardProps> = forwardRef(
     },
     ref
   ) => {
-    const disabled = !as && !href && !onClick
+    const disabled = !as && !href && !htmlHref && !onClick
     const fallbackRef = useRef(null)
     const cardRef = (ref || fallbackRef) as React.RefObject<any> | null
 
@@ -67,7 +71,7 @@ export const Card: React.FC<CardProps> = forwardRef(
       hasBorder: !!borderColor || !!borderRadius,
       disabled,
     })
-    const ariaLabel = href || as ? `跳轉至 ${as || href}` : undefined
+    const ariaLabel = htmlHref || as ? `跳轉至 ${as || htmlHref}` : undefined
 
     const openLink = ({
       newTab,
@@ -76,6 +80,10 @@ export const Card: React.FC<CardProps> = forwardRef(
       newTab: boolean
       event: React.MouseEvent | React.KeyboardEvent
     }) => {
+      if (window.getSelection()?.toString().length) {
+        return
+      }
+
       const target = event.target as HTMLElement
 
       if (disabled) {
@@ -94,12 +102,12 @@ export const Card: React.FC<CardProps> = forwardRef(
       }
 
       // jump behavior
-      if (href && !as) {
-        window.open(href, htmlTarget)
+      if (htmlHref) {
+        window.open(htmlHref, htmlTarget)
       }
 
-      if (href && as) {
-        if (newTab) {
+      if (href) {
+        if (newTab && as) {
           window.open(as, '_blank')
         } else {
           routerPush(href, as)

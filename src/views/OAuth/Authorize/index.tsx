@@ -142,12 +142,7 @@ const OAuthAuthorize = () => {
             </span>
             {/* FIXME: only render at CSR to get correct `appendTarget` */}
             {process.browser && (
-              <Link
-                {...appendTarget({
-                  ...PATHS.AUTH_LOGIN,
-                  fallbackCurrent: true,
-                })}
-              >
+              <Link {...appendTarget(PATHS.AUTH_LOGIN, true)}>
                 <a className="u-link-green">
                   <Translate zh_hant="切換賬戶" zh_hans="切换账户" />
                 </a>
@@ -158,7 +153,7 @@ const OAuthAuthorize = () => {
 
         <Dialog.Footer>
           {name === 'LikeCoin' && !viewer.liker.likerId ? (
-            <Dialog.Footer.Button {...PATHS.ME_SETTINGS}>
+            <Dialog.Footer.Button href={PATHS.ME_SETTINGS}>
               <Translate
                 zh_hant="請先設置 Liker ID"
                 zh_hans="请先设置 Liker ID"

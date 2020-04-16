@@ -31,7 +31,7 @@ const Ask = ({ children }: AskProps) => {
         />
 
         <Dialog.Footer>
-          <Dialog.Footer.Button {...PATHS.ME_SETTINGS_CHANGE_USERNAME}>
+          <Dialog.Footer.Button href={PATHS.ME_SETTINGS_CHANGE_USERNAME}>
             <Translate id="confirm" />
           </Dialog.Footer.Button>
 

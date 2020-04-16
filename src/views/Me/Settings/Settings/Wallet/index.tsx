@@ -50,7 +50,7 @@ const WalletSettings = () => {
 
       <Form.List.Item
         title={<Translate zh_hant="我的創作價值" zh_hans="我的创作价值" />}
-        href="https://like.co/in"
+        htmlHref="https://like.co/in"
         htmlTarget="_blank"
         leftAlign="top"
         right={

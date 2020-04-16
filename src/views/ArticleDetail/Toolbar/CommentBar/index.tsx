@@ -142,7 +142,7 @@ const CommentBar = ({ article }: { article: CommentBarArticle }) => {
             window.dispatchEvent(new CustomEvent(OPEN_LOGIN_DIALOG))
           },
         }
-      : appendTarget({ ...PATHS.AUTH_LOGIN, fallbackCurrent: true })
+      : appendTarget(PATHS.AUTH_LOGIN, true)
 
     return (
       <Card {...clickProps} {...cardProps}>

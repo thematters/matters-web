@@ -1,9 +1,11 @@
 import Link from 'next/link'
 
+import { Url } from '~/common/utils'
+
 import styles from './styles.css'
 
 interface TabProps {
-  href?: string
+  href?: Url
   as?: string
 
   disable?: boolean

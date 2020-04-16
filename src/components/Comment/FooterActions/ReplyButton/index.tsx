@@ -54,7 +54,10 @@ const fragments = {
   `,
 }
 
-const CommentButton: React.FC<ButtonProps> = ({ inCard, ...props }) => (
+const CommentButton: React.FC<ButtonProps & { inCard: boolean }> = ({
+  inCard,
+  ...props
+}) => (
   <Button
     spacing={['xtight', 'xtight']}
     bgActiveColor={inCard ? 'grey-lighter-active' : 'grey-lighter'}
@@ -91,7 +94,7 @@ const ReplyButton = ({
             window.dispatchEvent(new CustomEvent(OPEN_LOGIN_DIALOG))
           },
         }
-      : appendTarget({ ...PATHS.AUTH_LOGIN, fallbackCurrent: true })
+      : appendTarget(PATHS.AUTH_LOGIN, true)
 
     return <CommentButton {...clickProps} inCard={inCard} disabled={disabled} />
   }
