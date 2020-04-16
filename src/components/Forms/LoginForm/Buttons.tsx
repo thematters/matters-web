@@ -24,7 +24,7 @@ export const PasswordResetDialogButton = () => (
 )
 
 export const PasswordResetRedirectButton = () => (
-  <Button spacing={['xtight', 0]} {...appendTarget(PATHS.AUTH_FORGET)}>
+  <Button spacing={['xtight', 0]} {...appendTarget(PATHS.FORGET)}>
     <TextIcon color="green" weight="md">
       <Translate id="forgetPassword" />？
     </TextIcon>
