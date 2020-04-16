@@ -80,7 +80,7 @@ const LoginRedirectionButton = () => (
       title={<Translate zh_hant="已有帳號？" zh_hans="已有帐号？" />}
       rightText={<Translate id="login" />}
       rightTextColor="green"
-      {...appendTarget(PATHS.AUTH_LOGIN)}
+      {...appendTarget(PATHS.LOGIN)}
     />
   </Form.List>
 )

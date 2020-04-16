@@ -31,7 +31,7 @@ export const SignUpButton: React.FC<SignUpButtonProps> = ({
         },
       }
     : {
-        ...appendTarget(PATHS.AUTH_SIGNUP, true),
+        ...appendTarget(PATHS.SIGNUP, true),
         onClick: () => {
           analytics.trackEvent(ANALYTICS_EVENTS.SIGNUP_START, {
             type: trackType,

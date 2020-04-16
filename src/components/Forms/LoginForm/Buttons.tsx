@@ -51,7 +51,7 @@ export const SignUpRedirectionButton = () => (
       title={<Translate zh_hant="沒有帳號？" zh_hans="沒有帐号？" />}
       rightText={<Translate id="register" />}
       rightTextColor="green"
-      {...appendTarget(PATHS.AUTH_SIGNUP)}
+      {...appendTarget(PATHS.SIGNUP)}
     />
   </Form.List>
 )

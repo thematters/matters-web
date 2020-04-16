@@ -33,7 +33,7 @@ export const LoginButton: React.FC<LoginButtonProps> = ({
           window.dispatchEvent(new CustomEvent(OPEN_LOGIN_DIALOG))
         },
       }
-    : appendTarget(PATHS.AUTH_LOGIN, true)
+    : appendTarget(PATHS.LOGIN, true)
 
   if (isPlain) {
     return (

@@ -210,7 +210,7 @@ export const redirectToTarget = ({
 export const redirectToLogin = () => {
   const target = getTarget() || getEncodedCurrent()
 
-  return routerPush(`${PATHS.AUTH_LOGIN}?target=${target}`)
+  return routerPush(`${PATHS.LOGIN}?target=${target}`)
 }
 
 /**
