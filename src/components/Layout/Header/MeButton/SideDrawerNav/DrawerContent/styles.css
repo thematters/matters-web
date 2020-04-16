@@ -11,6 +11,7 @@ nav {
   background: var(--color-white);
   box-shadow: 4px 0px 16px rgba(0, 0, 0, 0.08);
   will-change: transform;
+  overflow-y: auto;
 
   @media (--xs-down) {
     width: 16rem;

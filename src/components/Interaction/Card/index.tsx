@@ -80,6 +80,10 @@ export const Card: React.FC<CardProps> = forwardRef(
       newTab: boolean
       event: React.MouseEvent | React.KeyboardEvent
     }) => {
+      if (window.getSelection()?.toString().length) {
+        return
+      }
+
       const target = event.target as HTMLElement
 
       if (disabled) {

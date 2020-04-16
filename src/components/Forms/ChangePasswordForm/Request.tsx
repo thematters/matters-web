@@ -13,7 +13,6 @@ import {
 import { useMutation } from '~/components/GQL'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 
-import { PATHS } from '~/common/enums'
 import {
   parseFormSubmitErrors,
   translate,
@@ -149,11 +148,7 @@ const Request: React.FC<FormProps> = ({
     return (
       <>
         <Layout.Header
-          left={
-            <Layout.Header.BackButton
-              {...(!isForget ? { href: PATHS.ME_SETTINGS } : {})}
-            />
-          }
+          left={<Layout.Header.BackButton />}
           right={
             <>
               <Layout.Header.Title id={titleId} />
