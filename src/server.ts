@@ -29,6 +29,10 @@ const PORT = process.env.PORT || 3000
 const app = next({ dev: !isProd })
 const handle = app.getRequestHandler()
 
+// Convert Next.js pattern to Express pattern
+const toExpressPath = (path: string) =>
+  path.replace(/\]/g, '').replace(/\[/g, ':')
+
 app
   .prepare()
   .then(() => {
@@ -39,10 +43,7 @@ app
 
     // routes
     ROUTES.forEach(({ pathname, handler }) => {
-      // convert Next.js pattern to Express pattern
-      const path = pathname.replace(/\]/g, '').replace(/\[/g, ':')
-
-      server.get(path, async (req, res, nx) => {
+      server.get(toExpressPath(pathname), async (req, res, nx) => {
         if (handler) {
           await handler(req, res, nx)
         }
