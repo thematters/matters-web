@@ -22,7 +22,6 @@ type ROUTE_KEY =
   | 'USER_FOLLOWERS'
   | 'USER_FOLLOWEES'
   | 'ARTICLE_DETAIL'
-  | 'ARTICLE_DETAIL_LEGACY'
   | 'ME_DRAFTS'
   | 'ME_BOOKMARKS'
   | 'ME_HISTORY'
@@ -37,9 +36,9 @@ type ROUTE_KEY =
   | 'ME_SETTINGS_BLOCKED'
   | 'ME_DRAFT_DETAIL'
   | 'RECOMMENDATION'
-  | 'AUTH_LOGIN'
-  | 'AUTH_SIGNUP'
-  | 'AUTH_FORGET'
+  | 'LOGIN'
+  | 'SIGNUP'
+  | 'FORGET'
   | 'OAUTH_AUTHORIZE'
   | 'OAUTH_CALLBACK_SUCCESS'
   | 'OAUTH_CALLBACK_FAILURE'
@@ -55,181 +54,70 @@ export const ROUTES: Array<{
   pathname: string
   handler?: (req: Request, res: Response, next: NextFunction) => any
 }> = [
-  {
-    key: 'HOME',
-    pathname: '/',
-  },
-  {
-    key: 'FOLLOW',
-    pathname: '/follow',
-  },
-  {
-    key: 'AUTHORS',
-    pathname: '/authors',
-  },
-  {
-    key: 'TOPICS',
-    pathname: '/topics',
-  },
-  {
-    key: 'ICYMI',
-    pathname: '/icymi',
-  },
-  {
-    key: 'SEARCH',
-    pathname: '/search',
-  },
+  { key: 'HOME', pathname: '/' },
+  { key: 'FOLLOW', pathname: '/follow' },
+  { key: 'AUTHORS', pathname: '/authors' },
+  { key: 'TOPICS', pathname: '/topics' },
+  { key: 'ICYMI', pathname: '/icymi' },
+  { key: 'SEARCH', pathname: '/search' },
   // experient page for recommendation engine testing
-  {
-    key: 'RECOMMENDATION',
-    pathname: '/recommendation',
-  },
+  { key: 'RECOMMENDATION', pathname: '/recommendation' },
 
   // Tag
-  {
-    key: 'TAGS',
-    pathname: '/tags',
-  },
-  {
-    key: 'TAG_DETAIL',
-    pathname: '/tags/[id]',
-  },
+  { key: 'TAGS', pathname: '/tags' },
+  { key: 'TAG_DETAIL', pathname: '/tags/[id]' },
 
   // User
-  {
-    key: 'USER_ARTICLES',
-    pathname: '/@[userName]',
-  },
-  {
-    key: 'USER_COMMENTS',
-    pathname: '/@[userName]/comments',
-  },
-  {
-    key: 'USER_FOLLOWERS',
-    pathname: '/@[userName]/followers',
-  },
-  {
-    key: 'USER_FOLLOWEES',
-    pathname: '/@[userName]/followees',
-  },
+  { key: 'USER_ARTICLES', pathname: '/@[userName]' },
+  { key: 'USER_COMMENTS', pathname: '/@[userName]/comments' },
+  { key: 'USER_FOLLOWERS', pathname: '/@[userName]/followers' },
+  { key: 'USER_FOLLOWEES', pathname: '/@[userName]/followees' },
 
   // Article
-  {
-    key: 'ARTICLE_DETAIL',
-    pathname: '/@[userName]/*-[mediaHash]',
-  },
+  { key: 'ARTICLE_DETAIL', pathname: '/@[userName]/*-[mediaHash]' },
 
   // Me
-  {
-    key: 'ME_DRAFTS',
-    pathname: '/me/drafts',
-  },
-  {
-    key: 'ME_BOOKMARKS',
-    pathname: '/me/bookmarks',
-  },
-  {
-    key: 'ME_HISTORY',
-    pathname: '/me/history',
-  },
-  {
-    key: 'ME_APPRECIATIONS_SENT',
-    pathname: '/me/appreciations/sent',
-  },
-  {
-    key: 'ME_APPRECIATIONS_RECEIVED',
-    pathname: '/me/appreciations/received',
-  },
-  {
-    key: 'ME_NOTIFICATIONS',
-    pathname: '/me/notifications',
-  },
+  { key: 'ME_DRAFTS', pathname: '/me/drafts' },
+  { key: 'ME_BOOKMARKS', pathname: '/me/bookmarks' },
+  { key: 'ME_HISTORY', pathname: '/me/history' },
+  { key: 'ME_APPRECIATIONS_SENT', pathname: '/me/appreciations/sent' },
+  { key: 'ME_APPRECIATIONS_RECEIVED', pathname: '/me/appreciations/received' },
+  { key: 'ME_NOTIFICATIONS', pathname: '/me/notifications' },
 
   // Settings
-  {
-    key: 'ME_SETTINGS',
-    pathname: '/me/settings',
-  },
+  { key: 'ME_SETTINGS', pathname: '/me/settings' },
   {
     key: 'ME_SETTINGS_CHANGE_USERNAME',
     pathname: '/me/settings/change-username',
   },
-  {
-    key: 'ME_SETTINGS_CHANGE_EMAIL',
-    pathname: '/me/settings/change-email',
-  },
+  { key: 'ME_SETTINGS_CHANGE_EMAIL', pathname: '/me/settings/change-email' },
   {
     key: 'ME_SETTINGS_CHANGE_PASSWORD',
     pathname: '/me/settings/change-password',
   },
-  {
-    key: 'ME_SETTINGS_NOTIFICATION',
-    pathname: '/me/settings/notification',
-  },
-  {
-    key: 'ME_SETTINGS_BLOCKED',
-    pathname: '/me/settings/blocked',
-  },
+  { key: 'ME_SETTINGS_NOTIFICATION', pathname: '/me/settings/notification' },
+  { key: 'ME_SETTINGS_BLOCKED', pathname: '/me/settings/blocked' },
 
   // Draft
-  {
-    key: 'ME_DRAFT_DETAIL',
-    pathname: '/me/drafts/*-[id]',
-  },
+  { key: 'ME_DRAFT_DETAIL', pathname: '/me/drafts/*-[id]' },
 
   // Auth
-  {
-    key: 'AUTH_LOGIN',
-    pathname: '/login',
-  },
-  {
-    key: 'AUTH_SIGNUP',
-    pathname: '/signup',
-  },
-  {
-    key: 'AUTH_FORGET',
-    pathname: '/forget',
-  },
+  { key: 'LOGIN', pathname: '/login' },
+  { key: 'SIGNUP', pathname: '/signup' },
+  { key: 'FORGET', pathname: '/forget' },
 
   // OAuth
-  {
-    key: 'OAUTH_AUTHORIZE',
-    pathname: '/oauth/authorize',
-  },
-  {
-    key: 'OAUTH_CALLBACK_SUCCESS',
-    pathname: '/oauth/[provider]/success',
-  },
-  {
-    key: 'OAUTH_CALLBACK_FAILURE',
-    pathname: '/oauth/[provider]/failure',
-  },
+  { key: 'OAUTH_AUTHORIZE', pathname: '/oauth/authorize' },
+  { key: 'OAUTH_CALLBACK_SUCCESS', pathname: '/oauth/[provider]/success' },
+  { key: 'OAUTH_CALLBACK_FAILURE', pathname: '/oauth/[provider]/failure' },
 
   // Misc
-  {
-    key: 'HELP',
-    pathname: '/help',
-  },
-  {
-    key: 'MIGRATION',
-    pathname: '/migration',
-  },
-  {
-    key: 'ABOUT',
-    pathname: '/about',
-  },
-  {
-    key: 'GUIDE',
-    pathname: '/guide',
-  },
-  {
-    key: 'COMMUNITY',
-    pathname: '/community',
-  },
-  {
-    key: 'TOS',
-    pathname: '/tos',
-  },
+  { key: 'HELP', pathname: '/help' },
+  { key: 'MIGRATION', pathname: '/migration' },
+  { key: 'ABOUT', pathname: '/about' },
+  { key: 'GUIDE', pathname: '/guide' },
+  { key: 'COMMUNITY', pathname: '/community' },
+  { key: 'TOS', pathname: '/tos' },
 ]
 
 export const UrlFragments = {
