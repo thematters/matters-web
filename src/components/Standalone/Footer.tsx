@@ -1,6 +1,6 @@
 import {
   Button,
-  EmailDialog,
+  NewsletterDialog,
   TextIcon,
   Tooltip,
   Translate,
@@ -88,7 +88,7 @@ const Footer = () => {
           </h2>
 
           <div id="mc_embed_signup">
-            <EmailDialog>
+            <NewsletterDialog>
               {({ open }) => (
                 <Button
                   aria-haspopup="true"
@@ -106,7 +106,7 @@ const Footer = () => {
                   </TextIcon>
                 </Button>
               )}
-            </EmailDialog>
+            </NewsletterDialog>
           </div>
         </section>
       </div>

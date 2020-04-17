@@ -4,11 +4,11 @@ import { Dialog } from '~/components'
 
 import Content from './Content'
 
-interface EmailDialogProps {
+interface NewsletterDialogProps {
   children: ({ open }: { open: () => void }) => React.ReactNode
 }
 
-const BaseEmailDialog = ({ children }: EmailDialogProps) => {
+const BaseNewsletterDialog = ({ children }: NewsletterDialogProps) => {
   const [showDialog, setShowDialog] = useState(true)
   const open = () => setShowDialog(true)
   const close = () => setShowDialog(false)
@@ -24,10 +24,10 @@ const BaseEmailDialog = ({ children }: EmailDialogProps) => {
   )
 }
 
-export const EmailDialog = (props: EmailDialogProps) => (
+export const NewsletterDialog = (props: NewsletterDialogProps) => (
   <Dialog.Lazy>
     {({ open, mounted }) =>
-      mounted ? <BaseEmailDialog {...props} /> : <>{props.children({ open })}</>
+      mounted ? <BaseNewsletterDialog {...props} /> : <>{props.children({ open })}</>
     }
   </Dialog.Lazy>
 )

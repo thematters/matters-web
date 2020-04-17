@@ -9,7 +9,7 @@ import { translate } from '~/common/utils'
 
 import styles from './styles.css'
 
-interface EmailDialogContentProps {
+interface NewsletterDialogContentProps {
   closeDialog: () => void
 }
 
@@ -29,7 +29,7 @@ const isInvalid = (value: string, lang: Language) => {
   }
 }
 
-const EmailDialogContent: React.FC<EmailDialogContentProps> = ({
+const NewsletterDialogContent: React.FC<NewsletterDialogContentProps> = ({
   closeDialog,
 }) => {
   const { lang } = useContext(LanguageContext)
@@ -170,4 +170,4 @@ const EmailDialogContent: React.FC<EmailDialogContentProps> = ({
   )
 }
 
-export default EmailDialogContent
+export default NewsletterDialogContent
