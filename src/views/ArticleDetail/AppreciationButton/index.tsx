@@ -10,15 +10,13 @@ import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { APPRECIATE_DEBOUNCE, Z_INDEX } from '~/common/enums'
 
 import Appreciators from '../Toolbar/Appreciators'
+import AnonymousButton from './AnonymousButton'
 import AppreciateButton from './AppreciateButton'
 import CivicLikerButton from './CivicLikerButton'
 import SetupLikerIdAppreciateButton from './SetupLikerIdAppreciateButton'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
-import {
-  AppreciateArticle,
-  AppreciateArticle_appreciateArticle,
-} from './__generated__/AppreciateArticle'
+import { AppreciateArticle } from './__generated__/AppreciateArticle'
 import { AppreciationButtonArticle } from './__generated__/AppreciationButtonArticle'
 
 const fragments = {
@@ -62,29 +60,13 @@ const AppreciationButton = ({
   // bundle appreciations
   const [amount, setAmount] = useState(0)
   const [sendAppreciation] = useMutation<AppreciateArticle>(APPRECIATE_ARTICLE)
-  const {
-    appreciateLimit,
-    appreciateLeft,
-    appreciationsReceivedTotal,
-  } = article
-  const limit = appreciateLimit
-  const left = appreciateLeft - amount
+  const limit = article.appreciateLimit
+  const left = article.appreciateLeft - amount
   const total = article.appreciationsReceivedTotal + amount
   const appreciatedCount = limit - left
   const [debouncedSendAppreciation] = useDebouncedCallback(async () => {
     try {
-      await sendAppreciation({
-        variables: { id: article.id, amount },
-        optimisticResponse: {
-          appreciateArticle: {
-            id: article.id,
-            appreciationsReceivedTotal: appreciationsReceivedTotal + amount,
-            hasAppreciate: true,
-            appreciateLeft: left,
-            __typename: 'Article',
-          } as AppreciateArticle_appreciateArticle,
-        },
-      })
+      await sendAppreciation({ variables: { id: article.id, amount } })
     } catch (e) {
       console.error(e)
     }
@@ -102,8 +84,14 @@ const AppreciationButton = ({
   const readCivicLikerDialog =
     viewer.isCivicLiker || data?.clientPreference.readCivicLikerDialog
   const canAppreciate =
-    (!isReachLimit && !isMe && !viewer.isInactive && viewer.liker.likerId) ||
-    !viewer.isAuthed
+    !isReachLimit && !isMe && !viewer.isInactive && viewer.liker.likerId
+
+  /**
+   * Anonymous
+   */
+  if (!viewer.isAuthed) {
+    return <AnonymousButton total={total} />
+  }
 
   /**
    * Setup Liker Id Button
@@ -118,10 +106,8 @@ const AppreciationButton = ({
   if (canAppreciate) {
     return (
       <AppreciateButton
-        onClick={() => appreciate()}
-        count={
-          viewer.isAuthed && appreciatedCount > 0 ? appreciatedCount : undefined
-        }
+        onClick={appreciate}
+        count={appreciatedCount}
         total={total}
       />
     )
@@ -139,9 +125,7 @@ const AppreciationButton = ({
             data: { readCivicLikerDialog: true },
           })
         }}
-        count={
-          viewer.isAuthed && appreciatedCount > 0 ? appreciatedCount : undefined
-        }
+        count={appreciatedCount}
         total={total}
       />
     )
@@ -175,15 +159,7 @@ const AppreciationButton = ({
       zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
     >
       <span>
-        <AppreciateButton
-          disabled
-          count={
-            viewer.isAuthed && appreciatedCount > 0
-              ? appreciatedCount
-              : undefined
-          }
-          total={total}
-        />
+        <AppreciateButton disabled count={appreciatedCount} total={total} />
       </span>
     </Tooltip>
   )
