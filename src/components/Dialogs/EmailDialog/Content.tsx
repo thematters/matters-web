@@ -20,7 +20,8 @@ interface FormValues {
 
 type Step = 'subscribe' | 'complete' | 'retry'
 
-const EMAIL_API = 'https://api-backend.app.newsleopard.com/api/contacts/subscribe/40280ba0715a279e017177f6130c03eb/verify'
+const EMAIL_API =
+  'https://api-backend.app.newsleopard.com/api/contacts/subscribe/40280ba0715a279e017177f6130c03eb/verify'
 
 const isInvalid = (value: string, lang: Language) => {
   if (!value || value.length === 0) {
@@ -28,7 +29,9 @@ const isInvalid = (value: string, lang: Language) => {
   }
 }
 
-const EmailDialogContent: React.FC<EmailDialogContentProps> = ({ closeDialog }) => {
+const EmailDialogContent: React.FC<EmailDialogContentProps> = ({
+  closeDialog,
+}) => {
   const { lang } = useContext(LanguageContext)
   const [step, setStep] = useState<Step>('subscribe')
   const isSubscribe = step === 'subscribe'
@@ -65,9 +68,9 @@ const EmailDialogContent: React.FC<EmailDialogContentProps> = ({ closeDialog }) 
         await fetch(EMAIL_API, {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'application/x-www-form-urlencoded',
           },
-          body: data
+          body: data,
         })
 
         setSubmitting(false)
@@ -85,7 +88,11 @@ const EmailDialogContent: React.FC<EmailDialogContentProps> = ({ closeDialog }) 
         label="姓名"
         type="text"
         name="name"
-        placeholder={translate({ zh_hant: '請輸入姓名', zh_hans: '请输入姓名', lang })}
+        placeholder={translate({
+          zh_hant: '請輸入姓名',
+          zh_hans: '请输入姓名',
+          lang,
+        })}
         value={values.name}
         error={touched.name && errors.name}
         onBlur={handleBlur}
@@ -121,23 +128,20 @@ const EmailDialogContent: React.FC<EmailDialogContentProps> = ({ closeDialog }) 
     <>
       <Dialog.Header
         title={
-          <Translate
-            zh_hant="訂閱 Matters 通訊"
-            zh_hans="订阅 Matters 通讯"
-          />
+          <Translate zh_hant="訂閱 Matters 通訊" zh_hans="订阅 Matters 通讯" />
         }
         close={closeDialog}
         rightButton={isSubscribe ? SubmitButton : null}
       />
-      <Dialog.Content spacing={isSubscribe ? [0, 0] : ['base', 'xloose']} hasGrow>
+      <Dialog.Content
+        spacing={isSubscribe ? [0, 0] : ['base', 'xloose']}
+        hasGrow
+      >
         {isSubscribe && InnerForm}
         {isComplete && (
           <>
             <p className="title">
-              <Translate
-                zh_hant="訂閱服務確認"
-                zh_hans="订阅服务确认"
-              />
+              <Translate zh_hant="訂閱服務確認" zh_hans="订阅服务确认" />
             </p>
             <p className="description">
               <Translate
@@ -150,10 +154,7 @@ const EmailDialogContent: React.FC<EmailDialogContentProps> = ({ closeDialog }) 
         {isRetry && (
           <>
             <p className="title">
-              <Translate
-                zh_hant="訂閱失敗"
-                zh_hans="订阅失败"
-              />
+              <Translate zh_hant="訂閱失敗" zh_hans="订阅失败" />
             </p>
             <p className="description">
               <Translate

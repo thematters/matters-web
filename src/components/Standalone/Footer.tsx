@@ -99,7 +99,10 @@ const Footer = () => {
                   onClick={open}
                 >
                   <TextIcon color="white" weight="md">
-                    <Translate zh_hant="訂閱 Matters 通訊" zh_hans="订阅 Matters 通讯" />
+                    <Translate
+                      zh_hant="訂閱 Matters 通訊"
+                      zh_hans="订阅 Matters 通讯"
+                    />
                   </TextIcon>
                 </Button>
               )}
