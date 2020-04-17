@@ -62,29 +62,13 @@ const AppreciationButton = ({
   // bundle appreciations
   const [amount, setAmount] = useState(0)
   const [sendAppreciation] = useMutation<AppreciateArticle>(APPRECIATE_ARTICLE)
-  const {
-    appreciateLimit,
-    appreciateLeft,
-    appreciationsReceivedTotal,
-  } = article
-  const limit = appreciateLimit
-  const left = appreciateLeft - amount
+  const limit = article.appreciateLimit
+  const left = article.appreciateLeft - amount
   const total = article.appreciationsReceivedTotal + amount
   const appreciatedCount = limit - left
   const [debouncedSendAppreciation] = useDebouncedCallback(async () => {
     try {
-      await sendAppreciation({
-        variables: { id: article.id, amount },
-        optimisticResponse: {
-          appreciateArticle: {
-            id: article.id,
-            appreciationsReceivedTotal: appreciationsReceivedTotal + amount,
-            hasAppreciate: true,
-            appreciateLeft: left,
-            __typename: 'Article',
-          } as AppreciateArticle_appreciateArticle,
-        },
-      })
+      await sendAppreciation({ variables: { id: article.id, amount } })
     } catch (e) {
       console.error(e)
     }
@@ -118,7 +102,7 @@ const AppreciationButton = ({
   if (canAppreciate) {
     return (
       <AppreciateButton
-        onClick={() => appreciate()}
+        onClick={appreciate}
         count={
           viewer.isAuthed && appreciatedCount > 0 ? appreciatedCount : undefined
         }
