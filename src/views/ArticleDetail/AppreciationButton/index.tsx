@@ -15,10 +15,7 @@ import CivicLikerButton from './CivicLikerButton'
 import SetupLikerIdAppreciateButton from './SetupLikerIdAppreciateButton'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
-import {
-  AppreciateArticle,
-  AppreciateArticle_appreciateArticle,
-} from './__generated__/AppreciateArticle'
+import { AppreciateArticle } from './__generated__/AppreciateArticle'
 import { AppreciationButtonArticle } from './__generated__/AppreciationButtonArticle'
 
 const fragments = {
