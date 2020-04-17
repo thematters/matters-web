@@ -19,20 +19,20 @@ const Help = () => {
   return (
     <>
       <Form.List>
-        <Form.List.Item title={<Translate id="about" />} {...PATHS.ABOUT} />
-        <Form.List.Item title={<Translate id="guide" />} {...PATHS.GUIDE} />
+        <Form.List.Item title={<Translate id="about" />} href={PATHS.ABOUT} />
+        <Form.List.Item title={<Translate id="guide" />} href={PATHS.GUIDE} />
         <Form.List.Item
           title={<Translate id="community" />}
-          {...PATHS.COMMUNITY}
+          href={PATHS.COMMUNITY}
         />
         <Form.List.Item
           title={<Translate id="migrationSideBar" />}
-          {...PATHS.MIGRATION}
+          href={PATHS.MIGRATION}
         />
-        <Form.List.Item title={<Translate id="term" />} {...PATHS.TOS} />
+        <Form.List.Item title={<Translate id="term" />} href={PATHS.TOS} />
         <Form.List.Item
           title={<Translate id="openCommunity" />}
-          href="https://github.com/thematters/developer-resource"
+          htmlHref="https://github.com/thematters/developer-resource"
           htmlTarget="_blank"
         />
         <Form.List.Item

@@ -21,31 +21,31 @@ const SideFooter = () => {
 
   return (
     <footer>
-      <Link {...PATHS.ABOUT}>
+      <Link href={PATHS.ABOUT}>
         <a>
           <Translate id="about" />
         </a>
       </Link>
 
-      <Link {...PATHS.GUIDE}>
+      <Link href={PATHS.GUIDE}>
         <a>
           <Translate id="guide" />
         </a>
       </Link>
 
-      <Link {...PATHS.COMMUNITY}>
+      <Link href={PATHS.COMMUNITY}>
         <a>
           <Translate id="community" />
         </a>
       </Link>
 
-      <Link {...PATHS.MIGRATION}>
+      <Link href={PATHS.MIGRATION}>
         <a>
           <Translate id="migrationSideBar" />
         </a>
       </Link>
 
-      <Link {...PATHS.TOS}>
+      <Link href={PATHS.TOS}>
         <a>
           <Translate id="term" />
         </a>

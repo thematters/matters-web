@@ -40,7 +40,7 @@ const Complete: React.FC<Props> = ({ type, purpose, closeDialog }) => {
       {!isInPage && (
         <Dialog.Footer>
           {isForget && (
-            <Dialog.Footer.Button {...appendTarget(PATHS.AUTH_LOGIN)}>
+            <Dialog.Footer.Button {...appendTarget(PATHS.LOGIN)}>
               <Translate id="login" />
             </Dialog.Footer.Button>
           )}

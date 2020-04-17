@@ -80,7 +80,7 @@ const LoginRedirectionButton = () => (
       title={<Translate zh_hant="已有帳號？" zh_hans="已有帐号？" />}
       rightText={<Translate id="login" />}
       rightTextColor="green"
-      {...appendTarget(PATHS.AUTH_LOGIN)}
+      {...appendTarget(PATHS.LOGIN)}
     />
   </Form.List>
 )
@@ -249,7 +249,7 @@ const Init: React.FC<FormProps> = ({
           <>
             <Translate zh_hant="我已閱讀並同意" zh_hans="我已阅读并同意" />
 
-            <Link {...PATHS.TOS}>
+            <Link href={PATHS.TOS}>
               <a className="u-link-green" target="_blank">
                 &nbsp;
                 <Translate

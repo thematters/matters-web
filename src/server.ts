@@ -9,7 +9,7 @@ import helmet from 'helmet'
 import MobileDetect from 'mobile-detect'
 import 'module-alias/register'
 import next from 'next'
-import path from 'path'
+import { join } from 'path'
 
 import { ROUTES } from '~/common/enums'
 
@@ -29,6 +29,10 @@ const PORT = process.env.PORT || 3000
 const app = next({ dev: !isProd })
 const handle = app.getRequestHandler()
 
+// Convert Next.js pattern to Express pattern
+const toExpressPath = (path: string) =>
+  path.replace(/\]/g, '').replace(/\[/g, ':')
+
 app
   .prepare()
   .then(() => {
@@ -38,8 +42,8 @@ app
     server.use(helmet())
 
     // routes
-    ROUTES.forEach(({ href, as, handler }) => {
-      server.get(as, async (req, res, nx) => {
+    ROUTES.forEach(({ pathname, handler }) => {
+      server.get(toExpressPath(pathname), async (req, res, nx) => {
         if (handler) {
           await handler(req, res, nx)
         }
@@ -48,12 +52,12 @@ app
         req.clientInfo = {
           isPhone: !!detect.phone(),
           isTablet: !!detect.tablet(),
-          isMobile: !!detect.mobile()
+          isMobile: !!detect.mobile(),
         }
 
-        return app.render(req, res, href, {
+        return app.render(req, res, pathname, {
           ...req.query,
-          ...req.params
+          ...req.params,
         })
       })
     })
@@ -61,7 +65,7 @@ app
     // fallback
     server.get('*', (req, res) => {
       if (req.path === '/service-worker.js') {
-        const filePath = path.join('build', req.path)
+        const filePath = join('build', req.path)
         res.setHeader('Service-Worker-Allowed', '/')
         return app.serveStatic(req, res, filePath)
       }

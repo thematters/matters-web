@@ -25,14 +25,14 @@ const MeTabs = () => {
     <Tabs>
       <Tabs.Tab
         {...userFollowersPath}
-        selected={router.pathname === PATHS.USER_FOLLOWERS.href}
+        selected={router.pathname === PATHS.USER_FOLLOWERS}
       >
         <Translate id={isMe ? 'followingMe' : 'follower'} />
       </Tabs.Tab>
 
       <Tabs.Tab
         {...userFolloweesPath}
-        selected={router.pathname === PATHS.USER_FOLLOWEES.href}
+        selected={router.pathname === PATHS.USER_FOLLOWEES}
       >
         <Translate id={isMe ? 'myFollowees' : 'following'} />
       </Tabs.Tab>

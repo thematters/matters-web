@@ -58,8 +58,8 @@ const CivicLikerDialog = ({ onClose, children }: CivicLikerDialogProps) => {
 
         <Dialog.Footer>
           <Dialog.Footer.Button
-            href={EXTERNAL_LINKS.CIVIC_LIKER_JOIN}
-            target="_blank"
+            htmlHref={EXTERNAL_LINKS.CIVIC_LIKER_JOIN}
+            htmlTarget="_blank"
             onClick={close}
           >
             <Translate zh_hant="立即登記" zh_hans="立即登记" />

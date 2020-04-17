@@ -43,20 +43,20 @@ const AccountSettings = () => {
 
       <Form.List.Item
         title={<Translate id="email" />}
-        {...PATHS.ME_SETTINGS_CHANGE_EMAIL}
+        href={PATHS.ME_SETTINGS_CHANGE_EMAIL}
         rightText={viewer.info.email}
       />
       <Form.List.Item
         title={<Translate id="loginPassword" />}
-        {...PATHS.ME_SETTINGS_CHANGE_PASSWORD}
+        href={PATHS.ME_SETTINGS_CHANGE_PASSWORD}
       />
       <Form.List.Item
         title={<Translate id="settingsNotification" />}
-        {...PATHS.ME_SETTINGS_NOTIFICATION}
+        href={PATHS.ME_SETTINGS_NOTIFICATION}
       />
       <Form.List.Item
         title={<Translate id="settingsBlock" />}
-        {...PATHS.ME_SETTINGS_BLOCKED}
+        href={PATHS.ME_SETTINGS_BLOCKED}
         rightText={totalBlockCount}
       />
     </Form.List>

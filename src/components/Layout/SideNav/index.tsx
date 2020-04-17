@@ -28,20 +28,20 @@ const SideNav = () => {
   const viewer = useContext(ViewerContext)
   const viewerUserName = viewer.userName || ''
 
-  const isInHome = router.pathname === PATHS.HOME.href
-  const isInFollow = router.pathname === PATHS.FOLLOW.href
-  const isInNotification = router.pathname === PATHS.ME_NOTIFICATIONS.href
-  const isInSearch = router.pathname === PATHS.SEARCH.href
+  const isInHome = router.pathname === PATHS.HOME
+  const isInFollow = router.pathname === PATHS.FOLLOW
+  const isInNotification = router.pathname === PATHS.ME_NOTIFICATIONS
+  const isInSearch = router.pathname === PATHS.SEARCH
   const isInMe =
-    router.asPath !== PATHS.ME_NOTIFICATIONS.as &&
-    (router.asPath.indexOf('/me') >= 0 ||
+    router.pathname !== PATHS.ME_NOTIFICATIONS &&
+    (router.pathname.indexOf('/me') >= 0 ||
       router.query.userName === viewerUserName)
-  const isInDraftDetail = router.pathname === PATHS.ME_DRAFT_DETAIL.href
+  const isInDraftDetail = router.pathname === PATHS.ME_DRAFT_DETAIL
 
   return (
     <section className="side-nav">
       <section className="logo">
-        <Link {...PATHS.HOME}>
+        <Link href={PATHS.HOME}>
           <a aria-label={TEXT.zh_hant.discover}>
             {isMediumUp ? <Icon.Logo /> : <Icon.LogoGraph />}
           </a>
@@ -55,7 +55,7 @@ const SideNav = () => {
           activeIcon={<Icon.NavHomeActive size="md" />}
           active={isInHome}
           isMediumUp={isMediumUp}
-          {...PATHS.HOME}
+          href={PATHS.HOME}
         />
 
         <NavListItem
@@ -64,7 +64,7 @@ const SideNav = () => {
           activeIcon={<UnreadIcon.Follow active />}
           active={isInFollow}
           isMediumUp={isMediumUp}
-          {...PATHS.FOLLOW}
+          href={PATHS.FOLLOW}
         />
 
         {viewer.isAuthed && (
@@ -74,7 +74,7 @@ const SideNav = () => {
             activeIcon={<UnreadIcon.Notification active />}
             active={isInNotification}
             isMediumUp={isMediumUp}
-            {...PATHS.ME_NOTIFICATIONS}
+            href={PATHS.ME_NOTIFICATIONS}
           />
         )}
 
@@ -85,7 +85,7 @@ const SideNav = () => {
             activeIcon={<Icon.NavSearch size="md" color="green" />}
             active={isInSearch}
             isMediumUp={isMediumUp}
-            {...PATHS.SEARCH}
+            href={PATHS.SEARCH}
           />
         )}
 

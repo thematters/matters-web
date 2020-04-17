@@ -28,16 +28,16 @@ const AppreciationTabs: React.FC<AppreciationTabsProps> & {
   return (
     <Tabs>
       <Tabs.Tab
-        {...PATHS.ME_APPRECIATIONS_SENT}
-        selected={router.pathname === PATHS.ME_APPRECIATIONS_SENT.href}
+        href={PATHS.ME_APPRECIATIONS_SENT}
+        selected={router.pathname === PATHS.ME_APPRECIATIONS_SENT}
         sup={activity.appreciationsSentTotal}
       >
         <Translate id="appreciationsSent" />
       </Tabs.Tab>
 
       <Tabs.Tab
-        {...PATHS.ME_APPRECIATIONS_RECEIVED}
-        selected={router.pathname === PATHS.ME_APPRECIATIONS_RECEIVED.href}
+        href={PATHS.ME_APPRECIATIONS_RECEIVED}
+        selected={router.pathname === PATHS.ME_APPRECIATIONS_RECEIVED}
         sup={activity.appreciationsReceivedTotal}
       >
         <Translate id="appreciationsReceived" />

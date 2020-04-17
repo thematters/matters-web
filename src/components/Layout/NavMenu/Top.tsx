@@ -40,7 +40,7 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
         </TextIcon>
       </Menu.Item>
 
-      <Menu.Item spacing={menuItemSpacing} {...PATHS.ME_DRAFTS}>
+      <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_DRAFTS}>
         <TextIcon
           icon={<Icon.DraftMedium size="md" />}
           spacing="base"
@@ -50,7 +50,7 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
         </TextIcon>
       </Menu.Item>
 
-      <Menu.Item spacing={menuItemSpacing} {...PATHS.ME_APPRECIATIONS_SENT}>
+      <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_APPRECIATIONS_SENT}>
         <TextIcon
           icon={<Icon.LikeMedium size="md" />}
           spacing="base"
@@ -60,7 +60,7 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
         </TextIcon>
       </Menu.Item>
 
-      <Menu.Item spacing={menuItemSpacing} {...PATHS.ME_BOOKMARKS}>
+      <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_BOOKMARKS}>
         <TextIcon
           icon={<Icon.BookmarkMedium size="md" />}
           spacing="base"
@@ -70,7 +70,7 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
         </TextIcon>
       </Menu.Item>
 
-      <Menu.Item spacing={menuItemSpacing} {...PATHS.ME_HISTORY}>
+      <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_HISTORY}>
         <TextIcon
           icon={<Icon.HistoryMedium size="md" />}
           spacing="base"
