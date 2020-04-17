@@ -10,6 +10,7 @@ import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { APPRECIATE_DEBOUNCE, Z_INDEX } from '~/common/enums'
 
 import Appreciators from '../Toolbar/Appreciators'
+import AnonymousButton from './AnonymousButton'
 import AppreciateButton from './AppreciateButton'
 import CivicLikerButton from './CivicLikerButton'
 import SetupLikerIdAppreciateButton from './SetupLikerIdAppreciateButton'
@@ -83,8 +84,14 @@ const AppreciationButton = ({
   const readCivicLikerDialog =
     viewer.isCivicLiker || data?.clientPreference.readCivicLikerDialog
   const canAppreciate =
-    (!isReachLimit && !isMe && !viewer.isInactive && viewer.liker.likerId) ||
-    !viewer.isAuthed
+    !isReachLimit && !isMe && !viewer.isInactive && viewer.liker.likerId
+
+  /**
+   * Anonymous
+   */
+  if (!viewer.isAuthed) {
+    return <AnonymousButton total={total} />
+  }
 
   /**
    * Setup Liker Id Button
@@ -100,9 +107,7 @@ const AppreciationButton = ({
     return (
       <AppreciateButton
         onClick={appreciate}
-        count={
-          viewer.isAuthed && appreciatedCount > 0 ? appreciatedCount : undefined
-        }
+        count={appreciatedCount}
         total={total}
       />
     )
@@ -120,9 +125,7 @@ const AppreciationButton = ({
             data: { readCivicLikerDialog: true },
           })
         }}
-        count={
-          viewer.isAuthed && appreciatedCount > 0 ? appreciatedCount : undefined
-        }
+        count={appreciatedCount}
         total={total}
       />
     )
@@ -156,15 +159,7 @@ const AppreciationButton = ({
       zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
     >
       <span>
-        <AppreciateButton
-          disabled
-          count={
-            viewer.isAuthed && appreciatedCount > 0
-              ? appreciatedCount
-              : undefined
-          }
-          total={total}
-        />
+        <AppreciateButton disabled count={appreciatedCount} total={total} />
       </span>
     </Tooltip>
   )
