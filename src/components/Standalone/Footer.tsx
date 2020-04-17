@@ -1,15 +1,12 @@
-import { useContext } from 'react'
-
 import {
   Button,
-  LanguageContext,
+  NewsletterDialog,
   TextIcon,
   Tooltip,
   Translate,
   withIcon,
 } from '~/components'
 
-import { translate } from '~/common/utils'
 import { ReactComponent as IconFooterFacebook } from '~/static/icons/footer-facebook.svg'
 import { ReactComponent as IconFooterInstagram } from '~/static/icons/footer-instagram.svg'
 import { ReactComponent as IconFooterTelegram } from '~/static/icons/footer-telegram.svg'
@@ -19,7 +16,6 @@ import { ReactComponent as IconFooterWeChat } from '~/static/icons/footer-wechat
 import styles from './styles.css'
 
 const Footer = () => {
-  const { lang } = useContext(LanguageContext)
   const year = new Date().getFullYear()
 
   return (
@@ -92,34 +88,25 @@ const Footer = () => {
           </h2>
 
           <div id="mc_embed_signup">
-            <form
-              action="https://news.us12.list-manage.com/subscribe/post?u=d5d5a3cc17a4dfebbee549e7f&amp;id=59e8b859f3"
-              method="post"
-            >
-              <input
-                type="email"
-                name="EMAIL"
-                placeholder={translate({ id: 'yourEmail', lang })}
-                defaultValue=""
-              />
-              <input
-                style={{ position: 'absolute', left: '-5000px' }}
-                aria-hidden="true"
-                type="text"
-                name="b_d5d5a3cc17a4dfebbee549e7f_82f8e18b83"
-                defaultValue=""
-              />
-              <Button
-                size={[null, '2.25rem']}
-                spacing={[0, 'base']}
-                type="submit"
-                bgColor="green"
-              >
-                <TextIcon color="white" weight="md">
-                  <Translate zh_hant="訂閱" zh_hans="订阅" />
-                </TextIcon>
-              </Button>
-            </form>
+            <NewsletterDialog>
+              {({ open }) => (
+                <Button
+                  aria-haspopup="true"
+                  size={[null, '2.25rem']}
+                  spacing={[0, 'base']}
+                  type="submit"
+                  bgColor="green"
+                  onClick={open}
+                >
+                  <TextIcon color="white" weight="md">
+                    <Translate
+                      zh_hant="訂閱 Matters 通訊"
+                      zh_hans="订阅 Matters 通讯"
+                    />
+                  </TextIcon>
+                </Button>
+              )}
+            </NewsletterDialog>
           </div>
         </section>
       </div>
