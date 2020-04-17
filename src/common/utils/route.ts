@@ -1,8 +1,11 @@
 import Router, { NextRouter } from 'next/router'
+import pathToRegexp from 'path-to-regexp'
 import queryString from 'query-string'
 import { UrlObject } from 'url'
 
-import { PATHS } from '~/common/enums'
+import { PATHS, ROUTES, toExpressPath } from '~/common/enums'
+
+import { parseURL } from './url'
 
 export type Url = string | UrlObject
 
@@ -243,8 +246,8 @@ export const appendTarget = (href: string, fallbackCurrent?: boolean) => {
  * @see {@url https://github.com/zeit/next.js/blob/canary/packages/next/client/link.tsx#L203-L211}
  * @see {@url https://github.com/zeit/next.js/issues/3249#issuecomment-574817539}
  */
-export const routerPush = (url: Url, as?: string) => {
-  Router.push(url, as).then((success: boolean) => {
+export const routerPush = (url: Url, as?: Url, options?: {}) => {
+  Router.push(url, as, options).then((success: boolean) => {
     if (!success) {
       return
     }
@@ -252,4 +255,93 @@ export const routerPush = (url: Url, as?: string) => {
     window.scrollTo(0, 0)
     document.body.focus()
   })
+}
+
+/**
+ * Capture <a> clicks, and `Router.push` if there's a matching route.
+ *
+ * @see {@url https://github.com/STRML/react-router-component/blob/e453e24342c12a2fcfd7d7ba797be18415f9a497/lib/CaptureClicks.js}
+ */
+export const captureClicks = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+  // Ignore canceled events, modified clicks, and right clicks.
+  if (e.defaultPrevented) {
+    return
+  }
+
+  if (e.metaKey || e.ctrlKey || e.shiftKey) {
+    return
+  }
+
+  if (e.button !== 0) {
+    return
+  }
+
+  // Get the <a> element.
+  let el = e.target as HTMLAnchorElement
+  while (el && el.nodeName !== 'A') {
+    el = el.parentNode as HTMLAnchorElement
+  }
+
+  // Ignore clicks from non-a elements.
+  if (!el) {
+    return
+  }
+
+  // Ignore hash (used often instead of javascript:void(0) in strict CSP envs)
+  if (el.getAttribute('href') === '#') {
+    return
+  }
+
+  const url = parseURL(el.href)
+  const windowURL = parseURL(window.location.href)
+
+  // Ignore links that don't share a protocol and host with ours.
+  if (url.protocol !== windowURL.protocol || url.host !== windowURL.host) {
+    return
+  }
+
+  // Prevent :focus from sticking; preventDefault() stops blur in some browsers
+  el.blur()
+  e.preventDefault()
+
+  /**
+   * Matching defined routes
+   *
+   * Note:
+   * We are using the same version (0.1.7) of `path-to-regexp` as Express.js 4.x,
+   * different from the version used by Next.js (6.x).
+   *
+   * They have different behaviors about wildcard asterisk (*), see below link.
+   *
+   * Once the custom routes (`src/server.ts`) is deprecated,
+   * it should be synchronized with Next.js.
+   *
+   * @see {@url https://github.com/pillarjs/path-to-regexp#compatibility-with-express--4x}
+   */
+  let matched = {}
+  ROUTES.some(({ pathname }) => {
+    console.log({ pathname })
+    const keys: PathToRegExpKey[] = []
+    const regexp = pathToRegexp(toExpressPath(pathname), keys)
+    const result = regexp.exec(url.pathname)
+
+    if (result) {
+      const searchQuery = queryString.parse(url.search) || {}
+      const matchedQuery: { [key: string]: string } = {}
+      keys.forEach((k, i) => (matchedQuery[k.name] = result[i + 1]))
+
+      matched = {
+        pathname,
+        query: {
+          ...searchQuery,
+          ...matchedQuery,
+        },
+      }
+      return true
+    }
+  })
+
+  if (matched) {
+    routerPush(matched, url)
+  }
 }

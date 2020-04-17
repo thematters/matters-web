@@ -4,6 +4,7 @@ import gql from 'graphql-tag'
 import { Translate } from '~/components'
 
 import contentCommentStyles from '~/common/styles/utils/content.comment.css'
+import { captureClicks } from '~/common/utils'
 
 import Collapsed from './Collapsed'
 import styles from './styles.css'
@@ -66,6 +67,7 @@ const Content = ({ comment, size }: ContentProps) => {
           dangerouslySetInnerHTML={{
             __html: content || '',
           }}
+          onClick={captureClicks}
         />
 
         <style jsx>{styles}</style>

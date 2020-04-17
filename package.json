@@ -68,6 +68,7 @@
     "next": "^9.3.5",
     "next-with-apollo": "^4.3.0",
     "nprogress": "^0.2.0",
+    "path-to-regexp": "^0.1.7",
     "query-string": "^6.12.1",
     "react": "^16.13.1",
     "react-beautiful-dnd": "^13.0.0",

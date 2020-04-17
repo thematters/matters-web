@@ -11,7 +11,7 @@ import 'module-alias/register'
 import next from 'next'
 import { join } from 'path'
 
-import { ROUTES } from '~/common/enums'
+import { ROUTES, toExpressPath } from '~/common/enums'
 
 // load environment variables from .env
 // skip error for CI
@@ -28,10 +28,6 @@ const isProd = process.env.ENV === 'production'
 const PORT = process.env.PORT || 3000
 const app = next({ dev: !isProd })
 const handle = app.getRequestHandler()
-
-// Convert Next.js pattern to Express pattern
-const toExpressPath = (path: string) =>
-  path.replace(/\]/g, '').replace(/\[/g, ':')
 
 app
   .prepare()
