@@ -150,6 +150,7 @@ type MemoedRichType = React.MemoExoticComponent<React.FC<RichProps>> & {
 
 const MemoedRich = React.memo(Rich, ({ user: prevUser }, { user }) => {
   return (
+    prevUser.id === user.id &&
     prevUser.isFollowee === user.isFollowee &&
     prevUser.isFollower === user.isFollower &&
     prevUser.isBlocked === user.isBlocked
