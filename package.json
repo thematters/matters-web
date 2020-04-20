@@ -112,7 +112,7 @@
     "@zeit/next-bundle-analyzer": "^0.1.2",
     "apollo": "^2.27.0",
     "babel-jest": "^25.3.0",
-    "babel-plugin-dynamic-import-node": "^2.3.0",
+    "babel-plugin-dynamic-import-node": "^2.3.1",
     "babel-plugin-module-resolver": "^4.0.0",
     "babel-polyfill": "^6.26.0",
     "chromedriver": "^81.0.0",
