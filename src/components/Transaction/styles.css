@@ -1,0 +1,32 @@
+.container {
+  @mixin flex-start-space-between;
+
+  font-size: var(--font-size-sm);
+}
+
+header {
+  & :global(h2) {
+    @mixin line-clamp;
+  }
+
+  & .content {
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-medium);
+  }
+}
+
+& .left {
+  & :global(> * + *) {
+    margin-top: var(--spacing-x-tight);
+  }
+}
+
+& .right {
+  flex-shrink: 0;
+  margin-left: var(--spacing-base);
+  text-align: right;
+
+  & .appreciate-count {
+    margin-bottom: var(--spacing-x-tight);
+  }
+}

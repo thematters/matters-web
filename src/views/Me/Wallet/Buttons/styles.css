@@ -1,0 +1,18 @@
+.buttons {
+  @mixin flex-center-space-between;
+  flex-direction: column;
+  margin-bottom: var(--spacing-loose);
+
+  & :global(> *) {
+    width: 100%;
+    flex: 1;
+  }
+
+  & :global(> * + *) {
+    margin-top: var(--spacing-base);
+  }
+
+  @media (--sm-up) {
+    margin-bottom: var(--spacing-xx-loose);
+  }
+}

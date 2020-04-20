@@ -1,6 +1,9 @@
-import { Dialog, Head, Layout, Spacer, Translate } from '~/components'
+import { Form, Head, Layout, Spacer, Translate } from '~/components'
+
+import { PATHS } from '~/common/enums'
 
 import Balance from './Balance'
+import Buttons from './Buttons'
 
 const Wallet = () => {
   return (
@@ -16,15 +19,14 @@ const Wallet = () => {
 
       <Balance />
 
-      <Dialog.Footer>
-        <Dialog.Footer.Button bgColor="green">
-          <Translate id="topUp" />
-        </Dialog.Footer.Button>
+      <Buttons />
 
-        <Dialog.Footer.Button bgColor="grey-lighter" textColor="black">
-          <Translate id="paymentPassword" />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
+      <Form.List>
+        <Form.List.Item
+          title={<Translate id="paymentTransactions" />}
+          href={PATHS.ME_WALLET_TRANSACTIONS}
+        />
+      </Form.List>
     </Layout.Main>
   )
 }

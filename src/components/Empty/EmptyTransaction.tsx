@@ -1,10 +1,10 @@
 import { Empty, Icon, Translate } from '~/components'
 
-export const EmptyAppreciation = () => (
+export const EmptyTransaction = () => (
   <Empty
     icon={<Icon.LikeMedium size="xxl" />}
     description={
-      <Translate zh_hant="還沒有讚賞記錄" zh_hans="还没有赞赏记录" />
+      <Translate zh_hant="還沒有交易記錄" zh_hans="还没有交易记录" />
     }
   />
 )

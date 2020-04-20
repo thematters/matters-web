@@ -8,7 +8,7 @@ export const numPrefix = (num: number | string) => {
 // https://stackoverflow.com/a/14428340
 export const numFormat = (
   num: number,
-  decimal: number = 0,
+  decimal: number = 2,
   sections: number = 3
 ) => {
   const re =

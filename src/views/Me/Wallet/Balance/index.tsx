@@ -3,6 +3,8 @@ import gql from 'graphql-tag'
 
 import { Spinner, Translate } from '~/components'
 
+import { numFormat } from '~/common/utils'
+
 import styles from './styles.css'
 
 import { MeWalletBalance } from './__generated__/MeWalletBalance'
@@ -37,7 +39,7 @@ const Balance = () => {
 
       <p className="amount">
         <span className="currency">HKD</span>
-        <span>{balanceHKD}</span>
+        <span>{numFormat(balanceHKD)}</span>
       </p>
 
       <style jsx>{styles}</style>

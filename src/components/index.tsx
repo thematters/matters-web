@@ -53,6 +53,7 @@ export * from './DraftDigest'
 export * from './Comment'
 export * from './Notice'
 export * from './Appreciation'
+export * from './Transaction'
 
 export * from './Search'
 export * from './UserProfile'
