@@ -1,12 +1,6 @@
 import { useState } from 'react'
 
-import {
-  Head,
-  Layout,
-  PasswordChangeComplete,
-  PasswordChangeConfirmForm,
-  PasswordChangeRequestForm,
-} from '~/components'
+import { ChangePasswordForm, Head, Layout } from '~/components'
 
 const Forget = () => {
   const [step, setStep] = useState('request')
@@ -40,7 +34,7 @@ const Forget = () => {
       <Head title={{ id: 'forgetPassword' }} />
 
       {step === 'request' && (
-        <PasswordChangeRequestForm
+        <ChangePasswordForm.Request
           defaultEmail={data.request.email}
           type="forget"
           purpose="page"
@@ -49,7 +43,7 @@ const Forget = () => {
       )}
 
       {step === 'confirm' && (
-        <PasswordChangeConfirmForm
+        <ChangePasswordForm.Confirm
           codeId={data.request.codeId}
           type="forget"
           purpose="page"
@@ -58,7 +52,7 @@ const Forget = () => {
       )}
 
       {step === 'complete' && (
-        <PasswordChangeComplete type="forget" purpose="page" />
+        <ChangePasswordForm.Complete type="forget" purpose="page" />
       )}
     </Layout.Main>
   )

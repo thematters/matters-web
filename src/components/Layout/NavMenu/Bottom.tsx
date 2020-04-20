@@ -66,7 +66,7 @@ const NavMenuBottom: React.FC<NavMenuBottomProps> = ({ isInSideDrawerNav }) => {
 
   return (
     <Menu spacingY={isInSideDrawerNav ? 0 : undefined}>
-      <Menu.Item spacing={menuItemSpacing} {...PATHS.HELP}>
+      <Menu.Item spacing={menuItemSpacing} href={PATHS.HELP}>
         <TextIcon
           icon={<Icon.HelpMedium size="md" />}
           spacing="base"
@@ -76,13 +76,13 @@ const NavMenuBottom: React.FC<NavMenuBottomProps> = ({ isInSideDrawerNav }) => {
         </TextIcon>
       </Menu.Item>
 
-      <Menu.Item spacing={menuItemSpacing} {...PATHS.ME_SETTINGS_ACCOUNT}>
+      <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_SETTINGS}>
         <TextIcon
           icon={<Icon.SettingsMedium size="md" />}
           spacing="base"
           size={menuItemSize}
         >
-          <Translate id="setting" />
+          <Translate id="settings" />
         </TextIcon>
       </Menu.Item>
 

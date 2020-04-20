@@ -156,7 +156,6 @@ export default () => (
           <CreateTagButton />
         </>
       }
-      marginBottom={0}
     />
 
     <Tags />

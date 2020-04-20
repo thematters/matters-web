@@ -52,7 +52,7 @@ const Search = () => {
   }, [])
 
   return (
-    <Layout.Main>
+    <Layout.Main bgColor={isAggregate ? 'grey-lighter' : undefined}>
       <Layout.Header
         left={
           showBackButton ? (
@@ -73,7 +73,6 @@ const Search = () => {
             )}
           </>
         }
-        marginBottom={0}
       />
 
       <Head title={{ id: 'search' }} />

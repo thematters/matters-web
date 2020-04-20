@@ -1,10 +1,8 @@
 import { useContext, useState } from 'react'
 
 import {
+  ChangePasswordForm,
   Dialog,
-  PasswordChangeComplete,
-  PasswordChangeConfirmForm,
-  PasswordChangeRequestForm,
   useEventListener,
   ViewerContext,
 } from '~/components'
@@ -60,7 +58,7 @@ const ResetPasswordDialog = () => {
       fixedHeight={step !== 'complete'}
     >
       {step === 'request' && (
-        <PasswordChangeRequestForm
+        <ChangePasswordForm.Request
           defaultEmail={data.request.email}
           type="forget"
           purpose="dialog"
@@ -70,7 +68,7 @@ const ResetPasswordDialog = () => {
       )}
 
       {step === 'reset' && (
-        <PasswordChangeConfirmForm
+        <ChangePasswordForm.Confirm
           codeId={data.request.codeId}
           submitCallback={() => setStep('complete')}
           type="forget"
@@ -80,7 +78,7 @@ const ResetPasswordDialog = () => {
       )}
 
       {step === 'complete' && (
-        <PasswordChangeComplete
+        <ChangePasswordForm.Complete
           type="forget"
           purpose="dialog"
           closeDialog={close}

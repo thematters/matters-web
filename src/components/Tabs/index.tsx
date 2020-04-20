@@ -1,20 +1,17 @@
-import classNames from 'classnames'
 import Link from 'next/link'
+
+import { Url } from '~/common/utils'
 
 import styles from './styles.css'
 
 interface TabProps {
-  href?: string
+  href?: Url
   as?: string
 
   disable?: boolean
   selected?: boolean
 
   sup?: React.ReactNode | string
-}
-
-interface TabsProps {
-  spacingBottom?: 0 | 'xtight' | 'tight' | 'base' | 'loose' | 'xxloose'
 }
 
 const Tab: React.FC<TabProps> = ({
@@ -51,15 +48,11 @@ const Tab: React.FC<TabProps> = ({
   )
 }
 
-export const Tabs: React.FC<TabsProps> & {
+export const Tabs: React.FC & {
   Tab: typeof Tab
-} = ({ spacingBottom = 'xtight', children }) => {
-  const navClass = classNames({
-    [`spacing-bottom-${spacingBottom}`]: !!spacingBottom,
-  })
-
+} = ({ children }) => {
   return (
-    <nav className={navClass}>
+    <nav>
       <ul role="tablist">{children}</ul>
 
       <style jsx>{styles}</style>

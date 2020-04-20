@@ -73,8 +73,8 @@ const Root = ({
   }, [])
 
   const router = useRouter()
-  const isInAbout = router.pathname === PATHS.ABOUT.href
-  const isInMigration = router.pathname === PATHS.MIGRATION.href
+  const isInAbout = router.pathname === PATHS.ABOUT
+  const isInMigration = router.pathname === PATHS.MIGRATION
   const shouldApplyLayout = !isInAbout && !isInMigration
 
   const { loading, data, error } = useQuery<RootQuery>(ROOT_QUERY)

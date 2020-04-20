@@ -25,7 +25,7 @@ const prefix = 'toast-'
 const Container = () => {
   const [toasts, setToasts] = useState<any[]>([])
   const router = useRouter()
-  const isMiscPage = router.pathname === PATHS.MIGRATION.href
+  const isMiscPage = router.pathname === PATHS.MIGRATION
 
   const add = (payload: { [key: string]: any }) => {
     if (!payload || Object.keys(payload).length === 0) {

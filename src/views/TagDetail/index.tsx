@@ -9,6 +9,7 @@ import {
   EmptyTag,
   Head,
   Layout,
+  Spacer,
   Spinner,
   Tabs,
   TextIcon,
@@ -91,11 +92,13 @@ const TagDetail = ({ data }: { data: TagDetailType }) => {
 
       <Head title={`#${data.node.content}`} />
 
+      <Spacer />
+
       {data.node.description && (
         <p className="description">{data.node.description}</p>
       )}
 
-      <Tabs spacingBottom={0}>
+      <Tabs>
         {hasSelected > 0 && (
           <Tabs.Tab selected={feed === 'selected'}>
             <Button onClick={() => setFeed('selected')}>

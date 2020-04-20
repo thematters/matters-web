@@ -89,7 +89,6 @@ const ViewMode = () => {
         <Button
           size={['3rem', '2rem']}
           bgColor="grey-lighter"
-          compensation="right"
           aria-haspopup="true"
           aira-label={TEXT.zh_hant.switchViewMode}
           onClick={open}

@@ -83,12 +83,27 @@ const CommentBar = ({ article }: { article: CommentBarArticle }) => {
             new CustomEvent(ADD_TOAST, {
               detail: {
                 color: 'red',
-                content: (
-                  <Translate
-                    zh_hant="當你獲得 15 次讚賞或積極閱讀文章，即可評論。"
-                    zh_hans="当你获得 15 次赞赏或积极阅读文章，即可评论。"
-                  />
-                ),
+                content: <Translate id="failureCommentOnboarding" />,
+              },
+            })
+          )
+        }}
+      >
+        <Content />
+      </Card>
+    )
+  }
+
+  if (viewer.isInactive) {
+    return (
+      <Card
+        {...cardProps}
+        onClick={() => {
+          window.dispatchEvent(
+            new CustomEvent(ADD_TOAST, {
+              detail: {
+                color: 'red',
+                content: <Translate id="FORBIDDEN" />,
               },
             })
           )
@@ -108,12 +123,7 @@ const CommentBar = ({ article }: { article: CommentBarArticle }) => {
             new CustomEvent(ADD_TOAST, {
               detail: {
                 color: 'red',
-                content: (
-                  <Translate
-                    zh_hant="因爲作者設置，你無法參與該作品下的討論。"
-                    zh_hans="因为作者设置，你无法参与该作品下的讨论。"
-                  />
-                ),
+                content: <Translate id="failureCommentBlocked" />,
               },
             })
           )
@@ -132,7 +142,7 @@ const CommentBar = ({ article }: { article: CommentBarArticle }) => {
             window.dispatchEvent(new CustomEvent(OPEN_LOGIN_DIALOG))
           },
         }
-      : appendTarget({ ...PATHS.AUTH_LOGIN, fallbackCurrent: true })
+      : appendTarget(PATHS.LOGIN, true)
 
     return (
       <Card {...clickProps} {...cardProps}>

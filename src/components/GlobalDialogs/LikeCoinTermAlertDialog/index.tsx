@@ -10,12 +10,12 @@ const LikeCoinTermAlertDialog = () => {
   const viewer = useContext(ViewerContext)
 
   const allowPaths = [
-    PATHS.HOME.href,
-    PATHS.ABOUT.href,
-    PATHS.GUIDE.href,
-    PATHS.ME_SETTINGS_ACCOUNT.href,
-    PATHS.ME_APPRECIATIONS_RECEIVED.href,
-    PATHS.ME_APPRECIATIONS_SENT.href,
+    PATHS.HOME,
+    PATHS.ABOUT,
+    PATHS.GUIDE,
+    PATHS.ME_SETTINGS,
+    PATHS.ME_APPRECIATIONS_RECEIVED,
+    PATHS.ME_APPRECIATIONS_SENT,
   ]
   const isPathAllowed =
     router.pathname && allowPaths.indexOf(router.pathname) >= 0

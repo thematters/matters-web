@@ -1,7 +1,13 @@
 import Router, { NextRouter } from 'next/router'
+import pathToRegexp from 'path-to-regexp'
 import queryString from 'query-string'
+import { UrlObject } from 'url'
 
-import { PATHS } from '~/common/enums'
+import { PATHS, ROUTES, toExpressPath } from '~/common/enums'
+
+import { parseURL } from './url'
+
+export type Url = string | UrlObject
 
 interface ArticleArgs {
   slug: string
@@ -61,7 +67,7 @@ type ToPathArgs =
  *
  * (works on SSR & CSR)
  */
-export const toPath = (args: ToPathArgs): { href: string; as: string } => {
+export const toPath = (args: ToPathArgs): { href: Url; as: string } => {
   switch (args.page) {
     case 'articleDetail': {
       const {
@@ -72,7 +78,10 @@ export const toPath = (args: ToPathArgs): { href: string; as: string } => {
       const asUrl = `/@${userName}/${slug}-${mediaHash}`
 
       return {
-        href: `${PATHS.ARTICLE_DETAIL.href}?userName=${userName}&slug=${slug}&mediaHash=${mediaHash}`,
+        href: {
+          pathname: PATHS.ARTICLE_DETAIL,
+          query: { userName, slug, mediaHash },
+        },
         as: args.fragment ? `${asUrl}#${args.fragment}` : asUrl,
       }
     }
@@ -88,45 +97,63 @@ export const toPath = (args: ToPathArgs): { href: string; as: string } => {
     }
     case 'draftDetail': {
       return {
-        href: `${PATHS.ME_DRAFT_DETAIL.href}?id=${args.id}&slug=${args.slug}`,
+        href: {
+          pathname: PATHS.ME_DRAFT_DETAIL,
+          query: { id: args.id, slug: args.slug },
+        },
         as: `/me/drafts/${args.slug}-${args.id}`,
       }
     }
     case 'tagDetail': {
       return {
-        href: `${PATHS.TAG_DETAIL.href}?id=${args.id}`,
+        href: {
+          pathname: PATHS.TAG_DETAIL,
+          query: { id: args.id },
+        },
         as: `/tags/${args.id}`,
       }
     }
     case 'userProfile': {
       return {
-        href: `${PATHS.USER_ARTICLES.href}?userName=${args.userName}`,
+        href: {
+          pathname: PATHS.USER_ARTICLES,
+          query: { userName: args.userName },
+        },
         as: `/@${args.userName}`,
       }
     }
     case 'userComments': {
       return {
-        href: `${PATHS.USER_COMMENTS.href}?userName=${args.userName}`,
+        href: {
+          pathname: PATHS.USER_COMMENTS,
+          query: { userName: args.userName },
+        },
         as: `/@${args.userName}/comments`,
       }
     }
     case 'userFollowers': {
       return {
-        href: `${PATHS.USER_FOLLOWERS.href}?userName=${args.userName}`,
+        href: {
+          pathname: PATHS.USER_FOLLOWERS,
+          query: { userName: args.userName },
+        },
         as: `/@${args.userName}/followers`,
       }
     }
     case 'userFollowees': {
       return {
-        href: `${PATHS.USER_FOLLOWEES.href}?userName=${args.userName}`,
+        href: {
+          pathname: PATHS.USER_FOLLOWEES,
+          query: { userName: args.userName },
+        },
         as: `/@${args.userName}/followees`,
       }
     }
     case 'search': {
       const typeStr = args.type ? `&type=${args.type}` : ''
       return {
-        href: `${PATHS.SEARCH.href}?q=${args.q || ''}${typeStr}`,
-        as: `${PATHS.SEARCH.as}?q=${args.q || ''}${typeStr}`,
+        href: `${PATHS.SEARCH}?q=${args.q || ''}${typeStr}`,
+        as: `${PATHS.SEARCH}?q=${args.q || ''}${typeStr}`,
       }
     }
   }
@@ -186,26 +213,15 @@ export const redirectToTarget = ({
 export const redirectToLogin = () => {
   const target = getTarget() || getEncodedCurrent()
 
-  return routerPush(
-    `${PATHS.AUTH_LOGIN.href}?target=${target}`,
-    `${PATHS.AUTH_LOGIN.as}?target=${target}`
-  )
+  return routerPush(`${PATHS.LOGIN}?target=${target}`)
 }
 
 /**
- * Append `?target` to `PATHS.xxx`.
+ * Append `?target` to the given path.
  *
  * (works on SSR & CSR)
  */
-export const appendTarget = ({
-  href,
-  as,
-  fallbackCurrent,
-}: {
-  href: string
-  as: string
-  fallbackCurrent?: boolean
-}) => {
+export const appendTarget = (href: string, fallbackCurrent?: boolean) => {
   let target = ''
 
   if (process.browser) {
@@ -216,12 +232,10 @@ export const appendTarget = ({
   if (target) {
     return {
       href: `${href}?target=${target}`,
-      as: `${as}?target=${target}`,
     }
   } else {
     return {
       href,
-      as,
     }
   }
 }
@@ -232,8 +246,8 @@ export const appendTarget = ({
  * @see {@url https://github.com/zeit/next.js/blob/canary/packages/next/client/link.tsx#L203-L211}
  * @see {@url https://github.com/zeit/next.js/issues/3249#issuecomment-574817539}
  */
-export const routerPush = (href: string, as?: string) => {
-  Router.push(href, as).then((success: boolean) => {
+export const routerPush = (url: Url, as?: Url, options?: {}) => {
+  Router.push(url, as, options).then((success: boolean) => {
     if (!success) {
       return
     }
@@ -241,4 +255,93 @@ export const routerPush = (href: string, as?: string) => {
     window.scrollTo(0, 0)
     document.body.focus()
   })
+}
+
+/**
+ * Capture <a> clicks, and `Router.push` if there's a matching route.
+ *
+ * @see {@url https://github.com/STRML/react-router-component/blob/e453e24342c12a2fcfd7d7ba797be18415f9a497/lib/CaptureClicks.js}
+ */
+export const captureClicks = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+  // Ignore canceled events, modified clicks, and right clicks.
+  if (e.defaultPrevented) {
+    return
+  }
+
+  if (e.metaKey || e.ctrlKey || e.shiftKey) {
+    return
+  }
+
+  if (e.button !== 0) {
+    return
+  }
+
+  // Get the <a> element.
+  let el = e.target as HTMLAnchorElement
+  while (el && el.nodeName !== 'A') {
+    el = el.parentNode as HTMLAnchorElement
+  }
+
+  // Ignore clicks from non-a elements.
+  if (!el) {
+    return
+  }
+
+  // Ignore hash (used often instead of javascript:void(0) in strict CSP envs)
+  if (el.getAttribute('href') === '#') {
+    return
+  }
+
+  const url = parseURL(el.href)
+  const windowURL = parseURL(window.location.href)
+
+  // Ignore links that don't share a protocol and host with ours.
+  if (url.protocol !== windowURL.protocol || url.host !== windowURL.host) {
+    return
+  }
+
+  // Prevent :focus from sticking; preventDefault() stops blur in some browsers
+  el.blur()
+  e.preventDefault()
+
+  /**
+   * Matching defined routes
+   *
+   * Note:
+   * We are using the same version (0.1.7) of `path-to-regexp` as Express.js 4.x,
+   * different from the version used by Next.js (6.x).
+   *
+   * They have different behaviors about wildcard asterisk (*), see below link.
+   *
+   * Once the custom routes (`src/server.ts`) is deprecated,
+   * it should be synchronized with Next.js.
+   *
+   * @see {@url https://github.com/pillarjs/path-to-regexp#compatibility-with-express--4x}
+   */
+  let matched = {}
+  ROUTES.some(({ pathname }) => {
+    console.log({ pathname })
+    const keys: PathToRegExpKey[] = []
+    const regexp = pathToRegexp(toExpressPath(pathname), keys)
+    const result = regexp.exec(url.pathname)
+
+    if (result) {
+      const searchQuery = queryString.parse(url.search) || {}
+      const matchedQuery: { [key: string]: string } = {}
+      keys.forEach((k, i) => (matchedQuery[k.name] = result[i + 1]))
+
+      matched = {
+        pathname,
+        query: {
+          ...searchQuery,
+          ...matchedQuery,
+        },
+      }
+      return true
+    }
+  })
+
+  if (matched) {
+    routerPush(matched, url)
+  }
 }

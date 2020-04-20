@@ -13,10 +13,10 @@ const NavBar = () => {
   const router = useRouter()
   const viewer = useContext(ViewerContext)
 
-  const isInHome = router.pathname === PATHS.HOME.href
-  const isInFollow = router.pathname === PATHS.FOLLOW.href
-  const isInNotification = router.pathname === PATHS.ME_NOTIFICATIONS.href
-  const isInSearch = router.pathname === PATHS.SEARCH.href
+  const isInHome = router.pathname === PATHS.HOME
+  const isInFollow = router.pathname === PATHS.FOLLOW
+  const isInNotification = router.pathname === PATHS.ME_NOTIFICATIONS
+  const isInSearch = router.pathname === PATHS.SEARCH
   const isInDraftDetail = router.pathname.indexOf('/me/drafts') >= 0
 
   return (
@@ -27,7 +27,7 @@ const NavBar = () => {
           icon={<Icon.NavHome size="md" />}
           activeIcon={<Icon.NavHomeActive size="md" color="green" />}
           active={isInHome}
-          {...PATHS.HOME}
+          href={PATHS.HOME}
         />
 
         <NavListItem
@@ -35,7 +35,7 @@ const NavBar = () => {
           icon={<UnreadIcon.Follow />}
           activeIcon={<UnreadIcon.Follow active />}
           active={isInFollow}
-          {...PATHS.FOLLOW}
+          href={PATHS.FOLLOW}
         />
 
         {!isInDraftDetail && (
@@ -49,7 +49,7 @@ const NavBar = () => {
           icon={<Icon.NavSearch size="md" />}
           activeIcon={<Icon.NavSearch size="md" color="green" />}
           active={isInSearch}
-          {...PATHS.SEARCH}
+          href={PATHS.SEARCH}
         />
 
         <NavListItem
@@ -57,7 +57,7 @@ const NavBar = () => {
           icon={<UnreadIcon.Notification />}
           activeIcon={<UnreadIcon.Notification active />}
           active={isInNotification}
-          {...PATHS.ME_NOTIFICATIONS}
+          href={PATHS.ME_NOTIFICATIONS}
         />
       </ul>
 

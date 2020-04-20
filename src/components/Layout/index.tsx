@@ -18,7 +18,8 @@ export const Layout: React.FC & {
   Spacing: typeof Spacing
 } = ({ children }) => {
   const router = useRouter()
-  const isInDraftDetail = router.pathname === PATHS.ME_DRAFT_DETAIL.href
+  const isInDraftDetail = router.pathname === PATHS.ME_DRAFT_DETAIL
+  const isInArticleDetail = router.pathname === PATHS.ARTICLE_DETAIL
 
   return (
     <>
@@ -32,7 +33,7 @@ export const Layout: React.FC & {
         {children}
       </main>
 
-      {!isInDraftDetail && (
+      {!isInDraftDetail && !isInArticleDetail && (
         <footer className="u-sm-up-hide">
           <NavBar />
         </footer>
@@ -53,8 +54,8 @@ interface MainProps {
 
 const Main: React.FC<MainProps> = ({ aside, bgColor, keepAside, children }) => {
   const router = useRouter()
-  const isInSearch = router.pathname === PATHS.SEARCH.href
-  const isInDraftDetail = router.pathname === PATHS.ME_DRAFT_DETAIL.href
+  const isInSearch = router.pathname === PATHS.SEARCH
+  const isInDraftDetail = router.pathname === PATHS.ME_DRAFT_DETAIL
 
   const articleClass = classNames({
     'l-col-three-mid': true,

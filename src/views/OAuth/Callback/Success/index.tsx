@@ -20,7 +20,7 @@ const OAuthCallbackSuccess = () => {
   }
 
   if (!provider || OAUTH_PROVIDER.indexOf(provider) < 0) {
-    routerPush(PATHS.HOME.href, PATHS.HOME.as)
+    routerPush(PATHS.HOME)
     return null
   }
 

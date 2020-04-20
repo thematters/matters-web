@@ -24,7 +24,7 @@ export const PasswordResetDialogButton = () => (
 )
 
 export const PasswordResetRedirectButton = () => (
-  <Button spacing={['xtight', 0]} {...appendTarget(PATHS.AUTH_FORGET)}>
+  <Button spacing={['xtight', 0]} {...appendTarget(PATHS.FORGET)}>
     <TextIcon color="green" weight="md">
       <Translate id="forgetPassword" />？
     </TextIcon>
@@ -36,6 +36,7 @@ export const SignUpDialogButton = () => (
     <Form.List.Item
       title={<Translate zh_hant="沒有帳號？" zh_hans="沒有帐号？" />}
       rightText={<Translate id="register" />}
+      rightTextColor="green"
       onClick={() => {
         window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
         window.dispatchEvent(new CustomEvent(OPEN_SIGNUP_DIALOG))
@@ -49,7 +50,8 @@ export const SignUpRedirectionButton = () => (
     <Form.List.Item
       title={<Translate zh_hant="沒有帳號？" zh_hans="沒有帐号？" />}
       rightText={<Translate id="register" />}
-      {...appendTarget(PATHS.AUTH_SIGNUP)}
+      rightTextColor="green"
+      {...appendTarget(PATHS.SIGNUP)}
     />
   </Form.List>
 )

@@ -6,7 +6,7 @@ import { useMutation } from '~/components/GQL'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import styles from '~/common/styles/utils/content.article.css'
-import { analytics, initAudioPlayers } from '~/common/utils'
+import { analytics, captureClicks, initAudioPlayers } from '~/common/utils'
 
 import { ContentArticle } from './__generated__/ContentArticle'
 import { ReadArticle } from './__generated__/ReadArticle'
@@ -87,6 +87,7 @@ const Content = ({ article }: { article: ContentArticle }) => {
       <div
         className="u-content"
         dangerouslySetInnerHTML={{ __html: article.content }}
+        onClick={captureClicks}
       />
 
       <Waypoint

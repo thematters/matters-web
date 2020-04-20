@@ -9,6 +9,7 @@ import {
   Layout,
   List,
   Notice,
+  Spacer,
   Spinner,
   useResponsive,
 } from '~/components'
@@ -115,6 +116,8 @@ const Notifications = () => {
       />
 
       <Head title={{ id: 'notification' }} />
+
+      <Spacer />
 
       <BaseNotifications />
     </Layout.Main>

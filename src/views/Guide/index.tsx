@@ -4,7 +4,7 @@ import { Head, LanguageContext, Layout } from '~/components'
 
 import contentStyles from '~/common/styles/utils/content.article.css'
 import detailsStyles from '~/common/styles/utils/details.css'
-import { translate } from '~/common/utils'
+import { captureClicks, translate } from '~/common/utils'
 
 import content from './content'
 
@@ -16,7 +16,6 @@ const Guide = () => {
       <Layout.Header
         left={<Layout.Header.BackButton />}
         right={<Layout.Header.Title id="guide" />}
-        marginBottom={0}
       />
 
       <Head title={{ id: 'guide' }} />
@@ -30,6 +29,7 @@ const Guide = () => {
             }),
           }}
           className="u-content"
+          onClick={captureClicks}
         />
       </Layout.Spacing>
 

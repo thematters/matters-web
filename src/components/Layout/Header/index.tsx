@@ -11,7 +11,6 @@ interface HeaderProps {
   right?: React.ReactNode
 
   mode?: 'solid-fixed' | 'transparent-absolute'
-  marginBottom?: 0 | 'base' | 'loose'
   className?: string
 }
 
@@ -20,16 +19,9 @@ const Header: React.FC<HeaderProps> & {
   CancelButton: typeof CancelButton
   MeButton: typeof MeButton
   Title: typeof Title
-} = ({
-  left,
-  right,
-  mode = 'solid-fixed',
-  marginBottom = 'loose',
-  className,
-}) => {
+} = ({ left, right, mode = 'solid-fixed', className }) => {
   const headerClass = classNames({
     [mode]: true,
-    [`margin-${marginBottom}`]: marginBottom,
     [`${className}`]: !!className,
   })
 

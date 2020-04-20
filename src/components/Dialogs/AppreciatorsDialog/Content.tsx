@@ -41,7 +41,7 @@ const ARTICLE_APPRECIATORS = gql`
         edges {
           cursor
           node {
-            ... on Transaction {
+            ... on Appreciation {
               amount
               sender {
                 ...UserDigestRichUser

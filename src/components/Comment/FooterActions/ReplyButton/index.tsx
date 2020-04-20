@@ -24,8 +24,9 @@ import { ReplyComemnt } from './__generated__/ReplyComemnt'
 
 export interface ReplyButtonProps {
   comment: ReplyComemnt
-  openLikeCoinDialog: () => void
   commentCallback?: () => void
+  onClick?: () => void
+  disabled?: boolean
   inCard: boolean
 }
 
@@ -53,7 +54,10 @@ const fragments = {
   `,
 }
 
-const CommentButton: React.FC<ButtonProps> = ({ inCard, ...props }) => (
+const CommentButton: React.FC<ButtonProps & { inCard: boolean }> = ({
+  inCard,
+  ...props
+}) => (
   <Button
     spacing={['xtight', 'xtight']}
     bgActiveColor={inCard ? 'grey-lighter-active' : 'grey-lighter'}
@@ -66,32 +70,20 @@ const CommentButton: React.FC<ButtonProps> = ({ inCard, ...props }) => (
 
 const ReplyButton = ({
   comment,
-  openLikeCoinDialog,
   commentCallback,
+  onClick,
+  disabled,
   inCard,
 }: ReplyButtonProps) => {
   const viewer = useContext(ViewerContext)
   const isSmallUp = useResponsive('sm-up')
 
-  const { id, parentComment, author, state, article } = comment
-  const isActive = state === 'active'
-  const isCollapsed = state === 'collapsed'
-  const isOnboarding = viewer.isOnboarding && article.author.id !== viewer.id
-  const isBlocked = article.author.isBlocking
-  const isDisabled = !isActive && !isCollapsed && !isOnboarding && !isBlocked
+  const { id, parentComment, author, article } = comment
 
   const submitCallback = () => {
     if (commentCallback) {
       commentCallback()
     }
-  }
-
-  if (isDisabled) {
-    return <CommentButton disabled inCard={inCard} />
-  }
-
-  if (viewer.shouldSetupLikerID) {
-    return <CommentButton onClick={openLikeCoinDialog} inCard={inCard} />
   }
 
   if (!viewer.isAuthed) {
@@ -102,9 +94,15 @@ const ReplyButton = ({
             window.dispatchEvent(new CustomEvent(OPEN_LOGIN_DIALOG))
           },
         }
-      : appendTarget({ ...PATHS.AUTH_LOGIN, fallbackCurrent: true })
+      : appendTarget(PATHS.LOGIN, true)
 
-    return <CommentButton {...clickProps} inCard={inCard} />
+    return <CommentButton {...clickProps} inCard={inCard} disabled={disabled} />
+  }
+
+  if (onClick) {
+    return (
+      <CommentButton onClick={onClick} inCard={inCard} disabled={disabled} />
+    )
   }
 
   return (
@@ -117,7 +115,11 @@ const ReplyButton = ({
       context={<ReplyTo user={author} />}
     >
       {({ open: openCommentFormDialog }) => (
-        <CommentButton onClick={openCommentFormDialog} inCard={inCard} />
+        <CommentButton
+          onClick={openCommentFormDialog}
+          inCard={inCard}
+          disabled={disabled}
+        />
       )}
     </CommentFormDialog>
   )
