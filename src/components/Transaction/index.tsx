@@ -82,7 +82,7 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
         </section>
 
         <section className="right">
-          <div className="appreciate-count">
+          <div className="num">
             <TextIcon
               spacing="xtight"
               size="sm"
