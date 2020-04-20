@@ -107,7 +107,7 @@ const AppreciationButton = ({
     return (
       <AppreciateButton
         onClick={appreciate}
-        count={appreciatedCount}
+        count={appreciatedCount > 0 ? appreciatedCount : undefined}
         total={total}
       />
     )
@@ -125,7 +125,7 @@ const AppreciationButton = ({
             data: { readCivicLikerDialog: true },
           })
         }}
-        count={appreciatedCount}
+        count={appreciatedCount > 0 ? appreciatedCount : undefined}
         total={total}
       />
     )
@@ -159,7 +159,11 @@ const AppreciationButton = ({
       zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
     >
       <span>
-        <AppreciateButton disabled count={appreciatedCount} total={total} />
+        <AppreciateButton
+          disabled
+          count={appreciatedCount > 0 ? appreciatedCount : undefined}
+          total={total}
+        />
       </span>
     </Tooltip>
   )
