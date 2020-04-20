@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.4.0] - 2020-04-20
+
+### Revamp
+
+- Settings #974
+
+### Changed
+
+- Refactor: Routes #983
+- Capture Clicks #942
+- Revise email subscription feature #985
+- Change fingerprint generator #976
+- Rename Transaction to Appreciation #973
+- Add comparing id condition for `<UserDigest.Rich>` memo. #982
+- Fix inconsistent logic of comment buttons; #966
+- Fix vertical align of digest footer buttons #972
+- Update @lost rounder #975
+
 ## [3.3.0] - 2020-04-09
 
 ### Added
