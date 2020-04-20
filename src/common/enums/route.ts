@@ -28,6 +28,7 @@ type ROUTE_KEY =
   | 'ME_APPRECIATIONS_SENT'
   | 'ME_APPRECIATIONS_RECEIVED'
   | 'ME_NOTIFICATIONS'
+  | 'ME_WALLET'
   | 'ME_SETTINGS'
   | 'ME_SETTINGS_CHANGE_USERNAME'
   | 'ME_SETTINGS_CHANGE_EMAIL'
@@ -83,6 +84,7 @@ export const ROUTES: Array<{
   { key: 'ME_APPRECIATIONS_SENT', pathname: '/me/appreciations/sent' },
   { key: 'ME_APPRECIATIONS_RECEIVED', pathname: '/me/appreciations/received' },
   { key: 'ME_NOTIFICATIONS', pathname: '/me/notifications' },
+  { key: 'ME_WALLET', pathname: '/me/wallet' },
 
   // Settings
   { key: 'ME_SETTINGS', pathname: '/me/settings' },
