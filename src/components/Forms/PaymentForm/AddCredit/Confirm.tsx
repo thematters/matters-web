@@ -14,6 +14,7 @@ import {
 } from '~/common/enums'
 import {
   calcStripeFee,
+  numFormat,
   parseFormSubmitErrors,
   toAmountString,
   validateAmount,
@@ -34,7 +35,6 @@ interface FormProps {
     transaction: AddCredit_addCredit_transaction
     client_secret: string
   }) => void
-  closeDialog: () => void
   defaultAmount?: number
 }
 
@@ -56,14 +56,10 @@ export const ADD_CREDIT = gql`
   }
 `
 
-const Confirm: React.FC<FormProps> = ({
-  submitCallback,
-  closeDialog,
-  defaultAmount,
-}) => {
+const Confirm: React.FC<FormProps> = ({ submitCallback, defaultAmount }) => {
   const [addCredit] = useMutation<AddCredit>(ADD_CREDIT)
   const { lang } = useContext(LanguageContext)
-  const formId = 'add-credit-form'
+  const formId = 'add-credit-confirm-form'
   const currency = PAYMENT_CURRENCY.HKD
 
   const {
@@ -133,12 +129,10 @@ const Confirm: React.FC<FormProps> = ({
   )
 
   const fee = calcStripeFee(values.amount)
-  const total = fee + values.amount
+  const total = numFormat(fee + values.amount)
 
   return (
     <>
-      <Dialog.Header title="topUp" close={closeDialog} />
-
       <Dialog.Content hasGrow>
         <section>
           {InnerForm}
@@ -149,7 +143,7 @@ const Confirm: React.FC<FormProps> = ({
                 <Translate id="topUpAmount" />
               </div>
               <div className="col">
-                {currency} {values.amount}
+                {currency} {toAmountString(values.amount)}
               </div>
             </section>
 

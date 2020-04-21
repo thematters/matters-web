@@ -1,7 +1,7 @@
 import AddCredit from './AddCredit'
-import Charge from './Charge'
+import Checkout from './Checkout'
 
 export const PaymentForm = {
   AddCredit,
-  Charge,
+  Checkout,
 }

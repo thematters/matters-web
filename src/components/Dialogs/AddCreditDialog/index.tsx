@@ -1,6 +1,8 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Dialog, PaymentForm } from '~/components'
+
+import { AddCredit_addCredit_transaction } from '~/components/Forms/PaymentForm/AddCredit/__generated__/AddCredit'
 
 type Step = 'confirm' | 'charge' | 'complete'
 
@@ -11,21 +13,23 @@ interface AddCreditDialogProps {
 const BaseAddCreditDialog = ({ children }: AddCreditDialogProps) => {
   const [showDialog, setShowDialog] = useState(true)
   const [step, setStep] = useState<Step>('confirm')
-  const open = () => setShowDialog(true)
-  const close = () => {
-    setShowDialog(false)
+  const open = () => {
+    setStep('confirm')
     resetData()
+    setShowDialog(true)
   }
+  const close = () => setShowDialog(false)
 
-  const [data, setData] = useState<{ transaction: any; client_secret: string }>(
-    {
-      transaction: null,
-      client_secret: '',
-    }
-  )
+  const [data, setData] = useState<{
+    transaction: AddCredit_addCredit_transaction | undefined
+    client_secret: string
+  }>({
+    transaction: undefined,
+    client_secret: '',
+  })
   const resetData = () =>
     setData({
-      transaction: null,
+      transaction: undefined,
       client_secret: '',
     })
 
@@ -39,16 +43,21 @@ const BaseAddCreditDialog = ({ children }: AddCreditDialogProps) => {
       {children({ open })}
 
       <Dialog size="sm" isOpen={showDialog} onDismiss={close} fixedHeight>
+        <Dialog.Header title="topUp" close={close} />
+
         {step === 'confirm' && (
-          <PaymentForm.AddCredit.Confirm
-            closeDialog={close}
-            submitCallback={onConfirm}
+          <PaymentForm.AddCredit.Confirm submitCallback={onConfirm} />
+        )}
+        {step === 'charge' && data.transaction && (
+          <PaymentForm.Checkout
+            client_secret={data.client_secret}
+            amount={data.transaction.amount}
+            currency={data.transaction.currency}
           />
         )}
-        {step === 'charge' && <PaymentForm.Charge closeDialog={close} />}
-        {step === 'complete' && (
+        {/* {step === 'complete' && (
           <PaymentForm.AddCredit.Complete closeDialog={close} />
-        )}
+        )} */}
       </Dialog>
     </>
   )
