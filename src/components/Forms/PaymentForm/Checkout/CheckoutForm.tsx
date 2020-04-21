@@ -7,8 +7,8 @@ import CardSection from './CardSection'
 
 export interface CheckoutFormProps {
   client_secret: string
-  amount: number
-  currency: string
+  amount?: number
+  currency?: string
 }
 
 const CheckoutForm: React.FC<CheckoutFormProps> = ({
@@ -21,13 +21,9 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
   const formId = 'checkout-form'
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    // We don't want to let default form submission happen here,
-    // which would refresh the page.
     event.preventDefault()
 
     if (!stripe || !elements) {
-      // Stripe.js has not yet loaded.
-      // Make sure to disable form submission until Stripe.js has loaded.
       return
     }
 

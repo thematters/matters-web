@@ -1,6 +1,7 @@
 import AmountInput from './AmountInput'
 import CheckBox from './CheckBox'
 import DropdownInput from './DropdownInput'
+import Field from './Field'
 import Input from './Input'
 import List from './List'
 import styles from './styles.css'
@@ -18,6 +19,7 @@ export const Form: React.FC<FormProps> & {
   DropdownInput: typeof DropdownInput
   AmountInput: typeof AmountInput
   List: typeof List
+  Field: typeof Field
 } = ({ children, ...formProps }) => (
   <form autoComplete="off" {...formProps}>
     {children}
@@ -32,3 +34,4 @@ Form.CheckBox = CheckBox
 Form.DropdownInput = DropdownInput
 Form.AmountInput = AmountInput
 Form.List = List
+Form.Field = Field
