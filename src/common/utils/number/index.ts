@@ -5,16 +5,9 @@ export const numPrefix = (num: number | string) => {
   return parsedNum > 0 ? `+${num}` : num
 }
 
-// https://stackoverflow.com/a/14428340
-export const numFormat = (
-  num: number,
-  decimal: number = 2,
-  sections: number = 3
-) => {
-  const re =
-    '\\d(?=(\\d{' + sections + '})+' + (decimal > 0 ? '\\.' : '$') + ')'
-  return num.toFixed(Math.max(0, ~~decimal)).replace(new RegExp(re, 'g'), '$&,')
-}
-
 export const numAbbr = (num: number, decPlaces: number = 2) =>
   abbr(num, decPlaces)
+
+export const numFormat = (num: number, decPlaces: number = 2) => {
+  return parseFloat(num.toFixed(decPlaces))
+}

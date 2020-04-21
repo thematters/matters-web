@@ -10,7 +10,7 @@ import {
   UserDigest,
 } from '~/components'
 
-import { numFormat, toPath } from '~/common/utils'
+import { toAmountString, toPath } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -93,7 +93,7 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
               &nbsp;
               {currency}
               &nbsp;
-              {numFormat(Math.abs(amount))}
+              {toAmountString(Math.abs(amount))}
             </TextIcon>
           </div>
 

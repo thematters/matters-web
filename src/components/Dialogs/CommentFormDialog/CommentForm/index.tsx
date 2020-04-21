@@ -178,7 +178,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
         }
       />
 
-      <Dialog.Content hasGrow>
+      <Dialog.Content spacing={['base', 'base']} hasGrow>
         {context && <section className="context">{context}</section>}
 
         <form

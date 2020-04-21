@@ -1,3 +1,4 @@
+import AmountInput from './AmountInput'
 import CheckBox from './CheckBox'
 import DropdownInput from './DropdownInput'
 import Input from './Input'
@@ -15,6 +16,7 @@ export const Form: React.FC<FormProps> & {
   Textarea: typeof Textarea
   CheckBox: typeof CheckBox
   DropdownInput: typeof DropdownInput
+  AmountInput: typeof AmountInput
   List: typeof List
 } = ({ children, ...formProps }) => (
   <form autoComplete="off" {...formProps}>
@@ -28,4 +30,5 @@ Form.Input = Input
 Form.Textarea = Textarea
 Form.CheckBox = CheckBox
 Form.DropdownInput = DropdownInput
+Form.AmountInput = AmountInput
 Form.List = List

@@ -227,9 +227,7 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
         rightButton={SubmitButton}
       />
 
-      <Dialog.Content spacing={[0, 0]} hasGrow>
-        {InnerForm}
-      </Dialog.Content>
+      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
     </>
   )
 }

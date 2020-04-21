@@ -109,7 +109,7 @@ export const validateAmount = (value: number, lang: Language) => {
     return translate({ id: 'required', lang })
   }
 
-  if (value <= MINIMAL_CHARGE_AMOUNT.HKD) {
+  if (value < MINIMAL_CHARGE_AMOUNT.HKD) {
     return translate({
       zh_hant: `最少充值金額爲 HKD ${MINIMAL_CHARGE_AMOUNT.HKD}`,
       zh_hans: `最少充值金额为 HKD ${MINIMAL_CHARGE_AMOUNT.HKD}`,

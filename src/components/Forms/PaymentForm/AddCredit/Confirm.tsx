@@ -7,16 +7,33 @@ import { Dialog, Form, LanguageContext, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import {
-  analytics,
+  MAXIMUM_CHARGE_AMOUNT,
+  MINIMAL_CHARGE_AMOUNT,
+  PAYMENT_CURRENCY,
+  PLATFORM_FEE,
+} from '~/common/enums'
+import {
   calcStripeFee,
   parseFormSubmitErrors,
+  toAmountString,
   validateAmount,
 } from '~/common/utils'
 
-import { AddCredit } from './__generated__/AddCredit'
+import styles from './styles.css'
+
+import {
+  AddCredit,
+  AddCredit_addCredit_transaction,
+} from './__generated__/AddCredit'
 
 interface FormProps {
-  submitCallback: () => void
+  submitCallback: ({
+    transaction,
+    client_secret,
+  }: {
+    transaction: AddCredit_addCredit_transaction
+    client_secret: string
+  }) => void
   closeDialog: () => void
   defaultAmount?: number
 }
@@ -29,9 +46,12 @@ export const ADD_CREDIT = gql`
   mutation AddCredit($input: AddCreditInput!) {
     addCredit(input: $input) {
       transaction {
-
+        id
+        amount
+        fee
+        currency
       }
-client_secret
+      client_secret
     }
   }
 `
@@ -43,21 +63,21 @@ const Confirm: React.FC<FormProps> = ({
 }) => {
   const [addCredit] = useMutation<AddCredit>(ADD_CREDIT)
   const { lang } = useContext(LanguageContext)
-
   const formId = 'add-credit-form'
+  const currency = PAYMENT_CURRENCY.HKD
 
   const {
     values,
     errors,
     touched,
     handleBlur,
-    handleChange,
+    setFieldValue,
     handleSubmit,
     isValid,
     isSubmitting,
   } = useFormik<FormValues>({
     initialValues: {
-      amount: defaultAmount || 0,
+      amount: defaultAmount || MINIMAL_CHARGE_AMOUNT[currency],
     },
     validate: ({ amount }) =>
       _pickBy({
@@ -65,11 +85,16 @@ const Confirm: React.FC<FormProps> = ({
       }),
     onSubmit: async ({ amount }, { setFieldError, setSubmitting }) => {
       try {
-        await addCredit({ variables: { input: { amount } } })
+        const { data } = await addCredit({ variables: { input: { amount } } })
 
-        if (submitCallback) {
-          submitCallback()
+        if (!data?.addCredit) {
+          throw new Error()
         }
+
+        submitCallback({
+          transaction: data?.addCredit.transaction,
+          client_secret: data?.addCredit.client_secret,
+        })
       } catch (error) {
         const [messages, codes] = parseFormSubmitErrors(error, lang)
         codes.forEach((code) => {
@@ -83,43 +108,86 @@ const Confirm: React.FC<FormProps> = ({
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
-      <Form.Input
+      <Form.AmountInput
+        fixedPlaceholder={currency}
         label={<Translate id="paymentAmount" />}
-        type="number"
         name="amount"
+        min={0}
+        max={MAXIMUM_CHARGE_AMOUNT[currency]}
+        step="1"
         required
         value={values.amount}
         error={touched.amount && errors.amount}
         onBlur={handleBlur}
-        onChange={handleChange}
+        onChange={(e) => {
+          const amount = e.target.valueAsNumber || 0
+          const sanitizedAmount = Math.min(
+            Math.floor(amount),
+            MAXIMUM_CHARGE_AMOUNT[currency]
+          )
+          setFieldValue('amount', sanitizedAmount)
+        }}
         autoFocus
       />
     </Form>
   )
 
-  const SubmitButton = (
-    <Dialog.Header.RightButton
-      type="submit"
-      form={formId}
-      disabled={!isValid || isSubmitting}
-      text={<Translate id="nextStep" />}
-      loading={isSubmitting}
-    />
-  )
+  const fee = calcStripeFee(values.amount)
+  const total = fee + values.amount
 
   return (
     <>
-      {closeDialog && (
-        <Dialog.Header
-          title="topUp"
-          close={closeDialog}
-          rightButton={SubmitButton}
-        />
-      )}
+      <Dialog.Header title="topUp" close={closeDialog} />
 
-      <Dialog.Content spacing={[0, 0]} hasGrow>
-        {InnerForm}
+      <Dialog.Content hasGrow>
+        <section>
+          {InnerForm}
+
+          <section className="confirm-info">
+            <section className="row">
+              <div className="col">
+                <Translate id="topUpAmount" />
+              </div>
+              <div className="col">
+                {currency} {values.amount}
+              </div>
+            </section>
+
+            <section className="row">
+              <div className="col">
+                <Translate id="paymentPlatformFee" /> ({PLATFORM_FEE[currency]})
+              </div>
+              <div className="col">
+                + {currency} {toAmountString(fee)}
+              </div>
+            </section>
+
+            <section className="row total">
+              <div className="col">
+                <Translate id="paymentAmount" />
+              </div>
+              <div className="col">
+                {currency} {toAmountString(total)}
+              </div>
+            </section>
+          </section>
+
+          <style jsx>{styles}</style>
+        </section>
       </Dialog.Content>
+
+      <Dialog.Footer>
+        <Dialog.Footer.Button
+          type="submit"
+          form={formId}
+          disabled={!isValid || isSubmitting}
+          bgColor="green"
+          textColor="white"
+          loading={isSubmitting}
+        >
+          <Translate id="nextStep" />
+        </Dialog.Footer.Button>
+      </Dialog.Footer>
     </>
   )
 }

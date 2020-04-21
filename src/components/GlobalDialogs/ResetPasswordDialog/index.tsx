@@ -11,35 +11,20 @@ import { CLOSE_ACTIVE_DIALOG, OPEN_RESET_PASSWORD_DIALOG } from '~/common/enums'
 
 const ResetPasswordDialog = () => {
   const viewer = useContext(ViewerContext)
-  const [step, setStep] = useState('request')
-  const [data, setData] = useState<{ [key: string]: any }>({
-    request: {
-      prev: 'login',
-      next: 'reset',
-      email: viewer.info.email,
-    },
-    reset: {
-      prev: 'request',
-      next: 'complete',
-    },
-    complete: {},
-  })
 
+  // data & controls
+  const [step, setStep] = useState('request')
+  const [data, setData] = useState<{ email: string; codeId: string }>({
+    email: viewer.info.email,
+    codeId: '',
+  })
   const requestCodeCallback = (params: any) => {
     const { email, codeId } = params
-    setData((prev) => {
-      return {
-        ...prev,
-        request: {
-          ...prev.request,
-          email,
-          codeId,
-        },
-      }
-    })
+    setData({ ...data, email, codeId })
     setStep('reset')
   }
 
+  // dailog & global listeners
   const [showDialog, setShowDialog] = useState(false)
   const open = () => {
     setStep('request')
@@ -59,7 +44,7 @@ const ResetPasswordDialog = () => {
     >
       {step === 'request' && (
         <ChangePasswordForm.Request
-          defaultEmail={data.request.email}
+          defaultEmail={data.email}
           type="forget"
           purpose="dialog"
           submitCallback={requestCodeCallback}
@@ -69,7 +54,7 @@ const ResetPasswordDialog = () => {
 
       {step === 'reset' && (
         <ChangePasswordForm.Confirm
-          codeId={data.request.codeId}
+          codeId={data.codeId}
           submitCallback={() => setStep('complete')}
           type="forget"
           purpose="dialog"
