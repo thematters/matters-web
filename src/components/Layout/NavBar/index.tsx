@@ -42,7 +42,7 @@ const NavBar = () => {
           <li>
             <WriteButton
               allowed={!viewer.shouldSetupLikerID}
-              isInactive={viewer.isInactive}
+              forbidden={viewer.isInactive}
             />
           </li>
         )}

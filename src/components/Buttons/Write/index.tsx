@@ -25,7 +25,7 @@ import { CreateDraft } from './__generated__/CreateDraft'
 interface Props {
   allowed: boolean
   isLarge?: boolean
-  isInactive?: boolean
+  forbidden?: boolean
 }
 
 export const CREATE_DRAFT = gql`
@@ -68,7 +68,7 @@ const BaseWriteButton = ({
   )
 }
 
-export const WriteButton = ({ allowed, isLarge, isInactive }: Props) => {
+export const WriteButton = ({ allowed, isLarge, forbidden }: Props) => {
   const { lang } = useContext(LanguageContext)
   const [putDraft, { loading }] = useMutation<CreateDraft>(CREATE_DRAFT, {
     variables: {
@@ -89,7 +89,7 @@ export const WriteButton = ({ allowed, isLarge, isInactive }: Props) => {
       isLarge={isLarge}
       onClick={async () => {
         try {
-          if (isInactive) {
+          if (forbidden) {
             window.dispatchEvent(
               new CustomEvent(ADD_TOAST, {
                 detail: {
