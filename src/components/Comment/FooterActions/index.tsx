@@ -96,7 +96,13 @@ const BaseFooterActions = ({
   return (
     <footer aira-label={`${comment.upvotes} 點讚、${comment.downvotes} 點踩`}>
       <section className="left">
-        {hasReply && <ReplyButton {...buttonProps} {...replyButtonProps} {...replyCustomButtonProps} />}
+        {hasReply && (
+          <ReplyButton
+            {...buttonProps}
+            {...replyButtonProps}
+            {...replyCustomButtonProps}
+          />
+        )}
 
         <UpvoteButton {...buttonProps} />
 

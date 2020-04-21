@@ -193,9 +193,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
                       {...props}
                       {...controls}
                       openEditCommentDialog={
-                        isBanned
-                          ? forbid
-                          : openEditCommentDialog
+                        isBanned ? forbid : openEditCommentDialog
                       }
                       openDeleteCommentDialog={openDeleteCommentDialog}
                       openBlockUserDialog={openBlockUserDialog}
