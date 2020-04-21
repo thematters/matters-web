@@ -40,7 +40,10 @@ const NavBar = () => {
 
         {!isInDraftDetail && (
           <li>
-            <WriteButton allowed={!viewer.shouldSetupLikerID} />
+            <WriteButton
+              allowed={!viewer.shouldSetupLikerID}
+              isInactive={viewer.isInactive}
+            />
           </li>
         )}
 

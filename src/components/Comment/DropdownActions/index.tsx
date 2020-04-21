@@ -9,11 +9,12 @@ import {
   DropdownDialog,
   Icon,
   Menu,
+  Translate,
   ViewerContext,
 } from '~/components'
 import { BlockUser } from '~/components/BlockUser'
 
-import { TEXT } from '~/common/enums'
+import { ADD_TOAST, TEXT } from '~/common/enums'
 
 import CollapseComment from './CollapseComment'
 import DeleteComment from './DeleteComment'
@@ -141,6 +142,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
   const { comment } = props
   const viewer = useContext(ViewerContext)
 
+  const { isArchived, isBanned } = viewer
   const isArticleAuthor = viewer.id === comment.article.author.id
   const isCommentAuthor = viewer.id === comment.author.id
   const isActive = comment.state === 'active'
@@ -158,7 +160,18 @@ const DropdownActions = (props: DropdownActionsProps) => {
     hasUncollapse: !!(isAbleCollapse && isCollapsed),
   }
 
-  if (_isEmpty(_pickBy(controls)) || viewer.isInactive) {
+  const forbid = () => {
+    window.dispatchEvent(
+      new CustomEvent(ADD_TOAST, {
+        detail: {
+          color: 'red',
+          content: <Translate id="FORBIDDEN" />,
+        },
+      })
+    )
+  }
+
+  if (_isEmpty(_pickBy(controls)) || isArchived) {
     return null
   }
 
@@ -179,7 +192,11 @@ const DropdownActions = (props: DropdownActionsProps) => {
                     <BaseDropdownActions
                       {...props}
                       {...controls}
-                      openEditCommentDialog={openEditCommentDialog}
+                      openEditCommentDialog={
+                        isBanned
+                          ? forbid
+                          : openEditCommentDialog
+                      }
                       openDeleteCommentDialog={openDeleteCommentDialog}
                       openBlockUserDialog={openBlockUserDialog}
                       openCollapseCommentDialog={openCollapseCommentDialog}
