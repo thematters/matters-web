@@ -11,18 +11,3 @@
   font-size: var(--font-size-sm);
   line-height: 1.5rem;
 }
-
-.amount {
-  @mixin flex-start-center;
-
-  font-size: 2.5rem;
-  font-weight: var(--font-weight-bold);
-  line-height: 1;
-
-  & .currency {
-    padding-top: var(--spacing-xx-tight);
-    padding-right: var(--spacing-xx-tight);
-
-    font-size: var(--font-size-sm);
-  }
-}

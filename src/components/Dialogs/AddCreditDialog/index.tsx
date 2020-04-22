@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import { Dialog, PaymentForm } from '~/components'
 
 import { AddCredit_addCredit_transaction } from '~/components/Forms/PaymentForm/AddCredit/__generated__/AddCredit'
 
-type Step = 'confirm' | 'charge' | 'complete'
+type Step = 'confirm' | 'checkout' | 'polling' | 'complete'
 
 interface AddCreditDialogProps {
   children: ({ open }: { open: () => void }) => React.ReactNode
@@ -35,7 +35,7 @@ const BaseAddCreditDialog = ({ children }: AddCreditDialogProps) => {
 
   const onConfirm = ({ transaction, client_secret }: any) => {
     setData({ ...data, transaction, client_secret })
-    setStep('charge')
+    setStep('checkout')
   }
 
   return (
@@ -48,16 +48,27 @@ const BaseAddCreditDialog = ({ children }: AddCreditDialogProps) => {
         {step === 'confirm' && (
           <PaymentForm.AddCredit.Confirm submitCallback={onConfirm} />
         )}
-        {step === 'charge' && data.transaction && (
+        {step === 'checkout' && data.transaction && (
           <PaymentForm.Checkout
             client_secret={data.client_secret}
             amount={data.transaction.amount}
             currency={data.transaction.currency}
+            submitCallback={() => setStep('polling')}
           />
         )}
-        {/* {step === 'complete' && (
-          <PaymentForm.AddCredit.Complete closeDialog={close} />
-        )} */}
+        {step === 'polling' && data.transaction && (
+          <PaymentForm.Transacting
+            txId={data.transaction.id}
+            prevStep={() => setStep('checkout')}
+            nextStep={() => setStep('complete')}
+          />
+        )}
+        {step === 'complete' && data.transaction && (
+          <PaymentForm.AddCredit.Complete
+            amount={data.transaction.amount}
+            currency={data.transaction.currency}
+          />
+        )}
       </Dialog>
     </>
   )

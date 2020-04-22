@@ -5,6 +5,10 @@ import { Form, LanguageContext, Translate } from '~/components'
 
 import styles from './styles.css'
 
+interface CardSectionProps {
+  error?: string | React.ReactNode
+}
+
 const FONT_FAMILY = {
   zh_hant:
     '-apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", Roboto, Arial, "PingFang TC", "Microsoft YaHei", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", sans-serif',
@@ -12,7 +16,7 @@ const FONT_FAMILY = {
     '-apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", Roboto, Arial, "PingFang TC", "Microsoft YaHei", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", sans-serif',
 }
 
-function CardSection() {
+const CardSection: React.FC<CardSectionProps> = ({ error }) => {
   const { lang } = useContext(LanguageContext)
   const options = {
     style: {
@@ -35,14 +39,6 @@ function CardSection() {
     },
   }
 
-  const hint = (
-    <Translate
-      zh_hant="付款信息由 Stripe 處理，不會被 Matters 儲存。"
-      zh_hans="付款信息由 Stripe 处理，不会被 Matters 储存。"
-    />
-  )
-  const error = ''
-
   return (
     <>
       <Form.Field>
@@ -57,7 +53,12 @@ function CardSection() {
 
         <Form.Field.Footer
           fieldMsgId="field-msg-checkout"
-          hint={hint}
+          hint={
+            <Translate
+              zh_hant="付款信息由 Stripe 處理，不會被 Matters 儲存。"
+              zh_hans="付款信息由 Stripe 处理，不会被 Matters 储存。"
+            />
+          }
           error={error}
         />
       </Form.Field>

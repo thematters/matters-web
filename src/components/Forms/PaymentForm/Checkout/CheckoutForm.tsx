@@ -1,5 +1,5 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
-import React from 'react'
+import React, { useState } from 'react'
 
 import { Dialog, Translate } from '~/components'
 
@@ -9,53 +9,61 @@ export interface CheckoutFormProps {
   client_secret: string
   amount?: number
   currency?: string
+  submitCallback: () => void
 }
 
 const CheckoutForm: React.FC<CheckoutFormProps> = ({
   client_secret,
   amount,
   currency,
+  submitCallback,
 }) => {
   const stripe = useStripe()
   const elements = useElements()
+  const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState<string | React.ReactNode>('')
   const formId = 'checkout-form'
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
+    setSubmitting(true)
+
     if (!stripe || !elements) {
       return
     }
 
+    const cardElement = elements.getElement(CardElement)
+
+    if (!cardElement) {
+      setError(<Translate id="ACTION_FAILED" />)
+    }
+
     const result = await stripe.confirmCardPayment(client_secret, {
-      payment_method: {
-        card: elements.getElement(CardElement),
-        billing_details: {
-          name: 'Jenny Rosen',
-        },
-      },
+      payment_method: { card: cardElement },
     })
 
     if (result.error) {
-      // Show error to your customer (e.g., insufficient funds)
-      console.log(result.error.message)
+      console.log(result.error)
+      setError(result.error.code)
+
+      import('@sentry/browser').then((Sentry) => {
+        Sentry.captureException(result.error)
+      })
     } else {
-      // The payment has been processed!
       if (result.paymentIntent.status === 'succeeded') {
-        // Show a success message to your customer
-        // There's a risk of the customer closing the window before callback
-        // execution. Set up a webhook or plugin to listen for the
-        // payment_intent.succeeded event that handles any business critical
-        // post-payment actions.
+        submitCallback()
       }
     }
+
+    setSubmitting(false)
   }
 
   return (
     <>
       <Dialog.Content hasGrow>
         <form id={formId} onSubmit={handleSubmit}>
-          <CardSection />
+          <CardSection error={error} />
         </form>
       </Dialog.Content>
 
@@ -66,7 +74,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
           disabled={!stripe}
           bgColor="green"
           textColor="white"
-          // loading={isSubmitting}
+          loading={submitting}
         >
           <Translate id="pay" /> {currency} {amount}
         </Dialog.Footer.Button>

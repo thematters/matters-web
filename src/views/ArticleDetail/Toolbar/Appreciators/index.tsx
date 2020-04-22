@@ -1,5 +1,4 @@
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
 
 import { AppreciatorsDialog, Translate } from '~/components'
 import { Avatar } from '~/components/Avatar'

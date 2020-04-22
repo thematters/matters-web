@@ -41,6 +41,7 @@ export * from './Interaction'
 export * from './Analytics'
 export * from './Hook'
 
+export * from './Payment'
 export * from './Buttons'
 export * from './Forms'
 export * from './Dialogs'

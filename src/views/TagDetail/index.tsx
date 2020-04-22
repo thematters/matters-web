@@ -1,6 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
 import { useRouter } from 'next/router'
 import { useContext, useState } from 'react'
 

@@ -1,9 +1,9 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { Spinner, Translate } from '~/components'
+import { CurrencyAmount, Spinner, Translate } from '~/components'
 
-import { toAmountString } from '~/common/utils'
+import { PAYMENT_CURRENCY } from '~/common/enums'
 
 import styles from './styles.css'
 
@@ -37,10 +37,7 @@ const Balance = () => {
         <Translate zh_hant="可用餘額" zh_hans="可用余额" />
       </p>
 
-      <p className="amount">
-        <span className="currency">HKD</span>
-        <span>{toAmountString(balanceHKD)}</span>
-      </p>
+      <CurrencyAmount currency={PAYMENT_CURRENCY.HKD} amount={balanceHKD} />
 
       <style jsx>{styles}</style>
     </section>
