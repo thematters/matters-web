@@ -9,7 +9,6 @@ import { ViewerTxState } from './__generated__/ViewerTxState'
 
 interface Props {
   txId: string
-  prevStep: () => void
   nextStep: () => void
   windowRef?: Window
 }
@@ -35,12 +34,7 @@ const VIEWER_TX_STATE = gql`
   }
 `
 
-const Transacting: React.FC<Props> = ({
-  txId,
-  prevStep,
-  nextStep,
-  windowRef,
-}) => {
+const Processing: React.FC<Props> = ({ txId, nextStep, windowRef }) => {
   const [polling, setPolling] = useState(true)
   const { data, error } = useQuery<ViewerTxState>(VIEWER_TX_STATE, {
     variables: { id: txId },
@@ -68,33 +62,24 @@ const Transacting: React.FC<Props> = ({
   }
 
   return (
-    <>
-      <Dialog.Message
-        description={
-          error ? (
-            <>
-              <div>
-                <Icon.EmptyWarning color="grey-light" size="xl" />
-              </div>
-            </>
-          ) : (
-            <Spinner />
-          )
-        }
-      />
+    <Dialog.Message
+      description={
+        error ? (
+          <>
+            <div>
+              <Icon.EmptyWarning color="grey-light" size="xl" />
+            </div>
 
-      <Dialog.Footer>
-        <Dialog.Footer.Button
-          disabled={!error}
-          onClick={() => {
-            prevStep()
-          }}
-        >
-          <Translate id="retry" />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
-    </>
+            <p>
+              <Translate id="NETWORK_ERROR" />
+            </p>
+          </>
+        ) : (
+          <Spinner />
+        )
+      }
+    />
   )
 }
 
-export default Transacting
+export default Processing

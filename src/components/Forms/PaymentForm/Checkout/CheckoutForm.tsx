@@ -1,7 +1,12 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
-import React, { useState } from 'react'
+import _get from 'lodash/get'
+import React, { useContext, useState } from 'react'
 
 import { Dialog, Translate } from '~/components'
+import { LanguageContext } from '~/components/Context'
+
+import { STRIPE_ERROR_MESSAGES } from '~/common/enums'
+import { toAmountString } from '~/common/utils'
 
 import CardSection from './CardSection'
 
@@ -20,6 +25,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
 }) => {
   const stripe = useStripe()
   const elements = useElements()
+  const { lang } = useContext(LanguageContext)
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState<string | React.ReactNode>('')
   const formId = 'checkout-form'
@@ -35,17 +41,18 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
 
     const cardElement = elements.getElement(CardElement)
 
-    if (!cardElement) {
-      setError(<Translate id="ACTION_FAILED" />)
-    }
-
     const result = await stripe.confirmCardPayment(client_secret, {
+      // @ts-ignore
       payment_method: { card: cardElement },
     })
 
     if (result.error) {
-      console.log(result.error)
-      setError(result.error.code)
+      const msg =
+        lang === 'en'
+          ? undefined
+          : _get(STRIPE_ERROR_MESSAGES[lang], result.error.code)
+
+      setError(msg || result.error.message)
 
       import('@sentry/browser').then((Sentry) => {
         Sentry.captureException(result.error)
@@ -76,7 +83,8 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
           textColor="white"
           loading={submitting}
         >
-          <Translate id="pay" /> {currency} {amount}
+          <Translate id="pay" /> {currency}{' '}
+          {amount ? toAmountString(amount) : ''}
         </Dialog.Footer.Button>
       </Dialog.Footer>
     </>

@@ -4,7 +4,7 @@ import { Dialog, PaymentForm } from '~/components'
 
 import { AddCredit_addCredit_transaction } from '~/components/Forms/PaymentForm/AddCredit/__generated__/AddCredit'
 
-type Step = 'confirm' | 'checkout' | 'polling' | 'complete'
+type Step = 'confirm' | 'checkout' | 'processing' | 'complete'
 
 interface AddCreditDialogProps {
   children: ({ open }: { open: () => void }) => React.ReactNode
@@ -43,7 +43,10 @@ const BaseAddCreditDialog = ({ children }: AddCreditDialogProps) => {
       {children({ open })}
 
       <Dialog size="sm" isOpen={showDialog} onDismiss={close} fixedHeight>
-        <Dialog.Header title="topUp" close={close} />
+        <Dialog.Header
+          title={step === 'complete' ? 'successTopUp' : 'topUp'}
+          close={close}
+        />
 
         {step === 'confirm' && (
           <PaymentForm.AddCredit.Confirm submitCallback={onConfirm} />
@@ -53,13 +56,12 @@ const BaseAddCreditDialog = ({ children }: AddCreditDialogProps) => {
             client_secret={data.client_secret}
             amount={data.transaction.amount}
             currency={data.transaction.currency}
-            submitCallback={() => setStep('polling')}
+            submitCallback={() => setStep('processing')}
           />
         )}
-        {step === 'polling' && data.transaction && (
-          <PaymentForm.Transacting
+        {step === 'processing' && data.transaction && (
+          <PaymentForm.Processing
             txId={data.transaction.id}
-            prevStep={() => setStep('checkout')}
             nextStep={() => setStep('complete')}
           />
         )}

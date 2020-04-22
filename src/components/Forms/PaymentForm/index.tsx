@@ -1,9 +1,9 @@
 import AddCredit from './AddCredit'
 import Checkout from './Checkout'
-import Transacting from './Transacting'
+import Processing from './Processing'
 
 export const PaymentForm = {
   AddCredit,
   Checkout,
-  Transacting,
+  Processing,
 }

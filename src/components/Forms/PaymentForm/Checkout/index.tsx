@@ -1,6 +1,9 @@
 import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
 import getConfig from 'next/config'
+import { useContext } from 'react'
+
+import { LanguageContext } from '~/components/Context'
 
 import CheckoutForm, { CheckoutFormProps } from './CheckoutForm'
 
@@ -15,8 +18,13 @@ type CheckoutProps = CheckoutFormProps
 const stripePromise = loadStripe(STRIPE_PUBLIC_KEY)
 
 const Checkout: React.FC<CheckoutProps> = (props) => {
+  const { lang } = useContext(LanguageContext)
+
   return (
-    <Elements stripe={stripePromise}>
+    <Elements
+      stripe={stripePromise}
+      options={{ locale: lang === 'en' ? 'en' : 'zh' }}
+    >
       <CheckoutForm {...props} />
     </Elements>
   )
