@@ -1,4 +1,4 @@
-import { numFormat } from './number'
+import { numRound } from './number'
 
 // https://stackoverflow.com/a/14428340/3786947
 export const toAmountString = (
@@ -25,5 +25,5 @@ const FEE_PERCENT = 0.034
 export const calcStripeFee = (amount: number) => {
   const charge = (amount + FEE_FIXED) / (1 - FEE_PERCENT)
   const fee = charge - amount
-  return numFormat(fee)
+  return numRound(fee)
 }

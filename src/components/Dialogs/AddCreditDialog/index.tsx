@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import { Dialog, PaymentForm } from '~/components'
 
-import { numFormat } from '~/common/utils'
+import { numRound } from '~/common/utils'
 
 import { AddCredit_addCredit_transaction } from '~/components/Forms/PaymentForm/AddCredit/__generated__/AddCredit'
 
@@ -69,7 +69,7 @@ const BaseAddCreditDialog = ({ children }: AddCreditDialogProps) => {
         {isCheckout && data.transaction && (
           <PaymentForm.Checkout
             client_secret={data.client_secret}
-            amount={numFormat(data.transaction.amount + data.transaction.fee)}
+            amount={numRound(data.transaction.amount + data.transaction.fee)}
             currency={data.transaction.currency}
             submitCallback={() => setStep('processing')}
           />

@@ -14,7 +14,7 @@ import {
 } from '~/common/enums'
 import {
   calcStripeFee,
-  numFormat,
+  numRound,
   parseFormSubmitErrors,
   toAmountString,
   validateAmount,
@@ -129,7 +129,7 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, defaultAmount }) => {
   )
 
   const fee = calcStripeFee(values.amount)
-  const total = numFormat(fee + values.amount)
+  const total = numRound(fee + values.amount)
 
   return (
     <>

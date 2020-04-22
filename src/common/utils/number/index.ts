@@ -1,4 +1,8 @@
+import NP from 'number-precision'
+
 import abbr from './abbr'
+
+NP.enableBoundaryChecking(false)
 
 export const numPrefix = (num: number | string) => {
   const parsedNum = parseFloat(num + '')
@@ -8,6 +12,6 @@ export const numPrefix = (num: number | string) => {
 export const numAbbr = (num: number, decPlaces: number = 2) =>
   abbr(num, decPlaces)
 
-export const numFormat = (num: number, decPlaces: number = 2) => {
-  return parseFloat(num.toFixed(decPlaces))
+export const numRound = (num: number, decPlaces: number = 2) => {
+  return NP.round(num, decPlaces)
 }
