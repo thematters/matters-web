@@ -7,7 +7,9 @@ import List from './List'
 import styles from './styles.css'
 import Textarea from './Textarea'
 
-type FormProps = React.DetailedHTMLProps<
+type FormProps = {
+  noBackground?: boolean
+} & React.DetailedHTMLProps<
   React.FormHTMLAttributes<HTMLFormElement>,
   HTMLFormElement
 >
@@ -20,8 +22,12 @@ export const Form: React.FC<FormProps> & {
   AmountInput: typeof AmountInput
   List: typeof List
   Field: typeof Field
-} = ({ children, ...formProps }) => (
-  <form autoComplete="off" {...formProps}>
+} = ({ noBackground, children, ...formProps }) => (
+  <form
+    className={noBackground ? 'no-background' : ''}
+    autoComplete="off"
+    {...formProps}
+  >
     {children}
 
     <style jsx>{styles}</style>

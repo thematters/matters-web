@@ -103,7 +103,7 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, defaultAmount }) => {
   })
 
   const InnerForm = (
-    <Form id={formId} onSubmit={handleSubmit}>
+    <Form id={formId} onSubmit={handleSubmit} noBackground>
       <Form.AmountInput
         fixedPlaceholder={currency}
         label={<Translate id="paymentAmount" />}

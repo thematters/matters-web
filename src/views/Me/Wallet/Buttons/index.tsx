@@ -15,9 +15,9 @@ const Buttons = () => {
             )}
           </AddCreditDialog>
 
-          <Dialog.Footer.Button bgColor="grey-lighter" textColor="black">
+          {/* <Dialog.Footer.Button bgColor="grey-lighter" textColor="black">
             <Translate id="paymentPassword" />
-          </Dialog.Footer.Button>
+          </Dialog.Footer.Button> */}
         </section>
       </div>
 
