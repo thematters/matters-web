@@ -24,7 +24,7 @@ const Tab: React.FC<TabProps> = ({
   sup,
   children,
 }) => {
-  if (href && as) {
+  if (href) {
     return (
       <li role="tab" aria-disabled={disable} aria-selected={selected}>
         <Link href={href} as={as}>
