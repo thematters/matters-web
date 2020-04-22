@@ -38,7 +38,7 @@
     "@matters/apollo-upload-client": "^11.1.0",
     "@matters/matters-editor": "^0.1.13",
     "@reach/alert": "^0.10.0",
-    "@reach/dialog": "^0.10.0",
+    "@reach/dialog": "^0.10.1",
     "@reach/visually-hidden": "^0.10.0",
     "@sentry/browser": "^5.15.4",
     "@tippy.js/react": "^3.1.1",
