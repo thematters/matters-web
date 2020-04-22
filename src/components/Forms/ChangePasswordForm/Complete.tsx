@@ -22,7 +22,12 @@ const Complete: React.FC<Props> = ({ type, purpose, closeDialog }) => {
       <Layout.Header left={<Layout.Header.Title id={titleId} />} />
 
       {closeDialog && (
-        <Dialog.Header title={titleId} close={closeDialog} headerHidden />
+        <Dialog.Header
+          title={titleId}
+          close={closeDialog}
+          closeTextId="close"
+          headerHidden
+        />
       )}
 
       <Dialog.Message

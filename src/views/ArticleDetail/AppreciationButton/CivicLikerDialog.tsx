@@ -27,7 +27,12 @@ const CivicLikerDialog = ({ onClose, children }: CivicLikerDialogProps) => {
       {children({ open })}
 
       <Dialog isOpen={showDialog} onDismiss={close} slideIn>
-        <Dialog.Header title="joinCivicLiker" close={close} headerHidden />
+        <Dialog.Header
+          title="joinCivicLiker"
+          close={close}
+          closeTextId="close"
+          headerHidden
+        />
 
         <Dialog.Message
           headline="joinCivicLiker"

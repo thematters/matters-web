@@ -167,6 +167,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
       <Dialog.Header
         title={title}
         close={closeDialog}
+        closeTextId="close"
         rightButton={
           <Dialog.Header.RightButton
             type="submit"

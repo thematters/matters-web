@@ -1,4 +1,5 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
+import { StripeCardElementChangeEvent } from '@stripe/stripe-js'
 import _get from 'lodash/get'
 import React, { useContext, useState } from 'react'
 
@@ -66,11 +67,24 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
     setSubmitting(false)
   }
 
+  const handleChange = (event: StripeCardElementChangeEvent) => {
+    if (event.error) {
+      const msg =
+        lang === 'en'
+          ? undefined
+          : _get(STRIPE_ERROR_MESSAGES[lang], event.error.code)
+
+      setError(msg || event.error.message)
+    } else {
+      setError('')
+    }
+  }
+
   return (
     <>
       <Dialog.Content hasGrow>
         <form id={formId} onSubmit={handleSubmit}>
-          <CardSection error={error} />
+          <CardSection error={error} onChange={handleChange} />
         </form>
       </Dialog.Content>
 

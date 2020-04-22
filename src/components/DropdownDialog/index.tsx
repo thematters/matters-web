@@ -130,7 +130,12 @@ const BaseDropdownDialog = ({
       {children({ open })}
 
       <Dialog isOpen={showDialog} onDismiss={close} {...dialog} slideIn>
-        <Dialog.Header title={dialog.title} close={close} headerHidden />
+        <Dialog.Header
+          title={dialog.title}
+          close={close}
+          closeTextId="close"
+          headerHidden
+        />
 
         <Content>{dialog.content}</Content>
 

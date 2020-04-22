@@ -4,17 +4,25 @@ import { Translate } from '~/components'
 
 import { TextId } from '~/common/enums'
 
-import { CloseButton, RightButton } from './Button'
+import { BackButton, CloseButton, RightButton } from './Button'
 import styles from './styles.css'
 
 export interface HeaderProps {
   title: TextId | React.ReactElement
   close: () => void
+  closeTextId?: TextId
   headerHidden?: boolean
+  leftButton?: React.ReactNode
   rightButton?: React.ReactNode | string
 }
 
-const BaseHeader = ({ title, close, rightButton }: HeaderProps) => (
+const BaseHeader = ({
+  title,
+  close,
+  closeTextId,
+  leftButton,
+  rightButton,
+}: HeaderProps) => (
   <header>
     <h1>
       <span id="dialog-title">
@@ -23,7 +31,7 @@ const BaseHeader = ({ title, close, rightButton }: HeaderProps) => (
     </h1>
 
     <section className="left">
-      <CloseButton close={close} />
+      {leftButton || <CloseButton close={close} textId={closeTextId} />}
     </section>
 
     {rightButton && <section className="right">{rightButton}</section>}
@@ -32,10 +40,10 @@ const BaseHeader = ({ title, close, rightButton }: HeaderProps) => (
   </header>
 )
 
-const Header: React.FC<HeaderProps> & { RightButton: typeof RightButton } = ({
-  headerHidden,
-  ...restProps
-}) => {
+const Header: React.FC<HeaderProps> & {
+  RightButton: typeof RightButton
+  BackButton: typeof BackButton
+} = ({ headerHidden, ...restProps }) => {
   if (!headerHidden) {
     return <BaseHeader {...restProps} />
   }
@@ -54,5 +62,6 @@ const Header: React.FC<HeaderProps> & { RightButton: typeof RightButton } = ({
 }
 
 Header.RightButton = RightButton
+Header.BackButton = BackButton
 
 export default Header

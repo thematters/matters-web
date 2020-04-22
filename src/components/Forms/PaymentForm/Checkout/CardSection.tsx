@@ -1,4 +1,5 @@
 import { CardElement } from '@stripe/react-stripe-js'
+import { StripeCardElementChangeEvent } from '@stripe/stripe-js'
 import React, { useContext } from 'react'
 
 import { Form, LanguageContext, Translate } from '~/components'
@@ -7,6 +8,7 @@ import styles from './styles.css'
 
 interface CardSectionProps {
   error?: string | React.ReactNode
+  onChange: (event: StripeCardElementChangeEvent) => any
 }
 
 const FONT_FAMILY = {
@@ -16,7 +18,7 @@ const FONT_FAMILY = {
     '-apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", Roboto, Arial, "PingFang TC", "Microsoft YaHei", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", sans-serif',
 }
 
-const CardSection: React.FC<CardSectionProps> = ({ error }) => {
+const CardSection: React.FC<CardSectionProps> = ({ error, onChange }) => {
   const { lang } = useContext(LanguageContext)
   const options = {
     style: {
@@ -29,7 +31,7 @@ const CardSection: React.FC<CardSectionProps> = ({ error }) => {
         fontSmoothing: 'antialiased',
         fontSize: '16px',
         '::placeholder': {
-          color: '#b3b3b3',
+          color: '#999c9d',
         },
       },
       invalid: {
@@ -48,7 +50,7 @@ const CardSection: React.FC<CardSectionProps> = ({ error }) => {
         />
 
         <Form.Field.Content>
-          <CardElement options={options} />
+          <CardElement options={options} onChange={onChange} />
         </Form.Field.Content>
 
         <Form.Field.Footer

@@ -2,6 +2,8 @@ import { useState } from 'react'
 
 import { Dialog, PaymentForm } from '~/components'
 
+import { numFormat } from '~/common/utils'
+
 import { AddCredit_addCredit_transaction } from '~/components/Forms/PaymentForm/AddCredit/__generated__/AddCredit'
 
 type Step = 'confirm' | 'checkout' | 'processing' | 'complete'
@@ -38,34 +40,47 @@ const BaseAddCreditDialog = ({ children }: AddCreditDialogProps) => {
     setStep('checkout')
   }
 
+  const isConfirm = step === 'confirm'
+  const isCheckout = step === 'checkout'
+  const isProcessing = step === 'processing'
+  const isComplete = step === 'complete'
+
   return (
     <>
       {children({ open })}
 
       <Dialog size="sm" isOpen={showDialog} onDismiss={close} fixedHeight>
         <Dialog.Header
-          title={step === 'complete' ? 'successTopUp' : 'topUp'}
+          title={isComplete ? 'successTopUp' : 'topUp'}
           close={close}
+          closeTextId="close"
+          leftButton={
+            isCheckout ? (
+              <Dialog.Header.BackButton onClick={() => setStep('confirm')} />
+            ) : isProcessing ? (
+              <span />
+            ) : undefined
+          }
         />
 
-        {step === 'confirm' && (
+        {isConfirm && (
           <PaymentForm.AddCredit.Confirm submitCallback={onConfirm} />
         )}
-        {step === 'checkout' && data.transaction && (
+        {isCheckout && data.transaction && (
           <PaymentForm.Checkout
             client_secret={data.client_secret}
-            amount={data.transaction.amount}
+            amount={numFormat(data.transaction.amount + data.transaction.fee)}
             currency={data.transaction.currency}
             submitCallback={() => setStep('processing')}
           />
         )}
-        {step === 'processing' && data.transaction && (
+        {isProcessing && data.transaction && (
           <PaymentForm.Processing
             txId={data.transaction.id}
             nextStep={() => setStep('complete')}
           />
         )}
-        {step === 'complete' && data.transaction && (
+        {isComplete && data.transaction && (
           <PaymentForm.AddCredit.Complete
             amount={data.transaction.amount}
             currency={data.transaction.currency}
