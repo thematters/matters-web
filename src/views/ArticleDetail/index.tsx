@@ -172,6 +172,7 @@ const ArticleDetail = () => {
             size="sm"
             spacing={[0, 0]}
             bgColor="none"
+            hasCivicLikerRing
           />
         }
       />

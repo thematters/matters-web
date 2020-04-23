@@ -209,7 +209,7 @@ export const UserProfile = () => {
 
         <header>
           <section className="avatar">
-            <Avatar size="xxl" user={user} hasCivicLikerRing={isCivicLiker} />
+            <Avatar size="xxl" user={user} hasCivicLikerRing />
           </section>
 
           {!isMe ? (

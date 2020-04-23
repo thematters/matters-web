@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 
 import { LinkWrapper, Translate } from '~/components'
-import { Avatar, AvatarSize } from '~/components/Avatar'
+import { Avatar, AvatarProps, AvatarSize } from '~/components/Avatar'
 
 import { toPath } from '~/common/utils'
 
@@ -22,7 +22,7 @@ import { UserDigestMiniUser } from './__generated__/UserDigestMiniUser'
  *   <UserDigest.Mini user={user} />
  */
 
-export interface UserDigestMiniProps {
+export type UserDigestMiniProps = {
   user: UserDigestMiniUser
 
   avatarSize?: Extract<AvatarSize, 'xs' | 'sm' | 'md' | 'lg'>
@@ -35,7 +35,7 @@ export interface UserDigestMiniProps {
   hasDisplayName?: boolean
   hasUserName?: boolean
   disabled?: boolean
-}
+} & AvatarProps
 
 const fragments = {
   user: gql`
@@ -60,6 +60,8 @@ const Mini = ({
   textWeight,
   nameColor = 'black',
   direction = 'row',
+
+  hasCivicLikerRing,
 
   hasAvatar,
   hasDisplayName,
@@ -105,7 +107,9 @@ const Mini = ({
   return (
     <LinkWrapper {...path} disabled={disabled}>
       <section className={containerClass}>
-        {hasAvatar && <Avatar size={avatarSize} user={user} />}
+        {hasAvatar && (
+          <Avatar size={avatarSize} user={user} hasCivicLikerRing />
+        )}
 
         <span className={nameClass}>
           {hasDisplayName && (
