@@ -7,6 +7,7 @@ import {
   AppreciatorsDialog,
   Button,
   DropdownDialog,
+  FingerprintDialog,
   Icon,
   IconColor,
   IconSize,
@@ -19,7 +20,7 @@ import { TEXT } from '~/common/enums'
 import AppreciatorsButton from './AppreciatorsButton'
 import ArchiveArticle from './ArchiveArticle'
 import ExtendButton from './ExtendButton'
-import Fingerprint from './Fingerprint'
+import FingerprintButton from './FingerprintButton'
 import RemoveTagButton from './RemoveTagButton'
 import SetTagSelectedButton from './SetTagSelectedButton'
 import SetTagUnselectedButton from './SetTagUnselectedButton'
@@ -70,7 +71,7 @@ const fragments = {
       ...ExtendButtonArticle
     }
     ${AppreciatorsDialog.fragments.article}
-    ${Fingerprint.Dialog.fragments.article}
+    ${FingerprintDialog.fragments.article}
     ${StickyButton.fragments.article}
     ${ArchiveArticle.fragments.article}
     ${ExtendButton.fragments.article}
@@ -103,7 +104,7 @@ const BaseDropdownActions = ({
         <AppreciatorsButton openDialog={openAppreciatorsDialog} />
       )}
       {hasFingerprint && (
-        <Fingerprint.Button openDialog={openFingerprintDialog} />
+        <FingerprintButton openDialog={openFingerprintDialog} />
       )}
       {hasExtend && <ExtendButton article={article} />}
 
@@ -183,7 +184,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
   }
 
   return (
-    <Fingerprint.Dialog article={article}>
+    <FingerprintDialog article={article}>
       {({ open: openFingerprintDialog }) => (
         <AppreciatorsDialog article={article}>
           {({ open: openAppreciatorsDialog }) => (
@@ -201,7 +202,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
           )}
         </AppreciatorsDialog>
       )}
-    </Fingerprint.Dialog>
+    </FingerprintDialog>
   )
 }
 

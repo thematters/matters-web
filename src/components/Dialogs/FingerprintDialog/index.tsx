@@ -21,7 +21,10 @@ const fragments = {
   `,
 }
 
-const FingerprintDialog = ({ article, children }: FingerprintDialogProps) => {
+const BaseFingerprintDialog = ({
+  article,
+  children,
+}: FingerprintDialogProps) => {
   const [showDialog, setShowDialog] = useState(true)
   const open = () => setShowDialog(true)
   const close = () => setShowDialog(false)
@@ -41,11 +44,11 @@ const FingerprintDialog = ({ article, children }: FingerprintDialogProps) => {
   )
 }
 
-const LazyFingerprintDialog = (props: FingerprintDialogProps) => (
+export const FingerprintDialog = (props: FingerprintDialogProps) => (
   <Dialog.Lazy>
     {({ open, mounted }) =>
       mounted ? (
-        <FingerprintDialog {...props} />
+        <BaseFingerprintDialog {...props} />
       ) : (
         <>{props.children({ open })}</>
       )
@@ -53,6 +56,4 @@ const LazyFingerprintDialog = (props: FingerprintDialogProps) => (
   </Dialog.Lazy>
 )
 
-LazyFingerprintDialog.fragments = fragments
-
-export default LazyFingerprintDialog
+FingerprintDialog.fragments = fragments
