@@ -3,7 +3,7 @@ import { useContext } from 'react'
 
 import { LikeCoinDialog, Translate, ViewerContext } from '~/components'
 
-import { ADD_TOAST } from '~/common/enums'
+import { ADD_TOAST, TextId } from '~/common/enums'
 
 import CreatedAt, { CreatedAtControls } from '../CreatedAt'
 import DownvoteButton from './DownvoteButton'
@@ -59,41 +59,28 @@ const BaseFooterActions = ({
   const isActive = state === 'active'
   const isCollapsed = state === 'collapsed'
   const isDisabled = !isActive && !isCollapsed
+  const addToast = (id: TextId) => {
+    window.dispatchEvent(
+      new CustomEvent(ADD_TOAST, {
+        detail: {
+          color: 'red',
+          content: <Translate id={id} />,
+        },
+      })
+    )
+  }
+  const forbid = () => addToast('FORBIDDEN')
 
   let onClick
 
   if (viewer.shouldSetupLikerID) {
     onClick = openLikeCoinDialog
   } else if (viewer.isOnboarding && article.author.id !== viewer.id) {
-    onClick = () =>
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: <Translate id="failureCommentOnboarding" />,
-          },
-        })
-      )
-  } else if (viewer.isInactive) {
-    onClick = () =>
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: <Translate id="FORBIDDEN" />,
-          },
-        })
-      )
+    onClick = () => addToast('failureCommentOnboarding')
+  } else if (viewer.isArchived) {
+    onClick = forbid
   } else if (article.author.isBlocking) {
-    onClick = () =>
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: <Translate id="failureCommentBlocked" />,
-          },
-        })
-      )
+    onClick = () => addToast('failureCommentBlocked')
   }
 
   const buttonProps = {
@@ -103,10 +90,19 @@ const BaseFooterActions = ({
     inCard,
   }
 
+  // customize case for banned user
+  const replyCustomButtonProps = viewer.isBanned ? { onClick: forbid } : {}
+
   return (
     <footer aira-label={`${comment.upvotes} 點讚、${comment.downvotes} 點踩`}>
       <section className="left">
-        {hasReply && <ReplyButton {...buttonProps} {...replyButtonProps} />}
+        {hasReply && (
+          <ReplyButton
+            {...buttonProps}
+            {...replyButtonProps}
+            {...replyCustomButtonProps}
+          />
+        )}
 
         <UpvoteButton {...buttonProps} />
 
