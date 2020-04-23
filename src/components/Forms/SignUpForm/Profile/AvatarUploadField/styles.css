@@ -1,7 +1,6 @@
 .container {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  @mixin flex-center-start;
+
   margin: var(--spacing-loose) 0;
   padding: 0 var(--spacing-base);
 }
