@@ -163,8 +163,7 @@ export const UserProfile = () => {
   const isCivicLiker = user.liker.civicLiker
   const isUserArchived = user.status.state === 'archived'
   const isUserBanned = user.status.state === 'banned'
-  const isUserFrozen = user.status.state === 'frozen'
-  const isUserInactive = isUserArchived || isUserBanned || isUserFrozen
+  const isUserInactive = isUserArchived || isUserBanned
 
   /**
    * Inactive User
@@ -187,7 +186,6 @@ export const UserProfile = () => {
             <section className="display-name">
               <h1 className="name">
                 {isUserArchived && <Translate id="accountArchived" />}
-                {isUserFrozen && <Translate id="accountFrozen" />}
                 {isUserBanned && <Translate id="accountBanned" />}
               </h1>
             </section>

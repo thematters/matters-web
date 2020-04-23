@@ -125,6 +125,7 @@ const SideNav = () => {
             <WriteButton
               allowed={!viewer.shouldSetupLikerID}
               isLarge={isMediumUp}
+              forbidden={viewer.isInactive}
             />
           </li>
         )}

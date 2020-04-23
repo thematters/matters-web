@@ -172,7 +172,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
       isActive &&
       !viewer.isInactive
     ),
-    hasArchive: isArticleAuthor && isActive && !viewer.isInactive,
+    hasArchive: isArticleAuthor && isActive && !viewer.isArchived,
     hasSetTagSelected: !!(inTagDetailLatest && isMattyUser),
     hasSetTagUnSelected: !!(inTagDetailSelected && isMattyUser),
     hasRemoveTag: !!(isInTagDetail && isMattyUser),
