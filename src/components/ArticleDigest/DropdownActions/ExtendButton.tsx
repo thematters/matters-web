@@ -1,9 +1,10 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
-import { Icon, LanguageContext, Menu, TextIcon, Translate } from '~/components'
+import { Icon, LanguageContext, Menu, TextIcon, Translate, ViewerContext } from '~/components'
 import { useMutation } from '~/components/GQL'
 
+import { ADD_TOAST } from '~/common/enums'
 import { routerPush, toPath, translate } from '~/common/utils'
 
 import { ExtendArticle } from './__generated__/ExtendArticle'
@@ -28,6 +29,7 @@ const fragments = {
 }
 
 const ExtendButton = ({ article }: { article: ExtendButtonArticle }) => {
+  const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
   const [extendArticle] = useMutation<ExtendArticle>(EXTEND_ARTICLE, {
     variables: {
@@ -39,6 +41,18 @@ const ExtendButton = ({ article }: { article: ExtendButtonArticle }) => {
   return (
     <Menu.Item
       onClick={async () => {
+        if (viewer.isInactive) {
+          window.dispatchEvent(
+            new CustomEvent(ADD_TOAST, {
+              detail: {
+                color: 'red',
+                content: <Translate id="FORBIDDEN" />,
+              },
+            })
+          )
+          return
+        }
+
         const { data } = await extendArticle()
         const { slug, id } = data?.putDraft || {}
 

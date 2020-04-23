@@ -41,7 +41,6 @@ export type Viewer = ViewerUser & {
   isActive: boolean
   isArchived: boolean
   isBanned: boolean
-  isFrozen: boolean
   isOnboarding: boolean
   isInactive: boolean
   isAdmin: boolean
@@ -54,11 +53,10 @@ export const processViewer = (viewer: ViewerUser): Viewer => {
   const state = viewer?.status?.state
   const role = viewer?.status?.role
   const isActive = state === 'active'
-  const isFrozen = state === 'frozen'
   const isBanned = state === 'banned'
   const isArchived = state === 'archived'
   const isOnboarding = state === 'onboarding'
-  const isInactive = isAuthed && (isFrozen || isBanned || isArchived)
+  const isInactive = isAuthed && (isBanned || isArchived)
   const isAdmin = role === 'admin'
   const isCivicLiker = viewer.liker.civicLiker
   const shouldSetupLikerID = isAuthed && !viewer.liker.likerId
@@ -81,7 +79,6 @@ export const processViewer = (viewer: ViewerUser): Viewer => {
     isActive,
     isBanned,
     isArchived,
-    isFrozen,
     isOnboarding,
     isInactive,
     isAdmin,
