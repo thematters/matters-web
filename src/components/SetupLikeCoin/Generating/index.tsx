@@ -44,7 +44,7 @@ const Generating: React.FC<Props> = ({ prevStep, nextStep }) => {
 
   return (
     <>
-      <Dialog.Content>
+      <Dialog.Content spacing={['base', 'base']}>
         <Dialog.Message
           description={
             error ? (

@@ -1,5 +1,4 @@
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
 import { createContext, useContext, useState } from 'react'
 
 import { Translate, ViewerContext } from '~/components'

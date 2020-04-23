@@ -29,9 +29,10 @@ const LikeCoinTerm: React.FC<LikeCoinTermProps> = ({
           />
         }
         close={closeDialog}
+        closeTextId="close"
       />
 
-      <Dialog.Content>
+      <Dialog.Content spacing={['base', 'base']}>
         <section
           className="container u-content"
           dangerouslySetInnerHTML={{

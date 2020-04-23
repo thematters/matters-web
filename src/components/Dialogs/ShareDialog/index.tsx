@@ -47,9 +47,14 @@ const BaseShareDialog = ({
       {children({ open: () => onShare(open) })}
 
       <Dialog size="sm" isOpen={showDialog} onDismiss={close} slideIn>
-        <Dialog.Header title="share" close={close} headerHidden />
+        <Dialog.Header
+          title="share"
+          close={close}
+          closeTextId="close"
+          headerHidden
+        />
 
-        <Dialog.Content spacing={[0, 0]}>
+        <Dialog.Content>
           <section className="socials-container">
             <section className="left">
               <LINE title={shareTitle} link={shareLink} />

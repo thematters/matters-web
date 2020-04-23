@@ -156,9 +156,10 @@ const AppreciatorsDialogContent = ({
           />
         }
         close={closeDialog}
+        closeTextId="close"
       />
 
-      <Dialog.Content spacing={[0, 0]}>
+      <Dialog.Content>
         <div className="dialog-appreciators-list">
           <InfiniteList
             data={edges}

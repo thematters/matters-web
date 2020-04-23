@@ -28,7 +28,11 @@ const BaseMigrationDialog = ({
       {children({ open })}
 
       <Dialog size="sm" isOpen={showDialog} onDismiss={close} fixedHeight>
-        <Dialog.Header title="migration" close={close} />
+        <Dialog.Header
+          title="migration"
+          close={close}
+          closeTextId={step === 'success' ? 'close' : 'cancel'}
+        />
         {step === 'upload' && <Upload nextStep={nextStep} />}
         {step === 'success' && <Success />}
       </Dialog>
