@@ -114,6 +114,7 @@ const BaseArticleDigestFeed = ({
               user={author}
               hasAvatar
               hasDisplayName
+              hasCivicLikerRing
               {...userDigestProps}
             />
             {inFollowFeed && (

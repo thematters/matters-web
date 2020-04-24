@@ -1,7 +1,5 @@
 .container {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  @mixin flex-center-start;
 
   color: var(--color-grey-dark);
   font-size: var(--font-size-sm);

@@ -22,6 +22,7 @@ header {
   & .left,
   & .right {
     display: inline-flex;
+    min-height: 1rem;
 
     & :global(> *) {
       line-height: 1.5rem;
@@ -33,6 +34,11 @@ header {
 
     & h1 {
       padding: 0;
+    }
+
+    & .left,
+    & .right {
+      min-height: 2rem;
     }
   }
 }

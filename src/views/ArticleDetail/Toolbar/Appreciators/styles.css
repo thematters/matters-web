@@ -19,9 +19,7 @@
 }
 
 .avatar-list {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  @mixin flex-center-start;
 
   & :global(> *) {
     position: relative;

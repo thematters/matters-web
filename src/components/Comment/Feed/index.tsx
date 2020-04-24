@@ -103,6 +103,7 @@ export const Feed = ({
           hasAvatar
           hasDisplayName
           hasUserName={hasUserName}
+          hasCivicLikerRing
         />
 
         <section className="right">
