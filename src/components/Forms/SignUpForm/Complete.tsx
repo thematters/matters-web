@@ -26,7 +26,7 @@ const Complete = ({
         />
       )}
 
-      <Dialog.Message align="left" spacing="sm">
+      <Dialog.Message align="left" spacing="base">
         <h3>
           <Translate
             zh_hant="歡迎加入 Matters！"

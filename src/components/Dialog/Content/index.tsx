@@ -2,8 +2,8 @@ import classNames from 'classnames'
 
 import styles from './styles.css'
 
-type SpacingX = 0 | 'base'
-type SpacingY = 0 | 'base'
+type SpacingX = 0 | 'base' | 'xloose'
+type SpacingY = 0 | 'base' | 'xloose'
 
 interface DialogContentProps {
   // Note: only apply in "sm-up" if the spacing is large than "base"

@@ -1,5 +1,5 @@
 .content {
-  margin: var(--spacing-x-loose) 0 var(--spacing-loose);
+  padding: var(--spacing-base) 0 var(--spacing-x-tight);
 
   text-align: center;
 
@@ -26,8 +26,4 @@
 
 .align-left {
   text-align: left;
-}
-
-.spacing-sm {
-  margin: var(--spacing-base) 0 var(--spacing-x-tight);
 }

@@ -7,13 +7,13 @@ import styles from './styles.css'
 interface DialogMessageProps {
   align?: 'left'
   error?: boolean
-  spacing?: 'sm'
+  spacing?: 'base' | 'xloose'
 }
 
 const DialogMessage: React.FC<DialogMessageProps> = ({
   align,
   error,
-  spacing,
+  spacing = 'xloose',
 
   children,
 }) => {
@@ -21,11 +21,10 @@ const DialogMessage: React.FC<DialogMessageProps> = ({
     content: true,
     error: !!error,
     [`align-${align}`]: !!align,
-    [`spacing-${spacing}`]: !!spacing,
   })
 
   return (
-    <Dialog.Content spacing={['base', 'base']}>
+    <Dialog.Content spacing={[spacing, spacing]}>
       <section className={contentClass}>{children}</section>
 
       <style jsx>{styles}</style>
