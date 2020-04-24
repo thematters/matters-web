@@ -24,7 +24,7 @@ const Complete = ({
         />
       )}
 
-      <Dialog.Message spacing="xlmdoose">
+      <Dialog.Message spacing="md">
         <h3>
           <Translate id="successChangeUserName" />
         </h3>
