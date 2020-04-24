@@ -97,6 +97,7 @@ const FeedAuthors = () => {
                   user={node}
                   spacing={['tight', 0]}
                   bgColor="none"
+                  hasCivicLikerRing
                   onClick={() =>
                     analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                       type: FEED_TYPE.AUTHORS,
