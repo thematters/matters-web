@@ -117,7 +117,7 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
       </Button>
 
       <Dialog isOpen={showDialog} onDismiss={close} size="sm">
-        <Dialog.Header title="deleteDraft" close={close} />
+        <Dialog.Header title="deleteDraft" close={close} mode="inner" />
 
         <Dialog.Message>
           <p>

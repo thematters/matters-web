@@ -1,6 +1,4 @@
 .content {
-  padding: var(--spacing-base) 0 var(--spacing-x-tight);
-
   text-align: center;
 
   & :global(h3) {
@@ -26,4 +24,8 @@
 
 .align-left {
   text-align: left;
+}
+
+.spacing-md {
+  padding: var(--spacing-base) 0;
 }

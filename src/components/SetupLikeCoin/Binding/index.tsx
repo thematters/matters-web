@@ -54,7 +54,7 @@ const Binding: React.FC<Props> = ({ prevStep, nextStep, windowRef }) => {
 
   return (
     <>
-      <Dialog.Message error={!!error}>
+      <Dialog.Message error={!!error} spacing="md">
         {error ? (
           <h3>
             <Translate

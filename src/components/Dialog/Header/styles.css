@@ -43,10 +43,10 @@ header {
   }
 }
 
-.spacing-holder {
-  padding: var(--spacing-base);
+.inner {
+  box-shadow: none;
 
-  @media (--sm-up) {
-    padding: 0;
+  & :global(> :not(h1)) {
+    visibility: hidden;
   }
 }

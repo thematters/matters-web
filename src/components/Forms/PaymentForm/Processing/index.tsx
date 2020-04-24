@@ -62,7 +62,7 @@ const Processing: React.FC<Props> = ({ txId, nextStep, windowRef }) => {
   }
 
   return (
-    <Dialog.Message error={!!error}>
+    <Dialog.Message error={!!error} spacing="md">
       {error ? (
         <h3>
           <Translate id="NETWORK_ERROR" />

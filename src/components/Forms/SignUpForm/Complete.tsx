@@ -23,10 +23,11 @@ const Complete = ({
           title="successRegister"
           close={closeDialog}
           closeTextId="close"
+          mode="inner"
         />
       )}
 
-      <Dialog.Message align="left" spacing="base">
+      <Dialog.Message align="left" spacing="md">
         <h3>
           <Translate
             zh_hant="歡迎加入 Matters！"

@@ -15,9 +15,11 @@ const Complete = ({
         <Layout.Header left={<Layout.Header.Title id="changeEmail" />} />
       )}
 
-      {closeDialog && <Dialog.Header title="changeEmail" close={closeDialog} />}
+      {closeDialog && (
+        <Dialog.Header title="changeEmail" close={closeDialog} mode="inner" />
+      )}
 
-      <Dialog.Message>
+      <Dialog.Message spacing="md">
         <h3>
           <Translate id="successChangeEmail" />
         </h3>

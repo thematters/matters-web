@@ -64,6 +64,7 @@ const CollapseCommentDialog = ({
         <Dialog.Header
           title={<Translate id="collapseComment" />}
           close={close}
+          mode="inner"
         />
 
         <Dialog.Message>

@@ -44,7 +44,7 @@ const Generating: React.FC<Props> = ({ prevStep, nextStep }) => {
 
   return (
     <>
-      <Dialog.Message error={!!error}>
+      <Dialog.Message error={!!error} spacing="md">
         {error ? (
           <h3>
             <Translate

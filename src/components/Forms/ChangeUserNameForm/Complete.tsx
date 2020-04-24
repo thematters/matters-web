@@ -20,10 +20,11 @@ const Complete = ({
           title="changeUserName"
           close={closeDialog}
           closeTextId="close"
+          mode="inner"
         />
       )}
 
-      <Dialog.Message>
+      <Dialog.Message spacing="xlmdoose">
         <h3>
           <Translate id="successChangeUserName" />
         </h3>
