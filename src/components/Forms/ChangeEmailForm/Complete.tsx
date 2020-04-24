@@ -15,25 +15,15 @@ const Complete = ({
         <Layout.Header left={<Layout.Header.Title id="changeEmail" />} />
       )}
 
-      {closeDialog && (
-        <Dialog.Header
-          title="successChangeEmail"
-          close={closeDialog}
-          headerHidden
-        />
-      )}
+      {closeDialog && <Dialog.Header title="changeEmail" close={closeDialog} />}
 
-      <Dialog.Message
-        description={
-          <>
-            <p>
-              <Translate id="successChangeEmail" />
-            </p>
-            <br />
-            {isInPage && <BackToHomeButton />}
-          </>
-        }
-      />
+      <Dialog.Message>
+        <h3>
+          <Translate id="successChangeEmail" />
+        </h3>
+        <br />
+        {isInPage && <BackToHomeButton />}
+      </Dialog.Message>
 
       {!isInPage && closeDialog && (
         <Dialog.Footer>

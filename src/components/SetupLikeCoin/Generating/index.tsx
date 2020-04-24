@@ -45,35 +45,33 @@ const Generating: React.FC<Props> = ({ prevStep, nextStep }) => {
   return (
     <>
       <Dialog.Content spacing={['base', 'base']}>
-        <Dialog.Message
-          description={
-            error ? (
-              <>
-                <div>
-                  <Icon.EmptyWarning color="grey-light" size="xl" />
-                </div>
+        <Dialog.Message>
+          {error ? (
+            <>
+              <div>
+                <Icon.EmptyWarning color="grey-light" size="xl" />
+              </div>
 
-                <p>
-                  <Translate
-                    zh_hant="哎呀，設置失敗了。"
-                    zh_hans="哎呀，设置失败了。"
-                  />
-                </p>
-              </>
-            ) : (
-              <>
-                <Spinner />
+              <p>
+                <Translate
+                  zh_hant="哎呀，設置失敗了。"
+                  zh_hans="哎呀，设置失败了。"
+                />
+              </p>
+            </>
+          ) : (
+            <>
+              <Spinner />
 
-                <p>
-                  <Translate
-                    zh_hant="正在生成 Liker ID"
-                    zh_hans="正在生成 Liker ID"
-                  />
-                </p>
-              </>
-            )
-          }
-        />
+              <p>
+                <Translate
+                  zh_hant="正在生成 Liker ID"
+                  zh_hans="正在生成 Liker ID"
+                />
+              </p>
+            </>
+          )}
+        </Dialog.Message>
       </Dialog.Content>
 
       <Dialog.Footer>

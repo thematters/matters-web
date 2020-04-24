@@ -62,23 +62,21 @@ const Processing: React.FC<Props> = ({ txId, nextStep, windowRef }) => {
   }
 
   return (
-    <Dialog.Message
-      description={
-        error ? (
-          <>
-            <div>
-              <Icon.EmptyWarning color="grey-light" size="xl" />
-            </div>
+    <Dialog.Message>
+      {error ? (
+        <>
+          <h3>
+            <Icon.EmptyWarning color="grey-light" size="xl" />
+          </h3>
 
-            <p>
-              <Translate id="NETWORK_ERROR" />
-            </p>
-          </>
-        ) : (
-          <Spinner />
-        )
-      }
-    />
+          <p>
+            <Translate id="NETWORK_ERROR" />
+          </p>
+        </>
+      ) : (
+        <Spinner />
+      )}
+    </Dialog.Message>
   )
 }
 

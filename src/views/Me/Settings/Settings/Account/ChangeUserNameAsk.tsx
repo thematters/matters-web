@@ -17,18 +17,17 @@ const Ask = ({ children }: AskProps) => {
     <>
       {children({ open })}
 
-      <Dialog isOpen={showDialog} onDismiss={close} size="sm" slideIn>
-        <Dialog.Header title="changeUserName" close={close} headerHidden />
+      <Dialog isOpen={showDialog} onDismiss={close} size="sm">
+        <Dialog.Header title="changeUserName" close={close} />
 
-        <Dialog.Message
-          headline="changeUserName"
-          description={
+        <Dialog.Message>
+          <p>
             <Translate
               zh_hant="您的 Matters ID 僅能永久修改一次，確定要繼續嗎？"
               zh_hans="您的 Matters ID 仅能永久修改一次，确定要继续吗？"
             />
-          }
-        />
+          </p>
+        </Dialog.Message>
 
         <Dialog.Footer>
           <Dialog.Footer.Button href={PATHS.ME_SETTINGS_CHANGE_USERNAME}>

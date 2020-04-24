@@ -117,19 +117,16 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
       </Button>
 
       <Dialog isOpen={showDialog} onDismiss={close} size="sm">
-        <Dialog.Header title="deleteDraft" close={close} headerHidden />
+        <Dialog.Header title="deleteDraft" close={close} />
 
-        <Dialog.Message
-          headline="deleteDraft"
-          description={
-            <>
-              <Translate
-                zh_hant="確認刪除草稿，草稿會馬上消失。"
-                zh_hans="确认删除草稿，草稿会马上消失。"
-              />
-            </>
-          }
-        />
+        <Dialog.Message>
+          <p>
+            <Translate
+              zh_hant="確認刪除草稿，草稿會馬上消失。"
+              zh_hans="确认删除草稿，草稿会马上消失。"
+            />
+          </p>
+        </Dialog.Message>
 
         <Dialog.Footer>
           <Dialog.Footer.Button

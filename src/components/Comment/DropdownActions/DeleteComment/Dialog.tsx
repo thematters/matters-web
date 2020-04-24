@@ -59,20 +59,17 @@ const DeleteCommentDialog = ({
     <>
       {children({ open })}
 
-      <Dialog isOpen={showDialog} onDismiss={close} size="sm" slideIn>
-        <Dialog.Header title="deleteComment" close={close} headerHidden />
+      <Dialog isOpen={showDialog} onDismiss={close} size="sm">
+        <Dialog.Header title="deleteComment" close={close} />
 
-        <Dialog.Message
-          headline="deleteComment"
-          description={
-            <>
-              <Translate
-                zh_hant="確認刪除評論，評論會馬上消失。"
-                zh_hans="确认删除评论，评论会马上消失。"
-              />
-            </>
-          }
-        />
+        <Dialog.Message>
+          <p>
+            <Translate
+              zh_hant="確認刪除評論，評論會馬上消失。"
+              zh_hans="确认删除评论，评论会马上消失。"
+            />
+          </p>
+        </Dialog.Message>
 
         <Dialog.Footer>
           <Dialog.Footer.Button

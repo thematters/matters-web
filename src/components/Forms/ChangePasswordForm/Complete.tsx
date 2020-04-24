@@ -26,21 +26,16 @@ const Complete: React.FC<Props> = ({ type, purpose, closeDialog }) => {
           title={titleId}
           close={closeDialog}
           closeTextId="close"
-          headerHidden
         />
       )}
 
-      <Dialog.Message
-        description={
-          <>
-            <p>
-              <Translate id={descriptionId} />
-            </p>
-            <br />
-            {isInPage && <BackToHomeButton />}
-          </>
-        }
-      />
+      <Dialog.Message>
+        <h3>
+          <Translate id={descriptionId} />
+        </h3>
+        <br />
+        {isInPage && <BackToHomeButton />}
+      </Dialog.Message>
 
       {!isInPage && (
         <Dialog.Footer>
