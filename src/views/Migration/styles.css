@@ -66,11 +66,8 @@ header {
   }
 
   & .steps {
-    display: flex;
-    align-items: flex-start;
+    @mixin flex-start-center;
     flex-direction: column;
-    justify-content: center;
-
 
     @media (--lg-up) {
       @mixin flex-start-space-between;
@@ -147,7 +144,7 @@ header {
   & .features {
     margin-top: var(--spacing-xx-loose);
 
-    @media(--lg-up) {
+    @media (--lg-up) {
       margin-top: 4.24rem;
     }
   }
@@ -181,9 +178,7 @@ header {
 }
 
 .banner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @mixin flex-center-all;
   flex-direction: column;
 
   min-height: 10.75rem;
@@ -209,7 +204,7 @@ header {
     margin: var(--spacing-x-tight) 0 var(--spacing-base);
   }
 
-  @media(--sm-up) {
+  @media (--sm-up) {
     padding: 0 var(--spacing-xx-loose);
 
     & .title {

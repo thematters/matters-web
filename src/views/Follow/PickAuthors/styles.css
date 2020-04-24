@@ -1,7 +1,5 @@
 header {
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
+  @mixin flex-center-start;
 
   @media (--sm-up) {
     align-items: center;

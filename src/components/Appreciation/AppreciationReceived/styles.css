@@ -16,9 +16,7 @@
   }
 
   & header {
-    display: flex;
-    align-items: center;
-    justify-content: left;
+    @mixin flex-center-start;
 
     color: var(--color-grey-dark);
     font-size: var(--font-size-sm);

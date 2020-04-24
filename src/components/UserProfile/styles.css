@@ -22,9 +22,7 @@ header {
 
   & .display-name,
   & .username {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
+    @mixin flex-center-start;
 
     & :global(> * + *) {
       margin-left: var(--spacing-x-tight);

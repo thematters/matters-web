@@ -8,16 +8,16 @@
   justify-content: center;
 }
 
-@define-mixin inline-flex-center-all {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
 @define-mixin flex-center-space-between {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+@define-mixin flex-center-start {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 @define-mixin flex-center-start {
@@ -42,6 +42,12 @@
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
+}
+
+@define-mixin inline-flex-center-all {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Fonts
