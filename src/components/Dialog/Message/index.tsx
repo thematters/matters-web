@@ -10,6 +10,21 @@ interface DialogMessageProps {
   spacing?: 'base' | 'xloose'
 }
 
+/**
+ *
+ * Usage:
+ *
+ * ```jsx
+ *   <Dialog.Message>
+ *     <p>grey text</p>
+ *   </Dialog.Message>
+ *
+ *   <Dialog.Message>
+ *     <h3>bold text</h3>
+ *   </Dialog.Message>
+ * ```
+ *
+ */
 const DialogMessage: React.FC<DialogMessageProps> = ({
   align,
   error,
