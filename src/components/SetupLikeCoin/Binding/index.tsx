@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useState } from 'react'
 
-import { Dialog, Icon, Spinner, Translate } from '~/components'
+import { Dialog, Spinner, Translate } from '~/components'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics } from '~/common/utils'
@@ -54,20 +54,14 @@ const Binding: React.FC<Props> = ({ prevStep, nextStep, windowRef }) => {
 
   return (
     <>
-      <Dialog.Message>
+      <Dialog.Message error={!!error}>
         {error ? (
-          <>
-            <div>
-              <Icon.EmptyWarning color="grey-light" size="xl" />
-            </div>
-
-            <p>
-              <Translate
-                zh_hant="哎呀，設置失敗了。"
-                zh_hans="哎呀，设置失败了。"
-              />
-            </p>
-          </>
+          <h3>
+            <Translate
+              zh_hant="哎呀，設置失敗了。"
+              zh_hans="哎呀，设置失败了。"
+            />
+          </h3>
         ) : (
           <>
             <Spinner />

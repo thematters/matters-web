@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useState } from 'react'
 
-import { Dialog, Icon, Spinner, Translate } from '~/components'
+import { Dialog, Spinner, Translate } from '~/components'
 
 import { ViewerTxState } from './__generated__/ViewerTxState'
 
@@ -62,17 +62,11 @@ const Processing: React.FC<Props> = ({ txId, nextStep, windowRef }) => {
   }
 
   return (
-    <Dialog.Message>
+    <Dialog.Message error={!!error}>
       {error ? (
-        <>
-          <h3>
-            <Icon.EmptyWarning color="grey-light" size="xl" />
-          </h3>
-
-          <p>
-            <Translate id="NETWORK_ERROR" />
-          </p>
-        </>
+        <h3>
+          <Translate id="NETWORK_ERROR" />
+        </h3>
       ) : (
         <Spinner />
       )}
