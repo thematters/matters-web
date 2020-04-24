@@ -22,6 +22,7 @@ const Complete = ({
         <Dialog.Header
           title="successRegister"
           close={closeDialog}
+          closeTextId="close"
           headerHidden
         />
       )}

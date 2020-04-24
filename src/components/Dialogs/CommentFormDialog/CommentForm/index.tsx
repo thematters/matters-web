@@ -167,6 +167,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
       <Dialog.Header
         title={title}
         close={closeDialog}
+        closeTextId="close"
         rightButton={
           <Dialog.Header.RightButton
             type="submit"
@@ -178,7 +179,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
         }
       />
 
-      <Dialog.Content hasGrow>
+      <Dialog.Content spacing={['base', 'base']} hasGrow>
         {context && <section className="context">{context}</section>}
 
         <form

@@ -240,9 +240,7 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
         rightButton={SubmitButton}
       />
 
-      <Dialog.Content spacing={[0, 0]} hasGrow>
-        {InnerForm}
-      </Dialog.Content>
+      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
     </>
   )
 }

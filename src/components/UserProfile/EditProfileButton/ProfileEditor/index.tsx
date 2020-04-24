@@ -24,12 +24,10 @@ import {
 import ProfileCoverUploader from './ProfileCoverUploader'
 import styles from './styles.css'
 
-import {
-  UpdateUserInfoProfile,
-  UpdateUserInfoProfile_updateUserInfo,
-} from './__generated__/UpdateUserInfoProfile'
+import { ProfileUser } from '~/components/UserProfile/__generated__/ProfileUser'
+import { UpdateUserInfoProfile } from './__generated__/UpdateUserInfoProfile'
 
-export type ProfileEditorUser = UpdateUserInfoProfile_updateUserInfo
+export type ProfileEditorUser = ProfileUser
 
 interface FormProps {
   user: ProfileEditorUser
@@ -203,9 +201,7 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
         rightButton={SubmitButton}
       />
 
-      <Dialog.Content spacing={[0, 0]} hasGrow>
-        {InnerForm}
-      </Dialog.Content>
+      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
     </>
   )
 }

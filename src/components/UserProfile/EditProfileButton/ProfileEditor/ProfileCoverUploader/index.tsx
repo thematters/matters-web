@@ -15,6 +15,7 @@ import Cover from '../../../Cover'
 import styles from './styles.css'
 
 import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
+import { ProfileUser } from '~/components/UserProfile/__generated__/ProfileUser'
 
 /**
  * This component is for uploading profile cover.
@@ -27,7 +28,7 @@ import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/Singl
  */
 
 interface Props {
-  user: any
+  user: ProfileUser
   onUpload: (assetId: string | null) => void
 }
 

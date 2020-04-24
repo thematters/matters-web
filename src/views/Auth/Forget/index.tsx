@@ -4,28 +4,14 @@ import { ChangePasswordForm, Head, Layout } from '~/components'
 
 const Forget = () => {
   const [step, setStep] = useState('request')
-  const [data, setData] = useState<{ [key: string]: any }>({
-    request: {
-      next: 'confirm',
-    },
-    confirm: {
-      prev: 'request',
-      next: 'complete',
-    },
+  const [data, setData] = useState<{ email: string; codeId: string }>({
+    email: '',
+    codeId: '',
   })
 
   const requestCodeCallback = (params: any) => {
     const { email, codeId } = params
-    setData((prev) => {
-      return {
-        ...prev,
-        request: {
-          ...prev.request,
-          email,
-          codeId,
-        },
-      }
-    })
+    setData({ ...data, email, codeId })
     setStep('confirm')
   }
 
@@ -35,7 +21,7 @@ const Forget = () => {
 
       {step === 'request' && (
         <ChangePasswordForm.Request
-          defaultEmail={data.request.email}
+          defaultEmail={data.email}
           type="forget"
           purpose="page"
           submitCallback={requestCodeCallback}
@@ -44,7 +30,7 @@ const Forget = () => {
 
       {step === 'confirm' && (
         <ChangePasswordForm.Confirm
-          codeId={data.request.codeId}
+          codeId={data.codeId}
           type="forget"
           purpose="page"
           submitCallback={() => setStep('complete')}

@@ -16,7 +16,7 @@ const {
 
 const Select: React.FC<SelectProps> = ({ startGenerate, startBind }) => {
   return (
-    <Dialog.Content spacing={[0, 0]} hasGrow>
+    <Dialog.Content hasGrow>
       <Hint />
 
       <Form.List>

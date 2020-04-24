@@ -7,25 +7,12 @@ type Step = 'request' | 'confirm' | 'complete'
 const ChangeEmail = () => {
   const viewer = useContext(ViewerContext)
   const [step, setStep] = useState<Step>('request')
-  const [data, setData] = useState<{ [key: string]: any }>({
-    request: {
-      next: 'confirm',
-      email: viewer.info.email,
-    },
-    confirm: {
-      next: 'complete',
-    },
+  const [data, setData] = useState<{ email: string; codeId: string }>({
+    email: viewer.info.email,
+    codeId: '',
   })
   const requestCallback = (codeId: string) => {
-    setData((prev) => {
-      return {
-        ...prev,
-        request: {
-          ...prev.request,
-          codeId,
-        },
-      }
-    })
+    setData({ ...data, codeId })
     setStep('confirm')
   }
 
@@ -35,7 +22,7 @@ const ChangeEmail = () => {
 
       {step === 'request' && (
         <ChangeEmailForm.Request
-          defaultEmail={data.request.email}
+          defaultEmail={data.email}
           purpose="page"
           submitCallback={requestCallback}
         />
@@ -43,7 +30,7 @@ const ChangeEmail = () => {
 
       {step === 'confirm' && (
         <ChangeEmailForm.Confirm
-          oldData={data.request}
+          oldData={data}
           purpose="page"
           submitCallback={() => setStep('complete')}
         />

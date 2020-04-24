@@ -5,6 +5,10 @@ form {
   border-radius: 0 0 0.5rem 0.5rem;
 
   @media (--sm-up) {
-    background: var(--color-white);
+    background: transparent;
+  }
+
+  &.no-background {
+    background: transparent;
   }
 }

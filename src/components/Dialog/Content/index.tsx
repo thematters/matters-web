@@ -12,7 +12,7 @@ interface DialogContentProps {
 }
 
 const DialogContent: React.FC<DialogContentProps> = ({
-  spacing = ['base', 'base'],
+  spacing = [0, 0],
   hasGrow,
 
   children,

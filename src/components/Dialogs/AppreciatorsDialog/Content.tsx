@@ -96,6 +96,7 @@ const AppreciatorsDialogContent = ({
             avatarBadge={
               <span className="appreciation-amount">{node.amount}</span>
             }
+            hasCivicLikerRing
             onClick={() => {
               analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                 type: FEED_TYPE.APPRECIATOR,
@@ -156,9 +157,10 @@ const AppreciatorsDialogContent = ({
           />
         }
         close={closeDialog}
+        closeTextId="close"
       />
 
-      <Dialog.Content spacing={[0, 0]}>
+      <Dialog.Content>
         <div className="dialog-appreciators-list">
           <InfiniteList
             data={edges}

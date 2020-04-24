@@ -31,6 +31,7 @@ import { ReactComponent as EmptyWarning } from './icons/empty-warning.svg'
 import { ReactComponent as Expand } from './icons/expand.svg'
 import { ReactComponent as External } from './icons/external.svg'
 import { ReactComponent as HashTag } from './icons/hashtag.svg'
+import { ReactComponent as Heart } from './icons/heart.svg'
 import { ReactComponent as HelpMedium } from './icons/help-md.svg'
 import { ReactComponent as HistoryMedium } from './icons/history-md.svg'
 import { ReactComponent as IPFSMedium } from './icons/ipfs-md.svg'
@@ -76,6 +77,7 @@ import { ReactComponent as ViewModeComfortable } from './icons/view-mode-comfort
 import { ReactComponent as ViewModeCompact } from './icons/view-mode-compact.svg'
 import { ReactComponent as ViewModeDefault } from './icons/view-mode-default.svg'
 import { ReactComponent as Volume } from './icons/volume.svg'
+import { ReactComponent as WalletMedium } from './icons/wallet-md.svg'
 import Live from './Live'
 import styles from './styles.css'
 
@@ -173,6 +175,9 @@ export const Icon = {
   Expand: withIcon(Expand),
   External: withIcon(External),
   HashTag: withIcon(HashTag),
+  Heart: withIcon((props) => (
+    <Heart style={{ width: 40, height: 40 }} {...props} />
+  )),
   HelpMedium: withIcon(HelpMedium),
   HistoryMedium: withIcon(HistoryMedium),
   IPFSMedium: withIcon(IPFSMedium),
@@ -225,4 +230,5 @@ export const Icon = {
   ViewModeCompact: withIcon(ViewModeCompact),
   ViewModeDefault: withIcon(ViewModeDefault),
   Volume: withIcon(Volume),
+  WalletMedium: withIcon(WalletMedium),
 }

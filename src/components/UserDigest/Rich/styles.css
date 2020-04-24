@@ -1,7 +1,5 @@
 .container {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  @mixin flex-center-start;
 
   position: relative;
 
@@ -27,9 +25,7 @@
 }
 
 header {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  @mixin flex-center-start;
 
   & :global(> * + *) {
     margin-left: var(--spacing-xx-tight);

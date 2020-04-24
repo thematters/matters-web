@@ -34,9 +34,9 @@ const BaseFingerprintDialog = ({
       {children({ open })}
 
       <Dialog isOpen={showDialog} onDismiss={close} fixedHeight>
-        <Dialog.Header title="IPFSEntrance" close={close} />
+        <Dialog.Header title="IPFSEntrance" close={close} closeTextId="close" />
 
-        <Dialog.Content spacing={[0, 0]} hasGrow>
+        <Dialog.Content hasGrow>
           <Content dataHash={article.dataHash || ''} />
         </Dialog.Content>
       </Dialog>

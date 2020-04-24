@@ -162,9 +162,7 @@ const Request: React.FC<FormProps> = ({
         />
       )}
 
-      <Dialog.Content spacing={[0, 0]} hasGrow>
-        {InnerForm}
-      </Dialog.Content>
+      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
     </>
   )
 }

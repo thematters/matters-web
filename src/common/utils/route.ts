@@ -320,7 +320,6 @@ export const captureClicks = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
    */
   let matched = {}
   ROUTES.some(({ pathname }) => {
-    console.log({ pathname })
     const keys: PathToRegExpKey[] = []
     const regexp = pathToRegexp(toExpressPath(pathname), keys)
     const result = regexp.exec(url.pathname)
