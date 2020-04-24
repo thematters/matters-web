@@ -29,6 +29,7 @@ import { getQuery } from '~/common/utils'
 
 import Collection from './Collection'
 import Content from './Content'
+import FingerprintButton from './FingerprintButton'
 import RelatedArticles from './RelatedArticles'
 import State from './State'
 import styles from './styles.css'
@@ -62,6 +63,7 @@ const ARTICLE_DETAIL = gql`
       ...TagListArticle
       ...RelatedArticles
       ...StateArticle
+      ...FingerprintArticle
     }
   }
   ${UserDigest.Rich.fragments.user}
@@ -69,6 +71,7 @@ const ARTICLE_DETAIL = gql`
   ${TagList.fragments.article}
   ${RelatedArticles.fragments.article}
   ${State.fragments.article}
+  ${FingerprintButton.fragments.article}
 `
 
 const DynamicResponse = dynamic(() => import('./Responses'), {
@@ -192,8 +195,13 @@ const ArticleDetail = () => {
         <section className="title">
           <Title type="article">{article.title}</Title>
 
-          <section className="subtitle">
-            <DateTime date={article.createdAt} />
+          <section className="info">
+            <section className="left">
+              <DateTime date={article.createdAt} color="grey" />
+
+              <FingerprintButton article={article} />
+            </section>
+
             <section className="right">{article.live && <Icon.Live />}</section>
           </section>
         </section>

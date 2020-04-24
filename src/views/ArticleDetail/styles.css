@@ -5,13 +5,18 @@
 
 .title {
   margin-bottom: var(--spacing-base);
+}
 
-  & .subtitle {
-    @mixin flex-center-space-between;
-    padding-top: var(--spacing-x-tight);
+.info {
+  @mixin flex-center-space-between;
+  padding-top: var(--spacing-x-tight);
 
-    & .right :global(> * + *) {
-      margin-left: var(--spacing-tight);
+  & .left,
+  & .right {
+    @mixin inline-flex-center-all;
+
+    & :global(> * + *) {
+      margin-left: var(--spacing-base);
     }
   }
 }
