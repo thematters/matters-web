@@ -9,7 +9,6 @@ import {
   Form,
   LanguageContext,
   Translate,
-  ViewerContext,
 } from '~/components'
 import { useMutation } from '~/components/GQL'
 
@@ -63,7 +62,6 @@ const UNCHANGED_FIELD = 'UNCHANGED_FIELD'
 const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
   const [update] = useMutation<UpdateUserInfoProfile>(UPDATE_USER_INFO)
   const { lang } = useContext(LanguageContext)
-  const viewer = useContext(ViewerContext)
 
   const formId = 'edit-profile-form'
 
@@ -86,7 +84,7 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
     },
     validate: ({ displayName, description }) =>
       _pickBy({
-        displayName: validateDisplayName(displayName, lang, viewer.isAdmin),
+        displayName: validateDisplayName(displayName, lang),
         description: validateDescription(description, lang),
       }),
     onSubmit: async (

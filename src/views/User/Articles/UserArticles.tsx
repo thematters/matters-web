@@ -129,8 +129,7 @@ const UserArticles = () => {
           {edges.map(({ node, cursor }, i) => {
             if (
               node.articleState !== 'active' &&
-              viewer.id !== node.author.id &&
-              viewer.isAdmin
+              viewer.id !== node.author.id
             ) {
               return null
             }

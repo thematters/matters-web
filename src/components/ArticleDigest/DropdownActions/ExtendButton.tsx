@@ -1,7 +1,14 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
-import { Icon, LanguageContext, Menu, TextIcon, Translate, ViewerContext } from '~/components'
+import {
+  Icon,
+  LanguageContext,
+  Menu,
+  TextIcon,
+  Translate,
+  ViewerContext,
+} from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import { ADD_TOAST } from '~/common/enums'

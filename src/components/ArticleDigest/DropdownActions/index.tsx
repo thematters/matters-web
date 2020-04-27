@@ -159,7 +159,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
   const viewer = useContext(ViewerContext)
 
   const isArticleAuthor = viewer.id === article.author.id
-  const isMattyUser = viewer.isAdmin && viewer.info.email === 'hi@matters.news'
+  const isMattyUser = viewer.info.email === 'hi@matters.news'
   const isActive = article.articleState === 'active'
   const isInTagDetail = inTagDetailLatest || inTagDetailSelected
 

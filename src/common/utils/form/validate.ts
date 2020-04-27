@@ -66,14 +66,10 @@ export const validateComparedUserName = (
   }
 }
 
-export const validateDisplayName = (
-  value: string,
-  lang: Language,
-  isAdmin?: boolean
-) => {
+export const validateDisplayName = (value: string, lang: Language) => {
   if (!value) {
     return translate({ id: 'required', lang })
-  } else if (!isValidDisplayName(value) && !isAdmin) {
+  } else if (!isValidDisplayName(value)) {
     return translate({ id: 'hintDisplayName', lang })
   }
 }
