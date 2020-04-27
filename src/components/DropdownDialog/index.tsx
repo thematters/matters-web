@@ -29,7 +29,7 @@ import { KEYCODES, TEXT, TextId } from '~/common/enums'
  *     dialog={{
  *       content: <DialogContent />,
  *       title: ....,
- *       headerHidden: false
+ *       mode: 'hidden'
  *     }}
  *   >
  *     <Button>
@@ -134,7 +134,7 @@ const BaseDropdownDialog = ({
           title={dialog.title}
           close={close}
           closeTextId="close"
-          headerHidden
+          mode="hidden"
         />
 
         <Content>{dialog.content}</Content>

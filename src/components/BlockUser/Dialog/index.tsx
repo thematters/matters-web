@@ -51,25 +51,17 @@ const BlockUserDialog = ({ user, children }: BlockUserDialogProps) => {
     <>
       {children({ open })}
 
-      <Dialog isOpen={showDialog} onDismiss={close} size="sm" slideIn>
-        <Dialog.Header title="changeUserName" close={close} headerHidden />
+      <Dialog isOpen={showDialog} onDismiss={close} size="sm">
+        <Dialog.Header title="blockUser" close={close} mode="inner" />
 
-        <Dialog.Message
-          headline="blockUser"
-          description={
-            <>
-              <Translate
-                zh_hant={`封鎖之後，${user.displayName} 將無法評論你的作品。`}
-                zh_hans={`封锁之后，${user.displayName} 将无法评论你的作品。`}
-              />
-
-              <Translate
-                zh_hant="你可以在設置裏管理你的封鎖用戶列表。"
-                zh_hans="你可以在设置里管理你的封锁用户列表。"
-              />
-            </>
-          }
-        />
+        <Dialog.Message>
+          <p>
+            <Translate
+              zh_hant={`封鎖之後，${user.displayName} 將無法評論你的作品。你可以在設置裏管理你的封鎖用戶列表。`}
+              zh_hans={`封锁之后，${user.displayName} 将无法评论你的作品。你可以在设置里管理你的封锁用户列表。`}
+            />
+          </p>
+        </Dialog.Message>
 
         <Dialog.Footer>
           <Dialog.Footer.Button

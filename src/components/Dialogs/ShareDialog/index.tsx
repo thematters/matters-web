@@ -51,7 +51,7 @@ const BaseShareDialog = ({
           title="share"
           close={close}
           closeTextId="close"
-          headerHidden
+          mode="hidden"
         />
 
         <Dialog.Content>

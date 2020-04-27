@@ -1,52 +1,47 @@
 import classNames from 'classnames'
 
-import { Dialog, Translate } from '~/components'
-
-import { TextId } from '~/common/enums'
+import { Dialog } from '~/components'
 
 import styles from './styles.css'
 
 interface DialogMessageProps {
-  headline?: React.ReactElement | TextId
-  description?: React.ReactElement | TextId
-  textAlign?: 'left'
+  align?: 'left'
+  error?: boolean
+  spacing?: 'md'
 }
 
+/**
+ *
+ * Usage:
+ *
+ * ```jsx
+ *   <Dialog.Message>
+ *     <p>grey text</p>
+ *   </Dialog.Message>
+ *
+ *   <Dialog.Message>
+ *     <h3>bold text</h3>
+ *   </Dialog.Message>
+ * ```
+ *
+ */
 const DialogMessage: React.FC<DialogMessageProps> = ({
-  headline,
-  description,
-  textAlign,
+  align,
+  error,
+  spacing = 'base',
 
   children,
 }) => {
-  const descriptionClass = classNames({
-    description: true,
-    [`${textAlign}`]: !!textAlign,
+  const contentClass = classNames({
+    content: true,
+    error: !!error,
+    [`align-${align}`]: !!align,
+    [`spacing-${spacing}`]: !!spacing,
   })
 
   return (
-    <Dialog.Content spacing={['xloose', 'base']}>
-      {headline && (
-        <h3 className="headline">
-          {typeof headline === 'string' ? (
-            <Translate id={headline as TextId} />
-          ) : (
-            headline
-          )}
-        </h3>
-      )}
-
-      {description && (
-        <section className={descriptionClass}>
-          {typeof description === 'string' ? (
-            <Translate id={description as TextId} />
-          ) : (
-            description
-          )}
-        </section>
-      )}
-
-      {children}
+    <Dialog.Content spacing={['base', 'base']}>
+      <section className={contentClass}>{children}</section>
 
       <style jsx>{styles}</style>
     </Dialog.Content>

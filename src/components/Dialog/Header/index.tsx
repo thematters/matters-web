@@ -1,6 +1,7 @@
 import VisuallyHidden from '@reach/visually-hidden'
+import classNames from 'classnames'
 
-import { Translate } from '~/components'
+import { Spacer, Translate } from '~/components'
 
 import { TextId } from '~/common/enums'
 
@@ -11,7 +12,7 @@ export interface HeaderProps {
   title: TextId | React.ReactElement
   close: () => void
   closeTextId?: TextId
-  headerHidden?: boolean
+  mode?: 'hidden' | 'inner'
   leftButton?: React.ReactNode
   rightButton?: React.ReactNode | string
 }
@@ -20,40 +21,53 @@ const BaseHeader = ({
   title,
   close,
   closeTextId,
+  mode,
   leftButton,
   rightButton,
-}: HeaderProps) => (
-  <header>
-    <h1>
-      <span id="dialog-title">
-        {typeof title === 'string' ? <Translate id={title as TextId} /> : title}
-      </span>
-    </h1>
+}: HeaderProps) => {
+  const headerClass = classNames({
+    inner: mode === 'inner',
+  })
 
-    <section className="left">
-      {leftButton || <CloseButton close={close} textId={closeTextId} />}
-    </section>
+  return (
+    <header className={headerClass}>
+      <h1>
+        <span id="dialog-title">
+          {typeof title === 'string' ? (
+            <Translate id={title as TextId} />
+          ) : (
+            title
+          )}
+        </span>
+      </h1>
 
-    {rightButton && <section className="right">{rightButton}</section>}
+      <section className="left">
+        {leftButton || <CloseButton close={close} textId={closeTextId} />}
+      </section>
 
-    <style jsx>{styles}</style>
-  </header>
-)
+      {rightButton && <section className="right">{rightButton}</section>}
+
+      <style jsx>{styles}</style>
+    </header>
+  )
+}
 
 const Header: React.FC<HeaderProps> & {
   RightButton: typeof RightButton
   BackButton: typeof BackButton
-} = ({ headerHidden, ...restProps }) => {
-  if (!headerHidden) {
-    return <BaseHeader {...restProps} />
+} = (props) => {
+  if (props.mode !== 'hidden') {
+    return <BaseHeader {...props} />
   }
 
   return (
     <>
-      <div className="spacing-holder" />
+      <div className="u-sm-up-hide">
+        <Spacer size="xloose" />
+      </div>
 
       <VisuallyHidden>
-        <BaseHeader {...restProps} />
+        <BaseHeader {...props} />
       </VisuallyHidden>
 
       <style jsx>{styles}</style>
