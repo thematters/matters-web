@@ -1,22 +1,31 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 
-import { Dialog, PaymentForm } from '~/components'
+import { Dialog, PaymentForm, ViewerContext } from '~/components'
 
 import { numRound } from '~/common/utils'
 
 import { AddCredit_addCredit_transaction } from '~/components/Forms/PaymentForm/AddCredit/__generated__/AddCredit'
 
-type Step = 'confirm' | 'checkout' | 'processing' | 'complete'
+type Step =
+  | 'setPaymentPassword'
+  | 'confirm'
+  | 'checkout'
+  | 'processing'
+  | 'complete'
 
 interface AddCreditDialogProps {
   children: ({ open }: { open: () => void }) => React.ReactNode
 }
 
 const BaseAddCreditDialog = ({ children }: AddCreditDialogProps) => {
+  const viewer = useContext(ViewerContext)
   const [showDialog, setShowDialog] = useState(true)
-  const [step, setStep] = useState<Step>('confirm')
+  const initialStep = viewer.status?.hasPaymentPassword
+    ? 'confirm'
+    : 'setPaymentPassword'
+  const [step, setStep] = useState<Step>(initialStep)
   const open = () => {
-    setStep('confirm')
+    setStep(initialStep)
     resetData()
     setShowDialog(true)
   }
@@ -40,6 +49,7 @@ const BaseAddCreditDialog = ({ children }: AddCreditDialogProps) => {
     setStep('checkout')
   }
 
+  const isSetPaymentPassword = step === 'setPaymentPassword'
   const isConfirm = step === 'confirm'
   const isCheckout = step === 'checkout'
   const isProcessing = step === 'processing'
@@ -51,7 +61,13 @@ const BaseAddCreditDialog = ({ children }: AddCreditDialogProps) => {
 
       <Dialog size="sm" isOpen={showDialog} onDismiss={close} fixedHeight>
         <Dialog.Header
-          title={isComplete ? 'successTopUp' : 'topUp'}
+          title={
+            isSetPaymentPassword
+              ? 'paymentPassword'
+              : isComplete
+              ? 'successTopUp'
+              : 'topUp'
+          }
           close={close}
           closeTextId="close"
           leftButton={
@@ -63,6 +79,9 @@ const BaseAddCreditDialog = ({ children }: AddCreditDialogProps) => {
           }
         />
 
+        {isSetPaymentPassword && (
+          <PaymentForm.SetPassword submitCallback={() => setStep('confirm')} />
+        )}
         {isConfirm && (
           <PaymentForm.AddCredit.Confirm submitCallback={onConfirm} />
         )}

@@ -36,6 +36,17 @@ export const isValidPassword = (password: string): boolean => {
 }
 
 /**
+ * Validate payment pass word. It only accepts digital.
+ */
+export const isValidPaymentPassword = (password: string): boolean => {
+  if (!password || password.length !== 6) {
+    return false
+  }
+
+  return /^[\d]*$/.test(password)
+}
+
+/**
  * Validate user display name. It only accepts alphabets, chinese characters and numbers.
  *
  * @see https://mattersnews.slack.com/archives/G8877EQMS/p1546446430005500
