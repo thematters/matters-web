@@ -21,6 +21,7 @@ export const ViewerFragments = {
         email
         agreeOn
         userNameEditable
+        group
       }
       settings {
         language
