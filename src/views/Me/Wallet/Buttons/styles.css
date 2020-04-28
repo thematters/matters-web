@@ -1,11 +1,11 @@
 .buttons {
   margin-bottom: var(--spacing-loose);
 
-  & :global(> *) {
+  & :global(> button) {
     width: 100%;
   }
 
-  & :global(> * + *) {
+  & :global(> button + button) {
     margin-top: var(--spacing-base);
   }
 
