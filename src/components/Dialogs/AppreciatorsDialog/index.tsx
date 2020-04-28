@@ -44,14 +44,8 @@ const BaseAppreciatorsDialog = ({
 }
 
 export const AppreciatorsDialog = (props: AppreciatorsDialogProps) => (
-  <Dialog.Lazy>
-    {({ open, mounted }) =>
-      mounted ? (
-        <BaseAppreciatorsDialog {...props} />
-      ) : (
-        <>{props.children({ open })}</>
-      )
-    }
+  <Dialog.Lazy mounted={<BaseAppreciatorsDialog {...props} />}>
+    {({ open }) => <>{props.children({ open })}</>}
   </Dialog.Lazy>
 )
 

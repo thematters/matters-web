@@ -26,14 +26,8 @@ const TagArticleDialog = ({ id, children }: TagArticleDialogProps) => {
 }
 
 const LazyTagArticleDialog = (props: TagArticleDialogProps) => (
-  <Dialog.Lazy>
-    {({ open, mounted }) =>
-      mounted ? (
-        <TagArticleDialog {...props} />
-      ) : (
-        <>{props.children({ open })}</>
-      )
-    }
+  <Dialog.Lazy mounted={<TagArticleDialog {...props} />}>
+    {({ open }) => <>{props.children({ open })}</>}
   </Dialog.Lazy>
 )
 

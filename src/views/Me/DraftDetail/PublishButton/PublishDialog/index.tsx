@@ -25,13 +25,7 @@ const BasePublishDialog = ({ children }: PublishDialogProps) => {
 }
 
 export const PublishDialog = (props: PublishDialogProps) => (
-  <Dialog.Lazy>
-    {({ open, mounted }) =>
-      mounted ? (
-        <BasePublishDialog {...props} />
-      ) : (
-        <>{props.children({ open })}</>
-      )
-    }
+  <Dialog.Lazy mounted={<BasePublishDialog {...props} />}>
+    {({ open }) => <>{props.children({ open })}</>}
   </Dialog.Lazy>
 )

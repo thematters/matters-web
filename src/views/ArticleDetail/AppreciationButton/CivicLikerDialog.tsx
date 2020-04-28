@@ -77,14 +77,8 @@ const CivicLikerDialog = ({ onClose, children }: CivicLikerDialogProps) => {
 }
 
 const LazyCivicLikerDialog = (props: CivicLikerDialogProps) => (
-  <Dialog.Lazy>
-    {({ open, mounted }) =>
-      mounted ? (
-        <CivicLikerDialog {...props} />
-      ) : (
-        <>{props.children({ open })}</>
-      )
-    }
+  <Dialog.Lazy mounted={<CivicLikerDialog {...props} />}>
+    {({ open }) => <>{props.children({ open })}</>}
   </Dialog.Lazy>
 )
 

@@ -154,13 +154,7 @@ const BaseDropdownDialog = ({
 }
 
 export const DropdownDialog: React.FC<DropdownDialogProps> = (props) => (
-  <Dialog.Lazy>
-    {({ open, mounted }) =>
-      mounted ? (
-        <BaseDropdownDialog {...props} />
-      ) : (
-        <>{props.children({ open })}</>
-      )
-    }
+  <Dialog.Lazy mounted={<BaseDropdownDialog {...props} />}>
+    {({ open }) => <>{props.children({ open })}</>}
   </Dialog.Lazy>
 )

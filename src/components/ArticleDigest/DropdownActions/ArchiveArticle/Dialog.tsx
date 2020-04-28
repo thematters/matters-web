@@ -108,14 +108,8 @@ const ArchiveArticleDialog = ({
 }
 
 const LazyArchiveArticleDialog = (props: ArchiveArticleDialogProps) => (
-  <Dialog.Lazy>
-    {({ open, mounted }) =>
-      mounted ? (
-        <ArchiveArticleDialog {...props} />
-      ) : (
-        <>{props.children({ open })}</>
-      )
-    }
+  <Dialog.Lazy mounted={<ArchiveArticleDialog {...props} />}>
+    {({ open }) => <>{props.children({ open })}</>}
   </Dialog.Lazy>
 )
 
