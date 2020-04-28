@@ -19,7 +19,6 @@ export const Layout: React.FC & {
 } = ({ children }) => {
   const router = useRouter()
   const isInDraftDetail = router.pathname === PATHS.ME_DRAFT_DETAIL
-  const isInArticleDetail = router.pathname === PATHS.ARTICLE_DETAIL
 
   return (
     <>
@@ -33,7 +32,7 @@ export const Layout: React.FC & {
         {children}
       </main>
 
-      {!isInDraftDetail && !isInArticleDetail && (
+      {!isInDraftDetail && (
         <footer className="u-sm-up-hide">
           <NavBar />
         </footer>
