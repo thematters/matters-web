@@ -2,6 +2,7 @@ import { useContext } from 'react'
 
 import { AddCreditDialog, Dialog, Translate, ViewerContext } from '~/components'
 
+import PaymentPasswordButton from './PaymentPasswordButton'
 import styles from './styles.css'
 
 const Buttons = () => {
@@ -20,11 +21,7 @@ const Buttons = () => {
             )}
           </AddCreditDialog>
 
-          {hasPaymentPassword && (
-            <Dialog.Footer.Button bgColor="grey-lighter" textColor="black">
-              <Translate id="paymentPassword" />
-            </Dialog.Footer.Button>
-          )}
+          {hasPaymentPassword && <PaymentPasswordButton />}
         </section>
       </div>
 

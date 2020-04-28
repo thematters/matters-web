@@ -1,7 +1,7 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 
 import { Dialog, Form, LanguageContext, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
@@ -9,36 +9,32 @@ import { useMutation } from '~/components/GQL'
 import {
   parseFormSubmitErrors,
   translate,
+  validateComparedPassword,
   validatePaymentPassword,
 } from '~/common/utils'
 
-import styles from './styles.css'
-
-import { SetPaymentPassword } from './__generated__/SetPaymentPassword'
+import { ResetPaymentPassword } from './__generated__/ResetPaymentPassword'
 
 interface FormProps {
+  codeId: string
   submitCallback: () => void
 }
 
 interface FormValues {
   password: string
+  comparedPassword: string
 }
 
-const SET_PAYMENT_PASSWORD = gql`
-  mutation SetPaymentPassword($password: String) {
-    updateUserInfo(input: { paymentPassword: $password }) {
-      id
-      status {
-        hasPaymentPassword
-      }
-    }
+export const RESET_PAYMENT_PASSWORD = gql`
+  mutation ResetPaymentPassword($input: ResetPasswordInput!) {
+    resetPassword(input: $input)
   }
 `
 
-const SetPassword: React.FC<FormProps> = ({ submitCallback }) => {
-  const [setPassword] = useMutation<SetPaymentPassword>(SET_PAYMENT_PASSWORD)
+const Confirm: React.FC<FormProps> = ({ codeId, submitCallback }) => {
+  const [reset] = useMutation<ResetPaymentPassword>(RESET_PAYMENT_PASSWORD)
   const { lang } = useContext(LanguageContext)
-  const formId = 'set-password-form'
+  const formId = 'payment-password-change-confirm-form'
 
   const {
     values,
@@ -52,14 +48,22 @@ const SetPassword: React.FC<FormProps> = ({ submitCallback }) => {
   } = useFormik<FormValues>({
     initialValues: {
       password: '',
+      comparedPassword: '',
     },
-    validate: ({ password }) =>
+    validate: ({ password, comparedPassword }) =>
       _pickBy({
         password: validatePaymentPassword(password, lang),
+        comparedPassword: validateComparedPassword(
+          password,
+          comparedPassword,
+          lang
+        ),
       }),
     onSubmit: async ({ password }, { setFieldError, setSubmitting }) => {
       try {
-        await setPassword({ variables: { password } })
+        await reset({
+          variables: { input: { password, codeId, type: 'payment' } },
+        })
 
         submitCallback()
       } catch (error) {
@@ -74,47 +78,36 @@ const SetPassword: React.FC<FormProps> = ({ submitCallback }) => {
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       <Form.PinInput
-        label={<Translate id="paymentPassword" />}
-        type="text"
+        label={<Translate id="newPassword" />}
+        type="password"
         name="password"
         required
-        placeholder={translate({
-          id: 'enterPassword',
-          lang,
-        })}
-        hint={<Translate id="hintPaymentPassword" />}
+        placeholder={translate({ id: 'enterNewPassword', lang })}
         value={values.password}
         error={touched.password && errors.password}
         onBlur={handleBlur}
         onChange={handleChange}
         autoFocus
       />
+
+      <Form.PinInput
+        label={<Translate id="newPassword" />}
+        type="password"
+        name="comparedPassword"
+        required
+        placeholder={translate({ id: 'enterNewPasswordAgain', lang })}
+        value={values.comparedPassword}
+        error={touched.comparedPassword && errors.comparedPassword}
+        hint={<Translate id="hintPaymentPassword" />}
+        onBlur={handleBlur}
+        onChange={handleChange}
+      />
     </Form>
   )
 
   return (
     <>
-      <Dialog.Content hasGrow>
-        <section className="reason">
-          <p>
-            <Translate
-              zh_hant="爲了保護你的資產安全"
-              zh_hans="为了保护你的资产安全"
-            />
-          </p>
-
-          <p>
-            <Translate
-              zh_hant="在充值前請先設置支付密碼"
-              zh_hans="在充值前请先设置支付密码"
-            />
-          </p>
-
-          <style jsx>{styles}</style>
-        </section>
-
-        {InnerForm}
-      </Dialog.Content>
+      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
 
       <Dialog.Footer>
         <Dialog.Footer.Button
@@ -132,4 +125,4 @@ const SetPassword: React.FC<FormProps> = ({ submitCallback }) => {
   )
 }
 
-export default SetPassword
+export default Confirm
