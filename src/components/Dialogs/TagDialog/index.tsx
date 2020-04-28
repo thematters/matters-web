@@ -28,9 +28,7 @@ const BaseTagDialog = ({ children, content, ...restProps }: TagDialogProps) => {
 }
 
 export const TagDialog = (props: TagDialogProps) => (
-  <Dialog.Lazy>
-    {({ open, mounted }) =>
-      mounted ? <BaseTagDialog {...props} /> : <>{props.children({ open })}</>
-    }
+  <Dialog.Lazy mounted={<BaseTagDialog {...props} />}>
+    {({ open }) => <>{props.children({ open })}</>}
   </Dialog.Lazy>
 )

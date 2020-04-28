@@ -96,14 +96,8 @@ const DeleteCommentDialog = ({
 }
 
 const LazyDeleteCommentDialog = (props: DeleteCommentDialogProps) => (
-  <Dialog.Lazy>
-    {({ open, mounted }) =>
-      mounted ? (
-        <DeleteCommentDialog {...props} />
-      ) : (
-        <>{props.children({ open })}</>
-      )
-    }
+  <Dialog.Lazy mounted={<DeleteCommentDialog {...props} />}>
+    {({ open }) => <>{props.children({ open })}</>}
   </Dialog.Lazy>
 )
 

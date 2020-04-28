@@ -111,13 +111,7 @@ const BaseAddCreditDialog = ({ children }: AddCreditDialogProps) => {
 }
 
 export const AddCreditDialog = (props: AddCreditDialogProps) => (
-  <Dialog.Lazy>
-    {({ open, mounted }) =>
-      mounted ? (
-        <BaseAddCreditDialog {...props} />
-      ) : (
-        <>{props.children({ open })}</>
-      )
-    }
+  <Dialog.Lazy mounted={<BaseAddCreditDialog {...props} />}>
+    {({ open }) => <>{props.children({ open })}</>}
   </Dialog.Lazy>
 )

@@ -88,10 +88,8 @@ const BlockUserDialog = ({ user, children }: BlockUserDialogProps) => {
 }
 
 const LazyBlockUserDialog = (props: BlockUserDialogProps) => (
-  <Dialog.Lazy>
-    {({ open, mounted }) =>
-      mounted ? <BlockUserDialog {...props} /> : <>{props.children({ open })}</>
-    }
+  <Dialog.Lazy mounted={<BlockUserDialog {...props} />}>
+    {({ open }) => <>{props.children({ open })}</>}
   </Dialog.Lazy>
 )
 
