@@ -74,13 +74,7 @@ const BaseResetPaymentPasswordDialog: React.FC<ResetPaymentPasswordProps> = ({
 export const ResetPaymentPasswordDialog = (
   props: ResetPaymentPasswordProps
 ) => (
-  <Dialog.Lazy>
-    {({ open, mounted }) =>
-      mounted ? (
-        <BaseResetPaymentPasswordDialog {...props} />
-      ) : (
-        <>{props.children({ open })}</>
-      )
-    }
+  <Dialog.Lazy mounted={<BaseResetPaymentPasswordDialog {...props} />}>
+    {({ open }) => <>{props.children({ open })}</>}
   </Dialog.Lazy>
 )

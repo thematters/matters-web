@@ -33,6 +33,7 @@ const BasePaymentPasswordButton: React.FC<PaymentPasswordButtonProps> = ({
     <DropdownDialog
       dropdown={{
         content: <Content isInDropdown />,
+        placement: 'bottom-end',
       }}
       dialog={{
         content: <Content />,
