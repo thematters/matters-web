@@ -107,7 +107,7 @@ const Confirm: React.FC<FormProps> = ({
         type="text"
         name="comparedUserName"
         required
-        placeholder={translate({ id: 'enterUserNameAgign', lang })}
+        placeholder={translate({ id: 'enterUserNameAgain', lang })}
         value={values.comparedUserName}
         error={touched.comparedUserName && errors.comparedUserName}
         onBlur={handleBlur}
