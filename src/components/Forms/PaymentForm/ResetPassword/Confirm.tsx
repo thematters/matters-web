@@ -1,14 +1,13 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
-import { Dialog, Form, LanguageContext, Translate } from '~/components'
+import { Dialog, Form, LanguageContext, Spinner, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import {
   parseFormSubmitErrors,
-  translate,
   validateComparedPassword,
   validatePaymentPassword,
 } from '~/common/utils'
@@ -34,14 +33,15 @@ export const RESET_PAYMENT_PASSWORD = gql`
 const Confirm: React.FC<FormProps> = ({ codeId, submitCallback }) => {
   const [reset] = useMutation<ResetPaymentPassword>(RESET_PAYMENT_PASSWORD)
   const { lang } = useContext(LanguageContext)
-  const formId = 'payment-password-change-confirm-form'
+  const [step, setStep] = useState<'password' | 'comparedPassword'>('password')
+  const isInComparedPassword = step === 'comparedPassword'
 
   const {
     values,
     errors,
     touched,
-    handleBlur,
-    handleChange,
+    setFieldValue,
+    setTouched,
     handleSubmit,
     isSubmitting,
     isValid,
@@ -50,15 +50,24 @@ const Confirm: React.FC<FormProps> = ({ codeId, submitCallback }) => {
       password: '',
       comparedPassword: '',
     },
-    validate: ({ password, comparedPassword }) =>
-      _pickBy({
-        password: validatePaymentPassword(password, lang),
-        comparedPassword: validateComparedPassword(
-          password,
-          comparedPassword,
-          lang
-        ),
-      }),
+    validate: ({ password, comparedPassword }) => {
+      const isPasswordValid = validatePaymentPassword(password, lang)
+      const isComparedPasswordValid = validateComparedPassword(
+        password,
+        comparedPassword,
+        lang
+      )
+
+      // jump to next step
+      if (isPasswordValid && !isInComparedPassword) {
+        setStep('comparedPassword')
+      }
+
+      return _pickBy({
+        password: isPasswordValid,
+        comparedPassword: isComparedPasswordValid,
+      })
+    },
     onSubmit: async ({ password }, { setFieldError, setSubmitting }) => {
       try {
         await reset({
@@ -76,53 +85,52 @@ const Confirm: React.FC<FormProps> = ({ codeId, submitCallback }) => {
   })
 
   const InnerForm = (
-    <Form id={formId} onSubmit={handleSubmit}>
-      <Form.Input
-        label={<Translate id="newPassword" />}
-        type="password"
-        name="password"
-        required
-        placeholder={translate({ id: 'enterNewPassword', lang })}
-        value={values.password}
-        error={touched.password && errors.password}
-        onBlur={handleBlur}
-        onChange={handleChange}
-        autoFocus
-      />
-
-      <Form.Input
-        label={<Translate id="newPassword" />}
-        type="password"
-        name="comparedPassword"
-        required
-        placeholder={translate({ id: 'enterNewPasswordAgain', lang })}
-        value={values.comparedPassword}
-        error={touched.comparedPassword && errors.comparedPassword}
-        hint={<Translate id="hintPaymentPassword" />}
-        onBlur={handleBlur}
-        onChange={handleChange}
-      />
+    <Form onSubmit={handleSubmit}>
+      {!isInComparedPassword && (
+        <Form.PinInput
+          length={6}
+          label={<Translate id="hintPaymentPassword" />}
+          name="password"
+          error={touched.password && errors.password}
+          onChange={(value) => {
+            const shouldValidate = value.length === 6
+            setTouched({ password: true }, shouldValidate)
+            setFieldValue('password', value, shouldValidate)
+          }}
+        />
+      )}
+      {isInComparedPassword && (
+        <Form.PinInput
+          length={6}
+          label={<Translate id="enterPaymentPasswordAgain" />}
+          name="compared-password"
+          error={touched.comparedPassword && errors.comparedPassword}
+          onChange={(value) => {
+            const shouldValidate = value.length === 6
+            setTouched({ comparedPassword: true }, shouldValidate)
+            setFieldValue('comparedPassword', value, shouldValidate)
+          }}
+        />
+      )}
     </Form>
   )
 
-  return (
-    <>
-      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+  useEffect(() => {
+    // submit on validate
+    if (isValid && values.password && values.comparedPassword) {
+      handleSubmit()
+    }
+  }, [isValid])
 
-      <Dialog.Footer>
-        <Dialog.Footer.Button
-          type="submit"
-          form={formId}
-          disabled={!isValid || isSubmitting}
-          bgColor="green"
-          textColor="white"
-          loading={isSubmitting}
-        >
-          <Translate id="confirm" />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
-    </>
-  )
+  if (isSubmitting) {
+    return (
+      <Dialog.Content hasGrow>
+        <Spinner />
+      </Dialog.Content>
+    )
+  }
+
+  return <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
 }
 
 export default Confirm
