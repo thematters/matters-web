@@ -127,19 +127,17 @@ export const ShareDialog = (props: ShareDialogProps) => {
   }
 
   return (
-    <Dialog.Lazy>
-      {({ open, mounted }) =>
-        mounted ? (
-          <BaseShareDialog
-            {...props}
-            onShare={onShare}
-            shareTitle={shareTitle}
-            shareLink={shareLink}
-          />
-        ) : (
-          <>{props.children({ open: () => onShare(open) })}</>
-        )
+    <Dialog.Lazy
+      mounted={
+        <BaseShareDialog
+          {...props}
+          onShare={onShare}
+          shareTitle={shareTitle}
+          shareLink={shareLink}
+        />
       }
+    >
+      {({ open }) => <>{props.children({ open })}</>}
     </Dialog.Lazy>
   )
 }

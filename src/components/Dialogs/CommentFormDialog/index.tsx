@@ -42,13 +42,7 @@ const BaseCommentFormDialog = ({
 }
 
 export const CommentFormDialog = (props: CommentFormDialogProps) => (
-  <Dialog.Lazy>
-    {({ open, mounted }) =>
-      mounted ? (
-        <BaseCommentFormDialog {...props} />
-      ) : (
-        <>{props.children({ open })}</>
-      )
-    }
+  <Dialog.Lazy mounted={<BaseCommentFormDialog {...props} />}>
+    {({ open }) => <>{props.children({ open })}</>}
   </Dialog.Lazy>
 )

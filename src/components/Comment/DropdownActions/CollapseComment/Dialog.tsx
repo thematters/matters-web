@@ -100,14 +100,8 @@ const CollapseCommentDialog = ({
 }
 
 const LazyCollapseCommentDialog = (props: CollapseCommentDialogProps) => (
-  <Dialog.Lazy>
-    {({ open, mounted }) =>
-      mounted ? (
-        <CollapseCommentDialog {...props} />
-      ) : (
-        <>{props.children({ open })}</>
-      )
-    }
+  <Dialog.Lazy mounted={<CollapseCommentDialog {...props} />}>
+    {({ open }) => <>{props.children({ open })}</>}
   </Dialog.Lazy>
 )
 
