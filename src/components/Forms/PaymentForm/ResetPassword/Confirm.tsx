@@ -85,7 +85,7 @@ const Confirm: React.FC<FormProps> = ({ codeId, submitCallback }) => {
   })
 
   const InnerForm = (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} noBackground>
       {!isInComparedPassword && (
         <Form.PinInput
           length={6}
