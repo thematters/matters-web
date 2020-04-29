@@ -20,7 +20,7 @@ const Item = forwardRef(
   ({ onPaste, onChange, onBackspace, ...inputProps }: ItemProps, ref: any) => {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       event.preventDefault()
-      onChange(event.target.value.slice(0, 1))
+      onChange(event.target.value.slice(-1))
     }
 
     const handleKeydown = (event: React.KeyboardEvent<HTMLInputElement>) => {

@@ -34,6 +34,7 @@ const Confirm: React.FC<FormProps> = ({ codeId, submitCallback }) => {
   const [reset] = useMutation<ResetPaymentPassword>(RESET_PAYMENT_PASSWORD)
   const { lang } = useContext(LanguageContext)
   const [step, setStep] = useState<'password' | 'comparedPassword'>('password')
+  const isInPassword = step === 'password'
   const isInComparedPassword = step === 'comparedPassword'
 
   const {
@@ -51,21 +52,21 @@ const Confirm: React.FC<FormProps> = ({ codeId, submitCallback }) => {
       comparedPassword: '',
     },
     validate: ({ password, comparedPassword }) => {
-      const isPasswordValid = validatePaymentPassword(password, lang)
-      const isComparedPasswordValid = validateComparedPassword(
+      const passwordError = validatePaymentPassword(password, lang)
+      const comparedPasswordError = validateComparedPassword(
         password,
         comparedPassword,
         lang
       )
 
       // jump to next step
-      if (isPasswordValid && !isInComparedPassword) {
+      if (!passwordError && isInPassword) {
         setStep('comparedPassword')
       }
 
       return _pickBy({
-        password: isPasswordValid,
-        comparedPassword: isComparedPasswordValid,
+        password: isInPassword && passwordError,
+        comparedPassword: isInComparedPassword && comparedPasswordError,
       })
     },
     onSubmit: async ({ password }, { setFieldError, setSubmitting }) => {
@@ -86,7 +87,7 @@ const Confirm: React.FC<FormProps> = ({ codeId, submitCallback }) => {
 
   const InnerForm = (
     <Form onSubmit={handleSubmit} noBackground>
-      {!isInComparedPassword && (
+      {isInPassword && (
         <Form.PinInput
           length={6}
           label={<Translate id="hintPaymentPassword" />}

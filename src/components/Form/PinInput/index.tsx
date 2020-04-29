@@ -41,10 +41,10 @@ const Input: React.FC<InputProps> = ({
 }) => {
   const initialValues = Array(length).fill('')
   const [values, setValues] = useState(initialValues)
-  const [elRefs, setElRefs] = useState<any>([])
+  const [itemRefs, setItemRefs] = useState<any>([])
 
   useEffect(() => {
-    setElRefs((refs: any) =>
+    setItemRefs((refs: any) =>
       Array(length)
         .fill('')
         .map((_, i) => refs[i] || createRef<any>())
@@ -63,7 +63,7 @@ const Input: React.FC<InputProps> = ({
     let currentIndex = index
     if (value.length === 1 && index < length - 1) {
       currentIndex += 1
-      elRefs[currentIndex]?.current?.focus()
+      itemRefs[currentIndex]?.current?.focus()
     }
 
     // Notify the parent
@@ -89,12 +89,12 @@ const Input: React.FC<InputProps> = ({
     )
 
     // Set focus
-    elRefs[Math.min(index + text.length, length - 1)]?.current?.focus()
+    itemRefs[Math.min(index + text.length, length - 1)]?.current?.focus()
   }
 
   const onBackspace = (index: number) => {
     if (index > 0) {
-      elRefs[index - 1].current?.focus()
+      itemRefs[index - 1].current?.focus()
     }
   }
 
@@ -113,7 +113,7 @@ const Input: React.FC<InputProps> = ({
               key={index}
               value={value}
               id={`field-${name}-${index + 1}`}
-              ref={elRefs[index]}
+              ref={itemRefs[index]}
               onChange={(val: string) => onItemChange(val, index)}
               onPaste={(event: React.ClipboardEvent<HTMLInputElement>) =>
                 onItemPaste(event, index)

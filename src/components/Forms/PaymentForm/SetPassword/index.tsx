@@ -40,6 +40,7 @@ const SetPassword: React.FC<FormProps> = ({ submitCallback }) => {
   const [setPassword] = useMutation<SetPaymentPassword>(SET_PAYMENT_PASSWORD)
   const { lang } = useContext(LanguageContext)
   const [step, setStep] = useState<'password' | 'comparedPassword'>('password')
+  const isInPassword = step === 'password'
   const isInComparedPassword = step === 'comparedPassword'
 
   const {
@@ -57,21 +58,21 @@ const SetPassword: React.FC<FormProps> = ({ submitCallback }) => {
       comparedPassword: '',
     },
     validate: ({ password, comparedPassword }) => {
-      const isPasswordValid = validatePaymentPassword(password, lang)
-      const isComparedPasswordValid = validateComparedPassword(
+      const passwordError = validatePaymentPassword(password, lang)
+      const comparedPasswordError = validateComparedPassword(
         password,
         comparedPassword,
         lang
       )
 
       // jump to next step
-      if (isPasswordValid && !isInComparedPassword) {
+      if (!passwordError && isInPassword) {
         setStep('comparedPassword')
       }
 
       return _pickBy({
-        password: isPasswordValid,
-        comparedPassword: isComparedPasswordValid,
+        password: isInPassword && passwordError,
+        comparedPassword: isInComparedPassword && comparedPasswordError,
       })
     },
     onSubmit: async ({ password }, { setFieldError, setSubmitting }) => {
@@ -90,7 +91,7 @@ const SetPassword: React.FC<FormProps> = ({ submitCallback }) => {
 
   const InnerForm = (
     <Form onSubmit={handleSubmit} noBackground>
-      {!isInComparedPassword && (
+      {isInPassword && (
         <Form.PinInput
           length={6}
           name="password"
@@ -135,7 +136,7 @@ const SetPassword: React.FC<FormProps> = ({ submitCallback }) => {
   return (
     <Dialog.Content hasGrow>
       <section className="reason">
-        {!isInComparedPassword && (
+        {isInPassword && (
           <p>
             <Translate
               zh_hant="爲了保護你的資產安全"
