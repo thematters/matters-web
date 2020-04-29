@@ -16,6 +16,7 @@ export const ViewerFragments = {
       }
       status {
         state
+        hasPaymentPassword
       }
       info {
         email

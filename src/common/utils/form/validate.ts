@@ -3,6 +3,7 @@ import {
   isValidDisplayName,
   isValidEmail,
   isValidPassword,
+  isValidPaymentPassword,
   isValidUserName,
   translate,
   ValidEmailOptions,
@@ -43,6 +44,14 @@ export const validateComparedPassword = (
     return translate({ id: 'required', lang })
   } else if (comparedValue !== value) {
     return translate({ id: 'passwordNotMatch', lang })
+  }
+}
+
+export const validatePaymentPassword = (value: string, lang: Language) => {
+  if (!value) {
+    return translate({ id: 'required', lang })
+  } else if (!isValidPaymentPassword(value)) {
+    return translate({ id: 'hintPaymentPassword', lang })
   }
 }
 

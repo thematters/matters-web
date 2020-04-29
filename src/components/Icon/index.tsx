@@ -67,6 +67,7 @@ import { ReactComponent as SettingsMedium } from './icons/settings-md.svg'
 import { ReactComponent as Share } from './icons/share.svg'
 import { ReactComponent as Sort } from './icons/sort.svg'
 import { ReactComponent as Spinner } from './icons/spinner.svg'
+import { ReactComponent as UnlockMedium } from './icons/unlock-md.svg'
 import { ReactComponent as UnMuteMedium } from './icons/unmute-md.svg'
 import { ReactComponent as UnPinMedium } from './icons/unpin-md.svg'
 import { ReactComponent as Up } from './icons/up.svg'
@@ -220,6 +221,7 @@ export const Icon = {
   Spinner: withIcon(({ className, ...restProps }) => (
     <Spinner className={`u-motion-spin ${className}`} {...restProps} />
   )),
+  UnlockMedium: withIcon(UnlockMedium),
   UnMuteMedium: withIcon(UnMuteMedium),
   UnPinMedium: withIcon(UnPinMedium),
   Up: withIcon(Up),

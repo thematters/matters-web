@@ -1,14 +1,11 @@
 .buttons {
-  @mixin flex-center-space-between;
-  flex-direction: column;
   margin-bottom: var(--spacing-loose);
 
-  & :global(> *) {
+  & :global(> button) {
     width: 100%;
-    flex: 1;
   }
 
-  & :global(> * + *) {
+  & :global(> button + button) {
     margin-top: var(--spacing-base);
   }
 
