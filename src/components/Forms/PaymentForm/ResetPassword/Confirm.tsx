@@ -77,7 +77,7 @@ const Confirm: React.FC<FormProps> = ({ codeId, submitCallback }) => {
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
-      <Form.PinInput
+      <Form.Input
         label={<Translate id="newPassword" />}
         type="password"
         name="password"
@@ -90,7 +90,7 @@ const Confirm: React.FC<FormProps> = ({ codeId, submitCallback }) => {
         autoFocus
       />
 
-      <Form.PinInput
+      <Form.Input
         label={<Translate id="newPassword" />}
         type="password"
         name="comparedPassword"

@@ -1,8 +1,0 @@
-input {
-  @mixin form-input;
-  height: 3rem;
-
-  @media (--sm-up) {
-    @mixin form-input-grey;
-  }
-}

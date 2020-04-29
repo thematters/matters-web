@@ -73,7 +73,7 @@ const SetPassword: React.FC<FormProps> = ({ submitCallback }) => {
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
-      <Form.PinInput
+      <Form.Input
         label={<Translate id="paymentPassword" />}
         type="text"
         name="password"
