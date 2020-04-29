@@ -1,16 +1,12 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 
 import { Dialog, Form, LanguageContext, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
-import {
-  parseFormSubmitErrors,
-  translate,
-  validatePaymentPassword,
-} from '~/common/utils'
+import { parseFormSubmitErrors, validatePaymentPassword } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -43,13 +39,15 @@ const SetPassword: React.FC<FormProps> = ({ submitCallback }) => {
   const {
     values,
     errors,
-    touched,
-    handleBlur,
-    handleChange,
     handleSubmit,
-    isSubmitting,
+    setFieldValue,
     isValid,
+    touched,
+    setTouched,
   } = useFormik<FormValues>({
+    validateOnBlur: false,
+    validateOnChange: false,
+    validateOnMount: false,
     initialValues: {
       password: '',
     },
@@ -73,62 +71,50 @@ const SetPassword: React.FC<FormProps> = ({ submitCallback }) => {
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
-      <Form.Input
-        label={<Translate id="paymentPassword" />}
-        type="text"
-        name="password"
-        required
-        placeholder={translate({
-          id: 'enterPassword',
-          lang,
-        })}
-        hint={<Translate id="hintPaymentPassword" />}
-        value={values.password}
+      <Form.PinInput
+        length={6}
+        name="set-password"
         error={touched.password && errors.password}
-        onBlur={handleBlur}
-        onChange={handleChange}
-        autoFocus
+        onChange={(value) => {
+          const shouldValidate = value.length === 6
+          setTouched({ password: true }, shouldValidate)
+          setFieldValue('password', value, shouldValidate)
+        }}
       />
     </Form>
   )
 
+  // submit on validate
+  useEffect(() => {
+    if (isValid && values.password) {
+      handleSubmit()
+    }
+  }, [isValid])
+
   return (
-    <>
-      <Dialog.Content hasGrow>
-        <section className="reason">
-          <p>
-            <Translate
-              zh_hant="爲了保護你的資產安全"
-              zh_hans="为了保护你的资产安全"
-            />
-          </p>
+    <Dialog.Content hasGrow>
+      <section className="reason">
+        <p>
+          <Translate
+            zh_hant="爲了保護你的資產安全"
+            zh_hans="为了保护你的资产安全"
+          />
+          <br />
+          <Translate
+            zh_hant="在充值前請先設置支付密碼"
+            zh_hans="在充值前请先设置支付密码"
+          />
+        </p>
 
-          <p>
-            <Translate
-              zh_hant="在充值前請先設置支付密碼"
-              zh_hans="在充值前请先设置支付密码"
-            />
-          </p>
+        <p className="hint">
+          <Translate id="hintPaymentPassword" />
+        </p>
 
-          <style jsx>{styles}</style>
-        </section>
+        <style jsx>{styles}</style>
+      </section>
 
-        {InnerForm}
-      </Dialog.Content>
-
-      <Dialog.Footer>
-        <Dialog.Footer.Button
-          type="submit"
-          form={formId}
-          disabled={!isValid || isSubmitting}
-          bgColor="green"
-          textColor="white"
-          loading={isSubmitting}
-        >
-          <Translate id="confirm" />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
-    </>
+      {InnerForm}
+    </Dialog.Content>
   )
 }
 
