@@ -65,7 +65,9 @@ const BaseResetPaymentPasswordDialog: React.FC<ResetPaymentPasswordProps> = ({
           />
         )}
 
-        {isComplete && <PaymentForm.ResetPassword.Complete />}
+        {isComplete && (
+          <PaymentForm.ResetPassword.Complete closeDialog={close} />
+        )}
       </Dialog>
     </>
   )
