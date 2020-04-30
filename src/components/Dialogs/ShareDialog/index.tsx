@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Dialog, Translate } from '~/components'
 import CLIENT_INFO from '~/components/GQL/queries/clientInfo'
 
-import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
+import { ANALYTICS_EVENTS, SHARE_TYPE, TextId } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 import Copy from './Copy'
@@ -23,6 +23,11 @@ import { ClientInfo } from '~/components/GQL/queries/__generated__/ClientInfo'
 export interface ShareDialogProps {
   title?: string
   path?: string
+
+  headerTitle?: TextId | React.ReactElement
+  description?: React.ReactNode
+  footerButtons?: React.ReactNode
+
   children: ({ open }: { open: () => void }) => React.ReactNode
 }
 
@@ -30,12 +35,20 @@ type BaseShareDialogProps = {
   onShare: (fallbackShare: () => void) => void
   shareTitle: string
   shareLink: string
-} & Pick<ShareDialogProps, 'children'>
+} & Pick<
+  ShareDialogProps,
+  'children' | 'headerTitle' | 'description' | 'footerButtons'
+>
 
 const BaseShareDialog = ({
   onShare,
   shareTitle,
   shareLink,
+
+  headerTitle,
+  description,
+  footerButtons,
+
   children,
 }: BaseShareDialogProps) => {
   const [showDialog, setShowDialog] = useState(true)
@@ -46,15 +59,23 @@ const BaseShareDialog = ({
     <>
       {children({ open: () => onShare(open) })}
 
-      <Dialog size="sm" isOpen={showDialog} onDismiss={close} slideIn>
+      <Dialog size="sm" isOpen={showDialog} onDismiss={close}>
         <Dialog.Header
-          title="share"
+          title={headerTitle || 'share'}
           close={close}
           closeTextId="close"
-          mode="hidden"
+          mode={headerTitle ? 'inner' : 'hidden'}
         />
 
         <Dialog.Content>
+          {description && (
+            <section className="description">
+              {description}
+
+              <style jsx>{styles}</style>
+            </section>
+          )}
+
           <section className="socials-container">
             <section className="left">
               <LINE title={shareTitle} link={shareLink} />
@@ -77,13 +98,15 @@ const BaseShareDialog = ({
         </Dialog.Content>
 
         <Dialog.Footer>
-          <Dialog.Footer.Button
-            bgColor="grey-lighter"
-            textColor="black"
-            onClick={close}
-          >
-            <Translate id="close" />
-          </Dialog.Footer.Button>
+          {footerButtons || (
+            <Dialog.Footer.Button
+              bgColor="grey-lighter"
+              textColor="black"
+              onClick={close}
+            >
+              <Translate id="close" />
+            </Dialog.Footer.Button>
+          )}
         </Dialog.Footer>
       </Dialog>
     </>
