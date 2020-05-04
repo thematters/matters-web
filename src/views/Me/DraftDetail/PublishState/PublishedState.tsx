@@ -1,8 +1,10 @@
-import { useContext, useEffect } from 'react'
+import { useEffect } from 'react'
 
-import { Dialog, ShareDialog, Translate, ViewerContext } from '~/components'
+import { Dialog, ShareDialog, Translate } from '~/components'
 
 import { toPath } from '~/common/utils'
+
+import { PublishStateDraft } from '~/components/GQL/fragments/__generated__/PublishStateDraft'
 
 const BasePublishedState = ({
   openShareDialog,
@@ -16,11 +18,14 @@ const BasePublishedState = ({
   return null
 }
 
-const PublishedState = () => {
-  const viewer = useContext(ViewerContext)
+const PublishedState = ({ draft }: { draft: PublishStateDraft }) => {
+  if (!draft.article) {
+    return null
+  }
+
   const path = toPath({
-    page: 'userProfile',
-    userName: viewer.userName || '',
+    page: 'articleDetail',
+    article: draft.article,
   })
 
   return (
