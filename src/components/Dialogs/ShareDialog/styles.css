@@ -40,3 +40,14 @@
     font-size: var(--font-size-sm);
   }
 }
+
+.description {
+  @mixin border-bottom-grey;
+
+  padding: var(--spacing-x-tight) var(--spacing-base) var(--spacing-loose);
+
+  color: var(--color-grey-dark);
+  font-size: var(--font-size-md-s);
+  line-height: 1.5rem;
+  text-align: center;
+}
