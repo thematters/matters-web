@@ -64,9 +64,14 @@ const TermContent: React.FC<TermContentProps> = ({ closeDialog }) => {
 
   const onLogout = async () => {
     try {
+      await unsubscribePush()
+    } catch (e) {
+      console.error(e)
+    }
+
+    try {
       await logout()
 
-      await unsubscribePush()
       // await clearPersistCache()
 
       closeDialog()
