@@ -6,6 +6,15 @@ export default {
       id
       publishState
       scheduledAt
+      article {
+        id
+        slug
+        mediaHash
+        author {
+          id
+          userName
+        }
+      }
     }
   `,
 }

@@ -20,7 +20,7 @@ const PublishState = ({ draft }: { draft: PublishStateDraft }) => {
     <section className="container">
       {isPending && <PendingState draft={draft} />}
       {isError && <ErrorState draft={draft} />}
-      {isPublished && <PublishedState />}
+      {isPublished && <PublishedState draft={draft} />}
 
       <style jsx>{styles}</style>
     </section>
