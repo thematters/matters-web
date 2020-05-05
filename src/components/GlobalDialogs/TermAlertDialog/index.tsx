@@ -66,6 +66,9 @@ const TermContent: React.FC<TermContentProps> = ({ closeDialog }) => {
     try {
       await logout()
 
+      await unsubscribePush()
+      // await clearPersistCache()
+
       closeDialog()
 
       Router.replace('/')
@@ -79,9 +82,6 @@ const TermContent: React.FC<TermContentProps> = ({ closeDialog }) => {
         })
       )
     }
-
-    await unsubscribePush()
-    // await clearPersistCache()
   }
 
   return (

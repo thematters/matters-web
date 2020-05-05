@@ -43,6 +43,9 @@ const NavMenuBottom: React.FC<NavMenuBottomProps> = ({ isInSideDrawerNav }) => {
         })
       )
 
+      await unsubscribePush()
+      // await clearPersistCache()
+
       redirectToTarget()
     } catch (e) {
       window.dispatchEvent(
@@ -54,9 +57,6 @@ const NavMenuBottom: React.FC<NavMenuBottomProps> = ({ isInSideDrawerNav }) => {
         })
       )
     }
-
-    await unsubscribePush()
-    // await clearPersistCache()
   }
 
   const menuItemSpacing = isInSideDrawerNav
