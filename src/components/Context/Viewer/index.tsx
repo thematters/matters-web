@@ -37,6 +37,39 @@ export const ViewerFragments = {
   `,
 }
 
+export const AnonymousViewer = {
+  id: '',
+  userName: null,
+  displayName: null,
+  avatar: null,
+  liker: {
+    likerId: null,
+    civicLiker: false,
+    __typename: 'Liker',
+  },
+  status: null,
+  info: {
+    email: null,
+    agreeOn: null,
+    userNameEditable: false,
+    group: 'a',
+    __typename: 'UserInfo',
+  },
+  settings: {
+    language: 'zh_hant',
+    __typename: 'UserSettings',
+  },
+  followees: {
+    totalCount: 0,
+    __typename: 'UserConnection',
+  },
+  followers: {
+    totalCount: 0,
+    __typename: 'UserConnection',
+  },
+  __typename: 'User',
+}
+
 export type Viewer = ViewerUser & {
   isAuthed: boolean
   isActive: boolean
@@ -92,10 +125,10 @@ export const ViewerProvider = ({
   viewer,
 }: {
   children: React.ReactNode
-  viewer: ViewerUser
+  viewer: ViewerUser | null | undefined
 }) => {
   return (
-    <ViewerContext.Provider value={processViewer(viewer)}>
+    <ViewerContext.Provider value={processViewer(viewer || AnonymousViewer)}>
       {children}
     </ViewerContext.Provider>
   )

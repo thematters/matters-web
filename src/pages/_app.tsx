@@ -78,7 +78,9 @@ const Root = ({
   const isInMigration = router.pathname === PATHS.MIGRATION
   const shouldApplyLayout = !isInAbout && !isInMigration
 
-  const { loading, data, error } = useQuery<RootQuery>(ROOT_QUERY)
+  const { loading, data, error } = useQuery<RootQuery>(ROOT_QUERY, {
+    skip: !process.browser,
+  })
   const viewer = data?.viewer
 
   if (loading) {
@@ -87,10 +89,6 @@ const Root = ({
 
   if (error) {
     return <QueryError error={error} />
-  }
-
-  if (!viewer) {
-    return <Error />
   }
 
   return (
