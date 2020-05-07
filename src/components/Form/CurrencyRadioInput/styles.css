@@ -1,4 +1,4 @@
-.currency {
+.src/components/Form/AmountRadioInput/index.tsxcurrency {
   @mixin inline-flex-center-all;
 
   background: var(--color-white);
@@ -41,13 +41,5 @@
   &.inactive {
     background: var(--color-white);
     color: var(--color-matters-green);
-  }
-}
-
-footer {
-
-  & div {
-    @mixin flex-center-all;
-    width: 100%;
   }
 }
