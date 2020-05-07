@@ -176,9 +176,7 @@ export const Icon = {
   Expand: withIcon(Expand),
   External: withIcon(External),
   HashTag: withIcon(HashTag),
-  Heart: withIcon((props) => (
-    <Heart style={{ width: 40, height: 40 }} {...props} />
-  )),
+  Heart: withIcon(Heart),
   HelpMedium: withIcon(HelpMedium),
   HistoryMedium: withIcon(HistoryMedium),
   IPFSMedium: withIcon(IPFSMedium),
