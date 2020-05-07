@@ -1,5 +1,7 @@
 import AmountInput from './AmountInput'
+import AmountRadioInput from './AmountRadioInput'
 import CheckBox from './CheckBox'
+import CurrencyRadioInput from './CurrencyRadioInput'
 import DropdownInput from './DropdownInput'
 import Field from './Field'
 import Input from './Input'
@@ -24,6 +26,8 @@ export const Form: React.FC<FormProps> & {
   AmountInput: typeof AmountInput
   List: typeof List
   Field: typeof Field
+  AmountRadioInput: typeof AmountRadioInput
+  CurrencyRadioInput: typeof CurrencyRadioInput
 } = ({ noBackground, children, ...formProps }) => (
   <form
     className={noBackground ? 'no-background' : ''}
@@ -44,3 +48,5 @@ Form.DropdownInput = DropdownInput
 Form.AmountInput = AmountInput
 Form.List = List
 Form.Field = Field
+Form.AmountRadioInput = AmountRadioInput
+Form.CurrencyRadioInput = CurrencyRadioInput
