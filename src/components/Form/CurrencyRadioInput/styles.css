@@ -1,4 +1,4 @@
-.src/components/Form/AmountRadioInput/index.tsxcurrency {
+.currency {
   @mixin inline-flex-center-all;
 
   background: var(--color-white);
