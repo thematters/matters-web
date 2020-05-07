@@ -3,6 +3,7 @@
 
   background: var(--color-white);
   color: var(--color-white);
+  font-weight: var(--font-weight-medium);
   width: 50%;
 
   padding-top: 0.25rem;
