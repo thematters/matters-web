@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 
-import { Spinner, ViewerContext } from '~/components'
+import { Layout, Spinner, ViewerContext } from '~/components'
 
 import { redirectToLogin } from '~/common/utils'
 
@@ -18,8 +18,16 @@ export const Protected: React.FC = ({ children }) => {
   }
 
   if (!process.browser) {
-    return <Spinner />
+    return (
+      <Layout.Main>
+        <Spinner />
+      </Layout.Main>
+    )
   }
 
-  return <Spinner />
+  return (
+    <Layout.Main>
+      <Spinner />
+    </Layout.Main>
+  )
 }

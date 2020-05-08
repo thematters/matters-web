@@ -4,7 +4,7 @@ import Link from 'next/link'
 import React from 'react'
 
 import { Card, CardProps, Translate } from '~/components'
-import { Avatar } from '~/components/Avatar'
+import { Avatar, AvatarProps } from '~/components/Avatar'
 import { FollowButton } from '~/components/Buttons/Follow'
 import { UnblockUserButton } from '~/components/Buttons/UnblockUser'
 
@@ -32,7 +32,8 @@ type RichProps = {
   hasFollow?: boolean
   hasState?: boolean
   hasUnblock?: boolean
-} & CardProps
+} & CardProps &
+  AvatarProps
 
 const fragments = {
   user: gql`
@@ -68,6 +69,8 @@ const Rich = ({
   hasState = true,
   hasUnblock,
 
+  hasCivicLikerRing,
+
   ...cardProps
 }: RichProps) => {
   const path = toPath({
@@ -86,7 +89,10 @@ const Rich = ({
       <Card spacing={['tight', 'tight']} {...cardProps}>
         <section className={containerClass}>
           <span className="avatar">
-            <Avatar size={size === 'sm' ? 'lg' : 'xl'} />
+            <Avatar
+              size={size === 'sm' ? 'lg' : 'xl'}
+              hasCivicLikerRing={hasCivicLikerRing}
+            />
           </span>
 
           <section className="content">

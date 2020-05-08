@@ -21,6 +21,9 @@ const fragments = {
   user: gql`
     fragment AvatarUser on User {
       avatar
+      liker {
+        civicLiker
+      }
     }
   `,
 }
@@ -32,6 +35,7 @@ export const Avatar = (props: AvatarProps) => {
     avatar: true,
     [size]: !!size,
   })
+  const isCivicLiker = user?.liker.civicLiker
 
   return (
     <>
@@ -40,7 +44,9 @@ export const Avatar = (props: AvatarProps) => {
         style={{ backgroundImage: `url(${source})` }}
         aria-hidden="true"
       >
-        {hasCivicLikerRing && <span className="civic-liker-ring" />}
+        {isCivicLiker && hasCivicLikerRing && (
+          <span className="civic-liker-ring" />
+        )}
       </div>
 
       <style jsx>{styles}</style>

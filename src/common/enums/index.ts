@@ -13,6 +13,7 @@ export * from './events'
 export * from './time'
 export * from './oauth'
 export * from './store'
+export * from './payment'
 
 export const Z_INDEX = {
   GLOBAL_HEADER: 100,

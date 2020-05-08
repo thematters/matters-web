@@ -21,7 +21,10 @@ const fragments = {
   `,
 }
 
-const FingerprintDialog = ({ article, children }: FingerprintDialogProps) => {
+const BaseFingerprintDialog = ({
+  article,
+  children,
+}: FingerprintDialogProps) => {
   const [showDialog, setShowDialog] = useState(true)
   const open = () => setShowDialog(true)
   const close = () => setShowDialog(false)
@@ -31,9 +34,9 @@ const FingerprintDialog = ({ article, children }: FingerprintDialogProps) => {
       {children({ open })}
 
       <Dialog isOpen={showDialog} onDismiss={close} fixedHeight>
-        <Dialog.Header title="IPFSEntrance" close={close} />
+        <Dialog.Header title="IPFSEntrance" close={close} closeTextId="close" />
 
-        <Dialog.Content spacing={[0, 0]} hasGrow>
+        <Dialog.Content hasGrow>
           <Content dataHash={article.dataHash || ''} />
         </Dialog.Content>
       </Dialog>
@@ -41,18 +44,10 @@ const FingerprintDialog = ({ article, children }: FingerprintDialogProps) => {
   )
 }
 
-const LazyFingerprintDialog = (props: FingerprintDialogProps) => (
-  <Dialog.Lazy>
-    {({ open, mounted }) =>
-      mounted ? (
-        <FingerprintDialog {...props} />
-      ) : (
-        <>{props.children({ open })}</>
-      )
-    }
+export const FingerprintDialog = (props: FingerprintDialogProps) => (
+  <Dialog.Lazy mounted={<BaseFingerprintDialog {...props} />}>
+    {({ open }) => <>{props.children({ open })}</>}
   </Dialog.Lazy>
 )
 
-LazyFingerprintDialog.fragments = fragments
-
-export default LazyFingerprintDialog
+FingerprintDialog.fragments = fragments

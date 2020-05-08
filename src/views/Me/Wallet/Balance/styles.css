@@ -1,0 +1,13 @@
+.balance {
+  margin-bottom: var(--spacing-loose);
+
+  text-align: center;
+}
+
+.hint {
+  margin-bottom: var(--spacing-x-tight);
+
+  color: var(--color-grey);
+  font-size: var(--font-size-sm);
+  line-height: 1.5rem;
+}

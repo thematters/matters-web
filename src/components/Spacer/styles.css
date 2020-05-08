@@ -6,6 +6,14 @@
   padding-bottom: var(--spacing-loose);
 }
 
+.xloose {
+  padding-bottom: var(--spacing-x-loose);
+}
+
+.xxloose {
+  padding-bottom: var(--spacing-xx-loose);
+}
+
 .xxxloose {
   padding-bottom: var(--spacing-xxx-loose);
 }

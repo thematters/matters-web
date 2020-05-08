@@ -1,8 +1,9 @@
 import { ApolloProvider, useQuery } from '@apollo/react-hooks'
+import { getDataFromTree } from '@apollo/react-ssr'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
 import gql from 'graphql-tag'
-import App from 'next/app'
+import { AppProps } from 'next/app'
 import getConfig from 'next/config'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
@@ -108,23 +109,21 @@ const Root = ({
   )
 }
 
-class MattersApp extends App<{ apollo: ApolloClient<InMemoryCache> }> {
-  render() {
-    const { Component, pageProps, apollo } = this.props
+const MattersApp = ({
+  Component,
+  pageProps,
+  apollo,
+}: AppProps & { apollo: ApolloClient<InMemoryCache> }) => (
+  <ErrorBoundary>
+    <ApolloProvider client={apollo}>
+      <GlobalStyles />
+      <ClientUpdater />
 
-    return (
-      <ErrorBoundary>
-        <ApolloProvider client={apollo}>
-          <GlobalStyles />
-          <ClientUpdater />
+      <Root client={apollo}>
+        <Component {...pageProps} />
+      </Root>
+    </ApolloProvider>
+  </ErrorBoundary>
+)
 
-          <Root client={apollo}>
-            <Component {...pageProps} />
-          </Root>
-        </ApolloProvider>
-      </ErrorBoundary>
-    )
-  }
-}
-
-export default withApollo(MattersApp)
+export default withApollo(MattersApp, { getDataFromTree })

@@ -28,7 +28,11 @@ const BaseMigrationDialog = ({
       {children({ open })}
 
       <Dialog size="sm" isOpen={showDialog} onDismiss={close} fixedHeight>
-        <Dialog.Header title="migration" close={close} />
+        <Dialog.Header
+          title="migration"
+          close={close}
+          closeTextId={step === 'success' ? 'close' : 'cancel'}
+        />
         {step === 'upload' && <Upload nextStep={nextStep} />}
         {step === 'success' && <Success />}
       </Dialog>
@@ -38,13 +42,7 @@ const BaseMigrationDialog = ({
 }
 
 export const MigrationDialog = (props: MigrationDialogProps) => (
-  <Dialog.Lazy>
-    {({ open, mounted }) =>
-      mounted ? (
-        <BaseMigrationDialog {...props} />
-      ) : (
-        <>{props.children({ open })}</>
-      )
-    }
+  <Dialog.Lazy mounted={<BaseMigrationDialog {...props} />}>
+    {({ open }) => <>{props.children({ open })}</>}
   </Dialog.Lazy>
 )

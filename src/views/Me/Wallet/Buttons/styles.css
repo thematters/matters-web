@@ -1,0 +1,15 @@
+.buttons {
+  margin-bottom: var(--spacing-loose);
+
+  & :global(> button) {
+    width: 100%;
+  }
+
+  & :global(> button + button) {
+    margin-top: var(--spacing-base);
+  }
+
+  @media (--sm-up) {
+    margin-bottom: var(--spacing-xx-loose);
+  }
+}

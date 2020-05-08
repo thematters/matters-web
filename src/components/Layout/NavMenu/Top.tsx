@@ -50,13 +50,13 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
         </TextIcon>
       </Menu.Item>
 
-      <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_APPRECIATIONS_SENT}>
+      <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_WALLET}>
         <TextIcon
-          icon={<Icon.LikeMedium size="md" />}
+          icon={<Icon.WalletMedium size="md" />}
           spacing="base"
           size={menuItemSize}
         >
-          <Translate id="myAppreciations" />
+          <Translate id="myWallet" />
         </TextIcon>
       </Menu.Item>
 
@@ -67,6 +67,16 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
           size={menuItemSize}
         >
           <Translate id="myBookmarks" />
+        </TextIcon>
+      </Menu.Item>
+
+      <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_APPRECIATIONS_SENT}>
+        <TextIcon
+          icon={<Icon.LikeMedium size="md" />}
+          spacing="base"
+          size={menuItemSize}
+        >
+          <Translate id="myAppreciations" />
         </TextIcon>
       </Menu.Item>
 

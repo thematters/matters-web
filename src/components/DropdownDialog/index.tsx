@@ -29,7 +29,7 @@ import { KEYCODES, TEXT, TextId } from '~/common/enums'
  *     dialog={{
  *       content: <DialogContent />,
  *       title: ....,
- *       headerHidden: false
+ *       mode: 'hidden'
  *     }}
  *   >
  *     <Button>
@@ -130,7 +130,12 @@ const BaseDropdownDialog = ({
       {children({ open })}
 
       <Dialog isOpen={showDialog} onDismiss={close} {...dialog} slideIn>
-        <Dialog.Header title={dialog.title} close={close} headerHidden />
+        <Dialog.Header
+          title={dialog.title}
+          close={close}
+          closeTextId="close"
+          mode="hidden"
+        />
 
         <Content>{dialog.content}</Content>
 
@@ -149,13 +154,7 @@ const BaseDropdownDialog = ({
 }
 
 export const DropdownDialog: React.FC<DropdownDialogProps> = (props) => (
-  <Dialog.Lazy>
-    {({ open, mounted }) =>
-      mounted ? (
-        <BaseDropdownDialog {...props} />
-      ) : (
-        <>{props.children({ open })}</>
-      )
-    }
+  <Dialog.Lazy mounted={<BaseDropdownDialog {...props} />}>
+    {({ open }) => <>{props.children({ open })}</>}
   </Dialog.Lazy>
 )

@@ -25,9 +25,7 @@ const BaseNewsletterDialog = ({ children }: NewsletterDialogProps) => {
 }
 
 export const NewsletterDialog = (props: NewsletterDialogProps) => (
-  <Dialog.Lazy>
-    {({ open, mounted }) =>
-      mounted ? <BaseNewsletterDialog {...props} /> : <>{props.children({ open })}</>
-    }
+  <Dialog.Lazy mounted={<BaseNewsletterDialog {...props} />}>
+    {({ open }) => <>{props.children({ open })}</>}
   </Dialog.Lazy>
 )

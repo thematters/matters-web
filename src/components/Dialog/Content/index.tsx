@@ -2,8 +2,8 @@ import classNames from 'classnames'
 
 import styles from './styles.css'
 
-type SpacingX = 0 | 'base' | 'xloose' | 'xxxloose'
-type SpacingY = 0 | 'base' | 'xloose' | 'xxxloose'
+type SpacingX = 0 | 'base' | 'xloose'
+type SpacingY = 0 | 'base' | 'xloose'
 
 interface DialogContentProps {
   // Note: only apply in "sm-up" if the spacing is large than "base"
@@ -12,7 +12,7 @@ interface DialogContentProps {
 }
 
 const DialogContent: React.FC<DialogContentProps> = ({
-  spacing = ['base', 'base'],
+  spacing = [0, 0],
   hasGrow,
 
   children,

@@ -158,10 +158,8 @@ header {
       }
 
       & .intro {
-        display: flex;
+        @mixin flex-start-center;
         flex-direction: column;
-        align-items: flex-start;
-        justify-content: center;
         text-align: left;
 
         & p {

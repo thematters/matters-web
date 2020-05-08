@@ -99,8 +99,8 @@ const SideNav = () => {
               </section>
             }
             placement="right-start"
-            distance={16}
-            offset={-16}
+            distance={24}
+            offset={-24}
             boundary="viewport"
             appendTo={process.browser ? document.body : undefined}
             zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
@@ -125,6 +125,7 @@ const SideNav = () => {
             <WriteButton
               allowed={!viewer.shouldSetupLikerID}
               isLarge={isMediumUp}
+              forbidden={viewer.isInactive}
             />
           </li>
         )}

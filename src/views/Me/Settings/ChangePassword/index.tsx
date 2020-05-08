@@ -6,32 +6,16 @@ type Step = 'request' | 'confirm' | 'complete'
 
 const ChangePassword = () => {
   const viewer = useContext(ViewerContext)
+
   const [step, setStep] = useState<Step>('request')
-  const [data, setData] = useState<{ [key: string]: any }>({
-    request: {
-      prev: 'login',
-      next: 'confirm',
-      email: viewer.info.email,
-    },
-    confirm: {
-      prev: 'request',
-      next: 'complete',
-    },
-    complete: {},
+  const [data, setData] = useState<{ email: string; codeId: string }>({
+    email: viewer.info.email,
+    codeId: '',
   })
 
   const requestCodeCallback = (params: any) => {
     const { email, codeId } = params
-    setData((prev) => {
-      return {
-        ...prev,
-        request: {
-          ...prev.request,
-          email,
-          codeId,
-        },
-      }
-    })
+    setData({ ...data, email, codeId })
     setStep('confirm')
   }
 
@@ -41,7 +25,7 @@ const ChangePassword = () => {
 
       {step === 'request' && (
         <ChangePasswordForm.Request
-          defaultEmail={data.request.email}
+          defaultEmail={data.email}
           type="change"
           purpose="page"
           submitCallback={requestCodeCallback}
@@ -50,7 +34,7 @@ const ChangePassword = () => {
 
       {step === 'confirm' && (
         <ChangePasswordForm.Confirm
-          codeId={data.request.codeId}
+          codeId={data.codeId}
           type="change"
           purpose="page"
           submitCallback={() => setStep('complete')}

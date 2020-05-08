@@ -48,6 +48,7 @@ const nextConfig = {
     FIREBASE_CONFIG,
     FCM_VAPID_KEY: process.env.FCM_VAPID_KEY,
     RECAPTCHA_KEY: process.env.RECAPTCHA_KEY,
+    STRIPE_PUBLIC_KEY: process.env.STRIPE_PUBLIC_KEY,
   },
 
   /**

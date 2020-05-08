@@ -1,7 +1,9 @@
+import { MINIMAL_CHARGE_AMOUNT } from '~/common/enums'
 import {
   isValidDisplayName,
   isValidEmail,
   isValidPassword,
+  isValidPaymentPassword,
   isValidUserName,
   translate,
   ValidEmailOptions,
@@ -45,6 +47,14 @@ export const validateComparedPassword = (
   }
 }
 
+export const validatePaymentPassword = (value: string, lang: Language) => {
+  if (!value) {
+    return translate({ id: 'required', lang })
+  } else if (!isValidPaymentPassword(value)) {
+    return translate({ id: 'hintPaymentPassword', lang })
+  }
+}
+
 export const validateUserName = (value: string, lang: Language) => {
   if (!value) {
     return translate({ id: 'required', lang })
@@ -65,14 +75,10 @@ export const validateComparedUserName = (
   }
 }
 
-export const validateDisplayName = (
-  value: string,
-  lang: Language,
-  isAdmin?: boolean
-) => {
+export const validateDisplayName = (value: string, lang: Language) => {
   if (!value) {
     return translate({ id: 'required', lang })
-  } else if (!isValidDisplayName(value) && !isAdmin) {
+  } else if (!isValidDisplayName(value)) {
     return translate({ id: 'hintDisplayName', lang })
   }
 }
@@ -98,5 +104,21 @@ export const validateToS = (value: boolean, lang: Language) => {
 export const validateAvatar = (value: string | null, lang: Language) => {
   if (!value) {
     return translate({ id: 'required', lang })
+  }
+}
+
+export const validateAmount = (value: number, lang: Language) => {
+  // TODO: multi-currency support
+
+  if (!value) {
+    return translate({ id: 'required', lang })
+  }
+
+  if (value < MINIMAL_CHARGE_AMOUNT.HKD) {
+    return translate({
+      zh_hant: `最少充值金額爲 HKD ${MINIMAL_CHARGE_AMOUNT.HKD}`,
+      zh_hans: `最少充值金额为 HKD ${MINIMAL_CHARGE_AMOUNT.HKD}`,
+      lang,
+    })
   }
 }

@@ -65,9 +65,7 @@ header {
 }
 .mode-comfortable {
   & .content {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    @mixin flex-start-space-between;
     margin: var(--spacing-tight) 0 var(--spacing-base);
 
     & .cover {
