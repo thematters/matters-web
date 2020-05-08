@@ -9,7 +9,6 @@ import helmet from 'helmet'
 import MobileDetect from 'mobile-detect'
 import 'module-alias/register'
 import next from 'next'
-import { join } from 'path'
 
 import { ROUTES, toExpressPath } from '~/common/enums'
 
@@ -60,12 +59,6 @@ app
 
     // fallback
     server.get('*', (req, res) => {
-      if (req.path === '/service-worker.js') {
-        const filePath = join('build', req.path)
-        res.setHeader('Service-Worker-Allowed', '/')
-        return app.serveStatic(req, res, filePath)
-      }
-
       return handle(req, res)
     })
 
