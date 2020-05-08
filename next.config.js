@@ -169,6 +169,7 @@ module.exports = withPlugins(
         workboxOpts: {
           // https://github.com/hanford/next-offline/issues/35
           importScripts: [URL_PUSH_SW],
+          swDest: '../public/service-worker.js',
           runtimeCaching: [
             {
               urlPattern: '/',
