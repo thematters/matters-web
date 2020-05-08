@@ -218,6 +218,7 @@ const SetAmount: React.FC<FormProps> = ({
         <Form.AmountInput
           autoFocus
           required
+          className={isHKD ? 'red-style' : undefined}
           fixedPlaceholder={values.currency}
           name="amount"
           min={0}
@@ -234,7 +235,13 @@ const SetAmount: React.FC<FormProps> = ({
 
       {canProcess && (
         <section className="set-amount-other">
-          <Button textColor={color} onClick={() => setFixed(!fixed)}>
+          <Button textColor={color} onClick={() => {
+            // reset default fixed amount
+            if (fixed === false) {
+              setFieldValue('amount', isLike ? defaultLikeAmount : defaultHKDAmount)
+            }
+            setFixed(!fixed)
+          }}>
             {fixed
               ? translate({ zh_hant: '其他金額', zh_hans: '其他金額', lang })
               : translate({ zh_hant: '固定金額', zh_hans: '固定金額', lang })}

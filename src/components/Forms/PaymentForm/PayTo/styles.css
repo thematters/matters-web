@@ -2,6 +2,7 @@
   @mixin flex-center-all;
 
   width: 100%;
+  margin-bottom: var(--spacing-loose);
 }
 
 .set-amount-fee {
@@ -9,7 +10,6 @@
 
   color: var(--color-grey-dark);
   font-size: var(--font-size-sm-s);
-  margin-top: var(--spacing-loose);
 }
 
 .set-amount-no-liker-id {
