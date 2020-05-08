@@ -82,7 +82,15 @@ import { ReactComponent as WalletMedium } from './icons/wallet-md.svg'
 import Live from './Live'
 import styles from './styles.css'
 
-export type IconSize = 'xs' | 'sm' | 'md-s' | 'md' | 'lg' | 'xl' | 'xxl'
+export type IconSize =
+  | 'xs'
+  | 'sm'
+  | 'md-s'
+  | 'md'
+  | 'lg'
+  | 'xl-s'
+  | 'xl'
+  | 'xxl'
 
 export type IconColor =
   | 'white'
@@ -93,6 +101,7 @@ export type IconColor =
   | 'grey-lighter'
   | 'green'
   | 'gold'
+  | 'red'
 
 export interface IconProps {
   size?: IconSize

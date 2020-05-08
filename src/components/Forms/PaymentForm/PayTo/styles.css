@@ -1,0 +1,46 @@
+.set-amount-other {
+  @mixin flex-center-all;
+
+  width: 100%;
+}
+
+.set-amount-fee {
+  @mixin flex-center-all;
+
+  color: var(--color-grey-dark);
+  font-size: var(--font-size-sm-s);
+  margin-top: var(--spacing-loose);
+}
+
+.set-amount-no-liker-id {
+  @mixin flex-center-all;
+
+  color: var(--color-grey-dark);
+  margin: var(--spacing-xx-loose) var(--spacing-xxx-loose);
+  text-align: center;
+}
+
+.complete-avatar {
+  @mixin flex-center-all;
+  margin: var(--spacing-loose) var(--spacing-x-loose);
+}
+
+.complete-avatar-outline {
+  @mixin flex-center-all;
+
+  border: 2.5px solid var(--color-white);
+  border-radius: 50%;
+  margin-left: calc(var(--spacing-x-tight) * -1);
+}
+
+.complete-message {
+  color: var(--color-grey-darker);
+  margin: 0 var(--spacing-x-loose) var(--spacing-x-loose);
+  line-height: 2;
+  text-align: center;
+}
+
+.complete-emphasize {
+  color: var(--color-black);
+  font-weight: var(--font-weight-medium);
+}

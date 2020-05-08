@@ -10,6 +10,7 @@ import { Waypoint } from 'react-waypoint'
 import {
   BackToHomeButton,
   DateTime,
+  DonationDialog,
   Error,
   Head,
   Icon,
@@ -29,6 +30,7 @@ import { getQuery } from '~/common/utils'
 
 import Collection from './Collection'
 import Content from './Content'
+import DonationButton from './DonationButton'
 import FingerprintButton from './FingerprintButton'
 import RelatedArticles from './RelatedArticles'
 import State from './State'
@@ -55,6 +57,7 @@ const ARTICLE_DETAIL = gql`
       createdAt
       author {
         ...UserDigestRichUser
+        ...UserDonationRecipient
       }
       collection(input: { first: 0 }) @connection(key: "articleCollection") {
         totalCount
@@ -72,6 +75,7 @@ const ARTICLE_DETAIL = gql`
   ${RelatedArticles.fragments.article}
   ${State.fragments.article}
   ${FingerprintButton.fragments.article}
+  ${DonationDialog.fragments.recipient}
 `
 
 const DynamicResponse = dynamic(() => import('./Responses'), {
@@ -109,6 +113,7 @@ const ArticleDetail = () => {
   const authorId = article && article.author.id
   const collectionCount = (article && article.collection.totalCount) || 0
   const canEditCollection = viewer.id === authorId
+  const showDonation = viewer.isAuthed && viewer.id !== article?.author.id
 
   useEffect(() => {
     if (shouldShowWall && window.location.hash && article) {
@@ -207,6 +212,10 @@ const ArticleDetail = () => {
         </section>
 
         <Content article={article} />
+
+        {showDonation && (
+          <DonationButton recipient={article.author} targetId={article.id} />
+        )}
 
         {(collectionCount > 0 || canEditCollection) && (
           <section className="block">
