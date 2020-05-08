@@ -9,6 +9,8 @@ import styles from './styles.css'
 import { PaymentPayoutNotice as NoticeType } from './__generated__/PaymentPayoutNotice'
 
 const PaymentPayoutNotice = ({ notice }: { notice: NoticeType }) => {
+  const tx = notice.target
+
   return (
     <section className="container">
       <section className="avatar-wrap">
@@ -18,7 +20,11 @@ const PaymentPayoutNotice = ({ notice }: { notice: NoticeType }) => {
       <section className="content-wrap">
         <p>
           <Translate zh_hant="你的 " zh_hans="你的 " />
-          {notice.target && `${notice.target.amount} ${notice.target.currency}`}
+          {tx && (
+            <span className="highlight">
+              {tx.amount} {tx.currency}
+            </span>
+          )}
           <Translate
             zh_hant={' 提現流程已開始，到帳時間請關注銀行提醒。'}
             zh_hans={' 提现流程已开始，到帐时间请关注银行提醒。'}

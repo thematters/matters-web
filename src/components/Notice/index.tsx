@@ -153,6 +153,10 @@ const BaseNotice: React.FC<NoticeProps> = ({ notice }) => {
       return <ArticleTagHasBeenRemovedNotice notice={notice} />
     case 'ArticleTagHasBeenUnselectedNotice':
       return <ArticleTagHasBeenUnselectedNotice notice={notice} />
+    case 'PaymentReceivedDonationNotice':
+      return <PaymentReceivedDonationNotice notice={notice} />
+    case 'PaymentPayoutNotice':
+      return <PaymentPayoutNotice notice={notice} />
     default:
       return null
   }
