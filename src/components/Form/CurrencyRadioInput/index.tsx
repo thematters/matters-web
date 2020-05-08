@@ -100,22 +100,20 @@ const CurrencyRadioInput: React.FC<CurrencyRadioInputProps> = ({
 
   return (
     <Field>
-      <Field.Content>
-        <CurrencyOption
-          {...baseInputProps}
-          inactive={isLike}
-          optionName={<Translate id="hkd" />}
-          optionType="hkd"
-          optionValue={PAYMENT_CURRENCY.HKD}
-        />
-        <CurrencyOption
-          {...baseInputProps}
-          inactive={!isLike}
-          optionName="LikeCoin"
-          optionType="like"
-          optionValue={PAYMENT_CURRENCY.LIKE}
-        />
-      </Field.Content>
+      <CurrencyOption
+        {...baseInputProps}
+        inactive={isLike}
+        optionName={<Translate id="hkd" />}
+        optionType="hkd"
+        optionValue={PAYMENT_CURRENCY.HKD}
+      />
+      <CurrencyOption
+        {...baseInputProps}
+        inactive={!isLike}
+        optionName="LikeCoin"
+        optionType="like"
+        optionValue={PAYMENT_CURRENCY.LIKE}
+      />
 
       <Field.Footer fieldMsgId={fieldMsgId} hint={hint} error={error} />
 

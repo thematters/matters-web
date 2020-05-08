@@ -103,13 +103,11 @@ const AmountRadioInput: React.FC<AmountRadioInputProps> = ({
 
   return (
     <Field>
-      <Field.Content>
-        <section className="amount-options">
-          {options.map((option) => (
-            <AmountOption {...baseInputProps} key={option} amount={option} />
-          ))}
-        </section>
-      </Field.Content>
+      <section className="amount-options">
+        {options.map((option) => (
+          <AmountOption {...baseInputProps} key={option} amount={option} />
+        ))}
+      </section>
 
       <Field.Footer fieldMsgId={fieldMsgId} hint={hint} error={error} />
 
