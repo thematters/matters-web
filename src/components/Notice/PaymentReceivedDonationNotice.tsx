@@ -22,7 +22,7 @@ const PaymentReceivedDonationNotice = ({ notice }: { notice: NoticeType }) => {
       <section className="content-wrap">
         <NoticeHead notice={notice}>
           <NoticeActorName user={notice.actor} />{' '}
-          <Translate zh_hant="支持了你 " zh_hans="支持了你 " />
+          <Translate zh_hant="支持了你的作品 " zh_hans="支持了你的作品 " />
           {tx && (
             <span className="highlight">
               {tx.amount} {tx.currency}
