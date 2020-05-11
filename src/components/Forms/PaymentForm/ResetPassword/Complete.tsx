@@ -5,10 +5,7 @@ interface CompleteProps {
   footerButtons?: React.ReactNode
 }
 
-const Complete: React.FC<CompleteProps> = ({
-  closeDialog,
-  footerButtons,
-}) => {
+const Complete: React.FC<CompleteProps> = ({ closeDialog, footerButtons }) => {
   return (
     <>
       <Dialog.Message spacing="md">
@@ -18,18 +15,17 @@ const Complete: React.FC<CompleteProps> = ({
       </Dialog.Message>
 
       <Dialog.Footer>
-        {footerButtons
-          ? <Dialog.Footer>{footerButtons}</Dialog.Footer>
-          : (
-            <Dialog.Footer.Button
-              bgColor="grey-lighter"
-              textColor="black"
-              onClick={closeDialog}
-            >
-              <Translate id="close" />
-            </Dialog.Footer.Button>
-          )
-        }
+        {footerButtons ? (
+          <Dialog.Footer>{footerButtons}</Dialog.Footer>
+        ) : (
+          <Dialog.Footer.Button
+            bgColor="grey-lighter"
+            textColor="black"
+            onClick={closeDialog}
+          >
+            <Translate id="close" />
+          </Dialog.Footer.Button>
+        )}
       </Dialog.Footer>
     </>
   )

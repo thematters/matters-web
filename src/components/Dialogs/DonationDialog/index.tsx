@@ -194,7 +194,9 @@ const BaseDonationDialog = ({
               ? 'topUp'
               : isSetPaymentPassword
               ? 'paymentPassword'
-              : (isResetPasswordComplete || isResetPasswordConfirm || isResetPasswordRequest)
+              : isResetPasswordComplete ||
+                isResetPasswordConfirm ||
+                isResetPasswordRequest
               ? 'resetPaymentPassword'
               : 'donation'
           }
@@ -279,34 +281,33 @@ const BaseDonationDialog = ({
 
         {/* below steps for password management */}
 
-        {isPasswordInvalid &&
+        {isPasswordInvalid && (
           <PaymentForm.PayTo.PasswordInvalid
             switchToConfirm={() => setStep('confirm')}
             switchToResetPassword={() => setStep('resetPasswordRequest')}
           />
-        }
+        )}
 
-        {isResetPasswordRequest &&
+        {isResetPasswordRequest && (
           <PaymentForm.ResetPassword.Request
             defaultEmail={resetPasswordData.email}
             submitCallback={resetPasswordRequestCallback}
           />
-        }
+        )}
 
-        {isResetPasswordConfirm &&
+        {isResetPasswordConfirm && (
           <PaymentForm.ResetPassword.Confirm
             codeId={resetPasswordData.codeId}
             submitCallback={() => setStep('resetPasswordComplete')}
           />
-        }
+        )}
 
-        {isResetPasswordComplete &&
+        {isResetPasswordComplete && (
           <PaymentForm.ResetPassword.Complete
             closeDialog={close}
             footerButtons={ContinueDonationButton}
           />
-        }
-
+        )}
       </Dialog>
     </>
   )
