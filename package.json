@@ -106,7 +106,7 @@
     "@types/react": "^16.9.34",
     "@types/react-beautiful-dnd": "^12.1.2",
     "@types/react-copy-to-clipboard": "^4.3.0",
-    "@types/react-dom": "^16.9.7",
+    "@types/react-dom": "^16.9.8",
     "@types/react-responsive": "^8.0.2",
     "@types/react-virtualized": "^9.21.9",
     "@types/segment-analytics": "0.0.32",
