@@ -20,12 +20,6 @@ const FIREBASE_CONFIG = process.env.FIREBASE_CONFIG
   ? JSON.parse(Buffer.from(process.env.FIREBASE_CONFIG, 'base64').toString())
   : {}
 
-const FIREBASE_ANALYTICS_CONFIG = process.env.FIREBASE_ANALYTICS_CONFIG
-  ? JSON.parse(
-      Buffer.from(process.env.FIREBASE_ANALYTICS_CONFIG, 'base64').toString()
-    )
-  : {}
-
 const URL_PUSH_SW = isProd
   ? './firebase-messaging-sw-production.js'
   : './firebase-messaging-sw-develop.js'
@@ -52,7 +46,6 @@ const nextConfig = {
     FB_APP_ID: process.env.FB_APP_ID,
     SENTRY_DSN: process.env.SENTRY_DSN,
     FIREBASE_CONFIG,
-    FIREBASE_ANALYTICS_CONFIG,
     FCM_VAPID_KEY: process.env.FCM_VAPID_KEY,
     RECAPTCHA_KEY: process.env.RECAPTCHA_KEY,
     STRIPE_PUBLIC_KEY: process.env.STRIPE_PUBLIC_KEY,
@@ -177,10 +170,7 @@ module.exports = withPlugins(
         workboxOpts: {
           // https://github.com/hanford/next-offline/issues/35
           importScripts: [URL_PUSH_SW],
-<<<<<<< HEAD
           swDest: '../public/service-worker.js',
-=======
->>>>>>> add firebase typing
           runtimeCaching: [
             {
               urlPattern: '/',

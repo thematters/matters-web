@@ -12,7 +12,7 @@ import { GA_TRACKING_ID } from '~/common/enums'
 import { langConvert } from '~/common/utils'
 
 const {
-  publicRuntimeConfig: { SEGMENT_KEY, FIREBASE_ANALYTICS_CONFIG },
+  publicRuntimeConfig: { SEGMENT_KEY, FIREBASE_CONFIG },
 } = getConfig()
 
 interface MattersDocumentProps {
@@ -69,9 +69,7 @@ class MattersDocument extends Document<MattersDocumentProps> {
             async
             dangerouslySetInnerHTML={{
               __html: `
-                firebase.initializeApp(${JSON.stringify(
-                  FIREBASE_ANALYTICS_CONFIG
-                )});
+                firebase.initializeApp(${JSON.stringify(FIREBASE_CONFIG)});
                 window.firebaseAnalytics = firebase.analytics();
               `,
             }}
