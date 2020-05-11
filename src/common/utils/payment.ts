@@ -27,3 +27,8 @@ export const calcStripeFee = (amount: number) => {
   const fee = charge - amount
   return numRound(fee)
 }
+
+export const calcMattersFee = (amount: number) => {
+  const fee = amount * 0.05
+  return numRound(fee)
+}

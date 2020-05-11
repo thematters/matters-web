@@ -1,7 +1,7 @@
 import VisuallyHidden from '@reach/visually-hidden'
 import classNames from 'classnames'
 
-import { PAYMENT_CURRENCY } from '~/common/enums'
+import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 
 import Field, { FieldProps } from '../Field'
 import styles from './styles.css'
@@ -31,7 +31,7 @@ type AmountOptionProps = {
   >
 
 type AmountRadioInputProps = {
-  currency: PAYMENT_CURRENCY
+  currency: CURRENCY
   isLike: boolean
   name: string
 } & Omit<FieldProps, 'fieldMsgId'> &
@@ -41,8 +41,8 @@ type AmountRadioInputProps = {
   >
 
 const amountOptions = {
-  [PAYMENT_CURRENCY.HKD]: [5, 10, 50, 80, 100, 200],
-  [PAYMENT_CURRENCY.LIKE]: [160, 660, 1660],
+  [CURRENCY.HKD]: [5, 10, 50, 80, 100, 200],
+  [CURRENCY.LIKE]: [160, 660, 1660],
 }
 
 const AmountOption: React.FC<AmountOptionProps> = ({

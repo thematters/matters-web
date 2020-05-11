@@ -3,7 +3,7 @@ import classNames from 'classnames'
 
 import { Translate } from '~/components'
 
-import { PAYMENT_CURRENCY } from '~/common/enums'
+import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 
 import Field, { FieldProps } from '../Field'
 import styles from './styles.css'
@@ -27,7 +27,7 @@ type CurrencyOptionProps = {
   isLike: boolean
   name: string
   optionName: React.ReactNode
-  optionValue: PAYMENT_CURRENCY
+  optionValue: CURRENCY
   optionType: 'hkd' | 'like'
 } & FieldProps &
   React.DetailedHTMLProps<
@@ -105,14 +105,14 @@ const CurrencyRadioInput: React.FC<CurrencyRadioInputProps> = ({
         inactive={isLike}
         optionName={<Translate id="hkd" />}
         optionType="hkd"
-        optionValue={PAYMENT_CURRENCY.HKD}
+        optionValue={CURRENCY.HKD}
       />
       <CurrencyOption
         {...baseInputProps}
         inactive={!isLike}
         optionName="LikeCoin"
         optionType="like"
-        optionValue={PAYMENT_CURRENCY.LIKE}
+        optionValue={CURRENCY.LIKE}
       />
 
       <Field.Footer fieldMsgId={fieldMsgId} hint={hint} error={error} />

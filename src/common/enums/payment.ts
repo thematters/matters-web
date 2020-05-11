@@ -13,6 +13,7 @@ export enum PAYMENT_CURRENCY {
 
 export const PLATFORM_FEE = {
   HKD: '3.4% + HKD 2.35',
+  MATTERS: '5%',
 }
 
 /**
