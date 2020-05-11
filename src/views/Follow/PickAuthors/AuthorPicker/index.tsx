@@ -80,7 +80,7 @@ export const AuthorPicker = ({ title }: { title: React.ReactNode }) => {
         <List hasBorder={false}>
           {edges.map(({ node, cursor }) => (
             <List.Item key={cursor}>
-              <UserDigest.Rich user={node} hasCivicLikerRing />
+              <UserDigest.Rich user={node} />
             </List.Item>
           ))}
         </List>

@@ -61,8 +61,6 @@ const Mini = ({
   nameColor = 'black',
   direction = 'row',
 
-  hasCivicLikerRing,
-
   hasAvatar,
   hasDisplayName,
   hasUserName,
@@ -107,9 +105,7 @@ const Mini = ({
   return (
     <LinkWrapper {...path} disabled={disabled}>
       <section className={containerClass}>
-        {hasAvatar && (
-          <Avatar size={avatarSize} user={user} hasCivicLikerRing />
-        )}
+        {hasAvatar && <Avatar size={avatarSize} user={user} />}
 
         <span className={nameClass}>
           {hasDisplayName && (
