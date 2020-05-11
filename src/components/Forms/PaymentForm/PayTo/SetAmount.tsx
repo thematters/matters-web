@@ -13,7 +13,10 @@ import {
 import { useMutation } from '~/components/GQL'
 import PAY_TO from '~/components/GQL/mutations/payTo'
 
-import { OPEN_LIKE_COIN_DIALOG, PAYMENT_CURRENCY } from '~/common/enums'
+import {
+  OPEN_LIKE_COIN_DIALOG,
+  PAYMENT_CURRENCY as CURRENCY,
+} from '~/common/enums'
 import {
   translate,
   validateCurrency,
@@ -28,21 +31,21 @@ import {
   PayTo_payTo as PayToResult,
 } from '~/components/GQL/mutations/__generated__/PayTo'
 
+type SetAmountCallbackValues = {
+  amount: number
+  currency: CURRENCY
+} & Partial<Omit<PayToResult, '__typename'>>
+
 interface FormProps {
   close: () => void
   recipient: UserDonationRecipient
-  submitCallback: (
-    values: {
-      amount: number
-      currency: PAYMENT_CURRENCY
-    } & Omit<PayToResult, '__typename'>
-  ) => void
+  submitCallback: (values: SetAmountCallbackValues) => void
   targetId: string
 }
 
 interface FormValues {
   amount: number
-  currency: PAYMENT_CURRENCY
+  currency: CURRENCY
 }
 
 interface NoLikerId {
@@ -100,7 +103,7 @@ const NoLikerIdButton = ({
         type="button"
         bgColor="green"
         textColor="white"
-        onClick={() => setFieldValue('currency', PAYMENT_CURRENCY.HKD)}
+        onClick={() => setFieldValue('currency', CURRENCY.HKD)}
       >
         <Translate zh_hant="使用港幣支持" zh_hans="使用港币支持" />
       </Dialog.Footer.Button>
@@ -136,7 +139,7 @@ const SetAmount: React.FC<FormProps> = ({
   } = useFormik<FormValues>({
     initialValues: {
       amount: defaultLikeAmount,
-      currency: PAYMENT_CURRENCY.LIKE,
+      currency: CURRENCY.LIKE,
     },
     validate: ({ amount, currency }) =>
       _pickBy({
@@ -145,32 +148,39 @@ const SetAmount: React.FC<FormProps> = ({
       }),
     onSubmit: async ({ amount, currency }, { setSubmitting }) => {
       try {
-        const result = await payTo({
-          variables: {
-            amount,
-            currency,
-            purpose: 'donation',
-            recipientId: recipient.id,
-            targetId,
-          },
-        })
+        switch (currency) {
+          case CURRENCY.LIKE:
+            const result = await payTo({
+              variables: {
+                amount,
+                currency,
+                purpose: 'donation',
+                recipientId: recipient.id,
+                targetId,
+              },
+            })
 
-        const redirectUrl = result?.data?.payTo.redirectUrl
-        const transaction = result?.data?.payTo.transaction
-        if (!redirectUrl || !transaction) {
-          // throw customzied error
-          return
+            const redirectUrl = result?.data?.payTo.redirectUrl
+            const transaction = result?.data?.payTo.transaction
+            if (!redirectUrl || !transaction) {
+              throw new Error()
+            }
+            setSubmitting(false)
+            submitCallback({ amount, currency, redirectUrl, transaction })
+            break
+          case CURRENCY.HKD:
+            setSubmitting(false)
+            submitCallback({ amount, currency })
+            break
         }
-        setSubmitting(false)
-        submitCallback({ amount, currency, redirectUrl, transaction })
       } catch (error) {
         setSubmitting(false)
       }
     },
   })
 
-  const isHKD = values.currency === PAYMENT_CURRENCY.HKD
-  const isLike = values.currency === PAYMENT_CURRENCY.LIKE
+  const isHKD = values.currency === CURRENCY.HKD
+  const isLike = values.currency === CURRENCY.LIKE
   const canGetLike = isLike && !!recipient.liker.likerId
   const canPayLike = isLike && !!viewer.liker.likerId
   const canProcess = isHKD || (canGetLike && canPayLike)
@@ -185,15 +195,13 @@ const SetAmount: React.FC<FormProps> = ({
         error={touched.currency && errors.currency}
         onBlur={handleBlur}
         onChange={(e) => {
-          const raw = (e.target.value || '') as keyof typeof PAYMENT_CURRENCY
-          const value = PAYMENT_CURRENCY[raw]
+          const raw = (e.target.value || '') as keyof typeof CURRENCY
+          const value = CURRENCY[raw]
           if (value) {
             setFieldValue('currency', value)
             setFieldValue(
               'amount',
-              value === PAYMENT_CURRENCY.LIKE
-                ? defaultLikeAmount
-                : defaultHKDAmount
+              value === CURRENCY.LIKE ? defaultLikeAmount : defaultHKDAmount
             )
           }
         }}

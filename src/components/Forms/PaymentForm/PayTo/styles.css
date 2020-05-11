@@ -20,6 +20,61 @@
   text-align: center;
 }
 
+.confirm-info {
+  padding: 0 var(--spacing-base);
+  margin-bottom: var(--spacing-loose);
+  width: 100%;
+
+  color: var(--color-grey);
+  font-size: var(--font-size-sm);
+  line-height: 1.5rem;
+
+  & .row {
+    @mixin flex-center-space-between;
+    margin: var(--spacing-base) 0;
+
+    & .col + .col {
+      text-align: right;
+    }
+  }
+
+  & .breaker {
+    margin: var(--spacing-base) 0;
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.15);
+  }
+
+  & .total {
+    color: var(--color-black);
+    font-weight: var(--font-weight-bold);
+
+    & .col + .col {
+      font-size: var(--font-size-lg);
+    }
+  }
+
+  & .wallet {
+    color: var(--color-black);
+    font-weight: var(--font-weight-bold);
+  }
+
+  & .insufficient {
+    color: var(--color-red);
+  }
+}
+
+.confirm-footer {
+  & :global(> footer) {
+    @mixin flex-center-all;
+
+    flex-direction: column;
+    margin-top: 0rem;
+
+    & :global(> button:last-child) {
+      margin: var(--spacing-base) 0 var(--spacing-loose);
+    }
+  }
+}
+
 .complete-avatar {
   @mixin flex-center-all;
   margin: var(--spacing-loose) var(--spacing-x-loose);

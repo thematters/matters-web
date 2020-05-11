@@ -1,6 +1,6 @@
 import { Avatar, Dialog, Icon, Translate } from '~/components'
 
-import { PAYMENT_CURRENCY } from '~/common/enums'
+import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 
 import styles from './styles.css'
 
@@ -8,7 +8,7 @@ import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__gen
 
 interface Props {
   amount: number
-  currency: PAYMENT_CURRENCY
+  currency: CURRENCY
   recipient: UserDonationRecipient
 }
 
