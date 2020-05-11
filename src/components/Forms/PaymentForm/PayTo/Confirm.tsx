@@ -7,10 +7,8 @@ import { Dialog, Form, LanguageContext, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import PAY_TO from '~/components/GQL/mutations/payTo'
 
-import { PAYMENT_CURRENCY as CURRENCY, PLATFORM_FEE } from '~/common/enums'
+import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import {
-  calcMattersFee,
-  numRound,
   parseFormSubmitErrors,
   toAmountString,
   validatePaymentPassword,
@@ -34,6 +32,7 @@ interface FormProps {
   ) => void
   switchToAddCredit: () => void
   switchToLike: () => void
+  switchToPasswordInvalid: () => void
   targetId: string
 }
 
@@ -49,6 +48,7 @@ const Confirm: React.FC<FormProps> = ({
   submitCallback,
   switchToAddCredit,
   switchToLike,
+  switchToPasswordInvalid,
   targetId,
 }) => {
   const formId = 'pay-to-confirm-form'
@@ -80,7 +80,7 @@ const Confirm: React.FC<FormProps> = ({
             currency,
             password,
             purpose: 'donation',
-            recipient: recipient.id,
+            recipientId: recipient.id,
             targetId,
           },
         })
@@ -92,9 +92,13 @@ const Confirm: React.FC<FormProps> = ({
         setSubmitting(false)
         submitCallback({ transaction })
       } catch (error) {
+        setSubmitting(false)
         const [messages, codes] = parseFormSubmitErrors(error, lang)
         setFieldError('password', messages[codes[0]])
-        setSubmitting(false)
+
+        if (codes[0] === 'USER_PASSWORD_INVALID') {
+          switchToPasswordInvalid()
+        }
       }
     },
   })
@@ -120,8 +124,6 @@ const Confirm: React.FC<FormProps> = ({
     }
   }, [isValid])
 
-  const fee = calcMattersFee(amount)
-  const receive = numRound(amount - fee)
   const isWalletInsufficient = balance < amount
   const walletClasses = classNames({
     row: true,
@@ -145,20 +147,10 @@ const Confirm: React.FC<FormProps> = ({
 
             <section className="row">
               <div className="col">
-                <Translate zh_hant="搭建社區" zh_hans="搭建社区" /> (
-                {PLATFORM_FEE.MATTERS})
-              </div>
-              <div className="col">
-                - {currency} {toAmountString(fee)}
-              </div>
-            </section>
-
-            <section className="row">
-              <div className="col">
                 <Translate zh_hant="作者實收" zh_hans="作者实收" />
               </div>
               <div className="col">
-                {currency} {toAmountString(receive)}
+                {currency} {toAmountString(amount)}
               </div>
             </section>
 

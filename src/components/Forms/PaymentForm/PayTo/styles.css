@@ -62,7 +62,8 @@
   }
 }
 
-.confirm-footer {
+.confirm-footer,
+.password-invalid-footer {
   & :global(> footer) {
     @mixin flex-center-all;
 
@@ -70,7 +71,7 @@
     margin-top: 0rem;
 
     & :global(> button:last-child) {
-      margin: var(--spacing-base) 0 var(--spacing-loose);
+      margin: var(--spacing-base) 0 var(--spacing-base);
     }
   }
 }
@@ -98,4 +99,12 @@
 .complete-emphasize {
   color: var(--color-black);
   font-weight: var(--font-weight-medium);
+}
+
+.password-invalid-message {
+  @mixin flex-center-all;
+
+  color: var(--color-red);
+  font-weight: var(--font-weight-medium);
+  margin: 3rem 1rem;
 }

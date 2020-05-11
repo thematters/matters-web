@@ -29,7 +29,11 @@ type Step =
   | 'checkout'
   | 'complete'
   | 'confirm'
+  | 'passwordInvalid'
   | 'processing'
+  | 'resetPasswordComplete'
+  | 'resetPasswordConfirm'
+  | 'resetPasswordRequest'
   | 'setAmount'
   | 'setPaymentPassword'
 
@@ -39,8 +43,13 @@ export type SetAmountCallbackValues = {
 } & Partial<Omit<PayToResult, '__typename'>>
 
 interface AddCreditData {
-  transaction: AddCreditTx | undefined
   client_secret: string
+  transaction: AddCreditTx | undefined
+}
+
+interface ResetPasswordData {
+  codeId: string
+  email: string
 }
 
 interface DonationDialogProps {
@@ -70,9 +79,10 @@ const BaseDonationDialog = ({
   recipient,
   targetId,
 }: DonationDialogProps) => {
-  const baseAddCreditData = { transaction: undefined, client_secret: '' }
-
   const viewer = useContext(ViewerContext)
+
+  const baseAddCreditData = { transaction: undefined, client_secret: '' }
+  const baseResetPasswordData = { email: viewer.info.email, codeId: '' }
 
   const [showDialog, setShowDialog] = useState(true)
   const [step, setStep] = useState<Step>(defaultStep)
@@ -83,6 +93,9 @@ const BaseDonationDialog = ({
   const [payToTx, setPayToTx] = useState<Omit<PayToTx, '__typename'>>()
   const [addCreditData, setAddCreditData] = useState<AddCreditData>(
     baseAddCreditData
+  )
+  const [resetPasswordData, setResetPasswordData] = useState<ResetPasswordData>(
+    baseResetPasswordData
   )
 
   const { data, loading } = useQuery<WalletBalance>(WALLET_BALANCE)
@@ -132,6 +145,22 @@ const BaseDonationDialog = ({
     setStep('checkout')
   }
 
+  const resetPasswordRequestCallback = ({ email, codeId }: any) => {
+    setResetPasswordData({ ...resetPasswordData, email, codeId })
+    setStep('resetPasswordConfirm')
+  }
+
+  const ContinueDonationButton = (
+    <Dialog.Footer.Button
+      type="button"
+      bgColor="green"
+      textColor="white"
+      onClick={() => setStep('confirm')}
+    >
+      <Translate zh_hant="繼續支付" zh_hans="继续支付" />
+    </Dialog.Footer.Button>
+  )
+
   if (loading) {
     return <Spinner />
   }
@@ -144,7 +173,11 @@ const BaseDonationDialog = ({
   const isCheckout = step === 'checkout'
   const isComplete = step === 'complete'
   const isConfirm = step === 'confirm'
+  const isPasswordInvalid = step === 'passwordInvalid'
   const isProcessing = step === 'processing'
+  const isResetPasswordComplete = step === 'resetPasswordComplete'
+  const isResetPasswordConfirm = step === 'resetPasswordConfirm'
+  const isResetPasswordRequest = step === 'resetPasswordRequest'
   const isSetAmount = step === 'setAmount'
   const isSetPaymentPassword = step === 'setPaymentPassword'
 
@@ -161,6 +194,8 @@ const BaseDonationDialog = ({
               ? 'topUp'
               : isSetPaymentPassword
               ? 'paymentPassword'
+              : (isResetPasswordComplete || isResetPasswordConfirm || isResetPasswordRequest)
+              ? 'resetPaymentPassword'
               : 'donation'
           }
         />
@@ -183,9 +218,28 @@ const BaseDonationDialog = ({
             submitCallback={() => setStep('processing')}
             switchToAddCredit={switchToAddCredit}
             switchToLike={switchToLike}
+            switchToPasswordInvalid={() => setStep('passwordInvalid')}
             targetId={targetId}
           />
         )}
+
+        {isProcessing && (
+          <PaymentForm.Processing
+            nextStep={() => setStep('complete')}
+            txId={payToTx?.id || ''}
+            windowRef={windowRef}
+          />
+        )}
+
+        {isComplete && (
+          <PaymentForm.PayTo.Complete
+            amount={amount}
+            currency={currency}
+            recipient={recipient}
+          />
+        )}
+
+        {/* below steps for add credit */}
 
         {isSetPaymentPassword && (
           <PaymentForm.SetPassword
@@ -219,34 +273,40 @@ const BaseDonationDialog = ({
           <PaymentForm.AddCredit.Complete
             amount={addCreditData.transaction.amount}
             currency={addCreditData.transaction.currency}
-            footerButtons={
-              <Dialog.Footer.Button
-                type="button"
-                bgColor="green"
-                textColor="white"
-                onClick={() => setStep('confirm')}
-              >
-                <Translate zh_hant="繼續支付" zh_hans="继续支付" />
-              </Dialog.Footer.Button>
-            }
+            footerButtons={ContinueDonationButton}
           />
         )}
 
-        {isProcessing && (
-          <PaymentForm.Processing
-            nextStep={() => setStep('complete')}
-            txId={payToTx?.id || ''}
-            windowRef={windowRef}
-          />
-        )}
+        {/* below steps for password management */}
 
-        {isComplete && (
-          <PaymentForm.PayTo.Complete
-            amount={amount}
-            currency={currency}
-            recipient={recipient}
+        {isPasswordInvalid &&
+          <PaymentForm.PayTo.PasswordInvalid
+            switchToConfirm={() => setStep('confirm')}
+            switchToResetPassword={() => setStep('resetPasswordRequest')}
           />
-        )}
+        }
+
+        {isResetPasswordRequest &&
+          <PaymentForm.ResetPassword.Request
+            defaultEmail={resetPasswordData.email}
+            submitCallback={resetPasswordRequestCallback}
+          />
+        }
+
+        {isResetPasswordConfirm &&
+          <PaymentForm.ResetPassword.Confirm
+            codeId={resetPasswordData.codeId}
+            submitCallback={() => setStep('resetPasswordComplete')}
+          />
+        }
+
+        {isResetPasswordComplete &&
+          <PaymentForm.ResetPassword.Complete
+            closeDialog={close}
+            footerButtons={ContinueDonationButton}
+          />
+        }
+
       </Dialog>
     </>
   )
