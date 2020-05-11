@@ -235,7 +235,7 @@ const SetAmount: React.FC<FormProps> = ({
           onBlur={handleBlur}
           onChange={(e) => {
             const value = e.target.valueAsNumber || 0
-            const sanitizedAmount = Math.min(Math.floor(value))
+            const sanitizedAmount = Math.abs(Math.min(isHKD ? Math.floor(value) : value))
             setFieldValue('amount', sanitizedAmount)
           }}
         />
