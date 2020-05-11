@@ -1,29 +1,16 @@
 import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
 
 import { CurrencyAmount, Spinner, Translate } from '~/components'
+import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
 
 import { PAYMENT_CURRENCY } from '~/common/enums'
 
 import styles from './styles.css'
 
-import { MeWalletBalance } from './__generated__/MeWalletBalance'
-
-const ME_WALLET_BALANCE = gql`
-  query MeWalletBalance {
-    viewer {
-      id
-      wallet {
-        balance {
-          HKD
-        }
-      }
-    }
-  }
-`
+import { WalletBalance } from '~/components/GQL/queries/__generated__/WalletBalance'
 
 const Balance = () => {
-  const { data, loading } = useQuery<MeWalletBalance>(ME_WALLET_BALANCE)
+  const { data, loading } = useQuery<WalletBalance>(WALLET_BALANCE)
 
   if (loading) {
     return <Spinner />
