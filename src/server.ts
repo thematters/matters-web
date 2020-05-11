@@ -6,7 +6,6 @@
 import dotenv from 'dotenv'
 import express from 'express'
 import helmet from 'helmet'
-import MobileDetect from 'mobile-detect'
 import 'module-alias/register'
 import next from 'next'
 
@@ -41,13 +40,6 @@ app
       server.get(toExpressPath(pathname), async (req, res, nx) => {
         if (handler) {
           await handler(req, res, nx)
-        }
-
-        const detect = new MobileDetect(req.headers['user-agent'] || '')
-        req.clientInfo = {
-          isPhone: !!detect.phone(),
-          isTablet: !!detect.tablet(),
-          isMobile: !!detect.mobile(),
         }
 
         return app.render(req, res, pathname, {

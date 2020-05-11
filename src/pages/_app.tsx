@@ -24,6 +24,7 @@ import { GlobalStyles } from '~/components/GlobalStyles'
 import { QueryError } from '~/components/GQL'
 import { ProgressBar } from '~/components/ProgressBar'
 import PushInitializer from '~/components/PushInitializer'
+import SplashScreen from '~/components/SplashScreen'
 
 import { PATHS } from '~/common/enums'
 import { analytics } from '~/common/utils'
@@ -104,6 +105,7 @@ const Root = ({
 
         <AnalyticsListener user={viewer || {}} />
         <PushInitializer client={client} />
+        <SplashScreen />
       </LanguageProvider>
     </ViewerProvider>
   )
