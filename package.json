@@ -39,7 +39,7 @@
     "@matters/apollo-upload-client": "^11.1.0",
     "@matters/matters-editor": "^0.1.13",
     "@reach/alert": "^0.10.1",
-    "@reach/dialog": "^0.10.1",
+    "@reach/dialog": "^0.10.2",
     "@reach/visually-hidden": "^0.10.1",
     "@sentry/browser": "^5.15.5",
     "@stripe/react-stripe-js": "^1.1.2",
