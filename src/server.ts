@@ -1,7 +1,5 @@
 /**
- * Note:
- * "module-alias" only used in this file to resolve `~` alias,
- * Next.js bundles will be resolved with Babel (see ".babelrc")
+ * Note: "module-alias" only used in "server.ts" to resolve `~` alias,
  */
 import express from 'express'
 import helmet from 'helmet'
