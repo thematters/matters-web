@@ -266,7 +266,10 @@ const SetAmount: React.FC<FormProps> = ({
 
       {!canProcess && (
         <section className="set-amount-no-liker-id">
-          <NoLikerIdMessage canPayLike={canPayLike} canReceiveLike={canReceiveLike} />
+          <NoLikerIdMessage
+            canPayLike={canPayLike}
+            canReceiveLike={canReceiveLike}
+          />
         </section>
       )}
       <style jsx>{styles}</style>
