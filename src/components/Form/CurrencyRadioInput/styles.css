@@ -1,27 +1,27 @@
 .currency {
   @mixin inline-flex-center-all;
 
-  background: var(--color-white);
-  color: var(--color-white);
-  font-weight: var(--font-weight-medium);
   width: 50%;
-
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
 
-  &:first-child {
+  background: var(--color-white);
+  color: var(--color-white);
+  font-weight: var(--font-weight-medium);
+
+  &:nth-child(1) {
     border-top-left-radius: 0.25rem;
     border-bottom-left-radius: 0.25rem;
   }
 
-  &:last-child {
+  &:nth-child(2) {
     border-top-right-radius: 0.25rem;
     border-bottom-right-radius: 0.25rem;
   }
 
   & label {
-    text-align: center;
     width: 100%;
+    text-align: center;
   }
 }
 
