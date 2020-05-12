@@ -62,7 +62,7 @@ const AmountOption: React.FC<AmountOptionProps> = ({
     active: value === amount,
   })
   return (
-    <section className={classes}>
+    <li className={classes}>
       <label htmlFor={fieldId}>
         {amount}
         <VisuallyHidden>
@@ -76,7 +76,7 @@ const AmountOption: React.FC<AmountOptionProps> = ({
         </VisuallyHidden>
       </label>
       <style jsx>{styles}</style>
-    </section>
+    </li>
   )
 }
 
@@ -103,11 +103,11 @@ const AmountRadioInput: React.FC<AmountRadioInputProps> = ({
 
   return (
     <Field>
-      <section className="amount-options">
+      <ul className="amount-options">
         {options.map((option) => (
           <AmountOption {...baseInputProps} key={option} amount={option} />
         ))}
-      </section>
+      </ul>
 
       <Field.Footer fieldMsgId={fieldMsgId} hint={hint} error={error} />
 
