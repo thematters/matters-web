@@ -1,5 +1,5 @@
 import {
-  Dialog,
+  Button,
   DonationDialog,
   Icon,
   LikeCoinDialog,
@@ -21,7 +21,7 @@ const DonationButton = ({
   <section className="donation">
     <DonationDialog recipient={recipient} targetId={targetId}>
       {({ open }) => (
-        <Dialog.Footer.Button
+        <Button
           size={['10.5rem', '2.5rem']}
           bgColor="red"
           onClick={open}
@@ -29,7 +29,7 @@ const DonationButton = ({
           <TextIcon icon={<Icon.Heart size="sm" />} weight="md" color="white">
             <Translate id="donation" />
           </TextIcon>
-        </Dialog.Footer.Button>
+        </Button>
       )}
     </DonationDialog>
 
