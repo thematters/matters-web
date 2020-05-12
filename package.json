@@ -97,7 +97,7 @@
     "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.4",
     "@types/grecaptcha": "^3.0.1",
-    "@types/helmet": "0.0.46",
+    "@types/helmet": "0.0.47",
     "@types/jest": "^25.2.1",
     "@types/jump.js": "^1.0.3",
     "@types/lodash": "^4.14.150",
