@@ -16,6 +16,8 @@ import CommentNewReplyNotice from './CommentNewReplyNotice'
 import CommentPinnedNotice from './CommentPinnedNotice'
 import DownstreamArticleArchivedNotice from './DownstreamArticleArchivedNotice'
 import OfficialAnnouncementNotice from './OfficialAnnouncementNotice'
+import PaymentPayoutNotice from './PaymentPayoutNotice'
+import PaymentReceivedDonationNotice from './PaymentReceivedDonationNotice'
 import SubscribedArticleNewCommentNotice from './SubscribedArticleNewCommentNotice'
 import UpstreamArticleArchivedNotice from './UpstreamArticleArchivedNotice'
 import UserNewFollowerNotice from './UserNewFollowerNotice'
@@ -83,6 +85,12 @@ const fragments = {
       ... on ArticleTagHasBeenUnselectedNotice {
         ...ArticleTagHasBeenUnselectedNotice
       }
+      ... on PaymentReceivedDonationNotice {
+        ...PaymentReceivedDonationNotice
+      }
+      ... on PaymentPayoutNotice {
+        ...PaymentPayoutNotice
+      }
     }
     ${ArticleNewAppreciationNotice.fragments.notice}
     ${ArticleNewCommentNotice.fragments.notice}
@@ -102,6 +110,8 @@ const fragments = {
     ${ArticleTagHasBeenAddedNotice.fragments.notice}
     ${ArticleTagHasBeenRemovedNotice.fragments.notice}
     ${ArticleTagHasBeenUnselectedNotice.fragments.notice}
+    ${PaymentReceivedDonationNotice.fragments.notice}
+    ${PaymentPayoutNotice.fragments.notice}
   `,
 }
 
@@ -143,6 +153,10 @@ const BaseNotice: React.FC<NoticeProps> = ({ notice }) => {
       return <ArticleTagHasBeenRemovedNotice notice={notice} />
     case 'ArticleTagHasBeenUnselectedNotice':
       return <ArticleTagHasBeenUnselectedNotice notice={notice} />
+    case 'PaymentReceivedDonationNotice':
+      return <PaymentReceivedDonationNotice notice={notice} />
+    case 'PaymentPayoutNotice':
+      return <PaymentPayoutNotice notice={notice} />
     default:
       return null
   }

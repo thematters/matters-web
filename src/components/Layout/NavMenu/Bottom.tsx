@@ -30,6 +30,12 @@ const NavMenuBottom: React.FC<NavMenuBottomProps> = ({ isInSideDrawerNav }) => {
   const viewer = useContext(ViewerContext)
   const onClickLogout = async () => {
     try {
+      await unsubscribePush()
+    } catch (e) {
+      console.error(e)
+    }
+
+    try {
       await logout()
 
       analytics.trackEvent(ANALYTICS_EVENTS.LOG_OUT, { id: viewer.id })
@@ -43,6 +49,8 @@ const NavMenuBottom: React.FC<NavMenuBottomProps> = ({ isInSideDrawerNav }) => {
         })
       )
 
+      // await clearPersistCache()
+
       redirectToTarget()
     } catch (e) {
       window.dispatchEvent(
@@ -54,9 +62,6 @@ const NavMenuBottom: React.FC<NavMenuBottomProps> = ({ isInSideDrawerNav }) => {
         })
       )
     }
-
-    await unsubscribePush()
-    // await clearPersistCache()
   }
 
   const menuItemSpacing = isInSideDrawerNav
