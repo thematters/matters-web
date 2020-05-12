@@ -1,6 +1,5 @@
 import ApolloClient from 'apollo-client'
 import gql from 'graphql-tag'
-import getConfig from 'next/config'
 
 import { Translate, Viewer } from '~/components'
 
@@ -8,9 +7,11 @@ import { ADD_TOAST, STORE_KEY_PUSH } from '~/common/enums'
 
 import { ToggleSubscribePush } from './__generated__/ToggleSubscribePush'
 
-const {
-  publicRuntimeConfig: { FIREBASE_CONFIG, FCM_VAPID_KEY },
-} = getConfig()
+const FIREBASE_CONFIG = process.env.NEXT_PUBLIC_FIREBASE_CONFIG
+  ? JSON.parse(
+      Buffer.from(process.env.NEXT_PUBLIC_FIREBASE_CONFIG, 'base64').toString()
+    )
+  : {}
 
 const TOGGLE_SUBSCRIBE_PUSH = gql`
   mutation ToggleSubscribePush($id: ID!, $enabled: Boolean!) {
@@ -61,7 +62,7 @@ export const initializePush = async ({
 
   // Init FCM
   const messaging = firebase.messaging()
-  messaging.usePublicVapidKey(FCM_VAPID_KEY)
+  messaging.usePublicVapidKey(process.env.NEXT_PUBLIC_FCM_VAPID_KEY || '')
 
   // Register our custom path service worker
   const registration = await window.navigator.serviceWorker.register(

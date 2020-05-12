@@ -1,4 +1,3 @@
-import getConfig from 'next/config'
 import { createContext, useEffect, useState } from 'react'
 
 declare global {
@@ -8,10 +7,6 @@ declare global {
 }
 
 // recaptcha related setup
-const {
-  publicRuntimeConfig: { RECAPTCHA_KEY },
-} = getConfig()
-
 const recaptchaScriptId = 'recaptcha-script'
 
 export const ReCaptchaContext = createContext<{
@@ -40,7 +35,9 @@ export const ReCaptchaProvider = ({
       const getToken = () => {
         if (window.grecaptcha && window.grecaptcha.execute) {
           window.grecaptcha
-            .execute(RECAPTCHA_KEY, { action: 'homepage' })
+            .execute(process.env.NEXT_PUBLIC_RECAPTCHA_KEY || '', {
+              action: 'homepage',
+            })
             .then((newToken) => {
               setToken(newToken)
             })
@@ -73,7 +70,7 @@ export const ReCaptchaProvider = ({
   useEffect(() => {
     if (!document.getElementById(recaptchaScriptId)) {
       const script = document.createElement('script')
-      script.src = `https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_KEY}`
+      script.src = `https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_KEY}`
       script.addEventListener('load', handleRecaptcha)
       script.id = recaptchaScriptId
 

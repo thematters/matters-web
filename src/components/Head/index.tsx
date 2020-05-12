@@ -1,4 +1,3 @@
-import getConfig from 'next/config'
 import NextHead from 'next/head'
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
@@ -19,10 +18,7 @@ import IMAGE_LAUNCH_2048 from '~/static/images/splashscreens/launch-2048x2732.pn
 import IMAGE_LAUNCH_640 from '~/static/images/splashscreens/launch-640x1136.png?url'
 import IMAGE_LAUNCH_750 from '~/static/images/splashscreens/launch-750x1294.png?url'
 
-const {
-  publicRuntimeConfig: { ENV, SITE_DOMAIN, FB_APP_ID },
-} = getConfig()
-const isProd = ENV === 'production'
+const isProd = process.env.NODE_ENV === 'production'
 
 interface HeadProps {
   title?: string | TranslateArgs
@@ -48,13 +44,13 @@ export const Head: React.FC<HeadProps> = (props) => {
       ? `${props.keywords.join(',')},matters,matters.news,創作有價`
       : 'matters,matters.news,創作有價',
     url: props.path
-      ? `${SITE_DOMAIN}${props.path}`
+      ? `${process.env.NEXT_PUBLIC_SITE_DOMAIN}${props.path}`
       : router.asPath
-      ? `${SITE_DOMAIN}${router.asPath}`
-      : SITE_DOMAIN,
+      ? `${process.env.NEXT_PUBLIC_SITE_DOMAIN}${router.asPath}`
+      : process.env.NEXT_PUBLIC_SITE_DOMAIN,
     image: props.image || IMAGE_INTRO,
   }
-  const canonicalUrl = head.url.split('#')[0].split('?')[0]
+  const canonicalUrl = head.url?.split('#')[0].split('?')[0]
 
   return (
     <NextHead>
@@ -106,7 +102,7 @@ export const Head: React.FC<HeadProps> = (props) => {
       )}
 
       {/* social */}
-      <meta property="fb:app_id" content={FB_APP_ID} />
+      <meta property="fb:app_id" content={process.env.NEXT_PUBLIC_FB_APP_ID} />
       <meta name="og:title" key="og:title" content={head.title} />
       <meta property="og:site_name" key="og:site_name" content="Matters" />
       <meta property="og:url" key="og:url" content={head.url} />

@@ -1,6 +1,5 @@
 import { useLazyQuery } from '@apollo/react-hooks'
 import { MattersArticleEditor } from '@matters/matters-editor'
-import getConfig from 'next/config'
 import { FC, useContext } from 'react'
 
 import { LanguageContext } from '~/components'
@@ -18,10 +17,6 @@ import {
   SearchUsers_search_edges_node_User,
 } from '~/components/GQL/queries/__generated__/SearchUsers'
 import { EditorDraft } from '../__generated__/EditorDraft'
-
-const {
-  publicRuntimeConfig: { ASSET_DOMAIN },
-} = getConfig()
 
 interface Props {
   draft: EditorDraft
@@ -69,7 +64,7 @@ const ArticleEditor: FC<Props> = ({ draft, update, upload }) => {
           siteDomain="matters.news"
           theme="bubble"
           titleDefaultValue={title || ''}
-          uploadAssetDomain={ASSET_DOMAIN}
+          uploadAssetDomain={process.env.NEXT_PUBLIC_ASSET_DOMAIN || ''}
         />
       </div>
       <style jsx>{themeStyles}</style>
