@@ -280,12 +280,6 @@ const SetAmount: React.FC<FormProps> = ({
         <section>
           {InnerForm}
 
-          {!isLike && (
-            <section className="set-amount-fee">
-              <Translate id="fee" />
-            </section>
-          )}
-
           <style jsx>{styles}</style>
         </section>
       </Dialog.Content>
