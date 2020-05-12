@@ -96,7 +96,7 @@
   text-align: center;
 }
 
-.complete-emphasize {
+b {
   color: var(--color-black);
   font-weight: var(--font-weight-medium);
 }

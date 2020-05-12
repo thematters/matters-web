@@ -23,9 +23,9 @@ const Complete: React.FC<Props> = ({ amount, currency, recipient }) => (
 
     <section className="complete-message">
       <Translate zh_hant="支持" zh_hans="支持" />
-      <span className="complete-emphasize">{` ${recipient.displayName} `}</span>
+      <b>{` ${recipient.displayName} `}</b>
       <Translate zh_hant="的" zh_hans="的" />
-      <span className="complete-emphasize">{` ${currency} ${amount} `}</span>
+      <b>{` ${currency} ${amount} `}</b>
       <br />
       <Translate zh_hant="已經支付成功" zh_hans="已经支付成功" />
       <br />
