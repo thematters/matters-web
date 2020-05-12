@@ -49,11 +49,11 @@ interface FormValues {
 }
 
 interface NoLikerId {
-  canGetLike: boolean
   canPayLike: boolean
+  canReceiveLike: boolean
 }
 
-const NoLikerIdMessage = ({ canGetLike, canPayLike }: NoLikerId) => {
+const NoLikerIdMessage = ({ canPayLike, canReceiveLike }: NoLikerId) => {
   if (!canPayLike) {
     return (
       <Translate
@@ -62,7 +62,7 @@ const NoLikerIdMessage = ({ canGetLike, canPayLike }: NoLikerId) => {
       />
     )
   }
-  if (!canGetLike) {
+  if (!canReceiveLike) {
     return (
       <Translate
         zh_hant="作者還沒有綁定 LikerID，你還不能用 LikeCoin 支持他"
@@ -74,8 +74,8 @@ const NoLikerIdMessage = ({ canGetLike, canPayLike }: NoLikerId) => {
 }
 
 const NoLikerIdButton = ({
-  canGetLike,
   canPayLike,
+  canReceiveLike,
   close,
   setFieldValue,
 }: NoLikerId & {
@@ -97,7 +97,7 @@ const NoLikerIdButton = ({
       </Dialog.Footer.Button>
     )
   }
-  if (!canGetLike) {
+  if (!canReceiveLike) {
     return (
       <Dialog.Footer.Button
         type="button"
@@ -181,9 +181,9 @@ const SetAmount: React.FC<FormProps> = ({
 
   const isHKD = values.currency === CURRENCY.HKD
   const isLike = values.currency === CURRENCY.LIKE
-  const canGetLike = isLike && !!recipient.liker.likerId
   const canPayLike = isLike && !!viewer.liker.likerId
-  const canProcess = isHKD || (canGetLike && canPayLike)
+  const canReceiveLike = isLike && !!recipient.liker.likerId
+  const canProcess = isHKD || (canPayLike && canReceiveLike)
   const color = isLike ? 'green' : 'red'
 
   const InnerForm = (
@@ -266,7 +266,7 @@ const SetAmount: React.FC<FormProps> = ({
 
       {!canProcess && (
         <section className="set-amount-no-liker-id">
-          <NoLikerIdMessage canGetLike={canGetLike} canPayLike={canPayLike} />
+          <NoLikerIdMessage canPayLike={canPayLike} canReceiveLike={canReceiveLike} />
         </section>
       )}
       <style jsx>{styles}</style>
@@ -298,8 +298,8 @@ const SetAmount: React.FC<FormProps> = ({
         )}
         {!canProcess && (
           <NoLikerIdButton
-            canGetLike={canGetLike}
             canPayLike={canPayLike}
+            canReceiveLike={canReceiveLike}
             close={close}
             setFieldValue={setFieldValue}
           />
