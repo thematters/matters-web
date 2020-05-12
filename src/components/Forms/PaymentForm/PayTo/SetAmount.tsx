@@ -210,7 +210,6 @@ const SetAmount: React.FC<FormProps> = ({
       {fixed && canProcess && (
         <Form.AmountRadioInput
           currency={values.currency}
-          isLike={isLike}
           name="amount"
           value={values.amount}
           error={touched.amount && errors.amount}

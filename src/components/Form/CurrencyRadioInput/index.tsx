@@ -23,12 +23,11 @@ import styles from './styles.css'
  */
 
 type CurrencyOptionProps = {
+  currency: CURRENCY
   inactive: boolean
   isLike: boolean
   name: string
-  optionName: React.ReactNode
-  optionValue: CURRENCY
-  optionType: 'hkd' | 'like'
+  text: React.ReactNode
 } & FieldProps &
   React.DetailedHTMLProps<
     React.InputHTMLAttributes<HTMLInputElement>,
@@ -45,40 +44,39 @@ type CurrencyRadioInputProps = {
   >
 
 const CurrencyOption: React.FC<CurrencyOptionProps> = ({
+  currency,
   inactive,
   isLike,
   name,
-  optionName,
-  optionValue,
-  optionType,
+  text,
 
   fieldMsgId,
-  value,
 
   ...inputProps
 }) => {
-  const fieldId = `field-${name}-${optionType}`
+  const fieldId = `field-${name}-${currency}`
   const classes = classNames({
     currency: true,
     [isLike ? 'like' : 'hkd']: true,
     inactive,
   })
   return (
-    <section className={classes}>
+    <li className={classes}>
       <label htmlFor={fieldId}>
-        {optionName}
+        {text}
         <VisuallyHidden>
           <input
             {...inputProps}
             aria-describedby={fieldMsgId}
             id={fieldId}
             name={name}
-            value={optionValue}
+            type="radio"
+            value={currency}
           />
         </VisuallyHidden>
       </label>
       <style jsx>{styles}</style>
-    </section>
+    </li>
   )
 }
 
@@ -95,25 +93,24 @@ const CurrencyRadioInput: React.FC<CurrencyRadioInputProps> = ({
     ...inputProps,
     fieldMsgId,
     isLike,
-    type: 'radio',
   }
 
   return (
     <Field>
-      <CurrencyOption
-        {...baseInputProps}
-        inactive={isLike}
-        optionName={<Translate id="hkd" />}
-        optionType="hkd"
-        optionValue={CURRENCY.HKD}
-      />
-      <CurrencyOption
-        {...baseInputProps}
-        inactive={!isLike}
-        optionName="LikeCoin"
-        optionType="like"
-        optionValue={CURRENCY.LIKE}
-      />
+      <ul>
+        <CurrencyOption
+          {...baseInputProps}
+          currency={CURRENCY.HKD}
+          inactive={isLike}
+          text={<Translate id="hkd" />}
+        />
+        <CurrencyOption
+          {...baseInputProps}
+          currency={CURRENCY.LIKE}
+          inactive={!isLike}
+          text="LikeCoin"
+        />
+      </ul>
 
       <Field.Footer fieldMsgId={fieldMsgId} hint={hint} error={error} />
 

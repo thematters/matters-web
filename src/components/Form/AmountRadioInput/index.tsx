@@ -22,7 +22,7 @@ import styles from './styles.css'
 
 type AmountOptionProps = {
   amount: number
-  isLike: boolean
+  currency: CURRENCY
   name: string
 } & FieldProps &
   React.DetailedHTMLProps<
@@ -32,7 +32,6 @@ type AmountOptionProps = {
 
 type AmountRadioInputProps = {
   currency: CURRENCY
-  isLike: boolean
   name: string
 } & Omit<FieldProps, 'fieldMsgId'> &
   React.DetailedHTMLProps<
@@ -47,7 +46,7 @@ const amountOptions = {
 
 const AmountOption: React.FC<AmountOptionProps> = ({
   amount,
-  isLike,
+  currency,
   name,
 
   fieldMsgId,
@@ -56,9 +55,10 @@ const AmountOption: React.FC<AmountOptionProps> = ({
   ...inputProps
 }) => {
   const fieldId = `field-${name}-${amount}`
+
   const classes = classNames({
     amount: true,
-    [isLike ? 'like' : 'hkd']: true,
+    [currency === CURRENCY.LIKE ? 'like' : 'hkd']: true,
     active: value === amount,
   })
   return (
@@ -82,7 +82,6 @@ const AmountOption: React.FC<AmountOptionProps> = ({
 
 const AmountRadioInput: React.FC<AmountRadioInputProps> = ({
   currency,
-  isLike,
   name,
 
   hint,
@@ -95,8 +94,8 @@ const AmountRadioInput: React.FC<AmountRadioInputProps> = ({
 
   const baseInputProps = {
     ...inputProps,
+    currency,
     fieldMsgId,
-    isLike,
     name,
     type: 'radio',
   }
@@ -105,7 +104,12 @@ const AmountRadioInput: React.FC<AmountRadioInputProps> = ({
     <Field>
       <ul className="amount-options">
         {options.map((option) => (
-          <AmountOption {...baseInputProps} key={option} amount={option} />
+          <AmountOption
+            {...baseInputProps}
+            key={option}
+            amount={option}
+            currency={currency}
+          />
         ))}
       </ul>
 
