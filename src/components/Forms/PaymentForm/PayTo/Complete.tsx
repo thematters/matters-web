@@ -15,7 +15,7 @@ interface Props {
 const Complete: React.FC<Props> = ({ amount, currency, recipient }) => (
   <Dialog.Content hasGrow>
     <section className="complete-avatar">
-      <Icon.Heart size="xl-s" color="red" />
+      <Icon.Heart size="xl-m" color="red" />
       <div className="complete-avatar-outline">
         <Avatar size="lg" user={recipient} />
       </div>

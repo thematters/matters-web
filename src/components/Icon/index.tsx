@@ -88,7 +88,7 @@ export type IconSize =
   | 'md-s'
   | 'md'
   | 'lg'
-  | 'xl-s'
+  | 'xl-m'
   | 'xl'
   | 'xxl'
 
