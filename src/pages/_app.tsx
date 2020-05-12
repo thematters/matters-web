@@ -105,7 +105,6 @@ const Root = ({
 
         <AnalyticsListener user={viewer || {}} />
         <PushInitializer client={client} />
-        <SplashScreen />
       </LanguageProvider>
     </ViewerProvider>
   )
@@ -119,6 +118,7 @@ const MattersApp = ({
   <ErrorBoundary>
     <ApolloProvider client={apollo}>
       <GlobalStyles />
+      <SplashScreen />
       <ClientUpdater />
 
       <Root client={apollo}>

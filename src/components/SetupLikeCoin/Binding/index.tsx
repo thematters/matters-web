@@ -40,9 +40,7 @@ const Binding: React.FC<Props> = ({ prevStep, nextStep, windowRef }) => {
     nextStep()
 
     if (windowRef) {
-      setTimeout(() => {
-        windowRef.close()
-      }, 5000)
+      windowRef.close()
     }
 
     return null
