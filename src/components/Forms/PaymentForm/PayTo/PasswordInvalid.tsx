@@ -13,14 +13,14 @@ const PasswordInvalid: React.FC<FormProps> = ({
 }) => {
   return (
     <>
-      <Dialog.Content hasGrow>
-        <section className="password-invalid-message">
+      <Dialog.Message error={true} spacing="xxl">
+        <h3>
           <Translate
             zh_hant="支付密碼錯誤，請重試"
             zh_hans="支付密码错误，请重试"
           />
-        </section>
-      </Dialog.Content>
+        </h3>
+      </Dialog.Message>
 
       <section className="password-invalid-footer">
         <Dialog.Footer>

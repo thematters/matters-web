@@ -7,7 +7,7 @@ import styles from './styles.css'
 interface DialogMessageProps {
   align?: 'left'
   error?: boolean
-  spacing?: 'md'
+  spacing?: 'md' | 'xxl'
 }
 
 /**

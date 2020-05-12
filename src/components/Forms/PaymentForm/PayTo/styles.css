@@ -100,11 +100,3 @@ b {
   color: var(--color-black);
   font-weight: var(--font-weight-medium);
 }
-
-.password-invalid-message {
-  @mixin flex-center-all;
-
-  color: var(--color-red);
-  font-weight: var(--font-weight-medium);
-  margin: 3rem 1rem;
-}
