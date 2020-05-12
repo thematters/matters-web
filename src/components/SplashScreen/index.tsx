@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { RemoveScroll } from 'react-remove-scroll'
 
 import { withIcon } from '~/components'
 
@@ -34,11 +35,13 @@ const SplashScreen = () => {
   }
 
   return (
-    <div className="splash-screen" aira-label="Matters Logo, Splash Screen">
-      {withIcon(IconSplashScreenLogo)({})}
+    <RemoveScroll>
+      <div className="splash-screen" aira-label="Matters Logo, Splash Screen">
+        {withIcon(IconSplashScreenLogo)({})}
 
-      <style jsx>{styles}</style>
-    </div>
+        <style jsx>{styles}</style>
+      </div>
+    </RemoveScroll>
   )
 }
 
