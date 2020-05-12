@@ -113,7 +113,6 @@ const ArticleDetail = () => {
   const authorId = article && article.author.id
   const collectionCount = (article && article.collection.totalCount) || 0
   const canEditCollection = viewer.id === authorId
-  const showDonation = viewer.isAuthed && viewer.id !== article?.author.id
 
   useEffect(() => {
     if (shouldShowWall && window.location.hash && article) {
@@ -213,9 +212,7 @@ const ArticleDetail = () => {
 
         <Content article={article} />
 
-        {showDonation && (
-          <DonationButton recipient={article.author} targetId={article.id} />
-        )}
+        <DonationButton recipient={article.author} targetId={article.id} />
 
         {(collectionCount > 0 || canEditCollection) && (
           <section className="block">
