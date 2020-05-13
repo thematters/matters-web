@@ -57,6 +57,8 @@ const Home = () => {
         />
       )}
 
+      <Spacer size="xtight" />
+
       <Feed />
 
       <style jsx>{styles}</style>
