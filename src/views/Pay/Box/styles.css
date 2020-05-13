@@ -1,0 +1,41 @@
+:root {
+  --box-avatar-size: 5.875rem;
+}
+
+.container {
+  @media (--sm-up) {
+    padding: var(--spacing-xxx-loose);
+  }
+}
+
+header {
+  padding: 0 var(--spacing-x-loose);
+
+  & :global(.avatar) {
+    display: block;
+    margin: 0 auto;
+  }
+
+  & h1 {
+    margin-top: var(--spacing-loose);
+
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-md);
+
+    &.left {
+      text-align: left;
+    }
+    &.center {
+      text-align: center;
+    }
+  }
+
+  @media (--md-up) {
+    padding: 0 var(--spacing-xxx-loose);
+
+    & :global(.avatar) {
+      width: var(--box-avatar-size);
+      height: var(--box-avatar-size);
+    }
+  }
+}

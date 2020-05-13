@@ -29,7 +29,7 @@ export const STRIPE_ERROR_MESSAGES = {
     amount_too_large: '支付金額高於最大允許金額，請調低金額後重試',
     amount_too_small: '支付金額低於最小允許金額，請調高金額後重試',
     card_decline_rate_limit_exceeded:
-      '銀行卡被拒絕多次，請等待24小時後重新充值，注意檢查卡片信息輸入正確',
+      '銀行卡被拒絕多次，請等待24小時後重新储值，注意檢查卡片信息輸入正確',
     card_declined: '你的銀行卡已被拒絕，請輸入正確的信息後重試',
     expired_card: '銀行卡已過期，請換卡操作',
     incorrect_address: '銀行卡地址錯誤，請重新輸入',
@@ -54,7 +54,7 @@ export const STRIPE_ERROR_MESSAGES = {
     amount_too_large: '支付金额高于最大允许金额，请调低金额后重试',
     amount_too_small: '支付金额低于最小允许金额，请调高金额后重试',
     card_decline_rate_limit_exceeded:
-      '银行卡被拒绝多次，请等待24小时后重新充值，注意检查卡片信息输入正确',
+      '银行卡被拒绝多次，请等待24小时后重新储值，注意检查卡片信息输入正确',
     card_declined: '你的银行卡已被拒绝，请输入正确的信息后重试',
     expired_card: '银行卡已过期，请换卡操作',
     incorrect_address: '银行卡地址错误，请重新输入',
@@ -76,3 +76,5 @@ export const STRIPE_ERROR_MESSAGES = {
     rate_limit: '操作过于频繁，请稍候再试',
   },
 }
+
+export const PAYMENT_PROVIDER = ['stripe', 'likecoin']

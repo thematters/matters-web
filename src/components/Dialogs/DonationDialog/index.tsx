@@ -190,7 +190,7 @@ const BaseDonationDialog = ({
           close={close}
           closeTextId="close"
           title={
-            isAddCredit
+            isAddCredit || isCheckout || isAddCreditProcessing
               ? 'topUp'
               : isSetPaymentPassword
               ? 'paymentPassword'
@@ -260,7 +260,7 @@ const BaseDonationDialog = ({
               addCreditData.transaction.amount + addCreditData.transaction.fee
             )}
             currency={addCreditData.transaction.currency}
-            submitCallback={() => setStep('processing')}
+            submitCallback={() => setStep('addCreditProcessing')}
           />
         )}
 

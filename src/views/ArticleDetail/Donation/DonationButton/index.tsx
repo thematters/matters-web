@@ -50,6 +50,7 @@ const DonationButton = ({ recipient, targetId }: DonationButtonProps) => {
           <Button
             size={['10.5rem', '2.5rem']}
             bgColor="red"
+            disabled={recipient.id === viewer.id}
             onClick={() => {
               if (!viewer.isAuthed) {
                 showLoginToast()

@@ -199,12 +199,14 @@ const SetAmount: React.FC<FormProps> = ({
         onChange={(e) => {
           const raw = (e.target.value || '') as keyof typeof CURRENCY
           const value = CURRENCY[raw]
+          const defaultAmount = fixed
+            ? value === CURRENCY.LIKE
+              ? defaultLikeAmount
+              : defaultHKDAmount
+            : 0
           if (value) {
             setFieldValue('currency', value)
-            setFieldValue(
-              'amount',
-              value === CURRENCY.LIKE ? defaultLikeAmount : defaultHKDAmount
-            )
+            setFieldValue('amount', defaultAmount)
           }
         }}
       />
@@ -238,10 +240,7 @@ const SetAmount: React.FC<FormProps> = ({
           onChange={(e) => {
             const value = e.target.valueAsNumber || 0
             const sanitizedAmount = Math.abs(
-              Math.min(
-                isHKD ? Math.floor(value) : value,
-                maxAmount
-              )
+              Math.min(isHKD ? Math.floor(value) : value, maxAmount)
             )
             setFieldValue('amount', sanitizedAmount)
           }}
@@ -259,6 +258,8 @@ const SetAmount: React.FC<FormProps> = ({
                   'amount',
                   isLike ? defaultLikeAmount : defaultHKDAmount
                 )
+              } else {
+                setFieldValue('amount', 0)
               }
               setFixed(!fixed)
             }}
