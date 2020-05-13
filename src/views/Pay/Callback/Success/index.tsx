@@ -36,7 +36,7 @@ const PayCallbackSuccess = () => {
             </h2>
 
             <p>
-              <Translate id="callbackClose"/>
+              <Translate id="callbackClose" />
             </p>
           </section>
 

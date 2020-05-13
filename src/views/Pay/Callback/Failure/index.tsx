@@ -36,7 +36,10 @@ const OAuthCallbackFailure = () => {
             </h2>
 
             <p>
-              <Translate zh_hant="請回到原頁面重試" zh_hans="请回到原页面重试" />
+              <Translate
+                zh_hant="請回到原頁面重試"
+                zh_hans="请回到原页面重试"
+              />
             </p>
             <style jsx>{styles}</style>
           </section>
