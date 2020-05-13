@@ -138,8 +138,8 @@ const SetAmount: React.FC<FormProps> = ({
     values,
   } = useFormik<FormValues>({
     initialValues: {
-      amount: defaultLikeAmount,
-      currency: CURRENCY.LIKE,
+      amount: defaultHKDAmount,
+      currency: CURRENCY.HKD,
     },
     validate: ({ amount, currency }) =>
       _pickBy({
