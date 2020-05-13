@@ -17,17 +17,34 @@ import styles from './styles.css'
 
 import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
 
-const DonationButton = ({
-  recipient,
-  targetId,
-}: {
+interface DonationButtonProps {
   recipient: UserDonationRecipient
   targetId: string
-}) => {
+}
+
+const DonationButton = ({ recipient, targetId }: DonationButtonProps) => {
   const viewer = useContext(ViewerContext)
 
+  const showLoginToast = () => {
+    window.dispatchEvent(
+      new CustomEvent(ADD_TOAST, {
+        detail: {
+          color: 'green',
+          content: (
+            <Translate
+              zh_hant="請登入／註冊支持作者"
+              zh_hans="请登入／注册支持作者"
+            />
+          ),
+          customButton: <LoginButton isPlain />,
+          buttonPlacement: 'center',
+        },
+      })
+    )
+  }
+
   return (
-    <section className="donation">
+    <section className="container">
       <DonationDialog recipient={recipient} targetId={targetId}>
         {({ open }) => (
           <Button
@@ -35,21 +52,7 @@ const DonationButton = ({
             bgColor="red"
             onClick={() => {
               if (!viewer.isAuthed) {
-                window.dispatchEvent(
-                  new CustomEvent(ADD_TOAST, {
-                    detail: {
-                      color: 'green',
-                      content: (
-                        <Translate
-                          zh_hant="請登入／註冊支持作者"
-                          zh_hans="请登入／注册支持作者"
-                        />
-                      ),
-                      customButton: <LoginButton isPlain />,
-                      buttonPlacement: 'center',
-                    },
-                  })
-                )
+                showLoginToast()
                 return
               }
               open()
@@ -61,8 +64,6 @@ const DonationButton = ({
           </Button>
         )}
       </DonationDialog>
-
-      {/* add donation list */}
 
       <LikeCoinDialog allowEventTrigger />
 

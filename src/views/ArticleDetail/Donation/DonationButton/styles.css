@@ -1,5 +1,5 @@
-.donation {
-  @mixin inline-flex-center-all;
+.container {
+  @mixin flex-center-all;
 
   width: 100%;
 
