@@ -6,6 +6,10 @@ export const MAXIMUM_CHARGE_AMOUNT = {
   HKD: 99999,
 }
 
+export const MAXIMUM_PAYTO_AMOUNT = {
+  HKD: 99999,
+}
+
 export enum PAYMENT_CURRENCY {
   HKD = 'HKD',
   LIKE = 'LIKE',

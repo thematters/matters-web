@@ -89,7 +89,7 @@ const BaseDonationDialog = ({
   const [windowRef, setWindowRef] = useState<Window | undefined>(undefined)
 
   const [amount, setAmount] = useState<number>(0)
-  const [currency, setCurrency] = useState<CURRENCY>(CURRENCY.LIKE)
+  const [currency, setCurrency] = useState<CURRENCY>(CURRENCY.HKD)
   const [payToTx, setPayToTx] = useState<Omit<PayToTx, '__typename'>>()
   const [addCreditData, setAddCreditData] = useState<AddCreditData>(
     baseAddCreditData

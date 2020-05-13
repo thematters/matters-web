@@ -14,6 +14,7 @@ import { useMutation } from '~/components/GQL'
 import PAY_TO from '~/components/GQL/mutations/payTo'
 
 import {
+  MAXIMUM_PAYTO_AMOUNT,
   OPEN_LIKE_COIN_DIALOG,
   PAYMENT_CURRENCY as CURRENCY,
 } from '~/common/enums'
@@ -138,8 +139,8 @@ const SetAmount: React.FC<FormProps> = ({
     values,
   } = useFormik<FormValues>({
     initialValues: {
-      amount: defaultLikeAmount,
-      currency: CURRENCY.LIKE,
+      amount: defaultHKDAmount,
+      currency: CURRENCY.HKD,
     },
     validate: ({ amount, currency }) =>
       _pickBy({
@@ -185,6 +186,7 @@ const SetAmount: React.FC<FormProps> = ({
   const canReceiveLike = isLike && !!recipient.liker.likerId
   const canProcess = isHKD || (canPayLike && canReceiveLike)
   const color = isLike ? 'green' : 'red'
+  const maxAmount = isLike ? Infinity : MAXIMUM_PAYTO_AMOUNT.HKD
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit} noBackground>
@@ -229,13 +231,17 @@ const SetAmount: React.FC<FormProps> = ({
           fixedPlaceholder={values.currency}
           name="amount"
           min={0}
+          max={maxAmount}
           value={values.amount}
           error={touched.amount && errors.amount}
           onBlur={handleBlur}
           onChange={(e) => {
             const value = e.target.valueAsNumber || 0
             const sanitizedAmount = Math.abs(
-              Math.min(isHKD ? Math.floor(value) : value)
+              Math.min(
+                isHKD ? Math.floor(value) : value,
+                maxAmount
+              )
             )
             setFieldValue('amount', sanitizedAmount)
           }}
