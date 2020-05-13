@@ -7,4 +7,8 @@
 
   --z-index-dialog: 200;
   --z-index-over-dialog: 201;
+
+  --z-index-progress-bar: 300;
+
+  --z-index-splash-screen: 400;
 }

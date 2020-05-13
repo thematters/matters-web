@@ -33,9 +33,6 @@ export default gql`
   type ClientInfo {
     id: ID!
     viewportSize: ViewportSize!
-    isPhone: Boolean!
-    isTablet: Boolean!
-    isMobile: Boolean!
   }
 
   type Push {
