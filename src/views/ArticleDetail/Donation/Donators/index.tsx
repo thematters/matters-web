@@ -33,7 +33,9 @@ const fragments = {
 const Donators = ({ article }: { article: DonatorsArticle }) => {
   const edges = article.transactionsReceivedBy.edges
   const donatorsCount = article.transactionsReceivedBy.totalCount
-  const donators = (edges?.map(({ node }) => node).filter((user) => !!user) || []).slice(0, 10)
+  const donators = (
+    edges?.map(({ node }) => node).filter((user) => !!user) || []
+  ).slice(0, 10)
 
   return (
     <section className="container">
