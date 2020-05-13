@@ -76,3 +76,5 @@ export const STRIPE_ERROR_MESSAGES = {
     rate_limit: '操作过于频繁，请稍候再试',
   },
 }
+
+export const PAYMENT_PROVIDER = ['stripe', 'likecoin']
