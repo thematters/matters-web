@@ -45,16 +45,17 @@ const Home = () => {
 
               {!viewer.isAuthed && (
                 <section className="buttons">
-                  <LoginButton />
-                  <SignUpButton trackType={SIGNUP_TYPE.GENERAL} />
+                  <LoginButton size={[null, '2rem']} />
+                  <SignUpButton
+                    size={[null, '2rem']}
+                    trackType={SIGNUP_TYPE.GENERAL}
+                  />
                 </section>
               )}
             </>
           }
         />
       )}
-
-      <Spacer size="xtight" />
 
       <Feed />
 
