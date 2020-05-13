@@ -1,27 +1,12 @@
 nav {
   position: relative;
-  margin: var(--spacing-loose) 0 var(--spacing-x-tight);
-  padding: 0 var(--spacing-base);
+  padding: var(--spacing-x-tight) var(--spacing-base);
 
   white-space: nowrap;
 
   @media (--sm-up) {
-    margin-bottom: var(--spacing-base);
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: 2rem;
-    background-image: linear-gradient(
-      to left,
-      var(--color-white),
-      var(--color-white) 73%,
-      rgba(255, 255, 255, 0)
-    );
+    padding-top: var(--spacing-base);
+    padding-bottom: var(--spacing-base);
   }
 }
 

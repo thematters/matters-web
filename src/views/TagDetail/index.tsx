@@ -5,14 +5,12 @@ import { useRouter } from 'next/router'
 import { useContext, useState } from 'react'
 
 import {
-  Button,
   EmptyTag,
   Head,
   Layout,
   Spacer,
   Spinner,
   Tabs,
-  TextIcon,
   Throw404,
   Translate,
   ViewerContext,

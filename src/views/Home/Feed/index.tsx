@@ -139,6 +139,10 @@ const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortByType }) => {
   const isNewLoading = networkStatus === NetworkStatus.loading
 
   if (loading && (!result || isNewLoading)) {
+    if (process.browser) {
+      window.scrollTo(0, 0)
+      document.body.focus()
+    }
     return <Spinner />
   }
 
@@ -246,7 +250,10 @@ const HomeFeed = () => {
     <>
       <section className="topbar">
         <SortBy sortBy={feedSortType as SortByType} setSortBy={setSortBy} />
-        <ViewMode />
+
+        <section className="right">
+          <ViewMode />
+        </section>
       </section>
 
       <MainFeed feedSortType={feedSortType as SortByType} />

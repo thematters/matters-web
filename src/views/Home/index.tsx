@@ -5,6 +5,7 @@ import {
   Layout,
   LoginButton,
   SignUpButton,
+  Spacer,
   useResponsive,
   ViewerContext,
 } from '~/components'
@@ -52,6 +53,8 @@ const Home = () => {
           }
         />
       )}
+
+      <Spacer size="xtight" />
 
       <Feed />
 

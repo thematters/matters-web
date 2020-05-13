@@ -8,7 +8,6 @@ import {
   InfiniteScroll,
   Layout,
   List,
-  Spacer,
   Spinner,
 } from '~/components'
 

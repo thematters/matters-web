@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 
-import { Spacer, Tabs, Translate } from '~/components'
+import { Tabs, Translate } from '~/components'
 
 import { PATHS } from '~/common/enums'
 import { getQuery, toPath } from '~/common/utils'
