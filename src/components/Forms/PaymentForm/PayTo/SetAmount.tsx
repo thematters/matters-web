@@ -238,10 +238,7 @@ const SetAmount: React.FC<FormProps> = ({
           onChange={(e) => {
             const value = e.target.valueAsNumber || 0
             const sanitizedAmount = Math.abs(
-              Math.min(
-                isHKD ? Math.floor(value) : value,
-                maxAmount
-              )
+              Math.min(isHKD ? Math.floor(value) : value, maxAmount)
             )
             setFieldValue('amount', sanitizedAmount)
           }}
