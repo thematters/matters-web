@@ -1,11 +1,13 @@
+import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useEffect } from 'react'
 
-import { Dialog, Form, LanguageContext, Translate } from '~/components'
+import { Dialog, Form, LanguageContext, Spinner, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import PAY_TO from '~/components/GQL/mutations/payTo'
+import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import {
@@ -21,10 +23,10 @@ import {
   PayTo as PayToMutate,
   PayTo_payTo as PayToResult,
 } from '~/components/GQL/mutations/__generated__/PayTo'
+import { WalletBalance } from '~/components/GQL/queries/__generated__/WalletBalance'
 
 interface FormProps {
   amount: number
-  balance: number
   currency: CURRENCY
   recipient: UserDonationRecipient
   submitCallback: (
@@ -42,7 +44,6 @@ interface FormValues {
 
 const Confirm: React.FC<FormProps> = ({
   amount,
-  balance,
   currency,
   recipient,
   submitCallback,
@@ -55,6 +56,8 @@ const Confirm: React.FC<FormProps> = ({
 
   const { lang } = useContext(LanguageContext)
   const [payTo] = useMutation<PayToMutate>(PAY_TO)
+
+  const { data, loading } = useQuery<WalletBalance>(WALLET_BALANCE)
 
   const {
     errors,
@@ -124,6 +127,11 @@ const Confirm: React.FC<FormProps> = ({
     }
   }, [isValid])
 
+  if (loading) {
+    return <Spinner />
+  }
+
+  const balance = data?.viewer?.wallet.balance.HKD || 0
   const isWalletInsufficient = balance < amount
   const walletClasses = classNames({
     row: true,
