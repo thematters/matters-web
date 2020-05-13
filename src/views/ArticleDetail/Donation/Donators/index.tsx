@@ -30,7 +30,7 @@ const fragments = {
   `,
 }
 
-const Donators =({ article }: { article: DonatorsArticle }) => {
+const Donators = ({ article }: { article: DonatorsArticle }) => {
   const edges = article.transactionsReceivedBy.edges
   const donatorsCount = article.transactionsReceivedBy.totalCount
   const donators = [

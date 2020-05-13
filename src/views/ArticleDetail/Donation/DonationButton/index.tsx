@@ -22,10 +22,7 @@ interface DonationButtonProps {
   targetId: string
 }
 
-const DonationButton = ({
-  recipient,
-  targetId,
-}: DonationButtonProps) => {
+const DonationButton = ({ recipient, targetId }: DonationButtonProps) => {
   const viewer = useContext(ViewerContext)
 
   const showLoginToast = () => {
