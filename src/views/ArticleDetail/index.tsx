@@ -212,10 +212,7 @@ const ArticleDetail = () => {
 
         {(collectionCount > 0 || isAuthor) && (
           <section className="block">
-            <Collection
-              article={article}
-              collectionCount={collectionCount}
-            />
+            <Collection article={article} collectionCount={collectionCount} />
           </section>
         )}
 
