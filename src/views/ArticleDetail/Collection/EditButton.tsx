@@ -35,11 +35,13 @@ const EDITOR_SET_COLLECTION = gql`
 
 const EditButton = ({
   article,
+  canEdit,
   editing,
   setEditing,
   editingArticles,
 }: {
   article: ArticleDetail_article
+  canEdit: boolean
   editing: boolean
   setEditing: any
   editingArticles: string[]
@@ -92,7 +94,20 @@ const EditButton = ({
   if (!editing) {
     return (
       <span className={editButtonClass}>
-        <Button {...buttonProps} onClick={() => setEditing(true)}>
+        <Button {...buttonProps} onClick={() => {
+          if (!canEdit) {
+            window.dispatchEvent(
+              new CustomEvent(ADD_TOAST, {
+                detail: {
+                  color: 'red',
+                  content: <Translate id="FORBIDDEN" />,
+                },
+              })
+            )
+            return
+          }
+          setEditing(true)
+        }}>
           <TextIcon
             icon={<Icon.Edit size="sm" />}
             color="grey"

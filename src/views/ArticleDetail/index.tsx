@@ -109,7 +109,7 @@ const ArticleDetail = () => {
   const article = data?.article
   const authorId = article && article.author.id
   const collectionCount = (article && article.collection.totalCount) || 0
-  const canEditCollection = viewer.id === authorId
+  const isAuthor = viewer.id === authorId
 
   useEffect(() => {
     if (shouldShowWall && window.location.hash && article) {
@@ -210,11 +210,10 @@ const ArticleDetail = () => {
 
         <Donation mediaHash={mediaHash} />
 
-        {(collectionCount > 0 || canEditCollection) && (
+        {(collectionCount > 0 || isAuthor) && (
           <section className="block">
             <Collection
               article={article}
-              canEdit={canEditCollection}
               collectionCount={collectionCount}
             />
           </section>

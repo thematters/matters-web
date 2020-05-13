@@ -84,7 +84,7 @@ const AppreciationButton = ({
   const readCivicLikerDialog =
     viewer.isCivicLiker || data?.clientPreference.readCivicLikerDialog
   const canAppreciate =
-    !isReachLimit && !isMe && !viewer.isInactive && viewer.liker.likerId
+    !isReachLimit && !isMe && !viewer.isArchived && viewer.liker.likerId
 
   /**
    * Anonymous
