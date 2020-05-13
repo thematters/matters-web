@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 
 import { ANALYTIC_TYPES, ANALYTICS, GA_TRACKING_ID } from '~/common/enums'
+import { deferTry } from '~/common/utils'
 
 import { useEventListener } from '../Hook'
 
@@ -11,18 +12,6 @@ declare global {
     analytics: SegmentAnalytics.AnalyticsJS & { [key: string]: any }
     gtag: any
   }
-}
-
-export const deferTry = (fn: () => any, timesLeft = 10, defer = 2000) => {
-  if (timesLeft > 0) {
-    try {
-      fn()
-    } catch (err) {
-      console.log(err)
-      setTimeout(() => deferTry(fn, timesLeft - 1, defer), defer)
-    }
-  }
-  return
 }
 
 const handleAnalytics = ({

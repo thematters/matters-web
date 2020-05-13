@@ -1,11 +1,9 @@
-import { useQuery } from '@apollo/react-hooks'
 import { useState } from 'react'
 
 import { Dialog, Translate } from '~/components'
-import CLIENT_INFO from '~/components/GQL/queries/clientInfo'
 
 import { ANALYTICS_EVENTS, SHARE_TYPE, TextId } from '~/common/enums'
-import { analytics } from '~/common/utils'
+import { analytics, isMobile } from '~/common/utils'
 
 import Copy from './Copy'
 import Douban from './Douban'
@@ -17,8 +15,6 @@ import Telegram from './Telegram'
 import Twitter from './Twitter'
 import Weibo from './Weibo'
 import WhatsApp from './WhatsApp'
-
-import { ClientInfo } from '~/components/GQL/queries/__generated__/ClientInfo'
 
 export interface ShareDialogProps {
   title?: string
@@ -115,10 +111,6 @@ const BaseShareDialog = ({
 
 export const ShareDialog = (props: ShareDialogProps) => {
   const { title, path } = props
-  const { data } = useQuery<ClientInfo>(CLIENT_INFO, {
-    variables: { id: 'local' },
-  })
-  const isMobile = data?.clientInfo.isMobile
   const shareLink = process.browser
     ? path
       ? `${window.location.origin}${path}`
@@ -130,7 +122,7 @@ export const ShareDialog = (props: ShareDialogProps) => {
   const onShare = async (fallbackShare: () => void) => {
     const navigator = window.navigator as any
 
-    if (navigator.share && isMobile) {
+    if (navigator.share && isMobile()) {
       try {
         await navigator.share({
           title: shareTitle,
