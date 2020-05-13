@@ -9,8 +9,9 @@ import { ADD_TOAST, STORE_KEY_PUSH } from '~/common/enums'
 import { ToggleSubscribePush } from './__generated__/ToggleSubscribePush'
 
 const {
-  publicRuntimeConfig: { FIREBASE_CONFIG, FCM_VAPID_KEY },
+  publicRuntimeConfig: { ENV, FIREBASE_CONFIG, FCM_VAPID_KEY },
 } = getConfig()
+const isProd = ENV === 'production'
 
 const TOGGLE_SUBSCRIBE_PUSH = gql`
   mutation ToggleSubscribePush($id: ID!, $enabled: Boolean!) {
@@ -29,6 +30,10 @@ export const initializePush = async ({
   client: ApolloClient<any>
   viewer: Viewer
 }) => {
+  if (!isProd) {
+    return
+  }
+
   const firebase = await import('firebase/app')
   await import('firebase/messaging')
 
