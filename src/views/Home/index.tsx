@@ -24,9 +24,7 @@ const Home = () => {
     <Layout.Main
       aside={
         <>
-          <Sidebar.Icymi />
           <Sidebar.Tags />
-          <Sidebar.Topics />
           <Sidebar.Authors />
         </>
       }
