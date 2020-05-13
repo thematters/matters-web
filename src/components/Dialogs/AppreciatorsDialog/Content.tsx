@@ -96,7 +96,6 @@ const AppreciatorsDialogContent = ({
             avatarBadge={
               <span className="appreciation-amount">{node.amount}</span>
             }
-            hasCivicLikerRing
             onClick={() => {
               analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
                 type: FEED_TYPE.APPRECIATOR,

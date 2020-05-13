@@ -32,6 +32,10 @@ header {
   }
 }
 
+.content {
+  overflow: hidden;
+}
+
 .name {
   font-weight: var(--font-weight-medium);
 }
