@@ -19,25 +19,21 @@ const MeTabs = () => {
   })
 
   return (
-    <>
-      <Tabs>
-        <Tabs.Tab
-          {...userArticlePath}
-          selected={router.pathname === PATHS.USER_ARTICLES}
-        >
-          <Translate id="article" />
-        </Tabs.Tab>
+    <Tabs>
+      <Tabs.Tab
+        {...userArticlePath}
+        selected={router.pathname === PATHS.USER_ARTICLES}
+      >
+        <Translate id="article" />
+      </Tabs.Tab>
 
-        <Tabs.Tab
-          {...userCommentsPath}
-          selected={router.pathname === PATHS.USER_COMMENTS}
-        >
-          <Translate id="comment" />
-        </Tabs.Tab>
-      </Tabs>
-
-      <Spacer size="xtight" />
-    </>
+      <Tabs.Tab
+        {...userCommentsPath}
+        selected={router.pathname === PATHS.USER_COMMENTS}
+      >
+        <Translate id="comment" />
+      </Tabs.Tab>
+    </Tabs>
   )
 }
 

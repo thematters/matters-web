@@ -30,7 +30,6 @@ const AppreciationTabs: React.FC<AppreciationTabsProps> & {
       <Tabs.Tab
         href={PATHS.ME_APPRECIATIONS_SENT}
         selected={router.pathname === PATHS.ME_APPRECIATIONS_SENT}
-        sup={activity.appreciationsSentTotal}
       >
         <Translate id="appreciationsSent" />
       </Tabs.Tab>
@@ -38,7 +37,6 @@ const AppreciationTabs: React.FC<AppreciationTabsProps> & {
       <Tabs.Tab
         href={PATHS.ME_APPRECIATIONS_RECEIVED}
         selected={router.pathname === PATHS.ME_APPRECIATIONS_RECEIVED}
-        sup={activity.appreciationsReceivedTotal}
       >
         <Translate id="appreciationsReceived" />
       </Tabs.Tab>

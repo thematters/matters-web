@@ -114,8 +114,6 @@ export default () => (
 
     <Head title={{ id: 'appreciationsSent' }} />
 
-    <Spacer />
-
     <AppreciationsSent />
   </Layout.Main>
 )
