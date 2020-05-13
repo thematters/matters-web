@@ -20,7 +20,6 @@ import Authors from './Authors'
 import SortBy, { SortByType } from './SortBy'
 import styles from './styles.css'
 import Tags from './Tags'
-import ViewMode from './ViewMode'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import {
@@ -250,10 +249,6 @@ const HomeFeed = () => {
     <>
       <section className="topbar">
         <SortBy sortBy={feedSortType as SortByType} setSortBy={setSortBy} />
-
-        <section className="right">
-          <ViewMode />
-        </section>
       </section>
 
       <MainFeed feedSortType={feedSortType as SortByType} />

@@ -4,16 +4,4 @@
 
   background: var(--color-white);
   z-index: var(--z-index-global-header);
-
-  & .right {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    padding: var(--spacing-x-tight) var(--spacing-base);
-
-    @media (--sm-up) {
-      padding: var(--spacing-base);
-    }
-  }
 }
