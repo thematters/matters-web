@@ -1,6 +1,8 @@
 import getConfig from 'next/config'
 import { createContext, useEffect, useState } from 'react'
 
+import { sleep } from '~/common/utils'
+
 declare global {
   interface Window {
     grecaptcha: ReCaptchaV2.ReCaptcha
@@ -35,9 +37,9 @@ export const ReCaptchaProvider = ({
   const [recaptchaInterval, setRecaptchaInterval] = useState(0)
 
   const handleRecaptcha = () => {
-    window.grecaptcha.ready(() => {
+    window.grecaptcha.ready(async () => {
       // function to get and set token
-      const getToken = () => {
+      const getToken = async () => {
         if (window.grecaptcha && window.grecaptcha.execute) {
           window.grecaptcha
             .execute(RECAPTCHA_KEY, { action: 'homepage' })
@@ -46,7 +48,8 @@ export const ReCaptchaProvider = ({
             })
         } else {
           // try again after 2 seconds if script is not injected
-          setTimeout(getToken, 2000)
+          await sleep(2000)
+          getToken()
         }
       }
 
@@ -63,9 +66,8 @@ export const ReCaptchaProvider = ({
       setRecaptchaInterval(intervalId)
 
       // clear up after max wait time of 20 minutes
-      setTimeout(() => {
-        clearInterval(intervalId)
-      }, 60 * 20 * 1000)
+      await sleep(60 * 20 * 1000)
+      clearInterval(intervalId)
     })
   }
 

@@ -1,0 +1,24 @@
+.splash-screen {
+  @mixin flex-center-all;
+
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  background: var(--color-white);
+  z-index: var(--z-index-splash-screen);
+
+  & :global(> svg) {
+    width: 192px;
+    height: auto;
+
+    @media (--sm-up) {
+      width: 256px;
+    }
+    @media (--lg-up) {
+      width: 347px;
+    }
+  }
+}

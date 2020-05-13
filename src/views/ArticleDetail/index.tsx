@@ -10,7 +10,6 @@ import { Waypoint } from 'react-waypoint'
 import {
   BackToHomeButton,
   DateTime,
-  DonationDialog,
   Error,
   Head,
   Icon,
@@ -30,7 +29,7 @@ import { getQuery } from '~/common/utils'
 
 import Collection from './Collection'
 import Content from './Content'
-import DonationButton from './DonationButton'
+import Donation from './Donation'
 import FingerprintButton from './FingerprintButton'
 import RelatedArticles from './RelatedArticles'
 import State from './State'
@@ -57,7 +56,6 @@ const ARTICLE_DETAIL = gql`
       createdAt
       author {
         ...UserDigestRichUser
-        ...UserDonationRecipient
       }
       collection(input: { first: 0 }) @connection(key: "articleCollection") {
         totalCount
@@ -75,7 +73,6 @@ const ARTICLE_DETAIL = gql`
   ${RelatedArticles.fragments.article}
   ${State.fragments.article}
   ${FingerprintButton.fragments.article}
-  ${DonationDialog.fragments.recipient}
 `
 
 const DynamicResponse = dynamic(() => import('./Responses'), {
@@ -211,7 +208,7 @@ const ArticleDetail = () => {
 
         <Content article={article} />
 
-        <DonationButton recipient={article.author} targetId={article.id} />
+        <Donation mediaHash={mediaHash} />
 
         {(collectionCount > 0 || canEditCollection) && (
           <section className="block">

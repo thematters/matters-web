@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import { useEffect } from 'react'
 
 import { REMOVE_TOAST, TOAST_DURATION } from '~/common/enums'
+import { sleep } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -92,10 +93,14 @@ export const ToastWithEffect = ({
   const remove = () => {
     window.dispatchEvent(new CustomEvent(REMOVE_TOAST, { detail: { id } }))
   }
+  const closeAfterDuration = async () => {
+    await sleep(duration)
+    remove()
+  }
 
   useEffect(() => {
     if (!fixed) {
-      setTimeout(remove, duration)
+      closeAfterDuration()
     }
   }, [])
 
