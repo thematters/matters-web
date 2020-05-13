@@ -16,8 +16,8 @@ const PasswordInvalid: React.FC<FormProps> = ({
       <Dialog.Message error={true} spacing="xxl">
         <h3>
           <Translate
-            zh_hant="支付密碼錯誤，請重試"
-            zh_hans="支付密码错误，请重试"
+            zh_hant="交易密碼錯誤，請重試"
+            zh_hans="交易密码错误，请重试"
           />
         </h3>
       </Dialog.Message>
