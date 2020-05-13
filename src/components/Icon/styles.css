@@ -26,6 +26,10 @@
     width: 2rem;
     height: 2rem;
   }
+  &.xl-m {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
   &.xl {
     width: 3rem;
     height: 3rem;
@@ -59,5 +63,8 @@
   }
   &.gold {
     color: var(--color-matters-gold);
+  }
+  &.red {
+    color: var(--color-red);
   }
 }

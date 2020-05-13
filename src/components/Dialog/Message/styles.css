@@ -29,3 +29,7 @@
 .spacing-md {
   padding: var(--spacing-base) 0;
 }
+
+.spacing-xxl {
+  padding: var(--spacing-xx-loose) 0;
+}

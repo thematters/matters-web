@@ -1,4 +1,4 @@
-import { MINIMAL_CHARGE_AMOUNT } from '~/common/enums'
+import { MINIMAL_CHARGE_AMOUNT, PAYMENT_CURRENCY } from '~/common/enums'
 import {
   isValidDisplayName,
   isValidEmail,
@@ -118,6 +118,30 @@ export const validateAmount = (value: number, lang: Language) => {
     return translate({
       zh_hant: `最少充值金額爲 HKD ${MINIMAL_CHARGE_AMOUNT.HKD}`,
       zh_hans: `最少充值金额为 HKD ${MINIMAL_CHARGE_AMOUNT.HKD}`,
+      lang,
+    })
+  }
+}
+
+export const validateDonationAmount = (value: number, lang: Language) => {
+  if (typeof value !== 'number') {
+    return translate({ id: 'required', lang })
+  }
+
+  if (value === 0) {
+    return translate({
+      zh_hant: '請選擇或輸入金額',
+      zh_hans: '请选择或输入金额',
+      lang,
+    })
+  }
+}
+
+export const validateCurrency = (value: string, lang: Language) => {
+  if (!PAYMENT_CURRENCY[value as keyof typeof PAYMENT_CURRENCY]) {
+    return translate({
+      zh_hant: '請選擇一種幣別',
+      zh_hans: '请选择一种币别',
       lang,
     })
   }

@@ -31,3 +31,10 @@ input {
   line-height: 3rem;
   pointer-events: none;
 }
+
+.red-style {
+  &:focus {
+    background: #FCF6F5;
+    border-bottom-color: var(--color-red);
+  }
+}

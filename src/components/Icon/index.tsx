@@ -82,7 +82,15 @@ import { ReactComponent as WalletMedium } from './icons/wallet-md.svg'
 import Live from './Live'
 import styles from './styles.css'
 
-export type IconSize = 'xs' | 'sm' | 'md-s' | 'md' | 'lg' | 'xl' | 'xxl'
+export type IconSize =
+  | 'xs'
+  | 'sm'
+  | 'md-s'
+  | 'md'
+  | 'lg'
+  | 'xl-m'
+  | 'xl'
+  | 'xxl'
 
 export type IconColor =
   | 'white'
@@ -93,6 +101,7 @@ export type IconColor =
   | 'grey-lighter'
   | 'green'
   | 'gold'
+  | 'red'
 
 export interface IconProps {
   size?: IconSize
@@ -176,9 +185,7 @@ export const Icon = {
   Expand: withIcon(Expand),
   External: withIcon(External),
   HashTag: withIcon(HashTag),
-  Heart: withIcon((props) => (
-    <Heart style={{ width: 40, height: 40 }} {...props} />
-  )),
+  Heart: withIcon(Heart),
   HelpMedium: withIcon(HelpMedium),
   HistoryMedium: withIcon(HistoryMedium),
   IPFSMedium: withIcon(IPFSMedium),
