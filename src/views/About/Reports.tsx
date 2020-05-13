@@ -15,6 +15,24 @@ const Reports = () => (
     <div className="l-row">
       <div className="item">
         <a
+          href="https://www.blog.google/around-the-globe/google-asia/gni-innovation-challenge-apac/"
+          target="_blank"
+        >
+          <h3>18 Asia Pacific news organizations with big ideas</h3>
+          <cite>Google Blog</cite>
+        </a>
+      </div>
+      <div className="item">
+        <a href="https://appworks.tw/category/events/" target="_blank">
+          <h3>
+            Taiwan’s AppWorks Demo Day #19 Puts 18 of the Most Promising Greater
+            Southeast Asian AI / Blockchain Founders on Stage
+          </h3>
+          <cite>AppWorks</cite>
+        </a>
+      </div>
+      <div className="item">
+        <a
           href="http://www.sixthtone.com/news/1002403/how-blockchain-could-revolutionize-chinas-media"
           target="_blank"
         >
@@ -58,21 +76,6 @@ const Reports = () => (
         >
           <h3>区块链：让好新闻更安全、更“值钱”？</h3>
           <cite>德國之聲</cite>
-        </a>
-      </div>
-      <div className="item">
-        <a href="https://36kr.com/p/5156042.html" target="_blank">
-          <h3>“城市化治理”：平台运营的最高境界</h3>
-          <cite>全媒派</cite>
-        </a>
-      </div>
-      <div className="item">
-        <a
-          href="https://mp.weixin.qq.com/s?__biz=MzU2MjQ2OTE5Nw==&mid=2247484199&idx=1&sn=adf46bfe6285c20e7f92fcf199360ce1&chksm=fc684305cb1fca13fdac5ca4d47063881ff6aa7909e3c141111da901667b72fdc2260e94c817&mpshare=1&scene=1&srcid=05162EAouKYBv3fNvBDz5a0Q&key=12a00fb205fe0934d49869205812e14fbd1e7a879942a8e5e1efcce1f99e6921623be4672714f229dfc58e2743696b5e4351b2d3acb3d1f31b36667268bfc386e0b3e682362c5f0b19f854f2b5108b4d&ascene=0&uin=NTU3NzYwNjU%3D&devicetype=iMac+MacBook8%2C1+OSX+OSX+10.13.4+build(17E199)&version=12020810&nettype=WIFI&lang=zh_CN&fontScale=100&pass_ticket=9m6qkpYH8nnyE6EF7DwHs%2Bj5jQnOW8R3ypMowqntaKA%3D"
-          target="_blank"
-        >
-          <h3>专访Matters创始人张洁平：区块链能让好内容活下去吗？</h3>
-          <cite>野馬財經</cite>
         </a>
       </div>
       <div className="item">
