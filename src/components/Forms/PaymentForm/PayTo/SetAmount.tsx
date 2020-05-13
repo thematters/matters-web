@@ -199,12 +199,14 @@ const SetAmount: React.FC<FormProps> = ({
         onChange={(e) => {
           const raw = (e.target.value || '') as keyof typeof CURRENCY
           const value = CURRENCY[raw]
+          const defaultAmount = fixed
+            ? value === CURRENCY.LIKE
+              ? defaultLikeAmount
+              : defaultHKDAmount
+            : 0
           if (value) {
             setFieldValue('currency', value)
-            setFieldValue(
-              'amount',
-              value === CURRENCY.LIKE ? defaultLikeAmount : defaultHKDAmount
-            )
+            setFieldValue('amount', defaultAmount)
           }
         }}
       />
