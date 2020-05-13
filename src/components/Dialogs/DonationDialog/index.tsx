@@ -1,12 +1,7 @@
 import gql from 'graphql-tag'
 import { useContext, useState } from 'react'
 
-import {
-  Dialog,
-  PaymentForm,
-  Translate,
-  ViewerContext,
-} from '~/components'
+import { Dialog, PaymentForm, Translate, ViewerContext } from '~/components'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { numRound } from '~/common/utils'
