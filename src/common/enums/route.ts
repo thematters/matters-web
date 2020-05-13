@@ -50,6 +50,8 @@ type ROUTE_KEY =
   | 'GUIDE'
   | 'COMMUNITY'
   | 'TOS'
+  | 'PAY_CALLBACK_SUCCESS'
+  | 'PAY_CALLBACK_FAILURE'
 
 export const ROUTES: Array<{
   key: ROUTE_KEY
@@ -114,6 +116,10 @@ export const ROUTES: Array<{
   { key: 'OAUTH_AUTHORIZE', pathname: '/oauth/authorize' },
   { key: 'OAUTH_CALLBACK_SUCCESS', pathname: '/oauth/[provider]/success' },
   { key: 'OAUTH_CALLBACK_FAILURE', pathname: '/oauth/[provider]/failure' },
+
+  // Pay
+  { key: 'PAY_CALLBACK_SUCCESS', pathname: '/pay/[provider]/success' },
+  { key: 'PAY_CALLBACK_FAILURE', pathname: '/pay/[provider]/failure' },
 
   // Misc
   { key: 'HELP', pathname: '/help' },
