@@ -256,6 +256,8 @@ const SetAmount: React.FC<FormProps> = ({
                   'amount',
                   isLike ? defaultLikeAmount : defaultHKDAmount
                 )
+              } else {
+                setFieldValue('amount', 0)
               }
               setFixed(!fixed)
             }}
