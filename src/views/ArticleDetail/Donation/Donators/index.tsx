@@ -13,7 +13,7 @@ const fragments = {
   article: gql`
     fragment DonatorsArticle on Article {
       id
-      transactionsReceivedBy(input: { first: 15, purpose: donation }) {
+      transactionsReceivedBy(input: { first: 10, purpose: donation }) {
         totalCount
         edges {
           cursor
@@ -35,7 +35,7 @@ const Donators = ({ article }: { article: DonatorsArticle }) => {
   const donatorsCount = article.transactionsReceivedBy.totalCount
   const donators = [
     ...(edges?.map(({ node }) => node).filter((user) => !!user) || []),
-  ].slice(0, 15)
+  ].slice(0, 10)
 
   return (
     <section className="container">
