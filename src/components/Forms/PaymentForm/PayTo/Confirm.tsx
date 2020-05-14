@@ -146,16 +146,7 @@ const Confirm: React.FC<FormProps> = ({
           <section className="confirm-info">
             <section className="row total">
               <div className="col">
-                <Translate zh_hant="實際支付" zh_hans="实际支付" />
-              </div>
-              <div className="col">
-                {currency} {toAmountString(amount)}
-              </div>
-            </section>
-
-            <section className="row">
-              <div className="col">
-                <Translate zh_hant="作者實收" zh_hans="作者实收" />
+                <Translate zh_hant="支付" zh_hans="支付" />
               </div>
               <div className="col">
                 {currency} {toAmountString(amount)}
