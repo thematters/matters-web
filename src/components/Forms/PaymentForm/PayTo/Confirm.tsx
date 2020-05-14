@@ -1,5 +1,4 @@
 import { useQuery } from '@apollo/react-hooks'
-import classNames from 'classnames'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useEffect } from 'react'
@@ -16,6 +15,7 @@ import {
   validatePaymentPassword,
 } from '~/common/utils'
 
+import ConfirmTable from '../ConfirmTable'
 import styles from './styles.css'
 
 import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
@@ -133,46 +133,38 @@ const Confirm: React.FC<FormProps> = ({
 
   const balance = data?.viewer?.wallet.balance.HKD || 0
   const isWalletInsufficient = balance < amount
-  const walletClasses = classNames({
-    row: true,
-    wallet: true,
-    insufficient: isWalletInsufficient,
-  })
 
   return (
     <>
       <Dialog.Content hasGrow>
         <section>
-          <section className="confirm-info">
-            <section className="row total">
-              <div className="col">
-                <Translate zh_hant="實際支付" zh_hans="实际支付" />
-              </div>
-              <div className="col">
+          <ConfirmTable>
+            <ConfirmTable.Row total>
+              <ConfirmTable.Col>
+                <Translate id="paymentAmount" />
+              </ConfirmTable.Col>
+
+              <ConfirmTable.Col>
                 {currency} {toAmountString(amount)}
-              </div>
-            </section>
+              </ConfirmTable.Col>
+            </ConfirmTable.Row>
 
-            <section className="row">
-              <div className="col">
-                <Translate zh_hant="作者實收" zh_hans="作者实收" />
-              </div>
-              <div className="col">
-                {currency} {toAmountString(amount)}
-              </div>
-            </section>
+            <ConfirmTable.Row breaker />
 
-            <section className="breaker" />
+            <ConfirmTable.Row insufficient={isWalletInsufficient}>
+              <ConfirmTable.Col>
+                <b>
+                  <Translate zh_hant="錢包餘額" zh_hans="钱包余额" />
+                </b>
+              </ConfirmTable.Col>
 
-            <section className={walletClasses}>
-              <div className="col">
-                <Translate zh_hant="錢包餘額" zh_hans="钱包余额" />
-              </div>
-              <div className="col">
-                {currency} {toAmountString(balance)}
-              </div>
-            </section>
-          </section>
+              <ConfirmTable.Col>
+                <b>
+                  {currency} {toAmountString(balance)}
+                </b>
+              </ConfirmTable.Col>
+            </ConfirmTable.Row>
+          </ConfirmTable>
 
           {!isWalletInsufficient && InnerForm}
         </section>

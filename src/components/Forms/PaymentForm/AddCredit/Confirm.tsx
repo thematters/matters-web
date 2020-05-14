@@ -20,7 +20,7 @@ import {
   validateAmount,
 } from '~/common/utils'
 
-import styles from './styles.css'
+import ConfirmTable from '../ConfirmTable'
 
 import {
   AddCredit,
@@ -106,7 +106,7 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, defaultAmount }) => {
     <Form id={formId} onSubmit={handleSubmit} noBackground>
       <Form.AmountInput
         fixedPlaceholder={currency}
-        label={<Translate id="paymentAmount" />}
+        label={<Translate zh_hant="輸入金額" zh_hans="输入金额" />}
         name="amount"
         min={0}
         max={MAXIMUM_CHARGE_AMOUNT[currency]}
@@ -137,36 +137,38 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, defaultAmount }) => {
         <section>
           {InnerForm}
 
-          <section className="confirm-info">
-            <section className="row">
-              <div className="col">
-                <Translate id="topUpAmount" />
-              </div>
-              <div className="col">
+          <ConfirmTable>
+            <ConfirmTable.Row>
+              <ConfirmTable.Col>
+                <Translate zh_hant="進帳金額" zh_hans="进帐金额" />
+              </ConfirmTable.Col>
+
+              <ConfirmTable.Col>
                 {currency} {toAmountString(values.amount)}
-              </div>
-            </section>
+              </ConfirmTable.Col>
+            </ConfirmTable.Row>
 
-            <section className="row">
-              <div className="col">
-                <Translate id="paymentPlatformFee" /> ({PLATFORM_FEE[currency]})
-              </div>
-              <div className="col">
+            <ConfirmTable.Row>
+              <ConfirmTable.Col>
+                <Translate zh_hant="Stripe 手續費" zh_hans="Stripe 手续费" />（
+                {PLATFORM_FEE[currency]}）
+              </ConfirmTable.Col>
+
+              <ConfirmTable.Col>
                 + {currency} {toAmountString(fee)}
-              </div>
-            </section>
+              </ConfirmTable.Col>
+            </ConfirmTable.Row>
 
-            <section className="row total">
-              <div className="col">
-                <Translate id="paymentAmount" />
-              </div>
-              <div className="col">
+            <ConfirmTable.Row total>
+              <ConfirmTable.Col>
+                <Translate zh_hant="充值確認" zh_hans="充值确认" />
+              </ConfirmTable.Col>
+
+              <ConfirmTable.Col>
                 {currency} {toAmountString(total)}
-              </div>
-            </section>
-          </section>
-
-          <style jsx>{styles}</style>
+              </ConfirmTable.Col>
+            </ConfirmTable.Row>
+          </ConfirmTable>
         </section>
       </Dialog.Content>
 
