@@ -21,7 +21,7 @@ const ViewMode = () => {
   const { data, client } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
     variables: { id: 'local' },
   })
-  const { viewMode } = data?.clientPreference || { viewMode: 'default' }
+  const { viewMode } = data?.clientPreference || { viewMode: 'comfortable' }
   const isDefaultMode = viewMode === 'default'
   const isComfortableMode = viewMode === 'comfortable'
   const isCompactMode = viewMode === 'compact'
@@ -90,13 +90,15 @@ const ViewMode = () => {
           title={<Translate id="viewMode" />}
           onClick={open}
           rightText={
-            isDefaultMode ? (
-              <Translate id="viewModeDefault" />
-            ) : isComfortableMode ? (
-              <Translate id="viewModeComfortable" />
-            ) : (
-              <Translate id="viewModeCompact" />
-            )
+            <span key={viewMode || ''}>
+              {isDefaultMode ? (
+                <Translate id="viewModeDefault" />
+              ) : isComfortableMode ? (
+                <Translate id="viewModeComfortable" />
+              ) : (
+                <Translate id="viewModeCompact" />
+              )}
+            </span>
           }
           ref={ref}
         />
