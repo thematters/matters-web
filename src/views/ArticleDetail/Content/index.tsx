@@ -35,7 +35,7 @@ const Content = ({ article }: { article: ContentArticle }) => {
   const [trackedFinish, setTrackedFinish] = useState(false)
   const contentContainer = useRef(null)
 
-  // iddle timer
+  // idle timer
   const [lastScroll, setScrollTime] = useState(0)
 
   const { id } = article
