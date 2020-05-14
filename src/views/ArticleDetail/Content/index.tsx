@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
-import { useEffect, useState } from 'react'
+import throttle from 'lodash/throttle'
+import { useEffect, useRef, useState } from 'react'
 import { Waypoint } from 'react-waypoint'
 
 import { useMutation } from '~/components/GQL'
@@ -30,64 +31,84 @@ const fragments = {
 
 const Content = ({ article }: { article: ContentArticle }) => {
   const [read] = useMutation<ReadArticle>(READ_ARTICLE)
+
   const [trackedFinish, setTrackedFinish] = useState(false)
-  const [trackedRead, setTrackedRead] = useState(false)
+  const contentContainer = useRef(null)
+
+  // idle timer
+  const [lastScroll, setScrollTime] = useState(0)
+
   const { id } = article
 
+  // called only once
   useEffect(() => {
+    initAudioPlayers()
+
+    const handleScroll = throttle(() => setScrollTime(Date.now() / 1000), 3000)
+    window.addEventListener('scroll', handleScroll)
     // enter and leave article for analytics
     analytics.trackEvent(ANALYTICS_EVENTS.ENTER_ARTICLE, {
       entrance: id,
     })
-
-    // send referrer to likebutton
-    const likeButtonIframe = document.querySelector(
-      '.likebutton iframe'
-    ) as HTMLFrameElement
-    if (likeButtonIframe) {
-      likeButtonIframe.addEventListener('load', () => {
-        if (likeButtonIframe.contentWindow) {
-          likeButtonIframe.contentWindow.postMessage(
-            {
-              action: 'SET_REFERRER',
-              content: { referrer: window.location.href.split('#')[0] },
-            },
-            'https://button.like.co'
-          )
-        }
-      })
-    }
-
-    return () =>
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
       analytics.trackEvent(ANALYTICS_EVENTS.LEAVE_ARTICLE, { entrance: id })
+    }
   }, [])
 
+  // register read
   useEffect(() => {
-    initAudioPlayers()
-  })
+    const timerId = setInterval(
+      (function heartbeat() {
+        const isReading = () => {
+          // tab hidden
+          if (document.hidden) {
+            return false
+          }
 
-  const FireOnMount = ({ fn }: { fn: () => void }) => {
-    useEffect(() => {
-      fn()
-    }, [])
-    return null
-  }
+          // idle for more than 5 minutes
+          if (Date.now() / 1000 - lastScroll > 60 * 5) {
+            return false
+          }
+
+          if (!contentContainer || !contentContainer.current) {
+            return false
+          }
+
+          // TODO: if modal shown
+
+          // if bottom is above center
+          const {
+            bottom,
+          } = ((contentContainer.current as unknown) as Element).getBoundingClientRect()
+
+          const isBottomAboveCenter = bottom <= window.innerHeight / 2
+
+          return !isBottomAboveCenter
+        }
+
+        if (isReading()) {
+          read({ variables: { id } })
+        }
+
+        return heartbeat
+      })(),
+      5000
+    )
+
+    // clean timer
+    return () => {
+      clearInterval(timerId)
+    }
+  }, [lastScroll])
 
   return (
     <>
-      <FireOnMount
-        fn={() => {
-          if (!trackedRead) {
-            read({ variables: { id } })
-            setTrackedRead(true)
-          }
-        }}
-      />
-
       <div
         className="u-content"
         dangerouslySetInnerHTML={{ __html: article.content }}
         onClick={captureClicks}
+        ref={contentContainer}
       />
 
       <Waypoint
