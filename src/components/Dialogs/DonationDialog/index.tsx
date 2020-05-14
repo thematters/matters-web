@@ -1,15 +1,7 @@
-import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useContext, useState } from 'react'
 
-import {
-  Dialog,
-  PaymentForm,
-  Spinner,
-  Translate,
-  ViewerContext,
-} from '~/components'
-import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
+import { Dialog, PaymentForm, Translate, ViewerContext } from '~/components'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { numRound } from '~/common/utils'
@@ -19,7 +11,6 @@ import {
   PayTo_payTo as PayToResult,
   PayTo_payTo_transaction as PayToTx,
 } from '~/components/GQL/mutations/__generated__/PayTo'
-import { WalletBalance } from '~/components/GQL/queries/__generated__/WalletBalance'
 import { UserDonationRecipient } from './__generated__/UserDonationRecipient'
 
 type Step =
@@ -98,8 +89,6 @@ const BaseDonationDialog = ({
     baseResetPasswordData
   )
 
-  const { data, loading } = useQuery<WalletBalance>(WALLET_BALANCE)
-
   const open = () => {
     setAddCreditData(baseAddCreditData)
     setStep(defaultStep)
@@ -161,12 +150,6 @@ const BaseDonationDialog = ({
     </Dialog.Footer.Button>
   )
 
-  if (loading) {
-    return <Spinner />
-  }
-
-  const balanceHKD = data?.viewer?.wallet.balance.HKD || 0
-
   const isAddCredit = step === 'addCredit'
   const isAddCreditComplete = step === 'addCreditComplete'
   const isAddCreditProcessing = step === 'addCreditProcessing'
@@ -214,7 +197,6 @@ const BaseDonationDialog = ({
         {isConfirm && (
           <PaymentForm.PayTo.Confirm
             amount={amount}
-            balance={balanceHKD}
             currency={currency}
             recipient={recipient}
             submitCallback={() => setStep('processing')}

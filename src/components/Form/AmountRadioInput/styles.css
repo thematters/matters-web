@@ -6,21 +6,14 @@
 
 .amount {
   display: flex;
-  width: 6.125rem;
-  max-width: 6.125rem;
-  min-width: 6.125rem;
+
+  flex: 0 0 30%;
 
   background: var(--color-white);
   border-radius: 0.25rem;
   color: var(--color-white);
   font-weight: var(--font-weight-medium);
   font-size: var(--font-size-lg);
-
-  @media (--xs-down) {
-    width: 5.5rem;
-    max-width: 5.5rem;
-    min-width: 5.5rem;
-  }
 
   &:nth-child(n+4) {
     margin-top: var(--spacing-loose);

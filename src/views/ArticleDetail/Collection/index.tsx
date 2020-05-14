@@ -1,9 +1,9 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import _uniq from 'lodash/uniq'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 
-import { Title, Translate, ViewMoreButton } from '~/components'
+import { Title, Translate, ViewerContext, ViewMoreButton } from '~/components'
 import articleFragments from '~/components/GQL/fragments/article'
 
 import { mergeConnections } from '~/common/utils'
@@ -29,8 +29,9 @@ const COLLECTION_LIST = gql`
 const Collection: React.FC<{
   article: ArticleDetail_article
   collectionCount?: number
-  canEdit?: boolean
-}> = ({ article, collectionCount, canEdit }) => {
+}> = ({ article, collectionCount }) => {
+  const viewer = useContext(ViewerContext)
+
   const [editing, setEditing] = useState<boolean>(false)
   const [editingArticles, setEditingArticles] = useState<any[]>([])
 
@@ -55,6 +56,9 @@ const Collection: React.FC<{
         }),
     })
 
+  const isAuthor = viewer.id === article.author.id
+  const canEdit = isAuthor && !viewer.isInactive
+
   return (
     <section className="collection">
       <header>
@@ -67,9 +71,10 @@ const Collection: React.FC<{
         </Title>
 
         <section className="right">
-          {canEdit && (
+          {isAuthor && (
             <EditButton
               article={article}
+              canEdit={canEdit}
               editing={editing}
               setEditing={setEditing}
               editingArticles={editingArticles}

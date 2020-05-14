@@ -33,14 +33,14 @@ const ME_APPRECIATIONS_SENT = gql`
           edges {
             cursor
             node {
-              ...AppreciationSentAppreciation
+              ...DigestAppreciation
             }
           }
         }
       }
     }
   }
-  ${Appreciation.AppreciationSent.fragments.appreciation}
+  ${Appreciation.fragments.appreciation}
   ${AppreciationTabs.fragments.userActivity}
 `
 
@@ -95,7 +95,7 @@ const AppreciationsSent = () => {
         <List>
           {edges.map(({ node, cursor }) => (
             <List.Item key={cursor}>
-              <Appreciation.AppreciationSent tx={node} />
+              <Appreciation appreciation={node} type="sent" />
             </List.Item>
           ))}
         </List>
