@@ -1,7 +1,7 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
-import { useContext } from 'react'
+import { useContext, useRef } from 'react'
 
 import { Dialog, Form, LanguageContext, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
@@ -57,6 +57,7 @@ export const ADD_CREDIT = gql`
 `
 
 const Confirm: React.FC<FormProps> = ({ submitCallback, defaultAmount }) => {
+  const inputRef: React.RefObject<any> | null = useRef(null)
   const [addCredit] = useMutation<AddCredit>(ADD_CREDIT)
   const { lang } = useContext(LanguageContext)
   const formId = 'add-credit-confirm-form'
@@ -111,6 +112,7 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, defaultAmount }) => {
         min={0}
         max={MAXIMUM_CHARGE_AMOUNT[currency]}
         step="1"
+        ref={inputRef}
         required
         value={values.amount}
         error={touched.amount && errors.amount}
@@ -121,6 +123,12 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, defaultAmount }) => {
             Math.floor(amount),
             MAXIMUM_CHARGE_AMOUNT[currency]
           )
+
+          /// remove extra left pad 0
+          if (inputRef.current) {
+            inputRef.current.value = sanitizedAmount
+          }
+
           setFieldValue('amount', sanitizedAmount)
         }}
         autoFocus
