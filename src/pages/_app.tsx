@@ -12,10 +12,10 @@ import {
   AnalyticsListener,
   Error,
   ErrorBoundary,
+  FeaturesProvider,
   LanguageProvider,
   Layout,
   Toast,
-  ViewerFragments,
   ViewerProvider,
 } from '~/components'
 import { ClientUpdater } from '~/components/ClientUpdater'
@@ -39,9 +39,13 @@ const ROOT_QUERY = gql`
       ...ViewerUser
       ...AnalyticsUser
     }
+    official {
+      ...FeatureOfficial
+    }
   }
-  ${ViewerFragments.user}
+  ${ViewerProvider.fragments.user}
   ${AnalyticsListener.fragments.user}
+  ${FeaturesProvider.fragments.official}
 `
 
 // Sentry
@@ -81,6 +85,7 @@ const Root = ({
 
   const { loading, data, error } = useQuery<RootQuery>(ROOT_QUERY)
   const viewer = data?.viewer
+  const official = data?.official
 
   if (loading) {
     return null
@@ -97,14 +102,16 @@ const Root = ({
   return (
     <ViewerProvider viewer={viewer}>
       <LanguageProvider>
-        {shouldApplyLayout ? <Layout>{children}</Layout> : children}
+        <FeaturesProvider official={official}>
+          {shouldApplyLayout ? <Layout>{children}</Layout> : children}
 
-        <GlobalDialogs />
-        <Toast.Container />
-        <ProgressBar />
+          <GlobalDialogs />
+          <Toast.Container />
+          <ProgressBar />
 
-        <AnalyticsListener user={viewer || {}} />
-        <PushInitializer client={client} />
+          <AnalyticsListener user={viewer || {}} />
+          <PushInitializer client={client} />
+        </FeaturesProvider>
       </LanguageProvider>
     </ViewerProvider>
   )
