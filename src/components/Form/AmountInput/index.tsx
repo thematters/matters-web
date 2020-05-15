@@ -1,3 +1,5 @@
+import { forwardRef } from 'react'
+
 import Field, { FieldProps } from '../Field'
 import styles from './styles.css'
 
@@ -25,45 +27,55 @@ type AmountInputProps = {
     HTMLInputElement
   >
 
-const AmountInput: React.FC<AmountInputProps> = ({
-  name,
-  label,
-  extraButton,
+const AmountInput = forwardRef(
+  (
+    {
+      name,
+      label,
+      extraButton,
 
-  hint,
-  error,
+      hint,
+      error,
 
-  fixedPlaceholder,
+      fixedPlaceholder,
 
-  ...inputProps
-}) => {
-  const fieldId = `field-${name}`
-  const fieldMsgId = `field-msg-${name}`
+      ...inputProps
+    }: AmountInputProps,
+    ref: any
+  ) => {
+    const fieldId = `field-${name}`
+    const fieldMsgId = `field-msg-${name}`
 
-  return (
-    <Field>
-      <Field.Header htmlFor={fieldId} label={label} extraButton={extraButton} />
-
-      <Field.Content>
-        <span className="fixed-placeholder">{fixedPlaceholder}</span>
-
-        <input
-          {...inputProps}
-          name={name}
-          type="number"
-          aria-describedby={fieldMsgId}
-          autoComplete="nope"
-          autoCorrect="off"
-          autoCapitalize="off"
-          spellCheck="false"
+    return (
+      <Field>
+        <Field.Header
+          htmlFor={fieldId}
+          label={label}
+          extraButton={extraButton}
         />
-      </Field.Content>
 
-      <Field.Footer fieldMsgId={fieldMsgId} hint={hint} error={error} />
+        <Field.Content>
+          <span className="fixed-placeholder">{fixedPlaceholder}</span>
 
-      <style jsx>{styles}</style>
-    </Field>
-  )
-}
+          <input
+            {...inputProps}
+            ref={ref}
+            name={name}
+            type="number"
+            aria-describedby={fieldMsgId}
+            autoComplete="nope"
+            autoCorrect="off"
+            autoCapitalize="off"
+            spellCheck="false"
+          />
+        </Field.Content>
+
+        <Field.Footer fieldMsgId={fieldMsgId} hint={hint} error={error} />
+
+        <style jsx>{styles}</style>
+      </Field>
+    )
+  }
+)
 
 export default AmountInput
