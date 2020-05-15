@@ -28,6 +28,8 @@ type ROUTE_KEY =
   | 'ME_APPRECIATIONS_SENT'
   | 'ME_APPRECIATIONS_RECEIVED'
   | 'ME_NOTIFICATIONS'
+  | 'ME_WALLET'
+  | 'ME_WALLET_TRANSACTIONS'
   | 'ME_SETTINGS'
   | 'ME_SETTINGS_CHANGE_USERNAME'
   | 'ME_SETTINGS_CHANGE_EMAIL'
@@ -48,6 +50,8 @@ type ROUTE_KEY =
   | 'GUIDE'
   | 'COMMUNITY'
   | 'TOS'
+  | 'PAY_CALLBACK_SUCCESS'
+  | 'PAY_CALLBACK_FAILURE'
 
 export const ROUTES: Array<{
   key: ROUTE_KEY
@@ -83,6 +87,8 @@ export const ROUTES: Array<{
   { key: 'ME_APPRECIATIONS_SENT', pathname: '/me/appreciations/sent' },
   { key: 'ME_APPRECIATIONS_RECEIVED', pathname: '/me/appreciations/received' },
   { key: 'ME_NOTIFICATIONS', pathname: '/me/notifications' },
+  { key: 'ME_WALLET', pathname: '/me/wallet' },
+  { key: 'ME_WALLET_TRANSACTIONS', pathname: '/me/wallet/transactions' },
 
   // Settings
   { key: 'ME_SETTINGS', pathname: '/me/settings' },
@@ -110,6 +116,10 @@ export const ROUTES: Array<{
   { key: 'OAUTH_AUTHORIZE', pathname: '/oauth/authorize' },
   { key: 'OAUTH_CALLBACK_SUCCESS', pathname: '/oauth/[provider]/success' },
   { key: 'OAUTH_CALLBACK_FAILURE', pathname: '/oauth/[provider]/failure' },
+
+  // Pay
+  { key: 'PAY_CALLBACK_SUCCESS', pathname: '/pay/[provider]/success' },
+  { key: 'PAY_CALLBACK_FAILURE', pathname: '/pay/[provider]/failure' },
 
   // Misc
   { key: 'HELP', pathname: '/help' },

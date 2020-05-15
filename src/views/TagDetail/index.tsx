@@ -55,7 +55,7 @@ const TagDetail = ({ data }: { data: TagDetailType }) => {
   const viewer = useContext(ViewerContext)
   const hasSelected = _get(data, 'node.articles.totalCount', 0)
   const [feed, setFeed] = useState<TagFeed>(hasSelected ? 'selected' : 'latest')
-  const canEdit = viewer.isAdmin && viewer.info.email === 'hi@matters.news'
+  const canEdit = viewer.info.email === 'hi@matters.news'
 
   if (!data || !data.node || data.node.__typename !== 'Tag') {
     return <EmptyTag />

@@ -14,23 +14,27 @@ export interface AvatarProps {
   user?: AvatarUser
   size?: AvatarSize
   src?: string
-  hasCivicLikerRing?: boolean
 }
 
 const fragments = {
   user: gql`
     fragment AvatarUser on User {
       avatar
+      liker {
+        civicLiker
+      }
     }
   `,
 }
 
 export const Avatar = (props: AvatarProps) => {
-  const { user, size = '', src, hasCivicLikerRing } = props
+  const { user, size = 'default', src } = props
   const source = src || user?.avatar || ICON_AVATAR_DEFAULT
+  const isCivicLiker = user?.liker.civicLiker
   const avatarClasses = classNames({
     avatar: true,
-    [size]: !!size,
+    [size]: true,
+    'civic-liker': isCivicLiker,
   })
 
   return (
@@ -40,13 +44,13 @@ export const Avatar = (props: AvatarProps) => {
         style={{ backgroundImage: `url(${source})` }}
         aria-hidden="true"
       >
-        {hasCivicLikerRing && <span className="civic-liker-ring" />}
+        {isCivicLiker && <span className="ring" />}
       </div>
 
       <style jsx>{styles}</style>
 
       <style jsx>{`
-        .civic-liker-ring {
+        .ring {
           background-image: url(${IMAGE_CIVIC_LIKER_RING});
         }
       `}</style>

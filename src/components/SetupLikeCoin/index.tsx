@@ -53,7 +53,11 @@ export const SetupLikeCoin: React.FC<Props> = ({
       )}
 
       {isInDialog && closeDialog && (
-        <Dialog.Header title="setupLikeCoin" close={closeDialog} />
+        <Dialog.Header
+          title="setupLikeCoin"
+          close={closeDialog}
+          closeTextId={step === 'complete' ? 'close' : 'cancel'}
+        />
       )}
 
       {step === 'select' && (

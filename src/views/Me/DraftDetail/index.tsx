@@ -78,10 +78,6 @@ const DraftDetail = () => {
     'saved' | 'saving' | 'saveFailed'
   >()
 
-  if (!process.browser) {
-    return null
-  }
-
   if (error) {
     return (
       <EmptyLayout>
@@ -96,6 +92,10 @@ const DraftDetail = () => {
         <Throw404 />
       </EmptyLayout>
     )
+  }
+
+  if (!process.browser) {
+    return <EmptyLayout />
   }
 
   const draft = (data?.node?.__typename === 'Draft' && data.node) || undefined

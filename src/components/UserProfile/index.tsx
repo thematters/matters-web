@@ -140,8 +140,8 @@ export const UserProfile = () => {
           statusCode={404}
           message={
             <Translate
-              zh_hant="此帳號因為違反社區約章而被註銷"
-              zh_hans="此帐号因为违反社区约章而被注销"
+              zh_hant="此帳戶因為違反社區約章而被註銷"
+              zh_hans="此帐户因为违反社区约章而被注销"
             />
           }
         />
@@ -163,8 +163,7 @@ export const UserProfile = () => {
   const isCivicLiker = user.liker.civicLiker
   const isUserArchived = user.status.state === 'archived'
   const isUserBanned = user.status.state === 'banned'
-  const isUserFrozen = user.status.state === 'frozen'
-  const isUserInactive = isUserArchived || isUserBanned || isUserFrozen
+  const isUserInactive = isUserArchived || isUserBanned
 
   /**
    * Inactive User
@@ -187,7 +186,6 @@ export const UserProfile = () => {
             <section className="display-name">
               <h1 className="name">
                 {isUserArchived && <Translate id="accountArchived" />}
-                {isUserFrozen && <Translate id="accountFrozen" />}
                 {isUserBanned && <Translate id="accountBanned" />}
               </h1>
             </section>
@@ -211,7 +209,7 @@ export const UserProfile = () => {
 
         <header>
           <section className="avatar">
-            <Avatar size="xxl" user={user} hasCivicLikerRing={isCivicLiker} />
+            <Avatar size="xxl" user={user} />
           </section>
 
           {!isMe ? (

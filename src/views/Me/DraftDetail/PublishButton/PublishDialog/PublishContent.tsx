@@ -40,14 +40,8 @@ const PublishContent: React.FC<PublishContentProps> = ({ closeDialog }) => {
   })
 
   const onPublish = async () => {
-    const { data: publishData } = await publish({ variables: { id } })
-
-    const state = publishData?.publishArticle.publishState || 'unpublished'
-
-    if (state === 'pending' || state === 'published') {
-      closeDialog()
-    }
-
+    publish({ variables: { id } })
+    closeDialog()
     analytics.trackEvent(ANALYTICS_EVENTS.CLICK_PUBLISH_IN_MODAL)
   }
 
@@ -66,7 +60,7 @@ const PublishContent: React.FC<PublishContentProps> = ({ closeDialog }) => {
         rightButton={SubmitButton}
       />
 
-      <Dialog.Content spacing={[0, 0]} hasGrow>
+      <Dialog.Content hasGrow>
         <PublishSlide />
       </Dialog.Content>
     </>

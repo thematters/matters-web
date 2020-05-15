@@ -71,25 +71,17 @@ const ArchiveArticleDialog = ({
     <>
       {children({ open })}
 
-      <Dialog isOpen={showDialog} onDismiss={close} size="sm" slideIn>
-        <Dialog.Header title="hide" close={close} headerHidden />
+      <Dialog isOpen={showDialog} onDismiss={close} size="sm">
+        <Dialog.Header title="hide" close={close} mode="inner" />
 
-        <Dialog.Message
-          headline="hide"
-          description={
-            <>
-              <Translate
-                zh_hant="確認隱藏，其他用戶將無法從站內訪問該作品。"
-                zh_hans="确认隐藏，其他用户将无法从站内访问该作品。"
-              />
-
-              <Translate
-                zh_hant="隱藏後無法回退，如需再次呈現作品，你需要重新發佈。"
-                zh_hans="隐藏后无法回退，如需再次呈现作品，你需要重新发布。"
-              />
-            </>
-          }
-        />
+        <Dialog.Message>
+          <p>
+            <Translate
+              zh_hant="確認隱藏，其他用戶將無法從站內訪問該作品。隱藏後無法回退，如需再次呈現作品，你需要重新發佈。"
+              zh_hans="确认隐藏，其他用户将无法从站内访问该作品。隐藏后无法回退，如需再次呈现作品，你需要重新发布。"
+            />
+          </p>
+        </Dialog.Message>
 
         <Dialog.Footer>
           <Dialog.Footer.Button
@@ -116,14 +108,8 @@ const ArchiveArticleDialog = ({
 }
 
 const LazyArchiveArticleDialog = (props: ArchiveArticleDialogProps) => (
-  <Dialog.Lazy>
-    {({ open, mounted }) =>
-      mounted ? (
-        <ArchiveArticleDialog {...props} />
-      ) : (
-        <>{props.children({ open })}</>
-      )
-    }
+  <Dialog.Lazy mounted={<ArchiveArticleDialog {...props} />}>
+    {({ open }) => <>{props.children({ open })}</>}
   </Dialog.Lazy>
 )
 

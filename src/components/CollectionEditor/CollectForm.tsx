@@ -89,8 +89,8 @@ const CollectForm: React.FC<Props> = ({ onAdd }) => {
           ref={inputNode}
           type="search"
           placeholder={translate({
-            zh_hant: '搜尋作品標題…',
-            zh_hans: '搜索作品标题…',
+            zh_hant: '搜尋內容或 URL',
+            zh_hans: '搜索内容或 URL',
             lang,
           })}
           onChange={(event) => {

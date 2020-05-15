@@ -36,7 +36,7 @@ const BaseAppreciatorsDialog = ({
     <>
       {children({ open })}
 
-      <Dialog isOpen={showDialog} onDismiss={close}>
+      <Dialog isOpen={showDialog} onDismiss={close} fixedHeight>
         <Content mediaHash={article.mediaHash || ''} closeDialog={close} />
       </Dialog>
     </>
@@ -44,14 +44,8 @@ const BaseAppreciatorsDialog = ({
 }
 
 export const AppreciatorsDialog = (props: AppreciatorsDialogProps) => (
-  <Dialog.Lazy>
-    {({ open, mounted }) =>
-      mounted ? (
-        <BaseAppreciatorsDialog {...props} />
-      ) : (
-        <>{props.children({ open })}</>
-      )
-    }
+  <Dialog.Lazy mounted={<BaseAppreciatorsDialog {...props} />}>
+    {({ open }) => <>{props.children({ open })}</>}
   </Dialog.Lazy>
 )
 

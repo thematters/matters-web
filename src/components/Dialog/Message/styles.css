@@ -1,20 +1,35 @@
-.headline {
-  font-size: var(--font-size-xm);
-  font-weight: var(--font-weight-medium);
-  line-height: 1.5rem;
-  text-align: center;
-}
-
-.description {
-  font-size: var(--font-size-sm);
-  color: var(--color-grey-dark);
+.content {
   text-align: center;
 
-  &.left {
-    text-align: left;
+  & :global(h3) {
+    font-size: var(--font-size-md);
+    line-height: 2rem;
+    text-align: center;
+  }
+  & :global(p) {
+    color: var(--color-grey-dark);
+    font-size: var(--font-size-md-s);
+    line-height: 1.5rem;
+  }
+  & :global(h3 + p, p + p) {
+    margin-top: var(--spacing-tight);
   }
 }
 
-.headline + .description {
-  margin-top: var(--spacing-x-tight);
+.error {
+  & :global(h3) {
+    color: var(--color-red);
+  }
+}
+
+.align-left {
+  text-align: left;
+}
+
+.spacing-md {
+  padding: var(--spacing-base) 0;
+}
+
+.spacing-xxl {
+  padding: var(--spacing-xx-loose) 0;
 }

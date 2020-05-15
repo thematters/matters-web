@@ -53,7 +53,7 @@ const CreateTagButton = () => {
   const viewer = useContext(ViewerContext)
 
   // temporarily safety check
-  const canEdit = viewer.isAdmin && viewer.info.email === 'hi@matters.news'
+  const canEdit = viewer.info.email === 'hi@matters.news'
 
   if (!canEdit) {
     return null

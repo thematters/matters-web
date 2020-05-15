@@ -23,12 +23,6 @@
     padding-right: var(--spacing-x-loose);
   }
 }
-.spacing-x-xxxloose {
-  @media (--sm-up) {
-    padding-left: var(--spacing-xxx-loose);
-    padding-right: var(--spacing-xxx-loose);
-  }
-}
 
 .spacing-y-0 {
   padding-top: 0;
@@ -38,11 +32,5 @@
   @media (--sm-up) {
     padding-top: var(--spacing-x-loose);
     padding-bottom: var(--spacing-x-loose);
-  }
-}
-.spacing-y-xxxloose {
-  @media (--sm-up) {
-    padding-top: var(--spacing-xxx-loose);
-    padding-bottom: var(--spacing-xxx-loose);
   }
 }

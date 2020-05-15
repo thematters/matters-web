@@ -1,8 +1,9 @@
 import { ApolloProvider, useQuery } from '@apollo/react-hooks'
+import { getDataFromTree } from '@apollo/react-ssr'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
 import gql from 'graphql-tag'
-import App from 'next/app'
+import { AppProps } from 'next/app'
 import getConfig from 'next/config'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
@@ -11,10 +12,10 @@ import {
   AnalyticsListener,
   Error,
   ErrorBoundary,
+  FeaturesProvider,
   LanguageProvider,
   Layout,
   Toast,
-  ViewerFragments,
   ViewerProvider,
 } from '~/components'
 import { ClientUpdater } from '~/components/ClientUpdater'
@@ -23,6 +24,7 @@ import { GlobalStyles } from '~/components/GlobalStyles'
 import { QueryError } from '~/components/GQL'
 import { ProgressBar } from '~/components/ProgressBar'
 import PushInitializer from '~/components/PushInitializer'
+import SplashScreen from '~/components/SplashScreen'
 
 import { PATHS } from '~/common/enums'
 import { analytics } from '~/common/utils'
@@ -37,9 +39,13 @@ const ROOT_QUERY = gql`
       ...ViewerUser
       ...AnalyticsUser
     }
+    official {
+      ...FeatureOfficial
+    }
   }
-  ${ViewerFragments.user}
+  ${ViewerProvider.fragments.user}
   ${AnalyticsListener.fragments.user}
+  ${FeaturesProvider.fragments.official}
 `
 
 // Sentry
@@ -79,6 +85,7 @@ const Root = ({
 
   const { loading, data, error } = useQuery<RootQuery>(ROOT_QUERY)
   const viewer = data?.viewer
+  const official = data?.official
 
   if (loading) {
     return null
@@ -95,36 +102,37 @@ const Root = ({
   return (
     <ViewerProvider viewer={viewer}>
       <LanguageProvider>
-        {shouldApplyLayout ? <Layout>{children}</Layout> : children}
+        <FeaturesProvider official={official}>
+          {shouldApplyLayout ? <Layout>{children}</Layout> : children}
 
-        <GlobalDialogs />
-        <Toast.Container />
-        <ProgressBar />
+          <GlobalDialogs />
+          <Toast.Container />
+          <ProgressBar />
 
-        <AnalyticsListener user={viewer || {}} />
-        <PushInitializer client={client} />
+          <AnalyticsListener user={viewer || {}} />
+          <PushInitializer client={client} />
+        </FeaturesProvider>
       </LanguageProvider>
     </ViewerProvider>
   )
 }
 
-class MattersApp extends App<{ apollo: ApolloClient<InMemoryCache> }> {
-  render() {
-    const { Component, pageProps, apollo } = this.props
+const MattersApp = ({
+  Component,
+  pageProps,
+  apollo,
+}: AppProps & { apollo: ApolloClient<InMemoryCache> }) => (
+  <ErrorBoundary>
+    <ApolloProvider client={apollo}>
+      <GlobalStyles />
+      <SplashScreen />
+      <ClientUpdater />
 
-    return (
-      <ErrorBoundary>
-        <ApolloProvider client={apollo}>
-          <GlobalStyles />
-          <ClientUpdater />
+      <Root client={apollo}>
+        <Component {...pageProps} />
+      </Root>
+    </ApolloProvider>
+  </ErrorBoundary>
+)
 
-          <Root client={apollo}>
-            <Component {...pageProps} />
-          </Root>
-        </ApolloProvider>
-      </ErrorBoundary>
-    )
-  }
-}
-
-export default withApollo(MattersApp)
+export default withApollo(MattersApp, { getDataFromTree })

@@ -64,9 +64,14 @@ const TermContent: React.FC<TermContentProps> = ({ closeDialog }) => {
 
   const onLogout = async () => {
     try {
+      await unsubscribePush()
+    } catch (e) {
+      console.error(e)
+    }
+
+    try {
       await logout()
 
-      await unsubscribePush()
       // await clearPersistCache()
 
       closeDialog()
@@ -88,7 +93,7 @@ const TermContent: React.FC<TermContentProps> = ({ closeDialog }) => {
     <form onSubmit={handleSubmit}>
       <Dialog.Header title="termAndPrivacy" close={closeDialog} />
 
-      <Dialog.Content>
+      <Dialog.Content spacing={['base', 'base']}>
         <p className="hint">
           <Translate
             zh_hant="我們的用戶協議和隱私政策發生了更改，請閱讀並同意後繼續使用。"

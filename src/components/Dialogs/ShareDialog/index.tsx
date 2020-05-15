@@ -1,11 +1,9 @@
-import { useQuery } from '@apollo/react-hooks'
 import { useState } from 'react'
 
 import { Dialog, Translate } from '~/components'
-import CLIENT_INFO from '~/components/GQL/queries/clientInfo'
 
-import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
-import { analytics } from '~/common/utils'
+import { ANALYTICS_EVENTS, SHARE_TYPE, TextId } from '~/common/enums'
+import { analytics, isMobile } from '~/common/utils'
 
 import Copy from './Copy'
 import Douban from './Douban'
@@ -18,11 +16,14 @@ import Twitter from './Twitter'
 import Weibo from './Weibo'
 import WhatsApp from './WhatsApp'
 
-import { ClientInfo } from '~/components/GQL/queries/__generated__/ClientInfo'
-
 export interface ShareDialogProps {
   title?: string
   path?: string
+
+  headerTitle?: TextId | React.ReactElement
+  description?: React.ReactNode
+  footerButtons?: React.ReactNode
+
   children: ({ open }: { open: () => void }) => React.ReactNode
 }
 
@@ -30,12 +31,20 @@ type BaseShareDialogProps = {
   onShare: (fallbackShare: () => void) => void
   shareTitle: string
   shareLink: string
-} & Pick<ShareDialogProps, 'children'>
+} & Pick<
+  ShareDialogProps,
+  'children' | 'headerTitle' | 'description' | 'footerButtons'
+>
 
 const BaseShareDialog = ({
   onShare,
   shareTitle,
   shareLink,
+
+  headerTitle,
+  description,
+  footerButtons,
+
   children,
 }: BaseShareDialogProps) => {
   const [showDialog, setShowDialog] = useState(true)
@@ -46,10 +55,23 @@ const BaseShareDialog = ({
     <>
       {children({ open: () => onShare(open) })}
 
-      <Dialog size="sm" isOpen={showDialog} onDismiss={close} slideIn>
-        <Dialog.Header title="share" close={close} headerHidden />
+      <Dialog size="sm" isOpen={showDialog} onDismiss={close}>
+        <Dialog.Header
+          title={headerTitle || 'share'}
+          close={close}
+          closeTextId="close"
+          mode={headerTitle ? 'inner' : 'hidden'}
+        />
 
-        <Dialog.Content spacing={[0, 0]}>
+        <Dialog.Content>
+          {description && (
+            <section className="description">
+              {description}
+
+              <style jsx>{styles}</style>
+            </section>
+          )}
+
           <section className="socials-container">
             <section className="left">
               <LINE title={shareTitle} link={shareLink} />
@@ -72,13 +94,15 @@ const BaseShareDialog = ({
         </Dialog.Content>
 
         <Dialog.Footer>
-          <Dialog.Footer.Button
-            bgColor="grey-lighter"
-            textColor="black"
-            onClick={close}
-          >
-            <Translate id="close" />
-          </Dialog.Footer.Button>
+          {footerButtons || (
+            <Dialog.Footer.Button
+              bgColor="grey-lighter"
+              textColor="black"
+              onClick={close}
+            >
+              <Translate id="close" />
+            </Dialog.Footer.Button>
+          )}
         </Dialog.Footer>
       </Dialog>
     </>
@@ -87,10 +111,6 @@ const BaseShareDialog = ({
 
 export const ShareDialog = (props: ShareDialogProps) => {
   const { title, path } = props
-  const { data } = useQuery<ClientInfo>(CLIENT_INFO, {
-    variables: { id: 'local' },
-  })
-  const isMobile = data?.clientInfo.isMobile
   const shareLink = process.browser
     ? path
       ? `${window.location.origin}${path}`
@@ -102,7 +122,7 @@ export const ShareDialog = (props: ShareDialogProps) => {
   const onShare = async (fallbackShare: () => void) => {
     const navigator = window.navigator as any
 
-    if (navigator.share && isMobile) {
+    if (navigator.share && isMobile()) {
       try {
         await navigator.share({
           title: shareTitle,
@@ -122,19 +142,17 @@ export const ShareDialog = (props: ShareDialogProps) => {
   }
 
   return (
-    <Dialog.Lazy>
-      {({ open, mounted }) =>
-        mounted ? (
-          <BaseShareDialog
-            {...props}
-            onShare={onShare}
-            shareTitle={shareTitle}
-            shareLink={shareLink}
-          />
-        ) : (
-          <>{props.children({ open: () => onShare(open) })}</>
-        )
+    <Dialog.Lazy
+      mounted={
+        <BaseShareDialog
+          {...props}
+          onShare={onShare}
+          shareTitle={shareTitle}
+          shareLink={shareLink}
+        />
       }
+    >
+      {({ open }) => <>{props.children({ open })}</>}
     </Dialog.Lazy>
   )
 }

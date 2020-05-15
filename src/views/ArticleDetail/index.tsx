@@ -11,6 +11,7 @@ import {
   BackToHomeButton,
   DateTime,
   Error,
+  FeaturesContext,
   Head,
   Icon,
   Layout,
@@ -29,6 +30,8 @@ import { getQuery } from '~/common/utils'
 
 import Collection from './Collection'
 import Content from './Content'
+import Donation from './Donation'
+import FingerprintButton from './FingerprintButton'
 import RelatedArticles from './RelatedArticles'
 import State from './State'
 import styles from './styles.css'
@@ -62,6 +65,7 @@ const ARTICLE_DETAIL = gql`
       ...TagListArticle
       ...RelatedArticles
       ...StateArticle
+      ...FingerprintArticle
     }
   }
   ${UserDigest.Rich.fragments.user}
@@ -69,6 +73,7 @@ const ARTICLE_DETAIL = gql`
   ${TagList.fragments.article}
   ${RelatedArticles.fragments.article}
   ${State.fragments.article}
+  ${FingerprintButton.fragments.article}
 `
 
 const DynamicResponse = dynamic(() => import('./Responses'), {
@@ -88,6 +93,7 @@ const ArticleDetail = () => {
   const router = useRouter()
   const mediaHash = getQuery({ router, key: 'mediaHash' })
   const viewer = useContext(ViewerContext)
+  const features = useContext(FeaturesContext)
   const [fixedWall, setFixedWall] = useState(false)
   const { data, loading, error } = useQuery<ArticleDetailType>(ARTICLE_DETAIL, {
     variables: { mediaHash },
@@ -105,7 +111,7 @@ const ArticleDetail = () => {
   const article = data?.article
   const authorId = article && article.author.id
   const collectionCount = (article && article.collection.totalCount) || 0
-  const canEditCollection = viewer.id === authorId
+  const isAuthor = viewer.id === authorId
 
   useEffect(() => {
     if (shouldShowWall && window.location.hash && article) {
@@ -191,21 +197,24 @@ const ArticleDetail = () => {
         <section className="title">
           <Title type="article">{article.title}</Title>
 
-          <section className="subtitle">
-            <DateTime date={article.createdAt} />
+          <section className="info">
+            <section className="left">
+              <DateTime date={article.createdAt} color="grey" />
+
+              <FingerprintButton article={article} />
+            </section>
+
             <section className="right">{article.live && <Icon.Live />}</section>
           </section>
         </section>
 
         <Content article={article} />
 
-        {(collectionCount > 0 || canEditCollection) && (
+        {features.payment && <Donation mediaHash={mediaHash} />}
+
+        {(collectionCount > 0 || isAuthor) && (
           <section className="block">
-            <Collection
-              article={article}
-              canEdit={canEditCollection}
-              collectionCount={collectionCount}
-            />
+            <Collection article={article} collectionCount={collectionCount} />
           </section>
         )}
 

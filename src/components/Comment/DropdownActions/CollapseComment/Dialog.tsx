@@ -60,24 +60,21 @@ const CollapseCommentDialog = ({
     <>
       {children({ open })}
 
-      <Dialog isOpen={showDialog} onDismiss={close} size="sm" slideIn>
+      <Dialog isOpen={showDialog} onDismiss={close} size="sm">
         <Dialog.Header
           title={<Translate id="collapseComment" />}
           close={close}
-          headerHidden
+          mode="inner"
         />
 
-        <Dialog.Message
-          headline="collapseComment"
-          description={
-            <>
-              <Translate
-                zh_hant="闔上評論後，其他用戶需展開才可查看"
-                zh_hans="折叠评论后，其他用户需展开才可查看"
-              />
-            </>
-          }
-        />
+        <Dialog.Message>
+          <p>
+            <Translate
+              zh_hant="闔上評論後，其他用戶需展開才可查看"
+              zh_hans="折叠评论后，其他用户需展开才可查看"
+            />
+          </p>
+        </Dialog.Message>
 
         <Dialog.Footer>
           <Dialog.Footer.Button
@@ -103,14 +100,8 @@ const CollapseCommentDialog = ({
 }
 
 const LazyCollapseCommentDialog = (props: CollapseCommentDialogProps) => (
-  <Dialog.Lazy>
-    {({ open, mounted }) =>
-      mounted ? (
-        <CollapseCommentDialog {...props} />
-      ) : (
-        <>{props.children({ open })}</>
-      )
-    }
+  <Dialog.Lazy mounted={<CollapseCommentDialog {...props} />}>
+    {({ open }) => <>{props.children({ open })}</>}
   </Dialog.Lazy>
 )
 

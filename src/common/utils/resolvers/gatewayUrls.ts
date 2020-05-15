@@ -1,5 +1,7 @@
 import fetch from 'isomorphic-unfetch'
 
+import { timeout } from '~/common/utils'
+
 const TEST_HASH = 'Qmaisz6NMhDB51cCvNWa1GMS7LU1pAxdF4Ld6Ft9kZEP2a'
 const PUBLIC_GATEWAYS: string[] = [
   'https://d26g9c7mfuzstv.cloudfront.net/ipfs/:hash',
@@ -26,15 +28,6 @@ const PUBLIC_GATEWAYS: string[] = [
   'https://:hash.ipfs.2read.net',
   'https://ipfs.2read.net/ipfs/:hash',
 ]
-
-function timeout(ms: number, promise: any) {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      reject(new Error('timeout'))
-    }, ms)
-    promise.then(resolve, reject)
-  })
-}
 
 // check accessbility for a given hash and gateway
 const checkGateway = async (

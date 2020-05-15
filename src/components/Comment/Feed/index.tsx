@@ -1,6 +1,5 @@
 import { useLazyQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
 
 import { AvatarSize, UserDigest } from '~/components'
 

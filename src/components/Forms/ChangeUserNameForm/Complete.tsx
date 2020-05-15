@@ -17,23 +17,20 @@ const Complete = ({
 
       {closeDialog && (
         <Dialog.Header
-          title="successChangeUserName"
+          title="changeUserName"
           close={closeDialog}
-          headerHidden
+          closeTextId="close"
+          mode="inner"
         />
       )}
 
-      <Dialog.Message
-        description={
-          <>
-            <p>
-              <Translate id="successChangeUserName" />
-            </p>
-            <br />
-            {isInPage && <BackToHomeButton />}
-          </>
-        }
-      />
+      <Dialog.Message spacing="md">
+        <h3>
+          <Translate id="successChangeUserName" />
+        </h3>
+        <br />
+        {isInPage && <BackToHomeButton />}
+      </Dialog.Message>
 
       {!isInPage && closeDialog && (
         <Dialog.Footer>

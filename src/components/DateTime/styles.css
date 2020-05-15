@@ -4,3 +4,7 @@ time {
   font-weight: var(--font-weight-timestamp);
   line-height: var(--line-height-timestamp);
 }
+
+.grey {
+  color: var(--color-grey);
+}

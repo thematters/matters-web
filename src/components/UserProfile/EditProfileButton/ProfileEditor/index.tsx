@@ -9,7 +9,6 @@ import {
   Form,
   LanguageContext,
   Translate,
-  ViewerContext,
 } from '~/components'
 import { useMutation } from '~/components/GQL'
 
@@ -24,12 +23,10 @@ import {
 import ProfileCoverUploader from './ProfileCoverUploader'
 import styles from './styles.css'
 
-import {
-  UpdateUserInfoProfile,
-  UpdateUserInfoProfile_updateUserInfo,
-} from './__generated__/UpdateUserInfoProfile'
+import { ProfileUser } from '~/components/UserProfile/__generated__/ProfileUser'
+import { UpdateUserInfoProfile } from './__generated__/UpdateUserInfoProfile'
 
-export type ProfileEditorUser = UpdateUserInfoProfile_updateUserInfo
+export type ProfileEditorUser = ProfileUser
 
 interface FormProps {
   user: ProfileEditorUser
@@ -65,7 +62,6 @@ const UNCHANGED_FIELD = 'UNCHANGED_FIELD'
 const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
   const [update] = useMutation<UpdateUserInfoProfile>(UPDATE_USER_INFO)
   const { lang } = useContext(LanguageContext)
-  const viewer = useContext(ViewerContext)
 
   const formId = 'edit-profile-form'
 
@@ -88,7 +84,7 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
     },
     validate: ({ displayName, description }) =>
       _pickBy({
-        displayName: validateDisplayName(displayName, lang, viewer.isAdmin),
+        displayName: validateDisplayName(displayName, lang),
         description: validateDescription(description, lang),
       }),
     onSubmit: async (
@@ -203,9 +199,7 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
         rightButton={SubmitButton}
       />
 
-      <Dialog.Content spacing={[0, 0]} hasGrow>
-        {InnerForm}
-      </Dialog.Content>
+      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
     </>
   )
 }

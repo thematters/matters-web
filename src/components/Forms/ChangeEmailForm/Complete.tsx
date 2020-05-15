@@ -16,24 +16,16 @@ const Complete = ({
       )}
 
       {closeDialog && (
-        <Dialog.Header
-          title="successChangeEmail"
-          close={closeDialog}
-          headerHidden
-        />
+        <Dialog.Header title="changeEmail" close={closeDialog} mode="inner" />
       )}
 
-      <Dialog.Message
-        description={
-          <>
-            <p>
-              <Translate id="successChangeEmail" />
-            </p>
-            <br />
-            {isInPage && <BackToHomeButton />}
-          </>
-        }
-      />
+      <Dialog.Message spacing="md">
+        <h3>
+          <Translate id="successChangeEmail" />
+        </h3>
+        <br />
+        {isInPage && <BackToHomeButton />}
+      </Dialog.Message>
 
       {!isInPage && closeDialog && (
         <Dialog.Footer>

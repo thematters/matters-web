@@ -6,10 +6,8 @@
 import dotenv from 'dotenv'
 import express from 'express'
 import helmet from 'helmet'
-import MobileDetect from 'mobile-detect'
 import 'module-alias/register'
 import next from 'next'
-import { join } from 'path'
 
 import { ROUTES, toExpressPath } from '~/common/enums'
 
@@ -44,13 +42,6 @@ app
           await handler(req, res, nx)
         }
 
-        const detect = new MobileDetect(req.headers['user-agent'] || '')
-        req.clientInfo = {
-          isPhone: !!detect.phone(),
-          isTablet: !!detect.tablet(),
-          isMobile: !!detect.mobile(),
-        }
-
         return app.render(req, res, pathname, {
           ...req.query,
           ...req.params,
@@ -60,12 +51,6 @@ app
 
     // fallback
     server.get('*', (req, res) => {
-      if (req.path === '/service-worker.js') {
-        const filePath = join('build', req.path)
-        res.setHeader('Service-Worker-Allowed', '/')
-        return app.serveStatic(req, res, filePath)
-      }
-
       return handle(req, res)
     })
 

@@ -5,6 +5,38 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.5.0] - 2020-05-15
+
+### Added
+
+- Matters Pay #996 #1031 #1038 #1059 #1060 #1081 #1083 #1084 #1085 #1086 #1087 #1089 #1093 #1094 #1099 #1102
+- A/B Grouping #1028
+- Civic Liker Ring Everywhere #1019
+- Read Timer #1058
+- Feature Flag #1100
+- Splash Screen #1071
+- Apache 2.0 License #1080
+
+### Changed
+
+- Firebase pageview #1058
+- Add fingerprint under article title #1018
+- Show ShareDialog when draft is published #1043
+- Remove unnecessary role usage. #1022
+- Refactor: `<Appreciation>`; #1093
+- Refactor: `<Dialog.Message>` #1021
+- Simplify usage of `<Dialog.Lazy>` #1032
+- Alter placeholder of CollectForm #1041
+- Clean Code: more flexbox mixins #1016
+- Add custom 404 page for SSG #1017
+- Ignore unsubscribePush errors #1042 #1050
+- Revise media reports of about page #1069
+- Change allowed operations for banned uer #1091
+- Disable service-worker registration & web push in local development #1088
+- Format LIKE wallet amount #1092
+- Fix "service-worker.js" bad serving in Next.js 9.3 #1063
+- Fix missing nav bar in article detail #1033
+
 ## [3.4.0] - 2020-04-20
 
 ### Revamp

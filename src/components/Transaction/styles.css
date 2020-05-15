@@ -1,0 +1,41 @@
+.container {
+  @mixin flex-start-space-between;
+
+  font-size: var(--font-size-sm);
+}
+
+.left {
+  & :global(> * + *) {
+    margin-top: var(--spacing-x-tight);
+  }
+
+  & .sender {
+    @mixin flex-center-start;
+
+    color: var(--color-grey-dark);
+    font-size: var(--font-size-sm);
+    line-height: 1;
+  }
+
+  & .content {
+    color: var(--color-black);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-medium);
+  }
+
+  & footer {
+    & :global(h2) {
+      @mixin line-clamp;
+    }
+  }
+}
+
+.right {
+  flex-shrink: 0;
+  margin-left: var(--spacing-base);
+  text-align: right;
+
+  & .num {
+    margin-bottom: var(--spacing-x-tight);
+  }
+}
