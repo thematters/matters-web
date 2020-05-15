@@ -1,6 +1,6 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
-import { useContext, useState } from 'react'
+import { useContext, useRef, useState } from 'react'
 
 import {
   Button,
@@ -127,6 +127,7 @@ const SetAmount: React.FC<FormProps> = ({
   const { lang } = useContext(LanguageContext)
   const [fixed, setFixed] = useState<boolean>(true)
   const [payTo] = useMutation<PayToMutate>(PAY_TO)
+  const inputRef: React.RefObject<any> | null = useRef(null)
 
   const {
     errors,
@@ -242,8 +243,14 @@ const SetAmount: React.FC<FormProps> = ({
             const sanitizedAmount = Math.abs(
               Math.min(isHKD ? Math.floor(value) : value, maxAmount)
             )
+
+            // remove extra left pad 0
+            if (inputRef.current) {
+              inputRef.current.value = sanitizedAmount
+            }
             setFieldValue('amount', sanitizedAmount)
           }}
+          ref={inputRef}
         />
       )}
 
