@@ -16,7 +16,6 @@ import {
   calcStripeFee,
   numRound,
   parseFormSubmitErrors,
-  sleep,
   toAmountString,
   validateAmount,
 } from '~/common/utils'
@@ -125,6 +124,7 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, defaultAmount }) => {
             MAXIMUM_CHARGE_AMOUNT[currency]
           )
 
+          /// remove extra left pad 0
           if (inputRef.current) {
             inputRef.current.value = sanitizedAmount
           }
