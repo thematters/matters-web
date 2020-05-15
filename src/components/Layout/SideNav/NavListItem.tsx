@@ -14,7 +14,7 @@ type NavListItemProps = {
   canScrollTop?: boolean
 } & ButtonProps
 
-const NavListItem = forwardRef(
+const NavListItem = forwardRef<HTMLButtonElement, NavListItemProps>(
   (
     {
       name,
@@ -24,7 +24,7 @@ const NavListItem = forwardRef(
       isMediumUp,
       canScrollTop = true,
       ...props
-    }: NavListItemProps,
+    },
     ref
   ) => {
     const { onClick: baseOnClick } = props

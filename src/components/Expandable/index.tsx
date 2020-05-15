@@ -17,7 +17,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
   const [expandable, setExpandable] = useState(false)
   const [expand, setExpand] = useState(true)
 
-  const node: React.RefObject<HTMLParagraphElement> | null = useRef(null)
+  const node = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (node?.current) {

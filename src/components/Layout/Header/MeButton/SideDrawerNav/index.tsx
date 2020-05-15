@@ -1,5 +1,4 @@
 import { DialogContent, DialogOverlay } from '@reach/dialog'
-import { useRef } from 'react'
 import { animated, useTransition } from 'react-spring'
 
 import DrawerContent from './DrawerContent'
@@ -12,8 +11,6 @@ export interface SideDrawerNavProps {
 }
 
 const SideDrawerNav: React.FC<SideDrawerNavProps> = ({ isOpen, onDismiss }) => {
-  const closeButtonRef: React.RefObject<any> | null = useRef(null)
-
   const transitions = useTransition(isOpen, null, {
     from: {
       opacity: 0,
@@ -39,11 +36,7 @@ const SideDrawerNav: React.FC<SideDrawerNavProps> = ({ isOpen, onDismiss }) => {
         }
 
         return (
-          <AnimatedDrawerOverlay
-            initialFocusRef={closeButtonRef}
-            key={key}
-            className="side-drawer-nav"
-          >
+          <AnimatedDrawerOverlay key={key} className="side-drawer-nav">
             <AnimatedOverlay style={{ opacity }} />
 
             <DialogContent aria-labelledby="菜單 - 我的">

@@ -128,7 +128,7 @@ export interface ButtonProps {
  *  </Button>
  * ```
  */
-export const Button: React.FC<ButtonProps> = forwardRef(
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
       spacing = [0, 0],
@@ -158,8 +158,8 @@ export const Button: React.FC<ButtonProps> = forwardRef(
     },
     ref
   ) => {
-    const fallbackRef = useRef(null)
-    const buttonRef = (ref || fallbackRef) as React.RefObject<any> | null
+    const fallbackRef = useRef<HTMLButtonElement>(null)
+    const buttonRef = ref || fallbackRef
 
     const isClickable = is !== 'span' && !restProps.disabled
     const isTransparent = !bgColor && !borderColor

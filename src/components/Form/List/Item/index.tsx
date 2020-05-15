@@ -16,7 +16,7 @@ type ItemProps = {
   ref?: any
 } & CardProps
 
-const Item: React.FC<ItemProps> = forwardRef(
+const Item = forwardRef<HTMLDivElement, ItemProps>(
   (
     {
       title,

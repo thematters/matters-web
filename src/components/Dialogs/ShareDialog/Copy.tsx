@@ -7,7 +7,7 @@ import { TEXT } from '~/common/enums'
 import styles from './styles.css'
 
 const Copy = ({ link }: { link: string }) => {
-  const inputRef: React.RefObject<any> | null = useRef(null)
+  const inputRef = useRef<HTMLInputElement>(null)
 
   return (
     <section className="copy">

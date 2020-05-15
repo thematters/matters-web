@@ -37,7 +37,7 @@ const Textarea: React.FC<TextareaProps> = ({
 
   ...textareaProps
 }) => {
-  const node: React.RefObject<any> | null = useRef(null)
+  const node = useRef<HTMLTextAreaElement>(null)
   const fieldId = `field-${name}`
   const fieldMsgId = `field-msg-${name}`
 

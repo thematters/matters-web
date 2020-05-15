@@ -16,8 +16,11 @@ type ItemProps = {
   'id' | 'value' | 'autoFocus'
 >
 
-const Item = forwardRef(
-  ({ onPaste, onChange, onBackspace, ...inputProps }: ItemProps, ref: any) => {
+const Item = forwardRef<HTMLInputElement, ItemProps>(
+  (
+    { onPaste, onChange, onBackspace, ...inputProps },
+    ref: React.Ref<HTMLInputElement>
+  ) => {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       event.preventDefault()
       onChange(event.target.value.slice(-1))

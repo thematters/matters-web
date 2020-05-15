@@ -32,7 +32,7 @@ const Container: React.FC<
   } & DialogProps
 > = ({ size = 'lg', fixedHeight, onDismiss, children, style, setDragGoal }) => {
   const isSmallUp = useResponsive('sm-up')
-  const node: React.RefObject<any> | null = useRef(null)
+  const node = useRef<HTMLDivElement>(null)
 
   const containerClass = classNames({
     container: true,

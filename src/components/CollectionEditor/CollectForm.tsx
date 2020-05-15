@@ -30,7 +30,7 @@ const CollectForm: React.FC<Props> = ({ onAdd }) => {
   const [search, setSearch] = useState('')
   const [debouncedSearch] = useDebounce(search, INPUT_DEBOUNCE)
   const [instance, setInstance] = useState<PopperInstance | null>(null)
-  const inputNode: React.RefObject<HTMLInputElement> | null = useRef(null)
+  const inputNode = useRef<HTMLInputElement>(null)
 
   // query
   const { loading, data } = useQuery<SearchArticles>(SEARCH_ARTICLES, {

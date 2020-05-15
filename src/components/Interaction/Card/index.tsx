@@ -32,7 +32,7 @@ export interface CardProps {
   ref?: any
 }
 
-export const Card: React.FC<CardProps> = forwardRef(
+export const Card = forwardRef<HTMLDivElement, CardProps>(
   (
     {
       spacing = ['base', 0],
@@ -57,7 +57,7 @@ export const Card: React.FC<CardProps> = forwardRef(
   ) => {
     const disabled = !as && !href && !htmlHref && !onClick
     const fallbackRef = useRef(null)
-    const cardRef = (ref || fallbackRef) as React.RefObject<any> | null
+    const cardRef = ref || fallbackRef
 
     const cardClass = classNames({
       card: true,

@@ -18,7 +18,7 @@ const DrawerContent: React.FC<DrawerContentProps> = ({
   onDismiss,
   ...props
 }) => {
-  const node: React.RefObject<any> | null = useRef(null)
+  const node = useRef<HTMLElement>(null)
   const closeOnClick = (event: React.MouseEvent | React.KeyboardEvent) => {
     const target = event.target as HTMLElement
     if (target?.closest && target.closest('[data-clickable], a, button')) {
