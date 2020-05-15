@@ -118,7 +118,7 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, defaultAmount }) => {
         value={values.amount}
         error={touched.amount && errors.amount}
         onBlur={handleBlur}
-        onChange={async (e) => {
+        onChange={(e) => {
           const amount = e.target.valueAsNumber || 0
           const sanitizedAmount = Math.min(
             Math.floor(amount),
