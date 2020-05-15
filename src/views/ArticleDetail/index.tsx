@@ -11,6 +11,7 @@ import {
   BackToHomeButton,
   DateTime,
   Error,
+  FeaturesContext,
   Head,
   Icon,
   Layout,
@@ -92,6 +93,7 @@ const ArticleDetail = () => {
   const router = useRouter()
   const mediaHash = getQuery({ router, key: 'mediaHash' })
   const viewer = useContext(ViewerContext)
+  const features = useContext(FeaturesContext)
   const [fixedWall, setFixedWall] = useState(false)
   const { data, loading, error } = useQuery<ArticleDetailType>(ARTICLE_DETAIL, {
     variables: { mediaHash },
@@ -208,7 +210,7 @@ const ArticleDetail = () => {
 
         <Content article={article} />
 
-        <Donation mediaHash={mediaHash} />
+        {features.payment && <Donation mediaHash={mediaHash} />}
 
         {(collectionCount > 0 || isAuthor) && (
           <section className="block">
