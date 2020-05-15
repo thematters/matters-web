@@ -63,7 +63,7 @@ const USER_REGISTER = gql`
 const LoginDialogButton = () => (
   <Form.List spacing="xloose">
     <Form.List.Item
-      title={<Translate zh_hant="已有帳號？" zh_hans="已有帐号？" />}
+      title={<Translate zh_hant="已有帳戶？" zh_hans="已有帐户？" />}
       rightText={<Translate id="login" />}
       rightTextColor="green"
       onClick={() => {
@@ -77,7 +77,7 @@ const LoginDialogButton = () => (
 const LoginRedirectionButton = () => (
   <Form.List spacing="xloose">
     <Form.List.Item
-      title={<Translate zh_hant="已有帳號？" zh_hans="已有帐号？" />}
+      title={<Translate zh_hant="已有帳戶？" zh_hans="已有帐户？" />}
       rightText={<Translate id="login" />}
       rightTextColor="green"
       {...appendTarget(PATHS.LOGIN)}
