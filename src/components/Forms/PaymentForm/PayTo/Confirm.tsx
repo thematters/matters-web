@@ -141,7 +141,7 @@ const Confirm: React.FC<FormProps> = ({
           <ConfirmTable>
             <ConfirmTable.Row total>
               <ConfirmTable.Col>
-                <Translate id="paymentAmount" />
+                <Translate zh_hant="支付" zh_hans="支付" />
               </ConfirmTable.Col>
 
               <ConfirmTable.Col>
