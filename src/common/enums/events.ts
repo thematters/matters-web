@@ -9,6 +9,9 @@ export const REMOVE_TOAST = 'removeToast'
 export const REFETCH_RESPONSES = 'refetchResponses'
 export const REFETCH_TAG_DETAIL_ARTICLES = 'refetchTagDetailArticles'
 
+// Donators
+export const REFETCH_DONATORS = 'refetchDonators'
+
 // Dialogs
 export const OPEN_LOGIN_DIALOG = 'openLoginDialog'
 export const OPEN_SIGNUP_DIALOG = 'openSignUpDialog'
