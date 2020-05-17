@@ -9,6 +9,8 @@ declare global {
   }
 }
 
+type ReCaptchaAction = 'verification-code' | 'appreciate-article'
+
 // recaptcha related setup
 const {
   publicRuntimeConfig: { RECAPTCHA_KEY },
@@ -27,8 +29,10 @@ export const ReCaptchaConsumer = ReCaptchaContext.Consumer
 
 export const ReCaptchaProvider = ({
   children,
+  action = 'verification-code',
 }: {
   children: React.ReactNode
+  action?: ReCaptchaAction
 }) => {
   const [token, setToken] = useState('')
   const [refreshToken, setRefreshToken] = useState<() => void>()
@@ -42,7 +46,7 @@ export const ReCaptchaProvider = ({
       const getToken = async () => {
         if (window.grecaptcha && window.grecaptcha.execute) {
           window.grecaptcha
-            .execute(RECAPTCHA_KEY, { action: 'homepage' })
+            .execute(RECAPTCHA_KEY, { action })
             .then((newToken) => {
               setToken(newToken)
             })
