@@ -44,6 +44,8 @@ const handleAnalytics = ({
       })
 
       window.firebaseAnalytics.logEvent('page_view')
+    } else {
+      window.firebaseAnalytics.logEvent(args[0], args[1])
     }
   }
 
