@@ -70,8 +70,8 @@ export const ReCaptchaProvider = ({
       setRecaptchaInterval(intervalId)
 
       // clear up after max wait time of 20 minutes
-      await sleep(60 * 20 * 1000)
-      clearInterval(intervalId)
+      // await sleep(60 * 20 * 1000)
+      // clearInterval(intervalId)
     })
   }
 
