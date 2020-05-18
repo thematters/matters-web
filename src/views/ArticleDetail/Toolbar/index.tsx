@@ -1,7 +1,12 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { BookmarkButton, ShareButton, useResponsive } from '~/components'
+import {
+  BookmarkButton,
+  ReCaptchaProvider,
+  ShareButton,
+  useResponsive,
+} from '~/components'
 import DropdownActions from '~/components/ArticleDigest/DropdownActions'
 
 import AppreciationButton from '../AppreciationButton'
@@ -43,10 +48,12 @@ const Toolbar = ({ mediaHash }: { mediaHash: string }) => {
 
   return (
     <section className="toolbar">
-      <section className="appreciate-button">
-        <AppreciationButton article={article} />
-        {isSmallUp && <Appreciators article={article} />}
-      </section>
+      <ReCaptchaProvider action="appreciate-article">
+        <section className="appreciate-button">
+          <AppreciationButton article={article} />
+          {isSmallUp && <Appreciators article={article} />}
+        </section>
+      </ReCaptchaProvider>
 
       <section className="comment-bar">
         <CommentBar article={article} />
