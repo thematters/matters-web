@@ -8,12 +8,13 @@ import {
   InfiniteScroll,
   List,
   Spinner,
+  useEventListener,
   useResponsive,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
+import { ANALYTICS_EVENTS, PTR_START, PTR_END } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import Authors from './Authors'
@@ -128,6 +129,7 @@ const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortByType }) => {
     loading,
     fetchMore: fetchMoreMainFeed,
     networkStatus,
+    refetch,
   } = useQuery<HottestFeed | NewestFeed>(queries[sortBy], {
     notifyOnNetworkStatusChange: true,
   })
@@ -136,6 +138,11 @@ const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortByType }) => {
   const result = data?.viewer?.recommendation.feed
   const { edges, pageInfo } = result || {}
   const isNewLoading = networkStatus === NetworkStatus.loading
+
+  useEventListener(PTR_START, async () => {
+    await refetch()
+    window.dispatchEvent(new CustomEvent(PTR_END, {}))
+  })
 
   if (loading && (!result || isNewLoading)) {
     if (process.browser) {

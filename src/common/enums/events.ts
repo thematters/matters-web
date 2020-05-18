@@ -18,3 +18,7 @@ export const OPEN_SIGNUP_DIALOG = 'openSignUpDialog'
 export const OPEN_RESET_PASSWORD_DIALOG = 'openPassword'
 export const CLOSE_ACTIVE_DIALOG = 'closeActiveDialog'
 export const OPEN_LIKE_COIN_DIALOG = 'openLikeCoinDialog'
+
+// Pull to Refresh
+export const PTR_START = 'startPullToRefresh'
+export const PTR_END = 'endPullToRefresh'

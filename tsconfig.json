@@ -18,8 +18,8 @@
     "target": "esnext",
     "baseUrl": "./",
     "paths": {
-      "@/*": ["./*"],
-      "~/*": ["./src/*"]
+      "~/*": ["./src/*"],
+      "@/*": ["./*"]
     },
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
