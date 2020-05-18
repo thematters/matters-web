@@ -8,7 +8,7 @@ import { sleep } from '~/common/utils'
 
 import { ReactComponent as IconPullToRefresh } from '@/public/static/icons/pull-to-refresh.svg'
 
-const PTR_TIMEOUT = 5000
+const PTR_TIMEOUT = 3000
 
 const PullToRefresh = () => {
   let PTR: any

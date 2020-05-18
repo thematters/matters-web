@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
-import { Form, Translate, ViewerContext } from '~/components'
+import { Form, Translate, usePullToRefresh, ViewerContext } from '~/components'
 
 import { PATHS } from '~/common/enums'
 
@@ -23,11 +23,16 @@ const VIEWER_TOTAL_BLOCK_COUNT = gql`
 
 const AccountSettings = () => {
   const viewer = useContext(ViewerContext)
-  const { data } = useQuery<ViewerTotalBlockCount>(VIEWER_TOTAL_BLOCK_COUNT, {
-    errorPolicy: 'none',
-  })
+  const { data, refetch } = useQuery<ViewerTotalBlockCount>(
+    VIEWER_TOTAL_BLOCK_COUNT,
+    {
+      errorPolicy: 'none',
+    }
+  )
   const totalBlockCount = data?.viewer?.blockList?.totalCount
   const userNameEditable = viewer.info.userNameEditable
+
+  usePullToRefresh({ onPull: refetch })
 
   return (
     <Form.List groupName={<Translate id="settingsAccount" />}>

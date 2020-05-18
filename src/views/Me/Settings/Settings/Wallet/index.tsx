@@ -7,6 +7,7 @@ import {
   Icon,
   LikeCoinDialog,
   Translate,
+  usePullToRefresh,
   ViewerContext,
 } from '~/components'
 
@@ -31,12 +32,17 @@ const VIEWER_LIKE_INFO = gql`
 const WalletSettings = () => {
   const viewer = useContext(ViewerContext)
   const likerId = viewer.liker.likerId
-  const { data, loading } = useQuery<ViewerLikeInfo>(VIEWER_LIKE_INFO, {
-    errorPolicy: 'none',
-  })
+  const { data, loading, refetch } = useQuery<ViewerLikeInfo>(
+    VIEWER_LIKE_INFO,
+    {
+      errorPolicy: 'none',
+    }
+  )
   const LIKE = data?.viewer?.status?.LIKE
   const USDPrice = numRound(LIKE?.rateUSD * LIKE?.total)
   const equalSign = LIKE?.total > 0 ? '≈' : '='
+
+  usePullToRefresh({ onPull: refetch })
 
   return (
     <Form.List groupName={<Translate id="settingsWallet" />}>

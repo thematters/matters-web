@@ -9,6 +9,7 @@ import {
   Layout,
   List,
   Spinner,
+  usePullToRefresh,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
@@ -44,9 +45,11 @@ const ME_HISTORY_FEED = gql`
 `
 
 const MeHistory = () => {
-  const { data, loading, error, fetchMore } = useQuery<MeHistoryFeed>(
+  const { data, loading, error, fetchMore, refetch } = useQuery<MeHistoryFeed>(
     ME_HISTORY_FEED
   )
+
+  usePullToRefresh({ onPull: refetch })
 
   if (loading) {
     return <Spinner />

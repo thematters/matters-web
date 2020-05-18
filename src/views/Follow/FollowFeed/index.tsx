@@ -8,6 +8,7 @@ import {
   InfiniteScroll,
   List,
   Spinner,
+  usePullToRefresh,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
@@ -50,9 +51,11 @@ const FOLLOW_FEED = gql`
 `
 
 const FollowFeed = () => {
-  const { data, loading, error, fetchMore } = useQuery<FollowFeedType>(
+  const { data, loading, error, fetchMore, refetch } = useQuery<FollowFeedType>(
     FOLLOW_FEED
   )
+
+  usePullToRefresh({ onPull: refetch })
 
   if (loading) {
     return <Spinner />

@@ -9,6 +9,7 @@ import {
   Layout,
   List,
   Spinner,
+  usePullToRefresh,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
@@ -72,9 +73,11 @@ const QUERIES = {
 }
 
 const Feed = ({ type = 'topic' }: ArticleFeedProp) => {
-  const { data, loading, error, fetchMore } = useQuery<AllTopics | AllIcymis>(
-    QUERIES[type]
-  )
+  const { data, loading, error, fetchMore, refetch } = useQuery<
+    AllTopics | AllIcymis
+  >(QUERIES[type])
+
+  usePullToRefresh({ onPull: refetch })
 
   if (loading) {
     return <Spinner />

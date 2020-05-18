@@ -11,6 +11,7 @@ import {
   List,
   Spinner,
   Translate,
+  usePullToRefresh,
   ViewerContext,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
@@ -57,11 +58,12 @@ const UserArticles = () => {
   const router = useRouter()
   const userName = getQuery({ router, key: 'userName' })
 
-  const { data, loading, error, fetchMore } = useQuery<UserArticlesTypes>(
-    USER_ARTICLES,
-    { variables: { userName } }
-  )
+  const { data, loading, error, fetchMore, refetch } = useQuery<
+    UserArticlesTypes
+  >(USER_ARTICLES, { variables: { userName } })
   const user = data?.user
+
+  usePullToRefresh({ onPull: refetch })
 
   if (loading) {
     return <Spinner />

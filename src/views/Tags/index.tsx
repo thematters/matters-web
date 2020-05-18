@@ -16,6 +16,7 @@ import {
   TagDialog,
   TextIcon,
   Translate,
+  usePullToRefresh,
   ViewerContext,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
@@ -78,7 +79,11 @@ const CreateTagButton = () => {
 }
 
 const Tags = () => {
-  const { data, loading, error, fetchMore } = useQuery<AllTags>(ALL_TAGS)
+  const { data, loading, error, fetchMore, refetch } = useQuery<AllTags>(
+    ALL_TAGS
+  )
+
+  usePullToRefresh({ onPull: refetch })
 
   if (loading) {
     return <Spinner />

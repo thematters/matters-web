@@ -9,6 +9,7 @@ import {
   List,
   Spinner,
   Translate,
+  usePullToRefresh,
   UserDigest,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
@@ -43,7 +44,11 @@ const ALL_AUTHORSS = gql`
 `
 
 const Authors = () => {
-  const { data, loading, error, fetchMore } = useQuery<AllAuthors>(ALL_AUTHORSS)
+  const { data, loading, error, fetchMore, refetch } = useQuery<AllAuthors>(
+    ALL_AUTHORSS
+  )
+
+  usePullToRefresh({ onPull: refetch })
 
   if (loading) {
     return <Spinner />

@@ -11,6 +11,7 @@ import {
   InfiniteScroll,
   List,
   Spinner,
+  usePullToRefresh,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
@@ -118,12 +119,13 @@ const UserCommentsWrap = () => {
 }
 
 const UserComments = ({ user }: UserIdUser) => {
-  const { data, loading, error, fetchMore } = useQuery<UserCommentFeed>(
-    USER_COMMENT_FEED,
-    {
-      variables: { id: user?.id },
-    }
-  )
+  const { data, loading, error, fetchMore, refetch } = useQuery<
+    UserCommentFeed
+  >(USER_COMMENT_FEED, {
+    variables: { id: user?.id },
+  })
+
+  usePullToRefresh({ onPull: refetch })
 
   if (!user || !user.id) {
     return null

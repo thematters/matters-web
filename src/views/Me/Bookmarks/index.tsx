@@ -9,6 +9,7 @@ import {
   Layout,
   List,
   Spinner,
+  usePullToRefresh,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
@@ -39,9 +40,11 @@ const ME_BOOKMARK_FEED = gql`
 `
 
 const MeBookmarks = () => {
-  const { data, loading, error, fetchMore } = useQuery<MeBookmarkFeed>(
+  const { data, loading, error, fetchMore, refetch } = useQuery<MeBookmarkFeed>(
     ME_BOOKMARK_FEED
   )
+
+  usePullToRefresh({ onPull: refetch })
 
   if (loading) {
     return <Spinner />

@@ -9,6 +9,7 @@ import {
   List,
   Spinner,
   Transaction,
+  usePullToRefresh,
 } from '~/components'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
@@ -41,7 +42,11 @@ const ME_TRANSACTIONS = gql`
 `
 
 const Transactions = () => {
-  const { data, loading, fetchMore } = useQuery<MeTransactions>(ME_TRANSACTIONS)
+  const { data, loading, fetchMore, refetch } = useQuery<MeTransactions>(
+    ME_TRANSACTIONS
+  )
+
+  usePullToRefresh({ onPull: refetch })
 
   if (loading) {
     return <Spinner />

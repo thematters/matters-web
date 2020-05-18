@@ -8,13 +8,13 @@ import {
   InfiniteScroll,
   List,
   Spinner,
-  useEventListener,
+  usePullToRefresh,
   useResponsive,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
-import { ANALYTICS_EVENTS, PTR_START, PTR_END } from '~/common/enums'
+import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import Authors from './Authors'
@@ -139,10 +139,7 @@ const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortByType }) => {
   const { edges, pageInfo } = result || {}
   const isNewLoading = networkStatus === NetworkStatus.loading
 
-  useEventListener(PTR_START, async () => {
-    await refetch()
-    window.dispatchEvent(new CustomEvent(PTR_END, {}))
-  })
+  usePullToRefresh({ onPull: refetch })
 
   if (loading && (!result || isNewLoading)) {
     if (process.browser) {

@@ -8,6 +8,7 @@ import {
   InfiniteScroll,
   Layout,
   Spinner,
+  usePullToRefresh,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
@@ -41,7 +42,7 @@ const query = gql`
 `
 
 const Feed = () => {
-  const { data, error, loading, fetchMore, networkStatus } = useQuery<
+  const { data, error, loading, fetchMore, networkStatus, refetch } = useQuery<
     RecommendationArticles
   >(query, {
     notifyOnNetworkStatusChange: true,
@@ -51,6 +52,8 @@ const Feed = () => {
   const result = data?.viewer?.recommendation.recommendArticles
   const { edges, pageInfo } = result || {}
   const isNewLoading = networkStatus === NetworkStatus.loading
+
+  usePullToRefresh({ onPull: refetch })
 
   if (loading && (!result || isNewLoading)) {
     return <Spinner />

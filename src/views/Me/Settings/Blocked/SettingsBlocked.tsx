@@ -7,6 +7,7 @@ import {
   List,
   Spinner,
   Translate,
+  usePullToRefresh,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 import { UserDigest } from '~/components/UserDigest'
@@ -39,9 +40,11 @@ const VIEWER_BLOCK_LIST = gql`
 `
 
 const SettingsBlocked = () => {
-  const { data, loading, error, fetchMore } = useQuery<ViewerBlockList>(
-    VIEWER_BLOCK_LIST
-  )
+  const { data, loading, error, fetchMore, refetch } = useQuery<
+    ViewerBlockList
+  >(VIEWER_BLOCK_LIST)
+
+  usePullToRefresh({ onPull: refetch })
 
   if (loading) {
     return <Spinner />

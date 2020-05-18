@@ -11,6 +11,7 @@ import {
   Notice,
   Spacer,
   Spinner,
+  usePullToRefresh,
   useResponsive,
 } from '~/components'
 import { useMutation } from '~/components/GQL'
@@ -56,7 +57,7 @@ const BaseNotifications = () => {
       update: updateViewerUnreadNoticeCount,
     }
   )
-  const { data, loading, fetchMore } = useQuery<
+  const { data, loading, fetchMore, refetch } = useQuery<
     MeNotifications,
     { first: number; after?: number }
   >(ME_NOTIFICATIONS)
@@ -64,6 +65,8 @@ const BaseNotifications = () => {
   useEffect(() => {
     markAllNoticesAsRead()
   }, [])
+
+  usePullToRefresh({ onPull: refetch })
 
   const connectionPath = 'viewer.notices'
   const { edges, pageInfo } = data?.viewer?.notices || {}

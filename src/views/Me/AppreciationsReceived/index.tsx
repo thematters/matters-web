@@ -9,6 +9,7 @@ import {
   Layout,
   List,
   Spinner,
+  usePullToRefresh,
 } from '~/components'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
@@ -45,9 +46,11 @@ const ME_APPRECIATED_RECEIVED = gql`
 `
 
 const AppreciationsReceived = () => {
-  const { data, loading, fetchMore } = useQuery<MeAppreciationsReceived>(
-    ME_APPRECIATED_RECEIVED
-  )
+  const { data, loading, fetchMore, refetch } = useQuery<
+    MeAppreciationsReceived
+  >(ME_APPRECIATED_RECEIVED)
+
+  usePullToRefresh({ onPull: refetch })
 
   if (loading) {
     return <Spinner />

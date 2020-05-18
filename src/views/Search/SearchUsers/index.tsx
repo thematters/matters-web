@@ -7,6 +7,7 @@ import {
   List,
   Spinner,
   Translate,
+  usePullToRefresh,
   UserDigest,
 } from '~/components'
 
@@ -42,9 +43,14 @@ const SearchUser = () => {
   const router = useRouter()
   const q = getQuery({ router, key: 'q' })
 
-  const { data, loading, fetchMore } = useQuery<SeachUsers>(SEARCH_USERS, {
-    variables: { key: q },
-  })
+  const { data, loading, fetchMore, refetch } = useQuery<SeachUsers>(
+    SEARCH_USERS,
+    {
+      variables: { key: q },
+    }
+  )
+
+  usePullToRefresh({ onPull: refetch })
 
   if (loading) {
     return <Spinner />

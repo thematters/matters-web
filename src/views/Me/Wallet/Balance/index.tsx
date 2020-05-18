@@ -1,6 +1,11 @@
 import { useQuery } from '@apollo/react-hooks'
 
-import { CurrencyAmount, Spinner, Translate } from '~/components'
+import {
+  CurrencyAmount,
+  Spinner,
+  Translate,
+  usePullToRefresh,
+} from '~/components'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
 
 import { PAYMENT_CURRENCY } from '~/common/enums'
@@ -10,7 +15,9 @@ import styles from './styles.css'
 import { WalletBalance } from '~/components/GQL/queries/__generated__/WalletBalance'
 
 const Balance = () => {
-  const { data, loading } = useQuery<WalletBalance>(WALLET_BALANCE)
+  const { data, loading, refetch } = useQuery<WalletBalance>(WALLET_BALANCE)
+
+  usePullToRefresh({ onPull: refetch })
 
   if (loading) {
     return <Spinner />
