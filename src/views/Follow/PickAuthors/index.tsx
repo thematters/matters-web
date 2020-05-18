@@ -1,6 +1,6 @@
 import { Head, Layout, Translate } from '~/components'
 
-import IMAGE_ILLUSTRATION_AVATAR from '~/static/images/illustration-avatar.svg'
+import IMAGE_ILLUSTRATION_AVATAR from '@/public/static/images/illustration-avatar.svg'
 
 import { AuthorPicker } from './AuthorPicker'
 import styles from './styles.css'

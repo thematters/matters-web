@@ -9,7 +9,8 @@ import {
 } from '~/components'
 
 import { translate } from '~/common/utils'
-import IMAGE_BANNER from '~/static/images/migration-banner.svg'
+
+import IMAGE_BANNER from '@/public/static/images/migration-banner.svg'
 
 import styles from './styles.css'
 

@@ -1,8 +1,4 @@
-const {
-  setDefaultTimeout,
-  AfterAll,
-  BeforeAll
-} = require('cucumber')
+const { setDefaultTimeout, AfterAll, BeforeAll } = require('cucumber')
 const {
   createSession,
   closeSession,
@@ -16,10 +12,10 @@ setDefaultTimeout(10000)
 
 BeforeAll(async () => {
   await startWebDriver({
-    env: driver
+    env: driver,
   })
   await createSession({
-    env: driver
+    env: driver,
   })
 })
 

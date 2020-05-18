@@ -4,7 +4,8 @@ import { TextIcon, withIcon } from '~/components'
 
 import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
 import { analytics } from '~/common/utils'
-import { ReactComponent as IconShareLINE } from '~/static/icons/share-line.svg'
+
+import { ReactComponent as IconShareLINE } from '@/public/static/icons/share-line.svg'
 
 const LINE = ({ title, link }: { title: string; link: string }) => (
   <button

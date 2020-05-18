@@ -4,7 +4,8 @@ import { RemoveScroll } from 'react-remove-scroll'
 import { withIcon } from '~/components'
 
 import { sleep } from '~/common/utils'
-import { ReactComponent as IconSplashScreenLogo } from '~/static/icons/splash-scren-logo.svg'
+
+import { ReactComponent as IconSplashScreenLogo } from '@/public/static/icons/splash-scren-logo.svg'
 
 import styles from './styles.css'
 

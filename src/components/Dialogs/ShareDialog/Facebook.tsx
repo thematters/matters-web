@@ -4,7 +4,8 @@ import { TextIcon, withIcon } from '~/components'
 
 import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
 import { analytics } from '~/common/utils'
-import { ReactComponent as IconShareFacebook } from '~/static/icons/share-facebook.svg'
+
+import { ReactComponent as IconShareFacebook } from '@/public/static/icons/share-facebook.svg'
 
 const Facebook = ({ title, link }: { title: string; link: string }) => (
   <button

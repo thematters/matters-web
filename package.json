@@ -116,7 +116,6 @@
     "apollo": "^2.27.4",
     "babel-jest": "^26.0.1",
     "babel-plugin-dynamic-import-node": "^2.3.3",
-    "babel-plugin-module-resolver": "^4.0.0",
     "babel-polyfill": "^6.26.0",
     "chromedriver": "^81.0.0",
     "cucumber": "^6.0.5",
@@ -210,7 +209,7 @@
       "^.+\\.(gif|png|jpg|ttf|eot)(\\?.+)?$": "<rootDir>/__mocks__/fileMock.js",
       "^.+\\.svg(\\?.+)?$": "<rootDir>/__mocks__/svgMock.js",
       "\\.css$": "<rootDir>/__mocks__/styleMock.js",
-      "~/static/(.*)$": "<rootDir>/public/static/$1",
+      "@/(.*)$": "<rootDir>/$1",
       "~/(.*)$": "<rootDir>/src/$1"
     },
     "coverageDirectory": "<rootDir>/coverage/",

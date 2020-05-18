@@ -18,9 +18,10 @@ import { AGENT_HASH_PREFIX, STORE_KEY_AGENT_HASH } from '~/common/enums'
 import introspectionQueryResultData from '~/common/gql/fragmentTypes.json'
 import { initAgentHash, randomString } from '~/common/utils'
 
-// import { setupPersistCache } from './cache'
 import resolvers from './resolvers'
 import typeDefs from './types'
+
+// import { setupPersistCache } from './cache'
 
 const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData,

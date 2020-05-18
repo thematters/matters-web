@@ -1,11 +1,5 @@
-const {
-  client
-} = require('nightwatch-api')
-const {
-  Given,
-  Then,
-  When
-} = require('cucumber')
+const { client } = require('nightwatch-api')
+const { Given, Then, When } = require('cucumber')
 
 const PATH = require('../common/enums/path')
 const TIME = require('../common/enums/time')

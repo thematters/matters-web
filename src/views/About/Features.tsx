@@ -1,8 +1,8 @@
 import { Translate } from '~/components'
 
-import IMAGE_3_1 from '~/static/images/about-3-1.jpg'
-import IMAGE_3_2 from '~/static/images/about-3-2.jpg'
-import IMAGE_3_3 from '~/static/images/about-3-3.jpg'
+import IMAGE_3_1 from '@/public/static/images/about-3-1.jpg'
+import IMAGE_3_2 from '@/public/static/images/about-3-2.jpg'
+import IMAGE_3_3 from '@/public/static/images/about-3-3.jpg'
 
 import styles from './styles.css'
 

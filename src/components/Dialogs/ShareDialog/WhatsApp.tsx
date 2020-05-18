@@ -4,7 +4,8 @@ import { TextIcon, withIcon } from '~/components'
 
 import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
 import { analytics } from '~/common/utils'
-import { ReactComponent as IconShareWhatsApp } from '~/static/icons/share-whatsapp.svg'
+
+import { ReactComponent as IconShareWhatsApp } from '@/public/static/icons/share-whatsapp.svg'
 
 const Whatsapp = ({ title, link }: { title: string; link: string }) => (
   <button

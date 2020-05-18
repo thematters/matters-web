@@ -1,6 +1,6 @@
 import { Tooltip, Translate } from '~/components'
 
-import { ReactComponent as IconLive } from '~/static/icons/label-live.svg'
+import { ReactComponent as IconLive } from '@/public/static/icons/label-live.svg'
 
 import styles from './styles.css'
 

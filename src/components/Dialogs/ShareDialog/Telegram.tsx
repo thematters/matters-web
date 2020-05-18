@@ -4,7 +4,8 @@ import { TextIcon, withIcon } from '~/components'
 
 import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
 import { analytics } from '~/common/utils'
-import { ReactComponent as IconShareTelegram } from '~/static/icons/share-telegram.svg'
+
+import { ReactComponent as IconShareTelegram } from '@/public/static/icons/share-telegram.svg'
 
 const Telegram = ({ title, link }: { title: string; link: string }) => (
   <button

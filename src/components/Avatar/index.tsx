@@ -1,8 +1,8 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 
-import ICON_AVATAR_DEFAULT from '~/static/icons/avatar-default.svg'
-import IMAGE_CIVIC_LIKER_RING from '~/static/icons/civic-liker-ring.svg'
+import ICON_AVATAR_DEFAULT from '@/public/static/icons/avatar-default.svg'
+import IMAGE_CIVIC_LIKER_RING from '@/public/static/icons/civic-liker-ring.svg'
 
 import styles from './styles.css'
 

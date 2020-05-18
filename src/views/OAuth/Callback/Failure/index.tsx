@@ -4,7 +4,8 @@ import { Layout, Translate } from '~/components'
 
 import { OAUTH_PROVIDER, PATHS } from '~/common/enums'
 import { getQuery, routerPush } from '~/common/utils'
-import ICON_LIKECOIN from '~/static/icons/likecoin.svg'
+
+import ICON_LIKECOIN from '@/public/static/icons/likecoin.svg'
 
 import { Box } from '../../Box'
 import styles from '../styles.css'
