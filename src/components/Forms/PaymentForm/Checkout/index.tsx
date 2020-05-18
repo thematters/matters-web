@@ -23,7 +23,7 @@ const Checkout: React.FC<CheckoutProps> = (props) => {
   return (
     <Elements
       stripe={stripePromise}
-      options={{ locale: lang === 'en' ? 'en' : 'zh' }}
+      options={{ locale: lang === 'zh_hans' ? 'zh' : 'en' }}
     >
       <CheckoutForm {...props} />
     </Elements>
