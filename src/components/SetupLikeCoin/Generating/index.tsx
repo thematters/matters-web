@@ -34,6 +34,7 @@ const Generating: React.FC<Props> = ({ prevStep, nextStep }) => {
   useEffect(() => {
     generate().then((result) => {
       const likerId = result?.data?.generateLikerId.liker.likerId
+      console.log('likerId', likerId)
 
       if (likerId) {
         nextStep()
