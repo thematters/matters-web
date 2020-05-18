@@ -10,6 +10,12 @@ import React from 'react'
 import { GA_TRACKING_ID } from '~/common/enums'
 import { langConvert } from '~/common/utils'
 
+const FIREBASE_CONFIG = process.env.NEXT_PUBLIC_FIREBASE_CONFIG
+  ? JSON.parse(
+      Buffer.from(process.env.NEXT_PUBLIC_FIREBASE_CONFIG, 'base64').toString()
+    )
+  : {}
+
 interface MattersDocumentProps {
   lang: HTMLLanguage
 }

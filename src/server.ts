@@ -9,7 +9,7 @@ import next from 'next'
 import { ROUTES, toExpressPath } from '~/common/enums'
 
 const isProd = process.env.NODE_ENV === 'production'
-const PORT = 3000
+const PORT = process.env.PORT || 3000
 const app = next({ dev: !isProd })
 const handle = app.getRequestHandler()
 

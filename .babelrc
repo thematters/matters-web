@@ -16,7 +16,15 @@
     ]
   ],
   "plugins": [
-
+    [
+      "module-resolver",
+      {
+        "alias": {
+          "~/static": "./public/static",
+          "~": "./src"
+        }
+      }
+    ],
     "@babel/plugin-proposal-optional-chaining"
   ]
 }
