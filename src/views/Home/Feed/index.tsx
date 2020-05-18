@@ -16,12 +16,10 @@ import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
-import Articles from './Articles'
 import Authors from './Authors'
-import SortBy from './SortBy'
+import SortBy, { SortByType } from './SortBy'
 import styles from './styles.css'
 import Tags from './Tags'
-import ViewMode from './ViewMode'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import {
@@ -32,8 +30,6 @@ import {
   NewestFeed,
   NewestFeed_viewer_recommendation_feed_edges,
 } from './__generated__/NewestFeed'
-
-type SortBy = 'hottest' | 'newest'
 
 type HorizontalFeed = React.FC<{ after?: string; first?: number }>
 
@@ -47,10 +43,8 @@ interface FeedLocation {
 }
 
 const horizontalFeeds: FeedLocation = {
-  2: () => <Articles type="icymi" />,
-  5: () => <Articles type="topics" />,
-  8: () => <Tags />,
-  11: () => <Authors />,
+  2: () => <Tags />,
+  5: () => <Authors />,
 }
 
 const feedFragment = gql`
@@ -97,9 +91,35 @@ export const queries = {
     }
     ${feedFragment}
   `,
+  icymi: gql`
+    query IcymiFeed($after: String) {
+      viewer {
+        id
+        recommendation {
+          feed: icymi(input: { first: 10, after: $after }) {
+            ...FeedArticleConnection
+          }
+        }
+      }
+    }
+    ${feedFragment}
+  `,
+  topics: gql`
+    query TopicsFeed($after: String) {
+      viewer {
+        id
+        recommendation {
+          feed: topics(input: { first: 10, after: $after }) {
+            ...FeedArticleConnection
+          }
+        }
+      }
+    }
+    ${feedFragment}
+  `,
 }
 
-const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
+const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortByType }) => {
   const isLargeUp = useResponsive('lg-up')
   const isHottestFeed = sortBy === 'hottest'
   const {
@@ -118,6 +138,10 @@ const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
   const isNewLoading = networkStatus === NetworkStatus.loading
 
   if (loading && (!result || isNewLoading)) {
+    if (process.browser) {
+      window.scrollTo(0, 0)
+      document.body.focus()
+    }
     return <Spinner />
   }
 
@@ -212,7 +236,7 @@ const HomeFeed = () => {
   const { feedSortType } = data?.clientPreference || {
     feedSortType: 'hottest',
   }
-  const setSortBy = (type: SortBy) => {
+  const setSortBy = (type: SortByType) => {
     if (client) {
       client.writeData({
         id: 'ClientPreference:local',
@@ -224,11 +248,10 @@ const HomeFeed = () => {
   return (
     <>
       <section className="topbar">
-        <SortBy sortBy={feedSortType as SortBy} setSortBy={setSortBy} />
-        <ViewMode />
+        <SortBy sortBy={feedSortType as SortByType} setSortBy={setSortBy} />
       </section>
 
-      <MainFeed feedSortType={feedSortType as SortBy} />
+      <MainFeed feedSortType={feedSortType as SortByType} />
 
       <style jsx>{styles}</style>
     </>

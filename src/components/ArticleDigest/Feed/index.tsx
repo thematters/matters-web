@@ -76,7 +76,7 @@ const BaseArticleDigestFeed = ({
   const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
     variables: { id: 'local' },
   })
-  const { viewMode } = data?.clientPreference || { viewMode: 'default' }
+  const { viewMode } = data?.clientPreference || { viewMode: 'comfortable' }
   const isCompactMode = viewMode === 'compact'
 
   const { author, summary, sticky } = article

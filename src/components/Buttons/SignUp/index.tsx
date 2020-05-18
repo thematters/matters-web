@@ -1,4 +1,10 @@
-import { Button, TextIcon, Translate, useResponsive } from '~/components'
+import {
+  Button,
+  ButtonProps,
+  TextIcon,
+  Translate,
+  useResponsive,
+} from '~/components'
 
 import {
   ANALYTICS_EVENTS,
@@ -8,14 +14,15 @@ import {
 } from '~/common/enums'
 import { analytics, appendTarget } from '~/common/utils'
 
-interface SignUpButtonProps {
+type SignUpButtonProps = {
   isPlain?: boolean
   trackType: string
-}
+} & Pick<ButtonProps, 'size'>
 
 export const SignUpButton: React.FC<SignUpButtonProps> = ({
   children,
   isPlain,
+  size,
   trackType,
 }) => {
   const isSmallUp = useResponsive('sm-up')
@@ -50,7 +57,7 @@ export const SignUpButton: React.FC<SignUpButtonProps> = ({
   return (
     <Button
       bgColor="green"
-      size={[null, '2.25rem']}
+      size={size || [null, '2.25rem']}
       spacing={[0, 'loose']}
       aria-haspopup="true"
       {...clickProps}
