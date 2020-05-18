@@ -112,7 +112,7 @@
     "@types/segment-analytics": "0.0.32",
     "@types/styled-jsx": "^2.2.8",
     "@types/validator": "^13.0.0",
-    "@types/xxhashjs": "^0.2.1",
+    "@types/xxhashjs": "^0.2.2",
     "@zeit/next-bundle-analyzer": "^0.1.2",
     "apollo": "^2.27.4",
     "babel-jest": "^26.0.1",
