@@ -27,7 +27,6 @@ export const SetupLikeCoin: React.FC<Props> = ({
 
   const [step, setStepState] = useState<Step>('select')
   const setStep = (newStep: Step) => {
-    console.log('step', step)
     setStepState(newStep)
     analytics.trackEvent(ANALYTICS_EVENTS.LIKECOIN_STEP_CHANGE, {
       from: step,
