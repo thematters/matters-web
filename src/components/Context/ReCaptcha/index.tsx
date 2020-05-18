@@ -81,7 +81,6 @@ export const ReCaptchaProvider = ({
     if (!document.getElementById(recaptchaScriptId)) {
       const script = document.createElement('script')
       script.src = `https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_KEY}`
-      console.log('use effect')
       script.addEventListener('load', handleRecaptcha)
       script.id = recaptchaScriptId
 
