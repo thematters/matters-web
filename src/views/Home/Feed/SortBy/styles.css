@@ -1,9 +1,0 @@
-ul {
-  & li {
-    display: inline-block;
-
-    & + li {
-      margin-left: var(--spacing-x-tight);
-    }
-  }
-}

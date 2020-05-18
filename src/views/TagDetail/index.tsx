@@ -5,14 +5,12 @@ import { useRouter } from 'next/router'
 import { useContext, useState } from 'react'
 
 import {
-  Button,
   EmptyTag,
   Head,
   Layout,
   Spacer,
   Spinner,
   Tabs,
-  TextIcon,
   Throw404,
   Translate,
   ViewerContext,
@@ -100,21 +98,19 @@ const TagDetail = ({ data }: { data: TagDetailType }) => {
 
       <Tabs>
         {hasSelected > 0 && (
-          <Tabs.Tab selected={feed === 'selected'}>
-            <Button onClick={() => setFeed('selected')}>
-              <TextIcon size="xm">
-                <Translate id="featured" />
-              </TextIcon>
-            </Button>
+          <Tabs.Tab
+            selected={feed === 'selected'}
+            onClick={() => setFeed('selected')}
+          >
+            <Translate id="featured" />
           </Tabs.Tab>
         )}
 
-        <Tabs.Tab selected={feed === 'latest'}>
-          <Button onClick={() => setFeed('latest')}>
-            <TextIcon size="xm">
-              <Translate id="latest" />
-            </TextIcon>
-          </Button>
+        <Tabs.Tab
+          selected={feed === 'latest'}
+          onClick={() => setFeed('latest')}
+        >
+          <Translate id="latest" />
         </Tabs.Tab>
       </Tabs>
 

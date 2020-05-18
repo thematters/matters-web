@@ -4,7 +4,6 @@ import {
   Button,
   DonationDialog,
   Icon,
-  LikeCoinDialog,
   LoginButton,
   TextIcon,
   Translate,
@@ -73,8 +72,6 @@ const DonationButton = ({ recipient, targetId }: DonationButtonProps) => {
           </Button>
         )}
       </DonationDialog>
-
-      <LikeCoinDialog allowEventTrigger />
 
       <style jsx>{styles}</style>
     </section>

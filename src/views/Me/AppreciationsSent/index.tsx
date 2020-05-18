@@ -8,7 +8,6 @@ import {
   InfiniteScroll,
   Layout,
   List,
-  Spacer,
   Spinner,
 } from '~/components'
 
@@ -113,8 +112,6 @@ export default () => (
     />
 
     <Head title={{ id: 'appreciationsSent' }} />
-
-    <Spacer />
 
     <AppreciationsSent />
   </Layout.Main>
