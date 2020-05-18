@@ -40,8 +40,8 @@ const fragments = {
 }
 
 const APPRECIATE_ARTICLE = gql`
-  mutation AppreciateArticle($id: ID!, $amount: Int!) {
-    appreciateArticle(input: { id: $id, amount: $amount }) {
+  mutation AppreciateArticle($id: ID!, $amount: Int!, $token: String!) {
+    appreciateArticle(input: { id: $id, amount: $amount, token: $token }) {
       id
       appreciationsReceivedTotal
       hasAppreciate
@@ -69,6 +69,7 @@ const AppreciationButton = ({
   const [sendAppreciation] = useMutation<AppreciateArticle>(APPRECIATE_ARTICLE)
   const limit = article.appreciateLimit
   const left = article.appreciateLeft - amount
+
   const total = article.appreciationsReceivedTotal + amount
   const appreciatedCount = limit - left
   const [debouncedSendAppreciation] = useDebouncedCallback(async () => {
