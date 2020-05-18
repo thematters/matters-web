@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { DonationDialog } from '~/components'
+import { DonationDialog, LikeCoinDialog } from '~/components'
 
 import DonationButton from './DonationButton'
 import Donators from './Donators'
@@ -25,7 +25,7 @@ const ARTICLE_DONATION = gql`
   ${DonationDialog.fragments.recipient}
 `
 
-const Donation = ({ mediaHash }: DonationProps) => {
+const BaseDonation = ({ mediaHash }: DonationProps) => {
   const { data, loading } = useQuery<ArticleDonation>(ARTICLE_DONATION, {
     variables: { mediaHash },
   })
@@ -47,6 +47,15 @@ const Donation = ({ mediaHash }: DonationProps) => {
       </section>
       <style jsx>{styles}</style>
     </section>
+  )
+}
+
+const Donation = ({ mediaHash }: DonationProps) => {
+  return (
+    <>
+      <BaseDonation mediaHash={mediaHash} />
+      <LikeCoinDialog allowEventTrigger />
+    </>
   )
 }
 
