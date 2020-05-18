@@ -7,12 +7,18 @@ export const ANALYTIC_TYPES = {
 }
 
 export const ANALYTICS_EVENTS = {
+  CLICK_FEED: 'click-feed',
+  CLCIK_BOTTON: 'click-button',
+  LOAD_MORE: 'load-more',
+  PURCHASE: 'purchase',
+  EXCEPTION: 'exception',
+
+  // old events
   CLICK_WRITE_BUTTON: 'click-write-button',
   CLICK_ENTER_AFTER_SIGNUP: 'click-enter-after-signup',
   CLICK_PUBLISH_BUTTON: 'click-publish-button',
   CLICK_SAVE_DRAFT_IN_MODAL: 'click-save-draft-in-modal',
   CLICK_PUBLISH_IN_MODAL: 'click-publish-in-modal',
-  CLICK_FEED: 'click-feed',
   CLICK_DRAFT: 'click-draft',
   CLICK_FREQUENT_SEARCH: 'click-frequent-search',
   CLICK_SEARCH_HISTORY: 'click-search-history',
@@ -47,6 +53,58 @@ export const ANALYTICS_EVENTS = {
   LIKECOIN_STEP_CHANGE: 'likecoin-step-change',
   LIKECOIN_STEP_RETRY: 'likecoin-step-retry',
 }
+
+export interface ArticleFeedProp {
+  elementType: 'article'
+  feedType: ArticleFeedType
+  digestType: 'ArticleDigestType'
+  feedLocation: number
+}
+export interface UserFeedProp {
+  elementType: 'user'
+  feedType: UserFeedType
+  digestType: 'UserDigestType'
+  feedLocation: number
+}
+
+export type ArticleFeedType =
+  | 'all-authors'
+  | 'all-icymi'
+  | 'all-tags'
+  | 'all-topics'
+  | 'author'
+  | 'authors'
+  | 'collection'
+  | 'follow'
+  | 'hottest'
+  | 'icymi'
+  | 'newest'
+  | 'read-history'
+  | 'related-article'
+  | 'tag-detail'
+  | 'tags'
+  | 'topics'
+  | 'user-article'
+  | 'wallet'
+
+export type UserFeedType =
+  | 'all-authors'
+  | 'all-icymi'
+  | 'all-topics'
+  | 'appreciator'
+  | 'author'
+  | 'authors'
+  | 'collection'
+  | 'follow'
+  | 'followee'
+  | 'follower'
+  | 'hottest'
+  | 'icymi'
+  | 'newest'
+  | 'read-history'
+  | 'related-article'
+  | 'tag-detail'
+  | 'wallet'
 
 export const SHARE_TYPE = {
   LINE: 'line',
