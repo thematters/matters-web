@@ -9,7 +9,7 @@ declare global {
   }
 }
 
-type ReCaptchaAction = 'verification-code' | 'appreciate-article'
+type ReCaptchaAction = 'verificationCode' | 'appreciateArticle'
 
 // recaptcha related setup
 const {
@@ -29,7 +29,7 @@ export const ReCaptchaConsumer = ReCaptchaContext.Consumer
 
 export const ReCaptchaProvider = ({
   children,
-  action = 'verification-code',
+  action = 'verificationCode',
 }: {
   children: React.ReactNode
   action?: ReCaptchaAction
@@ -48,6 +48,7 @@ export const ReCaptchaProvider = ({
           window.grecaptcha
             .execute(RECAPTCHA_KEY, { action })
             .then((newToken) => {
+              console.log({ newToken })
               setToken(newToken)
             })
         } else {
@@ -80,6 +81,7 @@ export const ReCaptchaProvider = ({
     if (!document.getElementById(recaptchaScriptId)) {
       const script = document.createElement('script')
       script.src = `https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_KEY}`
+      console.log('use effect')
       script.addEventListener('load', handleRecaptcha)
       script.id = recaptchaScriptId
 

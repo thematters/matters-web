@@ -48,7 +48,7 @@ const Toolbar = ({ mediaHash }: { mediaHash: string }) => {
 
   return (
     <section className="toolbar">
-      <ReCaptchaProvider action="appreciate-article">
+      <ReCaptchaProvider action="appreciateArticle">
         <section className="appreciate-button">
           <AppreciationButton article={article} />
           {isSmallUp && <Appreciators article={article} />}
