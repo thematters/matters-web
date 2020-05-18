@@ -12,5 +12,5 @@
   height: 1px;
 
   background: var(--color-matters-green);
-  z-index: 1031;
+  z-index: var(--z-index-progress-bar);
 }

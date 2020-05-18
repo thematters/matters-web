@@ -160,23 +160,7 @@ export default withApollo(({ ctx, headers, initialState }) => {
       dataLink({ headers }),
     ]),
     cache,
-    resolvers: {
-      ...resolvers,
-      Query: {
-        ...resolvers.Query,
-        clientInfo: () => {
-          const data = resolvers.Query.clientInfo()
-
-          // @ts-ignore
-          const clientInfo = ctx?.req?.clientInfo || {}
-
-          return {
-            ...data,
-            ...clientInfo,
-          }
-        },
-      },
-    },
+    resolvers,
     typeDefs,
   })
 

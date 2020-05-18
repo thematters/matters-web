@@ -49,9 +49,7 @@ const Processing: React.FC<Props> = ({ txId, nextStep, windowRef }) => {
     nextStep()
 
     if (windowRef) {
-      setTimeout(() => {
-        windowRef.close()
-      }, 5000)
+      windowRef.close()
     }
 
     return null

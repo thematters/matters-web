@@ -36,10 +36,7 @@ const OAuthCallbackSuccess = () => {
             </h2>
 
             <p>
-              <Translate
-                zh_hant="頁面即將關閉，請回到原頁面繼續操作"
-                zh_hans="页面即将关闭，请回到原页面继续操作"
-              />
+              <Translate id="callbackClose" />
             </p>
           </section>
 

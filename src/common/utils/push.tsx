@@ -12,6 +12,7 @@ const FIREBASE_CONFIG = process.env.NEXT_PUBLIC_FIREBASE_CONFIG
       Buffer.from(process.env.NEXT_PUBLIC_FIREBASE_CONFIG, 'base64').toString()
     )
   : {}
+const isProd = process.env.NODE_ENV === 'production'
 
 const TOGGLE_SUBSCRIBE_PUSH = gql`
   mutation ToggleSubscribePush($id: ID!, $enabled: Boolean!) {
@@ -30,6 +31,10 @@ export const initializePush = async ({
   client: ApolloClient<any>
   viewer: Viewer
 }) => {
+  if (!isProd) {
+    return
+  }
+
   const firebase = await import('firebase/app')
   await import('firebase/messaging')
 

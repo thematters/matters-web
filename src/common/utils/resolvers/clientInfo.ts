@@ -6,9 +6,6 @@ export default () => {
       height: null,
       __typename: 'ViewportSize',
     },
-    isPhone: false,
-    isTablet: false,
-    isMobile: false,
     __typename: 'ClientInfo',
   }
 }

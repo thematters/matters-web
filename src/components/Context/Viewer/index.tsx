@@ -3,7 +3,7 @@ import React from 'react'
 
 import { ViewerUser } from './__generated__/ViewerUser'
 
-export const ViewerFragments = {
+const ViewerFragments = {
   user: gql`
     fragment ViewerUser on User {
       id
@@ -100,3 +100,5 @@ export const ViewerProvider = ({
     </ViewerContext.Provider>
   )
 }
+
+ViewerProvider.fragments = ViewerFragments

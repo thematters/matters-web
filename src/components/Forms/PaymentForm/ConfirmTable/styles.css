@@ -1,0 +1,36 @@
+.confirm-table {
+  padding: 0 var(--spacing-base);
+  margin-bottom: var(--spacing-loose);
+  width: 100%;
+
+  color: var(--color-grey);
+  font-size: var(--font-size-sm);
+  line-height: 1.5rem;
+}
+
+.row {
+  @mixin flex-center-space-between;
+  margin: var(--spacing-base) 0;
+
+  & .col:last-child {
+    text-align: right;
+  }
+
+  &.total {
+    color: var(--color-black);
+    font-weight: var(--font-weight-bold);
+
+    & .col:last-child {
+      font-size: var(--font-size-lg);
+    }
+  }
+
+  &.insufficient {
+    color: var(--color-red);
+  }
+
+  &.breaker {
+    margin: var(--spacing-base) 0;
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.15);
+  }
+}

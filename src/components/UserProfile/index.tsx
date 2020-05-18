@@ -140,8 +140,8 @@ export const UserProfile = () => {
           statusCode={404}
           message={
             <Translate
-              zh_hant="此帳號因為違反社區約章而被註銷"
-              zh_hans="此帐号因为违反社区约章而被注销"
+              zh_hant="此帳戶因為違反社區約章而被註銷"
+              zh_hans="此帐户因为违反社区约章而被注销"
             />
           }
         />
@@ -209,7 +209,7 @@ export const UserProfile = () => {
 
         <header>
           <section className="avatar">
-            <Avatar size="xxl" user={user} hasCivicLikerRing />
+            <Avatar size="xxl" user={user} />
           </section>
 
           {!isMe ? (

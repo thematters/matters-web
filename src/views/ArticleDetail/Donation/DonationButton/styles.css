@@ -1,0 +1,11 @@
+.container {
+  @mixin flex-center-all;
+
+  width: 100%;
+
+  & :global(svg) {
+    fill: var(--color-red);
+    stroke: var(--color-white);
+    stroke-width: 5px;
+  }
+}

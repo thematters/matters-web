@@ -10,6 +10,8 @@ import {
   ViewerContext,
 } from '~/components'
 
+import { numRound } from '~/common/utils'
+
 import { ViewerLikeInfo } from './__generated__/ViewerLikeInfo'
 
 const VIEWER_LIKE_INFO = gql`
@@ -33,7 +35,7 @@ const WalletSettings = () => {
     errorPolicy: 'none',
   })
   const LIKE = data?.viewer?.status?.LIKE
-  const USDPrice = (LIKE?.rateUSD * LIKE?.total).toFixed(2)
+  const USDPrice = numRound(LIKE?.rateUSD * LIKE?.total)
   const equalSign = LIKE?.total > 0 ? '≈' : '='
 
   return (
@@ -58,7 +60,7 @@ const WalletSettings = () => {
         }
         rightText={
           likerId ? (
-            `${LIKE?.total} LikeCoin`
+            `${numRound(LIKE?.total || 0)} LikeCoin`
           ) : (
             <Translate
               zh_hant="完成設置 Liker ID 後即可管理創作收益"

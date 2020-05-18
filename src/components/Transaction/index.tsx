@@ -1,5 +1,5 @@
 import gql from 'graphql-tag'
-import React from 'react'
+import React, { useContext } from 'react'
 
 import {
   ArticleDigestTitle,
@@ -8,6 +8,7 @@ import {
   TextIcon,
   Translate,
   UserDigest,
+  ViewerContext,
 } from '~/components'
 
 import { toAmountString, toPath } from '~/common/utils'
@@ -48,13 +49,15 @@ const fragments = {
 }
 
 const BaseTransaction = ({ tx }: TransactionProps) => {
-  const { amount, currency, purpose, recipient, target, createdAt } = tx
+  const viewer = useContext(ViewerContext)
+  const { amount, currency, purpose, sender, recipient, target, createdAt } = tx
+
+  const isViewerSender = sender && viewer.id === sender.id
 
   const isAddCredit = purpose === 'addCredit'
-  // const isRefund = purpose === 'refund'
+  const isRefund = purpose === 'refund'
   const isDonation = purpose === 'donation'
-
-  const content = <Translate id={isAddCredit ? 'topUp' : 'refund'} />
+  const showContent = isAddCredit || isRefund
 
   const article = target?.__typename === 'Article' && target
   const path = article ? toPath({ page: 'articleDetail', article }) : null
@@ -63,13 +66,38 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
     <Card {...path} spacing={['base', 'base']}>
       <section className="container">
         <section className="left">
-          <header>
-            {content && <h4 className="content">{content}</h4>}
-            {article && <ArticleDigestTitle article={article} is="h2" />}
-          </header>
+          {showContent && (
+            <section className="content">
+              <p>
+                {isAddCredit && <Translate id="topUp" />}
+                {isRefund && <Translate id="refund" />}
+              </p>
+            </section>
+          )}
 
-          <footer>
-            {isDonation && recipient && (
+          {isDonation && !isViewerSender && sender && (
+            <header className="sender">
+              <UserDigest.Mini
+                user={sender}
+                avatarSize="xs"
+                hasAvatar
+                hasDisplayName
+              />
+              <span>
+                &nbsp;
+                <Translate zh_hant="支持了" zh_hans="支持了" />
+              </span>
+            </header>
+          )}
+
+          {isDonation && article && (
+            <section>
+              <ArticleDigestTitle article={article} is="h2" />
+            </section>
+          )}
+
+          {isDonation && isViewerSender && recipient && (
+            <footer>
               <UserDigest.Mini
                 user={recipient}
                 avatarSize="xs"
@@ -77,8 +105,8 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
                 hasDisplayName
                 hasUserName
               />
-            )}
-          </footer>
+            </footer>
+          )}
         </section>
 
         <section className="right">

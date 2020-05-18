@@ -57,6 +57,18 @@ class MattersDocument extends Document<MattersDocumentProps> {
               `,
             }}
           />
+          {/* Firebase */}
+          <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js" />
+          <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-analytics.js" />
+          <script
+            async
+            dangerouslySetInnerHTML={{
+              __html: `
+                firebase.initializeApp(${JSON.stringify(FIREBASE_CONFIG)});
+                window.firebaseAnalytics = firebase.analytics();
+              `,
+            }}
+          />
           {/* segment.io */}
           <script
             type="text/javascript"

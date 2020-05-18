@@ -69,8 +69,6 @@ const Rich = ({
   hasState = true,
   hasUnblock,
 
-  hasCivicLikerRing,
-
   ...cardProps
 }: RichProps) => {
   const path = toPath({
@@ -89,10 +87,7 @@ const Rich = ({
       <Card spacing={['tight', 'tight']} {...cardProps}>
         <section className={containerClass}>
           <span className="avatar">
-            <Avatar
-              size={size === 'sm' ? 'lg' : 'xl'}
-              hasCivicLikerRing={hasCivicLikerRing}
-            />
+            <Avatar size={size === 'sm' ? 'lg' : 'xl'} />
           </span>
 
           <section className="content">

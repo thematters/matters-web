@@ -11,6 +11,7 @@ import {
   BackToHomeButton,
   DateTime,
   Error,
+  FeaturesContext,
   Head,
   Icon,
   Layout,
@@ -29,6 +30,7 @@ import { getQuery } from '~/common/utils'
 
 import Collection from './Collection'
 import Content from './Content'
+import Donation from './Donation'
 import FingerprintButton from './FingerprintButton'
 import RelatedArticles from './RelatedArticles'
 import State from './State'
@@ -91,6 +93,7 @@ const ArticleDetail = () => {
   const router = useRouter()
   const mediaHash = getQuery({ router, key: 'mediaHash' })
   const viewer = useContext(ViewerContext)
+  const features = useContext(FeaturesContext)
   const [fixedWall, setFixedWall] = useState(false)
   const { data, loading, error } = useQuery<ArticleDetailType>(ARTICLE_DETAIL, {
     variables: { mediaHash },
@@ -108,7 +111,7 @@ const ArticleDetail = () => {
   const article = data?.article
   const authorId = article && article.author.id
   const collectionCount = (article && article.collection.totalCount) || 0
-  const canEditCollection = viewer.id === authorId
+  const isAuthor = viewer.id === authorId
 
   useEffect(() => {
     if (shouldShowWall && window.location.hash && article) {
@@ -175,7 +178,6 @@ const ArticleDetail = () => {
             size="sm"
             spacing={[0, 0]}
             bgColor="none"
-            hasCivicLikerRing
           />
         }
       />
@@ -208,13 +210,11 @@ const ArticleDetail = () => {
 
         <Content article={article} />
 
-        {(collectionCount > 0 || canEditCollection) && (
+        {features.payment && <Donation mediaHash={mediaHash} />}
+
+        {(collectionCount > 0 || isAuthor) && (
           <section className="block">
-            <Collection
-              article={article}
-              canEdit={canEditCollection}
-              collectionCount={collectionCount}
-            />
+            <Collection article={article} collectionCount={collectionCount} />
           </section>
         )}
 

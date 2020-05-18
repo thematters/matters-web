@@ -11,10 +11,10 @@ import {
   AnalyticsListener,
   Error,
   ErrorBoundary,
+  FeaturesProvider,
   LanguageProvider,
   Layout,
   Toast,
-  ViewerFragments,
   ViewerProvider,
 } from '~/components'
 import { ClientUpdater } from '~/components/ClientUpdater'
@@ -23,6 +23,7 @@ import { GlobalStyles } from '~/components/GlobalStyles'
 import { QueryError } from '~/components/GQL'
 import { ProgressBar } from '~/components/ProgressBar'
 import PushInitializer from '~/components/PushInitializer'
+import SplashScreen from '~/components/SplashScreen'
 
 import { PATHS } from '~/common/enums'
 import { analytics } from '~/common/utils'
@@ -37,9 +38,13 @@ const ROOT_QUERY = gql`
       ...ViewerUser
       ...AnalyticsUser
     }
+    official {
+      ...FeatureOfficial
+    }
   }
-  ${ViewerFragments.user}
+  ${ViewerProvider.fragments.user}
   ${AnalyticsListener.fragments.user}
+  ${FeaturesProvider.fragments.official}
 `
 
 // Sentry
@@ -76,6 +81,7 @@ const Root = ({
 
   const { loading, data, error } = useQuery<RootQuery>(ROOT_QUERY)
   const viewer = data?.viewer
+  const official = data?.official
 
   if (loading) {
     return null
@@ -92,14 +98,16 @@ const Root = ({
   return (
     <ViewerProvider viewer={viewer}>
       <LanguageProvider>
-        {shouldApplyLayout ? <Layout>{children}</Layout> : children}
+        <FeaturesProvider official={official}>
+          {shouldApplyLayout ? <Layout>{children}</Layout> : children}
 
-        <GlobalDialogs />
-        <Toast.Container />
-        <ProgressBar />
+          <GlobalDialogs />
+          <Toast.Container />
+          <ProgressBar />
 
-        <AnalyticsListener user={viewer || {}} />
-        <PushInitializer client={client} />
+          <AnalyticsListener user={viewer || {}} />
+          <PushInitializer client={client} />
+        </FeaturesProvider>
       </LanguageProvider>
     </ViewerProvider>
   )
@@ -113,6 +121,7 @@ const MattersApp = ({
   <ErrorBoundary>
     <ApolloProvider client={apollo}>
       <GlobalStyles />
+      <SplashScreen />
       <ClientUpdater />
 
       <Root client={apollo}>

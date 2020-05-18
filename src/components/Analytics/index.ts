@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 
 import { ANALYTIC_TYPES, ANALYTICS, GA_TRACKING_ID } from '~/common/enums'
+import { deferTry } from '~/common/utils'
 
 import { useEventListener } from '../Hook'
 
@@ -10,19 +11,16 @@ declare global {
   interface Window {
     analytics: SegmentAnalytics.AnalyticsJS & { [key: string]: any }
     gtag: any
-  }
-}
-
-export const deferTry = (fn: () => any, timesLeft = 10, defer = 2000) => {
-  if (timesLeft > 0) {
-    try {
-      fn()
-    } catch (err) {
-      console.log(err)
-      setTimeout(() => deferTry(fn, timesLeft - 1, defer), defer)
+    firebaseAnalytics: firebase.analytics.Analytics & {
+      logEvent: (
+        eventName: string,
+        eventParams?: {
+          [key: string]: any
+        },
+        options?: firebase.analytics.AnalyticsCallOptions
+      ) => void
     }
   }
-  return
 }
 
 const handleAnalytics = ({
@@ -38,11 +36,14 @@ const handleAnalytics = ({
   // if we have an event of type track or page
   if (type === ANALYTIC_TYPES.TRACK || type === ANALYTIC_TYPES.PAGE) {
     window.analytics[type](...args)
-    // GA tracking
+    // GA & firebase tracking
     if (type === ANALYTIC_TYPES.PAGE) {
+      const path = window.location.pathname
       window.gtag('config', GA_TRACKING_ID, {
-        page_location: args.url,
+        page_location: path,
       })
+
+      window.firebaseAnalytics.logEvent('page_view')
     }
   }
 
