@@ -48,7 +48,6 @@ export const ReCaptchaProvider = ({
           window.grecaptcha
             .execute(RECAPTCHA_KEY, { action })
             .then((newToken) => {
-              console.log({ newToken })
               setToken(newToken)
             })
         } else {
