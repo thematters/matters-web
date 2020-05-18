@@ -20,10 +20,8 @@ const ARTICLE_DONATION = gql`
       author {
         ...UserDonationRecipient
       }
-      ...DonatorsArticle
     }
   }
-  ${Donators.fragments.article}
   ${DonationDialog.fragments.recipient}
 `
 
@@ -45,7 +43,7 @@ const Donation = ({ mediaHash }: DonationProps) => {
       </section>
 
       <section className="donators">
-        <Donators article={article} />
+        <Donators mediaHash={mediaHash} />
       </section>
       <style jsx>{styles}</style>
     </section>
