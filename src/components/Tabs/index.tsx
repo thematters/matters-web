@@ -1,47 +1,32 @@
-import Link from 'next/link'
-
-import { Url } from '~/common/utils'
+import { Button, ButtonProps, TextIcon } from '~/components'
 
 import styles from './styles.css'
 
-interface TabProps {
-  href?: Url
-  as?: string
-
-  disable?: boolean
+type TabProps = {
   selected?: boolean
+} & ButtonProps
 
-  sup?: React.ReactNode | string
-}
-
-const Tab: React.FC<TabProps> = ({
-  href,
-  as,
-
-  disable,
-  selected,
-
-  sup,
-  children,
-}) => {
-  if (href) {
-    return (
-      <li role="tab" aria-disabled={disable} aria-selected={selected}>
-        <Link href={href} as={as}>
-          <a>
-            <span className="content">{children}</span>
-            {sup && <sup>{sup}</sup>}
-          </a>
-        </Link>
-        <style jsx>{styles}</style>
-      </li>
-    )
-  }
-
+const Tab: React.FC<TabProps> = ({ selected, children, ...buttonProps }) => {
   return (
-    <li role="tab" aria-disabled={disable} aria-selected={selected}>
-      <span className="content">{children}</span>
-      {sup && <sup>{sup}</sup>}
+    <li
+      role="tab"
+      aria-disabled={buttonProps.disabled}
+      aria-selected={selected}
+    >
+      <Button
+        spacing={['xtight', 'base']}
+        bgColor={selected ? 'green-lighter' : 'white'}
+        bgActiveColor={selected ? 'green-lighter' : 'grey-lighter'}
+        {...buttonProps}
+      >
+        <TextIcon
+          size="md"
+          color={selected ? 'green' : 'grey'}
+          weight="semibold"
+        >
+          {children}
+        </TextIcon>
+      </Button>
 
       <style jsx>{styles}</style>
     </li>

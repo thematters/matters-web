@@ -5,6 +5,7 @@ import {
   Layout,
   LoginButton,
   SignUpButton,
+  Spacer,
   useResponsive,
   ViewerContext,
 } from '~/components'
@@ -24,9 +25,7 @@ const Home = () => {
     <Layout.Main
       aside={
         <>
-          <Sidebar.Icymi />
           <Sidebar.Tags />
-          <Sidebar.Topics />
           <Sidebar.Authors />
         </>
       }
@@ -46,14 +45,19 @@ const Home = () => {
 
               {!viewer.isAuthed && (
                 <section className="buttons">
-                  <LoginButton />
-                  <SignUpButton trackType={SIGNUP_TYPE.GENERAL} />
+                  <LoginButton size={[null, '2rem']} />
+                  <SignUpButton
+                    size={[null, '2rem']}
+                    trackType={SIGNUP_TYPE.GENERAL}
+                  />
                 </section>
               )}
             </>
           }
         />
       )}
+
+      <Spacer size="xtight" />
 
       <Feed />
 

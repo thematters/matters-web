@@ -53,7 +53,7 @@ const FollowComment: React.FC<FollowCommentProps> = ({ comment, onClick }) => {
   const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
     variables: { id: 'local' },
   })
-  const { viewMode } = data?.clientPreference || { viewMode: 'default' }
+  const { viewMode } = data?.clientPreference || { viewMode: 'comfortable' }
   const isDefaultMode = viewMode === 'default'
 
   const { article, author } = comment

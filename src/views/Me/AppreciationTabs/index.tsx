@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
 
-import { Tabs, Translate } from '~/components'
+import { Spacer, Tabs, Translate } from '~/components'
 
 import { PATHS } from '~/common/enums'
 
@@ -26,23 +26,25 @@ const AppreciationTabs: React.FC<AppreciationTabsProps> & {
   const router = useRouter()
 
   return (
-    <Tabs>
-      <Tabs.Tab
-        href={PATHS.ME_APPRECIATIONS_SENT}
-        selected={router.pathname === PATHS.ME_APPRECIATIONS_SENT}
-        sup={activity.appreciationsSentTotal}
-      >
-        <Translate id="appreciationsSent" />
-      </Tabs.Tab>
+    <>
+      <Spacer size="xtight" />
 
-      <Tabs.Tab
-        href={PATHS.ME_APPRECIATIONS_RECEIVED}
-        selected={router.pathname === PATHS.ME_APPRECIATIONS_RECEIVED}
-        sup={activity.appreciationsReceivedTotal}
-      >
-        <Translate id="appreciationsReceived" />
-      </Tabs.Tab>
-    </Tabs>
+      <Tabs>
+        <Tabs.Tab
+          href={PATHS.ME_APPRECIATIONS_SENT}
+          selected={router.pathname === PATHS.ME_APPRECIATIONS_SENT}
+        >
+          <Translate id="appreciationsSent" />
+        </Tabs.Tab>
+
+        <Tabs.Tab
+          href={PATHS.ME_APPRECIATIONS_RECEIVED}
+          selected={router.pathname === PATHS.ME_APPRECIATIONS_RECEIVED}
+        >
+          <Translate id="appreciationsReceived" />
+        </Tabs.Tab>
+      </Tabs>
+    </>
   )
 }
 

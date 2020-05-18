@@ -1,58 +1,36 @@
-import { Button, ButtonProps, TextIcon, Translate } from '~/components'
+import { Tabs, Translate } from '~/components'
 
-import styles from './styles.css'
+export type SortByType = 'hottest' | 'newest' | 'icymi' | 'topics'
 
 interface SortByProps {
-  sortBy: 'hottest' | 'newest'
-  setSortBy: (sortBy: 'hottest' | 'newest') => void
+  sortBy: SortByType
+  setSortBy: (sortBy: SortByType) => void
 }
 
 const SortBy: React.FC<SortByProps> = ({ sortBy, setSortBy }) => {
   const isHottest = sortBy === 'hottest'
   const isNewset = sortBy === 'newest'
-
-  const buttonProps = {
-    size: ['6rem', '2rem'],
-  } as ButtonProps
+  const isICYMI = sortBy === 'icymi'
+  const isTopics = sortBy === 'topics'
 
   return (
-    <ul role="tablist">
-      <li role="tab">
-        <Button
-          {...buttonProps}
-          bgColor={isHottest ? 'green-lighter' : 'white'}
-          bgActiveColor={isHottest ? 'green-lighter' : 'grey-lighter'}
-          onClick={() => setSortBy('hottest')}
-        >
-          <TextIcon
-            size="md"
-            color={isHottest ? 'green' : 'grey'}
-            weight="semibold"
-          >
-            <Translate zh_hant="熱門作品" zh_hans="热门作品" />
-          </TextIcon>
-        </Button>
-      </li>
+    <Tabs>
+      <Tabs.Tab onClick={() => setSortBy('hottest')} selected={isHottest}>
+        <Translate zh_hant="熱門" zh_hans="热门" />
+      </Tabs.Tab>
 
-      <li role="tab">
-        <Button
-          {...buttonProps}
-          bgColor={isNewset ? 'green-lighter' : 'white'}
-          bgActiveColor={isNewset ? 'green-lighter' : 'grey-lighter'}
-          onClick={() => setSortBy('newest')}
-        >
-          <TextIcon
-            size="md"
-            color={isNewset ? 'green' : 'grey'}
-            weight="semibold"
-          >
-            <Translate zh_hant="最新作品" zh_hans="最新作品" />
-          </TextIcon>
-        </Button>
-      </li>
+      <Tabs.Tab onClick={() => setSortBy('newest')} selected={isNewset}>
+        <Translate zh_hant="最新" zh_hans="最新" />
+      </Tabs.Tab>
 
-      <style jsx>{styles}</style>
-    </ul>
+      <Tabs.Tab onClick={() => setSortBy('icymi')} selected={isICYMI}>
+        <Translate zh_hant="精選" zh_hans="精选" />
+      </Tabs.Tab>
+
+      <Tabs.Tab onClick={() => setSortBy('topics')} selected={isTopics}>
+        <Translate zh_hant="熱議" zh_hans="热议" />
+      </Tabs.Tab>
+    </Tabs>
   )
 }
 

@@ -36,7 +36,7 @@ const NavListItem = forwardRef(
       }
 
       if (active && canScrollTop) {
-        event.preventDefault()
+        event?.preventDefault()
         jump(document.body)
       }
     }

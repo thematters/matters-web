@@ -179,6 +179,7 @@ const UserComments = ({ user }: UserIdUser) => {
             <List.Item key={articleEdge.cursor}>
               <Card
                 spacing={['tight', 'base']}
+                bgColor="none"
                 {...toPath({
                   page: 'articleDetail',
                   article: articleEdge.node,

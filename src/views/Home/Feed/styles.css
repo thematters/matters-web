@@ -1,10 +1,7 @@
 .topbar {
-  @mixin flex-center-space-between;
+  position: sticky;
+  top: 0;
 
-  margin-top: var(--spacing-loose);
-  padding: 0 var(--spacing-base) var(--spacing-base);
-
-  @media (--sm-up) {
-    margin-top: var(--spacing-x-loose);
-  }
+  background: var(--color-white);
+  z-index: var(--z-index-global-header);
 }
