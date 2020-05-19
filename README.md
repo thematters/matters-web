@@ -5,7 +5,7 @@
 ### Start local dev
 
 - Install dependencies: `npm i`
-- Environment variables: `cp .env.example .env`
+- Environment variables: `cp .env.local.example .env.local`
 - Run `npm run dev`, then go to `http://localhost:3000/`
 
 ### Build and run production server
@@ -14,7 +14,7 @@
 
 ### Start local dev with docker
 
-- Environment variables: `cp .env.example .env`
+- Environment variables: `cp .env.local.example .env.local`
 - Set command alias: `source bin/dc-alias`
 - Build docker image: `dc build`
 - Run:

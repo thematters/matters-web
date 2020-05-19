@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 
 import {
   BookmarkButton,
+  ReCaptchaProvider,
   ShareButton,
   usePullToRefresh,
   useResponsive,
@@ -50,10 +51,12 @@ const Toolbar = ({ mediaHash }: { mediaHash: string }) => {
 
   return (
     <section className="toolbar">
-      <section className="appreciate-button">
-        <AppreciationButton article={article} />
-        {isSmallUp && <Appreciators article={article} />}
-      </section>
+      <ReCaptchaProvider action="appreciateArticle">
+        <section className="appreciate-button">
+          <AppreciationButton article={article} />
+          {isSmallUp && <Appreciators article={article} />}
+        </section>
+      </ReCaptchaProvider>
 
       <section className="comment-bar">
         <CommentBar article={article} />
