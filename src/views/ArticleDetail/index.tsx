@@ -94,6 +94,7 @@ const ArticleDetail = () => {
   const mediaHash = getQuery({ router, key: 'mediaHash' })
   const viewer = useContext(ViewerContext)
   const features = useContext(FeaturesContext)
+
   const [fixedWall, setFixedWall] = useState(false)
   const { data, loading, error } = useQuery<ArticleDetailType>(ARTICLE_DETAIL, {
     variables: { mediaHash },

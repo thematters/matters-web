@@ -8,6 +8,10 @@ declare global {
   }
 }
 
+type ReCaptchaAction = 'verificationCode' | 'appreciateArticle'
+
+const RECAPTCHA_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_KEY || ''
+
 // recaptcha related setup
 const recaptchaScriptId = 'recaptcha-script'
 
@@ -22,8 +26,10 @@ export const ReCaptchaConsumer = ReCaptchaContext.Consumer
 
 export const ReCaptchaProvider = ({
   children,
+  action = 'verificationCode',
 }: {
   children: React.ReactNode
+  action?: ReCaptchaAction
 }) => {
   const [token, setToken] = useState('')
   const [refreshToken, setRefreshToken] = useState<() => void>()
@@ -37,9 +43,7 @@ export const ReCaptchaProvider = ({
       const getToken = async () => {
         if (window.grecaptcha && window.grecaptcha.execute) {
           window.grecaptcha
-            .execute(process.env.NEXT_PUBLIC_RECAPTCHA_KEY || '', {
-              action: 'homepage',
-            })
+            .execute(RECAPTCHA_KEY, { action })
             .then((newToken) => {
               setToken(newToken)
             })
@@ -63,8 +67,8 @@ export const ReCaptchaProvider = ({
       setRecaptchaInterval(intervalId)
 
       // clear up after max wait time of 20 minutes
-      await sleep(60 * 20 * 1000)
-      clearInterval(intervalId)
+      // await sleep(60 * 20 * 1000)
+      // clearInterval(intervalId)
     })
   }
 

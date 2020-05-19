@@ -25,7 +25,7 @@ const NavListItem = ({
     }
 
     if (active) {
-      event.preventDefault()
+      event?.preventDefault()
       jump(document.body)
     }
   }

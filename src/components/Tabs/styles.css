@@ -1,23 +1,12 @@
 nav {
-  @mixin border-bottom-grey;
   position: relative;
+  padding: var(--spacing-x-tight) var(--spacing-base);
 
-  padding: 0 var(--spacing-base);
   white-space: nowrap;
 
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: 2rem;
-    background-image: linear-gradient(
-      to left,
-      var(--color-white),
-      var(--color-white) 73%,
-      rgba(255, 255, 255, 0)
-    );
+  @media (--sm-up) {
+    padding-top: var(--spacing-base);
+    padding-bottom: var(--spacing-base);
   }
 }
 
@@ -28,37 +17,9 @@ ul {
 }
 
 li {
-  position: relative;
   display: inline-block;
 
-  margin-right: var(--spacing-loose);
-
-  color: var(--color-grey);
-  font-size: var(--font-size-xm);
-  font-weight: var(--font-weight-semibold);
-  line-height: 1.5rem;
-  white-space: nowrap;
-
-  &:hover,
-  &:focus,
-  &[aria-selected='true'] {
-    color: var(--color-black);
-  }
-
-  & .content {
-    display: inline-block;
-    padding-bottom: var(--spacing-x-tight);
-    border-bottom: 2px solid transparent;
-  }
-
-  & sup {
-    top: calc(var(--spacing-x-tight) * -1);
-    padding-left: var(--spacing-xxx-tight);
-  }
-
-  &[aria-selected='true'] {
-    & .content {
-      border-bottom-color: var(--color-black);
-    }
+  & + li {
+    margin-left: var(--spacing-x-tight);
   }
 }
