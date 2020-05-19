@@ -4,7 +4,8 @@ import { TextIcon, withIcon } from '~/components'
 
 import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
 import { analytics } from '~/common/utils'
-import { ReactComponent as IconShareTwitter } from '~/static/icons/share-twitter.svg'
+
+import { ReactComponent as IconShareTwitter } from '@/public/static/icons/share-twitter.svg'
 
 const Twitter = ({ title, link }: { title: string; link: string }) => (
   <button

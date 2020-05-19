@@ -20,7 +20,8 @@ import {
   mergeConnections,
   toPath,
 } from '~/common/utils'
-import IMAGE_LOGO_192 from '~/static/icon-192x192.png?url'
+
+import IMAGE_LOGO_192 from '@/public/static/icon-192x192.png?url'
 
 import UserTabs from '../../UserTabs'
 

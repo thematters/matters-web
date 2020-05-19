@@ -1,16 +1,12 @@
 import Alert from '@reach/alert'
-import getConfig from 'next/config'
 
 import { Translate } from '~/components'
 
-import IMAGE_ILLUSTRATION_EMPTY from '~/static/images/illustration-empty.svg'
+import IMAGE_ILLUSTRATION_EMPTY from '@/public/static/images/illustration-empty.svg'
 
 import styles from './styles.css'
 
-const {
-  publicRuntimeConfig: { ENV },
-} = getConfig()
-const isProd = ENV === 'production'
+const isProd = process.env.NODE_ENV === 'production'
 
 interface ErrorProps {
   statusCode?: number | string | null

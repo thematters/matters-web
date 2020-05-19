@@ -3,7 +3,7 @@ import classNames from 'classnames'
 
 import { Button, Icon, LoginButton, Translate } from '~/components'
 
-import IMG_AD from '~/static/images/ad.svg'
+import IMG_AD from '@/public/static/images/ad.svg'
 
 import styles from './styles.css'
 

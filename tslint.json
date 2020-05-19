@@ -8,7 +8,7 @@
   "rules": {
     "no-implicit-dependencies": [
       true,
-      ["~", "tippy.js", "dotenv", "apollo-cache", "@testing-library"]
+      ["~", "@", "tippy.js", "dotenv", "apollo-cache", "@testing-library"]
     ],
     "no-bitwise": false,
     "no-submodule-imports": [false],
@@ -29,16 +29,21 @@
           {
             "name": "types",
             "match": "__generated__",
-            "order": 25
+            "order": 30
           },
           {
             "name": "local",
             "match": "^[.]",
+            "order": 25
+          },
+          {
+            "name": "internal:public",
+            "match": "^@/",
             "order": 20
           },
           {
             "name": "internal:others",
-            "match": "^~/(common|static|page|definitions)",
+            "match": "^~/(common|page|definitions)",
             "order": 15
           },
           {

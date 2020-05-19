@@ -1,9 +1,6 @@
 /**
- * Note:
- * "module-alias" only used in this file to resolve `~` alias,
- * Next.js bundles will be resolved with Babel (see ".babelrc")
+ * Note: "module-alias" only used in "server.ts" to resolve `~` alias,
  */
-import dotenv from 'dotenv'
 import express from 'express'
 import helmet from 'helmet'
 import 'module-alias/register'
@@ -11,18 +8,7 @@ import next from 'next'
 
 import { ROUTES, toExpressPath } from '~/common/enums'
 
-// load environment variables from .env
-// skip error for CI
-try {
-  const dotEnvResult = dotenv.config()
-  if (dotEnvResult.error) {
-    console.log('error loading .env file', dotEnvResult.error)
-  }
-} catch (err) {
-  console.log('error loading .env file', err)
-}
-
-const isProd = process.env.ENV === 'production'
+const isProd = process.env.NODE_ENV === 'production'
 const PORT = process.env.PORT || 3000
 const app = next({ dev: !isProd })
 const handle = app.getRequestHandler()

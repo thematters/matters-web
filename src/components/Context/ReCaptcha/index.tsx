@@ -1,4 +1,3 @@
-import getConfig from 'next/config'
 import { createContext, useEffect, useState } from 'react'
 
 import { sleep } from '~/common/utils'
@@ -11,11 +10,9 @@ declare global {
 
 type ReCaptchaAction = 'verificationCode' | 'appreciateArticle'
 
-// recaptcha related setup
-const {
-  publicRuntimeConfig: { RECAPTCHA_KEY },
-} = getConfig()
+const RECAPTCHA_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_KEY || ''
 
+// recaptcha related setup
 const recaptchaScriptId = 'recaptcha-script'
 
 export const ReCaptchaContext = createContext<{
@@ -79,7 +76,7 @@ export const ReCaptchaProvider = ({
   useEffect(() => {
     if (!document.getElementById(recaptchaScriptId)) {
       const script = document.createElement('script')
-      script.src = `https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_KEY}`
+      script.src = `https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_KEY}`
       script.addEventListener('load', handleRecaptcha)
       script.id = recaptchaScriptId
 

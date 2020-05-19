@@ -4,7 +4,8 @@ import { TextIcon, Translate, withIcon } from '~/components'
 
 import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
 import { analytics, dom } from '~/common/utils'
-import { ReactComponent as IconShareEmail } from '~/static/icons/share-email.svg'
+
+import { ReactComponent as IconShareEmail } from '@/public/static/icons/share-email.svg'
 
 const Email = ({ title, link }: { title: string; link: string }) => (
   <button

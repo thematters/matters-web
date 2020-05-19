@@ -18,7 +18,8 @@ import USER_ARTICLES from '~/components/GQL/queries/userArticles'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, getQuery, mergeConnections } from '~/common/utils'
-import IMAGE_LOGO_192 from '~/static/icon-192x192.png?url'
+
+import IMAGE_LOGO_192 from '@/public/static/icon-192x192.png?url'
 
 import UserTabs from '../UserTabs'
 import styles from './styles.css'

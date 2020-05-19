@@ -1,12 +1,8 @@
 import { CachePersistor } from 'apollo-cache-persist'
-import getConfig from 'next/config'
 
-const {
-  publicRuntimeConfig: { ENV },
-} = getConfig()
-const isProd = ENV === 'production'
+const isProd = process.env.NODE_ENV === 'production'
 
-const APP_VERSION = process.env.app_version || '__UNVERSIONING__'
+const APP_VERSION = process.env.APP_VERSION || '__UNVERSIONING__'
 const APP_VERSION_KEY = 'app-version'
 
 let persistor: any = null

@@ -1,5 +1,3 @@
-import getConfig from 'next/config'
-
 import { Dialog, Form, Translate } from '~/components'
 
 import Hint from './Hint'
@@ -9,10 +7,6 @@ interface SelectProps {
   startGenerate: () => void
   startBind: (windowRef: Window) => void
 }
-
-const {
-  publicRuntimeConfig: { OAUTH_URL },
-} = getConfig()
 
 const Select: React.FC<SelectProps> = ({ startGenerate, startBind }) => {
   return (
@@ -39,7 +33,7 @@ const Select: React.FC<SelectProps> = ({ startGenerate, startBind }) => {
             />
           }
           onClick={() => {
-            const url = `${OAUTH_URL}/likecoin`
+            const url = `${process.env.NEXT_PUBLIC_OAUTH_URL}/likecoin`
             const windowRef = window.open(url, '_blank')
 
             if (windowRef) {

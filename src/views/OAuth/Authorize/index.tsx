@@ -1,6 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import getConfig from 'next/config'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import queryString from 'query-string'
@@ -25,10 +24,7 @@ import styles from './styles.css'
 
 import { OAuthClientInfo } from './__generated__/OAuthClientInfo'
 
-const {
-  publicRuntimeConfig: { OAUTH_URL },
-} = getConfig()
-const OAUTH_AUTHORIZE_ENDPOINT = `${OAUTH_URL}/authorize`
+const OAUTH_AUTHORIZE_ENDPOINT = `${process.env.NEXT_PUBLIC_OAUTH_URL}/authorize`
 
 const OAUTH_CLIENT_INFO = gql`
   query OAuthClientInfo($id: ID!) {

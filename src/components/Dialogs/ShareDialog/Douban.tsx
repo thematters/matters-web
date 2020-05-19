@@ -4,7 +4,8 @@ import { TextIcon, Translate, withIcon } from '~/components'
 
 import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
 import { analytics, dom } from '~/common/utils'
-import { ReactComponent as IconShareDouban } from '~/static/icons/share-douban.svg'
+
+import { ReactComponent as IconShareDouban } from '@/public/static/icons/share-douban.svg'
 
 const Douban = ({ title, link }: { title: string; link: string }) => (
   <button
