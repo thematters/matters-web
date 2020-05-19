@@ -22,6 +22,7 @@ export const ANALYTICS_EVENTS = {
   ARTICLE_BOTTOM_CROSS: 'article-bottom-cross',
   PUBLISH_ERROR: 'publish-error',
   LOAD_MORE: 'load-more',
+  PULL_TO_REFRESH: 'pull-to-refresh',
   DISPLAY_ALL: 'display-all',
   SHUFFLE_AUTHOR: 'shuffle-author',
   ENTER_ARTICLE: 'enter-article',
