@@ -42,7 +42,8 @@ const WalletSettings = () => {
   const USDPrice = numRound(LIKE?.rateUSD * LIKE?.total)
   const equalSign = LIKE?.total > 0 ? '≈' : '='
 
-  usePullToRefresh({ onPull: refetch })
+  usePullToRefresh.Register()
+  usePullToRefresh.Handler(refetch)
 
   return (
     <Form.List groupName={<Translate id="settingsWallet" />}>

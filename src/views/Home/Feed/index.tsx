@@ -8,7 +8,6 @@ import {
   InfiniteScroll,
   List,
   Spinner,
-  usePullToRefresh,
   useResponsive,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
@@ -139,8 +138,6 @@ const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortByType }) => {
   const { edges, pageInfo } = result || {}
   const isNewLoading = networkStatus === NetworkStatus.loading
 
-  usePullToRefresh({ onPull: refetch })
-
   if (loading && (!result || isNewLoading)) {
     if (process.browser) {
       window.scrollTo(0, 0)
@@ -206,7 +203,11 @@ const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortByType }) => {
   }
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+    <InfiniteScroll
+      hasNextPage={pageInfo.hasNextPage}
+      loadMore={loadMore}
+      pullToRefresh={refetch}
+    >
       <List>
         {mixFeed.map((edge, i) => {
           if (edge.__typename === 'HorizontalFeed') {

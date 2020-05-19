@@ -41,7 +41,7 @@ const Toolbar = ({ mediaHash }: { mediaHash: string }) => {
     variables: { mediaHash },
   })
 
-  usePullToRefresh({ onPull: refetch })
+  usePullToRefresh.Handler(refetch)
 
   if (loading || !data || !data.article) {
     return null

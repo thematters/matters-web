@@ -17,7 +17,8 @@ import { WalletBalance } from '~/components/GQL/queries/__generated__/WalletBala
 const Balance = () => {
   const { data, loading, refetch } = useQuery<WalletBalance>(WALLET_BALANCE)
 
-  usePullToRefresh({ onPull: refetch })
+  usePullToRefresh.Register()
+  usePullToRefresh.Handler(refetch)
 
   if (loading) {
     return <Spinner />

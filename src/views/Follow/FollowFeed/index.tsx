@@ -8,7 +8,6 @@ import {
   InfiniteScroll,
   List,
   Spinner,
-  usePullToRefresh,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
@@ -55,8 +54,6 @@ const FollowFeed = () => {
     FOLLOW_FEED
   )
 
-  usePullToRefresh({ onPull: refetch })
-
   if (loading) {
     return <Spinner />
   }
@@ -91,7 +88,11 @@ const FollowFeed = () => {
   }
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+    <InfiniteScroll
+      hasNextPage={pageInfo.hasNextPage}
+      loadMore={loadMore}
+      pullToRefresh={refetch}
+    >
       <List>
         {edges.map(({ node, cursor }, i) => (
           <List.Item key={cursor}>

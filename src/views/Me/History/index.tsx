@@ -9,7 +9,6 @@ import {
   Layout,
   List,
   Spinner,
-  usePullToRefresh,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
@@ -49,8 +48,6 @@ const MeHistory = () => {
     ME_HISTORY_FEED
   )
 
-  usePullToRefresh({ onPull: refetch })
-
   if (loading) {
     return <Spinner />
   }
@@ -85,7 +82,11 @@ const MeHistory = () => {
   }
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+    <InfiniteScroll
+      hasNextPage={pageInfo.hasNextPage}
+      loadMore={loadMore}
+      pullToRefresh={refetch}
+    >
       <List>
         {edges.map(({ node, cursor }, i) => (
           <List.Item key={cursor}>

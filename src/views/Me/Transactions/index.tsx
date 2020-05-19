@@ -9,7 +9,6 @@ import {
   List,
   Spinner,
   Transaction,
-  usePullToRefresh,
 } from '~/components'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
@@ -46,8 +45,6 @@ const Transactions = () => {
     ME_TRANSACTIONS
   )
 
-  usePullToRefresh({ onPull: refetch })
-
   if (loading) {
     return <Spinner />
   }
@@ -82,7 +79,11 @@ const Transactions = () => {
   }
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+    <InfiniteScroll
+      hasNextPage={pageInfo.hasNextPage}
+      loadMore={loadMore}
+      pullToRefresh={refetch}
+    >
       <List>
         {edges.map(({ node, cursor }) => (
           <List.Item key={cursor}>

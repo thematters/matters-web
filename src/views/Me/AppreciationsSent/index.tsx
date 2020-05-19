@@ -9,7 +9,6 @@ import {
   Layout,
   List,
   Spinner,
-  usePullToRefresh,
 } from '~/components'
 
 import { ANALYTICS_EVENTS } from '~/common/enums'
@@ -49,8 +48,6 @@ const AppreciationsSent = () => {
   const { data, loading, fetchMore, refetch } = useQuery<MeAppreciationsSent>(
     ME_APPRECIATIONS_SENT
   )
-
-  usePullToRefresh({ onPull: refetch })
 
   if (loading) {
     return <Spinner />
@@ -94,7 +91,11 @@ const AppreciationsSent = () => {
     <>
       <AppreciationTabs activity={data.viewer.activity} />
 
-      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+      <InfiniteScroll
+        hasNextPage={pageInfo.hasNextPage}
+        loadMore={loadMore}
+        pullToRefresh={refetch}
+      >
         <List>
           {edges.map(({ node, cursor }) => (
             <List.Item key={cursor}>

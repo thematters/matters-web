@@ -125,7 +125,8 @@ const UserComments = ({ user }: UserIdUser) => {
     variables: { id: user?.id },
   })
 
-  usePullToRefresh({ onPull: refetch })
+  usePullToRefresh.Register()
+  usePullToRefresh.Handler(refetch)
 
   if (!user || !user.id) {
     return null

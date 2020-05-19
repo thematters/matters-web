@@ -9,7 +9,6 @@ import {
   Spinner,
   TextIcon,
   Translate,
-  usePullToRefresh,
   UserDigest,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
@@ -49,8 +48,6 @@ export const AuthorPicker = ({ title }: { title: React.ReactNode }) => {
   )
   const edges = data?.viewer?.recommendation.authors.edges || []
   const followeeCount = data?.viewer?.followees.totalCount || 0
-
-  usePullToRefresh({ onPull: refetch })
 
   return (
     <section className="container">

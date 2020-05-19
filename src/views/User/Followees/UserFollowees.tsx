@@ -51,7 +51,8 @@ const UserFollowees = () => {
     variables: { userName },
   })
 
-  usePullToRefresh({ onPull: refetch })
+  usePullToRefresh.Register()
+  usePullToRefresh.Handler(refetch)
 
   if (loading || !data || !data.user) {
     return <Spinner />

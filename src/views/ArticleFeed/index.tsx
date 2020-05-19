@@ -9,7 +9,6 @@ import {
   Layout,
   List,
   Spinner,
-  usePullToRefresh,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
@@ -77,8 +76,6 @@ const Feed = ({ type = 'topic' }: ArticleFeedProp) => {
     AllTopics | AllIcymis
   >(QUERIES[type])
 
-  usePullToRefresh({ onPull: refetch })
-
   if (loading) {
     return <Spinner />
   }
@@ -113,7 +110,11 @@ const Feed = ({ type = 'topic' }: ArticleFeedProp) => {
   }
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+    <InfiniteScroll
+      hasNextPage={pageInfo.hasNextPage}
+      loadMore={loadMore}
+      pullToRefresh={refetch}
+    >
       <List>
         {edges.map(({ node, cursor }, i) => (
           <List.Item key={cursor}>

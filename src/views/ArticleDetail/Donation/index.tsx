@@ -33,7 +33,7 @@ const BaseDonation = ({ mediaHash }: DonationProps) => {
     }
   )
 
-  usePullToRefresh({ onPull: refetch })
+  usePullToRefresh.Handler(refetch)
 
   if (loading || !data || !data.article) {
     return null

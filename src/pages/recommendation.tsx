@@ -8,7 +8,6 @@ import {
   InfiniteScroll,
   Layout,
   Spinner,
-  usePullToRefresh,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
@@ -53,8 +52,6 @@ const Feed = () => {
   const { edges, pageInfo } = result || {}
   const isNewLoading = networkStatus === NetworkStatus.loading
 
-  usePullToRefresh({ onPull: refetch })
-
   if (loading && (!result || isNewLoading)) {
     return <Spinner />
   }
@@ -84,6 +81,7 @@ const Feed = () => {
             }),
         })
       }
+      pullToRefresh={refetch}
     >
       <ul>
         {edges.map(({ node, cursor }, i) => (

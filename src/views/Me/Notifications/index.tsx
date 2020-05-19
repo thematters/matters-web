@@ -11,7 +11,6 @@ import {
   Notice,
   Spacer,
   Spinner,
-  usePullToRefresh,
   useResponsive,
 } from '~/components'
 import { useMutation } from '~/components/GQL'
@@ -66,8 +65,6 @@ const BaseNotifications = () => {
     markAllNoticesAsRead()
   }, [])
 
-  usePullToRefresh({ onPull: refetch })
-
   const connectionPath = 'viewer.notices'
   const { edges, pageInfo } = data?.viewer?.notices || {}
 
@@ -94,7 +91,11 @@ const BaseNotifications = () => {
     })
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+    <InfiniteScroll
+      hasNextPage={pageInfo.hasNextPage}
+      loadMore={loadMore}
+      pullToRefresh={refetch}
+    >
       <List spacing={['xloose', 'base']}>
         {edges.map(({ node, cursor }) => (
           <List.Item key={cursor}>

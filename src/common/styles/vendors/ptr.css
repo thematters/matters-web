@@ -18,7 +18,7 @@
 }
 
 .ptr--box {
-  padding: var(--spacing-tight);
+  padding: var(--spacing-base);
   flex-basis: 100%;
 }
 

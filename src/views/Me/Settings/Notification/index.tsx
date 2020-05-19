@@ -75,7 +75,8 @@ const NotificationSettings = () => {
   const settings = data?.viewer?.settings.notification
   const id = data?.viewer?.id
 
-  usePullToRefresh({ onPull: refetch })
+  usePullToRefresh.Register()
+  usePullToRefresh.Handler(refetch)
 
   if (loading) {
     return <Spinner />

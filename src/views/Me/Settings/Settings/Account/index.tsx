@@ -32,7 +32,8 @@ const AccountSettings = () => {
   const totalBlockCount = data?.viewer?.blockList?.totalCount
   const userNameEditable = viewer.info.userNameEditable
 
-  usePullToRefresh({ onPull: refetch })
+  usePullToRefresh.Register()
+  usePullToRefresh.Handler(refetch)
 
   return (
     <Form.List groupName={<Translate id="settingsAccount" />}>

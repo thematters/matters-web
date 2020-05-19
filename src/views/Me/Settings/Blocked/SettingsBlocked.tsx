@@ -7,7 +7,6 @@ import {
   List,
   Spinner,
   Translate,
-  usePullToRefresh,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 import { UserDigest } from '~/components/UserDigest'
@@ -43,8 +42,6 @@ const SettingsBlocked = () => {
   const { data, loading, error, fetchMore, refetch } = useQuery<
     ViewerBlockList
   >(VIEWER_BLOCK_LIST)
-
-  usePullToRefresh({ onPull: refetch })
 
   if (loading) {
     return <Spinner />
@@ -88,7 +85,11 @@ const SettingsBlocked = () => {
   }
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+    <InfiniteScroll
+      hasNextPage={pageInfo.hasNextPage}
+      loadMore={loadMore}
+      pullToRefresh={refetch}
+    >
       <List hasBorder={false}>
         {filteredUsers.map(({ node, cursor }, i) => (
           <List.Item key={cursor}>

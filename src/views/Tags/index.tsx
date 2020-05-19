@@ -16,7 +16,6 @@ import {
   TagDialog,
   TextIcon,
   Translate,
-  usePullToRefresh,
   ViewerContext,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
@@ -83,8 +82,6 @@ const Tags = () => {
     ALL_TAGS
   )
 
-  usePullToRefresh({ onPull: refetch })
-
   if (loading) {
     return <Spinner />
   }
@@ -120,7 +117,11 @@ const Tags = () => {
   }
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+    <InfiniteScroll
+      hasNextPage={pageInfo.hasNextPage}
+      loadMore={loadMore}
+      pullToRefresh={refetch}
+    >
       <List>
         {edges.map(
           ({ node, cursor }, i) =>

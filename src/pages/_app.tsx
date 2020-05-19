@@ -22,7 +22,6 @@ import { GlobalDialogs } from '~/components/GlobalDialogs'
 import { GlobalStyles } from '~/components/GlobalStyles'
 import { QueryError } from '~/components/GQL'
 import { ProgressBar } from '~/components/ProgressBar'
-import PullToRefresh from '~/components/PullToRefresh'
 import PushInitializer from '~/components/PushInitializer'
 import SplashScreen from '~/components/SplashScreen'
 
@@ -124,7 +123,6 @@ const MattersApp = ({
       <GlobalStyles />
       <SplashScreen />
       <ClientUpdater />
-      <PullToRefresh />
 
       <Root client={apollo}>
         <Component {...pageProps} />

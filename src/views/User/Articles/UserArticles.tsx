@@ -63,7 +63,8 @@ const UserArticles = () => {
   >(USER_ARTICLES, { variables: { userName } })
   const user = data?.user
 
-  usePullToRefresh({ onPull: refetch })
+  usePullToRefresh.Register()
+  usePullToRefresh.Handler(refetch)
 
   if (loading) {
     return <Spinner />

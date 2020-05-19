@@ -296,7 +296,7 @@ const LatestResponses = () => {
   }, [articleId])
 
   useEventListener(REFETCH_RESPONSES, refetch)
-  usePullToRefresh({ onPull: refetch })
+  usePullToRefresh.Handler(refetch)
 
   useEffect(() => {
     if (pageInfo && pageInfo.startCursor) {

@@ -64,7 +64,7 @@ const FeaturedComments = () => {
     (edges || []).map(({ node }) => node)
   ) as ArticleFeaturedComments_article_featuredComments_edges_node[]
 
-  usePullToRefresh({ onPull: refetch })
+  usePullToRefresh.Handler(refetch)
 
   if (loading && !data) {
     return <Spinner />
