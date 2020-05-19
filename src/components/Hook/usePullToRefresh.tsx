@@ -9,6 +9,18 @@ import { ReactComponent as IconPullToRefresh } from '@/public/static/icons/pull-
 
 import { useEventListener } from './useEventListener'
 
+/**
+ * Core of Pull to Refresh
+ *
+ * Usage:
+ *
+ * ```tsx
+ * usePullToRefresh.Register()
+ * usePullToRefresh.Handler(refetch)
+ * ```
+ *
+ */
+
 const PTR_START = 'startPullToRefresh'
 const PTR_END = 'endPullToRefresh'
 const PTR_TIMEOUT = 3000
@@ -25,7 +37,7 @@ const Register = (selector = 'body', timeout = PTR_TIMEOUT) => {
     PTR.init({
       mainElement: selector,
       triggerElement: selector,
-      distReload: 64,
+      distReload: 56,
       onRefresh: (cb: () => void) => {
         // start refresh
         window.dispatchEvent(new CustomEvent(PTR_START, {}))
@@ -76,17 +88,6 @@ const Handler = (onPull: () => any) => {
   })
 }
 
-/**
- * Pull to Refresh Core
- *
- * Usage:
- *
- * ```tsx
- * usePullToRefresh.Register()
- * usePullToRefresh.Handler(refetch)
- * ```
- *
- */
 export const usePullToRefresh = {
   Register,
   Handler,
