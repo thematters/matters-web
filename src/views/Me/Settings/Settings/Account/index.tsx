@@ -32,7 +32,6 @@ const AccountSettings = () => {
   const totalBlockCount = data?.viewer?.blockList?.totalCount
   const userNameEditable = viewer.info.userNameEditable
 
-  usePullToRefresh.Register()
   usePullToRefresh.Handler(refetch)
 
   return (

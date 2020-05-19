@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { Head, Layout, Spacer, Spinner, usePullToRefresh } from '~/components'
+import { Head, Layout, PullToRefresh, Spacer, Spinner } from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import ArticleSettings from './Article'
@@ -75,9 +75,6 @@ const NotificationSettings = () => {
   const settings = data?.viewer?.settings.notification
   const id = data?.viewer?.id
 
-  usePullToRefresh.Register()
-  usePullToRefresh.Handler(refetch)
-
   if (loading) {
     return <Spinner />
   }
@@ -110,13 +107,13 @@ const NotificationSettings = () => {
   }
 
   return (
-    <>
+    <PullToRefresh refresh={refetch}>
       <PreferenceSettings toggle={toggle} settings={settings} />
       <MeSettings toggle={toggle} settings={settings} />
       <ArticleSettings toggle={toggle} settings={settings} />
       <CommentSettings toggle={toggle} settings={settings} />
       <OtherSettings toggle={toggle} settings={settings} />
-    </>
+    </PullToRefresh>
   )
 }
 

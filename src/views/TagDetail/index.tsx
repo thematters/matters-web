@@ -8,6 +8,7 @@ import {
   EmptyTag,
   Head,
   Layout,
+  PullToRefresh,
   Spacer,
   Spinner,
   Tabs,
@@ -90,35 +91,37 @@ const TagDetail = ({ data }: { data: TagDetailType }) => {
 
       <Head title={`#${data.node.content}`} />
 
-      <Spacer />
+      <PullToRefresh>
+        <Spacer />
 
-      {data.node.description && (
-        <p className="description">{data.node.description}</p>
-      )}
-
-      <Tabs>
-        {hasSelected > 0 && (
-          <Tabs.Tab
-            selected={feed === 'selected'}
-            onClick={() => setFeed('selected')}
-          >
-            <Translate id="featured" />
-          </Tabs.Tab>
+        {data.node.description && (
+          <p className="description">{data.node.description}</p>
         )}
 
-        <Tabs.Tab
-          selected={feed === 'latest'}
-          onClick={() => setFeed('latest')}
-        >
-          <Translate id="latest" />
-        </Tabs.Tab>
-      </Tabs>
+        <Tabs>
+          {hasSelected > 0 && (
+            <Tabs.Tab
+              selected={feed === 'selected'}
+              onClick={() => setFeed('selected')}
+            >
+              <Translate id="featured" />
+            </Tabs.Tab>
+          )}
 
-      {feed === 'selected' ? (
-        <TagDetailArticles.Selected id={data.node.id} />
-      ) : (
-        <TagDetailArticles.Latest id={data.node.id} />
-      )}
+          <Tabs.Tab
+            selected={feed === 'latest'}
+            onClick={() => setFeed('latest')}
+          >
+            <Translate id="latest" />
+          </Tabs.Tab>
+        </Tabs>
+
+        {feed === 'selected' ? (
+          <TagDetailArticles.Selected id={data.node.id} />
+        ) : (
+          <TagDetailArticles.Latest id={data.node.id} />
+        )}
+      </PullToRefresh>
 
       <style jsx>{styles}</style>
     </Layout.Main>

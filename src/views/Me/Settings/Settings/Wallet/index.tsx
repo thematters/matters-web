@@ -42,7 +42,6 @@ const WalletSettings = () => {
   const USDPrice = numRound(LIKE?.rateUSD * LIKE?.total)
   const equalSign = LIKE?.total > 0 ? '≈' : '='
 
-  usePullToRefresh.Register()
   usePullToRefresh.Handler(refetch)
 
   return (

@@ -9,6 +9,7 @@ import {
   List,
   Spinner,
   useEventListener,
+  usePullToRefresh,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 import TAG_ARTICLES from '~/components/GQL/queries/tagArticles'
@@ -87,6 +88,7 @@ const SelectedArticles = ({ id }: { id: string }) => {
   }
 
   useEventListener(REFETCH_TAG_DETAIL_ARTICLES, sync)
+  usePullToRefresh.Handler(refetch)
 
   if (loading && (!articles || isNewLoading)) {
     return <Spinner />
@@ -105,11 +107,7 @@ const SelectedArticles = ({ id }: { id: string }) => {
   }
 
   return (
-    <InfiniteScroll
-      hasNextPage={pageInfo.hasNextPage}
-      loadMore={loadMore}
-      pullToRefresh={refetch}
-    >
+    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
       <List>
         {(edges || []).map(({ node, cursor }, i) => (
           <List.Item key={cursor}>

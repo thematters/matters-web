@@ -7,6 +7,7 @@ import {
   List,
   Spinner,
   Translate,
+  usePullToRefresh,
   UserDigest,
 } from '~/components'
 
@@ -49,6 +50,8 @@ const SearchUser = () => {
     }
   )
 
+  usePullToRefresh.Handler(refetch)
+
   if (loading) {
     return <Spinner />
   }
@@ -80,11 +83,7 @@ const SearchUser = () => {
   }
 
   return (
-    <InfiniteScroll
-      hasNextPage={pageInfo.hasNextPage}
-      loadMore={loadMore}
-      pullToRefresh={refetch}
-    >
+    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
       <List hasBorder={false}>
         {edges.map(
           ({ node, cursor }, i) =>

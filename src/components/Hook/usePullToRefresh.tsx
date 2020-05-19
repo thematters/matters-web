@@ -64,7 +64,7 @@ const Register = (selector = 'body', timeout = PTR_TIMEOUT) => {
 }
 
 /**
- * React Hook to handling `PTR_START` event from `usePullToRefresh.Register`
+ * React Hook to handle `PTR_START` event from `usePullToRefresh.Register`
  */
 const Handler = (onPull: () => any) => {
   useEventListener(PTR_START, async () => {
@@ -76,6 +76,17 @@ const Handler = (onPull: () => any) => {
   })
 }
 
+/**
+ * Pull to Refresh Core
+ *
+ * Usage:
+ *
+ * ```tsx
+ * usePullToRefresh.Register()
+ * usePullToRefresh.Handler(refetch)
+ * ```
+ *
+ */
 export const usePullToRefresh = {
   Register,
   Handler,

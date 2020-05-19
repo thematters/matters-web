@@ -9,6 +9,7 @@ import {
   List,
   Spinner,
   Translate,
+  usePullToRefresh,
 } from '~/components'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
@@ -51,6 +52,8 @@ const SearchArticles = () => {
   })
   const isNewLoading = networkStatus === NetworkStatus.setVariables
 
+  usePullToRefresh.Handler(refetch)
+
   if (loading && (!data?.search || isNewLoading)) {
     return <Spinner />
   }
@@ -82,11 +85,7 @@ const SearchArticles = () => {
   }
 
   return (
-    <InfiniteScroll
-      hasNextPage={pageInfo.hasNextPage}
-      loadMore={loadMore}
-      pullToRefresh={refetch}
-    >
+    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
       <List>
         {edges.map(
           ({ node, cursor }, i) =>
