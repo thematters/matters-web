@@ -18,7 +18,7 @@
     "target": "esnext",
     "baseUrl": "./",
     "paths": {
-      "@/*": ["./*"],
+      "@/public/static/*": ["./public/static/*"],
       "~/*": ["./src/*"]
     },
     "forceConsistentCasingInFileNames": true,
