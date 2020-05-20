@@ -115,7 +115,7 @@
     "@types/validator": "^13.0.0",
     "@types/xxhashjs": "^0.2.2",
     "@zeit/next-bundle-analyzer": "^0.1.2",
-    "apollo": "^2.27.4",
+    "apollo": "^2.28.0",
     "babel-jest": "^26.0.1",
     "babel-plugin-dynamic-import-node": "^2.3.3",
     "babel-polyfill": "^6.26.0",
