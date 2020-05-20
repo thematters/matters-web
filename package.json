@@ -119,7 +119,7 @@
     "babel-jest": "^26.0.1",
     "babel-plugin-dynamic-import-node": "^2.3.3",
     "babel-polyfill": "^6.26.0",
-    "chromedriver": "^81.0.0",
+    "chromedriver": "^83.0.0",
     "cucumber": "^6.0.5",
     "cucumber-pretty": "^6.0.0",
     "file-loader": "^6.0.0",
