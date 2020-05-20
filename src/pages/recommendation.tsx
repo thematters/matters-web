@@ -41,7 +41,7 @@ const query = gql`
 `
 
 const Feed = () => {
-  const { data, error, loading, fetchMore, networkStatus } = useQuery<
+  const { data, error, loading, fetchMore, networkStatus, refetch } = useQuery<
     RecommendationArticles
   >(query, {
     notifyOnNetworkStatusChange: true,
@@ -81,6 +81,7 @@ const Feed = () => {
             }),
         })
       }
+      pullToRefresh={refetch}
     >
       <ul>
         {edges.map(({ node, cursor }, i) => (

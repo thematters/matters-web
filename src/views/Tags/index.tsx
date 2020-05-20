@@ -78,7 +78,9 @@ const CreateTagButton = () => {
 }
 
 const Tags = () => {
-  const { data, loading, error, fetchMore } = useQuery<AllTags>(ALL_TAGS)
+  const { data, loading, error, fetchMore, refetch } = useQuery<AllTags>(
+    ALL_TAGS
+  )
 
   if (loading) {
     return <Spinner />
@@ -115,7 +117,11 @@ const Tags = () => {
   }
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+    <InfiniteScroll
+      hasNextPage={pageInfo.hasNextPage}
+      loadMore={loadMore}
+      pullToRefresh={refetch}
+    >
       <List>
         {edges.map(
           ({ node, cursor }, i) =>

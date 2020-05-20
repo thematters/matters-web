@@ -9,6 +9,7 @@ import {
   List,
   Spinner,
   Translate,
+  usePullToRefresh,
 } from '~/components'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
@@ -43,14 +44,15 @@ const SearchArticles = () => {
   const router = useRouter()
   const q = getQuery({ router, key: 'q' })
 
-  const { data, loading, fetchMore, networkStatus } = useQuery<SeachArticles>(
-    SEARCH_ARTICLES,
-    {
-      variables: { key: q, first: 10 },
-      notifyOnNetworkStatusChange: true,
-    }
-  )
+  const { data, loading, fetchMore, networkStatus, refetch } = useQuery<
+    SeachArticles
+  >(SEARCH_ARTICLES, {
+    variables: { key: q, first: 10 },
+    notifyOnNetworkStatusChange: true,
+  })
   const isNewLoading = networkStatus === NetworkStatus.setVariables
+
+  usePullToRefresh.Handler(refetch)
 
   if (loading && (!data?.search || isNewLoading)) {
     return <Spinner />

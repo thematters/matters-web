@@ -15,6 +15,7 @@ import {
   Head,
   Icon,
   Layout,
+  PullToRefresh,
   Spinner,
   Throw404,
   Title,
@@ -190,60 +191,66 @@ const ArticleDetail = () => {
         image={article.cover}
       />
 
-      <State article={article} />
+      <PullToRefresh>
+        <State article={article} />
 
-      <section className="content">
-        <TagList article={article} />
+        <section className="content">
+          <TagList article={article} />
 
-        <section className="title">
-          <Title type="article">{article.title}</Title>
+          <section className="title">
+            <Title type="article">{article.title}</Title>
 
-          <section className="info">
-            <section className="left">
-              <DateTime date={article.createdAt} color="grey" />
+            <section className="info">
+              <section className="left">
+                <DateTime date={article.createdAt} color="grey" />
 
-              <FingerprintButton article={article} />
+                <FingerprintButton article={article} />
+              </section>
+
+              <section className="right">
+                {article.live && <Icon.Live />}
+              </section>
             </section>
-
-            <section className="right">{article.live && <Icon.Live />}</section>
           </section>
+
+          <Content article={article} />
+
+          {features.payment && <Donation mediaHash={mediaHash} />}
+
+          {(collectionCount > 0 || isAuthor) && (
+            <section className="block">
+              <Collection article={article} collectionCount={collectionCount} />
+            </section>
+          )}
+
+          <Waypoint
+            onPositionChange={({ currentPosition }) => {
+              if (shouldShowWall) {
+                setFixedWall(currentPosition === 'inside')
+              }
+            }}
+          />
+
+          {!shouldShowWall && (
+            <section className="block">
+              <DynamicResponse />
+            </section>
+          )}
+
+          {!isLargeUp && !shouldShowWall && (
+            <RelatedArticles article={article} />
+          )}
         </section>
 
-        <Content article={article} />
+        <Toolbar mediaHash={mediaHash} />
 
-        {features.payment && <Donation mediaHash={mediaHash} />}
-
-        {(collectionCount > 0 || isAuthor) && (
-          <section className="block">
-            <Collection article={article} collectionCount={collectionCount} />
-          </section>
+        {shouldShowWall && (
+          <>
+            <section id="comments" />
+            <Wall show={fixedWall} />
+          </>
         )}
-
-        <Waypoint
-          onPositionChange={({ currentPosition }) => {
-            if (shouldShowWall) {
-              setFixedWall(currentPosition === 'inside')
-            }
-          }}
-        />
-
-        {!shouldShowWall && (
-          <section className="block">
-            <DynamicResponse />
-          </section>
-        )}
-
-        {!isLargeUp && !shouldShowWall && <RelatedArticles article={article} />}
-      </section>
-
-      <Toolbar mediaHash={mediaHash} />
-
-      {shouldShowWall && (
-        <>
-          <section id="comments" />
-          <Wall show={fixedWall} />
-        </>
-      )}
+      </PullToRefresh>
 
       <style jsx>{styles}</style>
     </Layout.Main>

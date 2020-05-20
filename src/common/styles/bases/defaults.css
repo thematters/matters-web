@@ -20,6 +20,11 @@ html {
   text-rendering: optimizeSpeed;
 }
 
+body {
+  /* disable pull-to-refresh & scroll bouncing */
+  overscroll-behavior-y: none;
+}
+
 *:not(body) {
   background-repeat: no-repeat;
   background-position: 50%;

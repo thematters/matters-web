@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { DonationDialog, LikeCoinDialog } from '~/components'
+import { DonationDialog, LikeCoinDialog, usePullToRefresh } from '~/components'
 
 import DonationButton from './DonationButton'
 import Donators from './Donators'
@@ -26,9 +26,14 @@ const ARTICLE_DONATION = gql`
 `
 
 const BaseDonation = ({ mediaHash }: DonationProps) => {
-  const { data, loading } = useQuery<ArticleDonation>(ARTICLE_DONATION, {
-    variables: { mediaHash },
-  })
+  const { data, loading, refetch } = useQuery<ArticleDonation>(
+    ARTICLE_DONATION,
+    {
+      variables: { mediaHash },
+    }
+  )
+
+  usePullToRefresh.Handler(refetch)
 
   if (loading || !data || !data.article) {
     return null

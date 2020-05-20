@@ -43,7 +43,9 @@ const ALL_AUTHORSS = gql`
 `
 
 const Authors = () => {
-  const { data, loading, error, fetchMore } = useQuery<AllAuthors>(ALL_AUTHORSS)
+  const { data, loading, error, fetchMore, refetch } = useQuery<AllAuthors>(
+    ALL_AUTHORSS
+  )
 
   if (loading) {
     return <Spinner />
@@ -84,7 +86,11 @@ const Authors = () => {
   }
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+    <InfiniteScroll
+      hasNextPage={pageInfo.hasNextPage}
+      loadMore={loadMore}
+      pullToRefresh={refetch}
+    >
       <List hasBorder={false}>
         {edges.map(({ node, cursor }, i) => (
           <List.Item key={cursor}>

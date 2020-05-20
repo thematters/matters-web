@@ -1,4 +1,4 @@
-import { Head, Layout, Spacer } from '~/components'
+import { Head, Layout, PullToRefresh, Spacer } from '~/components'
 
 import AccountSettings from './Account'
 import UISettings from './UI'
@@ -13,9 +13,12 @@ const Settings = () => {
       />
       <Head title={{ id: 'settings' }} />
 
-      <UISettings />
-      <AccountSettings />
-      <WalletSettings />
+      <PullToRefresh>
+        <UISettings />
+        <AccountSettings />
+        <WalletSettings />
+      </PullToRefresh>
+
       <Spacer size="xxxloose" />
     </Layout.Main>
   )

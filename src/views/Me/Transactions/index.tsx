@@ -41,7 +41,9 @@ const ME_TRANSACTIONS = gql`
 `
 
 const Transactions = () => {
-  const { data, loading, fetchMore } = useQuery<MeTransactions>(ME_TRANSACTIONS)
+  const { data, loading, fetchMore, refetch } = useQuery<MeTransactions>(
+    ME_TRANSACTIONS
+  )
 
   if (loading) {
     return <Spinner />
@@ -77,7 +79,11 @@ const Transactions = () => {
   }
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+    <InfiniteScroll
+      hasNextPage={pageInfo.hasNextPage}
+      loadMore={loadMore}
+      pullToRefresh={refetch}
+    >
       <List>
         {edges.map(({ node, cursor }) => (
           <List.Item key={cursor}>

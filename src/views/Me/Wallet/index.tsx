@@ -1,4 +1,11 @@
-import { Form, Head, Layout, Spacer, Translate } from '~/components'
+import {
+  Form,
+  Head,
+  Layout,
+  PullToRefresh,
+  Spacer,
+  Translate,
+} from '~/components'
 
 import { PATHS } from '~/common/enums'
 
@@ -15,18 +22,20 @@ const Wallet = () => {
 
       <Head title={{ id: 'myWallet' }} />
 
-      <Spacer size="xxloose" />
+      <PullToRefresh>
+        <Spacer size="xxloose" />
 
-      <Balance />
+        <Balance />
 
-      <Buttons />
+        <Buttons />
 
-      <Form.List>
-        <Form.List.Item
-          title={<Translate id="paymentTransactions" />}
-          href={PATHS.ME_WALLET_TRANSACTIONS}
-        />
-      </Form.List>
+        <Form.List>
+          <Form.List.Item
+            title={<Translate id="paymentTransactions" />}
+            href={PATHS.ME_WALLET_TRANSACTIONS}
+          />
+        </Form.List>
+      </PullToRefresh>
     </Layout.Main>
   )
 }

@@ -9,6 +9,7 @@ import {
   Spinner,
   Tag,
   Translate,
+  usePullToRefresh,
 } from '~/components'
 
 import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
@@ -43,9 +44,14 @@ const SearchTag = () => {
   const router = useRouter()
   const q = getQuery({ router, key: 'q' })
 
-  const { data, loading, fetchMore } = useQuery<SeachTags>(SEARCH_TAGS, {
-    variables: { key: q },
-  })
+  const { data, loading, fetchMore, refetch } = useQuery<SeachTags>(
+    SEARCH_TAGS,
+    {
+      variables: { key: q },
+    }
+  )
+
+  usePullToRefresh.Handler(refetch)
 
   if (loading) {
     return <Spinner />

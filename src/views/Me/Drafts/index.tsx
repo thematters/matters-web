@@ -40,7 +40,7 @@ const ME_DRAFTS_FEED = gql`
 `
 
 const MeDrafts = () => {
-  const { data, loading, error, fetchMore } = useQuery<MeDraftFeed>(
+  const { data, loading, error, fetchMore, refetch } = useQuery<MeDraftFeed>(
     ME_DRAFTS_FEED
   )
 
@@ -73,7 +73,11 @@ const MeDrafts = () => {
     })
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+    <InfiniteScroll
+      hasNextPage={pageInfo.hasNextPage}
+      loadMore={loadMore}
+      pullToRefresh={refetch}
+    >
       <List>
         {edges.map(({ node, cursor }) => (
           <List.Item key={cursor}>

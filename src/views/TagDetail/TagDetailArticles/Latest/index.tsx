@@ -9,6 +9,7 @@ import {
   List,
   Spinner,
   useEventListener,
+  usePullToRefresh,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 import TAG_ARTICLES from '~/components/GQL/queries/tagArticles'
@@ -88,6 +89,7 @@ const LatestArticles = ({ id }: { id: string }) => {
   }
 
   useEventListener(REFETCH_TAG_DETAIL_ARTICLES, sync)
+  usePullToRefresh.Handler(refetch)
 
   if (loading && (!articles || isNewLoading)) {
     return <Spinner />

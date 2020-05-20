@@ -1,0 +1,49 @@
+/* @styled-jsx=global */
+
+/* https://github.com/BoxFactura/pulltorefresh.js/blob/master/src/lib/styles.js */
+
+.ptr--ptr {
+  display: flex;
+  align-items: flex-end;
+  align-content: stretch;
+
+  top: 0;
+  width: 100%;
+  height: 0;
+
+  transition: height 0.3s, min-height 0.3s;
+  text-align: center;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.ptr--box {
+  padding: var(--spacing-base);
+  flex-basis: 100%;
+}
+
+.ptr--pull {
+  transition: none;
+}
+
+.ptr--text {
+  font-size: 0;
+  visibility: hidden;
+}
+
+.ptr--icon {
+  color: var(--color-grey-light);
+  font-size: 0;
+  transition: transform 0.3s;
+}
+
+/*
+When at the top of the page, disable vertical overscroll so passive touch
+listeners can take over.
+*/
+.ptr--top {
+  touch-action: pan-x pan-down pinch-zoom;
+}
+.ptr--release .ptr--icon {
+  transform: rotate(180deg);
+}

@@ -9,6 +9,7 @@ import {
   List,
   Spinner,
   Translate,
+  usePullToRefresh,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 import { UserDigest } from '~/components/UserDigest'
@@ -44,12 +45,14 @@ const USER_FOLLOWEES_FEED = gql`
 const UserFollowees = () => {
   const router = useRouter()
   const userName = getQuery({ router, key: 'userName' })
-  const { data, loading, error, fetchMore } = useQuery<UserFolloweeFeed>(
-    USER_FOLLOWEES_FEED,
-    {
-      variables: { userName },
-    }
-  )
+  const { data, loading, error, fetchMore, refetch } = useQuery<
+    UserFolloweeFeed
+  >(USER_FOLLOWEES_FEED, {
+    variables: { userName },
+  })
+
+  usePullToRefresh.Register()
+  usePullToRefresh.Handler(refetch)
 
   if (loading || !data || !data.user) {
     return <Spinner />

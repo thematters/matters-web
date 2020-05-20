@@ -44,7 +44,7 @@ const ME_HISTORY_FEED = gql`
 `
 
 const MeHistory = () => {
-  const { data, loading, error, fetchMore } = useQuery<MeHistoryFeed>(
+  const { data, loading, error, fetchMore, refetch } = useQuery<MeHistoryFeed>(
     ME_HISTORY_FEED
   )
 
@@ -82,7 +82,11 @@ const MeHistory = () => {
   }
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+    <InfiniteScroll
+      hasNextPage={pageInfo.hasNextPage}
+      loadMore={loadMore}
+      pullToRefresh={refetch}
+    >
       <List>
         {edges.map(({ node, cursor }, i) => (
           <List.Item key={cursor}>

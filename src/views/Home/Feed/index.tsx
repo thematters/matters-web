@@ -128,6 +128,7 @@ const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortByType }) => {
     loading,
     fetchMore: fetchMoreMainFeed,
     networkStatus,
+    refetch,
   } = useQuery<HottestFeed | NewestFeed>(queries[sortBy], {
     notifyOnNetworkStatusChange: true,
   })
@@ -202,7 +203,11 @@ const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortByType }) => {
   }
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+    <InfiniteScroll
+      hasNextPage={pageInfo.hasNextPage}
+      loadMore={loadMore}
+      pullToRefresh={refetch}
+    >
       <List>
         {mixFeed.map((edge, i) => {
           if (edge.__typename === 'HorizontalFeed') {

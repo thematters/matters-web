@@ -72,9 +72,9 @@ const QUERIES = {
 }
 
 const Feed = ({ type = 'topic' }: ArticleFeedProp) => {
-  const { data, loading, error, fetchMore } = useQuery<AllTopics | AllIcymis>(
-    QUERIES[type]
-  )
+  const { data, loading, error, fetchMore, refetch } = useQuery<
+    AllTopics | AllIcymis
+  >(QUERIES[type])
 
   if (loading) {
     return <Spinner />
@@ -110,7 +110,11 @@ const Feed = ({ type = 'topic' }: ArticleFeedProp) => {
   }
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+    <InfiniteScroll
+      hasNextPage={pageInfo.hasNextPage}
+      loadMore={loadMore}
+      pullToRefresh={refetch}
+    >
       <List>
         {edges.map(({ node, cursor }, i) => (
           <List.Item key={cursor}>

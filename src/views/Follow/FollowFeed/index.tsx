@@ -50,7 +50,7 @@ const FOLLOW_FEED = gql`
 `
 
 const FollowFeed = () => {
-  const { data, loading, error, fetchMore } = useQuery<FollowFeedType>(
+  const { data, loading, error, fetchMore, refetch } = useQuery<FollowFeedType>(
     FOLLOW_FEED
   )
 
@@ -88,7 +88,11 @@ const FollowFeed = () => {
   }
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+    <InfiniteScroll
+      hasNextPage={pageInfo.hasNextPage}
+      loadMore={loadMore}
+      pullToRefresh={refetch}
+    >
       <List>
         {edges.map(({ node, cursor }, i) => (
           <List.Item key={cursor}>
