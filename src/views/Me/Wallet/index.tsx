@@ -49,7 +49,7 @@ const Wallet = () => {
       <PullToRefresh refresh={refetch}>
         <Spacer size="xxloose" />
 
-        <Balance balanceHKD={balanceHKD} />
+        <Balance balanceHKD={balanceHKD} canPayout={canPayout} />
 
         <Buttons canPayout={canPayout} />
 

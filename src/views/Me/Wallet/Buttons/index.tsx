@@ -27,7 +27,7 @@ const Buttons: React.FC<ButtonsProps> = ({ canPayout }) => {
           </AddCreditDialog>
 
           <section className="sub">
-            <PayoutButton disabled={canPayout} />
+            <PayoutButton disabled={!canPayout} />
             {hasPaymentPassword && <PaymentPasswordButton />}
           </section>
         </section>

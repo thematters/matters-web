@@ -1,14 +1,15 @@
 import { CurrencyAmount, Translate } from '~/components'
 
-import { PAYMENT_CURRENCY } from '~/common/enums'
+import { MINIMAL_PAYOUT_AMOUNT, PAYMENT_CURRENCY } from '~/common/enums'
 
 import styles from './styles.css'
 
 interface BalanceProps {
   balanceHKD: number
+  canPayout: boolean
 }
 
-const Balance: React.FC<BalanceProps> = ({ balanceHKD }) => {
+const Balance: React.FC<BalanceProps> = ({ balanceHKD, canPayout }) => {
   return (
     <section className="balance">
       <p className="hint">
@@ -16,6 +17,17 @@ const Balance: React.FC<BalanceProps> = ({ balanceHKD }) => {
       </p>
 
       <CurrencyAmount currency={PAYMENT_CURRENCY.HKD} amount={balanceHKD} />
+
+      {!canPayout && (
+        <p className="payout-hint">
+          <span>
+            <Translate
+              zh_hant={`餘額超過 ${MINIMAL_PAYOUT_AMOUNT.HKD} HKD 就可以提現啦！`}
+              zh_hans={`余额超过 ${MINIMAL_PAYOUT_AMOUNT.HKD} HKD 就可以提现啦！`}
+            />
+          </span>
+        </p>
+      )}
 
       <style jsx>{styles}</style>
     </section>
