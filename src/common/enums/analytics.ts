@@ -23,7 +23,7 @@ interface ShareProp {
     | 'facebook'
     | 'weibo'
     | 'douban'
-    | 'root'
+    | 'copy-url'
 }
 
 interface PurchaseProp {
