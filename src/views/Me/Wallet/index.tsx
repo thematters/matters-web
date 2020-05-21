@@ -11,7 +11,7 @@ import {
 } from '~/components'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
 
-import { PAYMENT_MINIMAL_PAYOUT_AMOUNT, PATHS } from '~/common/enums'
+import { PATHS, PAYMENT_MINIMAL_PAYOUT_AMOUNT } from '~/common/enums'
 
 import Balance from './Balance'
 import Buttons from './Buttons'

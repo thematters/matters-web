@@ -1,6 +1,6 @@
 import { CurrencyAmount, Translate } from '~/components'
 
-import { PAYMENT_MINIMAL_PAYOUT_AMOUNT, PAYMENT_CURRENCY } from '~/common/enums'
+import { PAYMENT_CURRENCY, PAYMENT_MINIMAL_PAYOUT_AMOUNT } from '~/common/enums'
 
 import styles from './styles.css'
 

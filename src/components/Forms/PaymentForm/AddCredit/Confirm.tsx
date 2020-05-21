@@ -7,9 +7,9 @@ import { Dialog, Form, LanguageContext, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import {
+  PAYMENT_CURRENCY,
   PAYMENT_MAXIMUM_CHARGE_AMOUNT,
   PAYMENT_MINIMAL_CHARGE_AMOUNT,
-  PAYMENT_CURRENCY,
   PLATFORM_FEE,
 } from '~/common/enums'
 import {

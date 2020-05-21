@@ -14,9 +14,9 @@ import { useMutation } from '~/components/GQL'
 import PAY_TO from '~/components/GQL/mutations/payTo'
 
 import {
-  PAYMENT_MAXIMUM_PAYTO_AMOUNT,
   OPEN_LIKE_COIN_DIALOG,
   PAYMENT_CURRENCY as CURRENCY,
+  PAYMENT_MAXIMUM_PAYTO_AMOUNT,
 } from '~/common/enums'
 import {
   translate,

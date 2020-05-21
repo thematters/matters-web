@@ -1,4 +1,4 @@
-import { PAYMENT_MINIMAL_CHARGE_AMOUNT, PAYMENT_CURRENCY } from '~/common/enums'
+import { PAYMENT_CURRENCY, PAYMENT_MINIMAL_CHARGE_AMOUNT } from '~/common/enums'
 import {
   isValidDisplayName,
   isValidEmail,
