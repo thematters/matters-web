@@ -8,9 +8,10 @@ import styles from './styles.css'
 
 interface ButtonsProps {
   canPayout: boolean
+  hasStripeAccount: boolean
 }
 
-const Buttons: React.FC<ButtonsProps> = ({ canPayout }) => {
+const Buttons: React.FC<ButtonsProps> = ({ canPayout, hasStripeAccount }) => {
   const viewer = useContext(ViewerContext)
   const hasPaymentPassword = viewer.status?.hasPaymentPassword
 
@@ -27,7 +28,10 @@ const Buttons: React.FC<ButtonsProps> = ({ canPayout }) => {
           </AddCreditDialog>
 
           <section className="sub">
-            <PayoutButton disabled={!canPayout} />
+            <PayoutButton
+              disabled={!canPayout}
+              hasStripeAccount={hasStripeAccount}
+            />
             {hasPaymentPassword && <PaymentPasswordButton />}
           </section>
         </section>

@@ -23,7 +23,7 @@ const Wallet = () => {
   const { data, loading, refetch } = useQuery<WalletBalance>(WALLET_BALANCE)
   const balanceHKD = data?.viewer?.wallet.balance.HKD || 0
   const canPayout = balanceHKD >= MINIMAL_PAYOUT_AMOUNT.HKD
-  const hasStripeAccount = data?.viewer?.wallet.stripeAccount?.id
+  const hasStripeAccount = !!data?.viewer?.wallet.stripeAccount?.id
 
   if (loading) {
     return (
@@ -51,7 +51,7 @@ const Wallet = () => {
 
         <Balance balanceHKD={balanceHKD} canPayout={canPayout} />
 
-        <Buttons canPayout={canPayout} />
+        <Buttons canPayout={canPayout} hasStripeAccount={hasStripeAccount} />
 
         <Form.List>
           <Form.List.Item
