@@ -13,7 +13,6 @@ export const ANALYTICS_EVENTS = {
   PURCHASE: 'purchase',
   EXCEPTION: 'exception',
 
-  // old events
   CLICK_WRITE_BUTTON: 'click-write-button',
   CLICK_ENTER_AFTER_SIGNUP: 'click-enter-after-signup',
   CLICK_PUBLISH_BUTTON: 'click-publish-button',
@@ -27,7 +26,6 @@ export const ANALYTICS_EVENTS = {
   COMMENT_EDITOR_CHANGE: 'comment-editor-change',
   ARTICLE_BOTTOM_CROSS: 'article-bottom-cross',
   PUBLISH_ERROR: 'publish-error',
-  LOAD_MORE: 'load-more',
   PULL_TO_REFRESH: 'pull-to-refresh',
   DISPLAY_ALL: 'display-all',
   SHUFFLE_AUTHOR: 'shuffle-author',
@@ -54,25 +52,67 @@ export const ANALYTICS_EVENTS = {
   LIKECOIN_STEP_RETRY: 'likecoin-step-retry',
 }
 
-export interface ArticleFeedProp {
-  elementType: 'article'
-  feedType: ArticleFeedType
-  digestType: 'ArticleDigestType'
-  feedLocation: number
-}
-export interface UserFeedProp {
-  elementType: 'user'
-  feedType: UserFeedType
-  digestType: 'UserDigestType'
-  feedLocation: number
+export type AnalyticEvent =
+  | 'click-feed'
+  | 'click-button'
+  | 'load-more'
+  | 'share'
+  | 'purchase'
+
+export type EventProp =
+  | ClickButtonProp
+  | ClickFeedProp
+  | LoadMoreProp
+  | PurchaseProp
+  | ShareProp
+
+interface ShareProp {
+  type:
+    | 'line'
+    | 'whatsapp'
+    | 'telegram'
+    | 'wechat'
+    | 'twitter'
+    | 'email'
+    | 'facebook'
+    | 'weibo'
+    | 'douban'
+    | 'root'
 }
 
-export type ArticleFeedType =
+interface PurchaseProp {
+  amount: number
+}
+
+interface LoadMoreProp {
+  type: ArticleFeedType | UserFeedType
+}
+interface ClickButtonProp {
+  type:
+    | 'write'
+    | 'write_collection'
+    | 'donate'
+    | 'add_value'
+    | 'share_article'
+    | 'share_user'
+    | 'signup'
+}
+
+type ClickFeedProp = ArticleFeedProp | UserFeedProp
+
+interface ArticleFeedProp {
+  type: ArticleFeedType
+
+  contentType: 'article'
+  styleType: 'card' | 'large-cover' | 'small-cover' | 'no-cover' | 'title'
+  location: number
+}
+
+type ArticleFeedType =
   | 'all-authors'
   | 'all-icymi'
   | 'all-tags'
   | 'all-topics'
-  | 'author'
   | 'authors'
   | 'collection'
   | 'follow'
@@ -86,13 +126,18 @@ export type ArticleFeedType =
   | 'topics'
   | 'user-article'
   | 'wallet'
+interface UserFeedProp {
+  type: UserFeedType
+  contentType: 'user'
+  styleType: 'subtitle' | 'card'
+  location: number
+}
 
-export type UserFeedType =
+type UserFeedType =
   | 'all-authors'
   | 'all-icymi'
   | 'all-topics'
   | 'appreciator'
-  | 'author'
   | 'authors'
   | 'collection'
   | 'follow'
