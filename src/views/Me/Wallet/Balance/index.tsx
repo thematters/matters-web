@@ -1,6 +1,6 @@
 import { CurrencyAmount, Translate } from '~/components'
 
-import { MINIMAL_PAYOUT_AMOUNT, PAYMENT_CURRENCY } from '~/common/enums'
+import { PAYMENT_MINIMAL_PAYOUT_AMOUNT, PAYMENT_CURRENCY } from '~/common/enums'
 
 import styles from './styles.css'
 
@@ -22,8 +22,8 @@ const Balance: React.FC<BalanceProps> = ({ balanceHKD, canPayout }) => {
         <p className="payout-hint">
           <span>
             <Translate
-              zh_hant={`餘額超過 ${MINIMAL_PAYOUT_AMOUNT.HKD} HKD 就可以提現啦！`}
-              zh_hans={`余额超过 ${MINIMAL_PAYOUT_AMOUNT.HKD} HKD 就可以提现啦！`}
+              zh_hant={`餘額超過 ${PAYMENT_MINIMAL_PAYOUT_AMOUNT.HKD} HKD 就可以提現啦！`}
+              zh_hans={`余额超过 ${PAYMENT_MINIMAL_PAYOUT_AMOUNT.HKD} HKD 就可以提现啦！`}
             />
           </span>
         </p>

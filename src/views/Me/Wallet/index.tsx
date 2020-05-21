@@ -11,7 +11,7 @@ import {
 } from '~/components'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
 
-import { MINIMAL_PAYOUT_AMOUNT, PATHS } from '~/common/enums'
+import { PAYMENT_MINIMAL_PAYOUT_AMOUNT, PATHS } from '~/common/enums'
 
 import Balance from './Balance'
 import Buttons from './Buttons'
@@ -22,7 +22,7 @@ import { WalletBalance } from '~/components/GQL/queries/__generated__/WalletBala
 const Wallet = () => {
   const { data, loading, refetch } = useQuery<WalletBalance>(WALLET_BALANCE)
   const balanceHKD = data?.viewer?.wallet.balance.HKD || 0
-  const canPayout = balanceHKD >= MINIMAL_PAYOUT_AMOUNT.HKD
+  const canPayout = balanceHKD >= PAYMENT_MINIMAL_PAYOUT_AMOUNT.HKD
   const hasStripeAccount = !!data?.viewer?.wallet.stripeAccount?.id
 
   if (loading) {

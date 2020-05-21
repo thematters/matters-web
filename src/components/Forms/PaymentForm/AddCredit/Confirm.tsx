@@ -7,8 +7,8 @@ import { Dialog, Form, LanguageContext, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import {
-  MAXIMUM_CHARGE_AMOUNT,
-  MINIMAL_CHARGE_AMOUNT,
+  PAYMENT_MAXIMUM_CHARGE_AMOUNT,
+  PAYMENT_MINIMAL_CHARGE_AMOUNT,
   PAYMENT_CURRENCY,
   PLATFORM_FEE,
 } from '~/common/enums'
@@ -74,7 +74,7 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, defaultAmount }) => {
     isSubmitting,
   } = useFormik<FormValues>({
     initialValues: {
-      amount: defaultAmount || MINIMAL_CHARGE_AMOUNT[currency],
+      amount: defaultAmount || PAYMENT_MINIMAL_CHARGE_AMOUNT[currency],
     },
     validate: ({ amount }) =>
       _pickBy({
@@ -110,7 +110,7 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, defaultAmount }) => {
         label={<Translate zh_hant="輸入金額" zh_hans="输入金额" />}
         name="amount"
         min={0}
-        max={MAXIMUM_CHARGE_AMOUNT[currency]}
+        max={PAYMENT_MAXIMUM_CHARGE_AMOUNT[currency]}
         step="1"
         ref={inputRef}
         required
@@ -121,7 +121,7 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, defaultAmount }) => {
           const amount = e.target.valueAsNumber || 0
           const sanitizedAmount = Math.min(
             Math.floor(amount),
-            MAXIMUM_CHARGE_AMOUNT[currency]
+            PAYMENT_MAXIMUM_CHARGE_AMOUNT[currency]
           )
 
           /// remove extra left pad 0

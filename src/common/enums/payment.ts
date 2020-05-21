@@ -1,16 +1,16 @@
-export const MINIMAL_CHARGE_AMOUNT = {
+export const PAYMENT_MINIMAL_CHARGE_AMOUNT = {
   HKD: 20,
 }
 
-export const MAXIMUM_CHARGE_AMOUNT = {
+export const PAYMENT_MAXIMUM_CHARGE_AMOUNT = {
   HKD: 99999,
 }
 
-export const MAXIMUM_PAYTO_AMOUNT = {
+export const PAYMENT_MAXIMUM_PAYTO_AMOUNT = {
   HKD: 5000,
 }
 
-export const MINIMAL_PAYOUT_AMOUNT = {
+export const PAYMENT_MINIMAL_PAYOUT_AMOUNT = {
   HKD: 500,
 }
 
