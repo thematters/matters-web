@@ -11,3 +11,18 @@
   font-size: var(--font-size-sm);
   line-height: 1.5rem;
 }
+
+.payout-hint {
+  padding: var(--spacing-base) 0;
+
+  font-size: var(--font-size-sm-s);
+  text-align: center;
+
+  & > span {
+    display: inline-block;
+    padding: var(--spacing-xx-tight) var(--spacing-base);
+
+    background: var(--color-yellow-lighter);
+    border-radius: 1.5rem;
+  }
+}

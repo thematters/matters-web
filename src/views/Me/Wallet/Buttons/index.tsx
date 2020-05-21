@@ -3,9 +3,15 @@ import { useContext } from 'react'
 import { AddCreditDialog, Dialog, Translate, ViewerContext } from '~/components'
 
 import PaymentPasswordButton from './PaymentPasswordButton'
+import PayoutButton from './PayoutButton'
 import styles from './styles.css'
 
-const Buttons = () => {
+interface ButtonsProps {
+  canPayout: boolean
+  hasStripeAccount: boolean
+}
+
+const Buttons: React.FC<ButtonsProps> = ({ canPayout, hasStripeAccount }) => {
   const viewer = useContext(ViewerContext)
   const hasPaymentPassword = viewer.status?.hasPaymentPassword
 
@@ -21,7 +27,13 @@ const Buttons = () => {
             )}
           </AddCreditDialog>
 
-          {hasPaymentPassword && <PaymentPasswordButton />}
+          <section className="sub">
+            <PayoutButton
+              disabled={!canPayout}
+              hasStripeAccount={hasStripeAccount}
+            />
+            {hasPaymentPassword && <PaymentPasswordButton />}
+          </section>
         </section>
       </div>
 
