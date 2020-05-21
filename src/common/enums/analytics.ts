@@ -1,3 +1,104 @@
+export type AnalyticEvent =
+  | 'click-feed'
+  | 'click-button'
+  | 'load-more'
+  | 'share'
+  | 'purchase'
+
+export type EventProp =
+  | ClickButtonProp
+  | ClickFeedProp
+  | LoadMoreProp
+  | PurchaseProp
+  | ShareProp
+
+interface ShareProp {
+  type:
+    | 'line'
+    | 'whatsapp'
+    | 'telegram'
+    | 'wechat'
+    | 'twitter'
+    | 'email'
+    | 'facebook'
+    | 'weibo'
+    | 'douban'
+    | 'root'
+}
+
+interface PurchaseProp {
+  amount: number
+}
+
+interface LoadMoreProp {
+  type: ArticleFeedType | UserFeedType
+}
+
+interface ClickButtonProp {
+  type:
+    | 'write'
+    | 'write_collection'
+    | 'donate'
+    | 'add_value'
+    | 'share_article'
+    | 'share_user'
+    | 'signup'
+}
+
+type ClickFeedProp = ArticleFeedProp | UserFeedProp
+
+interface ArticleFeedProp {
+  type: ArticleFeedType
+
+  contentType: 'article'
+  styleType: 'card' | 'large-cover' | 'small-cover' | 'no-cover' | 'title'
+  location: number
+}
+
+type ArticleFeedType =
+  | 'all-authors'
+  | 'all-icymi'
+  | 'all-tags'
+  | 'all-topics'
+  | 'authors'
+  | 'collection'
+  | 'follow'
+  | 'hottest'
+  | 'icymi'
+  | 'newest'
+  | 'read-history'
+  | 'related-article'
+  | 'tag-detail'
+  | 'tags'
+  | 'topics'
+  | 'user-article'
+  | 'wallet'
+
+interface UserFeedProp {
+  type: UserFeedType
+  contentType: 'user'
+  styleType: 'subtitle' | 'card'
+  location: number
+}
+
+type UserFeedType =
+  | 'all-authors'
+  | 'all-icymi'
+  | 'all-topics'
+  | 'appreciator'
+  | 'authors'
+  | 'collection'
+  | 'follow'
+  | 'followee'
+  | 'follower'
+  | 'hottest'
+  | 'icymi'
+  | 'newest'
+  | 'read-history'
+  | 'related-article'
+  | 'tag-detail'
+  | 'wallet'
+
 export const GA_TRACKING_ID = 'UA-127561991-1'
 
 export const ANALYTIC_TYPES = {
@@ -51,105 +152,6 @@ export const ANALYTICS_EVENTS = {
   LIKECOIN_STEP_CHANGE: 'likecoin-step-change',
   LIKECOIN_STEP_RETRY: 'likecoin-step-retry',
 }
-
-export type AnalyticEvent =
-  | 'click-feed'
-  | 'click-button'
-  | 'load-more'
-  | 'share'
-  | 'purchase'
-
-export type EventProp =
-  | ClickButtonProp
-  | ClickFeedProp
-  | LoadMoreProp
-  | PurchaseProp
-  | ShareProp
-
-interface ShareProp {
-  type:
-    | 'line'
-    | 'whatsapp'
-    | 'telegram'
-    | 'wechat'
-    | 'twitter'
-    | 'email'
-    | 'facebook'
-    | 'weibo'
-    | 'douban'
-    | 'root'
-}
-
-interface PurchaseProp {
-  amount: number
-}
-
-interface LoadMoreProp {
-  type: ArticleFeedType | UserFeedType
-}
-interface ClickButtonProp {
-  type:
-    | 'write'
-    | 'write_collection'
-    | 'donate'
-    | 'add_value'
-    | 'share_article'
-    | 'share_user'
-    | 'signup'
-}
-
-type ClickFeedProp = ArticleFeedProp | UserFeedProp
-
-interface ArticleFeedProp {
-  type: ArticleFeedType
-
-  contentType: 'article'
-  styleType: 'card' | 'large-cover' | 'small-cover' | 'no-cover' | 'title'
-  location: number
-}
-
-type ArticleFeedType =
-  | 'all-authors'
-  | 'all-icymi'
-  | 'all-tags'
-  | 'all-topics'
-  | 'authors'
-  | 'collection'
-  | 'follow'
-  | 'hottest'
-  | 'icymi'
-  | 'newest'
-  | 'read-history'
-  | 'related-article'
-  | 'tag-detail'
-  | 'tags'
-  | 'topics'
-  | 'user-article'
-  | 'wallet'
-interface UserFeedProp {
-  type: UserFeedType
-  contentType: 'user'
-  styleType: 'subtitle' | 'card'
-  location: number
-}
-
-type UserFeedType =
-  | 'all-authors'
-  | 'all-icymi'
-  | 'all-topics'
-  | 'appreciator'
-  | 'authors'
-  | 'collection'
-  | 'follow'
-  | 'followee'
-  | 'follower'
-  | 'hottest'
-  | 'icymi'
-  | 'newest'
-  | 'read-history'
-  | 'related-article'
-  | 'tag-detail'
-  | 'wallet'
 
 export const SHARE_TYPE = {
   LINE: 'line',
