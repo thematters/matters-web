@@ -10,6 +10,10 @@ export const MAXIMUM_PAYTO_AMOUNT = {
   HKD: 5000,
 }
 
+export const MINIMAL_PAYOUT_AMOUNT = {
+  HKD: 500,
+}
+
 export enum PAYMENT_CURRENCY {
   HKD = 'HKD',
   LIKE = 'LIKE',

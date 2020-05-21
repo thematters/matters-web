@@ -29,6 +29,7 @@ import { ReactComponent as EditXS } from './icons/edit-xs.svg'
 import { ReactComponent as Edit } from './icons/edit.svg'
 import { ReactComponent as EmptyWarning } from './icons/empty-warning.svg'
 import { ReactComponent as Expand } from './icons/expand.svg'
+import { ReactComponent as ExternalLink } from './icons/external-link.svg'
 import { ReactComponent as External } from './icons/external.svg'
 import { ReactComponent as HashTag } from './icons/hashtag.svg'
 import { ReactComponent as Heart } from './icons/heart.svg'
@@ -184,6 +185,7 @@ export const Icon = {
   EmptyWarning: withIcon(EmptyWarning),
   Expand: withIcon(Expand),
   External: withIcon(External),
+  ExternalLink: withIcon(ExternalLink),
   HashTag: withIcon(HashTag),
   Heart: withIcon(Heart),
   HelpMedium: withIcon(HelpMedium),
