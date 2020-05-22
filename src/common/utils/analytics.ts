@@ -30,13 +30,14 @@ type ClickFeedProp = ArticleFeedProp | UserFeedProp | TagFeedProp
 
 interface ClickButtonProp {
   type:
-    | 'write'
-    | 'write_collection'
+    | 'checkout' // `next step` after top up dialog
     | 'donate'
-    | 'add_value'
     | 'share_article'
     | 'share_user'
     | 'signup'
+    | 'top_up'
+    | 'write'
+    | 'write_collection'
 }
 
 interface LoadMoreProp {

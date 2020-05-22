@@ -65,6 +65,7 @@ const handleAnalytics = ({
       window.gtag('config', GA_TRACKING_ID, {
         user_id: id,
       })
+      window.firebaseAnalytics.setUserId(id)
     } else {
       // visitor
       window.analytics.identify(args)
