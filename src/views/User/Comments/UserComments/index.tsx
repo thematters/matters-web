@@ -106,8 +106,8 @@ const UserCommentsWrap = () => {
     <>
       <Head
         title={{
-          zh_hant: `${user.displayName}發表的評論`,
-          zh_hans: `${user.displayName}发表的评论`,
+          zh_hant: `${user.displayName}發佈的評論`,
+          zh_hans: `${user.displayName}发布的评论`,
         }}
         description={user.info.description}
         image={IMAGE_LOGO_192}
