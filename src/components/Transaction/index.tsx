@@ -57,7 +57,8 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
   const isAddCredit = purpose === 'addCredit'
   const isRefund = purpose === 'refund'
   const isDonation = purpose === 'donation'
-  const showContent = isAddCredit || isRefund
+  const isPayout = purpose === 'payout'
+  const showContent = isAddCredit || isRefund || isPayout
 
   const article = target?.__typename === 'Article' && target
   const path = article ? toPath({ page: 'articleDetail', article }) : null
@@ -71,6 +72,7 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
               <p>
                 {isAddCredit && <Translate id="topUp" />}
                 {isRefund && <Translate id="refund" />}
+                {isPayout && <Translate id="paymentPayout" />}
               </p>
             </section>
           )}
