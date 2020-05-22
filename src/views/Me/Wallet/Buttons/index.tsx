@@ -1,8 +1,5 @@
-import { useContext } from 'react'
+import { AddCreditDialog, Dialog, Translate } from '~/components'
 
-import { AddCreditDialog, Dialog, Translate, ViewerContext } from '~/components'
-
-import PaymentPasswordButton from './PaymentPasswordButton'
 import PayoutButton from './PayoutButton'
 import styles from './styles.css'
 
@@ -12,8 +9,6 @@ interface ButtonsProps {
 }
 
 const Buttons: React.FC<ButtonsProps> = ({ canPayout, hasStripeAccount }) => {
-  const viewer = useContext(ViewerContext)
-  const hasPaymentPassword = viewer.status?.hasPaymentPassword
 
   return (
     <section className="l-row">
@@ -27,13 +22,10 @@ const Buttons: React.FC<ButtonsProps> = ({ canPayout, hasStripeAccount }) => {
             )}
           </AddCreditDialog>
 
-          <section className="sub">
-            <PayoutButton
-              disabled={!canPayout}
-              hasStripeAccount={hasStripeAccount}
-            />
-            {hasPaymentPassword && <PaymentPasswordButton />}
-          </section>
+          <PayoutButton
+            disabled={!canPayout}
+            hasStripeAccount={hasStripeAccount}
+          />
         </section>
       </div>
 
