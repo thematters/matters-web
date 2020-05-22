@@ -3,7 +3,6 @@ import ReactDOMServer from 'react-dom/server'
 
 import { Icon, withIcon } from '~/components'
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics, sleep } from '~/common/utils'
 
 import { ReactComponent as IconPullToRefresh } from '@/public/static/icons/pull-to-refresh.svg'
@@ -42,7 +41,7 @@ const Register = (selector = 'body', timeout = PTR_TIMEOUT) => {
       onRefresh: (cb: () => void) => {
         // start refresh
         window.dispatchEvent(new CustomEvent(PTR_START, {}))
-        analytics.trackEvent(ANALYTICS_EVENTS.PULL_TO_REFRESH)
+        analytics.trackEvent('pull_to_refresh')
 
         // end refresh
         let polling = true
