@@ -17,7 +17,7 @@ import { PATHS, PAYMENT_MINIMAL_PAYOUT_AMOUNT } from '~/common/enums'
 
 import Balance from './Balance'
 import Buttons from './Buttons'
-import PaymentPasswordButton from './PaymentPasswordButton'
+import PaymentPassword from './PaymentPassword'
 import ViewStripeAccount from './ViewStripeAccount'
 
 import { WalletBalance } from '~/components/GQL/queries/__generated__/WalletBalance'
@@ -64,7 +64,7 @@ const Wallet = () => {
             title={<Translate id="paymentTransactions" />}
             href={PATHS.ME_WALLET_TRANSACTIONS}
           />
-          {hasPaymentPassword && <PaymentPasswordButton />}
+          {hasPaymentPassword && <PaymentPassword />}
           {hasStripeAccount && <ViewStripeAccount />}
         </Form.List>
       </PullToRefresh>

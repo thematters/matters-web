@@ -267,8 +267,8 @@ const BaseDonationDialog = ({
         {/* below steps for password management */}
 
         {isPasswordInvalid && (
-          <PaymentForm.PayTo.PasswordInvalid
-            switchToConfirm={() => setStep('confirm')}
+          <PaymentForm.PasswordInvalid
+            switchToPrevious={() => setStep('confirm')}
             switchToResetPassword={() => setStep('resetPasswordRequest')}
           />
         )}
