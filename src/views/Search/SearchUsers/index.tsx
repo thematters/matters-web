@@ -11,7 +11,6 @@ import {
   UserDigest,
 } from '~/components'
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, getQuery, mergeConnections } from '~/common/utils'
 
 import EmptySearch from '../EmptySearch'
@@ -64,10 +63,9 @@ const SearchUser = () => {
   }
 
   const loadMore = () => {
-    analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
-      type: FEED_TYPE.SEARCH_USER,
+    analytics.trackEvent('load_more', {
+      type: 'search_user',
       location: edges.length,
-      entrance: q,
     })
     return fetchMore({
       variables: {
@@ -92,10 +90,11 @@ const SearchUser = () => {
                 <UserDigest.Rich
                   user={node}
                   onClick={() =>
-                    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                      type: FEED_TYPE.SEARCH_USER,
+                    analytics.trackEvent('click_feed', {
+                      type: 'search_user',
+                      contentType: 'user',
+                      styleType: 'card',
                       location: i,
-                      entrance: q,
                     })
                   }
                 />

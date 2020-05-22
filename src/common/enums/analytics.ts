@@ -1,9 +1,4 @@
-export type AnalyticEvent =
-  | 'click-feed'
-  | 'click-button'
-  | 'load-more'
-  | 'share'
-  | 'purchase'
+export type AnalyticEvent = 'click_feed' | 'click_button' | 'share' | 'purchase'
 
 export type EventProp =
   | ClickButtonProp
@@ -12,7 +7,7 @@ export type EventProp =
   | PurchaseProp
   | ShareProp
 
-interface ShareProp {
+export interface ShareProp {
   type:
     | 'line'
     | 'whatsapp'
@@ -26,15 +21,16 @@ interface ShareProp {
     | 'copy-url'
 }
 
-interface PurchaseProp {
+export interface PurchaseProp {
   amount: number
 }
 
-interface LoadMoreProp {
-  type: ArticleFeedType | UserFeedType
+export interface LoadMoreProp {
+  type: ArticleFeedType | UserFeedType | TagFeedType
+  location: number
 }
 
-interface ClickButtonProp {
+export interface ClickButtonProp {
   type:
     | 'write'
     | 'write_collection'
@@ -45,33 +41,44 @@ interface ClickButtonProp {
     | 'signup'
 }
 
-type ClickFeedProp = ArticleFeedProp | UserFeedProp
+export type ClickFeedProp = ArticleFeedProp | UserFeedProp | TagFeedProp
 
 interface ArticleFeedProp {
   type: ArticleFeedType
 
   contentType: 'article'
-  styleType: 'card' | 'large-cover' | 'small-cover' | 'no-cover' | 'title'
+  styleType:
+    | 'card' // cover photo as background, such as related articles
+    | 'large_cover'
+    | 'small_cover'
+    | 'no_cover'
+    | 'title'
+    | 'comment' // comment in follow feed
   location: number
 }
 
 type ArticleFeedType =
-  | 'all-authors'
-  | 'all-icymi'
-  | 'all-tags'
-  | 'all-topics'
-  | 'authors'
+  | 'all_authors'
+  | 'appreciations_sent'
+  | 'appreciations_received'
+  | 'all_icymi'
+  | 'all_topics'
+  | 'authors' // author feed on home page
   | 'collection'
   | 'follow'
   | 'hottest'
   | 'icymi'
   | 'newest'
-  | 'read-history'
-  | 'related-article'
-  | 'tag-detail'
-  | 'tags'
+  | 'read_history'
+  | 'related_article'
+  | 'search'
+  | 'search_article'
+  | 'tag_detail_latest'
+  | 'tag_detail_selected'
+  | 'tags' // tag feed with articles on home page
+  | 'transaction' // transaction history
   | 'topics'
-  | 'user-article'
+  | 'user_article'
   | 'wallet'
 
 interface UserFeedProp {
@@ -82,11 +89,13 @@ interface UserFeedProp {
 }
 
 type UserFeedType =
-  | 'all-authors'
-  | 'all-icymi'
-  | 'all-topics'
-  | 'appreciator'
-  | 'authors'
+  | 'all_authors'
+  | 'all_icymi'
+  | 'all_topics'
+  | 'appreciations_sent'
+  | 'appreciations_received'
+  | 'appreciators'
+  | 'authors' // author list on home page
   | 'collection'
   | 'follow'
   | 'followee'
@@ -94,10 +103,26 @@ type UserFeedType =
   | 'hottest'
   | 'icymi'
   | 'newest'
-  | 'read-history'
-  | 'related-article'
-  | 'tag-detail'
-  | 'wallet'
+  | 'read_history'
+  | 'related_article'
+  | 'search'
+  | 'search_user'
+  | 'tag_detail_latest'
+  | 'tag_detail_selected'
+  | 'transaction'
+
+interface TagFeedProp {
+  type: TagFeedType
+  contentType: 'tag'
+  styleType: 'title' | 'article'
+  location: number
+}
+
+type TagFeedType =
+  | 'all_tags' // all tags page
+  | 'search'
+  | 'search_tag'
+  | 'tags' // tag feed on home page
 
 export const GA_TRACKING_ID = 'UA-127561991-1'
 

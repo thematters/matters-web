@@ -4,9 +4,6 @@ import { useEffect } from 'react'
 import { Dialog, Spinner, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
-import { analytics } from '~/common/utils'
-
 import { GenerateLikerId } from './__generated__/GenerateLikerId'
 
 interface Props {
@@ -67,13 +64,7 @@ const Generating: React.FC<Props> = ({ prevStep, nextStep }) => {
       </Dialog.Message>
 
       <Dialog.Footer>
-        <Dialog.Footer.Button
-          disabled={!error}
-          onClick={() => {
-            prevStep()
-            analytics.trackEvent(ANALYTICS_EVENTS.LIKECOIN_STEP_RETRY)
-          }}
-        >
+        <Dialog.Footer.Button disabled={!error} onClick={prevStep}>
           <Translate id={error ? 'retry' : 'continue'} />
         </Dialog.Footer.Button>
       </Dialog.Footer>

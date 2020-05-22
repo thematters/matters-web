@@ -1,8 +1,27 @@
-import { ANALYTIC_TYPES, ANALYTICS } from '~/common/enums'
+import {
+  ANALYTIC_TYPES,
+  ANALYTICS,
+  ClickButtonProp,
+  ClickFeedProp,
+  LoadMoreProp,
+  PurchaseProp,
+  ShareProp,
+} from '~/common/enums'
+// | 'click-feed'
+// | 'click-button'
+// | 'load-more'
+// | 'share'
+// | 'purchase'
+type EventArgs =
+  | ['click_feed', ClickFeedProp]
+  | ['click_button', ClickButtonProp]
+  | ['load_more', LoadMoreProp]
+  | ['share', ShareProp]
+  | ['purchase', PurchaseProp]
+  | [] // identify user
+  | ['page_view'] // pageview
 
-const trackAs = (type: string) => (
-  ...args: Array<string | { [key: string]: string | number }>
-) => {
+const trackAs = (type: string) => (...args: EventArgs) => {
   // construct event with details
   const event = new CustomEvent(ANALYTICS, {
     detail: { args, type },

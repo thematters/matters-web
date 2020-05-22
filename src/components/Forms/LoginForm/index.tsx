@@ -6,7 +6,7 @@ import { useContext } from 'react'
 import { Dialog, Form, LanguageContext, Layout, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
-import { ADD_TOAST, ANALYTICS_EVENTS } from '~/common/enums'
+import { ADD_TOAST } from '~/common/enums'
 import {
   analytics,
   // clearPersistCache,
@@ -93,7 +93,6 @@ export const LoginForm: React.FC<FormProps> = ({
           })
         )
         analytics.identifyUser()
-        analytics.trackEvent(ANALYTICS_EVENTS.LOG_IN)
 
         // await clearPersistCache()
 
@@ -110,11 +109,6 @@ export const LoginForm: React.FC<FormProps> = ({
           } else {
             setFieldError('email', messages[code])
           }
-        })
-
-        analytics.trackEvent(ANALYTICS_EVENTS.LOG_IN_FAILED, {
-          email,
-          error,
         })
       }
 

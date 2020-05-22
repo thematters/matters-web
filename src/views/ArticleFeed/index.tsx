@@ -12,7 +12,6 @@ import {
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import { AllIcymis } from './__generated__/AllIcymis'
@@ -92,8 +91,8 @@ const Feed = ({ type = 'topic' }: ArticleFeedProp) => {
   }
 
   const loadMore = () => {
-    analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
-      type: type === 'topic' ? FEED_TYPE.ALL_TOPICS : FEED_TYPE.ALL_ICYMI,
+    analytics.trackEvent('load_more', {
+      type: type === 'topic' ? 'all_topics' : 'all_icymi',
       location: edges.length,
     })
     return fetchMore({
@@ -121,11 +120,10 @@ const Feed = ({ type = 'topic' }: ArticleFeedProp) => {
             <ArticleDigestFeed
               article={node}
               onClick={() =>
-                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                  type:
-                    type === 'topic'
-                      ? FEED_TYPE.ALL_TOPICS
-                      : FEED_TYPE.ALL_ICYMI,
+                analytics.trackEvent('click_feed', {
+                  type: type === 'topic' ? 'all_topics' : 'all_icymi',
+                  contentType: 'article',
+                  styleType: 'small_cover',
                   location: i,
                 })
               }

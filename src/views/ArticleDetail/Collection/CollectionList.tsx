@@ -8,7 +8,6 @@ import {
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 import { CollectionList as CollectionListTypes } from './__generated__/CollectionList'
@@ -48,8 +47,10 @@ const CollectionList: React.FC<CollectionListProps> = ({
             hasCover={isMediumUp}
             hasBackground
             onClick={() =>
-              analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                type: FEED_TYPE.COLLECTION,
+              analytics.trackEvent('click_feed', {
+                type: 'collection',
+                styleType: 'small_cover',
+                contentType: 'article',
                 location: i,
               })
             }

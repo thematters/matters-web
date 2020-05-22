@@ -1,23 +1,9 @@
-import { useContext } from 'react'
-
-import {
-  CardSpacing,
-  Icon,
-  Menu,
-  TextIcon,
-  Translate,
-  ViewerContext,
-} from '~/components'
+import { CardSpacing, Icon, Menu, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
 
-import { ADD_TOAST, ANALYTICS_EVENTS, PATHS } from '~/common/enums'
-import {
-  analytics,
-  // clearPersistCache,
-  redirectToTarget,
-  unsubscribePush,
-} from '~/common/utils'
+import { ADD_TOAST, PATHS } from '~/common/enums'
+import { redirectToTarget, unsubscribePush } from '~/common/utils'
 
 import { UserLogout } from '~/components/GQL/mutations/__generated__/UserLogout'
 
@@ -27,7 +13,6 @@ interface NavMenuBottomProps {
 
 const NavMenuBottom: React.FC<NavMenuBottomProps> = ({ isInSideDrawerNav }) => {
   const [logout] = useMutation<UserLogout>(USER_LOGOUT)
-  const viewer = useContext(ViewerContext)
   const onClickLogout = async () => {
     try {
       await unsubscribePush()
@@ -37,8 +22,6 @@ const NavMenuBottom: React.FC<NavMenuBottomProps> = ({ isInSideDrawerNav }) => {
 
     try {
       await logout()
-
-      analytics.trackEvent(ANALYTICS_EVENTS.LOG_OUT, { id: viewer.id })
 
       window.dispatchEvent(
         new CustomEvent(ADD_TOAST, {

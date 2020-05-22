@@ -20,7 +20,6 @@ import {
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, mergeConnections, toPath } from '~/common/utils'
 
 import { AllTags } from './__generated__/AllTags'
@@ -98,8 +97,8 @@ const Tags = () => {
   }
 
   const loadMore = () => {
-    analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
-      type: FEED_TYPE.TAGS,
+    analytics.trackEvent('load_more', {
+      type: 'all_tags',
       location: edges.length,
     })
     return fetchMore({
@@ -134,9 +133,11 @@ const Tags = () => {
                     id: node.id,
                   })}
                   onClick={() =>
-                    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                      type: FEED_TYPE.ALL_TAGS,
-                      location: i * 2,
+                    analytics.trackEvent('click_feed', {
+                      type: 'all_tags',
+                      contentType: 'tag',
+                      styleType: 'title',
+                      location: i,
                     })
                   }
                 >

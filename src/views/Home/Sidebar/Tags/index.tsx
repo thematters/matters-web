@@ -4,7 +4,6 @@ import gql from 'graphql-tag'
 import { Card, List, Spinner, Tag } from '~/components'
 import { QueryError } from '~/components/GQL'
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, toPath } from '~/common/utils'
 
 import SectionHeader from '../../SectionHeader'
@@ -60,8 +59,10 @@ const Tags = () => {
                   })}
                   bgColor="none"
                   onClick={() =>
-                    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                      type: FEED_TYPE.TAGS,
+                    analytics.trackEvent('click_feed', {
+                      type: 'tags',
+                      contentType: 'tag',
+                      styleType: 'title',
                       location: i,
                     })
                   }

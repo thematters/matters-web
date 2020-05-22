@@ -4,9 +4,6 @@ import { useEffect, useState } from 'react'
 
 import { Dialog, Spinner, Translate } from '~/components'
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
-import { analytics } from '~/common/utils'
-
 import { ViewerLikerId } from './__generated__/ViewerLikerId'
 
 interface Props {
@@ -77,13 +74,7 @@ const Binding: React.FC<Props> = ({ prevStep, nextStep, windowRef }) => {
       </Dialog.Message>
 
       <Dialog.Footer>
-        <Dialog.Footer.Button
-          disabled={!error}
-          onClick={() => {
-            prevStep()
-            analytics.trackEvent(ANALYTICS_EVENTS.LIKECOIN_STEP_RETRY)
-          }}
-        >
+        <Dialog.Footer.Button disabled={!error} onClick={prevStep}>
           <Translate id="retry" />
         </Dialog.Footer.Button>
       </Dialog.Footer>

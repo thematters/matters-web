@@ -1,13 +1,10 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
-import { Waypoint } from 'react-waypoint'
 
 import { Title, Translate } from '~/components'
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
-import { analytics, getQuery } from '~/common/utils'
+import { getQuery } from '~/common/utils'
 
 import FeatureComments from './FeaturedComments'
 import LatestResponses from './LatestResponses'
@@ -34,7 +31,6 @@ const ARTICLE_RESPONSE = gql`
 `
 
 const Responses = () => {
-  const [trackedFinish, setTrackedFinish] = useState(false)
   const router = useRouter()
   const mediaHash = getQuery({ router, key: 'mediaHash' })
 
@@ -59,17 +55,6 @@ const Responses = () => {
 
       <FeatureComments />
       <LatestResponses />
-
-      <Waypoint
-        onEnter={() => {
-          if (!trackedFinish) {
-            analytics.trackEvent(ANALYTICS_EVENTS.FINISH_COMMENTS, {
-              entrance: article.id,
-            })
-            setTrackedFinish(true)
-          }
-        }}
-      />
 
       <style jsx>{styles}</style>
     </section>

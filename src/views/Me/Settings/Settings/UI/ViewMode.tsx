@@ -10,8 +10,7 @@ import {
 } from '~/components'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
-import { ANALYTICS_EVENTS, STORE_KEY_VIEW_MODE } from '~/common/enums'
-import { analytics } from '~/common/utils'
+import { STORE_KEY_VIEW_MODE } from '~/common/enums'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 
@@ -33,8 +32,6 @@ const ViewMode = () => {
         data: { viewMode: mode },
       })
     }
-
-    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_VIEW_MODE, { mode })
 
     localStorage.setItem(STORE_KEY_VIEW_MODE, mode)
   }

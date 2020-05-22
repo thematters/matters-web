@@ -13,9 +13,6 @@ import { useMutation } from '~/components/GQL'
 import updateUserFollowerCount from '~/components/GQL/updates/userFollowerCount'
 import updateViewerFolloweeCount from '~/components/GQL/updates/viewerFolloweeCount'
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
-import { analytics } from '~/common/utils'
-
 import { FollowButtonSize } from './index'
 
 import { FollowButtonUser } from './__generated__/FollowButtonUser'
@@ -23,7 +20,7 @@ import { UnfollowUser } from './__generated__/UnfollowUser'
 
 const UNFOLLOW_USER = gql`
   mutation UnfollowUser($id: ID!) {
-    unfollowUser(input: { id: $id }) {
+    toggleFollowUser(input: { id: $id }) {
       id
       isFollowee
       isFollower
@@ -42,7 +39,7 @@ const Unfollow = ({
   const [unfollow] = useMutation<UnfollowUser>(UNFOLLOW_USER, {
     variables: { id: user.id },
     optimisticResponse: {
-      unfollowUser: {
+      toggleFollowUser: {
         id: user.id,
         isFollowee: false,
         isFollower: user.isFollower,
@@ -68,10 +65,7 @@ const Unfollow = ({
       textColor="white"
       bgColor="green"
       bgActiveColor="red"
-      onClick={() => {
-        unfollow()
-        analytics.trackEvent(ANALYTICS_EVENTS.UNFOLLOW_USER, { id: user.id })
-      }}
+      onClick={unfollow}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >

@@ -8,11 +8,9 @@ import MIGRATION from '~/components/GQL/mutations/migration'
 import {
   ACCEPTED_UPLOAD_MIGRATION_TYPES,
   ADD_TOAST,
-  ANALYTICS_EVENTS,
   UPLOAD_FILE_COUNT_LIMIT,
   UPLOAD_MIGRATION_SIZE_LIMIT,
 } from '~/common/enums'
-import { analytics } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -114,10 +112,6 @@ const MigrationDialogUpload = ({ nextStep }: MigrationDialogUploadProps) => {
       await migration({
         variables: { input: { type: 'medium', files } },
       })
-      analytics.trackEvent(ANALYTICS_EVENTS.UPLOAD_DRAFT, {
-        step: 'success',
-        amount: files.length,
-      })
       window.dispatchEvent(
         new CustomEvent(ADD_TOAST, {
           detail: {
@@ -155,10 +149,6 @@ const MigrationDialogUpload = ({ nextStep }: MigrationDialogUploadProps) => {
               if (element) {
                 element.click()
               }
-
-              analytics.trackEvent(ANALYTICS_EVENTS.UPLOAD_DRAFT, {
-                step: 'start',
-              })
             }}
           >
             <Translate zh_hant={zh_hant.upload} zh_hans={zh_hans.upload} />

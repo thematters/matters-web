@@ -11,7 +11,7 @@ import {
 } from '~/components'
 import { useMutation } from '~/components/GQL'
 
-import { ADD_TOAST, ANALYTICS_EVENTS, TEXT } from '~/common/enums'
+import { ADD_TOAST, TEXT } from '~/common/enums'
 import {
   analytics,
   parseFormSubmitErrors,
@@ -101,7 +101,9 @@ export const WriteButton = ({ allowed, isLarge, forbidden }: Props) => {
             return
           }
 
-          analytics.trackEvent(ANALYTICS_EVENTS.CLICK_WRITE_BUTTON)
+          analytics.trackEvent('click_button', {
+            type: 'write',
+          })
           const result = await putDraft()
           const { slug, id } = result?.data?.putDraft || {}
 

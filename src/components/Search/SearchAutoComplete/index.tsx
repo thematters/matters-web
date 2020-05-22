@@ -5,8 +5,7 @@ import { Fragment, useEffect } from 'react'
 
 import { Menu, Spinner } from '~/components'
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
-import { analytics, toPath } from '~/common/utils'
+import { toPath } from '~/common/utils'
 
 import FallbackSearchItem from './FallbackSearchItem'
 import styles from './styles.css'
@@ -71,12 +70,6 @@ export const SearchAutoComplete = (props: SearchAutoCompleteProps) => {
               page: 'search',
               q: key,
             })}
-            onClick={() => {
-              analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FREQUENT_SEARCH, {
-                location: i,
-                entrance: key,
-              })
-            }}
           >
             <span className={itemClass}>{key}</span>
           </Menu.Item>

@@ -4,8 +4,7 @@ import { useRouter } from 'next/router'
 import { Dialog, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
-import { analytics, getQuery } from '~/common/utils'
+import { getQuery } from '~/common/utils'
 
 import PublishSlide from './PublishSlide'
 
@@ -42,7 +41,6 @@ const PublishContent: React.FC<PublishContentProps> = ({ closeDialog }) => {
   const onPublish = async () => {
     publish({ variables: { id } })
     closeDialog()
-    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_PUBLISH_IN_MODAL)
   }
 
   const SubmitButton = (

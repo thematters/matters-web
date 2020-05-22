@@ -12,7 +12,6 @@ import {
   usePullToRefresh,
 } from '~/components'
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, getQuery, mergeConnections, toPath } from '~/common/utils'
 
 import EmptySearch from '../EmptySearch'
@@ -65,8 +64,8 @@ const SearchTag = () => {
   }
 
   const loadMore = () => {
-    analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
-      type: FEED_TYPE.SEARCH_TAG,
+    analytics.trackEvent('load_more', {
+      type: 'search_tag',
       location: edges.length,
     })
     return fetchMore({
@@ -100,10 +99,11 @@ const SearchTag = () => {
                     id: node.id,
                   })}
                   onClick={() =>
-                    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                      type: FEED_TYPE.SEARCH_TAG,
+                    analytics.trackEvent('click_feed', {
+                      type: 'search_tag',
+                      contentType: 'tag',
+                      styleType: 'title',
                       location: i,
-                      entrance: q,
                     })
                   }
                 >

@@ -1,7 +1,6 @@
 import { PageHeader, Translate, ViewAllButton } from '~/components'
 
-import { ANALYTICS_EVENTS, PATHS } from '~/common/enums'
-import { analytics } from '~/common/utils'
+import { PATHS } from '~/common/enums'
 
 import styles from './styles.css'
 
@@ -24,9 +23,6 @@ const FeedHeader = ({ type, rightButton }: SidebarHeaderProps) => {
     tags: <Translate zh_hant="找你想看的" zh_hans="找你想看的" />,
   }
   const path = pathMap[type]
-  const onClick = () => {
-    analytics.trackEvent(ANALYTICS_EVENTS.DISPLAY_ALL, { type })
-  }
 
   return (
     <PageHeader title={titleMap[type]} is="h2" hasNoBorder>
@@ -36,7 +32,6 @@ const FeedHeader = ({ type, rightButton }: SidebarHeaderProps) => {
         {path && (
           <ViewAllButton
             href={path}
-            onClick={onClick}
             bgColor={undefined}
             bgActiveColor="grey-lighter"
           />

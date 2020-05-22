@@ -1,7 +1,6 @@
 import { Card, Icon, TextIcon, Translate } from '~/components'
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
-import { analytics, toPath } from '~/common/utils'
+import { toPath } from '~/common/utils'
 
 interface ViewMoreButtonProps {
   q: string
@@ -26,11 +25,6 @@ const ViewMoreButton = ({ q, type }: ViewMoreButtonProps) => {
         type,
         q,
       })}
-      onClick={() => {
-        analytics.trackEvent(ANALYTICS_EVENTS.DISPLAY_ALL, {
-          type: `${type}-search`,
-        })
-      }}
     >
       <TextIcon
         icon={<Icon.Right size="xs" />}
