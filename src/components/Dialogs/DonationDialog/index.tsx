@@ -190,6 +190,7 @@ const BaseDonationDialog = ({
         {isSetAmount && (
           <PaymentForm.PayTo.SetAmount
             close={close}
+            defaultCurrency={currency}
             submitCallback={setAmountCallback}
             recipient={recipient}
             targetId={targetId}
