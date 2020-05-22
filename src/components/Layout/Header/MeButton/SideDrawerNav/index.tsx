@@ -1,6 +1,6 @@
 import { DialogContent, DialogOverlay } from '@reach/dialog'
-import { useRef } from 'react'
-import { animated, useTransition } from 'react-spring'
+import { useEffect, useRef } from 'react'
+import { animated, Globals, useTransition } from 'react-spring'
 
 import DrawerContent from './DrawerContent'
 import Overlay from './Overlay'
@@ -14,7 +14,19 @@ export interface SideDrawerNavProps {
 const SideDrawerNav: React.FC<SideDrawerNavProps> = ({ isOpen, onDismiss }) => {
   const closeButtonRef: React.RefObject<any> | null = useRef(null)
 
-  const transitions = useTransition(isOpen, null, {
+  // FIXME: https://github.com/react-spring/react-spring/issues/664#issuecomment-585748356
+  useEffect(() => {
+    if (performance.mark && performance.getEntries) {
+      performance.mark('dummy_check')
+      const entries = performance.getEntries()
+
+      Globals.assign({
+        skipAnimation: entries && entries.length === 0,
+      })
+    }
+  }, [])
+
+  const transition = useTransition(isOpen ? [true] : [], {
     from: {
       opacity: 0,
       transform: `translateX(-100%)`,
@@ -33,28 +45,21 @@ const SideDrawerNav: React.FC<SideDrawerNavProps> = ({ isOpen, onDismiss }) => {
 
   return (
     <>
-      {transitions.map(({ item, key, props: { opacity, transform } }) => {
-        if (!item) {
-          return
-        }
+      {transition(({ opacity, transform }) => (
+        <AnimatedDrawerOverlay
+          initialFocusRef={closeButtonRef}
+          className="side-drawer-nav"
+        >
+          <AnimatedOverlay style={{ opacity }} />
 
-        return (
-          <AnimatedDrawerOverlay
-            initialFocusRef={closeButtonRef}
-            key={key}
-            className="side-drawer-nav"
-          >
-            <AnimatedOverlay style={{ opacity }} />
-
-            <DialogContent aria-labelledby="菜單 - 我的">
-              <AnimatedDrawerContent
-                style={{ transform }}
-                onDismiss={onDismiss}
-              />
-            </DialogContent>
-          </AnimatedDrawerOverlay>
-        )
-      })}
+          <DialogContent aria-labelledby="菜單 - 我的">
+            <AnimatedDrawerContent
+              style={{ transform }}
+              onDismiss={onDismiss}
+            />
+          </DialogContent>
+        </AnimatedDrawerOverlay>
+      ))}
 
       <style jsx global>
         {globalStyles}
