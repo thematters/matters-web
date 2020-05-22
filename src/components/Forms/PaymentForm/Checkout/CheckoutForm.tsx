@@ -7,7 +7,7 @@ import { Dialog, Translate } from '~/components'
 import { LanguageContext } from '~/components/Context'
 
 import { STRIPE_ERROR_MESSAGES } from '~/common/enums'
-import { toAmountString } from '~/common/utils'
+import { analytics, toAmountString } from '~/common/utils'
 
 import CardSection from './CardSection'
 
@@ -55,12 +55,18 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
 
       setError(msg || result.error.message)
 
+      analytics.trackEvent('purchase', {
+        amount,
+        success: false,
+        message: JSON.stringify(result.error),
+      })
       import('@sentry/browser').then((Sentry) => {
         Sentry.captureException(result.error)
       })
     } else {
       if (result.paymentIntent.status === 'succeeded') {
         submitCallback()
+        analytics.trackEvent('purchase', { amount, success: true })
       }
     }
 

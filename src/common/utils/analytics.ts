@@ -60,7 +60,9 @@ interface ShareProp {
 }
 
 interface PurchaseProp {
-  amount: number
+  amount: number | undefined
+  success: boolean
+  message?: string
 }
 
 interface ArticleFeedProp {
