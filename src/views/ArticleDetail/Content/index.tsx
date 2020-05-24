@@ -52,6 +52,7 @@ const Content = ({
     const timerId = setInterval(
       (function heartbeat() {
         const isReading = () => {
+          console.log('?')
           // tab hidden
           if (document.hidden) {
             return false
@@ -66,7 +67,11 @@ const Content = ({
             return false
           }
 
-          // TODO: if modal shown
+          // if overlay is shown
+          const overlaySelectors = ['reach-portal', '.tippy-popper']
+          if (document.querySelector(overlaySelectors.join(','))) {
+            return false
+          }
 
           // if bottom is above center
           const {
