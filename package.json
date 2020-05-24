@@ -127,7 +127,7 @@
     "husky": "^4.2.5",
     "identity-obj-proxy": "^3.0.0",
     "imagemin-mozjpeg": "^8.0.0",
-    "imagemin-optipng": "^7.1.0",
+    "imagemin-optipng": "^8.0.0",
     "jest": "^25.5.4",
     "lost": "^8.3.1",
     "next-compose-plugins": "^2.2.0",
