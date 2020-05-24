@@ -18,22 +18,7 @@ const READ_ARTICLE = gql`
   }
 `
 
-const fragments = {
-  article: gql`
-    fragment ContentArticle on Article {
-      id
-      content
-      translation {
-        originalLanguage
-        content
-        title
-      }
-    }
-  `,
-}
-
 const Content = ({ article }: { article: ContentArticle }) => {
-  console.log({ trans: article.translation })
   const [read] = useMutation<ReadArticle>(READ_ARTICLE)
 
   const contentContainer = useRef(null)
@@ -115,6 +100,24 @@ const Content = ({ article }: { article: ContentArticle }) => {
   )
 }
 
-Content.fragments = fragments
+Content.fragments = {
+  article: gql`
+    fragment ContentArticle on Article {
+      id
+      content
+    }
+  `,
+  spa: {
+    article: gql`
+      fragment ContentTranslation on Article {
+        translation {
+          originalLanguage
+          content
+          title
+        }
+      }
+    `,
+  },
+}
 
 export default Content

@@ -38,6 +38,7 @@ import State from './State'
 import styles from './styles.css'
 import TagList from './TagList'
 import Toolbar from './Toolbar'
+import TranslationButton from './TranslationButton'
 import Wall from './Wall'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
@@ -205,6 +206,8 @@ const ArticleDetail = () => {
                 <DateTime date={article.createdAt} color="grey" />
 
                 <FingerprintButton article={article} />
+
+                <TranslationButton />
               </section>
 
               <section className="right">

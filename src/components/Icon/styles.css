@@ -43,28 +43,63 @@
   &.white {
     color: var(--color-white);
   }
+  &.white path {
+    stroke: var(--color-white);
+  }
+
   &.black {
     color: var(--color-black);
   }
+  &.black path {
+    stroke: var(--color-black);
+  }
+
   &.grey-dark {
     color: var(--color-grey-dark);
   }
+  &.grey-dark path {
+    stroke: var(--color-grey-dark);
+  }
+
   &.grey {
     color: var(--color-grey);
   }
+  &.grey path {
+    stroke: var(--color-grey);
+  }
+
   &.grey-light {
     color: var(--color-grey-light);
   }
+  &.grey-light path {
+    stroke: var(--color-grey-light);
+  }
+
   &.grey-lighter {
     color: var(--color-grey-lighter);
   }
+  &.grey-lighter path {
+    stroke: var(--color-grey-lighter);
+  }
+
   &.green {
     color: var(--color-matters-green);
   }
+  &.green path {
+    stroke: var(--color-matters-green);
+  }
+
   &.gold {
     color: var(--color-matters-gold);
   }
+  &.gold path {
+    stroke: var(--color-matters-gold);
+  }
+
   &.red {
     color: var(--color-red);
+  }
+  &.red path {
+    stroke: var(--color-red);
   }
 }
