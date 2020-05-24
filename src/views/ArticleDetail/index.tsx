@@ -43,11 +43,11 @@ import TranslationButton from './TranslationButton'
 import Wall from './Wall'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
+import { ArticleDetail as ArticleDetailType } from './__generated__/ArticleDetail'
 import { ArticleDetailSpa as ArticleDetailSpaType } from './__generated__/ArticleDetailSpa'
-import { ArticleDetailSsr as ArticleDetailSsrType } from './__generated__/ArticleDetailSsr'
 
 const ARTICLE_DETAIL_SSR = gql`
-  query ArticleDetailSsr($mediaHash: String) {
+  query ArticleDetail($mediaHash: String) {
     article(input: { mediaHash: $mediaHash }) {
       id
       title
@@ -131,7 +131,7 @@ const ArticleDetail = () => {
   const [contentTranslate, setContentTranslate] = useState(false)
 
   // ssr data
-  const { data, loading, error } = useQuery<ArticleDetailSsrType>(
+  const { data, loading, error } = useQuery<ArticleDetailType>(
     ARTICLE_DETAIL_SSR,
     {
       variables: { mediaHash },

@@ -10,7 +10,7 @@ import { ADD_TOAST } from '~/common/enums'
 
 import styles from './styles.css'
 
-import { ArticleDetailSsr_article } from '../__generated__/ArticleDetailSsr'
+import { ArticleDetail_article } from '../__generated__/ArticleDetail'
 import { EditorSetCollection } from './__generated__/EditorSetCollection'
 
 /**
@@ -40,7 +40,7 @@ const EditButton = ({
   setEditing,
   editingArticles,
 }: {
-  article: ArticleDetailSsr_article
+  article: ArticleDetail_article
   canEdit: boolean
   editing: boolean
   setEditing: any
