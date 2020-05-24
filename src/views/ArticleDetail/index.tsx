@@ -256,8 +256,8 @@ const ArticleDetail = () => {
                               color: 'green',
                               content: (
                                 <Translate
-                                  zh_hant="已翻譯為當前語言"
-                                  zh_hans="已翻译为当前语言"
+                                  zh_hant="已翻譯為繁體中文"
+                                  zh_hans="已翻译为简体中文"
                                 />
                               ),
                             },

@@ -52,7 +52,6 @@ const Content = ({
     const timerId = setInterval(
       (function heartbeat() {
         const isReading = () => {
-          console.log('?')
           // tab hidden
           if (document.hidden) {
             return false
