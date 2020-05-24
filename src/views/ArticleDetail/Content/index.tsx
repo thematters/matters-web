@@ -49,47 +49,45 @@ const Content = ({
 
   // register read
   useEffect(() => {
-    const timerId = setInterval(
-      (function heartbeat() {
-        const isReading = () => {
-          // tab hidden
-          if (document.hidden) {
-            return false
-          }
-
-          // idle for more than 5 minutes
-          if (Date.now() / 1000 - lastScroll > 60 * 5) {
-            return false
-          }
-
-          if (!contentContainer || !contentContainer.current) {
-            return false
-          }
-
-          // if overlay is shown
-          const overlaySelectors = ['reach-portal', '.tippy-popper']
-          if (document.querySelector(overlaySelectors.join(','))) {
-            return false
-          }
-
-          // if bottom is above center
-          const {
-            bottom,
-          } = ((contentContainer.current as unknown) as Element).getBoundingClientRect()
-
-          const isBottomAboveCenter = bottom <= window.innerHeight / 2
-
-          return !isBottomAboveCenter
+    const timerId = setInterval(() => {
+      const isReading = () => {
+        // tab hidden
+        if (document.hidden) {
+          return false
         }
 
-        if (isReading()) {
-          read({ variables: { id } })
+        // idle for more than 5 minutes
+        if (Date.now() / 1000 - lastScroll > 60 * 5) {
+          return false
         }
 
-        return heartbeat
-      })(),
-      5000
-    )
+        if (!contentContainer || !contentContainer.current) {
+          return false
+        }
+
+        // if overlay is shown
+        const overlaySelectors = ['reach-portal', '.tippy-popper']
+        if (document.querySelector(overlaySelectors.join(','))) {
+          return false
+        }
+
+        // if bottom is above center
+        const {
+          bottom,
+        } = ((contentContainer.current as unknown) as Element).getBoundingClientRect()
+
+        const isBottomAboveCenter = bottom <= window.innerHeight / 2
+        return !isBottomAboveCenter
+      }
+
+      if (isReading()) {
+        read({ variables: { id } })
+        //  for debug purpose
+        if (process.env.NODE_ENV !== 'production') {
+          console.log('reading')
+        }
+      }
+    }, 5000)
 
     // clean timer
     return () => {
