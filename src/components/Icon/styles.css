@@ -43,63 +43,57 @@
   &.white {
     color: var(--color-white);
   }
-  &.white path {
-    stroke: var(--color-white);
-  }
-
   &.black {
     color: var(--color-black);
   }
-  &.black path {
-    stroke: var(--color-black);
-  }
-
   &.grey-dark {
     color: var(--color-grey-dark);
   }
-  &.grey-dark path {
-    stroke: var(--color-grey-dark);
-  }
-
   &.grey {
     color: var(--color-grey);
   }
-  &.grey path {
-    stroke: var(--color-grey);
-  }
-
   &.grey-light {
     color: var(--color-grey-light);
   }
-  &.grey-light path {
-    stroke: var(--color-grey-light);
-  }
-
   &.grey-lighter {
     color: var(--color-grey-lighter);
   }
-  &.grey-lighter path {
-    stroke: var(--color-grey-lighter);
-  }
-
   &.green {
     color: var(--color-matters-green);
   }
-  &.green path {
-    stroke: var(--color-matters-green);
-  }
-
   &.gold {
     color: var(--color-matters-gold);
   }
-  &.gold path {
-    stroke: var(--color-matters-gold);
-  }
-
   &.red {
     color: var(--color-red);
   }
-  &.red path {
+
+  /* Stroke Color */
+  &.stroke-white path {
+    stroke: var(--color-white);
+  }
+  &.stroke-black path {
+    stroke: var(--color-black);
+  }
+  &.stroke-grey-dark path {
+    stroke: var(--color-grey-dark);
+  }
+  &.stroke-grey path {
+    stroke: var(--color-grey);
+  }
+  &.stroke-grey-light path {
+    stroke: var(--color-grey-light);
+  }
+  &.stroke-grey-lighter path {
+    stroke: var(--color-grey-lighter);
+  }
+  &.stroke-green path {
+    stroke: var(--color-matters-green);
+  }
+  &.stroke-gold path {
+    stroke: var(--color-matters-gold);
+  }
+  &.stroke-red path {
     stroke: var(--color-red);
   }
 }

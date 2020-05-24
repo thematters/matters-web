@@ -27,6 +27,7 @@ import { QueryError } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { UserDigest } from '~/components/UserDigest'
 
+import { ADD_TOAST } from '~/common/enums'
 import { getQuery } from '~/common/utils'
 
 import Collection from './Collection'
@@ -42,10 +43,11 @@ import TranslationButton from './TranslationButton'
 import Wall from './Wall'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
-import { ArticleDetail as ArticleDetailType } from './__generated__/ArticleDetail'
+import { ArticleDetailSpa as ArticleDetailSpaType } from './__generated__/ArticleDetailSpa'
+import { ArticleDetailSsr as ArticleDetailSsrType } from './__generated__/ArticleDetailSsr'
 
-const ARTICLE_DETAIL = gql`
-  query ArticleDetail($mediaHash: String) {
+const ARTICLE_DETAIL_SSR = gql`
+  query ArticleDetailSsr($mediaHash: String) {
     article(input: { mediaHash: $mediaHash }) {
       id
       title
@@ -78,6 +80,17 @@ const ARTICLE_DETAIL = gql`
   ${FingerprintButton.fragments.article}
 `
 
+const ARTICLE_DETAIL_SPA = gql`
+  query ArticleDetailSpa($mediaHash: String) {
+    article(input: { mediaHash: $mediaHash }) {
+      id
+      ...ContentTranslation
+    }
+  }
+  ${Content.fragments.spa.article}
+`
+
+// skip responses in SSR
 const DynamicResponse = dynamic(() => import('./Responses'), {
   ssr: false,
   loading: Spinner,
@@ -91,16 +104,10 @@ const EmptyLayout: React.FC = ({ children }) => (
 )
 
 const ArticleDetail = () => {
-  const isLargeUp = useResponsive('lg-up')
+  // router & viewer
   const router = useRouter()
   const mediaHash = getQuery({ router, key: 'mediaHash' })
   const viewer = useContext(ViewerContext)
-  const features = useContext(FeaturesContext)
-
-  const [fixedWall, setFixedWall] = useState(false)
-  const { data, loading, error } = useQuery<ArticleDetailType>(ARTICLE_DETAIL, {
-    variables: { mediaHash },
-  })
 
   const { data: clientPreferenceData } = useQuery<ClientPreference>(
     CLIENT_PREFERENCE,
@@ -109,18 +116,44 @@ const ArticleDetail = () => {
     }
   )
   const { wall } = clientPreferenceData?.clientPreference || { wall: true }
-
   const shouldShowWall = !viewer.isAuthed && wall
-  const article = data?.article
-  const authorId = article && article.author.id
-  const collectionCount = (article && article.collection.totalCount) || 0
-  const isAuthor = viewer.id === authorId
 
   useEffect(() => {
     if (shouldShowWall && window.location.hash && article) {
       jump('#comments', { offset: -10 })
     }
   }, [mediaHash])
+
+  // UI
+  const features = useContext(FeaturesContext)
+  const isLargeUp = useResponsive('lg-up')
+  const [fixedWall, setFixedWall] = useState(false)
+  const [contentTranslate, setContentTranslate] = useState(false)
+
+  // ssr data
+  const { data, loading, error } = useQuery<ArticleDetailSsrType>(
+    ARTICLE_DETAIL_SSR,
+    {
+      variables: { mediaHash },
+    }
+  )
+
+  // async load translation data
+  const { data: spaData } = useQuery<ArticleDetailSpaType>(ARTICLE_DETAIL_SPA, {
+    variables: { mediaHash },
+    ssr: false,
+  })
+
+  // merge and process data
+  const article = data && _merge(data?.article, spaData?.article)
+  const authorId = article && article.author.id
+  const collectionCount = (article && article.collection.totalCount) || 0
+  const isAuthor = viewer.id === authorId
+
+  const viewerLanguage = viewer.settings.language
+  const originLanguage = spaData?.article?.translation?.originalLanguage
+  const shouldTranslate = originLanguage && originLanguage !== viewerLanguage
+  const titleTranslation = article?.translation?.title
 
   if (loading) {
     return (
@@ -199,7 +232,11 @@ const ArticleDetail = () => {
           <TagList article={article} />
 
           <section className="title">
-            <Title type="article">{article.title}</Title>
+            <Title type="article">
+              {shouldTranslate && titleTranslation
+                ? titleTranslation
+                : article.title}
+            </Title>
 
             <section className="info">
               <section className="left">
@@ -207,7 +244,29 @@ const ArticleDetail = () => {
 
                 <FingerprintButton article={article} />
 
-                <TranslationButton />
+                {shouldTranslate && (
+                  <TranslationButton
+                    translate={contentTranslate}
+                    setTranslate={(translate) => {
+                      setContentTranslate(translate)
+                      if (translate) {
+                        window.dispatchEvent(
+                          new CustomEvent(ADD_TOAST, {
+                            detail: {
+                              color: 'green',
+                              content: (
+                                <Translate
+                                  zh_hant="已翻譯為當前語言"
+                                  zh_hans="已翻译为当前语言"
+                                />
+                              ),
+                            },
+                          })
+                        )
+                      }
+                    }}
+                  />
+                )}
               </section>
 
               <section className="right">
@@ -216,7 +275,7 @@ const ArticleDetail = () => {
             </section>
           </section>
 
-          <Content article={article} />
+          <Content article={article} translate={contentTranslate} />
 
           {features.payment && <Donation mediaHash={mediaHash} />}
 

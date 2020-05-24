@@ -8,6 +8,7 @@ import styles from '~/common/styles/utils/content.article.css'
 import { captureClicks, initAudioPlayers } from '~/common/utils'
 
 import { ContentArticle } from './__generated__/ContentArticle'
+import { ContentTranslation } from './__generated__/ContentTranslation'
 import { ReadArticle } from './__generated__/ReadArticle'
 
 const READ_ARTICLE = gql`
@@ -18,7 +19,13 @@ const READ_ARTICLE = gql`
   }
 `
 
-const Content = ({ article }: { article: ContentArticle }) => {
+const Content = ({
+  article,
+  translate,
+}: {
+  article: ContentArticle & ContentTranslation
+  translate: boolean
+}) => {
   const [read] = useMutation<ReadArticle>(READ_ARTICLE)
 
   const contentContainer = useRef(null)
@@ -86,11 +93,16 @@ const Content = ({ article }: { article: ContentArticle }) => {
     }
   }, [lastScroll])
 
+  const translation = article.translation
+
   return (
     <>
       <div
         className="u-content"
-        dangerouslySetInnerHTML={{ __html: article.content }}
+        dangerouslySetInnerHTML={{
+          __html:
+            translate && translation ? translation.content : article.content,
+        }}
         onClick={captureClicks}
         ref={contentContainer}
       />
