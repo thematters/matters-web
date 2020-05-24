@@ -23,11 +23,17 @@ const fragments = {
     fragment ContentArticle on Article {
       id
       content
+      translation {
+        originalLanguage
+        content
+        title
+      }
     }
   `,
 }
 
 const Content = ({ article }: { article: ContentArticle }) => {
+  console.log({ trans: article.translation })
   const [read] = useMutation<ReadArticle>(READ_ARTICLE)
 
   const contentContainer = useRef(null)
