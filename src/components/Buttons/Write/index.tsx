@@ -111,6 +111,11 @@ export const WriteButton = ({ allowed, isLarge, forbidden }: Props) => {
           }
         } catch (error) {
           const [messages, codes] = parseFormSubmitErrors(error, lang)
+
+          if (!messages[codes[0]]) {
+            return null
+          }
+
           window.dispatchEvent(
             new CustomEvent(ADD_TOAST, {
               detail: {
