@@ -1,4 +1,3 @@
-import Router from 'next/router'
 import { useEffect } from 'react'
 
 import { Dialog, Translate } from '~/components'
@@ -33,7 +32,7 @@ const Complete: React.FC<Props> = ({ callback }) => {
         <Dialog.Footer.Button
           type="button"
           bgColor="green"
-          onClick={() => Router.push(PATHS.ME_WALLET_TRANSACTIONS)}
+          href={PATHS.ME_WALLET_TRANSACTIONS}
         >
           <Translate zh_hant="查看交易" zh_hans="查看交易" />
         </Dialog.Footer.Button>
