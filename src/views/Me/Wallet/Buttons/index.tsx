@@ -1,4 +1,6 @@
-import { AddCreditDialog, Dialog, Translate } from '~/components'
+import { useContext } from 'react'
+
+import { AddCreditDialog, Dialog, FeaturesContext, Translate } from '~/components'
 
 import PayoutButton from './PayoutButton'
 import styles from './styles.css'
@@ -9,6 +11,7 @@ interface ButtonsProps {
 }
 
 const Buttons: React.FC<ButtonsProps> = ({ canPayout, hasStripeAccount }) => {
+  const features = useContext(FeaturesContext)
   return (
     <section className="l-row">
       <div className="l-col-4 l-col-sm-4 l-offset-sm-2 l-col-md-5 l-offset-md-2 l-col-lg-6 l-offset-lg-3">
@@ -21,10 +24,12 @@ const Buttons: React.FC<ButtonsProps> = ({ canPayout, hasStripeAccount }) => {
             )}
           </AddCreditDialog>
 
-          <PayoutButton
-            disabled={!canPayout}
-            hasStripeAccount={hasStripeAccount}
-          />
+          {features.payout &&
+            <PayoutButton
+              disabled={!canPayout}
+              hasStripeAccount={hasStripeAccount}
+            />
+          }
         </section>
       </div>
 
