@@ -39,6 +39,7 @@ type SetAmountCallbackValues = {
 
 interface FormProps {
   close: () => void
+  defaultCurrency?: CURRENCY
   recipient: UserDonationRecipient
   submitCallback: (values: SetAmountCallbackValues) => void
   targetId: string
@@ -115,6 +116,7 @@ const NoLikerIdButton = ({
 
 const SetAmount: React.FC<FormProps> = ({
   close,
+  defaultCurrency,
   recipient,
   submitCallback,
   targetId,
@@ -141,7 +143,7 @@ const SetAmount: React.FC<FormProps> = ({
   } = useFormik<FormValues>({
     initialValues: {
       amount: defaultHKDAmount,
-      currency: CURRENCY.HKD,
+      currency: defaultCurrency || CURRENCY.HKD,
     },
     validate: ({ amount, currency }) =>
       _pickBy({

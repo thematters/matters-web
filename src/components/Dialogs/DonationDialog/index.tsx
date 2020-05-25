@@ -190,6 +190,7 @@ const BaseDonationDialog = ({
         {isSetAmount && (
           <PaymentForm.PayTo.SetAmount
             close={close}
+            defaultCurrency={currency}
             submitCallback={setAmountCallback}
             recipient={recipient}
             targetId={targetId}
@@ -267,8 +268,8 @@ const BaseDonationDialog = ({
         {/* below steps for password management */}
 
         {isPasswordInvalid && (
-          <PaymentForm.PayTo.PasswordInvalid
-            switchToConfirm={() => setStep('confirm')}
+          <PaymentForm.PasswordInvalid
+            switchToPrevious={() => setStep('confirm')}
             switchToResetPassword={() => setStep('resetPasswordRequest')}
           />
         )}

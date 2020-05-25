@@ -3,12 +3,12 @@ import { Dialog, Translate } from '~/components'
 import styles from './styles.css'
 
 interface FormProps {
-  switchToConfirm: () => void
+  switchToPrevious: () => void
   switchToResetPassword: () => void
 }
 
 const PasswordInvalid: React.FC<FormProps> = ({
-  switchToConfirm,
+  switchToPrevious,
   switchToResetPassword,
 }) => {
   return (
@@ -27,7 +27,7 @@ const PasswordInvalid: React.FC<FormProps> = ({
           <Dialog.Footer.Button
             type="button"
             bgColor="green"
-            onClick={switchToConfirm}
+            onClick={switchToPrevious}
           >
             <Translate id="retry" />
           </Dialog.Footer.Button>

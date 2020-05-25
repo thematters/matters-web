@@ -1,6 +1,6 @@
 import {
-  Dialog,
   DropdownDialog,
+  Form,
   Icon,
   Menu,
   ResetPaymentPasswordDialog,
@@ -8,11 +8,11 @@ import {
   Translate,
 } from '~/components'
 
-interface PaymentPasswordButtonProps {
+interface PaymentPasswordProps {
   openResetPaymentPasswordDialog: () => void
 }
 
-const BasePaymentPasswordButton: React.FC<PaymentPasswordButtonProps> = ({
+const BasePaymentPassword: React.FC<PaymentPasswordProps> = ({
   openResetPaymentPasswordDialog,
 }) => {
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
@@ -41,15 +41,11 @@ const BasePaymentPasswordButton: React.FC<PaymentPasswordButtonProps> = ({
       }}
     >
       {({ open, ref }) => (
-        <Dialog.Footer.Button
-          bgColor="grey-lighter"
-          textColor="black"
-          aria-haspopup="true"
+        <Form.List.Item
+          title={<Translate zh_hant="管理交易密碼" zh_hans="管理交易密码" />}
           onClick={open}
           ref={ref}
-        >
-          <Translate id="paymentPassword" />
-        </Dialog.Footer.Button>
+        />
       )}
     </DropdownDialog>
   )
@@ -58,7 +54,7 @@ const BasePaymentPasswordButton: React.FC<PaymentPasswordButtonProps> = ({
 export default () => (
   <ResetPaymentPasswordDialog>
     {({ open: openResetPaymentPasswordDialog }) => (
-      <BasePaymentPasswordButton
+      <BasePaymentPassword
         openResetPaymentPasswordDialog={openResetPaymentPasswordDialog}
       />
     )}

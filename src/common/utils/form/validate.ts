@@ -137,6 +137,38 @@ export const validateDonationAmount = (value: number, lang: Language) => {
   }
 }
 
+export const validatePayoutAmount = ({
+  min,
+  max,
+  value,
+  lang,
+}: {
+  min: number
+  max: number
+  value: number
+  lang: Language
+}) => {
+  if (typeof value !== 'number') {
+    return translate({ id: 'required', lang })
+  }
+
+  if (value < min) {
+    return translate({
+      zh_hant: `最少提現金額爲 HKD ${min}`,
+      zh_hans: `最少提现金額爲 HKD ${min}`,
+      lang,
+    })
+  }
+
+  if (value > max) {
+    return translate({
+      zh_hant: `最高提現金額爲 HKD ${max}`,
+      zh_hans: `最高提现金額爲 HKD ${max}`,
+      lang,
+    })
+  }
+}
+
 export const validateCurrency = (value: string, lang: Language) => {
   if (!PAYMENT_CURRENCY[value as keyof typeof PAYMENT_CURRENCY]) {
     return translate({
