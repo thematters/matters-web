@@ -70,7 +70,7 @@ const AppreciationsReceived = () => {
 
   const loadMore = () => {
     analytics.trackEvent('load_more', {
-      type: 'appreciations_sent',
+      type: 'appreciations_received',
       location: edges.length,
     })
     return fetchMore({
