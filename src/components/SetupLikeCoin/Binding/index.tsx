@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Dialog, Spinner, Translate } from '~/components'
 
@@ -36,19 +36,21 @@ const Binding: React.FC<Props> = ({ prevStep, nextStep, windowRef }) => {
   })
   const likerId = data?.viewer?.liker.likerId
 
-  if (likerId) {
-    nextStep()
+  useEffect(() => {
+    if (likerId) {
+      nextStep()
 
-    if (windowRef) {
-      windowRef.close()
+      if (windowRef) {
+        windowRef.close()
+      }
+
+      return
     }
 
-    return null
-  }
-
-  if (error) {
-    setPolling(false)
-  }
+    if (error) {
+      setPolling(false)
+    }
+  })
 
   return (
     <>
