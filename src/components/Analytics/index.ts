@@ -44,6 +44,8 @@ const handleAnalytics = ({
       })
 
       window.firebaseAnalytics.logEvent('page_view')
+    } else {
+      window.firebaseAnalytics.logEvent(args[0], args[1])
     }
   }
 
@@ -63,6 +65,7 @@ const handleAnalytics = ({
       window.gtag('config', GA_TRACKING_ID, {
         user_id: id,
       })
+      window.firebaseAnalytics.setUserId(id, { global: true })
     } else {
       // visitor
       window.analytics.identify(args)

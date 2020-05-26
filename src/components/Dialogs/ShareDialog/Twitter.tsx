@@ -2,7 +2,6 @@ import queryString from 'query-string'
 
 import { TextIcon, withIcon } from '~/components'
 
-import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 import { ReactComponent as IconShareTwitter } from '@/public/static/icons/share-twitter.svg'
@@ -18,9 +17,8 @@ const Twitter = ({ title, link }: { title: string; link: string }) => (
           text: title,
           via: 'matterslab',
         })
-      analytics.trackEvent(ANALYTICS_EVENTS.SHARE, {
-        type: SHARE_TYPE.TWITTER,
-        url: link,
+      analytics.trackEvent('share', {
+        type: 'twitter',
       })
       return window.open(shareUrl, 'Share to Twitter')
     }}

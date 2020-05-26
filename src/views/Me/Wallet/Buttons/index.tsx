@@ -7,6 +7,8 @@ import {
   Translate,
 } from '~/components'
 
+import { analytics } from '~/common/utils'
+
 import PayoutButton from './PayoutButton'
 import styles from './styles.css'
 
@@ -23,7 +25,13 @@ const Buttons: React.FC<ButtonsProps> = ({ canPayout, hasStripeAccount }) => {
         <section className="buttons">
           <AddCreditDialog>
             {({ open }) => (
-              <Dialog.Footer.Button bgColor="green" onClick={open}>
+              <Dialog.Footer.Button
+                bgColor="green"
+                onClick={() => {
+                  open()
+                  analytics.trackEvent('click_button', { type: 'top_up' })
+                }}
+              >
                 <Translate id="topUp" />
               </Dialog.Footer.Button>
             )}

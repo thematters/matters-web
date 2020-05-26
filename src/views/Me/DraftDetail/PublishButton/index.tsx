@@ -8,9 +8,6 @@ import {
   ViewerContext,
 } from '~/components'
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
-import { analytics } from '~/common/utils'
-
 import { PublishDialog } from './PublishDialog'
 
 const PublishButton = ({
@@ -23,10 +20,7 @@ const PublishButton = ({
   <Button
     size={['4rem', '2rem']}
     bgColor="green"
-    onClick={() => {
-      analytics.trackEvent(ANALYTICS_EVENTS.CLICK_PUBLISH_BUTTON)
-      open()
-    }}
+    onClick={open}
     disabled={disabled}
     aria-haspopup="true"
   >

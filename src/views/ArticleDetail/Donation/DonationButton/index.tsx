@@ -11,6 +11,7 @@ import {
 } from '~/components'
 
 import { ADD_TOAST, REFETCH_DONATORS } from '~/common/enums'
+import { analytics } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -59,6 +60,7 @@ const DonationButton = ({ recipient, targetId }: DonationButtonProps) => {
             bgColor="red"
             disabled={recipient.id === viewer.id}
             onClick={() => {
+              analytics.trackEvent('click_button', { type: 'donate' })
               if (!viewer.isAuthed) {
                 showLoginToast()
                 return

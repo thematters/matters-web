@@ -13,7 +13,6 @@ import {
 import { QueryError } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import Authors from './Authors'
@@ -138,6 +137,12 @@ const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortByType }) => {
   const { edges, pageInfo } = result || {}
   const isNewLoading = networkStatus === NetworkStatus.loading
 
+  const { data: localCache } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
+    variables: { id: 'local' },
+  })
+
+  const { viewMode } = localCache?.clientPreference || { viewMode: 'default' }
+
   if (loading && (!result || isNewLoading)) {
     if (process.browser) {
       window.scrollTo(0, 0)
@@ -155,7 +160,7 @@ const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortByType }) => {
   }
 
   const loadMore = () => {
-    analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
+    analytics.trackEvent('load_more', {
       type: sortBy,
       location: edges.length,
     })
@@ -219,8 +224,15 @@ const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortByType }) => {
                 <ArticleDigestFeed
                   article={edge.node}
                   onClick={() =>
-                    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                    analytics.trackEvent('click_feed', {
                       type: sortBy,
+                      styleType:
+                        viewMode === 'default'
+                          ? 'small_cover'
+                          : viewMode === 'compact'
+                          ? 'no_cover'
+                          : 'large_cover',
+                      contentType: 'article',
                       location: i,
                     })
                   }

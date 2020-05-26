@@ -1,13 +1,11 @@
 import gql from 'graphql-tag'
 import throttle from 'lodash/throttle'
 import { useEffect, useRef, useState } from 'react'
-import { Waypoint } from 'react-waypoint'
 
 import { useMutation } from '~/components/GQL'
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
 import styles from '~/common/styles/utils/content.article.css'
-import { analytics, captureClicks, initAudioPlayers } from '~/common/utils'
+import { captureClicks, initAudioPlayers } from '~/common/utils'
 
 import { ContentArticle } from './__generated__/ContentArticle'
 import { ReadArticle } from './__generated__/ReadArticle'
@@ -32,7 +30,6 @@ const fragments = {
 const Content = ({ article }: { article: ContentArticle }) => {
   const [read] = useMutation<ReadArticle>(READ_ARTICLE)
 
-  const [trackedFinish, setTrackedFinish] = useState(false)
   const contentContainer = useRef(null)
 
   // idle timer
@@ -46,13 +43,9 @@ const Content = ({ article }: { article: ContentArticle }) => {
 
     const handleScroll = throttle(() => setScrollTime(Date.now() / 1000), 3000)
     window.addEventListener('scroll', handleScroll)
-    // enter and leave article for analytics
-    analytics.trackEvent(ANALYTICS_EVENTS.ENTER_ARTICLE, {
-      entrance: id,
-    })
+
     return () => {
       window.removeEventListener('scroll', handleScroll)
-      analytics.trackEvent(ANALYTICS_EVENTS.LEAVE_ARTICLE, { entrance: id })
     }
   }, [])
 
@@ -109,23 +102,6 @@ const Content = ({ article }: { article: ContentArticle }) => {
         dangerouslySetInnerHTML={{ __html: article.content }}
         onClick={captureClicks}
         ref={contentContainer}
-      />
-
-      <Waypoint
-        onEnter={() => {
-          if (!trackedFinish) {
-            analytics.trackEvent(ANALYTICS_EVENTS.FINISH_ARTICLE, {
-              entrance: id,
-            })
-            setTrackedFinish(true)
-          }
-        }}
-        onPositionChange={({ currentPosition: to, previousPosition: from }) => {
-          analytics.trackEvent(ANALYTICS_EVENTS.ARTICLE_BOTTOM_CROSS, {
-            from,
-            to,
-          })
-        }}
       />
 
       <style jsx>{styles}</style>

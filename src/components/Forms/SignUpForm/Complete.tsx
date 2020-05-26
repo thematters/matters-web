@@ -1,7 +1,6 @@
 import { Dialog, Layout, Translate } from '~/components'
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
-import { analytics, redirectToTarget } from '~/common/utils'
+import { redirectToTarget } from '~/common/utils'
 
 const Complete = ({
   purpose,
@@ -60,7 +59,6 @@ const Complete = ({
       <Dialog.Footer>
         <Dialog.Footer.Button
           onClick={() => {
-            analytics.trackEvent(ANALYTICS_EVENTS.CLICK_ENTER_AFTER_SIGNUP)
             redirectToTarget({
               fallback: isInPage ? 'homepage' : 'current',
             })

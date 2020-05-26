@@ -11,7 +11,6 @@ import {
   Transaction,
 } from '~/components'
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import { MeTransactions } from './__generated__/MeTransactions'
@@ -61,7 +60,7 @@ const Transactions = () => {
   }
 
   const loadMore = () => {
-    analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
+    analytics.trackEvent('load_more', {
       type: 'transaction',
       location: edges.length,
     })

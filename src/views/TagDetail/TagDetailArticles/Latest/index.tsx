@@ -14,11 +14,7 @@ import {
 import { QueryError } from '~/components/GQL'
 import TAG_ARTICLES from '~/components/GQL/queries/tagArticles'
 
-import {
-  ANALYTICS_EVENTS,
-  FEED_TYPE,
-  REFETCH_TAG_DETAIL_ARTICLES,
-} from '~/common/enums'
+import { REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import {
@@ -42,10 +38,9 @@ const LatestArticles = ({ id }: { id: string }) => {
   const hasArticles = edges && edges.length > 0 && pageInfo
 
   const loadMore = () => {
-    analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
-      type: FEED_TYPE.TAG_DETAIL,
+    analytics.trackEvent('load_more', {
+      type: 'tag_detail_selected',
       location: edges ? edges.length : 0,
-      entrance: id,
     })
     return fetchMore({
       variables: {
@@ -115,10 +110,11 @@ const LatestArticles = ({ id }: { id: string }) => {
             <ArticleDigestFeed
               article={node}
               onClick={() =>
-                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                  type: FEED_TYPE.TAG_DETAIL,
+                analytics.trackEvent('click_feed', {
+                  type: 'tag_detail_latest',
+                  contentType: 'article',
+                  styleType: 'title',
                   location: i,
-                  entrance: id,
                 })
               }
               inTagDetailLatest

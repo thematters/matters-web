@@ -10,8 +10,6 @@ import {
   ViewerContext,
 } from '~/components'
 
-import { SIGNUP_TYPE } from '~/common/enums'
-
 import Feed from './Feed'
 import Sidebar from './Sidebar'
 import styles from './styles.css'
@@ -46,10 +44,7 @@ const Home = () => {
               {!viewer.isAuthed && (
                 <section className="buttons">
                   <LoginButton size={[null, '2rem']} />
-                  <SignUpButton
-                    size={[null, '2rem']}
-                    trackType={SIGNUP_TYPE.GENERAL}
-                  />
+                  <SignUpButton size={[null, '2rem']} />
                 </section>
               )}
             </>

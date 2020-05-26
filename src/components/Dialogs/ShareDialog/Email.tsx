@@ -2,7 +2,6 @@ import queryString from 'query-string'
 
 import { TextIcon, Translate, withIcon } from '~/components'
 
-import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
 import { analytics, dom } from '~/common/utils'
 
 import { ReactComponent as IconShareEmail } from '@/public/static/icons/share-email.svg'
@@ -20,9 +19,8 @@ const Email = ({ title, link }: { title: string; link: string }) => (
           subject: title,
           body: `${description}\n\n${link}`,
         })
-      analytics.trackEvent(ANALYTICS_EVENTS.SHARE, {
-        type: SHARE_TYPE.EMAIL,
-        url: link,
+      analytics.trackEvent('share', {
+        type: 'email',
       })
       return (window.location.href = shareUrl)
     }}

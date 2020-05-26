@@ -2,7 +2,6 @@ import queryString from 'query-string'
 
 import { TextIcon, Translate, withIcon } from '~/components'
 
-import { ANALYTICS_EVENTS, SHARE_TYPE } from '~/common/enums'
 import { analytics, dom } from '~/common/utils'
 
 import { ReactComponent as IconShareDouban } from '@/public/static/icons/share-douban.svg'
@@ -21,9 +20,8 @@ const Douban = ({ title, link }: { title: string; link: string }) => (
           name: title,
           text: description,
         })
-      analytics.trackEvent(ANALYTICS_EVENTS.SHARE, {
-        type: SHARE_TYPE.DOUBAN,
-        url: link,
+      analytics.trackEvent('share', {
+        type: 'douban',
       })
       return window.open(shareUrl)
     }}

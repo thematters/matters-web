@@ -13,7 +13,6 @@ import {
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import { AllAuthors } from './__generated__/AllAuthors'
@@ -67,8 +66,8 @@ const Authors = () => {
   }
 
   const loadMore = () => {
-    analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
-      type: FEED_TYPE.ALL_AUTHORS,
+    analytics.trackEvent('load_more', {
+      type: 'all_authors',
       location: edges.length,
     })
     return fetchMore({
@@ -97,8 +96,10 @@ const Authors = () => {
             <UserDigest.Rich
               user={node}
               onClick={() =>
-                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                  type: FEED_TYPE.ALL_AUTHORS,
+                analytics.trackEvent('click_feed', {
+                  type: 'all_authors',
+                  styleType: 'card',
+                  contentType: 'user',
                   location: i,
                 })
               }

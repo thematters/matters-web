@@ -12,7 +12,6 @@ import {
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import { MeHistoryFeed } from './__generated__/MeHistoryFeed'
@@ -64,8 +63,8 @@ const MeHistory = () => {
   }
 
   const loadMore = () => {
-    analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
-      type: FEED_TYPE.READ_HISTORY,
+    analytics.trackEvent('load_more', {
+      type: 'read_history',
       location: edges.length,
     })
     return fetchMore({
@@ -93,8 +92,10 @@ const MeHistory = () => {
             <ArticleDigestFeed
               article={node.article}
               onClick={() =>
-                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                  type: FEED_TYPE.READ_HISTORY,
+                analytics.trackEvent('click_feed', {
+                  type: 'read_history',
+                  contentType: 'article',
+                  styleType: 'no_cover',
                   location: i,
                 })
               }

@@ -16,12 +16,7 @@ import {
 import { useMutation } from '~/components/GQL'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 
-import {
-  ANALYTICS_EVENTS,
-  CLOSE_ACTIVE_DIALOG,
-  OPEN_LOGIN_DIALOG,
-  PATHS,
-} from '~/common/enums'
+import { CLOSE_ACTIVE_DIALOG, OPEN_LOGIN_DIALOG, PATHS } from '~/common/enums'
 import {
   analytics,
   appendTarget,
@@ -140,7 +135,6 @@ const Init: React.FC<FormProps> = ({
         })
 
         analytics.identifyUser()
-        analytics.trackEvent(ANALYTICS_EVENTS.SIGNUP_SUCCESS)
 
         if (submitCallback) {
           submitCallback({ email, codeId, password })

@@ -17,7 +17,6 @@ import {
 import { QueryError } from '~/components/GQL'
 import USER_ARTICLES from '~/components/GQL/queries/userArticles'
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, getQuery, mergeConnections } from '~/common/utils'
 
 import IMAGE_LOGO_192 from '@/public/static/icon-192x192.png?url'
@@ -103,8 +102,8 @@ const UserArticles = () => {
   }
 
   const loadMore = () => {
-    analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
-      type: FEED_TYPE.USER_ARTICLE,
+    analytics.trackEvent('load_more', {
+      type: 'user_article',
       location: edges.length,
     })
     return fetchMore({
@@ -144,8 +143,10 @@ const UserArticles = () => {
                   article={node}
                   inUserArticles
                   onClick={() =>
-                    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                      type: FEED_TYPE.USER_ARTICLE,
+                    analytics.trackEvent('click_feed', {
+                      type: 'user_article',
+                      contentType: 'article',
+                      styleType: 'no_cover',
                       location: i,
                     })
                   }

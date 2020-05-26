@@ -14,7 +14,6 @@ import {
 import { QueryError } from '~/components/GQL'
 import { UserDigest } from '~/components/UserDigest'
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, getQuery, mergeConnections } from '~/common/utils'
 
 import { UserFollowerFeed } from './__generated__/UserFollowerFeed'
@@ -77,10 +76,9 @@ const UserFollowers = () => {
   }
 
   const loadMore = () => {
-    analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
-      type: FEED_TYPE.FOLLOWER,
+    analytics.trackEvent('load_more', {
+      type: 'follower',
       location: edges.length,
-      entrance: user.id,
     })
     return fetchMore({
       variables: {
@@ -111,10 +109,11 @@ const UserFollowers = () => {
               <UserDigest.Rich
                 user={node}
                 onClick={() =>
-                  analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                    type: FEED_TYPE.FOLLOWER,
+                  analytics.trackEvent('click_feed', {
+                    type: 'follower',
+                    contentType: 'user',
+                    styleType: 'card',
                     location: i,
-                    entrance: user.id,
                   })
                 }
               />

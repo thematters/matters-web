@@ -67,7 +67,7 @@ const Root = ({
   children: React.ReactNode
 }) => {
   useEffect(() => {
-    analytics.trackPage({ path: window.location.pathname })
+    analytics.trackPage()
   })
 
   useEffect(() => {

@@ -11,7 +11,6 @@ import {
   Spinner,
 } from '~/components'
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import AppreciationTabs from '../AppreciationTabs'
@@ -70,8 +69,8 @@ const AppreciationsReceived = () => {
   }
 
   const loadMore = () => {
-    analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
-      type: 'appreciationsReceived',
+    analytics.trackEvent('load_more', {
+      type: 'appreciations_received',
       location: edges.length,
     })
     return fetchMore({
