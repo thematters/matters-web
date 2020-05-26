@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.6.0] - 2020-05-26
+
+### Added
+
+- Payout #1129 #1135 #1141
+- Pull to Refresh #1115 #1131
+- ICYMI & Topics as home feeds #1082
+- Translation Button #1136
+- Add recaptcha protection to appreciate #1107 #1118 #1119
+- Add `.env` files #1122
+- Create default code of conduct #1140
+
+### Changed
+
+- New events schema & firebase analytics #1130
+- Refetch donators after donation complete. #1112
+- Adjust donation maximum amount for HKD. #1113
+- Use "en" instead of "zh" if current language is "zh_hant" #1117
+- Fix react-spring is broken by "privacy.resistFingerprinting" #1134
+
 ## [3.5.0] - 2020-05-15
 
 ### Added
