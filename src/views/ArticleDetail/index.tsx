@@ -80,7 +80,7 @@ const ARTICLE_DETAIL_SSR = gql`
   ${FingerprintButton.fragments.article}
 `
 
-const ARTICLE_DETAIL_SPA = gql`
+const ARTICLE_DETAIL_CSR = gql`
   query ArticleDetailSpa($mediaHash: String) {
     article(input: { mediaHash: $mediaHash }) {
       id
@@ -139,7 +139,7 @@ const ArticleDetail = () => {
   )
 
   // async load translation data
-  const { data: spaData } = useQuery<ArticleDetailSpaType>(ARTICLE_DETAIL_SPA, {
+  const { data: spaData } = useQuery<ArticleDetailSpaType>(ARTICLE_DETAIL_CSR, {
     variables: { mediaHash },
     ssr: false,
   })

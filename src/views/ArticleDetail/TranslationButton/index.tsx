@@ -2,6 +2,8 @@ import { FC } from 'react'
 
 import { Button, Icon, TextIcon, Translate } from '~/components'
 
+import { analytics } from '~/common/utils'
+
 const TranslationButton: FC<{
   translate: boolean
   setTranslate: (translate: boolean) => void
@@ -11,6 +13,7 @@ const TranslationButton: FC<{
     <Button
       onClick={() => {
         setTranslate(!translate)
+        analytics.trackEvent('click_button', { type: 'translation' })
       }}
     >
       <TextIcon

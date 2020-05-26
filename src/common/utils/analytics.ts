@@ -36,6 +36,7 @@ interface ClickButtonProp {
     | 'share_user'
     | 'signup'
     | 'top_up'
+    | 'translation' // translation button
     | 'write'
     | 'write_collection'
 }
