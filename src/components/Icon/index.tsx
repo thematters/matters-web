@@ -108,19 +108,17 @@ export type IconColor =
 export interface IconProps {
   size?: IconSize
   color?: IconColor
-  stroke?: IconColor
   [key: string]: any
 }
 
 export const withIcon = (
   WrappedIcon: React.FunctionComponent<React.SVGProps<HTMLOrSVGElement>>
 ) => (props: IconProps) => {
-  const { size = '', color = '', stroke = '', className, ...restProps } = props
+  const { size = '', color = '', className, ...restProps } = props
   const iconClass = classNames({
     icon: true,
     [size]: !!size,
     [color]: !!color,
-    [`stroke-${stroke}`]: !!stroke,
     [className]: !!className,
   })
 

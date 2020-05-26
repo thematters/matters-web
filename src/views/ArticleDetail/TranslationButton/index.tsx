@@ -14,7 +14,7 @@ const TranslationButton: FC<{
       }}
     >
       <TextIcon
-        icon={<Icon.World color={color} stroke={color} />}
+        icon={<Icon.World color={color} />}
         size="xs"
         spacing="xxtight"
         color={color}

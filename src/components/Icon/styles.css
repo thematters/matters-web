@@ -67,33 +67,4 @@
   &.red {
     color: var(--color-red);
   }
-
-  /* Stroke Color */
-  &.stroke-white path {
-    stroke: var(--color-white);
-  }
-  &.stroke-black path {
-    stroke: var(--color-black);
-  }
-  &.stroke-grey-dark path {
-    stroke: var(--color-grey-dark);
-  }
-  &.stroke-grey path {
-    stroke: var(--color-grey);
-  }
-  &.stroke-grey-light path {
-    stroke: var(--color-grey-light);
-  }
-  &.stroke-grey-lighter path {
-    stroke: var(--color-grey-lighter);
-  }
-  &.stroke-green path {
-    stroke: var(--color-matters-green);
-  }
-  &.stroke-gold path {
-    stroke: var(--color-matters-gold);
-  }
-  &.stroke-red path {
-    stroke: var(--color-red);
-  }
 }
