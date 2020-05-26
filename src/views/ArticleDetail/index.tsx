@@ -156,10 +156,7 @@ const ArticleDetail = () => {
   const [
     getTranslation,
     { data: translationData, loading: translating },
-  ] = useLazyQuery<ArticleDetailSpaType>(ARTICLE_TRANSLATION, {
-    variables: { mediaHash, language: viewerLanguage },
-    ssr: false,
-  })
+  ] = useLazyQuery<ArticleDetailSpaType>(ARTICLE_TRANSLATION)
   const titleTranslation = translationData?.article?.translation?.title
   const contentTranslation = translationData?.article?.translation?.content
 
@@ -257,15 +254,17 @@ const ArticleDetail = () => {
                       setTranslate(newTranslate)
 
                       if (newTranslate) {
-                        getTranslation()
+                        getTranslation({
+                          variables: { mediaHash, language: viewerLanguage },
+                        })
                         window.dispatchEvent(
                           new CustomEvent(ADD_TOAST, {
                             detail: {
                               color: 'green',
                               content: (
                                 <Translate
-                                  zh_hant="已翻譯為繁體中文"
-                                  zh_hans="已翻译为简体中文"
+                                  zh_hant="正在翻譯為繁體中文"
+                                  zh_hans="正在翻译为简体中文"
                                 />
                               ),
                             },
@@ -285,7 +284,7 @@ const ArticleDetail = () => {
 
           <Content
             article={article}
-            translation={translate ? contentTranslation : ''}
+            translation={translate ? contentTranslation : null}
             translating={translating}
           />
 
