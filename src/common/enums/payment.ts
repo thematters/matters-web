@@ -2,6 +2,10 @@ export const PAYMENT_MINIMAL_CHARGE_AMOUNT = {
   HKD: 20,
 }
 
+export const PAYMENT_DEFAULT_CHARGE_AMOUNT = {
+  HKD: 100,
+}
+
 export const PAYMENT_MAXIMUM_CHARGE_AMOUNT = {
   HKD: 99999,
 }
