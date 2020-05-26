@@ -23,11 +23,11 @@ const SortBy: React.FC<SortByProps> = ({ sortBy, setSortBy }) => {
         <Translate zh_hant="新作品" zh_hans="新作品" />
       </Tabs.Tab>
 
-      <Tabs.Tab onClick={() => setSortBy('icymi')} selected={isICYMI}>
+      <Tabs.Tab onClick={() => setSortBy('topics')} selected={isTopics}>
         <Translate zh_hant="正在聊" zh_hans="正在聊" />
       </Tabs.Tab>
 
-      <Tabs.Tab onClick={() => setSortBy('topics')} selected={isTopics}>
+      <Tabs.Tab onClick={() => setSortBy('icymi')} selected={isICYMI}>
         <Translate zh_hant="值得讀" zh_hans="值得读" />
       </Tabs.Tab>
     </Tabs>
