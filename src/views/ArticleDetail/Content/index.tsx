@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import gql from 'graphql-tag'
 import throttle from 'lodash/throttle'
 import { useEffect, useRef, useState } from 'react'
@@ -8,7 +9,6 @@ import styles from '~/common/styles/utils/content.article.css'
 import { captureClicks, initAudioPlayers } from '~/common/utils'
 
 import { ContentArticle } from './__generated__/ContentArticle'
-import { ContentTranslation } from './__generated__/ContentTranslation'
 import { ReadArticle } from './__generated__/ReadArticle'
 
 const READ_ARTICLE = gql`
@@ -21,10 +21,12 @@ const READ_ARTICLE = gql`
 
 const Content = ({
   article,
-  translate,
+  translation,
+  translating,
 }: {
-  article: ContentArticle & ContentTranslation
-  translate: boolean
+  article: ContentArticle
+  translation?: string
+  translating: boolean
 }) => {
   const [read] = useMutation<ReadArticle>(READ_ARTICLE)
 
@@ -82,10 +84,6 @@ const Content = ({
 
       if (isReading()) {
         read({ variables: { id } })
-        //  for debug purpose
-        if (process.env.NODE_ENV !== 'production') {
-          console.log('reading')
-        }
       }
     }, 5000)
 
@@ -95,15 +93,12 @@ const Content = ({
     }
   }, [lastScroll])
 
-  const translation = article.translation
-
   return (
     <>
       <div
-        className="u-content"
+        className={classNames({ 'u-content': true, translating })}
         dangerouslySetInnerHTML={{
-          __html:
-            translate && translation ? translation.content : article.content,
+          __html: translation || article.content,
         }}
         onClick={captureClicks}
         ref={contentContainer}
@@ -121,17 +116,6 @@ Content.fragments = {
       content
     }
   `,
-  csr: {
-    article: gql`
-      fragment ContentTranslation on Article {
-        translation {
-          originalLanguage
-          content
-          title
-        }
-      }
-    `,
-  },
 }
 
 export default Content
