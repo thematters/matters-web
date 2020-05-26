@@ -13,7 +13,6 @@ import {
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 import SectionHeader from '../../SectionHeader'
@@ -98,8 +97,10 @@ const FeedAuthors = () => {
                   spacing={['tight', 0]}
                   bgColor="none"
                   onClick={() =>
-                    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                      type: FEED_TYPE.AUTHORS,
+                    analytics.trackEvent('click_feed', {
+                      type: 'authors',
+                      contentType: 'user',
+                      styleType: 'card',
                       location: (edgeIndex + 1) * (nodeIndex + 1) - 1,
                     })
                   }

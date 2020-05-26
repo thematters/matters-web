@@ -1,4 +1,3 @@
-import getConfig from 'next/config'
 import NextHead from 'next/head'
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
@@ -6,16 +5,14 @@ import { useContext } from 'react'
 import { LanguageContext } from '~/components'
 
 import { langConvert, translate, TranslateArgs } from '~/common/utils'
-import IMAGE_APPLE_TOUCH_ICON from '~/static/apple-touch-icon.png?url'
-import IMAGE_FAVICON_16 from '~/static/favicon-16x16.png?url'
-import IMAGE_FAVICON_32 from '~/static/favicon-32x32.png?url'
-import IMAGE_FAVICON_64 from '~/static/favicon-64x64.png?url'
-import IMAGE_INTRO from '~/static/images/intro.jpg?url'
 
-const {
-  publicRuntimeConfig: { ENV, SITE_DOMAIN, FB_APP_ID },
-} = getConfig()
-const isProd = ENV === 'production'
+import IMAGE_APPLE_TOUCH_ICON from '@/public/static/apple-touch-icon.png?url'
+import IMAGE_FAVICON_16 from '@/public/static/favicon-16x16.png?url'
+import IMAGE_FAVICON_32 from '@/public/static/favicon-32x32.png?url'
+import IMAGE_FAVICON_64 from '@/public/static/favicon-64x64.png?url'
+import IMAGE_INTRO from '@/public/static/images/intro.jpg?url'
+
+const isProd = process.env.NODE_ENV === 'production'
 
 interface HeadProps {
   title?: string | TranslateArgs
@@ -41,13 +38,13 @@ export const Head: React.FC<HeadProps> = (props) => {
       ? `${props.keywords.join(',')},matters,matters.news,創作有價`
       : 'matters,matters.news,創作有價',
     url: props.path
-      ? `${SITE_DOMAIN}${props.path}`
+      ? `${process.env.NEXT_PUBLIC_SITE_DOMAIN}${props.path}`
       : router.asPath
-      ? `${SITE_DOMAIN}${router.asPath}`
-      : SITE_DOMAIN,
+      ? `${process.env.NEXT_PUBLIC_SITE_DOMAIN}${router.asPath}`
+      : process.env.NEXT_PUBLIC_SITE_DOMAIN,
     image: props.image || IMAGE_INTRO,
   }
-  const canonicalUrl = head.url.split('#')[0].split('?')[0]
+  const canonicalUrl = head.url?.split('#')[0].split('?')[0]
 
   return (
     <NextHead>
@@ -99,7 +96,7 @@ export const Head: React.FC<HeadProps> = (props) => {
       )}
 
       {/* social */}
-      <meta property="fb:app_id" content={FB_APP_ID} />
+      <meta property="fb:app_id" content={process.env.NEXT_PUBLIC_FB_APP_ID} />
       <meta name="og:title" key="og:title" content={head.title} />
       <meta property="og:site_name" key="og:site_name" content="Matters" />
       <meta property="og:url" key="og:url" content={head.url} />

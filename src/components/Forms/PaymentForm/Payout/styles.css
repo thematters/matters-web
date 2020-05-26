@@ -1,0 +1,10 @@
+b {
+  color: var(--color-black);
+  font-weight: var(--font-weight-medium);
+}
+
+h3 {
+  color: var(--color-grey);
+  margin-left: var(--spacing-loose);
+  margin-right: var(--spacing-loose);
+}

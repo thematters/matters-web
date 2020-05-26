@@ -1,4 +1,3 @@
-import getConfig from 'next/config'
 import { createContext, useEffect, useState } from 'react'
 
 import { sleep } from '~/common/utils'
@@ -9,11 +8,11 @@ declare global {
   }
 }
 
-// recaptcha related setup
-const {
-  publicRuntimeConfig: { RECAPTCHA_KEY },
-} = getConfig()
+type ReCaptchaAction = 'verificationCode' | 'appreciateArticle'
 
+const RECAPTCHA_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_KEY || ''
+
+// recaptcha related setup
 const recaptchaScriptId = 'recaptcha-script'
 
 export const ReCaptchaContext = createContext<{
@@ -27,8 +26,10 @@ export const ReCaptchaConsumer = ReCaptchaContext.Consumer
 
 export const ReCaptchaProvider = ({
   children,
+  action = 'verificationCode',
 }: {
   children: React.ReactNode
+  action?: ReCaptchaAction
 }) => {
   const [token, setToken] = useState('')
   const [refreshToken, setRefreshToken] = useState<() => void>()
@@ -42,7 +43,7 @@ export const ReCaptchaProvider = ({
       const getToken = async () => {
         if (window.grecaptcha && window.grecaptcha.execute) {
           window.grecaptcha
-            .execute(RECAPTCHA_KEY, { action: 'homepage' })
+            .execute(RECAPTCHA_KEY, { action })
             .then((newToken) => {
               setToken(newToken)
             })
@@ -66,8 +67,8 @@ export const ReCaptchaProvider = ({
       setRecaptchaInterval(intervalId)
 
       // clear up after max wait time of 20 minutes
-      await sleep(60 * 20 * 1000)
-      clearInterval(intervalId)
+      // await sleep(60 * 20 * 1000)
+      // clearInterval(intervalId)
     })
   }
 
@@ -75,7 +76,7 @@ export const ReCaptchaProvider = ({
   useEffect(() => {
     if (!document.getElementById(recaptchaScriptId)) {
       const script = document.createElement('script')
-      script.src = `https://www.google.com/recaptcha/api.js?render=${RECAPTCHA_KEY}`
+      script.src = `https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_KEY}`
       script.addEventListener('load', handleRecaptcha)
       script.id = recaptchaScriptId
 

@@ -2,7 +2,6 @@ import gql from 'graphql-tag'
 
 import { ArticleDigestTitle, Card, CardProps, Tag } from '~/components'
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, toPath } from '~/common/utils'
 
 import styles from './styles.css'
@@ -52,8 +51,10 @@ const TagFeedDigest = ({ tag, ...cardProps }: TagFeedDigestProps) => {
             <Card
               spacing={[0, 'base']}
               onClick={() =>
-                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                  type: FEED_TYPE.TAG_DETAIL,
+                analytics.trackEvent('click_feed', {
+                  type: 'tag_detail_latest',
+                  styleType: 'title',
+                  contentType: 'article',
                   location: i,
                 })
               }

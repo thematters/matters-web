@@ -2,7 +2,7 @@ import { ApolloQueryResult } from 'apollo-client'
 import { forwardRef, Ref } from 'react'
 import { Waypoint } from 'react-waypoint'
 
-import { Spinner } from '~/components'
+import { PullToRefresh, Spinner } from '~/components'
 
 /**
  *  Usage:
@@ -40,21 +40,25 @@ interface Props {
    * A React component to act as loader
    */
   loader?: React.ReactNode
+
+  /**
+   * Refetch function to be called by Pull to Refresh
+   */
+  pullToRefresh?: () => any
 }
 
 export const InfiniteScroll: React.FC<Props> = ({
-  children,
-  loader = <Spinner />,
   hasNextPage,
+  loader = <Spinner />,
   loadMore,
+  pullToRefresh,
+  children,
 }) => {
-  const Loader = ({ innerRef }: { innerRef: Ref<HTMLDivElement> }) => (
-    <div ref={innerRef}>{loader || <Spinner />}</div>
-  )
   const LoaderWithRef = forwardRef((props, ref: Ref<HTMLDivElement>) => (
-    <Loader innerRef={ref} />
+    <div ref={ref}>{loader || <Spinner />}</div>
   ))
-  return (
+
+  const Inner = () => (
     <div>
       {children}
       {hasNextPage && (
@@ -64,4 +68,14 @@ export const InfiniteScroll: React.FC<Props> = ({
       )}
     </div>
   )
+
+  if (pullToRefresh) {
+    return (
+      <PullToRefresh refresh={pullToRefresh}>
+        <Inner />
+      </PullToRefresh>
+    )
+  }
+
+  return <Inner />
 }

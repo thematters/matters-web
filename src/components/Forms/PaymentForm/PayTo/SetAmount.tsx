@@ -14,9 +14,9 @@ import { useMutation } from '~/components/GQL'
 import PAY_TO from '~/components/GQL/mutations/payTo'
 
 import {
-  MAXIMUM_PAYTO_AMOUNT,
   OPEN_LIKE_COIN_DIALOG,
   PAYMENT_CURRENCY as CURRENCY,
+  PAYMENT_MAXIMUM_PAYTO_AMOUNT,
 } from '~/common/enums'
 import {
   translate,
@@ -39,6 +39,7 @@ type SetAmountCallbackValues = {
 
 interface FormProps {
   close: () => void
+  defaultCurrency?: CURRENCY
   recipient: UserDonationRecipient
   submitCallback: (values: SetAmountCallbackValues) => void
   targetId: string
@@ -115,6 +116,7 @@ const NoLikerIdButton = ({
 
 const SetAmount: React.FC<FormProps> = ({
   close,
+  defaultCurrency,
   recipient,
   submitCallback,
   targetId,
@@ -141,7 +143,7 @@ const SetAmount: React.FC<FormProps> = ({
   } = useFormik<FormValues>({
     initialValues: {
       amount: defaultHKDAmount,
-      currency: CURRENCY.HKD,
+      currency: defaultCurrency || CURRENCY.HKD,
     },
     validate: ({ amount, currency }) =>
       _pickBy({
@@ -187,7 +189,7 @@ const SetAmount: React.FC<FormProps> = ({
   const canReceiveLike = isLike && !!recipient.liker.likerId
   const canProcess = isHKD || (canPayLike && canReceiveLike)
   const color = isLike ? 'green' : 'red'
-  const maxAmount = isLike ? Infinity : MAXIMUM_PAYTO_AMOUNT.HKD
+  const maxAmount = isLike ? Infinity : PAYMENT_MAXIMUM_PAYTO_AMOUNT.HKD
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit} noBackground>

@@ -186,7 +186,7 @@ export const Button: React.FC<ButtonProps> = forwardRef(
     // handle click
     const onClick = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
       if (restProps.onClick) {
-        restProps.onClick()
+        restProps.onClick(event)
       }
 
       // blur on click

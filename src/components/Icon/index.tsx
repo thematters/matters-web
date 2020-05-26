@@ -29,6 +29,7 @@ import { ReactComponent as EditXS } from './icons/edit-xs.svg'
 import { ReactComponent as Edit } from './icons/edit.svg'
 import { ReactComponent as EmptyWarning } from './icons/empty-warning.svg'
 import { ReactComponent as Expand } from './icons/expand.svg'
+import { ReactComponent as ExternalLink } from './icons/external-link.svg'
 import { ReactComponent as External } from './icons/external.svg'
 import { ReactComponent as HashTag } from './icons/hashtag.svg'
 import { ReactComponent as Heart } from './icons/heart.svg'
@@ -79,6 +80,7 @@ import { ReactComponent as ViewModeCompact } from './icons/view-mode-compact.svg
 import { ReactComponent as ViewModeDefault } from './icons/view-mode-default.svg'
 import { ReactComponent as Volume } from './icons/volume.svg'
 import { ReactComponent as WalletMedium } from './icons/wallet-md.svg'
+import { ReactComponent as World } from './icons/world.svg'
 import Live from './Live'
 import styles from './styles.css'
 
@@ -184,6 +186,7 @@ export const Icon = {
   EmptyWarning: withIcon(EmptyWarning),
   Expand: withIcon(Expand),
   External: withIcon(External),
+  ExternalLink: withIcon(ExternalLink),
   HashTag: withIcon(HashTag),
   Heart: withIcon(Heart),
   HelpMedium: withIcon(HelpMedium),
@@ -240,4 +243,5 @@ export const Icon = {
   ViewModeDefault: withIcon(ViewModeDefault),
   Volume: withIcon(Volume),
   WalletMedium: withIcon(WalletMedium),
+  World: withIcon(World),
 }

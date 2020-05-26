@@ -1,11 +1,8 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Dialog, Spinner, Translate } from '~/components'
-
-import { ANALYTICS_EVENTS } from '~/common/enums'
-import { analytics } from '~/common/utils'
 
 import { ViewerLikerId } from './__generated__/ViewerLikerId'
 
@@ -36,19 +33,21 @@ const Binding: React.FC<Props> = ({ prevStep, nextStep, windowRef }) => {
   })
   const likerId = data?.viewer?.liker.likerId
 
-  if (likerId) {
-    nextStep()
+  useEffect(() => {
+    if (likerId) {
+      nextStep()
 
-    if (windowRef) {
-      windowRef.close()
+      if (windowRef) {
+        windowRef.close()
+      }
+
+      return
     }
 
-    return null
-  }
-
-  if (error) {
-    setPolling(false)
-  }
+    if (error) {
+      setPolling(false)
+    }
+  })
 
   return (
     <>
@@ -75,13 +74,7 @@ const Binding: React.FC<Props> = ({ prevStep, nextStep, windowRef }) => {
       </Dialog.Message>
 
       <Dialog.Footer>
-        <Dialog.Footer.Button
-          disabled={!error}
-          onClick={() => {
-            prevStep()
-            analytics.trackEvent(ANALYTICS_EVENTS.LIKECOIN_STEP_RETRY)
-          }}
-        >
+        <Dialog.Footer.Button disabled={!error} onClick={prevStep}>
           <Translate id="retry" />
         </Dialog.Footer.Button>
       </Dialog.Footer>

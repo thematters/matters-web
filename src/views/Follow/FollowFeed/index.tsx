@@ -11,7 +11,6 @@ import {
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import FollowComment from './FollowComment'
@@ -50,7 +49,7 @@ const FOLLOW_FEED = gql`
 `
 
 const FollowFeed = () => {
-  const { data, loading, error, fetchMore } = useQuery<FollowFeedType>(
+  const { data, loading, error, fetchMore, refetch } = useQuery<FollowFeedType>(
     FOLLOW_FEED
   )
 
@@ -70,8 +69,8 @@ const FollowFeed = () => {
   }
 
   const loadMore = () => {
-    analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
-      type: FEED_TYPE.FOLLOW,
+    analytics.trackEvent('load_more', {
+      type: 'follow',
       location: edges.length,
     })
     return fetchMore({
@@ -88,7 +87,11 @@ const FollowFeed = () => {
   }
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+    <InfiniteScroll
+      hasNextPage={pageInfo.hasNextPage}
+      loadMore={loadMore}
+      pullToRefresh={refetch}
+    >
       <List>
         {edges.map(({ node, cursor }, i) => (
           <List.Item key={cursor}>
@@ -96,8 +99,10 @@ const FollowFeed = () => {
               <ArticleDigestFeed
                 article={node}
                 onClick={() =>
-                  analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                    type: FEED_TYPE.FOLLOW,
+                  analytics.trackEvent('click_feed', {
+                    type: 'follow',
+                    contentType: 'article',
+                    styleType: 'no_cover',
                     location: i,
                   })
                 }
@@ -108,8 +113,10 @@ const FollowFeed = () => {
               <FollowComment
                 comment={node}
                 onClick={() =>
-                  analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                    type: FEED_TYPE.FOLLOW,
+                  analytics.trackEvent('click_feed', {
+                    type: 'follow',
+                    contentType: 'article',
+                    styleType: 'comment',
                     location: i,
                   })
                 }

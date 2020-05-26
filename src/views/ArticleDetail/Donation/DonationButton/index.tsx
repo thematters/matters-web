@@ -4,14 +4,14 @@ import {
   Button,
   DonationDialog,
   Icon,
-  LikeCoinDialog,
   LoginButton,
   TextIcon,
   Translate,
   ViewerContext,
 } from '~/components'
 
-import { ADD_TOAST } from '~/common/enums'
+import { ADD_TOAST, REFETCH_DONATORS } from '~/common/enums'
+import { analytics } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -24,6 +24,10 @@ interface DonationButtonProps {
 
 const DonationButton = ({ recipient, targetId }: DonationButtonProps) => {
   const viewer = useContext(ViewerContext)
+
+  const completeCallback = () => {
+    window.dispatchEvent(new CustomEvent(REFETCH_DONATORS, {}))
+  }
 
   const showLoginToast = () => {
     window.dispatchEvent(
@@ -45,13 +49,18 @@ const DonationButton = ({ recipient, targetId }: DonationButtonProps) => {
 
   return (
     <section className="container">
-      <DonationDialog recipient={recipient} targetId={targetId}>
+      <DonationDialog
+        completeCallback={completeCallback}
+        recipient={recipient}
+        targetId={targetId}
+      >
         {({ open }) => (
           <Button
             size={['10.5rem', '2.5rem']}
             bgColor="red"
             disabled={recipient.id === viewer.id}
             onClick={() => {
+              analytics.trackEvent('click_button', { type: 'donate' })
               if (!viewer.isAuthed) {
                 showLoginToast()
                 return
@@ -65,8 +74,6 @@ const DonationButton = ({ recipient, targetId }: DonationButtonProps) => {
           </Button>
         )}
       </DonationDialog>
-
-      <LikeCoinDialog allowEventTrigger />
 
       <style jsx>{styles}</style>
     </section>

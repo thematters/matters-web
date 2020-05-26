@@ -2,8 +2,8 @@ import { useState } from 'react'
 
 import { Dialog, Translate } from '~/components'
 
-import { ANALYTICS_EVENTS, SHARE_TYPE, TextId } from '~/common/enums'
-import { analytics, isMobile } from '~/common/utils'
+import { TextId } from '~/common/enums'
+import { isMobile } from '~/common/utils'
 
 import Copy from './Copy'
 import Douban from './Douban'
@@ -134,11 +134,6 @@ export const ShareDialog = (props: ShareDialogProps) => {
     } else {
       fallbackShare()
     }
-
-    analytics.trackEvent(ANALYTICS_EVENTS, {
-      type: SHARE_TYPE.ROOT,
-      url: shareLink,
-    })
   }
 
   return (

@@ -1,8 +1,8 @@
 import { useQuery } from '@apollo/react-hooks'
 
 import {
-  Button,
   DropdownDialog,
+  Form,
   Icon,
   Menu,
   TextIcon,
@@ -10,8 +10,7 @@ import {
 } from '~/components'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
-import { ANALYTICS_EVENTS, STORE_KEY_VIEW_MODE, TEXT } from '~/common/enums'
-import { analytics } from '~/common/utils'
+import { STORE_KEY_VIEW_MODE } from '~/common/enums'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 
@@ -21,7 +20,7 @@ const ViewMode = () => {
   const { data, client } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
     variables: { id: 'local' },
   })
-  const { viewMode } = data?.clientPreference || { viewMode: 'default' }
+  const { viewMode } = data?.clientPreference || { viewMode: 'comfortable' }
   const isDefaultMode = viewMode === 'default'
   const isComfortableMode = viewMode === 'comfortable'
   const isCompactMode = viewMode === 'compact'
@@ -33,8 +32,6 @@ const ViewMode = () => {
         data: { viewMode: mode },
       })
     }
-
-    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_VIEW_MODE, { mode })
 
     localStorage.setItem(STORE_KEY_VIEW_MODE, mode)
   }
@@ -48,7 +45,7 @@ const ViewMode = () => {
           spacing="base"
           weight={isDefaultMode ? 'bold' : 'normal'}
         >
-          <Translate zh_hant="默認（大圖）" zh_hans="默认（大图）" />
+          <Translate id="viewModeDefault" />
         </TextIcon>
       </Menu.Item>
       <Menu.Item onClick={() => setViewMode('comfortable')}>
@@ -58,7 +55,7 @@ const ViewMode = () => {
           spacing="base"
           weight={isComfortableMode ? 'bold' : 'normal'}
         >
-          <Translate zh_hant="標準（小圖）" zh_hans="标准（小图）" />
+          <Translate id="viewModeComfortable" />
         </TextIcon>
       </Menu.Item>
       <Menu.Item onClick={() => setViewMode('compact')}>
@@ -68,7 +65,7 @@ const ViewMode = () => {
           spacing="base"
           weight={isCompactMode ? 'bold' : 'normal'}
         >
-          <Translate zh_hant="緊湊（無圖）" zh_hans="紧凑（无图）" />
+          <Translate id="viewModeCompact" />
         </TextIcon>
       </Menu.Item>
     </Menu>
@@ -86,20 +83,22 @@ const ViewMode = () => {
       }}
     >
       {({ open, ref }) => (
-        <Button
-          size={['3rem', '2rem']}
-          bgColor="grey-lighter"
-          aria-haspopup="true"
-          aira-label={TEXT.zh_hant.switchViewMode}
+        <Form.List.Item
+          title={<Translate id="viewMode" />}
           onClick={open}
+          rightText={
+            <span key={viewMode || ''}>
+              {isDefaultMode ? (
+                <Translate id="viewModeDefault" />
+              ) : isComfortableMode ? (
+                <Translate id="viewModeComfortable" />
+              ) : (
+                <Translate id="viewModeCompact" />
+              )}
+            </span>
+          }
           ref={ref}
-        >
-          {isDefaultMode && <Icon.ViewModeDefault size="md" color="grey" />}
-          {isComfortableMode && (
-            <Icon.ViewModeComfortable size="md" color="grey" />
-          )}
-          {isCompactMode && <Icon.ViewModeCompact size="md" color="grey" />}
-        </Button>
+        />
       )}
     </DropdownDialog>
   )

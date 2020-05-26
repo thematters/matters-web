@@ -1,4 +1,4 @@
-import IMAGE_COVER from '~/static/images/profile-cover.png'
+import IMAGE_COVER from '@/public/static/images/profile-cover.png'
 
 import styles from './styles.css'
 

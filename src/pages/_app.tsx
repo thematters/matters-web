@@ -4,7 +4,6 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
 import gql from 'graphql-tag'
 import { AppProps } from 'next/app'
-import getConfig from 'next/config'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 
@@ -53,10 +52,7 @@ import('@sentry/browser').then((Sentry) => {
   /**
    * Initialize
    */
-  const {
-    publicRuntimeConfig: { SENTRY_DSN },
-  } = getConfig()
-  Sentry.init({ dsn: SENTRY_DSN || '' })
+  Sentry.init({ dsn: process.env.NEXT_PUBLIC_SENTRY_DSN || '' })
 })
 
 /**
@@ -71,7 +67,7 @@ const Root = ({
   children: React.ReactNode
 }) => {
   useEffect(() => {
-    analytics.trackPage({ path: window.location.pathname })
+    analytics.trackPage()
   })
 
   useEffect(() => {

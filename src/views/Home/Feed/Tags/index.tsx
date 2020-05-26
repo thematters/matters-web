@@ -4,7 +4,6 @@ import gql from 'graphql-tag'
 import { Slides, Spinner } from '~/components'
 import { QueryError } from '~/components/GQL'
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 import SectionHeader from '../../SectionHeader'
@@ -56,8 +55,10 @@ const TagsFeed = () => {
           <TagFeedDigest
             tag={node}
             onClick={() =>
-              analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                type: FEED_TYPE.TAGS,
+              analytics.trackEvent('click_feed', {
+                type: 'tags',
+                contentType: 'tag',
+                styleType: 'article',
                 location: i,
               })
             }

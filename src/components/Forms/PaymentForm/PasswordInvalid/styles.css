@@ -1,0 +1,12 @@
+.password-invalid-footer {
+  & :global(> footer) {
+    @mixin flex-center-all;
+
+    flex-direction: column;
+    margin-top: 0rem;
+
+    & :global(> button:last-child) {
+      margin: var(--spacing-base) 0 var(--spacing-base);
+    }
+  }
+}

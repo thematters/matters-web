@@ -47,11 +47,7 @@ export const LikeCoinDialog: React.FC<LikeCoinDialogProps> = ({
         )}
 
         {step === 'setup' && (
-          <SetupLikeCoin
-            purpose="dialog"
-            submitCallback={close}
-            closeDialog={close}
-          />
+          <SetupLikeCoin purpose="dialog" closeDialog={close} />
         )}
       </Dialog>
     </>

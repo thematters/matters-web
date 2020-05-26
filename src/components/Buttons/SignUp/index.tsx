@@ -1,30 +1,30 @@
-import { Button, TextIcon, Translate, useResponsive } from '~/components'
-
 import {
-  ANALYTICS_EVENTS,
-  CLOSE_ACTIVE_DIALOG,
-  OPEN_SIGNUP_DIALOG,
-  PATHS,
-} from '~/common/enums'
+  Button,
+  ButtonProps,
+  TextIcon,
+  Translate,
+  useResponsive,
+} from '~/components'
+
+import { CLOSE_ACTIVE_DIALOG, OPEN_SIGNUP_DIALOG, PATHS } from '~/common/enums'
 import { analytics, appendTarget } from '~/common/utils'
 
-interface SignUpButtonProps {
+type SignUpButtonProps = {
   isPlain?: boolean
-  trackType: string
-}
+} & Pick<ButtonProps, 'size'>
 
 export const SignUpButton: React.FC<SignUpButtonProps> = ({
   children,
   isPlain,
-  trackType,
+  size,
 }) => {
   const isSmallUp = useResponsive('sm-up')
 
   const clickProps = isSmallUp
     ? {
         onClick: () => {
-          analytics.trackEvent(ANALYTICS_EVENTS.SIGNUP_START, {
-            type: trackType,
+          analytics.trackEvent('click_button', {
+            type: 'signup',
           })
           window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
           window.dispatchEvent(new CustomEvent(OPEN_SIGNUP_DIALOG))
@@ -33,8 +33,8 @@ export const SignUpButton: React.FC<SignUpButtonProps> = ({
     : {
         ...appendTarget(PATHS.SIGNUP, true),
         onClick: () => {
-          analytics.trackEvent(ANALYTICS_EVENTS.SIGNUP_START, {
-            type: trackType,
+          analytics.trackEvent('click_button', {
+            type: 'signup',
           })
         },
       }
@@ -50,7 +50,7 @@ export const SignUpButton: React.FC<SignUpButtonProps> = ({
   return (
     <Button
       bgColor="green"
-      size={[null, '2.25rem']}
+      size={size || [null, '2.25rem']}
       spacing={[0, 'loose']}
       aria-haspopup="true"
       {...clickProps}

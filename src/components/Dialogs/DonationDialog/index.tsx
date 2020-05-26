@@ -45,6 +45,7 @@ interface ResetPasswordData {
 
 interface DonationDialogProps {
   children: ({ open }: { open: () => void }) => React.ReactNode
+  completeCallback?: () => void
   defaultStep?: Step
   recipient: UserDonationRecipient
   targetId: string
@@ -66,6 +67,7 @@ const fragments = {
 
 const BaseDonationDialog = ({
   children,
+  completeCallback,
   defaultStep = 'setAmount',
   recipient,
   targetId,
@@ -188,6 +190,7 @@ const BaseDonationDialog = ({
         {isSetAmount && (
           <PaymentForm.PayTo.SetAmount
             close={close}
+            defaultCurrency={currency}
             submitCallback={setAmountCallback}
             recipient={recipient}
             targetId={targetId}
@@ -218,6 +221,7 @@ const BaseDonationDialog = ({
         {isComplete && (
           <PaymentForm.PayTo.Complete
             amount={amount}
+            callback={completeCallback}
             currency={currency}
             recipient={recipient}
           />
@@ -264,8 +268,8 @@ const BaseDonationDialog = ({
         {/* below steps for password management */}
 
         {isPasswordInvalid && (
-          <PaymentForm.PayTo.PasswordInvalid
-            switchToConfirm={() => setStep('confirm')}
+          <PaymentForm.PasswordInvalid
+            switchToPrevious={() => setStep('confirm')}
             switchToResetPassword={() => setStep('resetPasswordRequest')}
           />
         )}

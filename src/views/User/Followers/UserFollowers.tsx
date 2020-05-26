@@ -9,11 +9,11 @@ import {
   List,
   Spinner,
   Translate,
+  usePullToRefresh,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 import { UserDigest } from '~/components/UserDigest'
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, getQuery, mergeConnections } from '~/common/utils'
 
 import { UserFollowerFeed } from './__generated__/UserFollowerFeed'
@@ -44,12 +44,14 @@ const USER_FOLLOWERS_FEED = gql`
 const UserFollowers = () => {
   const router = useRouter()
   const userName = getQuery({ router, key: 'userName' })
-  const { data, loading, error, fetchMore } = useQuery<UserFollowerFeed>(
-    USER_FOLLOWERS_FEED,
-    {
-      variables: { userName },
-    }
-  )
+  const { data, loading, error, fetchMore, refetch } = useQuery<
+    UserFollowerFeed
+  >(USER_FOLLOWERS_FEED, {
+    variables: { userName },
+  })
+
+  usePullToRefresh.Register()
+  usePullToRefresh.Handler(refetch)
 
   if (loading || !data || !data.user) {
     return <Spinner />
@@ -74,10 +76,9 @@ const UserFollowers = () => {
   }
 
   const loadMore = () => {
-    analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
-      type: FEED_TYPE.FOLLOWER,
+    analytics.trackEvent('load_more', {
+      type: 'follower',
       location: edges.length,
-      entrance: user.id,
     })
     return fetchMore({
       variables: {
@@ -108,10 +109,11 @@ const UserFollowers = () => {
               <UserDigest.Rich
                 user={node}
                 onClick={() =>
-                  analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                    type: FEED_TYPE.FOLLOWER,
+                  analytics.trackEvent('click_feed', {
+                    type: 'follower',
+                    contentType: 'user',
+                    styleType: 'card',
                     location: i,
-                    entrance: user.id,
                   })
                 }
               />

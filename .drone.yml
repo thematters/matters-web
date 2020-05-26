@@ -30,9 +30,8 @@ steps:
   - name: develop:build
     image: node:12.16
     commands:
+      - cp .env.dev .env
       - npm run build
-    environment:
-      ENV: development
     when:
       branch:
         - develop
@@ -99,9 +98,8 @@ steps:
   - name: prod:build
     image: node:12.16
     commands:
+      - cp .env.prod .env
       - npm run build
-    environment:
-      ENV: production
     when:
       branch:
         - master

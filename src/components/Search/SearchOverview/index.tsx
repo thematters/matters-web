@@ -7,8 +7,7 @@ import { Fragment } from 'react'
 import { Menu, Translate } from '~/components'
 import { Spinner } from '~/components/Spinner'
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
-import { analytics, toPath } from '~/common/utils'
+import { toPath } from '~/common/utils'
 
 import ClearHistoryButton from './ClearHistoryButton'
 import styles from './styles.css'
@@ -80,20 +79,7 @@ export const SearchOverview = ({ inPage }: SearchOverviewProps) => {
                     q: key,
                   })}
                 >
-                  <a
-                    className="key"
-                    onClick={() => {
-                      analytics.trackEvent(
-                        ANALYTICS_EVENTS.CLICK_SEARCH_HISTORY,
-                        {
-                          location: i,
-                          entrance: key,
-                        }
-                      )
-                    }}
-                  >
-                    {key}
-                  </a>
+                  <a className="key">{key}</a>
                 </Link>
               </li>
             ))}
@@ -118,12 +104,6 @@ export const SearchOverview = ({ inPage }: SearchOverviewProps) => {
                   page: 'search',
                   q: key,
                 })}
-                onClick={() => {
-                  analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FREQUENT_SEARCH, {
-                    location: i,
-                    entrance: key,
-                  })
-                }}
                 key={key}
               >
                 <span className="key">{key}</span>

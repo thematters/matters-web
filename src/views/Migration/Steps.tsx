@@ -12,10 +12,9 @@ import {
   ViewerContext,
 } from '~/components'
 
-import { SIGNUP_TYPE } from '~/common/enums'
-import IMAGE_STEP_1 from '~/static/images/migration-step-1.svg'
-import IMAGE_STEP_2 from '~/static/images/migration-step-2.svg'
-import IMAGE_STEP_3 from '~/static/images/migration-step-3.svg'
+import IMAGE_STEP_1 from '@/public/static/images/migration-step-1.svg'
+import IMAGE_STEP_2 from '@/public/static/images/migration-step-2.svg'
+import IMAGE_STEP_3 from '@/public/static/images/migration-step-3.svg'
 
 import styles from './styles.css'
 
@@ -121,7 +120,7 @@ const Steps = () => {
                 />
               </p>
               <section className="sub-content-link">
-                <SignUpButton trackType={SIGNUP_TYPE.GENERAL} isPlain>
+                <SignUpButton isPlain>
                   <Translate
                     zh_hant={zh_hant.sub_content_1_2}
                     zh_hans={zh_hans.sub_content_1_2}

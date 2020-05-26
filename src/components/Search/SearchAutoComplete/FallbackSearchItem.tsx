@@ -2,8 +2,7 @@ import classNames from 'classnames'
 
 import { Menu, Translate } from '~/components'
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
-import { analytics, toPath } from '~/common/utils'
+import { toPath } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -24,12 +23,6 @@ const FallbackSearchItem = ({ searchKey, inPage }: FallbackSearchItemProps) => {
         page: 'search',
         q: searchKey,
       })}
-      onClick={() => {
-        analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FREQUENT_SEARCH, {
-          location: -1,
-          entrance: searchKey,
-        })
-      }}
     >
       <span className={itemClass}>
         <Translate id="search" />

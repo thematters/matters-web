@@ -9,9 +9,9 @@ import {
   List,
   Spinner,
   Translate,
+  usePullToRefresh,
 } from '~/components'
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, getQuery, mergeConnections } from '~/common/utils'
 
 import EmptySearch from '../EmptySearch'
@@ -43,14 +43,15 @@ const SearchArticles = () => {
   const router = useRouter()
   const q = getQuery({ router, key: 'q' })
 
-  const { data, loading, fetchMore, networkStatus } = useQuery<SeachArticles>(
-    SEARCH_ARTICLES,
-    {
-      variables: { key: q, first: 10 },
-      notifyOnNetworkStatusChange: true,
-    }
-  )
+  const { data, loading, fetchMore, networkStatus, refetch } = useQuery<
+    SeachArticles
+  >(SEARCH_ARTICLES, {
+    variables: { key: q, first: 10 },
+    notifyOnNetworkStatusChange: true,
+  })
   const isNewLoading = networkStatus === NetworkStatus.setVariables
+
+  usePullToRefresh.Handler(refetch)
 
   if (loading && (!data?.search || isNewLoading)) {
     return <Spinner />
@@ -64,10 +65,9 @@ const SearchArticles = () => {
   }
 
   const loadMore = () => {
-    analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
-      type: FEED_TYPE.SEARCH_ARTICLE,
+    analytics.trackEvent('load_more', {
+      type: 'search_article',
       location: edges.length,
-      entrance: q,
     })
     return fetchMore({
       variables: {
@@ -92,10 +92,11 @@ const SearchArticles = () => {
                 <ArticleDigestFeed
                   article={node}
                   onClick={() =>
-                    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                      type: FEED_TYPE.SEARCH_ARTICLE,
+                    analytics.trackEvent('click_feed', {
+                      type: 'search_article',
+                      contentType: 'article',
+                      styleType: 'title',
                       location: i,
-                      entrance: q,
                     })
                   }
                 />

@@ -8,6 +8,9 @@ export default gql`
         balance {
           HKD
         }
+        stripeAccount {
+          id
+        }
       }
     }
   }

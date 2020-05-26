@@ -49,6 +49,11 @@ const TermContent: React.FC<TermContentProps> = ({ closeDialog }) => {
         closeDialog()
       } catch (error) {
         const [messages, codes] = parseFormSubmitErrors(error, lang)
+
+        if (!messages[codes[0]]) {
+          return
+        }
+
         window.dispatchEvent(
           new CustomEvent(ADD_TOAST, {
             detail: {

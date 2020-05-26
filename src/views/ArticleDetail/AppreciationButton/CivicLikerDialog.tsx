@@ -2,8 +2,7 @@ import { useState } from 'react'
 
 import { Dialog, Translate } from '~/components'
 
-import { ANALYTICS_EVENTS, EXTERNAL_LINKS } from '~/common/enums'
-import { analytics } from '~/common/utils'
+import { EXTERNAL_LINKS } from '~/common/enums'
 
 interface CivicLikerDialogProps {
   onClose: () => void
@@ -14,11 +13,9 @@ const CivicLikerDialog = ({ onClose, children }: CivicLikerDialogProps) => {
   const [showDialog, setShowDialog] = useState(true)
   const open = () => {
     setShowDialog(true)
-    analytics.trackEvent(ANALYTICS_EVENTS.OPEN_CIVIC_LIKER_MODAL)
   }
   const close = () => {
     setShowDialog(false)
-    analytics.trackEvent(ANALYTICS_EVENTS.CLOSE_CIVIC_LIKER_MODAL)
     onClose()
   }
 

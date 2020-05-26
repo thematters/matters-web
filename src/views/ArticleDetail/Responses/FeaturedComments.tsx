@@ -2,7 +2,14 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
 
-import { List, Spinner, Title, Translate, ViewMoreButton } from '~/components'
+import {
+  List,
+  Spinner,
+  Title,
+  Translate,
+  usePullToRefresh,
+  ViewMoreButton,
+} from '~/components'
 
 import { filterComments, getQuery, mergeConnections } from '~/common/utils'
 
@@ -44,19 +51,20 @@ const FEATURED_COMMENTS = gql`
 const FeaturedComments = () => {
   const router = useRouter()
   const mediaHash = getQuery({ router, key: 'mediaHash' })
-  const { data, loading, fetchMore } = useQuery<ArticleFeaturedComments>(
-    FEATURED_COMMENTS,
-    {
-      variables: { mediaHash },
-      notifyOnNetworkStatusChange: true,
-    }
-  )
+  const { data, loading, fetchMore, refetch } = useQuery<
+    ArticleFeaturedComments
+  >(FEATURED_COMMENTS, {
+    variables: { mediaHash },
+    notifyOnNetworkStatusChange: true,
+  })
 
   const connectionPath = 'article.featuredComments'
   const { edges, pageInfo } = data?.article?.featuredComments || {}
   const comments = filterComments(
     (edges || []).map(({ node }) => node)
   ) as ArticleFeaturedComments_article_featuredComments_edges_node[]
+
+  usePullToRefresh.Handler(refetch)
 
   if (loading && !data) {
     return <Spinner />

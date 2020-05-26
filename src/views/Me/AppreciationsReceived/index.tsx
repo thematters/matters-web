@@ -8,11 +8,9 @@ import {
   InfiniteScroll,
   Layout,
   List,
-  Spacer,
   Spinner,
 } from '~/components'
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import AppreciationTabs from '../AppreciationTabs'
@@ -46,9 +44,9 @@ const ME_APPRECIATED_RECEIVED = gql`
 `
 
 const AppreciationsReceived = () => {
-  const { data, loading, fetchMore } = useQuery<MeAppreciationsReceived>(
-    ME_APPRECIATED_RECEIVED
-  )
+  const { data, loading, fetchMore, refetch } = useQuery<
+    MeAppreciationsReceived
+  >(ME_APPRECIATED_RECEIVED)
 
   if (loading) {
     return <Spinner />
@@ -71,8 +69,8 @@ const AppreciationsReceived = () => {
   }
 
   const loadMore = () => {
-    analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
-      type: 'appreciationsReceived',
+    analytics.trackEvent('load_more', {
+      type: 'appreciations_received',
       location: edges.length,
     })
     return fetchMore({
@@ -92,7 +90,11 @@ const AppreciationsReceived = () => {
     <>
       <AppreciationTabs activity={data.viewer.activity} />
 
-      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+      <InfiniteScroll
+        hasNextPage={pageInfo.hasNextPage}
+        loadMore={loadMore}
+        pullToRefresh={refetch}
+      >
         <List>
           {edges.map(({ node, cursor }) => (
             <List.Item key={cursor}>
@@ -113,8 +115,6 @@ export default () => (
     />
 
     <Head title={{ id: 'appreciationsReceived' }} />
-
-    <Spacer />
 
     <AppreciationsReceived />
   </Layout.Main>

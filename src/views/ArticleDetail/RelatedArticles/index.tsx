@@ -9,7 +9,6 @@ import {
   Translate,
 } from '~/components'
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 import styles from './styles.css'
@@ -53,10 +52,11 @@ const RelatedArticles = ({ article, inSidebar }: RelatedArticlesProps) => {
   })
 
   const onClick = (i: number) => () =>
-    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-      type: FEED_TYPE.RELATED_ARTICLE,
+    analytics.trackEvent('click_feed', {
+      type: 'related_article',
+      contentType: 'article',
+      styleType: 'card',
       location: i,
-      entrance: article.id,
     })
 
   const Header = (

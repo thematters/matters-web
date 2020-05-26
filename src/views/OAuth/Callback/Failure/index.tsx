@@ -4,15 +4,22 @@ import { Layout, Translate } from '~/components'
 
 import { OAUTH_PROVIDER, PATHS } from '~/common/enums'
 import { getQuery, routerPush } from '~/common/utils'
-import ICON_LIKECOIN from '~/static/icons/likecoin.svg'
+
+import ICON_LIKECOIN from '@/public/static/icons/likecoin.svg'
+import ICON_STRIPE from '@/public/static/icons/stripe.svg'
 
 import { Box } from '../../Box'
 import styles from '../styles.css'
 
 const OAUTH_CALLBACK_ERROR_CODE = {
   userNotFound: 1,
+  // likecoin
   likerNotFound: 2,
   likerExists: 3,
+  // stripe
+  stripeAccountNotFound: 4,
+  stripeAuthFailed: 5,
+  stripeAccountExists: 6,
 }
 
 const ERROR_TEXT = {
@@ -28,6 +35,18 @@ const ERROR_TEXT = {
     zh_hant: '此 Liker ID 已與 Matters ID 綁定',
     zh_hans: '此 Liker ID 已与 Matters ID 绑定',
   },
+  [OAUTH_CALLBACK_ERROR_CODE.stripeAccountNotFound]: {
+    zh_hant: 'Stripe 帳戶不存在',
+    zh_hans: 'Stripe 帐户不存在',
+  },
+  [OAUTH_CALLBACK_ERROR_CODE.stripeAuthFailed]: {
+    zh_hant: 'Stripe 帳戶創建失敗',
+    zh_hans: 'Stripe 帐户创建失败',
+  },
+  [OAUTH_CALLBACK_ERROR_CODE.stripeAccountExists]: {
+    zh_hant: '你已創建 Stripe 帳戶',
+    zh_hans: '你已创建 Stripe 帐户',
+  },
 }
 
 const OAuthCallbackFailure = () => {
@@ -39,6 +58,7 @@ const OAuthCallbackFailure = () => {
   }
   const avatar: { [key: string]: any } = {
     likecoin: ICON_LIKECOIN,
+    'stripe-connect': ICON_STRIPE,
   }
   const errorDetail = ERROR_TEXT[code as any]
 

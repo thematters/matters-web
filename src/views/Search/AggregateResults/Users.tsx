@@ -4,7 +4,6 @@ import { useRouter } from 'next/router'
 
 import { Card, List, Spinner, UserDigest } from '~/components'
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, getQuery, toPath } from '~/common/utils'
 
 import styles from './styles.css'
@@ -66,10 +65,11 @@ const AggregateUserResults = () => {
                     userName: node.userName || '',
                   })}
                   onClick={() =>
-                    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                      type: FEED_TYPE.SEARCH_USER,
+                    analytics.trackEvent('click_feed', {
+                      type: 'search',
+                      contentType: 'user',
+                      styleType: 'card',
                       location: i,
-                      entrance: q,
                     })
                   }
                 >
