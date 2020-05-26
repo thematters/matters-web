@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import { NetworkStatus } from 'apollo-client'
 import gql from 'graphql-tag'
+import { useEffect } from 'react'
 
 import {
   ArticleDigestFeed,
@@ -128,9 +129,21 @@ const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortByType }) => {
     fetchMore: fetchMoreMainFeed,
     networkStatus,
     refetch,
+    client,
   } = useQuery<HottestFeed | NewestFeed>(queries[sortBy], {
     notifyOnNetworkStatusChange: true,
   })
+
+  // prefetch other queries
+  useEffect(() => {
+    Object.keys(queries)
+      .filter((s) => s !== sortBy)
+      .map((s) => {
+        client.query({
+          query: queries[s as SortByType],
+        })
+      })
+  }, [])
 
   const connectionPath = 'viewer.recommendation.feed'
   const result = data?.viewer?.recommendation.feed

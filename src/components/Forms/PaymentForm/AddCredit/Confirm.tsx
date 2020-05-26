@@ -8,8 +8,8 @@ import { useMutation } from '~/components/GQL'
 
 import {
   PAYMENT_CURRENCY,
+  PAYMENT_DEFAULT_CHARGE_AMOUNT,
   PAYMENT_MAXIMUM_CHARGE_AMOUNT,
-  PAYMENT_MINIMAL_CHARGE_AMOUNT,
   PLATFORM_FEE,
 } from '~/common/enums'
 import {
@@ -74,7 +74,7 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, defaultAmount }) => {
     isSubmitting,
   } = useFormik<FormValues>({
     initialValues: {
-      amount: defaultAmount || PAYMENT_MINIMAL_CHARGE_AMOUNT[currency],
+      amount: defaultAmount || PAYMENT_DEFAULT_CHARGE_AMOUNT[currency],
     },
     validate: ({ amount }) =>
       _pickBy({

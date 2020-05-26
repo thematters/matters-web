@@ -80,6 +80,7 @@ import { ReactComponent as ViewModeCompact } from './icons/view-mode-compact.svg
 import { ReactComponent as ViewModeDefault } from './icons/view-mode-default.svg'
 import { ReactComponent as Volume } from './icons/volume.svg'
 import { ReactComponent as WalletMedium } from './icons/wallet-md.svg'
+import { ReactComponent as World } from './icons/world.svg'
 import Live from './Live'
 import styles from './styles.css'
 
@@ -242,4 +243,5 @@ export const Icon = {
   ViewModeDefault: withIcon(ViewModeDefault),
   Volume: withIcon(Volume),
   WalletMedium: withIcon(WalletMedium),
+  World: withIcon(World),
 }
