@@ -295,6 +295,12 @@
   }
 }
 
+.translating {
+  & p {
+    color: var(--color-grey);
+  }
+}
+
 #editor-article-container {
   position: relative;
 }

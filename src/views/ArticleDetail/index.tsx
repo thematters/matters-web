@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useLazyQuery, useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import jump from 'jump.js'
 import _merge from 'lodash/merge'
@@ -59,6 +59,7 @@ const ARTICLE_DETAIL_SSR = gql`
       cover
       summary
       createdAt
+      language
       author {
         ...UserDigestRichUser
       }
@@ -80,14 +81,16 @@ const ARTICLE_DETAIL_SSR = gql`
   ${FingerprintButton.fragments.article}
 `
 
-const ARTICLE_DETAIL_CSR = gql`
-  query ArticleDetailSpa($mediaHash: String) {
+const ARTICLE_TRANSLATION = gql`
+  query ArticleDetailSpa($mediaHash: String, $language: UserLanguage!) {
     article(input: { mediaHash: $mediaHash }) {
       id
-      ...ContentTranslation
+      translation(input: { language: $language }) {
+        content
+        title
+      }
     }
   }
-  ${Content.fragments.csr.article}
 `
 
 // skip responses in SSR
@@ -128,7 +131,6 @@ const ArticleDetail = () => {
   const features = useContext(FeaturesContext)
   const isLargeUp = useResponsive('lg-up')
   const [fixedWall, setFixedWall] = useState(false)
-  const [contentTranslate, setContentTranslate] = useState(false)
 
   // ssr data
   const { data, loading, error } = useQuery<ArticleDetailType>(
@@ -138,22 +140,28 @@ const ArticleDetail = () => {
     }
   )
 
-  // async load translation data
-  const { data: spaData } = useQuery<ArticleDetailSpaType>(ARTICLE_DETAIL_CSR, {
-    variables: { mediaHash },
-    ssr: false,
-  })
-
   // merge and process data
-  const article = data && _merge(data?.article, spaData?.article)
-  const authorId = article && article.author.id
+  const article = data?.article
+  const authorId = article?.author?.id
   const collectionCount = (article && article.collection.totalCount) || 0
   const isAuthor = viewer.id === authorId
 
+  // translation
+  const [translate, setTranslate] = useState(false)
+
+  const language = article?.language
   const viewerLanguage = viewer.settings.language
-  const originLanguage = spaData?.article?.translation?.originalLanguage
-  const shouldTranslate = originLanguage && originLanguage !== viewerLanguage
-  const titleTranslation = article?.translation?.title
+  const shouldTranslate = language && language !== viewerLanguage
+
+  const [
+    getTranslation,
+    { data: translationData, loading: translating },
+  ] = useLazyQuery<ArticleDetailSpaType>(ARTICLE_TRANSLATION, {
+    variables: { mediaHash, language: viewerLanguage },
+    ssr: false,
+  })
+  const titleTranslation = translationData?.article?.translation?.title
+  const contentTranslation = translationData?.article?.translation?.content
 
   if (loading) {
     return (
@@ -233,9 +241,7 @@ const ArticleDetail = () => {
 
           <section className="title">
             <Title type="article">
-              {shouldTranslate && titleTranslation
-                ? titleTranslation
-                : article.title}
+              {translate && titleTranslation ? titleTranslation : article.title}
             </Title>
 
             <section className="info">
@@ -246,10 +252,12 @@ const ArticleDetail = () => {
 
                 {shouldTranslate && (
                   <TranslationButton
-                    translate={contentTranslate}
-                    setTranslate={(translate) => {
-                      setContentTranslate(translate)
-                      if (translate) {
+                    translate={translate}
+                    setTranslate={(newTranslate) => {
+                      setTranslate(newTranslate)
+
+                      if (newTranslate) {
+                        getTranslation()
                         window.dispatchEvent(
                           new CustomEvent(ADD_TOAST, {
                             detail: {
@@ -275,7 +283,11 @@ const ArticleDetail = () => {
             </section>
           </section>
 
-          <Content article={article} translate={contentTranslate} />
+          <Content
+            article={article}
+            translation={translate ? contentTranslation : ''}
+            translating={translating}
+          />
 
           {features.payment && <Donation mediaHash={mediaHash} />}
 
