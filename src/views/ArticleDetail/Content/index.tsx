@@ -121,7 +121,7 @@ Content.fragments = {
       content
     }
   `,
-  spa: {
+  csr: {
     article: gql`
       fragment ContentTranslation on Article {
         translation {

@@ -87,7 +87,7 @@ const ARTICLE_DETAIL_SPA = gql`
       ...ContentTranslation
     }
   }
-  ${Content.fragments.spa.article}
+  ${Content.fragments.csr.article}
 `
 
 // skip responses in SSR
