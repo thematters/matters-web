@@ -70,11 +70,11 @@ const CurrencyOption: React.FC<CurrencyOptionProps> = ({
           <input
             {...inputProps}
             aria-describedby={fieldMsgId}
+            disabled={disabled}
             id={fieldId}
             name={name}
             type="radio"
             value={currency}
-            disabled={disabled}
           />
         </VisuallyHidden>
       </label>
