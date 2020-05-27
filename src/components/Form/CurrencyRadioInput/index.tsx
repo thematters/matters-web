@@ -52,6 +52,7 @@ const CurrencyOption: React.FC<CurrencyOptionProps> = ({
 
   fieldMsgId,
 
+  disabled,
   ...inputProps
 }) => {
   const fieldId = `field-${name}-${currency}`
@@ -59,6 +60,7 @@ const CurrencyOption: React.FC<CurrencyOptionProps> = ({
     currency: true,
     [isLike ? 'like' : 'hkd']: true,
     inactive,
+    disabled,
   })
   return (
     <li className={classes}>
@@ -72,6 +74,7 @@ const CurrencyOption: React.FC<CurrencyOptionProps> = ({
             name={name}
             type="radio"
             value={currency}
+            disabled={disabled}
           />
         </VisuallyHidden>
       </label>
