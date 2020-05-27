@@ -1,4 +1,5 @@
-import { FC } from 'react'
+import { Router } from 'next/router'
+import { FC, useEffect } from 'react'
 
 import { Button, Icon, TextIcon, Translate } from '~/components'
 
@@ -9,6 +10,11 @@ const TranslationButton: FC<{
   setTranslate: (translate: boolean) => void
 }> = ({ translate, setTranslate }) => {
   const color = translate ? 'green' : 'grey'
+
+  useEffect(() => {
+    Router.events.on('routeChangeStart', () => setTranslate(false))
+  }, [])
+
   return (
     <Button
       onClick={() => {
