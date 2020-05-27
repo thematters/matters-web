@@ -121,7 +121,7 @@ const SetAmount: React.FC<FormProps> = ({
   submitCallback,
   targetId,
 }) => {
-  const defaultHKDAmount = 5
+  const defaultHKDAmount = 10
   const defaultLikeAmount = 160
   const formId = 'pay-to-set-amount-form'
 
