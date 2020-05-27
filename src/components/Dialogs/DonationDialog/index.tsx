@@ -6,12 +6,8 @@ import { Dialog, PaymentForm, Translate, ViewerContext } from '~/components'
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { numRound } from '~/common/utils'
 
-import {
-  AddCredit_addCredit_transaction as AddCreditTx
-} from '~/components/Forms/PaymentForm/AddCredit/__generated__/AddCredit'
-import {
-  PayTo_payTo_transaction as PayToTx,
-} from '~/components/GQL/mutations/__generated__/PayTo'
+import { AddCredit_addCredit_transaction as AddCreditTx } from '~/components/Forms/PaymentForm/AddCredit/__generated__/AddCredit'
+import { PayTo_payTo_transaction as PayToTx } from '~/components/GQL/mutations/__generated__/PayTo'
 import { UserDonationRecipient } from './__generated__/UserDonationRecipient'
 
 type Step =
