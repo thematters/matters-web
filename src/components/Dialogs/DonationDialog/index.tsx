@@ -113,7 +113,9 @@ const BaseDonationDialog = ({
         }
         break
       case CURRENCY.HKD:
-        setStep('confirm')
+        setStep(
+          viewer.status?.hasPaymentPassword ? 'confirm' : 'setPaymentPassword'
+        )
         break
     }
   }
@@ -126,9 +128,7 @@ const BaseDonationDialog = ({
 
   const switchToAddCredit = () => {
     setAddCreditData(baseAddCreditData)
-    setStep(
-      viewer.status?.hasPaymentPassword ? 'addCredit' : 'setPaymentPassword'
-    )
+    setStep('addCredit')
   }
 
   const addCreditCallback = ({ transaction, client_secret }: any) => {
@@ -227,13 +227,11 @@ const BaseDonationDialog = ({
           />
         )}
 
-        {/* below steps for add credit */}
-
         {isSetPaymentPassword && (
-          <PaymentForm.SetPassword
-            submitCallback={() => setStep('addCredit')}
-          />
+          <PaymentForm.SetPassword submitCallback={() => setStep('confirm')} />
         )}
+
+        {/* below steps for add credit */}
 
         {isAddCredit && (
           <PaymentForm.AddCredit.Confirm submitCallback={addCreditCallback} />
