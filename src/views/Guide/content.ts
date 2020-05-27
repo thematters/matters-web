@@ -8,6 +8,8 @@ export default {
 
 <p><a className="u-link-green" href="https://matters.news/@hi176/matters-%E5%AF%AB%E4%BD%9C%E8%80%85%E5%B7%A5%E5%85%B7%E7%AE%B1-%E6%96%B0%E6%89%8B%E5%BF%85%E7%9C%8B-2020-03-13-%E6%9B%B4%E6%96%B0-bafyreihjfnilw5brblgqpkk4bw5lg6zn55k6caqqo7yl4u2dwaxpgpvvyq">Matters 作者工具箱 | 新手必看</a></p>
 
+<p><a className="u-link-green" href="https://matters.news/@hi176/matters-%E6%94%AF%E4%BB%98%E5%8A%9F%E8%83%BD%E6%8C%87%E5%8D%97-bafyreihhlgou6p2jwzl2gkwq32jge63oyuch542pp5bcfipkzqxu3b4f5e">Matters Pay 指南</a></p>
+
 <p>如果你還有其他疑問或建議，請寫信到 <a className="u-link-green" href="mailto:ask@matters.news" target="_blank">ask@matters.news</a>，我們會儘快回覆！</p>
 `,
   zh_hans: /* html */ `
@@ -18,6 +20,8 @@ export default {
 <p><a className="u-link-green" href="https://matters.news/@hi176/matters-%E8%AE%80%E8%80%85%E5%B7%A5%E5%85%B7%E7%AE%B1-%E6%96%B0%E6%89%8B%E5%BF%85%E7%9C%8B-2020-03-13-%E6%9B%B4%E6%96%B0-bafyreibzylcybyl3fb2gyf5mo4nfrlwyyomrnm4nfrvwt7z4ufv6c6j7r4">Matters 读者工具箱 | 新手必看</a></p>
 
 <p><a className="u-link-green" href="https://matters.news/@hi176/matters-%E5%AF%AB%E4%BD%9C%E8%80%85%E5%B7%A5%E5%85%B7%E7%AE%B1-%E6%96%B0%E6%89%8B%E5%BF%85%E7%9C%8B-2020-03-13-%E6%9B%B4%E6%96%B0-bafyreihjfnilw5brblgqpkk4bw5lg6zn55k6caqqo7yl4u2dwaxpgpvvyq">Matters 作者工具箱 | 新手必看</a></p>
+
+<p><a className="u-link-green" href="https://matters.news/@hi176/matters-%E6%94%AF%E4%BB%98%E5%8A%9F%E8%83%BD%E6%8C%87%E5%8D%97-bafyreihhlgou6p2jwzl2gkwq32jge63oyuch542pp5bcfipkzqxu3b4f5e">Matters Pay 指南</a></p>
 
 <p>如果你还有其他疑问或建议，请写信到 <a className="u-link-green" href="mailto:ask@matters.news" target="_blank">ask@matters.news</a>，我们会尽快回复！</p>
   `,
