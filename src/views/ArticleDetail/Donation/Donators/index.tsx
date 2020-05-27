@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { Spinner, Translate } from '~/components'
+import { Translate } from '~/components'
 import { Avatar } from '~/components/Avatar'
 import { useEventListener } from '~/components/Hook'
 
@@ -44,7 +44,7 @@ const Donators = ({ mediaHash }: { mediaHash: string }) => {
   useEventListener(REFETCH_DONATORS, refetch)
 
   if (loading) {
-    return <Spinner />
+    return null
   }
 
   if (!data || !data.article) {
