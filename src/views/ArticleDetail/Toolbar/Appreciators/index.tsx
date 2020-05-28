@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import { AppreciatorsDialog, Translate } from '~/components'
 import { Avatar } from '~/components/Avatar'
 
-import { TEXT, IMAGE_PIXEL } from '~/common/enums'
+import { IMAGE_PIXEL, TEXT } from '~/common/enums'
 import { numAbbr } from '~/common/utils'
 
 import styles from './styles.css'

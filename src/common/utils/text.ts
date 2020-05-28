@@ -80,5 +80,7 @@ export const makeTitle = (text: string, limit: number) => {
  * @see `<LazyLoading>`
  */
 export const insertLazyLoading = (content: string) => {
-  return content.replace(/\<img /g, '<img loading="lazy"')
+  return content
+    .replace(/\<img /g, '<img loading="lazy"')
+    .replace(/\<iframe /g, '<iframe loading="lazy"')
 }
