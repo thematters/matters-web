@@ -1,20 +1,31 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import _uniq from 'lodash/uniq'
+import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
 
-import { Title, Translate, ViewerContext, ViewMoreButton } from '~/components'
+import {
+  Spinner,
+  Title,
+  Translate,
+  ViewerContext,
+  ViewMoreButton,
+} from '~/components'
 import articleFragments from '~/components/GQL/fragments/article'
 
 import { mergeConnections } from '~/common/utils'
 
 import CollectionList from './CollectionList'
 import EditButton from './EditButton'
-import EditingList from './EditingList'
 import styles from './styles.css'
 
 import { ArticleDetail_article } from '../__generated__/ArticleDetail'
 import { CollectionList as CollectionListTypes } from './__generated__/CollectionList'
+
+const DynamicEditingList = dynamic(() => import('./EditingList'), {
+  ssr: false,
+  loading: Spinner,
+})
 
 const COLLECTION_LIST = gql`
   query CollectionList($mediaHash: String, $after: String, $first: Int) {
@@ -88,7 +99,7 @@ const Collection: React.FC<{
       )}
 
       {editing && (
-        <EditingList
+        <DynamicEditingList
           article={article}
           editingArticles={editingArticles}
           setEditingArticles={setEditingArticles}
