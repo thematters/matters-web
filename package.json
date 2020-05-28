@@ -67,7 +67,7 @@
     "jump.js": "^1.0.2",
     "lodash": "^4.17.15",
     "module-alias": "^2.2.2",
-    "next": "^9.4.2",
+    "next": "^9.4.4",
     "next-with-apollo": "^5.0.1",
     "nprogress": "^0.2.0",
     "number-precision": "^1.4.0",
