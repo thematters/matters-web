@@ -151,11 +151,9 @@ const BaseArticleDigestFeed = ({
         {!isCompactMode && (
           <section className="content">
             {cover && (
-              <section
-                className="cover"
-                data-lazy-loading
-                data-background-image={cover}
-              />
+              <div className="cover">
+                <img src={cover} loading="lazy" />
+              </div>
             )}
             {<p className="description">{cleanedSummary}</p>}
           </section>

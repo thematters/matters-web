@@ -5,7 +5,7 @@ import { Translate } from '~/components'
 import { Avatar } from '~/components/Avatar'
 import { useEventListener } from '~/components/Hook'
 
-import { REFETCH_DONATORS } from '~/common/enums'
+import { IMAGE_PIXEL, REFETCH_DONATORS } from '~/common/enums'
 import { numAbbr } from '~/common/utils'
 
 import styles from './styles.css'
@@ -71,7 +71,7 @@ const Donators = ({ mediaHash }: { mediaHash: string }) => {
         {donators.map((user, index) => (
           <Avatar
             user={user || undefined}
-            src={user ? undefined : 'data:image/gif;base64,'}
+            src={user ? undefined : IMAGE_PIXEL}
             size="sm"
             key={index}
           />

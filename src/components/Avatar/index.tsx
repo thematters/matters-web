@@ -38,15 +38,10 @@ export const Avatar = (props: AvatarProps) => {
   })
 
   return (
-    <>
-      <div
-        className={avatarClasses}
-        data-lazy-loading
-        data-background-image={source}
-        aria-hidden="true"
-      >
-        {isCivicLiker && <span className="ring" />}
-      </div>
+    <div className={avatarClasses}>
+      <img src={source} aria-hidden="true" loading="lazy" />
+
+      {isCivicLiker && <span className="ring" />}
 
       <style jsx>{styles}</style>
 
@@ -55,7 +50,7 @@ export const Avatar = (props: AvatarProps) => {
           background-image: url(${IMAGE_CIVIC_LIKER_RING});
         }
       `}</style>
-    </>
+    </div>
   )
 }
 

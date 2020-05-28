@@ -80,11 +80,9 @@ export const ArticleDigestSidebar = ({
         </header>
 
         {cover && (
-          <aside
-            className="cover"
-            data-lazy-loading
-            data-background-image={cover}
-          />
+          <aside className="cover">
+            <img src={cover} loading="lazy" />
+          </aside>
         )}
 
         <footer>

@@ -24,3 +24,6 @@ export const Z_INDEX = {
 }
 
 export const AGENT_HASH_PREFIX = 'v0__'
+
+export const IMAGE_PIXEL =
+  'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=='
