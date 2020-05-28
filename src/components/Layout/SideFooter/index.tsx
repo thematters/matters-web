@@ -54,6 +54,7 @@ const SideFooter = () => {
       <a
         href="https://github.com/thematters/developer-resource"
         target="_blank"
+        rel="noopener"
       >
         <Translate id="openCommunity" />
       </a>

@@ -3,6 +3,8 @@ import classNames from 'classnames'
 
 import { Button, Icon, LoginButton, Translate } from '~/components'
 
+import { TEXT } from '~/common/enums'
+
 import IMG_AD from '@/public/static/images/ad.svg'
 
 import styles from './styles.css'
@@ -48,7 +50,7 @@ const Wall = ({ show }: WallProps) => {
             </div>
 
             <div className="close">
-              <Button onClick={close}>
+              <Button onClick={close} aria-label={TEXT.zh_hant.close}>
                 <Icon.Clear color="grey" />
               </Button>
             </div>
