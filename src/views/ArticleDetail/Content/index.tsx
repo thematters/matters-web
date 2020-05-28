@@ -6,7 +6,11 @@ import { useEffect, useRef, useState } from 'react'
 import { useMutation } from '~/components/GQL'
 
 import styles from '~/common/styles/utils/content.article.css'
-import { captureClicks, initAudioPlayers } from '~/common/utils'
+import {
+  captureClicks,
+  initAudioPlayers,
+  insertLazyLoading,
+} from '~/common/utils'
 
 import { ContentArticle } from './__generated__/ContentArticle'
 import { ReadArticle } from './__generated__/ReadArticle'
@@ -98,7 +102,7 @@ const Content = ({
       <div
         className={classNames({ 'u-content': true, translating })}
         dangerouslySetInnerHTML={{
-          __html: translation || article.content,
+          __html: insertLazyLoading(translation || article.content),
         }}
         onClick={captureClicks}
         ref={contentContainer}

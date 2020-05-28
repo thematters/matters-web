@@ -82,7 +82,8 @@ export const ArticleDigestSidebar = ({
         {cover && (
           <aside
             className="cover"
-            style={{ backgroundImage: `url("${cover}")` }}
+            data-lazy-loading
+            data-background-image={cover}
           />
         )}
 

@@ -73,3 +73,12 @@ export const makeTitle = (text: string, limit: number) => {
   }
   return text
 }
+
+/**
+ * Adding lazy loading attributes to <img>, <iframe>, etc.
+ *
+ * @see `<LazyLoading>`
+ */
+export const insertLazyLoading = (content: string) => {
+  return content.replace(/\<img /g, '<img loading="lazy"')
+}

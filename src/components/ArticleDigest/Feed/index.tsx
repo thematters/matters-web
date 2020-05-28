@@ -153,9 +153,8 @@ const BaseArticleDigestFeed = ({
             {cover && (
               <section
                 className="cover"
-                style={{
-                  backgroundImage: `url(${cover})`,
-                }}
+                data-lazy-loading
+                data-background-image={cover}
               />
             )}
             {<p className="description">{cleanedSummary}</p>}

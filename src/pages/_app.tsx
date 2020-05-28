@@ -21,6 +21,7 @@ import { ClientUpdater } from '~/components/ClientUpdater'
 import { GlobalDialogs } from '~/components/GlobalDialogs'
 import { GlobalStyles } from '~/components/GlobalStyles'
 import { QueryError } from '~/components/GQL'
+import LazyLoading from '~/components/LazyLoading'
 import { ProgressBar } from '~/components/ProgressBar'
 import PushInitializer from '~/components/PushInitializer'
 import SplashScreen from '~/components/SplashScreen'
@@ -123,6 +124,7 @@ const MattersApp = ({
       <GlobalStyles />
       <SplashScreen />
       <ClientUpdater />
+      <LazyLoading />
 
       <Root client={apollo}>
         <Component {...pageProps} />

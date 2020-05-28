@@ -41,7 +41,8 @@ export const Avatar = (props: AvatarProps) => {
     <>
       <div
         className={avatarClasses}
-        style={{ backgroundImage: `url(${source})` }}
+        data-lazy-loading
+        data-background-image={source}
         aria-hidden="true"
       >
         {isCivicLiker && <span className="ring" />}
