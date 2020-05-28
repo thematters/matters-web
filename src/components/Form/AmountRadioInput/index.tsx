@@ -52,6 +52,7 @@ const AmountOption: React.FC<AmountOptionProps> = ({
   fieldMsgId,
   value,
 
+  disabled,
   ...inputProps
 }) => {
   const fieldId = `field-${name}-${amount}`
@@ -60,6 +61,7 @@ const AmountOption: React.FC<AmountOptionProps> = ({
     amount: true,
     [currency === CURRENCY.LIKE ? 'like' : 'hkd']: true,
     active: value === amount,
+    disabled,
   })
   return (
     <li className={classes}>
@@ -69,6 +71,7 @@ const AmountOption: React.FC<AmountOptionProps> = ({
           <input
             {...inputProps}
             aria-describedby={fieldMsgId}
+            disabled={disabled}
             id={fieldId}
             name={name}
             value={amount}
