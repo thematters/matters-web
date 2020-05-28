@@ -15,7 +15,7 @@ import { CollectArticlesDraft } from './__generated__/CollectArticlesDraft'
 import { DraftCollectionQuery } from './__generated__/DraftCollectionQuery'
 import { SetDraftCollection } from './__generated__/SetDraftCollection'
 
-const CollectionEditor = dynamic(
+const DynamicCollectionEditor = dynamic(
   () => import('~/components/CollectionEditor'),
   {
     ssr: false,
@@ -130,7 +130,7 @@ const CollectArticles = ({ draft, setSaveStatus }: CollectArticlesProps) => {
 
         {error && <QueryError error={error} />}
 
-        <CollectionEditor
+        <DynamicCollectionEditor
           articles={(edges && edges.map(({ node }) => node)) || []}
           onEdit={handleCollectionChange()}
         />

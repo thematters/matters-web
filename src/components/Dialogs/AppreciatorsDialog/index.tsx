@@ -1,9 +1,8 @@
 import gql from 'graphql-tag'
+import dynamic from 'next/dynamic'
 import { useState } from 'react'
 
-import { Dialog } from '~/components'
-
-import Content from './Content'
+import { Dialog, Spinner } from '~/components'
 
 import { AppreciatorsDialogArticle } from './__generated__/AppreciatorsDialogArticle'
 
@@ -24,6 +23,11 @@ const fragments = {
   `,
 }
 
+const DynamicConetnt = dynamic(() => import('./Content'), {
+  ssr: false,
+  loading: Spinner,
+})
+
 const BaseAppreciatorsDialog = ({
   article,
   children,
@@ -37,7 +41,10 @@ const BaseAppreciatorsDialog = ({
       {children({ open })}
 
       <Dialog isOpen={showDialog} onDismiss={close} fixedHeight>
-        <Content mediaHash={article.mediaHash || ''} closeDialog={close} />
+        <DynamicConetnt
+          mediaHash={article.mediaHash || ''}
+          closeDialog={close}
+        />
       </Dialog>
     </>
   )
