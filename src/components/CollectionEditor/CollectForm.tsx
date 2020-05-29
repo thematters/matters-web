@@ -66,9 +66,7 @@ const CollectForm: React.FC<Props> = ({ onAdd }) => {
     <>
       <Dropdown
         trigger="manual"
-        onShown={(i) => {
-          hidePopperOnClick(i)
-        }}
+        onShown={hidePopperOnClick}
         placement="bottom-start"
         onCreate={setInstance}
         content={

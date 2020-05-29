@@ -3,7 +3,7 @@
 /**
  * tippy.js/dist/tippy.css
  */
-.tippy-tooltip[data-animation='fade'][data-state='hidden'] {
+.tippy-box[data-animation='fade'][data-state='hidden'] {
   opacity: 0;
 }
 .tippy-iOS {
@@ -16,7 +16,7 @@
   transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
   transition-property: transform;
 }
-.tippy-tooltip {
+.tippy-box {
   position: relative;
   color: #fff;
   border-radius: 0.25rem;
@@ -27,41 +27,41 @@
   transition-property: visibility, opacity, transform;
   outline: 0;
 }
-.tippy-tooltip[data-placement^='top'] .tippy-arrow {
+.tippy-box[data-placement^='top'] .tippy-arrow {
   border-width: 8px 8px 0;
   border-top-color: #333;
   margin: 0 3px;
   transform-origin: 50% 0;
   bottom: -7px;
 }
-.tippy-tooltip[data-placement^='bottom'] .tippy-arrow {
+.tippy-box[data-placement^='bottom'] .tippy-arrow {
   border-width: 0 8px 8px;
   border-bottom-color: #333;
   margin: 0 3px;
   transform-origin: 50% 7px;
   top: -7px;
 }
-.tippy-tooltip[data-placement^='left'] .tippy-arrow {
+.tippy-box[data-placement^='left'] .tippy-arrow {
   border-width: 8px 0 8px 8px;
   border-left-color: #333;
   margin: 3px 0;
   transform-origin: 0 50%;
   right: -7px;
 }
-.tippy-tooltip[data-placement^='right'] .tippy-arrow {
+.tippy-box[data-placement^='right'] .tippy-arrow {
   border-width: 8px 8px 8px 0;
   border-right-color: #333;
   margin: 3px 0;
   transform-origin: 7px 50%;
   left: -7px;
 }
-.tippy-tooltip[data-arrow] {
+.tippy-box[data-arrow] {
   overflow: visible;
 }
-.tippy-tooltip[data-interactive] {
+.tippy-box[data-interactive] {
   pointer-events: auto;
 }
-.tippy-tooltip[data-inertia][data-state='visible'] {
+.tippy-box[data-inertia][data-state='visible'] {
   transition-timing-function: cubic-bezier(0.54, 1.5, 0.38, 1.11);
 }
 .tippy-arrow {
@@ -76,19 +76,19 @@
 /**
  * tippy.js/animations/shift-away.css
  */
-.tippy-tooltip[data-animation='shift-away'][data-placement^='top'][data-state='hidden'] {
+.tippy-box[data-animation='shift-away'][data-placement^='top'][data-state='hidden'] {
   transform: translateY(10px);
 }
-.tippy-tooltip[data-animation='shift-away'][data-placement^='bottom'][data-state='hidden'] {
+.tippy-box[data-animation='shift-away'][data-placement^='bottom'][data-state='hidden'] {
   transform: translateY(-10px);
 }
-.tippy-tooltip[data-animation='shift-away'][data-placement^='left'][data-state='hidden'] {
+.tippy-box[data-animation='shift-away'][data-placement^='left'][data-state='hidden'] {
   transform: translateX(10px);
 }
-.tippy-tooltip[data-animation='shift-away'][data-placement^='right'][data-state='hidden'] {
+.tippy-box[data-animation='shift-away'][data-placement^='right'][data-state='hidden'] {
   transform: translateX(-10px);
 }
-.tippy-tooltip[data-animation='shift-away'][data-state='hidden'] {
+.tippy-box[data-animation='shift-away'][data-state='hidden'] {
   opacity: 0;
 }
 
@@ -103,7 +103,7 @@
   --popper-border-color: rgba(0, 0, 0, 0.04);
 }
 
-.tippy-tooltip {
+.tippy-box {
   color: inherit;
   border-radius: 0;
   font-size: inherit;
@@ -118,7 +118,7 @@
 }
 
 /* theme:dropdown */
-.tippy-tooltip.dropdown-theme {
+.tippy-box.dropdown-theme {
   color: var(--color-black);
   border-radius: 0.5rem;
   background: var(--color-white);
@@ -126,7 +126,7 @@
 }
 
 /* theme:tooltip */
-.tippy-tooltip.tooltip-theme {
+.tippy-box.tooltip-theme {
   padding: var(--spacing-xx-tight) var(--spacing-base);
 
   color: var(--color-white);
@@ -137,7 +137,7 @@
 }
 
 /* shadow */
-.tippy-tooltip {
+.tippy-box {
   &.shadow-light-theme {
     box-shadow: var(--shadow-light);
   }

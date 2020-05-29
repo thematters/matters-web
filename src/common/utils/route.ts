@@ -172,7 +172,7 @@ export const getQuery = ({
   key: string
 }) => {
   const value = router.query && router.query[key]
-  return value instanceof Array ? value[0] : value
+  return value instanceof Array ? value[0] : value || ''
 }
 
 export const getTarget = (url?: string) => {

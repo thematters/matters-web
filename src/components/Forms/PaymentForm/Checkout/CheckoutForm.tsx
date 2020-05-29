@@ -64,7 +64,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
         Sentry.captureException(result.error)
       })
     } else {
-      if (result.paymentIntent.status === 'succeeded') {
+      if (result.paymentIntent?.status === 'succeeded') {
         submitCallback()
         analytics.trackEvent('purchase', { amount, success: true })
       }

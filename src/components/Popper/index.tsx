@@ -2,8 +2,8 @@ import dynamic from 'next/dynamic'
 
 import { Z_INDEX } from '~/common/enums'
 
-export type PopperInstance = import('tippy.js').Instance
-export type PopperProps = import('@tippy.js/react').TippyProps
+export type PopperInstance = import('@tippyjs/react/node_modules/tippy.js').Instance
+export type PopperProps = import('@tippyjs/react').TippyProps
 
 const DynamicLazyTippy = dynamic(() => import('./LazyTippy'), {
   ssr: false,
@@ -35,12 +35,10 @@ Dropdown.defaultProps = {
   arrow: false,
   trigger: 'click',
   interactive: true,
-  aria: 'describedby',
-  distance: 4,
+  offset: [0, 4],
   placement: 'bottom',
   animation: 'shift-away',
   theme: 'dropdown',
-  boundary: 'window',
   zIndex: Z_INDEX.UNDER_GLOBAL_HEADER,
 }
 
@@ -50,11 +48,10 @@ export const Tooltip: React.FC<PopperProps> = (props) => (
 Tooltip.defaultProps = {
   arrow: true,
   interactive: false,
-  distance: 12,
+  offset: [0, 12],
   placement: 'right',
   animation: 'shift-away',
   theme: 'tooltip',
-  boundary: 'window',
   zIndex: Z_INDEX.UNDER_GLOBAL_HEADER,
 }
 
@@ -63,9 +60,13 @@ Tooltip.defaultProps = {
  * @param instance
  */
 export const hidePopperOnClick = (instance: PopperInstance) => {
-  const popper = instance.popperChildren.tooltip
+  const box = instance.popper.firstElementChild
 
-  popper.addEventListener('click', (event) => {
+  if (!box) {
+    return
+  }
+
+  box.addEventListener('click', (event) => {
     const target = event.target as HTMLElement
 
     if (target?.closest && target.closest('[data-clickable], a, button')) {

@@ -109,9 +109,7 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
           content={<DropdownContent {...dropdownContentProps} />}
           zIndex={dropdownZIndex}
           appendTo={document.getElementById(dropdownAppendTo) || document.body}
-          onShown={(i) => {
-            hidePopperOnClick(i)
-          }}
+          onShown={hidePopperOnClick}
         >
           <input
             {...inputProps}

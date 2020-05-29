@@ -99,14 +99,20 @@ const SideNav = () => {
               </section>
             }
             placement="right-start"
-            distance={24}
-            offset={-24}
-            boundary="viewport"
+            offset={[-24, 24]}
+            popperOptions={{
+              modifiers: [
+                {
+                  name: 'preventOverflow',
+                  options: {
+                    rootBoundary: 'viewport',
+                  },
+                },
+              ],
+            }}
             appendTo={process.browser ? document.body : undefined}
             zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
-            onShown={(i) => {
-              hidePopperOnClick(i)
-            }}
+            onShown={hidePopperOnClick}
           >
             <NavListItem
               name={<Translate zh_hant="我的" zh_hans="我的" />}

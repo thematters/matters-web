@@ -79,7 +79,7 @@ const SearchTags = ({ addTag }: { addTag: (tag: string) => void }) => {
   const { lang } = useContext(LanguageContext)
   const [search, setSearch] = useState('')
   const [debouncedSearch] = useDebounce(search, INPUT_DEBOUNCE)
-  const [instance, setInstance] = useState<PopperInstance | null>(null)
+  const [instance, setInstance] = useState<PopperInstance>()
   const hideDropdown = () => {
     if (instance) {
       instance.hide()
@@ -101,9 +101,7 @@ const SearchTags = ({ addTag }: { addTag: (tag: string) => void }) => {
       <Dropdown
         trigger="manual"
         onCreate={setInstance}
-        onShown={(i) => {
-          hidePopperOnClick(i)
-        }}
+        onShown={hidePopperOnClick}
         content={
           <DropdownContent
             loading={loading}
