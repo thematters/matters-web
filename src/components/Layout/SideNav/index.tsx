@@ -101,17 +101,6 @@ const SideNav = () => {
             }
             placement="right-start"
             offset={[-24, 24]}
-            popperOptions={{
-              modifiers: [
-                {
-                  name: 'preventOverflow',
-                  options: {
-                    rootBoundary: 'viewport',
-                  },
-                },
-              ],
-            }}
-            appendTo={process.browser ? document.body : undefined}
             zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
             onShown={hidePopperOnClick}
           >

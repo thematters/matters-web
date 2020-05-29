@@ -31,8 +31,9 @@ const DynamicLazyTippy = dynamic(() => import('./LazyTippy'), {
 export const Dropdown: React.FC<PopperProps> = (props) => (
   <DynamicLazyTippy
     arrow={false}
-    trigger={'click'}
+    trigger="click"
     interactive={true}
+    appendTo={process.browser ? document.body : undefined}
     offset={[0, 4]}
     placement="bottom"
     animation="shift-away"

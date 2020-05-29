@@ -6,11 +6,11 @@ import { useDebounce } from 'use-debounce'
 import {
   Button,
   Dropdown,
-  SearchOverview,
-  SearchAutoComplete,
   Icon,
   LanguageContext,
   PopperInstance,
+  SearchAutoComplete,
+  SearchOverview,
 } from '~/components'
 
 import { INPUT_DEBOUNCE, TEXT, Z_INDEX } from '~/common/enums'
@@ -118,7 +118,6 @@ export const SearchBar: React.FC<SearchBarProps> = ({
             trigger="manual"
             placement="bottom-start"
             onCreate={(instance) => (instanceRef.current = instance)}
-            appendTo={process.browser ? document.body : undefined}
             zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
           >
             <form onSubmit={handleSubmit} autoComplete="off">
