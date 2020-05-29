@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import ReactDOMServer from 'react-dom/server'
 
-import { Icon, withIcon } from '~/components'
+import { IconSpinner, withIcon } from '~/components'
 
 import { analytics, sleep } from '~/common/utils'
 
@@ -61,7 +61,7 @@ const Register = (selector = 'body', timeout = PTR_TIMEOUT) => {
       iconArrow: ReactDOMServer.renderToString(
         withIcon(IconPullToRefresh)({ size: 'md' })
       ),
-      iconRefreshing: ReactDOMServer.renderToString(<Icon.Spinner size="md" />),
+      iconRefreshing: ReactDOMServer.renderToString(<IconSpinner size="md" />),
     })
   }
 

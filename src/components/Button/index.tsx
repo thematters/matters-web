@@ -110,7 +110,7 @@ export interface ButtonProps {
  *    spacing={['xtight', 'xtight']}
  *    onClick={onClick}
  *  >
- *    <Icon.BookmarkActive />
+ *    <IconBookmarkActive />
  *  </Button>
  *
  *  // with custom size, border, hover text & background

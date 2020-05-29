@@ -6,7 +6,7 @@ import { useDebounce } from 'use-debounce'
 import {
   Button,
   Dropdown,
-  Icon,
+  IconSearchMedium,
   LanguageContext,
   PopperInstance,
   SearchAutoComplete,
@@ -29,7 +29,7 @@ const SearchButton = () => (
     type="submit"
     aria-label={TEXT.zh_hant.search}
   >
-    <Icon.SearchMedium size="md" color="grey-dark" />
+    <IconSearchMedium size="md" color="grey-dark" />
   </Button>
 )
 

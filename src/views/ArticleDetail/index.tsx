@@ -13,7 +13,7 @@ import {
   Error,
   FeaturesContext,
   Head,
-  Icon,
+  IconLive,
   Layout,
   PullToRefresh,
   Spinner,
@@ -279,7 +279,7 @@ const ArticleDetail = () => {
               </section>
 
               <section className="right">
-                {article.live && <Icon.Live />}
+                {article.live && <IconLive />}
               </section>
             </section>
           </section>

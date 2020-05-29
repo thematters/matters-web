@@ -1,6 +1,5 @@
 import classNames from 'classnames'
 
-import { ReactComponent as AddMedium } from './icons/add-md.svg'
 import { ReactComponent as Add } from './icons/add.svg'
 import { ReactComponent as AppreciationMAX } from './icons/appreciation-max.svg'
 import { ReactComponent as ArchiveMedium } from './icons/archive-md.svg'
@@ -10,7 +9,6 @@ import { ReactComponent as BookmarkActive } from './icons/bookmark-active.svg'
 import { ReactComponent as BookmarkMedium } from './icons/bookmark-md.svg'
 import { ReactComponent as Bookmark } from './icons/bookmark.svg'
 import { ReactComponent as CameraMedium } from './icons/camera-md.svg'
-import { ReactComponent as Camera } from './icons/camera.svg'
 import { ReactComponent as CheckActive } from './icons/checkbox-check-active.svg'
 import { ReactComponent as CheckInactive } from './icons/checkbox-check-inactive.svg'
 import { ReactComponent as Clear } from './icons/clear.svg'
@@ -18,7 +16,6 @@ import { ReactComponent as CloseLarge } from './icons/close-lg.svg'
 import { ReactComponent as Collapse } from './icons/collapse.svg'
 import { ReactComponent as CollectionMedium } from './icons/collection-md.svg'
 import { ReactComponent as Comment } from './icons/comment.svg'
-import { ReactComponent as DeleteDraftMedium } from './icons/delete-draft-md.svg'
 import { ReactComponent as DeleteDraftXS } from './icons/delete-draft-xs.svg'
 import { ReactComponent as DotDivider } from './icons/dot-divider.svg'
 import { ReactComponent as Down } from './icons/down.svg'
@@ -44,8 +41,6 @@ import { ReactComponent as Link } from './icons/link.svg'
 import { ReactComponent as LogoGraph } from './icons/logo-graph.svg'
 import { ReactComponent as Logo } from './icons/logo.svg'
 import { ReactComponent as LogoutMedium } from './icons/logout-md.svg'
-import { ReactComponent as Max } from './icons/max.svg'
-import { ReactComponent as Min } from './icons/min.svg'
 import { ReactComponent as MoreLarge } from './icons/more-lg.svg'
 import { ReactComponent as More } from './icons/more.svg'
 import { ReactComponent as MuteMedium } from './icons/mute-md.svg'
@@ -63,7 +58,6 @@ import { ReactComponent as Reload } from './icons/reload.svg'
 import { ReactComponent as RemoveMedium } from './icons/remove-md.svg'
 import { ReactComponent as Right } from './icons/right.svg'
 import { ReactComponent as SearchMedium } from './icons/search-md.svg'
-import { ReactComponent as Search } from './icons/search.svg'
 import { ReactComponent as SettingsMedium } from './icons/settings-md.svg'
 import { ReactComponent as Share } from './icons/share.svg'
 import { ReactComponent as Sort } from './icons/sort.svg'
@@ -142,106 +136,97 @@ export const withIcon = (
  * import { Icon } from '~/components'
  *
  * // with "size"
- * <Icon.Add size="sm" />
+ * <IconAdd size="sm" />
  *
  * // with "color"
- * <Icon.Add color="green" />
+ * <IconAdd color="green" />
  *
  * // with custom styles
- * <Icon.Add style={{ width: 97, height: 20 }} />
+ * <IconAdd style={{ width: 97, height: 20 }} />
  *
  * ```
  */
-
-export const Icon = {
-  Add: withIcon(Add),
-  AddMedium: withIcon(AddMedium),
-  AppreciationMAX: withIcon(AppreciationMAX),
-  ArchiveMedium: withIcon(ArchiveMedium),
-  AvatarLogo: withIcon(AvatarLogo),
-  BackLarge: withIcon(BackLarge),
-  Bookmark: withIcon(Bookmark),
-  BookmarkActive: withIcon(BookmarkActive),
-  BookmarkMedium: withIcon(BookmarkMedium),
-  Camera: withIcon(Camera),
-  CameraMedium: withIcon(CameraMedium),
-  CheckActive: withIcon(CheckActive),
-  CheckInactive: withIcon(CheckInactive),
-  Clear: withIcon(Clear),
-  CloseLarge: withIcon(CloseLarge),
-  Collapse: withIcon(Collapse),
-  CollectionMedium: withIcon(CollectionMedium),
-  Comment: withIcon(Comment),
-  DeleteDraftMedium: withIcon(DeleteDraftMedium),
-  DeleteDraftXS: withIcon(DeleteDraftXS),
-  DotDivider: withIcon((props) => (
-    <DotDivider style={{ width: 18, height: 18 }} {...props} />
-  )),
-  Down: withIcon(Down),
-  DownVote: withIcon(DownVote),
-  DownVoteActive: withIcon(DownVoteActive),
-  DraftMedium: withIcon(DraftMedium),
-  Edit: withIcon(Edit),
-  EditXS: withIcon(EditXS),
-  EmptyWarning: withIcon(EmptyWarning),
-  Expand: withIcon(Expand),
-  External: withIcon(External),
-  ExternalLink: withIcon(ExternalLink),
-  HashTag: withIcon(HashTag),
-  Heart: withIcon(Heart),
-  HelpMedium: withIcon(HelpMedium),
-  HistoryMedium: withIcon(HistoryMedium),
-  IPFSMedium: withIcon(IPFSMedium),
-  Left: withIcon(Left),
-  LeftLarge: withIcon(LeftLarge),
-  Like: withIcon(Like),
-  LikeMedium: withIcon(LikeMedium),
-  Link: withIcon(Link),
-  Live,
-  Logo: withIcon((props) => (
-    <Logo style={{ width: 97, height: 20 }} {...props} />
-  )),
-  LogoGraph: withIcon((props) => (
-    <LogoGraph style={{ width: 48, height: 33 }} {...props} />
-  )),
-  LogoutMedium: withIcon(LogoutMedium),
-  Max: withIcon(Max),
-  Min: withIcon(Min),
-  More: withIcon(More),
-  MoreLarge: withIcon(MoreLarge),
-  MuteMedium: withIcon(MuteMedium),
-  NavFollow: withIcon(NavFollow),
-  NavFollowActive: withIcon(NavFollowActive),
-  NavHome: withIcon(NavHome),
-  NavHomeActive: withIcon(NavHomeActive),
-  NavNotification: withIcon(NavNotification),
-  NavNotificationActive: withIcon(NavNotificationActive),
-  NavSearch: withIcon(NavSearch),
-  Pen: withIcon(Pen),
-  PinMedium: withIcon(PinMedium),
-  ProfileMedium: withIcon(ProfileMedium),
-  Reload: withIcon(Reload),
-  RemoveMedium: withIcon(RemoveMedium),
-  Right: withIcon(Right),
-  Search: withIcon(Search),
-  SearchMedium: withIcon(SearchMedium),
-  SettingsMedium: withIcon(SettingsMedium),
-  Share: withIcon(Share),
-  Sort: withIcon(Sort),
-  Spinner: withIcon(({ className, ...restProps }) => (
-    <Spinner className={`u-motion-spin ${className}`} {...restProps} />
-  )),
-  UnlockMedium: withIcon(UnlockMedium),
-  UnMuteMedium: withIcon(UnMuteMedium),
-  UnPinMedium: withIcon(UnPinMedium),
-  Up: withIcon(Up),
-  UpVote: withIcon(UpVote),
-  UpVoteActive: withIcon(UpVoteActive),
-  User: withIcon(User),
-  ViewModeComfortable: withIcon(ViewModeComfortable),
-  ViewModeCompact: withIcon(ViewModeCompact),
-  ViewModeDefault: withIcon(ViewModeDefault),
-  Volume: withIcon(Volume),
-  WalletMedium: withIcon(WalletMedium),
-  World: withIcon(World),
-}
+export const IconAdd = withIcon(Add)
+export const IconAppreciationMAX = withIcon(AppreciationMAX)
+export const IconArchiveMedium = withIcon(ArchiveMedium)
+export const IconAvatarLogo = withIcon(AvatarLogo)
+export const IconBackLarge = withIcon(BackLarge)
+export const IconBookmark = withIcon(Bookmark)
+export const IconBookmarkActive = withIcon(BookmarkActive)
+export const IconBookmarkMedium = withIcon(BookmarkMedium)
+export const IconCameraMedium = withIcon(CameraMedium)
+export const IconCheckActive = withIcon(CheckActive)
+export const IconCheckInactive = withIcon(CheckInactive)
+export const IconClear = withIcon(Clear)
+export const IconCloseLarge = withIcon(CloseLarge)
+export const IconCollapse = withIcon(Collapse)
+export const IconCollectionMedium = withIcon(CollectionMedium)
+export const IconComment = withIcon(Comment)
+export const IconDeleteDraftXS = withIcon(DeleteDraftXS)
+export const IconDotDivider = withIcon((props) => (
+  <DotDivider style={{ width: 18, height: 18 }} {...props} />
+))
+export const IconDown = withIcon(Down)
+export const IconDownVote = withIcon(DownVote)
+export const IconDownVoteActive = withIcon(DownVoteActive)
+export const IconDraftMedium = withIcon(DraftMedium)
+export const IconEdit = withIcon(Edit)
+export const IconEditXS = withIcon(EditXS)
+export const IconEmptyWarning = withIcon(EmptyWarning)
+export const IconExpand = withIcon(Expand)
+export const IconExternal = withIcon(External)
+export const IconExternalLink = withIcon(ExternalLink)
+export const IconHashTag = withIcon(HashTag)
+export const IconHeart = withIcon(Heart)
+export const IconHelpMedium = withIcon(HelpMedium)
+export const IconHistoryMedium = withIcon(HistoryMedium)
+export const IconIPFSMedium = withIcon(IPFSMedium)
+export const IconLeft = withIcon(Left)
+export const IconLeftLarge = withIcon(LeftLarge)
+export const IconLike = withIcon(Like)
+export const IconLikeMedium = withIcon(LikeMedium)
+export const IconLink = withIcon(Link)
+export const IconLive = Live
+export const IconLogo = withIcon((props) => (
+  <Logo style={{ width: 97, height: 20 }} {...props} />
+))
+export const IconLogoGraph = withIcon((props) => (
+  <LogoGraph style={{ width: 48, height: 33 }} {...props} />
+))
+export const IconLogoutMedium = withIcon(LogoutMedium)
+export const IconMore = withIcon(More)
+export const IconMoreLarge = withIcon(MoreLarge)
+export const IconMuteMedium = withIcon(MuteMedium)
+export const IconNavFollow = withIcon(NavFollow)
+export const IconNavFollowActive = withIcon(NavFollowActive)
+export const IconNavHome = withIcon(NavHome)
+export const IconNavHomeActive = withIcon(NavHomeActive)
+export const IconNavNotification = withIcon(NavNotification)
+export const IconNavNotificationActive = withIcon(NavNotificationActive)
+export const IconNavSearch = withIcon(NavSearch)
+export const IconPen = withIcon(Pen)
+export const IconPinMedium = withIcon(PinMedium)
+export const IconProfileMedium = withIcon(ProfileMedium)
+export const IconReload = withIcon(Reload)
+export const IconRemoveMedium = withIcon(RemoveMedium)
+export const IconRight = withIcon(Right)
+export const IconSearchMedium = withIcon(SearchMedium)
+export const IconSettingsMedium = withIcon(SettingsMedium)
+export const IconShare = withIcon(Share)
+export const IconSort = withIcon(Sort)
+export const IconSpinner = withIcon(({ className, ...restProps }) => (
+  <Spinner className={`u-motion-spin ${className}`} {...restProps} />
+))
+export const IconUnlockMedium = withIcon(UnlockMedium)
+export const IconUnMuteMedium = withIcon(UnMuteMedium)
+export const IconUnPinMedium = withIcon(UnPinMedium)
+export const IconUp = withIcon(Up)
+export const IconUpVote = withIcon(UpVote)
+export const IconUpVoteActive = withIcon(UpVoteActive)
+export const IconUser = withIcon(User)
+export const IconViewModeComfortable = withIcon(ViewModeComfortable)
+export const IconViewModeCompact = withIcon(ViewModeCompact)
+export const IconViewModeDefault = withIcon(ViewModeDefault)
+export const IconVolume = withIcon(Volume)
+export const IconWalletMedium = withIcon(WalletMedium)
+export const IconWorld = withIcon(World)

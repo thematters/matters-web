@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
 
-import { Icon, Menu, TextIcon, Translate } from '~/components'
+import { IconPinMedium, Menu, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import { ADD_TOAST } from '~/common/enums'
@@ -61,7 +61,7 @@ const SetTagSelectedButton = ({
         )
       }}
     >
-      <TextIcon icon={<Icon.PinMedium size="md" />} size="md" spacing="base">
+      <TextIcon icon={<IconPinMedium size="md" />} size="md" spacing="base">
         <Translate zh_hant="添加精選" zh_hans="添加精选" />
       </TextIcon>
     </Menu.Item>

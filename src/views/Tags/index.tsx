@@ -7,7 +7,7 @@ import {
   Card,
   EmptyTag,
   Head,
-  Icon,
+  IconAdd,
   InfiniteScroll,
   Layout,
   List,
@@ -67,7 +67,7 @@ const CreateTagButton = () => {
           bgActiveColor="grey-lighter"
           onClick={open}
         >
-          <TextIcon icon={<Icon.Add color="green" size="xs" />} color="green">
+          <TextIcon icon={<IconAdd color="green" size="xs" />} color="green">
             <Translate id="createTag" />
           </TextIcon>
         </Button>

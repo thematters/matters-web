@@ -5,7 +5,11 @@ import { useContext } from 'react'
 import {
   Dropdown,
   hidePopperOnClick,
-  Icon,
+  IconLogo,
+  IconLogoGraph,
+  IconNavHome,
+  IconNavHomeActive,
+  IconNavSearch,
   Menu,
   Translate,
   useResponsive,
@@ -44,7 +48,7 @@ const SideNav = () => {
       <section className="logo">
         <Link href={PATHS.HOME}>
           <a aria-label={TEXT.zh_hant.discover}>
-            {isMediumUp ? <Icon.Logo /> : <Icon.LogoGraph />}
+            {isMediumUp ? <IconLogo /> : <IconLogoGraph />}
           </a>
         </Link>
       </section>
@@ -52,8 +56,8 @@ const SideNav = () => {
       <ul>
         <NavListItem
           name={<Translate id="discover" />}
-          icon={<Icon.NavHome size="md" />}
-          activeIcon={<Icon.NavHomeActive size="md" />}
+          icon={<IconNavHome size="md" />}
+          activeIcon={<IconNavHomeActive size="md" />}
           active={isInHome}
           isMediumUp={isMediumUp}
           href={PATHS.HOME}
@@ -82,8 +86,8 @@ const SideNav = () => {
         {!isLargeUp && (
           <NavListItem
             name={<Translate id="search" />}
-            icon={<Icon.NavSearch size="md" />}
-            activeIcon={<Icon.NavSearch size="md" color="green" />}
+            icon={<IconNavSearch size="md" />}
+            activeIcon={<IconNavSearch size="md" color="green" />}
             active={isInSearch}
             isMediumUp={isMediumUp}
             href={PATHS.SEARCH}

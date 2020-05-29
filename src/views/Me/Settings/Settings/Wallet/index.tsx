@@ -4,7 +4,7 @@ import { useContext } from 'react'
 
 import {
   Form,
-  Icon,
+  IconSpinner,
   LikeCoinDialog,
   Translate,
   usePullToRefresh,
@@ -62,7 +62,7 @@ const WalletSettings = () => {
         htmlTarget="_blank"
         leftAlign="top"
         right={
-          loading ? <Icon.Spinner color="grey-light" size="sm" /> : undefined
+          loading ? <IconSpinner color="grey-light" size="sm" /> : undefined
         }
         rightText={
           likerId ? (

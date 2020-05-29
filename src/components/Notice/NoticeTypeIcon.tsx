@@ -1,6 +1,14 @@
 import classNames from 'classnames'
 
-import { Icon } from '~/components'
+import {
+  IconAvatarLogo,
+  IconBookmark,
+  IconComment,
+  IconLike,
+  IconUpVote,
+  IconUser,
+  IconVolume,
+} from '~/components'
 
 import styles from './styles.css'
 
@@ -16,19 +24,19 @@ type IconType =
 const getIcon = (type: IconType) => {
   switch (type) {
     case 'appreciate':
-      return <Icon.Like color="green" />
+      return <IconLike color="green" />
     case 'bookmark':
-      return <Icon.Bookmark color="green" />
+      return <IconBookmark color="green" />
     case 'comment':
-      return <Icon.Comment color="green" />
+      return <IconComment color="green" />
     case 'logo':
-      return <Icon.AvatarLogo size="lg" />
+      return <IconAvatarLogo size="lg" />
     case 'user':
-      return <Icon.User color="green" size="lg" />
+      return <IconUser color="green" size="lg" />
     case 'upvote':
-      return <Icon.UpVote color="green" />
+      return <IconUpVote color="green" />
     case 'volume':
-      return <Icon.Volume color="grey-dark" size="lg" />
+      return <IconVolume color="grey-dark" size="lg" />
   }
 }
 

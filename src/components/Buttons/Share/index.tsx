@@ -1,8 +1,8 @@
 import {
   Button,
   ButtonProps,
-  Icon,
   IconColor,
+  IconShare,
   IconSize,
   ShareDialog,
   ShareDialogProps,
@@ -52,7 +52,7 @@ export const ShareButton: React.FC<ShareButtonProps> = ({
           aria-haspopup="true"
           onClick={open}
         >
-          {hasIcon && <Icon.Share size={iconSize} color={iconColor} />}
+          {hasIcon && <IconShare size={iconSize} color={iconColor} />}
           {children}
         </Button>
       )}

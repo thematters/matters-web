@@ -7,7 +7,7 @@ import {
   Button,
   CommentFormDialog,
   DropdownDialog,
-  Icon,
+  IconMore,
   Menu,
   Translate,
   ViewerContext,
@@ -131,7 +131,7 @@ const BaseDropdownActions = ({
           onClick={open}
           ref={ref}
         >
-          <Icon.More color="grey" />
+          <IconMore color="grey" />
         </Button>
       )}
     </DropdownDialog>

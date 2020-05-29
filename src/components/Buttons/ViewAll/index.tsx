@@ -1,4 +1,11 @@
-import { Button, ButtonProps, Icon, TextIcon, Translate } from '~/components'
+import {
+  Button,
+  ButtonProps,
+  IconDown,
+  IconRight,
+  TextIcon,
+  Translate,
+} from '~/components'
 
 type ViewAllButtonProps = {
   arrowIconDirection?: 'down' | 'right'
@@ -10,9 +17,9 @@ export const ViewAllButton: React.FC<ViewAllButtonProps> = ({
 }) => {
   const icon =
     arrowIconDirection === 'right' ? (
-      <Icon.Right size="xs" />
+      <IconRight size="xs" />
     ) : (
-      <Icon.Down size="xs" />
+      <IconDown size="xs" />
     )
 
   return (

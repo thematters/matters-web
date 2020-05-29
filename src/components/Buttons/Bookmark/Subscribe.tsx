@@ -1,7 +1,13 @@
 import { useQuery } from '@apollo/react-hooks'
 import { useContext } from 'react'
 
-import { Button, Icon, IconSize, Translate, ViewerContext } from '~/components'
+import {
+  Button,
+  IconBookmark,
+  IconSize,
+  Translate,
+  ViewerContext,
+} from '~/components'
 import { useMutation } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
@@ -73,7 +79,7 @@ const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
       onClick={onClick}
       disabled={disabled}
     >
-      <Icon.Bookmark size={size} />
+      <IconBookmark size={size} />
     </Button>
   )
 }

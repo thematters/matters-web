@@ -1,7 +1,13 @@
 import classNames from 'classnames'
 import { forwardRef } from 'react'
 
-import { Card, CardProps, Icon, TextIcon, useResponsive } from '~/components'
+import {
+  Card,
+  CardProps,
+  IconRight,
+  TextIcon,
+  useResponsive,
+} from '~/components'
 
 import styles from './styles.css'
 
@@ -55,7 +61,7 @@ const Item: React.FC<ItemProps> = forwardRef(
             <section className="right">
               {right || (
                 <TextIcon
-                  icon={clickable && <Icon.Right color="grey" />}
+                  icon={clickable && <IconRight color="grey" />}
                   size="md"
                   textPlacement="left"
                   spacing="xtight"

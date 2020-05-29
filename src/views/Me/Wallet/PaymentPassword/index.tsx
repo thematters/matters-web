@@ -1,7 +1,7 @@
 import {
   DropdownDialog,
   Form,
-  Icon,
+  IconUnlockMedium,
   Menu,
   ResetPaymentPasswordDialog,
   TextIcon,
@@ -19,7 +19,7 @@ const BasePaymentPassword: React.FC<PaymentPasswordProps> = ({
     <Menu width={isInDropdown ? 'sm' : undefined}>
       <Menu.Item onClick={openResetPaymentPasswordDialog}>
         <TextIcon
-          icon={<Icon.UnlockMedium size="md" />}
+          icon={<IconUnlockMedium size="md" />}
           size="md"
           spacing="base"
         >

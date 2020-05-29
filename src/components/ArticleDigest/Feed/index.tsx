@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import React from 'react'
 
-import { Card, Icon, TextIcon, Translate } from '~/components'
+import { Card, IconPinMedium, TextIcon, Translate } from '~/components'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { UserDigest } from '~/components/UserDigest'
 
@@ -126,7 +126,7 @@ const BaseArticleDigestFeed = ({
           <section className="right">
             {inUserArticles && sticky && (
               <TextIcon
-                icon={<Icon.PinMedium />}
+                icon={<IconPinMedium />}
                 size="sm"
                 color="grey"
                 weight="md"

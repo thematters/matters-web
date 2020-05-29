@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { Icon, TextIcon, Translate } from '~/components'
+import { IconArchiveMedium, TextIcon, Translate } from '~/components'
 
 import styles from './styles.css'
 
@@ -22,7 +22,7 @@ const InactiveState = ({ article }: { article: InactiveStateArticle }) => {
 
   return (
     <span className="inactive-state">
-      <TextIcon icon={<Icon.ArchiveMedium />} size="xs">
+      <TextIcon icon={<IconArchiveMedium />} size="xs">
         <Translate zh_hant="已站內隱藏" zh_hans="已站内隐藏" />
       </TextIcon>
 

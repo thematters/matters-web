@@ -1,4 +1,4 @@
-import { Card, Icon, TextIcon, Translate } from '~/components'
+import { Card, IconRight, TextIcon, Translate } from '~/components'
 
 import { toPath } from '~/common/utils'
 
@@ -27,7 +27,7 @@ const ViewMoreButton = ({ q, type }: ViewMoreButtonProps) => {
       })}
     >
       <TextIcon
-        icon={<Icon.Right size="xs" />}
+        icon={<IconRight size="xs" />}
         textPlacement="left"
         color="green"
       >

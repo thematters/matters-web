@@ -27,7 +27,7 @@ const nextConfig = {
     APP_VERSION: packageJson.version,
   },
   typescript: {
-    ignoreDevErrors: true,
+    ignoreDevErrors: false,
   },
   distDir: 'build',
   crossOrigin: 'anonymous',

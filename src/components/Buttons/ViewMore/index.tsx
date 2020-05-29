@@ -1,7 +1,7 @@
 import {
   Button,
   ButtonProps,
-  Icon,
+  IconDown,
   Spinner,
   TextIcon,
   Translate,
@@ -28,7 +28,7 @@ export const ViewMoreButton: React.FC<ViewMoreButtonProps> = ({
         {...props}
       >
         <TextIcon
-          icon={<Icon.Down size="xs" />}
+          icon={<IconDown size="xs" />}
           size="xs"
           color="white"
           weight="md"

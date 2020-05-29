@@ -1,7 +1,13 @@
 import VisuallyHidden from '@reach/visually-hidden'
 import { useState } from 'react'
 
-import { Button, Icon, Spinner, TextIcon, Translate } from '~/components'
+import {
+  Button,
+  IconCameraMedium,
+  Spinner,
+  TextIcon,
+  Translate,
+} from '~/components'
 import { useMutation } from '~/components/GQL'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 
@@ -103,7 +109,7 @@ export const ProfileCoverUploader: React.FC<Props> = ({ user, onUpload }) => {
       <Cover cover={cover} />
 
       <div className="mask">
-        {loading ? <Spinner /> : <Icon.CameraMedium color="white" size="xl" />}
+        {loading ? <Spinner /> : <IconCameraMedium color="white" size="xl" />}
 
         {user.info.profileCover && (
           <section className="delete">

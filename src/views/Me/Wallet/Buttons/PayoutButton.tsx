@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import {
   ButtonProps,
   Dialog,
-  Icon,
+  IconSpinner,
   PayoutDialog,
   Translate,
 } from '~/components'
@@ -66,7 +66,7 @@ const PayoutButton: React.FC<PayoutButtonProps> = ({
           }}
         >
           {loading ? (
-            <Icon.Spinner color="grey-light" size="md" />
+            <IconSpinner color="grey-light" size="md" />
           ) : (
             <Translate id="paymentPayout" />
           )}

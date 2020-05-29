@@ -1,4 +1,4 @@
-import { Button, Icon, TagDialog, TextIcon, Translate } from '~/components'
+import { Button, IconEdit, TagDialog, TextIcon, Translate } from '~/components'
 
 interface EditTagButtonProps {
   id?: string
@@ -17,7 +17,7 @@ const EditTagButton = (props: EditTagButtonProps) => (
         aria-haspopup="true"
       >
         <TextIcon
-          icon={<Icon.Edit color="green" size="xs" />}
+          icon={<IconEdit color="green" size="xs" />}
           size="sm"
           color="green"
         >
