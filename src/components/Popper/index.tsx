@@ -33,7 +33,6 @@ export const Dropdown: React.FC<PopperProps> = (props) => (
     arrow={false}
     trigger="click"
     interactive={true}
-    appendTo={process.browser ? document.body : undefined}
     offset={[0, 4]}
     placement="bottom"
     animation="shift-away"

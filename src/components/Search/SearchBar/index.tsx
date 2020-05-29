@@ -1,6 +1,6 @@
 import { Formik } from 'formik'
 import { useRouter } from 'next/router'
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useDebounce } from 'use-debounce'
 
 import {
@@ -8,7 +8,6 @@ import {
   Dropdown,
   IconSearchMedium,
   LanguageContext,
-  PopperInstance,
   SearchAutoComplete,
   SearchOverview,
 } from '~/components'
@@ -50,13 +49,9 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   })
 
   // dropdown
-  const instanceRef = useRef<PopperInstance>()
-  const hideDropdown = () => {
-    instanceRef.current?.hide()
-  }
-  const showDropdown = () => {
-    instanceRef.current?.show()
-  }
+  const [showDropdown, setShowDropdown] = useState(false)
+  const close = () => setShowDropdown(false)
+  const open = () => setShowDropdown(true)
 
   useEffect(() => {
     if (onChange) {
@@ -74,7 +69,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
           q: values.q.slice(0, 100),
         })
         routerPush(path.href, path.as)
-        hideDropdown()
+        close()
       }}
     >
       {({ values, handleSubmit, handleChange }) => {
@@ -115,9 +110,11 @@ export const SearchBar: React.FC<SearchBarProps> = ({
                 <SearchOverview />
               )
             }
-            trigger="manual"
+            trigger={undefined}
+            appendTo={process.browser ? document.body : undefined}
             placement="bottom-start"
-            onCreate={(instance) => (instanceRef.current = instance)}
+            onClickOutside={close}
+            visible={showDropdown}
             zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
           >
             <form onSubmit={handleSubmit} autoComplete="off">
@@ -130,11 +127,10 @@ export const SearchBar: React.FC<SearchBarProps> = ({
                 onChange={(e) => {
                   handleChange(e)
                   setSearch(e.target.value)
-                  showDropdown()
+                  open()
                 }}
-                onFocus={showDropdown}
-                onClick={showDropdown}
-                onBlur={hideDropdown}
+                onFocus={open}
+                onClick={open}
               />
 
               <SearchButton />

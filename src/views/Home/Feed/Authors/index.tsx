@@ -67,7 +67,7 @@ const FeedAuthors = () => {
         >
           <TextIcon
             icon={<IconReload size="xs" />}
-            color="grey-dark"
+            color="grey"
             size="xs"
             weight="md"
           >

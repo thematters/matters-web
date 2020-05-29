@@ -7,7 +7,6 @@ import {
   hidePopperOnClick,
   LanguageContext,
   Menu,
-  PopperInstance,
   Spinner,
   Translate,
 } from '~/components'
@@ -79,17 +78,9 @@ const SearchTags = ({ addTag }: { addTag: (tag: string) => void }) => {
   const { lang } = useContext(LanguageContext)
   const [search, setSearch] = useState('')
   const [debouncedSearch] = useDebounce(search, INPUT_DEBOUNCE)
-  const [instance, setInstance] = useState<PopperInstance>()
-  const hideDropdown = () => {
-    if (instance) {
-      instance.hide()
-    }
-  }
-  const showDropdown = () => {
-    if (instance) {
-      instance.show()
-    }
-  }
+  const [showDropdown, setShowDropdown] = useState(false)
+  const open = () => setShowDropdown(true)
+  const close = () => setShowDropdown(false)
 
   const { data, loading } = useQuery<SearchTagsQuery>(SEARCH_TAGS, {
     variables: { search: debouncedSearch },
@@ -99,9 +90,10 @@ const SearchTags = ({ addTag }: { addTag: (tag: string) => void }) => {
   return (
     <>
       <Dropdown
-        trigger="manual"
-        onCreate={setInstance}
+        trigger={undefined}
         onShown={hidePopperOnClick}
+        onClickOutside={close}
+        visible={showDropdown}
         content={
           <DropdownContent
             loading={loading}
@@ -124,13 +116,13 @@ const SearchTags = ({ addTag }: { addTag: (tag: string) => void }) => {
             const value = e.target.value
             setSearch(value)
             if (value) {
-              showDropdown()
+              open()
             } else {
-              hideDropdown()
+              close()
             }
           }}
-          onFocus={() => search && showDropdown()}
-          onClick={() => search && showDropdown()}
+          onFocus={() => search && open()}
+          onClick={() => search && open()}
           value={search}
           placeholder={translate({
             zh_hant: '增加標籤…',

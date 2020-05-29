@@ -104,6 +104,7 @@ const SideNav = () => {
               </section>
             }
             placement="right-start"
+            appendTo={process.browser ? document.body : undefined}
             offset={[-24, 24]}
             zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
             onShown={hidePopperOnClick}

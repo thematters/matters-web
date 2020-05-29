@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import { useState } from 'react'
 import { useDebounce } from 'use-debounce/lib'
 
-import { Dropdown, hidePopperOnClick, PopperInstance } from '~/components'
+import { Dropdown, hidePopperOnClick } from '~/components'
 
 import { INPUT_DEBOUNCE } from '~/common/enums'
 
@@ -47,22 +47,13 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
 
   ...inputProps
 }) => {
-  const [search, setSearch] = useState('')
-  const [instance, setInstance] = useState<PopperInstance | null>(null)
-  const [debouncedSearch] = useDebounce(search, INPUT_DEBOUNCE)
-
   const fieldId = `field-${name}`
+  const [search, setSearch] = useState('')
+  const [debouncedSearch] = useDebounce(search, INPUT_DEBOUNCE)
+  const [showDropdown, setShowDropdown] = useState(false)
+  const open = () => setShowDropdown(true)
+  const close = () => setShowDropdown(false)
 
-  const hideDropdown = () => {
-    if (instance) {
-      instance.hide()
-    }
-  }
-  const showDropdown = () => {
-    if (instance) {
-      instance.show()
-    }
-  }
   const dropdownContentCallback = (params: any) => {
     setSearch('')
     if (dropdownCallback) {
@@ -91,7 +82,7 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
     search,
     items,
     callback: dropdownContentCallback,
-    hideDropdown,
+    hideDropdown: close,
     width: getDropdownSize(),
   }
 
@@ -103,13 +94,14 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
 
       <Field.Content>
         <Dropdown
-          trigger="manual"
+          trigger={undefined}
           placement="bottom-start"
-          onCreate={setInstance}
           content={<DropdownContent {...dropdownContentProps} />}
           zIndex={dropdownZIndex}
           appendTo={document.getElementById(dropdownAppendTo) || document.body}
           onShown={hidePopperOnClick}
+          onClickOutside={close}
+          visible={showDropdown}
         >
           <input
             {...inputProps}
@@ -123,7 +115,7 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
               }
 
               if (search) {
-                showDropdown()
+                open()
               }
             }}
             onFocus={(e) => {
@@ -132,7 +124,7 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
               }
 
               if (search) {
-                showDropdown()
+                open()
               }
             }}
             onChange={(e) => {
@@ -145,9 +137,9 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
               setSearch(trimedValue)
 
               if (trimedValue) {
-                showDropdown()
+                open()
               } else {
-                hideDropdown()
+                close()
               }
             }}
           />

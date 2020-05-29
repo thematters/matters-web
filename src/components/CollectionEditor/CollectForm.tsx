@@ -7,7 +7,6 @@ import {
   DropdownArticleList,
   hidePopperOnClick,
   LanguageContext,
-  PopperInstance,
 } from '~/components'
 import SEARCH_ARTICLES from '~/components/GQL/queries/searchArticles'
 
@@ -29,7 +28,6 @@ const CollectForm: React.FC<Props> = ({ onAdd }) => {
   const { lang } = useContext(LanguageContext)
   const [search, setSearch] = useState('')
   const [debouncedSearch] = useDebounce(search, INPUT_DEBOUNCE)
-  const [instance, setInstance] = useState<PopperInstance | null>(null)
   const inputNode: React.RefObject<HTMLInputElement> | null = useRef(null)
 
   // query
@@ -42,33 +40,27 @@ const CollectForm: React.FC<Props> = ({ onAdd }) => {
     .map(({ node }) => node) as SearchArticles_search_edges_node_Article[]
 
   // dropdown
-  const hideDropdown = () => {
-    if (instance) {
-      instance.hide()
-    }
-  }
-  const showDropdown = () => {
-    if (instance) {
-      instance.show()
-    }
-  }
+  const [showDropdown, setShowDropdown] = useState(false)
+  const open = () => setShowDropdown(true)
+  const close = () => setShowDropdown(false)
   const isShowDropdown = (articles && articles.length) || loading
 
   useEffect(() => {
     if (isShowDropdown) {
-      showDropdown()
+      open()
     } else {
-      hideDropdown()
+      close()
     }
   })
 
   return (
     <>
       <Dropdown
-        trigger="manual"
+        trigger={undefined}
         onShown={hidePopperOnClick}
+        onClickOutside={close}
         placement="bottom-start"
-        onCreate={setInstance}
+        visible={showDropdown}
         content={
           <DropdownArticleList
             articles={articles}
@@ -97,7 +89,7 @@ const CollectForm: React.FC<Props> = ({ onAdd }) => {
           }}
           onFocus={() => {
             if (isShowDropdown) {
-              showDropdown()
+              open()
             }
           }}
         />
