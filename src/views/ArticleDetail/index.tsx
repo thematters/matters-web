@@ -292,6 +292,13 @@ const ArticleDetail = () => {
 
           {features.payment && <DynamicDonation mediaHash={mediaHash} />}
 
+          <Waypoint
+            bottomOffset={-200}
+            onEnter={() => {
+              setShowResponses(true)
+            }}
+          />
+
           {(collectionCount > 0 || isAuthor) && (
             <section className="block">
               <Collection article={article} collectionCount={collectionCount} />
@@ -299,9 +306,6 @@ const ArticleDetail = () => {
           )}
 
           <Waypoint
-            onEnter={() => {
-              setShowResponses(true)
-            }}
             onPositionChange={({ currentPosition }) => {
               if (shouldShowWall) {
                 setFixedWall(currentPosition === 'inside')
