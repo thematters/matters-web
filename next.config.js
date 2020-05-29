@@ -7,9 +7,9 @@ const packageJson = require('./package.json')
 
 const isProd = process.env.NODE_ENV === 'production'
 
-const URL_PUSH_SW = isProd
-  ? './firebase-messaging-sw-production.js'
-  : './firebase-messaging-sw-develop.js'
+const URL_PUSH_SW = isProd ?
+  './firebase-messaging-sw-production.js' :
+  './firebase-messaging-sw-develop.js'
 
 const nextConfig = {
   /**
@@ -26,13 +26,15 @@ const nextConfig = {
   env: {
     APP_VERSION: packageJson.version,
   },
-  useFileSystemPublicRoutes: false,
   typescript: {
     ignoreDevErrors: true,
   },
   distDir: 'build',
   crossOrigin: 'anonymous',
-  webpack(config, { defaultLoaders, isServer }) {
+  webpack(config, {
+    defaultLoaders,
+    isServer
+  }) {
     /**
      * Styles in regular CSS files
      * @see {@url https://github.com/zeit/styled-jsx#styles-in-regular-css-files}
@@ -49,8 +51,7 @@ const nextConfig = {
 
     config.module.rules.push({
       test: /\.svg$/,
-      use: [
-        {
+      use: [{
           loader: '@svgr/webpack',
           options: {
             memo: true,
@@ -139,8 +140,7 @@ module.exports = withPlugins(
           // https://github.com/hanford/next-offline/issues/35
           importScripts: [URL_PUSH_SW],
           swDest: '../public/service-worker.js',
-          runtimeCaching: [
-            {
+          runtimeCaching: [{
               urlPattern: '/',
               handler: 'NetworkFirst',
               options: {
