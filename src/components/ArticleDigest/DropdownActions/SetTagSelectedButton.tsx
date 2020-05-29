@@ -5,6 +5,7 @@ import { Icon, Menu, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import { ADD_TOAST } from '~/common/enums'
+import { getQuery } from '~/common/utils'
 
 import { SetTagSelected } from './__generated__/SetTagSelected'
 import { SetTagSelectedButtonArticle } from './__generated__/SetTagSelectedButtonArticle'
@@ -34,8 +35,9 @@ const SetTagSelectedButton = ({
   article: SetTagSelectedButtonArticle
 }) => {
   const router = useRouter()
+  const tagId = getQuery({ router, key: 'tagId' })
   const [update] = useMutation<SetTagSelected>(SET_TAG_SELECTED, {
-    variables: { id: router.query.id, articles: [article.id] },
+    variables: { id: tagId, articles: [article.id] },
   })
 
   return (

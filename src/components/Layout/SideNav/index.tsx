@@ -14,6 +14,7 @@ import {
 } from '~/components'
 
 import { PATHS, TEXT, Z_INDEX } from '~/common/enums'
+import { getQuery } from '~/common/utils'
 
 import MeAvatar from '../MeAvatar'
 import NavMenu from '../NavMenu'
@@ -26,6 +27,7 @@ const SideNav = () => {
   const isLargeUp = useResponsive('lg-up')
   const router = useRouter()
   const viewer = useContext(ViewerContext)
+  const userName = getQuery({ router, key: 'userName' })
   const viewerUserName = viewer.userName || ''
 
   const isInHome = router.pathname === PATHS.HOME
@@ -34,8 +36,7 @@ const SideNav = () => {
   const isInSearch = router.pathname === PATHS.SEARCH
   const isInMe =
     router.pathname !== PATHS.ME_NOTIFICATIONS &&
-    (router.pathname.indexOf('/me') >= 0 ||
-      router.query.userName === viewerUserName)
+    (router.pathname.indexOf('/me') >= 0 || userName === viewerUserName)
   const isInDraftDetail = router.pathname === PATHS.ME_DRAFT_DETAIL
 
   return (

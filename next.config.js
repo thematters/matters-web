@@ -88,13 +88,6 @@ const nextConfig = {
 
     return config
   },
-  exportPathMap: async function (defaultPathMap) {
-    return {
-      '/': {
-        page: '/_error',
-      },
-    }
-  },
 }
 
 module.exports = withPlugins(

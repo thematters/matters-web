@@ -69,7 +69,7 @@ export const ROUTES: Array<{
 
   // Tag
   { key: 'TAGS', pathname: '/tags' },
-  { key: 'TAG_DETAIL', pathname: '/tags/[id]' },
+  { key: 'TAG_DETAIL', pathname: '/tags/[tagId]' },
 
   // User
   { key: 'USER_ARTICLES', pathname: '/[userName]' },

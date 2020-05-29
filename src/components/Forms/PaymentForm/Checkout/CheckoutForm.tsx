@@ -51,7 +51,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
       const msg =
         lang === 'en'
           ? undefined
-          : _get(STRIPE_ERROR_MESSAGES[lang], result.error.code)
+          : _get(STRIPE_ERROR_MESSAGES[lang], result.error.code || '')
 
       setError(msg || result.error.message)
 

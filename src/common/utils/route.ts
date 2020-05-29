@@ -173,6 +173,7 @@ export const getQuery = ({
     | 'userName'
     | 'mediaHash'
     | 'draftId'
+    | 'tagId'
     | 'q'
     | 'type'
     | 'scope'
