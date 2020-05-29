@@ -5,11 +5,11 @@ import {
   Head,
   Layout,
   PullToRefresh,
-  SearchAutoComplete,
   SearchBar,
-  SearchOverview,
   useResponsive,
 } from '~/components'
+import SearchAutoComplete from '~/components/Search/SearchAutoComplete'
+import SearchOverview from '~/components/Search/SearchOverview'
 
 import { getQuery, routerPush, toPath } from '~/common/utils'
 

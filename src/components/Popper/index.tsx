@@ -5,7 +5,9 @@ import { Z_INDEX } from '~/common/enums'
 export type PopperInstance = import('tippy.js').Instance
 export type PopperProps = import('@tippy.js/react').TippyProps
 
-const DynamicTippy = dynamic(() => import('@tippy.js/react'), { ssr: true })
+const DynamicLazyTippy = dynamic(() => import('./LazyTippy'), {
+  ssr: false,
+})
 
 /**
  * Wrappers of <Tippy> with customize themes
@@ -27,7 +29,7 @@ const DynamicTippy = dynamic(() => import('@tippy.js/react'), { ssr: true })
  */
 
 export const Dropdown: React.FC<PopperProps> = (props) => (
-  <DynamicTippy {...props} />
+  <DynamicLazyTippy {...props} />
 )
 Dropdown.defaultProps = {
   arrow: false,
@@ -43,7 +45,7 @@ Dropdown.defaultProps = {
 }
 
 export const Tooltip: React.FC<PopperProps> = (props) => (
-  <DynamicTippy {...props} />
+  <DynamicLazyTippy {...props} />
 )
 Tooltip.defaultProps = {
   arrow: true,

@@ -23,7 +23,7 @@ const SEARCH_AUTOCOMPLETE = gql`
   }
 `
 
-export const SearchAutoComplete = (props: SearchAutoCompleteProps) => {
+const SearchAutoComplete = (props: SearchAutoCompleteProps) => {
   const { searchKey, inPage } = props
   const [getAutoComplete, { data, loading }] = useLazyQuery<
     SearchAutoCompleteType
@@ -80,3 +80,5 @@ export const SearchAutoComplete = (props: SearchAutoCompleteProps) => {
     </Menu>
   )
 }
+
+export default SearchAutoComplete

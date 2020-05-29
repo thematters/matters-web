@@ -29,7 +29,7 @@ const SEARCH_AUTOCOMPLETE = gql`
   ${ClearHistoryButton.fragments.user}
 `
 
-export const SearchOverview = ({ inPage }: SearchOverviewProps) => {
+const SearchOverview = ({ inPage }: SearchOverviewProps) => {
   const { data, loading } = useQuery<SearchOverviewType>(SEARCH_AUTOCOMPLETE)
 
   const frequentSearch = data?.frequentSearch || []
@@ -117,3 +117,5 @@ export const SearchOverview = ({ inPage }: SearchOverviewProps) => {
     </Menu>
   )
 }
+
+export default SearchOverview
