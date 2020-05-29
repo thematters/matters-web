@@ -29,31 +29,31 @@ const DynamicLazyTippy = dynamic(() => import('./LazyTippy'), {
  */
 
 export const Dropdown: React.FC<PopperProps> = (props) => (
-  <DynamicLazyTippy {...props} />
+  <DynamicLazyTippy
+    arrow={false}
+    trigger={'click'}
+    interactive={true}
+    offset={[0, 4]}
+    placement="bottom"
+    animation="shift-away"
+    theme="dropdown"
+    zIndex={Z_INDEX.UNDER_GLOBAL_HEADER}
+    {...props}
+  />
 )
-Dropdown.defaultProps = {
-  arrow: false,
-  trigger: 'click',
-  interactive: true,
-  offset: [0, 4],
-  placement: 'bottom',
-  animation: 'shift-away',
-  theme: 'dropdown',
-  zIndex: Z_INDEX.UNDER_GLOBAL_HEADER,
-}
 
 export const Tooltip: React.FC<PopperProps> = (props) => (
-  <DynamicLazyTippy {...props} />
+  <DynamicLazyTippy
+    arrow={true}
+    interactive={false}
+    offset={[0, 12]}
+    placement="right"
+    animation="shift-away"
+    theme="tooltip"
+    zIndex={Z_INDEX.UNDER_GLOBAL_HEADER}
+    {...props}
+  />
 )
-Tooltip.defaultProps = {
-  arrow: true,
-  interactive: false,
-  offset: [0, 12],
-  placement: 'right',
-  animation: 'shift-away',
-  theme: 'tooltip',
-  zIndex: Z_INDEX.UNDER_GLOBAL_HEADER,
-}
 
 /**
  * Hide popper when inside button was clicked

@@ -1,5 +1,4 @@
 import { Formik } from 'formik'
-import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { useDebounce } from 'use-debounce'
@@ -7,10 +6,11 @@ import { useDebounce } from 'use-debounce'
 import {
   Button,
   Dropdown,
+  SearchOverview,
+  SearchAutoComplete,
   Icon,
   LanguageContext,
   PopperInstance,
-  Spinner,
 } from '~/components'
 
 import { INPUT_DEBOUNCE, TEXT, Z_INDEX } from '~/common/enums'
@@ -22,19 +22,6 @@ interface SearchBarProps {
   onChange?: (key: string) => void
   hasDropdown?: boolean
 }
-
-const DynamicSearchAutoComplete = dynamic(
-  () => import('../SearchAutoComplete'),
-  {
-    ssr: false,
-    loading: Spinner,
-  }
-)
-
-const DynamicSearchOverview = dynamic(() => import('../SearchOverview'), {
-  ssr: false,
-  loading: Spinner,
-})
 
 const SearchButton = () => (
   <Button
@@ -123,9 +110,9 @@ export const SearchBar: React.FC<SearchBarProps> = ({
           <Dropdown
             content={
               debouncedSearch ? (
-                <DynamicSearchAutoComplete searchKey={debouncedSearch} />
+                <SearchAutoComplete searchKey={debouncedSearch} />
               ) : (
-                <DynamicSearchOverview />
+                <SearchOverview />
               )
             }
             trigger="manual"
