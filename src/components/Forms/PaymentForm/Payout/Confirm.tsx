@@ -140,9 +140,7 @@ const BaseConfirm: React.FC<FormProps> = ({
               onBlur={handleBlur}
               onChange={(e) => {
                 const value = e.target.valueAsNumber || 0
-                const sanitizedAmount = Math.abs(
-                  Math.max(Math.floor(value), 0)
-                )
+                const sanitizedAmount = Math.abs(Math.max(Math.floor(value), 0))
                 if (inputRef.current) {
                   inputRef.current.value = sanitizedAmount
                 }
