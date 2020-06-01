@@ -100,7 +100,7 @@
     "@types/helmet": "0.0.47",
     "@types/jest": "^25.2.3",
     "@types/jump.js": "^1.0.3",
-    "@types/lodash": "^4.14.153",
+    "@types/lodash": "^4.14.154",
     "@types/next-server": "^9.0.0",
     "@types/nprogress": "0.2.0",
     "@types/pulltorefreshjs": "^0.1.3",
