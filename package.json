@@ -10,8 +10,8 @@
   },
   "license": "ISC",
   "scripts": {
-    "dev": "next -p $PORT",
-    "start": "next start -p $PORT",
+    "dev": "PORT=\"${PORT:-3000}\"; next -p $PORT",
+    "start": "PORT=\"${PORT:-3000}\"; next start -p $PORT",
     "build": "NODE_ENV=production npm run gen:type && next build",
     "test": "jest",
     "format": "prettier --write \"{,!(build|node_modules|coverage)/**/!(__generated__)/}*.{js,jsx,ts,tsx,json}\"",
