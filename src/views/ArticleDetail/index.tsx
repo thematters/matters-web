@@ -150,7 +150,6 @@ const ArticleDetail = () => {
 
   // translation
   const [translate, setTranslate] = useState(false)
-
   const language = article?.language
   const viewerLanguage = viewer.settings.language
   const shouldTranslate = language && language !== viewerLanguage
@@ -161,6 +160,31 @@ const ArticleDetail = () => {
   ] = useLazyQuery<ArticleDetailSpaType>(ARTICLE_TRANSLATION)
   const titleTranslation = translationData?.article?.translation?.title
   const contentTranslation = translationData?.article?.translation?.content
+  const onTranslate = (newTranslate: boolean) => {
+    setTranslate(newTranslate)
+
+    if (!newTranslate) {
+      return
+    }
+
+    getTranslation({
+      variables: { mediaHash, language: viewerLanguage },
+    })
+
+    window.dispatchEvent(
+      new CustomEvent(ADD_TOAST, {
+        detail: {
+          color: 'green',
+          content: (
+            <Translate
+              zh_hant="正在翻譯為繁體中文"
+              zh_hans="正在翻译为简体中文"
+            />
+          ),
+        },
+      })
+    )
+  }
 
   if (loading) {
     return (
@@ -252,28 +276,7 @@ const ArticleDetail = () => {
                 {shouldTranslate && (
                   <TranslationButton
                     translate={translate}
-                    setTranslate={(newTranslate) => {
-                      setTranslate(newTranslate)
-
-                      if (newTranslate) {
-                        getTranslation({
-                          variables: { mediaHash, language: viewerLanguage },
-                        })
-                        window.dispatchEvent(
-                          new CustomEvent(ADD_TOAST, {
-                            detail: {
-                              color: 'green',
-                              content: (
-                                <Translate
-                                  zh_hant="正在翻譯為繁體中文"
-                                  zh_hans="正在翻译为简体中文"
-                                />
-                              ),
-                            },
-                          })
-                        )
-                      }
-                    }}
+                    setTranslate={onTranslate}
                   />
                 )}
               </section>
