@@ -1,4 +1,12 @@
-import { Button, ButtonProps, Icon, TextIcon, Translate } from '~/components'
+import {
+  Button,
+  ButtonProps,
+  IconBackLarge,
+  IconCloseLarge,
+  IconSpinner,
+  TextIcon,
+  Translate,
+} from '~/components'
 import { useResponsive } from '~/components/Hook'
 
 import { TEXT, TextId } from '~/common/enums'
@@ -23,7 +31,7 @@ export const CloseButton = ({ close, textId }: CloseButtonProps) => {
           <Translate id={textId || 'cancel'} />
         </TextIcon>
       )}
-      {isSmallUp && <Icon.CloseLarge size="lg" color="green" />}
+      {isSmallUp && <IconCloseLarge size="lg" color="green" />}
     </Button>
   )
 }
@@ -45,7 +53,7 @@ export const BackButton: React.FC<BackButton> = (props) => {
           <Translate id="previousStep" />
         </TextIcon>
       )}
-      {isSmallUp && <Icon.BackLarge size="lg" color="green" />}
+      {isSmallUp && <IconBackLarge size="lg" color="green" />}
     </Button>
   )
 }
@@ -73,7 +81,7 @@ export const RightButton: React.FC<RightButtonProps> = ({
         color={isSmallUp ? 'white' : 'green'}
         size={isSmallUp ? 'md-s' : 'md'}
         weight="md"
-        icon={loading && <Icon.Spinner size="sm" />}
+        icon={loading && <IconSpinner size="sm" />}
       >
         {loading ? null : text}
       </TextIcon>

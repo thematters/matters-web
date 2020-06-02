@@ -2,9 +2,9 @@ import chunk from 'lodash/chunk'
 
 import { Translate, useResponsive } from '~/components'
 
-import IMAGE_FEATURE_1 from '~/static/images/migration-feature-1.svg'
-import IMAGE_FEATURE_2 from '~/static/images/migration-feature-2.svg'
-import IMAGE_FEATURE_3 from '~/static/images/migration-feature-3.svg'
+import IMAGE_FEATURE_1 from '@/public/static/images/migration-feature-1.svg'
+import IMAGE_FEATURE_2 from '@/public/static/images/migration-feature-2.svg'
+import IMAGE_FEATURE_3 from '@/public/static/images/migration-feature-3.svg'
 
 import styles from './styles.css'
 

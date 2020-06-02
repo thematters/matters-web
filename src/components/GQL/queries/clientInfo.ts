@@ -8,9 +8,6 @@ export default gql`
         width
         height
       }
-      isPhone
-      isTablet
-      isMobile
     }
   }
 `

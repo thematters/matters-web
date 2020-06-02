@@ -4,7 +4,7 @@ import _chunk from 'lodash/chunk'
 
 import {
   Button,
-  Icon,
+  IconReload,
   Slides,
   Spinner,
   TextIcon,
@@ -13,7 +13,6 @@ import {
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 import SectionHeader from '../../SectionHeader'
@@ -67,8 +66,8 @@ const FeedAuthors = () => {
           onClick={() => refetch()}
         >
           <TextIcon
-            icon={<Icon.Reload size="xs" />}
-            color="grey-dark"
+            icon={<IconReload size="xs" />}
+            color="grey"
             size="xs"
             weight="md"
           >
@@ -97,10 +96,11 @@ const FeedAuthors = () => {
                   user={node}
                   spacing={['tight', 0]}
                   bgColor="none"
-                  hasCivicLikerRing
                   onClick={() =>
-                    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                      type: FEED_TYPE.AUTHORS,
+                    analytics.trackEvent('click_feed', {
+                      type: 'authors',
+                      contentType: 'user',
+                      styleType: 'card',
                       location: (edgeIndex + 1) * (nodeIndex + 1) - 1,
                     })
                   }

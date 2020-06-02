@@ -5,14 +5,13 @@ import { useRouter } from 'next/router'
 import { useContext, useState } from 'react'
 
 import {
-  Button,
   EmptyTag,
   Head,
   Layout,
+  PullToRefresh,
   Spacer,
   Spinner,
   Tabs,
-  TextIcon,
   Throw404,
   Translate,
   ViewerContext,
@@ -20,6 +19,7 @@ import {
 import { getErrorCodes, QueryError } from '~/components/GQL'
 
 import { ERROR_CODES } from '~/common/enums'
+import { getQuery } from '~/common/utils'
 
 import styles from './styles.css'
 import { TagDetailArticles } from './TagDetailArticles'
@@ -92,37 +92,37 @@ const TagDetail = ({ data }: { data: TagDetailType }) => {
 
       <Head title={`#${data.node.content}`} />
 
-      <Spacer />
+      <PullToRefresh>
+        <Spacer />
 
-      {data.node.description && (
-        <p className="description">{data.node.description}</p>
-      )}
-
-      <Tabs>
-        {hasSelected > 0 && (
-          <Tabs.Tab selected={feed === 'selected'}>
-            <Button onClick={() => setFeed('selected')}>
-              <TextIcon size="xm">
-                <Translate id="featured" />
-              </TextIcon>
-            </Button>
-          </Tabs.Tab>
+        {data.node.description && (
+          <p className="description">{data.node.description}</p>
         )}
 
-        <Tabs.Tab selected={feed === 'latest'}>
-          <Button onClick={() => setFeed('latest')}>
-            <TextIcon size="xm">
-              <Translate id="latest" />
-            </TextIcon>
-          </Button>
-        </Tabs.Tab>
-      </Tabs>
+        <Tabs>
+          {hasSelected > 0 && (
+            <Tabs.Tab
+              selected={feed === 'selected'}
+              onClick={() => setFeed('selected')}
+            >
+              <Translate id="featured" />
+            </Tabs.Tab>
+          )}
 
-      {feed === 'selected' ? (
-        <TagDetailArticles.Selected id={data.node.id} />
-      ) : (
-        <TagDetailArticles.Latest id={data.node.id} />
-      )}
+          <Tabs.Tab
+            selected={feed === 'latest'}
+            onClick={() => setFeed('latest')}
+          >
+            <Translate id="latest" />
+          </Tabs.Tab>
+        </Tabs>
+
+        {feed === 'selected' ? (
+          <TagDetailArticles.Selected id={data.node.id} />
+        ) : (
+          <TagDetailArticles.Latest id={data.node.id} />
+        )}
+      </PullToRefresh>
 
       <style jsx>{styles}</style>
     </Layout.Main>
@@ -131,8 +131,9 @@ const TagDetail = ({ data }: { data: TagDetailType }) => {
 
 const TagDetailContainer = () => {
   const router = useRouter()
+  const tagId = getQuery({ router, key: 'tagId' })
   const { data, loading, error } = useQuery<TagDetailType>(TAG_DETAIL, {
-    variables: { id: router.query.id },
+    variables: { id: tagId },
   })
 
   if (loading) {

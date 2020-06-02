@@ -25,6 +25,7 @@ export * from './Slides'
 export * from './CopyToClipboard'
 export * from './Context'
 export * from './GQL'
+export * from './PullToRefresh'
 
 /**
  * Compositions

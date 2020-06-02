@@ -15,6 +15,7 @@ export type ButtonWidth =
   | '6rem'
   | '7rem'
   | '8rem'
+  | '10.5rem'
   | '100%'
   | undefined
   | null
@@ -109,7 +110,7 @@ export interface ButtonProps {
  *    spacing={['xtight', 'xtight']}
  *    onClick={onClick}
  *  >
- *    <Icon.BookmarkActive />
+ *    <IconBookmarkActive />
  *  </Button>
  *
  *  // with custom size, border, hover text & background
@@ -185,7 +186,7 @@ export const Button: React.FC<ButtonProps> = forwardRef(
     // handle click
     const onClick = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
       if (restProps.onClick) {
-        restProps.onClick()
+        restProps.onClick(event)
       }
 
       // blur on click

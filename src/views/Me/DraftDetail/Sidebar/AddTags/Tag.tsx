@@ -1,4 +1,4 @@
-import { Button, Icon } from '~/components'
+import { Button, IconClear } from '~/components'
 
 import styles from './styles.css'
 
@@ -12,7 +12,7 @@ const Tag = ({ tag, deleteTag }: TagProps) => (
     <span>{tag}</span>
 
     <Button onClick={() => deleteTag(tag)}>
-      <Icon.Clear color="grey-lighter" />
+      <IconClear color="grey-lighter" />
     </Button>
 
     <style jsx>{styles}</style>

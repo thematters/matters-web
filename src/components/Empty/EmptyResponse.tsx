@@ -1,4 +1,4 @@
-import { Empty, Icon, Translate } from '~/components'
+import { Empty, IconComment, Translate } from '~/components'
 
 export const EmptyResponse = ({
   articleOnlyMode,
@@ -7,7 +7,7 @@ export const EmptyResponse = ({
 }) => {
   return (
     <Empty
-      icon={<Icon.Comment size="xxl" />}
+      icon={<IconComment size="xxl" />}
       description={
         articleOnlyMode ? (
           <Translate zh_hant="還沒有衍生作品" zh_hans="还没有衍生作品" />

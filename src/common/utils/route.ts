@@ -1,9 +1,9 @@
 import Router, { NextRouter } from 'next/router'
-import pathToRegexp from 'path-to-regexp'
+import { Key, pathToRegexp } from 'path-to-regexp'
 import queryString from 'query-string'
 import { UrlObject } from 'url'
 
-import { PATHS, ROUTES, toExpressPath } from '~/common/enums'
+import { PATHS, ROUTES } from '~/common/enums'
 
 import { parseURL } from './url'
 
@@ -169,10 +169,34 @@ export const getQuery = ({
   key,
 }: {
   router: NextRouter
-  key: string
+  key:
+    | 'userName'
+    | 'mediaHash'
+    | 'draftId'
+    | 'tagId'
+    | 'q'
+    | 'type'
+    | 'scope'
+    | 'state'
+    | 'client_id'
+    | 'redirect_uri'
+    | 'provider'
+    | 'code'
 }) => {
   const value = router.query && router.query[key]
-  return value instanceof Array ? value[0] : value
+  let query = value instanceof Array ? value[0] : value || ''
+
+  switch (key) {
+    case 'userName':
+      query = query.replace('@', '')
+      break
+    case 'mediaHash':
+    case 'draftId':
+      query = query.split('-').slice(-1)[0]
+      break
+  }
+
+  return query
 }
 
 export const getTarget = (url?: string) => {
@@ -306,22 +330,12 @@ export const captureClicks = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
 
   /**
    * Matching defined routes
-   *
-   * Note:
-   * We are using the same version (0.1.7) of `path-to-regexp` as Express.js 4.x,
-   * different from the version used by Next.js (6.x).
-   *
-   * They have different behaviors about wildcard asterisk (*), see below link.
-   *
-   * Once the custom routes (`src/server.ts`) is deprecated,
-   * it should be synchronized with Next.js.
-   *
-   * @see {@url https://github.com/pillarjs/path-to-regexp#compatibility-with-express--4x}
    */
   let matched = {}
   ROUTES.some(({ pathname }) => {
-    const keys: PathToRegExpKey[] = []
-    const regexp = pathToRegexp(toExpressPath(pathname), keys)
+    const keys: Key[] = []
+    const path = pathname.replace(/\]/g, '').replace(/\[/g, ':')
+    const regexp = pathToRegexp(path, keys)
     const result = regexp.exec(url.pathname)
 
     if (result) {

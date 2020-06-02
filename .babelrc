@@ -3,8 +3,12 @@
     [
       "next/babel",
       {
-        "preset-env": { "modules": false },
-        "transform-runtime": { "useESModules": false },
+        "preset-env": {
+          "modules": false
+        },
+        "transform-runtime": {
+          "useESModules": false
+        },
         "styled-jsx": {
           "plugins": ["styled-jsx-plugin-postcss"]
         }
@@ -12,15 +16,6 @@
     ]
   ],
   "plugins": [
-    [
-      "module-resolver",
-      {
-        "alias": {
-          "~/static": "./public/static",
-          "~": "./src"
-        }
-      }
-    ],
     "@babel/plugin-proposal-optional-chaining"
   ]
 }

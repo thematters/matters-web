@@ -11,7 +11,6 @@ import {
   Transaction,
 } from '~/components'
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import { MeTransactions } from './__generated__/MeTransactions'
@@ -41,7 +40,9 @@ const ME_TRANSACTIONS = gql`
 `
 
 const Transactions = () => {
-  const { data, loading, fetchMore } = useQuery<MeTransactions>(ME_TRANSACTIONS)
+  const { data, loading, fetchMore, refetch } = useQuery<MeTransactions>(
+    ME_TRANSACTIONS
+  )
 
   if (loading) {
     return <Spinner />
@@ -59,7 +60,7 @@ const Transactions = () => {
   }
 
   const loadMore = () => {
-    analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
+    analytics.trackEvent('load_more', {
       type: 'transaction',
       location: edges.length,
     })
@@ -77,7 +78,11 @@ const Transactions = () => {
   }
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+    <InfiniteScroll
+      hasNextPage={pageInfo.hasNextPage}
+      loadMore={loadMore}
+      pullToRefresh={refetch}
+    >
       <List>
         {edges.map(({ node, cursor }) => (
           <List.Item key={cursor}>

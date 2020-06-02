@@ -4,7 +4,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
 import gql from 'graphql-tag'
 import { AppProps } from 'next/app'
-import getConfig from 'next/config'
+import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 
@@ -12,18 +12,16 @@ import {
   AnalyticsListener,
   Error,
   ErrorBoundary,
+  FeaturesProvider,
   LanguageProvider,
   Layout,
   Toast,
-  ViewerFragments,
   ViewerProvider,
 } from '~/components'
 import { ClientUpdater } from '~/components/ClientUpdater'
-import { GlobalDialogs } from '~/components/GlobalDialogs'
 import { GlobalStyles } from '~/components/GlobalStyles'
 import { QueryError } from '~/components/GQL'
-import { ProgressBar } from '~/components/ProgressBar'
-import PushInitializer from '~/components/PushInitializer'
+import SplashScreen from '~/components/SplashScreen'
 
 import { PATHS } from '~/common/enums'
 import { analytics } from '~/common/utils'
@@ -38,9 +36,13 @@ const ROOT_QUERY = gql`
       ...ViewerUser
       ...AnalyticsUser
     }
+    official {
+      ...FeatureOfficial
+    }
   }
-  ${ViewerFragments.user}
+  ${ViewerProvider.fragments.user}
   ${AnalyticsListener.fragments.user}
+  ${FeaturesProvider.fragments.official}
 `
 
 // Sentry
@@ -48,16 +50,29 @@ import('@sentry/browser').then((Sentry) => {
   /**
    * Initialize
    */
-  const {
-    publicRuntimeConfig: { SENTRY_DSN },
-  } = getConfig()
-  Sentry.init({ dsn: SENTRY_DSN || '' })
+  Sentry.init({ dsn: process.env.NEXT_PUBLIC_SENTRY_DSN || '' })
 })
 
 /**
  * `<Root>` contains components that depend on viewer
  *
  */
+const DynamicPushInitializer = dynamic(
+  () => import('~/components/PushInitializer'),
+  {
+    ssr: false,
+  }
+)
+const DynamicProgressBar = dynamic(() => import('~/components/ProgressBar'), {
+  ssr: false,
+})
+const DynamicGlobalDialogs = dynamic(
+  () => import('~/components/GlobalDialogs'),
+  {
+    ssr: false,
+  }
+)
+
 const Root = ({
   client,
   children,
@@ -66,7 +81,7 @@ const Root = ({
   children: React.ReactNode
 }) => {
   useEffect(() => {
-    analytics.trackPage({ path: window.location.pathname })
+    analytics.trackPage()
   })
 
   useEffect(() => {
@@ -82,6 +97,7 @@ const Root = ({
     skip: !process.browser,
   })
   const viewer = data?.viewer
+  const official = data?.official
 
   if (loading) {
     return null
@@ -94,14 +110,15 @@ const Root = ({
   return (
     <ViewerProvider viewer={viewer}>
       <LanguageProvider>
-        {shouldApplyLayout ? <Layout>{children}</Layout> : children}
+        <FeaturesProvider official={official}>
+          {shouldApplyLayout ? <Layout>{children}</Layout> : children}
 
-        <GlobalDialogs />
-        <Toast.Container />
-        <ProgressBar />
-
-        <AnalyticsListener user={viewer || {}} />
-        <PushInitializer client={client} />
+          <Toast.Container />
+          <AnalyticsListener user={viewer || {}} />
+          <DynamicGlobalDialogs />
+          <DynamicProgressBar />
+          <DynamicPushInitializer client={client} />
+        </FeaturesProvider>
       </LanguageProvider>
     </ViewerProvider>
   )
@@ -115,6 +132,7 @@ const MattersApp = ({
   <ErrorBoundary>
     <ApolloProvider client={apollo}>
       <GlobalStyles />
+      <SplashScreen />
       <ClientUpdater />
 
       <Root client={apollo}>

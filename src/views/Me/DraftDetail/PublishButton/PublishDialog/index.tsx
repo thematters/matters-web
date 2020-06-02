@@ -8,8 +8,8 @@ interface PublishDialogProps {
   children: ({ open }: { open: () => void }) => React.ReactNode
 }
 
-const BasePublishDialog = ({ children }: PublishDialogProps) => {
-  const [showDialog, setShowDialog] = useState(true)
+export const PublishDialog = ({ children }: PublishDialogProps) => {
+  const [showDialog, setShowDialog] = useState(false)
   const open = () => setShowDialog(true)
   const close = () => setShowDialog(false)
 
@@ -23,9 +23,3 @@ const BasePublishDialog = ({ children }: PublishDialogProps) => {
     </>
   )
 }
-
-export const PublishDialog = (props: PublishDialogProps) => (
-  <Dialog.Lazy mounted={<BasePublishDialog {...props} />}>
-    {({ open }) => <>{props.children({ open })}</>}
-  </Dialog.Lazy>
-)

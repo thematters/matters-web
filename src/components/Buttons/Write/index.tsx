@@ -3,7 +3,8 @@ import { useContext } from 'react'
 
 import {
   Button,
-  Icon,
+  IconPen,
+  IconSpinner,
   LanguageContext,
   LikeCoinDialog,
   TextIcon,
@@ -11,7 +12,7 @@ import {
 } from '~/components'
 import { useMutation } from '~/components/GQL'
 
-import { ADD_TOAST, ANALYTICS_EVENTS, TEXT } from '~/common/enums'
+import { ADD_TOAST, TEXT } from '~/common/enums'
 import {
   analytics,
   parseFormSubmitErrors,
@@ -47,9 +48,9 @@ const BaseWriteButton = ({
   isLarge?: boolean
 }) => {
   const WriteIcon = loading ? (
-    <Icon.Spinner size="sm" color="white" />
+    <IconSpinner size="sm" color="white" />
   ) : (
-    <Icon.Pen size="sm" color="white" />
+    <IconPen size="sm" color="white" />
   )
 
   return (
@@ -101,7 +102,9 @@ export const WriteButton = ({ allowed, isLarge, forbidden }: Props) => {
             return
           }
 
-          analytics.trackEvent(ANALYTICS_EVENTS.CLICK_WRITE_BUTTON)
+          analytics.trackEvent('click_button', {
+            type: 'write',
+          })
           const result = await putDraft()
           const { slug, id } = result?.data?.putDraft || {}
 
@@ -111,6 +114,11 @@ export const WriteButton = ({ allowed, isLarge, forbidden }: Props) => {
           }
         } catch (error) {
           const [messages, codes] = parseFormSubmitErrors(error, lang)
+
+          if (!messages[codes[0]]) {
+            return null
+          }
+
           window.dispatchEvent(
             new CustomEvent(ADD_TOAST, {
               detail: {

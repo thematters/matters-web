@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { Button, Icon, TextIcon } from '~/components'
+import { Button, IconLike, TextIcon } from '~/components'
 
 import { numAbbr } from '~/common/utils'
 
@@ -23,7 +23,7 @@ const Appreciation = ({
 }) => (
   <Button spacing={['xtight', 'xtight']} is="span">
     <TextIcon
-      icon={<Icon.Like size={size === 'xs' ? 'xs' : undefined} />}
+      icon={<IconLike size={size === 'xs' ? 'xs' : undefined} />}
       color="grey"
       weight="md"
       size={size}

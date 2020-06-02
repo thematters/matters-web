@@ -2,7 +2,13 @@ import { useContext } from 'react'
 
 import {
   CardSpacing,
-  Icon,
+  FeaturesContext,
+  IconBookmarkMedium,
+  IconDraftMedium,
+  IconHistoryMedium,
+  IconLikeMedium,
+  IconProfileMedium,
+  IconWalletMedium,
   Menu,
   TextIcon,
   Translate,
@@ -18,6 +24,7 @@ interface NavMenuTopProps {
 
 const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
   const viewer = useContext(ViewerContext)
+  const features = useContext(FeaturesContext)
   const viewerPath = toPath({
     page: 'userProfile',
     userName: viewer.userName || '',
@@ -32,7 +39,7 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
     <Menu spacingY={isInSideDrawerNav ? 0 : undefined}>
       <Menu.Item spacing={menuItemSpacing} {...viewerPath}>
         <TextIcon
-          icon={<Icon.ProfileMedium size="md" />}
+          icon={<IconProfileMedium size="md" />}
           spacing="base"
           size={menuItemSize}
         >
@@ -42,7 +49,7 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
 
       <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_DRAFTS}>
         <TextIcon
-          icon={<Icon.DraftMedium size="md" />}
+          icon={<IconDraftMedium size="md" />}
           spacing="base"
           size={menuItemSize}
         >
@@ -50,19 +57,21 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
         </TextIcon>
       </Menu.Item>
 
-      <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_WALLET}>
-        <TextIcon
-          icon={<Icon.WalletMedium size="md" />}
-          spacing="base"
-          size={menuItemSize}
-        >
-          <Translate id="myWallet" />
-        </TextIcon>
-      </Menu.Item>
+      {(features.add_credit || features.payout) && (
+        <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_WALLET}>
+          <TextIcon
+            icon={<IconWalletMedium size="md" />}
+            spacing="base"
+            size={menuItemSize}
+          >
+            <Translate id="myWallet" />
+          </TextIcon>
+        </Menu.Item>
+      )}
 
       <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_BOOKMARKS}>
         <TextIcon
-          icon={<Icon.BookmarkMedium size="md" />}
+          icon={<IconBookmarkMedium size="md" />}
           spacing="base"
           size={menuItemSize}
         >
@@ -72,7 +81,7 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
 
       <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_APPRECIATIONS_SENT}>
         <TextIcon
-          icon={<Icon.LikeMedium size="md" />}
+          icon={<IconLikeMedium size="md" />}
           spacing="base"
           size={menuItemSize}
         >
@@ -82,7 +91,7 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
 
       <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_HISTORY}>
         <TextIcon
-          icon={<Icon.HistoryMedium size="md" />}
+          icon={<IconHistoryMedium size="md" />}
           spacing="base"
           size={menuItemSize}
         >

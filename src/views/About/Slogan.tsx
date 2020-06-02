@@ -1,9 +1,10 @@
 import { Button, TextIcon, Translate } from '~/components'
 
 import { PATHS } from '~/common/enums'
-import IMAGE_SLOGAN_LG from '~/static/images/about-1-lg.svg'
-import IMAGE_SLOGAN_MD from '~/static/images/about-1-md.svg'
-import IMAGE_SLOGAN_SM from '~/static/images/about-1-sm.svg'
+
+import IMAGE_SLOGAN_LG from '@/public/static/images/about-1-lg.svg'
+import IMAGE_SLOGAN_MD from '@/public/static/images/about-1-md.svg'
+import IMAGE_SLOGAN_SM from '@/public/static/images/about-1-sm.svg'
 
 import styles from './styles.css'
 

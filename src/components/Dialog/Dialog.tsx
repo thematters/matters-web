@@ -1,7 +1,7 @@
 import { DialogContent, DialogOverlay } from '@reach/dialog'
 import classNames from 'classnames'
 import { useEffect, useRef, useState } from 'react'
-import { animated, useSpring } from 'react-spring'
+import { animated, Globals, useSpring } from 'react-spring'
 import { useDrag } from 'react-use-gesture'
 
 import { useOutsideClick, useResponsive } from '~/components'
@@ -83,12 +83,15 @@ const Dialog: React.FC<DialogProps> = (props) => {
   }))
 
   // Fade In/ Fade Out
-  const [{ opacity, transform }, setFade] = useSpring(() => ({
+  const [{ opacity, transform }, setFade] = useSpring<{
+    opacity: number
+    transform: string
+  }>(() => ({
     opacity: 0,
     transform: 'translateY(100%)',
     config: { tension: 270, friction: isSmallUp ? undefined : 30 },
-    onRest: (val: { opacity: number }) => {
-      const isFadedOut = val.opacity <= 0
+    onRest: (val) => {
+      const isFadedOut = val.value <= 0
 
       if (isFadedOut) {
         setMounted(false)
@@ -109,6 +112,18 @@ const Dialog: React.FC<DialogProps> = (props) => {
       setFade({ opacity: 0, transform: 'translateY(100%)' })
     }
   })
+
+  // FIXME: https://github.com/react-spring/react-spring/issues/664#issuecomment-585748356
+  useEffect(() => {
+    if (performance.mark && performance.getEntries) {
+      performance.mark('dummy_check')
+      const entries = performance.getEntries()
+
+      Globals.assign({
+        skipAnimation: entries && entries.length === 0,
+      })
+    }
+  }, [])
 
   const AnimatedDialogOverlay = animated(DialogOverlay)
   const AnimatedContainer = animated(Container)

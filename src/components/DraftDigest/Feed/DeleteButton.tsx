@@ -1,7 +1,13 @@
 import gql from 'graphql-tag'
 import { useState } from 'react'
 
-import { Button, Dialog, Icon, TextIcon, Translate } from '~/components'
+import {
+  Button,
+  Dialog,
+  IconDeleteDraftXS,
+  TextIcon,
+  Translate,
+} from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import { ADD_TOAST } from '~/common/enums'
@@ -107,7 +113,7 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
         onClick={open}
       >
         <TextIcon
-          icon={<Icon.DeleteDraftXS size="xs" />}
+          icon={<IconDeleteDraftXS size="xs" />}
           size="xs"
           color="grey-dark"
           weight="md"

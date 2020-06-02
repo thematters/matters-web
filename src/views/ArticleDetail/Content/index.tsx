@@ -1,12 +1,16 @@
+import classNames from 'classnames'
 import gql from 'graphql-tag'
-import { useEffect, useState } from 'react'
-import { Waypoint } from 'react-waypoint'
+import throttle from 'lodash/throttle'
+import { useEffect, useRef, useState } from 'react'
 
 import { useMutation } from '~/components/GQL'
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
 import styles from '~/common/styles/utils/content.article.css'
-import { analytics, captureClicks, initAudioPlayers } from '~/common/utils'
+import {
+  captureClicks,
+  initAudioPlayers,
+  insertLazyLoading,
+} from '~/common/utils'
 
 import { ContentArticle } from './__generated__/ContentArticle'
 import { ReadArticle } from './__generated__/ReadArticle'
@@ -19,92 +23,89 @@ const READ_ARTICLE = gql`
   }
 `
 
-const fragments = {
-  article: gql`
-    fragment ContentArticle on Article {
-      id
-      content
-    }
-  `,
-}
-
-const Content = ({ article }: { article: ContentArticle }) => {
+const Content = ({
+  article,
+  translation,
+  translating,
+}: {
+  article: ContentArticle
+  translation?: string | null
+  translating: boolean
+}) => {
   const [read] = useMutation<ReadArticle>(READ_ARTICLE)
-  const [trackedFinish, setTrackedFinish] = useState(false)
-  const [trackedRead, setTrackedRead] = useState(false)
+
+  const contentContainer = useRef(null)
+
+  // idle timer
+  const [lastScroll, setScrollTime] = useState(0)
+
   const { id } = article
 
-  useEffect(() => {
-    // enter and leave article for analytics
-    analytics.trackEvent(ANALYTICS_EVENTS.ENTER_ARTICLE, {
-      entrance: id,
-    })
-
-    // send referrer to likebutton
-    const likeButtonIframe = document.querySelector(
-      '.likebutton iframe'
-    ) as HTMLFrameElement
-    if (likeButtonIframe) {
-      likeButtonIframe.addEventListener('load', () => {
-        if (likeButtonIframe.contentWindow) {
-          likeButtonIframe.contentWindow.postMessage(
-            {
-              action: 'SET_REFERRER',
-              content: { referrer: window.location.href.split('#')[0] },
-            },
-            'https://button.like.co'
-          )
-        }
-      })
-    }
-
-    return () =>
-      analytics.trackEvent(ANALYTICS_EVENTS.LEAVE_ARTICLE, { entrance: id })
-  }, [])
-
+  // called only once
   useEffect(() => {
     initAudioPlayers()
-  })
 
-  const FireOnMount = ({ fn }: { fn: () => void }) => {
-    useEffect(() => {
-      fn()
-    }, [])
-    return null
-  }
+    const handleScroll = throttle(() => setScrollTime(Date.now() / 1000), 3000)
+    window.addEventListener('scroll', handleScroll)
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
+  // register read
+  useEffect(() => {
+    const timerId = setInterval(() => {
+      const isReading = () => {
+        // tab hidden
+        if (document.hidden) {
+          return false
+        }
+
+        // idle for more than 5 minutes
+        if (Date.now() / 1000 - lastScroll > 60 * 5) {
+          return false
+        }
+
+        if (!contentContainer || !contentContainer.current) {
+          return false
+        }
+
+        // if overlay is shown
+        const overlaySelectors = ['reach-portal', '.tippy-popper']
+        if (document.querySelector(overlaySelectors.join(','))) {
+          return false
+        }
+
+        // if bottom is above center
+        const {
+          bottom,
+        } = ((contentContainer.current as unknown) as Element).getBoundingClientRect()
+
+        const isBottomAboveCenter = bottom <= window.innerHeight / 2
+        return !isBottomAboveCenter
+      }
+
+      if (isReading()) {
+        read({ variables: { id } })
+      }
+    }, 5000)
+
+    // clean timer
+    return () => {
+      clearInterval(timerId)
+    }
+  }, [lastScroll])
 
   return (
     <>
-      <FireOnMount
-        fn={() => {
-          if (!trackedRead) {
-            read({ variables: { id } })
-            setTrackedRead(true)
-          }
-        }}
-      />
-
       <div
-        className="u-content"
-        dangerouslySetInnerHTML={{ __html: article.content }}
+        className={classNames({ 'u-content': true, translating })}
+        dangerouslySetInnerHTML={{
+          __html: insertLazyLoading(translation || article.content),
+        }}
         onClick={captureClicks}
-      />
-
-      <Waypoint
-        onEnter={() => {
-          if (!trackedFinish) {
-            analytics.trackEvent(ANALYTICS_EVENTS.FINISH_ARTICLE, {
-              entrance: id,
-            })
-            setTrackedFinish(true)
-          }
-        }}
-        onPositionChange={({ currentPosition: to, previousPosition: from }) => {
-          analytics.trackEvent(ANALYTICS_EVENTS.ARTICLE_BOTTOM_CROSS, {
-            from,
-            to,
-          })
-        }}
+        ref={contentContainer}
       />
 
       <style jsx>{styles}</style>
@@ -112,6 +113,13 @@ const Content = ({ article }: { article: ContentArticle }) => {
   )
 }
 
-Content.fragments = fragments
+Content.fragments = {
+  article: gql`
+    fragment ContentArticle on Article {
+      id
+      content
+    }
+  `,
+}
 
 export default Content

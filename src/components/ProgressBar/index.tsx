@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 
 import styles from './styles.css'
 
-export const ProgressBar = () => {
+const ProgressBar = () => {
   const showAfterMs = 300
   let timer: any = null
 
@@ -39,3 +39,5 @@ export const ProgressBar = () => {
     </style>
   )
 }
+
+export default ProgressBar

@@ -39,6 +39,7 @@ const CardSection: React.FC<CardSectionProps> = ({ error, onChange }) => {
         iconColor: '#c85c41',
       },
     },
+    hidePostalCode: true,
   }
 
   return (

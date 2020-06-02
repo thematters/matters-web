@@ -2,9 +2,6 @@ import { useState } from 'react'
 
 import { Dialog, Layout, SignUpForm } from '~/components'
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
-import { analytics } from '~/common/utils'
-
 import Binding from './Binding'
 import Generating from './Generating'
 import Select from './Select'
@@ -28,10 +25,6 @@ export const SetupLikeCoin: React.FC<Props> = ({
   const [step, setStepState] = useState<Step>('select')
   const setStep = (newStep: Step) => {
     setStepState(newStep)
-    analytics.trackEvent(ANALYTICS_EVENTS.LIKECOIN_STEP_CHANGE, {
-      from: step,
-      to: newStep,
-    })
   }
 
   const [bindingWindowRef, setBindingWindowRef] = useState<Window | undefined>(

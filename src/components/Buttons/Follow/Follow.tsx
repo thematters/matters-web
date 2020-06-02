@@ -12,9 +12,6 @@ import { useMutation } from '~/components/GQL'
 import updateUserFollowerCount from '~/components/GQL/updates/userFollowerCount'
 import updateViewerFolloweeCount from '~/components/GQL/updates/viewerFolloweeCount'
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
-import { analytics } from '~/common/utils'
-
 import { FollowButtonSize } from './index'
 
 import { FollowButtonUser } from './__generated__/FollowButtonUser'
@@ -22,7 +19,7 @@ import { FollowUser } from './__generated__/FollowUser'
 
 const FOLLOW_USER = gql`
   mutation FollowUser($id: ID!) {
-    followUser(input: { id: $id }) {
+    toggleFollowUser(input: { id: $id }) {
       id
       isFollowee
       isFollower
@@ -40,7 +37,7 @@ const Follow = ({
   const [follow] = useMutation<FollowUser>(FOLLOW_USER, {
     variables: { id: user.id },
     optimisticResponse: {
-      followUser: {
+      toggleFollowUser: {
         id: user.id,
         isFollowee: true,
         isFollower: user.isFollower,
@@ -67,10 +64,7 @@ const Follow = ({
       textActiveColor="white"
       bgActiveColor="green"
       borderColor="green"
-      onClick={() => {
-        follow()
-        analytics.trackEvent(ANALYTICS_EVENTS.FOLLOW_USER, { id: user.id })
-      }}
+      onClick={follow}
     >
       <TextIcon weight="md" size={size === 'lg' ? 'sm' : 'xs'}>
         <Translate id="follow" />

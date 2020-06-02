@@ -1,8 +1,9 @@
 import { Button, Tooltip, Translate, withIcon } from '~/components'
 
 import { EXTERNAL_LINKS } from '~/common/enums'
-import { ReactComponent as IconCivicLikerBadge } from '~/static/icons/civic-liker-badge.svg'
-import { ReactComponent as IconSeedBadge } from '~/static/icons/early-user-badge.svg'
+
+import { ReactComponent as IconCivicLikerBadge } from '@/public/static/icons/civic-liker-badge.svg'
+import { ReactComponent as IconSeedBadge } from '@/public/static/icons/early-user-badge.svg'
 
 import styles from './styles.css'
 

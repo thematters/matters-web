@@ -1,6 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import getConfig from 'next/config'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import queryString from 'query-string'
@@ -25,10 +24,7 @@ import styles from './styles.css'
 
 import { OAuthClientInfo } from './__generated__/OAuthClientInfo'
 
-const {
-  publicRuntimeConfig: { OAUTH_URL },
-} = getConfig()
-const OAUTH_AUTHORIZE_ENDPOINT = `${OAUTH_URL}/authorize`
+const OAUTH_AUTHORIZE_ENDPOINT = `${process.env.NEXT_PUBLIC_OAUTH_URL}/authorize`
 
 const OAUTH_CLIENT_INFO = gql`
   query OAuthClientInfo($id: ID!) {
@@ -85,8 +81,8 @@ const OAuthAuthorize = () => {
             {name}
           </a>
           <Translate
-            zh_hant=" 正在申請訪問你的 Matters 帳號數據："
-            zh_hans=" 正在申请访问你的 Matters 帐号数据："
+            zh_hant=" 正在申請訪問你的 Matters 帳戶數據："
+            zh_hans=" 正在申请访问你的 Matters 帐户数据："
           />
         </>
       }
@@ -144,7 +140,7 @@ const OAuthAuthorize = () => {
             {process.browser && (
               <Link {...appendTarget(PATHS.LOGIN, true)}>
                 <a className="u-link-green">
-                  <Translate zh_hant="切換賬戶" zh_hans="切换账户" />
+                  <Translate zh_hant="切換帳戶" zh_hans="切换帐户" />
                 </a>
               </Link>
             )}

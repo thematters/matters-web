@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-import { Button, Icon, TextIcon, Translate } from '~/components'
+import { Button, IconExpand, TextIcon, Translate } from '~/components'
 
 import styles from './styles.css'
 
@@ -52,7 +52,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
             setExpand(true)
           }}
         >
-          <TextIcon icon={<Icon.Expand size="xs" />}>
+          <TextIcon icon={<IconExpand size="xs" />}>
             <Translate id="expand" />
           </TextIcon>
         </Button>

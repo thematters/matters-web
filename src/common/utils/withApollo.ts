@@ -13,28 +13,25 @@ import { getMainDefinition } from 'apollo-utilities'
 import http from 'http'
 import https from 'https'
 import withApollo from 'next-with-apollo'
-import getConfig from 'next/config'
 
 import { AGENT_HASH_PREFIX, STORE_KEY_AGENT_HASH } from '~/common/enums'
 import introspectionQueryResultData from '~/common/gql/fragmentTypes.json'
 import { initAgentHash, randomString } from '~/common/utils'
 
-// import { setupPersistCache } from './cache'
 import resolvers from './resolvers'
 import typeDefs from './types'
+
+// import { setupPersistCache } from './cache'
 
 const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData,
 })
 
-const {
-  publicRuntimeConfig: { ENV, API_URL, WS_URL },
-} = getConfig()
-const isProd = ENV === 'production'
+const isProd = process.env.NODE_ENV === 'production'
 
 // toggle http for local dev
 const agent =
-  (API_URL || '').split(':')[0] === 'http'
+  (process.env.NEXT_PUBLIC_API_URL || '').split(':')[0] === 'http'
     ? new http.Agent()
     : new https.Agent({
         rejectUnauthorized: isProd, // allow access to https:...matters.news in localhost
@@ -47,7 +44,7 @@ const persistedQueryLink = createPersistedQueryLink({
 
 const httpLink = ({ headers }: { [key: string]: any }) =>
   createUploadLink({
-    uri: API_URL,
+    uri: process.env.NEXT_PUBLIC_API_URL,
     credentials: 'include',
     headers,
     fetchOptions: {
@@ -58,7 +55,7 @@ const httpLink = ({ headers }: { [key: string]: any }) =>
 // only do ws with browser
 const wsLink = process.browser
   ? new WebSocketLink({
-      uri: WS_URL,
+      uri: process.env.NEXT_PUBLIC_WS_URL || '',
       options: {
         reconnect: true,
       },
@@ -164,23 +161,7 @@ export default withApollo(({ ctx, headers, initialState }) => {
       dataLink({ headers }),
     ]),
     cache,
-    resolvers: {
-      ...resolvers,
-      Query: {
-        ...resolvers.Query,
-        clientInfo: () => {
-          const data = resolvers.Query.clientInfo()
-
-          // @ts-ignore
-          const clientInfo = ctx?.req?.clientInfo || {}
-
-          return {
-            ...data,
-            ...clientInfo,
-          }
-        },
-      },
-    },
+    resolvers,
     typeDefs,
   })
 

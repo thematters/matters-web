@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { Icon } from '~/components'
+import { IconLive } from '~/components'
 
 import { LiveArticle } from './__generated__/LiveArticle'
 
@@ -18,7 +18,7 @@ const Live = ({ article }: { article: LiveArticle }) => {
     return null
   }
 
-  return <Icon.Live />
+  return <IconLive />
 }
 
 Live.fragments = fragments

@@ -1,10 +1,10 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 
-import { Button, Icon, TextIcon } from '~/components'
+import { Button, IconComment, TextIcon } from '~/components'
 
-import { ANALYTICS_EVENTS, UrlFragments } from '~/common/enums'
-import { analytics, numAbbr, toPath } from '~/common/utils'
+import { UrlFragments } from '~/common/enums'
+import { numAbbr, toPath } from '~/common/utils'
 
 import { ActionsResponseCountArticle } from './__generated__/ActionsResponseCountArticle'
 
@@ -48,16 +48,10 @@ const ResponseCount = ({
       bgActiveColor={inCard ? 'grey-lighter-active' : 'grey-lighter'}
       {...path}
       disabled={isBanned}
-      onClick={() => {
-        analytics.trackEvent(ANALYTICS_EVENTS.OPEN_COMMENTS, {
-          entrance: article.id,
-          type: 'article-digest',
-        })
-      }}
       aira-label="查看評論"
     >
       <TextIcon
-        icon={<Icon.Comment size={size === 'xs' ? 'xs' : undefined} />}
+        icon={<IconComment size={size === 'xs' ? 'xs' : undefined} />}
         color="grey"
         weight="md"
         size={size}

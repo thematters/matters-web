@@ -3,8 +3,7 @@ import React from 'react'
 
 import { Card, DateTime, LinkWrapper, Title, Translate } from '~/components'
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
-import { analytics, toPath } from '~/common/utils'
+import { toPath } from '~/common/utils'
 
 import DeleteButton from './DeleteButton'
 import EditButton from './EditButton'
@@ -40,13 +39,7 @@ const DraftDigestFeed = ({ draft }: DraftDigestFeedProps) => {
   })
 
   return (
-    <Card
-      {...path}
-      spacing={['base', 'base']}
-      onClick={() =>
-        analytics.trackEvent(ANALYTICS_EVENTS.CLICK_DRAFT, { entrance: id })
-      }
-    >
+    <Card {...path} spacing={['base', 'base']}>
       <LinkWrapper {...path} textActiveColor="green">
         <Title type="feed" is="h2">
           {title || <Translate id="untitle" />}

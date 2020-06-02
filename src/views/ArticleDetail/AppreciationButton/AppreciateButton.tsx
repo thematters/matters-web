@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import { useRef } from 'react'
 
-import { Icon } from '~/components'
+import { IconAppreciationMAX, IconLike } from '~/components'
 
 import { numAbbr } from '~/common/utils'
 
@@ -51,11 +51,11 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
           }
         }}
       >
-        <Icon.Like className="icon-like" size="md" color="green" />
+        <IconLike className="icon-like" size="md" color="green" />
         <span className="total">{numAbbr(total)}</span>
         {count && (
           <span className="count">
-            {count === 'MAX' ? <Icon.AppreciationMAX color="white" /> : count}
+            {count === 'MAX' ? <IconAppreciationMAX color="white" /> : count}
           </span>
         )}
       </button>

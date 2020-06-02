@@ -1,15 +1,14 @@
 import { useContext } from 'react'
 
 import {
-  Icon,
+  IconLogo,
   Layout,
   LoginButton,
   SignUpButton,
+  Spacer,
   useResponsive,
   ViewerContext,
 } from '~/components'
-
-import { SIGNUP_TYPE } from '~/common/enums'
 
 import Feed from './Feed'
 import Sidebar from './Sidebar'
@@ -24,9 +23,7 @@ const Home = () => {
     <Layout.Main
       aside={
         <>
-          <Sidebar.Icymi />
           <Sidebar.Tags />
-          <Sidebar.Topics />
           <Sidebar.Authors />
         </>
       }
@@ -38,7 +35,7 @@ const Home = () => {
             <>
               {hasLogo ? (
                 <section className="logo">
-                  <Icon.Logo />
+                  <IconLogo />
                 </section>
               ) : (
                 <Layout.Header.Title id="discover" />
@@ -46,14 +43,16 @@ const Home = () => {
 
               {!viewer.isAuthed && (
                 <section className="buttons">
-                  <LoginButton />
-                  <SignUpButton trackType={SIGNUP_TYPE.GENERAL} />
+                  <LoginButton size={[null, '2rem']} />
+                  <SignUpButton size={[null, '2rem']} />
                 </section>
               )}
             </>
           }
         />
       )}
+
+      <Spacer size="xtight" />
 
       <Feed />
 

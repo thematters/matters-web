@@ -13,7 +13,6 @@ import {
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import { AllAuthors } from './__generated__/AllAuthors'
@@ -43,7 +42,9 @@ const ALL_AUTHORSS = gql`
 `
 
 const Authors = () => {
-  const { data, loading, error, fetchMore } = useQuery<AllAuthors>(ALL_AUTHORSS)
+  const { data, loading, error, fetchMore, refetch } = useQuery<AllAuthors>(
+    ALL_AUTHORSS
+  )
 
   if (loading) {
     return <Spinner />
@@ -65,8 +66,8 @@ const Authors = () => {
   }
 
   const loadMore = () => {
-    analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
-      type: FEED_TYPE.ALL_AUTHORS,
+    analytics.trackEvent('load_more', {
+      type: 'all_authors',
       location: edges.length,
     })
     return fetchMore({
@@ -84,15 +85,21 @@ const Authors = () => {
   }
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+    <InfiniteScroll
+      hasNextPage={pageInfo.hasNextPage}
+      loadMore={loadMore}
+      pullToRefresh={refetch}
+    >
       <List hasBorder={false}>
         {edges.map(({ node, cursor }, i) => (
           <List.Item key={cursor}>
             <UserDigest.Rich
               user={node}
               onClick={() =>
-                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                  type: FEED_TYPE.ALL_AUTHORS,
+                analytics.trackEvent('click_feed', {
+                  type: 'all_authors',
+                  styleType: 'card',
+                  contentType: 'user',
                   location: i,
                 })
               }

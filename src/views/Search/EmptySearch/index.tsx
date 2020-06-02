@@ -1,9 +1,9 @@
-import { Empty, Icon } from '~/components'
+import { Empty, IconNavSearch } from '~/components'
 
 const EmptySearch = ({
   description,
 }: {
   description?: string | React.ReactNode
-}) => <Empty icon={<Icon.NavSearch size="xxl" />} description={description} />
+}) => <Empty icon={<IconNavSearch size="xxl" />} description={description} />
 
 export default EmptySearch

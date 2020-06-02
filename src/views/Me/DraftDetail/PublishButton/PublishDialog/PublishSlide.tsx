@@ -3,7 +3,8 @@ import { useContext } from 'react'
 import { LanguageContext } from '~/components'
 
 import { translate } from '~/common/utils'
-import PUBLISH_IMAGE from '~/static/images/publish-1.svg'
+
+import PUBLISH_IMAGE from '@/public/static/images/publish-1.svg'
 
 import styles from './styles.css'
 

@@ -113,8 +113,10 @@ const BaseDropdownDialog = ({
     return (
       <Dropdown
         {...dropdown}
+        trigger={undefined}
         content={<Content>{dropdown.content}</Content>}
         onHidden={close}
+        onClickOutside={close}
         visible={showDialog}
       >
         <ForwardChildren open={open} children={children} />

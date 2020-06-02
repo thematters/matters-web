@@ -26,6 +26,7 @@
           { "name": "RecentSearchConnection" },
           { "name": "AppreciationConnection" },
           { "name": "NoticeConnection" },
+          { "name": "TransactionConnection" },
           { "name": "SearchResultConnection" },
           { "name": "ReportConnection" },
           { "name": "OAuthClientConnection" },
@@ -58,8 +59,15 @@
           { "name": "OfficialAnnouncementNotice" },
           { "name": "ArticleTagHasBeenAddedNotice" },
           { "name": "ArticleTagHasBeenRemovedNotice" },
-          { "name": "ArticleTagHasBeenUnselectedNotice" }
+          { "name": "ArticleTagHasBeenUnselectedNotice" },
+          { "name": "PaymentReceivedDonationNotice" },
+          { "name": "PaymentPayoutNotice" }
         ]
+      },
+      {
+        "kind": "UNION",
+        "name": "TransactionTarget",
+        "possibleTypes": [{ "name": "Article" }, { "name": "Transaction" }]
       }
     ]
   }

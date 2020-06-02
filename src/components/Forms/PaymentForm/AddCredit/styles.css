@@ -1,31 +1,3 @@
-.confirm-info {
-  padding: 0 var(--spacing-base);
-  margin-bottom: var(--spacing-loose);
-  width: 100%;
-
-  color: var(--color-grey);
-  font-size: var(--font-size-sm);
-  line-height: 1.5rem;
-
-  & .row {
-    @mixin flex-center-space-between;
-    margin: var(--spacing-base) 0;
-
-    & .col + .col {
-      text-align: right;
-    }
-  }
-
-  & .total {
-    color: var(--color-black);
-    font-weight: var(--font-weight-bold);
-
-    & .col + .col {
-      font-size: var(--font-size-lg);
-    }
-  }
-}
-
 .complete-content {
   margin: var(--spacing-xx-loose) 0;
 }

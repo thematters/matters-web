@@ -3,7 +3,8 @@ import queryString from 'query-string'
 import { TextIcon, Translate, withIcon } from '~/components'
 
 import { dom } from '~/common/utils'
-import { ReactComponent as IconShareWeibo } from '~/static/icons/share-weibo.svg'
+
+import { ReactComponent as IconShareWeibo } from '@/public/static/icons/share-weibo.svg'
 
 const Weibo = ({ title, link }: { title: string; link: string }) => (
   <button

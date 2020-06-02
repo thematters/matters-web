@@ -11,8 +11,7 @@ import {
 import { QueryError } from '~/components/GQL'
 import { UserDigest } from '~/components/UserDigest'
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
-import { analytics, mergeConnections } from '~/common/utils'
+import { mergeConnections } from '~/common/utils'
 
 import { ViewerBlockList } from './__generated__/ViewerBlockList'
 
@@ -39,9 +38,9 @@ const VIEWER_BLOCK_LIST = gql`
 `
 
 const SettingsBlocked = () => {
-  const { data, loading, error, fetchMore } = useQuery<ViewerBlockList>(
-    VIEWER_BLOCK_LIST
-  )
+  const { data, loading, error, fetchMore, refetch } = useQuery<
+    ViewerBlockList
+  >(VIEWER_BLOCK_LIST)
 
   if (loading) {
     return <Spinner />
@@ -67,10 +66,6 @@ const SettingsBlocked = () => {
   }
 
   const loadMore = () => {
-    analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
-      type: FEED_TYPE.ALL_AUTHORS,
-      location: edges.length,
-    })
     return fetchMore({
       variables: {
         after: pageInfo.endCursor,
@@ -85,21 +80,15 @@ const SettingsBlocked = () => {
   }
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+    <InfiniteScroll
+      hasNextPage={pageInfo.hasNextPage}
+      loadMore={loadMore}
+      pullToRefresh={refetch}
+    >
       <List hasBorder={false}>
         {filteredUsers.map(({ node, cursor }, i) => (
           <List.Item key={cursor}>
-            <UserDigest.Rich
-              user={node}
-              hasUnblock
-              hasFollow={false}
-              onClick={() =>
-                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                  type: FEED_TYPE.ALL_AUTHORS,
-                  location: i,
-                })
-              }
-            />
+            <UserDigest.Rich user={node} hasUnblock hasFollow={false} />
           </List.Item>
         ))}
       </List>

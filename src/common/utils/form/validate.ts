@@ -1,4 +1,4 @@
-import { MINIMAL_CHARGE_AMOUNT } from '~/common/enums'
+import { PAYMENT_CURRENCY, PAYMENT_MINIMAL_CHARGE_AMOUNT } from '~/common/enums'
 import {
   isValidDisplayName,
   isValidEmail,
@@ -114,10 +114,66 @@ export const validateAmount = (value: number, lang: Language) => {
     return translate({ id: 'required', lang })
   }
 
-  if (value < MINIMAL_CHARGE_AMOUNT.HKD) {
+  if (value < PAYMENT_MINIMAL_CHARGE_AMOUNT.HKD) {
     return translate({
-      zh_hant: `最少充值金額爲 HKD ${MINIMAL_CHARGE_AMOUNT.HKD}`,
-      zh_hans: `最少充值金额为 HKD ${MINIMAL_CHARGE_AMOUNT.HKD}`,
+      zh_hant: `最少储值金額爲 HKD ${PAYMENT_MINIMAL_CHARGE_AMOUNT.HKD}`,
+      zh_hans: `最少储值金额为 HKD ${PAYMENT_MINIMAL_CHARGE_AMOUNT.HKD}`,
+      lang,
+    })
+  }
+}
+
+export const validateDonationAmount = (value: number, lang: Language) => {
+  if (typeof value !== 'number') {
+    return translate({ id: 'required', lang })
+  }
+
+  if (value === 0) {
+    return translate({
+      zh_hant: '請選擇或輸入金額',
+      zh_hans: '请选择或输入金额',
+      lang,
+    })
+  }
+}
+
+export const validatePayoutAmount = ({
+  min,
+  max,
+  value,
+  lang,
+}: {
+  min: number
+  max: number
+  value: number
+  lang: Language
+}) => {
+  if (typeof value !== 'number') {
+    return translate({ id: 'required', lang })
+  }
+
+  if (value < min) {
+    return translate({
+      zh_hant: `最少提現金額爲 HKD ${min}`,
+      zh_hans: `最少提现金額爲 HKD ${min}`,
+      lang,
+    })
+  }
+
+  if (value > max) {
+    return translate({
+      zh_hant: `最高提現金額爲 HKD ${max}`,
+      zh_hans: `最高提现金額爲 HKD ${max}`,
+      lang,
+    })
+  }
+}
+
+export const validateCurrency = (value: string, lang: Language) => {
+  if (!PAYMENT_CURRENCY[value as keyof typeof PAYMENT_CURRENCY]) {
+    return translate({
+      zh_hant: '請選擇一種幣別',
+      zh_hans: '请选择一种币别',
       lang,
     })
   }

@@ -3,7 +3,12 @@ import gql from 'graphql-tag'
 import { useContext, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 
-import { Tooltip, Translate, ViewerContext } from '~/components'
+import {
+  ReCaptchaContext,
+  Tooltip,
+  Translate,
+  ViewerContext,
+} from '~/components'
 import { useMutation } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
@@ -35,8 +40,8 @@ const fragments = {
 }
 
 const APPRECIATE_ARTICLE = gql`
-  mutation AppreciateArticle($id: ID!, $amount: Int!) {
-    appreciateArticle(input: { id: $id, amount: $amount }) {
+  mutation AppreciateArticle($id: ID!, $amount: Int!, $token: String!) {
+    appreciateArticle(input: { id: $id, amount: $amount, token: $token }) {
       id
       appreciationsReceivedTotal
       hasAppreciate
@@ -53,6 +58,8 @@ const AppreciationButton = ({
   article: AppreciationButtonArticle
 }) => {
   const viewer = useContext(ViewerContext)
+  const { token, refreshToken } = useContext(ReCaptchaContext)
+
   const { data, client } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
     variables: { id: 'local' },
   })
@@ -62,11 +69,14 @@ const AppreciationButton = ({
   const [sendAppreciation] = useMutation<AppreciateArticle>(APPRECIATE_ARTICLE)
   const limit = article.appreciateLimit
   const left = article.appreciateLeft - amount
+
   const total = article.appreciationsReceivedTotal + amount
   const appreciatedCount = limit - left
   const [debouncedSendAppreciation] = useDebouncedCallback(async () => {
     try {
-      await sendAppreciation({ variables: { id: article.id, amount } })
+      await sendAppreciation({
+        variables: { id: article.id, amount, token },
+      }).then(refreshToken)
     } catch (e) {
       console.error(e)
     }
@@ -84,7 +94,7 @@ const AppreciationButton = ({
   const readCivicLikerDialog =
     viewer.isCivicLiker || data?.clientPreference.readCivicLikerDialog
   const canAppreciate =
-    !isReachLimit && !isMe && !viewer.isInactive && viewer.liker.likerId
+    !isReachLimit && !isMe && !viewer.isArchived && viewer.liker.likerId
 
   /**
    * Anonymous

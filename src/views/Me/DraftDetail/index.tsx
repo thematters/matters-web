@@ -67,7 +67,7 @@ const EmptyLayout: React.FC = ({ children }) => (
 
 const DraftDetail = () => {
   const router = useRouter()
-  const id = getQuery({ router, key: 'id' })
+  const id = getQuery({ router, key: 'draftId' })
   const { data, loading, error } = useQuery<DraftDetailQuery>(DRAFT_DETAIL, {
     variables: { id },
     fetchPolicy: 'network-only',
@@ -77,10 +77,6 @@ const DraftDetail = () => {
   const [saveStatus, setSaveStatus] = useState<
     'saved' | 'saving' | 'saveFailed'
   >()
-
-  if (!process.browser) {
-    return null
-  }
 
   if (error) {
     return (
@@ -96,6 +92,10 @@ const DraftDetail = () => {
         <Throw404 />
       </EmptyLayout>
     )
+  }
+
+  if (!process.browser) {
+    return <EmptyLayout />
   }
 
   const draft = (data?.node?.__typename === 'Draft' && data.node) || undefined

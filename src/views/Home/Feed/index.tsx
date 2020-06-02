@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import { NetworkStatus } from 'apollo-client'
 import gql from 'graphql-tag'
+import { useEffect } from 'react'
 
 import {
   ArticleDigestFeed,
@@ -13,15 +14,12 @@ import {
 import { QueryError } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
-import Articles from './Articles'
 import Authors from './Authors'
-import SortBy from './SortBy'
+import SortBy, { SortByType } from './SortBy'
 import styles from './styles.css'
 import Tags from './Tags'
-import ViewMode from './ViewMode'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import {
@@ -32,8 +30,6 @@ import {
   NewestFeed,
   NewestFeed_viewer_recommendation_feed_edges,
 } from './__generated__/NewestFeed'
-
-type SortBy = 'hottest' | 'newest'
 
 type HorizontalFeed = React.FC<{ after?: string; first?: number }>
 
@@ -47,10 +43,8 @@ interface FeedLocation {
 }
 
 const horizontalFeeds: FeedLocation = {
-  2: () => <Articles type="icymi" />,
-  5: () => <Articles type="topics" />,
-  8: () => <Tags />,
-  11: () => <Authors />,
+  2: () => <Tags />,
+  5: () => <Authors />,
 }
 
 const feedFragment = gql`
@@ -97,9 +91,35 @@ export const queries = {
     }
     ${feedFragment}
   `,
+  icymi: gql`
+    query IcymiFeed($after: String) {
+      viewer {
+        id
+        recommendation {
+          feed: icymi(input: { first: 10, after: $after }) {
+            ...FeedArticleConnection
+          }
+        }
+      }
+    }
+    ${feedFragment}
+  `,
+  topics: gql`
+    query TopicsFeed($after: String) {
+      viewer {
+        id
+        recommendation {
+          feed: topics(input: { first: 10, after: $after }) {
+            ...FeedArticleConnection
+          }
+        }
+      }
+    }
+    ${feedFragment}
+  `,
 }
 
-const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
+const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortByType }) => {
   const isLargeUp = useResponsive('lg-up')
   const isHottestFeed = sortBy === 'hottest'
   const {
@@ -108,16 +128,39 @@ const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
     loading,
     fetchMore: fetchMoreMainFeed,
     networkStatus,
+    refetch,
+    client,
   } = useQuery<HottestFeed | NewestFeed>(queries[sortBy], {
     notifyOnNetworkStatusChange: true,
   })
+
+  // prefetch other queries
+  useEffect(() => {
+    Object.keys(queries)
+      .filter((s) => s !== sortBy)
+      .map((s) => {
+        client.query({
+          query: queries[s as SortByType],
+        })
+      })
+  }, [])
 
   const connectionPath = 'viewer.recommendation.feed'
   const result = data?.viewer?.recommendation.feed
   const { edges, pageInfo } = result || {}
   const isNewLoading = networkStatus === NetworkStatus.loading
 
+  const { data: localCache } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
+    variables: { id: 'local' },
+  })
+
+  const { viewMode } = localCache?.clientPreference || { viewMode: 'default' }
+
   if (loading && (!result || isNewLoading)) {
+    if (process.browser) {
+      window.scrollTo(0, 0)
+      document.body.focus()
+    }
     return <Spinner />
   }
 
@@ -130,7 +173,7 @@ const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
   }
 
   const loadMore = () => {
-    analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
+    analytics.trackEvent('load_more', {
       type: sortBy,
       location: edges.length,
     })
@@ -178,7 +221,11 @@ const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
   }
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+    <InfiniteScroll
+      hasNextPage={pageInfo.hasNextPage}
+      loadMore={loadMore}
+      pullToRefresh={refetch}
+    >
       <List>
         {mixFeed.map((edge, i) => {
           if (edge.__typename === 'HorizontalFeed') {
@@ -190,8 +237,15 @@ const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortBy }) => {
                 <ArticleDigestFeed
                   article={edge.node}
                   onClick={() =>
-                    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
+                    analytics.trackEvent('click_feed', {
                       type: sortBy,
+                      styleType:
+                        viewMode === 'default'
+                          ? 'small_cover'
+                          : viewMode === 'compact'
+                          ? 'no_cover'
+                          : 'large_cover',
+                      contentType: 'article',
                       location: i,
                     })
                   }
@@ -212,7 +266,7 @@ const HomeFeed = () => {
   const { feedSortType } = data?.clientPreference || {
     feedSortType: 'hottest',
   }
-  const setSortBy = (type: SortBy) => {
+  const setSortBy = (type: SortByType) => {
     if (client) {
       client.writeData({
         id: 'ClientPreference:local',
@@ -224,11 +278,10 @@ const HomeFeed = () => {
   return (
     <>
       <section className="topbar">
-        <SortBy sortBy={feedSortType as SortBy} setSortBy={setSortBy} />
-        <ViewMode />
+        <SortBy sortBy={feedSortType as SortByType} setSortBy={setSortBy} />
       </section>
 
-      <MainFeed feedSortType={feedSortType as SortBy} />
+      <MainFeed feedSortType={feedSortType as SortByType} />
 
       <style jsx>{styles}</style>
     </>

@@ -12,7 +12,6 @@ import {
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import { MeHistoryFeed } from './__generated__/MeHistoryFeed'
@@ -44,7 +43,7 @@ const ME_HISTORY_FEED = gql`
 `
 
 const MeHistory = () => {
-  const { data, loading, error, fetchMore } = useQuery<MeHistoryFeed>(
+  const { data, loading, error, fetchMore, refetch } = useQuery<MeHistoryFeed>(
     ME_HISTORY_FEED
   )
 
@@ -64,8 +63,8 @@ const MeHistory = () => {
   }
 
   const loadMore = () => {
-    analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
-      type: FEED_TYPE.READ_HISTORY,
+    analytics.trackEvent('load_more', {
+      type: 'read_history',
       location: edges.length,
     })
     return fetchMore({
@@ -82,15 +81,21 @@ const MeHistory = () => {
   }
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+    <InfiniteScroll
+      hasNextPage={pageInfo.hasNextPage}
+      loadMore={loadMore}
+      pullToRefresh={refetch}
+    >
       <List>
         {edges.map(({ node, cursor }, i) => (
           <List.Item key={cursor}>
             <ArticleDigestFeed
               article={node.article}
               onClick={() =>
-                analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                  type: FEED_TYPE.READ_HISTORY,
+                analytics.trackEvent('click_feed', {
+                  type: 'read_history',
+                  contentType: 'article',
+                  styleType: 'no_cover',
                   location: i,
                 })
               }

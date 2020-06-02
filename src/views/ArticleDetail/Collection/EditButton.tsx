@@ -2,7 +2,15 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import _uniq from 'lodash/uniq'
 
-import { Button, ButtonProps, Icon, TextIcon, Translate } from '~/components'
+import {
+  Button,
+  ButtonProps,
+  IconEdit,
+  IconPen,
+  IconSpinner,
+  TextIcon,
+  Translate,
+} from '~/components'
 import { useMutation } from '~/components/GQL'
 import articleFragments from '~/components/GQL/fragments/article'
 
@@ -35,11 +43,13 @@ const EDITOR_SET_COLLECTION = gql`
 
 const EditButton = ({
   article,
+  canEdit,
   editing,
   setEditing,
   editingArticles,
 }: {
   article: ArticleDetail_article
+  canEdit: boolean
   editing: boolean
   setEditing: any
   editingArticles: string[]
@@ -92,9 +102,25 @@ const EditButton = ({
   if (!editing) {
     return (
       <span className={editButtonClass}>
-        <Button {...buttonProps} onClick={() => setEditing(true)}>
+        <Button
+          {...buttonProps}
+          onClick={() => {
+            if (!canEdit) {
+              window.dispatchEvent(
+                new CustomEvent(ADD_TOAST, {
+                  detail: {
+                    color: 'red',
+                    content: <Translate id="FORBIDDEN" />,
+                  },
+                })
+              )
+              return
+            }
+            setEditing(true)
+          }}
+        >
           <TextIcon
-            icon={<Icon.Edit size="sm" />}
+            icon={<IconEdit size="sm" />}
             color="grey"
             size="xs"
             weight="md"
@@ -118,7 +144,7 @@ const EditButton = ({
 
       <Button {...buttonProps} disabled={!!loading} onClick={onSave}>
         <TextIcon
-          icon={loading ? <Icon.Spinner size="xs" /> : <Icon.Pen size="xs" />}
+          icon={loading ? <IconSpinner size="xs" /> : <IconPen size="xs" />}
           color="grey"
           size="xs"
           weight="md"

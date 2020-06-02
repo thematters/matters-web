@@ -7,14 +7,8 @@ import { Button, Dialog, Spinner, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
-import { ADD_TOAST, ANALYTICS_EVENTS, TEXT, TextId } from '~/common/enums'
-import {
-  analytics,
-  dom,
-  stripHtml,
-  subscribePush,
-  trimLineBreaks,
-} from '~/common/utils'
+import { ADD_TOAST, TEXT, TextId } from '~/common/enums'
+import { dom, stripHtml, subscribePush, trimLineBreaks } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -185,20 +179,6 @@ const CommentForm: React.FC<CommentFormProps> = ({
         <form
           id={formId}
           onSubmit={handleSubmit}
-          onFocus={() => {
-            analytics.trackEvent(ANALYTICS_EVENTS.COMMENT_EDITOR_CHANGE, {
-              state: 'focus',
-              level: parentId ? 2 : 1,
-              operation: commentId ? 'edit' : 'create',
-            })
-          }}
-          onBlur={() => {
-            analytics.trackEvent(ANALYTICS_EVENTS.COMMENT_EDITOR_CHANGE, {
-              state: 'blur',
-              level: parentId ? 2 : 1,
-              operation: commentId ? 'update' : 'create',
-            })
-          }}
           aria-label={TEXT.zh_hant.putComment}
         >
           <CommentEditor content={content} update={onUpdate} />

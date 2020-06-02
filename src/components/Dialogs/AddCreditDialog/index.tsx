@@ -2,7 +2,7 @@ import { useContext, useState } from 'react'
 
 import { Dialog, PaymentForm, ViewerContext } from '~/components'
 
-import { numRound } from '~/common/utils'
+import { analytics, numRound } from '~/common/utils'
 
 import { AddCredit_addCredit_transaction } from '~/components/Forms/PaymentForm/AddCredit/__generated__/AddCredit'
 
@@ -47,6 +47,7 @@ const BaseAddCreditDialog = ({ children }: AddCreditDialogProps) => {
   const onConfirm = ({ transaction, client_secret }: any) => {
     setData({ ...data, transaction, client_secret })
     setStep('checkout')
+    analytics.trackEvent('click_button', { type: 'checkout' })
   }
 
   const isSetPaymentPassword = step === 'setPaymentPassword'

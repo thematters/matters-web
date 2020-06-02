@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { Icon, Menu, TextIcon, Translate } from '~/components'
+import { IconEdit, Menu, TextIcon, Translate } from '~/components'
 
 interface EditButtonProps {
   openEditCommentDialog: () => void
@@ -29,7 +29,7 @@ const fragments = {
 const EditButton = ({ openEditCommentDialog }: EditButtonProps) => {
   return (
     <Menu.Item onClick={openEditCommentDialog}>
-      <TextIcon icon={<Icon.Edit size="md" />} size="md" spacing="base">
+      <TextIcon icon={<IconEdit size="md" />} size="md" spacing="base">
         <Translate id="edit" />
       </TextIcon>
     </Menu.Item>

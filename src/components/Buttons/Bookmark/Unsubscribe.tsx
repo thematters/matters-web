@@ -1,4 +1,4 @@
-import { Button, Icon, IconSize } from '~/components'
+import { Button, IconBookmarkActive, IconSize } from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import TOGGLE_SUBSCRIBE_ARTICLE from '../../GQL/mutations/toggleSubscribeArticle'
@@ -40,7 +40,7 @@ const Unsubscribe = ({
       onClick={unsubscribe}
       disabled={disabled}
     >
-      <Icon.BookmarkActive color="black" size={size} />
+      <IconBookmarkActive color="black" size={size} />
     </Button>
   )
 }

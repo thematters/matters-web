@@ -35,6 +35,8 @@ const Item = forwardRef(
       }
     }
 
+    const value = ((inputProps.value as string) || '').slice(-1)
+
     return (
       <>
         <input
@@ -49,6 +51,7 @@ const Item = forwardRef(
           onPaste={onPaste}
           ref={ref}
           {...inputProps}
+          value={value}
         />
 
         <style jsx>{styles}</style>

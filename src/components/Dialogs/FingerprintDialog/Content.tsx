@@ -1,7 +1,13 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { Button, CopyToClipboard, Icon, Spinner, Translate } from '~/components'
+import {
+  Button,
+  CopyToClipboard,
+  IconLink,
+  Spinner,
+  Translate,
+} from '~/components'
 
 import { TEXT } from '~/common/enums'
 
@@ -25,7 +31,7 @@ const CopyButton = ({ text }: { text: string }) => {
         bgActiveColor="grey-lighter"
         aira-label={TEXT.zh_hant.copy}
       >
-        <Icon.Link color="grey" />
+        <IconLink color="grey" />
       </Button>
     </CopyToClipboard>
   )

@@ -1,15 +1,15 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
-import { useContext } from 'react'
+import { useContext, useRef } from 'react'
 
 import { Dialog, Form, LanguageContext, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import {
-  MAXIMUM_CHARGE_AMOUNT,
-  MINIMAL_CHARGE_AMOUNT,
   PAYMENT_CURRENCY,
+  PAYMENT_DEFAULT_CHARGE_AMOUNT,
+  PAYMENT_MAXIMUM_CHARGE_AMOUNT,
   PLATFORM_FEE,
 } from '~/common/enums'
 import {
@@ -20,7 +20,7 @@ import {
   validateAmount,
 } from '~/common/utils'
 
-import styles from './styles.css'
+import ConfirmTable from '../ConfirmTable'
 
 import {
   AddCredit,
@@ -57,6 +57,7 @@ export const ADD_CREDIT = gql`
 `
 
 const Confirm: React.FC<FormProps> = ({ submitCallback, defaultAmount }) => {
+  const inputRef: React.RefObject<any> | null = useRef(null)
   const [addCredit] = useMutation<AddCredit>(ADD_CREDIT)
   const { lang } = useContext(LanguageContext)
   const formId = 'add-credit-confirm-form'
@@ -73,7 +74,7 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, defaultAmount }) => {
     isSubmitting,
   } = useFormik<FormValues>({
     initialValues: {
-      amount: defaultAmount || MINIMAL_CHARGE_AMOUNT[currency],
+      amount: defaultAmount || PAYMENT_DEFAULT_CHARGE_AMOUNT[currency],
     },
     validate: ({ amount }) =>
       _pickBy({
@@ -106,11 +107,12 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, defaultAmount }) => {
     <Form id={formId} onSubmit={handleSubmit} noBackground>
       <Form.AmountInput
         fixedPlaceholder={currency}
-        label={<Translate id="paymentAmount" />}
+        label={<Translate zh_hant="輸入金額" zh_hans="输入金额" />}
         name="amount"
         min={0}
-        max={MAXIMUM_CHARGE_AMOUNT[currency]}
+        max={PAYMENT_MAXIMUM_CHARGE_AMOUNT[currency]}
         step="1"
+        ref={inputRef}
         required
         value={values.amount}
         error={touched.amount && errors.amount}
@@ -119,8 +121,14 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, defaultAmount }) => {
           const amount = e.target.valueAsNumber || 0
           const sanitizedAmount = Math.min(
             Math.floor(amount),
-            MAXIMUM_CHARGE_AMOUNT[currency]
+            PAYMENT_MAXIMUM_CHARGE_AMOUNT[currency]
           )
+
+          /// remove extra left pad 0
+          if (inputRef.current) {
+            inputRef.current.value = sanitizedAmount
+          }
+
           setFieldValue('amount', sanitizedAmount)
         }}
         autoFocus
@@ -137,36 +145,38 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, defaultAmount }) => {
         <section>
           {InnerForm}
 
-          <section className="confirm-info">
-            <section className="row">
-              <div className="col">
-                <Translate id="topUpAmount" />
-              </div>
-              <div className="col">
+          <ConfirmTable>
+            <ConfirmTable.Row>
+              <ConfirmTable.Col>
+                <Translate zh_hant="進帳金額" zh_hans="进帐金额" />
+              </ConfirmTable.Col>
+
+              <ConfirmTable.Col>
                 {currency} {toAmountString(values.amount)}
-              </div>
-            </section>
+              </ConfirmTable.Col>
+            </ConfirmTable.Row>
 
-            <section className="row">
-              <div className="col">
-                <Translate id="paymentPlatformFee" /> ({PLATFORM_FEE[currency]})
-              </div>
-              <div className="col">
+            <ConfirmTable.Row>
+              <ConfirmTable.Col>
+                <Translate zh_hant="Stripe 手續費" zh_hans="Stripe 手续费" />（
+                {PLATFORM_FEE[currency]}）
+              </ConfirmTable.Col>
+
+              <ConfirmTable.Col>
                 + {currency} {toAmountString(fee)}
-              </div>
-            </section>
+              </ConfirmTable.Col>
+            </ConfirmTable.Row>
 
-            <section className="row total">
-              <div className="col">
-                <Translate id="paymentAmount" />
-              </div>
-              <div className="col">
+            <ConfirmTable.Row total>
+              <ConfirmTable.Col>
+                <Translate zh_hant="充值確認" zh_hans="充值确认" />
+              </ConfirmTable.Col>
+
+              <ConfirmTable.Col>
                 {currency} {toAmountString(total)}
-              </div>
-            </section>
-          </section>
-
-          <style jsx>{styles}</style>
+              </ConfirmTable.Col>
+            </ConfirmTable.Row>
+          </ConfirmTable>
         </section>
       </Dialog.Content>
 

@@ -4,8 +4,7 @@ import { useRouter } from 'next/router'
 import { Dialog, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
-import { analytics, getQuery } from '~/common/utils'
+import { getQuery } from '~/common/utils'
 
 import PublishSlide from './PublishSlide'
 
@@ -27,7 +26,7 @@ const PUBLISH_ARTICLE = gql`
 
 const PublishContent: React.FC<PublishContentProps> = ({ closeDialog }) => {
   const router = useRouter()
-  const id = getQuery({ router, key: 'id' })
+  const id = getQuery({ router, key: 'draftId' })
   const [publish] = useMutation<PublishArticle>(PUBLISH_ARTICLE, {
     optimisticResponse: {
       publishArticle: {
@@ -40,15 +39,8 @@ const PublishContent: React.FC<PublishContentProps> = ({ closeDialog }) => {
   })
 
   const onPublish = async () => {
-    const { data: publishData } = await publish({ variables: { id } })
-
-    const state = publishData?.publishArticle.publishState || 'unpublished'
-
-    if (state === 'pending' || state === 'published') {
-      closeDialog()
-    }
-
-    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_PUBLISH_IN_MODAL)
+    publish({ variables: { id } })
+    closeDialog()
   }
 
   const SubmitButton = (

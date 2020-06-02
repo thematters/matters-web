@@ -11,6 +11,7 @@ import {
   InfiniteScroll,
   List,
   Spinner,
+  usePullToRefresh,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
@@ -20,7 +21,8 @@ import {
   mergeConnections,
   toPath,
 } from '~/common/utils'
-import IMAGE_LOGO_192 from '~/static/icon-192x192.png?url'
+
+import IMAGE_LOGO_192 from '@/public/static/icon-192x192.png?url'
 
 import UserTabs from '../../UserTabs'
 
@@ -104,8 +106,8 @@ const UserCommentsWrap = () => {
     <>
       <Head
         title={{
-          zh_hant: `${user.displayName}發表的評論`,
-          zh_hans: `${user.displayName}发表的评论`,
+          zh_hant: `${user.displayName}發佈的評論`,
+          zh_hans: `${user.displayName}发布的评论`,
         }}
         description={user.info.description}
         image={IMAGE_LOGO_192}
@@ -117,12 +119,14 @@ const UserCommentsWrap = () => {
 }
 
 const UserComments = ({ user }: UserIdUser) => {
-  const { data, loading, error, fetchMore } = useQuery<UserCommentFeed>(
-    USER_COMMENT_FEED,
-    {
-      variables: { id: user?.id },
-    }
-  )
+  const { data, loading, error, fetchMore, refetch } = useQuery<
+    UserCommentFeed
+  >(USER_COMMENT_FEED, {
+    variables: { id: user?.id },
+  })
+
+  usePullToRefresh.Register()
+  usePullToRefresh.Handler(refetch)
 
   if (!user || !user.id) {
     return null
@@ -179,6 +183,7 @@ const UserComments = ({ user }: UserIdUser) => {
             <List.Item key={articleEdge.cursor}>
               <Card
                 spacing={['tight', 'base']}
+                bgColor="none"
                 {...toPath({
                   page: 'articleDetail',
                   article: articleEdge.node,

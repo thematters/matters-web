@@ -295,6 +295,10 @@
   }
 }
 
+.translating {
+  opacity: 0.5;
+}
+
 #editor-article-container {
   position: relative;
 }

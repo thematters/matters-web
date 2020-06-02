@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { Button, Icon, TextIcon, Translate } from '~/components'
+import { Button, IconRight, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import { RetryPublish } from './__generated__/RetryPublish'
@@ -37,7 +37,7 @@ const RetryButton = ({ id }: { id: string }) => {
     >
       <TextIcon
         color="white"
-        icon={<Icon.Right size="xs" />}
+        icon={<IconRight size="xs" />}
         textPlacement="left"
       >
         <Translate id="retry" />

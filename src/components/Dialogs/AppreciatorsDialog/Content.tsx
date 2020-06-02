@@ -12,7 +12,6 @@ import {
 import { QueryError } from '~/components/GQL'
 import { UserDigest } from '~/components/UserDigest'
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import styles from './styles.css'
@@ -96,12 +95,12 @@ const AppreciatorsDialogContent = ({
             avatarBadge={
               <span className="appreciation-amount">{node.amount}</span>
             }
-            hasCivicLikerRing
             onClick={() => {
-              analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                type: FEED_TYPE.APPRECIATOR,
+              analytics.trackEvent('click_feed', {
+                type: 'appreciators',
+                contentType: 'user',
+                styleType: 'card',
                 location: index,
-                entrance: article.id,
               })
             }}
           />
@@ -112,10 +111,9 @@ const AppreciatorsDialogContent = ({
   }
 
   const loadMore = (callback: () => void) => {
-    analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
-      type: FEED_TYPE.APPRECIATOR,
+    analytics.trackEvent('load_more', {
+      type: 'appreciators',
       location: edges.length,
-      entrance: article.id,
     })
     return fetchMore({
       variables: {

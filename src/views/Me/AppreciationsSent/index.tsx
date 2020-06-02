@@ -8,11 +8,9 @@ import {
   InfiniteScroll,
   Layout,
   List,
-  Spacer,
   Spinner,
 } from '~/components'
 
-import { ANALYTICS_EVENTS } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import AppreciationTabs from '../AppreciationTabs'
@@ -34,19 +32,19 @@ const ME_APPRECIATIONS_SENT = gql`
           edges {
             cursor
             node {
-              ...AppreciationSentAppreciation
+              ...DigestAppreciation
             }
           }
         }
       }
     }
   }
-  ${Appreciation.AppreciationSent.fragments.appreciation}
+  ${Appreciation.fragments.appreciation}
   ${AppreciationTabs.fragments.userActivity}
 `
 
 const AppreciationsSent = () => {
-  const { data, loading, fetchMore } = useQuery<MeAppreciationsSent>(
+  const { data, loading, fetchMore, refetch } = useQuery<MeAppreciationsSent>(
     ME_APPRECIATIONS_SENT
   )
 
@@ -71,8 +69,8 @@ const AppreciationsSent = () => {
   }
 
   const loadMore = () => {
-    analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
-      type: 'appreciationsSent',
+    analytics.trackEvent('load_more', {
+      type: 'appreciations_sent',
       location: edges.length,
     })
     return fetchMore({
@@ -92,11 +90,15 @@ const AppreciationsSent = () => {
     <>
       <AppreciationTabs activity={data.viewer.activity} />
 
-      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+      <InfiniteScroll
+        hasNextPage={pageInfo.hasNextPage}
+        loadMore={loadMore}
+        pullToRefresh={refetch}
+      >
         <List>
           {edges.map(({ node, cursor }) => (
             <List.Item key={cursor}>
-              <Appreciation.AppreciationSent tx={node} />
+              <Appreciation appreciation={node} type="sent" />
             </List.Item>
           ))}
         </List>
@@ -113,8 +115,6 @@ export default () => (
     />
 
     <Head title={{ id: 'appreciationsSent' }} />
-
-    <Spacer />
 
     <AppreciationsSent />
   </Layout.Main>

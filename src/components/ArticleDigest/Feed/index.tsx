@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import React from 'react'
 
-import { Card, Icon, TextIcon, Translate } from '~/components'
+import { Card, IconPinMedium, TextIcon, Translate } from '~/components'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { UserDigest } from '~/components/UserDigest'
 
@@ -76,7 +76,7 @@ const BaseArticleDigestFeed = ({
   const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
     variables: { id: 'local' },
   })
-  const { viewMode } = data?.clientPreference || { viewMode: 'default' }
+  const { viewMode } = data?.clientPreference || { viewMode: 'comfortable' }
   const isCompactMode = viewMode === 'compact'
 
   const { author, summary, sticky } = article
@@ -114,7 +114,6 @@ const BaseArticleDigestFeed = ({
               user={author}
               hasAvatar
               hasDisplayName
-              hasCivicLikerRing
               {...userDigestProps}
             />
             {inFollowFeed && (
@@ -127,7 +126,7 @@ const BaseArticleDigestFeed = ({
           <section className="right">
             {inUserArticles && sticky && (
               <TextIcon
-                icon={<Icon.PinMedium />}
+                icon={<IconPinMedium />}
                 size="sm"
                 color="grey"
                 weight="md"
@@ -152,12 +151,9 @@ const BaseArticleDigestFeed = ({
         {!isCompactMode && (
           <section className="content">
             {cover && (
-              <section
-                className="cover"
-                style={{
-                  backgroundImage: `url(${cover})`,
-                }}
-              />
+              <div className="cover">
+                <img src={cover} loading="lazy" />
+              </div>
             )}
             {<p className="description">{cleanedSummary}</p>}
           </section>

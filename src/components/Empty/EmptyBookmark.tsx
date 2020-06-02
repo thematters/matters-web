@@ -1,8 +1,8 @@
-import { Empty, Icon, Translate } from '~/components'
+import { Empty, IconBookmarkMedium, Translate } from '~/components'
 
 export const EmptyBookmark = () => (
   <Empty
-    icon={<Icon.BookmarkMedium size="xxl" />}
+    icon={<IconBookmarkMedium size="xxl" />}
     description={
       <>
         <Translate zh_hant="看到好作品" zh_hans="看到好作品" />

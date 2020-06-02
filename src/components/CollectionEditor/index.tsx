@@ -8,7 +8,12 @@ import {
   DropResult,
 } from 'react-beautiful-dnd'
 
-import { ArticleDigestDropdown, Button, Icon } from '~/components'
+import {
+  ArticleDigestDropdown,
+  Button,
+  IconClear,
+  IconSort,
+} from '~/components'
 
 import { TEXT } from '~/common/enums'
 
@@ -108,7 +113,7 @@ class CollectionEditor extends React.Component<Props, State> {
                         })}
                       >
                         <span className="drag-handler" aria-label="拖拽">
-                          <Icon.Sort color="grey" />
+                          <IconSort color="grey" />
                         </span>
 
                         <ArticleDigestDropdown
@@ -131,7 +136,7 @@ class CollectionEditor extends React.Component<Props, State> {
                             aria-label={TEXT.zh_hant.delete}
                             onClick={() => this.onDelete(article)}
                           >
-                            <Icon.Clear color="black" />
+                            <IconClear color="black" />
                           </Button>
                         </span>
                       </li>

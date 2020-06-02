@@ -1,7 +1,7 @@
 import {
   Button,
   ButtonProps,
-  Icon,
+  IconCloseLarge,
   TextIcon,
   Translate,
   useResponsive,
@@ -24,7 +24,7 @@ const CancelButton = (props: ButtonProps) => {
           <Translate id="cancel" />
         </TextIcon>
       )}
-      {isSmallUp && <Icon.CloseLarge size="lg" color="green" />}
+      {isSmallUp && <IconCloseLarge size="lg" color="green" />}
     </Button>
   )
 }

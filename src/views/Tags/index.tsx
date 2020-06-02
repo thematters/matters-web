@@ -7,7 +7,7 @@ import {
   Card,
   EmptyTag,
   Head,
-  Icon,
+  IconAdd,
   InfiniteScroll,
   Layout,
   List,
@@ -20,7 +20,6 @@ import {
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, mergeConnections, toPath } from '~/common/utils'
 
 import { AllTags } from './__generated__/AllTags'
@@ -68,7 +67,7 @@ const CreateTagButton = () => {
           bgActiveColor="grey-lighter"
           onClick={open}
         >
-          <TextIcon icon={<Icon.Add color="green" size="xs" />} color="green">
+          <TextIcon icon={<IconAdd color="green" size="xs" />} color="green">
             <Translate id="createTag" />
           </TextIcon>
         </Button>
@@ -78,7 +77,9 @@ const CreateTagButton = () => {
 }
 
 const Tags = () => {
-  const { data, loading, error, fetchMore } = useQuery<AllTags>(ALL_TAGS)
+  const { data, loading, error, fetchMore, refetch } = useQuery<AllTags>(
+    ALL_TAGS
+  )
 
   if (loading) {
     return <Spinner />
@@ -96,8 +97,8 @@ const Tags = () => {
   }
 
   const loadMore = () => {
-    analytics.trackEvent(ANALYTICS_EVENTS.LOAD_MORE, {
-      type: FEED_TYPE.TAGS,
+    analytics.trackEvent('load_more', {
+      type: 'all_tags',
       location: edges.length,
     })
     return fetchMore({
@@ -115,7 +116,11 @@ const Tags = () => {
   }
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+    <InfiniteScroll
+      hasNextPage={pageInfo.hasNextPage}
+      loadMore={loadMore}
+      pullToRefresh={refetch}
+    >
       <List>
         {edges.map(
           ({ node, cursor }, i) =>
@@ -128,9 +133,11 @@ const Tags = () => {
                     id: node.id,
                   })}
                   onClick={() =>
-                    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                      type: FEED_TYPE.ALL_TAGS,
-                      location: i * 2,
+                    analytics.trackEvent('click_feed', {
+                      type: 'all_tags',
+                      contentType: 'tag',
+                      styleType: 'title',
+                      location: i,
                     })
                   }
                 >

@@ -1,13 +1,3 @@
-// load environment variables from .env
-try {
-  const dotEnvResult = require('dotenv').config()
-  if (dotEnvResult.error) {
-    console.log('error loading .env', dotEnvResult.error)
-  }
-} catch (err) {
-  console.log('error loading .env', err)
-}
-
 const withPlugins = require('next-compose-plugins')
 const withBundleAnalyzer = require('@zeit/next-bundle-analyzer')
 const optimizedImages = require('next-optimized-images')
@@ -15,14 +5,11 @@ const withOffline = require('next-offline')
 
 const packageJson = require('./package.json')
 
-const isProd = process.env.ENV === 'production'
-const FIREBASE_CONFIG = process.env.FIREBASE_CONFIG ?
-  JSON.parse(Buffer.from(process.env.FIREBASE_CONFIG, 'base64').toString()) :
-  {}
+const isProd = process.env.NODE_ENV === 'production'
 
-const URL_PUSH_SW = isProd ?
-  './firebase-messaging-sw-production.js' :
-  './firebase-messaging-sw-develop.js'
+const URL_PUSH_SW = isProd
+  ? './firebase-messaging-sw-production.js'
+  : './firebase-messaging-sw-develop.js'
 
 const nextConfig = {
   /**
@@ -31,43 +18,20 @@ const nextConfig = {
    * @see {@url https://github.com/zeit/next.js#exposing-configuration-to-the-server--client-side}
    */
   poweredByHeader: false,
-  serverRuntimeConfig: {
-    // Will only be available on the server side
-  },
-  publicRuntimeConfig: {
-    // Will be available on both server and client
-    ENV: process.env.ENV,
-    SITE_DOMAIN: process.env.SITE_DOMAIN,
-    ASSET_DOMAIN: process.env.ASSET_DOMAIN,
-    API_URL: process.env.API_URL,
-    WS_URL: process.env.WS_URL,
-    OAUTH_URL: process.env.OAUTH_URL,
-    SEGMENT_KEY: process.env.SEGMENT_KEY,
-    FB_APP_ID: process.env.FB_APP_ID,
-    SENTRY_DSN: process.env.SENTRY_DSN,
-    FIREBASE_CONFIG,
-    FCM_VAPID_KEY: process.env.FCM_VAPID_KEY,
-    RECAPTCHA_KEY: process.env.RECAPTCHA_KEY,
-    STRIPE_PUBLIC_KEY: process.env.STRIPE_PUBLIC_KEY
-  },
 
   /**
    * Build time configs
    */
   pageExtensions: ['tsx'],
   env: {
-    app_version: packageJson.version,
+    APP_VERSION: packageJson.version,
   },
-  useFileSystemPublicRoutes: false,
   typescript: {
-    ignoreDevErrors: true,
+    ignoreDevErrors: false,
   },
   distDir: 'build',
   crossOrigin: 'anonymous',
-  webpack(config, {
-    defaultLoaders,
-    isServer
-  }) {
+  webpack(config, { defaultLoaders, isServer }) {
     /**
      * Styles in regular CSS files
      * @see {@url https://github.com/zeit/styled-jsx#styles-in-regular-css-files}
@@ -84,7 +48,8 @@ const nextConfig = {
 
     config.module.rules.push({
       test: /\.svg$/,
-      use: [{
+      use: [
+        {
           loader: '@svgr/webpack',
           options: {
             memo: true,
@@ -120,13 +85,6 @@ const nextConfig = {
     // })
 
     return config
-  },
-  exportPathMap: async function (defaultPathMap) {
-    return {
-      '/': {
-        page: '/_error',
-      },
-    }
   },
 }
 
@@ -172,7 +130,9 @@ module.exports = withPlugins(
         workboxOpts: {
           // https://github.com/hanford/next-offline/issues/35
           importScripts: [URL_PUSH_SW],
-          runtimeCaching: [{
+          swDest: '../public/service-worker.js',
+          runtimeCaching: [
+            {
               urlPattern: '/',
               handler: 'NetworkFirst',
               options: {

@@ -1,7 +1,13 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { BookmarkButton, ShareButton, useResponsive } from '~/components'
+import {
+  BookmarkButton,
+  ReCaptchaProvider,
+  ShareButton,
+  usePullToRefresh,
+  useResponsive,
+} from '~/components'
 import DropdownActions from '~/components/ArticleDigest/DropdownActions'
 
 import AppreciationButton from '../AppreciationButton'
@@ -31,9 +37,11 @@ const ARTICLE_TOOLBAR = gql`
 
 const Toolbar = ({ mediaHash }: { mediaHash: string }) => {
   const isSmallUp = useResponsive('sm-up')
-  const { data, loading } = useQuery<ArticleToolbar>(ARTICLE_TOOLBAR, {
+  const { data, loading, refetch } = useQuery<ArticleToolbar>(ARTICLE_TOOLBAR, {
     variables: { mediaHash },
   })
+
+  usePullToRefresh.Handler(refetch)
 
   if (loading || !data || !data.article) {
     return null
@@ -43,10 +51,12 @@ const Toolbar = ({ mediaHash }: { mediaHash: string }) => {
 
   return (
     <section className="toolbar">
-      <section className="appreciate-button">
-        <AppreciationButton article={article} />
-        {isSmallUp && <Appreciators article={article} />}
-      </section>
+      <ReCaptchaProvider action="appreciateArticle">
+        <section className="appreciate-button">
+          <AppreciationButton article={article} />
+          {isSmallUp && <Appreciators article={article} />}
+        </section>
+      </ReCaptchaProvider>
 
       <section className="comment-bar">
         <CommentBar article={article} />

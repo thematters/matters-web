@@ -50,6 +50,8 @@ type ROUTE_KEY =
   | 'GUIDE'
   | 'COMMUNITY'
   | 'TOS'
+  | 'PAY_CALLBACK_SUCCESS'
+  | 'PAY_CALLBACK_FAILURE'
 
 export const ROUTES: Array<{
   key: ROUTE_KEY
@@ -67,16 +69,16 @@ export const ROUTES: Array<{
 
   // Tag
   { key: 'TAGS', pathname: '/tags' },
-  { key: 'TAG_DETAIL', pathname: '/tags/[id]' },
+  { key: 'TAG_DETAIL', pathname: '/tags/[tagId]' },
 
   // User
-  { key: 'USER_ARTICLES', pathname: '/@[userName]' },
-  { key: 'USER_COMMENTS', pathname: '/@[userName]/comments' },
-  { key: 'USER_FOLLOWERS', pathname: '/@[userName]/followers' },
-  { key: 'USER_FOLLOWEES', pathname: '/@[userName]/followees' },
+  { key: 'USER_ARTICLES', pathname: '/[userName]' },
+  { key: 'USER_COMMENTS', pathname: '/[userName]/comments' },
+  { key: 'USER_FOLLOWERS', pathname: '/[userName]/followers' },
+  { key: 'USER_FOLLOWEES', pathname: '/[userName]/followees' },
 
   // Article
-  { key: 'ARTICLE_DETAIL', pathname: '/@[userName]/*-[mediaHash]' },
+  { key: 'ARTICLE_DETAIL', pathname: '/[userName]/[mediaHash]' },
 
   // Me
   { key: 'ME_DRAFTS', pathname: '/me/drafts' },
@@ -103,7 +105,7 @@ export const ROUTES: Array<{
   { key: 'ME_SETTINGS_BLOCKED', pathname: '/me/settings/blocked' },
 
   // Draft
-  { key: 'ME_DRAFT_DETAIL', pathname: '/me/drafts/*-[id]' },
+  { key: 'ME_DRAFT_DETAIL', pathname: '/me/drafts/[draftId]' },
 
   // Auth
   { key: 'LOGIN', pathname: '/login' },
@@ -115,6 +117,10 @@ export const ROUTES: Array<{
   { key: 'OAUTH_CALLBACK_SUCCESS', pathname: '/oauth/[provider]/success' },
   { key: 'OAUTH_CALLBACK_FAILURE', pathname: '/oauth/[provider]/failure' },
 
+  // Pay
+  { key: 'PAY_CALLBACK_SUCCESS', pathname: '/pay/[provider]/success' },
+  { key: 'PAY_CALLBACK_FAILURE', pathname: '/pay/[provider]/failure' },
+
   // Misc
   { key: 'HELP', pathname: '/help' },
   { key: 'MIGRATION', pathname: '/migration' },
@@ -123,10 +129,6 @@ export const ROUTES: Array<{
   { key: 'COMMUNITY', pathname: '/community' },
   { key: 'TOS', pathname: '/tos' },
 ]
-
-// Convert Next.js pattern to Express pattern
-export const toExpressPath = (path: string) =>
-  path.replace(/\]/g, '').replace(/\[/g, ':')
 
 export const UrlFragments = {
   COMMENTS: 'comments',

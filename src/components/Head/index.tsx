@@ -1,4 +1,3 @@
-import getConfig from 'next/config'
 import NextHead from 'next/head'
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
@@ -6,23 +5,14 @@ import { useContext } from 'react'
 import { LanguageContext } from '~/components'
 
 import { langConvert, translate, TranslateArgs } from '~/common/utils'
-import IMAGE_APPLE_TOUCH_ICON from '~/static/apple-touch-icon.png?url'
-import IMAGE_FAVICON_16 from '~/static/favicon-16x16.png?url'
-import IMAGE_FAVICON_32 from '~/static/favicon-32x32.png?url'
-import IMAGE_FAVICON_64 from '~/static/favicon-64x64.png?url'
-import IMAGE_INTRO from '~/static/images/intro.jpg?url'
-import IMAGE_LAUNCH_1125 from '~/static/images/splashscreens/launch-1125x2436.png?url'
-import IMAGE_LAUNCH_1242 from '~/static/images/splashscreens/launch-1242x2148.png?url'
-import IMAGE_LAUNCH_1536 from '~/static/images/splashscreens/launch-1536x2048.png?url'
-import IMAGE_LAUNCH_1668 from '~/static/images/splashscreens/launch-1668x2224.png?url'
-import IMAGE_LAUNCH_2048 from '~/static/images/splashscreens/launch-2048x2732.png?url'
-import IMAGE_LAUNCH_640 from '~/static/images/splashscreens/launch-640x1136.png?url'
-import IMAGE_LAUNCH_750 from '~/static/images/splashscreens/launch-750x1294.png?url'
 
-const {
-  publicRuntimeConfig: { ENV, SITE_DOMAIN, FB_APP_ID },
-} = getConfig()
-const isProd = ENV === 'production'
+import IMAGE_APPLE_TOUCH_ICON from '@/public/static/apple-touch-icon.png?url'
+import IMAGE_FAVICON_16 from '@/public/static/favicon-16x16.png?url'
+import IMAGE_FAVICON_32 from '@/public/static/favicon-32x32.png?url'
+import IMAGE_FAVICON_64 from '@/public/static/favicon-64x64.png?url'
+import IMAGE_INTRO from '@/public/static/images/intro.jpg?url'
+
+const isProd = process.env.NODE_ENV === 'production'
 
 interface HeadProps {
   title?: string | TranslateArgs
@@ -48,13 +38,13 @@ export const Head: React.FC<HeadProps> = (props) => {
       ? `${props.keywords.join(',')},matters,matters.news,創作有價`
       : 'matters,matters.news,創作有價',
     url: props.path
-      ? `${SITE_DOMAIN}${props.path}`
+      ? `${process.env.NEXT_PUBLIC_SITE_DOMAIN}${props.path}`
       : router.asPath
-      ? `${SITE_DOMAIN}${router.asPath}`
-      : SITE_DOMAIN,
+      ? `${process.env.NEXT_PUBLIC_SITE_DOMAIN}${router.asPath}`
+      : process.env.NEXT_PUBLIC_SITE_DOMAIN,
     image: props.image || IMAGE_INTRO,
   }
-  const canonicalUrl = head.url.split('#')[0].split('?')[0]
+  const canonicalUrl = head.url?.split('#')[0].split('?')[0]
 
   return (
     <NextHead>
@@ -62,7 +52,7 @@ export const Head: React.FC<HeadProps> = (props) => {
       <meta
         name="viewport"
         key="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
       />
       <title>{head.title}</title>
       <meta name="description" key="description" content={head.description} />
@@ -106,7 +96,7 @@ export const Head: React.FC<HeadProps> = (props) => {
       )}
 
       {/* social */}
-      <meta property="fb:app_id" content={FB_APP_ID} />
+      <meta property="fb:app_id" content={process.env.NEXT_PUBLIC_FB_APP_ID} />
       <meta name="og:title" key="og:title" content={head.title} />
       <meta property="og:site_name" key="og:site_name" content="Matters" />
       <meta property="og:url" key="og:url" content={head.url} />
@@ -174,49 +164,6 @@ export const Head: React.FC<HeadProps> = (props) => {
         name="mobile-web-app-capable"
         key="mobile-web-app-capable"
         content="yes"
-      />
-
-      <link
-        rel="apple-touch-startup-image"
-        key="apple-touch-startup-image-640x1136"
-        href={IMAGE_LAUNCH_640}
-        media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
-      />
-      <link
-        rel="apple-touch-startup-image"
-        key="apple-touch-startup-image-750x1294"
-        href={IMAGE_LAUNCH_750}
-        media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
-      />
-      <link
-        rel="apple-touch-startup-image"
-        key="apple-touch-startup-image-1242x2148"
-        href={IMAGE_LAUNCH_1242}
-        media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"
-      />
-      <link
-        rel="apple-touch-startup-image"
-        key="apple-touch-startup-image-1125x2436"
-        href={IMAGE_LAUNCH_1125}
-        media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"
-      />
-      <link
-        rel="apple-touch-startup-image"
-        key="apple-touch-startup-image-1536x2048"
-        href={IMAGE_LAUNCH_1536}
-        media="(min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)"
-      />
-      <link
-        rel="apple-touch-startup-image"
-        key="apple-touch-startup-image-1668x2224"
-        href={IMAGE_LAUNCH_1668}
-        media="(min-device-width: 834px) and (max-device-width: 834px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)"
-      />
-      <link
-        rel="apple-touch-startup-image"
-        key="apple-touch-startup-image-2048x2732"
-        href={IMAGE_LAUNCH_2048}
-        media="(min-device-width: 1024px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)"
       />
 
       <link rel="manifest" key="manifest" href="/static/manifest.json" />

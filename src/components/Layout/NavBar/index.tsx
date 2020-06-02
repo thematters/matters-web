@@ -1,7 +1,13 @@
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
-import { Icon, ViewerContext, WriteButton } from '~/components'
+import {
+  IconNavHome,
+  IconNavHomeActive,
+  IconNavSearch,
+  ViewerContext,
+  WriteButton,
+} from '~/components'
 
 import { PATHS, TEXT } from '~/common/enums'
 
@@ -24,8 +30,8 @@ const NavBar = () => {
       <ul>
         <NavListItem
           name={TEXT.zh_hant.discover}
-          icon={<Icon.NavHome size="md" />}
-          activeIcon={<Icon.NavHomeActive size="md" color="green" />}
+          icon={<IconNavHome size="md" />}
+          activeIcon={<IconNavHomeActive size="md" color="green" />}
           active={isInHome}
           href={PATHS.HOME}
         />
@@ -49,8 +55,8 @@ const NavBar = () => {
 
         <NavListItem
           name={TEXT.zh_hant.search}
-          icon={<Icon.NavSearch size="md" />}
-          activeIcon={<Icon.NavSearch size="md" color="green" />}
+          icon={<IconNavSearch size="md" />}
+          activeIcon={<IconNavSearch size="md" color="green" />}
           active={isInSearch}
           href={PATHS.SEARCH}
         />

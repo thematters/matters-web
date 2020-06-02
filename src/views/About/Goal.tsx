@@ -1,6 +1,6 @@
 import { Translate } from '~/components'
 
-import IMAGE_GOAL from '~/static/images/about-2.svg'
+import IMAGE_GOAL from '@/public/static/images/about-2.svg'
 
 import styles from './styles.css'
 

@@ -1,8 +1,8 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 
-import ICON_AVATAR_DEFAULT from '~/static/icons/avatar-default.svg'
-import IMAGE_CIVIC_LIKER_RING from '~/static/icons/civic-liker-ring.svg'
+import ICON_AVATAR_DEFAULT from '@/public/static/icons/avatar-default.svg'
+import IMAGE_CIVIC_LIKER_RING from '@/public/static/icons/civic-liker-ring.svg'
 
 import styles from './styles.css'
 
@@ -14,7 +14,6 @@ export interface AvatarProps {
   user?: AvatarUser
   size?: AvatarSize
   src?: string
-  hasCivicLikerRing?: boolean
 }
 
 const fragments = {
@@ -29,34 +28,29 @@ const fragments = {
 }
 
 export const Avatar = (props: AvatarProps) => {
-  const { user, size = '', src, hasCivicLikerRing } = props
+  const { user, size = 'default', src } = props
   const source = src || user?.avatar || ICON_AVATAR_DEFAULT
+  const isCivicLiker = user?.liker.civicLiker
   const avatarClasses = classNames({
     avatar: true,
-    [size]: !!size,
+    [size]: true,
+    'civic-liker': isCivicLiker,
   })
-  const isCivicLiker = user?.liker.civicLiker
 
   return (
-    <>
-      <div
-        className={avatarClasses}
-        style={{ backgroundImage: `url(${source})` }}
-        aria-hidden="true"
-      >
-        {isCivicLiker && hasCivicLikerRing && (
-          <span className="civic-liker-ring" />
-        )}
-      </div>
+    <div className={avatarClasses}>
+      <img src={source} aria-hidden="true" loading="lazy" />
+
+      {isCivicLiker && <span className="ring" />}
 
       <style jsx>{styles}</style>
 
       <style jsx>{`
-        .civic-liker-ring {
+        .ring {
           background-image: url(${IMAGE_CIVIC_LIKER_RING});
         }
       `}</style>
-    </>
+    </div>
   )
 }
 

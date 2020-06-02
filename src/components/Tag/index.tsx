@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import { Icon, IconProps, TextIcon, TextIconProps } from '~/components'
+import { IconHashTag, IconProps, TextIcon, TextIconProps } from '~/components'
 
 import { numAbbr, toPath } from '~/common/utils'
 
@@ -88,7 +88,7 @@ export const Tag = ({ tag, type = 'list', textSize, active }: TagProps) => {
     <Link {...path}>
       <a className={tagClasses}>
         <TextIcon
-          icon={<Icon.HashTag {...iconProps} />}
+          icon={<IconHashTag {...iconProps} />}
           {...textIconProps}
           size={textSize || textIconProps.size}
         >

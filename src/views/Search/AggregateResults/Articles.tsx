@@ -4,7 +4,6 @@ import { useRouter } from 'next/router'
 
 import { ArticleDigestTitle, Card, List, Spinner } from '~/components'
 
-import { ANALYTICS_EVENTS, FEED_TYPE } from '~/common/enums'
 import { analytics, getQuery, toPath } from '~/common/utils'
 
 import styles from './styles.css'
@@ -66,10 +65,11 @@ const AggregateArticleResults = () => {
                     article: node,
                   })}
                   onClick={() =>
-                    analytics.trackEvent(ANALYTICS_EVENTS.CLICK_FEED, {
-                      type: FEED_TYPE.SEARCH_ARTICLE,
+                    analytics.trackEvent('click_feed', {
+                      type: 'search',
+                      contentType: 'article',
+                      styleType: 'title',
                       location: i,
-                      entrance: q,
                     })
                   }
                 >

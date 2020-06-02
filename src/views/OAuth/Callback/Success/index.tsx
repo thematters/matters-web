@@ -4,7 +4,9 @@ import { Layout, Translate } from '~/components'
 
 import { OAUTH_PROVIDER, PATHS } from '~/common/enums'
 import { getQuery, routerPush } from '~/common/utils'
-import ICON_LIKECOIN from '~/static/icons/likecoin.svg'
+
+import ICON_LIKECOIN from '@/public/static/icons/likecoin.svg'
+import ICON_STRIPE from '@/public/static/icons/stripe.svg'
 
 import { Box } from '../../Box'
 import styles from '../styles.css'
@@ -17,6 +19,7 @@ const OAuthCallbackSuccess = () => {
   }
   const avatar: { [key: string]: any } = {
     likecoin: ICON_LIKECOIN,
+    'stripe-connect': ICON_STRIPE,
   }
 
   if (!provider || OAUTH_PROVIDER.indexOf(provider) < 0) {
@@ -36,10 +39,7 @@ const OAuthCallbackSuccess = () => {
             </h2>
 
             <p>
-              <Translate
-                zh_hant="頁面即將關閉，請回到原頁面繼續操作"
-                zh_hans="页面即将关闭，请回到原页面继续操作"
-              />
+              <Translate id="callbackClose" />
             </p>
           </section>
 
