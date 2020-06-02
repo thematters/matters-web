@@ -1,31 +1,23 @@
-import XXH from 'xxhashjs'
+import fingerprint from 'fingerprintjs2'
 
-import { AGENT_HASH_PREFIX } from '~/common/enums'
+import { AGENT_HASH_PREFIX, STORE_KEY_AGENT_HASH } from '~/common/enums'
 
-export const initAgentHash = (window: Window) => {
-  if (process.browser && typeof window !== 'undefined') {
-    try {
-      const canvas = window.document.createElement('canvas')
-      const context = canvas.getContext('2d')
-      if (context) {
-        context.rotate(0.045)
-        context.shadowBlur = 10
-        context.shadowColor = '#d7f9d5'
-        context.fillRect(1, 1, 120, 11)
-        context.fillRect(0, 0, 120, 10)
-        context.font = "14px 'Arial'"
-        context.textBaseline = 'top'
-        context.fillStyle = '#ddd'
-        context.fillText('MattersAgentHash', 0, 0)
-        context.fillStyle = '#333'
-        context.fillText('MattersAgentHash', 2, 2)
-        const dataURL = canvas.toDataURL().replace('data:image/png;base64,', '')
-        const hash = AGENT_HASH_PREFIX + XXH.h64(dataURL, 0).toString(10)
-        return hash
-      }
-    } catch (error) {
-      // catch silently
-    }
+export const initAgentHash = () => {
+  if (!process.browser || typeof window === 'undefined') {
+    return
   }
-  return null
+
+  try {
+    const stored = window.localStorage.getItem(STORE_KEY_AGENT_HASH)
+
+    if (!stored || !stored.startsWith(AGENT_HASH_PREFIX)) {
+      fingerprint.get(components => {
+        const values = components.map(component => component.value)
+        const hash = AGENT_HASH_PREFIX + fingerprint.x64hash128(values.join(''), 31)
+        window.localStorage.setItem(STORE_KEY_AGENT_HASH, hash)
+      })
+    }
+  } catch (error) {
+    // catch silently
+  }
 }
