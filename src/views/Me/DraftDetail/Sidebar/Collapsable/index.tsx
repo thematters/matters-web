@@ -1,6 +1,6 @@
 import { ReactNode, useState } from 'react'
 
-import { Button, Icon, TextIcon } from '~/components'
+import { Button, IconUp, TextIcon } from '~/components'
 
 import styles from './styles.css'
 
@@ -20,7 +20,7 @@ const Collapsable: React.FC<{
         >
           <TextIcon
             icon={
-              <Icon.Up
+              <IconUp
                 style={{
                   transform: `rotate(${collapsed ? 180 : 0}deg)`,
                 }}

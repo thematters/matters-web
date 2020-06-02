@@ -13,7 +13,7 @@ import {
   Error,
   FeaturesContext,
   Head,
-  Icon,
+  IconLive,
   Layout,
   PullToRefresh,
   Spinner,
@@ -32,7 +32,6 @@ import { getQuery } from '~/common/utils'
 
 import Collection from './Collection'
 import Content from './Content'
-import Donation from './Donation'
 import FingerprintButton from './FingerprintButton'
 import RelatedArticles from './RelatedArticles'
 import State from './State'
@@ -93,10 +92,12 @@ const ARTICLE_TRANSLATION = gql`
   }
 `
 
-// skip responses in SSR
 const DynamicResponse = dynamic(() => import('./Responses'), {
   ssr: false,
   loading: Spinner,
+})
+const DynamicDonation = dynamic(() => import('./Donation'), {
+  ssr: false,
 })
 
 const EmptyLayout: React.FC = ({ children }) => (
@@ -131,6 +132,7 @@ const ArticleDetail = () => {
   const features = useContext(FeaturesContext)
   const isLargeUp = useResponsive('lg-up')
   const [fixedWall, setFixedWall] = useState(false)
+  const [showResponses, setShowResponses] = useState(false)
 
   // ssr data
   const { data, loading, error } = useQuery<ArticleDetailType>(
@@ -277,7 +279,7 @@ const ArticleDetail = () => {
               </section>
 
               <section className="right">
-                {article.live && <Icon.Live />}
+                {article.live && <IconLive />}
               </section>
             </section>
           </section>
@@ -288,7 +290,14 @@ const ArticleDetail = () => {
             translating={translating}
           />
 
-          {features.payment && <Donation mediaHash={mediaHash} />}
+          {features.payment && <DynamicDonation mediaHash={mediaHash} />}
+
+          <Waypoint
+            bottomOffset={-200}
+            onEnter={() => {
+              setShowResponses(true)
+            }}
+          />
 
           {(collectionCount > 0 || isAuthor) && (
             <section className="block">
@@ -304,7 +313,7 @@ const ArticleDetail = () => {
             }}
           />
 
-          {!shouldShowWall && (
+          {!shouldShowWall && showResponses && (
             <section className="block">
               <DynamicResponse />
             </section>

@@ -1,21 +1,20 @@
 import { Formik } from 'formik'
 import { useRouter } from 'next/router'
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useDebounce } from 'use-debounce'
 
 import {
   Button,
   Dropdown,
-  Icon,
+  IconSearchMedium,
   LanguageContext,
-  PopperInstance,
+  SearchAutoComplete,
+  SearchOverview,
 } from '~/components'
 
 import { INPUT_DEBOUNCE, TEXT, Z_INDEX } from '~/common/enums'
 import { getQuery, routerPush, toPath, translate } from '~/common/utils'
 
-import { SearchAutoComplete } from '../SearchAutoComplete'
-import { SearchOverview } from '../SearchOverview'
 import styles from './styles.css'
 
 interface SearchBarProps {
@@ -29,7 +28,7 @@ const SearchButton = () => (
     type="submit"
     aria-label={TEXT.zh_hant.search}
   >
-    <Icon.SearchMedium size="md" color="grey-dark" />
+    <IconSearchMedium size="md" color="grey-dark" />
   </Button>
 )
 
@@ -50,13 +49,9 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   })
 
   // dropdown
-  const instanceRef = useRef<PopperInstance>()
-  const hideDropdown = () => {
-    instanceRef.current?.hide()
-  }
-  const showDropdown = () => {
-    instanceRef.current?.show()
-  }
+  const [showDropdown, setShowDropdown] = useState(false)
+  const close = () => setShowDropdown(false)
+  const open = () => setShowDropdown(true)
 
   useEffect(() => {
     if (onChange) {
@@ -74,7 +69,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
           q: values.q.slice(0, 100),
         })
         routerPush(path.href, path.as)
-        hideDropdown()
+        close()
       }}
     >
       {({ values, handleSubmit, handleChange }) => {
@@ -115,10 +110,11 @@ export const SearchBar: React.FC<SearchBarProps> = ({
                 <SearchOverview />
               )
             }
-            trigger="manual"
-            placement="bottom-start"
-            onCreate={(instance) => (instanceRef.current = instance)}
+            trigger={undefined}
             appendTo={process.browser ? document.body : undefined}
+            placement="bottom-start"
+            onClickOutside={close}
+            visible={showDropdown}
             zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
           >
             <form onSubmit={handleSubmit} autoComplete="off">
@@ -131,11 +127,10 @@ export const SearchBar: React.FC<SearchBarProps> = ({
                 onChange={(e) => {
                   handleChange(e)
                   setSearch(e.target.value)
-                  showDropdown()
+                  open()
                 }}
-                onFocus={showDropdown}
-                onClick={showDropdown}
-                onBlur={hideDropdown}
+                onFocus={open}
+                onClick={open}
               />
 
               <SearchButton />

@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { Button, Icon, TextIcon, Translate } from '~/components'
+import { Button, IconEditXS, TextIcon, Translate } from '~/components'
 
 import { toPath } from '~/common/utils'
 
@@ -36,7 +36,7 @@ const EditButton = ({ draft }: EditButtonProps) => {
       {...path}
     >
       <TextIcon
-        icon={<Icon.EditXS size="xs" />}
+        icon={<IconEditXS size="xs" />}
         size="xs"
         color="green"
         weight="md"

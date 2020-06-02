@@ -1,7 +1,7 @@
 import { Router } from 'next/router'
 import { FC, useEffect } from 'react'
 
-import { Button, Icon, TextIcon, Translate } from '~/components'
+import { Button, IconWorld, TextIcon, Translate } from '~/components'
 
 import { analytics } from '~/common/utils'
 
@@ -23,7 +23,7 @@ const TranslationButton: FC<{
       }}
     >
       <TextIcon
-        icon={<Icon.World color={color} />}
+        icon={<IconWorld color={color} />}
         size="xs"
         spacing="xxtight"
         color={color}

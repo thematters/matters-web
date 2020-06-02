@@ -1,4 +1,4 @@
-import { Icon, Menu, TextIcon, Translate } from '~/components'
+import { IconLike, Menu, TextIcon, Translate } from '~/components'
 
 interface AppreciatorsButtonProps {
   openDialog: () => void
@@ -7,7 +7,7 @@ interface AppreciatorsButtonProps {
 const AppreciatorsButton = ({ openDialog }: AppreciatorsButtonProps) => {
   return (
     <Menu.Item onClick={openDialog}>
-      <TextIcon icon={<Icon.Like size="md" />} size="md" spacing="base">
+      <TextIcon icon={<IconLike size="md" />} size="md" spacing="base">
         <Translate id="viewAppreciators" />
       </TextIcon>
     </Menu.Item>

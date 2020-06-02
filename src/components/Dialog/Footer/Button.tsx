@@ -1,6 +1,6 @@
 import { forwardRef } from 'react'
 
-import { Button, ButtonProps, Icon, TextIcon } from '~/components'
+import { Button, ButtonProps, IconSpinner, TextIcon } from '~/components'
 
 type DialogFooterButtonProps = {
   textColor?: 'black' | 'white'
@@ -30,7 +30,7 @@ const DialogFooterButton: React.FC<DialogFooterButtonProps> = forwardRef(
       {...restProps}
     >
       <TextIcon
-        icon={loading && <Icon.Spinner size="md" />}
+        icon={loading && <IconSpinner size="md" />}
         color={textColor}
         size="md"
         weight="md"

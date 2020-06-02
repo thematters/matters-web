@@ -67,7 +67,7 @@ const EmptyLayout: React.FC = ({ children }) => (
 
 const DraftDetail = () => {
   const router = useRouter()
-  const id = getQuery({ router, key: 'id' })
+  const id = getQuery({ router, key: 'draftId' })
   const { data, loading, error } = useQuery<DraftDetailQuery>(DRAFT_DETAIL, {
     variables: { id },
     fetchPolicy: 'network-only',

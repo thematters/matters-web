@@ -1,4 +1,12 @@
-import { CardSpacing, Icon, Menu, TextIcon, Translate } from '~/components'
+import {
+  CardSpacing,
+  IconHelpMedium,
+  IconLogoutMedium,
+  IconSettingsMedium,
+  Menu,
+  TextIcon,
+  Translate,
+} from '~/components'
 import { useMutation } from '~/components/GQL'
 import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
 
@@ -56,7 +64,7 @@ const NavMenuBottom: React.FC<NavMenuBottomProps> = ({ isInSideDrawerNav }) => {
     <Menu spacingY={isInSideDrawerNav ? 0 : undefined}>
       <Menu.Item spacing={menuItemSpacing} href={PATHS.HELP}>
         <TextIcon
-          icon={<Icon.HelpMedium size="md" />}
+          icon={<IconHelpMedium size="md" />}
           spacing="base"
           size={menuItemSize}
         >
@@ -66,7 +74,7 @@ const NavMenuBottom: React.FC<NavMenuBottomProps> = ({ isInSideDrawerNav }) => {
 
       <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_SETTINGS}>
         <TextIcon
-          icon={<Icon.SettingsMedium size="md" />}
+          icon={<IconSettingsMedium size="md" />}
           spacing="base"
           size={menuItemSize}
         >
@@ -76,7 +84,7 @@ const NavMenuBottom: React.FC<NavMenuBottomProps> = ({ isInSideDrawerNav }) => {
 
       <Menu.Item spacing={menuItemSpacing} onClick={onClickLogout}>
         <TextIcon
-          icon={<Icon.LogoutMedium size="md" />}
+          icon={<IconLogoutMedium size="md" />}
           spacing="base"
           size={menuItemSize}
         >

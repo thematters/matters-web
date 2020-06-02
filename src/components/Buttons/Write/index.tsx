@@ -3,7 +3,8 @@ import { useContext } from 'react'
 
 import {
   Button,
-  Icon,
+  IconPen,
+  IconSpinner,
   LanguageContext,
   LikeCoinDialog,
   TextIcon,
@@ -47,9 +48,9 @@ const BaseWriteButton = ({
   isLarge?: boolean
 }) => {
   const WriteIcon = loading ? (
-    <Icon.Spinner size="sm" color="white" />
+    <IconSpinner size="sm" color="white" />
   ) : (
-    <Icon.Pen size="sm" color="white" />
+    <IconPen size="sm" color="white" />
   )
 
   return (

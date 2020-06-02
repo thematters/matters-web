@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { Head, Icon } from '~/components'
+import { Head, IconLogo } from '~/components'
 import Footer from '~/components/Standalone/Footer'
 
 import { PATHS, TEXT } from '~/common/enums'
@@ -20,7 +20,7 @@ const About = () => {
         <section className="l-row">
           <Link href={PATHS.HOME}>
             <a className="logo" aria-label={TEXT.zh_hant.discover}>
-              <Icon.Logo />
+              <IconLogo />
             </a>
           </Link>
         </section>

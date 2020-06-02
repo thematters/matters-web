@@ -8,7 +8,7 @@ import {
   Dialog,
   DropdownArticleList,
   Form,
-  Icon,
+  IconClear,
   LanguageContext,
   Translate,
 } from '~/components'
@@ -198,7 +198,7 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
                 aria-label={TEXT.zh_hant.delete}
                 onClick={() => onDelete(article)}
               >
-                <Icon.Clear color="black" />
+                <IconClear color="black" />
               </Button>
             </span>
           </li>

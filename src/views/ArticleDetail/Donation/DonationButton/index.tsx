@@ -3,7 +3,7 @@ import { useContext } from 'react'
 import {
   Button,
   DonationDialog,
-  Icon,
+  IconHeart,
   LoginButton,
   TextIcon,
   Translate,
@@ -68,7 +68,7 @@ const DonationButton = ({ recipient, targetId }: DonationButtonProps) => {
               open()
             }}
           >
-            <TextIcon icon={<Icon.Heart size="sm" />} weight="md" color="white">
+            <TextIcon icon={<IconHeart size="sm" />} weight="md" color="white">
               <Translate id="donation" />
             </TextIcon>
           </Button>

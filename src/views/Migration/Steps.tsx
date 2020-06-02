@@ -137,6 +137,7 @@ const Steps = () => {
             borderColor="green"
             htmlHref="https://medium.com/me/export"
             htmlTarget="_blank"
+            rel="noopener"
             {...buttonProps}
           >
             <TextIcon color="green" size="md" weight="md">

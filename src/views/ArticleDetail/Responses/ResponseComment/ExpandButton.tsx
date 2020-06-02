@@ -1,4 +1,4 @@
-import { Button, Icon, TextIcon, Translate } from '~/components'
+import { Button, IconDown, TextIcon, Translate } from '~/components'
 
 import styles from './styles.css'
 
@@ -19,7 +19,7 @@ const ExpandButton = ({
       size="xs"
       color="green"
       textPlacement="left"
-      icon={<Icon.Down size="xs" />}
+      icon={<IconDown size="xs" />}
     >
       <Translate
         zh_hant={`查看 ${restCount} 條回應`}

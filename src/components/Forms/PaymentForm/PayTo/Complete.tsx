@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-import { Avatar, Dialog, Icon, Translate } from '~/components'
+import { Avatar, Dialog, IconHeart, Translate } from '~/components'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 
@@ -30,7 +30,7 @@ const Complete: React.FC<Props> = ({
   return (
     <Dialog.Content hasGrow>
       <section className="complete-avatar">
-        <Icon.Heart size="xl-m" color="red" />
+        <IconHeart size="xl-m" color="red" />
         <div className="complete-avatar-outline">
           <Avatar size="lg" user={recipient} />
         </div>

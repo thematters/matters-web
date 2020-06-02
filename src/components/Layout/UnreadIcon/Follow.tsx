@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import { useContext, useEffect } from 'react'
 
-import { Icon, ViewerContext } from '~/components'
+import { IconNavFollow, IconNavFollowActive, ViewerContext } from '~/components'
 import UNREAD_FOLLOWEE_ARTICLES from '~/components/GQL/queries/unreadFolloweeArticles'
 
 import { POLL_INTERVAL } from '~/common/enums'
@@ -39,9 +39,9 @@ const FollowUnreadIcon: React.FC<FollowUnreadIconProps> = ({ active }) => {
   return (
     <span className={iconClass}>
       {active ? (
-        <Icon.NavFollowActive size="md" color="green" />
+        <IconNavFollowActive size="md" color="green" />
       ) : (
-        <Icon.NavFollow size="md" />
+        <IconNavFollow size="md" />
       )}
 
       <style jsx>{styles}</style>

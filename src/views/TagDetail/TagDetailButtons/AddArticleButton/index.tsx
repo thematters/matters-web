@@ -1,4 +1,4 @@
-import { Button, Icon, TextIcon, Translate } from '~/components'
+import { Button, IconAdd, TextIcon, Translate } from '~/components'
 
 import TagArticleDialog from './TagArticleDialog'
 
@@ -17,7 +17,7 @@ const AddArticleButton: React.FC<AddArticleButtonProps> = ({ id }) => {
           onClick={open}
           aria-haspopup="true"
         >
-          <TextIcon icon={<Icon.Add color="green" size="xs" />} color="green">
+          <TextIcon icon={<IconAdd color="green" size="xs" />} color="green">
             <Translate id="addArticleTag" />
           </TextIcon>
         </Button>

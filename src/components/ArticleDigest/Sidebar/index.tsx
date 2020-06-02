@@ -80,10 +80,9 @@ export const ArticleDigestSidebar = ({
         </header>
 
         {cover && (
-          <aside
-            className="cover"
-            style={{ backgroundImage: `url("${cover}")` }}
-          />
+          <aside className="cover">
+            <img src={cover} loading="lazy" />
+          </aside>
         )}
 
         <footer>

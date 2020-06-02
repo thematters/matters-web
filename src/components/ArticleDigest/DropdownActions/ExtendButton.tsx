@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import { useContext } from 'react'
 
 import {
-  Icon,
+  IconCollectionMedium,
   LanguageContext,
   Menu,
   TextIcon,
@@ -70,7 +70,7 @@ const ExtendButton = ({ article }: { article: ExtendButtonArticle }) => {
       }}
     >
       <TextIcon
-        icon={<Icon.CollectionMedium size="md" />}
+        icon={<IconCollectionMedium size="md" />}
         size="md"
         spacing="base"
       >

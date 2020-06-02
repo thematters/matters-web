@@ -296,9 +296,7 @@
 }
 
 .translating {
-  & p {
-    color: var(--color-grey);
-  }
+  opacity: 0.5;
 }
 
 #editor-article-container {

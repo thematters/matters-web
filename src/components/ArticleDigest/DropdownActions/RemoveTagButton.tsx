@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import _isArray from 'lodash/isArray'
 import { useRouter } from 'next/router'
 
-import { Icon, Menu, TextIcon, Translate } from '~/components'
+import { IconRemoveMedium, Menu, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import { REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
@@ -55,7 +55,7 @@ const RemoveTagButton = ({ article }: { article: RemoveTagButtonArticle }) => {
         )
       }}
     >
-      <TextIcon icon={<Icon.RemoveMedium size="md" />} size="md" spacing="base">
+      <TextIcon icon={<IconRemoveMedium size="md" />} size="md" spacing="base">
         <Translate zh_hant="取消標籤" zh_hans="取消标签" />
       </TextIcon>
     </Menu.Item>

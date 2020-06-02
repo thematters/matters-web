@@ -1,4 +1,10 @@
-import { Icon, Menu, TextIcon, Translate } from '~/components'
+import {
+  IconMuteMedium,
+  IconUnMuteMedium,
+  Menu,
+  TextIcon,
+  Translate,
+} from '~/components'
 import { useMutation } from '~/components/GQL'
 import UNBLOCK_USER from '~/components/GQL/mutations/unblockUser'
 
@@ -40,7 +46,7 @@ const BlockUserButton = ({
     return (
       <Menu.Item onClick={onUnblock}>
         <TextIcon
-          icon={<Icon.UnMuteMedium size="md" />}
+          icon={<IconUnMuteMedium size="md" />}
           size="md"
           spacing="base"
         >
@@ -52,7 +58,7 @@ const BlockUserButton = ({
 
   return (
     <Menu.Item onClick={openDialog}>
-      <TextIcon icon={<Icon.MuteMedium size="md" />} size="md" spacing="base">
+      <TextIcon icon={<IconMuteMedium size="md" />} size="md" spacing="base">
         <Translate id="blockUser" />
       </TextIcon>
     </Menu.Item>

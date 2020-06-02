@@ -147,7 +147,7 @@ export const ShareDialog = (props: ShareDialogProps) => {
         />
       }
     >
-      {({ open }) => <>{props.children({ open })}</>}
+      {({ open }) => <>{props.children({ open: () => onShare(open) })}</>}
     </Dialog.Lazy>
   )
 }

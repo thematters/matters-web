@@ -4,7 +4,7 @@ import ResetPasswordDialog from './ResetPasswordDialog'
 import SignUpDialog from './SignUpDialog'
 // import TermAlertDialog from './TermAlertDialog'
 
-export const GlobalDialogs = () => {
+const GlobalDialogs = () => {
   return (
     <>
       {/* <TermAlertDialog /> */}
@@ -16,3 +16,5 @@ export const GlobalDialogs = () => {
     </>
   )
 }
+
+export default GlobalDialogs

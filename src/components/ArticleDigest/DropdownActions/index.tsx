@@ -8,8 +8,8 @@ import {
   Button,
   DropdownDialog,
   FingerprintDialog,
-  Icon,
   IconColor,
+  IconMore,
   IconSize,
   Menu,
   ViewerContext,
@@ -142,7 +142,7 @@ const BaseDropdownActions = ({
           onClick={open}
           ref={ref}
         >
-          <Icon.More color={color} size={size} />
+          <IconMore color={color} size={size} />
         </Button>
       )}
     </DropdownDialog>
