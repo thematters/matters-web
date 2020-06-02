@@ -81,6 +81,10 @@ const BasePayoutDialog = ({
           title={
             isConnectStripeAccount
               ? 'connectStripeAccount'
+              : isResetPasswordComplete ||
+                isResetPasswordConfirm ||
+                isResetPasswordRequest
+              ? 'resetPaymentPassword'
               : isComplete
               ? 'paymentPayoutComplete'
               : 'paymentPayout'

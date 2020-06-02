@@ -43,5 +43,13 @@ type MemoedTranslate = React.MemoExoticComponent<React.FC<TranslateProps>>
 
 export const Translate = React.memo(
   BaseTranslate,
-  ({ lang: prevLang }, { lang }) => prevLang === lang
+  (prev, next) => {
+    if ('id' in prev && 'id' in next) {
+      return prev.id === next.id
+    }
+    if ('zh_hant' in prev && 'zh_hant' in next) {
+      return prev.zh_hant === next.zh_hant
+    }
+    return prev.lang === next.lang
+  }
 ) as MemoedTranslate
