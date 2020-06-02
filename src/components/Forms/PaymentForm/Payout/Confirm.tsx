@@ -140,9 +140,7 @@ const BaseConfirm: React.FC<FormProps> = ({
               onBlur={handleBlur}
               onChange={(e) => {
                 const value = e.target.valueAsNumber || 0
-                const sanitizedAmount = Math.abs(
-                  Math.max(Math.floor(value), PAYMENT_MINIMAL_PAYOUT_AMOUNT.HKD)
-                )
+                const sanitizedAmount = Math.abs(Math.max(Math.floor(value), 0))
                 if (inputRef.current) {
                   inputRef.current.value = sanitizedAmount
                 }
@@ -189,7 +187,7 @@ const BaseConfirm: React.FC<FormProps> = ({
               error={touched.password && errors.password}
               onChange={(value) => {
                 const shouldValidate = value.length === 6
-                setTouched({ password: true }, shouldValidate)
+                setTouched({ amount: true, password: true }, shouldValidate)
                 setFieldValue('password', value, shouldValidate)
               }}
             />
