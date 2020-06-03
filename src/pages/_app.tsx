@@ -24,7 +24,7 @@ import { QueryError } from '~/components/GQL'
 import SplashScreen from '~/components/SplashScreen'
 
 import { PATHS } from '~/common/enums'
-import { analytics, initAgentHash } from '~/common/utils'
+import { analytics } from '~/common/utils'
 import withApollo from '~/common/utils/withApollo'
 
 import { RootQuery } from './__generated__/RootQuery'
@@ -72,6 +72,9 @@ const DynamicGlobalDialogs = dynamic(
     ssr: false,
   }
 )
+const DynamicFingerprint = dynamic(() => import('~/components/Fingerprint'), {
+  ssr: false,
+})
 
 const Root = ({
   client,
@@ -86,10 +89,6 @@ const Root = ({
 
   useEffect(() => {
     analytics.identifyUser()
-  }, [])
-
-  useEffect(() => {
-    initAgentHash()
   }, [])
 
   const router = useRouter()
@@ -124,6 +123,7 @@ const Root = ({
           <DynamicGlobalDialogs />
           <DynamicProgressBar />
           <DynamicPushInitializer client={client} />
+          <DynamicFingerprint />
         </FeaturesProvider>
       </LanguageProvider>
     </ViewerProvider>
