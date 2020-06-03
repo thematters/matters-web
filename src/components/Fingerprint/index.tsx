@@ -4,7 +4,6 @@ import { useEffect } from 'react'
 import { AGENT_HASH_PREFIX, STORE_KEY_AGENT_HASH } from '~/common/enums'
 
 const Fingerprint = () => {
-
   useEffect(() => {
     if (!process.browser || typeof window === 'undefined') {
       return
