@@ -3,7 +3,7 @@ import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useRef } from 'react'
 
-import { Dialog, Form, LanguageContext, Spinner, Translate } from '~/components'
+import { Dialog, Form, LanguageContext, Spinner, Tooltip, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import PAYOUT from '~/components/GQL/mutations/payout'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
@@ -11,6 +11,7 @@ import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
 import {
   PAYMENT_CURRENCY as CURRENCY,
   PAYMENT_MINIMAL_PAYOUT_AMOUNT,
+  Z_INDEX,
 } from '~/common/enums'
 import {
   calcMattersFee,
@@ -160,15 +161,28 @@ const BaseConfirm: React.FC<FormProps> = ({
                 </ConfirmTable.Col>
               </ConfirmTable.Row>
 
-              <ConfirmTable.Row>
-                <ConfirmTable.Col>
-                  <Translate zh_hant="服務費 (20%)" zh_hans="服务费 (20%)" />
-                </ConfirmTable.Col>
+              <Tooltip
+                content={
+                  <Translate
+                    zh_hant="用於支付 Stripe 手續費，並支持 Matters 運營"
+                    zh_hans="用于支付 Stripe 手续费，并支持 Matters 运营"
+                  />
+                }
+                placement="top"
+                zIndex={Z_INDEX.OVER_DIALOG}
+              >
+                <section>
+                  <ConfirmTable.Row>
+                    <ConfirmTable.Col>
+                          <Translate zh_hant="服務費 (20%)" zh_hans="服务费 (20%)" />
+                    </ConfirmTable.Col>
 
-                <ConfirmTable.Col>
-                  - {currency} {toAmountString(fee)}
-                </ConfirmTable.Col>
-              </ConfirmTable.Row>
+                    <ConfirmTable.Col>
+                      - {currency} {toAmountString(fee)}
+                    </ConfirmTable.Col>
+                  </ConfirmTable.Row>
+                </section>
+              </Tooltip>
 
               <ConfirmTable.Row total>
                 <ConfirmTable.Col>
