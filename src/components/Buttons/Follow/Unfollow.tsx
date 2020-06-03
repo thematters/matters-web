@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
+import _isNil from 'lodash/isNil'
 import { useState } from 'react'
 
 import {
@@ -38,7 +39,7 @@ const Unfollow = ({ user, size }: UnfollowProps) => {
   const [unfollow] = useMutation<UnfollowUser>(UNFOLLOW_USER, {
     variables: { id: user.id },
     optimisticResponse:
-      user.id && user.isFollower
+      !_isNil(user.id) && !_isNil(user.isFollower)
         ? {
             toggleFollowUser: {
               id: user.id,

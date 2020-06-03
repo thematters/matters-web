@@ -139,17 +139,17 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
 /**
  * Memoizing
  */
-type MemoedTransactionType = React.MemoExoticComponent<
+type MemoizedTransactionType = React.MemoExoticComponent<
   React.FC<TransactionProps>
 > & {
   fragments: typeof fragments
 }
 
-export const MemoedTransaction = React.memo(
+export const MemoizedTransaction = React.memo(
   BaseTransaction,
   () => true
-) as MemoedTransactionType
+) as MemoizedTransactionType
 
-MemoedTransaction.fragments = fragments
+MemoizedTransaction.fragments = fragments
 
-export const Transaction = MemoedTransaction
+export const Transaction = MemoizedTransaction

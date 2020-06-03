@@ -176,7 +176,7 @@ const BaseArticleDigestFeed = ({
 /**
  * Memoizing
  */
-type MemoedArticleDigestFeed = React.MemoExoticComponent<
+type MemoizedArticleDigestFeed = React.MemoExoticComponent<
   React.FC<ArticleDigestFeedProps>
 > & {
   fragments: typeof fragments
@@ -194,6 +194,6 @@ export const ArticleDigestFeed = React.memo(
         article.appreciationsReceivedTotal
     )
   }
-) as MemoedArticleDigestFeed
+) as MemoizedArticleDigestFeed
 
 ArticleDigestFeed.fragments = fragments

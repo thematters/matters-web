@@ -47,6 +47,6 @@ const BaseDateTime = ({
 /**
  * Memoizing
  */
-type MemoedDateTime = React.MemoExoticComponent<React.FC<DateTimeProps>>
+type MemoizedDateTime = React.MemoExoticComponent<React.FC<DateTimeProps>>
 
-export const DateTime = React.memo(BaseDateTime) as MemoedDateTime
+export const DateTime = React.memo(BaseDateTime) as MemoizedDateTime

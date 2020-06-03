@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import _isNil from 'lodash/isNil'
 
 import { Button, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
@@ -25,7 +26,7 @@ const fragments = {
 export const UnblockUserButton = ({ user }: UnblockUserButtonProps) => {
   const [unblockUser] = useMutation<UnblockUser>(UNBLOCK_USER, {
     variables: { id: user.id },
-    optimisticResponse: user.id
+    optimisticResponse: !_isNil(user.id)
       ? {
           unblockUser: {
             id: user.id,

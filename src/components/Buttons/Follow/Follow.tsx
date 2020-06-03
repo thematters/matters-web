@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
+import _isNil from 'lodash/isNil'
 
 import {
   Button,
@@ -36,7 +37,7 @@ const Follow = ({ user, size }: FollowProps) => {
   const [follow] = useMutation<FollowUser>(FOLLOW_USER, {
     variables: { id: user.id },
     optimisticResponse:
-      user.id && user.isFollower
+      !_isNil(user.id) && !_isNil(user.isFollower)
         ? {
             toggleFollowUser: {
               id: user.id,

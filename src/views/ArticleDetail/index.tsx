@@ -42,11 +42,12 @@ import TranslationButton from './TranslationButton'
 import Wall from './Wall'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
-import { ArticleDetail as ArticleDetailType } from './__generated__/ArticleDetail'
-import { ArticleDetailSpa as ArticleDetailSpaType } from './__generated__/ArticleDetailSpa'
+import { ArticleDetailPrivate } from './__generated__/ArticleDetailPrivate'
+import { ArticleDetailPublic } from './__generated__/ArticleDetailPublic'
+import { ArticleTranslation } from './__generated__/ArticleTranslation'
 
-const ARTICLE_DETAIL_SSR = gql`
-  query ArticleDetail($mediaHash: String) {
+const ARTICLE_DETAIL_PUBLIC = gql`
+  query ArticleDetailPublic($mediaHash: String) {
     article(input: { mediaHash: $mediaHash }) {
       id
       title
@@ -80,8 +81,20 @@ const ARTICLE_DETAIL_SSR = gql`
   ${FingerprintButton.fragments.article}
 `
 
+const ARTICLE_DETAIL_PRIVATE = gql`
+  query ArticleDetailPrivate($mediaHash: String) {
+    article(input: { mediaHash: $mediaHash }) {
+      id
+      author {
+        ...UserDigestRichUserPrivate
+      }
+    }
+  }
+  ${UserDigest.Rich.fragments.user.private}
+`
+
 const ARTICLE_TRANSLATION = gql`
-  query ArticleDetailSpa($mediaHash: String, $language: UserLanguage!) {
+  query ArticleTranslation($mediaHash: String, $language: UserLanguage!) {
     article(input: { mediaHash: $mediaHash }) {
       id
       translation(input: { language: $language }) {
@@ -108,11 +121,17 @@ const EmptyLayout: React.FC = ({ children }) => (
 )
 
 const ArticleDetail = () => {
-  // router & viewer
   const router = useRouter()
   const mediaHash = getQuery({ router, key: 'mediaHash' })
   const viewer = useContext(ViewerContext)
 
+  // UI
+  const features = useContext(FeaturesContext)
+  const isLargeUp = useResponsive('lg-up')
+  const [fixedWall, setFixedWall] = useState(false)
+  const [showResponses, setShowResponses] = useState(false)
+
+  // wall
   const { data: clientPreferenceData } = useQuery<ClientPreference>(
     CLIENT_PREFERENCE,
     {
@@ -122,30 +141,31 @@ const ArticleDetail = () => {
   const { wall } = clientPreferenceData?.clientPreference || { wall: true }
   const shouldShowWall = !viewer.isAuthed && wall
 
-  useEffect(() => {
-    if (shouldShowWall && window.location.hash && article) {
-      jump('#comments', { offset: -10 })
-    }
-  }, [mediaHash])
-
-  // UI
-  const features = useContext(FeaturesContext)
-  const isLargeUp = useResponsive('lg-up')
-  const [fixedWall, setFixedWall] = useState(false)
-  const [showResponses, setShowResponses] = useState(false)
-
-  // ssr data
-  const { data, loading, error } = useQuery<ArticleDetailType>(
-    ARTICLE_DETAIL_SSR,
+  // public data
+  const { data, loading, error } = useQuery<ArticleDetailPublic>(
+    ARTICLE_DETAIL_PUBLIC,
     {
       variables: { mediaHash },
     }
   )
 
+  // private data
+  const [fetchPrivate, { data: privateData }] = useLazyQuery<
+    ArticleDetailPrivate
+  >(ARTICLE_DETAIL_PRIVATE, {
+    variables: { mediaHash },
+  })
+  useEffect(() => {
+    if (!viewer.id) {
+      return
+    }
+    fetchPrivate()
+  }, [mediaHash, viewer.id])
+
   // merge and process data
-  const article = data?.article
+  const article = _merge({}, data?.article, privateData?.article)
   const authorId = article?.author?.id
-  const collectionCount = (article && article.collection.totalCount) || 0
+  const collectionCount = article?.collection?.totalCount || 0
   const isAuthor = viewer.id === authorId
 
   // translation
@@ -157,7 +177,7 @@ const ArticleDetail = () => {
   const [
     getTranslation,
     { data: translationData, loading: translating },
-  ] = useLazyQuery<ArticleDetailSpaType>(ARTICLE_TRANSLATION)
+  ] = useLazyQuery<ArticleTranslation>(ARTICLE_TRANSLATION)
   const titleTranslation = translationData?.article?.translation?.title
   const contentTranslation = translationData?.article?.translation?.content
   const onTranslate = (newTranslate: boolean) => {
@@ -185,6 +205,15 @@ const ArticleDetail = () => {
       })
     )
   }
+
+  /**
+   * Render
+   */
+  useEffect(() => {
+    if (shouldShowWall && window.location.hash && article) {
+      jump('#comments', { offset: -10 })
+    }
+  }, [mediaHash])
 
   if (loading) {
     return (
