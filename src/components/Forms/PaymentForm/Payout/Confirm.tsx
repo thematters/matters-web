@@ -162,7 +162,7 @@ const BaseConfirm: React.FC<FormProps> = ({
 
               <ConfirmTable.Row>
                 <ConfirmTable.Col>
-                  <Translate zh_hant="服務費 (15%)" zh_hans="服务费 (15%)" />
+                  <Translate zh_hant="服務費 (20%)" zh_hans="服务费 (20%)" />
                 </ConfirmTable.Col>
 
                 <ConfirmTable.Col>
