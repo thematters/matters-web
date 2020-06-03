@@ -3,7 +3,14 @@ import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useRef } from 'react'
 
-import { Dialog, Form, LanguageContext, Spinner, Tooltip, Translate } from '~/components'
+import {
+  Dialog,
+  Form,
+  LanguageContext,
+  Spinner,
+  Tooltip,
+  Translate,
+} from '~/components'
 import { useMutation } from '~/components/GQL'
 import PAYOUT from '~/components/GQL/mutations/payout'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
@@ -174,7 +181,10 @@ const BaseConfirm: React.FC<FormProps> = ({
                 <section>
                   <ConfirmTable.Row>
                     <ConfirmTable.Col>
-                          <Translate zh_hant="服務費 (20%)" zh_hans="服务费 (20%)" />
+                      <Translate
+                        zh_hant="服務費 (20%)"
+                        zh_hans="服务费 (20%)"
+                      />
                     </ConfirmTable.Col>
 
                     <ConfirmTable.Col>
