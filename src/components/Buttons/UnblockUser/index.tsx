@@ -9,6 +9,10 @@ import { ADD_TOAST } from '~/common/enums'
 import { UnblockUser } from '~/components/GQL/mutations/__generated__/UnblockUser'
 import { UnblockUserButtonUser } from './__generated__/UnblockUserButtonUser'
 
+interface UnblockUserButtonProps {
+  user: Partial<UnblockUserButtonUser>
+}
+
 const fragments = {
   user: gql`
     fragment UnblockUserButtonUser on User {
@@ -18,20 +22,18 @@ const fragments = {
   `,
 }
 
-export const UnblockUserButton = ({
-  user,
-}: {
-  user: UnblockUserButtonUser
-}) => {
+export const UnblockUserButton = ({ user }: UnblockUserButtonProps) => {
   const [unblockUser] = useMutation<UnblockUser>(UNBLOCK_USER, {
     variables: { id: user.id },
-    optimisticResponse: {
-      unblockUser: {
-        id: user.id,
-        isBlocked: false,
-        __typename: 'User',
-      },
-    },
+    optimisticResponse: user.id
+      ? {
+          unblockUser: {
+            id: user.id,
+            isBlocked: false,
+            __typename: 'User',
+          },
+        }
+      : undefined,
   })
 
   return (

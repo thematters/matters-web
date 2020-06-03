@@ -17,6 +17,11 @@ import { FollowButtonSize } from './index'
 import { FollowButtonUser } from './__generated__/FollowButtonUser'
 import { FollowUser } from './__generated__/FollowUser'
 
+interface FollowProps {
+  user: Partial<FollowButtonUser>
+  size: FollowButtonSize
+}
+
 const FOLLOW_USER = gql`
   mutation FollowUser($id: ID!) {
     toggleFollowUser(input: { id: $id }) {
@@ -27,23 +32,20 @@ const FOLLOW_USER = gql`
   }
 `
 
-const Follow = ({
-  user,
-  size,
-}: {
-  user: FollowButtonUser
-  size: FollowButtonSize
-}) => {
+const Follow = ({ user, size }: FollowProps) => {
   const [follow] = useMutation<FollowUser>(FOLLOW_USER, {
     variables: { id: user.id },
-    optimisticResponse: {
-      toggleFollowUser: {
-        id: user.id,
-        isFollowee: true,
-        isFollower: user.isFollower,
-        __typename: 'User',
-      },
-    },
+    optimisticResponse:
+      user.id && user.isFollower
+        ? {
+            toggleFollowUser: {
+              id: user.id,
+              isFollowee: true,
+              isFollower: user.isFollower,
+              __typename: 'User',
+            },
+          }
+        : undefined,
     update: (cache) => {
       const userName = _get(user, 'userName', null)
       updateUserFollowerCount({ cache, type: 'increment', userName })

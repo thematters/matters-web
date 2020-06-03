@@ -4,7 +4,11 @@ import { Button, TextIcon, Translate } from '~/components'
 
 import { FollowStateUser } from './__generated__/FollowStateUser'
 
-const FollowState = ({ user }: { user: FollowStateUser }) => {
+interface FollowStateProps {
+  user: Partial<FollowStateUser>
+}
+
+const FollowState = ({ user }: FollowStateProps) => {
   if (!user.isFollower) {
     return null
   }

@@ -18,6 +18,11 @@ import { FollowButtonSize } from './index'
 import { FollowButtonUser } from './__generated__/FollowButtonUser'
 import { UnfollowUser } from './__generated__/UnfollowUser'
 
+interface UnfollowProps {
+  user: Partial<FollowButtonUser>
+  size: FollowButtonSize
+}
+
 const UNFOLLOW_USER = gql`
   mutation UnfollowUser($id: ID!) {
     toggleFollowUser(input: { id: $id }) {
@@ -28,24 +33,21 @@ const UNFOLLOW_USER = gql`
   }
 `
 
-const Unfollow = ({
-  user,
-  size,
-}: {
-  user: FollowButtonUser
-  size: FollowButtonSize
-}) => {
+const Unfollow = ({ user, size }: UnfollowProps) => {
   const [hover, setHover] = useState(false)
   const [unfollow] = useMutation<UnfollowUser>(UNFOLLOW_USER, {
     variables: { id: user.id },
-    optimisticResponse: {
-      toggleFollowUser: {
-        id: user.id,
-        isFollowee: false,
-        isFollower: user.isFollower,
-        __typename: 'User',
-      },
-    },
+    optimisticResponse:
+      user.id && user.isFollower
+        ? {
+            toggleFollowUser: {
+              id: user.id,
+              isFollowee: false,
+              isFollower: user.isFollower,
+              __typename: 'User',
+            },
+          }
+        : undefined,
     update: (cache) => {
       const userName = _get(user, 'userName', null)
       updateUserFollowerCount({ cache, type: 'decrement', userName })

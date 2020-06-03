@@ -9,6 +9,11 @@ import Unfollow from './Unfollow'
 
 import { FollowButtonUser } from './__generated__/FollowButtonUser'
 
+interface FollowButtonProps {
+  user: Partial<FollowButtonUser>
+  size?: FollowButtonSize
+}
+
 const fragments = {
   user: gql`
     fragment FollowButtonUser on User {
@@ -21,13 +26,7 @@ const fragments = {
 
 export type FollowButtonSize = 'lg' | 'md' | 'md-s'
 
-export const FollowButton = ({
-  user,
-  size = 'md',
-}: {
-  user: FollowButtonUser
-  size?: FollowButtonSize
-}) => {
+export const FollowButton = ({ user, size = 'md' }: FollowButtonProps) => {
   const viewer = useContext(ViewerContext)
 
   if (viewer.isInactive || viewer.id === user.id) {

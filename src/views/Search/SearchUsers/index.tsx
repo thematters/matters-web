@@ -29,13 +29,13 @@ const SEARCH_USERS = gql`
         cursor
         node {
           ... on User {
-            ...UserDigestRichUser
+            ...UserDigestRichUserPublic
           }
         }
       }
     }
   }
-  ${UserDigest.Rich.fragments.user}
+  ${UserDigest.Rich.fragments.user.public}
 `
 
 const SearchUser = () => {

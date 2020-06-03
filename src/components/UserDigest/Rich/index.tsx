@@ -12,7 +12,8 @@ import { toPath } from '~/common/utils'
 
 import styles from './styles.css'
 
-import { UserDigestRichUser } from './__generated__/UserDigestRichUser'
+import { UserDigestRichUserPrivate } from './__generated__/UserDigestRichUserPrivate'
+import { UserDigestRichUserPublic } from './__generated__/UserDigestRichUserPublic'
 
 /**
  * UeserDigest.Rich is a component for presenting user's avatar, display
@@ -24,7 +25,7 @@ import { UserDigestRichUser } from './__generated__/UserDigestRichUser'
  */
 
 type RichProps = {
-  user: UserDigestRichUser
+  user: UserDigestRichUserPublic & Partial<UserDigestRichUserPrivate>
 
   size?: 'sm' | 'lg'
   avatarBadge?: React.ReactNode
@@ -36,27 +37,34 @@ type RichProps = {
   AvatarProps
 
 const fragments = {
-  user: gql`
-    fragment UserDigestRichUser on User {
-      id
-      userName
-      displayName
-      info {
-        description
+  user: {
+    public: gql`
+      fragment UserDigestRichUserPublic on User {
+        id
+        userName
+        displayName
+        info {
+          description
+        }
+        status {
+          state
+        }
+        ...AvatarUser
       }
-      status {
-        state
+      ${Avatar.fragments.user}
+    `,
+    private: gql`
+      fragment UserDigestRichUserPrivate on User {
+        id
+        ...FollowStateUser
+        ...FollowButtonUser
+        ...UnblockUserButtonUser
       }
-      ...AvatarUser
-      ...FollowStateUser
-      ...FollowButtonUser
-      ...UnblockUserButtonUser
-    }
-    ${Avatar.fragments.user}
-    ${FollowButton.State.fragments.user}
-    ${FollowButton.fragments.user}
-    ${UnblockUserButton.fragments.user}
-  `,
+      ${FollowButton.State.fragments.user}
+      ${FollowButton.fragments.user}
+      ${UnblockUserButton.fragments.user}
+    `,
+  },
 }
 
 const Rich = ({

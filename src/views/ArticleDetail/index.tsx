@@ -60,7 +60,7 @@ const ARTICLE_DETAIL_SSR = gql`
       createdAt
       language
       author {
-        ...UserDigestRichUser
+        ...UserDigestRichUserPublic
       }
       collection(input: { first: 0 }) @connection(key: "articleCollection") {
         totalCount
@@ -72,7 +72,7 @@ const ARTICLE_DETAIL_SSR = gql`
       ...FingerprintArticle
     }
   }
-  ${UserDigest.Rich.fragments.user}
+  ${UserDigest.Rich.fragments.user.public}
   ${Content.fragments.article}
   ${TagList.fragments.article}
   ${RelatedArticles.fragments.article}

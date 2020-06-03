@@ -32,13 +32,13 @@ const USER_FOLLOWERS_FEED = gql`
         edges {
           cursor
           node {
-            ...UserDigestRichUser
+            ...UserDigestRichUserPublic
           }
         }
       }
     }
   }
-  ${UserDigest.Rich.fragments.user}
+  ${UserDigest.Rich.fragments.user.public}
 `
 
 const UserFollowers = () => {

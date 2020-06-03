@@ -12,11 +12,6 @@ const fragments = {
       state
     }
   `,
-  response: gql`
-    fragment StateResponse on Article {
-      articleState: state
-    }
-  `,
 }
 
 const BannedHeader = () => (

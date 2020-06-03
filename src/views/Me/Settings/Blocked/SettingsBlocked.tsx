@@ -28,13 +28,15 @@ const VIEWER_BLOCK_LIST = gql`
         edges {
           cursor
           node {
-            ...UserDigestRichUser
+            ...UserDigestRichUserPublic
+            ...UserDigestRichUserPrivate
           }
         }
       }
     }
   }
-  ${UserDigest.Rich.fragments.user}
+  ${UserDigest.Rich.fragments.user.public}
+  ${UserDigest.Rich.fragments.user.private}
 `
 
 const SettingsBlocked = () => {

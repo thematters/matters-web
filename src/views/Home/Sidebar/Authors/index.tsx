@@ -29,14 +29,14 @@ const SIDEBAR_AUTHORS = gql`
           edges {
             cursor
             node {
-              ...UserDigestRichUser
+              ...UserDigestRichUserPublic
             }
           }
         }
       }
     }
   }
-  ${UserDigest.Rich.fragments.user}
+  ${UserDigest.Rich.fragments.user.public}
 `
 
 const Authors = () => {
