@@ -22,10 +22,11 @@ import EditButton from './EditButton'
 import PinButton from './PinButton'
 import UncollapseButton from './UncollapseButton'
 
-import { DropdownActionsComment } from './__generated__/DropdownActionsComment'
+import { DropdownActionsCommentPrivate } from './__generated__/DropdownActionsCommentPrivate'
+import { DropdownActionsCommentPublic } from './__generated__/DropdownActionsCommentPublic'
 
 interface DropdownActionsProps {
-  comment: DropdownActionsComment
+  comment: DropdownActionsCommentPublic & Partial<DropdownActionsCommentPrivate>
   inCard?: boolean
 }
 
@@ -48,31 +49,43 @@ interface DialogProps {
 type BaseDropdownActionsProps = DropdownActionsProps & Controls & DialogProps
 
 const fragments = {
-  comment: gql`
-    fragment DropdownActionsComment on Comment {
-      id
-      state
-      author {
+  comment: {
+    public: gql`
+      fragment DropdownActionsCommentPublic on Comment {
         id
-        ...BlockUser
-      }
-      parentComment {
-        id
-      }
-      article {
-        id
-        mediaHash
+        state
+        content
         author {
           id
+          ...BlockUserPublic
+        }
+        parentComment {
+          id
+        }
+        article {
+          id
+          mediaHash
+          author {
+            id
+          }
+        }
+        ...PinButtonComment
+      }
+      ${PinButton.fragments.comment}
+      ${BlockUser.fragments.user.public}
+    `,
+    private: gql`
+      fragment DropdownActionsCommentPrivate on Comment {
+        id
+        author {
+          id
+          isBlocking
+          ...BlockUserPrivate
         }
       }
-      ...EditButtonComment
-      ...PinButtonComment
-    }
-    ${EditButton.fragments.comment}
-    ${PinButton.fragments.comment}
-    ${BlockUser.fragments.user}
-  `,
+      ${BlockUser.fragments.user.private}
+    `,
+  },
 }
 
 const BaseDropdownActions = ({

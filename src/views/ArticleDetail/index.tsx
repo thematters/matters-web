@@ -1,5 +1,4 @@
 import { useLazyQuery, useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
 import jump from 'jump.js'
 import _merge from 'lodash/merge'
 import dynamic from 'next/dynamic'
@@ -33,6 +32,11 @@ import { getQuery } from '~/common/utils'
 import Collection from './Collection'
 import Content from './Content'
 import FingerprintButton from './FingerprintButton'
+import {
+  ARTICLE_DETAIL_PRIVATE,
+  ARTICLE_DETAIL_PUBLIC,
+  ARTICLE_TRANSLATION,
+} from './gql'
 import RelatedArticles from './RelatedArticles'
 import State from './State'
 import styles from './styles.css'
@@ -45,69 +49,6 @@ import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientP
 import { ArticleDetailPrivate } from './__generated__/ArticleDetailPrivate'
 import { ArticleDetailPublic } from './__generated__/ArticleDetailPublic'
 import { ArticleTranslation } from './__generated__/ArticleTranslation'
-
-const ARTICLE_DETAIL_PUBLIC = gql`
-  query ArticleDetailPublic($mediaHash: String) {
-    article(input: { mediaHash: $mediaHash }) {
-      id
-      title
-      slug
-      mediaHash
-      state
-      public
-      live
-      cover
-      summary
-      createdAt
-      language
-      author {
-        ...UserDigestRichUserPublic
-      }
-      collection(input: { first: 0 }) @connection(key: "articleCollection") {
-        totalCount
-      }
-      ...ContentArticle
-      ...TagListArticle
-      ...RelatedArticles
-      ...StateArticle
-      ...FingerprintArticle
-      ...ToolbarArticlePublic
-    }
-  }
-  ${Content.fragments.article}
-  ${TagList.fragments.article}
-  ${RelatedArticles.fragments.article}
-  ${State.fragments.article}
-  ${FingerprintButton.fragments.article}
-  ${UserDigest.Rich.fragments.user.public}
-  ${Toolbar.fragments.article.public}
-`
-
-const ARTICLE_DETAIL_PRIVATE = gql`
-  query ArticleDetailPrivate($mediaHash: String) {
-    article(input: { mediaHash: $mediaHash }) {
-      id
-      author {
-        ...UserDigestRichUserPrivate
-      }
-      ...ToolbarArticlePrivate
-    }
-  }
-  ${UserDigest.Rich.fragments.user.private}
-  ${Toolbar.fragments.article.private}
-`
-
-const ARTICLE_TRANSLATION = gql`
-  query ArticleTranslation($mediaHash: String, $language: UserLanguage!) {
-    article(input: { mediaHash: $mediaHash }) {
-      id
-      translation(input: { language: $language }) {
-        content
-        title
-      }
-    }
-  }
-`
 
 const DynamicResponse = dynamic(() => import('./Responses'), {
   ssr: false,

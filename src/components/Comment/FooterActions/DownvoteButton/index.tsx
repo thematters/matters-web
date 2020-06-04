@@ -16,24 +16,33 @@ import { numAbbr } from '~/common/utils'
 
 import { UnvoteComment } from '~/components/GQL/mutations/__generated__/UnvoteComment'
 import { VoteComment } from '~/components/GQL/mutations/__generated__/VoteComment'
-import { DownvoteComment } from './__generated__/DownvoteComment'
+import { DownvoteCommentPublic } from './__generated__/DownvoteCommentPublic'
+import { DownvoteCommentPrivate } from './__generated__/DownvoteCommentPrivate'
 
 interface DownvoteButtonProps {
-  comment: DownvoteComment
+  comment: DownvoteCommentPublic & Partial<DownvoteCommentPrivate>
   onClick?: () => void
   disabled?: boolean
   inCard: boolean
 }
 
 const fragments = {
-  comment: gql`
-    fragment DownvoteComment on Comment {
-      id
-      upvotes
-      downvotes
-      myVote
-    }
-  `,
+  comment: {
+    public: gql`
+      fragment DownvoteCommentPublic on Comment {
+        id
+        upvotes
+        downvotes
+      }
+    `,
+    private: gql`
+      fragment DownvoteCommentPrivate on Comment {
+        id
+
+        myVote
+      }
+    `,
+  },
 }
 
 const DownvoteButton = ({

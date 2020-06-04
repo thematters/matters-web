@@ -39,13 +39,15 @@ const FEATURED_COMMENTS = gql`
         }
         edges {
           node {
-            ...ResponseCommentComment
+            ...ResponseCommentCommentPublic
+            ...ResponseCommentCommentPrivate
           }
         }
       }
     }
   }
-  ${ResponseComment.fragments.comment}
+  ${ResponseComment.fragments.comment.public}
+  ${ResponseComment.fragments.comment.private}
 `
 
 const FeaturedComments = () => {

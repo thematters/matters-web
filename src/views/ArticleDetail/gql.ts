@@ -1,0 +1,73 @@
+import gql from 'graphql-tag'
+
+import { UserDigest } from '~/components/UserDigest'
+
+import Content from './Content'
+import FingerprintButton from './FingerprintButton'
+import RelatedArticles from './RelatedArticles'
+import State from './State'
+import TagList from './TagList'
+import Toolbar from './Toolbar'
+
+export const ARTICLE_DETAIL_PUBLIC = gql`
+  query ArticleDetailPublic($mediaHash: String) {
+    article(input: { mediaHash: $mediaHash }) {
+      id
+      title
+      slug
+      mediaHash
+      state
+      public
+      live
+      cover
+      summary
+      createdAt
+      language
+      author {
+        ...UserDigestRichUserPublic
+      }
+      collection(input: { first: 0 }) @connection(key: "articleCollection") {
+        totalCount
+      }
+      ...ContentArticle
+      ...TagListArticle
+      ...RelatedArticles
+      ...StateArticle
+      ...FingerprintArticle
+      ...ToolbarArticlePublic
+    }
+  }
+  ${Content.fragments.article}
+  ${TagList.fragments.article}
+  ${RelatedArticles.fragments.article}
+  ${State.fragments.article}
+  ${FingerprintButton.fragments.article}
+  ${UserDigest.Rich.fragments.user.public}
+  ${Toolbar.fragments.article.public}
+`
+
+export const ARTICLE_DETAIL_PRIVATE = gql`
+  query ArticleDetailPrivate($mediaHash: String) {
+    article(input: { mediaHash: $mediaHash }) {
+      id
+      author {
+        ...UserDigestRichUserPrivate
+      }
+      ...ToolbarArticlePrivate
+    }
+  }
+  ${UserDigest.Rich.fragments.user.private}
+  ${Toolbar.fragments.article.private}
+`
+
+export const ARTICLE_TRANSLATION = gql`
+  query ArticleTranslation($mediaHash: String, $language: UserLanguage!) {
+    article(input: { mediaHash: $mediaHash }) {
+      id
+      translation(input: { language: $language }) {
+        content
+        title
+      }
+    }
+  }
+`

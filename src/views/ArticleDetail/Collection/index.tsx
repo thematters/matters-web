@@ -13,7 +13,7 @@ import EditButton from './EditButton'
 import EditingList from './EditingList'
 import styles from './styles.css'
 
-import { ArticleDetail_article } from '../__generated__/ArticleDetail'
+import { ArticleDetailPublic_article } from '../__generated__/ArticleDetailPublic'
 import { CollectionList as CollectionListTypes } from './__generated__/CollectionList'
 
 const COLLECTION_LIST = gql`
@@ -27,7 +27,7 @@ const COLLECTION_LIST = gql`
 `
 
 const Collection: React.FC<{
-  article: ArticleDetail_article
+  article: ArticleDetailPublic_article
   collectionCount?: number
 }> = ({ article, collectionCount }) => {
   const viewer = useContext(ViewerContext)

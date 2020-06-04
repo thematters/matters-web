@@ -8,7 +8,8 @@ import { filterComments } from '~/common/utils'
 import ExpandButton from './ExpandButton'
 import styles from './styles.css'
 
-import { ResponseCommentComment } from './__generated__/ResponseCommentComment'
+import { ResponseCommentCommentPrivate } from './__generated__/ResponseCommentCommentPrivate'
+import { ResponseCommentCommentPublic } from './__generated__/ResponseCommentCommentPublic'
 
 const COLLAPSE_COUNT = 2
 
@@ -18,27 +19,48 @@ interface ResponseCommentControls {
   commentCallback?: () => void
 }
 
+type CommentType = ResponseCommentCommentPublic &
+  Partial<ResponseCommentCommentPrivate>
+
 type ResponseCommentProps = {
-  comment: ResponseCommentComment
+  comment: CommentType
 } & ResponseCommentControls
 
 const fragments = {
-  comment: gql`
-    fragment ResponseCommentComment on Comment {
-      id
-      ...FeedComment
-      comments(input: { sort: oldest, first: null }) {
-        edges {
-          cursor
-          node {
-            ...FeedComment
+  comment: {
+    public: gql`
+      fragment ResponseCommentCommentPublic on Comment {
+        id
+        ...FeedCommentPublic
+        comments(input: { sort: oldest, first: null }) {
+          edges {
+            cursor
+            node {
+              ...FeedCommentPublic
+            }
           }
         }
       }
-    }
 
-    ${Comment.Feed.fragments.comment}
-  `,
+      ${Comment.Feed.fragments.comment.public}
+    `,
+    private: gql`
+      fragment ResponseCommentCommentPrivate on Comment {
+        id
+        ...FeedCommentPrivate
+        comments(input: { sort: oldest, first: null }) {
+          edges {
+            cursor
+            node {
+              ...FeedCommentPrivate
+            }
+          }
+        }
+      }
+
+      ${Comment.Feed.fragments.comment.private}
+    `,
+  },
 }
 
 const ResponseComment = ({
@@ -49,7 +71,7 @@ const ResponseComment = ({
 }: ResponseCommentProps) => {
   const descendants = filterComments(
     (comment.comments?.edges || []).map(({ node }) => node)
-  ) as ResponseCommentComment[]
+  ) as CommentType[]
   const restCount = descendants.length - COLLAPSE_COUNT
   const [expand, setExpand] = useState(defaultExpand || restCount <= 0)
 

@@ -71,14 +71,16 @@ const LatestResponsesArticle = gql`
             ...ResponseArticleArticle
           }
           ... on Comment {
-            ...ResponseCommentComment
+            ...ResponseCommentCommentPublic
+            ...ResponseCommentCommentPrivate
           }
         }
       }
     }
   }
   ${ResponseArticle.fragments.article}
-  ${ResponseComment.fragments.comment}
+  ${ResponseComment.fragments.comment.public}
+  ${ResponseComment.fragments.comment.private}
 `
 
 const LATEST_RESPONSES = gql`

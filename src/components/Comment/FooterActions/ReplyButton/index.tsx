@@ -43,7 +43,6 @@ const fragments = {
         id
         author {
           id
-          isBlocking
         }
       }
       parentComment {

@@ -11,7 +11,8 @@ import ReplyButton, { ReplyButtonProps } from './ReplyButton'
 import styles from './styles.css'
 import UpvoteButton from './UpvoteButton'
 
-import { FooterActionsComment } from './__generated__/FooterActionsComment'
+import { FooterActionsCommentPrivate } from './__generated__/FooterActionsCommentPrivate'
+import { FooterActionsCommentPublic } from './__generated__/FooterActionsCommentPublic'
 
 export type FooterActionsControls = {
   hasReply?: boolean
@@ -21,25 +22,44 @@ export type FooterActionsControls = {
   Pick<ReplyButtonProps, 'commentCallback'>
 
 export type FooterActionsProps = {
-  comment: FooterActionsComment
+  comment: FooterActionsCommentPublic & Partial<FooterActionsCommentPrivate>
 } & FooterActionsControls
 
 const fragments = {
-  comment: gql`
-    fragment FooterActionsComment on Comment {
-      id
-      state
-      ...ReplyComemnt
-      ...UpvoteComment
-      ...DownvoteComment
-      ...CreatedAtComment
-    }
-
-    ${ReplyButton.fragments.comment}
-    ${UpvoteButton.fragments.comment}
-    ${DownvoteButton.fragments.comment}
-    ${CreatedAt.fragments.comment}
-  `,
+  comment: {
+    public: gql`
+      fragment FooterActionsCommentPublic on Comment {
+        id
+        state
+        ...CreatedAtComment
+        ...ReplyComemnt
+        ...UpvoteCommentPublic
+        ...DownvoteCommentPublic
+      }
+      ${CreatedAt.fragments.comment}
+      ${ReplyButton.fragments.comment}
+      ${UpvoteButton.fragments.comment.public}
+      ${DownvoteButton.fragments.comment.public}
+    `,
+    private: gql`
+      fragment FooterActionsCommentPrivate on Comment {
+        id
+        article {
+          id
+          author {
+            id
+            isBlocking
+          }
+        }
+        ...UpvoteCommentPrivate
+        ...DownvoteCommentPrivate
+        ...CreatedAtComment
+      }
+      ${CreatedAt.fragments.comment}
+      ${UpvoteButton.fragments.comment.private}
+      ${DownvoteButton.fragments.comment.private}
+    `,
+  },
 }
 
 const BaseFooterActions = ({

@@ -37,15 +37,19 @@ const fragments = {
         ...ArticleDigestTitleArticle
       }
       ...CreatedAtComment
-      ...ContentComment
-      ...FooterActionsComment
+      ...ContentCommentPublic
+      ...ContentCommentPrivate
+      ...FooterActionsCommentPublic
+      ...FooterActionsCommentPrivate
     }
 
     ${UserDigest.Mini.fragments.user}
     ${ArticleDigestTitle.fragments.article}
     ${Comment.CreatedAt.fragments.comment}
-    ${Comment.Content.fragments.comment}
-    ${Comment.FooterActions.fragments.comment}
+    ${Comment.Content.fragments.comment.public}
+    ${Comment.Content.fragments.comment.private}
+    ${Comment.FooterActions.fragments.comment.public}
+    ${Comment.FooterActions.fragments.comment.private}
   `,
 }
 

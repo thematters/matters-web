@@ -60,7 +60,7 @@ const fragments = {
       ...DropdownActionsUser
     }
     ${Avatar.fragments.user}
-    ${FollowButton.fragments.user}
+    ${FollowButton.fragments.user.private}
     ${DropdownActions.fragments.user}
   `,
 }

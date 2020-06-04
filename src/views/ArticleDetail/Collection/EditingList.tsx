@@ -10,7 +10,7 @@ import articleFragments from '~/components/GQL/fragments/article'
 
 import styles from './styles.css'
 
-import { ArticleDetail_article } from '../__generated__/ArticleDetail'
+import { ArticleDetailPublic_article } from '../__generated__/ArticleDetailPublic'
 import {
   EditorCollection,
   EditorCollection_article_collection_edges_node,
@@ -38,7 +38,7 @@ const EditingList = ({
   editingArticles,
   setEditingArticles,
 }: {
-  article: ArticleDetail_article
+  article: ArticleDetailPublic_article
   editingArticles: EditorCollection_article_collection_edges_node[]
   setEditingArticles: (
     articles: EditorCollection_article_collection_edges_node[]

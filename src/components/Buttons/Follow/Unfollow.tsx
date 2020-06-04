@@ -16,11 +16,11 @@ import updateViewerFolloweeCount from '~/components/GQL/updates/viewerFolloweeCo
 
 import { FollowButtonSize } from './index'
 
-import { FollowButtonUser } from './__generated__/FollowButtonUser'
+import { FollowButtonUserPrivate } from './__generated__/FollowButtonUserPrivate'
 import { UnfollowUser } from './__generated__/UnfollowUser'
 
 interface UnfollowProps {
-  user: Partial<FollowButtonUser>
+  user: Partial<FollowButtonUserPrivate>
   size: FollowButtonSize
 }
 

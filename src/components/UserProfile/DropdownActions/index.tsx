@@ -21,9 +21,11 @@ const fragments = {
   user: gql`
     fragment DropdownActionsUser on User {
       id
-      ...BlockUser
+      ...BlockUserPublic
+      ...BlockUserPrivate
     }
-    ${BlockUser.fragments.user}
+    ${BlockUser.fragments.user.public}
+    ${BlockUser.fragments.user.private}
   `,
 }
 
