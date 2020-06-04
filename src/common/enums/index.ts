@@ -23,7 +23,7 @@ export const Z_INDEX = {
   OVER_DIALOG: 201,
 }
 
-export const AGENT_HASH_PREFIX = 'v0__'
+export const AGENT_HASH_PREFIX = 'v1__'
 
 export const IMAGE_PIXEL =
   'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=='

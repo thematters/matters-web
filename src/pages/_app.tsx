@@ -72,6 +72,9 @@ const DynamicGlobalDialogs = dynamic(
     ssr: false,
   }
 )
+const DynamicFingerprint = dynamic(() => import('~/components/Fingerprint'), {
+  ssr: false,
+})
 
 const Root = ({
   client,
@@ -120,6 +123,7 @@ const Root = ({
           <DynamicGlobalDialogs />
           <DynamicProgressBar />
           <DynamicPushInitializer client={client} />
+          <DynamicFingerprint />
         </FeaturesProvider>
       </LanguageProvider>
     </ViewerProvider>
