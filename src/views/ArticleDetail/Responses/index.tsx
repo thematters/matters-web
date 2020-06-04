@@ -9,7 +9,6 @@ import { getQuery } from '~/common/utils'
 import FeatureComments from './FeaturedComments'
 import LatestResponses from './LatestResponses'
 import ResponseCount from './ResponseCount'
-import styles from './styles.css'
 
 import { ArticleResponse } from './__generated__/ArticleResponse'
 
@@ -55,8 +54,6 @@ const Responses = () => {
 
       <FeatureComments />
       <LatestResponses />
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

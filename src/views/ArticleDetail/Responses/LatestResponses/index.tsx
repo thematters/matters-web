@@ -1,11 +1,10 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
+import { useLazyQuery, useQuery } from '@apollo/react-hooks'
 import jump from 'jump.js'
 import _differenceBy from 'lodash/differenceBy'
 import _get from 'lodash/get'
 import _merge from 'lodash/merge'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import {
   EmptyResponse,
@@ -17,6 +16,7 @@ import {
   useEventListener,
   usePullToRefresh,
   useResponsive,
+  ViewerContext,
   ViewMoreButton,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
@@ -30,14 +30,20 @@ import {
   unshiftConnections,
 } from '~/common/utils'
 
-import ResponseArticle from './ResponseArticle'
-import ResponseComment from './ResponseComment'
-import styles from './styles.css'
-
+import ResponseArticle from '../ResponseArticle'
+import ResponseComment from '../ResponseComment'
+import styles from '../styles.css'
 import {
-  LatestResponses as LatestResponsesType,
-  LatestResponses_article_responses_edges_node,
-} from './__generated__/LatestResponses'
+  LATEST_RESPONSES_PRIVATE,
+  LATEST_RESPONSES_PUBLIC,
+  SUBSCRIBE_RESPONSE_ADDED,
+} from './gql'
+
+import { LatestResponsesPrivate } from './__generated__/LatestResponsesPrivate'
+import {
+  LatestResponsesPublic,
+  LatestResponsesPublic_article_responses_edges_node,
+} from './__generated__/LatestResponsesPublic'
 import {
   ResponseAdded,
   ResponseAdded_nodeEdited_Article,
@@ -45,86 +51,8 @@ import {
 
 const RESPONSES_COUNT = 15
 
-const LatestResponsesArticle = gql`
-  fragment LatestResponsesArticle on Article {
-    id
-    responseCount
-    responses(
-      input: {
-        after: $after
-        before: $before
-        first: $first
-        includeAfter: $includeAfter
-        includeBefore: $includeBefore
-        articleOnly: $articleOnly
-      }
-    ) {
-      totalCount
-      pageInfo {
-        startCursor
-        endCursor
-        hasNextPage
-      }
-      edges {
-        node {
-          ... on Article {
-            ...ResponseArticleArticle
-          }
-          ... on Comment {
-            ...ResponseCommentCommentPublic
-            ...ResponseCommentCommentPrivate
-          }
-        }
-      }
-    }
-  }
-  ${ResponseArticle.fragments.article}
-  ${ResponseComment.fragments.comment.public}
-  ${ResponseComment.fragments.comment.private}
-`
-
-const LATEST_RESPONSES = gql`
-  query LatestResponses(
-    $mediaHash: String
-    $before: String
-    $after: String
-    $first: Int = 8
-    $includeAfter: Boolean
-    $includeBefore: Boolean
-    $articleOnly: Boolean
-  ) {
-    article(input: { mediaHash: $mediaHash }) {
-      id
-      mediaHash
-      live
-      ...LatestResponsesArticle
-    }
-  }
-  ${LatestResponsesArticle}
-`
-
-const SUBSCRIBE_RESPONSE_ADDED = gql`
-  subscription ResponseAdded(
-    $id: ID!
-    $before: String
-    $after: String
-    $first: Int
-    $includeAfter: Boolean
-    $includeBefore: Boolean
-    $articleOnly: Boolean
-  ) {
-    nodeEdited(input: { id: $id }) {
-      id
-      ... on Article {
-        id
-        ...LatestResponsesArticle
-      }
-    }
-  }
-  ${LatestResponsesArticle}
-`
-
 const LatestResponses = () => {
+  const viewer = useContext(ViewerContext)
   const isMediumUp = useResponsive('md-up')
   const router = useRouter()
   const mediaHash = getQuery({ router, key: 'mediaHash' })
@@ -147,6 +75,7 @@ const LatestResponses = () => {
     descendantId = fragment.split('-')[1]
   }
 
+  // public data
   const {
     data,
     loading,
@@ -154,7 +83,7 @@ const LatestResponses = () => {
     fetchMore,
     subscribeToMore,
     refetch,
-  } = useQuery<LatestResponsesType>(LATEST_RESPONSES, {
+  } = useQuery<LatestResponsesPublic>(LATEST_RESPONSES_PUBLIC, {
     variables: {
       mediaHash,
       first: RESPONSES_COUNT,
@@ -166,6 +95,9 @@ const LatestResponses = () => {
   const article = data?.article
   const { edges, pageInfo } = (article && article.responses) || {}
   const articleId = article && article.id
+  const publicResponses = filterResponses(
+    (edges || []).map(({ node }) => node)
+  ) as LatestResponsesPublic_article_responses_edges_node[]
 
   const loadMore = (params?: { before: string }) => {
     const loadBefore = (params && params.before) || null
@@ -232,9 +164,22 @@ const LatestResponses = () => {
       },
     })
 
-  const responses = filterResponses(
-    (edges || []).map(({ node }) => node)
-  ) as LatestResponses_article_responses_edges_node[]
+  // private data
+  const responseIds = publicResponses.map((node) => node.id)
+  const [fetchPrivate, { data: privateData }] = useLazyQuery<
+    LatestResponsesPrivate
+  >(LATEST_RESPONSES_PRIVATE)
+  useEffect(() => {
+    if (!viewer.id) {
+      return
+    }
+    fetchPrivate({ variables: { ids: responseIds } })
+  }, [viewer.id, responseIds.join(',')])
+
+  // merge data
+  const responses = _merge([], publicResponses, privateData?.nodes)
+
+  console.log({ privateData, publicResponses, responses })
 
   // real time update with websocket
   useEffect(() => {
