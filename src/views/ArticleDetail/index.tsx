@@ -71,14 +71,16 @@ const ARTICLE_DETAIL_PUBLIC = gql`
       ...RelatedArticles
       ...StateArticle
       ...FingerprintArticle
+      ...ToolbarArticlePublic
     }
   }
-  ${UserDigest.Rich.fragments.user.public}
   ${Content.fragments.article}
   ${TagList.fragments.article}
   ${RelatedArticles.fragments.article}
   ${State.fragments.article}
   ${FingerprintButton.fragments.article}
+  ${UserDigest.Rich.fragments.user.public}
+  ${Toolbar.fragments.article.public}
 `
 
 const ARTICLE_DETAIL_PRIVATE = gql`
@@ -88,9 +90,11 @@ const ARTICLE_DETAIL_PRIVATE = gql`
       author {
         ...UserDigestRichUserPrivate
       }
+      ...ToolbarArticlePrivate
     }
   }
   ${UserDigest.Rich.fragments.user.private}
+  ${Toolbar.fragments.article.private}
 `
 
 const ARTICLE_TRANSLATION = gql`
@@ -356,7 +360,7 @@ const ArticleDetail = () => {
           )}
         </section>
 
-        <Toolbar mediaHash={mediaHash} />
+        <Toolbar article={article} />
 
         {shouldShowWall && (
           <>

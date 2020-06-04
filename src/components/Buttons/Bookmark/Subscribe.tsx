@@ -20,7 +20,7 @@ import { ToggleSubscribeArticle } from '~/components/GQL/mutations/__generated__
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 
 interface SubscribeProps {
-  articleId: string
+  articleId?: string
   size?: Extract<IconSize, 'md-s'>
   disabled?: boolean
   inCard: boolean
@@ -32,13 +32,15 @@ const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
     TOGGLE_SUBSCRIBE_ARTICLE,
     {
       variables: { id: articleId },
-      optimisticResponse: {
-        toggleSubscribeArticle: {
-          id: articleId,
-          subscribed: true,
-          __typename: 'Article',
-        },
-      },
+      optimisticResponse: articleId
+        ? {
+            toggleSubscribeArticle: {
+              id: articleId,
+              subscribed: true,
+              __typename: 'Article',
+            },
+          }
+        : undefined,
     }
   )
   const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {

@@ -8,19 +8,21 @@ import UNBLOCK_USER from '~/components/GQL/mutations/unblockUser'
 import { ADD_TOAST } from '~/common/enums'
 
 import { UnblockUser } from '~/components/GQL/mutations/__generated__/UnblockUser'
-import { UnblockUserButtonUser } from './__generated__/UnblockUserButtonUser'
+import { UnblockUserButtonUserPrivate } from './__generated__/UnblockUserButtonUserPrivate'
 
 interface UnblockUserButtonProps {
-  user: Partial<UnblockUserButtonUser>
+  user: Partial<UnblockUserButtonUserPrivate>
 }
 
 const fragments = {
-  user: gql`
-    fragment UnblockUserButtonUser on User {
-      id
-      isBlocked
-    }
-  `,
+  user: {
+    private: gql`
+      fragment UnblockUserButtonUserPrivate on User {
+        id
+        isBlocked
+      }
+    `,
+  },
 }
 
 export const UnblockUserButton = ({ user }: UnblockUserButtonProps) => {

@@ -56,13 +56,13 @@ const fragments = {
     private: gql`
       fragment UserDigestRichUserPrivate on User {
         id
-        ...FollowStateUser
-        ...FollowButtonUser
-        ...UnblockUserButtonUser
+        ...FollowStateUserPrivate
+        ...FollowButtonUserPrivate
+        ...UnblockUserButtonUserPrivate
       }
-      ${FollowButton.State.fragments.user}
-      ${FollowButton.fragments.user}
-      ${UnblockUserButton.fragments.user}
+      ${FollowButton.State.fragments.user.private}
+      ${FollowButton.fragments.user.private}
+      ${UnblockUserButton.fragments.user.private}
     `,
   },
 }

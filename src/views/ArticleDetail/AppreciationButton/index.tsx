@@ -22,21 +22,34 @@ import SetupLikerIdAppreciateButton from './SetupLikerIdAppreciateButton'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import { AppreciateArticle } from './__generated__/AppreciateArticle'
-import { AppreciationButtonArticle } from './__generated__/AppreciationButtonArticle'
+import { AppreciationButtonArticlePrivate } from './__generated__/AppreciationButtonArticlePrivate'
+import { AppreciationButtonArticlePublic } from './__generated__/AppreciationButtonArticlePublic'
+
+interface AppreciationButtonProps {
+  article: AppreciationButtonArticlePublic &
+    Partial<AppreciationButtonArticlePrivate>
+}
 
 const fragments = {
-  article: gql`
-    fragment AppreciationButtonArticle on Article {
-      id
-      author {
+  article: {
+    public: gql`
+      fragment AppreciationButtonArticlePublic on Article {
         id
+        author {
+          id
+        }
+        appreciationsReceivedTotal
+        appreciateLimit
       }
-      appreciationsReceivedTotal
-      hasAppreciate
-      appreciateLimit
-      appreciateLeft
-    }
-  `,
+    `,
+    private: gql`
+      fragment AppreciationButtonArticlePrivate on Article {
+        id
+        hasAppreciate
+        appreciateLeft
+      }
+    `,
+  },
 }
 
 const APPRECIATE_ARTICLE = gql`
@@ -52,11 +65,7 @@ const APPRECIATE_ARTICLE = gql`
   ${Appreciators.fragments.article}
 `
 
-const AppreciationButton = ({
-  article,
-}: {
-  article: AppreciationButtonArticle
-}) => {
+const AppreciationButton = ({ article }: AppreciationButtonProps) => {
   const viewer = useContext(ViewerContext)
   const { token, refreshToken } = useContext(ReCaptchaContext)
 
@@ -68,7 +77,7 @@ const AppreciationButton = ({
   const [amount, setAmount] = useState(0)
   const [sendAppreciation] = useMutation<AppreciateArticle>(APPRECIATE_ARTICLE)
   const limit = article.appreciateLimit
-  const left = article.appreciateLeft - amount
+  const left = (article.appreciateLeft || 0) - amount
 
   const total = article.appreciationsReceivedTotal + amount
   const appreciatedCount = limit - left
