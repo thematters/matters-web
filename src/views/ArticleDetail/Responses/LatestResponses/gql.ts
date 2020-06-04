@@ -15,7 +15,6 @@ const LatestResponsesArticlePublic = gql`
         includeAfter: $includeAfter
         includeBefore: $includeBefore
         articleOnly: $articleOnly
-        includePrivate: $includePrivate
       }
     ) {
       totalCount
@@ -49,7 +48,6 @@ export const LATEST_RESPONSES_PUBLIC = gql`
     $includeAfter: Boolean
     $includeBefore: Boolean
     $articleOnly: Boolean
-    $includePrivate: Boolean
   ) {
     article(input: { mediaHash: $mediaHash }) {
       id

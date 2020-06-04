@@ -1,4 +1,5 @@
 import _get from 'lodash/get'
+import _merge from 'lodash/merge'
 import _set from 'lodash/set'
 import _uniqBy from 'lodash/uniqBy'
 
@@ -68,4 +69,28 @@ export const unshiftConnections = ({
     },
     edges: [...newEdges, ...oldEdges],
   })
+}
+
+/**
+ * Deep merge public and private nodes
+ *
+ */
+export const mergePrivateNodes = ({
+  publicNodes,
+  privateNodes,
+}: {
+  publicNodes: any[]
+  privateNodes: any[]
+}) => {
+  const nodes = publicNodes.map((publicNode) => {
+    for (const privateNode of privateNodes) {
+      if (privateNode.id === publicNode.id) {
+        _merge(publicNode, privateNode)
+        break
+      }
+    }
+    return publicNode
+  })
+
+  return nodes
 }

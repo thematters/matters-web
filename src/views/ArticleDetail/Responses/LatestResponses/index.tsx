@@ -2,7 +2,6 @@ import { useLazyQuery, useQuery } from '@apollo/react-hooks'
 import jump from 'jump.js'
 import _differenceBy from 'lodash/differenceBy'
 import _get from 'lodash/get'
-import _merge from 'lodash/merge'
 import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
 
@@ -27,6 +26,7 @@ import {
   filterResponses,
   getQuery,
   mergeConnections,
+  mergePrivateNodes,
   unshiftConnections,
 } from '~/common/utils'
 
@@ -99,11 +99,30 @@ const LatestResponses = () => {
     (edges || []).map(({ node }) => node)
   ) as LatestResponsesPublic_article_responses_edges_node[]
 
-  const loadMore = (params?: { before: string }) => {
+  // private data
+  const responseIds = publicResponses.map((node) => node.id)
+  const [fetchPrivate, { data: privateData }] = useLazyQuery<
+    LatestResponsesPrivate
+  >(LATEST_RESPONSES_PRIVATE)
+  useEffect(() => {
+    if (!viewer.id) {
+      return
+    }
+    fetchPrivate({ variables: { ids: responseIds } })
+  }, [viewer.id, mediaHash, responseIds.join(',')])
+
+  // merge data
+  const responses = mergePrivateNodes({
+    publicNodes: publicResponses,
+    privateNodes: privateData?.nodes || [],
+  })
+
+  // load more data
+  const loadMore = async (params?: { before: string }) => {
     const loadBefore = (params && params.before) || null
     const noLimit = loadBefore && pageInfo && pageInfo.endCursor
 
-    return fetchMore({
+    fetchMore({
       variables: {
         after: pageInfo && pageInfo.endCursor,
         before: loadBefore,
@@ -163,23 +182,6 @@ const LatestResponses = () => {
         return newResult
       },
     })
-
-  // private data
-  const responseIds = publicResponses.map((node) => node.id)
-  const [fetchPrivate, { data: privateData }] = useLazyQuery<
-    LatestResponsesPrivate
-  >(LATEST_RESPONSES_PRIVATE)
-  useEffect(() => {
-    if (!viewer.id) {
-      return
-    }
-    fetchPrivate({ variables: { ids: responseIds } })
-  }, [viewer.id, responseIds.join(',')])
-
-  // merge data
-  const responses = _merge([], publicResponses, privateData?.nodes)
-
-  console.log({ privateData, publicResponses, responses })
 
   // real time update with websocket
   useEffect(() => {

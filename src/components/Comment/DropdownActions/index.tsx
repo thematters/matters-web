@@ -79,8 +79,14 @@ const fragments = {
         id
         author {
           id
-          isBlocking
           ...BlockUserPrivate
+        }
+        article {
+          id
+          author {
+            id
+            isBlocking
+          }
         }
       }
       ${BlockUser.fragments.user.private}

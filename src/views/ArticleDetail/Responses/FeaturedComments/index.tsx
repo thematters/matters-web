@@ -19,7 +19,7 @@ import styles from '../styles.css'
 import {
   ArticleFeaturedComments,
   ArticleFeaturedComments_article_featuredComments_edges_node,
-} from '../__generated__/ArticleFeaturedComments'
+} from './__generated__/ArticleFeaturedComments'
 
 const FEATURED_COMMENTS = gql`
   query ArticleFeaturedComments(
