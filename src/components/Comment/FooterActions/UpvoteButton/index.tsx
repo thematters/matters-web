@@ -11,8 +11,8 @@ import { numAbbr } from '~/common/utils'
 
 import { UnvoteComment } from '~/components/GQL/mutations/__generated__/UnvoteComment'
 import { VoteComment } from '~/components/GQL/mutations/__generated__/VoteComment'
-import { UpvoteCommentPublic } from './__generated__/UpvoteCommentPublic'
 import { UpvoteCommentPrivate } from './__generated__/UpvoteCommentPrivate'
+import { UpvoteCommentPublic } from './__generated__/UpvoteCommentPublic'
 
 interface UpvoteButtonProps {
   comment: UpvoteCommentPublic & Partial<UpvoteCommentPrivate>

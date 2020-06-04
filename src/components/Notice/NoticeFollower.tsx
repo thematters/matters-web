@@ -24,8 +24,10 @@ NoticeFollower.fragments = {
   follower: gql`
     fragment NoticeFollower on User {
       ...UserDigestRichUserPublic
+      ...UserDigestRichUserPrivate
     }
     ${UserDigest.Rich.fragments.user.public}
+    ${UserDigest.Rich.fragments.user.private}
   `,
 }
 

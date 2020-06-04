@@ -31,6 +31,7 @@ const FEED_AUTHORS = gql`
             cursor
             node {
               ...UserDigestRichUserPublic
+              ...UserDigestRichUserPrivate
             }
           }
         }
@@ -38,6 +39,7 @@ const FEED_AUTHORS = gql`
     }
   }
   ${UserDigest.Rich.fragments.user.public}
+  ${UserDigest.Rich.fragments.user.private}
 `
 
 const FeedAuthors = () => {

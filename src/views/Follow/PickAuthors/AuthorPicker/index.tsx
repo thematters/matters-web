@@ -30,6 +30,7 @@ const AUTHOR_PICKER = gql`
             cursor
             node {
               ...UserDigestRichUserPublic
+              ...UserDigestRichUserPrivate
             }
           }
         }
@@ -37,6 +38,7 @@ const AUTHOR_PICKER = gql`
     }
   }
   ${UserDigest.Rich.fragments.user.public}
+  ${UserDigest.Rich.fragments.user.private}
 `
 
 export const AuthorPicker = ({ title }: { title: React.ReactNode }) => {

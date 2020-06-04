@@ -32,6 +32,7 @@ const ALL_AUTHORSS = gql`
             cursor
             node {
               ...UserDigestRichUserPublic
+              ...UserDigestRichUserPrivate
             }
           }
         }
@@ -39,6 +40,7 @@ const ALL_AUTHORSS = gql`
     }
   }
   ${UserDigest.Rich.fragments.user.public}
+  ${UserDigest.Rich.fragments.user.private}
 `
 
 const Authors = () => {

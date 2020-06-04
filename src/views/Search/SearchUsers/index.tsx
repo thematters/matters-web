@@ -30,12 +30,14 @@ const SEARCH_USERS = gql`
         node {
           ... on User {
             ...UserDigestRichUserPublic
+            ...UserDigestRichUserPrivate
           }
         }
       }
     }
   }
   ${UserDigest.Rich.fragments.user.public}
+  ${UserDigest.Rich.fragments.user.private}
 `
 
 const SearchUser = () => {
