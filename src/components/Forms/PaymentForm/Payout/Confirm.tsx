@@ -6,8 +6,10 @@ import { useContext, useRef } from 'react'
 import {
   Dialog,
   Form,
+  IconHelpMedium,
   LanguageContext,
   Spinner,
+  TextIcon,
   Tooltip,
   Translate,
 } from '~/components'
@@ -181,10 +183,17 @@ const BaseConfirm: React.FC<FormProps> = ({
                 <section>
                   <ConfirmTable.Row>
                     <ConfirmTable.Col>
-                      <Translate
-                        zh_hant="服務費 (20%)"
-                        zh_hans="服务费 (20%)"
-                      />
+                      <TextIcon
+                        icon={<IconHelpMedium />}
+                        size="xs"
+                        spacing="xxtight"
+                        textPlacement="left"
+                      >
+                        <Translate
+                          zh_hant="服務費 (20%)"
+                          zh_hans="服务费 (20%)"
+                        />
+                      </TextIcon>
                     </ConfirmTable.Col>
 
                     <ConfirmTable.Col>
