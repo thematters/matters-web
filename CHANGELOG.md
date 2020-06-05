@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.7.0] - 2020-06-05
+
+### Added
+
+- Lazy Loading #1159
+
+### Changed
+
+- Fix incorrect feeds #1146
+- Fix sharing title in draft detail #1148
+- Move lazy query variable to function call #1152
+- Update text & link #1153
+- Limit PinInput value in 1 char #1154
+- Move payment password setup after amount setting. #1155
+- Add one more step before open Like pay tab. #1156
+
 ## [3.6.0] - 2020-05-26
 
 ### Added
