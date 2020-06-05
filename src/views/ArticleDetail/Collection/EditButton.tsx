@@ -2,7 +2,15 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import _uniq from 'lodash/uniq'
 
-import { Button, ButtonProps, Icon, TextIcon, Translate } from '~/components'
+import {
+  Button,
+  ButtonProps,
+  IconEdit,
+  IconPen,
+  IconSpinner,
+  TextIcon,
+  Translate,
+} from '~/components'
 import { useMutation } from '~/components/GQL'
 import articleFragments from '~/components/GQL/fragments/article'
 
@@ -112,7 +120,7 @@ const EditButton = ({
           }}
         >
           <TextIcon
-            icon={<Icon.Edit size="sm" />}
+            icon={<IconEdit size="sm" />}
             color="grey"
             size="xs"
             weight="md"
@@ -136,7 +144,7 @@ const EditButton = ({
 
       <Button {...buttonProps} disabled={!!loading} onClick={onSave}>
         <TextIcon
-          icon={loading ? <Icon.Spinner size="xs" /> : <Icon.Pen size="xs" />}
+          icon={loading ? <IconSpinner size="xs" /> : <IconPen size="xs" />}
           color="grey"
           size="xs"
           weight="md"

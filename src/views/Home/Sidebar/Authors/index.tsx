@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 
 import {
   Button,
-  Icon,
+  IconReload,
   List,
   Spinner,
   TextIcon,
@@ -66,8 +66,8 @@ const Authors = () => {
             onClick={() => refetch()}
           >
             <TextIcon
-              icon={<Icon.Reload size="xs" />}
-              color="grey-dark"
+              icon={<IconReload size="xs" />}
+              color="grey"
               size="xs"
               weight="md"
             >

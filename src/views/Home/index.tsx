@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 
 import {
-  Icon,
+  IconLogo,
   Layout,
   LoginButton,
   SignUpButton,
@@ -35,7 +35,7 @@ const Home = () => {
             <>
               {hasLogo ? (
                 <section className="logo">
-                  <Icon.Logo />
+                  <IconLogo />
                 </section>
               ) : (
                 <Layout.Header.Title id="discover" />

@@ -7,10 +7,7 @@ import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { numRound } from '~/common/utils'
 
 import { AddCredit_addCredit_transaction as AddCreditTx } from '~/components/Forms/PaymentForm/AddCredit/__generated__/AddCredit'
-import {
-  PayTo_payTo as PayToResult,
-  PayTo_payTo_transaction as PayToTx,
-} from '~/components/GQL/mutations/__generated__/PayTo'
+import { PayTo_payTo_transaction as PayToTx } from '~/components/GQL/mutations/__generated__/PayTo'
 import { UserDonationRecipient } from './__generated__/UserDonationRecipient'
 
 type Step =
@@ -28,10 +25,15 @@ type Step =
   | 'setAmount'
   | 'setPaymentPassword'
 
-export type SetAmountCallbackValues = {
+interface SetAmountCallbackValues {
   amount: number
   currency: CURRENCY
-} & Partial<Omit<PayToResult, '__typename'>>
+}
+
+interface SetAmountOpenTabCallbackValues {
+  window: Window
+  transaction: PayToTx
+}
 
 interface AddCreditData {
   client_secret: string
@@ -97,25 +99,25 @@ const BaseDonationDialog = ({
     setShowDialog(true)
   }
 
-  const close = () => setShowDialog(false)
+  const close = () => {
+    setCurrency(CURRENCY.HKD)
+    setShowDialog(false)
+  }
 
   const setAmountCallback = (values: SetAmountCallbackValues) => {
     setAmount(values.amount)
     setCurrency(values.currency)
-
-    switch (values.currency) {
-      case CURRENCY.LIKE:
-        const redirectWindow = window.open(values.redirectUrl, '_blank')
-        if (redirectWindow) {
-          setWindowRef(redirectWindow)
-          setPayToTx(values.transaction)
-          setStep('processing')
-        }
-        break
-      case CURRENCY.HKD:
-        setStep('confirm')
-        break
+    if (values.currency === CURRENCY.HKD) {
+      setStep(
+        viewer.status?.hasPaymentPassword ? 'confirm' : 'setPaymentPassword'
+      )
     }
+  }
+
+  const setAmountOpenTabCallback = (values: SetAmountOpenTabCallbackValues) => {
+    setWindowRef(values.window)
+    setPayToTx(values.transaction)
+    setStep('processing')
   }
 
   const switchToLike = () => {
@@ -126,9 +128,7 @@ const BaseDonationDialog = ({
 
   const switchToAddCredit = () => {
     setAddCreditData(baseAddCreditData)
-    setStep(
-      viewer.status?.hasPaymentPassword ? 'addCredit' : 'setPaymentPassword'
-    )
+    setStep('addCredit')
   }
 
   const addCreditCallback = ({ transaction, client_secret }: any) => {
@@ -191,8 +191,9 @@ const BaseDonationDialog = ({
           <PaymentForm.PayTo.SetAmount
             close={close}
             defaultCurrency={currency}
-            submitCallback={setAmountCallback}
+            openTabCallback={setAmountOpenTabCallback}
             recipient={recipient}
+            submitCallback={setAmountCallback}
             targetId={targetId}
           />
         )}
@@ -227,13 +228,11 @@ const BaseDonationDialog = ({
           />
         )}
 
-        {/* below steps for add credit */}
-
         {isSetPaymentPassword && (
-          <PaymentForm.SetPassword
-            submitCallback={() => setStep('addCredit')}
-          />
+          <PaymentForm.SetPassword submitCallback={() => setStep('confirm')} />
         )}
+
+        {/* below steps for add credit */}
 
         {isAddCredit && (
           <PaymentForm.AddCredit.Confirm submitCallback={addCreditCallback} />

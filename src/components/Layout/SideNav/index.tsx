@@ -5,7 +5,11 @@ import { useContext } from 'react'
 import {
   Dropdown,
   hidePopperOnClick,
-  Icon,
+  IconLogo,
+  IconLogoGraph,
+  IconNavHome,
+  IconNavHomeActive,
+  IconNavSearch,
   Menu,
   Translate,
   useResponsive,
@@ -14,6 +18,7 @@ import {
 } from '~/components'
 
 import { PATHS, TEXT, Z_INDEX } from '~/common/enums'
+import { getQuery } from '~/common/utils'
 
 import MeAvatar from '../MeAvatar'
 import NavMenu from '../NavMenu'
@@ -26,6 +31,7 @@ const SideNav = () => {
   const isLargeUp = useResponsive('lg-up')
   const router = useRouter()
   const viewer = useContext(ViewerContext)
+  const userName = getQuery({ router, key: 'userName' })
   const viewerUserName = viewer.userName || ''
 
   const isInHome = router.pathname === PATHS.HOME
@@ -34,8 +40,7 @@ const SideNav = () => {
   const isInSearch = router.pathname === PATHS.SEARCH
   const isInMe =
     router.pathname !== PATHS.ME_NOTIFICATIONS &&
-    (router.pathname.indexOf('/me') >= 0 ||
-      router.query.userName === viewerUserName)
+    (router.pathname.indexOf('/me') >= 0 || userName === viewerUserName)
   const isInDraftDetail = router.pathname === PATHS.ME_DRAFT_DETAIL
 
   return (
@@ -43,7 +48,7 @@ const SideNav = () => {
       <section className="logo">
         <Link href={PATHS.HOME}>
           <a aria-label={TEXT.zh_hant.discover}>
-            {isMediumUp ? <Icon.Logo /> : <Icon.LogoGraph />}
+            {isMediumUp ? <IconLogo /> : <IconLogoGraph />}
           </a>
         </Link>
       </section>
@@ -51,8 +56,8 @@ const SideNav = () => {
       <ul>
         <NavListItem
           name={<Translate id="discover" />}
-          icon={<Icon.NavHome size="md" />}
-          activeIcon={<Icon.NavHomeActive size="md" />}
+          icon={<IconNavHome size="md" />}
+          activeIcon={<IconNavHomeActive size="md" />}
           active={isInHome}
           isMediumUp={isMediumUp}
           href={PATHS.HOME}
@@ -81,8 +86,8 @@ const SideNav = () => {
         {!isLargeUp && (
           <NavListItem
             name={<Translate id="search" />}
-            icon={<Icon.NavSearch size="md" />}
-            activeIcon={<Icon.NavSearch size="md" color="green" />}
+            icon={<IconNavSearch size="md" />}
+            activeIcon={<IconNavSearch size="md" color="green" />}
             active={isInSearch}
             isMediumUp={isMediumUp}
             href={PATHS.SEARCH}
@@ -99,14 +104,10 @@ const SideNav = () => {
               </section>
             }
             placement="right-start"
-            distance={24}
-            offset={-24}
-            boundary="viewport"
             appendTo={process.browser ? document.body : undefined}
+            offset={[-24, 24]}
             zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
-            onShown={(i) => {
-              hidePopperOnClick(i)
-            }}
+            onShown={hidePopperOnClick}
           >
             <NavListItem
               name={<Translate zh_hant="我的" zh_hans="我的" />}

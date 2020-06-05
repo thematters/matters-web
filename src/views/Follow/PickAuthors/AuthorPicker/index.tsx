@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 
 import {
   Button,
-  Icon,
+  IconReload,
   List,
   PageHeader,
   Spinner,
@@ -59,7 +59,7 @@ export const AuthorPicker = ({ title }: { title: React.ReactNode }) => {
             bgActiveColor="grey-lighter"
             onClick={() => refetch()}
           >
-            <TextIcon icon={<Icon.Reload size="sm" />} color="grey">
+            <TextIcon icon={<IconReload size="sm" />} color="grey">
               <Translate id="shuffle" />
             </TextIcon>
           </Button>

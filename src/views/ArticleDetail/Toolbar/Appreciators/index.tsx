@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import { AppreciatorsDialog, Translate } from '~/components'
 import { Avatar } from '~/components/Avatar'
 
-import { TEXT } from '~/common/enums'
+import { IMAGE_PIXEL, TEXT } from '~/common/enums'
 import { numAbbr } from '~/common/utils'
 
 import styles from './styles.css'
@@ -55,6 +55,7 @@ const Appreciators = ({ article }: { article: AppreciatorsArticle }) => {
           type="button"
           className="container"
           onClick={open}
+          disabled={totalReceivedCount <= 0}
           aria-label={TEXT.zh_hant.viewAppreciators}
           aria-haspopup="true"
         >
@@ -75,7 +76,7 @@ const Appreciators = ({ article }: { article: AppreciatorsArticle }) => {
             {appreciators.map((user, index) => (
               <Avatar
                 user={user || undefined}
-                src={user ? undefined : 'data:image/gif;base64,'}
+                src={user ? undefined : IMAGE_PIXEL}
                 size="sm"
                 key={index}
               />

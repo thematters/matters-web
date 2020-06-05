@@ -18,7 +18,10 @@
     width: var(--article-digest-sidebar-cover-width);
     height: var(--article-digest-sidebar-cover-width);
 
-    border-radius: var(--spacing-xx-tight);
+    & img {
+      @mixin object-fit-cover;
+      border-radius: var(--spacing-xx-tight);
+    }
   }
 
   &.has-background {

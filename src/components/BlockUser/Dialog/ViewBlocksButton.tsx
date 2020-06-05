@@ -1,4 +1,10 @@
-import { Button, Icon, TextIcon, Translate, useResponsive } from '~/components'
+import {
+  Button,
+  IconRight,
+  TextIcon,
+  Translate,
+  useResponsive,
+} from '~/components'
 
 import { PATHS } from '~/common/enums'
 
@@ -12,7 +18,7 @@ const ViewBlocksButton = () => {
       spacing={[0, 0]}
     >
       <TextIcon
-        icon={<Icon.Right size="xs" color="green" />}
+        icon={<IconRight size="xs" color="green" />}
         textPlacement="left"
       >
         {isMediumUp ? (

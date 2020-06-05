@@ -1,9 +1,9 @@
-import { Icon, Menu, TextIcon, Translate } from '~/components'
+import { IconCollapse, Menu, TextIcon, Translate } from '~/components'
 
 const CollapseCommentButton = ({ openDialog }: { openDialog: () => void }) => {
   return (
     <Menu.Item onClick={openDialog}>
-      <TextIcon icon={<Icon.Collapse size="md" />} size="md" spacing="base">
+      <TextIcon icon={<IconCollapse size="md" />} size="md" spacing="base">
         <Translate id="collapseComment" />
       </TextIcon>
     </Menu.Item>

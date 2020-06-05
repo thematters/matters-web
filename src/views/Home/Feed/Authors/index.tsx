@@ -4,7 +4,7 @@ import _chunk from 'lodash/chunk'
 
 import {
   Button,
-  Icon,
+  IconReload,
   Slides,
   Spinner,
   TextIcon,
@@ -66,8 +66,8 @@ const FeedAuthors = () => {
           onClick={() => refetch()}
         >
           <TextIcon
-            icon={<Icon.Reload size="xs" />}
-            color="grey-dark"
+            icon={<IconReload size="xs" />}
+            color="grey"
             size="xs"
             weight="md"
           >

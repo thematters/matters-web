@@ -16,7 +16,7 @@ import withApollo from 'next-with-apollo'
 
 import { AGENT_HASH_PREFIX, STORE_KEY_AGENT_HASH } from '~/common/enums'
 import introspectionQueryResultData from '~/common/gql/fragmentTypes.json'
-import { initAgentHash, randomString } from '~/common/utils'
+import { randomString } from '~/common/utils'
 
 import resolvers from './resolvers'
 import typeDefs from './types'
@@ -123,24 +123,19 @@ const sentryLink = setContext((_, { headers }) => {
 })
 
 const agentHashLink = setContext((_, { headers }) => {
-  let agentHash: string | null = null
+  let hash: string | null = null
 
   if (typeof window !== 'undefined') {
-    const storedAgentHash = window.localStorage.getItem(STORE_KEY_AGENT_HASH)
-    agentHash = storedAgentHash
-
-    if (!agentHash || !agentHash.startsWith(AGENT_HASH_PREFIX)) {
-      agentHash = initAgentHash(window)
-    }
-    if (agentHash && storedAgentHash !== agentHash) {
-      window.localStorage.setItem(STORE_KEY_AGENT_HASH, agentHash)
+    const stored = window.localStorage.getItem(STORE_KEY_AGENT_HASH)
+    if (stored && stored.startsWith(AGENT_HASH_PREFIX)) {
+      hash = stored
     }
   }
 
   return {
     headers: {
       ...headers,
-      ...(agentHash ? { 'x-user-agent-hash': agentHash } : {}),
+      ...(hash ? { 'x-user-agent-hash': hash } : {}),
     },
   }
 })

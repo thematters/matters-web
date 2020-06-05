@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { useContext } from 'react'
 
-import { Head, Icon, LanguageContext } from '~/components'
+import { Head, IconLogo, LanguageContext } from '~/components'
 import Footer from '~/components/Standalone/Footer'
 
 import { PATHS, TEXT } from '~/common/enums'
@@ -35,7 +35,7 @@ const Migration = () => {
         <section className="l-row">
           <Link href={PATHS.HOME}>
             <a className="logo" aria-label={TEXT.zh_hant.discover}>
-              <Icon.Logo />
+              <IconLogo />
             </a>
           </Link>
         </section>

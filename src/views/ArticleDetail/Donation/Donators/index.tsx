@@ -1,11 +1,11 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { Spinner, Translate } from '~/components'
+import { Translate } from '~/components'
 import { Avatar } from '~/components/Avatar'
 import { useEventListener } from '~/components/Hook'
 
-import { REFETCH_DONATORS } from '~/common/enums'
+import { IMAGE_PIXEL, REFETCH_DONATORS } from '~/common/enums'
 import { numAbbr } from '~/common/utils'
 
 import styles from './styles.css'
@@ -44,7 +44,7 @@ const Donators = ({ mediaHash }: { mediaHash: string }) => {
   useEventListener(REFETCH_DONATORS, refetch)
 
   if (loading) {
-    return <Spinner />
+    return null
   }
 
   if (!data || !data.article) {
@@ -71,7 +71,7 @@ const Donators = ({ mediaHash }: { mediaHash: string }) => {
         {donators.map((user, index) => (
           <Avatar
             user={user || undefined}
-            src={user ? undefined : 'data:image/gif;base64,'}
+            src={user ? undefined : IMAGE_PIXEL}
             size="sm"
             key={index}
           />

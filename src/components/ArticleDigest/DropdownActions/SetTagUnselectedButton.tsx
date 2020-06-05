@@ -3,10 +3,11 @@ import _filter from 'lodash/filter'
 import _get from 'lodash/get'
 import { useRouter } from 'next/router'
 
-import { Icon, Menu, TextIcon, Translate } from '~/components'
+import { IconUnPinMedium, Menu, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import { ADD_TOAST } from '~/common/enums'
+import { getQuery } from '~/common/utils'
 
 import {
   TagArticles,
@@ -40,12 +41,13 @@ const SetTagUnselectedButton = ({
   article: SetTagUnselectedButtonArticle
 }) => {
   const router = useRouter()
+  const tagId = getQuery({ router, key: 'tagId' })
   const [update] = useMutation<SetTagUnselected>(SET_TAG_UNSELECTED, {
-    variables: { id: router.query.id, articles: [article.id] },
+    variables: { id: tagId, articles: [article.id] },
     update: (cache) => {
       try {
         const query = require('~/components/GQL/queries/tagArticles').default
-        const variables = { id: router.query.id, selected: true }
+        const variables = { id: tagId, selected: true }
         const data = cache.readQuery<TagArticles>({ query, variables })
         const node = _get(data, 'node', {}) as TagArticles_node_Tag
         if (
@@ -98,7 +100,7 @@ const SetTagUnselectedButton = ({
         await update()
       }}
     >
-      <TextIcon icon={<Icon.UnPinMedium size="md" />} size="md" spacing="base">
+      <TextIcon icon={<IconUnPinMedium size="md" />} size="md" spacing="base">
         <Translate zh_hant="取消精選" zh_hans="取消精选" />
       </TextIcon>
     </Menu.Item>

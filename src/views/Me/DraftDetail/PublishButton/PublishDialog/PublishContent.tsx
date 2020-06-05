@@ -26,7 +26,7 @@ const PUBLISH_ARTICLE = gql`
 
 const PublishContent: React.FC<PublishContentProps> = ({ closeDialog }) => {
   const router = useRouter()
-  const id = getQuery({ router, key: 'id' })
+  const id = getQuery({ router, key: 'draftId' })
   const [publish] = useMutation<PublishArticle>(PUBLISH_ARTICLE, {
     optimisticResponse: {
       publishArticle: {

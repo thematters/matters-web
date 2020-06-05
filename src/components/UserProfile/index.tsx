@@ -87,6 +87,7 @@ export const UserProfile = () => {
   const isSmallUp = useResponsive('sm-up')
   const router = useRouter()
   const viewer = useContext(ViewerContext)
+
   const userName = getQuery({ router, key: 'userName' })
   const isMe = !userName || viewer.userName === userName
   const { data, loading } = useQuery<MeProfileUser | UserProfileUser>(

@@ -29,17 +29,23 @@ import styles from './styles.css'
 import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
 import {
   PayTo as PayToMutate,
-  PayTo_payTo as PayToResult,
+  PayTo_payTo_transaction as PayToTx,
 } from '~/components/GQL/mutations/__generated__/PayTo'
 
-type SetAmountCallbackValues = {
+interface SetAmountCallbackValues {
   amount: number
   currency: CURRENCY
-} & Partial<Omit<PayToResult, '__typename'>>
+}
+
+interface SetAmountOpenTabCallbackValues {
+  window: Window
+  transaction: PayToTx
+}
 
 interface FormProps {
   close: () => void
   defaultCurrency?: CURRENCY
+  openTabCallback: (values: SetAmountOpenTabCallbackValues) => void
   recipient: UserDonationRecipient
   submitCallback: (values: SetAmountCallbackValues) => void
   targetId: string
@@ -117,17 +123,23 @@ const NoLikerIdButton = ({
 const SetAmount: React.FC<FormProps> = ({
   close,
   defaultCurrency,
+  openTabCallback,
   recipient,
   submitCallback,
   targetId,
 }) => {
-  const defaultHKDAmount = 5
+  const defaultHKDAmount = 10
   const defaultLikeAmount = 160
   const formId = 'pay-to-set-amount-form'
 
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
+
   const [fixed, setFixed] = useState<boolean>(true)
+  const [locked, setLocked] = useState<boolean>(false)
+  const [tabUrl, setTabUrl] = useState('')
+  const [tx, setTx] = useState<PayToTx>()
+
   const [payTo] = useMutation<PayToMutate>(PAY_TO)
   const inputRef: React.RefObject<any> | null = useRef(null)
 
@@ -152,31 +164,27 @@ const SetAmount: React.FC<FormProps> = ({
       }),
     onSubmit: async ({ amount, currency }, { setSubmitting }) => {
       try {
-        switch (currency) {
-          case CURRENCY.LIKE:
-            const result = await payTo({
-              variables: {
-                amount,
-                currency,
-                purpose: 'donation',
-                recipientId: recipient.id,
-                targetId,
-              },
-            })
-
-            const redirectUrl = result?.data?.payTo.redirectUrl
-            const transaction = result?.data?.payTo.transaction
-            if (!redirectUrl || !transaction) {
-              throw new Error()
-            }
-            setSubmitting(false)
-            submitCallback({ amount, currency, redirectUrl, transaction })
-            break
-          case CURRENCY.HKD:
-            setSubmitting(false)
-            submitCallback({ amount, currency })
-            break
+        if (currency === CURRENCY.LIKE) {
+          const result = await payTo({
+            variables: {
+              amount,
+              currency,
+              purpose: 'donation',
+              recipientId: recipient.id,
+              targetId,
+            },
+          })
+          const redirectUrl = result?.data?.payTo.redirectUrl
+          const transaction = result?.data?.payTo.transaction
+          if (!redirectUrl || !transaction) {
+            throw new Error()
+          }
+          setLocked(true)
+          setTabUrl(redirectUrl)
+          setTx(transaction)
         }
+        setSubmitting(false)
+        submitCallback({ amount, currency })
       } catch (error) {
         setSubmitting(false)
       }
@@ -196,6 +204,7 @@ const SetAmount: React.FC<FormProps> = ({
       <Form.CurrencyRadioInput
         isLike={isLike}
         name="currency"
+        disabled={locked}
         value={values.currency}
         error={touched.currency && errors.currency}
         onBlur={handleBlur}
@@ -218,6 +227,7 @@ const SetAmount: React.FC<FormProps> = ({
         <Form.AmountRadioInput
           currency={values.currency}
           name="amount"
+          disabled={locked}
           value={values.amount}
           error={touched.amount && errors.amount}
           onBlur={handleBlur}
@@ -233,6 +243,7 @@ const SetAmount: React.FC<FormProps> = ({
           autoFocus
           required
           className={isHKD ? 'red-style' : undefined}
+          disabled={locked}
           fixedPlaceholder={values.currency}
           name="amount"
           min={0}
@@ -259,6 +270,7 @@ const SetAmount: React.FC<FormProps> = ({
       {canProcess && (
         <section className="set-amount-other">
           <Button
+            disabled={locked}
             textColor={color}
             onClick={() => {
               // reset default fixed amount
@@ -303,7 +315,7 @@ const SetAmount: React.FC<FormProps> = ({
       </Dialog.Content>
 
       <Dialog.Footer>
-        {canProcess && (
+        {canProcess && !locked && (
           <Dialog.Footer.Button
             type="submit"
             form={formId}
@@ -322,6 +334,22 @@ const SetAmount: React.FC<FormProps> = ({
             close={close}
             setFieldValue={setFieldValue}
           />
+        )}
+        {locked && (
+          <Dialog.Footer.Button
+            type="button"
+            onClick={() => {
+              const payWindow = window.open(tabUrl, '_blank')
+              if (payWindow && tx) {
+                openTabCallback({ window: payWindow, transaction: tx })
+              }
+            }}
+          >
+            <Translate
+              zh_hant="開啟 LikeCoin 支付頁面"
+              zh_hans="开启 LikeCoin 支付页面"
+            />
+          </Dialog.Footer.Button>
         )}
       </Dialog.Footer>
     </>

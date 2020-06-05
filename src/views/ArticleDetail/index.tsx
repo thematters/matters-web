@@ -13,7 +13,7 @@ import {
   Error,
   FeaturesContext,
   Head,
-  Icon,
+  IconLive,
   Layout,
   PullToRefresh,
   Spinner,
@@ -32,7 +32,6 @@ import { getQuery } from '~/common/utils'
 
 import Collection from './Collection'
 import Content from './Content'
-import Donation from './Donation'
 import FingerprintButton from './FingerprintButton'
 import RelatedArticles from './RelatedArticles'
 import State from './State'
@@ -93,10 +92,12 @@ const ARTICLE_TRANSLATION = gql`
   }
 `
 
-// skip responses in SSR
 const DynamicResponse = dynamic(() => import('./Responses'), {
   ssr: false,
   loading: Spinner,
+})
+const DynamicDonation = dynamic(() => import('./Donation'), {
+  ssr: false,
 })
 
 const EmptyLayout: React.FC = ({ children }) => (
@@ -131,6 +132,7 @@ const ArticleDetail = () => {
   const features = useContext(FeaturesContext)
   const isLargeUp = useResponsive('lg-up')
   const [fixedWall, setFixedWall] = useState(false)
+  const [showResponses, setShowResponses] = useState(false)
 
   // ssr data
   const { data, loading, error } = useQuery<ArticleDetailType>(
@@ -148,7 +150,6 @@ const ArticleDetail = () => {
 
   // translation
   const [translate, setTranslate] = useState(false)
-
   const language = article?.language
   const viewerLanguage = viewer.settings.language
   const shouldTranslate = language && language !== viewerLanguage
@@ -159,6 +160,31 @@ const ArticleDetail = () => {
   ] = useLazyQuery<ArticleDetailSpaType>(ARTICLE_TRANSLATION)
   const titleTranslation = translationData?.article?.translation?.title
   const contentTranslation = translationData?.article?.translation?.content
+  const onTranslate = (newTranslate: boolean) => {
+    setTranslate(newTranslate)
+
+    if (!newTranslate) {
+      return
+    }
+
+    getTranslation({
+      variables: { mediaHash, language: viewerLanguage },
+    })
+
+    window.dispatchEvent(
+      new CustomEvent(ADD_TOAST, {
+        detail: {
+          color: 'green',
+          content: (
+            <Translate
+              zh_hant="正在翻譯為繁體中文"
+              zh_hans="正在翻译为简体中文"
+            />
+          ),
+        },
+      })
+    )
+  }
 
   if (loading) {
     return (
@@ -250,34 +276,13 @@ const ArticleDetail = () => {
                 {shouldTranslate && (
                   <TranslationButton
                     translate={translate}
-                    setTranslate={(newTranslate) => {
-                      setTranslate(newTranslate)
-
-                      if (newTranslate) {
-                        getTranslation({
-                          variables: { mediaHash, language: viewerLanguage },
-                        })
-                        window.dispatchEvent(
-                          new CustomEvent(ADD_TOAST, {
-                            detail: {
-                              color: 'green',
-                              content: (
-                                <Translate
-                                  zh_hant="正在翻譯為繁體中文"
-                                  zh_hans="正在翻译为简体中文"
-                                />
-                              ),
-                            },
-                          })
-                        )
-                      }
-                    }}
+                    setTranslate={onTranslate}
                   />
                 )}
               </section>
 
               <section className="right">
-                {article.live && <Icon.Live />}
+                {article.live && <IconLive />}
               </section>
             </section>
           </section>
@@ -288,7 +293,14 @@ const ArticleDetail = () => {
             translating={translating}
           />
 
-          {features.payment && <Donation mediaHash={mediaHash} />}
+          {features.payment && <DynamicDonation mediaHash={mediaHash} />}
+
+          <Waypoint
+            bottomOffset={-200}
+            onEnter={() => {
+              setShowResponses(true)
+            }}
+          />
 
           {(collectionCount > 0 || isAuthor) && (
             <section className="block">
@@ -304,7 +316,7 @@ const ArticleDetail = () => {
             }}
           />
 
-          {!shouldShowWall && (
+          {!shouldShowWall && showResponses && (
             <section className="block">
               <DynamicResponse />
             </section>

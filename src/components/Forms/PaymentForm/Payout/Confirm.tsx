@@ -3,7 +3,16 @@ import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useRef } from 'react'
 
-import { Dialog, Form, LanguageContext, Spinner, Translate } from '~/components'
+import {
+  Dialog,
+  Form,
+  IconHelpMedium,
+  LanguageContext,
+  Spinner,
+  TextIcon,
+  Tooltip,
+  Translate,
+} from '~/components'
 import { useMutation } from '~/components/GQL'
 import PAYOUT from '~/components/GQL/mutations/payout'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
@@ -11,6 +20,7 @@ import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
 import {
   PAYMENT_CURRENCY as CURRENCY,
   PAYMENT_MINIMAL_PAYOUT_AMOUNT,
+  Z_INDEX,
 } from '~/common/enums'
 import {
   calcMattersFee,
@@ -140,9 +150,7 @@ const BaseConfirm: React.FC<FormProps> = ({
               onBlur={handleBlur}
               onChange={(e) => {
                 const value = e.target.valueAsNumber || 0
-                const sanitizedAmount = Math.abs(
-                  Math.max(Math.floor(value), PAYMENT_MINIMAL_PAYOUT_AMOUNT.HKD)
-                )
+                const sanitizedAmount = Math.abs(Math.max(Math.floor(value), 0))
                 if (inputRef.current) {
                   inputRef.current.value = sanitizedAmount
                 }
@@ -162,15 +170,38 @@ const BaseConfirm: React.FC<FormProps> = ({
                 </ConfirmTable.Col>
               </ConfirmTable.Row>
 
-              <ConfirmTable.Row>
-                <ConfirmTable.Col>
-                  <Translate zh_hant="服務費 (15%)" zh_hans="服务费 (15%)" />
-                </ConfirmTable.Col>
+              <Tooltip
+                content={
+                  <Translate
+                    zh_hant="用於支付 Stripe 手續費，並支持 Matters 運營"
+                    zh_hans="用于支付 Stripe 手续费，并支持 Matters 运营"
+                  />
+                }
+                placement="top"
+                zIndex={Z_INDEX.OVER_DIALOG}
+              >
+                <section>
+                  <ConfirmTable.Row>
+                    <ConfirmTable.Col>
+                      <TextIcon
+                        icon={<IconHelpMedium />}
+                        size="xs"
+                        spacing="xxtight"
+                        textPlacement="left"
+                      >
+                        <Translate
+                          zh_hant="服務費 (20%)"
+                          zh_hans="服务费 (20%)"
+                        />
+                      </TextIcon>
+                    </ConfirmTable.Col>
 
-                <ConfirmTable.Col>
-                  - {currency} {toAmountString(fee)}
-                </ConfirmTable.Col>
-              </ConfirmTable.Row>
+                    <ConfirmTable.Col>
+                      - {currency} {toAmountString(fee)}
+                    </ConfirmTable.Col>
+                  </ConfirmTable.Row>
+                </section>
+              </Tooltip>
 
               <ConfirmTable.Row total>
                 <ConfirmTable.Col>
@@ -189,7 +220,7 @@ const BaseConfirm: React.FC<FormProps> = ({
               error={touched.password && errors.password}
               onChange={(value) => {
                 const shouldValidate = value.length === 6
-                setTouched({ password: true }, shouldValidate)
+                setTouched({ amount: true, password: true }, shouldValidate)
                 setFieldValue('password', value, shouldValidate)
               }}
             />

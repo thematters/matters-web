@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-import { Avatar, Dialog, Icon, Translate } from '~/components'
+import { Avatar, Dialog, IconHeart, Translate } from '~/components'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 
@@ -30,24 +30,18 @@ const Complete: React.FC<Props> = ({
   return (
     <Dialog.Content hasGrow>
       <section className="complete-avatar">
-        <Icon.Heart size="xl-m" color="red" />
+        <IconHeart size="xl-m" color="red" />
         <div className="complete-avatar-outline">
           <Avatar size="lg" user={recipient} />
         </div>
       </section>
 
       <section className="complete-message">
+        <b>{`${currency} ${amount} `}</b>
         <Translate zh_hant="支持" zh_hans="支持" />
         <b>{` ${recipient.displayName} `}</b>
-        <Translate zh_hant="的" zh_hans="的" />
-        <b>{` ${currency} ${amount} `}</b>
         <br />
-        <Translate zh_hant="已經支付成功" zh_hans="已经支付成功" />
-        <br />
-        <Translate
-          zh_hant="感謝你對創作者的支持"
-          zh_hans="感谢你对创作者的支持"
-        />
+        <Translate zh_hant="已經成功送出！" zh_hans="已经成功送出！" />
       </section>
       <style jsx>{styles}</style>
     </Dialog.Content>

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Button, Icon, TextIcon, Translate } from '~/components'
+import { Button, IconExpand, TextIcon, Translate } from '~/components'
 
 import contentCommentStyles from '~/common/styles/utils/content.comment.css'
 import { captureClicks } from '~/common/utils'
@@ -50,7 +50,7 @@ const Collapsed = ({
           }}
         >
           <TextIcon
-            icon={<Icon.Expand size="xs" />}
+            icon={<IconExpand size="xs" />}
             textPlacement="left"
             weight="normal"
             color="grey"

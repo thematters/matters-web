@@ -6,7 +6,7 @@ import {
   ArticleDigestFeed,
   EmptyArticle,
   Head,
-  Icon,
+  IconDotDivider,
   InfiniteScroll,
   List,
   Spinner,
@@ -41,7 +41,7 @@ const ArticleSummaryInfo = ({ user }: { user: UserArticles_user }) => {
       <span className="num">&nbsp;{articles}&nbsp;</span>
       <Translate zh_hant="篇作品" zh_hans="篇作品" />
 
-      <Icon.DotDivider />
+      <IconDotDivider />
 
       <Translate zh_hant="累積創作" zh_hans="累积创作" />
       <span className="num">&nbsp;{words}&nbsp;</span>

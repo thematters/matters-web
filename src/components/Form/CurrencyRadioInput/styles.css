@@ -43,4 +43,9 @@
     background: var(--color-white);
     color: var(--color-matters-green);
   }
+
+  &.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 }

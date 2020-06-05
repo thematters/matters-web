@@ -5,8 +5,12 @@
   flex-shrink: 0;
   display: inline-block;
 
-  border-radius: 50%;
-  background-color: var(--color-grey-lighter);
+  & img {
+    @mixin object-fit-cover;
+
+    border-radius: 50%;
+    background-color: var(--color-grey-lighter);
+  }
 }
 
 /**

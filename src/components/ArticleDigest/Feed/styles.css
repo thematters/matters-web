@@ -32,8 +32,13 @@ header {
 }
 
 .cover {
-  background-color: var(--color-grey-lighter);
-  border-radius: 0.25rem;
+  position: relative;
+
+  & img {
+    @mixin object-fit-cover;
+    border-radius: 0.25rem;
+    background-color: var(--color-grey-lighter);
+  }
 
   &::after {
     content: '';

@@ -8,6 +8,7 @@ export default {
       scheduledAt
       article {
         id
+        title
         slug
         mediaHash
         author {

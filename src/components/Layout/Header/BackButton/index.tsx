@@ -1,7 +1,13 @@
 import { useQuery } from '@apollo/react-hooks'
 import Router from 'next/router'
 
-import { Button, ButtonProps, Icon, useResponsive } from '~/components'
+import {
+  Button,
+  ButtonProps,
+  IconBackLarge,
+  IconLeftLarge,
+  useResponsive,
+} from '~/components'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
 import { PATHS, TEXT } from '~/common/enums'
@@ -43,7 +49,7 @@ export const BackButton: React.FC<BackButtonProps> = ({ mode, ...props }) => {
         onClick={onBack}
         {...props}
       >
-        <Icon.BackLarge size="lg" color="white" />
+        <IconBackLarge size="lg" color="white" />
       </Button>
     )
   }
@@ -56,14 +62,14 @@ export const BackButton: React.FC<BackButtonProps> = ({ mode, ...props }) => {
         onClick={onBack}
         {...props}
       >
-        <Icon.BackLarge size="lg" color="green" />
+        <IconBackLarge size="lg" color="green" />
       </Button>
     )
   }
 
   return (
     <Button aria-label={TEXT.zh_hant.back} onClick={onBack} {...props}>
-      <Icon.LeftLarge size="lg" />
+      <IconLeftLarge size="lg" />
     </Button>
   )
 }

@@ -1,7 +1,13 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { Form, Icon, TextIcon, Translate } from '~/components'
+import {
+  Form,
+  IconExternalLink,
+  IconSpinner,
+  TextIcon,
+  Translate,
+} from '~/components'
 
 import { GetStripeLoginUrl } from './__generated__/GetStripeLoginUrl'
 
@@ -32,9 +38,9 @@ const Buttons = () => {
       htmlTarget="_blank"
       right={
         loading ? (
-          <Icon.Spinner color="grey" size="sm" />
+          <IconSpinner color="grey" size="sm" />
         ) : (
-          <TextIcon icon={<Icon.ExternalLink color="grey" size="sm" />} />
+          <TextIcon icon={<IconExternalLink color="grey" size="sm" />} />
         )
       }
     />

@@ -1,6 +1,6 @@
 import VisuallyHidden from '@reach/visually-hidden'
 
-import { Icon } from '~/components'
+import { IconCheckActive, IconCheckInactive } from '~/components'
 import { TextIcon } from '~/components/TextIcon'
 
 import Field, { FieldProps } from '../Field'
@@ -31,9 +31,9 @@ const CheckBox: React.FC<CheckBoxProps> = ({
         <TextIcon
           icon={
             inputProps.checked ? (
-              <Icon.CheckActive size="md-s" />
+              <IconCheckActive size="md-s" />
             ) : (
-              <Icon.CheckInactive size="md-s" />
+              <IconCheckInactive size="md-s" />
             )
           }
           color="grey-dark"

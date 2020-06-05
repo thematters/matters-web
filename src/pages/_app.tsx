@@ -4,6 +4,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
 import gql from 'graphql-tag'
 import { AppProps } from 'next/app'
+import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 
@@ -18,11 +19,8 @@ import {
   ViewerProvider,
 } from '~/components'
 import { ClientUpdater } from '~/components/ClientUpdater'
-import { GlobalDialogs } from '~/components/GlobalDialogs'
 import { GlobalStyles } from '~/components/GlobalStyles'
 import { QueryError } from '~/components/GQL'
-import { ProgressBar } from '~/components/ProgressBar'
-import PushInitializer from '~/components/PushInitializer'
 import SplashScreen from '~/components/SplashScreen'
 
 import { PATHS } from '~/common/enums'
@@ -59,6 +57,25 @@ import('@sentry/browser').then((Sentry) => {
  * `<Root>` contains components that depend on viewer
  *
  */
+const DynamicPushInitializer = dynamic(
+  () => import('~/components/PushInitializer'),
+  {
+    ssr: false,
+  }
+)
+const DynamicProgressBar = dynamic(() => import('~/components/ProgressBar'), {
+  ssr: false,
+})
+const DynamicGlobalDialogs = dynamic(
+  () => import('~/components/GlobalDialogs'),
+  {
+    ssr: false,
+  }
+)
+const DynamicFingerprint = dynamic(() => import('~/components/Fingerprint'), {
+  ssr: false,
+})
+
 const Root = ({
   client,
   children,
@@ -101,12 +118,12 @@ const Root = ({
         <FeaturesProvider official={official}>
           {shouldApplyLayout ? <Layout>{children}</Layout> : children}
 
-          <GlobalDialogs />
           <Toast.Container />
-          <ProgressBar />
-
           <AnalyticsListener user={viewer || {}} />
-          <PushInitializer client={client} />
+          <DynamicGlobalDialogs />
+          <DynamicProgressBar />
+          <DynamicPushInitializer client={client} />
+          <DynamicFingerprint />
         </FeaturesProvider>
       </LanguageProvider>
     </ViewerProvider>

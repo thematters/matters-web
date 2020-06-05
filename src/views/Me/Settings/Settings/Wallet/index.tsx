@@ -4,7 +4,7 @@ import { useContext } from 'react'
 
 import {
   Form,
-  Icon,
+  IconSpinner,
   LikeCoinDialog,
   Translate,
   usePullToRefresh,
@@ -58,11 +58,11 @@ const WalletSettings = () => {
 
       <Form.List.Item
         title={<Translate zh_hant="我的創作價值" zh_hans="我的创作价值" />}
-        htmlHref="https://like.co/in"
+        htmlHref="https://like.co/in/matters/redirect"
         htmlTarget="_blank"
         leftAlign="top"
         right={
-          loading ? <Icon.Spinner color="grey-light" size="sm" /> : undefined
+          loading ? <IconSpinner color="grey-light" size="sm" /> : undefined
         }
         rightText={
           likerId ? (

@@ -26,9 +26,8 @@ const nextConfig = {
   env: {
     APP_VERSION: packageJson.version,
   },
-  useFileSystemPublicRoutes: false,
   typescript: {
-    ignoreDevErrors: true,
+    ignoreDevErrors: false,
   },
   distDir: 'build',
   crossOrigin: 'anonymous',
@@ -86,13 +85,6 @@ const nextConfig = {
     // })
 
     return config
-  },
-  exportPathMap: async function (defaultPathMap) {
-    return {
-      '/': {
-        page: '/_error',
-      },
-    }
   },
 }
 

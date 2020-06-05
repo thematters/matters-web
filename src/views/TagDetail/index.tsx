@@ -19,6 +19,7 @@ import {
 import { getErrorCodes, QueryError } from '~/components/GQL'
 
 import { ERROR_CODES } from '~/common/enums'
+import { getQuery } from '~/common/utils'
 
 import styles from './styles.css'
 import { TagDetailArticles } from './TagDetailArticles'
@@ -130,8 +131,9 @@ const TagDetail = ({ data }: { data: TagDetailType }) => {
 
 const TagDetailContainer = () => {
   const router = useRouter()
+  const tagId = getQuery({ router, key: 'tagId' })
   const { data, loading, error } = useQuery<TagDetailType>(TAG_DETAIL, {
-    variables: { id: router.query.id },
+    variables: { id: tagId },
   })
 
   if (loading) {
