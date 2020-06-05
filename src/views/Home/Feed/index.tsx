@@ -122,11 +122,12 @@ export const queries = {
 
 const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortByType }) => {
   const isLargeUp = useResponsive('lg-up')
+  const isHottestFeed = sortBy === 'hottest'
 
   const viewer = useContext(ViewerContext)
 
-  // switch feed type for user group b
-  if (viewer.info.group === 'b') {
+  // split out group b if in hottest feed and user is logged in
+  if (isHottestFeed && viewer.id && viewer.info.group === 'b') {
     queries.hottest = gql`
       query HottestFeed($after: String) {
         viewer {
@@ -141,8 +142,6 @@ const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortByType }) => {
       ${feedFragment}
     `
   }
-
-  const isHottestFeed = sortBy === 'hottest'
 
   const {
     data,
