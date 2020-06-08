@@ -73,15 +73,14 @@ export const unshiftConnections = ({
 
 /**
  * Deep merge public and private nodes
- *
  */
-export const mergePrivateNodes = ({
+export function mergePrivateNodes<MergedNodeType>({
   publicNodes,
   privateNodes,
 }: {
-  publicNodes: any[]
-  privateNodes: any[]
-}) => {
+  publicNodes: Array<{ id: string }>
+  privateNodes: Array<{ id: string }>
+}): MergedNodeType[] {
   const nodes = publicNodes.map((publicNode) => {
     for (const privateNode of privateNodes) {
       if (privateNode.id === publicNode.id) {
@@ -92,5 +91,5 @@ export const mergePrivateNodes = ({
     return publicNode
   })
 
-  return nodes
+  return nodes as any
 }

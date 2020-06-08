@@ -39,5 +39,6 @@ export const filterComment = (comment: Comment) => {
   return false
 }
 
-export const filterComments = (comments: Comment[]) =>
-  comments.filter(filterComment)
+export function filterComments<T>(comments: Comment[]): T[] {
+  return comments.filter(filterComment)
+}

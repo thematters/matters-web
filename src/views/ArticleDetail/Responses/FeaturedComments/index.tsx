@@ -1,6 +1,7 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
+import { useLazyQuery, useQuery } from '@apollo/react-hooks'
+import _flatten from 'lodash/flatten'
 import { useRouter } from 'next/router'
+import { useContext } from 'react'
 
 import {
   List,
@@ -8,63 +9,101 @@ import {
   Title,
   Translate,
   usePullToRefresh,
+  ViewerContext,
   ViewMoreButton,
 } from '~/components'
 
-import { filterComments, getQuery, mergeConnections } from '~/common/utils'
+import {
+  filterComments,
+  getQuery,
+  mergeConnections,
+  mergePrivateNodes,
+} from '~/common/utils'
 
 import ResponseComment from '../ResponseComment'
 import styles from '../styles.css'
+import { FEATURED_COMMENTS_PRIVATE, FEATURED_COMMENTS_PUBLIC } from './gql'
 
 import {
-  ArticleFeaturedComments,
-  ArticleFeaturedComments_article_featuredComments_edges_node,
-} from './__generated__/ArticleFeaturedComments'
+  FeaturedCommentsPrivate,
+  FeaturedCommentsPrivate_nodes_Comment_comments_edges_node,
+} from './__generated__/FeaturedCommentsPrivate'
+import {
+  FeaturedCommentsPublic,
+  FeaturedCommentsPublic_article_featuredComments_edges_node,
+} from './__generated__/FeaturedCommentsPublic'
 
-const FEATURED_COMMENTS = gql`
-  query ArticleFeaturedComments(
-    $mediaHash: String
-    $after: String
-    $first: Int = 10
-  ) {
-    article(input: { mediaHash: $mediaHash }) {
-      id
-      mediaHash
-      featuredComments(input: { first: $first, after: $after }) {
-        totalCount
-        pageInfo {
-          startCursor
-          endCursor
-          hasNextPage
-        }
-        edges {
-          node {
-            ...ResponseCommentCommentPublic
-            ...ResponseCommentCommentPrivate
-          }
-        }
-      }
-    }
-  }
-  ${ResponseComment.fragments.comment.public}
-  ${ResponseComment.fragments.comment.private}
-`
+type CommentPublic = FeaturedCommentsPublic_article_featuredComments_edges_node
+type CommentPrivate = FeaturedCommentsPrivate_nodes_Comment_comments_edges_node
+type Comment = CommentPublic & Partial<CommentPrivate>
 
 const FeaturedComments = () => {
+  const viewer = useContext(ViewerContext)
   const router = useRouter()
   const mediaHash = getQuery({ router, key: 'mediaHash' })
+
+  /**
+   * Data Fetching
+   */
+  // public data
   const { data, loading, fetchMore, refetch } = useQuery<
-    ArticleFeaturedComments
-  >(FEATURED_COMMENTS, {
+    FeaturedCommentsPublic
+  >(FEATURED_COMMENTS_PUBLIC, {
     variables: { mediaHash },
     notifyOnNetworkStatusChange: true,
   })
 
+  // private data
+  const [fetchPrivate, { data: privateData }] = useLazyQuery<
+    FeaturedCommentsPrivate
+  >(FEATURED_COMMENTS_PRIVATE)
+  const loadPrivate = (publicData: FeaturedCommentsPublic) => {
+    if (!viewer.id) {
+      return
+    }
+
+    const publiceEdges = publicData?.article?.featuredComments.edges || []
+    const publicComments = filterComments<Comment>(
+      publiceEdges.map(({ node }) => node)
+    )
+    const publicIds = publicComments.map((node) => {
+      const descendants = node.comments.edges || []
+      const descendantIds = descendants.map(({ node: comment }) => comment.id)
+
+      return [node.id, ...descendantIds]
+    })
+
+    fetchPrivate({ variables: { ids: _flatten(publicIds) } })
+  }
+
+  // pagination
   const connectionPath = 'article.featuredComments'
   const { edges, pageInfo } = data?.article?.featuredComments || {}
-  const comments = filterComments(
-    (edges || []).map(({ node }) => node)
-  ) as ArticleFeaturedComments_article_featuredComments_edges_node[]
+
+  // merge data
+  const comments = mergePrivateNodes<Comment>({
+    publicNodes: filterComments<CommentPublic>(
+      (edges || []).map(({ node }) => node)
+    ),
+    privateNodes: privateData?.nodes || [],
+  })
+
+  // load next page
+  const loadMore = async () => {
+    const { data: newData } = await fetchMore({
+      variables: {
+        after: pageInfo && pageInfo.endCursor,
+      },
+      updateQuery: (previousResult, { fetchMoreResult }) =>
+        mergeConnections({
+          oldData: previousResult,
+          newData: fetchMoreResult,
+          path: connectionPath,
+        }),
+    })
+
+    loadPrivate(newData)
+  }
 
   usePullToRefresh.Handler(refetch)
 
@@ -74,20 +113,6 @@ const FeaturedComments = () => {
 
   if (!edges || edges.length <= 0 || !pageInfo || comments.length <= 0) {
     return null
-  }
-
-  const loadMore = () => {
-    return fetchMore({
-      variables: {
-        after: pageInfo.endCursor,
-      },
-      updateQuery: (previousResult, { fetchMoreResult }) =>
-        mergeConnections({
-          oldData: previousResult,
-          newData: fetchMoreResult,
-          path: connectionPath,
-        }),
-    })
   }
 
   return (

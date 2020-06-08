@@ -19,11 +19,11 @@ interface ResponseCommentControls {
   commentCallback?: () => void
 }
 
-type CommentType = ResponseCommentCommentPublic &
+type Comment = ResponseCommentCommentPublic &
   Partial<ResponseCommentCommentPrivate>
 
 type ResponseCommentProps = {
-  comment: CommentType
+  comment: Comment
 } & ResponseCommentControls
 
 const fragments = {
@@ -71,7 +71,7 @@ const ResponseComment = ({
 }: ResponseCommentProps) => {
   const descendants = filterComments(
     (comment.comments?.edges || []).map(({ node }) => node)
-  ) as CommentType[]
+  ) as Comment[]
   const restCount = descendants.length - COLLAPSE_COUNT
   const [expand, setExpand] = useState(defaultExpand || restCount <= 0)
 

@@ -1,6 +1,7 @@
 import { useLazyQuery, useQuery } from '@apollo/react-hooks'
 import jump from 'jump.js'
 import _differenceBy from 'lodash/differenceBy'
+import _flatten from 'lodash/flatten'
 import _get from 'lodash/get'
 import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
@@ -39,7 +40,10 @@ import {
   SUBSCRIBE_RESPONSE_ADDED,
 } from './gql'
 
-import { LatestResponsesPrivate } from './__generated__/LatestResponsesPrivate'
+import {
+  LatestResponsesPrivate,
+  LatestResponsesPrivate_nodes_Comment_comments_edges_node,
+} from './__generated__/LatestResponsesPrivate'
 import {
   LatestResponsesPublic,
   LatestResponsesPublic_article_responses_edges_node,
@@ -51,6 +55,10 @@ import {
 
 const RESPONSES_COUNT = 15
 
+type ResponsePublic = LatestResponsesPublic_article_responses_edges_node
+type ResponsePrivate = LatestResponsesPrivate_nodes_Comment_comments_edges_node
+type Response = ResponsePublic & Partial<Omit<ResponsePrivate, '__typename'>>
+
 const LatestResponses = () => {
   const viewer = useContext(ViewerContext)
   const isMediumUp = useResponsive('md-up')
@@ -61,6 +69,7 @@ const LatestResponses = () => {
 
   /**
    * Fragment Patterns
+   *
    * 0. ``
    * 1. `#comment`
    * 2. `#parentCommentId`
@@ -75,6 +84,9 @@ const LatestResponses = () => {
     descendantId = fragment.split('-')[1]
   }
 
+  /**
+   * Data Fetching
+   */
   // public data
   const {
     data,
@@ -91,38 +103,63 @@ const LatestResponses = () => {
     },
     notifyOnNetworkStatusChange: true,
   })
+
+  // private data
+  const [fetchPrivate, { data: privateData }] = useLazyQuery<
+    LatestResponsesPrivate
+  >(LATEST_RESPONSES_PRIVATE)
+  const loadPrivate = (publicData: LatestResponsesPublic) => {
+    if (!viewer.id) {
+      return
+    }
+
+    const publiceEdges = publicData.article?.responses.edges || []
+    const publicResponses = filterResponses<Response>(
+      publiceEdges.map(({ node }) => node)
+    )
+    const publicIds = publicResponses.map((node) => {
+      // no private data is need by articles
+      if (node.__typename === 'Article') {
+        return []
+      }
+
+      const descendants = node.comments.edges || []
+      const descendantIds = descendants.map(({ node: comment }) => comment.id)
+
+      return [node.id, ...descendantIds]
+    })
+
+    fetchPrivate({ variables: { ids: _flatten(publicIds) } })
+  }
+
+  // pagination
   const connectionPath = 'article.responses'
   const article = data?.article
   const { edges, pageInfo } = (article && article.responses) || {}
   const articleId = article && article.id
-  const publicResponses = filterResponses(
-    (edges || []).map(({ node }) => node)
-  ) as LatestResponsesPublic_article_responses_edges_node[]
 
-  // private data
-  const responseIds = publicResponses.map((node) => node.id)
-  const [fetchPrivate, { data: privateData }] = useLazyQuery<
-    LatestResponsesPrivate
-  >(LATEST_RESPONSES_PRIVATE)
+  // fetch private data for first page
   useEffect(() => {
-    if (!viewer.id) {
+    if (!data || !articleId) {
       return
     }
-    fetchPrivate({ variables: { ids: responseIds } })
-  }, [viewer.id, mediaHash, responseIds.join(',')])
+    loadPrivate(data)
+  }, [articleId])
 
   // merge data
-  const responses = mergePrivateNodes({
-    publicNodes: publicResponses,
+  const responses = mergePrivateNodes<Response>({
+    publicNodes: filterResponses<ResponsePublic>(
+      (edges || []).map(({ node }) => node)
+    ),
     privateNodes: privateData?.nodes || [],
   })
 
-  // load more data
+  // load next page
   const loadMore = async (params?: { before: string }) => {
     const loadBefore = (params && params.before) || null
     const noLimit = loadBefore && pageInfo && pageInfo.endCursor
 
-    fetchMore({
+    const { data: newData } = await fetchMore({
       variables: {
         after: pageInfo && pageInfo.endCursor,
         before: loadBefore,
@@ -137,10 +174,22 @@ const LatestResponses = () => {
           path: connectionPath,
         }),
     })
+
+    loadPrivate(newData)
   }
 
-  const commentCallback = () =>
-    fetchMore({
+  // refetch when comment is sent or pull down
+  useEventListener(REFETCH_RESPONSES, refetch)
+  usePullToRefresh.Handler(refetch)
+
+  useEffect(() => {
+    if (pageInfo && pageInfo.startCursor) {
+      setStoredCursor(pageInfo.startCursor)
+    }
+  }, [pageInfo && pageInfo.startCursor])
+
+  const commentCallback = async () => {
+    const { data: newData } = await fetchMore({
       variables: {
         before: storedCursor,
         includeBefore: false,
@@ -183,45 +232,50 @@ const LatestResponses = () => {
       },
     })
 
+    loadPrivate(newData)
+  }
+
   // real time update with websocket
   useEffect(() => {
-    if (article && article.live && edges && pageInfo) {
-      subscribeToMore<ResponseAdded>({
-        document: SUBSCRIBE_RESPONSE_ADDED,
-        variables: {
-          id: article.id,
-          before: pageInfo.endCursor,
-          includeBefore: true,
-          articleOnly: articleOnlyMode,
-        },
-        updateQuery: (prev, { subscriptionData }) => {
-          if (!prev.article) {
-            return prev
-          }
-          const oldData = prev.article
-          const newData = subscriptionData.data
-            .nodeEdited as ResponseAdded_nodeEdited_Article
-          const diff = _differenceBy(
-            newData.responses.edges,
-            oldData.responses.edges || [],
-            'node.id'
-          )
-          return {
-            article: {
-              ...oldData,
-              responses: {
-                ...oldData.responses,
-                edges: [...diff, ...(oldData.responses.edges || [])],
-                pageInfo: {
-                  ...newData.responses.pageInfo,
-                  endCursor: oldData.responses.pageInfo.endCursor,
-                },
+    if (!article || !article.live || !edges || !pageInfo) {
+      return
+    }
+
+    subscribeToMore<ResponseAdded>({
+      document: SUBSCRIBE_RESPONSE_ADDED,
+      variables: {
+        id: article.id,
+        before: pageInfo.endCursor,
+        includeBefore: true,
+        articleOnly: articleOnlyMode,
+      },
+      updateQuery: (prev, { subscriptionData }) => {
+        if (!prev.article) {
+          return prev
+        }
+        const oldData = prev.article
+        const newData = subscriptionData.data
+          .nodeEdited as ResponseAdded_nodeEdited_Article
+        const diff = _differenceBy(
+          newData.responses.edges,
+          oldData.responses.edges || [],
+          'node.id'
+        )
+        return {
+          article: {
+            ...oldData,
+            responses: {
+              ...oldData.responses,
+              edges: [...diff, ...(oldData.responses.edges || [])],
+              pageInfo: {
+                ...newData.responses.pageInfo,
+                endCursor: oldData.responses.pageInfo.endCursor,
               },
             },
-          }
-        },
-      })
-    }
+          },
+        }
+      },
+    })
   }, [articleId])
 
   // scroll to comment
@@ -244,15 +298,9 @@ const LatestResponses = () => {
     }
   }, [articleId])
 
-  useEventListener(REFETCH_RESPONSES, refetch)
-  usePullToRefresh.Handler(refetch)
-
-  useEffect(() => {
-    if (pageInfo && pageInfo.startCursor) {
-      setStoredCursor(pageInfo.startCursor)
-    }
-  }, [pageInfo && pageInfo.startCursor])
-
+  /**
+   * Render
+   */
   if (loading && !data) {
     return <Spinner />
   }
