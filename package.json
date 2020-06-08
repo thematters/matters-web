@@ -69,7 +69,7 @@
     "number-precision": "^1.4.0",
     "path-to-regexp": "^6.1.0",
     "pulltorefreshjs": "^0.1.20",
-    "query-string": "^6.12.1",
+    "query-string": "^6.13.0",
     "react": "^16.13.1",
     "react-beautiful-dnd": "^13.0.0",
     "react-copy-to-clipboard": "^5.0.2",
