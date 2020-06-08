@@ -1,5 +1,4 @@
 import { useLazyQuery, useQuery } from '@apollo/react-hooks'
-import _flatten from 'lodash/flatten'
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
@@ -26,7 +25,7 @@ import { FEATURED_COMMENTS_PRIVATE, FEATURED_COMMENTS_PUBLIC } from './gql'
 
 import {
   FeaturedCommentsPrivate,
-  FeaturedCommentsPrivate_nodes_Comment_comments_edges_node,
+  FeaturedCommentsPrivate_nodes_Comment,
 } from './__generated__/FeaturedCommentsPrivate'
 import {
   FeaturedCommentsPublic,
@@ -34,7 +33,7 @@ import {
 } from './__generated__/FeaturedCommentsPublic'
 
 type CommentPublic = FeaturedCommentsPublic_article_featuredComments_edges_node
-type CommentPrivate = FeaturedCommentsPrivate_nodes_Comment_comments_edges_node
+type CommentPrivate = FeaturedCommentsPrivate_nodes_Comment
 type Comment = CommentPublic & Partial<CommentPrivate>
 
 const FeaturedComments = () => {
@@ -66,14 +65,9 @@ const FeaturedComments = () => {
     const publicComments = filterComments<Comment>(
       publiceEdges.map(({ node }) => node)
     )
-    const publicIds = publicComments.map((node) => {
-      const descendants = node.comments.edges || []
-      const descendantIds = descendants.map(({ node: comment }) => comment.id)
+    const publicIds = publicComments.map((node) => node.id)
 
-      return [node.id, ...descendantIds]
-    })
-
-    fetchPrivate({ variables: { ids: _flatten(publicIds) } })
+    fetchPrivate({ variables: { ids: publicIds } })
   }
 
   // pagination

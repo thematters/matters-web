@@ -1,7 +1,6 @@
 import { useLazyQuery, useQuery } from '@apollo/react-hooks'
 import jump from 'jump.js'
 import _differenceBy from 'lodash/differenceBy'
-import _flatten from 'lodash/flatten'
 import _get from 'lodash/get'
 import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
@@ -42,7 +41,7 @@ import {
 
 import {
   LatestResponsesPrivate,
-  LatestResponsesPrivate_nodes_Comment_comments_edges_node,
+  LatestResponsesPrivate_nodes_Comment,
 } from './__generated__/LatestResponsesPrivate'
 import {
   LatestResponsesPublic,
@@ -56,7 +55,7 @@ import {
 const RESPONSES_COUNT = 15
 
 type ResponsePublic = LatestResponsesPublic_article_responses_edges_node
-type ResponsePrivate = LatestResponsesPrivate_nodes_Comment_comments_edges_node
+type ResponsePrivate = LatestResponsesPrivate_nodes_Comment
 type Response = ResponsePublic & Partial<Omit<ResponsePrivate, '__typename'>>
 
 const LatestResponses = () => {
@@ -117,19 +116,11 @@ const LatestResponses = () => {
     const publicResponses = filterResponses<Response>(
       publiceEdges.map(({ node }) => node)
     )
-    const publicIds = publicResponses.map((node) => {
-      // no private data is need by articles
-      if (node.__typename === 'Article') {
-        return []
-      }
+    const publicIds = publicResponses
+      .filter((node) => node.__typename === 'Comment')
+      .map((node) => node.id)
 
-      const descendants = node.comments.edges || []
-      const descendantIds = descendants.map(({ node: comment }) => comment.id)
-
-      return [node.id, ...descendantIds]
-    })
-
-    fetchPrivate({ variables: { ids: _flatten(publicIds) } })
+    fetchPrivate({ variables: { ids: publicIds } })
   }
 
   // pagination

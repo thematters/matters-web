@@ -41,7 +41,6 @@ const fragments = {
           }
         }
       }
-
       ${Comment.Feed.fragments.comment.public}
     `,
     private: gql`
@@ -57,7 +56,6 @@ const fragments = {
           }
         }
       }
-
       ${Comment.Feed.fragments.comment.private}
     `,
   },
