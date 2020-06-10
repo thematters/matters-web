@@ -1,4 +1,4 @@
-import { useLazyQuery, useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/react-hooks'
 import jump from 'jump.js'
 import _differenceBy from 'lodash/differenceBy'
 import _get from 'lodash/get'
@@ -34,10 +34,7 @@ import ResponseComment from '../ResponseComment'
 import styles from '../styles.css'
 import { LATEST_RESPONSES_PRIVATE, LATEST_RESPONSES_PUBLIC } from './gql'
 
-import {
-  LatestResponsesPrivate,
-  LatestResponsesPrivate_nodes_Comment,
-} from './__generated__/LatestResponsesPrivate'
+import { LatestResponsesPrivate_nodes_Comment } from './__generated__/LatestResponsesPrivate'
 import {
   LatestResponsesPublic,
   LatestResponsesPublic_article_responses_edges_node,
@@ -78,7 +75,7 @@ const LatestResponses = () => {
    * Data Fetching
    */
   // public data
-  const { data, loading, error, fetchMore, refetch } = useQuery<
+  const { data, loading, error, fetchMore, refetch, client } = useQuery<
     LatestResponsesPublic
   >(LATEST_RESPONSES_PUBLIC, {
     variables: {
@@ -89,12 +86,18 @@ const LatestResponses = () => {
     notifyOnNetworkStatusChange: true,
   })
 
-  // private data
-  const [fetchPrivate] = useLazyQuery<LatestResponsesPrivate>(
-    LATEST_RESPONSES_PRIVATE
+  // pagination
+  const connectionPath = 'article.responses'
+  const article = data?.article
+  const { edges, pageInfo } = (article && article.responses) || {}
+  const articleId = article && article.id
+  const responses = filterResponses<ResponsePublic>(
+    (edges || []).map(({ node }) => node)
   )
-  const loadPrivate = (publicData: LatestResponsesPublic) => {
-    if (!viewer.id) {
+
+  // private data
+  const loadPrivate = (publicData?: LatestResponsesPublic) => {
+    if (!viewer.id || !publicData || !articleId) {
       return
     }
 
@@ -106,23 +109,14 @@ const LatestResponses = () => {
       .filter((node) => node.__typename === 'Comment')
       .map((node) => node.id)
 
-    fetchPrivate({ variables: { ids: publicIds } })
+    client.query({
+      query: LATEST_RESPONSES_PRIVATE,
+      variables: { ids: publicIds },
+    })
   }
-
-  // pagination
-  const connectionPath = 'article.responses'
-  const article = data?.article
-  const { edges, pageInfo } = (article && article.responses) || {}
-  const articleId = article && article.id
-  const responses = filterResponses<ResponsePublic>(
-    (edges || []).map(({ node }) => node)
-  )
 
   // fetch private data for first page
   useEffect(() => {
-    if (!data || !articleId) {
-      return
-    }
     loadPrivate(data)
   }, [articleId, viewer.id])
 

@@ -1,4 +1,4 @@
-import { useLazyQuery, useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/react-hooks'
 import { useRouter } from 'next/router'
 import { useContext, useEffect } from 'react'
 
@@ -18,10 +18,7 @@ import ResponseComment from '../ResponseComment'
 import styles from '../styles.css'
 import { FEATURED_COMMENTS_PRIVATE, FEATURED_COMMENTS_PUBLIC } from './gql'
 
-import {
-  FeaturedCommentsPrivate,
-  FeaturedCommentsPrivate_nodes_Comment,
-} from './__generated__/FeaturedCommentsPrivate'
+import { FeaturedCommentsPrivate_nodes_Comment } from './__generated__/FeaturedCommentsPrivate'
 import {
   FeaturedCommentsPublic,
   FeaturedCommentsPublic_article_featuredComments_edges_node,
@@ -40,30 +37,12 @@ const FeaturedComments = () => {
    * Data Fetching
    */
   // public data
-  const { data, loading, fetchMore, refetch } = useQuery<
+  const { data, loading, fetchMore, refetch, client } = useQuery<
     FeaturedCommentsPublic
   >(FEATURED_COMMENTS_PUBLIC, {
     variables: { mediaHash },
     notifyOnNetworkStatusChange: true,
   })
-
-  // private data
-  const [fetchPrivate] = useLazyQuery<FeaturedCommentsPrivate>(
-    FEATURED_COMMENTS_PRIVATE
-  )
-  const loadPrivate = (publicData: FeaturedCommentsPublic) => {
-    if (!viewer.id) {
-      return
-    }
-
-    const publiceEdges = publicData?.article?.featuredComments.edges || []
-    const publicComments = filterComments<Comment>(
-      publiceEdges.map(({ node }) => node)
-    )
-    const publicIds = publicComments.map((node) => node.id)
-
-    fetchPrivate({ variables: { ids: publicIds } })
-  }
 
   // pagination
   const connectionPath = 'article.featuredComments'
@@ -74,11 +53,26 @@ const FeaturedComments = () => {
     (edges || []).map(({ node }) => node)
   )
 
-  // fetch private data for first page
-  useEffect(() => {
-    if (!data || !articleId) {
+  // private data
+  const loadPrivate = (publicData?: FeaturedCommentsPublic) => {
+    if (!viewer.id || !publicData || !articleId) {
       return
     }
+
+    const publiceEdges = publicData?.article?.featuredComments.edges || []
+    const publicComments = filterComments<Comment>(
+      publiceEdges.map(({ node }) => node)
+    )
+    const publicIds = publicComments.map((node) => node.id)
+
+    client.query({
+      query: FEATURED_COMMENTS_PRIVATE,
+      variables: { ids: publicIds },
+    })
+  }
+
+  // fetch private data for first page
+  useEffect(() => {
     loadPrivate(data)
   }, [articleId, viewer.id])
 

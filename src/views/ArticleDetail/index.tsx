@@ -85,16 +85,11 @@ const ArticleDetail = () => {
   const shouldShowWall = !viewer.isAuthed && wall
 
   // public data
-  const { data, loading, error } = useQuery<ArticleDetailPublic>(
+  const { data, loading, error, client } = useQuery<ArticleDetailPublic>(
     ARTICLE_DETAIL_PUBLIC,
     {
       variables: { mediaHash },
     }
-  )
-
-  // private data
-  const [fetchPrivate] = useLazyQuery<ArticleDetailPrivate>(
-    ARTICLE_DETAIL_PRIVATE
   )
 
   const article = data?.article
@@ -107,9 +102,12 @@ const ArticleDetail = () => {
     if (!viewer.id || !article) {
       return
     }
-    console.log('fetchPrivate', article)
-    fetchPrivate({
-      variables: { mediaHash },
+
+    client.query({
+      query: ARTICLE_DETAIL_PRIVATE,
+      variables: {
+        mediaHash,
+      },
     })
   }, [mediaHash, viewer.id, article])
 
