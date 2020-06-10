@@ -44,7 +44,6 @@ import TranslationButton from './TranslationButton'
 import Wall from './Wall'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
-import { ArticleDetailPrivate } from './__generated__/ArticleDetailPrivate'
 import { ArticleDetailPublic } from './__generated__/ArticleDetailPublic'
 import { ArticleTranslation } from './__generated__/ArticleTranslation'
 
@@ -105,6 +104,7 @@ const ArticleDetail = () => {
 
     client.query({
       query: ARTICLE_DETAIL_PRIVATE,
+      fetchPolicy: 'network-only',
       variables: {
         mediaHash,
       },

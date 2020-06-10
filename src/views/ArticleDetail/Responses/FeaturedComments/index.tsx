@@ -67,6 +67,7 @@ const FeaturedComments = () => {
 
     client.query({
       query: FEATURED_COMMENTS_PRIVATE,
+      fetchPolicy: 'network-only',
       variables: { ids: publicIds },
     })
   }

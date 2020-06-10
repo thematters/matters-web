@@ -111,6 +111,7 @@ const LatestResponses = () => {
 
     client.query({
       query: LATEST_RESPONSES_PRIVATE,
+      fetchPolicy: 'network-only',
       variables: { ids: publicIds },
     })
   }
