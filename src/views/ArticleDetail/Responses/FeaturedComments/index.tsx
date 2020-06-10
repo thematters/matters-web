@@ -1,6 +1,6 @@
 import { useLazyQuery, useQuery } from '@apollo/react-hooks'
 import { useRouter } from 'next/router'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 
 import {
   List,
@@ -12,12 +12,7 @@ import {
   ViewMoreButton,
 } from '~/components'
 
-import {
-  filterComments,
-  getQuery,
-  mergeConnections,
-  mergePrivateNodes,
-} from '~/common/utils'
+import { filterComments, getQuery, mergeConnections } from '~/common/utils'
 
 import ResponseComment from '../ResponseComment'
 import styles from '../styles.css'
@@ -53,9 +48,9 @@ const FeaturedComments = () => {
   })
 
   // private data
-  const [fetchPrivate, { data: privateData }] = useLazyQuery<
-    FeaturedCommentsPrivate
-  >(FEATURED_COMMENTS_PRIVATE)
+  const [fetchPrivate] = useLazyQuery<FeaturedCommentsPrivate>(
+    FEATURED_COMMENTS_PRIVATE
+  )
   const loadPrivate = (publicData: FeaturedCommentsPublic) => {
     if (!viewer.id) {
       return
@@ -72,15 +67,20 @@ const FeaturedComments = () => {
 
   // pagination
   const connectionPath = 'article.featuredComments'
-  const { edges, pageInfo } = data?.article?.featuredComments || {}
+  const article = data?.article
+  const { edges, pageInfo } = article?.featuredComments || {}
+  const articleId = article && article.id
+  const comments = filterComments<CommentPublic>(
+    (edges || []).map(({ node }) => node)
+  )
 
-  // merge data
-  const comments = mergePrivateNodes<Comment>({
-    publicNodes: filterComments<CommentPublic>(
-      (edges || []).map(({ node }) => node)
-    ),
-    privateNodes: privateData?.nodes || [],
-  })
+  // fetch private data for first page
+  useEffect(() => {
+    if (!data || !articleId) {
+      return
+    }
+    loadPrivate(data)
+  }, [articleId, viewer.id])
 
   // load next page
   const loadMore = async () => {

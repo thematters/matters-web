@@ -26,18 +26,13 @@ import {
   filterResponses,
   getQuery,
   mergeConnections,
-  mergePrivateNodes,
   unshiftConnections,
 } from '~/common/utils'
 
 import ResponseArticle from '../ResponseArticle'
 import ResponseComment from '../ResponseComment'
 import styles from '../styles.css'
-import {
-  LATEST_RESPONSES_PRIVATE,
-  LATEST_RESPONSES_PUBLIC,
-  SUBSCRIBE_RESPONSE_ADDED,
-} from './gql'
+import { LATEST_RESPONSES_PRIVATE, LATEST_RESPONSES_PUBLIC } from './gql'
 
 import {
   LatestResponsesPrivate,
@@ -47,10 +42,6 @@ import {
   LatestResponsesPublic,
   LatestResponsesPublic_article_responses_edges_node,
 } from './__generated__/LatestResponsesPublic'
-import {
-  ResponseAdded,
-  ResponseAdded_nodeEdited_Article,
-} from './__generated__/ResponseAdded'
 
 const RESPONSES_COUNT = 15
 
@@ -87,14 +78,9 @@ const LatestResponses = () => {
    * Data Fetching
    */
   // public data
-  const {
-    data,
-    loading,
-    error,
-    fetchMore,
-    subscribeToMore,
-    refetch,
-  } = useQuery<LatestResponsesPublic>(LATEST_RESPONSES_PUBLIC, {
+  const { data, loading, error, fetchMore, refetch } = useQuery<
+    LatestResponsesPublic
+  >(LATEST_RESPONSES_PUBLIC, {
     variables: {
       mediaHash,
       first: RESPONSES_COUNT,
@@ -104,9 +90,9 @@ const LatestResponses = () => {
   })
 
   // private data
-  const [fetchPrivate, { data: privateData }] = useLazyQuery<
-    LatestResponsesPrivate
-  >(LATEST_RESPONSES_PRIVATE)
+  const [fetchPrivate] = useLazyQuery<LatestResponsesPrivate>(
+    LATEST_RESPONSES_PRIVATE
+  )
   const loadPrivate = (publicData: LatestResponsesPublic) => {
     if (!viewer.id) {
       return
@@ -128,6 +114,9 @@ const LatestResponses = () => {
   const article = data?.article
   const { edges, pageInfo } = (article && article.responses) || {}
   const articleId = article && article.id
+  const responses = filterResponses<ResponsePublic>(
+    (edges || []).map(({ node }) => node)
+  )
 
   // fetch private data for first page
   useEffect(() => {
@@ -135,15 +124,7 @@ const LatestResponses = () => {
       return
     }
     loadPrivate(data)
-  }, [articleId])
-
-  // merge data
-  const responses = mergePrivateNodes<Response>({
-    publicNodes: filterResponses<ResponsePublic>(
-      (edges || []).map(({ node }) => node)
-    ),
-    privateNodes: privateData?.nodes || [],
-  })
+  }, [articleId, viewer.id])
 
   // load next page
   const loadMore = async (params?: { before: string }) => {
@@ -225,49 +206,6 @@ const LatestResponses = () => {
 
     loadPrivate(newData)
   }
-
-  // real time update with websocket
-  useEffect(() => {
-    if (!article || !article.live || !edges || !pageInfo) {
-      return
-    }
-
-    subscribeToMore<ResponseAdded>({
-      document: SUBSCRIBE_RESPONSE_ADDED,
-      variables: {
-        id: article.id,
-        before: pageInfo.endCursor,
-        includeBefore: true,
-        articleOnly: articleOnlyMode,
-      },
-      updateQuery: (prev, { subscriptionData }) => {
-        if (!prev.article) {
-          return prev
-        }
-        const oldData = prev.article
-        const newData = subscriptionData.data
-          .nodeEdited as ResponseAdded_nodeEdited_Article
-        const diff = _differenceBy(
-          newData.responses.edges,
-          oldData.responses.edges || [],
-          'node.id'
-        )
-        return {
-          article: {
-            ...oldData,
-            responses: {
-              ...oldData.responses,
-              edges: [...diff, ...(oldData.responses.edges || [])],
-              pageInfo: {
-                ...newData.responses.pageInfo,
-                endCursor: oldData.responses.pageInfo.endCursor,
-              },
-            },
-          },
-        }
-      },
-    })
-  }, [articleId])
 
   // scroll to comment
   useEffect(() => {

@@ -18,7 +18,6 @@ const ARTICLE_RESPONSE = gql`
   ) {
     article(input: { mediaHash: $mediaHash }) {
       id
-      live
       author {
         id
         isBlocking
@@ -62,7 +61,6 @@ Responses.fragments = {
   article: gql`
     fragment ResponsesArticle on Article {
       id
-      live
       author {
         id
         isBlocking

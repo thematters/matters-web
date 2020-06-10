@@ -34,7 +34,6 @@ const fragments = {
     public: gql`
       fragment CommentBarArticlePublic on Article {
         id
-        live
       }
     `,
     private: gql`
@@ -54,9 +53,6 @@ const CommentBar = ({ article }: CommentBarProps) => {
   const isSmallUp = useResponsive('sm-up')
 
   const refetchResponses = () => {
-    if (article.live) {
-      return
-    }
     window.dispatchEvent(new CustomEvent(REFETCH_RESPONSES, {}))
   }
 

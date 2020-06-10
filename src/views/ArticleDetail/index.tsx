@@ -1,6 +1,5 @@
 import { useLazyQuery, useQuery } from '@apollo/react-hooks'
 import jump from 'jump.js'
-import _merge from 'lodash/merge'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
@@ -12,7 +11,6 @@ import {
   Error,
   FeaturesContext,
   Head,
-  IconLive,
   Layout,
   PullToRefresh,
   Spinner,
@@ -95,23 +93,25 @@ const ArticleDetail = () => {
   )
 
   // private data
-  const [fetchPrivate, { data: privateData }] = useLazyQuery<
-    ArticleDetailPrivate
-  >(ARTICLE_DETAIL_PRIVATE, {
-    variables: { mediaHash },
-  })
-  useEffect(() => {
-    if (!viewer.id) {
-      return
-    }
-    fetchPrivate()
-  }, [mediaHash, viewer.id])
+  const [fetchPrivate] = useLazyQuery<ArticleDetailPrivate>(
+    ARTICLE_DETAIL_PRIVATE
+  )
 
-  // merge and process data
-  const article = _merge({}, data?.article, privateData?.article)
+  const article = data?.article
   const authorId = article?.author?.id
   const collectionCount = article?.collection?.totalCount || 0
   const isAuthor = viewer.id === authorId
+
+  // fetch private data
+  useEffect(() => {
+    if (!viewer.id || !article) {
+      return
+    }
+    console.log('fetchPrivate', article)
+    fetchPrivate({
+      variables: { mediaHash },
+    })
+  }, [mediaHash, viewer.id, article])
 
   // translation
   const [translate, setTranslate] = useState(false)
@@ -255,9 +255,7 @@ const ArticleDetail = () => {
                 )}
               </section>
 
-              <section className="right">
-                {article.live && <IconLive />}
-              </section>
+              <section className="right" />
             </section>
           </section>
 

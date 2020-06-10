@@ -18,13 +18,13 @@ export const ARTICLE_DETAIL_PUBLIC = gql`
       mediaHash
       state
       public
-      live
       cover
       summary
       createdAt
       language
       author {
         ...UserDigestRichUserPublic
+        ...UserDigestRichUserPrivate
       }
       collection(input: { first: 0 }) @connection(key: "articleCollection") {
         totalCount
@@ -35,6 +35,7 @@ export const ARTICLE_DETAIL_PUBLIC = gql`
       ...StateArticle
       ...FingerprintArticle
       ...ToolbarArticlePublic
+      ...ToolbarArticlePrivate
     }
   }
   ${Content.fragments.article}
@@ -43,7 +44,9 @@ export const ARTICLE_DETAIL_PUBLIC = gql`
   ${State.fragments.article}
   ${FingerprintButton.fragments.article}
   ${UserDigest.Rich.fragments.user.public}
+  ${UserDigest.Rich.fragments.user.private}
   ${Toolbar.fragments.article.public}
+  ${Toolbar.fragments.article.private}
 `
 
 export const ARTICLE_DETAIL_PRIVATE = gql`

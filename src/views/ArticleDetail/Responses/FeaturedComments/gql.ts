@@ -21,12 +21,14 @@ export const FEATURED_COMMENTS_PUBLIC = gql`
         edges {
           node {
             ...ResponseCommentCommentPublic
+            ...ResponseCommentCommentPrivate
           }
         }
       }
     }
   }
   ${ResponseComment.fragments.comment.public}
+  ${ResponseComment.fragments.comment.private}
 `
 
 export const FEATURED_COMMENTS_PRIVATE = gql`

@@ -3,42 +3,6 @@ import gql from 'graphql-tag'
 import ResponseArticle from '../ResponseArticle'
 import ResponseComment from '../ResponseComment'
 
-const LatestResponsesArticlePublic = gql`
-  fragment LatestResponsesArticlePublic on Article {
-    id
-    responseCount
-    responses(
-      input: {
-        after: $after
-        before: $before
-        first: $first
-        includeAfter: $includeAfter
-        includeBefore: $includeBefore
-        articleOnly: $articleOnly
-      }
-    ) {
-      totalCount
-      pageInfo {
-        startCursor
-        endCursor
-        hasNextPage
-      }
-      edges {
-        node {
-          ... on Article {
-            ...ResponseArticleArticle
-          }
-          ... on Comment {
-            ...ResponseCommentCommentPublic
-          }
-        }
-      }
-    }
-  }
-  ${ResponseArticle.fragments.article}
-  ${ResponseComment.fragments.comment.public}
-`
-
 export const LATEST_RESPONSES_PUBLIC = gql`
   query LatestResponsesPublic(
     $mediaHash: String
@@ -52,11 +16,41 @@ export const LATEST_RESPONSES_PUBLIC = gql`
     article(input: { mediaHash: $mediaHash }) {
       id
       mediaHash
-      live
-      ...LatestResponsesArticlePublic
+      id
+      responseCount
+      responses(
+        input: {
+          after: $after
+          before: $before
+          first: $first
+          includeAfter: $includeAfter
+          includeBefore: $includeBefore
+          articleOnly: $articleOnly
+        }
+      ) {
+        totalCount
+        pageInfo {
+          startCursor
+          endCursor
+          hasNextPage
+        }
+        edges {
+          node {
+            ... on Article {
+              ...ResponseArticleArticle
+            }
+            ... on Comment {
+              ...ResponseCommentCommentPublic
+              ...ResponseCommentCommentPrivate
+            }
+          }
+        }
+      }
     }
   }
-  ${LatestResponsesArticlePublic}
+  ${ResponseArticle.fragments.article}
+  ${ResponseComment.fragments.comment.public}
+  ${ResponseComment.fragments.comment.private}
 `
 
 export const LATEST_RESPONSES_PRIVATE = gql`
@@ -69,25 +63,4 @@ export const LATEST_RESPONSES_PRIVATE = gql`
     }
   }
   ${ResponseComment.fragments.comment.private}
-`
-
-export const SUBSCRIBE_RESPONSE_ADDED = gql`
-  subscription ResponseAdded(
-    $id: ID!
-    $before: String
-    $after: String
-    $first: Int
-    $includeAfter: Boolean
-    $includeBefore: Boolean
-    $articleOnly: Boolean
-  ) {
-    nodeEdited(input: { id: $id }) {
-      id
-      ... on Article {
-        id
-        ...LatestResponsesArticlePublic
-      }
-    }
-  }
-  ${LatestResponsesArticlePublic}
 `
