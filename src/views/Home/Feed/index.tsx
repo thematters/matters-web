@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import { NetworkStatus } from 'apollo-client'
 import gql from 'graphql-tag'
-import { useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 
 import {
   ArticleDigestFeed,
@@ -10,6 +10,7 @@ import {
   List,
   Spinner,
   useResponsive,
+  ViewerContext,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
@@ -66,11 +67,11 @@ const feedFragment = gql`
 
 export const queries = {
   hottest: gql`
-    query HottestFeed($after: String) {
+    query ValuedFeed($after: String) {
       viewer {
         id
         recommendation {
-          feed: hottest(input: { first: 10, after: $after }) {
+          feed: valued(input: { first: 10, after: $after }) {
             ...FeedArticleConnection
           }
         }
@@ -122,6 +123,26 @@ export const queries = {
 const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortByType }) => {
   const isLargeUp = useResponsive('lg-up')
   const isHottestFeed = sortBy === 'hottest'
+
+  const viewer = useContext(ViewerContext)
+
+  // split out group b if in hottest feed and user is logged in
+  if (isHottestFeed && viewer.id && viewer.info.group === 'b') {
+    queries.hottest = gql`
+      query HottestFeed($after: String) {
+        viewer {
+          id
+          recommendation {
+            feed: hottest(input: { first: 10, after: $after }) {
+              ...FeedArticleConnection
+            }
+          }
+        }
+      }
+      ${feedFragment}
+    `
+  }
+
   const {
     data,
     error,
