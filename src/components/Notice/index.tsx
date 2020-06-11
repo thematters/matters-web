@@ -165,10 +165,10 @@ const BaseNotice: React.FC<NoticeProps> = ({ notice }) => {
 /**
  * Memoizing
  */
-type MemoedNotice = React.MemoExoticComponent<React.FC<NoticeProps>> & {
+type MemoizedNotice = React.MemoExoticComponent<React.FC<NoticeProps>> & {
   fragments: typeof fragments
 }
 
-export const Notice = React.memo(BaseNotice, () => true) as MemoedNotice
+export const Notice = React.memo(BaseNotice, () => true) as MemoizedNotice
 
 Notice.fragments = fragments

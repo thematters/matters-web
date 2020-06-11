@@ -7,27 +7,28 @@ import Follow from './Follow'
 import FollowState from './FollowState'
 import Unfollow from './Unfollow'
 
-import { FollowButtonUser } from './__generated__/FollowButtonUser'
+import { FollowButtonUserPrivate } from './__generated__/FollowButtonUserPrivate'
+
+interface FollowButtonProps {
+  user: Partial<FollowButtonUserPrivate>
+  size?: FollowButtonSize
+}
 
 const fragments = {
-  user: gql`
-    fragment FollowButtonUser on User {
-      id
-      isFollower
-      isFollowee
-    }
-  `,
+  user: {
+    private: gql`
+      fragment FollowButtonUserPrivate on User {
+        id
+        isFollower
+        isFollowee
+      }
+    `,
+  },
 }
 
 export type FollowButtonSize = 'lg' | 'md' | 'md-s'
 
-export const FollowButton = ({
-  user,
-  size = 'md',
-}: {
-  user: FollowButtonUser
-  size?: FollowButtonSize
-}) => {
+export const FollowButton = ({ user, size = 'md' }: FollowButtonProps) => {
   const viewer = useContext(ViewerContext)
 
   if (viewer.isInactive || viewer.id === user.id) {

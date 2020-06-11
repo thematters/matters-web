@@ -119,17 +119,17 @@ const BaseAppreciation = ({ type, appreciation }: AppreciationProps) => {
 /**
  * Memoizing
  */
-type MemoedAppreciationType = React.MemoExoticComponent<
+type MemoizedAppreciationType = React.MemoExoticComponent<
   React.FC<AppreciationProps>
 > & {
   fragments: typeof fragments
 }
 
-export const MemoedAppreciation = React.memo(
+export const MemoizedAppreciation = React.memo(
   BaseAppreciation,
   () => true
-) as MemoedAppreciationType
+) as MemoizedAppreciationType
 
-MemoedAppreciation.fragments = fragments
+MemoizedAppreciation.fragments = fragments
 
-export const Appreciation = MemoedAppreciation
+export const Appreciation = MemoizedAppreciation

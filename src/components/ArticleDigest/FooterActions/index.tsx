@@ -31,12 +31,12 @@ const fragments = {
       }
       ...AppreciationArticle
       ...ActionsResponseCountArticle
-      ...BookmarkArticle
+      ...BookmarkArticlePrivate
       ...DropdownActionsArticle
     }
     ${Appreciation.fragments.article}
     ${ResponseCount.fragments.article}
-    ${BookmarkButton.fragments.article}
+    ${BookmarkButton.fragments.article.private}
     ${DropdownActions.fragments.article}
   `,
 }

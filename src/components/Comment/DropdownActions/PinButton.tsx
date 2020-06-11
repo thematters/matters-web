@@ -20,7 +20,6 @@ const PIN_COMMENT = gql`
       pinned
       article {
         id
-        pinCommentLimit
         pinCommentLeft
       }
     }
@@ -34,7 +33,6 @@ const UNPIN_COMMENT = gql`
       pinned
       article {
         id
-        pinCommentLimit
         pinCommentLeft
       }
     }
@@ -48,8 +46,6 @@ const fragments = {
       pinned
       article {
         id
-        mediaHash
-        pinCommentLimit
         pinCommentLeft
       }
     }

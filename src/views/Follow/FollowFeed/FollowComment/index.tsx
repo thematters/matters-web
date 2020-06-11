@@ -37,15 +37,19 @@ const fragments = {
         ...ArticleDigestTitleArticle
       }
       ...CreatedAtComment
-      ...ContentComment
-      ...FooterActionsComment
+      ...ContentCommentPublic
+      ...ContentCommentPrivate
+      ...FooterActionsCommentPublic
+      ...FooterActionsCommentPrivate
     }
 
     ${UserDigest.Mini.fragments.user}
     ${ArticleDigestTitle.fragments.article}
     ${Comment.CreatedAt.fragments.comment}
-    ${Comment.Content.fragments.comment}
-    ${Comment.FooterActions.fragments.comment}
+    ${Comment.Content.fragments.comment.public}
+    ${Comment.Content.fragments.comment.private}
+    ${Comment.FooterActions.fragments.comment.public}
+    ${Comment.FooterActions.fragments.comment.private}
   `,
 }
 
@@ -129,13 +133,13 @@ const FollowComment: React.FC<FollowCommentProps> = ({ comment, onClick }) => {
 /**
  * Memoizing
  */
-type MemoedFollowCommentType = React.MemoExoticComponent<
+type MemoizedFollowCommentType = React.MemoExoticComponent<
   React.FC<FollowCommentProps>
 > & {
   fragments: typeof fragments
 }
 
-const MemoedFollowComment = React.memo(
+const MemoizedFollowComment = React.memo(
   FollowComment,
   ({ comment: prevComment }, { comment }) => {
     return (
@@ -143,8 +147,8 @@ const MemoedFollowComment = React.memo(
       prevComment.downvotes === comment.downvotes
     )
   }
-) as MemoedFollowCommentType
+) as MemoizedFollowCommentType
 
-MemoedFollowComment.fragments = fragments
+MemoizedFollowComment.fragments = fragments
 
-export default MemoedFollowComment
+export default MemoizedFollowComment
