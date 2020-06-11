@@ -71,7 +71,7 @@ const ArticleDetail = () => {
   const features = useContext(FeaturesContext)
   const isLargeUp = useResponsive('lg-up')
   const [fixedWall, setFixedWall] = useState(false)
-  const [showResponses, setShowResponses] = useState(false)
+  // const [showResponses, setShowResponses] = useState(false)
 
   // wall
   const { data: clientPreferenceData } = useQuery<ClientPreference>(
@@ -265,12 +265,12 @@ const ArticleDetail = () => {
 
           {features.payment && <DynamicDonation mediaHash={mediaHash} />}
 
-          <Waypoint
+          {/* <Waypoint
             bottomOffset={-200}
             onEnter={() => {
               setShowResponses(true)
             }}
-          />
+          /> */}
 
           {(collectionCount > 0 || isAuthor) && (
             <section className="block">
@@ -286,7 +286,8 @@ const ArticleDetail = () => {
             }}
           />
 
-          {!shouldShowWall && showResponses && (
+          {!shouldShowWall && (
+            // showResponses &&
             <section className="block">
               <DynamicResponse />
             </section>
