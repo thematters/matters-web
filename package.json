@@ -82,7 +82,7 @@
     "react-waypoint": "^9.0.2",
     "subscriptions-transport-ws": "^0.9.16",
     "use-debounce": "^3.4.2",
-    "validator": "^13.1.0"
+    "validator": "^13.1.1"
   },
   "devDependencies": {
     "@babel/plugin-proposal-optional-chaining": "^7.10.1",
