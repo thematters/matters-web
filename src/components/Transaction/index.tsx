@@ -50,15 +50,7 @@ const fragments = {
 
 const BaseTransaction = ({ tx }: TransactionProps) => {
   const viewer = useContext(ViewerContext)
-  const {
-    amount,
-    currency,
-    purpose,
-    sender,
-    recipient,
-    target,
-    createdAt,
-  } = tx
+  const { amount, currency, purpose, sender, recipient, target, createdAt } = tx
 
   const isViewerSender = sender && viewer.id === sender.id
 
