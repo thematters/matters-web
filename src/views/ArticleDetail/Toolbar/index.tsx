@@ -17,7 +17,7 @@ import styles from './styles.css'
 
 import { ArticleToolbar } from './__generated__/ArticleToolbar'
 
-const ARTICLE_TOOLBAR = gql`
+export const ARTICLE_TOOLBAR = gql`
   query ArticleToolbar($mediaHash: String) {
     article(input: { mediaHash: $mediaHash }) {
       id

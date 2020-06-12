@@ -165,6 +165,7 @@ const BaseDonationDialog = ({
   const isResetPasswordRequest = step === 'resetPasswordRequest'
   const isSetAmount = step === 'setAmount'
   const isSetPaymentPassword = step === 'setPaymentPassword'
+  const isHKD = currency === CURRENCY.HKD
 
   return (
     <>
@@ -203,7 +204,7 @@ const BaseDonationDialog = ({
             amount={amount}
             currency={currency}
             recipient={recipient}
-            submitCallback={() => setStep('processing')}
+            submitCallback={() => setStep(isHKD ? 'complete' : 'processing')}
             switchToAddCredit={switchToAddCredit}
             switchToLike={switchToLike}
             switchToPasswordInvalid={() => setStep('passwordInvalid')}

@@ -11,10 +11,10 @@ import {
 } from '~/components'
 import { useMutation } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
+import updateAppreciation from '~/components/GQL/updates/appreciation'
 
 import { APPRECIATE_DEBOUNCE, Z_INDEX } from '~/common/enums'
 
-import Appreciators from '../Toolbar/Appreciators'
 import AnonymousButton from './AnonymousButton'
 import AppreciateButton from './AppreciateButton'
 import CivicLikerButton from './CivicLikerButton'
@@ -35,6 +35,7 @@ const fragments = {
       hasAppreciate
       appreciateLimit
       appreciateLeft
+      mediaHash
     }
   `,
 }
@@ -43,13 +44,8 @@ const APPRECIATE_ARTICLE = gql`
   mutation AppreciateArticle($id: ID!, $amount: Int!, $token: String!) {
     appreciateArticle(input: { id: $id, amount: $amount, token: $token }) {
       id
-      appreciationsReceivedTotal
-      hasAppreciate
-      appreciateLeft
-      ...AppreciatorsArticle
     }
   }
-  ${Appreciators.fragments.article}
 `
 
 const AppreciationButton = ({
@@ -76,6 +72,15 @@ const AppreciationButton = ({
     try {
       await sendAppreciation({
         variables: { id: article.id, amount, token },
+        update: (cache) => {
+          updateAppreciation({
+            cache,
+            left,
+            mediaHash: article.mediaHash || '',
+            total,
+            viewer,
+          })
+        },
       }).then(refreshToken)
     } catch (e) {
       console.error(e)

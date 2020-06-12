@@ -41,7 +41,11 @@ const Complete: React.FC<Props> = ({
         <Translate zh_hant="支持" zh_hans="支持" />
         <b>{` ${recipient.displayName} `}</b>
         <br />
-        <Translate zh_hant="已經成功送出！" zh_hans="已经成功送出！" />
+        {currency === CURRENCY.HKD ? (
+          <Translate zh_hant="的指令已經送出！" zh_hans="的指令已经送出！" />
+        ) : (
+          <Translate zh_hant="已經成功送出！" zh_hans="已经成功送出！" />
+        )}
       </section>
       <style jsx>{styles}</style>
     </Dialog.Content>
