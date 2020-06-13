@@ -4,6 +4,17 @@
   font-size: var(--font-size-sm);
 }
 
+.pending {
+  opacity: 0.5;
+}
+
+.pending-timestamp {
+  color: var(--color-grey-light);
+  font-size: var(--font-size-timestamp);
+  font-weight: var(--font-weight-timestamp);
+  line-height: var(--line-height-timestamp);
+}
+
 .left {
   & :global(> * + *) {
     margin-top: var(--spacing-x-tight);

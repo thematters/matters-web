@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import gql from 'graphql-tag'
 import React, { useContext } from 'react'
 
@@ -50,7 +51,16 @@ const fragments = {
 
 const BaseTransaction = ({ tx }: TransactionProps) => {
   const viewer = useContext(ViewerContext)
-  const { amount, currency, purpose, sender, recipient, target, createdAt } = tx
+  const {
+    amount,
+    currency,
+    purpose,
+    sender,
+    recipient,
+    target,
+    createdAt,
+    state: txState,
+  } = tx
 
   const isViewerSender = sender && viewer.id === sender.id
 
@@ -58,6 +68,7 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
   const isRefund = purpose === 'refund'
   const isDonation = purpose === 'donation'
   const isPayout = purpose === 'payout'
+  const isPending = txState === 'pending'
   const showContent = isAddCredit || isRefund || isPayout
 
   const article = target?.__typename === 'Article' && target
@@ -66,7 +77,12 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
   return (
     <Card {...path} spacing={['base', 'base']}>
       <section className="container">
-        <section className="left">
+        <section
+          className={classNames({
+            left: true,
+            pending: isPending,
+          })}
+        >
           {showContent && (
             <section className="content">
               <p>
@@ -112,7 +128,12 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
         </section>
 
         <section className="right">
-          <div className="num">
+          <div
+            className={classNames({
+              num: true,
+              pending: isPending,
+            })}
+          >
             <TextIcon
               spacing="xtight"
               size="sm"
@@ -127,7 +148,13 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
             </TextIcon>
           </div>
 
-          <DateTime date={createdAt} />
+          {isPending ? (
+            <span className="pending-timestamp">
+              <Translate zh_hant="進行中" zh_hans="进行中" />
+            </span>
+          ) : (
+            <DateTime date={createdAt} />
+          )}
         </section>
 
         <style jsx>{styles}</style>

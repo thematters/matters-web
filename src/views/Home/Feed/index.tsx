@@ -288,6 +288,12 @@ const HomeFeed = () => {
     feedSortType: 'hottest',
   }
   const setSortBy = (type: SortByType) => {
+    console.log('before', {
+      scrollY: window.scrollY,
+      pageYOffset: window.pageYOffset,
+      scrollTop: document.documentElement.scrollTop,
+      clientTop: document.documentElement.clientTop,
+    })
     if (client) {
       client.writeData({
         id: 'ClientPreference:local',
@@ -295,6 +301,15 @@ const HomeFeed = () => {
       })
     }
   }
+
+  useEffect(() => {
+    console.log('after', {
+      scrollY: window.scrollY,
+      pageYOffset: window.pageYOffset,
+      scrollTop: document.documentElement.scrollTop,
+      clientTop: document.documentElement.clientTop,
+    })
+  })
 
   return (
     <>

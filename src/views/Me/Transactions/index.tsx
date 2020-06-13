@@ -20,7 +20,9 @@ const ME_TRANSACTIONS = gql`
     viewer {
       id
       wallet {
-        transactions(input: { first: 20, after: $after, states: succeeded }) {
+        transactions(
+          input: { first: 20, after: $after, states: [succeeded, pending] }
+        ) {
           pageInfo {
             startCursor
             endCursor
