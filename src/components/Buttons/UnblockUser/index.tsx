@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import _isNil from 'lodash/isNil'
 
 import { Button, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
@@ -7,31 +8,35 @@ import UNBLOCK_USER from '~/components/GQL/mutations/unblockUser'
 import { ADD_TOAST } from '~/common/enums'
 
 import { UnblockUser } from '~/components/GQL/mutations/__generated__/UnblockUser'
-import { UnblockUserButtonUser } from './__generated__/UnblockUserButtonUser'
+import { UnblockUserButtonUserPrivate } from './__generated__/UnblockUserButtonUserPrivate'
 
-const fragments = {
-  user: gql`
-    fragment UnblockUserButtonUser on User {
-      id
-      isBlocked
-    }
-  `,
+interface UnblockUserButtonProps {
+  user: Partial<UnblockUserButtonUserPrivate>
 }
 
-export const UnblockUserButton = ({
-  user,
-}: {
-  user: UnblockUserButtonUser
-}) => {
+const fragments = {
+  user: {
+    private: gql`
+      fragment UnblockUserButtonUserPrivate on User {
+        id
+        isBlocked
+      }
+    `,
+  },
+}
+
+export const UnblockUserButton = ({ user }: UnblockUserButtonProps) => {
   const [unblockUser] = useMutation<UnblockUser>(UNBLOCK_USER, {
     variables: { id: user.id },
-    optimisticResponse: {
-      unblockUser: {
-        id: user.id,
-        isBlocked: false,
-        __typename: 'User',
-      },
-    },
+    optimisticResponse: !_isNil(user.id)
+      ? {
+          unblockUser: {
+            id: user.id,
+            isBlocked: false,
+            __typename: 'User',
+          },
+        }
+      : undefined,
   })
 
   return (

@@ -9,34 +9,39 @@ import { captureClicks } from '~/common/utils'
 import Collapsed from './Collapsed'
 import styles from './styles.css'
 
-import { ContentComment } from './__generated__/ContentComment'
+import { ContentCommentPrivate } from './__generated__/ContentCommentPrivate'
+import { ContentCommentPublic } from './__generated__/ContentCommentPublic'
 
 interface ContentProps {
-  comment: ContentComment
+  comment: ContentCommentPublic & Partial<ContentCommentPrivate>
 
   size?: 'sm' | 'md-s'
 }
 
 const fragments = {
-  comment: gql`
-    fragment ContentComment on Comment {
-      id
-      content
-      state
-      author {
+  comment: {
+    public: gql`
+      fragment ContentCommentPublic on Comment {
         id
-        isBlocked
+        content
+        state
       }
-    }
-  `,
+    `,
+    private: gql`
+      fragment ContentCommentPrivate on Comment {
+        id
+        author {
+          id
+          isBlocked
+        }
+      }
+    `,
+  },
 }
 
 const Content = ({ comment, size }: ContentProps) => {
-  const {
-    content,
-    state,
-    author: { isBlocked },
-  } = comment
+  const { content, state } = comment
+  const isBlocked = comment.author?.isBlocked
 
   const contentClass = classNames({
     content: true,

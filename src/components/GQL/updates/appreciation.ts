@@ -1,11 +1,11 @@
 import { DataProxy } from 'apollo-cache'
 import _cloneDeep from 'lodash/cloneDeep'
 import _some from 'lodash/some'
-import { ARTICLE_TOOLBAR } from '~/views/ArticleDetail/Toolbar'
+import { ARTICLE_DETAIL_PUBLIC } from '~/views/ArticleDetail/gql'
 
 import { ERROR_CODES } from '~/common/enums'
 
-import { ArticleToolbar } from '~/views/ArticleDetail/Toolbar/__generated__/ArticleToolbar'
+import { ArticleDetailPublic } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
 
 const update = ({
   cache,
@@ -27,8 +27,8 @@ const update = ({
 
     const variables = { mediaHash }
     const cacheData = _cloneDeep(
-      cache.readQuery<ArticleToolbar>({
-        query: ARTICLE_TOOLBAR,
+      cache.readQuery<ArticleDetailPublic>({
+        query: ARTICLE_DETAIL_PUBLIC,
         variables,
       })
     )
@@ -69,7 +69,7 @@ const update = ({
     }
 
     cache.writeQuery({
-      query: ARTICLE_TOOLBAR,
+      query: ARTICLE_DETAIL_PUBLIC,
       data: cacheData,
       variables,
     })

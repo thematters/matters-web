@@ -10,14 +10,15 @@ import UNBLOCK_USER from '~/components/GQL/mutations/unblockUser'
 
 import { ADD_TOAST } from '~/common/enums'
 
-import { BlockUser } from '~/components/GQL/fragments/__generated__/BlockUser'
 import { UnblockUser } from '~/components/GQL/mutations/__generated__/UnblockUser'
+import { BlockUserPrivate } from '../__generated__/BlockUserPrivate'
+import { BlockUserPublic } from '../__generated__/BlockUserPublic'
 
 const BlockUserButton = ({
   user,
   openDialog,
 }: {
-  user: BlockUser
+  user: BlockUserPublic & Partial<BlockUserPrivate>
   openDialog: () => void
 }) => {
   const [unblockUser] = useMutation<UnblockUser>(UNBLOCK_USER, {

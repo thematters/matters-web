@@ -1,7 +1,5 @@
 import { useLazyQuery, useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
 import jump from 'jump.js'
-import _merge from 'lodash/merge'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
@@ -13,7 +11,6 @@ import {
   Error,
   FeaturesContext,
   Head,
-  IconLive,
   Layout,
   PullToRefresh,
   Spinner,
@@ -33,6 +30,11 @@ import { getQuery } from '~/common/utils'
 import Collection from './Collection'
 import Content from './Content'
 import FingerprintButton from './FingerprintButton'
+import {
+  ARTICLE_DETAIL_PRIVATE,
+  ARTICLE_DETAIL_PUBLIC,
+  ARTICLE_TRANSLATION,
+} from './gql'
 import RelatedArticles from './RelatedArticles'
 import State from './State'
 import styles from './styles.css'
@@ -42,55 +44,8 @@ import TranslationButton from './TranslationButton'
 import Wall from './Wall'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
-import { ArticleDetail as ArticleDetailType } from './__generated__/ArticleDetail'
-import { ArticleDetailSpa as ArticleDetailSpaType } from './__generated__/ArticleDetailSpa'
-
-const ARTICLE_DETAIL_SSR = gql`
-  query ArticleDetail($mediaHash: String) {
-    article(input: { mediaHash: $mediaHash }) {
-      id
-      title
-      slug
-      mediaHash
-      state
-      public
-      live
-      cover
-      summary
-      createdAt
-      language
-      author {
-        ...UserDigestRichUser
-      }
-      collection(input: { first: 0 }) @connection(key: "articleCollection") {
-        totalCount
-      }
-      ...ContentArticle
-      ...TagListArticle
-      ...RelatedArticles
-      ...StateArticle
-      ...FingerprintArticle
-    }
-  }
-  ${UserDigest.Rich.fragments.user}
-  ${Content.fragments.article}
-  ${TagList.fragments.article}
-  ${RelatedArticles.fragments.article}
-  ${State.fragments.article}
-  ${FingerprintButton.fragments.article}
-`
-
-const ARTICLE_TRANSLATION = gql`
-  query ArticleDetailSpa($mediaHash: String, $language: UserLanguage!) {
-    article(input: { mediaHash: $mediaHash }) {
-      id
-      translation(input: { language: $language }) {
-        content
-        title
-      }
-    }
-  }
-`
+import { ArticleDetailPublic } from './__generated__/ArticleDetailPublic'
+import { ArticleTranslation } from './__generated__/ArticleTranslation'
 
 const DynamicResponse = dynamic(() => import('./Responses'), {
   ssr: false,
@@ -108,11 +63,17 @@ const EmptyLayout: React.FC = ({ children }) => (
 )
 
 const ArticleDetail = () => {
-  // router & viewer
   const router = useRouter()
   const mediaHash = getQuery({ router, key: 'mediaHash' })
   const viewer = useContext(ViewerContext)
 
+  // UI
+  const features = useContext(FeaturesContext)
+  const isLargeUp = useResponsive('lg-up')
+  const [fixedWall, setFixedWall] = useState(false)
+  // const [showResponses, setShowResponses] = useState(false)
+
+  // wall
   const { data: clientPreferenceData } = useQuery<ClientPreference>(
     CLIENT_PREFERENCE,
     {
@@ -122,31 +83,33 @@ const ArticleDetail = () => {
   const { wall } = clientPreferenceData?.clientPreference || { wall: true }
   const shouldShowWall = !viewer.isAuthed && wall
 
-  useEffect(() => {
-    if (shouldShowWall && window.location.hash && article) {
-      jump('#comments', { offset: -10 })
-    }
-  }, [mediaHash])
-
-  // UI
-  const features = useContext(FeaturesContext)
-  const isLargeUp = useResponsive('lg-up')
-  const [fixedWall, setFixedWall] = useState(false)
-  // const [showResponses, setShowResponses] = useState(false)
-
-  // ssr data
-  const { data, loading, error } = useQuery<ArticleDetailType>(
-    ARTICLE_DETAIL_SSR,
+  // public data
+  const { data, loading, error, client } = useQuery<ArticleDetailPublic>(
+    ARTICLE_DETAIL_PUBLIC,
     {
       variables: { mediaHash },
     }
   )
 
-  // merge and process data
   const article = data?.article
   const authorId = article?.author?.id
-  const collectionCount = (article && article.collection.totalCount) || 0
+  const collectionCount = article?.collection?.totalCount || 0
   const isAuthor = viewer.id === authorId
+
+  // fetch private data
+  useEffect(() => {
+    if (!viewer.id || !article) {
+      return
+    }
+
+    client.query({
+      query: ARTICLE_DETAIL_PRIVATE,
+      fetchPolicy: 'network-only',
+      variables: {
+        mediaHash,
+      },
+    })
+  }, [mediaHash, viewer.id, article])
 
   // translation
   const [translate, setTranslate] = useState(false)
@@ -157,7 +120,7 @@ const ArticleDetail = () => {
   const [
     getTranslation,
     { data: translationData, loading: translating },
-  ] = useLazyQuery<ArticleDetailSpaType>(ARTICLE_TRANSLATION)
+  ] = useLazyQuery<ArticleTranslation>(ARTICLE_TRANSLATION)
   const titleTranslation = translationData?.article?.translation?.title
   const contentTranslation = translationData?.article?.translation?.content
   const onTranslate = (newTranslate: boolean) => {
@@ -185,6 +148,15 @@ const ArticleDetail = () => {
       })
     )
   }
+
+  /**
+   * Render
+   */
+  useEffect(() => {
+    if (shouldShowWall && window.location.hash && article) {
+      jump('#comments', { offset: -10 })
+    }
+  }, [mediaHash])
 
   if (loading) {
     return (
@@ -281,9 +253,7 @@ const ArticleDetail = () => {
                 )}
               </section>
 
-              <section className="right">
-                {article.live && <IconLive />}
-              </section>
+              <section className="right" />
             </section>
           </section>
 
@@ -328,7 +298,7 @@ const ArticleDetail = () => {
           )}
         </section>
 
-        <Toolbar mediaHash={mediaHash} />
+        <Toolbar article={article} />
 
         {shouldShowWall && (
           <>

@@ -4,12 +4,10 @@ import {
   IntrospectionFragmentMatcher,
 } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
-import { ApolloLink, split } from 'apollo-link'
+import { ApolloLink } from 'apollo-link'
 import { setContext } from 'apollo-link-context'
 import { onError } from 'apollo-link-error'
 import { createPersistedQueryLink } from 'apollo-link-persisted-queries'
-import { WebSocketLink } from 'apollo-link-ws'
-import { getMainDefinition } from 'apollo-utilities'
 import http from 'http'
 import https from 'https'
 import withApollo from 'next-with-apollo'
@@ -51,32 +49,6 @@ const httpLink = ({ headers }: { [key: string]: any }) =>
       agent,
     },
   })
-
-// only do ws with browser
-const wsLink = process.browser
-  ? new WebSocketLink({
-      uri: process.env.NEXT_PUBLIC_WS_URL || '',
-      options: {
-        reconnect: true,
-      },
-    })
-  : null
-
-const dataLink = process.browser
-  ? ({ headers }: { [key: string]: any }) =>
-      split(
-        // split based on operation type
-        ({ query }) => {
-          const definition = getMainDefinition(query)
-          return (
-            definition.kind === 'OperationDefinition' &&
-            definition.operation === 'subscription'
-          )
-        },
-        wsLink as WebSocketLink,
-        httpLink({ headers })
-      )
-  : httpLink
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
@@ -153,7 +125,7 @@ export default withApollo(({ ctx, headers, initialState }) => {
       authLink,
       sentryLink,
       agentHashLink,
-      dataLink({ headers }),
+      httpLink({ headers }),
     ]),
     cache,
     resolvers,

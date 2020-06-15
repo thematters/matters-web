@@ -9,7 +9,6 @@ import { getQuery } from '~/common/utils'
 import FeatureComments from './FeaturedComments'
 import LatestResponses from './LatestResponses'
 import ResponseCount from './ResponseCount'
-import styles from './styles.css'
 
 import { ArticleResponse } from './__generated__/ArticleResponse'
 
@@ -19,7 +18,6 @@ const ARTICLE_RESPONSE = gql`
   ) {
     article(input: { mediaHash: $mediaHash }) {
       id
-      live
       author {
         id
         isBlocking
@@ -55,8 +53,6 @@ const Responses = () => {
 
       <FeatureComments />
       <LatestResponses />
-
-      <style jsx>{styles}</style>
     </section>
   )
 }
@@ -65,7 +61,6 @@ Responses.fragments = {
   article: gql`
     fragment ResponsesArticle on Article {
       id
-      live
       author {
         id
         isBlocking

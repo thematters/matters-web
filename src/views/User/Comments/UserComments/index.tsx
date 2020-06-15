@@ -67,7 +67,8 @@ const USER_COMMENT_FEED = gql`
                 edges {
                   cursor
                   node {
-                    ...FeedComment
+                    ...FeedCommentPublic
+                    ...FeedCommentPrivate
                   }
                 }
               }
@@ -78,7 +79,8 @@ const USER_COMMENT_FEED = gql`
     }
   }
   ${ArticleDigestTitle.fragments.article}
-  ${Comment.Feed.fragments.comment}
+  ${Comment.Feed.fragments.comment.public}
+  ${Comment.Feed.fragments.comment.private}
 `
 
 const UserCommentsWrap = () => {

@@ -14,7 +14,6 @@ import FooterActions, { FooterActionsControls } from '../FooterActions'
 import { ArticleDigestTitle } from '../Title'
 import CreatedAt from './CreatedAt'
 import InactiveState from './InactiveState'
-import Live from './Live'
 import styles from './styles.css'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
@@ -40,14 +39,12 @@ const fragments = {
       articleState: state
       cover
       summary
-      live
       author {
         id
         userName
         ...UserDigestMiniUser
       }
       ...CreatedAtArticle
-      ...LiveArticle
       ...InactiveStateArticle
       ...ArticleDigestTitleArticle
       ...FooterActionsArticle
@@ -55,7 +52,6 @@ const fragments = {
     }
     ${UserDigest.Mini.fragments.user}
     ${CreatedAt.fragments.article}
-    ${Live.fragments.article}
     ${InactiveState.fragments.article}
     ${ArticleDigestTitle.fragments.article}
     ${FooterActions.fragments.article}
@@ -135,7 +131,6 @@ const BaseArticleDigestFeed = ({
               </TextIcon>
             )}
 
-            <Live article={article} />
             {inUserArticles && <InactiveState article={article} />}
             <CreatedAt article={article} />
           </section>
@@ -176,7 +171,7 @@ const BaseArticleDigestFeed = ({
 /**
  * Memoizing
  */
-type MemoedArticleDigestFeed = React.MemoExoticComponent<
+type MemoizedArticleDigestFeed = React.MemoExoticComponent<
   React.FC<ArticleDigestFeedProps>
 > & {
   fragments: typeof fragments
@@ -194,6 +189,6 @@ export const ArticleDigestFeed = React.memo(
         article.appreciationsReceivedTotal
     )
   }
-) as MemoedArticleDigestFeed
+) as MemoizedArticleDigestFeed
 
 ArticleDigestFeed.fragments = fragments

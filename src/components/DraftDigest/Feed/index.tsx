@@ -65,17 +65,17 @@ const DraftDigestFeed = ({ draft }: DraftDigestFeedProps) => {
 /**
  * Memoizing
  */
-type MemoedDraftDigestFeedType = React.MemoExoticComponent<
+type MemoizedDraftDigestFeedType = React.MemoExoticComponent<
   React.FC<DraftDigestFeedProps>
 > & {
   fragments: typeof fragments
 }
 
-const MemoedDraftDigestFeed = React.memo(
+const MemoizedDraftDigestFeed = React.memo(
   DraftDigestFeed,
   () => true
-) as MemoedDraftDigestFeedType
+) as MemoizedDraftDigestFeedType
 
-MemoedDraftDigestFeed.fragments = fragments
+MemoizedDraftDigestFeed.fragments = fragments
 
-export default MemoedDraftDigestFeed
+export default MemoizedDraftDigestFeed

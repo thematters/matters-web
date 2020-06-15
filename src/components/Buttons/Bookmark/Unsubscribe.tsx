@@ -6,7 +6,7 @@ import TOGGLE_SUBSCRIBE_ARTICLE from '../../GQL/mutations/toggleSubscribeArticle
 import { ToggleSubscribeArticle } from '~/components/GQL/mutations/__generated__/ToggleSubscribeArticle'
 
 interface UnsubscribeProps {
-  articleId: string
+  articleId?: string
   size?: Extract<IconSize, 'md-s'>
   disabled?: boolean
   inCard: boolean
@@ -22,13 +22,15 @@ const Unsubscribe = ({
     TOGGLE_SUBSCRIBE_ARTICLE,
     {
       variables: { id: articleId },
-      optimisticResponse: {
-        toggleSubscribeArticle: {
-          id: articleId,
-          subscribed: false,
-          __typename: 'Article',
-        },
-      },
+      optimisticResponse: articleId
+        ? {
+            toggleSubscribeArticle: {
+              id: articleId,
+              subscribed: false,
+              __typename: 'Article',
+            },
+          }
+        : undefined,
     }
   )
 

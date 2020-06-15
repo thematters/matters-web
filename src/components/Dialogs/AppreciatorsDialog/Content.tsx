@@ -43,7 +43,8 @@ const ARTICLE_APPRECIATORS = gql`
             ... on Appreciation {
               amount
               sender {
-                ...UserDigestRichUser
+                ...UserDigestRichUserPublic
+                ...UserDigestRichUserPrivate
               }
             }
           }
@@ -51,7 +52,8 @@ const ARTICLE_APPRECIATORS = gql`
       }
     }
   }
-  ${UserDigest.Rich.fragments.user}
+  ${UserDigest.Rich.fragments.user.public}
+  ${UserDigest.Rich.fragments.user.private}
 `
 
 const AppreciatorsDialogContent = ({

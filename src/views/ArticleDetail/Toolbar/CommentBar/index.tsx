@@ -22,29 +22,37 @@ import { appendTarget } from '~/common/utils'
 
 import styles from './styles.css'
 
-import { CommentBarArticle } from './__generated__/CommentBarArticle'
+import { CommentBarArticlePrivate } from './__generated__/CommentBarArticlePrivate'
+import { CommentBarArticlePublic } from './__generated__/CommentBarArticlePublic'
 
-const fragments = {
-  article: gql`
-    fragment CommentBarArticle on Article {
-      id
-      live
-      author {
-        id
-        isBlocking
-      }
-    }
-  `,
+interface CommentBarProps {
+  article: CommentBarArticlePublic & Partial<CommentBarArticlePrivate>
 }
 
-const CommentBar = ({ article }: { article: CommentBarArticle }) => {
+const fragments = {
+  article: {
+    public: gql`
+      fragment CommentBarArticlePublic on Article {
+        id
+      }
+    `,
+    private: gql`
+      fragment CommentBarArticlePrivate on Article {
+        id
+        author {
+          id
+          isBlocking
+        }
+      }
+    `,
+  },
+}
+
+const CommentBar = ({ article }: CommentBarProps) => {
   const viewer = useContext(ViewerContext)
   const isSmallUp = useResponsive('sm-up')
 
   const refetchResponses = () => {
-    if (article.live) {
-      return
-    }
     window.dispatchEvent(new CustomEvent(REFETCH_RESPONSES, {}))
   }
 
@@ -74,7 +82,7 @@ const CommentBar = ({ article }: { article: CommentBarArticle }) => {
     )
   }
 
-  if (viewer.isOnboarding && article.author.id !== viewer.id) {
+  if (viewer.isOnboarding && article.author?.id !== viewer.id) {
     return (
       <Card
         {...cardProps}
@@ -114,7 +122,7 @@ const CommentBar = ({ article }: { article: CommentBarArticle }) => {
     )
   }
 
-  if (article.author.isBlocking) {
+  if (article.author?.isBlocking) {
     return (
       <Card
         {...cardProps}

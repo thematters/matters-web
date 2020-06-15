@@ -1,5 +1,4 @@
 import { useLazyQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
 
 import { AvatarSize, UserDigest } from '~/components'
 
@@ -8,9 +7,11 @@ import DropdownActions from '../DropdownActions'
 import FooterActions, { FooterActionsControls } from '../FooterActions'
 import PinnedLabel from '../PinnedLabel'
 import ReplyTo from '../ReplyTo'
+import { fragments, REFETCH_COMMENT } from './gql'
 import styles from './styles.css'
 
-import { FeedComment } from './__generated__/FeedComment'
+import { FeedCommentPrivate } from './__generated__/FeedCommentPrivate'
+import { FeedCommentPublic } from './__generated__/FeedCommentPublic'
 import { RefetchComment } from './__generated__/RefetchComment'
 
 export type CommentControls = {
@@ -19,58 +20,8 @@ export type CommentControls = {
 } & FooterActionsControls
 
 export type CommentProps = {
-  comment: FeedComment
+  comment: FeedCommentPublic & Partial<FeedCommentPrivate>
 } & CommentControls
-
-const fragments = {
-  comment: gql`
-    fragment FeedComment on Comment {
-      id
-      author {
-        id
-        ...UserDigestMiniUser
-      }
-      replyTo {
-        id
-        author {
-          id
-          ...ReplyToUser
-        }
-      }
-      ...ContentComment
-      ...PinnedLabelComment
-      ...DropdownActionsComment
-      ...FooterActionsComment
-    }
-
-    ${UserDigest.Mini.fragments.user}
-    ${ReplyTo.fragments.user}
-    ${Content.fragments.comment}
-    ${PinnedLabel.fragments.comment}
-    ${DropdownActions.fragments.comment}
-    ${FooterActions.fragments.comment}
-  `,
-}
-
-const REFETCH_COMMENT = gql`
-  query RefetchComment($id: ID!) {
-    node(input: { id: $id }) {
-      ... on Comment {
-        id
-        ...FeedComment
-        comments(input: { sort: oldest, first: null }) {
-          edges {
-            cursor
-            node {
-              ...FeedComment
-            }
-          }
-        }
-      }
-    }
-  }
-  ${fragments.comment}
-`
 
 export const Feed = ({
   comment,

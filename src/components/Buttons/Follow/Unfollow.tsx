@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
+import _isNil from 'lodash/isNil'
 import { useState } from 'react'
 
 import {
@@ -15,8 +16,13 @@ import updateViewerFolloweeCount from '~/components/GQL/updates/viewerFolloweeCo
 
 import { FollowButtonSize } from './index'
 
-import { FollowButtonUser } from './__generated__/FollowButtonUser'
+import { FollowButtonUserPrivate } from './__generated__/FollowButtonUserPrivate'
 import { UnfollowUser } from './__generated__/UnfollowUser'
+
+interface UnfollowProps {
+  user: Partial<FollowButtonUserPrivate>
+  size: FollowButtonSize
+}
 
 const UNFOLLOW_USER = gql`
   mutation UnfollowUser($id: ID!) {
@@ -28,24 +34,21 @@ const UNFOLLOW_USER = gql`
   }
 `
 
-const Unfollow = ({
-  user,
-  size,
-}: {
-  user: FollowButtonUser
-  size: FollowButtonSize
-}) => {
+const Unfollow = ({ user, size }: UnfollowProps) => {
   const [hover, setHover] = useState(false)
   const [unfollow] = useMutation<UnfollowUser>(UNFOLLOW_USER, {
     variables: { id: user.id },
-    optimisticResponse: {
-      toggleFollowUser: {
-        id: user.id,
-        isFollowee: false,
-        isFollower: user.isFollower,
-        __typename: 'User',
-      },
-    },
+    optimisticResponse:
+      !_isNil(user.id) && !_isNil(user.isFollower)
+        ? {
+            toggleFollowUser: {
+              id: user.id,
+              isFollowee: false,
+              isFollower: user.isFollower,
+              __typename: 'User',
+            },
+          }
+        : undefined,
     update: (cache) => {
       const userName = _get(user, 'userName', null)
       updateUserFollowerCount({ cache, type: 'decrement', userName })

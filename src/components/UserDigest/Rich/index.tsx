@@ -12,7 +12,8 @@ import { toPath } from '~/common/utils'
 
 import styles from './styles.css'
 
-import { UserDigestRichUser } from './__generated__/UserDigestRichUser'
+import { UserDigestRichUserPrivate } from './__generated__/UserDigestRichUserPrivate'
+import { UserDigestRichUserPublic } from './__generated__/UserDigestRichUserPublic'
 
 /**
  * UeserDigest.Rich is a component for presenting user's avatar, display
@@ -24,7 +25,7 @@ import { UserDigestRichUser } from './__generated__/UserDigestRichUser'
  */
 
 type RichProps = {
-  user: UserDigestRichUser
+  user: UserDigestRichUserPublic & Partial<UserDigestRichUserPrivate>
 
   size?: 'sm' | 'lg'
   avatarBadge?: React.ReactNode
@@ -36,27 +37,34 @@ type RichProps = {
   AvatarProps
 
 const fragments = {
-  user: gql`
-    fragment UserDigestRichUser on User {
-      id
-      userName
-      displayName
-      info {
-        description
+  user: {
+    public: gql`
+      fragment UserDigestRichUserPublic on User {
+        id
+        userName
+        displayName
+        info {
+          description
+        }
+        status {
+          state
+        }
+        ...AvatarUser
       }
-      status {
-        state
+      ${Avatar.fragments.user}
+    `,
+    private: gql`
+      fragment UserDigestRichUserPrivate on User {
+        id
+        ...FollowStateUserPrivate
+        ...FollowButtonUserPrivate
+        ...UnblockUserButtonUserPrivate
       }
-      ...AvatarUser
-      ...FollowStateUser
-      ...FollowButtonUser
-      ...UnblockUserButtonUser
-    }
-    ${Avatar.fragments.user}
-    ${FollowButton.State.fragments.user}
-    ${FollowButton.fragments.user}
-    ${UnblockUserButton.fragments.user}
-  `,
+      ${FollowButton.State.fragments.user.private}
+      ${FollowButton.fragments.user.private}
+      ${UnblockUserButton.fragments.user.private}
+    `,
+  },
 }
 
 const Rich = ({
@@ -145,19 +153,19 @@ const Rich = ({
 /**
  * Memoizing
  */
-type MemoedRichType = React.MemoExoticComponent<React.FC<RichProps>> & {
+type MemoizedRichType = React.MemoExoticComponent<React.FC<RichProps>> & {
   fragments: typeof fragments
 }
 
-const MemoedRich = React.memo(Rich, ({ user: prevUser }, { user }) => {
+const MemoizedRich = React.memo(Rich, ({ user: prevUser }, { user }) => {
   return (
     prevUser.id === user.id &&
     prevUser.isFollowee === user.isFollowee &&
     prevUser.isFollower === user.isFollower &&
     prevUser.isBlocked === user.isBlocked
   )
-}) as MemoedRichType
+}) as MemoizedRichType
 
-MemoedRich.fragments = fragments
+MemoizedRich.fragments = fragments
 
-export default MemoedRich
+export default MemoizedRich

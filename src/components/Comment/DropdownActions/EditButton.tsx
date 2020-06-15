@@ -1,29 +1,7 @@
-import gql from 'graphql-tag'
-
 import { IconEdit, Menu, TextIcon, Translate } from '~/components'
 
 interface EditButtonProps {
   openEditCommentDialog: () => void
-}
-
-const fragments = {
-  comment: gql`
-    fragment EditButtonComment on Comment {
-      id
-      state
-      content
-      article {
-        id
-        author {
-          id
-          isBlocking
-        }
-      }
-      parentComment {
-        id
-      }
-    }
-  `,
 }
 
 const EditButton = ({ openEditCommentDialog }: EditButtonProps) => {
@@ -35,7 +13,5 @@ const EditButton = ({ openEditCommentDialog }: EditButtonProps) => {
     </Menu.Item>
   )
 }
-
-EditButton.fragments = fragments
 
 export default EditButton

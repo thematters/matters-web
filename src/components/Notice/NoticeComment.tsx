@@ -27,10 +27,11 @@ const fragments = {
       parentComment {
         id
       }
-      ...ContentComment
+      ...ContentCommentPublic
+      ...ContentCommentPrivate
     }
-
-    ${CommentContent.fragments.comment}
+    ${CommentContent.fragments.comment.public}
+    ${CommentContent.fragments.comment.private}
   `,
 }
 

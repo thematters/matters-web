@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
+import { useRouter } from 'next/router'
 import { useContext, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 
@@ -14,6 +15,7 @@ import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import updateAppreciation from '~/components/GQL/updates/appreciation'
 
 import { APPRECIATE_DEBOUNCE, Z_INDEX } from '~/common/enums'
+import { getQuery } from '~/common/utils'
 
 import AnonymousButton from './AnonymousButton'
 import AppreciateButton from './AppreciateButton'
@@ -22,22 +24,34 @@ import SetupLikerIdAppreciateButton from './SetupLikerIdAppreciateButton'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import { AppreciateArticle } from './__generated__/AppreciateArticle'
-import { AppreciationButtonArticle } from './__generated__/AppreciationButtonArticle'
+import { AppreciationButtonArticlePrivate } from './__generated__/AppreciationButtonArticlePrivate'
+import { AppreciationButtonArticlePublic } from './__generated__/AppreciationButtonArticlePublic'
+
+interface AppreciationButtonProps {
+  article: AppreciationButtonArticlePublic &
+    Partial<AppreciationButtonArticlePrivate>
+}
 
 const fragments = {
-  article: gql`
-    fragment AppreciationButtonArticle on Article {
-      id
-      author {
+  article: {
+    public: gql`
+      fragment AppreciationButtonArticlePublic on Article {
         id
+        author {
+          id
+        }
+        appreciationsReceivedTotal
+        appreciateLimit
       }
-      appreciationsReceivedTotal
-      hasAppreciate
-      appreciateLimit
-      appreciateLeft
-      mediaHash
-    }
-  `,
+    `,
+    private: gql`
+      fragment AppreciationButtonArticlePrivate on Article {
+        id
+        hasAppreciate
+        appreciateLeft
+      }
+    `,
+  },
 }
 
 const APPRECIATE_ARTICLE = gql`
@@ -48,11 +62,9 @@ const APPRECIATE_ARTICLE = gql`
   }
 `
 
-const AppreciationButton = ({
-  article,
-}: {
-  article: AppreciationButtonArticle
-}) => {
+const AppreciationButton = ({ article }: AppreciationButtonProps) => {
+  const router = useRouter()
+  const mediaHash = getQuery({ router, key: 'mediaHash' })
   const viewer = useContext(ViewerContext)
   const { token, refreshToken } = useContext(ReCaptchaContext)
 
@@ -64,7 +76,7 @@ const AppreciationButton = ({
   const [amount, setAmount] = useState(0)
   const [sendAppreciation] = useMutation<AppreciateArticle>(APPRECIATE_ARTICLE)
   const limit = article.appreciateLimit
-  const left = article.appreciateLeft - amount
+  const left = (article.appreciateLeft || 0) - amount
 
   const total = article.appreciationsReceivedTotal + amount
   const appreciatedCount = limit - left
@@ -76,7 +88,7 @@ const AppreciationButton = ({
           updateAppreciation({
             cache,
             left,
-            mediaHash: article.mediaHash || '',
+            mediaHash,
             total,
             viewer,
           })
