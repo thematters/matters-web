@@ -85,8 +85,7 @@ export const makeTitle = (text: string, limit: number) => {
  * @see `<Img>`
  */
 export const optimizeEmbed = (content: string) => {
-  return (
-    content
+  return content
     .replace(/\<iframe /g, '<iframe loading="lazy"')
     .replace(
       /<img\s[^>]*?src\s*=\s*['\"]([^'\"]*?)['\"][^>]*?>/g,
