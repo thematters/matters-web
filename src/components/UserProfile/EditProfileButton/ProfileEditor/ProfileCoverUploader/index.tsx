@@ -106,7 +106,7 @@ export const ProfileCoverUploader: React.FC<Props> = ({ user, onUpload }) => {
 
   return (
     <label htmlFor={fieldId}>
-      <Cover cover={cover} />
+      <Cover cover={cover} inEditor />
 
       <div className="mask">
         {loading ? <Spinner /> : <IconCameraMedium color="white" size="xl" />}

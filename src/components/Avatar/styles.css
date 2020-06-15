@@ -5,7 +5,7 @@
   flex-shrink: 0;
   display: inline-block;
 
-  & img {
+  & :global(img) {
     @mixin object-fit-cover;
 
     border-radius: 50%;

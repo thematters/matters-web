@@ -1,6 +1,8 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 
+import { Img } from '~/components'
+
 import ICON_AVATAR_DEFAULT from '@/public/static/icons/avatar-default.svg'
 import IMAGE_CIVIC_LIKER_RING from '@/public/static/icons/civic-liker-ring.svg'
 
@@ -14,6 +16,7 @@ export interface AvatarProps {
   user?: AvatarUser
   size?: AvatarSize
   src?: string
+  inEditor?: boolean
 }
 
 const fragments = {
@@ -28,8 +31,9 @@ const fragments = {
 }
 
 export const Avatar = (props: AvatarProps) => {
-  const { user, size = 'default', src } = props
+  const { user, size = 'default', src, inEditor } = props
   const source = src || user?.avatar || ICON_AVATAR_DEFAULT
+  const isFallback = !src && !user?.avatar
   const isCivicLiker = user?.liker.civicLiker
   const avatarClasses = classNames({
     avatar: true,
@@ -39,7 +43,7 @@ export const Avatar = (props: AvatarProps) => {
 
   return (
     <div className={avatarClasses}>
-      <img src={source} aria-hidden="true" loading="lazy" />
+      <Img url={source} size="144w" disabled={isFallback || inEditor} />
 
       {isCivicLiker && <span className="ring" />}
 
