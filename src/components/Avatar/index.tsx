@@ -33,7 +33,8 @@ const fragments = {
 export const Avatar = (props: AvatarProps) => {
   const { user, size = 'default', src, inEditor } = props
   const source = src || user?.avatar || ICON_AVATAR_DEFAULT
-  const isFallback = !src && !user?.avatar
+  const isFallback =
+    (!src && !user?.avatar) || source.indexOf('data:image') >= 0
   const isCivicLiker = user?.liker.civicLiker
   const avatarClasses = classNames({
     avatar: true,
