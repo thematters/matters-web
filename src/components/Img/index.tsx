@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import { toSizedImageURL, ToSizedImageURLSize } from '~/common/utils'
 
 /**
@@ -12,12 +14,15 @@ interface ImgProps {
 }
 
 export const Img = ({ url, size, smUpSize, disabled }: ImgProps) => {
-  if (disabled) {
+  const [error, setError] = useState(false)
+
+  // Fallback to the raw `url` if manually disable or responsive image is failed to load
+  if (disabled || error) {
     return <img src={url} loading="lazy" />
   }
 
   return (
-    <picture>
+    <picture onError={() => setError(true)}>
       {smUpSize && (
         <source
           type="image/webp"
@@ -44,6 +49,7 @@ export const Img = ({ url, size, smUpSize, disabled }: ImgProps) => {
           ext: 'webp',
         })}
       />
+
       <img src={url} srcSet={toSizedImageURL({ url, size })} loading="lazy" />
     </picture>
   )
