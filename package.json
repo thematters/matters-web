@@ -36,7 +36,7 @@
     "@matters/matters-editor": "^0.1.13",
     "@reach/alert": "^0.10.3",
     "@reach/dialog": "^0.10.4",
-    "@reach/visually-hidden": "^0.10.2",
+    "@reach/visually-hidden": "^0.10.4",
     "@sentry/browser": "^5.17.0",
     "@stripe/react-stripe-js": "^1.1.2",
     "@stripe/stripe-js": "^1.7.0",
