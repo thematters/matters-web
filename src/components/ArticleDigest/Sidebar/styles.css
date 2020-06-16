@@ -18,7 +18,7 @@
     width: var(--article-digest-sidebar-cover-width);
     height: var(--article-digest-sidebar-cover-width);
 
-    & img {
+    & :global(img) {
       @mixin object-fit-cover;
       border-radius: var(--spacing-xx-tight);
     }

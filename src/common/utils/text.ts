@@ -1,3 +1,5 @@
+import { toSizedImageURL } from './url'
+
 /**
  * Remove html tag and merge multiple spaces into one.
  */
@@ -75,12 +77,46 @@ export const makeTitle = (text: string, limit: number) => {
 }
 
 /**
- * Adding lazy loading attributes to <img>, <iframe>, etc.
+ * Optimize embed images & iframes
  *
- * @see `<LazyLoading>`
+ * 1) Add loading=lazy attribute
+ * 2) Responsive Images
+ *
+ * @see `<Img>`
  */
-export const insertLazyLoading = (content: string) => {
+export const optimizeEmbed = (content: string) => {
   return content
-    .replace(/\<img /g, '<img loading="lazy"')
     .replace(/\<iframe /g, '<iframe loading="lazy"')
+    .replace(
+      /<img\s[^>]*?src\s*=\s*['\"]([^'\"]*?)['\"][^>]*?>/g,
+      (match, src, offset) => {
+        return /* html */ `
+      <picture>
+        <source
+          type="image/webp"
+          media="(min-width: 768px)"
+          srcSet=${toSizedImageURL({ url: src, size: '1080w', ext: 'webp' })}
+          onerror="this.srcset='${src}'"
+        />
+
+        <source
+          media="(min-width: 768px)"
+          srcSet=${toSizedImageURL({ url: src, size: '1080w' })}
+          onerror="this.srcset='${src}'"
+        />
+
+        <source
+          type="image/webp"
+          srcSet=${toSizedImageURL({ url: src, size: '540w', ext: 'webp' })}
+        />
+
+        <img
+          src=${src}
+          srcSet=${toSizedImageURL({ url: src, size: '540w' })}
+          loading="lazy"
+        />
+      </picture>
+    `
+      }
+    )
 }

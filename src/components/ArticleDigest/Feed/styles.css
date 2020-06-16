@@ -34,7 +34,7 @@ header {
 .cover {
   position: relative;
 
-  & img {
+  & :global(img) {
     @mixin object-fit-cover;
     border-radius: 0.25rem;
     background-color: var(--color-grey-lighter);

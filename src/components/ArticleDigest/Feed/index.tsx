@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import React from 'react'
 
-import { Card, IconPinMedium, TextIcon, Translate } from '~/components'
+import { Card, IconPinMedium, Img, TextIcon, Translate } from '~/components'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { UserDigest } from '~/components/UserDigest'
 
@@ -74,6 +74,7 @@ const BaseArticleDigestFeed = ({
   })
   const { viewMode } = data?.clientPreference || { viewMode: 'comfortable' }
   const isCompactMode = viewMode === 'compact'
+  const isDefaultMode = viewMode === 'default'
 
   const { author, summary, sticky } = article
   const isBanned = article.articleState === 'banned'
@@ -147,7 +148,11 @@ const BaseArticleDigestFeed = ({
           <section className="content">
             {cover && (
               <div className="cover">
-                <img src={cover} loading="lazy" />
+                <Img
+                  url={cover}
+                  size={isDefaultMode ? '540w' : '144w'}
+                  smUpSize={isDefaultMode ? '1080w' : '360w'}
+                />
               </div>
             )}
             {<p className="description">{cleanedSummary}</p>}
