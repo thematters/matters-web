@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
+import { useRouter } from 'next/router'
 import { useContext, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 
@@ -11,10 +12,11 @@ import {
 } from '~/components'
 import { useMutation } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
+import updateAppreciation from '~/components/GQL/updates/appreciation'
 
 import { APPRECIATE_DEBOUNCE, Z_INDEX } from '~/common/enums'
+import { getQuery } from '~/common/utils'
 
-import Appreciators from '../Toolbar/Appreciators'
 import AnonymousButton from './AnonymousButton'
 import AppreciateButton from './AppreciateButton'
 import CivicLikerButton from './CivicLikerButton'
@@ -56,16 +58,13 @@ const APPRECIATE_ARTICLE = gql`
   mutation AppreciateArticle($id: ID!, $amount: Int!, $token: String!) {
     appreciateArticle(input: { id: $id, amount: $amount, token: $token }) {
       id
-      appreciationsReceivedTotal
-      hasAppreciate
-      appreciateLeft
-      ...AppreciatorsArticle
     }
   }
-  ${Appreciators.fragments.article}
 `
 
 const AppreciationButton = ({ article }: AppreciationButtonProps) => {
+  const router = useRouter()
+  const mediaHash = getQuery({ router, key: 'mediaHash' })
   const viewer = useContext(ViewerContext)
   const { token, refreshToken } = useContext(ReCaptchaContext)
 
@@ -85,6 +84,15 @@ const AppreciationButton = ({ article }: AppreciationButtonProps) => {
     try {
       await sendAppreciation({
         variables: { id: article.id, amount, token },
+        update: (cache) => {
+          updateAppreciation({
+            cache,
+            left,
+            mediaHash,
+            total,
+            viewer,
+          })
+        },
       }).then(refreshToken)
     } catch (e) {
       console.error(e)

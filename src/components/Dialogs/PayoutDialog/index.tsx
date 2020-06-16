@@ -4,8 +4,6 @@ import { Dialog, PaymentForm, Translate, ViewerContext } from '~/components'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 
-import { Payout_payout as PayoutResult } from '~/components/GQL/mutations/__generated__/Payout'
-
 type Step =
   | 'complete'
   | 'connectStripeAccount'
@@ -36,7 +34,6 @@ const BasePayoutDialog = ({
   const [showDialog, setShowDialog] = useState(true)
   const [step, setStep] = useState<Step>(initialStep)
 
-  const [payoutTx, setPayoutTx] = useState<PayoutResult>()
   const [resetPasswordData, setResetPasswordData] = useState<ResetPasswordData>(
     { email: viewer.info.email, codeId: '' }
   )
@@ -67,7 +64,6 @@ const BasePayoutDialog = ({
   const isConnectStripeAccount = step === 'connectStripeAccount'
   const isConfirm = step === 'confirm'
   const isPasswordInvalid = step === 'passwordInvalid'
-  const isProcessing = step === 'processing'
   const isResetPasswordComplete = step === 'resetPasswordComplete'
   const isResetPasswordConfirm = step === 'resetPasswordConfirm'
   const isResetPasswordRequest = step === 'resetPasswordRequest'
@@ -102,18 +98,8 @@ const BasePayoutDialog = ({
         {isConfirm && (
           <PaymentForm.Payout.Confirm
             currency={CURRENCY.HKD}
-            submitCallback={(tx) => {
-              setPayoutTx(tx)
-              setStep('processing')
-            }}
+            submitCallback={(tx) => setStep('complete')}
             switchToPasswordInvalid={() => setStep('passwordInvalid')}
-          />
-        )}
-
-        {isProcessing && (
-          <PaymentForm.Processing
-            nextStep={() => setStep('complete')}
-            txId={payoutTx?.id || ''}
           />
         )}
 

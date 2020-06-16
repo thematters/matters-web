@@ -16,7 +16,7 @@ import styles from './styles.css'
 import { ToolbarArticlePrivate } from './__generated__/ToolbarArticlePrivate'
 import { ToolbarArticlePublic } from './__generated__/ToolbarArticlePublic'
 
-interface ToolbarProps {
+export interface ToolbarProps {
   article: ToolbarArticlePublic & Partial<ToolbarArticlePrivate>
 }
 
