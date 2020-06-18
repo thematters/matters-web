@@ -17,7 +17,7 @@ env:
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
 
 jobs:
-  build_and_deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
@@ -56,6 +56,33 @@ jobs:
 
       # - name: Test - BDD
 
+      # === `develop` branch ===
+      - name: Build (devlop)
+        if: github.ref == 'refs/heads/develop' || github.base_ref == 'develop'
+        run: cp .env.dev .env && npm run build
+
+      # === `master` branch ===
+      - name: Build (production)
+        if: github.ref == 'refs/heads/master' || github.base_ref == 'master'
+        run: cp .env.prod .env && npm run build
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: next.js artifacts
+          path: .next
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@master
+
+      - uses: actions/download-artifact@master
+        with:
+          name: next.js artifacts
+          path: .next
+
       - name: Setup AWS
         if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/master'
         uses: aws-actions/configure-aws-credentials@v1
@@ -65,14 +92,10 @@ jobs:
           aws-region: ap-southeast-1
 
       # === `develop` branch ===
-      - name: Build (devlop)
-        if: github.ref == 'refs/heads/develop' || github.base_ref == 'develop'
-        run: cp .env.dev .env && npm run build
-
       - name: Upload Assets (devlop)
         if: github.ref == 'refs/heads/develop'
         run: |
-          aws s3 sync ./_next s3://web-develop.matters.news/_next
+          aws s3 sync .next s3://web-develop.matters.news/_next
 
       - name: Deploy - eb init (develop)
         if: github.ref == 'refs/heads/develop'
@@ -92,14 +115,10 @@ jobs:
           command: 'deploy matters-client-web-develop'
 
       # === `master` branch ===
-      - name: Build (production)
-        if: github.ref == 'refs/heads/master' || github.base_ref == 'master'
-        run: cp .env.prod .env && npm run build
-
       - name: Upload Assets (production)
         if: github.ref == 'refs/heads/master'
         run: |
-          aws s3 sync ./_next s3://matters.news/_next
+          aws s3 sync .next s3://matters.news/_next
 
       - name: Deploy - eb init (production)
         if: github.ref == 'refs/heads/master'
@@ -113,6 +132,10 @@ jobs:
         with:
           command: 'deploy matters-client-web-prod'
 
+  notify:
+    runs-on: ubuntu-latest
+    needs: deploy
+    steps:
       - name: Slack Notification
         if: always()
         uses: 8398a7/action-slack@v3
