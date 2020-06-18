@@ -57,7 +57,7 @@ jobs:
       # - name: Test - BDD
 
       - name: Setup AWS
-        if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/master'
+        # if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/master'
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -66,27 +66,27 @@ jobs:
 
       # === `develop` branch ===
       - name: Build (devlop)
-        if: github.ref == 'refs/heads/develop' || github.base_ref == 'develop'
+        # if: github.ref == 'refs/heads/develop' || github.base_ref == 'develop'
         run: cp .env.dev .env && npm run build
 
       - name: Upload Assets (devlop)
-        if: github.ref == 'refs/heads/develop'
+        # if: github.ref == 'refs/heads/develop'
         run: |
           aws s3 sync .next s3://web-develop.matters.news/_next
 
       - name: Deploy - eb init (develop)
-        if: github.ref == 'refs/heads/develop'
+        # if: github.ref == 'refs/heads/develop'
         uses: hmanzur/actions-aws-eb@v1.0.0
         with:
           command: 'init matters-stage --region ap-southeast-1'
 
       - name: Deploy - mv .ebextensions (develop)
-        if: github.ref == 'refs/heads/develop'
+        # if: github.ref == 'refs/heads/develop'
         run: |
           cp .ebextensions/http-basic-auth.config.dev .ebextensions/http-basic-auth.config
 
       - name: Deploy - eb deploy (develop)
-        if: github.ref == 'refs/heads/develop'
+        # if: github.ref == 'refs/heads/develop'
         uses: hmanzur/actions-aws-eb@v1.0.0
         with:
           command: 'deploy matters-client-web-develop'
