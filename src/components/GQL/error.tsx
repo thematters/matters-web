@@ -4,7 +4,7 @@ import { Error, LoginButton, Translate } from '~/components'
 
 import { ADD_TOAST, ERROR_CODES, ErrorCodeKeys } from '~/common/enums'
 
-export const getErrorCodes = (error: ApolloError): ErrorCodeKeys[] => {
+export const getErrorCodes = (error?: ApolloError): ErrorCodeKeys[] => {
   const errorCodes: ErrorCodeKeys[] = []
 
   if (!error || !error.graphQLErrors) {

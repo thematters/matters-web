@@ -6,6 +6,7 @@
 
 - Install dependencies: `npm i`
 - Environment variables: `cp .env.local.example .env.local`
+- (Optional) Run `npm run gen:type` or `npm run gen:watch`
 - Run `npm run dev`, then go to `http://localhost:3000/`
 
 ### Build and run production server
