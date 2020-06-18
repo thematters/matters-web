@@ -72,7 +72,7 @@ jobs:
       - name: Upload Assets (devlop)
         if: github.ref == 'refs/heads/develop'
         run: |
-          aws s3 sync ./_next s3://web-develop.matters.news/_next
+          aws s3 sync .next s3://web-develop.matters.news/_next
 
       - name: Deploy - eb init (develop)
         if: github.ref == 'refs/heads/develop'
@@ -99,7 +99,7 @@ jobs:
       - name: Upload Assets (production)
         if: github.ref == 'refs/heads/master'
         run: |
-          aws s3 sync ./_next s3://matters.news/_next
+          aws s3 sync .next s3://matters.news/_next
 
       - name: Deploy - eb init (production)
         if: github.ref == 'refs/heads/master'
