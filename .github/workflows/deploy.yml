@@ -38,7 +38,7 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Install Dependencies
-        run: npm install
+        run: npm ci
 
       - name: Lint
         run: |
@@ -66,7 +66,7 @@ jobs:
 
       # === `develop` branch ===
       - name: Build (devlop)
-        if: github.ref == 'refs/heads/develop'
+        if: github.ref == 'refs/heads/develop' || github.base_ref == 'refs/heads/develop'
         run: cp .env.dev .env && npm run build
 
       - name: Upload Assets (devlop)
@@ -93,7 +93,7 @@ jobs:
 
       # === `master` branch ===
       - name: Build (production)
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/master' || github.base_ref == 'refs/heads/master'
         run: cp .env.prod .env && npm run build
 
       - name: Upload Assets (production)
