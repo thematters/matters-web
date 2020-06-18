@@ -42,9 +42,9 @@ jobs:
 
       - name: Lint
         run: |
-          npm run gen:clean
-          && npm run gen:type
-          && npm run lint
+          npm run gen:clean \
+          && npm run gen:type \
+          && npm run lint \
           && npm run format:check
 
       # - name: Test
