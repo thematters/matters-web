@@ -56,6 +56,16 @@ jobs:
 
       # - name: Test - BDD
 
+      # === `develop` branch ===
+      - name: Build (devlop)
+        # if: github.ref == 'refs/heads/develop' || github.base_ref == 'develop'
+        run: cp .env.dev .env && npm run build
+
+      # === `master` branch ===
+      - name: Build (production)
+        if: github.ref == 'refs/heads/master' || github.base_ref == 'master'
+        run: cp .env.prod .env && npm run build
+
       - name: Setup AWS
         # if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/master'
         uses: aws-actions/configure-aws-credentials@v1
@@ -69,10 +79,6 @@ jobs:
         run: zip -r deploy.zip . -x node_modules/\* .git/\*
 
       # === `develop` branch ===
-      - name: Build (devlop)
-        # if: github.ref == 'refs/heads/develop' || github.base_ref == 'develop'
-        run: cp .env.dev .env && npm run build
-
       - name: Upload Assets (devlop)
         # if: github.ref == 'refs/heads/develop'
         run: |
@@ -96,10 +102,6 @@ jobs:
           deployment_package: deploy.zip
 
       # === `master` branch ===
-      - name: Build (production)
-        if: github.ref == 'refs/heads/master' || github.base_ref == 'master'
-        run: cp .env.prod .env && npm run build
-
       - name: Upload Assets (production)
         if: github.ref == 'refs/heads/master'
         run: |
