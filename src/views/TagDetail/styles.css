@@ -4,6 +4,18 @@
   }
 }
 
+.maintainer {
+  @mixin flex-center-start;
+
+  padding: 0 var(--spacing-base) var(--spacing-base);
+
+  & span {
+    color: var(--color-grey-dark);
+    font-size: var(--font-size-sm);
+    margin-left: var(--spacing-x-tight);
+  }
+}
+
 .description {
   padding: 0 var(--spacing-base);
 
