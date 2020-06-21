@@ -1,5 +1,7 @@
 # matters-web
 
+![](https://github.com/thematters/matters-web/workflows/Deployment/badge.svg) ![](https://github.com/thematters/matters-web/workflows/Create%20Release/badge.svg)
+
 ## Getting Started
 
 ### Start local dev

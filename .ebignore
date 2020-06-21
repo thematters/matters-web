@@ -1,7 +1,0 @@
-.git
-node_modules
-.DS_Store
-.DS_Store?
-.vscode
-.idea
-static-site-build
