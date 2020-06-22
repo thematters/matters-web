@@ -1,0 +1,37 @@
+name: Create Release
+
+on:
+  push:
+    branches:
+      - master
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@master
+
+      - name: Get Version
+        id: version
+        uses: martinbeentjes/npm-get-version-action@master
+
+      - name: Create Release
+        uses: actions/create-release@v1
+        with:
+          tag_name: v${{ steps.version.outputs.current-version}}
+          release_name: v${{ steps.version.outputs.current-version}}
+          draft: false
+          prerelease: false
+
+      - name: Slack Notification
+        if: always()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          author_name: matters-web
+          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took
