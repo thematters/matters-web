@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
+import _find from 'lodash/find'
 import _get from 'lodash/get'
 import { useRouter } from 'next/router'
 import { useContext, useState } from 'react'
@@ -17,6 +18,7 @@ import {
   ViewerContext,
 } from '~/components'
 import { getErrorCodes, QueryError } from '~/components/GQL'
+import { UserDigest } from '~/components/UserDigest'
 
 import { ERROR_CODES } from '~/common/enums'
 import { getQuery } from '~/common/utils'
@@ -33,13 +35,22 @@ const TAG_DETAIL = gql`
       ... on Tag {
         id
         content
+        creator {
+          id
+          ...UserDigestMiniUser
+        }
         description
+        editors {
+          id
+          ...UserDigestMiniUser
+        }
         articles(input: { first: 0, selected: true }) {
           totalCount
         }
       }
     }
   }
+  ${UserDigest.Mini.fragments.user}
 `
 
 type TagFeed = 'latest' | 'selected'
@@ -64,6 +75,11 @@ const TagDetail = ({ data }: { data: TagDetailType }) => {
   if (hasSelected === 0 && feed === 'selected') {
     setFeed('latest')
   }
+
+  const editors = data.node.editors || []
+  const maintainer =
+    _find(editors, (editor) => editor.userName !== 'matty') ||
+    _find(editors, (editor) => editor.userName === 'matty')
 
   return (
     <Layout.Main>
@@ -94,6 +110,20 @@ const TagDetail = ({ data }: { data: TagDetailType }) => {
 
       <PullToRefresh>
         <Spacer />
+
+        {maintainer && (
+          <section className="maintainer">
+            <UserDigest.Mini
+              user={maintainer}
+              avatarSize="xs"
+              hasAvatar
+              hasDisplayName
+            />
+            <span>
+              <Translate zh_hant="主理" zh_hans="主理" />
+            </span>
+          </section>
+        )}
 
         {data.node.description && (
           <p className="description">{data.node.description}</p>
