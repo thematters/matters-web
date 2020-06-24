@@ -14,7 +14,7 @@
     "start": "PORT=\"${PORT:-3000}\"; next start -p $PORT",
     "build": "NODE_ENV=production npm run gen:type && next build",
     "test": "jest",
-    "format": "prettier --write \"{,!(build|node_modules|coverage)/**/!(__generated__)/}*.{js,jsx,ts,tsx,json}\"",
+    "format": "prettier --write \"{,!(.next|build|node_modules|coverage)/**/!(__generated__)/}*.{js,jsx,ts,tsx,json}\"",
     "format:check": "npm run format -- --list-different",
     "lint": "npm run typecheck && tslint -p .",
     "lint:fix": "tslint -p . --fix",
@@ -116,6 +116,7 @@
     "chromedriver": "^83.0.0",
     "cucumber": "^6.0.5",
     "cucumber-pretty": "^6.0.0",
+    "cz-conventional-changelog": "^3.2.0",
     "file-loader": "^6.0.0",
     "geckodriver": "^1.19.1",
     "husky": "^4.2.5",
@@ -151,7 +152,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run format && npm run lint"
+      "pre-commit": "npm run format && npm run lint",
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
     }
   },
   "jest": {
@@ -170,6 +172,7 @@
     "testPathIgnorePatterns": [
       "<rootDir>/node_modules/",
       "<rootDir>/build/",
+      "<rootDir>/.next/",
       "<rootDir>/bin/",
       "<rootDir>/static/"
     ],
@@ -207,6 +210,11 @@
         "tsConfig": "<rootDir>/tsconfig.json",
         "diagnostics": false
       }
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
     }
   }
 }
