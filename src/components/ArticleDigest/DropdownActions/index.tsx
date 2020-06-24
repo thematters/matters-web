@@ -1,6 +1,9 @@
 import gql from 'graphql-tag'
+import _find from 'lodash/find'
 import _isEmpty from 'lodash/isEmpty'
 import _pickBy from 'lodash/pickBy'
+import _some from 'lodash/some'
+import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
 import {
@@ -16,6 +19,7 @@ import {
 } from '~/components'
 
 import { TEXT } from '~/common/enums'
+import { getQuery } from '~/common/utils'
 
 import AppreciatorsButton from './AppreciatorsButton'
 import ArchiveArticle from './ArchiveArticle'
@@ -69,12 +73,18 @@ const fragments = {
       ...ArchiveArticleArticle
       ...StickyButtonArticle
       ...ExtendButtonArticle
+      ...RemoveTagButtonArticle
+      ...SetTagSelectedButtonArticle
+      ...SetTagUnselectedButtonArticle
     }
     ${AppreciatorsDialog.fragments.article}
     ${FingerprintDialog.fragments.article}
     ${StickyButton.fragments.article}
     ${ArchiveArticle.fragments.article}
     ${ExtendButton.fragments.article}
+    ${RemoveTagButton.fragments.article}
+    ${SetTagSelectedButton.fragments.article}
+    ${SetTagUnselectedButton.fragments.article}
   `,
 }
 
@@ -156,12 +166,26 @@ const DropdownActions = (props: DropdownActionsProps) => {
     inTagDetailLatest,
     inTagDetailSelected,
   } = props
+  const router = useRouter()
   const viewer = useContext(ViewerContext)
 
   const isArticleAuthor = viewer.id === article.author.id
-  const isMattyUser = viewer.info.email === 'hi@matters.news'
   const isActive = article.articleState === 'active'
   const isInTagDetail = inTagDetailLatest || inTagDetailSelected
+
+  // check permission if in tag detail
+  let canEditTag = false
+  if (isInTagDetail) {
+    const tagId = getQuery({ router, key: 'tagId' })
+    const tag = _find(article.tags || [], (item) => item.id === tagId)
+    const isEditor = _some(
+      tag?.editors || [],
+      (editor) => editor.id === viewer.id
+    )
+    const isCreator = tag?.creator?.id === viewer.id
+    canEditTag =
+      isEditor || isCreator || viewer.info.email === 'hi@matters.news'
+  }
 
   const controls = {
     hasAppreciators: article.appreciationsReceived.totalCount > 0,
@@ -174,9 +198,9 @@ const DropdownActions = (props: DropdownActionsProps) => {
       !viewer.isInactive
     ),
     hasArchive: isArticleAuthor && isActive && !viewer.isArchived,
-    hasSetTagSelected: !!(inTagDetailLatest && isMattyUser),
-    hasSetTagUnSelected: !!(inTagDetailSelected && isMattyUser),
-    hasRemoveTag: !!(isInTagDetail && isMattyUser),
+    hasSetTagSelected: !!(inTagDetailLatest && canEditTag),
+    hasSetTagUnSelected: !!(inTagDetailSelected && canEditTag),
+    hasRemoveTag: !!(isInTagDetail && canEditTag),
   }
 
   if (_isEmpty(_pickBy(controls))) {
