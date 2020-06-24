@@ -51,10 +51,7 @@ const ALL_TAGS = gql`
 const CreateTagButton = () => {
   const viewer = useContext(ViewerContext)
 
-  // temporarily safety check
-  const canEdit = viewer.info.email === 'hi@matters.news'
-
-  if (!canEdit) {
+  if (!viewer.id) {
     return null
   }
 
