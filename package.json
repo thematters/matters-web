@@ -34,7 +34,7 @@
     "@apollo/react-ssr": "^3.1.3",
     "@matters/apollo-upload-client": "^11.1.0",
     "@matters/matters-editor": "^0.1.15",
-    "@reach/alert": "^0.10.4",
+    "@reach/alert": "^0.10.5",
     "@reach/dialog": "^0.10.4",
     "@reach/visually-hidden": "^0.10.4",
     "@sentry/browser": "^5.18.0",
