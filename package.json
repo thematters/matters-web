@@ -107,7 +107,7 @@
     "@types/react-virtualized": "^9.21.10",
     "@types/segment-analytics": "0.0.32",
     "@types/styled-jsx": "^2.2.8",
-    "@types/validator": "^13.0.0",
+    "@types/validator": "^13.1.0",
     "@zeit/next-bundle-analyzer": "^0.1.2",
     "apollo": "^2.28.3",
     "babel-jest": "^26.1.0",
