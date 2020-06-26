@@ -1,5 +1,6 @@
 .overlay {
   @mixin expand-to-container;
+
   content: '';
   background: rgba(0, 0, 0, 0.25);
   will-change: opacity;
@@ -11,7 +12,6 @@
   flex-direction: column;
   max-height: 80vh;
   max-height: calc(var(--vh) * 90);
-
   background: var(--color-white);
   border-radius: 0.5rem 0.5rem 0 0;
   will-change: transform, top;
@@ -54,14 +54,12 @@
   top: 0;
   left: 50%;
   padding: var(--spacing-x-tight);
-
   transform: translateX(-50%);
 
   & .icon {
     display: inline-block;
     width: 3rem;
     height: 0.375rem;
-
     border-radius: 0.5rem;
     background: var(--color-grey-lighter);
   }

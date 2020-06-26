@@ -5,7 +5,6 @@
     position: relative;
     display: block;
     padding-left: var(--spacing-loose);
-
     cursor: pointer;
     user-select: none;
 
@@ -17,6 +16,7 @@
       width: 0.6rem;
       height: 0.6rem;
     }
+
     &:focus {
       outline: 0;
     }

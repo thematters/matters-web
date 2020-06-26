@@ -1,7 +1,6 @@
 .toast {
   margin: 0 var(--spacing-base) var(--spacing-base);
   padding: var(--spacing-x-tight) var(--spacing-base);
-
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
   border-radius: 0.5rem;
@@ -12,15 +11,19 @@
   &.top {
     @mixin flex-start-space-between;
   }
+
   &.bottom {
     @mixin flex-end-space-between;
   }
+
   &.center {
     @mixin flex-center-space-between;
   }
+
   &.center-x {
     & section {
       width: 100%;
+
       & p.content,
       & p.sub-description {
         width: 100%;
@@ -40,7 +43,6 @@
   flex-shrink: 0;
   display: inline-flex;
   margin-left: var(--spacing-x-tight);
-
   font-weight: var(--font-weight-normal);
 }
 
@@ -64,6 +66,7 @@
     visibility: hidden;
     opacity: 0;
   }
+
   to {
     visibility: visible;
     opacity: 1;

@@ -5,8 +5,8 @@
 
 ul {
   @mixin hide-scrollbar;
-  display: flex;
 
+  display: flex;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 

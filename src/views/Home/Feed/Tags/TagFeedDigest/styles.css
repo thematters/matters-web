@@ -1,13 +1,12 @@
 .container {
   background: var(--color-white);
-  box-shadow: 0px 2px 16px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
   border-radius: 0.25rem;
   overflow: hidden;
 }
 
 header {
   display: flex;
-
   padding: var(--spacing-base);
   color: var(--color-white);
   background: var(--color-matters-green);
@@ -23,6 +22,7 @@ ul {
   & li {
     & :global(h4) {
       @mixin line-clamp;
+
       height: 2rem;
       line-height: 2rem;
     }

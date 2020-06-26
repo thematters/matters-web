@@ -4,13 +4,13 @@
 
 header {
   @mixin flex-end-space-between;
+
   padding: 0 var(--spacing-base);
   margin-bottom: var(--spacing-base);
 
   & .avatar {
     display: inline-flex;
     margin-top: calc(var(--spacing-loose) * -1);
-
     box-shadow: 0 0 0 3px var(--color-white);
     border-radius: 50%;
   }
@@ -40,7 +40,6 @@ header {
 
   & .username {
     margin-top: var(--spacing-x-tight);
-
     color: var(--color-grey-dark);
     font-size: var(--font-size-md);
     line-height: 1;
@@ -49,7 +48,6 @@ header {
   & .description {
     position: relative;
     margin-top: var(--spacing-base);
-
     color: var(--color-grey-darker);
     font-size: var(--font-size-md);
     white-space: pre-wrap;
@@ -58,14 +56,12 @@ header {
 
 footer {
   padding: 0 var(--spacing-base);
-
   color: var(--color-grey);
   font-size: var(--font-size-sm);
 
   & :global(> *) {
     display: inline-flex;
     align-items: center;
-
     line-height: 1.5rem;
 
     & + * {
@@ -76,7 +72,6 @@ footer {
   & .count {
     display: block;
     padding-right: var(--spacing-x-tight);
-
     color: var(--color-black);
     font-size: var(--font-size-lg);
     font-weight: var(--font-weight-bold);

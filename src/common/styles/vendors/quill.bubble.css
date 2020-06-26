@@ -4,14 +4,11 @@
   --control-height: 24px;
   --input-padding-width: 5px;
   --input-padding-height: 3px;
-
   --background-color: var(--color-white);
   --text-color: var(--color-black);
   --border-color: rgba(0, 0, 0, 0.08);
-
   --inactive-color: var(--color-black);
   --active-color: var(--color-matters-gold);
-
   --arrow-width: 6px;
 }
 
@@ -67,7 +64,7 @@
   box-shadow: var(--shadow-dark);
   border-radius: var(--spacing-xx-tight);
 
-  &:after {
+  &::after {
     clear: both;
     content: '';
     display: table;
@@ -77,10 +74,11 @@
     float: left;
     height: var(--control-height);
     padding: var(--input-padding-height) var(--input-padding-width);
-    width: calc(
-      var(--control-height) +
+    width:
+      calc(
+        var(--control-height) +
         (var(--input-padding-width) - var(--input-padding-height)) * 2
-    );
+      );
   }
 
   & svg {
@@ -105,6 +103,7 @@
     & .ql-stroke.ql-fill {
       fill: var(--active-color);
     }
+
     & .ql-stroke,
     & .ql-stroke-miter {
       stroke: var(--active-color);
@@ -150,6 +149,7 @@
   & .ql-tooltip {
     position: absolute;
     transform: translateY(10px);
+
     /* transition: all 0.2s ease-in-out; */
 
     & a {
@@ -166,7 +166,7 @@
     display: inline-block;
     vertical-align: middle;
 
-    &:after {
+    &::after {
       clear: both;
       content: '';
       display: table;
@@ -196,6 +196,7 @@
   & .ql-empty {
     fill: none;
   }
+
   & .ql-even {
     fill-rule: evenodd;
   }
@@ -214,10 +215,12 @@
       display: none;
     }
   }
+
   & .ql-direction.ql-active {
     & svg:last-child {
       display: inline;
     }
+
     & svg:first-child {
       display: none;
     }
@@ -253,6 +256,7 @@
       z-index: -1;
     }
   }
+
   & .ql-tooltip:not(.ql-flip) .ql-tooltip-arrow {
     border-bottom: var(--arrow-width) solid var(--background-color);
     top: calc(-1 * var(--arrow-width));
@@ -262,6 +266,7 @@
       border-bottom: calc(var(--arrow-width) + 2px) solid var(--border-color);
     }
   }
+
   & .ql-tooltip.ql-flip .ql-tooltip-arrow {
     border-top: var(--arrow-width) solid var(--background-color);
     bottom: calc(-1 * var(--arrow-width));
@@ -292,7 +297,6 @@
       width: 100%;
       height: 100%;
       padding: var(--spacing-x-tight) var(--spacing-base);
-
       color: var(--text-color);
       font-size: var(--font-size-sm);
       background: transparent;

@@ -2,7 +2,6 @@
   display: inline-flex;
   align-items: center;
   justify-content: flex-start;
-
   user-select: none;
   vertical-align: middle;
 }
@@ -22,26 +21,31 @@
     font-size: var(--font-size-xs);
   }
 }
+
 .size-sm {
   & .text {
     font-size: var(--font-size-sm);
   }
 }
+
 .size-md {
   & .text {
     font-size: var(--font-size-md);
   }
 }
+
 .size-md-s {
   & .text {
     font-size: var(--font-size-md-s);
   }
 }
+
 .size-xm {
   & .text {
     font-size: var(--font-size-xm);
   }
 }
+
 .size-lg {
   & .text {
     font-size: var(--font-size-lg);
@@ -52,27 +56,35 @@
 .black {
   color: var(--color-black);
 }
+
 .green {
   color: var(--color-matters-green);
 }
+
 .gold {
   color: var(--color-matters-gold);
 }
+
 .grey {
   color: var(--color-grey);
 }
+
 .grey-light {
   color: var(--color-grey-light);
 }
+
 .grey-dark {
   color: var(--color-grey-dark);
 }
+
 .grey-darker {
   color: var(--color-grey-darker);
 }
+
 .white {
   color: var(--color-white);
 }
+
 .red {
   color: var(--color-red);
 }
@@ -82,53 +94,67 @@
   &.text-right .text {
     padding-left: var(--spacing-xxx-tight);
   }
+
   &.text-left .text {
     padding-right: var(--spacing-xxx-tight);
   }
+
   &.text-bottom .text {
     padding-top: var(--spacing-xxx-tight);
   }
 }
+
 .spacing-xxtight.hasIcon {
   &.text-right .text {
     padding-left: var(--spacing-xx-tight);
   }
+
   &.text-left .text {
     padding-right: var(--spacing-xx-tight);
   }
+
   &.text-bottom .text {
     padding-top: var(--spacing-xx-tight);
   }
 }
+
 .spacing-xtight.hasIcon {
   &.text-right .text {
     padding-left: var(--spacing-x-tight);
   }
+
   &.text-left .text {
     padding-right: var(--spacing-x-tight);
   }
+
   &.text-bottom .text {
     padding-top: var(--spacing-x-tight);
   }
 }
+
 .spacing-tight.hasIcon {
   &.text-right .text {
     padding-left: var(--spacing-tight);
   }
+
   &.text-left .text {
     padding-right: var(--spacing-tight);
   }
+
   &.text-bottom .text {
     padding-top: var(--spacing-tight);
   }
 }
+
 .spacing-base.hasIcon {
   &.text-right .text {
     padding-left: var(--spacing-base);
   }
+
   &.text-left .text {
     padding-right: var(--spacing-base);
   }
+
   &.text-bottom .text {
     padding-top: var(--spacing-base);
   }
@@ -138,15 +164,19 @@
 .weight-light {
   font-weight: var(--font-weight-light);
 }
+
 .weight-normal {
   font-weight: var(--font-weight-normal);
 }
+
 .weight-md {
   font-weight: var(--font-weight-medium);
 }
+
 .weight-semibold {
   font-weight: var(--font-weight-semibold);
 }
+
 .weight-bold {
   font-weight: var(--font-weight-bold);
 }

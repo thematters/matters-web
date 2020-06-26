@@ -2,7 +2,6 @@
   & .name {
     padding: 0 var(--spacing-base);
     margin: var(--spacing-loose) 0 var(--spacing-x-tight);
-
     color: var(--color-grey-dark);
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-normal);
@@ -24,7 +23,6 @@ ul {
   @media (--sm-up) {
     margin-left: var(--spacing-base);
     margin-right: var(--spacing-base);
-
     border-radius: 0.5rem;
 
     & :global(> li) {

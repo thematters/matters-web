@@ -23,14 +23,12 @@
 
 footer {
   margin-top: var(--spacing-base);
-
   color: var(--color-grey);
   font-size: var(--font-size-sm);
 
   & :global(> *) {
     display: inline-flex;
     align-items: center;
-
     line-height: 1.5rem;
 
     & + * {
@@ -41,7 +39,6 @@ footer {
   & .count {
     display: block;
     padding-right: var(--spacing-x-tight);
-
     color: var(--color-black);
     font-size: var(--font-size-lg);
     font-weight: var(--font-weight-bold);

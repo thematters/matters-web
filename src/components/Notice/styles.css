@@ -1,14 +1,12 @@
 .container {
   display: flex;
   align-items: flex-start;
-
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-normal);
 }
 
 .avatar-wrap {
   flex-shrink: 0;
-
   margin-right: var(--spacing-x-tight);
   width: 2rem;
 
@@ -16,6 +14,7 @@
     & :global(.avatar) {
       border: 1.5px solid var(--color-white);
     }
+
     & :global(> *) {
       position: relative;
       display: inline-flex;
@@ -23,9 +22,11 @@
       & + :global(*) {
         margin-left: calc(var(--spacing-x-tight) * -1);
       }
+
       &:nth-child(1) {
         z-index: 2;
       }
+
       &:nth-child(2) {
         z-index: 1;
       }
@@ -54,6 +55,7 @@
 
   & .head-wrap {
     @mixin flex-start-space-between;
+
     margin-bottom: var(--spacing-x-tight);
 
     & h4 {

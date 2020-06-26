@@ -1,5 +1,6 @@
 h2 {
   @mixin font-serif;
+
   font-size: 1.7rem;
   line-height: 1.4;
 
@@ -14,7 +15,6 @@ header {
   left: 0;
   right: 0;
   padding: var(--spacing-x-loose) 0;
-
   z-index: 1;
 
   & .logo {
@@ -27,13 +27,12 @@ header {
 
 .slogan {
   @mixin flex-center-space-between;
-  align-items: flex-start;
 
+  align-items: flex-start;
   position: relative;
   padding-top: 8.125rem;
   height: 100vh;
   height: calc(var(--vh) * 100);
-
   background-color: var(--color-green-lighter);
   background-repeat: no-repeat;
   background-position: right bottom;
@@ -119,6 +118,7 @@ header {
         font-size: var(--font-size-xl);
         font-weight: var(--font-weight-light);
       }
+
       & p {
         margin-top: var(--spacing-base);
         margin-bottom: var(--spacing-x-loose);
@@ -135,7 +135,8 @@ header {
 
   @media (--sm-up) {
     margin-top: 3.5rem;
-    background: linear-gradient(
+    background:
+      linear-gradient(
         90deg,
         var(--color-yellow-lighter) 50%,
         transparent 50%
@@ -159,6 +160,7 @@ header {
 
       & .intro {
         @mixin flex-start-center;
+
         flex-direction: column;
         text-align: left;
 
@@ -194,6 +196,7 @@ header {
 
     & a {
       @mixin all-transition;
+
       position: relative;
       display: block;
       padding: var(--spacing-base);
@@ -210,6 +213,7 @@ header {
 
       & h3 {
         @mixin font-serif;
+
         margin-bottom: var(--spacing-x-tight);
         font-size: var(--font-size-xl);
         line-height: 1.3333333;
@@ -241,7 +245,6 @@ header {
 
 .footer {
   padding: 4.5rem 0 2rem;
-
   background: var(--color-grey-lighter);
   text-align: center;
 
@@ -253,6 +256,7 @@ header {
     font-size: var(--font-size-lg);
     margin-bottom: var(--spacing-loose);
   }
+
   & p {
     @mixin font-serif;
 
@@ -260,6 +264,7 @@ header {
       margin-top: var(--spacing-loose);
     }
   }
+
   & .socials {
     & :global(> *) {
       display: inline-block;
@@ -272,11 +277,11 @@ header {
 
     & input {
       @mixin border-bottom-grey;
+
       display: inline-block;
       padding: var(--spacing-x-tight);
       margin-right: var(--spacing-base);
       height: 2.5rem;
-
       background: var(--color-white);
     }
   }

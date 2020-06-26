@@ -6,11 +6,9 @@
   display: flex;
   align-items: flex-end;
   align-content: stretch;
-
   top: 0;
   width: 100%;
   height: 0;
-
   transition: height 0.3s, min-height 0.3s;
   text-align: center;
   overflow: hidden;
@@ -44,6 +42,7 @@ listeners can take over.
 .ptr--top {
   touch-action: pan-x pan-down pinch-zoom;
 }
+
 .ptr--release .ptr--icon {
   transform: rotate(180deg);
 }

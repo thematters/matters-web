@@ -7,9 +7,10 @@
 .container.has-cover {
   position: relative;
   min-height: var(--article-digest-sidebar-cover-width);
-  padding-right: calc(
-    var(--article-digest-sidebar-cover-width) + var(--spacing-x-tight)
-  );
+  padding-right:
+    calc(
+      var(--article-digest-sidebar-cover-width) + var(--spacing-x-tight)
+    );
 
   & .cover {
     position: absolute;
@@ -20,21 +21,22 @@
 
     & :global(img) {
       @mixin object-fit-cover;
+
       border-radius: var(--spacing-xx-tight);
     }
   }
 
   &.has-background {
     min-height: auto;
-    padding-right: calc(
-      var(--article-digest-sidebar-cover-width-lg) + var(--spacing-base)
-    );
+    padding-right:
+      calc(
+        var(--article-digest-sidebar-cover-width-lg) + var(--spacing-base)
+      );
 
     & .cover {
       margin: calc(var(--article-digest-sidebar-card-spacing) * -1);
       width: var(--article-digest-sidebar-cover-width-lg);
       height: calc(100% + var(--article-digest-sidebar-card-spacing) * 2);
-
       border-radius: 0;
     }
   }
@@ -42,7 +44,6 @@
 
 footer {
   margin-top: var(--spacing-tight);
-
   line-height: 1;
 
   /* Make <UserDigest.Mini> as an inline element, otherwise users will easily touch it inadvertently */

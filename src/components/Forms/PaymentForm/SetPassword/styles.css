@@ -1,8 +1,8 @@
 .reason {
   @mixin border-bottom-grey;
+
   padding: var(--spacing-loose) 0;
   margin: 0 var(--spacing-base);
-
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-md);
   line-height: 1.5rem;
@@ -11,7 +11,6 @@
 
 .hint {
   margin-top: var(--spacing-x-tight);
-
   color: var(--color-grey);
   font-weight: var(--font-weight-normal);
   font-size: var(--font-size-sm);

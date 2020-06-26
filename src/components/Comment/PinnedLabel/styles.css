@@ -1,7 +1,6 @@
 .label {
   display: inline-block;
   padding: var(--spacing-xx-tight) var(--spacing-x-tight);
-
   color: var(--color-white);
   font-size: var(--font-size-xs);
   line-height: 1;

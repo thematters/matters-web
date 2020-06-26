@@ -6,6 +6,7 @@
       display: none !important;
     }
   }
+
   @media (--$(device)-down) {
     .u-$(device)-down-hide {
       display: none !important;

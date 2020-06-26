@@ -1,7 +1,7 @@
 .container {
   @mixin flex-center-space-between;
-  padding: var(--spacing-base);
 
+  padding: var(--spacing-base);
   line-height: 1;
 }
 
@@ -21,7 +21,6 @@
 
   & .subtitle {
     margin-top: var(--spacing-xx-tight);
-
     color: var(--color-grey);
     font-size: var(--font-size-sm-s);
     line-height: 1rem;
@@ -33,11 +32,9 @@
 
   & .subtext {
     display: block;
-
     color: var(--color-grey);
     font-size: var(--font-size-sm-s);
     line-height: 1rem;
-
     text-align: right;
   }
 

@@ -3,7 +3,6 @@
   align-items: center;
   margin: var(--spacing-x-tight) 0;
   padding: 0 var(--spacing-base);
-
   color: var(--color-grey-dark);
 
   & .num {

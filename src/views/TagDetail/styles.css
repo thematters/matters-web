@@ -18,7 +18,6 @@
 
 .description {
   padding: 0 var(--spacing-base);
-
   color: var(--color-grey-darker);
   font-size: var(--font-size-sm);
   white-space: pre-wrap;

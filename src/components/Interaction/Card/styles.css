@@ -1,5 +1,6 @@
 .card {
   @mixin all-transition;
+
   outline: none;
 
   &:not(.disabled) {
@@ -13,6 +14,7 @@
 
   & :global(.card.bg-grey-lighter) {
     @mixin border-grey;
+
     border-color: transparent;
   }
 
@@ -27,6 +29,7 @@
     }
   }
 }
+
 .bg-grey-lighter {
   background: var(--color-grey-lighter);
 
@@ -52,10 +55,12 @@
   padding-top: var(--spacing-x-tight);
   padding-bottom: var(--spacing-x-tight);
 }
+
 .spacing-y-tight {
   padding-top: var(--spacing-tight);
   padding-bottom: var(--spacing-tight);
 }
+
 .spacing-y-base {
   padding-top: var(--spacing-base);
   padding-bottom: var(--spacing-base);
@@ -65,14 +70,17 @@
   padding-left: var(--spacing-x-tight);
   padding-right: var(--spacing-x-tight);
 }
+
 .spacing-x-tight {
   padding-left: var(--spacing-tight);
   padding-right: var(--spacing-tight);
 }
+
 .spacing-x-base {
   padding-left: var(--spacing-base);
   padding-right: var(--spacing-base);
 }
+
 .spacing-x-loose {
   padding-left: var(--spacing-loose);
   padding-right: var(--spacing-loose);
@@ -90,9 +98,11 @@
 .border-radius-base {
   border-radius: var(--spacing-base);
 }
+
 .border-radius-xtight {
   border-radius: var(--spacing-x-tight);
 }
+
 .border-radius-xxtight {
   border-radius: var(--spacing-xx-tight);
 }

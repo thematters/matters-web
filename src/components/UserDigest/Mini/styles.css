@@ -4,6 +4,7 @@
   &.hasAvatar .name {
     margin-left: var(--spacing-x-tight);
   }
+
   &:not(.disabled) {
     &:hover,
     &:focus {
@@ -22,6 +23,7 @@
     flex-direction: row;
     align-items: center;
   }
+
   &.direction-column {
     flex-direction: column;
     align-items: flex-start;
@@ -30,6 +32,7 @@
     & .username {
       line-height: 1.25;
     }
+
     & .username {
       margin-left: 0;
     }
@@ -39,9 +42,9 @@
 .displayname {
   line-height: 1;
 }
+
 .username {
   margin-left: var(--spacing-xx-tight);
-
   font-size: var(--font-size-sm);
   color: var(--color-grey);
   line-height: 1;
@@ -50,18 +53,23 @@
 .text-size-xs {
   font-size: var(--font-size-xs);
 }
+
 .text-size-sm-s {
   font-size: var(--font-size-sm-s);
 }
+
 .text-size-sm {
   font-size: var(--font-size-sm);
 }
+
 .text-size-md {
   font-size: var(--font-size-md);
 }
+
 .text-size-md-s {
   font-size: var(--font-size-md-s);
 }
+
 .text-weight-md {
   font-weight: var(--font-weight-medium);
 }
@@ -71,11 +79,13 @@
     color: var(--color-black);
   }
 }
+
 .name-color-white {
   & .displayname {
     color: var(--color-white);
   }
 }
+
 .name-color-grey-darker {
   & .displayname {
     color: var(--color-grey-darker);

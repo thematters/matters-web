@@ -1,16 +1,15 @@
 .appreciate-button {
   position: relative;
-
   color: var(--color-matters-green);
 
   @media (--sm-up) {
     width: 3rem;
     height: 3rem;
-
     border-radius: 50%;
     border: 1.5px solid var(--color-matters-green);
     background: var(--color-white);
-    box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.08),
+    box-shadow:
+      0 3px 8px 0 rgba(0, 0, 0, 0.08),
       0 4px 12px 0 rgba(0, 0, 0, 0.08);
     z-index: 5;
 
@@ -32,12 +31,10 @@
     right: -0.25rem;
     width: 1rem;
     height: 1rem;
-
     color: var(--color-white);
     font-size: var(--font-size-xs-s);
     font-weight: var(--font-weight-bold);
     line-height: 1rem;
-
     background: var(--color-matters-green);
     border-radius: 50%;
   }
@@ -47,7 +44,6 @@
   display: inline-block;
   margin-top: 0;
   margin-left: var(--spacing-x-tight);
-
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
   line-height: 1rem;

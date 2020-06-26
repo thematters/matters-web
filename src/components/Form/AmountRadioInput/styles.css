@@ -6,9 +6,7 @@
 
 .amount {
   display: flex;
-
   flex: 0 0 30%;
-
   background: var(--color-white);
   border-radius: 0.25rem;
   color: var(--color-white);
@@ -24,7 +22,6 @@
     height: 100%;
     padding-top: var(--spacing-base);
     padding-bottom: var(--spacing-base);
-
     text-align: center;
   }
 }

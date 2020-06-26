@@ -1,6 +1,5 @@
 .container {
   padding: var(--spacing-base) var(--spacing-base) var(--spacing-xx-loose);
-
   text-align: left;
 
   @media (--sm-up) {
@@ -10,6 +9,7 @@
 
 header {
   @mixin flex-center-space-between;
+
   margin-bottom: var(--spacing-base);
 
   & h4 {
@@ -23,7 +23,6 @@ header {
 
   & input {
     padding: var(--spacing-x-tight) var(--spacing-base);
-
     color: var(--color-matters-gold);
     font-size: var(--font-size-sm);
     font-family: var(--font-mono);
@@ -47,6 +46,7 @@ header {
     @mixin border-top-grey;
     @mixin border-bottom-grey;
     @mixin hide-scrollbar;
+
     margin: 0 calc(var(--spacing-base) * -1);
     padding: var(--spacing-x-tight) var(--spacing-base) 0;
     max-height: 11rem;
@@ -62,8 +62,8 @@ header {
 
       & .gateway-url {
         @mixin truncate;
-        margin-right: var(--spacing-x-tight);
 
+        margin-right: var(--spacing-x-tight);
         font-size: var(--font-size-md);
         line-height: 2.5rem;
       }
@@ -74,7 +74,6 @@ header {
 .help {
   & p {
     margin-top: var(--spacing-base);
-
     font-size: var(--font-size-sm);
     color: var(--color-grey-darker);
 

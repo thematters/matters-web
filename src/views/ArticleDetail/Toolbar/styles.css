@@ -3,15 +3,12 @@
 
   display: flex;
   align-items: center;
-
   position: sticky;
   bottom: 0;
   margin: 0;
-
   padding: var(--spacing-base);
   padding-bottom: calc(constant(safe-area-inset-bottom) + var(--spacing-base));
   padding-bottom: calc(env(safe-area-inset-bottom) + var(--spacing-base));
-
   background: var(--color-white);
   line-height: 1;
   z-index: var(--z-index-over-global-header);
@@ -26,7 +23,6 @@
 .comment-bar {
   flex-grow: 1;
   flex-shrink: 1;
-
   margin-left: var(--spacing-base);
 }
 

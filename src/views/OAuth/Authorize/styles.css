@@ -8,7 +8,6 @@
 
   & ul {
     padding: 0 var(--spacing-x-tight) var(--spacing-x-loose);
-
     color: var(--color-grey-darker);
     font-size: var(--font-size-sm);
 
@@ -32,12 +31,12 @@
 
 .current-account {
   @mixin flex-center-all;
+
   margin-top: var(--spacing-x-loose);
 }
 
 .switch-account {
   margin-top: var(--spacing-base);
-
   color: var(--color-grey-dark);
   font-size: var(--font-size-sm);
   text-align: center;

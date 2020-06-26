@@ -34,7 +34,6 @@
 .descriptions {
   position: relative;
   margin-bottom: var(--spacing-xx-loose);
-
   color: var(--color-grey-darker);
 
   & .description {
@@ -51,7 +50,6 @@
       position: absolute;
       top: 0;
       left: 1.5rem;
-
       color: var(--color-matters-green);
       font-weight: var(--font-weight-bold);
       font-size: var(--font-size-sm);

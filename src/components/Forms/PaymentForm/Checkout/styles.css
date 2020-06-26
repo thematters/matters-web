@@ -6,7 +6,6 @@
   @mixin border-bottom-grey;
 
   padding: 0 0 0 var(--spacing-base);
-
   background-color: var(--color-white);
 
   @media (--sm-up) {

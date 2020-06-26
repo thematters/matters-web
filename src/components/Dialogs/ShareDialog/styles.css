@@ -13,7 +13,6 @@
     height: 3rem;
     padding-left: var(--spacing-loose);
     padding-right: var(--spacing-loose);
-
     font-weight: var(--font-weight-medium);
     text-align: left;
 
@@ -27,6 +26,7 @@
 .copy {
   @mixin flex-center-space-between;
   @mixin border-top-grey;
+
   padding: var(--spacing-base) var(--spacing-loose);
 
   & :global(.text-icon) {
@@ -35,7 +35,6 @@
 
   & input {
     margin-left: var(--spacing-x-tight);
-
     color: var(--color-grey);
     font-size: var(--font-size-sm);
   }
@@ -45,7 +44,6 @@
   @mixin border-bottom-grey;
 
   padding: var(--spacing-x-tight) var(--spacing-base) var(--spacing-loose);
-
   color: var(--color-grey-dark);
   font-size: var(--font-size-md-s);
   line-height: 1.5rem;

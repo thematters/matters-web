@@ -27,10 +27,11 @@
         left: calc(var(--descendant-avatar-size) / 2);
         top: calc(var(--descendant-avatar-size) + var(--spacing-x-tight));
         height: 0;
-        height: calc(
-          100% - var(--descendant-item-spacing) - var(--spacing-x-tight) +
+        height:
+          calc(
+            100% - var(--descendant-item-spacing) - var(--spacing-x-tight) +
             var(--spacing-xx-tight)
-        );
+          );
         width: 1px;
         background-color: var(--color-line-grey-light);
       }

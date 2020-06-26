@@ -6,7 +6,6 @@
     width: 100%;
     padding: 0 var(--spacing-base);
     margin-top: var(--spacing-base);
-
     font-size: var(--font-size-sm);
 
     & :global(> header) {
@@ -21,6 +20,7 @@
 
 .setting-item {
   @mixin flex-center-space-between;
+
   padding: var(--spacing-loose) 0;
 
   & + .setting-item {

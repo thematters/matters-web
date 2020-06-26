@@ -6,7 +6,6 @@
   right: 0;
   bottom: 0;
   left: 0;
-
   background: var(--color-white);
   z-index: var(--z-index-splash-screen);
 
@@ -17,6 +16,7 @@
     @media (--sm-up) {
       width: 256px;
     }
+
     @media (--lg-up) {
       width: 347px;
     }

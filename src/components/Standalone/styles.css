@@ -1,5 +1,6 @@
 h2 {
   @mixin font-serif;
+
   font-size: 1.7rem;
   line-height: 1.4;
 
@@ -10,7 +11,6 @@ h2 {
 
 .footer {
   padding: 4.5rem 0 2rem;
-
   background: var(--color-grey-lighter);
   text-align: center;
 
@@ -22,6 +22,7 @@ h2 {
     font-size: var(--font-size-lg);
     margin-bottom: var(--spacing-loose);
   }
+
   & p {
     @mixin font-serif;
 
@@ -29,6 +30,7 @@ h2 {
       margin-top: var(--spacing-loose);
     }
   }
+
   & .socials {
     & :global(> *) {
       display: inline-block;
@@ -41,11 +43,11 @@ h2 {
 
     & input {
       @mixin border-bottom-grey;
+
       display: inline-block;
       padding: var(--spacing-x-tight);
       margin-right: var(--spacing-base);
       height: 2.5rem;
-
       background: var(--color-white);
     }
   }

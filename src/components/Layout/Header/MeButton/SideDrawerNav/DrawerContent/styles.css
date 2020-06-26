@@ -2,14 +2,12 @@ nav {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
   width: 20rem;
   height: 100%;
   padding-top: constant(safe-area-inset-top);
   padding-top: env(safe-area-inset-top);
-
   background: var(--color-white);
-  box-shadow: 4px 0px 16px rgba(0, 0, 0, 0.08);
+  box-shadow: 4px 0 16px rgba(0, 0, 0, 0.08);
   will-change: transform;
   overflow-y: auto;
 

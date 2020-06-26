@@ -1,7 +1,6 @@
 .empty {
   margin: var(--spacing-xxx-loose) 0;
   padding: 0 var(--spacing-base);
-
   text-align: center;
   color: var(--color-grey-light);
 }

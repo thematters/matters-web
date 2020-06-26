@@ -14,9 +14,9 @@
 
       & .key {
         @mixin line-clamp;
+
         padding: 0 var(--spacing-x-tight);
         height: 1.5rem;
-
         color: var(--color-grey-darker);
         font-size: var(--font-size-sm);
         line-height: 1.5rem;
@@ -39,6 +39,7 @@
 .frequent-searches {
   & .key {
     @mixin line-clamp;
+
     color: var(--color-matters-green);
     font-size: var(--font-size-sm);
   }

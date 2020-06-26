@@ -7,7 +7,6 @@
 
 .hint {
   margin-left: var(--spacing-base);
-
   color: var(--color-grey-dark);
   font-size: var(--font-size-sm);
 }

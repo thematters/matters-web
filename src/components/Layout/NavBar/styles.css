@@ -8,7 +8,6 @@
   padding: var(--spacing-base) var(--spacing-x-loose);
   padding-bottom: calc(constant(safe-area-inset-bottom) + var(--spacing-base));
   padding-bottom: calc(env(safe-area-inset-bottom) + var(--spacing-base));
-
   background: var(--color-white);
   z-index: var(--z-index-global-header);
 

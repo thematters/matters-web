@@ -2,7 +2,6 @@
   display: inline-block;
   padding-top: var(--spacing-x-tight);
   padding-left: var(--spacing-base);
-
   line-height: inherit;
   text-align: left;
 }
@@ -15,18 +14,23 @@
     & + :global(.avatar) {
       margin-left: calc(var(--spacing-x-tight) * -1);
     }
+
     &:nth-child(1) {
       z-index: 5;
     }
+
     &:nth-child(2) {
       z-index: 4;
     }
+
     &:nth-child(3) {
       z-index: 3;
     }
+
     &:nth-child(4) {
       z-index: 2;
     }
+
     &:nth-child(4) {
       z-index: 1;
     }
@@ -35,7 +39,6 @@
 
 .name-list {
   margin-top: var(--spacing-xx-tight);
-
   font-size: var(--font-size-sm);
 
   & .highlight {
@@ -48,11 +51,11 @@
 
   & .appreciation-amount {
     @mixin inline-flex-center-all;
+
     margin-top: -2px;
     margin-right: -2px;
     height: 1rem;
     min-width: 1rem;
-
     color: var(--color-white);
     font-size: var(--font-size-xs);
     font-weight: var(--font-weight-bold);

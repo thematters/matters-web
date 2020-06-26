@@ -2,7 +2,6 @@
   padding: 0 var(--spacing-base);
   margin-bottom: var(--spacing-loose);
   width: 100%;
-
   color: var(--color-grey);
   font-size: var(--font-size-sm);
   line-height: 1.5rem;
@@ -10,6 +9,7 @@
 
 .row {
   @mixin flex-center-space-between;
+
   margin: var(--spacing-base) 0;
 
   & .col:last-child {

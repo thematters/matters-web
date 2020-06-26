@@ -1,5 +1,6 @@
 h2 {
   @mixin font-serif;
+
   font-size: 1.7rem;
   line-height: 1.4;
 
@@ -14,7 +15,6 @@ header {
   left: 0;
   right: 0;
   padding: var(--spacing-x-loose) 0;
-
   z-index: 1;
 
   & .logo {
@@ -30,10 +30,8 @@ header {
 
   background-color: var(--color-green-lighter);
   background-repeat: no-repeat;
-
   height: 100vh;
   height: calc(var(--vh) * 100);
-
   padding-top: var(--global-header-height);
 
   @media (--sm-up) {
@@ -67,10 +65,12 @@ header {
 
   & .steps {
     @mixin flex-start-center;
+
     flex-direction: column;
 
     @media (--lg-up) {
       @mixin flex-start-space-between;
+
       flex-direction: row;
     }
   }
@@ -78,8 +78,8 @@ header {
 
 .step {
   @mixin flex-center-all;
-  flex-direction: column;
 
+  flex-direction: column;
   width: 100%;
   margin-top: var(--spacing-xx-loose);
 
@@ -91,7 +91,6 @@ header {
   & .avatar {
     display: flex;
     align-items: center;
-
     background: var(--color-grey-lighter);
     border-radius: 2rem;
     font-size: var(--color-black);
@@ -138,6 +137,7 @@ header {
 
   & .header {
     @mixin flex-center-all;
+
     text-align: center;
   }
 
@@ -152,8 +152,8 @@ header {
 
 .feature {
   @mixin flex-center-all;
-  flex-direction: column;
 
+  flex-direction: column;
   margin-top: var(--spacing-loose);
 
   & section {
@@ -179,8 +179,8 @@ header {
 
 .banner {
   @mixin flex-center-all;
-  flex-direction: column;
 
+  flex-direction: column;
   min-height: 10.75rem;
   margin-top: 5rem;
   margin-bottom: 8rem;

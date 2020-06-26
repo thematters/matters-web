@@ -26,7 +26,7 @@
     @mixin flex-center-all;
 
     flex-direction: column;
-    margin-top: 0rem;
+    margin-top: 0;
 
     & :global(> button:last-child) {
       margin: var(--spacing-base) 0 var(--spacing-base);
@@ -36,6 +36,7 @@
 
 .complete-avatar {
   @mixin flex-center-all;
+
   margin: var(--spacing-loose) var(--spacing-x-loose);
 }
 

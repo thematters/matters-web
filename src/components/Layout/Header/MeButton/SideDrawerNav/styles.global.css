@@ -7,7 +7,6 @@
   bottom: 0;
   left: 0;
   overflow: hidden;
-
   z-index: var(--z-index-over-global-header);
 }
 
@@ -17,6 +16,5 @@
   bottom: 0;
   left: 0;
   right: 0;
-
   outline: none;
 }

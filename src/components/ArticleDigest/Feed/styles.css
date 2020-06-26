@@ -7,7 +7,6 @@ header {
 
     & .published-article {
       margin-left: var(--spacing-x-tight);
-
       color: var(--color-grey);
       font-size: var(--font-size-sm);
     }
@@ -25,7 +24,6 @@ header {
 
 .description {
   margin: var(--spacing-tight) 0 var(--spacing-base);
-
   color: var(--color-grey-darker);
   font-size: var(--font-size-md-s);
   line-height: 1.5rem;
@@ -36,6 +34,7 @@ header {
 
   & :global(img) {
     @mixin object-fit-cover;
+
     border-radius: 0.25rem;
     background-color: var(--color-grey-lighter);
   }
@@ -56,7 +55,6 @@ header {
 .inactive-state {
   display: inline-block;
   padding: var(--spacing-xxx-tight) var(--spacing-xx-tight);
-
   color: var(--color-white);
   background: var(--color-grey);
   border-radius: 0.125rem;
@@ -68,9 +66,11 @@ header {
  */
 .mode-default {
 }
+
 .mode-comfortable {
   & .content {
     @mixin flex-start-space-between;
+
     margin: var(--spacing-tight) 0 var(--spacing-base);
 
     & .cover {
@@ -95,6 +95,7 @@ header {
       margin: 0;
 
       @mixin line-clamp;
+
       -webkit-line-clamp: 3;
 
       @media (--sm-up) {
@@ -103,5 +104,6 @@ header {
     }
   }
 }
+
 .mode-compact {
 }

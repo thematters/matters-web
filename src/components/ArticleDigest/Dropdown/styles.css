@@ -19,8 +19,8 @@
 
   & :global(h3) {
     @mixin truncate;
-    min-width: 0;
 
+    min-width: 0;
     line-height: 1;
   }
 

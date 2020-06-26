@@ -1,8 +1,6 @@
 .content {
   flex-shrink: 1;
-
   padding: var(--spacing-base);
-
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 
@@ -17,6 +15,7 @@
   padding-left: 0;
   padding-right: 0;
 }
+
 .spacing-x-xloose {
   @media (--sm-up) {
     padding-left: var(--spacing-x-loose);
@@ -28,6 +27,7 @@
   padding-top: 0;
   padding-bottom: 0;
 }
+
 .spacing-y-xloose {
   @media (--sm-up) {
     padding-top: var(--spacing-x-loose);

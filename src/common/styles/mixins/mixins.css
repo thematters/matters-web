@@ -106,7 +106,6 @@
   @mixin border-bottom-grey;
 
   padding: var(--spacing-base);
-
   font-size: var(--font-size-md);
   background-color: var(--color-white);
 
@@ -128,9 +127,7 @@
   @mixin all-transition;
 
   padding: var(--spacing-base);
-
   font-size: var(--font-size-md);
-
   background-color: var(--color-grey-lighter);
   border-radius: 0.125rem;
   border-top: none;
@@ -187,6 +184,7 @@
 @define-mixin line-clamp {
   display: -webkit-box;
   -webkit-line-clamp: 1;
+
   /* autoprefixer: ignore next */
   -webkit-box-orient: vertical;
   overflow: hidden;
@@ -211,7 +209,7 @@
 
   /* Chrome & Safari */
   &::-webkit-scrollbar {
-    width: 0px !important;
-    height: 0px !important;
+    width: 0 !important;
+    height: 0 !important;
   }
 }

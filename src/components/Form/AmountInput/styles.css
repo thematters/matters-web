@@ -1,7 +1,7 @@
 input {
   @mixin form-input;
-  height: 3rem;
 
+  height: 3rem;
   font-weight: var(--font-weight-medium);
   text-align: right;
 
@@ -25,7 +25,6 @@ input {
   top: 0;
   left: var(--spacing-base);
   height: 100%;
-
   color: var(--color-grey);
   font-size: var(--font-size-md);
   line-height: 3rem;
@@ -34,7 +33,7 @@ input {
 
 .red-style {
   &:focus {
-    background: #FCF6F5;
+    background: #fcf6f5;
     border-bottom-color: var(--color-red);
   }
 }

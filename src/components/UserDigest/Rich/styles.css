@@ -42,6 +42,7 @@ header {
 
 .description {
   @mixin line-clamp;
+
   color: var(--color-grey-dark);
   font-size: var(--font-size-sm-s);
 }
@@ -49,7 +50,6 @@ header {
 .extra-button {
   display: flex;
   align-items: flex-start;
-
   position: absolute;
   top: 0;
   right: 0;
@@ -75,6 +75,7 @@ header {
     align-items: middle;
   }
 }
+
 .size-lg {
   & .content {
     height: 3rem;

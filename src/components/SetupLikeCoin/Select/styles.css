@@ -12,7 +12,6 @@
 .intro {
   & h4 {
     margin-bottom: var(--spacing-x-tight);
-
     font-size: var(--font-size-xs);
     font-weight: var(--font-weight-medium);
   }

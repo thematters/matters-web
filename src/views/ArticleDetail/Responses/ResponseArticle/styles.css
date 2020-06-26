@@ -1,7 +1,7 @@
 header {
   @mixin inline-flex-center-all;
-  margin-bottom: var(--spacing-x-tight);
 
+  margin-bottom: var(--spacing-x-tight);
   color: var(--color-grey);
   font-size: var(--font-size-sm);
 

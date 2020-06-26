@@ -18,7 +18,6 @@
 
 .error-message {
   margin-top: var(--spacing-x-tight);
-
   color: var(--color-grey-dark);
   font-size: var(--font-size-sm);
 }
@@ -30,7 +29,6 @@
 .error-detail {
   margin-top: var(--spacing-x-loose);
   padding: var(--spacing-loose);
-
   text-align: left;
   color: var(--color-red);
   background: var(--color-yellow-lighter);

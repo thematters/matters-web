@@ -16,10 +16,12 @@ ul {
       top: 0;
       height: 100%;
     }
+
     & .drag-handler {
       padding-right: var(--spacing-x-tight);
       right: 100%;
     }
+
     & .delete-handler {
       padding-left: var(--spacing-x-tight);
       left: 100%;

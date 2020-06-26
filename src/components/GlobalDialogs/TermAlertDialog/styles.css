@@ -4,10 +4,10 @@
 
 .context {
   @mixin border-grey;
+
   max-height: 15rem;
   margin-top: var(--spacing-base);
   padding: var(--spacing-x-tight);
-
   font-size: var(--font-size-sm);
   border-radius: 0.125rem;
   overflow-y: auto;
@@ -17,10 +17,12 @@
     border-radius: 0.5rem;
     background-color: rgba(0, 0, 0, 0);
   }
+
   &::-webkit-scrollbar {
     width: 0.9rem;
     background-color: rgba(0, 0, 0, 0);
   }
+
   &::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, 0.1);
     border: 0.25rem solid rgba(0, 0, 0, 0);
@@ -34,6 +36,7 @@
   @media (--sm-up) {
     max-height: 27rem;
   }
+
   @media (--xs-down) {
     max-height: 10rem;
   }
@@ -41,7 +44,6 @@
   & :global(h3) {
     margin-top: var(--spacing-x-tight);
     margin-bottom: var(--spacing-x-tight);
-
     font-size: var(--font-size-md);
   }
 }

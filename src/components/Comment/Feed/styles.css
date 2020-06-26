@@ -19,7 +19,8 @@ header {
 }
 
 .reply-to-container {
-  margin: var(--spacing-xx-tight) 0 var(--spacing-x-tight)
+  margin:
+    var(--spacing-xx-tight) 0 var(--spacing-x-tight)
     var(--spacing-x-loose);
 }
 
