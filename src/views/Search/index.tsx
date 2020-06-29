@@ -18,7 +18,6 @@ import AggregateResults from './AggregateResults'
 import SearchArticles from './SearchArticles'
 import SearchTags from './SearchTags'
 import SearchUsers from './SearchUsers'
-import styles from './styles.css'
 
 const Search = () => {
   const router = useRouter()
@@ -87,8 +86,6 @@ const Search = () => {
         {isArticleOnly && <SearchArticles />}
         {isAggregate && <AggregateResults />}
       </PullToRefresh>
-
-      <style jsx>{styles}</style>
     </Layout.Main>
   )
 }

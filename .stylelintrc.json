@@ -1,3 +1,13 @@
 {
-  "extends": "stylelint-config-standard"
+  "extends": ["stylelint-config-standard", "stylelint-config-prettier"],
+  "rules": {
+    "selector-pseudo-class-no-unknown": [true, {
+      "ignorePseudoClasses": ["global"]
+    }],
+    "at-rule-no-unknown": null,
+    "no-descending-specificity": null,
+    "property-no-unknown": [true, {
+      "ignoreProperties": ["/lost-/"]
+    }]
+  }
 }

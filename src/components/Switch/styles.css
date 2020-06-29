@@ -11,7 +11,7 @@
   display: inline-flex;
   position: relative;
   user-select: none;
-  tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .switch input {
@@ -58,10 +58,9 @@
 
 .switch input:checked + span::after,
 .switch input:checked + span + .loading :global(svg) {
-  left:
-    calc(
-      var(--switch-width) - var(--switch-thumb-width) - var(--switch-spacing)
-    );
+  left: calc(
+    var(--switch-width) - var(--switch-thumb-width) - var(--switch-spacing)
+  );
 }
 
 .switch:hover,

@@ -1,4 +1,5 @@
 /* @styled-jsx=global */
+/* stylelint-disable no-duplicate-selectors */
 
 :root {
   --control-height: 24px;
@@ -74,11 +75,10 @@
     float: left;
     height: var(--control-height);
     padding: var(--input-padding-height) var(--input-padding-width);
-    width:
-      calc(
-        var(--control-height) +
+    width: calc(
+      var(--control-height) +
         (var(--input-padding-width) - var(--input-padding-height)) * 2
-      );
+    );
   }
 
   & svg {

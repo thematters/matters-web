@@ -64,9 +64,6 @@ header {
 /**
  * View Mode
  */
-.mode-default {
-}
-
 .mode-comfortable {
   & .content {
     @mixin flex-start-space-between;
@@ -103,7 +100,4 @@ header {
       }
     }
   }
-}
-
-.mode-compact {
 }
