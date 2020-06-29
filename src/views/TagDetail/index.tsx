@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import _find from 'lodash/find'
 import _get from 'lodash/get'
+import _some from 'lodash/some'
 import { useRouter } from 'next/router'
 import { useContext, useState } from 'react'
 
@@ -66,7 +67,6 @@ const TagDetail = ({ data }: { data: TagDetailType }) => {
   const viewer = useContext(ViewerContext)
   const hasSelected = _get(data, 'node.articles.totalCount', 0)
   const [feed, setFeed] = useState<TagFeed>(hasSelected ? 'selected' : 'latest')
-  const canEdit = viewer.info.email === 'hi@matters.news'
 
   if (!data || !data.node || data.node.__typename !== 'Tag') {
     return <EmptyTag />
@@ -77,9 +77,11 @@ const TagDetail = ({ data }: { data: TagDetailType }) => {
   }
 
   const editors = data.node.editors || []
-  const maintainer =
-    _find(editors, (editor) => editor.userName !== 'matty') ||
-    _find(editors, (editor) => editor.userName === 'matty')
+  const maintainer = _find(editors, (editor) => editor.userName !== 'matty')
+  const isEditor = _some(editors, (editor) => editor.id === viewer.id)
+  const isCreator = data.node.creator?.id === viewer.id
+  const canEdit =
+    isEditor || isCreator || viewer.info.email === 'hi@matters.news'
 
   return (
     <Layout.Main>
