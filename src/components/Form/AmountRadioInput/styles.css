@@ -7,13 +7,13 @@
 .amount {
   display: flex;
   flex: 0 0 30%;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-white);
   background: var(--color-white);
   border-radius: 0.25rem;
-  color: var(--color-white);
-  font-weight: var(--font-weight-medium);
-  font-size: var(--font-size-lg);
 
-  &:nth-child(n+4) {
+  &:nth-child(n + 4) {
     margin-top: var(--spacing-loose);
   }
 
@@ -27,26 +27,26 @@
 }
 
 .hkd {
-  border: 1.5px solid var(--color-red);
   color: var(--color-red);
+  border: 1.5px solid var(--color-red);
 
   &.active {
-    background: var(--color-red);
     color: var(--color-white);
+    background: var(--color-red);
   }
 }
 
 .like {
-  border: 1.5px solid var(--color-matters-green);
   color: var(--color-matters-green);
+  border: 1.5px solid var(--color-matters-green);
 
   &.active {
-    background: var(--color-matters-green);
     color: var(--color-white);
+    background: var(--color-matters-green);
   }
 
   &.disabled {
-    opacity: 0.5;
     cursor: not-allowed;
+    opacity: 0.5;
   }
 }

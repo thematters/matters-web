@@ -1,9 +1,9 @@
 header {
   top: 0;
+  z-index: var(--z-index-global-header);
   width: 100%;
   padding-top: constant(safe-area-inset-top);
   padding-top: env(safe-area-inset-top);
-  z-index: var(--z-index-global-header);
 
   &.solid-fixed {
     @mixin border-bottom-grey;

@@ -10,9 +10,9 @@
 
   & .image {
     &::after {
-      content: '';
       display: block;
       padding-bottom: 38%;
+      content: '';
     }
   }
 }
@@ -38,21 +38,21 @@
 
   & .description {
     position: relative;
-    font-size: var(--font-size-sm);
     padding: 0 var(--spacing-xx-loose);
+    font-size: var(--font-size-sm);
 
     & + .description {
       margin-top: var(--spacing-base);
     }
 
     &::before {
-      content: attr(data-content);
       position: absolute;
       top: 0;
       left: 1.5rem;
-      color: var(--color-matters-green);
-      font-weight: var(--font-weight-bold);
       font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-matters-green);
+      content: attr(data-content);
     }
   }
 }

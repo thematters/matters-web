@@ -8,8 +8,8 @@
 }
 
 .switch {
-  display: inline-flex;
   position: relative;
+  display: inline-flex;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
 }
@@ -21,21 +21,21 @@
 
 .switch input + span {
   @mixin all-transition;
+  position: relative;
 
   display: inline-block;
-  position: relative;
   width: var(--switch-width);
   height: var(--switch-height);
+  line-height: 1;
   background: var(--switch-background);
   border-radius: var(--switch-border-radius);
-  line-height: 1;
 }
 
 .switch input + span::after {
-  content: '';
   display: block;
-  border-radius: var(--switch-border-radius);
+  content: '';
   background: var(--color-white);
+  border-radius: var(--switch-border-radius);
   box-shadow: 0 2px 4px var(--color-line-grey);
 }
 

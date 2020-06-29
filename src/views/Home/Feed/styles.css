@@ -1,6 +1,6 @@
 .topbar {
   position: sticky;
   top: 0;
-  background: var(--color-white);
   z-index: var(--z-index-global-header);
+  background: var(--color-white);
 }

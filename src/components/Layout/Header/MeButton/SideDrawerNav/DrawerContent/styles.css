@@ -6,10 +6,10 @@ nav {
   height: 100%;
   padding-top: constant(safe-area-inset-top);
   padding-top: env(safe-area-inset-top);
+  overflow-y: auto;
   background: var(--color-white);
   box-shadow: 4px 0 16px rgba(0, 0, 0, 0.08);
   will-change: transform;
-  overflow-y: auto;
 
   @media (--xs-down) {
     width: 16rem;

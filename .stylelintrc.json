@@ -1,13 +1,25 @@
 {
-  "extends": ["stylelint-config-standard", "stylelint-config-prettier"],
+  "plugins": ["stylelint-prettier"],
+  "extends": [
+    "stylelint-config-recommended",
+    "stylelint-config-recess-order",
+    "stylelint-config-prettier"
+  ],
   "rules": {
-    "selector-pseudo-class-no-unknown": [true, {
-      "ignorePseudoClasses": ["global"]
-    }],
+    "prettier/prettier": true,
+    "selector-pseudo-class-no-unknown": [
+      true,
+      {
+        "ignorePseudoClasses": ["global"]
+      }
+    ],
     "at-rule-no-unknown": null,
     "no-descending-specificity": null,
-    "property-no-unknown": [true, {
-      "ignoreProperties": ["/lost-/"]
-    }]
+    "property-no-unknown": [
+      true,
+      {
+        "ignoreProperties": ["/lost-/"]
+      }
+    ]
   }
 }

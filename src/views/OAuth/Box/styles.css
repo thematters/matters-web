@@ -18,8 +18,8 @@ header {
 
   & h1 {
     margin-top: var(--spacing-loose);
-    font-weight: var(--font-weight-medium);
     font-size: var(--font-size-md);
+    font-weight: var(--font-weight-medium);
 
     &.left {
       text-align: left;

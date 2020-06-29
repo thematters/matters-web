@@ -7,8 +7,8 @@
 
 .avatar-wrap {
   flex-shrink: 0;
-  margin-right: var(--spacing-x-tight);
   width: 2rem;
+  margin-right: var(--spacing-x-tight);
 
   &.multi {
     & :global(.avatar) {
@@ -44,12 +44,12 @@
 
   & h4 {
     margin-bottom: var(--spacing-xx-tight);
-    color: var(--color-grey);
     font-weight: var(--font-weight-normal);
+    color: var(--color-grey);
 
     & :global(a) {
-      color: var(--color-black);
       font-weight: var(--font-weight-medium);
+      color: var(--color-black);
     }
   }
 

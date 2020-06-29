@@ -2,44 +2,16 @@
 
 :root {
   /* Font Stack */
-  --font-sans-tc:
-    -apple-system,
-    blinkmacsystemfont,
-    'Helvetica Neue',
-    'Segoe UI',
-    roboto,
-    arial,
-    'PingFang TC',
-    'Microsoft YaHei',
-    'Source Han Sans TC',
-    'Noto Sans CJK TC',
-    'WenQuanYi Micro Hei',
-    sans-serif;
-  --font-sans-sc:
-    -apple-system,
-    blinkmacsystemfont,
-    'Helvetica Neue',
-    'Segoe UI',
-    roboto,
-    arial,
-    'PingFang SC',
-    'Microsoft YaHei',
-    'Source Han Sans SC',
-    'Noto Sans CJK SC',
-    'WenQuanYi Micro Hei',
-    sans-serif;
-  --font-serif-tc:
-    'Noto Serif',
-    'Noto Serif CJK TC',
-    'Source Han Serif TC',
-    'Songti TC',
-    serif;
-  --font-serif-sc:
-    'Noto Serif',
-    'Noto Serif CJK SC',
-    'Source Han Serif SC',
-    'Songti SC',
-    serif;
+  --font-sans-tc: -apple-system, blinkmacsystemfont, 'Helvetica Neue',
+    'Segoe UI', roboto, arial, 'PingFang TC', 'Microsoft YaHei',
+    'Source Han Sans TC', 'Noto Sans CJK TC', 'WenQuanYi Micro Hei', sans-serif;
+  --font-sans-sc: -apple-system, blinkmacsystemfont, 'Helvetica Neue',
+    'Segoe UI', roboto, arial, 'PingFang SC', 'Microsoft YaHei',
+    'Source Han Sans SC', 'Noto Sans CJK SC', 'WenQuanYi Micro Hei', sans-serif;
+  --font-serif-tc: 'Noto Serif', 'Noto Serif CJK TC', 'Source Han Serif TC',
+    'Songti TC', serif;
+  --font-serif-sc: 'Noto Serif', 'Noto Serif CJK SC', 'Source Han Serif SC',
+    'Songti SC', serif;
   --font-mono: menlo, 'SFMono-Regular', consolas, monaco, monospace;
 
   /* Type Scale */

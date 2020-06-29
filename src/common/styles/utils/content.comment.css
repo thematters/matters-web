@@ -39,8 +39,8 @@
     text-align: center;
 
     & :global(figcaption) {
-      margin-top: var(--spacing-x-tight);
       padding: 0 var(--spacing-base);
+      margin-top: var(--spacing-x-tight);
       font-size: var(--font-size-sm-s);
       color: var(--color-grey);
     }
@@ -53,12 +53,12 @@
     padding: 0 var(--spacing-base);
 
     &::before {
-      content: '';
       position: absolute;
       top: 0;
       left: 0;
       width: 4px;
       height: 100%;
+      content: '';
       background: var(--color-matters-gold);
     }
   }
@@ -122,9 +122,9 @@
   /* Link
    ========================================================================== */
   & :global(a) {
+    padding-bottom: 2px;
     color: var(--color-matters-green);
     border-bottom: 1px solid currentColor;
-    padding-bottom: 2px;
 
     &:hover,
     &:active,
@@ -135,8 +135,8 @@
 
   /* fix frequent misuse of links */
   & :global(u > a, ins > a) {
-    border-bottom: 0;
     padding-bottom: 0;
+    border-bottom: 0;
   }
 
   /* Misc
@@ -161,12 +161,12 @@
   position: absolute;
   top: 0;
   left: 0;
+  z-index: var(--z-index-under-global-header);
   width: var(--sizing-menu-md);
   max-height: calc(4rem * 3);
-  color: var(--color-black);
-  border-radius: 0.5rem;
-  background: var(--color-white);
-  box-shadow: var(--shadow-dark);
   overflow-y: auto;
-  z-index: var(--z-index-under-global-header);
+  color: var(--color-black);
+  background: var(--color-white);
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-dark);
 }

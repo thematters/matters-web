@@ -1,8 +1,8 @@
 .label {
   display: inline-block;
   color: var(--color-white);
-  background: var(--color-matters-green);
   user-select: none;
+  background: var(--color-matters-green);
 }
 
 .sm {

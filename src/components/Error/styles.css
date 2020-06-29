@@ -3,23 +3,23 @@
 }
 
 .image {
-  margin: 0 auto;
   max-width: 15rem;
   max-height: 15rem;
+  margin: 0 auto;
 }
 
 .error-code {
-  color: var(--color-grey);
   font-family: var(--font-mono);
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-normal);
   line-height: 1.16666667;
+  color: var(--color-grey);
 }
 
 .error-message {
   margin-top: var(--spacing-x-tight);
-  color: var(--color-grey-dark);
   font-size: var(--font-size-sm);
+  color: var(--color-grey-dark);
 }
 
 .error-redirect {
@@ -27,12 +27,12 @@
 }
 
 .error-detail {
-  margin-top: var(--spacing-x-loose);
   padding: var(--spacing-loose);
-  text-align: left;
+  margin-top: var(--spacing-x-loose);
+  overflow: auto;
   color: var(--color-red);
+  text-align: left;
   background: var(--color-yellow-lighter);
   border: 1px solid var(--color-red);
-  overflow: auto;
   -webkit-overflow-scrolling: touch;
 }

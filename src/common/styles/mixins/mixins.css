@@ -129,9 +129,9 @@
   padding: var(--spacing-base);
   font-size: var(--font-size-md);
   background-color: var(--color-grey-lighter);
-  border-radius: 0.125rem;
   border-top: none;
   border-bottom: 1px solid var(--color-grey-light);
+  border-radius: 0.125rem;
 
   &:focus,
   &.focus {
@@ -154,9 +154,9 @@
 @define-mixin expand-to-container {
   position: absolute;
   top: 0;
-  left: 0;
   right: 0;
   bottom: 0;
+  left: 0;
 }
 
 @define-mixin object-fit-cover {
@@ -177,8 +177,8 @@
 @define-mixin truncate {
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
   word-wrap: normal;
+  white-space: nowrap;
 }
 
 @define-mixin line-clamp {

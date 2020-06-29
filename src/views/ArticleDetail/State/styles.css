@@ -1,9 +1,9 @@
 .container {
   position: sticky;
   top: calc(var(--global-header-height-mobile) + var(--spacing-base));
+  z-index: 10;
   margin-top: calc(var(--spacing-xx-loose) * -1);
   margin-bottom: var(--spacing-loose);
-  z-index: 10;
 
   @media (--sm-up) {
     top: calc(var(--global-header-height) + var(--spacing-base));

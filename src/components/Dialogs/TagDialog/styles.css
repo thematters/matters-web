@@ -1,7 +1,7 @@
 .field {
-  color: var(--color-grey-darker);
-  font-size: var(--font-size-sm);
   margin: 0 0 0.5rem;
+  font-size: var(--font-size-sm);
+  color: var(--color-grey-darker);
 }
 
 .search-tag-item {

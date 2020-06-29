@@ -10,9 +10,9 @@
 
   @media (--sm-up) {
     background-color: var(--color-grey-lighter);
-    border-radius: 0.125rem;
     border-top: none;
     border-bottom: 1px solid var(--color-grey-light);
+    border-radius: 0.125rem;
 
     &.StripeElement--focus {
       background-color: var(--color-green-lighter);

@@ -3,15 +3,15 @@
 
   & :global(img) {
     @mixin object-fit-cover;
+    background-color: var(--color-grey-lighter);
 
     border-radius: 0.25rem;
-    background-color: var(--color-grey-lighter);
   }
 
   &::after {
-    content: '';
     display: block;
     padding-bottom: 46.93%;
+    content: '';
 
     @media (--sm-up) {
       padding-bottom: 30.14%;

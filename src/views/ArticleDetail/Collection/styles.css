@@ -1,9 +1,8 @@
 :root {
   --collection-list-number-width: 1.25rem;
-  --collection-list-spacing:
-    calc(
-      var(--collection-list-number-width) + var(--spacing-x-tight)
-    );
+  --collection-list-spacing: calc(
+    var(--collection-list-number-width) + var(--spacing-x-tight)
+  );
 }
 
 .collection {
@@ -24,9 +23,9 @@
   position: relative;
   top: -0.7rem;
   right: -0.25rem;
-  color: var(--color-matters-green);
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-bold);
+  color: var(--color-matters-green);
 }
 
 .edit-button {

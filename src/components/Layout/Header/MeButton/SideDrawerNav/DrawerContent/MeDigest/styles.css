@@ -15,16 +15,16 @@
   }
 
   & .username {
-    color: var(--color-grey-dark);
     font-size: var(--font-size-md);
     line-height: 1.5rem;
+    color: var(--color-grey-dark);
   }
 }
 
 footer {
   margin-top: var(--spacing-base);
-  color: var(--color-grey);
   font-size: var(--font-size-sm);
+  color: var(--color-grey);
 
   & :global(> *) {
     display: inline-flex;
@@ -39,9 +39,9 @@ footer {
   & .count {
     display: block;
     padding-right: var(--spacing-x-tight);
-    color: var(--color-black);
     font-size: var(--font-size-lg);
     font-weight: var(--font-weight-bold);
     line-height: 1.5rem;
+    color: var(--color-black);
   }
 }

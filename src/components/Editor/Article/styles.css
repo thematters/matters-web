@@ -1,31 +1,27 @@
 :root {
   --editor-title-height: 3.25rem;
-  --editor-content-spacing:
-    calc(
-      var(--editor-title-height) + var(--spacing-base) * 2 +
+  --editor-content-spacing: calc(
+    var(--editor-title-height) + var(--spacing-base) * 2 +
       var(--spacing-x-tight)
-    );
+  );
 }
 
 .container {
   position: relative;
 
   & :global(.ql-editor) {
-    max-height:
-      calc(
-        100vh - var(--global-header-height-mobile) - var(--editor-content-spacing)
-      );
-    max-height:
-      calc(
-        var(--vh) * 100 - var(--global-header-height-mobile) -
+    max-height: calc(
+      100vh - var(--global-header-height-mobile) - var(--editor-content-spacing)
+    );
+    max-height: calc(
+      var(--vh) * 100 - var(--global-header-height-mobile) -
         var(--editor-content-spacing)
-      );
+    );
 
     @media (--sm-up) {
-      max-height:
-        calc(
-          100vh - var(--global-header-height) - var(--editor-content-spacing)
-        );
+      max-height: calc(
+        100vh - var(--global-header-height) - var(--editor-content-spacing)
+      );
     }
   }
 }

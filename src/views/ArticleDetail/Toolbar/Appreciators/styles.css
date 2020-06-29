@@ -6,10 +6,10 @@
 
 .received-count {
   margin-bottom: var(--spacing-xx-tight);
-  color: var(--color-grey);
-  line-height: 1rem;
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-medium);
+  line-height: 1rem;
+  color: var(--color-grey);
 
   &.highlight {
     color: var(--color-matters-green);
@@ -45,10 +45,10 @@
 
     width: 1.25rem;
     height: 1.25rem;
-    color: var(--color-white);
-    line-height: 1.25rem;
     font-size: var(--font-size-xs-s);
     font-weight: var(--font-weight-semibold);
+    line-height: 1.25rem;
+    color: var(--color-white);
     background: var(--color-matters-green);
     border-radius: 50%;
   }

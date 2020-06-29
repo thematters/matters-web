@@ -21,12 +21,12 @@ footer {
 }
 
 .summary {
-  color: var(--color-grey-darker);
   font-size: var(--font-size-sm);
-
-  @mixin line-clamp;
+  color: var(--color-grey-darker);
 
   -webkit-line-clamp: 2;
+
+  @mixin line-clamp;
 }
 
 .container.has-cover {

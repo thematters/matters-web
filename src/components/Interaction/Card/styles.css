@@ -67,23 +67,23 @@
 }
 
 .spacing-x-xtight {
-  padding-left: var(--spacing-x-tight);
   padding-right: var(--spacing-x-tight);
+  padding-left: var(--spacing-x-tight);
 }
 
 .spacing-x-tight {
-  padding-left: var(--spacing-tight);
   padding-right: var(--spacing-tight);
+  padding-left: var(--spacing-tight);
 }
 
 .spacing-x-base {
-  padding-left: var(--spacing-base);
   padding-right: var(--spacing-base);
+  padding-left: var(--spacing-base);
 }
 
 .spacing-x-loose {
-  padding-left: var(--spacing-loose);
   padding-right: var(--spacing-loose);
+  padding-left: var(--spacing-loose);
 }
 
 /* Border */

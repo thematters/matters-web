@@ -7,10 +7,9 @@
 .container.has-cover {
   position: relative;
   min-height: var(--article-digest-sidebar-cover-width);
-  padding-right:
-    calc(
-      var(--article-digest-sidebar-cover-width) + var(--spacing-x-tight)
-    );
+  padding-right: calc(
+    var(--article-digest-sidebar-cover-width) + var(--spacing-x-tight)
+  );
 
   & .cover {
     position: absolute;
@@ -28,15 +27,14 @@
 
   &.has-background {
     min-height: auto;
-    padding-right:
-      calc(
-        var(--article-digest-sidebar-cover-width-lg) + var(--spacing-base)
-      );
+    padding-right: calc(
+      var(--article-digest-sidebar-cover-width-lg) + var(--spacing-base)
+    );
 
     & .cover {
-      margin: calc(var(--article-digest-sidebar-card-spacing) * -1);
       width: var(--article-digest-sidebar-cover-width-lg);
       height: calc(100% + var(--article-digest-sidebar-card-spacing) * 2);
+      margin: calc(var(--article-digest-sidebar-card-spacing) * -1);
       border-radius: 0;
     }
   }

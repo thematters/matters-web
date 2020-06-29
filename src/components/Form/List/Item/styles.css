@@ -21,9 +21,9 @@
 
   & .subtitle {
     margin-top: var(--spacing-xx-tight);
-    color: var(--color-grey);
     font-size: var(--font-size-sm-s);
     line-height: 1rem;
+    color: var(--color-grey);
   }
 }
 
@@ -32,9 +32,9 @@
 
   & .subtext {
     display: block;
-    color: var(--color-grey);
     font-size: var(--font-size-sm-s);
     line-height: 1rem;
+    color: var(--color-grey);
     text-align: right;
   }
 

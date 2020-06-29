@@ -7,8 +7,8 @@ header {
 
     & .published-article {
       margin-left: var(--spacing-x-tight);
-      color: var(--color-grey);
       font-size: var(--font-size-sm);
+      color: var(--color-grey);
     }
 
     & :global(> * + *) {
@@ -24,9 +24,9 @@ header {
 
 .description {
   margin: var(--spacing-tight) 0 var(--spacing-base);
-  color: var(--color-grey-darker);
   font-size: var(--font-size-md-s);
   line-height: 1.5rem;
+  color: var(--color-grey-darker);
 }
 
 .cover {
@@ -34,15 +34,15 @@ header {
 
   & :global(img) {
     @mixin object-fit-cover;
+    background-color: var(--color-grey-lighter);
 
     border-radius: 0.25rem;
-    background-color: var(--color-grey-lighter);
   }
 
   &::after {
-    content: '';
     display: block;
     padding-bottom: 55.98%; /* 192/343 */
+    content: '';
   }
 
   @media (--sm-up) {
@@ -55,10 +55,10 @@ header {
 .inactive-state {
   display: inline-block;
   padding: var(--spacing-xxx-tight) var(--spacing-xx-tight);
+  line-height: 1;
   color: var(--color-white);
   background: var(--color-grey);
   border-radius: 0.125rem;
-  line-height: 1;
 }
 
 /**

@@ -8,8 +8,8 @@
   @mixin flex-center-all;
 
   margin: var(--spacing-base) 0;
-  color: var(--color-red);
   font-size: var(--font-size-sm-s);
+  color: var(--color-red);
 }
 
 .avatar-list {

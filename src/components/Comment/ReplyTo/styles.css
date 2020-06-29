@@ -1,8 +1,8 @@
 .container {
   @mixin flex-center-start;
+  font-size: var(--font-size-sm);
 
   color: var(--color-grey-dark);
-  font-size: var(--font-size-sm);
 }
 
 .reply-to {

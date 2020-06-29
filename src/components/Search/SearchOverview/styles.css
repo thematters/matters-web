@@ -2,8 +2,8 @@
   & ul {
     display: flex;
     flex-wrap: wrap;
-    margin-top: var(--spacing-xx-tight);
     padding: 0 var(--spacing-base);
+    margin-top: var(--spacing-xx-tight);
 
     & li {
       margin-bottom: var(--spacing-tight);
@@ -14,14 +14,14 @@
 
       & .key {
         @mixin line-clamp;
+        height: 1.5rem;
 
         padding: 0 var(--spacing-x-tight);
-        height: 1.5rem;
-        color: var(--color-grey-darker);
         font-size: var(--font-size-sm);
         line-height: 1.5rem;
-        border-radius: 2rem;
+        color: var(--color-grey-darker);
         background: var(--color-grey-lighter);
+        border-radius: 2rem;
 
         &:hover,
         &:focus {
@@ -39,9 +39,9 @@
 .frequent-searches {
   & .key {
     @mixin line-clamp;
+    font-size: var(--font-size-sm);
 
     color: var(--color-matters-green);
-    font-size: var(--font-size-sm);
   }
 
   &.inPage .key {

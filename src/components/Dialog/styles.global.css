@@ -6,8 +6,8 @@
   right: 0;
   bottom: 0;
   left: 0;
-  overflow: hidden;
   z-index: var(--z-index-dialog);
+  overflow: hidden;
 
   @media (--sm-up) {
     @mixin flex-center-all;
@@ -16,16 +16,16 @@
 
 .dialog [data-reach-dialog-content] {
   position: absolute;
+  right: 0;
   bottom: 0;
   left: 0;
-  right: 0;
   outline: none;
 
   @media (--sm-up) {
     position: relative;
+    right: auto;
     bottom: auto;
     left: auto;
-    right: auto;
     width: 100%;
   }
 }

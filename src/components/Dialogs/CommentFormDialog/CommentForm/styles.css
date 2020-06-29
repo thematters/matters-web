@@ -6,9 +6,9 @@
 
 form {
   @mixin hide-scrollbar;
+  position: relative;
 
   flex-grow: 1;
-  position: relative;
   padding-bottom: var(--spacing-x-loose);
   overflow-y: auto;
 

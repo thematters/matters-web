@@ -12,10 +12,10 @@ h2 {
 header {
   position: absolute;
   top: 0;
-  left: 0;
   right: 0;
-  padding: var(--spacing-x-loose) 0;
+  left: 0;
   z-index: 1;
+  padding: var(--spacing-x-loose) 0;
 
   & .logo {
     & :global(svg) {
@@ -27,24 +27,24 @@ header {
 
 .slogan {
   @mixin flex-center-space-between;
+  position: relative;
 
   align-items: flex-start;
-  position: relative;
-  padding-top: 8.125rem;
   height: 100vh;
   height: calc(var(--vh) * 100);
+  padding-top: 8.125rem;
+  text-align: center;
   background-color: var(--color-green-lighter);
   background-repeat: no-repeat;
   background-position: right bottom;
   background-size: contain;
-  text-align: center;
 
   @media (--sm-up) {
     align-items: center;
-    padding-top: 0;
     height: 50rem;
-    background-position: right center;
+    padding-top: 0;
     text-align: left;
+    background-position: right center;
   }
 
   & img {
@@ -64,8 +64,8 @@ header {
 
   & img {
     display: block;
-    margin: 0 auto;
     height: 20rem;
+    margin: 0 auto;
   }
 
   & h2 {
@@ -122,8 +122,8 @@ header {
       & p {
         margin-top: var(--spacing-base);
         margin-bottom: var(--spacing-x-loose);
-        color: var(--color-matters-gold);
         font-size: var(--font-size-sm);
+        color: var(--color-matters-gold);
       }
     }
 
@@ -135,8 +135,7 @@ header {
 
   @media (--sm-up) {
     margin-top: 3.5rem;
-    background:
-      linear-gradient(
+    background: linear-gradient(
         90deg,
         var(--color-yellow-lighter) 50%,
         transparent 50%
@@ -183,8 +182,8 @@ header {
 
   & .item {
     width: 100%;
-    margin-bottom: var(--spacing-base);
     padding: 0 var(--spacing-x-tight);
+    margin-bottom: var(--spacing-base);
 
     @media (--sm-up) {
       width: 50%;
@@ -231,12 +230,12 @@ header {
 
         & cite {
           position: absolute;
+          right: var(--spacing-base);
           bottom: var(--spacing-base);
           left: var(--spacing-base);
-          right: var(--spacing-base);
-          color: var(--color-grey-darker);
           font-style: normal;
           font-weight: var(--font-weight-medium);
+          color: var(--color-grey-darker);
         }
       }
     }
@@ -245,16 +244,16 @@ header {
 
 .footer {
   padding: 4.5rem 0 2rem;
-  background: var(--color-grey-lighter);
   text-align: center;
+  background: var(--color-grey-lighter);
 
   & .footer-section {
     margin-bottom: var(--spacing-xxx-loose);
   }
 
   & h2 {
-    font-size: var(--font-size-lg);
     margin-bottom: var(--spacing-loose);
+    font-size: var(--font-size-lg);
   }
 
   & p {
@@ -279,9 +278,9 @@ header {
       @mixin border-bottom-grey;
 
       display: inline-block;
+      height: 2.5rem;
       padding: var(--spacing-x-tight);
       margin-right: var(--spacing-base);
-      height: 2.5rem;
       background: var(--color-white);
     }
   }
@@ -299,9 +298,9 @@ header {
 
     & .socials {
       & :global(> *) {
-        margin-left: 0;
         margin-right: var(--spacing-loose);
         margin-bottom: var(--spacing-x-tight);
+        margin-left: 0;
       }
     }
 

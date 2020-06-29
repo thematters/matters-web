@@ -52,9 +52,9 @@ span.container {
   @mixin inline-flex-center-all;
 
   position: relative;
+  box-sizing: border-box;
   text-align: center;
   white-space: nowrap;
-  box-sizing: border-box;
 }
 
 /* Hot Area
@@ -62,9 +62,9 @@ span.container {
 .hotarea {
   @mixin expand-to-container;
   @mixin all-transition;
+  z-index: 0;
 
   background: transparent;
-  z-index: 0;
 
   & :global(+ *) {
     z-index: 1;
@@ -143,61 +143,61 @@ span.container {
 
 .spacing-x-xxtight {
   &:not(.isTransparent) {
-    padding-left: var(--spacing-xx-tight);
     padding-right: var(--spacing-xx-tight);
+    padding-left: var(--spacing-xx-tight);
   }
 
   & .hotarea {
-    margin-left: calc(var(--spacing-xx-tight) * -1);
     margin-right: calc(var(--spacing-xx-tight) * -1);
+    margin-left: calc(var(--spacing-xx-tight) * -1);
   }
 }
 
 .spacing-x-xtight {
   &:not(.isTransparent) {
-    padding-left: var(--spacing-x-tight);
     padding-right: var(--spacing-x-tight);
+    padding-left: var(--spacing-x-tight);
   }
 
   & .hotarea {
-    margin-left: calc(var(--spacing-x-tight) * -1);
     margin-right: calc(var(--spacing-x-tight) * -1);
+    margin-left: calc(var(--spacing-x-tight) * -1);
   }
 }
 
 .spacing-x-tight {
   &:not(.isTransparent) {
-    padding-left: var(--spacing-tight);
     padding-right: var(--spacing-tight);
+    padding-left: var(--spacing-tight);
   }
 
   & .hotarea {
-    margin-left: calc(var(--spacing-tight) * -1);
     margin-right: calc(var(--spacing-tight) * -1);
+    margin-left: calc(var(--spacing-tight) * -1);
   }
 }
 
 .spacing-x-base {
   &:not(.isTransparent) {
-    padding-left: var(--spacing-base);
     padding-right: var(--spacing-base);
+    padding-left: var(--spacing-base);
   }
 
   & .hotarea {
-    margin-left: calc(var(--spacing-base) * -1);
     margin-right: calc(var(--spacing-base) * -1);
+    margin-left: calc(var(--spacing-base) * -1);
   }
 }
 
 .spacing-x-loose {
   &:not(.isTransparent) {
-    padding-left: var(--spacing-loose);
     padding-right: var(--spacing-loose);
+    padding-left: var(--spacing-loose);
   }
 
   & .hotarea {
-    margin-left: calc(var(--spacing-loose) * -1);
     margin-right: calc(var(--spacing-loose) * -1);
+    margin-left: calc(var(--spacing-loose) * -1);
   }
 }
 
@@ -377,14 +377,14 @@ span.container {
 
 .border-md {
   & .hotarea {
-    border-width: 1.5px;
     border-style: solid;
+    border-width: 1.5px;
   }
 }
 
 .border-sm {
   & .hotarea {
-    border-width: 1px;
     border-style: solid;
+    border-width: 1px;
   }
 }

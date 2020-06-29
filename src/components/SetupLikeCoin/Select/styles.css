@@ -1,12 +1,12 @@
 .hint,
 .intro {
-  margin: var(--spacing-loose) 0 var(--spacing-x-tight);
   padding: 0 var(--spacing-base);
+  margin: var(--spacing-loose) 0 var(--spacing-x-tight);
 }
 
 .hint {
-  color: var(--color-grey-dark);
   font-size: var(--font-size-sm);
+  color: var(--color-grey-dark);
 }
 
 .intro {

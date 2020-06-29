@@ -1,7 +1,7 @@
 p {
   height: 2rem;
   padding: 0 var(--spacing-base);
-  color: var(--color-grey-darker);
   font-size: var(--font-size-sm);
   line-height: 2rem;
+  color: var(--color-grey-darker);
 }

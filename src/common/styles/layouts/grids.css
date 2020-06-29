@@ -8,9 +8,9 @@
  * Row
  */
 .l-row {
-  lost-center: 100%;
-  margin-left: 1rem;
   margin-right: 1rem;
+  margin-left: 1rem;
+  lost-center: 100%;
 
   @media (--sm-up) {
     & {
@@ -31,8 +31,8 @@
   }
 
   &.full {
-    margin-left: auto;
     margin-right: auto;
+    margin-left: auto;
   }
 }
 

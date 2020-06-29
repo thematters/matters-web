@@ -10,9 +10,9 @@
 
     &::-webkit-details-marker {
       position: absolute;
-      display: inline-block;
       top: 0.45rem;
       left: 0;
+      display: inline-block;
       width: 0.6rem;
       height: 0.6rem;
     }

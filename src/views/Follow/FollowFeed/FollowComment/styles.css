@@ -6,8 +6,8 @@ header {
 
     & .reply-to {
       margin-left: var(--spacing-x-tight);
-      color: var(--color-grey);
       font-size: var(--font-size-sm);
+      color: var(--color-grey);
     }
   }
 }

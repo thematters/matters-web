@@ -3,11 +3,11 @@ footer {
 }
 
 .hint {
-  color: var(--color-grey);
   font-size: var(--font-size-xs);
+  color: var(--color-grey);
 }
 
 .error {
-  color: var(--color-red);
   font-size: var(--font-size-xs);
+  color: var(--color-red);
 }

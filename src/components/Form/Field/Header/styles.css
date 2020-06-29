@@ -5,6 +5,6 @@ header {
 }
 
 label {
-  color: var(--color-grey-dark);
   font-size: var(--font-size-sm);
+  color: var(--color-grey-dark);
 }

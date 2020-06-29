@@ -18,13 +18,13 @@ ul {
     }
 
     & .drag-handler {
-      padding-right: var(--spacing-x-tight);
       right: 100%;
+      padding-right: var(--spacing-x-tight);
     }
 
     & .delete-handler {
-      padding-left: var(--spacing-x-tight);
       left: 100%;
+      padding-left: var(--spacing-x-tight);
     }
 
     @media (--lg-up) {

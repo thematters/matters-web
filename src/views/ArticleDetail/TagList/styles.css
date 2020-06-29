@@ -1,6 +1,6 @@
 .tag-list {
-  margin-bottom: var(--spacing-base);
   margin-right: calc(var(--spacing-base) * -1);
+  margin-bottom: var(--spacing-base);
 }
 
 ul {

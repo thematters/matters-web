@@ -1,9 +1,9 @@
 header {
   @mixin flex-center-space-between;
   @mixin shadow-border-bottom-grey;
+  position: relative;
 
   flex-shrink: 0;
-  position: relative;
   padding: var(--spacing-x-loose) var(--spacing-base) var(--spacing-tight);
 
   & h1 {
@@ -11,9 +11,9 @@ header {
 
     position: absolute;
     top: 0;
-    left: 0;
     right: 0;
     bottom: 0;
+    left: 0;
     padding: var(--spacing-x-loose) 0 var(--spacing-tight);
     font-size: var(--font-size-xm);
     font-weight: var(--font-weight-medium);

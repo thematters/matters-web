@@ -3,15 +3,15 @@
 /* Document
    ========================================================================== */
 html {
-  border-collapse: collapse;
   box-sizing: border-box;
+  border-collapse: collapse;
   -webkit-text-size-adjust: 100%;
 }
 
 html,
 body {
-  margin: 0;
   padding: 0;
+  margin: 0;
 }
 
 * {
@@ -38,8 +38,8 @@ ul {
 ol,
 ul,
 li {
-  margin: 0;
   padding: 0;
+  margin: 0;
   border: 0;
 }
 
@@ -55,8 +55,8 @@ p,
 blockquote,
 pre,
 code {
-  margin: 0;
   padding: 0;
+  margin: 0;
   border: 0;
 }
 
@@ -87,9 +87,9 @@ small {
 
 sub,
 sup {
+  position: relative;
   font-size: 75%;
   line-height: 0;
-  position: relative;
   vertical-align: baseline;
 }
 
@@ -117,38 +117,38 @@ input,
 select,
 textarea,
 button {
-  margin: 0;
   padding: 0;
-  outline: 0;
-  border: 0;
-  color: inherit;
+  margin: 0;
   font: inherit;
   line-height: 1.15;
+  color: inherit;
+  border: 0;
   border-radius: 0;
+  outline: 0;
   appearance: none;
 }
 
 button {
   display: inline-block;
 
-  @mixin inline-flex-center-all;
-
   width: auto;
-  background: transparent;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  touch-action: manipulation;
   cursor: pointer;
   user-select: none;
-  text-align: center;
-  vertical-align: middle;
-  white-space: nowrap;
-  touch-action: manipulation;
+  background: transparent;
+
+  @mixin inline-flex-center-all;
 
   & > * {
     vertical-align: middle;
   }
 
   &::-moz-focus-inner {
-    border: 0;
     padding: 0;
+    border: 0;
   }
 
   &:disabled,
@@ -183,8 +183,8 @@ select {
   }
 
   &::-ms-value {
-    background: none;
     color: inherit;
+    background: none;
   }
 }
 

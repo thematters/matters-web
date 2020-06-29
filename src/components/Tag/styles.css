@@ -11,8 +11,8 @@
 }
 
 .list {
-  display: block;
   position: relative;
+  display: block;
   padding-right: var(--list-tag-count-width);
 
   & .count {
@@ -21,9 +21,9 @@
     right: 0;
     bottom: 0;
     width: var(--list-tag-count-width);
-    color: var(--color-grey);
     font-size: var(--font-size-md-s);
     line-height: 1rem;
+    color: var(--color-grey);
     text-align: right;
   }
 }
@@ -38,11 +38,11 @@
 
 .inline {
   display: inline-flex;
-  padding: 0 var(--spacing-tight) 0 var(--spacing-x-tight);
   height: 1.5rem;
+  padding: 0 var(--spacing-tight) 0 var(--spacing-x-tight);
   line-height: 1.5rem;
-  border-radius: 2rem;
   background: var(--color-grey-lighter);
+  border-radius: 2rem;
 
   &:hover,
   &:focus {

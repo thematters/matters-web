@@ -1,7 +1,7 @@
 footer {
   margin: var(--spacing-loose) var(--spacing-base);
-  color: var(--color-grey-dark);
   font-size: var(--font-size-sm);
+  color: var(--color-grey-dark);
 
   & p {
     margin-bottom: var(--spacing-x-tight);

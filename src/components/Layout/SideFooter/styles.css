@@ -1,12 +1,11 @@
 footer {
   margin-bottom: var(--global-nav-height);
-  margin-bottom:
-    calc(
-      constant(safe-area-inset-bottom) + var(--global-nav-height)
-    );
+  margin-bottom: calc(
+    constant(safe-area-inset-bottom) + var(--global-nav-height)
+  );
   margin-bottom: calc(env(safe-area-inset-bottom) + var(--global-nav-height));
-  color: var(--color-grey);
   font-size: var(--font-size-sm-s);
+  color: var(--color-grey);
 
   & :global(> *) {
     display: inline-block;

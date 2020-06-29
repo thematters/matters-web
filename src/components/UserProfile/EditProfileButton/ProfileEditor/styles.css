@@ -1,4 +1,4 @@
 .avatar-field {
-  margin-top: calc(var(--spacing-xx-loose) * -1);
   padding-left: var(--spacing-base);
+  margin-top: calc(var(--spacing-xx-loose) * -1);
 }

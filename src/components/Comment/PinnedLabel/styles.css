@@ -1,10 +1,10 @@
 .label {
   display: inline-block;
   padding: var(--spacing-xx-tight) var(--spacing-x-tight);
-  color: var(--color-white);
   font-size: var(--font-size-xs);
   line-height: 1;
-  border-radius: 0.125rem;
-  background: var(--color-matters-green);
+  color: var(--color-white);
   user-select: none;
+  background: var(--color-matters-green);
+  border-radius: 0.125rem;
 }

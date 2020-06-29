@@ -1,8 +1,8 @@
 .empty {
-  margin: var(--spacing-xxx-loose) 0;
   padding: 0 var(--spacing-base);
-  text-align: center;
+  margin: var(--spacing-xxx-loose) 0;
   color: var(--color-grey-light);
+  text-align: center;
 }
 
 .description {

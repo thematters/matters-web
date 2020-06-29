@@ -6,15 +6,15 @@
   right: 0;
   bottom: 0;
   left: 0;
-  overflow: hidden;
   z-index: var(--z-index-over-global-header);
+  overflow: hidden;
 }
 
 .side-drawer-nav [data-reach-dialog-content] {
   position: absolute;
   top: 0;
+  right: 0;
   bottom: 0;
   left: 0;
-  right: 0;
   outline: none;
 }
