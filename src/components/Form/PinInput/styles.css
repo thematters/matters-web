@@ -1,8 +1,8 @@
 .pin-input {
   @mixin flex-center-all;
+
   width: 100%;
   padding: 0 var(--spacing-base);
-
   margin: 0 auto;
 
   & .pin-input-item {

@@ -46,9 +46,9 @@ header {
     @mixin border-top-grey;
     @mixin border-bottom-grey;
     @mixin hide-scrollbar;
+
     max-height: 11rem;
     padding: var(--spacing-x-tight) var(--spacing-base) 0;
-
     margin: 0 calc(var(--spacing-base) * -1);
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;

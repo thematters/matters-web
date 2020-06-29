@@ -1,7 +1,7 @@
 footer {
   @mixin flex-center-space-between;
-  flex-direction: column;
 
+  flex-direction: column;
   flex-shrink: 0;
   margin: var(--spacing-base);
   margin-bottom: calc(constant(safe-area-inset-bottom) + var(--spacing-base));

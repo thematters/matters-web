@@ -11,9 +11,9 @@
 
   & .sender {
     @mixin flex-center-start;
+
     font-size: var(--font-size-sm);
     line-height: 1;
-
     color: var(--color-grey-dark);
   }
 

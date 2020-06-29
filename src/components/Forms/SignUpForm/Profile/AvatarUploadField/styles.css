@@ -1,7 +1,7 @@
 .container {
   @mixin flex-center-start;
-  padding: 0 var(--spacing-base);
 
+  padding: 0 var(--spacing-base);
   margin: var(--spacing-loose) 0;
 }
 

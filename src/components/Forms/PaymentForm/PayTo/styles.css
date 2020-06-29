@@ -7,15 +7,15 @@
 
 .set-amount-fee {
   @mixin flex-center-all;
-  font-size: var(--font-size-sm-s);
 
+  font-size: var(--font-size-sm-s);
   color: var(--color-grey-dark);
 }
 
 .set-amount-no-liker-id {
   @mixin flex-center-all;
-  margin: var(--spacing-xx-loose) var(--spacing-xxx-loose);
 
+  margin: var(--spacing-xx-loose) var(--spacing-xxx-loose);
   color: var(--color-grey-dark);
   text-align: center;
 }
@@ -42,8 +42,8 @@
 
 .complete-avatar-outline {
   @mixin flex-center-all;
-  margin-left: calc(var(--spacing-x-tight) * -1);
 
+  margin-left: calc(var(--spacing-x-tight) * -1);
   border: 2.5px solid var(--color-white);
   border-radius: 50%;
 }

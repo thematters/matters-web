@@ -1,9 +1,9 @@
 .toolbar {
   @mixin border-top-grey;
+
   position: sticky;
   bottom: 0;
   z-index: var(--z-index-over-global-header);
-
   display: flex;
   align-items: center;
   padding: var(--spacing-base);

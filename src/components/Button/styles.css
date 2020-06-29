@@ -62,8 +62,8 @@ span.container {
 .hotarea {
   @mixin expand-to-container;
   @mixin all-transition;
-  z-index: 0;
 
+  z-index: 0;
   background: transparent;
 
   & :global(+ *) {

@@ -23,7 +23,6 @@ footer {
 .summary {
   font-size: var(--font-size-sm);
   color: var(--color-grey-darker);
-
   -webkit-line-clamp: 2;
 
   @mixin line-clamp;

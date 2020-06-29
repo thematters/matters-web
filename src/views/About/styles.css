@@ -27,8 +27,8 @@ header {
 
 .slogan {
   @mixin flex-center-space-between;
-  position: relative;
 
+  position: relative;
   align-items: flex-start;
   height: 100vh;
   height: calc(var(--vh) * 100);

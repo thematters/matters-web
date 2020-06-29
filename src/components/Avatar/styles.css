@@ -7,8 +7,8 @@
 
   & :global(img) {
     @mixin object-fit-cover;
-    background-color: var(--color-grey-lighter);
 
+    background-color: var(--color-grey-lighter);
     border-radius: 50%;
   }
 }

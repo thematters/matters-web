@@ -18,8 +18,8 @@
 
 .container {
   @mixin border-top-grey;
-  position: relative;
 
+  position: relative;
   display: flex;
   flex-direction: column;
   padding: var(--spacing-base);

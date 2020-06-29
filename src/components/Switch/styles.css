@@ -21,8 +21,8 @@
 
 .switch input + span {
   @mixin all-transition;
-  position: relative;
 
+  position: relative;
   display: inline-block;
   width: var(--switch-width);
   height: var(--switch-height);

@@ -1,8 +1,8 @@
 header {
   @mixin flex-center-space-between;
   @mixin shadow-border-bottom-grey;
-  position: relative;
 
+  position: relative;
   flex-shrink: 0;
   padding: var(--spacing-x-loose) var(--spacing-base) var(--spacing-tight);
 

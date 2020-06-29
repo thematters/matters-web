@@ -42,8 +42,8 @@ header {
 
 .description {
   @mixin line-clamp;
-  font-size: var(--font-size-sm-s);
 
+  font-size: var(--font-size-sm-s);
   color: var(--color-grey-dark);
 }
 

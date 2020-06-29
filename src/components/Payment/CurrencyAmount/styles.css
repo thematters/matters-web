@@ -1,7 +1,7 @@
 section {
   @mixin flex-start-center;
-  font-weight: var(--font-weight-bold);
 
+  font-weight: var(--font-weight-bold);
   line-height: 1;
 }
 
