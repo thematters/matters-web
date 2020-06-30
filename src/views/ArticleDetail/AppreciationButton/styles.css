@@ -1,4 +1,6 @@
 .appreciate-button {
+  @mixin all-transition;
+
   position: relative;
 
   color: var(--color-matters-green);
@@ -8,7 +10,7 @@
     height: 3rem;
 
     border-radius: 50%;
-    border: 1.5px solid var(--color-matters-green);
+    border: 1.5px solid currentColor;
     background: var(--color-white);
     box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.08),
       0 4px 12px 0 rgba(0, 0, 0, 0.08);
@@ -18,6 +20,35 @@
     &:focus {
       background: var(--color-green-lighter);
     }
+  }
+
+  & .icon {
+    position: relative;
+    width: 2rem;
+    height: 2rem;
+  }
+
+  & :global(.icon-like) {
+    position: absolute;
+    top: 0.25rem;
+    left: 0.25rem;
+    opacity: 1;
+    transform: scale(1);
+    transition: transform 0.2s ease-in-out;
+  }
+  & :global(.icon-superlike) {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 28px;
+    height: 28px;
+    opacity: 0;
+    transform: scale(0) translateY(2px);
+    transition: transform 0.2s ease-in-out;
+  }
+  & :global(.icon-superlike .superlike_svg__star) {
+    fill-opacity: 0;
+    transition: fill-opacity 0.1s ease-in-out;
   }
 }
 
@@ -46,7 +77,7 @@
 .total {
   display: inline-block;
   margin-top: 0;
-  margin-left: var(--spacing-x-tight);
+  margin-left: var(--spacing-xx-tight);
 
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
@@ -55,5 +86,37 @@
 
   @media (--sm-up) {
     display: none;
+  }
+}
+
+.isSuperLike {
+  color: var(--color-matters-gold);
+
+  @media (--sm-up) {
+    &:hover,
+    &:focus {
+      background: var(--color-yellow-lighter);
+    }
+  }
+
+  & .count {
+    @media (--sm-up) {
+      background: var(--color-matters-gold);
+    }
+  }
+
+  & :global(.icon-like) {
+    opacity: 0;
+    transform: scale(0);
+  }
+  & :global(.icon-superlike) {
+    opacity: 1;
+    transform: scale(1) translateY(2px);
+  }
+
+  &.superLiked {
+    & :global(.icon-superlike .superlike_svg__star) {
+      fill-opacity: 1;
+    }
   }
 }

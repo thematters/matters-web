@@ -49,15 +49,24 @@ const fragments = {
         id
         hasAppreciate
         appreciateLeft
+        canSuperLike
       }
     `,
   },
 }
 
 const APPRECIATE_ARTICLE = gql`
-  mutation AppreciateArticle($id: ID!, $amount: Int!, $token: String!) {
-    appreciateArticle(input: { id: $id, amount: $amount, token: $token }) {
+  mutation AppreciateArticle(
+    $id: ID!
+    $amount: Int!
+    $token: String!
+    $superLike: Boolean
+  ) {
+    appreciateArticle(
+      input: { id: $id, amount: $amount, token: $token, superLike: $superLike }
+    ) {
       id
+      canSuperLike
     }
   }
 `
@@ -72,18 +81,36 @@ const AppreciationButton = ({ article }: AppreciationButtonProps) => {
     variables: { id: 'local' },
   })
 
-  // bundle appreciations
   const [amount, setAmount] = useState(0)
+  const [superLiked, setSuperLiked] = useState(false)
   const [sendAppreciation] = useMutation<AppreciateArticle>(APPRECIATE_ARTICLE)
   const limit = article.appreciateLimit
-  const left = (article.appreciateLeft || 0) - amount
-
+  const left =
+    (typeof article.appreciateLeft === 'number' ? article.appreciateLeft : 5) -
+    amount
+  const canSuperLike = article.canSuperLike
   const total = article.appreciationsReceivedTotal + amount
   const appreciatedCount = limit - left
+
+  // UI
+  const isReachLimit = left <= 0
+  const isMe = article.author.id === viewer.id
+  const readCivicLikerDialog =
+    viewer.isCivicLiker || data?.clientPreference.readCivicLikerDialog
+  const isSuperLike = viewer.isCivicLiker && isReachLimit
+  const canAppreciate =
+    (!isReachLimit && !isMe && !viewer.isArchived && viewer.liker.likerId) ||
+    canSuperLike
+
+  // bundle appreciations
   const [debouncedSendAppreciation] = useDebouncedCallback(async () => {
     try {
       await sendAppreciation({
-        variables: { id: article.id, amount, token },
+        variables: {
+          id: article.id,
+          amount,
+          token,
+        },
         update: (cache) => {
           updateAppreciation({
             cache,
@@ -100,18 +127,29 @@ const AppreciationButton = ({ article }: AppreciationButtonProps) => {
 
     setAmount(0)
   }, APPRECIATE_DEBOUNCE)
-  const appreciate = () => {
-    setAmount(amount + 1)
-    debouncedSendAppreciation()
-  }
 
-  // UI
-  const isReachLimit = left <= 0
-  const isMe = article.author.id === viewer.id
-  const readCivicLikerDialog =
-    viewer.isCivicLiker || data?.clientPreference.readCivicLikerDialog
-  const canAppreciate =
-    !isReachLimit && !isMe && !viewer.isArchived && viewer.liker.likerId
+  const appreciate = async () => {
+    if (isSuperLike && canSuperLike) {
+      setSuperLiked(true)
+
+      try {
+        await sendAppreciation({
+          variables: {
+            id: article.id,
+            amount,
+            token,
+            superLike: true,
+          },
+        })
+      } catch (e) {
+        setSuperLiked(false)
+        console.error(e)
+      }
+    } else {
+      setAmount(amount + 1)
+      debouncedSendAppreciation()
+    }
+  }
 
   /**
    * Anonymous
@@ -136,6 +174,9 @@ const AppreciationButton = ({ article }: AppreciationButtonProps) => {
         onClick={appreciate}
         count={appreciatedCount > 0 ? appreciatedCount : undefined}
         total={total}
+        isSuperLike={isSuperLike}
+        canSuperLike={canSuperLike}
+        superLiked={superLiked}
       />
     )
   }
@@ -162,7 +203,15 @@ const AppreciationButton = ({ article }: AppreciationButtonProps) => {
    * MAX Button
    */
   if (!canAppreciate && isReachLimit) {
-    return <AppreciateButton count="MAX" total={total} />
+    return (
+      <AppreciateButton
+        count="MAX"
+        total={total}
+        isSuperLike={isSuperLike}
+        canSuperLike={canSuperLike}
+        superLiked={superLiked}
+      />
+    )
   }
 
   /**
@@ -190,6 +239,9 @@ const AppreciationButton = ({ article }: AppreciationButtonProps) => {
           disabled
           count={appreciatedCount > 0 ? appreciatedCount : undefined}
           total={total}
+          isSuperLike={isSuperLike}
+          canSuperLike={canSuperLike}
+          superLiked={superLiked}
         />
       </span>
     </Tooltip>
