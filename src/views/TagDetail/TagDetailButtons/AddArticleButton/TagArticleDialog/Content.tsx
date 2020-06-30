@@ -11,6 +11,7 @@ import {
   IconClear,
   LanguageContext,
   Translate,
+  useResponsive,
 } from '~/components'
 import { useMutation } from '~/components/GQL'
 import SEARCH_ARTICLES from '~/components/GQL/queries/searchArticles'
@@ -70,6 +71,7 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
   closeDialog,
   id,
 }) => {
+  const isSmallUp = useResponsive('sm-up')
   const [selectedArticles, setSelectedArticles] = useState<any[]>([])
   const [update] = useMutation<PutArticlesTags>(PUT_ARTICLES_TAGS)
   const { lang } = useContext(LanguageContext)
@@ -142,8 +144,10 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
 
   const onClickMenuItem = (params: any) => {
     setFieldValue('name', '')
-    setFieldValue('articles', [...values.articles, params.id])
-    setSelectedArticles([...selectedArticles, params])
+    if (!values.articles.includes(params.id)) {
+      setFieldValue('articles', [...values.articles, params.id])
+      setSelectedArticles([...selectedArticles, params])
+    }
   }
 
   const onDelete = (article: any) => {
@@ -188,7 +192,7 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
                 <ArticleDigestDropdown.OpenExternalLink article={article} />
               }
               borderRadius="xtight"
-              bgColor="grey-lighter"
+              bgColor={isSmallUp ? 'grey-lighter' : 'white'}
               spacing={['tight', 'tight']}
             />
 
