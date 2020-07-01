@@ -1,5 +1,6 @@
 header {
   @mixin border-bottom-grey;
+
   padding-bottom: var(--spacing-tight);
 
   &.hasNoBorder {
@@ -9,5 +10,6 @@ header {
 
 .title {
   @mixin flex-center-space-between;
+
   flex-wrap: wrap;
 }

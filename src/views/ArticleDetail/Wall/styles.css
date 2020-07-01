@@ -2,27 +2,26 @@
   @mixin all-transition;
 
   position: fixed;
-  left: 0;
   right: 0;
   bottom: 0;
-  margin: 0;
-
-  transform: translateY(100%);
-  opacity: 0;
+  left: 0;
   z-index: var(--z-index-over-global-header);
+  margin: 0;
+  opacity: 0;
+  transform: translateY(100%);
 }
 
 .show {
-  transform: translateY(0%);
   opacity: 1;
+  transform: translateY(0%);
 }
 
 .container {
   @mixin border-top-grey;
-  display: flex;
-  flex-direction: column;
 
   position: relative;
+  display: flex;
+  flex-direction: column;
   padding: var(--spacing-base);
   padding-bottom: calc(constant(safe-area-inset-bottom) + var(--spacing-base));
   padding-bottom: calc(env(safe-area-inset-bottom) + var(--spacing-base));
@@ -39,9 +38,8 @@
 
   & .desc {
     margin: var(--spacing-xx-tight) 0 var(--spacing-x-tight);
-
-    color: var(--color-grey-darker);
     font-size: var(--font-size-sm);
+    color: var(--color-grey-darker);
   }
 
   & .signup {
@@ -49,10 +47,10 @@
   }
 
   & .close {
-    display: inline-flex;
     position: absolute;
     top: 0;
     right: 0;
+    display: inline-flex;
     padding: var(--spacing-base);
   }
 }

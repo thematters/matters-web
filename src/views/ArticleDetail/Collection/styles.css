@@ -10,6 +10,7 @@
 
   & header {
     @mixin flex-center-space-between;
+
     padding-bottom: var(--spacing-base);
 
     & .right :global(> * + *) {
@@ -22,10 +23,9 @@
   position: relative;
   top: -0.7rem;
   right: -0.25rem;
-
-  color: var(--color-matters-green);
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-bold);
+  color: var(--color-matters-green);
 }
 
 .edit-button {
@@ -38,6 +38,7 @@
 
 .editing-list {
   @mixin max-height-scroll;
+
   padding: 0 var(--spacing-x-tight);
 
   @media (--lg-up) {

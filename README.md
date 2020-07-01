@@ -111,6 +111,7 @@ See `.vscode/settings.json`
 - [mikestead.dotenv](https://marketplace.visualstudio.com/items?itemName=mikestead.dotenv)
 - [ms-vscode.vscode-typescript-tslint-plugin]()
 - [Prisma.vscode-graphql](https://marketplace.visualstudio.com/items?itemName=Prisma.vscode-graphql)
+- [stylelint.vscode-stylelint](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint)
 - [ricard.postcss](https://marketplace.visualstudio.com/items?itemName=ricard.PostCSS)
 
 ##### Optional

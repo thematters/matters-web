@@ -4,16 +4,13 @@ html {
   @mixin font-sans;
 
   height: 100%;
-
   font-size: var(--sizing-root);
   font-weight: var(--font-weight-base);
   line-height: var(--line-height-base);
-  -webkit-text-size-adjust: 100%;
-
-  background-color: var(--color-white);
   word-break: break-word;
+  background-color: var(--color-white);
+  -webkit-text-size-adjust: 100%;
   -ms-overflow-style: -ms-autohiding-scrollbar;
-
   -webkit-tap-highlight-color: transparent;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -76,15 +73,13 @@ hr {
   @mixin border-top-grey;
 
   display: block;
-
   width: 100%;
   height: 0;
-  margin: 0;
   padding: 0;
-
+  margin: 0;
+  border-right: 0;
   border-bottom: 0;
   border-left: 0;
-  border-right: 0;
 }
 
 code,

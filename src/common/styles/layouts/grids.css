@@ -8,20 +8,22 @@
  * Row
  */
 .l-row {
-  lost-center: 100%;
-  margin-left: 1rem;
   margin-right: 1rem;
+  margin-left: 1rem;
+  lost-center: 100%;
 
   @media (--sm-up) {
     & {
       lost-center: 792px;
     }
   }
+
   @media (--md-up) {
     & {
       lost-center: 896px;
     }
   }
+
   @media (--lg-up) {
     & {
       lost-center: 1208px;
@@ -29,14 +31,15 @@
   }
 
   &.full {
-    margin-left: auto;
     margin-right: auto;
+    margin-left: auto;
   }
 }
 
 /*
  * Column & Offset
  */
+
 /* 4 cols in XSmall */
 @each $i in 0, 1, 2, 3, 4 {
   .l-col-$(i) {
@@ -132,11 +135,13 @@
       lost-column: 1/8;
     }
   }
+
   @media (--md-up) {
     & {
       lost-column: 2/9;
     }
   }
+
   @media (--lg-up) {
     & {
       lost-column: 2/12;
@@ -152,11 +157,13 @@
       lost-column: 7/8;
     }
   }
+
   @media (--md-up) {
     & {
       lost-column: 7/9;
     }
   }
+
   @media (--lg-up) {
     & {
       lost-column: 7/12;
@@ -177,12 +184,14 @@
       lost-column: 7/8;
     }
   }
+
   @media (--md-up) {
     & {
       lost-offset: 2/9;
       lost-column: 7/9;
     }
   }
+
   @media (--lg-up) {
     & {
       lost-offset: 0/12;

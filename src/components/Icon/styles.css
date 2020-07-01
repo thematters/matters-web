@@ -10,30 +10,37 @@
     width: 0.75rem;
     height: 0.75rem;
   }
+
   &.sm {
     width: 0.875rem;
     height: 0.875rem;
   }
+
   &.md-s {
     width: 1.25rem;
     height: 1.25rem;
   }
+
   &.md {
     width: 1.5rem;
     height: 1.5rem;
   }
+
   &.lg {
     width: 2rem;
     height: 2rem;
   }
+
   &.xl-m {
     width: 2.5rem;
     height: 2.5rem;
   }
+
   &.xl {
     width: 3rem;
     height: 3rem;
   }
+
   &.xxl {
     width: 4rem;
     height: 4rem;
@@ -43,27 +50,35 @@
   &.white {
     color: var(--color-white);
   }
+
   &.black {
     color: var(--color-black);
   }
+
   &.grey-dark {
     color: var(--color-grey-dark);
   }
+
   &.grey {
     color: var(--color-grey);
   }
+
   &.grey-light {
     color: var(--color-grey-light);
   }
+
   &.grey-lighter {
     color: var(--color-grey-lighter);
   }
+
   &.green {
     color: var(--color-matters-green);
   }
+
   &.gold {
     color: var(--color-matters-gold);
   }
+
   &.red {
     color: var(--color-red);
   }

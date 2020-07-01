@@ -10,16 +10,15 @@
   padding: 0 var(--spacing-base) var(--spacing-base);
 
   & span {
-    color: var(--color-grey-dark);
-    font-size: var(--font-size-sm);
     margin-left: var(--spacing-x-tight);
+    font-size: var(--font-size-sm);
+    color: var(--color-grey-dark);
   }
 }
 
 .description {
   padding: 0 var(--spacing-base);
-
-  color: var(--color-grey-darker);
   font-size: var(--font-size-sm);
+  color: var(--color-grey-darker);
   white-space: pre-wrap;
 }

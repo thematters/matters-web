@@ -29,6 +29,7 @@
   & :global(img, video, audio) {
     display: block;
     margin: 0 auto;
+
     /* max-height: 100vh; */
   }
 
@@ -38,9 +39,8 @@
     text-align: center;
 
     & :global(figcaption) {
-      margin-top: var(--spacing-x-tight);
       padding: 0 var(--spacing-base);
-
+      margin-top: var(--spacing-x-tight);
       font-size: var(--font-size-sm-s);
       color: var(--color-grey);
     }
@@ -53,13 +53,12 @@
     padding: 0 var(--spacing-base);
 
     &::before {
-      content: '';
       position: absolute;
       top: 0;
       left: 0;
-
       width: 4px;
       height: 100%;
+      content: '';
       background: var(--color-matters-gold);
     }
   }
@@ -70,13 +69,16 @@
   & :global(ol) {
     padding-left: var(--spacing-loose);
   }
+
   & :global(li) {
     padding-left: var(--spacing-x-tight);
     margin: var(--spacing-x-tight) 0;
   }
+
   & :global(ul) {
     list-style-type: disc;
   }
+
   & :global(ol) {
     list-style-type: decimal;
   }
@@ -86,18 +88,23 @@
   & :global(h1) {
     font-size: var(--font-size-article-h1);
   }
+
   & :global(h2) {
     font-size: var(--font-size-article-h2);
   }
+
   & :global(h3) {
     font-size: var(--font-size-article-h3);
   }
+
   & :global(h4) {
     font-size: var(--font-size-article-h4);
   }
+
   & :global(h5) {
     font-size: var(--font-size-article-h5);
   }
+
   & :global(h6) {
     font-size: var(--font-size-article-h6);
   }
@@ -115,9 +122,9 @@
   /* Link
    ========================================================================== */
   & :global(a) {
-    color: var(--color-matters-green);
-    border-bottom: 1px solid currentcolor;
     padding-bottom: 2px;
+    color: var(--color-matters-green);
+    border-bottom: 1px solid currentColor;
 
     &:hover,
     &:active,
@@ -125,21 +132,20 @@
       color: var(--color-matters-green-active);
     }
   }
+
   /* fix frequent misuse of links */
   & :global(u > a, ins > a) {
-    border-bottom: 0;
     padding-bottom: 0;
+    border-bottom: 0;
   }
 
   /* Misc
    ========================================================================== */
   & :global(hr) {
     display: block;
-
     width: 10rem;
     height: 0.125rem;
     margin: var(--spacing-loose) auto;
-
     border: 0;
     border-top: 1px solid var(--color-line-grey-dark);
     border-bottom: 1px solid var(--color-line-grey-dark);
@@ -155,14 +161,12 @@
   position: absolute;
   top: 0;
   left: 0;
-
+  z-index: var(--z-index-under-global-header);
   width: var(--sizing-menu-md);
   max-height: calc(4rem * 3);
-
-  color: var(--color-black);
-  border-radius: 0.5rem;
-  background: var(--color-white);
-  box-shadow: var(--shadow-dark);
   overflow-y: auto;
-  z-index: var(--z-index-under-global-header);
+  color: var(--color-black);
+  background: var(--color-white);
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-dark);
 }

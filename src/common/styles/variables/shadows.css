@@ -1,6 +1,6 @@
 /* @styled-jsx=global */
 
 :root {
-  --shadow-light: 0px 4px 16px rgba(0, 0, 0, 0.08);
-  --shadow-dark: 0px 4px 16px rgba(0, 0, 0, 0.12);
+  --shadow-light: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-dark: 0 4px 16px rgba(0, 0, 0, 0.12);
 }

@@ -22,23 +22,23 @@
       padding: 0;
 
       &::before {
-        content: '';
         position: absolute;
-        left: calc(var(--descendant-avatar-size) / 2);
         top: calc(var(--descendant-avatar-size) + var(--spacing-x-tight));
+        left: calc(var(--descendant-avatar-size) / 2);
+        width: 1px;
         height: 0;
         height: calc(
           100% - var(--descendant-item-spacing) - var(--spacing-x-tight) +
             var(--spacing-xx-tight)
         );
-        width: 1px;
+        content: '';
         background-color: var(--color-line-grey-light);
       }
     }
   }
 
   & :global(.content-container) {
-    margin-top: var(--spacing-x-tight);
     padding-left: var(--spacing-x-loose);
+    margin-top: var(--spacing-x-tight);
   }
 }

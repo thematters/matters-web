@@ -9,7 +9,6 @@ header {
     width: 3rem;
     height: 3rem;
     margin-right: var(--spacing-loose);
-
     border-radius: 50%;
 
     @media (--sm-up) {
@@ -25,6 +24,7 @@ header {
       margin-top: var(--spacing-x-tight);
       color: var(--color-grey-dark);
     }
+
     & .hightlight {
       color: var(--color-matters-green);
     }

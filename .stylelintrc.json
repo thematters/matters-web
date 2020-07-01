@@ -1,0 +1,25 @@
+{
+  "plugins": ["stylelint-prettier"],
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-recess-order",
+    "stylelint-config-prettier"
+  ],
+  "rules": {
+    "prettier/prettier": true,
+    "selector-pseudo-class-no-unknown": [
+      true,
+      {
+        "ignorePseudoClasses": ["global"]
+      }
+    ],
+    "at-rule-no-unknown": null,
+    "no-descending-specificity": null,
+    "property-no-unknown": [
+      true,
+      {
+        "ignoreProperties": ["/lost-/"]
+      }
+    ]
+  }
+}
