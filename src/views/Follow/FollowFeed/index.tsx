@@ -10,48 +10,76 @@ import {
   Spinner,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
+import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
 import { analytics, mergeConnections } from '~/common/utils'
 
+import FeedType, { FollowFeedType } from './FeedType'
 import FollowComment from './FollowComment'
 
-import { FollowFeed as FollowFeedType } from './__generated__/FollowFeed'
+import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
+import { FollowArticleFeed } from './__generated__/FollowArticleFeed'
+import { FollowCommentFeed } from './__generated__/FollowCommentFeed'
 
-const FOLLOW_FEED = gql`
-  query FollowFeed($after: String) {
-    viewer {
-      id
-      recommendation {
-        followeeWorks(input: { first: 10, after: $after }) {
-          pageInfo {
-            startCursor
-            endCursor
-            hasNextPage
-          }
-          edges {
-            cursor
-            node {
-              __typename
-              ... on Article {
-                ...ArticleDigestFeedArticle
-              }
-              ... on Comment {
-                ...FollowComment
+const queries = {
+  article: gql`
+    query FollowArticleFeed($after: String) {
+      viewer {
+        id
+        recommendation {
+          followeeArticles(input: { first: 10, after: $after }) {
+            pageInfo {
+              startCursor
+              endCursor
+              hasNextPage
+            }
+            edges {
+              cursor
+              node {
+                __typename
+                ... on Article {
+                  ...ArticleDigestFeedArticle
+                }
               }
             }
           }
         }
       }
     }
-  }
-  ${ArticleDigestFeed.fragments.article}
-  ${FollowComment.fragments.comment}
-`
+    ${ArticleDigestFeed.fragments.article}
+  `,
+  comment: gql`
+    query FollowCommentFeed($after: String) {
+      viewer {
+        id
+        recommendation {
+          followeeComments(input: { first: 10, after: $after }) {
+            pageInfo {
+              startCursor
+              endCursor
+              hasNextPage
+            }
+            edges {
+              cursor
+              node {
+                __typename
+                ... on Comment {
+                  ...FollowComment
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    ${FollowComment.fragments.comment}
+  `,
+}
 
-const FollowFeed = () => {
-  const { data, loading, error, fetchMore, refetch } = useQuery<FollowFeedType>(
-    FOLLOW_FEED
-  )
+const ArticlesFeed = () => {
+  const { data, loading, error, fetchMore, refetch } = useQuery<
+    FollowArticleFeed
+  >(queries.article)
 
   if (loading) {
     return <Spinner />
@@ -61,8 +89,9 @@ const FollowFeed = () => {
     return <QueryError error={error} />
   }
 
-  const connectionPath = 'viewer.recommendation.followeeWorks'
-  const { edges, pageInfo } = data?.viewer?.recommendation.followeeWorks || {}
+  const connectionPath = 'viewer.recommendation.followeeArticles'
+  const { edges, pageInfo } =
+    data?.viewer?.recommendation.followeeArticles || {}
 
   if (!edges || edges.length <= 0 || !pageInfo) {
     return <EmptyArticle />
@@ -95,33 +124,18 @@ const FollowFeed = () => {
       <List>
         {edges.map(({ node, cursor }, i) => (
           <List.Item key={cursor}>
-            {node.__typename === 'Article' && (
-              <ArticleDigestFeed
-                article={node}
-                onClick={() =>
-                  analytics.trackEvent('click_feed', {
-                    type: 'follow',
-                    contentType: 'article',
-                    styleType: 'no_cover',
-                    location: i,
-                  })
-                }
-                inFollowFeed
-              />
-            )}
-            {node.__typename === 'Comment' && (
-              <FollowComment
-                comment={node}
-                onClick={() =>
-                  analytics.trackEvent('click_feed', {
-                    type: 'follow',
-                    contentType: 'article',
-                    styleType: 'comment',
-                    location: i,
-                  })
-                }
-              />
-            )}
+            <ArticleDigestFeed
+              article={node}
+              onClick={() =>
+                analytics.trackEvent('click_feed', {
+                  type: 'follow',
+                  contentType: 'article',
+                  styleType: 'no_cover',
+                  location: i,
+                })
+              }
+              inFollowFeed
+            />
           </List.Item>
         ))}
       </List>
@@ -129,9 +143,101 @@ const FollowFeed = () => {
   )
 }
 
-export default () => (
-  <>
-    <Head title={{ id: 'follow' }} />
-    <FollowFeed />
-  </>
-)
+const CommentsFeed = () => {
+  const { data, loading, error, fetchMore, refetch } = useQuery<
+    FollowCommentFeed
+  >(queries.comment)
+
+  if (loading) {
+    return <Spinner />
+  }
+
+  if (error) {
+    return <QueryError error={error} />
+  }
+
+  const connectionPath = 'viewer.recommendation.followeeComments'
+  const { edges, pageInfo } =
+    data?.viewer?.recommendation.followeeComments || {}
+
+  if (!edges || edges.length <= 0 || !pageInfo) {
+    return <EmptyArticle />
+  }
+
+  const loadMore = () => {
+    analytics.trackEvent('load_more', {
+      type: 'follow',
+      location: edges.length,
+    })
+    return fetchMore({
+      variables: {
+        after: pageInfo.endCursor,
+      },
+      updateQuery: (previousResult, { fetchMoreResult }) =>
+        mergeConnections({
+          oldData: previousResult,
+          newData: fetchMoreResult,
+          path: connectionPath,
+        }),
+    })
+  }
+
+  return (
+    <InfiniteScroll
+      hasNextPage={pageInfo.hasNextPage}
+      loadMore={loadMore}
+      pullToRefresh={refetch}
+    >
+      <List>
+        {edges.map(({ node, cursor }, i) => (
+          <List.Item key={cursor}>
+            <FollowComment
+              comment={node}
+              onClick={() =>
+                analytics.trackEvent('click_feed', {
+                  type: 'follow',
+                  contentType: 'article',
+                  styleType: 'comment',
+                  location: i,
+                })
+              }
+            />
+          </List.Item>
+        ))}
+      </List>
+    </InfiniteScroll>
+  )
+}
+
+const FollowFeed = () => {
+  const { data, client } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
+    variables: { id: 'local' },
+  })
+  const { followFeedType } = data?.clientPreference || {
+    followFeedType: 'article',
+  }
+  const setFeedType = (type: FollowFeedType) => {
+    if (client) {
+      client.writeData({
+        id: 'ClientPreference:local',
+        data: { followFeedType: type },
+      })
+    }
+  }
+
+  return (
+    <>
+      <Head title={{ id: 'follow' }} />
+      <section className="topbar">
+        <FeedType
+          type={followFeedType as FollowFeedType}
+          setFeedType={setFeedType}
+        />
+      </section>
+      {followFeedType === 'article' && <ArticlesFeed />}
+      {followFeedType === 'comment' && <CommentsFeed />}
+    </>
+  )
+}
+
+export default FollowFeed
