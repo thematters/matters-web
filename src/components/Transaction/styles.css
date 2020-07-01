@@ -12,15 +12,15 @@
   & .sender {
     @mixin flex-center-start;
 
-    color: var(--color-grey-dark);
     font-size: var(--font-size-sm);
     line-height: 1;
+    color: var(--color-grey-dark);
   }
 
   & .content {
-    color: var(--color-black);
     font-size: var(--font-size-md);
     font-weight: var(--font-weight-medium);
+    color: var(--color-black);
   }
 
   & footer {

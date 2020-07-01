@@ -1,14 +1,13 @@
 section {
   @mixin flex-start-center;
 
-  line-height: 1;
   font-weight: var(--font-weight-bold);
+  line-height: 1;
 }
 
 .currency {
   padding-top: var(--spacing-xx-tight);
   padding-right: var(--spacing-xx-tight);
-
   font-size: var(--font-size-sm);
 }
 

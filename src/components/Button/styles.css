@@ -3,6 +3,7 @@
 .container {
   display: inline-flex;
 }
+
 span.container {
   cursor: initial;
 }
@@ -11,12 +12,15 @@ span.container {
 .text-white {
   color: var(--color-white);
 }
+
 .text-black {
   color: var(--color-black);
 }
+
 .text-green {
   color: var(--color-matters-green);
 }
+
 .text-red {
   color: var(--color-red);
 }
@@ -27,12 +31,14 @@ span.container {
     color: var(--color-white);
   }
 }
+
 .text-active-black {
   &:hover,
   &:focus {
     color: var(--color-black);
   }
 }
+
 .text-active-green {
   &:hover,
   &:focus {
@@ -44,11 +50,11 @@ span.container {
    ========================================================================== */
 .content {
   @mixin inline-flex-center-all;
-  position: relative;
 
+  position: relative;
+  box-sizing: border-box;
   text-align: center;
   white-space: nowrap;
-  box-sizing: border-box;
 }
 
 /* Hot Area
@@ -57,8 +63,8 @@ span.container {
   @mixin expand-to-container;
   @mixin all-transition;
 
-  background: transparent;
   z-index: 0;
+  background: transparent;
 
   & :global(+ *) {
     z-index: 1;
@@ -72,12 +78,14 @@ span.container {
     transform: translateX(-50%);
   }
 }
+
 .centering-y {
   & .hotarea {
     top: 50%;
     transform: translateY(-50%);
   }
 }
+
 .centering-x.centering-y {
   & .hotarea {
     transform: translate(-50%, -50%);
@@ -90,36 +98,43 @@ span.container {
     padding-top: var(--spacing-xx-tight);
     padding-bottom: var(--spacing-xx-tight);
   }
+
   & .hotarea {
     margin-top: calc(var(--spacing-xx-tight) * -1);
     margin-bottom: calc(var(--spacing-xx-tight) * -1);
   }
 }
+
 .spacing-y-xtight {
   &:not(.isTransparent) {
     padding-top: var(--spacing-x-tight);
     padding-bottom: var(--spacing-x-tight);
   }
+
   & .hotarea {
     margin-top: calc(var(--spacing-x-tight) * -1);
     margin-bottom: calc(var(--spacing-x-tight) * -1);
   }
 }
+
 .spacing-y-tight {
   &:not(.isTransparent) {
     padding-top: var(--spacing-tight);
     padding-bottom: var(--spacing-tight);
   }
+
   & .hotarea {
     margin-top: calc(var(--spacing-tight) * -1);
     margin-bottom: calc(var(--spacing-tight) * -1);
   }
 }
+
 .spacing-y-base {
   &:not(.isTransparent) {
     padding-top: var(--spacing-base);
     padding-bottom: var(--spacing-base);
   }
+
   & .hotarea {
     margin-top: calc(var(--spacing-base) * -1);
     margin-bottom: calc(var(--spacing-base) * -1);
@@ -128,52 +143,61 @@ span.container {
 
 .spacing-x-xxtight {
   &:not(.isTransparent) {
-    padding-left: var(--spacing-xx-tight);
     padding-right: var(--spacing-xx-tight);
+    padding-left: var(--spacing-xx-tight);
   }
+
   & .hotarea {
-    margin-left: calc(var(--spacing-xx-tight) * -1);
     margin-right: calc(var(--spacing-xx-tight) * -1);
+    margin-left: calc(var(--spacing-xx-tight) * -1);
   }
 }
+
 .spacing-x-xtight {
   &:not(.isTransparent) {
-    padding-left: var(--spacing-x-tight);
     padding-right: var(--spacing-x-tight);
+    padding-left: var(--spacing-x-tight);
   }
+
   & .hotarea {
-    margin-left: calc(var(--spacing-x-tight) * -1);
     margin-right: calc(var(--spacing-x-tight) * -1);
+    margin-left: calc(var(--spacing-x-tight) * -1);
   }
 }
+
 .spacing-x-tight {
   &:not(.isTransparent) {
-    padding-left: var(--spacing-tight);
     padding-right: var(--spacing-tight);
+    padding-left: var(--spacing-tight);
   }
+
   & .hotarea {
-    margin-left: calc(var(--spacing-tight) * -1);
     margin-right: calc(var(--spacing-tight) * -1);
+    margin-left: calc(var(--spacing-tight) * -1);
   }
 }
+
 .spacing-x-base {
   &:not(.isTransparent) {
-    padding-left: var(--spacing-base);
     padding-right: var(--spacing-base);
+    padding-left: var(--spacing-base);
   }
+
   & .hotarea {
-    margin-left: calc(var(--spacing-base) * -1);
     margin-right: calc(var(--spacing-base) * -1);
+    margin-left: calc(var(--spacing-base) * -1);
   }
 }
+
 .spacing-x-loose {
   &:not(.isTransparent) {
-    padding-left: var(--spacing-loose);
     padding-right: var(--spacing-loose);
+    padding-left: var(--spacing-loose);
   }
+
   & .hotarea {
-    margin-left: calc(var(--spacing-loose) * -1);
     margin-right: calc(var(--spacing-loose) * -1);
+    margin-left: calc(var(--spacing-loose) * -1);
   }
 }
 
@@ -196,6 +220,7 @@ span.container {
     }
   }
 }
+
 .bg-green {
   & .hotarea {
     background: var(--color-matters-green);
@@ -208,6 +233,7 @@ span.container {
     }
   }
 }
+
 .bg-green-lighter {
   & .hotarea {
     background: var(--color-green-lighter);
@@ -220,6 +246,7 @@ span.container {
     }
   }
 }
+
 .bg-gold {
   & .hotarea {
     background: var(--color-matters-gold);
@@ -232,11 +259,13 @@ span.container {
     }
   }
 }
+
 .bg-red {
   & .hotarea {
     background: var(--color-red);
   }
 }
+
 .bg-half-black {
   & .hotarea {
     background: rgba(0, 0, 0, 0.5);
@@ -259,6 +288,7 @@ span.container {
     }
   }
 }
+
 .bg-active-grey-lighter-active {
   &:hover,
   &:focus {
@@ -267,6 +297,7 @@ span.container {
     }
   }
 }
+
 .bg-active-green-lighter {
   &:hover,
   &:focus {
@@ -275,6 +306,7 @@ span.container {
     }
   }
 }
+
 .bg-active-green {
   &:hover,
   &:focus {
@@ -284,6 +316,7 @@ span.container {
     }
   }
 }
+
 .bg-active-red {
   &:hover,
   &:focus {
@@ -299,36 +332,43 @@ span.container {
     border-color: var(--color-white);
   }
 }
+
 .border-grey {
   & .hotarea {
     border-color: var(--color-grey);
   }
 }
+
 .border-grey-light {
   & .hotarea {
     border-color: var(--color-grey-light);
   }
 }
+
 .border-grey-lighter {
   & .hotarea {
     border-color: var(--color-grey-lighter);
   }
 }
+
 .border-green-lighter {
   & .hotarea {
     border-color: var(--color-green-lighter);
   }
 }
+
 .border-green {
   & .hotarea {
     border-color: var(--color-matters-green);
   }
 }
+
 .border-gold {
   & .hotarea {
     border-color: var(--color-matters-gold);
   }
 }
+
 .border-red {
   & .hotarea {
     border-color: var(--color-red);
@@ -337,13 +377,14 @@ span.container {
 
 .border-md {
   & .hotarea {
-    border-width: 1.5px;
     border-style: solid;
+    border-width: 1.5px;
   }
 }
+
 .border-sm {
   & .hotarea {
-    border-width: 1px;
     border-style: solid;
+    border-width: 1px;
   }
 }

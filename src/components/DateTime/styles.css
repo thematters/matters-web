@@ -1,8 +1,8 @@
 time {
-  color: var(--color-grey-light);
   font-size: var(--font-size-timestamp);
   font-weight: var(--font-weight-timestamp);
   line-height: var(--line-height-timestamp);
+  color: var(--color-grey-light);
 }
 
 .grey {

@@ -1,5 +1,6 @@
 .container {
   @mixin flex-center-all;
+
   flex-direction: column;
 }
 
@@ -7,9 +8,8 @@
   @mixin flex-center-all;
 
   margin: var(--spacing-base) 0;
-
-  color: var(--color-red);
   font-size: var(--font-size-sm-s);
+  color: var(--color-red);
 }
 
 .avatar-list {
@@ -17,36 +17,44 @@
 
   & :global(> *) {
     position: relative;
-
     box-shadow: 0 0 0 2px var(--color-white);
 
     &:nth-child(1) {
       z-index: 10;
     }
+
     &:nth-child(2) {
       z-index: 9;
     }
+
     &:nth-child(3) {
       z-index: 8;
     }
+
     &:nth-child(4) {
       z-index: 7;
     }
+
     &:nth-child(5) {
       z-index: 6;
     }
+
     &:nth-child(6) {
       z-index: 5;
     }
+
     &:nth-child(7) {
       z-index: 4;
     }
+
     &:nth-child(8) {
       z-index: 3;
     }
+
     &:nth-child(9) {
       z-index: 2;
     }
+
     &:nth-child(10) {
       z-index: 1;
     }

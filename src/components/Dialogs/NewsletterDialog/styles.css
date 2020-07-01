@@ -4,9 +4,9 @@ p {
 }
 
 .title {
-  color: var(--color-black);
-  font-weight: var(--font-weight-semibold);
   margin-bottom: var(--spacing-x-tight);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-black);
 }
 
 .description {

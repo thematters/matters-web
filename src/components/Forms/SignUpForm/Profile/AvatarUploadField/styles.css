@@ -1,13 +1,12 @@
 .container {
   @mixin flex-center-start;
 
-  margin: var(--spacing-loose) 0;
   padding: 0 var(--spacing-base);
+  margin: var(--spacing-loose) 0;
 }
 
 .hint {
   margin-left: var(--spacing-base);
-
-  color: var(--color-grey-dark);
   font-size: var(--font-size-sm);
+  color: var(--color-grey-dark);
 }

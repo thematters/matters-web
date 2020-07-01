@@ -4,8 +4,8 @@ label {
   font-size: 0;
 
   &.has-border {
-    box-shadow: 0 0 0 3px var(--color-white);
     border-radius: 50%;
+    box-shadow: 0 0 0 3px var(--color-white);
   }
 }
 

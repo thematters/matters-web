@@ -77,7 +77,10 @@ const TagDetail = ({ data }: { data: TagDetailType }) => {
   }
 
   const editors = data.node.editors || []
-  const maintainer = _find(editors, (editor) => editor.userName !== 'matty')
+  const maintainer = _find(
+    editors,
+    (editor) => (editor.displayName || '').toLowerCase() !== 'matty'
+  )
   const isEditor = _some(editors, (editor) => editor.id === viewer.id)
   const isCreator = data.node.creator?.id === viewer.id
   const canEdit =

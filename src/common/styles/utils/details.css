@@ -5,18 +5,18 @@
     position: relative;
     display: block;
     padding-left: var(--spacing-loose);
-
     cursor: pointer;
     user-select: none;
 
     &::-webkit-details-marker {
       position: absolute;
-      display: inline-block;
       top: 0.45rem;
       left: 0;
+      display: inline-block;
       width: 0.6rem;
       height: 0.6rem;
     }
+
     &:focus {
       outline: 0;
     }

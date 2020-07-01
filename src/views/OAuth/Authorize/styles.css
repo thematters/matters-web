@@ -8,21 +8,20 @@
 
   & ul {
     padding: 0 var(--spacing-x-tight) var(--spacing-x-loose);
-
-    color: var(--color-grey-darker);
     font-size: var(--font-size-sm);
+    color: var(--color-grey-darker);
 
     & li {
       position: relative;
       padding: var(--spacing-x-tight) var(--spacing-x-tight);
 
       &::before {
-        content: '';
         position: absolute;
-        left: 0;
         top: calc(50% - 1px);
+        left: 0;
         width: 2px;
         height: 2px;
+        content: '';
         background-color: currentColor;
         border-radius: 50%;
       }
@@ -32,13 +31,13 @@
 
 .current-account {
   @mixin flex-center-all;
+
   margin-top: var(--spacing-x-loose);
 }
 
 .switch-account {
   margin-top: var(--spacing-base);
-
-  color: var(--color-grey-dark);
   font-size: var(--font-size-sm);
+  color: var(--color-grey-dark);
   text-align: center;
 }

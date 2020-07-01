@@ -1,5 +1,6 @@
 h2 {
   @mixin font-serif;
+
   font-size: 1.7rem;
   line-height: 1.4;
 
@@ -10,18 +11,18 @@ h2 {
 
 .footer {
   padding: 4.5rem 0 2rem;
-
-  background: var(--color-grey-lighter);
   text-align: center;
+  background: var(--color-grey-lighter);
 
   & .footer-section {
     margin-bottom: var(--spacing-xxx-loose);
   }
 
   & h2 {
-    font-size: var(--font-size-lg);
     margin-bottom: var(--spacing-loose);
+    font-size: var(--font-size-lg);
   }
+
   & p {
     @mixin font-serif;
 
@@ -29,6 +30,7 @@ h2 {
       margin-top: var(--spacing-loose);
     }
   }
+
   & .socials {
     & :global(> *) {
       display: inline-block;
@@ -41,11 +43,11 @@ h2 {
 
     & input {
       @mixin border-bottom-grey;
+
       display: inline-block;
+      height: 2.5rem;
       padding: var(--spacing-x-tight);
       margin-right: var(--spacing-base);
-      height: 2.5rem;
-
       background: var(--color-white);
     }
   }
@@ -63,9 +65,9 @@ h2 {
 
     & .socials {
       & :global(> *) {
-        margin-left: 0;
         margin-right: var(--spacing-loose);
         margin-bottom: var(--spacing-x-tight);
+        margin-left: 0;
       }
     }
 
