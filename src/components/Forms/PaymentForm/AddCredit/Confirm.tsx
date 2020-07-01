@@ -10,10 +10,10 @@ import {
   PAYMENT_CURRENCY,
   PAYMENT_DEFAULT_CHARGE_AMOUNT,
   PAYMENT_MAXIMUM_CHARGE_AMOUNT,
-  PLATFORM_FEE,
+  // PLATFORM_FEE,
 } from '~/common/enums'
 import {
-  calcStripeFee,
+  // calcStripeFee,
   numRound,
   parseFormSubmitErrors,
   toAmountString,
@@ -136,8 +136,9 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, defaultAmount }) => {
     </Form>
   )
 
-  const fee = calcStripeFee(values.amount)
-  const total = numRound(fee + values.amount)
+  // const fee = calcStripeFee(values.amount)
+  // const total = numRound(fee + values.amount)
+  const total = numRound(values.amount)
 
   return (
     <>
@@ -156,7 +157,7 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, defaultAmount }) => {
               </ConfirmTable.Col>
             </ConfirmTable.Row>
 
-            <ConfirmTable.Row>
+            {/* <ConfirmTable.Row>
               <ConfirmTable.Col>
                 <Translate zh_hant="Stripe 手續費" zh_hans="Stripe 手续费" />（
                 {PLATFORM_FEE[currency]}）
@@ -165,7 +166,7 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, defaultAmount }) => {
               <ConfirmTable.Col>
                 + {currency} {toAmountString(fee)}
               </ConfirmTable.Col>
-            </ConfirmTable.Row>
+            </ConfirmTable.Row> */}
 
             <ConfirmTable.Row total>
               <ConfirmTable.Col>
