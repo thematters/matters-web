@@ -128,7 +128,7 @@ const ArticlesFeed = () => {
               article={node}
               onClick={() =>
                 analytics.trackEvent('click_feed', {
-                  type: 'follow',
+                  type: 'follow-article',
                   contentType: 'article',
                   styleType: 'no_cover',
                   location: i,
@@ -195,9 +195,9 @@ const CommentsFeed = () => {
               comment={node}
               onClick={() =>
                 analytics.trackEvent('click_feed', {
-                  type: 'follow',
-                  contentType: 'article',
-                  styleType: 'comment',
+                  type: 'follow-comment',
+                  contentType: 'comment',
+                  styleType: 'card',
                   location: i,
                 })
               }

@@ -13,6 +13,7 @@ export default gql`
         supported
       }
       routeHistory
+      followFeedType
     }
   }
 `
