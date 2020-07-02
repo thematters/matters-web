@@ -801,7 +801,7 @@ export const TEXT = {
     USER_EMAIL_EXISTS: 'Email is already used by others.',
     USER_EMAIL_INVALID: 'Invalid email',
     USER_EMAIL_NOT_FOUND: 'Invalid account',
-    USER_NOT_FOUND: 'User nof found',
+    USER_NOT_FOUND: 'User not found',
     USER_PASSWORD_INVALID: 'Invalid password',
     USER_USERNAME_EXISTS: 'Matters ID is already used by others.',
     USER_USERNAME_INVALID: 'Invalid Matters ID',
