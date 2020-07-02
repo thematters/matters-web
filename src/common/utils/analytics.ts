@@ -26,7 +26,11 @@ type EventArgs =
   | ['share', ShareProp]
   | ['purchase', PurchaseProp]
 
-type ClickFeedProp = ArticleFeedProp | CommentFeedProp | UserFeedProp | TagFeedProp
+type ClickFeedProp =
+  | ArticleFeedProp
+  | CommentFeedProp
+  | UserFeedProp
+  | TagFeedProp
 
 interface ClickButtonProp {
   type:
@@ -124,8 +128,7 @@ type ArticleFeedType =
   | 'user_article'
   | 'wallet'
 
-type CommentFeedType =
-  | 'follow-comment'
+type CommentFeedType = 'follow-comment'
 
 type UserFeedType =
   | 'all_authors'
