@@ -140,6 +140,13 @@ const AppreciationButton = ({ article }: AppreciationButtonProps) => {
             token,
             superLike: true,
           },
+          optimisticResponse: {
+            appreciateArticle: {
+              id: article.id,
+              canSuperLike: false,
+              __typename: 'Article',
+            },
+          },
         })
       } catch (e) {
         setSuperLiked(false)
