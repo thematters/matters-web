@@ -36,13 +36,13 @@
   }
   & :global(.icon-superlike) {
     position: absolute;
-    top: 2px;
+    top: 3px;
     left: 2px;
     width: 28px;
     height: 28px;
     opacity: 0;
     transition: transform 0.2s ease-in-out;
-    transform: scale(0) translateY(2px);
+    transform: scale(0);
   }
   & :global(.icon-superlike .superlike_svg__star) {
     fill-opacity: 0;
@@ -106,7 +106,7 @@
   }
   & :global(.icon-superlike) {
     opacity: 1;
-    transform: scale(1) translateY(2px);
+    transform: scale(1);
   }
 
   &.superLiked {

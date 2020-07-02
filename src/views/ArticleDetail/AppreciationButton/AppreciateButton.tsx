@@ -28,10 +28,9 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
   canSuperLike,
   superLiked,
 }) => {
-  const btnRef = useRef<HTMLButtonElement>(null)
+  const iconRef = useRef<HTMLButtonElement>(null)
   const buttonClass = classNames({
     'appreciate-button': true,
-    clap: true,
     isSuperLike,
     superLiked,
   })
@@ -40,11 +39,10 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
     <button
       className={buttonClass}
       type="button"
-      ref={btnRef}
       disabled={disabled}
       onClick={() => {
-        if (btnRef.current) {
-          clap.clap(btnRef.current)
+        if (iconRef.current) {
+          clap.clap(iconRef.current)
         }
 
         if (onClick) {
@@ -52,13 +50,16 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
         }
       }}
       aria-label="讚賞作品"
-      onTransitionEnd={(e) => {
-        if (e.propertyName === 'transform' && btnRef.current) {
-          clap.handZoomOut(btnRef.current)
-        }
-      }}
     >
-      <span className="icon">
+      <span
+        className="icon clap"
+        ref={iconRef}
+        onTransitionEnd={(e) => {
+          if (e.propertyName === 'transform' && iconRef.current) {
+            clap.handZoomOut(iconRef.current)
+          }
+        }}
+      >
         <IconLike className="icon-like" size="md" color="green" />
         <IconSuperLike className="icon-superlike" size="md" />
       </span>
