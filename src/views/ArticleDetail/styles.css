@@ -1,6 +1,6 @@
 .content {
-  padding: var(--spacing-base);
   min-height: 100vh;
+  padding: var(--spacing-base);
 }
 
 .title {
@@ -9,6 +9,7 @@
 
 .info {
   @mixin flex-center-space-between;
+
   padding-top: var(--spacing-x-tight);
 
   & .left,
@@ -23,6 +24,7 @@
 
 .block {
   @mixin border-top-grey;
-  margin: var(--spacing-loose) 0 var(--spacing-base);
+
   padding-top: var(--spacing-loose);
+  margin: var(--spacing-loose) 0 var(--spacing-base);
 }

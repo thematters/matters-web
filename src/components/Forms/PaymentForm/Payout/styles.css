@@ -1,10 +1,10 @@
 b {
-  color: var(--color-black);
   font-weight: var(--font-weight-medium);
+  color: var(--color-black);
 }
 
 h3 {
-  color: var(--color-grey);
-  margin-left: var(--spacing-loose);
   margin-right: var(--spacing-loose);
+  margin-left: var(--spacing-loose);
+  color: var(--color-grey);
 }

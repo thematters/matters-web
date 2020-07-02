@@ -1,27 +1,26 @@
 .tags-intro {
   margin: var(--spacing-base) 0;
-
-  color: var(--color-grey);
   font-size: var(--font-size-xs);
+  color: var(--color-grey);
 }
 
 .tag {
   display: inline-block;
+  height: 1.5rem;
+  padding: 0 var(--spacing-x-tight);
   margin-right: var(--spacing-x-tight);
   margin-bottom: var(--spacing-x-tight);
-  padding: 0 var(--spacing-x-tight);
-  height: 1.5rem;
-
   font-size: var(--font-size-sm);
   color: var(--color-white);
-  background: var(--color-matters-green);
   white-space: nowrap;
+  background: var(--color-matters-green);
 
   & :global(> *) {
     display: inline-block;
     line-height: 1;
     vertical-align: middle;
   }
+
   & :global(> * + *) {
     margin-left: var(--spacing-xx-tight);
   }
@@ -29,9 +28,8 @@
 
 .search-tag-input {
   display: inline-block;
-  height: 1.5rem;
   width: 5rem;
-
+  height: 1.5rem;
   font-size: var(--font-size-sm);
   line-height: 1.5rem;
   color: var(--color-black);

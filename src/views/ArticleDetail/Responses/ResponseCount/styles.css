@@ -2,8 +2,7 @@
   position: relative;
   top: -0.7rem;
   right: -0.25rem;
-
-  color: var(--color-matters-green);
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-bold);
+  color: var(--color-matters-green);
 }

@@ -1,12 +1,11 @@
 .container {
   @mixin flex-center-start;
 
-  color: var(--color-grey-dark);
   font-size: var(--font-size-sm);
+  color: var(--color-grey-dark);
 }
 
 .reply-to {
   margin-right: var(--spacing-xx-tight);
-
   line-height: 1rem;
 }

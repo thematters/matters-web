@@ -1,6 +1,5 @@
 article {
   min-height: 100vh;
-
   padding-bottom: var(--global-nav-height);
   padding-bottom: calc(
     constant(safe-area-inset-bottom) + var(--global-nav-height)
@@ -24,6 +23,7 @@ article {
   @media (--sm-up) {
     @mixin border-left-grey;
     @mixin border-right-grey;
+
     padding-bottom: 0;
   }
 }
@@ -31,6 +31,7 @@ article {
 aside {
   @mixin border-left-grey;
   @mixin border-right-grey;
+
   padding: var(--spacing-base);
 
   & :global(> * + *) {
@@ -42,8 +43,7 @@ aside {
 
     /* Fix grid layout. Otherwise, we need wrap it with another `l-low` */
     margin-right: 0 !important;
-
-    border-left: none;
     border-right: none;
+    border-left: none;
   }
 }

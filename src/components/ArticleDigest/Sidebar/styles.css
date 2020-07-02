@@ -20,6 +20,7 @@
 
     & :global(img) {
       @mixin object-fit-cover;
+
       border-radius: var(--spacing-xx-tight);
     }
   }
@@ -31,10 +32,9 @@
     );
 
     & .cover {
-      margin: calc(var(--article-digest-sidebar-card-spacing) * -1);
       width: var(--article-digest-sidebar-cover-width-lg);
       height: calc(100% + var(--article-digest-sidebar-card-spacing) * 2);
-
+      margin: calc(var(--article-digest-sidebar-card-spacing) * -1);
       border-radius: 0;
     }
   }
@@ -42,7 +42,6 @@
 
 footer {
   margin-top: var(--spacing-tight);
-
   line-height: 1;
 
   /* Make <UserDigest.Mini> as an inline element, otherwise users will easily touch it inadvertently */
