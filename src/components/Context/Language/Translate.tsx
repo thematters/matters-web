@@ -39,7 +39,7 @@ const BaseTranslate = (props: TranslateProps) => {
 /**
  * Memoizing
  */
-type MemoedTranslate = React.MemoExoticComponent<React.FC<TranslateProps>>
+type MemoizedTranslate = React.MemoExoticComponent<React.FC<TranslateProps>>
 
 export const Translate = React.memo(BaseTranslate, (prev, next) => {
   if ('id' in prev && 'id' in next) {
@@ -49,4 +49,4 @@ export const Translate = React.memo(BaseTranslate, (prev, next) => {
     return prev.zh_hant === next.zh_hant
   }
   return prev.lang === next.lang
-}) as MemoedTranslate
+}) as MemoizedTranslate

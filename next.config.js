@@ -29,7 +29,6 @@ const nextConfig = {
   typescript: {
     ignoreDevErrors: false,
   },
-  distDir: 'build',
   crossOrigin: 'anonymous',
   webpack(config, { defaultLoaders, isServer }) {
     /**

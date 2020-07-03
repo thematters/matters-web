@@ -56,11 +56,11 @@ const fragments = {
         state
       }
       ...AvatarUser
-      ...FollowButtonUser @skip(if: $isMe)
+      ...FollowButtonUserPrivate @skip(if: $isMe)
       ...DropdownActionsUser
     }
     ${Avatar.fragments.user}
-    ${FollowButton.fragments.user}
+    ${FollowButton.fragments.user.private}
     ${DropdownActions.fragments.user}
   `,
 }

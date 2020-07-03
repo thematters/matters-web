@@ -1,11 +1,9 @@
-import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
 import {
   BookmarkButton,
   ReCaptchaProvider,
   ShareButton,
-  usePullToRefresh,
   useResponsive,
 } from '~/components'
 import DropdownActions from '~/components/ArticleDigest/DropdownActions'
@@ -15,39 +13,44 @@ import Appreciators from './Appreciators'
 import CommentBar from './CommentBar'
 import styles from './styles.css'
 
-import { ArticleToolbar } from './__generated__/ArticleToolbar'
+import { ToolbarArticlePrivate } from './__generated__/ToolbarArticlePrivate'
+import { ToolbarArticlePublic } from './__generated__/ToolbarArticlePublic'
 
-const ARTICLE_TOOLBAR = gql`
-  query ArticleToolbar($mediaHash: String) {
-    article(input: { mediaHash: $mediaHash }) {
-      id
-      ...AppreciationButtonArticle
-      ...AppreciatorsArticle
-      ...CommentBarArticle
-      ...BookmarkArticle
-      ...DropdownActionsArticle
-    }
-  }
-  ${AppreciationButton.fragments.article}
-  ${Appreciators.fragments.article}
-  ${CommentBar.fragments.article}
-  ${BookmarkButton.fragments.article}
-  ${DropdownActions.fragments.article}
-`
+export interface ToolbarProps {
+  article: ToolbarArticlePublic & Partial<ToolbarArticlePrivate>
+}
 
-const Toolbar = ({ mediaHash }: { mediaHash: string }) => {
+const fragments = {
+  article: {
+    public: gql`
+      fragment ToolbarArticlePublic on Article {
+        id
+        ...AppreciatorsArticle
+        ...DropdownActionsArticle
+        ...AppreciationButtonArticlePublic
+        ...CommentBarArticlePublic
+      }
+      ${Appreciators.fragments.article}
+      ${DropdownActions.fragments.article}
+      ${AppreciationButton.fragments.article.public}
+      ${CommentBar.fragments.article.public}
+    `,
+    private: gql`
+      fragment ToolbarArticlePrivate on Article {
+        id
+        ...BookmarkArticlePrivate
+        ...AppreciationButtonArticlePrivate
+        ...CommentBarArticlePrivate
+      }
+      ${AppreciationButton.fragments.article.private}
+      ${BookmarkButton.fragments.article.private}
+      ${CommentBar.fragments.article.private}
+    `,
+  },
+}
+
+const Toolbar = ({ article }: ToolbarProps) => {
   const isSmallUp = useResponsive('sm-up')
-  const { data, loading, refetch } = useQuery<ArticleToolbar>(ARTICLE_TOOLBAR, {
-    variables: { mediaHash },
-  })
-
-  usePullToRefresh.Handler(refetch)
-
-  if (loading || !data || !data.article) {
-    return null
-  }
-
-  const { article } = data
 
   return (
     <section className="toolbar">
@@ -77,5 +80,7 @@ const Toolbar = ({ mediaHash }: { mediaHash: string }) => {
     </section>
   )
 }
+
+Toolbar.fragments = fragments
 
 export default Toolbar

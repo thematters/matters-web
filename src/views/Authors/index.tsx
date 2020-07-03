@@ -31,14 +31,16 @@ const ALL_AUTHORSS = gql`
           edges {
             cursor
             node {
-              ...UserDigestRichUser
+              ...UserDigestRichUserPublic
+              ...UserDigestRichUserPrivate
             }
           }
         }
       }
     }
   }
-  ${UserDigest.Rich.fragments.user}
+  ${UserDigest.Rich.fragments.user.public}
+  ${UserDigest.Rich.fragments.user.private}
 `
 
 const Authors = () => {

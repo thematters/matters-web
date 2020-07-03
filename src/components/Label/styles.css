@@ -1,13 +1,12 @@
 .label {
   display: inline-block;
   color: var(--color-white);
-  background: var(--color-matters-green);
   user-select: none;
+  background: var(--color-matters-green);
 }
 
 .sm {
   padding: var(--spacing-xx-tight) var(--spacing-x-tight);
-
   font-size: var(--font-size-xs);
   line-height: 1;
   border-radius: 0.125rem;
@@ -17,7 +16,6 @@
   @mixin font-serif;
 
   padding: var(--spacing-xx-tight) var(--spacing-base);
-
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-bold);
   line-height: 1.42857143;

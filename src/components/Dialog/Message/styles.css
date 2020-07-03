@@ -6,11 +6,13 @@
     line-height: 2rem;
     text-align: center;
   }
+
   & :global(p) {
-    color: var(--color-grey-dark);
     font-size: var(--font-size-md-s);
     line-height: 1.5rem;
+    color: var(--color-grey-dark);
   }
+
   & :global(h3 + p, p + p) {
     margin-top: var(--spacing-tight);
   }

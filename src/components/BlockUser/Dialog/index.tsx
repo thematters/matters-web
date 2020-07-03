@@ -8,11 +8,12 @@ import { ADD_TOAST } from '~/common/enums'
 
 import ViewBlocksButton from './ViewBlocksButton'
 
-import { BlockUser } from '~/components/GQL/fragments/__generated__/BlockUser'
 import { BlockUser as BlockUserMutate } from '~/components/GQL/mutations/__generated__/BlockUser'
+import { BlockUserPrivate } from '../__generated__/BlockUserPrivate'
+import { BlockUserPublic } from '../__generated__/BlockUserPublic'
 
 interface BlockUserDialogProps {
-  user: BlockUser
+  user: BlockUserPublic & Partial<BlockUserPrivate>
   children: ({ open }: { open: () => void }) => React.ReactNode
 }
 

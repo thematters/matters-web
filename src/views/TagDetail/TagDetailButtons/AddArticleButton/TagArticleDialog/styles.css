@@ -11,7 +11,7 @@ ul {
 
       position: absolute;
       top: 0;
-      right: calc((1rem + var(--spacing-xx-tight)) * -1);
+      right: calc(var(--spacing-base) * -1);
       height: 100%;
     }
 

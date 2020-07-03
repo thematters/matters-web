@@ -6,21 +6,23 @@ import { IconSize, ViewerContext } from '~/components'
 import Subscribe from './Subscribe'
 import Unsubscribe from './Unsubscribe'
 
-import { BookmarkArticle } from './__generated__/BookmarkArticle'
+import { BookmarkArticlePrivate } from './__generated__/BookmarkArticlePrivate'
 
 interface BookmarkButtonProps {
-  article: BookmarkArticle
+  article: Partial<BookmarkArticlePrivate>
   size?: Extract<IconSize, 'md-s'>
   inCard: boolean
 }
 
 const fragments = {
-  article: gql`
-    fragment BookmarkArticle on Article {
-      id
-      subscribed
-    }
-  `,
+  article: {
+    private: gql`
+      fragment BookmarkArticlePrivate on Article {
+        id
+        subscribed
+      }
+    `,
+  },
 }
 
 export const BookmarkButton = ({

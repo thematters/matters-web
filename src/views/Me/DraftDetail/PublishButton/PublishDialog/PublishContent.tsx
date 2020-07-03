@@ -27,16 +27,7 @@ const PUBLISH_ARTICLE = gql`
 const PublishContent: React.FC<PublishContentProps> = ({ closeDialog }) => {
   const router = useRouter()
   const id = getQuery({ router, key: 'draftId' })
-  const [publish] = useMutation<PublishArticle>(PUBLISH_ARTICLE, {
-    optimisticResponse: {
-      publishArticle: {
-        id,
-        scheduledAt: new Date(Date.now() + 1000).toISOString(),
-        publishState: 'pending' as any,
-        __typename: 'Draft',
-      },
-    },
-  })
+  const [publish] = useMutation<PublishArticle>(PUBLISH_ARTICLE)
 
   const onPublish = async () => {
     publish({ variables: { id } })

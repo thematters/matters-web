@@ -3,17 +3,14 @@
 :root {
   --color-matters-gold: #c0a46b;
   --color-matters-green: #0d6763;
-
-  --color-black: #333333;
+  --color-black: #333;
   --color-grey-darker: #808080;
   --color-grey-dark: #999c9d;
   --color-grey: #b3b3b3;
-  --color-grey-light: #dddddd;
+  --color-grey-light: #ddd;
   --color-grey-lighter: #f7f7f7;
-  --color-white: #ffffff;
-
+  --color-white: #fff;
   --color-red: #c85c41;
-
   --color-green-lighter: #f2faf7;
   --color-yellow-lighter: #faf7f0;
 

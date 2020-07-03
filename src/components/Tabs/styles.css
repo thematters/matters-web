@@ -1,7 +1,6 @@
 nav {
   position: relative;
   padding: var(--spacing-x-tight) var(--spacing-base);
-
   white-space: nowrap;
 
   @media (--sm-up) {
@@ -12,6 +11,7 @@ nav {
 
 ul {
   @mixin hide-scrollbar;
+
   overflow: auto;
   -webkit-overflow-scrolling: touch;
 }

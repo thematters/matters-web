@@ -1,15 +1,15 @@
 .avatar {
   position: relative;
+  display: inline-block;
 
   /* may under a flex layout, keep it unshrinkable */
   flex-shrink: 0;
-  display: inline-block;
 
-  & img {
+  & :global(img) {
     @mixin object-fit-cover;
 
-    border-radius: 50%;
     background-color: var(--color-grey-lighter);
+    border-radius: 50%;
   }
 }
 
@@ -31,6 +31,7 @@
 /**
  * Sizes
  */
+
 /* 16px */
 .xs {
   width: 1rem;

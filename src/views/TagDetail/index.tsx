@@ -1,6 +1,8 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
+import _find from 'lodash/find'
 import _get from 'lodash/get'
+import _some from 'lodash/some'
 import { useRouter } from 'next/router'
 import { useContext, useState } from 'react'
 
@@ -17,6 +19,7 @@ import {
   ViewerContext,
 } from '~/components'
 import { getErrorCodes, QueryError } from '~/components/GQL'
+import { UserDigest } from '~/components/UserDigest'
 
 import { ERROR_CODES } from '~/common/enums'
 import { getQuery } from '~/common/utils'
@@ -33,13 +36,22 @@ const TAG_DETAIL = gql`
       ... on Tag {
         id
         content
+        creator {
+          id
+          ...UserDigestMiniUser
+        }
         description
+        editors {
+          id
+          ...UserDigestMiniUser
+        }
         articles(input: { first: 0, selected: true }) {
           totalCount
         }
       }
     }
   }
+  ${UserDigest.Mini.fragments.user}
 `
 
 type TagFeed = 'latest' | 'selected'
@@ -55,7 +67,6 @@ const TagDetail = ({ data }: { data: TagDetailType }) => {
   const viewer = useContext(ViewerContext)
   const hasSelected = _get(data, 'node.articles.totalCount', 0)
   const [feed, setFeed] = useState<TagFeed>(hasSelected ? 'selected' : 'latest')
-  const canEdit = viewer.info.email === 'hi@matters.news'
 
   if (!data || !data.node || data.node.__typename !== 'Tag') {
     return <EmptyTag />
@@ -64,6 +75,16 @@ const TagDetail = ({ data }: { data: TagDetailType }) => {
   if (hasSelected === 0 && feed === 'selected') {
     setFeed('latest')
   }
+
+  const editors = data.node.editors || []
+  const maintainer = _find(
+    editors,
+    (editor) => (editor.displayName || '').toLowerCase() !== 'matty'
+  )
+  const isEditor = _some(editors, (editor) => editor.id === viewer.id)
+  const isCreator = data.node.creator?.id === viewer.id
+  const canEdit =
+    isEditor || isCreator || viewer.info.email === 'hi@matters.news'
 
   return (
     <Layout.Main>
@@ -94,6 +115,20 @@ const TagDetail = ({ data }: { data: TagDetailType }) => {
 
       <PullToRefresh>
         <Spacer />
+
+        {maintainer && (
+          <section className="maintainer">
+            <UserDigest.Mini
+              user={maintainer}
+              avatarSize="xs"
+              hasAvatar
+              hasDisplayName
+            />
+            <span>
+              <Translate zh_hant="主理" zh_hans="主理" />
+            </span>
+          </section>
+        )}
 
         {data.node.description && (
           <p className="description">{data.node.description}</p>

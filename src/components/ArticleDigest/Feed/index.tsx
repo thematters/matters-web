@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import React from 'react'
 
-import { Card, IconPinMedium, TextIcon, Translate } from '~/components'
+import { Card, IconPinMedium, Img, TextIcon, Translate } from '~/components'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { UserDigest } from '~/components/UserDigest'
 
@@ -14,7 +14,6 @@ import FooterActions, { FooterActionsControls } from '../FooterActions'
 import { ArticleDigestTitle } from '../Title'
 import CreatedAt from './CreatedAt'
 import InactiveState from './InactiveState'
-import Live from './Live'
 import styles from './styles.css'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
@@ -40,14 +39,12 @@ const fragments = {
       articleState: state
       cover
       summary
-      live
       author {
         id
         userName
         ...UserDigestMiniUser
       }
       ...CreatedAtArticle
-      ...LiveArticle
       ...InactiveStateArticle
       ...ArticleDigestTitleArticle
       ...FooterActionsArticle
@@ -55,7 +52,6 @@ const fragments = {
     }
     ${UserDigest.Mini.fragments.user}
     ${CreatedAt.fragments.article}
-    ${Live.fragments.article}
     ${InactiveState.fragments.article}
     ${ArticleDigestTitle.fragments.article}
     ${FooterActions.fragments.article}
@@ -78,6 +74,7 @@ const BaseArticleDigestFeed = ({
   })
   const { viewMode } = data?.clientPreference || { viewMode: 'comfortable' }
   const isCompactMode = viewMode === 'compact'
+  const isDefaultMode = viewMode === 'default'
 
   const { author, summary, sticky } = article
   const isBanned = article.articleState === 'banned'
@@ -135,7 +132,6 @@ const BaseArticleDigestFeed = ({
               </TextIcon>
             )}
 
-            <Live article={article} />
             {inUserArticles && <InactiveState article={article} />}
             <CreatedAt article={article} />
           </section>
@@ -152,7 +148,11 @@ const BaseArticleDigestFeed = ({
           <section className="content">
             {cover && (
               <div className="cover">
-                <img src={cover} loading="lazy" />
+                <Img
+                  url={cover}
+                  size={isDefaultMode ? '540w' : '144w'}
+                  smUpSize={isDefaultMode ? '1080w' : '360w'}
+                />
               </div>
             )}
             {<p className="description">{cleanedSummary}</p>}
@@ -176,7 +176,7 @@ const BaseArticleDigestFeed = ({
 /**
  * Memoizing
  */
-type MemoedArticleDigestFeed = React.MemoExoticComponent<
+type MemoizedArticleDigestFeed = React.MemoExoticComponent<
   React.FC<ArticleDigestFeedProps>
 > & {
   fragments: typeof fragments
@@ -194,6 +194,6 @@ export const ArticleDigestFeed = React.memo(
         article.appreciationsReceivedTotal
     )
   }
-) as MemoedArticleDigestFeed
+) as MemoizedArticleDigestFeed
 
 ArticleDigestFeed.fragments = fragments

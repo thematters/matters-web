@@ -1,12 +1,12 @@
 .menu {
   width: 100%;
-
   text-align: left;
 }
 
 .width-sm {
   width: var(--sizing-menu-sm);
 }
+
 .width-md {
   width: var(--sizing-menu-md);
 }

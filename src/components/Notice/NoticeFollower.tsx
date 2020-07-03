@@ -23,9 +23,11 @@ const NoticeFollower = ({ user }: { user: NoticeFollowerType | null }) => {
 NoticeFollower.fragments = {
   follower: gql`
     fragment NoticeFollower on User {
-      ...UserDigestRichUser
+      ...UserDigestRichUserPublic
+      ...UserDigestRichUserPrivate
     }
-    ${UserDigest.Rich.fragments.user}
+    ${UserDigest.Rich.fragments.user.public}
+    ${UserDigest.Rich.fragments.user.private}
   `,
 }
 

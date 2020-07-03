@@ -8,8 +8,9 @@ import { useMutation } from '~/components/GQL'
 import styles from '~/common/styles/utils/content.article.css'
 import {
   captureClicks,
+  dom,
   initAudioPlayers,
-  insertLazyLoading,
+  optimizeEmbed,
 } from '~/common/utils'
 
 import { ContentArticle } from './__generated__/ContentArticle'
@@ -97,12 +98,41 @@ const Content = ({
     }
   }, [lastScroll])
 
+  // fallback image
+  useEffect(() => {
+    const $imgs = Array.from(
+      dom.$$('.u-content picture img')
+    ) as HTMLImageElement[]
+
+    const onError = (event: ErrorEvent) => {
+      const $img = event.target as HTMLImageElement
+      const $figure = $img.parentElement?.parentElement
+      const $fig = $figure?.querySelector('figcaption')
+
+      if (!$figure) {
+        return
+      }
+
+      $figure.innerHTML = `
+        <img src=${$img.src} />
+        ${$fig?.outerHTML}
+      `
+    }
+
+    $imgs.forEach(($img) =>
+      $img.addEventListener('error', onError, { once: true })
+    )
+
+    return () =>
+      $imgs.forEach(($img) => $img.removeEventListener('error', onError))
+  }, [article.id])
+
   return (
     <>
       <div
         className={classNames({ 'u-content': true, translating })}
         dangerouslySetInnerHTML={{
-          __html: insertLazyLoading(translation || article.content),
+          __html: optimizeEmbed(translation || article.content),
         }}
         onClick={captureClicks}
         ref={contentContainer}

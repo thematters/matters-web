@@ -8,8 +8,8 @@ import { filterComment } from './comment'
  *
  * @param responses
  */
-export const filterResponses = (responses: any[]) =>
-  responses.filter((response) => {
+export function filterResponses<T>(responses: any[]): T[] {
+  return responses.filter((response) => {
     // article
     if (_has(response, 'articleState')) {
       return true
@@ -18,6 +18,7 @@ export const filterResponses = (responses: any[]) =>
     // comment
     return filterComment(response)
   })
+}
 
 export const responseStateIs = (
   response: any,

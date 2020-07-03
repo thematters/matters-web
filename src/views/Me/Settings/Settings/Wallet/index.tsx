@@ -4,6 +4,7 @@ import { useContext } from 'react'
 
 import {
   Form,
+  getErrorCodes,
   IconSpinner,
   LikeCoinDialog,
   Translate,
@@ -32,14 +33,19 @@ const VIEWER_LIKE_INFO = gql`
 const WalletSettings = () => {
   const viewer = useContext(ViewerContext)
   const likerId = viewer.liker.likerId
-  const { data, loading, refetch } = useQuery<ViewerLikeInfo>(
+  const { data, loading, refetch, error } = useQuery<ViewerLikeInfo>(
     VIEWER_LIKE_INFO,
     {
       errorPolicy: 'none',
+      skip: !process.browser,
     }
   )
+
+  const errorCodes = getErrorCodes(error)
+  const shouldReAuth = errorCodes.some((code) => code === 'OAUTH_TOKEN_INVALID')
+
   const LIKE = data?.viewer?.status?.LIKE
-  const USDPrice = numRound(LIKE?.rateUSD * LIKE?.total)
+  const USDPrice = numRound(LIKE?.rateUSD * LIKE?.total || 0)
   const equalSign = LIKE?.total > 0 ? '≈' : '='
 
   usePullToRefresh.Handler(refetch)
@@ -58,14 +64,23 @@ const WalletSettings = () => {
 
       <Form.List.Item
         title={<Translate zh_hant="我的創作價值" zh_hans="我的创作价值" />}
-        htmlHref="https://like.co/in/matters/redirect"
+        htmlHref={
+          shouldReAuth
+            ? `${process.env.NEXT_PUBLIC_OAUTH_URL}/likecoin`
+            : 'https://like.co/in/matters/redirect'
+        }
         htmlTarget="_blank"
         leftAlign="top"
         right={
           loading ? <IconSpinner color="grey-light" size="sm" /> : undefined
         }
         rightText={
-          likerId ? (
+          shouldReAuth ? (
+            <Translate
+              zh_hant="重新綁定 Liker ID 后即可管理創作收益"
+              zh_hans="重新绑定 Liker ID 后即可管理创作收益"
+            />
+          ) : likerId ? (
             `${numRound(LIKE?.total || 0)} LikeCoin`
           ) : (
             <Translate
@@ -74,7 +89,9 @@ const WalletSettings = () => {
             />
           )
         }
-        rightSubText={likerId && `${equalSign} ${USDPrice} USD`}
+        rightSubText={
+          !shouldReAuth && likerId && `${equalSign} ${USDPrice} USD`
+        }
       />
     </Form.List>
   )

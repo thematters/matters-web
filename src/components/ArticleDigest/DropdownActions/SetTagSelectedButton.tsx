@@ -25,6 +25,15 @@ const fragments = {
   article: gql`
     fragment SetTagSelectedButtonArticle on Article {
       id
+      tags {
+        id
+        creator {
+          id
+        }
+        editors {
+          id
+        }
+      }
     }
   `,
 }

@@ -12,13 +12,19 @@
   "emmet.syntaxProfiles": {
     "postcss": "css"
   },
+
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false,
+
   "prettier.requireConfig": true,
 
   "javascript.updateImportsOnFileMove.enabled": "never",
   "typescript.updateImportsOnFileMove.enabled": "never",
 
   "editor.codeActionsOnSave": {
-    "source.fixAll.tslint": true
+    "source.fixAll": true
   },
+
   "typescript.tsdk": "node_modules/typescript/lib"
 }

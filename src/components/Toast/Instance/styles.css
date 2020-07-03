@@ -1,26 +1,29 @@
 .toast {
-  margin: 0 var(--spacing-base) var(--spacing-base);
   padding: var(--spacing-x-tight) var(--spacing-base);
-
+  margin: 0 var(--spacing-base) var(--spacing-base);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
+  visibility: visible;
   border-radius: 0.5rem;
   box-shadow: var(--shadow-light);
   animation: toastFadeIn 0.25s ease;
-  visibility: visible;
 
   &.top {
     @mixin flex-start-space-between;
   }
+
   &.bottom {
     @mixin flex-end-space-between;
   }
+
   &.center {
     @mixin flex-center-space-between;
   }
+
   &.center-x {
     & section {
       width: 100%;
+
       & p.content,
       & p.sub-description {
         width: 100%;
@@ -31,16 +34,15 @@
 }
 
 .sub-description {
-  font-weight: var(--font-weight-normal);
   margin-top: var(--spacing-xx-tight);
+  font-weight: var(--font-weight-normal);
   opacity: 0.7;
 }
 
 .custom-button {
-  flex-shrink: 0;
   display: inline-flex;
+  flex-shrink: 0;
   margin-left: var(--spacing-x-tight);
-
   font-weight: var(--font-weight-normal);
 }
 
@@ -64,6 +66,7 @@
     visibility: hidden;
     opacity: 0;
   }
+
   to {
     visibility: visible;
     opacity: 1;

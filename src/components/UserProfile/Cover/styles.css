@@ -1,8 +1,17 @@
 .profile-cover {
+  position: relative;
+
+  & :global(img) {
+    @mixin object-fit-cover;
+
+    background-color: var(--color-grey-lighter);
+    border-radius: 0.25rem;
+  }
+
   &::after {
-    content: '';
     display: block;
     padding-bottom: 46.93%;
+    content: '';
 
     @media (--sm-up) {
       padding-bottom: 30.14%;

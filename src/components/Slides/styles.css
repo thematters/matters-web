@@ -3,18 +3,17 @@
 
   & ul {
     @mixin hide-scrollbar;
+
     display: flex;
     margin-right: calc(var(--spacing-base) * -1);
-
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
 
     & li {
       flex-shrink: 0;
-      margin: 0;
       padding: 0 var(--spacing-base) 0 0;
-
+      margin: 0;
       scroll-snap-align: start;
     }
   }

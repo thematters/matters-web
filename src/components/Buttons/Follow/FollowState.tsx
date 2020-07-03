@@ -2,9 +2,13 @@ import gql from 'graphql-tag'
 
 import { Button, TextIcon, Translate } from '~/components'
 
-import { FollowStateUser } from './__generated__/FollowStateUser'
+import { FollowStateUserPrivate } from './__generated__/FollowStateUserPrivate'
 
-const FollowState = ({ user }: { user: FollowStateUser }) => {
+interface FollowStateProps {
+  user: Partial<FollowStateUserPrivate>
+}
+
+const FollowState = ({ user }: FollowStateProps) => {
   if (!user.isFollower) {
     return null
   }
@@ -29,13 +33,15 @@ const FollowState = ({ user }: { user: FollowStateUser }) => {
 }
 
 FollowState.fragments = {
-  user: gql`
-    fragment FollowStateUser on User {
-      id
-      isFollower
-      isFollowee
-    }
-  `,
+  user: {
+    private: gql`
+      fragment FollowStateUserPrivate on User {
+        id
+        isFollower
+        isFollowee
+      }
+    `,
+  },
 }
 
 export default FollowState

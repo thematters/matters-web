@@ -1,11 +1,9 @@
 import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
 import jump from 'jump.js'
 import _differenceBy from 'lodash/differenceBy'
 import _get from 'lodash/get'
-import _merge from 'lodash/merge'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import {
   EmptyResponse,
@@ -17,6 +15,7 @@ import {
   useEventListener,
   usePullToRefresh,
   useResponsive,
+  ViewerContext,
   ViewMoreButton,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
@@ -30,99 +29,25 @@ import {
   unshiftConnections,
 } from '~/common/utils'
 
-import ResponseArticle from './ResponseArticle'
-import ResponseComment from './ResponseComment'
-import styles from './styles.css'
+import ResponseArticle from '../ResponseArticle'
+import ResponseComment from '../ResponseComment'
+import styles from '../styles.css'
+import { LATEST_RESPONSES_PRIVATE, LATEST_RESPONSES_PUBLIC } from './gql'
 
+import { LatestResponsesPrivate_nodes_Comment } from './__generated__/LatestResponsesPrivate'
 import {
-  LatestResponses as LatestResponsesType,
-  LatestResponses_article_responses_edges_node,
-} from './__generated__/LatestResponses'
-import {
-  ResponseAdded,
-  ResponseAdded_nodeEdited_Article,
-} from './__generated__/ResponseAdded'
+  LatestResponsesPublic,
+  LatestResponsesPublic_article_responses_edges_node,
+} from './__generated__/LatestResponsesPublic'
 
 const RESPONSES_COUNT = 15
 
-const LatestResponsesArticle = gql`
-  fragment LatestResponsesArticle on Article {
-    id
-    responseCount
-    responses(
-      input: {
-        after: $after
-        before: $before
-        first: $first
-        includeAfter: $includeAfter
-        includeBefore: $includeBefore
-        articleOnly: $articleOnly
-      }
-    ) {
-      totalCount
-      pageInfo {
-        startCursor
-        endCursor
-        hasNextPage
-      }
-      edges {
-        node {
-          ... on Article {
-            ...ResponseArticleArticle
-          }
-          ... on Comment {
-            ...ResponseCommentComment
-          }
-        }
-      }
-    }
-  }
-  ${ResponseArticle.fragments.article}
-  ${ResponseComment.fragments.comment}
-`
-
-const LATEST_RESPONSES = gql`
-  query LatestResponses(
-    $mediaHash: String
-    $before: String
-    $after: String
-    $first: Int = 8
-    $includeAfter: Boolean
-    $includeBefore: Boolean
-    $articleOnly: Boolean
-  ) {
-    article(input: { mediaHash: $mediaHash }) {
-      id
-      mediaHash
-      live
-      ...LatestResponsesArticle
-    }
-  }
-  ${LatestResponsesArticle}
-`
-
-const SUBSCRIBE_RESPONSE_ADDED = gql`
-  subscription ResponseAdded(
-    $id: ID!
-    $before: String
-    $after: String
-    $first: Int
-    $includeAfter: Boolean
-    $includeBefore: Boolean
-    $articleOnly: Boolean
-  ) {
-    nodeEdited(input: { id: $id }) {
-      id
-      ... on Article {
-        id
-        ...LatestResponsesArticle
-      }
-    }
-  }
-  ${LatestResponsesArticle}
-`
+type ResponsePublic = LatestResponsesPublic_article_responses_edges_node
+type ResponsePrivate = LatestResponsesPrivate_nodes_Comment
+type Response = ResponsePublic & Partial<Omit<ResponsePrivate, '__typename'>>
 
 const LatestResponses = () => {
+  const viewer = useContext(ViewerContext)
   const isMediumUp = useResponsive('md-up')
   const router = useRouter()
   const mediaHash = getQuery({ router, key: 'mediaHash' })
@@ -131,6 +56,7 @@ const LatestResponses = () => {
 
   /**
    * Fragment Patterns
+   *
    * 0. ``
    * 1. `#comment`
    * 2. `#parentCommentId`
@@ -145,14 +71,13 @@ const LatestResponses = () => {
     descendantId = fragment.split('-')[1]
   }
 
-  const {
-    data,
-    loading,
-    error,
-    fetchMore,
-    subscribeToMore,
-    refetch,
-  } = useQuery<LatestResponsesType>(LATEST_RESPONSES, {
+  /**
+   * Data Fetching
+   */
+  // public data
+  const { data, loading, error, fetchMore, refetch, client } = useQuery<
+    LatestResponsesPublic
+  >(LATEST_RESPONSES_PUBLIC, {
     variables: {
       mediaHash,
       first: RESPONSES_COUNT,
@@ -160,16 +85,48 @@ const LatestResponses = () => {
     },
     notifyOnNetworkStatusChange: true,
   })
+
+  // pagination
   const connectionPath = 'article.responses'
   const article = data?.article
   const { edges, pageInfo } = (article && article.responses) || {}
   const articleId = article && article.id
+  const responses = filterResponses<ResponsePublic>(
+    (edges || []).map(({ node }) => node)
+  )
 
-  const loadMore = (params?: { before: string }) => {
+  // private data
+  const loadPrivate = (publicData?: LatestResponsesPublic) => {
+    if (!viewer.id || !publicData || !articleId) {
+      return
+    }
+
+    const publiceEdges = publicData.article?.responses.edges || []
+    const publicResponses = filterResponses<Response>(
+      publiceEdges.map(({ node }) => node)
+    )
+    const publicIds = publicResponses
+      .filter((node) => node.__typename === 'Comment')
+      .map((node) => node.id)
+
+    client.query({
+      query: LATEST_RESPONSES_PRIVATE,
+      fetchPolicy: 'network-only',
+      variables: { ids: publicIds },
+    })
+  }
+
+  // fetch private data for first page
+  useEffect(() => {
+    loadPrivate(data)
+  }, [articleId, viewer.id])
+
+  // load next page
+  const loadMore = async (params?: { before: string }) => {
     const loadBefore = (params && params.before) || null
     const noLimit = loadBefore && pageInfo && pageInfo.endCursor
 
-    return fetchMore({
+    const { data: newData } = await fetchMore({
       variables: {
         after: pageInfo && pageInfo.endCursor,
         before: loadBefore,
@@ -184,10 +141,22 @@ const LatestResponses = () => {
           path: connectionPath,
         }),
     })
+
+    loadPrivate(newData)
   }
 
-  const commentCallback = () =>
-    fetchMore({
+  // refetch when comment is sent or pull down
+  useEventListener(REFETCH_RESPONSES, refetch)
+  usePullToRefresh.Handler(refetch)
+
+  useEffect(() => {
+    if (pageInfo && pageInfo.startCursor) {
+      setStoredCursor(pageInfo.startCursor)
+    }
+  }, [pageInfo && pageInfo.startCursor])
+
+  const commentCallback = async () => {
+    const { data: newData } = await fetchMore({
       variables: {
         before: storedCursor,
         includeBefore: false,
@@ -230,50 +199,8 @@ const LatestResponses = () => {
       },
     })
 
-  const responses = filterResponses(
-    (edges || []).map(({ node }) => node)
-  ) as LatestResponses_article_responses_edges_node[]
-
-  // real time update with websocket
-  useEffect(() => {
-    if (article && article.live && edges && pageInfo) {
-      subscribeToMore<ResponseAdded>({
-        document: SUBSCRIBE_RESPONSE_ADDED,
-        variables: {
-          id: article.id,
-          before: pageInfo.endCursor,
-          includeBefore: true,
-          articleOnly: articleOnlyMode,
-        },
-        updateQuery: (prev, { subscriptionData }) => {
-          if (!prev.article) {
-            return prev
-          }
-          const oldData = prev.article
-          const newData = subscriptionData.data
-            .nodeEdited as ResponseAdded_nodeEdited_Article
-          const diff = _differenceBy(
-            newData.responses.edges,
-            oldData.responses.edges || [],
-            'node.id'
-          )
-          return {
-            article: {
-              ...oldData,
-              responses: {
-                ...oldData.responses,
-                edges: [...diff, ...(oldData.responses.edges || [])],
-                pageInfo: {
-                  ...newData.responses.pageInfo,
-                  endCursor: oldData.responses.pageInfo.endCursor,
-                },
-              },
-            },
-          }
-        },
-      })
-    }
-  }, [articleId])
+    loadPrivate(newData)
+  }
 
   // scroll to comment
   useEffect(() => {
@@ -295,15 +222,9 @@ const LatestResponses = () => {
     }
   }, [articleId])
 
-  useEventListener(REFETCH_RESPONSES, refetch)
-  usePullToRefresh.Handler(refetch)
-
-  useEffect(() => {
-    if (pageInfo && pageInfo.startCursor) {
-      setStoredCursor(pageInfo.startCursor)
-    }
-  }, [pageInfo && pageInfo.startCursor])
-
+  /**
+   * Render
+   */
   if (loading && !data) {
     return <Spinner />
   }

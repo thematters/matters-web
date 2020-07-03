@@ -1,32 +1,30 @@
 .pin-input {
   @mixin flex-center-all;
 
-  margin: 0 auto;
-  padding: 0 var(--spacing-base);
   width: 100%;
+  padding: 0 var(--spacing-base);
+  margin: 0 auto;
 
   & .pin-input-item {
     display: flex;
-
     width: 16.6%;
     height: 3rem;
-
-    color: var(--color-black);
-    line-height: 1.5rem;
     font-size: var(--font-size-xl);
-    border: 1.5px solid var(--color-grey-light);
+    line-height: 1.5rem;
+    color: var(--color-black);
     text-align: center;
+    border: 1.5px solid var(--color-grey-light);
 
     & + .pin-input-item {
       border-left: 0;
     }
 
     &:first-child {
-      border-radius: 0.25rem 0px 0px 0.25rem;
+      border-radius: 0.25rem 0 0 0.25rem;
     }
 
     &:last-child {
-      border-radius: 0px 0.25rem 0.25rem 0px;
+      border-radius: 0 0.25rem 0.25rem 0;
     }
   }
 

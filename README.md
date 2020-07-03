@@ -1,11 +1,14 @@
 # matters-web
 
+![Deploy Status](https://github.com/thematters/matters-web/workflows/Deployment/badge.svg) ![Release Status](https://github.com/thematters/matters-web/workflows/Create%20Release/badge.svg) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+
 ## Getting Started
 
 ### Start local dev
 
 - Install dependencies: `npm i`
 - Environment variables: `cp .env.local.example .env.local`
+- (Optional) Run `npm run gen:type` or `npm run gen:watch`
 - Run `npm run dev`, then go to `http://localhost:3000/`
 
 ### Build and run production server
@@ -108,6 +111,7 @@ See `.vscode/settings.json`
 - [mikestead.dotenv](https://marketplace.visualstudio.com/items?itemName=mikestead.dotenv)
 - [ms-vscode.vscode-typescript-tslint-plugin]()
 - [Prisma.vscode-graphql](https://marketplace.visualstudio.com/items?itemName=Prisma.vscode-graphql)
+- [stylelint.vscode-stylelint](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint)
 - [ricard.postcss](https://marketplace.visualstudio.com/items?itemName=ricard.PostCSS)
 
 ##### Optional
