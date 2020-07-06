@@ -3,10 +3,13 @@ const fs = require('fs')
 const dotenv = require('dotenv')
 
 // load environment variables from .env
-const dotEnvResult = dotenv.config()
+const dotEnvResult = dotenv.config({
+  path: '.env.dev'
+})
 if (dotEnvResult.error) {
   console.error(dotEnvResult.error)
 }
+
 
 fetch(process.env.NEXT_PUBLIC_API_URL, {
     method: 'POST',
