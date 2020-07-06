@@ -7,13 +7,13 @@ import SidebarCollection from '~/components/Editor/Sidebar/Collection'
 import { QueryError, useMutation } from '~/components/GQL'
 
 import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
-import { CollectArticlesDraft } from './__generated__/CollectArticlesDraft'
 import { DraftCollectionQuery } from './__generated__/DraftCollectionQuery'
+import { EditCollectionDraft } from './__generated__/EditCollectionDraft'
 import { SetDraftCollection } from './__generated__/SetDraftCollection'
 
 const fragments = {
   draft: gql`
-    fragment CollectArticlesDraft on Draft {
+    fragment EditCollectionDraft on Draft {
       id
       publishState
       collection(input: { first: 0 }) {
@@ -57,12 +57,12 @@ const SET_DRAFT_COLLECTION = gql`
   ${ArticleDigestDropdown.fragments.article}
 `
 
-interface CollectArticlesProps {
-  draft: CollectArticlesDraft
+interface EditCollectionProps {
+  draft: EditCollectionDraft
   setSaveStatus: (status: 'saved' | 'saving' | 'saveFailed') => void
 }
 
-const CollectArticles = ({ draft, setSaveStatus }: CollectArticlesProps) => {
+const EditCollection = ({ draft, setSaveStatus }: EditCollectionProps) => {
   const draftId = draft.id
   const isPending = draft.publishState === 'pending'
   const isPublished = draft.publishState === 'published'
@@ -115,6 +115,6 @@ const CollectArticles = ({ draft, setSaveStatus }: CollectArticlesProps) => {
   )
 }
 
-CollectArticles.fragments = fragments
+EditCollection.fragments = fragments
 
-export default CollectArticles
+export default EditCollection

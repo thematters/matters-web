@@ -216,19 +216,26 @@ const ArticleDetail = () => {
   if (editMode) {
     return (
       <Layout.Main aside={<EditModeSidebar article={article} />}>
-        <Layout.Header
-          left={<Layout.Header.BackButton />}
-          right={<EditModeHeader setEditMode={setEditMode} />}
-        />
-        <section className="content editing">
-          <section className="title">
-            <Title type="article">
-              {translate && titleTranslation ? titleTranslation : article.title}
-            </Title>
-          </section>
+        <Layout.Header right={<EditModeHeader setEditMode={setEditMode} />} />
+        {isLargeUp && (
+          <section className="content editing">
+            <section className="title">
+              <Title type="article">
+                {translate && titleTranslation
+                  ? titleTranslation
+                  : article.title}
+              </Title>
+            </section>
 
-          <Content article={article} />
-        </section>
+            <Content article={article} />
+          </section>
+        )}
+
+        {!isLargeUp && (
+          <Layout.Spacing>
+            <EditModeSidebar article={article} />
+          </Layout.Spacing>
+        )}
 
         <style jsx>{styles}</style>
       </Layout.Main>

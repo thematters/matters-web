@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import CollectArticles from './CollectArticles'
+import EditCollection from './EditCollection'
 
 import { EditModeSidebarArticle } from './__generated__/EditModeSidebarArticle'
 
@@ -10,7 +10,7 @@ interface EditModeSidebarProps {
 
 const EditModeSidebar = ({ article }: EditModeSidebarProps) => (
   <>
-    <CollectArticles article={article} />
+    <EditCollection article={article} />
   </>
 )
 
@@ -18,9 +18,9 @@ EditModeSidebar.fragments = {
   article: gql`
     fragment EditModeSidebarArticle on Article {
       id
-      ...CollectArticlesArticle
+      ...EditCollectionArticle
     }
-    ${CollectArticles.fragments.article}
+    ${EditCollection.fragments.article}
   `,
 }
 

@@ -11,16 +11,16 @@ import { ADD_TOAST } from '~/common/enums'
 
 import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
 import { ArticleCollection } from './__generated__/ArticleCollection'
-import { CollectArticlesArticle } from './__generated__/CollectArticlesArticle'
+import { EditCollectionArticle } from './__generated__/EditCollectionArticle'
 import { SetArticleCollection } from './__generated__/SetArticleCollection'
 
-interface CollectArticlesProps {
-  article: CollectArticlesArticle
+interface EditCollectionProps {
+  article: EditCollectionArticle
 }
 
 const fragments = {
   article: gql`
-    fragment CollectArticlesArticle on Article {
+    fragment EditCollectionArticle on Article {
       id
     }
   `,
@@ -58,7 +58,7 @@ const SET_ARTICLE_COLLECTION = gql`
   ${articleFragments.articleCollection}
 `
 
-const CollectArticles = ({ article }: CollectArticlesProps) => {
+const EditCollection = ({ article }: EditCollectionProps) => {
   const { data, loading, error } = useQuery<ArticleCollection>(
     ARTICLE_COLLECTION,
     {
@@ -113,6 +113,6 @@ const CollectArticles = ({ article }: CollectArticlesProps) => {
   )
 }
 
-CollectArticles.fragments = fragments
+EditCollection.fragments = fragments
 
-export default CollectArticles
+export default EditCollection
