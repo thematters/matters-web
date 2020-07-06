@@ -28,6 +28,7 @@ export default gql`
     wall: Boolean!
     push: Push!
     routeHistory: [URL!]
+    followFeedType: FollowFeedType
   }
 
   type ClientInfo {
@@ -48,6 +49,11 @@ export default gql`
   enum FeedSortType {
     hottest
     newest
+  }
+
+  enum FollowFeedType {
+    article
+    comment
   }
 
   enum ViewMode {

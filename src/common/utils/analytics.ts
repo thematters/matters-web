@@ -26,7 +26,11 @@ type EventArgs =
   | ['share', ShareProp]
   | ['purchase', PurchaseProp]
 
-type ClickFeedProp = ArticleFeedProp | UserFeedProp | TagFeedProp
+type ClickFeedProp =
+  | ArticleFeedProp
+  | CommentFeedProp
+  | UserFeedProp
+  | TagFeedProp
 
 interface ClickButtonProp {
   type:
@@ -42,7 +46,7 @@ interface ClickButtonProp {
 }
 
 interface LoadMoreProp {
-  type: ArticleFeedType | UserFeedType | TagFeedType
+  type: ArticleFeedType | CommentFeedType | UserFeedType | TagFeedType
   location: number
 }
 
@@ -76,7 +80,13 @@ interface ArticleFeedProp {
     | 'small_cover'
     | 'no_cover'
     | 'title'
-    | 'comment' // comment in follow feed
+  location: number
+}
+
+interface CommentFeedProp {
+  type: CommentFeedType
+  contentType: 'comment'
+  styleType: 'card'
   location: number
 }
 
@@ -102,7 +112,7 @@ type ArticleFeedType =
   | 'all_topics'
   | 'authors' // author feed on home page
   | 'collection'
-  | 'follow'
+  | 'follow-article'
   | 'hottest'
   | 'icymi'
   | 'newest'
@@ -117,6 +127,8 @@ type ArticleFeedType =
   | 'topics'
   | 'user_article'
   | 'wallet'
+
+type CommentFeedType = 'follow-comment'
 
 type UserFeedType =
   | 'all_authors'
@@ -143,6 +155,7 @@ type UserFeedType =
 
 type TagFeedType =
   | 'all_tags' // all tags page
+  | 'follow-tag'
   | 'search'
   | 'search_tag'
   | 'tags' // tag feed on home page
