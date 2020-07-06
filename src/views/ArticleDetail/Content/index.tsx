@@ -31,7 +31,7 @@ const Content = ({
 }: {
   article: ContentArticle
   translation?: string | null
-  translating: boolean
+  translating?: boolean
 }) => {
   const [read] = useMutation<ReadArticle>(READ_ARTICLE)
 

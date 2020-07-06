@@ -29,6 +29,8 @@ import { getQuery } from '~/common/utils'
 
 import Collection from './Collection'
 import Content from './Content'
+import EditModeHeader from './EditModeHeader'
+import EditModeSidebar from './EditModeSidebar'
 import FingerprintButton from './FingerprintButton'
 import {
   ARTICLE_DETAIL_PRIVATE,
@@ -73,6 +75,9 @@ const ArticleDetail = () => {
   const [fixedWall, setFixedWall] = useState(false)
   // const [showResponses, setShowResponses] = useState(false)
 
+  // edit mode
+  const [editMode, setEditMode] = useState(false)
+
   // wall
   const { data: clientPreferenceData } = useQuery<ClientPreference>(
     CLIENT_PREFERENCE,
@@ -95,6 +100,7 @@ const ArticleDetail = () => {
   const authorId = article?.author?.id
   const collectionCount = article?.collection?.totalCount || 0
   const isAuthor = viewer.id === authorId
+  const canEdit = isAuthor && !viewer.isInactive
 
   // fetch private data
   useEffect(() => {
@@ -207,6 +213,28 @@ const ArticleDetail = () => {
     )
   }
 
+  if (editMode) {
+    return (
+      <Layout.Main aside={<EditModeSidebar article={article} />}>
+        <Layout.Header
+          left={<Layout.Header.BackButton />}
+          right={<EditModeHeader setEditMode={setEditMode} />}
+        />
+        <section className="content editing">
+          <section className="title">
+            <Title type="article">
+              {translate && titleTranslation ? titleTranslation : article.title}
+            </Title>
+          </section>
+
+          <Content article={article} />
+        </section>
+
+        <style jsx>{styles}</style>
+      </Layout.Main>
+    )
+  }
+
   return (
     <Layout.Main aside={<RelatedArticles article={article} inSidebar />}>
       <Layout.Header
@@ -272,7 +300,7 @@ const ArticleDetail = () => {
             }}
           /> */}
 
-          {(collectionCount > 0 || isAuthor) && (
+          {collectionCount > 0 && (
             <section className="block">
               <Collection article={article} collectionCount={collectionCount} />
             </section>
@@ -298,7 +326,17 @@ const ArticleDetail = () => {
           )}
         </section>
 
-        <Toolbar article={article} />
+        <Toolbar
+          article={article}
+          editArticle={
+            canEdit
+              ? () => {
+                  setEditMode(true)
+                  jump(document.body)
+                }
+              : undefined
+          }
+        />
 
         {shouldShowWall && (
           <>

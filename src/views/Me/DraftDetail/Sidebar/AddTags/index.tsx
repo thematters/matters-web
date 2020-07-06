@@ -3,9 +3,9 @@ import gql from 'graphql-tag'
 import _uniq from 'lodash/uniq'
 
 import { Translate } from '~/components'
+import SidebarCollapsable from '~/components/Editor/Sidebar/Collapsable'
 import { useMutation } from '~/components/GQL'
 
-import Collapsable from '../Collapsable'
 import SearchTags from './SearchTags'
 import styles from './styles.css'
 import Tag from './Tag'
@@ -73,7 +73,10 @@ const AddTags = ({ draft, setSaveStatus }: AddTagsProps) => {
   }
 
   return (
-    <Collapsable title={<Translate id="tag" />} defaultCollapsed={!hasTags}>
+    <SidebarCollapsable
+      title={<Translate id="tag" />}
+      defaultCollapsed={!hasTags}
+    >
       <p className="tags-intro">
         <Translate
           zh_hant="通過添加標籤幫助讀者更好地找到你的作品。如果沒有合適的標籤，你可以創建新的。"
@@ -89,7 +92,7 @@ const AddTags = ({ draft, setSaveStatus }: AddTagsProps) => {
       </section>
 
       <style jsx>{styles}</style>
-    </Collapsable>
+    </SidebarCollapsable>
   )
 }
 

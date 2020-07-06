@@ -6,7 +6,9 @@ import {
   ShareButton,
   useResponsive,
 } from '~/components'
-import DropdownActions from '~/components/ArticleDigest/DropdownActions'
+import DropdownActions, {
+  DropdownActionsControls,
+} from '~/components/ArticleDigest/DropdownActions'
 
 import AppreciationButton from '../AppreciationButton'
 import Appreciators from './Appreciators'
@@ -16,9 +18,9 @@ import styles from './styles.css'
 import { ToolbarArticlePrivate } from './__generated__/ToolbarArticlePrivate'
 import { ToolbarArticlePublic } from './__generated__/ToolbarArticlePublic'
 
-export interface ToolbarProps {
+export type ToolbarProps = {
   article: ToolbarArticlePublic & Partial<ToolbarArticlePrivate>
-}
+} & DropdownActionsControls
 
 const fragments = {
   article: {
@@ -49,7 +51,7 @@ const fragments = {
   },
 }
 
-const Toolbar = ({ article }: ToolbarProps) => {
+const Toolbar = ({ article, editArticle }: ToolbarProps) => {
   const isSmallUp = useResponsive('sm-up')
 
   return (
@@ -73,6 +75,7 @@ const Toolbar = ({ article }: ToolbarProps) => {
           color="black"
           size="md-s"
           inCard={false}
+          editArticle={editArticle}
         />
       </section>
 

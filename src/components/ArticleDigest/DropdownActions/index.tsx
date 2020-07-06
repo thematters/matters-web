@@ -23,6 +23,7 @@ import { getQuery } from '~/common/utils'
 
 import AppreciatorsButton from './AppreciatorsButton'
 import ArchiveArticle from './ArchiveArticle'
+import EditButton from './EditButton'
 import ExtendButton from './ExtendButton'
 import FingerprintButton from './FingerprintButton'
 import RemoveTagButton from './RemoveTagButton'
@@ -39,6 +40,7 @@ export interface DropdownActionsControls {
   inUserArticles?: boolean
   inTagDetailLatest?: boolean
   inTagDetailSelected?: boolean
+  editArticle?: () => any
 }
 
 type DropdownActionsProps = {
@@ -93,6 +95,7 @@ const BaseDropdownActions = ({
   color = 'grey',
   size,
   inCard,
+  editArticle,
 
   hasAppreciators,
   hasFingerprint,
@@ -129,6 +132,7 @@ const BaseDropdownActions = ({
       {hasSetTagSelected && <SetTagSelectedButton article={article} />}
       {hasSetTagUnSelected && <SetTagUnselectedButton article={article} />}
       {hasRemoveTag && <RemoveTagButton article={article} />}
+      {editArticle && <EditButton editArticle={editArticle} />}
     </Menu>
   )
 

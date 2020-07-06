@@ -3,9 +3,9 @@ import gql from 'graphql-tag'
 import _uniqBy from 'lodash/uniqBy'
 
 import { Translate } from '~/components'
+import SidebarCollapsable from '~/components/Editor/Sidebar/Collapsable'
 import { useMutation } from '~/components/GQL'
 
-import Collapsable from '../Collapsable'
 import styles from './styles.css'
 
 import {
@@ -107,7 +107,7 @@ const AddCover = ({ draft, ...props }: AddCover) => {
   })
 
   return (
-    <Collapsable
+    <SidebarCollapsable
       title={<Translate zh_hans="封面" zh_hant="封面" />}
       defaultCollapsed={false}
     >
@@ -130,7 +130,7 @@ const AddCover = ({ draft, ...props }: AddCover) => {
       </section>
 
       <style jsx>{styles}</style>
-    </Collapsable>
+    </SidebarCollapsable>
   )
 }
 
