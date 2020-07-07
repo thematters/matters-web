@@ -65,7 +65,7 @@ const RemoveTagButton = ({ article }: { article: RemoveTagButtonArticle }) => {
       }}
     >
       <TextIcon icon={<IconRemoveMedium size="md" />} size="md" spacing="base">
-        <Translate zh_hant="取消標籤" zh_hans="取消标签" />
+        <Translate zh_hant="移除作品" zh_hans="移除作品" />
       </TextIcon>
     </Menu.Item>
   )
