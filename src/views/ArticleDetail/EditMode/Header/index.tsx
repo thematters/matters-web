@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import _uniq from 'lodash/uniq'
 
-import { Button, IconSpinner, TextIcon, Translate } from '~/components'
+import { Button, IconSpinner, Tag, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import articleFragments from '~/components/GQL/fragments/article'
 
@@ -14,6 +14,7 @@ import { EditArticle } from './__generated__/EditArticle'
 
 interface EditModeHeaderProps {
   id: string
+  mediaHash: string
   tags: string[]
   collection: ArticleDigestDropdownArticle[]
   setEditMode: (enable: boolean) => any
@@ -25,24 +26,31 @@ interface EditModeHeaderProps {
  * The response of this mutation is aligned with `COLLECTION_LIST` in `CollectionList.tsx`,
  * so that it will auto update the local cache and prevent refetch logics
  */
-
 const EDIT_ARTICLE = gql`
   mutation EditArticle(
     $id: ID!
+    $mediaHash: String!
+    $tags: [String!]
     $collection: [ID!]
     $after: String
     $first: Int = null
   ) {
-    editArticle(input: { id: $id, collection: $collection }) {
+    editArticle(input: { id: $id, tags: $tags, collection: $collection }) {
       id
+      tags @connection(key: "tagsList") {
+        ...DigestTag
+        selected(input: { mediaHash: $mediaHash })
+      }
       ...ArticleCollection
     }
   }
+  ${Tag.fragments.tag}
   ${articleFragments.articleCollection}
 `
 
 const EditModeHeader = ({
   id,
+  mediaHash,
   tags,
   collection,
   setEditMode,
@@ -54,6 +62,8 @@ const EditModeHeader = ({
       await editArticle({
         variables: {
           id,
+          mediaHash,
+          tags,
           collection: _uniq(collection.map(({ id: articleId }) => articleId)),
           first: null,
         },

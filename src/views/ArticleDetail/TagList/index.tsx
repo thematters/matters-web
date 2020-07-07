@@ -9,7 +9,7 @@ import { TagListArticle } from './__generated__/TagListArticle'
 const fragments = {
   article: gql`
     fragment TagListArticle on Article {
-      tags {
+      tags @connection(key: "tagsList") {
         ...DigestTag
         selected(input: { mediaHash: $mediaHash })
       }

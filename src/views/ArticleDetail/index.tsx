@@ -237,6 +237,7 @@ const ArticleDetail = () => {
           right={
             <EditMode.Header
               id={article.id}
+              mediaHash={mediaHash}
               tags={editModeTags}
               collection={editModeCollection}
               setEditMode={setEditMode}
