@@ -29,8 +29,7 @@ import { getQuery } from '~/common/utils'
 
 import Collection from './Collection'
 import Content from './Content'
-import EditModeHeader from './EditModeHeader'
-import EditModeSidebar from './EditModeSidebar'
+import EditMode from './EditMode'
 import FingerprintButton from './FingerprintButton'
 import {
   ARTICLE_DETAIL_PRIVATE,
@@ -45,6 +44,7 @@ import Toolbar from './Toolbar'
 import TranslationButton from './TranslationButton'
 import Wall from './Wall'
 
+import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import { ArticleDetailPublic } from './__generated__/ArticleDetailPublic'
 import { ArticleTranslation } from './__generated__/ArticleTranslation'
@@ -77,6 +77,10 @@ const ArticleDetail = () => {
 
   // edit mode
   const [editMode, setEditMode] = useState(false)
+  const [editModeTags, setEditModeTags] = useState<string[]>([])
+  const [editModeCollection, setEditModeCollection] = useState<
+    ArticleDigestDropdownArticle[]
+  >([])
 
   // wall
   const { data: clientPreferenceData } = useQuery<ClientPreference>(
@@ -188,6 +192,9 @@ const ArticleDetail = () => {
     )
   }
 
+  /**
+   * Archived or Banned
+   */
   if (article.state !== 'active' && viewer.id !== authorId) {
     return (
       <EmptyLayout>
@@ -213,10 +220,29 @@ const ArticleDetail = () => {
     )
   }
 
+  /**
+   * Edit Mode
+   */
+  const sidebarProps = {
+    articleId: article.id,
+    tags: editModeTags,
+    collection: editModeCollection,
+    setTags: setEditModeTags,
+    setCollection: setEditModeCollection,
+  }
   if (editMode) {
     return (
-      <Layout.Main aside={<EditModeSidebar article={article} />}>
-        <Layout.Header right={<EditModeHeader setEditMode={setEditMode} />} />
+      <Layout.Main aside={<EditMode.Sidebar {...sidebarProps} />}>
+        <Layout.Header
+          right={
+            <EditMode.Header
+              id={article.id}
+              tags={editModeTags}
+              collection={editModeCollection}
+              setEditMode={setEditMode}
+            />
+          }
+        />
         {isLargeUp && (
           <section className="content editing">
             <section className="title">
@@ -233,7 +259,7 @@ const ArticleDetail = () => {
 
         {!isLargeUp && (
           <Layout.Spacing>
-            <EditModeSidebar article={article} />
+            <EditMode.Sidebar {...sidebarProps} />
           </Layout.Spacing>
         )}
 

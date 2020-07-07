@@ -56,6 +56,7 @@ interface Controls {
   hasSetTagSelected: boolean
   hasSetTagUnSelected: boolean
   hasRemoveTag: boolean
+  hasEdit: boolean
 }
 
 interface DialogProps {
@@ -105,6 +106,7 @@ const BaseDropdownActions = ({
   hasSetTagSelected,
   hasSetTagUnSelected,
   hasRemoveTag,
+  hasEdit,
 
   openFingerprintDialog,
   openAppreciatorsDialog,
@@ -132,7 +134,7 @@ const BaseDropdownActions = ({
       {hasSetTagSelected && <SetTagSelectedButton article={article} />}
       {hasSetTagUnSelected && <SetTagUnselectedButton article={article} />}
       {hasRemoveTag && <RemoveTagButton article={article} />}
-      {editArticle && <EditButton editArticle={editArticle} />}
+      {hasEdit && editArticle && <EditButton editArticle={editArticle} />}
     </Menu>
   )
 
@@ -169,6 +171,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
     inUserArticles,
     inTagDetailLatest,
     inTagDetailSelected,
+    editArticle,
   } = props
   const router = useRouter()
   const viewer = useContext(ViewerContext)
@@ -205,6 +208,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
     hasSetTagSelected: !!(inTagDetailLatest && canEditTag),
     hasSetTagUnSelected: !!(inTagDetailSelected && canEditTag),
     hasRemoveTag: !!(isInTagDetail && canEditTag),
+    hasEdit: isActive && !!editArticle,
   }
 
   if (_isEmpty(_pickBy(controls))) {
