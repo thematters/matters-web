@@ -11,6 +11,7 @@ export default (_: any) => {
       __typename: 'Push',
     },
     routeHistory: [],
+    followFeedType: 'article',
     __typename: 'ClientPreference',
   }
 }

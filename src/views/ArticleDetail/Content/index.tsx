@@ -119,7 +119,9 @@ const Content = ({
       `
     }
 
-    $imgs.forEach(($img) => $img.addEventListener('error', onError))
+    $imgs.forEach(($img) =>
+      $img.addEventListener('error', onError, { once: true })
+    )
 
     return () =>
       $imgs.forEach(($img) => $img.removeEventListener('error', onError))

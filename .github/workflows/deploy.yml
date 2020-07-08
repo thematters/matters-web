@@ -101,6 +101,7 @@ jobs:
           region: ap-southeast-1
           deployment_package: deploy.zip
           use_existing_version_if_available: true
+          wait_for_deployment: false
 
       # === `master` branch ===
       - name: Upload Assets (production)

@@ -11,7 +11,7 @@ interface ProfileCoverProps {
 
 export const ProfileCover = ({ cover, inEditor }: ProfileCoverProps) => {
   const url = cover || IMAGE_COVER
-  const isFallback = !!cover
+  const isFallback = !cover
 
   return (
     <div className="profile-cover">
