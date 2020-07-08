@@ -16,7 +16,7 @@ interface EditModeHeaderProps {
   mediaHash: string
   editModeTags: string[]
   editModeCollection: ArticleDigestDropdownArticle[]
-  setEditMode: (enable: boolean) => any
+  onEditSaved: () => any
 }
 
 /**
@@ -52,7 +52,7 @@ const EditModeHeader = ({
   mediaHash,
   editModeTags,
   editModeCollection,
-  setEditMode,
+  onEditSaved,
 }: EditModeHeaderProps) => {
   const [editArticle, { loading }] = useMutation<EditArticle>(EDIT_ARTICLE)
 
@@ -67,7 +67,7 @@ const EditModeHeader = ({
           first: null,
         },
       })
-      setEditMode(false)
+      onEditSaved()
     } catch (e) {
       window.dispatchEvent(
         new CustomEvent(ADD_TOAST, {

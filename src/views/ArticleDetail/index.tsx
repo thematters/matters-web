@@ -75,13 +75,6 @@ const ArticleDetail = () => {
   const [fixedWall, setFixedWall] = useState(false)
   // const [showResponses, setShowResponses] = useState(false)
 
-  // edit mode
-  const [editMode, setEditMode] = useState(false)
-  const [editModeTags, setEditModeTags] = useState<string[]>([])
-  const [editModeCollection, setEditModeCollection] = useState<
-    ArticleDigestDropdownArticle[]
-  >([])
-
   // wall
   const { data: clientPreferenceData } = useQuery<ClientPreference>(
     CLIENT_PREFERENCE,
@@ -93,12 +86,11 @@ const ArticleDetail = () => {
   const shouldShowWall = !viewer.isAuthed && wall
 
   // public data
-  const { data, loading, error, client } = useQuery<ArticleDetailPublic>(
-    ARTICLE_DETAIL_PUBLIC,
-    {
-      variables: { mediaHash },
-    }
-  )
+  const { data, loading, error, client, refetch: refetchPublic } = useQuery<
+    ArticleDetailPublic
+  >(ARTICLE_DETAIL_PUBLIC, {
+    variables: { mediaHash },
+  })
 
   const article = data?.article
   const authorId = article?.author?.id
@@ -157,6 +149,17 @@ const ArticleDetail = () => {
         },
       })
     )
+  }
+
+  // edit mode
+  const [editMode, setEditMode] = useState(false)
+  const [editModeTags, setEditModeTags] = useState<string[]>([])
+  const [editModeCollection, setEditModeCollection] = useState<
+    ArticleDigestDropdownArticle[]
+  >([])
+  const onEditSaved = () => {
+    setEditMode(false)
+    refetchPublic()
   }
 
   useEffect(() => {
@@ -250,7 +253,7 @@ const ArticleDetail = () => {
               mediaHash={mediaHash}
               editModeTags={editModeTags}
               editModeCollection={editModeCollection}
-              setEditMode={setEditMode}
+              onEditSaved={onEditSaved}
             />
           }
         />
