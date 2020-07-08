@@ -25,7 +25,7 @@ const fragments = {
   article: gql`
     fragment RemoveTagButtonArticle on Article {
       id
-      tags @connection(key: "tagsList") {
+      tags {
         id
         creator {
           id

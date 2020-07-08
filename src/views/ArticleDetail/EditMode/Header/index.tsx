@@ -1,5 +1,4 @@
 import gql from 'graphql-tag'
-import _uniq from 'lodash/uniq'
 
 import { Button, IconSpinner, Tag, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
@@ -15,8 +14,8 @@ import { EditArticle } from './__generated__/EditArticle'
 interface EditModeHeaderProps {
   id: string
   mediaHash: string
-  tags: string[]
-  collection: ArticleDigestDropdownArticle[]
+  editModeTags: string[]
+  editModeCollection: ArticleDigestDropdownArticle[]
   setEditMode: (enable: boolean) => any
 }
 
@@ -37,7 +36,7 @@ const EDIT_ARTICLE = gql`
   ) {
     editArticle(input: { id: $id, tags: $tags, collection: $collection }) {
       id
-      tags @connection(key: "tagsList") {
+      tags {
         ...DigestTag
         selected(input: { mediaHash: $mediaHash })
       }
@@ -51,8 +50,8 @@ const EDIT_ARTICLE = gql`
 const EditModeHeader = ({
   id,
   mediaHash,
-  tags,
-  collection,
+  editModeTags,
+  editModeCollection,
   setEditMode,
 }: EditModeHeaderProps) => {
   const [editArticle, { loading }] = useMutation<EditArticle>(EDIT_ARTICLE)
@@ -63,8 +62,8 @@ const EditModeHeader = ({
         variables: {
           id,
           mediaHash,
-          tags,
-          collection: _uniq(collection.map(({ id: articleId }) => articleId)),
+          tags: editModeTags,
+          collection: editModeCollection.map(({ id: articleId }) => articleId),
           first: null,
         },
       })

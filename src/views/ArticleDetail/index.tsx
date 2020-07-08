@@ -159,15 +159,15 @@ const ArticleDetail = () => {
     )
   }
 
-  /**
-   * Render
-   */
   useEffect(() => {
     if (shouldShowWall && window.location.hash && article) {
       jump('#comments', { offset: -10 })
     }
   }, [mediaHash])
 
+  /**
+   * Render:Loading
+   */
   if (loading) {
     return (
       <EmptyLayout>
@@ -176,6 +176,9 @@ const ArticleDetail = () => {
     )
   }
 
+  /**
+   * Render:Error
+   */
   if (error) {
     return (
       <EmptyLayout>
@@ -184,6 +187,9 @@ const ArticleDetail = () => {
     )
   }
 
+  /**
+   * Render:404
+   */
   if (!article) {
     return (
       <EmptyLayout>
@@ -193,7 +199,7 @@ const ArticleDetail = () => {
   }
 
   /**
-   * Archived or Banned
+   * Render:Archived/Banned
    */
   if (article.state !== 'active' && viewer.id !== authorId) {
     return (
@@ -221,54 +227,52 @@ const ArticleDetail = () => {
   }
 
   /**
-   * Edit Mode
+   * Render:Edit Mode
    */
-  const sidebarProps = {
-    articleId: article.id,
-    tags: editModeTags,
-    collection: editModeCollection,
-    setTags: setEditModeTags,
-    setCollection: setEditModeCollection,
-  }
   if (editMode) {
     return (
-      <Layout.Main aside={<EditMode.Sidebar {...sidebarProps} />}>
+      <Layout.Main
+        aside={
+          <EditMode.Sidebar
+            mediaHash={mediaHash}
+            editModeTags={editModeTags}
+            setEditModeTags={setEditModeTags}
+            editModeCollection={editModeCollection}
+            setEditModeCollection={setEditModeCollection}
+          />
+        }
+        keepAside
+      >
         <Layout.Header
           right={
             <EditMode.Header
               id={article.id}
               mediaHash={mediaHash}
-              tags={editModeTags}
-              collection={editModeCollection}
+              editModeTags={editModeTags}
+              editModeCollection={editModeCollection}
               setEditMode={setEditMode}
             />
           }
         />
-        {isLargeUp && (
-          <section className="content editing">
-            <section className="title">
-              <Title type="article">
-                {translate && titleTranslation
-                  ? titleTranslation
-                  : article.title}
-              </Title>
-            </section>
 
-            <Content article={article} />
+        <section className="content editing">
+          <section className="title">
+            <Title type="article">
+              {translate && titleTranslation ? titleTranslation : article.title}
+            </Title>
           </section>
-        )}
 
-        {!isLargeUp && (
-          <Layout.Spacing>
-            <EditMode.Sidebar {...sidebarProps} />
-          </Layout.Spacing>
-        )}
+          <Content article={article} />
+        </section>
 
         <style jsx>{styles}</style>
       </Layout.Main>
     )
   }
 
+  /**
+   * Render
+   */
   return (
     <Layout.Main aside={<RelatedArticles article={article} inSidebar />}>
       <Layout.Header

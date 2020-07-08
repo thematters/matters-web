@@ -2,12 +2,20 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import _uniq from 'lodash/uniq'
 
-import { Title, Translate, ViewMoreButton } from '~/components'
+import {
+  ArticleDigestSidebar,
+  List,
+  Spinner,
+  Title,
+  Translate,
+  useResponsive,
+  ViewMoreButton,
+} from '~/components'
+import { QueryError } from '~/components/GQL'
 import articleFragments from '~/components/GQL/fragments/article'
 
-import { mergeConnections } from '~/common/utils'
+import { analytics, mergeConnections } from '~/common/utils'
 
-import CollectionList from './CollectionList'
 import styles from './styles.css'
 
 import { ArticleDetailPublic_article } from '../__generated__/ArticleDetailPublic'
@@ -27,12 +35,13 @@ const Collection: React.FC<{
   article: ArticleDetailPublic_article
   collectionCount?: number
 }> = ({ article, collectionCount }) => {
+  const isMediumUp = useResponsive('md-up')
   const { data, loading, error, fetchMore } = useQuery<CollectionListTypes>(
     COLLECTION_LIST,
     { variables: { mediaHash: article.mediaHash, first: 3 } }
   )
   const connectionPath = 'article.collection'
-  const { pageInfo } = data?.article?.collection || {}
+  const { edges, pageInfo } = data?.article?.collection || {}
   const loadAll = () =>
     fetchMore({
       variables: {
@@ -48,6 +57,18 @@ const Collection: React.FC<{
         }),
     })
 
+  if (loading) {
+    return <Spinner />
+  }
+
+  if (error) {
+    return <QueryError error={error} />
+  }
+
+  if (!edges || !pageInfo) {
+    return null
+  }
+
   return (
     <section className="collection">
       <header>
@@ -60,7 +81,25 @@ const Collection: React.FC<{
         </Title>
       </header>
 
-      <CollectionList data={data} loading={loading} error={error} />
+      <List spacing={['base', 0]} hasBorder={false}>
+        {edges.map(({ node, cursor }, i) => (
+          <List.Item key={cursor}>
+            <ArticleDigestSidebar
+              article={node}
+              hasCover={isMediumUp}
+              hasBackground
+              onClick={() =>
+                analytics.trackEvent('click_feed', {
+                  type: 'collection',
+                  styleType: 'small_cover',
+                  contentType: 'article',
+                  location: i,
+                })
+              }
+            />
+          </List.Item>
+        ))}
+      </List>
 
       {pageInfo?.hasNextPage && <ViewMoreButton onClick={loadAll} />}
 

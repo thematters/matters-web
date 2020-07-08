@@ -31,7 +31,7 @@ const fragments = {
   article: gql`
     fragment SetTagUnselectedButtonArticle on Article {
       id
-      tags @connection(key: "tagsList") {
+      tags {
         id
         creator {
           id
