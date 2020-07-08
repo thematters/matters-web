@@ -34,8 +34,8 @@ const update = ({
 
     const followers = cacheData.node.followers.edges || []
     if (type === 'follow') {
-      followers.push({
-        cursor:  window.btoa(`arrayconnection:${followers.length}:0`) || '',
+      followers.unshift({
+        cursor: window.btoa(`arrayconnection:${followers.length}:0`) || '',
         node: {
           avatar: viewer.avatar,
           id: viewer.id,
@@ -50,7 +50,9 @@ const update = ({
       cacheData.node.followers.edges = followers
       cacheData.node.followers.totalCount++
     } else {
-      cacheData.node.followers.edges = followers.filter(follower => follower.node.id !== viewer.id)
+      cacheData.node.followers.edges = followers.filter(
+        (follower) => follower.node.id !== viewer.id
+      )
       cacheData.node.followers.totalCount--
     }
 

@@ -24,10 +24,10 @@ import styles from './styles.css'
 import { PutArticlesTags } from './__generated__/PutArticlesTags'
 
 const PUT_ARTICLES_TAGS = gql`
-  mutation PutArticlesTags($id: ID!, $articles: [ID!]) {
+  mutation PutArticlesTags($id: ID!, $articles: [ID!], $selected: Boolean!) {
     putArticlesTags(input: { id: $id, articles: $articles }) {
       id
-      articles(input: { first: 0, selected: true }) {
+      articles(input: { first: 0, selected: $selected }) {
         totalCount
       }
     }
@@ -60,6 +60,7 @@ const DropdownContent = ({
 interface TagArticleDialogContentProps {
   id?: string
   closeDialog: () => void
+  forSelected?: boolean
 }
 
 interface FormValues {
@@ -70,6 +71,7 @@ interface FormValues {
 const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
   closeDialog,
   id,
+  forSelected = false,
 }) => {
   const isSmallUp = useResponsive('sm-up')
   const [selectedArticles, setSelectedArticles] = useState<any[]>([])
@@ -110,7 +112,7 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
           return
         }
 
-        await update({ variables: { id, articles } })
+        await update({ variables: { id, articles, selected: forSelected } })
 
         setSubmitting(false)
 
@@ -226,7 +228,7 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
   return (
     <>
       <Dialog.Header
-        title="addArticleTag"
+        title={forSelected ? 'tagAddSelectedArticle' : 'tagAddArticle'}
         close={closeDialog}
         rightButton={SubmitButton}
       />

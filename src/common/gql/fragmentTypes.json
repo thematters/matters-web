@@ -17,8 +17,8 @@
         "name": "Connection",
         "possibleTypes": [
           { "name": "ArticleConnection" },
-          { "name": "ResponseConnection" },
           { "name": "CommentConnection" },
+          { "name": "ResponseConnection" },
           { "name": "TagConnection" },
           { "name": "UserConnection" },
           { "name": "DraftConnection" },
