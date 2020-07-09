@@ -83,7 +83,8 @@ const TagDetail = ({ data }: { data: TagDetailType }) => {
     setFeed('latest')
   }
 
-  const filter = ({ displayName }: any) => (displayName || '').toLowerCase() !== 'matty'
+  const filter = ({ displayName }: any) =>
+    (displayName || '').toLowerCase() !== 'matty'
   const editors = data.node.editors || []
   const owner = _find(editors, filter)
 
@@ -92,7 +93,9 @@ const TagDetail = ({ data }: { data: TagDetailType }) => {
   const isEditor = _some(editors, (editor) => editor.id === viewer.id)
   const isCreator = data.node.creator?.id === viewer.id
   const isMaintainer =
-    isEditor || (normalEditors.length === 0 && isCreator) || viewer.info.email === 'hi@matters.news'
+    isEditor ||
+    (normalEditors.length === 0 && isCreator) ||
+    viewer.info.email === 'hi@matters.news'
 
   return (
     <Layout.Main>
@@ -147,7 +150,10 @@ const TagDetail = ({ data }: { data: TagDetailType }) => {
 
           <section className="buttons">
             <TagDetailButtons.FollowButton tag={data.node} />
-            <TagDetailButtons.AddButton tag={data.node} isMaintainer={isMaintainer} />
+            <TagDetailButtons.AddButton
+              tag={data.node}
+              isMaintainer={isMaintainer}
+            />
           </section>
         </section>
 

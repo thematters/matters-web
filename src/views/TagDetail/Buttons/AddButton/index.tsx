@@ -133,7 +133,11 @@ const BaseDropdownActions = ({
       {isMaintainer && (
         <>
           <Menu.Item onClick={openTagSelectedArticleDialog}>
-            <TextIcon icon={<IconAddMedium size="md" />} size="md" spacing="base">
+            <TextIcon
+              icon={<IconAddMedium size="md" />}
+              size="md"
+              spacing="base"
+            >
               <Translate id="tagAddSelectedArticle" />
             </TextIcon>
           </Menu.Item>
