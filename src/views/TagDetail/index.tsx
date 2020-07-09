@@ -83,15 +83,16 @@ const TagDetail = ({ data }: { data: TagDetailType }) => {
     setFeed('latest')
   }
 
+  const filter = ({ displayName }: any) => (displayName || '').toLowerCase() !== 'matty'
   const editors = data.node.editors || []
-  const maintainer = _find(
-    editors,
-    (editor) => (editor.displayName || '').toLowerCase() !== 'matty'
-  )
+  const owner = _find(editors, filter)
+
+  // define permission
+  const normalEditors = editors.filter(filter)
   const isEditor = _some(editors, (editor) => editor.id === viewer.id)
   const isCreator = data.node.creator?.id === viewer.id
-  const canEdit =
-    isEditor || isCreator || viewer.info.email === 'hi@matters.news'
+  const isMaintainer =
+    isEditor || (normalEditors.length === 0 && isCreator) || viewer.info.email === 'hi@matters.news'
 
   return (
     <Layout.Main>
@@ -105,7 +106,7 @@ const TagDetail = ({ data }: { data: TagDetailType }) => {
               id={data.node.id}
               content={data.node.content}
               description={data.node.description || undefined}
-              canEdit={canEdit}
+              isMaintainer={isMaintainer}
             />
           </>
         }
@@ -117,10 +118,10 @@ const TagDetail = ({ data }: { data: TagDetailType }) => {
         <Spacer />
 
         <section className="info">
-          {maintainer && (
-            <section className="maintainer">
+          {owner && (
+            <section className="owner">
               <UserDigest.Mini
-                user={maintainer}
+                user={owner}
                 avatarSize="xs"
                 hasAvatar
                 hasDisplayName
@@ -146,7 +147,7 @@ const TagDetail = ({ data }: { data: TagDetailType }) => {
 
           <section className="buttons">
             <TagDetailButtons.FollowButton tag={data.node} />
-            {canEdit && <TagDetailButtons.AddButton id={data.node.id} />}
+            <TagDetailButtons.AddButton tag={data.node} isMaintainer={isMaintainer} />
           </section>
         </section>
 

@@ -12,7 +12,9 @@ import { SetTagSelectedButtonArticle } from './__generated__/SetTagSelectedButto
 
 const SET_TAG_SELECTED = gql`
   mutation SetTagSelected($id: ID!, $articles: [ID!]) {
-    putArticlesTags(input: { id: $id, articles: $articles, selected: true }) {
+    updateArticlesTags(
+      input: { id: $id, articles: $articles, isSelected: true }
+    ) {
       id
       articles(input: { first: 0, selected: true }) {
         totalCount

@@ -17,7 +17,7 @@ interface DropdownActionsProps {
   id: string
   content?: string
   description?: string
-  canEdit: boolean
+  isMaintainer: boolean
 }
 
 interface DialogProps {
@@ -31,7 +31,7 @@ const BaseDropdownActions = ({
   id,
   content,
   description,
-  canEdit,
+  isMaintainer,
   openShareDialog,
   openTagDialog,
 }: BaseDropdownActionsProps) => {
@@ -42,7 +42,7 @@ const BaseDropdownActions = ({
           <Translate zh_hant="分享標籤" zh_hans="分享标签" />
         </TextIcon>
       </Menu.Item>
-      {canEdit && (
+      {isMaintainer && (
         <Menu.Item onClick={openTagDialog}>
           <TextIcon icon={<IconEdit size="md" />} size="md" spacing="base">
             <Translate id="editTag" />

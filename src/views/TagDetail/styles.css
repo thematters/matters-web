@@ -5,7 +5,7 @@
   margin-bottom: var(--spacing-x-tight);
 }
 
-.maintainer {
+.owner {
   @mixin flex-center-start;
 
   padding: 0 0 var(--spacing-base);

@@ -1,4 +1,5 @@
 import { DataProxy } from 'apollo-cache'
+import _cloneDeep from 'lodash/cloneDeep'
 
 import TAG_ARTICLES_COUNT from '~/components/GQL/queries/tagArticlesCount'
 
@@ -9,10 +10,12 @@ import { TagArticlesCount } from '~/components/GQL/queries/__generated__/TagArti
 const update = ({
   cache,
   id,
+  count = 1,
   type,
 }: {
   cache: DataProxy
   id: string
+  count?: number
   type: 'increment' | 'decrement'
 }) => {
   try {
@@ -26,20 +29,21 @@ const update = ({
       variables,
     })
 
-    if (!cacheData || !cacheData.node || cacheData.node.__typename !== 'Tag') {
+    const data = _cloneDeep(cacheData)
+    if (!data || !data.node || data.node.__typename !== 'Tag') {
       return
     }
 
     if (type === 'increment') {
-      cacheData.node.articles.totalCount++
+      data.node.articles.totalCount += count
     } else {
-      cacheData.node.articles.totalCount--
+      data.node.articles.totalCount -= count
     }
 
     cache.writeQuery({
       query: TAG_ARTICLES_COUNT,
       variables,
-      data: cacheData,
+      data,
     })
   } catch (e) {
     if (e.message.startsWith("Can't find field")) {
