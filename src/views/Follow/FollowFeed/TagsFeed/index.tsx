@@ -20,17 +20,17 @@ import { analytics, mergeConnections } from '~/common/utils'
 import styles from './styles.css'
 
 import {
-  FollowTagsArticlesFeed,
-  FollowTagsArticlesFeed_viewer_recommendation_followTagsArticles_edges_node as FollowTagsArticlesFeedNode,
-} from './__generated__/FollowTagsArticlesFeed'
-import { FollowTagsFeed } from './__generated__/FollowTagsFeed'
+  FollowingTagsArticlesFeed,
+  FollowingTagsArticlesFeed_viewer_recommendation_followingTagsArticles_edges_node as FollowingTagsArticlesFeedNode,
+} from './__generated__/FollowingTagsArticlesFeed'
+import { FollowingTagsFeed } from './__generated__/FollowingTagsFeed'
 
-const FOLLOW_TAGS = gql`
-  query FollowTagsFeed {
+const FOLLOWING_TAGS = gql`
+  query FollowingTagsFeed {
     viewer {
       id
       recommendation {
-        followTags(input: { first: null }) {
+        followingTags(input: { first: null }) {
           edges {
             node {
               ... on Tag {
@@ -44,12 +44,12 @@ const FOLLOW_TAGS = gql`
   }
 `
 
-const FOLLOW_TAGS_ARTICLES = gql`
-  query FollowTagsArticlesFeed($after: String) {
+const FOLLOWING_TAGS_ARTICLES = gql`
+  query FollowingTagsArticlesFeed($after: String) {
     viewer {
       id
       recommendation {
-        followTagsArticles(input: { first: 10, after: $after }) {
+        followingTagsArticles(input: { first: 10, after: $after }) {
           pageInfo {
             startCursor
             endCursor
@@ -78,8 +78,8 @@ const FOLLOW_TAGS_ARTICLES = gql`
 
 const TagsArticles = ({ tagIds }: { tagIds: string[] }) => {
   const { data, loading, error, fetchMore, refetch } = useQuery<
-    FollowTagsArticlesFeed
-  >(FOLLOW_TAGS_ARTICLES)
+    FollowingTagsArticlesFeed
+  >(FOLLOWING_TAGS_ARTICLES)
 
   if (loading) {
     return <Spinner />
@@ -89,9 +89,9 @@ const TagsArticles = ({ tagIds }: { tagIds: string[] }) => {
     return <QueryError error={error} />
   }
 
-  const connectionPath = 'viewer.recommendation.followTagsArticles'
+  const connectionPath = 'viewer.recommendation.followingTagsArticles'
   const { edges, pageInfo } =
-    data?.viewer?.recommendation.followTagsArticles || {}
+    data?.viewer?.recommendation.followingTagsArticles || {}
 
   if (!edges || edges.length <= 0 || !pageInfo) {
     return <EmptyArticle />
@@ -115,7 +115,7 @@ const TagsArticles = ({ tagIds }: { tagIds: string[] }) => {
     })
   }
 
-  const TagComponent = ({ node }: { node: FollowTagsArticlesFeedNode }) => {
+  const TagComponent = ({ node }: { node: FollowingTagsArticlesFeedNode }) => {
     if (!node || !node.tags || node.tags.length <= 0) {
       return null
     }
@@ -170,7 +170,7 @@ const TagsArticles = ({ tagIds }: { tagIds: string[] }) => {
 }
 
 const TagsFeed = () => {
-  const { data, loading, error } = useQuery<FollowTagsFeed>(FOLLOW_TAGS)
+  const { data, loading, error } = useQuery<FollowingTagsFeed>(FOLLOWING_TAGS)
 
   if (loading) {
     return <Spinner />
@@ -180,7 +180,7 @@ const TagsFeed = () => {
     return <QueryError error={error} />
   }
 
-  const { edges } = data?.viewer?.recommendation.followTags || {}
+  const { edges } = data?.viewer?.recommendation.followingTags || {}
 
   if (!edges || edges.length <= 0) {
     return <EmptyArticle />
