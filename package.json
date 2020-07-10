@@ -57,7 +57,7 @@
     "date-fns": "^2.14.0",
     "express": "^4.17.1",
     "fingerprintjs2": "^2.1.0",
-    "firebase": "^7.15.5",
+    "firebase": "^7.16.0",
     "formik": "^2.1.4",
     "graphql": "^14.7.0",
     "graphql-tag": "^2.10.4",
