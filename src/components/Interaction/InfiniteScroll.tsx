@@ -62,7 +62,7 @@ export const InfiniteScroll: React.FC<Props> = ({
     <div>
       {children}
       {hasNextPage && (
-        <Waypoint bottomOffset="-100%" onEnter={() => loadMore()}>
+        <Waypoint onEnter={loadMore}>
           <LoaderWithRef />
         </Waypoint>
       )}
