@@ -106,6 +106,7 @@ const SearchTags = ({ addTag }: { addTag: (tag: string) => void }) => {
             addTag={(tag: string) => {
               addTag(tag)
               setSearch('')
+              close()
             }}
           />
         }

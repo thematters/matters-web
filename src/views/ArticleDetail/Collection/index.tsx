@@ -1,16 +1,21 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import _uniq from 'lodash/uniq'
-import { useContext, useState } from 'react'
 
-import { Title, Translate, ViewerContext, ViewMoreButton } from '~/components'
+import {
+  ArticleDigestSidebar,
+  List,
+  Spinner,
+  Title,
+  Translate,
+  useResponsive,
+  ViewMoreButton,
+} from '~/components'
+import { QueryError } from '~/components/GQL'
 import articleFragments from '~/components/GQL/fragments/article'
 
-import { mergeConnections } from '~/common/utils'
+import { analytics, mergeConnections } from '~/common/utils'
 
-import CollectionList from './CollectionList'
-import EditButton from './EditButton'
-import EditingList from './EditingList'
 import styles from './styles.css'
 
 import { ArticleDetailPublic_article } from '../__generated__/ArticleDetailPublic'
@@ -30,17 +35,13 @@ const Collection: React.FC<{
   article: ArticleDetailPublic_article
   collectionCount?: number
 }> = ({ article, collectionCount }) => {
-  const viewer = useContext(ViewerContext)
-
-  const [editing, setEditing] = useState<boolean>(false)
-  const [editingArticles, setEditingArticles] = useState<any[]>([])
-
+  const isMediumUp = useResponsive('md-up')
   const { data, loading, error, fetchMore } = useQuery<CollectionListTypes>(
     COLLECTION_LIST,
     { variables: { mediaHash: article.mediaHash, first: 3 } }
   )
   const connectionPath = 'article.collection'
-  const { pageInfo } = data?.article?.collection || {}
+  const { edges, pageInfo } = data?.article?.collection || {}
   const loadAll = () =>
     fetchMore({
       variables: {
@@ -56,8 +57,17 @@ const Collection: React.FC<{
         }),
     })
 
-  const isAuthor = viewer.id === article.author.id
-  const canEdit = isAuthor && !viewer.isInactive
+  if (loading) {
+    return <Spinner />
+  }
+
+  if (error) {
+    return <QueryError error={error} />
+  }
+
+  if (!edges || !pageInfo) {
+    return null
+  }
 
   return (
     <section className="collection">
@@ -69,35 +79,29 @@ const Collection: React.FC<{
             {collectionCount}
           </span>
         </Title>
-
-        <section className="right">
-          {isAuthor && (
-            <EditButton
-              article={article}
-              canEdit={canEdit}
-              editing={editing}
-              setEditing={setEditing}
-              editingArticles={editingArticles}
-            />
-          )}
-        </section>
       </header>
 
-      {!editing && (
-        <CollectionList data={data} loading={loading} error={error} />
-      )}
+      <List spacing={['base', 0]} hasBorder={false}>
+        {edges.map(({ node, cursor }, i) => (
+          <List.Item key={cursor}>
+            <ArticleDigestSidebar
+              article={node}
+              hasCover={isMediumUp}
+              hasBackground
+              onClick={() =>
+                analytics.trackEvent('click_feed', {
+                  type: 'collection',
+                  styleType: 'small_cover',
+                  contentType: 'article',
+                  location: i,
+                })
+              }
+            />
+          </List.Item>
+        ))}
+      </List>
 
-      {editing && (
-        <EditingList
-          article={article}
-          editingArticles={editingArticles}
-          setEditingArticles={setEditingArticles}
-        />
-      )}
-
-      {!editing && pageInfo?.hasNextPage && (
-        <ViewMoreButton onClick={loadAll} />
-      )}
+      {pageInfo?.hasNextPage && <ViewMoreButton onClick={loadAll} />}
 
       <style jsx>{styles}</style>
     </section>

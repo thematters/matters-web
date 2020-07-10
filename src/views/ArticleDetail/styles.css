@@ -1,6 +1,11 @@
 .content {
   min-height: 100vh;
   padding: var(--spacing-base);
+
+  &.editing {
+    cursor: not-allowed;
+    opacity: 0.3;
+  }
 }
 
 .title {

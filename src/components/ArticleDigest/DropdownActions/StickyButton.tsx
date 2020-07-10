@@ -11,11 +11,11 @@ import { useMutation } from '~/components/GQL'
 import updateUserArticles from '~/components/GQL/updates/userArticles'
 
 import { StickyButtonArticle } from './__generated__/StickyButtonArticle'
-import { UpdateArticleInfo } from './__generated__/UpdateArticleInfo'
+import { ToggleSticky } from './__generated__/ToggleSticky'
 
-const UPDATE_ARTICLE_INFO = gql`
-  mutation UpdateArticleInfo($id: ID!, $sticky: Boolean!) {
-    updateArticleInfo(input: { id: $id, sticky: $sticky }) {
+const TOGGLE_STICKY = gql`
+  mutation ToggleSticky($id: ID!, $sticky: Boolean!) {
+    editArticle(input: { id: $id, sticky: $sticky }) {
       id
       sticky
     }
@@ -36,10 +36,10 @@ const fragments = {
 }
 
 const StickyButton = ({ article }: { article: StickyButtonArticle }) => {
-  const [update] = useMutation<UpdateArticleInfo>(UPDATE_ARTICLE_INFO, {
+  const [toggleSticky] = useMutation<ToggleSticky>(TOGGLE_STICKY, {
     variables: { id: article.id, sticky: !article.sticky },
     optimisticResponse: {
-      updateArticleInfo: {
+      editArticle: {
         id: article.id,
         sticky: !article.sticky,
         __typename: 'Article',
@@ -58,7 +58,7 @@ const StickyButton = ({ article }: { article: StickyButtonArticle }) => {
   return (
     <Menu.Item
       onClick={() => {
-        update()
+        toggleSticky()
       }}
     >
       {article.sticky ? (

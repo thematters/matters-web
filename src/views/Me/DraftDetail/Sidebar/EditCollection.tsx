@@ -1,31 +1,19 @@
 import { useQuery } from '@apollo/react-hooks'
-import classNames from 'classnames'
 import gql from 'graphql-tag'
 import _uniq from 'lodash/uniq'
-import dynamic from 'next/dynamic'
 
-import { ArticleDigestDropdown, Spinner, Translate } from '~/components'
+import { ArticleDigestDropdown, Spinner } from '~/components'
+import SidebarCollection from '~/components/Editor/Sidebar/Collection'
 import { QueryError, useMutation } from '~/components/GQL'
 
-import Collapsable from '../Collapsable'
-import styles from './styles.css'
-
 import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
-import { CollectArticlesDraft } from './__generated__/CollectArticlesDraft'
 import { DraftCollectionQuery } from './__generated__/DraftCollectionQuery'
+import { EditCollectionDraft } from './__generated__/EditCollectionDraft'
 import { SetDraftCollection } from './__generated__/SetDraftCollection'
-
-const DynamicCollectionEditor = dynamic(
-  () => import('~/components/CollectionEditor'),
-  {
-    ssr: false,
-    loading: Spinner,
-  }
-)
 
 const fragments = {
   draft: gql`
-    fragment CollectArticlesDraft on Draft {
+    fragment EditCollectionDraft on Draft {
       id
       publishState
       collection(input: { first: 0 }) {
@@ -69,20 +57,17 @@ const SET_DRAFT_COLLECTION = gql`
   ${ArticleDigestDropdown.fragments.article}
 `
 
-interface CollectArticlesProps {
-  draft: CollectArticlesDraft
+interface EditCollectionProps {
+  draft: EditCollectionDraft
   setSaveStatus: (status: 'saved' | 'saving' | 'saveFailed') => void
 }
 
-const CollectArticles = ({ draft, setSaveStatus }: CollectArticlesProps) => {
+const EditCollection = ({ draft, setSaveStatus }: EditCollectionProps) => {
   const draftId = draft.id
   const isPending = draft.publishState === 'pending'
   const isPublished = draft.publishState === 'published'
-  const containerClasses = classNames({
-    container: true,
-    'u-area-disable': isPending || isPublished,
-  })
-  const handleCollectionChange = () => async (
+
+  const handleCollectionChange = async (
     articles: ArticleDigestDropdownArticle[]
   ) => {
     setSaveStatus('saving')
@@ -113,34 +98,23 @@ const CollectArticles = ({ draft, setSaveStatus }: CollectArticlesProps) => {
     data.node.collection &&
     data.node.collection.edges
 
+  if (loading) {
+    return <Spinner />
+  }
+
+  if (error) {
+    return <QueryError error={error} />
+  }
+
   return (
-    <Collapsable
-      title={<Translate id="extend" />}
-      defaultCollapsed={draft.collection.totalCount <= 0}
-    >
-      <p className="intro">
-        <Translate
-          zh_hant="關聯自己或他人的作品，幫助讀者更好地發現內容。"
-          zh_hans="关联自己或他人的作品，帮助读者更好地发现内容。"
-        />
-      </p>
-
-      <section className={containerClasses}>
-        {loading && <Spinner />}
-
-        {error && <QueryError error={error} />}
-
-        <DynamicCollectionEditor
-          articles={(edges && edges.map(({ node }) => node)) || []}
-          onEdit={handleCollectionChange()}
-        />
-      </section>
-
-      <style jsx>{styles}</style>
-    </Collapsable>
+    <SidebarCollection
+      articles={(edges && edges.map(({ node }) => node)) || []}
+      onEdit={handleCollectionChange}
+      disabled={isPending || isPublished}
+    />
   )
 }
 
-CollectArticles.fragments = fragments
+EditCollection.fragments = fragments
 
-export default CollectArticles
+export default EditCollection

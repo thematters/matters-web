@@ -29,6 +29,7 @@ import { getQuery } from '~/common/utils'
 
 import Collection from './Collection'
 import Content from './Content'
+import EditMode from './EditMode'
 import FingerprintButton from './FingerprintButton'
 import {
   ARTICLE_DETAIL_PRIVATE,
@@ -43,6 +44,7 @@ import Toolbar from './Toolbar'
 import TranslationButton from './TranslationButton'
 import Wall from './Wall'
 
+import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import { ArticleDetailPublic } from './__generated__/ArticleDetailPublic'
 import { ArticleTranslation } from './__generated__/ArticleTranslation'
@@ -84,17 +86,17 @@ const ArticleDetail = () => {
   const shouldShowWall = !viewer.isAuthed && wall
 
   // public data
-  const { data, loading, error, client } = useQuery<ArticleDetailPublic>(
-    ARTICLE_DETAIL_PUBLIC,
-    {
-      variables: { mediaHash },
-    }
-  )
+  const { data, loading, error, client, refetch: refetchPublic } = useQuery<
+    ArticleDetailPublic
+  >(ARTICLE_DETAIL_PUBLIC, {
+    variables: { mediaHash },
+  })
 
   const article = data?.article
   const authorId = article?.author?.id
   const collectionCount = article?.collection?.totalCount || 0
   const isAuthor = viewer.id === authorId
+  const canEdit = isAuthor && !viewer.isInactive
 
   // fetch private data
   useEffect(() => {
@@ -149,15 +151,26 @@ const ArticleDetail = () => {
     )
   }
 
-  /**
-   * Render
-   */
+  // edit mode
+  const [editMode, setEditMode] = useState(false)
+  const [editModeTags, setEditModeTags] = useState<string[]>([])
+  const [editModeCollection, setEditModeCollection] = useState<
+    ArticleDigestDropdownArticle[]
+  >([])
+  const onEditSaved = () => {
+    setEditMode(false)
+    refetchPublic()
+  }
+
   useEffect(() => {
     if (shouldShowWall && window.location.hash && article) {
       jump('#comments', { offset: -10 })
     }
   }, [mediaHash])
 
+  /**
+   * Render:Loading
+   */
   if (loading) {
     return (
       <EmptyLayout>
@@ -166,6 +179,9 @@ const ArticleDetail = () => {
     )
   }
 
+  /**
+   * Render:Error
+   */
   if (error) {
     return (
       <EmptyLayout>
@@ -174,6 +190,9 @@ const ArticleDetail = () => {
     )
   }
 
+  /**
+   * Render:404
+   */
   if (!article) {
     return (
       <EmptyLayout>
@@ -182,6 +201,9 @@ const ArticleDetail = () => {
     )
   }
 
+  /**
+   * Render:Archived/Banned
+   */
   if (article.state !== 'active' && viewer.id !== authorId) {
     return (
       <EmptyLayout>
@@ -207,6 +229,53 @@ const ArticleDetail = () => {
     )
   }
 
+  /**
+   * Render:Edit Mode
+   */
+  if (editMode) {
+    return (
+      <Layout.Main
+        aside={
+          <EditMode.Sidebar
+            mediaHash={mediaHash}
+            editModeTags={editModeTags}
+            setEditModeTags={setEditModeTags}
+            editModeCollection={editModeCollection}
+            setEditModeCollection={setEditModeCollection}
+          />
+        }
+        keepAside
+      >
+        <Layout.Header
+          right={
+            <EditMode.Header
+              id={article.id}
+              mediaHash={mediaHash}
+              editModeTags={editModeTags}
+              editModeCollection={editModeCollection}
+              onEditSaved={onEditSaved}
+            />
+          }
+        />
+
+        <section className="content editing">
+          <section className="title">
+            <Title type="article">
+              {translate && titleTranslation ? titleTranslation : article.title}
+            </Title>
+          </section>
+
+          <Content article={article} />
+        </section>
+
+        <style jsx>{styles}</style>
+      </Layout.Main>
+    )
+  }
+
+  /**
+   * Render
+   */
   return (
     <Layout.Main aside={<RelatedArticles article={article} inSidebar />}>
       <Layout.Header
@@ -272,7 +341,7 @@ const ArticleDetail = () => {
             }}
           /> */}
 
-          {(collectionCount > 0 || isAuthor) && (
+          {collectionCount > 0 && (
             <section className="block">
               <Collection article={article} collectionCount={collectionCount} />
             </section>
@@ -298,7 +367,17 @@ const ArticleDetail = () => {
           )}
         </section>
 
-        <Toolbar article={article} />
+        <Toolbar
+          article={article}
+          editArticle={
+            canEdit
+              ? () => {
+                  setEditMode(true)
+                  jump(document.body)
+                }
+              : undefined
+          }
+        />
 
         {shouldShowWall && (
           <>

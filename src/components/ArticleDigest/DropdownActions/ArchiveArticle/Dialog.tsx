@@ -12,7 +12,7 @@ import { ArchiveArticleArticle } from './__generated__/ArchiveArticleArticle'
 
 const ARCHIVE_ARTICLE = gql`
   mutation ArchiveArticle($id: ID!) {
-    archiveArticle(input: { id: $id }) {
+    editArticle(input: { id: $id, state: archived }) {
       id
       articleState: state
       sticky
@@ -36,7 +36,7 @@ const ArchiveArticleDialog = ({
   const [archiveArticle] = useMutation<ArchiveArticle>(ARCHIVE_ARTICLE, {
     variables: { id: article.id },
     optimisticResponse: {
-      archiveArticle: {
+      editArticle: {
         id: article.id,
         articleState: 'archived' as any,
         sticky: false,
