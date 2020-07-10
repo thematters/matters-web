@@ -8,6 +8,7 @@ import { useContext, useState } from 'react'
 
 import {
   EmptyTag,
+  Expandable,
   Head,
   Layout,
   PullToRefresh,
@@ -15,6 +16,7 @@ import {
   Spinner,
   Tabs,
   Throw404,
+  Title,
   Translate,
   ViewerContext,
 } from '~/components'
@@ -24,9 +26,12 @@ import { UserDigest } from '~/components/UserDigest'
 import { ERROR_CODES } from '~/common/enums'
 import { getQuery } from '~/common/utils'
 
+import { TagDetailArticles } from './Articles'
+import ArticlesCount from './ArticlesCount'
+import { TagDetailButtons } from './Buttons'
+import DropdownActions from './DropdownActions'
+import Followers from './Followers'
 import styles from './styles.css'
-import { TagDetailArticles } from './TagDetailArticles'
-import { TagDetailButtons } from './TagDetailButtons'
 
 import { TagDetail as TagDetailType } from './__generated__/TagDetail'
 
@@ -48,10 +53,12 @@ const TAG_DETAIL = gql`
         articles(input: { first: 0, selected: true }) {
           totalCount
         }
+        ...FollowButtonTag
       }
     }
   }
   ${UserDigest.Mini.fragments.user}
+  ${TagDetailButtons.FollowButton.fragments.tag}
 `
 
 type TagFeed = 'latest' | 'selected'
@@ -76,15 +83,19 @@ const TagDetail = ({ data }: { data: TagDetailType }) => {
     setFeed('latest')
   }
 
+  const filter = ({ displayName }: any) =>
+    (displayName || '').toLowerCase() !== 'matty'
   const editors = data.node.editors || []
-  const maintainer = _find(
-    editors,
-    (editor) => (editor.displayName || '').toLowerCase() !== 'matty'
-  )
+  const owner = _find(editors, filter)
+
+  // define permission
+  const normalEditors = editors.filter(filter)
   const isEditor = _some(editors, (editor) => editor.id === viewer.id)
   const isCreator = data.node.creator?.id === viewer.id
-  const canEdit =
-    isEditor || isCreator || viewer.info.email === 'hi@matters.news'
+  const isMaintainer =
+    isEditor ||
+    (normalEditors.length === 0 && isCreator) ||
+    viewer.info.email === 'hi@matters.news'
 
   return (
     <Layout.Main>
@@ -92,21 +103,14 @@ const TagDetail = ({ data }: { data: TagDetailType }) => {
         left={<Layout.Header.BackButton />}
         right={
           <>
-            <Layout.Header.Title
-              zh_hant={`#${data.node.content}`}
-              zh_hans={`#${data.node.content}`}
-            />
+            <Layout.Header.Title id="tag" />
 
-            {canEdit && (
-              <section className="buttons">
-                <TagDetailButtons.AddArticleButton id={data.node.id} />
-                <TagDetailButtons.EditTagButton
-                  id={data.node.id}
-                  content={data.node.content}
-                  description={data.node.description || undefined}
-                />
-              </section>
-            )}
+            <DropdownActions
+              id={data.node.id}
+              content={data.node.content}
+              description={data.node.description || undefined}
+              isMaintainer={isMaintainer}
+            />
           </>
         }
       />
@@ -116,23 +120,42 @@ const TagDetail = ({ data }: { data: TagDetailType }) => {
       <PullToRefresh>
         <Spacer />
 
-        {maintainer && (
-          <section className="maintainer">
-            <UserDigest.Mini
-              user={maintainer}
-              avatarSize="xs"
-              hasAvatar
-              hasDisplayName
-            />
-            <span>
-              <Translate zh_hant="主理" zh_hans="主理" />
-            </span>
-          </section>
-        )}
+        <section className="info">
+          {owner && (
+            <section className="owner">
+              <UserDigest.Mini
+                user={owner}
+                avatarSize="xs"
+                hasAvatar
+                hasDisplayName
+              />
+              <span>
+                <Translate zh_hant="主理" zh_hans="主理" />
+              </span>
+            </section>
+          )}
 
-        {data.node.description && (
-          <p className="description">{data.node.description}</p>
-        )}
+          <Title type="tag">#{data.node.content}</Title>
+
+          {data.node.description && (
+            <Expandable>
+              <p className="description">{data.node.description}</p>
+            </Expandable>
+          )}
+
+          <section className="statistics">
+            <Followers id={data.node.id} />
+            <ArticlesCount id={data.node.id} />
+          </section>
+
+          <section className="buttons">
+            <TagDetailButtons.FollowButton tag={data.node} />
+            <TagDetailButtons.AddButton
+              tag={data.node}
+              isMaintainer={isMaintainer}
+            />
+          </section>
+        </section>
 
         <Tabs>
           {hasSelected > 0 && (

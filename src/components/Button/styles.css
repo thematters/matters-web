@@ -21,6 +21,10 @@ span.container {
   color: var(--color-matters-green);
 }
 
+.text-gold {
+  color: var(--color-matters-gold);
+}
+
 .text-red {
   color: var(--color-red);
 }
@@ -313,6 +317,16 @@ span.container {
     & .hotarea {
       color: var(--color-white);
       background: var(--color-matters-green);
+    }
+  }
+}
+
+.bg-active-gold {
+  &:hover,
+  &:focus {
+    & .hotarea {
+      color: var(--color-white);
+      background: var(--color-matters-gold);
     }
   }
 }

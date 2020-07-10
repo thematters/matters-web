@@ -1,13 +1,14 @@
-.buttons {
-  & :global(> * + *) {
-    margin-left: var(--spacing-base);
-  }
+.info {
+  @mixin border-bottom-grey;
+
+  padding: 0 var(--spacing-base) var(--spacing-loose);
+  margin-bottom: var(--spacing-x-tight);
 }
 
-.maintainer {
+.owner {
   @mixin flex-center-start;
 
-  padding: 0 var(--spacing-base) var(--spacing-base);
+  padding: 0 0 var(--spacing-base);
 
   & span {
     margin-left: var(--spacing-x-tight);
@@ -17,8 +18,19 @@
 }
 
 .description {
-  padding: 0 var(--spacing-base);
-  font-size: var(--font-size-sm);
+  padding-top: 1rem;
+  font-size: var(--font-size-md-s);
+  line-height: 1.33333333;
   color: var(--color-grey-darker);
   white-space: pre-wrap;
+}
+
+.statistics {
+  @mixin flex-center-space-between;
+}
+
+.buttons {
+  @mixin flex-center-space-between;
+
+  padding-top: 1rem;
 }

@@ -18,7 +18,9 @@ import { SetTagUnselectedButtonArticle } from './__generated__/SetTagUnselectedB
 
 const SET_TAG_UNSELECTED = gql`
   mutation SetTagUnselected($id: ID!, $articles: [ID!]) {
-    putArticlesTags(input: { id: $id, articles: $articles, selected: false }) {
+    updateArticlesTags(
+      input: { id: $id, articles: $articles, isSelected: false }
+    ) {
       id
       articles(input: { first: 0, selected: true }) {
         totalCount
