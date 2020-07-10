@@ -7,7 +7,7 @@ import _sortBy from 'lodash/sortBy'
 
 import {
   ArticleDigestFeed,
-  EmptyArticle,
+  EmptyFollowingTag,
   InfiniteScroll,
   List,
   Spinner,
@@ -94,7 +94,7 @@ const TagsArticles = ({ tagIds }: { tagIds: string[] }) => {
     data?.viewer?.recommendation.followingTagsArticles || {}
 
   if (!edges || edges.length <= 0 || !pageInfo) {
-    return <EmptyArticle />
+    return <EmptyFollowingTag />
   }
 
   const loadMore = () => {
@@ -183,7 +183,7 @@ const TagsFeed = () => {
   const { edges } = data?.viewer?.recommendation.followingTags || {}
 
   if (!edges || edges.length <= 0) {
-    return <EmptyArticle />
+    return <EmptyFollowingTag />
   }
 
   const tagIds = edges.map(({ node }) => node.id)
