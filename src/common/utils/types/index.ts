@@ -54,6 +54,7 @@ export default gql`
   enum FollowFeedType {
     article
     comment
+    tag
   }
 
   enum ViewMode {

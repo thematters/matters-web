@@ -20,6 +20,7 @@
 export * from './withIcon'
 
 export * from './IconAdd'
+export * from './IconAddMedium'
 export * from './IconAppreciationMAX'
 export * from './IconArchiveMedium'
 export * from './IconAvatarLogo'

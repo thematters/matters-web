@@ -54,7 +54,10 @@ type ButtonColor =
   | 'gold'
   | 'red'
 
-type ButtonTextColor = Extract<ButtonColor, 'white' | 'black' | 'green' | 'red'>
+type ButtonTextColor = Extract<
+  ButtonColor,
+  'white' | 'black' | 'green' | 'gold' | 'red'
+>
 
 export type ButtonBgColor = Extract<
   ButtonColor,
@@ -70,7 +73,12 @@ export type ButtonBgColor = Extract<
 
 type ButtonBgActiveColor = Extract<
   ButtonColor,
-  'grey-lighter' | 'green-lighter' | 'grey-lighter-active' | 'green' | 'red'
+  | 'grey-lighter'
+  | 'green-lighter'
+  | 'grey-lighter-active'
+  | 'green'
+  | 'gold'
+  | 'red'
 >
 
 export interface ButtonProps {

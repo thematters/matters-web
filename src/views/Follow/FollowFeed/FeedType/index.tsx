@@ -1,6 +1,6 @@
 import { Tabs, Translate } from '~/components'
 
-export type FollowFeedType = 'article' | 'comment'
+export type FollowFeedType = 'article' | 'comment' | 'tag'
 
 interface FeedTypeProps {
   type: FollowFeedType
@@ -10,6 +10,7 @@ interface FeedTypeProps {
 const FeedType: React.FC<FeedTypeProps> = ({ type, setFeedType }) => {
   const isArticle = type === 'article'
   const isComment = type === 'comment'
+  const isTag = type === 'tag'
 
   return (
     <Tabs>
@@ -19,6 +20,10 @@ const FeedType: React.FC<FeedTypeProps> = ({ type, setFeedType }) => {
 
       <Tabs.Tab onClick={() => setFeedType('comment')} selected={isComment}>
         <Translate id="comment" />
+      </Tabs.Tab>
+
+      <Tabs.Tab onClick={() => setFeedType('tag')} selected={isTag}>
+        <Translate id="tag" />
       </Tabs.Tab>
     </Tabs>
   )
