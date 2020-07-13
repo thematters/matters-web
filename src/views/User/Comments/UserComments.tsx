@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
+import _flatten from 'lodash/flatten'
 import { useRouter } from 'next/router'
+import { useContext, useEffect } from 'react'
 
 import {
   ArticleDigestTitle,
@@ -12,6 +13,7 @@ import {
   List,
   Spinner,
   usePullToRefresh,
+  ViewerContext,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
@@ -24,66 +26,16 @@ import {
 
 import IMAGE_LOGO_192 from '@/public/static/icon-192x192.png?url'
 
-import UserTabs from '../../UserTabs'
+import UserTabs from '../UserTabs'
+import { USER_COMMENTS_PRIVATE, USER_COMMENTS_PUBLIC, USER_ID } from './gql'
 
 import {
-  UserCommentFeed,
-  UserCommentFeed_node_User_commentedArticles_edges_node_comments_edges_node,
-} from './__generated__/UserCommentFeed'
+  UserCommentsPublic,
+  UserCommentsPublic_node_User_commentedArticles_edges_node_comments_edges_node,
+} from './__generated__/UserCommentsPublic'
 import { UserIdUser } from './__generated__/UserIdUser'
 
-const USER_ID = gql`
-  query UserIdUser($userName: String!) {
-    user(input: { userName: $userName }) {
-      id
-      displayName
-      info {
-        description
-      }
-      status {
-        state
-      }
-    }
-  }
-`
-
-const USER_COMMENT_FEED = gql`
-  query UserCommentFeed($id: ID!, $after: String) {
-    node(input: { id: $id }) {
-      ... on User {
-        id
-        commentedArticles(input: { first: 5, after: $after }) {
-          pageInfo {
-            startCursor
-            endCursor
-            hasNextPage
-          }
-          edges {
-            cursor
-            node {
-              id
-              ...ArticleDigestTitleArticle
-              comments(input: { filter: { author: $id }, first: null }) {
-                edges {
-                  cursor
-                  node {
-                    ...FeedCommentPublic
-                    ...FeedCommentPrivate
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-  ${ArticleDigestTitle.fragments.article}
-  ${Comment.Feed.fragments.comment.public}
-  ${Comment.Feed.fragments.comment.private}
-`
-
-const UserCommentsWrap = () => {
+const UserComments = () => {
   const router = useRouter()
   const userName = getQuery({ router, key: 'userName' })
 
@@ -115,18 +67,80 @@ const UserCommentsWrap = () => {
         image={IMAGE_LOGO_192}
       />
       <UserTabs />
-      <UserComments user={user} />
+      <BaseUserComments user={user} />
     </>
   )
 }
 
-const UserComments = ({ user }: UserIdUser) => {
-  const { data, loading, error, fetchMore, refetch } = useQuery<
-    UserCommentFeed
-  >(USER_COMMENT_FEED, {
+const BaseUserComments = ({ user }: UserIdUser) => {
+  const viewer = useContext(ViewerContext)
+
+  /**
+   * Data Fetching
+   */
+  // public data
+  const { data, loading, error, fetchMore, refetch, client } = useQuery<
+    UserCommentsPublic
+  >(USER_COMMENTS_PUBLIC, {
     variables: { id: user?.id },
   })
 
+  // pagination
+  const connectionPath = 'node.commentedArticles'
+  const { edges, pageInfo } =
+    (data?.node?.__typename === 'User' &&
+      data.node.commentedArticles &&
+      data.node.commentedArticles) ||
+    {}
+
+  // private data
+  const loadPrivate = (publicData?: UserCommentsPublic) => {
+    if (!viewer.id || !publicData || !user) {
+      return
+    }
+
+    const articles =
+      publicData?.node?.__typename === 'User'
+        ? publicData.node.commentedArticles.edges || []
+        : []
+
+    const publiceNodes = _flatten(
+      articles.map(({ node }) =>
+        (node.comments.edges || []).map(({ node: comment }) => comment)
+      )
+    )
+    const publicIds = publiceNodes.map((comment) => comment.id)
+
+    client.query({
+      query: USER_COMMENTS_PRIVATE,
+      fetchPolicy: 'network-only',
+      variables: { ids: publicIds },
+    })
+  }
+
+  // fetch private data for first page
+  useEffect(() => {
+    loadPrivate(data)
+  }, [user?.id, viewer.id])
+
+  // load next page
+  const loadMore = async () => {
+    const { data: newData } = await fetchMore({
+      variables: {
+        after: pageInfo?.endCursor,
+      },
+      updateQuery: (previousResult, { fetchMoreResult }) =>
+        mergeConnections({
+          oldData: previousResult,
+          newData: fetchMoreResult,
+          path: connectionPath,
+        }),
+    })
+
+    loadPrivate(newData)
+  }
+
+  // pull to refresh
   usePullToRefresh.Register()
   usePullToRefresh.Handler(refetch)
 
@@ -142,31 +156,9 @@ const UserComments = ({ user }: UserIdUser) => {
     return <QueryError error={error} />
   }
 
-  const connectionPath = 'node.commentedArticles'
-  const { edges, pageInfo } =
-    (data &&
-      data.node &&
-      data.node.__typename === 'User' &&
-      data.node.commentedArticles &&
-      data.node.commentedArticles) ||
-    {}
-
   if (!edges || edges.length <= 0 || !pageInfo) {
     return <EmptyComment />
   }
-
-  const loadMore = () =>
-    fetchMore({
-      variables: {
-        after: pageInfo.endCursor,
-      },
-      updateQuery: (previousResult, { fetchMoreResult }) =>
-        mergeConnections({
-          oldData: previousResult,
-          newData: fetchMoreResult,
-          path: connectionPath,
-        }),
-    })
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
@@ -175,7 +167,7 @@ const UserComments = ({ user }: UserIdUser) => {
           const commentEdges = articleEdge.node.comments.edges
           const filteredComments = filterComments(
             (commentEdges || []).map(({ node }) => node)
-          ) as UserCommentFeed_node_User_commentedArticles_edges_node_comments_edges_node[]
+          ) as UserCommentsPublic_node_User_commentedArticles_edges_node_comments_edges_node[]
 
           if (filteredComments.length <= 0) {
             return null
@@ -219,4 +211,4 @@ const UserComments = ({ user }: UserIdUser) => {
   )
 }
 
-export default UserCommentsWrap
+export default UserComments
