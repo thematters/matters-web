@@ -28,7 +28,7 @@ const update = ({
   // FIXME: circular dependencies
   const {
     USER_ARTICLES_PUBLIC,
-  } = require('~/components/GQL/queries/userArticlesPublic').default
+  } = require('~/components/GQL/queries/userArticles').default
 
   if (!userName) {
     return
