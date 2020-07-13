@@ -17,7 +17,7 @@ import InactiveState from './InactiveState'
 import styles from './styles.css'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
-import { ArticleDigestFeedArticle } from './__generated__/ArticleDigestFeedArticle'
+import { ArticleDigestFeedArticlePublic } from './__generated__/ArticleDigestFeedArticlePublic'
 
 export type ArticleDigestFeedControls = {
   onClick?: () => any
@@ -26,7 +26,7 @@ export type ArticleDigestFeedControls = {
 } & FooterActionsControls
 
 type ArticleDigestFeedProps = {
-  article: ArticleDigestFeedArticle
+  article: ArticleDigestFeedArticlePublic
 } & ArticleDigestFeedControls
 
 const fragments = {

@@ -10,12 +10,12 @@ import Appreciation from './Appreciation'
 import ResponseCount from './ResponseCount'
 import styles from './styles.css'
 
-import { FooterActionsArticle } from './__generated__/FooterActionsArticle'
+import { FooterActionsArticlePublic } from './__generated__/FooterActionsArticlePublic'
 
 export type FooterActionsControls = DropdownActionsControls
 
 type FooterActionsProps = {
-  article: FooterActionsArticle
+  article: FooterActionsArticlePublic
 } & FooterActionsControls
 
 const fragments = {
