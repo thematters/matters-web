@@ -30,33 +30,44 @@ type ArticleDigestFeedProps = {
 } & ArticleDigestFeedControls
 
 const fragments = {
-  article: gql`
-    fragment ArticleDigestFeedArticle on Article {
-      id
-      title
-      slug
-      mediaHash
-      articleState: state
-      cover
-      summary
-      author {
+  article: {
+    public: gql`
+      fragment ArticleDigestFeedArticlePublic on Article {
         id
-        userName
-        ...UserDigestMiniUser
+        title
+        slug
+        mediaHash
+        articleState: state
+        cover
+        summary
+        author {
+          id
+          userName
+          ...UserDigestMiniUser
+        }
+        ...CreatedAtArticle
+        ...InactiveStateArticle
+        ...ArticleDigestTitleArticle
+        ...DropdownActionsArticle
+        ...FooterActionsArticlePublic
+        ...FooterActionsArticlePrivate
       }
-      ...CreatedAtArticle
-      ...InactiveStateArticle
-      ...ArticleDigestTitleArticle
-      ...FooterActionsArticle
-      ...DropdownActionsArticle
-    }
-    ${UserDigest.Mini.fragments.user}
-    ${CreatedAt.fragments.article}
-    ${InactiveState.fragments.article}
-    ${ArticleDigestTitle.fragments.article}
-    ${FooterActions.fragments.article}
-    ${DropdownActions.fragments.article}
-  `,
+      ${UserDigest.Mini.fragments.user}
+      ${CreatedAt.fragments.article}
+      ${InactiveState.fragments.article}
+      ${ArticleDigestTitle.fragments.article}
+      ${DropdownActions.fragments.article}
+      ${FooterActions.fragments.article.public}
+      ${FooterActions.fragments.article.private}
+    `,
+    private: gql`
+      fragment ArticleDigestFeedArticlePrivate on Article {
+        id
+        ...FooterActionsArticlePrivate
+      }
+      ${FooterActions.fragments.article.private}
+    `,
+  },
 }
 
 const BaseArticleDigestFeed = ({

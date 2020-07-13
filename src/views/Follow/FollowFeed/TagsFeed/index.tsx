@@ -64,7 +64,8 @@ const FOLLOWING_TAGS_ARTICLES = gql`
                   ...DigestTag
                   createdAt
                 }
-                ...ArticleDigestFeedArticle
+                ...ArticleDigestFeedArticlePublic
+                ...ArticleDigestFeedArticlePrivate
               }
             }
           }
@@ -72,7 +73,8 @@ const FOLLOWING_TAGS_ARTICLES = gql`
       }
     }
   }
-  ${ArticleDigestFeed.fragments.article}
+  ${ArticleDigestFeed.fragments.article.public}
+  ${ArticleDigestFeed.fragments.article.private}
   ${Tag.fragments.tag}
 `
 

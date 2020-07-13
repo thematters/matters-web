@@ -26,7 +26,9 @@ const update = ({
   type: 'sticky' | 'unsticky' | 'archive'
 }) => {
   // FIXME: circular dependencies
-  const USER_ARTICLES = require('~/components/GQL/queries/userArticles').default
+  const {
+    USER_ARTICLES_PUBLIC,
+  } = require('~/components/GQL/queries/userArticles').default
 
   if (!userName) {
     return
@@ -34,7 +36,7 @@ const update = ({
 
   try {
     const data = cache.readQuery<UserArticles>({
-      query: USER_ARTICLES,
+      query: USER_ARTICLES_PUBLIC,
       variables: { userName },
     })
 
@@ -72,7 +74,7 @@ const update = ({
     }
 
     cache.writeQuery({
-      query: USER_ARTICLES,
+      query: USER_ARTICLES_PUBLIC,
       variables: { userName },
       data: {
         user: {

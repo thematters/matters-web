@@ -58,11 +58,13 @@ const feedFragment = gql`
     edges {
       cursor
       node {
-        ...ArticleDigestFeedArticle
+        ...ArticleDigestFeedArticlePublic
+        ...ArticleDigestFeedArticlePrivate
       }
     }
   }
-  ${ArticleDigestFeed.fragments.article}
+  ${ArticleDigestFeed.fragments.article.public}
+  ${ArticleDigestFeed.fragments.article.private}
 `
 
 export const queries = {

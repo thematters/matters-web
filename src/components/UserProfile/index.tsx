@@ -57,7 +57,7 @@ export const UserProfile = () => {
         userName,
       },
     })
-  }, [userName, viewer.id, user])
+  }, [user?.id, viewer.id])
 
   /**
    * Render

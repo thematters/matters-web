@@ -30,13 +30,15 @@ const SEARCH_ARTICLES = gql`
         cursor
         node {
           ... on Article {
-            ...ArticleDigestFeedArticle
+            ...ArticleDigestFeedArticlePublic
+            ...ArticleDigestFeedArticlePrivate
           }
         }
       }
     }
   }
-  ${ArticleDigestFeed.fragments.article}
+  ${ArticleDigestFeed.fragments.article.public}
+  ${ArticleDigestFeed.fragments.article.private}
 `
 
 const SearchArticles = () => {
