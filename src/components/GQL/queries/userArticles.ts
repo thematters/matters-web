@@ -11,8 +11,7 @@ export default gql`
         description
         profileCover
       }
-      articles(input: { first: 10, after: $after })
-        @connection(key: "userArticles") {
+      articles(input: { first: 10, after: $after }) {
         totalCount
         pageInfo {
           startCursor
