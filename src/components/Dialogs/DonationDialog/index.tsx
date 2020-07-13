@@ -1,10 +1,10 @@
 import gql from 'graphql-tag'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import { Dialog, PaymentForm, Translate, ViewerContext } from '~/components'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
-import { numRound } from '~/common/utils'
+import { analytics, numRound } from '~/common/utils'
 
 import { AddCredit_addCredit_transaction as AddCreditTx } from '~/components/Forms/PaymentForm/AddCredit/__generated__/AddCredit'
 import { PayTo_payTo_transaction as PayToTx } from '~/components/GQL/mutations/__generated__/PayTo'
@@ -152,20 +152,43 @@ const BaseDonationDialog = ({
     </Dialog.Footer.Button>
   )
 
+  /**
+   * Add Credit
+   */
+  // add credit when credit not enough
   const isAddCredit = step === 'addCredit'
   const isAddCreditComplete = step === 'addCreditComplete'
   const isAddCreditProcessing = step === 'addCreditProcessing'
+  // stripe elements
   const isCheckout = step === 'checkout'
-  const isComplete = step === 'complete'
-  const isConfirm = step === 'confirm'
-  const isPasswordInvalid = step === 'passwordInvalid'
+  // processing
   const isProcessing = step === 'processing'
+
+  /**
+   * Donation
+   */
+  // complete dialog for donation
+  const isComplete = step === 'complete'
+  // set donation amount
+  const isSetAmount = step === 'setAmount'
+  // confirm donation amount
+  const isConfirm = step === 'confirm'
+
+  /**
+   * Password
+   */
+  // wrong password
+  const isPasswordInvalid = step === 'passwordInvalid'
   const isResetPasswordComplete = step === 'resetPasswordComplete'
   const isResetPasswordConfirm = step === 'resetPasswordConfirm'
   const isResetPasswordRequest = step === 'resetPasswordRequest'
-  const isSetAmount = step === 'setAmount'
   const isSetPaymentPassword = step === 'setPaymentPassword'
+
   const isHKD = currency === CURRENCY.HKD
+
+  useEffect(() => {
+    analytics.trackEvent('view_add_credit_dialog', { step })
+  }, [step])
 
   return (
     <>

@@ -25,6 +25,7 @@ type EventArgs =
   | ['load_more', LoadMoreProp]
   | ['share', ShareProp]
   | ['purchase', PurchaseProp]
+  | ['view_add_credit_dialog', ViewDialogProp]
 
 type ClickFeedProp =
   | ArticleFeedProp
@@ -68,6 +69,10 @@ interface PurchaseProp {
   amount: number | undefined
   success: boolean
   message?: string
+}
+
+interface ViewDialogProp {
+  step: string
 }
 
 interface ArticleFeedProp {
