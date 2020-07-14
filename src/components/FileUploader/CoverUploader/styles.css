@@ -1,0 +1,38 @@
+.uploader {
+  position: relative;
+  display: block;
+  font-size: 0;
+
+  & .mask {
+    @mixin expand-to-container;
+    @mixin flex-center-all;
+
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  & .delete {
+    position: absolute;
+    right: var(--spacing-base);
+    bottom: var(--spacing-base);
+  }
+}
+
+.cover {
+  position: relative;
+
+  & :global(img) {
+    @mixin object-fit-cover;
+
+    background-color: var(--color-grey-lighter);
+  }
+
+  &::after {
+    display: block;
+    padding-bottom: 46.93%;
+    content: '';
+
+    @media (--sm-up) {
+      padding-bottom: 30.14%;
+    }
+  }
+}

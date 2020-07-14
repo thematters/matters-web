@@ -16,6 +16,7 @@ import { TEXT } from '~/common/enums'
 interface DropdownActionsProps {
   id: string
   content?: string
+  cover?: string
   description?: string
   isMaintainer: boolean
 }

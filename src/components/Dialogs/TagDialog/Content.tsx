@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import { useContext } from 'react'
 
 import {
+  CoverUploader,
   Dialog,
   Form,
   LanguageContext,
@@ -27,10 +28,11 @@ import styles from './styles.css'
 import { PutTag } from './__generated__/PutTag'
 
 const PUT_TAG = gql`
-  mutation PutTag($id: ID, $content: String, $description: String) {
-    putTag(input: { id: $id, content: $content, description: $description }) {
+  mutation PutTag($input: PutTagInput!) {
+    putTag(input: $input) {
       id
       content
+      cover
       description
     }
   }
@@ -104,18 +106,23 @@ const DropdownListWithDefaultItem = (props: DropdownListBaseProps) => {
 interface TagDialogContentProps {
   id?: string
   content?: string
+  cover?: string
   description?: string
   closeDialog: () => void
 }
 
 interface FormValues {
   newContent: string
+  newCover?: string
   newDescription: string
 }
+
+const UNCHANGED_FIELD = 'UNCHANGED_FIELD'
 
 const TagDialogContent: React.FC<TagDialogContentProps> = ({
   id,
   content,
+  cover,
   description,
   closeDialog,
 }) => {
@@ -137,6 +144,7 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
   } = useFormik<FormValues>({
     initialValues: {
       newContent: content || '',
+      newCover: UNCHANGED_FIELD,
       newDescription: description || '',
     },
     validate: ({ newContent }) => {
@@ -151,12 +159,19 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
       }
     },
     onSubmit: async (
-      { newContent, newDescription },
+      { newContent, newCover, newDescription },
       { setFieldError, setSubmitting }
     ) => {
       try {
         const result = await update({
-          variables: { id, content: newContent, description: newDescription },
+          variables: {
+            input: {
+              id,
+              content: newContent,
+              description: newDescription,
+              ...(newCover !== UNCHANGED_FIELD ? { cover: newCover } : {}),
+            },
+          },
         })
 
         window.dispatchEvent(
@@ -191,6 +206,17 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
+      <section className="cover-field">
+        <CoverUploader
+          assetType="tagCover"
+          coverUrl={cover}
+          entityId={id}
+          entityType="tag"
+          inEditor={true}
+          onUpload={(assetId) => setFieldValue('newCover', assetId)}
+        />
+      </section>
+
       <Form.DropdownInput
         label={<Translate id="tagName" />}
         type="text"

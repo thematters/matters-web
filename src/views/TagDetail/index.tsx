@@ -41,6 +41,7 @@ const TAG_DETAIL = gql`
       ... on Tag {
         id
         content
+        cover
         creator {
           id
           ...UserDigestMiniUser
@@ -108,6 +109,7 @@ const TagDetail = ({ data }: { data: TagDetailType }) => {
             <DropdownActions
               id={data.node.id}
               content={data.node.content}
+              cover={data.node.cover || undefined}
               description={data.node.description || undefined}
               isMaintainer={isMaintainer}
             />
