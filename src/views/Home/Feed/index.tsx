@@ -141,7 +141,6 @@ const MainFeed = ({ feedSortType: sortBy, viewMode }: MainFeedProps) => {
 
   // load next page
   const loadMore = async () => {
-    console.log({ loading, isNewLoading })
     analytics.trackEvent('load_more', {
       type: sortBy,
       location: edges?.length || 0,
@@ -153,14 +152,6 @@ const MainFeed = ({ feedSortType: sortBy, viewMode }: MainFeedProps) => {
       },
       // previousResult could be undefined when scrolling before loading finishes, reason unknown
       updateQuery: (previousResult, { fetchMoreResult }) => {
-        console.log(
-          previousResult?.viewer?.recommendation.feed.edges?.map(
-            ({ node }) => node.id
-          ),
-          fetchMoreResult?.viewer?.recommendation.feed.edges?.map(
-            ({ node }) => node.id
-          )
-        )
         return previousResult
           ? mergeConnections({
               oldData: previousResult,
@@ -192,10 +183,6 @@ const MainFeed = ({ feedSortType: sortBy, viewMode }: MainFeedProps) => {
 
   // insert other feeds
   let mixFeed: FeedEdge[] = edges
-  console.log(
-    edges.map(({ node }) => node.id),
-    pageInfo.endCursor
-  )
 
   if (!isLargeUp && isHottestFeed) {
     // get copy
@@ -218,7 +205,6 @@ const MainFeed = ({ feedSortType: sortBy, viewMode }: MainFeedProps) => {
 
   return (
     <InfiniteScroll
-      loading={loading}
       hasNextPage={pageInfo.hasNextPage}
       loadMore={loadMore}
       pullToRefresh={refetch}

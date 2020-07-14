@@ -25,8 +25,6 @@ import { PullToRefresh, Spinner } from '~/components'
  */
 
 interface Props {
-  loading?: boolean
-
   /**
    * Does the resource have more entities
    */
@@ -49,7 +47,6 @@ interface Props {
 }
 
 export const InfiniteScroll: React.FC<Props> = ({
-  loading,
   hasNextPage,
   loader = <Spinner />,
   loadMore,
@@ -64,15 +61,7 @@ export const InfiniteScroll: React.FC<Props> = ({
     <div>
       {children}
       {hasNextPage && (
-        <Waypoint
-          onEnter={() => {
-            if (loading) {
-              return
-            }
-
-            loadMore()
-          }}
-        >
+        <Waypoint onEnter={loadMore}>
           <LoaderWithRef />
         </Waypoint>
       )}

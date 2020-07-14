@@ -48,7 +48,6 @@ export const FEED_ARTICLES_PUBLIC = {
     }
     ${feedFragment}
   `,
-
   newest: gql`
     query NewestFeedPublic($after: String) {
       viewer {
