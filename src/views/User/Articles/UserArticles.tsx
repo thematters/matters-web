@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 import { useRouter } from 'next/router'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 
 import {
   ArticleDigestFeed,
@@ -15,7 +15,10 @@ import {
   ViewerContext,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
-import USER_ARTICLES from '~/components/GQL/queries/userArticles'
+import {
+  USER_ARTICLES_PRIVATE,
+  USER_ARTICLES_PUBLIC,
+} from '~/components/GQL/queries/userArticles'
 
 import { analytics, getQuery, mergeConnections } from '~/common/utils'
 
@@ -25,11 +28,11 @@ import UserTabs from '../UserTabs'
 import styles from './styles.css'
 
 import {
-  UserArticles as UserArticlesTypes,
-  UserArticles_user,
-} from '~/components/GQL/queries/__generated__/UserArticles'
+  UserArticlesPublic,
+  UserArticlesPublic_user,
+} from '~/components/GQL/queries/__generated__/UserArticlesPublic'
 
-const ArticleSummaryInfo = ({ user }: { user: UserArticles_user }) => {
+const ArticleSummaryInfo = ({ user }: { user: UserArticlesPublic_user }) => {
   const { articleCount: articles, totalWordCount: words } = user.status || {
     articleCount: 0,
     totalWordCount: 0,
@@ -57,14 +60,69 @@ const UserArticles = () => {
   const router = useRouter()
   const userName = getQuery({ router, key: 'userName' })
 
-  const { data, loading, error, fetchMore, refetch } = useQuery<
-    UserArticlesTypes
-  >(USER_ARTICLES, { variables: { userName } })
-  const user = data?.user
+  /**
+   * Data Fetching
+   */
+  // public data
+  const { data, loading, error, fetchMore, refetch, client } = useQuery<
+    UserArticlesPublic
+  >(USER_ARTICLES_PUBLIC, { variables: { userName } })
 
+  // pagination
+  const connectionPath = 'user.articles'
+  const user = data?.user
+  const { edges, pageInfo } = user?.articles || {}
+
+  // private data
+  const loadPrivate = (publicData?: UserArticlesPublic) => {
+    if (!viewer.id || !publicData || !user) {
+      return
+    }
+
+    const publiceEdges = publicData.user?.articles?.edges || []
+    const publicIds = publiceEdges.map(({ node }) => node.id)
+
+    client.query({
+      query: USER_ARTICLES_PRIVATE,
+      fetchPolicy: 'network-only',
+      variables: { ids: publicIds },
+    })
+  }
+
+  // fetch private data for first page
+  useEffect(() => {
+    loadPrivate(data)
+  }, [user?.id, viewer.id])
+
+  // load next page
+  const loadMore = async () => {
+    analytics.trackEvent('load_more', {
+      type: 'user_article',
+      location: edges?.length || 0,
+    })
+
+    const { data: newData } = await fetchMore({
+      variables: {
+        after: pageInfo?.endCursor,
+      },
+      updateQuery: (previousResult, { fetchMoreResult }) =>
+        mergeConnections({
+          oldData: previousResult,
+          newData: fetchMoreResult,
+          path: connectionPath,
+        }),
+    })
+
+    loadPrivate(newData)
+  }
+
+  // pull to refresh
   usePullToRefresh.Register()
   usePullToRefresh.Handler(refetch)
 
+  /**
+   * Render
+   */
   if (loading) {
     return <Spinner />
   }
@@ -76,9 +134,6 @@ const UserArticles = () => {
   if (!user || user?.status?.state === 'archived') {
     return null
   }
-
-  const connectionPath = 'user.articles'
-  const { edges, pageInfo } = user.articles
 
   const CustomHead = () => (
     <Head
@@ -99,24 +154,6 @@ const UserArticles = () => {
         <EmptyArticle />
       </>
     )
-  }
-
-  const loadMore = () => {
-    analytics.trackEvent('load_more', {
-      type: 'user_article',
-      location: edges.length,
-    })
-    return fetchMore({
-      variables: {
-        after: pageInfo.endCursor,
-      },
-      updateQuery: (previousResult, { fetchMoreResult }) =>
-        mergeConnections({
-          oldData: previousResult,
-          newData: fetchMoreResult,
-          path: connectionPath,
-        }),
-    })
   }
 
   return (

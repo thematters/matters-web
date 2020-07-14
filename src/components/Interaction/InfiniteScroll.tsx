@@ -1,4 +1,3 @@
-import { ApolloQueryResult } from 'apollo-client'
 import { forwardRef, Ref } from 'react'
 import { Waypoint } from 'react-waypoint'
 
@@ -34,7 +33,7 @@ interface Props {
   /**
    * Callback to load more entities
    */
-  loadMore: () => Promise<ApolloQueryResult<any>>
+  loadMore: () => Promise<any>
 
   /**
    * A React component to act as loader

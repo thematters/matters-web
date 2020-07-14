@@ -36,14 +36,16 @@ const QUERIES = {
             edges {
               cursor
               node {
-                ...ArticleDigestFeedArticle
+                ...ArticleDigestFeedArticlePublic
+                ...ArticleDigestFeedArticlePrivate
               }
             }
           }
         }
       }
     }
-    ${ArticleDigestFeed.fragments.article}
+    ${ArticleDigestFeed.fragments.article.public}
+    ${ArticleDigestFeed.fragments.article.private}
   `,
   icymi: gql`
     query AllIcymis($after: String) {
@@ -59,14 +61,16 @@ const QUERIES = {
             edges {
               cursor
               node {
-                ...ArticleDigestFeedArticle
+                ...ArticleDigestFeedArticlePublic
+                ...ArticleDigestFeedArticlePrivate
               }
             }
           }
         }
       }
     }
-    ${ArticleDigestFeed.fragments.article}
+    ${ArticleDigestFeed.fragments.article.public}
+    ${ArticleDigestFeed.fragments.article.private}
   `,
 }
 

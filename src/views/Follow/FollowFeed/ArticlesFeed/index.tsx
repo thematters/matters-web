@@ -30,7 +30,8 @@ const FOLLOW_ARTICLES = gql`
             node {
               __typename
               ... on Article {
-                ...ArticleDigestFeedArticle
+                ...ArticleDigestFeedArticlePublic
+                ...ArticleDigestFeedArticlePrivate
               }
             }
           }
@@ -38,7 +39,8 @@ const FOLLOW_ARTICLES = gql`
       }
     }
   }
-  ${ArticleDigestFeed.fragments.article}
+  ${ArticleDigestFeed.fragments.article.public}
+  ${ArticleDigestFeed.fragments.article.private}
 `
 
 const ArticlesFeed = () => {
