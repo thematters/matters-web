@@ -156,6 +156,10 @@ const UserArticles = () => {
     )
   }
 
+  const articleEdges = edges.filter(
+    ({ node }) => node.articleState === 'active' || viewer.id === node.author.id
+  )
+
   return (
     <>
       <CustomHead />
@@ -166,31 +170,22 @@ const UserArticles = () => {
 
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
         <List>
-          {edges.map(({ node, cursor }, i) => {
-            if (
-              node.articleState !== 'active' &&
-              viewer.id !== node.author.id
-            ) {
-              return null
-            }
-
-            return (
-              <List.Item key={cursor}>
-                <ArticleDigestFeed
-                  article={node}
-                  inUserArticles
-                  onClick={() =>
-                    analytics.trackEvent('click_feed', {
-                      type: 'user_article',
-                      contentType: 'article',
-                      styleType: 'no_cover',
-                      location: i,
-                    })
-                  }
-                />
-              </List.Item>
-            )
-          })}
+          {articleEdges.map(({ node, cursor }, i) => (
+            <List.Item key={cursor}>
+              <ArticleDigestFeed
+                article={node}
+                inUserArticles
+                onClick={() =>
+                  analytics.trackEvent('click_feed', {
+                    type: 'user_article',
+                    contentType: 'article',
+                    styleType: 'no_cover',
+                    location: i,
+                  })
+                }
+              />
+            </List.Item>
+          ))}
         </List>
       </InfiniteScroll>
     </>

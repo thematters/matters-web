@@ -35,6 +35,8 @@ import {
 } from './__generated__/UserCommentsPublic'
 import { UserIdUser } from './__generated__/UserIdUser'
 
+type CommentedArticleComment = UserCommentsPublic_node_User_commentedArticles_edges_node_comments_edges_node
+
 const UserComments = () => {
   const router = useRouter()
   const userName = getQuery({ router, key: 'userName' })
@@ -103,7 +105,6 @@ const BaseUserComments = ({ user }: UserIdUser) => {
       publicData?.node?.__typename === 'User'
         ? publicData.node.commentedArticles.edges || []
         : []
-
     const publiceNodes = _flatten(
       articles.map(({ node }) =>
         (node.comments.edges || []).map(({ node: comment }) => comment)
@@ -144,6 +145,9 @@ const BaseUserComments = ({ user }: UserIdUser) => {
   usePullToRefresh.Register()
   usePullToRefresh.Handler(refetch)
 
+  /**
+   * Render
+   */
   if (!user || !user.id) {
     return null
   }
@@ -160,52 +164,51 @@ const BaseUserComments = ({ user }: UserIdUser) => {
     return <EmptyComment />
   }
 
+  const articleEdges = edges
+    .map((edge) => {
+      const commentEdges = edge.node.comments.edges || []
+      const comments = filterComments<CommentedArticleComment>(
+        commentEdges.map(({ node }) => node)
+      )
+      return { ...edge, comments }
+    })
+    .filter(({ comments }) => comments.length > 0)
+
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
       <List spacing={['loose', 0]}>
-        {edges.map((articleEdge) => {
-          const commentEdges = articleEdge.node.comments.edges
-          const filteredComments = filterComments(
-            (commentEdges || []).map(({ node }) => node)
-          ) as UserCommentsPublic_node_User_commentedArticles_edges_node_comments_edges_node[]
+        {articleEdges.map(({ cursor, node, comments }) => (
+          <List.Item key={cursor}>
+            <Card
+              spacing={['tight', 'base']}
+              bgColor="none"
+              {...toPath({
+                page: 'articleDetail',
+                article: node,
+              })}
+            >
+              <ArticleDigestTitle article={node} is="h3" />
+            </Card>
 
-          if (filteredComments.length <= 0) {
-            return null
-          }
-
-          return (
-            <List.Item key={articleEdge.cursor}>
-              <Card
-                spacing={['tight', 'base']}
-                bgColor="none"
-                {...toPath({
-                  page: 'articleDetail',
-                  article: articleEdge.node,
-                })}
-              >
-                <ArticleDigestTitle article={articleEdge.node} is="h3" />
-              </Card>
-
-              <List hasBorder={false}>
-                {filteredComments.map((comment) => (
-                  <List.Item key={comment.id}>
-                    <Card
-                      spacing={['tight', 'base']}
-                      {...toPath({ page: 'commentDetail', comment })}
-                    >
-                      <Comment.Feed
-                        comment={comment}
-                        hasCreatedAt
-                        hasLink
-                        inCard
-                      />
-                    </Card>
-                  </List.Item>
-                ))}
-              </List>
-            </List.Item>
-          )
-        })}
+            <List hasBorder={false}>
+              {comments.map((comment) => (
+                <List.Item key={comment.id}>
+                  <Card
+                    spacing={['tight', 'base']}
+                    {...toPath({ page: 'commentDetail', comment })}
+                  >
+                    <Comment.Feed
+                      comment={comment}
+                      hasCreatedAt
+                      hasLink
+                      inCard
+                    />
+                  </Card>
+                </List.Item>
+              ))}
+            </List>
+          </List.Item>
+        ))}
       </List>
     </InfiniteScroll>
   )
