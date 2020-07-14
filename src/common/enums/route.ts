@@ -12,8 +12,6 @@ type ROUTE_KEY =
   | 'HOME'
   | 'FOLLOW'
   | 'AUTHORS'
-  | 'TOPICS'
-  | 'ICYMI'
   | 'SEARCH'
   | 'TAGS'
   | 'TAG_DETAIL'
@@ -61,8 +59,6 @@ export const ROUTES: Array<{
   { key: 'HOME', pathname: '/' },
   { key: 'FOLLOW', pathname: '/follow' },
   { key: 'AUTHORS', pathname: '/authors' },
-  { key: 'TOPICS', pathname: '/topics' },
-  { key: 'ICYMI', pathname: '/icymi' },
   { key: 'SEARCH', pathname: '/search' },
   // experient page for recommendation engine testing
   { key: 'RECOMMENDATION', pathname: '/recommendation' },
