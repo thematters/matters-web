@@ -1,4 +1,3 @@
-import { forwardRef, Ref } from 'react'
 import { Waypoint } from 'react-waypoint'
 
 import { PullToRefresh, Spinner } from '~/components'
@@ -53,28 +52,28 @@ export const InfiniteScroll: React.FC<Props> = ({
   pullToRefresh,
   children,
 }) => {
-  const LoaderWithRef = forwardRef((props, ref: Ref<HTMLDivElement>) => (
-    <div ref={ref}>{loader || <Spinner />}</div>
-  ))
-
-  const Inner = () => (
-    <div>
-      {children}
-      {hasNextPage && (
-        <Waypoint onEnter={loadMore}>
-          <LoaderWithRef />
-        </Waypoint>
-      )}
-    </div>
+  const Loader = () => (
+    <>
+      <Waypoint onEnter={loadMore} />
+      {loader}
+    </>
   )
 
   if (pullToRefresh) {
     return (
       <PullToRefresh refresh={pullToRefresh}>
-        <Inner />
+        <>
+          {children}
+          {hasNextPage && <Loader />}
+        </>
       </PullToRefresh>
     )
   }
 
-  return <Inner />
+  return (
+    <>
+      {children}
+      {hasNextPage && <Loader />}
+    </>
+  )
 }
