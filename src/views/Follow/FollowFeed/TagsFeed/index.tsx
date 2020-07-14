@@ -12,6 +12,7 @@ import {
   List,
   Spinner,
   Tag,
+  Translate,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
@@ -137,6 +138,9 @@ const TagsArticles = ({ tagIds }: { tagIds: string[] }) => {
     return (
       <section className="tag">
         <Tag tag={tag} type="inline" active={true} />
+        <span>
+          <Translate zh_hant="新增了" zh_hans="新增了" />
+        </span>
         <style jsx>{styles}</style>
       </section>
     )
@@ -162,7 +166,6 @@ const TagsArticles = ({ tagIds }: { tagIds: string[] }) => {
                   location: i,
                 })
               }
-              inFollowFeed
             />
           </List.Item>
         ))}
