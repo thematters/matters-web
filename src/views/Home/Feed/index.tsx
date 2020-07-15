@@ -108,7 +108,8 @@ const MainFeed = ({ feedSortType: sortBy, viewMode }: MainFeedProps) => {
 
   // pagination
   const connectionPath = 'viewer.recommendation.feed'
-  const { edges, pageInfo } = data?.viewer?.recommendation.feed || {}
+  const result = data?.viewer?.recommendation.feed
+  const { edges, pageInfo } = result || {}
   const isNewLoading = networkStatus === NetworkStatus.loading
 
   // private data
@@ -141,6 +142,10 @@ const MainFeed = ({ feedSortType: sortBy, viewMode }: MainFeedProps) => {
 
   // load next page
   const loadMore = async () => {
+    if (loading || isNewLoading) {
+      return
+    }
+
     analytics.trackEvent('load_more', {
       type: sortBy,
       location: edges?.length || 0,
@@ -150,17 +155,13 @@ const MainFeed = ({ feedSortType: sortBy, viewMode }: MainFeedProps) => {
       variables: {
         after: pageInfo?.endCursor,
       },
-      // previousResult could be undefined when scrolling before loading finishes, reason unknown
-      updateQuery: (previousResult, { fetchMoreResult }) => {
-        return previousResult
-          ? mergeConnections({
-              oldData: previousResult,
-              newData: fetchMoreResult,
-              path: connectionPath,
-              dedupe: true,
-            })
-          : fetchMoreResult
-      },
+      updateQuery: (previousResult, { fetchMoreResult }) =>
+        mergeConnections({
+          oldData: previousResult,
+          newData: fetchMoreResult,
+          path: connectionPath,
+          dedupe: true,
+        }),
     })
 
     loadPrivate(newData)
@@ -169,7 +170,7 @@ const MainFeed = ({ feedSortType: sortBy, viewMode }: MainFeedProps) => {
   /**
    * Render
    */
-  if (loading && isNewLoading) {
+  if (loading && (!result || isNewLoading)) {
     return <Spinner />
   }
 
