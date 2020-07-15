@@ -187,7 +187,7 @@ const BaseDonationDialog = ({
   const isHKD = currency === CURRENCY.HKD
 
   useEffect(() => {
-    analytics.trackEvent('view_add_credit_dialog', { step })
+    analytics.trackEvent('view_donation_dialog', { step })
   }, [step])
 
   return (

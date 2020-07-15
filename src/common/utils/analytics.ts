@@ -26,6 +26,7 @@ type EventArgs =
   | ['share', ShareProp]
   | ['purchase', PurchaseProp]
   | ['view_add_credit_dialog', ViewDialogProp]
+  | ['view_donation_dialog', ViewDialogProp]
 
 type ClickFeedProp =
   | ArticleFeedProp
