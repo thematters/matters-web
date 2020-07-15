@@ -12,6 +12,7 @@ import {
   LanguageContext,
   Translate,
   useResponsive,
+  ViewerContext,
 } from '~/components'
 import { useMutation } from '~/components/GQL'
 import SEARCH_ARTICLES from '~/components/GQL/queries/searchArticles'
@@ -81,6 +82,7 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
   const [selectedArticles, setSelectedArticles] = useState<any[]>([])
   const [add] = useMutation<AddArticlesTags>(ADD_ARTICLES_TAGS)
   const { lang } = useContext(LanguageContext)
+  const viewer = useContext(ViewerContext)
 
   const formId = 'put-article-tag-form'
 
@@ -199,6 +201,7 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
         dropdownCallback={onClickMenuItem}
         DropdownContent={DropdownContent}
         query={SEARCH_ARTICLES}
+        queryFilter={{ authorId: viewer.id }}
       />
 
       <ul>
