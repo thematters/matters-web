@@ -58,7 +58,7 @@
     "express": "^4.17.1",
     "fingerprintjs2": "^2.1.0",
     "firebase": "^7.16.0",
-    "formik": "^2.1.4",
+    "formik": "^2.1.5",
     "graphql": "^14.7.0",
     "graphql-tag": "^2.10.4",
     "helmet": "^3.23.3",
