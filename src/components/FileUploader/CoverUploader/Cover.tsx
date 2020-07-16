@@ -8,11 +8,7 @@ export interface CoverProps {
   inEditor?: boolean
 }
 
-export const Cover = ({
-  coverUrl,
-  defaultCoverUrl,
-  inEditor,
-}: CoverProps) => {
+export const Cover = ({ coverUrl, defaultCoverUrl, inEditor }: CoverProps) => {
   const url = coverUrl || defaultCoverUrl
   const isFallback = !url
 
