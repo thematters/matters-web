@@ -16,8 +16,8 @@ import {
   Spinner,
   Tabs,
   Throw404,
-  Title,
   Translate,
+  useResponsive,
   ViewerContext,
 } from '~/components'
 import { getErrorCodes, QueryError } from '~/components/GQL'
@@ -29,6 +29,7 @@ import { getQuery } from '~/common/utils'
 import { TagDetailArticles } from './Articles'
 import ArticlesCount from './ArticlesCount'
 import { TagDetailButtons } from './Buttons'
+import Cover from './Cover'
 import DropdownActions from './DropdownActions'
 import Followers from './Followers'
 import styles from './styles.css'
@@ -72,6 +73,7 @@ const EmptyLayout: React.FC = ({ children }) => (
 )
 
 const TagDetail = ({ data }: { data: TagDetailType }) => {
+  const isSmallUp = useResponsive('sm-up')
   const viewer = useContext(ViewerContext)
   const hasSelected = _get(data, 'node.articles.totalCount', 0)
   const [feed, setFeed] = useState<TagFeed>(hasSelected ? 'selected' : 'latest')
@@ -101,11 +103,14 @@ const TagDetail = ({ data }: { data: TagDetailType }) => {
   return (
     <Layout.Main>
       <Layout.Header
-        left={<Layout.Header.BackButton />}
+        left={
+          <Layout.Header.BackButton
+            mode={!isSmallUp ? 'black-solid' : undefined}
+          />
+        }
         right={
           <>
-            <Layout.Header.Title id="tag" />
-
+            {isSmallUp ? <Layout.Header.Title id="tag" /> : <span />}
             <DropdownActions
               id={data.node.id}
               content={data.node.content}
@@ -115,11 +120,14 @@ const TagDetail = ({ data }: { data: TagDetailType }) => {
             />
           </>
         }
+        mode={isSmallUp ? 'solid-fixed' : 'transparent-absolute'}
       />
 
       <Head title={`#${data.node.content}`} />
 
       <PullToRefresh>
+        <Cover content={data.node.content} cover={data.node.cover} />
+
         <Spacer />
 
         <section className="info">
@@ -136,8 +144,6 @@ const TagDetail = ({ data }: { data: TagDetailType }) => {
               </span>
             </section>
           )}
-
-          <Title type="tag">#{data.node.content}</Title>
 
           {data.node.description && (
             <Expandable>

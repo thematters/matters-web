@@ -23,6 +23,8 @@ import {
   translate,
 } from '~/common/utils'
 
+import TAG_COVER from '@/public/static/images/tag-cover.png'
+
 import styles from './styles.css'
 
 import { PutTag } from './__generated__/PutTag'
@@ -210,6 +212,7 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
         <CoverUploader
           assetType="tagCover"
           coverUrl={cover}
+          defaultCoverUrl={TAG_COVER}
           entityId={id}
           entityType="tag"
           inEditor={true}

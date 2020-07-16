@@ -1,18 +1,16 @@
 import { Img } from '~/components'
 
-import IMAGE_COVER from '@/public/static/images/profile-cover.png'
-
 import styles from './styles.css'
 
 export interface CoverProps {
   coverUrl?: string
-  defaultCoverUrl?: string
+  defaultCoverUrl: string
   inEditor?: boolean
 }
 
 export const Cover = ({
   coverUrl,
-  defaultCoverUrl = IMAGE_COVER,
+  defaultCoverUrl,
   inEditor,
 }: CoverProps) => {
   const url = coverUrl || defaultCoverUrl

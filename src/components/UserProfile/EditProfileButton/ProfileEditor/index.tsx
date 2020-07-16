@@ -21,6 +21,8 @@ import {
   validateDisplayName,
 } from '~/common/utils'
 
+import IMAGE_COVER from '@/public/static/images/profile-cover.png'
+
 import styles from './styles.css'
 
 import { ProfileUser } from '~/components/UserProfile/__generated__/ProfileUser'
@@ -134,6 +136,7 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
         <CoverUploader
           assetType="profileCover"
           coverUrl={user.info.profileCover}
+          defaultCoverUrl={IMAGE_COVER}
           entityType="user"
           inEditor={true}
           onUpload={(assetId) => setFieldValue('profileCover', assetId)}
