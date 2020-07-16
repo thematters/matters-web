@@ -209,7 +209,7 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
-      {isEditing &&
+      {isEditing && (
         <section className="cover-field">
           <CoverUploader
             assetType="tagCover"
@@ -221,7 +221,7 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
             onUpload={(assetId) => setFieldValue('newCover', assetId)}
           />
         </section>
-      }
+      )}
 
       <Form.DropdownInput
         label={<Translate id="tagName" />}
