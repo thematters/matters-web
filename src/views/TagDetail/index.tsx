@@ -1,10 +1,9 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import _find from 'lodash/find'
-import _get from 'lodash/get'
 import _some from 'lodash/some'
 import { useRouter } from 'next/router'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import {
   EmptyTag,
@@ -26,14 +25,18 @@ import { UserDigest } from '~/components/UserDigest'
 import { ERROR_CODES } from '~/common/enums'
 import { getQuery } from '~/common/utils'
 
-import { TagDetailArticles } from './Articles'
+import TagDetailArticles from './Articles'
 import ArticlesCount from './ArticlesCount'
 import { TagDetailButtons } from './Buttons'
 import DropdownActions from './DropdownActions'
 import Followers from './Followers'
 import styles from './styles.css'
 
-import { TagDetail as TagDetailType } from './__generated__/TagDetail'
+import {
+  TagDetail as TagDetailType,
+  TagDetail_node_Tag,
+  TagDetail_node_Tag_editors,
+} from './__generated__/TagDetail'
 
 const TAG_DETAIL = gql`
   query TagDetail($id: ID!) {
@@ -61,7 +64,7 @@ const TAG_DETAIL = gql`
   ${TagDetailButtons.FollowButton.fragments.tag}
 `
 
-type TagFeed = 'latest' | 'selected'
+type TagFeedType = 'latest' | 'selected'
 
 const EmptyLayout: React.FC = ({ children }) => (
   <Layout.Main>
@@ -70,33 +73,39 @@ const EmptyLayout: React.FC = ({ children }) => (
   </Layout.Main>
 )
 
-const TagDetail = ({ data }: { data: TagDetailType }) => {
+const TagDetail = ({ tag }: { tag: TagDetail_node_Tag }) => {
   const viewer = useContext(ViewerContext)
-  const hasSelected = _get(data, 'node.articles.totalCount', 0)
-  const [feed, setFeed] = useState<TagFeed>(hasSelected ? 'selected' : 'latest')
 
-  if (!data || !data.node || data.node.__typename !== 'Tag') {
-    return <EmptyTag />
-  }
+  // feed type
+  const hasSelected = (tag?.articles.totalCount || 0) > 0
+  const [feed, setFeed] = useState<TagFeedType>(
+    hasSelected ? 'selected' : 'latest'
+  )
+  const isSelected = feed === 'selected'
 
-  if (hasSelected === 0 && feed === 'selected') {
-    setFeed('latest')
-  }
-
-  const filter = ({ displayName }: any) =>
-    (displayName || '').toLowerCase() !== 'matty'
-  const editors = data.node.editors || []
-  const owner = _find(editors, filter)
+  useEffect(() => {
+    if (!hasSelected && isSelected) {
+      setFeed('latest')
+    }
+  })
 
   // define permission
+  const filter = ({ displayName }: TagDetail_node_Tag_editors) =>
+    (displayName || '').toLowerCase() !== 'matty'
+  const editors = tag?.editors || []
+  const owner = _find(editors, filter)
+
   const normalEditors = editors.filter(filter)
   const isEditor = _some(editors, (editor) => editor.id === viewer.id)
-  const isCreator = data.node.creator?.id === viewer.id
+  const isCreator = tag?.creator?.id === viewer.id
   const isMaintainer =
     isEditor ||
     (normalEditors.length === 0 && isCreator) ||
     viewer.info.email === 'hi@matters.news'
 
+  /**
+   * Render
+   */
   return (
     <Layout.Main>
       <Layout.Header
@@ -106,16 +115,16 @@ const TagDetail = ({ data }: { data: TagDetailType }) => {
             <Layout.Header.Title id="tag" />
 
             <DropdownActions
-              id={data.node.id}
-              content={data.node.content}
-              description={data.node.description || undefined}
+              id={tag.id}
+              content={tag.content}
+              description={tag.description || undefined}
               isMaintainer={isMaintainer}
             />
           </>
         }
       />
 
-      <Head title={`#${data.node.content}`} />
+      <Head title={`#${tag.content}`} />
 
       <PullToRefresh>
         <Spacer />
@@ -135,51 +144,38 @@ const TagDetail = ({ data }: { data: TagDetailType }) => {
             </section>
           )}
 
-          <Title type="tag">#{data.node.content}</Title>
+          <Title type="tag">#{tag.content}</Title>
 
-          {data.node.description && (
+          {tag.description && (
             <Expandable>
-              <p className="description">{data.node.description}</p>
+              <p className="description">{tag.description}</p>
             </Expandable>
           )}
 
           <section className="statistics">
-            <Followers id={data.node.id} />
-            <ArticlesCount id={data.node.id} />
+            <Followers id={tag.id} />
+            <ArticlesCount id={tag.id} />
           </section>
 
           <section className="buttons">
-            <TagDetailButtons.FollowButton tag={data.node} />
-            <TagDetailButtons.AddButton
-              tag={data.node}
-              isMaintainer={isMaintainer}
-            />
+            <TagDetailButtons.FollowButton tag={tag} />
+            <TagDetailButtons.AddButton tag={tag} isMaintainer={isMaintainer} />
           </section>
         </section>
 
         <Tabs>
-          {hasSelected > 0 && (
-            <Tabs.Tab
-              selected={feed === 'selected'}
-              onClick={() => setFeed('selected')}
-            >
+          {hasSelected && (
+            <Tabs.Tab selected={isSelected} onClick={() => setFeed('selected')}>
               <Translate id="featured" />
             </Tabs.Tab>
           )}
 
-          <Tabs.Tab
-            selected={feed === 'latest'}
-            onClick={() => setFeed('latest')}
-          >
+          <Tabs.Tab selected={!isSelected} onClick={() => setFeed('latest')}>
             <Translate id="latest" />
           </Tabs.Tab>
         </Tabs>
 
-        {feed === 'selected' ? (
-          <TagDetailArticles.Selected id={data.node.id} />
-        ) : (
-          <TagDetailArticles.Latest id={data.node.id} />
-        )}
+        <TagDetailArticles tagId={tag.id} selected={isSelected} />
       </PullToRefresh>
 
       <style jsx>{styles}</style>
@@ -228,7 +224,7 @@ const TagDetailContainer = () => {
     )
   }
 
-  return <TagDetail data={data} />
+  return <TagDetail tag={data.node} />
 }
 
 export default TagDetailContainer

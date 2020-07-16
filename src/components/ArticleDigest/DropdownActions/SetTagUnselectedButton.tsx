@@ -10,9 +10,9 @@ import { ADD_TOAST } from '~/common/enums'
 import { getQuery } from '~/common/utils'
 
 import {
-  TagArticles,
-  TagArticles_node_Tag,
-} from '~/components/GQL/queries/__generated__/TagArticles'
+  TagArticlesPublic,
+  TagArticlesPublic_node_Tag,
+} from '~/components/GQL/queries/__generated__/TagArticlesPublic'
 import { SetTagUnselected } from './__generated__/SetTagUnselected'
 import { SetTagUnselectedButtonArticle } from './__generated__/SetTagUnselectedButtonArticle'
 
@@ -57,10 +57,12 @@ const SetTagUnselectedButton = ({
     variables: { id: tagId, articles: [article.id] },
     update: (cache) => {
       try {
-        const query = require('~/components/GQL/queries/tagArticles').default
+        const {
+          TAG_ARTICLES_PUBLIC: query,
+        } = require('~/components/GQL/queries/tagArticles').default
         const variables = { id: tagId, selected: true }
-        const data = cache.readQuery<TagArticles>({ query, variables })
-        const node = _get(data, 'node', {}) as TagArticles_node_Tag
+        const data = cache.readQuery<TagArticlesPublic>({ query, variables })
+        const node = _get(data, 'node', {}) as TagArticlesPublic_node_Tag
         if (
           !node.articles ||
           !node.articles.edges ||
