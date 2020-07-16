@@ -3,7 +3,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import {
   AnalyticsListener,
@@ -77,14 +77,19 @@ const Root = ({
   const official = data?.official
 
   // viewer
+  const [privateFetched, setPrivateFetched] = useState(false)
+  const fetchPrivateViewer = async () => {
+    await client.query({
+      query: ROOT_QUERY_PRIVATE,
+      fetchPolicy: 'network-only',
+    })
+    setPrivateFetched(true)
+  }
   useEffect(() => {
     if (!data) {
       return
     }
-    client.query({
-      query: ROOT_QUERY_PRIVATE,
-      fetchPolicy: 'network-only',
-    })
+    fetchPrivateViewer()
   }, [!!data])
 
   if (loading) {
@@ -100,7 +105,7 @@ const Root = ({
   }
 
   return (
-    <ViewerProvider viewer={viewer}>
+    <ViewerProvider viewer={viewer} privateFetched={privateFetched}>
       <LanguageProvider>
         <FeaturesProvider official={official}>
           {shouldApplyLayout ? <Layout>{children}</Layout> : children}
