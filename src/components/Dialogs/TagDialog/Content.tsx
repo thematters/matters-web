@@ -130,6 +130,7 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
 }) => {
   const [update] = useMutation<PutTag>(PUT_TAG)
   const { lang } = useContext(LanguageContext)
+  const isEditing = id && content
 
   const formId = 'put-tag-form'
 
@@ -208,17 +209,19 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
-      <section className="cover-field">
-        <CoverUploader
-          assetType="tagCover"
-          coverUrl={cover}
-          defaultCoverUrl={TAG_COVER}
-          entityId={id}
-          entityType="tag"
-          inEditor={true}
-          onUpload={(assetId) => setFieldValue('newCover', assetId)}
-        />
-      </section>
+      {isEditing &&
+        <section className="cover-field">
+          <CoverUploader
+            assetType="tagCover"
+            coverUrl={cover}
+            defaultCoverUrl={TAG_COVER}
+            entityId={id}
+            entityType="tag"
+            inEditor={true}
+            onUpload={(assetId) => setFieldValue('newCover', assetId)}
+          />
+        </section>
+      }
 
       <Form.DropdownInput
         label={<Translate id="tagName" />}
@@ -264,7 +267,7 @@ const TagDialogContent: React.FC<TagDialogContentProps> = ({
   return (
     <>
       <Dialog.Header
-        title={content ? 'editTag' : 'createTag'}
+        title={isEditing ? 'editTag' : 'createTag'}
         close={closeDialog}
         rightButton={SubmitButton}
       />
