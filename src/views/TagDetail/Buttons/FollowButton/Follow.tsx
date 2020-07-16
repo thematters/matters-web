@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { DataProxy, gql } from '@apollo/client'
 import _isNil from 'lodash/isNil'
 import { useContext } from 'react'
 
@@ -42,7 +42,7 @@ const Follow = ({ tag }: FollowProps) => {
             },
           }
         : undefined,
-    update: (cache) => {
+    update: (cache: DataProxy) => {
       updateTagFollowers({
         cache,
         id: tag.id,

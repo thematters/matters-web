@@ -1,6 +1,5 @@
-import { useQuery } from '@apollo/react-hooks'
+import { gql, useQuery } from '@apollo/client'
 import classNames from 'classnames'
-import gql from 'graphql-tag'
 import React from 'react'
 
 import { Card, IconPinMedium, Img, TextIcon, Translate } from '~/components'

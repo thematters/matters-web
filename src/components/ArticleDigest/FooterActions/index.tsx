@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 import { BookmarkButton } from '~/components/Buttons/Bookmark'
 import { ShareButton } from '~/components/Buttons/Share'

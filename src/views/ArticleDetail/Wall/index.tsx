@@ -1,7 +1,8 @@
-import { useApolloClient } from '@apollo/react-hooks'
+import { useApolloClient } from '@apollo/client'
 import classNames from 'classnames'
 
 import { Button, IconClear, LoginButton, Translate } from '~/components'
+import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
 import { TEXT } from '~/common/enums'
 
@@ -20,9 +21,9 @@ const Wall = ({ show }: WallProps) => {
   const outerClasses = classNames({ outer: true, show })
 
   const close = () => {
-    if (client?.writeData) {
-      client.writeData({
-        id: 'ClientPreference:local',
+    if (client?.writeQuery) {
+      client.writeQuery({
+        query: CLIENT_PREFERENCE,
         data: { wall: false },
       })
     }

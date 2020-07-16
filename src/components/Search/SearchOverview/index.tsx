@@ -1,6 +1,6 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import classNames from 'classnames'
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 import Link from 'next/link'
 import { Fragment } from 'react'
 

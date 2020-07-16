@@ -1,5 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
-import { NetworkStatus } from 'apollo-client'
+import { NetworkStatus, useQuery } from '@apollo/client'
 import _get from 'lodash/get'
 
 import {

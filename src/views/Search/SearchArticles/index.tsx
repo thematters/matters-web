@@ -1,6 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
-import { NetworkStatus } from 'apollo-client'
-import gql from 'graphql-tag'
+import { NetworkStatus, useQuery, gql } from '@apollo/client'
 import { useRouter } from 'next/router'
 
 import {

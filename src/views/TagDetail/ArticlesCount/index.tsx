@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 
 import { Translate } from '~/components'
 import TAG_ARTICLES_COUNT from '~/components/GQL/queries/tagArticlesCount'

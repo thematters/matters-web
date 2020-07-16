@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 import AddCover from './AddCover'
 import EditCollection from './EditCollection'

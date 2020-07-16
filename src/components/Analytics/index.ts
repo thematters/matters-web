@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 import { ANALYTIC_TYPES, ANALYTICS, GA_TRACKING_ID } from '~/common/enums'
 import { deferTry } from '~/common/utils'

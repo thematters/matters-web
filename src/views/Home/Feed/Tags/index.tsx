@@ -1,5 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
+import { useQuery, gql } from '@apollo/client'
 
 import { Slides, Spinner } from '~/components'
 import { QueryError } from '~/components/GQL'

@@ -1,6 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
-import { InMemoryCache } from 'apollo-cache-inmemory'
-import { ApolloClient } from 'apollo-client'
+import { ApolloClient, InMemoryCache, useQuery } from '@apollo/client'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'

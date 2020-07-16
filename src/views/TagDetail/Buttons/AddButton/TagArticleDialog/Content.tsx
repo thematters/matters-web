@@ -1,5 +1,5 @@
 import { useFormik } from 'formik'
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 import { useContext, useState } from 'react'
 
 import {

@@ -1,6 +1,5 @@
-import { useLazyQuery } from '@apollo/react-hooks'
+import { gql, useLazyQuery } from '@apollo/client'
 import classNames from 'classnames'
-import gql from 'graphql-tag'
 import { Fragment, useEffect } from 'react'
 
 import { Menu, Spinner } from '~/components'

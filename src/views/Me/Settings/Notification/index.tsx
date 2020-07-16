@@ -1,5 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
+import { useQuery, gql } from '@apollo/client'
 
 import { Head, Layout, PullToRefresh, Spacer, Spinner } from '~/components'
 import { useMutation } from '~/components/GQL'

@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 import _filter from 'lodash/filter'
 import _get from 'lodash/get'
 import { useRouter } from 'next/router'

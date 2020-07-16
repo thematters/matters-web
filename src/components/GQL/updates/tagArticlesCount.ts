@@ -1,4 +1,4 @@
-import { DataProxy } from 'apollo-cache'
+import { DataProxy } from '@apollo/client'
 import _cloneDeep from 'lodash/cloneDeep'
 
 import TAG_ARTICLES_COUNT from '~/components/GQL/queries/tagArticlesCount'

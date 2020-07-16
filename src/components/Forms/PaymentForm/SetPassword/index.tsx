@@ -1,5 +1,5 @@
 import { useFormik } from 'formik'
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 import _pickBy from 'lodash/pickBy'
 import React, { useContext, useEffect, useState } from 'react'
 

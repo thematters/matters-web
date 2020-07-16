@@ -1,5 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
+import { gql, useQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
 import { useContext, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
@@ -147,8 +146,8 @@ const AppreciationButton = ({ article }: AppreciationButtonProps) => {
     return (
       <CivicLikerButton
         onClose={() => {
-          client.writeData({
-            id: 'ClientPreference:local',
+          client.writeQuery({
+            query: CLIENT_PREFERENCE,
             data: { readCivicLikerDialog: true },
           })
         }}

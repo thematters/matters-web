@@ -1,4 +1,4 @@
-import { DataProxy } from 'apollo-cache'
+import { DataProxy } from '@apollo/client'
 
 import VIEWER_FOLLOWEE_COUNT from '~/components/GQL/queries/followeeCount'
 

@@ -23,7 +23,7 @@
     },
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
-    "isolatedModules": true
+    "isolatedModules": false
   },
   "includes": ["./src/definitions/**/*.d.ts"],
   "exclude": ["node_modules", "build"],

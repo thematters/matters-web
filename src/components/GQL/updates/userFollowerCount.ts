@@ -1,4 +1,4 @@
-import { DataProxy } from 'apollo-cache'
+import { DataProxy } from '@apollo/client'
 
 import USER_FOLLOWER_COUNT from '~/components/GQL/queries/userFollowerCount'
 

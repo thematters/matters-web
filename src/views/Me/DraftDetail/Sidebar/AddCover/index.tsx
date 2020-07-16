@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 import _uniqBy from 'lodash/uniqBy'
 
 import { Translate } from '~/components'

@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
 import { useContext, useEffect } from 'react'
 

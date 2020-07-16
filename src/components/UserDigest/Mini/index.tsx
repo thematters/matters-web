@@ -1,5 +1,5 @@
+import { gql } from '@apollo/client'
 import classNames from 'classnames'
-import gql from 'graphql-tag'
 
 import { LinkWrapper, Translate } from '~/components'
 import { Avatar, AvatarProps, AvatarSize } from '~/components/Avatar'

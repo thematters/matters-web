@@ -1,4 +1,4 @@
-import { useLazyQuery, useQuery } from '@apollo/react-hooks'
+import { useLazyQuery, useQuery } from '@apollo/client'
 import jump from 'jump.js'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'

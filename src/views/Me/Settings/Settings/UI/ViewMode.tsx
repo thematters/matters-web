@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 
 import {
   DropdownDialog,
@@ -29,8 +29,8 @@ const ViewMode = () => {
 
   const setViewMode = (mode: ViewMode) => {
     if (client) {
-      client.writeData({
-        id: 'ClientPreference:local',
+      client.writeQuery({
+        query: CLIENT_PREFERENCE,
         data: { viewMode: mode },
       })
     }

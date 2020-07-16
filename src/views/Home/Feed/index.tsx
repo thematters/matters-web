@@ -1,6 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
-import { NetworkStatus } from 'apollo-client'
-import gql from 'graphql-tag'
+import { gql, NetworkStatus, useQuery } from '@apollo/client'
 import { useContext } from 'react'
 
 import {
@@ -279,8 +277,8 @@ const HomeFeed = () => {
   }
   const setSortBy = (type: SortByType) => {
     if (client) {
-      client.writeData({
-        id: 'ClientPreference:local',
+      client.writeQuery({
+        query: CLIENT_PREFERENCE,
         data: { feedSortType: type },
       })
     }

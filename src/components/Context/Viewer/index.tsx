@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 import React from 'react'
 
 import { ViewerUser } from './__generated__/ViewerUser'

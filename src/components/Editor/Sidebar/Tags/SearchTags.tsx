@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import { useContext, useState } from 'react'
 import { useDebounce } from 'use-debounce/lib'
 

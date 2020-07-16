@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 import _get from 'lodash/get'
 import _isNil from 'lodash/isNil'
 import { useState } from 'react'

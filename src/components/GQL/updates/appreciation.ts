@@ -1,4 +1,4 @@
-import { DataProxy } from 'apollo-cache'
+import { DataProxy } from '@apollo/client'
 import _cloneDeep from 'lodash/cloneDeep'
 import _some from 'lodash/some'
 import { ARTICLE_DETAIL_PUBLIC } from '~/views/ArticleDetail/gql'

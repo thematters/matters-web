@@ -1,5 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
+import { gql, useQuery } from '@apollo/client'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import queryString from 'query-string'

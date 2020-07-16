@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 import { Translate } from '~/components'
 import { UserDigest } from '~/components/UserDigest'

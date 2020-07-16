@@ -1,29 +1,20 @@
-import { createUploadLink } from '@matters/apollo-upload-client'
-import {
-  InMemoryCache,
-  IntrospectionFragmentMatcher,
-} from 'apollo-cache-inmemory'
-import { ApolloClient } from 'apollo-client'
-import { ApolloLink } from 'apollo-link'
-import { setContext } from 'apollo-link-context'
-import { onError } from 'apollo-link-error'
-import { createPersistedQueryLink } from 'apollo-link-persisted-queries'
+import { ApolloClient, from, InMemoryCache } from '@apollo/client'
+import { setContext } from '@apollo/link-context'
+import { onError } from '@apollo/link-error'
+import { createPersistedQueryLink } from '@apollo/link-persisted-queries'
+import { createUploadLink } from 'apollo-upload-client'
 import http from 'http'
 import https from 'https'
 import withApollo from 'next-with-apollo'
 
 import { AGENT_HASH_PREFIX, STORE_KEY_AGENT_HASH } from '~/common/enums'
-import introspectionQueryResultData from '~/common/gql/fragmentTypes.json'
+import possibleTypes from '~/common/gql/fragmentTypes.json'
 import { randomString } from '~/common/utils'
 
 import resolvers from './resolvers'
 import typeDefs from './types'
 
 // import { setupPersistCache } from './cache'
-
-const fragmentMatcher = new IntrospectionFragmentMatcher({
-  introspectionQueryResultData,
-})
 
 const isProd = process.env.NODE_ENV === 'production'
 
@@ -113,13 +104,15 @@ const agentHashLink = setContext((_, { headers }) => {
 })
 
 export default withApollo(({ ctx, headers, initialState }) => {
-  const cache = new InMemoryCache({ fragmentMatcher })
+  const cache = new InMemoryCache({
+    possibleTypes,
+  })
   cache.restore(initialState || {})
 
   // setupPersistCache(cache)
 
   const client = new ApolloClient({
-    link: ApolloLink.from([
+    link: from([
       persistedQueryLink,
       errorLink,
       authLink,

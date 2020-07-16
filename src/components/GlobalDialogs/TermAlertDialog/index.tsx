@@ -1,5 +1,5 @@
+import { gql } from '@apollo/client'
 import { useFormik } from 'formik'
-import gql from 'graphql-tag'
 import Router from 'next/router'
 import { useContext, useState } from 'react'
 

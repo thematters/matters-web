@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 import { useState } from 'react'
 
 import { Dialog } from '~/components'

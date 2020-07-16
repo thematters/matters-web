@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 import { Button, IconUpVote, IconUpVoteActive, TextIcon } from '~/components'
 import { useMutation } from '~/components/GQL'

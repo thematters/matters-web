@@ -1,74 +1,44 @@
 {
-  "__schema": {
-    "types": [
-      {
-        "kind": "INTERFACE",
-        "name": "Node",
-        "possibleTypes": [
-          { "name": "Article" },
-          { "name": "User" },
-          { "name": "Comment" },
-          { "name": "Tag" },
-          { "name": "Draft" }
-        ]
-      },
-      {
-        "kind": "INTERFACE",
-        "name": "Connection",
-        "possibleTypes": [
-          { "name": "ArticleConnection" },
-          { "name": "CommentConnection" },
-          { "name": "ResponseConnection" },
-          { "name": "TagConnection" },
-          { "name": "UserConnection" },
-          { "name": "DraftConnection" },
-          { "name": "ReadHistoryConnection" },
-          { "name": "RecentSearchConnection" },
-          { "name": "AppreciationConnection" },
-          { "name": "NoticeConnection" },
-          { "name": "TransactionConnection" },
-          { "name": "SearchResultConnection" },
-          { "name": "ReportConnection" },
-          { "name": "OAuthClientConnection" },
-          { "name": "SkippedListItemsConnection" }
-        ]
-      },
-      {
-        "kind": "UNION",
-        "name": "Response",
-        "possibleTypes": [{ "name": "Article" }, { "name": "Comment" }]
-      },
-      {
-        "kind": "INTERFACE",
-        "name": "Notice",
-        "possibleTypes": [
-          { "name": "UserNewFollowerNotice" },
-          { "name": "ArticlePublishedNotice" },
-          { "name": "ArticleNewDownstreamNotice" },
-          { "name": "ArticleNewCollectedNotice" },
-          { "name": "ArticleNewAppreciationNotice" },
-          { "name": "ArticleNewSubscriberNotice" },
-          { "name": "ArticleNewCommentNotice" },
-          { "name": "ArticleMentionedYouNotice" },
-          { "name": "SubscribedArticleNewCommentNotice" },
-          { "name": "UpstreamArticleArchivedNotice" },
-          { "name": "DownstreamArticleArchivedNotice" },
-          { "name": "CommentPinnedNotice" },
-          { "name": "CommentNewReplyNotice" },
-          { "name": "CommentMentionedYouNotice" },
-          { "name": "OfficialAnnouncementNotice" },
-          { "name": "ArticleTagHasBeenAddedNotice" },
-          { "name": "ArticleTagHasBeenRemovedNotice" },
-          { "name": "ArticleTagHasBeenUnselectedNotice" },
-          { "name": "PaymentReceivedDonationNotice" },
-          { "name": "PaymentPayoutNotice" }
-        ]
-      },
-      {
-        "kind": "UNION",
-        "name": "TransactionTarget",
-        "possibleTypes": [{ "name": "Article" }, { "name": "Transaction" }]
-      }
-    ]
-  }
+  "Node": ["Article", "User", "Comment", "Tag", "Draft"],
+  "Connection": [
+    "ArticleConnection",
+    "CommentConnection",
+    "ResponseConnection",
+    "TagConnection",
+    "UserConnection",
+    "DraftConnection",
+    "ReadHistoryConnection",
+    "RecentSearchConnection",
+    "AppreciationConnection",
+    "NoticeConnection",
+    "TransactionConnection",
+    "SearchResultConnection",
+    "ReportConnection",
+    "OAuthClientConnection",
+    "SkippedListItemsConnection"
+  ],
+  "Response": ["Article", "Comment"],
+  "Notice": [
+    "UserNewFollowerNotice",
+    "ArticlePublishedNotice",
+    "ArticleNewDownstreamNotice",
+    "ArticleNewCollectedNotice",
+    "ArticleNewAppreciationNotice",
+    "ArticleNewSubscriberNotice",
+    "ArticleNewCommentNotice",
+    "ArticleMentionedYouNotice",
+    "SubscribedArticleNewCommentNotice",
+    "UpstreamArticleArchivedNotice",
+    "DownstreamArticleArchivedNotice",
+    "CommentPinnedNotice",
+    "CommentNewReplyNotice",
+    "CommentMentionedYouNotice",
+    "OfficialAnnouncementNotice",
+    "ArticleTagHasBeenAddedNotice",
+    "ArticleTagHasBeenRemovedNotice",
+    "ArticleTagHasBeenUnselectedNotice",
+    "PaymentReceivedDonationNotice",
+    "PaymentPayoutNotice"
+  ],
+  "TransactionTarget": ["Article", "Transaction"]
 }

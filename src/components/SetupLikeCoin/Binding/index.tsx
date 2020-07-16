@@ -1,5 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
+import { useQuery, gql } from '@apollo/client'
 import { useEffect, useState } from 'react'
 
 import { Dialog, Spinner, Translate } from '~/components'
