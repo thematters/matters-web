@@ -1,4 +1,4 @@
-import { DataProxy, gql } from '@apollo/client'
+import { gql } from '@apollo/client'
 import _isNil from 'lodash/isNil'
 import { useContext, useState } from 'react'
 
@@ -37,7 +37,7 @@ const Unfollow = ({ tag }: UnfollowTagProps) => {
             },
           }
         : undefined,
-    update: (cache: DataProxy) => {
+    update: (cache) => {
       updateTagFollowers({
         cache,
         type: 'unfollow',
