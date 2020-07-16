@@ -4,7 +4,7 @@ import { UserDigest } from '~/components'
 
 export const ALL_AUTHORS_PUBLIC = gql`
   query AllAuthorsPublic($after: String) {
-    viewer {
+    viewer @connection(key: "viewerAuthors") {
       id
       recommendation {
         authors(input: { first: 20, after: $after }) {
