@@ -12,8 +12,6 @@ type ROUTE_KEY =
   | 'HOME'
   | 'FOLLOW'
   | 'AUTHORS'
-  | 'TOPICS'
-  | 'ICYMI'
   | 'SEARCH'
   | 'TAGS'
   | 'TAG_DETAIL'
@@ -58,12 +56,14 @@ export const ROUTES: Array<{
   pathname: string
   handler?: (req: Request, res: Response, next: NextFunction) => any
 }> = [
+  /**
+   * Public
+   */
   { key: 'HOME', pathname: '/' },
   { key: 'FOLLOW', pathname: '/follow' },
   { key: 'AUTHORS', pathname: '/authors' },
-  { key: 'TOPICS', pathname: '/topics' },
-  { key: 'ICYMI', pathname: '/icymi' },
   { key: 'SEARCH', pathname: '/search' },
+
   // experient page for recommendation engine testing
   { key: 'RECOMMENDATION', pathname: '/recommendation' },
 
@@ -80,6 +80,22 @@ export const ROUTES: Array<{
   // Article
   { key: 'ARTICLE_DETAIL', pathname: '/[userName]/[mediaHash]' },
 
+  // Auth
+  { key: 'LOGIN', pathname: '/login' },
+  { key: 'SIGNUP', pathname: '/signup' },
+  { key: 'FORGET', pathname: '/forget' },
+
+  // Misc
+  { key: 'HELP', pathname: '/help' },
+  { key: 'MIGRATION', pathname: '/migration' },
+  { key: 'ABOUT', pathname: '/about' },
+  { key: 'GUIDE', pathname: '/guide' },
+  { key: 'COMMUNITY', pathname: '/community' },
+  { key: 'TOS', pathname: '/tos' },
+
+  /**
+   * Protected
+   */
   // Me
   { key: 'ME_DRAFTS', pathname: '/me/drafts' },
   { key: 'ME_BOOKMARKS', pathname: '/me/bookmarks' },
@@ -107,11 +123,6 @@ export const ROUTES: Array<{
   // Draft
   { key: 'ME_DRAFT_DETAIL', pathname: '/me/drafts/[draftId]' },
 
-  // Auth
-  { key: 'LOGIN', pathname: '/login' },
-  { key: 'SIGNUP', pathname: '/signup' },
-  { key: 'FORGET', pathname: '/forget' },
-
   // OAuth
   { key: 'OAUTH_AUTHORIZE', pathname: '/oauth/authorize' },
   { key: 'OAUTH_CALLBACK_SUCCESS', pathname: '/oauth/[provider]/success' },
@@ -120,14 +131,6 @@ export const ROUTES: Array<{
   // Pay
   { key: 'PAY_CALLBACK_SUCCESS', pathname: '/pay/[provider]/success' },
   { key: 'PAY_CALLBACK_FAILURE', pathname: '/pay/[provider]/failure' },
-
-  // Misc
-  { key: 'HELP', pathname: '/help' },
-  { key: 'MIGRATION', pathname: '/migration' },
-  { key: 'ABOUT', pathname: '/about' },
-  { key: 'GUIDE', pathname: '/guide' },
-  { key: 'COMMUNITY', pathname: '/community' },
-  { key: 'TOS', pathname: '/tos' },
 ]
 
 export const UrlFragments = {

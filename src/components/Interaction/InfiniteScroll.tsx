@@ -52,19 +52,13 @@ export const InfiniteScroll: React.FC<Props> = ({
   pullToRefresh,
   children,
 }) => {
-  const Loader = () => (
-    <>
-      <Waypoint onEnter={loadMore} />
-      {loader}
-    </>
-  )
-
   if (pullToRefresh) {
     return (
       <PullToRefresh refresh={pullToRefresh}>
         <>
           {children}
-          {hasNextPage && <Loader />}
+          {hasNextPage && <Waypoint onEnter={loadMore} />}
+          {hasNextPage && loader}
         </>
       </PullToRefresh>
     )
@@ -73,7 +67,8 @@ export const InfiniteScroll: React.FC<Props> = ({
   return (
     <>
       {children}
-      {hasNextPage && <Loader />}
+      {hasNextPage && <Waypoint onEnter={loadMore} />}
+      {hasNextPage && loader}
     </>
   )
 }

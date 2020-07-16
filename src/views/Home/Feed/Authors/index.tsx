@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
 import _chunk from 'lodash/chunk'
+import { useContext, useEffect } from 'react'
 
 import {
   Button,
@@ -10,44 +10,61 @@ import {
   TextIcon,
   Translate,
   UserDigest,
+  ViewerContext,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
 import { analytics } from '~/common/utils'
 
 import SectionHeader from '../../SectionHeader'
+import { FEED_AUTHORS_PRIVATE, FEED_AUTHORS_PUBLIC } from './gql'
 
-import { FeedAuthors as FeedAuthorsType } from './__generated__/FeedAuthors'
-
-const FEED_AUTHORS = gql`
-  query FeedAuthors {
-    viewer {
-      id
-      recommendation {
-        authors(
-          input: { first: 9, filter: { random: true, followed: false } }
-        ) {
-          edges {
-            cursor
-            node {
-              ...UserDigestRichUserPublic
-              ...UserDigestRichUserPrivate
-            }
-          }
-        }
-      }
-    }
-  }
-  ${UserDigest.Rich.fragments.user.public}
-  ${UserDigest.Rich.fragments.user.private}
-`
+import { FeedAuthorsPublic } from './__generated__/FeedAuthorsPublic'
 
 const FeedAuthors = () => {
-  const { data, loading, error, refetch } = useQuery<FeedAuthorsType>(
-    FEED_AUTHORS,
+  const viewer = useContext(ViewerContext)
+
+  /**
+   * Data Fetching
+   */
+  // public data
+  const { data, loading, error, refetch, client } = useQuery<FeedAuthorsPublic>(
+    FEED_AUTHORS_PUBLIC,
     { notifyOnNetworkStatusChange: true }
   )
+
   const edges = data?.viewer?.recommendation.authors.edges
+
+  // private data
+  const loadPrivate = (publicData?: FeedAuthorsPublic) => {
+    if (!viewer.id || !publicData) {
+      return
+    }
+
+    const publiceEdges = publicData?.viewer?.recommendation.authors.edges || []
+    const publicIds = publiceEdges.map(({ node }) => node.id)
+
+    client.query({
+      query: FEED_AUTHORS_PRIVATE,
+      fetchPolicy: 'network-only',
+      variables: { ids: publicIds },
+    })
+  }
+
+  // fetch private data for first page
+  useEffect(() => {
+    if (loading || !edges) {
+      return
+    }
+
+    loadPrivate(data)
+  }, [!!edges, viewer.id])
+
+  // fetch
+  const suffle = async () => {
+    const { data: newData } = await refetch()
+    loadPrivate(newData)
+  }
 
   if (error) {
     return <QueryError error={error} />
@@ -65,7 +82,7 @@ const FeedAuthors = () => {
           size={[null, '1.25rem']}
           spacing={[0, 'xtight']}
           bgActiveColor="grey-lighter"
-          onClick={() => refetch()}
+          onClick={suffle}
         >
           <TextIcon
             icon={<IconReload size="xs" />}
