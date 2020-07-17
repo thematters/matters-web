@@ -132,7 +132,7 @@ const MainFeed = ({ feedSortType: sortBy, viewMode }: MainFeedProps) => {
   const fetchedPrviateSortsRef = useRef<SortByType[]>([])
   useEffect(() => {
     const fetched = fetchedPrviateSortsRef.current.indexOf(sortBy) >= 0
-    if (loading || !edges || fetched) {
+    if (loading || !edges || fetched || !viewer.id) {
       return
     }
 

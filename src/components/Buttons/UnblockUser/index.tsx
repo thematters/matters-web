@@ -3,11 +3,11 @@ import _isNil from 'lodash/isNil'
 
 import { Button, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
-import UNBLOCK_USER from '~/components/GQL/mutations/unblockUser'
+import TOGGLE_BLOCK_USER from '~/components/GQL/mutations/toggleBlockUser'
 
 import { ADD_TOAST } from '~/common/enums'
 
-import { UnblockUser } from '~/components/GQL/mutations/__generated__/UnblockUser'
+import { ToggleBlockUser } from '~/components/GQL/mutations/__generated__/ToggleBlockUser'
 import { UnblockUserButtonUserPrivate } from './__generated__/UnblockUserButtonUserPrivate'
 
 interface UnblockUserButtonProps {
@@ -26,11 +26,11 @@ const fragments = {
 }
 
 export const UnblockUserButton = ({ user }: UnblockUserButtonProps) => {
-  const [unblockUser] = useMutation<UnblockUser>(UNBLOCK_USER, {
-    variables: { id: user.id },
+  const [unblockUser] = useMutation<ToggleBlockUser>(TOGGLE_BLOCK_USER, {
+    variables: { id: user.id, enabled: false },
     optimisticResponse: !_isNil(user.id)
       ? {
-          unblockUser: {
+          toggleBlockUser: {
             id: user.id,
             isBlocked: false,
             __typename: 'User',

@@ -9,8 +9,10 @@ const PushInitializer = ({ client }: { client: ApolloClient<any> }) => {
   const viewer = useContext(ViewerContext)
 
   useEffect(() => {
-    initializePush({ client, viewer })
-  }, [])
+    if (viewer.privateFetched) {
+      initializePush({ client, viewer })
+    }
+  }, [viewer.privateFetched])
 
   return null
 }

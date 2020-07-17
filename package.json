@@ -24,7 +24,7 @@
     "analyze": "BUNDLE_ANALYZE=both next build",
     "analyze:server": "BUNDLE_ANALYZE=server next build",
     "analyze:browser": "BUNDLE_ANALYZE=browser next build",
-    "gen:type": "npm run gen:clean && apollo client:codegen __generated__ --target=typescript --includes 'src/**/*.{ts,tsx}' --endpoint 'https://server-stage.matters.news/graphql'",
+    "gen:type": "npm run gen:clean && apollo client:codegen __generated__ --target=typescript --includes 'src/**/*.{ts,tsx}' --endpoint 'http://matters-server-develop.ap-southeast-1.elasticbeanstalk.com/graphql'",
     "gen:type:prod": "npm run gen:clean && apollo client:codegen __generated__ --target=typescript --includes 'src/**/*.{ts,tsx}' --endpoint 'https://server.matters.news/graphql'",
     "gen:watch": "npm run gen:type -- --watch",
     "gen:watch:prod": "npm run gen:type:prod -- --watch",
