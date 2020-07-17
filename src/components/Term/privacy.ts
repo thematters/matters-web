@@ -5,7 +5,7 @@ const Privacy: { zh_hant: string; zh_hans: string; en: string } = {
   <h3>隱私政策</h3>
 </summary>
 
-<p><small>更新日期：2020 年 7 月 20 日</small></p>
+<p><small>更新日期：2020 年 7 月 18 日</small></p>
 <p>本隱私政策（隱私政策）最後更新於上述日期，並且將不時更新。本隱私政策的任何變更將於公佈本政策的修訂政策後生效。本隱私政策旨在告知所有用戶，MATTERS LAB LIMITED（以下簡稱「MATTERS」）將如何處理個人信息與非個人信息。如有用戶不同意本隱私政策中的任何一部分，則MATTERS將無法向此類用戶提供服務，而此類用戶也應當停止訪問服務。</p>
 
 <p><b><u>1. 定義</u></b></p>
@@ -112,7 +112,7 @@ const Privacy: { zh_hant: string; zh_hans: string; en: string } = {
   <h3>隐私政策</h3>
 </summary>
 
-  <p><small>更新日期：2020 年 7 月 20 日</small></p>
+  <p><small>更新日期：2020 年 7 月 18 日</small></p>
 <p>本隐私政策（隐私政策）最后更新于上述日期，并且将不时更新。本隐私政策的任何变更将于公布本政策的修订政策后生效。本隐私政策旨在告知所有用户，MATTERS LAB LIMITED（以下简称「MATTERS」）将如何处理个人信息与非个人信息。如有用户不同意本隐私政策中的任何一部分，则MATTERS将无法向此类用户提供服务，而此类用户也应当停止访问服务。</p>
 
 <p><b><u>1. 定义</u></b></p>
@@ -219,7 +219,7 @@ const Privacy: { zh_hant: string; zh_hans: string; en: string } = {
   <h3>Privacy Policy </h3>
 </summary>
 
-<p>Last updated: <i>20 July, 2020</i></p>
+<p>Last updated: <i>18 July, 2020</i></p>
 <p>This privacy policy (the <b><i>Privacy Policy</i></b>) was last updated on the date above and shall be updated from time to time. Any changes to this Privacy Policy will become effective upon posting of the revised policy hereunder. This Privacy Policy is intended to inform all Users about how the Data Controller treats Personal Information and Non-personal Information. If any User does not agree with any part of this Privacy Policy, then the Data Controller cannot provide the Services to such User, and such User should stop accessing the same.</p>
 
 <p><b><u>1. DEFINITIONS</u></b></p>

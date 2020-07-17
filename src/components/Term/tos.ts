@@ -5,7 +5,7 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
   <h3>用戶協議</h3>
 </summary>
 
-<p><small>更新日期：2020 年 7 月 20 日</small></p>
+<p><small>更新日期：2020 年 7 月 18 日</small></p>
 <p>請仔細閱讀以下條款，這些條款包含了有關您合法權利和義務的重要信息。當您訪問或使用MATTERS時，即表示您完全接受以下條款的約束。如果您不同意這些條款，可以選擇不進入 MATTERS 。此中文條款為英文版本譯本，如中、英文兩個版本有任何抵觸或不相符之處，請以後面的英文版本為準。</p>
 <p><i>關於條款修改：</i></p>
 <p>MATTERS 保留自行修改條款的權利。修改後，MATTERS將通過平台公佈其修改，或以其它方式向您告知。如果您在MATTERS公佈修改後繼續訪問和使用MATTERS，則表示您同意接受修改後的條款。如果您不同意修改後的條款，您只能停止使用平台和服務。</p>
@@ -257,7 +257,7 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
   <h3>用户协议</h3>
 </summary>
 
-<p><small>更新日期：2020 年 7 月 20 日</small></p>
+<p><small>更新日期：2020 年 7 月 18 日</small></p>
 <p>请仔细阅读以下条款，这些条款包含了有关您合法权利和义务的重要信息。当您访问或使用MATTERS时，即表示您完全接受以下条款的约束。如果您不同意这些条款，可以选择不进入MATTERS。此中文条款为英文版本译本，如中、英文两个版本有任何抵触或不相符之处，请以后面的英文版本为准。</p>
 <p><i>关于条款修改：</i></p>
 <p>MATTERS 保留自行修改条款的权利。修改后，MATTERS将通过平台公布其修改，或以其它方式向您告知。如果您在MATTERS公佈修改后继续访问和使用MATTERS，则表示您同意接受修改后的条款。如果您不同意修改后的条款，您只能停止使用平台和服务。</p>
@@ -505,7 +505,7 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
   <h3>Terms and Conditions for MATTERS</h3>
 </summary>
 
-<p>Last updated date: <i> 20 July, 2020</i></p>
+<p>Last updated date: <i> 18 July, 2020</i></p>
 <p>PLEASE READ THESE TERMS CAREFULLY AS THEY CONTAIN IMPORTANT INFORMATION REGARDING YOUR LEGAL RIGHTS, REMEDIES AND OBLIGATIONS. YOU ACKNOWLEDGE AND AGREE THAT, BY ACCESSING OR USING THE PLATFORM AND/OR THE SERVICES, YOU ARE INDICATING THAT YOU HAVE READ, AND THAT YOU UNDERSTAND AND AGREE TO BE BOUND BY THESE TERMS. IF YOU DO NOT AGREE TO THESE TERMS, THEN YOU HAVE NO RIGHT TO ACCESS OR USE THE PLATFORM AND/OR THE SERVICES.</p>
 <p><i>Modification: </i></p>
 <p>MATTERS reserves the right to, at its sole discretion, modify these Terms at any time without prior notice and consent. If MATTERS modifies these Terms, it will post the modification via the Platform or otherwise provide you with notice of the modification. By continuing to access and/or use the Platform and/or the Services after MATTERS has posted a modification via the Platform and/or has provided you with notice of the modification, you are indicating that you agree to be bound by the modified Terms. If the modified Terms are not acceptable to you, your only recourse is to cease using the Platform and the Services.</p>
