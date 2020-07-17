@@ -10,35 +10,41 @@ import Appreciation from './Appreciation'
 import ResponseCount from './ResponseCount'
 import styles from './styles.css'
 
-import { FooterActionsArticle } from './__generated__/FooterActionsArticle'
+import { FooterActionsArticlePublic } from './__generated__/FooterActionsArticlePublic'
 
 export type FooterActionsControls = DropdownActionsControls
 
 type FooterActionsProps = {
-  article: FooterActionsArticle
+  article: FooterActionsArticlePublic
 } & FooterActionsControls
 
 const fragments = {
-  article: gql`
-    fragment FooterActionsArticle on Article {
-      id
-      title
-      slug
-      mediaHash
-      author {
+  article: {
+    public: gql`
+      fragment FooterActionsArticlePublic on Article {
         id
-        userName
+        title
+        slug
+        mediaHash
+        author {
+          id
+          userName
+        }
+        ...AppreciationArticle
+        ...ActionsResponseCountArticle
+        ...DropdownActionsArticle
       }
-      ...AppreciationArticle
-      ...ActionsResponseCountArticle
-      ...BookmarkArticlePrivate
-      ...DropdownActionsArticle
-    }
-    ${Appreciation.fragments.article}
-    ${ResponseCount.fragments.article}
-    ${BookmarkButton.fragments.article.private}
-    ${DropdownActions.fragments.article}
-  `,
+      ${Appreciation.fragments.article}
+      ${ResponseCount.fragments.article}
+      ${DropdownActions.fragments.article}
+    `,
+    private: gql`
+      fragment FooterActionsArticlePrivate on Article {
+        ...BookmarkArticlePrivate
+      }
+      ${BookmarkButton.fragments.article.private}
+    `,
+  },
 }
 
 const FooterActions = ({

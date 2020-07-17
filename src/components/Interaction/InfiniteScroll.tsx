@@ -1,5 +1,3 @@
-import { ApolloQueryResult } from 'apollo-client'
-import { forwardRef, Ref } from 'react'
 import { Waypoint } from 'react-waypoint'
 
 import { PullToRefresh, Spinner } from '~/components'
@@ -34,7 +32,7 @@ interface Props {
   /**
    * Callback to load more entities
    */
-  loadMore: () => Promise<ApolloQueryResult<any>>
+  loadMore: () => Promise<any>
 
   /**
    * A React component to act as loader
@@ -54,28 +52,23 @@ export const InfiniteScroll: React.FC<Props> = ({
   pullToRefresh,
   children,
 }) => {
-  const LoaderWithRef = forwardRef((props, ref: Ref<HTMLDivElement>) => (
-    <div ref={ref}>{loader || <Spinner />}</div>
-  ))
-
-  const Inner = () => (
-    <div>
-      {children}
-      {hasNextPage && (
-        <Waypoint onEnter={loadMore}>
-          <LoaderWithRef />
-        </Waypoint>
-      )}
-    </div>
-  )
-
   if (pullToRefresh) {
     return (
       <PullToRefresh refresh={pullToRefresh}>
-        <Inner />
+        <>
+          {children}
+          {hasNextPage && <Waypoint onEnter={loadMore} />}
+          {hasNextPage && loader}
+        </>
       </PullToRefresh>
     )
   }
 
-  return <Inner />
+  return (
+    <>
+      {children}
+      {hasNextPage && <Waypoint onEnter={loadMore} />}
+      {hasNextPage && loader}
+    </>
+  )
 }

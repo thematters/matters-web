@@ -109,6 +109,7 @@ const ArticleDetail = () => {
       fetchPolicy: 'network-only',
       variables: {
         mediaHash,
+        includeContent: article.state !== 'active' && isAuthor,
       },
     })
   }, [mediaHash, viewer.id, article])
@@ -204,7 +205,7 @@ const ArticleDetail = () => {
   /**
    * Render:Archived/Banned
    */
-  if (article.state !== 'active' && viewer.id !== authorId) {
+  if (article.state !== 'active' && !isAuthor) {
     return (
       <EmptyLayout>
         <Error

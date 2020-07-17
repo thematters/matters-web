@@ -76,8 +76,10 @@ const EditModeSidebar = ({
     <>
       <SidebarTags
         tags={editModeTags.length > 0 ? editModeTags : tags}
-        onAddTag={(tag) => setEditModeTags(_uniq(tags.concat(tag)))}
-        onDeleteTag={(tag) => setEditModeTags(tags.filter((it) => it !== tag))}
+        onAddTag={(tag) => setEditModeTags(_uniq(editModeTags.concat(tag)))}
+        onDeleteTag={(tag) =>
+          setEditModeTags(editModeTags.filter((it) => it !== tag))
+        }
       />
       <SidebarCollection
         articles={

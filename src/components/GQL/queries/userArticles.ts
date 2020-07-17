@@ -2,8 +2,8 @@ import gql from 'graphql-tag'
 
 import { ArticleDigestFeed } from '~/components'
 
-export default gql`
-  query UserArticles($userName: String!, $after: String) {
+export const USER_ARTICLES_PUBLIC = gql`
+  query UserArticlesPublic($userName: String!, $after: String) {
     user(input: { userName: $userName }) {
       id
       displayName
@@ -11,8 +11,7 @@ export default gql`
         description
         profileCover
       }
-      articles(input: { first: 10, after: $after })
-        @connection(key: "userArticles") {
+      articles(input: { first: 10, after: $after }) {
         totalCount
         pageInfo {
           startCursor
@@ -24,7 +23,8 @@ export default gql`
           node {
             createdAt
             wordCount
-            ...ArticleDigestFeedArticle
+            ...ArticleDigestFeedArticlePublic
+            ...ArticleDigestFeedArticlePrivate
           }
         }
       }
@@ -35,5 +35,18 @@ export default gql`
       }
     }
   }
-  ${ArticleDigestFeed.fragments.article}
+  ${ArticleDigestFeed.fragments.article.public}
+  ${ArticleDigestFeed.fragments.article.private}
+`
+
+export const USER_ARTICLES_PRIVATE = gql`
+  query UserArticlesPrivate($ids: [ID!]!) {
+    nodes(input: { ids: $ids }) {
+      id
+      ... on Article {
+        ...ArticleDigestFeedArticlePrivate
+      }
+    }
+  }
+  ${ArticleDigestFeed.fragments.article.private}
 `

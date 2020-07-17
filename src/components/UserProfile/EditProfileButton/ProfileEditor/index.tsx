@@ -25,10 +25,10 @@ import IMAGE_COVER from '@/public/static/images/profile-cover.png'
 
 import styles from './styles.css'
 
-import { ProfileUser } from '~/components/UserProfile/__generated__/ProfileUser'
+import { ProfileUserPublic } from '~/components/UserProfile/__generated__/ProfileUserPublic'
 import { UpdateUserInfoProfile } from './__generated__/UpdateUserInfoProfile'
 
-export type ProfileEditorUser = ProfileUser
+export type ProfileEditorUser = ProfileUserPublic
 
 interface FormProps {
   user: ProfileEditorUser

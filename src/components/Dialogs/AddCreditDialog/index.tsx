@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import { Dialog, PaymentForm, ViewerContext } from '~/components'
 
@@ -38,6 +38,7 @@ const BaseAddCreditDialog = ({ children }: AddCreditDialogProps) => {
     transaction: undefined,
     client_secret: '',
   })
+
   const resetData = () =>
     setData({
       transaction: undefined,
@@ -50,11 +51,24 @@ const BaseAddCreditDialog = ({ children }: AddCreditDialogProps) => {
     analytics.trackEvent('click_button', { type: 'checkout' })
   }
 
+  // set password if needed
   const isSetPaymentPassword = step === 'setPaymentPassword'
+
+  // confirm add credit amount
   const isConfirm = step === 'confirm'
+
+  // stripe elements for credit card info
   const isCheckout = step === 'checkout'
+
+  // loader and error catching
   const isProcessing = step === 'processing'
+
+  // confirmation
   const isComplete = step === 'complete'
+
+  useEffect(() => {
+    analytics.trackEvent('view_add_credit_dialog', { step })
+  }, [step])
 
   return (
     <>

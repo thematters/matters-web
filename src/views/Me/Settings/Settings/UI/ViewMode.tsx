@@ -16,7 +16,7 @@ import { STORE_KEY_VIEW_MODE } from '~/common/enums'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 
-type ViewMode = 'default' | 'comfortable' | 'compact'
+export type ViewModeType = 'default' | 'comfortable' | 'compact'
 
 const ViewMode = () => {
   const { data, client } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
@@ -27,7 +27,7 @@ const ViewMode = () => {
   const isComfortableMode = viewMode === 'comfortable'
   const isCompactMode = viewMode === 'compact'
 
-  const setViewMode = (mode: ViewMode) => {
+  const setViewMode = (mode: ViewModeType) => {
     if (client) {
       client.writeData({
         id: 'ClientPreference:local',
