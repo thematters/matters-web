@@ -99,7 +99,7 @@ const ArticleDetail = () => {
   const canEdit = isAuthor && !viewer.isInactive
 
   // fetch private data
-  useEffect(() => {
+  const loadPrivate = () => {
     if (!viewer.id || !article) {
       return
     }
@@ -112,6 +112,10 @@ const ArticleDetail = () => {
         includeContent: article.state !== 'active' && isAuthor,
       },
     })
+  }
+
+  useEffect(() => {
+    loadPrivate()
   }, [mediaHash, viewer.id, article])
 
   // translation
@@ -158,9 +162,10 @@ const ArticleDetail = () => {
   const [editModeCollection, setEditModeCollection] = useState<
     ArticleDigestDropdownArticle[]
   >([])
-  const onEditSaved = () => {
+  const onEditSaved = async () => {
     setEditMode(false)
-    refetchPublic()
+    await refetchPublic()
+    loadPrivate()
   }
 
   useEffect(() => {

@@ -27,7 +27,7 @@ const Authors = () => {
    * Data Fetching
    */
   // public data
-  const { data, loading, error, refetch, client } = useQuery<
+  const { data, loading, error, refetch: refetchPublic, client } = useQuery<
     SidebarAuthorsPublic
   >(SIDEBAR_AUTHORS_PUBLIC, { notifyOnNetworkStatusChange: true })
   const edges = data?.viewer?.recommendation.authors.edges
@@ -57,9 +57,9 @@ const Authors = () => {
     loadPrivate(data)
   }, [!!edges, viewer.id])
 
-  // fetch
-  const suffle = async () => {
-    const { data: newData } = await refetch()
+  // refetch
+  const refetch = async () => {
+    const { data: newData } = await refetchPublic()
     loadPrivate(newData)
   }
 
@@ -80,7 +80,7 @@ const Authors = () => {
             size={[null, '1.25rem']}
             spacing={[0, 'xtight']}
             bgActiveColor="grey-lighter"
-            onClick={suffle}
+            onClick={refetch}
           >
             <TextIcon
               icon={<IconReload size="xs" />}

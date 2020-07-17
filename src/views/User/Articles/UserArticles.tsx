@@ -64,9 +64,16 @@ const UserArticles = () => {
    * Data Fetching
    */
   // public data
-  const { data, loading, error, fetchMore, refetch, client } = useQuery<
-    UserArticlesPublic
-  >(USER_ARTICLES_PUBLIC, { variables: { userName } })
+  const {
+    data,
+    loading,
+    error,
+    fetchMore,
+    refetch: refetchPublic,
+    client,
+  } = useQuery<UserArticlesPublic>(USER_ARTICLES_PUBLIC, {
+    variables: { userName },
+  })
 
   // pagination
   const connectionPath = 'user.articles'
@@ -116,7 +123,11 @@ const UserArticles = () => {
     loadPrivate(newData)
   }
 
-  // pull to refresh
+  // refetch & pull to refresh
+  const refetch = async () => {
+    const { data: newData } = await refetchPublic()
+    loadPrivate(newData)
+  }
   usePullToRefresh.Register()
   usePullToRefresh.Handler(refetch)
 

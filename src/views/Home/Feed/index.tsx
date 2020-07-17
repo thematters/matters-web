@@ -100,7 +100,7 @@ const MainFeed = ({ feedSortType: sortBy, viewMode }: MainFeedProps) => {
     loading,
     fetchMore,
     networkStatus,
-    refetch,
+    refetch: refetchPublic,
     client,
   } = useQuery<FeedArticlesPublic>(FEED_ARTICLES_PUBLIC[sortBy], {
     notifyOnNetworkStatusChange: true,
@@ -164,6 +164,12 @@ const MainFeed = ({ feedSortType: sortBy, viewMode }: MainFeedProps) => {
         }),
     })
 
+    loadPrivate(newData)
+  }
+
+  // refetch & pull to refresh
+  const refetch = async () => {
+    const { data: newData } = await refetchPublic()
     loadPrivate(newData)
   }
 
