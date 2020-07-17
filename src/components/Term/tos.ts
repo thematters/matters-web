@@ -5,7 +5,7 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
   <h3>用戶協議</h3>
 </summary>
 
-<p><small>更新日期：2020 年 5 月 15 日</small></p>
+<p><small>更新日期：2020 年 7 月 18 日</small></p>
 <p>請仔細閱讀以下條款，這些條款包含了有關您合法權利和義務的重要信息。當您訪問或使用MATTERS時，即表示您完全接受以下條款的約束。如果您不同意這些條款，可以選擇不進入 MATTERS 。此中文條款為英文版本譯本，如中、英文兩個版本有任何抵觸或不相符之處，請以後面的英文版本為準。</p>
 <p><i>關於條款修改：</i></p>
 <p>MATTERS 保留自行修改條款的權利。修改後，MATTERS將通過平台公佈其修改，或以其它方式向您告知。如果您在MATTERS公佈修改後繼續訪問和使用MATTERS，則表示您同意接受修改後的條款。如果您不同意修改後的條款，您只能停止使用平台和服務。</p>
@@ -17,31 +17,29 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
 <p>&nbsp;&nbsp;&nbsp;&nbsp;(c)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>社區約章</i></b>是指MATTERS的社區約章，列出了平台對於用戶行為的規範和期望，並會不時修改；</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;(d)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>内容</i></b>是指文本、圖形、圖像、音頻、視頻、信息和其他材料；</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;(e)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>內容標準</i></b>是指任何用戶在平台發佈的任何內容的標準，詳見本條款第5.5條；</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(f)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>香港</i></b>是指中華人民共和國的香港特別行政區；</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(g)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>知識產權</i></b>是指與平台相關的所有版權和其他知識產權，無論其以何種形式呈現、為哪種媒體形式體現、是否已注冊，包括但不限於專利、設計權、商標、服務商標、應用程序、前述任何一項的申請權利、數據庫權利、專有技術、商業名稱、機密信息權利、商譽以及世界範圍內存在的其他類似的權利；</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(h)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>專有技術</i></b>是指與平台和/或服務相關的所有技術、經驗、數據、技術和商業信息，包括但不限於運營模式；</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(i)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>MATTERS</i></b>是指MATTERS LAB LIMITED，一家基於中華人民共和國香港特別行政區的法律注冊成立的私營有限公司；</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(j)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>MATTERS庫</i></b>是指MATTERS用於記錄和共享所有內容的可公開訪問的分佈式數據庫；</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(k)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>在線課程</i></b>是指由MATTERS組織、安排或以其他方式提供給平台上用戶的在線課程；</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(l)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>密碼</i></b>是指註冊用戶對其帳戶和第三方貨幣帳戶設置的所有此類（i）密碼；（ii）為其儲值錢包設置的個人密碼；</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(m)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>平台</i></b>是指MATTERS以網站、手機應用或其他形式向用戶提供服務的平台；</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(n)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>隱私政策</i></b>是指MATTERS的隱私政策，並由MATTERS不時更新；</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(o)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>私鑰</i></b>的定義請參照本條款第3.3條(ii)；</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(p)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>發佈</i></b>是指，就任何內容而言，在平台上或通過平台張貼、提交、發表、展示內容和/或傳輸給其他用戶和其他人的內容（包括對內容的評論），被發佈的定義也應照此解釋；</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(q)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>服務</i></b>的定義請參照本條款第2.1條；</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(r)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>儲值金額</i></b>是指存入儲值錢包的錢；</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(s)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>儲值錢包</i></b>是指MATTERS提供給其註冊用戶在MATTERS使用的數字錢包；</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(t)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>儲值錢包密碼</i></b>是指註冊用戶為使用儲值錢包而設置的個人密碼；</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(u)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>稅收</i></b>是指由香港或其他地區的地方、市政、政府、州、聯邦、或其他機構或當局施加的、徵收的或強制執行的扣繳、關稅、捐稅、徵稅、社會保障費用以及地稅等在所有情況下都具有課稅性質的所有形式的稅收，以及任何與之相關的利息、處罰、附加費或罰款；</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(v)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>條款</i></b>是指由MATTERS不時修訂或以其他方式更新的條款和條件（包括隱私政策）；</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(w)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>第三方內容</i></b>的定義請參照本條款第8.6條；</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(x)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>第三方貨幣</i></b>是指用戶可以在平台上存儲，發送和/或接收的任何加密貨幣（始終由第三方操作，維護或以其他方式提供）；</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(y)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>第三方貨幣帳戶</i></b>表示與相應的第三方貨幣相關聯的任何此類帳戶（始終由第三方運營，維護或以其他方式提供）；</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(z)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>用戶</i></b>是指平台的任何用戶，用戶們也應照此解釋；</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(aa)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>用戶內容</i></b>是指由任何用戶發佈到平台的任何內容。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(f)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>知識產權</i></b>是指與平台相關的所有版權和其他知識產權，無論其以何種形式呈現、為哪種媒體形式體現、是否已注冊，包括但不限於專利、設計權、商標、服務商標、應用程序、前述任何一項的申請權利、數據庫權利、專有技術、商業名稱、機密信息權利、商譽以及世界範圍內存在的其他類似的權利；</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(g)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>專有技術</i></b>是指與平台和/或服務相關的所有技術、經驗、數據、技術和商業信息，包括但不限於運營模式；</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(h)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>MATTERS</i></b>是指 MATTERS, INC.，一家基於美國特拉華州法律注冊成立的私營有限公司；</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(i)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>MATTERS庫</i></b>是指MATTERS用於記錄和共享所有內容的可公開訪問的分佈式數據庫；</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(j)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>在線課程</i></b>是指由MATTERS組織、安排或以其他方式提供給平台上用戶的在線課程；</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(k)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>密碼</i></b>是指註冊用戶對其帳戶和第三方貨幣帳戶設置的所有此類（i）密碼；（ii）為其儲值錢包設置的個人密碼；</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(l)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>平台</i></b>是指MATTERS以網站、手機應用或其他形式向用戶提供服務的平台；</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(m)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>隱私政策</i></b>是指MATTERS的隱私政策，並由MATTERS不時更新；</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(n)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>私鑰</i></b>的定義請參照本條款第3.3條(ii)；</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(o)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>發佈</i></b>是指，就任何內容而言，在平台上或通過平台張貼、提交、發表、展示內容和/或傳輸給其他用戶和其他人的內容（包括對內容的評論），被發佈的定義也應照此解釋；</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(p)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>服務</i></b>的定義請參照本條款第2.1條；</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(q)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>儲值金額</i></b>是指存入儲值錢包的錢；</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(r)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>儲值錢包</i></b>是指MATTERS提供給其註冊用戶在MATTERS使用的數字錢包；</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(s)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>儲值錢包密碼</i></b>是指註冊用戶為使用儲值錢包而設置的個人密碼；</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(t)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>稅收</i></b>是指任何適用司法管轄區的地方、市政、政府、州、聯邦、或其他機構或當局施加的、徵收的或強制執行的扣繳、關稅、捐稅、徵稅、社會保障費用以及地稅等在所有情況下都具有課稅性質的所有形式的稅收，以及任何與之相關的利息、處罰、附加費或罰款；</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(u)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>條款</i></b>是指由MATTERS不時修訂或以其他方式更新的條款和條件（包括隱私政策）；</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(v)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>第三方內容</i></b>的定義請參照本條款第8.6條；</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(w)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>第三方貨幣</i></b>是指用戶可以在平台上存儲，發送和/或接收的任何加密貨幣（始終由第三方操作，維護或以其他方式提供）；</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(x)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>第三方貨幣帳戶</i></b>表示與相應的第三方貨幣相關聯的任何此類帳戶（始終由第三方運營，維護或以其他方式提供）；</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(y)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>用戶</i></b>是指平台的任何用戶，用戶們也應照此解釋；</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(z)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>用戶內容</i></b>是指由任何用戶發佈到平台的任何內容。</p>
 <p>1.2    提及個人、公司、託管、合作夥伴、非法人團體或其他實體，應被理解為包括他們中的任何一個。</p>
 <p>1.3    提及單一性別的詞語應被理解為包括所有性別，提及單一個人的詞語應被理解為包括多數人，反之亦然，提及單數詞的含義應被理解為包括複數詞，反之亦然，提及整體應被理解為包括對其中任何部分的提及。</p>
-<p>1.4    以下詞彙，<b><i>附屬</i></b>、<b><i>附屬子公司</i></b>、<b><i>控權公司</i></b>和<b><i>母公司</i></b>的定義均按照（香港法例第622章）《公司條例》中的規定來解釋。</p>
 
 
 <p><b><u>2. 服務</u></b></p>
@@ -56,8 +54,7 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
 <p>2.3    本平台和/或服務面向的使用者年齡不得低於18歲。您必須年滿18歲才能訪問或使用平台和/或服務。</p>
 
 <p><i>地理限制</i></p>
-<p>2.4    MATTERS並未聲明，平台或其任何內容在香港以外的地區也是可訪問或合適的。有些人或者在有些國家訪問本平台可能是不合法的。如果您要從香港以外的地點訪問本平台，則由您自行決定訪問並且您有責任遵守當地法律。</p>
-<p>2.5    MATTERS並未聲明，由第三方服務商提供的任何服務（包括但不限於與儲值錢包和第三方貨幣錢包有關的服務）可在香港以外的地方訪問或獲得。</p>
+<p>2.4    MATTERS並未聲明，平台或其任何內容在您所在的司法管轄範圍以外的地區也是可訪問或合適的。有些人或者在有些國家訪問本平台可能是不合法的。您確認您應承擔責任並採取措施遵守您和任何適用司法管轄區中的所有本地法律。</p>
 
 <p><b><u>3. 帳戶註冊與帳戶安全</u></b></p>
 
@@ -70,7 +67,7 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
 <p>3.4    您了解並同意您使用的儲值錢包，第三方服務商提供的加密貨幣錢包，第三方貨幣帳戶和第三方貨幣將受此類條款約束且第三方服務提供商可能不時會收取服務費用。</p>
 
 <p><i>帳戶安全</i></p>
-<p>3.5    您有責任維護帳戶、密碼、第三方貨幣帳戶和私鑰的安全。您接受並承認，如果您沒有密碼和/或密鑰，您將無法訪問與您帳戶相關聯的儲值錢包、任何用戶內容和第三方貨幣帳戶。您同意您的帳戶屬於您個人，並且同意您不會向其他任何人提供訪問平台所需要的用戶名、密碼、私鑰、第三方貨幣帳戶信息或其他安全信息。您必須將這些信息視為機密信息，不得將其透露給其他任何人或實體。</p>
+<p>3.5    您有責任維護帳戶、密碼、第三方貨幣帳戶和私鑰各個方面的安全。您接受並承認，如果您沒有密碼和/或密鑰，您將無法訪問與您帳戶相關聯的儲值錢包、任何用戶內容和第三方貨幣帳戶。您同意您的帳戶屬於您個人，並且同意您不會向其他任何人提供訪問平台所需要的用戶名、密碼、私鑰、第三方貨幣帳戶信息或其他安全信息。您必須將這些信息嚴格保密，不得將其透露給其他任何人或實體。</p>
 <p>3.6    您同意，當您發現帳戶、儲值錢包、第三方貨幣帳戶被未經授權訪問或使用，或者有其他安全問題時立即通知MATTERS。在此您同意，在適用法律允許的最大範圍內，您對任何在您的帳戶、密碼、第三方貨幣帳戶和私鑰下發生的活動（包括與您帳戶鏈接第三方貨幣及其帳戶）負責，並接受任何授權的或未授權的對您帳戶、儲值錢包（包括儲值金額）和第三方貨幣帳戶和私鑰的訪問（包括與您帳戶鏈接第三方貨幣及其帳戶）可能帶來的所有風險。 </p>
 <p>3.7    您理解並同意數字虛擬錢包和密碼學是不斷進步的領域。代碼破解的進步或技術的進步（比如量子計算機）可能會對平台、服務、帳戶、儲值錢包、第三方貨幣帳戶造成風險，導致您的財產被盜或丟失。在使用平台和/或服務時，您承認並接受此類內在風險。</p>
 
@@ -199,7 +196,7 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
 <p>6.5    您可以使用平台上的信息，但僅供您個人使用。除非在版權法下另有明確許可，否則在未經MATTERS和版權所有者明確許可的情況下，不得對下載內容進行複製、再分配、出版或商業利用。在允許複製、再分配或出版版權內容的情況下，不得更改或刪除作者歸屬、商標說明或版權聲明。您承認您不會通過下載版權內容來獲得任何所有權。</p>
 
 <p><b><u>6. 商標</u></b></p>
-<p>6.6    「MATTERS」商標是或被許可是MATTERS和/或其關聯公司在香港或其他地方（無論是否註冊）的商標。MATTERS的名稱與商標以及所有相關的名稱、商標、產品與服務名稱、設計和標語均為MATTERS、其關聯公司或其許可方的商標。未經MATTERS事先書面許可，您不得使用此類商標。</p>
+<p>6.6    「MATTERS」商標是或被許可是MATTERS和/或其關聯公司在全球（無論是否註冊）的商標。MATTERS的名稱與商標以及所有相關的名稱、商標、產品與服務名稱、設計和標語均為MATTERS、其關聯公司或其許可方的商標。未經MATTERS事先書面許可，您不得使用此類商標。</p>
 <p>6.7    其他產品以及平台上明確身份的公司名稱可以是MATTERS、其許可方和/或其關聯公司或第三方的名稱、商標、商號、服務商標、商標、標誌、其他專有名稱或標記。在平台上使用任何第三方的或歸屬於第三方的名稱、商標、商標、服務商標、商標、標誌或其他專有名稱或商標，以及能夠通過平台從第三方獲得特定商品或服務，均不可被解釋為此第三方受到平台的認可，贊助平台，或此第三方通過平台參與提供商品、服務或信息。</p>
 
 <p><i>有關侵權的申訴</i></p>
@@ -230,7 +227,7 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
 <p>9.2     此外，相關適用的法律有可能不允許MATTERS限制或免除上述責任。在這樣的情況下，MATTERS應在相關法律規定的範圍內承擔相應的責任。在引起索賠的事件發生後，申訴方應盡快提交索賠申請。</p>
 <p>9.3    您接受並承認，使用互聯網平台和服務存在風險，包括但不限於硬件故障、軟件故障、互聯網連接故障的風險，惡意軟件植入的風險，以及第三方有可能未經授權訪問存儲在您帳戶、第三方貨幣帳戶，儲值帳戶或與您帳戶相關聯的信息（包括但不限於您的密碼和私鑰）的風險。您接受並承認，MATTERS對於您使用服務時可能遇到的任何通信故障、中斷、錯誤、失真或延遲不承擔責任。</p>
 <p>9.4    根據適用法規關於時效的規定，被過分延遲提交的索賠請求可能會被視作無效。只有真實的索賠才能得到處理。儘管有上述規定，任何由本條款、平台和/或服務引起的或與本條款、平台和/或服務相關的任何訴訟或索賠請求必須在訴因產生後一（1）年內被提交，否則在此期限過後此訴訟或索賠將被永久禁止。</p>
-<p>9.5    在不影響上述規定的情況下以及在適用法律允許的情況下，MATTERS對任何一位用戶的累計賠償責任均不得超過1000港元。</p>
+<p>9.5    在不影響上述規定的情況下以及在適用法律允許的情況下，MATTERS對任何一位用戶的累計賠償責任均不得超過150美金。</p>
 
 <p><b><u>10. 賠償保障</u></b></p>
 <p>10.1    您同意賠償和豁免MATTERS所有因為您的作為、不作為或疏忽而引致或遭受的任何索賠、責任、損害、損失和金錢賠償的責任，包括但不限於由以下情況（或內容）引起或與以下情況（或內容）相關的MATTERS、其關聯公司、其各自的許可方、服務提供商、員工、代理人、主管和/或董事被要求支付的、蒙受的、或被強加的法律及其他費用：</p>
@@ -245,13 +242,12 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
 <p><b><u>12. 其他規定</u></b></p>
 <p>12.1    本條款接替並取代MATTERS與您之間涉及平台和/或服務的任何以及所有事先的口頭或書面諒解或協議。</p>
 <p>12.2    未經MATTERS事先書面許可，您不得借法律的實施或以其他方式轉讓或轉移這些條款。MATTERS有權自行決定轉讓或轉移這些條款，並不受任何限制。在上述規定的規限下，本條款將對您、MATTERS、您與MATTERS各自的繼承人、被許可的受讓人和法律代表的利益具有適用性和約束力。</p>
-<p>12.3    非本條款任何一方的人無權根據《合約（第三者權利）條例》（香港法例第623章）執行本條款中的任何規定。</p>
-<p>12.4    在此條款下任何被許可或被要求的通知或其他消息，包括有關修改本條款的通知，將由MATTERS以書面形式通過電子郵件發送。</p>
-<p>12.5    MATTERS未行使本條款的任何權利或規定並不構成MATTERS對在未來行使該權利或條款的放棄。任何此類權利或規定的放棄只有在以書面形式並由正式授權的MATTERS代表簽字時才有效。除非本條款明確規定，否則任何一方根據本條款實施的任何救濟方法將不影響本條款下的其他救濟方法。</p>
-<p>12.6    本條款受香港法律管轄，並按照香港法律解釋。本條款的各方不可撤回地同意，香港法院對與本條款有關或由本條款引起的任何索賠或爭議擁有專屬管轄權。</p>
-<p>12.7    本條款和條件的原始英文版本可能被翻譯成其他語言。如果對本條款的內容或解釋存在爭議，亦或者本條款的英文版本與任何其他語言版本之間存在矛盾或不一致，則在法律允許的範圍內，英語版本適用、優先並具有決定性。</p>
-<p>12.8    本條款應被視為可分割的。如有任何條款被確定為不可執行的或無效的，則應依然在適用法律允許的最大範圍內執行此條款，並且任何條款被確定無效都不應影響任何其他條款的有效性和可執行性。被分割的條款應由盡可能接近原先措辭和意圖的新條款取代。</p>
-<p>12.9    與平台有關的所有投訴、反饋、評論、技術支持請求和其他聯絡信息請直接發送至 ask@matters.news。 </p>
+<p>12.3    在此條款下任何被許可或被要求的通知或其他消息，包括有關修改本條款的通知，將由MATTERS以書面形式通過電子郵件發送。</p>
+<p>12.4    MATTERS未行使本條款的任何權利或規定並不構成MATTERS對在未來行使該權利或條款的放棄。任何此類權利或規定的放棄只有在以書面形式並由正式授權的MATTERS代表簽字時才有效。除非本條款明確規定，否則任何一方根據本條款實施的任何救濟方法將不影響本條款下的其他救濟方法。</p>
+<p>12.5    本條款受特拉華州法律管轄，並按照特拉華州法律解釋。本條款的各方不可撤回地同意，特拉華州法院對與本條款有關或由本條款引起的任何索賠或爭議擁有專屬管轄權。</p>
+<p>12.6    本條款和條件的原始英文版本可能被翻譯成其他語言。如果對本條款的內容或解釋存在爭議，亦或者本條款的英文版本與任何其他語言版本之間存在矛盾或不一致，則在法律允許的範圍內，英語版本適用、優先並具有決定性。</p>
+<p>12.7    本條款應被視為可分割的。如有任何條款被確定為不可執行的或無效的，則應依然在適用法律允許的最大範圍內執行此條款，並且任何條款被確定無效都不應影響任何其他條款的有效性和可執行性。被分割的條款應由盡可能接近原先措辭和意圖的新條款取代。</p>
+<p>12.8    與平台有關的所有投訴、反饋、評論、技術支持請求和其他聯絡信息請直接發送至 ask@matters.news。 </p>
 
 </details>
   `,
@@ -261,7 +257,7 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
   <h3>用户协议</h3>
 </summary>
 
-<p><small>更新日期：2020 年 5 月 15 日</small></p>
+<p><small>更新日期：2020 年 7 月 18 日</small></p>
 <p>请仔细阅读以下条款，这些条款包含了有关您合法权利和义务的重要信息。当您访问或使用MATTERS时，即表示您完全接受以下条款的约束。如果您不同意这些条款，可以选择不进入MATTERS。此中文条款为英文版本译本，如中、英文两个版本有任何抵触或不相符之处，请以后面的英文版本为准。</p>
 <p><i>关于条款修改：</i></p>
 <p>MATTERS 保留自行修改条款的权利。修改后，MATTERS将通过平台公布其修改，或以其它方式向您告知。如果您在MATTERS公佈修改后继续访问和使用MATTERS，则表示您同意接受修改后的条款。如果您不同意修改后的条款，您只能停止使用平台和服务。</p>
@@ -273,31 +269,29 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
 <p>&nbsp;&nbsp;&nbsp;&nbsp;(c)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>社区约章</i></b>指MATTERS的社区约章，列出了平台对于用户行为的规范和期望，并会不时修改；</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;(d)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>内容</i></b>是指文本、图形、图像、音频、视频、信息和其他材料；</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;(e)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>内容标准</i></b>是指任何用户在平台发布的任何内容的标准，详见本条款第5.5条；</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(f)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>香港</i></b>是指中华人民共和国的香港特别行政区；</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(g)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>知识产权</i></b>是指与平台相关的所有版权和其他知识产权，无论其以何种形式呈现、为哪种媒体形式体现、是否已注册，包括但不限于专利、设计权、商标、服务商标、应用程序、前述任何一项的申请权利、数据库权利、专有技术、商业名称、机密信息权利、商誉以及世界范围内存在的其他类似的权利；</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(h)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>专有技术</i></b>是指与平台和/或服务相关的所有技术、经验、数据、技术和商业信息，包括但不限于运营模式；</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(i)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>MATTERS</i></b>是指MATTERS LAB LIMITED，一家基于中华人民共和国香港特别行政区的法律注册成立的私营有限公司；</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(j)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>MATTERS库</i></b>是指MATTERS用于记录和共享所有内容的可公开访问的分布式数据库；</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(k)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>在线课程</i></b>是指由MATTERS组织、安排或以其他方式提供给平台上用户的在线课程；</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(l)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>密码</i></b>指註册用户对其帐户和第三方货币帐户设置的所有此类（i）密码；（ii）为其储值钱包设置的个人密码；</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(m)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>平台</i></b>是指MATTERS以网站、手机应用或其他形式向用户提供服务的平台；</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(n)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>隐私政策</i></b>是指MATTERS的隐私政策，并由MATTERS不时更新；</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(o)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>私钥</i></b>的定义请参照本条款第3.3条(ii)；</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(p)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>发布</i></b>是指，就任何内容而言，在平台上或通过平台张贴内容，提交内容，发表内容，展示内容或转发加密货币（如适用）和/或内容给其他用户或其他人（包括对内容的评论），被发布的定义也应照此解释;</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(q)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>服务</i></b>的定义请参照本条款第2.1条；</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(r)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>储值金额</i></b>的定义请参照本条款第2.1条；</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(s)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>储值钱包</i></b>是指MATTERS提供给其註册用户在MATTERS使用的数字钱包；</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(t)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>储值钱包密码</i></b>是指註册用户为使用储值钱包而设置的个人密码；</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(u)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>税收</i></b>是指由香港或其他地区的地方、市政、政府、州、联邦、或其他机构或当局施加的、征收的或强制执行的扣缴、关税、捐税、征税、社会保障费用以及地税等在所有情况下都具有课税性质的所有形式的税收，以及任何与之相关的利息、处罚、附加费或罚款；</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(v)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>条款</i></b>是指由MATTERS不时修订、修改或以其他方式更新的条款和条件（包括隐私政策）；</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(w)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>第三方内容</i></b>的定义请参照本条款第8.6条；</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(x)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>第三方货币</i></b>是指用户可以在平台上存储，发送和/或接收的任何加密货币（始终由第三方操作，维护或以其他方式提供）</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(y)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>第三方货币帐户</i></b>表示与相应的第三方货币相关联的任何此类帐户（始终由第三方运营，维护或以其他方式提供）。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(z)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>用户内容</i></b>是指由任何用户发布到平台的任何内容。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(aa)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>用户</i></b>是指平台的任何用户，用户们也应照此解释；</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(f)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>知识产权</i></b>是指与平台相关的所有版权和其他知识产权，无论其以何种形式呈现、为哪种媒体形式体现、是否已注册，包括但不限于专利、设计权、商标、服务商标、应用程序、前述任何一项的申请权利、数据库权利、专有技术、商业名称、机密信息权利、商誉以及世界范围内存在的其他类似的权利；</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(g)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>专有技术</i></b>是指与平台和/或服务相关的所有技术、经验、数据、技术和商业信息，包括但不限于运营模式；</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(h)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>MATTERS</i></b>是指 MATTERS, INC.，一家基于美国特拉华州法律注册成立的私营有限公司；</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(i)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>MATTERS库</i></b>是指MATTERS用于记录和共享所有内容的可公开访问的分布式数据库；</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(j)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>在线课程</i></b>是指由MATTERS组织、安排或以其他方式提供给平台上用户的在线课程；</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(k)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>密码</i></b>指註册用户对其帐户和第三方货币帐户设置的所有此类（i）密码；（ii）为其储值钱包设置的个人密码；</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(l)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>平台</i></b>是指MATTERS以网站、手机应用或其他形式向用户提供服务的平台；</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(m)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>隐私政策</i></b>是指MATTERS的隐私政策，并由MATTERS不时更新；</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(n)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>私钥</i></b>的定义请参照本条款第3.3条(ii)；</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(o)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>发布</i></b>是指，就任何内容而言，在平台上或通过平台张贴内容，提交内容，发表内容，展示内容或转发加密货币（如适用）和/或内容给其他用户或其他人（包括对内容的评论），被发布的定义也应照此解释;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(p)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>服务</i></b>的定义请参照本条款第2.1条；</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(q)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>储值金额</i></b>的定义请参照本条款第2.1条；</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(r)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>储值钱包</i></b>是指MATTERS提供给其註册用户在MATTERS使用的数字钱包；</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(s)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>储值钱包密码</i></b>是指註册用户为使用储值钱包而设置的个人密码；</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(t)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>税收</i></b>是指任何适用司法管辖区的地方、市政、政府、州、联邦、或其他机构或当局施加的、征收的或强制执行的扣缴、关税、捐税、征税、社会保障费用以及地税等在所有情况下都具有课税性质的所有形式的税收，以及任何与之相关的利息、处罚、附加费或罚款；</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(u)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>条款</i></b>是指由MATTERS不时修订、修改或以其他方式更新的条款和条件（包括隐私政策）；</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(v)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>第三方内容</i></b>的定义请参照本条款第8.6条；</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(w)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>第三方货币</i></b>是指用户可以在平台上存储，发送和/或接收的任何加密货币（始终由第三方操作，维护或以其他方式提供）</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(x)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>第三方货币帐户</i></b>表示与相应的第三方货币相关联的任何此类帐户（始终由第三方运营，维护或以其他方式提供）。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(y)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>用户内容</i></b>是指由任何用户发布到平台的任何内容。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(z)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>用户</i></b>是指平台的任何用户，用户们也应照此解释；</p>
 <p>1.2    提及个人、公司、托管、合作伙伴、非法人团体或其他实体，应被理解为包括他们中的任何一个。</p>
 <p>1.3    提及单一性别的词语应被理解为包括所有性别，提及单一个人的词语应被理解为包括多数人，反之亦然，提及单数词的含义应被理解为包括复数词，反之亦然，提及整体应被理解为包括对其中任何部分的提及。</p>
-<p>1.4    以下词汇，<b><i>附属</i></b>、<b><i>附属子公司</i></b>、<b><i>控权公司</i></b>和<b><i>母公司</i></b>的定义均按照（香港法例第622章）《公司条例》中的规定来解释。</p>
 
 <p><b><u>2. 服务</u></b></p>
 
@@ -310,7 +304,7 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
 <p>2.3    本平台和/或服务面向的使用者年龄不得低于18岁。您必须年满18岁才能访问或使用平台和/或服务。</p>
 
 <p><i>地理限制</i></p>
-<p>2.4    MATTERS并未声明，平台或其任何内容在香港以外的地区也是可访问的或合适的。有些人或者在有些国家访问本平台可能是不合法的。如果您要从香港以外的地点访问本平台，则由您自行决定访问并且您有责任遵守当地法律。</p>
+<p>2.4    MATTERS并未声明，平台或其任何内容在您所在的司法管辖范围以外的地区也是可访问的或合适的。有些人或者在有些国家访问本平台可能是不合法的。您确认您应承担责任并采取措施遵守您和任何适用司法管辖区中的所有本地法律。</p>
 
 <p><b><u>3. 帳戶注册与帳戶安全</u></b></p>
 
@@ -323,7 +317,7 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
 <p>3.4    您了解并同意您使用的储值钱包，第三方服务商提供的加密货币钱包，第三方货币帐户和第三方货币将受此类条款约束且第三方服务提供商可能不时会收取服务费用。</p>
 
 <p><i>帳戶安全</i></p>
-<p>3.5    您有责任维护帐戶、密码、第三方货币帐户和私钥的安全。您必须确保密码和私钥的安全。您接受并承认，如果您没有密码和/或密钥，您将无法访问与您帐戶相关联的储值钱包任何用户内容和加密货币（如适用）。您承认您的帐戶属于您个人，并且同意您不会向其他任何人提供访问平台所需要的用户名、密码、私钥或其他安全信息。您必须将这些信息视为机密信息，不得将其透露给其他任何人或实体。</p>
+<p>3.5    您有责任维护帐戶、密码、第三方货币帐户和私钥各个方面的安全。您必须确保密码和私钥的安全。您接受并承认，如果您没有密码和/或密钥，您将无法访问与您帐戶相关联的储值钱包任何用户内容和加密货币（如适用）。您承认您的帐戶属于您个人，并且同意您不会向其他任何人提供访问平台所需要的用户名、密码、私钥或其他安全信息。您必须将这些信息严格保密，不得将其透露给其他任何人或实体。</p>
 <p>3.6    您同意，当您发现帐户、储值钱包、第三方货币帐户被未经授权访问或使用，或者有其他安全问题时立即通知MATTERS。在此您同意，在适用法律允许的最大范围内，您对任何在您的帐户、密码、第三方货币帐户和私钥下發生的活动（包括与您帐户链接第三方货币及其帐户）负责，并接受任何授权的或未授权的对您帐户、储值钱包（包括储值金额）和第三方货币帐户和私钥的访问（包括与您帐户链接第三方货币及其帐户）可能带来的所有风险。</p>
 <p>3.7    您理解并同意数字虚拟钱包和密码学是不断进步的领域。代码破解的进步或技术的进步（比如量子计算机）可能会对平台、服务和用户帐戶、储值钱包、第三方货币帐户造成风险，导致您的财产被盗或丢失。在使用平台和/或服务时，您承认并接受此类内在风险。</p>
 
@@ -451,7 +445,7 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
 <p>6.5    您可以使用平台上的信息，但仅供您个人使用。除非在版权法下另有明确许可，否则在未经MATTERS和版权所有者明确许可的情况下，不得对下载内容进行复制、再分配、出版或商业利用。在允许复制、再分配或出版版权内容的情况下，不得更改或删除作者归属、商标说明或版权声明。您承认您不会通过下载版权内容来获得任何所有权。</p>
 
 <p><b><u>6. 商标</u></b></p>
-<p>6.6    「MATTERS」商标是或被许可是MATTERS和/或其关联公司在香港或其他地方（无论是否注册）的商标。MATTERS的名称与商标以及所有相关的名称、商标、产品与服务名称、设计和标语均为MATTERS、其关联公司或其许可方的商标。未经MATTERS事先书面许可，您不得使用此类商标。</p>
+<p>6.6    “MATTERS”商标是或被许可是MATTERS和/或其关联公司在全球（无论是否注册）的商标。MATTERS的名称与商标以及所有相关的名称、商标、产品与服务名称、设计和标语均为MATTERS、其关联公司或其许可方的商标。未经MATTERS事先书面许可，您不得使用此类商标。</p>
 <p>6.7    其他产品以及平台上明确身份的公司名称可以是MATTERS、其许可方和/或其关联公司或第三方的名称、商标、商号、服务商标、商标、标志、其他专有名称或标记。在平台上使用任何第三方的或归属于第三方的名称、商标、商标、服务商标、商标、标志或其他专有名称或商标，以及能够通过平台从第三方获得特定商品或服务，均不可被解释为此第三方受到平台的认可，赞助平台，或此第三方通过平台参与提供商品、服务或信息。</p>
 
 <p><i>有关侵权的申诉</i></p>
@@ -482,7 +476,7 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
 <p>9.2     此外，相关适用的法律有可能不允许MATTERS限制或免除上述责任。在这样的情况下，MATTERS应在相关法律规定的范围内承担相应的责任。在引起索赔的事件发生后，申诉方应尽快提交索赔申请。</p>
 <p>9.3    您接受并承认，使用互联网平台和服务存在风险，包括但不限于硬件故障、软件故障和互联网连接故障的风险，恶意软件植入的风险，以及第三方有可能未经授权访问存储在您帐戶、第三方货币帐户、储值帐户内或与您帐戶相关联的信息（包括但不限于您的密码和私钥）的风险。您接受并承认，MATTERS对于您使用服务时可能遇到的任何通信故障、中断、错误、失真或延迟不承担责任。</p>
 <p>9.4    根据适用法规关于时效的规定，被过分延迟提交的索赔请求可能会被视作无效。只有真实的索赔才能得到处理。尽管有上述规定，任何由本条款、平台和/或服务引起的或与本条款、平台和/或服务相关的任何诉讼或索赔请求必须在诉因产生后一（1）年内被提交，否则在此期限过后此诉讼或索赔将被永久禁止。</p>
-<p>9.5    在不影响上述规定的情况下以及在适用法律允许的情况下，MATTERS对任何一位用户的累计赔偿责任在任何情况下均不得超过1000港元。</p>
+<p>9.5    在不影响上述规定的情况下以及在适用法律允许的情况下，MATTERS对任何一位用户的累计赔偿责任在任何情况下均不得超过150美金。</p>
 
 <p><b><u>10. 赔偿保障</u></b></p>
 <p>10.1    您同意赔偿和豁免MATTERS所有因为您的作为、不作为或疏忽而引致或遭受的任何索赔、责任、损害、损失和金钱赔偿的责任，包括但不限于由以下情况（或内容）引起或与以下情况（或内容）相关的MATTERS、其关联公司、其各自的许可方、服务提供商、员工、代理人、主管和/或董事被要求支付的、蒙受的、或被强加的法律及其他费用：</p>
@@ -496,13 +490,12 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
 <p><b><u>12. 其他规定</u></b></p>
 <p>12.1    本条款接替并取代MATTERS与您之间涉及平台和/或服务的任何以及所有事先的口头或书面谅解或协议。</p>
 <p>12.2    未经MATTERS事先书面许可，您不得借法律的实施或以其他方式转让或转移这些条款。MATTERS有权自行决定转让或转移这些条款，并不受任何限制。在上述规定的规限下，本条款将对您、MATTERS、您与MATTERS各自的继承人、被许可的受让人和法律代表的利益具有适用性和约束力。</p>
-<p>12.3    非本条款任何一方的人无权根据《合约（第三者权利）条例》（香港法例第623章）执行本条款中的任何规定。</p>
-<p>12.4    在此条款下任何被许可或被要求的通知或其他消息，包括有关修改本条款的通知，将由MATTERS以书面形式通过电子邮件发送。</p>
-<p>12.5    MATTERS未行使本条款的任何权利或规定并不构成MATTERS对在未来行使该权利或条款的放弃。任何此类权利或规定的放弃只有在以书面形式并由正式授权的MATTERS代表签字时才有效。除非本条款明确规定，否则任何一方根据本条款实施的任何救济方法将不影响本条款下的其他救济方法。</p>
-<p>12.6    本条款受香港法律管辖，并按照香港法律解释。本条款的各方不可撤回地同意，香港法院对与本条款有关或由本条款引起的任何索赔或争议拥有专属管辖权。</p>
-<p>12.7    本条款和条件的原始英文版本可能被翻译成其他语言。如果对本条款的内容或解释存在争议，亦或者本条款的英文版本与任何其他语言版本之间存在矛盾或不一致，则在法律允许的范围内，英语版本适用、优先并具有决定性。</p>
-<p>12.8    本条款应被视为可分割的。如有任何条款被确定为不可执行的或无效的，则应依然在适用法律允许的最大范围内执行此条款，并且任何条款被确定无效都不应影响任何其他条款的有效性和可执行性。被分割的条款应由尽可能接近原先措辞和意图的新条款取代。</p>
-<p>12.9    与平台有关的所有投诉、反馈、评论、技术支持请求和其他联络信息请直接发送至 ask@matters.news。 </p>
+<p>12.3    在此条款下任何被许可或被要求的通知或其他消息，包括有关修改本条款的通知，将由MATTERS以书面形式通过电子邮件发送。</p>
+<p>12.4    MATTERS未行使本条款的任何权利或规定并不构成MATTERS对在未来行使该权利或条款的放弃。任何此类权利或规定的放弃只有在以书面形式并由正式授权的MATTERS代表签字时才有效。除非本条款明确规定，否则任何一方根据本条款实施的任何救济方法将不影响本条款下的其他救济方法。</p>
+<p>12.5    本条款受特拉华州法律管辖，并按照特拉华州法律解释。本条款的各方不可撤回地同意，特拉华州法院对与本条款有关或由本条款引起的任何索赔或争议拥有专属管辖权。</p>
+<p>12.6    本条款和条件的原始英文版本可能被翻译成其他语言。如果对本条款的内容或解释存在争议，亦或者本条款的英文版本与任何其他语言版本之间存在矛盾或不一致，则在法律允许的范围内，英语版本适用、优先并具有决定性。</p>
+<p>12.7    本条款应被视为可分割的。如有任何条款被确定为不可执行的或无效的，则应依然在适用法律允许的最大范围内执行此条款，并且任何条款被确定无效都不应影响任何其他条款的有效性和可执行性。被分割的条款应由尽可能接近原先措辞和意图的新条款取代。</p>
+<p>12.8    与平台有关的所有投诉、反馈、评论、技术支持请求和其他联络信息请直接发送至 ask@matters.news。 </p>
 
 </details>
 `,
@@ -512,7 +505,7 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
   <h3>Terms and Conditions for MATTERS</h3>
 </summary>
 
-<p>Last updated date: <i> 15 May, 2020</i></p>
+<p>Last updated date: <i> 18 July, 2020</i></p>
 <p>PLEASE READ THESE TERMS CAREFULLY AS THEY CONTAIN IMPORTANT INFORMATION REGARDING YOUR LEGAL RIGHTS, REMEDIES AND OBLIGATIONS. YOU ACKNOWLEDGE AND AGREE THAT, BY ACCESSING OR USING THE PLATFORM AND/OR THE SERVICES, YOU ARE INDICATING THAT YOU HAVE READ, AND THAT YOU UNDERSTAND AND AGREE TO BE BOUND BY THESE TERMS. IF YOU DO NOT AGREE TO THESE TERMS, THEN YOU HAVE NO RIGHT TO ACCESS OR USE THE PLATFORM AND/OR THE SERVICES.</p>
 <p><i>Modification: </i></p>
 <p>MATTERS reserves the right to, at its sole discretion, modify these Terms at any time without prior notice and consent. If MATTERS modifies these Terms, it will post the modification via the Platform or otherwise provide you with notice of the modification. By continuing to access and/or use the Platform and/or the Services after MATTERS has posted a modification via the Platform and/or has provided you with notice of the modification, you are indicating that you agree to be bound by the modified Terms. If the modified Terms are not acceptable to you, your only recourse is to cease using the Platform and the Services.</p>
@@ -521,34 +514,32 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
 <p>1.1	In these Terms, the following definitions and rules of interpretation apply unless otherwise defined:</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;(a)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>Account</i></b> means an account provided by MATTERS to its registered Users for the use of the Platform and the Services;</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;(b)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>Affiliates</i></b> means, in relation to MATTERS, for the time being, (i) any subsidiary of MATTERS; (ii) any subsidiary undertaking of MATTERS; (iii) any holding company of MATTERS; (iv) any parent undertaking of MATTERS; and (v) any group undertaking of MATTERS; </p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(c)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>Community Rules</i></b> means the community rules of MATTERS setting out the rules and expectations of behaviours and actions of Users on the Platform, as modified from time to time;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(c)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>Community Rules</i></b> means the community rules of MATTERS setting out the rules and expectations of behaviors and actions of Users on the Platform, as modified from time to time;</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;(d)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>Contents</i></b> means text, graphics, images, audio, video, information and other materials;</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;(e)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>Content Standards</i></b> means the standards for any Contents posted by any User to the Platform as set out in clause 5.5 of these Terms;</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(f)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>Hong Kong</i></b> means Hong Kong Special Administrative Region of the People’s Republic of China;</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(g)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>Intellectual Property Rights</i></b>includes, in relation to the Platform, all copyright and other intellectual property rights, howsoever arising and in whatever media, whether registered or not registered, including but not limited to patents, design rights, trade marks, service marks, applications or rights to apply for any of the foregoing, database rights, Know-How, trade or business name, rights in confidential information, goodwill, and other similar rights existing in any part of the world;</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(h)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>Know-How</i></b> means all know-how, experience, data, technical and commercial information relating to the Platform and/or the Services, including but not limited to mode of operation;</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(i)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>MATTERS</i></b> means MATTERS LAB LIMITED, a private limited company incorporated under the laws of Hong Kong;</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(j)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>MATTERS Vault</i></b>means the publicly accessible distributed database which MATTERS uses to record and share all Contents;</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(k)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>Online Courses</i></b> means such online courses organised, arranged or otherwise made available by MATTERS to the Users on the Platform;</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(l)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>Passcode</i></b> means, any and all such (i) passcodes set by a registered User in relation to his/her Account and Third Party Coins ID respectively; and (ii) the Stored Value Wallet PIN set by a registered User for his/her Stored Value Wallet;</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(m)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>Platform</i></b> means the platform made available by MATTERS in the form of a website, mobile application or otherwise for the provision of the Services;</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(n)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>Privacy Policy</i></b> means the privacy policy of MATTERS, as updated by MATTERS from time to time;</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(o)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>Private Key</i></b> is as defined under clause 3.3 (ii) of these Terms;</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(p)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>post</i></b> means, in respect of any Contents, post, submit, publish, display or transmit to other Users or other persons such Third Party Coins and/or Contents (including comments made to any such Contents) on or through the Platform, and <b><i>posted</i></b> shall be construed accordingly;</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(q)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>Services</i></b>is as defined under clause 2.1 of these Terms;</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(r)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>Stored Value</i></b> refers to the money loaded onto the Stored Value Wallet;</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(s)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>Stored Value Wallet</i></b> means the digital virtual wallet provided by MATTERS to its registered Users for the use of the Platform and the Services (where applicable);</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(t)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>Stored Value Wallet PIN</i></b> means the PIN set by a registered User for the usage of his/her Stored Value Wallet;</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(u)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>Tax</i></b> means all forms of taxation, withholdings, duties, imposts, levies, social security contributions and rates imposed, assessed or enforced by any local, municipal, governmental, state, federal or other body or authority in Hong Kong or elsewhere, in all cases being in the nature of taxation, and any related interest, penalty, surcharge or fine;</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(v)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>Terms</i></b> means these terms and conditions (including the Privacy Policy), as revised, modified or otherwise updated by MATTERS from time to time; </p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(w)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>Third Party Contents</i></b> is as defined under clause 8.6 of these Terms;</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(x)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>Third Party Coins</i></b> means any such cryptocurrencies (which are at all times operated, maintained or otherwise provided by (a) third party(ies)) which a User may store, send and/or receive on the Platform</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(y)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>Third Party Coins ID</i></b> means any such account (which are all times operated, maintained or otherwise provided by third part(ies)) linked to the respective Third Party Coins;</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(z)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>User</i></b> means any user of the Platform, and <b><i>Users</i></b> shall be construed accordingly; and</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(aa)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>User Contents</i></b> means any Contents posted by any User to the Platform.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(f)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>Intellectual Property Rights</i></b>includes, in relation to the Platform, all copyright and other intellectual property rights, howsoever arising and in whatever media, whether registered or not registered, including but not limited to patents, design rights, trademarks, service marks, applications or rights to apply for any of the foregoing, database rights, Know-How, trade or business name, rights in confidential information, goodwill, and other similar rights existing in any part of the world;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(g)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>Know-How</i></b> means all know-how, experience, data, technical and commercial information relating to the Platform and/or the Services, including but not limited to mode of operation;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(h)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>MATTERS</i></b> means MATTERS, INC., a private limited company incorporated under the laws of the State of Delaware;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(i)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>MATTERS Vault</i></b>means the publicly accessible distributed database which MATTERS uses to record and share all Contents;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(j)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>Online Courses</i></b> means such online courses organized, arranged or otherwise made available by MATTERS to the Users on the Platform;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(k)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>Passcode</i></b> means, any and all such (i) passcodes set by a registered User in relation to his/her Account and Third Party Coins ID respectively; and (ii) the Stored Value Wallet PIN set by a registered User for his/her Stored Value Wallet;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(l)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>Platform</i></b> means the platform made available by MATTERS in the form of a website, mobile application or otherwise for the provision of the Services;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(m)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>Privacy Policy</i></b> means the privacy policy of MATTERS, as updated by MATTERS from time to time;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(n)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>Private Key</i></b> is as defined under clause 3.3 (ii) of these Terms;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(o)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>post</i></b> means, in respect of any Contents, post, submit, publish, display or transmit to other Users or other persons such Third Party Coins and/or Contents (including comments made to any such Contents) on or through the Platform, and <b><i>posted</i></b> shall be construed accordingly;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(p)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>Services</i></b>is as defined under clause 2.1 of these Terms;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(q)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>Stored Value</i></b> refers to the money loaded onto the Stored Value Wallet;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(r)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>Stored Value Wallet</i></b> means the digital virtual wallet provided by MATTERS to its registered Users for the use of the Platform and the Services (where applicable);</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(s)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>Stored Value Wallet PIN</i></b> means the PIN set by a registered User for the usage of his/her Stored Value Wallet;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(t)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>Tax</i></b> means all forms of taxation, withholdings, duties, imposts, levies, social security contributions and rates imposed, assessed or enforced by any local, municipal, governmental, state, federal or other body or authority in any applicable jurisdictions, in all cases being in the nature of taxation, and any related interest, penalty, surcharge or fine;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(u)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>Terms</i></b> means these terms and conditions (including the Privacy Policy), as revised, modified or otherwise updated by MATTERS from time to time; </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(v)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>Third Party Contents</i></b> is as defined under clause 8.6 of these Terms;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(w)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>Third Party Coins</i></b> means any such cryptocurrencies (which are at all times operated, maintained or otherwise provided by (a) third party(ies)) which a User may store, send and/or receive on the Platform</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(x)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>Third Party Coins ID</i></b> means any such account (which are all times operated, maintained or otherwise provided by third part(ies)) linked to the respective Third Party Coins;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(y)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>User</i></b> means any user of the Platform, and <b><i>Users</i></b> shall be construed accordingly; and</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(z)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>User Contents</i></b> means any Contents posted by any User to the Platform.</p>
 <p>1.2    A reference to a person, corporation, trust, partnership, unincorporated body or other entity includes any of them.</p>
 <p>1.3    Words importing one gender shall be treated as importing any gender, words importing individuals shall be treated as importing persons and vice versa, words importing the singular shall be treated as importing the plural and vice versa, and words importing the whole shall be treated as including a reference to any part thereof.</p>
-<p>1.4    The words/phrases <b><i>subsidiary</i></b>, <b><i>subsidiary undertaking</i></b>, <b><i>holding company</i></b> and <b><i>parent undertaking</i></b>have the meanings given to them in the Companies Ordinance (Chapter 622 of the laws of Hong Kong).</p>
 
 <p><b><u>2. THE SERVICES</u></b></p>
 
@@ -561,9 +552,7 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
 <p>2.3    The Platform and/or the Services are not targeted toward, nor intended for use by, anyone under the age of 18. You must be at least 18 years of age to access or use the Platform and/or the Services.</p>
 
 <p><i>Geographical restrictions</i></p>
-<p>2.4    MATTERS makes no claim that the Platform or any of its Contents is accessible or appropriate outside of Hong Kong. Access to the Platform may not be legal by certain persons or in certain countries. If you access the Platform from outside Hong Kong, you do so on your own initiative and are responsible for compliance with local laws.</p>
-
-<p>2.5    MATTERS further makes no claim that any services provided by any third party service providers (including but not limited to those relating to the Stored Value Wallet and Third Party Coins) are accessible or available outside Hong Kong.</p>
+<p>2.4    MATTERS makes no claim that the Platform or any of its Contents is accessible or appropriate outside of your jurisdiction. Access to the Platform may not be legal by certain persons or in certain countries. You hereby acknowledge that you shall take responsibility and take steps to comply with any and all local laws in your and any applicable jurisdictions.</p>
 
 <p><b><u>3. ACCOUNT REGISTRATION AND SECURITY</u></b></p>
 
@@ -578,7 +567,7 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
 <p>3.4    You understand and agree that your use of the Stored Value Wallet, the third party service provider cryptocurrency wallet, the Third Party Coins ID and the Third Party Coins will be subject to such terms and conditions and/or applicable fees as imposed by the relevant third party service providers from time to time.</p>
 
 <p><i>Account security</i></p>
-<p>3.5    You are responsible for maintaining the security of your Account, your Third Party Coins ID, your Passcode and your Private Key. You must keep your Passcode and your Private Key secure. You accept and acknowledge that any User Contents and Third Party Coins you have associated with your Account and your Third Party Coins ID will become permanently inaccessible if you do not have your Passcode and/or your Private Key. You acknowledge that your Account and your Third Party Coins ID are personal to you and agree not to provide any other person with access to the Platform using your User name, Passcode, Private Key or other security information. You must treat such information as confidential, and you must not disclose it to any other person or entity.</p>
+<p>3.5    You are responsible for maintaining all aspects of security of your Account, your Third Party Coins ID, your Passcode and your Private Key. You must keep your Passcode and your Private Key secure. You accept and acknowledge that your Stored Value Wallet, User Contents and Third Party Coins you have associated with your Account and your Third Party Coins ID will become permanently inaccessible if you do not have your Passcode and/or your Private Key. You acknowledge that your Account,  your Passcode, and your Third Party Coins ID are personal to you and agree not to provide any other person with access to the Platform using your User name, Passcode, Private Key or other security information. You must treat such information as strictly confidential, and you must not disclose it to any other person or entity.</p>
 <p>3.6   You agree to notify MATTERS immediately of any unauthorized access to or use of your Account, your Third Party Coins ID or any other breach of security. You hereby accept and acknowledge that you take responsibility for all activities that occur under your Account, your Third Party Coins ID (including the Third Party Coins linked to your Account and your Third Party Coins ID) and Private Key and accept all risks of any authorized or unauthorized access to your Account, your Third Party Coins ID (including the Third Party Coins  linked to your Account and your Third Party Coins ID) and Private Key, to the maximum extent permitted by applicable laws.</p>
 <p>3.7    You acknowledge and understand that cryptography is a progressing field. Advances in code cracking or technical advances such as the development of quantum computers may present risks to the Platform, the Services, your Account and your Third Party Coins ID, which could result in the theft or loss of your property. By using the Platform and/or the Services, you acknowledge and accept such inherent risks.</p>
 
@@ -587,16 +576,16 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
 
 <p><i>Stored Value Wallet</i></p>
 <p>3.9    With regards to the top-up and cash-out of Stored Value in your Stored Value Wallet, you understand and agree that:</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(a)&nbsp;&nbsp;&nbsp;&nbsp;MATTERS may impose limitations and shall notify you from time to time the minimum and maximum allowable amount for top-up, payment and/or cash-out of Stored Value in your Stored Value Wallet over any given period of time in compliant with MATTERS’ internal policies and/or any applicable laws. For the avoidance of doubt, you may cash-out the Stored Value in your Stored Value Wallet at any time;</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(b)&nbsp;&nbsp;&nbsp;&nbsp;MATTERS will, in its sole discretion, designate and procure third party service provider(s) to manage the top-up and cash-out of Stored Value in your Stored Value Wallet in accordance with your instructions from time to time. You are advised to read the terms and conditions of these third party service providers carefully to understand the requirements, fees and charges they may impose per top-up and cash-out transaction of your Stored Value (or part thereof as applicable). You agree (i) to authorise our designated third party service provider(s) to effect any such top-up and cash-out transactions of your Stored Value in accordance with these Terms; and (ii) that such top-up and cash-out transactions of Stored Value is effected by third party service provider(s) beyond the control and responsibilities of MATTERS;</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(c)&nbsp;&nbsp;&nbsp;&nbsp;MATTERS has a right to charge you an administrative fee equivalent to fifteen per cent (15%) of the relevant cash-out amount of Stored Value in your Stored Value Wallet. The applicable administration fees are determined by MATTERS at its sole discretion from time to time. You agree that MATTERS has a right to deduct the applicable administration fees from your Stored Value when applicable before the relevant cash-out transaction by the third party service provider(s); and</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(d)&nbsp;&nbsp;&nbsp;&nbsp;you agree that MATTERS shall be entitled to assume that any instruction to deal with Stored Value in your Stored Value Wallet which is received by MATTERS from your Account through the Platform is an instruction given by you and can accordingly be acted on by MATTERS. You further agree where MATTERS and/or our designated third party payment system provider(s) has reason to believe that an instruction is not properly authorised or that any other breach of security has occurred, MATTERS has the right not to process, or delay processing such instruction. You agree to indemnify MATTERS and hold MATTERS harmless against all actions, claims, proceedings, losses, damages, costs and expenses which may be brought against us or suffered or incurred by MATTERS arising from or in connection with these Terms.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(a)&nbsp;&nbsp;&nbsp;&nbsp;MATTERS may impose limitations and shall notify you from time to time the minimum and maximum permitted amount for top-up, payment and/or cash-out of Stored Value in your Stored Value Wallet over any given period of time in compliant with MATTERS’ internal policies and/or any applicable laws. For the avoidance of doubt, you may cash-out the Stored Value in your Stored Value Wallet at any time;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(b)&nbsp;&nbsp;&nbsp;&nbsp;MATTERS will, in its sole discretion, designate and procure third party service provider(s) to manage the top-up and cash-out of Stored Value in your Stored Value Wallet in accordance with your instructions from time to time. You are advised to read the terms and conditions of these third party service providers carefully to understand the requirements, fees and charges they may impose per top-up and cash-out transaction of your Stored Value (or part thereof as applicable). You agree (i) to authorize our designated third party service provider(s) to effect any such top-up and cash-out transactions of your Stored Value in accordance with these Terms; and (ii) that such top-up and cash-out transactions of Stored Value is effected by third party service provider(s) beyond the control and responsibilities of MATTERS;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(c)&nbsp;&nbsp;&nbsp;&nbsp;MATTERS shall have a right to charge you an administrative fee equivalent to fifteen per cent (15%) of the relevant cash-out amount of Stored Value in your Stored Value Wallet. The applicable administration fees are determined by MATTERS at its sole discretion from time to time. You agree that MATTERS shall have the right to deduct the applicable administration fees from your Stored Value when applicable before the relevant cash-out transaction by the third party service provider(s); and</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(d)&nbsp;&nbsp;&nbsp;&nbsp;you agree that MATTERS shall be entitled to assume that any instruction to deal with Stored Value in your Stored Value Wallet which is received by MATTERS from your Account through the Platform is an instruction given by you and can accordingly be acted on by MATTERS. You further agree where MATTERS and/or our designated third party payment system provider(s) has reason to believe that an instruction is not properly authorized or that any other breach of security has occurred, MATTERS has the right not to process, or delay processing such instruction. You agree to indemnify MATTERS and hold MATTERS harmless against all actions, claims, proceedings, losses, damages, costs and expenses which may be brought against us or suffered or incurred by MATTERS arising from or in connection with these Terms.</p>
 
 <p>3.10    With regards to your use and obligations of the Stored Value Wallet, you understand and agree that:</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;(a)&nbsp;&nbsp;&nbsp;&nbsp;you must not use your Stored Value Wallet in any manner that (i) is inconsistent with these Terms or in contravention of any applicable laws (including but not limited to any laws and regulations relating to anti-money laundering activities); (ii) could result in complaints, disputes, claims, penalties or other liability to MATTERS, other Users or third parties; (iii) could cause MATTERS to breach or not comply with any such applicable laws; and/or (iv) could damage, disable, overburden, impair or compromise the Services, the Platform or security or interfere with other Users;</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(b)&nbsp;&nbsp;&nbsp;&nbsp;you must not tamper with your Stored Value Wallet (including, but not limited to, the software, applications, functions, features and the data recorded on your Stored Value Wallet) in any way. For the avoidance of doubt, MATTERS will not honour transactions, or allow cash-out of any Stored Value, if your Stored Value Wallet has been tampered with;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(b)&nbsp;&nbsp;&nbsp;&nbsp;you must not tamper with your Stored Value Wallet (including, but not limited to, the software, applications, functions, features and the data recorded on your Stored Value Wallet) in any way. For the avoidance of doubt, MATTERS will not honor transactions, or allow cash-out of any Stored Value, if your Stored Value Wallet has been tampered with;</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;(c)&nbsp;&nbsp;&nbsp;&nbsp;you must notify MATTERS as soon as practicable if you suspect that there has been unauthorized transaction and/or access to your Stored Value Wallet; and</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(d)&nbsp;&nbsp;&nbsp;&nbsp;you will cooperate with MATTERS when MATTERS ask for your co-operation and, if appropriate, the police, in investigating any possible or suspected unauthorised use, or in resetting your Stored Value Wallet if it is hacked or tampered with, or if MATTERS has reasonable grounds to suspect suspicious behaviour or usage pattern, or as required by applicable laws.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(d)&nbsp;&nbsp;&nbsp;&nbsp;you will cooperate with MATTERS when MATTERS ask for your co-operation and, if appropriate, the police, in investigating any possible or suspected unauthorized use, or in resetting your Stored Value Wallet if it is hacked or tampered with, or if MATTERS has reasonable grounds to suspect suspicious behavior or usage pattern, or as required by applicable laws.</p>
 
 <p>3.11     With regards to the Stored Value in your Stored Value Wallet, you understand and agree that:</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;(a)&nbsp;&nbsp;&nbsp;&nbsp;MATTERS will only process your instructions to make payments with and/or cash-out Stored Value from your Stored Value Wallet after it has been provided with the relevant accurate Stored Value Wallet PIN;</p>
@@ -605,8 +594,8 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
 
 <p><b><u>4. USE OF THE PLATFORM AND THE SERVICES</u></b></p>
 
-<p><i>Limited licence</i></p>
-<p>4.1    MATTERS grants you a limited, restricted, personal, non-transferable, non-sublicenseable and revocable licence to access and use the Platform only as expressly permitted in these Terms. Except for this licence, MATTERS does not grant you any other rights or licence with respect to the Platform and any rights or licences not expressly granted herein are reserved.</p>
+<p><i>Limited license</i></p>
+<p>4.1    MATTERS grants you a limited, restricted, personal, non-transferable, non-sublicenseable and revocable license to access and use the Platform only as expressly permitted in these Terms. Except for this license, MATTERS does not grant you any other rights or license with respect to the Platform and any rights or licenses not expressly granted herein are reserved.</p>
 <p>4.2    Nothing in these Terms is intended to nor shall create any partnership, joint venture, agency, consultancy or trusteeship between you and MATTERS.</p>
 
 <p><i>Prohibited use</i></p>
@@ -642,10 +631,10 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
 <p><i>User Contents</i></p>
 <p>5.1    The Platform may contain message boards, chat rooms, personal web pages or profiles, forums, bulletin boards, APIs and other interactive features that allow Users to post User Contents on or through the Platform.</p>
 <p>5.2    All User Contents must comply with the Content Standards and the Community Rules. Any User Content that does not meet the Content Standards and/or the Community Rules will not be posted and/or will be hidden by MATTERS at any time and without prior notice.</p>
-<p>5.3    Any User Contents you post to the Platform will be considered non-confidential. MATTERS and its Affiliates are under no obligation to treat any User Contents as confidential information. For the avoidance of doubt, MATTERS does not claim ownership of any User Content. However, by providing any User Contents on the Platform, you grant MATTERS and its Affiliates, and each of their respective licensees, successors and assigns a non-exclusive, worldwide, irrevocable, unconditional, perpetual right and licence to, on a complimentary basis, use, modify, delete, exploit, reproduce, display, distribute, sublicense, communicate and make available any such User Contents as MATTERS at its discretion sees fit for any purpose.</p>
+<p>5.3    Any User Contents you post to the Platform will be considered non-confidential. MATTERS and its Affiliates are under no obligation to treat any User Contents as confidential information. For the avoidance of doubt, MATTERS does not claim ownership of any User Content. However, by providing any User Contents on the Platform, you grant MATTERS and its Affiliates, and each of their respective licensees, successors and assigns a non-exclusive, worldwide, irrevocable, unconditional, perpetual right and license to, on a complimentary basis, use, modify, delete, exploit, reproduce, display, distribute, sublicense, communicate and make available any such User Contents as MATTERS at its discretion sees fit for any purpose.</p>
 <p>5.4    You represent and warrant that:</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;(a)&nbsp;&nbsp;&nbsp;&nbsp;you own and control all rights in and to the User Contents or otherwise have the lawful right to post and distribute such User Contents to or through the Platform;</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(b)&nbsp;&nbsp;&nbsp;&nbsp;you have the right to grant such licence to MATTERS and its Affiliates and their service providers, and each of their respective licensees, successors and assigns;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(b)&nbsp;&nbsp;&nbsp;&nbsp;you have the right to grant such license to MATTERS and its Affiliates and their service providers, and each of their respective licensees, successors and assigns;</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;(c)&nbsp;&nbsp;&nbsp;&nbsp;all of your User Contents do and will comply with these Terms, the Community Rules and any applicable laws and regulations and will not violate any rights of or cause injury to any person or entity; and</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;(d)&nbsp;&nbsp;&nbsp;&nbsp;you are responsible for any User Contents you post, and you, not MATTERS, shall be solely responsible for such User Contents, including its legality, reliability, accuracy and appropriateness.</p>
 
@@ -698,18 +687,18 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
 <p><i>Intellectual Property Rights of MATTERS</i></p>
 <p>6.1    The Platform contains copyright material, trade names and other proprietary information and the entire Contents of the Platform are protected by copyright law. Unless stated otherwise, the software required for the Services or available at or used by the Platform and the Intellectual Property Rights in the Platform and the Contents on the Platform (save and except User Contents) are owned by MATTERS, its Affiliates and/or their respective licensors, suppliers or service providers. MATTERS and its licensors, own copyright and/or database rights in the selection, coordination, arrangement and enhancement of such Content (save and except User Contents).</p>
 <p>6.2    The look and feel of the Platform (in the form of a  website or otherwise) is protected by copyright with all rights reserved. You may not duplicate, copy, or reuse any portion of the HTML/CSS, JavaScript, or visual design elements or concepts without the express written permission of MATTERS.</p>
-<p>6.3    MATTERS exclusively retains ownership of all rights, title and interest in and to (all Intellectual Property Rights of) the Platform and Contents (including the translated content) save and except User Contents. Any unauthorised use will constitute a material infringement of MATTERS’ Intellectual Property Rights.</p>
+<p>6.3    MATTERS exclusively retains ownership of all rights, title and interest in and to (all Intellectual Property Rights of) the Platform and Contents (including the translated content) save and except User Contents. Any unauthorized use will constitute a material infringement of MATTERS’ Intellectual Property Rights.</p>
 
-<p><i>Prohibited behaviour</i></p>
+<p><i>Prohibited behavior</i></p>
 <p>6.4    You may not modify, publish, transmit, participate in the transfer or sale of, create derivative works, or in any way exploit, the Platform and the Contents on the Platform, in whole or in part except as provided in these Terms, except as follows:</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;(a)&nbsp;&nbsp;&nbsp;&nbsp;your computer may temporarily store copies of such materials in RAM incidental to your accessing and viewing those materials;</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;(b)&nbsp;&nbsp;&nbsp;&nbsp;you may store files that are automatically cached by your web browser for display enhancement purposes;</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(c)&nbsp;&nbsp;&nbsp;&nbsp;if MATTERS provides desktop, mobile or other applications for download, you may download a single copy to your computer or mobile device solely for your own personal use, provided you agree to be bound by our end User licence agreement for such applications; and </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(c)&nbsp;&nbsp;&nbsp;&nbsp;if MATTERS provides desktop, mobile or other applications for download, you may download a single copy to your computer or mobile device solely for your own personal use, provided you agree to be bound by our end User license agreement for such applications; and </p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;(d)&nbsp;&nbsp;&nbsp;&nbsp;if MATTERS provides social media features with certain Content, you may take such actions as are enabled by such features.</p>
-<p>6.5    You may use information from the Platform for your own personal use only. Except as otherwise expressly permitted under copyright law, no copying, redistribution, retransmission, publication or commercial exploitation of downloaded Contents will be permitted without the express permission of MATTERS and that of the copyright owner. In the event of any permitted copying, redistribution or publication of copyright Content, no changes in or deletion of author attribution, trade mark legend or copyright notice shall be made. You acknowledge that you do not acquire any ownership rights by downloading copyright Content.</p>
+<p>6.5    You may use information from the Platform for your own personal use only. Except as otherwise expressly permitted under copyright law, no copying, redistribution, retransmission, publication or commercial exploitation of downloaded Contents will be permitted without the express permission of MATTERS and that of the copyright owner. In the event of any permitted copying, redistribution or publication of copyright Content, no changes in or deletion of author attribution, trademark legend or copyright notice shall be made. You acknowledge that you do not acquire any ownership rights by downloading copyright Content.</p>
 
 <p><b><u>6. Trade mark</u></b></p>
-<p>6.6    The mark “MATTERS” is a trade mark of or licensed to MATTERS and/or its Affiliates in Hong Kong or elsewhere (whether registered or not). The name and logo of MATTERS and all related names, logos, product and service names, designs and slogans are trade marks of MATTERS or its Affiliates or licensors. You must not use such marks without the prior written permission of MATTERS. </p>
+<p>6.6    The mark “MATTERS” is a trademark of or licensed to MATTERS and/or its Affiliates worldwide (whether registered or not). The name and logo of MATTERS and all related names, logos, product and service names, designs and slogans are trademarks of MATTERS or its Affiliates or licensors. You must not use such marks without the prior written permission of MATTERS.</p>
 <p>6.7    Other product and company names identified on the Platform may be the name, trade mark, trade name, service mark, logo, symbol or other proprietary designation of MATTERS, its licensors and/or Affiliates or a third party. The use on the Platform of any name, trade name, trade mark, service mark, logo, symbol or other proprietary designation or marking of or belonging to any third party, and the availability of specific goods or services from such third party through the Platform, should not be construed as an endorsement or sponsorship of the Platform by any such third party, or the participation by such third party in the offering of goods, services or information through the Platform. </p>
 
 <p><i>Complaint of alleged infringement</i></p>
@@ -726,7 +715,7 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
 <p>8.2    Your use of the Platform, its Contents, the Services and any items obtained through the Platform is at your own risk. The Platform, its Content, the Services and any items obtained through the Platform are provided on an "as is" and "as available" basis, without any warranties of any kind, either express or implied. Without limiting the foregoing, neither MATTERS nor anyone associated with MATTERS represents or warrants that the Platform, its Content, the Services and any items obtained through the Platform will be accurate, reliable, error-free or uninterrupted, that defects will be corrected, that the Platform or the server that makes it available are free of viruses or other harmful components or that the Platform, the Services and any items obtained through the Platform will otherwise meet your needs or expectations.</p>
 <p>8.3    You understand that MATTERS cannot and do not guarantee or warrant that any Contents available for downloading from the Platform will be free of viruses or other destructive code. You are responsible for implementing sufficient procedures and checkpoints to satisfy your particular requirements for anti-virus protection and accuracy of data input and output, and for maintaining a means external to the Platform for any reconstruction of any lost data. MATTERS will not be liable for any loss or damage caused by a distributed denial-of-service attack, viruses or other technologically harmful material that may infect your computer equipment, computer programs, data or other proprietary material due to your use of the Platform, the Services and any items obtained through the Platform or to your downloading of any material posted on it, or on any website linked to it.</p>
 <p>8.4    You understand and agree that actions or inactions caused by third parties or external instrumentalities (including without limitation the Internet) may create situations in which connections to the Platform may be impaired or disrupted. While MATTERS will use commercially reasonable efforts to take any actions it deems appropriate to remedy and avoid such events, MATTERS makes no guarantee that such events will not occur and you agree that MATTERS shall have no liability for any breach of these Terms to the extent caused by any such event.</p>
-<p>8.5    Unless MATTERS is at fault for intentional or wilful misconduct, or gross negligence, MATTERS is not responsible for any failures caused by server errors, misdirected or redirected transmissions, failed internet connections, interruptions in the transmission or receipt of reservations or, any computer virus or other technical defect, whether human or technical in nature.</p>
+<p>8.5    Unless MATTERS is at fault for intentional or willful misconduct, or gross negligence, MATTERS is not responsible for any failures caused by server errors, misdirected or redirected transmissions, failed internet connections, interruptions in the transmission or receipt of reservations or, any computer virus or other technical defect, whether human or technical in nature.</p>
 <p>8.6    The Platform may contain links to web pages and services of third parties (such as reCAPTCHA by Google) (<b><i>Third Party Contents</i></b>) and such links and services are provided for your convenience only. MATTERS has no absolute control over any Third Party Contents, and accept no responsibility for them or for any loss or damage that may arise from your use of them. If you decide to access any of the Third Party Contents linked to the Platform, you do so entirely at your own risk and subject to the terms and conditions of use for such Third Party Contents (including but not limited to the Google Privacy Policy and Terms of Service).</p>
 <p>8.7    MATTERS will not be responsible or liable to you for any loss and take no responsibility in relation to loss, inaccessibility or transaction which may arise from the top-up and cash-out transaction(s) provided by third party service provider(s) in relation to your Stored Value, including but not limited to (i) any loss, delay, error or omission which may occur in relation to the transmission; (ii) any exchange control or restriction which may be imposed by applicable laws; (iii) any loss or delay to you arising therefrom in connection with such control or restriction; and/or (iv) any charge which may be imposed by the third party service provider(s).</p>
 <p>8.8    MATTERS will not be liable for any matters arising from or in connection with the Stored Value Wallet and/or any loss and expense incurred or suffered by you or any other persons due to any improper or unauthorized use of the Stored Value Wallet. MATTERS has the right to not process any payment or cash-out instructions where it has not been provided with the accurate Stored Value Wallet PIN and/or where it has reasonable grounds to believe that the Stored Value Wallet has been altered or interfered, or  a third party has been allowed to alter or interfere, with the data on your Stored Value Wallet. MATTERS has a right to recover reasonable costs, expenses, losses and damages suffered or incurred by MATTERS as a result of thereof. To the extent permissible by applicable laws, MATTERS excludes all loss, damage, cost, expense, liability and penalty arising out of or in connection with the use of the Stored Value Wallet.</p>
@@ -740,14 +729,14 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
 <p>9.2     In addition, limitation of or exemption from the aforementioned liability may not be permitted pursuant to the relevant applicable laws. In such case, MATTERS shall bear the liability to the extent set forth in the relevant laws. Claims should be submitted as soon as possible after the occurrence of the event giving rise to the claim.</p>
 <p>9.3    You accept and acknowledge that there are risks associated with utilizing the Internet-based Platform and Services including, but not limited to, the risk of failure of hardware, software and Internet connections, the risk of malicious software introduction, and the risk that third parties may obtain unauthorized access to information stored within or associated with your Account, your Third Party Coins ID and Stored Value Wallet, including, but not limited to your Passcode and your Private Key. You accept and acknowledge that MATTERS will not be responsible for any communication failures, disruptions, errors, distortions, or delays you may experience when using the Services, however caused.</p>
 <p>9.4    Claims submitted with undue delay may be considered void pursuant to the applicable statute of limitations. Only bona fide claims will be considered. Notwithstanding the above, any cause of action or claim you may have arising out of or relating to these Terms, the Platform and/or the Services must be commenced within one (1) year after the cause of action accrues, otherwise, such cause of action or claim is permanently barred.</p>
-<p>9.5    Without prejudice to the foregoing and insofar as permitted under applicable laws, the aggregate liability of MATTERS to any User shall in no event exceed an amount of HKD 1000. </p>
+<p>9.5    Without prejudice to the foregoing and insofar as permitted under applicable laws, the aggregate liability of MATTERS to any User shall in no event exceed an amount of USD 150.</p>
 
 <p><b><u>10. INDEMNIFICATION</u></b></p>
 <p>10.1    You agree to indemnify and hold harmless MATTERS from and against any claims, liabilities, damages, losses, and expenses that MATTERS incurs or suffers as a result of any action, inaction or omission by you, including, without limitation, legal and other fees payable or suffered by, or imposed on, MATTERS, its Affiliates, their respective licensors, service providers, employees, agents, officers and/or directors arising out of or in connection with:</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;(a)&nbsp;&nbsp;&nbsp;&nbsp;access to, use or misuse of the Platform and/or the Services in violation of these Terms, applicable laws and regulations and/or any rights of any third party by you; </p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(b)&nbsp;&nbsp;&nbsp;&nbsp;any unauthorised activities or actions under your Account, your Third Party Coins ID (including the Third Party Coins linked to your Account and your Third Party Coins ID) and your Stored Value Wallet (including the Stored Value in your Stored Value Wallet), whether or not you have authorised or are aware of such activities or actions; and/or</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(b)&nbsp;&nbsp;&nbsp;&nbsp;any unauthorized activities or actions under your Account, your Third Party Coins ID (including the Third Party Coins linked to your Account and your Third Party Coins ID) and your Stored Value Wallet (including the Stored Value in your Stored Value Wallet), whether or not you have unauthorized or are aware of such activities or actions; and/or</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;(c)&nbsp;&nbsp;&nbsp;&nbsp;any User Content posted by you.</p>
-<p>10.2    If you use the Platform and/or the Services for or on behalf of a third party, you are responsible for any error in the accuracy of information provided in connection with such use. In addition, you must inform such third party of all applicable Terms. Each User using the Platform and/or the Services for or on behalf of any third party agrees to indemnify and hold MATTERS and each of its Affiliates (as applicable) harmless from and against any and all liabilities, losses, damages, suits and claims (including the costs of defence), relating to such third party’s or the User’s failure to fulfil any of its obligations as described above.</p>
+<p>10.2    If you use the Platform and/or the Services for or on behalf of a third party, you are responsible for any error in the accuracy of information provided in connection with such use. In addition, you must inform such third party of all applicable Terms. Each User using the Platform and/or the Services for or on behalf of any third party agrees to indemnify and hold MATTERS and each of its Affiliates (as applicable) harmless from and against any and all liabilities, losses, damages, suits and claims (including the costs of defense), relating to such third party’s or the User’s failure to fulfil any of its obligations as described above.</p>
 
 <p><b><u>11. STANDARD TERMS FOR USE OF APPLICATION</u></b></p>
 <p>11.1     By accessing or using the Platform through mobile application, you acknowledge and agree to be bound by the standard terms imposed by Apple App Store and/or Google Play (as applicable) as amended from time to time. </p>
@@ -755,13 +744,12 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
 <p><b><u>12. MISCELLANEOUS</u></b></p>
 <p>12.1    These Terms supersede and replace any and all prior oral or written understandings or agreements between MATTERS and you regarding the Platform and/or the Services.</p>
 <p>12.2    You may not assign or transfer these Terms, by operation of law or otherwise, without MATTERS’ prior written consent. MATTERS may assign or transfer these Terms, at its sole discretion, without restriction. Subject to the foregoing, these Terms will bind and inure to the benefit of you and MATTERS, the successors, permitted assigns and legal representatives of you and MATTERS respectively.</p>
-<p>12.3    A person who is not a party to these Terms has no right under the Contracts (Rights of Third Parties) Ordinance (Chapter 623 of the laws of Hong Kong) to enforce any provision of these Terms.</p>
-<p>12.4    Any notices or other communications permitted or required hereunder, including those regarding modifications to these Terms, will be in writing and given by MATTERS via email transmitted. </p>
-<p>12.5    The failure of MATTERS to enforce any right or provision of these Terms will not constitute a waiver of future enforcement of that right or provision. The waiver of any such right or provision will be effective only if in writing and signed by a duly authorised representative of MATTERS. Except as expressly set forth in these Terms, the exercise by either party of any of its remedies under these Terms will be without prejudice to its other remedies thereunder.  </p>
-<p>12.6    These Terms shall be governed by and construed in accordance with the laws of Hong Kong. The Parties hereunder irrevocably agrees that the courts of Hong Kong shall have exclusive jurisdiction in relation to any claim or dispute concerning or arising from these Terms. </p>
-<p>12.7    The original English version of these terms and conditions may have been translated into other languages. In the event of a dispute about the contents or interpretation of these Terms or inconsistency or discrepancy between the English version and any other language version of these Terms, the English language version to the extent permitted by law shall apply, prevail and be conclusive. </p>
-<p>12.8    These Terms shall be deemed severable. In the event that any provision is determined to be unenforceable or invalid, such provision shall nonetheless be enforced to the fullest extent permitted by applicable law and such determination shall not affect the validity and enforceability of any other remaining provisions. The severed provisions shall be replaced by a provision approximating as much as possible the original wording and intent.</p>
-<p>12.9    All complaints, feedback, comments, requests for technical support and other communications in relation to the Platform shall be directed to ask@matters.news.</p>
+<p>12.3    Any notices or other communications permitted or required hereunder, including those regarding modifications to these Terms, will be in writing and given by MATTERS via email transmitted. </p>
+<p>12.4    The failure of MATTERS to enforce any right or provision of these Terms will not constitute a waiver of future enforcement of that right or provision. The waiver of any such right or provision will be effective only if in writing and signed by a duly authorized representative of MATTERS. Except as expressly set forth in these Terms, the exercise by either party of any of its remedies under these Terms will be without prejudice to its other remedies thereunder.  </p>
+<p>12.5    These Terms shall be governed by and construed in accordance with the laws of the State of Delaware. The Parties hereunder irrevocably agrees that the courts of the State of Delaware shall have exclusive jurisdiction in relation to any claim or dispute concerning or arising from these Terms.</p>
+<p>12.6    The original English version of these terms and conditions may have been translated into other languages. In the event of a dispute about the contents or interpretation of these Terms or inconsistency or discrepancy between the English version and any other language version of these Terms, the English language version to the extent permitted by law shall apply, prevail and be conclusive. </p>
+<p>12.7    These Terms shall be deemed severable. In the event that any provision is determined to be unenforceable or invalid, such provision shall nonetheless be enforced to the fullest extent permitted by applicable law and such determination shall not affect the validity and enforceability of any other remaining provisions. The severed provisions shall be replaced by a provision approximating as much as possible the original wording and intent.</p>
+<p>12.8    All complaints, feedback, comments, requests for technical support and other communications in relation to the Platform shall be directed to ask@matters.news.</p>
 
 </details>
 `,
