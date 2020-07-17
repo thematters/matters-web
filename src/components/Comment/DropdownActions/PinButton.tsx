@@ -8,36 +8,10 @@ import {
   Translate,
 } from '~/components'
 import { useMutation } from '~/components/GQL'
+import TOGGLE_PIN_COMMENT from '~/components/GQL/mutations/togglePinComment'
 
+import { TogglePinComment } from '~/components/GQL/mutations/__generated__/TogglePinComment'
 import { PinButtonComment } from './__generated__/PinButtonComment'
-import { PinComment } from './__generated__/PinComment'
-import { UnpinComment } from './__generated__/UnpinComment'
-
-const PIN_COMMENT = gql`
-  mutation PinComment($id: ID!) {
-    pinComment(input: { id: $id }) {
-      id
-      pinned
-      article {
-        id
-        pinCommentLeft
-      }
-    }
-  }
-`
-
-const UNPIN_COMMENT = gql`
-  mutation UnpinComment($id: ID!) {
-    unpinComment(input: { id: $id }) {
-      id
-      pinned
-      article {
-        id
-        pinCommentLeft
-      }
-    }
-  }
-`
 
 const fragments = {
   comment: gql`
@@ -54,10 +28,10 @@ const fragments = {
 
 const PinButton = ({ comment }: { comment: PinButtonComment }) => {
   const canPin = comment.article.pinCommentLeft > 0
-  const [unpinComment] = useMutation<UnpinComment>(UNPIN_COMMENT, {
-    variables: { id: comment.id },
+  const [unpinComment] = useMutation<TogglePinComment>(TOGGLE_PIN_COMMENT, {
+    variables: { id: comment.id, enabled: false },
     optimisticResponse: {
-      unpinComment: {
+      togglePinComment: {
         id: comment.id,
         pinned: false,
         article: {
@@ -67,10 +41,10 @@ const PinButton = ({ comment }: { comment: PinButtonComment }) => {
       },
     },
   })
-  const [pinComment] = useMutation<PinComment>(PIN_COMMENT, {
-    variables: { id: comment.id },
+  const [pinComment] = useMutation<TogglePinComment>(TOGGLE_PIN_COMMENT, {
+    variables: { id: comment.id, enabled: true },
     optimisticResponse: {
-      pinComment: {
+      togglePinComment: {
         id: comment.id,
         pinned: true,
         article: {

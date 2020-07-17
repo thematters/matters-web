@@ -1,4 +1,3 @@
-import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import _isNil from 'lodash/isNil'
 import { useState } from 'react'
@@ -11,33 +10,24 @@ import {
   Translate,
 } from '~/components'
 import { useMutation } from '~/components/GQL'
+import TOGGLE_FOLLOW_USER from '~/components/GQL/mutations/toggleFollowUser'
 import updateUserFollowerCount from '~/components/GQL/updates/userFollowerCount'
 import updateViewerFolloweeCount from '~/components/GQL/updates/viewerFolloweeCount'
 
 import { FollowButtonSize } from './index'
 
+import { ToggleFollowUser } from '~/components/GQL/mutations/__generated__/ToggleFollowUser'
 import { FollowButtonUserPrivate } from './__generated__/FollowButtonUserPrivate'
-import { UnfollowUser } from './__generated__/UnfollowUser'
 
 interface UnfollowProps {
   user: Partial<FollowButtonUserPrivate>
   size: FollowButtonSize
 }
 
-const UNFOLLOW_USER = gql`
-  mutation UnfollowUser($id: ID!) {
-    toggleFollowUser(input: { id: $id }) {
-      id
-      isFollowee
-      isFollower
-    }
-  }
-`
-
 const Unfollow = ({ user, size }: UnfollowProps) => {
   const [hover, setHover] = useState(false)
-  const [unfollow] = useMutation<UnfollowUser>(UNFOLLOW_USER, {
-    variables: { id: user.id },
+  const [unfollow] = useMutation<ToggleFollowUser>(TOGGLE_FOLLOW_USER, {
+    variables: { id: user.id, enabled: false },
     optimisticResponse:
       !_isNil(user.id) && !_isNil(user.isFollower)
         ? {

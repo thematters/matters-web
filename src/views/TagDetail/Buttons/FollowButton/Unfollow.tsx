@@ -1,32 +1,23 @@
-import gql from 'graphql-tag'
 import _isNil from 'lodash/isNil'
 import { useContext, useState } from 'react'
 
 import { Button, TextIcon, Translate, ViewerContext } from '~/components'
 import { useMutation } from '~/components/GQL'
+import TOGGLE_FOLLOW_TAG from '~/components/GQL/mutations/toggleFollowTag'
 import updateTagFollowers from '~/components/GQL/updates/tagFollowers'
 
+import { ToggleFollowTag } from '~/components/GQL/mutations/__generated__/ToggleFollowTag'
 import { FollowButtonTag as FollowButtonTagType } from './__generated__/FollowButtonTag'
-import { UnfollowTag } from './__generated__/UnfollowTag'
 
 interface UnfollowTagProps {
   tag: FollowButtonTagType
 }
 
-const UNFOLLOW_TAG = gql`
-  mutation UnfollowTag($id: ID!) {
-    toggleFollowTag(input: { id: $id }) {
-      id
-      isFollower
-    }
-  }
-`
-
 const Unfollow = ({ tag }: UnfollowTagProps) => {
   const viewer = useContext(ViewerContext)
   const [hover, setHover] = useState(false)
-  const [unfollow] = useMutation<UnfollowTag>(UNFOLLOW_TAG, {
-    variables: { id: tag.id },
+  const [unfollow] = useMutation<ToggleFollowTag>(TOGGLE_FOLLOW_TAG, {
+    variables: { id: tag.id, enabled: false },
     optimisticResponse:
       !_isNil(tag.id) && !_isNil(tag.isFollower)
         ? {

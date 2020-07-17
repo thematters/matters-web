@@ -6,11 +6,11 @@ import {
   Translate,
 } from '~/components'
 import { useMutation } from '~/components/GQL'
-import UNBLOCK_USER from '~/components/GQL/mutations/unblockUser'
+import TOGGLE_BLOCK_USER from '~/components/GQL/mutations/toggleBlockUser'
 
 import { ADD_TOAST } from '~/common/enums'
 
-import { UnblockUser } from '~/components/GQL/mutations/__generated__/UnblockUser'
+import { ToggleBlockUser } from '~/components/GQL/mutations/__generated__/ToggleBlockUser'
 import { BlockUserPrivate } from '../__generated__/BlockUserPrivate'
 import { BlockUserPublic } from '../__generated__/BlockUserPublic'
 
@@ -21,10 +21,10 @@ const BlockUserButton = ({
   user: BlockUserPublic & Partial<BlockUserPrivate>
   openDialog: () => void
 }) => {
-  const [unblockUser] = useMutation<UnblockUser>(UNBLOCK_USER, {
-    variables: { id: user.id },
+  const [unblockUser] = useMutation<ToggleBlockUser>(TOGGLE_BLOCK_USER, {
+    variables: { id: user.id, enabled: false },
     optimisticResponse: {
-      unblockUser: {
+      toggleBlockUser: {
         id: user.id,
         isBlocked: false,
         __typename: 'User',
