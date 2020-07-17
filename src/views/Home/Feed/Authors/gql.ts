@@ -5,7 +5,7 @@ import { UserDigest } from '~/components'
 
 export const FEED_AUTHORS_PUBLIC = gql`
   query FeedAuthorsPublic {
-    viewer {
+    viewer @connection(key: "viewerFeedAuthors") {
       id
       recommendation {
         authors(

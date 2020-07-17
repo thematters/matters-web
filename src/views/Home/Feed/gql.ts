@@ -24,7 +24,7 @@ const feedFragment = gql`
 export const FEED_ARTICLES_PUBLIC = {
   hottest: gql`
     query HottestFeedPublic($after: String) {
-      viewer @connection(key: "viewerHottest") {
+      viewer @connection(key: "viewerFeedHottest") {
         id
         recommendation {
           feed: hottest(input: { first: 10, after: $after }) {
@@ -37,7 +37,7 @@ export const FEED_ARTICLES_PUBLIC = {
   `,
   valued: gql`
     query ValuedFeedPublic($after: String) {
-      viewer @connection(key: "viewerValued") {
+      viewer @connection(key: "viewerFeedValued") {
         id
         recommendation {
           feed: valued(input: { first: 10, after: $after }) {
@@ -50,7 +50,7 @@ export const FEED_ARTICLES_PUBLIC = {
   `,
   newest: gql`
     query NewestFeedPublic($after: String) {
-      viewer @connection(key: "viewerNewest") {
+      viewer @connection(key: "viewerFeedNewest") {
         id
         recommendation {
           feed: newest(input: { first: 10, after: $after }) {
@@ -63,7 +63,7 @@ export const FEED_ARTICLES_PUBLIC = {
   `,
   icymi: gql`
     query IcymiFeedPublic($after: String) {
-      viewer @connection(key: "viewerIcymi") {
+      viewer @connection(key: "viewerFeedIcymi") {
         id
         recommendation {
           feed: icymi(input: { first: 10, after: $after }) {
@@ -76,7 +76,7 @@ export const FEED_ARTICLES_PUBLIC = {
   `,
   topics: gql`
     query TopicsFeedPublic($after: String) {
-      viewer @connection(key: "viewerTopics") {
+      viewer @connection(key: "viewerFeedTopics") {
         id
         recommendation {
           feed: topics(input: { first: 10, after: $after }) {

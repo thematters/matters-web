@@ -4,7 +4,7 @@ import { UserDigest } from '~/components'
 
 export const SIDEBAR_AUTHORS_PUBLIC = gql`
   query SidebarAuthorsPublic {
-    viewer {
+    viewer @connection(key: "viewerSidebarAuthors") {
       id
       recommendation {
         authors(
