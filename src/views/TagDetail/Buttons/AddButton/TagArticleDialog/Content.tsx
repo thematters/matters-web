@@ -201,7 +201,7 @@ const TagArticleDialogContent: React.FC<TagArticleDialogContentProps> = ({
         dropdownCallback={onClickMenuItem}
         DropdownContent={DropdownContent}
         query={SEARCH_ARTICLES}
-        queryFilter={{ authorId: viewer.id }}
+        queryFilter={forSelected ? undefined : { authorId: viewer.id }}
       />
 
       <ul>
