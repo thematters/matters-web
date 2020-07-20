@@ -88,9 +88,11 @@ const MainFeed = ({ feedSortType: sortBy, viewMode }: MainFeedProps) => {
   /**
    * Data Fetching
    */
+  let query = FEED_ARTICLES_PUBLIC[sortBy]
+
   // split out group b if in hottest feed and user is logged in
   if (isHottestFeed && (!viewer.id || viewer.info.group !== 'b')) {
-    FEED_ARTICLES_PUBLIC.hottest = FEED_ARTICLES_PUBLIC.valued
+    query = FEED_ARTICLES_PUBLIC.valued
   }
 
   // public data
@@ -100,9 +102,9 @@ const MainFeed = ({ feedSortType: sortBy, viewMode }: MainFeedProps) => {
     loading,
     fetchMore,
     networkStatus,
-    refetch,
+    refetch: refetchPublic,
     client,
-  } = useQuery<FeedArticlesPublic>(FEED_ARTICLES_PUBLIC[sortBy], {
+  } = useQuery<FeedArticlesPublic>(query, {
     notifyOnNetworkStatusChange: true,
   })
 
@@ -132,7 +134,7 @@ const MainFeed = ({ feedSortType: sortBy, viewMode }: MainFeedProps) => {
   const fetchedPrviateSortsRef = useRef<SortByType[]>([])
   useEffect(() => {
     const fetched = fetchedPrviateSortsRef.current.indexOf(sortBy) >= 0
-    if (loading || !edges || fetched) {
+    if (loading || !edges || fetched || !viewer.id) {
       return
     }
 
@@ -167,10 +169,20 @@ const MainFeed = ({ feedSortType: sortBy, viewMode }: MainFeedProps) => {
     loadPrivate(newData)
   }
 
+  // refetch & pull to refresh
+  const refetch = async () => {
+    const { data: newData } = await refetchPublic()
+    loadPrivate(newData)
+  }
+
   /**
    * Render
    */
   if (loading && (!result || isNewLoading)) {
+    if (process.browser) {
+      window.scrollTo(0, 0)
+      document.body.focus()
+    }
     return <Spinner />
   }
 
