@@ -5,7 +5,7 @@ const Privacy: { zh_hant: string; zh_hans: string; en: string } = {
   <h3>隱私政策</h3>
 </summary>
 
-<p><small>更新日期：2020 年 7 月 20 日</small></p>
+<p><small>更新日期：2020 年 7 月 18 日</small></p>
 <p>本隱私政策（隱私政策）最後更新於上述日期，並且將不時更新。本隱私政策的任何變更將於公佈本政策的修訂政策後生效。本隱私政策旨在告知所有用戶，MATTERS LAB LIMITED（以下簡稱「MATTERS」）將如何處理個人信息與非個人信息。如有用戶不同意本隱私政策中的任何一部分，則MATTERS將無法向此類用戶提供服務，而此類用戶也應當停止訪問服務。</p>
 
 <p><b><u>1. 定義</u></b></p>
@@ -112,7 +112,7 @@ const Privacy: { zh_hant: string; zh_hans: string; en: string } = {
   <h3>隐私政策</h3>
 </summary>
 
-  <p><small>更新日期：2020 年 7 月 20 日</small></p>
+  <p><small>更新日期：2020 年 7 月 18 日</small></p>
 <p>本隐私政策（隐私政策）最后更新于上述日期，并且将不时更新。本隐私政策的任何变更将于公布本政策的修订政策后生效。本隐私政策旨在告知所有用户，MATTERS LAB LIMITED（以下简称「MATTERS」）将如何处理个人信息与非个人信息。如有用户不同意本隐私政策中的任何一部分，则MATTERS将无法向此类用户提供服务，而此类用户也应当停止访问服务。</p>
 
 <p><b><u>1. 定义</u></b></p>
@@ -219,7 +219,7 @@ const Privacy: { zh_hant: string; zh_hans: string; en: string } = {
   <h3>Privacy Policy </h3>
 </summary>
 
-<p>Last updated: <i>20 July, 2020</i></p>
+<p>Last updated: <i>18 July, 2020</i></p>
 <p>This privacy policy (the <b><i>Privacy Policy</i></b>) was last updated on the date above and shall be updated from time to time. Any changes to this Privacy Policy will become effective upon posting of the revised policy hereunder. This Privacy Policy is intended to inform all Users about how the Data Controller treats Personal Information and Non-personal Information. If any User does not agree with any part of this Privacy Policy, then the Data Controller cannot provide the Services to such User, and such User should stop accessing the same.</p>
 
 <p><b><u>1. DEFINITIONS</u></b></p>
@@ -242,7 +242,7 @@ const Privacy: { zh_hant: string; zh_hans: string; en: string } = {
 
 <p>3.1 The Data Controller will receive, store and process Personal Information that the Users make available when assessing or using the Services. It will take appropriate steps to protect Personal Information collected and/or held by it against unauthorized or accidental access, processing, erasure, loss, use or disclosure. </p>
 
-<p>3.2 In order to protect the Personal Information, the Data Controller will require all Users (or their respective relevant persons as defined under applicable laws) to prove their identities in relation to their requests to access and/or correct their Personal Information.  Requests for access and correction of Personal Information are to be addressed in writing and sent to ask@matters.news or by posting to theDesk, 511 Queen’s Road West, Sai Wan, Hong Kong to Ms. Beryl Liu. A reasonable fee shall be charged to offset the Data Controller’s administrative and actual costs incurred in complying with the relevant data access requests. Where there are reasonable grounds for believing that any Personal Information is inaccurate, the Data Controller shall take practicable steps to ensure that the Personal Information shall not be used unless and until those grounds cease to be applicable to such Personal Information or the Personal Information shall be erased.</p>
+<p>3.2 In order to protect the Personal Information, the Data Controller will require all Users (or their respective relevant persons as defined under applicable laws) to prove their identities in relation to their requests to access and/or correct their Personal Information.  Requests for access and correction of Personal Information are to be addressed in writing and sent to ask@matters.news. A reasonable fee shall be charged to offset the Data Controller’s administrative and actual costs incurred in complying with the relevant data access requests. Where there are reasonable grounds for believing that any Personal Information is inaccurate, the Data Controller shall take practicable steps to ensure that the Personal Information shall not be used unless and until those grounds cease to be applicable to such Personal Information or the Personal Information shall be erased. </p>
 
 <p>3.3 Where any Personal Information held by the Data Controller is no longer required for the purposes as stated under clause 4.2 of this Privacy Policy, the Data Controller shall take practicable steps to cease processing such Personal Information as soon as reasonably practicable, provided that the Data Controller may keep copies of such Personal Information as is reasonably required (i) for archival purposes; (ii) for use in relation to any actual or potential dispute; (iii) for compliance with applicable laws and regulations; (iv) for enforcing any agreement the Data Controller has with such User; and (v) for protecting the Data Controller’s and its employees’ rights, property or safety. The Data Controller will take practicable steps to ensure such Personal Information will not be kept longer than is necessary for the fulfillment of the above purposes (including direct or indirect purposes). </p>
 

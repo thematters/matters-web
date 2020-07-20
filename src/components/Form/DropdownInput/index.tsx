@@ -16,6 +16,7 @@ interface DropdownProps {
   dropdownCallback?: (params: any) => void
   dropdownZIndex?: number
   query: any
+  queryFilter?: Record<string, any>
 }
 
 type InputProps = {
@@ -44,6 +45,7 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
   dropdownCallback,
   dropdownZIndex,
   query,
+  queryFilter,
 
   ...inputProps
 }) => {
@@ -71,7 +73,7 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
   }
 
   const { data, loading } = useQuery(query, {
-    variables: { search: debouncedSearch },
+    variables: { search: debouncedSearch, filter: queryFilter },
     skip: !debouncedSearch,
   })
 

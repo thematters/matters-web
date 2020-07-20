@@ -5,7 +5,7 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
   <h3>用戶協議</h3>
 </summary>
 
-<p><small>更新日期：2020 年 7 月 20 日</small></p>
+<p><small>更新日期：2020 年 7 月 18 日</small></p>
 <p>請仔細閱讀以下條款，這些條款包含了有關您合法權利和義務的重要信息。當您訪問或使用MATTERS時，即表示您完全接受以下條款的約束。如果您不同意這些條款，可以選擇不進入 MATTERS 。此中文條款為英文版本譯本，如中、英文兩個版本有任何抵觸或不相符之處，請以後面的英文版本為準。</p>
 <p><i>關於條款修改：</i></p>
 <p>MATTERS 保留自行修改條款的權利。修改後，MATTERS將通過平台公佈其修改，或以其它方式向您告知。如果您在MATTERS公佈修改後繼續訪問和使用MATTERS，則表示您同意接受修改後的條款。如果您不同意修改後的條款，您只能停止使用平台和服務。</p>
@@ -19,7 +19,7 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
 <p>&nbsp;&nbsp;&nbsp;&nbsp;(e)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>內容標準</i></b>是指任何用戶在平台發佈的任何內容的標準，詳見本條款第5.5條；</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;(f)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>知識產權</i></b>是指與平台相關的所有版權和其他知識產權，無論其以何種形式呈現、為哪種媒體形式體現、是否已注冊，包括但不限於專利、設計權、商標、服務商標、應用程序、前述任何一項的申請權利、數據庫權利、專有技術、商業名稱、機密信息權利、商譽以及世界範圍內存在的其他類似的權利；</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;(g)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>專有技術</i></b>是指與平台和/或服務相關的所有技術、經驗、數據、技術和商業信息，包括但不限於運營模式；</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;(h)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>MATTERS</i></b>MATTERS, INC.，一家基於美國特拉華州法律注冊成立的私營有限公司；</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;(h)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>MATTERS</i></b>是指 MATTERS, INC.，一家基於美國特拉華州法律注冊成立的私營有限公司；</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;(i)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>MATTERS庫</i></b>是指MATTERS用於記錄和共享所有內容的可公開訪問的分佈式數據庫；</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;(j)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>在線課程</i></b>是指由MATTERS組織、安排或以其他方式提供給平台上用戶的在線課程；</p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;(k)&nbsp;&nbsp;&nbsp;&nbsp;<b><i>密碼</i></b>是指註冊用戶對其帳戶和第三方貨幣帳戶設置的所有此類（i）密碼；（ii）為其儲值錢包設置的個人密碼；</p>
@@ -257,7 +257,7 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
   <h3>用户协议</h3>
 </summary>
 
-<p><small>更新日期：2020 年 7 月 20 日</small></p>
+<p><small>更新日期：2020 年 7 月 18 日</small></p>
 <p>请仔细阅读以下条款，这些条款包含了有关您合法权利和义务的重要信息。当您访问或使用MATTERS时，即表示您完全接受以下条款的约束。如果您不同意这些条款，可以选择不进入MATTERS。此中文条款为英文版本译本，如中、英文两个版本有任何抵触或不相符之处，请以后面的英文版本为准。</p>
 <p><i>关于条款修改：</i></p>
 <p>MATTERS 保留自行修改条款的权利。修改后，MATTERS将通过平台公布其修改，或以其它方式向您告知。如果您在MATTERS公佈修改后继续访问和使用MATTERS，则表示您同意接受修改后的条款。如果您不同意修改后的条款，您只能停止使用平台和服务。</p>
@@ -505,7 +505,7 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
   <h3>Terms and Conditions for MATTERS</h3>
 </summary>
 
-<p>Last updated date: <i> 20 July, 2020</i></p>
+<p>Last updated date: <i> 18 July, 2020</i></p>
 <p>PLEASE READ THESE TERMS CAREFULLY AS THEY CONTAIN IMPORTANT INFORMATION REGARDING YOUR LEGAL RIGHTS, REMEDIES AND OBLIGATIONS. YOU ACKNOWLEDGE AND AGREE THAT, BY ACCESSING OR USING THE PLATFORM AND/OR THE SERVICES, YOU ARE INDICATING THAT YOU HAVE READ, AND THAT YOU UNDERSTAND AND AGREE TO BE BOUND BY THESE TERMS. IF YOU DO NOT AGREE TO THESE TERMS, THEN YOU HAVE NO RIGHT TO ACCESS OR USE THE PLATFORM AND/OR THE SERVICES.</p>
 <p><i>Modification: </i></p>
 <p>MATTERS reserves the right to, at its sole discretion, modify these Terms at any time without prior notice and consent. If MATTERS modifies these Terms, it will post the modification via the Platform or otherwise provide you with notice of the modification. By continuing to access and/or use the Platform and/or the Services after MATTERS has posted a modification via the Platform and/or has provided you with notice of the modification, you are indicating that you agree to be bound by the modified Terms. If the modified Terms are not acceptable to you, your only recourse is to cease using the Platform and the Services.</p>
@@ -698,7 +698,7 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
 <p>6.5    You may use information from the Platform for your own personal use only. Except as otherwise expressly permitted under copyright law, no copying, redistribution, retransmission, publication or commercial exploitation of downloaded Contents will be permitted without the express permission of MATTERS and that of the copyright owner. In the event of any permitted copying, redistribution or publication of copyright Content, no changes in or deletion of author attribution, trademark legend or copyright notice shall be made. You acknowledge that you do not acquire any ownership rights by downloading copyright Content.</p>
 
 <p><b><u>6. Trade mark</u></b></p>
-<p>6.6    The mark “MATTERS” is a trademark of or licensed to MATTERS and/or its Affiliates in Hong Kong or elsewhere (whether registered or not). The name and logo of MATTERS and all related names, logos, product and service names, designs and slogans are trademarks of MATTERS or its Affiliates or licensors. You must not use such marks without the prior written permission of MATTERS. </p>
+<p>6.6    The mark “MATTERS” is a trademark of or licensed to MATTERS and/or its Affiliates worldwide (whether registered or not). The name and logo of MATTERS and all related names, logos, product and service names, designs and slogans are trademarks of MATTERS or its Affiliates or licensors. You must not use such marks without the prior written permission of MATTERS.</p>
 <p>6.7    Other product and company names identified on the Platform may be the name, trade mark, trade name, service mark, logo, symbol or other proprietary designation of MATTERS, its licensors and/or Affiliates or a third party. The use on the Platform of any name, trade name, trade mark, service mark, logo, symbol or other proprietary designation or marking of or belonging to any third party, and the availability of specific goods or services from such third party through the Platform, should not be construed as an endorsement or sponsorship of the Platform by any such third party, or the participation by such third party in the offering of goods, services or information through the Platform. </p>
 
 <p><i>Complaint of alleged infringement</i></p>
