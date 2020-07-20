@@ -18,6 +18,7 @@ import { QueryError } from '~/components/GQL'
 import {
   USER_ARTICLES_PRIVATE,
   USER_ARTICLES_PUBLIC,
+  VIEWER_ARTICLES,
 } from '~/components/GQL/queries/userArticles'
 
 import { analytics, getQuery, mergeConnections } from '~/common/utils'
@@ -59,6 +60,12 @@ const UserArticles = () => {
   const viewer = useContext(ViewerContext)
   const router = useRouter()
   const userName = getQuery({ router, key: 'userName' })
+  const isViewer = viewer.userName === userName
+
+  let query = USER_ARTICLES_PUBLIC
+  if (isViewer) {
+    query = VIEWER_ARTICLES
+  }
 
   /**
    * Data Fetching
@@ -71,7 +78,7 @@ const UserArticles = () => {
     fetchMore,
     refetch: refetchPublic,
     client,
-  } = useQuery<UserArticlesPublic>(USER_ARTICLES_PUBLIC, {
+  } = useQuery<UserArticlesPublic>(query, {
     variables: { userName },
   })
 
@@ -82,7 +89,7 @@ const UserArticles = () => {
 
   // private data
   const loadPrivate = (publicData?: UserArticlesPublic) => {
-    if (!viewer.id || !publicData || !user) {
+    if (!viewer.id || isViewer || !publicData || !user) {
       return
     }
 

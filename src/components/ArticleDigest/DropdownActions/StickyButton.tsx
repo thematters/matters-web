@@ -56,11 +56,7 @@ const StickyButton = ({ article }: { article: StickyButtonArticle }) => {
   })
 
   return (
-    <Menu.Item
-      onClick={() => {
-        toggleSticky()
-      }}
-    >
+    <Menu.Item onClick={toggleSticky}>
       {article.sticky ? (
         <TextIcon icon={<IconUnPinMedium size="md" />} size="md" spacing="base">
           <Translate id="unstickyArticle" />

@@ -116,7 +116,7 @@ const ArticleDetail = () => {
 
   useEffect(() => {
     loadPrivate()
-  }, [mediaHash, viewer.id, article])
+  }, [mediaHash, !!article, viewer.id])
 
   // translation
   const [translate, setTranslate] = useState(false)
