@@ -1,0 +1,28 @@
+.content {
+  @mixin flex-start-space-between;
+
+  margin-top: var(--spacing-x-tight);
+
+  & p {
+    flex-grow: 1;
+    margin-right: var(--spacing-x-tight);
+    font-size: var(--font-size-sm-s);
+    line-height: 1.85;
+    color: var(--color-grey);
+
+    @mixin line-clamp;
+
+    -webkit-line-clamp: 3;
+  }
+
+  & .cover {
+    flex-shrink: 0;
+    width: 3rem;
+    height: 3rem;
+
+    & :global(img) {
+      background-color: var(--color-grey-lighter);
+      border-radius: 0.25rem;
+    }
+  }
+}
