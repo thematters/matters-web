@@ -46,7 +46,7 @@ const Followers = ({ id }: FollowersProps) => {
       <section className="count">
         <b>{numAbbr(totalCount)}</b>
         <span>
-          <Translate zh_hant=" 人關注" zh_hans=" 人关注" />
+          <Translate zh_hant=" 人追蹤" zh_hans=" 人追踪" />
         </span>
       </section>
 
