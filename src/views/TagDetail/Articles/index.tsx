@@ -40,7 +40,7 @@ const TagDetailArticles = ({ tagId, selected }: TagArticlesProps) => {
     loading,
     error,
     fetchMore,
-    refetch,
+    refetch: refetchPublic,
     networkStatus,
     client,
   } = useQuery<TagArticlesPublic>(TAG_ARTICLES_PUBLIC, {
@@ -108,7 +108,12 @@ const TagDetailArticles = ({ tagId, selected }: TagArticlesProps) => {
   }
 
   // refetch, sync & pull to refresh
-  const sync = ({
+  const refetch = async () => {
+    const { data: newData } = await refetchPublic()
+    loadPrivate(newData)
+  }
+
+  const sync = async ({
     event,
     differences = 0,
   }: {
@@ -118,20 +123,22 @@ const TagDetailArticles = ({ tagId, selected }: TagArticlesProps) => {
     const count = (edges || []).length
     switch (event) {
       case 'add':
-        refetch({
+        const { data: addData } = await refetchPublic({
           variables: {
             id: tagId,
             first: count + differences,
           },
         })
+        loadPrivate(addData)
         break
       case 'delete':
-        refetch({
+        const { data: deleteData } = await refetchPublic({
           variables: {
             id: tagId,
             first: Math.max(count - 1, 0),
           },
         })
+        loadPrivate(deleteData)
         break
     }
   }

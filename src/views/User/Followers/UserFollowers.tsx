@@ -30,9 +30,14 @@ const UserFollowers = () => {
    * Data Fetching
    */
   // public data
-  const { data, loading, error, fetchMore, refetch, client } = useQuery<
-    UserFollowerPublic
-  >(USER_FOLLOWERS_PUBLIC, {
+  const {
+    data,
+    loading,
+    error,
+    fetchMore,
+    refetch: refetchPublic,
+    client,
+  } = useQuery<UserFollowerPublic>(USER_FOLLOWERS_PUBLIC, {
     variables: { userName },
   })
 
@@ -83,7 +88,11 @@ const UserFollowers = () => {
     loadPrivate(newData)
   }
 
-  // pull to refresh
+  // refetch & pull to refresh
+  const refetch = async () => {
+    const { data: newData } = await refetchPublic()
+    loadPrivate(newData)
+  }
   usePullToRefresh.Register()
   usePullToRefresh.Handler(refetch)
 

@@ -22,11 +22,11 @@ import { QueryError } from '~/components/GQL'
 
 import { analytics, mergeConnections, toPath } from '~/common/utils'
 
-import { AllTags } from './__generated__/AllTags'
+import { AllTagsPublic } from './__generated__/AllTagsPublic'
 
 const ALL_TAGS = gql`
-  query AllTags($after: String) {
-    viewer {
+  query AllTagsPublic($after: String) {
+    viewer @connection(key: "viewerTags") {
       id
       recommendation {
         tags(input: { first: 20, after: $after }) {
@@ -74,7 +74,7 @@ const CreateTagButton = () => {
 }
 
 const Tags = () => {
-  const { data, loading, error, fetchMore, refetch } = useQuery<AllTags>(
+  const { data, loading, error, fetchMore, refetch } = useQuery<AllTagsPublic>(
     ALL_TAGS
   )
 

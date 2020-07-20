@@ -28,10 +28,9 @@ const FeedAuthors = () => {
    * Data Fetching
    */
   // public data
-  const { data, loading, error, refetch, client } = useQuery<FeedAuthorsPublic>(
-    FEED_AUTHORS_PUBLIC,
-    { notifyOnNetworkStatusChange: true }
-  )
+  const { data, loading, error, refetch: refetchPublic, client } = useQuery<
+    FeedAuthorsPublic
+  >(FEED_AUTHORS_PUBLIC, { notifyOnNetworkStatusChange: true })
 
   const edges = data?.viewer?.recommendation.authors.edges
 
@@ -60,9 +59,9 @@ const FeedAuthors = () => {
     loadPrivate(data)
   }, [!!edges, viewer.id])
 
-  // fetch
-  const suffle = async () => {
-    const { data: newData } = await refetch()
+  // refetch & pull to refresh
+  const refetch = async () => {
+    const { data: newData } = await refetchPublic()
     loadPrivate(newData)
   }
 
@@ -82,7 +81,7 @@ const FeedAuthors = () => {
           size={[null, '1.25rem']}
           spacing={[0, 'xtight']}
           bgActiveColor="grey-lighter"
-          onClick={suffle}
+          onClick={refetch}
         >
           <TextIcon
             icon={<IconReload size="xs" />}
