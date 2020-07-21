@@ -29,11 +29,11 @@ import {
 import TagArticleDialog from './TagArticleDialog'
 
 import { CreateDraft } from '~/components/GQL/mutations/__generated__/CreateDraft'
-import { TagDetail_node_Tag } from '../../__generated__/TagDetail'
+import { TagDetailPublic_node_Tag } from '../../__generated__/TagDetailPublic'
 
 interface DropdownActionsProps {
   isMaintainer: boolean
-  tag: TagDetail_node_Tag
+  tag: TagDetailPublic_node_Tag
 }
 
 interface DialogProps {

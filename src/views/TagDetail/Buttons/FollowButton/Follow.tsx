@@ -13,10 +13,10 @@ import TOGGLE_FOLLOW_TAG from '~/components/GQL/mutations/toggleFollowTag'
 import updateTagFollowers from '~/components/GQL/updates/tagFollowers'
 
 import { ToggleFollowTag } from '~/components/GQL/mutations/__generated__/ToggleFollowTag'
-import { FollowButtonTag as FollowButtonTagType } from './__generated__/FollowButtonTag'
+import { FollowButtonTagPrivate } from './__generated__/FollowButtonTagPrivate'
 
 interface FollowProps {
-  tag: FollowButtonTagType
+  tag: FollowButtonTagPrivate
 }
 
 const Follow = ({ tag }: FollowProps) => {

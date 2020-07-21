@@ -4,12 +4,12 @@ import { Dialog } from '~/components'
 
 import Content from './Content'
 
-import { TagDetail_node_Tag } from '../../../__generated__/TagDetail'
+import { TagDetailPublic_node_Tag } from '../../../__generated__/TagDetailPublic'
 
 interface TagArticleDialogProps {
   children: ({ open }: { open: () => void }) => React.ReactNode
   forSelected?: boolean
-  tag: TagDetail_node_Tag
+  tag: TagDetailPublic_node_Tag
 }
 
 const TagArticleDialog = ({
