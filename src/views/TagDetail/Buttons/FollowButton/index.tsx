@@ -10,12 +10,14 @@ interface FollowButtonProps {
 }
 
 const fragments = {
-  tag: gql`
-    fragment FollowButtonTag on Tag {
-      id
-      isFollower
-    }
-  `,
+  tag: {
+    private: gql`
+      fragment FollowButtonTagPrivate on Tag {
+        id
+        isFollower
+      }
+    `,
+  },
 }
 
 const FollowButton = ({ tag }: FollowButtonProps) => {
