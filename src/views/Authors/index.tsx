@@ -27,9 +27,14 @@ const Authors = () => {
    * Data Fetching
    */
   // public data
-  const { data, loading, error, fetchMore, refetch, client } = useQuery<
-    AllAuthorsPublic
-  >(ALL_AUTHORS_PUBLIC)
+  const {
+    data,
+    loading,
+    error,
+    fetchMore,
+    refetch: refetchPublic,
+    client,
+  } = useQuery<AllAuthorsPublic>(ALL_AUTHORS_PUBLIC)
 
   // pagination
   const connectionPath = 'viewer.recommendation.authors'
@@ -76,6 +81,12 @@ const Authors = () => {
         }),
     })
 
+    loadPrivate(newData)
+  }
+
+  // refetch & pull to refresh
+  const refetch = async () => {
+    const { data: newData } = await refetchPublic()
     loadPrivate(newData)
   }
 

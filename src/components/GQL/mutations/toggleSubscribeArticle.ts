@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 
 export default gql`
-  mutation ToggleSubscribeArticle($id: ID!) {
-    toggleSubscribeArticle(input: { id: $id }) {
+  mutation ToggleSubscribeArticle($id: ID!, $enabled: Boolean) {
+    toggleSubscribeArticle(input: { id: $id, enabled: $enabled }) {
       id
       subscribed
     }

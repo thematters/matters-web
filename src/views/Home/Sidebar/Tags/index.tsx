@@ -8,11 +8,11 @@ import { analytics, toPath } from '~/common/utils'
 
 import SectionHeader from '../../SectionHeader'
 
-import { SidebarTags } from './__generated__/SidebarTags'
+import { SidebarTagsPublic } from './__generated__/SidebarTagsPublic'
 
 const SIDEBAR_TAGS = gql`
-  query SidebarTags {
-    viewer {
+  query SidebarTagsPublic {
+    viewer @connection(key: "viewerSidebarTags") {
       id
       recommendation {
         tags(input: { first: 5 }) {
@@ -30,7 +30,7 @@ const SIDEBAR_TAGS = gql`
 `
 
 const Tags = () => {
-  const { data, loading, error } = useQuery<SidebarTags>(SIDEBAR_TAGS)
+  const { data, loading, error } = useQuery<SidebarTagsPublic>(SIDEBAR_TAGS)
   const edges = data?.viewer?.recommendation.tags.edges
 
   if (error) {

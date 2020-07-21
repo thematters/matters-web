@@ -67,7 +67,11 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   }
 })
 
-const authLink = setContext((_, { headers }) => {
+const authLink = setContext((operation, { headers }) => {
+  if (process.env.NODE_ENV !== 'production') {
+    console.log(`\x1b[32m[GraphQL operation]\x1b[0m`, operation.operationName)
+  }
+
   return {
     headers: {
       ...headers,
