@@ -3,10 +3,10 @@ import gql from 'graphql-tag'
 import Follow from './Follow'
 import Unfollow from './Unfollow'
 
-import { FollowButtonTag as FollowButtonTagType } from './__generated__/FollowButtonTag'
+import { FollowButtonTagPrivate } from './__generated__/FollowButtonTagPrivate'
 
 interface FollowButtonProps {
-  tag: FollowButtonTagType
+  tag: FollowButtonTagPrivate
 }
 
 const fragments = {

@@ -23,7 +23,7 @@ import { parseFormSubmitErrors, translate } from '~/common/utils'
 
 import styles from './styles.css'
 
-import { TagDetail_node_Tag } from '../../../__generated__/TagDetail'
+import { TagDetailPublic_node_Tag } from '../../../__generated__/TagDetailPublic'
 import { AddArticlesTags } from './__generated__/AddArticlesTags'
 
 const ADD_ARTICLES_TAGS = gql`
@@ -65,7 +65,7 @@ const DropdownContent = ({
 interface TagArticleDialogContentProps {
   closeDialog: () => void
   forSelected?: boolean
-  tag: TagDetail_node_Tag
+  tag: TagDetailPublic_node_Tag
 }
 
 interface FormValues {
