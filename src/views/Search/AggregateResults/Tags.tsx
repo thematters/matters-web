@@ -1,51 +1,39 @@
 import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
 
-import { Card, List, Spinner, Tag } from '~/components'
+import { Card, List, Spinner, Tag, usePullToRefresh } from '~/components'
 
 import { analytics, getQuery, toPath } from '~/common/utils'
 
+import { SEARCH_AGGREGATE_TAGS_PUBLIC } from './gql'
 import styles from './styles.css'
 import ViewMoreButton from './ViewMoreButton'
 
-import { SeachAggregateTags } from './__generated__/SeachAggregateTags'
-
-const SEARCH_AGGREGATE_TAGS = gql`
-  query SeachAggregateTags($key: String!) {
-    search(input: { key: $key, type: Tag, first: 3 }) {
-      pageInfo {
-        startCursor
-        endCursor
-        hasNextPage
-      }
-      edges {
-        cursor
-        node {
-          ... on Tag {
-            ...DigestTag
-          }
-        }
-      }
-    }
-  }
-  ${Tag.fragments.tag}
-`
+import { SeachAggregateTagsPublic } from './__generated__/SeachAggregateTagsPublic'
 
 const AggregateTagResults = () => {
   const router = useRouter()
   const q = getQuery({ router, key: 'q' })
 
-  const { data, loading } = useQuery<SeachAggregateTags>(
-    SEARCH_AGGREGATE_TAGS,
+  /**
+   * Data Fetching
+   */
+  // public data
+  const { data, loading, refetch } = useQuery<SeachAggregateTagsPublic>(
+    SEARCH_AGGREGATE_TAGS_PUBLIC,
     { variables: { key: q } }
   )
 
+  const { edges, pageInfo } = data?.search || {}
+
+  usePullToRefresh.Handler(refetch)
+
+  /**
+   * Render
+   */
   if (loading) {
     return <Spinner />
   }
-
-  const { edges, pageInfo } = data?.search || {}
 
   if (!edges || edges.length <= 0 || !pageInfo) {
     return null

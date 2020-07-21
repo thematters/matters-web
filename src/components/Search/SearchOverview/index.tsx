@@ -1,36 +1,33 @@
 import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
-import gql from 'graphql-tag'
 import Link from 'next/link'
-import { Fragment } from 'react'
+import { Fragment, useContext, useEffect } from 'react'
 
-import { Menu, Translate } from '~/components'
+import { Menu, Translate, ViewerContext } from '~/components'
 import { Spinner } from '~/components/Spinner'
 
 import { toPath } from '~/common/utils'
 
 import ClearHistoryButton from './ClearHistoryButton'
+import { SEARCH_AUTOCOMPLETE_PRIVATE, SEARCH_AUTOCOMPLETE_PUBLIC } from './gql'
 import styles from './styles.css'
 
-import { SearchOverview as SearchOverviewType } from './__generated__/SearchOverview'
+import { SearchOverviewPublic } from './__generated__/SearchOverviewPublic'
 
 interface SearchOverviewProps {
   inPage?: boolean
 }
 
-const SEARCH_AUTOCOMPLETE = gql`
-  query SearchOverview {
-    frequentSearch(input: { first: 5, key: "" })
-    viewer {
-      id
-      ...RecentSearchesUser
-    }
-  }
-  ${ClearHistoryButton.fragments.user}
-`
-
 export const SearchOverview = ({ inPage }: SearchOverviewProps) => {
-  const { data, loading } = useQuery<SearchOverviewType>(SEARCH_AUTOCOMPLETE)
+  const viewer = useContext(ViewerContext)
+
+  /**
+   * Data Fetching
+   */
+  // public data
+  const { data, loading, client } = useQuery<SearchOverviewPublic>(
+    SEARCH_AUTOCOMPLETE_PUBLIC
+  )
 
   const frequentSearch = data?.frequentSearch || []
   const recentSearches = data?.viewer?.activity.recentSearches.edges || []
@@ -46,6 +43,25 @@ export const SearchOverview = ({ inPage }: SearchOverviewProps) => {
     inPage,
   })
 
+  // private data
+  const loadPrivate = () => {
+    if (!viewer.id) {
+      return
+    }
+
+    client.query({
+      query: SEARCH_AUTOCOMPLETE_PRIVATE,
+      fetchPolicy: 'network-only',
+    })
+  }
+
+  useEffect(() => {
+    loadPrivate()
+  }, [viewer.id])
+
+  /**
+   * Render
+   */
   if (loading) {
     return (
       <Menu width={inPage ? undefined : 'md'}>
@@ -55,7 +71,6 @@ export const SearchOverview = ({ inPage }: SearchOverviewProps) => {
   }
 
   if (!showFrequentSearch && !showSearchHistory) {
-    // TODO: Empty Notice
     return null
   }
 
