@@ -41,7 +41,7 @@
     "@reach/alert": "^0.10.5",
     "@reach/dialog": "^0.10.5",
     "@reach/visually-hidden": "^0.10.4",
-    "@sentry/browser": "^5.19.2",
+    "@sentry/browser": "^5.20.0",
     "@stripe/react-stripe-js": "^1.1.2",
     "@stripe/stripe-js": "^1.8.0",
     "@tippyjs/react": "^4.0.4",
