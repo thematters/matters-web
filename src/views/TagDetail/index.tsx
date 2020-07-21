@@ -1,5 +1,4 @@
 import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
 import _find from 'lodash/find'
 import _some from 'lodash/some'
 import { useRouter } from 'next/router'
@@ -17,6 +16,7 @@ import {
   Throw404,
   Title,
   Translate,
+  usePullToRefresh,
   ViewerContext,
 } from '~/components'
 import { getErrorCodes, QueryError } from '~/components/GQL'
@@ -30,39 +30,14 @@ import ArticlesCount from './ArticlesCount'
 import { TagDetailButtons } from './Buttons'
 import DropdownActions from './DropdownActions'
 import Followers from './Followers'
+import { TAG_DETAIL_PRIVATE, TAG_DETAIL_PUBLIC } from './gql'
 import styles from './styles.css'
 
 import {
-  TagDetail as TagDetailType,
-  TagDetail_node_Tag,
-  TagDetail_node_Tag_editors,
-} from './__generated__/TagDetail'
-
-const TAG_DETAIL = gql`
-  query TagDetail($id: ID!) {
-    node(input: { id: $id }) {
-      ... on Tag {
-        id
-        content
-        creator {
-          id
-          ...UserDigestMiniUser
-        }
-        description
-        editors {
-          id
-          ...UserDigestMiniUser
-        }
-        articles(input: { first: 0, selected: true }) {
-          totalCount
-        }
-        ...FollowButtonTag
-      }
-    }
-  }
-  ${UserDigest.Mini.fragments.user}
-  ${TagDetailButtons.FollowButton.fragments.tag}
-`
+  TagDetailPublic,
+  TagDetailPublic_node_Tag,
+  TagDetailPublic_node_Tag_editors,
+} from './__generated__/TagDetailPublic'
 
 type TagFeedType = 'latest' | 'selected'
 
@@ -73,7 +48,7 @@ const EmptyLayout: React.FC = ({ children }) => (
   </Layout.Main>
 )
 
-const TagDetail = ({ tag }: { tag: TagDetail_node_Tag }) => {
+const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
   const viewer = useContext(ViewerContext)
 
   // feed type
@@ -90,7 +65,7 @@ const TagDetail = ({ tag }: { tag: TagDetail_node_Tag }) => {
   })
 
   // define permission
-  const filter = ({ displayName }: TagDetail_node_Tag_editors) =>
+  const filter = ({ displayName }: TagDetailPublic_node_Tag_editors) =>
     (displayName || '').toLowerCase() !== 'matty'
   const editors = tag?.editors || []
   const owner = _find(editors, filter)
@@ -184,12 +159,49 @@ const TagDetail = ({ tag }: { tag: TagDetail_node_Tag }) => {
 }
 
 const TagDetailContainer = () => {
+  const viewer = useContext(ViewerContext)
   const router = useRouter()
   const tagId = getQuery({ router, key: 'tagId' })
-  const { data, loading, error } = useQuery<TagDetailType>(TAG_DETAIL, {
+
+  /**
+   * Data Fetching
+   */
+  // public data
+  const { data, loading, error, refetch: refetchPublic, client } = useQuery<
+    TagDetailPublic
+  >(TAG_DETAIL_PUBLIC, {
     variables: { id: tagId },
   })
 
+  // private data
+  const loadPrivate = () => {
+    if (!viewer.id || !tagId) {
+      return
+    }
+
+    client.query({
+      query: TAG_DETAIL_PRIVATE,
+      fetchPolicy: 'network-only',
+      variables: { id: tagId },
+    })
+  }
+
+  // fetch private data for first page
+  useEffect(() => {
+    loadPrivate()
+  }, [tagId, viewer.id])
+
+  // refetch & pull to refresh
+  const refetch = async () => {
+    await refetchPublic()
+    loadPrivate()
+  }
+  usePullToRefresh.Register()
+  usePullToRefresh.Handler(refetch)
+
+  /**
+   * Render
+   */
   if (loading) {
     return (
       <EmptyLayout>
