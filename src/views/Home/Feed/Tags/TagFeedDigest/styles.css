@@ -6,13 +6,30 @@
 }
 
 header {
-  display: flex;
-  padding: var(--spacing-base);
-  color: var(--color-white);
+  position: relative;
   background: var(--color-matters-green);
 
-  & :global(.tag) {
+  & :global(img) {
+    @mixin object-fit-cover;
+
+    background: var(--color-matters-green);
+  }
+
+  & :global(a) {
     @mixin line-clamp;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: var(--spacing-base);
+  }
+
+  &::after {
+    display: block;
+    padding-bottom: 22.8%;
+    content: '';
   }
 }
 
