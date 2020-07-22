@@ -18,6 +18,7 @@ import { QueryError } from '~/components/GQL'
 import {
   USER_ARTICLES_PRIVATE,
   USER_ARTICLES_PUBLIC,
+  VIEWER_ARTICLES,
 } from '~/components/GQL/queries/userArticles'
 
 import { analytics, getQuery, mergeConnections } from '~/common/utils'
@@ -59,14 +60,27 @@ const UserArticles = () => {
   const viewer = useContext(ViewerContext)
   const router = useRouter()
   const userName = getQuery({ router, key: 'userName' })
+  const isViewer = viewer.userName === userName
+
+  let query = USER_ARTICLES_PUBLIC
+  if (isViewer) {
+    query = VIEWER_ARTICLES
+  }
 
   /**
    * Data Fetching
    */
   // public data
-  const { data, loading, error, fetchMore, refetch, client } = useQuery<
-    UserArticlesPublic
-  >(USER_ARTICLES_PUBLIC, { variables: { userName } })
+  const {
+    data,
+    loading,
+    error,
+    fetchMore,
+    refetch: refetchPublic,
+    client,
+  } = useQuery<UserArticlesPublic>(query, {
+    variables: { userName },
+  })
 
   // pagination
   const connectionPath = 'user.articles'
@@ -75,7 +89,7 @@ const UserArticles = () => {
 
   // private data
   const loadPrivate = (publicData?: UserArticlesPublic) => {
-    if (!viewer.id || !publicData || !user) {
+    if (!viewer.id || isViewer || !publicData || !user) {
       return
     }
 
@@ -116,7 +130,11 @@ const UserArticles = () => {
     loadPrivate(newData)
   }
 
-  // pull to refresh
+  // refetch & pull to refresh
+  const refetch = async () => {
+    const { data: newData } = await refetchPublic()
+    loadPrivate(newData)
+  }
   usePullToRefresh.Register()
   usePullToRefresh.Handler(refetch)
 

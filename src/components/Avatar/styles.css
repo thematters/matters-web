@@ -4,6 +4,7 @@
 
   /* may under a flex layout, keep it unshrinkable */
   flex-shrink: 0;
+  border-radius: 50%;
 
   & :global(img) {
     @mixin object-fit-cover;

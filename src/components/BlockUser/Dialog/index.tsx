@@ -2,13 +2,13 @@ import { useState } from 'react'
 
 import { Dialog, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
-import BLOCK_USER from '~/components/GQL/mutations/blockUser'
+import TOGGLE_BLOCK_USER from '~/components/GQL/mutations/toggleBlockUser'
 
 import { ADD_TOAST } from '~/common/enums'
 
 import ViewBlocksButton from './ViewBlocksButton'
 
-import { BlockUser as BlockUserMutate } from '~/components/GQL/mutations/__generated__/BlockUser'
+import { ToggleBlockUser } from '~/components/GQL/mutations/__generated__/ToggleBlockUser'
 import { BlockUserPrivate } from '../__generated__/BlockUserPrivate'
 import { BlockUserPublic } from '../__generated__/BlockUserPublic'
 
@@ -22,10 +22,10 @@ const BlockUserDialog = ({ user, children }: BlockUserDialogProps) => {
   const open = () => setShowDialog(true)
   const close = () => setShowDialog(false)
 
-  const [blockUser] = useMutation<BlockUserMutate>(BLOCK_USER, {
-    variables: { id: user.id },
+  const [blockUser] = useMutation<ToggleBlockUser>(TOGGLE_BLOCK_USER, {
+    variables: { id: user.id, enabled: true },
     optimisticResponse: {
-      blockUser: {
+      toggleBlockUser: {
         id: user.id,
         isBlocked: true,
         __typename: 'User',

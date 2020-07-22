@@ -1,4 +1,3 @@
-import gql from 'graphql-tag'
 import _isNil from 'lodash/isNil'
 import { useContext } from 'react'
 
@@ -10,28 +9,20 @@ import {
   ViewerContext,
 } from '~/components'
 import { useMutation } from '~/components/GQL'
+import TOGGLE_FOLLOW_TAG from '~/components/GQL/mutations/toggleFollowTag'
 import updateTagFollowers from '~/components/GQL/updates/tagFollowers'
 
-import { FollowButtonTag as FollowButtonTagType } from './__generated__/FollowButtonTag'
-import { FollowTag } from './__generated__/FollowTag'
+import { ToggleFollowTag } from '~/components/GQL/mutations/__generated__/ToggleFollowTag'
+import { FollowButtonTagPrivate } from './__generated__/FollowButtonTagPrivate'
 
 interface FollowProps {
-  tag: FollowButtonTagType
+  tag: FollowButtonTagPrivate
 }
-
-const FOLLOW_TAG = gql`
-  mutation FollowTag($id: ID!) {
-    toggleFollowTag(input: { id: $id }) {
-      id
-      isFollower
-    }
-  }
-`
 
 const Follow = ({ tag }: FollowProps) => {
   const viewer = useContext(ViewerContext)
-  const [follow] = useMutation<FollowTag>(FOLLOW_TAG, {
-    variables: { id: tag.id },
+  const [follow] = useMutation<ToggleFollowTag>(TOGGLE_FOLLOW_TAG, {
+    variables: { id: tag.id, enabled: true },
     optimisticResponse:
       !_isNil(tag.id) && !_isNil(tag.isFollower)
         ? {

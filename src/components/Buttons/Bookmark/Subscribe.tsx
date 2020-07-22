@@ -31,7 +31,7 @@ const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
   const [subscribe] = useMutation<ToggleSubscribeArticle>(
     TOGGLE_SUBSCRIBE_ARTICLE,
     {
-      variables: { id: articleId },
+      variables: { id: articleId, enabled: true },
       optimisticResponse: articleId
         ? {
             toggleSubscribeArticle: {

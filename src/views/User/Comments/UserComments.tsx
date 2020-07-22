@@ -81,9 +81,14 @@ const BaseUserComments = ({ user }: UserIdUser) => {
    * Data Fetching
    */
   // public data
-  const { data, loading, error, fetchMore, refetch, client } = useQuery<
-    UserCommentsPublic
-  >(USER_COMMENTS_PUBLIC, {
+  const {
+    data,
+    loading,
+    error,
+    fetchMore,
+    refetch: refetchPublic,
+    client,
+  } = useQuery<UserCommentsPublic>(USER_COMMENTS_PUBLIC, {
     variables: { id: user?.id },
   })
 
@@ -141,7 +146,11 @@ const BaseUserComments = ({ user }: UserIdUser) => {
     loadPrivate(newData)
   }
 
-  // pull to refresh
+  // refetch & pull to refresh
+  const refetch = async () => {
+    const { data: newData } = await refetchPublic()
+    loadPrivate(newData)
+  }
   usePullToRefresh.Register()
   usePullToRefresh.Handler(refetch)
 
