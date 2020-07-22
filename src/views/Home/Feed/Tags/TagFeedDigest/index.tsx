@@ -44,7 +44,7 @@ const TagFeedDigest = ({ tag, ...cardProps }: TagFeedDigestProps) => {
     <section className="container">
       <Card {...path} spacing={[0, 0]} {...cardProps}>
         <header>
-          <Img url={tag.cover || TAG_COVER} size="1080w" smUpSize="540w" />
+          <Img url={tag.cover || TAG_COVER} size="360w" />
           <Tag tag={tag} type="title" />
         </header>
       </Card>
