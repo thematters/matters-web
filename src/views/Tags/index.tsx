@@ -108,7 +108,11 @@ const Tags = () => {
                     })
                   }
                 >
-                  <List.Card id={node.id} content={node.content} cover={node.cover} />
+                  <List.Card
+                    id={node.id}
+                    content={node.content}
+                    cover={node.cover}
+                  />
                 </Card>
               </List.Item>
             )

@@ -37,7 +37,6 @@ const Card: React.FC<CardProps> = ({ id, content, cover }) => {
       </a>
     </Link>
   )
-
 }
 
 const Item: React.FC<ItemProps> = ({ children, hidden = false }) => {
@@ -51,7 +50,9 @@ const Item: React.FC<ItemProps> = ({ children, hidden = false }) => {
   )
 }
 
-export const List: React.FC & { Card: typeof Card; Item: typeof Item } = ({ children }) => {
+export const List: React.FC & { Card: typeof Card; Item: typeof Item } = ({
+  children,
+}) => {
   return (
     <section className="list" role="list">
       {children}
