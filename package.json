@@ -3,12 +3,12 @@
   "version": "3.10.2",
   "description": "codebase of Matters' website",
   "sideEffects": false,
-  "author": "",
+  "author": "Matters <hi@matters.news>",
   "engines": {
     "node": ">=12.16",
     "npm": ">=6.14"
   },
-  "license": "ISC",
+  "license": "Apache-2.0",
   "scripts": {
     "dev": "PORT=\"${PORT:-3000}\"; next -p $PORT",
     "start": "PORT=\"${PORT:-3000}\"; next start -p $PORT",
