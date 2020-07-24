@@ -75,11 +75,12 @@ const AppreciationButton = ({ article }: AppreciationButtonProps) => {
   // bundle appreciations
   const [amount, setAmount] = useState(0)
   const [sendAppreciation] = useMutation<AppreciateArticle>(APPRECIATE_ARTICLE)
+  const hasAppreciate = article.hasAppreciate
   const limit = article.appreciateLimit
   const left = (article.appreciateLeft || 0) - amount
 
   const total = article.appreciationsReceivedTotal + amount
-  const appreciatedCount = limit - left
+  const appreciatedCount = hasAppreciate || amount ? limit - left : 0
   const [debouncedSendAppreciation] = useDebouncedCallback(async () => {
     try {
       await sendAppreciation({
@@ -130,7 +131,7 @@ const AppreciationButton = ({ article }: AppreciationButtonProps) => {
   /**
    * Appreciate Button
    */
-  if (canAppreciate) {
+  if (canAppreciate || !hasAppreciate) {
     return (
       <AppreciateButton
         onClick={appreciate}

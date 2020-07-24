@@ -13,7 +13,8 @@ export const Protected: React.FC = ({ children }) => {
     }
   }, [viewer.privateFetched])
 
-  if (viewer.isAuthed) {
+
+  if (viewer.isAuthed && viewer.privateFetched) {
     return <>{children}</>
   }
 
