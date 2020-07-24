@@ -23,13 +23,14 @@ const Card: React.FC<CardProps> = ({ id, content, cover }) => {
   const path = toPath({ page: 'tagDetail', id })
 
   const url = cover || TAG_COVER
+  const maskClasses = classNames({ mask: !!cover })
 
   return (
     <Link {...path}>
       <a>
         <section className="card">
           <Img url={url} size="360w" />
-          <div>
+          <div className={maskClasses}>
             <p>{content}</p>
           </div>
         </section>

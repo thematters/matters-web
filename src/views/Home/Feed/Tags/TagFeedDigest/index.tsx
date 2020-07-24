@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import gql from 'graphql-tag'
 
 import { ArticleDigestTitle, Card, CardProps, Img, Tag } from '~/components'
@@ -39,13 +40,16 @@ const TagFeedDigest = ({ tag, ...cardProps }: TagFeedDigestProps) => {
     page: 'tagDetail',
     id: tag.id,
   })
+  const maskClasses = classNames({ mask: !!tag.cover })
 
   return (
     <section className="container">
       <Card {...path} spacing={[0, 0]} {...cardProps}>
         <header>
           <Img url={tag.cover || TAG_COVER} size="360w" />
-          <Tag tag={tag} type="title" />
+          <div className={maskClasses}>
+            <Tag tag={tag} type="title" />
+          </div>
         </header>
       </Card>
 

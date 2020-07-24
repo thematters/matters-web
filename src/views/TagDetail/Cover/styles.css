@@ -7,12 +7,16 @@
     background-color: var(--color-matters-green);
   }
 
-  & :global(div) {
-    position: absolute;
-    right: var(--spacing-base);
-    bottom: var(--spacing-loose);
-    left: var(--spacing-base);
-    color: var(--color-white);
+  & .container {
+    @mixin expand-to-container;
+
+    & .content {
+      position: absolute;
+      right: var(--spacing-base);
+      bottom: var(--spacing-loose);
+      left: var(--spacing-base);
+      color: var(--color-white);
+    }
   }
 
   &::after {
@@ -35,4 +39,8 @@
       margin-top: -1px;
     }
   }
+}
+
+.mask {
+  background: rgba(0, 0, 0, 0.3);
 }
