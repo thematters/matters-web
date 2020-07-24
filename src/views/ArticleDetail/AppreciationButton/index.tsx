@@ -131,7 +131,7 @@ const AppreciationButton = ({ article }: AppreciationButtonProps) => {
   /**
    * Appreciate Button
    */
-  if (canAppreciate || !hasAppreciate) {
+  if (canAppreciate || (!hasAppreciate && amount <= 0)) {
     return (
       <AppreciateButton
         onClick={appreciate}
