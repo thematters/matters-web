@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
+import { useContext, useEffect } from 'react'
 
 import {
   EmptyWarning,
@@ -10,62 +10,102 @@ import {
   Spinner,
   Translate,
   usePullToRefresh,
+  ViewerContext,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 import { UserDigest } from '~/components/UserDigest'
 
 import { analytics, getQuery, mergeConnections } from '~/common/utils'
 
-import { UserFolloweeFeed } from './__generated__/UserFolloweeFeed'
+import { USER_FOLLOWEES_PRIVATE, USER_FOLLOWEES_PUBLIC } from './gql'
 
-const USER_FOLLOWEES_FEED = gql`
-  query UserFolloweeFeed($userName: String!, $after: String) {
-    user(input: { userName: $userName }) {
-      id
-      displayName
-      followees(input: { first: 20, after: $after }) {
-        pageInfo {
-          startCursor
-          endCursor
-          hasNextPage
-        }
-        edges {
-          cursor
-          node {
-            ...UserDigestRichUserPublic
-            ...UserDigestRichUserPrivate
-          }
-        }
-      }
-    }
-  }
-  ${UserDigest.Rich.fragments.user.public}
-  ${UserDigest.Rich.fragments.user.private}
-`
+import { UserFolloweePublic } from './__generated__/UserFolloweePublic'
 
 const UserFollowees = () => {
+  const viewer = useContext(ViewerContext)
   const router = useRouter()
   const userName = getQuery({ router, key: 'userName' })
-  const { data, loading, error, fetchMore, refetch } = useQuery<
-    UserFolloweeFeed
-  >(USER_FOLLOWEES_FEED, {
+
+  /**
+   * Data Fetching
+   */
+  // public data
+  const {
+    data,
+    loading,
+    error,
+    fetchMore,
+    refetch: refetchPublic,
+    client,
+  } = useQuery<UserFolloweePublic>(USER_FOLLOWEES_PUBLIC, {
     variables: { userName },
   })
 
+  // pagination
+  const user = data?.user
+  const connectionPath = 'user.followees'
+  const { edges, pageInfo } = user?.followees || {}
+
+  // private data
+  const loadPrivate = (publicData?: UserFolloweePublic) => {
+    if (!viewer.id || !publicData || !user) {
+      return
+    }
+
+    const publiceEdges = publicData.user?.followees.edges || []
+    const publicIds = publiceEdges.map(({ node }) => node.id)
+
+    client.query({
+      query: USER_FOLLOWEES_PRIVATE,
+      fetchPolicy: 'network-only',
+      variables: { ids: publicIds },
+    })
+  }
+
+  // fetch private data for first page
+  useEffect(() => {
+    loadPrivate(data)
+  }, [user?.id, viewer.id])
+
+  // load next page
+  const loadMore = async () => {
+    analytics.trackEvent('load_more', {
+      type: 'followee',
+      location: edges?.length || 0,
+    })
+    const { data: newData } = await fetchMore({
+      variables: {
+        after: pageInfo?.endCursor,
+      },
+      updateQuery: (previousResult, { fetchMoreResult }) =>
+        mergeConnections({
+          oldData: previousResult,
+          newData: fetchMoreResult,
+          path: connectionPath,
+        }),
+    })
+
+    loadPrivate(newData)
+  }
+
+  // refetch & pull to refresh
+  const refetch = async () => {
+    const { data: newData } = await refetchPublic()
+    loadPrivate(newData)
+  }
   usePullToRefresh.Register()
   usePullToRefresh.Handler(refetch)
 
-  if (loading || !data || !data.user) {
+  /**
+   * Render
+   */
+  if (loading || !data || !user) {
     return <Spinner />
   }
 
   if (error) {
     return <QueryError error={error} />
   }
-
-  const user = data.user
-  const connectionPath = 'user.followees'
-  const { edges, pageInfo } = user.followees
 
   if (!edges || edges.length <= 0 || !pageInfo) {
     return (
@@ -75,24 +115,6 @@ const UserFollowees = () => {
         }
       />
     )
-  }
-
-  const loadMore = () => {
-    analytics.trackEvent('load_more', {
-      type: 'followee',
-      location: edges.length,
-    })
-    return fetchMore({
-      variables: {
-        after: pageInfo.endCursor,
-      },
-      updateQuery: (previousResult, { fetchMoreResult }) =>
-        mergeConnections({
-          oldData: previousResult,
-          newData: fetchMoreResult,
-          path: connectionPath,
-        }),
-    })
   }
 
   return (

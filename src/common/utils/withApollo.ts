@@ -43,7 +43,6 @@ const persistedQueryLink = createPersistedQueryLink({
 const httpLink = ({ headers }: { [key: string]: any }) =>
   createUploadLink({
     uri: process.env.NEXT_PUBLIC_API_URL,
-    credentials: 'include',
     headers,
     fetchOptions: {
       agent,
@@ -67,8 +66,17 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   }
 })
 
-const authLink = setContext((_, { headers }) => {
+const authLink = setContext((operation, { headers }) => {
+  const operationName = operation.operationName || ''
+
+  if (process.env.NODE_ENV !== 'production') {
+    console.log(`\x1b[32m[GraphQL operation]\x1b[0m`, operationName)
+  }
+
+  const isPublicOperation = /Public$/.test(operationName)
+
   return {
+    credentials: isPublicOperation ? 'omit' : 'include',
     headers: {
       ...headers,
       'x-client-name': 'web',
@@ -122,9 +130,9 @@ export default withApollo(({ ctx, headers, initialState }) => {
     link: ApolloLink.from([
       persistedQueryLink,
       errorLink,
-      authLink,
       sentryLink,
       agentHashLink,
+      authLink,
       httpLink({ headers }),
     ]),
     cache,

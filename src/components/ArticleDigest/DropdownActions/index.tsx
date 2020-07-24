@@ -23,6 +23,7 @@ import { getQuery } from '~/common/utils'
 
 import AppreciatorsButton from './AppreciatorsButton'
 import ArchiveArticle from './ArchiveArticle'
+import EditButton from './EditButton'
 import ExtendButton from './ExtendButton'
 import FingerprintButton from './FingerprintButton'
 import RemoveTagButton from './RemoveTagButton'
@@ -39,6 +40,7 @@ export interface DropdownActionsControls {
   inUserArticles?: boolean
   inTagDetailLatest?: boolean
   inTagDetailSelected?: boolean
+  editArticle?: () => any
 }
 
 type DropdownActionsProps = {
@@ -54,6 +56,7 @@ interface Controls {
   hasSetTagSelected: boolean
   hasSetTagUnSelected: boolean
   hasRemoveTag: boolean
+  hasEdit: boolean
 }
 
 interface DialogProps {
@@ -93,6 +96,7 @@ const BaseDropdownActions = ({
   color = 'grey',
   size,
   inCard,
+  editArticle,
 
   hasAppreciators,
   hasFingerprint,
@@ -102,6 +106,7 @@ const BaseDropdownActions = ({
   hasSetTagSelected,
   hasSetTagUnSelected,
   hasRemoveTag,
+  hasEdit,
 
   openFingerprintDialog,
   openAppreciatorsDialog,
@@ -129,6 +134,7 @@ const BaseDropdownActions = ({
       {hasSetTagSelected && <SetTagSelectedButton article={article} />}
       {hasSetTagUnSelected && <SetTagUnselectedButton article={article} />}
       {hasRemoveTag && <RemoveTagButton article={article} />}
+      {hasEdit && editArticle && <EditButton editArticle={editArticle} />}
     </Menu>
   )
 
@@ -165,6 +171,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
     inUserArticles,
     inTagDetailLatest,
     inTagDetailSelected,
+    editArticle,
   } = props
   const router = useRouter()
   const viewer = useContext(ViewerContext)
@@ -201,6 +208,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
     hasSetTagSelected: !!(inTagDetailLatest && canEditTag),
     hasSetTagUnSelected: !!(inTagDetailSelected && canEditTag),
     hasRemoveTag: !!(isInTagDetail && canEditTag),
+    hasEdit: isActive && !!editArticle,
   }
 
   if (_isEmpty(_pickBy(controls))) {

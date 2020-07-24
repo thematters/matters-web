@@ -47,7 +47,12 @@ const CardSection: React.FC<CardSectionProps> = ({ error, onChange }) => {
       <Form.Field>
         <Form.Field.Header
           htmlFor="field-checkout"
-          label={<Translate zh_hant="信用卡信息" zh_hans="信用卡信息" />}
+          label={
+            <Translate
+              zh_hant="Visa / Mastercard / American Express 支付"
+              zh_hans="Visa / Mastercard / American Express 支付"
+            />
+          }
         />
 
         <Form.Field.Content>

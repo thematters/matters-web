@@ -1,0 +1,5 @@
+p {
+  margin-right: var(--spacing-base);
+  font-size: var(--font-size-sm);
+  color: var(--color-grey-darker);
+}

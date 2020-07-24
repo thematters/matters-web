@@ -59,7 +59,7 @@ export const AuthorPicker = ({ title }: { title: React.ReactNode }) => {
             size={[null, '1.25rem']}
             spacing={[0, 'xtight']}
             bgActiveColor="grey-lighter"
-            onClick={() => refetch()}
+            onClick={refetch}
           >
             <TextIcon icon={<IconReload size="sm" />} color="grey">
               <Translate id="shuffle" />

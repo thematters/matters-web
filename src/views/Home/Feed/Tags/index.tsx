@@ -9,11 +9,11 @@ import { analytics } from '~/common/utils'
 import SectionHeader from '../../SectionHeader'
 import TagFeedDigest from './TagFeedDigest'
 
-import { FeedTags } from './__generated__/FeedTags'
+import { FeedTagsPublic } from './__generated__/FeedTagsPublic'
 
 const FEED_TAGS = gql`
-  query FeedTags {
-    viewer {
+  query FeedTagsPublic {
+    viewer @connection(key: "viewerFeedTags") {
       id
       recommendation {
         tags(input: { first: 5 }) {
@@ -31,7 +31,7 @@ const FEED_TAGS = gql`
 `
 
 const TagsFeed = () => {
-  const { data, loading, error } = useQuery<FeedTags>(FEED_TAGS)
+  const { data, loading, error } = useQuery<FeedTagsPublic>(FEED_TAGS)
   const edges = data?.viewer?.recommendation.tags.edges
 
   if (error) {

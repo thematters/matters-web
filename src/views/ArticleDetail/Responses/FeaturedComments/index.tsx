@@ -37,7 +37,7 @@ const FeaturedComments = () => {
    * Data Fetching
    */
   // public data
-  const { data, loading, fetchMore, refetch, client } = useQuery<
+  const { data, loading, fetchMore, refetch: refetchPublic, client } = useQuery<
     FeaturedCommentsPublic
   >(FEATURED_COMMENTS_PUBLIC, {
     variables: { mediaHash },
@@ -94,6 +94,11 @@ const FeaturedComments = () => {
     loadPrivate(newData)
   }
 
+  // refetch & pull to refresh
+  const refetch = async () => {
+    const { data: newData } = await refetchPublic()
+    loadPrivate(newData)
+  }
   usePullToRefresh.Handler(refetch)
 
   if (loading && !data) {

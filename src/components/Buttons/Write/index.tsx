@@ -1,4 +1,3 @@
-import gql from 'graphql-tag'
 import { useContext } from 'react'
 
 import {
@@ -11,6 +10,7 @@ import {
   Translate,
 } from '~/components'
 import { useMutation } from '~/components/GQL'
+import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
 
 import { ADD_TOAST, TEXT } from '~/common/enums'
 import {
@@ -21,22 +21,13 @@ import {
   translate,
 } from '~/common/utils'
 
-import { CreateDraft } from './__generated__/CreateDraft'
+import { CreateDraft } from '~/components/GQL/mutations/__generated__/CreateDraft'
 
 interface Props {
   allowed: boolean
   isLarge?: boolean
   forbidden?: boolean
 }
-
-export const CREATE_DRAFT = gql`
-  mutation CreateDraft($title: String!) {
-    putDraft(input: { title: $title }) {
-      id
-      slug
-    }
-  }
-`
 
 const BaseWriteButton = ({
   onClick,

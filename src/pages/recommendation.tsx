@@ -30,14 +30,16 @@ const query = gql`
             cursor
             node {
               id
-              ...ArticleDigestFeedArticle
+              ...ArticleDigestFeedArticlePublic
+              ...ArticleDigestFeedArticlePrivate
             }
           }
         }
       }
     }
   }
-  ${ArticleDigestFeed.fragments.article}
+  ${ArticleDigestFeed.fragments.article.public}
+  ${ArticleDigestFeed.fragments.article.private}
 `
 
 const Feed = () => {

@@ -15,22 +15,29 @@ import { BlockUser } from '~/components/BlockUser'
 
 import { TEXT } from '~/common/enums'
 
-import { DropdownActionsUser } from './__generated__/DropdownActionsUser'
+import { DropdownActionsUserPublic } from './__generated__/DropdownActionsUserPublic'
 
 const fragments = {
-  user: gql`
-    fragment DropdownActionsUser on User {
-      id
-      ...BlockUserPublic
-      ...BlockUserPrivate
-    }
-    ${BlockUser.fragments.user.public}
-    ${BlockUser.fragments.user.private}
-  `,
+  user: {
+    public: gql`
+      fragment DropdownActionsUserPublic on User {
+        id
+        ...BlockUserPublic
+      }
+      ${BlockUser.fragments.user.public}
+    `,
+    private: gql`
+      fragment DropdownActionsUserPrivate on User {
+        id
+        ...BlockUserPrivate
+      }
+      ${BlockUser.fragments.user.private}
+    `,
+  },
 }
 
 interface DropdownActionsProps {
-  user: DropdownActionsUser
+  user: DropdownActionsUserPublic
   isMe: boolean
 }
 

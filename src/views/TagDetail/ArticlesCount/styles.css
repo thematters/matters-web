@@ -1,0 +1,8 @@
+.container {
+  font-size: var(--font-size-sm);
+  color: var(--color-grey-darker);
+
+  & b {
+    color: var(--color-black);
+  }
+}

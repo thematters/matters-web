@@ -21,7 +21,7 @@ const Unsubscribe = ({
   const [unsubscribe] = useMutation<ToggleSubscribeArticle>(
     TOGGLE_SUBSCRIBE_ARTICLE,
     {
-      variables: { id: articleId },
+      variables: { id: articleId, enabled: false },
       optimisticResponse: articleId
         ? {
             toggleSubscribeArticle: {

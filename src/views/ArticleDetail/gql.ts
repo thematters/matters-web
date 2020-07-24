@@ -50,9 +50,10 @@ export const ARTICLE_DETAIL_PUBLIC = gql`
 `
 
 export const ARTICLE_DETAIL_PRIVATE = gql`
-  query ArticleDetailPrivate($mediaHash: String) {
+  query ArticleDetailPrivate($mediaHash: String, $includeContent: Boolean!) {
     article(input: { mediaHash: $mediaHash }) {
       id
+      content @include(if: $includeContent)
       author {
         ...UserDigestRichUserPrivate
       }

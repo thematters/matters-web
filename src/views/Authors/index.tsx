@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
+import { useContext, useEffect } from 'react'
 
 import {
   EmptyWarning,
@@ -10,71 +10,67 @@ import {
   Spinner,
   Translate,
   UserDigest,
+  ViewerContext,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
 import { analytics, mergeConnections } from '~/common/utils'
 
-import { AllAuthors } from './__generated__/AllAuthors'
+import { ALL_AUTHORS_PRIVATE, ALL_AUTHORS_PUBLIC } from './gql'
 
-const ALL_AUTHORSS = gql`
-  query AllAuthors($after: String) {
-    viewer {
-      id
-      recommendation {
-        authors(input: { first: 20, after: $after }) {
-          pageInfo {
-            startCursor
-            endCursor
-            hasNextPage
-          }
-          edges {
-            cursor
-            node {
-              ...UserDigestRichUserPublic
-              ...UserDigestRichUserPrivate
-            }
-          }
-        }
-      }
-    }
-  }
-  ${UserDigest.Rich.fragments.user.public}
-  ${UserDigest.Rich.fragments.user.private}
-`
+import { AllAuthorsPublic } from './__generated__/AllAuthorsPublic'
 
 const Authors = () => {
-  const { data, loading, error, fetchMore, refetch } = useQuery<AllAuthors>(
-    ALL_AUTHORSS
-  )
+  const viewer = useContext(ViewerContext)
 
-  if (loading) {
-    return <Spinner />
-  }
+  /**
+   * Data Fetching
+   */
+  // public data
+  const {
+    data,
+    loading,
+    error,
+    fetchMore,
+    refetch: refetchPublic,
+    client,
+  } = useQuery<AllAuthorsPublic>(ALL_AUTHORS_PUBLIC)
 
-  if (error) {
-    return <QueryError error={error} />
-  }
-
+  // pagination
   const connectionPath = 'viewer.recommendation.authors'
   const { edges, pageInfo } = data?.viewer?.recommendation.authors || {}
 
-  if (!edges || edges.length <= 0 || !pageInfo) {
-    return (
-      <EmptyWarning
-        description={<Translate zh_hant="還沒有作者" zh_hans="还没有作者" />}
-      />
-    )
+  // private data
+  const loadPrivate = (publicData?: AllAuthorsPublic) => {
+    if (!viewer.id || !publicData) {
+      return
+    }
+
+    const publiceEdges = publicData?.viewer?.recommendation.authors.edges || []
+    const publicIds = publiceEdges.map(({ node }) => node.id)
+
+    client.query({
+      query: ALL_AUTHORS_PRIVATE,
+      fetchPolicy: 'network-only',
+      variables: { ids: publicIds },
+    })
   }
 
-  const loadMore = () => {
+  // fetch private data for first page
+  useEffect(() => {
+    loadPrivate(data)
+  }, [!!edges, viewer.id])
+
+  // load next page
+  const loadMore = async () => {
     analytics.trackEvent('load_more', {
       type: 'all_authors',
-      location: edges.length,
+      location: edges?.length || 0,
     })
-    return fetchMore({
+
+    const { data: newData } = await fetchMore({
       variables: {
-        after: pageInfo.endCursor,
+        after: pageInfo?.endCursor,
       },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
@@ -84,6 +80,33 @@ const Authors = () => {
           dedupe: true,
         }),
     })
+
+    loadPrivate(newData)
+  }
+
+  // refetch & pull to refresh
+  const refetch = async () => {
+    const { data: newData } = await refetchPublic()
+    loadPrivate(newData)
+  }
+
+  /**
+   * Render
+   */
+  if (loading) {
+    return <Spinner />
+  }
+
+  if (error) {
+    return <QueryError error={error} />
+  }
+
+  if (!edges || edges.length <= 0 || !pageInfo) {
+    return (
+      <EmptyWarning
+        description={<Translate zh_hant="還沒有作者" zh_hans="还没有作者" />}
+      />
+    )
   }
 
   return (
