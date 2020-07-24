@@ -10,7 +10,7 @@ const TagCover = ({ content, cover }: { content: string; cover?: string }) => {
   const url = cover || TAG_COVER
   const maskClasses = classNames({
     container: true,
-    mask: !!cover
+    mask: !!cover,
   })
 
   return (
