@@ -44,7 +44,10 @@ let NERDTreeWinSize = 50
 " NERDTree-tabs
 let g:nerdtree_tabs_open_on_console_startup = 1
 
-" Set import cost
+" Ale
+let g:airline#extensions#ale#enabled = 1
+
+" import cost
 augroup import_cost_auto_run
   autocmd!
   autocmd InsertLeave *.js,*.jsx,*.ts,*.tsx ImportCost
