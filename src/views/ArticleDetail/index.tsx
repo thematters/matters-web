@@ -100,7 +100,7 @@ const ArticleDetail = () => {
 
   // fetch private data
   const loadPrivate = () => {
-    if (!viewer.id || !article) {
+    if (!viewer.id || !article || !article?.mediaHash) {
       return
     }
 
@@ -108,7 +108,7 @@ const ArticleDetail = () => {
       query: ARTICLE_DETAIL_PRIVATE,
       fetchPolicy: 'network-only',
       variables: {
-        mediaHash,
+        mediaHash: article?.mediaHash,
         includeContent: article.state !== 'active' && isAuthor,
       },
     })
@@ -116,7 +116,7 @@ const ArticleDetail = () => {
 
   useEffect(() => {
     loadPrivate()
-  }, [mediaHash, !!article, viewer.id])
+  }, [article?.mediaHash, viewer.id])
 
   // translation
   const [translate, setTranslate] = useState(false)
