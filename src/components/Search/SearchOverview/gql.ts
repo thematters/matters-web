@@ -5,7 +5,7 @@ import ClearHistoryButton from './ClearHistoryButton'
 export const SEARCH_AUTOCOMPLETE_PUBLIC = gql`
   query SearchOverviewPublic {
     frequentSearch(input: { first: 5, key: "" })
-    viewer {
+    viewer @connection(key: "viewerSearchOverview") {
       id
       ...RecentSearchesUser
     }
@@ -15,7 +15,7 @@ export const SEARCH_AUTOCOMPLETE_PUBLIC = gql`
 
 export const SEARCH_AUTOCOMPLETE_PRIVATE = gql`
   query SearchOverviewPrivate {
-    viewer {
+    viewer @connection(key: "viewerSearchOverview") {
       id
       ...RecentSearchesUser
     }
