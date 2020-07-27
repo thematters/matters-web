@@ -1,5 +1,4 @@
 set nocompatible
-filetype off
 
 call plug#begin('~/.local/share/nvim/plugged')
 
@@ -21,7 +20,6 @@ Plug 'tpope/vim-cucumber'
 
 call plug#end()
 
-" General settings
 set number
 set encoding=utf-8
 set fileencoding=utf-8
