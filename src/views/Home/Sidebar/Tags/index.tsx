@@ -50,7 +50,7 @@ const Tags = () => {
 
       {loading && <Spinner />}
 
-      <List>
+      <List hasBorder={false}>
         {edges.map(
           ({ node, cursor }, i) =>
             node.__typename === 'Tag' && (
@@ -71,14 +71,16 @@ const Tags = () => {
                   }
                 >
                   <Tag tag={node} type="inline" textSize="sm" active={true} />
-                  <section className="content">
-                    <p>{node.description}</p>
-                    {node.cover && (
-                      <div className="cover">
-                        <Img url={node.cover} size="144w" />
-                      </div>
-                    )}
-                  </section>
+                  {node.description && (
+                    <section className="content">
+                      <p>{node.description}</p>
+                      {node.cover && (
+                        <div className="cover">
+                          <Img url={node.cover} size="144w" />
+                        </div>
+                      )}
+                    </section>
+                  )}
                 </Card>
               </List.Item>
             )

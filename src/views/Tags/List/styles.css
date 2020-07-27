@@ -61,4 +61,5 @@
 
 .mask {
   background: rgba(0, 0, 0, 0.3);
+  border-radius: var(--spacing-xx-tight);
 }
