@@ -1,26 +1,20 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { useContext } from 'react'
 
 import {
-  Button,
   Card,
   EmptyTag,
   Head,
-  IconAdd,
   InfiniteScroll,
   Layout,
-  List,
   Spinner,
-  Tag,
-  TagDialog,
-  TextIcon,
-  Translate,
-  ViewerContext,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
 import { analytics, mergeConnections, toPath } from '~/common/utils'
+
+import { TagsButtons } from './Buttons'
+import { List } from './List'
 
 import { AllTagsPublic } from './__generated__/AllTagsPublic'
 
@@ -38,40 +32,16 @@ const ALL_TAGS = gql`
           edges {
             cursor
             node {
-              ...DigestTag
+              id
+              cover
+              content
             }
           }
         }
       }
     }
   }
-  ${Tag.fragments.tag}
 `
-
-const CreateTagButton = () => {
-  const viewer = useContext(ViewerContext)
-
-  if (!viewer.id) {
-    return null
-  }
-
-  return (
-    <TagDialog>
-      {({ open }) => (
-        <Button
-          size={[null, '1.5rem']}
-          spacing={[0, 'xtight']}
-          bgActiveColor="grey-lighter"
-          onClick={open}
-        >
-          <TextIcon icon={<IconAdd color="green" size="xs" />} color="green">
-            <Translate id="createTag" />
-          </TextIcon>
-        </Button>
-      )}
-    </TagDialog>
-  )
-}
 
 const Tags = () => {
   const { data, loading, error, fetchMore, refetch } = useQuery<AllTagsPublic>(
@@ -124,7 +94,7 @@ const Tags = () => {
             node.__typename === 'Tag' && (
               <List.Item key={cursor}>
                 <Card
-                  spacing={['base', 'base']}
+                  spacing={[0, 0]}
                   {...toPath({
                     page: 'tagDetail',
                     id: node.id,
@@ -138,11 +108,20 @@ const Tags = () => {
                     })
                   }
                 >
-                  <Tag tag={node} type="list" />
+                  <List.Card
+                    id={node.id}
+                    content={node.content}
+                    cover={node.cover}
+                  />
                 </Card>
               </List.Item>
             )
         )}
+
+        {/* for maintain grid alignment */}
+        <List.Item hidden />
+        <List.Item hidden />
+        <List.Item hidden />
       </List>
     </InfiniteScroll>
   )
@@ -157,7 +136,7 @@ export default () => (
       right={
         <>
           <Layout.Header.Title id="allTags" />
-          <CreateTagButton />
+          <TagsButtons.CreateButton />
         </>
       }
     />

@@ -15,15 +15,14 @@ header {
     background: var(--color-matters-green);
   }
 
-  & :global(a) {
-    @mixin line-clamp;
+  & :global(div) {
+    @mixin expand-to-container;
 
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
     padding: var(--spacing-base);
+
+    & a {
+      @mixin line-clamp;
+    }
   }
 
   &::after {
@@ -44,4 +43,8 @@ ul {
       line-height: 2rem;
     }
   }
+}
+
+.mask {
+  background: rgba(0, 0, 0, 0.3);
 }
