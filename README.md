@@ -122,6 +122,12 @@ See `.vscode/settings.json`
 - [CoenraadS.bracket-pair-colorizer](https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket-pair-colorizer)
 - [naumovs.color-highlight]()
 
+### Vim
+
+#### Settings
+
+For vim users, you might want to see `.vim/.vimrc` (using vim-plug).
+
 ## Release a new version
 
 1. Update `CHANGELOG.md`
