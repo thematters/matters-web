@@ -1,27 +1,21 @@
 import { useQuery } from '@apollo/react-hooks'
 
-import { Toast, Translate, useCountdown } from '~/components'
+import { Toast, Translate } from '~/components'
 import DRAFT_PUBLISH_STATE from '~/components/GQL/queries/draftPublishState'
-
-import { TEXT } from '~/common/enums'
 
 import { PublishStateDraft } from '~/components/GQL/fragments/__generated__/PublishStateDraft'
 import { DraftPublishState } from '~/components/GQL/queries/__generated__/DraftPublishState'
 
 const PendingState = ({ draft }: { draft: PublishStateDraft }) => {
   const scheduledAt = draft.scheduledAt
-  const {
-    countdown: { timeLeft },
-    formattedTimeLeft,
-  } = useCountdown({ timeLeft: Date.parse(scheduledAt) - Date.now() })
-  const isPublishing = !scheduledAt || !timeLeft || timeLeft <= 0
+  const isPublishing = !scheduledAt || Date.parse(scheduledAt) <= Date.now()
 
   useQuery<DraftPublishState>(DRAFT_PUBLISH_STATE, {
     variables: { id: draft.id },
     pollInterval: 1000 * 2,
     errorPolicy: 'none',
     fetchPolicy: 'network-only',
-    skip: !process.browser || !isPublishing,
+    skip: !process.browser,
   })
 
   return (
@@ -31,10 +25,7 @@ const PendingState = ({ draft }: { draft: PublishStateDraft }) => {
         isPublishing ? (
           <Translate id="publishing" />
         ) : (
-          <Translate
-            zh_hant={`${TEXT.zh_hant.waitingForPublish} (${formattedTimeLeft.mmss})`}
-            zh_hans={`${TEXT.zh_hans.waitingForPublish} (${formattedTimeLeft.mmss})`}
-          />
+          <Translate id="waitingForPublish" />
         )
       }
       subDescription={
