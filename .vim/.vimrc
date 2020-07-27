@@ -1,7 +1,6 @@
 set nocompatible
 filetype off
 
-" Run vim-plug
 call plug#begin('~/.local/share/nvim/plugged')
 
 " Plugins
@@ -22,12 +21,8 @@ Plug 'tpope/vim-cucumber'
 
 call plug#end()
 
-filetype plugin indent on
-filetype indent off
-
 " General settings
 set number
-set hlsearch
 set encoding=utf-8
 set fileencoding=utf-8
 set mouse-=a
