@@ -1,4 +1,3 @@
-import { useQuery } from '@apollo/react-hooks'
 import _find from 'lodash/find'
 import _some from 'lodash/some'
 import { useRouter } from 'next/router'
@@ -15,6 +14,7 @@ import {
   Tabs,
   Throw404,
   Translate,
+  usePublicQuery,
   usePullToRefresh,
   useResponsive,
   ViewerContext,
@@ -174,9 +174,13 @@ const TagDetailContainer = () => {
    * Data Fetching
    */
   // public data
-  const { data, loading, error, refetch: refetchPublic, client } = useQuery<
-    TagDetailPublic
-  >(TAG_DETAIL_PUBLIC, {
+  const {
+    data,
+    loading,
+    error,
+    refetch: refetchPublic,
+    client,
+  } = usePublicQuery<TagDetailPublic>(TAG_DETAIL_PUBLIC, {
     variables: { id: tagId },
   })
 

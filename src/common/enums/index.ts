@@ -27,3 +27,5 @@ export const AGENT_HASH_PREFIX = 'v1__'
 
 export const IMAGE_PIXEL =
   'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=='
+
+export const GQL_CONTEXT_PUBLIC_QUERY_KEY = 'publicQuery'

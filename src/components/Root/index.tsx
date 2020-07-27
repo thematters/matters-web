@@ -1,4 +1,3 @@
-import { useQuery } from '@apollo/react-hooks'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
 import dynamic from 'next/dynamic'
@@ -12,6 +11,7 @@ import {
   LanguageProvider,
   Layout,
   Toast,
+  usePublicQuery,
   ViewerProvider,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
@@ -72,7 +72,9 @@ const Root = ({
   const shouldApplyLayout = !isInAbout && !isInMigration
 
   // anonymous
-  const { loading, data, error } = useQuery<RootQueryPublic>(ROOT_QUERY_PUBLIC)
+  const { loading, data, error } = usePublicQuery<RootQueryPublic>(
+    ROOT_QUERY_PUBLIC
+  )
   const viewer = data?.viewer
   const official = data?.official
 

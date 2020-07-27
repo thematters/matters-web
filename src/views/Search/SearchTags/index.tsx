@@ -1,4 +1,3 @@
-import { useQuery } from '@apollo/react-hooks'
 import { useRouter } from 'next/router'
 
 import {
@@ -8,6 +7,7 @@ import {
   Spinner,
   Tag,
   Translate,
+  usePublicQuery,
 } from '~/components'
 
 import { analytics, getQuery, mergeConnections, toPath } from '~/common/utils'
@@ -25,7 +25,7 @@ const SearchTag = () => {
    * Data Fetching
    */
   // public data
-  const { data, loading, fetchMore, refetch } = useQuery<SeachTagsPublic>(
+  const { data, loading, fetchMore, refetch } = usePublicQuery<SeachTagsPublic>(
     SEARCH_TAGS_PUBLIC,
     {
       variables: { key: q },

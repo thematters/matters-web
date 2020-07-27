@@ -8,6 +8,7 @@ import {
   InfiniteScroll,
   List,
   Spinner,
+  usePublicQuery,
   useResponsive,
   ViewerContext,
 } from '~/components'
@@ -104,7 +105,7 @@ const MainFeed = ({ feedSortType: sortBy, viewMode }: MainFeedProps) => {
     networkStatus,
     refetch: refetchPublic,
     client,
-  } = useQuery<FeedArticlesPublic>(query, {
+  } = usePublicQuery<FeedArticlesPublic>(query, {
     notifyOnNetworkStatusChange: true,
   })
 

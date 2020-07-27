@@ -1,4 +1,3 @@
-import { useQuery } from '@apollo/react-hooks'
 import { useRouter } from 'next/router'
 import { useContext, useEffect } from 'react'
 
@@ -9,6 +8,7 @@ import {
   List,
   Spinner,
   Translate,
+  usePublicQuery,
   usePullToRefresh,
   ViewerContext,
 } from '~/components'
@@ -37,7 +37,7 @@ const UserFollowers = () => {
     fetchMore,
     refetch: refetchPublic,
     client,
-  } = useQuery<UserFollowerPublic>(USER_FOLLOWERS_PUBLIC, {
+  } = usePublicQuery<UserFollowerPublic>(USER_FOLLOWERS_PUBLIC, {
     variables: { userName },
   })
 

@@ -1,9 +1,8 @@
-import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import Link from 'next/link'
 import { Fragment, useContext, useEffect } from 'react'
 
-import { Menu, Translate, ViewerContext } from '~/components'
+import { Menu, Translate, usePublicQuery, ViewerContext } from '~/components'
 import { Spinner } from '~/components/Spinner'
 
 import { toPath } from '~/common/utils'
@@ -25,7 +24,7 @@ export const SearchOverview = ({ inPage }: SearchOverviewProps) => {
    * Data Fetching
    */
   // public data
-  const { data, loading, client } = useQuery<SearchOverviewPublic>(
+  const { data, loading, client } = usePublicQuery<SearchOverviewPublic>(
     SEARCH_AUTOCOMPLETE_PUBLIC
   )
 

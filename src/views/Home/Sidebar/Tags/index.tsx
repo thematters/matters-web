@@ -1,7 +1,6 @@
-import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { Card, Img, List, Spinner, Tag } from '~/components'
+import { Card, Img, List, Spinner, Tag, usePublicQuery } from '~/components'
 import { QueryError } from '~/components/GQL'
 
 import { analytics, toPath } from '~/common/utils'
@@ -33,7 +32,9 @@ const SIDEBAR_TAGS = gql`
 `
 
 const Tags = () => {
-  const { data, loading, error } = useQuery<SidebarTagsPublic>(SIDEBAR_TAGS)
+  const { data, loading, error } = usePublicQuery<SidebarTagsPublic>(
+    SIDEBAR_TAGS
+  )
   const edges = data?.viewer?.recommendation.tags.edges
 
   if (error) {

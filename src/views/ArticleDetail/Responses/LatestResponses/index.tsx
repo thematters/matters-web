@@ -1,4 +1,3 @@
-import { useQuery } from '@apollo/react-hooks'
 import jump from 'jump.js'
 import _differenceBy from 'lodash/differenceBy'
 import _get from 'lodash/get'
@@ -13,6 +12,7 @@ import {
   Title,
   Translate,
   useEventListener,
+  usePublicQuery,
   usePullToRefresh,
   useResponsive,
   ViewerContext,
@@ -82,7 +82,7 @@ const LatestResponses = () => {
     fetchMore,
     refetch: refetchPublic,
     client,
-  } = useQuery<LatestResponsesPublic>(LATEST_RESPONSES_PUBLIC, {
+  } = usePublicQuery<LatestResponsesPublic>(LATEST_RESPONSES_PUBLIC, {
     variables: {
       mediaHash,
       first: RESPONSES_COUNT,
