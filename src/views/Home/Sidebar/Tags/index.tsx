@@ -1,12 +1,13 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { Card, List, Spinner, Tag } from '~/components'
+import { Card, Img, List, Spinner, Tag } from '~/components'
 import { QueryError } from '~/components/GQL'
 
 import { analytics, toPath } from '~/common/utils'
 
 import SectionHeader from '../../SectionHeader'
+import styles from './styles.css'
 
 import { SidebarTagsPublic } from './__generated__/SidebarTagsPublic'
 
@@ -19,6 +20,8 @@ const SIDEBAR_TAGS = gql`
           edges {
             cursor
             node {
+              cover
+              description
               ...DigestTag
             }
           }
@@ -67,12 +70,21 @@ const Tags = () => {
                     })
                   }
                 >
-                  <Tag tag={node} type="list" textSize="sm" />
+                  <Tag tag={node} type="inline" textSize="sm" active={true} />
+                  <section className="content">
+                    <p>{node.description}</p>
+                    {node.cover && (
+                      <div className="cover">
+                        <Img url={node.cover} size="144w" />
+                      </div>
+                    )}
+                  </section>
                 </Card>
               </List.Item>
             )
         )}
       </List>
+      <style jsx>{styles}</style>
     </section>
   )
 }
