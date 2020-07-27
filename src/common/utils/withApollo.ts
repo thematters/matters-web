@@ -66,14 +66,14 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   }
 })
 
-const authLink = setContext((operation, { headers }) => {
+const authLink = setContext((operation, { headers, publicQuery }) => {
   const operationName = operation.operationName || ''
 
   if (process.env.NODE_ENV !== 'production') {
     console.log(`\x1b[32m[GraphQL operation]\x1b[0m`, operationName)
   }
 
-  const isPublicOperation = /Public$/.test(operationName)
+  const isPublicOperation = publicQuery || /Public$/.test(operationName)
 
   return {
     credentials: isPublicOperation ? 'omit' : 'include',

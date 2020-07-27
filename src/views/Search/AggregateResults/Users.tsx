@@ -1,7 +1,13 @@
-import { useQuery } from '@apollo/react-hooks'
 import { useRouter } from 'next/router'
 
-import { Card, List, Spinner, usePullToRefresh, UserDigest } from '~/components'
+import {
+  Card,
+  List,
+  Spinner,
+  usePublicQuery,
+  usePullToRefresh,
+  UserDigest,
+} from '~/components'
 
 import { analytics, getQuery, toPath } from '~/common/utils'
 
@@ -19,7 +25,7 @@ const AggregateUserResults = () => {
    * Data Fetching
    */
   // public data
-  const { data, loading, refetch } = useQuery<SeachAggregateUsersPublic>(
+  const { data, loading, refetch } = usePublicQuery<SeachAggregateUsersPublic>(
     SEARCH_AGGREGATE_USERS_PUBLIC,
     { variables: { key: q } }
   )

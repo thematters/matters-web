@@ -1,4 +1,3 @@
-import { useQuery } from '@apollo/react-hooks'
 import { NetworkStatus } from 'apollo-client'
 import { useContext, useEffect } from 'react'
 
@@ -9,6 +8,7 @@ import {
   List,
   Spinner,
   useEventListener,
+  usePublicQuery,
   usePullToRefresh,
   ViewerContext,
 } from '~/components'
@@ -43,7 +43,7 @@ const TagDetailArticles = ({ tagId, selected }: TagArticlesProps) => {
     refetch: refetchPublic,
     networkStatus,
     client,
-  } = useQuery<TagArticlesPublic>(TAG_ARTICLES_PUBLIC, {
+  } = usePublicQuery<TagArticlesPublic>(TAG_ARTICLES_PUBLIC, {
     variables: { id: tagId, selected },
     notifyOnNetworkStatusChange: true,
   })

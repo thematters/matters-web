@@ -1,4 +1,3 @@
-import { useQuery } from '@apollo/react-hooks'
 import { useContext, useEffect } from 'react'
 
 import {
@@ -8,6 +7,7 @@ import {
   Spinner,
   TextIcon,
   Translate,
+  usePublicQuery,
   UserDigest,
   ViewerContext,
 } from '~/components'
@@ -27,9 +27,15 @@ const Authors = () => {
    * Data Fetching
    */
   // public data
-  const { data, loading, error, refetch: refetchPublic, client } = useQuery<
-    SidebarAuthorsPublic
-  >(SIDEBAR_AUTHORS_PUBLIC, { notifyOnNetworkStatusChange: true })
+  const {
+    data,
+    loading,
+    error,
+    refetch: refetchPublic,
+    client,
+  } = usePublicQuery<SidebarAuthorsPublic>(SIDEBAR_AUTHORS_PUBLIC, {
+    notifyOnNetworkStatusChange: true,
+  })
   const edges = data?.viewer?.recommendation.authors.edges
 
   // private data

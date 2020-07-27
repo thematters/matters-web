@@ -1,8 +1,10 @@
-import { OperationVariables } from '@apollo/react-common'
+import { OperationVariables, QueryResult } from '@apollo/react-common'
 import {
   MutationHookOptions,
   MutationTuple,
+  QueryHookOptions,
   useMutation as baseUseMutation,
+  useQuery as baseUseQuery,
 } from '@apollo/react-hooks'
 import { DocumentNode } from 'graphql'
 
@@ -18,4 +20,18 @@ export const useMutation = <TData = any, TVariables = OperationVariables>(
   })
 
   return [mutate, result]
+}
+
+export const usePublicQuery = <TData = any, TVariables = OperationVariables>(
+  query: DocumentNode,
+  options?: QueryHookOptions<TData, TVariables>
+): QueryResult<TData, TVariables> => {
+  const result = baseUseQuery(query, {
+    ...options,
+    context: {
+      publicQuery: true,
+    },
+  })
+
+  return result
 }

@@ -1,4 +1,3 @@
-import { useQuery } from '@apollo/react-hooks'
 import { NetworkStatus } from 'apollo-client'
 import { useRouter } from 'next/router'
 import { useContext, useEffect } from 'react'
@@ -9,6 +8,7 @@ import {
   List,
   Spinner,
   Translate,
+  usePublicQuery,
   ViewerContext,
 } from '~/components'
 
@@ -35,7 +35,7 @@ const SearchArticles = () => {
     networkStatus,
     refetch: refetchPublic,
     client,
-  } = useQuery<SeachArticlesPublic>(SEARCH_ARTICLES_PUBLIC, {
+  } = usePublicQuery<SeachArticlesPublic>(SEARCH_ARTICLES_PUBLIC, {
     variables: { key: q, first: 10 },
     notifyOnNetworkStatusChange: true,
   })

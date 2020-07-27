@@ -1,4 +1,3 @@
-import { useQuery } from '@apollo/react-hooks'
 import _chunk from 'lodash/chunk'
 import { useContext, useEffect } from 'react'
 
@@ -9,6 +8,7 @@ import {
   Spinner,
   TextIcon,
   Translate,
+  usePublicQuery,
   UserDigest,
   ViewerContext,
 } from '~/components'
@@ -28,9 +28,15 @@ const FeedAuthors = () => {
    * Data Fetching
    */
   // public data
-  const { data, loading, error, refetch: refetchPublic, client } = useQuery<
-    FeedAuthorsPublic
-  >(FEED_AUTHORS_PUBLIC, { notifyOnNetworkStatusChange: true })
+  const {
+    data,
+    loading,
+    error,
+    refetch: refetchPublic,
+    client,
+  } = usePublicQuery<FeedAuthorsPublic>(FEED_AUTHORS_PUBLIC, {
+    notifyOnNetworkStatusChange: true,
+  })
 
   const edges = data?.viewer?.recommendation.authors.edges
 
