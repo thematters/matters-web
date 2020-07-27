@@ -7,6 +7,7 @@ import Content from './Content'
 interface TagDialogProps {
   id?: string
   content?: string
+  cover?: string
   description?: string
   children: ({ open }: { open: () => void }) => React.ReactNode
 }

@@ -10,6 +10,7 @@ export const TAG_DETAIL_PUBLIC = gql`
       ... on Tag {
         id
         content
+        cover
         creator {
           id
           ...UserDigestMiniUser

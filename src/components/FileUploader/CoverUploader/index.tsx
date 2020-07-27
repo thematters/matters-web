@@ -17,33 +17,51 @@ import {
   UPLOAD_IMAGE_SIZE_LIMIT,
 } from '~/common/enums'
 
-import Cover from '../../../Cover'
+import Cover, { CoverProps } from './Cover'
 import styles from './styles.css'
 
 import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
-import { ProfileUserPublic } from '~/components/UserProfile/__generated__/ProfileUserPublic'
 
 /**
- * This component is for uploading profile cover.
+ * This shared component is for uploading cover.
  *
  * Usage:
  *
  * ```jsx
- *   <ProfileCoverUploader user={user} />
+ *   <CoverUploader
+ *     assetType={assetType}
+ *     coverUrl={coverUrl}
+ *     defaultCoverUrl={defaultCoverUrl}
+ *     entityId={entityId}
+ *     entityType={entityType}
+ *     inEditor={true || false}
+ *     onUpload={onUpload}
+ *   />
  * ```
  */
 
 interface Props {
-  user: ProfileUserPublic
+  assetType: 'profileCover' | 'tagCover'
+  entityId?: string
+  entityType: 'user' | 'tag'
   onUpload: (assetId: string | null) => void
+  coverUrl?: string
 }
 
-export const ProfileCoverUploader: React.FC<Props> = ({ user, onUpload }) => {
-  const [cover, setCover] = useState<string | null>(user.info.profileCover)
+export const CoverUploader = ({
+  assetType,
+  coverUrl,
+  defaultCoverUrl,
+  entityId,
+  entityType,
+  inEditor,
+  onUpload,
+}: Props & CoverProps) => {
+  const [cover, setCover] = useState<string | undefined>(coverUrl)
   const [upload, { loading }] = useMutation<SingleFileUpload>(UPLOAD_FILE)
 
   const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
-  const fieldId = 'profile-cover-upload-form'
+  const fieldId = 'cover-upload-form'
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     event.stopPropagation()
@@ -75,7 +93,7 @@ export const ProfileCoverUploader: React.FC<Props> = ({ user, onUpload }) => {
     try {
       const { data } = await upload({
         variables: {
-          input: { file, type: 'profileCover', entityType: 'user' },
+          input: { file, type: assetType, entityId, entityType },
         },
       })
       const id = data?.singleFileUpload.id
@@ -100,18 +118,22 @@ export const ProfileCoverUploader: React.FC<Props> = ({ user, onUpload }) => {
   }
 
   const removeCover = () => {
-    setCover(null)
+    setCover(undefined)
     onUpload(null)
   }
 
   return (
-    <label htmlFor={fieldId}>
-      <Cover cover={cover} inEditor />
+    <label className="uploader" htmlFor={fieldId}>
+      <Cover
+        coverUrl={cover}
+        defaultCoverUrl={defaultCoverUrl}
+        inEditor={inEditor}
+      />
 
       <div className="mask">
         {loading ? <Spinner /> : <IconCameraMedium color="white" size="xl" />}
 
-        {user.info.profileCover && (
+        {coverUrl && (
           <section className="delete">
             <Button
               size={[null, '1.25rem']}
@@ -145,4 +167,4 @@ export const ProfileCoverUploader: React.FC<Props> = ({ user, onUpload }) => {
   )
 }
 
-export default ProfileCoverUploader
+export default CoverUploader

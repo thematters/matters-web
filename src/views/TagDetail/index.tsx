@@ -14,9 +14,9 @@ import {
   Spinner,
   Tabs,
   Throw404,
-  Title,
   Translate,
   usePullToRefresh,
+  useResponsive,
   ViewerContext,
 } from '~/components'
 import { getErrorCodes, QueryError } from '~/components/GQL'
@@ -28,6 +28,7 @@ import { getQuery } from '~/common/utils'
 import TagDetailArticles from './Articles'
 import ArticlesCount from './ArticlesCount'
 import { TagDetailButtons } from './Buttons'
+import Cover from './Cover'
 import DropdownActions from './DropdownActions'
 import Followers from './Followers'
 import { TAG_DETAIL_PRIVATE, TAG_DETAIL_PUBLIC } from './gql'
@@ -49,6 +50,7 @@ const EmptyLayout: React.FC = ({ children }) => (
 )
 
 const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
+  const isSmallUp = useResponsive('sm-up')
   const viewer = useContext(ViewerContext)
 
   // feed type
@@ -84,24 +86,31 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
   return (
     <Layout.Main>
       <Layout.Header
-        left={<Layout.Header.BackButton />}
+        left={
+          <Layout.Header.BackButton
+            mode={!isSmallUp ? 'black-solid' : undefined}
+          />
+        }
         right={
           <>
-            <Layout.Header.Title id="tag" />
-
+            {isSmallUp ? <Layout.Header.Title id="tag" /> : <span />}
             <DropdownActions
               id={tag.id}
               content={tag.content}
+              cover={tag.cover || undefined}
               description={tag.description || undefined}
               isMaintainer={isMaintainer}
             />
           </>
         }
+        mode={isSmallUp ? 'solid-fixed' : 'transparent-absolute'}
       />
 
       <Head title={`#${tag.content}`} />
 
       <PullToRefresh>
+        <Cover content={tag.content} cover={tag.cover} />
+
         <Spacer />
 
         <section className="info">
@@ -118,8 +127,6 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
               </span>
             </section>
           )}
-
-          <Title type="tag">#{tag.content}</Title>
 
           {tag.description && (
             <Expandable>
