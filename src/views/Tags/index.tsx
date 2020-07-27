@@ -1,4 +1,3 @@
-import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
 import {
@@ -8,6 +7,7 @@ import {
   InfiniteScroll,
   Layout,
   Spinner,
+  usePublicQuery,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
@@ -44,9 +44,9 @@ const ALL_TAGS = gql`
 `
 
 const Tags = () => {
-  const { data, loading, error, fetchMore, refetch } = useQuery<AllTagsPublic>(
-    ALL_TAGS
-  )
+  const { data, loading, error, fetchMore, refetch } = usePublicQuery<
+    AllTagsPublic
+  >(ALL_TAGS)
 
   if (loading) {
     return <Spinner />

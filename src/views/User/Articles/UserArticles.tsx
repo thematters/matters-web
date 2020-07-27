@@ -1,4 +1,3 @@
-import { useQuery } from '@apollo/react-hooks'
 import { useRouter } from 'next/router'
 import { useContext, useEffect } from 'react'
 
@@ -11,6 +10,7 @@ import {
   List,
   Spinner,
   Translate,
+  usePublicQuery,
   usePullToRefresh,
   ViewerContext,
 } from '~/components'
@@ -63,8 +63,10 @@ const UserArticles = () => {
   const isViewer = viewer.userName === userName
 
   let query = USER_ARTICLES_PUBLIC
+  let publicQuery = true
   if (isViewer) {
     query = VIEWER_ARTICLES
+    publicQuery = false
   }
 
   /**
@@ -78,9 +80,13 @@ const UserArticles = () => {
     fetchMore,
     refetch: refetchPublic,
     client,
-  } = useQuery<UserArticlesPublic>(query, {
-    variables: { userName },
-  })
+  } = usePublicQuery<UserArticlesPublic>(
+    query,
+    {
+      variables: { userName },
+    },
+    { publicQuery }
+  )
 
   // pagination
   const connectionPath = 'user.articles'

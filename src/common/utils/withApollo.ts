@@ -70,15 +70,19 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   }
 })
 
-const authLink = setContext((operation, { headers, ...rest }) => {
+const authLink = setContext((operation, { headers, ...restCtx }) => {
   const operationName = operation.operationName || ''
 
-  if (process.env.NODE_ENV !== 'production') {
-    console.log(`\x1b[32m[GraphQL operation]\x1b[0m`, operationName)
-  }
+  const isPublicOperation = restCtx[GQL_CONTEXT_PUBLIC_QUERY_KEY]
 
-  const isPublicOperation =
-    rest[GQL_CONTEXT_PUBLIC_QUERY_KEY] || /Public$/.test(operationName)
+  if (process.env.NODE_ENV !== 'production') {
+    console.log(
+      `%c[GraphQL operation]\x1b[0m`,
+      'background: #0d6763; color: #fff',
+      operationName,
+      isPublicOperation ? '' : '(w/ credentials)'
+    )
+  }
 
   return {
     credentials: isPublicOperation ? 'omit' : 'include',
