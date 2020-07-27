@@ -6,13 +6,29 @@
 }
 
 header {
-  display: flex;
-  padding: var(--spacing-base);
-  color: var(--color-white);
+  position: relative;
   background: var(--color-matters-green);
 
-  & :global(.tag) {
-    @mixin line-clamp;
+  & :global(img) {
+    @mixin object-fit-cover;
+
+    background: var(--color-matters-green);
+  }
+
+  & :global(div) {
+    @mixin expand-to-container;
+
+    padding: var(--spacing-base);
+
+    & a {
+      @mixin line-clamp;
+    }
+  }
+
+  &::after {
+    display: block;
+    padding-bottom: 22.8%;
+    content: '';
   }
 }
 
@@ -27,4 +43,8 @@ ul {
       line-height: 2rem;
     }
   }
+}
+
+.mask {
+  background: rgba(0, 0, 0, 0.3);
 }

@@ -1,0 +1,46 @@
+.cover {
+  position: relative;
+
+  & :global(img) {
+    @mixin object-fit-cover;
+
+    background-color: var(--color-matters-green);
+  }
+
+  & .container {
+    @mixin expand-to-container;
+
+    & .content {
+      position: absolute;
+      right: var(--spacing-base);
+      bottom: var(--spacing-loose);
+      left: var(--spacing-base);
+      color: var(--color-white);
+    }
+  }
+
+  &::after {
+    display: block;
+    padding-bottom: 46.93%;
+    content: '';
+
+    @media (--sm-up) {
+      padding-bottom: 30.14%;
+    }
+  }
+}
+
+.content {
+  & :global(span.text-icon) {
+    display: flex;
+    align-items: flex-start;
+
+    & :global(svg) {
+      margin-top: -1px;
+    }
+  }
+}
+
+.mask {
+  background: rgba(0, 0, 0, 0.3);
+}

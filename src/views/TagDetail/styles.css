@@ -8,7 +8,7 @@
 .owner {
   @mixin flex-center-start;
 
-  padding: 0 0 var(--spacing-base);
+  margin-bottom: var(--spacing-base);
 
   & span {
     margin-left: var(--spacing-x-tight);
@@ -18,7 +18,6 @@
 }
 
 .description {
-  padding-top: 1rem;
   font-size: var(--font-size-md-s);
   line-height: 1.33333333;
   color: var(--color-grey-darker);
