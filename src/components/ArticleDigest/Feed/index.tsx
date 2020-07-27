@@ -27,6 +27,7 @@ export type ArticleDigestFeedControls = {
 
 type ArticleDigestFeedProps = {
   article: ArticleDigestFeedArticlePublic
+  extraHeader?: React.ReactNode
 } & ArticleDigestFeedControls
 
 const fragments = {
@@ -79,6 +80,8 @@ const BaseArticleDigestFeed = ({
   inFollowFeed,
 
   onClick,
+
+  extraHeader,
 }: ArticleDigestFeedProps) => {
   const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
     variables: { id: 'local' },
@@ -116,6 +119,7 @@ const BaseArticleDigestFeed = ({
   return (
     <Card {...path} spacing={['base', 'base']} onClick={onClick}>
       <section className={containerClass}>
+        {extraHeader}
         <header>
           <section className="left">
             <UserDigest.Mini
