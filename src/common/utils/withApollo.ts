@@ -12,7 +12,11 @@ import http from 'http'
 import https from 'https'
 import withApollo from 'next-with-apollo'
 
-import { AGENT_HASH_PREFIX, STORE_KEY_AGENT_HASH } from '~/common/enums'
+import {
+  AGENT_HASH_PREFIX,
+  GQL_CONTEXT_PUBLIC_QUERY_KEY,
+  STORE_KEY_AGENT_HASH,
+} from '~/common/enums'
 import introspectionQueryResultData from '~/common/gql/fragmentTypes.json'
 import { randomString } from '~/common/utils'
 
@@ -66,14 +70,15 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   }
 })
 
-const authLink = setContext((operation, { headers, publicQuery }) => {
+const authLink = setContext((operation, { headers, ...rest }) => {
   const operationName = operation.operationName || ''
 
   if (process.env.NODE_ENV !== 'production') {
     console.log(`\x1b[32m[GraphQL operation]\x1b[0m`, operationName)
   }
 
-  const isPublicOperation = publicQuery || /Public$/.test(operationName)
+  const isPublicOperation =
+    rest[GQL_CONTEXT_PUBLIC_QUERY_KEY] || /Public$/.test(operationName)
 
   return {
     credentials: isPublicOperation ? 'omit' : 'include',

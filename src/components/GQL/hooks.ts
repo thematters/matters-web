@@ -8,6 +8,8 @@ import {
 } from '@apollo/react-hooks'
 import { DocumentNode } from 'graphql'
 
+import { GQL_CONTEXT_PUBLIC_QUERY_KEY } from '~/common/enums'
+
 import { mutationOnError } from './error'
 
 export const useMutation = <TData = any, TVariables = OperationVariables>(
@@ -29,7 +31,7 @@ export const usePublicQuery = <TData = any, TVariables = OperationVariables>(
   const result = baseUseQuery(query, {
     ...options,
     context: {
-      publicQuery: true,
+      [GQL_CONTEXT_PUBLIC_QUERY_KEY]: true,
     },
   })
 
