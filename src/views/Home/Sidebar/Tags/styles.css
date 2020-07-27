@@ -16,11 +16,14 @@
   }
 
   & .cover {
+    position: relative;
     flex-shrink: 0;
     width: 3rem;
     height: 3rem;
 
     & :global(img) {
+      @mixin object-fit-cover;
+
       background-color: var(--color-grey-lighter);
       border-radius: 0.25rem;
     }
