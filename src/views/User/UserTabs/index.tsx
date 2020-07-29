@@ -19,7 +19,7 @@ const MeTabs = () => {
   })
 
   return (
-    <Tabs>
+    <Tabs sticky>
       <Tabs.Tab
         {...userArticlePath}
         selected={router.pathname === PATHS.USER_ARTICLES}

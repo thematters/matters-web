@@ -13,6 +13,7 @@
   & span {
     margin-left: var(--spacing-x-tight);
     font-size: var(--font-size-sm);
+    line-height: 1;
     color: var(--color-grey-dark);
   }
 }
@@ -26,10 +27,12 @@
 
 .statistics {
   @mixin flex-center-space-between;
+
+  margin-top: var(--spacing-base);
 }
 
 .buttons {
   @mixin flex-center-space-between;
 
-  padding-top: 1rem;
+  margin-top: var(--spacing-base);
 }

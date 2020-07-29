@@ -22,7 +22,7 @@ const MeTabs = () => {
   })
 
   return (
-    <Tabs>
+    <Tabs sticky>
       <Tabs.Tab
         {...userFollowersPath}
         selected={router.pathname === PATHS.USER_FOLLOWERS}

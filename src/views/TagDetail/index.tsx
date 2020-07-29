@@ -145,7 +145,7 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
           </section>
         </section>
 
-        <Tabs>
+        <Tabs sticky>
           {hasSelected && (
             <Tabs.Tab selected={isSelected} onClick={() => setFeed('selected')}>
               <Translate id="featured" />

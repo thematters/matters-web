@@ -14,7 +14,7 @@ const SortBy: React.FC<SortByProps> = ({ sortBy, setSortBy }) => {
   const isTopics = sortBy === 'topics'
 
   return (
-    <Tabs>
+    <Tabs sticky>
       <Tabs.Tab onClick={() => setSortBy('hottest')} selected={isHottest}>
         <Translate zh_hant="都在看" zh_hans="都在看" />
       </Tabs.Tab>

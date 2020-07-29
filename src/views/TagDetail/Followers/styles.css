@@ -1,7 +1,5 @@
 .container {
   @mixin flex-center-start;
-
-  margin: var(--spacing-base) 0;
 }
 
 .count {

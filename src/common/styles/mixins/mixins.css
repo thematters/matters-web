@@ -149,7 +149,7 @@
   }
 }
 
-/* Misc
+/* Utilities
    ========================================================================== */
 @define-mixin expand-to-container {
   position: absolute;
