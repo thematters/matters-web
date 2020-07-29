@@ -132,8 +132,8 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
           )}
 
           <section className="statistics">
-            <Followers id={tag.id} />
-            <ArticlesCount id={tag.id} />
+            <Followers tag={tag} />
+            <ArticlesCount tag={tag} />
           </section>
 
           <section className="buttons">
