@@ -62,6 +62,7 @@ const RelatedArticles = ({ article, inSidebar }: RelatedArticlesProps) => {
   const Header = (
     <PageHeader
       title={<Translate zh_hant="推薦閱讀" zh_hans="推荐阅读" />}
+      is="h2"
       hasNoBorder
     />
   )
@@ -93,6 +94,7 @@ const RelatedArticles = ({ article, inSidebar }: RelatedArticlesProps) => {
               titleTextSize="sm"
               hasCover
               onClick={onClick(i)}
+              bgActiveColor="grey-lighter"
             />
           </li>
         ))}

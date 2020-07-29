@@ -17,6 +17,7 @@ import { analytics } from '~/common/utils'
 
 import SectionHeader from '../../SectionHeader'
 import { SIDEBAR_AUTHORS_PRIVATE, SIDEBAR_AUTHORS_PUBLIC } from './gql'
+import styles from './styles.css'
 
 import { SidebarAuthorsPublic } from './__generated__/SidebarAuthorsPublic'
 
@@ -78,7 +79,7 @@ const Authors = () => {
   }
 
   return (
-    <section>
+    <section className="container">
       <SectionHeader
         type="authors"
         rightButton={
@@ -108,8 +109,10 @@ const Authors = () => {
             <List.Item key={cursor}>
               <UserDigest.Rich
                 user={node}
-                spacing={['tight', 0]}
+                spacing={['xtight', 'xtight']}
                 bgColor="none"
+                bgActiveColor="grey-lighter"
+                borderRadius="xtight"
                 onClick={() =>
                   analytics.trackEvent('click_feed', {
                     type: 'authors',
@@ -124,6 +127,8 @@ const Authors = () => {
           ))}
         </List>
       )}
+
+      <style jsx>{styles}</style>
     </section>
   )
 }
