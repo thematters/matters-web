@@ -1,6 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
-
-import { Translate } from '~/components'
+import { Translate, usePublicQuery } from '~/components'
 import TAG_ARTICLES_COUNT from '~/components/GQL/queries/tagArticlesCount'
 
 import { numAbbr } from '~/common/utils'
@@ -14,7 +12,7 @@ interface ArticlesCountProps {
 }
 
 const ArticlesCount = ({ id }: ArticlesCountProps) => {
-  const { data } = useQuery<TagArticlesCount>(TAG_ARTICLES_COUNT, {
+  const { data } = usePublicQuery<TagArticlesCount>(TAG_ARTICLES_COUNT, {
     variables: { id },
   })
 

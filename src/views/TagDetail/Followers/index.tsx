@@ -1,6 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
-
-import { Translate } from '~/components'
+import { Translate, usePublicQuery } from '~/components'
 import { Avatar } from '~/components/Avatar'
 import TAG_FOLLOWERS from '~/components/GQL/queries/tagFollowers'
 
@@ -16,7 +14,9 @@ interface FollowersProps {
 }
 
 const Followers = ({ id }: FollowersProps) => {
-  const { data } = useQuery<TagFollowers>(TAG_FOLLOWERS, { variables: { id } })
+  const { data } = usePublicQuery<TagFollowers>(TAG_FOLLOWERS, {
+    variables: { id },
+  })
 
   if (!data || !data.node || data.node.__typename !== 'Tag') {
     return null
