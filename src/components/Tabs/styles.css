@@ -11,7 +11,7 @@ nav {
   &.sticky {
     position: sticky;
     top: 0;
-    z-index: var(--z-index-global-header);
+    z-index: var(--z-index-sticky-tabs);
     background: var(--color-white);
   }
 }

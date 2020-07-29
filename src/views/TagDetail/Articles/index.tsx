@@ -152,7 +152,6 @@ const TagDetailArticles = ({ tagId, selected }: TagArticlesProps) => {
   /**
    * Render
    */
-  console.log(loading, isNewLoading, networkStatus)
   if (loading && (!edges || isNewLoading)) {
     return <Spinner />
   }
