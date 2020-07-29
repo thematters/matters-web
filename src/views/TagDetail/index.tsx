@@ -9,7 +9,6 @@ import {
   Head,
   Layout,
   PullToRefresh,
-  Spacer,
   Spinner,
   Tabs,
   Throw404,
@@ -110,8 +109,6 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
 
       <PullToRefresh>
         <Cover content={tag.content} cover={tag.cover} />
-
-        <Spacer />
 
         <section className="info">
           {owner && (

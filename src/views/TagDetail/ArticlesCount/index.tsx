@@ -28,7 +28,8 @@ const ArticlesCount = ({ id }: ArticlesCountProps) => {
     <section className="container">
       <b>{numAbbr(totalCount)}</b>
       <span>
-        <Translate zh_hant=" 篇作品" zh_hans=" 篇作品" />
+        &nbsp;
+        <Translate zh_hant="篇作品" zh_hans="篇作品" />
       </span>
 
       <style jsx>{styles}</style>

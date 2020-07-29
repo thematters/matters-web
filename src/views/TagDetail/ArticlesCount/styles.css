@@ -1,4 +1,6 @@
 .container {
+  @mixin inline-flex-center-all;
+
   font-size: var(--font-size-sm);
   color: var(--color-grey-darker);
 
