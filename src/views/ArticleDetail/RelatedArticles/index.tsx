@@ -46,7 +46,7 @@ const RelatedArticles = ({ article, inSidebar }: RelatedArticlesProps) => {
     return null
   }
 
-  const relatedArticlesClass = classNames({
+  const relatedArticlesClasses = classNames({
     'related-articles': true,
     inSidebar,
   })
@@ -68,7 +68,7 @@ const RelatedArticles = ({ article, inSidebar }: RelatedArticlesProps) => {
 
   if (!inSidebar) {
     return (
-      <section className={relatedArticlesClass}>
+      <section className={relatedArticlesClasses}>
         <Slides header={Header} bgColor="green-lighter">
           {edges.map(({ node, cursor }, i) => (
             <Slides.Item key={cursor}>
@@ -82,7 +82,7 @@ const RelatedArticles = ({ article, inSidebar }: RelatedArticlesProps) => {
   }
 
   return (
-    <section className={relatedArticlesClass}>
+    <section className={relatedArticlesClasses}>
       {Header}
 
       <ul>

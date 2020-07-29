@@ -34,7 +34,7 @@ const Container: React.FC<
   const isSmallUp = useResponsive('sm-up')
   const node: React.RefObject<any> | null = useRef(null)
 
-  const containerClass = classNames({
+  const containerClasses = classNames({
     container: true,
     'fixed-height': !!fixedHeight,
     'l-col-4 l-col-sm-6 l-offset-sm-1 l-col-md-5 l-offset-md-2 l-col-lg-6 l-offset-lg-3':
@@ -55,7 +55,7 @@ const Container: React.FC<
   return (
     <div
       ref={node}
-      className={containerClass}
+      className={containerClasses}
       style={style}
       onKeyDown={(event) => {
         if (event.keyCode === KEYCODES.escape) {

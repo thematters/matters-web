@@ -59,7 +59,7 @@ export const Card: React.FC<CardProps> = forwardRef(
     const fallbackRef = useRef(null)
     const cardRef = (ref || fallbackRef) as React.RefObject<any> | null
 
-    const cardClass = classNames({
+    const cardClasses = classNames({
       card: true,
       [`spacing-y-${spacing[0]}`]: !!spacing[0],
       [`spacing-x-${spacing[1]}`]: !!spacing[1],
@@ -127,7 +127,7 @@ export const Card: React.FC<CardProps> = forwardRef(
 
     return (
       <section
-        className={cardClass}
+        className={cardClasses}
         tabIndex={disabled ? undefined : 0}
         aria-label={ariaLabel}
         ref={cardRef}

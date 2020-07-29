@@ -89,34 +89,31 @@ const Tags = () => {
       pullToRefresh={refetch}
     >
       <List>
-        {edges.map(
-          ({ node, cursor }, i) =>
-            node.__typename === 'Tag' && (
-              <List.Item key={cursor}>
-                <Card
-                  spacing={[0, 0]}
-                  {...toPath({
-                    page: 'tagDetail',
-                    id: node.id,
-                  })}
-                  onClick={() =>
-                    analytics.trackEvent('click_feed', {
-                      type: 'all_tags',
-                      contentType: 'tag',
-                      styleType: 'title',
-                      location: i,
-                    })
-                  }
-                >
-                  <List.Card
-                    id={node.id}
-                    content={node.content}
-                    cover={node.cover}
-                  />
-                </Card>
-              </List.Item>
-            )
-        )}
+        {edges.map(({ node }, i) => (
+          <List.Item key={node.id}>
+            <Card
+              spacing={[0, 0]}
+              {...toPath({
+                page: 'tagDetail',
+                id: node.id,
+              })}
+              onClick={() =>
+                analytics.trackEvent('click_feed', {
+                  type: 'all_tags',
+                  contentType: 'tag',
+                  styleType: 'title',
+                  location: i,
+                })
+              }
+            >
+              <List.Card
+                id={node.id}
+                content={node.content}
+                cover={node.cover}
+              />
+            </Card>
+          </List.Item>
+        ))}
 
         {/* for maintain grid alignment */}
         <List.Item hidden />

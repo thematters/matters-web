@@ -15,10 +15,7 @@ import {
 import { TEXT, Z_INDEX } from '~/common/enums'
 
 interface DropdownActionsProps {
-  id: string
   content?: string
-  cover?: string
-  description?: string
   isMaintainer: boolean
 }
 
@@ -30,14 +27,12 @@ interface DialogProps {
 type BaseDropdownActionsProps = DropdownActionsProps & DialogProps
 
 const BaseDropdownActions = ({
-  id,
-  content,
-  description,
   isMaintainer,
   openShareDialog,
   openTagDialog,
 }: BaseDropdownActionsProps) => {
   const isSmallUp = useResponsive('sm-up')
+
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
     <Menu width={isInDropdown ? 'sm' : undefined}>
       <Menu.Item onClick={openShareDialog}>
@@ -45,6 +40,7 @@ const BaseDropdownActions = ({
           <Translate zh_hant="分享標籤" zh_hans="分享标签" />
         </TextIcon>
       </Menu.Item>
+
       {isMaintainer && (
         <Menu.Item onClick={openTagDialog}>
           <TextIcon icon={<IconEdit size="md" />} size="md" spacing="base">

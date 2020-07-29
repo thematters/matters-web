@@ -14,7 +14,6 @@
 .item {
   display: flex;
   flex-shrink: 0;
-  width: var(--tag-page-list-item-width);
   margin: var(--spacing-x-tight) auto;
 
   &.hidden {
@@ -24,7 +23,6 @@
 
 .card {
   position: relative;
-  width: var(--tag-page-list-item-width);
 
   & :global(img) {
     @mixin object-fit-cover;

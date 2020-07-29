@@ -44,7 +44,7 @@ const Container = () => {
   useEventListener(ADD_TOAST, add)
   useEventListener(REMOVE_TOAST, remove)
 
-  const instanceClass = isMiscPage
+  const instanceClasses = isMiscPage
     ? classNames(
         'l-col-4',
         'l-col-sm-6',
@@ -61,7 +61,7 @@ const Container = () => {
       <section className="toast-container">
         <div className="l-row full">
           <div className={isMiscPage ? '' : 'l-col-three-left'} />
-          <div className={instanceClass}>
+          <div className={instanceClasses}>
             {toasts.map((toast) => (
               <ToastWithEffect key={toast.id} {...toast} />
             ))}

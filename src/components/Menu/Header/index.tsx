@@ -13,13 +13,13 @@ const MenuHeader: React.FC<MenuHeaderProps> = ({
   size = 'md-s',
   children,
 }) => {
-  const titleClass = classNames({
+  const titleClasses = classNames({
     [`size-${size}`]: !!size,
   })
 
   return (
     <header>
-      <h3 className={titleClass}>{title}</h3>
+      <h3 className={titleClasses}>{title}</h3>
       {children}
 
       <style jsx>{styles}</style>

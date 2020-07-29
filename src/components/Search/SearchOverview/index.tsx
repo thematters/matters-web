@@ -33,11 +33,11 @@ export const SearchOverview = ({ inPage }: SearchOverviewProps) => {
   const showFrequentSearch = frequentSearch.length > 0
   const showSearchHistory = recentSearches.length > 0
 
-  const recentSearchesClass = classNames({
+  const recentSearchesClasses = classNames({
     'recent-searches': true,
     inPage,
   })
-  const frequentSearchesClass = classNames({
+  const frequentSearchesClasses = classNames({
     'frequent-searches': true,
     inPage,
   })
@@ -76,7 +76,7 @@ export const SearchOverview = ({ inPage }: SearchOverviewProps) => {
   return (
     <Menu width={inPage ? undefined : 'md'}>
       {showSearchHistory && (
-        <section className={recentSearchesClass}>
+        <section className={recentSearchesClasses}>
           <Menu.Header
             title={<Translate id="searchHistory" />}
             size={inPage ? 'lg' : 'md-s'}
@@ -104,7 +104,7 @@ export const SearchOverview = ({ inPage }: SearchOverviewProps) => {
       )}
 
       {showFrequentSearch && (
-        <section className={frequentSearchesClass}>
+        <section className={frequentSearchesClasses}>
           <Menu.Header
             title={<Translate id="frequentSearch" />}
             size={inPage ? 'lg' : 'md-s'}

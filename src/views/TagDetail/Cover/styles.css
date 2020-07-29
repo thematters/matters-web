@@ -7,18 +7,6 @@
     background-color: var(--color-matters-green);
   }
 
-  & .container {
-    @mixin expand-to-container;
-
-    & .content {
-      position: absolute;
-      right: var(--spacing-base);
-      bottom: var(--spacing-loose);
-      left: var(--spacing-base);
-      color: var(--color-white);
-    }
-  }
-
   &::after {
     display: block;
     padding-bottom: 46.93%;
@@ -30,17 +18,18 @@
   }
 }
 
-.content {
-  & :global(span.text-icon) {
-    display: flex;
-    align-items: flex-start;
+.title {
+  @mixin expand-to-container;
 
-    & :global(svg) {
-      margin-top: -1px;
-    }
+  & .content {
+    position: absolute;
+    right: var(--spacing-base);
+    bottom: var(--spacing-loose);
+    left: var(--spacing-base);
+    line-height: 1;
   }
-}
 
-.mask {
-  background: rgba(0, 0, 0, 0.3);
+  &.mask {
+    background: rgba(0, 0, 0, 0.3);
+  }
 }

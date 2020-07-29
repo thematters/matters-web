@@ -33,7 +33,7 @@ export const withIcon = (
   WrappedIcon: React.FunctionComponent<React.SVGProps<HTMLOrSVGElement>>
 ) => (props: IconProps) => {
   const { size = '', color = '', className, ...restProps } = props
-  const iconClass = classNames({
+  const iconClasses = classNames({
     icon: true,
     [size]: !!size,
     [color]: !!color,
@@ -42,7 +42,7 @@ export const withIcon = (
 
   return (
     <>
-      <WrappedIcon className={iconClass} aria-hidden="true" {...restProps} />
+      <WrappedIcon className={iconClasses} aria-hidden="true" {...restProps} />
 
       <style jsx global>
         {styles}

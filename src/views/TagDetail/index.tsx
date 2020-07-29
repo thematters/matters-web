@@ -93,11 +93,9 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
         right={
           <>
             {isSmallUp ? <Layout.Header.Title id="tag" /> : <span />}
+
             <DropdownActions
-              id={tag.id}
               content={tag.content}
-              cover={tag.cover || undefined}
-              description={tag.description || undefined}
               isMaintainer={isMaintainer}
             />
           </>
@@ -108,7 +106,7 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
       <Head title={`#${tag.content}`} />
 
       <PullToRefresh>
-        <Cover content={tag.content} cover={tag.cover} />
+        <Cover tag={tag} />
 
         <section className="info">
           {owner && (

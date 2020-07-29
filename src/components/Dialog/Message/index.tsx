@@ -32,7 +32,7 @@ const DialogMessage: React.FC<DialogMessageProps> = ({
 
   children,
 }) => {
-  const contentClass = classNames({
+  const contentClasses = classNames({
     content: true,
     error: !!error,
     [`align-${align}`]: !!align,
@@ -41,7 +41,7 @@ const DialogMessage: React.FC<DialogMessageProps> = ({
 
   return (
     <Dialog.Content spacing={['base', 'base']}>
-      <section className={contentClass}>{children}</section>
+      <section className={contentClasses}>{children}</section>
 
       <style jsx>{styles}</style>
     </Dialog.Content>

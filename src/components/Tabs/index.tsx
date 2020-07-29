@@ -42,12 +42,12 @@ interface TabsProps {
 export const Tabs: React.FC<TabsProps> & {
   Tab: typeof Tab
 } = ({ sticky, children }) => {
-  const navClass = classNames({
+  const navClasses = classNames({
     sticky,
   })
 
   return (
-    <nav className={navClass}>
+    <nav className={navClasses}>
       <ul role="tablist">{children}</ul>
 
       <style jsx>{styles}</style>

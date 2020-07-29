@@ -52,7 +52,7 @@ export const ArticleDigestSidebar = ({
   const { articleState: state } = article
   const isBanned = state === 'banned'
   const cover = !isBanned && hasCover ? article.cover : null
-  const containerClass = classNames({
+  const containerClasses = classNames({
     container: true,
     'has-cover': !!cover,
     'has-background': !!hasBackground,
@@ -70,7 +70,7 @@ export const ArticleDigestSidebar = ({
       bgColor={hasBackground ? 'grey-lighter' : 'none'}
       onClick={onClick}
     >
-      <section className={containerClass}>
+      <section className={containerClasses}>
         <header>
           <ArticleDigestTitle
             article={article}
