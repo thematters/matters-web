@@ -14,7 +14,8 @@ import { QueryError } from '~/components/GQL'
 import { analytics, mergeConnections, toPath } from '~/common/utils'
 
 import { TagsButtons } from './Buttons'
-import { List } from './List'
+import CardTag from './Card'
+import styles from './styles.css'
 
 import { AllTagsPublic } from './__generated__/AllTagsPublic'
 
@@ -33,14 +34,14 @@ const ALL_TAGS = gql`
             cursor
             node {
               id
-              cover
-              content
+              ...CardTag
             }
           }
         }
       }
     }
   }
+  ${CardTag.fragments.tag}
 `
 
 const Tags = () => {
@@ -88,9 +89,9 @@ const Tags = () => {
       loadMore={loadMore}
       pullToRefresh={refetch}
     >
-      <List>
+      <ul>
         {edges.map(({ node }, i) => (
-          <List.Item key={node.id}>
+          <li key={node.id}>
             <Card
               spacing={[0, 0]}
               {...toPath({
@@ -106,20 +107,18 @@ const Tags = () => {
                 })
               }
             >
-              <List.Card
-                id={node.id}
-                content={node.content}
-                cover={node.cover}
-              />
+              <CardTag tag={node} />
             </Card>
-          </List.Item>
+          </li>
         ))}
 
         {/* for maintain grid alignment */}
-        <List.Item hidden />
-        <List.Item hidden />
-        <List.Item hidden />
-      </List>
+        <li />
+        <li />
+        <li />
+
+        <style jsx>{styles}</style>
+      </ul>
     </InfiniteScroll>
   )
 }

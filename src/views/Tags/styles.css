@@ -1,0 +1,15 @@
+ul {
+  @mixin flex-center-space-between;
+
+  flex-wrap: wrap;
+  padding: var(--spacing-base) 0 0 var(--spacing-base);
+}
+
+li {
+  flex: 1 1 50%;
+  padding: 0 var(--spacing-base) var(--spacing-base) 0;
+
+  @media (--sm-up) {
+    flex: 1 1 33.333%;
+  }
+}
