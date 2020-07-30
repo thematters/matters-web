@@ -131,7 +131,7 @@
     "lost": "^8.3.1",
     "next-compose-plugins": "^2.2.0",
     "next-offline": "^5.0.0-beta.10",
-    "next-optimized-images": "^2.6.1",
+    "next-optimized-images": "^2.6.2",
     "nightwatch": "^1.3.7",
     "nightwatch-api": "^3.0.1",
     "postcss-calc": "^7.0.2",
