@@ -6,7 +6,7 @@
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: var(--z-index-over-global-header);
+  z-index: var(--z-index-over-sticky-tabs);
   overflow: hidden;
 }
 

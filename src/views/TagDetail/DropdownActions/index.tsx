@@ -7,6 +7,7 @@ import {
   Menu,
   ShareDialog,
   TagDialog,
+  TagDialogProps,
   TextIcon,
   Translate,
   useResponsive,
@@ -14,10 +15,9 @@ import {
 
 import { TEXT, Z_INDEX } from '~/common/enums'
 
-interface DropdownActionsProps {
-  content?: string
+type DropdownActionsProps = {
   isMaintainer: boolean
-}
+} & TagDialogProps
 
 interface DialogProps {
   openShareDialog: () => void

@@ -2,17 +2,19 @@ import { useState } from 'react'
 
 import { Dialog } from '~/components'
 
-import Content from './Content'
+import Content, { TagDialogContentProps } from './Content'
 
-interface TagDialogProps {
-  id?: string
-  content?: string
-  cover?: string
-  description?: string
+export type TagDialogProps = TagDialogContentProps
+
+type BaseTagDialogProps = {
   children: ({ open }: { open: () => void }) => React.ReactNode
-}
+} & TagDialogProps
 
-const BaseTagDialog = ({ children, content, ...restProps }: TagDialogProps) => {
+const BaseTagDialog = ({
+  children,
+  content,
+  ...restProps
+}: BaseTagDialogProps) => {
   const [showDialog, setShowDialog] = useState(true)
   const open = () => setShowDialog(true)
   const close = () => setShowDialog(false)
@@ -28,7 +30,7 @@ const BaseTagDialog = ({ children, content, ...restProps }: TagDialogProps) => {
   )
 }
 
-export const TagDialog = (props: TagDialogProps) => (
+export const TagDialog = (props: BaseTagDialogProps) => (
   <Dialog.Lazy mounted={<BaseTagDialog {...props} />}>
     {({ open }) => <>{props.children({ open })}</>}
   </Dialog.Lazy>
