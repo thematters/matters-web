@@ -29,12 +29,12 @@ const FollowFeed = () => {
   return (
     <>
       <Head title={{ id: 'follow' }} />
-      <section className="topbar">
-        <FeedType
-          type={followFeedType as FollowFeedType}
-          setFeedType={setFeedType}
-        />
-      </section>
+
+      <FeedType
+        type={followFeedType as FollowFeedType}
+        setFeedType={setFeedType}
+      />
+
       {followFeedType === 'article' && <ArticlesFeed />}
       {followFeedType === 'comment' && <CommentsFeed />}
       {followFeedType === 'tag' && <TagsFeed />}

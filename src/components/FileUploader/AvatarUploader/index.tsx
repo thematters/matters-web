@@ -85,12 +85,12 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
     }
   }
 
-  const labelClass = classNames({
+  const labelClasses = classNames({
     'has-border': hasBorder,
   })
 
   return (
-    <label className={labelClass} htmlFor={fieldId}>
+    <label className={labelClasses} htmlFor={fieldId}>
       <Avatar size="xxl" {...avatarProps} src={avatar} />
 
       <div className="mask">

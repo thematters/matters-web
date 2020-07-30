@@ -98,7 +98,7 @@ const BaseArticleDigestFeed = ({
     page: 'articleDetail',
     article,
   })
-  const containerClass = classNames({
+  const containerClasses = classNames({
     [`mode-${viewMode}`]: !!viewMode,
   })
 
@@ -118,7 +118,7 @@ const BaseArticleDigestFeed = ({
 
   return (
     <Card {...path} spacing={['base', 'base']} onClick={onClick}>
-      <section className={containerClass}>
+      <section className={containerClasses}>
         {extraHeader}
         <header>
           <section className="left">

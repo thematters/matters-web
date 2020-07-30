@@ -6,5 +6,5 @@
   color: var(--color-white);
   user-select: none;
   background: var(--color-matters-green);
-  border-radius: 0.125rem;
+  border-radius: var(--spacing-xxx-tight);
 }

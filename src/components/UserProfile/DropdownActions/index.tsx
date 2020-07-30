@@ -13,7 +13,7 @@ import {
 } from '~/components'
 import { BlockUser } from '~/components/BlockUser'
 
-import { TEXT } from '~/common/enums'
+import { TEXT, Z_INDEX } from '~/common/enums'
 
 import { DropdownActionsUserPublic } from './__generated__/DropdownActionsUserPublic'
 
@@ -74,6 +74,8 @@ const BaseDropdownActions = ({
       dropdown={{
         content: <Content isInDropdown />,
         placement: 'bottom-end',
+        zIndex: Z_INDEX.OVER_STICKY_TABS,
+        appendTo: process.browser ? document.body : undefined,
       }}
       dialog={{
         content: <Content />,

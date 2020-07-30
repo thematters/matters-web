@@ -29,7 +29,7 @@ const AppreciationTabs: React.FC<AppreciationTabsProps> & {
     <>
       <Spacer size="xtight" />
 
-      <Tabs>
+      <Tabs sticky>
         <Tabs.Tab
           href={PATHS.ME_APPRECIATIONS_SENT}
           selected={router.pathname === PATHS.ME_APPRECIATIONS_SENT}

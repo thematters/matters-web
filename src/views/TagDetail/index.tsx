@@ -9,7 +9,6 @@ import {
   Head,
   Layout,
   PullToRefresh,
-  Spacer,
   Spinner,
   Tabs,
   Throw404,
@@ -94,11 +93,9 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
         right={
           <>
             {isSmallUp ? <Layout.Header.Title id="tag" /> : <span />}
+
             <DropdownActions
-              id={tag.id}
               content={tag.content}
-              cover={tag.cover || undefined}
-              description={tag.description || undefined}
               isMaintainer={isMaintainer}
             />
           </>
@@ -109,9 +106,7 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
       <Head title={`#${tag.content}`} />
 
       <PullToRefresh>
-        <Cover content={tag.content} cover={tag.cover} />
-
-        <Spacer />
+        <Cover tag={tag} />
 
         <section className="info">
           {owner && (
@@ -135,8 +130,8 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
           )}
 
           <section className="statistics">
-            <Followers id={tag.id} />
-            <ArticlesCount id={tag.id} />
+            <Followers tag={tag} />
+            <ArticlesCount tag={tag} />
           </section>
 
           <section className="buttons">
@@ -145,7 +140,7 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
           </section>
         </section>
 
-        <Tabs>
+        <Tabs sticky>
           {hasSelected && (
             <Tabs.Tab selected={isSelected} onClick={() => setFeed('selected')}>
               <Translate id="featured" />

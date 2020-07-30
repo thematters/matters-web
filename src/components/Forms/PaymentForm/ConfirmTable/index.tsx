@@ -14,7 +14,7 @@ const Row: React.FC<RowProps> = ({
   breaker,
   children,
 }) => {
-  const rowClass = classNames({
+  const rowClasses = classNames({
     row: true,
     total,
     insufficient,
@@ -22,7 +22,7 @@ const Row: React.FC<RowProps> = ({
   })
 
   return (
-    <section className={rowClass}>
+    <section className={rowClasses}>
       {children}
       <style jsx>{styles}</style>
     </section>

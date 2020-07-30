@@ -39,7 +39,7 @@ const Item: React.FC<ItemProps> = forwardRef(
   ) => {
     const isSmallUp = useResponsive('sm-up')
     const clickable = cardProps.as || cardProps.href || cardProps.onClick
-    const leftClass = classNames({
+    const leftClasses = classNames({
       left: true,
       top: leftAlign === 'top',
     })
@@ -53,7 +53,7 @@ const Item: React.FC<ItemProps> = forwardRef(
           ref={ref}
         >
           <section className="container">
-            <section className={leftClass}>
+            <section className={leftClasses}>
               <h5 className="title">{title}</h5>
               {subtitle && <p className="subtitle">{subtitle}</p>}
             </section>

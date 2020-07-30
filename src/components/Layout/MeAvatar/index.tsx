@@ -15,13 +15,13 @@ const MeAvatar: React.FC<MeAvatarProps> = ({
   user,
   ...avatarProps
 }) => {
-  const meAvatarClass = classNames({
+  const meAvatarClasses = classNames({
     'me-avatar': true,
     active: !user.isInactive && active,
   })
 
   return (
-    <div className={meAvatarClass}>
+    <div className={meAvatarClasses}>
       <Avatar
         size={size}
         user={!user.isInactive ? user : undefined}

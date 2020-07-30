@@ -14,7 +14,8 @@ import { QueryError } from '~/components/GQL'
 import { analytics, mergeConnections, toPath } from '~/common/utils'
 
 import { TagsButtons } from './Buttons'
-import { List } from './List'
+import CardTag from './Card'
+import styles from './styles.css'
 
 import { AllTagsPublic } from './__generated__/AllTagsPublic'
 
@@ -33,14 +34,14 @@ const ALL_TAGS = gql`
             cursor
             node {
               id
-              cover
-              content
+              ...CardTag
             }
           }
         }
       }
     }
   }
+  ${CardTag.fragments.tag}
 `
 
 const Tags = () => {
@@ -88,41 +89,36 @@ const Tags = () => {
       loadMore={loadMore}
       pullToRefresh={refetch}
     >
-      <List>
-        {edges.map(
-          ({ node, cursor }, i) =>
-            node.__typename === 'Tag' && (
-              <List.Item key={cursor}>
-                <Card
-                  spacing={[0, 0]}
-                  {...toPath({
-                    page: 'tagDetail',
-                    id: node.id,
-                  })}
-                  onClick={() =>
-                    analytics.trackEvent('click_feed', {
-                      type: 'all_tags',
-                      contentType: 'tag',
-                      styleType: 'title',
-                      location: i,
-                    })
-                  }
-                >
-                  <List.Card
-                    id={node.id}
-                    content={node.content}
-                    cover={node.cover}
-                  />
-                </Card>
-              </List.Item>
-            )
-        )}
+      <ul>
+        {edges.map(({ node }, i) => (
+          <li key={node.id}>
+            <Card
+              spacing={[0, 0]}
+              {...toPath({
+                page: 'tagDetail',
+                id: node.id,
+              })}
+              onClick={() =>
+                analytics.trackEvent('click_feed', {
+                  type: 'all_tags',
+                  contentType: 'tag',
+                  styleType: 'title',
+                  location: i,
+                })
+              }
+            >
+              <CardTag tag={node} />
+            </Card>
+          </li>
+        ))}
 
         {/* for maintain grid alignment */}
-        <List.Item hidden />
-        <List.Item hidden />
-        <List.Item hidden />
-      </List>
+        <li />
+        <li />
+        <li />
+
+        <style jsx>{styles}</style>
+      </ul>
     </InfiniteScroll>
   )
 }

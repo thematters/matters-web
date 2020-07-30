@@ -1,37 +1,49 @@
 import classNames from 'classnames'
+import gql from 'graphql-tag'
 
-import { IconHashTag, Img, TextIcon } from '~/components'
+import { Img, Tag } from '~/components'
 
 import TAG_COVER from '@/public/static/images/tag-cover.png'
 
 import styles from './styles.css'
 
-const TagCover = ({ content, cover }: { content: string; cover?: string }) => {
-  const url = cover || TAG_COVER
-  const maskClasses = classNames({
-    container: true,
-    mask: !!cover,
+import { CoverTag } from './__generated__/CoverTag'
+
+interface TagCoverProps {
+  tag: CoverTag
+}
+
+const TagCover = ({ tag }: TagCoverProps) => {
+  const url = tag.cover || TAG_COVER
+  const titleClasses = classNames({
+    title: true,
+    mask: !!tag.cover,
   })
 
   return (
-    <div className="cover">
+    <section className="cover">
       <Img url={url} size="1080w" smUpSize="540w" />
-      <div className={maskClasses}>
+
+      <div className={titleClasses}>
         <div className="content">
-          <TextIcon
-            color="white"
-            icon={<IconHashTag color="grey" size="md" />}
-            size="lg"
-            spacing={0}
-            weight="md"
-          >
-            {content}
-          </TextIcon>
+          <Tag tag={tag} type="title" />
         </div>
       </div>
+
       <style jsx>{styles}</style>
-    </div>
+    </section>
   )
+}
+
+TagCover.fragments = {
+  tag: gql`
+    fragment CoverTag on Tag {
+      id
+      cover
+      ...DigestTag
+    }
+    ${Tag.fragments.tag}
+  `,
 }
 
 export default TagCover

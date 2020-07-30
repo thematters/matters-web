@@ -33,7 +33,7 @@ export const SearchAutoComplete = (props: SearchAutoCompleteProps) => {
   const frequentSearch = data?.frequentSearch || []
   const showFrequentSearch = frequentSearch.length > 0
 
-  const itemClass = classNames({
+  const itemClasses = classNames({
     key: true,
     inPage,
   })
@@ -71,7 +71,7 @@ export const SearchAutoComplete = (props: SearchAutoCompleteProps) => {
               q: key,
             })}
           >
-            <span className={itemClass}>{key}</span>
+            <span className={itemClasses}>{key}</span>
           </Menu.Item>
         </Fragment>
       ))}

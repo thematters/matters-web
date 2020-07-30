@@ -18,12 +18,12 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
 
   children,
 }) => {
-  const headerClass = classNames({
+  const headerClasses = classNames({
     hasNoBorder: !!hasNoBorder,
   })
 
   return (
-    <header className={headerClass}>
+    <header className={headerClasses}>
       <section className="title">
         <Title type="nav" is={is}>
           {title}

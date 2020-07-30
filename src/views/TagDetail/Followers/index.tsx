@@ -1,28 +1,20 @@
-import { useQuery } from '@apollo/react-hooks'
-
 import { Translate } from '~/components'
 import { Avatar } from '~/components/Avatar'
-import TAG_FOLLOWERS from '~/components/GQL/queries/tagFollowers'
+import tagFragments from '~/components/GQL/fragments/tag'
 
 import { IMAGE_PIXEL } from '~/common/enums'
 import { numAbbr } from '~/common/utils'
 
 import styles from './styles.css'
 
-import { TagFollowers } from '~/components/GQL/queries/__generated__/TagFollowers'
+import { FollowersTag } from '~/components/GQL/fragments/__generated__/FollowersTag'
 
 interface FollowersProps {
-  id: string
+  tag: FollowersTag
 }
 
-const Followers = ({ id }: FollowersProps) => {
-  const { data } = useQuery<TagFollowers>(TAG_FOLLOWERS, { variables: { id } })
-
-  if (!data || !data.node || data.node.__typename !== 'Tag') {
-    return null
-  }
-
-  const { edges, totalCount } = data?.node?.followers || {
+const Followers = ({ tag }: FollowersProps) => {
+  const { edges, totalCount } = tag.followers || {
     edges: [],
     totalCount: 0,
   }
@@ -46,7 +38,8 @@ const Followers = ({ id }: FollowersProps) => {
       <section className="count">
         <b>{numAbbr(totalCount)}</b>
         <span>
-          <Translate zh_hant=" 人追蹤" zh_hans=" 人追踪" />
+          &nbsp;
+          <Translate zh_hant="人追蹤" zh_hans="人追踪" />
         </span>
       </section>
 
@@ -55,4 +48,7 @@ const Followers = ({ id }: FollowersProps) => {
   )
 }
 
+Followers.fragments = {
+  tag: tagFragments.followers,
+}
 export default Followers

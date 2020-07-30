@@ -14,12 +14,12 @@ const CreateButton = () => {
   if (!viewer.id) {
     return null
   }
+
   return (
     <TagDialog>
       {({ open }) => (
         <Button
-          size={[null, '1.5rem']}
-          spacing={[0, 'xtight']}
+          size={['6rem', '2rem']}
           bgActiveColor="grey-lighter"
           onClick={open}
         >

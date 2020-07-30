@@ -1,0 +1,43 @@
+.card {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--spacing-xx-tight);
+
+  & :global(img) {
+    @mixin object-fit-cover;
+
+    background: var(--color-matters-green);
+  }
+
+  &::after {
+    display: block;
+    padding-bottom: 43.91%;
+    content: '';
+  }
+}
+
+.name {
+  @mixin expand-to-container;
+  @mixin flex-center-all;
+
+  padding: var(--spacing-base);
+
+  & h4 {
+    @mixin line-clamp;
+
+    font-size: var(--font-size-sm);
+    color: var(--color-white);
+    text-align: center;
+    -webkit-line-clamp: 2;
+  }
+
+  &.mask {
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  @media (--sm-up) {
+    & h4 {
+      font-size: var(--font-size-md);
+    }
+  }
+}

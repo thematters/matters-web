@@ -175,7 +175,7 @@ export const Button: React.FC<ButtonProps> = forwardRef(
     const [spacingY, spacingX] = spacing
 
     // container
-    const containerClass = classNames({
+    const containerClasses = classNames({
       container: true,
       isTransparent,
       'centering-x': width && isTransparent,
@@ -207,7 +207,7 @@ export const Button: React.FC<ButtonProps> = forwardRef(
       ...restProps,
       onClick,
       ref: buttonRef as React.RefObject<any>,
-      className: containerClass,
+      className: containerClasses,
     }
 
     // content

@@ -55,7 +55,10 @@ const TagDetailArticles = ({ tagId, selected }: TagArticlesProps) => {
       data.node.articles &&
       data.node.articles) ||
     {}
-  const isNewLoading = networkStatus === NetworkStatus.loading
+  const isNewLoading =
+    [NetworkStatus.loading, NetworkStatus.setVariables].indexOf(
+      networkStatus
+    ) >= 0
 
   // private data
   const loadPrivate = (publicData?: TagArticlesPublic) => {
@@ -149,7 +152,7 @@ const TagDetailArticles = ({ tagId, selected }: TagArticlesProps) => {
   /**
    * Render
    */
-  if (loading && isNewLoading) {
+  if (loading && (!edges || isNewLoading)) {
     return <Spinner />
   }
 

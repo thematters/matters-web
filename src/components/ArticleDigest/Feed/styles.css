@@ -36,7 +36,7 @@ header {
     @mixin object-fit-cover;
 
     background-color: var(--color-grey-lighter);
-    border-radius: 0.25rem;
+    border-radius: var(--spacing-xx-tight);
   }
 
   &::after {
@@ -58,7 +58,7 @@ header {
   line-height: 1;
   color: var(--color-white);
   background: var(--color-grey);
-  border-radius: 0.125rem;
+  border-radius: var(--spacing-xxx-tight);
 }
 
 /**
