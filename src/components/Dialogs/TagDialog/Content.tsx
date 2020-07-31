@@ -105,13 +105,16 @@ const DropdownListWithDefaultItem = (props: DropdownListBaseProps) => {
   )
 }
 
-interface TagDialogContentProps {
+export interface TagDialogContentProps {
   id?: string
   content?: string
   cover?: string
-  description?: string
-  closeDialog: () => void
+  description?: string | null
 }
+
+type BaseTagDialogContentProps = {
+  closeDialog: () => void
+} & TagDialogContentProps
 
 interface FormValues {
   newContent: string
@@ -121,7 +124,7 @@ interface FormValues {
 
 const UNCHANGED_FIELD = 'UNCHANGED_FIELD'
 
-const TagDialogContent: React.FC<TagDialogContentProps> = ({
+const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
   id,
   content,
   cover,
