@@ -1,26 +1,15 @@
 import gql from 'graphql-tag'
 
-import { Avatar } from '~/components'
+import tagFragments from '../fragments/tag'
 
 export default gql`
   query TagFollowers($id: ID!) {
     node(input: { id: $id }) {
       ... on Tag {
         id
-        followers(input: { first: 5 }) {
-          totalCount
-          edges {
-            cursor
-            node {
-              ... on User {
-                id
-                ...AvatarUser
-              }
-            }
-          }
-        }
+        ...FollowersTag
       }
     }
   }
-  ${Avatar.fragments.user}
+  ${tagFragments.followers}
 `

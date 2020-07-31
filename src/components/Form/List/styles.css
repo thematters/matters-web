@@ -23,7 +23,7 @@ ul {
   @media (--sm-up) {
     margin-right: var(--spacing-base);
     margin-left: var(--spacing-base);
-    border-radius: 0.5rem;
+    border-radius: var(--spacing-x-tight);
 
     & :global(> li) {
       border: none;

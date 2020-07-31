@@ -23,7 +23,7 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
   total,
 }) => {
   const btnRef = useRef<HTMLButtonElement>(null)
-  const buttonClass = classNames({
+  const buttonClasses = classNames({
     'appreciate-button': true,
     clap: true,
   })
@@ -31,7 +31,7 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
   return (
     <>
       <button
-        className={buttonClass}
+        className={buttonClasses}
         type="button"
         ref={btnRef}
         disabled={disabled}

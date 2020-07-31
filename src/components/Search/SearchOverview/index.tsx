@@ -1,9 +1,8 @@
-import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import Link from 'next/link'
 import { Fragment, useContext, useEffect } from 'react'
 
-import { Menu, Translate, ViewerContext } from '~/components'
+import { Menu, Translate, usePublicQuery, ViewerContext } from '~/components'
 import { Spinner } from '~/components/Spinner'
 
 import { toPath } from '~/common/utils'
@@ -25,7 +24,7 @@ export const SearchOverview = ({ inPage }: SearchOverviewProps) => {
    * Data Fetching
    */
   // public data
-  const { data, loading, client } = useQuery<SearchOverviewPublic>(
+  const { data, loading, client } = usePublicQuery<SearchOverviewPublic>(
     SEARCH_AUTOCOMPLETE_PUBLIC
   )
 
@@ -34,11 +33,11 @@ export const SearchOverview = ({ inPage }: SearchOverviewProps) => {
   const showFrequentSearch = frequentSearch.length > 0
   const showSearchHistory = recentSearches.length > 0
 
-  const recentSearchesClass = classNames({
+  const recentSearchesClasses = classNames({
     'recent-searches': true,
     inPage,
   })
-  const frequentSearchesClass = classNames({
+  const frequentSearchesClasses = classNames({
     'frequent-searches': true,
     inPage,
   })
@@ -77,7 +76,7 @@ export const SearchOverview = ({ inPage }: SearchOverviewProps) => {
   return (
     <Menu width={inPage ? undefined : 'md'}>
       {showSearchHistory && (
-        <section className={recentSearchesClass}>
+        <section className={recentSearchesClasses}>
           <Menu.Header
             title={<Translate id="searchHistory" />}
             size={inPage ? 'lg' : 'md-s'}
@@ -105,7 +104,7 @@ export const SearchOverview = ({ inPage }: SearchOverviewProps) => {
       )}
 
       {showFrequentSearch && (
-        <section className={frequentSearchesClass}>
+        <section className={frequentSearchesClasses}>
           <Menu.Header
             title={<Translate id="frequentSearch" />}
             size={inPage ? 'lg' : 'md-s'}

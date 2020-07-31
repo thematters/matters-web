@@ -13,7 +13,7 @@ const FeedType: React.FC<FeedTypeProps> = ({ type, setFeedType }) => {
   const isTag = type === 'tag'
 
   return (
-    <Tabs>
+    <Tabs sticky>
       <Tabs.Tab onClick={() => setFeedType('article')} selected={isArticle}>
         <Translate id="article" />
       </Tabs.Tab>

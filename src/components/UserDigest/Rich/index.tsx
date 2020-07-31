@@ -84,7 +84,7 @@ const Rich = ({
     userName: user.userName || '',
   })
   const isArchived = user?.status?.state === 'archived'
-  const containerClass = classNames({
+  const containerClasses = classNames({
     container: true,
     [`size-${size}`]: !!size,
     disabled: isArchived,
@@ -93,7 +93,7 @@ const Rich = ({
   if (isArchived) {
     return (
       <Card spacing={['tight', 'tight']} {...cardProps}>
-        <section className={containerClass}>
+        <section className={containerClasses}>
           <span className="avatar">
             <Avatar size={size === 'sm' ? 'lg' : 'xl'} />
           </span>
@@ -118,7 +118,7 @@ const Rich = ({
 
   return (
     <Card {...path} spacing={['tight', 'tight']} {...cardProps}>
-      <section className={containerClass}>
+      <section className={containerClasses}>
         <Link {...path}>
           <a className="avatar">
             <Avatar size={size === 'sm' ? 'lg' : 'xl'} user={user} />

@@ -12,7 +12,7 @@
     background-color: var(--color-grey-lighter);
     border-top: none;
     border-bottom: 1px solid var(--color-grey-light);
-    border-radius: 0.125rem;
+    border-radius: var(--spacing-xxx-tight);
 
     &.StripeElement--focus {
       background-color: var(--color-green-lighter);

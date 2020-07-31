@@ -1,26 +1,21 @@
-import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { useContext } from 'react'
 
 import {
-  Button,
   Card,
   EmptyTag,
   Head,
-  IconAdd,
   InfiniteScroll,
   Layout,
-  List,
   Spinner,
-  Tag,
-  TagDialog,
-  TextIcon,
-  Translate,
-  ViewerContext,
+  usePublicQuery,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
 import { analytics, mergeConnections, toPath } from '~/common/utils'
+
+import { TagsButtons } from './Buttons'
+import CardTag from './Card'
+import styles from './styles.css'
 
 import { AllTagsPublic } from './__generated__/AllTagsPublic'
 
@@ -38,45 +33,21 @@ const ALL_TAGS = gql`
           edges {
             cursor
             node {
-              ...DigestTag
+              id
+              ...CardTag
             }
           }
         }
       }
     }
   }
-  ${Tag.fragments.tag}
+  ${CardTag.fragments.tag}
 `
 
-const CreateTagButton = () => {
-  const viewer = useContext(ViewerContext)
-
-  if (!viewer.id) {
-    return null
-  }
-
-  return (
-    <TagDialog>
-      {({ open }) => (
-        <Button
-          size={[null, '1.5rem']}
-          spacing={[0, 'xtight']}
-          bgActiveColor="grey-lighter"
-          onClick={open}
-        >
-          <TextIcon icon={<IconAdd color="green" size="xs" />} color="green">
-            <Translate id="createTag" />
-          </TextIcon>
-        </Button>
-      )}
-    </TagDialog>
-  )
-}
-
 const Tags = () => {
-  const { data, loading, error, fetchMore, refetch } = useQuery<AllTagsPublic>(
-    ALL_TAGS
-  )
+  const { data, loading, error, fetchMore, refetch } = usePublicQuery<
+    AllTagsPublic
+  >(ALL_TAGS)
 
   if (loading) {
     return <Spinner />
@@ -118,32 +89,36 @@ const Tags = () => {
       loadMore={loadMore}
       pullToRefresh={refetch}
     >
-      <List>
-        {edges.map(
-          ({ node, cursor }, i) =>
-            node.__typename === 'Tag' && (
-              <List.Item key={cursor}>
-                <Card
-                  spacing={['base', 'base']}
-                  {...toPath({
-                    page: 'tagDetail',
-                    id: node.id,
-                  })}
-                  onClick={() =>
-                    analytics.trackEvent('click_feed', {
-                      type: 'all_tags',
-                      contentType: 'tag',
-                      styleType: 'title',
-                      location: i,
-                    })
-                  }
-                >
-                  <Tag tag={node} type="list" />
-                </Card>
-              </List.Item>
-            )
-        )}
-      </List>
+      <ul>
+        {edges.map(({ node }, i) => (
+          <li key={node.id}>
+            <Card
+              spacing={[0, 0]}
+              {...toPath({
+                page: 'tagDetail',
+                id: node.id,
+              })}
+              onClick={() =>
+                analytics.trackEvent('click_feed', {
+                  type: 'all_tags',
+                  contentType: 'tag',
+                  styleType: 'title',
+                  location: i,
+                })
+              }
+            >
+              <CardTag tag={node} />
+            </Card>
+          </li>
+        ))}
+
+        {/* for maintain grid alignment */}
+        <li />
+        <li />
+        <li />
+
+        <style jsx>{styles}</style>
+      </ul>
     </InfiniteScroll>
   )
 }
@@ -157,7 +132,7 @@ export default () => (
       right={
         <>
           <Layout.Header.Title id="allTags" />
-          <CreateTagButton />
+          <TagsButtons.CreateButton />
         </>
       }
     />

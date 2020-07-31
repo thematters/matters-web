@@ -1,0 +1,35 @@
+.cover {
+  position: relative;
+
+  & :global(img) {
+    @mixin object-fit-cover;
+
+    background-color: var(--color-matters-green);
+  }
+
+  &::after {
+    display: block;
+    padding-bottom: 46.93%;
+    content: '';
+
+    @media (--sm-up) {
+      padding-bottom: 30.14%;
+    }
+  }
+}
+
+.title {
+  @mixin expand-to-container;
+
+  & .content {
+    position: absolute;
+    right: var(--spacing-base);
+    bottom: var(--spacing-loose);
+    left: var(--spacing-base);
+    line-height: 1;
+  }
+
+  &.mask {
+    background: rgba(0, 0, 0, 0.3);
+  }
+}

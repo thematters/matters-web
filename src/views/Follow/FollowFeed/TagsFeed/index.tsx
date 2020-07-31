@@ -155,7 +155,6 @@ const TagsArticles = ({ tagIds }: { tagIds: string[] }) => {
       <List>
         {edges.map(({ node, cursor }, i) => (
           <List.Item key={cursor}>
-            <TagComponent node={node} />
             <ArticleDigestFeed
               article={node}
               onClick={() =>
@@ -166,6 +165,7 @@ const TagsArticles = ({ tagIds }: { tagIds: string[] }) => {
                   location: i,
                 })
               }
+              extraHeader={<TagComponent node={node} />}
             />
           </List.Item>
         ))}

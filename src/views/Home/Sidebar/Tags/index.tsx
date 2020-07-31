@@ -1,12 +1,12 @@
-import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { Card, List, Spinner, Tag } from '~/components'
+import { Card, Img, List, Spinner, Tag, usePublicQuery } from '~/components'
 import { QueryError } from '~/components/GQL'
 
 import { analytics, toPath } from '~/common/utils'
 
 import SectionHeader from '../../SectionHeader'
+import styles from './styles.css'
 
 import { SidebarTagsPublic } from './__generated__/SidebarTagsPublic'
 
@@ -19,6 +19,8 @@ const SIDEBAR_TAGS = gql`
           edges {
             cursor
             node {
+              cover
+              description
               ...DigestTag
             }
           }
@@ -30,7 +32,9 @@ const SIDEBAR_TAGS = gql`
 `
 
 const Tags = () => {
-  const { data, loading, error } = useQuery<SidebarTagsPublic>(SIDEBAR_TAGS)
+  const { data, loading, error } = usePublicQuery<SidebarTagsPublic>(
+    SIDEBAR_TAGS
+  )
   const edges = data?.viewer?.recommendation.tags.edges
 
   if (error) {
@@ -42,37 +46,51 @@ const Tags = () => {
   }
 
   return (
-    <section>
+    <section className="container">
       <SectionHeader type="tags" />
 
       {loading && <Spinner />}
 
-      <List>
-        {edges.map(
-          ({ node, cursor }, i) =>
-            node.__typename === 'Tag' && (
-              <List.Item key={cursor}>
-                <Card
-                  {...toPath({
-                    page: 'tagDetail',
-                    id: node.id,
-                  })}
-                  bgColor="none"
-                  onClick={() =>
-                    analytics.trackEvent('click_feed', {
-                      type: 'tags',
-                      contentType: 'tag',
-                      styleType: 'title',
-                      location: i,
-                    })
-                  }
-                >
-                  <Tag tag={node} type="list" textSize="sm" />
-                </Card>
-              </List.Item>
-            )
-        )}
+      <List hasBorder={false}>
+        {edges.map(({ node, cursor }, i) => (
+          <List.Item key={cursor}>
+            <Card
+              {...toPath({
+                page: 'tagDetail',
+                id: node.id,
+              })}
+              spacing={['xtight', 'xtight']}
+              bgColor="none"
+              bgActiveColor="grey-lighter"
+              borderRadius="xtight"
+              onClick={() =>
+                analytics.trackEvent('click_feed', {
+                  type: 'tags',
+                  contentType: 'tag',
+                  styleType: 'title',
+                  location: i,
+                })
+              }
+            >
+              <Tag tag={node} type="inline" textSize="sm" active={true} />
+
+              {node.description && (
+                <section className="content">
+                  <p>{node.description}</p>
+
+                  {node.cover && (
+                    <div className="cover">
+                      <Img url={node.cover} size="144w" />
+                    </div>
+                  )}
+                </section>
+              )}
+            </Card>
+          </List.Item>
+        ))}
       </List>
+
+      <style jsx>{styles}</style>
     </section>
   )
 }

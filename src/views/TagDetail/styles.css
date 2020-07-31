@@ -8,29 +8,31 @@
 .owner {
   @mixin flex-center-start;
 
-  padding: 0 0 var(--spacing-base);
+  margin-top: var(--spacing-base);
 
   & span {
     margin-left: var(--spacing-x-tight);
     font-size: var(--font-size-sm);
+    line-height: 1;
     color: var(--color-grey-dark);
   }
 }
 
 .description {
-  padding-top: 1rem;
+  margin-top: var(--spacing-base);
   font-size: var(--font-size-md-s);
-  line-height: 1.33333333;
   color: var(--color-grey-darker);
   white-space: pre-wrap;
 }
 
 .statistics {
   @mixin flex-center-space-between;
+
+  margin-top: var(--spacing-loose);
 }
 
 .buttons {
   @mixin flex-center-space-between;
 
-  padding-top: 1rem;
+  margin-top: var(--spacing-loose);
 }

@@ -33,7 +33,7 @@ export const ToastInstance = ({
   buttonPlacement = 'top',
   customButton,
 }: ToastProps) => {
-  const mainClass = classNames({
+  const mainClasses = classNames({
     toast: true,
     [buttonPlacement]: buttonPlacement,
     [color]: !!color,
@@ -42,7 +42,7 @@ export const ToastInstance = ({
   const alertType = color === 'red' ? 'assertive' : 'polite'
 
   return (
-    <section className={mainClass}>
+    <section className={mainClasses}>
       <section>
         <Alert type={alertType}>
           {content && <p className="content">{content}</p>}

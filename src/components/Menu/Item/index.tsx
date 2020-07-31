@@ -10,12 +10,12 @@ const MenuItem: React.FC<MenuItemProps> = ({
   spacing = ['tight', 'base'],
   ...restProps
 }) => {
-  const menuItemClass = classNames({
+  const menuItemClasses = classNames({
     'menu-item': true,
   })
 
   return (
-    <li className={menuItemClass} role="menuitem">
+    <li className={menuItemClasses} role="menuitem">
       <Card spacing={spacing} {...restProps}>
         {children}
       </Card>

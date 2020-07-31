@@ -84,8 +84,8 @@ const EditModeHeader = ({
     <>
       <p>
         <Translate
-          zh_hant="作品已發佈到 IPFS，無法被修改，但你可以編輯關聯作品和標籤。"
-          zh_hans="作品已发布到 IPFS，无法被修改，但你可以编辑关联作品和标签。"
+          zh_hant="作品已發佈到 IPFS，無法被修改，但你可以修訂關聯作品和標籤。"
+          zh_hans="作品已发布到 IPFS，无法被修改，但你可以修订关联作品和标签。"
         />
       </p>
 

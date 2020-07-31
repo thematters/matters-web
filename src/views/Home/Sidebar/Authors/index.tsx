@@ -1,4 +1,3 @@
-import { useQuery } from '@apollo/react-hooks'
 import { useContext, useEffect } from 'react'
 
 import {
@@ -8,6 +7,7 @@ import {
   Spinner,
   TextIcon,
   Translate,
+  usePublicQuery,
   UserDigest,
   ViewerContext,
 } from '~/components'
@@ -17,6 +17,7 @@ import { analytics } from '~/common/utils'
 
 import SectionHeader from '../../SectionHeader'
 import { SIDEBAR_AUTHORS_PRIVATE, SIDEBAR_AUTHORS_PUBLIC } from './gql'
+import styles from './styles.css'
 
 import { SidebarAuthorsPublic } from './__generated__/SidebarAuthorsPublic'
 
@@ -27,9 +28,15 @@ const Authors = () => {
    * Data Fetching
    */
   // public data
-  const { data, loading, error, refetch: refetchPublic, client } = useQuery<
-    SidebarAuthorsPublic
-  >(SIDEBAR_AUTHORS_PUBLIC, { notifyOnNetworkStatusChange: true })
+  const {
+    data,
+    loading,
+    error,
+    refetch: refetchPublic,
+    client,
+  } = usePublicQuery<SidebarAuthorsPublic>(SIDEBAR_AUTHORS_PUBLIC, {
+    notifyOnNetworkStatusChange: true,
+  })
   const edges = data?.viewer?.recommendation.authors.edges
 
   // private data
@@ -72,7 +79,7 @@ const Authors = () => {
   }
 
   return (
-    <section>
+    <section className="container">
       <SectionHeader
         type="authors"
         rightButton={
@@ -102,8 +109,10 @@ const Authors = () => {
             <List.Item key={cursor}>
               <UserDigest.Rich
                 user={node}
-                spacing={['tight', 0]}
+                spacing={['xtight', 'xtight']}
                 bgColor="none"
+                bgActiveColor="grey-lighter"
+                borderRadius="xtight"
                 onClick={() =>
                   analytics.trackEvent('click_feed', {
                     type: 'authors',
@@ -118,6 +127,8 @@ const Authors = () => {
           ))}
         </List>
       )}
+
+      <style jsx>{styles}</style>
     </section>
   )
 }

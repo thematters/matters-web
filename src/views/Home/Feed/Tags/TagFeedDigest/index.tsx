@@ -1,8 +1,11 @@
+import classNames from 'classnames'
 import gql from 'graphql-tag'
 
-import { ArticleDigestTitle, Card, CardProps, Tag } from '~/components'
+import { ArticleDigestTitle, Card, CardProps, Img, Tag } from '~/components'
 
 import { analytics, toPath } from '~/common/utils'
+
+import TAG_COVER from '@/public/static/images/tag-cover.png'
 
 import styles from './styles.css'
 
@@ -14,6 +17,7 @@ const fragments = {
   tag: gql`
     fragment TagFeedDigestTag on Tag {
       id
+      cover
       selectArticles: articles(input: { first: 5 }) {
         edges {
           cursor
@@ -36,12 +40,16 @@ const TagFeedDigest = ({ tag, ...cardProps }: TagFeedDigestProps) => {
     page: 'tagDetail',
     id: tag.id,
   })
+  const maskClasses = classNames({ mask: !!tag.cover })
 
   return (
     <section className="container">
       <Card {...path} spacing={[0, 0]} {...cardProps}>
         <header>
-          <Tag tag={tag} type="title" />
+          <Img url={tag.cover || TAG_COVER} size="360w" />
+          <div className={maskClasses}>
+            <Tag tag={tag} type="title" />
+          </div>
         </header>
       </Card>
 

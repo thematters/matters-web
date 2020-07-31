@@ -1,4 +1,3 @@
-import { useQuery } from '@apollo/react-hooks'
 import { useRouter } from 'next/router'
 import { useContext, useEffect } from 'react'
 
@@ -7,6 +6,7 @@ import {
   List,
   Spinner,
   Translate,
+  usePublicQuery,
   UserDigest,
   ViewerContext,
 } from '~/components'
@@ -27,9 +27,13 @@ const SearchUser = () => {
    * Data Fetching
    */
   // public data
-  const { data, loading, fetchMore, refetch: refetchPublic, client } = useQuery<
-    SeachUsersPublic
-  >(SEARCH_USERS_PUBLIC, {
+  const {
+    data,
+    loading,
+    fetchMore,
+    refetch: refetchPublic,
+    client,
+  } = usePublicQuery<SeachUsersPublic>(SEARCH_USERS_PUBLIC, {
     variables: { key: q },
   })
 

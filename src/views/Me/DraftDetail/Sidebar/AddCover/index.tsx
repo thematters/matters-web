@@ -58,14 +58,14 @@ const CoverList = ({ draft, assets, setSaveStatus }: CoverListProps) => {
     <section>
       {uniqAssets.map((asset, index) => {
         const isSelected = asset.path === cover
-        const coverItemClass = classNames({
+        const coverItemClasses = classNames({
           'cover-image': true,
           selected: isSelected,
         })
 
         return (
           <section
-            className={coverItemClass}
+            className={coverItemClasses}
             style={{ backgroundImage: `url(${asset.path})` }}
             role="button"
             aria-label={`選擇圖 ${index + 1} 作爲作品封面`}

@@ -76,8 +76,9 @@ const BaseDropdownDialog = ({
 }: DropdownDialogProps) => {
   const isSmallUp = useResponsive('sm-up')
   const [showDialog, setShowDialog] = useState(true)
-  const open = () => setShowDialog(true)
+  // const open = () => setShowDialog(true)
   const close = () => setShowDialog(false)
+  const toggle = () => setShowDialog(!showDialog)
   const closeOnClick = (event: React.MouseEvent | React.KeyboardEvent) => {
     const target = event.target as HTMLElement
     if (target?.closest && target.closest('[data-clickable], a, button')) {
@@ -119,7 +120,7 @@ const BaseDropdownDialog = ({
         onClickOutside={close}
         visible={showDialog}
       >
-        <ForwardChildren open={open} children={children} />
+        <ForwardChildren open={toggle} children={children} />
       </Dropdown>
     )
   }
@@ -129,7 +130,7 @@ const BaseDropdownDialog = ({
    */
   return (
     <>
-      {children({ open })}
+      {children({ open: toggle })}
 
       <Dialog isOpen={showDialog} onDismiss={close} {...dialog} slideIn>
         <Dialog.Header

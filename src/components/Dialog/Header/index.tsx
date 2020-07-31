@@ -25,12 +25,12 @@ const BaseHeader = ({
   leftButton,
   rightButton,
 }: HeaderProps) => {
-  const headerClass = classNames({
+  const headerClasses = classNames({
     inner: mode === 'inner',
   })
 
   return (
-    <header className={headerClass}>
+    <header className={headerClasses}>
       <h1>
         <span id="dialog-title">
           {typeof title === 'string' ? (

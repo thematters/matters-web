@@ -108,17 +108,38 @@ const AppreciationButton = ({ article }: AppreciationButtonProps) => {
 
   // UI
   const isReachLimit = left <= 0
-  const isMe = article.author.id === viewer.id
+  const isArticleAuthor = article.author.id === viewer.id
   const readCivicLikerDialog =
     viewer.isCivicLiker || data?.clientPreference.readCivicLikerDialog
   const canAppreciate =
-    !isReachLimit && !isMe && !viewer.isArchived && viewer.liker.likerId
+    !isReachLimit &&
+    !isArticleAuthor &&
+    !viewer.isArchived &&
+    viewer.liker.likerId
 
   /**
    * Anonymous
    */
   if (!viewer.isAuthed) {
     return <AnonymousButton total={total} />
+  }
+
+  /**
+   * Article Author
+   */
+  if (isArticleAuthor) {
+    return (
+      <Tooltip
+        content={
+          <Translate zh_hant="去讚賞其他用戶吧" zh_hans="去赞赏其他用户吧" />
+        }
+        zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
+      >
+        <span>
+          <AppreciateButton disabled total={total} />
+        </span>
+      </Tooltip>
+    )
   }
 
   /**
@@ -172,17 +193,7 @@ const AppreciationButton = ({ article }: AppreciationButtonProps) => {
   return (
     <Tooltip
       content={
-        <Translate
-          {...(isMe
-            ? {
-                zh_hant: '去讚賞其他用戶吧',
-                zh_hans: '去赞赏其他用户吧',
-              }
-            : {
-                zh_hant: '你還沒有讚賞權限',
-                zh_hans: '你还没有赞赏权限',
-              })}
-        />
+        <Translate zh_hant="你還沒有讚賞權限" zh_hans="你还没有赞赏权限" />
       }
       zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
     >

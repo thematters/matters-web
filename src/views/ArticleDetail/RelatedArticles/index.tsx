@@ -46,7 +46,7 @@ const RelatedArticles = ({ article, inSidebar }: RelatedArticlesProps) => {
     return null
   }
 
-  const relatedArticlesClass = classNames({
+  const relatedArticlesClasses = classNames({
     'related-articles': true,
     inSidebar,
   })
@@ -62,13 +62,14 @@ const RelatedArticles = ({ article, inSidebar }: RelatedArticlesProps) => {
   const Header = (
     <PageHeader
       title={<Translate zh_hant="推薦閱讀" zh_hans="推荐阅读" />}
+      is="h2"
       hasNoBorder
     />
   )
 
   if (!inSidebar) {
     return (
-      <section className={relatedArticlesClass}>
+      <section className={relatedArticlesClasses}>
         <Slides header={Header} bgColor="green-lighter">
           {edges.map(({ node, cursor }, i) => (
             <Slides.Item key={cursor}>
@@ -82,7 +83,7 @@ const RelatedArticles = ({ article, inSidebar }: RelatedArticlesProps) => {
   }
 
   return (
-    <section className={relatedArticlesClass}>
+    <section className={relatedArticlesClasses}>
       {Header}
 
       <ul>
@@ -93,6 +94,7 @@ const RelatedArticles = ({ article, inSidebar }: RelatedArticlesProps) => {
               titleTextSize="sm"
               hasCover
               onClick={onClick(i)}
+              bgActiveColor="grey-lighter"
             />
           </li>
         ))}

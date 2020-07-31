@@ -17,7 +17,7 @@ import {
 import { useMutation } from '~/components/GQL'
 import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
 
-import { ADD_TOAST } from '~/common/enums'
+import { ADD_TOAST, Z_INDEX } from '~/common/enums'
 import {
   analytics,
   parseFormSubmitErrors,
@@ -158,6 +158,8 @@ const BaseDropdownActions = ({
       dropdown={{
         content: <Content isInDropdown />,
         placement: 'bottom-end',
+        zIndex: Z_INDEX.OVER_STICKY_TABS,
+        appendTo: process.browser ? document.body : undefined,
       }}
       dialog={{
         content: <Content />,

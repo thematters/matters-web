@@ -1,4 +1,3 @@
-import { useQuery } from '@apollo/react-hooks'
 import { useContext, useEffect } from 'react'
 
 import {
@@ -9,6 +8,7 @@ import {
   List,
   Spinner,
   Translate,
+  usePublicQuery,
   UserDigest,
   ViewerContext,
 } from '~/components'
@@ -34,7 +34,7 @@ const Authors = () => {
     fetchMore,
     refetch: refetchPublic,
     client,
-  } = useQuery<AllAuthorsPublic>(ALL_AUTHORS_PUBLIC)
+  } = usePublicQuery<AllAuthorsPublic>(ALL_AUTHORS_PUBLIC)
 
   // pagination
   const connectionPath = 'viewer.recommendation.authors'

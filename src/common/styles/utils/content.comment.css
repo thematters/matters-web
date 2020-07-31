@@ -167,6 +167,6 @@
   overflow-y: auto;
   color: var(--color-black);
   background: var(--color-white);
-  border-radius: 0.5rem;
+  border-radius: var(--spacing-x-tight);
   box-shadow: var(--shadow-dark);
 }

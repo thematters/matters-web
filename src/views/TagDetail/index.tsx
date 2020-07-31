@@ -1,4 +1,3 @@
-import { useQuery } from '@apollo/react-hooks'
 import _find from 'lodash/find'
 import _some from 'lodash/some'
 import { useRouter } from 'next/router'
@@ -10,13 +9,13 @@ import {
   Head,
   Layout,
   PullToRefresh,
-  Spacer,
   Spinner,
   Tabs,
   Throw404,
-  Title,
   Translate,
+  usePublicQuery,
   usePullToRefresh,
+  useResponsive,
   ViewerContext,
 } from '~/components'
 import { getErrorCodes, QueryError } from '~/components/GQL'
@@ -28,6 +27,7 @@ import { getQuery } from '~/common/utils'
 import TagDetailArticles from './Articles'
 import ArticlesCount from './ArticlesCount'
 import { TagDetailButtons } from './Buttons'
+import Cover from './Cover'
 import DropdownActions from './DropdownActions'
 import Followers from './Followers'
 import { TAG_DETAIL_PRIVATE, TAG_DETAIL_PUBLIC } from './gql'
@@ -49,6 +49,7 @@ const EmptyLayout: React.FC = ({ children }) => (
 )
 
 const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
+  const isSmallUp = useResponsive('sm-up')
   const viewer = useContext(ViewerContext)
 
   // feed type
@@ -84,25 +85,25 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
   return (
     <Layout.Main>
       <Layout.Header
-        left={<Layout.Header.BackButton />}
+        left={
+          <Layout.Header.BackButton
+            mode={!isSmallUp ? 'black-solid' : undefined}
+          />
+        }
         right={
           <>
-            <Layout.Header.Title id="tag" />
+            {isSmallUp ? <Layout.Header.Title id="tag" /> : <span />}
 
-            <DropdownActions
-              id={tag.id}
-              content={tag.content}
-              description={tag.description || undefined}
-              isMaintainer={isMaintainer}
-            />
+            <DropdownActions {...tag} isMaintainer={isMaintainer} />
           </>
         }
+        mode={isSmallUp ? 'solid-fixed' : 'transparent-absolute'}
       />
 
       <Head title={`#${tag.content}`} />
 
       <PullToRefresh>
-        <Spacer />
+        <Cover tag={tag} />
 
         <section className="info">
           {owner && (
@@ -119,8 +120,6 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
             </section>
           )}
 
-          <Title type="tag">#{tag.content}</Title>
-
           {tag.description && (
             <Expandable>
               <p className="description">{tag.description}</p>
@@ -128,8 +127,8 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
           )}
 
           <section className="statistics">
-            <Followers id={tag.id} />
-            <ArticlesCount id={tag.id} />
+            <Followers tag={tag} />
+            <ArticlesCount tag={tag} />
           </section>
 
           <section className="buttons">
@@ -138,7 +137,7 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
           </section>
         </section>
 
-        <Tabs>
+        <Tabs sticky>
           {hasSelected && (
             <Tabs.Tab selected={isSelected} onClick={() => setFeed('selected')}>
               <Translate id="featured" />
@@ -167,9 +166,13 @@ const TagDetailContainer = () => {
    * Data Fetching
    */
   // public data
-  const { data, loading, error, refetch: refetchPublic, client } = useQuery<
-    TagDetailPublic
-  >(TAG_DETAIL_PUBLIC, {
+  const {
+    data,
+    loading,
+    error,
+    refetch: refetchPublic,
+    client,
+  } = usePublicQuery<TagDetailPublic>(TAG_DETAIL_PUBLIC, {
     variables: { id: tagId },
   })
 

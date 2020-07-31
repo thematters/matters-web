@@ -43,7 +43,7 @@ const Content = ({ comment, size }: ContentProps) => {
   const { content, state } = comment
   const isBlocked = comment.author?.isBlocked
 
-  const contentClass = classNames({
+  const contentClasses = classNames({
     content: true,
     [`size-${size}`]: !!size,
   })
@@ -59,7 +59,7 @@ const Content = ({ comment, size }: ContentProps) => {
             <Translate id="commentCollapsed" />
           )
         }
-        className={contentClass}
+        className={contentClasses}
       />
     )
   }
@@ -68,7 +68,7 @@ const Content = ({ comment, size }: ContentProps) => {
     return (
       <>
         <section
-          className={`${contentClass} u-content-comment`}
+          className={`${contentClasses} u-content-comment`}
           dangerouslySetInnerHTML={{
             __html: content || '',
           }}
@@ -83,7 +83,7 @@ const Content = ({ comment, size }: ContentProps) => {
 
   if (state === 'banned') {
     return (
-      <p className={`${contentClass} inactive`}>
+      <p className={`${contentClasses} inactive`}>
         <Translate
           zh_hant="此評論因違反用戶協定而被隱藏"
           zh_hans="此评论因违反用户协定而被隐藏"
@@ -96,7 +96,7 @@ const Content = ({ comment, size }: ContentProps) => {
 
   if (state === 'archived') {
     return (
-      <p className={`${contentClass} inactive`}>
+      <p className={`${contentClasses} inactive`}>
         <Translate id="commentDeleted" />
 
         <style jsx>{styles}</style>

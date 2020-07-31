@@ -46,13 +46,12 @@ export const Expandable: React.FC<ExpandableProps> = ({
       {expandable && !expand && (
         <Button
           spacing={['xxtight', 'xtight']}
-          bgColor="green-lighter"
-          textColor="green"
+          bgColor="grey-lighter"
           onClick={() => {
             setExpand(true)
           }}
         >
-          <TextIcon icon={<IconExpand size="xs" />}>
+          <TextIcon icon={<IconExpand size="xs" />} color="grey">
             <Translate id="expand" />
           </TextIcon>
         </Button>

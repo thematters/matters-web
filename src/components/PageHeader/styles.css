@@ -1,7 +1,7 @@
 header {
   @mixin border-bottom-grey;
 
-  padding-bottom: var(--spacing-tight);
+  padding-bottom: var(--spacing-x-tight);
 
   &.hasNoBorder {
     border: none;

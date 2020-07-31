@@ -9,7 +9,7 @@
   padding: var(--spacing-xx-tight) var(--spacing-x-tight);
   font-size: var(--font-size-xs);
   line-height: 1;
-  border-radius: 0.125rem;
+  border-radius: var(--spacing-xxx-tight);
 }
 
 .default {

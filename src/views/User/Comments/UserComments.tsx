@@ -12,6 +12,7 @@ import {
   InfiniteScroll,
   List,
   Spinner,
+  usePublicQuery,
   usePullToRefresh,
   ViewerContext,
 } from '~/components'
@@ -88,7 +89,7 @@ const BaseUserComments = ({ user }: UserIdUser) => {
     fetchMore,
     refetch: refetchPublic,
     client,
-  } = useQuery<UserCommentsPublic>(USER_COMMENTS_PUBLIC, {
+  } = usePublicQuery<UserCommentsPublic>(USER_COMMENTS_PUBLIC, {
     variables: { id: user?.id },
   })
 

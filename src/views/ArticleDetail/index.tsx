@@ -17,6 +17,7 @@ import {
   Throw404,
   Title,
   Translate,
+  usePublicQuery,
   useResponsive,
   ViewerContext,
 } from '~/components'
@@ -86,9 +87,13 @@ const ArticleDetail = () => {
   const shouldShowWall = !viewer.isAuthed && wall
 
   // public data
-  const { data, loading, error, client, refetch: refetchPublic } = useQuery<
-    ArticleDetailPublic
-  >(ARTICLE_DETAIL_PUBLIC, {
+  const {
+    data,
+    loading,
+    error,
+    client,
+    refetch: refetchPublic,
+  } = usePublicQuery<ArticleDetailPublic>(ARTICLE_DETAIL_PUBLIC, {
     variables: { mediaHash },
   })
 

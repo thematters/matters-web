@@ -1,4 +1,3 @@
-import { useQuery } from '@apollo/react-hooks'
 import _some from 'lodash/some'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -13,6 +12,7 @@ import {
   Spinner,
   Throw404,
   Translate,
+  usePublicQuery,
   useResponsive,
   ViewerContext,
 } from '~/components'
@@ -36,7 +36,7 @@ export const UserProfile = () => {
   // public data
   const userName = getQuery({ router, key: 'userName' })
   const isMe = !userName || viewer.userName === userName
-  const { data, loading, client } = useQuery<UserProfileUserPublic>(
+  const { data, loading, client } = usePublicQuery<UserProfileUserPublic>(
     USER_PROFILE_PUBLIC,
     {
       variables: { userName },

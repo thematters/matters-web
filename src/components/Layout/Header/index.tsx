@@ -20,13 +20,13 @@ const Header: React.FC<HeaderProps> & {
   MeButton: typeof MeButton
   Title: typeof Title
 } = ({ left, right, mode = 'solid-fixed', className }) => {
-  const headerClass = classNames({
+  const headerClasses = classNames({
     [mode]: true,
     [`${className}`]: !!className,
   })
 
   return (
-    <header className={headerClass}>
+    <header className={headerClasses}>
       <section className="content">
         {left && <section className="left">{left}</section>}
         {right && <section className="right">{right}</section>}

@@ -2,7 +2,9 @@ import gql from 'graphql-tag'
 
 import { UserDigest } from '~/components/UserDigest'
 
+import ArticlesCount from './ArticlesCount'
 import { TagDetailButtons } from './Buttons'
+import Followers from './Followers'
 
 export const TAG_DETAIL_PUBLIC = gql`
   query TagDetailPublic($id: ID!) {
@@ -10,23 +12,25 @@ export const TAG_DETAIL_PUBLIC = gql`
       ... on Tag {
         id
         content
+        cover
+        description
         creator {
           id
           ...UserDigestMiniUser
         }
-        description
         editors {
           id
           ...UserDigestMiniUser
         }
-        articles(input: { first: 0, selected: true }) {
-          totalCount
-        }
+        ...FollowersTag
+        ...ArticleCountTag
         ...FollowButtonTagPrivate
       }
     }
   }
   ${UserDigest.Mini.fragments.user}
+  ${Followers.fragments.tag}
+  ${ArticlesCount.fragments.tag}
   ${TagDetailButtons.FollowButton.fragments.tag.private}
 `
 

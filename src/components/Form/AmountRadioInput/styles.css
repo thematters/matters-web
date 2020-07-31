@@ -11,7 +11,7 @@
   font-weight: var(--font-weight-medium);
   color: var(--color-white);
   background: var(--color-white);
-  border-radius: 0.25rem;
+  border-radius: var(--spacing-xx-tight);
 
   &:nth-child(n + 4) {
     margin-top: var(--spacing-loose);
