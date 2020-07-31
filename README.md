@@ -8,14 +8,14 @@
 
 - Install dependencies: `npm i`
 - Environment variables: `cp .env.local.example .env.local`
-- (Optional) Run `npm run gen:type` or `npm run gen:watch`
+- Run `npm run gen:type` or `npm run gen:watch`
 - Run `npm run dev`, then go to `http://localhost:3000/`
 
 ### Build and run production server
 
 `npm run build && npm run start`
 
-### Start local dev with docker
+### Start local dev with Docker
 
 - Environment variables: `cp .env.local.example .env.local`
 - Set command alias: `source bin/dc-alias`
@@ -43,30 +43,6 @@
 - Pull:
   - `docker pull 903380195283.dkr.ecr.ap-southeast-1.amazonaws.com/matters-web:latest`
   - `docker tag 903380195283.dkr.ecr.ap-southeast-1.amazonaws.com/matters-web:latest matters-web:latest`
-
-## Routing
-
-We customized routes with Express in `server.ts` and disabled [fs routing](https://github.com/zeit/next.js#disabling-file-system-routing).
-
-Note that we need to specify `href` (the path inside pages directory + query string) and `as` (the path that will be renderer on browser URL bar) props in `<Link>` component.
-
-For instances:
-
-```jsx
-// Home
-<Link href="/Home" as="/">
-
-// All Authors
-<Link href="/Authors" as="/authors">
-
-// User Comments
-<Link href="/User/Comments?username=matty" as="/@matty/comments">
-
-// Tag Detail
-<Link href="/TagDetail?id=RHJhZnQ6MQ==" as="/tags/RHJhZnQ6MQ==">
-```
-
-See [next.js docs](https://github.com/zeit/next.js#routing) for more details.
 
 ## Conventions
 
@@ -127,12 +103,6 @@ See `.vscode/settings.json`
 #### Settings
 
 For vim users, you might want to see `.vim/.vimrc` (using vim-plug).
-
-## Release a new version
-
-1. Update `CHANGELOG.md`
-2. Update `version` field of `package.json`
-3. Create a new release and tag in [GitHub Releases](https://github.com/thematters/matters-web/releases)
 
 ## Troubleshooting
 
