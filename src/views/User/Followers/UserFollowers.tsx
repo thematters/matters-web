@@ -17,6 +17,9 @@ import { UserDigest } from '~/components/UserDigest'
 
 import { analytics, getQuery, mergeConnections } from '~/common/utils'
 
+import IMAGE_LOGO_192 from '@/public/static/icon-192x192.png?url'
+
+import FollowerTabs from '../FollowerTabs'
 import { USER_FOLLOWERS_PRIVATE, USER_FOLLOWERS_PUBLIC } from './gql'
 
 import { UserFollowerPublic } from './__generated__/UserFollowerPublic'
@@ -108,24 +111,38 @@ const UserFollowers = () => {
     return <QueryError error={error} />
   }
 
+  const CustomHead = () => (
+    <Head
+      title={{
+        zh_hant: `${user.displayName}的追蹤者`,
+        zh_hans: `${user.displayName}的追踪者`,
+      }}
+      description={user.info.description}
+      image={user.info.profileCover || IMAGE_LOGO_192}
+    />
+  )
+
   if (!edges || edges.length <= 0 || !pageInfo) {
     return (
-      <EmptyWarning
-        description={
-          <Translate zh_hant="還沒有追蹤者" zh_hans="还没有追踪者" />
-        }
-      />
+      <>
+        <CustomHead />
+
+        <FollowerTabs />
+
+        <EmptyWarning
+          description={
+            <Translate zh_hant="還沒有追蹤者" zh_hans="还没有追踪者" />
+          }
+        />
+      </>
     )
   }
 
   return (
     <>
-      <Head
-        title={{
-          zh_hant: `${user.displayName}的追蹤者`,
-          zh_hans: `${user.displayName}的追踪者`,
-        }}
-      />
+      <CustomHead />
+
+      <FollowerTabs />
 
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
         <List hasBorder={false}>

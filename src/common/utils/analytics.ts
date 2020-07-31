@@ -134,7 +134,7 @@ type ArticleFeedType =
   | 'user_article'
   | 'wallet'
 
-type CommentFeedType = 'follow-comment'
+type CommentFeedType = 'follow-comment' | 'user_comment'
 
 type UserFeedType =
   | 'all_authors'
@@ -165,3 +165,4 @@ type TagFeedType =
   | 'search'
   | 'search_tag'
   | 'tags' // tag feed on home page
+  | 'user_tag'

@@ -17,6 +17,10 @@ const MeTabs = () => {
     page: 'userComments',
     userName,
   })
+  const userTagsPath = toPath({
+    page: 'userTags',
+    userName,
+  })
 
   return (
     <Tabs sticky>
@@ -32,6 +36,13 @@ const MeTabs = () => {
         selected={router.pathname === PATHS.USER_COMMENTS}
       >
         <Translate id="comment" />
+      </Tabs.Tab>
+
+      <Tabs.Tab
+        {...userTagsPath}
+        selected={router.pathname === PATHS.USER_TAGS}
+      >
+        <Translate id="tag" />
       </Tabs.Tab>
     </Tabs>
   )

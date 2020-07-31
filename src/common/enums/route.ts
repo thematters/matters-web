@@ -17,6 +17,7 @@ type ROUTE_KEY =
   | 'TAG_DETAIL'
   | 'USER_ARTICLES'
   | 'USER_COMMENTS'
+  | 'USER_TAGS'
   | 'USER_FOLLOWERS'
   | 'USER_FOLLOWEES'
   | 'ARTICLE_DETAIL'
@@ -74,6 +75,7 @@ export const ROUTES: Array<{
   // User
   { key: 'USER_ARTICLES', pathname: '/[userName]' },
   { key: 'USER_COMMENTS', pathname: '/[userName]/comments' },
+  { key: 'USER_TAGS', pathname: '/[userName]/tags' },
   { key: 'USER_FOLLOWERS', pathname: '/[userName]/followers' },
   { key: 'USER_FOLLOWEES', pathname: '/[userName]/followees' },
 

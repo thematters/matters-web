@@ -49,6 +49,10 @@ type ToPathArgs =
       userName: string
     }
   | {
+      page: 'userTags'
+      userName: string
+    }
+  | {
       page: 'userFollowers'
       userName: string
     }
@@ -129,6 +133,15 @@ export const toPath = (args: ToPathArgs): { href: Url; as: string } => {
           query: { userName: args.userName },
         },
         as: `/@${args.userName}/comments`,
+      }
+    }
+    case 'userTags': {
+      return {
+        href: {
+          pathname: PATHS.USER_TAGS,
+          query: { userName: args.userName },
+        },
+        as: `/@${args.userName}/tags`,
       }
     }
     case 'userFollowers': {
