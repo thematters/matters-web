@@ -57,9 +57,10 @@ const SetTagUnselectedButton = ({
     variables: { id: tagId, articles: [article.id] },
     update: (cache) => {
       try {
+        // FIXME: circular dependencies
         const {
           TAG_ARTICLES_PUBLIC: query,
-        } = require('~/components/GQL/queries/tagArticles').default
+        } = require('~/components/GQL/queries/tagArticles')
         const variables = { id: tagId, selected: true }
         const data = cache.readQuery<TagArticlesPublic>({ query, variables })
         const node = _get(data, 'node', {}) as TagArticlesPublic_node_Tag

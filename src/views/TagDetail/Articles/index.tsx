@@ -179,7 +179,8 @@ const TagDetailArticles = ({ tagId, selected }: TagArticlesProps) => {
                   location: i,
                 })
               }
-              inTagDetailLatest
+              inTagDetailSelected={selected}
+              inTagDetailLatest={!selected}
             />
           </List.Item>
         ))}
