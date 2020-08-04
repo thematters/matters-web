@@ -16,10 +16,13 @@
   padding-right: var(--list-tag-count-width);
 
   & .count {
+    @mixin inline-flex-center-all;
+
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
+    justify-content: flex-end;
     width: var(--list-tag-count-width);
     font-size: var(--font-size-md-s);
     line-height: 1rem;

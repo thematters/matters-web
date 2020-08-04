@@ -9,6 +9,7 @@ export const USER_ID = gql`
       displayName
       info {
         description
+        profileCover
       }
       status {
         state
