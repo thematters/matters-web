@@ -1,7 +1,12 @@
 import classNames from 'classnames'
 import { useRef } from 'react'
 
-import { IconAppreciationMAX, IconLike, IconSuperLike } from '~/components'
+import {
+  IconAppreciationMAX,
+  IconLike,
+  IconSuperLike,
+  IconSuperLikeInfinite,
+} from '~/components'
 
 import { numAbbr } from '~/common/utils'
 
@@ -15,7 +20,6 @@ interface AppreciateButtonProps {
   count?: number | 'MAX'
   total: number
   isSuperLike?: boolean
-  canSuperLike?: boolean
   superLiked?: boolean
 }
 
@@ -25,7 +29,6 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
   count,
   total,
   isSuperLike,
-  canSuperLike,
   superLiked,
 }) => {
   const iconRef = useRef<HTMLButtonElement>(null)
@@ -66,11 +69,17 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
 
       <span className="total">{numAbbr(total)}</span>
 
-      {count && count !== 'MAX' && !isSuperLike && (
+      {!isSuperLike && count && count !== 'MAX' && (
         <span className="count">{count}</span>
       )}
 
-      {count === 'MAX' && (
+      {isSuperLike && count === 'MAX' && (
+        <span className="count">
+          <IconSuperLikeInfinite color="gold" />
+        </span>
+      )}
+
+      {!isSuperLike && count === 'MAX' && (
         <span className="count">
           <IconAppreciationMAX color="white" />
         </span>
