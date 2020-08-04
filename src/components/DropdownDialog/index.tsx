@@ -12,7 +12,7 @@ import {
   useResponsive,
 } from '~/components'
 
-import { KEYCODES, TEXT, TextId } from '~/common/enums'
+import { KEYCODES, TEXT, TextId, Z_INDEX } from '~/common/enums'
 
 /**
  * This is a responsive component which will show
@@ -113,12 +113,14 @@ const BaseDropdownDialog = ({
   if (isSmallUp) {
     return (
       <Dropdown
-        {...dropdown}
         trigger={undefined}
-        content={<Content>{dropdown.content}</Content>}
         onHidden={close}
         onClickOutside={close}
         visible={showDialog}
+        zIndex={Z_INDEX.OVER_STICKY_TABS}
+        appendTo={process.browser ? document.body : undefined}
+        {...dropdown}
+        content={<Content>{dropdown.content}</Content>}
       >
         <ForwardChildren open={toggle} children={children} />
       </Dropdown>

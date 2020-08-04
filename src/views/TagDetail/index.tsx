@@ -53,7 +53,7 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
   const viewer = useContext(ViewerContext)
 
   // feed type
-  const hasSelected = (tag?.articles.totalCount || 0) > 0
+  const hasSelected = (tag?.selectedArticles.totalCount || 0) > 0
   const [feed, setFeed] = useState<TagFeedType>(
     hasSelected ? 'selected' : 'latest'
   )
