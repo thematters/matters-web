@@ -1,7 +1,7 @@
 form {
   flex-grow: 1;
   background: var(--color-grey-lighter);
-  border-radius: 0 0 0.5rem 0.5rem;
+  border-radius: 0 0 var(--spacing-x-tight) var(--spacing-x-tight);
 
   @media (--sm-up) {
     background: transparent;

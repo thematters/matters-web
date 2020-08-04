@@ -1,0 +1,37 @@
+.container {
+  & :global(.list-item > .card) {
+    margin: var(--spacing-x-tight) calc(var(--spacing-x-tight) * -1);
+  }
+}
+
+.content {
+  @mixin flex-start-space-between;
+
+  margin-top: var(--spacing-x-tight);
+
+  & p {
+    flex-grow: 1;
+    margin-right: var(--spacing-x-tight);
+    font-size: var(--font-size-sm-s);
+    line-height: 1.85;
+    color: var(--color-grey);
+
+    @mixin line-clamp;
+
+    -webkit-line-clamp: 3;
+  }
+
+  & .cover {
+    position: relative;
+    flex-shrink: 0;
+    width: 3rem;
+    height: 3rem;
+
+    & :global(img) {
+      @mixin object-fit-cover;
+
+      background-color: var(--color-grey-lighter);
+      border-radius: var(--spacing-xx-tight);
+    }
+  }
+}

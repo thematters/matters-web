@@ -56,7 +56,7 @@ export const ArticleDigestDropdown = ({
 }: ArticleDigestDropdownProps) => {
   const { articleState: state } = article
   const isBanned = state === 'banned'
-  const containerClass = classNames({
+  const containerClasses = classNames({
     container: true,
     'has-extra-button': !!extraButton,
   })
@@ -72,7 +72,7 @@ export const ArticleDigestDropdown = ({
       as={cardDisabled ? undefined : path.as}
       {...cardProps}
     >
-      <section className={containerClass}>
+      <section className={containerClasses}>
         <header>
           <ArticleDigestTitle
             article={article}

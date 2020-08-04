@@ -25,8 +25,14 @@ type EventArgs =
   | ['load_more', LoadMoreProp]
   | ['share', ShareProp]
   | ['purchase', PurchaseProp]
+  | ['view_add_credit_dialog', ViewDialogProp]
+  | ['view_donation_dialog', ViewDialogProp]
 
-type ClickFeedProp = ArticleFeedProp | UserFeedProp | TagFeedProp
+type ClickFeedProp =
+  | ArticleFeedProp
+  | CommentFeedProp
+  | UserFeedProp
+  | TagFeedProp
 
 interface ClickButtonProp {
   type:
@@ -42,7 +48,7 @@ interface ClickButtonProp {
 }
 
 interface LoadMoreProp {
-  type: ArticleFeedType | UserFeedType | TagFeedType
+  type: ArticleFeedType | CommentFeedType | UserFeedType | TagFeedType
   location: number
 }
 
@@ -66,6 +72,10 @@ interface PurchaseProp {
   message?: string
 }
 
+interface ViewDialogProp {
+  step: string
+}
+
 interface ArticleFeedProp {
   type: ArticleFeedType
 
@@ -76,7 +86,13 @@ interface ArticleFeedProp {
     | 'small_cover'
     | 'no_cover'
     | 'title'
-    | 'comment' // comment in follow feed
+  location: number
+}
+
+interface CommentFeedProp {
+  type: CommentFeedType
+  contentType: 'comment'
+  styleType: 'card'
   location: number
 }
 
@@ -102,7 +118,7 @@ type ArticleFeedType =
   | 'all_topics'
   | 'authors' // author feed on home page
   | 'collection'
-  | 'follow'
+  | 'follow-article'
   | 'hottest'
   | 'icymi'
   | 'newest'
@@ -117,6 +133,8 @@ type ArticleFeedType =
   | 'topics'
   | 'user_article'
   | 'wallet'
+
+type CommentFeedType = 'follow-comment' | 'user_comment'
 
 type UserFeedType =
   | 'all_authors'
@@ -143,6 +161,8 @@ type UserFeedType =
 
 type TagFeedType =
   | 'all_tags' // all tags page
+  | 'follow-tag'
   | 'search'
   | 'search_tag'
   | 'tags' // tag feed on home page
+  | 'user_tag'

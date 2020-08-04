@@ -43,6 +43,7 @@ export const ERROR_CODES = {
 
   // TAG
   DUPLICATE_TAG: 'DUPLICATE_TAG',
+  NOT_ALLOW_ADD_TAG: 'NOT_ALLOW_ADD_TAG',
 
   // Verification Code
   CODE_INVALID: 'CODE_INVALID',

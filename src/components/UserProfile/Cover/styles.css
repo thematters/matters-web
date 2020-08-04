@@ -5,7 +5,7 @@
     @mixin object-fit-cover;
 
     background-color: var(--color-grey-lighter);
-    border-radius: 0.25rem;
+    border-radius: var(--spacing-xx-tight);
   }
 
   &::after {

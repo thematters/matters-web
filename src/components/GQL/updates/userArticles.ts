@@ -1,12 +1,12 @@
 import { DataProxy } from 'apollo-cache'
 
 import {
-  UserArticles,
-  UserArticles_user_articles_edges,
-} from '~/components/GQL/queries/__generated__/UserArticles'
+  UserArticlesPublic,
+  UserArticlesPublic_user_articles_edges,
+} from '~/components/GQL/queries/__generated__/UserArticlesPublic'
 
 const sortEdgesByCreatedAtDesc = (
-  edges: UserArticles_user_articles_edges[]
+  edges: UserArticlesPublic_user_articles_edges[]
 ) => {
   return edges.sort(
     ({ node: n1 }, { node: n2 }) =>
@@ -26,15 +26,17 @@ const update = ({
   type: 'sticky' | 'unsticky' | 'archive'
 }) => {
   // FIXME: circular dependencies
-  const USER_ARTICLES = require('~/components/GQL/queries/userArticles').default
+  const {
+    USER_ARTICLES_PUBLIC,
+  } = require('~/components/GQL/queries/userArticles')
 
   if (!userName) {
     return
   }
 
   try {
-    const data = cache.readQuery<UserArticles>({
-      query: USER_ARTICLES,
+    const data = cache.readQuery<UserArticlesPublic>({
+      query: USER_ARTICLES_PUBLIC,
       variables: { userName },
     })
 
@@ -72,7 +74,7 @@ const update = ({
     }
 
     cache.writeQuery({
-      query: USER_ARTICLES,
+      query: USER_ARTICLES_PUBLIC,
       variables: { userName },
       data: {
         user: {

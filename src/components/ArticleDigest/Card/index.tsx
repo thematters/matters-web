@@ -55,7 +55,7 @@ export const ArticleDigestCard = ({
   const cleanedSummary = isBanned
     ? ''
     : makeSummary(summary, countWordsLength(article.title) > 40 ? 50 : 70)
-  const containerClass = classNames({
+  const containerClasses = classNames({
     container: true,
     'has-cover': !!cover,
   })
@@ -74,7 +74,7 @@ export const ArticleDigestCard = ({
       onClick={onClick}
     >
       <section
-        className={containerClass}
+        className={containerClasses}
         style={
           cover && {
             backgroundImage: `linear-gradient(180deg, rgba(0, 0, 0, 0.16) 0%, rgba(0, 0, 0, 0.64) 100%), url("${cover}")`,

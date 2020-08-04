@@ -1,0 +1,6 @@
+# dev team is required for all PR reviews
+*   @thematters/dev
+
+# data team is required for all analytic related PR reviews
+src/components/Analytics/*  @thematters/data
+src/common/utils/analytics.ts @thematters/data

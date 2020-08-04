@@ -1,137 +1,45 @@
 import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
 
-import {
-  ArticleDigestFeed,
-  EmptyArticle,
-  Head,
-  InfiniteScroll,
-  List,
-  Spinner,
-} from '~/components'
-import { QueryError } from '~/components/GQL'
+import { Head } from '~/components'
+import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
-import { analytics, mergeConnections } from '~/common/utils'
+import ArticlesFeed from './ArticlesFeed'
+import CommentsFeed from './CommentsFeed'
+import FeedType, { FollowFeedType } from './FeedType'
+import TagsFeed from './TagsFeed'
 
-import FollowComment from './FollowComment'
-
-import { FollowFeed as FollowFeedType } from './__generated__/FollowFeed'
-
-const FOLLOW_FEED = gql`
-  query FollowFeed($after: String) {
-    viewer {
-      id
-      recommendation {
-        followeeWorks(input: { first: 10, after: $after }) {
-          pageInfo {
-            startCursor
-            endCursor
-            hasNextPage
-          }
-          edges {
-            cursor
-            node {
-              __typename
-              ... on Article {
-                ...ArticleDigestFeedArticle
-              }
-              ... on Comment {
-                ...FollowComment
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-  ${ArticleDigestFeed.fragments.article}
-  ${FollowComment.fragments.comment}
-`
+import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 
 const FollowFeed = () => {
-  const { data, loading, error, fetchMore, refetch } = useQuery<FollowFeedType>(
-    FOLLOW_FEED
-  )
-
-  if (loading) {
-    return <Spinner />
+  const { data, client } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
+    variables: { id: 'local' },
+  })
+  const { followFeedType } = data?.clientPreference || {
+    followFeedType: 'article',
   }
-
-  if (error) {
-    return <QueryError error={error} />
-  }
-
-  const connectionPath = 'viewer.recommendation.followeeWorks'
-  const { edges, pageInfo } = data?.viewer?.recommendation.followeeWorks || {}
-
-  if (!edges || edges.length <= 0 || !pageInfo) {
-    return <EmptyArticle />
-  }
-
-  const loadMore = () => {
-    analytics.trackEvent('load_more', {
-      type: 'follow',
-      location: edges.length,
-    })
-    return fetchMore({
-      variables: {
-        after: pageInfo.endCursor,
-      },
-      updateQuery: (previousResult, { fetchMoreResult }) =>
-        mergeConnections({
-          oldData: previousResult,
-          newData: fetchMoreResult,
-          path: connectionPath,
-        }),
-    })
+  const setFeedType = (type: FollowFeedType) => {
+    if (client) {
+      client.writeData({
+        id: 'ClientPreference:local',
+        data: { followFeedType: type },
+      })
+    }
   }
 
   return (
-    <InfiniteScroll
-      hasNextPage={pageInfo.hasNextPage}
-      loadMore={loadMore}
-      pullToRefresh={refetch}
-    >
-      <List>
-        {edges.map(({ node, cursor }, i) => (
-          <List.Item key={cursor}>
-            {node.__typename === 'Article' && (
-              <ArticleDigestFeed
-                article={node}
-                onClick={() =>
-                  analytics.trackEvent('click_feed', {
-                    type: 'follow',
-                    contentType: 'article',
-                    styleType: 'no_cover',
-                    location: i,
-                  })
-                }
-                inFollowFeed
-              />
-            )}
-            {node.__typename === 'Comment' && (
-              <FollowComment
-                comment={node}
-                onClick={() =>
-                  analytics.trackEvent('click_feed', {
-                    type: 'follow',
-                    contentType: 'article',
-                    styleType: 'comment',
-                    location: i,
-                  })
-                }
-              />
-            )}
-          </List.Item>
-        ))}
-      </List>
-    </InfiniteScroll>
+    <>
+      <Head title={{ id: 'follow' }} />
+
+      <FeedType
+        type={followFeedType as FollowFeedType}
+        setFeedType={setFeedType}
+      />
+
+      {followFeedType === 'article' && <ArticlesFeed />}
+      {followFeedType === 'comment' && <CommentsFeed />}
+      {followFeedType === 'tag' && <TagsFeed />}
+    </>
   )
 }
 
-export default () => (
-  <>
-    <Head title={{ id: 'follow' }} />
-    <FollowFeed />
-  </>
-)
+export default FollowFeed

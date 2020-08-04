@@ -34,27 +34,30 @@ interface ToSizedImageURLProps {
 
 const PROCESSED_PREFIX = 'processed'
 
-export const changeExt = ({ url, ext }: { url: string; ext?: 'webp' }) => {
-  const list = url.split('.')
+export const changeExt = ({ key, ext }: { key: string; ext?: 'webp' }) => {
+  const list = key.split('.')
   const hasExt = list.length > 1
   const newExt = ext || list.slice(-1)[0] || ''
 
   if (hasExt) {
-    return url.replace(/\.[^.]+$/, `.${newExt}`)
+    return key.replace(/\.[^.]+$/, `.${newExt}`)
   }
 
-  return `${url}.${ext || ''}`
+  return `${key}${ext ? '.' + ext : ''}`
 }
 
 export const toSizedImageURL = ({ url, size, ext }: ToSizedImageURLProps) => {
-  const assetDomain = process.env.NEXT_PUBLIC_ASSET_DOMAIN
+  const assetDomain = process.env.NEXT_PUBLIC_ASSET_DOMAIN || ''
+  const isOutsideLink = url.indexOf(assetDomain) < 0
+  const isGIF = /gif/i.test(url)
 
-  if (!assetDomain) {
+  if (!assetDomain || isOutsideLink || isGIF) {
     return url
   }
 
-  const extedUrl = changeExt({ url, ext })
+  const key = url.replace(assetDomain, ``)
+  const extedUrl = changeExt({ key, ext })
   const prefix = size ? '/' + PROCESSED_PREFIX + '/' + size : ''
 
-  return extedUrl.replace(assetDomain, `${assetDomain}${prefix}`)
+  return assetDomain + prefix + extedUrl
 }

@@ -12,7 +12,7 @@ import {
   useResponsive,
 } from '~/components'
 
-import { KEYCODES, TEXT, TextId } from '~/common/enums'
+import { KEYCODES, TEXT, TextId, Z_INDEX } from '~/common/enums'
 
 /**
  * This is a responsive component which will show
@@ -76,8 +76,9 @@ const BaseDropdownDialog = ({
 }: DropdownDialogProps) => {
   const isSmallUp = useResponsive('sm-up')
   const [showDialog, setShowDialog] = useState(true)
-  const open = () => setShowDialog(true)
+  // const open = () => setShowDialog(true)
   const close = () => setShowDialog(false)
+  const toggle = () => setShowDialog(!showDialog)
   const closeOnClick = (event: React.MouseEvent | React.KeyboardEvent) => {
     const target = event.target as HTMLElement
     if (target?.closest && target.closest('[data-clickable], a, button')) {
@@ -112,14 +113,16 @@ const BaseDropdownDialog = ({
   if (isSmallUp) {
     return (
       <Dropdown
-        {...dropdown}
         trigger={undefined}
-        content={<Content>{dropdown.content}</Content>}
         onHidden={close}
         onClickOutside={close}
         visible={showDialog}
+        zIndex={Z_INDEX.OVER_STICKY_TABS}
+        appendTo={process.browser ? document.body : undefined}
+        {...dropdown}
+        content={<Content>{dropdown.content}</Content>}
       >
-        <ForwardChildren open={open} children={children} />
+        <ForwardChildren open={toggle} children={children} />
       </Dropdown>
     )
   }
@@ -129,7 +132,7 @@ const BaseDropdownDialog = ({
    */
   return (
     <>
-      {children({ open })}
+      {children({ open: toggle })}
 
       <Dialog isOpen={showDialog} onDismiss={close} {...dialog} slideIn>
         <Dialog.Header

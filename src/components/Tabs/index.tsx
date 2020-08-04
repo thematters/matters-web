@@ -1,3 +1,5 @@
+import classNames from 'classnames'
+
 import { Button, ButtonProps, TextIcon } from '~/components'
 
 import styles from './styles.css'
@@ -33,11 +35,19 @@ const Tab: React.FC<TabProps> = ({ selected, children, ...buttonProps }) => {
   )
 }
 
-export const Tabs: React.FC & {
+interface TabsProps {
+  sticky?: boolean
+}
+
+export const Tabs: React.FC<TabsProps> & {
   Tab: typeof Tab
-} = ({ children }) => {
+} = ({ sticky, children }) => {
+  const navClasses = classNames({
+    sticky,
+  })
+
   return (
-    <nav>
+    <nav className={navClasses}>
       <ul role="tablist">{children}</ul>
 
       <style jsx>{styles}</style>

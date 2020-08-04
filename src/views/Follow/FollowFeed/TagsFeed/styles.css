@@ -1,0 +1,12 @@
+.tag {
+  @mixin flex-center-start;
+
+  width: 100%;
+  margin-bottom: var(--spacing-loose);
+
+  & span {
+    margin-left: var(--spacing-x-tight);
+    font-size: var(--font-size-sm);
+    color: var(--color-grey);
+  }
+}

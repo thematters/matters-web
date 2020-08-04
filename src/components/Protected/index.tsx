@@ -8,21 +8,13 @@ export const Protected: React.FC = ({ children }) => {
   const viewer = useContext(ViewerContext)
 
   useEffect(() => {
-    if (!viewer.isAuthed && process.browser) {
+    if (viewer.privateFetched && !viewer.isAuthed) {
       redirectToLogin()
     }
-  }, [])
+  }, [viewer.privateFetched])
 
-  if (viewer.isAuthed) {
+  if (viewer.isAuthed && viewer.privateFetched) {
     return <>{children}</>
-  }
-
-  if (!process.browser) {
-    return (
-      <Layout.Main>
-        <Spinner />
-      </Layout.Main>
-    )
   }
 
   return (

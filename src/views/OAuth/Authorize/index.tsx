@@ -136,14 +136,12 @@ const OAuthAuthorize = () => {
             <span>
               <Translate zh_hant="不是你？" zh_hans="不是你？" />
             </span>
-            {/* FIXME: only render at CSR to get correct `appendTarget` */}
-            {process.browser && (
-              <Link {...appendTarget(PATHS.LOGIN, true)}>
-                <a className="u-link-green">
-                  <Translate zh_hant="切換帳戶" zh_hans="切换帐户" />
-                </a>
-              </Link>
-            )}
+
+            <Link {...appendTarget(PATHS.LOGIN, true)}>
+              <a className="u-link-green">
+                <Translate zh_hant="切換帳戶" zh_hans="切换帐户" />
+              </a>
+            </Link>
           </p>
         </section>
 

@@ -12,7 +12,7 @@ interface FallbackSearchItemProps {
 }
 
 const FallbackSearchItem = ({ searchKey, inPage }: FallbackSearchItemProps) => {
-  const itemClass = classNames({
+  const itemClasses = classNames({
     'key highlight': true,
     inPage,
   })
@@ -24,7 +24,7 @@ const FallbackSearchItem = ({ searchKey, inPage }: FallbackSearchItemProps) => {
         q: searchKey,
       })}
     >
-      <span className={itemClass}>
+      <span className={itemClasses}>
         <Translate id="search" />
 
         <b>&nbsp;{searchKey}</b>

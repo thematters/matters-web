@@ -1,6 +1,5 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
+import { useContext, useEffect } from 'react'
 
 import {
   EmptyWarning,
@@ -9,82 +8,77 @@ import {
   List,
   Spinner,
   Translate,
+  usePublicQuery,
   usePullToRefresh,
+  ViewerContext,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 import { UserDigest } from '~/components/UserDigest'
 
 import { analytics, getQuery, mergeConnections } from '~/common/utils'
 
-import { UserFollowerFeed } from './__generated__/UserFollowerFeed'
+import IMAGE_LOGO_192 from '@/public/static/icon-192x192.png?url'
 
-const USER_FOLLOWERS_FEED = gql`
-  query UserFollowerFeed($userName: String!, $after: String) {
-    user(input: { userName: $userName }) {
-      id
-      displayName
-      followers(input: { first: 20, after: $after }) {
-        pageInfo {
-          startCursor
-          endCursor
-          hasNextPage
-        }
-        edges {
-          cursor
-          node {
-            ...UserDigestRichUserPublic
-            ...UserDigestRichUserPrivate
-          }
-        }
-      }
-    }
-  }
-  ${UserDigest.Rich.fragments.user.public}
-  ${UserDigest.Rich.fragments.user.private}
-`
+import FollowerTabs from '../FollowerTabs'
+import { USER_FOLLOWERS_PRIVATE, USER_FOLLOWERS_PUBLIC } from './gql'
+
+import { UserFollowerPublic } from './__generated__/UserFollowerPublic'
 
 const UserFollowers = () => {
+  const viewer = useContext(ViewerContext)
   const router = useRouter()
   const userName = getQuery({ router, key: 'userName' })
-  const { data, loading, error, fetchMore, refetch } = useQuery<
-    UserFollowerFeed
-  >(USER_FOLLOWERS_FEED, {
+
+  /**
+   * Data Fetching
+   */
+  // public data
+  const {
+    data,
+    loading,
+    error,
+    fetchMore,
+    refetch: refetchPublic,
+    client,
+  } = usePublicQuery<UserFollowerPublic>(USER_FOLLOWERS_PUBLIC, {
     variables: { userName },
   })
 
-  usePullToRefresh.Register()
-  usePullToRefresh.Handler(refetch)
-
-  if (loading || !data || !data.user) {
-    return <Spinner />
-  }
-
-  if (error) {
-    return <QueryError error={error} />
-  }
-
-  const user = data.user
+  // pagination
+  const user = data?.user
   const connectionPath = 'user.followers'
-  const { edges, pageInfo } = user.followers
+  const { edges, pageInfo } = user?.followers || {}
 
-  if (!edges || edges.length <= 0 || !pageInfo) {
-    return (
-      <EmptyWarning
-        description={
-          <Translate zh_hant="還沒有追蹤者" zh_hans="还没有追踪者" />
-        }
-      />
-    )
+  // private data
+  const loadPrivate = (publicData?: UserFollowerPublic) => {
+    if (!viewer.id || !publicData || !user) {
+      return
+    }
+
+    const publiceEdges = publicData.user?.followers.edges || []
+    const publicIds = publiceEdges.map(({ node }) => node.id)
+
+    client.query({
+      query: USER_FOLLOWERS_PRIVATE,
+      fetchPolicy: 'network-only',
+      variables: { ids: publicIds },
+    })
   }
 
-  const loadMore = () => {
+  // fetch private data for first page
+  useEffect(() => {
+    loadPrivate(data)
+  }, [user?.id, viewer.id])
+
+  // load next page
+  const loadMore = async () => {
     analytics.trackEvent('load_more', {
       type: 'follower',
-      location: edges.length,
+      location: edges?.length || 0,
     })
-    return fetchMore({
+    const { data: newData } = await fetchMore({
       variables: {
-        after: pageInfo.endCursor,
+        after: pageInfo?.endCursor,
       },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
@@ -93,16 +87,62 @@ const UserFollowers = () => {
           path: connectionPath,
         }),
     })
+
+    loadPrivate(newData)
+  }
+
+  // refetch & pull to refresh
+  const refetch = async () => {
+    const { data: newData } = await refetchPublic()
+    loadPrivate(newData)
+  }
+  usePullToRefresh.Register()
+  usePullToRefresh.Handler(refetch)
+
+  /**
+   * Render
+   */
+
+  if (loading || !data || !user) {
+    return <Spinner />
+  }
+
+  if (error) {
+    return <QueryError error={error} />
+  }
+
+  const CustomHead = () => (
+    <Head
+      title={{
+        zh_hant: `${user.displayName}的追蹤者`,
+        zh_hans: `${user.displayName}的追踪者`,
+      }}
+      description={user.info.description}
+      image={user.info.profileCover || IMAGE_LOGO_192}
+    />
+  )
+
+  if (!edges || edges.length <= 0 || !pageInfo) {
+    return (
+      <>
+        <CustomHead />
+
+        <FollowerTabs />
+
+        <EmptyWarning
+          description={
+            <Translate zh_hant="還沒有追蹤者" zh_hans="还没有追踪者" />
+          }
+        />
+      </>
+    )
   }
 
   return (
     <>
-      <Head
-        title={{
-          zh_hant: `${user.displayName}的追蹤者`,
-          zh_hans: `${user.displayName}的追踪者`,
-        }}
-      />
+      <CustomHead />
+
+      <FollowerTabs />
 
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
         <List hasBorder={false}>

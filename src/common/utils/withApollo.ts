@@ -12,7 +12,11 @@ import http from 'http'
 import https from 'https'
 import withApollo from 'next-with-apollo'
 
-import { AGENT_HASH_PREFIX, STORE_KEY_AGENT_HASH } from '~/common/enums'
+import {
+  AGENT_HASH_PREFIX,
+  GQL_CONTEXT_PUBLIC_QUERY_KEY,
+  STORE_KEY_AGENT_HASH,
+} from '~/common/enums'
 import introspectionQueryResultData from '~/common/gql/fragmentTypes.json'
 import { randomString } from '~/common/utils'
 
@@ -43,7 +47,6 @@ const persistedQueryLink = createPersistedQueryLink({
 const httpLink = ({ headers }: { [key: string]: any }) =>
   createUploadLink({
     uri: process.env.NEXT_PUBLIC_API_URL,
-    credentials: 'include',
     headers,
     fetchOptions: {
       agent,
@@ -67,8 +70,22 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   }
 })
 
-const authLink = setContext((_, { headers }) => {
+const authLink = setContext((operation, { headers, ...restCtx }) => {
+  const operationName = operation.operationName || ''
+
+  const isPublicOperation = restCtx[GQL_CONTEXT_PUBLIC_QUERY_KEY]
+
+  if (process.env.NODE_ENV !== 'production') {
+    console.log(
+      `%c[GraphQL operation]\x1b[0m`,
+      'background: #0d6763; color: #fff',
+      operationName,
+      isPublicOperation ? '' : '(w/ credentials)'
+    )
+  }
+
   return {
+    credentials: isPublicOperation ? 'omit' : 'include',
     headers: {
       ...headers,
       'x-client-name': 'web',
@@ -122,9 +139,9 @@ export default withApollo(({ ctx, headers, initialState }) => {
     link: ApolloLink.from([
       persistedQueryLink,
       errorLink,
-      authLink,
       sentryLink,
       agentHashLink,
+      authLink,
       httpLink({ headers }),
     ]),
     cache,

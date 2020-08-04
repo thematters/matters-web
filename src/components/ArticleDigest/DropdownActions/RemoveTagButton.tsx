@@ -4,8 +4,10 @@ import { useRouter } from 'next/router'
 
 import { IconRemoveMedium, Menu, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
+import updateTagArticlesCount from '~/components/GQL/updates/tagArticlesCount'
 
 import { REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
+import { getQuery } from '~/common/utils'
 
 import { DeleteArticlesTags } from './__generated__/DeleteArticlesTags'
 import { RemoveTagButtonArticle } from './__generated__/RemoveTagButtonArticle'
@@ -40,14 +42,16 @@ const fragments = {
 
 const RemoveTagButton = ({ article }: { article: RemoveTagButtonArticle }) => {
   const router = useRouter()
-  const {
-    query: { id },
-  } = router
-  const tagId = _isArray(id) ? id[0] : id
+  const id = getQuery({ router, key: 'tagId' })
 
   const [deleteArticlesTags] = useMutation<DeleteArticlesTags>(
     DELETE_ARTICLES_TAGS,
-    { variables: { id: tagId, articles: [article.id] } }
+    {
+      variables: { id, articles: [article.id] },
+      update: (cache) => {
+        updateTagArticlesCount({ cache, type: 'decrement', id })
+      },
+    }
   )
 
   return (
@@ -65,7 +69,7 @@ const RemoveTagButton = ({ article }: { article: RemoveTagButtonArticle }) => {
       }}
     >
       <TextIcon icon={<IconRemoveMedium size="md" />} size="md" spacing="base">
-        <Translate zh_hant="取消標籤" zh_hans="取消标签" />
+        <Translate zh_hant="移除作品" zh_hans="移除作品" />
       </TextIcon>
     </Menu.Item>
   )

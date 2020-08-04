@@ -20,7 +20,7 @@ const List: React.FC<ListProps> & { Item: typeof Item } = ({
   spacing = 0,
   children,
 }) => {
-  const listClass = classNames({
+  const listClasses = classNames({
     [`spacing-${spacing}`]: !!spacing,
   })
 
@@ -28,7 +28,7 @@ const List: React.FC<ListProps> & { Item: typeof Item } = ({
     <section className="group">
       {groupName && <h4 className="name">{groupName}</h4>}
 
-      <ul className={listClass}>{children}</ul>
+      <ul className={listClasses}>{children}</ul>
 
       <style jsx>{styles}</style>
     </section>

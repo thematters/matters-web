@@ -17,7 +17,7 @@ const DialogContent: React.FC<DialogContentProps> = ({
 
   children,
 }) => {
-  const contentClass = classNames({
+  const contentClasses = classNames({
     content: true,
     'has-grow': !!hasGrow,
     [`spacing-y-${spacing[0]}`]: true,
@@ -25,7 +25,7 @@ const DialogContent: React.FC<DialogContentProps> = ({
   })
 
   return (
-    <section className={contentClass}>
+    <section className={contentClasses}>
       {children}
 
       <style jsx>{styles}</style>

@@ -5,6 +5,7 @@ import { useContext } from 'react'
 
 import {
   AvatarUploader,
+  CoverUploader,
   Dialog,
   Form,
   LanguageContext,
@@ -20,13 +21,14 @@ import {
   validateDisplayName,
 } from '~/common/utils'
 
-import ProfileCoverUploader from './ProfileCoverUploader'
+import IMAGE_COVER from '@/public/static/images/profile-cover.png'
+
 import styles from './styles.css'
 
-import { ProfileUser } from '~/components/UserProfile/__generated__/ProfileUser'
+import { ProfileUserPublic } from '~/components/UserProfile/__generated__/ProfileUserPublic'
 import { UpdateUserInfoProfile } from './__generated__/UpdateUserInfoProfile'
 
-export type ProfileEditorUser = ProfileUser
+export type ProfileEditorUser = ProfileUserPublic
 
 interface FormProps {
   user: ProfileEditorUser
@@ -131,8 +133,12 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       <section className="cover-field">
-        <ProfileCoverUploader
-          user={user}
+        <CoverUploader
+          assetType="profileCover"
+          coverUrl={user.info.profileCover}
+          defaultCoverUrl={IMAGE_COVER}
+          entityType="user"
+          inEditor={true}
           onUpload={(assetId) => setFieldValue('profileCover', assetId)}
         />
       </section>

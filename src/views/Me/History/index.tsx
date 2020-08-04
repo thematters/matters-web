@@ -31,7 +31,8 @@ const ME_HISTORY_FEED = gql`
             cursor
             node {
               article {
-                ...ArticleDigestFeedArticle
+                ...ArticleDigestFeedArticlePublic
+                ...ArticleDigestFeedArticlePrivate
               }
             }
           }
@@ -39,7 +40,8 @@ const ME_HISTORY_FEED = gql`
       }
     }
   }
-  ${ArticleDigestFeed.fragments.article}
+  ${ArticleDigestFeed.fragments.article.public}
+  ${ArticleDigestFeed.fragments.article.private}
 `
 
 const MeHistory = () => {

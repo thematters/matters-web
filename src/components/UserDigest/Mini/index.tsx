@@ -71,7 +71,7 @@ const Mini = ({
     page: 'userProfile',
     userName: user.userName || '',
   })
-  const containerClass = classNames({
+  const containerClasses = classNames({
     container: true,
     [`text-size-${textSize}`]: !!textSize,
     [`text-weight-${textWeight}`]: !!textWeight,
@@ -79,17 +79,17 @@ const Mini = ({
     hasAvatar,
     disabled: disabled || isArchived,
   })
-  const nameClass = classNames({
+  const nameClasses = classNames({
     name: true,
     [`direction-${direction}`]: !!direction,
   })
 
   if (isArchived) {
     return (
-      <span className={containerClass}>
+      <span className={containerClasses}>
         {hasAvatar && <Avatar size={avatarSize} />}
 
-        <span className={nameClass}>
+        <span className={nameClasses}>
           {hasDisplayName && (
             <span className="displayname">
               <Translate id="accountArchived" />
@@ -104,10 +104,10 @@ const Mini = ({
 
   return (
     <LinkWrapper {...path} disabled={disabled}>
-      <section className={containerClass}>
+      <section className={containerClasses}>
         {hasAvatar && <Avatar size={avatarSize} user={user} />}
 
-        <span className={nameClass}>
+        <span className={nameClasses}>
           {hasDisplayName && (
             <span className="displayname">{user.displayName}</span>
           )}

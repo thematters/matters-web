@@ -34,10 +34,10 @@ const FollowUnreadIcon: React.FC<FollowUnreadIconProps> = ({ active }) => {
   }, [])
 
   const unread = data?.viewer?.status?.unreadFolloweeArticles
-  const iconClass = classNames({ 'unread-icon': true, unread })
+  const iconClasses = classNames({ 'unread-icon': true, unread })
 
   return (
-    <span className={iconClass}>
+    <span className={iconClasses}>
       {active ? (
         <IconNavFollowActive size="md" color="green" />
       ) : (

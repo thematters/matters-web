@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 
-import { Card, Img } from '~/components'
+import { Card, CardProps, Img } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 
 import { toPath } from '~/common/utils'
@@ -11,14 +11,14 @@ import styles from './styles.css'
 
 import { ArticleDigestSidebarArticle } from './__generated__/ArticleDigestSidebarArticle'
 
-interface ArticleDigestSidebarProps {
+type ArticleDigestSidebarProps = {
   article: ArticleDigestSidebarArticle
 
   titleTextSize?: ArticleDigestTitleTextSize
   hasBackground?: boolean
   hasCover?: boolean
   onClick?: () => any
-}
+} & CardProps
 
 const fragments = {
   article: gql`
@@ -48,11 +48,13 @@ export const ArticleDigestSidebar = ({
   hasBackground,
   hasCover,
   onClick,
+
+  ...cardProps
 }: ArticleDigestSidebarProps) => {
   const { articleState: state } = article
   const isBanned = state === 'banned'
   const cover = !isBanned && hasCover ? article.cover : null
-  const containerClass = classNames({
+  const containerClasses = classNames({
     container: true,
     'has-cover': !!cover,
     'has-background': !!hasBackground,
@@ -65,12 +67,13 @@ export const ArticleDigestSidebar = ({
   return (
     <Card
       {...path}
-      spacing={hasBackground ? ['tight', 'tight'] : [0, 0]}
-      borderRadius={hasBackground ? 'xtight' : undefined}
+      spacing={['tight', 'tight']}
+      borderRadius="xtight"
       bgColor={hasBackground ? 'grey-lighter' : 'none'}
       onClick={onClick}
+      {...cardProps}
     >
-      <section className={containerClass}>
+      <section className={containerClasses}>
         <header>
           <ArticleDigestTitle
             article={article}

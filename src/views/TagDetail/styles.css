@@ -1,24 +1,38 @@
-.buttons {
-  & :global(> * + *) {
-    margin-left: var(--spacing-base);
-  }
+.info {
+  @mixin border-bottom-grey;
+
+  padding: 0 var(--spacing-base) var(--spacing-loose);
+  margin-bottom: var(--spacing-x-tight);
 }
 
-.maintainer {
+.owner {
   @mixin flex-center-start;
 
-  padding: 0 var(--spacing-base) var(--spacing-base);
+  margin-top: var(--spacing-base);
 
   & span {
     margin-left: var(--spacing-x-tight);
     font-size: var(--font-size-sm);
+    line-height: 1;
     color: var(--color-grey-dark);
   }
 }
 
 .description {
-  padding: 0 var(--spacing-base);
-  font-size: var(--font-size-sm);
+  margin-top: var(--spacing-base);
+  font-size: var(--font-size-md-s);
   color: var(--color-grey-darker);
   white-space: pre-wrap;
+}
+
+.statistics {
+  @mixin flex-center-space-between;
+
+  margin-top: var(--spacing-loose);
+}
+
+.buttons {
+  @mixin flex-center-space-between;
+
+  margin-top: var(--spacing-loose);
 }

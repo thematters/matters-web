@@ -31,7 +31,7 @@ const Content = ({
 }: {
   article: ContentArticle
   translation?: string | null
-  translating: boolean
+  translating?: boolean
 }) => {
   const [read] = useMutation<ReadArticle>(READ_ARTICLE)
 
@@ -56,41 +56,46 @@ const Content = ({
 
   // register read
   useEffect(() => {
-    const timerId = setInterval(() => {
-      const isReading = () => {
-        // tab hidden
-        if (document.hidden) {
-          return false
+    const timerId = setInterval(
+      (function heartbeat() {
+        const isReading = () => {
+          // tab hidden
+          if (document.hidden) {
+            return false
+          }
+
+          // idle for more than 5 minutes
+          if (Date.now() / 1000 - lastScroll > 60 * 5) {
+            return false
+          }
+
+          if (!contentContainer || !contentContainer.current) {
+            return false
+          }
+
+          // if overlay is shown
+          const overlaySelectors = ['reach-portal', '.tippy-popper']
+          if (document.querySelector(overlaySelectors.join(','))) {
+            return false
+          }
+
+          // if bottom is above center
+          const {
+            bottom,
+          } = ((contentContainer.current as unknown) as Element).getBoundingClientRect()
+
+          const isBottomAboveCenter = bottom <= window.innerHeight / 2
+          return !isBottomAboveCenter
         }
 
-        // idle for more than 5 minutes
-        if (Date.now() / 1000 - lastScroll > 60 * 5) {
-          return false
+        if (isReading()) {
+          read({ variables: { id } })
         }
 
-        if (!contentContainer || !contentContainer.current) {
-          return false
-        }
-
-        // if overlay is shown
-        const overlaySelectors = ['reach-portal', '.tippy-popper']
-        if (document.querySelector(overlaySelectors.join(','))) {
-          return false
-        }
-
-        // if bottom is above center
-        const {
-          bottom,
-        } = ((contentContainer.current as unknown) as Element).getBoundingClientRect()
-
-        const isBottomAboveCenter = bottom <= window.innerHeight / 2
-        return !isBottomAboveCenter
-      }
-
-      if (isReading()) {
-        read({ variables: { id } })
-      }
-    }, 5000)
+        return heartbeat
+      })(),
+      5000
+    )
 
     // clean timer
     return () => {
@@ -119,7 +124,9 @@ const Content = ({
       `
     }
 
-    $imgs.forEach(($img) => $img.addEventListener('error', onError))
+    $imgs.forEach(($img) =>
+      $img.addEventListener('error', onError, { once: true })
+    )
 
     return () =>
       $imgs.forEach(($img) => $img.removeEventListener('error', onError))

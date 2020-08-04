@@ -1,51 +1,45 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
 
-import { Card, List, Spinner, UserDigest } from '~/components'
+import {
+  Card,
+  List,
+  Spinner,
+  usePublicQuery,
+  usePullToRefresh,
+  UserDigest,
+} from '~/components'
 
 import { analytics, getQuery, toPath } from '~/common/utils'
 
+import { SEARCH_AGGREGATE_USERS_PUBLIC } from './gql'
 import styles from './styles.css'
 import ViewMoreButton from './ViewMoreButton'
 
-import { SeachAggregateUsers } from './__generated__/SeachAggregateUsers'
-
-const SEARCH_AGGREGATE_USERS = gql`
-  query SeachAggregateUsers($key: String!) {
-    search(input: { key: $key, type: User, first: 3 }) {
-      pageInfo {
-        startCursor
-        endCursor
-        hasNextPage
-      }
-      edges {
-        cursor
-        node {
-          ... on User {
-            ...UserDigestMiniUser
-          }
-        }
-      }
-    }
-  }
-  ${UserDigest.Mini.fragments.user}
-`
+import { SeachAggregateUsersPublic } from './__generated__/SeachAggregateUsersPublic'
 
 const AggregateUserResults = () => {
   const router = useRouter()
   const q = getQuery({ router, key: 'q' })
 
-  const { data, loading } = useQuery<SeachAggregateUsers>(
-    SEARCH_AGGREGATE_USERS,
+  /**
+   * Data Fetching
+   */
+  // public data
+  const { data, loading, refetch } = usePublicQuery<SeachAggregateUsersPublic>(
+    SEARCH_AGGREGATE_USERS_PUBLIC,
     { variables: { key: q } }
   )
 
+  const { edges, pageInfo } = data?.search || {}
+
+  usePullToRefresh.Handler(refetch)
+
+  /**
+   * Render
+   */
   if (loading) {
     return <Spinner />
   }
-
-  const { edges, pageInfo } = data?.search || {}
 
   if (!edges || edges.length <= 0 || !pageInfo) {
     return null

@@ -1,10 +1,7 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
-import _get from 'lodash/get'
 import _some from 'lodash/some'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 
 import {
   Avatar,
@@ -15,6 +12,7 @@ import {
   Spinner,
   Throw404,
   Translate,
+  usePublicQuery,
   useResponsive,
   ViewerContext,
 } from '~/components'
@@ -25,79 +23,45 @@ import { CivicLikerBadge, SeedBadge } from './Badges'
 import Cover from './Cover'
 import DropdownActions from './DropdownActions'
 import EditProfileButton from './EditProfileButton'
+import { USER_PROFILE_PRIVATE, USER_PROFILE_PUBLIC } from './gql'
 import styles from './styles.css'
 
-import { MeProfileUser } from './__generated__/MeProfileUser'
-import { UserProfileUser } from './__generated__/UserProfileUser'
-
-const fragments = {
-  user: gql`
-    fragment ProfileUser on User {
-      id
-      userName
-      displayName
-      liker {
-        civicLiker
-      }
-      info {
-        badges {
-          type
-        }
-        description
-        profileCover
-      }
-      followees(input: { first: 0 }) {
-        totalCount
-      }
-      followers(input: { first: 0 }) {
-        totalCount
-      }
-      status {
-        state
-      }
-      ...AvatarUser
-      ...FollowButtonUserPrivate @skip(if: $isMe)
-      ...DropdownActionsUser
-    }
-    ${Avatar.fragments.user}
-    ${FollowButton.fragments.user.private}
-    ${DropdownActions.fragments.user}
-  `,
-}
-
-const USER_PROFILE = gql`
-  query UserProfileUser($userName: String!, $isMe: Boolean = false) {
-    user(input: { userName: $userName }) {
-      ...ProfileUser
-    }
-  }
-  ${fragments.user}
-`
-
-const ME_PROFILE = gql`
-  query MeProfileUser($isMe: Boolean = true) {
-    viewer {
-      ...ProfileUser
-    }
-  }
-  ${fragments.user}
-`
+import { UserProfileUserPublic } from './__generated__/UserProfileUserPublic'
 
 export const UserProfile = () => {
   const isSmallUp = useResponsive('sm-up')
   const router = useRouter()
   const viewer = useContext(ViewerContext)
 
+  // public data
   const userName = getQuery({ router, key: 'userName' })
   const isMe = !userName || viewer.userName === userName
-  const { data, loading } = useQuery<MeProfileUser | UserProfileUser>(
-    isMe ? ME_PROFILE : USER_PROFILE,
+  const { data, loading, client } = usePublicQuery<UserProfileUserPublic>(
+    USER_PROFILE_PUBLIC,
     {
-      variables: isMe ? {} : { userName },
+      variables: { userName },
     }
   )
-  const user = isMe ? _get(data, 'viewer') : _get(data, 'user')
+  const user = data?.user
 
+  // fetch private data
+  useEffect(() => {
+    if (!viewer.id || !user) {
+      return
+    }
+
+    client.query({
+      query: USER_PROFILE_PRIVATE,
+      fetchPolicy: 'network-only',
+      variables: {
+        userName,
+      },
+    })
+  }, [user?.id, viewer.id])
+
+  /**
+   * Render
+   */
   const LayoutHeader = () => (
     <Layout.Header
       left={
@@ -152,18 +116,19 @@ export const UserProfile = () => {
 
   const userFollowersPath = toPath({
     page: 'userFollowers',
-    userName: user.userName,
+    userName,
   })
   const userFolloweesPath = toPath({
     page: 'userFollowees',
-    userName: user.userName,
+    userName,
   })
   const badges = user.info.badges || []
   const hasSeedBadge = _some(badges, { type: 'seed' })
   const profileCover = user.info.profileCover || ''
+  const userState = user.status?.state as string
   const isCivicLiker = user.liker.civicLiker
-  const isUserArchived = user.status.state === 'archived'
-  const isUserBanned = user.status.state === 'banned'
+  const isUserArchived = userState === 'archived'
+  const isUserBanned = userState === 'banned'
   const isUserInactive = isUserArchived || isUserBanned
 
   /**

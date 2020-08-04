@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
 
-import { IconPinMedium, Menu, TextIcon, Translate } from '~/components'
+import { IconAddMedium, Menu, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import { ADD_TOAST } from '~/common/enums'
@@ -12,7 +12,9 @@ import { SetTagSelectedButtonArticle } from './__generated__/SetTagSelectedButto
 
 const SET_TAG_SELECTED = gql`
   mutation SetTagSelected($id: ID!, $articles: [ID!]) {
-    putArticlesTags(input: { id: $id, articles: $articles, selected: true }) {
+    updateArticlesTags(
+      input: { id: $id, articles: $articles, isSelected: true }
+    ) {
       id
       articles(input: { first: 0, selected: true }) {
         totalCount
@@ -70,8 +72,8 @@ const SetTagSelectedButton = ({
         )
       }}
     >
-      <TextIcon icon={<IconPinMedium size="md" />} size="md" spacing="base">
-        <Translate zh_hant="添加精選" zh_hans="添加精选" />
+      <TextIcon icon={<IconAddMedium size="md" />} size="md" spacing="base">
+        <Translate zh_hant="添加到精選" zh_hans="添加到精选" />
       </TextIcon>
     </Menu.Item>
   )

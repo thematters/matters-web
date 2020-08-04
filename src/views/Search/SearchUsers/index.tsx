@@ -1,77 +1,82 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
+import { useContext, useEffect } from 'react'
 
 import {
   InfiniteScroll,
   List,
   Spinner,
   Translate,
-  usePullToRefresh,
+  usePublicQuery,
   UserDigest,
+  ViewerContext,
 } from '~/components'
 
 import { analytics, getQuery, mergeConnections } from '~/common/utils'
 
 import EmptySearch from '../EmptySearch'
+import { SEARCH_USERS_PRIVATE, SEARCH_USERS_PUBLIC } from './gql'
 
-import { SeachUsers } from './__generated__/SeachUsers'
-
-const SEARCH_USERS = gql`
-  query SeachUsers($key: String!, $after: String) {
-    search(input: { key: $key, type: User, first: 20, after: $after }) {
-      pageInfo {
-        startCursor
-        endCursor
-        hasNextPage
-      }
-      edges {
-        cursor
-        node {
-          ... on User {
-            ...UserDigestRichUserPublic
-            ...UserDigestRichUserPrivate
-          }
-        }
-      }
-    }
-  }
-  ${UserDigest.Rich.fragments.user.public}
-  ${UserDigest.Rich.fragments.user.private}
-`
+import { SeachUsersPublic } from './__generated__/SeachUsersPublic'
 
 const SearchUser = () => {
+  const viewer = useContext(ViewerContext)
   const router = useRouter()
   const q = getQuery({ router, key: 'q' })
 
-  const { data, loading, fetchMore, refetch } = useQuery<SeachUsers>(
-    SEARCH_USERS,
-    {
-      variables: { key: q },
-    }
-  )
+  /**
+   * Data Fetching
+   */
+  // public data
+  const {
+    data,
+    loading,
+    fetchMore,
+    refetch: refetchPublic,
+    client,
+  } = usePublicQuery<SeachUsersPublic>(SEARCH_USERS_PUBLIC, {
+    variables: { key: q },
+  })
 
-  usePullToRefresh.Handler(refetch)
-
-  if (loading) {
-    return <Spinner />
-  }
-
+  // pagination
   const connectionPath = 'search'
   const { edges, pageInfo } = data?.search || {}
 
-  if (!edges || edges.length <= 0 || !pageInfo) {
-    return <EmptySearch description={<Translate id="emptySearchResults" />} />
+  // private data
+  const loadPrivate = (publicData?: SeachUsersPublic) => {
+    if (!viewer.id || !publicData) {
+      return
+    }
+
+    const publicIds = (publicData?.search.edges || [])
+      .filter(({ node }) => node.__typename === 'User')
+      .map(({ node }) => node.__typename === 'User' && node.id)
+
+    client.query({
+      query: SEARCH_USERS_PRIVATE,
+      fetchPolicy: 'network-only',
+      variables: { ids: publicIds },
+    })
   }
 
-  const loadMore = () => {
+  // fetch private data for first page
+  useEffect(() => {
+    if (loading || !edges) {
+      return
+    }
+
+    loadPrivate(data)
+  }, [!!edges, viewer.id])
+
+  // load next page
+  const loadMore = async () => {
     analytics.trackEvent('load_more', {
       type: 'search_user',
-      location: edges.length,
+      location: edges?.length || 0,
     })
-    return fetchMore({
+
+    const { data: newData } = await fetchMore({
       variables: {
-        after: pageInfo.endCursor,
+        after: pageInfo?.endCursor,
       },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
@@ -80,10 +85,33 @@ const SearchUser = () => {
           path: connectionPath,
         }),
     })
+
+    loadPrivate(newData)
+  }
+
+  // refetch & pull to refresh
+  const refetch = async () => {
+    const { data: newData } = await refetchPublic()
+    loadPrivate(newData)
+  }
+
+  /**
+   * Render
+   */
+  if (loading) {
+    return <Spinner />
+  }
+
+  if (!edges || edges.length <= 0 || !pageInfo) {
+    return <EmptySearch description={<Translate id="emptySearchResults" />} />
   }
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+    <InfiniteScroll
+      hasNextPage={pageInfo.hasNextPage}
+      loadMore={loadMore}
+      pullToRefresh={refetch}
+    >
       <List hasBorder={false}>
         {edges.map(
           ({ node, cursor }, i) =>

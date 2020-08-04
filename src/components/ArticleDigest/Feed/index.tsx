@@ -17,7 +17,7 @@ import InactiveState from './InactiveState'
 import styles from './styles.css'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
-import { ArticleDigestFeedArticle } from './__generated__/ArticleDigestFeedArticle'
+import { ArticleDigestFeedArticlePublic } from './__generated__/ArticleDigestFeedArticlePublic'
 
 export type ArticleDigestFeedControls = {
   onClick?: () => any
@@ -26,37 +26,49 @@ export type ArticleDigestFeedControls = {
 } & FooterActionsControls
 
 type ArticleDigestFeedProps = {
-  article: ArticleDigestFeedArticle
+  article: ArticleDigestFeedArticlePublic
+  extraHeader?: React.ReactNode
 } & ArticleDigestFeedControls
 
 const fragments = {
-  article: gql`
-    fragment ArticleDigestFeedArticle on Article {
-      id
-      title
-      slug
-      mediaHash
-      articleState: state
-      cover
-      summary
-      author {
+  article: {
+    public: gql`
+      fragment ArticleDigestFeedArticlePublic on Article {
         id
-        userName
-        ...UserDigestMiniUser
+        title
+        slug
+        mediaHash
+        articleState: state
+        cover
+        summary
+        author {
+          id
+          userName
+          ...UserDigestMiniUser
+        }
+        ...CreatedAtArticle
+        ...InactiveStateArticle
+        ...ArticleDigestTitleArticle
+        ...DropdownActionsArticle
+        ...FooterActionsArticlePublic
+        ...FooterActionsArticlePrivate
       }
-      ...CreatedAtArticle
-      ...InactiveStateArticle
-      ...ArticleDigestTitleArticle
-      ...FooterActionsArticle
-      ...DropdownActionsArticle
-    }
-    ${UserDigest.Mini.fragments.user}
-    ${CreatedAt.fragments.article}
-    ${InactiveState.fragments.article}
-    ${ArticleDigestTitle.fragments.article}
-    ${FooterActions.fragments.article}
-    ${DropdownActions.fragments.article}
-  `,
+      ${UserDigest.Mini.fragments.user}
+      ${CreatedAt.fragments.article}
+      ${InactiveState.fragments.article}
+      ${ArticleDigestTitle.fragments.article}
+      ${DropdownActions.fragments.article}
+      ${FooterActions.fragments.article.public}
+      ${FooterActions.fragments.article.private}
+    `,
+    private: gql`
+      fragment ArticleDigestFeedArticlePrivate on Article {
+        id
+        ...FooterActionsArticlePrivate
+      }
+      ${FooterActions.fragments.article.private}
+    `,
+  },
 }
 
 const BaseArticleDigestFeed = ({
@@ -68,6 +80,8 @@ const BaseArticleDigestFeed = ({
   inFollowFeed,
 
   onClick,
+
+  extraHeader,
 }: ArticleDigestFeedProps) => {
   const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
     variables: { id: 'local' },
@@ -84,7 +98,7 @@ const BaseArticleDigestFeed = ({
     page: 'articleDetail',
     article,
   })
-  const containerClass = classNames({
+  const containerClasses = classNames({
     [`mode-${viewMode}`]: !!viewMode,
   })
 
@@ -104,7 +118,8 @@ const BaseArticleDigestFeed = ({
 
   return (
     <Card {...path} spacing={['base', 'base']} onClick={onClick}>
-      <section className={containerClass}>
+      <section className={containerClasses}>
+        {extraHeader}
         <header>
           <section className="left">
             <UserDigest.Mini

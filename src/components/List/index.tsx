@@ -38,13 +38,13 @@ const ListItem: React.FC<ListItemProps> = ({
   className,
   ...restProps
 }) => {
-  const listItemClass = classNames({
+  const listItemClasses = classNames({
     'list-item': true,
     [className]: !!className,
   })
 
   return (
-    <section className={listItemClass} role="listitem" {...restProps}>
+    <section className={listItemClasses} role="listitem" {...restProps}>
       {children}
       <style jsx>{styles}</style>
     </section>
@@ -62,7 +62,7 @@ export const List: React.FC<ListProps> & {
   className,
   ...restProps
 }) => {
-  const listClass = classNames({
+  const listClasses = classNames({
     list: true,
     [`spacing-y-${spacing[0]}`]: !!spacing[0],
     [`spacing-x-${spacing[1]}`]: !!spacing[1],
@@ -71,7 +71,7 @@ export const List: React.FC<ListProps> & {
   })
 
   return (
-    <section className={listClass} role="list" {...restProps}>
+    <section className={listClasses} role="list" {...restProps}>
       {children}
       <style jsx>{styles}</style>
     </section>

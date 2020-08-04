@@ -1,4 +1,5 @@
 import { useLazyQuery } from '@apollo/react-hooks'
+import React from 'react'
 
 import { AvatarSize, UserDigest } from '~/components'
 
@@ -23,7 +24,7 @@ export type CommentProps = {
   comment: FeedCommentPublic & Partial<FeedCommentPrivate>
 } & CommentControls
 
-export const Feed = ({
+export const BaseCommentFeed = ({
   comment,
   avatarSize = 'lg',
   hasUserName,
@@ -82,6 +83,24 @@ export const Feed = ({
   )
 }
 
-Feed.fragments = fragments
+/**
+ * Memoizing
+ */
+type MemoizedCommentFeed = React.MemoExoticComponent<React.FC<CommentProps>> & {
+  fragments: typeof fragments
+}
 
-export default Feed
+const CommentFeed = React.memo(
+  BaseCommentFeed,
+  ({ comment: prevComment }, { comment }) => {
+    return (
+      prevComment.content === comment.content &&
+      prevComment.upvotes === comment.upvotes &&
+      prevComment.downvotes === comment.downvotes
+    )
+  }
+) as MemoizedCommentFeed
+
+CommentFeed.fragments = fragments
+
+export default CommentFeed

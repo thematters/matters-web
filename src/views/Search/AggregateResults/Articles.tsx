@@ -1,51 +1,44 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
 
-import { ArticleDigestTitle, Card, List, Spinner } from '~/components'
+import {
+  ArticleDigestTitle,
+  Card,
+  List,
+  Spinner,
+  usePublicQuery,
+  usePullToRefresh,
+} from '~/components'
 
 import { analytics, getQuery, toPath } from '~/common/utils'
 
+import { SEARCH_AGGREGATE_ARTICLES_PUBLIC } from './gql'
 import styles from './styles.css'
 import ViewMoreButton from './ViewMoreButton'
 
-import { SeachAggregateArticles } from './__generated__/SeachAggregateArticles'
-
-const SEARCH_AGGREGATE_ARTICLES = gql`
-  query SeachAggregateArticles($key: String!) {
-    search(input: { key: $key, type: Article, first: 4 }) {
-      pageInfo {
-        startCursor
-        endCursor
-        hasNextPage
-      }
-      edges {
-        cursor
-        node {
-          ... on Article {
-            ...ArticleDigestTitleArticle
-          }
-        }
-      }
-    }
-  }
-  ${ArticleDigestTitle.fragments.article}
-`
+import { SeachAggregateArticlesPublic } from './__generated__/SeachAggregateArticlesPublic'
 
 const AggregateArticleResults = () => {
   const router = useRouter()
   const q = getQuery({ router, key: 'q' })
 
-  const { data, loading } = useQuery<SeachAggregateArticles>(
-    SEARCH_AGGREGATE_ARTICLES,
-    { variables: { key: q } }
-  )
+  /**
+   * Data Fetching
+   */
+  // public data
+  const { data, loading, refetch } = usePublicQuery<
+    SeachAggregateArticlesPublic
+  >(SEARCH_AGGREGATE_ARTICLES_PUBLIC, { variables: { key: q } })
 
+  const { edges, pageInfo } = data?.search || {}
+
+  usePullToRefresh.Handler(refetch)
+
+  /**
+   * Render
+   */
   if (loading) {
     return <Spinner />
   }
-
-  const { edges, pageInfo } = data?.search || {}
 
   if (!edges || edges.length <= 0 || !pageInfo) {
     return null

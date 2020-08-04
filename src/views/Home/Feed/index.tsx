@@ -1,7 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 import { NetworkStatus } from 'apollo-client'
-import gql from 'graphql-tag'
-import { useContext } from 'react'
+import { useContext, useEffect, useRef } from 'react'
 
 import {
   ArticleDigestFeed,
@@ -9,6 +8,7 @@ import {
   InfiniteScroll,
   List,
   Spinner,
+  usePublicQuery,
   useResponsive,
   ViewerContext,
 } from '~/components'
@@ -18,29 +18,61 @@ import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import Authors from './Authors'
+import { FEED_ARTICLES_PRIVATE, FEED_ARTICLES_PUBLIC } from './gql'
 import SortBy, { SortByType } from './SortBy'
-import styles from './styles.css'
 import Tags from './Tags'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import {
-  HottestFeed,
-  HottestFeed_viewer_recommendation_feed_edges,
-} from './__generated__/HottestFeed'
+  HottestFeedPublic,
+  HottestFeedPublic_viewer_recommendation_feed_edges,
+} from './__generated__/HottestFeedPublic'
 import {
-  NewestFeed,
-  NewestFeed_viewer_recommendation_feed_edges,
-} from './__generated__/NewestFeed'
+  IcymiFeedPublic,
+  IcymiFeedPublic_viewer_recommendation_feed_edges,
+} from './__generated__/IcymiFeedPublic'
+import {
+  NewestFeedPublic,
+  NewestFeedPublic_viewer_recommendation_feed_edges,
+} from './__generated__/NewestFeedPublic'
+import {
+  TopicsFeedPublic,
+  TopicsFeedPublic_viewer_recommendation_feed_edges,
+} from './__generated__/TopicsFeedPublic'
+import {
+  ValuedFeedPublic,
+  ValuedFeedPublic_viewer_recommendation_feed_edges,
+} from './__generated__/ValuedFeedPublic'
+
+type FeedArticlesPublic =
+  | HottestFeedPublic
+  | NewestFeedPublic
+  | IcymiFeedPublic
+  | ValuedFeedPublic
+  | TopicsFeedPublic
 
 type HorizontalFeed = React.FC<{ after?: string; first?: number }>
 
-interface FeedEdge {
+interface HorizontalFeedEdge {
   __typename: 'HorizontalFeed'
   Feed: HorizontalFeed
 }
 
+type FeedEdge =
+  | HorizontalFeedEdge
+  | HottestFeedPublic_viewer_recommendation_feed_edges
+  | IcymiFeedPublic_viewer_recommendation_feed_edges
+  | NewestFeedPublic_viewer_recommendation_feed_edges
+  | TopicsFeedPublic_viewer_recommendation_feed_edges
+  | ValuedFeedPublic_viewer_recommendation_feed_edges
+
 interface FeedLocation {
   [key: number]: HorizontalFeed
+}
+
+interface MainFeedProps {
+  feedSortType: SortByType
+  viewMode: string | null
 }
 
 const horizontalFeeds: FeedLocation = {
@@ -48,123 +80,104 @@ const horizontalFeeds: FeedLocation = {
   5: () => <Authors />,
 }
 
-const feedFragment = gql`
-  fragment FeedArticleConnection on ArticleConnection {
-    pageInfo {
-      startCursor
-      endCursor
-      hasNextPage
-    }
-    edges {
-      cursor
-      node {
-        ...ArticleDigestFeedArticle
-      }
-    }
-  }
-  ${ArticleDigestFeed.fragments.article}
-`
-
-export const queries = {
-  hottest: gql`
-    query ValuedFeed($after: String) {
-      viewer {
-        id
-        recommendation {
-          feed: valued(input: { first: 10, after: $after }) {
-            ...FeedArticleConnection
-          }
-        }
-      }
-    }
-    ${feedFragment}
-  `,
-  newest: gql`
-    query NewestFeed($after: String) {
-      viewer {
-        id
-        recommendation {
-          feed: newest(input: { first: 10, after: $after }) {
-            ...FeedArticleConnection
-          }
-        }
-      }
-    }
-    ${feedFragment}
-  `,
-  icymi: gql`
-    query IcymiFeed($after: String) {
-      viewer {
-        id
-        recommendation {
-          feed: icymi(input: { first: 10, after: $after }) {
-            ...FeedArticleConnection
-          }
-        }
-      }
-    }
-    ${feedFragment}
-  `,
-  topics: gql`
-    query TopicsFeed($after: String) {
-      viewer {
-        id
-        recommendation {
-          feed: topics(input: { first: 10, after: $after }) {
-            ...FeedArticleConnection
-          }
-        }
-      }
-    }
-    ${feedFragment}
-  `,
-}
-
-const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortByType }) => {
+const MainFeed = ({ feedSortType: sortBy, viewMode }: MainFeedProps) => {
+  const viewer = useContext(ViewerContext)
   const isLargeUp = useResponsive('lg-up')
   const isHottestFeed = sortBy === 'hottest'
 
-  const viewer = useContext(ViewerContext)
+  /**
+   * Data Fetching
+   */
+  let query = FEED_ARTICLES_PUBLIC[sortBy]
 
   // split out group b if in hottest feed and user is logged in
-  if (isHottestFeed && viewer.id && viewer.info.group === 'b') {
-    queries.hottest = gql`
-      query HottestFeed($after: String) {
-        viewer {
-          id
-          recommendation {
-            feed: hottest(input: { first: 10, after: $after }) {
-              ...FeedArticleConnection
-            }
-          }
-        }
-      }
-      ${feedFragment}
-    `
+  if (isHottestFeed && (!viewer.id || viewer.info.group !== 'b')) {
+    query = FEED_ARTICLES_PUBLIC.valued
   }
 
+  // public data
   const {
     data,
     error,
     loading,
-    fetchMore: fetchMoreMainFeed,
+    fetchMore,
     networkStatus,
-    refetch,
-  } = useQuery<HottestFeed | NewestFeed>(queries[sortBy], {
+    refetch: refetchPublic,
+    client,
+  } = usePublicQuery<FeedArticlesPublic>(query, {
     notifyOnNetworkStatusChange: true,
   })
 
+  // pagination
   const connectionPath = 'viewer.recommendation.feed'
   const result = data?.viewer?.recommendation.feed
   const { edges, pageInfo } = result || {}
   const isNewLoading = networkStatus === NetworkStatus.loading
 
-  const { data: localCache } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
-    variables: { id: 'local' },
-  })
+  // private data
+  const loadPrivate = (publicData?: FeedArticlesPublic) => {
+    if (!viewer.id || !publicData) {
+      return
+    }
 
-  const { viewMode } = localCache?.clientPreference || { viewMode: 'default' }
+    const publiceEdges = publicData.viewer?.recommendation?.feed.edges || []
+    const publicIds = publiceEdges.map(({ node }) => node.id)
 
+    client.query({
+      query: FEED_ARTICLES_PRIVATE,
+      fetchPolicy: 'network-only',
+      variables: { ids: publicIds },
+    })
+  }
+
+  // fetch private data for first page
+  const fetchedPrviateSortsRef = useRef<SortByType[]>([])
+  useEffect(() => {
+    const fetched = fetchedPrviateSortsRef.current.indexOf(sortBy) >= 0
+    if (loading || !edges || fetched || !viewer.id) {
+      return
+    }
+
+    loadPrivate(data)
+    fetchedPrviateSortsRef.current = [...fetchedPrviateSortsRef.current, sortBy]
+  }, [!!edges, loading, sortBy, viewer.id])
+
+  // load next page
+  const loadMore = async () => {
+    if (loading || isNewLoading) {
+      return
+    }
+
+    analytics.trackEvent('load_more', {
+      type: sortBy,
+      location: edges?.length || 0,
+    })
+
+    const { data: newData } = await fetchMore({
+      variables: {
+        after: pageInfo?.endCursor,
+      },
+      updateQuery: (previousResult, { fetchMoreResult }) =>
+        mergeConnections({
+          oldData: previousResult,
+          newData: fetchMoreResult,
+          path: connectionPath,
+          dedupe: true,
+        }),
+    })
+
+    loadPrivate(newData)
+  }
+
+  // refetch & pull to refresh
+  const refetch = async () => {
+    const { data: newData } = await refetchPublic()
+    loadPrivate(newData)
+  }
+
+  /**
+   * Render
+   */
   if (loading && (!result || isNewLoading)) {
     if (process.browser) {
       window.scrollTo(0, 0)
@@ -181,34 +194,8 @@ const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortByType }) => {
     return <EmptyArticle />
   }
 
-  const loadMore = () => {
-    analytics.trackEvent('load_more', {
-      type: sortBy,
-      location: edges.length,
-    })
-    return fetchMoreMainFeed({
-      variables: {
-        after: pageInfo.endCursor,
-      },
-      // previousResult could be undefined when scrolling before loading finishes, reason unknown
-      updateQuery: (previousResult, { fetchMoreResult }) =>
-        previousResult
-          ? mergeConnections({
-              oldData: previousResult,
-              newData: fetchMoreResult,
-              path: connectionPath,
-              dedupe: true,
-            })
-          : fetchMoreResult,
-    })
-  }
-
   // insert other feeds
-  let mixFeed: Array<
-    | FeedEdge
-    | HottestFeed_viewer_recommendation_feed_edges
-    | NewestFeed_viewer_recommendation_feed_edges
-  > = edges
+  let mixFeed: FeedEdge[] = edges
 
   if (!isLargeUp && isHottestFeed) {
     // get copy
@@ -240,28 +227,28 @@ const MainFeed = ({ feedSortType: sortBy }: { feedSortType: SortByType }) => {
           if (edge.__typename === 'HorizontalFeed') {
             const { Feed } = edge
             return <Feed key={edge.__typename + i} />
-          } else {
-            return (
-              <List.Item key={edge.cursor}>
-                <ArticleDigestFeed
-                  article={edge.node}
-                  onClick={() =>
-                    analytics.trackEvent('click_feed', {
-                      type: sortBy,
-                      styleType:
-                        viewMode === 'default'
-                          ? 'small_cover'
-                          : viewMode === 'compact'
-                          ? 'no_cover'
-                          : 'large_cover',
-                      contentType: 'article',
-                      location: i,
-                    })
-                  }
-                />
-              </List.Item>
-            )
           }
+
+          return (
+            <List.Item key={edge.cursor}>
+              <ArticleDigestFeed
+                article={edge.node}
+                onClick={() =>
+                  analytics.trackEvent('click_feed', {
+                    type: sortBy,
+                    styleType:
+                      viewMode === 'default'
+                        ? 'small_cover'
+                        : viewMode === 'compact'
+                        ? 'no_cover'
+                        : 'large_cover',
+                    contentType: 'article',
+                    location: i,
+                  })
+                }
+              />
+            </List.Item>
+          )
         })}
       </List>
     </InfiniteScroll>
@@ -272,6 +259,7 @@ const HomeFeed = () => {
   const { data, client } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
     variables: { id: 'local' },
   })
+  const { viewMode } = data?.clientPreference || { viewMode: 'default' }
   const { feedSortType } = data?.clientPreference || {
     feedSortType: 'hottest',
   }
@@ -286,13 +274,9 @@ const HomeFeed = () => {
 
   return (
     <>
-      <section className="topbar">
-        <SortBy sortBy={feedSortType as SortByType} setSortBy={setSortBy} />
-      </section>
+      <SortBy sortBy={feedSortType as SortByType} setSortBy={setSortBy} />
 
-      <MainFeed feedSortType={feedSortType as SortByType} />
-
-      <style jsx>{styles}</style>
+      <MainFeed feedSortType={feedSortType as SortByType} viewMode={viewMode} />
     </>
   )
 }

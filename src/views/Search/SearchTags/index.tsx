@@ -1,5 +1,3 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
 
 import {
@@ -9,68 +7,44 @@ import {
   Spinner,
   Tag,
   Translate,
-  usePullToRefresh,
+  usePublicQuery,
 } from '~/components'
 
 import { analytics, getQuery, mergeConnections, toPath } from '~/common/utils'
 
 import EmptySearch from '../EmptySearch'
+import { SEARCH_TAGS_PUBLIC } from './gql'
 
-import { SeachTags } from './__generated__/SeachTags'
-
-const SEARCH_TAGS = gql`
-  query SeachTags($key: String!, $after: String) {
-    search(input: { key: $key, type: Tag, first: 20, after: $after }) {
-      pageInfo {
-        startCursor
-        endCursor
-        hasNextPage
-      }
-      edges {
-        cursor
-        node {
-          ... on Tag {
-            ...DigestTag
-          }
-        }
-      }
-    }
-  }
-  ${Tag.fragments.tag}
-`
+import { SeachTagsPublic } from './__generated__/SeachTagsPublic'
 
 const SearchTag = () => {
   const router = useRouter()
   const q = getQuery({ router, key: 'q' })
 
-  const { data, loading, fetchMore, refetch } = useQuery<SeachTags>(
-    SEARCH_TAGS,
+  /**
+   * Data Fetching
+   */
+  // public data
+  const { data, loading, fetchMore, refetch } = usePublicQuery<SeachTagsPublic>(
+    SEARCH_TAGS_PUBLIC,
     {
       variables: { key: q },
     }
   )
 
-  usePullToRefresh.Handler(refetch)
-
-  if (loading) {
-    return <Spinner />
-  }
-
+  // pagination
   const connectionPath = 'search'
   const { edges, pageInfo } = data?.search || {}
 
-  if (!edges || edges.length <= 0 || !pageInfo) {
-    return null
-  }
-
+  // load next page
   const loadMore = () => {
     analytics.trackEvent('load_more', {
       type: 'search_tag',
-      location: edges.length,
+      location: edges?.length || 0,
     })
     return fetchMore({
       variables: {
-        after: pageInfo.endCursor,
+        after: pageInfo?.endCursor,
       },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
@@ -81,12 +55,27 @@ const SearchTag = () => {
     })
   }
 
+  /**
+   * Render
+   */
+  if (loading) {
+    return <Spinner />
+  }
+
+  if (!edges || edges.length <= 0 || !pageInfo) {
+    return null
+  }
+
   if (edges.length <= 0) {
     return <EmptySearch description={<Translate id="emptySearchResults" />} />
   }
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+    <InfiniteScroll
+      hasNextPage={pageInfo.hasNextPage}
+      loadMore={loadMore}
+      pullToRefresh={refetch}
+    >
       <List>
         {edges.map(
           ({ node, cursor }, i) =>

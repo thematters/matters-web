@@ -56,21 +56,21 @@ const Main: React.FC<MainProps> = ({ aside, bgColor, keepAside, children }) => {
   const isInSearch = router.pathname === PATHS.SEARCH
   const isInDraftDetail = router.pathname === PATHS.ME_DRAFT_DETAIL
 
-  const articleClass = classNames({
+  const articleClasses = classNames({
     'l-col-three-mid': true,
     [`bg-${bgColor}`]: !!bgColor,
     keepAside,
   })
-  const asideClass = classNames({
+  const asideClasses = classNames({
     'l-col-three-right': true,
     'u-lg-down-hide': !keepAside,
   })
 
   return (
     <>
-      <article className={articleClass}>{children}</article>
+      <article className={articleClasses}>{children}</article>
 
-      <aside className={asideClass}>
+      <aside className={asideClasses}>
         {!isInSearch && (
           <section className="u-lg-down-hide">
             <SearchBar />

@@ -8,13 +8,13 @@ interface MenuDividerProps {
 }
 
 const MenuDivider: React.FC<MenuDividerProps> = ({ spacing = 0 }) => {
-  const dividerClass = classNames({
+  const dividerClasses = classNames({
     [`spacing-${spacing}`]: !!spacing,
   })
 
   return (
     <>
-      <hr className={dividerClass} />
+      <hr className={dividerClasses} />
       <style jsx>{styles}</style>
     </>
   )

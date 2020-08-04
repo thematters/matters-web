@@ -1,7 +1,6 @@
-import { useQuery } from '@apollo/react-hooks'
 import { NetworkStatus } from 'apollo-client'
-import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
+import { useContext, useEffect } from 'react'
 
 import {
   ArticleDigestFeed,
@@ -9,69 +8,79 @@ import {
   List,
   Spinner,
   Translate,
-  usePullToRefresh,
+  usePublicQuery,
+  ViewerContext,
 } from '~/components'
 
 import { analytics, getQuery, mergeConnections } from '~/common/utils'
 
 import EmptySearch from '../EmptySearch'
+import { SEARCH_ARTICLES_PRIVATE, SEARCH_ARTICLES_PUBLIC } from './gql'
 
-import { SeachArticles } from './__generated__/SeachArticles'
-
-const SEARCH_ARTICLES = gql`
-  query SeachArticles($key: String!, $first: Int!, $after: String) {
-    search(input: { key: $key, type: Article, first: $first, after: $after }) {
-      pageInfo {
-        startCursor
-        endCursor
-        hasNextPage
-      }
-      edges {
-        cursor
-        node {
-          ... on Article {
-            ...ArticleDigestFeedArticle
-          }
-        }
-      }
-    }
-  }
-  ${ArticleDigestFeed.fragments.article}
-`
+import { SeachArticlesPublic } from './__generated__/SeachArticlesPublic'
 
 const SearchArticles = () => {
+  const viewer = useContext(ViewerContext)
   const router = useRouter()
   const q = getQuery({ router, key: 'q' })
 
-  const { data, loading, fetchMore, networkStatus, refetch } = useQuery<
-    SeachArticles
-  >(SEARCH_ARTICLES, {
+  /**
+   * Data Fetching
+   */
+  // public data
+  const {
+    data,
+    loading,
+    fetchMore,
+    networkStatus,
+    refetch: refetchPublic,
+    client,
+  } = usePublicQuery<SeachArticlesPublic>(SEARCH_ARTICLES_PUBLIC, {
     variables: { key: q, first: 10 },
     notifyOnNetworkStatusChange: true,
   })
   const isNewLoading = networkStatus === NetworkStatus.setVariables
 
-  usePullToRefresh.Handler(refetch)
-
-  if (loading && (!data?.search || isNewLoading)) {
-    return <Spinner />
-  }
-
+  // pagination
   const connectionPath = 'search'
   const { edges, pageInfo } = data?.search || {}
 
-  if (!edges || edges.length <= 0 || !pageInfo) {
-    return <EmptySearch description={<Translate id="emptySearchResults" />} />
+  // private data
+  const loadPrivate = (publicData?: SeachArticlesPublic) => {
+    if (!viewer.id || !publicData) {
+      return
+    }
+
+    const publicIds = (publicData?.search.edges || [])
+      .filter(({ node }) => node.__typename === 'Article')
+      .map(({ node }) => node.__typename === 'Article' && node.id)
+
+    client.query({
+      query: SEARCH_ARTICLES_PRIVATE,
+      fetchPolicy: 'network-only',
+      variables: { ids: publicIds },
+    })
   }
 
-  const loadMore = () => {
+  // fetch private data for first page
+  useEffect(() => {
+    if (loading || !edges) {
+      return
+    }
+
+    loadPrivate(data)
+  }, [!!edges, viewer.id])
+
+  // load next page
+  const loadMore = async () => {
     analytics.trackEvent('load_more', {
       type: 'search_article',
-      location: edges.length,
+      location: edges?.length || 0,
     })
-    return fetchMore({
+
+    const { data: newData } = await fetchMore({
       variables: {
-        after: pageInfo.endCursor,
+        after: pageInfo?.endCursor,
       },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
@@ -80,10 +89,33 @@ const SearchArticles = () => {
           path: connectionPath,
         }),
     })
+
+    loadPrivate(newData)
+  }
+
+  // refetch & pull to refresh
+  const refetch = async () => {
+    const { data: newData } = await refetchPublic()
+    loadPrivate(newData)
+  }
+
+  /**
+   * Render
+   */
+  if (loading && (!data?.search || isNewLoading)) {
+    return <Spinner />
+  }
+
+  if (!edges || edges.length <= 0 || !pageInfo) {
+    return <EmptySearch description={<Translate id="emptySearchResults" />} />
   }
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+    <InfiniteScroll
+      hasNextPage={pageInfo.hasNextPage}
+      loadMore={loadMore}
+      pullToRefresh={refetch}
+    >
       <List>
         {edges.map(
           ({ node, cursor }, i) =>

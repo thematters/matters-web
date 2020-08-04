@@ -1,4 +1,3 @@
-import { useQuery } from '@apollo/react-hooks'
 import { useRouter } from 'next/router'
 import { useContext, useEffect } from 'react'
 
@@ -7,6 +6,7 @@ import {
   Spinner,
   Title,
   Translate,
+  usePublicQuery,
   usePullToRefresh,
   ViewerContext,
   ViewMoreButton,
@@ -37,9 +37,13 @@ const FeaturedComments = () => {
    * Data Fetching
    */
   // public data
-  const { data, loading, fetchMore, refetch, client } = useQuery<
-    FeaturedCommentsPublic
-  >(FEATURED_COMMENTS_PUBLIC, {
+  const {
+    data,
+    loading,
+    fetchMore,
+    refetch: refetchPublic,
+    client,
+  } = usePublicQuery<FeaturedCommentsPublic>(FEATURED_COMMENTS_PUBLIC, {
     variables: { mediaHash },
     notifyOnNetworkStatusChange: true,
   })
@@ -94,6 +98,11 @@ const FeaturedComments = () => {
     loadPrivate(newData)
   }
 
+  // refetch & pull to refresh
+  const refetch = async () => {
+    const { data: newData } = await refetchPublic()
+    loadPrivate(newData)
+  }
   usePullToRefresh.Handler(refetch)
 
   if (loading && !data) {

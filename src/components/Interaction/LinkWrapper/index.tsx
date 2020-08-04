@@ -30,14 +30,14 @@ export const LinkWrapper: React.FC<LinkWrapperProps> = ({
     return <>{children}</>
   }
 
-  const linkClass = classNames({
+  const linkClasses = classNames({
     [`text-active-${textActiveColor}`]: !!textActiveColor,
   })
 
   return (
     <Link href={href} as={as}>
       <a
-        className={linkClass}
+        className={linkClasses}
         onClick={() => {
           if (onClick) {
             onClick()

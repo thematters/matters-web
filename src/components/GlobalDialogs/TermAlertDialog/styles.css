@@ -10,12 +10,12 @@
   margin-top: var(--spacing-base);
   overflow-y: auto;
   font-size: var(--font-size-sm);
-  border-radius: 0.125rem;
+  border-radius: var(--spacing-xxx-tight);
   -webkit-overflow-scrolling: touch;
 
   &::-webkit-scrollbar-track {
     background-color: rgba(0, 0, 0, 0);
-    border-radius: 0.5rem;
+    border-radius: var(--spacing-x-tight);
   }
 
   &::-webkit-scrollbar {

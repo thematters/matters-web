@@ -1,6 +1,5 @@
-import { useQuery } from '@apollo/react-hooks'
 import { useRouter } from 'next/router'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 
 import {
   ArticleDigestFeed,
@@ -11,11 +10,16 @@ import {
   List,
   Spinner,
   Translate,
+  usePublicQuery,
   usePullToRefresh,
   ViewerContext,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
-import USER_ARTICLES from '~/components/GQL/queries/userArticles'
+import {
+  USER_ARTICLES_PRIVATE,
+  USER_ARTICLES_PUBLIC,
+  VIEWER_ARTICLES,
+} from '~/components/GQL/queries/userArticles'
 
 import { analytics, getQuery, mergeConnections } from '~/common/utils'
 
@@ -25,11 +29,11 @@ import UserTabs from '../UserTabs'
 import styles from './styles.css'
 
 import {
-  UserArticles as UserArticlesTypes,
-  UserArticles_user,
-} from '~/components/GQL/queries/__generated__/UserArticles'
+  UserArticlesPublic,
+  UserArticlesPublic_user,
+} from '~/components/GQL/queries/__generated__/UserArticlesPublic'
 
-const ArticleSummaryInfo = ({ user }: { user: UserArticles_user }) => {
+const ArticleSummaryInfo = ({ user }: { user: UserArticlesPublic_user }) => {
   const { articleCount: articles, totalWordCount: words } = user.status || {
     articleCount: 0,
     totalWordCount: 0,
@@ -56,15 +60,93 @@ const UserArticles = () => {
   const viewer = useContext(ViewerContext)
   const router = useRouter()
   const userName = getQuery({ router, key: 'userName' })
+  const isViewer = viewer.userName === userName
 
-  const { data, loading, error, fetchMore, refetch } = useQuery<
-    UserArticlesTypes
-  >(USER_ARTICLES, { variables: { userName } })
+  let query = USER_ARTICLES_PUBLIC
+  let publicQuery = true
+  if (isViewer) {
+    query = VIEWER_ARTICLES
+    publicQuery = false
+  }
+
+  /**
+   * Data Fetching
+   */
+  // public data
+  const {
+    data,
+    loading,
+    error,
+    fetchMore,
+    refetch: refetchPublic,
+    client,
+  } = usePublicQuery<UserArticlesPublic>(
+    query,
+    {
+      variables: { userName },
+    },
+    { publicQuery }
+  )
+
+  // pagination
+  const connectionPath = 'user.articles'
   const user = data?.user
+  const { edges, pageInfo } = user?.articles || {}
 
+  // private data
+  const loadPrivate = (publicData?: UserArticlesPublic) => {
+    if (!viewer.id || isViewer || !publicData || !user) {
+      return
+    }
+
+    const publiceEdges = publicData.user?.articles?.edges || []
+    const publicIds = publiceEdges.map(({ node }) => node.id)
+
+    client.query({
+      query: USER_ARTICLES_PRIVATE,
+      fetchPolicy: 'network-only',
+      variables: { ids: publicIds },
+    })
+  }
+
+  // fetch private data for first page
+  useEffect(() => {
+    loadPrivate(data)
+  }, [user?.id, viewer.id])
+
+  // load next page
+  const loadMore = async () => {
+    analytics.trackEvent('load_more', {
+      type: 'user_article',
+      location: edges?.length || 0,
+    })
+
+    const { data: newData } = await fetchMore({
+      variables: {
+        after: pageInfo?.endCursor,
+      },
+      updateQuery: (previousResult, { fetchMoreResult }) =>
+        mergeConnections({
+          oldData: previousResult,
+          newData: fetchMoreResult,
+          path: connectionPath,
+        }),
+    })
+
+    loadPrivate(newData)
+  }
+
+  // refetch & pull to refresh
+  const refetch = async () => {
+    const { data: newData } = await refetchPublic()
+    loadPrivate(newData)
+  }
   usePullToRefresh.Register()
   usePullToRefresh.Handler(refetch)
 
+  /**
+   * Render
+   */
   if (loading) {
     return <Spinner />
   }
@@ -77,16 +159,13 @@ const UserArticles = () => {
     return null
   }
 
-  const connectionPath = 'user.articles'
-  const { edges, pageInfo } = user.articles
-
   const CustomHead = () => (
     <Head
       title={{
         zh_hant: `${user.displayName}的創作空間站`,
         zh_hans: `${user.displayName}的创作空间站`,
       }}
-      description={user.info.description || ''}
+      description={user.info.description}
       image={user.info.profileCover || IMAGE_LOGO_192}
     />
   )
@@ -101,23 +180,9 @@ const UserArticles = () => {
     )
   }
 
-  const loadMore = () => {
-    analytics.trackEvent('load_more', {
-      type: 'user_article',
-      location: edges.length,
-    })
-    return fetchMore({
-      variables: {
-        after: pageInfo.endCursor,
-      },
-      updateQuery: (previousResult, { fetchMoreResult }) =>
-        mergeConnections({
-          oldData: previousResult,
-          newData: fetchMoreResult,
-          path: connectionPath,
-        }),
-    })
-  }
+  const articleEdges = edges.filter(
+    ({ node }) => node.articleState === 'active' || viewer.id === node.author.id
+  )
 
   return (
     <>
@@ -129,31 +194,22 @@ const UserArticles = () => {
 
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
         <List>
-          {edges.map(({ node, cursor }, i) => {
-            if (
-              node.articleState !== 'active' &&
-              viewer.id !== node.author.id
-            ) {
-              return null
-            }
-
-            return (
-              <List.Item key={cursor}>
-                <ArticleDigestFeed
-                  article={node}
-                  inUserArticles
-                  onClick={() =>
-                    analytics.trackEvent('click_feed', {
-                      type: 'user_article',
-                      contentType: 'article',
-                      styleType: 'no_cover',
-                      location: i,
-                    })
-                  }
-                />
-              </List.Item>
-            )
-          })}
+          {articleEdges.map(({ node, cursor }, i) => (
+            <List.Item key={cursor}>
+              <ArticleDigestFeed
+                article={node}
+                inUserArticles
+                onClick={() =>
+                  analytics.trackEvent('click_feed', {
+                    type: 'user_article',
+                    contentType: 'article',
+                    styleType: 'no_cover',
+                    location: i,
+                  })
+                }
+              />
+            </List.Item>
+          ))}
         </List>
       </InfiniteScroll>
     </>

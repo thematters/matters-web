@@ -1,5 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
+import { useContext, useEffect } from 'react'
 
 import {
   Button,
@@ -8,45 +7,68 @@ import {
   Spinner,
   TextIcon,
   Translate,
+  usePublicQuery,
   UserDigest,
+  ViewerContext,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
 import { analytics } from '~/common/utils'
 
 import SectionHeader from '../../SectionHeader'
+import { SIDEBAR_AUTHORS_PRIVATE, SIDEBAR_AUTHORS_PUBLIC } from './gql'
+import styles from './styles.css'
 
-import { SidebarAuthors } from './__generated__/SidebarAuthors'
-
-const SIDEBAR_AUTHORS = gql`
-  query SidebarAuthors {
-    viewer {
-      id
-      recommendation {
-        authors(
-          input: { first: 5, filter: { random: true, followed: false } }
-        ) {
-          edges {
-            cursor
-            node {
-              ...UserDigestRichUserPublic
-              ...UserDigestRichUserPrivate
-            }
-          }
-        }
-      }
-    }
-  }
-  ${UserDigest.Rich.fragments.user.public}
-  ${UserDigest.Rich.fragments.user.private}
-`
+import { SidebarAuthorsPublic } from './__generated__/SidebarAuthorsPublic'
 
 const Authors = () => {
-  const { data, loading, error, refetch } = useQuery<SidebarAuthors>(
-    SIDEBAR_AUTHORS,
-    { notifyOnNetworkStatusChange: true }
-  )
+  const viewer = useContext(ViewerContext)
+
+  /**
+   * Data Fetching
+   */
+  // public data
+  const {
+    data,
+    loading,
+    error,
+    refetch: refetchPublic,
+    client,
+  } = usePublicQuery<SidebarAuthorsPublic>(SIDEBAR_AUTHORS_PUBLIC, {
+    notifyOnNetworkStatusChange: true,
+  })
   const edges = data?.viewer?.recommendation.authors.edges
+
+  // private data
+  const loadPrivate = (publicData?: SidebarAuthorsPublic) => {
+    if (!viewer.id || !publicData) {
+      return
+    }
+
+    const publiceEdges = publicData?.viewer?.recommendation.authors.edges || []
+    const publicIds = publiceEdges.map(({ node }) => node.id)
+
+    client.query({
+      query: SIDEBAR_AUTHORS_PRIVATE,
+      fetchPolicy: 'network-only',
+      variables: { ids: publicIds },
+    })
+  }
+
+  // fetch private data for first page
+  useEffect(() => {
+    if (loading || !edges) {
+      return
+    }
+
+    loadPrivate(data)
+  }, [!!edges, viewer.id])
+
+  // refetch
+  const refetch = async () => {
+    const { data: newData } = await refetchPublic()
+    loadPrivate(newData)
+  }
 
   if (error) {
     return <QueryError error={error} />
@@ -57,7 +79,7 @@ const Authors = () => {
   }
 
   return (
-    <section>
+    <section className="container">
       <SectionHeader
         type="authors"
         rightButton={
@@ -65,7 +87,7 @@ const Authors = () => {
             size={[null, '1.25rem']}
             spacing={[0, 'xtight']}
             bgActiveColor="grey-lighter"
-            onClick={() => refetch()}
+            onClick={refetch}
           >
             <TextIcon
               icon={<IconReload size="xs" />}
@@ -87,8 +109,10 @@ const Authors = () => {
             <List.Item key={cursor}>
               <UserDigest.Rich
                 user={node}
-                spacing={['tight', 0]}
+                spacing={['xtight', 'xtight']}
                 bgColor="none"
+                bgActiveColor="grey-lighter"
+                borderRadius="xtight"
                 onClick={() =>
                   analytics.trackEvent('click_feed', {
                     type: 'authors',
@@ -103,6 +127,8 @@ const Authors = () => {
           ))}
         </List>
       )}
+
+      <style jsx>{styles}</style>
     </section>
   )
 }

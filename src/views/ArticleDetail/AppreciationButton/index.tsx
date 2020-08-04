@@ -84,25 +84,14 @@ const AppreciationButton = ({ article }: AppreciationButtonProps) => {
   const [amount, setAmount] = useState(0)
   const [superLiked, setSuperLiked] = useState(false)
   const [sendAppreciation] = useMutation<AppreciateArticle>(APPRECIATE_ARTICLE)
+  const hasAppreciate = article.hasAppreciate
   const limit = article.appreciateLimit
   const left =
     (typeof article.appreciateLeft === 'number' ? article.appreciateLeft : 5) -
     amount
   const canSuperLike = article.canSuperLike
   const total = article.appreciationsReceivedTotal + amount
-  const appreciatedCount = limit - left
-
-  // UI
-  const isReachLimit = left <= 0
-  const isMe = article.author.id === viewer.id
-  const readCivicLikerDialog =
-    viewer.isCivicLiker || data?.clientPreference.readCivicLikerDialog
-  const isSuperLike = viewer.isCivicLiker && isReachLimit
-  const canAppreciate =
-    (!isReachLimit && !isMe && !viewer.isArchived && viewer.liker.likerId) ||
-    canSuperLike
-
-  // bundle appreciations
+  const appreciatedCount = hasAppreciate || amount ? limit - left : 0
   const [debouncedSendAppreciation] = useDebouncedCallback(async () => {
     try {
       await sendAppreciation({
@@ -127,42 +116,74 @@ const AppreciationButton = ({ article }: AppreciationButtonProps) => {
 
     setAmount(0)
   }, APPRECIATE_DEBOUNCE)
-
-  const appreciate = async () => {
+  const sendSuperLike = async () => {
+    try {
+      await sendAppreciation({
+        variables: {
+          id: article.id,
+          amount,
+          token,
+          superLike: true,
+        },
+        optimisticResponse: {
+          appreciateArticle: {
+            id: article.id,
+            canSuperLike: false,
+            __typename: 'Article',
+          },
+        },
+      })
+    } catch (e) {
+      setSuperLiked(false)
+      console.error(e)
+    }
+  }
+  const appreciate = () => {
     if (isSuperLike && canSuperLike) {
       setSuperLiked(true)
-
-      try {
-        await sendAppreciation({
-          variables: {
-            id: article.id,
-            amount,
-            token,
-            superLike: true,
-          },
-          optimisticResponse: {
-            appreciateArticle: {
-              id: article.id,
-              canSuperLike: false,
-              __typename: 'Article',
-            },
-          },
-        })
-      } catch (e) {
-        setSuperLiked(false)
-        console.error(e)
-      }
+      sendSuperLike()
     } else {
       setAmount(amount + 1)
       debouncedSendAppreciation()
     }
   }
 
+  // UI
+  const isReachLimit = left <= 0
+  const isArticleAuthor = article.author.id === viewer.id
+  const readCivicLikerDialog =
+    viewer.isCivicLiker || data?.clientPreference.readCivicLikerDialog
+  const isSuperLike = viewer.isCivicLiker && isReachLimit
+  const canAppreciate =
+    (!isReachLimit &&
+      !isArticleAuthor &&
+      !viewer.isArchived &&
+      viewer.liker.likerId) ||
+    canSuperLike
+
   /**
    * Anonymous
    */
   if (!viewer.isAuthed) {
     return <AnonymousButton total={total} />
+  }
+
+  /**
+   * Article Author
+   */
+  if (isArticleAuthor) {
+    return (
+      <Tooltip
+        content={
+          <Translate zh_hant="去讚賞其他用戶吧" zh_hans="去赞赏其他用户吧" />
+        }
+        zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
+      >
+        <span>
+          <AppreciateButton disabled total={total} />
+        </span>
+      </Tooltip>
+    )
   }
 
   /**
@@ -175,7 +196,7 @@ const AppreciationButton = ({ article }: AppreciationButtonProps) => {
   /**
    * Appreciate Button
    */
-  if (canAppreciate) {
+  if (canAppreciate || (!hasAppreciate && amount <= 0)) {
     return (
       <AppreciateButton
         onClick={appreciate}
@@ -227,17 +248,7 @@ const AppreciationButton = ({ article }: AppreciationButtonProps) => {
   return (
     <Tooltip
       content={
-        <Translate
-          {...(isMe
-            ? {
-                zh_hant: '去讚賞其他用戶吧',
-                zh_hans: '去赞赏其他用户吧',
-              }
-            : {
-                zh_hant: '你還沒有讚賞權限',
-                zh_hans: '你还没有赞赏权限',
-              })}
-        />
+        <Translate zh_hant="你還沒有讚賞權限" zh_hans="你还没有赞赏权限" />
       }
       zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
     >

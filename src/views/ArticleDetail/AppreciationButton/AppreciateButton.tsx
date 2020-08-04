@@ -29,7 +29,7 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
   superLiked,
 }) => {
   const iconRef = useRef<HTMLButtonElement>(null)
-  const buttonClass = classNames({
+  const buttonClasses = classNames({
     'appreciate-button': true,
     isSuperLike,
     superLiked,
@@ -37,7 +37,7 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
 
   return (
     <button
-      className={buttonClass}
+      className={buttonClasses}
       type="button"
       disabled={disabled}
       onClick={() => {

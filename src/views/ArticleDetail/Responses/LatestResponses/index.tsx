@@ -1,4 +1,3 @@
-import { useQuery } from '@apollo/react-hooks'
 import jump from 'jump.js'
 import _differenceBy from 'lodash/differenceBy'
 import _get from 'lodash/get'
@@ -13,6 +12,7 @@ import {
   Title,
   Translate,
   useEventListener,
+  usePublicQuery,
   usePullToRefresh,
   useResponsive,
   ViewerContext,
@@ -75,9 +75,14 @@ const LatestResponses = () => {
    * Data Fetching
    */
   // public data
-  const { data, loading, error, fetchMore, refetch, client } = useQuery<
-    LatestResponsesPublic
-  >(LATEST_RESPONSES_PUBLIC, {
+  const {
+    data,
+    loading,
+    error,
+    fetchMore,
+    refetch: refetchPublic,
+    client,
+  } = usePublicQuery<LatestResponsesPublic>(LATEST_RESPONSES_PUBLIC, {
     variables: {
       mediaHash,
       first: RESPONSES_COUNT,
@@ -145,7 +150,11 @@ const LatestResponses = () => {
     loadPrivate(newData)
   }
 
-  // refetch when comment is sent or pull down
+  // refetch & pull to refresh
+  const refetch = async () => {
+    const { data: newData } = await refetchPublic()
+    loadPrivate(newData)
+  }
   useEventListener(REFETCH_RESPONSES, refetch)
   usePullToRefresh.Handler(refetch)
 

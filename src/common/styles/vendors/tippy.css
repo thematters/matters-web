@@ -144,7 +144,7 @@
 .tippy-box[data-theme='dropdown'] {
   color: var(--color-black);
   background: var(--color-white);
-  border-radius: 0.5rem;
+  border-radius: var(--spacing-x-tight);
   box-shadow: var(--shadow-dark);
 }
 
@@ -154,7 +154,7 @@
   font-size: var(--font-size-sm);
   color: var(--color-white);
   background: var(--color-black);
-  border-radius: 0.25rem;
+  border-radius: var(--spacing-xx-tight);
   box-shadow: var(--shadow-dark);
 }
 

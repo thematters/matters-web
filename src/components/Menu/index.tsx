@@ -15,14 +15,14 @@ export const Menu: React.FC<MenuProps> & {
   Divider: typeof Divider
   Header: typeof Header
 } = ({ width, spacingY = 'xtight', children }) => {
-  const menuClass = classNames({
+  const menuClasses = classNames({
     menu: true,
     [`width-${width}`]: !!width,
     [`spacing-y-${spacingY}`]: !!spacingY,
   })
 
   return (
-    <ul className={menuClass} role="menu">
+    <ul className={menuClasses} role="menu">
       {children}
       <style jsx>{styles}</style>
     </ul>
