@@ -48,7 +48,10 @@ const DynamicFingerprint = dynamic(() => import('~/components/Fingerprint'), {
  */
 // Sentry
 import('@sentry/browser').then((Sentry) => {
-  Sentry.init({ dsn: process.env.NEXT_PUBLIC_SENTRY_DSN || '' })
+  Sentry.init({
+    dsn: process.env.NEXT_PUBLIC_SENTRY_DSN || '',
+    ignoreErrors: ['Timeout', 'Network error'],
+  })
 })
 
 const Root = ({
