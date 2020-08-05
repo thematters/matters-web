@@ -30,9 +30,13 @@ import { AppreciationButtonArticlePublic } from './__generated__/AppreciationBut
 interface AppreciationButtonProps {
   article: AppreciationButtonArticlePublic &
     Partial<AppreciationButtonArticlePrivate>
+  privateFetched: boolean
 }
 
-const AppreciationButton = ({ article }: AppreciationButtonProps) => {
+const AppreciationButton = ({
+  article,
+  privateFetched,
+}: AppreciationButtonProps) => {
   const router = useRouter()
   const mediaHash = getQuery({ router, key: 'mediaHash' })
   const viewer = useContext(ViewerContext)
@@ -47,14 +51,13 @@ const AppreciationButton = ({ article }: AppreciationButtonProps) => {
    */
   const [amount, setAmount] = useState(0)
   const [sendAppreciation] = useMutation<AppreciateArticle>(APPRECIATE_ARTICLE)
-  const hasAppreciate = article.hasAppreciate
   const limit = article.appreciateLimit
   const left =
     (typeof article.appreciateLeft === 'number'
       ? article.appreciateLeft
       : limit) - amount
   const total = article.appreciationsReceivedTotal + amount
-  const appreciatedCount = hasAppreciate || amount ? limit - left : 0
+  const appreciatedCount = limit - left
   const isReachLimit = left <= 0
   const [debouncedSendAppreciation] = useDebouncedCallback(async () => {
     try {
@@ -148,24 +151,7 @@ const AppreciationButton = ({ article }: AppreciationButtonProps) => {
   const appreciate = () => {
     if (isSuperLike) {
       setSuperLiked(true)
-
-      if (canSuperLike) {
-        sendSuperLike()
-      } else {
-        window.dispatchEvent(
-          new CustomEvent(ADD_TOAST, {
-            detail: {
-              color: 'green',
-              content: (
-                <Translate
-                  zh_hant="12 小時後才能再次 Super Like。"
-                  zh_hans="12 小时后才能再次 Super Like。"
-                />
-              ),
-            },
-          })
-        )
-      }
+      sendSuperLike()
     } else {
       setAmount(amount + 1)
       debouncedSendAppreciation()
@@ -177,7 +163,7 @@ const AppreciationButton = ({ article }: AppreciationButtonProps) => {
     viewer.isCivicLiker || data?.clientPreference.readCivicLikerDialog
   const canAppreciate =
     (!isReachLimit && !viewer.isArchived && viewer.liker.likerId) ||
-    canSuperLike
+    (isSuperLike && canSuperLike)
 
   // Anonymous
   if (!viewer.isAuthed) {
@@ -205,8 +191,13 @@ const AppreciationButton = ({ article }: AppreciationButtonProps) => {
     return <SetupLikerIdAppreciateButton total={total} />
   }
 
-  /// Appreciable
-  if (canAppreciate || (!hasAppreciate && amount <= 0)) {
+  // Blocked by private query
+  if (!privateFetched) {
+    return <AppreciateButton total={total} />
+  }
+
+  // Appreciable
+  if (canAppreciate) {
     return (
       <AppreciateButton
         onClick={appreciate}
@@ -234,16 +225,33 @@ const AppreciationButton = ({ article }: AppreciationButtonProps) => {
     )
   }
 
-  // MAX
-  if (!canAppreciate && isReachLimit) {
+  // MAX:SuperLike
+  if (!canAppreciate && isReachLimit && isSuperLike) {
     return (
-      <AppreciateButton
-        count="MAX"
-        total={total}
-        isSuperLike={isSuperLike}
-        superLiked={superLiked}
-      />
+      <Tooltip
+        content={
+          <Translate
+            zh_hant="12 小時後才能再次 Super Like。"
+            zh_hans="12 小时后才能再次 Super Like。"
+          />
+        }
+        zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
+      >
+        <span>
+          <AppreciateButton
+            count="MAX"
+            total={total}
+            isSuperLike={isSuperLike}
+            superLiked={superLiked}
+          />
+        </span>
+      </Tooltip>
     )
+  }
+
+  // MAX
+  if (!canAppreciate && isReachLimit && !isSuperLike) {
+    return <AppreciateButton count="MAX" total={total} />
   }
 
   // Disabled

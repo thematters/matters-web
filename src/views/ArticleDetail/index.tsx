@@ -74,7 +74,6 @@ const ArticleDetail = () => {
   const features = useContext(FeaturesContext)
   const isLargeUp = useResponsive('lg-up')
   const [fixedWall, setFixedWall] = useState(false)
-  // const [showResponses, setShowResponses] = useState(false)
 
   // wall
   const { data: clientPreferenceData } = useQuery<ClientPreference>(
@@ -104,12 +103,13 @@ const ArticleDetail = () => {
   const canEdit = isAuthor && !viewer.isInactive
 
   // fetch private data
-  const loadPrivate = () => {
+  const [privateFetched, setPrivateFetched] = useState(false)
+  const loadPrivate = async () => {
     if (!viewer.id || !article || !article?.mediaHash) {
       return
     }
 
-    client.query({
+    await client.query({
       query: ARTICLE_DETAIL_PRIVATE,
       fetchPolicy: 'network-only',
       variables: {
@@ -117,7 +117,13 @@ const ArticleDetail = () => {
         includeContent: article.state !== 'active' && isAuthor,
       },
     })
+
+    setPrivateFetched(true)
   }
+
+  useEffect(() => {
+    setPrivateFetched(false)
+  }, [mediaHash])
 
   useEffect(() => {
     loadPrivate()
@@ -345,13 +351,6 @@ const ArticleDetail = () => {
 
           {features.payment && <DynamicDonation mediaHash={mediaHash} />}
 
-          {/* <Waypoint
-            bottomOffset={-200}
-            onEnter={() => {
-              setShowResponses(true)
-            }}
-          /> */}
-
           {collectionCount > 0 && (
             <section className="block">
               <Collection article={article} collectionCount={collectionCount} />
@@ -367,7 +366,6 @@ const ArticleDetail = () => {
           />
 
           {!shouldShowWall && (
-            // showResponses &&
             <section className="block">
               <DynamicResponse />
             </section>
@@ -388,6 +386,7 @@ const ArticleDetail = () => {
                 }
               : undefined
           }
+          privateFetched={privateFetched}
         />
 
         {shouldShowWall && (
