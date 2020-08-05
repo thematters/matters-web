@@ -17,7 +17,7 @@
 
 ### Start local dev with Docker
 
-- Environment variables: `cp .env.local.example .env.local`
+- Environment variables: `cp .env.local.example .env`
 - Set command alias: `source bin/dc-alias`
 - Build docker image: `dc build`
 - Run:
