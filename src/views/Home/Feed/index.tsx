@@ -88,12 +88,12 @@ const MainFeed = ({ feedSortType: sortBy, viewMode }: MainFeedProps) => {
   /**
    * Data Fetching
    */
-  let query = FEED_ARTICLES_PUBLIC[sortBy]
+  const query = FEED_ARTICLES_PUBLIC[sortBy]
 
   // split out group b if in hottest feed and user is logged in
-  if (isHottestFeed && (!viewer.id || viewer.info.group !== 'b')) {
-    query = FEED_ARTICLES_PUBLIC.valued
-  }
+  // if (isHottestFeed && (!viewer.id || viewer.info.group !== 'b')) {
+  //   query = FEED_ARTICLES_PUBLIC.valued
+  // }
 
   // public data
   const {
