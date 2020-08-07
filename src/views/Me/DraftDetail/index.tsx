@@ -46,9 +46,7 @@ export const UPDATE_DRAFT = gql`
     putDraft(input: { id: $id, title: $title, content: $content }) {
       id
       title
-      content
       cover
-      slug
       assets {
         id
         type
