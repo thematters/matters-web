@@ -170,7 +170,6 @@ export const Head: React.FC<HeadProps> = (props) => {
 
       {/* DNS */}
       <link rel="dns-prefetch" href="https://www.gstatic.com" />
-      <link rel="dns-prefetch" href="https://cdn.segment.com" />
       <link rel="dns-prefetch" href="https://sentry.matters.one" />
     </NextHead>
   )
