@@ -1,20 +1,22 @@
-import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
 import { Translate } from '~/components'
 import { Avatar } from '~/components/Avatar'
-import { useEventListener } from '~/components/Hook'
 
-import { IMAGE_PIXEL, REFETCH_DONATORS } from '~/common/enums'
+import { IMAGE_PIXEL } from '~/common/enums'
 import { numAbbr } from '~/common/utils'
 
 import styles from './styles.css'
 
-import { ArticleDonators } from './__generated__/ArticleDonators'
+import { DonatorsArticle } from './__generated__/DonatorsArticle'
 
-const ARTICLE_DONATORS = gql`
-  query ArticleDonators($mediaHash: String) {
-    article(input: { mediaHash: $mediaHash }) {
+interface DonatorsProps {
+  article: DonatorsArticle
+}
+
+const fragments = {
+  article: gql`
+    fragment DonatorsArticle on Article {
       id
       transactionsReceivedBy(input: { first: 10, purpose: donation }) {
         totalCount
@@ -29,29 +31,11 @@ const ARTICLE_DONATORS = gql`
         }
       }
     }
-  }
-  ${Avatar.fragments.user}
-`
+    ${Avatar.fragments.user}
+  `,
+}
 
-const Donators = ({ mediaHash }: { mediaHash: string }) => {
-  const { data, loading, refetch } = useQuery<ArticleDonators>(
-    ARTICLE_DONATORS,
-    {
-      variables: { mediaHash },
-    }
-  )
-
-  useEventListener(REFETCH_DONATORS, refetch)
-
-  if (loading) {
-    return null
-  }
-
-  if (!data || !data.article) {
-    return null
-  }
-
-  const { article } = data
+const Donators = ({ article }: DonatorsProps) => {
   const edges = article.transactionsReceivedBy.edges
   const donatorsCount = article.transactionsReceivedBy.totalCount
   const donators = (
@@ -81,5 +65,7 @@ const Donators = ({ mediaHash }: { mediaHash: string }) => {
     </section>
   )
 }
+
+Donators.fragments = fragments
 
 export default Donators
