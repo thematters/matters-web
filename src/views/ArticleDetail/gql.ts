@@ -7,6 +7,7 @@ import FingerprintButton from './FingerprintButton'
 import RelatedArticles from './RelatedArticles'
 import State from './State'
 import TagList from './TagList'
+import Donation from './Donation'
 import Toolbar from './Toolbar'
 
 export const ARTICLE_DETAIL_PUBLIC = gql`
@@ -36,6 +37,7 @@ export const ARTICLE_DETAIL_PUBLIC = gql`
       ...FingerprintArticle
       ...ToolbarArticlePublic
       ...ToolbarArticlePrivate
+      ...DonationArticle
     }
   }
   ${Content.fragments.article}
@@ -47,6 +49,7 @@ export const ARTICLE_DETAIL_PUBLIC = gql`
   ${UserDigest.Rich.fragments.user.private}
   ${Toolbar.fragments.article.public}
   ${Toolbar.fragments.article.private}
+  ${Donation.fragments.article}
 `
 
 export const ARTICLE_DETAIL_PRIVATE = gql`
