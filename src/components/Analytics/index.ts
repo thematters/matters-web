@@ -9,7 +9,6 @@ import { AnalyticsUser } from './__generated__/AnalyticsUser'
 
 declare global {
   interface Window {
-    analytics: SegmentAnalytics.AnalyticsJS & { [key: string]: any }
     gtag: any
     firebaseAnalytics: firebase.analytics.Analytics & {
       logEvent: (
@@ -35,7 +34,6 @@ const handleAnalytics = ({
 
   // if we have an event of type track or page
   if (type === ANALYTIC_TYPES.TRACK || type === ANALYTIC_TYPES.PAGE) {
-    window.analytics[type](...args)
     // GA & firebase tracking
     if (type === ANALYTIC_TYPES.PAGE) {
       const path = window.location.pathname
@@ -53,22 +51,13 @@ const handleAnalytics = ({
   if (type === ANALYTIC_TYPES.IDENTIFY) {
     // logged in
     if (user && 'id' in user && 'info' in user) {
-      const { info, id, userName } = user as AnalyticsUser
-      window.analytics.identify(
-        id,
-        {
-          email: info.email,
-          username: userName,
-        },
-        ...args
-      )
+      const { id } = user as AnalyticsUser
       window.gtag('config', GA_TRACKING_ID, {
         user_id: id,
       })
       window.firebaseAnalytics.setUserId(id, { global: true })
     } else {
       // visitor
-      window.analytics.identify(args)
     }
   }
 }
