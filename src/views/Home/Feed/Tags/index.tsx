@@ -1,7 +1,6 @@
-import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { Slides, Spinner } from '~/components'
+import { Slides, Spinner, usePublicQuery } from '~/components'
 import { QueryError } from '~/components/GQL'
 
 import { analytics } from '~/common/utils'
@@ -31,7 +30,7 @@ const FEED_TAGS = gql`
 `
 
 const TagsFeed = () => {
-  const { data, loading, error } = useQuery<FeedTagsPublic>(FEED_TAGS)
+  const { data, loading, error } = usePublicQuery<FeedTagsPublic>(FEED_TAGS)
   const edges = data?.viewer?.recommendation.tags.edges
 
   if (error) {
