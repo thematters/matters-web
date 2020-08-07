@@ -3,11 +3,11 @@ import gql from 'graphql-tag'
 import { UserDigest } from '~/components/UserDigest'
 
 import Content from './Content'
+import Donation from './Donation'
 import FingerprintButton from './FingerprintButton'
 import RelatedArticles from './RelatedArticles'
 import State from './State'
 import TagList from './TagList'
-import Donation from './Donation'
 import Toolbar from './Toolbar'
 
 export const ARTICLE_DETAIL_PUBLIC = gql`
