@@ -106,7 +106,7 @@ const SideNav = () => {
             placement="right-start"
             appendTo={process.browser ? document.body : undefined}
             offset={[-24, 24]}
-            zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
+            zIndex={Z_INDEX.OVER_STICKY_TABS}
             onShown={hidePopperOnClick}
           >
             <NavListItem
