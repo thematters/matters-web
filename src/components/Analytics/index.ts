@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import _get from 'lodash/get'
 
 import { ANALYTIC_TYPES, ANALYTICS, GA_TRACKING_ID } from '~/common/enums'
 import { deferTry } from '~/common/utils'
@@ -37,11 +38,16 @@ const handleAnalytics = ({
     // GA & firebase tracking
     if (type === ANALYTIC_TYPES.PAGE) {
       const path = window.location.pathname
+      const referrer = _get(args[1], 'page_referrer')
+
       window.gtag('config', GA_TRACKING_ID, {
         page_location: path,
+        page_referrer: referrer,
       })
 
-      window.firebaseAnalytics.logEvent('page_view')
+      window.firebaseAnalytics.logEvent('page_view', {
+        page_referrer: referrer,
+      })
     } else {
       window.firebaseAnalytics.logEvent(args[0], args[1])
     }

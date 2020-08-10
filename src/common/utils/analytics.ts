@@ -18,7 +18,7 @@ export const analytics = {
 
 type EventArgs =
   | [] // identify user
-  | ['page_view'] // pageview
+  | ['page_view', PageViewProp] // pageview
   | ['pull_to_refresh']
   | ['click_feed', ClickFeedProp]
   | ['click_button', ClickButtonProp]
@@ -27,6 +27,10 @@ type EventArgs =
   | ['purchase', PurchaseProp]
   | ['view_add_credit_dialog', ViewDialogProp]
   | ['view_donation_dialog', ViewDialogProp]
+
+interface PageViewProp {
+  page_referrer: string
+}
 
 type ClickFeedProp =
   | ArticleFeedProp
