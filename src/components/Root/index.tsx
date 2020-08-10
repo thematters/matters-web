@@ -15,10 +15,10 @@ import {
   ViewerProvider,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
+import PageViewTracker from '~/components/PageViewTracker'
 import SplashScreen from '~/components/SplashScreen'
 
 import { PATHS } from '~/common/enums'
-import { analytics } from '~/common/utils'
 
 import { ROOT_QUERY_PRIVATE, ROOT_QUERY_PUBLIC } from './gql'
 
@@ -90,20 +90,6 @@ const Root = ({
     fetchPrivateViewer()
   }, [!!data])
 
-  // trackings
-  useEffect(() => {
-    if (!privateFetched) {
-      return
-    }
-    analytics.trackPage()
-  })
-  useEffect(() => {
-    if (!privateFetched) {
-      return
-    }
-    analytics.identifyUser()
-  }, [privateFetched])
-
   /**
    * Render
    */
@@ -122,6 +108,7 @@ const Root = ({
   return (
     <ViewerProvider viewer={viewer} privateFetched={privateFetched}>
       <SplashScreen />
+      <PageViewTracker />
 
       <LanguageProvider>
         <FeaturesProvider official={official}>
