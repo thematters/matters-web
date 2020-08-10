@@ -8,13 +8,6 @@ import { analytics } from '~/common/utils'
 const PageViewTracker = () => {
   const viewer = useContext(ViewerContext)
 
-  const trackPage = () => {
-    if (!viewer.privateFetched) {
-      return
-    }
-    analytics.trackPage()
-  }
-
   // first load
   useEffect(() => {
     if (!viewer.privateFetched) {
@@ -22,17 +15,25 @@ const PageViewTracker = () => {
     }
 
     analytics.identifyUser()
-    trackPage()
+    analytics.trackPage()
   }, [viewer.privateFetched])
 
   // subsequent changes
   useEffect(() => {
+    const trackPage = () => {
+      if (!viewer.privateFetched) {
+        return
+      }
+
+      analytics.trackPage()
+    }
+
     Router.events.on('routeChangeComplete', trackPage)
 
     return () => {
       Router.events.off('routeChangeComplete', trackPage)
     }
-  }, [])
+  }, [viewer.privateFetched])
 
   return null
 }
