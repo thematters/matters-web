@@ -30,6 +30,7 @@ import { getQuery } from '~/common/utils'
 
 import Collection from './Collection'
 import Content from './Content'
+import Donation from './Donation'
 import EditMode from './EditMode'
 import FingerprintButton from './FingerprintButton'
 import {
@@ -54,10 +55,6 @@ const DynamicResponse = dynamic(() => import('./Responses'), {
   ssr: false,
   loading: Spinner,
 })
-const DynamicDonation = dynamic(() => import('./Donation'), {
-  ssr: false,
-})
-
 const EmptyLayout: React.FC = ({ children }) => (
   <Layout.Main>
     <Layout.Header left={<Layout.Header.BackButton />} />
@@ -343,7 +340,7 @@ const ArticleDetail = () => {
             translating={translating}
           />
 
-          {features.payment && <DynamicDonation mediaHash={mediaHash} />}
+          {features.payment && <Donation article={article} />}
 
           {/* <Waypoint
             bottomOffset={-200}

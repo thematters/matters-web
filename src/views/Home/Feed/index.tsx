@@ -90,8 +90,7 @@ const MainFeed = ({ feedSortType: sortBy, viewMode }: MainFeedProps) => {
    */
   let query = FEED_ARTICLES_PUBLIC[sortBy]
 
-  // split out group b if in hottest feed and user is logged in
-  if (isHottestFeed && (!viewer.id || viewer.info.group !== 'b')) {
+  if (isHottestFeed && viewer.id) {
     query = FEED_ARTICLES_PUBLIC.valued
   }
 

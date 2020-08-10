@@ -7,6 +7,10 @@ export const USER_FOLLOWEES_PUBLIC = gql`
     user(input: { userName: $userName }) {
       id
       displayName
+      info {
+        description
+        profileCover
+      }
       followees(input: { first: 20, after: $after }) {
         pageInfo {
           startCursor

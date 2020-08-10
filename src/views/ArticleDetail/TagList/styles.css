@@ -12,6 +12,6 @@ ul {
 
   & li {
     flex-shrink: 0;
-    margin-right: var(--spacing-base);
+    padding-right: var(--spacing-base);
   }
 }

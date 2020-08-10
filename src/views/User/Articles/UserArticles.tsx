@@ -165,7 +165,7 @@ const UserArticles = () => {
         zh_hant: `${user.displayName}的創作空間站`,
         zh_hans: `${user.displayName}的创作空间站`,
       }}
-      description={user.info.description || ''}
+      description={user.info.description}
       image={user.info.profileCover || IMAGE_LOGO_192}
     />
   )

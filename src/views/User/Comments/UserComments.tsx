@@ -19,6 +19,7 @@ import {
 import { QueryError } from '~/components/GQL'
 
 import {
+  analytics,
   filterComments,
   getQuery,
   mergeConnections,
@@ -67,7 +68,7 @@ const UserComments = () => {
           zh_hans: `${user.displayName}发布的评论`,
         }}
         description={user.info.description}
-        image={IMAGE_LOGO_192}
+        image={user.info.profileCover || IMAGE_LOGO_192}
       />
       <UserTabs />
       <BaseUserComments user={user} />
@@ -132,6 +133,11 @@ const BaseUserComments = ({ user }: UserIdUser) => {
 
   // load next page
   const loadMore = async () => {
+    analytics.trackEvent('load_more', {
+      type: 'user_comment',
+      location: edges?.length || 0,
+    })
+
     const { data: newData } = await fetchMore({
       variables: {
         after: pageInfo?.endCursor,

@@ -48,7 +48,6 @@ export const UPDATE_DRAFT = gql`
       title
       content
       cover
-      slug
       assets {
         id
         type
