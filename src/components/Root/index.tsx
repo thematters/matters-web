@@ -14,8 +14,8 @@ import {
   usePublicQuery,
   ViewerProvider,
 } from '~/components'
+import PageViewTracker from '~/components/Analytics/PageViewTracker'
 import { QueryError } from '~/components/GQL'
-import PageViewTracker from '~/components/PageViewTracker'
 import SplashScreen from '~/components/SplashScreen'
 
 import { PATHS } from '~/common/enums'
