@@ -15,6 +15,7 @@ import {
   ViewerProvider,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
+import SplashScreen from '~/components/SplashScreen'
 
 import { PATHS } from '~/common/enums'
 import { analytics } from '~/common/utils'
@@ -114,6 +115,8 @@ const Root = ({
       <LanguageProvider>
         <FeaturesProvider official={official}>
           {shouldApplyLayout ? <Layout>{children}</Layout> : children}
+
+          <SplashScreen />
 
           <Toast.Container />
           <AnalyticsListener user={viewer || {}} />
