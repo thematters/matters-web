@@ -62,14 +62,6 @@ const Root = ({
   client: ApolloClient<InMemoryCache>
   children: React.ReactNode
 }) => {
-  useEffect(() => {
-    analytics.trackPage()
-  })
-
-  useEffect(() => {
-    analytics.identifyUser()
-  }, [])
-
   const router = useRouter()
   const isInAbout = router.pathname === PATHS.ABOUT
   const isInMigration = router.pathname === PATHS.MIGRATION
@@ -98,6 +90,23 @@ const Root = ({
     fetchPrivateViewer()
   }, [!!data])
 
+  // trackings
+  useEffect(() => {
+    if (!privateFetched) {
+      return
+    }
+    analytics.trackPage()
+  })
+  useEffect(() => {
+    if (!privateFetched) {
+      return
+    }
+    analytics.identifyUser()
+  }, [privateFetched])
+
+  /**
+   * Render
+   */
   if (loading) {
     return null
   }
@@ -112,11 +121,11 @@ const Root = ({
 
   return (
     <ViewerProvider viewer={viewer} privateFetched={privateFetched}>
+      <SplashScreen />
+
       <LanguageProvider>
         <FeaturesProvider official={official}>
           {shouldApplyLayout ? <Layout>{children}</Layout> : children}
-
-          <SplashScreen />
 
           <Toast.Container />
           <AnalyticsListener user={viewer || {}} />
