@@ -67,7 +67,7 @@
     "isomorphic-unfetch": "^3.0.0",
     "jump.js": "^1.0.2",
     "lodash": "^4.17.19",
-    "next": "^9.5.1",
+    "next": "^9.5.2",
     "next-with-apollo": "^5.1.0",
     "nprogress": "^0.2.0",
     "number-precision": "^1.5.0",
