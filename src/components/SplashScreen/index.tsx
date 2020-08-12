@@ -1,37 +1,16 @@
-import { useEffect, useState } from 'react'
+import { useContext } from 'react'
 import { RemoveScroll } from 'react-remove-scroll'
 
-import { withIcon } from '~/components'
-
-import { sleep } from '~/common/utils'
+import { ViewerContext, withIcon } from '~/components'
 
 import { ReactComponent as IconSplashScreenLogo } from '@/public/static/icons/splash-scren-logo.svg'
 
 import styles from './styles.css'
 
 const SplashScreen = () => {
-  const [show, setShow] = useState(true)
-  const hide = () => setShow(false)
+  const viewer = useContext(ViewerContext)
 
-  useEffect(() => {
-    if (document.readyState === 'loading') {
-      // loading yet, wait for the event
-      document.addEventListener('DOMContentLoaded', hide)
-    } else {
-      // DOM is ready!
-      const waitThenHide = async () => {
-        await sleep(1000)
-        hide()
-      }
-      waitThenHide()
-    }
-
-    return () => {
-      document.removeEventListener('DOMContentLoaded', hide)
-    }
-  })
-
-  if (!show) {
+  if (viewer.privateFetched) {
     return null
   }
 

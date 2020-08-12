@@ -14,10 +14,11 @@ import {
   usePublicQuery,
   ViewerProvider,
 } from '~/components'
+import PageViewTracker from '~/components/Analytics/PageViewTracker'
 import { QueryError } from '~/components/GQL'
+import SplashScreen from '~/components/SplashScreen'
 
 import { PATHS } from '~/common/enums'
-import { analytics } from '~/common/utils'
 
 import { ROOT_QUERY_PRIVATE, ROOT_QUERY_PUBLIC } from './gql'
 
@@ -48,7 +49,10 @@ const DynamicFingerprint = dynamic(() => import('~/components/Fingerprint'), {
  */
 // Sentry
 import('@sentry/browser').then((Sentry) => {
-  Sentry.init({ dsn: process.env.NEXT_PUBLIC_SENTRY_DSN || '' })
+  Sentry.init({
+    dsn: process.env.NEXT_PUBLIC_SENTRY_DSN || '',
+    ignoreErrors: ['Timeout', 'Network error'],
+  })
 })
 
 const Root = ({
@@ -58,14 +62,6 @@ const Root = ({
   client: ApolloClient<InMemoryCache>
   children: React.ReactNode
 }) => {
-  useEffect(() => {
-    analytics.trackPage()
-  })
-
-  useEffect(() => {
-    analytics.identifyUser()
-  }, [])
-
   const router = useRouter()
   const isInAbout = router.pathname === PATHS.ABOUT
   const isInMigration = router.pathname === PATHS.MIGRATION
@@ -94,6 +90,9 @@ const Root = ({
     fetchPrivateViewer()
   }, [!!data])
 
+  /**
+   * Render
+   */
   if (loading) {
     return null
   }
@@ -108,6 +107,9 @@ const Root = ({
 
   return (
     <ViewerProvider viewer={viewer} privateFetched={privateFetched}>
+      <SplashScreen />
+      <PageViewTracker />
+
       <LanguageProvider>
         <FeaturesProvider official={official}>
           {shouldApplyLayout ? <Layout>{children}</Layout> : children}

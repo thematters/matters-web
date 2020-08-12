@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
+import _random from 'lodash/random'
 
 import {
   Button,
@@ -18,14 +19,14 @@ import styles from './styles.css'
 import { AuthorPicker as AuthorPickerType } from './__generated__/AuthorPicker'
 
 const AUTHOR_PICKER = gql`
-  query AuthorPicker {
+  query AuthorPicker($random: NonNegativeInt) {
     viewer {
       id
       followees(input: { first: 0 }) {
         totalCount
       }
       recommendation {
-        authors(input: { first: 5, filter: { random: true } }) {
+        authors(input: { first: 5, filter: { random: $random } }) {
           edges {
             cursor
             node {
@@ -46,10 +47,15 @@ export const AuthorPicker = ({ title }: { title: React.ReactNode }) => {
     AUTHOR_PICKER,
     {
       notifyOnNetworkStatusChange: true,
+      variables: { random: 0 },
     }
   )
   const edges = data?.viewer?.recommendation.authors.edges || []
   const followeeCount = data?.viewer?.followees.totalCount || 0
+
+  const shuffle = () => {
+    refetch({ random: _random(0, 50) })
+  }
 
   return (
     <section className="container">
@@ -59,7 +65,7 @@ export const AuthorPicker = ({ title }: { title: React.ReactNode }) => {
             size={[null, '1.25rem']}
             spacing={[0, 'xtight']}
             bgActiveColor="grey-lighter"
-            onClick={refetch}
+            onClick={shuffle}
           >
             <TextIcon icon={<IconReload size="sm" />} color="grey">
               <Translate id="shuffle" />
