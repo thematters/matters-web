@@ -77,11 +77,15 @@ const Root = ({
   // viewer
   const [privateFetched, setPrivateFetched] = useState(false)
   const fetchPrivateViewer = async () => {
-    await client.query({
-      query: ROOT_QUERY_PRIVATE,
-      fetchPolicy: 'network-only',
-    })
-    setPrivateFetched(true)
+    try {
+      await client.query({
+        query: ROOT_QUERY_PRIVATE,
+        fetchPolicy: 'network-only',
+      })
+    } catch (e) {
+      console.error(e)
+      setPrivateFetched(true)
+    }
   }
   useEffect(() => {
     if (!data) {
