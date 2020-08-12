@@ -84,8 +84,8 @@ const Root = ({
       })
     } catch (e) {
       console.error(e)
-      setPrivateFetched(true)
     }
+    setPrivateFetched(true)
   }
   useEffect(() => {
     if (!data) {
