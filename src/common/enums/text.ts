@@ -123,6 +123,9 @@ export const TEXT = {
     hintTerm: '我們的用戶協議和隱私政策發生了更改，請閱讀並同意後繼續使用。',
     hintUserDescription: '建議 50 字以內，最長 200 字',
     hintUserName: '4-15 個字元，僅支持英文、數字及下劃線',
+    hintAddTag:
+      '通過添加標籤幫助讀者更好地找到你的作品。如果沒有合適的標籤，你可以創建新的。',
+    hintEditCollection: '關聯自己或他人的作品，幫助讀者更好地發現內容。',
     history: '足跡',
     hkd: '港幣',
     hottestArticles: '熱門作品',
@@ -399,6 +402,9 @@ export const TEXT = {
     hintTerm: '我们的用户协议和隐私政策发生了更改，请阅读并同意后继续使用。',
     hintUserDescription: '建议 50 字以内，最长 200 字',
     hintUserName: '4-15 位，仅支持英文、数字及下划线',
+    hintAddTag:
+      '通过添加标签帮助读者更好地找到你的作品。如果没有合适的标签，你可以创建新的。',
+    hintEditCollection: '关联自己或他人的作品，帮助读者更好地发现内容。',
     history: '足迹',
     hkd: '港币',
     hottestArticles: '热门作品',

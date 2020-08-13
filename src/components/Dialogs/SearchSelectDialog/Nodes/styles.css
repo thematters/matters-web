@@ -1,0 +1,20 @@
+:root {
+  --icon-size: 1.5rem;
+  --icon-spacing-right: var(--spacing-base);
+}
+
+.node {
+  &.selectable {
+    padding-right: calc(var(--icon-spacing-right) + var(--icon-size));
+  }
+}
+
+.icon-select {
+  @mixin inline-flex-center-all;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  padding-right: var(--icon-spacing-right);
+}

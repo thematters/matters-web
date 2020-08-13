@@ -1,28 +1,32 @@
+import gql from 'graphql-tag'
 import { useContext } from 'react'
 
 import {
   Button,
   DropdownDialog,
-  IconAddMedium,
-  IconHashTag,
   IconPen,
-  IconSpinner,
   LanguageContext,
   Menu,
   TextIcon,
   Translate,
+  ViewerContext,
 } from '~/components'
-import { SearchSelectDialog } from '~/components/Dialogs/SearchSelectDialog'
+import {
+  SearchSelectDialog,
+  SearchSelectNode,
+} from '~/components/Dialogs/SearchSelectDialog'
 import { useMutation } from '~/components/GQL'
-import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
+import updateTagArticlesCount from '~/components/GQL/updates/tagArticlesCount'
 
+import { ADD_TOAST, REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
 import { translate } from '~/common/utils'
 
+import AddMyArticlesButton from './AddMyArticlesButton'
+import AddSelectedArticlesButton from './AddSelectedArticlesButton'
 import CreateDraftMenuItem from './CreateDraftMenuItem'
-import TagArticleDialog from './TagArticleDialog'
 
-import { CreateDraft } from '~/components/GQL/mutations/__generated__/CreateDraft'
 import { TagDetailPublic_node_Tag } from '../../__generated__/TagDetailPublic'
+import { AddArticlesTags } from './__generated__/AddArticlesTags'
 
 interface DropdownActionsProps {
   isMaintainer: boolean
@@ -30,50 +34,40 @@ interface DropdownActionsProps {
 }
 
 interface DialogProps {
-  openTagSelectedArticleDialog: () => void
-  openSearchDialog: () => void
+  openAddSelectedArticlesDialog: () => void
+  openAddMyArticlesDialog: () => void
 }
 
 type BaseDropdownActionsProps = DropdownActionsProps & DialogProps
 
+const ADD_ARTICLES_TAGS = gql`
+  mutation AddArticlesTags($id: ID!, $articles: [ID!], $selected: Boolean) {
+    addArticlesTags(
+      input: { id: $id, articles: $articles, selected: $selected }
+    ) {
+      id
+      articles(input: { first: 0, selected: $selected }) {
+        totalCount
+      }
+    }
+  }
+`
+
 const BaseDropdownActions = ({
   isMaintainer,
   tag,
-  openTagSelectedArticleDialog,
-  openSearchDialog,
+  openAddSelectedArticlesDialog,
+  openAddMyArticlesDialog,
 }: BaseDropdownActionsProps) => {
-  const { lang } = useContext(LanguageContext)
-  const [putDraft, { loading }] = useMutation<CreateDraft>(CREATE_DRAFT, {
-    variables: {
-      title: translate({ id: 'untitle', lang }),
-      tags: [tag.content],
-    },
-  })
-
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
     <Menu width={isInDropdown ? 'sm' : undefined}>
       {isMaintainer && (
-        <>
-          <Menu.Item onClick={openTagSelectedArticleDialog}>
-            <TextIcon
-              icon={<IconAddMedium size="md" />}
-              size="md"
-              spacing="base"
-            >
-              <Translate id="tagAddSelectedArticle" />
-            </TextIcon>
-          </Menu.Item>
-          <Menu.Divider spacing="xtight" />
-        </>
+        <AddSelectedArticlesButton onClick={openAddSelectedArticlesDialog} />
       )}
 
-      <CreateDraftMenuItem putDraft={putDraft} />
+      <CreateDraftMenuItem tag={tag} />
 
-      <Menu.Item onClick={openSearchDialog}>
-        <TextIcon icon={<IconHashTag size="md" />} size="md" spacing="base">
-          <Translate id="tagAddArticle" />
-        </TextIcon>
-      </Menu.Item>
+      <AddMyArticlesButton onClick={openAddMyArticlesDialog} />
     </Menu>
   )
 
@@ -99,11 +93,7 @@ const BaseDropdownActions = ({
           aria-haspopup="true"
           ref={ref}
         >
-          <TextIcon
-            icon={loading ? <IconSpinner /> : <IconPen />}
-            weight="md"
-            size="md-s"
-          >
+          <TextIcon icon={<IconPen />} weight="md" size="md-s">
             <Translate id="addArticleTag" />
           </TextIcon>
         </Button>
@@ -113,22 +103,83 @@ const BaseDropdownActions = ({
 }
 
 const DropdownActions = (props: DropdownActionsProps) => {
+  const viewer = useContext(ViewerContext)
+  const { lang } = useContext(LanguageContext)
+  const { tag } = props
+
+  /**
+   * Data
+   */
+  const [add, { loading }] = useMutation<AddArticlesTags>(ADD_ARTICLES_TAGS)
+  const addArticlesToTag = (selected: boolean) => async (
+    articles: SearchSelectNode[]
+  ) => {
+    const articleIds = articles.map((article) => article.id)
+
+    await add({
+      variables: { id: tag.id, articles: articleIds, selected },
+      update: (cache, { data }) => {
+        if (selected) {
+          const newCount = data?.addArticlesTags?.articles?.totalCount || 0
+          const oldCount = tag.articles.totalCount || 0
+          updateTagArticlesCount({
+            cache,
+            id: tag.id,
+            count: newCount - oldCount,
+            type: 'increment',
+          })
+        }
+      },
+    })
+
+    window.dispatchEvent(
+      new CustomEvent(ADD_TOAST, {
+        detail: {
+          color: 'green',
+          content: translate({ id: 'addedArticleTag', lang }),
+          duration: 2000,
+        },
+      })
+    )
+
+    window.dispatchEvent(
+      new CustomEvent(REFETCH_TAG_DETAIL_ARTICLES, {
+        detail: {
+          event: 'add',
+          differences: articles.length,
+        },
+      })
+    )
+  }
+
+  /**
+   * Render
+   */
   return (
     <SearchSelectDialog
       title="tagAddArticle"
-      onSave={(items) => console.log(items)}
+      hint="hintEditCollection"
       searchType="Article"
+      searchFilter={{ authorId: viewer.id }}
+      onSave={addArticlesToTag(false)}
+      saving={loading}
     >
-      {({ open: openSearchDialog }) => (
-        <TagArticleDialog tag={props.tag} forSelected>
-          {({ open: openTagSelectedArticleDialog }) => (
+      {({ open: openAddMyArticlesDialog }) => (
+        <SearchSelectDialog
+          title="tagAddSelectedArticle"
+          hint="hintEditCollection"
+          searchType="Article"
+          onSave={addArticlesToTag(true)}
+          saving={loading}
+        >
+          {({ open: openAddSelectedArticlesDialog }) => (
             <BaseDropdownActions
               {...props}
-              openTagSelectedArticleDialog={openTagSelectedArticleDialog}
-              openSearchDialog={openSearchDialog}
+              openAddSelectedArticlesDialog={openAddSelectedArticlesDialog}
+              openAddMyArticlesDialog={openAddMyArticlesDialog}
             />
           )}
-        </TagArticleDialog>
+        </SearchSelectDialog>
       )}
     </SearchSelectDialog>
   )

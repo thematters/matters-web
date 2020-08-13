@@ -2,10 +2,10 @@ import { useRouter } from 'next/router'
 import { useContext, useEffect } from 'react'
 
 import {
+  EmptySearch,
   InfiniteScroll,
   List,
   Spinner,
-  Translate,
   usePublicQuery,
   UserDigest,
   ViewerContext,
@@ -13,7 +13,6 @@ import {
 
 import { analytics, getQuery, mergeConnections } from '~/common/utils'
 
-import EmptySearch from '../EmptySearch'
 import { SEARCH_USERS_PRIVATE, SEARCH_USERS_PUBLIC } from './gql'
 
 import { SearchUsersPublic } from './__generated__/SearchUsersPublic'
@@ -103,7 +102,7 @@ const SearchUser = () => {
   }
 
   if (!edges || edges.length <= 0 || !pageInfo) {
-    return <EmptySearch description={<Translate id="emptySearchResults" />} />
+    return <EmptySearch />
   }
 
   return (

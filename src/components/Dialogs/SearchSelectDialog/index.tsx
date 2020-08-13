@@ -1,80 +1,134 @@
 import { useState } from 'react'
 
-import { Dialog } from '~/components'
+import { Dialog, Translate } from '~/components'
 
 import { TextId } from '~/common/enums'
 
-import SearchingArea, { SearchType, SelectNode } from './SearchingArea'
+import SearchingArea, {
+  SearchFilter,
+  SearchType,
+  SelectNode,
+} from './SearchingArea'
+import StagingArea, { StagingNode } from './StagingArea'
+import styles from './styles.css'
 
 type Area = 'staging' | 'searching'
 
+export type SearchSelectNode = SelectNode
+
 interface SearchSelectDialogProps {
   title: TextId | React.ReactElement
+  hint: TextId
 
-  stagingNodes?: SelectNode[]
-  onSave: (stagingNodes: SelectNode[]) => void
+  nodes?: SelectNode[]
+  onSave: (nodes: SelectNode[]) => Promise<any>
+  saving?: boolean
 
   searchType: SearchType
+  searchFilter?: SearchFilter
 
   children: ({ open }: { open: () => void }) => React.ReactNode
 }
 
 const BaseSearchSelectDialog = ({
   title,
+  hint,
 
-  stagingNodes: initStagingNodes,
+  nodes,
   onSave,
+  saving,
 
   searchType,
+  searchFilter,
 
   children,
 }: SearchSelectDialogProps) => {
+  const initStagingNodes =
+    nodes?.map((node) => ({ node, selected: true })) || []
+
   // dialog
   const [showDialog, setShowDialog] = useState(true)
   const open = () => {
     setShowDialog(true)
-    setArea('searching')
-    setStagingNodes(initStagingNodes || [])
+    setArea('staging')
+    setStagingNodes(initStagingNodes)
   }
   const close = () => setShowDialog(false)
 
   // area
   const [area, setArea] = useState<Area>('staging')
-  // const isStagingArea = area === 'staging'
-  const isSearchingArea = area === 'searching'
+  const inStagingArea = area === 'staging'
+  const inSearchingArea = area === 'searching'
   const toStagingArea = () => setArea('staging')
   const toSearchingArea = () => setArea('searching')
 
   // data
-  const [stagingNodes, setStagingNodes] = useState<SelectNode[]>(
-    initStagingNodes || []
+  const [stagingNodes, setStagingNodes] = useState<StagingNode[]>(
+    initStagingNodes
   )
-  const addStagingNodes = (node: SelectNode) => {
-    const isExists = stagingNodes.some((n) => n.id === node.id)
+  const addNodeToStaging = (node: SelectNode) => {
+    const isExists = stagingNodes.some(({ node: n }) => n.id === node.id)
 
     if (!isExists) {
-      setStagingNodes([...stagingNodes, node])
+      setStagingNodes([...stagingNodes, { node, selected: true }])
     }
 
     toStagingArea()
   }
+  const toggleSelectStagingNode = (node: SelectNode) => {
+    const newNodes = stagingNodes.map(({ node: n, selected: s }) => {
+      if (n.id === node.id) {
+        return { node, selected: !s }
+      }
 
-  console.log({ stagingNodes, area })
+      return { node: n, selected: s }
+    })
+
+    setStagingNodes(newNodes)
+  }
+  const onClickSave = async () => {
+    await onSave(stagingNodes.map(({ node }) => node))
+    close()
+  }
 
   return (
     <>
       {children({ open })}
 
       <Dialog isOpen={showDialog} onDismiss={close} fixedHeight>
-        <Dialog.Header title={title} close={close} closeTextId="close" />
-
-        <SearchingArea
-          isSearchingArea={isSearchingArea}
-          searchType={searchType}
-          toStagingArea={toStagingArea}
-          toSearchingArea={toSearchingArea}
-          addStagingNodes={addStagingNodes}
+        <Dialog.Header
+          title={title}
+          close={close}
+          closeTextId="close"
+          rightButton={
+            <Dialog.Header.RightButton
+              onClick={onClickSave}
+              text={<Translate id="save" />}
+              loading={saving}
+            />
+          }
         />
+
+        <section className="area">
+          <SearchingArea
+            inSearchingArea={inSearchingArea}
+            searchType={searchType}
+            searchFilter={searchFilter}
+            toStagingArea={toStagingArea}
+            toSearchingArea={toSearchingArea}
+            addNodeToStaging={addNodeToStaging}
+          />
+
+          <StagingArea
+            nodes={stagingNodes}
+            toggleSelectNode={toggleSelectStagingNode}
+            searchType={searchType}
+            hint={hint}
+            inStagingArea={inStagingArea}
+          />
+
+          <style jsx>{styles}</style>
+        </section>
       </Dialog>
     </>
   )

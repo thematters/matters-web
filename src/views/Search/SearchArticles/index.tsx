@@ -4,17 +4,16 @@ import { useContext, useEffect } from 'react'
 
 import {
   ArticleDigestFeed,
+  EmptySearch,
   InfiniteScroll,
   List,
   Spinner,
-  Translate,
   usePublicQuery,
   ViewerContext,
 } from '~/components'
 
 import { analytics, getQuery, mergeConnections } from '~/common/utils'
 
-import EmptySearch from '../EmptySearch'
 import { SEARCH_ARTICLES_PRIVATE, SEARCH_ARTICLES_PUBLIC } from './gql'
 
 import { SearchArticlesPublic } from './__generated__/SearchArticlesPublic'
@@ -107,7 +106,7 @@ const SearchArticles = () => {
   }
 
   if (!edges || edges.length <= 0 || !pageInfo) {
-    return <EmptySearch description={<Translate id="emptySearchResults" />} />
+    return <EmptySearch />
   }
 
   return (
