@@ -15,7 +15,7 @@ import { analytics, getQuery, mergeConnections, toPath } from '~/common/utils'
 import EmptySearch from '../EmptySearch'
 import { SEARCH_TAGS_PUBLIC } from './gql'
 
-import { SeachTagsPublic } from './__generated__/SeachTagsPublic'
+import { SearchTagsPublic } from './__generated__/SearchTagsPublic'
 
 const SearchTag = () => {
   const router = useRouter()
@@ -25,12 +25,11 @@ const SearchTag = () => {
    * Data Fetching
    */
   // public data
-  const { data, loading, fetchMore, refetch } = usePublicQuery<SeachTagsPublic>(
-    SEARCH_TAGS_PUBLIC,
-    {
-      variables: { key: q },
-    }
-  )
+  const { data, loading, fetchMore, refetch } = usePublicQuery<
+    SearchTagsPublic
+  >(SEARCH_TAGS_PUBLIC, {
+    variables: { key: q },
+  })
 
   // pagination
   const connectionPath = 'search'

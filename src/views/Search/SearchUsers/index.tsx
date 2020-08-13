@@ -16,7 +16,7 @@ import { analytics, getQuery, mergeConnections } from '~/common/utils'
 import EmptySearch from '../EmptySearch'
 import { SEARCH_USERS_PRIVATE, SEARCH_USERS_PUBLIC } from './gql'
 
-import { SeachUsersPublic } from './__generated__/SeachUsersPublic'
+import { SearchUsersPublic } from './__generated__/SearchUsersPublic'
 
 const SearchUser = () => {
   const viewer = useContext(ViewerContext)
@@ -33,7 +33,7 @@ const SearchUser = () => {
     fetchMore,
     refetch: refetchPublic,
     client,
-  } = usePublicQuery<SeachUsersPublic>(SEARCH_USERS_PUBLIC, {
+  } = usePublicQuery<SearchUsersPublic>(SEARCH_USERS_PUBLIC, {
     variables: { key: q },
   })
 
@@ -42,7 +42,7 @@ const SearchUser = () => {
   const { edges, pageInfo } = data?.search || {}
 
   // private data
-  const loadPrivate = (publicData?: SeachUsersPublic) => {
+  const loadPrivate = (publicData?: SearchUsersPublic) => {
     if (!viewer.id || !publicData) {
       return
     }
