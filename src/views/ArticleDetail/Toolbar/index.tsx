@@ -20,6 +20,7 @@ import { ToolbarArticlePublic } from './__generated__/ToolbarArticlePublic'
 
 export type ToolbarProps = {
   article: ToolbarArticlePublic & Partial<ToolbarArticlePrivate>
+  privateFetched: boolean
 } & DropdownActionsControls
 
 const fragments = {
@@ -51,14 +52,17 @@ const fragments = {
   },
 }
 
-const Toolbar = ({ article, editArticle }: ToolbarProps) => {
+const Toolbar = ({ article, editArticle, privateFetched }: ToolbarProps) => {
   const isSmallUp = useResponsive('sm-up')
 
   return (
     <section className="toolbar">
       <ReCaptchaProvider action="appreciateArticle">
         <section className="appreciate-button">
-          <AppreciationButton article={article} />
+          <AppreciationButton
+            article={article}
+            privateFetched={privateFetched}
+          />
           {isSmallUp && <Appreciators article={article} />}
         </section>
       </ReCaptchaProvider>

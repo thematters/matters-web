@@ -6,11 +6,7 @@ const ICON_LIKE_EXPLODE = `
 </svg>
 `
 
-export const getRandomFloat = (
-  min: number,
-  max: number,
-  digits: number = 1
-) => {
+const getRandomFloat = (min: number, max: number, digits: number = 1) => {
   return parseFloat(
     (Math.random() * (max - min + 1 / 10 ** digits) + min).toFixed(digits)
   )
