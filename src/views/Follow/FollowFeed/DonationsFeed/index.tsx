@@ -80,7 +80,7 @@ const DonationsArticles = ({ isCompactMode }: { isCompactMode: boolean }) => {
 
   const loadMore = () => {
     analytics.trackEvent('load_more', {
-      type: 'follow',
+      type: 'followee-donated-article',
       location: edges.length,
     })
     return fetchMore({
