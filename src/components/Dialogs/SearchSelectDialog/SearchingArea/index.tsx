@@ -1,10 +1,9 @@
-import { Fragment, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDebounce } from 'use-debounce'
 
 import {
   EmptySearch,
   InfiniteScroll,
-  List,
   Spinner,
   usePublicLazyQuery,
 } from '~/components'
@@ -12,7 +11,7 @@ import {
 import { INPUT_DEBOUNCE } from '~/common/enums'
 import { mergeConnections } from '~/common/utils'
 
-import { SearchSelectArticle, SearchSelectTag, SearchSelectUser } from '../Node'
+import SearchSelectNode from '../SearchSelectNode'
 import styles from '../styles.css'
 import { SELECT_SEARCH } from './gql'
 import SearchInput, { SearchType as SearchInputType } from './SearchInput'
@@ -149,27 +148,13 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
               hasNextPage={!!pageInfo?.hasNextPage}
               loadMore={loadMore}
             >
-              <List>
+              <ul className="nodes">
                 {searchingNodes.map((node) => (
-                  <Fragment key={node.id}>
-                    {node.__typename === 'Article' && (
-                      <SearchSelectArticle
-                        article={node}
-                        onClick={addNodeToStaging}
-                      />
-                    )}
-                    {node.__typename === 'Tag' && (
-                      <SearchSelectTag tag={node} onClick={addNodeToStaging} />
-                    )}
-                    {node.__typename === 'User' && (
-                      <SearchSelectUser
-                        user={node}
-                        onClick={addNodeToStaging}
-                      />
-                    )}
-                  </Fragment>
+                  <li key={node.id}>
+                    <SearchSelectNode node={node} onClick={addNodeToStaging} />
+                  </li>
                 ))}
-              </List>
+              </ul>
             </InfiniteScroll>
           )}
 

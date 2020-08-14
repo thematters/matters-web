@@ -26,6 +26,8 @@ interface SearchSelectDialogProps {
   searchType: SearchType
   searchFilter?: SearchFilter
 
+  draggable?: boolean
+
   children: ({ open }: { open: () => void }) => React.ReactNode
 }
 
@@ -39,6 +41,8 @@ const BaseSearchSelectDialog = ({
 
   searchType,
   searchFilter,
+
+  draggable,
 
   children,
 }: SearchSelectDialogProps) => {
@@ -74,17 +78,7 @@ const BaseSearchSelectDialog = ({
 
     toStagingArea()
   }
-  const toggleSelectStagingNode = (node: SelectNode) => {
-    const newNodes = stagingNodes.map(({ node: n, selected: s }) => {
-      if (n.id === node.id) {
-        return { node, selected: !s }
-      }
 
-      return { node: n, selected: s }
-    })
-
-    setStagingNodes(newNodes)
-  }
   const onClickSave = async () => {
     await onSave(stagingNodes.map(({ node }) => node))
     close()
@@ -119,9 +113,10 @@ const BaseSearchSelectDialog = ({
 
         <StagingArea
           nodes={stagingNodes}
-          toggleSelectNode={toggleSelectStagingNode}
+          setNodes={setStagingNodes}
           hint={hint}
           inStagingArea={inStagingArea}
+          draggable={draggable}
         />
       </Dialog>
     </>
