@@ -10,7 +10,6 @@ import SearchingArea, {
   SelectNode,
 } from './SearchingArea'
 import StagingArea, { StagingNode } from './StagingArea'
-import styles from './styles.css'
 
 type Area = 'staging' | 'searching'
 
@@ -109,26 +108,21 @@ const BaseSearchSelectDialog = ({
           }
         />
 
-        <section className="area">
-          <SearchingArea
-            inSearchingArea={inSearchingArea}
-            searchType={searchType}
-            searchFilter={searchFilter}
-            toStagingArea={toStagingArea}
-            toSearchingArea={toSearchingArea}
-            addNodeToStaging={addNodeToStaging}
-          />
+        <SearchingArea
+          inSearchingArea={inSearchingArea}
+          searchType={searchType}
+          searchFilter={searchFilter}
+          toStagingArea={toStagingArea}
+          toSearchingArea={toSearchingArea}
+          addNodeToStaging={addNodeToStaging}
+        />
 
-          <StagingArea
-            nodes={stagingNodes}
-            toggleSelectNode={toggleSelectStagingNode}
-            searchType={searchType}
-            hint={hint}
-            inStagingArea={inStagingArea}
-          />
-
-          <style jsx>{styles}</style>
-        </section>
+        <StagingArea
+          nodes={stagingNodes}
+          toggleSelectNode={toggleSelectStagingNode}
+          hint={hint}
+          inStagingArea={inStagingArea}
+        />
       </Dialog>
     </>
   )

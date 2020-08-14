@@ -1,16 +1,12 @@
-import { Translate } from '~/components/Context'
+import { Fragment } from 'react'
+
+import { List, Translate } from '~/components'
 
 import { TextId } from '~/common/enums'
 
-import {
-  SearchSelectArticle,
-  SearchSelectArticles,
-  SearchSelectTag,
-  SearchSelectTags,
-  SearchSelectUser,
-  SearchSelectUsers,
-} from '../Nodes'
-import { SearchType, SelectNode } from '../SearchingArea'
+import { SearchSelectArticle, SearchSelectTag, SearchSelectUser } from '../Node'
+import { SelectNode } from '../SearchingArea'
+import areaStyles from '../styles.css'
 import styles from './styles.css'
 
 export interface StagingNode {
@@ -18,69 +14,68 @@ export interface StagingNode {
   selected: boolean
 }
 
-interface SearchingAreaProps {
+interface StagingAreaProps {
   nodes: StagingNode[]
-  searchType: SearchType
   hint: TextId
   inStagingArea: boolean
   toggleSelectNode: (node: SelectNode) => void
 }
 
-const SearchingArea: React.FC<SearchingAreaProps> = ({
+const StagingArea: React.FC<StagingAreaProps> = ({
   nodes,
-  searchType,
   hint,
   inStagingArea,
   toggleSelectNode,
 }) => {
-  const isArticle = searchType === 'Article'
-  const isTag = searchType === 'Tag'
-  const isUser = searchType === 'User'
+  if (!inStagingArea) {
+    return null
+  }
 
-  const filterNodes = (type: SearchType) =>
-    nodes.filter(({ node }) => node.__typename === type)
-
-  /**
-   * Render
-   */
   return (
-    <>
-      {inStagingArea && nodes.length <= 0 && hint && (
+    <section className="area">
+      {nodes.length <= 0 && hint && (
         <section className="hint">
           <Translate id={hint} />
         </section>
       )}
 
-      {inStagingArea && isArticle && (
-        <SearchSelectArticles
-          articles={filterNodes('Article') as SearchSelectArticle[]}
-          onClick={toggleSelectNode}
-          inStagingArea
-          // TODO: load more
-        />
-      )}
-
-      {inStagingArea && isTag && (
-        <SearchSelectTags
-          tags={filterNodes('Tag') as SearchSelectTag[]}
-          onClick={toggleSelectNode}
-          inStagingArea
-          // TODO: load more
-        />
-      )}
-
-      {inStagingArea && isUser && (
-        <SearchSelectUsers
-          users={filterNodes('User') as SearchSelectUser[]}
-          onClick={toggleSelectNode}
-          inStagingArea
-          // TODO: load more
-        />
+      {nodes.length > 0 && (
+        <List>
+          {nodes.map(({ node, selected }) => (
+            <Fragment key={node.id}>
+              {node.__typename === 'Article' && (
+                <SearchSelectArticle
+                  article={node}
+                  selected={selected}
+                  onClick={toggleSelectNode}
+                  inStagingArea
+                />
+              )}
+              {node.__typename === 'Tag' && (
+                <SearchSelectTag
+                  tag={node}
+                  selected={selected}
+                  onClick={toggleSelectNode}
+                  inStagingArea
+                />
+              )}
+              {node.__typename === 'User' && (
+                <SearchSelectUser
+                  user={node}
+                  selected={selected}
+                  onClick={toggleSelectNode}
+                  inStagingArea
+                />
+              )}
+            </Fragment>
+          ))}
+        </List>
       )}
 
       <style jsx>{styles}</style>
-    </>
+      <style jsx>{areaStyles}</style>
+    </section>
   )
 }
 
-export default SearchingArea
+export default StagingArea

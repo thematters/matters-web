@@ -1,18 +1,19 @@
-import { useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { useDebounce } from 'use-debounce'
 
-import { EmptySearch, Spinner, usePublicLazyQuery } from '~/components'
+import {
+  EmptySearch,
+  InfiniteScroll,
+  List,
+  Spinner,
+  usePublicLazyQuery,
+} from '~/components'
 
 import { INPUT_DEBOUNCE } from '~/common/enums'
+import { mergeConnections } from '~/common/utils'
 
-import {
-  SearchSelectArticle,
-  SearchSelectArticles,
-  SearchSelectTag,
-  SearchSelectTags,
-  SearchSelectUser,
-  SearchSelectUsers,
-} from '../Nodes'
+import { SearchSelectArticle, SearchSelectTag, SearchSelectUser } from '../Node'
+import styles from '../styles.css'
 import { SELECT_SEARCH } from './gql'
 import SearchInput, { SearchType as SearchInputType } from './SearchInput'
 
@@ -37,7 +38,6 @@ export type SelectUser = SelectSearch_search_edges_node_User
 interface SearchingAreaProps {
   searchType: SearchType
   searchFilter?: SearchFilter
-  // TODO: searchFilter
   inSearchingArea: boolean
   toStagingArea: () => void
   toSearchingArea: () => void
@@ -53,28 +53,47 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
   toSearchingArea,
   addNodeToStaging,
 }) => {
-  const isArticle = searchType === 'Article'
-  const isTag = searchType === 'Tag'
-  const isUser = searchType === 'User'
-
   // States of Searching
   const [searching, setSearching] = useState(false)
   const [searchingNodes, setSearchingNodes] = useState<SelectNode[]>([])
-  const filterNodes = (type: SearchType) =>
-    searchingNodes
-      .filter((node) => node.__typename === type)
-      .map((node) => ({ node }))
 
   // Data Fetching
   const [searchKey, setSearchKey] = useState('')
   const [debouncedSearchKey] = useDebounce(searchKey, INPUT_DEBOUNCE)
-  const [lazySearch, { data, loading }] = usePublicLazyQuery<SelectSearch>(
-    SELECT_SEARCH
-  )
-  const nodes = data?.search.edges?.map(({ node }) => node) || []
+  const [lazySearch, { data, loading, fetchMore }] = usePublicLazyQuery<
+    SelectSearch
+  >(SELECT_SEARCH)
+
+  // pagination
+  const connectionPath = 'search'
+  const { edges, pageInfo } = data?.search || {}
+
+  // load next page
+  const loadMore = async () => {
+    // analytics.trackEvent('load_more', {
+    //   type: 'search_article',
+    //   location: edges?.length || 0,
+    // })
+
+    fetchMore({
+      variables: {
+        after: pageInfo?.endCursor,
+      },
+      updateQuery: (previousResult, { fetchMoreResult }) =>
+        mergeConnections({
+          oldData: previousResult,
+          newData: fetchMoreResult,
+          path: connectionPath,
+        }),
+    })
+  }
+
+  const nodes = edges?.map(({ node }) => node) || []
   const nodeIds = nodes.map((n) => n.id).join(',')
   const search = (key: string) => {
-    lazySearch({ variables: { key, type: searchType, filter: searchFilter } })
+    lazySearch({
+      variables: { key, type: searchType, filter: searchFilter, first: 10 },
+    })
   }
 
   // handling changes from search input
@@ -119,32 +138,43 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
         onFocus={onSearchInputFocus}
       />
 
-      {inSearchingArea && searching && <Spinner />}
+      {inSearchingArea && (
+        <section className="area">
+          {searching && <Spinner />}
 
-      {inSearchingArea && !searching && nodes.length <= 0 && <EmptySearch />}
+          {!searching && nodes.length <= 0 && <EmptySearch />}
 
-      {inSearchingArea && !searching && isArticle && (
-        <SearchSelectArticles
-          articles={filterNodes('Article') as SearchSelectArticle[]}
-          onClick={addNodeToStaging}
-          // TODO: load more
-        />
-      )}
+          {!searching && nodes.length > 0 && (
+            <InfiniteScroll
+              hasNextPage={!!pageInfo?.hasNextPage}
+              loadMore={loadMore}
+            >
+              <List>
+                {searchingNodes.map((node) => (
+                  <Fragment key={node.id}>
+                    {node.__typename === 'Article' && (
+                      <SearchSelectArticle
+                        article={node}
+                        onClick={addNodeToStaging}
+                      />
+                    )}
+                    {node.__typename === 'Tag' && (
+                      <SearchSelectTag tag={node} onClick={addNodeToStaging} />
+                    )}
+                    {node.__typename === 'User' && (
+                      <SearchSelectUser
+                        user={node}
+                        onClick={addNodeToStaging}
+                      />
+                    )}
+                  </Fragment>
+                ))}
+              </List>
+            </InfiniteScroll>
+          )}
 
-      {inSearchingArea && !searching && isTag && (
-        <SearchSelectTags
-          tags={filterNodes('Tag') as SearchSelectTag[]}
-          onClick={addNodeToStaging}
-          // TODO: load more
-        />
-      )}
-
-      {inSearchingArea && !searching && isUser && (
-        <SearchSelectUsers
-          users={filterNodes('User') as SearchSelectUser[]}
-          onClick={addNodeToStaging}
-          // TODO: load more
-        />
+          <style jsx>{styles}</style>
+        </section>
       )}
     </>
   )

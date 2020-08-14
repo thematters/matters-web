@@ -7,8 +7,18 @@ export const SELECT_SEARCH = gql`
     $key: String!
     $type: SearchTypes!
     $filter: SearchFilter
+    $after: String
+    $first: Int
   ) {
-    search(input: { key: $key, type: $type, first: 5, filter: $filter }) {
+    search(
+      input: {
+        key: $key
+        type: $type
+        filter: $filter
+        after: $after
+        first: $first
+      }
+    ) {
       pageInfo {
         startCursor
         endCursor

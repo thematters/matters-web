@@ -1,3 +1,9 @@
 .area {
-  padding-bottom: var(--spacing-tight);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+
+  @media (--sm-up) {
+    max-height: 50vh;
+    margin-bottom: var(--spacing-tight);
+  }
 }
