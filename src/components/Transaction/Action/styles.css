@@ -1,0 +1,27 @@
+.to {
+  @mixin flex-center-all;
+
+  & .outline {
+    @mixin flex-center-all;
+
+    margin-left: calc(var(--spacing-xx-tight) * -1);
+    border: 2.5px solid var(--color-white);
+    border-radius: 50%;
+  }
+}
+
+.from {
+  @mixin flex-center-all;
+
+  & .outline {
+    @mixin flex-center-all;
+
+    z-index: 1;
+    margin-left: calc(var(--spacing-xx-tight) * -1);
+
+    & :global(svg) {
+      stroke: var(--color-white);
+      stroke-width: 3;
+    }
+  }
+}
