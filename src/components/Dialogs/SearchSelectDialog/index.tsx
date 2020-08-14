@@ -11,6 +11,21 @@ import SearchingArea, {
 } from './SearchingArea'
 import StagingArea, { StagingNode } from './StagingArea'
 
+/**
+ * <SearchSelectDialog> is a dialog component for
+ * searching nodes (article, tag, and user),
+ * select and submit them to the component used it.
+ *
+ * It composed of three main components:
+ *
+ * - <SearchInput>: typing keyword for searching nodes.
+ *
+ * - <SearchingArea>: showing the above search results,
+ *                    click node will add it to the staging area.
+ *
+ * - <StagingArea>: managing staging nodes, selected nodes will be submitted.
+ *
+ */
 type Area = 'staging' | 'searching'
 
 export type SearchSelectNode = SelectNode
