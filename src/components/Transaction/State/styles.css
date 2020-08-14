@@ -1,0 +1,9 @@
+section {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  & :global(span.text) {
+    line-height: 2;
+  }
+}
