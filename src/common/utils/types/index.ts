@@ -55,6 +55,7 @@ export default gql`
     article
     comment
     tag
+    donation
   }
 
   enum ViewMode {
