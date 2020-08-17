@@ -62,7 +62,7 @@ const TagDetailArticles = ({ tagId, selected }: TagArticlesProps) => {
 
   // private data
   const loadPrivate = (publicData?: TagArticlesPublic) => {
-    if (!viewer.id || !publicData) {
+    if (!viewer.isAuthed || !publicData) {
       return
     }
 

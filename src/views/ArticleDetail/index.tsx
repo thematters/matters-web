@@ -102,7 +102,7 @@ const ArticleDetail = () => {
   // fetch private data
   const [privateFetched, setPrivateFetched] = useState(false)
   const loadPrivate = async () => {
-    if (!viewer.id || !article || !article?.mediaHash) {
+    if (!viewer.isAuthed || !article || !article?.mediaHash) {
       return
     }
 

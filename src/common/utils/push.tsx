@@ -84,7 +84,7 @@ export const initializePush = async ({
   const isNotificationGranted =
     window.Notification && Notification.permission === 'granted'
 
-  if (!viewer.id || !isNotificationGranted) {
+  if (!viewer.isAuthed || !isNotificationGranted) {
     return
   }
 

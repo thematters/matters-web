@@ -11,7 +11,7 @@ import {
 const CreateButton = () => {
   const viewer = useContext(ViewerContext)
 
-  if (!viewer.id) {
+  if (!viewer.isAuthed) {
     return null
   }
 
