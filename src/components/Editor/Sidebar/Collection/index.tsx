@@ -32,10 +32,7 @@ const Collection = ({ articles, onEdit, disabled }: CollectionProps) => {
       defaultCollapsed={articles.length <= 0}
     >
       <p className="intro">
-        <Translate
-          zh_hant="關聯自己或他人的作品，幫助讀者更好地發現內容。"
-          zh_hans="关联自己或他人的作品，帮助读者更好地发现内容。"
-        />
+        <Translate id="hintEditCollection" />
       </p>
 
       <section className={containerClasses}>

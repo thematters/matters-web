@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import { ArticleDigestTitle, Tag, UserDigest } from '~/components'
 
 export const SEARCH_AGGREGATE_ARTICLES_PUBLIC = gql`
-  query SeachAggregateArticlesPublic($key: String!) {
+  query SearchAggregateArticlesPublic($key: String!) {
     search(input: { key: $key, type: Article, first: 4 }) {
       pageInfo {
         startCursor
@@ -24,7 +24,7 @@ export const SEARCH_AGGREGATE_ARTICLES_PUBLIC = gql`
 `
 
 export const SEARCH_AGGREGATE_TAGS_PUBLIC = gql`
-  query SeachAggregateTagsPublic($key: String!) {
+  query SearchAggregateTagsPublic($key: String!) {
     search(input: { key: $key, type: Tag, first: 3 }) {
       pageInfo {
         startCursor
@@ -45,7 +45,7 @@ export const SEARCH_AGGREGATE_TAGS_PUBLIC = gql`
 `
 
 export const SEARCH_AGGREGATE_USERS_PUBLIC = gql`
-  query SeachAggregateUsersPublic($key: String!) {
+  query SearchAggregateUsersPublic($key: String!) {
     search(input: { key: $key, type: User, first: 3 }) {
       pageInfo {
         startCursor

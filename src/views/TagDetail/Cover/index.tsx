@@ -26,7 +26,7 @@ const TagCover = ({ tag }: TagCoverProps) => {
 
       <div className={titleClasses}>
         <div className="content">
-          <Tag tag={tag} type="title" />
+          <Tag tag={tag} type="title" disabled />
         </div>
       </div>
 
