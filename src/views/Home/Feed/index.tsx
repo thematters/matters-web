@@ -87,10 +87,14 @@ const MainFeed = ({ feedSortType: sortBy, viewMode }: MainFeedProps) => {
 
   /**
    * Data Fetching
+   *
+   * Hottest Feed:
+   * 1) Logged-in User: Hottest, `article_activity_materialized`
+   * 2) Anonymous User: Valued, `article_value_materialized`
    */
   let query = FEED_ARTICLES_PUBLIC[sortBy]
 
-  if (isHottestFeed && viewer.id) {
+  if (isHottestFeed && !viewer.id) {
     query = FEED_ARTICLES_PUBLIC.valued
   }
 
