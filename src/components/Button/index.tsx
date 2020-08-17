@@ -159,6 +159,7 @@ export const Button: React.FC<ButtonProps> = forwardRef(
       is,
 
       htmlHref,
+      htmlTarget,
       type = 'button',
       className,
       children,
@@ -239,7 +240,7 @@ export const Button: React.FC<ButtonProps> = forwardRef(
     // anchor
     if (htmlHref) {
       return (
-        <a href={htmlHref} {...containerProps}>
+        <a href={htmlHref} target={htmlTarget} {...containerProps}>
           <div className="content" style={contentStyle}>
             <div className="hotarea" style={hotAreaStyle} />
             {children}

@@ -21,6 +21,7 @@ import AppreciateButton from './AppreciateButton'
 import CivicLikerButton from './CivicLikerButton'
 import { APPRECIATE_ARTICLE, fragments } from './gql'
 import SetupLikerIdAppreciateButton from './SetupLikerIdAppreciateButton'
+import ViewSuperLikeButton from './ViewSuperLikeButton'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import { AppreciateArticle } from './__generated__/AppreciateArticle'
@@ -117,6 +118,8 @@ const AppreciationButton = ({
                 zh_hans="你对文章送出了一个 Super Like！"
               />
             ),
+            customButton: <ViewSuperLikeButton />,
+            buttonPlacement: 'center',
           },
         })
       )
@@ -228,24 +231,29 @@ const AppreciationButton = ({
   // MAX:SuperLike
   if (!canAppreciate && isReachLimit && isSuperLike) {
     return (
-      <Tooltip
-        content={
-          <Translate
-            zh_hant="12:00 或 00:00 就可以再次送出 Super Like 啦！"
-            zh_hans="12:00 或 00:00 就可以再次送出 Super Like 啦！"
-          />
-        }
-        zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
-      >
-        <span>
-          <AppreciateButton
-            count="MAX"
-            total={total}
-            isSuperLike={isSuperLike}
-            superLiked={superLiked}
-          />
-        </span>
-      </Tooltip>
+      <AppreciateButton
+        count="MAX"
+        total={total}
+        onClick={() => {
+          window.dispatchEvent(
+            new CustomEvent(ADD_TOAST, {
+              detail: {
+                color: 'green',
+                content: (
+                  <Translate
+                    zh_hant="12:00 或 00:00 就可以再次送出 Super Like 啦！"
+                    zh_hans="12:00 或 00:00 就可以再次送出 Super Like 啦！"
+                  />
+                ),
+                customButton: <ViewSuperLikeButton />,
+                buttonPlacement: 'center',
+              },
+            })
+          )
+        }}
+        isSuperLike={isSuperLike}
+        superLiked={superLiked}
+      />
     )
   }
 
