@@ -9,7 +9,7 @@ import {
 } from '~/components'
 
 import { INPUT_DEBOUNCE } from '~/common/enums'
-import { mergeConnections } from '~/common/utils'
+import { analytics, mergeConnections } from '~/common/utils'
 
 import SearchSelectNode from '../SearchSelectNode'
 import styles from '../styles.css'
@@ -68,11 +68,14 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
   const { edges, pageInfo } = data?.search || {}
 
   // load next page
+  const isArticle = searchType === 'Article'
+  const isTag = searchType === 'Tag'
+  // const isUser = searchType === 'User'
   const loadMore = async () => {
-    // analytics.trackEvent('load_more', {
-    //   type: 'search_article',
-    //   location: edges?.length || 0,
-    // })
+    analytics.trackEvent('load_more', {
+      type: isArticle ? 'search_article' : isTag ? 'search_tag' : 'search_user',
+      location: edges?.length || 0,
+    })
 
     fetchMore({
       variables: {
