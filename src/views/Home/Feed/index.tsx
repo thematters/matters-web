@@ -89,8 +89,8 @@ const MainFeed = ({ feedSortType: sortBy, viewMode }: MainFeedProps) => {
    * Data Fetching
    *
    * Hottest Feed:
-   * 1) Logged-in User: Hottest, `article_value_materialized`
-   * 2) Anonymous User: Valued, `article_activity_materialized`
+   * 1) Logged-in User: Hottest, `article_activity_materialized`
+   * 2) Anonymous User: Valued, `article_value_materialized`
    */
   let query = FEED_ARTICLES_PUBLIC[sortBy]
 
