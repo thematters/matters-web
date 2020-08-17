@@ -5,6 +5,7 @@ import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
 import ArticlesFeed from './ArticlesFeed'
 import CommentsFeed from './CommentsFeed'
+import DonationsFeed from './DonationsFeed'
 import FeedType, { FollowFeedType } from './FeedType'
 import TagsFeed from './TagsFeed'
 
@@ -38,6 +39,7 @@ const FollowFeed = () => {
       {followFeedType === 'article' && <ArticlesFeed />}
       {followFeedType === 'comment' && <CommentsFeed />}
       {followFeedType === 'tag' && <TagsFeed />}
+      {followFeedType === 'donation' && <DonationsFeed />}
     </>
   )
 }

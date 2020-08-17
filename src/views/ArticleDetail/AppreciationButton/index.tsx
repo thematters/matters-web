@@ -1,5 +1,4 @@
 import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
 import { useContext, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
@@ -14,12 +13,13 @@ import { useMutation } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import updateAppreciation from '~/components/GQL/updates/appreciation'
 
-import { APPRECIATE_DEBOUNCE, Z_INDEX } from '~/common/enums'
+import { ADD_TOAST, APPRECIATE_DEBOUNCE, Z_INDEX } from '~/common/enums'
 import { getQuery } from '~/common/utils'
 
 import AnonymousButton from './AnonymousButton'
 import AppreciateButton from './AppreciateButton'
 import CivicLikerButton from './CivicLikerButton'
+import { APPRECIATE_ARTICLE, fragments } from './gql'
 import SetupLikerIdAppreciateButton from './SetupLikerIdAppreciateButton'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
@@ -30,39 +30,13 @@ import { AppreciationButtonArticlePublic } from './__generated__/AppreciationBut
 interface AppreciationButtonProps {
   article: AppreciationButtonArticlePublic &
     Partial<AppreciationButtonArticlePrivate>
+  privateFetched: boolean
 }
 
-const fragments = {
-  article: {
-    public: gql`
-      fragment AppreciationButtonArticlePublic on Article {
-        id
-        author {
-          id
-        }
-        appreciationsReceivedTotal
-        appreciateLimit
-      }
-    `,
-    private: gql`
-      fragment AppreciationButtonArticlePrivate on Article {
-        id
-        hasAppreciate
-        appreciateLeft
-      }
-    `,
-  },
-}
-
-const APPRECIATE_ARTICLE = gql`
-  mutation AppreciateArticle($id: ID!, $amount: Int!, $token: String!) {
-    appreciateArticle(input: { id: $id, amount: $amount, token: $token }) {
-      id
-    }
-  }
-`
-
-const AppreciationButton = ({ article }: AppreciationButtonProps) => {
+const AppreciationButton = ({
+  article,
+  privateFetched,
+}: AppreciationButtonProps) => {
   const router = useRouter()
   const mediaHash = getQuery({ router, key: 'mediaHash' })
   const viewer = useContext(ViewerContext)
@@ -72,19 +46,27 @@ const AppreciationButton = ({ article }: AppreciationButtonProps) => {
     variables: { id: 'local' },
   })
 
-  // bundle appreciations
+  /**
+   * Normal Appreciation
+   */
   const [amount, setAmount] = useState(0)
   const [sendAppreciation] = useMutation<AppreciateArticle>(APPRECIATE_ARTICLE)
-  const hasAppreciate = article.hasAppreciate
   const limit = article.appreciateLimit
-  const left = (article.appreciateLeft || 0) - amount
-
+  const left =
+    (typeof article.appreciateLeft === 'number'
+      ? article.appreciateLeft
+      : limit) - amount
   const total = article.appreciationsReceivedTotal + amount
-  const appreciatedCount = hasAppreciate || amount ? limit - left : 0
+  const appreciatedCount = limit - left
+  const isReachLimit = left <= 0
   const [debouncedSendAppreciation] = useDebouncedCallback(async () => {
     try {
       await sendAppreciation({
-        variables: { id: article.id, amount, token },
+        variables: {
+          id: article.id,
+          amount,
+          token,
+        },
         update: (cache) => {
           updateAppreciation({
             cache,
@@ -101,32 +83,94 @@ const AppreciationButton = ({ article }: AppreciationButtonProps) => {
 
     setAmount(0)
   }, APPRECIATE_DEBOUNCE)
-  const appreciate = () => {
-    setAmount(amount + 1)
-    debouncedSendAppreciation()
+
+  /**
+   * SuperLike
+   */
+  const [superLiked, setSuperLiked] = useState(false)
+  const canSuperLike = article.canSuperLike
+  const isSuperLike = viewer.isCivicLiker && isReachLimit
+  const sendSuperLike = async () => {
+    try {
+      await sendAppreciation({
+        variables: {
+          id: article.id,
+          amount,
+          token,
+          superLike: true,
+        },
+        optimisticResponse: {
+          appreciateArticle: {
+            id: article.id,
+            canSuperLike: false,
+            __typename: 'Article',
+          },
+        },
+      })
+      window.dispatchEvent(
+        new CustomEvent(ADD_TOAST, {
+          detail: {
+            color: 'green',
+            content: (
+              <Translate
+                zh_hant="你對文章送出了一個 Super Like！"
+                zh_hans="你对文章送出了一个 Super Like！"
+              />
+            ),
+          },
+        })
+      )
+    } catch (e) {
+      setSuperLiked(false)
+      console.error(e)
+    }
   }
 
-  // UI
-  const isReachLimit = left <= 0
+  /**
+   * Render
+   *
+   * Anonymous:
+   *   1) Show login toast on click
+   *
+   * Article Author:
+   *   1) Disabled, show tooltip on hover
+   *
+   * No LikerID:
+   *   1) Show Setup LikerID modal on click
+   *
+   * Non-Civic Liker:
+   *   1) Allow to appreciate 5 times
+   *   2) Show modal to introduce Civic Liker on click
+   *   3) Show "MAX" on close
+   *
+   * Civic Liker:
+   *   1) Allow to appreciate 5 times
+   *   2) Show SuperLike
+   *   3) Show "∞" on click
+   */
+  const appreciate = () => {
+    if (isSuperLike) {
+      setSuperLiked(true)
+      sendSuperLike()
+    } else {
+      setAmount(amount + 1)
+      debouncedSendAppreciation()
+    }
+  }
+
   const isArticleAuthor = article.author.id === viewer.id
   const readCivicLikerDialog =
     viewer.isCivicLiker || data?.clientPreference.readCivicLikerDialog
   const canAppreciate =
-    !isReachLimit &&
-    !isArticleAuthor &&
-    !viewer.isArchived &&
-    viewer.liker.likerId
+    (!isReachLimit && !viewer.isArchived && viewer.liker.likerId) ||
+    (isSuperLike && canSuperLike)
 
-  /**
-   * Anonymous
-   */
+  // Anonymous
   if (!viewer.isAuthed) {
     return <AnonymousButton total={total} />
   }
 
-  /**
-   * Article Author
-   */
+  // Article Author
   if (isArticleAuthor) {
     return (
       <Tooltip
@@ -142,29 +186,30 @@ const AppreciationButton = ({ article }: AppreciationButtonProps) => {
     )
   }
 
-  /**
-   * Setup Liker Id Button
-   */
+  // Liker ID
   if (viewer.shouldSetupLikerID) {
     return <SetupLikerIdAppreciateButton total={total} />
   }
 
-  /**
-   * Appreciate Button
-   */
-  if (canAppreciate || (!hasAppreciate && amount <= 0)) {
+  // Blocked by private query
+  if (!privateFetched) {
+    return <AppreciateButton total={total} />
+  }
+
+  // Appreciable
+  if (canAppreciate) {
     return (
       <AppreciateButton
         onClick={appreciate}
         count={appreciatedCount > 0 ? appreciatedCount : undefined}
         total={total}
+        isSuperLike={isSuperLike}
+        superLiked={superLiked}
       />
     )
   }
 
-  /**
-   * Civic Liker Button
-   */
+  // Civic Liker
   if (!canAppreciate && !readCivicLikerDialog && isReachLimit) {
     return (
       <CivicLikerButton
@@ -180,16 +225,36 @@ const AppreciationButton = ({ article }: AppreciationButtonProps) => {
     )
   }
 
-  /**
-   * MAX Button
-   */
-  if (!canAppreciate && isReachLimit) {
+  // MAX:SuperLike
+  if (!canAppreciate && isReachLimit && isSuperLike) {
+    return (
+      <Tooltip
+        content={
+          <Translate
+            zh_hant="12 小時後才能再次 Super Like。"
+            zh_hans="12 小时后才能再次 Super Like。"
+          />
+        }
+        zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
+      >
+        <span>
+          <AppreciateButton
+            count="MAX"
+            total={total}
+            isSuperLike={isSuperLike}
+            superLiked={superLiked}
+          />
+        </span>
+      </Tooltip>
+    )
+  }
+
+  // MAX
+  if (!canAppreciate && isReachLimit && !isSuperLike) {
     return <AppreciateButton count="MAX" total={total} />
   }
 
-  /**
-   * Disabled Button
-   */
+  // Disabled
   return (
     <Tooltip
       content={

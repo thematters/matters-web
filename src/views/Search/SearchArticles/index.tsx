@@ -4,20 +4,19 @@ import { useContext, useEffect } from 'react'
 
 import {
   ArticleDigestFeed,
+  EmptySearch,
   InfiniteScroll,
   List,
   Spinner,
-  Translate,
   usePublicQuery,
   ViewerContext,
 } from '~/components'
 
 import { analytics, getQuery, mergeConnections } from '~/common/utils'
 
-import EmptySearch from '../EmptySearch'
 import { SEARCH_ARTICLES_PRIVATE, SEARCH_ARTICLES_PUBLIC } from './gql'
 
-import { SeachArticlesPublic } from './__generated__/SeachArticlesPublic'
+import { SearchArticlesPublic } from './__generated__/SearchArticlesPublic'
 
 const SearchArticles = () => {
   const viewer = useContext(ViewerContext)
@@ -35,7 +34,7 @@ const SearchArticles = () => {
     networkStatus,
     refetch: refetchPublic,
     client,
-  } = usePublicQuery<SeachArticlesPublic>(SEARCH_ARTICLES_PUBLIC, {
+  } = usePublicQuery<SearchArticlesPublic>(SEARCH_ARTICLES_PUBLIC, {
     variables: { key: q, first: 10 },
     notifyOnNetworkStatusChange: true,
   })
@@ -46,7 +45,7 @@ const SearchArticles = () => {
   const { edges, pageInfo } = data?.search || {}
 
   // private data
-  const loadPrivate = (publicData?: SeachArticlesPublic) => {
+  const loadPrivate = (publicData?: SearchArticlesPublic) => {
     if (!viewer.id || !publicData) {
       return
     }
@@ -107,7 +106,7 @@ const SearchArticles = () => {
   }
 
   if (!edges || edges.length <= 0 || !pageInfo) {
-    return <EmptySearch description={<Translate id="emptySearchResults" />} />
+    return <EmptySearch />
   }
 
   return (

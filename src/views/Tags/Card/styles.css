@@ -32,7 +32,7 @@
   }
 
   &.mask {
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.35);
   }
 
   @media (--sm-up) {
