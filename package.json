@@ -63,7 +63,7 @@
     "formik": "^2.1.5",
     "graphql": "^14.7.0",
     "graphql-tag": "^2.11.0",
-    "helmet": "^3.23.3",
+    "helmet": "^4.1.0",
     "isomorphic-unfetch": "^3.0.0",
     "jump.js": "^1.0.2",
     "lodash": "^4.17.19",
