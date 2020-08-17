@@ -231,8 +231,8 @@ const AppreciationButton = ({
       <Tooltip
         content={
           <Translate
-            zh_hant="12 小時後才能再次 Super Like。"
-            zh_hans="12 小时后才能再次 Super Like。"
+            zh_hant="12:00 或 00:00 就可以再次送出 Super Like 啦！"
+            zh_hans="12:00 或 00:00 就可以再次送出 Super Like 啦！"
           />
         }
         zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
