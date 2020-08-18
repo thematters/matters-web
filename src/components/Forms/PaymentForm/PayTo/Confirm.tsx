@@ -154,7 +154,7 @@ const Confirm: React.FC<FormProps> = ({
             <ConfirmTable.Row insufficient={isWalletInsufficient}>
               <ConfirmTable.Col>
                 <b>
-                  <Translate zh_hant="錢包餘額" zh_hans="钱包余额" />
+                  <Translate id="walletBalance" />
                 </b>
               </ConfirmTable.Col>
 

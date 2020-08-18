@@ -40,8 +40,8 @@ type AmountRadioInputProps = {
   >
 
 const amountOptions = {
-  [CURRENCY.HKD]: [5, 10, 50, 80, 100, 200],
-  [CURRENCY.LIKE]: [160, 660, 1660],
+  [CURRENCY.HKD]: [5, 10, 30, 50, 100, 300],
+  [CURRENCY.LIKE]: [166, 666, 1666],
 }
 
 const AmountOption: React.FC<AmountOptionProps> = ({

@@ -1,17 +1,3 @@
-.set-amount-other {
-  @mixin flex-center-all;
-
-  width: 100%;
-  margin-bottom: var(--spacing-loose);
-}
-
-.set-amount-fee {
-  @mixin flex-center-all;
-
-  font-size: var(--font-size-sm-s);
-  color: var(--color-grey-dark);
-}
-
 .set-amount-no-liker-id {
   @mixin flex-center-all;
 

@@ -1,7 +1,13 @@
 import gql from 'graphql-tag'
 import { useContext, useEffect, useState } from 'react'
 
-import { Dialog, PaymentForm, Translate, ViewerContext } from '~/components'
+import {
+  Dialog,
+  PaymentForm,
+  Translate,
+  useDialogStep,
+  ViewerContext,
+} from '~/components'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { analytics, numRound } from '~/common/utils'
@@ -80,7 +86,9 @@ const BaseDonationDialog = ({
   const baseResetPasswordData = { email: viewer.info.email, codeId: '' }
 
   const [showDialog, setShowDialog] = useState(true)
-  const [step, setStep] = useState<Step>(defaultStep)
+  const { currStep, prevStep, goForward, goBack } = useDialogStep<Step>(
+    defaultStep
+  )
   const [windowRef, setWindowRef] = useState<Window | undefined>(undefined)
 
   const [amount, setAmount] = useState<number>(0)
@@ -95,7 +103,7 @@ const BaseDonationDialog = ({
 
   const open = () => {
     setAddCreditData(baseAddCreditData)
-    setStep(defaultStep)
+    goForward(defaultStep)
     setShowDialog(true)
   }
 
@@ -108,7 +116,7 @@ const BaseDonationDialog = ({
     setAmount(values.amount)
     setCurrency(values.currency)
     if (values.currency === CURRENCY.HKD) {
-      setStep(
+      goForward(
         viewer.status?.hasPaymentPassword ? 'confirm' : 'setPaymentPassword'
       )
     }
@@ -117,28 +125,28 @@ const BaseDonationDialog = ({
   const setAmountOpenTabCallback = (values: SetAmountOpenTabCallbackValues) => {
     setWindowRef(values.window)
     setPayToTx(values.transaction)
-    setStep('processing')
+    goForward('processing')
   }
 
   const switchToLike = () => {
     setAmount(160)
     setCurrency(CURRENCY.LIKE)
-    setStep('setAmount')
+    goForward('setAmount')
   }
 
   const switchToAddCredit = () => {
     setAddCreditData(baseAddCreditData)
-    setStep('addCredit')
+    goForward('addCredit')
   }
 
   const addCreditCallback = ({ transaction, client_secret }: any) => {
     setAddCreditData({ ...addCreditData, transaction, client_secret })
-    setStep('checkout')
+    goForward('checkout')
   }
 
   const resetPasswordRequestCallback = ({ email, codeId }: any) => {
     setResetPasswordData({ ...resetPasswordData, email, codeId })
-    setStep('resetPasswordConfirm')
+    goForward('resetPasswordConfirm')
   }
 
   const ContinueDonationButton = (
@@ -146,7 +154,7 @@ const BaseDonationDialog = ({
       type="button"
       bgColor="green"
       textColor="white"
-      onClick={() => setStep('confirm')}
+      onClick={() => goForward('confirm')}
     >
       <Translate zh_hant="繼續支付" zh_hans="继续支付" />
     </Dialog.Footer.Button>
@@ -156,39 +164,39 @@ const BaseDonationDialog = ({
    * Add Credit
    */
   // add credit when credit not enough
-  const isAddCredit = step === 'addCredit'
-  const isAddCreditComplete = step === 'addCreditComplete'
-  const isAddCreditProcessing = step === 'addCreditProcessing'
+  const isAddCredit = currStep === 'addCredit'
+  const isAddCreditComplete = currStep === 'addCreditComplete'
+  const isAddCreditProcessing = currStep === 'addCreditProcessing'
   // stripe elements
-  const isCheckout = step === 'checkout'
+  const isCheckout = currStep === 'checkout'
   // processing
-  const isProcessing = step === 'processing'
+  const isProcessing = currStep === 'processing'
 
   /**
    * Donation
    */
   // complete dialog for donation
-  const isComplete = step === 'complete'
+  const isComplete = currStep === 'complete'
   // set donation amount
-  const isSetAmount = step === 'setAmount'
+  const isSetAmount = currStep === 'setAmount'
   // confirm donation amount
-  const isConfirm = step === 'confirm'
+  const isConfirm = currStep === 'confirm'
 
   /**
    * Password
    */
   // wrong password
-  const isPasswordInvalid = step === 'passwordInvalid'
-  const isResetPasswordComplete = step === 'resetPasswordComplete'
-  const isResetPasswordConfirm = step === 'resetPasswordConfirm'
-  const isResetPasswordRequest = step === 'resetPasswordRequest'
-  const isSetPaymentPassword = step === 'setPaymentPassword'
+  const isPasswordInvalid = currStep === 'passwordInvalid'
+  const isResetPasswordComplete = currStep === 'resetPasswordComplete'
+  const isResetPasswordConfirm = currStep === 'resetPasswordConfirm'
+  const isResetPasswordRequest = currStep === 'resetPasswordRequest'
+  const isSetPaymentPassword = currStep === 'setPaymentPassword'
 
   const isHKD = currency === CURRENCY.HKD
 
   useEffect(() => {
-    analytics.trackEvent('view_donation_dialog', { step })
-  }, [step])
+    analytics.trackEvent('view_donation_dialog', { step: currStep })
+  }, [currStep])
 
   return (
     <>
@@ -197,7 +205,12 @@ const BaseDonationDialog = ({
       <Dialog size="sm" isOpen={showDialog} onDismiss={close} fixedHeight>
         <Dialog.Header
           close={close}
-          closeTextId="close"
+          leftButton={
+            prevStep ? <Dialog.Header.BackButton onClick={goBack} /> : <span />
+          }
+          rightButton={
+            <Dialog.Header.CloseButton close={close} textId="close" />
+          }
           title={
             isAddCredit || isCheckout || isAddCreditProcessing
               ? 'topUp'
@@ -218,6 +231,7 @@ const BaseDonationDialog = ({
             openTabCallback={setAmountOpenTabCallback}
             recipient={recipient}
             submitCallback={setAmountCallback}
+            switchToAddCredit={switchToAddCredit}
             targetId={targetId}
           />
         )}
@@ -227,17 +241,17 @@ const BaseDonationDialog = ({
             amount={amount}
             currency={currency}
             recipient={recipient}
-            submitCallback={() => setStep(isHKD ? 'complete' : 'processing')}
+            submitCallback={() => goForward(isHKD ? 'complete' : 'processing')}
             switchToAddCredit={switchToAddCredit}
             switchToLike={switchToLike}
-            switchToPasswordInvalid={() => setStep('passwordInvalid')}
+            switchToPasswordInvalid={() => goForward('passwordInvalid')}
             targetId={targetId}
           />
         )}
 
         {isProcessing && (
           <PaymentForm.Processing
-            nextStep={() => setStep('complete')}
+            nextStep={() => goForward('complete')}
             txId={payToTx?.id || ''}
             windowRef={windowRef}
           />
@@ -253,7 +267,9 @@ const BaseDonationDialog = ({
         )}
 
         {isSetPaymentPassword && (
-          <PaymentForm.SetPassword submitCallback={() => setStep('confirm')} />
+          <PaymentForm.SetPassword
+            submitCallback={() => goForward('confirm')}
+          />
         )}
 
         {/* below steps for add credit */}
@@ -269,14 +285,14 @@ const BaseDonationDialog = ({
               addCreditData.transaction.amount + addCreditData.transaction.fee
             )}
             currency={addCreditData.transaction.currency}
-            submitCallback={() => setStep('addCreditProcessing')}
+            submitCallback={() => goForward('addCreditProcessing')}
           />
         )}
 
         {isAddCreditProcessing && addCreditData.transaction && (
           <PaymentForm.Processing
             txId={addCreditData.transaction.id}
-            nextStep={() => setStep('addCreditComplete')}
+            nextStep={() => goForward('addCreditComplete')}
           />
         )}
 
@@ -292,8 +308,8 @@ const BaseDonationDialog = ({
 
         {isPasswordInvalid && (
           <PaymentForm.PasswordInvalid
-            switchToPrevious={() => setStep('confirm')}
-            switchToResetPassword={() => setStep('resetPasswordRequest')}
+            switchToPrevious={() => goForward('confirm')}
+            switchToResetPassword={() => goForward('resetPasswordRequest')}
           />
         )}
 
@@ -307,7 +323,7 @@ const BaseDonationDialog = ({
         {isResetPasswordConfirm && (
           <PaymentForm.ResetPassword.Confirm
             codeId={resetPasswordData.codeId}
-            submitCallback={() => setStep('resetPasswordComplete')}
+            submitCallback={() => goForward('resetPasswordComplete')}
           />
         )}
 
