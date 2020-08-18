@@ -1,5 +1,15 @@
-import { Button, IconBookmarkActive, IconSize } from '~/components'
+import { useContext } from 'react'
+
+import {
+  Button,
+  IconBookmarkActive,
+  IconSize,
+  Translate,
+  ViewerContext,
+} from '~/components'
 import { useMutation } from '~/components/GQL'
+
+import { ADD_TOAST } from '~/common/enums'
 
 import TOGGLE_SUBSCRIBE_ARTICLE from '../../GQL/mutations/toggleSubscribeArticle'
 
@@ -18,6 +28,7 @@ const Unsubscribe = ({
   disabled,
   inCard,
 }: UnsubscribeProps) => {
+  const viewer = useContext(ViewerContext)
   const [unsubscribe] = useMutation<ToggleSubscribeArticle>(
     TOGGLE_SUBSCRIBE_ARTICLE,
     {
@@ -39,7 +50,21 @@ const Unsubscribe = ({
       spacing={['xtight', 'xtight']}
       bgActiveColor={inCard ? 'grey-lighter-active' : 'grey-lighter'}
       aria-label="取消收藏"
-      onClick={unsubscribe}
+      onClick={async () => {
+        if (viewer.isFrozen) {
+          window.dispatchEvent(
+            new CustomEvent(ADD_TOAST, {
+              detail: {
+                color: 'red',
+                content: <Translate id="FORBIDDEN" />,
+              },
+            })
+          )
+          return
+        }
+
+        await unsubscribe()
+      }}
       disabled={disabled}
     >
       <IconBookmarkActive color="black" size={size} />
