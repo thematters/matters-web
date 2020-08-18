@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
 
-import { Dialog, PaymentForm, ViewerContext } from '~/components'
+import { Dialog, PaymentForm, useStep, ViewerContext } from '~/components'
 
 type Step = 'request' | 'confirm' | 'complete'
 
@@ -14,9 +14,9 @@ const BaseResetPaymentPasswordDialog: React.FC<ResetPaymentPasswordProps> = ({
   const viewer = useContext(ViewerContext)
 
   const [showDialog, setShowDialog] = useState(true)
-  const [step, setStep] = useState<Step>('request')
+  const { currStep, goForward } = useStep<Step>('request')
   const open = () => {
-    setStep('request')
+    goForward('request')
     setShowDialog(true)
   }
   const close = () => setShowDialog(false)
@@ -28,12 +28,12 @@ const BaseResetPaymentPasswordDialog: React.FC<ResetPaymentPasswordProps> = ({
   const requestCodeCallback = (params: any) => {
     const { email, codeId } = params
     setData({ ...data, email, codeId })
-    setStep('confirm')
+    goForward('confirm')
   }
 
-  const isRequest = step === 'request'
-  const isConfirm = step === 'confirm'
-  const isComplete = step === 'complete'
+  const isRequest = currStep === 'request'
+  const isConfirm = currStep === 'confirm'
+  const isComplete = currStep === 'complete'
 
   return (
     <>
@@ -46,7 +46,7 @@ const BaseResetPaymentPasswordDialog: React.FC<ResetPaymentPasswordProps> = ({
           closeTextId="close"
           leftButton={
             isConfirm ? (
-              <Dialog.Header.BackButton onClick={() => setStep('request')} />
+              <Dialog.Header.BackButton onClick={() => goForward('request')} />
             ) : undefined
           }
         />
@@ -61,7 +61,7 @@ const BaseResetPaymentPasswordDialog: React.FC<ResetPaymentPasswordProps> = ({
         {isConfirm && (
           <PaymentForm.ResetPassword.Confirm
             codeId={data.codeId}
-            submitCallback={() => setStep('complete')}
+            submitCallback={() => goForward('complete')}
           />
         )}
 

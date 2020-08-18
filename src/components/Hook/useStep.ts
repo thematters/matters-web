@@ -1,10 +1,10 @@
 import { useState } from 'react'
 
 /**
- * Dialog step controller
+ * Step controller for dialogs
  *
  */
-export function useDialogStep<Step>(defaultStep: Step) {
+export function useStep<Step>(defaultStep: Step) {
   const [steps, setSteps] = useState<Step[]>(defaultStep ? [defaultStep] : [])
 
   const prevStep = steps[steps.length - 2]
@@ -17,8 +17,6 @@ export function useDialogStep<Step>(defaultStep: Step) {
   const goBack = () => {
     setSteps(steps.slice(0, -1))
   }
-
-  console.log({ steps })
 
   return { currStep, prevStep, goForward, goBack }
 }

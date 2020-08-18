@@ -1,24 +1,24 @@
-import { useState } from 'react'
-
-import { ChangeUserNameForm, Head, Layout } from '~/components'
+import { ChangeUserNameForm, Head, Layout, useStep } from '~/components'
 
 type Step = 'confirm' | 'complete'
 
 const ChangePassword = () => {
-  const [step, setStep] = useState<Step>('confirm')
+  const { currStep, goForward } = useStep<Step>('confirm')
 
   return (
     <Layout.Main bgColor="grey-lighter">
       <Head title={{ id: 'changeUserName' }} />
 
-      {step === 'confirm' && (
+      {currStep === 'confirm' && (
         <ChangeUserNameForm.Confirm
           purpose="page"
-          submitCallback={() => setStep('complete')}
+          submitCallback={() => goForward('complete')}
         />
       )}
 
-      {step === 'complete' && <ChangeUserNameForm.Complete purpose="page" />}
+      {currStep === 'complete' && (
+        <ChangeUserNameForm.Complete purpose="page" />
+      )}
     </Layout.Main>
   )
 }

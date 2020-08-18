@@ -5,7 +5,7 @@ import {
   Dialog,
   PaymentForm,
   Translate,
-  useDialogStep,
+  useStep,
   ViewerContext,
 } from '~/components'
 
@@ -86,9 +86,7 @@ const BaseDonationDialog = ({
   const baseResetPasswordData = { email: viewer.info.email, codeId: '' }
 
   const [showDialog, setShowDialog] = useState(true)
-  const { currStep, prevStep, goForward, goBack } = useDialogStep<Step>(
-    defaultStep
-  )
+  const { currStep, prevStep, goForward, goBack } = useStep<Step>(defaultStep)
   const [windowRef, setWindowRef] = useState<Window | undefined>(undefined)
 
   const [amount, setAmount] = useState<number>(0)

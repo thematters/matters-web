@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Dialog } from '~/components'
+import { Dialog, useStep } from '~/components'
 
 import styles from './styles.css'
 import Success from './Success'
@@ -18,10 +18,10 @@ const BaseMigrationDialog = ({
   defaultStep = 'upload',
 }: MigrationDialogProps) => {
   const [showDialog, setShowDialog] = useState(true)
-  const [step, setStep] = useState<Step>(defaultStep)
+  const { currStep, goForward } = useStep<Step>(defaultStep)
   const open = () => setShowDialog(true)
   const close = () => setShowDialog(false)
-  const nextStep = () => setStep('success')
+  const nextStep = () => goForward('success')
 
   return (
     <>
@@ -31,10 +31,10 @@ const BaseMigrationDialog = ({
         <Dialog.Header
           title="migration"
           close={close}
-          closeTextId={step === 'success' ? 'close' : 'cancel'}
+          closeTextId={currStep === 'success' ? 'close' : 'cancel'}
         />
-        {step === 'upload' && <Upload nextStep={nextStep} />}
-        {step === 'success' && <Success />}
+        {currStep === 'upload' && <Upload nextStep={nextStep} />}
+        {currStep === 'success' && <Success />}
       </Dialog>
       <style jsx>{styles}</style>
     </>

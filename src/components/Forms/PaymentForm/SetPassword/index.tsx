@@ -1,9 +1,16 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 
-import { Dialog, Form, LanguageContext, Spinner, Translate } from '~/components'
+import {
+  Dialog,
+  Form,
+  LanguageContext,
+  Spinner,
+  Translate,
+  useStep,
+} from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import {
@@ -39,9 +46,11 @@ const SET_PAYMENT_PASSWORD = gql`
 const SetPassword: React.FC<FormProps> = ({ submitCallback }) => {
   const [setPassword] = useMutation<SetPaymentPassword>(SET_PAYMENT_PASSWORD)
   const { lang } = useContext(LanguageContext)
-  const [step, setStep] = useState<'password' | 'comparedPassword'>('password')
-  const isInPassword = step === 'password'
-  const isInComparedPassword = step === 'comparedPassword'
+  const { currStep, goForward } = useStep<'password' | 'comparedPassword'>(
+    'password'
+  )
+  const isInPassword = currStep === 'password'
+  const isInComparedPassword = currStep === 'comparedPassword'
 
   const {
     values,
@@ -67,7 +76,7 @@ const SetPassword: React.FC<FormProps> = ({ submitCallback }) => {
 
       // jump to next step
       if (!passwordError && isInPassword) {
-        setStep('comparedPassword')
+        goForward('comparedPassword')
       }
 
       return _pickBy({

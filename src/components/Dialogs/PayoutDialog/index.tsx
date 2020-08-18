@@ -1,6 +1,12 @@
 import { useContext, useState } from 'react'
 
-import { Dialog, PaymentForm, Translate, ViewerContext } from '~/components'
+import {
+  Dialog,
+  PaymentForm,
+  Translate,
+  useStep,
+  ViewerContext,
+} from '~/components'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 
@@ -32,21 +38,21 @@ const BasePayoutDialog = ({
 
   const viewer = useContext(ViewerContext)
   const [showDialog, setShowDialog] = useState(true)
-  const [step, setStep] = useState<Step>(initialStep)
+  const { currStep, goForward } = useStep<Step>(initialStep)
 
   const [resetPasswordData, setResetPasswordData] = useState<ResetPasswordData>(
     { email: viewer.info.email, codeId: '' }
   )
 
   const open = () => {
-    setStep(initialStep)
+    goForward(initialStep)
     setShowDialog(true)
   }
   const close = () => setShowDialog(false)
 
   const resetPasswordRequestCallback = ({ email, codeId }: any) => {
     setResetPasswordData({ ...resetPasswordData, email, codeId })
-    setStep('resetPasswordConfirm')
+    goForward('resetPasswordConfirm')
   }
 
   const ContinuePayoutButton = (
@@ -54,19 +60,19 @@ const BasePayoutDialog = ({
       type="button"
       bgColor="green"
       textColor="white"
-      onClick={() => setStep('confirm')}
+      onClick={() => goForward('confirm')}
     >
       <Translate zh_hant="繼續提現" zh_hans="继续提现" />
     </Dialog.Footer.Button>
   )
 
-  const isComplete = step === 'complete'
-  const isConnectStripeAccount = step === 'connectStripeAccount'
-  const isConfirm = step === 'confirm'
-  const isPasswordInvalid = step === 'passwordInvalid'
-  const isResetPasswordComplete = step === 'resetPasswordComplete'
-  const isResetPasswordConfirm = step === 'resetPasswordConfirm'
-  const isResetPasswordRequest = step === 'resetPasswordRequest'
+  const isComplete = currStep === 'complete'
+  const isConnectStripeAccount = currStep === 'connectStripeAccount'
+  const isConfirm = currStep === 'confirm'
+  const isPasswordInvalid = currStep === 'passwordInvalid'
+  const isResetPasswordComplete = currStep === 'resetPasswordComplete'
+  const isResetPasswordConfirm = currStep === 'resetPasswordConfirm'
+  const isResetPasswordRequest = currStep === 'resetPasswordRequest'
 
   return (
     <>
@@ -91,15 +97,15 @@ const BasePayoutDialog = ({
 
         {isConnectStripeAccount && (
           <PaymentForm.ConnectStripeAccount
-            nextStep={() => setStep('confirm')}
+            nextStep={() => goForward('confirm')}
           />
         )}
 
         {isConfirm && (
           <PaymentForm.Payout.Confirm
             currency={CURRENCY.HKD}
-            submitCallback={(tx) => setStep('complete')}
-            switchToPasswordInvalid={() => setStep('passwordInvalid')}
+            submitCallback={(tx) => goForward('complete')}
+            switchToPasswordInvalid={() => goForward('passwordInvalid')}
           />
         )}
 
@@ -109,8 +115,8 @@ const BasePayoutDialog = ({
 
         {isPasswordInvalid && (
           <PaymentForm.PasswordInvalid
-            switchToPrevious={() => setStep('confirm')}
-            switchToResetPassword={() => setStep('resetPasswordRequest')}
+            switchToPrevious={() => goForward('confirm')}
+            switchToResetPassword={() => goForward('resetPasswordRequest')}
           />
         )}
 
@@ -124,7 +130,7 @@ const BasePayoutDialog = ({
         {isResetPasswordConfirm && (
           <PaymentForm.ResetPassword.Confirm
             codeId={resetPasswordData.codeId}
-            submitCallback={() => setStep('resetPasswordComplete')}
+            submitCallback={() => goForward('resetPasswordComplete')}
           />
         )}
 

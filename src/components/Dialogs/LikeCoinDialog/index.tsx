@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Dialog, SetupLikeCoin, useEventListener } from '~/components'
+import { Dialog, SetupLikeCoin, useEventListener, useStep } from '~/components'
 
 import { OPEN_LIKE_COIN_DIALOG } from '~/common/enums'
 
@@ -22,11 +22,11 @@ export const LikeCoinDialog: React.FC<LikeCoinDialogProps> = ({
 
   children,
 }) => {
-  const [step, setStep] = useState<Step>(defaultStep)
-  const nextStep = () => setStep('setup')
+  const { currStep, goForward } = useStep<Step>(defaultStep)
+  const nextStep = () => goForward('setup')
   const [showDialog, setShowDialog] = useState(defaultShowDialog)
   const open = () => {
-    setStep('term')
+    goForward('term')
     setShowDialog(true)
   }
   const close = () => setShowDialog(false)
@@ -42,11 +42,11 @@ export const LikeCoinDialog: React.FC<LikeCoinDialogProps> = ({
       {children && children({ open })}
 
       <Dialog isOpen={showDialog} onDismiss={close}>
-        {step === 'term' && (
+        {currStep === 'term' && (
           <LikeCoinTerm nextStep={nextStep} closeDialog={close} />
         )}
 
-        {step === 'setup' && (
+        {currStep === 'setup' && (
           <SetupLikeCoin purpose="dialog" closeDialog={close} />
         )}
       </Dialog>

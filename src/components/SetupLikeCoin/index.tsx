@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Dialog, Layout, SignUpForm } from '~/components'
+import { Dialog, Layout, SignUpForm, useStep } from '~/components'
 
 import Binding from './Binding'
 import Generating from './Generating'
@@ -22,20 +22,17 @@ export const SetupLikeCoin: React.FC<Props> = ({
   const isInDialog = purpose === 'dialog'
   const isInPage = purpose === 'page'
 
-  const [step, setStepState] = useState<Step>('select')
-  const setStep = (newStep: Step) => {
-    setStepState(newStep)
-  }
+  const { currStep, goForward } = useStep<Step>('select')
 
   const [bindingWindowRef, setBindingWindowRef] = useState<Window | undefined>(
     undefined
   )
-  const backToSelect = () => setStep('select')
+  const backToSelect = () => goForward('select')
   const complete = () => {
     if (submitCallback) {
       submitCallback()
     } else {
-      setStep('complete')
+      goForward('complete')
     }
   }
 
@@ -49,15 +46,15 @@ export const SetupLikeCoin: React.FC<Props> = ({
         <Dialog.Header
           title="setupLikeCoin"
           close={closeDialog}
-          closeTextId={step === 'complete' ? 'close' : 'cancel'}
+          closeTextId={currStep === 'complete' ? 'close' : 'cancel'}
         />
       )}
 
-      {step === 'select' && (
+      {currStep === 'select' && (
         <Select
-          startGenerate={() => setStep('generating')}
+          startGenerate={() => goForward('generating')}
           startBind={(windowRef?: Window) => {
-            setStep('binding')
+            goForward('binding')
             if (windowRef) {
               setBindingWindowRef(windowRef)
             }
@@ -65,11 +62,11 @@ export const SetupLikeCoin: React.FC<Props> = ({
         />
       )}
 
-      {step === 'generating' && (
+      {currStep === 'generating' && (
         <Generating prevStep={backToSelect} nextStep={complete} />
       )}
 
-      {step === 'binding' && (
+      {currStep === 'binding' && (
         <Binding
           prevStep={backToSelect}
           nextStep={complete}
@@ -77,7 +74,7 @@ export const SetupLikeCoin: React.FC<Props> = ({
         />
       )}
 
-      {step === 'complete' && <SignUpForm.Complete />}
+      {currStep === 'complete' && <SignUpForm.Complete />}
     </>
   )
 }

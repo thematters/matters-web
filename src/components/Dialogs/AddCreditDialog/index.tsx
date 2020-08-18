@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
 
-import { Dialog, PaymentForm, ViewerContext } from '~/components'
+import { Dialog, PaymentForm, useStep, ViewerContext } from '~/components'
 
 import { analytics, numRound } from '~/common/utils'
 
@@ -23,9 +23,9 @@ const BaseAddCreditDialog = ({ children }: AddCreditDialogProps) => {
   const initialStep = viewer.status?.hasPaymentPassword
     ? 'confirm'
     : 'setPaymentPassword'
-  const [step, setStep] = useState<Step>(initialStep)
+  const { currStep, goForward } = useStep<Step>(initialStep)
   const open = () => {
-    setStep(initialStep)
+    goForward(initialStep)
     resetData()
     setShowDialog(true)
   }
@@ -47,28 +47,28 @@ const BaseAddCreditDialog = ({ children }: AddCreditDialogProps) => {
 
   const onConfirm = ({ transaction, client_secret }: any) => {
     setData({ ...data, transaction, client_secret })
-    setStep('checkout')
+    goForward('checkout')
     analytics.trackEvent('click_button', { type: 'checkout' })
   }
 
   // set password if needed
-  const isSetPaymentPassword = step === 'setPaymentPassword'
+  const isSetPaymentPassword = currStep === 'setPaymentPassword'
 
   // confirm add credit amount
-  const isConfirm = step === 'confirm'
+  const isConfirm = currStep === 'confirm'
 
   // stripe elements for credit card info
-  const isCheckout = step === 'checkout'
+  const isCheckout = currStep === 'checkout'
 
   // loader and error catching
-  const isProcessing = step === 'processing'
+  const isProcessing = currStep === 'processing'
 
   // confirmation
-  const isComplete = step === 'complete'
+  const isComplete = currStep === 'complete'
 
   useEffect(() => {
-    analytics.trackEvent('view_add_credit_dialog', { step })
-  }, [step])
+    analytics.trackEvent('view_add_credit_dialog', { step: currStep })
+  }, [currStep])
 
   return (
     <>
@@ -87,7 +87,7 @@ const BaseAddCreditDialog = ({ children }: AddCreditDialogProps) => {
           closeTextId="close"
           leftButton={
             isCheckout ? (
-              <Dialog.Header.BackButton onClick={() => setStep('confirm')} />
+              <Dialog.Header.BackButton onClick={() => goForward('confirm')} />
             ) : isProcessing ? (
               <span />
             ) : undefined
@@ -95,7 +95,9 @@ const BaseAddCreditDialog = ({ children }: AddCreditDialogProps) => {
         />
 
         {isSetPaymentPassword && (
-          <PaymentForm.SetPassword submitCallback={() => setStep('confirm')} />
+          <PaymentForm.SetPassword
+            submitCallback={() => goForward('confirm')}
+          />
         )}
         {isConfirm && (
           <PaymentForm.AddCredit.Confirm submitCallback={onConfirm} />
@@ -105,13 +107,13 @@ const BaseAddCreditDialog = ({ children }: AddCreditDialogProps) => {
             client_secret={data.client_secret}
             amount={numRound(data.transaction.amount + data.transaction.fee)}
             currency={data.transaction.currency}
-            submitCallback={() => setStep('processing')}
+            submitCallback={() => goForward('processing')}
           />
         )}
         {isProcessing && data.transaction && (
           <PaymentForm.Processing
             txId={data.transaction.id}
-            nextStep={() => setStep('complete')}
+            nextStep={() => goForward('complete')}
           />
         )}
         {isComplete && data.transaction && (

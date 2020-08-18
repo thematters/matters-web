@@ -1,44 +1,42 @@
-import { useState } from 'react'
-
-import { Head, Layout, SetupLikeCoin, SignUpForm } from '~/components'
+import { Head, Layout, SetupLikeCoin, SignUpForm, useStep } from '~/components'
 
 type Step = 'signUp' | 'profile' | 'setupLikeCoin' | 'complete'
 
 const SignUp = () => {
-  const [step, setStep] = useState<Step>('signUp')
+  const { currStep, goForward } = useStep<Step>('signUp')
 
   return (
     <Layout.Main bgColor="grey-lighter">
       <Head title={{ id: 'register' }} />
 
-      {step === 'signUp' && (
+      {currStep === 'signUp' && (
         <SignUpForm.Init
           purpose="page"
           submitCallback={() => {
-            setStep('profile')
+            goForward('profile')
           }}
         />
       )}
 
-      {step === 'profile' && (
+      {currStep === 'profile' && (
         <SignUpForm.Profile
           purpose="page"
           submitCallback={() => {
-            setStep('setupLikeCoin')
+            goForward('setupLikeCoin')
           }}
         />
       )}
 
-      {step === 'setupLikeCoin' && (
+      {currStep === 'setupLikeCoin' && (
         <SetupLikeCoin
           purpose="page"
           submitCallback={() => {
-            setStep('complete')
+            goForward('complete')
           }}
         />
       )}
 
-      {step === 'complete' && <SignUpForm.Complete purpose="page" />}
+      {currStep === 'complete' && <SignUpForm.Complete purpose="page" />}
     </Layout.Main>
   )
 }
