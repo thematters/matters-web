@@ -46,7 +46,7 @@ export const UserProfile = () => {
 
   // fetch private data
   useEffect(() => {
-    if (!viewer.id || !user) {
+    if (!viewer.isAuthed || !user) {
       return
     }
 

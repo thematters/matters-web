@@ -46,7 +46,7 @@ const SearchArticles = () => {
 
   // private data
   const loadPrivate = (publicData?: SearchArticlesPublic) => {
-    if (!viewer.id || !publicData) {
+    if (!viewer.isAuthed || !publicData) {
       return
     }
 

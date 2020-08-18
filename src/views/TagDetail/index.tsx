@@ -178,7 +178,7 @@ const TagDetailContainer = () => {
 
   // private data
   const loadPrivate = () => {
-    if (!viewer.id || !tagId) {
+    if (!viewer.isAuthed || !tagId) {
       return
     }
 

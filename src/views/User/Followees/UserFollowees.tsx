@@ -51,7 +51,7 @@ const UserFollowees = () => {
 
   // private data
   const loadPrivate = (publicData?: UserFolloweePublic) => {
-    if (!viewer.id || !publicData || !user) {
+    if (!viewer.isAuthed || !publicData || !user) {
       return
     }
 

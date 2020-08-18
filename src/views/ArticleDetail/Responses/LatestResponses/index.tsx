@@ -102,7 +102,7 @@ const LatestResponses = () => {
 
   // private data
   const loadPrivate = (publicData?: LatestResponsesPublic) => {
-    if (!viewer.id || !publicData || !articleId) {
+    if (!viewer.isAuthed || !publicData || !articleId) {
       return
     }
 

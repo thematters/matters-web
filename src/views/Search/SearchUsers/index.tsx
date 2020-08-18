@@ -42,7 +42,7 @@ const SearchUser = () => {
 
   // private data
   const loadPrivate = (publicData?: SearchUsersPublic) => {
-    if (!viewer.id || !publicData) {
+    if (!viewer.isAuthed || !publicData) {
       return
     }
 
