@@ -65,16 +65,16 @@ const NoLikerIdMessage = ({ canPayLike, canReceiveLike }: NoLikerId) => {
   if (!canPayLike) {
     return (
       <Translate
-        zh_hant="請先綁定 LikerID， 才能用 LikeCoin 支持作者"
-        zh_hans="请先绑定 LikerID， 才能用 LikeCoin 支持作者"
+        zh_hant="請先綁定 Liker ID， 才能用 LikeCoin 支持作者"
+        zh_hans="请先绑定 Liker ID， 才能用 LikeCoin 支持作者"
       />
     )
   }
   if (!canReceiveLike) {
     return (
       <Translate
-        zh_hant="作者還沒有綁定 LikerID，你還不能用 LikeCoin 支持他"
-        zh_hans="作者还没有绑定 LikerID，你还不能用 LikeCoin 支持他"
+        zh_hant="作者還沒有綁定 Liker ID，你還不能用 LikeCoin 支持他"
+        zh_hans="作者还没有绑定 Liker ID，你还不能用 LikeCoin 支持他"
       />
     )
   }

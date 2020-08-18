@@ -130,7 +130,7 @@ const BaseArticleDigestFeed = ({
             />
             {inFollowFeed && (
               <span className="published-article">
-                <Translate zh_hant="發佈了作品" zh_hans="发布了作品" />
+                <Translate zh_hant="發佈了" zh_hans="发布了" />
               </span>
             )}
           </section>
