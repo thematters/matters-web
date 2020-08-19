@@ -98,6 +98,7 @@ export const mutationOnError = (error: ApolloError) => {
     ERROR_CODES.LIKER_USER_ID_EXISTS,
     ERROR_CODES.LIKER_EMAIL_EXISTS,
     ERROR_CODES.MIGRATION_REACH_LIMIT,
+    ERROR_CODES.FORBIDDEN_BY_STATE,
   ] as ErrorCodeKeys[]
   CATCH_CODES.forEach((code) => {
     if (errorMap[code]) {
