@@ -106,7 +106,7 @@ const Confirm: React.FC<FormProps> = ({ submitCallback, defaultAmount }) => {
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit} noBackground>
       <Form.AmountInput
-        fixedPlaceholder={currency}
+        currency={currency}
         label={<Translate zh_hant="輸入金額" zh_hans="输入金额" />}
         name="amount"
         min={0}

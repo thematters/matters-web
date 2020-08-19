@@ -6,7 +6,6 @@
   text-align: center;
 }
 
-.confirm-footer,
 .password-invalid-footer {
   & :global(> footer) {
     @mixin flex-center-all;
@@ -39,9 +38,4 @@
   line-height: 2;
   color: var(--color-grey-darker);
   text-align: center;
-}
-
-b {
-  font-weight: var(--font-weight-medium);
-  color: var(--color-black);
 }

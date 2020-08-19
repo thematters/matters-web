@@ -20,33 +20,34 @@ import styles from './styles.css'
  *
  */
 
+interface BaseOptionProps {
+  currency: CURRENCY
+  balance?: number
+  name: string
+}
+
 type AmountOptionProps = {
   amount: number
-  currency: CURRENCY
-  name: string
-} & FieldProps &
+} & BaseOptionProps &
+  FieldProps &
   React.DetailedHTMLProps<
     React.InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
   >
 
 type AmountRadioInputProps = {
-  currency: CURRENCY
-  name: string
-} & Omit<FieldProps, 'fieldMsgId'> &
+  amounts: { [key in CURRENCY]: number[] }
+} & BaseOptionProps &
+  Omit<FieldProps, 'fieldMsgId'> &
   React.DetailedHTMLProps<
     React.InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
   >
 
-const amountOptions = {
-  [CURRENCY.HKD]: [5, 10, 30, 50, 100, 300],
-  [CURRENCY.LIKE]: [166, 666, 1666],
-}
-
 const AmountOption: React.FC<AmountOptionProps> = ({
   amount,
   currency,
+  balance,
   name,
 
   fieldMsgId,
@@ -57,16 +58,21 @@ const AmountOption: React.FC<AmountOptionProps> = ({
 }) => {
   const fieldId = `field-${name}-${amount}`
 
-  const classes = classNames({
+  const isBalanceInsufficient =
+    typeof balance === 'number' ? balance < amount : false
+
+  const amountClasses = classNames({
     amount: true,
     [currency === CURRENCY.LIKE ? 'like' : 'hkd']: true,
     active: value === amount,
-    disabled,
+    disabled: disabled || isBalanceInsufficient,
   })
+
   return (
-    <li className={classes}>
+    <li className={amountClasses}>
       <label htmlFor={fieldId}>
         {amount}
+
         <VisuallyHidden>
           <input
             {...inputProps}
@@ -75,6 +81,7 @@ const AmountOption: React.FC<AmountOptionProps> = ({
             id={fieldId}
             name={name}
             value={amount}
+            type="radio"
           />
         </VisuallyHidden>
       </label>
@@ -85,6 +92,8 @@ const AmountOption: React.FC<AmountOptionProps> = ({
 
 const AmountRadioInput: React.FC<AmountRadioInputProps> = ({
   currency,
+  balance,
+  amounts,
   name,
 
   hint,
@@ -93,26 +102,22 @@ const AmountRadioInput: React.FC<AmountRadioInputProps> = ({
   ...inputProps
 }) => {
   const fieldMsgId = `field-msg-${name}`
-  const options = amountOptions[currency]
+
+  const options = amounts[currency]
 
   const baseInputProps = {
     ...inputProps,
     currency,
+    balance,
     fieldMsgId,
     name,
-    type: 'radio',
   }
 
   return (
     <Field>
       <ul className="amount-options">
         {options.map((option) => (
-          <AmountOption
-            {...baseInputProps}
-            key={option}
-            amount={option}
-            currency={currency}
-          />
+          <AmountOption {...baseInputProps} key={option} amount={option} />
         ))}
       </ul>
 

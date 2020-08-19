@@ -9,7 +9,7 @@ import styles from './styles.css'
  *
  * ```jsx
  *   <Form.AmountInput
- *     fixedPlaceholder="HKD"
+ *     currency="HKD"
  *     error="xxx"
  *     hint="xxx"
  *     ...other <input> props...
@@ -20,7 +20,7 @@ import styles from './styles.css'
 
 type AmountInputProps = {
   name: string
-  fixedPlaceholder: string | React.ReactNode
+  currency: string | React.ReactNode
 } & Omit<FieldProps, 'fieldMsgId'> &
   React.DetailedHTMLProps<
     React.InputHTMLAttributes<HTMLInputElement>,
@@ -37,7 +37,7 @@ const AmountInput = forwardRef(
       hint,
       error,
 
-      fixedPlaceholder,
+      currency,
 
       ...inputProps
     }: AmountInputProps,
@@ -55,7 +55,7 @@ const AmountInput = forwardRef(
         />
 
         <Field.Content>
-          <span className="fixed-placeholder">{fixedPlaceholder}</span>
+          <span className="currency">{currency}</span>
 
           <input
             {...inputProps}

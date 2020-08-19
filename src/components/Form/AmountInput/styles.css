@@ -20,7 +20,7 @@ input {
   -moz-appearance: textfield;
 }
 
-.fixed-placeholder {
+.currency {
   position: absolute;
   top: 0;
   left: var(--spacing-base);

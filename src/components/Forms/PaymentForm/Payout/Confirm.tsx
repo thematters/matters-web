@@ -142,7 +142,7 @@ const BaseConfirm: React.FC<FormProps> = ({
               required
               min={PAYMENT_MINIMAL_PAYOUT_AMOUNT.HKD}
               max={balance}
-              fixedPlaceholder={currency}
+              currency={currency}
               label={<Translate zh_hant="提現金額" zh_hans="提现金额" />}
               name="amount"
               value={values.amount}

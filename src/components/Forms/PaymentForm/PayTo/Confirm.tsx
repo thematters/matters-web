@@ -16,7 +16,6 @@ import {
 } from '~/common/utils'
 
 import ConfirmTable from '../ConfirmTable'
-import styles from './styles.css'
 
 import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
 import {
@@ -135,68 +134,37 @@ const Confirm: React.FC<FormProps> = ({
   const isWalletInsufficient = balance < amount
 
   return (
-    <>
-      <Dialog.Content hasGrow>
-        <section>
-          <ConfirmTable>
-            <ConfirmTable.Row total>
-              <ConfirmTable.Col>
-                <Translate zh_hant="支付" zh_hans="支付" />
-              </ConfirmTable.Col>
+    <Dialog.Content hasGrow>
+      <ConfirmTable>
+        <ConfirmTable.Row total>
+          <ConfirmTable.Col>
+            <Translate zh_hant="支付" zh_hans="支付" />
+          </ConfirmTable.Col>
 
-              <ConfirmTable.Col>
-                {currency} {toAmountString(amount)}
-              </ConfirmTable.Col>
-            </ConfirmTable.Row>
+          <ConfirmTable.Col>
+            {currency} {toAmountString(amount)}
+          </ConfirmTable.Col>
+        </ConfirmTable.Row>
 
-            <ConfirmTable.Row breaker />
+        <ConfirmTable.Row breaker />
 
-            <ConfirmTable.Row insufficient={isWalletInsufficient}>
-              <ConfirmTable.Col>
-                <b>
-                  <Translate id="walletBalance" />
-                </b>
-              </ConfirmTable.Col>
+        <ConfirmTable.Row insufficient={isWalletInsufficient}>
+          <ConfirmTable.Col>
+            <b>
+              <Translate id="walletBalance" />
+            </b>
+          </ConfirmTable.Col>
 
-              <ConfirmTable.Col>
-                <b>
-                  {currency} {toAmountString(balance)}
-                </b>
-              </ConfirmTable.Col>
-            </ConfirmTable.Row>
-          </ConfirmTable>
+          <ConfirmTable.Col>
+            <b>
+              {currency} {toAmountString(balance)}
+            </b>
+          </ConfirmTable.Col>
+        </ConfirmTable.Row>
+      </ConfirmTable>
 
-          {!isWalletInsufficient && InnerForm}
-        </section>
-      </Dialog.Content>
-
-      {isWalletInsufficient && (
-        <section className="confirm-footer">
-          <Dialog.Footer>
-            <Dialog.Footer.Button
-              type="button"
-              bgColor="green"
-              onClick={switchToAddCredit}
-            >
-              <Translate id="topUp" />
-            </Dialog.Footer.Button>
-
-            <Dialog.Footer.Button
-              type="button"
-              bgColor="grey-lighter"
-              textColor="black"
-              onClick={switchToLike}
-            >
-              <Translate
-                zh_hant="使用 LikeCoin 支持"
-                zh_hans="使用 LikeCoin 支持"
-              />
-            </Dialog.Footer.Button>
-          </Dialog.Footer>
-        </section>
-      )}
-      <style jsx>{styles}</style>
-    </>
+      {!isWalletInsufficient && InnerForm}
+    </Dialog.Content>
   )
 }
 

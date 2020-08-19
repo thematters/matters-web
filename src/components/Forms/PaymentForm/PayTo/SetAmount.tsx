@@ -1,3 +1,4 @@
+import { useQuery } from '@apollo/react-hooks'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useRef, useState } from 'react'
@@ -11,6 +12,7 @@ import {
 } from '~/components'
 import { useMutation } from '~/components/GQL'
 import PAY_TO from '~/components/GQL/mutations/payTo'
+import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
 
 import {
   PAYMENT_CURRENCY as CURRENCY,
@@ -27,6 +29,7 @@ import {
   PayTo as PayToMutate,
   PayTo_payTo_transaction as PayToTx,
 } from '~/components/GQL/mutations/__generated__/PayTo'
+import { WalletBalance } from '~/components/GQL/queries/__generated__/WalletBalance'
 
 interface SetAmountCallbackValues {
   amount: number
@@ -53,6 +56,16 @@ interface FormValues {
   currency: CURRENCY
 }
 
+const AMOUNT_DEFAULT = {
+  [CURRENCY.HKD]: 10,
+  [CURRENCY.LIKE]: 166,
+}
+
+const AMOUNT_OPTIONS = {
+  [CURRENCY.HKD]: [5, 10, 30, 50, 100, 300],
+  [CURRENCY.LIKE]: [166, 666, 1666],
+}
+
 const SetAmount: React.FC<FormProps> = ({
   close,
   defaultCurrency,
@@ -62,8 +75,6 @@ const SetAmount: React.FC<FormProps> = ({
   switchToAddCredit,
   targetId,
 }) => {
-  const defaultHKDAmount = 10
-  const defaultLikeAmount = 166
   const formId = 'pay-to-set-amount-form'
 
   const viewer = useContext(ViewerContext)
@@ -77,6 +88,10 @@ const SetAmount: React.FC<FormProps> = ({
   const [payTo] = useMutation<PayToMutate>(PAY_TO)
   const inputRef: React.RefObject<any> | null = useRef(null)
 
+  // HKD balance
+  const { data } = useQuery<WalletBalance>(WALLET_BALANCE)
+  const balance = data?.viewer?.wallet.balance.HKD || 0
+
   const {
     errors,
     handleBlur,
@@ -88,7 +103,7 @@ const SetAmount: React.FC<FormProps> = ({
     values,
   } = useFormik<FormValues>({
     initialValues: {
-      amount: defaultHKDAmount,
+      amount: AMOUNT_DEFAULT[defaultCurrency || CURRENCY.HKD],
       currency: defaultCurrency || CURRENCY.HKD,
     },
     validate: ({ amount, currency }) =>
@@ -132,6 +147,7 @@ const SetAmount: React.FC<FormProps> = ({
   const canProcess = isHKD || (canPayLike && canReceiveLike)
   const color = isLike ? 'green' : 'red'
   const maxAmount = isLike ? Infinity : PAYMENT_MAXIMUM_PAYTO_AMOUNT.HKD
+  const isBalanceInsufficient = isHKD && balance < values.amount
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit} noBackground>
@@ -145,11 +161,7 @@ const SetAmount: React.FC<FormProps> = ({
         onChange={(e) => {
           const raw = (e.target.value || '') as keyof typeof CURRENCY
           const value = CURRENCY[raw]
-          const defaultAmount = fixed
-            ? value === CURRENCY.LIKE
-              ? defaultLikeAmount
-              : defaultHKDAmount
-            : 0
+          const defaultAmount = fixed ? AMOUNT_DEFAULT[value] : 0
           if (value) {
             setFieldValue('currency', value)
             setFieldValue('amount', defaultAmount)
@@ -160,6 +172,8 @@ const SetAmount: React.FC<FormProps> = ({
       {fixed && canProcess && (
         <Form.AmountRadioInput
           currency={values.currency}
+          balance={isHKD ? balance : undefined}
+          amounts={AMOUNT_OPTIONS}
           name="amount"
           disabled={locked}
           value={values.amount}
@@ -178,7 +192,7 @@ const SetAmount: React.FC<FormProps> = ({
           required
           className={isHKD ? 'red-style' : undefined}
           disabled={locked}
-          fixedPlaceholder={values.currency}
+          currency={values.currency}
           name="amount"
           min={0}
           max={maxAmount}
@@ -203,16 +217,14 @@ const SetAmount: React.FC<FormProps> = ({
 
       {canProcess && (
         <CustomAmount
+          balance={balance}
           fixed={fixed}
           disabled={locked}
           textColor={color}
           onClick={() => {
             // reset default fixed amount
             if (fixed === false) {
-              setFieldValue(
-                'amount',
-                isLike ? defaultLikeAmount : defaultHKDAmount
-              )
+              setFieldValue('amount', AMOUNT_DEFAULT[values.currency])
             } else {
               setFieldValue('amount', 0)
             }
@@ -235,20 +247,14 @@ const SetAmount: React.FC<FormProps> = ({
 
   return (
     <>
-      <Dialog.Content hasGrow>
-        <section>
-          {InnerForm}
+      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
 
-          <style jsx>{styles}</style>
-        </section>
-      </Dialog.Content>
-
-      <Dialog.Footer>
+      <Dialog.Footer block>
         {canProcess && !locked && (
           <Dialog.Footer.Button
             type="submit"
             form={formId}
-            disabled={!isValid || isSubmitting}
+            disabled={!isValid || isSubmitting || isBalanceInsufficient}
             bgColor={color}
             textColor="white"
             loading={isSubmitting}

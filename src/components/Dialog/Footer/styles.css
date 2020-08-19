@@ -16,12 +16,14 @@ footer {
     margin-top: var(--spacing-base);
   }
 
-  @media (--sm-up) {
-    flex-direction: row;
+  &:not(.block) {
+    @media (--sm-up) {
+      flex-direction: row;
 
-    & :global(> * + *) {
-      margin-top: 0;
-      margin-left: var(--spacing-base);
+      & :global(> * + *) {
+        margin-top: 0;
+        margin-left: var(--spacing-base);
+      }
     }
   }
 }
