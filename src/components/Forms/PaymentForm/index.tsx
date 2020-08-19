@@ -3,7 +3,6 @@ import dynamic from 'next/dynamic'
 import { Spinner } from '~/components'
 
 import ConnectStripeAccount from './ConnectStripeAccount'
-import PasswordInvalid from './PasswordInvalid'
 import Payout from './Payout'
 import PayTo from './PayTo'
 import Processing from './Processing'
@@ -18,7 +17,6 @@ const DynamicAddCredit = dynamic(() => import('./AddCredit'), {
 export const PaymentForm = {
   AddCredit: DynamicAddCredit,
   ConnectStripeAccount,
-  PasswordInvalid,
   Payout,
   PayTo,
   Processing,

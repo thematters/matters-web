@@ -34,17 +34,14 @@ import {
 import ConfirmTable from '../ConfirmTable'
 import styles from './styles.css'
 
-import {
-  Payout as PayoutMutate,
-  Payout_payout as PayoutResult,
-} from '~/components/GQL/mutations/__generated__/Payout'
+import { Payout as PayoutMutate } from '~/components/GQL/mutations/__generated__/Payout'
 import { WalletBalance } from '~/components/GQL/queries/__generated__/WalletBalance'
 
 interface FormProps {
   balance: number
   currency: CURRENCY
-  submitCallback: (tx: PayoutResult) => void
-  switchToPasswordInvalid: () => void
+  submitCallback: () => void
+  switchToResetPassword: () => void
 }
 
 interface FormValues {
@@ -56,7 +53,7 @@ const BaseConfirm: React.FC<FormProps> = ({
   balance,
   currency,
   submitCallback,
-  switchToPasswordInvalid,
+  switchToResetPassword,
 }: FormProps) => {
   const formId = 'payout-confirm-form'
 
@@ -100,15 +97,11 @@ const BaseConfirm: React.FC<FormProps> = ({
           throw new Error()
         }
         setSubmitting(false)
-        submitCallback(tx)
+        submitCallback()
       } catch (error) {
         setSubmitting(false)
         const [messages, codes] = parseFormSubmitErrors(error, lang)
         setFieldError('password', messages[codes[0]])
-
-        if (codes[0] === 'USER_PASSWORD_INVALID') {
-          switchToPasswordInvalid()
-        }
       }
     },
   })
@@ -119,116 +112,113 @@ const BaseConfirm: React.FC<FormProps> = ({
   return (
     <>
       <Dialog.Content hasGrow>
-        <section>
-          <Form id={formId} onSubmit={handleSubmit} noBackground>
-            <ConfirmTable>
-              <ConfirmTable.Row insufficient={false}>
-                <ConfirmTable.Col>
-                  <b>
-                    <Translate id="walletBalance" />
-                  </b>
-                </ConfirmTable.Col>
+        <Form id={formId} onSubmit={handleSubmit} noBackground>
+          <ConfirmTable>
+            <ConfirmTable.Row>
+              <ConfirmTable.Col>
+                <b>
+                  <Translate id="walletBalance" />
+                </b>
+              </ConfirmTable.Col>
 
-                <ConfirmTable.Col>
-                  <b>
-                    {currency} {toAmountString(balance)}
-                  </b>
-                </ConfirmTable.Col>
-              </ConfirmTable.Row>
-            </ConfirmTable>
+              <ConfirmTable.Col>
+                <b>
+                  {currency} {toAmountString(balance)}
+                </b>
+              </ConfirmTable.Col>
+            </ConfirmTable.Row>
+          </ConfirmTable>
 
-            <Form.AmountInput
-              autoFocus
-              required
-              min={PAYMENT_MINIMAL_PAYOUT_AMOUNT.HKD}
-              max={balance}
-              currency={currency}
-              label={<Translate zh_hant="提現金額" zh_hans="提现金额" />}
-              name="amount"
-              value={values.amount}
-              error={touched.amount && errors.amount}
-              onBlur={handleBlur}
-              onChange={(e) => {
-                const value = e.target.valueAsNumber || 0
-                const sanitizedAmount = Math.abs(Math.max(Math.floor(value), 0))
-                if (inputRef.current) {
-                  inputRef.current.value = sanitizedAmount
-                }
-                setFieldValue('amount', sanitizedAmount)
-              }}
-              ref={inputRef}
-            />
+          <Form.AmountInput
+            autoFocus
+            required
+            min={PAYMENT_MINIMAL_PAYOUT_AMOUNT.HKD}
+            max={balance}
+            currency={currency}
+            label={<Translate zh_hant="提現金額" zh_hans="提现金额" />}
+            name="amount"
+            value={values.amount}
+            error={touched.amount && errors.amount}
+            onBlur={handleBlur}
+            onChange={(e) => {
+              const value = e.target.valueAsNumber || 0
+              const sanitizedAmount = Math.abs(Math.max(Math.floor(value), 0))
+              if (inputRef.current) {
+                inputRef.current.value = sanitizedAmount
+              }
+              setFieldValue('amount', sanitizedAmount)
+            }}
+            ref={inputRef}
+          />
 
-            <ConfirmTable>
-              <ConfirmTable.Row>
-                <ConfirmTable.Col>
-                  <Translate zh_hant="提現金額" zh_hans="提现金额" />
-                </ConfirmTable.Col>
+          <ConfirmTable>
+            <ConfirmTable.Row>
+              <ConfirmTable.Col>
+                <Translate zh_hant="提現金額" zh_hans="提现金额" />
+              </ConfirmTable.Col>
 
-                <ConfirmTable.Col>
-                  {currency} {toAmountString(values.amount)}
-                </ConfirmTable.Col>
-              </ConfirmTable.Row>
+              <ConfirmTable.Col>
+                {currency} {toAmountString(values.amount)}
+              </ConfirmTable.Col>
+            </ConfirmTable.Row>
 
-              <Tooltip
-                content={
-                  <Translate
-                    zh_hant="用於支付 Stripe 手續費，並支持 Matters 運營"
-                    zh_hans="用于支付 Stripe 手续费，并支持 Matters 运营"
-                  />
-                }
-                placement="top"
-                zIndex={Z_INDEX.OVER_DIALOG}
-              >
-                <section>
-                  <ConfirmTable.Row>
-                    <ConfirmTable.Col>
-                      <TextIcon
-                        icon={<IconHelpMedium />}
-                        size="xs"
-                        spacing="xxtight"
-                        textPlacement="left"
-                      >
-                        <Translate
-                          zh_hant="服務費 (20%)"
-                          zh_hans="服务费 (20%)"
-                        />
-                      </TextIcon>
-                    </ConfirmTable.Col>
+            <ConfirmTable.Row>
+              <ConfirmTable.Col>
+                <Tooltip
+                  content={
+                    <Translate
+                      zh_hant="用於支付 Stripe 手續費，並支持 Matters 運營"
+                      zh_hans="用于支付 Stripe 手续费，并支持 Matters 运营"
+                    />
+                  }
+                  placement="top"
+                  zIndex={Z_INDEX.OVER_DIALOG}
+                >
+                  <span>
+                    <TextIcon
+                      icon={<IconHelpMedium />}
+                      spacing="xxtight"
+                      textPlacement="left"
+                    >
+                      <Translate
+                        zh_hant="服務費 (20%)"
+                        zh_hans="服务费 (20%)"
+                      />
+                    </TextIcon>
+                  </span>
+                </Tooltip>
+              </ConfirmTable.Col>
 
-                    <ConfirmTable.Col>
-                      - {currency} {toAmountString(fee)}
-                    </ConfirmTable.Col>
-                  </ConfirmTable.Row>
-                </section>
-              </Tooltip>
+              <ConfirmTable.Col>
+                - {currency} {toAmountString(fee)}
+              </ConfirmTable.Col>
+            </ConfirmTable.Row>
 
-              <ConfirmTable.Row total>
-                <ConfirmTable.Col>
-                  <Translate zh_hant="實際提現" zh_hans="实际提现" />
-                </ConfirmTable.Col>
+            <ConfirmTable.Row total>
+              <ConfirmTable.Col>
+                <Translate zh_hant="實際提現" zh_hans="实际提现" />
+              </ConfirmTable.Col>
 
-                <ConfirmTable.Col>
-                  {currency} {toAmountString(total)}
-                </ConfirmTable.Col>
-              </ConfirmTable.Row>
-            </ConfirmTable>
+              <ConfirmTable.Col>
+                {currency} {toAmountString(total)}
+              </ConfirmTable.Col>
+            </ConfirmTable.Row>
+          </ConfirmTable>
 
-            <Form.PinInput
-              length={6}
-              name="password"
-              error={touched.password && errors.password}
-              onChange={(value) => {
-                const shouldValidate = value.length === 6
-                setTouched({ amount: true, password: true }, shouldValidate)
-                setFieldValue('password', value, shouldValidate)
-              }}
-            />
-          </Form>
-        </section>
+          <Form.PinInput
+            length={6}
+            name="password"
+            error={touched.password && errors.password}
+            onChange={(value) => {
+              const shouldValidate = value.length === 6
+              setTouched({ amount: true, password: true }, shouldValidate)
+              setFieldValue('password', value, shouldValidate)
+            }}
+          />
+        </Form>
       </Dialog.Content>
 
-      <Dialog.Footer>
+      <Dialog.Footer block>
         <Dialog.Footer.Button
           type="submit"
           form={formId}
@@ -239,7 +229,17 @@ const BaseConfirm: React.FC<FormProps> = ({
         >
           <Translate id="confirm" />
         </Dialog.Footer.Button>
+
+        <Dialog.Footer.Button
+          type="button"
+          bgColor="grey-lighter"
+          textColor="black"
+          onClick={switchToResetPassword}
+        >
+          <Translate id="forgetPassword" />
+        </Dialog.Footer.Button>
       </Dialog.Footer>
+
       <style jsx>{styles}</style>
     </>
   )
@@ -249,12 +249,12 @@ const Confirm = (props: Omit<FormProps, 'balance'>) => {
   const { data, loading } = useQuery<WalletBalance>(WALLET_BALANCE, {
     fetchPolicy: 'no-cache',
   })
+  const balance = data?.viewer?.wallet.balance.HKD || 0
 
   if (loading) {
     return <Spinner />
   }
 
-  const balance = data?.viewer?.wallet.balance.HKD || 0
   return <BaseConfirm {...props} balance={balance} />
 }
 

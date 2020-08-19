@@ -8,7 +8,6 @@ type Step =
   | 'complete'
   | 'connectStripeAccount'
   | 'confirm'
-  | 'passwordInvalid'
   | 'processing'
   | 'resetPassword'
 
@@ -46,7 +45,6 @@ const BasePayoutDialog = ({
   const isComplete = currStep === 'complete'
   const isConnectStripeAccount = currStep === 'connectStripeAccount'
   const isConfirm = currStep === 'confirm'
-  const isPasswordInvalid = currStep === 'passwordInvalid'
   const isResetPassword = currStep === 'resetPassword'
 
   return (
@@ -77,22 +75,14 @@ const BasePayoutDialog = ({
         {isConfirm && (
           <PaymentForm.Payout.Confirm
             currency={CURRENCY.HKD}
-            submitCallback={(tx) => goForward('complete')}
-            switchToPasswordInvalid={() => goForward('passwordInvalid')}
+            submitCallback={() => goForward('complete')}
+            switchToResetPassword={() => goForward('resetPassword')}
           />
         )}
 
         {isComplete && <PaymentForm.Payout.Complete />}
 
         {/* below steps for password management */}
-
-        {isPasswordInvalid && (
-          <PaymentForm.PasswordInvalid
-            switchToPrevious={() => goForward('confirm')}
-            switchToResetPassword={() => goForward('resetPassword')}
-          />
-        )}
-
         {isResetPassword && (
           <PaymentForm.ResetPassword
             callbackButtons={ContinuePayoutButton}

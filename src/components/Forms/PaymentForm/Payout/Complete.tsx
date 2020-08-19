@@ -37,6 +37,7 @@ const Complete: React.FC<Props> = ({ callback }) => {
           <Translate zh_hant="查看交易" zh_hans="查看交易" />
         </Dialog.Footer.Button>
       </Dialog.Footer>
+
       <style jsx>{styles}</style>
     </>
   )

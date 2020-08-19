@@ -99,16 +99,6 @@ const BaseDonationDialog = ({
     goForward('processing')
   }
 
-  const switchToLike = () => {
-    setAmount(160)
-    setCurrency(CURRENCY.LIKE)
-    goForward('setAmount')
-  }
-
-  const switchToAddCredit = () => {
-    goForward('addCredit')
-  }
-
   const ContinueDonationButton = (
     <Dialog.Footer.Button
       type="button"
@@ -180,7 +170,9 @@ const BaseDonationDialog = ({
             openTabCallback={setAmountOpenTabCallback}
             recipient={recipient}
             submitCallback={setAmountCallback}
-            switchToAddCredit={switchToAddCredit}
+            switchToAddCredit={() => {
+              goForward('addCredit')
+            }}
             targetId={targetId}
           />
         )}
@@ -191,8 +183,7 @@ const BaseDonationDialog = ({
             currency={currency}
             recipient={recipient}
             submitCallback={() => goForward(isHKD ? 'complete' : 'processing')}
-            switchToAddCredit={switchToAddCredit}
-            switchToLike={switchToLike}
+            switchToResetPassword={() => goForward('resetPassword')}
             targetId={targetId}
           />
         )}

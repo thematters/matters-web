@@ -15,25 +15,20 @@ import {
   validatePaymentPassword,
 } from '~/common/utils'
 
-import ConfirmTable from '../ConfirmTable'
+import ConfirmTable from '../../ConfirmTable'
+import styles from './styles.css'
 
 import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
-import {
-  PayTo as PayToMutate,
-  PayTo_payTo as PayToResult,
-} from '~/components/GQL/mutations/__generated__/PayTo'
+import { PayTo as PayToMutate } from '~/components/GQL/mutations/__generated__/PayTo'
 import { WalletBalance } from '~/components/GQL/queries/__generated__/WalletBalance'
 
 interface FormProps {
   amount: number
   currency: CURRENCY
   recipient: UserDonationRecipient
-  submitCallback: (
-    values: Omit<PayToResult, '__typename' | 'redirectUrl'>
-  ) => void
-  switchToAddCredit: () => void
-  switchToLike: () => void
   targetId: string
+  submitCallback: () => void
+  switchToResetPassword: () => void
 }
 
 interface FormValues {
@@ -44,10 +39,9 @@ const Confirm: React.FC<FormProps> = ({
   amount,
   currency,
   recipient,
-  submitCallback,
-  switchToAddCredit,
-  switchToLike,
   targetId,
+  submitCallback,
+  switchToResetPassword,
 }) => {
   const formId = 'pay-to-confirm-form'
 
@@ -88,19 +82,17 @@ const Confirm: React.FC<FormProps> = ({
         })
 
         const transaction = result?.data?.payTo.transaction
+
         if (!transaction) {
           throw new Error()
         }
+
         setSubmitting(false)
-        submitCallback({ transaction })
+        submitCallback()
       } catch (error) {
         setSubmitting(false)
         const [messages, codes] = parseFormSubmitErrors(error, lang)
         setFieldError('password', messages[codes[0]])
-
-        if (codes[0] === 'USER_PASSWORD_INVALID') {
-          // TODO
-        }
       }
     },
   })
@@ -134,37 +126,56 @@ const Confirm: React.FC<FormProps> = ({
   const isWalletInsufficient = balance < amount
 
   return (
-    <Dialog.Content hasGrow>
-      <ConfirmTable>
-        <ConfirmTable.Row total>
-          <ConfirmTable.Col>
-            <Translate zh_hant="支付" zh_hans="支付" />
-          </ConfirmTable.Col>
+    <>
+      <Dialog.Content hasGrow>
+        <section>
+          <section className="confirm">
+            <h4 className="to">
+              <Translate zh_hant="給" zh_hans="给" /> {recipient.displayName}
+            </h4>
 
-          <ConfirmTable.Col>
-            {currency} {toAmountString(amount)}
-          </ConfirmTable.Col>
-        </ConfirmTable.Row>
+            <p className="amount">
+              <b>
+                {currency} {amount}
+              </b>
+            </p>
+          </section>
 
-        <ConfirmTable.Row breaker />
+          <ConfirmTable>
+            <ConfirmTable.Row breaker />
 
-        <ConfirmTable.Row insufficient={isWalletInsufficient}>
-          <ConfirmTable.Col>
-            <b>
-              <Translate id="walletBalance" />
-            </b>
-          </ConfirmTable.Col>
+            <ConfirmTable.Row insufficient={isWalletInsufficient}>
+              <ConfirmTable.Col>
+                <b>
+                  <Translate id="walletBalance" />
+                </b>
+              </ConfirmTable.Col>
 
-          <ConfirmTable.Col>
-            <b>
-              {currency} {toAmountString(balance)}
-            </b>
-          </ConfirmTable.Col>
-        </ConfirmTable.Row>
-      </ConfirmTable>
+              <ConfirmTable.Col>
+                <b>
+                  {currency} {toAmountString(balance)}
+                </b>
+              </ConfirmTable.Col>
+            </ConfirmTable.Row>
+          </ConfirmTable>
 
-      {!isWalletInsufficient && InnerForm}
-    </Dialog.Content>
+          {!isWalletInsufficient && InnerForm}
+
+          <style jsx>{styles}</style>
+        </section>
+      </Dialog.Content>
+
+      <Dialog.Footer>
+        <Dialog.Footer.Button
+          type="button"
+          bgColor="grey-lighter"
+          textColor="black"
+          onClick={switchToResetPassword}
+        >
+          <Translate id="forgetPassword" />
+        </Dialog.Footer.Button>
+      </Dialog.Footer>
+    </>
   )
 }
 
