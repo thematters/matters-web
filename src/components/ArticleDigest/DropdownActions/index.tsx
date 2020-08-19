@@ -15,10 +15,11 @@ import {
   IconMore,
   IconSize,
   Menu,
+  Translate,
   ViewerContext,
 } from '~/components'
 
-import { TEXT } from '~/common/enums'
+import { ADD_TOAST, TEXT } from '~/common/enums'
 import { getQuery } from '~/common/utils'
 
 import AppreciatorsButton from './AppreciatorsButton'
@@ -194,6 +195,17 @@ const DropdownActions = (props: DropdownActionsProps) => {
       isEditor || isCreator || viewer.info.email === 'hi@matters.news'
   }
 
+  const forbid = () => {
+    window.dispatchEvent(
+      new CustomEvent(ADD_TOAST, {
+        detail: {
+          color: 'red',
+          content: <Translate id="FORBIDDEN" />,
+        },
+      })
+    )
+  }
+
   const controls = {
     hasAppreciators: article.appreciationsReceived.totalCount > 0,
     hasFingerprint: isActive || isArticleAuthor,
@@ -227,7 +239,9 @@ const DropdownActions = (props: DropdownActionsProps) => {
                   {...controls}
                   openFingerprintDialog={openFingerprintDialog}
                   openAppreciatorsDialog={openAppreciatorsDialog}
-                  openArchiveDialog={openArchiveDialog}
+                  openArchiveDialog={
+                    viewer.isFrozen ? forbid : openArchiveDialog
+                  }
                 />
               )}
             </ArchiveArticle.Dialog>

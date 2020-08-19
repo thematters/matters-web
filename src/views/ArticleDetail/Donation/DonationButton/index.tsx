@@ -29,6 +29,17 @@ const DonationButton = ({ recipient, targetId }: DonationButtonProps) => {
     window.dispatchEvent(new CustomEvent(REFETCH_DONATORS, {}))
   }
 
+  const forbid = () => {
+    window.dispatchEvent(
+      new CustomEvent(ADD_TOAST, {
+        detail: {
+          color: 'red',
+          content: <Translate id="FORBIDDEN" />,
+        },
+      })
+    )
+  }
+
   const showLoginToast = () => {
     window.dispatchEvent(
       new CustomEvent(ADD_TOAST, {
@@ -63,6 +74,10 @@ const DonationButton = ({ recipient, targetId }: DonationButtonProps) => {
               analytics.trackEvent('click_button', { type: 'donate' })
               if (!viewer.isAuthed) {
                 showLoginToast()
+                return
+              }
+              if (viewer.isFrozen) {
+                forbid()
                 return
               }
               open()

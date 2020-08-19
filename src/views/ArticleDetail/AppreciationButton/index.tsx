@@ -19,6 +19,7 @@ import { getQuery } from '~/common/utils'
 import AnonymousButton from './AnonymousButton'
 import AppreciateButton from './AppreciateButton'
 import CivicLikerButton from './CivicLikerButton'
+import ForbiddenButton from './ForbiddenButton'
 import { APPRECIATE_ARTICLE, fragments } from './gql'
 import SetupLikerIdAppreciateButton from './SetupLikerIdAppreciateButton'
 import ViewSuperLikeButton from './ViewSuperLikeButton'
@@ -172,6 +173,12 @@ const AppreciationButton = ({
   if (!viewer.isAuthed) {
     return <AnonymousButton total={total} />
   }
+
+  // Frobidden
+  if (viewer.isFrozen) {
+    return <ForbiddenButton total={total} />
+  }
+
 
   // Article Author
   if (isArticleAuthor) {

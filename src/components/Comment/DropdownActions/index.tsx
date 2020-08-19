@@ -161,7 +161,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
   const { comment } = props
   const viewer = useContext(ViewerContext)
 
-  const { isArchived, isBanned } = viewer
+  const { isArchived, isBanned, isFrozen } = viewer
   const isArticleAuthor = viewer.id === comment.article.author.id
   const isCommentAuthor = viewer.id === comment.author.id
   const isActive = comment.state === 'active'
@@ -212,9 +212,11 @@ const DropdownActions = (props: DropdownActionsProps) => {
                       {...props}
                       {...controls}
                       openEditCommentDialog={
-                        isBanned ? forbid : openEditCommentDialog
+                        isBanned || isFrozen ? forbid : openEditCommentDialog
                       }
-                      openDeleteCommentDialog={openDeleteCommentDialog}
+                      openDeleteCommentDialog={
+                        isFrozen ? forbid : openDeleteCommentDialog
+                      }
                       openBlockUserDialog={openBlockUserDialog}
                       openCollapseCommentDialog={openCollapseCommentDialog}
                     />
