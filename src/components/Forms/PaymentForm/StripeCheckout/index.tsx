@@ -6,9 +6,9 @@ import { Form, LanguageContext, Translate } from '~/components'
 
 import styles from './styles.css'
 
-interface CardSectionProps {
+interface StripeCheckoutProps {
   error?: string | React.ReactNode
-  onChange: (event: StripeCardElementChangeEvent) => any
+  onChange: (error: StripeCardElementChangeEvent) => void
 }
 
 const FONT_FAMILY = {
@@ -18,7 +18,7 @@ const FONT_FAMILY = {
     '-apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", Roboto, Arial, "PingFang TC", "Microsoft YaHei", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", sans-serif',
 }
 
-const CardSection: React.FC<CardSectionProps> = ({ error, onChange }) => {
+const StripeCheckout: React.FC<StripeCheckoutProps> = ({ error, onChange }) => {
   const { lang } = useContext(LanguageContext)
   const options = {
     style: {
@@ -78,4 +78,4 @@ const CardSection: React.FC<CardSectionProps> = ({ error, onChange }) => {
   )
 }
 
-export default CardSection
+export default StripeCheckout

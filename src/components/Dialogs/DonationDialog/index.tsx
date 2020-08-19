@@ -10,25 +10,20 @@ import {
 } from '~/components'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
-import { analytics, numRound } from '~/common/utils'
+import { analytics } from '~/common/utils'
 
-import { AddCredit_addCredit_transaction as AddCreditTx } from '~/components/Forms/PaymentForm/AddCredit/__generated__/AddCredit'
 import { PayTo_payTo_transaction as PayToTx } from '~/components/GQL/mutations/__generated__/PayTo'
 import { UserDonationRecipient } from './__generated__/UserDonationRecipient'
 
 type Step =
+  | 'setAmount'
   | 'addCredit'
-  | 'addCreditComplete'
-  | 'addCreditProcessing'
-  | 'checkout'
   | 'complete'
   | 'confirm'
-  | 'passwordInvalid'
   | 'processing'
   | 'resetPasswordComplete'
   | 'resetPasswordConfirm'
   | 'resetPasswordRequest'
-  | 'setAmount'
   | 'setPaymentPassword'
 
 interface SetAmountCallbackValues {
@@ -39,11 +34,6 @@ interface SetAmountCallbackValues {
 interface SetAmountOpenTabCallbackValues {
   window: Window
   transaction: PayToTx
-}
-
-interface AddCreditData {
-  client_secret: string
-  transaction: AddCreditTx | undefined
 }
 
 interface ResetPasswordData {
@@ -82,7 +72,6 @@ const BaseDonationDialog = ({
 }: DonationDialogProps) => {
   const viewer = useContext(ViewerContext)
 
-  const baseAddCreditData = { transaction: undefined, client_secret: '' }
   const baseResetPasswordData = { email: viewer.info.email, codeId: '' }
 
   const [showDialog, setShowDialog] = useState(true)
@@ -92,15 +81,11 @@ const BaseDonationDialog = ({
   const [amount, setAmount] = useState<number>(0)
   const [currency, setCurrency] = useState<CURRENCY>(CURRENCY.HKD)
   const [payToTx, setPayToTx] = useState<Omit<PayToTx, '__typename'>>()
-  const [addCreditData, setAddCreditData] = useState<AddCreditData>(
-    baseAddCreditData
-  )
   const [resetPasswordData, setResetPasswordData] = useState<ResetPasswordData>(
     baseResetPasswordData
   )
 
   const open = () => {
-    setAddCreditData(baseAddCreditData)
     goForward(defaultStep)
     setShowDialog(true)
   }
@@ -133,13 +118,7 @@ const BaseDonationDialog = ({
   }
 
   const switchToAddCredit = () => {
-    setAddCreditData(baseAddCreditData)
     goForward('addCredit')
-  }
-
-  const addCreditCallback = ({ transaction, client_secret }: any) => {
-    setAddCreditData({ ...addCreditData, transaction, client_secret })
-    goForward('checkout')
   }
 
   const resetPasswordRequestCallback = ({ email, codeId }: any) => {
@@ -154,21 +133,9 @@ const BaseDonationDialog = ({
       textColor="white"
       onClick={() => goForward('confirm')}
     >
-      <Translate zh_hant="繼續支付" zh_hans="继续支付" />
+      <Translate zh_hant="回到交易" zh_hans="回到交易" />
     </Dialog.Footer.Button>
   )
-
-  /**
-   * Add Credit
-   */
-  // add credit when credit not enough
-  const isAddCredit = currStep === 'addCredit'
-  const isAddCreditComplete = currStep === 'addCreditComplete'
-  const isAddCreditProcessing = currStep === 'addCreditProcessing'
-  // stripe elements
-  const isCheckout = currStep === 'checkout'
-  // processing
-  const isProcessing = currStep === 'processing'
 
   /**
    * Donation
@@ -179,12 +146,18 @@ const BaseDonationDialog = ({
   const isSetAmount = currStep === 'setAmount'
   // confirm donation amount
   const isConfirm = currStep === 'confirm'
+  // processing
+  const isProcessing = currStep === 'processing'
+
+  /**
+   * Add Credit
+   */
+  const isAddCredit = currStep === 'addCredit'
 
   /**
    * Password
    */
   // wrong password
-  const isPasswordInvalid = currStep === 'passwordInvalid'
   const isResetPasswordComplete = currStep === 'resetPasswordComplete'
   const isResetPasswordConfirm = currStep === 'resetPasswordConfirm'
   const isResetPasswordRequest = currStep === 'resetPasswordRequest'
@@ -210,7 +183,7 @@ const BaseDonationDialog = ({
             <Dialog.Header.CloseButton close={close} textId="close" />
           }
           title={
-            isAddCredit || isCheckout || isAddCreditProcessing
+            isAddCredit
               ? 'topUp'
               : isSetPaymentPassword
               ? 'paymentPassword'
@@ -242,7 +215,6 @@ const BaseDonationDialog = ({
             submitCallback={() => goForward(isHKD ? 'complete' : 'processing')}
             switchToAddCredit={switchToAddCredit}
             switchToLike={switchToLike}
-            switchToPasswordInvalid={() => goForward('passwordInvalid')}
             targetId={targetId}
           />
         )}
@@ -271,46 +243,11 @@ const BaseDonationDialog = ({
         )}
 
         {/* below steps for add credit */}
-
         {isAddCredit && (
-          <PaymentForm.AddCredit.Confirm submitCallback={addCreditCallback} />
-        )}
-
-        {isCheckout && addCreditData.transaction && (
-          <PaymentForm.Checkout
-            client_secret={addCreditData.client_secret}
-            amount={numRound(
-              addCreditData.transaction.amount + addCreditData.transaction.fee
-            )}
-            currency={addCreditData.transaction.currency}
-            submitCallback={() => goForward('addCreditProcessing')}
-          />
-        )}
-
-        {isAddCreditProcessing && addCreditData.transaction && (
-          <PaymentForm.Processing
-            txId={addCreditData.transaction.id}
-            nextStep={() => goForward('addCreditComplete')}
-          />
-        )}
-
-        {isAddCreditComplete && addCreditData.transaction && (
-          <PaymentForm.AddCredit.Complete
-            amount={addCreditData.transaction.amount}
-            currency={addCreditData.transaction.currency}
-            footerButtons={ContinueDonationButton}
-          />
+          <PaymentForm.AddCredit footerButtons={ContinueDonationButton} />
         )}
 
         {/* below steps for password management */}
-
-        {isPasswordInvalid && (
-          <PaymentForm.PasswordInvalid
-            switchToPrevious={() => goForward('confirm')}
-            switchToResetPassword={() => goForward('resetPasswordRequest')}
-          />
-        )}
-
         {isResetPasswordRequest && (
           <PaymentForm.ResetPassword.Request
             defaultEmail={resetPasswordData.email}

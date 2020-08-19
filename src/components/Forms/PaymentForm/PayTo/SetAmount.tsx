@@ -89,7 +89,9 @@ const SetAmount: React.FC<FormProps> = ({
   const inputRef: React.RefObject<any> | null = useRef(null)
 
   // HKD balance
-  const { data } = useQuery<WalletBalance>(WALLET_BALANCE)
+  const { data } = useQuery<WalletBalance>(WALLET_BALANCE, {
+    fetchPolicy: 'no-cache',
+  })
   const balance = data?.viewer?.wallet.balance.HKD || 0
 
   const {

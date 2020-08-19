@@ -246,7 +246,9 @@ const BaseConfirm: React.FC<FormProps> = ({
 }
 
 const Confirm = (props: Omit<FormProps, 'balance'>) => {
-  const { data, loading } = useQuery<WalletBalance>(WALLET_BALANCE)
+  const { data, loading } = useQuery<WalletBalance>(WALLET_BALANCE, {
+    fetchPolicy: 'no-cache',
+  })
 
   if (loading) {
     return <Spinner />

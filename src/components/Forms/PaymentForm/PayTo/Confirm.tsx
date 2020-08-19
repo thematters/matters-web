@@ -33,7 +33,6 @@ interface FormProps {
   ) => void
   switchToAddCredit: () => void
   switchToLike: () => void
-  switchToPasswordInvalid: () => void
   targetId: string
 }
 
@@ -48,7 +47,6 @@ const Confirm: React.FC<FormProps> = ({
   submitCallback,
   switchToAddCredit,
   switchToLike,
-  switchToPasswordInvalid,
   targetId,
 }) => {
   const formId = 'pay-to-confirm-form'
@@ -56,7 +54,9 @@ const Confirm: React.FC<FormProps> = ({
   const { lang } = useContext(LanguageContext)
   const [payTo] = useMutation<PayToMutate>(PAY_TO)
 
-  const { data, loading } = useQuery<WalletBalance>(WALLET_BALANCE)
+  const { data, loading } = useQuery<WalletBalance>(WALLET_BALANCE, {
+    fetchPolicy: 'no-cache',
+  })
 
   const {
     errors,
@@ -99,7 +99,7 @@ const Confirm: React.FC<FormProps> = ({
         setFieldError('password', messages[codes[0]])
 
         if (codes[0] === 'USER_PASSWORD_INVALID') {
-          switchToPasswordInvalid()
+          // TODO
         }
       }
     },
