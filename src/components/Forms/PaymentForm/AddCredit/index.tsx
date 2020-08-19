@@ -34,13 +34,12 @@ import {
 } from '~/common/utils'
 
 import StripeCheckout from '../StripeCheckout'
-import styles from './styles.css'
 
 import { AddCredit as AddCreditType } from './__generated__/AddCredit'
 
 interface FormProps {
   defaultAmount?: number
-  footerButtons?: React.ReactNode
+  callbackButtons?: React.ReactNode
 }
 
 interface FormValues {
@@ -69,7 +68,7 @@ const stripePromise = loadStripe(
 
 const BaseAddCredit: React.FC<FormProps> = ({
   defaultAmount,
-  footerButtons,
+  callbackButtons,
 }) => {
   const stripe = useStripe()
   const elements = useElements()
@@ -220,15 +219,15 @@ const BaseAddCredit: React.FC<FormProps> = ({
   if (completed) {
     return (
       <>
-        <Dialog.Content hasGrow>
-          <section className="complete-content">
-            <CurrencyAmount amount={values.amount} currency={currency} />
+        <Dialog.Message spacing="xxl">
+          <h3>
+            <Translate id="successTopUp" />
+          </h3>
+          <br />
+          <CurrencyAmount amount={values.amount} currency={currency} />
+        </Dialog.Message>
 
-            <style jsx>{styles}</style>
-          </section>
-        </Dialog.Content>
-
-        {footerButtons && <Dialog.Footer>{footerButtons}</Dialog.Footer>}
+        {callbackButtons && <Dialog.Footer>{callbackButtons}</Dialog.Footer>}
       </>
     )
   }
@@ -236,9 +235,11 @@ const BaseAddCredit: React.FC<FormProps> = ({
   return (
     <>
       <Dialog.Content hasGrow>
-        {InnerForm}
+        <section>
+          {InnerForm}
 
-        <StripeCheckout error={checkoutError} onChange={onCheckoutChange} />
+          <StripeCheckout error={checkoutError} onChange={onCheckoutChange} />
+        </section>
       </Dialog.Content>
 
       <Dialog.Footer>

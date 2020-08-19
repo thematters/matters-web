@@ -21,9 +21,7 @@ type Step =
   | 'complete'
   | 'confirm'
   | 'processing'
-  | 'resetPasswordComplete'
-  | 'resetPasswordConfirm'
-  | 'resetPasswordRequest'
+  | 'resetPassword'
   | 'setPaymentPassword'
 
 interface SetAmountCallbackValues {
@@ -34,11 +32,6 @@ interface SetAmountCallbackValues {
 interface SetAmountOpenTabCallbackValues {
   window: Window
   transaction: PayToTx
-}
-
-interface ResetPasswordData {
-  codeId: string
-  email: string
 }
 
 interface DonationDialogProps {
@@ -72,8 +65,6 @@ const BaseDonationDialog = ({
 }: DonationDialogProps) => {
   const viewer = useContext(ViewerContext)
 
-  const baseResetPasswordData = { email: viewer.info.email, codeId: '' }
-
   const [showDialog, setShowDialog] = useState(true)
   const { currStep, prevStep, goForward, goBack } = useStep<Step>(defaultStep)
   const [windowRef, setWindowRef] = useState<Window | undefined>(undefined)
@@ -81,9 +72,6 @@ const BaseDonationDialog = ({
   const [amount, setAmount] = useState<number>(0)
   const [currency, setCurrency] = useState<CURRENCY>(CURRENCY.HKD)
   const [payToTx, setPayToTx] = useState<Omit<PayToTx, '__typename'>>()
-  const [resetPasswordData, setResetPasswordData] = useState<ResetPasswordData>(
-    baseResetPasswordData
-  )
 
   const open = () => {
     goForward(defaultStep)
@@ -121,11 +109,6 @@ const BaseDonationDialog = ({
     goForward('addCredit')
   }
 
-  const resetPasswordRequestCallback = ({ email, codeId }: any) => {
-    setResetPasswordData({ ...resetPasswordData, email, codeId })
-    goForward('resetPasswordConfirm')
-  }
-
   const ContinueDonationButton = (
     <Dialog.Footer.Button
       type="button"
@@ -157,10 +140,7 @@ const BaseDonationDialog = ({
   /**
    * Password
    */
-  // wrong password
-  const isResetPasswordComplete = currStep === 'resetPasswordComplete'
-  const isResetPasswordConfirm = currStep === 'resetPasswordConfirm'
-  const isResetPasswordRequest = currStep === 'resetPasswordRequest'
+  const isResetPassword = currStep === 'resetPassword'
   const isSetPaymentPassword = currStep === 'setPaymentPassword'
 
   const isHKD = currency === CURRENCY.HKD
@@ -187,9 +167,7 @@ const BaseDonationDialog = ({
               ? 'topUp'
               : isSetPaymentPassword
               ? 'paymentPassword'
-              : isResetPasswordComplete ||
-                isResetPasswordConfirm ||
-                isResetPasswordRequest
+              : isResetPassword
               ? 'resetPaymentPassword'
               : 'donation'
           }
@@ -244,28 +222,14 @@ const BaseDonationDialog = ({
 
         {/* below steps for add credit */}
         {isAddCredit && (
-          <PaymentForm.AddCredit footerButtons={ContinueDonationButton} />
+          <PaymentForm.AddCredit callbackButtons={ContinueDonationButton} />
         )}
 
         {/* below steps for password management */}
-        {isResetPasswordRequest && (
-          <PaymentForm.ResetPassword.Request
-            defaultEmail={resetPasswordData.email}
-            submitCallback={resetPasswordRequestCallback}
-          />
-        )}
-
-        {isResetPasswordConfirm && (
-          <PaymentForm.ResetPassword.Confirm
-            codeId={resetPasswordData.codeId}
-            submitCallback={() => goForward('resetPasswordComplete')}
-          />
-        )}
-
-        {isResetPasswordComplete && (
-          <PaymentForm.ResetPassword.Complete
-            closeDialog={close}
-            footerButtons={ContinueDonationButton}
+        {isResetPassword && (
+          <PaymentForm.ResetPassword
+            callbackButtons={ContinueDonationButton}
+            close={close}
           />
         )}
       </Dialog>
