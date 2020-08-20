@@ -5,37 +5,3 @@
   color: var(--color-grey-dark);
   text-align: center;
 }
-
-.password-invalid-footer {
-  & :global(> footer) {
-    @mixin flex-center-all;
-
-    flex-direction: column;
-    margin-top: 0;
-
-    & :global(> button:last-child) {
-      margin: var(--spacing-base) 0 var(--spacing-base);
-    }
-  }
-}
-
-.complete-avatar {
-  @mixin flex-center-all;
-
-  margin: var(--spacing-loose) var(--spacing-x-loose);
-}
-
-.complete-avatar-outline {
-  @mixin flex-center-all;
-
-  margin-left: calc(var(--spacing-x-tight) * -1);
-  border: 2.5px solid var(--color-white);
-  border-radius: 50%;
-}
-
-.complete-message {
-  margin: 0 var(--spacing-x-loose) var(--spacing-x-loose);
-  line-height: 2;
-  color: var(--color-grey-darker);
-  text-align: center;
-}

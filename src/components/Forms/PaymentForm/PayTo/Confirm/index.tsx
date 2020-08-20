@@ -3,7 +3,7 @@ import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useEffect } from 'react'
 
-import { Dialog, Form, LanguageContext, Spinner, Translate } from '~/components'
+import { Dialog, Form, LanguageContext, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import PAY_TO from '~/components/GQL/mutations/payTo'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
@@ -48,7 +48,7 @@ const Confirm: React.FC<FormProps> = ({
   const { lang } = useContext(LanguageContext)
   const [payTo] = useMutation<PayToMutate>(PAY_TO)
 
-  const { data, loading } = useQuery<WalletBalance>(WALLET_BALANCE, {
+  const { data } = useQuery<WalletBalance>(WALLET_BALANCE, {
     fetchPolicy: 'network-only',
   })
 
@@ -117,10 +117,6 @@ const Confirm: React.FC<FormProps> = ({
       handleSubmit()
     }
   }, [isValid])
-
-  if (loading) {
-    return <Spinner />
-  }
 
   const balance = data?.viewer?.wallet.balance.HKD || 0
   const isWalletInsufficient = balance < amount

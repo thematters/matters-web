@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import { useContext } from 'react'
 
 import { Button, ButtonProps, LanguageContext, Translate } from '~/components'
@@ -10,14 +11,21 @@ import styles from './styles.css'
 type CustomAmountProps = {
   balance: number
   fixed: boolean
+  insufficient: boolean
 } & ButtonProps
 
 export const CustomAmount: React.FC<CustomAmountProps> = ({
   balance,
   fixed,
+  insufficient,
   ...buttonProps
 }) => {
   const { lang } = useContext(LanguageContext)
+
+  const balanceClasses = classNames({
+    balance: true,
+    insufficient,
+  })
 
   return (
     <section className="container">
@@ -27,9 +35,13 @@ export const CustomAmount: React.FC<CustomAmountProps> = ({
           : translate({ zh_hant: '固定金額', zh_hans: '固定金額', lang })}
       </Button>
 
-      <span className="wallet-balance">
-        <Translate id="walletBalance" /> {PAYMENT_CURRENCY.HKD}{' '}
-        <b>{toAmountString(balance)}</b>
+      <span className={balanceClasses}>
+        <Translate
+          id={insufficient ? 'walletBalanceInsufficient' : 'walletBalance'}
+        />
+        <b>
+          &nbsp;{PAYMENT_CURRENCY.HKD}&nbsp;{toAmountString(balance)}
+        </b>
       </span>
 
       <style jsx>{styles}</style>

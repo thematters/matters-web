@@ -125,8 +125,6 @@ const BaseAddCredit: React.FC<FormProps> = ({
         amount: validateAmount(amount, lang),
       }),
     onSubmit: async ({ amount }, { setSubmitting }) => {
-      // TBC: analytics.trackEvent('click_button', { type: 'checkout' })
-
       /**
        * Create Transaction
        */

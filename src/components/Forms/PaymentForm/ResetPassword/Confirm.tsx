@@ -3,14 +3,7 @@ import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useEffect } from 'react'
 
-import {
-  Dialog,
-  Form,
-  LanguageContext,
-  Spinner,
-  Translate,
-  useStep,
-} from '~/components'
+import { Dialog, Form, LanguageContext, Spinner, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import {
@@ -40,11 +33,6 @@ export const RESET_PAYMENT_PASSWORD = gql`
 const Confirm: React.FC<FormProps> = ({ codeId, submitCallback }) => {
   const [reset] = useMutation<ResetPaymentPassword>(RESET_PAYMENT_PASSWORD)
   const { lang } = useContext(LanguageContext)
-  const { currStep, goForward } = useStep<'password' | 'comparedPassword'>(
-    'password'
-  )
-  const isInPassword = currStep === 'password'
-  const isInComparedPassword = currStep === 'comparedPassword'
 
   const {
     values,
@@ -68,14 +56,9 @@ const Confirm: React.FC<FormProps> = ({ codeId, submitCallback }) => {
         lang
       )
 
-      // jump to next step
-      if (!passwordError && isInPassword) {
-        goForward('comparedPassword')
-      }
-
       return _pickBy({
-        password: isInPassword && passwordError,
-        comparedPassword: isInComparedPassword && comparedPasswordError,
+        password: passwordError,
+        comparedPassword: comparedPasswordError,
       })
     },
     onSubmit: async ({ password }, { setFieldError, setSubmitting }) => {
@@ -96,32 +79,30 @@ const Confirm: React.FC<FormProps> = ({ codeId, submitCallback }) => {
 
   const InnerForm = (
     <Form onSubmit={handleSubmit} noBackground>
-      {isInPassword && (
-        <Form.PinInput
-          length={6}
-          label={<Translate id="hintPaymentPassword" />}
-          name="password"
-          error={touched.password && errors.password}
-          onChange={(value) => {
-            const shouldValidate = value.length === 6
-            setTouched({ password: true }, shouldValidate)
-            setFieldValue('password', value, shouldValidate)
-          }}
-        />
-      )}
-      {isInComparedPassword && (
-        <Form.PinInput
-          length={6}
-          label={<Translate id="enterPaymentPasswordAgain" />}
-          name="compared-password"
-          error={touched.comparedPassword && errors.comparedPassword}
-          onChange={(value) => {
-            const shouldValidate = value.length === 6
-            setTouched({ comparedPassword: true }, shouldValidate)
-            setFieldValue('comparedPassword', value, shouldValidate)
-          }}
-        />
-      )}
+      <Form.PinInput
+        length={6}
+        label={<Translate id="hintPaymentPassword" />}
+        name="password"
+        error={touched.password && errors.password}
+        onChange={(value) => {
+          const shouldValidate = value.length === 6
+          setTouched({ password: true }, shouldValidate)
+          setFieldValue('password', value, shouldValidate)
+        }}
+      />
+
+      <Form.PinInput
+        length={6}
+        label={<Translate id="enterPaymentPasswordAgain" />}
+        name="compared-password"
+        error={touched.comparedPassword && errors.comparedPassword}
+        onChange={(value) => {
+          const shouldValidate = value.length === 6
+          setTouched({ comparedPassword: true }, shouldValidate)
+          setFieldValue('comparedPassword', value, shouldValidate)
+        }}
+        autoFocus={false}
+      />
     </Form>
   )
 

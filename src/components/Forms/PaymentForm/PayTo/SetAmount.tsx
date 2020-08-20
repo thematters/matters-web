@@ -222,6 +222,7 @@ const SetAmount: React.FC<FormProps> = ({
         <CustomAmount
           balance={balance}
           fixed={fixed}
+          insufficient={isBalanceInsufficient}
           disabled={locked}
           textColor={color}
           onClick={() => {
