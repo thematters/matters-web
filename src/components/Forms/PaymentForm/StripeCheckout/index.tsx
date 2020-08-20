@@ -41,12 +41,14 @@ const StripeCheckout: React.FC<StripeCheckoutProps> = ({ error, onChange }) => {
     },
     hidePostalCode: true,
   }
+  const fieldId = 'field-checkout'
+  const fieldMsgId = 'field-msg-checkout'
 
   return (
     <>
       <Form.Field>
         <Form.Field.Header
-          htmlFor="field-checkout"
+          htmlFor={fieldId}
           label={
             <Translate
               zh_hant="Visa / Mastercard / American Express 支付"
@@ -56,11 +58,11 @@ const StripeCheckout: React.FC<StripeCheckoutProps> = ({ error, onChange }) => {
         />
 
         <Form.Field.Content>
-          <CardElement options={options} onChange={onChange} />
+          <CardElement id={fieldId} options={options} onChange={onChange} />
         </Form.Field.Content>
 
         <Form.Field.Footer
-          fieldMsgId="field-msg-checkout"
+          fieldMsgId={fieldMsgId}
           hint={
             <Translate
               zh_hant="付款信息由 Stripe 處理，不會被 Matters 儲存。"

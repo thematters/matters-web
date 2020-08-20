@@ -211,12 +211,10 @@ const BaseDonationDialog = ({
           />
         )}
 
-        {/* below steps for add credit */}
         {isAddCredit && (
           <PaymentForm.AddCredit callbackButtons={ContinueDonationButton} />
         )}
 
-        {/* below steps for password management */}
         {isResetPassword && (
           <PaymentForm.ResetPassword
             callbackButtons={ContinueDonationButton}

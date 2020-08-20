@@ -59,6 +59,7 @@ const AmountInput = forwardRef(
 
           <input
             {...inputProps}
+            id={fieldId}
             ref={ref}
             name={name}
             type="number"

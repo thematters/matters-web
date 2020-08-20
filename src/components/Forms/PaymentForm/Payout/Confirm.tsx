@@ -32,7 +32,6 @@ import {
 } from '~/common/utils'
 
 import ConfirmTable from '../ConfirmTable'
-import styles from './styles.css'
 
 import { Payout as PayoutMutate } from '~/components/GQL/mutations/__generated__/Payout'
 import { WalletBalance } from '~/components/GQL/queries/__generated__/WalletBalance'
@@ -114,17 +113,13 @@ const BaseConfirm: React.FC<FormProps> = ({
       <Dialog.Content hasGrow>
         <Form id={formId} onSubmit={handleSubmit} noBackground>
           <ConfirmTable>
-            <ConfirmTable.Row>
+            <ConfirmTable.Row type="balance">
               <ConfirmTable.Col>
-                <b>
-                  <Translate id="walletBalance" />
-                </b>
+                <Translate id="walletBalance" />
               </ConfirmTable.Col>
 
               <ConfirmTable.Col>
-                <b>
-                  {currency} {toAmountString(balance)}
-                </b>
+                {currency} {toAmountString(balance)}
               </ConfirmTable.Col>
             </ConfirmTable.Row>
           </ConfirmTable>
@@ -194,7 +189,7 @@ const BaseConfirm: React.FC<FormProps> = ({
               </ConfirmTable.Col>
             </ConfirmTable.Row>
 
-            <ConfirmTable.Row total>
+            <ConfirmTable.Row type="total">
               <ConfirmTable.Col>
                 <Translate zh_hant="實際提現" zh_hans="实际提现" />
               </ConfirmTable.Col>
@@ -239,15 +234,13 @@ const BaseConfirm: React.FC<FormProps> = ({
           <Translate id="forgetPassword" />
         </Dialog.Footer.Button>
       </Dialog.Footer>
-
-      <style jsx>{styles}</style>
     </>
   )
 }
 
 const Confirm = (props: Omit<FormProps, 'balance'>) => {
   const { data, loading } = useQuery<WalletBalance>(WALLET_BALANCE, {
-    fetchPolicy: 'no-cache',
+    fetchPolicy: 'network-only',
   })
   const balance = data?.viewer?.wallet.balance.HKD || 0
 

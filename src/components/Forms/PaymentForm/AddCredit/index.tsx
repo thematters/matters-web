@@ -1,3 +1,4 @@
+import { useQuery } from '@apollo/react-hooks'
 import {
   CardElement,
   Elements,
@@ -19,6 +20,7 @@ import {
   Translate,
 } from '~/components'
 import { useMutation } from '~/components/GQL'
+import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
 
 import {
   PAYMENT_CURRENCY,
@@ -29,12 +31,15 @@ import {
 import {
   analytics,
   parseFormSubmitErrors,
+  toAmountString,
   translate,
   validateAmount,
 } from '~/common/utils'
 
+import ConfirmTable from '../ConfirmTable'
 import StripeCheckout from '../StripeCheckout'
 
+import { WalletBalance } from '~/components/GQL/queries/__generated__/WalletBalance'
 import { AddCredit as AddCreditType } from './__generated__/AddCredit'
 
 interface FormProps {
@@ -74,6 +79,11 @@ const BaseAddCredit: React.FC<FormProps> = ({
   const elements = useElements()
   const { lang } = useContext(LanguageContext)
   const [addCredit] = useMutation<AddCreditType>(ADD_CREDIT)
+
+  const { data: balanceData } = useQuery<WalletBalance>(WALLET_BALANCE, {
+    fetchPolicy: 'network-only',
+  })
+  const balance = balanceData?.viewer?.wallet.balance.HKD || 0
 
   const [completed, setCompleted] = useState(false)
   const [checkoutError, setCheckoutError] = useState('')
@@ -236,6 +246,22 @@ const BaseAddCredit: React.FC<FormProps> = ({
     <>
       <Dialog.Content hasGrow>
         <section>
+          <ConfirmTable>
+            <ConfirmTable.Row type="balance">
+              <ConfirmTable.Col>
+                <b>
+                  <Translate id="walletBalance" />
+                </b>
+              </ConfirmTable.Col>
+
+              <ConfirmTable.Col>
+                <b>
+                  {currency} {toAmountString(balance)}
+                </b>
+              </ConfirmTable.Col>
+            </ConfirmTable.Row>
+          </ConfirmTable>
+
           {InnerForm}
 
           <StripeCheckout error={checkoutError} onChange={onCheckoutChange} />

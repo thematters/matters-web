@@ -26,7 +26,7 @@ const Wallet = () => {
   const viewer = useContext(ViewerContext)
 
   const { data, loading, refetch } = useQuery<WalletBalance>(WALLET_BALANCE, {
-    fetchPolicy: 'no-cache',
+    fetchPolicy: 'network-only',
   })
   const balanceHKD = data?.viewer?.wallet.balance.HKD || 0
   const canPayout = balanceHKD >= PAYMENT_MINIMAL_PAYOUT_AMOUNT.HKD

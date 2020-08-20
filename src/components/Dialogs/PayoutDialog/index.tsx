@@ -80,9 +80,8 @@ const BasePayoutDialog = ({
           />
         )}
 
-        {isComplete && <PaymentForm.Payout.Complete />}
+        {isComplete && <PaymentForm.Payout.Complete close={close} />}
 
-        {/* below steps for password management */}
         {isResetPassword && (
           <PaymentForm.ResetPassword
             callbackButtons={ContinuePayoutButton}

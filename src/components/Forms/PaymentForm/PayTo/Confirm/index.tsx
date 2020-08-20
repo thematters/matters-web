@@ -49,7 +49,7 @@ const Confirm: React.FC<FormProps> = ({
   const [payTo] = useMutation<PayToMutate>(PAY_TO)
 
   const { data, loading } = useQuery<WalletBalance>(WALLET_BALANCE, {
-    fetchPolicy: 'no-cache',
+    fetchPolicy: 'network-only',
   })
 
   const {
@@ -129,7 +129,7 @@ const Confirm: React.FC<FormProps> = ({
     <>
       <Dialog.Content hasGrow>
         <section>
-          <section className="confirm">
+          <section className="info">
             <h4 className="to">
               <Translate zh_hant="給" zh_hans="给" /> {recipient.displayName}
             </h4>
@@ -142,19 +142,17 @@ const Confirm: React.FC<FormProps> = ({
           </section>
 
           <ConfirmTable>
-            <ConfirmTable.Row breaker />
+            <ConfirmTable.Row type="breaker" />
 
-            <ConfirmTable.Row insufficient={isWalletInsufficient}>
+            <ConfirmTable.Row
+              type={isWalletInsufficient ? 'insufficient' : 'balance'}
+            >
               <ConfirmTable.Col>
-                <b>
-                  <Translate id="walletBalance" />
-                </b>
+                <Translate id="walletBalance" />
               </ConfirmTable.Col>
 
               <ConfirmTable.Col>
-                <b>
-                  {currency} {toAmountString(balance)}
-                </b>
+                {currency} {toAmountString(balance)}
               </ConfirmTable.Col>
             </ConfirmTable.Row>
           </ConfirmTable>
