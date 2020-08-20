@@ -89,7 +89,7 @@ const BaseFooterActions = ({
       })
     )
   }
-  const forbid = () => addToast('FORBIDDEN')
+  const forbid = () => addToast('FORBIDDEN_BY_STATE')
 
   let onClick
 

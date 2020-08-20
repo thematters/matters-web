@@ -179,7 +179,6 @@ const AppreciationButton = ({
     return <ForbiddenButton total={total} />
   }
 
-
   // Article Author
   if (isArticleAuthor) {
     return (

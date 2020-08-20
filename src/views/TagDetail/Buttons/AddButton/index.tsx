@@ -152,6 +152,18 @@ const DropdownActions = (props: DropdownActionsProps) => {
     )
   }
 
+  const forbid = () => {
+    window.dispatchEvent(
+      new CustomEvent(ADD_TOAST, {
+        detail: {
+          color: 'red',
+          content: <Translate id="FORBIDDEN_BY_STATE" />,
+        },
+      })
+    )
+    return
+  }
+
   /**
    * Render
    */
@@ -175,8 +187,12 @@ const DropdownActions = (props: DropdownActionsProps) => {
           {({ open: openAddSelectedArticlesDialog }) => (
             <BaseDropdownActions
               {...props}
-              openAddSelectedArticlesDialog={openAddSelectedArticlesDialog}
-              openAddMyArticlesDialog={openAddMyArticlesDialog}
+              openAddSelectedArticlesDialog={
+                viewer.isFrozen ? forbid : openAddSelectedArticlesDialog
+              }
+              openAddMyArticlesDialog={
+                viewer.isFrozen ? forbid : openAddMyArticlesDialog
+              }
             />
           )}
         </SearchSelectDialog>

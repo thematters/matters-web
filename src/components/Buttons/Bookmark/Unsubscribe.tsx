@@ -56,7 +56,7 @@ const Unsubscribe = ({
             new CustomEvent(ADD_TOAST, {
               detail: {
                 color: 'red',
-                content: <Translate id="FORBIDDEN" />,
+                content: <Translate id="FORBIDDEN_BY_STATE" />,
               },
             })
           )
