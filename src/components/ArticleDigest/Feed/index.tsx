@@ -120,6 +120,7 @@ const BaseArticleDigestFeed = ({
     <Card {...path} spacing={['base', 'base']} onClick={onClick}>
       <section className={containerClasses}>
         {extraHeader}
+
         <header>
           <section className="left">
             <UserDigest.Mini
@@ -128,6 +129,7 @@ const BaseArticleDigestFeed = ({
               hasDisplayName
               {...userDigestProps}
             />
+
             {inFollowFeed && (
               <TextIcon size="sm" color="grey-dark">
                 <Translate zh_hant="發佈了" zh_hans="发布了" />

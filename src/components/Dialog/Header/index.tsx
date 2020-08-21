@@ -55,6 +55,7 @@ const BaseHeader = ({
 const Header: React.FC<HeaderProps> & {
   RightButton: typeof RightButton
   BackButton: typeof BackButton
+  CloseButton: typeof CloseButton
 } = (props) => {
   if (props.mode !== 'hidden') {
     return <BaseHeader {...props} />
@@ -77,5 +78,6 @@ const Header: React.FC<HeaderProps> & {
 
 Header.RightButton = RightButton
 Header.BackButton = BackButton
+Header.CloseButton = CloseButton
 
 export default Header

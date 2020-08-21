@@ -15,13 +15,4 @@ footer {
   & :global(> * + *) {
     margin-top: var(--spacing-base);
   }
-
-  @media (--sm-up) {
-    flex-direction: row;
-
-    & :global(> * + *) {
-      margin-top: 0;
-      margin-left: var(--spacing-base);
-    }
-  }
 }

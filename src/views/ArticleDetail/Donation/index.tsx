@@ -29,13 +29,10 @@ const fragments = {
 const BaseDonation = ({ article }: DonationProps) => {
   return (
     <section className="container">
-      <section className="button">
-        <DonationButton recipient={article.author} targetId={article.id} />
-      </section>
+      <DonationButton recipient={article.author} targetId={article.id} />
 
-      <section className="donators">
-        <Donators article={article} />
-      </section>
+      <Donators article={article} />
+
       <style jsx>{styles}</style>
     </section>
   )

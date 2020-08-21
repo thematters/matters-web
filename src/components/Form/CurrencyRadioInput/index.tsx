@@ -62,6 +62,7 @@ const CurrencyOption: React.FC<CurrencyOptionProps> = ({
     inactive,
     disabled,
   })
+
   return (
     <li className={classes}>
       <label htmlFor={fieldId}>
