@@ -89,7 +89,7 @@ const BaseFooterActions = ({
       })
     )
   }
-  const forbid = () => addToast('FORBIDDEN')
+  const forbid = () => addToast('FORBIDDEN_BY_STATE')
 
   let onClick
 
@@ -97,7 +97,7 @@ const BaseFooterActions = ({
     onClick = openLikeCoinDialog
   } else if (viewer.isOnboarding && article.author.id !== viewer.id) {
     onClick = () => addToast('failureCommentOnboarding')
-  } else if (viewer.isArchived) {
+  } else if (viewer.isArchived || viewer.isFrozen) {
     onClick = forbid
   } else if (article.author.isBlocking) {
     onClick = () => addToast('failureCommentBlocked')

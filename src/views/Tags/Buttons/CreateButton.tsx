@@ -8,6 +8,8 @@ import {
   ViewerContext,
 } from '~/components'
 
+import { ADD_TOAST } from '~/common/enums'
+
 const CreateButton = () => {
   const viewer = useContext(ViewerContext)
 
@@ -21,7 +23,21 @@ const CreateButton = () => {
         <Button
           size={['6rem', '2rem']}
           bgActiveColor="grey-lighter"
-          onClick={open}
+          onClick={() => {
+            if (viewer.isFrozen) {
+              window.dispatchEvent(
+                new CustomEvent(ADD_TOAST, {
+                  detail: {
+                    color: 'red',
+                    content: <Translate id="FORBIDDEN_BY_STATE" />,
+                  },
+                })
+              )
+              return
+            }
+
+            open()
+          }}
         >
           <TextIcon color="green" size="md" weight="md">
             <Translate id="createTag" />

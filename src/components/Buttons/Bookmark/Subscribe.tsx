@@ -49,6 +49,18 @@ const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
   const push = data?.clientPreference.push
 
   const onClick = async () => {
+    if (viewer.isFrozen) {
+      window.dispatchEvent(
+        new CustomEvent(ADD_TOAST, {
+          detail: {
+            color: 'red',
+            content: <Translate id="FORBIDDEN_BY_STATE" />,
+          },
+        })
+      )
+      return
+    }
+
     await subscribe()
 
     // skip

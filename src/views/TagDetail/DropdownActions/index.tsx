@@ -1,3 +1,5 @@
+import { useContext } from 'react'
+
 import {
   Button,
   DropdownDialog,
@@ -11,9 +13,10 @@ import {
   TextIcon,
   Translate,
   useResponsive,
+  ViewerContext,
 } from '~/components'
 
-import { TEXT } from '~/common/enums'
+import { ADD_TOAST, TEXT } from '~/common/enums'
 
 type DropdownActionsProps = {
   isMaintainer: boolean
@@ -78,6 +81,20 @@ const BaseDropdownActions = ({
 }
 
 const DropdownActions = (props: DropdownActionsProps) => {
+  const viewer = useContext(ViewerContext)
+
+  const forbid = () => {
+    window.dispatchEvent(
+      new CustomEvent(ADD_TOAST, {
+        detail: {
+          color: 'red',
+          content: <Translate id="FORBIDDEN_BY_STATE" />,
+        },
+      })
+    )
+    return
+  }
+
   return (
     <ShareDialog title={props.content}>
       {({ open: openShareDialog }) => (
@@ -86,7 +103,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
             <BaseDropdownActions
               {...props}
               openShareDialog={openShareDialog}
-              openTagDialog={openTagDialog}
+              openTagDialog={viewer.isFrozen ? forbid : openTagDialog}
             />
           )}
         </TagDialog>
