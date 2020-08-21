@@ -13,6 +13,7 @@ import {
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
+import { UserDigestMiniProps } from '~/components/UserDigest/Mini'
 
 import { analytics, mergeConnections } from '~/common/utils'
 
@@ -97,27 +98,13 @@ const DonationsArticles = ({ isCompactMode }: { isCompactMode: boolean }) => {
     })
   }
 
-  const Followee = ({
+  const followee = ({
     node,
   }: {
     node: FolloweeDonatedArticlesFeedFollowee
-  }) => {
+  }) => (props: Partial<UserDigestMiniProps>) => {
     if (!node) {
       return null
-    }
-
-    let userDigestProps = {}
-    if (isCompactMode) {
-      userDigestProps = {
-        avatarSize: 'sm',
-        textSize: 'sm',
-      }
-    } else {
-      userDigestProps = {
-        avatarSize: 'lg',
-        textSize: 'md-s',
-        textWeight: 'md',
-      }
     }
 
     return (
@@ -129,7 +116,7 @@ const DonationsArticles = ({ isCompactMode }: { isCompactMode: boolean }) => {
           textWeight="md"
           hasAvatar
           hasDisplayName
-          {...userDigestProps}
+          {...props}
         />
 
         <TextIcon size="sm" color="grey-dark">
@@ -159,7 +146,8 @@ const DonationsArticles = ({ isCompactMode }: { isCompactMode: boolean }) => {
                   location: i,
                 })
               }
-              extraHeader={<Followee node={node.followee} />}
+              donator={followee({ node: node.followee })}
+              inFolloweeDonationsFeed
             />
           </List.Item>
         ))}

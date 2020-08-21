@@ -6,6 +6,7 @@ import React from 'react'
 import { Card, IconPinMedium, Img, TextIcon, Translate } from '~/components'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { UserDigest } from '~/components/UserDigest'
+import { UserDigestMiniProps } from '~/components/UserDigest/Mini'
 
 import { stripHtml, toPath } from '~/common/utils'
 
@@ -23,10 +24,13 @@ export type ArticleDigestFeedControls = {
   onClick?: () => any
 
   inFollowFeed?: boolean
+  inFolloweeDonationsFeed?: boolean
 } & FooterActionsControls
 
 type ArticleDigestFeedProps = {
   article: ArticleDigestFeedArticlePublic
+
+  donator?: (props: Partial<UserDigestMiniProps>) => React.ReactNode
   extraHeader?: React.ReactNode
 } & ArticleDigestFeedControls
 
@@ -78,9 +82,11 @@ const BaseArticleDigestFeed = ({
   inTagDetailSelected,
   inUserArticles,
   inFollowFeed,
+  inFolloweeDonationsFeed,
 
   onClick,
 
+  donator,
   extraHeader,
 }: ArticleDigestFeedProps) => {
   const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
@@ -92,6 +98,7 @@ const BaseArticleDigestFeed = ({
 
   const { author, summary, sticky } = article
   const isBanned = article.articleState === 'banned'
+  const showAuthor = !inFolloweeDonationsFeed
   const cover = !isBanned ? article.cover : null
   const cleanedSummary = isBanned ? '' : stripHtml(summary)
   const path = toPath({
@@ -122,12 +129,17 @@ const BaseArticleDigestFeed = ({
         {extraHeader}
         <header>
           <section className="left">
-            <UserDigest.Mini
-              user={author}
-              hasAvatar
-              hasDisplayName
-              {...userDigestProps}
-            />
+            {showAuthor && (
+              <UserDigest.Mini
+                user={author}
+                hasAvatar
+                hasDisplayName
+                {...userDigestProps}
+              />
+            )}
+            {inFolloweeDonationsFeed && (
+              <>{donator && donator(userDigestProps)}</>
+            )}
             {inFollowFeed && (
               <TextIcon size="sm" color="grey-dark">
                 <Translate zh_hant="發佈了" zh_hans="发布了" />
