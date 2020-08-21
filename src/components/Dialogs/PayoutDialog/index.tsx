@@ -23,7 +23,7 @@ const BasePayoutDialog = ({
   const initialStep = hasStripeAccount ? 'confirm' : 'connectStripeAccount'
 
   const [showDialog, setShowDialog] = useState(true)
-  const { currStep, goForward } = useStep<Step>(initialStep)
+  const { currStep, goForward, prevStep, goBack } = useStep<Step>(initialStep)
 
   const open = () => {
     goForward(initialStep)
@@ -32,12 +32,7 @@ const BasePayoutDialog = ({
   const close = () => setShowDialog(false)
 
   const ContinuePayoutButton = (
-    <Dialog.Footer.Button
-      type="button"
-      bgColor="green"
-      textColor="white"
-      onClick={() => goForward('confirm')}
-    >
+    <Dialog.Footer.Button type="button" onClick={() => goForward('confirm')}>
       <Translate zh_hant="繼續提現" zh_hans="继续提现" />
     </Dialog.Footer.Button>
   )
@@ -53,6 +48,12 @@ const BasePayoutDialog = ({
 
       <Dialog size="sm" isOpen={showDialog} onDismiss={close} fixedHeight>
         <Dialog.Header
+          leftButton={
+            prevStep ? <Dialog.Header.BackButton onClick={goBack} /> : <span />
+          }
+          rightButton={
+            <Dialog.Header.CloseButton close={close} textId="close" />
+          }
           title={
             isConnectStripeAccount
               ? 'connectStripeAccount'

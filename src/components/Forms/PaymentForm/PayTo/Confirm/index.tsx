@@ -161,12 +161,11 @@ const Confirm: React.FC<FormProps> = ({
 
       <Dialog.Footer>
         <Dialog.Footer.Button
-          type="button"
-          bgColor="grey-lighter"
-          textColor="black"
+          bgColor="white"
+          textColor="grey"
           onClick={switchToResetPassword}
         >
-          <Translate id="forgetPassword" />
+          <Translate id="forgetPassword" />？
         </Dialog.Footer.Button>
       </Dialog.Footer>
     </>

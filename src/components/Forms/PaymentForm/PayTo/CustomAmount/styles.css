@@ -9,14 +9,4 @@
 .balance {
   font-size: var(--font-size-sm);
   color: var(--color-black);
-
-  & b {
-    font-weight: var(--font-weight-medium);
-  }
-
-  &.insufficient {
-    & b {
-      color: var(--color-red);
-    }
-  }
 }

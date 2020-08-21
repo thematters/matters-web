@@ -6,6 +6,7 @@ import { useContext, useRef, useState } from 'react'
 import {
   Dialog,
   Form,
+  IconExternalLink,
   LanguageContext,
   Spinner,
   Translate,
@@ -257,7 +258,7 @@ const SetAmount: React.FC<FormProps> = ({
     <>
       <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
 
-      <Dialog.Footer block>
+      <Dialog.Footer>
         {canProcess && !locked && (
           <Dialog.Footer.Button
             type="submit"
@@ -292,13 +293,13 @@ const SetAmount: React.FC<FormProps> = ({
 
         {locked && (
           <Dialog.Footer.Button
-            type="button"
             onClick={() => {
               const payWindow = window.open(tabUrl, '_blank')
               if (payWindow && tx) {
                 openTabCallback({ window: payWindow, transaction: tx })
               }
             }}
+            icon={<IconExternalLink size="xs" />}
           >
             <Translate
               zh_hant="前往 Liker Land 支付"

@@ -33,6 +33,7 @@ const MigrationDialogSuccess = () => {
           <Translate zh_hant={zh_hant.content_2} zh_hans={zh_hans.content_2} />
         </p>
       </Dialog.Content>
+
       <Dialog.Footer>
         <Dialog.Footer.Button href={PATHS.HOME}>
           <Translate zh_hant={zh_hant.back} zh_hans={zh_hans.back} />

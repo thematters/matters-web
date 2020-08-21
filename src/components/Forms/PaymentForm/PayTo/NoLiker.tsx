@@ -44,9 +44,6 @@ export const NoLikerIdButton = ({
   if (!canPayLike) {
     return (
       <Dialog.Footer.Button
-        type="button"
-        bgColor="green"
-        textColor="white"
         onClick={() => {
           window.dispatchEvent(new CustomEvent(OPEN_LIKE_COIN_DIALOG, {}))
           close()
@@ -60,9 +57,6 @@ export const NoLikerIdButton = ({
   if (!canReceiveLike) {
     return (
       <Dialog.Footer.Button
-        type="button"
-        bgColor="green"
-        textColor="white"
         onClick={() => setFieldValue('currency', CURRENCY.HKD)}
       >
         <Translate zh_hant="使用港幣支持" zh_hans="使用港币支持" />

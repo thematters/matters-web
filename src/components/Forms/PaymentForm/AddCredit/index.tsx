@@ -271,8 +271,6 @@ const BaseAddCredit: React.FC<FormProps> = ({
           type="submit"
           form={formId}
           disabled={!isValid || isSubmitting || checkoutError}
-          bgColor="green"
-          textColor="white"
           loading={isSubmitting}
         >
           <Translate zh_hant="確認儲值" zh_hans="确认储值" />

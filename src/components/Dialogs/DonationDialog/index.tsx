@@ -100,12 +100,7 @@ const BaseDonationDialog = ({
   }
 
   const ContinueDonationButton = (
-    <Dialog.Footer.Button
-      type="button"
-      bgColor="green"
-      textColor="white"
-      onClick={() => goForward('confirm')}
-    >
+    <Dialog.Footer.Button onClick={() => goForward('confirm')}>
       <Translate zh_hant="回到交易" zh_hans="回到交易" />
     </Dialog.Footer.Button>
   )

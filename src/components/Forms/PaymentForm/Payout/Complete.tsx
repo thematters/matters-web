@@ -28,17 +28,12 @@ const Complete: React.FC<Props> = ({ close }) => {
         </p>
       </Dialog.Message>
 
-      <Dialog.Footer block>
-        <Dialog.Footer.Button
-          type="button"
-          bgColor="green"
-          href={PATHS.ME_WALLET_TRANSACTIONS}
-        >
+      <Dialog.Footer>
+        <Dialog.Footer.Button href={PATHS.ME_WALLET_TRANSACTIONS}>
           <Translate zh_hant="查看交易" zh_hans="查看交易" />
         </Dialog.Footer.Button>
 
         <Dialog.Footer.Button
-          type="button"
           bgColor="grey-lighter"
           textColor="black"
           onClick={close}

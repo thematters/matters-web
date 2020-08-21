@@ -1,4 +1,3 @@
-import classNames from 'classnames'
 import { useContext } from 'react'
 
 import { Button, ButtonProps, LanguageContext, Translate } from '~/components'
@@ -22,11 +21,6 @@ export const CustomAmount: React.FC<CustomAmountProps> = ({
 }) => {
   const { lang } = useContext(LanguageContext)
 
-  const balanceClasses = classNames({
-    balance: true,
-    insufficient,
-  })
-
   return (
     <section className="container">
       <Button {...buttonProps}>
@@ -35,13 +29,11 @@ export const CustomAmount: React.FC<CustomAmountProps> = ({
           : translate({ zh_hant: '固定金額', zh_hans: '固定金額', lang })}
       </Button>
 
-      <span className={balanceClasses}>
+      <span className="balance">
         <Translate
           id={insufficient ? 'walletBalanceInsufficient' : 'walletBalance'}
         />
-        <b>
-          &nbsp;{PAYMENT_CURRENCY.HKD}&nbsp;{toAmountString(balance)}
-        </b>
+        &nbsp;{PAYMENT_CURRENCY.HKD}&nbsp;{toAmountString(balance)}
       </span>
 
       <style jsx>{styles}</style>

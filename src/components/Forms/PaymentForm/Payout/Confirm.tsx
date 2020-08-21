@@ -213,25 +213,22 @@ const BaseConfirm: React.FC<FormProps> = ({
         </Form>
       </Dialog.Content>
 
-      <Dialog.Footer block>
+      <Dialog.Footer>
         <Dialog.Footer.Button
           type="submit"
           form={formId}
           disabled={!isValid || isSubmitting}
-          bgColor="green"
-          textColor="white"
           loading={isSubmitting}
         >
           <Translate id="confirm" />
         </Dialog.Footer.Button>
 
         <Dialog.Footer.Button
-          type="button"
-          bgColor="grey-lighter"
-          textColor="black"
+          bgColor="white"
+          textColor="grey"
           onClick={switchToResetPassword}
         >
-          <Translate id="forgetPassword" />
+          <Translate id="forgetPassword" />？
         </Dialog.Footer.Button>
       </Dialog.Footer>
     </>
