@@ -12,14 +12,14 @@ type Step = 'request' | 'confirm' | 'complete'
 
 const ChangeEmail = () => {
   const viewer = useContext(ViewerContext)
-  const { currStep, goForward } = useStep<Step>('request')
+  const { currStep, forward } = useStep<Step>('request')
   const [data, setData] = useState<{ email: string; codeId: string }>({
     email: viewer.info.email,
     codeId: '',
   })
   const requestCallback = (codeId: string) => {
     setData({ ...data, codeId })
-    goForward('confirm')
+    forward('confirm')
   }
 
   return (
@@ -38,7 +38,7 @@ const ChangeEmail = () => {
         <ChangeEmailForm.Confirm
           oldData={data}
           purpose="page"
-          submitCallback={() => goForward('complete')}
+          submitCallback={() => forward('complete')}
         />
       )}
 

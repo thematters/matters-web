@@ -13,11 +13,11 @@ import { CLOSE_ACTIVE_DIALOG, OPEN_SIGNUP_DIALOG } from '~/common/enums'
 type Step = 'signUp' | 'profile' | 'setupLikeCoin' | 'complete'
 
 const SignUpDialog = () => {
-  const { currStep, goForward } = useStep<Step>('signUp')
+  const { currStep, forward } = useStep<Step>('signUp')
 
   const [showDialog, setShowDialog] = useState(false)
   const open = () => {
-    goForward('signUp')
+    forward('signUp')
     setShowDialog(true)
   }
   const close = () => {
@@ -37,7 +37,7 @@ const SignUpDialog = () => {
         <SignUpForm.Init
           purpose="dialog"
           submitCallback={() => {
-            goForward('profile')
+            forward('profile')
           }}
           closeDialog={close}
         />
@@ -46,7 +46,7 @@ const SignUpDialog = () => {
         <SignUpForm.Profile
           purpose="dialog"
           submitCallback={() => {
-            goForward('setupLikeCoin')
+            forward('setupLikeCoin')
           }}
           closeDialog={close}
         />
@@ -55,7 +55,7 @@ const SignUpDialog = () => {
         <SetupLikeCoin
           purpose="dialog"
           submitCallback={() => {
-            goForward('complete')
+            forward('complete')
           }}
           closeDialog={close}
         />

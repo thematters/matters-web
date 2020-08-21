@@ -13,7 +13,7 @@ type Step = 'request' | 'confirm' | 'complete'
 const ChangePassword = () => {
   const viewer = useContext(ViewerContext)
 
-  const { currStep, goForward } = useStep<Step>('request')
+  const { currStep, forward } = useStep<Step>('request')
   const [data, setData] = useState<{ email: string; codeId: string }>({
     email: viewer.info.email,
     codeId: '',
@@ -22,7 +22,7 @@ const ChangePassword = () => {
   const requestCodeCallback = (params: any) => {
     const { email, codeId } = params
     setData({ ...data, email, codeId })
-    goForward('confirm')
+    forward('confirm')
   }
 
   return (
@@ -43,7 +43,7 @@ const ChangePassword = () => {
           codeId={data.codeId}
           type="change"
           purpose="page"
-          submitCallback={() => goForward('complete')}
+          submitCallback={() => forward('complete')}
         />
       )}
 

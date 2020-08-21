@@ -23,7 +23,7 @@ interface DonationDialogProps {
 
 const ResetPassword = ({ callbackButtons, close }: DonationDialogProps) => {
   const viewer = useContext(ViewerContext)
-  const { currStep, goForward } = useStep<Step>('resetPasswordRequest')
+  const { currStep, forward } = useStep<Step>('resetPasswordRequest')
 
   const baseResetPasswordData = { email: viewer.info.email, codeId: '' }
   const [resetPasswordData, setResetPasswordData] = useState<ResetPasswordData>(
@@ -32,7 +32,7 @@ const ResetPassword = ({ callbackButtons, close }: DonationDialogProps) => {
 
   const resetPasswordRequestCallback = ({ email, codeId }: any) => {
     setResetPasswordData({ ...resetPasswordData, email, codeId })
-    goForward('resetPasswordConfirm')
+    forward('resetPasswordConfirm')
   }
 
   const isResetPasswordRequest = currStep === 'resetPasswordRequest'
@@ -51,7 +51,7 @@ const ResetPassword = ({ callbackButtons, close }: DonationDialogProps) => {
       {isResetPasswordConfirm && (
         <Confirm
           codeId={resetPasswordData.codeId}
-          submitCallback={() => goForward('resetPasswordComplete')}
+          submitCallback={() => forward('resetPasswordComplete')}
         />
       )}
 

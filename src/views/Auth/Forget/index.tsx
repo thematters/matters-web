@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { ChangePasswordForm, Head, Layout, useStep } from '~/components'
 
 const Forget = () => {
-  const { currStep, goForward } = useStep('request')
+  const { currStep, forward } = useStep('request')
   const [data, setData] = useState<{ email: string; codeId: string }>({
     email: '',
     codeId: '',
@@ -12,7 +12,7 @@ const Forget = () => {
   const requestCodeCallback = (params: any) => {
     const { email, codeId } = params
     setData({ ...data, email, codeId })
-    goForward('confirm')
+    forward('confirm')
   }
 
   return (
@@ -33,7 +33,7 @@ const Forget = () => {
           codeId={data.codeId}
           type="forget"
           purpose="page"
-          submitCallback={() => goForward('complete')}
+          submitCallback={() => forward('complete')}
         />
       )}
 

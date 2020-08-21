@@ -10,13 +10,13 @@ export function useStep<Step>(defaultStep: Step) {
   const prevStep = steps[steps.length - 2]
   const currStep = steps[steps.length - 1]
 
-  const goForward = (nextStep: Step) => {
+  const forward = (nextStep: Step) => {
     setSteps([...steps, nextStep])
   }
 
-  const goBack = () => {
+  const back = () => {
     setSteps(steps.slice(0, -1))
   }
 
-  return { currStep, prevStep, goForward, goBack }
+  return { currStep, prevStep, forward, back }
 }

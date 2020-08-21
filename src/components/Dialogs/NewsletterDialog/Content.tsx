@@ -33,7 +33,7 @@ const NewsletterDialogContent: React.FC<NewsletterDialogContentProps> = ({
   closeDialog,
 }) => {
   const { lang } = useContext(LanguageContext)
-  const { currStep, goForward } = useStep<Step>('subscribe')
+  const { currStep, forward } = useStep<Step>('subscribe')
   const isSubscribe = currStep === 'subscribe'
   const isComplete = currStep === 'complete'
   const isRetry = currStep === 'retry'
@@ -74,10 +74,10 @@ const NewsletterDialogContent: React.FC<NewsletterDialogContentProps> = ({
         })
 
         setSubmitting(false)
-        goForward('complete')
+        forward('complete')
       } catch (error) {
         setSubmitting(false)
-        goForward('retry')
+        forward('retry')
       }
     },
   })

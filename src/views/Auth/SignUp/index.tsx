@@ -3,7 +3,7 @@ import { Head, Layout, SetupLikeCoin, SignUpForm, useStep } from '~/components'
 type Step = 'signUp' | 'profile' | 'setupLikeCoin' | 'complete'
 
 const SignUp = () => {
-  const { currStep, goForward } = useStep<Step>('signUp')
+  const { currStep, forward } = useStep<Step>('signUp')
 
   return (
     <Layout.Main bgColor="grey-lighter">
@@ -13,7 +13,7 @@ const SignUp = () => {
         <SignUpForm.Init
           purpose="page"
           submitCallback={() => {
-            goForward('profile')
+            forward('profile')
           }}
         />
       )}
@@ -22,7 +22,7 @@ const SignUp = () => {
         <SignUpForm.Profile
           purpose="page"
           submitCallback={() => {
-            goForward('setupLikeCoin')
+            forward('setupLikeCoin')
           }}
         />
       )}
@@ -31,7 +31,7 @@ const SignUp = () => {
         <SetupLikeCoin
           purpose="page"
           submitCallback={() => {
-            goForward('complete')
+            forward('complete')
           }}
         />
       )}

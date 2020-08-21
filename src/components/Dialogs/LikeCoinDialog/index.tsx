@@ -22,11 +22,11 @@ export const LikeCoinDialog: React.FC<LikeCoinDialogProps> = ({
 
   children,
 }) => {
-  const { currStep, goForward } = useStep<Step>(defaultStep)
-  const nextStep = () => goForward('setup')
+  const { currStep, forward } = useStep<Step>(defaultStep)
+  const nextStep = () => forward('setup')
   const [showDialog, setShowDialog] = useState(defaultShowDialog)
   const open = () => {
-    goForward('term')
+    forward('term')
     setShowDialog(true)
   }
   const close = () => setShowDialog(false)

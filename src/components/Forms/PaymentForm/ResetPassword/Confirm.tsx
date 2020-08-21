@@ -40,7 +40,7 @@ export const RESET_PAYMENT_PASSWORD = gql`
 const Confirm: React.FC<FormProps> = ({ codeId, submitCallback }) => {
   const [reset] = useMutation<ResetPaymentPassword>(RESET_PAYMENT_PASSWORD)
   const { lang } = useContext(LanguageContext)
-  const { currStep, goForward } = useStep<'password' | 'comparedPassword'>(
+  const { currStep, forward } = useStep<'password' | 'comparedPassword'>(
     'password'
   )
   const isInPassword = currStep === 'password'
@@ -70,7 +70,7 @@ const Confirm: React.FC<FormProps> = ({ codeId, submitCallback }) => {
 
       // jump to next step
       if (!passwordError && isInPassword) {
-        goForward('comparedPassword')
+        forward('comparedPassword')
       }
 
       return _pickBy({

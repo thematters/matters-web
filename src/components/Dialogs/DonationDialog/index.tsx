@@ -66,7 +66,7 @@ const BaseDonationDialog = ({
   const viewer = useContext(ViewerContext)
 
   const [showDialog, setShowDialog] = useState(true)
-  const { currStep, prevStep, goForward, goBack } = useStep<Step>(defaultStep)
+  const { currStep, prevStep, forward, back } = useStep<Step>(defaultStep)
   const [windowRef, setWindowRef] = useState<Window | undefined>(undefined)
 
   const [amount, setAmount] = useState<number>(0)
@@ -74,7 +74,7 @@ const BaseDonationDialog = ({
   const [payToTx, setPayToTx] = useState<Omit<PayToTx, '__typename'>>()
 
   const open = () => {
-    goForward(defaultStep)
+    forward(defaultStep)
     setShowDialog(true)
   }
 
@@ -87,7 +87,7 @@ const BaseDonationDialog = ({
     setAmount(values.amount)
     setCurrency(values.currency)
     if (values.currency === CURRENCY.HKD) {
-      goForward(
+      forward(
         viewer.status?.hasPaymentPassword ? 'confirm' : 'setPaymentPassword'
       )
     }
@@ -96,11 +96,11 @@ const BaseDonationDialog = ({
   const setAmountOpenTabCallback = (values: SetAmountOpenTabCallbackValues) => {
     setWindowRef(values.window)
     setPayToTx(values.transaction)
-    goForward('processing')
+    forward('processing')
   }
 
   const ContinueDonationButton = (
-    <Dialog.Footer.Button onClick={() => goForward('confirm')}>
+    <Dialog.Footer.Button onClick={() => forward('confirm')}>
       <Translate zh_hant="回到交易" zh_hans="回到交易" />
     </Dialog.Footer.Button>
   )
@@ -142,7 +142,7 @@ const BaseDonationDialog = ({
         <Dialog.Header
           close={close}
           leftButton={
-            prevStep ? <Dialog.Header.BackButton onClick={goBack} /> : <span />
+            prevStep ? <Dialog.Header.BackButton onClick={back} /> : <span />
           }
           rightButton={
             <Dialog.Header.CloseButton close={close} textId="close" />
@@ -166,7 +166,7 @@ const BaseDonationDialog = ({
             recipient={recipient}
             submitCallback={setAmountCallback}
             switchToAddCredit={() => {
-              goForward('addCredit')
+              forward('addCredit')
             }}
             targetId={targetId}
           />
@@ -177,15 +177,15 @@ const BaseDonationDialog = ({
             amount={amount}
             currency={currency}
             recipient={recipient}
-            submitCallback={() => goForward(isHKD ? 'complete' : 'processing')}
-            switchToResetPassword={() => goForward('resetPassword')}
+            submitCallback={() => forward(isHKD ? 'complete' : 'processing')}
+            switchToResetPassword={() => forward('resetPassword')}
             targetId={targetId}
           />
         )}
 
         {isProcessing && (
           <PaymentForm.Processing
-            nextStep={() => goForward('complete')}
+            nextStep={() => forward('complete')}
             txId={payToTx?.id || ''}
             windowRef={windowRef}
           />
@@ -201,9 +201,7 @@ const BaseDonationDialog = ({
         )}
 
         {isSetPaymentPassword && (
-          <PaymentForm.SetPassword
-            submitCallback={() => goForward('confirm')}
-          />
+          <PaymentForm.SetPassword submitCallback={() => forward('confirm')} />
         )}
 
         {isAddCredit && (

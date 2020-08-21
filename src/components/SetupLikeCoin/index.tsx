@@ -22,17 +22,17 @@ export const SetupLikeCoin: React.FC<Props> = ({
   const isInDialog = purpose === 'dialog'
   const isInPage = purpose === 'page'
 
-  const { currStep, goForward } = useStep<Step>('select')
+  const { currStep, forward } = useStep<Step>('select')
 
   const [bindingWindowRef, setBindingWindowRef] = useState<Window | undefined>(
     undefined
   )
-  const backToSelect = () => goForward('select')
+  const backToSelect = () => forward('select')
   const complete = () => {
     if (submitCallback) {
       submitCallback()
     } else {
-      goForward('complete')
+      forward('complete')
     }
   }
 
@@ -52,9 +52,9 @@ export const SetupLikeCoin: React.FC<Props> = ({
 
       {currStep === 'select' && (
         <Select
-          startGenerate={() => goForward('generating')}
+          startGenerate={() => forward('generating')}
           startBind={(windowRef?: Window) => {
-            goForward('binding')
+            forward('binding')
             if (windowRef) {
               setBindingWindowRef(windowRef)
             }

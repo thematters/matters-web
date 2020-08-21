@@ -17,10 +17,10 @@ const BaseAddCreditDialog = ({ children }: AddCreditDialogProps) => {
   const initialStep = viewer.status?.hasPaymentPassword
     ? 'addCredit'
     : 'setPaymentPassword'
-  const { currStep, goForward } = useStep<Step>(initialStep)
+  const { currStep, forward } = useStep<Step>(initialStep)
 
   const open = () => {
-    goForward(initialStep)
+    forward(initialStep)
     setShowDialog(true)
   }
 
@@ -46,7 +46,7 @@ const BaseAddCreditDialog = ({ children }: AddCreditDialogProps) => {
 
         {isSetPaymentPassword && (
           <PaymentForm.SetPassword
-            submitCallback={() => goForward('addCredit')}
+            submitCallback={() => forward('addCredit')}
           />
         )}
 

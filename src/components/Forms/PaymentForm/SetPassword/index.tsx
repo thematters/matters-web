@@ -46,7 +46,7 @@ const SET_PAYMENT_PASSWORD = gql`
 const SetPassword: React.FC<FormProps> = ({ submitCallback }) => {
   const [setPassword] = useMutation<SetPaymentPassword>(SET_PAYMENT_PASSWORD)
   const { lang } = useContext(LanguageContext)
-  const { currStep, goForward } = useStep<'password' | 'comparedPassword'>(
+  const { currStep, forward } = useStep<'password' | 'comparedPassword'>(
     'password'
   )
   const isInPassword = currStep === 'password'
@@ -76,7 +76,7 @@ const SetPassword: React.FC<FormProps> = ({ submitCallback }) => {
 
       // jump to next step
       if (!passwordError && isInPassword) {
-        goForward('comparedPassword')
+        forward('comparedPassword')
       }
 
       return _pickBy({

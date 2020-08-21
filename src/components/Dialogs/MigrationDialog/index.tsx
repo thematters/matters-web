@@ -18,10 +18,10 @@ const BaseMigrationDialog = ({
   defaultStep = 'upload',
 }: MigrationDialogProps) => {
   const [showDialog, setShowDialog] = useState(true)
-  const { currStep, goForward } = useStep<Step>(defaultStep)
+  const { currStep, forward } = useStep<Step>(defaultStep)
   const open = () => setShowDialog(true)
   const close = () => setShowDialog(false)
-  const nextStep = () => goForward('success')
+  const nextStep = () => forward('success')
 
   return (
     <>

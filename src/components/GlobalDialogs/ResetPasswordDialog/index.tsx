@@ -14,7 +14,7 @@ const ResetPasswordDialog = () => {
   const viewer = useContext(ViewerContext)
 
   // data & controls
-  const { currStep, goForward } = useStep('request')
+  const { currStep, forward } = useStep('request')
   const [data, setData] = useState<{ email: string; codeId: string }>({
     email: viewer.info.email,
     codeId: '',
@@ -22,13 +22,13 @@ const ResetPasswordDialog = () => {
   const requestCodeCallback = (params: any) => {
     const { email, codeId } = params
     setData({ ...data, email, codeId })
-    goForward('reset')
+    forward('reset')
   }
 
   // dailog & global listeners
   const [showDialog, setShowDialog] = useState(false)
   const open = () => {
-    goForward('request')
+    forward('request')
     setShowDialog(true)
   }
   const close = () => setShowDialog(false)
@@ -56,7 +56,7 @@ const ResetPasswordDialog = () => {
       {currStep === 'reset' && (
         <ChangePasswordForm.Confirm
           codeId={data.codeId}
-          submitCallback={() => goForward('complete')}
+          submitCallback={() => forward('complete')}
           type="forget"
           purpose="dialog"
           closeDialog={close}
