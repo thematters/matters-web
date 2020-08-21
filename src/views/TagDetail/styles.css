@@ -10,11 +10,8 @@
 
   margin-top: var(--spacing-base);
 
-  & span {
+  & :global(> * + *) {
     margin-left: var(--spacing-x-tight);
-    font-size: var(--font-size-sm);
-    line-height: 1;
-    color: var(--color-grey-dark);
   }
 }
 

@@ -129,9 +129,9 @@ const BaseArticleDigestFeed = ({
               {...userDigestProps}
             />
             {inFollowFeed && (
-              <span className="published-article">
+              <TextIcon size="sm" color="grey-dark">
                 <Translate zh_hant="發佈了" zh_hans="发布了" />
-              </span>
+              </TextIcon>
             )}
           </section>
 

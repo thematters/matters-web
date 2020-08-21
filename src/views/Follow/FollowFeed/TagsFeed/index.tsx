@@ -12,6 +12,7 @@ import {
   List,
   Spinner,
   Tag,
+  TextIcon,
   Translate,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
@@ -138,9 +139,10 @@ const TagsArticles = ({ tagIds }: { tagIds: string[] }) => {
     return (
       <section className="tag">
         <Tag tag={tag} type="inline" active={true} />
-        <span>
+
+        <TextIcon size="sm" color="grey-dark">
           <Translate zh_hant="新增了" zh_hans="新增了" />
-        </span>
+        </TextIcon>
         <style jsx>{styles}</style>
       </section>
     )
