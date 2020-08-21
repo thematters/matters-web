@@ -4,10 +4,8 @@ header {
   & .left {
     @mixin inline-flex-center-all;
 
-    & .reply-to {
+    & :global(> * + *) {
       margin-left: var(--spacing-x-tight);
-      font-size: var(--font-size-sm);
-      color: var(--color-grey);
     }
   }
 }

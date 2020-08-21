@@ -7,6 +7,7 @@ import {
   InfiniteScroll,
   List,
   Spinner,
+  TextIcon,
   Translate,
   UserDigest,
 } from '~/components'
@@ -130,9 +131,10 @@ const DonationsArticles = ({ isCompactMode }: { isCompactMode: boolean }) => {
           hasDisplayName
           {...userDigestProps}
         />
-        <span>
+
+        <TextIcon size="sm" color="grey-dark">
           <Translate zh_hant="支持了" zh_hans="支持了" />
-        </span>
+        </TextIcon>
         <style jsx>{styles}</style>
       </section>
     )
