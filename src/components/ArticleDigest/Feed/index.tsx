@@ -125,7 +125,7 @@ const BaseArticleDigestFeed = ({
           <section className="left">
             {actor ? (
               actor(userDigestProps)
-            ): (
+            ) : (
               <UserDigest.Mini
                 user={author}
                 hasAvatar

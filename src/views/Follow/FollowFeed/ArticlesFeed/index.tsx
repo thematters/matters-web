@@ -20,7 +20,7 @@ import styles from './styles.css'
 
 import {
   FollowArticlesFeed,
-  FollowArticlesFeed_viewer_recommendation_followeeArticles_edges_node_author as FollowArticlesFeedAuthor
+  FollowArticlesFeed_viewer_recommendation_followeeArticles_edges_node_author as FollowArticlesFeedAuthor,
 } from './__generated__/FollowArticlesFeed'
 
 const FOLLOW_ARTICLES = gql`
@@ -91,11 +91,9 @@ const ArticlesFeed = () => {
     })
   }
 
-  const actor = ({
-    node,
-  }: {
-    node: FollowArticlesFeedAuthor
-  }) => (props: Partial<UserDigestMiniProps>) => {
+  const actor = ({ node }: { node: FollowArticlesFeedAuthor }) => (
+    props: Partial<UserDigestMiniProps>
+  ) => {
     if (!node) {
       return null
     }

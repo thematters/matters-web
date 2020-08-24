@@ -98,11 +98,9 @@ const DonationsArticles = ({ isCompactMode }: { isCompactMode: boolean }) => {
     })
   }
 
-  const actor = ({
-    node,
-  }: {
-    node: FolloweeDonatedArticlesFeedFollowee
-  }) => (props: Partial<UserDigestMiniProps>) => {
+  const actor = ({ node }: { node: FolloweeDonatedArticlesFeedFollowee }) => (
+    props: Partial<UserDigestMiniProps>
+  ) => {
     if (!node) {
       return null
     }
