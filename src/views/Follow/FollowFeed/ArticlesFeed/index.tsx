@@ -7,12 +7,21 @@ import {
   InfiniteScroll,
   List,
   Spinner,
+  TextIcon,
+  Translate,
+  UserDigest,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
+import { UserDigestMiniProps } from '~/components/UserDigest/Mini'
 
 import { analytics, mergeConnections } from '~/common/utils'
 
-import { FollowArticlesFeed } from './__generated__/FollowArticlesFeed'
+import styles from './styles.css'
+
+import {
+  FollowArticlesFeed,
+  FollowArticlesFeed_viewer_recommendation_followeeArticles_edges_node_author as FollowArticlesFeedAuthor
+} from './__generated__/FollowArticlesFeed'
 
 const FOLLOW_ARTICLES = gql`
   query FollowArticlesFeed($after: String) {
@@ -82,6 +91,35 @@ const ArticlesFeed = () => {
     })
   }
 
+  const actor = ({
+    node,
+  }: {
+    node: FollowArticlesFeedAuthor
+  }) => (props: Partial<UserDigestMiniProps>) => {
+    if (!node) {
+      return null
+    }
+
+    return (
+      <section className="author">
+        <UserDigest.Mini
+          user={node}
+          avatarSize="lg"
+          textSize="md-s"
+          textWeight="md"
+          hasAvatar
+          hasDisplayName
+          {...props}
+        />
+
+        <TextIcon size="sm" color="grey-dark">
+          <Translate zh_hant="發佈了" zh_hans="发布了" />
+        </TextIcon>
+        <style jsx>{styles}</style>
+      </section>
+    )
+  }
+
   return (
     <InfiniteScroll
       hasNextPage={pageInfo.hasNextPage}
@@ -101,7 +139,7 @@ const ArticlesFeed = () => {
                   location: i,
                 })
               }
-              inFollowFeed
+              actor={actor({ node: node.author })}
             />
           </List.Item>
         ))}

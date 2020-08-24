@@ -22,15 +22,12 @@ import { ArticleDigestFeedArticlePublic } from './__generated__/ArticleDigestFee
 
 export type ArticleDigestFeedControls = {
   onClick?: () => any
-
-  inFollowFeed?: boolean
-  inFolloweeDonationsFeed?: boolean
 } & FooterActionsControls
 
 type ArticleDigestFeedProps = {
   article: ArticleDigestFeedArticlePublic
 
-  donator?: (props: Partial<UserDigestMiniProps>) => React.ReactNode
+  actor?: (props: Partial<UserDigestMiniProps>) => React.ReactNode
   extraHeader?: React.ReactNode
 } & ArticleDigestFeedControls
 
@@ -81,12 +78,10 @@ const BaseArticleDigestFeed = ({
   inTagDetailLatest,
   inTagDetailSelected,
   inUserArticles,
-  inFollowFeed,
-  inFolloweeDonationsFeed,
 
   onClick,
 
-  donator,
+  actor,
   extraHeader,
 }: ArticleDigestFeedProps) => {
   const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
@@ -98,7 +93,6 @@ const BaseArticleDigestFeed = ({
 
   const { author, summary, sticky } = article
   const isBanned = article.articleState === 'banned'
-  const showAuthor = !inFolloweeDonationsFeed
   const cover = !isBanned ? article.cover : null
   const cleanedSummary = isBanned ? '' : stripHtml(summary)
   const path = toPath({
@@ -129,21 +123,15 @@ const BaseArticleDigestFeed = ({
         {extraHeader}
         <header>
           <section className="left">
-            {showAuthor && (
+            {actor ? (
+              actor(userDigestProps)
+            ): (
               <UserDigest.Mini
                 user={author}
                 hasAvatar
                 hasDisplayName
                 {...userDigestProps}
               />
-            )}
-            {inFolloweeDonationsFeed && (
-              <>{donator && donator(userDigestProps)}</>
-            )}
-            {inFollowFeed && (
-              <TextIcon size="sm" color="grey-dark">
-                <Translate zh_hant="發佈了" zh_hans="发布了" />
-              </TextIcon>
             )}
           </section>
 

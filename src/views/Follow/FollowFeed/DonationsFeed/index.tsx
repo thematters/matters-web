@@ -98,7 +98,7 @@ const DonationsArticles = ({ isCompactMode }: { isCompactMode: boolean }) => {
     })
   }
 
-  const followee = ({
+  const actor = ({
     node,
   }: {
     node: FolloweeDonatedArticlesFeedFollowee
@@ -146,8 +146,7 @@ const DonationsArticles = ({ isCompactMode }: { isCompactMode: boolean }) => {
                   location: i,
                 })
               }
-              donator={followee({ node: node.followee })}
-              inFolloweeDonationsFeed
+              actor={actor({ node: node.followee })}
             />
           </List.Item>
         ))}
