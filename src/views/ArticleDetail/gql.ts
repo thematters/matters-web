@@ -11,7 +11,10 @@ import TagList from './TagList'
 import Toolbar from './Toolbar'
 
 export const ARTICLE_DETAIL_PUBLIC = gql`
-  query ArticleDetailPublic($mediaHash: String) {
+  query ArticleDetailPublic(
+    $mediaHash: String
+    $includeCanSuperLike: Boolean = false
+  ) {
     article(input: { mediaHash: $mediaHash }) {
       id
       title
@@ -53,7 +56,11 @@ export const ARTICLE_DETAIL_PUBLIC = gql`
 `
 
 export const ARTICLE_DETAIL_PRIVATE = gql`
-  query ArticleDetailPrivate($mediaHash: String, $includeContent: Boolean!) {
+  query ArticleDetailPrivate(
+    $mediaHash: String
+    $includeContent: Boolean!
+    $includeCanSuperLike: Boolean!
+  ) {
     article(input: { mediaHash: $mediaHash }) {
       id
       content @include(if: $includeContent)
