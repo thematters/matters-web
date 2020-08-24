@@ -1,4 +1,4 @@
-.followee {
+.author {
   @mixin flex-center-start;
 
   width: 100%;
