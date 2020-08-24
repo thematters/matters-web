@@ -99,7 +99,7 @@ const FollowComment: React.FC<FollowCommentProps> = ({ comment, onClick }) => {
             {...userDigestProps}
           />
           <TextIcon size="sm" color="grey-dark">
-            <Translate zh_hant="評論了作品" zh_hans="评论了作品" />
+            <Translate zh_hant="評論了" zh_hans="评论了" />
           </TextIcon>
         </section>
 

@@ -112,6 +112,7 @@ const ArticleDetail = () => {
       variables: {
         mediaHash: article?.mediaHash,
         includeContent: article.state !== 'active' && isAuthor,
+        includeCanSuperLike: viewer.isCivicLiker,
       },
     })
 

@@ -17,7 +17,7 @@ export const fragments = {
         id
         hasAppreciate
         appreciateLeft
-        canSuperLike
+        canSuperLike @include(if: $includeCanSuperLike)
       }
     `,
   },
