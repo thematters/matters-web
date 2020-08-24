@@ -25,6 +25,11 @@
     }
   }
 
+  &.balance {
+    font-weight: var(--font-weight-medium);
+    color: var(--color-black);
+  }
+
   &.insufficient {
     color: var(--color-red);
   }

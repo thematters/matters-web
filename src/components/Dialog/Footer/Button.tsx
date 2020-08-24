@@ -3,11 +3,12 @@ import { forwardRef } from 'react'
 import { Button, ButtonProps, IconSpinner, TextIcon } from '~/components'
 
 type DialogFooterButtonProps = {
-  textColor?: 'black' | 'white'
-  bgColor?: 'green' | 'grey-lighter' | 'red'
+  textColor?: 'black' | 'white' | 'grey'
+  bgColor?: 'green' | 'grey-lighter' | 'red' | 'white'
+  icon?: React.ReactNode
 
   loading?: boolean
-} & ButtonProps
+} & Omit<ButtonProps, 'bgColor'>
 
 const DialogFooterButton: React.FC<DialogFooterButtonProps> = forwardRef(
   (
@@ -15,6 +16,8 @@ const DialogFooterButton: React.FC<DialogFooterButtonProps> = forwardRef(
       loading,
       textColor = 'white',
       bgColor = 'green',
+
+      icon,
 
       disabled,
       children,
@@ -30,10 +33,11 @@ const DialogFooterButton: React.FC<DialogFooterButtonProps> = forwardRef(
       {...restProps}
     >
       <TextIcon
-        icon={loading && <IconSpinner size="md" />}
+        icon={icon || (loading && <IconSpinner size="md" />)}
         color={textColor}
         size="md"
         weight="md"
+        textPlacement="left"
       >
         {loading ? null : children}
       </TextIcon>

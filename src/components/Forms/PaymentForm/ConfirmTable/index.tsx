@@ -3,22 +3,13 @@ import classNames from 'classnames'
 import styles from './styles.css'
 
 interface RowProps {
-  total?: boolean
-  insufficient?: boolean
-  breaker?: boolean
+  type?: 'balance' | 'total' | 'insufficient' | 'breaker'
 }
 
-const Row: React.FC<RowProps> = ({
-  total,
-  insufficient,
-  breaker,
-  children,
-}) => {
+const Row: React.FC<RowProps> = ({ type, children }) => {
   const rowClasses = classNames({
     row: true,
-    total,
-    insufficient,
-    breaker,
+    [`${type}`]: !!type,
   })
 
   return (

@@ -24,6 +24,12 @@
     padding-bottom: var(--spacing-base);
     text-align: center;
   }
+
+  &.disabled {
+    pointer-events: none;
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
 }
 
 .hkd {
@@ -43,10 +49,5 @@
   &.active {
     color: var(--color-white);
     background: var(--color-matters-green);
-  }
-
-  &.disabled {
-    cursor: not-allowed;
-    opacity: 0.5;
   }
 }

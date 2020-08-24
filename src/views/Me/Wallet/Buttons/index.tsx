@@ -26,7 +26,6 @@ const Buttons: React.FC<ButtonsProps> = ({ canPayout, hasStripeAccount }) => {
           <AddCreditDialog>
             {({ open }) => (
               <Dialog.Footer.Button
-                bgColor="green"
                 onClick={() => {
                   open()
                   analytics.trackEvent('click_button', { type: 'top_up' })

@@ -25,6 +25,7 @@ type InputProps = {
   onChange: (val: string, index: number) => void
   onComplete?: (val: string) => void
   name: string
+  autoFocus?: boolean
 } & Omit<FieldProps, 'fieldMsgId'>
 
 const Input: React.FC<InputProps> = ({
@@ -34,6 +35,7 @@ const Input: React.FC<InputProps> = ({
 
   name,
   label,
+  autoFocus = true,
   extraButton,
 
   hint,
@@ -119,7 +121,7 @@ const Input: React.FC<InputProps> = ({
                 onItemPaste(event, index)
               }
               onBackspace={() => onBackspace(index)}
-              autoFocus={index === 0}
+              autoFocus={autoFocus ? index === 0 : false}
             />
           ))}
         </section>

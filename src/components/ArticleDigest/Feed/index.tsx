@@ -121,6 +121,7 @@ const BaseArticleDigestFeed = ({
     <Card {...path} spacing={['base', 'base']} onClick={onClick}>
       <section className={containerClasses}>
         {extraHeader}
+
         <header>
           <section className="left">
             {actor ? (
