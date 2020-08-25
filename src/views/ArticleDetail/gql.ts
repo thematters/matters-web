@@ -13,7 +13,7 @@ import Toolbar from './Toolbar'
 export const ARTICLE_DETAIL_PUBLIC = gql`
   query ArticleDetailPublic(
     $mediaHash: String
-    $includeCanSuperLike: Boolean = false
+    $includeCanSuperLike: Boolean = true
   ) {
     article(input: { mediaHash: $mediaHash }) {
       id
