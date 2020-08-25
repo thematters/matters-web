@@ -28,7 +28,7 @@ export type UserDigestMiniProps = {
   avatarSize?: Extract<AvatarSize, 'xs' | 'sm' | 'md' | 'lg'>
   textSize?: 'xs' | 'sm-s' | 'sm' | 'md-s' | 'md'
   textWeight?: 'md'
-  nameColor?: 'black' | 'white' | 'grey-darker'
+  nameColor?: 'black' | 'white' | 'grey-darker' | 'green'
   direction?: 'row' | 'column'
 
   hasAvatar?: boolean

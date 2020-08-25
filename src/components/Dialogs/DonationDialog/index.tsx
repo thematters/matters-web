@@ -8,6 +8,7 @@ import {
   useStep,
   ViewerContext,
 } from '~/components'
+import { UserDigest } from '~/components/UserDigest'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { analytics } from '~/common/utils'
@@ -46,13 +47,13 @@ const fragments = {
   recipient: gql`
     fragment UserDonationRecipient on User {
       id
-      avatar
-      displayName
       liker {
         likerId
         civicLiker
       }
+      ...UserDigestMiniUser
     }
+    ${UserDigest.Mini.fragments.user}
   `,
 }
 
@@ -138,7 +139,12 @@ const BaseDonationDialog = ({
     <>
       {children({ open })}
 
-      <Dialog size="sm" isOpen={showDialog} onDismiss={close} fixedHeight>
+      <Dialog
+        size={isComplete ? 'lg' : 'sm'}
+        isOpen={showDialog}
+        onDismiss={close}
+        fixedHeight
+      >
         <Dialog.Header
           close={close}
           leftButton={
@@ -154,6 +160,8 @@ const BaseDonationDialog = ({
               ? 'paymentPassword'
               : isResetPassword
               ? 'resetPaymentPassword'
+              : isComplete
+              ? 'successDonation'
               : 'donation'
           }
         />
@@ -193,10 +201,9 @@ const BaseDonationDialog = ({
 
         {isComplete && (
           <PaymentForm.PayTo.Complete
-            amount={amount}
             callback={completeCallback}
-            currency={currency}
             recipient={recipient}
+            targetId={targetId}
           />
         )}
 

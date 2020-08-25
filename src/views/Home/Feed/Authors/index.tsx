@@ -3,12 +3,9 @@ import _random from 'lodash/random'
 import { useContext, useEffect } from 'react'
 
 import {
-  Button,
-  IconReload,
+  ShuffleButton,
   Slides,
   Spinner,
-  TextIcon,
-  Translate,
   usePublicQuery,
   UserDigest,
   ViewerContext,
@@ -67,23 +64,7 @@ const Authors = () => {
   const SlidesHeader = (
     <SectionHeader
       type="authors"
-      rightButton={
-        <Button
-          size={[null, '1.25rem']}
-          spacing={[0, 'xtight']}
-          bgActiveColor="grey-lighter"
-          onClick={shuffle}
-        >
-          <TextIcon
-            icon={<IconReload size="xs" />}
-            color="grey"
-            size="xs"
-            weight="md"
-          >
-            <Translate id="shuffle" />
-          </TextIcon>
-        </Button>
-      }
+      rightButton={<ShuffleButton onClick={shuffle} />}
     />
   )
 
