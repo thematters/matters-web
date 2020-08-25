@@ -5,6 +5,7 @@ import React, { useContext } from 'react'
 import { Form, LanguageContext, Translate } from '~/components'
 
 import styles from './styles.css'
+import globalStyles from './styles.global.css'
 
 interface StripeCheckoutProps {
   error?: string | React.ReactNode
@@ -58,7 +59,9 @@ const StripeCheckout: React.FC<StripeCheckoutProps> = ({ error, onChange }) => {
         />
 
         <Form.Field.Content>
-          <CardElement id={fieldId} options={options} onChange={onChange} />
+          <section className="checkout-input">
+            <CardElement id={fieldId} options={options} onChange={onChange} />
+          </section>
         </Form.Field.Content>
 
         <Form.Field.Footer
@@ -74,8 +77,9 @@ const StripeCheckout: React.FC<StripeCheckoutProps> = ({ error, onChange }) => {
       </Form.Field>
 
       <style jsx global>
-        {styles}
+        {globalStyles}
       </style>
+      <style jsx>{styles}</style>
     </>
   )
 }

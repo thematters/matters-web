@@ -224,6 +224,7 @@ const SetAmount: React.FC<FormProps> = ({
           balance={balance}
           fixed={fixed}
           insufficient={isBalanceInsufficient}
+          showBalance={!isLike}
           disabled={locked}
           textColor={color}
           onClick={() => {
@@ -272,7 +273,7 @@ const SetAmount: React.FC<FormProps> = ({
           </Dialog.Footer.Button>
         )}
 
-        {canProcess && !locked && (
+        {canProcess && !isLike && !locked && (
           <Dialog.Footer.Button
             bgColor="grey-lighter"
             textColor="black"
