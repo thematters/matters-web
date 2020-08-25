@@ -101,12 +101,15 @@ const AppreciationButton = ({
           token,
           superLike: true,
         },
-        optimisticResponse: {
-          appreciateArticle: {
-            id: article.id,
+        update: (cache) => {
+          updateAppreciation({
+            cache,
+            left,
+            mediaHash,
+            total,
+            viewer,
             canSuperLike: false,
-            __typename: 'Article',
-          },
+          })
         },
       })
       window.dispatchEvent(
