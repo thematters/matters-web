@@ -30,7 +30,12 @@ interface ActionProps {
   recipient?: Recipient | null
 }
 
-const Action = ({ isSender, isWalletAction, sender, recipient }: ActionProps) => {
+const Action = ({
+  isSender,
+  isWalletAction,
+  sender,
+  recipient,
+}: ActionProps) => {
   if (isWalletAction) {
     return (
       <section className="wallet">
