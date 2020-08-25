@@ -20,10 +20,10 @@
   justify-content: flex-start;
 }
 
-@define-mixin flex-center-start {
+@define-mixin flex-center-end {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: flex-end;
 }
 
 @define-mixin flex-start-space-between {

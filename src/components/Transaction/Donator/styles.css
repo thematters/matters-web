@@ -1,9 +1,5 @@
 section {
-  margin-bottom: var(--spacing-xx-tight);
-  font-size: var(--font-size-md-s);
-}
-
-.user-name {
-  margin-left: var(--spacing-xx-tight);
-  color: var(--color-grey-dark);
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--spacing-x-tight);
 }

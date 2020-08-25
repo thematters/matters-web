@@ -1,4 +1,4 @@
-import { Avatar, IconHeart } from '~/components'
+import { Avatar, IconHeart, IconWalletMedium } from '~/components'
 
 import styles from './styles.css'
 
@@ -16,6 +16,7 @@ import {
  * ```tsx
  *  <Action
  *    isSender={true}
+ *    isWalletAction={false}
  *    sender={sender}
  *    recipient={recipient}
  *  />
@@ -23,32 +24,47 @@ import {
  */
 
 interface ActionProps {
-  isSender: boolean
+  isSender?: boolean
+  isWalletAction?: boolean
   sender?: Sender | null
   recipient?: Recipient | null
 }
 
-const Action = ({ isSender, sender, recipient }: ActionProps) => (
-  <>
-    {!isSender && sender && (
-      <section className="from">
-        <Avatar size="sm" user={sender} />
-        <div className="outline">
+const Action = ({
+  isSender,
+  isWalletAction,
+  sender,
+  recipient,
+}: ActionProps) => {
+  if (isWalletAction) {
+    return (
+      <section className="wallet">
+        <IconWalletMedium size="md" color="green" />
+        <style jsx>{styles}</style>
+      </section>
+    )
+  }
+  return (
+    <>
+      {!isSender && sender && (
+        <section className="from">
+          <Avatar size="sm" user={sender} />
+          <div className="outline">
+            <IconHeart size="md" color="red" />
+          </div>
+        </section>
+      )}
+      {isSender && recipient && (
+        <section className="to">
           <IconHeart size="md" color="red" />
-        </div>
-      </section>
-    )}
-
-    {isSender && recipient && (
-      <section className="to">
-        <IconHeart size="md" color="red" />
-        <div className="outline">
-          <Avatar size="sm" user={recipient} />
-        </div>
-      </section>
-    )}
-    <style jsx>{styles}</style>
-  </>
-)
+          <div className="outline">
+            <Avatar size="sm" user={recipient} />
+          </div>
+        </section>
+      )}
+      <style jsx>{styles}</style>
+    </>
+  )
+}
 
 export default Action

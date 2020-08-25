@@ -1,3 +1,5 @@
+import { UserDigest } from '~/components'
+
 import styles from './styles.css'
 
 import {
@@ -26,8 +28,7 @@ const Donator = ({ user }: DonatorProps) => {
 
   return (
     <section>
-      <span>{user.displayName}</span>
-      <span className="user-name">@{user.userName}</span>
+      <UserDigest.Mini textSize="md-s" user={user} hasDisplayName hasUserName />
       <style jsx>{styles}</style>
     </section>
   )
