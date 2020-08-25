@@ -37,6 +37,12 @@
       & .wallet-action {
         margin-bottom: var(--spacing-xx-tight);
       }
+
+      & .wallet-action {
+        & p {
+          font-size: var(--fon-size-md-s);
+        }
+      }
     }
 
     & .right {

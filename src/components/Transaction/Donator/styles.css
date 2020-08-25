@@ -1,9 +1,9 @@
 section {
   margin-bottom: var(--spacing-xx-tight);
-  font-size: var(--font-size-md-s);
-}
+  font-size: var(--font-size-md);
 
-.user-name {
-  margin-left: var(--spacing-xx-tight);
-  color: var(--color-grey-dark);
+  & :global(.displayname),
+  & :global(.username) {
+    line-height: 1.5;
+  }
 }
