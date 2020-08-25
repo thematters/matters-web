@@ -5,7 +5,6 @@ import {
   ArticleDigestTitle,
   Card,
   DateTime,
-  IconWalletMedium,
   Translate,
   UserDigest,
   ViewerContext,
@@ -80,19 +79,12 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
     <Card {...path} spacing={['base', 'base']}>
       <section className="container">
         <section className="tx-icon">
-          {isDonation && (
-            <Action
-              isSender={!!isViewerSender}
-              sender={sender}
-              recipient={recipient}
-            />
-          )}
-
-          {isWalletAction && (
-            <section className="wallet">
-              <IconWalletMedium size="md" color="green" />
-            </section>
-          )}
+          <Action
+            isSender={!!isViewerSender}
+            isWalletAction={isWalletAction}
+            sender={sender}
+            recipient={recipient}
+          />
         </section>
 
         <section className="tx-info">

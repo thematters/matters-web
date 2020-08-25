@@ -25,3 +25,15 @@
     }
   }
 }
+
+.wallet {
+  @mixin flex-center-end;
+
+  width: 100%;
+}
+
+.to,
+.from,
+.wallet {
+  margin-top: calc(var(--spacing-xx-tight) * -1);
+}

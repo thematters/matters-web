@@ -1,9 +1,5 @@
 section {
-  margin-bottom: var(--spacing-xx-tight);
-  font-size: var(--font-size-md);
-
-  & :global(.displayname),
-  & :global(.username) {
-    line-height: 1.5;
-  }
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--spacing-x-tight);
 }

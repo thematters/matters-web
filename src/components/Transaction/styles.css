@@ -6,12 +6,6 @@
     flex-direction: column;
     flex-shrink: 0;
     width: var(--spacing-xx-loose);
-
-    & .wallet {
-      display: flex;
-      justify-content: flex-end;
-      width: 100%;
-    }
   }
 
   & .tx-info {
@@ -39,8 +33,13 @@
       }
 
       & .wallet-action {
+        @mixin flex-center-start;
+
         & p {
+          display: flex;
+          align-items: center;
           font-size: var(--fon-size-md-s);
+          line-height: 1;
         }
       }
     }
