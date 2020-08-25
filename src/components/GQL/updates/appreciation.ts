@@ -13,18 +13,21 @@ const update = ({
   mediaHash,
   total,
   viewer,
+  canSuperLike,
 }: {
   cache: DataProxy
   left: number
   mediaHash: string
   total: number
   viewer: any
+  canSuperLike?: boolean
 }) => {
   try {
     if (!mediaHash) {
       return
     }
 
+    // read from local cache
     const variables = { mediaHash }
     const cacheData = _cloneDeep(
       cache.readQuery<ArticleDetailPublic>({
@@ -37,9 +40,15 @@ const update = ({
       return
     }
 
+    // update counts
     cacheData.article.appreciateLeft = left
     cacheData.article.appreciationsReceivedTotal = total
     cacheData.article.hasAppreciate = true
+
+    // update SuperLike
+    if (typeof canSuperLike === 'boolean') {
+      cacheData.article.canSuperLike = canSuperLike
+    }
 
     // inject viewer into appreciators
     const appreciators = cacheData.article?.received?.edges || []
@@ -49,6 +58,7 @@ const update = ({
     })
     if (!hasApprecaitor) {
       cacheData.article.received.totalCount = appreciatorsCount + 1
+
       appreciators.push({
         cursor: window.btoa(`arrayconnection:${appreciators.length}`) || '',
         node: {
@@ -65,9 +75,11 @@ const update = ({
         },
         __typename: 'AppreciationEdge',
       })
+
       cacheData.article.received.edges = appreciators
     }
 
+    // write to local cache
     cache.writeQuery({
       query: ARTICLE_DETAIL_PUBLIC,
       data: cacheData,
