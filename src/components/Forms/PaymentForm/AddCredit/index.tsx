@@ -231,6 +231,12 @@ const BaseAddCredit: React.FC<FormProps> = ({
           <h3>
             <Translate id="successTopUp" />
           </h3>
+          <p>
+            <Translate
+              zh_hant="創作者們望眼欲穿，快去送上支持吧"
+              zh_hans="创作者们望眼欲穿，快去送上支持吧"
+            />
+          </p>
           <br />
           <CurrencyAmount amount={values.amount} currency={currency} />
         </Dialog.Message>
@@ -247,15 +253,11 @@ const BaseAddCredit: React.FC<FormProps> = ({
           <ConfirmTable>
             <ConfirmTable.Row type="balance">
               <ConfirmTable.Col>
-                <b>
-                  <Translate id="walletBalance" />
-                </b>
+                <Translate id="walletBalance" />
               </ConfirmTable.Col>
 
               <ConfirmTable.Col>
-                <b>
-                  {currency} {toAmountString(balance)}
-                </b>
+                {currency} {toAmountString(balance)}
               </ConfirmTable.Col>
             </ConfirmTable.Row>
           </ConfirmTable>

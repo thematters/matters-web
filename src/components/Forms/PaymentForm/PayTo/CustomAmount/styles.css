@@ -5,8 +5,3 @@
   padding: 0 var(--spacing-base);
   margin-bottom: var(--spacing-loose);
 }
-
-.balance {
-  font-size: var(--font-size-sm);
-  color: var(--color-black);
-}

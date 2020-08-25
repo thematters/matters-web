@@ -142,7 +142,11 @@ const BaseDonationDialog = ({
         <Dialog.Header
           close={close}
           leftButton={
-            prevStep ? <Dialog.Header.BackButton onClick={back} /> : <span />
+            prevStep && !isComplete ? (
+              <Dialog.Header.BackButton onClick={back} />
+            ) : (
+              <span />
+            )
           }
           rightButton={
             <Dialog.Header.CloseButton close={close} textId="close" />
