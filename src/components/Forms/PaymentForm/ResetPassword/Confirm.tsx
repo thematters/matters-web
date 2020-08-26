@@ -73,6 +73,10 @@ const Confirm: React.FC<FormProps> = ({ codeId, submitCallback }) => {
         forward('comparedPassword')
       }
 
+      if (comparedPasswordError) {
+        setFieldValue('comparedPassword', '', false)
+      }
+
       return _pickBy({
         password: isInPassword && passwordError,
         comparedPassword: isInComparedPassword && comparedPasswordError,
@@ -88,6 +92,7 @@ const Confirm: React.FC<FormProps> = ({ codeId, submitCallback }) => {
       } catch (error) {
         const [messages, codes] = parseFormSubmitErrors(error, lang)
         setFieldError('password', messages[codes[0]])
+        setFieldValue('comparedPassword', '', false)
       }
 
       setSubmitting(false)
@@ -101,6 +106,7 @@ const Confirm: React.FC<FormProps> = ({ codeId, submitCallback }) => {
           length={6}
           label={<Translate id="hintPaymentPassword" />}
           name="password"
+          value={values.password}
           error={touched.password && errors.password}
           onChange={(value) => {
             const shouldValidate = value.length === 6
@@ -114,6 +120,7 @@ const Confirm: React.FC<FormProps> = ({ codeId, submitCallback }) => {
           length={6}
           label={<Translate id="enterPaymentPasswordAgain" />}
           name="compared-password"
+          value={values.comparedPassword}
           error={touched.comparedPassword && errors.comparedPassword}
           onChange={(value) => {
             const shouldValidate = value.length === 6
