@@ -105,6 +105,7 @@ const SetPassword: React.FC<FormProps> = ({ submitCallback }) => {
           length={6}
           name="password"
           error={touched.password && errors.password}
+          hint={<Translate id="hintPaymentPassword" />}
           onChange={(value) => {
             const shouldValidate = value.length === 6
             setTouched({ password: true }, shouldValidate)
@@ -117,6 +118,7 @@ const SetPassword: React.FC<FormProps> = ({ submitCallback }) => {
           length={6}
           name="compared-password"
           error={touched.comparedPassword && errors.comparedPassword}
+          hint={<Translate id="hintPaymentPassword" />}
           onChange={(value) => {
             const shouldValidate = value.length === 6
             setTouched({ comparedPassword: true }, shouldValidate)

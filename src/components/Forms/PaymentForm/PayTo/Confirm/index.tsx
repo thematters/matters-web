@@ -3,7 +3,7 @@ import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useEffect } from 'react'
 
-import { Dialog, Form, LanguageContext, Translate } from '~/components'
+import { Dialog, Form, LanguageContext, Spinner, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import PAY_TO from '~/components/GQL/mutations/payTo'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
@@ -56,6 +56,7 @@ const Confirm: React.FC<FormProps> = ({
     errors,
     handleSubmit,
     isValid,
+    isSubmitting,
     setFieldValue,
     setTouched,
     touched,
@@ -103,6 +104,7 @@ const Confirm: React.FC<FormProps> = ({
         length={6}
         name="password"
         error={touched.password && errors.password}
+        hint={<Translate id="hintPaymentPassword" />}
         onChange={(value) => {
           const shouldValidate = value.length === 6
           setTouched({ password: true }, shouldValidate)
@@ -120,6 +122,14 @@ const Confirm: React.FC<FormProps> = ({
 
   const balance = data?.viewer?.wallet.balance.HKD || 0
   const isWalletInsufficient = balance < amount
+
+  if (isSubmitting) {
+    return (
+      <Dialog.Content hasGrow>
+        <Spinner />
+      </Dialog.Content>
+    )
+  }
 
   return (
     <>

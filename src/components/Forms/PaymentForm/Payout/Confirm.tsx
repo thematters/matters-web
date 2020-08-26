@@ -204,6 +204,7 @@ const BaseConfirm: React.FC<FormProps> = ({
             length={6}
             name="password"
             error={touched.password && errors.password}
+            hint={<Translate id="hintPaymentPassword" />}
             onChange={(value) => {
               const shouldValidate = value.length === 6
               setTouched({ amount: true, password: true }, shouldValidate)
