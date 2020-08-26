@@ -64,7 +64,11 @@ const ArticleEditor: FC<Props> = ({ draft, update, upload }) => {
           siteDomain="matters.news"
           theme="bubble"
           titleDefaultValue={title || ''}
-          uploadAssetDomain={process.env.NEXT_PUBLIC_ASSET_DOMAIN || ''}
+          uploadAssetDomain={
+            process.env.NEXT_PUBLIC_ASSET_DOMAIN
+              ? `https://${process.env.NEXT_PUBLIC_ASSET_DOMAIN}`
+              : ''
+          }
         />
       </div>
       <style jsx>{themeStyles}</style>
