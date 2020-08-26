@@ -38,10 +38,10 @@ export const Head: React.FC<HeadProps> = (props) => {
       ? `${props.keywords.join(',')},matters,matters.news,創作有價`
       : 'matters,matters.news,創作有價',
     url: props.path
-      ? `${process.env.NEXT_PUBLIC_SITE_DOMAIN}${props.path}`
+      ? `//${process.env.NEXT_PUBLIC_SITE_DOMAIN}${props.path}`
       : router.asPath
-      ? `${process.env.NEXT_PUBLIC_SITE_DOMAIN}${router.asPath}`
-      : process.env.NEXT_PUBLIC_SITE_DOMAIN,
+      ? `//${process.env.NEXT_PUBLIC_SITE_DOMAIN}${router.asPath}`
+      : '//' + process.env.NEXT_PUBLIC_SITE_DOMAIN,
     image: props.image || IMAGE_INTRO,
   }
   const canonicalUrl = head.url?.split('#')[0].split('?')[0]
