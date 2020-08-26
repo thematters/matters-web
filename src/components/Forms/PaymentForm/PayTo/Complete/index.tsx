@@ -1,6 +1,7 @@
 import { NetworkStatus } from 'apollo-client'
 import _random from 'lodash/random'
-import { useContext, useEffect } from 'react'
+import _range from 'lodash/range'
+import { useContext, useEffect, useRef } from 'react'
 
 import {
   ArticleDigestSidebar,
@@ -30,10 +31,16 @@ interface Props {
   targetId: string
 }
 
+const DEFAULT_RANDOM = 0
+const PAGE_COUNT = 3
+
 const Complete: React.FC<Props> = ({ callback, recipient, targetId }) => {
   const viewer = useContext(ViewerContext)
   const isMediumUp = useResponsive('md-up')
 
+  /**
+   * Data Fetching
+   */
   const { data, refetch, networkStatus } = usePublicQuery<RelatedDonations>(
     RELATED_DONATIONS,
     {
@@ -42,7 +49,8 @@ const Complete: React.FC<Props> = ({ callback, recipient, targetId }) => {
         senderUserName: viewer.userName,
         recipientUserName: recipient.userName,
         targetId,
-        random: 0,
+        first: PAGE_COUNT,
+        random: DEFAULT_RANDOM,
       },
     }
   )
@@ -57,8 +65,20 @@ const Complete: React.FC<Props> = ({ callback, recipient, targetId }) => {
   const recipientReceivedDonationCount =
     data?.recipient?.status?.receivedDonationCount || 1
 
+  // shuffle
+  const totalCount =
+    (data?.node?.__typename === 'Article' &&
+      data.node.relatedDonationArticles.totalCount) ||
+    0
+  const prevRandomRef = useRef(DEFAULT_RANDOM)
   const shuffle = () => {
-    refetch({ random: _random(0, 50) })
+    const prevRandom = prevRandomRef.current
+    const max = Math.ceil(totalCount / PAGE_COUNT)
+    const randoms = _range(0, max).filter((n) => n !== prevRandom)
+    const random = randoms[_random(0, randoms.length - 1)]
+
+    refetch({ random })
+    prevRandomRef.current = random
   }
 
   useEffect(() => {
@@ -67,6 +87,9 @@ const Complete: React.FC<Props> = ({ callback, recipient, targetId }) => {
     }
   }, [])
 
+  /**
+   * Render
+   */
   if (isLoading) {
     return <Spinner />
   }
@@ -111,11 +134,13 @@ const Complete: React.FC<Props> = ({ callback, recipient, targetId }) => {
                 />
               </TextIcon>
 
-              <ShuffleButton
-                onClick={shuffle}
-                bgColor="green-lighter"
-                color="green"
-              />
+              {totalCount > PAGE_COUNT && (
+                <ShuffleButton
+                  onClick={shuffle}
+                  bgColor="green-lighter"
+                  color="green"
+                />
+              )}
             </header>
 
             {isRefetching && <Spinner />}
