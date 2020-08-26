@@ -19,6 +19,8 @@ import {
 } from '~/components'
 import { TextIcon } from '~/components/TextIcon'
 
+import { analytics } from '~/common/utils'
+
 import { RELATED_DONATIONS } from './gql'
 import styles from './styles.css'
 
@@ -153,14 +155,14 @@ const Complete: React.FC<Props> = ({ callback, recipient, targetId }) => {
                       article={node}
                       hasCover={isMediumUp}
                       hasBackground
-                      // onClick={() =>
-                      //   analytics.trackEvent('click_feed', {
-                      //     type: 'collection',
-                      //     styleType: 'small_cover',
-                      //     contentType: 'article',
-                      //     location: i,
-                      //   })
-                      // }
+                      onClick={() =>
+                        analytics.trackEvent('click_feed', {
+                          type: 'related_donations',
+                          styleType: 'small_cover',
+                          contentType: 'article',
+                          location: i,
+                        })
+                      }
                     />
                   </List.Item>
                 ))}
