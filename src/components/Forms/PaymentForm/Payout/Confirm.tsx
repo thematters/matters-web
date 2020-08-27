@@ -101,6 +101,7 @@ const BaseConfirm: React.FC<FormProps> = ({
         setSubmitting(false)
         const [messages, codes] = parseFormSubmitErrors(error, lang)
         setFieldError('password', messages[codes[0]])
+        setFieldValue('password', '', false)
       }
     },
   })
@@ -203,7 +204,9 @@ const BaseConfirm: React.FC<FormProps> = ({
           <Form.PinInput
             length={6}
             name="password"
+            value={values.password}
             error={touched.password && errors.password}
+            hint={<Translate id="hintPaymentPassword" />}
             onChange={(value) => {
               const shouldValidate = value.length === 6
               setTouched({ amount: true, password: true }, shouldValidate)

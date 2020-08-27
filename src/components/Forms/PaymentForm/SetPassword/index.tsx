@@ -79,6 +79,10 @@ const SetPassword: React.FC<FormProps> = ({ submitCallback }) => {
         forward('comparedPassword')
       }
 
+      if (comparedPasswordError) {
+        setFieldValue('comparedPassword', '', false)
+      }
+
       return _pickBy({
         password: isInPassword && passwordError,
         comparedPassword: isInComparedPassword && comparedPasswordError,
@@ -92,6 +96,7 @@ const SetPassword: React.FC<FormProps> = ({ submitCallback }) => {
       } catch (error) {
         const [messages, codes] = parseFormSubmitErrors(error, lang)
         setFieldError('password', messages[codes[0]])
+        setFieldValue('comparedPassword', '', false)
       }
 
       setSubmitting(false)
@@ -104,7 +109,9 @@ const SetPassword: React.FC<FormProps> = ({ submitCallback }) => {
         <Form.PinInput
           length={6}
           name="password"
+          value={values.password}
           error={touched.password && errors.password}
+          hint={<Translate id="hintPaymentPassword" />}
           onChange={(value) => {
             const shouldValidate = value.length === 6
             setTouched({ password: true }, shouldValidate)
@@ -116,7 +123,9 @@ const SetPassword: React.FC<FormProps> = ({ submitCallback }) => {
         <Form.PinInput
           length={6}
           name="compared-password"
+          value={values.comparedPassword}
           error={touched.comparedPassword && errors.comparedPassword}
+          hint={<Translate id="hintPaymentPassword" />}
           onChange={(value) => {
             const shouldValidate = value.length === 6
             setTouched({ comparedPassword: true }, shouldValidate)
