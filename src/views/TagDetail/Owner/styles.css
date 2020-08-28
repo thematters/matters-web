@@ -1,0 +1,20 @@
+.container {
+  @mixin flex-center-space-between;
+
+  padding: var(--spacing-x-tight) var(--spacing-base);
+  margin-top: var(--spacing-base);
+  background: var(--color-grey-lighter);
+  border-radius: var(--spacing-x-tight);
+}
+
+.left {
+  @mixin flex-center-start;
+
+  & :global(> * + *) {
+    margin-left: var(--spacing-x-tight);
+  }
+}
+
+.right {
+  @mixin flex-center-end;
+}
