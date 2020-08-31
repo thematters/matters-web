@@ -1,4 +1,11 @@
-import { Button, IconEmptyAvatar, TextIcon, Translate, UserDigest } from '~/components'
+import {
+  Button,
+  IconEmptyAvatar,
+  TagAdoptionDialog,
+  TextIcon,
+  Translate,
+  UserDigest,
+} from '~/components'
 
 import styles from './styles.css'
 
@@ -14,7 +21,7 @@ const Owner = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
       <section className="container">
         <section className="left">
           <TextIcon
-            icon={<IconEmptyAvatar size="md"/>}
+            icon={<IconEmptyAvatar size="md" />}
             color="grey-dark"
             size="md-s"
             spacing="xtight"
@@ -26,17 +33,22 @@ const Owner = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
           </TextIcon>
         </section>
         <section className="right">
-          <Button
-            size={['3rem', '1.5rem']}
-            textColor="green"
-            textActiveColor="white"
-            bgActiveColor="green"
-            borderColor="green"
-          >
-            <TextIcon weight="md" size="xs">
-              <Translate zh_hant="認領" zh_hans="认领" />
-            </TextIcon>
-          </Button>
+          <TagAdoptionDialog>
+            {({ open }) => (
+              <Button
+                size={['3rem', '1.5rem']}
+                textColor="green"
+                textActiveColor="white"
+                bgActiveColor="green"
+                borderColor="green"
+                onClick={open}
+              >
+                <TextIcon weight="md" size="xs">
+                  <Translate zh_hant="認領" zh_hans="认领" />
+                </TextIcon>
+              </Button>
+            )}
+          </TagAdoptionDialog>
         </section>
         <style jsx>{styles}</style>
       </section>
