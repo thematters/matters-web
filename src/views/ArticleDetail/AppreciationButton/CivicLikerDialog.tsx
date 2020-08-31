@@ -33,13 +33,22 @@ const CivicLikerDialog = ({ onClose, children }: CivicLikerDialogProps) => {
 
         <Dialog.Message align="left">
           <p>
+            <Translate zh_hant="加入讚賞公民解鎖" zh_hans="加入赞赏公民解锁" />
+            &nbsp;
+            <a
+              className="u-link-green"
+              href={EXTERNAL_LINKS.SUPER_LIKE}
+              target="_blank"
+            >
+              <Translate zh_hant="Super Like" zh_hans="Super Like" />
+            </a>
             <Translate
-              zh_hant="加入讚賞公民解鎖 Super Like，本年內每天整點中午及凌晨獲贈一個。"
-              zh_hans="加入赞赏公民解锁 Super Like，本年内每天整点中午及凌晨获赠一个。"
+              zh_hant="，本年內每天整點中午及凌晨獲贈一個 Super Like。"
+              zh_hans="，本年内每天整点中午及凌晨获赠一个 Super Like。"
             />
           </p>
 
-          <ol>
+          <ul>
             <li>
               <Translate
                 zh_hant="直接支付額外 LikeCoin，進一步支持作者"
@@ -58,7 +67,7 @@ const CivicLikerDialog = ({ onClose, children }: CivicLikerDialogProps) => {
                 zh_hans="每当文章产生下线 Super Like，内容伯乐及作者同时获得回馈"
               />
             </li>
-          </ol>
+          </ul>
 
           <p>
             <Translate zh_hant="瞭解更多 " zh_hans="了解更多" />
