@@ -95,7 +95,9 @@ const BaseSearchSelectDialog = ({
   }
 
   const onClickSave = async () => {
-    await onSave(stagingNodes.map(({ node }) => node))
+    await onSave(
+      stagingNodes.filter(({ selected }) => !!selected).map(({ node }) => node)
+    )
     close()
   }
 
