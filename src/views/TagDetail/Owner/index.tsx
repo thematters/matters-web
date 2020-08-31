@@ -1,3 +1,5 @@
+import { useContext } from 'react'
+
 import {
   Button,
   IconEmptyAvatar,
@@ -5,13 +7,29 @@ import {
   TextIcon,
   Translate,
   UserDigest,
+  ViewerContext,
 } from '~/components'
+
+import { ADD_TOAST } from '~/common/enums'
 
 import styles from './styles.css'
 
 import { TagDetailPublic_node_Tag } from '../__generated__/TagDetailPublic'
 
 const Owner = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
+  const viewer = useContext(ViewerContext)
+
+  const forbid = () => {
+    window.dispatchEvent(
+      new CustomEvent(ADD_TOAST, {
+        detail: {
+          color: 'red',
+          content: <Translate id="FORBIDDEN_BY_STATE" />,
+        },
+      })
+    )
+  }
+
   if (!tag) {
     return null
   }
@@ -41,7 +59,7 @@ const Owner = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
                 textActiveColor="white"
                 bgActiveColor="green"
                 borderColor="green"
-                onClick={open}
+                onClick={viewer.isFrozen ? forbid : open}
               >
                 <TextIcon weight="md" size="xs">
                   <Translate zh_hant="認領" zh_hans="认领" />

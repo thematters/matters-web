@@ -1,0 +1,11 @@
+.title {
+  margin-bottom: var(--spacing-x-tight);
+  font-size: var(--font-size-xm);
+  text-align: center;
+}
+
+.content {
+  font-size: var(--font-size-md-s);
+  color: var(--color-grey-dark);
+  text-align: center;
+}

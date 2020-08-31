@@ -1,4 +1,5 @@
 .content {
   font-size: var(--font-size-md-s);
   color: var(--color-grey-dark);
+  text-align: center;
 }

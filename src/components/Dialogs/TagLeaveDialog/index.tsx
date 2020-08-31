@@ -16,16 +16,6 @@ interface Props {
   children: ({ open }: { open: () => void }) => React.ReactNode
 }
 
-const textZhHant =
-  '當你認領標籤後，即刻成為該標籤的主理人。' +
-  '你將可以為標籤設置封面，編輯描述，並添加作品至精選列表。' +
-  '你主理的標籤可以用作文集、策展，也可以變成圈子、小組、討論區等，更多主理人玩法等你發掘！'
-
-const textZhHans =
-  '当你认领标签后，即刻成为该标签的主理人。' +
-  '你将可以为标签设置封面，编辑描述，并添加作品至精选列表。' +
-  '你主理的标签可以用作文集、策展，也可以变成圈子、小组、讨论区等，更多主理人玩法等你发掘！'
-
 const BaseDialog = ({ children }: Props) => {
   const [showDialog, setShowDialog] = useState(true)
   const open = () => setShowDialog(true)
@@ -43,28 +33,34 @@ const BaseDialog = ({ children }: Props) => {
 
       <Dialog size="sm" isOpen={showDialog} onDismiss={close}>
         <Dialog.Header
-          title={<Translate zh_hant="認領標籤" zh_hans="认领标签" />}
+          title={<Translate zh_hant="離開標籤" zh_hans="离开标签" />}
           close={close}
           closeTextId="cancel"
         />
         <Dialog.Content spacing={['base', 'base']}>
+          <p className="title">
+            <Translate zh_hant="確定要這麼做嗎" zh_hans="确定要这么做吗" /> 😭
+          </p>
           <p className="content">
-            <Translate zh_hant={textZhHant} zh_hans={textZhHans} />
+            <Translate
+              zh_hant="如果離開標籤，你將無法繼續管理標籤。"
+              zh_hans="如果离开标签，你将无法继续管理标签。"
+            />
           </p>
         </Dialog.Content>
         <Dialog.Footer>
           <Dialog.Footer.Button
             textColor="white"
-            bgColor="gold"
+            bgColor="red"
             loading={loading}
             onClick={async () => {
               try {
                 const result = await update({
-                  variables: { input: { id, type: 'adopt' } },
+                  variables: { input: { id, type: 'leave' } },
                 })
 
                 if (!result) {
-                  throw new Error('tag adoption failed')
+                  throw new Error('tag leave failed')
                 }
 
                 window.dispatchEvent(
@@ -72,7 +68,10 @@ const BaseDialog = ({ children }: Props) => {
                     detail: {
                       color: 'green',
                       content: (
-                        <Translate zh_hant="認領成功" zh_hans="认领成功" />
+                        <Translate
+                          zh_hant="離開標籤成功"
+                          zh_hans="离开标签成功"
+                        />
                       ),
                       duration: 2000,
                     },
@@ -85,7 +84,7 @@ const BaseDialog = ({ children }: Props) => {
               }
             }}
           >
-            <Translate zh_hant="即刻主理" zh_hans="即刻主理" />
+            <Translate zh_hant="確認離開" zh_hans="确认离开" />
           </Dialog.Footer.Button>
 
           <Dialog.Footer.Button
@@ -93,7 +92,7 @@ const BaseDialog = ({ children }: Props) => {
             bgColor="grey-lighter"
             onClick={close}
           >
-            <Translate zh_hant="考慮一下" zh_hans="考虑一下" />
+            <Translate zh_hant="取消" zh_hans="取消" />
           </Dialog.Footer.Button>
         </Dialog.Footer>
       </Dialog>
@@ -102,7 +101,7 @@ const BaseDialog = ({ children }: Props) => {
   )
 }
 
-export const TagAdoptionDialog = (props: Props) => (
+export const TagLeaveDialog = (props: Props) => (
   <Dialog.Lazy mounted={<BaseDialog {...props} />}>
     {({ open }) => <>{props.children({ open })}</>}
   </Dialog.Lazy>

@@ -82,7 +82,11 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
           <>
             {isSmallUp ? <Layout.Header.Title id="tag" /> : <span />}
 
-            <DropdownActions {...tag} isMaintainer={isMaintainer} />
+            <DropdownActions
+              {...tag}
+              isMaintainer={isMaintainer}
+              isOwner={isOwner}
+            />
           </>
         }
         mode={isSmallUp ? 'solid-fixed' : 'transparent-absolute'}
