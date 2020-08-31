@@ -47,7 +47,10 @@ const ME_TRANSACTIONS = gql`
 
 const Transactions = () => {
   const { data, loading, fetchMore, refetch } = useQuery<MeTransactions>(
-    ME_TRANSACTIONS
+    ME_TRANSACTIONS,
+    {
+      fetchPolicy: 'network-only',
+    }
   )
 
   if (loading) {
