@@ -61,14 +61,8 @@ const ArticleEditor: FC<Props> = ({ draft, update, upload }) => {
           mentionUsers={mentionUsers}
           mentionListComponent={MentionUserList}
           readOnly={readyOnly}
-          siteDomain="matters.news"
           theme="bubble"
           titleDefaultValue={title || ''}
-          uploadAssetDomain={
-            process.env.NEXT_PUBLIC_ASSET_DOMAIN
-              ? `https://${process.env.NEXT_PUBLIC_ASSET_DOMAIN}`
-              : ''
-          }
         />
       </div>
       <style jsx>{themeStyles}</style>
