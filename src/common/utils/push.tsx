@@ -4,14 +4,10 @@ import gql from 'graphql-tag'
 import { Translate, Viewer } from '~/components'
 
 import { ADD_TOAST, STORE_KEY_PUSH } from '~/common/enums'
+import { initializeFirebase } from '~/common/utils'
 
 import { ToggleSubscribePush } from './__generated__/ToggleSubscribePush'
 
-const FIREBASE_CONFIG = process.env.NEXT_PUBLIC_FIREBASE_CONFIG
-  ? JSON.parse(
-      Buffer.from(process.env.NEXT_PUBLIC_FIREBASE_CONFIG, 'base64').toString()
-    )
-  : {}
 const isProd = process.env.NODE_ENV === 'production'
 
 const TOGGLE_SUBSCRIBE_PUSH = gql`
@@ -35,20 +31,12 @@ export const initializePush = async ({
     return
   }
 
-  const firebase = await import('firebase/app')
+  const firebase = await initializeFirebase()
   await import('firebase/messaging')
 
   cachedClient = client
 
-  /**
-   * Init Firebase
-   */
-  // FIXME: https://github.com/zeit/next.js/issues/1999
-  if (firebase.apps.length || !process.browser) {
-    return
-  }
-
-  if (firebase.messaging.isSupported()) {
+  if (firebase?.messaging.isSupported()) {
     client.writeData({
       id: 'ClientPreference:local',
       data: {
@@ -61,9 +49,6 @@ export const initializePush = async ({
   } else {
     return
   }
-
-  // Init Firebase App
-  firebase.initializeApp(FIREBASE_CONFIG)
 
   // Init FCM
   const messaging = firebase.messaging()
@@ -99,7 +84,7 @@ export const initializePush = async ({
   const isNotificationGranted =
     window.Notification && Notification.permission === 'granted'
 
-  if (!viewer.id || !isNotificationGranted) {
+  if (!viewer.isAuthed || !isNotificationGranted) {
     return
   }
 

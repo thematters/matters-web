@@ -15,7 +15,7 @@ import { SEARCH_AGGREGATE_TAGS_PUBLIC } from './gql'
 import styles from './styles.css'
 import ViewMoreButton from './ViewMoreButton'
 
-import { SeachAggregateTagsPublic } from './__generated__/SeachAggregateTagsPublic'
+import { SearchAggregateTagsPublic } from './__generated__/SearchAggregateTagsPublic'
 
 const AggregateTagResults = () => {
   const router = useRouter()
@@ -25,7 +25,7 @@ const AggregateTagResults = () => {
    * Data Fetching
    */
   // public data
-  const { data, loading, refetch } = usePublicQuery<SeachAggregateTagsPublic>(
+  const { data, loading, refetch } = usePublicQuery<SearchAggregateTagsPublic>(
     SEARCH_AGGREGATE_TAGS_PUBLIC,
     { variables: { key: q } }
   )

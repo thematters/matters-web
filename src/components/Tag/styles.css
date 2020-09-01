@@ -33,9 +33,11 @@
 
 .title {
   display: inline-flex;
+  line-height: 1.5rem;
 
   & :global(svg) {
-    opacity: 0.3;
+    margin-right: var(--spacing-xxx-tight);
+    opacity: 0.35;
   }
 }
 

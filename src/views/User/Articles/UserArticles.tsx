@@ -95,7 +95,7 @@ const UserArticles = () => {
 
   // private data
   const loadPrivate = (publicData?: UserArticlesPublic) => {
-    if (!viewer.id || isViewer || !publicData || !user) {
+    if (!viewer.isAuthed || isViewer || !publicData || !user) {
       return
     }
 

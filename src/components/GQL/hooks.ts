@@ -1,8 +1,11 @@
 import { OperationVariables, QueryResult } from '@apollo/react-common'
 import {
+  LazyQueryHookOptions,
   MutationHookOptions,
   MutationTuple,
   QueryHookOptions,
+  QueryTuple,
+  useLazyQuery as baseUseLazyQuery,
   useMutation as baseUseMutation,
   useQuery as baseUseQuery,
 } from '@apollo/react-hooks'
@@ -36,6 +39,27 @@ export const usePublicQuery = <TData = any, TVariables = OperationVariables>(
   const publicQuery = customQueryProps?.publicQuery
 
   const result = baseUseQuery(query, {
+    ...options,
+    context: {
+      [GQL_CONTEXT_PUBLIC_QUERY_KEY]:
+        typeof publicQuery === 'boolean' ? publicQuery : true,
+    },
+  })
+
+  return result
+}
+
+export const usePublicLazyQuery = <
+  TData = any,
+  TVariables = OperationVariables
+>(
+  query: DocumentNode,
+  options?: LazyQueryHookOptions<TData, TVariables>,
+  customQueryProps?: CustomQueryProps
+): QueryTuple<TData, TVariables> => {
+  const publicQuery = customQueryProps?.publicQuery
+
+  const result = baseUseLazyQuery(query, {
     ...options,
     context: {
       [GQL_CONTEXT_PUBLIC_QUERY_KEY]:

@@ -15,7 +15,7 @@ import { SEARCH_AGGREGATE_ARTICLES_PUBLIC } from './gql'
 import styles from './styles.css'
 import ViewMoreButton from './ViewMoreButton'
 
-import { SeachAggregateArticlesPublic } from './__generated__/SeachAggregateArticlesPublic'
+import { SearchAggregateArticlesPublic } from './__generated__/SearchAggregateArticlesPublic'
 
 const AggregateArticleResults = () => {
   const router = useRouter()
@@ -26,7 +26,7 @@ const AggregateArticleResults = () => {
    */
   // public data
   const { data, loading, refetch } = usePublicQuery<
-    SeachAggregateArticlesPublic
+    SearchAggregateArticlesPublic
   >(SEARCH_AGGREGATE_ARTICLES_PUBLIC, { variables: { key: q } })
 
   const { edges, pageInfo } = data?.search || {}

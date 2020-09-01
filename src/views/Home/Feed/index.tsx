@@ -119,7 +119,7 @@ const MainFeed = ({ feedSortType: sortBy, viewMode }: MainFeedProps) => {
 
   // private data
   const loadPrivate = (publicData?: FeedArticlesPublic) => {
-    if (!viewer.id || !publicData) {
+    if (!viewer.isAuthed || !publicData) {
       return
     }
 
@@ -137,7 +137,7 @@ const MainFeed = ({ feedSortType: sortBy, viewMode }: MainFeedProps) => {
   const fetchedPrviateSortsRef = useRef<SortByType[]>([])
   useEffect(() => {
     const fetched = fetchedPrviateSortsRef.current.indexOf(sortBy) >= 0
-    if (loading || !edges || fetched || !viewer.id) {
+    if (loading || !edges || fetched || !viewer.isAuthed) {
       return
     }
 

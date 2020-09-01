@@ -11,6 +11,7 @@ import {
   PullToRefresh,
   Spinner,
   Tabs,
+  TextIcon,
   Throw404,
   Translate,
   usePublicQuery,
@@ -114,9 +115,10 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
                 hasAvatar
                 hasDisplayName
               />
-              <span>
+
+              <TextIcon size="sm" color="grey-dark">
                 <Translate zh_hant="主理" zh_hans="主理" />
-              </span>
+              </TextIcon>
             </section>
           )}
 
@@ -178,7 +180,7 @@ const TagDetailContainer = () => {
 
   // private data
   const loadPrivate = () => {
-    if (!viewer.id || !tagId) {
+    if (!viewer.isAuthed || !tagId) {
       return
     }
 

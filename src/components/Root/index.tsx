@@ -51,7 +51,7 @@ const DynamicFingerprint = dynamic(() => import('~/components/Fingerprint'), {
 import('@sentry/browser').then((Sentry) => {
   Sentry.init({
     dsn: process.env.NEXT_PUBLIC_SENTRY_DSN || '',
-    ignoreErrors: ['Timeout', 'Network error'],
+    ignoreErrors: [/.*Timeout.*/, /.*Network.*/],
   })
 })
 
@@ -77,10 +77,14 @@ const Root = ({
   // viewer
   const [privateFetched, setPrivateFetched] = useState(false)
   const fetchPrivateViewer = async () => {
-    await client.query({
-      query: ROOT_QUERY_PRIVATE,
-      fetchPolicy: 'network-only',
-    })
+    try {
+      await client.query({
+        query: ROOT_QUERY_PRIVATE,
+        fetchPolicy: 'network-only',
+      })
+    } catch (e) {
+      console.error(e)
+    }
     setPrivateFetched(true)
   }
   useEffect(() => {

@@ -91,3 +91,9 @@
     color: var(--color-grey-darker);
   }
 }
+
+.name-color-green {
+  & .displayname {
+    color: var(--color-matters-green);
+  }
+}

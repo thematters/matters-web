@@ -1,0 +1,7 @@
+.container {
+  @mixin flex-center-space-between;
+
+  width: 100%;
+  padding: 0 var(--spacing-base);
+  margin-bottom: var(--spacing-loose);
+}

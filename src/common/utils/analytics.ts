@@ -123,6 +123,7 @@ type ArticleFeedType =
   | 'authors' // author feed on home page
   | 'collection'
   | 'follow-article'
+  | 'followee-donated-article'
   | 'hottest'
   | 'icymi'
   | 'newest'
@@ -137,6 +138,7 @@ type ArticleFeedType =
   | 'topics'
   | 'user_article'
   | 'wallet'
+  | 'related_donations'
 
 type CommentFeedType = 'follow-comment' | 'user_comment'
 

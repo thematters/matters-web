@@ -1,26 +1,32 @@
 import { useContext, useState } from 'react'
 
-import { ChangeEmailForm, Head, Layout, ViewerContext } from '~/components'
+import {
+  ChangeEmailForm,
+  Head,
+  Layout,
+  useStep,
+  ViewerContext,
+} from '~/components'
 
 type Step = 'request' | 'confirm' | 'complete'
 
 const ChangeEmail = () => {
   const viewer = useContext(ViewerContext)
-  const [step, setStep] = useState<Step>('request')
+  const { currStep, forward } = useStep<Step>('request')
   const [data, setData] = useState<{ email: string; codeId: string }>({
     email: viewer.info.email,
     codeId: '',
   })
   const requestCallback = (codeId: string) => {
     setData({ ...data, codeId })
-    setStep('confirm')
+    forward('confirm')
   }
 
   return (
     <Layout.Main bgColor="grey-lighter">
       <Head title={{ id: 'changeEmail' }} />
 
-      {step === 'request' && (
+      {currStep === 'request' && (
         <ChangeEmailForm.Request
           defaultEmail={data.email}
           purpose="page"
@@ -28,15 +34,15 @@ const ChangeEmail = () => {
         />
       )}
 
-      {step === 'confirm' && (
+      {currStep === 'confirm' && (
         <ChangeEmailForm.Confirm
           oldData={data}
           purpose="page"
-          submitCallback={() => setStep('complete')}
+          submitCallback={() => forward('complete')}
         />
       )}
 
-      {step === 'complete' && <ChangeEmailForm.Complete purpose="page" />}
+      {currStep === 'complete' && <ChangeEmailForm.Complete purpose="page" />}
     </Layout.Main>
   )
 }

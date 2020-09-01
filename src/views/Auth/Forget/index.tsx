@@ -1,9 +1,9 @@
 import { useState } from 'react'
 
-import { ChangePasswordForm, Head, Layout } from '~/components'
+import { ChangePasswordForm, Head, Layout, useStep } from '~/components'
 
 const Forget = () => {
-  const [step, setStep] = useState('request')
+  const { currStep, forward } = useStep('request')
   const [data, setData] = useState<{ email: string; codeId: string }>({
     email: '',
     codeId: '',
@@ -12,14 +12,14 @@ const Forget = () => {
   const requestCodeCallback = (params: any) => {
     const { email, codeId } = params
     setData({ ...data, email, codeId })
-    setStep('confirm')
+    forward('confirm')
   }
 
   return (
     <Layout.Main bgColor="grey-lighter">
       <Head title={{ id: 'forgetPassword' }} />
 
-      {step === 'request' && (
+      {currStep === 'request' && (
         <ChangePasswordForm.Request
           defaultEmail={data.email}
           type="forget"
@@ -28,16 +28,16 @@ const Forget = () => {
         />
       )}
 
-      {step === 'confirm' && (
+      {currStep === 'confirm' && (
         <ChangePasswordForm.Confirm
           codeId={data.codeId}
           type="forget"
           purpose="page"
-          submitCallback={() => setStep('complete')}
+          submitCallback={() => forward('complete')}
         />
       )}
 
-      {step === 'complete' && (
+      {currStep === 'complete' && (
         <ChangePasswordForm.Complete type="forget" purpose="page" />
       )}
     </Layout.Main>

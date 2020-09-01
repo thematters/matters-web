@@ -59,7 +59,7 @@ const FeaturedComments = () => {
 
   // private data
   const loadPrivate = (publicData?: FeaturedCommentsPublic) => {
-    if (!viewer.id || !publicData || !articleId) {
+    if (!viewer.isAuthed || !publicData || !articleId) {
       return
     }
 

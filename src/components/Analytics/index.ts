@@ -1,8 +1,9 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
+import { useEffect, useRef } from 'react'
 
 import { ANALYTIC_TYPES, ANALYTICS, GA_TRACKING_ID } from '~/common/enums'
-import { deferTry } from '~/common/utils'
+import { deferTry, initializeFirebase } from '~/common/utils'
 
 import { useEventListener } from '../Hook'
 
@@ -11,24 +12,17 @@ import { AnalyticsUser } from './__generated__/AnalyticsUser'
 declare global {
   interface Window {
     gtag: any
-    firebaseAnalytics: firebase.analytics.Analytics & {
-      logEvent: (
-        eventName: string,
-        eventParams?: {
-          [key: string]: any
-        },
-        options?: firebase.analytics.AnalyticsCallOptions
-      ) => void
-    }
   }
 }
 
-const handleAnalytics = ({
+const handleAnalytics = async ({
   detail,
   user,
+  analytics,
 }: {
   detail: CustomEvent['detail']
   user: AnalyticsUser | {}
+  analytics?: firebase.analytics.Analytics
 }) => {
   // get the information out of the tracked event
   const { type, args } = detail
@@ -45,11 +39,11 @@ const handleAnalytics = ({
         page_referrer: referrer,
       })
 
-      window.firebaseAnalytics.logEvent('page_view', {
+      analytics?.logEvent('page_view', {
         page_referrer: referrer,
       })
     } else {
-      window.firebaseAnalytics.logEvent(args[0], args[1])
+      analytics?.logEvent(args[0], args[1])
     }
   }
 
@@ -61,7 +55,7 @@ const handleAnalytics = ({
       window.gtag('config', GA_TRACKING_ID, {
         user_id: id,
       })
-      window.firebaseAnalytics.setUserId(id, { global: true })
+      analytics?.setUserId(id, { global: true })
     } else {
       // visitor
     }
@@ -69,8 +63,24 @@ const handleAnalytics = ({
 }
 
 export const AnalyticsListener = ({ user }: { user: AnalyticsUser | {} }) => {
+  const analyticsRef = useRef<firebase.analytics.Analytics>()
+
+  const initAnalytics = async () => {
+    const firebase = await initializeFirebase()
+    await import('firebase/analytics')
+
+    const analytics = firebase?.analytics()
+    analyticsRef.current = analytics
+  }
+
+  useEffect(() => {
+    initAnalytics()
+  }, [])
+
   useEventListener(ANALYTICS, (detail: CustomEvent['detail']) => {
-    deferTry(() => handleAnalytics({ detail, user }))
+    deferTry(() =>
+      handleAnalytics({ detail, user, analytics: analyticsRef.current })
+    )
   })
   return null
 }

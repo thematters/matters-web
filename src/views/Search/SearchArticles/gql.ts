@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import { ArticleDigestFeed } from '~/components'
 
 export const SEARCH_ARTICLES_PUBLIC = gql`
-  query SeachArticlesPublic($key: String!, $first: Int!, $after: String) {
+  query SearchArticlesPublic($key: String!, $first: Int!, $after: String) {
     search(input: { key: $key, type: Article, first: $first, after: $after }) {
       pageInfo {
         startCursor
@@ -26,7 +26,7 @@ export const SEARCH_ARTICLES_PUBLIC = gql`
 `
 
 export const SEARCH_ARTICLES_PRIVATE = gql`
-  query SeachArticlesPrivate($ids: [ID!]!) {
+  query SearchArticlesPrivate($ids: [ID!]!) {
     nodes(input: { ids: $ids }) {
       id
       ... on Article {

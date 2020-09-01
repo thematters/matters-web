@@ -1,0 +1,16 @@
+.info {
+  padding: var(--spacing-x-tight) var(--spacing-base);
+  text-align: center;
+}
+
+.to {
+  margin-top: var(--spacing-base);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.amount {
+  margin-top: var(--spacing-base);
+  font-size: var(--font-size-xxl);
+  line-height: 1;
+}

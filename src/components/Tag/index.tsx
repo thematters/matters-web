@@ -15,6 +15,8 @@ interface TagProps {
   type?: 'list' | 'title' | 'inline'
   textSize?: 'sm'
   active?: boolean
+  disabled?: boolean
+  hasCount?: boolean
 }
 
 const fragments = {
@@ -29,7 +31,14 @@ const fragments = {
   `,
 }
 
-export const Tag = ({ tag, type = 'list', textSize, active }: TagProps) => {
+export const Tag = ({
+  tag,
+  type = 'list',
+  textSize,
+  active,
+  disabled,
+  hasCount = true,
+}: TagProps) => {
   const tagClasses = classNames({
     tag: true,
     [type]: type,
@@ -82,21 +91,36 @@ export const Tag = ({ tag, type = 'list', textSize, active }: TagProps) => {
   }
 
   const tagCount = numAbbr(tag.articles.totalCount || 0)
-  const hasCount = type === 'list'
+
+  const Inner = () => (
+    <>
+      <TextIcon
+        icon={<IconHashTag {...iconProps} />}
+        {...textIconProps}
+        size={textSize || textIconProps.size}
+      >
+        {tag.content}
+      </TextIcon>
+
+      {hasCount && type === 'list' && <span className="count">{tagCount}</span>}
+
+      <style jsx>{styles}</style>
+    </>
+  )
+
+  if (disabled) {
+    return (
+      <span className={tagClasses}>
+        <Inner />
+        <style jsx>{styles}</style>
+      </span>
+    )
+  }
 
   return (
     <Link {...path}>
       <a className={tagClasses}>
-        <TextIcon
-          icon={<IconHashTag {...iconProps} />}
-          {...textIconProps}
-          size={textSize || textIconProps.size}
-        >
-          {tag.content}
-        </TextIcon>
-
-        {hasCount && tagCount && <span className="count">{tagCount}</span>}
-
+        <Inner />
         <style jsx>{styles}</style>
       </a>
     </Link>

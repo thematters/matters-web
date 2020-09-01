@@ -25,10 +25,7 @@ const AddTags = ({ tags, onAddTag, onDeleteTag, disabled }: AddTagsProps) => {
   return (
     <Collapsable title={<Translate id="tag" />} defaultCollapsed={!hasTags}>
       <p className="tags-intro">
-        <Translate
-          zh_hant="通過添加標籤幫助讀者更好地找到你的作品。如果沒有合適的標籤，你可以創建新的。"
-          zh_hans="通过添加标签帮助读者更好地找到你的作品。如果没有合适的标签，你可以创建新的。"
-        />
+        <Translate id="hintAddTag" />
       </p>
 
       <section className={tagsContainerClasses}>

@@ -42,7 +42,7 @@ const Authors = () => {
 
   // private data
   const loadPrivate = (publicData?: AllAuthorsPublic) => {
-    if (!viewer.id || !publicData) {
+    if (!viewer.isAuthed || !publicData) {
       return
     }
 

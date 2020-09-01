@@ -7,6 +7,7 @@ import {
   Card,
   Comment,
   Expandable,
+  TextIcon,
   Translate,
   UserDigest,
 } from '~/components'
@@ -97,9 +98,9 @@ const FollowComment: React.FC<FollowCommentProps> = ({ comment, onClick }) => {
             hasDisplayName
             {...userDigestProps}
           />
-          <span className="reply-to">
-            <Translate zh_hant="評論了作品" zh_hans="评论了作品" />
-          </span>
+          <TextIcon size="sm" color="grey-dark">
+            <Translate zh_hant="評論了" zh_hans="评论了" />
+          </TextIcon>
         </section>
 
         <Comment.CreatedAt comment={comment} />

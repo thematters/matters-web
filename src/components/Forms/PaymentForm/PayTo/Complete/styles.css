@@ -1,0 +1,47 @@
+.container {
+  padding: var(--spacing-x-loose) var(--spacing-base);
+}
+
+.complete-avatar {
+  @mixin flex-center-all;
+
+  padding: 0 var(--spacing-x-tight);
+
+  & .complete-avatar-outline {
+    @mixin flex-center-all;
+
+    margin-left: calc(var(--spacing-x-tight) * -1);
+    border: 2.5px solid var(--color-white);
+    border-radius: 50%;
+  }
+}
+
+.complete-message {
+  padding: 0 var(--spacing-x-tight);
+  margin-top: var(--spacing-base);
+  color: var(--color-black);
+  text-align: center;
+
+  & :global(> *) {
+    display: inline-flex;
+  }
+
+  & .times {
+    color: var(--color-matters-gold);
+  }
+}
+
+.related-donations {
+  margin-top: var(--spacing-x-loose);
+  margin-bottom: calc(var(--spacing-base) * -1);
+
+  & header {
+    @mixin flex-center-space-between;
+
+    padding-bottom: var(--spacing-base);
+
+    & .right :global(> * + *) {
+      margin-left: var(--spacing-x-tight);
+    }
+  }
+}

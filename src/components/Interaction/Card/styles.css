@@ -1,6 +1,7 @@
 .card {
   @mixin all-transition;
 
+  position: relative;
   outline: none;
 
   &:not(.disabled) {

@@ -44,7 +44,7 @@ export const SearchOverview = ({ inPage }: SearchOverviewProps) => {
 
   // private data
   const loadPrivate = () => {
-    if (!viewer.id) {
+    if (!viewer.isAuthed) {
       return
     }
 
