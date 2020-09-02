@@ -76,8 +76,6 @@ const BaseDialog = ({ children }: Props) => {
                     },
                   })
                 )
-
-                close()
               } catch (error) {
                 throw error
               }
