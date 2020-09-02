@@ -8,8 +8,6 @@ import UPDATE_TAG_SETTING from '~/components/GQL/mutations/updateTagSetting'
 import { ADD_TOAST } from '~/common/enums'
 import { getQuery } from '~/common/utils'
 
-import styles from './styles.css'
-
 import { UpdateTagSetting } from '~/components/GQL/mutations/__generated__/UpdateTagSetting'
 
 interface Props {
@@ -47,11 +45,11 @@ const BaseDialog = ({ children }: Props) => {
           close={close}
           closeTextId="cancel"
         />
-        <Dialog.Content spacing={['base', 'base']}>
-          <p className="content">
+        <Dialog.Message>
+          <p>
             <Translate zh_hant={textZhHant} zh_hans={textZhHans} />
           </p>
-        </Dialog.Content>
+        </Dialog.Message>
         <Dialog.Footer>
           <Dialog.Footer.Button
             textColor="white"
@@ -97,7 +95,6 @@ const BaseDialog = ({ children }: Props) => {
           </Dialog.Footer.Button>
         </Dialog.Footer>
       </Dialog>
-      <style jsx>{styles}</style>
     </>
   )
 }
