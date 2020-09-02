@@ -84,7 +84,7 @@ const BaseDropdownActions = ({
     >
       {({ open, ref }) => (
         <Button
-          size={['7rem', '2.25rem']}
+          size={['5rem', '2rem']}
           textColor="gold"
           textActiveColor="white"
           bgActiveColor="gold"
@@ -94,7 +94,7 @@ const BaseDropdownActions = ({
           ref={ref}
         >
           <TextIcon icon={<IconPen />} weight="md" size="md-s">
-            <Translate id="addArticleTag" />
+            <Translate zh_hant="投稿" zh_hans="投稿" />
           </TextIcon>
         </Button>
       )}

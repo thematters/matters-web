@@ -45,7 +45,7 @@ const Follow = ({ tag }: FollowProps) => {
 
   return (
     <Button
-      size={['7rem', '2.25rem']}
+      size={['5rem', '2rem']}
       textColor="green"
       textActiveColor="white"
       bgActiveColor="green"
@@ -53,7 +53,7 @@ const Follow = ({ tag }: FollowProps) => {
       onClick={follow}
     >
       <TextIcon icon={<IconAdd />} weight="md" size="md-s">
-        <Translate zh_hant="追蹤標籤" zh_hans="追踪标签" />
+        <Translate id="follow" />
       </TextIcon>
     </Button>
   )

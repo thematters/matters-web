@@ -4,7 +4,7 @@ import { Button, ButtonProps, IconSpinner, TextIcon } from '~/components'
 
 type DialogFooterButtonProps = {
   textColor?: 'black' | 'white' | 'grey'
-  bgColor?: 'green' | 'grey-lighter' | 'red' | 'white'
+  bgColor?: 'green' | 'grey-lighter' | 'red' | 'white' | 'gold'
   icon?: React.ReactNode
 
   loading?: boolean

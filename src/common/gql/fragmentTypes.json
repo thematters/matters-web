@@ -18,6 +18,7 @@
         "possibleTypes": [
           { "name": "ArticleConnection" },
           { "name": "CommentConnection" },
+          { "name": "FolloweeDonatedArticleConnection" },
           { "name": "ResponseConnection" },
           { "name": "TagConnection" },
           { "name": "UserConnection" },
