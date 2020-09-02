@@ -147,7 +147,9 @@ export default withApollo(({ ctx, headers, initialState, ...rest }) => {
 
   // setupPersistCache(cache)
 
-  const host = ctx?.req?.headers.host || _get(window, 'location.host')
+  const host =
+    ctx?.req?.headers.host ||
+    (typeof window === 'undefined' ? '' : _get(window, 'location.host'))
 
   const client = new ApolloClient({
     link: ApolloLink.from([

@@ -85,6 +85,21 @@ const nextConfig = {
 
     return config
   },
+  // filter out server side path for static export
+  exportPathMap: async function (
+    defaultPathMap,
+    { dev, dir, outDir, distDir, buildId }
+  ) {
+    const excludePath = ['oauth', 'pay']
+
+    const filtered = Object.keys(defaultPathMap)
+      .filter((key) => !excludePath.includes(key.split('/')[1]))
+      .reduce((obj, key) => {
+        obj[key] = defaultPathMap[key]
+        return obj
+      }, {})
+    return filtered
+  },
 }
 
 module.exports = withPlugins(
@@ -120,38 +135,38 @@ module.exports = withPlugins(
       },
     ],
 
-    // offline
-    [
-      withOffline,
-      {
-        // FIXME: https://github.com/hanford/next-offline/issues/195
-        generateInDevMode: false,
-        workboxOpts: {
-          // https://github.com/hanford/next-offline/issues/35
-          importScripts: [URL_PUSH_SW],
-          swDest: '../public/service-worker.js',
-          runtimeCaching: [
-            {
-              urlPattern: '/',
-              handler: 'NetworkFirst',
-              options: {
-                cacheName: 'homepage-cache',
-              },
-            },
-            {
-              urlPattern: new RegExp('/_next/static/'),
-              handler: 'CacheFirst',
-              options: {
-                cacheName: 'static-cache',
-                cacheableResponse: {
-                  statuses: [0, 200],
-                },
-              },
-            },
-          ],
-        },
-      },
-    ],
+    // // offline
+    // [
+    //   withOffline,
+    //   {
+    //     // FIXME: https://github.com/hanford/next-offline/issues/195
+    //     generateInDevMode: false,
+    //     workboxOpts: {
+    //       // https://github.com/hanford/next-offline/issues/35
+    //       importScripts: [URL_PUSH_SW],
+    //       swDest: '../public/service-worker.js',
+    //       runtimeCaching: [
+    //         {
+    //           urlPattern: '/',
+    //           handler: 'NetworkFirst',
+    //           options: {
+    //             cacheName: 'homepage-cache',
+    //           },
+    //         },
+    //         {
+    //           urlPattern: new RegExp('/_next/static/'),
+    //           handler: 'CacheFirst',
+    //           options: {
+    //             cacheName: 'static-cache',
+    //             cacheableResponse: {
+    //               statuses: [0, 200],
+    //             },
+    //           },
+    //         },
+    //       ],
+    //     },
+    //   },
+    // ],
   ],
   nextConfig
 )
