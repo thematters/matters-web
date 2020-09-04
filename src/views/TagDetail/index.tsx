@@ -10,6 +10,7 @@ import {
   Head,
   Layout,
   PullToRefresh,
+  ShareButton,
   Spinner,
   Tabs,
   Throw404,
@@ -22,7 +23,7 @@ import {
 import { getErrorCodes, QueryError } from '~/components/GQL'
 
 import { ERROR_CODES } from '~/common/enums'
-import { getQuery } from '~/common/utils'
+import { getQuery, toPath } from '~/common/utils'
 
 import TagDetailArticles from './Articles'
 import ArticlesCount from './ArticlesCount'
@@ -44,6 +45,7 @@ type TagFeedType = 'latest' | 'selected'
 const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
   const isSmallUp = useResponsive('sm-up')
   const viewer = useContext(ViewerContext)
+  const path = toPath({ page: 'tagDetail', id: tag.id })
 
   // feed type
   const hasSelected = (tag?.selectedArticles.totalCount || 0) > 0
@@ -60,10 +62,7 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
 
   // define permission
   const isOwner = tag?.owner?.id === viewer.id
-  const isEditor = _some(
-    tag?.editors || [],
-    (editor) => editor.id === viewer.id
-  )
+  const isEditor = _some(tag?.editors || [], ['id', viewer.id])
   const isMatty = viewer.info.email === 'hi@matters.news'
   const isMaintainer = isOwner || isEditor || isMatty
 
@@ -82,11 +81,15 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
           <>
             {isSmallUp ? <Layout.Header.Title id="tag" /> : <span />}
 
-            <DropdownActions
-              {...tag}
-              isMaintainer={isMaintainer}
-              isOwner={isOwner}
+            <ShareButton
+              title={tag.content}
+              path={encodeURI(path.as)}
+              bgColor={isSmallUp ? 'green-lighter' : 'half-black'}
+              iconColor={isSmallUp ? 'green' : 'white'}
+              inCard={false}
             />
+
+            {isMaintainer && <DropdownActions isOwner={isOwner} tag={tag} />}
           </>
         }
         mode={isSmallUp ? 'solid-fixed' : 'transparent-absolute'}
@@ -113,7 +116,7 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
 
           <section className="buttons">
             <TagDetailButtons.FollowButton tag={tag} />
-            <TagDetailButtons.AddButton tag={tag} isMaintainer={isMaintainer} />
+            <TagDetailButtons.AddButton tag={tag} />
           </section>
         </section>
 
