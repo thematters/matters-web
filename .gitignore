@@ -111,3 +111,6 @@ tests_output
 # misc
 TODO
 service-worker.js*
+
+# editors & IDEs
+.idea/
