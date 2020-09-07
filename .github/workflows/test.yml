@@ -1,0 +1,47 @@
+name: Test
+
+on:
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@master
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2.1.1
+        with:
+          node-version: '12.16'
+
+      - name: Cache Dependencies
+        id: cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Generate Types
+        if: github.ref == 'refs/heads/develop' || github.base_ref == 'develop'
+        run: |
+          npm run gen:clean \
+          && npm run gen:type
+
+      - name: Generate Types (production)
+        if: github.ref == 'refs/heads/master' || github.base_ref == 'master'
+        run: |
+          npm run gen:clean \
+          && npm run gen:type:prod
+
+      - name: Lint
+        run: |
+          npm run lint \
+          && npm run format:check
