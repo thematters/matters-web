@@ -173,7 +173,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
   }
 
   return (
-    <TagDialog {...props}>
+    <TagDialog {...props.tag}>
       {({ open: openTagDialog }) => (
         <SearchSelectDialog
           title="tagAddSelectedArticle"
