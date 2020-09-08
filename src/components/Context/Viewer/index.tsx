@@ -19,6 +19,7 @@ const ViewerFragments = {
         hasPaymentPassword
       }
       info {
+        createdAt
         email
         agreeOn
         userNameEditable

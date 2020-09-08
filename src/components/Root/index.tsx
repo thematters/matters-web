@@ -1,5 +1,7 @@
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
+import differenceInDays from 'date-fns/differenceInDays'
+import parseISO from 'date-fns/parseISO'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
@@ -55,6 +57,13 @@ import('@sentry/browser').then((Sentry) => {
   })
 })
 
+const isNewUser = (date: Date | string | number) => {
+  if (typeof date === 'string') {
+    date = parseISO(date)
+  }
+  return differenceInDays(new Date(), date) <= 7
+}
+
 const Root = ({
   client,
   children,
@@ -78,15 +87,34 @@ const Root = ({
   const [privateFetched, setPrivateFetched] = useState(false)
   const fetchPrivateViewer = async () => {
     try {
-      await client.query({
+      const result = await client.query({
         query: ROOT_QUERY_PRIVATE,
         fetchPolicy: 'network-only',
       })
+
+      if (result) {
+        const {
+          data: {
+            viewer: {
+              info: { createdAt, group },
+            },
+          },
+        } = result
+
+        // if user registered in 7 days, then change default feed
+        if (createdAt && isNewUser(createdAt) && group === 'b') {
+          client.writeData({
+            id: 'ClientPreference:local',
+            data: { feedSortType: 'icymi' },
+          })
+        }
+      }
     } catch (e) {
       console.error(e)
     }
     setPrivateFetched(true)
   }
+
   useEffect(() => {
     if (!data) {
       return
