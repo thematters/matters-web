@@ -57,12 +57,14 @@ const Tags = () => {
       publicQuery: !viewer.isAuthed,
     }
   )
-  const randomSize = 50
+  const randomMaxSize = 50
+  const size = Math.round(
+    (data?.viewer?.recommendation.tags.totalCount || randomMaxSize) / 5
+  )
   const edges = data?.viewer?.recommendation.tags.edges
-  const count = data?.viewer?.recommendation.tags.totalCount || randomSize
 
   const shuffle = () => {
-    refetch({ random: _random(0, Math.min(randomSize, count)) })
+    refetch({ random: _random(0, Math.min(randomMaxSize, size)) })
   }
 
   useEffect(() => {
@@ -88,44 +90,46 @@ const Tags = () => {
 
       {loading && <Spinner />}
 
-      <List hasBorder={false}>
-        {edges.map(({ node, cursor }, i) => (
-          <List.Item key={cursor}>
-            <Card
-              {...toPath({
-                page: 'tagDetail',
-                id: node.id,
-              })}
-              spacing={['xtight', 'xtight']}
-              bgColor="none"
-              bgActiveColor="grey-lighter"
-              borderRadius="xtight"
-              onClick={() =>
-                analytics.trackEvent('click_feed', {
-                  type: 'tags',
-                  contentType: 'tag',
-                  styleType: 'title',
-                  location: i,
-                })
-              }
-            >
-              <Tag tag={node} type="inline" textSize="sm" active={true} />
+      {!loading && (
+        <List hasBorder={false}>
+          {edges.map(({ node, cursor }, i) => (
+            <List.Item key={cursor}>
+              <Card
+                {...toPath({
+                  page: 'tagDetail',
+                  id: node.id,
+                })}
+                spacing={['xtight', 'xtight']}
+                bgColor="none"
+                bgActiveColor="grey-lighter"
+                borderRadius="xtight"
+                onClick={() =>
+                  analytics.trackEvent('click_feed', {
+                    type: 'tags',
+                    contentType: 'tag',
+                    styleType: 'title',
+                    location: i,
+                  })
+                }
+              >
+                <Tag tag={node} type="inline" textSize="sm" active={true} />
 
-              {node.description && (
-                <section className="content">
-                  <p>{node.description}</p>
+                {node.description && (
+                  <section className="content">
+                    <p>{node.description}</p>
 
-                  {node.cover && (
-                    <div className="cover">
-                      <Img url={node.cover} size="144w" />
-                    </div>
-                  )}
-                </section>
-              )}
-            </Card>
-          </List.Item>
-        ))}
-      </List>
+                    {node.cover && (
+                      <div className="cover">
+                        <Img url={node.cover} size="144w" />
+                      </div>
+                    )}
+                  </section>
+                )}
+              </Card>
+            </List.Item>
+          ))}
+        </List>
+      )}
 
       <style jsx>{styles}</style>
     </section>
