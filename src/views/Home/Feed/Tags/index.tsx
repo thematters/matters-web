@@ -24,6 +24,7 @@ const FEED_TAGS = gql`
       id
       recommendation {
         tags(input: { first: 5, filter: { random: $random } }) {
+          totalCount
           edges {
             cursor
             node {
@@ -51,10 +52,14 @@ const TagsFeed = () => {
       publicQuery: !viewer.isAuthed,
     }
   )
+  const randomMaxSize = 50
+  const size = Math.round(
+    (data?.viewer?.recommendation.tags.totalCount || randomMaxSize) / 5
+  )
   const edges = data?.viewer?.recommendation.tags.edges
 
   const shuffle = () => {
-    refetch({ random: _random(0, 50) })
+    refetch({ random: _random(0, Math.min(randomMaxSize, size)) })
   }
 
   useEffect(() => {
@@ -86,21 +91,22 @@ const TagsFeed = () => {
         </Slides.Item>
       )}
 
-      {edges.map(({ node, cursor }, i) => (
-        <Slides.Item key={cursor}>
-          <TagFeedDigest
-            tag={node}
-            onClick={() =>
-              analytics.trackEvent('click_feed', {
-                type: 'tags',
-                contentType: 'tag',
-                styleType: 'article',
-                location: i,
-              })
-            }
-          />
-        </Slides.Item>
-      ))}
+      {!loading &&
+        edges.map(({ node, cursor }, i) => (
+          <Slides.Item key={cursor}>
+            <TagFeedDigest
+              tag={node}
+              onClick={() =>
+                analytics.trackEvent('click_feed', {
+                  type: 'tags',
+                  contentType: 'tag',
+                  styleType: 'article',
+                  location: i,
+                })
+              }
+            />
+          </Slides.Item>
+        ))}
     </Slides>
   )
 }
