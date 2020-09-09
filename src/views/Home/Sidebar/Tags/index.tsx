@@ -27,6 +27,7 @@ const SIDEBAR_TAGS = gql`
       id
       recommendation {
         tags(input: { first: 5, filter: { random: $random } }) {
+          totalCount
           edges {
             cursor
             node {
@@ -56,10 +57,12 @@ const Tags = () => {
       publicQuery: !viewer.isAuthed,
     }
   )
+  const randomSize = 50
   const edges = data?.viewer?.recommendation.tags.edges
+  const count = data?.viewer?.recommendation.tags.totalCount || randomSize
 
   const shuffle = () => {
-    refetch({ random: _random(0, 50) })
+    refetch({ random: _random(0, Math.min(randomSize, count)) })
   }
 
   useEffect(() => {
