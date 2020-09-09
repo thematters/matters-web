@@ -47,7 +47,7 @@ const OAuthAuthorize = () => {
   )}`
   const clientId = getQuery({ router, key: 'client_id' })
   const state = getQuery({ router, key: 'state' })
-  const scope = getQuery({ router, key: 'scope' })
+  const requestScopes = getQuery({ router, key: 'scope' })
   const redirectUri = getQuery({ router, key: 'redirect_uri' })
 
   const { data, loading } = useQuery<OAuthClientInfo>(OAUTH_CLIENT_INFO, {
@@ -70,7 +70,10 @@ const OAuthAuthorize = () => {
     return <Throw404 />
   }
 
-  const { avatar, website, name, scope: scopes } = data.oauthClient
+  const { avatar, website, name, scope: clientScopes } = data.oauthClient
+  const validScopes = requestScopes
+    ? requestScopes.split(/[,\s]/).filter((s) => !!s)
+    : clientScopes
 
   return (
     <Box
@@ -91,7 +94,9 @@ const OAuthAuthorize = () => {
       <form action={actionUrl} method="post">
         <input type="hidden" name="client_id" value={clientId} />
         {state && <input type="hidden" name="state" value={state} />}
-        {scope && <input type="hidden" name="scope" value={scope} />}
+        {requestScopes && (
+          <input type="hidden" name="scope" value={requestScopes} />
+        )}
         {redirectUri && (
           <input type="hidden" name="redirect_uri" value={redirectUri} />
         )}
@@ -105,8 +110,8 @@ const OAuthAuthorize = () => {
                 zh_hans="读取你的公开资料"
               />
             </li>
-            {scopes &&
-              scopes.map((s: any) => {
+            {validScopes &&
+              validScopes.map((s: any) => {
                 const readableScope = toReadableScope({
                   scope: s,
                   lang,
@@ -116,7 +121,7 @@ const OAuthAuthorize = () => {
                   return null
                 }
 
-                return <li key={scope}>{readableScope}</li>
+                return <li key={s}>{readableScope}</li>
               })}
           </ul>
 
