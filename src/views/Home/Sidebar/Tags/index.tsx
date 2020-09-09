@@ -1,6 +1,17 @@
 import gql from 'graphql-tag'
+import _random from 'lodash/random'
+import { useContext, useEffect } from 'react'
 
-import { Card, Img, List, Spinner, Tag, usePublicQuery } from '~/components'
+import {
+  Card,
+  Img,
+  List,
+  ShuffleButton,
+  Spinner,
+  Tag,
+  usePublicQuery,
+  ViewerContext,
+} from '~/components'
 import { QueryError } from '~/components/GQL'
 
 import { analytics, toPath } from '~/common/utils'
@@ -11,11 +22,11 @@ import styles from './styles.css'
 import { SidebarTagsPublic } from './__generated__/SidebarTagsPublic'
 
 const SIDEBAR_TAGS = gql`
-  query SidebarTagsPublic {
+  query SidebarTagsPublic($random: NonNegativeInt) {
     viewer @connection(key: "viewerSidebarTags") {
       id
       recommendation {
-        tags(input: { first: 5 }) {
+        tags(input: { first: 5, filter: { random: $random } }) {
           edges {
             cursor
             node {
@@ -32,10 +43,30 @@ const SIDEBAR_TAGS = gql`
 `
 
 const Tags = () => {
-  const { data, loading, error } = usePublicQuery<SidebarTagsPublic>(
-    SIDEBAR_TAGS
+  const viewer = useContext(ViewerContext)
+  const { data, loading, error, refetch } = usePublicQuery<SidebarTagsPublic>(
+    SIDEBAR_TAGS,
+    {
+      notifyOnNetworkStatusChange: true,
+      variables: {
+        random: 0,
+      },
+    },
+    {
+      publicQuery: !viewer.isAuthed,
+    }
   )
   const edges = data?.viewer?.recommendation.tags.edges
+
+  const shuffle = () => {
+    refetch({ random: _random(0, 50) })
+  }
+
+  useEffect(() => {
+    if (viewer.isAuthed) {
+      shuffle()
+    }
+  }, [viewer.isAuthed])
 
   if (error) {
     return <QueryError error={error} />
@@ -47,7 +78,10 @@ const Tags = () => {
 
   return (
     <section className="container">
-      <SectionHeader type="tags" />
+      <SectionHeader
+        type="tags"
+        rightButton={<ShuffleButton onClick={shuffle} />}
+      />
 
       {loading && <Spinner />}
 
