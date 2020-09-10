@@ -101,7 +101,6 @@ export const ClientUpdater = () => {
       return
     }
 
-    console.log('write')
     client.writeData({
       id: 'ClientPreference:local',
       data: { feedSortType: 'icymi' },
