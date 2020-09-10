@@ -1,7 +1,5 @@
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
-import differenceInDays from 'date-fns/differenceInDays'
-import parseISO from 'date-fns/parseISO'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
@@ -20,7 +18,7 @@ import PageViewTracker from '~/components/Analytics/PageViewTracker'
 import { QueryError } from '~/components/GQL'
 import SplashScreen from '~/components/SplashScreen'
 
-import { PATHS } from '~/common/enums'
+import { CHANGE_NEW_USER_HOME_FEED_SORT_BY, PATHS } from '~/common/enums'
 
 import { ROOT_QUERY_PRIVATE, ROOT_QUERY_PUBLIC } from './gql'
 
@@ -57,13 +55,6 @@ import('@sentry/browser').then((Sentry) => {
   })
 })
 
-const isNewUser = (date: Date | string | number) => {
-  if (typeof date === 'string') {
-    date = parseISO(date)
-  }
-  return differenceInDays(new Date(), date) <= 7
-}
-
 const Root = ({
   client,
   children,
@@ -92,22 +83,13 @@ const Root = ({
         fetchPolicy: 'network-only',
       })
 
-      if (result) {
-        const {
-          data: {
-            viewer: {
-              info: { createdAt, group },
-            },
-          },
-        } = result
-
-        // if user registered in 7 days, then change default feed
-        if (createdAt && isNewUser(createdAt) && group === 'b') {
-          client.writeData({
-            id: 'ClientPreference:local',
-            data: { feedSortType: 'icymi' },
+      const info = result?.data?.viewer?.info
+      if (info) {
+        window.dispatchEvent(
+          new CustomEvent(CHANGE_NEW_USER_HOME_FEED_SORT_BY, {
+            detail: info
           })
-        }
+        )
       }
     } catch (e) {
       console.error(e)

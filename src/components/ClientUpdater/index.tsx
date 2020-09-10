@@ -1,11 +1,16 @@
 import { useQuery } from '@apollo/react-hooks'
+import differenceInDays from 'date-fns/differenceInDays'
+import parseISO from 'date-fns/parseISO'
 import { Router } from 'next/router'
 import { useEffect, useRef } from 'react'
 
-import { useWindowResize } from '~/components'
+import { useEventListener, useWindowResize } from '~/components'
 import CLIENT_INFO from '~/components/GQL/queries/clientInfo'
 
-import { STORE_KEY_VIEW_MODE } from '~/common/enums'
+import {
+  CHANGE_NEW_USER_HOME_FEED_SORT_BY,
+  STORE_KEY_VIEW_MODE,
+} from '~/common/enums'
 
 import { ClientInfo } from '~/components/GQL/queries/__generated__/ClientInfo'
 
@@ -73,6 +78,40 @@ export const ClientUpdater = () => {
       data: { viewMode: storedViewMode },
     })
   }, [])
+
+  /**
+   * Change specific new user's home feed.
+   */
+  const changeNewUserHomeFeedSortBy = ({
+    createdAt,
+    group,
+  }: {
+    createdAt: Date | string | number | null
+    group: 'a' | 'b' | null
+  }) => {
+    if (!createdAt || !group) {
+      return
+    }
+
+    if (typeof createdAt === 'string') {
+      createdAt = parseISO(createdAt)
+    }
+
+    if (differenceInDays(new Date(), createdAt) > 7 || group !== 'b') {
+      return
+    }
+
+    console.log('write')
+    client.writeData({
+      id: 'ClientPreference:local',
+      data: { feedSortType: 'icymi' },
+    })
+  }
+
+  useEventListener(
+    CHANGE_NEW_USER_HOME_FEED_SORT_BY,
+    changeNewUserHomeFeedSortBy
+  )
 
   return null
 }
