@@ -94,11 +94,10 @@ const Profile: React.FC<FormProps> = ({
         if (info) {
           window.dispatchEvent(
             new CustomEvent(CHANGE_NEW_USER_HOME_FEED_SORT_BY, {
-              detail: info
+              detail: info,
             })
           )
         }
-
       } catch (e) {
         // do not block the next step since register is successfully
         console.error(e)

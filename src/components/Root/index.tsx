@@ -87,7 +87,7 @@ const Root = ({
       if (info) {
         window.dispatchEvent(
           new CustomEvent(CHANGE_NEW_USER_HOME_FEED_SORT_BY, {
-            detail: info
+            detail: info,
           })
         )
       }
