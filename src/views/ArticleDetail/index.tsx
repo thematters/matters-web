@@ -178,7 +178,7 @@ const ArticleDetail = () => {
   }
 
   useEffect(() => {
-    if (shouldShowWall && window.location.hash && article) {
+    if (window.location.hash && article) {
       jump('#comments', { offset: -10 })
     }
   }, [mediaHash])
@@ -323,6 +323,15 @@ const ArticleDetail = () => {
               {translate && titleTranslation ? titleTranslation : article.title}
             </Title>
 
+            <Waypoint
+              topOffset={-400}
+              onLeave={() => {
+                if (shouldShowWall) {
+                  setFixedWall(true)
+                }
+              }}
+            />
+
             <section className="info">
               <section className="left">
                 <DateTime date={article.createdAt} color="grey" />
@@ -355,23 +364,11 @@ const ArticleDetail = () => {
             </section>
           )}
 
-          <Waypoint
-            onPositionChange={({ currentPosition }) => {
-              if (shouldShowWall) {
-                setFixedWall(currentPosition === 'inside')
-              }
-            }}
-          />
+          <section className="block">
+            <DynamicResponse />
+          </section>
 
-          {!shouldShowWall && (
-            <section className="block">
-              <DynamicResponse />
-            </section>
-          )}
-
-          {!isLargeUp && !shouldShowWall && (
-            <RelatedArticles article={article} />
-          )}
+          {!isLargeUp && <RelatedArticles article={article} />}
         </section>
 
         <Toolbar
