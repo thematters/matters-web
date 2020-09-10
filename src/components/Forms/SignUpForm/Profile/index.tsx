@@ -6,6 +6,7 @@ import { useContext } from 'react'
 import { Dialog, Form, LanguageContext, Layout, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
+import { CHANGE_NEW_USER_HOME_FEED_SORT_BY } from '~/common/enums'
 import {
   translate,
   validateAvatar,
@@ -35,7 +36,9 @@ const UPDATE_USER_INFO = gql`
       id
       avatar
       info {
+        createdAt
         description
+        group
       }
     }
   }
@@ -78,7 +81,7 @@ const Profile: React.FC<FormProps> = ({
       { props, setSubmitting }: any
     ) => {
       try {
-        await update({
+        const result = await update({
           variables: {
             input: {
               displayName,
@@ -87,6 +90,14 @@ const Profile: React.FC<FormProps> = ({
             },
           },
         })
+        const info = result?.data?.updateUserInfo?.info
+        if (info) {
+          window.dispatchEvent(
+            new CustomEvent(CHANGE_NEW_USER_HOME_FEED_SORT_BY, {
+              detail: info,
+            })
+          )
+        }
       } catch (e) {
         // do not block the next step since register is successfully
         console.error(e)
