@@ -80,15 +80,19 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 
 const authLink = setContext((operation, { headers, ...restCtx }) => {
   const operationName = operation.operationName || ''
+  const operationVariables = operation.variables || {}
 
   const isPublicOperation = restCtx[GQL_CONTEXT_PUBLIC_QUERY_KEY]
 
   if (process.env.NODE_ENV !== 'production') {
     console.log(
-      `%c[GraphQL operation]\x1b[0m`,
+      `%c[GraphQL operation]%c ${operationName} ` +
+      `${isPublicOperation ? '' : '(w/ credentials)'}` +
+      `%c Variables`,
       'background: #0d6763; color: #fff',
-      operationName,
-      isPublicOperation ? '' : '(w/ credentials)'
+      '',
+      'color: #fff68f',
+      operationVariables,
     )
   }
 
