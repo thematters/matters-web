@@ -40,8 +40,8 @@ const Wall = ({ show }: WallProps) => {
 
             <p className="desc">
               <Translate
-                zh_hant="馬上加入全球最高質量華語創作社區，更多精彩文章與討論等著你。"
-                zh_hans="马上加入全球最高质量华语创作社区，更多精彩文章与讨论等着你。"
+                zh_hant="一鍵登入，即可加入全球最優質中文創作社區"
+                zh_hans="一键登入，即可加入全球最优质中文创作社区"
               />
             </p>
 
