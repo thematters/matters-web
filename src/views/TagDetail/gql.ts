@@ -22,6 +22,10 @@ export const TAG_DETAIL_PUBLIC = gql`
           id
           ...UserDigestMiniUser
         }
+        owner {
+          id
+          ...UserDigestMiniUser
+        }
         selectedArticles: articles(input: { first: 0, selected: true }) {
           totalCount
         }

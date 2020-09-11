@@ -3,51 +3,78 @@ import { useContext } from 'react'
 import {
   Button,
   DropdownDialog,
+  IconAddMedium,
   IconEdit,
   IconMoreLarge,
-  IconShare,
+  IconRemoveMedium,
+  LanguageContext,
   Menu,
-  ShareDialog,
   TagDialog,
-  TagDialogProps,
+  TagLeaveDialog,
   TextIcon,
   Translate,
   useResponsive,
   ViewerContext,
 } from '~/components'
+import {
+  SearchSelectDialog,
+  SearchSelectNode,
+} from '~/components/Dialogs/SearchSelectDialog'
+import { useMutation } from '~/components/GQL'
+import ADD_ARTICLES_TAGS from '~/components/GQL/mutations/addArticlesTags'
+import updateTagArticlesCount from '~/components/GQL/updates/tagArticlesCount'
 
-import { ADD_TOAST, TEXT } from '~/common/enums'
+import { ADD_TOAST, REFETCH_TAG_DETAIL_ARTICLES, TEXT } from '~/common/enums'
+import { translate } from '~/common/utils'
 
-type DropdownActionsProps = {
-  isMaintainer: boolean
-} & TagDialogProps
+import styles from './styles.css'
+
+import { AddArticlesTags } from '~/components/GQL/mutations/__generated__/AddArticlesTags'
+import { TagDetailPublic_node_Tag } from '../__generated__/TagDetailPublic'
+
+interface DropdownActionsProps {
+  isOwner: boolean
+  tag: TagDetailPublic_node_Tag
+}
 
 interface DialogProps {
-  openShareDialog: () => void
+  openTagAddSelectedArticlesDialog: () => void
   openTagDialog: () => void
+  openTagLeaveDialog: () => void
 }
 
 type BaseDropdownActionsProps = DropdownActionsProps & DialogProps
 
 const BaseDropdownActions = ({
-  isMaintainer,
-  openShareDialog,
+  isOwner,
+  openTagAddSelectedArticlesDialog,
   openTagDialog,
+  openTagLeaveDialog,
 }: BaseDropdownActionsProps) => {
   const isSmallUp = useResponsive('sm-up')
 
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
     <Menu width={isInDropdown ? 'sm' : undefined}>
-      <Menu.Item onClick={openShareDialog}>
-        <TextIcon icon={<IconShare size="md" />} size="md" spacing="base">
-          <Translate zh_hant="分享標籤" zh_hans="分享标签" />
+      <Menu.Item onClick={openTagDialog}>
+        <TextIcon icon={<IconEdit size="md" />} size="md" spacing="base">
+          <Translate id="editTag" />
+        </TextIcon>
+      </Menu.Item>
+      <Menu.Item onClick={openTagAddSelectedArticlesDialog}>
+        <TextIcon icon={<IconAddMedium size="md" />} size="md" spacing="base">
+          <Translate id="tagAddSelectedArticle" />
         </TextIcon>
       </Menu.Item>
 
-      {isMaintainer && (
-        <Menu.Item onClick={openTagDialog}>
-          <TextIcon icon={<IconEdit size="md" />} size="md" spacing="base">
-            <Translate id="editTag" />
+      {isOwner && (
+        <Menu.Item onClick={openTagLeaveDialog}>
+          <TextIcon
+            icon={<IconRemoveMedium size="md" />}
+            color="red"
+            size="md"
+            spacing="base"
+          >
+            <Translate zh_hant="離開標籤" zh_hans="离开标签" />
           </TextIcon>
         </Menu.Item>
       )}
@@ -66,15 +93,18 @@ const BaseDropdownActions = ({
       }}
     >
       {({ open, ref }) => (
-        <Button
-          bgColor={isSmallUp ? 'green-lighter' : 'half-black'}
-          aria-label={TEXT.zh_hant.moreActions}
-          aria-haspopup="true"
-          onClick={open}
-          ref={ref}
-        >
-          <IconMoreLarge size="lg" color={isSmallUp ? 'green' : 'white'} />
-        </Button>
+        <section className="container">
+          <Button
+            bgColor={isSmallUp ? 'green-lighter' : 'half-black'}
+            aria-label={TEXT.zh_hant.moreActions}
+            aria-haspopup="true"
+            onClick={open}
+            ref={ref}
+          >
+            <IconMoreLarge size="lg" color={isSmallUp ? 'green' : 'white'} />
+          </Button>
+          <style jsx>{styles}</style>
+        </section>
       )}
     </DropdownDialog>
   )
@@ -82,6 +112,53 @@ const BaseDropdownActions = ({
 
 const DropdownActions = (props: DropdownActionsProps) => {
   const viewer = useContext(ViewerContext)
+  const { lang } = useContext(LanguageContext)
+  const { tag } = props
+
+  /**
+   * Data
+   */
+  const [add, { loading }] = useMutation<AddArticlesTags>(ADD_ARTICLES_TAGS)
+  const addArticlesToTag = (selected: boolean) => async (
+    articles: SearchSelectNode[]
+  ) => {
+    const articleIds = articles.map((article) => article.id)
+
+    await add({
+      variables: { id: tag.id, articles: articleIds, selected },
+      update: (cache, { data }) => {
+        if (selected) {
+          const newCount = data?.addArticlesTags?.articles?.totalCount || 0
+          const oldCount = tag.articles.totalCount || 0
+          updateTagArticlesCount({
+            cache,
+            id: tag.id,
+            count: newCount - oldCount,
+            type: 'increment',
+          })
+        }
+      },
+    })
+
+    window.dispatchEvent(
+      new CustomEvent(ADD_TOAST, {
+        detail: {
+          color: 'green',
+          content: translate({ id: 'addedArticleTag', lang }),
+          duration: 2000,
+        },
+      })
+    )
+
+    window.dispatchEvent(
+      new CustomEvent(REFETCH_TAG_DETAIL_ARTICLES, {
+        detail: {
+          event: 'add',
+          differences: articles.length,
+        },
+      })
+    )
+  }
 
   const forbid = () => {
     window.dispatchEvent(
@@ -96,19 +173,34 @@ const DropdownActions = (props: DropdownActionsProps) => {
   }
 
   return (
-    <ShareDialog title={props.content}>
-      {({ open: openShareDialog }) => (
-        <TagDialog {...props}>
-          {({ open: openTagDialog }) => (
-            <BaseDropdownActions
-              {...props}
-              openShareDialog={openShareDialog}
-              openTagDialog={viewer.isFrozen ? forbid : openTagDialog}
-            />
+    <TagDialog {...props.tag}>
+      {({ open: openTagDialog }) => (
+        <SearchSelectDialog
+          title="tagAddSelectedArticle"
+          hint="hintEditCollection"
+          searchType="Article"
+          onSave={addArticlesToTag(true)}
+          saving={loading}
+        >
+          {({ open: openTagAddSelectedArticlesDialog }) => (
+            <TagLeaveDialog {...props}>
+              {({ open: openTagLeaveDialog }) => (
+                <BaseDropdownActions
+                  {...props}
+                  openTagAddSelectedArticlesDialog={
+                    viewer.isFrozen ? forbid : openTagAddSelectedArticlesDialog
+                  }
+                  openTagDialog={viewer.isFrozen ? forbid : openTagDialog}
+                  openTagLeaveDialog={
+                    viewer.isFrozen ? forbid : openTagLeaveDialog
+                  }
+                />
+              )}
+            </TagLeaveDialog>
           )}
-        </TagDialog>
+        </SearchSelectDialog>
       )}
-    </ShareDialog>
+    </TagDialog>
   )
 }
 

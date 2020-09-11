@@ -1,4 +1,3 @@
-import gql from 'graphql-tag'
 import { useContext } from 'react'
 
 import {
@@ -16,55 +15,34 @@ import {
   SearchSelectNode,
 } from '~/components/Dialogs/SearchSelectDialog'
 import { useMutation } from '~/components/GQL'
+import ADD_ARTICLES_TAGS from '~/components/GQL/mutations/addArticlesTags'
 import updateTagArticlesCount from '~/components/GQL/updates/tagArticlesCount'
 
 import { ADD_TOAST, REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
 import { translate } from '~/common/utils'
 
 import AddMyArticlesButton from './AddMyArticlesButton'
-import AddSelectedArticlesButton from './AddSelectedArticlesButton'
 import CreateDraftMenuItem from './CreateDraftMenuItem'
 
+import { AddArticlesTags } from '~/components/GQL/mutations/__generated__/AddArticlesTags'
 import { TagDetailPublic_node_Tag } from '../../__generated__/TagDetailPublic'
-import { AddArticlesTags } from './__generated__/AddArticlesTags'
 
 interface DropdownActionsProps {
-  isMaintainer: boolean
   tag: TagDetailPublic_node_Tag
 }
 
 interface DialogProps {
-  openAddSelectedArticlesDialog: () => void
   openAddMyArticlesDialog: () => void
 }
 
 type BaseDropdownActionsProps = DropdownActionsProps & DialogProps
 
-const ADD_ARTICLES_TAGS = gql`
-  mutation AddArticlesTags($id: ID!, $articles: [ID!], $selected: Boolean) {
-    addArticlesTags(
-      input: { id: $id, articles: $articles, selected: $selected }
-    ) {
-      id
-      articles(input: { first: 0, selected: $selected }) {
-        totalCount
-      }
-    }
-  }
-`
-
 const BaseDropdownActions = ({
-  isMaintainer,
   tag,
-  openAddSelectedArticlesDialog,
   openAddMyArticlesDialog,
 }: BaseDropdownActionsProps) => {
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
     <Menu width={isInDropdown ? 'sm' : undefined}>
-      {isMaintainer && (
-        <AddSelectedArticlesButton onClick={openAddSelectedArticlesDialog} />
-      )}
-
       <CreateDraftMenuItem tag={tag} />
 
       <AddMyArticlesButton onClick={openAddMyArticlesDialog} />
@@ -84,7 +62,7 @@ const BaseDropdownActions = ({
     >
       {({ open, ref }) => (
         <Button
-          size={['7rem', '2.25rem']}
+          size={['5rem', '2rem']}
           textColor="gold"
           textActiveColor="white"
           bgActiveColor="gold"
@@ -94,7 +72,7 @@ const BaseDropdownActions = ({
           ref={ref}
         >
           <TextIcon icon={<IconPen />} weight="md" size="md-s">
-            <Translate id="addArticleTag" />
+            <Translate zh_hant="投稿" zh_hans="投稿" />
           </TextIcon>
         </Button>
       )}
@@ -177,25 +155,12 @@ const DropdownActions = (props: DropdownActionsProps) => {
       saving={loading}
     >
       {({ open: openAddMyArticlesDialog }) => (
-        <SearchSelectDialog
-          title="tagAddSelectedArticle"
-          hint="hintEditCollection"
-          searchType="Article"
-          onSave={addArticlesToTag(true)}
-          saving={loading}
-        >
-          {({ open: openAddSelectedArticlesDialog }) => (
-            <BaseDropdownActions
-              {...props}
-              openAddSelectedArticlesDialog={
-                viewer.isFrozen ? forbid : openAddSelectedArticlesDialog
-              }
-              openAddMyArticlesDialog={
-                viewer.isFrozen ? forbid : openAddMyArticlesDialog
-              }
-            />
-          )}
-        </SearchSelectDialog>
+        <BaseDropdownActions
+          {...props}
+          openAddMyArticlesDialog={
+            viewer.isFrozen ? forbid : openAddMyArticlesDialog
+          }
+        />
       )}
     </SearchSelectDialog>
   )

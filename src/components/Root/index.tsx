@@ -18,7 +18,7 @@ import PageViewTracker from '~/components/Analytics/PageViewTracker'
 import { QueryError } from '~/components/GQL'
 import SplashScreen from '~/components/SplashScreen'
 
-import { PATHS } from '~/common/enums'
+import { CHANGE_NEW_USER_HOME_FEED_SORT_BY, PATHS } from '~/common/enums'
 
 import { ROOT_QUERY_PRIVATE, ROOT_QUERY_PUBLIC } from './gql'
 
@@ -78,15 +78,25 @@ const Root = ({
   const [privateFetched, setPrivateFetched] = useState(false)
   const fetchPrivateViewer = async () => {
     try {
-      await client.query({
+      const result = await client.query({
         query: ROOT_QUERY_PRIVATE,
         fetchPolicy: 'network-only',
       })
+
+      const info = result?.data?.viewer?.info
+      if (info) {
+        window.dispatchEvent(
+          new CustomEvent(CHANGE_NEW_USER_HOME_FEED_SORT_BY, {
+            detail: info,
+          })
+        )
+      }
     } catch (e) {
       console.error(e)
     }
     setPrivateFetched(true)
   }
+
   useEffect(() => {
     if (!data) {
       return

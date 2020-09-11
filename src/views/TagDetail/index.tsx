@@ -4,14 +4,16 @@ import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
 
 import {
+  EmptyLayout,
   EmptyTag,
   Expandable,
+  FeaturesContext,
   Head,
   Layout,
   PullToRefresh,
+  ShareButton,
   Spinner,
   Tabs,
-  TextIcon,
   Throw404,
   Translate,
   usePublicQuery,
@@ -20,10 +22,9 @@ import {
   ViewerContext,
 } from '~/components'
 import { getErrorCodes, QueryError } from '~/components/GQL'
-import { UserDigest } from '~/components/UserDigest'
 
 import { ERROR_CODES } from '~/common/enums'
-import { getQuery } from '~/common/utils'
+import { getQuery, toPath } from '~/common/utils'
 
 import TagDetailArticles from './Articles'
 import ArticlesCount from './ArticlesCount'
@@ -32,26 +33,21 @@ import Cover from './Cover'
 import DropdownActions from './DropdownActions'
 import Followers from './Followers'
 import { TAG_DETAIL_PRIVATE, TAG_DETAIL_PUBLIC } from './gql'
+import Owner from './Owner'
 import styles from './styles.css'
 
 import {
   TagDetailPublic,
   TagDetailPublic_node_Tag,
-  TagDetailPublic_node_Tag_editors,
 } from './__generated__/TagDetailPublic'
 
 type TagFeedType = 'latest' | 'selected'
 
-const EmptyLayout: React.FC = ({ children }) => (
-  <Layout.Main>
-    <Layout.Header left={<Layout.Header.BackButton />} />
-    {children}
-  </Layout.Main>
-)
-
 const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
   const isSmallUp = useResponsive('sm-up')
   const viewer = useContext(ViewerContext)
+  const features = useContext(FeaturesContext)
+  const path = toPath({ page: 'tagDetail', id: tag.id })
 
   // feed type
   const hasSelected = (tag?.selectedArticles.totalCount || 0) > 0
@@ -67,18 +63,10 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
   })
 
   // define permission
-  const filter = ({ displayName }: TagDetailPublic_node_Tag_editors) =>
-    (displayName || '').toLowerCase() !== 'matty'
-  const editors = tag?.editors || []
-  const owner = _find(editors, filter)
-
-  const normalEditors = editors.filter(filter)
-  const isEditor = _some(editors, (editor) => editor.id === viewer.id)
-  const isCreator = tag?.creator?.id === viewer.id
-  const isMaintainer =
-    isEditor ||
-    (normalEditors.length === 0 && isCreator) ||
-    viewer.info.email === 'hi@matters.news'
+  const isOwner = tag?.owner?.id === viewer.id
+  const isEditor = _some(tag?.editors || [], ['id', viewer.id])
+  const isMatty = viewer.info.email === 'hi@matters.news'
+  const isMaintainer = isOwner || isEditor || isMatty
 
   /**
    * Render
@@ -95,7 +83,15 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
           <>
             {isSmallUp ? <Layout.Header.Title id="tag" /> : <span />}
 
-            <DropdownActions {...tag} isMaintainer={isMaintainer} />
+            <ShareButton
+              title={tag.content}
+              path={encodeURI(path.as)}
+              bgColor={isSmallUp ? 'green-lighter' : 'half-black'}
+              iconColor={isSmallUp ? 'green' : 'white'}
+              inCard={false}
+            />
+
+            {isMaintainer && <DropdownActions isOwner={isOwner} tag={tag} />}
           </>
         }
         mode={isSmallUp ? 'solid-fixed' : 'transparent-absolute'}
@@ -107,20 +103,12 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
         <Cover tag={tag} />
 
         <section className="info">
-          {owner && (
-            <section className="owner">
-              <UserDigest.Mini
-                user={owner}
-                avatarSize="xs"
-                hasAvatar
-                hasDisplayName
-              />
+          {features.tag_adoption && <Owner tag={tag} />}
 
-              <TextIcon size="sm" color="grey-dark">
-                <Translate zh_hant="主理" zh_hans="主理" />
-              </TextIcon>
-            </section>
-          )}
+          <section className="statistics">
+            <Followers tag={tag} />
+            <ArticlesCount tag={tag} />
+          </section>
 
           {tag.description && (
             <Expandable>
@@ -128,14 +116,9 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
             </Expandable>
           )}
 
-          <section className="statistics">
-            <Followers tag={tag} />
-            <ArticlesCount tag={tag} />
-          </section>
-
           <section className="buttons">
             <TagDetailButtons.FollowButton tag={tag} />
-            <TagDetailButtons.AddButton tag={tag} isMaintainer={isMaintainer} />
+            <TagDetailButtons.AddButton tag={tag} />
           </section>
         </section>
 

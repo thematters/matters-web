@@ -13,7 +13,7 @@ import { TEXT } from '~/common/enums'
 type ShareButtonBaseProps = {
   hasIcon?: boolean
   iconSize?: Extract<IconSize, 'md-s'>
-  iconColor?: Extract<IconColor, 'grey' | 'black'>
+  iconColor?: Extract<IconColor, 'green' | 'grey' | 'black' | 'white'>
   inCard: boolean
 } & Omit<ShareDialogProps, 'children'>
 
@@ -33,11 +33,13 @@ export const ShareButton: React.FC<ShareButtonProps> = ({
   ...props
 }) => {
   const isGreen = bgColor === 'green'
-  const buttonBgActiveColor = isGreen
-    ? undefined
-    : inCard
-    ? 'grey-lighter-active'
-    : 'grey-lighter'
+  const isHalfBlack = bgColor === 'half-black'
+  const buttonBgActiveColor =
+    isGreen || isHalfBlack
+      ? undefined
+      : inCard
+      ? 'grey-lighter-active'
+      : 'grey-lighter'
   const buttonSpacing = spacing || ['xtight', 'xtight']
 
   return (

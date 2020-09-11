@@ -3,12 +3,13 @@ import React from 'react'
 
 import { FeatureOfficial } from './__generated__/FeatureOfficial'
 
-type FeatureName = 'payment' | 'add_credit' | 'payout'
+type FeatureName = 'payment' | 'add_credit' | 'payout' | 'tag_adoption'
 
 export const FeaturesContext = React.createContext({
   payment: false,
   add_credit: false,
   payout: false,
+  tag_adoption: false,
 })
 
 export const FeaturesConsumer = FeaturesContext.Consumer
