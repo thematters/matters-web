@@ -87,12 +87,12 @@ const authLink = setContext((operation, { headers, ...restCtx }) => {
   if (process.env.NODE_ENV !== 'production') {
     console.log(
       `%c[GraphQL operation]%c ${operationName} ` +
-      `${isPublicOperation ? '' : '(w/ credentials)'}` +
-      `%c Variables`,
+        `${isPublicOperation ? '' : '(w/ credentials)'}` +
+        `%c Variables`,
       'background: #0d6763; color: #fff',
       '',
       'color: #fff68f',
-      operationVariables,
+      operationVariables
     )
   }
 
