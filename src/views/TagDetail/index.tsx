@@ -7,6 +7,7 @@ import {
   EmptyLayout,
   EmptyTag,
   Expandable,
+  FeaturesContext,
   Head,
   Layout,
   PullToRefresh,
@@ -45,6 +46,7 @@ type TagFeedType = 'latest' | 'selected'
 const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
   const isSmallUp = useResponsive('sm-up')
   const viewer = useContext(ViewerContext)
+  const features = useContext(FeaturesContext)
   const path = toPath({ page: 'tagDetail', id: tag.id })
 
   // feed type
@@ -101,7 +103,7 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
         <Cover tag={tag} />
 
         <section className="info">
-          <Owner tag={tag} />
+          {features.tag_adoption &&<Owner tag={tag} />}
 
           <section className="statistics">
             <Followers tag={tag} />
