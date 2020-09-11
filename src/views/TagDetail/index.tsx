@@ -103,7 +103,7 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
         <Cover tag={tag} />
 
         <section className="info">
-          {features.tag_adoption &&<Owner tag={tag} />}
+          {features.tag_adoption && <Owner tag={tag} />}
 
           <section className="statistics">
             <Followers tag={tag} />
