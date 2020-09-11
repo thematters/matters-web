@@ -235,7 +235,7 @@ export const redirectToTarget = ({
 } = {}) => {
   const fallbackTarget =
     fallback === 'homepage'
-      ? `/?t=${Date.now()}` // FIXME: to purge cache
+      ? `/` // FIXME: to purge cache
       : window.location.href
   const target = getTarget() || fallbackTarget
 

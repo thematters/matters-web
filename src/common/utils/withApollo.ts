@@ -17,6 +17,7 @@ import {
   AGENT_HASH_PREFIX,
   GQL_CONTEXT_PUBLIC_QUERY_KEY,
   STORE_KEY_AGENT_HASH,
+  STORE_KEY_AUTH_TOKEN,
 } from '~/common/enums'
 import introspectionQueryResultData from '~/common/gql/fragmentTypes.json'
 import { randomString } from '~/common/utils'
@@ -37,7 +38,7 @@ const persistedQueryLink = createPersistedQueryLink({
   useGETForHashedQueries: true,
 })
 
-const httpLink = ({ headers, host }: { [key: string]: any }) => {
+const httpLink = ({ headers = {}, host }: { [key: string]: any }) => {
   const isOAuthSite = process.env.NEXT_PUBLIC_OAUTH_SITE_DOMAIN === host
 
   const apiUrl = isOAuthSite
@@ -51,6 +52,11 @@ const httpLink = ({ headers, host }: { [key: string]: any }) => {
       : new https.Agent({
           rejectUnauthorized: isProd, // allow access to https:...matters.news in localhost
         })
+
+  // get auth from local storage
+  if (typeof window !== 'undefined') {
+    headers['x-access-token'] = localStorage.getItem(STORE_KEY_AUTH_TOKEN)
+  }
 
   return createUploadLink({
     uri: apiUrl,
@@ -127,7 +133,7 @@ const agentHashLink = setContext((_, { headers }) => {
   let hash: string | null = null
 
   if (typeof window !== 'undefined') {
-    const stored = window.localStorage.getItem(STORE_KEY_AGENT_HASH)
+    const stored = localStorage.getItem(STORE_KEY_AGENT_HASH)
     if (stored && stored.startsWith(AGENT_HASH_PREFIX)) {
       hash = stored
     }

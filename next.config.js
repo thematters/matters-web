@@ -135,38 +135,38 @@ module.exports = withPlugins(
       },
     ],
 
-    // // offline
-    // [
-    //   withOffline,
-    //   {
-    //     // FIXME: https://github.com/hanford/next-offline/issues/195
-    //     generateInDevMode: false,
-    //     workboxOpts: {
-    //       // https://github.com/hanford/next-offline/issues/35
-    //       importScripts: [URL_PUSH_SW],
-    //       swDest: '../public/service-worker.js',
-    //       runtimeCaching: [
-    //         {
-    //           urlPattern: '/',
-    //           handler: 'NetworkFirst',
-    //           options: {
-    //             cacheName: 'homepage-cache',
-    //           },
-    //         },
-    //         {
-    //           urlPattern: new RegExp('/_next/static/'),
-    //           handler: 'CacheFirst',
-    //           options: {
-    //             cacheName: 'static-cache',
-    //             cacheableResponse: {
-    //               statuses: [0, 200],
-    //             },
-    //           },
-    //         },
-    //       ],
-    //     },
-    //   },
-    // ],
+    // offline
+    [
+      withOffline,
+      {
+        // FIXME: https://github.com/hanford/next-offline/issues/195
+        generateInDevMode: false,
+        workboxOpts: {
+          // https://github.com/hanford/next-offline/issues/35
+          importScripts: [URL_PUSH_SW],
+          swDest: '../public/service-worker.js',
+          runtimeCaching: [
+            {
+              urlPattern: '/',
+              handler: 'NetworkFirst',
+              options: {
+                cacheName: 'homepage-cache',
+              },
+            },
+            {
+              urlPattern: new RegExp('/_next/static/'),
+              handler: 'CacheFirst',
+              options: {
+                cacheName: 'static-cache',
+                cacheableResponse: {
+                  statuses: [0, 200],
+                },
+              },
+            },
+          ],
+        },
+      },
+    ],
   ],
   nextConfig
 )
