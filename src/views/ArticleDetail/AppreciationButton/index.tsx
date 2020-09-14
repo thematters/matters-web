@@ -42,6 +42,7 @@ const AppreciationButton = ({
   const router = useRouter()
   const mediaHash = getQuery({ router, key: 'mediaHash' })
   const viewer = useContext(ViewerContext)
+  const isArticleAuthor = article.author.id === viewer.id
   const { token, refreshToken } = useContext(ReCaptchaContext)
 
   const { data, client } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
@@ -91,7 +92,7 @@ const AppreciationButton = ({
    */
   const [superLiked, setSuperLiked] = useState(false)
   const canSuperLike = article.canSuperLike
-  const isSuperLike = viewer.isCivicLiker && isReachLimit
+  const isSuperLike = viewer.isCivicLiker && (isReachLimit || isArticleAuthor)
   const sendSuperLike = async () => {
     try {
       await sendAppreciation({
@@ -165,7 +166,6 @@ const AppreciationButton = ({
     }
   }
 
-  const isArticleAuthor = article.author.id === viewer.id
   const readCivicLikerDialog =
     viewer.isCivicLiker || data?.clientPreference.readCivicLikerDialog
   const canAppreciate =
@@ -183,7 +183,7 @@ const AppreciationButton = ({
   }
 
   // Article Author
-  if (isArticleAuthor) {
+  if (isArticleAuthor && !isSuperLike) {
     return (
       <Tooltip
         content={
