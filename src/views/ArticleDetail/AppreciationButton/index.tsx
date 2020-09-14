@@ -70,21 +70,10 @@ const AppreciationButton = ({
           amount,
           token,
         },
-        update: (cache) => {
-          updateAppreciation({
-            cache,
-            left,
-            mediaHash,
-            total,
-            viewer,
-          })
-        },
       }).then(refreshToken)
     } catch (e) {
       console.error(e)
     }
-
-    setAmount(0)
   }, APPRECIATE_DEBOUNCE)
 
   /**
