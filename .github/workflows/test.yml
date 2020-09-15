@@ -35,6 +35,12 @@ jobs:
           npm run gen:clean \
           && npm run gen:type
 
+      - name: Generate Types (stage)
+        if: github.ref == 'refs/heads/stage' || github.base_ref == 'stage'
+        run: |
+          npm run gen:clean \
+          && npm run gen:type
+
       - name: Generate Types (production)
         if: github.ref == 'refs/heads/master' || github.base_ref == 'master'
         run: |
