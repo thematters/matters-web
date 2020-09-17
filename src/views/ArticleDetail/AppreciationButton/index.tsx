@@ -42,12 +42,11 @@ const AppreciationButton = ({
   const router = useRouter()
   const mediaHash = getQuery({ router, key: 'mediaHash' })
   const viewer = useContext(ViewerContext)
-  const isArticleAuthor = article.author.id === viewer.id
   const { token, refreshToken } = useContext(ReCaptchaContext)
-
   const { data, client } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
     variables: { id: 'local' },
   })
+  const isArticleAuthor = article.author.id === viewer.id
 
   /**
    * Normal Appreciation
@@ -61,7 +60,7 @@ const AppreciationButton = ({
       : limit) - amount
   const total = article.appreciationsReceivedTotal + amount
   const appreciatedCount = limit - left
-  const isReachLimit = left <= 0
+  const isReachLimit = left <= 0 || isArticleAuthor
   const [debouncedSendAppreciation] = useDebouncedCallback(async () => {
     try {
       await sendAppreciation({
@@ -81,7 +80,7 @@ const AppreciationButton = ({
    */
   const [superLiked, setSuperLiked] = useState(false)
   const canSuperLike = article.canSuperLike
-  const isSuperLike = viewer.isCivicLiker && (isReachLimit || isArticleAuthor)
+  const isSuperLike = viewer.isCivicLiker && isReachLimit
   const sendSuperLike = async () => {
     try {
       await sendAppreciation({
@@ -140,10 +139,15 @@ const AppreciationButton = ({
    *   2) Show modal to introduce Civic Liker on click
    *   3) Show "MAX" on close
    *
-   * Civic Liker:
+   * Civic Liker in own article:
+   *   1) Show SuperLike
+   *   2) Show "∞" on click
+   *
+   * Civic Liker in others' articles:
    *   1) Allow to appreciate 5 times
    *   2) Show SuperLike
    *   3) Show "∞" on click
+   *
    */
   const appreciate = () => {
     if (isSuperLike) {
@@ -211,7 +215,7 @@ const AppreciationButton = ({
   }
 
   // Civic Liker
-  if (!canAppreciate && !readCivicLikerDialog && isReachLimit) {
+  if (isReachLimit && !readCivicLikerDialog) {
     return (
       <CivicLikerButton
         onClose={() => {
@@ -227,7 +231,7 @@ const AppreciationButton = ({
   }
 
   // MAX:SuperLike
-  if (!canAppreciate && isReachLimit && isSuperLike) {
+  if (isReachLimit && isSuperLike) {
     return (
       <AppreciateButton
         count="MAX"
@@ -256,7 +260,7 @@ const AppreciationButton = ({
   }
 
   // MAX
-  if (!canAppreciate && isReachLimit && !isSuperLike) {
+  if (isReachLimit && !isSuperLike) {
     return <AppreciateButton count="MAX" total={total} />
   }
 
