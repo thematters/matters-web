@@ -82,7 +82,7 @@ jobs:
       # === `stage` branch ===
       - name: Build (stage)
         if: github.ref == 'refs/heads/stage' || github.base_ref == 'stage'
-        run: cp .env.dev .env && npm run build
+        run: cp .env.stage .env && npm run build
 
       - name: Against SEO (stage)
         if: github.ref == 'refs/heads/stage'
