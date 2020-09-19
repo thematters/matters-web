@@ -10,6 +10,14 @@ export const decorators = [
     <>
       <GlobalStyles />
       <Story />
+      <style jsx global>
+        {`
+          //background color should be controled by storybook
+          html {
+            background-color: initial;
+          }
+        `}
+      </style>
     </>
   ),
 ]

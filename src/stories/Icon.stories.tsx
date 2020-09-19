@@ -1,24 +1,26 @@
-// tslint:disable-next-line:no-implicit-dependencies
 import { Meta, Story } from '@storybook/react/types-6-0'
+import React from 'react'
+import IconTable from '~/stories/IconTable'
 
-import { Button } from '~/components/Button'
-import { IconAdd } from '~/components/Icon'
+import { IconProps } from '~/components'
 
 export default {
-  title: 'Example/Icons',
-  component: Button,
+  title: 'Components/Icons',
+  component: IconTable,
+  parameters: {
+    backgrounds: {
+      values: [
+        { name: 'grey', value: '#ddd' },
+        { name: 'black', value: '#000' },
+      ],
+    },
+  },
 } as Meta
 
-const Template: Story<any> = (args: any) => <Button {...args} />
+const Template: Story<IconProps> = (args) => <IconTable {...args} />
 
-export const Add = Template.bind({})
-Add.args = {
-  spacing: ['tight', 'base'],
-  borderColor: 'gold',
-  children: (
-    <>
-      <IconAdd />
-      Add
-    </>
-  ),
+export const All = Template.bind({})
+All.args = {
+  size: 'lg',
+  color: 'black',
 }
