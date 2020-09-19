@@ -1,6 +1,6 @@
 const tsconfig = require('../tsconfig.json')
 const path = require('path')
-const { merge, mergeWithCustomize } = require('webpack-merge')
+const { mergeWithCustomize } = require('webpack-merge')
 
 module.exports = {
   stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
@@ -71,5 +71,18 @@ module.exports = {
       }
     )
     return newConfig
+  },
+  /*
+    make the components' PropTypes interface works for argTypes of storybook
+  */
+  typescript: {
+    reactDocgen: 'react-docgen-typescript',
+    reactDocgenTypescriptOptions: {
+      shouldExtractLiteralValuesFromEnum: true,
+      // @see https://github.com/storybookjs/storybook/issues/11019#issuecomment-656776919
+      shouldRemoveUndefinedFromOptional: true,
+      propFilter: (prop) =>
+        prop.parent ? !/node_modules/.test(prop.parent.fileName) : true,
+    },
   },
 }

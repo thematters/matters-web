@@ -24,7 +24,9 @@ export type IconColor =
   | 'red'
 
 export interface IconProps {
+  /** Working Icon description */
   size?: IconSize
+  /** Working Icon description */
   color?: IconColor
   [key: string]: any
 }
