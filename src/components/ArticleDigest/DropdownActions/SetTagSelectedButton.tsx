@@ -62,8 +62,8 @@ const SetTagSelectedButton = ({
               color: 'green',
               content: (
                 <Translate
-                  zh_hant="文章已添加至精選"
-                  zh_hans="文章已添加至精选"
+                  zh_hant="作品已添加至精選"
+                  zh_hans="作品已添加至精选"
                 />
               ),
               duration: 2000,

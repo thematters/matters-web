@@ -107,8 +107,8 @@ const AppreciationButton = ({
             color: 'green',
             content: (
               <Translate
-                zh_hant="你對文章送出了一個 Super Like！"
-                zh_hans="你对文章送出了一个 Super Like！"
+                zh_hant="你對作品送出了一個 Super Like！"
+                zh_hans="你对作品送出了一个 Super Like！"
               />
             ),
             customButton: <ViewSuperLikeButton />,

@@ -57,14 +57,14 @@ const CivicLikerDialog = ({ onClose, children }: CivicLikerDialogProps) => {
             </li>
             <li>
               <Translate
-                zh_hant="成為內容伯樂，每天推薦好文章"
-                zh_hans="成为内容伯乐，每天推荐好文章"
+                zh_hant="成為內容伯樂，每天推薦好作品"
+                zh_hans="成为内容伯乐，每天推荐好作品"
               />
             </li>
             <li>
               <Translate
-                zh_hant="每當文章產生下線 Super Like，內容伯樂及作者同時獲得回饋"
-                zh_hans="每当文章产生下线 Super Like，内容伯乐及作者同时获得回馈"
+                zh_hant="每當作品產生下線 Super Like，內容伯樂及作者同時獲得回饋"
+                zh_hans="每当作品产生下线 Super Like，内容伯乐及作者同时获得回馈"
               />
             </li>
           </ul>

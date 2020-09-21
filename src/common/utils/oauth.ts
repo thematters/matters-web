@@ -48,12 +48,6 @@ export const toReadableScope = ({
       zh_hans: '读取你的',
       en: 'Query your',
     }[lang]
-  } else if (scope.indexOf('mutation') >= 0) {
-    prefix = {
-      zh_hant: '管理你的',
-      zh_hans: '管理你的',
-      en: 'Manage your',
-    }[lang]
   }
 
   return prefix + scopeTexts.join('、')
