@@ -198,13 +198,13 @@ export const OAUTH_SCOPE_TREE = {
     },
     level2: {
       _t: {
-        zh_hant: '作品發佈、評論修改、草稿刪除等',
-        zh_hans: '作品发布、评论修改、草稿删除等',
+        zh_hant: '發佈作品、修改評論、刪除草稿等',
+        zh_hans: '发布作品、修改评论、删除草稿等',
       },
       publishArticle: {
         _t: {
-          zh_hant: '作品發佈',
-          zh_hans: '作品发布',
+          zh_hant: '發佈作品',
+          zh_hans: '发布作品',
         },
       },
       putComment: {
@@ -234,13 +234,13 @@ export const OAUTH_SCOPE_TREE = {
     },
     level3: {
       _t: {
-        zh_hant: '作品修訂、錢包、金流等',
-        zh_hans: '作品修订、钱包、支付等',
+        zh_hant: '管理作品、錢包、金流等',
+        zh_hans: '管理作品、钱包、支付等',
       },
       putDraft: {
         _t: {
-          zh_hant: '作品草稿',
-          zh_hans: '作品草稿',
+          zh_hant: '修改草稿',
+          zh_hans: '修改草稿',
         },
       },
       editArticle: {
@@ -281,8 +281,8 @@ export const OAUTH_SCOPE_TREE = {
       },
       singleFileUpload: {
         _t: {
-          zh_hant: '圖片、音頻等文件上傳',
-          zh_hans: '图片、音频等文件上传',
+          zh_hant: '文件（圖片、音頻等）上傳',
+          zh_hans: '文件（图片、音频等）上传',
         },
       },
       changeEmail: {
