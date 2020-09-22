@@ -6,6 +6,7 @@ const withOffline = require('next-offline')
 const packageJson = require('./package.json')
 
 const isProd = process.env.NODE_ENV === 'production'
+const isStatic = process.env.NEXT_PUBLIC_BUILD_TYPE === 'static'
 
 const URL_PUSH_SW = isProd
   ? './firebase-messaging-sw-production.js'
@@ -102,39 +103,40 @@ const nextConfig = {
   },
 }
 
-module.exports = withPlugins(
+let plugins = [
+  // images
   [
-    // images
-    [
-      optimizedImages,
-      {
-        handleImages: ['jpeg', 'png'],
-        optimizeImagesInDev: true,
-        inlineImageLimit: 1024,
-      },
-    ],
+    optimizedImages,
+    {
+      handleImages: ['jpeg', 'png'],
+      optimizeImagesInDev: true,
+      inlineImageLimit: 1024,
+    },
+  ],
 
-    // bundle analyzer
-    [
-      withBundleAnalyzer,
-      {
-        analyzeServer: ['server', 'both'].includes(process.env.BUNDLE_ANALYZE),
-        analyzeBrowser: ['browser', 'both'].includes(
-          process.env.BUNDLE_ANALYZE
-        ),
-        bundleAnalyzerConfig: {
-          server: {
-            analyzerMode: 'static',
-            reportFilename: './bundles/server.html',
-          },
-          browser: {
-            analyzerMode: 'static',
-            reportFilename: './bundles/client.html',
-          },
+  // bundle analyzer
+  [
+    withBundleAnalyzer,
+    {
+      analyzeServer: ['server', 'both'].includes(process.env.BUNDLE_ANALYZE),
+      analyzeBrowser: ['browser', 'both'].includes(process.env.BUNDLE_ANALYZE),
+      bundleAnalyzerConfig: {
+        server: {
+          analyzerMode: 'static',
+          reportFilename: './bundles/server.html',
+        },
+        browser: {
+          analyzerMode: 'static',
+          reportFilename: './bundles/client.html',
         },
       },
-    ],
+    },
+  ],
+]
 
+if (!isStatic) {
+  plugins = [
+    ...plugins,
     // offline
     [
       withOffline,
@@ -167,6 +169,7 @@ module.exports = withPlugins(
         },
       },
     ],
-  ],
-  nextConfig
-)
+  ]
+}
+
+module.exports = withPlugins(plugins, nextConfig)

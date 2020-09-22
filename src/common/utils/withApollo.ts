@@ -32,6 +32,7 @@ const fragmentMatcher = new IntrospectionFragmentMatcher({
 })
 
 const isProd = process.env.NODE_ENV === 'production'
+const isStaticBuild = process.env.NEXT_PUBLIC_BUILD_TYPE === 'static'
 
 // links
 const persistedQueryLink = createPersistedQueryLink({
@@ -55,7 +56,10 @@ const httpLink = ({ headers = {}, host }: { [key: string]: any }) => {
 
   // get auth from local storage
   if (typeof window !== 'undefined') {
-    headers['x-access-token'] = localStorage.getItem(STORE_KEY_AUTH_TOKEN)
+    const token = localStorage.getItem(STORE_KEY_AUTH_TOKEN)
+    if (token && isStaticBuild) {
+      headers['x-access-token'] = token
+    }
   }
 
   return createUploadLink({

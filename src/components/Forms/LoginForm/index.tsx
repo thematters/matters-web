@@ -37,6 +37,8 @@ interface FormValues {
   password: ''
 }
 
+const isStaticBuild = process.env.NEXT_PUBLIC_BUILD_TYPE === 'static'
+
 export const USER_LOGIN = gql`
   mutation UserLogin($input: UserLoginInput!) {
     userLogin(input: $input) {
@@ -99,8 +101,8 @@ export const LoginForm: React.FC<FormProps> = ({
 
         const token = result.data?.userLogin.token
 
-        // FIXME: security assessment, see: https://github.com/apollographql/apollo-feature-requests/issues/149
-        if (token) {
+        // security discussion see: https://github.com/apollographql/apollo-feature-requests/issues/149
+        if (isStaticBuild && token) {
           localStorage.setItem(STORE_KEY_AUTH_TOKEN, token)
         }
 
