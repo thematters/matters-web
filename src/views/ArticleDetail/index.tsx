@@ -306,7 +306,8 @@ const ArticleDetail = () => {
       />
 
       <Head
-        title={article.title}
+        title={`${article.title} - ${article?.author.displayName} (@${article.author.userName})`}
+        noSuffix
         description={article.summary}
         keywords={(article.tags || []).map(({ content }) => content)}
         image={article.cover}
