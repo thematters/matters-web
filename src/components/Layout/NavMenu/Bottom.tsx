@@ -10,7 +10,7 @@ import {
 import { useMutation } from '~/components/GQL'
 import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
 
-import { ADD_TOAST, PATHS } from '~/common/enums'
+import { ADD_TOAST, PATHS, STORE_KEY_AUTH_TOKEN } from '~/common/enums'
 import { redirectToTarget, unsubscribePush } from '~/common/utils'
 
 import { UserLogout } from '~/components/GQL/mutations/__generated__/UserLogout'
@@ -29,7 +29,7 @@ const NavMenuBottom: React.FC<NavMenuBottomProps> = ({ isInSideDrawerNav }) => {
     }
 
     try {
-      await logout()
+      await logout().then(() => localStorage.removeItem(STORE_KEY_AUTH_TOKEN))
 
       window.dispatchEvent(
         new CustomEvent(ADD_TOAST, {

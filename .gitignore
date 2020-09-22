@@ -92,6 +92,7 @@ typings/
 .DS_Store
 
 build
+out
 static-site-build
 yarn.lock
 
