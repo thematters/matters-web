@@ -5,19 +5,6 @@
   margin-bottom: var(--spacing-x-tight);
 }
 
-.owner {
-  @mixin flex-center-start;
-
-  margin-top: var(--spacing-base);
-
-  & span {
-    margin-left: var(--spacing-x-tight);
-    font-size: var(--font-size-sm);
-    line-height: 1;
-    color: var(--color-grey-dark);
-  }
-}
-
 .description {
   margin-top: var(--spacing-base);
   font-size: var(--font-size-md-s);
@@ -28,7 +15,7 @@
 .statistics {
   @mixin flex-center-space-between;
 
-  margin-top: var(--spacing-loose);
+  margin-top: var(--spacing-base);
 }
 
 .buttons {

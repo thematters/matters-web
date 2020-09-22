@@ -12,7 +12,7 @@ import {
 
 import { toPath } from '~/common/utils'
 
-import styles from '../Transaction/styles.css'
+import styles from './styles.css'
 
 import { DigestAppreciation } from './__generated__/DigestAppreciation'
 

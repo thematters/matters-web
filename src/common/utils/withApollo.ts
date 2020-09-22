@@ -10,6 +10,7 @@ import { onError } from 'apollo-link-error'
 import { createPersistedQueryLink } from 'apollo-link-persisted-queries'
 import http from 'http'
 import https from 'https'
+import _get from 'lodash/get'
 import withApollo from 'next-with-apollo'
 
 import {
@@ -31,27 +32,34 @@ const fragmentMatcher = new IntrospectionFragmentMatcher({
 
 const isProd = process.env.NODE_ENV === 'production'
 
-// toggle http for local dev
-const agent =
-  (process.env.NEXT_PUBLIC_API_URL || '').split(':')[0] === 'http'
-    ? new http.Agent()
-    : new https.Agent({
-        rejectUnauthorized: isProd, // allow access to https:...matters.news in localhost
-      })
-
 // links
 const persistedQueryLink = createPersistedQueryLink({
   useGETForHashedQueries: true,
 })
 
-const httpLink = ({ headers }: { [key: string]: any }) =>
-  createUploadLink({
-    uri: process.env.NEXT_PUBLIC_API_URL,
+const httpLink = ({ headers, host }: { [key: string]: any }) => {
+  const isOAuthSite = process.env.NEXT_PUBLIC_OAUTH_SITE_DOMAIN === host
+
+  const apiUrl = isOAuthSite
+    ? process.env.NEXT_PUBLIC_OAUTH_API_URL
+    : process.env.NEXT_PUBLIC_API_URL
+
+  // toggle http for local dev
+  const agent =
+    (apiUrl || '').split(':')[0] === 'http'
+      ? new http.Agent()
+      : new https.Agent({
+          rejectUnauthorized: isProd, // allow access to https:...matters.news in localhost
+        })
+
+  return createUploadLink({
+    uri: apiUrl,
     headers,
     fetchOptions: {
       agent,
     },
   })
+}
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
@@ -72,15 +80,19 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 
 const authLink = setContext((operation, { headers, ...restCtx }) => {
   const operationName = operation.operationName || ''
+  const operationVariables = operation.variables || {}
 
   const isPublicOperation = restCtx[GQL_CONTEXT_PUBLIC_QUERY_KEY]
 
   if (process.env.NODE_ENV !== 'production') {
     console.log(
-      `%c[GraphQL operation]\x1b[0m`,
+      `%c[GraphQL operation]%c ${operationName} ` +
+        `${isPublicOperation ? '' : '(w/ credentials)'}` +
+        `%c Variables`,
       'background: #0d6763; color: #fff',
-      operationName,
-      isPublicOperation ? '' : '(w/ credentials)'
+      '',
+      'color: #fff68f',
+      operationVariables
     )
   }
 
@@ -129,11 +141,13 @@ const agentHashLink = setContext((_, { headers }) => {
   }
 })
 
-export default withApollo(({ ctx, headers, initialState }) => {
+export default withApollo(({ ctx, headers, initialState, ...rest }) => {
   const cache = new InMemoryCache({ fragmentMatcher })
   cache.restore(initialState || {})
 
   // setupPersistCache(cache)
+
+  const host = ctx?.req?.headers.host || _get(window, 'location.host')
 
   const client = new ApolloClient({
     link: ApolloLink.from([
@@ -142,7 +156,7 @@ export default withApollo(({ ctx, headers, initialState }) => {
       sentryLink,
       agentHashLink,
       authLink,
-      httpLink({ headers }),
+      httpLink({ headers, host }),
     ]),
     cache,
     resolvers,

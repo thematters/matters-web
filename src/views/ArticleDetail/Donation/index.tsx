@@ -1,67 +1,52 @@
-import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { DonationDialog, LikeCoinDialog, usePullToRefresh } from '~/components'
+import { DonationDialog, LikeCoinDialog } from '~/components'
 
 import DonationButton from './DonationButton'
 import Donators from './Donators'
 import styles from './styles.css'
 
-import { ArticleDonation } from './__generated__/ArticleDonation'
+import { DonationArticle } from './__generated__/DonationArticle'
 
 interface DonationProps {
-  mediaHash: string
+  article: DonationArticle
 }
 
-const ARTICLE_DONATION = gql`
-  query ArticleDonation($mediaHash: String) {
-    article(input: { mediaHash: $mediaHash }) {
+const fragments = {
+  article: gql`
+    fragment DonationArticle on Article {
       id
       author {
         ...UserDonationRecipient
       }
+      ...DonatorsArticle
     }
-  }
-  ${DonationDialog.fragments.recipient}
-`
+    ${Donators.fragments.article}
+    ${DonationDialog.fragments.recipient}
+  `,
+}
 
-const BaseDonation = ({ mediaHash }: DonationProps) => {
-  const { data, loading, refetch } = useQuery<ArticleDonation>(
-    ARTICLE_DONATION,
-    {
-      variables: { mediaHash },
-    }
-  )
-
-  usePullToRefresh.Handler(refetch)
-
-  if (loading || !data || !data.article) {
-    return null
-  }
-
-  const { article } = data
-
+const BaseDonation = ({ article }: DonationProps) => {
   return (
     <section className="container">
-      <section className="button">
-        <DonationButton recipient={article.author} targetId={article.id} />
-      </section>
+      <DonationButton recipient={article.author} targetId={article.id} />
 
-      <section className="donators">
-        <Donators mediaHash={mediaHash} />
-      </section>
+      <Donators article={article} />
+
       <style jsx>{styles}</style>
     </section>
   )
 }
 
-const Donation = ({ mediaHash }: DonationProps) => {
+const Donation = ({ article }: DonationProps) => {
   return (
     <>
-      <BaseDonation mediaHash={mediaHash} />
+      <BaseDonation article={article} />
       <LikeCoinDialog allowEventTrigger />
     </>
   )
 }
+
+Donation.fragments = fragments
 
 export default Donation

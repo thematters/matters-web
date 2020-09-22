@@ -8,6 +8,7 @@ import {
   List,
   Spinner,
   Tag,
+  Translate,
   usePublicQuery,
   usePullToRefresh,
 } from '~/components'
@@ -104,7 +105,11 @@ const UserTags = () => {
       <>
         <CustomHead />
         <UserTabs />
-        <EmptyTag />
+        <EmptyTag
+          description={
+            <Translate zh_hant="還沒有主理標籤喔" zh_hans="还没有主理标签喔" />
+          }
+        />
       </>
     )
   }

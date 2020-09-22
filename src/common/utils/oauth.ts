@@ -7,13 +7,13 @@ const iterateScopeTexts = (
   lang: Language,
   scopeTexts: string[]
 ) => {
-  // retrieve root scope's __text__
-  if (scopes.__text__ && scopes.__text__[lang]) {
-    scopeTexts.push(scopes.__text__[lang])
+  // retrieve root scope's _t
+  if (scopes._t && scopes._t[lang]) {
+    scopeTexts.push(scopes._t[lang])
     return
   }
 
-  // retrieve all nested scopes' __text__
+  // retrieve all nested scopes' _t
   Object.keys(scopes).forEach((key) => {
     if (key === lang) {
       scopeTexts.push(scopes[key])
@@ -46,7 +46,13 @@ export const toReadableScope = ({
     prefix = {
       zh_hant: '讀取你的',
       zh_hans: '读取你的',
-      en: '讀取你的',
+      en: 'Query your',
+    }[lang]
+  } else if (scope.indexOf('mutation') >= 0) {
+    prefix = {
+      zh_hant: '管理你的',
+      zh_hans: '管理你的',
+      en: 'Manage your',
     }[lang]
   }
 

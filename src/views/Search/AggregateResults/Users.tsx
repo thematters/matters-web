@@ -15,7 +15,7 @@ import { SEARCH_AGGREGATE_USERS_PUBLIC } from './gql'
 import styles from './styles.css'
 import ViewMoreButton from './ViewMoreButton'
 
-import { SeachAggregateUsersPublic } from './__generated__/SeachAggregateUsersPublic'
+import { SearchAggregateUsersPublic } from './__generated__/SearchAggregateUsersPublic'
 
 const AggregateUserResults = () => {
   const router = useRouter()
@@ -25,7 +25,7 @@ const AggregateUserResults = () => {
    * Data Fetching
    */
   // public data
-  const { data, loading, refetch } = usePublicQuery<SeachAggregateUsersPublic>(
+  const { data, loading, refetch } = usePublicQuery<SearchAggregateUsersPublic>(
     SEARCH_AGGREGATE_USERS_PUBLIC,
     { variables: { key: q } }
   )

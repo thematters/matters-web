@@ -18,7 +18,7 @@ export const analytics = {
 
 type EventArgs =
   | [] // identify user
-  | ['page_view'] // pageview
+  | ['page_view', PageViewProp] // pageview
   | ['pull_to_refresh']
   | ['click_feed', ClickFeedProp]
   | ['click_button', ClickButtonProp]
@@ -27,6 +27,10 @@ type EventArgs =
   | ['purchase', PurchaseProp]
   | ['view_add_credit_dialog', ViewDialogProp]
   | ['view_donation_dialog', ViewDialogProp]
+
+interface PageViewProp {
+  page_referrer: string
+}
 
 type ClickFeedProp =
   | ArticleFeedProp
@@ -119,6 +123,7 @@ type ArticleFeedType =
   | 'authors' // author feed on home page
   | 'collection'
   | 'follow-article'
+  | 'followee-donated-article'
   | 'hottest'
   | 'icymi'
   | 'newest'
@@ -133,6 +138,7 @@ type ArticleFeedType =
   | 'topics'
   | 'user_article'
   | 'wallet'
+  | 'related_donations'
 
 type CommentFeedType = 'follow-comment' | 'user_comment'
 

@@ -47,7 +47,7 @@ const ArticleNewCommentNotice = ({ notice }: { notice: NoticeType }) => {
               zh_hans={`等 ${numAbbr(actorsCount)} 人`}
             />
           )}
-          <Translate zh_hant="評論了你的作品" zh_hans="评论了你的作品" />{' '}
+          <Translate zh_hant="評論了" zh_hans="评论了" />{' '}
         </NoticeHead>
 
         <NoticeArticle article={notice.target} isBlock />

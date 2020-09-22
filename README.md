@@ -1,6 +1,6 @@
 # matters-web
 
-![Deploy Status](https://github.com/thematters/matters-web/workflows/Deployment/badge.svg) ![Release Status](https://github.com/thematters/matters-web/workflows/Create%20Release/badge.svg) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+![Deployment Status](https://github.com/thematters/matters-web/workflows/Deployment/badge.svg) ![Test Status](https://github.com/thematters/matters-web/workflows/Test/badge.svg) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 ## Getting Started
 

@@ -30,6 +30,7 @@ import { getQuery } from '~/common/utils'
 
 import Collection from './Collection'
 import Content from './Content'
+import Donation from './Donation'
 import EditMode from './EditMode'
 import FingerprintButton from './FingerprintButton'
 import {
@@ -54,10 +55,6 @@ const DynamicResponse = dynamic(() => import('./Responses'), {
   ssr: false,
   loading: Spinner,
 })
-const DynamicDonation = dynamic(() => import('./Donation'), {
-  ssr: false,
-})
-
 const EmptyLayout: React.FC = ({ children }) => (
   <Layout.Main>
     <Layout.Header left={<Layout.Header.BackButton />} />
@@ -74,7 +71,6 @@ const ArticleDetail = () => {
   const features = useContext(FeaturesContext)
   const isLargeUp = useResponsive('lg-up')
   const [fixedWall, setFixedWall] = useState(false)
-  // const [showResponses, setShowResponses] = useState(false)
 
   // wall
   const { data: clientPreferenceData } = useQuery<ClientPreference>(
@@ -104,20 +100,28 @@ const ArticleDetail = () => {
   const canEdit = isAuthor && !viewer.isInactive
 
   // fetch private data
-  const loadPrivate = () => {
-    if (!viewer.id || !article || !article?.mediaHash) {
+  const [privateFetched, setPrivateFetched] = useState(false)
+  const loadPrivate = async () => {
+    if (!viewer.isAuthed || !article || !article?.mediaHash) {
       return
     }
 
-    client.query({
+    await client.query({
       query: ARTICLE_DETAIL_PRIVATE,
       fetchPolicy: 'network-only',
       variables: {
         mediaHash: article?.mediaHash,
         includeContent: article.state !== 'active' && isAuthor,
+        includeCanSuperLike: viewer.isCivicLiker,
       },
     })
+
+    setPrivateFetched(true)
   }
+
+  useEffect(() => {
+    setPrivateFetched(false)
+  }, [mediaHash])
 
   useEffect(() => {
     loadPrivate()
@@ -174,7 +178,7 @@ const ArticleDetail = () => {
   }
 
   useEffect(() => {
-    if (shouldShowWall && window.location.hash && article) {
+    if (window.location.hash && article) {
       jump('#comments', { offset: -10 })
     }
   }, [mediaHash])
@@ -302,7 +306,8 @@ const ArticleDetail = () => {
       />
 
       <Head
-        title={article.title}
+        title={`${article.title} - ${article?.author.displayName} (@${article.author.userName})`}
+        noSuffix
         description={article.summary}
         keywords={(article.tags || []).map(({ content }) => content)}
         image={article.cover}
@@ -318,6 +323,15 @@ const ArticleDetail = () => {
             <Title type="article">
               {translate && titleTranslation ? titleTranslation : article.title}
             </Title>
+
+            <Waypoint
+              topOffset={-400}
+              onLeave={() => {
+                if (shouldShowWall) {
+                  setFixedWall(true)
+                }
+              }}
+            />
 
             <section className="info">
               <section className="left">
@@ -343,14 +357,7 @@ const ArticleDetail = () => {
             translating={translating}
           />
 
-          {features.payment && <DynamicDonation mediaHash={mediaHash} />}
-
-          {/* <Waypoint
-            bottomOffset={-200}
-            onEnter={() => {
-              setShowResponses(true)
-            }}
-          /> */}
+          {features.payment && <Donation article={article} />}
 
           {collectionCount > 0 && (
             <section className="block">
@@ -358,24 +365,11 @@ const ArticleDetail = () => {
             </section>
           )}
 
-          <Waypoint
-            onPositionChange={({ currentPosition }) => {
-              if (shouldShowWall) {
-                setFixedWall(currentPosition === 'inside')
-              }
-            }}
-          />
+          <section className="block">
+            <DynamicResponse />
+          </section>
 
-          {!shouldShowWall && (
-            // showResponses &&
-            <section className="block">
-              <DynamicResponse />
-            </section>
-          )}
-
-          {!isLargeUp && !shouldShowWall && (
-            <RelatedArticles article={article} />
-          )}
+          {!isLargeUp && <RelatedArticles article={article} />}
         </section>
 
         <Toolbar
@@ -388,6 +382,7 @@ const ArticleDetail = () => {
                 }
               : undefined
           }
+          privateFetched={privateFetched}
         />
 
         {shouldShowWall && (

@@ -20,6 +20,7 @@ interface HeadProps {
   keywords?: string[]
   path?: string
   image?: string
+  noSuffix?: boolean
 }
 
 export const Head: React.FC<HeadProps> = (props) => {
@@ -31,17 +32,17 @@ export const Head: React.FC<HeadProps> = (props) => {
       : props.title
 
   const head = {
-    title: title ? `${title} - Matters` : 'Matters',
+    title: title ? (props.noSuffix ? title : `${title} - Matters`) : 'Matters',
     description:
       props.description || '一個自由、自主、永續的創作與公共討論空間',
     keywords: props.keywords
       ? `${props.keywords.join(',')},matters,matters.news,創作有價`
       : 'matters,matters.news,創作有價',
     url: props.path
-      ? `${process.env.NEXT_PUBLIC_SITE_DOMAIN}${props.path}`
+      ? `//${process.env.NEXT_PUBLIC_SITE_DOMAIN}${props.path}`
       : router.asPath
-      ? `${process.env.NEXT_PUBLIC_SITE_DOMAIN}${router.asPath}`
-      : process.env.NEXT_PUBLIC_SITE_DOMAIN,
+      ? `//${process.env.NEXT_PUBLIC_SITE_DOMAIN}${router.asPath}`
+      : '//' + process.env.NEXT_PUBLIC_SITE_DOMAIN,
     image: props.image || IMAGE_INTRO,
   }
   const canonicalUrl = head.url?.split('#')[0].split('?')[0]
@@ -52,7 +53,7 @@ export const Head: React.FC<HeadProps> = (props) => {
       <meta
         name="viewport"
         key="viewport"
-        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover"
       />
       <title>{head.title}</title>
       <meta name="description" key="description" content={head.description} />
@@ -170,7 +171,6 @@ export const Head: React.FC<HeadProps> = (props) => {
 
       {/* DNS */}
       <link rel="dns-prefetch" href="https://www.gstatic.com" />
-      <link rel="dns-prefetch" href="https://cdn.segment.com" />
       <link rel="dns-prefetch" href="https://sentry.matters.one" />
     </NextHead>
   )

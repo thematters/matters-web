@@ -6,6 +6,7 @@ import React from 'react'
 import { Card, IconPinMedium, Img, TextIcon, Translate } from '~/components'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { UserDigest } from '~/components/UserDigest'
+import { UserDigestMiniProps } from '~/components/UserDigest/Mini'
 
 import { stripHtml, toPath } from '~/common/utils'
 
@@ -21,12 +22,12 @@ import { ArticleDigestFeedArticlePublic } from './__generated__/ArticleDigestFee
 
 export type ArticleDigestFeedControls = {
   onClick?: () => any
-
-  inFollowFeed?: boolean
 } & FooterActionsControls
 
 type ArticleDigestFeedProps = {
   article: ArticleDigestFeedArticlePublic
+
+  actor?: (props: Partial<UserDigestMiniProps>) => React.ReactNode
   extraHeader?: React.ReactNode
 } & ArticleDigestFeedControls
 
@@ -77,10 +78,10 @@ const BaseArticleDigestFeed = ({
   inTagDetailLatest,
   inTagDetailSelected,
   inUserArticles,
-  inFollowFeed,
 
   onClick,
 
+  actor,
   extraHeader,
 }: ArticleDigestFeedProps) => {
   const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
@@ -120,18 +121,18 @@ const BaseArticleDigestFeed = ({
     <Card {...path} spacing={['base', 'base']} onClick={onClick}>
       <section className={containerClasses}>
         {extraHeader}
+
         <header>
           <section className="left">
-            <UserDigest.Mini
-              user={author}
-              hasAvatar
-              hasDisplayName
-              {...userDigestProps}
-            />
-            {inFollowFeed && (
-              <span className="published-article">
-                <Translate zh_hant="發佈了作品" zh_hans="发布了作品" />
-              </span>
+            {actor ? (
+              actor(userDigestProps)
+            ) : (
+              <UserDigest.Mini
+                user={author}
+                hasAvatar
+                hasDisplayName
+                {...userDigestProps}
+              />
             )}
           </section>
 

@@ -4,13 +4,15 @@ header {
   & .left,
   & .right {
     @mixin inline-flex-center-all;
+  }
 
-    & .published-article {
+  & .left {
+    & :global(> * + *) {
       margin-left: var(--spacing-x-tight);
-      font-size: var(--font-size-sm);
-      color: var(--color-grey);
     }
+  }
 
+  & .right {
     & :global(> * + *) {
       margin-left: var(--spacing-tight);
     }

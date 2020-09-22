@@ -47,7 +47,9 @@ export const changeExt = ({ key, ext }: { key: string; ext?: 'webp' }) => {
 }
 
 export const toSizedImageURL = ({ url, size, ext }: ToSizedImageURLProps) => {
-  const assetDomain = process.env.NEXT_PUBLIC_ASSET_DOMAIN || ''
+  const assetDomain = process.env.NEXT_PUBLIC_ASSET_DOMAIN
+    ? `https://${process.env.NEXT_PUBLIC_ASSET_DOMAIN}`
+    : ''
   const isOutsideLink = url.indexOf(assetDomain) < 0
   const isGIF = /gif/i.test(url)
 

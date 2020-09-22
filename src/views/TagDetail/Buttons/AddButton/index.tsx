@@ -3,153 +3,49 @@ import { useContext } from 'react'
 import {
   Button,
   DropdownDialog,
-  IconAddMedium,
-  IconHashTag,
   IconPen,
-  IconSpinner,
   LanguageContext,
-  LikeCoinDialog,
   Menu,
   TextIcon,
   Translate,
   ViewerContext,
 } from '~/components'
-import { useMutation } from '~/components/GQL'
-import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
-
-import { ADD_TOAST } from '~/common/enums'
 import {
-  analytics,
-  parseFormSubmitErrors,
-  routerPush,
-  toPath,
-  translate,
-} from '~/common/utils'
+  SearchSelectDialog,
+  SearchSelectNode,
+} from '~/components/Dialogs/SearchSelectDialog'
+import { useMutation } from '~/components/GQL'
+import ADD_ARTICLES_TAGS from '~/components/GQL/mutations/addArticlesTags'
+import updateTagArticlesCount from '~/components/GQL/updates/tagArticlesCount'
 
-import TagArticleDialog from './TagArticleDialog'
+import { ADD_TOAST, REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
+import { translate } from '~/common/utils'
 
-import { CreateDraft } from '~/components/GQL/mutations/__generated__/CreateDraft'
+import AddMyArticlesButton from './AddMyArticlesButton'
+import CreateDraftMenuItem from './CreateDraftMenuItem'
+
+import { AddArticlesTags } from '~/components/GQL/mutations/__generated__/AddArticlesTags'
 import { TagDetailPublic_node_Tag } from '../../__generated__/TagDetailPublic'
 
 interface DropdownActionsProps {
-  isMaintainer: boolean
   tag: TagDetailPublic_node_Tag
 }
 
 interface DialogProps {
-  openTagSelectedArticleDialog: () => void
-  openTagArticleDialog: () => void
+  openAddMyArticlesDialog: () => void
 }
 
 type BaseDropdownActionsProps = DropdownActionsProps & DialogProps
 
-const BaseCreateDraftMenuItem = ({ onClick }: { onClick: () => any }) => (
-  <Menu.Item onClick={onClick}>
-    <TextIcon icon={<IconAddMedium size="md" />} size="md" spacing="base">
-      <Translate zh_hant="創作新的作品" zh_hans="创作新的作品" />
-    </TextIcon>
-  </Menu.Item>
-)
-
-const CreateDraftMenuItem = ({
-  putDraft,
-}: {
-  putDraft: () => Promise<any>
-}) => {
-  const { lang } = useContext(LanguageContext)
-  const viewer = useContext(ViewerContext)
-
-  if (viewer.shouldSetupLikerID) {
-    return (
-      <LikeCoinDialog>
-        {({ open }) => <BaseCreateDraftMenuItem onClick={open} />}
-      </LikeCoinDialog>
-    )
-  }
-
-  return (
-    <BaseCreateDraftMenuItem
-      onClick={async () => {
-        try {
-          if (viewer.isInactive) {
-            window.dispatchEvent(
-              new CustomEvent(ADD_TOAST, {
-                detail: {
-                  color: 'red',
-                  content: <Translate id="FORBIDDEN" />,
-                },
-              })
-            )
-            return
-          }
-
-          analytics.trackEvent('click_button', {
-            type: 'write',
-          })
-          const result = await putDraft()
-          const { slug, id } = result?.data?.putDraft || {}
-
-          if (slug && id) {
-            const path = toPath({ page: 'draftDetail', slug, id })
-            routerPush(path.href, path.as)
-          }
-        } catch (error) {
-          const [messages, codes] = parseFormSubmitErrors(error, lang)
-
-          if (!messages[codes[0]]) {
-            return null
-          }
-
-          window.dispatchEvent(
-            new CustomEvent(ADD_TOAST, {
-              detail: {
-                color: 'red',
-                content: messages[codes[0]],
-              },
-            })
-          )
-        }
-      }}
-    />
-  )
-}
-
 const BaseDropdownActions = ({
-  isMaintainer,
   tag,
-  openTagSelectedArticleDialog,
-  openTagArticleDialog,
+  openAddMyArticlesDialog,
 }: BaseDropdownActionsProps) => {
-  const { lang } = useContext(LanguageContext)
-  const [putDraft, { loading }] = useMutation<CreateDraft>(CREATE_DRAFT, {
-    variables: {
-      title: translate({ id: 'untitle', lang }),
-      tags: [tag.content],
-    },
-  })
-
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
     <Menu width={isInDropdown ? 'sm' : undefined}>
-      {isMaintainer && (
-        <>
-          <Menu.Item onClick={openTagSelectedArticleDialog}>
-            <TextIcon
-              icon={<IconAddMedium size="md" />}
-              size="md"
-              spacing="base"
-            >
-              <Translate id="tagAddSelectedArticle" />
-            </TextIcon>
-          </Menu.Item>
-          <Menu.Divider spacing="xtight" />
-        </>
-      )}
-      <CreateDraftMenuItem putDraft={putDraft} />
-      <Menu.Item onClick={openTagArticleDialog}>
-        <TextIcon icon={<IconHashTag size="md" />} size="md" spacing="base">
-          <Translate id="tagAddArticle" />
-        </TextIcon>
-      </Menu.Item>
+      <CreateDraftMenuItem tag={tag} />
+
+      <AddMyArticlesButton onClick={openAddMyArticlesDialog} />
     </Menu>
   )
 
@@ -166,7 +62,7 @@ const BaseDropdownActions = ({
     >
       {({ open, ref }) => (
         <Button
-          size={['7rem', '2.25rem']}
+          size={['5rem', '2rem']}
           textColor="gold"
           textActiveColor="white"
           bgActiveColor="gold"
@@ -175,12 +71,8 @@ const BaseDropdownActions = ({
           aria-haspopup="true"
           ref={ref}
         >
-          <TextIcon
-            icon={loading ? <IconSpinner /> : <IconPen />}
-            weight="md"
-            size="md-s"
-          >
-            <Translate id="addArticleTag" />
+          <TextIcon icon={<IconPen />} weight="md" size="md-s">
+            <Translate zh_hant="投稿" zh_hans="投稿" />
           </TextIcon>
         </Button>
       )}
@@ -189,20 +81,88 @@ const BaseDropdownActions = ({
 }
 
 const DropdownActions = (props: DropdownActionsProps) => {
+  const viewer = useContext(ViewerContext)
+  const { lang } = useContext(LanguageContext)
+  const { tag } = props
+
+  /**
+   * Data
+   */
+  const [add, { loading }] = useMutation<AddArticlesTags>(ADD_ARTICLES_TAGS)
+  const addArticlesToTag = (selected: boolean) => async (
+    articles: SearchSelectNode[]
+  ) => {
+    const articleIds = articles.map((article) => article.id)
+
+    await add({
+      variables: { id: tag.id, articles: articleIds, selected },
+      update: (cache, { data }) => {
+        if (selected) {
+          const newCount = data?.addArticlesTags?.articles?.totalCount || 0
+          const oldCount = tag.articles.totalCount || 0
+          updateTagArticlesCount({
+            cache,
+            id: tag.id,
+            count: newCount - oldCount,
+            type: 'increment',
+          })
+        }
+      },
+    })
+
+    window.dispatchEvent(
+      new CustomEvent(ADD_TOAST, {
+        detail: {
+          color: 'green',
+          content: translate({ id: 'addedArticleTag', lang }),
+          duration: 2000,
+        },
+      })
+    )
+
+    window.dispatchEvent(
+      new CustomEvent(REFETCH_TAG_DETAIL_ARTICLES, {
+        detail: {
+          event: 'add',
+          differences: articles.length,
+        },
+      })
+    )
+  }
+
+  const forbid = () => {
+    window.dispatchEvent(
+      new CustomEvent(ADD_TOAST, {
+        detail: {
+          color: 'red',
+          content: <Translate id="FORBIDDEN_BY_STATE" />,
+        },
+      })
+    )
+    return
+  }
+
+  /**
+   * Render
+   */
   return (
-    <TagArticleDialog tag={props.tag} forSelected>
-      {({ open: openTagSelectedArticleDialog }) => (
-        <TagArticleDialog tag={props.tag}>
-          {({ open: openTagArticleDialog }) => (
-            <BaseDropdownActions
-              {...props}
-              openTagSelectedArticleDialog={openTagSelectedArticleDialog}
-              openTagArticleDialog={openTagArticleDialog}
-            />
-          )}
-        </TagArticleDialog>
+    <SearchSelectDialog
+      title="tagAddArticle"
+      hint="hintEditCollection"
+      searchType="Article"
+      searchFilter={{ authorId: viewer.id }}
+      onSave={addArticlesToTag(false)}
+      saving={loading}
+    >
+      {({ open: openAddMyArticlesDialog }) => (
+        <BaseDropdownActions
+          {...props}
+          openAddMyArticlesDialog={
+            viewer.isFrozen ? forbid : openAddMyArticlesDialog
+          }
+        />
       )}
-    </TagArticleDialog>
+    </SearchSelectDialog>
   )
 }
 

@@ -78,7 +78,6 @@ const CollapseCommentDialog = ({
 
         <Dialog.Footer>
           <Dialog.Footer.Button
-            bgColor="green"
             onClick={() => {
               onCollapse()
               close()

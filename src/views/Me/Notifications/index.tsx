@@ -61,7 +61,9 @@ const BaseNotifications = () => {
   const { data, loading, fetchMore, refetch } = useQuery<
     MeNotifications,
     { first: number; after?: number }
-  >(ME_NOTIFICATIONS)
+  >(ME_NOTIFICATIONS, {
+    fetchPolicy: 'network-only',
+  })
 
   useEffect(() => {
     markAllNoticesAsRead()

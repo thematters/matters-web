@@ -1,0 +1,41 @@
+:root {
+  --search-input-height: 3rem;
+  --search-input-button-width: 2rem;
+}
+
+form {
+  position: relative;
+  width: 100%;
+  height: var(--search-input-height);
+  margin-right: auto;
+  margin-left: auto;
+  font-size: var(--font-size-md-s);
+  line-height: var(--search-input-height);
+
+  & :global(input[type='search']) {
+    height: 100%;
+    padding: 0 calc(var(--search-input-button-width) + var(--spacing-x-tight));
+    font-size: var(--font-size-sm);
+    color: var(--color-black);
+    background-color: var(--color-grey-lighter);
+
+    &::placeholder {
+      color: var(--color-grey);
+      opacity: 1; /* Firefox */
+    }
+  }
+
+  & button.search,
+  & button.clear {
+    position: absolute;
+    top: 0;
+    width: var(--search-input-button-width);
+    height: 100%;
+  }
+  & button.search {
+    left: var(--spacing-x-tight);
+  }
+  & button.clear {
+    right: var(--spacing-x-tight);
+  }
+}

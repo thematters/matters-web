@@ -104,7 +104,7 @@ const BaseUserComments = ({ user }: UserIdUser) => {
 
   // private data
   const loadPrivate = (publicData?: UserCommentsPublic) => {
-    if (!viewer.id || !publicData || !user) {
+    if (!viewer.isAuthed || !publicData || !user) {
       return
     }
 

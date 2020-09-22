@@ -5,6 +5,7 @@ import {
   SetupLikeCoin,
   SignUpForm,
   useEventListener,
+  useStep,
 } from '~/components'
 
 import { CLOSE_ACTIVE_DIALOG, OPEN_SIGNUP_DIALOG } from '~/common/enums'
@@ -12,11 +13,11 @@ import { CLOSE_ACTIVE_DIALOG, OPEN_SIGNUP_DIALOG } from '~/common/enums'
 type Step = 'signUp' | 'profile' | 'setupLikeCoin' | 'complete'
 
 const SignUpDialog = () => {
-  const [step, setStep] = useState<Step>('signUp')
+  const { currStep, forward } = useStep<Step>('signUp')
 
   const [showDialog, setShowDialog] = useState(false)
   const open = () => {
-    setStep('signUp')
+    forward('signUp')
     setShowDialog(true)
   }
   const close = () => {
@@ -30,36 +31,36 @@ const SignUpDialog = () => {
     <Dialog
       isOpen={showDialog}
       onDismiss={close}
-      fixedHeight={step !== 'complete'}
+      fixedHeight={currStep !== 'complete'}
     >
-      {step === 'signUp' && (
+      {currStep === 'signUp' && (
         <SignUpForm.Init
           purpose="dialog"
           submitCallback={() => {
-            setStep('profile')
+            forward('profile')
           }}
           closeDialog={close}
         />
       )}
-      {step === 'profile' && (
+      {currStep === 'profile' && (
         <SignUpForm.Profile
           purpose="dialog"
           submitCallback={() => {
-            setStep('setupLikeCoin')
+            forward('setupLikeCoin')
           }}
           closeDialog={close}
         />
       )}
-      {step === 'setupLikeCoin' && (
+      {currStep === 'setupLikeCoin' && (
         <SetupLikeCoin
           purpose="dialog"
           submitCallback={() => {
-            setStep('complete')
+            forward('complete')
           }}
           closeDialog={close}
         />
       )}
-      {step === 'complete' && <SignUpForm.Complete closeDialog={close} />}
+      {currStep === 'complete' && <SignUpForm.Complete closeDialog={close} />}
     </Dialog>
   )
 }

@@ -1,9 +1,9 @@
 import { useFormik } from 'formik'
 import fetch from 'isomorphic-unfetch'
 import _pickBy from 'lodash/pickBy'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 
-import { Dialog, Form, LanguageContext, Translate } from '~/components'
+import { Dialog, Form, LanguageContext, Translate, useStep } from '~/components'
 
 import { translate } from '~/common/utils'
 
@@ -33,10 +33,10 @@ const NewsletterDialogContent: React.FC<NewsletterDialogContentProps> = ({
   closeDialog,
 }) => {
   const { lang } = useContext(LanguageContext)
-  const [step, setStep] = useState<Step>('subscribe')
-  const isSubscribe = step === 'subscribe'
-  const isComplete = step === 'complete'
-  const isRetry = step === 'retry'
+  const { currStep, forward } = useStep<Step>('subscribe')
+  const isSubscribe = currStep === 'subscribe'
+  const isComplete = currStep === 'complete'
+  const isRetry = currStep === 'retry'
 
   const formId = 'email-form'
 
@@ -74,10 +74,10 @@ const NewsletterDialogContent: React.FC<NewsletterDialogContentProps> = ({
         })
 
         setSubmitting(false)
-        setStep('complete')
+        forward('complete')
       } catch (error) {
         setSubmitting(false)
-        setStep('retry')
+        forward('retry')
       }
     },
   })

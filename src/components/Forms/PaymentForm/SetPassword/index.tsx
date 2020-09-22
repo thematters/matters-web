@@ -1,9 +1,16 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 
-import { Dialog, Form, LanguageContext, Spinner, Translate } from '~/components'
+import {
+  Dialog,
+  Form,
+  LanguageContext,
+  Spinner,
+  Translate,
+  useStep,
+} from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import {
@@ -39,9 +46,11 @@ const SET_PAYMENT_PASSWORD = gql`
 const SetPassword: React.FC<FormProps> = ({ submitCallback }) => {
   const [setPassword] = useMutation<SetPaymentPassword>(SET_PAYMENT_PASSWORD)
   const { lang } = useContext(LanguageContext)
-  const [step, setStep] = useState<'password' | 'comparedPassword'>('password')
-  const isInPassword = step === 'password'
-  const isInComparedPassword = step === 'comparedPassword'
+  const { currStep, forward } = useStep<'password' | 'comparedPassword'>(
+    'password'
+  )
+  const isInPassword = currStep === 'password'
+  const isInComparedPassword = currStep === 'comparedPassword'
 
   const {
     values,
@@ -67,7 +76,11 @@ const SetPassword: React.FC<FormProps> = ({ submitCallback }) => {
 
       // jump to next step
       if (!passwordError && isInPassword) {
-        setStep('comparedPassword')
+        forward('comparedPassword')
+      }
+
+      if (comparedPasswordError) {
+        setFieldValue('comparedPassword', '', false)
       }
 
       return _pickBy({
@@ -83,6 +96,7 @@ const SetPassword: React.FC<FormProps> = ({ submitCallback }) => {
       } catch (error) {
         const [messages, codes] = parseFormSubmitErrors(error, lang)
         setFieldError('password', messages[codes[0]])
+        setFieldValue('comparedPassword', '', false)
       }
 
       setSubmitting(false)
@@ -95,7 +109,9 @@ const SetPassword: React.FC<FormProps> = ({ submitCallback }) => {
         <Form.PinInput
           length={6}
           name="password"
+          value={values.password}
           error={touched.password && errors.password}
+          hint={<Translate id="hintPaymentPassword" />}
           onChange={(value) => {
             const shouldValidate = value.length === 6
             setTouched({ password: true }, shouldValidate)
@@ -107,7 +123,9 @@ const SetPassword: React.FC<FormProps> = ({ submitCallback }) => {
         <Form.PinInput
           length={6}
           name="compared-password"
+          value={values.comparedPassword}
           error={touched.comparedPassword && errors.comparedPassword}
+          hint={<Translate id="hintPaymentPassword" />}
           onChange={(value) => {
             const shouldValidate = value.length === 6
             setTouched({ comparedPassword: true }, shouldValidate)

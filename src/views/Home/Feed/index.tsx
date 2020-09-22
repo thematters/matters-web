@@ -87,11 +87,14 @@ const MainFeed = ({ feedSortType: sortBy, viewMode }: MainFeedProps) => {
 
   /**
    * Data Fetching
+   *
+   * Hottest Feed:
+   * 1) Logged-in User: Hottest, `article_activity_materialized`
+   * 2) Anonymous User: Valued, `article_value_materialized`
    */
   let query = FEED_ARTICLES_PUBLIC[sortBy]
 
-  // split out group b if in hottest feed and user is logged in
-  if (isHottestFeed && (!viewer.id || viewer.info.group !== 'b')) {
+  if (isHottestFeed && !viewer.id) {
     query = FEED_ARTICLES_PUBLIC.valued
   }
 
@@ -116,7 +119,7 @@ const MainFeed = ({ feedSortType: sortBy, viewMode }: MainFeedProps) => {
 
   // private data
   const loadPrivate = (publicData?: FeedArticlesPublic) => {
-    if (!viewer.id || !publicData) {
+    if (!viewer.isAuthed || !publicData) {
       return
     }
 
@@ -134,7 +137,7 @@ const MainFeed = ({ feedSortType: sortBy, viewMode }: MainFeedProps) => {
   const fetchedPrviateSortsRef = useRef<SortByType[]>([])
   useEffect(() => {
     const fetched = fetchedPrviateSortsRef.current.indexOf(sortBy) >= 0
-    if (loading || !edges || fetched || !viewer.id) {
+    if (loading || !edges || fetched || !viewer.isAuthed) {
       return
     }
 

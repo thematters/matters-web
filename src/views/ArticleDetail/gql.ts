@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import { UserDigest } from '~/components/UserDigest'
 
 import Content from './Content'
+import Donation from './Donation'
 import FingerprintButton from './FingerprintButton'
 import RelatedArticles from './RelatedArticles'
 import State from './State'
@@ -10,7 +11,10 @@ import TagList from './TagList'
 import Toolbar from './Toolbar'
 
 export const ARTICLE_DETAIL_PUBLIC = gql`
-  query ArticleDetailPublic($mediaHash: String) {
+  query ArticleDetailPublic(
+    $mediaHash: String
+    $includeCanSuperLike: Boolean = true
+  ) {
     article(input: { mediaHash: $mediaHash }) {
       id
       title
@@ -36,6 +40,7 @@ export const ARTICLE_DETAIL_PUBLIC = gql`
       ...FingerprintArticle
       ...ToolbarArticlePublic
       ...ToolbarArticlePrivate
+      ...DonationArticle
     }
   }
   ${Content.fragments.article}
@@ -47,10 +52,15 @@ export const ARTICLE_DETAIL_PUBLIC = gql`
   ${UserDigest.Rich.fragments.user.private}
   ${Toolbar.fragments.article.public}
   ${Toolbar.fragments.article.private}
+  ${Donation.fragments.article}
 `
 
 export const ARTICLE_DETAIL_PRIVATE = gql`
-  query ArticleDetailPrivate($mediaHash: String, $includeContent: Boolean!) {
+  query ArticleDetailPrivate(
+    $mediaHash: String
+    $includeContent: Boolean!
+    $includeCanSuperLike: Boolean!
+  ) {
     article(input: { mediaHash: $mediaHash }) {
       id
       content @include(if: $includeContent)

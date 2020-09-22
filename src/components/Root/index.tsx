@@ -14,10 +14,11 @@ import {
   usePublicQuery,
   ViewerProvider,
 } from '~/components'
+import PageViewTracker from '~/components/Analytics/PageViewTracker'
 import { QueryError } from '~/components/GQL'
+import SplashScreen from '~/components/SplashScreen'
 
-import { PATHS } from '~/common/enums'
-import { analytics } from '~/common/utils'
+import { CHANGE_NEW_USER_HOME_FEED_SORT_BY, PATHS } from '~/common/enums'
 
 import { ROOT_QUERY_PRIVATE, ROOT_QUERY_PUBLIC } from './gql'
 
@@ -50,7 +51,7 @@ const DynamicFingerprint = dynamic(() => import('~/components/Fingerprint'), {
 import('@sentry/browser').then((Sentry) => {
   Sentry.init({
     dsn: process.env.NEXT_PUBLIC_SENTRY_DSN || '',
-    ignoreErrors: ['Timeout', 'Network error'],
+    ignoreErrors: [/.*Timeout.*/, /.*Network.*/],
   })
 })
 
@@ -61,14 +62,6 @@ const Root = ({
   client: ApolloClient<InMemoryCache>
   children: React.ReactNode
 }) => {
-  useEffect(() => {
-    analytics.trackPage()
-  })
-
-  useEffect(() => {
-    analytics.identifyUser()
-  }, [])
-
   const router = useRouter()
   const isInAbout = router.pathname === PATHS.ABOUT
   const isInMigration = router.pathname === PATHS.MIGRATION
@@ -84,12 +77,26 @@ const Root = ({
   // viewer
   const [privateFetched, setPrivateFetched] = useState(false)
   const fetchPrivateViewer = async () => {
-    await client.query({
-      query: ROOT_QUERY_PRIVATE,
-      fetchPolicy: 'network-only',
-    })
+    try {
+      const result = await client.query({
+        query: ROOT_QUERY_PRIVATE,
+        fetchPolicy: 'network-only',
+      })
+
+      const info = result?.data?.viewer?.info
+      if (info) {
+        window.dispatchEvent(
+          new CustomEvent(CHANGE_NEW_USER_HOME_FEED_SORT_BY, {
+            detail: info,
+          })
+        )
+      }
+    } catch (e) {
+      console.error(e)
+    }
     setPrivateFetched(true)
   }
+
   useEffect(() => {
     if (!data) {
       return
@@ -97,6 +104,9 @@ const Root = ({
     fetchPrivateViewer()
   }, [!!data])
 
+  /**
+   * Render
+   */
   if (loading) {
     return null
   }
@@ -111,6 +121,9 @@ const Root = ({
 
   return (
     <ViewerProvider viewer={viewer} privateFetched={privateFetched}>
+      <SplashScreen />
+      <PageViewTracker />
+
       <LanguageProvider>
         <FeaturesProvider official={official}>
           {shouldApplyLayout ? <Layout>{children}</Layout> : children}

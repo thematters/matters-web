@@ -22,9 +22,11 @@ import styles from './styles.css'
 
 type InputProps = {
   length?: number
-  onChange: (val: string, index: number) => void
+  onChange: (val: string) => void
   onComplete?: (val: string) => void
   name: string
+  value: string
+  autoFocus?: boolean
 } & Omit<FieldProps, 'fieldMsgId'>
 
 const Input: React.FC<InputProps> = ({
@@ -33,14 +35,18 @@ const Input: React.FC<InputProps> = ({
   onComplete,
 
   name,
+  value,
   label,
+  autoFocus = true,
   extraButton,
 
   hint,
   error,
 }) => {
-  const initialValues = Array(length).fill('')
-  const [values, setValues] = useState(initialValues)
+  const values = [...value.split(''), ...Array(length).fill('')].slice(
+    0,
+    length
+  )
   const [itemRefs, setItemRefs] = useState<any>([])
 
   useEffect(() => {
@@ -51,25 +57,31 @@ const Input: React.FC<InputProps> = ({
     )
   }, [])
 
-  const onItemChange = (value: string, index: number) => {
+  useEffect(() => {
+    if (value) {
+      return
+    }
+
+    itemRefs[0]?.current?.focus()
+  })
+
+  const onItemChange = (val: string, index: number) => {
     const newValues = [
       ...values.slice(0, index),
-      value,
+      val,
       ...values.slice(index + 1),
     ]
-    setValues(newValues)
 
     // Set focus on next
     let currentIndex = index
-    if (value.length === 1 && index < length - 1) {
+    if (val.length === 1 && index < length - 1) {
       currentIndex += 1
       itemRefs[currentIndex]?.current?.focus()
     }
 
     // Notify the parent
     const pin = newValues.join('')
-
-    onChange(pin, currentIndex)
+    onChange(pin)
 
     if (pin.length === length && onComplete) {
       onComplete(pin)
@@ -83,10 +95,14 @@ const Input: React.FC<InputProps> = ({
     event.preventDefault()
 
     const text = event.clipboardData.getData('text/plain').split('')
-
-    setValues(
-      [...values.slice(0, index), ...text, ...initialValues].slice(0, length)
+    const newValues = [...values.slice(0, index), ...text, ...values].slice(
+      0,
+      length
     )
+
+    // Notify the parent
+    const pin = newValues.join('')
+    onChange(pin)
 
     // Set focus
     itemRefs[Math.min(index + text.length, length - 1)]?.current?.focus()
@@ -108,18 +124,18 @@ const Input: React.FC<InputProps> = ({
 
       <Field.Content>
         <section className="pin-input">
-          {values.map((value, index) => (
+          {values.map((val, index) => (
             <Item
               key={index}
-              value={value}
+              value={val}
               id={`field-${name}-${index + 1}`}
               ref={itemRefs[index]}
-              onChange={(val: string) => onItemChange(val, index)}
+              onChange={(v: string) => onItemChange(v, index)}
               onPaste={(event: React.ClipboardEvent<HTMLInputElement>) =>
                 onItemPaste(event, index)
               }
               onBackspace={() => onBackspace(index)}
-              autoFocus={index === 0}
+              autoFocus={autoFocus ? index === 0 : false}
             />
           ))}
         </section>

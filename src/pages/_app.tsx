@@ -8,7 +8,6 @@ import { ErrorBoundary } from '~/components'
 import { ClientUpdater } from '~/components/ClientUpdater'
 import { GlobalStyles } from '~/components/GlobalStyles'
 import Root from '~/components/Root'
-import SplashScreen from '~/components/SplashScreen'
 
 import withApollo from '~/common/utils/withApollo'
 
@@ -20,7 +19,6 @@ const MattersApp = ({
   <ErrorBoundary>
     <ApolloProvider client={apollo}>
       <GlobalStyles />
-      <SplashScreen />
       <ClientUpdater />
 
       <Root client={apollo}>

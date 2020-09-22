@@ -133,8 +133,6 @@ const Request: React.FC<FormProps> = ({
           type="submit"
           form={formId}
           disabled={!isValid || isSubmitting}
-          bgColor="green"
-          textColor="white"
           loading={isSubmitting}
         >
           <Translate id="nextStep" />

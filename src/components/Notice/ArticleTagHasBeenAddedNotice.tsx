@@ -25,10 +25,7 @@ const ArticleTagHasBeenAddedNotice = ({ notice }: { notice: NoticeType }) => {
       <section className="content-wrap overflow-hidden">
         <NoticeHead notice={notice}>
           <NoticeActorName user={notice.actor} />{' '}
-          <Translate
-            zh_hant="將你的作品加入標籤精選文集"
-            zh_hans="将你的作品加入标签精选文集"
-          />
+          <Translate zh_hant="將你的作品加入" zh_hans="将你的作品加入" />
         </NoticeHead>
 
         <NoticeArticle article={notice.target} isBlock />

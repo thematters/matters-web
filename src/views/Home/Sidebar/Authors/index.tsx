@@ -1,12 +1,10 @@
+import _random from 'lodash/random'
 import { useContext, useEffect } from 'react'
 
 import {
-  Button,
-  IconReload,
   List,
+  ShuffleButton,
   Spinner,
-  TextIcon,
-  Translate,
   usePublicQuery,
   UserDigest,
   ViewerContext,
@@ -16,10 +14,10 @@ import { QueryError } from '~/components/GQL'
 import { analytics } from '~/common/utils'
 
 import SectionHeader from '../../SectionHeader'
-import { SIDEBAR_AUTHORS_PRIVATE, SIDEBAR_AUTHORS_PUBLIC } from './gql'
+import { SIDEBAR_AUTHORS } from './gql'
 import styles from './styles.css'
 
-import { SidebarAuthorsPublic } from './__generated__/SidebarAuthorsPublic'
+import { SidebarAuthors } from './__generated__/SidebarAuthors'
 
 const Authors = () => {
   const viewer = useContext(ViewerContext)
@@ -27,49 +25,33 @@ const Authors = () => {
   /**
    * Data Fetching
    */
-  // public data
-  const {
-    data,
-    loading,
-    error,
-    refetch: refetchPublic,
-    client,
-  } = usePublicQuery<SidebarAuthorsPublic>(SIDEBAR_AUTHORS_PUBLIC, {
-    notifyOnNetworkStatusChange: true,
-  })
+  const { data, loading, error, refetch } = usePublicQuery<SidebarAuthors>(
+    SIDEBAR_AUTHORS,
+    {
+      notifyOnNetworkStatusChange: true,
+      variables: {
+        random: 0,
+      },
+    },
+    {
+      publicQuery: !viewer.isAuthed,
+    }
+  )
   const edges = data?.viewer?.recommendation.authors.edges
 
-  // private data
-  const loadPrivate = (publicData?: SidebarAuthorsPublic) => {
-    if (!viewer.id || !publicData) {
-      return
-    }
-
-    const publiceEdges = publicData?.viewer?.recommendation.authors.edges || []
-    const publicIds = publiceEdges.map(({ node }) => node.id)
-
-    client.query({
-      query: SIDEBAR_AUTHORS_PRIVATE,
-      fetchPolicy: 'network-only',
-      variables: { ids: publicIds },
-    })
+  const shuffle = () => {
+    refetch({ random: _random(0, 50) })
   }
 
-  // fetch private data for first page
   useEffect(() => {
-    if (loading || !edges) {
-      return
+    if (viewer.isAuthed) {
+      shuffle()
     }
+  }, [viewer.isAuthed])
 
-    loadPrivate(data)
-  }, [!!edges, viewer.id])
-
-  // refetch
-  const refetch = async () => {
-    const { data: newData } = await refetchPublic()
-    loadPrivate(newData)
-  }
-
+  /**
+   * Render
+   */
   if (error) {
     return <QueryError error={error} />
   }
@@ -82,23 +64,7 @@ const Authors = () => {
     <section className="container">
       <SectionHeader
         type="authors"
-        rightButton={
-          <Button
-            size={[null, '1.25rem']}
-            spacing={[0, 'xtight']}
-            bgActiveColor="grey-lighter"
-            onClick={refetch}
-          >
-            <TextIcon
-              icon={<IconReload size="xs" />}
-              color="grey"
-              size="xs"
-              weight="md"
-            >
-              <Translate id="shuffle" />
-            </TextIcon>
-          </Button>
-        }
+        rightButton={<ShuffleButton onClick={shuffle} />}
       />
 
       {loading && <Spinner />}

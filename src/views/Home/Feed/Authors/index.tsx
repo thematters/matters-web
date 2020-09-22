@@ -1,13 +1,11 @@
 import _chunk from 'lodash/chunk'
+import _random from 'lodash/random'
 import { useContext, useEffect } from 'react'
 
 import {
-  Button,
-  IconReload,
+  ShuffleButton,
   Slides,
   Spinner,
-  TextIcon,
-  Translate,
   usePublicQuery,
   UserDigest,
   ViewerContext,
@@ -17,60 +15,44 @@ import { QueryError } from '~/components/GQL'
 import { analytics } from '~/common/utils'
 
 import SectionHeader from '../../SectionHeader'
-import { FEED_AUTHORS_PRIVATE, FEED_AUTHORS_PUBLIC } from './gql'
+import { FEED_AUTHORS } from './gql'
 
-import { FeedAuthorsPublic } from './__generated__/FeedAuthorsPublic'
+import { FeedAuthors } from './__generated__/FeedAuthors'
 
-const FeedAuthors = () => {
+const Authors = () => {
   const viewer = useContext(ViewerContext)
 
   /**
    * Data Fetching
    */
-  // public data
-  const {
-    data,
-    loading,
-    error,
-    refetch: refetchPublic,
-    client,
-  } = usePublicQuery<FeedAuthorsPublic>(FEED_AUTHORS_PUBLIC, {
-    notifyOnNetworkStatusChange: true,
-  })
+  const { data, loading, error, refetch } = usePublicQuery<FeedAuthors>(
+    FEED_AUTHORS,
+    {
+      notifyOnNetworkStatusChange: true,
+      variables: {
+        random: 0,
+      },
+    },
+    {
+      publicQuery: !viewer.isAuthed,
+    }
+  )
 
   const edges = data?.viewer?.recommendation.authors.edges
 
-  // private data
-  const loadPrivate = (publicData?: FeedAuthorsPublic) => {
-    if (!viewer.id || !publicData) {
-      return
-    }
-
-    const publiceEdges = publicData?.viewer?.recommendation.authors.edges || []
-    const publicIds = publiceEdges.map(({ node }) => node.id)
-
-    client.query({
-      query: FEED_AUTHORS_PRIVATE,
-      fetchPolicy: 'network-only',
-      variables: { ids: publicIds },
-    })
+  const shuffle = () => {
+    refetch({ random: _random(0, 50) })
   }
 
-  // fetch private data for first page
   useEffect(() => {
-    if (loading || !edges) {
-      return
+    if (viewer.isAuthed) {
+      shuffle()
     }
+  }, [viewer.isAuthed])
 
-    loadPrivate(data)
-  }, [!!edges, viewer.id])
-
-  // refetch & pull to refresh
-  const refetch = async () => {
-    const { data: newData } = await refetchPublic()
-    loadPrivate(newData)
-  }
-
+  /**
+   * Render
+   */
   if (error) {
     return <QueryError error={error} />
   }
@@ -82,23 +64,7 @@ const FeedAuthors = () => {
   const SlidesHeader = (
     <SectionHeader
       type="authors"
-      rightButton={
-        <Button
-          size={[null, '1.25rem']}
-          spacing={[0, 'xtight']}
-          bgActiveColor="grey-lighter"
-          onClick={refetch}
-        >
-          <TextIcon
-            icon={<IconReload size="xs" />}
-            color="grey"
-            size="xs"
-            weight="md"
-          >
-            <Translate id="shuffle" />
-          </TextIcon>
-        </Button>
-      }
+      rightButton={<ShuffleButton onClick={shuffle} />}
     />
   )
 
@@ -137,4 +103,4 @@ const FeedAuthors = () => {
   )
 }
 
-export default FeedAuthors
+export default Authors
