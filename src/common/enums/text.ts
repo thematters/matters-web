@@ -128,6 +128,7 @@ export const TEXT = {
     hintAddTag:
       '通過添加標籤幫助讀者更好地找到你的作品。如果沒有合適的標籤，你可以創建新的。',
     hintEditCollection: '關聯自己或他人的作品，幫助讀者更好地發現內容。',
+    hintManageEditors: '新增協作者',
     history: '足跡',
     hkd: '港幣',
     hottestArticles: '熱門作品',
@@ -145,6 +146,7 @@ export const TEXT = {
     login: '登入',
     loginPassword: '登入密碼',
     logout: '登出',
+    manageEditors: '管理社群',
     MIGRATION_REACH_LIMIT: '導入作品累計超過 1 MB',
     migration: '搬家到 Matters',
     migrationSideBar: '一鍵搬家',
@@ -412,6 +414,7 @@ export const TEXT = {
     hintAddTag:
       '通过添加标签帮助读者更好地找到你的作品。如果没有合适的标签，你可以创建新的。',
     hintEditCollection: '关联自己或他人的作品，帮助读者更好地发现内容。',
+    hintManageEditors: '新增协作者',
     history: '足迹',
     hkd: '港币',
     hottestArticles: '热门作品',
@@ -429,6 +432,7 @@ export const TEXT = {
     login: '登录',
     loginPassword: '登录密码',
     logout: '登出',
+    manageEditors: '管理社群',
     MIGRATION_REACH_LIMIT: '导入作品累計超过 1 MB',
     migration: '搬家到 Matters',
     migrationSideBar: '一鍵搬家',
