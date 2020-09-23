@@ -17,6 +17,7 @@ import {
   AGENT_HASH_PREFIX,
   GQL_CONTEXT_PUBLIC_QUERY_KEY,
   STORE_KEY_AGENT_HASH,
+  STORE_KEY_AUTH_TOKEN,
 } from '~/common/enums'
 import introspectionQueryResultData from '~/common/gql/fragmentTypes.json'
 import { randomString } from '~/common/utils'
@@ -31,13 +32,14 @@ const fragmentMatcher = new IntrospectionFragmentMatcher({
 })
 
 const isProd = process.env.NODE_ENV === 'production'
+const isStaticBuild = process.env.NEXT_PUBLIC_BUILD_TYPE === 'static'
 
 // links
 const persistedQueryLink = createPersistedQueryLink({
   useGETForHashedQueries: true,
 })
 
-const httpLink = ({ headers, host }: { [key: string]: any }) => {
+const httpLink = ({ headers = {}, host }: { [key: string]: any }) => {
   const isOAuthSite = process.env.NEXT_PUBLIC_OAUTH_SITE_DOMAIN === host
 
   const apiUrl = isOAuthSite
@@ -51,6 +53,14 @@ const httpLink = ({ headers, host }: { [key: string]: any }) => {
       : new https.Agent({
           rejectUnauthorized: isProd, // allow access to https:...matters.news in localhost
         })
+
+  // get auth from local storage
+  if (typeof window !== 'undefined') {
+    const token = localStorage.getItem(STORE_KEY_AUTH_TOKEN)
+    if (token && isStaticBuild) {
+      headers['x-access-token'] = token
+    }
+  }
 
   return createUploadLink({
     uri: apiUrl,
@@ -127,7 +137,7 @@ const agentHashLink = setContext((_, { headers }) => {
   let hash: string | null = null
 
   if (typeof window !== 'undefined') {
-    const stored = window.localStorage.getItem(STORE_KEY_AGENT_HASH)
+    const stored = localStorage.getItem(STORE_KEY_AGENT_HASH)
     if (stored && stored.startsWith(AGENT_HASH_PREFIX)) {
       hash = stored
     }
@@ -147,7 +157,9 @@ export default withApollo(({ ctx, headers, initialState, ...rest }) => {
 
   // setupPersistCache(cache)
 
-  const host = ctx?.req?.headers.host || _get(window, 'location.host')
+  const host =
+    ctx?.req?.headers.host ||
+    (typeof window === 'undefined' ? '' : _get(window, 'location.host'))
 
   const client = new ApolloClient({
     link: ApolloLink.from([
