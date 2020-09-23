@@ -100,7 +100,7 @@ const SetTagUnselectedButton = ({
         detail: {
           color: 'green',
           content: (
-            <Translate zh_hant="文章已取消精選" zh_hans="文章已取消精选" />
+            <Translate zh_hant="作品已取消精選" zh_hans="作品已取消精选" />
           ),
           duration: 2000,
         },
