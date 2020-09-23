@@ -20,11 +20,9 @@ const VIEWER_LIKE_INFO = gql`
   query ViewerLikeInfo {
     viewer {
       id
-      status {
-        LIKE {
-          total
-          rateUSD
-        }
+      liker {
+        total
+        rateUSD
       }
     }
   }
@@ -44,9 +42,9 @@ const WalletSettings = () => {
   const errorCodes = getErrorCodes(error)
   const shouldReAuth = errorCodes.some((code) => code === 'OAUTH_TOKEN_INVALID')
 
-  const LIKE = data?.viewer?.status?.LIKE
-  const USDPrice = numRound(LIKE?.rateUSD * LIKE?.total || 0)
-  const equalSign = LIKE?.total > 0 ? '≈' : '='
+  const liker = data?.viewer?.liker
+  const USDPrice = numRound(liker?.rateUSD * liker?.total || 0)
+  const equalSign = liker?.total > 0 ? '≈' : '='
 
   usePullToRefresh.Handler(refetch)
 
@@ -81,7 +79,7 @@ const WalletSettings = () => {
               zh_hans="重新绑定 Liker ID 后即可管理创作收益"
             />
           ) : likerId ? (
-            `${numRound(LIKE?.total || 0)} LikeCoin`
+            `${numRound(liker?.total || 0)} LikeCoin`
           ) : (
             <Translate
               zh_hant="完成設置 Liker ID 後即可管理創作收益"
