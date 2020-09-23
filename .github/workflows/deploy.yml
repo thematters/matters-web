@@ -74,20 +74,10 @@ jobs:
         if: github.ref == 'refs/heads/develop' || github.base_ref == 'develop'
         run: cp .env.dev .env && npm run build
 
-      - name: Against SEO (develop)
-        if: github.ref == 'refs/heads/develop'
-        run: |
-          cp .ebextensions/http-basic-auth.config.dev .ebextensions/http-basic-auth.config
-
       # === `stage` branch ===
       - name: Build (stage)
         if: github.ref == 'refs/heads/stage' || github.base_ref == 'stage'
         run: cp .env.stage .env && npm run build
-
-      - name: Against SEO (stage)
-        if: github.ref == 'refs/heads/stage'
-        run: |
-          cp .ebextensions/http-basic-auth.config.dev .ebextensions/http-basic-auth.config
 
       # === `master` branch ===
       - name: Build (production)
