@@ -43,10 +43,10 @@ const AppreciationButton = ({
   const mediaHash = getQuery({ router, key: 'mediaHash' })
   const viewer = useContext(ViewerContext)
   const { token, refreshToken } = useContext(ReCaptchaContext)
-
   const { data, client } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
     variables: { id: 'local' },
   })
+  const isArticleAuthor = article.author.id === viewer.id
 
   /**
    * Normal Appreciation
@@ -60,7 +60,7 @@ const AppreciationButton = ({
       : limit) - amount
   const total = article.appreciationsReceivedTotal + amount
   const appreciatedCount = limit - left
-  const isReachLimit = left <= 0
+  const isReachLimit = left <= 0 || isArticleAuthor
   const [debouncedSendAppreciation] = useDebouncedCallback(async () => {
     try {
       await sendAppreciation({
@@ -69,21 +69,10 @@ const AppreciationButton = ({
           amount,
           token,
         },
-        update: (cache) => {
-          updateAppreciation({
-            cache,
-            left,
-            mediaHash,
-            total,
-            viewer,
-          })
-        },
       }).then(refreshToken)
     } catch (e) {
       console.error(e)
     }
-
-    setAmount(0)
   }, APPRECIATE_DEBOUNCE)
 
   /**
@@ -118,8 +107,8 @@ const AppreciationButton = ({
             color: 'green',
             content: (
               <Translate
-                zh_hant="你對文章送出了一個 Super Like！"
-                zh_hans="你对文章送出了一个 Super Like！"
+                zh_hant="你對作品送出了一個 Super Like！"
+                zh_hans="你对作品送出了一个 Super Like！"
               />
             ),
             customButton: <ViewSuperLikeButton />,
@@ -150,10 +139,15 @@ const AppreciationButton = ({
    *   2) Show modal to introduce Civic Liker on click
    *   3) Show "MAX" on close
    *
-   * Civic Liker:
+   * Civic Liker in own article:
+   *   1) Show SuperLike
+   *   2) Show "∞" on click
+   *
+   * Civic Liker in others' articles:
    *   1) Allow to appreciate 5 times
    *   2) Show SuperLike
    *   3) Show "∞" on click
+   *
    */
   const appreciate = () => {
     if (isSuperLike) {
@@ -165,7 +159,6 @@ const AppreciationButton = ({
     }
   }
 
-  const isArticleAuthor = article.author.id === viewer.id
   const readCivicLikerDialog =
     viewer.isCivicLiker || data?.clientPreference.readCivicLikerDialog
   const canAppreciate =
@@ -183,7 +176,7 @@ const AppreciationButton = ({
   }
 
   // Article Author
-  if (isArticleAuthor) {
+  if (isArticleAuthor && !isSuperLike) {
     return (
       <Tooltip
         content={
@@ -222,7 +215,7 @@ const AppreciationButton = ({
   }
 
   // Civic Liker
-  if (!canAppreciate && !readCivicLikerDialog && isReachLimit) {
+  if (isReachLimit && !readCivicLikerDialog) {
     return (
       <CivicLikerButton
         onClose={() => {
@@ -238,7 +231,7 @@ const AppreciationButton = ({
   }
 
   // MAX:SuperLike
-  if (!canAppreciate && isReachLimit && isSuperLike) {
+  if (isReachLimit && isSuperLike) {
     return (
       <AppreciateButton
         count="MAX"
@@ -267,7 +260,7 @@ const AppreciationButton = ({
   }
 
   // MAX
-  if (!canAppreciate && isReachLimit && !isSuperLike) {
+  if (isReachLimit && !isSuperLike) {
     return <AppreciateButton count="MAX" total={total} />
   }
 

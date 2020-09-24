@@ -36,8 +36,8 @@ const PublishedState = ({ draft }: { draft: PublishStateDraft }) => {
         <>
           <p>
             <Translate
-              zh_hant="作品發佈成功，快把文章分享到不同渠道，"
-              zh_hans="作品发布成功，快把文章分享到不同渠道，"
+              zh_hant="作品發佈成功，快把作品分享到不同渠道，"
+              zh_hans="作品发布成功，快把作品分享到不同渠道，"
             />
           </p>
           <p>

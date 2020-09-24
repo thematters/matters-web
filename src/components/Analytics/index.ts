@@ -15,6 +15,18 @@ declare global {
   }
 }
 
+const analyticsDebugger = (event: string, params: any) => {
+  if (process.env.NODE_ENV !== 'production') {
+    console.log(
+      `%c[Analytics debugger]%c ${event} %cVariables`,
+      'background: #800080; color: #fff',
+      '',
+      'color: #fff68f',
+      params
+    )
+  }
+}
+
 const handleAnalytics = async ({
   detail,
   user,
@@ -42,8 +54,12 @@ const handleAnalytics = async ({
       analytics?.logEvent('page_view', {
         page_referrer: referrer,
       })
+      analyticsDebugger('page_view', {
+        page_referrer: referrer,
+      })
     } else {
       analytics?.logEvent(args[0], args[1])
+      analyticsDebugger(args[0], args[1])
     }
   }
 

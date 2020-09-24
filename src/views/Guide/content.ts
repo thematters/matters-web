@@ -2,7 +2,7 @@ export default {
   zh_hant: /* html */ `
 <p>知道你初來乍到，需要一些指引，所以我們為作者們準備了一份超詳盡的實用指南。</p>
 
-<p>如何融入社區？如何找到我想看的文章？如何提取我在 Matters 獲得的寫作收益？想在 Matters 開心創作、交流，以下這兩篇指南，列出了所有你需要的資訊。</p>
+<p>如何融入社區？如何找到我想看的作品？如何提取我在 Matters 獲得的寫作收益？想在 Matters 開心創作、交流，以下這兩篇指南，列出了所有你需要的資訊。</p>
 
 <p><a className="u-link-green" href="https://matters.news/@hi176/matters-%E8%AE%80%E8%80%85%E5%B7%A5%E5%85%B7%E7%AE%B1-%E6%96%B0%E6%89%8B%E5%BF%85%E7%9C%8B-2020-08-14%E6%9B%B4%E6%96%B0-bafyreiarbkxluq3zqtl4mrq4i34roo2nfr46fnaqcqgp7mgjqyxj4apf6a">Matters 讀者工具箱 | 新手必看</a></p>
 
@@ -18,7 +18,7 @@ export default {
   zh_hans: /* html */ `
 <p>知道你初来乍到，需要一些指引，所以我们为作者们准备了一份超详尽的实用指南。</p>
 
-<p>如何融入社区？如何找到我想看的文章？如何提取我在 Matters 获得的写作收益？想在 Matters 开心创作、交流，以下这两篇指南，列出了所有你需要的信息。</p>
+<p>如何融入社区？如何找到我想看的作品？如何提取我在 Matters 获得的写作收益？想在 Matters 开心创作、交流，以下这两篇指南，列出了所有你需要的信息。</p>
 
 <p><a className="u-link-green" href="https://matters.news/@hi176/matters-%E8%AE%80%E8%80%85%E5%B7%A5%E5%85%B7%E7%AE%B1-%E6%96%B0%E6%89%8B%E5%BF%85%E7%9C%8B-2020-08-14%E6%9B%B4%E6%96%B0-bafyreiarbkxluq3zqtl4mrq4i34roo2nfr46fnaqcqgp7mgjqyxj4apf6a">Matters 读者工具箱 | 新手必看</a></p>
 

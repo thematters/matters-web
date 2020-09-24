@@ -131,8 +131,8 @@ const Complete: React.FC<Props> = ({ callback, recipient, targetId }) => {
             <header>
               <TextIcon size="sm" color="grey-darker">
                 <Translate
-                  zh_hant="支持過這篇文章的人也支持了"
-                  zh_hans="支持过这篇文章的人也支持了"
+                  zh_hant="支持過這篇作品的人也支持了"
+                  zh_hans="支持过这篇作品的人也支持了"
                 />
               </TextIcon>
 

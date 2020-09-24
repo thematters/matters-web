@@ -20,6 +20,7 @@ interface HeadProps {
   keywords?: string[]
   path?: string
   image?: string
+  noSuffix?: boolean
 }
 
 export const Head: React.FC<HeadProps> = (props) => {
@@ -31,7 +32,7 @@ export const Head: React.FC<HeadProps> = (props) => {
       : props.title
 
   const head = {
-    title: title ? `${title} - Matters` : 'Matters',
+    title: title ? (props.noSuffix ? title : `${title} - Matters`) : 'Matters',
     description:
       props.description || '一個自由、自主、永續的創作與公共討論空間',
     keywords: props.keywords
