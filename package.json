@@ -1,6 +1,6 @@
 {
   "name": "matters-web",
-  "version": "3.15.0",
+  "version": "3.16.0",
   "description": "codebase of Matters' website",
   "sideEffects": false,
   "author": "Matters <hi@matters.news>",
@@ -85,7 +85,7 @@
     "react-use-gesture": "^7.0.15",
     "react-virtualized": "^9.22.2",
     "react-waypoint": "^9.0.3",
-    "subscriptions-transport-ws": "^0.9.17",
+    "subscriptions-transport-ws": "^0.9.18",
     "use-debounce": "^3.4.3",
     "validator": "^13.1.1"
   },
