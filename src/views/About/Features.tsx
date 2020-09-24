@@ -56,8 +56,8 @@ const Features = () => (
           />
           <br />
           <Translate
-            zh_hant="38 篇文章，200 萬的閱讀量"
-            zh_hans="38 篇文章，200 万的阅读量"
+            zh_hant="38 篇作品，200 萬的閱讀量"
+            zh_hans="38 篇作品，200 万的阅读量"
           />
         </h3>
         <p>

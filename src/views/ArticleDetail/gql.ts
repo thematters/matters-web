@@ -21,7 +21,6 @@ export const ARTICLE_DETAIL_PUBLIC = gql`
       slug
       mediaHash
       state
-      public
       cover
       summary
       createdAt

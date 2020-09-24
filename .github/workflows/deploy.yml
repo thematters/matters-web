@@ -74,20 +74,10 @@ jobs:
         if: github.ref == 'refs/heads/develop' || github.base_ref == 'develop'
         run: cp .env.dev .env && npm run build
 
-      - name: Against SEO (develop)
-        if: github.ref == 'refs/heads/develop'
-        run: |
-          cp .ebextensions/http-basic-auth.config.dev .ebextensions/http-basic-auth.config
-
       # === `stage` branch ===
       - name: Build (stage)
         if: github.ref == 'refs/heads/stage' || github.base_ref == 'stage'
         run: cp .env.stage .env && npm run build
-
-      - name: Against SEO (stage)
-        if: github.ref == 'refs/heads/stage'
-        run: |
-          cp .ebextensions/http-basic-auth.config.dev .ebextensions/http-basic-auth.config
 
       # === `master` branch ===
       - name: Build (production)
@@ -125,7 +115,7 @@ jobs:
           region: ap-southeast-1
           deployment_package: deploy.zip
           use_existing_version_if_available: true
-          wait_for_deployment: false
+          wait_for_deployment: true
 
       # === `stage` branch ===
       - name: Upload Assets (stage)
@@ -146,7 +136,7 @@ jobs:
           region: ap-southeast-1
           deployment_package: deploy.zip
           use_existing_version_if_available: true
-          wait_for_deployment: false
+          wait_for_deployment: true
 
       # === `master` branch ===
       - name: Upload Assets (production)
@@ -167,6 +157,7 @@ jobs:
           region: ap-southeast-1
           deployment_package: deploy.zip
           use_existing_version_if_available: true
+          wait_for_deployment: true
 
       - name: Slack Notification
         if: always()
