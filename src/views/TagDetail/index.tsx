@@ -91,7 +91,13 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
               inCard={false}
             />
 
-            {isMaintainer && <DropdownActions isOwner={isOwner} tag={tag} />}
+            {isMaintainer && (
+              <DropdownActions
+                isOwner={isOwner}
+                isEditor={isEditor}
+                tag={tag}
+              />
+            )}
           </>
         }
         mode={isSmallUp ? 'solid-fixed' : 'transparent-absolute'}
