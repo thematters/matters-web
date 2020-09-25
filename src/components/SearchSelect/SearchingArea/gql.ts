@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { ArticleDigestDropdown, Tag, UserDigest } from '~/components'
+import { ArticleDigestDropdown, Tag, UserDigest } from './internal'
 
 export const SELECT_SEARCH = gql`
   query SelectSearch(
