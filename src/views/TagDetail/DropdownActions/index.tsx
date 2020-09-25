@@ -10,6 +10,7 @@ import {
   LanguageContext,
   Menu,
   TagDialog,
+  TagEditorDialog,
   TagLeaveDialog,
   TextIcon,
   Translate,
@@ -40,6 +41,7 @@ interface DropdownActionsProps {
 interface DialogProps {
   openTagAddSelectedArticlesDialog: () => void
   openTagDialog: () => void
+  openTagEditorDialog: () => void
   openTagLeaveDialog: () => void
 }
 
@@ -49,6 +51,7 @@ const BaseDropdownActions = ({
   isOwner,
   openTagAddSelectedArticlesDialog,
   openTagDialog,
+  openTagEditorDialog,
   openTagLeaveDialog,
 }: BaseDropdownActionsProps) => {
   const isSmallUp = useResponsive('sm-up')
@@ -67,16 +70,27 @@ const BaseDropdownActions = ({
       </Menu.Item>
 
       {isOwner && (
-        <Menu.Item onClick={openTagLeaveDialog}>
-          <TextIcon
-            icon={<IconRemoveMedium size="md" />}
-            color="red"
-            size="md"
-            spacing="base"
-          >
-            <Translate zh_hant="離開標籤" zh_hans="离开标签" />
-          </TextIcon>
-        </Menu.Item>
+        <>
+          <Menu.Item onClick={openTagEditorDialog}>
+            <TextIcon
+              icon={<IconRemoveMedium size="md" />}
+              size="md"
+              spacing="base"
+            >
+              <Translate zh_hant="管理社群" zh_hans="管理社群" />
+            </TextIcon>
+          </Menu.Item>
+          <Menu.Item onClick={openTagLeaveDialog}>
+            <TextIcon
+              icon={<IconRemoveMedium size="md" />}
+              color="red"
+              size="md"
+              spacing="base"
+            >
+              <Translate zh_hant="辭去權限" zh_hans="辞去权限" />
+            </TextIcon>
+          </Menu.Item>
+        </>
       )}
     </Menu>
   )
@@ -185,16 +199,25 @@ const DropdownActions = (props: DropdownActionsProps) => {
           {({ open: openTagAddSelectedArticlesDialog }) => (
             <TagLeaveDialog {...props}>
               {({ open: openTagLeaveDialog }) => (
-                <BaseDropdownActions
-                  {...props}
-                  openTagAddSelectedArticlesDialog={
-                    viewer.isFrozen ? forbid : openTagAddSelectedArticlesDialog
-                  }
-                  openTagDialog={viewer.isFrozen ? forbid : openTagDialog}
-                  openTagLeaveDialog={
-                    viewer.isFrozen ? forbid : openTagLeaveDialog
-                  }
-                />
+                <TagEditorDialog {...props}>
+                  {({ open: openTagEditorDialog }) => (
+                    <BaseDropdownActions
+                      {...props}
+                      openTagAddSelectedArticlesDialog={
+                        viewer.isFrozen
+                          ? forbid
+                          : openTagAddSelectedArticlesDialog
+                      }
+                      openTagDialog={viewer.isFrozen ? forbid : openTagDialog}
+                      openTagLeaveDialog={
+                        viewer.isFrozen ? forbid : openTagLeaveDialog
+                      }
+                      openTagEditorDialog={
+                        viewer.isFrozen ? forbid : openTagEditorDialog
+                      }
+                    />
+                  )}
+                </TagEditorDialog>
               )}
             </TagLeaveDialog>
           )}

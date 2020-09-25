@@ -29,10 +29,13 @@ type RichProps = {
 
   size?: 'sm' | 'lg'
   avatarBadge?: React.ReactNode
+  descriptionReplacement?: React.ReactNode
+  extraButton?: React.ReactNode
 
   hasFollow?: boolean
   hasState?: boolean
   hasUnblock?: boolean
+  hasDescriptionReplacement?: boolean
 } & CardProps &
   AvatarProps
 
@@ -72,10 +75,13 @@ const Rich = ({
 
   size = 'lg',
   avatarBadge,
+  descriptionReplacement,
+  extraButton,
 
   hasFollow = true,
   hasState = true,
   hasUnblock,
+  hasDescriptionReplacement = true,
 
   ...cardProps
 }: RichProps) => {
@@ -134,14 +140,18 @@ const Rich = ({
             {hasState && <FollowButton.State user={user} />}
           </header>
 
-          {user.info.description && (
+          {!hasDescriptionReplacement && user.info.description && (
             <p className="description">{user.info.description}</p>
+          )}
+          {descriptionReplacement && (
+            <p className="description">{descriptionReplacement}</p>
           )}
         </section>
 
         <section className="extra-button">
           {hasUnblock && <UnblockUserButton user={user} />}
           {hasFollow && <FollowButton user={user} size="md-s" />}
+          {extraButton}
         </section>
 
         <style jsx>{styles}</style>
