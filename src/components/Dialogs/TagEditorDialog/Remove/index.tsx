@@ -1,6 +1,7 @@
 import { Dialog, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import UPDATE_TAG_SETTING from '~/components/GQL/mutations/updateTagSetting'
+import updateTagMaintainers from '~/components/GQL/updates/tagMaintainers'
 
 import { ADD_TOAST } from '~/common/enums'
 
@@ -60,6 +61,13 @@ const TagRemoveEditor = ({ id, editor, close }: Props) => {
                 variables: {
                   input: { id, type: 'remove_editor', editors: [editor] },
                 },
+                update: (cache) =>
+                  updateTagMaintainers({
+                    cache,
+                    id,
+                    type: 'remove',
+                    editors: [editor],
+                  }),
               })
 
               if (!result) {

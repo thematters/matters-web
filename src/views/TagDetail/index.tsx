@@ -29,6 +29,7 @@ import { getQuery, toPath } from '~/common/utils'
 import TagDetailArticles from './Articles'
 import ArticlesCount from './ArticlesCount'
 import { TagDetailButtons } from './Buttons'
+import Community from './Community'
 import Cover from './Cover'
 import DropdownActions from './DropdownActions'
 import Followers from './Followers'
@@ -41,7 +42,7 @@ import {
   TagDetailPublic_node_Tag,
 } from './__generated__/TagDetailPublic'
 
-type TagFeedType = 'latest' | 'selected'
+type TagFeedType = 'latest' | 'selected' | 'community'
 
 const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
   const isSmallUp = useResponsive('sm-up')
@@ -50,14 +51,16 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
   const path = toPath({ page: 'tagDetail', id: tag.id })
 
   // feed type
-  const hasSelected = (tag?.selectedArticles.totalCount || 0) > 0
+  const hasSelectedFeed = (tag?.selectedArticles.totalCount || 0) > 0
   const [feed, setFeed] = useState<TagFeedType>(
-    hasSelected ? 'selected' : 'latest'
+    hasSelectedFeed ? 'selected' : 'latest'
   )
   const isSelected = feed === 'selected'
+  const isLatest = feed === 'latest'
+  const isCommunity = feed === 'community'
 
   useEffect(() => {
-    if (!hasSelected && isSelected) {
+    if (!hasSelectedFeed && isSelected) {
       setFeed('latest')
     }
   })
@@ -129,18 +132,25 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
         </section>
 
         <Tabs sticky>
-          {hasSelected && (
+          {hasSelectedFeed && (
             <Tabs.Tab selected={isSelected} onClick={() => setFeed('selected')}>
               <Translate id="featured" />
             </Tabs.Tab>
           )}
 
-          <Tabs.Tab selected={!isSelected} onClick={() => setFeed('latest')}>
+          <Tabs.Tab selected={isLatest} onClick={() => setFeed('latest')}>
             <Translate id="latest" />
+          </Tabs.Tab>
+
+          <Tabs.Tab selected={isCommunity} onClick={() => setFeed('community')}>
+            <Translate zh_hant="社群" zh_hans="社群" />
           </Tabs.Tab>
         </Tabs>
 
-        <TagDetailArticles tagId={tag.id} selected={isSelected} />
+        {(isSelected || isLatest) && (
+          <TagDetailArticles tagId={tag.id} selected={isSelected} />
+        )}
+        {isCommunity && <Community id={tag.id} isOwner={isOwner} />}
       </PullToRefresh>
 
       <style jsx>{styles}</style>

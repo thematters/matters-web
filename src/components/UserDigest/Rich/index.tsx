@@ -81,7 +81,7 @@ const Rich = ({
   hasFollow = true,
   hasState = true,
   hasUnblock,
-  hasDescriptionReplacement = true,
+  hasDescriptionReplacement = false,
 
   ...cardProps
 }: RichProps) => {

@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import { UserDigest } from '~/components/UserDigest'
 
 export default gql`
-  query TagEditors($id: ID!) {
+  query TagMaintainers($id: ID!) {
     node(input: { id: $id }) {
       ... on Tag {
         id
@@ -11,7 +11,7 @@ export default gql`
           id
           ...UserDigestRichUserPublic
         }
-        editors(input: { excludeAdmin: true }) {
+        editors(input: { excludeAdmin: true, excludeOwner: true }) {
           id
           ...UserDigestRichUserPublic
         }

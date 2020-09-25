@@ -9,11 +9,11 @@ import {
   UserDigest,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
+import TAG_MAINTAINERS from '~/components/GQL/queries/tagMaintainers'
 
-import TAG_EDITORS from './gql'
 import styles from './styles.css'
 
-import { TagEditors } from './__generated__/TagEditors'
+import { TagMaintainers } from '~/components/GQL/queries/__generated__/TagMaintainers'
 
 /**
  * This a sub-component of <TagEditorDialog>. It shows editors of a tag, and
@@ -55,7 +55,7 @@ const RemoveButton = ({ remove }: { remove: (editor: string) => void }) => (
 )
 
 const TagEditorList = ({ id, close, toAddStep, toRemoveStep }: Props) => {
-  const { data, loading, error } = useQuery<TagEditors>(TAG_EDITORS, {
+  const { data, loading, error } = useQuery<TagMaintainers>(TAG_MAINTAINERS, {
     variables: { id },
   })
 
@@ -73,10 +73,10 @@ const TagEditorList = ({ id, close, toAddStep, toRemoveStep }: Props) => {
     return null
   }
 
-  // filter out owner
-  const editors = (tag.editors || []).filter(
-    (editor) => editor.id !== tag.owner?.id
-  )
+  const editors = tag.editors || []
+  const count = editors.length
+  const isAllowAdd = count < 4
+  const isHavingEditors = count > 0
 
   return (
     <>
@@ -100,7 +100,7 @@ const TagEditorList = ({ id, close, toAddStep, toRemoveStep }: Props) => {
           )}
         </section>
 
-        {editors.length > 0 && (
+        {isHavingEditors && (
           <>
             <hr className="divider" />
             <ul>
@@ -134,7 +134,7 @@ const TagEditorList = ({ id, close, toAddStep, toRemoveStep }: Props) => {
             />
             <span className="count">
               {' '}
-              {editors.length}
+              {count}
               {'/4 '}
             </span>
             <Translate zh_hant="名協作者" zh_hans="名协作者" />
@@ -142,15 +142,17 @@ const TagEditorList = ({ id, close, toAddStep, toRemoveStep }: Props) => {
         </Dialog.Message>
       </Dialog.Content>
 
-      <Dialog.Footer>
-        <Dialog.Footer.Button
-          textColor="white"
-          bgColor="green"
-          onClick={toAddStep}
-        >
-          <Translate zh_hant="新增協作者" zh_hans="新增协作者" />
-        </Dialog.Footer.Button>
-      </Dialog.Footer>
+      {isAllowAdd && (
+        <Dialog.Footer>
+          <Dialog.Footer.Button
+            textColor="white"
+            bgColor="green"
+            onClick={toAddStep}
+          >
+            <Translate zh_hant="新增協作者" zh_hans="新增协作者" />
+          </Dialog.Footer.Button>
+        </Dialog.Footer>
+      )}
 
       <style jsx>{styles}</style>
     </>

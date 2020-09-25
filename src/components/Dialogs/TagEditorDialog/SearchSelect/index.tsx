@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { Dialog, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import UPDATE_TAG_SETTING from '~/components/GQL/mutations/updateTagSetting'
+import updateTagMaintainers from '~/components/GQL/updates/tagMaintainers'
 import SearchingArea, {
   SelectNode,
 } from '~/components/SearchSelect/SearchingArea'
@@ -66,6 +67,13 @@ const TagSearchSelectEditor = ({ id, close, toListStep }: Props) => {
         .map(({ node }) => node.id)
       const result = await update({
         variables: { input: { id, type: 'add_editor', editors } },
+        update: (cache) =>
+          updateTagMaintainers({
+            cache,
+            id,
+            type: 'add',
+            editors: stagingNodes,
+          }),
       })
 
       if (!result) {
