@@ -12,9 +12,10 @@ import { UpdateTagSetting } from '~/components/GQL/mutations/__generated__/Updat
 
 interface Props {
   children: ({ open }: { open: () => void }) => React.ReactNode
+  isOwner?: boolean
 }
 
-const BaseDialog = ({ children }: Props) => {
+const BaseDialog = ({ children, isOwner }: Props) => {
   const [showDialog, setShowDialog] = useState(true)
   const open = () => setShowDialog(true)
   const close = () => setShowDialog(false)
@@ -54,7 +55,9 @@ const BaseDialog = ({ children }: Props) => {
             onClick={async () => {
               try {
                 const result = await update({
-                  variables: { input: { id, type: 'leave' } },
+                  variables: {
+                    input: { id, type: isOwner ? 'leave' : 'leave_editor' },
+                  },
                 })
 
                 if (!result) {

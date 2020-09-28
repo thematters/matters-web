@@ -6,10 +6,12 @@ import {
   IconAddMedium,
   IconEdit,
   IconMoreLarge,
+  IconProfileMedium,
   IconRemoveMedium,
   LanguageContext,
   Menu,
   TagDialog,
+  TagEditorDialog,
   TagLeaveDialog,
   TextIcon,
   Translate,
@@ -34,12 +36,14 @@ import { TagDetailPublic_node_Tag } from '../__generated__/TagDetailPublic'
 
 interface DropdownActionsProps {
   isOwner: boolean
+  isEditor: boolean
   tag: TagDetailPublic_node_Tag
 }
 
 interface DialogProps {
   openTagAddSelectedArticlesDialog: () => void
   openTagDialog: () => void
+  openTagEditorDialog: () => void
   openTagLeaveDialog: () => void
 }
 
@@ -47,19 +51,23 @@ type BaseDropdownActionsProps = DropdownActionsProps & DialogProps
 
 const BaseDropdownActions = ({
   isOwner,
+  isEditor,
   openTagAddSelectedArticlesDialog,
   openTagDialog,
+  openTagEditorDialog,
   openTagLeaveDialog,
 }: BaseDropdownActionsProps) => {
   const isSmallUp = useResponsive('sm-up')
 
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
     <Menu width={isInDropdown ? 'sm' : undefined}>
-      <Menu.Item onClick={openTagDialog}>
-        <TextIcon icon={<IconEdit size="md" />} size="md" spacing="base">
-          <Translate id="editTag" />
-        </TextIcon>
-      </Menu.Item>
+      {isOwner && (
+        <Menu.Item onClick={openTagDialog}>
+          <TextIcon icon={<IconEdit size="md" />} size="md" spacing="base">
+            <Translate id="editTag" />
+          </TextIcon>
+        </Menu.Item>
+      )}
       <Menu.Item onClick={openTagAddSelectedArticlesDialog}>
         <TextIcon icon={<IconAddMedium size="md" />} size="md" spacing="base">
           <Translate id="tagAddSelectedArticle" />
@@ -67,6 +75,17 @@ const BaseDropdownActions = ({
       </Menu.Item>
 
       {isOwner && (
+        <Menu.Item onClick={openTagEditorDialog}>
+          <TextIcon
+            icon={<IconProfileMedium size="md" />}
+            size="md"
+            spacing="base"
+          >
+            <Translate zh_hant="管理社群" zh_hans="管理社群" />
+          </TextIcon>
+        </Menu.Item>
+      )}
+      {(isOwner || isEditor) && (
         <Menu.Item onClick={openTagLeaveDialog}>
           <TextIcon
             icon={<IconRemoveMedium size="md" />}
@@ -74,7 +93,7 @@ const BaseDropdownActions = ({
             size="md"
             spacing="base"
           >
-            <Translate zh_hant="離開標籤" zh_hans="离开标签" />
+            <Translate zh_hant="辭去權限" zh_hans="辞去权限" />
           </TextIcon>
         </Menu.Item>
       )}
@@ -185,16 +204,25 @@ const DropdownActions = (props: DropdownActionsProps) => {
           {({ open: openTagAddSelectedArticlesDialog }) => (
             <TagLeaveDialog {...props}>
               {({ open: openTagLeaveDialog }) => (
-                <BaseDropdownActions
-                  {...props}
-                  openTagAddSelectedArticlesDialog={
-                    viewer.isFrozen ? forbid : openTagAddSelectedArticlesDialog
-                  }
-                  openTagDialog={viewer.isFrozen ? forbid : openTagDialog}
-                  openTagLeaveDialog={
-                    viewer.isFrozen ? forbid : openTagLeaveDialog
-                  }
-                />
+                <TagEditorDialog {...props}>
+                  {({ open: openTagEditorDialog }) => (
+                    <BaseDropdownActions
+                      {...props}
+                      openTagAddSelectedArticlesDialog={
+                        viewer.isFrozen
+                          ? forbid
+                          : openTagAddSelectedArticlesDialog
+                      }
+                      openTagDialog={viewer.isFrozen ? forbid : openTagDialog}
+                      openTagLeaveDialog={
+                        viewer.isFrozen ? forbid : openTagLeaveDialog
+                      }
+                      openTagEditorDialog={
+                        viewer.isFrozen ? forbid : openTagEditorDialog
+                      }
+                    />
+                  )}
+                </TagEditorDialog>
               )}
             </TagLeaveDialog>
           )}
