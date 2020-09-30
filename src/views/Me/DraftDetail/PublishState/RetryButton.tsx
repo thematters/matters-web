@@ -9,7 +9,6 @@ const RETRY_PUBLISH = gql`
   mutation RetryPublish($id: ID!) {
     retryPublish: publishArticle(input: { id: $id }) {
       id
-      scheduledAt
       publishState
     }
   }
@@ -21,7 +20,6 @@ const RetryButton = ({ id }: { id: string }) => {
     optimisticResponse: {
       retryPublish: {
         id,
-        scheduledAt: new Date(Date.now() + 1000).toISOString(),
         publishState: 'pending' as any,
         __typename: 'Draft',
       },
