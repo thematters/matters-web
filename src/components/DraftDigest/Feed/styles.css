@@ -5,9 +5,8 @@ footer {
 
   & .left,
   & .right {
-    & :global(> *) {
-      padding-right: var(--spacing-loose);
-      vertical-align: middle;
+    & :global(> * + *) {
+      padding-left: var(--spacing-loose);
     }
   }
 }
