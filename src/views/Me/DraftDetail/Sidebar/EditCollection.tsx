@@ -71,6 +71,7 @@ const EditCollection = ({ draft, setSaveStatus }: EditCollectionProps) => {
     articles: ArticleDigestDropdownArticle[]
   ) => {
     setSaveStatus('saving')
+
     try {
       await setCollection({
         variables: {
@@ -84,7 +85,9 @@ const EditCollection = ({ draft, setSaveStatus }: EditCollectionProps) => {
     }
   }
 
-  const [setCollection] = useMutation<SetDraftCollection>(SET_DRAFT_COLLECTION)
+  const [setCollection, { loading: saving }] = useMutation<SetDraftCollection>(
+    SET_DRAFT_COLLECTION
+  )
   const { data, loading, error } = useQuery<DraftCollectionQuery>(
     DRAFT_COLLECTION,
     {
@@ -110,6 +113,7 @@ const EditCollection = ({ draft, setSaveStatus }: EditCollectionProps) => {
     <SidebarCollection
       articles={(edges && edges.map(({ node }) => node)) || []}
       onEdit={handleCollectionChange}
+      saving={saving}
       disabled={isPending || isPublished}
     />
   )
