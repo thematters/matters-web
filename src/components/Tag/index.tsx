@@ -43,6 +43,7 @@ export const Tag = ({
     tag: true,
     [type]: type,
     active,
+    disabled,
   })
 
   const path = toPath({

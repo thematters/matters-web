@@ -9,12 +9,13 @@ import { ADD_TOAST } from '~/common/enums'
 import styles from './styles.css'
 
 import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
+import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
 import { EditArticle } from './__generated__/EditArticle'
 
 interface EditModeHeaderProps {
   id: string
   mediaHash: string
-  editModeTags: string[]
+  editModeTags: DigestTag[]
   editModeCollection: ArticleDigestDropdownArticle[]
   onEditSaved: () => any
 }
@@ -62,7 +63,7 @@ const EditModeHeader = ({
         variables: {
           id,
           mediaHash,
-          tags: editModeTags,
+          tags: editModeTags.map(({ content }) => content),
           collection: editModeCollection.map(({ id: articleId }) => articleId),
           first: null,
         },

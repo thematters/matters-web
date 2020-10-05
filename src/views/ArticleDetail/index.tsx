@@ -48,6 +48,7 @@ import Wall from './Wall'
 
 import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
+import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
 import { ArticleDetailPublic } from './__generated__/ArticleDetailPublic'
 import { ArticleTranslation } from './__generated__/ArticleTranslation'
 
@@ -167,7 +168,7 @@ const ArticleDetail = () => {
 
   // edit mode
   const [editMode, setEditMode] = useState(false)
-  const [editModeTags, setEditModeTags] = useState<string[]>([])
+  const [editModeTags, setEditModeTags] = useState<DigestTag[]>([])
   const [editModeCollection, setEditModeCollection] = useState<
     ArticleDigestDropdownArticle[]
   >([])

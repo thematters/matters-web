@@ -4,6 +4,7 @@ import _uniq from 'lodash/uniq'
 import SidebarTags from '~/components/Editor/Sidebar/Tags'
 import { useMutation } from '~/components/GQL'
 
+import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
 import { EditTagsDraft } from './__generated__/EditTagsDraft'
 import { UpdateDraftTags } from './__generated__/UpdateDraftTags'
 
@@ -33,27 +34,19 @@ interface EditTagsProps {
 }
 
 const EditTags = ({ draft, setSaveStatus }: EditTagsProps) => {
-  const [updateTags] = useMutation<UpdateDraftTags>(UPDATE_TAGS)
+  const [updateTags, { loading }] = useMutation<UpdateDraftTags>(UPDATE_TAGS)
   const tags = draft.tags || []
   const isPending = draft.publishState === 'pending'
   const isPublished = draft.publishState === 'published'
 
-  const addTag = async (tag: string) => {
+  const onEdit = async (newTags: DigestTag[]) => {
     setSaveStatus('saving')
     try {
       await updateTags({
-        variables: { id: draft.id, tags: _uniq(tags.concat(tag)) },
-      })
-      setSaveStatus('saved')
-    } catch (e) {
-      setSaveStatus('saveFailed')
-    }
-  }
-  const deleteTag = async (tag: string) => {
-    setSaveStatus('saving')
-    try {
-      await updateTags({
-        variables: { id: draft.id, tags: tags.filter((it) => it !== tag) },
+        variables: {
+          id: draft.id,
+          tags: _uniq(newTags.map(({ content }) => content)),
+        },
       })
       setSaveStatus('saved')
     } catch (e) {
@@ -63,9 +56,17 @@ const EditTags = ({ draft, setSaveStatus }: EditTagsProps) => {
 
   return (
     <SidebarTags
-      tags={tags}
-      onAddTag={addTag}
-      onDeleteTag={deleteTag}
+      tags={tags.map((content) => ({
+        __typename: 'Tag',
+        id: content,
+        content,
+        articles: {
+          __typename: 'ArticleConnection',
+          totalCount: 0,
+        },
+      }))}
+      onEdit={onEdit}
+      saving={loading}
       disabled={isPending || isPublished}
     />
   )

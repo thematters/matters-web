@@ -71,7 +71,7 @@ const Main: React.FC<MainProps> = ({ aside, bgColor, keepAside, children }) => {
       <article className={articleClasses}>{children}</article>
 
       <aside className={asideClasses}>
-        {!isInSearch && (
+        {!isInSearch && !isInDraftDetail && (
           <section className="u-lg-down-hide">
             <SearchBar />
           </section>

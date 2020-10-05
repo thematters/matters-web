@@ -10,12 +10,13 @@ import { QueryError } from '~/components/GQL'
 import articleFragments from '~/components/GQL/fragments/article'
 
 import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
+import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
 import { EditModeArticle } from './__generated__/EditModeArticle'
 
 interface EditModeSidebarProps {
   mediaHash: string
-  editModeTags: string[]
-  setEditModeTags: (tags: string[]) => any
+  editModeTags: DigestTag[]
+  setEditModeTags: (tags: DigestTag[]) => any
   editModeCollection: ArticleDigestDropdownArticle[]
   setEditModeCollection: (articles: ArticleDigestDropdownArticle[]) => any
 }
@@ -52,7 +53,7 @@ const EditModeSidebar = ({
     }
   )
   const article = data?.article
-  const tags = article?.tags?.map(({ content }) => content) || []
+  const tags = article?.tags || []
   const collection = article?.collection.edges?.map(({ node }) => node) || []
 
   useEffect(() => {
@@ -76,10 +77,7 @@ const EditModeSidebar = ({
     <>
       <SidebarTags
         tags={editModeTags.length > 0 ? editModeTags : tags}
-        onAddTag={(tag) => setEditModeTags(_uniq(editModeTags.concat(tag)))}
-        onDeleteTag={(tag) =>
-          setEditModeTags(editModeTags.filter((it) => it !== tag))
-        }
+        onEdit={(newTags: DigestTag[]) => setEditModeTags(_uniq(newTags))}
       />
       <SidebarCollection
         articles={

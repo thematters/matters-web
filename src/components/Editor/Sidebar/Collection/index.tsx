@@ -24,7 +24,7 @@ const Collection = ({
 }: CollectionProps) => {
   return (
     <SearchSelectDialog
-      title="tagAddArticle"
+      title="extendArticle"
       hint="hintEditCollection"
       searchType="Article"
       onSave={(nodes: SearchSelectNode[]) =>
@@ -40,21 +40,23 @@ const Collection = ({
           onClick={openAddMyArticlesDialog}
           disabled={disabled}
         >
-          <ul>
-            {articles.map((article) => (
-              <li key={article.id}>
-                <ArticleDigestDropdown
-                  article={article}
-                  titleTextSize="sm"
-                  spacing={['base', 'base']}
-                  bgColor="none"
-                  bgActiveColor="grey-lighter"
-                />
-              </li>
-            ))}
+          {articles.length > 0 && (
+            <ul>
+              {articles.map((article) => (
+                <li key={article.id}>
+                  <ArticleDigestDropdown
+                    article={article}
+                    titleTextSize="sm"
+                    spacing={['base', 'base']}
+                    bgColor="none"
+                    bgActiveColor="grey-lighter"
+                  />
+                </li>
+              ))}
 
-            <style jsx>{styles}</style>
-          </ul>
+              <style jsx>{styles}</style>
+            </ul>
+          )}
         </Box>
       )}
     </SearchSelectDialog>

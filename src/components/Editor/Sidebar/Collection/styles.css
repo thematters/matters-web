@@ -1,4 +1,6 @@
 ul {
+  padding-top: var(--spacing-base);
+
   & li {
     @mixin border-top-grey;
 
