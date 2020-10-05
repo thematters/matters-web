@@ -5,6 +5,7 @@ import {
   EmptySearch,
   InfiniteScroll,
   Spinner,
+  toDigestTag,
   usePublicLazyQuery,
 } from '~/components'
 
@@ -13,6 +14,7 @@ import { analytics, mergeConnections } from '~/common/utils'
 
 import SearchSelectNode from '../SearchSelectNode'
 import styles from '../styles.css'
+import CreateTag from './CreateTag'
 import { SELECT_SEARCH } from './gql'
 import SearchInput, { SearchType as SearchInputType } from './SearchInput'
 
@@ -43,10 +45,13 @@ export type SelectUser = SelectSearch_search_edges_node_User
 interface SearchingAreaProps {
   searchType: SearchType
   searchFilter?: SearchFilter
+
   inSearchingArea: boolean
   toStagingArea: () => void
   toSearchingArea: () => void
   addNodeToStaging: (node: SelectNode) => void
+
+  creatable?: boolean
 }
 
 const SearchingArea: React.FC<SearchingAreaProps> = ({
@@ -57,6 +62,8 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
   toStagingArea,
   toSearchingArea,
   addNodeToStaging,
+
+  creatable,
 }) => {
   // States of Searching
   const [searching, setSearching] = useState(false)
@@ -76,7 +83,6 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
   // load next page
   const isArticle = searchType === 'Article'
   const isTag = searchType === 'Tag'
-  // const isUser = searchType === 'User'
   const loadMore = async () => {
     analytics.trackEvent('load_more', {
       type: isArticle ? 'search_article' : isTag ? 'search_tag' : 'search_user',
@@ -133,6 +139,14 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
     setSearchingNodes(nodes)
   }, [loading, nodeIds])
 
+  const canCreateTag =
+    isTag &&
+    searchKey &&
+    creatable &&
+    !nodes.some(
+      (node) => node.__typename === 'Tag' && node.content === searchKey
+    )
+
   /**
    * Render
    */
@@ -150,14 +164,23 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
         <section className="area">
           {searching && <Spinner />}
 
-          {!searching && nodes.length <= 0 && <EmptySearch />}
+          {!searching && nodes.length <= 0 && !canCreateTag && <EmptySearch />}
 
-          {!searching && nodes.length > 0 && (
+          {!searching && (nodes.length > 0 || canCreateTag) && (
             <InfiniteScroll
               hasNextPage={!!pageInfo?.hasNextPage}
               loadMore={loadMore}
             >
               <ul className="nodes">
+                {canCreateTag && (
+                  <li>
+                    <CreateTag
+                      tag={toDigestTag(searchKey)}
+                      onClick={addNodeToStaging}
+                    />
+                  </li>
+                )}
+
                 {searchingNodes.map((node) => (
                   <li key={node.id}>
                     <SearchSelectNode node={node} onClick={addNodeToStaging} />

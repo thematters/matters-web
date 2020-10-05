@@ -27,6 +27,7 @@ const AddTags = ({ tags, onEdit, saving, disabled }: AddTagsProps) => {
       onSave={(nodes: SearchSelectNode[]) => onEdit(nodes as DigestTag[])}
       nodes={tags}
       saving={saving}
+      creatable
     >
       {({ open: openAddMyArticlesDialog }) => (
         <Box

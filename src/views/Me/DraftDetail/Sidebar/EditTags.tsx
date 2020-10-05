@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 import _uniq from 'lodash/uniq'
 
+import { toDigestTag } from '~/components'
 import SidebarTags from '~/components/Editor/Sidebar/Tags'
 import { useMutation } from '~/components/GQL'
 
@@ -54,17 +55,12 @@ const EditTags = ({ draft, setSaveStatus }: EditTagsProps) => {
     }
   }
 
+  // convert to DigestTag since `draft.tags` only contain content
+  const normalizedTags = tags.map(toDigestTag)
+
   return (
     <SidebarTags
-      tags={tags.map((content) => ({
-        __typename: 'Tag',
-        id: content,
-        content,
-        articles: {
-          __typename: 'ArticleConnection',
-          totalCount: 0,
-        },
-      }))}
+      tags={normalizedTags}
       onEdit={onEdit}
       saving={loading}
       disabled={isPending || isPublished}
