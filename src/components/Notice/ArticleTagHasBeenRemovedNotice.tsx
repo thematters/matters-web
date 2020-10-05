@@ -26,8 +26,8 @@ const ArticleTagHasBeenRemovedNotice = ({ notice }: { notice: NoticeType }) => {
         <NoticeHead notice={notice}>
           <NoticeActorName user={notice.actor} />{' '}
           <Translate
-            zh_hant="將標籤從你的作品移除"
-            zh_hans="将标签從你的作品移除"
+            zh_hant="將你的作品從標籤中拿走了"
+            zh_hans="将你的作品从标签中拿走了"
           />
         </NoticeHead>
 
