@@ -45,5 +45,13 @@ aside {
     margin-right: 0 !important;
     border-right: none;
     border-left: none;
+
+    &.in-draft-detail {
+      padding-top: var(--global-header-height);
+
+      & :global(> * + *) {
+        margin-top: var(--spacing-loose);
+      }
+    }
   }
 }

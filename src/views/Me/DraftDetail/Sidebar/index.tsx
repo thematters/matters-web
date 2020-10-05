@@ -1,21 +1,20 @@
 import gql from 'graphql-tag'
 
-import AddCover from './AddCover'
 import EditCollection from './EditCollection'
+import EditCover from './EditCover'
 import EditTags from './EditTags'
 
 import { DraftSidebarDraft } from './__generated__/DraftSidebarDraft'
 
 interface SidebarProps {
   draft: DraftSidebarDraft
-  setSaveStatus: (status: 'saved' | 'saving' | 'saveFailed') => void
 }
 
-const Sidebar = ({ draft, setSaveStatus }: SidebarProps) => (
+const Sidebar = ({ draft }: SidebarProps) => (
   <>
-    <AddCover draft={draft} setSaveStatus={setSaveStatus} />
-    <EditTags draft={draft} setSaveStatus={setSaveStatus} />
-    <EditCollection draft={draft} setSaveStatus={setSaveStatus} />
+    <EditCover draft={draft} />
+    <EditTags draft={draft} />
+    <EditCollection draft={draft} />
   </>
 )
 
@@ -23,11 +22,11 @@ Sidebar.fragments = {
   draft: gql`
     fragment DraftSidebarDraft on Draft {
       id
-      ...AddCoverDraft
+      ...EditCoverDraft
       ...EditTagsDraft
       ...EditCollectionDraft
     }
-    ${AddCover.fragments.draft}
+    ${EditCover.fragments.draft}
     ${EditTags.fragments.draft}
     ${EditCollection.fragments.draft}
   `,

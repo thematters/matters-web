@@ -31,28 +31,21 @@ const UPDATE_TAGS = gql`
 
 interface EditTagsProps {
   draft: EditTagsDraft
-  setSaveStatus: (status: 'saved' | 'saving' | 'saveFailed') => void
 }
 
-const EditTags = ({ draft, setSaveStatus }: EditTagsProps) => {
+const EditTags = ({ draft }: EditTagsProps) => {
   const [updateTags, { loading }] = useMutation<UpdateDraftTags>(UPDATE_TAGS)
   const tags = draft.tags || []
   const isPending = draft.publishState === 'pending'
   const isPublished = draft.publishState === 'published'
 
-  const onEdit = async (newTags: DigestTag[]) => {
-    setSaveStatus('saving')
-    try {
-      await updateTags({
-        variables: {
-          id: draft.id,
-          tags: _uniq(newTags.map(({ content }) => content)),
-        },
-      })
-      setSaveStatus('saved')
-    } catch (e) {
-      setSaveStatus('saveFailed')
-    }
+  const onEdit = (newTags: DigestTag[]) => {
+    updateTags({
+      variables: {
+        id: draft.id,
+        tags: _uniq(newTags.map(({ content }) => content)),
+      },
+    })
   }
 
   // convert to DigestTag since `draft.tags` only contain content

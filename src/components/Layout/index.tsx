@@ -64,6 +64,7 @@ const Main: React.FC<MainProps> = ({ aside, bgColor, keepAside, children }) => {
   const asideClasses = classNames({
     'l-col-three-right': true,
     'u-lg-down-hide': !keepAside,
+    'in-draft-detail': isInDraftDetail,
   })
 
   return (

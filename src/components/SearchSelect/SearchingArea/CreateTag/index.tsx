@@ -10,8 +10,6 @@ interface CreateTagProps {
 }
 
 const CreateTag: React.FC<CreateTagProps> = ({ tag, onClick }) => {
-  console.log({ tag })
-
   return (
     <Card spacing={['base', 'base']} onClick={() => onClick(tag)}>
       <section className="add-tag">

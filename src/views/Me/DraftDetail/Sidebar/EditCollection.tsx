@@ -59,30 +59,20 @@ const SET_DRAFT_COLLECTION = gql`
 
 interface EditCollectionProps {
   draft: EditCollectionDraft
-  setSaveStatus: (status: 'saved' | 'saving' | 'saveFailed') => void
 }
 
-const EditCollection = ({ draft, setSaveStatus }: EditCollectionProps) => {
+const EditCollection = ({ draft }: EditCollectionProps) => {
   const draftId = draft.id
   const isPending = draft.publishState === 'pending'
   const isPublished = draft.publishState === 'published'
 
-  const handleCollectionChange = async (
-    articles: ArticleDigestDropdownArticle[]
-  ) => {
-    setSaveStatus('saving')
-
-    try {
-      await setCollection({
-        variables: {
-          id: draft.id,
-          collection: _uniq(articles.map(({ id }) => id)),
-        },
-      })
-      setSaveStatus('saved')
-    } catch (e) {
-      setSaveStatus('saveFailed')
-    }
+  const handleCollectionChange = (articles: ArticleDigestDropdownArticle[]) => {
+    setCollection({
+      variables: {
+        id: draft.id,
+        collection: _uniq(articles.map(({ id }) => id)),
+      },
+    })
   }
 
   const [setCollection, { loading: saving }] = useMutation<SetDraftCollection>(
