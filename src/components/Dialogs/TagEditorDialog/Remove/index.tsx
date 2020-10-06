@@ -5,7 +5,10 @@ import updateTagMaintainers from '~/components/GQL/updates/tagMaintainers'
 
 import { ADD_TOAST } from '~/common/enums'
 
+import styles from './styles.css'
+
 import { UpdateTagSetting } from '~/components/GQL/mutations/__generated__/UpdateTagSetting'
+import { TagMaintainers_node_Tag_editors as TagEditor } from '~/components/GQL/queries/__generated__/TagMaintainers'
 
 /**
  * This a sub-component of <TagEditorDialog>. It ask user to confirm
@@ -23,7 +26,7 @@ import { UpdateTagSetting } from '~/components/GQL/mutations/__generated__/Updat
  */
 interface Props {
   id: string
-  editor: string
+  editor: TagEditor
 
   close: () => void
 }
@@ -43,9 +46,12 @@ const TagRemoveEditor = ({ id, editor, close }: Props) => {
 
       <Dialog.Message>
         <p>
+          <Translate zh_hant="移除後" zh_hans="移除后" />
+          {'， '}
+          <span className="name">{editor.displayName}</span>{' '}
           <Translate
-            zh_hant="移除後，該用戶將無法繼續參與「精選」作品管理。"
-            zh_hans="移除后，该用户将无法继续参与「精选」作品管理。"
+            zh_hant="將無法繼續參與「精選」作品管理。"
+            zh_hans="将无法继续参与「精选」作品管理。"
           />
         </p>
       </Dialog.Message>
@@ -59,14 +65,14 @@ const TagRemoveEditor = ({ id, editor, close }: Props) => {
             try {
               const result = await update({
                 variables: {
-                  input: { id, type: 'remove_editor', editors: [editor] },
+                  input: { id, type: 'remove_editor', editors: [editor.id] },
                 },
                 update: (cache) =>
                   updateTagMaintainers({
                     cache,
                     id,
                     type: 'remove',
-                    editors: [editor],
+                    editors: [editor.id],
                   }),
               })
 
@@ -106,6 +112,7 @@ const TagRemoveEditor = ({ id, editor, close }: Props) => {
           <Translate zh_hant="取消" zh_hans="取消" />
         </Dialog.Footer.Button>
       </Dialog.Footer>
+      <style jsx>{styles}</style>
     </>
   )
 }

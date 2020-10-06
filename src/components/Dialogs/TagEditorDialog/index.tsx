@@ -9,6 +9,8 @@ import TagEditorList from './List'
 import TagRemoveEditor from './Remove'
 import TagSearchSelectEditor from './SearchSelect'
 
+import { TagMaintainers_node_Tag_editors as TagEditor } from '~/components/GQL/queries/__generated__/TagMaintainers'
+
 /**
  * TagEditorDialog is composed of three steps: list, add and remove.
  *
@@ -30,7 +32,7 @@ const BaseDialog = ({ children }: Props) => {
   const defaultStep = 'list'
 
   const [showDialog, setShowDialog] = useState(true)
-  const [removeEditor, setRemoveEditor] = useState<string>()
+  const [removeEditor, setRemoveEditor] = useState<TagEditor>()
   const { currStep, forward, reset } = useStep<Step>(defaultStep)
 
   const open = () => {
@@ -59,7 +61,7 @@ const BaseDialog = ({ children }: Props) => {
             id={id}
             close={close}
             toAddStep={() => forward('add')}
-            toRemoveStep={(editor: string) => {
+            toRemoveStep={(editor: TagEditor) => {
               setRemoveEditor(editor)
               forward('remove')
             }}
