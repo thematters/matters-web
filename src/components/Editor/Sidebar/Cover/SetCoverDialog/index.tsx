@@ -1,18 +1,23 @@
 import { useState } from 'react'
 
-import { Dialog, IconCheckedWithBorderMedium, Translate } from '~/components'
+import { Dialog, Translate } from '~/components'
 
+import Selector from './Selector'
 import styles from './styles.css'
+import Uploader, { UploadEntity } from './Uploader'
 
 import { Asset } from '~/components/GQL/fragments/__generated__/Asset'
 
-interface SetCoverDialogProps {
+export type BaseSetCoverDialogProps = {
   cover: string
   assets: Asset[]
 
-  onSave: (asset: Asset) => Promise<any>
+  onEdit: (asset: Asset) => any
+  refetchAssets: () => any
   saving?: boolean
+} & UploadEntity
 
+type SetCoverDialogProps = BaseSetCoverDialogProps & {
   children: ({ open }: { open: () => void }) => React.ReactNode
 }
 
@@ -20,10 +25,12 @@ const SetCoverDialog = ({
   cover,
   assets,
 
-  onSave,
+  onEdit,
   saving,
 
   children,
+
+  ...uploadEntity
 }: SetCoverDialogProps) => {
   // dialog
   const [showDialog, setShowDialog] = useState(true)
@@ -36,12 +43,12 @@ const SetCoverDialog = ({
   const [selected, setSelected] = useState(
     assets.find((ast) => ast.path === cover)
   )
-  const onClickSave = async () => {
+  const onSave = async () => {
     if (!selected) {
       return
     }
 
-    await onSave(selected)
+    await onEdit(selected)
     close()
   }
 
@@ -56,49 +63,30 @@ const SetCoverDialog = ({
           closeTextId="close"
           rightButton={
             <Dialog.Header.RightButton
-              onClick={onClickSave}
+              onClick={onSave}
               text={<Translate id="save" />}
               loading={saving}
             />
           }
         />
 
-        <section className="container">
-          {assets.length > 0 && (
-            <section className="selector">
-              <h3>
-                <Translate
-                  zh_hant="你也可以選擇一張已有的圖片作為封面"
-                  zh_hans="你也可以选择一张已有的图片作为封面"
-                />
-              </h3>
+        <Dialog.Content hasGrow>
+          <section className="container">
+            {/* Uploader */}
+            <Uploader setSelected={setSelected} {...uploadEntity} />
 
-              <ul>
-                {assets.map((asset, index) => (
-                  <li
-                    key={asset.id}
-                    className={
-                      asset.path === selected?.path ? 'selected' : undefined
-                    }
-                  >
-                    <button
-                      type="button"
-                      onClick={() => setSelected(asset)}
-                      aria-label={`設置第 ${index + 1} 張圖片為封面`}
-                    >
-                      <img src={asset.path} />
+            {/* Selector */}
+            {assets.length > 0 && (
+              <Selector
+                assets={assets}
+                selected={selected}
+                setSelected={setSelected}
+              />
+            )}
 
-                      {asset.path === selected?.path && (
-                        <IconCheckedWithBorderMedium size="md" color="green" />
-                      )}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </section>
-          )}
-          <style jsx>{styles}</style>
-        </section>
+            <style jsx>{styles}</style>
+          </section>
+        </Dialog.Content>
       </Dialog>
     </>
   )

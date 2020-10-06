@@ -7,8 +7,10 @@ import { useState } from 'react'
 import { Head, Layout, Spinner, Throw404, useResponsive } from '~/components'
 import { fragments as EditorFragments } from '~/components/Editor/fragments'
 import { QueryError, useMutation } from '~/components/GQL'
+import assetFragment from '~/components/GQL/fragments/asset'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 
+import { ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
 import { getQuery, stripHtml } from '~/common/utils'
 
 import PublishButton from './PublishButton'
@@ -49,12 +51,11 @@ export const UPDATE_DRAFT = gql`
       content
       cover
       assets {
-        id
-        type
-        path
+        ...Asset
       }
     }
   }
+  ${assetFragment}
 `
 
 const EmptyLayout: React.FC = ({ children }) => (
@@ -110,8 +111,8 @@ const DraftDetail = () => {
     const result = await singleFileUpload({
       variables: {
         input: {
-          type: 'embed',
-          entityType: 'draft',
+          type: ASSET_TYPE.embed,
+          entityType: ENTITY_TYPE.draft,
           entityId: draft && draft.id,
           ...input,
         },

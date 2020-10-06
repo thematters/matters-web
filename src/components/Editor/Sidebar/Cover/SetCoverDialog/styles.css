@@ -2,6 +2,25 @@
   padding: var(--spacing-base);
 }
 
+.uploader {
+  @mixin flex-center-space-between;
+
+  padding: var(--spacing-x-tight) var(--spacing-base);
+  margin-bottom: var(--spacing-loose);
+  border: 1.5px solid var(--color-grey-light);
+  border-style: dashed;
+  border-radius: var(--spacing-xx-tight);
+
+  & h3 {
+    margin-bottom: var(--spacing-x-tight);
+  }
+
+  & p {
+    font-size: var(--font-size-sm-s);
+    color: var(--color-grey);
+  }
+}
+
 .selector {
   & h3 {
     margin-bottom: var(--spacing-base);
