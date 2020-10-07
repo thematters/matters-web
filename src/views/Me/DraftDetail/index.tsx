@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 
-import { Head, Layout, Spinner, Throw404 } from '~/components'
+import { Head, Layout, Spinner, Throw404, useResponsive } from '~/components'
 import { fragments as EditorFragments } from '~/components/Editor/fragments'
 import { QueryError, useMutation } from '~/components/GQL'
 import assetFragment from '~/components/GQL/fragments/asset'
@@ -13,10 +13,11 @@ import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 import { ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
 import { getQuery, stripHtml } from '~/common/utils'
 
+import BottomBar from './EditMeta/BottomBar'
+import Sidebar from './EditMeta/Sidebar'
 import PublishButton from './PublishButton'
 import PublishState from './PublishState'
 import SaveStatus from './SaveStatus'
-import Sidebar from './Sidebar'
 
 import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
 import { DraftDetailQuery } from './__generated__/DraftDetailQuery'
@@ -33,14 +34,16 @@ const DRAFT_DETAIL = gql`
       id
       ... on Draft {
         ...EditorDraft
-        ...DraftSidebarDraft
         ...PublishStateDraft
+        ...SidebarDraft
+        ...BottomBarDraft
       }
     }
   }
   ${EditorFragments.draft}
-  ${Sidebar.fragments.draft}
   ${PublishState.fragments.draft}
+  ${Sidebar.fragments.draft}
+  ${BottomBar.fragments.draft}
 `
 
 export const UPDATE_DRAFT = gql`
@@ -66,6 +69,7 @@ const EmptyLayout: React.FC = ({ children }) => (
 )
 
 const DraftDetail = () => {
+  const isSmallUp = useResponsive('sm-up')
   const router = useRouter()
   const id = getQuery({ router, key: 'draftId' })
   const { data, loading, error } = useQuery<DraftDetailQuery>(DRAFT_DETAIL, {
@@ -148,8 +152,8 @@ const DraftDetail = () => {
     <Layout.Main
       aside={
         <>
-          {loading && <Spinner />}
-          {draft && <Sidebar draft={draft} />}
+          {isSmallUp && loading && <Spinner />}
+          {isSmallUp && draft && <Sidebar draft={draft} />}
         </>
       }
       inEditor
@@ -175,6 +179,8 @@ const DraftDetail = () => {
           <Layout.Spacing>
             <Editor draft={draft} update={update} upload={upload} />
           </Layout.Spacing>
+
+          {!isSmallUp && <BottomBar draft={draft} />}
         </>
       )}
     </Layout.Main>

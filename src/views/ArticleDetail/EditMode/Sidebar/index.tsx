@@ -4,9 +4,7 @@ import _uniq from 'lodash/uniq'
 import { useEffect } from 'react'
 
 import { Spinner } from '~/components'
-import SidebarCollection from '~/components/Editor/Sidebar/Collection'
-import SidebarCover from '~/components/Editor/Sidebar/Cover'
-import SidebarTags from '~/components/Editor/Sidebar/Tags'
+import Sidebar from '~/components/Editor/Sidebar'
 import { QueryError } from '~/components/GQL'
 import articleFragments from '~/components/GQL/fragments/article'
 import assetFragment from '~/components/GQL/fragments/asset'
@@ -100,7 +98,7 @@ const EditModeSidebar = ({
 
   return (
     <>
-      <SidebarCover
+      <Sidebar.Cover
         cover={cover?.path}
         assets={data.article.assets}
         entityId={article.id}
@@ -109,12 +107,12 @@ const EditModeSidebar = ({
         refetchAssets={refetch}
       />
 
-      <SidebarTags
+      <Sidebar.Tags
         tags={tags.length > 0 ? tags : tags}
         onEdit={(newTags: DigestTag[]) => setTags(_uniq(newTags))}
       />
 
-      <SidebarCollection
+      <Sidebar.Collection
         articles={collection.length > 0 ? collection : collection}
         onEdit={setCollection}
       />

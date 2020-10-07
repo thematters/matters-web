@@ -1,0 +1,18 @@
+.bottom-bar {
+  @mixin flex-center-space-between;
+
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: var(--z-index-global-header);
+  height: var(--global-nav-height);
+  background: var(--color-white);
+  border-radius: var(--spacing-x-tight) var(--spacing-x-tight) 0 0;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08);
+
+  & button {
+    flex: 1 1 0;
+    height: 100%;
+  }
+}
