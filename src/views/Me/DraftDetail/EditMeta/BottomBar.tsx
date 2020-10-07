@@ -14,11 +14,11 @@ import {
 
 import { BottomBarDraft } from './__generated__/BottomBarDraft'
 
-interface SidebarProps {
+interface BottomBarProps {
   draft: BottomBarDraft
 }
 
-const EditDraftSidebar = ({ draft }: SidebarProps) => {
+const EditDraftBottomBar = ({ draft }: BottomBarProps) => {
   const {
     onEdit: onEditCollection,
     saving: collectionSaving,
@@ -49,7 +49,7 @@ const EditDraftSidebar = ({ draft }: SidebarProps) => {
   )
 }
 
-EditDraftSidebar.fragments = {
+EditDraftBottomBar.fragments = {
   draft: gql`
     fragment BottomBarDraft on Draft {
       id
@@ -59,4 +59,4 @@ EditDraftSidebar.fragments = {
   `,
 }
 
-export default EditDraftSidebar
+export default EditDraftBottomBar

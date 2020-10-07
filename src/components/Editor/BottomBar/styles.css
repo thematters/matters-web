@@ -5,7 +5,7 @@
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: var(--z-index-global-header);
+  z-index: var(--z-index-over-global-header);
   height: var(--global-nav-height);
   background: var(--color-white);
   border-radius: var(--spacing-x-tight) var(--spacing-x-tight) 0 0;
