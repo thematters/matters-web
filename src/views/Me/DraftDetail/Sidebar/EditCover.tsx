@@ -42,8 +42,8 @@ const DRAFT_ASSETS = gql`
 `
 
 const UPDATE_COVER = gql`
-  mutation UpdateDraftCover($id: ID!, $coverAssetId: ID) {
-    putDraft(input: { id: $id, coverAssetId: $coverAssetId }) {
+  mutation UpdateDraftCover($id: ID!, $cover: ID) {
+    putDraft(input: { id: $id, cover: $cover }) {
       id
       ...EditCoverDraft
     }
@@ -63,11 +63,11 @@ const EditCover = ({ draft }: EditCoverProps) => {
   const isPending = draft.publishState === 'pending'
   const isPublished = draft.publishState === 'published'
 
-  const onEdit = (asset: EditCoverDraft_assets) => {
+  const onEdit = (asset?: EditCoverDraft_assets) => {
     update({
       variables: {
         id: draft.id,
-        coverAssetId: asset.id,
+        cover: asset ? asset.id : null,
       },
     })
   }

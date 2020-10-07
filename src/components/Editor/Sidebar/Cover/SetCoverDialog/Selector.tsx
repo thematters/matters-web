@@ -7,7 +7,7 @@ import { Asset } from '~/components/GQL/fragments/__generated__/Asset'
 interface SelectorProps {
   assets: Asset[]
   selected?: Asset
-  setSelected: (asset: Asset) => any
+  setSelected: (asset?: Asset) => any
 }
 
 const Selector: React.FC<SelectorProps> = ({
@@ -31,7 +31,9 @@ const Selector: React.FC<SelectorProps> = ({
         >
           <button
             type="button"
-            onClick={() => setSelected(asset)}
+            onClick={() =>
+              setSelected(asset.id === selected?.id ? undefined : asset)
+            }
             aria-label={`設置第 ${index + 1} 張圖片為封面`}
           >
             <img src={asset.path} />

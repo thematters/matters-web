@@ -9,10 +9,10 @@ import Uploader, { UploadEntity } from './Uploader'
 import { Asset } from '~/components/GQL/fragments/__generated__/Asset'
 
 export type BaseSetCoverDialogProps = {
-  cover: string
+  cover?: string
   assets: Asset[]
 
-  onEdit: (asset: Asset) => any
+  onEdit: (asset?: Asset) => any
   refetchAssets: () => any
   saving?: boolean
 } & UploadEntity
@@ -44,10 +44,6 @@ const SetCoverDialog = ({
     assets.find((ast) => ast.path === cover)
   )
   const onSave = async () => {
-    if (!selected) {
-      return
-    }
-
     await onEdit(selected)
     close()
   }

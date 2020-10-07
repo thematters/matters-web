@@ -18,13 +18,15 @@ const AddTags = ({ cover, disabled, ...restProps }: AddTagsProps) => {
           onClick={openSetCoverDialog}
           disabled={disabled}
         >
-          <section className="container">
-            <div className="cover">
-              <img src={cover} />
-            </div>
+          {cover && (
+            <section className="container">
+              <div className="cover">
+                <img src={cover} />
+              </div>
 
-            <style jsx>{styles}</style>
-          </section>
+              <style jsx>{styles}</style>
+            </section>
+          )}
         </Box>
       )}
     </SetCoverDialog>

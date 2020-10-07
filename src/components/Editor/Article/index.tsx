@@ -23,7 +23,7 @@ interface Props {
   update: (draft: {
     title?: string | null
     content?: string | null
-    coverAssetId?: string | null
+    cover?: string | null
   }) => Promise<void>
   upload: DraftAssetUpload
 }

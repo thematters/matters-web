@@ -14,12 +14,6 @@ article {
     }
   }
 
-  &.keepAside {
-    @media (--lg-down) {
-      min-height: auto;
-    }
-  }
-
   @media (--sm-up) {
     @mixin border-left-grey;
     @mixin border-right-grey;
@@ -46,7 +40,7 @@ aside {
     border-right: none;
     border-left: none;
 
-    &.in-draft-detail {
+    &.in-editor {
       padding-top: var(--global-header-height);
 
       & :global(> * + *) {

@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 
-import { Head, Layout, Spinner, Throw404, useResponsive } from '~/components'
+import { Head, Layout, Spinner, Throw404 } from '~/components'
 import { fragments as EditorFragments } from '~/components/Editor/fragments'
 import { QueryError, useMutation } from '~/components/GQL'
 import assetFragment from '~/components/GQL/fragments/asset'
@@ -66,8 +66,6 @@ const EmptyLayout: React.FC = ({ children }) => (
 )
 
 const DraftDetail = () => {
-  const isLargeUp = useResponsive('lg-up')
-
   const router = useRouter()
   const id = getQuery({ router, key: 'draftId' })
   const { data, loading, error } = useQuery<DraftDetailQuery>(DRAFT_DETAIL, {
@@ -131,7 +129,7 @@ const DraftDetail = () => {
   const update = async (newDraft: {
     title?: string | null
     content?: string | null
-    coverAssetId?: string | null
+    cover?: string | null
   }) => {
     try {
       if (draft?.publishState === 'published') {
@@ -150,11 +148,11 @@ const DraftDetail = () => {
     <Layout.Main
       aside={
         <>
-          {isLargeUp && loading && <Spinner />}
-          {isLargeUp && draft && <Sidebar draft={draft} />}
+          {loading && <Spinner />}
+          {draft && <Sidebar draft={draft} />}
         </>
       }
-      keepAside
+      inEditor
     >
       <Layout.Header
         left={<Layout.Header.BackButton />}

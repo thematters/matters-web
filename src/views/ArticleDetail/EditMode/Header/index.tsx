@@ -9,14 +9,16 @@ import { ADD_TOAST } from '~/common/enums'
 import styles from './styles.css'
 
 import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
+import { Asset } from '~/components/GQL/fragments/__generated__/Asset'
 import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
+import { ArticleDetailPublic_article } from '../../__generated__/ArticleDetailPublic'
 import { EditArticle } from './__generated__/EditArticle'
 
 interface EditModeHeaderProps {
-  id: string
-  mediaHash: string
-  editModeTags: DigestTag[]
-  editModeCollection: ArticleDigestDropdownArticle[]
+  article: ArticleDetailPublic_article
+  cover?: Asset
+  tags: DigestTag[]
+  collection: ArticleDigestDropdownArticle[]
   onEditSaved: () => any
 }
 
@@ -30,13 +32,17 @@ const EDIT_ARTICLE = gql`
   mutation EditArticle(
     $id: ID!
     $mediaHash: String!
+    $cover: ID
     $tags: [String!]
     $collection: [ID!]
     $after: String
     $first: Int = null
   ) {
-    editArticle(input: { id: $id, tags: $tags, collection: $collection }) {
+    editArticle(
+      input: { id: $id, cover: $cover, tags: $tags, collection: $collection }
+    ) {
       id
+      cover
       tags {
         ...DigestTag
         selected(input: { mediaHash: $mediaHash })
@@ -49,10 +55,10 @@ const EDIT_ARTICLE = gql`
 `
 
 const EditModeHeader = ({
-  id,
-  mediaHash,
-  editModeTags,
-  editModeCollection,
+  article,
+  cover,
+  tags,
+  collection,
   onEditSaved,
 }: EditModeHeaderProps) => {
   const [editArticle, { loading }] = useMutation<EditArticle>(EDIT_ARTICLE)
@@ -61,10 +67,11 @@ const EditModeHeader = ({
     try {
       await editArticle({
         variables: {
-          id,
-          mediaHash,
-          tags: editModeTags.map(({ content }) => content),
-          collection: editModeCollection.map(({ id: articleId }) => articleId),
+          id: article.id,
+          mediaHash: article.mediaHash,
+          cover: cover ? cover.id : null,
+          tags: tags.map(({ content }) => content),
+          collection: collection.map(({ id: articleId }) => articleId),
           first: null,
         },
       })
