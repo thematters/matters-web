@@ -72,7 +72,7 @@ const Uploader: React.FC<UploaderProps> = ({
         variables: {
           input: {
             file,
-            type: ASSET_TYPE.embed,
+            type: ASSET_TYPE.cover,
             entityId,
             entityType,
           },
