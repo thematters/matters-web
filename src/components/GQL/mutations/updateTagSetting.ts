@@ -2,6 +2,8 @@ import gql from 'graphql-tag'
 
 import { Avatar } from '~/components/Avatar'
 
+import Tag from '../fragments/tag'
+
 export default gql`
   mutation UpdateTagSetting($input: UpdateTagSettingInput!) {
     updateTagSetting(input: $input) {
@@ -19,7 +21,9 @@ export default gql`
         }
         ...AvatarUser
       }
+      ...FollowersTag
     }
   }
   ${Avatar.fragments.user}
+  ${Tag.followers}
 `
