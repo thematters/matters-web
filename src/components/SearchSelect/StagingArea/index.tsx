@@ -9,6 +9,11 @@ import SearchSelectNode from '../SearchSelectNode'
 import areaStyles from '../styles.css'
 import styles from './styles.css'
 
+/**
+ * This is a sub-component of search-and-select. It's a container
+ * of selected nodes from <SearchingArea>. All nodes in it will be
+ * submitted.
+ */
 export interface StagingNode {
   node: SelectNode
   selected: boolean
