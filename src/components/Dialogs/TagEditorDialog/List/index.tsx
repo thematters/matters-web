@@ -13,7 +13,10 @@ import TAG_MAINTAINERS from '~/components/GQL/queries/tagMaintainers'
 
 import styles from './styles.css'
 
-import { TagMaintainers } from '~/components/GQL/queries/__generated__/TagMaintainers'
+import {
+  TagMaintainers,
+  TagMaintainers_node_Tag_editors as TagEditor,
+} from '~/components/GQL/queries/__generated__/TagMaintainers'
 
 /**
  * This a sub-component of <TagEditorDialog>. It shows editors of a tag, and
@@ -35,7 +38,7 @@ interface Props {
 
   close: () => void
   toAddStep: () => void
-  toRemoveStep: (editor: string) => void
+  toRemoveStep: (editor: TagEditor) => void
 }
 
 const RemoveButton = ({ remove }: { remove: (editor: string) => void }) => (
@@ -114,7 +117,7 @@ const TagEditorList = ({ id, close, toAddStep, toRemoveStep }: Props) => {
                       <Translate zh_hant="協作者" zh_hans="协作者" />
                     }
                     extraButton={
-                      <RemoveButton remove={() => toRemoveStep(editor.id)} />
+                      <RemoveButton remove={() => toRemoveStep(editor)} />
                     }
                     spacing={['tight', 'base']}
                   />

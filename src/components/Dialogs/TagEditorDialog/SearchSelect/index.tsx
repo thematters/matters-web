@@ -1,3 +1,4 @@
+import _get from 'lodash/get'
 import { useState } from 'react'
 
 import { Dialog, Translate } from '~/components'
@@ -62,18 +63,27 @@ const TagSearchSelectEditor = ({ id, close, toListStep }: Props) => {
 
   const onClickSave = async () => {
     try {
-      const editors = stagingNodes
-        .filter(({ selected }) => !!selected)
-        .map(({ node }) => node.id)
+      const editors = stagingNodes.filter(({ selected }) => !!selected)
       const result = await update({
-        variables: { input: { id, type: 'add_editor', editors } },
-        update: (cache) =>
+        variables: {
+          input: {
+            id,
+            type: 'add_editor',
+            editors: editors.map(({ node }) => node.id),
+          },
+        },
+        update: (cache) => {
+          // filter out matty for local cache update
+          const filteredEditors = editors.filter(
+            ({ node }) => _get(node, 'displayName') !== 'Matty'
+          )
           updateTagMaintainers({
             cache,
             id,
             type: 'add',
-            editors: stagingNodes,
-          }),
+            editors: filteredEditors,
+          })
+        },
       })
 
       if (!result) {
