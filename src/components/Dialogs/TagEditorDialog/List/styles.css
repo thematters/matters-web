@@ -1,0 +1,11 @@
+.owner {
+  padding-top: 1px;
+}
+
+.hint {
+  padding: var(--spacing-x-tight) var(--spacing-xx-loose) 0;
+}
+
+.count {
+  color: var(--color-matters-green);
+}

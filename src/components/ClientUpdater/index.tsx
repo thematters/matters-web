@@ -84,12 +84,10 @@ export const ClientUpdater = () => {
    */
   const changeNewUserHomeFeedSortBy = ({
     createdAt,
-    group,
   }: {
     createdAt: Date | string | number | null
-    group: 'a' | 'b' | null
   }) => {
-    if (!createdAt || !group) {
+    if (!createdAt) {
       return
     }
 
@@ -97,7 +95,7 @@ export const ClientUpdater = () => {
       createdAt = parseISO(createdAt)
     }
 
-    if (differenceInDays(new Date(), createdAt) > 7 || group !== 'b') {
+    if (differenceInDays(new Date(), createdAt) > 7) {
       return
     }
 

@@ -24,6 +24,12 @@ import {
   SelectSearch_search_edges_node_User,
 } from './__generated__/SelectSearch'
 
+/**
+ * This is a sub-component of search-and-select, and it will show
+ * search results after typing in <SearchInput>. Node will be
+ * added into the staging area when click.
+ *
+ */
 export type SearchType = SearchInputType
 export interface SearchFilter {
   authorId: string

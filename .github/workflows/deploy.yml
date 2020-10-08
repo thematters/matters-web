@@ -21,7 +21,7 @@ jobs:
         uses: actions/checkout@master
 
       - name: Setup Node.js
-        uses: actions/setup-node@v2.1.1
+        uses: actions/setup-node@v2.1.2
         with:
           node-version: '12.16'
 
@@ -74,20 +74,10 @@ jobs:
         if: github.ref == 'refs/heads/develop' || github.base_ref == 'develop'
         run: cp .env.dev .env && npm run build
 
-      - name: Against SEO (develop)
-        if: github.ref == 'refs/heads/develop'
-        run: |
-          cp .ebextensions/http-basic-auth.config.dev .ebextensions/http-basic-auth.config
-
       # === `stage` branch ===
       - name: Build (stage)
         if: github.ref == 'refs/heads/stage' || github.base_ref == 'stage'
         run: cp .env.stage .env && npm run build
-
-      - name: Against SEO (stage)
-        if: github.ref == 'refs/heads/stage'
-        run: |
-          cp .ebextensions/http-basic-auth.config.dev .ebextensions/http-basic-auth.config
 
       # === `master` branch ===
       - name: Build (production)
@@ -114,7 +104,7 @@ jobs:
 
       - name: Deploy to EB (develop)
         if: github.ref == 'refs/heads/develop'
-        uses: einaregilsson/beanstalk-deploy@v11
+        uses: einaregilsson/beanstalk-deploy@v13
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -125,7 +115,7 @@ jobs:
           region: ap-southeast-1
           deployment_package: deploy.zip
           use_existing_version_if_available: true
-          wait_for_deployment: false
+          wait_for_deployment: true
 
       # === `stage` branch ===
       - name: Upload Assets (stage)
@@ -135,7 +125,7 @@ jobs:
 
       - name: Deploy to EB (stage)
         if: github.ref == 'refs/heads/stage'
-        uses: einaregilsson/beanstalk-deploy@v11
+        uses: einaregilsson/beanstalk-deploy@v13
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -146,7 +136,7 @@ jobs:
           region: ap-southeast-1
           deployment_package: deploy.zip
           use_existing_version_if_available: true
-          wait_for_deployment: false
+          wait_for_deployment: true
 
       # === `master` branch ===
       - name: Upload Assets (production)
@@ -156,7 +146,7 @@ jobs:
 
       - name: Deploy to EB (production)
         if: github.ref == 'refs/heads/master'
-        uses: einaregilsson/beanstalk-deploy@v11
+        uses: einaregilsson/beanstalk-deploy@v13
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -167,6 +157,7 @@ jobs:
           region: ap-southeast-1
           deployment_package: deploy.zip
           use_existing_version_if_available: true
+          wait_for_deployment: true
 
       - name: Slack Notification
         if: always()

@@ -19,7 +19,6 @@
           { "name": "ArticleConnection" },
           { "name": "CommentConnection" },
           { "name": "FolloweeDonatedArticleConnection" },
-          { "name": "ResponseConnection" },
           { "name": "TagConnection" },
           { "name": "UserConnection" },
           { "name": "DraftConnection" },
@@ -28,16 +27,11 @@
           { "name": "AppreciationConnection" },
           { "name": "NoticeConnection" },
           { "name": "TransactionConnection" },
+          { "name": "ResponseConnection" },
           { "name": "SearchResultConnection" },
-          { "name": "ReportConnection" },
           { "name": "OAuthClientConnection" },
           { "name": "SkippedListItemsConnection" }
         ]
-      },
-      {
-        "kind": "UNION",
-        "name": "Response",
-        "possibleTypes": [{ "name": "Article" }, { "name": "Comment" }]
       },
       {
         "kind": "INTERFACE",
@@ -61,6 +55,10 @@
           { "name": "ArticleTagHasBeenAddedNotice" },
           { "name": "ArticleTagHasBeenRemovedNotice" },
           { "name": "ArticleTagHasBeenUnselectedNotice" },
+          { "name": "TagAdoptionNotice" },
+          { "name": "TagLeaveNotice" },
+          { "name": "TagAddEditorNotice" },
+          { "name": "TagLeaveEditorNotice" },
           { "name": "PaymentReceivedDonationNotice" },
           { "name": "PaymentPayoutNotice" }
         ]
@@ -69,6 +67,11 @@
         "kind": "UNION",
         "name": "TransactionTarget",
         "possibleTypes": [{ "name": "Article" }, { "name": "Transaction" }]
+      },
+      {
+        "kind": "UNION",
+        "name": "Response",
+        "possibleTypes": [{ "name": "Article" }, { "name": "Comment" }]
       }
     ]
   }

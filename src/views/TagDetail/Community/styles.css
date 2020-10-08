@@ -1,0 +1,12 @@
+.category {
+  @mixin flex-center-space-between;
+
+  padding: var(--spacing-x-tight) var(--spacing-base);
+  font-size: var(--font-size-md-s);
+  font-weight: var(--font-weight-medium);
+}
+
+.count {
+  margin-left: var(--spacing-x-tight);
+  color: var(--color-grey-dark);
+}

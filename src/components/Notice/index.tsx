@@ -19,6 +19,10 @@ import OfficialAnnouncementNotice from './OfficialAnnouncementNotice'
 import PaymentPayoutNotice from './PaymentPayoutNotice'
 import PaymentReceivedDonationNotice from './PaymentReceivedDonationNotice'
 import SubscribedArticleNewCommentNotice from './SubscribedArticleNewCommentNotice'
+import TagAddEditorNotice from './TagAddEditorNotice'
+import TagAdoptionNotice from './TagAdoptionNotice'
+import TagLeaveEditorNotice from './TagLeaveEditorNotice'
+import TagLeaveNotice from './TagLeaveNotice'
 import UpstreamArticleArchivedNotice from './UpstreamArticleArchivedNotice'
 import UserNewFollowerNotice from './UserNewFollowerNotice'
 
@@ -91,6 +95,18 @@ const fragments = {
       ... on PaymentPayoutNotice {
         ...PaymentPayoutNotice
       }
+      ... on TagAdoptionNotice {
+        ...TagAdoptionNotice
+      }
+      ... on TagLeaveNotice {
+        ...TagLeaveNotice
+      }
+      ... on TagAddEditorNotice {
+        ...TagAddEditorNotice
+      }
+      ... on TagLeaveEditorNotice {
+        ...TagLeaveEditorNotice
+      }
     }
     ${ArticleNewAppreciationNotice.fragments.notice}
     ${ArticleNewCommentNotice.fragments.notice}
@@ -112,6 +128,10 @@ const fragments = {
     ${ArticleTagHasBeenUnselectedNotice.fragments.notice}
     ${PaymentReceivedDonationNotice.fragments.notice}
     ${PaymentPayoutNotice.fragments.notice}
+    ${TagAdoptionNotice.fragments.notice}
+    ${TagLeaveNotice.fragments.notice}
+    ${TagAddEditorNotice.fragments.notice}
+    ${TagLeaveEditorNotice.fragments.notice}
   `,
 }
 
@@ -157,6 +177,14 @@ const BaseNotice: React.FC<NoticeProps> = ({ notice }) => {
       return <PaymentReceivedDonationNotice notice={notice} />
     case 'PaymentPayoutNotice':
       return <PaymentPayoutNotice notice={notice} />
+    case 'TagAdoptionNotice':
+      return <TagAdoptionNotice notice={notice} />
+    case 'TagLeaveNotice':
+      return <TagLeaveNotice notice={notice} />
+    case 'TagAddEditorNotice':
+      return <TagAddEditorNotice notice={notice} />
+    case 'TagLeaveEditorNotice':
+      return <TagLeaveEditorNotice notice={notice} />
     default:
       return null
   }
