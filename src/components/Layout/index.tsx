@@ -46,24 +46,20 @@ export const Layout: React.FC & {
 interface MainProps {
   aside?: React.ReactNode
   bgColor?: 'grey-lighter'
-  // TODO: this prop only temporally used by DraftDetail,
-  // would be removed after revamped
-  keepAside?: boolean
+  inEditor?: boolean
 }
 
-const Main: React.FC<MainProps> = ({ aside, bgColor, keepAside, children }) => {
+const Main: React.FC<MainProps> = ({ aside, bgColor, inEditor, children }) => {
   const router = useRouter()
   const isInSearch = router.pathname === PATHS.SEARCH
-  const isInDraftDetail = router.pathname === PATHS.ME_DRAFT_DETAIL
 
   const articleClasses = classNames({
     'l-col-three-mid': true,
     [`bg-${bgColor}`]: !!bgColor,
-    keepAside,
   })
   const asideClasses = classNames({
     'l-col-three-right': true,
-    'u-lg-down-hide': !keepAside,
+    'in-editor': inEditor,
   })
 
   return (
@@ -71,7 +67,7 @@ const Main: React.FC<MainProps> = ({ aside, bgColor, keepAside, children }) => {
       <article className={articleClasses}>{children}</article>
 
       <aside className={asideClasses}>
-        {!isInSearch && (
+        {!isInSearch && !inEditor && (
           <section className="u-lg-down-hide">
             <SearchBar />
           </section>
@@ -79,7 +75,7 @@ const Main: React.FC<MainProps> = ({ aside, bgColor, keepAside, children }) => {
 
         {aside}
 
-        {!isInDraftDetail && (
+        {!inEditor && (
           <section className="u-lg-down-hide">
             <SideFooter />
           </section>

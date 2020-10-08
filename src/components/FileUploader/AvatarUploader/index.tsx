@@ -10,6 +10,8 @@ import { IconCameraMedium } from '~/components/Icon'
 import {
   ACCEPTED_UPLOAD_IMAGE_TYPES,
   ADD_TOAST,
+  ASSET_TYPE,
+  ENTITY_TYPE,
   UPLOAD_IMAGE_SIZE_LIMIT,
 } from '~/common/enums'
 
@@ -62,7 +64,13 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
 
     try {
       const { data } = await upload({
-        variables: { input: { file, type: 'avatar', entityType: 'user' } },
+        variables: {
+          input: {
+            file,
+            type: ASSET_TYPE.avatar,
+            entityType: ENTITY_TYPE.user,
+          },
+        },
       })
       const id = data?.singleFileUpload.id
       const path = data?.singleFileUpload.path

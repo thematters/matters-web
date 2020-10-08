@@ -46,7 +46,6 @@ import Toolbar from './Toolbar'
 import TranslationButton from './TranslationButton'
 import Wall from './Wall'
 
-import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import { ArticleDetailPublic } from './__generated__/ArticleDetailPublic'
 import { ArticleTranslation } from './__generated__/ArticleTranslation'
@@ -97,7 +96,6 @@ const ArticleDetail = () => {
   const authorId = article?.author?.id
   const collectionCount = article?.collection?.totalCount || 0
   const isAuthor = viewer.id === authorId
-  const canEdit = isAuthor && !viewer.isInactive
 
   // fetch private data
   const [privateFetched, setPrivateFetched] = useState(false)
@@ -166,17 +164,15 @@ const ArticleDetail = () => {
   }
 
   // edit mode
+  const canEdit = isAuthor && !viewer.isInactive
   const [editMode, setEditMode] = useState(false)
-  const [editModeTags, setEditModeTags] = useState<string[]>([])
-  const [editModeCollection, setEditModeCollection] = useState<
-    ArticleDigestDropdownArticle[]
-  >([])
   const onEditSaved = async () => {
     setEditMode(false)
     await refetchPublic()
     loadPrivate()
   }
 
+  // jump to comment area
   useEffect(() => {
     if (window.location.hash && article) {
       jump('#comments', { offset: -10 })
@@ -248,44 +244,7 @@ const ArticleDetail = () => {
    * Render:Edit Mode
    */
   if (editMode) {
-    return (
-      <Layout.Main
-        aside={
-          <EditMode.Sidebar
-            mediaHash={mediaHash}
-            editModeTags={editModeTags}
-            setEditModeTags={setEditModeTags}
-            editModeCollection={editModeCollection}
-            setEditModeCollection={setEditModeCollection}
-          />
-        }
-        keepAside
-      >
-        <Layout.Header
-          right={
-            <EditMode.Header
-              id={article.id}
-              mediaHash={mediaHash}
-              editModeTags={editModeTags}
-              editModeCollection={editModeCollection}
-              onEditSaved={onEditSaved}
-            />
-          }
-        />
-
-        <section className="content editing">
-          <section className="title">
-            <Title type="article">
-              {translate && titleTranslation ? titleTranslation : article.title}
-            </Title>
-          </section>
-
-          <Content article={article} />
-        </section>
-
-        <style jsx>{styles}</style>
-      </Layout.Main>
-    )
+    return <EditMode article={article} onSaved={onEditSaved} />
   }
 
   /**

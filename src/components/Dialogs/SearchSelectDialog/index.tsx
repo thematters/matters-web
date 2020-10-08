@@ -43,6 +43,9 @@ interface SearchSelectDialogProps {
   draggable?: boolean
 
   children: ({ open }: { open: () => void }) => React.ReactNode
+
+  // to create a new tag
+  creatable?: boolean
 }
 
 const BaseSearchSelectDialog = ({
@@ -59,6 +62,8 @@ const BaseSearchSelectDialog = ({
   draggable,
 
   children,
+
+  creatable,
 }: SearchSelectDialogProps) => {
   const initStagingNodes =
     nodes?.map((node) => ({ node, selected: true })) || []
@@ -125,6 +130,7 @@ const BaseSearchSelectDialog = ({
           toStagingArea={toStagingArea}
           toSearchingArea={toSearchingArea}
           addNodeToStaging={addNodeToStaging}
+          creatable={creatable}
         />
 
         <StagingArea

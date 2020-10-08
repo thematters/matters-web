@@ -14,12 +14,6 @@ article {
     }
   }
 
-  &.keepAside {
-    @media (--lg-down) {
-      min-height: auto;
-    }
-  }
-
   @media (--sm-up) {
     @mixin border-left-grey;
     @mixin border-right-grey;
@@ -45,5 +39,13 @@ aside {
     margin-right: 0 !important;
     border-right: none;
     border-left: none;
+
+    &.in-editor {
+      padding-top: var(--global-header-height);
+
+      & :global(> * + *) {
+        margin-top: var(--spacing-loose);
+      }
+    }
   }
 }
