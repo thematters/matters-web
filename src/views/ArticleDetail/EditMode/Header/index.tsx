@@ -19,7 +19,8 @@ interface EditModeHeaderProps {
   cover?: Asset
   tags: DigestTag[]
   collection: ArticleDigestDropdownArticle[]
-  onEditSaved: () => any
+  onSaved: () => any
+  disabled?: boolean
 }
 
 /**
@@ -59,7 +60,10 @@ const EditModeHeader = ({
   cover,
   tags,
   collection,
-  onEditSaved,
+
+  onSaved,
+
+  disabled,
 }: EditModeHeaderProps) => {
   const [editArticle, { loading }] = useMutation<EditArticle>(EDIT_ARTICLE)
 
@@ -75,7 +79,7 @@ const EditModeHeader = ({
           first: null,
         },
       })
-      onEditSaved()
+      onSaved()
     } catch (e) {
       window.dispatchEvent(
         new CustomEvent(ADD_TOAST, {
@@ -102,6 +106,7 @@ const EditModeHeader = ({
         bgColor="green"
         onClick={onSave}
         aria-haspopup="true"
+        disabled={disabled}
       >
         <TextIcon
           color="white"

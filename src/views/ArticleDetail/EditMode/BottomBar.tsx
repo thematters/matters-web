@@ -14,11 +14,11 @@ interface EditModeBottomBarProps {
   tags: DigestTag[]
   collection: ArticleDigestDropdownArticle[]
 
-  setCover: (cover?: Asset) => any
-  setTags: (tags: DigestTag[]) => any
-  setCollection: (articles: ArticleDigestDropdownArticle[]) => any
+  editCover: (cover?: Asset) => any
+  editTags: (tags: DigestTag[]) => any
+  editCollection: (articles: ArticleDigestDropdownArticle[]) => any
 
-  refetch: () => any
+  refetchAssets: () => any
 }
 
 const EditModeBottomBar: React.FC<EditModeBottomBarProps> = ({
@@ -29,11 +29,11 @@ const EditModeBottomBar: React.FC<EditModeBottomBarProps> = ({
   tags,
   collection,
 
-  setCover,
-  setTags,
-  setCollection,
+  editCover,
+  editTags,
+  editCollection,
 
-  refetch,
+  refetchAssets,
 }) => {
   return (
     <BottomBar
@@ -41,12 +41,12 @@ const EditModeBottomBar: React.FC<EditModeBottomBarProps> = ({
       assets={assets}
       tags={tags}
       collection={collection}
-      onEditCover={setCover}
-      onEditCollection={setCollection}
-      onEditTags={setTags}
+      onEditCover={editCover}
+      onEditCollection={editCollection}
+      onEditTags={editTags}
       entityId={article.id}
       entityType={ENTITY_TYPE.article}
-      refetchAssets={refetch}
+      refetchAssets={refetchAssets}
     />
   )
 }

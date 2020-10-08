@@ -1,40 +1,37 @@
-import gql from 'graphql-tag'
-
 import { toDigestTag } from '~/components'
 import Sidebar from '~/components/Editor/Sidebar'
 
 import { ENTITY_TYPE } from '~/common/enums'
 
 import {
-  fragments,
-  useEditCollection,
-  useEditCover,
-  useEditTags,
+  useEditDraftCollection,
+  useEditDraftCover,
+  useEditDraftTags,
 } from './hooks'
 
-import { SidebarDraft } from './__generated__/SidebarDraft'
+import { EditMetaDraft } from './__generated__/EditMetaDraft'
 
 interface BaseSidebarProps {
-  draft: SidebarDraft
+  draft: EditMetaDraft
 }
 
 type SidebarProps = BaseSidebarProps & { disabled: boolean }
 
-const EditCollection = ({ draft, disabled }: SidebarProps) => {
-  const { onEdit, saving } = useEditCollection(draft)
+const EditDraftCollection = ({ draft, disabled }: SidebarProps) => {
+  const { edit, saving } = useEditDraftCollection(draft)
 
   return (
     <Sidebar.Collection
       articles={draft?.collection?.edges?.map(({ node }) => node) || []}
-      onEdit={onEdit}
+      onEdit={edit}
       saving={saving}
       disabled={disabled}
     />
   )
 }
 
-const EditCover = ({ draft, disabled }: SidebarProps) => {
-  const { onEdit, refetch, saving } = useEditCover(draft)
+const EditDraftCover = ({ draft, disabled }: SidebarProps) => {
+  const { edit, refetch, saving } = useEditDraftCover(draft)
 
   return (
     <Sidebar.Cover
@@ -42,7 +39,7 @@ const EditCover = ({ draft, disabled }: SidebarProps) => {
       assets={draft.assets}
       entityId={draft.id}
       entityType={ENTITY_TYPE.draft}
-      onEdit={onEdit}
+      onEdit={edit}
       refetchAssets={refetch}
       saving={saving}
       disabled={disabled}
@@ -50,14 +47,14 @@ const EditCover = ({ draft, disabled }: SidebarProps) => {
   )
 }
 
-const EditTags = ({ draft, disabled }: SidebarProps) => {
-  const { onEdit, saving } = useEditTags(draft)
+const EditDraftTags = ({ draft, disabled }: SidebarProps) => {
+  const { edit, saving } = useEditDraftTags(draft)
   const tags = (draft.tags || []).map(toDigestTag)
 
   return (
     <Sidebar.Tags
       tags={tags}
-      onEdit={onEdit}
+      onEdit={edit}
       saving={saving}
       disabled={disabled}
     />
@@ -71,21 +68,11 @@ const EditDraftSidebar = (props: BaseSidebarProps) => {
 
   return (
     <>
-      <EditCover {...props} disabled={disabled} />
-      <EditTags {...props} disabled={disabled} />
-      <EditCollection {...props} disabled={disabled} />
+      <EditDraftCover {...props} disabled={disabled} />
+      <EditDraftTags {...props} disabled={disabled} />
+      <EditDraftCollection {...props} disabled={disabled} />
     </>
   )
-}
-
-EditDraftSidebar.fragments = {
-  draft: gql`
-    fragment SidebarDraft on Draft {
-      id
-      ...EditMetaDraft
-    }
-    ${fragments.draft}
-  `,
 }
 
 export default EditDraftSidebar

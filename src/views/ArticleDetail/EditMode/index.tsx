@@ -1,16 +1,14 @@
 import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
 import _uniq from 'lodash/uniq'
 import { useEffect, useState } from 'react'
 
 import { Layout, Spinner, Title, useResponsive } from '~/components'
-import { QueryError } from '~/components/GQL'
-import articleFragments from '~/components/GQL/fragments/article'
-import assetFragment from '~/components/GQL/fragments/asset'
+import { QueryError, useImperativeQuery } from '~/components/GQL'
 
 import Content from '../Content'
 import styles from '../styles.css'
 import EditModeBottomBar from './BottomBar'
+import { EDIT_MODE_ARTICLE, EDIT_MODE_ARTICLE_ASSETS } from './gql'
 import EditModeHeader from './Header'
 import EditModeSidebar from './Sidebar'
 
@@ -19,42 +17,33 @@ import { Asset } from '~/components/GQL/fragments/__generated__/Asset'
 import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
 import { ArticleDetailPublic_article } from '../__generated__/ArticleDetailPublic'
 import { EditModeArticle } from './__generated__/EditModeArticle'
+import { EditModeArticleAssets } from './__generated__/EditModeArticleAssets'
 
 interface EditModeProps {
   article: ArticleDetailPublic_article
-  onEditSaved: () => void
+  onSaved: () => void
 }
 
-const EDIT_MODE_ARTICLE = gql`
-  query EditModeArticle(
-    $mediaHash: String!
-    $after: String
-    $first: Int = null
-  ) {
-    article(input: { mediaHash: $mediaHash }) {
-      id
-      cover
-      assets {
-        ...Asset
-      }
-      ...ArticleCollection
-    }
-  }
-  ${assetFragment}
-  ${articleFragments.articleCollection}
-`
-
-const EditMode: React.FC<EditModeProps> = ({ article, onEditSaved }) => {
+const EditMode: React.FC<EditModeProps> = ({ article, onSaved }) => {
   const isSmallUp = useResponsive('sm-up')
 
-  const [cover, setCover] = useState<Asset>()
-  const [tags, setTags] = useState<DigestTag[]>(article.tags || [])
-  const [collection, setCollection] = useState<ArticleDigestDropdownArticle[]>(
+  // staging editing data
+  const [cover, editCover] = useState<Asset>()
+  const [tags, editTags] = useState<DigestTag[]>(article.tags || [])
+  const [collection, editCollection] = useState<ArticleDigestDropdownArticle[]>(
     []
   )
 
-  const { data, loading, error, refetch } = useQuery<EditModeArticle>(
+  // fetch and refetch latest metadata
+  const { data, loading, error } = useQuery<EditModeArticle>(
     EDIT_MODE_ARTICLE,
+    {
+      variables: { mediaHash: article.mediaHash },
+      fetchPolicy: 'network-only',
+    }
+  )
+  const refetchAssets = useImperativeQuery<EditModeArticleAssets>(
+    EDIT_MODE_ARTICLE_ASSETS,
     {
       variables: { mediaHash: article.mediaHash },
       fetchPolicy: 'network-only',
@@ -66,22 +55,20 @@ const EditMode: React.FC<EditModeProps> = ({ article, onEditSaved }) => {
       return
     }
 
+    // cover, find from `article.assets` since `article.cover` isn't a `Asset`
     const assets = data.article.assets
-    const currCover = assets.find(
-      (asset) => asset.path === data?.article?.cover
-    )
-    const currCollection =
-      data.article.collection.edges?.map(({ node }) => node) || []
-
+    const currCover = assets.find((asset) => asset.path === data.article?.cover)
     if (currCover) {
-      setCover(currCover)
+      editCover(currCover)
     }
 
-    if (currCollection.length > 0) {
-      setCollection(currCollection)
-    }
+    // collection
+    editCollection(data.article.collection.edges?.map(({ node }) => node) || [])
   }, [data?.article?.id])
 
+  /**
+   * Render
+   */
   if (loading) {
     return (
       <Layout.Main inEditor>
@@ -92,7 +79,8 @@ const EditMode: React.FC<EditModeProps> = ({ article, onEditSaved }) => {
               cover={cover}
               tags={tags}
               collection={collection}
-              onEditSaved={onEditSaved}
+              onSaved={onSaved}
+              disabled
             />
           }
         />
@@ -116,10 +104,10 @@ const EditMode: React.FC<EditModeProps> = ({ article, onEditSaved }) => {
             assets={data?.article?.assets || []}
             tags={tags}
             collection={collection}
-            setCover={setCover}
-            setTags={setTags}
-            setCollection={setCollection}
-            refetch={refetch}
+            editCover={editCover}
+            editTags={editTags}
+            editCollection={editCollection}
+            refetchAssets={refetchAssets}
           />
         )
       }
@@ -132,7 +120,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onEditSaved }) => {
             cover={cover}
             tags={tags}
             collection={collection}
-            onEditSaved={onEditSaved}
+            onSaved={onSaved}
           />
         }
       />
@@ -152,10 +140,10 @@ const EditMode: React.FC<EditModeProps> = ({ article, onEditSaved }) => {
           assets={data?.article?.assets || []}
           tags={tags}
           collection={collection}
-          setCover={setCover}
-          setTags={setTags}
-          setCollection={setCollection}
-          refetch={refetch}
+          editCover={editCover}
+          editTags={editTags}
+          editCollection={editCollection}
+          refetchAssets={refetchAssets}
         />
       )}
 

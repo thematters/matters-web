@@ -1,32 +1,29 @@
-import gql from 'graphql-tag'
-
 import { toDigestTag } from '~/components'
 import BottomBar from '~/components/Editor/BottomBar'
 
 import { ENTITY_TYPE } from '~/common/enums'
 
 import {
-  fragments,
-  useEditCollection,
-  useEditCover,
-  useEditTags,
+  useEditDraftCollection,
+  useEditDraftCover,
+  useEditDraftTags,
 } from './hooks'
 
-import { BottomBarDraft } from './__generated__/BottomBarDraft'
+import { EditMetaDraft } from './__generated__/EditMetaDraft'
 
 interface BottomBarProps {
-  draft: BottomBarDraft
+  draft: EditMetaDraft
 }
 
 const EditDraftBottomBar = ({ draft }: BottomBarProps) => {
   const {
-    onEdit: onEditCollection,
+    edit: editCollection,
     saving: collectionSaving,
-  } = useEditCollection(draft)
-  const { onEdit: onEditCover, saving: coverSaving, refetch } = useEditCover(
+  } = useEditDraftCollection(draft)
+  const { edit: editCover, saving: coverSaving, refetch } = useEditDraftCover(
     draft
   )
-  const { onEdit: onEditTags, saving: tagsSaving } = useEditTags(draft)
+  const { edit: editTags, saving: tagsSaving } = useEditDraftTags(draft)
   const tags = (draft.tags || []).map(toDigestTag)
   const isPending = draft.publishState === 'pending'
   const isPublished = draft.publishState === 'published'
@@ -37,9 +34,9 @@ const EditDraftBottomBar = ({ draft }: BottomBarProps) => {
       assets={draft.assets}
       tags={tags}
       collection={draft?.collection?.edges?.map(({ node }) => node) || []}
-      onEditCover={onEditCover}
-      onEditCollection={onEditCollection}
-      onEditTags={onEditTags}
+      onEditCover={editCover}
+      onEditCollection={editCollection}
+      onEditTags={editTags}
       entityId={draft.id}
       entityType={ENTITY_TYPE.draft}
       refetchAssets={refetch}
@@ -47,16 +44,6 @@ const EditDraftBottomBar = ({ draft }: BottomBarProps) => {
       disabled={isPending || isPublished}
     />
   )
-}
-
-EditDraftBottomBar.fragments = {
-  draft: gql`
-    fragment BottomBarDraft on Draft {
-      id
-      ...EditMetaDraft
-    }
-    ${fragments.draft}
-  `,
 }
 
 export default EditDraftBottomBar

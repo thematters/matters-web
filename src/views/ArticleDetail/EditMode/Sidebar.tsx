@@ -16,11 +16,11 @@ interface EditModeSidebarProps {
   tags: DigestTag[]
   collection: ArticleDigestDropdownArticle[]
 
-  setCover: (cover?: Asset) => any
-  setTags: (tags: DigestTag[]) => any
-  setCollection: (articles: ArticleDigestDropdownArticle[]) => any
+  editCover: (cover?: Asset) => any
+  editTags: (tags: DigestTag[]) => any
+  editCollection: (articles: ArticleDigestDropdownArticle[]) => any
 
-  refetch: () => any
+  refetchAssets: () => any
 }
 
 const EditModeSidebar: React.FC<EditModeSidebarProps> = ({
@@ -31,11 +31,11 @@ const EditModeSidebar: React.FC<EditModeSidebarProps> = ({
   tags,
   collection,
 
-  setCover,
-  setTags,
-  setCollection,
+  editCover,
+  editTags,
+  editCollection,
 
-  refetch,
+  refetchAssets,
 }) => {
   return (
     <>
@@ -44,18 +44,18 @@ const EditModeSidebar: React.FC<EditModeSidebarProps> = ({
         assets={assets}
         entityId={article.id}
         entityType={ENTITY_TYPE.article}
-        onEdit={setCover}
-        refetchAssets={refetch}
+        onEdit={editCover}
+        refetchAssets={refetchAssets}
       />
 
       <Sidebar.Tags
         tags={tags.length > 0 ? tags : tags}
-        onEdit={(newTags: DigestTag[]) => setTags(_uniq(newTags))}
+        onEdit={(newTags: DigestTag[]) => editTags(_uniq(newTags))}
       />
 
       <Sidebar.Collection
         articles={collection.length > 0 ? collection : collection}
-        onEdit={setCollection}
+        onEdit={editCollection}
       />
     </>
   )

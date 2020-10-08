@@ -172,6 +172,7 @@ const ArticleDetail = () => {
     loadPrivate()
   }
 
+  // jump to comment area
   useEffect(() => {
     if (window.location.hash && article) {
       jump('#comments', { offset: -10 })
@@ -243,7 +244,7 @@ const ArticleDetail = () => {
    * Render:Edit Mode
    */
   if (editMode) {
-    return <EditMode article={article} onEditSaved={onEditSaved} />
+    return <EditMode article={article} onSaved={onEditSaved} />
   }
 
   /**
