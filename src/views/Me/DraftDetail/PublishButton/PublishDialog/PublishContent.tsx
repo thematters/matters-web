@@ -19,7 +19,6 @@ const PUBLISH_ARTICLE = gql`
     publishArticle(input: { id: $id }) {
       id
       publishState
-      scheduledAt
     }
   }
 `

@@ -1,6 +1,8 @@
 import gql from 'graphql-tag'
+import _some from 'lodash/some'
+import { useContext } from 'react'
 
-import { Translate } from '~/components'
+import { Translate, ViewerContext } from '~/components'
 
 import NoticeActorAvatar from './NoticeActorAvatar'
 import NoticeActorName from './NoticeActorName'
@@ -16,9 +18,15 @@ const ArticleTagHasBeenUnselectedNotice = ({
 }: {
   notice: NoticeType
 }) => {
-  if (!notice || !notice.actor) {
+  const viewer = useContext(ViewerContext)
+  if (!notice || !notice.actor || !notice.target) {
     return null
   }
+
+  const isOwner = notice.tag?.owner?.id === viewer.id
+  const isEditor = _some(notice.tag?.editors || [], ['id', viewer.id])
+  const isMaintainer = isOwner || isEditor
+  const isAuthor = notice.target.author?.id === viewer.id
 
   return (
     <section className="container">
@@ -28,11 +36,25 @@ const ArticleTagHasBeenUnselectedNotice = ({
 
       <section className="content-wrap overflow-hidden">
         <NoticeHead notice={notice}>
+          {isAuthor && (
+            <>
+              <Translate zh_hant="啊喔" zh_hans="啊喔" />
+              {'， '}
+            </>
+          )}
           <NoticeActorName user={notice.actor} />{' '}
-          <Translate
-            zh_hant="將你的作品從標籤精選文集移除"
-            zh_hans="将你的作品從标签精选文集移除"
-          />
+          {isAuthor && (
+            <Translate
+              zh_hant="將你的作品從標籤精選中拿走了"
+              zh_hans="将你的作品從标签精选中拿走了"
+            />
+          )}
+          {!isAuthor && isMaintainer && (
+            <Translate
+              zh_hant="將作品從標籤精選中拿走了"
+              zh_hans="将作品從标签精选中拿走了"
+            />
+          )}
         </NoticeHead>
 
         <NoticeArticle article={notice.target} isBlock />
@@ -60,6 +82,12 @@ ArticleTagHasBeenUnselectedNotice.fragments = {
         ...NoticeArticle
       }
       tag {
+        editors {
+          id
+        }
+        owner {
+          id
+        }
         ...NoticeTag
       }
     }

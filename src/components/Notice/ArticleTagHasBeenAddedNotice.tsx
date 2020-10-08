@@ -1,6 +1,8 @@
 import gql from 'graphql-tag'
+import _some from 'lodash/some'
+import { useContext } from 'react'
 
-import { Translate } from '~/components'
+import { Translate, ViewerContext } from '~/components'
 
 import NoticeActorAvatar from './NoticeActorAvatar'
 import NoticeActorName from './NoticeActorName'
@@ -12,9 +14,16 @@ import styles from './styles.css'
 import { ArticleTagHasBeenAddedNotice as NoticeType } from './__generated__/ArticleTagHasBeenAddedNotice'
 
 const ArticleTagHasBeenAddedNotice = ({ notice }: { notice: NoticeType }) => {
-  if (!notice || !notice.actor) {
+  const viewer = useContext(ViewerContext)
+
+  if (!notice || !notice.actor || !notice.target) {
     return null
   }
+
+  const isOwner = notice.tag?.owner?.id === viewer.id
+  const isEditor = _some(notice.tag?.editors || [], ['id', viewer.id])
+  const isMaintainer = isOwner || isEditor
+  const isAuthor = notice.target.author?.id === viewer.id
 
   return (
     <section className="container">
@@ -25,7 +34,19 @@ const ArticleTagHasBeenAddedNotice = ({ notice }: { notice: NoticeType }) => {
       <section className="content-wrap overflow-hidden">
         <NoticeHead notice={notice}>
           <NoticeActorName user={notice.actor} />{' '}
-          <Translate zh_hant="將你的作品加入" zh_hans="将你的作品加入" />
+          {isAuthor && (
+            <Translate
+              zh_hant="發現你的作品，並把它加入標籤"
+              zh_hans="发现你的作品，并把它加入标签"
+            />
+          )}
+          {!isAuthor && isMaintainer && notice.target.author && (
+            <>
+              <Translate zh_hant="將" zh_hans="將" />{' '}
+              <NoticeActorName user={notice?.target?.author} />{' '}
+              <Translate zh_hant="的作品加入標籤" zh_hans="的作品加入标签" />
+            </>
+          )}
         </NoticeHead>
 
         <NoticeArticle article={notice.target} isBlock />
@@ -50,9 +71,18 @@ ArticleTagHasBeenAddedNotice.fragments = {
         ...NoticeActorNameUser
       }
       target {
+        author {
+          displayName
+        }
         ...NoticeArticle
       }
       tag {
+        editors {
+          id
+        }
+        owner {
+          id
+        }
         ...NoticeTag
       }
     }

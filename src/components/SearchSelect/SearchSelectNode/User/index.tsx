@@ -10,11 +10,14 @@ import {
 import styles from '../styles.css'
 
 import { UserDigestMiniUser } from '~/components/UserDigest/Mini/__generated__/UserDigestMiniUser'
+import { SelectSearch_search_edges_node_User_info as UserInfo } from '../../SearchingArea/__generated__/SelectSearch'
+
+type User = UserDigestMiniUser & { info: UserInfo }
 
 interface SearchSelectUserProps {
-  user: UserDigestMiniUser
+  user: User
   selected?: boolean
-  onClick: (user: UserDigestMiniUser) => void
+  onClick: (user: User) => void
   inStagingArea?: boolean
 }
 

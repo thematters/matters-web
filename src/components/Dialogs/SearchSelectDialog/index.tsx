@@ -1,15 +1,14 @@
 import { useState } from 'react'
 
 import { Dialog, Translate } from '~/components'
-
-import { TextId } from '~/common/enums'
-
 import SearchingArea, {
   SearchFilter,
   SearchType,
   SelectNode,
-} from './SearchingArea'
-import StagingArea, { StagingNode } from './StagingArea'
+} from '~/components/SearchSelect/SearchingArea'
+import StagingArea, { StagingNode } from '~/components/SearchSelect/StagingArea'
+
+import { TextId } from '~/common/enums'
 
 /**
  * <SearchSelectDialog> is a dialog component for
