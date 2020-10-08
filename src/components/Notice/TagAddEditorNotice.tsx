@@ -4,14 +4,13 @@ import { Translate } from '~/components'
 
 import NoticeActorAvatar from './NoticeActorAvatar'
 import NoticeActorName from './NoticeActorName'
-import NoticeArticle from './NoticeArticle'
 import NoticeHead from './NoticeHead'
 import NoticeTag from './NoticeTag'
 import styles from './styles.css'
 
-import { ArticleTagHasBeenRemovedNotice as NoticeType } from './__generated__/ArticleTagHasBeenRemovedNotice'
+import { TagAddEditorNotice as NoticeType } from './__generated__/TagAddEditorNotice'
 
-const ArticleTagHasBeenRemovedNotice = ({ notice }: { notice: NoticeType }) => {
+const TagAddEditorNotice = ({ notice }: { notice: NoticeType }) => {
   if (!notice || !notice.actor) {
     return null
   }
@@ -22,16 +21,14 @@ const ArticleTagHasBeenRemovedNotice = ({ notice }: { notice: NoticeType }) => {
         <NoticeActorAvatar user={notice.actor} />
       </section>
 
-      <section className="content-wrap overflow-hidden">
+      <section className="content-wrap">
         <NoticeHead notice={notice}>
           <NoticeActorName user={notice.actor} />{' '}
           <Translate
-            zh_hant="將你的作品從標籤中拿走了"
-            zh_hans="将你的作品从标签中拿走了"
+            zh_hant="邀請你成為標籤的協作者"
+            zh_hans="邀请你成为標籤的协作者"
           />
         </NoticeHead>
-
-        <NoticeArticle article={notice.target} isBlock />
 
         <NoticeTag tag={notice.tag} />
       </section>
@@ -41,9 +38,9 @@ const ArticleTagHasBeenRemovedNotice = ({ notice }: { notice: NoticeType }) => {
   )
 }
 
-ArticleTagHasBeenRemovedNotice.fragments = {
+TagAddEditorNotice.fragments = {
   notice: gql`
-    fragment ArticleTagHasBeenRemovedNotice on ArticleTagHasBeenRemovedNotice {
+    fragment TagAddEditorNotice on TagAddEditorNotice {
       id
       unread
       __typename
@@ -52,19 +49,14 @@ ArticleTagHasBeenRemovedNotice.fragments = {
         ...NoticeActorAvatarUser
         ...NoticeActorNameUser
       }
-      target {
-        ...NoticeArticle
-      }
       tag {
         ...NoticeTag
       }
     }
     ${NoticeActorAvatar.fragments.user}
     ${NoticeActorName.fragments.user}
-    ${NoticeArticle.fragments.article}
-    ${NoticeHead.fragments.date}
     ${NoticeTag.fragments.tag}
   `,
 }
 
-export default ArticleTagHasBeenRemovedNotice
+export default TagAddEditorNotice

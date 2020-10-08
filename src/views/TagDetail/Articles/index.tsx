@@ -1,5 +1,5 @@
 import { NetworkStatus } from 'apollo-client'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useRef } from 'react'
 
 import {
   ArticleDigestFeed,
@@ -30,6 +30,7 @@ interface TagArticlesProps {
 
 const TagDetailArticles = ({ tagId, selected }: TagArticlesProps) => {
   const viewer = useContext(ViewerContext)
+  const feed = useRef(selected)
 
   /**
    * Data Fetching
@@ -83,6 +84,11 @@ const TagDetailArticles = ({ tagId, selected }: TagArticlesProps) => {
   useEffect(() => {
     if (loading || !edges) {
       return
+    }
+
+    if (feed.current !== selected) {
+      refetchPublic()
+      feed.current = selected
     }
 
     loadPrivate(data)

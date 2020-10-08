@@ -55,6 +55,10 @@
           { "name": "ArticleTagHasBeenAddedNotice" },
           { "name": "ArticleTagHasBeenRemovedNotice" },
           { "name": "ArticleTagHasBeenUnselectedNotice" },
+          { "name": "TagAdoptionNotice" },
+          { "name": "TagLeaveNotice" },
+          { "name": "TagAddEditorNotice" },
+          { "name": "TagLeaveEditorNotice" },
           { "name": "PaymentReceivedDonationNotice" },
           { "name": "PaymentPayoutNotice" }
         ]
