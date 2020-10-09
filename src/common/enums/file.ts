@@ -26,6 +26,7 @@ export enum ENTITY_TYPE {
 
 export enum ASSET_TYPE {
   avatar = 'avatar',
+  cover = 'cover',
   embed = 'embed',
   embedaudio = 'embedaudio',
   profileCover = 'profileCover',
