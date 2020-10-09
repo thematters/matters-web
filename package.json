@@ -126,6 +126,7 @@
     "babel-plugin-dynamic-import-node": "^2.3.3",
     "babel-polyfill": "^6.26.0",
     "chromedriver": "^84.0.1",
+    "core-js": "^3.6.5",
     "cucumber": "^6.0.5",
     "cucumber-pretty": "^6.0.0",
     "cz-conventional-changelog": "^3.2.0",
