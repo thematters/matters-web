@@ -5,8 +5,9 @@
 }
 
 .editor-title {
+  padding: var(--spacing-base) var(--spacing-base) 0;
+
   & input {
-    margin-bottom: var(--spacing-base);
     font-size: var(--font-size-article-title);
     font-weight: var(--font-weight-article-title);
     line-height: var(--line-height-article-title);
