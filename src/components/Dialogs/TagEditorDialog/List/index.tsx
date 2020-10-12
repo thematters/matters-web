@@ -78,8 +78,11 @@ const TagEditorList = ({ id, close, toAddStep, toRemoveStep }: Props) => {
 
   const editors = tag.editors || []
   const count = editors.length
+
   const isAllowAdd = count < 4
   const isHavingEditors = count > 0
+  const isHavingNoneEditors = count === 0
+  const isReachingLimit = count === 4
 
   return (
     <>
@@ -132,14 +135,25 @@ const TagEditorList = ({ id, close, toAddStep, toRemoveStep }: Props) => {
         <Dialog.Message>
           <p className="hint">
             <Translate
-              zh_hant="協作者可以與你共同管理「精選」每個標籤最多添加"
-              zh_hans="协作者可以与你共同管理「精选」每个标签最多添加"
+              zh_hant="協作者可以與你共同管理精選"
+              zh_hans="协作者可以与你共同管理精选"
             />
-            <span className="count">
-              {' '}
-              {count}
-              {'/4 '}
-            </span>
+            <br />
+            {(isHavingNoneEditors || isReachingLimit) && (
+              <>
+                <Translate
+                  zh_hant="每個標籤最多添加"
+                  zh_hans="每个标签最多添加"
+                />
+                <span className="count">{' 4 '}</span>
+              </>
+            )}
+            {isAllowAdd && isHavingEditors && (
+              <>
+                <Translate zh_hant="你還可以添加" zh_hans="你还可以添加" />
+                <span className="count"> {4 - count} </span>
+              </>
+            )}
             <Translate zh_hant="名協作者" zh_hans="名协作者" />
           </p>
         </Dialog.Message>
