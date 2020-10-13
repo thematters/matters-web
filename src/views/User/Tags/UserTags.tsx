@@ -92,8 +92,8 @@ const UserTags = () => {
   const CustomHead = () => (
     <Head
       title={{
-        zh_hant: `${user.displayName}主理的標籤`,
-        zh_hans: `${user.displayName}主理的標籤`,
+        zh_hant: `${user.displayName}主理與協作的標籤`,
+        zh_hans: `${user.displayName}主理与协作的標籤`,
       }}
       description={user.info.description}
       image={user.info.profileCover || IMAGE_LOGO_192}
@@ -107,7 +107,7 @@ const UserTags = () => {
         <UserTabs />
         <EmptyTag
           description={
-            <Translate zh_hant="還沒有主理標籤喔" zh_hans="还没有主理标签喔" />
+            <Translate zh_hant="還沒有主理與協作標籤喔" zh_hans="还没有主理与协作标签喔" />
           }
         />
       </>
