@@ -5,7 +5,7 @@ import { FC, useContext } from 'react'
 import { LanguageContext } from '~/components'
 import SEARCH_USERS from '~/components/GQL/queries/searchUsers'
 
-import { ADD_TOAST } from '~/common/enums'
+import { ADD_TOAST, ASSET_TYPE } from '~/common/enums'
 import editorStyles from '~/common/styles/utils/content.article.css'
 import themeStyles from '~/common/styles/vendors/quill.bubble.css'
 
@@ -23,9 +23,16 @@ interface Props {
   update: (draft: {
     title?: string | null
     content?: string | null
-    coverAssetId?: string | null
+    cover?: string | null
   }) => Promise<void>
-  upload: DraftAssetUpload
+  upload: (input: {
+    file?: any
+    url?: string
+    type?: ASSET_TYPE.embed | ASSET_TYPE.embedaudio
+  }) => Promise<{
+    id: string
+    path: string
+  }>
 }
 
 const ArticleEditor: FC<Props> = ({ draft, update, upload }) => {

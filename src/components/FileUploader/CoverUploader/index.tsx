@@ -14,6 +14,9 @@ import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 import {
   ACCEPTED_UPLOAD_IMAGE_TYPES,
   ADD_TOAST,
+  ASSET_TYPE,
+  ENTITY_TYPE,
+  TEXT,
   UPLOAD_IMAGE_SIZE_LIMIT,
 } from '~/common/enums'
 
@@ -41,9 +44,9 @@ import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/Singl
  */
 
 interface Props {
-  assetType: 'profileCover' | 'tagCover'
+  assetType: ASSET_TYPE.profileCover | ASSET_TYPE.tagCover
   entityId?: string
-  entityType: 'user' | 'tag'
+  entityType: ENTITY_TYPE.user | ENTITY_TYPE.tag
   onUpload: (assetId: string | null) => void
   coverUrl?: string
 }
@@ -155,7 +158,7 @@ export const CoverUploader = ({
           id={fieldId}
           type="file"
           name="file"
-          aria-label="上傳封面"
+          aria-label={TEXT.zh_hant.uploadCover}
           accept={acceptTypes}
           multiple={false}
           onChange={handleChange}

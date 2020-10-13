@@ -5,7 +5,6 @@ export default {
     fragment PublishStateDraft on Draft {
       id
       publishState
-      scheduledAt
       article {
         id
         title

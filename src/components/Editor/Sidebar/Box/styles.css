@@ -1,0 +1,12 @@
+.box {
+  @mixin border-grey;
+
+  padding: var(--spacing-base) 0;
+  border-radius: var(--spacing-x-tight);
+
+  & header {
+    @mixin flex-center-space-between;
+
+    padding: 0 var(--spacing-base);
+  }
+}

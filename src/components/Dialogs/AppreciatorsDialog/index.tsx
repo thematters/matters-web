@@ -41,10 +41,7 @@ const BaseAppreciatorsDialog = ({
       {children({ open })}
 
       <Dialog isOpen={showDialog} onDismiss={close} fixedHeight>
-        <DynamicConetnt
-          mediaHash={article.mediaHash || ''}
-          closeDialog={close}
-        />
+        <DynamicConetnt mediaHash={article.mediaHash} closeDialog={close} />
       </Dialog>
     </>
   )

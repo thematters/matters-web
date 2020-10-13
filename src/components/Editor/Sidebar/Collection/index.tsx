@@ -1,46 +1,65 @@
-import classNames from 'classnames'
-import _uniq from 'lodash/uniq'
-import dynamic from 'next/dynamic'
+import { ArticleDigestDropdown, IconCollectionMedium } from '~/components'
+import {
+  SearchSelectDialog,
+  SearchSelectNode,
+} from '~/components/Dialogs/SearchSelectDialog'
 
-import { Spinner, Translate } from '~/components'
-
-import Collapsable from '../Collapsable'
+import Box from '../Box'
 import styles from './styles.css'
 
 import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
 
-const DynamicCollectionEditor = dynamic(() => import('./CollectionEditor'), {
-  ssr: false,
-  loading: Spinner,
-})
-
 interface CollectionProps {
   articles: ArticleDigestDropdownArticle[]
   onEdit: (articles: ArticleDigestDropdownArticle[]) => any
+  saving?: boolean
   disabled?: boolean
 }
 
-const Collection = ({ articles, onEdit, disabled }: CollectionProps) => {
-  const containerClasses = classNames({
-    container: true,
-    'u-area-disable': disabled,
-  })
-
+const Collection = ({
+  articles,
+  onEdit,
+  saving,
+  disabled,
+}: CollectionProps) => {
   return (
-    <Collapsable
-      title={<Translate id="extend" />}
-      defaultCollapsed={articles.length <= 0}
+    <SearchSelectDialog
+      title="extendArticle"
+      hint="hintEditCollection"
+      searchType="Article"
+      onSave={(nodes: SearchSelectNode[]) =>
+        onEdit(nodes as ArticleDigestDropdownArticle[])
+      }
+      nodes={articles}
+      saving={saving}
     >
-      <p className="intro">
-        <Translate id="hintEditCollection" />
-      </p>
+      {({ open: openAddMyArticlesDialog }) => (
+        <Box
+          icon={<IconCollectionMedium size="md" />}
+          title="extendArticle"
+          onClick={openAddMyArticlesDialog}
+          disabled={disabled}
+        >
+          {articles.length > 0 && (
+            <ul>
+              {articles.map((article) => (
+                <li key={article.id}>
+                  <ArticleDigestDropdown
+                    article={article}
+                    titleTextSize="sm"
+                    spacing={['base', 'base']}
+                    bgColor="none"
+                    bgActiveColor="grey-lighter"
+                  />
+                </li>
+              ))}
 
-      <section className={containerClasses}>
-        <DynamicCollectionEditor articles={articles} onEdit={onEdit} />
-      </section>
-
-      <style jsx>{styles}</style>
-    </Collapsable>
+              <style jsx>{styles}</style>
+            </ul>
+          )}
+        </Box>
+      )}
+    </SearchSelectDialog>
   )
 }
 

@@ -163,6 +163,7 @@ type UserFeedType =
   | 'search_user'
   | 'tag_detail_latest'
   | 'tag_detail_selected'
+  | 'tag_detail_community'
   | 'transaction'
 
 type TagFeedType =

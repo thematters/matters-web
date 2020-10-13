@@ -49,17 +49,21 @@
   background: var(--color-grey-lighter);
   border-radius: 2rem;
 
-  &:hover,
-  &:focus {
-    background: var(--color-green-lighter);
+  &:not(.disabled) {
+    &:hover,
+    &:focus {
+      background: var(--color-green-lighter);
+    }
   }
 
   &.active {
     background: var(--color-green-lighter);
 
-    &:hover,
-    &:focus {
-      background: var(--color-grey-lighter-active);
+    &:not(.disabled) {
+      &:hover,
+      &:focus {
+        background: var(--color-grey-lighter-active);
+      }
     }
 
     & :global(svg) {

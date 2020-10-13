@@ -1,5 +1,11 @@
-.intro {
-  margin: var(--spacing-base) 0;
-  font-size: var(--font-size-xs);
-  color: var(--color-grey);
+ul {
+  padding-top: var(--spacing-base);
+
+  & li {
+    @mixin border-top-grey;
+
+    &:last-child {
+      margin-bottom: calc(var(--spacing-base) * -1);
+    }
+  }
 }

@@ -1,15 +1,14 @@
 import { useState } from 'react'
 
 import { Dialog, Translate } from '~/components'
-
-import { TextId } from '~/common/enums'
-
 import SearchingArea, {
   SearchFilter,
   SearchType,
   SelectNode,
-} from './SearchingArea'
-import StagingArea, { StagingNode } from './StagingArea'
+} from '~/components/SearchSelect/SearchingArea'
+import StagingArea, { StagingNode } from '~/components/SearchSelect/StagingArea'
+
+import { TextId } from '~/common/enums'
 
 /**
  * <SearchSelectDialog> is a dialog component for
@@ -44,6 +43,9 @@ interface SearchSelectDialogProps {
   draggable?: boolean
 
   children: ({ open }: { open: () => void }) => React.ReactNode
+
+  // to create a new tag
+  creatable?: boolean
 }
 
 const BaseSearchSelectDialog = ({
@@ -60,6 +62,8 @@ const BaseSearchSelectDialog = ({
   draggable,
 
   children,
+
+  creatable,
 }: SearchSelectDialogProps) => {
   const initStagingNodes =
     nodes?.map((node) => ({ node, selected: true })) || []
@@ -126,6 +130,7 @@ const BaseSearchSelectDialog = ({
           toStagingArea={toStagingArea}
           toSearchingArea={toSearchingArea}
           addNodeToStaging={addNodeToStaging}
+          creatable={creatable}
         />
 
         <StagingArea

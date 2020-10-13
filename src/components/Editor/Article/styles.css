@@ -17,6 +17,7 @@
       var(--vh) * 100 - var(--global-header-height-mobile) -
         var(--editor-content-spacing)
     );
+    padding: var(--spacing-base);
 
     @media (--sm-up) {
       max-height: calc(

@@ -53,7 +53,7 @@ const BaseDialog = ({ children }: Props) => {
         <Dialog.Footer>
           <Dialog.Footer.Button
             textColor="white"
-            bgColor="gold"
+            bgColor="green"
             loading={loading}
             onClick={async () => {
               try {
