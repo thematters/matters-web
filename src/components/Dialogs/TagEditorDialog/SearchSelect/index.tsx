@@ -1,7 +1,7 @@
 import _get from 'lodash/get'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 
-import { Dialog, Translate } from '~/components'
+import { Dialog, LanguageContext, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import UPDATE_TAG_SETTING from '~/components/GQL/mutations/updateTagSetting'
 import updateTagMaintainers from '~/components/GQL/updates/tagMaintainers'
@@ -11,6 +11,7 @@ import SearchingArea, {
 import StagingArea, { StagingNode } from '~/components/SearchSelect/StagingArea'
 
 import { ADD_TOAST } from '~/common/enums'
+import { parseFormSubmitErrors } from '~/common/utils'
 
 import { UpdateTagSetting } from '~/components/GQL/mutations/__generated__/UpdateTagSetting'
 
@@ -38,6 +39,7 @@ type Area = 'staging' | 'searching'
  * ```
  */
 const TagSearchSelectEditor = ({ id, close, toListStep }: Props) => {
+  const { lang } = useContext(LanguageContext)
   const [update, { loading }] = useMutation<UpdateTagSetting>(
     UPDATE_TAG_SETTING
   )
@@ -87,7 +89,7 @@ const TagSearchSelectEditor = ({ id, close, toListStep }: Props) => {
       })
 
       if (!result) {
-        throw new Error('add tag editors failed')
+        return
       }
 
       window.dispatchEvent(
@@ -104,7 +106,20 @@ const TagSearchSelectEditor = ({ id, close, toListStep }: Props) => {
 
       close()
     } catch (error) {
-      throw error
+      const [messages, codes] = parseFormSubmitErrors(error, lang)
+
+      if (!messages[codes[0]]) {
+        return null
+      }
+
+      window.dispatchEvent(
+        new CustomEvent(ADD_TOAST, {
+          detail: {
+            color: 'red',
+            content: messages[codes[0]],
+          },
+        })
+      )
     }
   }
 
