@@ -107,7 +107,10 @@ const UserTags = () => {
         <UserTabs />
         <EmptyTag
           description={
-            <Translate zh_hant="還沒有主理與協作標籤喔" zh_hans="还没有主理与协作标签喔" />
+            <Translate
+              zh_hant="還沒有主理與協作標籤喔"
+              zh_hans="还没有主理与协作标签喔"
+            />
           }
         />
       </>
