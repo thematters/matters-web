@@ -79,7 +79,7 @@ const Init: React.FC<FormProps> = ({
   const formId = 'sign-up-init-form'
 
   const { token, refreshToken } = useContext(ReCaptchaContext)
-  const [send] = useMutation<SendVerificationCode>(SEND_CODE)
+  const [sendCode] = useMutation<SendVerificationCode>(SEND_CODE)
 
   const {
     values,
@@ -113,13 +113,9 @@ const Init: React.FC<FormProps> = ({
       )}&displayName=${encodeURIComponent(displayName)}`
 
       try {
-        await send({
+        await sendCode({
           variables: { input: { email, type: 'register', token, redirectUrl } },
         })
-
-        if (refreshToken) {
-          refreshToken()
-        }
 
         submitCallback()
       } catch (error) {
@@ -142,6 +138,10 @@ const Init: React.FC<FormProps> = ({
             )
           }
         })
+
+        if (refreshToken) {
+          refreshToken()
+        }
 
         setSubmitting(false)
       }

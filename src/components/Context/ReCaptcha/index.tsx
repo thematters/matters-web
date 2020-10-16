@@ -41,16 +41,20 @@ export const ReCaptchaProvider = ({
     window.grecaptcha.ready(async () => {
       // function to get and set token
       const getToken = async () => {
-        if (window.grecaptcha && window.grecaptcha.execute) {
-          window.grecaptcha
-            .execute(RECAPTCHA_KEY, { action })
-            .then((newToken) => {
-              setToken(newToken)
-            })
-        } else {
-          // try again after 2 seconds if script is not injected
-          await sleep(2000)
-          getToken()
+        try {
+          if (window.grecaptcha && window.grecaptcha.execute) {
+            window.grecaptcha
+              .execute(RECAPTCHA_KEY, { action })
+              .then((newToken) => {
+                setToken(newToken)
+              })
+          } else {
+            // try again after 2 seconds if script is not injected
+            await sleep(2000)
+            getToken()
+          }
+        } catch (e) {
+          console.error(e)
         }
       }
 

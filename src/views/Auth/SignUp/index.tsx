@@ -30,7 +30,7 @@ const SignUp = () => {
           <SignUpForm.Init
             purpose="page"
             submitCallback={() => {
-              forward('init')
+              forward('verification_sent')
             }}
           />
         </ReCaptchaProvider>

@@ -1,6 +1,12 @@
 import { useState } from 'react'
 
-import { Dialog, SignUpForm, useEventListener, useStep } from '~/components'
+import {
+  Dialog,
+  ReCaptchaProvider,
+  SignUpForm,
+  useEventListener,
+  useStep,
+} from '~/components'
 
 import { CLOSE_ACTIVE_DIALOG, OPEN_SIGNUP_DIALOG } from '~/common/enums'
 
@@ -29,13 +35,15 @@ const SignUpDialog = () => {
       fixedHeight={currStep !== 'verification_sent'}
     >
       {currStep === 'init' && (
-        <SignUpForm.Init
-          purpose="dialog"
-          submitCallback={() => {
-            forward('verification_sent')
-          }}
-          closeDialog={close}
-        />
+        <ReCaptchaProvider>
+          <SignUpForm.Init
+            purpose="dialog"
+            submitCallback={() => {
+              forward('verification_sent')
+            }}
+            closeDialog={close}
+          />
+        </ReCaptchaProvider>
       )}
       {currStep === 'verification_sent' && (
         <SignUpForm.VerificationLinkSent purpose="dialog" closeDialog={close} />
