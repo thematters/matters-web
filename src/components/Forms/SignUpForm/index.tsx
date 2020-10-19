@@ -1,9 +1,11 @@
 import Complete from './Complete'
 import Init from './Init'
-import Profile from './Profile'
+import Password from './Password'
+import VerificationLinkSent from './VerificationLinkSent'
 
 export const SignUpForm = {
   Init,
-  Profile,
+  VerificationLinkSent,
+  Password,
   Complete,
 }

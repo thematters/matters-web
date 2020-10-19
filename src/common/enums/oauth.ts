@@ -287,7 +287,7 @@ export const OAUTH_SCOPE_TREE = {
       },
       changeEmail: {
         _t: {
-          zh_hant: '修改郵箱',
+          zh_hant: '修改電子信箱',
           zh_hans: '修改邮箱',
         },
       },

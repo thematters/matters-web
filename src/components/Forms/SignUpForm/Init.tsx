@@ -1,5 +1,4 @@
 import { useFormik } from 'formik'
-import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import Link from 'next/link'
 import { useContext } from 'react'
@@ -9,51 +8,40 @@ import {
   Form,
   LanguageContext,
   Layout,
-  ReCaptchaProvider,
-  SendCodeButton,
+  ReCaptchaContext,
   Translate,
 } from '~/components'
 import { useMutation } from '~/components/GQL'
-import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
+import SEND_CODE from '~/components/GQL/mutations/sendCode'
 
-import { CLOSE_ACTIVE_DIALOG, OPEN_LOGIN_DIALOG, PATHS } from '~/common/enums'
 import {
-  analytics,
+  ADD_TOAST,
+  CLOSE_ACTIVE_DIALOG,
+  OPEN_LOGIN_DIALOG,
+  PATHS,
+} from '~/common/enums'
+import {
   appendTarget,
   parseFormSubmitErrors,
   translate,
-  validateCode,
+  validateDisplayName,
   validateEmail,
-  validatePassword,
   validateToS,
-  validateUserName,
 } from '~/common/utils'
 
-import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
-import { UserRegister } from './__generated__/UserRegister'
+import { SendVerificationCode } from '~/components/GQL/mutations/__generated__/SendVerificationCode'
 
 interface FormProps {
-  defaultEmail?: string
   purpose: 'dialog' | 'page'
-  submitCallback?: (params: any) => void
+  submitCallback: () => void
   closeDialog?: () => void
 }
 
 interface FormValues {
+  displayName: string
   email: string
-  code: string
-  userName: string
-  password: string
   tos: boolean
 }
-
-const USER_REGISTER = gql`
-  mutation UserRegister($input: UserRegisterInput!) {
-    userRegister(input: $input) {
-      auth
-    }
-  }
-`
 
 const LoginDialogButton = () => (
   <Form.List spacing="xloose">
@@ -81,17 +69,17 @@ const LoginRedirectionButton = () => (
 )
 
 const Init: React.FC<FormProps> = ({
-  defaultEmail = '',
   purpose,
   submitCallback,
   closeDialog,
 }) => {
-  const [confirm] = useMutation<ConfirmVerificationCode>(CONFIRM_CODE)
-  const [register] = useMutation<UserRegister>(USER_REGISTER)
   const { lang } = useContext(LanguageContext)
   const isInDialog = purpose === 'dialog'
   const isInPage = purpose === 'page'
   const formId = 'sign-up-init-form'
+
+  const { token, refreshToken } = useContext(ReCaptchaContext)
+  const [sendCode] = useMutation<SendVerificationCode>(SEND_CODE)
 
   const {
     values,
@@ -104,54 +92,56 @@ const Init: React.FC<FormProps> = ({
     isValid,
   } = useFormik<FormValues>({
     initialValues: {
-      email: defaultEmail,
-      code: '',
-      userName: '',
-      password: '',
+      displayName: '',
+      email: '',
       tos: true,
     },
-    validate: ({ email, code, userName, password, tos }) =>
+    validate: ({ displayName, email, tos }) =>
       _pickBy({
+        displayName: validateDisplayName(displayName, lang),
         email: validateEmail(email, lang, { allowPlusSign: false }),
-        code: validateCode(code, lang),
-        userName: validateUserName(userName, lang),
-        password: validatePassword(password, lang),
         tos: validateToS(tos, lang),
       }),
     onSubmit: async (
-      { email, code, userName, password },
+      { displayName, email },
       { setFieldError, setSubmitting }
     ) => {
+      const redirectUrl = `${
+        window.location.origin
+      }/signup?email=${encodeURIComponent(
+        email
+      )}&displayName=${encodeURIComponent(displayName)}`
+
       try {
-        const { data } = await confirm({
-          variables: { input: { email, code, type: 'register' } },
-        })
-        const codeId = data?.confirmVerificationCode
-
-        await register({
-          variables: {
-            input: { email, codeId, userName, displayName: userName, password },
-          },
+        await sendCode({
+          variables: { input: { email, type: 'register', token, redirectUrl } },
         })
 
-        analytics.identifyUser()
-
-        if (submitCallback) {
-          submitCallback({ email, codeId, password })
-        }
+        submitCallback()
       } catch (error) {
         const [messages, codes] = parseFormSubmitErrors(error, lang)
         codes.forEach((c) => {
           if (c.includes('USER_EMAIL_')) {
             setFieldError('email', messages[c])
-          } else if (c.indexOf('CODE_') >= 0) {
-            setFieldError('code', messages[c])
-          } else if (c.indexOf('USER_PASSWORD_') >= 0) {
-            setFieldError('password', messages[c])
           } else {
-            setFieldError('userName', messages[c])
+            if (!messages[codes[0]]) {
+              return
+            }
+
+            window.dispatchEvent(
+              new CustomEvent(ADD_TOAST, {
+                detail: {
+                  color: 'red',
+                  content: messages[codes[0]],
+                },
+              })
+            )
           }
         })
+
+        if (refreshToken) {
+          refreshToken()
+        }
 
         setSubmitting(false)
       }
@@ -160,6 +150,22 @@ const Init: React.FC<FormProps> = ({
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
+      <Form.Input
+        label={<Translate id="displayName" />}
+        type="text"
+        name="displayName"
+        required
+        placeholder={translate({
+          zh_hant: '你的站內暱稱，之後可以修改',
+          zh_hans: '你的站内暱称，之后可以修改',
+          lang,
+        })}
+        value={values.displayName}
+        error={touched.displayName && errors.displayName}
+        onBlur={handleBlur}
+        onChange={handleChange}
+      />
+
       <Form.Input
         label={<Translate id="email" />}
         type="email"
@@ -174,64 +180,6 @@ const Init: React.FC<FormProps> = ({
         onBlur={handleBlur}
         onChange={handleChange}
         autoFocus
-      />
-
-      <Form.Input
-        label={<Translate id="verificationCode" />}
-        type="text"
-        name="code"
-        required
-        placeholder={translate({
-          id: 'enterVerificationCode',
-          lang,
-        })}
-        value={values.code}
-        error={touched.code && errors.code}
-        onBlur={handleBlur}
-        onChange={handleChange}
-        extraButton={
-          <SendCodeButton
-            email={values.email}
-            type="register"
-            disabled={!!errors.email}
-          />
-        }
-      />
-
-      <Form.Input
-        label="Matters ID"
-        type="text"
-        name="userName"
-        required
-        value={values.userName}
-        error={touched.userName && errors.userName}
-        onBlur={handleBlur}
-        onChange={handleChange}
-        placeholder={translate({
-          zh_hant: '你的站內身份識別，允許修改一次',
-          zh_hans: '你的站内身份识别，允许修改一次',
-          lang,
-        })}
-        hint={translate({
-          id: 'hintUserName',
-          lang,
-        })}
-      />
-
-      <Form.Input
-        label={<Translate id="password" />}
-        type="password"
-        name="password"
-        required
-        placeholder={translate({
-          id: 'enterPassword',
-          lang,
-        })}
-        value={values.password}
-        error={touched.password && errors.password}
-        onBlur={handleBlur}
-        onChange={handleChange}
-        hint={<Translate id="hintPassword" />}
       />
 
       <Form.CheckBox
@@ -274,7 +222,7 @@ const Init: React.FC<FormProps> = ({
 
   if (isInPage) {
     return (
-      <ReCaptchaProvider>
+      <>
         <Layout.Header
           left={<Layout.Header.BackButton />}
           right={
@@ -285,12 +233,12 @@ const Init: React.FC<FormProps> = ({
           }
         />
         {InnerForm}
-      </ReCaptchaProvider>
+      </>
     )
   }
 
   return (
-    <ReCaptchaProvider>
+    <>
       {closeDialog && (
         <Dialog.Header
           title="register"
@@ -300,7 +248,7 @@ const Init: React.FC<FormProps> = ({
       )}
 
       <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
-    </ReCaptchaProvider>
+    </>
   )
 }
 
