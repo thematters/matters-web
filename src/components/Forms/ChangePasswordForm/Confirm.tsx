@@ -5,6 +5,7 @@ import { useContext } from 'react'
 
 import { Dialog, Form, LanguageContext, Layout, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
+import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 
 import {
   parseFormSubmitErrors,
@@ -13,13 +14,15 @@ import {
   validatePassword,
 } from '~/common/utils'
 
+import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
 import { ResetPassword } from './__generated__/ResetPassword'
 
 interface FormProps {
-  codeId: string
+  email: string
+  code: string
   type: 'forget' | 'change'
   purpose: 'dialog' | 'page'
-  submitCallback?: () => void
+  submitCallback: () => void
   closeDialog?: () => void
 }
 
@@ -35,12 +38,14 @@ export const RESET_PASSWORD = gql`
 `
 
 const Confirm: React.FC<FormProps> = ({
-  codeId,
+  email,
+  code,
   type,
   purpose,
   submitCallback,
   closeDialog,
 }) => {
+  const [confirm] = useMutation<ConfirmVerificationCode>(CONFIRM_CODE)
   const [reset] = useMutation<ResetPassword>(RESET_PASSWORD)
   const { lang } = useContext(LanguageContext)
 
@@ -74,12 +79,20 @@ const Confirm: React.FC<FormProps> = ({
       }),
     onSubmit: async ({ password }, { setFieldError, setSubmitting }) => {
       try {
-        const { data } = await reset({
+        // verify email
+        let codeId = ''
+        const { data } = await confirm({
+          variables: { input: { email, type: 'password_reset', code } },
+        })
+
+        codeId = data?.confirmVerificationCode || ''
+
+        // finish password resetting
+        await reset({
           variables: { input: { password, codeId } },
         })
-        const resetPassword = data?.resetPassword
 
-        if (submitCallback && resetPassword) {
+        if (submitCallback) {
           submitCallback()
         }
       } catch (error) {

@@ -2,37 +2,24 @@ import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 
-import {
-  Dialog,
-  Form,
-  LanguageContext,
-  Layout,
-  SendCodeButton,
-  Translate,
-} from '~/components'
+import { Dialog, Form, LanguageContext, Layout, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
-import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
+import SEND_CODE from '~/components/GQL/mutations/sendCode'
 
-import {
-  parseFormSubmitErrors,
-  translate,
-  validateCode,
-  validateEmail,
-} from '~/common/utils'
+import { parseFormSubmitErrors, translate, validateEmail } from '~/common/utils'
 
-import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
+import { SendVerificationCode } from '~/components/GQL/mutations/__generated__/SendVerificationCode'
 
 interface FormProps {
-  defaultEmail: string
+  defaultEmail?: string
   type: 'forget' | 'change'
   purpose: 'dialog' | 'page'
-  submitCallback?: (params: any) => void
+  submitCallback: () => void
   closeDialog?: () => void
 }
 
 interface FormValues {
   email: string
-  code: string
 }
 
 const Request: React.FC<FormProps> = ({
@@ -42,13 +29,15 @@ const Request: React.FC<FormProps> = ({
   submitCallback,
   closeDialog,
 }) => {
-  const [confirmCode] = useMutation<ConfirmVerificationCode>(CONFIRM_CODE)
   const { lang } = useContext(LanguageContext)
 
   const isForget = type === 'forget'
   const isInPage = purpose === 'page'
   const formId = `password-change-request-form`
   const titleId = isForget ? 'resetPassword' : 'changePassword'
+  const redirectPath = isForget ? '/forget' : '/me/settings/change-password'
+
+  const [sendCode] = useMutation<SendVerificationCode>(SEND_CODE)
 
   const {
     values,
@@ -62,32 +51,25 @@ const Request: React.FC<FormProps> = ({
   } = useFormik<FormValues>({
     initialValues: {
       email: defaultEmail,
-      code: '',
     },
-    validate: ({ email, code }) =>
+    validate: ({ email }) =>
       _pickBy({
         email: validateEmail(email, lang, { allowPlusSign: true }),
-        code: validateCode(code, lang),
       }),
-    onSubmit: async ({ email, code }, { setFieldError, setSubmitting }) => {
-      try {
-        const { data } = await confirmCode({
-          variables: { input: { email, type: 'password_reset', code } },
-        })
-        const confirmVerificationCode = data?.confirmVerificationCode
+    onSubmit: async ({ email }, { setFieldError, setSubmitting }) => {
+      const redirectUrl = `${
+        window.location.origin
+      }${redirectPath}?email=${encodeURIComponent(email)}`
 
-        if (submitCallback && confirmVerificationCode) {
-          submitCallback({ email, codeId: confirmVerificationCode })
-        }
+      try {
+        await sendCode({
+          variables: { input: { email, type: 'password_reset', redirectUrl } },
+        })
+
+        submitCallback()
       } catch (error) {
         const [messages, codes] = parseFormSubmitErrors(error, lang)
-        codes.forEach((c) => {
-          if (c.includes('CODE_')) {
-            setFieldError('code', messages[c])
-          } else {
-            setFieldError('email', messages[c])
-          }
-        })
+        setFieldError('email', messages[codes[0]])
       }
 
       setSubmitting(false)
@@ -110,26 +92,6 @@ const Request: React.FC<FormProps> = ({
         disabled={!!defaultEmail}
         onBlur={handleBlur}
         onChange={handleChange}
-      />
-
-      <Form.Input
-        label={<Translate id="verificationCode" />}
-        type="text"
-        name="code"
-        required
-        placeholder={translate({ id: 'enterVerificationCode', lang })}
-        value={values.code}
-        error={touched.code && errors.code}
-        onBlur={handleBlur}
-        onChange={handleChange}
-        extraButton={
-          <SendCodeButton
-            email={values.email}
-            type="password_reset"
-            disabled={!!errors.email}
-          />
-        }
-        autoFocus
       />
     </Form>
   )

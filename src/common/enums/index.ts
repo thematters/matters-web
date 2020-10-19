@@ -30,3 +30,11 @@ export const IMAGE_PIXEL =
   'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=='
 
 export const GQL_CONTEXT_PUBLIC_QUERY_KEY = 'publicQuery'
+
+export const VERIFICATION_CODE_TYPES = {
+  register: 'register',
+  email_reset: 'email_reset',
+  email_reset_confirm: 'email_reset_confirm',
+  password_reset: 'password_reset',
+  payment_password_reset: 'payment_password_reset',
+}

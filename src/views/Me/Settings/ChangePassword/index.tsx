@@ -1,29 +1,27 @@
-import { useContext, useState } from 'react'
+import { useRouter } from 'next/router'
+import { useContext } from 'react'
 
 import {
   ChangePasswordForm,
   Head,
   Layout,
   useStep,
+  VerificationLinkSent,
   ViewerContext,
 } from '~/components'
 
-type Step = 'request' | 'confirm' | 'complete'
+import { getQuery } from '~/common/utils'
+
+type Step = 'request' | 'verification_sent' | 'confirm' | 'complete'
 
 const ChangePassword = () => {
   const viewer = useContext(ViewerContext)
+  const router = useRouter()
+  const email = getQuery({ router, key: 'email' })
+  const code = getQuery({ router, key: 'code' })
 
-  const { currStep, forward } = useStep<Step>('request')
-  const [data, setData] = useState<{ email: string; codeId: string }>({
-    email: viewer.info.email,
-    codeId: '',
-  })
-
-  const requestCodeCallback = (params: any) => {
-    const { email, codeId } = params
-    setData({ ...data, email, codeId })
-    forward('confirm')
-  }
+  const initStep = code ? 'confirm' : 'request'
+  const { currStep, forward } = useStep<Step>(initStep)
 
   return (
     <Layout.Main bgColor="grey-lighter">
@@ -31,16 +29,22 @@ const ChangePassword = () => {
 
       {currStep === 'request' && (
         <ChangePasswordForm.Request
-          defaultEmail={data.email}
+          defaultEmail={viewer.info.email}
           type="change"
-          purpose="page"
-          submitCallback={requestCodeCallback}
+          purpose="dialog"
+          submitCallback={() => forward('verification_sent')}
+          closeDialog={close}
         />
+      )}
+
+      {currStep === 'verification_sent' && (
+        <VerificationLinkSent type="changePassword" purpose="page" />
       )}
 
       {currStep === 'confirm' && (
         <ChangePasswordForm.Confirm
-          codeId={data.codeId}
+          email={email}
+          code={code}
           type="change"
           purpose="page"
           submitCallback={() => forward('complete')}

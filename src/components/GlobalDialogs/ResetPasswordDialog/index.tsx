@@ -1,29 +1,20 @@
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 
 import {
   ChangePasswordForm,
   Dialog,
   useEventListener,
   useStep,
-  ViewerContext,
+  VerificationLinkSent,
 } from '~/components'
 
 import { CLOSE_ACTIVE_DIALOG, OPEN_RESET_PASSWORD_DIALOG } from '~/common/enums'
 
-const ResetPasswordDialog = () => {
-  const viewer = useContext(ViewerContext)
+type Step = 'request' | 'verification_sent'
 
+const ResetPasswordDialog = () => {
   // data & controls
-  const { currStep, forward } = useStep('request')
-  const [data, setData] = useState<{ email: string; codeId: string }>({
-    email: viewer.info.email,
-    codeId: '',
-  })
-  const requestCodeCallback = (params: any) => {
-    const { email, codeId } = params
-    setData({ ...data, email, codeId })
-    forward('reset')
-  }
+  const { currStep, forward } = useStep<Step>('request')
 
   // dailog & global listeners
   const [showDialog, setShowDialog] = useState(false)
@@ -37,35 +28,19 @@ const ResetPasswordDialog = () => {
   useEventListener(OPEN_RESET_PASSWORD_DIALOG, open)
 
   return (
-    <Dialog
-      isOpen={showDialog}
-      onDismiss={close}
-      size={currStep === 'complete' ? 'sm' : 'lg'}
-      fixedHeight={currStep !== 'complete'}
-    >
+    <Dialog isOpen={showDialog} onDismiss={close} size="sm">
       {currStep === 'request' && (
         <ChangePasswordForm.Request
-          defaultEmail={data.email}
           type="forget"
           purpose="dialog"
-          submitCallback={requestCodeCallback}
+          submitCallback={() => forward('verification_sent')}
           closeDialog={close}
         />
       )}
 
-      {currStep === 'reset' && (
-        <ChangePasswordForm.Confirm
-          codeId={data.codeId}
-          submitCallback={() => forward('complete')}
-          type="forget"
-          purpose="dialog"
-          closeDialog={close}
-        />
-      )}
-
-      {currStep === 'complete' && (
-        <ChangePasswordForm.Complete
-          type="forget"
+      {currStep === 'verification_sent' && (
+        <VerificationLinkSent
+          type="resetPassword"
           purpose="dialog"
           closeDialog={close}
         />
