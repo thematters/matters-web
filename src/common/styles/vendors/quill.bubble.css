@@ -50,8 +50,8 @@
 
   &.ql-blank::before {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: var(--spacing-base);
+    left: var(--spacing-base);
     color: var(--color-grey);
     pointer-events: none;
     content: attr(data-placeholder);

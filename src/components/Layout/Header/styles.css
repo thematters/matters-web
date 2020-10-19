@@ -6,7 +6,7 @@ header {
   padding-top: env(safe-area-inset-top);
 
   &.solid-fixed {
-    @mixin border-bottom-grey;
+    @mixin shadow-border-bottom-grey;
 
     position: sticky;
     background: var(--color-white);
@@ -20,10 +20,11 @@ header {
 .content {
   @mixin flex-center-space-between;
 
-  padding: var(--spacing-x-tight) var(--spacing-base);
+  height: var(--global-header-height-mobile);
+  padding: 0 var(--spacing-base);
 
   @media (--sm-up) {
-    padding: var(--spacing-base);
+    height: var(--global-header-height);
   }
 }
 
