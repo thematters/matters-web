@@ -11,18 +11,18 @@
   position: relative;
 
   & :global(.ql-editor) {
-    max-height: calc(
+    height: calc(
       100vh - var(--global-header-height-mobile) -
         var(--editor-content-spacing-mobile)
     );
-    max-height: calc(
+    height: calc(
       var(--vh) * 100 - var(--global-header-height-mobile) -
         var(--editor-content-spacing-mobile)
     );
     padding: var(--spacing-base);
 
     @media (--sm-up) {
-      max-height: calc(
+      height: calc(
         100vh - var(--global-header-height) - var(--editor-content-spacing)
       );
     }
