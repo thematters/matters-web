@@ -15,6 +15,7 @@ import withApollo from 'next-with-apollo'
 
 import {
   AGENT_HASH_PREFIX,
+  COOKIE_USER_GROUP,
   GQL_CONTEXT_PUBLIC_QUERY_KEY,
   STORE_KEY_AGENT_HASH,
   STORE_KEY_AUTH_TOKEN,
@@ -22,6 +23,7 @@ import {
 import introspectionQueryResultData from '~/common/gql/fragmentTypes.json'
 import { randomString } from '~/common/utils'
 
+import { getCookie } from './cookie'
 import resolvers from './resolvers'
 import typeDefs from './types'
 
@@ -34,12 +36,17 @@ const fragmentMatcher = new IntrospectionFragmentMatcher({
 const isProd = process.env.NODE_ENV === 'production'
 const isStaticBuild = process.env.NEXT_PUBLIC_BUILD_TYPE === 'static'
 
-// links
+/**
+ * Links
+ */
 const persistedQueryLink = createPersistedQueryLink({
   useGETForHashedQueries: true,
 })
 
-const httpLink = ({ headers = {}, host }: { [key: string]: any }) => {
+/**
+ * Dynamic API endpoint based on hostname
+ */
+const httpLink = ({ host }: { host: string }) => {
   const isOAuthSite = process.env.NEXT_PUBLIC_OAUTH_SITE_DOMAIN === host
 
   const apiUrl = isOAuthSite
@@ -54,23 +61,17 @@ const httpLink = ({ headers = {}, host }: { [key: string]: any }) => {
           rejectUnauthorized: isProd, // allow access to https:...matters.news in localhost
         })
 
-  // get auth from local storage
-  if (typeof window !== 'undefined') {
-    const token = localStorage.getItem(STORE_KEY_AUTH_TOKEN)
-    if (token && isStaticBuild) {
-      headers['x-access-token'] = token
-    }
-  }
-
   return createUploadLink({
     uri: apiUrl,
-    headers,
     fetchOptions: {
       agent,
     },
   })
 }
 
+/**
+ * Logging error message
+ */
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
     graphQLErrors.map(({ message, locations, extensions, path }) =>
@@ -88,10 +89,14 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   }
 })
 
+/**
+ * Determine whether the token should be included and where to retrieve from.
+ */
 const authLink = setContext((operation, { headers, ...restCtx }) => {
+  // Determine whether it's a public or private query,
+  // cookies won't be include if it's a public query.
   const operationName = operation.operationName || ''
   const operationVariables = operation.variables || {}
-
   const isPublicOperation = restCtx[GQL_CONTEXT_PUBLIC_QUERY_KEY]
 
   if (process.env.NODE_ENV !== 'production') {
@@ -106,17 +111,42 @@ const authLink = setContext((operation, { headers, ...restCtx }) => {
     )
   }
 
+  // Get token from local storage if it's a static-build client
+  if (typeof window !== 'undefined') {
+    const token = localStorage.getItem(STORE_KEY_AUTH_TOKEN)
+    if (token && isStaticBuild) {
+      headers['x-access-token'] = token
+    }
+  }
+
   return {
     credentials: isPublicOperation ? 'omit' : 'include',
     headers: {
       ...headers,
-      'x-client-name': 'web',
     },
   }
 })
 
+/**
+ * Get user group from cookie,
+ * HTTP cookie from SSR or `document.cookie` from CSR
+ */
+const userGroupLink = ({ cookie }: { cookie: string }) =>
+  setContext((_, { headers }) => {
+    const userGroup = getCookie(cookie, COOKIE_USER_GROUP)
+
+    return {
+      headers: {
+        ...headers,
+        ...(userGroup ? { 'x-user-group': userGroup } : {}),
+      },
+    }
+  })
+
+/**
+ * Inject Sentry action id to a custom header
+ */
 const sentryLink = setContext((_, { headers }) => {
-  // Add action id for Sentry
   const actionId = randomString()
 
   import('@sentry/browser').then((Sentry) => {
@@ -133,6 +163,9 @@ const sentryLink = setContext((_, { headers }) => {
   }
 })
 
+/**
+ * Fingerprint only works on CSR
+ */
 const agentHashLink = setContext((_, { headers }) => {
   let hash: string | null = null
 
@@ -151,7 +184,7 @@ const agentHashLink = setContext((_, { headers }) => {
   }
 })
 
-export default withApollo(({ ctx, headers, initialState, ...rest }) => {
+export default withApollo(({ ctx, headers, initialState }) => {
   const cache = new InMemoryCache({ fragmentMatcher })
   cache.restore(initialState || {})
 
@@ -160,6 +193,7 @@ export default withApollo(({ ctx, headers, initialState, ...rest }) => {
   const host =
     ctx?.req?.headers.host ||
     (typeof window === 'undefined' ? '' : _get(window, 'location.host'))
+  const cookie = headers?.cookie || (process.browser ? document.cookie : '')
 
   const client = new ApolloClient({
     link: ApolloLink.from([
@@ -168,7 +202,8 @@ export default withApollo(({ ctx, headers, initialState, ...rest }) => {
       sentryLink,
       agentHashLink,
       authLink,
-      httpLink({ headers, host }),
+      userGroupLink({ cookie }),
+      httpLink({ host }),
     ]),
     cache,
     resolvers,

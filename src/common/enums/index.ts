@@ -30,3 +30,6 @@ export const IMAGE_PIXEL =
   'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=='
 
 export const GQL_CONTEXT_PUBLIC_QUERY_KEY = 'publicQuery'
+
+export const COOKIE_TOKEN_NAME = '__token'
+export const COOKIE_USER_GROUP = '__user_group'
