@@ -69,7 +69,7 @@
     "helmet": "^4.1.0",
     "isomorphic-unfetch": "^3.1.0",
     "jump.js": "^1.0.2",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.20",
     "next": "^9.5.4",
     "next-with-apollo": "^5.1.0",
     "nprogress": "^0.2.0",
