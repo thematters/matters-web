@@ -143,7 +143,9 @@ const DraftDetail = () => {
 
       <PublishState draft={draft} />
 
-      <Editor draft={draft} update={update} upload={upload} />
+      <Layout.Spacing>
+        <Editor draft={draft} update={update} upload={upload} />
+      </Layout.Spacing>
 
       {!isSmallUp && <BottomBar draft={draft} />}
     </Layout.Main>
