@@ -6,6 +6,7 @@ import {
   SignUpForm,
   useEventListener,
   useStep,
+  VerificationLinkSent,
 } from '~/components'
 
 import { CLOSE_ACTIVE_DIALOG, OPEN_SIGNUP_DIALOG } from '~/common/enums'
@@ -46,7 +47,11 @@ const SignUpDialog = () => {
         </ReCaptchaProvider>
       )}
       {currStep === 'verification_sent' && (
-        <SignUpForm.VerificationLinkSent purpose="dialog" closeDialog={close} />
+        <VerificationLinkSent
+          type="register"
+          purpose="dialog"
+          closeDialog={close}
+        />
       )}
     </Dialog>
   )

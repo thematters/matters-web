@@ -88,14 +88,15 @@ const Confirm: React.FC<FormProps> = ({ codeId, submitCallback }) => {
           variables: { input: { password, codeId, type: 'payment' } },
         })
 
+        setSubmitting(false)
         submitCallback()
       } catch (error) {
+        setSubmitting(false)
+
         const [messages, codes] = parseFormSubmitErrors(error, lang)
         setFieldError('password', messages[codes[0]])
         setFieldValue('comparedPassword', '', false)
       }
-
-      setSubmitting(false)
     },
   })
 

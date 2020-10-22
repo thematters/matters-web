@@ -14,12 +14,7 @@ import {
 import { useMutation } from '~/components/GQL'
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
 
-import {
-  ADD_TOAST,
-  CLOSE_ACTIVE_DIALOG,
-  OPEN_LOGIN_DIALOG,
-  PATHS,
-} from '~/common/enums'
+import { CLOSE_ACTIVE_DIALOG, OPEN_LOGIN_DIALOG, PATHS } from '~/common/enums'
 import {
   appendTarget,
   parseFormSubmitErrors,
@@ -117,33 +112,17 @@ const Init: React.FC<FormProps> = ({
           variables: { input: { email, type: 'register', token, redirectUrl } },
         })
 
+        setSubmitting(false)
         submitCallback()
       } catch (error) {
-        const [messages, codes] = parseFormSubmitErrors(error, lang)
-        codes.forEach((c) => {
-          if (c.includes('USER_EMAIL_')) {
-            setFieldError('email', messages[c])
-          } else {
-            if (!messages[codes[0]]) {
-              return
-            }
+        setSubmitting(false)
 
-            window.dispatchEvent(
-              new CustomEvent(ADD_TOAST, {
-                detail: {
-                  color: 'red',
-                  content: messages[codes[0]],
-                },
-              })
-            )
-          }
-        })
+        const [messages, codes] = parseFormSubmitErrors(error, lang)
+        setFieldError('email', messages[codes[0]])
 
         if (refreshToken) {
           refreshToken()
         }
-
-        setSubmitting(false)
       }
     },
   })
