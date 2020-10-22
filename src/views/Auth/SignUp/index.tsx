@@ -6,6 +6,7 @@ import {
   ReCaptchaProvider,
   SignUpForm,
   useStep,
+  VerificationLinkSent,
 } from '~/components'
 
 import { getQuery } from '~/common/utils'
@@ -37,7 +38,7 @@ const SignUp = () => {
       )}
 
       {currStep === 'verification_sent' && (
-        <SignUpForm.VerificationLinkSent purpose="page" />
+        <VerificationLinkSent type="register" purpose="page" />
       )}
 
       {currStep === 'password' && (
