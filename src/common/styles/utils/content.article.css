@@ -4,21 +4,9 @@
   --side-toolbar-button-size: 2rem;
 }
 
-.editor-title {
-  padding: var(--spacing-base) var(--spacing-base) 0;
-
-  & input {
-    font-size: var(--font-size-article-title);
-    font-weight: var(--font-weight-article-title);
-    line-height: var(--line-height-article-title);
-
-    &::placeholder {
-      color: var(--color-grey);
-      opacity: 1; /* Firefox */
-    }
-  }
-}
-
+/****
+ * Article Detail & Editor
+ */
 .u-content,
 #editor-article-container .ql-editor {
   line-height: var(--line-height-article-base);
@@ -310,29 +298,61 @@
   opacity: 0.5;
 }
 
-#editor-article-container {
-  position: relative;
-}
-
-#editor-article-container .ql-editor {
-  & input.embed-clipboard {
-    line-height: 1.875;
+@keyframes play-spinning {
+  from {
+    transform: rotate(0deg);
   }
 
-  & figure figcaption {
-    font-size: 0;
+  to {
+    transform: rotate(360deg);
+  }
+}
 
-    & textarea {
-      overflow: hidden;
-      font-size: var(--font-size-sm-s);
-      text-align: center;
-      resize: none;
+/****
+ * Editor Only
+ */
+.editor-title {
+  & input {
+    margin-bottom: var(--spacing-base);
+    font-size: var(--font-size-article-title);
+    font-weight: var(--font-weight-article-title);
+    line-height: var(--line-height-article-title);
+
+    &::placeholder {
+      color: var(--color-grey);
+      opacity: 1; /* Firefox */
     }
   }
 }
 
-#editor-article-container .spinner {
-  stroke: var(--color-grey-light);
+#editor-article-container {
+  position: relative;
+
+  & .ql-editor {
+    & input.embed-clipboard {
+      line-height: 1.875;
+    }
+
+    & figure {
+      margin-right: 0;
+      margin-left: 0;
+
+      & figcaption {
+        font-size: 0;
+
+        & textarea {
+          overflow: hidden;
+          font-size: var(--font-size-sm-s);
+          text-align: center;
+          resize: none;
+        }
+      }
+    }
+  }
+
+  & .spinner {
+    stroke: var(--color-grey-light);
+  }
 }
 
 .toolbar-container {
@@ -432,14 +452,4 @@
   background: var(--color-white);
   border-radius: var(--spacing-x-tight);
   box-shadow: var(--shadow-dark);
-}
-
-@keyframes play-spinning {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
 }
