@@ -16,11 +16,11 @@ const texts: {
     header: '搬家完成後，你將立刻獲得以下功能',
     title_1: '實現作品的永久保存',
     content_1:
-      '選擇發佈後，你的作品將被上載到星際文件系統（InterPlanetary File System，IPFS）的節點上' +
+      '選擇發布後，你的作品將被上載到星際文件系統（InterPlanetary File System，IPFS）的節點上' +
       '，實現作品内容的分佈式存儲，無法被删改。你可使用這些分佈式節點傳播你的作品。',
     title_4: '持續的被動收入',
     content_4:
-      '你的作品在 Matters 發佈後，讀者就可以為作品拍手，每一筆拍手都將轉換成加密貨幣 LikeCoin，' +
+      '你的作品在 Matters 發布後，讀者就可以為作品拍手，每一筆拍手都將轉換成加密貨幣 LikeCoin，' +
       '變成創作者的收入。拍手没有時間期限，除非你將作品隱藏，否則每一篇作品都可持續收到拍手。',
     title_5: '優質的讀者互動',
     content_5:

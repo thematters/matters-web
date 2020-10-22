@@ -6,7 +6,7 @@ const LikeCoinTerm: { zh_hant: string; zh_hans: string } = {
 
 <p>本次合作的變動如下：你目前持有的 MAT 將變成 LikeCoin，會以 <b>1 MAT = 10 LikeCoin</b> 的匯率轉換，進入錢包即可查看詳情。你可以綁定已有的 LikeCoin 帳戶或允許 Matters 為你創建新的 LikeCoin 帳戶，並透過這個帳戶將 LikeCoin 變現、管理自己的創作收益。</p>
 
-<p>當你點擊同意升級，我們將開始為你提供以上轉軌服務。未來，在 Matters 發佈作品、讚賞他人，都需要擁有一個 LikeCoin 帳戶。若你不同意以上升級，你在 Matters 的歷史作品依然可以收到 LikeCoin 讚賞，但無法進行收益管理，未來也無法使用 Matters 的所有服務。</p>
+<p>當你點擊同意升級，我們將開始為你提供以上轉軌服務。未來，在 Matters 發布作品、讚賞他人，都需要擁有一個 LikeCoin 帳戶。若你不同意以上升級，你在 Matters 的歷史作品依然可以收到 LikeCoin 讚賞，但無法進行收益管理，未來也無法使用 Matters 的所有服務。</p>
 
 <p>了解更多創作收益的管理細節，請參考我們的 <a href="/faq" class="u-link-green" target="_blank" >新手指南</a>。</p>
   `,

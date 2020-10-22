@@ -2,6 +2,7 @@ import _get from 'lodash/get'
 import Document, {
   DocumentContext,
   Head,
+  Html,
   Main,
   NextScript,
 } from 'next/document'
@@ -40,7 +41,7 @@ class MattersDocument extends Document<MattersDocumentProps> {
 
   public render() {
     return (
-      <html lang={this.props.lang}>
+      <Html lang={this.props.lang}>
         <Head>
           {/* Global Site Tag (gtag.js) - Google Analytics */}
           <script
@@ -63,7 +64,7 @@ class MattersDocument extends Document<MattersDocumentProps> {
           <Main />
           <NextScript />
         </body>
-      </html>
+      </Html>
     )
   }
 }
