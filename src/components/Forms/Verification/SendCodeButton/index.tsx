@@ -11,7 +11,11 @@ import {
 } from '~/components'
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
 
-import { ADD_TOAST, SEND_CODE_COUNTDOWN } from '~/common/enums'
+import {
+  ADD_TOAST,
+  SEND_CODE_COUNTDOWN,
+  VERIFICATION_CODE_TYPES,
+} from '~/common/enums'
 import { parseFormSubmitErrors } from '~/common/utils'
 
 import styles from './styles.css'
@@ -24,26 +28,20 @@ import { SendVerificationCode } from '~/components/GQL/mutations/__generated__/S
  * Usage:
  *
  * ```jsx
- *   <SendCodeButton
+ *   <VerificationSendCodeButton
  *     email={'user-email'}
  *     type={'verification-type'}
  *   />
  * ```
  */
 
-interface SendCodeButtonProps {
+interface VerificationSendCodeButtonProps {
   email: string
-  type:
-    | 'register'
-    | 'email_reset'
-    | 'email_reset_confirm'
-    | 'password_reset'
-    | 'payment_password_reset'
-    | 'email_verify'
+  type: keyof typeof VERIFICATION_CODE_TYPES
   disabled?: boolean
 }
 
-export const SendCodeButton: React.FC<SendCodeButtonProps> = ({
+export const VerificationSendCodeButton: React.FC<VerificationSendCodeButtonProps> = ({
   email,
   type,
   disabled,

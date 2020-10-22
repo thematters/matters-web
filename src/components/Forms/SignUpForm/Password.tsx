@@ -94,13 +94,16 @@ const Password: React.FC<FormProps> = ({
 
         analytics.identifyUser()
 
+        setSubmitting(false)
+
         if (submitCallback) {
           submitCallback({ email, codeId, password })
         }
       } catch (error) {
+        setSubmitting(false)
+
         const [messages, codes] = parseFormSubmitErrors(error, lang)
         setFieldError('password', messages[codes[0]])
-        setSubmitting(false)
       }
     },
   })
