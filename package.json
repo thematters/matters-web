@@ -129,7 +129,7 @@
     "core-js": "^3.6.5",
     "cucumber": "^6.0.5",
     "cucumber-pretty": "^6.0.0",
-    "cz-conventional-changelog": "^3.2.0",
+    "cz-conventional-changelog": "^3.3.0",
     "file-loader": "^6.0.0",
     "geckodriver": "^1.20.0",
     "husky": "^4.2.5",
