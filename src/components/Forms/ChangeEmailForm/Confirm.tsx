@@ -98,10 +98,14 @@ const Confirm: React.FC<FormProps> = ({
 
         await changeEmail(params)
 
+        setSubmitting(false)
+
         if (submitCallback) {
           submitCallback()
         }
       } catch (error) {
+        setSubmitting(false)
+
         const [messages, codes] = parseFormSubmitErrors(error, lang)
         codes.forEach((c) => {
           if (c.includes('CODE_')) {
@@ -111,8 +115,6 @@ const Confirm: React.FC<FormProps> = ({
           }
         })
       }
-
-      setSubmitting(false)
     },
   })
 

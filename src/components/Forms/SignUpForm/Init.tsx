@@ -112,8 +112,11 @@ const Init: React.FC<FormProps> = ({
           variables: { input: { email, type: 'register', token, redirectUrl } },
         })
 
+        setSubmitting(false)
         submitCallback()
       } catch (error) {
+        setSubmitting(false)
+
         const [messages, codes] = parseFormSubmitErrors(error, lang)
         setFieldError('email', messages[codes[0]])
 
@@ -121,8 +124,6 @@ const Init: React.FC<FormProps> = ({
           refreshToken()
         }
       }
-
-      setSubmitting(false)
     },
   })
 

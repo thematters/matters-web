@@ -66,13 +66,14 @@ const Request: React.FC<FormProps> = ({
           variables: { input: { email, type: 'password_reset', redirectUrl } },
         })
 
+        setSubmitting(false)
         submitCallback()
       } catch (error) {
+        setSubmitting(false)
+
         const [messages, codes] = parseFormSubmitErrors(error, lang)
         setFieldError('email', messages[codes[0]])
       }
-
-      setSubmitting(false)
     },
   })
 

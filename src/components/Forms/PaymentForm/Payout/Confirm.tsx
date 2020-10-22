@@ -99,6 +99,7 @@ const BaseConfirm: React.FC<FormProps> = ({
         submitCallback()
       } catch (error) {
         setSubmitting(false)
+
         const [messages, codes] = parseFormSubmitErrors(error, lang)
         setFieldError('password', messages[codes[0]])
         setFieldValue('password', '', false)

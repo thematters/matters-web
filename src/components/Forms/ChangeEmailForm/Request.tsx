@@ -71,10 +71,14 @@ const Request: React.FC<FormProps> = ({
         })
         const confirmVerificationCode = data?.confirmVerificationCode
 
+        setSubmitting(false)
+
         if (submitCallback && confirmVerificationCode) {
           submitCallback(confirmVerificationCode)
         }
       } catch (error) {
+        setSubmitting(false)
+
         const [messages, codes] = parseFormSubmitErrors(error, lang)
         codes.forEach((c) => {
           if (c.includes('CODE_')) {
@@ -84,8 +88,6 @@ const Request: React.FC<FormProps> = ({
           }
         })
       }
-
-      setSubmitting(false)
     },
   })
 
