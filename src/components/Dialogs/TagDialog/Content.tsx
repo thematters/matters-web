@@ -14,7 +14,7 @@ import {
 import { useMutation } from '~/components/GQL'
 import SEARCH_TAGS from '~/components/GQL/queries/searchTags'
 
-import { ADD_TOAST } from '~/common/enums'
+import { ADD_TOAST, ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
 import {
   numAbbr,
   parseFormSubmitErrors,
@@ -192,6 +192,8 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
 
         const returnedTagId = result?.data?.putTag?.id
 
+        setSubmitting(false)
+
         if (!id) {
           // if created, then redirect to tag detail page
           const path = toPath({ page: 'tagDetail', id: returnedTagId || '' })
@@ -200,11 +202,11 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
           closeDialog()
         }
       } catch (error) {
+        setSubmitting(false)
+
         const [messages, codes] = parseFormSubmitErrors(error, lang)
         setFieldError('newContent', messages[codes[0]])
       }
-
-      setSubmitting(false)
     },
   })
 
@@ -215,11 +217,11 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
       {isEditing && (
         <section className="cover-field">
           <CoverUploader
-            assetType="tagCover"
+            assetType={ASSET_TYPE.tagCover}
             coverUrl={cover}
             defaultCoverUrl={TAG_COVER}
             entityId={id}
-            entityType="tag"
+            entityType={ENTITY_TYPE.tag}
             inEditor={true}
             onUpload={(assetId) => setFieldValue('newCover', assetId)}
           />

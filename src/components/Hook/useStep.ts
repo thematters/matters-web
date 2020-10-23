@@ -18,5 +18,7 @@ export function useStep<Step>(defaultStep: Step) {
     setSteps(steps.slice(0, -1))
   }
 
-  return { currStep, prevStep, forward, back }
+  const reset = (step: Step) => setSteps([step])
+
+  return { currStep, prevStep, forward, back, reset }
 }

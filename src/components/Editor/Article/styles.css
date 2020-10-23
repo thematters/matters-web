@@ -1,8 +1,13 @@
 :root {
   --editor-title-height: 3.25rem;
+  --eidtor-bottom-bar-height: var(--global-nav-height);
+  --editor-conatiner-spacing: calc(var(--spacing-base) * 2);
   --editor-content-spacing: calc(
-    var(--editor-title-height) + var(--spacing-base) * 2 +
-      var(--spacing-x-tight)
+    var(--editor-title-height) + var(--editor-conatiner-spacing)
+  );
+  --editor-content-spacing-mobile: calc(
+    var(--editor-title-height) + var(--editor-container-spacing) +
+      var(--eidtor-bottom-bar-height)
   );
 }
 
@@ -10,16 +15,17 @@
   position: relative;
 
   & :global(.ql-editor) {
-    max-height: calc(
-      100vh - var(--global-header-height-mobile) - var(--editor-content-spacing)
+    height: calc(
+      100vh - var(--global-header-height-mobile) -
+        var(--editor-content-spacing-mobile)
     );
-    max-height: calc(
+    height: calc(
       var(--vh) * 100 - var(--global-header-height-mobile) -
-        var(--editor-content-spacing)
+        var(--editor-content-spacing-mobile)
     );
 
     @media (--sm-up) {
-      max-height: calc(
+      height: calc(
         100vh - var(--global-header-height) - var(--editor-content-spacing)
       );
     }

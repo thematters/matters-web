@@ -1,19 +1,24 @@
-import { useState } from 'react'
+import { useRouter } from 'next/router'
 
-import { ChangePasswordForm, Head, Layout, useStep } from '~/components'
+import {
+  ChangePasswordForm,
+  Head,
+  Layout,
+  useStep,
+  VerificationLinkSent,
+} from '~/components'
+
+import { getQuery } from '~/common/utils'
+
+type Step = 'request' | 'verification_sent' | 'confirm' | 'complete'
 
 const Forget = () => {
-  const { currStep, forward } = useStep('request')
-  const [data, setData] = useState<{ email: string; codeId: string }>({
-    email: '',
-    codeId: '',
-  })
+  const router = useRouter()
+  const email = getQuery({ router, key: 'email' })
+  const code = getQuery({ router, key: 'code' })
 
-  const requestCodeCallback = (params: any) => {
-    const { email, codeId } = params
-    setData({ ...data, email, codeId })
-    forward('confirm')
-  }
+  const initStep = code ? 'confirm' : 'request'
+  const { currStep, forward } = useStep<Step>(initStep)
 
   return (
     <Layout.Main bgColor="grey-lighter">
@@ -21,16 +26,20 @@ const Forget = () => {
 
       {currStep === 'request' && (
         <ChangePasswordForm.Request
-          defaultEmail={data.email}
           type="forget"
           purpose="page"
-          submitCallback={requestCodeCallback}
+          submitCallback={() => forward('verification_sent')}
         />
+      )}
+
+      {currStep === 'verification_sent' && (
+        <VerificationLinkSent type="resetPassword" purpose="page" />
       )}
 
       {currStep === 'confirm' && (
         <ChangePasswordForm.Confirm
-          codeId={data.codeId}
+          email={email}
+          code={code}
           type="forget"
           purpose="page"
           submitCallback={() => forward('complete')}

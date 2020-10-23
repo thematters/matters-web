@@ -31,6 +31,17 @@ const fragments = {
   `,
 }
 
+export const toDigestTag = (content: string) =>
+  ({
+    __typename: 'Tag',
+    id: content,
+    content,
+    articles: {
+      __typename: 'ArticleConnection',
+      totalCount: 0,
+    },
+  } as DigestTag)
+
 export const Tag = ({
   tag,
   type = 'list',
@@ -43,6 +54,7 @@ export const Tag = ({
     tag: true,
     [type]: type,
     active,
+    disabled,
   })
 
   const path = toPath({

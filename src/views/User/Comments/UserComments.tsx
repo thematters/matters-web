@@ -64,7 +64,7 @@ const UserComments = () => {
     <>
       <Head
         title={{
-          zh_hant: `${user.displayName}發佈的評論`,
+          zh_hant: `${user.displayName}發布的評論`,
           zh_hans: `${user.displayName}发布的评论`,
         }}
         description={user.info.description}

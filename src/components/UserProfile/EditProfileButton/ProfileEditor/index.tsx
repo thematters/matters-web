@@ -13,7 +13,7 @@ import {
 } from '~/components'
 import { useMutation } from '~/components/GQL'
 
-import { ADD_TOAST } from '~/common/enums'
+import { ADD_TOAST, ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
 import {
   parseFormSubmitErrors,
   translate,
@@ -114,8 +114,11 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
           })
         )
 
+        setSubmitting(false)
         closeDialog()
       } catch (error) {
+        setSubmitting(false)
+
         const [messages, codes] = parseFormSubmitErrors(error, lang)
         codes.forEach((code) => {
           if (code.includes('USER_DISPLAYNAME_INVALID')) {
@@ -125,8 +128,6 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
           }
         })
       }
-
-      setSubmitting(false)
     },
   })
 
@@ -134,10 +135,10 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
     <Form id={formId} onSubmit={handleSubmit}>
       <section className="cover-field">
         <CoverUploader
-          assetType="profileCover"
+          assetType={ASSET_TYPE.profileCover}
           coverUrl={user.info.profileCover}
           defaultCoverUrl={IMAGE_COVER}
-          entityType="user"
+          entityType={ENTITY_TYPE.user}
           inEditor={true}
           onUpload={(assetId) => setFieldValue('profileCover', assetId)}
         />

@@ -6,8 +6,8 @@ import {
   Dialog,
   Form,
   LanguageContext,
-  SendCodeButton,
   Translate,
+  VerificationSendCodeButton,
 } from '~/components'
 import { useMutation } from '~/components/GQL'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
@@ -66,10 +66,14 @@ const Request: React.FC<FormProps> = ({
         })
         const confirmVerificationCode = data?.confirmVerificationCode
 
+        setSubmitting(false)
+
         if (submitCallback && confirmVerificationCode) {
           submitCallback({ email, codeId: confirmVerificationCode })
         }
       } catch (error) {
+        setSubmitting(false)
+
         const [messages, codes] = parseFormSubmitErrors(error, lang)
         codes.forEach((c) => {
           if (c.includes('CODE_')) {
@@ -79,8 +83,6 @@ const Request: React.FC<FormProps> = ({
           }
         })
       }
-
-      setSubmitting(false)
     },
   })
 
@@ -113,7 +115,7 @@ const Request: React.FC<FormProps> = ({
         onBlur={handleBlur}
         onChange={handleChange}
         extraButton={
-          <SendCodeButton
+          <VerificationSendCodeButton
             email={values.email}
             type="payment_password_reset"
             disabled={!!errors.email}

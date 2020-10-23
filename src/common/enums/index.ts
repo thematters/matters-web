@@ -5,8 +5,7 @@ export * from './keyCodes'
 export * from './text'
 export * from './lang'
 export * from './invalidNames'
-export * from './fileTypes'
-export * from './fileSizes'
+export * from './file'
 export * from './errorCode'
 export * from './externalLinks'
 export * from './events'
@@ -31,3 +30,13 @@ export const IMAGE_PIXEL =
   'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=='
 
 export const GQL_CONTEXT_PUBLIC_QUERY_KEY = 'publicQuery'
+
+export const VERIFICATION_CODE_TYPES = {
+  register: 'register',
+  email_reset: 'email_reset',
+  email_reset_confirm: 'email_reset_confirm',
+  password_reset: 'password_reset',
+  payment_password_reset: 'payment_password_reset',
+}
+export const COOKIE_TOKEN_NAME = '__token'
+export const COOKIE_USER_GROUP = '__user_group'

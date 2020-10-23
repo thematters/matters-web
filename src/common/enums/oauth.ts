@@ -198,18 +198,18 @@ export const OAUTH_SCOPE_TREE = {
     },
     level2: {
       _t: {
-        zh_hant: '發佈作品、修改評論、刪除草稿等',
+        zh_hant: '發布作品、修改評論、刪除草稿等',
         zh_hans: '发布作品、修改评论、删除草稿等',
       },
       publishArticle: {
         _t: {
-          zh_hant: '發佈作品',
+          zh_hant: '發布作品',
           zh_hans: '发布作品',
         },
       },
       putComment: {
         _t: {
-          zh_hant: '發佈和修訂評論',
+          zh_hant: '發布和修訂評論',
           zh_hans: '发布和修订评论',
         },
       },
@@ -287,7 +287,7 @@ export const OAUTH_SCOPE_TREE = {
       },
       changeEmail: {
         _t: {
-          zh_hant: '修改郵箱',
+          zh_hant: '修改電子信箱',
           zh_hans: '修改邮箱',
         },
       },

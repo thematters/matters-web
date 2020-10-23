@@ -182,19 +182,7 @@ export const getQuery = ({
   key,
 }: {
   router: NextRouter
-  key:
-    | 'userName'
-    | 'mediaHash'
-    | 'draftId'
-    | 'tagId'
-    | 'q'
-    | 'type'
-    | 'scope'
-    | 'state'
-    | 'client_id'
-    | 'redirect_uri'
-    | 'provider'
-    | 'code'
+  key: string
 }) => {
   const value = router.query && router.query[key]
   let query = value instanceof Array ? value[0] : value || ''

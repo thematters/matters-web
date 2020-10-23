@@ -12,9 +12,10 @@ import { UpdateTagSetting } from '~/components/GQL/mutations/__generated__/Updat
 
 interface Props {
   children: ({ open }: { open: () => void }) => React.ReactNode
+  isOwner?: boolean
 }
 
-const BaseDialog = ({ children }: Props) => {
+const BaseDialog = ({ children, isOwner }: Props) => {
   const [showDialog, setShowDialog] = useState(true)
   const open = () => setShowDialog(true)
   const close = () => setShowDialog(false)
@@ -31,7 +32,7 @@ const BaseDialog = ({ children }: Props) => {
 
       <Dialog size="sm" isOpen={showDialog} onDismiss={close}>
         <Dialog.Header
-          title={<Translate zh_hant="離開標籤" zh_hans="离开标签" />}
+          title={<Translate zh_hant="辭去權限" zh_hans="辞去权限" />}
           close={close}
           closeTextId="cancel"
         />
@@ -41,8 +42,8 @@ const BaseDialog = ({ children }: Props) => {
           </h3>
           <p>
             <Translate
-              zh_hant="如果離開標籤，你將無法繼續管理標籤。"
-              zh_hans="如果离开标签，你将无法继续管理标签。"
+              zh_hant="如果辭去權限，你將無法繼續管理標籤。"
+              zh_hans="如果辞去权限，你将无法继续管理标签。"
             />
           </p>
         </Dialog.Message>
@@ -54,7 +55,9 @@ const BaseDialog = ({ children }: Props) => {
             onClick={async () => {
               try {
                 const result = await update({
-                  variables: { input: { id, type: 'leave' } },
+                  variables: {
+                    input: { id, type: isOwner ? 'leave' : 'leave_editor' },
+                  },
                 })
 
                 if (!result) {
@@ -67,8 +70,8 @@ const BaseDialog = ({ children }: Props) => {
                       color: 'green',
                       content: (
                         <Translate
-                          zh_hant="離開標籤成功"
-                          zh_hans="离开标签成功"
+                          zh_hant="辭去權限成功"
+                          zh_hans="辞去权限成功"
                         />
                       ),
                       duration: 2000,
@@ -82,7 +85,7 @@ const BaseDialog = ({ children }: Props) => {
               }
             }}
           >
-            <Translate zh_hant="確認離開" zh_hans="确认离开" />
+            <Translate zh_hant="確認辭去" zh_hans="确认辞去" />
           </Dialog.Footer.Button>
 
           <Dialog.Footer.Button

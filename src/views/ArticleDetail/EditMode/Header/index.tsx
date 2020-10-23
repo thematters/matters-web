@@ -9,14 +9,18 @@ import { ADD_TOAST } from '~/common/enums'
 import styles from './styles.css'
 
 import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
+import { Asset } from '~/components/GQL/fragments/__generated__/Asset'
+import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
+import { ArticleDetailPublic_article } from '../../__generated__/ArticleDetailPublic'
 import { EditArticle } from './__generated__/EditArticle'
 
 interface EditModeHeaderProps {
-  id: string
-  mediaHash: string
-  editModeTags: string[]
-  editModeCollection: ArticleDigestDropdownArticle[]
-  onEditSaved: () => any
+  article: ArticleDetailPublic_article
+  cover?: Asset
+  tags: DigestTag[]
+  collection: ArticleDigestDropdownArticle[]
+  onSaved: () => any
+  disabled?: boolean
 }
 
 /**
@@ -29,13 +33,17 @@ const EDIT_ARTICLE = gql`
   mutation EditArticle(
     $id: ID!
     $mediaHash: String!
+    $cover: ID
     $tags: [String!]
     $collection: [ID!]
     $after: String
     $first: Int = null
   ) {
-    editArticle(input: { id: $id, tags: $tags, collection: $collection }) {
+    editArticle(
+      input: { id: $id, cover: $cover, tags: $tags, collection: $collection }
+    ) {
       id
+      cover
       tags {
         ...DigestTag
         selected(input: { mediaHash: $mediaHash })
@@ -48,11 +56,14 @@ const EDIT_ARTICLE = gql`
 `
 
 const EditModeHeader = ({
-  id,
-  mediaHash,
-  editModeTags,
-  editModeCollection,
-  onEditSaved,
+  article,
+  cover,
+  tags,
+  collection,
+
+  onSaved,
+
+  disabled,
 }: EditModeHeaderProps) => {
   const [editArticle, { loading }] = useMutation<EditArticle>(EDIT_ARTICLE)
 
@@ -60,14 +71,15 @@ const EditModeHeader = ({
     try {
       await editArticle({
         variables: {
-          id,
-          mediaHash,
-          tags: editModeTags,
-          collection: editModeCollection.map(({ id: articleId }) => articleId),
+          id: article.id,
+          mediaHash: article.mediaHash,
+          cover: cover ? cover.id : null,
+          tags: tags.map(({ content }) => content),
+          collection: collection.map(({ id: articleId }) => articleId),
           first: null,
         },
       })
-      onEditSaved()
+      onSaved()
     } catch (e) {
       window.dispatchEvent(
         new CustomEvent(ADD_TOAST, {
@@ -84,7 +96,7 @@ const EditModeHeader = ({
     <>
       <p>
         <Translate
-          zh_hant="作品已發佈到 IPFS，無法被修改，但你可以修訂關聯作品和標籤。"
+          zh_hant="作品已發布到 IPFS，無法被修改，但你可以修訂關聯作品和標籤。"
           zh_hans="作品已发布到 IPFS，无法被修改，但你可以修订关联作品和标签。"
         />
       </p>
@@ -94,6 +106,7 @@ const EditModeHeader = ({
         bgColor="green"
         onClick={onSave}
         aria-haspopup="true"
+        disabled={disabled}
       >
         <TextIcon
           color="white"
