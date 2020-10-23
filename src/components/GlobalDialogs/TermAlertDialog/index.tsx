@@ -46,8 +46,12 @@ const TermContent: React.FC<TermContentProps> = ({ closeDialog }) => {
     onSubmit: async (values, { setSubmitting, setFieldError }) => {
       try {
         await update({ variables: { input: { agreeOn: true } } })
+
+        setSubmitting(false)
         closeDialog()
       } catch (error) {
+        setSubmitting(false)
+
         const [messages, codes] = parseFormSubmitErrors(error, lang)
 
         if (!messages[codes[0]]) {
@@ -63,7 +67,6 @@ const TermContent: React.FC<TermContentProps> = ({ closeDialog }) => {
           })
         )
       }
-      setSubmitting(false)
     },
   })
 

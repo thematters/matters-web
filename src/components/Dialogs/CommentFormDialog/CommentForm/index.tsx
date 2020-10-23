@@ -135,16 +135,17 @@ const CommentForm: React.FC<CommentFormProps> = ({
         })
       )
 
+      setSubmitting(false)
+
       if (submitCallback) {
         submitCallback()
       }
 
       closeDialog()
     } catch (e) {
+      setSubmitting(false)
       console.error(e)
     }
-
-    setSubmitting(false)
   }
 
   const onUpdate = ({ content: newContent }: { content: string }) => {

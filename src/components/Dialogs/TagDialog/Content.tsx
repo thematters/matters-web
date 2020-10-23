@@ -192,6 +192,8 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
 
         const returnedTagId = result?.data?.putTag?.id
 
+        setSubmitting(false)
+
         if (!id) {
           // if created, then redirect to tag detail page
           const path = toPath({ page: 'tagDetail', id: returnedTagId || '' })
@@ -200,11 +202,11 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
           closeDialog()
         }
       } catch (error) {
+        setSubmitting(false)
+
         const [messages, codes] = parseFormSubmitErrors(error, lang)
         setFieldError('newContent', messages[codes[0]])
       }
-
-      setSubmitting(false)
     },
   })
 

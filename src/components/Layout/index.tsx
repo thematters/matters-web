@@ -61,26 +61,29 @@ const Main: React.FC<MainProps> = ({ aside, bgColor, inEditor, children }) => {
     'l-col-three-right': true,
     'in-editor': inEditor,
   })
+  const showAside = aside || !inEditor
 
   return (
     <>
       <article className={articleClasses}>{children}</article>
 
-      <aside className={asideClasses}>
-        {!isInSearch && !inEditor && (
-          <section className="u-lg-down-hide">
-            <SearchBar />
-          </section>
-        )}
+      {showAside && (
+        <aside className={asideClasses}>
+          {!isInSearch && !inEditor && (
+            <section className="u-lg-down-hide">
+              <SearchBar />
+            </section>
+          )}
 
-        {aside}
+          {aside}
 
-        {!inEditor && (
-          <section className="u-lg-down-hide">
-            <SideFooter />
-          </section>
-        )}
-      </aside>
+          {!inEditor && (
+            <section className="u-lg-down-hide">
+              <SideFooter />
+            </section>
+          )}
+        </aside>
+      )}
 
       <style jsx>{styles}</style>
     </>

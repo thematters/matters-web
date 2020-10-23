@@ -120,7 +120,10 @@ const DraftDetail = () => {
   }
 
   return (
-    <Layout.Main aside={<>{isSmallUp && <Sidebar draft={draft} />}</>} inEditor>
+    <Layout.Main
+      aside={isSmallUp ? <Sidebar draft={draft} /> : undefined}
+      inEditor
+    >
       <Layout.Header
         left={<Layout.Header.BackButton />}
         right={
@@ -140,7 +143,9 @@ const DraftDetail = () => {
 
       <PublishState draft={draft} />
 
-      <Editor draft={draft} update={update} upload={upload} />
+      <Layout.Spacing>
+        <Editor draft={draft} update={update} upload={upload} />
+      </Layout.Spacing>
 
       {!isSmallUp && <BottomBar draft={draft} />}
     </Layout.Main>

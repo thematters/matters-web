@@ -17,7 +17,7 @@ const texts: {
   zh_hant: {
     intro: '搬家到 Matters',
     content:
-      '想將過去發佈在其他地方的作品，搬到 Matters，實現作品的永久保存？' +
+      '想將過去發布在其他地方的作品，搬到 Matters，實現作品的永久保存？' +
       '從今天開始，只要三個步驟，就可以將你在 Medium 的作品輕鬆搬到 Matters。',
     start: '開始搬家',
   },

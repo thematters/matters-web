@@ -1,34 +1,51 @@
-import { Head, Layout, SetupLikeCoin, SignUpForm, useStep } from '~/components'
+import { useRouter } from 'next/router'
 
-type Step = 'signUp' | 'profile' | 'setupLikeCoin' | 'complete'
+import {
+  Head,
+  Layout,
+  ReCaptchaProvider,
+  SignUpForm,
+  useStep,
+  VerificationLinkSent,
+} from '~/components'
+
+import { getQuery } from '~/common/utils'
+
+type Step = 'init' | 'verification_sent' | 'password' | 'complete'
 
 const SignUp = () => {
-  const { currStep, forward } = useStep<Step>('signUp')
+  const router = useRouter()
+  const email = getQuery({ router, key: 'email' })
+  const code = getQuery({ router, key: 'code' })
+  const displayName = getQuery({ router, key: 'displayName' })
+
+  const initStep = email && code && displayName ? 'password' : 'init'
+  const { currStep, forward } = useStep<Step>(initStep)
 
   return (
     <Layout.Main bgColor="grey-lighter">
       <Head title={{ id: 'register' }} />
 
-      {currStep === 'signUp' && (
-        <SignUpForm.Init
-          purpose="page"
-          submitCallback={() => {
-            forward('profile')
-          }}
-        />
+      {currStep === 'init' && (
+        <ReCaptchaProvider>
+          <SignUpForm.Init
+            purpose="page"
+            submitCallback={() => {
+              forward('verification_sent')
+            }}
+          />
+        </ReCaptchaProvider>
       )}
 
-      {currStep === 'profile' && (
-        <SignUpForm.Profile
-          purpose="page"
-          submitCallback={() => {
-            forward('setupLikeCoin')
-          }}
-        />
+      {currStep === 'verification_sent' && (
+        <VerificationLinkSent type="register" purpose="page" />
       )}
 
-      {currStep === 'setupLikeCoin' && (
-        <SetupLikeCoin
+      {currStep === 'password' && (
+        <SignUpForm.Password
+          email={email}
+          code={code}
+          displayName={displayName}
           purpose="page"
           submitCallback={() => {
             forward('complete')
