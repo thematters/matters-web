@@ -127,11 +127,11 @@ const Password: React.FC<FormProps> = ({
       />
 
       <Form.Input
-        label={<Translate id="newPassword" />}
+        label={<Translate id="passwordAgain" />}
         type="password"
         name="comparedPassword"
         required
-        placeholder={translate({ id: 'enterNewPasswordAgain', lang })}
+        placeholder={translate({ id: 'enterPasswordAgain', lang })}
         value={values.comparedPassword}
         error={touched.comparedPassword && errors.comparedPassword}
         hint={<Translate id="hintPassword" />}

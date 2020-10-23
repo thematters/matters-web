@@ -66,6 +66,6 @@ export const unshiftConnections = ({
       endCursor: oldPageInfo.endCursor,
       hasNextPage: oldPageInfo.hasNextPage,
     },
-    edges: [...newEdges, ...oldEdges],
+    edges: _uniqBy([...oldEdges, ...newEdges], (edge) => edge.node.id),
   })
 }

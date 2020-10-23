@@ -50,7 +50,7 @@ const WalletSettings = () => {
 
   return (
     <Form.List groupName={<Translate id="settingsWallet" />}>
-      <LikeCoinDialog defaultStep="setup">
+      <LikeCoinDialog>
         {({ open }) => (
           <Form.List.Item
             title="Liker ID"
