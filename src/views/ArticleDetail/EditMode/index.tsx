@@ -168,13 +168,16 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
         cancel={onCancel}
       />
 
-      <Editor
-        draft={draft}
-        isReviseMode={!isReviseDisabled}
-        isTitleReadOnly={true}
-        update={async (update) => editContent(update.content || '')}
-        upload={async () => ({ id: '', path: '' })}
-      />
+      <Layout.Spacing>
+        <Editor
+          draft={draft}
+          isReviseMode={!isReviseDisabled}
+          isTitleReadOnly={true}
+          update={async (update) => editContent(update.content || '')}
+          upload={async () => ({ id: '', path: '' })}
+        />
+      </Layout.Spacing>
+
 
       {!isSmallUp && (
         <EditModeBottomBar
