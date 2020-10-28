@@ -37,6 +37,12 @@ interface EditModeHeaderProps {
   onSaved: () => any
 }
 
+/**
+ * Note:
+ *
+ * The response of this mutation is aligned with `COLLECTION_LIST` in `CollectionList.tsx`,
+ * so that it will auto update the local cache and prevent refetch logics
+ */
 const EDIT_ARTICLE = gql`
   mutation EditArticle(
     $id: ID!
@@ -76,12 +82,6 @@ const EDIT_ARTICLE = gql`
   ${EditorFragments.draft}
 `
 
-/**
- * Note:
- *
- * The response of this mutation is aligned with `COLLECTION_LIST` in `CollectionList.tsx`,
- * so that it will auto update the local cache and prevent refetch logics
- */
 const EditModeHeader = ({
   article,
   content,
