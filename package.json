@@ -61,6 +61,7 @@
     "classnames": "^2.2.6",
     "date-fns": "^2.16.1",
     "express": "^4.17.1",
+    "fastest-levenshtein": "^1.0.12",
     "fingerprintjs2": "^2.1.2",
     "firebase": "^7.23.0",
     "formik": "^2.1.5",

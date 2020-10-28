@@ -1,15 +1,23 @@
 import { useQuery } from '@apollo/react-hooks'
 import _uniq from 'lodash/uniq'
+import dynamic from 'next/dynamic'
 import { useEffect, useState } from 'react'
 
-import { Layout, Spinner, Title, useResponsive } from '~/components'
+import {
+  EmptyLayout,
+  Layout,
+  ReviseArticleDialog,
+  Spinner,
+  Throw404,
+  useResponsive,
+} from '~/components'
 import { QueryError, useImperativeQuery } from '~/components/GQL'
 
-import Content from '../Content'
 import styles from '../styles.css'
 import EditModeBottomBar from './BottomBar'
 import { EDIT_MODE_ARTICLE, EDIT_MODE_ARTICLE_ASSETS } from './gql'
 import EditModeHeader from './Header'
+import PublishState from './PublishState'
 import EditModeSidebar from './Sidebar'
 
 import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
@@ -21,13 +29,20 @@ import { EditModeArticleAssets } from './__generated__/EditModeArticleAssets'
 
 interface EditModeProps {
   article: ArticleDetailPublic_article
+  onCancel: () => void
   onSaved: () => void
 }
 
-const EditMode: React.FC<EditModeProps> = ({ article, onSaved }) => {
+const Editor = dynamic(() => import('~/components/Editor/Article'), {
+  ssr: false,
+  loading: Spinner,
+})
+
+const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
   const isSmallUp = useResponsive('sm-up')
 
   // staging editing data
+  const [content, editContent] = useState<string | null>(null)
   const [cover, editCover] = useState<Asset>()
   const [tags, editTags] = useState<DigestTag[]>(article.tags || [])
   const [collection, editCollection] = useState<ArticleDigestDropdownArticle[]>(
@@ -76,15 +91,14 @@ const EditMode: React.FC<EditModeProps> = ({ article, onSaved }) => {
           right={
             <EditModeHeader
               article={article}
+              content={content}
               cover={cover}
               tags={tags}
               collection={collection}
               onSaved={onSaved}
-              disabled
             />
           }
         />
-
         <Spinner />
       </Layout.Main>
     )
@@ -93,6 +107,23 @@ const EditMode: React.FC<EditModeProps> = ({ article, onSaved }) => {
   if (error) {
     return <QueryError error={error} />
   }
+
+  const drafts = data?.article?.drafts || []
+  const draft = drafts[0]
+  const count = 4 - (drafts.length || 0)
+
+  if (!draft) {
+    return (
+      <EmptyLayout>
+        <Throw404 />
+      </EmptyLayout>
+    )
+  }
+
+  const isSameHash = draft.mediaHash === article.mediaHash
+  const isPending = draft.publishState === 'pending'
+  const isEditDisabled = !isSameHash || isPending
+  const isReviseDisabled = isEditDisabled || count <= 0
 
   return (
     <Layout.Main
@@ -108,30 +139,44 @@ const EditMode: React.FC<EditModeProps> = ({ article, onSaved }) => {
             editTags={editTags}
             editCollection={editCollection}
             refetchAssets={refetchAssets}
+            disabled={isEditDisabled}
           />
         )
       }
       inEditor
     >
       <Layout.Header
+        left={
+          <Layout.Header.BackButton onClick={onCancel} disabled={isPending} />
+        }
         right={
           <EditModeHeader
             article={article}
+            content={content}
             cover={cover}
             tags={tags}
             collection={collection}
+            count={count}
+            isSameHash={isSameHash}
             onSaved={onSaved}
           />
         }
       />
 
-      <section className="content editing">
-        <section className="title">
-          <Title type="article">{article.title}</Title>
-        </section>
+      <PublishState
+        article={article}
+        draft={draft}
+        isSameHash={isSameHash}
+        cancel={onCancel}
+      />
 
-        <Content article={article} />
-      </section>
+      <Editor
+        draft={draft}
+        isReviseMode={!isReviseDisabled}
+        isTitleReadOnly={true}
+        update={async (update) => editContent(update.content || '')}
+        upload={async () => ({ id: '', path: '' })}
+      />
 
       {!isSmallUp && (
         <EditModeBottomBar
@@ -144,8 +189,11 @@ const EditMode: React.FC<EditModeProps> = ({ article, onSaved }) => {
           editTags={editTags}
           editCollection={editCollection}
           refetchAssets={refetchAssets}
+          disabled={isEditDisabled}
         />
       )}
+
+      {!isReviseDisabled && <ReviseArticleDialog count={count} />}
 
       <style jsx>{styles}</style>
     </Layout.Main>

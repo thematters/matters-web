@@ -20,6 +20,10 @@ import { EditorDraft } from '../__generated__/EditorDraft'
 
 interface Props {
   draft: EditorDraft
+
+  isReviseMode?: boolean
+  isTitleReadOnly?: boolean
+
   update: (draft: {
     title?: string | null
     content?: string | null
@@ -35,14 +39,22 @@ interface Props {
   }>
 }
 
-const ArticleEditor: FC<Props> = ({ draft, update, upload }) => {
+const ArticleEditor: FC<Props> = ({
+  draft,
+
+  isReviseMode = false,
+  isTitleReadOnly = false,
+
+  update,
+  upload,
+}) => {
   const [search, searchResult] = useLazyQuery<SearchUsers>(SEARCH_USERS)
   const { lang } = useContext(LanguageContext)
 
   const { id, content, publishState, title } = draft
   const isPending = publishState === 'pending'
   const isPublished = publishState === 'published'
-  const readyOnly = isPending || isPublished
+  const isReadOnly = (isPending || isPublished) && !isReviseMode
   const { data, loading } = searchResult
 
   const mentionUsers = (data?.search.edges || []).map(
@@ -61,15 +73,18 @@ const ArticleEditor: FC<Props> = ({ draft, update, upload }) => {
           editorContentId={id}
           editorUpdate={update}
           editorUpload={upload}
+          enableReviseMode={isReviseMode}
+          enableToolbar={!isReviseMode}
           eventName={ADD_TOAST}
           language={lang.toUpperCase()}
           mentionLoading={loading}
           mentionKeywordChange={mentionKeywordChange}
           mentionUsers={mentionUsers}
           mentionListComponent={MentionUserList}
-          readOnly={readyOnly}
+          readOnly={isReadOnly}
           theme="bubble"
           titleDefaultValue={title || ''}
+          titleReadOnly={isTitleReadOnly}
         />
       </div>
       <style jsx>{themeStyles}</style>

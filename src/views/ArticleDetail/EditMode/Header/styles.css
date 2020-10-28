@@ -3,3 +3,16 @@ p {
   font-size: var(--font-size-sm);
   color: var(--color-grey-darker);
 }
+
+.green {
+  color: var(--color-matters-green);
+}
+
+.red {
+  color: var(--color-red);
+}
+
+.notice {
+  margin-left: var(--spacing-x-tight);
+  color: var(--color-black);
+}

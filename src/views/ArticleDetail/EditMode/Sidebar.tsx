@@ -16,6 +16,8 @@ interface EditModeSidebarProps {
   tags: DigestTag[]
   collection: ArticleDigestDropdownArticle[]
 
+  disabled: boolean
+
   editCover: (cover?: Asset) => any
   editTags: (tags: DigestTag[]) => any
   editCollection: (articles: ArticleDigestDropdownArticle[]) => any
@@ -30,6 +32,8 @@ const EditModeSidebar: React.FC<EditModeSidebarProps> = ({
   assets,
   tags,
   collection,
+
+  disabled,
 
   editCover,
   editTags,
@@ -46,16 +50,19 @@ const EditModeSidebar: React.FC<EditModeSidebarProps> = ({
         entityType={ENTITY_TYPE.article}
         onEdit={editCover}
         refetchAssets={refetchAssets}
+        disabled={disabled}
       />
 
       <Sidebar.Tags
         tags={tags.length > 0 ? tags : tags}
         onEdit={(newTags: DigestTag[]) => editTags(_uniq(newTags))}
+        disabled={disabled}
       />
 
       <Sidebar.Collection
         articles={collection.length > 0 ? collection : collection}
         onEdit={editCollection}
+        disabled={disabled}
       />
     </>
   )

@@ -244,7 +244,13 @@ const ArticleDetail = () => {
    * Render:Edit Mode
    */
   if (editMode) {
-    return <EditMode article={article} onSaved={onEditSaved} />
+    return (
+      <EditMode
+        article={article}
+        onCancel={() => setEditMode(false)}
+        onSaved={onEditSaved}
+      />
+    )
   }
 
   /**
