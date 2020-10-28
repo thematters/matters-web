@@ -106,6 +106,7 @@ export const LoginForm: React.FC<FormProps> = ({
           localStorage.setItem(STORE_KEY_AUTH_TOKEN, token)
         }
 
+        setSubmitting(false)
         redirectToTarget({
           fallback: !!isInPage ? 'homepage' : 'current',
         })
@@ -120,9 +121,8 @@ export const LoginForm: React.FC<FormProps> = ({
             setFieldError('email', messages[code])
           }
         })
+        setSubmitting(false)
       }
-
-      setSubmitting(false)
     },
   })
 

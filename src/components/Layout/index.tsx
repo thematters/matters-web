@@ -59,6 +59,7 @@ const Main: React.FC<MainProps> = ({ aside, bgColor, inEditor, children }) => {
   })
   const asideClasses = classNames({
     'l-col-three-right': true,
+    'u-lg-down-hide': true,
     'in-editor': inEditor,
   })
 

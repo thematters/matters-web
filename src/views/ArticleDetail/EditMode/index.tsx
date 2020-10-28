@@ -128,20 +128,18 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
   return (
     <Layout.Main
       aside={
-        isSmallUp && (
-          <EditModeSidebar
-            article={article}
-            cover={cover}
-            assets={data?.article?.assets || []}
-            tags={tags}
-            collection={collection}
-            editCover={editCover}
-            editTags={editTags}
-            editCollection={editCollection}
-            refetchAssets={refetchAssets}
-            disabled={isEditDisabled}
-          />
-        )
+        <EditModeSidebar
+          article={article}
+          cover={cover}
+          assets={data?.article?.assets || []}
+          tags={tags}
+          collection={collection}
+          editCover={editCover}
+          editTags={editTags}
+          editCollection={editCollection}
+          refetchAssets={refetchAssets}
+          disabled={isEditDisabled}
+        />
       }
       inEditor
     >

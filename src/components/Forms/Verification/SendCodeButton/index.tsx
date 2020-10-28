@@ -1,4 +1,3 @@
-import gql from 'graphql-tag'
 import { useContext, useState } from 'react'
 
 import {
@@ -10,13 +9,18 @@ import {
   useCountdown,
   useMutation,
 } from '~/components'
+import SEND_CODE from '~/components/GQL/mutations/sendCode'
 
-import { ADD_TOAST, SEND_CODE_COUNTDOWN } from '~/common/enums'
+import {
+  ADD_TOAST,
+  SEND_CODE_COUNTDOWN,
+  VERIFICATION_CODE_TYPES,
+} from '~/common/enums'
 import { parseFormSubmitErrors } from '~/common/utils'
 
 import styles from './styles.css'
 
-import { SendVerificationCode } from './__generated__/SendVerificationCode'
+import { SendVerificationCode } from '~/components/GQL/mutations/__generated__/SendVerificationCode'
 
 /**
  * This component is for sending verification code to user with built-in mutation.
@@ -24,32 +28,20 @@ import { SendVerificationCode } from './__generated__/SendVerificationCode'
  * Usage:
  *
  * ```jsx
- *   <SendCodeButton
+ *   <VerificationSendCodeButton
  *     email={'user-email'}
  *     type={'verification-type'}
  *   />
  * ```
  */
 
-interface SendCodeButtonProps {
+interface VerificationSendCodeButtonProps {
   email: string
-  type:
-    | 'register'
-    | 'email_reset'
-    | 'email_reset_confirm'
-    | 'password_reset'
-    | 'payment_password_reset'
-    | 'email_verify'
+  type: keyof typeof VERIFICATION_CODE_TYPES
   disabled?: boolean
 }
 
-export const SEND_CODE = gql`
-  mutation SendVerificationCode($input: SendVerificationCodeInput!) {
-    sendVerificationCode(input: $input)
-  }
-`
-
-export const SendCodeButton: React.FC<SendCodeButtonProps> = ({
+export const VerificationSendCodeButton: React.FC<VerificationSendCodeButtonProps> = ({
   email,
   type,
   disabled,

@@ -2,22 +2,23 @@ import { useState } from 'react'
 
 import {
   Dialog,
-  SetupLikeCoin,
+  ReCaptchaProvider,
   SignUpForm,
   useEventListener,
   useStep,
+  VerificationLinkSent,
 } from '~/components'
 
 import { CLOSE_ACTIVE_DIALOG, OPEN_SIGNUP_DIALOG } from '~/common/enums'
 
-type Step = 'signUp' | 'profile' | 'setupLikeCoin' | 'complete'
+type Step = 'init' | 'verification_sent'
 
 const SignUpDialog = () => {
-  const { currStep, forward } = useStep<Step>('signUp')
+  const { currStep, forward } = useStep<Step>('init')
 
   const [showDialog, setShowDialog] = useState(false)
   const open = () => {
-    forward('signUp')
+    forward('init')
     setShowDialog(true)
   }
   const close = () => {
@@ -29,38 +30,29 @@ const SignUpDialog = () => {
 
   return (
     <Dialog
+      size="sm"
       isOpen={showDialog}
       onDismiss={close}
-      fixedHeight={currStep !== 'complete'}
+      fixedHeight={currStep !== 'verification_sent'}
     >
-      {currStep === 'signUp' && (
-        <SignUpForm.Init
+      {currStep === 'init' && (
+        <ReCaptchaProvider>
+          <SignUpForm.Init
+            purpose="dialog"
+            submitCallback={() => {
+              forward('verification_sent')
+            }}
+            closeDialog={close}
+          />
+        </ReCaptchaProvider>
+      )}
+      {currStep === 'verification_sent' && (
+        <VerificationLinkSent
+          type="register"
           purpose="dialog"
-          submitCallback={() => {
-            forward('profile')
-          }}
           closeDialog={close}
         />
       )}
-      {currStep === 'profile' && (
-        <SignUpForm.Profile
-          purpose="dialog"
-          submitCallback={() => {
-            forward('setupLikeCoin')
-          }}
-          closeDialog={close}
-        />
-      )}
-      {currStep === 'setupLikeCoin' && (
-        <SetupLikeCoin
-          purpose="dialog"
-          submitCallback={() => {
-            forward('complete')
-          }}
-          closeDialog={close}
-        />
-      )}
-      {currStep === 'complete' && <SignUpForm.Complete closeDialog={close} />}
     </Dialog>
   )
 }

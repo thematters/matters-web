@@ -114,8 +114,11 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
           })
         )
 
+        setSubmitting(false)
         closeDialog()
       } catch (error) {
+        setSubmitting(false)
+
         const [messages, codes] = parseFormSubmitErrors(error, lang)
         codes.forEach((code) => {
           if (code.includes('USER_DISPLAYNAME_INVALID')) {
@@ -125,8 +128,6 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
           }
         })
       }
-
-      setSubmitting(false)
     },
   })
 

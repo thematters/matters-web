@@ -8,6 +8,7 @@ import { useMutation } from '~/components/GQL'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 
 import {
+  analytics,
   parseFormSubmitErrors,
   translate,
   validateComparedPassword,
@@ -15,14 +16,14 @@ import {
 } from '~/common/utils'
 
 import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
-import { ResetPassword } from './__generated__/ResetPassword'
+import { UserRegister } from './__generated__/UserRegister'
 
 interface FormProps {
   email: string
   code: string
-  type: 'forget' | 'change'
+  displayName: string
   purpose: 'dialog' | 'page'
-  submitCallback: () => void
+  submitCallback?: (params: any) => void
   closeDialog?: () => void
 }
 
@@ -31,28 +32,27 @@ interface FormValues {
   comparedPassword: string
 }
 
-export const RESET_PASSWORD = gql`
-  mutation ResetPassword($input: ResetPasswordInput!) {
-    resetPassword(input: $input)
+const USER_REGISTER = gql`
+  mutation UserRegister($input: UserRegisterInput!) {
+    userRegister(input: $input) {
+      auth
+    }
   }
 `
 
-const Confirm: React.FC<FormProps> = ({
+const Password: React.FC<FormProps> = ({
+  purpose,
   email,
   code,
-  type,
-  purpose,
+  displayName,
   submitCallback,
   closeDialog,
 }) => {
   const [confirm] = useMutation<ConfirmVerificationCode>(CONFIRM_CODE)
-  const [reset] = useMutation<ResetPassword>(RESET_PASSWORD)
+  const [register] = useMutation<UserRegister>(USER_REGISTER)
   const { lang } = useContext(LanguageContext)
-
-  const isForget = type === 'forget'
   const isInPage = purpose === 'page'
-  const formId = 'password-change-confirm-form'
-  const titleId = isForget ? 'resetPassword' : 'changePassword'
+  const formId = 'sign-up-password-form'
 
   const {
     values,
@@ -80,22 +80,24 @@ const Confirm: React.FC<FormProps> = ({
     onSubmit: async ({ password }, { setFieldError, setSubmitting }) => {
       try {
         // verify email
-        let codeId = ''
         const { data } = await confirm({
-          variables: { input: { email, type: 'password_reset', code } },
+          variables: { input: { email, code, type: 'register' } },
+        })
+        const codeId = data?.confirmVerificationCode
+
+        // finish registration
+        await register({
+          variables: {
+            input: { email, codeId, displayName, password },
+          },
         })
 
-        codeId = data?.confirmVerificationCode || ''
-
-        // finish password resetting
-        await reset({
-          variables: { input: { password, codeId } },
-        })
+        analytics.identifyUser()
 
         setSubmitting(false)
 
         if (submitCallback) {
-          submitCallback()
+          submitCallback({ email, codeId, password })
         }
       } catch (error) {
         setSubmitting(false)
@@ -109,24 +111,27 @@ const Confirm: React.FC<FormProps> = ({
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       <Form.Input
-        label={<Translate id="newPassword" />}
+        label={<Translate id="password" />}
         type="password"
         name="password"
         required
-        placeholder={translate({ id: 'enterNewPassword', lang })}
+        placeholder={translate({
+          id: 'enterPassword',
+          lang,
+        })}
         value={values.password}
         error={touched.password && errors.password}
         onBlur={handleBlur}
         onChange={handleChange}
-        autoFocus
+        hint={<Translate id="hintPassword" />}
       />
 
       <Form.Input
-        label={<Translate id="newPassword" />}
+        label={<Translate id="passwordAgain" />}
         type="password"
         name="comparedPassword"
         required
-        placeholder={translate({ id: 'enterNewPasswordAgain', lang })}
+        placeholder={translate({ id: 'enterPasswordAgain', lang })}
         value={values.comparedPassword}
         error={touched.comparedPassword && errors.comparedPassword}
         hint={<Translate id="hintPassword" />}
@@ -153,12 +158,11 @@ const Confirm: React.FC<FormProps> = ({
           left={<Layout.Header.BackButton />}
           right={
             <>
-              <Layout.Header.Title id={titleId} />
+              <Layout.Header.Title id="register" />
               {SubmitButton}
             </>
           }
         />
-
         {InnerForm}
       </>
     )
@@ -168,7 +172,7 @@ const Confirm: React.FC<FormProps> = ({
     <>
       {closeDialog && (
         <Dialog.Header
-          title={titleId}
+          title="register"
           close={closeDialog}
           rightButton={SubmitButton}
         />
@@ -179,4 +183,4 @@ const Confirm: React.FC<FormProps> = ({
   )
 }
 
-export default Confirm
+export default Password
