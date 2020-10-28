@@ -178,7 +178,6 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
         />
       </Layout.Spacing>
 
-
       {!isSmallUp && (
         <EditModeBottomBar
           article={article}
