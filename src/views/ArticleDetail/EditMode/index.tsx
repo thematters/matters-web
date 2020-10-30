@@ -25,7 +25,7 @@ interface EditModeProps {
 }
 
 const EditMode: React.FC<EditModeProps> = ({ article, onSaved }) => {
-  const isSmallUp = useResponsive('sm-up')
+  const isLargeUp = useResponsive('lg-up')
 
   // staging editing data
   const [cover, editCover] = useState<Asset>()
@@ -131,7 +131,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onSaved }) => {
         <Content article={article} />
       </section>
 
-      {!isSmallUp && (
+      {!isLargeUp && (
         <EditModeBottomBar
           article={article}
           cover={cover}

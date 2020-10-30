@@ -11,6 +11,14 @@
   border-radius: var(--spacing-x-tight) var(--spacing-x-tight) 0 0;
   box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08);
 
+  @media (--sm-up) {
+    @mixin border-top-grey;
+
+    position: sticky;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
   & button {
     flex: 1 1 0;
     height: 100%;
