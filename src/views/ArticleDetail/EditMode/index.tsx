@@ -39,7 +39,7 @@ const Editor = dynamic(() => import('~/components/Editor/Article'), {
 })
 
 const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
-  const isSmallUp = useResponsive('sm-up')
+  const isLargeUp = useResponsive('lg-up')
 
   // staging editing data
   const [content, editContent] = useState<string | null>(null)
@@ -178,7 +178,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
         />
       </Layout.Spacing>
 
-      {!isSmallUp && (
+      {!isLargeUp && (
         <EditModeBottomBar
           article={article}
           cover={cover}
