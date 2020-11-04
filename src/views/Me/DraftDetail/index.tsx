@@ -34,7 +34,7 @@ const EmptyLayout: React.FC = ({ children }) => (
 )
 
 const DraftDetail = () => {
-  const isSmallUp = useResponsive('sm-up')
+  const isLargeUp = useResponsive('lg-up')
   const router = useRouter()
   const id = getQuery({ router, key: 'draftId' })
 
@@ -144,7 +144,7 @@ const DraftDetail = () => {
         <Editor draft={draft} update={update} upload={upload} />
       </Layout.Spacing>
 
-      {!isSmallUp && <BottomBar draft={draft} />}
+      {!isLargeUp && <BottomBar draft={draft} />}
     </Layout.Main>
   )
 }
