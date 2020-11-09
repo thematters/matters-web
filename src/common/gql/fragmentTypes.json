@@ -48,6 +48,8 @@
           { "name": "SubscribedArticleNewCommentNotice" },
           { "name": "UpstreamArticleArchivedNotice" },
           { "name": "DownstreamArticleArchivedNotice" },
+          { "name": "RevisedArticlePublishedNotice" },
+          { "name": "RevisedArticleNotPublishedNotice" },
           { "name": "CommentPinnedNotice" },
           { "name": "CommentNewReplyNotice" },
           { "name": "CommentMentionedYouNotice" },

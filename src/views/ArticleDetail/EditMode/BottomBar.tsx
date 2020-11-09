@@ -14,6 +14,8 @@ interface EditModeBottomBarProps {
   tags: DigestTag[]
   collection: ArticleDigestDropdownArticle[]
 
+  disabled: boolean
+
   editCover: (cover?: Asset) => any
   editTags: (tags: DigestTag[]) => any
   editCollection: (articles: ArticleDigestDropdownArticle[]) => any
@@ -28,6 +30,8 @@ const EditModeBottomBar: React.FC<EditModeBottomBarProps> = ({
   assets,
   tags,
   collection,
+
+  disabled,
 
   editCover,
   editTags,
@@ -47,6 +51,7 @@ const EditModeBottomBar: React.FC<EditModeBottomBarProps> = ({
       entityId={article.id}
       entityType={ENTITY_TYPE.article}
       refetchAssets={refetchAssets}
+      disabled={disabled}
     />
   )
 }
