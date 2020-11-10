@@ -78,7 +78,7 @@
     "path-to-regexp": "^6.1.0",
     "pulltorefreshjs": "^0.1.20",
     "query-string": "^6.13.1",
-    "react": "^16.13.1",
+    "react": "^16.14.0",
     "react-beautiful-dnd": "^13.0.0",
     "react-copy-to-clipboard": "^5.0.2",
     "react-dom": "^16.13.1",
