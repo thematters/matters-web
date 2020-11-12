@@ -35,19 +35,6 @@ export const FEED_ARTICLES_PUBLIC = {
     }
     ${feedFragment}
   `,
-  valued: gql`
-    query ValuedFeedPublic($after: String) {
-      viewer @connection(key: "viewerFeedValued") {
-        id
-        recommendation {
-          feed: valued(input: { first: 10, after: $after }) {
-            ...FeedArticleConnection
-          }
-        }
-      }
-    }
-    ${feedFragment}
-  `,
   newest: gql`
     query NewestFeedPublic($after: String) {
       viewer @connection(key: "viewerFeedNewest") {
