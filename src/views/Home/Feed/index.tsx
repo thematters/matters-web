@@ -39,16 +39,11 @@ import {
   TopicsFeedPublic,
   TopicsFeedPublic_viewer_recommendation_feed_edges,
 } from './__generated__/TopicsFeedPublic'
-import {
-  ValuedFeedPublic,
-  ValuedFeedPublic_viewer_recommendation_feed_edges,
-} from './__generated__/ValuedFeedPublic'
 
 type FeedArticlesPublic =
   | HottestFeedPublic
   | NewestFeedPublic
   | IcymiFeedPublic
-  | ValuedFeedPublic
   | TopicsFeedPublic
 
 type HorizontalFeed = React.FC<{ after?: string; first?: number }>
@@ -64,7 +59,6 @@ type FeedEdge =
   | IcymiFeedPublic_viewer_recommendation_feed_edges
   | NewestFeedPublic_viewer_recommendation_feed_edges
   | TopicsFeedPublic_viewer_recommendation_feed_edges
-  | ValuedFeedPublic_viewer_recommendation_feed_edges
 
 interface FeedLocation {
   [key: number]: HorizontalFeed
@@ -87,18 +81,9 @@ const MainFeed = ({ feedSortType: sortBy, viewMode }: MainFeedProps) => {
 
   /**
    * Data Fetching
-   *
-   * Hottest Feed:
-   * 1) Logged-in User: Hottest, `article_activity_materialized`
-   * 2) Anonymous User: Valued, `article_value_materialized`
    */
-  let query = FEED_ARTICLES_PUBLIC[sortBy]
-
-  if (isHottestFeed && !viewer.id) {
-    query = FEED_ARTICLES_PUBLIC.valued
-  }
-
   // public data
+  const query = FEED_ARTICLES_PUBLIC[sortBy]
   const {
     data,
     error,
