@@ -28,7 +28,7 @@ export const ReviseArticleDialog = ({ children, count }: Props) => {
                 zh_hans="修订作品正文目前支持增加、删除或替换中英文字符，"
               />
               <span className="bold">
-                <Translate zh_hant="次修訂上限為" zh_hans="次修订上限为" />
+                <Translate zh_hant="單次修訂上限為" zh_hans="单次修订上限为" />
                 <span className="count"> 50 </span>
                 <Translate zh_hant="個編輯距離。" zh_hans="個編輯距離。" />
               </span>

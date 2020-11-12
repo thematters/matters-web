@@ -110,7 +110,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
 
   const drafts = data?.article?.drafts || []
   const draft = drafts[0]
-  const count = 4 - (drafts.length || 0)
+  const count = 3 - (drafts.length || 0)
 
   if (!draft) {
     return (

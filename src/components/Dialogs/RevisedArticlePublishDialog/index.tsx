@@ -35,8 +35,8 @@ export const RevisedArticlePublishDialog = ({ children, onSave }: Props) => {
               </li>
               <li>
                 <Translate
-                  zh_hant="當前作品版本會直接覆蓋顯示，讀者只能看到當前版本，上一版本將在 Matters 站內被隱藏。"
-                  zh_hans="当前作品版本会直接覆盖显示，读者只能看到当前版本，上一版本将在 Matters 站内被隐藏。"
+                  zh_hant="修訂發布後，站內將僅顯示修訂後作品，暫不提供草稿或其他方式回顧過往文字，請自行備份留存喔。"
+                  zh_hans="修订发布后，站内将仅显示修订后作品，暂不提供草稿或其他方式回顾过往文字，请自行备份留存喔。"
                 />
               </li>
             </ul>

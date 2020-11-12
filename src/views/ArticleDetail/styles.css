@@ -33,3 +33,19 @@
   padding-top: var(--spacing-loose);
   margin: var(--spacing-loose) 0 var(--spacing-base);
 }
+
+.time {
+  flex-shrink: 0;
+  font-size: var(--font-size-timestamp);
+  font-weight: var(--font-weight-timestamp);
+  line-height: var(--line-height-timestamp);
+
+  & span {
+    margin-right: var(--spacing-xx-tight);
+    color: var(--color-grey);
+  }
+
+  &:last-child {
+    margin-left: var(--spacing-base);
+  }
+}
