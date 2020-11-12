@@ -4,9 +4,18 @@ import { TextIcon, withIcon } from '~/components'
 
 import { analytics } from '~/common/utils'
 
+import { ReactComponent as IconShareTwitterCircle } from '@/public/static/icons/share-twitter-circle.svg'
 import { ReactComponent as IconShareTwitter } from '@/public/static/icons/share-twitter.svg'
 
-const Twitter = ({ title, link }: { title: string; link: string }) => (
+const Twitter = ({
+  title,
+  link,
+  circle,
+}: {
+  title: string
+  link: string
+  circle?: boolean
+}) => (
   <button
     type="button"
     onClick={() => {
@@ -23,9 +32,13 @@ const Twitter = ({ title, link }: { title: string; link: string }) => (
       return window.open(shareUrl, 'Share to Twitter')
     }}
   >
-    <TextIcon icon={withIcon(IconShareTwitter)({})} spacing="base">
-      Twitter
-    </TextIcon>
+    {circle && withIcon(IconShareTwitterCircle)({ size: 'xl-m' })}
+
+    {!circle && (
+      <TextIcon icon={withIcon(IconShareTwitter)({})} spacing="base">
+        Twitter
+      </TextIcon>
+    )}
   </button>
 )
 

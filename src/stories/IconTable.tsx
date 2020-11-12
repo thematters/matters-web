@@ -13,11 +13,14 @@ const LOGO_REQUEST = /IconLogo/
 export default function IconTable(props: IconProps) {
   return (
     <>
+      {/* Logo */}
       <Tooltip content={'IconLogo'}>
         <span>
           <IconLogo {...props} />
         </span>
       </Tooltip>
+
+      {/* Other Icons */}
       <div className="container">
         {icons
           .keys()

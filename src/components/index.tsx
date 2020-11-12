@@ -58,6 +58,7 @@ export * from './Notice'
 export * from './Appreciation'
 export * from './Transaction'
 
+export * from './Share'
 export * from './Search'
 export * from './UserProfile'
 export * from './FileUploader'

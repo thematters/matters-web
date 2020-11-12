@@ -114,3 +114,6 @@ service-worker.js*
 
 # editors & IDEs
 .idea/
+
+# storybook
+storybook-static

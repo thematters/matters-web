@@ -4,9 +4,18 @@ import { TextIcon, withIcon } from '~/components'
 
 import { analytics } from '~/common/utils'
 
+import { ReactComponent as IconShareWhatsAppCircle } from '@/public/static/icons/share-whatsapp-circle.svg'
 import { ReactComponent as IconShareWhatsApp } from '@/public/static/icons/share-whatsapp.svg'
 
-const Whatsapp = ({ title, link }: { title: string; link: string }) => (
+const Whatsapp = ({
+  title,
+  link,
+  circle,
+}: {
+  title: string
+  link: string
+  circle?: boolean
+}) => (
   <button
     type="button"
     onClick={() => {
@@ -22,9 +31,13 @@ const Whatsapp = ({ title, link }: { title: string; link: string }) => (
       return window.open(shareUrl, 'Share to WhatsApp')
     }}
   >
-    <TextIcon icon={withIcon(IconShareWhatsApp)({})} spacing="base">
-      WhatsApp
-    </TextIcon>
+    {circle && withIcon(IconShareWhatsAppCircle)({ size: 'xl-m' })}
+
+    {!circle && (
+      <TextIcon icon={withIcon(IconShareWhatsApp)({})} spacing="base">
+        WhatsApp
+      </TextIcon>
+    )}
   </button>
 )
 
