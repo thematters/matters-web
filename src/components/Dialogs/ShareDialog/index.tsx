@@ -1,20 +1,12 @@
 import { useState } from 'react'
 
-import { Dialog, Translate } from '~/components'
+import { Dialog, ShareButtons, Translate } from '~/components'
 
 import { TextId } from '~/common/enums'
 import { isMobile } from '~/common/utils'
 
 import Copy from './Copy'
-import Douban from './Douban'
-import Email from './Email'
-import Facebook from './Facebook'
-import LINE from './LINE'
 import styles from './styles.css'
-import Telegram from './Telegram'
-import Twitter from './Twitter'
-import Weibo from './Weibo'
-import WhatsApp from './WhatsApp'
 
 export interface ShareDialogProps {
   title?: string
@@ -74,17 +66,17 @@ const BaseShareDialog = ({
 
           <section className="socials-container">
             <section className="left">
-              <LINE title={shareTitle} link={shareLink} />
-              <WhatsApp title={shareTitle} link={shareLink} />
-              <Telegram title={shareTitle} link={shareLink} />
-              <Douban title={shareTitle} link={shareLink} />
+              <ShareButtons.LINE title={shareTitle} link={shareLink} />
+              <ShareButtons.WhatsApp title={shareTitle} link={shareLink} />
+              <ShareButtons.Telegram title={shareTitle} link={shareLink} />
+              <ShareButtons.Douban title={shareTitle} link={shareLink} />
             </section>
 
             <section className="right">
-              <Twitter title={shareTitle} link={shareLink} />
-              <Facebook title={shareTitle} link={shareLink} />
-              <Weibo title={shareTitle} link={shareLink} />
-              <Email title={shareTitle} link={shareLink} />
+              <ShareButtons.Twitter title={shareTitle} link={shareLink} />
+              <ShareButtons.Facebook title={shareTitle} link={shareLink} />
+              <ShareButtons.Weibo title={shareTitle} link={shareLink} />
+              <ShareButtons.Email title={shareTitle} link={shareLink} />
             </section>
 
             <style jsx>{styles}</style>

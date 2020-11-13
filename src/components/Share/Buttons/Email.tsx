@@ -4,15 +4,24 @@ import { TextIcon, Translate, withIcon } from '~/components'
 
 import { analytics, dom } from '~/common/utils'
 
+import { ReactComponent as IconShareEmailCircle } from '@/public/static/icons/share-email-circle.svg'
 import { ReactComponent as IconShareEmail } from '@/public/static/icons/share-email.svg'
 
-const Email = ({ title, link }: { title: string; link: string }) => (
+const Email = ({
+  title,
+  link,
+  circle,
+}: {
+  title: string
+  link: string
+  circle?: boolean
+}) => (
   <button
     type="button"
     onClick={() => {
       const description = dom
         .$('meta[name="description"]')
-        .getAttribute('content')
+        ?.getAttribute('content')
       const shareUrl =
         'mailto:?' +
         queryString.stringify({
@@ -25,9 +34,13 @@ const Email = ({ title, link }: { title: string; link: string }) => (
       return (window.location.href = shareUrl)
     }}
   >
-    <TextIcon icon={withIcon(IconShareEmail)({})} spacing="base">
-      <Translate zh_hant="郵件" zh_hans="邮件" />
-    </TextIcon>
+    {circle && withIcon(IconShareEmailCircle)({ size: 'xl-m' })}
+
+    {!circle && (
+      <TextIcon icon={withIcon(IconShareEmail)({})} spacing="base">
+        <Translate zh_hant="郵件" zh_hans="邮件" />
+      </TextIcon>
+    )}
   </button>
 )
 
