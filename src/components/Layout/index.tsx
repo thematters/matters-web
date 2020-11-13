@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import { useRouter } from 'next/router'
 
-import { Head, SearchBar } from '~/components'
+import { Head, OnboardingTasks, SearchBar } from '~/components'
 
 import { PATHS } from '~/common/enums'
 
@@ -71,6 +71,12 @@ const Main: React.FC<MainProps> = ({ aside, bgColor, inEditor, children }) => {
         {!isInSearch && !inEditor && (
           <section className="u-lg-down-hide">
             <SearchBar />
+          </section>
+        )}
+
+        {!inEditor && (
+          <section className="u-lg-down-hide">
+            <OnboardingTasks.Widget />
           </section>
         )}
 

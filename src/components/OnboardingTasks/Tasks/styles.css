@@ -1,0 +1,19 @@
+ul {
+  & :global(li) {
+    @mixin border-top-grey;
+  }
+
+  & :global(li:last-child) {
+    @mixin border-bottom-grey;
+  }
+}
+
+.allDone {
+  margin-top: var(--spacing-loose);
+  margin-bottom: var(--spacing-loose);
+
+  & hr {
+    margin-top: var(--spacing-loose);
+    margin-bottom: var(--spacing-tight);
+  }
+}

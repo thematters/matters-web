@@ -1,0 +1,14 @@
+.widget {
+  border: 1px solid var(--color-matters-gold);
+  border-radius: var(--spacing-x-tight);
+}
+
+header {
+  padding: var(--spacing-loose) var(--spacing-base) var(--spacing-tight);
+
+  & p {
+    margin-top: var(--spacing-tight);
+    font-size: var(--font-size-sm-s);
+    line-height: var(--spacing-loose);
+  }
+}
