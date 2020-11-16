@@ -1,7 +1,9 @@
 export default (_: any) => {
   return {
+    __typename: 'ClientPreference',
     id: 'local',
     feedSortType: 'hottest',
+    followFeedType: 'article',
     viewMode: 'comfortable',
     readCivicLikerDialog: false,
     wall: true,
@@ -11,7 +13,6 @@ export default (_: any) => {
       __typename: 'Push',
     },
     routeHistory: [],
-    followFeedType: 'article',
-    __typename: 'ClientPreference',
+    onboardingTasks: true,
   }
 }

@@ -11,7 +11,7 @@ export * from './externalLinks'
 export * from './events'
 export * from './time'
 export * from './oauth'
-export * from './store'
+export * from './storage'
 export * from './payment'
 
 export const Z_INDEX = {

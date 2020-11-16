@@ -1,7 +1,8 @@
 import classNames from 'classnames'
 import { useRouter } from 'next/router'
+import { useContext } from 'react'
 
-import { Head, OnboardingTasks, SearchBar } from '~/components'
+import { Head, OnboardingTasks, SearchBar, ViewerContext } from '~/components'
 
 import { PATHS } from '~/common/enums'
 
@@ -50,6 +51,9 @@ interface MainProps {
 }
 
 const Main: React.FC<MainProps> = ({ aside, bgColor, inEditor, children }) => {
+  const viewer = useContext(ViewerContext)
+  const showOnboardingTasks = !inEditor && viewer.onboardingTasks.shown
+
   const router = useRouter()
   const isInSearch = router.pathname === PATHS.SEARCH
 
@@ -74,7 +78,7 @@ const Main: React.FC<MainProps> = ({ aside, bgColor, inEditor, children }) => {
           </section>
         )}
 
-        {!inEditor && (
+        {showOnboardingTasks && (
           <section className="u-lg-down-hide">
             <OnboardingTasks.Widget />
           </section>

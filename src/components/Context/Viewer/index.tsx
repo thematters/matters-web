@@ -1,41 +1,60 @@
 import gql from 'graphql-tag'
 import React from 'react'
 
-import { ViewerUser } from './__generated__/ViewerUser'
+import { ClientPreference_clientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
+import { ViewerUserPrivate } from './__generated__/ViewerUserPrivate'
+import { ViewerUserPublic } from './__generated__/ViewerUserPublic'
+
+export type ViewerUser = ViewerUserPublic & ViewerUserPrivate
 
 const ViewerFragments = {
-  user: gql`
-    fragment ViewerUser on User {
-      id
-      userName
-      displayName
-      avatar
-      liker {
-        likerId
-        civicLiker
+  user: {
+    public: gql`
+      fragment ViewerUserPublic on User {
+        id
+        userName
+        displayName
+        avatar
+        liker {
+          likerId
+          civicLiker
+        }
+        status {
+          state
+          hasPaymentPassword
+        }
+        info {
+          createdAt
+          email
+          agreeOn
+          userNameEditable
+          group
+        }
+        settings {
+          language
+        }
+        followees(input: { first: 0 }) {
+          totalCount
+        }
+        followers(input: { first: 0 }) {
+          totalCount
+        }
       }
-      status {
-        state
-        hasPaymentPassword
+    `,
+    private: gql`
+      fragment ViewerUserPrivate on User {
+        id
+        articles(input: { first: 0 }) {
+          totalCount
+        }
+        recommendation {
+          followingTags(input: { first: 0 }) {
+            totalCount
+          }
+        }
       }
-      info {
-        createdAt
-        email
-        agreeOn
-        userNameEditable
-        group
-      }
-      settings {
-        language
-      }
-      followees(input: { first: 0 }) {
-        totalCount
-      }
-      followers(input: { first: 0 }) {
-        totalCount
-      }
-    }
-  `,
+    `,
+  },
 }
 
 export type Viewer = ViewerUser & {
@@ -49,12 +68,23 @@ export type Viewer = ViewerUser & {
   isCivicLiker: boolean
   shouldSetupLikerID: boolean
   privateFetched: boolean
+  onboardingTasks: {
+    shown: boolean
+    finished: boolean
+    hasLikerId: boolean
+    hasFollowingTag: boolean
+    hasArticle: boolean
+    hasFollowee: boolean
+    hasCommentPremission: boolean
+  }
 }
 
 export const processViewer = (
   viewer: ViewerUser,
-  privateFetched: boolean
+  privateFetched: boolean,
+  clientPreference?: ClientPreference_clientPreference
 ): Viewer => {
+  // States
   const isAuthed = !!viewer.id
   const state = viewer?.status?.state
   const isActive = state === 'active'
@@ -65,6 +95,20 @@ export const processViewer = (
   const isInactive = isAuthed && (isBanned || isFrozen || isArchived)
   const isCivicLiker = viewer.liker.civicLiker
   const shouldSetupLikerID = isAuthed && !viewer.liker.likerId
+
+  // Onbooarding Tasks
+  const hasLikerId = !!viewer.liker.likerId
+  const hasFollowingTag =
+    (viewer?.recommendation?.followingTags.totalCount || 0) >= 5
+  const hasArticle = (viewer?.articles?.totalCount || 0) >= 1
+  const hasFollowee = (viewer?.followees?.totalCount || 0) >= 5
+  const hasCommentPremission = isAuthed && !isOnboarding
+  const isOnboardingTasksFinished =
+    hasLikerId &&
+    hasFollowingTag &&
+    hasArticle &&
+    hasFollowee &&
+    hasCommentPremission
 
   // Add user info for Sentry
   import('@sentry/browser').then((Sentry) => {
@@ -89,6 +133,19 @@ export const processViewer = (
     isCivicLiker,
     shouldSetupLikerID,
     privateFetched,
+    onboardingTasks: {
+      shown: !!(
+        isAuthed &&
+        clientPreference?.onboardingTasks &&
+        !isOnboardingTasksFinished
+      ),
+      finished: isOnboardingTasksFinished,
+      hasLikerId,
+      hasFollowingTag,
+      hasArticle,
+      hasFollowee,
+      hasCommentPremission,
+    },
   }
 }
 
@@ -100,13 +157,17 @@ export const ViewerProvider = ({
   children,
   viewer,
   privateFetched,
+  clientPreference,
 }: {
   children: React.ReactNode
   viewer: ViewerUser
   privateFetched: boolean
+  clientPreference?: ClientPreference_clientPreference
 }) => {
   return (
-    <ViewerContext.Provider value={processViewer(viewer, privateFetched)}>
+    <ViewerContext.Provider
+      value={processViewer(viewer, privateFetched, clientPreference)}
+    >
       {children}
     </ViewerContext.Provider>
   )

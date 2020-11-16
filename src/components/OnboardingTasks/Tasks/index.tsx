@@ -1,49 +1,32 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useApolloClient } from '@apollo/react-hooks'
 import { useContext } from 'react'
 
 import {
   Dialog,
   EmbedShare,
   LikeCoinDialog,
-  QueryError,
-  Spinner,
   Translate,
   ViewerContext,
 } from '~/components'
 
-import { ONBOARDING_TASKS_PROGESS } from '../gql'
+import { STORAGE_KEY_ONBOARDING_TASKS } from '~/common/enums'
+import { storage } from '~/common/utils'
+
 import styles from './styles.css'
 import TaskItem from './TaskItem'
 
-import { OnboardingTasksProgress } from '../__generated__/OnboardingTasksProgress'
-
 const Tasks = () => {
   const viewer = useContext(ViewerContext)
+  const client = useApolloClient()
 
-  const { data, loading, error } = useQuery<OnboardingTasksProgress>(
-    ONBOARDING_TASKS_PROGESS
-  )
+  const hideTasks = () => {
+    client.writeData({
+      id: 'ClientPreference:local',
+      data: { onboardingTasks: false },
+    })
 
-  if (loading) {
-    return <Spinner />
+    storage.set(STORAGE_KEY_ONBOARDING_TASKS, false)
   }
-
-  if (error) {
-    return <QueryError error={error} />
-  }
-
-  const hasLikerId = !!viewer.liker.likerId
-  const hasFollowingTag =
-    (data?.viewer?.recommendation.followingTags.totalCount || 0) >= 5
-  const hasArticle = (data?.viewer?.articles.totalCount || 0) >= 1
-  const hasFollowee = (data?.viewer?.followees.totalCount || 0) >= 5
-  const hasCommentPremission = !viewer.isOnboarding
-  const isAllDone =
-    hasLikerId &&
-    hasFollowingTag &&
-    hasArticle &&
-    hasFollowee &&
-    hasCommentPremission
 
   return (
     <>
@@ -57,8 +40,8 @@ const Tasks = () => {
                   zh_hans="设置 Liker ID 化赞为赏"
                 />
               }
-              done={hasLikerId}
-              onClick={hasLikerId ? undefined : open}
+              done={viewer.onboardingTasks.hasLikerId}
+              onClick={viewer.onboardingTasks.hasLikerId ? undefined : open}
             />
           )}
         </LikeCoinDialog>
@@ -70,7 +53,7 @@ const Tasks = () => {
               zh_hans="追踪 5 位喜欢的创作者"
             />
           }
-          done={hasFollowee}
+          done={viewer.onboardingTasks.hasFollowee}
         />
         <TaskItem
           title={
@@ -79,13 +62,13 @@ const Tasks = () => {
               zh_hans="追踪 5 个感兴趣的标签"
             />
           }
-          done={hasFollowingTag}
+          done={viewer.onboardingTasks.hasFollowingTag}
         />
         <TaskItem
           title={
             <Translate
-              zh_hant="創作第一篇作品和社區說聲 Hi"
-              zh_hans="创作第一篇作品和社区说声 Hi "
+              zh_hant="用第一篇創作同社區問好"
+              zh_hans="用第一篇创作同社区问好"
             />
           }
           subtitle={
@@ -94,7 +77,7 @@ const Tasks = () => {
               zh_hans="参与 #新人打卡 关注"
             />
           }
-          done={hasArticle}
+          done={viewer.onboardingTasks.hasArticle}
         />
         <TaskItem
           title={
@@ -109,13 +92,13 @@ const Tasks = () => {
               zh_hans="获得拍手数 × 2 + 阅读篇数 ≥ 10"
             />
           }
-          done={hasCommentPremission}
+          done={viewer.onboardingTasks.hasCommentPremission}
         />
       </ul>
 
-      <section className={isAllDone ? 'allDone' : ''}>
+      <section className={viewer.onboardingTasks.finished ? 'allDone' : ''}>
         <Dialog.Footer>
-          {isAllDone ? (
+          {viewer.onboardingTasks.finished ? (
             <Dialog.Footer.Button
               type="button"
               bgColor="gold"
@@ -126,13 +109,7 @@ const Tasks = () => {
               <Translate zh_hant="繼續閱讀航程" zh_hans="继续阅读航程" />
             </Dialog.Footer.Button>
           ) : (
-            <Dialog.Footer.Button
-              type="button"
-              onClick={() => {
-                // TODO
-              }}
-              implicit
-            >
+            <Dialog.Footer.Button type="button" onClick={hideTasks} implicit>
               <Translate
                 zh_hant="不跟導航自己逛逛 😌"
                 zh_hans="不跟导航自己逛逛 😌"
@@ -141,7 +118,7 @@ const Tasks = () => {
           )}
         </Dialog.Footer>
 
-        {isAllDone && (
+        {viewer.onboardingTasks.finished && (
           <>
             <hr />
             <EmbedShare

@@ -1,3 +1,4 @@
+import { useQuery } from '@apollo/react-hooks'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
 import dynamic from 'next/dynamic'
@@ -13,15 +14,18 @@ import {
   Toast,
   usePublicQuery,
   ViewerProvider,
+  ViewerUser,
 } from '~/components'
 import PageViewTracker from '~/components/Analytics/PageViewTracker'
 import { QueryError } from '~/components/GQL'
+import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import SplashScreen from '~/components/SplashScreen'
 
 import { CHANGE_NEW_USER_HOME_FEED_SORT_BY, PATHS } from '~/common/enums'
 
 import { ROOT_QUERY_PRIVATE, ROOT_QUERY_PUBLIC } from './gql'
 
+import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import { RootQueryPublic } from './__generated__/RootQueryPublic'
 
 const DynamicPushInitializer = dynamic(
@@ -66,6 +70,11 @@ const Root = ({
   const isInAbout = router.pathname === PATHS.ABOUT
   const isInMigration = router.pathname === PATHS.MIGRATION
   const shouldApplyLayout = !isInAbout && !isInMigration
+
+  // client perference
+  const clientPreferenceData = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
+    variables: { id: 'local' },
+  })
 
   // anonymous
   const { loading, data, error } = usePublicQuery<RootQueryPublic>(
@@ -120,7 +129,11 @@ const Root = ({
   }
 
   return (
-    <ViewerProvider viewer={viewer} privateFetched={privateFetched}>
+    <ViewerProvider
+      viewer={viewer as ViewerUser}
+      privateFetched={privateFetched}
+      clientPreference={clientPreferenceData.data?.clientPreference}
+    >
       <SplashScreen />
       <PageViewTracker />
 

@@ -9,8 +9,10 @@ import CLIENT_INFO from '~/components/GQL/queries/clientInfo'
 
 import {
   CHANGE_NEW_USER_HOME_FEED_SORT_BY,
-  STORE_KEY_VIEW_MODE,
+  STORAGE_KEY_ONBOARDING_TASKS,
+  STORAGE_KEY_VIEW_MODE,
 } from '~/common/enums'
+import { storage } from '~/common/utils'
 
 import { ClientInfo } from '~/components/GQL/queries/__generated__/ClientInfo'
 
@@ -64,19 +66,29 @@ export const ClientUpdater = () => {
   }, [])
 
   /**
-   * Restore View Mode from localStorage
+   * Restore client preference from localStorage
    */
   useEffect(() => {
-    const storedViewMode = localStorage.getItem(STORE_KEY_VIEW_MODE)
+    const storedViewMode = storage.get(STORAGE_KEY_VIEW_MODE)
+    const storedOnboardingTasks = storage.get(STORAGE_KEY_ONBOARDING_TASKS)
 
-    if (!client?.writeData || !storedViewMode) {
+    if (!client?.writeData) {
       return
     }
 
-    client.writeData({
-      id: 'ClientPreference:local',
-      data: { viewMode: storedViewMode },
-    })
+    if (storedViewMode) {
+      client.writeData({
+        id: 'ClientPreference:local',
+        data: { viewMode: storedViewMode },
+      })
+    }
+
+    if (typeof storedOnboardingTasks === 'boolean') {
+      client.writeData({
+        id: 'ClientPreference:local',
+        data: { onboardingTasks: storedOnboardingTasks },
+      })
+    }
   }, [])
 
   /**
