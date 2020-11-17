@@ -17,3 +17,11 @@ ul {
     margin-bottom: var(--spacing-tight);
   }
 }
+
+.share {
+  padding: 0 var(--spacing-base);
+
+  @media (--lg-up) {
+    padding: 0;
+  }
+}

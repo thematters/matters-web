@@ -7,12 +7,18 @@ import {
   LanguageContext,
   LikeCoinDialog,
   Translate,
+  useResponsive,
   ViewerContext,
 } from '~/components'
 import { useMutation } from '~/components/GQL'
 import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
 
-import { ADD_TOAST, STORAGE_KEY_ONBOARDING_TASKS } from '~/common/enums'
+import {
+  ADD_TOAST,
+  SHARE_SOURCCE,
+  SHARE_SOURCCE_ONBOARDING_TASKS,
+  STORAGE_KEY_ONBOARDING_TASKS,
+} from '~/common/enums'
 import {
   analytics,
   parseFormSubmitErrors,
@@ -31,6 +37,7 @@ const Tasks = () => {
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
   const client = useApolloClient()
+  const isLargeUp = useResponsive('lg-up')
 
   const [putDraft] = useMutation<CreateDraft>(CREATE_DRAFT, {
     variables: {
@@ -82,6 +89,11 @@ const Tasks = () => {
       enabled: false,
     })
   }
+
+  const sharePath = toPath({
+    page: 'userProfile',
+    userName: viewer.userName || '',
+  }).as
 
   return (
     <>
@@ -161,6 +173,7 @@ const Tasks = () => {
               type="button"
               bgColor="gold"
               textColor="white"
+              onClick={hideTasks}
             >
               <Translate zh_hant="繼續閱讀航程" zh_hans="继续阅读航程" />
             </Dialog.Footer.Button>
@@ -177,15 +190,20 @@ const Tasks = () => {
         {viewer.onboardingTasks.finished && (
           <>
             <hr />
-            <EmbedShare
-              headerTitle={
-                <Translate
-                  zh_hant="邀請更多好友加入星際旅行"
-                  zh_hans="邀请更多好友加入星际旅行"
-                />
-              }
-              wrap
-            />
+
+            <section className="share">
+              <EmbedShare
+                title={`${viewer.displayName} 已解鎖新手獎賞，快點加入 Matters 獲得創作者獎勵吧`}
+                path={`${sharePath}?${SHARE_SOURCCE}=${SHARE_SOURCCE_ONBOARDING_TASKS}`}
+                headerTitle={
+                  <Translate
+                    zh_hant="邀請更多好友加入星際旅行"
+                    zh_hans="邀请更多好友加入星际旅行"
+                  />
+                }
+                wrap={isLargeUp}
+              />
+            </section>
           </>
         )}
       </section>
