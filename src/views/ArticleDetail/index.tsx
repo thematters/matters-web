@@ -260,7 +260,7 @@ const ArticleDetail = () => {
    */
   const infoClasses = classNames({
     info: true,
-    split: !!article.revisedAt && !isSmallUp
+    split: !!article.revisedAt && !isSmallUp,
   })
 
   return (
