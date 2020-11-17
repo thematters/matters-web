@@ -22,7 +22,8 @@ export const Layout: React.FC & {
   const router = useRouter()
   const isInDraftDetail = router.pathname === PATHS.ME_DRAFT_DETAIL
   const isInArticleDetail = router.pathname === PATHS.ARTICLE_DETAIL
-  const showOnboardingTasks = !isInDraftDetail && viewer.onboardingTasks.enabled
+  const showOnboardingTasks =
+    !isInDraftDetail && !isInArticleDetail && viewer.onboardingTasks.enabled
 
   return (
     <>
@@ -38,7 +39,7 @@ export const Layout: React.FC & {
 
       {showOnboardingTasks && (
         <section className="u-lg-up-hide">
-          <OnboardingTasks.NavBar inArticleDetail={isInArticleDetail} />
+          <OnboardingTasks.NavBar />
         </section>
       )}
 
@@ -61,14 +62,18 @@ interface MainProps {
 
 const Main: React.FC<MainProps> = ({ aside, bgColor, inEditor, children }) => {
   const viewer = useContext(ViewerContext)
-  const showOnboardingTasks = !inEditor && viewer.onboardingTasks.enabled
 
   const router = useRouter()
   const isInSearch = router.pathname === PATHS.SEARCH
+  const isInArticleDetail = router.pathname === PATHS.ARTICLE_DETAIL
+  const showOnboardingTasks =
+    !inEditor && !isInArticleDetail && viewer.onboardingTasks.enabled
 
   const articleClasses = classNames({
     'l-col-three-mid': true,
     [`bg-${bgColor}`]: !!bgColor,
+    hasNavBar: !isInArticleDetail && !inEditor,
+    hasOnboardingTasks: showOnboardingTasks,
   })
   const asideClasses = classNames({
     'l-col-three-right': true,

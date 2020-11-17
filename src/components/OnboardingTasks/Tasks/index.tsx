@@ -161,8 +161,6 @@ const Tasks = () => {
               type="button"
               bgColor="gold"
               textColor="white"
-              textSize="sm"
-              height="2rem"
             >
               <Translate zh_hant="繼續閱讀航程" zh_hans="继续阅读航程" />
             </Dialog.Footer.Button>

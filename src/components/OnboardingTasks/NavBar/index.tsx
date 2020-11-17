@@ -1,4 +1,3 @@
-import classNames from 'classnames'
 import { useContext } from 'react'
 
 import {
@@ -14,16 +13,7 @@ import { ReactComponent as IconOnboardLaunch } from '@/public/static/icons/onboa
 import OnboardingTasksDialog from '../Dialog'
 import styles from './styles.css'
 
-interface NavBarProps {
-  inArticleDetail: boolean
-}
-
-const NavBar: React.FC<NavBarProps> = ({ inArticleDetail }) => {
-  const navBarClasses = classNames({
-    navBar: true,
-    inArticleDetail,
-  })
-
+const NavBar = () => {
   const viewer = useContext(ViewerContext)
   const doneCount = Object.values(viewer.onboardingTasks.tasks).reduce(
     (sum, next) => sum + (next ? 1 : 0),
@@ -33,28 +23,32 @@ const NavBar: React.FC<NavBarProps> = ({ inArticleDetail }) => {
   return (
     <OnboardingTasksDialog>
       {({ open: openOnboardingTasksDialog }) => (
-        <section className={navBarClasses}>
-          <Card
-            bgColor="none"
-            spacing={[0, 0]}
-            onClick={openOnboardingTasksDialog}
-          >
-            <section className="content">
-              <section className="left">
-                {withIcon(IconOnboardLaunch)({ size: 'xl-m' })}
+        <section className="nav-bar">
+          <div className="l-row full">
+            <div className="l-col-three-left" />
+            <div className="l-col-three-right">
+              <Card
+                bgColor="none"
+                spacing={[0, 0]}
+                onClick={openOnboardingTasksDialog}
+              >
+                <section className="content">
+                  <section className="left">
+                    {withIcon(IconOnboardLaunch)({ size: 'xl-m' })}
 
-                <p>
-                  <Translate zh_hant="星際導航" zh_hans="星际导航" />
-                  <span className="highlight"> {doneCount}/5</span>
-                </p>
-              </section>
+                    <p>
+                      <Translate zh_hant="星際導航" zh_hans="星际导航" />
+                      <span className="highlight"> {doneCount}/5</span>
+                    </p>
+                  </section>
 
-              <section className="right">
-                <IconRight color="grey" />
-              </section>
-            </section>
-          </Card>
-
+                  <section className="right">
+                    <IconRight color="grey" />
+                  </section>
+                </section>
+              </Card>
+            </div>
+          </div>
           <style jsx>{styles}</style>
         </section>
       )}

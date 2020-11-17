@@ -2,36 +2,27 @@
 @lost flexbox flex;
 @lost rounder 99.99999;
 
-.navBar {
-  @mixin shadow-border-top-grey;
-
+.nav-bar {
   position: fixed;
   right: 0;
   bottom: var(--global-nav-height);
+  left: 0;
   z-index: var(--z-index-global-header);
-  width: 100%;
-  padding: var(--spacing-tight) var(--spacing-base);
-  padding-bottom: calc(constant(safe-area-inset-bottom) + var(--spacing-tight));
-  padding-bottom: calc(env(safe-area-inset-bottom) + var(--spacing-tight));
-  background: var(--color-yellow-lighter);
 
   @media (--sm-up) {
     bottom: 0;
-
-    & {
-      lost-column: 7/8;
-    }
-  }
-
-  &.inArticleDetail {
-    @media (--sm-up) {
-      bottom: 5rem;
-    }
   }
 }
 
 .content {
   @mixin flex-center-space-between;
+  @mixin shadow-border-top-grey;
+
+  padding: var(--spacing-tight) var(--spacing-base);
+  padding-bottom: calc(constant(safe-area-inset-bottom) + var(--spacing-tight));
+  padding-bottom: calc(env(safe-area-inset-bottom) + var(--spacing-tight));
+  margin: 0 1px; /* borders of main grid */
+  background: var(--color-yellow-lighter);
 
   & p {
     margin-left: var(--spacing-base);

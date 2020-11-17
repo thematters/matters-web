@@ -24,7 +24,7 @@
         var(--editor-content-spacing-mobile)
     );
 
-    @media (--sm-up) {
+    @media (--lg-up) {
       height: calc(
         100vh - var(--global-header-height) - var(--editor-content-spacing)
       );

@@ -4,9 +4,7 @@ import { Button, ButtonProps, IconSpinner, TextIcon } from '~/components'
 
 type DialogFooterButtonProps = {
   textColor?: 'black' | 'white' | 'grey'
-  textSize?: 'sm' | 'md'
   bgColor?: 'green' | 'grey-lighter' | 'red' | 'white' | 'gold'
-  height?: '2rem' | '3rem'
   icon?: React.ReactNode
 
   loading?: boolean
@@ -18,9 +16,7 @@ const DialogFooterButton: React.FC<DialogFooterButtonProps> = forwardRef(
     {
       loading,
       textColor = 'white',
-      textSize = 'md',
       bgColor = 'green',
-      height = '3rem',
 
       icon,
 
@@ -35,7 +31,7 @@ const DialogFooterButton: React.FC<DialogFooterButtonProps> = forwardRef(
   ) => (
     <Button
       bgColor={implicit ? 'white' : bgColor}
-      size={['100%', height]}
+      size={['100%', '3rem']}
       disabled={disabled || loading}
       ref={ref}
       {...restProps}
@@ -43,7 +39,7 @@ const DialogFooterButton: React.FC<DialogFooterButtonProps> = forwardRef(
       <TextIcon
         icon={icon || (loading && <IconSpinner size="md" />)}
         color={implicit ? 'grey-dark' : textColor}
-        size={implicit ? 'sm' : textSize}
+        size={implicit ? 'sm' : 'md'}
         weight={implicit ? 'normal' : 'md'}
         textPlacement="left"
         textDecoration={implicit ? 'underline' : undefined}

@@ -30,8 +30,9 @@
 .block {
   @mixin border-top-grey;
 
-  padding-top: var(--spacing-loose);
-  margin: var(--spacing-loose) 0 var(--spacing-base);
+  padding: var(--spacing-loose) var(--spacing-base) 0;
+  margin: var(--spacing-loose) calc(var(--spacing-base) * -1)
+    var(--spacing-base);
 }
 
 .time {
