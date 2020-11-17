@@ -1,4 +1,4 @@
-export default (_: any) => {
+const clientPreferenceResolver = (_: any) => {
   return {
     __typename: 'ClientPreference',
     id: 'local',
@@ -13,6 +13,12 @@ export default (_: any) => {
       __typename: 'Push',
     },
     routeHistory: [],
-    onboardingTasks: true,
+    onboardingTasks: {
+      enabled: true,
+      finished: false,
+      __typename: 'OnboardingTasks',
+    },
   }
 }
+
+export default clientPreferenceResolver

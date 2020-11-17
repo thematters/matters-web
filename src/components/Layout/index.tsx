@@ -18,8 +18,11 @@ export const Layout: React.FC & {
   Header: typeof Header
   Spacing: typeof Spacing
 } = ({ children }) => {
+  const viewer = useContext(ViewerContext)
   const router = useRouter()
   const isInDraftDetail = router.pathname === PATHS.ME_DRAFT_DETAIL
+  const isInArticleDetail = router.pathname === PATHS.ARTICLE_DETAIL
+  const showOnboardingTasks = !isInDraftDetail && viewer.onboardingTasks.enabled
 
   return (
     <>
@@ -32,6 +35,12 @@ export const Layout: React.FC & {
 
         {children}
       </main>
+
+      {showOnboardingTasks && (
+        <section className="u-lg-up-hide">
+          <OnboardingTasks.NavBar inArticleDetail={isInArticleDetail} />
+        </section>
+      )}
 
       {!isInDraftDetail && (
         <footer className="u-sm-up-hide">
@@ -52,7 +61,7 @@ interface MainProps {
 
 const Main: React.FC<MainProps> = ({ aside, bgColor, inEditor, children }) => {
   const viewer = useContext(ViewerContext)
-  const showOnboardingTasks = !inEditor && viewer.onboardingTasks.shown
+  const showOnboardingTasks = !inEditor && viewer.onboardingTasks.enabled
 
   const router = useRouter()
   const isInSearch = router.pathname === PATHS.SEARCH

@@ -14,7 +14,10 @@ export default gql`
         supported
       }
       routeHistory
-      onboardingTasks
+      onboardingTasks {
+        enabled
+        finished
+      }
     }
   }
 `

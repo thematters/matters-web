@@ -1,7 +1,7 @@
-import Dialog from './Dialog'
+import NavBar from './NavBar'
 import Widget from './Widget'
 
 export const OnboardingTasks = {
   Widget,
-  Dialog,
+  NavBar,
 }

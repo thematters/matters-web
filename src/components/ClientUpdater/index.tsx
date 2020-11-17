@@ -76,19 +76,27 @@ export const ClientUpdater = () => {
       return
     }
 
+    const writeData = {}
+
     if (storedViewMode) {
-      client.writeData({
-        id: 'ClientPreference:local',
-        data: { viewMode: storedViewMode },
+      Object.assign(writeData, {
+        viewMode: storedViewMode,
       })
     }
 
-    if (typeof storedOnboardingTasks === 'boolean') {
-      client.writeData({
-        id: 'ClientPreference:local',
-        data: { onboardingTasks: storedOnboardingTasks },
+    if (storedOnboardingTasks) {
+      Object.assign(writeData, {
+        onboardingTasks: {
+          __typename: 'OnboardingTasks',
+          ...storedOnboardingTasks,
+        },
       })
     }
+
+    client.writeData({
+      id: 'ClientPreference:local',
+      data: writeData,
+    })
   }, [])
 
   /**

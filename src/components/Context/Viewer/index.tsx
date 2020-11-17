@@ -1,7 +1,13 @@
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import React from 'react'
 
-import { ClientPreference_clientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
+import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
+
+import {
+  ClientPreference,
+  ClientPreference_clientPreference_onboardingTasks,
+} from '~/components/GQL/queries/__generated__/ClientPreference'
 import { ViewerUserPrivate } from './__generated__/ViewerUserPrivate'
 import { ViewerUserPublic } from './__generated__/ViewerUserPublic'
 
@@ -69,22 +75,24 @@ export type Viewer = ViewerUser & {
   shouldSetupLikerID: boolean
   privateFetched: boolean
   onboardingTasks: {
-    shown: boolean
+    enabled: boolean
     finished: boolean
-    hasLikerId: boolean
-    hasFollowingTag: boolean
-    hasArticle: boolean
-    hasFollowee: boolean
-    hasCommentPremission: boolean
+    tasks: {
+      likerId: boolean
+      followingTag: boolean
+      article: boolean
+      followee: boolean
+      commentPermission: boolean
+    }
   }
 }
 
 export const processViewer = (
   viewer: ViewerUser,
   privateFetched: boolean,
-  clientPreference?: ClientPreference_clientPreference
+  onboardingTasks?: ClientPreference_clientPreference_onboardingTasks
 ): Viewer => {
-  // States
+  // User state
   const isAuthed = !!viewer.id
   const state = viewer?.status?.state
   const isActive = state === 'active'
@@ -98,17 +106,17 @@ export const processViewer = (
 
   // Onbooarding Tasks
   const hasLikerId = !!viewer.liker.likerId
-  const hasFollowingTag =
-    (viewer?.recommendation?.followingTags.totalCount || 0) >= 5
-  const hasArticle = (viewer?.articles?.totalCount || 0) >= 1
-  const hasFollowee = (viewer?.followees?.totalCount || 0) >= 5
-  const hasCommentPremission = isAuthed && !isOnboarding
+  const hasFollowingTag = viewer?.recommendation?.followingTags.totalCount >= 5
+  const hasArticle = viewer?.articles?.totalCount >= 1
+  const hasFollowee = viewer?.followees?.totalCount >= 5
+  const hasCommentPermission = isAuthed && !isOnboarding
+  const isOnboardingTasksEnabled = !!(isAuthed && onboardingTasks?.enabled)
   const isOnboardingTasksFinished =
     hasLikerId &&
     hasFollowingTag &&
     hasArticle &&
     hasFollowee &&
-    hasCommentPremission
+    hasCommentPermission
 
   // Add user info for Sentry
   import('@sentry/browser').then((Sentry) => {
@@ -134,17 +142,15 @@ export const processViewer = (
     shouldSetupLikerID,
     privateFetched,
     onboardingTasks: {
-      shown: !!(
-        isAuthed &&
-        clientPreference?.onboardingTasks &&
-        !isOnboardingTasksFinished
-      ),
+      enabled: isOnboardingTasksEnabled,
       finished: isOnboardingTasksFinished,
-      hasLikerId,
-      hasFollowingTag,
-      hasArticle,
-      hasFollowee,
-      hasCommentPremission,
+      tasks: {
+        likerId: hasLikerId,
+        followingTag: hasFollowingTag,
+        article: hasArticle,
+        followee: hasFollowee,
+        commentPermission: hasCommentPermission,
+      },
     },
   }
 }
@@ -157,16 +163,19 @@ export const ViewerProvider = ({
   children,
   viewer,
   privateFetched,
-  clientPreference,
 }: {
   children: React.ReactNode
   viewer: ViewerUser
   privateFetched: boolean
-  clientPreference?: ClientPreference_clientPreference
 }) => {
+  const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
+    variables: { id: 'local' },
+  })
+  const onboardingTasks = data?.clientPreference.onboardingTasks
+
   return (
     <ViewerContext.Provider
-      value={processViewer(viewer, privateFetched, clientPreference)}
+      value={processViewer(viewer, privateFetched, onboardingTasks)}
     >
       {children}
     </ViewerContext.Provider>

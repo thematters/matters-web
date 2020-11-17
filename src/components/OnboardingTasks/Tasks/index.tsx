@@ -4,28 +4,83 @@ import { useContext } from 'react'
 import {
   Dialog,
   EmbedShare,
+  LanguageContext,
   LikeCoinDialog,
   Translate,
   ViewerContext,
 } from '~/components'
+import { useMutation } from '~/components/GQL'
+import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
 
-import { STORAGE_KEY_ONBOARDING_TASKS } from '~/common/enums'
-import { storage } from '~/common/utils'
+import { ADD_TOAST, STORAGE_KEY_ONBOARDING_TASKS } from '~/common/enums'
+import {
+  analytics,
+  parseFormSubmitErrors,
+  routerPush,
+  storage,
+  toPath,
+  translate,
+} from '~/common/utils'
 
 import styles from './styles.css'
 import TaskItem from './TaskItem'
 
+import { CreateDraft } from '~/components/GQL/mutations/__generated__/CreateDraft'
+
 const Tasks = () => {
   const viewer = useContext(ViewerContext)
+  const { lang } = useContext(LanguageContext)
   const client = useApolloClient()
+
+  const [putDraft] = useMutation<CreateDraft>(CREATE_DRAFT, {
+    variables: {
+      title: translate({ id: 'untitle', lang }),
+      tags: ['新人打卡'],
+    },
+  })
+  const createDraft = async () => {
+    try {
+      analytics.trackEvent('click_button', {
+        type: 'write',
+      })
+      const result = await putDraft()
+      const { slug, id } = result?.data?.putDraft || {}
+
+      if (slug && id) {
+        const path = toPath({ page: 'draftDetail', slug, id })
+        routerPush(path.href, path.as)
+      }
+    } catch (error) {
+      const [messages, codes] = parseFormSubmitErrors(error, lang)
+
+      if (!messages[codes[0]]) {
+        return null
+      }
+
+      window.dispatchEvent(
+        new CustomEvent(ADD_TOAST, {
+          detail: {
+            color: 'red',
+            content: messages[codes[0]],
+          },
+        })
+      )
+    }
+  }
 
   const hideTasks = () => {
     client.writeData({
       id: 'ClientPreference:local',
-      data: { onboardingTasks: false },
+      data: {
+        onboardingTasks: { __typename: 'OnboardingTasks', enabled: false },
+      },
     })
 
-    storage.set(STORAGE_KEY_ONBOARDING_TASKS, false)
+    const storedOnboardingTasks = storage.get(STORAGE_KEY_ONBOARDING_TASKS)
+    storage.set(STORAGE_KEY_ONBOARDING_TASKS, {
+      ...storedOnboardingTasks,
+      enabled: false,
+    })
   }
 
   return (
@@ -40,8 +95,8 @@ const Tasks = () => {
                   zh_hans="设置 Liker ID 化赞为赏"
                 />
               }
-              done={viewer.onboardingTasks.hasLikerId}
-              onClick={viewer.onboardingTasks.hasLikerId ? undefined : open}
+              done={viewer.onboardingTasks.tasks.likerId}
+              onClick={viewer.onboardingTasks.tasks.likerId ? undefined : open}
             />
           )}
         </LikeCoinDialog>
@@ -53,7 +108,7 @@ const Tasks = () => {
               zh_hans="追踪 5 位喜欢的创作者"
             />
           }
-          done={viewer.onboardingTasks.hasFollowee}
+          done={viewer.onboardingTasks.tasks.followee}
         />
         <TaskItem
           title={
@@ -62,7 +117,7 @@ const Tasks = () => {
               zh_hans="追踪 5 个感兴趣的标签"
             />
           }
-          done={viewer.onboardingTasks.hasFollowingTag}
+          done={viewer.onboardingTasks.tasks.followingTag}
         />
         <TaskItem
           title={
@@ -77,7 +132,10 @@ const Tasks = () => {
               zh_hans="参与 #新人打卡 关注"
             />
           }
-          done={viewer.onboardingTasks.hasArticle}
+          done={viewer.onboardingTasks.tasks.article}
+          onClick={
+            viewer.onboardingTasks.tasks.article ? undefined : createDraft
+          }
         />
         <TaskItem
           title={
@@ -92,7 +150,7 @@ const Tasks = () => {
               zh_hans="获得拍手数 × 2 + 阅读篇数 ≥ 10"
             />
           }
-          done={viewer.onboardingTasks.hasCommentPremission}
+          done={viewer.onboardingTasks.tasks.commentPermission}
         />
       </ul>
 

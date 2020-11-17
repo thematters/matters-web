@@ -54,7 +54,7 @@ const checkGateway = async (
   }
 }
 
-export default async () => {
+const gatewayUrlsResolver = async () => {
   const checkers = await Promise.all(
     PUBLIC_GATEWAYS.map((url) =>
       checkGateway(TEST_HASH, url).then((alive: boolean) => ({ url, alive }))
@@ -62,3 +62,5 @@ export default async () => {
   )
   return checkers.filter(({ alive }) => alive).map(({ url }) => url)
 }
+
+export default gatewayUrlsResolver

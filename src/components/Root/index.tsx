@@ -1,4 +1,3 @@
-import { useQuery } from '@apollo/react-hooks'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
 import dynamic from 'next/dynamic'
@@ -18,14 +17,16 @@ import {
 } from '~/components'
 import PageViewTracker from '~/components/Analytics/PageViewTracker'
 import { QueryError } from '~/components/GQL'
-import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import SplashScreen from '~/components/SplashScreen'
 
 import { CHANGE_NEW_USER_HOME_FEED_SORT_BY, PATHS } from '~/common/enums'
 
 import { ROOT_QUERY_PRIVATE, ROOT_QUERY_PUBLIC } from './gql'
 
-import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
+import {
+  RootQueryPrivate,
+  RootQueryPrivate_viewer,
+} from './__generated__/RootQueryPrivate'
 import { RootQueryPublic } from './__generated__/RootQueryPublic'
 
 const DynamicPushInitializer = dynamic(
@@ -71,11 +72,6 @@ const Root = ({
   const isInMigration = router.pathname === PATHS.MIGRATION
   const shouldApplyLayout = !isInAbout && !isInMigration
 
-  // client perference
-  const clientPreferenceData = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
-    variables: { id: 'local' },
-  })
-
   // anonymous
   const { loading, data, error } = usePublicQuery<RootQueryPublic>(
     ROOT_QUERY_PUBLIC
@@ -84,14 +80,21 @@ const Root = ({
   const official = data?.official
 
   // viewer
+  const [privateViewer, setPrivateViewer] = useState<RootQueryPrivate_viewer>()
   const [privateFetched, setPrivateFetched] = useState(false)
   const fetchPrivateViewer = async () => {
     try {
-      const result = await client.query({
+      const result = await client.query<RootQueryPrivate>({
         query: ROOT_QUERY_PRIVATE,
         fetchPolicy: 'network-only',
       })
 
+      // set private viewer
+      if (result?.data?.viewer) {
+        setPrivateViewer(result?.data?.viewer)
+      }
+
+      // set default home feed
       const info = result?.data?.viewer?.info
       if (info) {
         window.dispatchEvent(
@@ -103,6 +106,8 @@ const Root = ({
     } catch (e) {
       console.error(e)
     }
+
+    // mark private fetched as true
     setPrivateFetched(true)
   }
 
@@ -130,9 +135,8 @@ const Root = ({
 
   return (
     <ViewerProvider
-      viewer={viewer as ViewerUser}
+      viewer={(privateViewer || viewer) as ViewerUser}
       privateFetched={privateFetched}
-      clientPreference={clientPreferenceData.data?.clientPreference}
     >
       <SplashScreen />
       <PageViewTracker />

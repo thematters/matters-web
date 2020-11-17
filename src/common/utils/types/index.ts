@@ -44,8 +44,7 @@ export default gql`
     "Log route history for page back button"
     routeHistory: [URL!]
 
-    "Whether onboarding tasks tracker is shown"
-    onboardingTasks: Boolean!
+    onboardingTasks: OnboardingTasks!
   }
 
   type ClientInfo {
@@ -61,6 +60,11 @@ export default gql`
   type ViewportSize {
     width: Int
     height: Int
+  }
+
+  type OnboardingTasks {
+    enabled: Boolean!
+    finished: Boolean!
   }
 
   enum FeedSortType {
