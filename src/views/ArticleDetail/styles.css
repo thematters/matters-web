@@ -17,12 +17,44 @@
 
   padding-top: var(--spacing-x-tight);
 
-  & .left,
   & .right {
     @mixin inline-flex-center-all;
 
     & :global(> * + *) {
       margin-left: var(--spacing-base);
+    }
+  }
+
+  & .left {
+    @mixin inline-flex-center-start;
+
+    & .timeline,
+    & .features {
+      @mixin inline-flex-center-start;
+
+      & :global(> * + *) {
+        margin-left: var(--spacing-base);
+      }
+    }
+
+    & .features {
+      margin-left: var(--spacing-base);
+    }
+  }
+}
+
+.split {
+  & .right {
+    flex-grow: 0;
+  }
+
+  & .left {
+    flex-direction: column;
+    flex-grow: 1;
+    align-items: flex-start;
+
+    & .features {
+      margin: var(--spacing-x-tight) 0;
     }
   }
 }
@@ -44,9 +76,5 @@
   & span {
     margin-right: var(--spacing-xx-tight);
     color: var(--color-grey);
-  }
-
-  &:last-child {
-    margin-left: var(--spacing-base);
   }
 }
