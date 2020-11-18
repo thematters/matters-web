@@ -50,6 +50,12 @@
   justify-content: center;
 }
 
+@define-mixin inline-flex-center-start {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
 /* Fonts
    ========================================================================== */
 @define-mixin font-serif {
