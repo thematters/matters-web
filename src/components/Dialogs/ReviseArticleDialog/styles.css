@@ -1,0 +1,12 @@
+.message {
+  padding: var(--spacing-base) var(--spacing-loose);
+}
+
+.bold {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-black);
+}
+
+.count {
+  color: var(--color-matters-green);
+}

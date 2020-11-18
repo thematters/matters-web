@@ -1,4 +1,5 @@
 import { useLazyQuery, useQuery } from '@apollo/react-hooks'
+import classNames from 'classnames'
 import jump from 'jump.js'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
@@ -69,6 +70,7 @@ const ArticleDetail = () => {
   // UI
   const features = useContext(FeaturesContext)
   const isLargeUp = useResponsive('lg-up')
+  const isSmallUp = useResponsive('sm-up')
   const [fixedWall, setFixedWall] = useState(false)
 
   // wall
@@ -244,12 +246,23 @@ const ArticleDetail = () => {
    * Render:Edit Mode
    */
   if (editMode) {
-    return <EditMode article={article} onSaved={onEditSaved} />
+    return (
+      <EditMode
+        article={article}
+        onCancel={() => setEditMode(false)}
+        onSaved={onEditSaved}
+      />
+    )
   }
 
   /**
    * Render
    */
+  const infoClasses = classNames({
+    info: true,
+    split: !!article.revisedAt && !isSmallUp,
+  })
+
   return (
     <Layout.Main aside={<RelatedArticles article={article} inSidebar />}>
       <Layout.Header
@@ -292,18 +305,36 @@ const ArticleDetail = () => {
               }}
             />
 
-            <section className="info">
+            <section className={infoClasses}>
               <section className="left">
-                <DateTime date={article.createdAt} color="grey" />
+                <section className="timeline">
+                  <section className="time">
+                    <span>
+                      <Translate zh_hant="發布於" zh_hans="發布於" />
+                    </span>
+                    <DateTime date={article.createdAt} color="grey" />
+                  </section>
 
-                <FingerprintButton article={article} />
+                  {article.revisedAt && (
+                    <section className="time">
+                      <span>
+                        <Translate zh_hant="修訂於" zh_hans="修訂於" />
+                      </span>
+                      <DateTime date={article.revisedAt} color="grey" />
+                    </section>
+                  )}
+                </section>
 
-                {shouldTranslate && (
-                  <TranslationButton
-                    translate={translate}
-                    setTranslate={onTranslate}
-                  />
-                )}
+                <section className="features">
+                  <FingerprintButton article={article} />
+
+                  {shouldTranslate && (
+                    <TranslationButton
+                      translate={translate}
+                      setTranslate={onTranslate}
+                    />
+                  )}
+                </section>
               </section>
 
               <section className="right" />

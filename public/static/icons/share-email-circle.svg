@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 41 40">
+  <g transform="translate(.884)" fill="none" fill-rule="evenodd">
+    <circle fill="#C0A46B" cx="20" cy="20" r="20"/>
+    <path stroke="#FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M11 27V13.666h17.667V27z"/>
+    <path stroke="#FFF" stroke-width="2" fill="#FFF" stroke-linecap="round" stroke-linejoin="round" d="M20 20l-8.667-6.334h17z"/>
+  </g>
+</svg>
