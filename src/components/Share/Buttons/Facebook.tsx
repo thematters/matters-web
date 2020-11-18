@@ -4,9 +4,18 @@ import { TextIcon, withIcon } from '~/components'
 
 import { analytics } from '~/common/utils'
 
+import { ReactComponent as IconShareFacebookCircle } from '@/public/static/icons/share-facebook-circle.svg'
 import { ReactComponent as IconShareFacebook } from '@/public/static/icons/share-facebook.svg'
 
-const Facebook = ({ title, link }: { title: string; link: string }) => (
+const Facebook = ({
+  title,
+  link,
+  circle,
+}: {
+  title: string
+  link: string
+  circle?: boolean
+}) => (
   <button
     type="button"
     onClick={() => {
@@ -21,9 +30,13 @@ const Facebook = ({ title, link }: { title: string; link: string }) => (
       return window.open(shareUrl, 'Share to Facebook')
     }}
   >
-    <TextIcon icon={withIcon(IconShareFacebook)({})} spacing="base">
-      Facebook
-    </TextIcon>
+    {circle && withIcon(IconShareFacebookCircle)({ size: 'xl-m' })}
+
+    {!circle && (
+      <TextIcon icon={withIcon(IconShareFacebook)({})} spacing="base">
+        Facebook
+      </TextIcon>
+    )}
   </button>
 )
 

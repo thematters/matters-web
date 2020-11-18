@@ -18,6 +18,8 @@ import DownstreamArticleArchivedNotice from './DownstreamArticleArchivedNotice'
 import OfficialAnnouncementNotice from './OfficialAnnouncementNotice'
 import PaymentPayoutNotice from './PaymentPayoutNotice'
 import PaymentReceivedDonationNotice from './PaymentReceivedDonationNotice'
+import RevisedArticleNotPublishedNotice from './RevisedArticleNotPublishedNotice'
+import RevisedArticlePublishedNotice from './RevisedArticlePublishedNotice'
 import SubscribedArticleNewCommentNotice from './SubscribedArticleNewCommentNotice'
 import TagAddEditorNotice from './TagAddEditorNotice'
 import TagAdoptionNotice from './TagAdoptionNotice'
@@ -107,6 +109,12 @@ const fragments = {
       ... on TagLeaveEditorNotice {
         ...TagLeaveEditorNotice
       }
+      ... on RevisedArticlePublishedNotice {
+        ...RevisedArticlePublishedNotice
+      }
+      ... on RevisedArticleNotPublishedNotice {
+        ...RevisedArticleNotPublishedNotice
+      }
     }
     ${ArticleNewAppreciationNotice.fragments.notice}
     ${ArticleNewCommentNotice.fragments.notice}
@@ -132,6 +140,8 @@ const fragments = {
     ${TagLeaveNotice.fragments.notice}
     ${TagAddEditorNotice.fragments.notice}
     ${TagLeaveEditorNotice.fragments.notice}
+    ${RevisedArticlePublishedNotice.fragments.notice}
+    ${RevisedArticleNotPublishedNotice.fragments.notice}
   `,
 }
 
@@ -185,6 +195,10 @@ const BaseNotice: React.FC<NoticeProps> = ({ notice }) => {
       return <TagAddEditorNotice notice={notice} />
     case 'TagLeaveEditorNotice':
       return <TagLeaveEditorNotice notice={notice} />
+    case 'RevisedArticlePublishedNotice':
+      return <RevisedArticlePublishedNotice notice={notice} />
+    case 'RevisedArticleNotPublishedNotice':
+      return <RevisedArticleNotPublishedNotice notice={notice} />
     default:
       return null
   }

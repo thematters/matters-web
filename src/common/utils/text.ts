@@ -1,3 +1,5 @@
+import { distance } from 'fastest-levenshtein'
+
 import { toSizedImageURL } from './url'
 
 /**
@@ -120,3 +122,9 @@ export const optimizeEmbed = (content: string) => {
       }
     )
 }
+
+/**
+ * Get distances of two context diffs.
+ */
+export const measureDiffs = (source: string, target: string) =>
+  distance(source, target)

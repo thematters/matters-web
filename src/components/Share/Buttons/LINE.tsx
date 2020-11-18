@@ -4,9 +4,18 @@ import { TextIcon, withIcon } from '~/components'
 
 import { analytics } from '~/common/utils'
 
+import { ReactComponent as IconShareLINECircle } from '@/public/static/icons/share-line-circle.svg'
 import { ReactComponent as IconShareLINE } from '@/public/static/icons/share-line.svg'
 
-const LINE = ({ title, link }: { title: string; link: string }) => (
+const LINE = ({
+  title,
+  link,
+  circle,
+}: {
+  title: string
+  link: string
+  circle?: boolean
+}) => (
   <button
     type="button"
     onClick={() => {
@@ -23,9 +32,13 @@ const LINE = ({ title, link }: { title: string; link: string }) => (
       return window.open(shareUrl, 'Share to Line')
     }}
   >
-    <TextIcon icon={withIcon(IconShareLINE)({})} spacing="base">
-      LINE
-    </TextIcon>
+    {circle && withIcon(IconShareLINECircle)({ size: 'xl-m' })}
+
+    {!circle && (
+      <TextIcon icon={withIcon(IconShareLINE)({})} spacing="base">
+        LINE
+      </TextIcon>
+    )}
   </button>
 )
 

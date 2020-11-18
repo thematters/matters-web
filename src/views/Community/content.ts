@@ -28,12 +28,14 @@ export default {
   <li>試圖未經授權地進入、干擾、破壞或中斷平台、服務、任何相關網站、儲存平台的服務器的行為；或以可能使網頁失效、過載、損壞或損傷，或者可能干擾平台和／或服務正常運行的行為。</li>
   <li>惡意註冊批量帳戶，在網頁刷讚和刷屏，損害社區與其他用戶權益的行為。</li>
   <li>發布賭博、色情、藥品類廣告，或其他經過社區訴訟而被認定不應該在 Matters 社區進行的商業活動。</li>
+  <li>成為公共標籤管理者 <sup>[2]</sup>，但不按照公正、客觀立場維護標籤，且拒絕交出標籤主理權。（關於公共標籤的社區討論，請<a class="u-link-green" href="https://matters.news/@hi176/%E9%A6%AC%E7%89%B9%E5%B8%82%E6%A8%99%E7%B1%A4%E7%AE%A1%E7%90%86%E6%96%B9%E6%B3%95%E5%8D%B3%E5%B0%87%E4%B8%8A%E7%B7%9A-%E6%AD%A1%E8%BF%8E%E5%B8%82%E6%B0%91%E6%8F%90%E4%BE%9B%E5%BB%BA%E8%AD%B0-bafyreicuoekc36s3ddhrf5rie3ds53td2bfq4kn4tfcqxkj6ylfbboxqja">點擊這裡</a>。）</li>
 </ol>
 <p>為了社區的可持續與良性運轉，Matters 鼓勵和保護所有塑造理性、友善，真誠的社區氛圍的行為。對社區造成不利影響的內容和行為，Matters 站方保留對其施行處理的權利。</p>
 <p>當用戶看到任何疑似違反社區約章的狀況，想要回報給站方，也可以直接在 <a class="u-link-green" href="https://matters.news/@hi176/%E7%9C%8B%E5%88%B0%E7%A4%BE%E5%8D%80%E7%95%B0%E5%B8%B8%E7%8B%80%E6%B3%81-%E6%AD%A1%E8%BF%8E%E4%BE%86%E6%AD%A4%E5%B8%96%E5%9B%9E%E5%A0%B1-bafyreiaeziginnm4e4vdzq5y5tdtnqurzgxrngp4ajp2rbdghv6inuv5ie">這個帖子</a> 下方留言，謝謝大家共同維護 Matters。</p>
 
 <br/>
 <p id="sup-1"><sup>[1]</sup> <small>歧視行為定義：針對人們受保護的特徵向對方發起的言論攻擊，這些特徵包括民族、種族、國籍、宗教信仰、性取向、種姓、性別、性別認同，以及嚴重疾病或殘疾。</small></p>
+<p id="sup-2"><sup>[2]</sup> <small>公共標籤是指創建日期在主理標籤功能上線之前（即 2020 年 7 月 27 日），使用這個標籤的作者數達到 40 人或以上的標籤。</small></p>
   `,
   zh_hans: /* html */ `
 <p>社区的事情社区作主，是 Matters 社区的主旨。Matters 社区由 Matters 用户共同创建，只要你是 Matters 注册用户，就能够透过以下方式参与社区建设。</p>
@@ -64,11 +66,13 @@ export default {
   <li>试图未经授权地进入、干扰、破坏或中断平台、服务、任何相关网站、储存平台的服务器的行为；或以可能使网页失效、过载、损坏或损伤，或者可能干扰平台和／或服务正常运行的行为。</li>
   <li>恶意注册批量帐户，在网页刷赞和刷屏，损害社区与其他用户权益的行为。</li>
   <li>发布赌博、色情、药品类广告，或其他经过社区诉讼而被认定不应该在 Matters 社区进行的商业活动。</li>
+  <li>成为公共标签管理者 <sup>[2]</sup>，但不按照公正、客观立场维护标签，且拒绝交出标签主理权。 （关于公共标签的社区讨论，请<a class="u-link-green" href="https://matters.news/@hi176/%E9%A6%AC%E7%89%B9%E5%B8%82%E6%A8%99%E7%B1%A4%E7%AE%A1%E7%90%86%E6%96%B9%E6%B3%95%E5%8D%B3%E5%B0%87%E4%B8%8A%E7%B7%9A-%E6%AD%A1%E8%BF%8E%E5%B8%82%E6%B0%91%E6%8F%90%E4%BE%9B%E5%BB%BA%E8%AD%B0-bafyreicuoekc36s3ddhrf5rie3ds53td2bfq4kn4tfcqxkj6ylfbboxqja">点击这里</a>。）</li>
 </ol>
 <p>为了社区的可持续与良性运转，Matters 鼓励和保护所有塑造理性、友善，真诚的社区氛围的行为。对社区造成不利影响的内容和行为，Matters 站方保留对其施行处理的权利。</p>
 <p>当用户看到任何疑似违反社区约章的状况，想要回报给站方，也可以直接在 <a class="u-link-green" href="https://matters.news/@hi176/%E7%9C%8B%E5%88%B0%E7%A4%BE%E5%8D%80%E7%95%B0%E5%B8%B8%E7%8B%80%E6%B3%81-%E6%AD%A1%E8%BF%8E%E4%BE%86%E6%AD%A4%E5%B8%96%E5%9B%9E%E5%A0%B1-bafyreiaeziginnm4e4vdzq5y5tdtnqurzgxrngp4ajp2rbdghv6inuv5ie">这个帖子</a> 下方留言，谢谢大家共同维护 Matters。</p>
 
 <br/>
 <p id="sup-1"><sup>[1]</sup> <small>歧视行为定义：针对人们受保护的特征向对方发起的言论攻击，这些特征包括民族、种族、国籍、宗教信仰、性取向、种姓、性别、性别认同，以及严重疾病或残疾。</small></p>
+<p id="sup-2"><sup>[2]</sup> <small>公共标签是指创建日期在主理标签功能上线之前（即 2020 年 7 月 27 日），使用这个标签的作者数达到 40 人或以上的标签。</small></p>
   `,
 }

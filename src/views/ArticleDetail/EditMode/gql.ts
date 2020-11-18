@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 
+import { fragments as EditorFragments } from '~/components/Editor/fragments'
 import articleFragments from '~/components/GQL/fragments/article'
 import assetFragment from '~/components/GQL/fragments/asset'
 
@@ -12,14 +13,21 @@ export const EDIT_MODE_ARTICLE = gql`
     article(input: { mediaHash: $mediaHash }) {
       id
       cover
+      slug
       assets {
         ...Asset
+      }
+      drafts {
+        mediaHash
+        publishState
+        ...EditorDraft
       }
       ...ArticleCollection
     }
   }
   ${assetFragment}
   ${articleFragments.articleCollection}
+  ${EditorFragments.draft}
 `
 
 export const EDIT_MODE_ARTICLE_ASSETS = gql`

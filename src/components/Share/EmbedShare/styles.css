@@ -1,0 +1,37 @@
+.share {
+  text-align: center;
+
+  & header {
+    margin-bottom: var(--spacing-tight);
+  }
+}
+
+.buttons {
+  @mixin hide-scrollbar;
+
+  overflow-x: auto;
+  white-space: nowrap;
+
+  & :global(button) {
+    margin-right: var(--spacing-base);
+  }
+
+  &.wrap {
+    overflow: inherit;
+    white-space: inherit;
+
+    & .left,
+    & .right {
+      display: block;
+      width: 100%;
+
+      & :global(button:last-child) {
+        margin-right: 0;
+      }
+    }
+
+    & .right {
+      margin-top: var(--spacing-x-tight);
+    }
+  }
+}

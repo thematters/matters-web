@@ -24,6 +24,7 @@ export const ARTICLE_DETAIL_PUBLIC = gql`
       cover
       summary
       createdAt
+      revisedAt
       language
       author {
         ...UserDigestRichUserPublic
