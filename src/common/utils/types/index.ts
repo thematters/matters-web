@@ -64,7 +64,6 @@ export default gql`
 
   type OnboardingTasks {
     enabled: Boolean!
-    finished: Boolean!
   }
 
   enum FeedSortType {

@@ -27,7 +27,7 @@ const TaskItem: React.FC<TaskItemProps> = ({
 
   return (
     <li>
-      <Card bgColor={'white'} {...cardProps} spacing={['tight', 'base']}>
+      <Card bgColor="white" {...cardProps} spacing={['tight', 'base']}>
         <section className={containerClasses}>
           <section className="left">
             <span className="check">

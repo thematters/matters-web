@@ -8,7 +8,10 @@ const OnboardingTasksWidget = () => {
     <section className="widget">
       <header>
         <Title type="feed" is="h2">
-          <Translate zh_hant="歡迎遨遊 Matters 星際網絡" />
+          <Translate
+            zh_hant="歡迎遨遊 Matters 星際網絡"
+            zh_hans="欢迎遨游 Matters 星际网络"
+          />
         </Title>
 
         <p>

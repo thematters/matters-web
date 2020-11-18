@@ -19,10 +19,11 @@ const MattersApp = ({
   <ErrorBoundary>
     <ApolloProvider client={apollo}>
       <GlobalStyles />
-      <ClientUpdater />
 
       <Root client={apollo}>
         <Component {...pageProps} />
+
+        <ClientUpdater />
       </Root>
     </ApolloProvider>
   </ErrorBoundary>

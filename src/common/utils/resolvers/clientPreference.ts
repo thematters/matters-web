@@ -15,7 +15,6 @@ const clientPreferenceResolver = (_: any) => {
     routeHistory: [],
     onboardingTasks: {
       enabled: true,
-      finished: false,
       __typename: 'OnboardingTasks',
     },
   }

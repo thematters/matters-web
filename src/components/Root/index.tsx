@@ -19,7 +19,7 @@ import PageViewTracker from '~/components/Analytics/PageViewTracker'
 import { QueryError } from '~/components/GQL'
 import SplashScreen from '~/components/SplashScreen'
 
-import { CHANGE_NEW_USER_HOME_FEED_SORT_BY, PATHS } from '~/common/enums'
+import { PATHS } from '~/common/enums'
 
 import { ROOT_QUERY_PRIVATE, ROOT_QUERY_PUBLIC } from './gql'
 
@@ -92,16 +92,6 @@ const Root = ({
       // set private viewer
       if (result?.data?.viewer) {
         setPrivateViewer(result?.data?.viewer)
-      }
-
-      // set default home feed
-      const info = result?.data?.viewer?.info
-      if (info) {
-        window.dispatchEvent(
-          new CustomEvent(CHANGE_NEW_USER_HOME_FEED_SORT_BY, {
-            detail: info,
-          })
-        )
       }
     } catch (e) {
       console.error(e)

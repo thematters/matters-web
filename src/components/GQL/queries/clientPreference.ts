@@ -16,7 +16,6 @@ export default gql`
       routeHistory
       onboardingTasks {
         enabled
-        finished
       }
     }
   }

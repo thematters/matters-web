@@ -10,7 +10,12 @@ import {
 import { useMutation } from '~/components/GQL'
 import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
 
-import { ADD_TOAST, PATHS, STORAGE_KEY_AUTH_TOKEN } from '~/common/enums'
+import {
+  ACCOUNT_LOGOUT,
+  ADD_TOAST,
+  PATHS,
+  STORAGE_KEY_AUTH_TOKEN,
+} from '~/common/enums'
 import { redirectToTarget, storage, unsubscribePush } from '~/common/utils'
 
 import { UserLogout } from '~/components/GQL/mutations/__generated__/UserLogout'
@@ -29,7 +34,10 @@ const NavMenuBottom: React.FC<NavMenuBottomProps> = ({ isInSideDrawerNav }) => {
     }
 
     try {
-      await logout().then(() => storage.remove(STORAGE_KEY_AUTH_TOKEN))
+      await logout().then(() => {
+        storage.remove(STORAGE_KEY_AUTH_TOKEN)
+        window.dispatchEvent(new CustomEvent(ACCOUNT_LOGOUT, {}))
+      })
 
       window.dispatchEvent(
         new CustomEvent(ADD_TOAST, {

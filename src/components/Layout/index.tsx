@@ -1,8 +1,9 @@
+import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import { useRouter } from 'next/router'
-import { useContext } from 'react'
 
-import { Head, OnboardingTasks, SearchBar, ViewerContext } from '~/components'
+import { Head, OnboardingTasks, SearchBar } from '~/components'
+import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
 import { PATHS } from '~/common/enums'
 
@@ -13,17 +14,15 @@ import SideNav from './SideNav'
 import Spacing from './Spacing'
 import styles from './styles.css'
 
+import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
+
 export const Layout: React.FC & {
   Main: typeof Main
   Header: typeof Header
   Spacing: typeof Spacing
 } = ({ children }) => {
-  const viewer = useContext(ViewerContext)
   const router = useRouter()
   const isInDraftDetail = router.pathname === PATHS.ME_DRAFT_DETAIL
-  const isInArticleDetail = router.pathname === PATHS.ARTICLE_DETAIL
-  const showOnboardingTasks =
-    !isInDraftDetail && !isInArticleDetail && viewer.onboardingTasks.enabled
 
   return (
     <>
@@ -36,12 +35,6 @@ export const Layout: React.FC & {
 
         {children}
       </main>
-
-      {showOnboardingTasks && (
-        <section className="u-lg-up-hide">
-          <OnboardingTasks.NavBar />
-        </section>
-      )}
 
       {!isInDraftDetail && (
         <footer className="u-sm-up-hide">
@@ -61,13 +54,16 @@ interface MainProps {
 }
 
 const Main: React.FC<MainProps> = ({ aside, bgColor, inEditor, children }) => {
-  const viewer = useContext(ViewerContext)
-
   const router = useRouter()
   const isInSearch = router.pathname === PATHS.SEARCH
   const isInArticleDetail = router.pathname === PATHS.ARTICLE_DETAIL
+
+  const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
+    variables: { id: 'local' },
+  })
+  const onboardingTasks = data?.clientPreference.onboardingTasks
   const showOnboardingTasks =
-    !inEditor && !isInArticleDetail && viewer.onboardingTasks.enabled
+    !inEditor && !isInArticleDetail && onboardingTasks?.enabled
 
   const articleClasses = classNames({
     'l-col-three-mid': true,
@@ -83,7 +79,15 @@ const Main: React.FC<MainProps> = ({ aside, bgColor, inEditor, children }) => {
 
   return (
     <>
-      <article className={articleClasses}>{children}</article>
+      <article className={articleClasses}>
+        {children}
+
+        {showOnboardingTasks && (
+          <section className="u-lg-up-hide">
+            <OnboardingTasks.NavBar />
+          </section>
+        )}
+      </article>
 
       <aside className={asideClasses}>
         {!isInSearch && !inEditor && (

@@ -1,13 +1,6 @@
-import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import React from 'react'
 
-import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
-
-import {
-  ClientPreference,
-  ClientPreference_clientPreference_onboardingTasks,
-} from '~/components/GQL/queries/__generated__/ClientPreference'
 import { ViewerUserPrivate } from './__generated__/ViewerUserPrivate'
 import { ViewerUserPublic } from './__generated__/ViewerUserPublic'
 
@@ -75,7 +68,6 @@ export type Viewer = ViewerUser & {
   shouldSetupLikerID: boolean
   privateFetched: boolean
   onboardingTasks: {
-    enabled: boolean
     finished: boolean
     tasks: {
       likerId: boolean
@@ -89,8 +81,7 @@ export type Viewer = ViewerUser & {
 
 export const processViewer = (
   viewer: ViewerUser,
-  privateFetched: boolean,
-  onboardingTasks?: ClientPreference_clientPreference_onboardingTasks
+  privateFetched: boolean
 ): Viewer => {
   // User state
   const isAuthed = !!viewer.id
@@ -110,7 +101,6 @@ export const processViewer = (
   const hasArticle = viewer?.articles?.totalCount >= 1
   const hasFollowee = viewer?.followees?.totalCount >= 5
   const hasCommentPermission = isAuthed && !isOnboarding
-  const isOnboardingTasksEnabled = !!(isAuthed && onboardingTasks?.enabled)
   const isOnboardingTasksFinished =
     hasLikerId &&
     hasFollowingTag &&
@@ -142,7 +132,6 @@ export const processViewer = (
     shouldSetupLikerID,
     privateFetched,
     onboardingTasks: {
-      enabled: isOnboardingTasksEnabled,
       finished: isOnboardingTasksFinished,
       tasks: {
         likerId: hasLikerId,
@@ -168,15 +157,8 @@ export const ViewerProvider = ({
   viewer: ViewerUser
   privateFetched: boolean
 }) => {
-  const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
-    variables: { id: 'local' },
-  })
-  const onboardingTasks = data?.clientPreference.onboardingTasks
-
   return (
-    <ViewerContext.Provider
-      value={processViewer(viewer, privateFetched, onboardingTasks)}
-    >
+    <ViewerContext.Provider value={processViewer(viewer, privateFetched)}>
       {children}
     </ViewerContext.Provider>
   )

@@ -1,4 +1,3 @@
-import { useApolloClient } from '@apollo/react-hooks'
 import { useContext } from 'react'
 
 import {
@@ -15,15 +14,14 @@ import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
 
 import {
   ADD_TOAST,
+  ONBOARDING_TASKS_HIDE,
   SHARE_SOURCCE,
   SHARE_SOURCCE_ONBOARDING_TASKS,
-  STORAGE_KEY_ONBOARDING_TASKS,
 } from '~/common/enums'
 import {
   analytics,
   parseFormSubmitErrors,
   routerPush,
-  storage,
   toPath,
   translate,
 } from '~/common/utils'
@@ -36,7 +34,6 @@ import { CreateDraft } from '~/components/GQL/mutations/__generated__/CreateDraf
 const Tasks = () => {
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
-  const client = useApolloClient()
   const isLargeUp = useResponsive('lg-up')
 
   const [putDraft] = useMutation<CreateDraft>(CREATE_DRAFT, {
@@ -76,18 +73,7 @@ const Tasks = () => {
   }
 
   const hideTasks = () => {
-    client.writeData({
-      id: 'ClientPreference:local',
-      data: {
-        onboardingTasks: { __typename: 'OnboardingTasks', enabled: false },
-      },
-    })
-
-    const storedOnboardingTasks = storage.get(STORAGE_KEY_ONBOARDING_TASKS)
-    storage.set(STORAGE_KEY_ONBOARDING_TASKS, {
-      ...storedOnboardingTasks,
-      enabled: false,
-    })
+    window.dispatchEvent(new CustomEvent(ONBOARDING_TASKS_HIDE, {}))
   }
 
   const sharePath = toPath({
