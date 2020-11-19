@@ -13,5 +13,5 @@
 .shuffle {
   @mixin flex-center-end;
 
-  padding: var(--spacing-tight) var(--spacing-loose);
+  padding: var(--spacing-xx-tight) var(--spacing-loose) var(--spacing-tight);
 }

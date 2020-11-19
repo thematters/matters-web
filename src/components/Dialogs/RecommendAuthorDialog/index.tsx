@@ -12,7 +12,7 @@ interface Props {
 const BaseDialog = ({ children }: Props) => {
   const defaultType = 'trendy'
 
-  const { show, close } = useDialogSwitch(true)
+  const { show, open, close } = useDialogSwitch(true)
   const [feed, setFeed] = useState<FeedType>(defaultType)
 
   const isActive = feed === 'active'

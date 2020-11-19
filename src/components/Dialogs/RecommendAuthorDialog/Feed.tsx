@@ -57,7 +57,11 @@ const Feed = ({ type }: Props) => {
   if (!edges || edges.length <= 0) {
     return (
       <section className="feed">
-        <EmptyWarning description={<Translate zh_hant="還沒有創作者" zh_hans="还没有创作者" />}/>
+        <EmptyWarning
+          description={
+            <Translate zh_hant="還沒有可追蹤創作者" zh_hans="还没有可追踪创作者" />
+          }
+        />
       </section>
     )
   }
