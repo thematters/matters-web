@@ -17,14 +17,15 @@ import {
   AGENT_HASH_PREFIX,
   COOKIE_USER_GROUP,
   GQL_CONTEXT_PUBLIC_QUERY_KEY,
-  STORE_KEY_AGENT_HASH,
-  STORE_KEY_AUTH_TOKEN,
+  STORAGE_KEY_AGENT_HASH,
+  STORAGE_KEY_AUTH_TOKEN,
 } from '~/common/enums'
 import introspectionQueryResultData from '~/common/gql/fragmentTypes.json'
 import { randomString } from '~/common/utils'
 
 import { getCookie } from './cookie'
 import resolvers from './resolvers'
+import { storage } from './storage'
 import typeDefs from './types'
 
 // import { setupPersistCache } from './cache'
@@ -113,7 +114,7 @@ const authLink = setContext((operation, { headers, ...restCtx }) => {
 
   // Get token from local storage if it's a static-build client
   if (typeof window !== 'undefined') {
-    const token = localStorage.getItem(STORE_KEY_AUTH_TOKEN)
+    const token = storage.get(STORAGE_KEY_AUTH_TOKEN)
     if (token && isStaticBuild) {
       headers['x-access-token'] = token
     }
@@ -170,7 +171,7 @@ const agentHashLink = setContext((_, { headers }) => {
   let hash: string | null = null
 
   if (typeof window !== 'undefined') {
-    const stored = localStorage.getItem(STORE_KEY_AGENT_HASH)
+    const stored = storage.get(STORAGE_KEY_AGENT_HASH)
     if (stored && stored.startsWith(AGENT_HASH_PREFIX)) {
       hash = stored
     }
