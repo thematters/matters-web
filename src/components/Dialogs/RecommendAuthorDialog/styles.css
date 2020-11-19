@@ -1,6 +1,4 @@
 .message {
-  text-align: left;
-
   & span {
     color: var(--color-matters-green);
   }
@@ -13,5 +11,5 @@
 .shuffle {
   @mixin flex-center-end;
 
-  padding: var(--spacing-xx-tight) var(--spacing-loose) var(--spacing-tight);
+  padding: 0 var(--spacing-loose) var(--spacing-tight);
 }

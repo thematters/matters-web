@@ -31,7 +31,7 @@ const BaseDialog = ({ children }: Props) => {
         />
 
         <Dialog.Content>
-          <Dialog.Message>
+          <Dialog.Message align="left">
             <p className="message">
               <Translate
                 zh_hant="「追蹤」你感興趣的創作者。你將看到創作者發佈的作品、評論，以及他們支持的優質創作。開啟你的訂閱時間線，追蹤至少"

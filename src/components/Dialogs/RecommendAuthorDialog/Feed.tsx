@@ -42,7 +42,7 @@ const Feed = ({ type }: Props) => {
   )
   const edges = data?.viewer?.recommendation.authors.edges
 
-  const shuffle = () => refetch({ random: _random(0, 12) })
+  const shuffle = () => refetch({ random: _random(0, 12), type })
 
   useEffect(() => {
     if (viewer.isAuthed) {
