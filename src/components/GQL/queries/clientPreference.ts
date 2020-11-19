@@ -5,6 +5,7 @@ export default gql`
     clientPreference @client {
       id
       feedSortType
+      followFeedType
       viewMode
       readCivicLikerDialog
       wall
@@ -13,7 +14,9 @@ export default gql`
         supported
       }
       routeHistory
-      followFeedType
+      onboardingTasks {
+        enabled
+      }
     }
   }
 `

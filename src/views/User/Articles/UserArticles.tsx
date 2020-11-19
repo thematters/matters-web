@@ -21,6 +21,7 @@ import {
   VIEWER_ARTICLES,
 } from '~/components/GQL/queries/userArticles'
 
+import { SHARE_SOURCCE, SHARE_SOURCCE_ONBOARDING_TASKS } from '~/common/enums'
 import { analytics, getQuery, mergeConnections } from '~/common/utils'
 
 import IMAGE_LOGO_192 from '@/public/static/icon-192x192.png?url'
@@ -159,12 +160,23 @@ const UserArticles = () => {
     return null
   }
 
+  /**
+   * Customize title
+   */
+  const shareSource = getQuery({ router, key: SHARE_SOURCCE })
+  const isShareOnboardingTasks = shareSource === SHARE_SOURCCE_ONBOARDING_TASKS
+
   const CustomHead = () => (
     <Head
       title={{
-        zh_hant: `${user.displayName}的創作空間站`,
-        zh_hans: `${user.displayName}的创作空间站`,
+        zh_hant: isShareOnboardingTasks
+          ? `${user.displayName} 已解鎖新手獎賞，快點加入 Matters 獲得創作者獎勵吧`
+          : `${user.displayName}的創作空間站`,
+        zh_hans: isShareOnboardingTasks
+          ? `${user.displayName} 已解锁新手奖赏，快点加入 Matters 获得创作者奖励吧`
+          : `${user.displayName}的创作空间站`,
       }}
+      noSuffix={isShareOnboardingTasks}
       description={user.info.description}
       image={user.info.profileCover || IMAGE_LOGO_192}
     />

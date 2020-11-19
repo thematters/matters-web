@@ -13,15 +13,20 @@ import {
   Toast,
   usePublicQuery,
   ViewerProvider,
+  ViewerUser,
 } from '~/components'
 import PageViewTracker from '~/components/Analytics/PageViewTracker'
 import { QueryError } from '~/components/GQL'
 import SplashScreen from '~/components/SplashScreen'
 
-import { CHANGE_NEW_USER_HOME_FEED_SORT_BY, PATHS } from '~/common/enums'
+import { PATHS } from '~/common/enums'
 
 import { ROOT_QUERY_PRIVATE, ROOT_QUERY_PUBLIC } from './gql'
 
+import {
+  RootQueryPrivate,
+  RootQueryPrivate_viewer,
+} from './__generated__/RootQueryPrivate'
 import { RootQueryPublic } from './__generated__/RootQueryPublic'
 
 const DynamicPushInitializer = dynamic(
@@ -75,25 +80,24 @@ const Root = ({
   const official = data?.official
 
   // viewer
+  const [privateViewer, setPrivateViewer] = useState<RootQueryPrivate_viewer>()
   const [privateFetched, setPrivateFetched] = useState(false)
   const fetchPrivateViewer = async () => {
     try {
-      const result = await client.query({
+      const result = await client.query<RootQueryPrivate>({
         query: ROOT_QUERY_PRIVATE,
         fetchPolicy: 'network-only',
       })
 
-      const info = result?.data?.viewer?.info
-      if (info) {
-        window.dispatchEvent(
-          new CustomEvent(CHANGE_NEW_USER_HOME_FEED_SORT_BY, {
-            detail: info,
-          })
-        )
+      // set private viewer
+      if (result?.data?.viewer) {
+        setPrivateViewer(result?.data?.viewer)
       }
     } catch (e) {
       console.error(e)
     }
+
+    // mark private fetched as true
     setPrivateFetched(true)
   }
 
@@ -120,7 +124,10 @@ const Root = ({
   }
 
   return (
-    <ViewerProvider viewer={viewer} privateFetched={privateFetched}>
+    <ViewerProvider
+      viewer={(privateViewer || viewer) as ViewerUser}
+      privateFetched={privateFetched}
+    >
       <SplashScreen />
       <PageViewTracker />
 
