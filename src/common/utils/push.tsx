@@ -3,8 +3,8 @@ import gql from 'graphql-tag'
 
 import { Translate, Viewer } from '~/components'
 
-import { ADD_TOAST, STORE_KEY_PUSH } from '~/common/enums'
-import { initializeFirebase } from '~/common/utils'
+import { ADD_TOAST, STORAGE_KEY_PUSH } from '~/common/enums'
+import { initializeFirebase, storage } from '~/common/utils'
 
 import { ToggleSubscribePush } from './__generated__/ToggleSubscribePush'
 
@@ -79,7 +79,7 @@ export const initializePush = async ({
   /**
    * Init push setting in local
    */
-  const push = JSON.parse(localStorage.getItem(STORE_KEY_PUSH) || '{}')
+  const push = storage.get(STORAGE_KEY_PUSH) || {}
   const isViewerPush = viewer.id === push.userId
   const isNotificationGranted =
     window.Notification && Notification.permission === 'granted'
@@ -157,14 +157,11 @@ export const subscribePush = async (options?: { silent?: boolean }) => {
         },
       },
     })
-    localStorage.setItem(
-      STORE_KEY_PUSH,
-      JSON.stringify({
-        userId: data?.toggleSubscribePush?.id,
-        enabled: true,
-        token,
-      })
-    )
+    storage.set(STORAGE_KEY_PUSH, {
+      userId: data?.toggleSubscribePush?.id,
+      enabled: true,
+      token,
+    })
 
     if (!silent) {
       window.dispatchEvent(
@@ -219,7 +216,7 @@ export const unsubscribePush = async () => {
   }
 
   // Update local state
-  localStorage.removeItem(STORE_KEY_PUSH)
+  storage.remove(STORAGE_KEY_PUSH)
 
   if (!cachedClient) {
     return

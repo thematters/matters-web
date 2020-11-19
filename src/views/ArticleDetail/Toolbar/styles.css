@@ -1,5 +1,5 @@
 .toolbar {
-  @mixin border-top-grey;
+  @mixin shadow-border-top-grey;
 
   position: sticky;
   bottom: 0;

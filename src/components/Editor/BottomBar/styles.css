@@ -1,23 +1,18 @@
 .bottom-bar {
-  @mixin flex-center-space-between;
-
   position: fixed;
   right: 0;
   bottom: 0;
   left: 0;
   z-index: var(--z-index-over-global-header);
+}
+
+.content {
+  @mixin shadow-border-top-grey;
+  @mixin flex-center-space-between;
+
   height: var(--global-nav-height);
+  margin: 0 1px; /* borders of main grid */
   background: var(--color-white);
-  border-radius: var(--spacing-x-tight) var(--spacing-x-tight) 0 0;
-  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08);
-
-  @media (--sm-up) {
-    @mixin border-top-grey;
-
-    position: sticky;
-    border-radius: 0;
-    box-shadow: none;
-  }
 
   & button {
     flex: 1 1 0;
