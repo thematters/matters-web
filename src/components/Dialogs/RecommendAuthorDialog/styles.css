@@ -1,0 +1,17 @@
+.message {
+  text-align: left;
+
+  & span {
+    color: var(--color-matters-green);
+  }
+}
+
+.feed {
+  padding-bottom: var(--spacing-x-tight);
+}
+
+.shuffle {
+  @mixin flex-center-end;
+
+  padding: var(--spacing-tight) var(--spacing-loose);
+}
