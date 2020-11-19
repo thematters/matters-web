@@ -1,0 +1,15 @@
+.message {
+  & span {
+    color: var(--color-matters-green);
+  }
+}
+
+.feed {
+  padding-bottom: var(--spacing-base);
+}
+
+.shuffle {
+  @mixin flex-center-end;
+
+  padding: 0 var(--spacing-loose) var(--spacing-tight);
+}
