@@ -2,7 +2,7 @@ import { useLazyQuery, useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import jump from 'jump.js'
 import dynamic from 'next/dynamic'
-import { useRouter } from 'next/router'
+import Router, { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
 import { Waypoint } from 'react-waypoint'
 
@@ -26,8 +26,8 @@ import { QueryError } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { UserDigest } from '~/components/UserDigest'
 
-import { ADD_TOAST } from '~/common/enums'
-import { getQuery } from '~/common/utils'
+import { ADD_TOAST, URL_QS } from '~/common/enums'
+import { getQuery, toPath } from '~/common/utils'
 
 import Collection from './Collection'
 import Content from './Content'
@@ -167,12 +167,31 @@ const ArticleDetail = () => {
 
   // edit mode
   const canEdit = isAuthor && !viewer.isInactive
+  const mode = getQuery({ router, key: URL_QS.MODE_EDIT.key })
   const [editMode, setEditMode] = useState(false)
+  const exitEditMode = () => {
+    if (!article) {
+      return
+    }
+
+    const path = toPath({ page: 'articleDetail', article })
+    Router.replace(path.href, path.as)
+  }
+
   const onEditSaved = async () => {
     setEditMode(false)
     await refetchPublic()
     loadPrivate()
+    exitEditMode()
   }
+
+  useEffect(() => {
+    if (!canEdit || !article) {
+      return
+    }
+
+    setEditMode(mode === URL_QS.MODE_EDIT.value)
+  }, [mode, article])
 
   // jump to comment area
   useEffect(() => {
@@ -249,7 +268,7 @@ const ArticleDetail = () => {
     return (
       <EditMode
         article={article}
-        onCancel={() => setEditMode(false)}
+        onCancel={exitEditMode}
         onSaved={onEditSaved}
       />
     )
@@ -362,18 +381,7 @@ const ArticleDetail = () => {
           {!isLargeUp && <RelatedArticles article={article} />}
         </section>
 
-        <Toolbar
-          article={article}
-          editArticle={
-            canEdit
-              ? () => {
-                  setEditMode(true)
-                  jump(document.body)
-                }
-              : undefined
-          }
-          privateFetched={privateFetched}
-        />
+        <Toolbar article={article} privateFetched={privateFetched} />
 
         {shouldShowWall && (
           <>

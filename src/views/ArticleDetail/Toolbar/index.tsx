@@ -52,7 +52,7 @@ const fragments = {
   },
 }
 
-const Toolbar = ({ article, editArticle, privateFetched }: ToolbarProps) => {
+const Toolbar = ({ article, privateFetched }: ToolbarProps) => {
   const isSmallUp = useResponsive('sm-up')
 
   return (
@@ -79,7 +79,6 @@ const Toolbar = ({ article, editArticle, privateFetched }: ToolbarProps) => {
           color="black"
           size="md-s"
           inCard={false}
-          editArticle={editArticle}
         />
       </section>
 

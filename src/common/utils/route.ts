@@ -71,7 +71,10 @@ type ToPathArgs =
  *
  * (works on SSR & CSR)
  */
-export const toPath = (args: ToPathArgs): { href: Url; as: string } => {
+export const toPath = (
+  args: ToPathArgs,
+  query?: { [key: string]: string }
+): { href: Url; as: string } => {
   switch (args.page) {
     case 'articleDetail': {
       const {
@@ -84,7 +87,7 @@ export const toPath = (args: ToPathArgs): { href: Url; as: string } => {
       return {
         href: {
           pathname: PATHS.ARTICLE_DETAIL,
-          query: { userName, slug, mediaHash },
+          query: { userName, slug, mediaHash, ...(query || {}) },
         },
         as: args.fragment ? `${asUrl}#${args.fragment}` : asUrl,
       }

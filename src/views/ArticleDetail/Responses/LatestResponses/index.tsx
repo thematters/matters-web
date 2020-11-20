@@ -20,7 +20,7 @@ import {
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
-import { REFETCH_RESPONSES, UrlFragments } from '~/common/enums'
+import { REFETCH_RESPONSES, URL_FRAGMENT } from '~/common/enums'
 import {
   dom,
   filterResponses,
@@ -219,7 +219,7 @@ const LatestResponses = () => {
 
     const jumpToFragment = () => {
       jump(`#${fragment}`, {
-        offset: fragment === UrlFragments.COMMENTS ? -10 : -64,
+        offset: fragment === URL_FRAGMENT.COMMENTS ? -10 : -64,
       })
     }
     const element = dom.$(`#${fragment}`)
