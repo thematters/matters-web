@@ -1,27 +1,23 @@
 import { useState } from 'react'
 
-import { Dialog, Layout, SignUpForm, useStep } from '~/components'
+import { Dialog, useStep } from '~/components'
 
 import Binding from './Binding'
+import Complete from './Complete'
 import Generating from './Generating'
 import Select from './Select'
 
 type Step = 'select' | 'binding' | 'generating' | 'complete'
 
 interface Props {
-  purpose: 'dialog' | 'page'
+  closeDialog: () => void
   submitCallback?: () => void
-  closeDialog?: () => void
 }
 
 export const SetupLikeCoin: React.FC<Props> = ({
-  purpose,
-  submitCallback,
   closeDialog,
+  submitCallback,
 }) => {
-  const isInDialog = purpose === 'dialog'
-  const isInPage = purpose === 'page'
-
   const { currStep, forward } = useStep<Step>('select')
 
   const [bindingWindowRef, setBindingWindowRef] = useState<Window | undefined>(
@@ -38,17 +34,11 @@ export const SetupLikeCoin: React.FC<Props> = ({
 
   return (
     <>
-      {isInPage && (
-        <Layout.Header left={<Layout.Header.Title id="setupLikeCoin" />} />
-      )}
-
-      {isInDialog && closeDialog && (
-        <Dialog.Header
-          title="setupLikeCoin"
-          close={closeDialog}
-          closeTextId={currStep === 'complete' ? 'close' : 'cancel'}
-        />
-      )}
+      <Dialog.Header
+        title="setupLikeCoin"
+        close={closeDialog}
+        closeTextId={currStep === 'complete' ? 'close' : 'cancel'}
+      />
 
       {currStep === 'select' && (
         <Select
@@ -74,7 +64,7 @@ export const SetupLikeCoin: React.FC<Props> = ({
         />
       )}
 
-      {currStep === 'complete' && <SignUpForm.Complete />}
+      {currStep === 'complete' && <Complete />}
     </>
   )
 }
