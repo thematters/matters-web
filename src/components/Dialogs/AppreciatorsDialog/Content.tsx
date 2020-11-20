@@ -85,9 +85,7 @@ const AppreciatorsDialogContent = ({
   const ListRow = ({
     index,
     datum,
-  }: RowRendererProps<
-    ArticleAppreciators_article_appreciationsReceived_edges
-  >) => {
+  }: RowRendererProps<ArticleAppreciators_article_appreciationsReceived_edges>) => {
     const { node, cursor } = datum
     return (
       <div className="appreciator-item" key={cursor}>

@@ -136,13 +136,13 @@ const Dialog: React.FC<DialogProps> = (props) => {
   return (
     <>
       <AnimatedDialogOverlay className="dialog">
-        <AnimatedOverlay style={{ opacity }} />
+        <AnimatedOverlay style={{ opacity: opacity as any }} />
 
         <DialogContent className="l-row full" aria-labelledby="dialog-title">
           <AnimatedContainer
             style={{
               transform: !isSmallUp && slideIn ? transform : undefined,
-              opacity: isSmallUp || !slideIn ? opacity : undefined,
+              opacity: isSmallUp || !slideIn ? (opacity as any) : undefined,
               top: !isSmallUp ? top : undefined,
             }}
             setDragGoal={setDragGoal}

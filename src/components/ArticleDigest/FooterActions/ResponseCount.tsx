@@ -3,7 +3,7 @@ import _get from 'lodash/get'
 
 import { Button, IconComment, TextIcon } from '~/components'
 
-import { UrlFragments } from '~/common/enums'
+import { URL_FRAGMENT } from '~/common/enums'
 import { numAbbr, toPath } from '~/common/utils'
 
 import { ActionsResponseCountArticle } from './__generated__/ActionsResponseCountArticle'
@@ -38,7 +38,7 @@ const ResponseCount = ({
   const path = toPath({
     page: 'articleDetail',
     article,
-    fragment: UrlFragments.COMMENTS,
+    fragment: URL_FRAGMENT.COMMENTS,
   })
   const isBanned = state === 'banned'
 

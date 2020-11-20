@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic'
 
 import { Z_INDEX } from '~/common/enums'
 
-export type PopperInstance = import('@tippyjs/react/node_modules/tippy.js').Instance
+export type PopperInstance = any
 export type PopperProps = import('@tippyjs/react').TippyProps
 
 const DynamicLazyTippy = dynamic(() => import('./LazyTippy'), {
@@ -66,7 +66,7 @@ export const hidePopperOnClick = (instance: PopperInstance) => {
     return
   }
 
-  box.addEventListener('click', (event) => {
+  box.addEventListener('click', (event: any) => {
     const target = event.target as HTMLElement
 
     if (target?.closest && target.closest('[data-clickable], a, button')) {

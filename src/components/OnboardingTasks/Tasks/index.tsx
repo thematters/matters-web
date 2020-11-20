@@ -12,12 +12,7 @@ import {
 import { useMutation } from '~/components/GQL'
 import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
 
-import {
-  ADD_TOAST,
-  ONBOARDING_TASKS_HIDE,
-  SHARE_SOURCCE,
-  SHARE_SOURCCE_ONBOARDING_TASKS,
-} from '~/common/enums'
+import { ADD_TOAST, ONBOARDING_TASKS_HIDE, URL_QS } from '~/common/enums'
 import {
   analytics,
   parseFormSubmitErrors,
@@ -52,7 +47,7 @@ const Tasks = () => {
 
       if (slug && id) {
         const path = toPath({ page: 'draftDetail', slug, id })
-        routerPush(path.href, path.as)
+        routerPush(path.href)
       }
     } catch (error) {
       const [messages, codes] = parseFormSubmitErrors(error, lang)
@@ -79,7 +74,7 @@ const Tasks = () => {
   const sharePath = toPath({
     page: 'userProfile',
     userName: viewer.userName || '',
-  }).as
+  }).href
 
   return (
     <>
@@ -180,7 +175,7 @@ const Tasks = () => {
             <section className="share">
               <EmbedShare
                 title={`${viewer.displayName} 已解鎖新手獎賞，快點加入 Matters 獲得創作者獎勵吧`}
-                path={`${sharePath}?${SHARE_SOURCCE}=${SHARE_SOURCCE_ONBOARDING_TASKS}`}
+                path={`${sharePath}?${URL_QS.SHARE_SOURCE_ONBOARDING_TASKS.key}=${URL_QS.SHARE_SOURCE_ONBOARDING_TASKS.value}`}
                 headerTitle={
                   <Translate
                     zh_hant="邀請更多好友加入星際旅行"

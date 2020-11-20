@@ -67,11 +67,7 @@ export const ArticleDigestDropdown = ({
   const cardDisabled = isBanned || disabled
 
   return (
-    <Card
-      href={cardDisabled ? undefined : path.href}
-      as={cardDisabled ? undefined : path.as}
-      {...cardProps}
-    >
+    <Card href={cardDisabled ? undefined : path.href} {...cardProps}>
       <section className={containerClasses}>
         <header>
           <ArticleDigestTitle

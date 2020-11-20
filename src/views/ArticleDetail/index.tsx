@@ -26,7 +26,7 @@ import { QueryError } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { UserDigest } from '~/components/UserDigest'
 
-import { ADD_TOAST } from '~/common/enums'
+import { ADD_TOAST, URL_QS } from '~/common/enums'
 import { getQuery } from '~/common/utils'
 
 import Collection from './Collection'
@@ -167,12 +167,21 @@ const ArticleDetail = () => {
 
   // edit mode
   const canEdit = isAuthor && !viewer.isInactive
+  const mode = getQuery({ router, key: URL_QS.MODE_EDIT.key })
   const [editMode, setEditMode] = useState(false)
   const onEditSaved = async () => {
     setEditMode(false)
     await refetchPublic()
     loadPrivate()
   }
+
+  useEffect(() => {
+    if (!canEdit) {
+      return
+    }
+
+    setEditMode(mode === URL_QS.MODE_EDIT.value)
+  }, [mode])
 
   // jump to comment area
   useEffect(() => {
@@ -362,18 +371,7 @@ const ArticleDetail = () => {
           {!isLargeUp && <RelatedArticles article={article} />}
         </section>
 
-        <Toolbar
-          article={article}
-          editArticle={
-            canEdit
-              ? () => {
-                  setEditMode(true)
-                  jump(document.body)
-                }
-              : undefined
-          }
-          privateFetched={privateFetched}
-        />
+        <Toolbar article={article} privateFetched={privateFetched} />
 
         {shouldShowWall && (
           <>

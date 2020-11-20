@@ -72,7 +72,7 @@ const FooterActions = ({
         <BookmarkButton article={article} inCard={inCard} />
         <ShareButton
           title={title}
-          path={encodeURI(path.as)}
+          path={encodeURI(path.href)}
           iconColor="grey"
           inCard={inCard}
         />

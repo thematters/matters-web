@@ -31,7 +31,7 @@ const PublishedState = ({ draft }: { draft: PublishStateDraft }) => {
   return (
     <ShareDialog
       title={draft.article.title}
-      path={encodeURI(path.as)}
+      path={encodeURI(path.href)}
       description={
         <>
           <p>

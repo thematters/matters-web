@@ -21,7 +21,7 @@ import {
   VIEWER_ARTICLES,
 } from '~/components/GQL/queries/userArticles'
 
-import { SHARE_SOURCCE, SHARE_SOURCCE_ONBOARDING_TASKS } from '~/common/enums'
+import { URL_QS } from '~/common/enums'
 import { analytics, getQuery, mergeConnections } from '~/common/utils'
 
 import IMAGE_LOGO_192 from '@/public/static/icon-192x192.png?url'
@@ -163,8 +163,12 @@ const UserArticles = () => {
   /**
    * Customize title
    */
-  const shareSource = getQuery({ router, key: SHARE_SOURCCE })
-  const isShareOnboardingTasks = shareSource === SHARE_SOURCCE_ONBOARDING_TASKS
+  const shareSource = getQuery({
+    router,
+    key: URL_QS.SHARE_SOURCE_ONBOARDING_TASKS.key,
+  })
+  const isShareOnboardingTasks =
+    shareSource === URL_QS.SHARE_SOURCE_ONBOARDING_TASKS.value
 
   const CustomHead = () => (
     <Head

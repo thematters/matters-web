@@ -18,7 +18,7 @@ const TaskItem: React.FC<TaskItemProps> = ({
   done,
   ...cardProps
 }) => {
-  const clickable = cardProps.as || cardProps.href || cardProps.onClick
+  const clickable = cardProps.href || cardProps.onClick
 
   const containerClasses = classNames({
     container: true,

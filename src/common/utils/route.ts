@@ -1,13 +1,10 @@
 import Router, { NextRouter } from 'next/router'
 import { Key, pathToRegexp } from 'path-to-regexp'
 import queryString from 'query-string'
-import { UrlObject } from 'url'
 
 import { PATHS, ROUTES } from '~/common/enums'
 
 import { parseURL } from './url'
-
-export type Url = string | UrlObject
 
 interface ArticleArgs {
   slug: string
@@ -71,7 +68,7 @@ type ToPathArgs =
  *
  * (works on SSR & CSR)
  */
-export const toPath = (args: ToPathArgs): { href: Url; as: string } => {
+export const toPath = (args: ToPathArgs): { href: string } => {
   switch (args.page) {
     case 'articleDetail': {
       const {
@@ -82,11 +79,7 @@ export const toPath = (args: ToPathArgs): { href: Url; as: string } => {
       const asUrl = `/@${userName}/${slug}-${mediaHash}`
 
       return {
-        href: {
-          pathname: PATHS.ARTICLE_DETAIL,
-          query: { userName, slug, mediaHash },
-        },
-        as: args.fragment ? `${asUrl}#${args.fragment}` : asUrl,
+        href: args.fragment ? `${asUrl}#${args.fragment}` : asUrl,
       }
     }
     case 'commentDetail': {
@@ -101,72 +94,43 @@ export const toPath = (args: ToPathArgs): { href: Url; as: string } => {
     }
     case 'draftDetail': {
       return {
-        href: {
-          pathname: PATHS.ME_DRAFT_DETAIL,
-          query: { id: args.id, slug: args.slug },
-        },
-        as: `/me/drafts/${args.slug}-${args.id}`,
+        href: `/me/drafts/${args.slug}-${args.id}`,
       }
     }
     case 'tagDetail': {
       return {
-        href: {
-          pathname: PATHS.TAG_DETAIL,
-          query: { id: args.id },
-        },
-        as: `/tags/${args.id}`,
+        href: `/tags/${args.id}`,
       }
     }
     case 'userProfile': {
       return {
-        href: {
-          pathname: PATHS.USER_ARTICLES,
-          query: { userName: args.userName },
-        },
-        as: `/@${args.userName}`,
+        href: `/@${args.userName}`,
       }
     }
     case 'userComments': {
       return {
-        href: {
-          pathname: PATHS.USER_COMMENTS,
-          query: { userName: args.userName },
-        },
-        as: `/@${args.userName}/comments`,
+        href: `/@${args.userName}/comments`,
       }
     }
     case 'userTags': {
       return {
-        href: {
-          pathname: PATHS.USER_TAGS,
-          query: { userName: args.userName },
-        },
-        as: `/@${args.userName}/tags`,
+        href: `/@${args.userName}/tags`,
       }
     }
     case 'userFollowers': {
       return {
-        href: {
-          pathname: PATHS.USER_FOLLOWERS,
-          query: { userName: args.userName },
-        },
-        as: `/@${args.userName}/followers`,
+        href: `/@${args.userName}/followers`,
       }
     }
     case 'userFollowees': {
       return {
-        href: {
-          pathname: PATHS.USER_FOLLOWEES,
-          query: { userName: args.userName },
-        },
-        as: `/@${args.userName}/followees`,
+        href: `/@${args.userName}/followees`,
       }
     }
     case 'search': {
       const typeStr = args.type ? `&type=${args.type}` : ''
       return {
         href: `${PATHS.SEARCH}?q=${args.q || ''}${typeStr}`,
-        as: `${PATHS.SEARCH}?q=${args.q || ''}${typeStr}`,
       }
     }
   }
@@ -271,8 +235,8 @@ export const appendTarget = (href: string, fallbackCurrent?: boolean) => {
  * @see {@url https://github.com/zeit/next.js/blob/canary/packages/next/client/link.tsx#L203-L211}
  * @see {@url https://github.com/zeit/next.js/issues/3249#issuecomment-574817539}
  */
-export const routerPush = (url: Url, as?: Url, options?: {}) => {
-  Router.push(url, as, options).then((success: boolean) => {
+export const routerPush = (url: string, options?: {}) => {
+  Router.push(url, options).then((success: boolean) => {
     if (!success) {
       return
     }
@@ -356,6 +320,6 @@ export const captureClicks = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
   })
 
   if (matched) {
-    routerPush(matched, url)
+    routerPush(el.href)
   }
 }

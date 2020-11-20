@@ -40,7 +40,7 @@ const PublishedState = ({ article, draft, cancel }: Props) => {
   return (
     <ShareDialog
       title={article.title}
-      path={encodeURI(path.as)}
+      path={encodeURI(path.href)}
       description={
         <>
           <p>
@@ -64,7 +64,7 @@ const PublishedState = ({ article, draft, cancel }: Props) => {
         <Dialog.Footer.Button
           onClick={() => {
             cancel()
-            routerPush(path.href, path.as)
+            routerPush(path.href)
           }}
         >
           <Translate zh_hant="查看修訂作品" zh_hans="查看修订作品" />

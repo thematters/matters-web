@@ -50,7 +50,7 @@ const SideDrawerNav: React.FC<SideDrawerNavProps> = ({ isOpen, onDismiss }) => {
           initialFocusRef={closeButtonRef}
           className="side-drawer-nav"
         >
-          <AnimatedOverlay style={{ opacity }} />
+          <AnimatedOverlay style={{ opacity: opacity as any }} />
 
           <DialogContent aria-labelledby="菜單 - 我的">
             <AnimatedDrawerContent

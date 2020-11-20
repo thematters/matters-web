@@ -25,9 +25,14 @@ const AggregateArticleResults = () => {
    * Data Fetching
    */
   // public data
-  const { data, loading, refetch } = usePublicQuery<
-    SearchAggregateArticlesPublic
-  >(SEARCH_AGGREGATE_ARTICLES_PUBLIC, { variables: { key: q } })
+  const {
+    data,
+    loading,
+    refetch,
+  } = usePublicQuery<SearchAggregateArticlesPublic>(
+    SEARCH_AGGREGATE_ARTICLES_PUBLIC,
+    { variables: { key: q } }
+  )
 
   const { edges, pageInfo } = data?.search || {}
 

@@ -41,7 +41,6 @@ export interface DropdownActionsControls {
   inUserArticles?: boolean
   inTagDetailLatest?: boolean
   inTagDetailSelected?: boolean
-  editArticle?: () => any
 }
 
 type DropdownActionsProps = {
@@ -78,6 +77,7 @@ const fragments = {
       ...StickyButtonArticle
       ...ExtendButtonArticle
       ...RemoveTagButtonArticle
+      ...EditArticleButtonArticle
       ...SetTagSelectedButtonArticle
       ...SetTagUnselectedButtonArticle
     }
@@ -87,6 +87,7 @@ const fragments = {
     ${ArchiveArticle.fragments.article}
     ${ExtendButton.fragments.article}
     ${RemoveTagButton.fragments.article}
+    ${EditButton.fragments.article}
     ${SetTagSelectedButton.fragments.article}
     ${SetTagUnselectedButton.fragments.article}
   `,
@@ -97,7 +98,6 @@ const BaseDropdownActions = ({
   color = 'grey',
   size,
   inCard,
-  editArticle,
 
   hasAppreciators,
   hasFingerprint,
@@ -135,7 +135,7 @@ const BaseDropdownActions = ({
       {hasSetTagSelected && <SetTagSelectedButton article={article} />}
       {hasSetTagUnSelected && <SetTagUnselectedButton article={article} />}
       {hasRemoveTag && <RemoveTagButton article={article} />}
-      {hasEdit && editArticle && <EditButton editArticle={editArticle} />}
+      {hasEdit && <EditButton article={article} />}
     </Menu>
   )
 
@@ -172,7 +172,6 @@ const DropdownActions = (props: DropdownActionsProps) => {
     inUserArticles,
     inTagDetailLatest,
     inTagDetailSelected,
-    editArticle,
   } = props
   const router = useRouter()
   const viewer = useContext(ViewerContext)
@@ -220,7 +219,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
     hasSetTagSelected: !!(inTagDetailLatest && canEditTag),
     hasSetTagUnSelected: !!(inTagDetailSelected && canEditTag),
     hasRemoveTag: !!(isInTagDetail && canEditTag),
-    hasEdit: isActive && !!editArticle,
+    hasEdit: isActive && isArticleAuthor,
   }
 
   if (_isEmpty(_pickBy(controls))) {

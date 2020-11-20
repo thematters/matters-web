@@ -135,10 +135,6 @@ export const ROUTES: Array<{
   { key: 'PAY_CALLBACK_FAILURE', pathname: '/pay/[provider]/failure' },
 ]
 
-export const UrlFragments = {
-  COMMENTS: 'comments',
-}
-
 export const PATHS = {} as {
   [key in ROUTE_KEY]: string
 }

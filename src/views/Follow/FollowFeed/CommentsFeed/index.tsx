@@ -38,9 +38,13 @@ const FOLLOW_COMMENTS = gql`
 `
 
 const CommentsFeed = () => {
-  const { data, loading, error, fetchMore, refetch } = useQuery<
-    FollowCommentsFeed
-  >(FOLLOW_COMMENTS)
+  const {
+    data,
+    loading,
+    error,
+    fetchMore,
+    refetch,
+  } = useQuery<FollowCommentsFeed>(FOLLOW_COMMENTS)
 
   if (loading) {
     return <Spinner />
