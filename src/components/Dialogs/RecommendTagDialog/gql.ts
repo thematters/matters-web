@@ -1,25 +1,49 @@
 import gql from 'graphql-tag'
 
-import { Tag } from '~/components'
+import { TagDigest } from '~/components/TagDigest'
 
-export const RECOMMEND_TAGS = gql`
-  query RecommendTags($random: NonNegativeInt) {
-    viewer @connection(key: "viewerRecommendTags") {
+export const HOTTEST_TAGS = gql`
+  query HottestTags($random: NonNegativeInt) {
+    viewer @connection(key: "viewerHottestTags") {
       id
       recommendation {
-        tags(input: { first: 5, filter: { random: $random } }) {
+        hottestTags(input: { first: 5, filter: { random: $random } }) {
           totalCount
           edges {
             cursor
             node {
-              cover
-              description
-              ...DigestTag
+              id
+              ...TagDigestRichTagPublic
+              ...TagDigestRichTagPrivate
             }
           }
         }
       }
     }
   }
-  ${Tag.fragments.tag}
+  ${TagDigest.Rich.fragments.tag.public}
+  ${TagDigest.Rich.fragments.tag.private}
+`
+
+export const SELECTED_TAGS = gql`
+  query SelectedTags($random: NonNegativeInt) {
+    viewer @connection(key: "viewerSelectedTags") {
+      id
+      recommendation {
+        selectedTags(input: { first: 5, filter: { random: $random } }) {
+          totalCount
+          edges {
+            cursor
+            node {
+              id
+              ...TagDigestRichTagPublic
+              ...TagDigestRichTagPrivate
+            }
+          }
+        }
+      }
+    }
+  }
+  ${TagDigest.Rich.fragments.tag.public}
+  ${TagDigest.Rich.fragments.tag.private}
 `

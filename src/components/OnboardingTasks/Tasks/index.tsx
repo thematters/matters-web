@@ -5,6 +5,8 @@ import {
   EmbedShare,
   LanguageContext,
   LikeCoinDialog,
+  RecommendAuthorDialog,
+  RecommendTagDialog,
   Translate,
   useResponsive,
   ViewerContext,
@@ -99,24 +101,38 @@ const Tasks = () => {
           )}
         </LikeCoinDialog>
 
-        <TaskItem
-          title={
-            <Translate
-              zh_hant="追蹤 5 位喜歡的創作者"
-              zh_hans="追踪 5 位喜欢的创作者"
+        <RecommendAuthorDialog>
+          {({ open }) => (
+            <TaskItem
+              title={
+                <Translate
+                  zh_hant="追蹤 5 位喜歡的創作者"
+                  zh_hans="追踪 5 位喜欢的创作者"
+                />
+              }
+              done={viewer.onboardingTasks.tasks.followee}
+              onClick={viewer.onboardingTasks.tasks.followee ? undefined : open}
             />
-          }
-          done={viewer.onboardingTasks.tasks.followee}
-        />
-        <TaskItem
-          title={
-            <Translate
-              zh_hant="追蹤 5 個感興趣的標籤"
-              zh_hans="追踪 5 个感兴趣的标签"
+          )}
+        </RecommendAuthorDialog>
+
+        <RecommendTagDialog>
+          {({ open }) => (
+            <TaskItem
+              title={
+                <Translate
+                  zh_hant="追蹤 5 個感興趣的標籤"
+                  zh_hans="追踪 5 个感兴趣的标签"
+                />
+              }
+              done={viewer.onboardingTasks.tasks.followingTag}
+              onClick={
+                viewer.onboardingTasks.tasks.followingTag ? undefined : open
+              }
             />
-          }
-          done={viewer.onboardingTasks.tasks.followingTag}
-        />
+          )}
+        </RecommendTagDialog>
+
         <TaskItem
           title={
             <Translate

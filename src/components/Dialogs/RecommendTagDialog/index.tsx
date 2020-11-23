@@ -10,13 +10,13 @@ interface Props {
 }
 
 const BaseDialog = ({ children }: Props) => {
-  const defaultType = 'trendy'
+  const defaultType = 'hottest'
 
   const { show, open, close } = useDialogSwitch(true)
   const [feed, setFeed] = useState<FeedType>(defaultType)
 
+  const isHottest = feed === 'hottest'
   const isSelected = feed === 'selected'
-  const isTrendy = feed === 'trendy'
 
   return (
     <>
@@ -42,7 +42,7 @@ const BaseDialog = ({ children }: Props) => {
           </Dialog.Message>
 
           <Tabs>
-            <Tabs.Tab onClick={() => setFeed('trendy')} selected={isTrendy}>
+            <Tabs.Tab onClick={() => setFeed('hottest')} selected={isHottest}>
               <Translate zh_hant="熱門標籤" zh_hans="热门标签" />
             </Tabs.Tab>
             <Tabs.Tab onClick={() => setFeed('selected')} selected={isSelected}>

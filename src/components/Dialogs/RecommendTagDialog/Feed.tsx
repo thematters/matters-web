@@ -1,27 +1,38 @@
+import _get from 'lodash/get'
 import _random from 'lodash/random'
 import { useContext, useEffect } from 'react'
 
 import {
-  Card,
   EmptyWarning,
   List,
   ShuffleButton,
   Spinner,
-  Tag,
+  TagDigest,
   Translate,
   usePublicQuery,
   ViewerContext,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
-import { toPath } from '~/common/utils'
-
-import { RECOMMEND_TAGS } from './gql'
+import { HOTTEST_TAGS, SELECTED_TAGS } from './gql'
 import styles from './styles.css'
 
-import { RecommendTags } from './__generated__/RecommendTags'
+import {
+  HottestTags,
+  HottestTags_viewer_recommendation_hottestTags_edges,
+} from './__generated__/HottestTags'
+import {
+  SelectedTags,
+  SelectedTags_viewer_recommendation_selectedTags_edges,
+} from './__generated__/SelectedTags'
 
-export type FeedType = 'trendy' | 'selected'
+export type FeedType = 'hottest' | 'selected'
+
+export type FeedQuery = HottestTags | SelectedTags
+
+export type FeedEdges =
+  | HottestTags_viewer_recommendation_hottestTags_edges
+  | SelectedTags_viewer_recommendation_selectedTags_edges
 
 interface Props {
   type: FeedType
@@ -29,9 +40,11 @@ interface Props {
 
 const Feed = ({ type }: Props) => {
   const viewer = useContext(ViewerContext)
+  const isHottest = type === 'hottest'
 
-  const { data, loading, error, refetch } = usePublicQuery<RecommendTags>(
-    RECOMMEND_TAGS,
+  const query = isHottest ? HOTTEST_TAGS : SELECTED_TAGS
+  const { data, loading, error, refetch } = usePublicQuery<FeedQuery>(
+    query,
     {
       notifyOnNetworkStatusChange: true,
       variables: {
@@ -43,7 +56,11 @@ const Feed = ({ type }: Props) => {
     }
   )
 
-  const edges = data?.viewer?.recommendation.tags.edges
+  const edges = _get(
+    data?.viewer?.recommendation,
+    isHottest ? 'hottestTags.edges' : 'selectedTags.edges',
+    []
+  ) as FeedEdges[]
 
   const shuffle = () => refetch({ random: _random(0, 12) })
 
@@ -81,18 +98,14 @@ const Feed = ({ type }: Props) => {
         <List>
           {edges.map(({ node, cursor }, i) => (
             <List.Item key={cursor}>
-              <Card
-                {...toPath({
-                  page: 'tagDetail',
-                  id: node.id,
-                })}
+              <TagDigest.Rich
+                tag={node}
                 spacing={['base', 'base']}
                 bgColor="none"
                 bgActiveColor="grey-lighter"
-                borderRadius="xtight"
-              >
-                <Tag tag={node} type="list" />
-              </Card>
+                hasDesc
+                hasFollow
+              />
             </List.Item>
           ))}
         </List>
