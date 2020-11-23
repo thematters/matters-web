@@ -2,7 +2,7 @@ import { useLazyQuery, useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import jump from 'jump.js'
 import dynamic from 'next/dynamic'
-import { useRouter } from 'next/router'
+import Router, { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
 import { Waypoint } from 'react-waypoint'
 
@@ -27,7 +27,7 @@ import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { UserDigest } from '~/components/UserDigest'
 
 import { ADD_TOAST, URL_QS } from '~/common/enums'
-import { getQuery } from '~/common/utils'
+import { getQuery, toPath } from '~/common/utils'
 
 import Collection from './Collection'
 import Content from './Content'
@@ -169,19 +169,29 @@ const ArticleDetail = () => {
   const canEdit = isAuthor && !viewer.isInactive
   const mode = getQuery({ router, key: URL_QS.MODE_EDIT.key })
   const [editMode, setEditMode] = useState(false)
+  const exitEditMode = () => {
+    if (!article) {
+      return
+    }
+
+    const path = toPath({ page: 'articleDetail', article })
+    Router.replace(path.href)
+  }
+
   const onEditSaved = async () => {
     setEditMode(false)
     await refetchPublic()
     loadPrivate()
+    exitEditMode()
   }
 
   useEffect(() => {
-    if (!canEdit) {
+    if (!canEdit || !article) {
       return
     }
 
     setEditMode(mode === URL_QS.MODE_EDIT.value)
-  }, [mode])
+  }, [mode, article])
 
   // jump to comment area
   useEffect(() => {
@@ -258,7 +268,7 @@ const ArticleDetail = () => {
     return (
       <EditMode
         article={article}
-        onCancel={() => setEditMode(false)}
+        onCancel={exitEditMode}
         onSaved={onEditSaved}
       />
     )
