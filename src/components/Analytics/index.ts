@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useEffect, useRef } from 'react'
 
-import { ANALYTIC_TYPES, ANALYTICS, GA_TRACKING_ID } from '~/common/enums'
+import { ANALYTICS, ANALYTIC_TYPES, GA_TRACKING_ID } from '~/common/enums'
 import { deferTry, initializeFirebase } from '~/common/utils'
 
 import { useEventListener } from '../Hook'

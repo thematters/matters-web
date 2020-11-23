@@ -2,7 +2,7 @@ import { ApolloError } from 'apollo-client'
 
 import { Error, LoginButton, Translate } from '~/components'
 
-import { ADD_TOAST, ERROR_CODES, ErrorCodeKeys } from '~/common/enums'
+import { ADD_TOAST, ErrorCodeKeys, ERROR_CODES } from '~/common/enums'
 
 export const getErrorCodes = (error?: ApolloError): ErrorCodeKeys[] => {
   const errorCodes: ErrorCodeKeys[] = []

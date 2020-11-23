@@ -97,7 +97,7 @@ const Features = () => {
 
   const isMediumUp = useResponsive('md-up')
 
-  const items: Array<{ index: number; src?: string; children?: any }> = [
+  const items: { index: number; src?: string; children?: any }[] = [
     { index: 1 },
     { index: 2, src: IMAGE_FEATURE_1 },
     { index: 3, src: IMAGE_FEATURE_2 },

@@ -1,4 +1,4 @@
-import { ANALYTIC_TYPES, ANALYTICS } from '~/common/enums'
+import { ANALYTICS, ANALYTIC_TYPES } from '~/common/enums'
 
 const trackAs = (type: string) => (...args: EventArgs) => {
   // construct event with details
