@@ -13,6 +13,6 @@ p {
 }
 
 .notice {
-  margin-left: var(--spacing-x-tight);
+  display: inline-block;
   color: var(--color-black);
 }

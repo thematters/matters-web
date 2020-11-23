@@ -155,7 +155,9 @@ const EditModeHeader = ({
               <>
                 <Translate zh_hant="正文剩餘" zh_hans="正文剩余" /> {count}{' '}
                 <Translate zh_hant="版修訂" zh_hans="版修订" />
-                <span className={diffCountClasses}> {diffCount}/50 </span>
+                <span className={diffCountClasses}>
+                  &nbsp;{diffCount}/50&nbsp;&nbsp;&nbsp;
+                </span>
               </>
             )}
             {isOverLimit && (
