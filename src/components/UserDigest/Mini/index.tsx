@@ -34,7 +34,9 @@ export type UserDigestMiniProps = {
   hasAvatar?: boolean
   hasDisplayName?: boolean
   hasUserName?: boolean
+
   disabled?: boolean
+  onClick?: () => void
 } & AvatarProps
 
 const fragments = {
@@ -65,6 +67,8 @@ const Mini = ({
   hasDisplayName,
   hasUserName,
   disabled,
+
+  onClick,
 }: UserDigestMiniProps) => {
   const isArchived = user?.status?.state === 'archived'
   const path = toPath({
@@ -103,7 +107,7 @@ const Mini = ({
   }
 
   return (
-    <LinkWrapper {...path} disabled={disabled}>
+    <LinkWrapper {...path} disabled={disabled} onClick={onClick}>
       <section className={containerClasses}>
         {hasAvatar && <Avatar size={avatarSize} user={user} />}
 

@@ -19,7 +19,9 @@ type ArticleDigestTitleProps = {
   textSize?: ArticleDigestTitleTextSize
   textWeight?: ArticleDigestTitleTextWeight
   is?: ArticleDigestTitleIs
+
   disabled?: boolean
+  onClick?: () => void
 } & Pick<LinkWrapperProps, 'onClick'>
 
 const fragments = {
@@ -44,7 +46,9 @@ export const ArticleDigestTitle = ({
   textSize = 'md',
   textWeight = 'md',
   is = 'h2',
+
   disabled,
+  onClick,
 
   ...restProps
 }: ArticleDigestTitleProps) => {
@@ -67,6 +71,7 @@ export const ArticleDigestTitle = ({
       {...path}
       textActiveColor={isClickable ? 'green' : undefined}
       disabled={!isClickable}
+      onClick={onClick}
       {...restProps}
     >
       <>

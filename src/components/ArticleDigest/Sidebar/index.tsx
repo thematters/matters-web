@@ -18,6 +18,7 @@ type ArticleDigestSidebarProps = {
   hasBackground?: boolean
   hasCover?: boolean
   onClick?: () => any
+  onClickAuthor?: () => void
 } & CardProps
 
 const fragments = {
@@ -48,6 +49,7 @@ export const ArticleDigestSidebar = ({
   hasBackground,
   hasCover,
   onClick,
+  onClickAuthor,
 
   ...cardProps
 }: ArticleDigestSidebarProps) => {
@@ -96,6 +98,7 @@ export const ArticleDigestSidebar = ({
             nameColor="grey-darker"
             hasAvatar
             hasDisplayName
+            onClick={onClickAuthor}
           />
         </footer>
 

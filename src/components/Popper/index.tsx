@@ -32,7 +32,7 @@ export const Dropdown: React.FC<PopperProps> = (props) => (
   <DynamicLazyTippy
     arrow={false}
     trigger="click"
-    interactive={true}
+    interactive
     offset={[0, 4]}
     placement="bottom"
     animation="shift-away"
@@ -44,7 +44,7 @@ export const Dropdown: React.FC<PopperProps> = (props) => (
 
 export const Tooltip: React.FC<PopperProps> = (props) => (
   <DynamicLazyTippy
-    arrow={true}
+    arrow
     interactive={false}
     offset={[0, 12]}
     placement="right"

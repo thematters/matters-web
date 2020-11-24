@@ -101,6 +101,14 @@ const MeHistory = () => {
                   location: i,
                 })
               }
+              onClickAuthor={() => {
+                analytics.trackEvent('click_feed', {
+                  type: 'read_history',
+                  contentType: 'user',
+                  styleType: 'subtitle',
+                  location: i,
+                })
+              }}
             />
           </List.Item>
         ))}
