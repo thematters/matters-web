@@ -222,7 +222,7 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
             defaultCoverUrl={TAG_COVER}
             entityId={id}
             entityType={ENTITY_TYPE.tag}
-            inEditor={true}
+            inEditor
             onUpload={(assetId) => setFieldValue('newCover', assetId)}
           />
         </section>
@@ -241,7 +241,7 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
         }}
         onChange={handleChange}
         dropdownAppendTo={formId}
-        dropdownAutoSizing={true}
+        dropdownAutoSizing
         DropdownContent={DropdownContent}
         query={SEARCH_TAGS}
       />

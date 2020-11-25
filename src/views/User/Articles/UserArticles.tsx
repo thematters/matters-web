@@ -223,6 +223,14 @@ const UserArticles = () => {
                     location: i,
                   })
                 }
+                onClickAuthor={() => {
+                  analytics.trackEvent('click_feed', {
+                    type: 'user_article',
+                    contentType: 'user',
+                    styleType: 'subtitle',
+                    location: i,
+                  })
+                }}
               />
             </List.Item>
           ))}

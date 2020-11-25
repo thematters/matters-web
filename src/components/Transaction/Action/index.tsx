@@ -15,7 +15,7 @@ import {
  *
  * ```tsx
  *  <Action
- *    isSender={true}
+ *    isSender
  *    isWalletAction={false}
  *    sender={sender}
  *    recipient={recipient}

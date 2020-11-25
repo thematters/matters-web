@@ -20,6 +20,7 @@ interface ArticleDigestCardProps {
   article: ArticleDigestCardArticle
 
   onClick?: () => any
+  onClickAuthor?: () => void
 }
 
 const fragments = {
@@ -47,6 +48,7 @@ const fragments = {
 export const ArticleDigestCard = ({
   article,
   onClick,
+  onClickAuthor,
 }: ArticleDigestCardProps) => {
   const { summary, state } = article
   const isBanned = state === 'banned'
@@ -98,6 +100,7 @@ export const ArticleDigestCard = ({
             nameColor={cover ? 'white' : undefined}
             hasAvatar
             hasDisplayName
+            onClick={onClickAuthor}
           />
         </footer>
 

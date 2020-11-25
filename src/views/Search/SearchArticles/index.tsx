@@ -130,6 +130,14 @@ const SearchArticles = () => {
                       location: i,
                     })
                   }
+                  onClickAuthor={() => {
+                    analytics.trackEvent('click_feed', {
+                      type: 'search_tag',
+                      contentType: 'user',
+                      styleType: 'subtitle',
+                      location: i,
+                    })
+                  }}
                 />
               </List.Item>
             )
