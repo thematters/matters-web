@@ -61,19 +61,6 @@ export const FEED_ARTICLES_PUBLIC = {
     }
     ${feedFragment}
   `,
-  topics: gql`
-    query TopicsFeedPublic($after: String) {
-      viewer @connection(key: "viewerFeedTopics") {
-        id
-        recommendation {
-          feed: topics(input: { first: 10, after: $after }) {
-            ...FeedArticleConnection
-          }
-        }
-      }
-    }
-    ${feedFragment}
-  `,
 }
 
 export const FEED_ARTICLES_PRIVATE = gql`
