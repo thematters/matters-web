@@ -225,6 +225,14 @@ const MainFeed = ({ feedSortType: sortBy, viewMode }: MainFeedProps) => {
                     location: i,
                   })
                 }
+                onClickAuthor={() => {
+                  analytics.trackEvent('click_feed', {
+                    type: sortBy,
+                    contentType: 'user',
+                    styleType: 'subtitle',
+                    location: i,
+                  })
+                }}
               />
             </List.Item>
           )

@@ -185,6 +185,14 @@ const TagDetailArticles = ({ tagId, selected }: TagArticlesProps) => {
                   location: i,
                 })
               }
+              onClickAuthor={() => {
+                analytics.trackEvent('click_feed', {
+                  type: selected ? 'tag_detail_selected' : 'tag_detail_latest',
+                  contentType: 'user',
+                  styleType: 'subtitle',
+                  location: i,
+                })
+              }}
               inTagDetailSelected={selected}
               inTagDetailLatest={!selected}
             />

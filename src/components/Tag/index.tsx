@@ -17,6 +17,7 @@ interface TagProps {
   active?: boolean
   disabled?: boolean
   hasCount?: boolean
+  onClick?: () => void
 }
 
 const fragments = {
@@ -49,6 +50,7 @@ export const Tag = ({
   active,
   disabled,
   hasCount = true,
+  onClick,
 }: TagProps) => {
   const tagClasses = classNames({
     tag: true,
@@ -131,7 +133,7 @@ export const Tag = ({
 
   return (
     <Link {...path}>
-      <a className={tagClasses}>
+      <a className={tagClasses} onClick={onClick}>
         <Inner />
         <style jsx>{styles}</style>
       </a>
