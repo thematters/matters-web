@@ -89,6 +89,7 @@ const AppreciatorsDialogContent = ({
     ArticleAppreciators_article_appreciationsReceived_edges
   >) => {
     const { node, cursor } = datum
+
     return (
       <div className="appreciator-item" key={cursor}>
         {node.sender && (

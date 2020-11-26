@@ -160,7 +160,7 @@ const MigrationDialogUpload = ({ nextStep }: MigrationDialogUploadProps) => {
                 name="file"
                 aira-label="上傳檔案"
                 accept={acceptTypes}
-                multiple={true}
+                multiple
                 onChange={handleChange}
               />
             </VisuallyHidden>
