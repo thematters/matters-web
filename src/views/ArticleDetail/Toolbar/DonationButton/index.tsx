@@ -38,8 +38,6 @@ const fragments = {
 const DonationButton = ({ article }: DonationButtonProps) => {
   const viewer = useContext(ViewerContext)
 
-  const total = article.transactionsReceivedBy.totalCount || '0'
-
   const forbid = () => {
     window.dispatchEvent(
       new CustomEvent(ADD_TOAST, {
@@ -97,7 +95,7 @@ const DonationButton = ({ article }: DonationButtonProps) => {
               spacing="xtight"
               size="sm"
             >
-              {total}
+              {article.transactionsReceivedBy.totalCount || undefined}
             </TextIcon>
           </Button>
         )}

@@ -21,8 +21,10 @@
 
   & :global(.icon-superlike) {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: -0.25rem;
+    left: -0.25rem;
+    width: 1.75rem;
+    height: 1.75rem;
     opacity: 0;
     transition: transform 0.2s ease-in-out;
     transform: scale(0);

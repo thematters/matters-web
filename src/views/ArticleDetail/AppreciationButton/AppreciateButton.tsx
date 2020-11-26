@@ -69,7 +69,7 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
             </span>
           }
         >
-          {numAbbr(total)}
+          {total > 0 ? numAbbr(total) : undefined}
         </TextIcon>
       </Button>
 

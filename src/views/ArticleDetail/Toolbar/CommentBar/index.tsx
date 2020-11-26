@@ -91,7 +91,7 @@ const Content = ({
         spacing="xtight"
         size="sm"
       >
-        {numAbbr(article.responseCount || 0)}
+        {article.responseCount > 0 ? numAbbr(article.responseCount) : undefined}
       </TextIcon>
     </Button>
   )
