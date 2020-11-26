@@ -27,7 +27,7 @@ const Follow = ({ tag }: Props) => {
         : undefined,
     update: (cache) => {
       updateViewerFollowingTagCount({ cache, type: 'increment' })
-    }
+    },
   })
 
   return (

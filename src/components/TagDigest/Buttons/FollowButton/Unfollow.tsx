@@ -29,7 +29,7 @@ const Unfollow = ({ tag }: UnfollowTagProps) => {
         : undefined,
     update: (cache) => {
       updateViewerFollowingTagCount({ cache, type: 'decrement' })
-    }
+    },
   })
 
   return (
