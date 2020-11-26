@@ -1,38 +1,34 @@
 .toolbar {
   @mixin shadow-border-top-grey;
+  @mixin flex-center-space-between;
 
   position: sticky;
   bottom: 0;
   z-index: var(--z-index-over-global-header);
-  display: flex;
-  align-items: center;
+  height: var(--global-nav-height);
   padding: var(--spacing-base);
   padding-bottom: calc(constant(safe-area-inset-bottom) + var(--spacing-base));
   padding-bottom: calc(env(safe-area-inset-bottom) + var(--spacing-base));
-  margin: 0;
-  line-height: 1;
   background: var(--color-white);
-}
-
-.appreciate-button {
-  flex-shrink: 0;
-
-  @mixin flex-center-start;
-}
-
-.comment-bar {
-  flex-grow: 1;
-  flex-shrink: 1;
-  margin-left: var(--spacing-base);
-}
-
-.buttons {
-  flex-shrink: 0;
 
   & :global(> *) {
+    display: inline-flex;
+    flex-shrink: 0;
+  }
+
+  & :global(> * + *) {
     margin-left: var(--spacing-loose);
 
     @media (--xs-down) {
+      margin-left: var(--spacing-base);
+    }
+  }
+
+  @media (--sm-up) {
+    & .comment-bar {
+      display: block;
+      flex-grow: 1;
+      flex-shrink: 1;
       margin-left: var(--spacing-base);
     }
   }

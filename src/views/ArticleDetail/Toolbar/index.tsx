@@ -13,6 +13,7 @@ import DropdownActions, {
 import AppreciationButton from '../AppreciationButton'
 import Appreciators from './Appreciators'
 import CommentBar from './CommentBar'
+import DonationButton from './DonationButton'
 import styles from './styles.css'
 
 import { ToolbarArticlePrivate } from './__generated__/ToolbarArticlePrivate'
@@ -30,10 +31,12 @@ const fragments = {
         id
         ...AppreciatorsArticle
         ...DropdownActionsArticle
+        ...DonationButtonArticle
         ...AppreciationButtonArticlePublic
         ...CommentBarArticlePublic
       }
       ${Appreciators.fragments.article}
+      ${DonationButton.fragments.article}
       ${DropdownActions.fragments.article}
       ${AppreciationButton.fragments.article.public}
       ${CommentBar.fragments.article.public}
@@ -58,29 +61,23 @@ const Toolbar = ({ article, privateFetched }: ToolbarProps) => {
   return (
     <section className="toolbar">
       <ReCaptchaProvider action="appreciateArticle">
-        <section className="appreciate-button">
-          <AppreciationButton
-            article={article}
-            privateFetched={privateFetched}
-          />
-          {isSmallUp && <Appreciators article={article} />}
-        </section>
+        <AppreciationButton article={article} privateFetched={privateFetched} />
       </ReCaptchaProvider>
+
+      <DonationButton article={article} />
 
       <section className="comment-bar">
         <CommentBar article={article} />
       </section>
 
-      <section className="buttons">
-        <BookmarkButton article={article} size="md-s" inCard={false} />
-        <ShareButton iconSize="md-s" inCard={false} />
-        <DropdownActions
-          article={article}
-          color="black"
-          size="md-s"
-          inCard={false}
-        />
-      </section>
+      <BookmarkButton article={article} size="md-s" inCard={false} />
+      {isSmallUp && <ShareButton iconSize="md-s" inCard={false} />}
+      <DropdownActions
+        article={article}
+        color="black"
+        size="md-s"
+        inCard={false}
+      />
 
       <style jsx>{styles}</style>
     </section>

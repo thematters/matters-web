@@ -1,12 +1,7 @@
 import classNames from 'classnames'
 import { useRef } from 'react'
 
-import {
-  IconAppreciationMAX,
-  IconLike,
-  IconSuperLike,
-  IconSuperLikeInfinite,
-} from '~/components'
+import { Button, IconLike, IconSuperLike, TextIcon } from '~/components'
 
 import { numAbbr } from '~/common/utils'
 
@@ -39,57 +34,50 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
   })
 
   return (
-    <button
-      className={buttonClasses}
-      type="button"
-      disabled={disabled}
-      onClick={() => {
-        if (iconRef.current) {
-          clap.clap(iconRef.current)
-        }
+    <span className={buttonClasses}>
+      <Button
+        spacing={['xtight', 'xtight']}
+        bgActiveColor="grey-lighter"
+        aria-label="讚賞作品"
+        disabled={disabled}
+        onClick={() => {
+          if (iconRef.current) {
+            clap.clap(iconRef.current)
+          }
 
-        if (onClick) {
-          onClick()
-        }
-      }}
-      aria-label="讚賞作品"
-    >
-      <span
-        className="icon clap"
-        ref={iconRef}
-        onTransitionEnd={(e) => {
-          if (e.propertyName === 'transform' && iconRef.current) {
-            clap.handZoomOut(iconRef.current)
+          if (onClick) {
+            onClick()
           }
         }}
       >
-        <IconLike className="icon-like" size="md" color="green" />
-        <IconSuperLike className="icon-superlike" size="md" />
-      </span>
-
-      <span className="total">{numAbbr(total)}</span>
-
-      {!isSuperLike && count && count !== 'MAX' && (
-        <span className="count">{count}</span>
-      )}
-
-      {isSuperLike && count === 'MAX' && (
-        <span className="count">
-          <IconSuperLikeInfinite color="gold" />
-        </span>
-      )}
-
-      {!isSuperLike && count === 'MAX' && (
-        <span className="count">
-          <IconAppreciationMAX color="white" />
-        </span>
-      )}
+        <TextIcon
+          weight="md"
+          spacing="xtight"
+          size="sm"
+          icon={
+            <span
+              className="icon clap"
+              ref={iconRef}
+              onTransitionEnd={(e) => {
+                if (e.propertyName === 'transform' && iconRef.current) {
+                  clap.handZoomOut(iconRef.current)
+                }
+              }}
+            >
+              <IconLike className="icon-like" size="md-s" />
+              <IconSuperLike className="icon-superlike" size="md-s" />
+            </span>
+          }
+        >
+          {numAbbr(total)}
+        </TextIcon>
+      </Button>
 
       <style jsx>{styles}</style>
       <style jsx global>
         {clapStyles}
       </style>
-    </button>
+    </span>
   )
 }
 
