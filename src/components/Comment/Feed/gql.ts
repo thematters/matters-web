@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import { UserDigest } from '~/components'
 
 import Content from '../Content'
+import DonatorLabel from '../DonatorLabel'
 import DropdownActions from '../DropdownActions'
 import FooterActions from '../FooterActions'
 import PinnedLabel from '../PinnedLabel'
@@ -24,6 +25,7 @@ export const fragments = {
             ...ReplyToUser
           }
         }
+        ...DonatorLabelComment
         ...PinnedLabelComment
         ...FooterActionsCommentPublic
         ...DropdownActionsCommentPublic
@@ -31,6 +33,7 @@ export const fragments = {
       }
       ${UserDigest.Mini.fragments.user}
       ${ReplyTo.fragments.user}
+      ${DonatorLabel.fragments.comment}
       ${PinnedLabel.fragments.comment}
       ${FooterActions.fragments.comment.public}
       ${DropdownActions.fragments.comment.public}
