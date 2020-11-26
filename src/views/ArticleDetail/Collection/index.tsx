@@ -96,6 +96,14 @@ const Collection: React.FC<{
                   location: i,
                 })
               }
+              onClickAuthor={() => {
+                analytics.trackEvent('click_feed', {
+                  type: 'collection',
+                  contentType: 'user',
+                  styleType: 'subtitle',
+                  location: i,
+                })
+              }}
             />
           </List.Item>
         ))}

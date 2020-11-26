@@ -113,7 +113,7 @@ const authLink = setContext((operation, { headers, ...restCtx }) => {
   }
 
   // Get token from local storage if it's a static-build client
-  if (typeof window !== 'undefined') {
+  if (process.env.NEXT_PUBLIC_BUILD_TYPE === 'static') {
     const token = storage.get(STORAGE_KEY_AUTH_TOKEN)
     if (token && isStaticBuild) {
       headers['x-access-token'] = token
