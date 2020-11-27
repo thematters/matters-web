@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Button, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import TOGGLE_FOLLOW_TAG from '~/components/GQL/mutations/toggleFollowTag'
+import updateViewerFollowingTagCount from '~/components/GQL/updates/viewerFollowingTagCount'
 
 import { ToggleFollowTag } from '~/components/GQL/mutations/__generated__/ToggleFollowTag'
 import { TagDigestFollowButtonPrivate } from './__generated__/TagDigestFollowButtonPrivate'
@@ -26,6 +27,9 @@ const Unfollow = ({ tag }: UnfollowTagProps) => {
             },
           }
         : undefined,
+    update: (cache) => {
+      updateViewerFollowingTagCount({ cache, type: 'decrement' })
+    },
   })
 
   return (

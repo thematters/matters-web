@@ -3,6 +3,7 @@ import _isNil from 'lodash/isNil'
 import { Button, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import TOGGLE_FOLLOW_TAG from '~/components/GQL/mutations/toggleFollowTag'
+import updateViewerFollowingTagCount from '~/components/GQL/updates/viewerFollowingTagCount'
 
 import { ToggleFollowTag } from '~/components/GQL/mutations/__generated__/ToggleFollowTag'
 import { TagDigestFollowButtonPrivate } from './__generated__/TagDigestFollowButtonPrivate'
@@ -24,6 +25,9 @@ const Follow = ({ tag }: Props) => {
             },
           }
         : undefined,
+    update: (cache) => {
+      updateViewerFollowingTagCount({ cache, type: 'increment' })
+    },
   })
 
   return (
