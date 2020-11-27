@@ -4,6 +4,7 @@ import React from 'react'
 import { AvatarSize, UserDigest } from '~/components'
 
 import Content from '../Content'
+import DonatorLabel from '../DonatorLabel'
 import DropdownActions from '../DropdownActions'
 import FooterActions, { FooterActionsControls } from '../FooterActions'
 import PinnedLabel from '../PinnedLabel'
@@ -58,6 +59,7 @@ export const BaseCommentFeed = ({
         />
 
         <section className="right">
+          <DonatorLabel comment={comment} />
           <PinnedLabel comment={comment} />
           <DropdownActions comment={comment} inCard={actionControls.inCard} />
         </section>
