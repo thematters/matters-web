@@ -10,10 +10,7 @@
           "useESModules": false
         },
         "styled-jsx": {
-          "plugins": ["styled-jsx-plugin-postcss",  {
-            "path":
-              "./postcss.config.json"
-          }]
+          "plugins": ["styled-jsx-plugin-postcss"]
         }
       }
     ]
