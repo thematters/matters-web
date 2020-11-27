@@ -123,7 +123,13 @@ const TagsArticles = ({ tagIds }: { tagIds: string[] }) => {
     })
   }
 
-  const TagComponent = ({ node }: { node: FollowingTagsArticlesFeedNode }) => {
+  const TagComponent = ({
+    node,
+    index,
+  }: {
+    node: FollowingTagsArticlesFeedNode
+    index: number
+  }) => {
     if (!node || !node.tags || node.tags.length <= 0) {
       return null
     }
@@ -133,16 +139,32 @@ const TagsArticles = ({ tagIds }: { tagIds: string[] }) => {
       tags.map(({ id }) => id),
       tagIds
     )
+
     if (!matches || matches.length <= 0) {
       return null
     }
+
     const tag = _find(tags, { id: matches[0] })
+
     if (!tag) {
       return null
     }
+
     return (
       <section className="tag">
-        <Tag tag={tag} type="inline" active={true} />
+        <Tag
+          tag={tag}
+          type="inline"
+          active
+          onClick={() => {
+            analytics.trackEvent('click_feed', {
+              type: 'follow-tag',
+              contentType: 'tag',
+              styleType: 'title',
+              location: index,
+            })
+          }}
+        />
 
         <TextIcon size="sm" color="grey-dark">
           <Translate zh_hant="新增了" zh_hans="新增了" />
@@ -165,13 +187,13 @@ const TagsArticles = ({ tagIds }: { tagIds: string[] }) => {
               article={node}
               onClick={() =>
                 analytics.trackEvent('click_feed', {
-                  type: 'follow-article',
+                  type: 'follow-tag',
                   contentType: 'article',
                   styleType: 'no_cover',
                   location: i,
                 })
               }
-              extraHeader={<TagComponent node={node} />}
+              extraHeader={<TagComponent node={node} index={i} />}
             />
           </List.Item>
         ))}

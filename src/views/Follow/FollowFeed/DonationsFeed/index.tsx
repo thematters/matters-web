@@ -148,6 +148,14 @@ const DonationsArticles = ({ isCompactMode }: { isCompactMode: boolean }) => {
                   location: i,
                 })
               }
+              onClickAuthor={() => {
+                analytics.trackEvent('click_feed', {
+                  type: 'followee-donated-article',
+                  contentType: 'user',
+                  styleType: 'subtitle',
+                  location: i,
+                })
+              }}
               actor={actor({ node: node.followee })}
             />
           </List.Item>

@@ -9,7 +9,7 @@ export interface LinkWrapperProps {
   textActiveColor?: 'green'
 
   disabled?: boolean
-  onClick?: () => any
+  onClick?: () => void
 }
 
 export const LinkWrapper: React.FC<LinkWrapperProps> = ({
@@ -34,9 +34,10 @@ export const LinkWrapper: React.FC<LinkWrapperProps> = ({
     <Link href={href}>
       <a
         className={linkClasses}
-        onClick={() => {
+        onClick={(e) => {
           if (onClick) {
             onClick()
+            e.stopPropagation()
           }
         }}
       >

@@ -1,6 +1,6 @@
 import { Tabs, Translate } from '~/components'
 
-export type SortByType = 'hottest' | 'newest' | 'icymi' | 'topics'
+export type SortByType = 'hottest' | 'newest' | 'icymi'
 
 interface SortByProps {
   sortBy: SortByType
@@ -11,7 +11,6 @@ const SortBy: React.FC<SortByProps> = ({ sortBy, setSortBy }) => {
   const isHottest = sortBy === 'hottest'
   const isNewset = sortBy === 'newest'
   const isICYMI = sortBy === 'icymi'
-  const isTopics = sortBy === 'topics'
 
   return (
     <Tabs sticky>
@@ -21,10 +20,6 @@ const SortBy: React.FC<SortByProps> = ({ sortBy, setSortBy }) => {
 
       <Tabs.Tab onClick={() => setSortBy('newest')} selected={isNewset}>
         <Translate zh_hant="最新" zh_hans="最新" />
-      </Tabs.Tab>
-
-      <Tabs.Tab onClick={() => setSortBy('topics')} selected={isTopics}>
-        <Translate zh_hant="熱議" zh_hans="热议" />
       </Tabs.Tab>
 
       <Tabs.Tab onClick={() => setSortBy('icymi')} selected={isICYMI}>

@@ -22,7 +22,9 @@ import { FollowComment as FollowCommentType } from './__generated__/FollowCommen
 
 interface FollowCommentProps {
   comment: FollowCommentType
-  onClick?: () => any
+  onClickComment?: () => any
+  onClickArticle?: () => void
+  onClickAuthor?: () => void
 }
 
 const fragments = {
@@ -54,7 +56,12 @@ const fragments = {
   `,
 }
 
-const FollowComment: React.FC<FollowCommentProps> = ({ comment, onClick }) => {
+const FollowComment: React.FC<FollowCommentProps> = ({
+  comment,
+  onClickComment,
+  onClickArticle,
+  onClickAuthor,
+}) => {
   const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
     variables: { id: 'local' },
   })
@@ -86,7 +93,7 @@ const FollowComment: React.FC<FollowCommentProps> = ({ comment, onClick }) => {
   }
 
   return (
-    <Card {...articlePath} spacing={['base', 'base']} onClick={onClick}>
+    <Card {...articlePath} spacing={['base', 'base']} onClick={onClickArticle}>
       <header>
         <section className="left">
           <UserDigest.Mini
@@ -96,6 +103,7 @@ const FollowComment: React.FC<FollowCommentProps> = ({ comment, onClick }) => {
             textWeight="md"
             hasAvatar
             hasDisplayName
+            onClick={onClickAuthor}
             {...userDigestProps}
           />
           <TextIcon size="sm" color="grey-dark">
@@ -107,7 +115,7 @@ const FollowComment: React.FC<FollowCommentProps> = ({ comment, onClick }) => {
       </header>
 
       <section className="article-title">
-        <ArticleDigestTitle article={article} />
+        <ArticleDigestTitle article={article} onClick={onClickArticle} />
       </section>
 
       <section className="comment-content">
@@ -116,7 +124,7 @@ const FollowComment: React.FC<FollowCommentProps> = ({ comment, onClick }) => {
           bgColor="grey-lighter"
           spacing={['xtight', 'base']}
           borderRadius="xtight"
-          onClick={onClick}
+          onClick={onClickComment}
         >
           <Expandable limit={5} buffer={2}>
             <Comment.Content comment={comment} size="md-s" />

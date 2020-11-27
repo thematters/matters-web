@@ -22,6 +22,7 @@ import { ArticleDigestFeedArticlePublic } from './__generated__/ArticleDigestFee
 
 export type ArticleDigestFeedControls = {
   onClick?: () => any
+  onClickAuthor?: () => void
 } & FooterActionsControls
 
 type ArticleDigestFeedProps = {
@@ -80,6 +81,7 @@ const BaseArticleDigestFeed = ({
   inUserArticles,
 
   onClick,
+  onClickAuthor,
 
   actor,
   extraHeader,
@@ -131,6 +133,7 @@ const BaseArticleDigestFeed = ({
                 user={author}
                 hasAvatar
                 hasDisplayName
+                onClick={onClickAuthor}
                 {...userDigestProps}
               />
             )}
