@@ -84,20 +84,23 @@ const Root = ({
   const [privateFetched, setPrivateFetched] = useState(false)
   const fetchPrivateViewer = async () => {
     try {
-      const result = await client.query<RootQueryPrivate>({
+      const privateWatcher = client.watchQuery<RootQueryPrivate>({
         query: ROOT_QUERY_PRIVATE,
         fetchPolicy: 'network-only',
       })
-
-      // set private viewer
-      if (result?.data?.viewer) {
-        setPrivateViewer(result?.data?.viewer)
-      }
+      privateWatcher.subscribe({
+        next: (result) => {
+          // set private viewer
+          if (result?.data?.viewer) {
+            setPrivateViewer(result?.data?.viewer)
+          }
+        },
+        error: (e) => console.error,
+      })
     } catch (e) {
       console.error(e)
     }
 
-    // mark private fetched as true
     setPrivateFetched(true)
   }
 
