@@ -1,6 +1,6 @@
 import { NetworkStatus } from 'apollo-client'
 import { useRouter } from 'next/router'
-import { useContext, useEffect } from 'react'
+import { Fragment, useContext, useEffect } from 'react'
 
 import {
   ArticleDigestFeed,
@@ -14,6 +14,7 @@ import {
 
 import { analytics, getQuery, mergeConnections } from '~/common/utils'
 
+import GoogleSearchButton from '../GoogleSearchButton'
 import { SEARCH_ARTICLES_PRIVATE, SEARCH_ARTICLES_PUBLIC } from './gql'
 
 import { SearchArticlesPublic } from './__generated__/SearchArticlesPublic'
@@ -119,27 +120,36 @@ const SearchArticles = () => {
         {edges.map(
           ({ node, cursor }, i) =>
             node.__typename === 'Article' && (
-              <List.Item key={cursor}>
-                <ArticleDigestFeed
-                  article={node}
-                  onClick={() =>
-                    analytics.trackEvent('click_feed', {
-                      type: 'search_article',
-                      contentType: 'article',
-                      styleType: 'title',
-                      location: i,
-                    })
-                  }
-                  onClickAuthor={() => {
-                    analytics.trackEvent('click_feed', {
-                      type: 'search_tag',
-                      contentType: 'user',
-                      styleType: 'subtitle',
-                      location: i,
-                    })
-                  }}
-                />
-              </List.Item>
+              <Fragment key={cursor}>
+                <List.Item>
+                  <ArticleDigestFeed
+                    article={node}
+                    onClick={() =>
+                      analytics.trackEvent('click_feed', {
+                        type: 'search_article',
+                        contentType: 'article',
+                        styleType: 'title',
+                        location: i,
+                      })
+                    }
+                    onClickAuthor={() => {
+                      analytics.trackEvent('click_feed', {
+                        type: 'search_tag',
+                        contentType: 'user',
+                        styleType: 'subtitle',
+                        location: i,
+                      })
+                    }}
+                  />
+                </List.Item>
+
+                {((edges.length > 2 && i === 2) ||
+                  (edges.length <= 2 && i === edges.length - 1)) && (
+                  <List.Item>
+                    <GoogleSearchButton />
+                  </List.Item>
+                )}
+              </Fragment>
             )
         )}
       </List>
