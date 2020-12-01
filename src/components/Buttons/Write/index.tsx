@@ -101,7 +101,7 @@ export const WriteButton = ({ allowed, isLarge, forbidden }: Props) => {
 
           if (slug && id) {
             const path = toPath({ page: 'draftDetail', slug, id })
-            routerPush(path.href, path.as)
+            routerPush(path.href)
           }
         } catch (error) {
           const [messages, codes] = parseFormSubmitErrors(error, lang)

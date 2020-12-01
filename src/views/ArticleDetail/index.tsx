@@ -175,7 +175,7 @@ const ArticleDetail = () => {
     }
 
     const path = toPath({ page: 'articleDetail', article })
-    Router.replace(path.href, path.as)
+    Router.replace(path.href)
   }
 
   const onEditSaved = async () => {

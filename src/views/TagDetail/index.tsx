@@ -88,7 +88,7 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
 
             <ShareButton
               title={tag.content}
-              path={encodeURI(path.as)}
+              path={encodeURI(path.href)}
               bgColor={isSmallUp ? 'green-lighter' : 'half-black'}
               iconColor={isSmallUp ? 'green' : 'white'}
               inCard={false}

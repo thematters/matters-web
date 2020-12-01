@@ -49,7 +49,7 @@ const Tasks = () => {
 
       if (slug && id) {
         const path = toPath({ page: 'draftDetail', slug, id })
-        routerPush(path.href, path.as)
+        routerPush(path.href)
       }
     } catch (error) {
       const [messages, codes] = parseFormSubmitErrors(error, lang)
@@ -76,7 +76,7 @@ const Tasks = () => {
   const sharePath = toPath({
     page: 'userProfile',
     userName: viewer.userName || '',
-  }).as
+  }).href
 
   return (
     <>

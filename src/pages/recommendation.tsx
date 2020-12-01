@@ -43,9 +43,14 @@ const query = gql`
 `
 
 const Feed = () => {
-  const { data, error, loading, fetchMore, networkStatus, refetch } = useQuery<
-    RecommendationArticles
-  >(query, {
+  const {
+    data,
+    error,
+    loading,
+    fetchMore,
+    networkStatus,
+    refetch,
+  } = useQuery<RecommendationArticles>(query, {
     notifyOnNetworkStatusChange: true,
   })
 

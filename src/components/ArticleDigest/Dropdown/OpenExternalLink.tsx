@@ -15,7 +15,7 @@ const OpenExternalLink = ({
   })
 
   return (
-    <a href={path.as} target="_blank">
+    <a href={path.href} target="_blank">
       <IconExternal color="green" />
     </a>
   )

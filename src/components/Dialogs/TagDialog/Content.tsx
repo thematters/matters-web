@@ -197,7 +197,7 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
         if (!id) {
           // if created, then redirect to tag detail page
           const path = toPath({ page: 'tagDetail', id: returnedTagId || '' })
-          routerPush(path.href, path.as)
+          routerPush(path.href)
         } else {
           closeDialog()
         }

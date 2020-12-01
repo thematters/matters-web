@@ -72,9 +72,10 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
   // Data Fetching
   const [searchKey, setSearchKey] = useState('')
   const [debouncedSearchKey] = useDebounce(searchKey, INPUT_DEBOUNCE)
-  const [lazySearch, { data, loading, fetchMore }] = usePublicLazyQuery<
-    SelectSearch
-  >(SELECT_SEARCH)
+  const [
+    lazySearch,
+    { data, loading, fetchMore },
+  ] = usePublicLazyQuery<SelectSearch>(SELECT_SEARCH)
 
   // pagination
   const connectionPath = 'search'

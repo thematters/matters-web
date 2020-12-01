@@ -53,9 +53,13 @@ const FOLLOW_ARTICLES = gql`
 `
 
 const ArticlesFeed = () => {
-  const { data, loading, error, fetchMore, refetch } = useQuery<
-    FollowArticlesFeed
-  >(FOLLOW_ARTICLES)
+  const {
+    data,
+    loading,
+    error,
+    fetchMore,
+    refetch,
+  } = useQuery<FollowArticlesFeed>(FOLLOW_ARTICLES)
 
   if (loading) {
     return <Spinner />

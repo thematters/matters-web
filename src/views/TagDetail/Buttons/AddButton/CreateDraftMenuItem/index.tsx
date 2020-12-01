@@ -70,7 +70,7 @@ const CreateDraftButton: React.FC<CreateDraftButtonProps> = ({ tag }) => {
 
       if (slug && id) {
         const path = toPath({ page: 'draftDetail', slug, id })
-        routerPush(path.href, path.as)
+        routerPush(path.href)
       }
     } catch (error) {
       const [messages, codes] = parseFormSubmitErrors(error, lang)

@@ -26,13 +26,11 @@ const EditArticleButton = ({
 }: {
   article: EditArticleButtonArticle
 }) => {
-  const query = { [URL_QS.MODE_EDIT.key]: URL_QS.MODE_EDIT.value }
-  const { href, as } = toPath({ page: 'articleDetail', article }, query)
+  const { href } = toPath({ page: 'articleDetail', article })
 
   return (
     <Menu.Item
-      href={href}
-      as={`${as}?${URL_QS.MODE_EDIT.key}=${URL_QS.MODE_EDIT.value}`}
+      href={`${href}?${URL_QS.MODE_EDIT.key}=${URL_QS.MODE_EDIT.value}`}
     >
       <TextIcon icon={<IconEdit size="md" />} size="md" spacing="base">
         <Translate id="editArticle" />
