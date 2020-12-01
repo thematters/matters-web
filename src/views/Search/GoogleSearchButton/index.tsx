@@ -1,5 +1,7 @@
 import { Dialog, GoogleSearchDialog, TextIcon, Translate } from '~/components'
 
+import { analytics } from '~/common/utils'
+
 import styles from './styles.css'
 
 const GoogleSearchButton = () => {
@@ -18,12 +20,15 @@ const GoogleSearchButton = () => {
 
           <Dialog.Footer.Button
             type="button"
-            onClick={openGoogleSearchDialog}
+            onClick={() => {
+              analytics.trackEvent('click_button', { type: 'google_search' })
+              openGoogleSearchDialog()
+            }}
             implicit
           >
             <Translate
-              zh_hant="改使用 Google 搜尋文章內容關鍵字"
-              zh_hans="改使用 Google 搜索文章内容关键字"
+              zh_hant="改使用 Google 搜尋關鍵字"
+              zh_hans="改使用 Google 搜索关键字"
             />
           </Dialog.Footer.Button>
 

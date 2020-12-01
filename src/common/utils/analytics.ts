@@ -49,6 +49,7 @@ interface ClickButtonProp {
     | 'translation' // translation button
     | 'write'
     | 'write_collection'
+    | 'google_search'
 }
 
 /**
