@@ -153,7 +153,7 @@
     "postcss-preset-env": "^6.7.0",
     "prettier": "^2.2.0",
     "react-is": "^17.0.1",
-    "styled-jsx-plugin-postcss": "^3.0.2",
+    "styled-jsx-plugin-postcss": "^4.0.0",
     "stylelint": "^13.8.0",
     "stylelint-config-prettier": "^8.0.2",
     "stylelint-config-recess-order": "^2.3.0",
