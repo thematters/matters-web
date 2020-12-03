@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router'
+import { Fragment } from 'react'
 
 import {
   Card,
@@ -12,6 +13,7 @@ import {
 
 import { analytics, getQuery, mergeConnections, toPath } from '~/common/utils'
 
+import GoogleSearchButton from '../GoogleSearchButton'
 import { SEARCH_TAGS_PUBLIC } from './gql'
 
 import { SearchTagsPublic } from './__generated__/SearchTagsPublic'
@@ -81,25 +83,34 @@ const SearchTag = () => {
         {edges.map(
           ({ node, cursor }, i) =>
             node.__typename === 'Tag' && (
-              <List.Item key={cursor}>
-                <Card
-                  spacing={['base', 'base']}
-                  {...toPath({
-                    page: 'tagDetail',
-                    id: node.id,
-                  })}
-                  onClick={() =>
-                    analytics.trackEvent('click_feed', {
-                      type: 'search_tag',
-                      contentType: 'tag',
-                      styleType: 'title',
-                      location: i,
-                    })
-                  }
-                >
-                  <Tag tag={node} type="list" />
-                </Card>
-              </List.Item>
+              <Fragment>
+                <List.Item key={cursor}>
+                  <Card
+                    spacing={['base', 'base']}
+                    {...toPath({
+                      page: 'tagDetail',
+                      id: node.id,
+                    })}
+                    onClick={() =>
+                      analytics.trackEvent('click_feed', {
+                        type: 'search_tag',
+                        contentType: 'tag',
+                        styleType: 'title',
+                        location: i,
+                      })
+                    }
+                  >
+                    <Tag tag={node} type="list" />
+                  </Card>
+                </List.Item>
+
+                {((edges.length > 5 && i === 5) ||
+                  (edges.length <= 5 && i === edges.length - 1)) && (
+                  <List.Item>
+                    <GoogleSearchButton />
+                  </List.Item>
+                )}
+              </Fragment>
             )
         )}
       </List>
