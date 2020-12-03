@@ -21,7 +21,15 @@ interface GoogleSearchDialogProps {
 
 const GCSE_SCRIPT_ID = '__GCSE'
 
-const renderCSE = () => {
+const renderCSE = (defer?: boolean) => {
+  // Since <Dialog> uses useEffect to render dialog content,
+  // we put renderCSE to next cycle.
+  if (defer) {
+    setTimeout(() => {
+      renderCSE()
+    })
+  }
+
   const cse = _get(window, 'google.search.cse')
 
   if (!cse) {
@@ -53,17 +61,13 @@ const BaseGoogleSearchDialog = ({ children }: GoogleSearchDialogProps) => {
   const [showDialog, setShowDialog] = useState(true)
   const open = () => {
     setShowDialog(true)
-
-    // Since <Dialog> uses useEffect to render dialog content,
-    // we put renderCSE to next cycle.
-    setTimeout(() => {
-      renderCSE()
-    })
+    renderCSE(true)
   }
   const close = () => setShowDialog(false)
 
   useEffect(() => {
     if (dom.$(`#${GCSE_SCRIPT_ID}`)) {
+      renderCSE(true)
       return
     }
 
