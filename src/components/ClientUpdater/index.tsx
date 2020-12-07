@@ -7,7 +7,6 @@ import { useContext, useEffect, useRef } from 'react'
 import { useEventListener, useWindowResize, ViewerContext } from '~/components'
 
 import {
-  ACCOUNT_LOGOUT,
   ONBOARDING_TASKS_HIDE,
   STORAGE_KEY_ONBOARDING_TASKS,
   STORAGE_KEY_VIEW_MODE,
@@ -85,15 +84,23 @@ export const ClientUpdater = () => {
    * Onboarding Tasks
    */
   useEffect(() => {
+    if (!viewer.id) {
+      return
+    }
+
     let storedOnboardingTasks = storage.get(STORAGE_KEY_ONBOARDING_TASKS)
+    const isSameViewer = storedOnboardingTasks?.viewerId === viewer.id
 
     // Store init tasks state into local storage
-    if (!storedOnboardingTasks) {
+    if (!storedOnboardingTasks || !isSameViewer) {
       storedOnboardingTasks = {
-        // mark `enabled` as `true` if viewer has finished all tasks.
-        enabled: viewer.onboardingTasks.finished,
+        // mark `enabled` as `false` if viewer has finished all tasks.
+        enabled: !viewer.onboardingTasks.finished,
       }
-      storage.set(STORAGE_KEY_ONBOARDING_TASKS, storedOnboardingTasks)
+      storage.set(STORAGE_KEY_ONBOARDING_TASKS, {
+        ...storedOnboardingTasks,
+        viewerId: viewer.id,
+      })
     }
 
     client.writeData({
@@ -106,11 +113,6 @@ export const ClientUpdater = () => {
       },
     })
   }, [viewer.id])
-
-  // clear tasks state from local storage
-  useEventListener(ACCOUNT_LOGOUT, () => {
-    storage.remove(STORAGE_KEY_ONBOARDING_TASKS)
-  })
 
   // hide tasks
   useEventListener(ONBOARDING_TASKS_HIDE, () => {
