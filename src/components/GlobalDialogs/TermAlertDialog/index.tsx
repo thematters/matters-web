@@ -13,11 +13,7 @@ import {
 import { useMutation } from '~/components/GQL'
 import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
 
-import {
-  ACCOUNT_LOGOUT,
-  ADD_TOAST,
-  STORAGE_KEY_AUTH_TOKEN,
-} from '~/common/enums'
+import { ADD_TOAST, STORAGE_KEY_AUTH_TOKEN } from '~/common/enums'
 import { parseFormSubmitErrors, storage, unsubscribePush } from '~/common/utils'
 
 import styles from './styles.css'
@@ -84,7 +80,6 @@ const TermContent: React.FC<TermContentProps> = ({ closeDialog }) => {
     try {
       await logout().then(() => {
         storage.remove(STORAGE_KEY_AUTH_TOKEN)
-        window.dispatchEvent(new CustomEvent(ACCOUNT_LOGOUT, {}))
       })
 
       // await clearPersistCache()

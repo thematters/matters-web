@@ -94,14 +94,20 @@ const Root = ({
           if (result?.data?.viewer) {
             setPrivateViewer(result?.data?.viewer)
           }
+
+          // mark private fetched as true
+          setPrivateFetched(true)
         },
-        error: (e) => console.error,
+        error: (e) => {
+          // mark private fetched as true
+          setPrivateFetched(true)
+
+          console.error(e)
+        },
       })
     } catch (e) {
       console.error(e)
     }
-
-    setPrivateFetched(true)
   }
 
   useEffect(() => {

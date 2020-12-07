@@ -19,8 +19,5 @@ export const OPEN_RESET_PASSWORD_DIALOG = 'openPassword'
 export const CLOSE_ACTIVE_DIALOG = 'closeActiveDialog'
 export const OPEN_LIKE_COIN_DIALOG = 'openLikeCoinDialog'
 
-// Account
-export const ACCOUNT_LOGOUT = 'accountLogout'
-
 // Onboarding Tasks
 export const ONBOARDING_TASKS_HIDE = 'onboardingTasksHide'
