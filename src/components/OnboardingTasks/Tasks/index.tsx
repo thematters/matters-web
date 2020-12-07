@@ -4,7 +4,6 @@ import {
   Dialog,
   EmbedShare,
   LanguageContext,
-  LikeCoinDialog,
   RecommendAuthorDialog,
   RecommendTagDialog,
   Translate,
@@ -14,7 +13,12 @@ import {
 import { useMutation } from '~/components/GQL'
 import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
 
-import { ADD_TOAST, ONBOARDING_TASKS_HIDE, URL_QS } from '~/common/enums'
+import {
+  ADD_TOAST,
+  ONBOARDING_TASKS_HIDE,
+  OPEN_LIKE_COIN_DIALOG,
+  URL_QS,
+} from '~/common/enums'
 import {
   analytics,
   parseFormSubmitErrors,
@@ -81,20 +85,23 @@ const Tasks = () => {
   return (
     <>
       <ul>
-        <LikeCoinDialog>
-          {({ open }) => (
-            <TaskItem
-              title={
-                <Translate
-                  zh_hant="設置 Liker ID 化讚為賞"
-                  zh_hans="设置 Liker ID 化赞为赏"
-                />
-              }
-              done={viewer.onboardingTasks.tasks.likerId}
-              onClick={viewer.onboardingTasks.tasks.likerId ? undefined : open}
+        <TaskItem
+          title={
+            <Translate
+              zh_hant="設置 Liker ID 化讚為賞"
+              zh_hans="设置 Liker ID 化赞为赏"
             />
-          )}
-        </LikeCoinDialog>
+          }
+          done={viewer.onboardingTasks.tasks.likerId}
+          onClick={
+            viewer.onboardingTasks.tasks.likerId
+              ? undefined
+              : () =>
+                  window.dispatchEvent(
+                    new CustomEvent(OPEN_LIKE_COIN_DIALOG, {})
+                  )
+          }
+        />
 
         <RecommendAuthorDialog>
           {({ open }) => (
