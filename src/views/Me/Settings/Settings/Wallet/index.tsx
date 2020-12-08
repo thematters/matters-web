@@ -6,12 +6,12 @@ import {
   Form,
   getErrorCodes,
   IconSpinner,
-  LikeCoinDialog,
   Translate,
   usePullToRefresh,
   ViewerContext,
 } from '~/components'
 
+import { OPEN_LIKE_COIN_DIALOG } from '~/common/enums'
 import { numRound } from '~/common/utils'
 
 import { ViewerLikeInfo } from './__generated__/ViewerLikeInfo'
@@ -50,15 +50,16 @@ const WalletSettings = () => {
 
   return (
     <Form.List groupName={<Translate id="settingsWallet" />}>
-      <LikeCoinDialog>
-        {({ open }) => (
-          <Form.List.Item
-            title="Liker ID"
-            onClick={!likerId ? open : undefined}
-            rightText={likerId || <Translate id="setup" />}
-          />
-        )}
-      </LikeCoinDialog>
+      <Form.List.Item
+        title="Liker ID"
+        onClick={
+          !likerId
+            ? () =>
+                window.dispatchEvent(new CustomEvent(OPEN_LIKE_COIN_DIALOG, {}))
+            : undefined
+        }
+        rightText={likerId || <Translate id="setup" />}
+      />
 
       <Form.List.Item
         title={<Translate zh_hant="我的創作價值" zh_hans="我的创作价值" />}

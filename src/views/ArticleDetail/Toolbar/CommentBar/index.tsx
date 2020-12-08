@@ -8,7 +8,6 @@ import {
   CardProps,
   CommentFormDialog,
   IconComment,
-  LikeCoinDialog,
   TextIcon,
   Translate,
   useResponsive,
@@ -18,6 +17,7 @@ import {
 import {
   ADD_TOAST,
   CLOSE_ACTIVE_DIALOG,
+  OPEN_LIKE_COIN_DIALOG,
   OPEN_LOGIN_DIALOG,
   PATHS,
   REFETCH_RESPONSES,
@@ -111,11 +111,13 @@ const CommentBar = ({ article }: CommentBarProps) => {
 
   if (viewer.shouldSetupLikerID) {
     return (
-      <LikeCoinDialog>
-        {({ open }) => (
-          <Content {...props} aria-haspopup="true" onClick={open} />
-        )}
-      </LikeCoinDialog>
+      <Content
+        {...props}
+        aria-haspopup="true"
+        onClick={() =>
+          window.dispatchEvent(new CustomEvent(OPEN_LIKE_COIN_DIALOG, {}))
+        }
+      />
     )
   }
 

@@ -3,7 +3,6 @@ import { useContext } from 'react'
 import {
   IconAddMedium,
   LanguageContext,
-  LikeCoinDialog,
   Menu,
   TextIcon,
   Translate,
@@ -12,7 +11,7 @@ import {
 import { useMutation } from '~/components/GQL'
 import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
 
-import { ADD_TOAST } from '~/common/enums'
+import { ADD_TOAST, OPEN_LIKE_COIN_DIALOG } from '~/common/enums'
 import {
   analytics,
   parseFormSubmitErrors,
@@ -92,9 +91,11 @@ const CreateDraftButton: React.FC<CreateDraftButtonProps> = ({ tag }) => {
 
   if (viewer.shouldSetupLikerID) {
     return (
-      <LikeCoinDialog>
-        {({ open }) => <BaseCreateDraftButton onClick={open} />}
-      </LikeCoinDialog>
+      <BaseCreateDraftButton
+        onClick={() =>
+          window.dispatchEvent(new CustomEvent(OPEN_LIKE_COIN_DIALOG, {}))
+        }
+      />
     )
   }
 
