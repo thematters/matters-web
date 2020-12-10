@@ -116,7 +116,10 @@ export const ClientUpdater = () => {
 
   // hide tasks
   useEventListener(ONBOARDING_TASKS_HIDE, () => {
+    const storedOnboardingTasks = storage.get(STORAGE_KEY_ONBOARDING_TASKS)
+
     storage.set(STORAGE_KEY_ONBOARDING_TASKS, {
+      ...storedOnboardingTasks,
       enabled: false,
     })
 
