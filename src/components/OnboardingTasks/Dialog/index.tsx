@@ -1,6 +1,9 @@
 import { useState } from 'react'
 
 import { Dialog, Translate } from '~/components'
+import { useEventListener } from '~/components/Hook'
+
+import { CLOSE_ONBOARDING_TASKS_DIALOG } from '~/common/enums'
 
 import Tasks from '../Tasks'
 import styles from './styles.css'
@@ -15,6 +18,8 @@ const BaseOnboardingTasksDialog: React.FC<OnboardingTasksDialogProps> = ({
   const [showDialog, setShowDialog] = useState(true)
   const open = () => setShowDialog(true)
   const close = () => setShowDialog(false)
+
+  useEventListener(CLOSE_ONBOARDING_TASKS_DIALOG, close)
 
   return (
     <>
@@ -34,18 +39,13 @@ const BaseOnboardingTasksDialog: React.FC<OnboardingTasksDialogProps> = ({
         <Dialog.Content hasGrow spacing={[0, 0]}>
           <p>
             <Translate
-              zh_hant="導航帶你發現更多寶藏作者與優質作品，"
-              zh_hans="导航带你发现更多宝藏作者与优质作品，"
+              zh_hant="導航帶你發現更多寶藏作者和優質作品。"
+              zh_hans="导航带你发现更多宝藏作者和优质作品。"
             />
             <br />
             <Translate
-              zh_hant="更有首發限定好禮，留下創作足跡，"
-              zh_hans="更有首发限定好礼，留下创作足迹，"
-            />
-            <br />
-            <Translate
-              zh_hant="即拿 LikeCoin 獎賞！🎉"
-              zh_hans="即拿 LikeCoin 奖赏！🎉"
+              zh_hant="留下創作足跡，獲得更多支持！🙌"
+              zh_hans="留下创作足迹，获得更多支持！🙌"
             />
           </p>
 

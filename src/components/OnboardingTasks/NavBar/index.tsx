@@ -3,6 +3,8 @@ import { useContext } from 'react'
 import {
   Card,
   IconRight,
+  RecommendAuthorDialog,
+  RecommendTagDialog,
   Translate,
   ViewerContext,
   withIcon,
@@ -21,12 +23,12 @@ const NavBar = () => {
   )
 
   return (
-    <OnboardingTasksDialog>
-      {({ open: openOnboardingTasksDialog }) => (
-        <section className="nav-bar">
-          <div className="l-row full">
-            <div className="l-col-three-left" />
-            <div className="l-col-three-right">
+    <section className="nav-bar">
+      <div className="l-row full">
+        <div className="l-col-three-left" />
+        <div className="l-col-three-right">
+          <OnboardingTasksDialog>
+            {({ open: openOnboardingTasksDialog }) => (
               <Card
                 bgColor="none"
                 spacing={[0, 0]}
@@ -47,12 +49,16 @@ const NavBar = () => {
                   </section>
                 </section>
               </Card>
-            </div>
-          </div>
-          <style jsx>{styles}</style>
-        </section>
-      )}
-    </OnboardingTasksDialog>
+            )}
+          </OnboardingTasksDialog>
+        </div>
+      </div>
+
+      <RecommendAuthorDialog />
+      <RecommendTagDialog />
+
+      <style jsx>{styles}</style>
+    </section>
   )
 }
 

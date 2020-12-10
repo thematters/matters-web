@@ -1,35 +1,39 @@
 import { useState } from 'react'
 
 import { Dialog, Tabs, Translate, useDialogSwitch } from '~/components'
+import { useEventListener } from '~/components/Hook'
+
+import { OPEN_RECOMMEND_TAG_DIALOG } from '~/common/enums'
 
 import Feed, { FeedType } from './Feed'
 import styles from './styles.css'
 
 interface Props {
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  children?: ({ open }: { open: () => void }) => React.ReactNode
 }
 
-const BaseDialog = ({ children }: Props) => {
+export const RecommendTagDialog = ({ children }: Props) => {
   const defaultType = 'hottest'
 
-  const { show, open, close } = useDialogSwitch(true)
+  const { show, open, close } = useDialogSwitch(false)
   const [feed, setFeed] = useState<FeedType>(defaultType)
 
   const isHottest = feed === 'hottest'
-  const isSelected = feed === 'selected'
+
+  useEventListener(OPEN_RECOMMEND_TAG_DIALOG, open)
 
   return (
     <>
       {children && children({ open })}
 
-      <Dialog size="sm" isOpen={show} onDismiss={close}>
+      <Dialog size="sm" isOpen={show} onDismiss={close} fixedHeight>
         <Dialog.Header
           title={<Translate zh_hant="追蹤標籤" zh_hans="追踪标签" />}
           close={close}
           closeTextId="cancel"
         />
 
-        <Dialog.Content>
+        <Dialog.Content hasGrow>
           <Dialog.Message align="left">
             <p className="message">
               <Translate
@@ -45,9 +49,6 @@ const BaseDialog = ({ children }: Props) => {
             <Tabs.Tab onClick={() => setFeed('hottest')} selected={isHottest}>
               <Translate zh_hant="熱門標籤" zh_hans="热门标签" />
             </Tabs.Tab>
-            <Tabs.Tab onClick={() => setFeed('selected')} selected={isSelected}>
-              <Translate zh_hant="編輯精選" zh_hans="编辑精选" />
-            </Tabs.Tab>
           </Tabs>
         </Dialog.Content>
 
@@ -57,9 +58,3 @@ const BaseDialog = ({ children }: Props) => {
     </>
   )
 }
-
-export const RecommendTagDialog = (props: Props) => (
-  <Dialog.Lazy mounted={<BaseDialog {...props} />}>
-    {({ open }) => <>{props.children({ open })}</>}
-  </Dialog.Lazy>
-)

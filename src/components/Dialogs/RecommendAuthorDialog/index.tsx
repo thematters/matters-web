@@ -1,36 +1,41 @@
 import { useState } from 'react'
 
 import { Dialog, Tabs, Translate, useDialogSwitch } from '~/components'
+import { useEventListener } from '~/components/Hook'
+
+import { OPEN_RECOMMEND_AUTHOR_DIALOG } from '~/common/enums'
 
 import Feed, { FeedType } from './Feed'
 import styles from './styles.css'
 
 interface Props {
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  children?: ({ open }: { open: () => void }) => React.ReactNode
 }
 
-const BaseDialog = ({ children }: Props) => {
+export const RecommendAuthorDialog = ({ children }: Props) => {
   const defaultType = 'trendy'
 
-  const { show, open, close } = useDialogSwitch(true)
+  const { show, open, close } = useDialogSwitch(false)
   const [feed, setFeed] = useState<FeedType>(defaultType)
 
   const isActive = feed === 'active'
   const isAppreciated = feed === 'appreciated'
   const isTrendy = feed === 'trendy'
 
+  useEventListener(OPEN_RECOMMEND_AUTHOR_DIALOG, open)
+
   return (
     <>
       {children && children({ open })}
 
-      <Dialog size="sm" isOpen={show} onDismiss={close}>
+      <Dialog size="sm" isOpen={show} onDismiss={close} fixedHeight>
         <Dialog.Header
           title={<Translate id="followAuthor" />}
           close={close}
           closeTextId="cancel"
         />
 
-        <Dialog.Content>
+        <Dialog.Content hasGrow>
           <Dialog.Message align="left">
             <p className="message">
               <Translate
@@ -65,9 +70,3 @@ const BaseDialog = ({ children }: Props) => {
     </>
   )
 }
-
-export const RecommendAuthorDialog = (props: Props) => (
-  <Dialog.Lazy mounted={<BaseDialog {...props} />}>
-    {({ open }) => <>{props.children({ open })}</>}
-  </Dialog.Lazy>
-)
