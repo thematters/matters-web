@@ -4,8 +4,6 @@ import {
   Dialog,
   EmbedShare,
   LanguageContext,
-  RecommendAuthorDialog,
-  RecommendTagDialog,
   Translate,
   useResponsive,
   ViewerContext,
@@ -15,8 +13,11 @@ import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
 
 import {
   ADD_TOAST,
+  CLOSE_ONBOARDING_TASKS_DIALOG,
   ONBOARDING_TASKS_HIDE,
   OPEN_LIKE_COIN_DIALOG,
+  OPEN_RECOMMEND_AUTHOR_DIALOG,
+  OPEN_RECOMMEND_TAG_DIALOG,
   URL_QS,
 } from '~/common/enums'
 import {
@@ -73,6 +74,16 @@ const Tasks = () => {
     }
   }
 
+  const openRecommendAuthorDialog = () => {
+    window.dispatchEvent(new CustomEvent(CLOSE_ONBOARDING_TASKS_DIALOG, {}))
+    window.dispatchEvent(new CustomEvent(OPEN_RECOMMEND_AUTHOR_DIALOG, {}))
+  }
+
+  const openRecommendTagDialog = () => {
+    window.dispatchEvent(new CustomEvent(CLOSE_ONBOARDING_TASKS_DIALOG, {}))
+    window.dispatchEvent(new CustomEvent(OPEN_RECOMMEND_TAG_DIALOG, {}))
+  }
+
   const hideTasks = () => {
     window.dispatchEvent(new CustomEvent(ONBOARDING_TASKS_HIDE, {}))
   }
@@ -103,37 +114,35 @@ const Tasks = () => {
           }
         />
 
-        <RecommendAuthorDialog>
-          {({ open }) => (
-            <TaskItem
-              title={
-                <Translate
-                  zh_hant="追蹤 5 位喜歡的創作者"
-                  zh_hans="追踪 5 位喜欢的创作者"
-                />
-              }
-              done={viewer.onboardingTasks.tasks.followee}
-              onClick={viewer.onboardingTasks.tasks.followee ? undefined : open}
+        <TaskItem
+          title={
+            <Translate
+              zh_hant="追蹤 5 位喜歡的創作者"
+              zh_hans="追踪 5 位喜欢的创作者"
             />
-          )}
-        </RecommendAuthorDialog>
+          }
+          done={viewer.onboardingTasks.tasks.followee}
+          onClick={
+            viewer.onboardingTasks.tasks.followee
+              ? undefined
+              : openRecommendAuthorDialog
+          }
+        />
 
-        <RecommendTagDialog>
-          {({ open }) => (
-            <TaskItem
-              title={
-                <Translate
-                  zh_hant="追蹤 5 個感興趣的標籤"
-                  zh_hans="追踪 5 个感兴趣的标签"
-                />
-              }
-              done={viewer.onboardingTasks.tasks.followingTag}
-              onClick={
-                viewer.onboardingTasks.tasks.followingTag ? undefined : open
-              }
+        <TaskItem
+          title={
+            <Translate
+              zh_hant="追蹤 5 個感興趣的標籤"
+              zh_hans="追踪 5 个感兴趣的标签"
             />
-          )}
-        </RecommendTagDialog>
+          }
+          done={viewer.onboardingTasks.tasks.followingTag}
+          onClick={
+            viewer.onboardingTasks.tasks.followingTag
+              ? undefined
+              : openRecommendTagDialog
+          }
+        />
 
         <TaskItem
           title={

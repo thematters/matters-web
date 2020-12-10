@@ -1,4 +1,9 @@
-import { Title, Translate } from '~/components'
+import {
+  RecommendAuthorDialog,
+  RecommendTagDialog,
+  Title,
+  Translate,
+} from '~/components'
 
 import Tasks from '../Tasks'
 import styles from './styles.css'
@@ -33,6 +38,8 @@ const OnboardingTasksWidget = () => {
       </header>
 
       <Tasks />
+      <RecommendAuthorDialog />
+      <RecommendTagDialog />
 
       <style jsx>{styles}</style>
     </section>
