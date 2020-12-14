@@ -1,41 +1,59 @@
 import gql from 'graphql-tag'
 import React from 'react'
 
-import { ViewerUser } from './__generated__/ViewerUser'
+import { ViewerUserPrivate } from './__generated__/ViewerUserPrivate'
+import { ViewerUserPublic } from './__generated__/ViewerUserPublic'
+
+export type ViewerUser = ViewerUserPublic & ViewerUserPrivate
 
 const ViewerFragments = {
-  user: gql`
-    fragment ViewerUser on User {
-      id
-      userName
-      displayName
-      avatar
-      liker {
-        likerId
-        civicLiker
+  user: {
+    public: gql`
+      fragment ViewerUserPublic on User {
+        id
+        userName
+        displayName
+        avatar
+        liker {
+          likerId
+          civicLiker
+        }
+        status {
+          state
+          hasPaymentPassword
+        }
+        info {
+          createdAt
+          email
+          agreeOn
+          userNameEditable
+          group
+        }
+        settings {
+          language
+        }
+        followees(input: { first: 0 }) {
+          totalCount
+        }
+        followers(input: { first: 0 }) {
+          totalCount
+        }
       }
-      status {
-        state
-        hasPaymentPassword
+    `,
+    private: gql`
+      fragment ViewerUserPrivate on User {
+        id
+        articles(input: { first: 0 }) {
+          totalCount
+        }
+        recommendation {
+          followingTags(input: { first: 0 }) {
+            totalCount
+          }
+        }
       }
-      info {
-        createdAt
-        email
-        agreeOn
-        userNameEditable
-        group
-      }
-      settings {
-        language
-      }
-      followees(input: { first: 0 }) {
-        totalCount
-      }
-      followers(input: { first: 0 }) {
-        totalCount
-      }
-    }
-  `,
+    `,
+  },
 }
 
 export type Viewer = ViewerUser & {
@@ -49,12 +67,23 @@ export type Viewer = ViewerUser & {
   isCivicLiker: boolean
   shouldSetupLikerID: boolean
   privateFetched: boolean
+  onboardingTasks: {
+    finished: boolean
+    tasks: {
+      likerId: boolean
+      followingTag: boolean
+      article: boolean
+      followee: boolean
+      commentPermission: boolean
+    }
+  }
 }
 
 export const processViewer = (
   viewer: ViewerUser,
   privateFetched: boolean
 ): Viewer => {
+  // User state
   const isAuthed = !!viewer.id
   const state = viewer?.status?.state
   const isActive = state === 'active'
@@ -65,6 +94,19 @@ export const processViewer = (
   const isInactive = isAuthed && (isBanned || isFrozen || isArchived)
   const isCivicLiker = viewer.liker.civicLiker
   const shouldSetupLikerID = isAuthed && !viewer.liker.likerId
+
+  // Onbooarding Tasks
+  const hasLikerId = !!viewer.liker.likerId
+  const hasFollowingTag = viewer?.recommendation?.followingTags.totalCount >= 5
+  const hasArticle = viewer?.articles?.totalCount >= 1
+  const hasFollowee = viewer?.followees?.totalCount >= 5
+  const hasCommentPermission = isAuthed && !isOnboarding
+  const isOnboardingTasksFinished =
+    hasLikerId &&
+    hasFollowingTag &&
+    hasArticle &&
+    hasFollowee &&
+    hasCommentPermission
 
   // Add user info for Sentry
   import('@sentry/browser').then((Sentry) => {
@@ -89,6 +131,16 @@ export const processViewer = (
     isCivicLiker,
     shouldSetupLikerID,
     privateFetched,
+    onboardingTasks: {
+      finished: isOnboardingTasksFinished,
+      tasks: {
+        likerId: hasLikerId,
+        followingTag: hasFollowingTag,
+        article: hasArticle,
+        followee: hasFollowee,
+        commentPermission: hasCommentPermission,
+      },
+    },
   }
 }
 

@@ -2,108 +2,48 @@
   @mixin all-transition;
 
   position: relative;
-  color: var(--color-matters-green);
-
-  @media (--sm-up) {
-    z-index: 5;
-    width: 3rem;
-    height: 3rem;
-    background: var(--color-white);
-    border: 1.5px solid currentColor;
-    border-radius: 50%;
-    box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.08),
-      0 4px 12px 0 rgba(0, 0, 0, 0.08);
-
-    &:hover,
-    &:focus {
-      background: var(--color-green-lighter);
-    }
-  }
+  display: inline-flex;
 
   & .icon {
     position: relative;
-    width: 2rem;
-    height: 2rem;
+    width: 1.25rem;
+    height: 1.25rem;
   }
 
   & :global(.icon-like) {
     position: absolute;
-    top: 0.25rem;
-    left: 0.25rem;
+    top: 0;
+    left: 0;
     opacity: 1;
     transition: transform 0.2s ease-in-out;
     transform: scale(1);
   }
+
   & :global(.icon-superlike) {
     position: absolute;
-    top: 3px;
-    left: 2px;
-    width: 28px;
-    height: 28px;
+    top: -0.25rem;
+    left: -0.25rem;
+    width: 1.75rem;
+    height: 1.75rem;
     opacity: 0;
     transition: transform 0.2s ease-in-out;
     transform: scale(0);
   }
+
   & :global(.icon-superlike .superlike_svg__star) {
     fill-opacity: 0;
     transition: fill-opacity 0.1s ease-in-out;
   }
 }
 
-.count {
-  display: none;
-
-  @media (--sm-up) {
-    @mixin flex-center-all;
-
-    position: absolute;
-    top: -0.25rem;
-    right: -0.25rem;
-    width: 1rem;
-    height: 1rem;
-    font-size: var(--font-size-xs-s);
-    font-weight: var(--font-weight-bold);
-    line-height: 1rem;
-    color: var(--color-white);
-    background: var(--color-matters-green);
-    border-radius: 50%;
-  }
-}
-
-.total {
-  display: inline-block;
-  margin-top: 0;
-  margin-left: var(--spacing-xx-tight);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
-  line-height: 1rem;
-  vertical-align: middle;
-
-  @media (--sm-up) {
-    display: none;
-  }
-}
-
 .isSuperLike {
   color: var(--color-matters-gold);
-
-  @media (--sm-up) {
-    &:hover,
-    &:focus {
-      background: var(--color-yellow-lighter);
-    }
-  }
-
-  & .count {
-    @media (--sm-up) {
-      background: var(--color-matters-gold);
-    }
-  }
 
   & :global(.icon-like) {
     opacity: 0;
     transform: scale(0);
   }
+
   & :global(.icon-superlike) {
     opacity: 1;
     transform: scale(1);

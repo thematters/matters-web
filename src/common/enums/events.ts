@@ -18,6 +18,9 @@ export const OPEN_SIGNUP_DIALOG = 'openSignUpDialog'
 export const OPEN_RESET_PASSWORD_DIALOG = 'openPassword'
 export const CLOSE_ACTIVE_DIALOG = 'closeActiveDialog'
 export const OPEN_LIKE_COIN_DIALOG = 'openLikeCoinDialog'
+export const CLOSE_ONBOARDING_TASKS_DIALOG = 'closeOnboardingTasksDialog'
+export const OPEN_RECOMMEND_AUTHOR_DIALOG = 'openRecommendAuthorDialog'
+export const OPEN_RECOMMEND_TAG_DIALOG = 'openRecommendTagDialog'
 
-// Preference
-export const CHANGE_NEW_USER_HOME_FEED_SORT_BY = 'changeNewUserHomeFeedSortBy'
+// Onboarding Tasks
+export const ONBOARDING_TASKS_HIDE = 'onboardingTasksHide'

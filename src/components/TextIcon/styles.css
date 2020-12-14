@@ -180,3 +180,7 @@
 .weight-bold {
   font-weight: var(--font-weight-bold);
 }
+
+.text-underline {
+  text-decoration: underline;
+}

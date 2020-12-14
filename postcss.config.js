@@ -1,12 +1,12 @@
 module.exports = {
-  plugins: [
-    require('postcss-each'),
-    require('postcss-conditionals'),
-    require('lost'),
-    require('postcss-mixins')({
+  plugins: {
+    'postcss-each': {},
+    'postcss-conditionals': {},
+    lost: {},
+    'postcss-mixins': {
       mixinsFiles: './src/common/styles/mixins/mixins.css',
-    }),
-    require('postcss-preset-env')({
+    },
+    'postcss-preset-env': {
       stage: 0,
       preserve: false,
       importFrom: [
@@ -18,8 +18,8 @@ module.exports = {
         './src/common/styles/variables/typography.css',
         './src/common/styles/variables/shadows.css',
       ],
-    }),
-    require('postcss-calc'),
-    require('postcss-color-function'),
-  ],
+    },
+    'postcss-calc': {},
+    'postcss-color-function': {},
+  },
 }

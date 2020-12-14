@@ -52,11 +52,11 @@ type ROUTE_KEY =
   | 'PAY_CALLBACK_SUCCESS'
   | 'PAY_CALLBACK_FAILURE'
 
-export const ROUTES: Array<{
+export const ROUTES: {
   key: ROUTE_KEY
   pathname: string
   handler?: (req: Request, res: Response, next: NextFunction) => any
-}> = [
+}[] = [
   /**
    * Public
    */
@@ -134,10 +134,6 @@ export const ROUTES: Array<{
   { key: 'PAY_CALLBACK_SUCCESS', pathname: '/pay/[provider]/success' },
   { key: 'PAY_CALLBACK_FAILURE', pathname: '/pay/[provider]/failure' },
 ]
-
-export const UrlFragments = {
-  COMMENTS: 'comments',
-}
 
 export const PATHS = {} as {
   [key in ROUTE_KEY]: string

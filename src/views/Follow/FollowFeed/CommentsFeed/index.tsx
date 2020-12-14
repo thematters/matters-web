@@ -38,9 +38,13 @@ const FOLLOW_COMMENTS = gql`
 `
 
 const CommentsFeed = () => {
-  const { data, loading, error, fetchMore, refetch } = useQuery<
-    FollowCommentsFeed
-  >(FOLLOW_COMMENTS)
+  const {
+    data,
+    loading,
+    error,
+    fetchMore,
+    refetch,
+  } = useQuery<FollowCommentsFeed>(FOLLOW_COMMENTS)
 
   if (loading) {
     return <Spinner />
@@ -87,11 +91,27 @@ const CommentsFeed = () => {
           <List.Item key={cursor}>
             <FollowComment
               comment={node}
-              onClick={() =>
+              onClickComment={() =>
                 analytics.trackEvent('click_feed', {
                   type: 'follow-comment',
                   contentType: 'comment',
                   styleType: 'card',
+                  location: i,
+                })
+              }
+              onClickArticle={() =>
+                analytics.trackEvent('click_feed', {
+                  type: 'follow-comment',
+                  contentType: 'article',
+                  styleType: 'card',
+                  location: i,
+                })
+              }
+              onClickAuthor={() =>
+                analytics.trackEvent('click_feed', {
+                  type: 'follow-comment',
+                  contentType: 'user',
+                  styleType: 'subtitle',
                   location: i,
                 })
               }

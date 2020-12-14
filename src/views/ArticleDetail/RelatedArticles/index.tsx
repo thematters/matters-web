@@ -59,6 +59,15 @@ const RelatedArticles = ({ article, inSidebar }: RelatedArticlesProps) => {
       location: i,
     })
 
+  const onClickAuthor = (i: number) => () => {
+    analytics.trackEvent('click_feed', {
+      type: 'related_article',
+      contentType: 'user',
+      styleType: 'subtitle',
+      location: i,
+    })
+  }
+
   const Header = (
     <PageHeader
       title={<Translate zh_hant="推薦閱讀" zh_hans="推荐阅读" />}
@@ -73,7 +82,11 @@ const RelatedArticles = ({ article, inSidebar }: RelatedArticlesProps) => {
         <Slides header={Header} bgColor="green-lighter">
           {edges.map(({ node, cursor }, i) => (
             <Slides.Item key={cursor}>
-              <ArticleDigestCard article={node} onClick={onClick(i)} />
+              <ArticleDigestCard
+                article={node}
+                onClick={onClick(i)}
+                onClickAuthor={onClickAuthor(i)}
+              />
             </Slides.Item>
           ))}
         </Slides>
@@ -94,6 +107,7 @@ const RelatedArticles = ({ article, inSidebar }: RelatedArticlesProps) => {
               titleTextSize="sm"
               hasCover
               onClick={onClick(i)}
+              onClickAuthor={onClickAuthor(i)}
               bgActiveColor="grey-lighter"
             />
           </li>

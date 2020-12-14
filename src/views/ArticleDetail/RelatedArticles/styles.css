@@ -3,7 +3,7 @@
   margin-bottom: calc(var(--spacing-base) * -1);
   margin-left: calc(var(--spacing-base) * -1);
 
-  @media (--sm-up) {
+  @media (--lg-up) {
     margin-right: 0;
     margin-bottom: 0;
     margin-left: 0;

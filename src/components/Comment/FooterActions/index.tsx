@@ -1,9 +1,9 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
-import { LikeCoinDialog, Translate, ViewerContext } from '~/components'
+import { Translate, ViewerContext } from '~/components'
 
-import { ADD_TOAST, TextId } from '~/common/enums'
+import { ADD_TOAST, OPEN_LIKE_COIN_DIALOG, TextId } from '~/common/enums'
 
 import CreatedAt, { CreatedAtControls } from '../CreatedAt'
 import DownvoteButton from './DownvoteButton'
@@ -69,10 +69,8 @@ const BaseFooterActions = ({
   hasCreatedAt,
   inCard = false,
 
-  openLikeCoinDialog,
-
   ...replyButtonProps
-}: FooterActionsProps & { openLikeCoinDialog: () => void }) => {
+}: FooterActionsProps) => {
   const viewer = useContext(ViewerContext)
 
   const { state, article } = comment
@@ -94,7 +92,8 @@ const BaseFooterActions = ({
   let onClick
 
   if (viewer.shouldSetupLikerID) {
-    onClick = openLikeCoinDialog
+    onClick = () =>
+      window.dispatchEvent(new CustomEvent(OPEN_LIKE_COIN_DIALOG, {}))
   } else if (viewer.isOnboarding && article.author.id !== viewer.id) {
     onClick = () => addToast('failureCommentOnboarding')
   } else if (viewer.isArchived || viewer.isFrozen) {
@@ -136,11 +135,7 @@ const BaseFooterActions = ({
 }
 
 const FooterActions = (props: FooterActionsProps) => (
-  <LikeCoinDialog>
-    {({ open: openLikeCoinDialog }) => (
-      <BaseFooterActions {...props} openLikeCoinDialog={openLikeCoinDialog} />
-    )}
-  </LikeCoinDialog>
+  <BaseFooterActions {...props} />
 )
 
 FooterActions.fragments = fragments

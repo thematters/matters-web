@@ -1,5 +1,4 @@
 import gql from 'graphql-tag'
-import _chunk from 'lodash/chunk'
 
 import { UserDigest } from '~/components'
 

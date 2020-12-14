@@ -68,7 +68,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
           page: 'search',
           q: values.q.slice(0, 100),
         })
-        routerPush(path.href, path.as)
+        routerPush(path.href)
         close()
       }}
     >

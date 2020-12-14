@@ -12,7 +12,8 @@ import {
 } from '~/components'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
-import { STORE_KEY_VIEW_MODE } from '~/common/enums'
+import { STORAGE_KEY_VIEW_MODE } from '~/common/enums'
+import { storage } from '~/common/utils'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 
@@ -35,7 +36,7 @@ const ViewMode = () => {
       })
     }
 
-    localStorage.setItem(STORE_KEY_VIEW_MODE, mode)
+    storage.set(STORAGE_KEY_VIEW_MODE, mode)
   }
 
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (

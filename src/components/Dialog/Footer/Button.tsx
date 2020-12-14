@@ -8,6 +8,7 @@ type DialogFooterButtonProps = {
   icon?: React.ReactNode
 
   loading?: boolean
+  implicit?: boolean
 } & Omit<ButtonProps, 'bgColor'>
 
 const DialogFooterButton: React.FC<DialogFooterButtonProps> = forwardRef(
@@ -21,12 +22,15 @@ const DialogFooterButton: React.FC<DialogFooterButtonProps> = forwardRef(
 
       disabled,
       children,
+
+      implicit,
+
       ...restProps
     },
     ref
   ) => (
     <Button
-      bgColor={bgColor}
+      bgColor={implicit ? 'white' : bgColor}
       size={['100%', '3rem']}
       disabled={disabled || loading}
       ref={ref}
@@ -34,10 +38,11 @@ const DialogFooterButton: React.FC<DialogFooterButtonProps> = forwardRef(
     >
       <TextIcon
         icon={icon || (loading && <IconSpinner size="md" />)}
-        color={textColor}
-        size="md"
-        weight="md"
+        color={implicit ? 'grey-dark' : textColor}
+        size={implicit ? 'sm' : 'md'}
+        weight={implicit ? 'normal' : 'md'}
         textPlacement="left"
+        textDecoration={implicit ? 'underline' : undefined}
       >
         {loading ? null : children}
       </TextIcon>

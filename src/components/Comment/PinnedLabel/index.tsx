@@ -14,6 +14,7 @@ const fragments = {
     }
   `,
 }
+
 const PinnedLabel = ({ comment }: { comment: PinnedLabelComment }) => {
   if (!comment.pinned) {
     return null
@@ -21,7 +22,7 @@ const PinnedLabel = ({ comment }: { comment: PinnedLabelComment }) => {
 
   return (
     <span className="label">
-      <Translate id="authorRecommend" />
+      <Translate zh_hant="作者精選" zh_hans="作者精选" />
 
       <style jsx>{styles}</style>
     </span>

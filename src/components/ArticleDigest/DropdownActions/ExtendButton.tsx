@@ -65,7 +65,7 @@ const ExtendButton = ({ article }: { article: ExtendButtonArticle }) => {
 
         if (slug && id) {
           const path = toPath({ page: 'draftDetail', slug, id })
-          routerPush(path.href, path.as)
+          routerPush(path.href)
         }
       }}
     >

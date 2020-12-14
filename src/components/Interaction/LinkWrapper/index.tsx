@@ -1,23 +1,19 @@
 import classNames from 'classnames'
 import Link from 'next/link'
 
-import { Url } from '~/common/utils'
-
 import styles from './styles.css'
 
 export interface LinkWrapperProps {
-  href: Url
-  as: string
+  href: string
 
   textActiveColor?: 'green'
 
   disabled?: boolean
-  onClick?: () => any
+  onClick?: () => void
 }
 
 export const LinkWrapper: React.FC<LinkWrapperProps> = ({
   href,
-  as,
 
   textActiveColor,
 
@@ -35,12 +31,13 @@ export const LinkWrapper: React.FC<LinkWrapperProps> = ({
   })
 
   return (
-    <Link href={href} as={as}>
+    <Link href={href}>
       <a
         className={linkClasses}
-        onClick={() => {
+        onClick={(e) => {
           if (onClick) {
             onClick()
+            e.stopPropagation()
           }
         }}
       >

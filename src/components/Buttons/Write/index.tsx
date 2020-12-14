@@ -5,14 +5,13 @@ import {
   IconPen,
   IconSpinner,
   LanguageContext,
-  LikeCoinDialog,
   TextIcon,
   Translate,
 } from '~/components'
 import { useMutation } from '~/components/GQL'
 import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
 
-import { ADD_TOAST, TEXT } from '~/common/enums'
+import { ADD_TOAST, OPEN_LIKE_COIN_DIALOG, TEXT } from '~/common/enums'
 import {
   analytics,
   parseFormSubmitErrors,
@@ -70,9 +69,12 @@ export const WriteButton = ({ allowed, isLarge, forbidden }: Props) => {
 
   if (!allowed) {
     return (
-      <LikeCoinDialog>
-        {({ open }) => <BaseWriteButton onClick={open} isLarge={isLarge} />}
-      </LikeCoinDialog>
+      <BaseWriteButton
+        onClick={() =>
+          window.dispatchEvent(new CustomEvent(OPEN_LIKE_COIN_DIALOG, {}))
+        }
+        isLarge={isLarge}
+      />
     )
   }
 
@@ -101,7 +103,7 @@ export const WriteButton = ({ allowed, isLarge, forbidden }: Props) => {
 
           if (slug && id) {
             const path = toPath({ page: 'draftDetail', slug, id })
-            routerPush(path.href, path.as)
+            routerPush(path.href)
           }
         } catch (error) {
           const [messages, codes] = parseFormSubmitErrors(error, lang)

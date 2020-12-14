@@ -4,9 +4,9 @@ export default {
 
 <p>如何融入社區？如何找到我想看的作品？如何提取我在 Matters 獲得的寫作收益？想在 Matters 開心創作、交流，以下這兩篇指南，列出了所有你需要的資訊。</p>
 
-<p><a className="u-link-green" href="https://matters.news/@hi176/matters-%E8%AE%80%E8%80%85%E5%B7%A5%E5%85%B7%E7%AE%B1-%E6%96%B0%E6%89%8B%E5%BF%85%E7%9C%8B-2020-08-14%E6%9B%B4%E6%96%B0-bafyreiarbkxluq3zqtl4mrq4i34roo2nfr46fnaqcqgp7mgjqyxj4apf6a">Matters 讀者工具箱 | 新手必看</a></p>
+<p><a className="u-link-green" href="https://matters.news/@hi176/matters-%E8%AE%80%E8%80%85%E5%B7%A5%E5%85%B7%E7%AE%B1-%E6%96%B0%E6%89%8B%E5%BF%85%E7%9C%8B-2020-11-24%E6%9B%B4%E6%96%B0-bafyreigxoumoklsjzpunibaoi36m3zkh3lrd23i63562gjin5yk3usypja">Matters 讀者工具箱 | 新手必看</a></p>
 
-<p><a className="u-link-green" href="https://matters.news/@hi176/matters-%E4%BD%9C%E8%80%85%E5%B7%A5%E5%85%B7%E7%AE%B1-%E6%96%B0%E6%89%8B%E5%BF%85%E7%9C%8B-2020-08-14%E6%9B%B4%E6%96%B0-bafyreicxjqzr23m4to3kgc5cnepovt3e4ps7mxy537v7aun76wpre7ngae">Matters 作者工具箱 | 新手必看</a></p>
+<p><a className="u-link-green" href="https://matters.news/@hi176/matters-%E4%BD%9C%E8%80%85%E5%B7%A5%E5%85%B7%E7%AE%B1-%E6%96%B0%E6%89%8B%E5%BF%85%E7%9C%8B-2020-11-24%E6%9B%B4%E6%96%B0-bafyreidh5ynfz4bn2szfeaapzwi4z4vfoybzdzdtaed7n6u6f7gljopima">Matters 作者工具箱 | 新手必看</a></p>
 
 <p><a className="u-link-green" href="https://matters.news/@hi176/matters-%E6%94%AF%E4%BB%98%E8%88%87%E6%8F%90%E7%8F%BE%E5%8A%9F%E8%83%BD%E6%8C%87%E5%8D%97-2020-08-14%E6%9B%B4%E6%96%B0-bafyreicfgnpk4jamnhkjecq32kdlmhhtp6xrwpkxoalp37wayd4sqmjo54">Matters 支付與提現指南</a></p>
 
@@ -20,9 +20,9 @@ export default {
 
 <p>如何融入社区？如何找到我想看的作品？如何提取我在 Matters 获得的写作收益？想在 Matters 开心创作、交流，以下这两篇指南，列出了所有你需要的信息。</p>
 
-<p><a className="u-link-green" href="https://matters.news/@hi176/matters-%E8%AE%80%E8%80%85%E5%B7%A5%E5%85%B7%E7%AE%B1-%E6%96%B0%E6%89%8B%E5%BF%85%E7%9C%8B-2020-08-14%E6%9B%B4%E6%96%B0-bafyreiarbkxluq3zqtl4mrq4i34roo2nfr46fnaqcqgp7mgjqyxj4apf6a">Matters 读者工具箱 | 新手必看</a></p>
+<p><a className="u-link-green" href="https://matters.news/@hi176/matters-%E8%AE%80%E8%80%85%E5%B7%A5%E5%85%B7%E7%AE%B1-%E6%96%B0%E6%89%8B%E5%BF%85%E7%9C%8B-2020-11-24%E6%9B%B4%E6%96%B0-bafyreigxoumoklsjzpunibaoi36m3zkh3lrd23i63562gjin5yk3usypja">Matters 读者工具箱 | 新手必看</a></p>
 
-<p><a className="u-link-green" href="https://matters.news/@hi176/matters-%E4%BD%9C%E8%80%85%E5%B7%A5%E5%85%B7%E7%AE%B1-%E6%96%B0%E6%89%8B%E5%BF%85%E7%9C%8B-2020-08-14%E6%9B%B4%E6%96%B0-bafyreicxjqzr23m4to3kgc5cnepovt3e4ps7mxy537v7aun76wpre7ngae">Matters 作者工具箱 | 新手必看</a></p>
+<p><a className="u-link-green" href="https://matters.news/@hi176/matters-%E4%BD%9C%E8%80%85%E5%B7%A5%E5%85%B7%E7%AE%B1-%E6%96%B0%E6%89%8B%E5%BF%85%E7%9C%8B-2020-11-24%E6%9B%B4%E6%96%B0-bafyreidh5ynfz4bn2szfeaapzwi4z4vfoybzdzdtaed7n6u6f7gljopima">Matters 作者工具箱 | 新手必看</a></p>
 
 <p><a className="u-link-green" href="https://matters.news/@hi176/matters-%E6%94%AF%E4%BB%98%E8%88%87%E6%8F%90%E7%8F%BE%E5%8A%9F%E8%83%BD%E6%8C%87%E5%8D%97-2020-08-14%E6%9B%B4%E6%96%B0-bafyreicfgnpk4jamnhkjecq32kdlmhhtp6xrwpkxoalp37wayd4sqmjo54">Matters 支付与提现指南</a></p>
 

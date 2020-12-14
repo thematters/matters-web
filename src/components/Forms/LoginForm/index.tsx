@@ -6,12 +6,13 @@ import { useContext } from 'react'
 import { Dialog, Form, LanguageContext, Layout, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
-import { ADD_TOAST, STORE_KEY_AUTH_TOKEN } from '~/common/enums'
+import { ADD_TOAST, STORAGE_KEY_AUTH_TOKEN } from '~/common/enums'
 import {
   analytics,
   // clearPersistCache,
   parseFormSubmitErrors,
   redirectToTarget,
+  storage,
   translate,
   validateEmail,
   validatePassword,
@@ -103,7 +104,7 @@ export const LoginForm: React.FC<FormProps> = ({
 
         // security discussion see: https://github.com/apollographql/apollo-feature-requests/issues/149
         if (isStaticBuild && token) {
-          localStorage.setItem(STORE_KEY_AUTH_TOKEN, token)
+          storage.set(STORAGE_KEY_AUTH_TOKEN, token)
         }
 
         setSubmitting(false)

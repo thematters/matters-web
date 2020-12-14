@@ -1,4 +1,4 @@
-import { ANALYTIC_TYPES, ANALYTICS } from '~/common/enums'
+import { ANALYTICS, ANALYTIC_TYPES } from '~/common/enums'
 
 const trackAs = (type: string) => (...args: EventArgs) => {
   // construct event with details
@@ -28,16 +28,16 @@ type EventArgs =
   | ['view_add_credit_dialog', ViewDialogProp]
   | ['view_donation_dialog', ViewDialogProp]
 
+/**
+ * Event: Page View
+ */
 interface PageViewProp {
   page_referrer: string
 }
 
-type ClickFeedProp =
-  | ArticleFeedProp
-  | CommentFeedProp
-  | UserFeedProp
-  | TagFeedProp
-
+/**
+ * Event: Click Button
+ */
 interface ClickButtonProp {
   type:
     | 'checkout' // `next step` after top up dialog
@@ -49,13 +49,20 @@ interface ClickButtonProp {
     | 'translation' // translation button
     | 'write'
     | 'write_collection'
+    | 'google_search'
 }
 
+/**
+ * Event: Load More
+ */
 interface LoadMoreProp {
   type: ArticleFeedType | CommentFeedType | UserFeedType | TagFeedType
   location: number
 }
 
+/**
+ * Event: Share
+ */
 interface ShareProp {
   type:
     | 'line'
@@ -70,49 +77,37 @@ interface ShareProp {
     | 'copy-url'
 }
 
+/**
+ * Event: Purchase
+ */
 interface PurchaseProp {
   amount: number | undefined
   success: boolean
   message?: string
 }
 
+/**
+ * Event: View Dialog
+ */
 interface ViewDialogProp {
   step: string
 }
 
-interface ArticleFeedProp {
-  type: ArticleFeedType
-
-  contentType: 'article'
-  styleType:
-    | 'card' // cover photo as background, such as related articles
-    | 'large_cover'
-    | 'small_cover'
-    | 'no_cover'
-    | 'title'
+/**
+ * Event: Click Feed
+ */
+interface ClickFeedProp {
+  type: FeedType
+  contentType: ContentType
+  styleType: StyleType
   location: number
 }
 
-interface CommentFeedProp {
-  type: CommentFeedType
-  contentType: 'comment'
-  styleType: 'card'
-  location: number
-}
+// content type
+type ContentType = 'article' | 'comment' | 'user' | 'tag'
 
-interface UserFeedProp {
-  type: UserFeedType
-  contentType: 'user'
-  styleType: 'subtitle' | 'card'
-  location: number
-}
-
-interface TagFeedProp {
-  type: TagFeedType
-  contentType: 'tag'
-  styleType: 'title' | 'article'
-  location: number
-}
+// feed type
+type FeedType = ArticleFeedType | CommentFeedType | UserFeedType | TagFeedType
 
 type ArticleFeedType =
   | 'all_authors'
@@ -173,3 +168,23 @@ type TagFeedType =
   | 'search_tag'
   | 'tags' // tag feed on home page
   | 'user_tag'
+
+// style type
+type StyleType =
+  | ArticleStyleType
+  | CommentStyleType
+  | UserStyleType
+  | TagStyleType
+
+type ArticleStyleType =
+  | 'card' // cover photo as background, such as related articles
+  | 'large_cover'
+  | 'small_cover'
+  | 'no_cover'
+  | 'title'
+
+type CommentStyleType = 'card'
+
+type UserStyleType = 'subtitle' | 'card'
+
+type TagStyleType = 'title' | 'article'

@@ -163,6 +163,14 @@ const Complete: React.FC<Props> = ({ callback, recipient, targetId }) => {
                           location: i,
                         })
                       }
+                      onClickAuthor={() => {
+                        analytics.trackEvent('click_feed', {
+                          type: 'related_donations',
+                          contentType: 'user',
+                          styleType: 'subtitle',
+                          location: i,
+                        })
+                      }}
                     />
                   </List.Item>
                 ))}

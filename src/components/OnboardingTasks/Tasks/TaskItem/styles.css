@@ -1,0 +1,50 @@
+.container {
+  @mixin flex-center-space-between;
+
+  line-height: 1;
+}
+
+.left {
+  @mixin flex-center-space-between;
+
+  & .check {
+    opacity: 0.4;
+  }
+
+  & .content {
+    display: inline-flex;
+    flex-direction: column;
+    margin-left: var(--spacing-tight);
+  }
+
+  & .title {
+    font-size: var(--font-size-sm-s);
+    font-weight: var(--font-weight-normal);
+  }
+
+  & .subtitle {
+    margin-top: var(--spacing-xx-tight);
+    font-size: var(--font-size-xs);
+    color: var(--color-grey);
+  }
+}
+
+.right {
+  display: inline-flex;
+
+  & :global(.text-icon svg) {
+    margin-right: calc(var(--spacing-x-tight) * -1);
+  }
+}
+
+.done {
+  & .left {
+    & .check {
+      opacity: 1;
+    }
+
+    & .title {
+      color: var(--color-grey);
+    }
+  }
+}

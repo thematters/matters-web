@@ -139,7 +139,7 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
           coverUrl={user.info.profileCover}
           defaultCoverUrl={IMAGE_COVER}
           entityType={ENTITY_TYPE.user}
-          inEditor={true}
+          inEditor
           onUpload={(assetId) => setFieldValue('profileCover', assetId)}
         />
       </section>

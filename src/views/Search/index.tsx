@@ -28,7 +28,7 @@ const Search = () => {
   const resetAutoComplete = () => setTypingKey('')
   const onCancel = () => {
     const path = toPath({ page: 'search' })
-    routerPush(path.href, path.as)
+    routerPush(path.href)
   }
 
   const isOverview = !q && !typingKey

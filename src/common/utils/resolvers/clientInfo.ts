@@ -1,4 +1,4 @@
-export default () => {
+const clientInfoResolver = () => {
   return {
     id: 'local',
     viewportSize: {
@@ -9,3 +9,5 @@ export default () => {
     __typename: 'ClientInfo',
   }
 }
+
+export default clientInfoResolver
