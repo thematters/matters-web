@@ -1,12 +1,8 @@
 import { useContext } from 'react'
 
-import {
-  Button,
-  LikeCoinDialog,
-  TextIcon,
-  Translate,
-  ViewerContext,
-} from '~/components'
+import { Button, TextIcon, Translate, ViewerContext } from '~/components'
+
+import { OPEN_LIKE_COIN_DIALOG } from '~/common/enums'
 
 import { PublishDialog } from './PublishDialog'
 
@@ -42,9 +38,12 @@ const PublishButtonWithEffect = ({ disabled }: { disabled?: boolean }) => {
   }
 
   return (
-    <LikeCoinDialog>
-      {({ open }) => <PublishButton open={open} disabled={disabled} />}
-    </LikeCoinDialog>
+    <PublishButton
+      open={() =>
+        window.dispatchEvent(new CustomEvent(OPEN_LIKE_COIN_DIALOG, {}))
+      }
+      disabled={disabled}
+    />
   )
 }
 

@@ -112,7 +112,7 @@ const Tags = () => {
                   })
                 }
               >
-                <Tag tag={node} type="inline" textSize="sm" active={true} />
+                <Tag tag={node} type="inline" textSize="sm" active />
 
                 {node.description && (
                   <section className="content">

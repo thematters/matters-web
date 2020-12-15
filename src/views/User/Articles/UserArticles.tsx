@@ -21,6 +21,7 @@ import {
   VIEWER_ARTICLES,
 } from '~/components/GQL/queries/userArticles'
 
+import { URL_QS } from '~/common/enums'
 import { analytics, getQuery, mergeConnections } from '~/common/utils'
 
 import IMAGE_LOGO_192 from '@/public/static/icon-192x192.png?url'
@@ -159,12 +160,27 @@ const UserArticles = () => {
     return null
   }
 
+  /**
+   * Customize title
+   */
+  const shareSource = getQuery({
+    router,
+    key: URL_QS.SHARE_SOURCE_ONBOARDING_TASKS.key,
+  })
+  const isShareOnboardingTasks =
+    shareSource === URL_QS.SHARE_SOURCE_ONBOARDING_TASKS.value
+
   const CustomHead = () => (
     <Head
       title={{
-        zh_hant: `${user.displayName}的創作空間站`,
-        zh_hans: `${user.displayName}的创作空间站`,
+        zh_hant: isShareOnboardingTasks
+          ? `${user.displayName} 已解鎖新手獎賞，快點加入 Matters 獲得創作者獎勵吧`
+          : `${user.displayName}的創作空間站`,
+        zh_hans: isShareOnboardingTasks
+          ? `${user.displayName} 已解锁新手奖赏，快点加入 Matters 获得创作者奖励吧`
+          : `${user.displayName}的创作空间站`,
       }}
+      noSuffix={isShareOnboardingTasks}
       description={user.info.description}
       image={user.info.profileCover || IMAGE_LOGO_192}
     />
@@ -207,6 +223,14 @@ const UserArticles = () => {
                     location: i,
                   })
                 }
+                onClickAuthor={() => {
+                  analytics.trackEvent('click_feed', {
+                    type: 'user_article',
+                    contentType: 'user',
+                    styleType: 'subtitle',
+                    location: i,
+                  })
+                }}
               />
             </List.Item>
           ))}

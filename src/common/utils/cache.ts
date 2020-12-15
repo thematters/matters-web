@@ -1,5 +1,7 @@
 import { CachePersistor } from 'apollo-cache-persist'
 
+import { storage } from './storage'
+
 const isProd = process.env.NODE_ENV === 'production'
 
 const APP_VERSION = process.env.APP_VERSION || '__UNVERSIONING__'
@@ -44,7 +46,7 @@ export const setupPersistCache = async (inMemoryCache: any) => {
      */
 
     // Read the current app version from LocalStorage.
-    const currentVersion = window.localStorage.getItem(APP_VERSION_KEY)
+    const currentVersion = storage.get(APP_VERSION_KEY)
 
     if (currentVersion === APP_VERSION) {
       console.log(
@@ -56,7 +58,7 @@ export const setupPersistCache = async (inMemoryCache: any) => {
         `[apollo-cache-persist] ${currentVersion} is outdated (latest ${APP_VERSION}), purge`
       )
       await persistor.purge()
-      window.localStorage.setItem(APP_VERSION_KEY, APP_VERSION)
+      storage.set(APP_VERSION_KEY, APP_VERSION)
     }
   } catch (error) {
     console.error('Failed to setupPersistCache', error)

@@ -53,9 +53,13 @@ const FOLLOW_ARTICLES = gql`
 `
 
 const ArticlesFeed = () => {
-  const { data, loading, error, fetchMore, refetch } = useQuery<
-    FollowArticlesFeed
-  >(FOLLOW_ARTICLES)
+  const {
+    data,
+    loading,
+    error,
+    fetchMore,
+    refetch,
+  } = useQuery<FollowArticlesFeed>(FOLLOW_ARTICLES)
 
   if (loading) {
     return <Spinner />
@@ -91,9 +95,13 @@ const ArticlesFeed = () => {
     })
   }
 
-  const actor = ({ node }: { node: FollowArticlesFeedAuthor }) => (
-    props: Partial<UserDigestMiniProps>
-  ) => {
+  const actor = ({
+    node,
+    index,
+  }: {
+    node: FollowArticlesFeedAuthor
+    index: number
+  }) => (props: Partial<UserDigestMiniProps>) => {
     if (!node) {
       return null
     }
@@ -107,6 +115,14 @@ const ArticlesFeed = () => {
           textWeight="md"
           hasAvatar
           hasDisplayName
+          onClick={() => {
+            analytics.trackEvent('click_feed', {
+              type: 'follow-article',
+              contentType: 'user',
+              styleType: 'subtitle',
+              location: index,
+            })
+          }}
           {...props}
         />
 
@@ -137,7 +153,7 @@ const ArticlesFeed = () => {
                   location: i,
                 })
               }
-              actor={actor({ node: node.author })}
+              actor={actor({ node: node.author, index: i })}
             />
           </List.Item>
         ))}

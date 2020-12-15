@@ -7,15 +7,24 @@ import {
 } from '~/components'
 
 const fragments = {
-  user: gql`
-    fragment Viewer on User {
-      id
-      ...ViewerUser
-      ...AnalyticsUser
-    }
-    ${ViewerProvider.fragments.user}
-    ${AnalyticsListener.fragments.user}
-  `,
+  user: {
+    public: gql`
+      fragment ViewerPublic on User {
+        id
+        ...ViewerUserPublic
+        ...AnalyticsUser
+      }
+      ${ViewerProvider.fragments.user.public}
+      ${AnalyticsListener.fragments.user}
+    `,
+    private: gql`
+      fragment ViewerPrivate on User {
+        id
+        ...ViewerUserPrivate
+      }
+      ${ViewerProvider.fragments.user.private}
+    `,
+  },
   official: gql`
     fragment Official on Official {
       ...FeatureOfficial
@@ -27,25 +36,27 @@ const fragments = {
 export const ROOT_QUERY_PUBLIC = gql`
   query RootQueryPublic {
     viewer {
-      ...Viewer
+      ...ViewerPublic
     }
     official {
       ...Official
     }
   }
-  ${fragments.user}
+  ${fragments.user.public}
   ${fragments.official}
 `
 
 export const ROOT_QUERY_PRIVATE = gql`
   query RootQueryPrivate {
     viewer {
-      ...Viewer
+      ...ViewerPublic
+      ...ViewerPrivate
     }
     official {
       ...Official
     }
   }
-  ${fragments.user}
+  ${fragments.user.public}
+  ${fragments.user.private}
   ${fragments.official}
 `

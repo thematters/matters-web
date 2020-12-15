@@ -1,8 +1,10 @@
 import { useState } from 'react'
 
-import { Dialog, SetupLikeCoin, useEventListener } from '~/components'
+import { Dialog, useEventListener } from '~/components'
 
 import { OPEN_LIKE_COIN_DIALOG } from '~/common/enums'
+
+import { SetupLikeCoin } from './SetupLikeCoin'
 
 interface LikeCoinDialogProps {
   allowEventTrigger?: boolean
@@ -29,8 +31,8 @@ export const LikeCoinDialog: React.FC<LikeCoinDialogProps> = ({
     <>
       {children && children({ open })}
 
-      <Dialog isOpen={showDialog} onDismiss={close}>
-        <SetupLikeCoin purpose="dialog" closeDialog={close} />
+      <Dialog isOpen={showDialog} onDismiss={close} size="sm">
+        <SetupLikeCoin closeDialog={close} />
       </Dialog>
     </>
   )

@@ -35,16 +35,8 @@ import {
   NewestFeedPublic,
   NewestFeedPublic_viewer_recommendation_feed_edges,
 } from './__generated__/NewestFeedPublic'
-import {
-  TopicsFeedPublic,
-  TopicsFeedPublic_viewer_recommendation_feed_edges,
-} from './__generated__/TopicsFeedPublic'
 
-type FeedArticlesPublic =
-  | HottestFeedPublic
-  | NewestFeedPublic
-  | IcymiFeedPublic
-  | TopicsFeedPublic
+type FeedArticlesPublic = HottestFeedPublic | NewestFeedPublic | IcymiFeedPublic
 
 type HorizontalFeed = React.FC<{ after?: string; first?: number }>
 
@@ -58,7 +50,6 @@ type FeedEdge =
   | HottestFeedPublic_viewer_recommendation_feed_edges
   | IcymiFeedPublic_viewer_recommendation_feed_edges
   | NewestFeedPublic_viewer_recommendation_feed_edges
-  | TopicsFeedPublic_viewer_recommendation_feed_edges
 
 interface FeedLocation {
   [key: number]: HorizontalFeed
@@ -234,6 +225,14 @@ const MainFeed = ({ feedSortType: sortBy, viewMode }: MainFeedProps) => {
                     location: i,
                   })
                 }
+                onClickAuthor={() => {
+                  analytics.trackEvent('click_feed', {
+                    type: sortBy,
+                    contentType: 'user',
+                    styleType: 'subtitle',
+                    location: i,
+                  })
+                }}
               />
             </List.Item>
           )

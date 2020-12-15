@@ -22,13 +22,29 @@ export default gql`
 
   type ClientPreference {
     id: ID!
+
+    "Feed type in homepage"
     feedSortType: FeedSortType
-    viewMode: ViewMode
-    readCivicLikerDialog: Boolean!
-    wall: Boolean!
-    push: Push!
-    routeHistory: [URL!]
+
+    "Feed type in follow page"
     followFeedType: FollowFeedType
+
+    "View Mode for entity's card UI"
+    viewMode: ViewMode
+
+    "Whether civic liker dialog is hidden"
+    readCivicLikerDialog: Boolean!
+
+    "Login or sign up wall in article detail page"
+    wall: Boolean!
+
+    "Whether push notification is supported/enabled"
+    push: Push!
+
+    "Log route history for page back button"
+    routeHistory: [URL!]
+
+    onboardingTasks: OnboardingTasks!
   }
 
   type ClientInfo {
@@ -44,6 +60,10 @@ export default gql`
   type ViewportSize {
     width: Int
     height: Int
+  }
+
+  type OnboardingTasks {
+    enabled: Boolean!
   }
 
   enum FeedSortType {

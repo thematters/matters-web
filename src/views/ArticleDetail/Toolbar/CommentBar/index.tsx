@@ -2,10 +2,13 @@ import gql from 'graphql-tag'
 import { useContext } from 'react'
 
 import {
+  Button,
+  ButtonProps,
   Card,
   CardProps,
   CommentFormDialog,
-  LikeCoinDialog,
+  IconComment,
+  TextIcon,
   Translate,
   useResponsive,
   ViewerContext,
@@ -14,19 +17,24 @@ import {
 import {
   ADD_TOAST,
   CLOSE_ACTIVE_DIALOG,
+  OPEN_LIKE_COIN_DIALOG,
   OPEN_LOGIN_DIALOG,
   PATHS,
   REFETCH_RESPONSES,
+  TEXT,
 } from '~/common/enums'
-import { appendTarget } from '~/common/utils'
+import { appendTarget, numAbbr } from '~/common/utils'
 
 import styles from './styles.css'
 
 import { CommentBarArticlePrivate } from './__generated__/CommentBarArticlePrivate'
 import { CommentBarArticlePublic } from './__generated__/CommentBarArticlePublic'
 
+type CommentBarArticle = CommentBarArticlePublic &
+  Partial<CommentBarArticlePrivate>
+
 interface CommentBarProps {
-  article: CommentBarArticlePublic & Partial<CommentBarArticlePrivate>
+  article: CommentBarArticle
 }
 
 const fragments = {
@@ -34,6 +42,7 @@ const fragments = {
     public: gql`
       fragment CommentBarArticlePublic on Article {
         id
+        responseCount
       }
     `,
     private: gql`
@@ -48,6 +57,45 @@ const fragments = {
   },
 }
 
+const Content = ({
+  isSmallUp,
+  article,
+  ...props
+}: (CardProps | ButtonProps) & {
+  isSmallUp: boolean
+  article: CommentBarArticle
+}) =>
+  isSmallUp ? (
+    <Card
+      bgColor="grey-lighter"
+      spacing={[0, 0]}
+      borderRadius="base"
+      {...(props as CardProps)}
+    >
+      <p>
+        <Translate id="putComment" />
+        <Translate zh_hant="…" zh_hans="…" />
+        <style jsx>{styles}</style>
+      </p>
+    </Card>
+  ) : (
+    <Button
+      spacing={['xtight', 'xtight']}
+      bgActiveColor="grey-lighter"
+      aira-label={TEXT.zh_hant.replyComment}
+      {...(props as ButtonProps)}
+    >
+      <TextIcon
+        icon={<IconComment size="md-s" />}
+        weight="md"
+        spacing="xtight"
+        size="sm"
+      >
+        {article.responseCount > 0 ? numAbbr(article.responseCount) : undefined}
+      </TextIcon>
+    </Button>
+  )
+
 const CommentBar = ({ article }: CommentBarProps) => {
   const viewer = useContext(ViewerContext)
   const isSmallUp = useResponsive('sm-up')
@@ -56,36 +104,27 @@ const CommentBar = ({ article }: CommentBarProps) => {
     window.dispatchEvent(new CustomEvent(REFETCH_RESPONSES, {}))
   }
 
-  const cardProps: CardProps = {
-    bgColor: 'grey-lighter',
-    spacing: [0, 0],
-    borderRadius: 'base',
+  const props = {
+    isSmallUp,
+    article,
   }
-
-  const Content = () => (
-    <p>
-      <Translate id="putComment" />
-      <Translate zh_hant="…" zh_hans="…" />
-      <style jsx>{styles}</style>
-    </p>
-  )
 
   if (viewer.shouldSetupLikerID) {
     return (
-      <LikeCoinDialog>
-        {({ open }) => (
-          <Card aria-haspopup="true" onClick={open} {...cardProps}>
-            <Content />
-          </Card>
-        )}
-      </LikeCoinDialog>
+      <Content
+        {...props}
+        aria-haspopup="true"
+        onClick={() =>
+          window.dispatchEvent(new CustomEvent(OPEN_LIKE_COIN_DIALOG, {}))
+        }
+      />
     )
   }
 
   if (viewer.isOnboarding && article.author?.id !== viewer.id) {
     return (
-      <Card
-        {...cardProps}
+      <Content
+        {...props}
         onClick={() => {
           window.dispatchEvent(
             new CustomEvent(ADD_TOAST, {
@@ -96,16 +135,14 @@ const CommentBar = ({ article }: CommentBarProps) => {
             })
           )
         }}
-      >
-        <Content />
-      </Card>
+      />
     )
   }
 
   if (viewer.isInactive) {
     return (
-      <Card
-        {...cardProps}
+      <Content
+        {...props}
         onClick={() => {
           window.dispatchEvent(
             new CustomEvent(ADD_TOAST, {
@@ -116,16 +153,14 @@ const CommentBar = ({ article }: CommentBarProps) => {
             })
           )
         }}
-      >
-        <Content />
-      </Card>
+      />
     )
   }
 
   if (article.author?.isBlocking) {
     return (
-      <Card
-        {...cardProps}
+      <Content
+        {...props}
         onClick={() => {
           window.dispatchEvent(
             new CustomEvent(ADD_TOAST, {
@@ -136,9 +171,7 @@ const CommentBar = ({ article }: CommentBarProps) => {
             })
           )
         }}
-      >
-        <Content />
-      </Card>
+      />
     )
   }
 
@@ -152,20 +185,12 @@ const CommentBar = ({ article }: CommentBarProps) => {
         }
       : appendTarget(PATHS.LOGIN, true)
 
-    return (
-      <Card {...clickProps} {...cardProps}>
-        <Content />
-      </Card>
-    )
+    return <Content {...props} {...clickProps} />
   }
 
   return (
     <CommentFormDialog articleId={article.id} submitCallback={refetchResponses}>
-      {({ open }) => (
-        <Card aria-haspopup="true" onClick={open} {...cardProps}>
-          <Content />
-        </Card>
-      )}
+      {({ open }) => <Content {...props} aria-haspopup="true" onClick={open} />}
     </CommentFormDialog>
   )
 }

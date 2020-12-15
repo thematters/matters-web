@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { DonationDialog, LikeCoinDialog } from '~/components'
+import { DonationDialog } from '~/components'
 
 import DonationButton from './DonationButton'
 import Donators from './Donators'
@@ -26,7 +26,7 @@ const fragments = {
   `,
 }
 
-const BaseDonation = ({ article }: DonationProps) => {
+const Donation = ({ article }: DonationProps) => {
   return (
     <section className="container">
       <DonationButton recipient={article.author} targetId={article.id} />
@@ -35,15 +35,6 @@ const BaseDonation = ({ article }: DonationProps) => {
 
       <style jsx>{styles}</style>
     </section>
-  )
-}
-
-const Donation = ({ article }: DonationProps) => {
-  return (
-    <>
-      <BaseDonation article={article} />
-      <LikeCoinDialog allowEventTrigger />
-    </>
   )
 }
 

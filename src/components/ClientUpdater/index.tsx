@@ -1,30 +1,29 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useApolloClient } from '@apollo/react-hooks'
 import differenceInDays from 'date-fns/differenceInDays'
 import parseISO from 'date-fns/parseISO'
 import { Router } from 'next/router'
-import { useEffect, useRef } from 'react'
+import { useContext, useEffect, useRef } from 'react'
 
-import { useEventListener, useWindowResize } from '~/components'
-import CLIENT_INFO from '~/components/GQL/queries/clientInfo'
+import { useEventListener, useWindowResize, ViewerContext } from '~/components'
 
 import {
-  CHANGE_NEW_USER_HOME_FEED_SORT_BY,
-  STORE_KEY_VIEW_MODE,
+  ONBOARDING_TASKS_HIDE,
+  STORAGE_KEY_ONBOARDING_TASKS,
+  STORAGE_KEY_VIEW_MODE,
 } from '~/common/enums'
-
-import { ClientInfo } from '~/components/GQL/queries/__generated__/ClientInfo'
+import { storage } from '~/common/utils'
 
 export const ClientUpdater = () => {
+  const client = useApolloClient()
+  const viewer = useContext(ViewerContext)
+
   /**
    * Update viewportSize
    */
-  const { client } = useQuery<ClientInfo>(CLIENT_INFO, {
-    variables: { id: 'local' },
-  })
   const [width, height] = useWindowResize()
 
   useEffect(() => {
-    if (!client?.writeData || !width || !height) {
+    if (!width || !height) {
       return
     }
 
@@ -64,33 +63,78 @@ export const ClientUpdater = () => {
   }, [])
 
   /**
-   * Restore View Mode from localStorage
+   * View Mode
    */
   useEffect(() => {
-    const storedViewMode = localStorage.getItem(STORE_KEY_VIEW_MODE)
+    const storedViewMode = storage.get(STORAGE_KEY_VIEW_MODE)
 
-    if (!client?.writeData || !storedViewMode) {
+    if (!storedViewMode) {
       return
     }
 
     client.writeData({
       id: 'ClientPreference:local',
-      data: { viewMode: storedViewMode },
+      data: {
+        viewMode: storedViewMode,
+      },
     })
   }, [])
 
   /**
-   * Change specific new user's home feed.
+   * Onboarding Tasks
    */
-  const changeNewUserHomeFeedSortBy = ({
-    createdAt,
-  }: {
-    createdAt: Date | string | number | null
-  }) => {
-    if (!createdAt) {
+  useEffect(() => {
+    if (!viewer.id) {
       return
     }
 
+    let storedOnboardingTasks = storage.get(STORAGE_KEY_ONBOARDING_TASKS)
+    const isSameViewer = storedOnboardingTasks?.viewerId === viewer.id
+
+    // Store init tasks state into local storage
+    if (!storedOnboardingTasks || !isSameViewer) {
+      storedOnboardingTasks = {
+        // mark `enabled` as `false` if viewer has finished all tasks.
+        enabled: !viewer.onboardingTasks.finished,
+      }
+      storage.set(STORAGE_KEY_ONBOARDING_TASKS, {
+        ...storedOnboardingTasks,
+        viewerId: viewer.id,
+      })
+    }
+
+    client.writeData({
+      id: 'ClientPreference:local',
+      data: {
+        onboardingTasks: {
+          __typename: 'OnboardingTasks',
+          ...storedOnboardingTasks,
+        },
+      },
+    })
+  }, [viewer.id])
+
+  // hide tasks
+  useEventListener(ONBOARDING_TASKS_HIDE, () => {
+    const storedOnboardingTasks = storage.get(STORAGE_KEY_ONBOARDING_TASKS)
+
+    storage.set(STORAGE_KEY_ONBOARDING_TASKS, {
+      ...storedOnboardingTasks,
+      enabled: false,
+    })
+
+    client.writeData({
+      id: 'ClientPreference:local',
+      data: {
+        onboardingTasks: { __typename: 'OnboardingTasks', enabled: false },
+      },
+    })
+  })
+
+  /**
+   * Change specific new user's home feed.
+   */
+  const changeNewUserHomeFeedSortBy = (createdAt: Date | string | number) => {
     if (typeof createdAt === 'string') {
       createdAt = parseISO(createdAt)
     }
@@ -105,10 +149,15 @@ export const ClientUpdater = () => {
     })
   }
 
-  useEventListener(
-    CHANGE_NEW_USER_HOME_FEED_SORT_BY,
-    changeNewUserHomeFeedSortBy
-  )
+  useEffect(() => {
+    const viewerCreatedAt = viewer?.info.createdAt
+
+    if (!viewerCreatedAt) {
+      return
+    }
+
+    changeNewUserHomeFeedSortBy(viewerCreatedAt)
+  }, [viewer.id])
 
   return null
 }

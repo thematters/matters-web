@@ -47,6 +47,7 @@ const TagFeedDigest = ({ tag, ...cardProps }: TagFeedDigestProps) => {
       <Card {...path} spacing={[0, 0]} {...cardProps}>
         <header>
           <Img url={tag.cover || TAG_COVER} size="360w" />
+
           <div className={maskClasses}>
             <Tag tag={tag} type="title" />
           </div>
@@ -60,9 +61,9 @@ const TagFeedDigest = ({ tag, ...cardProps }: TagFeedDigestProps) => {
               spacing={[0, 'base']}
               onClick={() =>
                 analytics.trackEvent('click_feed', {
-                  type: 'tag_detail_latest',
-                  styleType: 'title',
+                  type: 'tags',
                   contentType: 'article',
+                  styleType: 'title',
                   location: i,
                 })
               }

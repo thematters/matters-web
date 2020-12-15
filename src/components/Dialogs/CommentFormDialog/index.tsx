@@ -34,7 +34,7 @@ const BaseCommentFormDialog = ({
     <>
       {children && children({ open })}
 
-      <Dialog isOpen={showDialog} onDismiss={close} onRest={onRest}>
+      <Dialog isOpen={showDialog} onDismiss={close} onRest={onRest} fixedHeight>
         <CommentForm {...props} closeDialog={close} />
       </Dialog>
     </>

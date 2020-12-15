@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { useContext, useEffect } from 'react'
+import { Fragment, useContext, useEffect } from 'react'
 
 import {
   EmptySearch,
@@ -13,6 +13,7 @@ import {
 
 import { analytics, getQuery, mergeConnections } from '~/common/utils'
 
+import GoogleSearchButton from '../GoogleSearchButton'
 import { SEARCH_USERS_PRIVATE, SEARCH_USERS_PUBLIC } from './gql'
 
 import { SearchUsersPublic } from './__generated__/SearchUsersPublic'
@@ -115,19 +116,28 @@ const SearchUser = () => {
         {edges.map(
           ({ node, cursor }, i) =>
             node.__typename === 'User' && (
-              <List.Item key={cursor}>
-                <UserDigest.Rich
-                  user={node}
-                  onClick={() =>
-                    analytics.trackEvent('click_feed', {
-                      type: 'search_user',
-                      contentType: 'user',
-                      styleType: 'card',
-                      location: i,
-                    })
-                  }
-                />
-              </List.Item>
+              <Fragment>
+                <List.Item key={cursor}>
+                  <UserDigest.Rich
+                    user={node}
+                    onClick={() =>
+                      analytics.trackEvent('click_feed', {
+                        type: 'search_user',
+                        contentType: 'user',
+                        styleType: 'card',
+                        location: i,
+                      })
+                    }
+                  />
+                </List.Item>
+
+                {((edges.length > 6 && i === 6) ||
+                  (edges.length <= 6 && i === edges.length - 1)) && (
+                  <List.Item>
+                    <GoogleSearchButton />
+                  </List.Item>
+                )}
+              </Fragment>
             )
         )}
       </List>

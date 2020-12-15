@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import { forwardRef, useRef } from 'react'
 
 import { KEYCODES } from '~/common/enums'
-import { routerPush, Url } from '~/common/utils'
+import { routerPush } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -21,8 +21,7 @@ export interface CardProps {
   borderColor?: CardBorderColor
   borderRadius?: CardBorderRadius
 
-  href?: Url
-  as?: string
+  href?: string
 
   htmlHref?: string
   htmlTarget?: '_blank'
@@ -44,7 +43,6 @@ export const Card: React.FC<CardProps> = forwardRef(
       borderRadius,
 
       href,
-      as,
 
       htmlHref,
       htmlTarget,
@@ -55,7 +53,7 @@ export const Card: React.FC<CardProps> = forwardRef(
     },
     ref
   ) => {
-    const disabled = !as && !href && !htmlHref && !onClick
+    const disabled = !href && !htmlHref && !onClick
     const fallbackRef = useRef(null)
     const cardRef = (ref || fallbackRef) as React.RefObject<any> | null
 
@@ -71,7 +69,8 @@ export const Card: React.FC<CardProps> = forwardRef(
       hasBorder: !!borderColor || !!borderRadius,
       disabled,
     })
-    const ariaLabel = htmlHref || as ? `跳轉至 ${as || htmlHref}` : undefined
+    const ariaLabel =
+      htmlHref || href ? `跳轉至 ${href || htmlHref}` : undefined
 
     const openLink = ({
       newTab,
@@ -107,10 +106,10 @@ export const Card: React.FC<CardProps> = forwardRef(
       }
 
       if (href) {
-        if (newTab && as) {
-          window.open(as, '_blank')
+        if (newTab && href) {
+          window.open(href, '_blank')
         } else {
-          routerPush(href, as)
+          routerPush(href)
         }
       }
 

@@ -1,7 +1,9 @@
+import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import { useRouter } from 'next/router'
 
-import { Head, SearchBar } from '~/components'
+import { Head, OnboardingTasks, SearchBar } from '~/components'
+import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
 import { PATHS } from '~/common/enums'
 
@@ -11,6 +13,8 @@ import SideFooter from './SideFooter'
 import SideNav from './SideNav'
 import Spacing from './Spacing'
 import styles from './styles.css'
+
+import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 
 export const Layout: React.FC & {
   Main: typeof Main
@@ -52,10 +56,20 @@ interface MainProps {
 const Main: React.FC<MainProps> = ({ aside, bgColor, inEditor, children }) => {
   const router = useRouter()
   const isInSearch = router.pathname === PATHS.SEARCH
+  const isInArticleDetail = router.pathname === PATHS.ARTICLE_DETAIL
+
+  const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
+    variables: { id: 'local' },
+  })
+  const onboardingTasks = data?.clientPreference.onboardingTasks
+  const showOnboardingTasks =
+    !inEditor && !isInArticleDetail && onboardingTasks?.enabled
 
   const articleClasses = classNames({
     'l-col-three-mid': true,
     [`bg-${bgColor}`]: !!bgColor,
+    hasNavBar: !isInArticleDetail && !inEditor,
+    hasOnboardingTasks: showOnboardingTasks,
   })
   const asideClasses = classNames({
     'l-col-three-right': true,
@@ -65,12 +79,26 @@ const Main: React.FC<MainProps> = ({ aside, bgColor, inEditor, children }) => {
 
   return (
     <>
-      <article className={articleClasses}>{children}</article>
+      <article className={articleClasses}>
+        {children}
+
+        {showOnboardingTasks && (
+          <section className="u-lg-up-hide">
+            <OnboardingTasks.NavBar />
+          </section>
+        )}
+      </article>
 
       <aside className={asideClasses}>
         {!isInSearch && !inEditor && (
           <section className="u-lg-down-hide">
             <SearchBar />
+          </section>
+        )}
+
+        {showOnboardingTasks && (
+          <section className="u-lg-down-hide">
+            <OnboardingTasks.Widget />
           </section>
         )}
 

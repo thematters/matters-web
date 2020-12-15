@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic'
 
 import { Z_INDEX } from '~/common/enums'
 
-export type PopperInstance = import('@tippyjs/react/node_modules/tippy.js').Instance
+export type PopperInstance = any
 export type PopperProps = import('@tippyjs/react').TippyProps
 
 const DynamicLazyTippy = dynamic(() => import('./LazyTippy'), {
@@ -32,7 +32,7 @@ export const Dropdown: React.FC<PopperProps> = (props) => (
   <DynamicLazyTippy
     arrow={false}
     trigger="click"
-    interactive={true}
+    interactive
     offset={[0, 4]}
     placement="bottom"
     animation="shift-away"
@@ -44,7 +44,7 @@ export const Dropdown: React.FC<PopperProps> = (props) => (
 
 export const Tooltip: React.FC<PopperProps> = (props) => (
   <DynamicLazyTippy
-    arrow={true}
+    arrow
     interactive={false}
     offset={[0, 12]}
     placement="right"
@@ -66,7 +66,7 @@ export const hidePopperOnClick = (instance: PopperInstance) => {
     return
   }
 
-  box.addEventListener('click', (event) => {
+  box.addEventListener('click', (event: any) => {
     const target = event.target as HTMLElement
 
     if (target?.closest && target.closest('[data-clickable], a, button')) {
