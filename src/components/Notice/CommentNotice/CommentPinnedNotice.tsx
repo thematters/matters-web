@@ -2,28 +2,34 @@ import gql from 'graphql-tag'
 
 import { Translate } from '~/components'
 
-import NoticeActorAvatar from './NoticeActorAvatar'
-import NoticeActorName from './NoticeActorName'
-import NoticeComment from './NoticeComment'
-import NoticeHead from './NoticeHead'
-import styles from './styles.css'
+import NoticeActorAvatar from '../NoticeActorAvatar'
+import NoticeActorName from '../NoticeActorName'
+import NoticeComment from '../NoticeComment'
+import NoticeHead from '../NoticeHead'
+import styles from '../styles.css'
 
 import { CommentPinnedNotice as NoticeType } from './__generated__/CommentPinnedNotice'
 
 const CommentPinnedNotice = ({ notice }: { notice: NoticeType }) => {
+  if (!notice.actors) {
+    return null
+  }
+
+  const actor = notice.actors[0]
+
   return (
     <section className="container">
       <section className="avatar-wrap">
-        <NoticeActorAvatar user={notice.actor} key={notice.actor.id} />
+        <NoticeActorAvatar user={actor} key={actor.id} />
       </section>
 
       <section className="content-wrap">
         <NoticeHead notice={notice}>
-          <NoticeActorName user={notice.actor} />{' '}
+          <NoticeActorName user={actor} />{' '}
           <Translate zh_hant="置頂了你的評論" zh_hans="置顶了你的评论" />
         </NoticeHead>
 
-        <NoticeComment comment={notice.target} />
+        <NoticeComment comment={notice.comment} />
       </section>
 
       <style jsx>{styles}</style>
@@ -33,16 +39,14 @@ const CommentPinnedNotice = ({ notice }: { notice: NoticeType }) => {
 
 CommentPinnedNotice.fragments = {
   notice: gql`
-    fragment CommentPinnedNotice on CommentPinnedNotice {
+    fragment CommentPinnedNotice on CommentNotice {
       id
-      unread
-      __typename
       ...NoticeHead
-      actor {
+      actors {
         ...NoticeActorAvatarUser
         ...NoticeActorNameUser
       }
-      target {
+      comment: target {
         ...NoticeComment
       }
     }

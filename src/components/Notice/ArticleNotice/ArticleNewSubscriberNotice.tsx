@@ -5,16 +5,16 @@ import { Translate } from '~/components'
 
 import { numAbbr } from '~/common/utils'
 
-import NoticeActorAvatar from './NoticeActorAvatar'
-import NoticeActorName from './NoticeActorName'
-import NoticeArticle from './NoticeArticle'
-import NoticeHead from './NoticeHead'
-import NoticeTypeIcon from './NoticeTypeIcon'
-import styles from './styles.css'
+import NoticeActorAvatar from '../NoticeActorAvatar'
+import NoticeActorName from '../NoticeActorName'
+import NoticeArticle from '../NoticeArticle'
+import NoticeHead from '../NoticeHead'
+import NoticeTypeIcon from '../NoticeTypeIcon'
+import styles from '../styles.css'
 
-import { ArticleNewDownstreamNotice as NoticeType } from './__generated__/ArticleNewDownstreamNotice'
+import { ArticleNewSubscriberNotice as NoticeType } from './__generated__/ArticleNewSubscriberNotice'
 
-const ArticleNewDownstreamNotice = ({ notice }: { notice: NoticeType }) => {
+const ArticleNewSubscriberNotice = ({ notice }: { notice: NoticeType }) => {
   if (!notice || !notice.actors) {
     return null
   }
@@ -26,14 +26,14 @@ const ArticleNewDownstreamNotice = ({ notice }: { notice: NoticeType }) => {
     <section className="container">
       <section className="avatar-wrap">
         {isMultiActors ? (
-          <NoticeTypeIcon type="user" />
+          <NoticeTypeIcon type="bookmark" hasSpacing />
         ) : (
           <NoticeActorAvatar user={notice.actors[0]} />
         )}
       </section>
 
       <section className="content-wrap">
-        <NoticeHead hasDate={isMultiActors} notice={notice}>
+        <NoticeHead hasDate={!isMultiActors} notice={notice}>
           {notice.actors.slice(0, 2).map((actor, index) => (
             <Fragment key={index}>
               <NoticeActorName user={actor} />
@@ -46,11 +46,10 @@ const ArticleNewDownstreamNotice = ({ notice }: { notice: NoticeType }) => {
               zh_hans={`等 ${numAbbr(actorsCount)} 人`}
             />
           )}
-          <Translate zh_hant="引申了你的作品" zh_hans="引申了你的作品" />{' '}
-          <NoticeArticle article={notice.target} />
+          <Translate zh_hant="收藏了你的作品" zh_hans="收藏了你的作品" />
         </NoticeHead>
 
-        <NoticeArticle article={notice.downstream} />
+        <NoticeArticle article={notice.article} isBlock />
 
         {isMultiActors && (
           <section className="multi-actor-avatars">
@@ -66,21 +65,16 @@ const ArticleNewDownstreamNotice = ({ notice }: { notice: NoticeType }) => {
   )
 }
 
-ArticleNewDownstreamNotice.fragments = {
+ArticleNewSubscriberNotice.fragments = {
   notice: gql`
-    fragment ArticleNewDownstreamNotice on ArticleNewDownstreamNotice {
+    fragment ArticleNewSubscriberNotice on ArticleNotice {
       id
-      unread
-      __typename
       ...NoticeHead
       actors {
         ...NoticeActorAvatarUser
         ...NoticeActorNameUser
       }
-      downstream {
-        ...NoticeArticle
-      }
-      target {
+      article: target {
         ...NoticeArticle
       }
     }
@@ -91,4 +85,4 @@ ArticleNewDownstreamNotice.fragments = {
   `,
 }
 
-export default ArticleNewDownstreamNotice
+export default ArticleNewSubscriberNotice

@@ -2,29 +2,31 @@ import gql from 'graphql-tag'
 
 import { Translate } from '~/components'
 
-import NoticeActorAvatar from './NoticeActorAvatar'
-import NoticeActorName from './NoticeActorName'
-import NoticeArticle from './NoticeArticle'
-import NoticeHead from './NoticeHead'
-import NoticeTag from './NoticeTag'
-import styles from './styles.css'
+import NoticeActorAvatar from '../NoticeActorAvatar'
+import NoticeActorName from '../NoticeActorName'
+import NoticeArticle from '../NoticeArticle'
+import NoticeHead from '../NoticeHead'
+import NoticeTag from '../NoticeTag'
+import styles from '../styles.css'
 
-import { ArticleTagHasBeenRemovedNotice as NoticeType } from './__generated__/ArticleTagHasBeenRemovedNotice'
+import { ArticleTagRemovedNotice as NoticeType } from './__generated__/ArticleTagRemovedNotice'
 
-const ArticleTagHasBeenRemovedNotice = ({ notice }: { notice: NoticeType }) => {
-  if (!notice || !notice.actor) {
+const ArticleTagRemovedNotice = ({ notice }: { notice: NoticeType }) => {
+  if (!notice || !notice.actors) {
     return null
   }
+
+  const actor = notice.actors[0]
 
   return (
     <section className="container">
       <section className="avatar-wrap">
-        <NoticeActorAvatar user={notice.actor} />
+        <NoticeActorAvatar user={actor} />
       </section>
 
       <section className="content-wrap overflow-hidden">
         <NoticeHead notice={notice}>
-          <NoticeActorName user={notice.actor} />{' '}
+          <NoticeActorName user={actor} />{' '}
           <Translate
             zh_hant="將你的作品從標籤中拿走了"
             zh_hans="将你的作品从标签中拿走了"
@@ -41,14 +43,12 @@ const ArticleTagHasBeenRemovedNotice = ({ notice }: { notice: NoticeType }) => {
   )
 }
 
-ArticleTagHasBeenRemovedNotice.fragments = {
+ArticleTagRemovedNotice.fragments = {
   notice: gql`
-    fragment ArticleTagHasBeenRemovedNotice on ArticleTagHasBeenRemovedNotice {
+    fragment ArticleTagRemovedNotice on ArticleTagNotice {
       id
-      unread
-      __typename
       ...NoticeHead
-      actor {
+      actors {
         ...NoticeActorAvatarUser
         ...NoticeActorNameUser
       }
@@ -67,4 +67,4 @@ ArticleTagHasBeenRemovedNotice.fragments = {
   `,
 }
 
-export default ArticleTagHasBeenRemovedNotice
+export default ArticleTagRemovedNotice

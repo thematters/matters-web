@@ -5,21 +5,16 @@ import { Translate } from '~/components'
 
 import { numAbbr } from '~/common/utils'
 
-import NoticeActorAvatar from './NoticeActorAvatar'
-import NoticeActorName from './NoticeActorName'
-import NoticeArticle from './NoticeArticle'
-import NoticeComment from './NoticeComment'
-import NoticeHead from './NoticeHead'
-import NoticeTypeIcon from './NoticeTypeIcon'
-import styles from './styles.css'
+import NoticeActorAvatar from '../NoticeActorAvatar'
+import NoticeActorName from '../NoticeActorName'
+import NoticeFollower from '../NoticeFollower'
+import NoticeHead from '../NoticeHead'
+import NoticeTypeIcon from '../NoticeTypeIcon'
+import styles from '../styles.css'
 
-import { SubscribedArticleNewCommentNotice as NoticeType } from './__generated__/SubscribedArticleNewCommentNotice'
+import { UserNewFollowerNotice as NoticeType } from './__generated__/UserNewFollowerNotice'
 
-const SubscribedArticleNewCommentNotice = ({
-  notice,
-}: {
-  notice: NoticeType
-}) => {
+const UserNewFollowerNotice = ({ notice }: { notice: NoticeType }) => {
   if (!notice || !notice.actors) {
     return null
   }
@@ -30,15 +25,11 @@ const SubscribedArticleNewCommentNotice = ({
   return (
     <section className="container">
       <section className="avatar-wrap">
-        {isMultiActors ? (
-          <NoticeTypeIcon type="comment" hasSpacing />
-        ) : (
-          <NoticeActorAvatar user={notice.actors[0]} />
-        )}
+        <NoticeTypeIcon type="user" />
       </section>
 
       <section className="content-wrap">
-        <NoticeHead hasDate={isMultiActors} notice={notice}>
+        <NoticeHead hasDate={!isMultiActors} notice={notice}>
           {notice.actors.slice(0, 2).map((actor, index) => (
             <Fragment key={index}>
               <NoticeActorName user={actor} />
@@ -51,11 +42,7 @@ const SubscribedArticleNewCommentNotice = ({
               zh_hans={`等 ${numAbbr(actorsCount)} 人`}
             />
           )}
-          <Translate
-            zh_hant="評論了你收藏的作品"
-            zh_hans="评论了你收藏的作品"
-          />{' '}
-          <NoticeArticle article={notice.target} />
+          <Translate id="followingYou" />
         </NoticeHead>
 
         {isMultiActors ? (
@@ -65,7 +52,7 @@ const SubscribedArticleNewCommentNotice = ({
             ))}
           </section>
         ) : (
-          <NoticeComment comment={notice.comment} />
+          <NoticeFollower user={notice.actors[0]} />
         )}
       </section>
 
@@ -74,30 +61,22 @@ const SubscribedArticleNewCommentNotice = ({
   )
 }
 
-SubscribedArticleNewCommentNotice.fragments = {
+UserNewFollowerNotice.fragments = {
   notice: gql`
-    fragment SubscribedArticleNewCommentNotice on SubscribedArticleNewCommentNotice {
+    fragment UserNewFollowerNotice on UserNotice {
       id
-      unread
-      __typename
       ...NoticeHead
       actors {
         ...NoticeActorAvatarUser
         ...NoticeActorNameUser
-      }
-      target {
-        ...NoticeArticle
-      }
-      comment {
-        ...NoticeComment
+        ...NoticeFollower
       }
     }
     ${NoticeActorAvatar.fragments.user}
     ${NoticeActorName.fragments.user}
-    ${NoticeArticle.fragments.article}
-    ${NoticeComment.fragments.comment}
+    ${NoticeFollower.fragments.follower}
     ${NoticeHead.fragments.date}
   `,
 }
 
-export default SubscribedArticleNewCommentNotice
+export default UserNewFollowerNotice

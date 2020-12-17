@@ -5,23 +5,24 @@ import { Translate } from '~/components'
 
 import { numAbbr } from '~/common/utils'
 
-import NoticeActorAvatar from './NoticeActorAvatar'
-import NoticeActorName from './NoticeActorName'
-import NoticeArticle from './NoticeArticle'
-import NoticeComment from './NoticeComment'
-import NoticeHead from './NoticeHead'
-import NoticeTypeIcon from './NoticeTypeIcon'
-import styles from './styles.css'
+import NoticeActorAvatar from '../NoticeActorAvatar'
+import NoticeActorName from '../NoticeActorName'
+import NoticeArticle from '../NoticeArticle'
+import NoticeComment from '../NoticeComment'
+import NoticeHead from '../NoticeHead'
+import NoticeTypeIcon from '../NoticeTypeIcon'
+import styles from '../styles.css'
 
-import { CommentNewReplyNotice as NoticeType } from './__generated__/CommentNewReplyNotice'
+import { ArticleNewCommentNotice as NoticeType } from './__generated__/ArticleNewCommentNotice'
 
-const CommentNewReplyNotice = ({ notice }: { notice: NoticeType }) => {
+const ArticleNewCommentNotice = ({ notice }: { notice: NoticeType }) => {
   if (!notice || !notice.actors) {
     return null
   }
 
   const actorsCount = notice.actors.length
   const isMultiActors = actorsCount > 1
+  const commentArticle = notice.comment?.article
 
   return (
     <section className="container">
@@ -47,19 +48,19 @@ const CommentNewReplyNotice = ({ notice }: { notice: NoticeType }) => {
               zh_hans={`等 ${numAbbr(actorsCount)} 人`}
             />
           )}
-          <Translate zh_hant="回覆了你的評論" zh_hans="回复了你的评论" />
+          <Translate zh_hant="評論了" zh_hans="评论了" />{' '}
         </NoticeHead>
 
-        <NoticeArticle article={notice?.reply?.article || null} isBlock />
+        {commentArticle && <NoticeArticle article={commentArticle} isBlock />}
 
-        <NoticeComment comment={isMultiActors ? notice.target : notice.reply} />
-
-        {isMultiActors && (
+        {isMultiActors ? (
           <section className="multi-actor-avatars">
             {notice.actors.map((actor, index) => (
               <NoticeActorAvatar key={index} user={actor} />
             ))}
           </section>
+        ) : (
+          <NoticeComment comment={notice.comment} />
         )}
       </section>
 
@@ -67,21 +68,17 @@ const CommentNewReplyNotice = ({ notice }: { notice: NoticeType }) => {
     </section>
   )
 }
-CommentNewReplyNotice.fragments = {
+
+ArticleNewCommentNotice.fragments = {
   notice: gql`
-    fragment CommentNewReplyNotice on CommentNewReplyNotice {
+    fragment ArticleNewCommentNotice on CommentNotice {
       id
-      unread
-      __typename
       ...NoticeHead
       actors {
         ...NoticeActorAvatarUser
         ...NoticeActorNameUser
       }
-      target {
-        ...NoticeComment
-      }
-      reply {
+      comment: target {
         ...NoticeComment
         article {
           ...NoticeArticle
@@ -96,4 +93,4 @@ CommentNewReplyNotice.fragments = {
   `,
 }
 
-export default CommentNewReplyNotice
+export default ArticleNewCommentNotice
