@@ -48,7 +48,7 @@ const Confirm: React.FC<FormProps> = ({
   const { lang } = useContext(LanguageContext)
   const [payTo] = useMutation<PayToMutate>(PAY_TO)
 
-  const { data } = useQuery<WalletBalance>(WALLET_BALANCE, {
+  const { data, loading } = useQuery<WalletBalance>(WALLET_BALANCE, {
     fetchPolicy: 'network-only',
   })
 
@@ -125,7 +125,7 @@ const Confirm: React.FC<FormProps> = ({
   const balance = data?.viewer?.wallet.balance.HKD || 0
   const isWalletInsufficient = balance < amount
 
-  if (isSubmitting) {
+  if (isSubmitting || loading) {
     return (
       <Dialog.Content hasGrow>
         <Spinner />
