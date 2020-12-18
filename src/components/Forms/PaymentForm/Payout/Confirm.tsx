@@ -6,7 +6,7 @@ import { useContext, useRef } from 'react'
 import {
   Dialog,
   Form,
-  IconHelpMedium,
+  IconHelp24,
   LanguageContext,
   Spinner,
   TextIcon,
@@ -173,7 +173,7 @@ const BaseConfirm: React.FC<FormProps> = ({
                 >
                   <span>
                     <TextIcon
-                      icon={<IconHelpMedium />}
+                      icon={<IconHelp24 />}
                       spacing="xxtight"
                       textPlacement="left"
                     >

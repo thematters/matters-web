@@ -4,7 +4,7 @@ import _random from 'lodash/random'
 
 import {
   Button,
-  IconReload,
+  IconReload16,
   List,
   PageHeader,
   Spinner,
@@ -67,7 +67,7 @@ export const AuthorPicker = ({ title }: { title: React.ReactNode }) => {
             bgActiveColor="grey-lighter"
             onClick={shuffle}
           >
-            <TextIcon icon={<IconReload size="sm" />} color="grey">
+            <TextIcon icon={<IconReload16 size="sm" />} color="grey">
               <Translate id="shuffle" />
             </TextIcon>
           </Button>

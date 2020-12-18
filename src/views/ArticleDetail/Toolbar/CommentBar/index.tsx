@@ -7,7 +7,7 @@ import {
   Card,
   CardProps,
   CommentFormDialog,
-  IconComment,
+  IconActionComment16,
   TextIcon,
   Translate,
   useResponsive,
@@ -86,7 +86,7 @@ const Content = ({
       {...(props as ButtonProps)}
     >
       <TextIcon
-        icon={<IconComment size="md-s" />}
+        icon={<IconActionComment16 size="md-s" />}
         weight="md"
         spacing="xtight"
         size="sm"

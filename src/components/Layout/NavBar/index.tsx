@@ -2,9 +2,9 @@ import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
 import {
-  IconNavHome,
-  IconNavHomeActive,
-  IconNavSearch,
+  IconNavHome24,
+  IconNavHomeActive24,
+  IconNavSearch24,
   ViewerContext,
   WriteButton,
 } from '~/components'
@@ -30,8 +30,8 @@ const NavBar = () => {
       <ul>
         <NavListItem
           name={TEXT.zh_hant.discover}
-          icon={<IconNavHome size="md" />}
-          activeIcon={<IconNavHomeActive size="md" color="green" />}
+          icon={<IconNavHome24 size="md" />}
+          activeIcon={<IconNavHomeActive24 size="md" color="green" />}
           active={isInHome}
           href={PATHS.HOME}
         />
@@ -55,8 +55,8 @@ const NavBar = () => {
 
         <NavListItem
           name={TEXT.zh_hant.search}
-          icon={<IconNavSearch size="md" />}
-          activeIcon={<IconNavSearch size="md" color="green" />}
+          icon={<IconNavSearch24 size="md" />}
+          activeIcon={<IconNavSearch24 size="md" color="green" />}
           active={isInSearch}
           href={PATHS.SEARCH}
         />

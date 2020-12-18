@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import { useRef } from 'react'
 
-import { Button, IconLike, IconSuperLike, TextIcon } from '~/components'
+import { Button, IconActionClap16, IconSuperLike, TextIcon } from '~/components'
 
 import { numAbbr } from '~/common/utils'
 
@@ -64,7 +64,7 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
                 }
               }}
             >
-              <IconLike className="icon-like" size="md-s" />
+              <IconActionClap16 className="icon-like" size="md-s" />
               <IconSuperLike className="icon-superlike" size="md-s" />
             </span>
           }

@@ -1,8 +1,8 @@
 import classNames from 'classnames'
 
-import { Card, CardProps, IconRight, withIcon } from '~/components'
+import { Card, CardProps, IconArrowRight16, withIcon } from '~/components'
 
-import { ReactComponent as IconOnboardChecked } from '@/public/static/icons/onboard-checked.svg'
+import { ReactComponent as IconOnboardChecked } from '@/public/static/icons/40px/done.svg'
 
 import styles from './styles.css'
 
@@ -42,7 +42,7 @@ const TaskItem: React.FC<TaskItemProps> = ({
 
           {clickable && (
             <section className="right">
-              <IconRight color="grey" />
+              <IconArrowRight16 color="grey" />
             </section>
           )}
         </section>

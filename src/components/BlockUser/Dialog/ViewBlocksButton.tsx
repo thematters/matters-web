@@ -1,6 +1,6 @@
 import {
   Button,
-  IconRight,
+  IconArrowRight16,
   TextIcon,
   Translate,
   useResponsive,
@@ -18,7 +18,7 @@ const ViewBlocksButton = () => {
       spacing={[0, 0]}
     >
       <TextIcon
-        icon={<IconRight size="xs" color="green" />}
+        icon={<IconArrowRight16 size="xs" color="green" />}
         textPlacement="left"
       >
         {isMediumUp ? (

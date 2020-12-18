@@ -4,8 +4,8 @@ import { TextIcon, withIcon } from '~/components'
 
 import { analytics } from '~/common/utils'
 
-import { ReactComponent as IconShareLINECircle } from '@/public/static/icons/share-line-circle.svg'
-import { ReactComponent as IconShareLINE } from '@/public/static/icons/share-line.svg'
+import { ReactComponent as IconShareLINE } from '@/public/static/icons/16px/share-line.svg'
+import { ReactComponent as IconShareLINECircle } from '@/public/static/icons/40px/share-line-circle.svg'
 
 const LINE = ({
   title,

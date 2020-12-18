@@ -1,7 +1,7 @@
 import { useApolloClient } from '@apollo/react-hooks'
 import classNames from 'classnames'
 
-import { Button, IconClear, LoginButton, Translate } from '~/components'
+import { Button, IconClear16, LoginButton, Translate } from '~/components'
 
 import { TEXT } from '~/common/enums'
 
@@ -51,7 +51,7 @@ const Wall = ({ show }: WallProps) => {
 
             <div className="close">
               <Button onClick={close} aria-label={TEXT.zh_hant.close}>
-                <IconClear color="grey" />
+                <IconClear16 color="grey" />
               </Button>
             </div>
           </section>

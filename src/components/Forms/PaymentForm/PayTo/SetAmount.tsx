@@ -6,7 +6,7 @@ import { useContext, useRef, useState } from 'react'
 import {
   Dialog,
   Form,
-  IconExternalLink,
+  IconExternalLink16,
   LanguageContext,
   Spinner,
   Translate,
@@ -300,7 +300,7 @@ const SetAmount: React.FC<FormProps> = ({
                 openTabCallback({ window: payWindow, transaction: tx })
               }
             }}
-            icon={<IconExternalLink size="xs" />}
+            icon={<IconExternalLink16 size="xs" />}
           >
             <Translate
               zh_hant="前往 Liker Land 支付"

@@ -1,11 +1,11 @@
 import { useEffect } from 'react'
 import ReactDOMServer from 'react-dom/server'
 
-import { IconSpinner, withIcon } from '~/components'
+import { IconSpinner16, withIcon } from '~/components'
 
 import { analytics, sleep } from '~/common/utils'
 
-import { ReactComponent as IconPullToRefresh } from '@/public/static/icons/pull-to-refresh.svg'
+import { ReactComponent as IconPullToRefresh } from '@/public/static/icons/24px/pull-to-refresh.svg'
 
 import { useEventListener } from './useEventListener'
 
@@ -61,7 +61,9 @@ const Register = (selector = 'body', timeout = PTR_TIMEOUT) => {
       iconArrow: ReactDOMServer.renderToString(
         withIcon(IconPullToRefresh)({ size: 'md' })
       ),
-      iconRefreshing: ReactDOMServer.renderToString(<IconSpinner size="md" />),
+      iconRefreshing: ReactDOMServer.renderToString(
+        <IconSpinner16 size="md" />
+      ),
     })
   }
 

@@ -1,4 +1,4 @@
-import { IconInfo, IconMore, TextIcon, Translate } from '~/components'
+import { IconInfo16, IconMore16, TextIcon, Translate } from '~/components'
 
 import styles from './styles.css'
 
@@ -26,9 +26,9 @@ const State = ({ state }: StateProps) => {
     switch (state) {
       case 'canceled':
       case 'failed':
-        return <IconInfo />
+        return <IconInfo16 />
       case 'pending':
-        return <IconMore />
+        return <IconMore16 />
       default:
         return null
     }

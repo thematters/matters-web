@@ -1,6 +1,6 @@
 import {
-  IconMuteMedium,
-  IconUnMuteMedium,
+  IconMute24,
+  IconUnMute24,
   Menu,
   TextIcon,
   Translate,
@@ -46,11 +46,7 @@ const BlockUserButton = ({
   if (user.isBlocked) {
     return (
       <Menu.Item onClick={onUnblock}>
-        <TextIcon
-          icon={<IconUnMuteMedium size="md" />}
-          size="md"
-          spacing="base"
-        >
+        <TextIcon icon={<IconUnMute24 size="md" />} size="md" spacing="base">
           <Translate id="unblockUser" />
         </TextIcon>
       </Menu.Item>
@@ -59,7 +55,7 @@ const BlockUserButton = ({
 
   return (
     <Menu.Item onClick={openDialog}>
-      <TextIcon icon={<IconMuteMedium size="md" />} size="md" spacing="base">
+      <TextIcon icon={<IconMute24 size="md" />} size="md" spacing="base">
         <Translate id="blockUser" />
       </TextIcon>
     </Menu.Item>

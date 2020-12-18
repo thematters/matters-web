@@ -4,8 +4,8 @@ import { TextIcon, withIcon } from '~/components'
 
 import { analytics } from '~/common/utils'
 
-import { ReactComponent as IconShareFacebookCircle } from '@/public/static/icons/share-facebook-circle.svg'
-import { ReactComponent as IconShareFacebook } from '@/public/static/icons/share-facebook.svg'
+import { ReactComponent as IconShareFacebook } from '@/public/static/icons/16px/share-facebook.svg'
+import { ReactComponent as IconShareFacebookCircle } from '@/public/static/icons/40px/share-facebook-circle.svg'
 
 const Facebook = ({
   title,

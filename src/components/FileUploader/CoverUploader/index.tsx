@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 import {
   Button,
-  IconCameraMedium,
+  IconCamera24,
   Spinner,
   TextIcon,
   Translate,
@@ -134,7 +134,7 @@ export const CoverUploader = ({
       />
 
       <div className="mask">
-        {loading ? <Spinner /> : <IconCameraMedium color="white" size="xl" />}
+        {loading ? <Spinner /> : <IconCamera24 color="white" size="xl" />}
 
         {coverUrl && (
           <section className="delete">

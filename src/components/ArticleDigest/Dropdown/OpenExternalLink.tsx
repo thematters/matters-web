@@ -1,4 +1,4 @@
-import { IconExternal } from '~/components'
+import { IconExternal16 } from '~/components'
 
 import { toPath } from '~/common/utils'
 
@@ -16,7 +16,7 @@ const OpenExternalLink = ({
 
   return (
     <a href={path.href} target="_blank">
-      <IconExternal color="green" />
+      <IconExternal16 color="green" />
     </a>
   )
 }

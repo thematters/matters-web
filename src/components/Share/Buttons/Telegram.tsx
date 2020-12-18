@@ -4,8 +4,8 @@ import { TextIcon, withIcon } from '~/components'
 
 import { analytics } from '~/common/utils'
 
-import { ReactComponent as IconShareTelegramCircle } from '@/public/static/icons/share-telegram-circle.svg'
-import { ReactComponent as IconShareTelegram } from '@/public/static/icons/share-telegram.svg'
+import { ReactComponent as IconShareTelegram } from '@/public/static/icons/16px/share-telegram.svg'
+import { ReactComponent as IconShareTelegramCircle } from '@/public/static/icons/40px/share-telegram-circle.svg'
 
 const Telegram = ({
   title,

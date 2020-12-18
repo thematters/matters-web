@@ -1,4 +1,4 @@
-import { IconCheckedWithBorderMedium, Translate } from '~/components'
+import { IconChecked24, Translate } from '~/components'
 
 import { ASSET_TYPE } from '~/common/enums'
 
@@ -47,7 +47,7 @@ const Selector: React.FC<SelectorProps> = ({
               <img src={asset.path} />
 
               {asset.path === selected?.path && (
-                <IconCheckedWithBorderMedium size="md" color="green" />
+                <IconChecked24 size="md" color="green" />
               )}
             </button>
           </li>

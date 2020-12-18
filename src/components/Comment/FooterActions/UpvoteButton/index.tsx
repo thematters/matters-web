@@ -1,6 +1,11 @@
 import gql from 'graphql-tag'
 
-import { Button, IconUpVote, IconUpVoteActive, TextIcon } from '~/components'
+import {
+  Button,
+  IconActionUpVote16,
+  IconActionUpVoted16,
+  TextIcon,
+} from '~/components'
 import { useMutation } from '~/components/GQL'
 import {
   UNVOTE_COMMENT,
@@ -82,7 +87,7 @@ const UpvoteButton = ({
         disabled={disabled}
         aira-label="取消點讚"
       >
-        <TextIcon icon={<IconUpVoteActive />} color="green" weight="md">
+        <TextIcon icon={<IconActionUpVoted16 />} color="green" weight="md">
           {comment.upvotes > 0 ? numAbbr(comment.upvotes) : undefined}
         </TextIcon>
       </Button>
@@ -99,7 +104,11 @@ const UpvoteButton = ({
       disabled={disabled}
       aira-label="點讚"
     >
-      <TextIcon icon={<IconUpVote color="grey" />} color="grey" weight="md">
+      <TextIcon
+        icon={<IconActionUpVote16 color="grey" />}
+        color="grey"
+        weight="md"
+      >
         {comment.upvotes > 0 ? numAbbr(comment.upvotes) : undefined}
       </TextIcon>
     </Button>

@@ -1,4 +1,4 @@
-import { IconIPFSMedium, Menu, TextIcon, Translate } from '~/components'
+import { IconIPFS24, Menu, TextIcon, Translate } from '~/components'
 
 interface FingerprintButtonProps {
   openDialog: () => void
@@ -7,7 +7,7 @@ interface FingerprintButtonProps {
 const FingerprintButton = ({ openDialog }: FingerprintButtonProps) => {
   return (
     <Menu.Item onClick={openDialog}>
-      <TextIcon icon={<IconIPFSMedium size="md" />} size="md" spacing="base">
+      <TextIcon icon={<IconIPFS24 size="md" />} size="md" spacing="base">
         <Translate id="IPFSEntrance" />
       </TextIcon>
     </Menu.Item>

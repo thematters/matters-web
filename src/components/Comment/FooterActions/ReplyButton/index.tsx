@@ -5,7 +5,7 @@ import {
   Button,
   ButtonProps,
   CommentFormDialog,
-  IconComment,
+  IconActionComment16,
   useResponsive,
   ViewerContext,
 } from '~/components'
@@ -63,7 +63,7 @@ const CommentButton: React.FC<ButtonProps & { inCard: boolean }> = ({
     aira-label={TEXT.zh_hant.replyComment}
     {...props}
   >
-    <IconComment />
+    <IconActionComment16 />
   </Button>
 )
 

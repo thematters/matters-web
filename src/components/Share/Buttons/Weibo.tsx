@@ -4,8 +4,8 @@ import { TextIcon, Translate, withIcon } from '~/components'
 
 import { dom } from '~/common/utils'
 
-import { ReactComponent as IconShareWeiboCircle } from '@/public/static/icons/share-weibo-circle.svg'
-import { ReactComponent as IconShareWeibo } from '@/public/static/icons/share-weibo.svg'
+import { ReactComponent as IconShareWeibo } from '@/public/static/icons/16px/share-weibo.svg'
+import { ReactComponent as IconShareWeiboCircle } from '@/public/static/icons/40px/share-weibo-circle.svg'
 
 const Weibo = ({
   title,
