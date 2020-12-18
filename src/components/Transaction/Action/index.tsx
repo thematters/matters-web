@@ -1,4 +1,4 @@
-import { Avatar, IconHeart, IconWalletMedium } from '~/components'
+import { Avatar, IconDonation, IconWalletMedium } from '~/components'
 
 import styles from './styles.css'
 
@@ -50,13 +50,13 @@ const Action = ({
         <section className="from">
           <Avatar size="sm" user={sender} />
           <div className="outline">
-            <IconHeart size="md" color="red" />
+            <IconDonation size="md-s" />
           </div>
         </section>
       )}
       {isSender && recipient && (
         <section className="to">
-          <IconHeart size="md" color="red" />
+          <IconDonation size="md-s" />
           <div className="outline">
             <Avatar size="sm" user={recipient} />
           </div>
