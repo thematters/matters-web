@@ -1,8 +1,8 @@
 import {
   Button,
   ButtonProps,
-  IconColor,
   IconActionShare16,
+  IconColor,
   IconSize,
   ShareDialog,
   ShareDialogProps,

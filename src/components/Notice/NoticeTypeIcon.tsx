@@ -2,10 +2,10 @@ import classNames from 'classnames'
 
 import {
   IconActionBookmark16,
-  IconActionUpVote16,
-  IconAvatarLogo32,
   IconActionClap16,
   IconActionComment16,
+  IconActionUpVote16,
+  IconAvatarLogo32,
   IconUser16,
   IconVolume16,
 } from '~/components'

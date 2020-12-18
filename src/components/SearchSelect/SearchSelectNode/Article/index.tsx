@@ -3,8 +3,8 @@ import classNames from 'classnames'
 import {
   ArticleDigestDropdown,
   Card,
-  IconChecked24,
   IconCheck24,
+  IconChecked24,
 } from '~/components'
 
 import styles from '../styles.css'

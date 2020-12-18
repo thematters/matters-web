@@ -3,8 +3,8 @@ import gql from 'graphql-tag'
 import {
   Button,
   DropdownDialog,
-  IconMore32,
   IconActionShare16,
+  IconMore32,
   Menu,
   ShareDialog,
   TextIcon,
