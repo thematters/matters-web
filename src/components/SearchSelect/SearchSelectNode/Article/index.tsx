@@ -3,8 +3,8 @@ import classNames from 'classnames'
 import {
   ArticleDigestDropdown,
   Card,
-  IconCheck24,
-  IconChecked24,
+  IconChecked,
+  IconUnChecked,
 } from '~/components'
 
 import styles from '../styles.css'
@@ -42,10 +42,10 @@ const SearchSelectArticle: React.FC<SearchSelectArticleProps> = ({
 
         <span className="icon-select">
           {inStagingArea && selected && (
-            <IconChecked24 color="green" size="md" />
+            <IconChecked color="green" size="md-s" />
           )}
           {inStagingArea && !selected && (
-            <IconCheck24 color="grey-light" size="md" />
+            <IconUnChecked color="grey-light" size="md-s" />
           )}
         </span>
 

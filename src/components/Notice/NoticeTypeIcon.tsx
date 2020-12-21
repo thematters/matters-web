@@ -7,7 +7,7 @@ import {
   IconComment16,
   IconUpVote16,
   IconUser16,
-  IconVolume16,
+  IconVolume32,
 } from '~/components'
 
 import styles from './styles.css'
@@ -36,7 +36,7 @@ const getIcon = (type: IconType) => {
     case 'upvote':
       return <IconUpVote16 color="green" />
     case 'volume':
-      return <IconVolume16 color="grey-dark" size="lg" />
+      return <IconVolume32 color="grey-dark" size="lg" />
   }
 }
 

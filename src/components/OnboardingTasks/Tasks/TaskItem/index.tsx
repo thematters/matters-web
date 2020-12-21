@@ -31,7 +31,7 @@ const TaskItem: React.FC<TaskItemProps> = ({
         <section className={containerClasses}>
           <section className="left">
             <span className="check">
-              {withIcon(IconOnboardChecked)({ size: 'xl-m' })}
+              {withIcon(IconOnboardChecked)({ size: 'xl-m', color: 'gold' })}
             </span>
 
             <section className="content">

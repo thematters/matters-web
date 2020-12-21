@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 
-import { Card, IconCheck24, IconChecked24, Tag } from '~/components'
+import { Card, IconChecked, IconUnChecked, Tag } from '~/components'
 
 import styles from '../styles.css'
 
@@ -31,10 +31,10 @@ const SearchSelectTag: React.FC<SearchSelectTagProps> = ({
 
         <span className="icon-select">
           {inStagingArea && selected && (
-            <IconChecked24 color="green" size="md" />
+            <IconChecked color="green" size="md-s" />
           )}
           {inStagingArea && !selected && (
-            <IconCheck24 color="grey-light" size="md" />
+            <IconUnChecked color="grey-light" size="md-s" />
           )}
         </span>
 

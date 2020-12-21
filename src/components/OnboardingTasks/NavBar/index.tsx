@@ -36,7 +36,10 @@ const NavBar = () => {
               >
                 <section className="content">
                   <section className="left">
-                    {withIcon(IconOnboardLaunch)({ size: 'xl-m' })}
+                    {withIcon(IconOnboardLaunch)({
+                      size: 'xl-m',
+                      color: 'gold',
+                    })}
 
                     <p>
                       <Translate zh_hant="星際導航" zh_hans="星际导航" />
