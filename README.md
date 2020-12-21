@@ -87,8 +87,6 @@ We use [SVGR](https://react-svgr.com/) to transform SVGs into React components. 
   - Add `fill="none"` to `<svg>`.
 - If the icon is resuable, create a component file under `components/Icon` and export it from `components/Icon/index.tsx`.
 
-we put the reusable icons into separated files (e.g. `components/Icon/IconAdd16.tsx`).
-
 ## Conventions
 
 [Matters Design System](https://paper.dropbox.com/doc/Matters-Design-System--AXX9x2tuPldQFCWTN0Mt~_itAQ-klFuV5yv3ZlqpqHL0w0kU)
