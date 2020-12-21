@@ -2,28 +2,30 @@ import gql from 'graphql-tag'
 
 import { Translate } from '~/components'
 
-import NoticeActorAvatar from './NoticeActorAvatar'
-import NoticeActorName from './NoticeActorName'
-import NoticeHead from './NoticeHead'
-import NoticeTag from './NoticeTag'
-import styles from './styles.css'
+import NoticeActorAvatar from '../NoticeActorAvatar'
+import NoticeActorName from '../NoticeActorName'
+import NoticeHead from '../NoticeHead'
+import NoticeTag from '../NoticeTag'
+import styles from '../styles.css'
 
 import { TagAddEditorNotice as NoticeType } from './__generated__/TagAddEditorNotice'
 
 const TagAddEditorNotice = ({ notice }: { notice: NoticeType }) => {
-  if (!notice || !notice.actor) {
+  if (!notice || !notice.actors) {
     return null
   }
+
+  const actor = notice.actors[0]
 
   return (
     <section className="container">
       <section className="avatar-wrap">
-        <NoticeActorAvatar user={notice.actor} />
+        <NoticeActorAvatar user={actor} />
       </section>
 
       <section className="content-wrap">
         <NoticeHead notice={notice}>
-          <NoticeActorName user={notice.actor} />{' '}
+          <NoticeActorName user={actor} />{' '}
           <Translate
             zh_hant="邀請你成為標籤的協作者"
             zh_hans="邀请你成为標籤的协作者"
@@ -40,16 +42,14 @@ const TagAddEditorNotice = ({ notice }: { notice: NoticeType }) => {
 
 TagAddEditorNotice.fragments = {
   notice: gql`
-    fragment TagAddEditorNotice on TagAddEditorNotice {
+    fragment TagAddEditorNotice on TagNotice {
       id
-      unread
-      __typename
       ...NoticeHead
-      actor {
+      actors {
         ...NoticeActorAvatarUser
         ...NoticeActorNameUser
       }
-      tag {
+      tag: target {
         ...NoticeTag
       }
     }

@@ -5,17 +5,16 @@ import { Translate } from '~/components'
 
 import { numAbbr } from '~/common/utils'
 
-import NoticeActorAvatar from './NoticeActorAvatar'
-import NoticeActorName from './NoticeActorName'
-import NoticeArticle from './NoticeArticle'
-import NoticeComment from './NoticeComment'
-import NoticeHead from './NoticeHead'
-import NoticeTypeIcon from './NoticeTypeIcon'
-import styles from './styles.css'
+import NoticeActorAvatar from '../NoticeActorAvatar'
+import NoticeActorName from '../NoticeActorName'
+import NoticeArticle from '../NoticeArticle'
+import NoticeHead from '../NoticeHead'
+import NoticeTypeIcon from '../NoticeTypeIcon'
+import styles from '../styles.css'
 
-import { ArticleNewCommentNotice as NoticeType } from './__generated__/ArticleNewCommentNotice'
+import { ArticleNewAppreciationNotice as NoticeType } from './__generated__/ArticleNewAppreciationNotice'
 
-const ArticleNewCommentNotice = ({ notice }: { notice: NoticeType }) => {
+const ArticleNewAppreciationNotice = ({ notice }: { notice: NoticeType }) => {
   if (!notice || !notice.actors) {
     return null
   }
@@ -27,7 +26,7 @@ const ArticleNewCommentNotice = ({ notice }: { notice: NoticeType }) => {
     <section className="container">
       <section className="avatar-wrap">
         {isMultiActors ? (
-          <NoticeTypeIcon type="comment" hasSpacing />
+          <NoticeTypeIcon type="appreciate" hasSpacing />
         ) : (
           <NoticeActorAvatar user={notice.actors[0]} />
         )}
@@ -47,19 +46,20 @@ const ArticleNewCommentNotice = ({ notice }: { notice: NoticeType }) => {
               zh_hans={`等 ${numAbbr(actorsCount)} 人`}
             />
           )}
-          <Translate zh_hant="評論了" zh_hans="评论了" />{' '}
+          <Translate
+            zh_hant="喜歡並讚賞了你的作品"
+            zh_hans="喜欢并赞赏了你的作品"
+          />
         </NoticeHead>
 
-        <NoticeArticle article={notice.target} isBlock />
+        <NoticeArticle article={notice.article} isBlock />
 
-        {isMultiActors ? (
+        {isMultiActors && (
           <section className="multi-actor-avatars">
             {notice.actors.map((actor, index) => (
               <NoticeActorAvatar key={index} user={actor} />
             ))}
           </section>
-        ) : (
-          <NoticeComment comment={notice.comment} />
         )}
       </section>
 
@@ -68,30 +68,24 @@ const ArticleNewCommentNotice = ({ notice }: { notice: NoticeType }) => {
   )
 }
 
-ArticleNewCommentNotice.fragments = {
+ArticleNewAppreciationNotice.fragments = {
   notice: gql`
-    fragment ArticleNewCommentNotice on ArticleNewCommentNotice {
+    fragment ArticleNewAppreciationNotice on ArticleNotice {
       id
-      unread
-      __typename
       ...NoticeHead
       actors {
         ...NoticeActorAvatarUser
         ...NoticeActorNameUser
       }
-      target {
+      article: target {
         ...NoticeArticle
-      }
-      comment {
-        ...NoticeComment
       }
     }
     ${NoticeActorAvatar.fragments.user}
     ${NoticeActorName.fragments.user}
     ${NoticeArticle.fragments.article}
-    ${NoticeComment.fragments.comment}
     ${NoticeHead.fragments.date}
   `,
 }
 
-export default ArticleNewCommentNotice
+export default ArticleNewAppreciationNotice

@@ -4,24 +4,22 @@ import { useContext } from 'react'
 
 import { Translate, ViewerContext } from '~/components'
 
-import NoticeActorAvatar from './NoticeActorAvatar'
-import NoticeActorName from './NoticeActorName'
-import NoticeArticle from './NoticeArticle'
-import NoticeHead from './NoticeHead'
-import NoticeTag from './NoticeTag'
-import styles from './styles.css'
+import NoticeActorAvatar from '../NoticeActorAvatar'
+import NoticeActorName from '../NoticeActorName'
+import NoticeArticle from '../NoticeArticle'
+import NoticeHead from '../NoticeHead'
+import NoticeTag from '../NoticeTag'
+import styles from '../styles.css'
 
-import { ArticleTagHasBeenUnselectedNotice as NoticeType } from './__generated__/ArticleTagHasBeenUnselectedNotice'
+import { ArticleTagUnselectedNotice as NoticeType } from './__generated__/ArticleTagUnselectedNotice'
 
-const ArticleTagHasBeenUnselectedNotice = ({
-  notice,
-}: {
-  notice: NoticeType
-}) => {
+const ArticleTagUnselectedNotice = ({ notice }: { notice: NoticeType }) => {
   const viewer = useContext(ViewerContext)
-  if (!notice || !notice.actor || !notice.target) {
+  if (!notice || !notice.actors || !notice.target) {
     return null
   }
+
+  const actor = notice.actors[0]
 
   const isOwner = notice.tag?.owner?.id === viewer.id
   const isEditor = _some(notice.tag?.editors || [], ['id', viewer.id])
@@ -31,7 +29,7 @@ const ArticleTagHasBeenUnselectedNotice = ({
   return (
     <section className="container">
       <section className="avatar-wrap">
-        <NoticeActorAvatar user={notice.actor} />
+        <NoticeActorAvatar user={actor} />
       </section>
 
       <section className="content-wrap overflow-hidden">
@@ -42,7 +40,7 @@ const ArticleTagHasBeenUnselectedNotice = ({
               {'， '}
             </>
           )}
-          <NoticeActorName user={notice.actor} />{' '}
+          <NoticeActorName user={actor} />{' '}
           {isAuthor && (
             <Translate
               zh_hant="將你的作品從標籤精選中拿走了"
@@ -67,14 +65,12 @@ const ArticleTagHasBeenUnselectedNotice = ({
   )
 }
 
-ArticleTagHasBeenUnselectedNotice.fragments = {
+ArticleTagUnselectedNotice.fragments = {
   notice: gql`
-    fragment ArticleTagHasBeenUnselectedNotice on ArticleTagHasBeenUnselectedNotice {
+    fragment ArticleTagUnselectedNotice on ArticleTagNotice {
       id
-      unread
-      __typename
       ...NoticeHead
-      actor {
+      actors {
         ...NoticeActorAvatarUser
         ...NoticeActorNameUser
       }
@@ -99,4 +95,4 @@ ArticleTagHasBeenUnselectedNotice.fragments = {
   `,
 }
 
-export default ArticleTagHasBeenUnselectedNotice
+export default ArticleTagUnselectedNotice

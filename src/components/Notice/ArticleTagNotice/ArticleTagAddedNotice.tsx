@@ -4,21 +4,23 @@ import { useContext } from 'react'
 
 import { Translate, ViewerContext } from '~/components'
 
-import NoticeActorAvatar from './NoticeActorAvatar'
-import NoticeActorName from './NoticeActorName'
-import NoticeArticle from './NoticeArticle'
-import NoticeHead from './NoticeHead'
-import NoticeTag from './NoticeTag'
-import styles from './styles.css'
+import NoticeActorAvatar from '../NoticeActorAvatar'
+import NoticeActorName from '../NoticeActorName'
+import NoticeArticle from '../NoticeArticle'
+import NoticeHead from '../NoticeHead'
+import NoticeTag from '../NoticeTag'
+import styles from '../styles.css'
 
-import { ArticleTagHasBeenAddedNotice as NoticeType } from './__generated__/ArticleTagHasBeenAddedNotice'
+import { ArticleTagAddedNotice as NoticeType } from './__generated__/ArticleTagAddedNotice'
 
-const ArticleTagHasBeenAddedNotice = ({ notice }: { notice: NoticeType }) => {
+const ArticleTagAddedNotice = ({ notice }: { notice: NoticeType }) => {
   const viewer = useContext(ViewerContext)
 
-  if (!notice || !notice.actor || !notice.target) {
+  if (!notice || !notice.actors || !notice.target) {
     return null
   }
+
+  const actor = notice.actors[0]
 
   const isOwner = notice.tag?.owner?.id === viewer.id
   const isEditor = _some(notice.tag?.editors || [], ['id', viewer.id])
@@ -28,12 +30,12 @@ const ArticleTagHasBeenAddedNotice = ({ notice }: { notice: NoticeType }) => {
   return (
     <section className="container">
       <section className="avatar-wrap">
-        <NoticeActorAvatar user={notice.actor} />
+        <NoticeActorAvatar user={actor} />
       </section>
 
       <section className="content-wrap overflow-hidden">
         <NoticeHead notice={notice}>
-          <NoticeActorName user={notice.actor} />{' '}
+          <NoticeActorName user={actor} />{' '}
           {isAuthor && (
             <Translate
               zh_hant="發現你的作品，並把它加入標籤"
@@ -59,14 +61,12 @@ const ArticleTagHasBeenAddedNotice = ({ notice }: { notice: NoticeType }) => {
   )
 }
 
-ArticleTagHasBeenAddedNotice.fragments = {
+ArticleTagAddedNotice.fragments = {
   notice: gql`
-    fragment ArticleTagHasBeenAddedNotice on ArticleTagHasBeenAddedNotice {
+    fragment ArticleTagAddedNotice on ArticleTagNotice {
       id
-      unread
-      __typename
       ...NoticeHead
-      actor {
+      actors {
         ...NoticeActorAvatarUser
         ...NoticeActorNameUser
       }
@@ -94,4 +94,4 @@ ArticleTagHasBeenAddedNotice.fragments = {
   `,
 }
 
-export default ArticleTagHasBeenAddedNotice
+export default ArticleTagAddedNotice

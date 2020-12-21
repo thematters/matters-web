@@ -2,28 +2,30 @@ import gql from 'graphql-tag'
 
 import { Translate } from '~/components'
 
-import NoticeActorAvatar from './NoticeActorAvatar'
-import NoticeActorName from './NoticeActorName'
-import NoticeHead from './NoticeHead'
-import NoticeTag from './NoticeTag'
-import styles from './styles.css'
+import NoticeActorAvatar from '../NoticeActorAvatar'
+import NoticeActorName from '../NoticeActorName'
+import NoticeHead from '../NoticeHead'
+import NoticeTag from '../NoticeTag'
+import styles from '../styles.css'
 
 import { TagLeaveNotice as NoticeType } from './__generated__/TagLeaveNotice'
 
 const TagLeaveNotice = ({ notice }: { notice: NoticeType }) => {
-  if (!notice || !notice.actor) {
+  if (!notice || !notice.actors) {
     return null
   }
+
+  const actor = notice.actors[0]
 
   return (
     <section className="container">
       <section className="avatar-wrap">
-        <NoticeActorAvatar user={notice.actor} />
+        <NoticeActorAvatar user={actor} />
       </section>
 
       <section className="content-wrap">
         <NoticeHead notice={notice}>
-          <NoticeActorName user={notice.actor} />{' '}
+          <NoticeActorName user={actor} />{' '}
           <Translate
             zh_hant="辭去了標籤主理人權限，你要不要試試看成為新的主理人？"
             zh_hans="辞去了标签主理人权限，你要不要试试看成为新的主理人？"
@@ -40,16 +42,14 @@ const TagLeaveNotice = ({ notice }: { notice: NoticeType }) => {
 
 TagLeaveNotice.fragments = {
   notice: gql`
-    fragment TagLeaveNotice on TagLeaveNotice {
+    fragment TagLeaveNotice on TagNotice {
       id
-      unread
-      __typename
       ...NoticeHead
-      actor {
+      actors {
         ...NoticeActorAvatarUser
         ...NoticeActorNameUser
       }
-      tag {
+      tag: target {
         ...NoticeTag
       }
     }

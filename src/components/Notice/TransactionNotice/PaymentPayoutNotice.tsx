@@ -2,14 +2,14 @@ import gql from 'graphql-tag'
 
 import { Translate } from '~/components'
 
-import NoticeDate from './NoticeDate'
-import NoticeTypeIcon from './NoticeTypeIcon'
-import styles from './styles.css'
+import NoticeDate from '../NoticeDate'
+import NoticeTypeIcon from '../NoticeTypeIcon'
+import styles from '../styles.css'
 
 import { PaymentPayoutNotice as NoticeType } from './__generated__/PaymentPayoutNotice'
 
 const PaymentPayoutNotice = ({ notice }: { notice: NoticeType }) => {
-  const tx = notice.target
+  const tx = notice.tx
 
   return (
     <section className="container">
@@ -41,12 +41,10 @@ const PaymentPayoutNotice = ({ notice }: { notice: NoticeType }) => {
 
 PaymentPayoutNotice.fragments = {
   notice: gql`
-    fragment PaymentPayoutNotice on PaymentPayoutNotice {
+    fragment PaymentPayoutNotice on TransactionNotice {
       id
-      unread
-      __typename
       ...NoticeDate
-      target {
+      tx: target {
         id
         amount
         currency
