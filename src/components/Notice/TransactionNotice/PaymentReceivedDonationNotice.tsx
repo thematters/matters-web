@@ -2,26 +2,31 @@ import gql from 'graphql-tag'
 
 import { Translate } from '~/components'
 
-import NoticeActorAvatar from './NoticeActorAvatar'
-import NoticeActorName from './NoticeActorName'
-import NoticeArticle from './NoticeArticle'
-import NoticeHead from './NoticeHead'
-import styles from './styles.css'
+import NoticeActorAvatar from '../NoticeActorAvatar'
+import NoticeActorName from '../NoticeActorName'
+import NoticeArticle from '../NoticeArticle'
+import NoticeHead from '../NoticeHead'
+import styles from '../styles.css'
 
 import { PaymentReceivedDonationNotice as NoticeType } from './__generated__/PaymentReceivedDonationNotice'
 
 const PaymentReceivedDonationNotice = ({ notice }: { notice: NoticeType }) => {
-  const tx = notice.target
+  if (!notice.actors) {
+    return null
+  }
+
+  const tx = notice.tx
+  const actor = notice.actors[0]
 
   return (
     <section className="container">
       <section className="avatar-wrap">
-        <NoticeActorAvatar user={notice.actor} />
+        <NoticeActorAvatar user={actor} />
       </section>
 
       <section className="content-wrap">
         <NoticeHead notice={notice}>
-          <NoticeActorName user={notice.actor} />{' '}
+          <NoticeActorName user={actor} />{' '}
           <Translate zh_hant="支持了你的作品 " zh_hans="支持了你的作品 " />
           {tx && (
             <span className="highlight">
@@ -46,16 +51,14 @@ const PaymentReceivedDonationNotice = ({ notice }: { notice: NoticeType }) => {
 
 PaymentReceivedDonationNotice.fragments = {
   notice: gql`
-    fragment PaymentReceivedDonationNotice on PaymentReceivedDonationNotice {
+    fragment PaymentReceivedDonationNotice on TransactionNotice {
       id
-      unread
-      __typename
       ...NoticeHead
-      actor {
+      actors {
         ...NoticeActorAvatarUser
         ...NoticeActorNameUser
       }
-      target {
+      tx: target {
         id
         amount
         currency

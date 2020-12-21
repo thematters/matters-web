@@ -2,10 +2,10 @@ import gql from 'graphql-tag'
 
 import { Translate } from '~/components'
 
-import NoticeArticle from './NoticeArticle'
-import NoticeHead from './NoticeHead'
-import NoticeTypeIcon from './NoticeTypeIcon'
-import styles from './styles.css'
+import NoticeArticle from '../NoticeArticle'
+import NoticeHead from '../NoticeHead'
+import NoticeTypeIcon from '../NoticeTypeIcon'
+import styles from '../styles.css'
 
 import { RevisedArticleNotPublishedNotice as NoticeType } from './__generated__/RevisedArticleNotPublishedNotice'
 
@@ -28,7 +28,7 @@ const RevisedArticleNotPublishedNotice = ({
           />
         </NoticeHead>
 
-        <NoticeArticle article={notice.target} isBlock />
+        <NoticeArticle article={notice.article} isBlock />
       </section>
 
       <style jsx>{styles}</style>
@@ -38,12 +38,10 @@ const RevisedArticleNotPublishedNotice = ({
 
 RevisedArticleNotPublishedNotice.fragments = {
   notice: gql`
-    fragment RevisedArticleNotPublishedNotice on RevisedArticleNotPublishedNotice {
+    fragment RevisedArticleNotPublishedNotice on ArticleNotice {
       id
-      unread
-      __typename
       ...NoticeHead
-      target {
+      article: target {
         ...NoticeArticle
       }
     }
