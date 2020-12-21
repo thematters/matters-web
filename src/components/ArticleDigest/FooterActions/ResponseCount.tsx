@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 
-import { Button, IconActionComment16, TextIcon } from '~/components'
+import { Button, IconComment16, TextIcon } from '~/components'
 
 import { URL_FRAGMENT } from '~/common/enums'
 import { numAbbr, toPath } from '~/common/utils'
@@ -51,7 +51,7 @@ const ResponseCount = ({
       aira-label="查看評論"
     >
       <TextIcon
-        icon={<IconActionComment16 size={size === 'xs' ? 'xs' : undefined} />}
+        icon={<IconComment16 size={size === 'xs' ? 'xs' : undefined} />}
         color="grey"
         weight="md"
         size={size}

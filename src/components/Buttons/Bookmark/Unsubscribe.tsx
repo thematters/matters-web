@@ -2,7 +2,7 @@ import { useContext } from 'react'
 
 import {
   Button,
-  IconActionBookmarked16,
+  IconBookmarked16,
   IconSize,
   Translate,
   ViewerContext,
@@ -67,7 +67,7 @@ const Unsubscribe = ({
       }}
       disabled={disabled}
     >
-      <IconActionBookmarked16 color="black" size={size} />
+      <IconBookmarked16 color="black" size={size} />
     </Button>
   )
 }

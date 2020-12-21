@@ -44,6 +44,51 @@
   - `docker pull 903380195283.dkr.ecr.ap-southeast-1.amazonaws.com/matters-web:latest`
   - `docker tag 903380195283.dkr.ecr.ap-southeast-1.amazonaws.com/matters-web:latest matters-web:latest`
 
+## Static File
+
+```bash
+./public/static/
+├── apple-touch-icon.png # favicons
+├── favicon-16x16.png
+├── icon-96x96.png
+├── icons # icons in different sizes
+│   ├── 12px
+│   │   ├── ...
+│   │   └── draft-edit.svg
+│   ├── 16px
+│   │   ├── ...
+│   │   └── world.svg
+│   ├── 24px
+│   │   ├── ...
+│   │   └── wallet.svg
+│   ├── 32px
+│   │   ├── ...
+│   │   └── warning.svg
+│   ├── 40px
+│   │   ├── ...
+│   │   └── share-whatsapp-circle.svg
+│   ├── 72px
+│   │   ├── ...
+│   │   └── empty-warning.svg
+│   └── stripe.svg
+├── images # illustrations
+│   ├── ...
+│   └── publish-4.svg
+├── manifest.json # configurations
+└── opensearch.xml
+```
+
+### Icon
+
+We use [SVGR](https://react-svgr.com/) to transform SVGs into React components. For reusability and bundle optimization:
+
+- If the icon color isn't static:
+  - Modify the values of `fill` and `stroke` attributes to `currentColor`, and
+  - Add `fill="none"` to `<svg>`.
+- If the icon is resuable, create a component file under `components/Icon` and export it from `components/Icon/index.tsx`.
+
+we put the reusable icons into separated files (e.g. `components/Icon/IconAdd16.tsx`).
+
 ## Conventions
 
 [Matters Design System](https://paper.dropbox.com/doc/Matters-Design-System--AXX9x2tuPldQFCWTN0Mt~_itAQ-klFuV5yv3ZlqpqHL0w0kU)

@@ -1,11 +1,6 @@
 import gql from 'graphql-tag'
 
-import {
-  Button,
-  IconActionDownVote16,
-  IconActionDownVoted16,
-  TextIcon,
-} from '~/components'
+import { Button, IconDownVote16, IconDownVoted16, TextIcon } from '~/components'
 import { useMutation } from '~/components/GQL'
 import {
   UNVOTE_COMMENT,
@@ -88,7 +83,7 @@ const DownvoteButton = ({
         disabled={disabled}
         aria-label="取消點踩"
       >
-        <TextIcon icon={<IconActionDownVoted16 />} color="green" weight="md">
+        <TextIcon icon={<IconDownVoted16 />} color="green" weight="md">
           {comment.downvotes > 0 ? numAbbr(comment.downvotes) : undefined}
         </TextIcon>
       </Button>
@@ -105,11 +100,7 @@ const DownvoteButton = ({
       disabled={disabled}
       aria-label="點踩"
     >
-      <TextIcon
-        icon={<IconActionDownVote16 color="grey" />}
-        color="grey"
-        weight="md"
-      >
+      <TextIcon icon={<IconDownVote16 color="grey" />} color="grey" weight="md">
         {comment.downvotes > 0 ? numAbbr(comment.downvotes) : undefined}
       </TextIcon>
     </Button>

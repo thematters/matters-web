@@ -3,7 +3,7 @@ import { useContext } from 'react'
 
 import {
   Button,
-  IconActionBookmark16,
+  IconBookmark16,
   IconSize,
   Translate,
   ViewerContext,
@@ -93,7 +93,7 @@ const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
       onClick={onClick}
       disabled={disabled}
     >
-      <IconActionBookmark16 size={size} />
+      <IconBookmark16 size={size} />
     </Button>
   )
 }
