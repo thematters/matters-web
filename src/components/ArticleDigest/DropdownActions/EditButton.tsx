@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { IconEdit, Menu, TextIcon, Translate } from '~/components'
+import { IconEdit16, Menu, TextIcon, Translate } from '~/components'
 
 import { URL_QS } from '~/common/enums'
 import { toPath } from '~/common/utils'
@@ -32,7 +32,7 @@ const EditArticleButton = ({
     <Menu.Item
       href={`${href}?${URL_QS.MODE_EDIT.key}=${URL_QS.MODE_EDIT.value}`}
     >
-      <TextIcon icon={<IconEdit size="md" />} size="md" spacing="base">
+      <TextIcon icon={<IconEdit16 size="md" />} size="md" spacing="base">
         <Translate id="editArticle" />
       </TextIcon>
     </Menu.Item>

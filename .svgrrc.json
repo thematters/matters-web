@@ -1,0 +1,8 @@
+{
+  "memo": true,
+  "dimensions": false,
+  "svgoConfig": {
+    "removeDimensions": true,
+    "sortAttrs": true
+  }
+}

@@ -4,7 +4,7 @@ import gql from 'graphql-tag'
 import {
   Button,
   CopyToClipboard,
-  IconLink,
+  IconCopy16,
   Spinner,
   Translate,
 } from '~/components'
@@ -31,7 +31,7 @@ const CopyButton = ({ text }: { text: string }) => {
         bgActiveColor="grey-lighter"
         aira-label={TEXT.zh_hant.copy}
       >
-        <IconLink color="grey" />
+        <IconCopy16 color="grey" />
       </Button>
     </CopyToClipboard>
   )

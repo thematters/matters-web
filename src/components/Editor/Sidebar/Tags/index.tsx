@@ -1,6 +1,6 @@
 import _uniq from 'lodash/uniq'
 
-import { IconHashTagMedium, Tag } from '~/components'
+import { IconHashTag24, Tag } from '~/components'
 import {
   SearchSelectDialog,
   SearchSelectNode,
@@ -31,7 +31,7 @@ const AddTags = ({ tags, onEdit, saving, disabled }: AddTagsProps) => {
     >
       {({ open: openAddMyArticlesDialog }) => (
         <Box
-          icon={<IconHashTagMedium size="md" />}
+          icon={<IconHashTag24 size="md" />}
           title="addTag"
           onClick={openAddMyArticlesDialog}
           disabled={disabled}

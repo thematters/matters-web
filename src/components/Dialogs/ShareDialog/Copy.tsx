@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 
-import { Button, CopyToClipboard, IconLink } from '~/components'
+import { Button, CopyToClipboard, IconCopy16 } from '~/components'
 
 import { TEXT } from '~/common/enums'
 
@@ -17,7 +17,7 @@ const Copy = ({ link }: { link: string }) => {
           bgActiveColor="grey-lighter"
           aira-label={TEXT.zh_hant.copy}
         >
-          <IconLink color="grey" />
+          <IconCopy16 color="grey" />
         </Button>
       </CopyToClipboard>
 

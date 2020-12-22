@@ -1,12 +1,6 @@
 import gql from 'graphql-tag'
 
-import {
-  IconPinMedium,
-  IconUnPinMedium,
-  Menu,
-  TextIcon,
-  Translate,
-} from '~/components'
+import { IconPin24, IconUnPin24, Menu, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import updateUserArticles from '~/components/GQL/updates/userArticles'
 
@@ -58,11 +52,11 @@ const StickyButton = ({ article }: { article: StickyButtonArticle }) => {
   return (
     <Menu.Item onClick={toggleSticky}>
       {article.sticky ? (
-        <TextIcon icon={<IconUnPinMedium size="md" />} size="md" spacing="base">
+        <TextIcon icon={<IconUnPin24 size="md" />} size="md" spacing="base">
           <Translate id="unstickyArticle" />
         </TextIcon>
       ) : (
-        <TextIcon icon={<IconPinMedium size="md" />} size="md" spacing="base">
+        <TextIcon icon={<IconPin24 size="md" />} size="md" spacing="base">
           <Translate id="stickyArticle" />
         </TextIcon>
       )}

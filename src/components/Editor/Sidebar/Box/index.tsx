@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 
-import { Button, IconEdit, TextIcon, Translate } from '~/components'
+import { Button, IconEdit16, TextIcon, Translate } from '~/components'
 
 import { TEXT, TextId } from '~/common/enums'
 
@@ -38,7 +38,7 @@ const Box: React.FC<BoxProps> = ({
           spacing={['xtight', 'xtight']}
           aira-label={TEXT.zh_hant[title]}
         >
-          <IconEdit color="grey" />
+          <IconEdit16 color="grey" />
         </Button>
       </header>
 

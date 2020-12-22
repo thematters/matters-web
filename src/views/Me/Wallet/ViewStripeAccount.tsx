@@ -3,8 +3,8 @@ import gql from 'graphql-tag'
 
 import {
   Form,
-  IconExternalLink,
-  IconSpinner,
+  IconExternalLink16,
+  IconSpinner16,
   TextIcon,
   Translate,
 } from '~/components'
@@ -38,9 +38,9 @@ const Buttons = () => {
       htmlTarget="_blank"
       right={
         loading ? (
-          <IconSpinner color="grey" size="sm" />
+          <IconSpinner16 color="grey" size="sm" />
         ) : (
-          <TextIcon icon={<IconExternalLink color="grey" size="sm" />} />
+          <TextIcon icon={<IconExternalLink16 color="grey" size="sm" />} />
         )
       }
     />

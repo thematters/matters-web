@@ -2,8 +2,8 @@ import { useContext } from 'react'
 
 import {
   Button,
-  IconPen,
-  IconSpinner,
+  IconPen16,
+  IconSpinner16,
   LanguageContext,
   TextIcon,
   Translate,
@@ -38,9 +38,9 @@ const BaseWriteButton = ({
   isLarge?: boolean
 }) => {
   const WriteIcon = loading ? (
-    <IconSpinner size="sm" color="white" />
+    <IconSpinner16 size="sm" color="white" />
   ) : (
-    <IconPen size="sm" color="white" />
+    <IconPen16 size="sm" color="white" />
   )
 
   return (

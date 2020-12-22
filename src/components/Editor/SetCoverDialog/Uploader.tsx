@@ -1,7 +1,7 @@
 import VisuallyHidden from '@reach/visually-hidden'
 import classNames from 'classnames'
 
-import { IconCamera, IconSpinner, TextIcon, Translate } from '~/components'
+import { IconCamera16, IconSpinner16, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 
@@ -117,7 +117,7 @@ const Uploader: React.FC<UploaderProps> = ({
       <div>
         <h3>
           <TextIcon
-            icon={<IconCamera />}
+            icon={<IconCamera16 />}
             color="green"
             size="sm"
             weight="md"
@@ -147,7 +147,7 @@ const Uploader: React.FC<UploaderProps> = ({
         </VisuallyHidden>
       </div>
 
-      {loading && <IconSpinner color="grey-light" size="md" />}
+      {loading && <IconSpinner16 color="grey-light" size="md" />}
 
       <style jsx>{styles}</style>
     </label>

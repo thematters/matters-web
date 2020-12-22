@@ -1,4 +1,4 @@
-import { ArticleDigestDropdown, IconCollectionMedium } from '~/components'
+import { ArticleDigestDropdown, IconCollection24 } from '~/components'
 import {
   SearchSelectDialog,
   SearchSelectNode,
@@ -35,7 +35,7 @@ const Collection = ({
     >
       {({ open: openAddMyArticlesDialog }) => (
         <Box
-          icon={<IconCollectionMedium size="md" />}
+          icon={<IconCollection24 size="md" />}
           title="extendArticle"
           onClick={openAddMyArticlesDialog}
           disabled={disabled}

@@ -4,7 +4,7 @@ import { useState } from 'react'
 import {
   Button,
   Dialog,
-  IconDeleteDraftXS,
+  IconDraftDelete12,
   TextIcon,
   Translate,
 } from '~/components'
@@ -113,7 +113,7 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
         onClick={open}
       >
         <TextIcon
-          icon={<IconDeleteDraftXS size="xs" />}
+          icon={<IconDraftDelete12 size="xs" />}
           size="xs"
           color="grey-dark"
           weight="md"

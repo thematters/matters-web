@@ -3,8 +3,8 @@ import classNames from 'classnames'
 import { useContext, useEffect } from 'react'
 
 import {
-  IconNavNotification,
-  IconNavNotificationActive,
+  IconNavNotification24,
+  IconNavNotificationActive24,
   ViewerContext,
 } from '~/components'
 import { UNREAD_NOTICE_COUNT } from '~/components/GQL/queries/notice'
@@ -43,9 +43,9 @@ const NotificationUnreadIcon: React.FC<UnreadIconProps> = ({ active }) => {
   return (
     <span className={iconClasses}>
       {active ? (
-        <IconNavNotificationActive size="md" color="green" />
+        <IconNavNotificationActive24 size="md" color="green" />
       ) : (
-        <IconNavNotification size="md" />
+        <IconNavNotification24 size="md" />
       )}
 
       <style jsx>{styles}</style>

@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 
 import {
   Button,
-  IconSpinner,
+  IconSpinner16,
   RevisedArticlePublishDialog,
   Tag,
   TextIcon,
@@ -191,7 +191,7 @@ const EditModeHeader = ({
               color="white"
               size="md"
               weight="md"
-              icon={loading && <IconSpinner size="sm" />}
+              icon={loading && <IconSpinner16 size="sm" />}
             >
               {loading ? null : saveButtonText}
             </TextIcon>

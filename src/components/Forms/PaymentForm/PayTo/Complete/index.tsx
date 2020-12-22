@@ -7,7 +7,7 @@ import {
   ArticleDigestSidebar,
   Avatar,
   Dialog,
-  IconHeart,
+  IconDonate24,
   List,
   ShuffleButton,
   Spinner,
@@ -100,7 +100,7 @@ const Complete: React.FC<Props> = ({ callback, recipient, targetId }) => {
     <Dialog.Content hasGrow>
       <section className="container">
         <section className="complete-avatar">
-          <IconHeart size="xl-m" color="red" />
+          <IconDonate24 size="lg" />
 
           <div className="complete-avatar-outline">
             <Avatar size="lg" user={recipient} />
