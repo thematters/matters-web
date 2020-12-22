@@ -16,7 +16,7 @@ import { ArticleTagAddedNotice as NoticeType } from './__generated__/ArticleTagA
 const ArticleTagAddedNotice = ({ notice }: { notice: NoticeType }) => {
   const viewer = useContext(ViewerContext)
 
-  if (!notice || !notice.actors || !notice.target) {
+  if (!notice.actors) {
     return null
   }
 

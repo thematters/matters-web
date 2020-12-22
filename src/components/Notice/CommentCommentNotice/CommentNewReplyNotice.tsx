@@ -16,7 +16,7 @@ import styles from '../styles.css'
 import { CommentNewReplyNotice as NoticeType } from './__generated__/CommentNewReplyNotice'
 
 const CommentNewReplyNotice = ({ notice }: { notice: NoticeType }) => {
-  if (!notice || !notice.actors) {
+  if (!notice.actors) {
     return null
   }
 

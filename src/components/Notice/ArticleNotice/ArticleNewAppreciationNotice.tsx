@@ -15,7 +15,7 @@ import styles from '../styles.css'
 import { ArticleNewAppreciationNotice as NoticeType } from './__generated__/ArticleNewAppreciationNotice'
 
 const ArticleNewAppreciationNotice = ({ notice }: { notice: NoticeType }) => {
-  if (!notice || !notice.actors) {
+  if (!notice.actors) {
     return null
   }
 

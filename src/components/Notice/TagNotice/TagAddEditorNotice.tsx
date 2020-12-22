@@ -11,7 +11,7 @@ import styles from '../styles.css'
 import { TagAddEditorNotice as NoticeType } from './__generated__/TagAddEditorNotice'
 
 const TagAddEditorNotice = ({ notice }: { notice: NoticeType }) => {
-  if (!notice || !notice.actors) {
+  if (!notice.actors) {
     return null
   }
 
