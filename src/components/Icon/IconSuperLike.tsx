@@ -1,4 +1,5 @@
-import { ReactComponent as SuperLike } from './icons/superlike.svg'
+import { ReactComponent as Icon } from '@/public/static/icons/superlike.svg'
+
 import { withIcon } from './withIcon'
 
-export const IconSuperLike = withIcon(SuperLike)
+export const IconSuperLike = withIcon(Icon)

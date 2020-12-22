@@ -1,4 +1,4 @@
-import { Avatar, IconDonation, IconWalletMedium } from '~/components'
+import { Avatar, IconDonate24, IconWallet24 } from '~/components'
 
 import styles from './styles.css'
 
@@ -39,7 +39,7 @@ const Action = ({
   if (isWalletAction) {
     return (
       <section className="wallet">
-        <IconWalletMedium size="md" color="green" />
+        <IconWallet24 size="md" color="green" />
         <style jsx>{styles}</style>
       </section>
     )
@@ -50,13 +50,13 @@ const Action = ({
         <section className="from">
           <Avatar size="sm" user={sender} />
           <div className="outline">
-            <IconDonation size="md-s" />
+            <IconDonate24 size="md-s" />
           </div>
         </section>
       )}
       {isSender && recipient && (
         <section className="to">
-          <IconDonation size="md-s" />
+          <IconDonate24 size="md-s" />
           <div className="outline">
             <Avatar size="sm" user={recipient} />
           </div>

@@ -3,11 +3,11 @@ import { useContext } from 'react'
 import {
   Button,
   DropdownDialog,
-  IconAddMedium,
-  IconEdit,
-  IconMoreLarge,
-  IconProfileMedium,
-  IconRemoveMedium,
+  IconAdd24,
+  IconEdit16,
+  IconMore32,
+  IconProfile24,
+  IconRemove24,
   LanguageContext,
   Menu,
   TagDialog,
@@ -63,24 +63,20 @@ const BaseDropdownActions = ({
     <Menu width={isInDropdown ? 'sm' : undefined}>
       {isOwner && (
         <Menu.Item onClick={openTagDialog}>
-          <TextIcon icon={<IconEdit size="md" />} size="md" spacing="base">
+          <TextIcon icon={<IconEdit16 size="md" />} size="md" spacing="base">
             <Translate id="editTag" />
           </TextIcon>
         </Menu.Item>
       )}
       <Menu.Item onClick={openTagAddSelectedArticlesDialog}>
-        <TextIcon icon={<IconAddMedium size="md" />} size="md" spacing="base">
+        <TextIcon icon={<IconAdd24 size="md" />} size="md" spacing="base">
           <Translate id="tagAddSelectedArticle" />
         </TextIcon>
       </Menu.Item>
 
       {isOwner && (
         <Menu.Item onClick={openTagEditorDialog}>
-          <TextIcon
-            icon={<IconProfileMedium size="md" />}
-            size="md"
-            spacing="base"
-          >
+          <TextIcon icon={<IconProfile24 size="md" />} size="md" spacing="base">
             <Translate zh_hant="管理社群" zh_hans="管理社群" />
           </TextIcon>
         </Menu.Item>
@@ -88,7 +84,7 @@ const BaseDropdownActions = ({
       {(isOwner || isEditor) && (
         <Menu.Item onClick={openTagLeaveDialog}>
           <TextIcon
-            icon={<IconRemoveMedium size="md" />}
+            icon={<IconRemove24 size="md" />}
             color="red"
             size="md"
             spacing="base"
@@ -120,7 +116,7 @@ const BaseDropdownActions = ({
             onClick={open}
             ref={ref}
           >
-            <IconMoreLarge size="lg" color={isSmallUp ? 'green' : 'white'} />
+            <IconMore32 size="lg" color={isSmallUp ? 'green' : 'white'} />
           </Button>
           <style jsx>{styles}</style>
         </section>

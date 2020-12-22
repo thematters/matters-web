@@ -4,8 +4,8 @@ import { TextIcon, withIcon } from '~/components'
 
 import { analytics } from '~/common/utils'
 
-import { ReactComponent as IconShareTwitterCircle } from '@/public/static/icons/share-twitter-circle.svg'
-import { ReactComponent as IconShareTwitter } from '@/public/static/icons/share-twitter.svg'
+import { ReactComponent as IconShareTwitter } from '@/public/static/icons/16px/share-twitter.svg'
+import { ReactComponent as IconShareTwitterCircle } from '@/public/static/icons/40px/share-twitter-circle.svg'
 
 const Twitter = ({
   title,

@@ -5,7 +5,7 @@ import {
   DropResult,
 } from 'react-beautiful-dnd'
 
-import { IconSort } from '~/components'
+import { IconSort16 } from '~/components'
 
 import { SelectNode } from '../SearchingArea'
 import SearchSelectNode from '../SearchSelectNode'
@@ -73,7 +73,7 @@ const DraggableNodes: React.FC<DraggableNodesProps> = ({
                     {...dragProvided.dragHandleProps}
                   >
                     <span className="drag-handler" aria-label="拖拽">
-                      <IconSort color="grey-light" />
+                      <IconSort16 color="grey-light" />
                     </span>
 
                     <SearchSelectNode

@@ -7,11 +7,6 @@ declare module '*.png?url' {
   export = value
 }
 
-declare module '*.svg?sprite' {
-  const value: any
-  export = value
-}
-
 declare module '*.svg' {
   import { FunctionComponent, SVGProps } from 'react'
 

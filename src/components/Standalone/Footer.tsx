@@ -7,11 +7,11 @@ import {
   withIcon,
 } from '~/components'
 
-import { ReactComponent as IconFooterFacebook } from '@/public/static/icons/footer-facebook.svg'
-import { ReactComponent as IconFooterInstagram } from '@/public/static/icons/footer-instagram.svg'
-import { ReactComponent as IconFooterTelegram } from '@/public/static/icons/footer-telegram.svg'
-import { ReactComponent as IconFooterTwitter } from '@/public/static/icons/footer-twitter.svg'
-import { ReactComponent as IconFooterWeChat } from '@/public/static/icons/footer-wechat.svg'
+import { ReactComponent as IconFooterFacebook } from '@/public/static/icons/24px/footer-facebook.svg'
+import { ReactComponent as IconFooterInstagram } from '@/public/static/icons/24px/footer-instagram.svg'
+import { ReactComponent as IconFooterTelegram } from '@/public/static/icons/24px/footer-telegram.svg'
+import { ReactComponent as IconFooterTwitter } from '@/public/static/icons/24px/footer-twitter.svg'
+import { ReactComponent as IconFooterWeChat } from '@/public/static/icons/24px/footer-wechat.svg'
 
 import styles from './styles.css'
 

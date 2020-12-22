@@ -1,4 +1,4 @@
-import { IconImageMedium } from '~/components'
+import { IconImage24 } from '~/components'
 
 import SetCoverDialog, { BaseSetCoverDialogProps } from '../../SetCoverDialog'
 import Box from '../Box'
@@ -13,7 +13,7 @@ const AddTags = ({ cover, disabled, ...restProps }: AddTagsProps) => {
     <SetCoverDialog cover={cover} {...restProps}>
       {({ open: openSetCoverDialog }) => (
         <Box
-          icon={<IconImageMedium size="md" />}
+          icon={<IconImage24 size="md" />}
           title="setCover"
           onClick={openSetCoverDialog}
           disabled={disabled}

@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 
-import { IconClear, IconSearch, LanguageContext } from '~/components'
+import { IconClear16, IconSearch16, LanguageContext } from '~/components'
 
 import { TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
@@ -72,7 +72,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
           type="submit"
           aria-label={TEXT.zh_hant.search}
         >
-          <IconSearch color="grey" />
+          <IconSearch16 color="grey" />
         </button>
 
         {value && (
@@ -82,7 +82,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
             aria-label={TEXT.zh_hant.clear}
             onClick={() => onChange('')}
           >
-            <IconClear color="grey" />
+            <IconClear16 color="grey" />
           </button>
         )}
       </form>

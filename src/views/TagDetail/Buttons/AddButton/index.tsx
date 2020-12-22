@@ -3,7 +3,7 @@ import { useContext } from 'react'
 import {
   Button,
   DropdownDialog,
-  IconPen,
+  IconPen16,
   LanguageContext,
   Menu,
   TextIcon,
@@ -71,7 +71,7 @@ const BaseDropdownActions = ({
           aria-haspopup="true"
           ref={ref}
         >
-          <TextIcon icon={<IconPen />} weight="md" size="md-s">
+          <TextIcon icon={<IconPen16 />} weight="md" size="md-s">
             <Translate zh_hant="投稿" zh_hans="投稿" />
           </TextIcon>
         </Button>

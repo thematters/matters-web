@@ -7,9 +7,9 @@ import {
   hidePopperOnClick,
   IconLogo,
   IconLogoGraph,
-  IconNavHome,
-  IconNavHomeActive,
-  IconNavSearch,
+  IconNavHome24,
+  IconNavHomeActive24,
+  IconNavSearch24,
   Menu,
   Translate,
   useResponsive,
@@ -56,8 +56,8 @@ const SideNav = () => {
       <ul>
         <NavListItem
           name={<Translate id="discover" />}
-          icon={<IconNavHome size="md" />}
-          activeIcon={<IconNavHomeActive size="md" />}
+          icon={<IconNavHome24 size="md" />}
+          activeIcon={<IconNavHomeActive24 size="md" />}
           active={isInHome}
           isMediumUp={isMediumUp}
           href={PATHS.HOME}
@@ -86,8 +86,8 @@ const SideNav = () => {
         {!isLargeUp && (
           <NavListItem
             name={<Translate id="search" />}
-            icon={<IconNavSearch size="md" />}
-            activeIcon={<IconNavSearch size="md" color="green" />}
+            icon={<IconNavSearch24 size="md" />}
+            activeIcon={<IconNavSearch24 size="md" color="green" />}
             active={isInSearch}
             isMediumUp={isMediumUp}
             href={PATHS.SEARCH}

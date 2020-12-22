@@ -3,7 +3,7 @@ import _filter from 'lodash/filter'
 import _get from 'lodash/get'
 import { useRouter } from 'next/router'
 
-import { IconUnPinMedium, Menu, TextIcon, Translate } from '~/components'
+import { IconUnPin24, Menu, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import { ADD_TOAST } from '~/common/enums'
@@ -114,7 +114,7 @@ const SetTagUnselectedButton = ({
         await update()
       }}
     >
-      <TextIcon icon={<IconUnPinMedium size="md" />} size="md" spacing="base">
+      <TextIcon icon={<IconUnPin24 size="md" />} size="md" spacing="base">
         <Translate zh_hant="取消精選" zh_hans="取消精选" />
       </TextIcon>
     </Menu.Item>

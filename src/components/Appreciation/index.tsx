@@ -4,7 +4,7 @@ import React from 'react'
 import {
   ArticleDigestTitle,
   Card,
-  IconLike,
+  IconClap16,
   TextIcon,
   Translate,
   UserDigest,
@@ -100,7 +100,7 @@ const BaseAppreciation = ({ type, appreciation }: AppreciationProps) => {
         <section className="right">
           <div className="num" aria-label={`${amount} 次讚賞`}>
             <TextIcon
-              icon={<IconLike />}
+              icon={<IconClap16 />}
               spacing="xtight"
               weight="md"
               color="green"

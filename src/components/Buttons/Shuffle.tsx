@@ -1,7 +1,7 @@
 import {
   Button,
   ButtonProps,
-  IconReload,
+  IconReload12,
   TextIcon,
   TextIconProps,
   Translate,
@@ -20,7 +20,7 @@ export const ShuffleButton: React.FC<ShuffleButtonProps> = ({
     {...props}
   >
     <TextIcon
-      icon={<IconReload size="xs" />}
+      icon={<IconReload12 size="xs" />}
       color={color || 'grey'}
       size="xs"
       weight="md"

@@ -1,4 +1,4 @@
-import { Card, IconAdd, TextIcon, Translate } from '~/components'
+import { Card, IconAdd16, TextIcon, Translate } from '~/components'
 
 import styles from './styles.css'
 
@@ -13,7 +13,7 @@ const CreateTag: React.FC<CreateTagProps> = ({ tag, onClick }) => {
   return (
     <Card spacing={['base', 'base']} onClick={() => onClick(tag)}>
       <section className="add-tag">
-        <TextIcon icon={<IconAdd />} color="green" size="md">
+        <TextIcon icon={<IconAdd16 />} color="green" size="md">
           <Translate id="create" />
         </TextIcon>
 

@@ -3,8 +3,8 @@ import gql from 'graphql-tag'
 import {
   Button,
   DropdownDialog,
-  IconMoreLarge,
-  IconShare,
+  IconMore32,
+  IconShare16,
   Menu,
   ShareDialog,
   TextIcon,
@@ -58,7 +58,7 @@ const BaseDropdownActions = ({
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
     <Menu width={isInDropdown ? 'sm' : undefined}>
       <Menu.Item onClick={openShareDialog}>
-        <TextIcon icon={<IconShare size="md" />} size="md" spacing="base">
+        <TextIcon icon={<IconShare16 size="md" />} size="md" spacing="base">
           <Translate zh_hant="分享主頁" zh_hans="分享主页" />
         </TextIcon>
       </Menu.Item>
@@ -88,7 +88,7 @@ const BaseDropdownActions = ({
           onClick={open}
           ref={ref}
         >
-          <IconMoreLarge size="lg" color={isSmallUp ? 'green' : 'white'} />
+          <IconMore32 size="lg" color={isSmallUp ? 'green' : 'white'} />
         </Button>
       )}
     </DropdownDialog>

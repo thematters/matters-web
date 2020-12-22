@@ -3,12 +3,12 @@ import { useContext } from 'react'
 import {
   CardSpacing,
   FeaturesContext,
-  IconBookmarkMedium,
-  IconDraftMedium,
-  IconHistoryMedium,
-  IconLikeMedium,
-  IconProfileMedium,
-  IconWalletMedium,
+  IconBookmark24,
+  IconClap24,
+  IconDraft24,
+  IconHistory24,
+  IconProfile24,
+  IconWallet24,
   Menu,
   TextIcon,
   Translate,
@@ -39,7 +39,7 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
     <Menu spacingY={isInSideDrawerNav ? 0 : undefined}>
       <Menu.Item spacing={menuItemSpacing} {...viewerPath}>
         <TextIcon
-          icon={<IconProfileMedium size="md" />}
+          icon={<IconProfile24 size="md" />}
           spacing="base"
           size={menuItemSize}
         >
@@ -49,7 +49,7 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
 
       <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_DRAFTS}>
         <TextIcon
-          icon={<IconDraftMedium size="md" />}
+          icon={<IconDraft24 size="md" />}
           spacing="base"
           size={menuItemSize}
         >
@@ -60,7 +60,7 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
       {(features.add_credit || features.payout) && (
         <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_WALLET}>
           <TextIcon
-            icon={<IconWalletMedium size="md" />}
+            icon={<IconWallet24 size="md" />}
             spacing="base"
             size={menuItemSize}
           >
@@ -71,7 +71,7 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
 
       <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_BOOKMARKS}>
         <TextIcon
-          icon={<IconBookmarkMedium size="md" />}
+          icon={<IconBookmark24 size="md" />}
           spacing="base"
           size={menuItemSize}
         >
@@ -81,7 +81,7 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
 
       <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_APPRECIATIONS_SENT}>
         <TextIcon
-          icon={<IconLikeMedium size="md" />}
+          icon={<IconClap24 size="md" />}
           spacing="base"
           size={menuItemSize}
         >
@@ -91,7 +91,7 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
 
       <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_HISTORY}>
         <TextIcon
-          icon={<IconHistoryMedium size="md" />}
+          icon={<IconHistory24 size="md" />}
           spacing="base"
           size={menuItemSize}
         >

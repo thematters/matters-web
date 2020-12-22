@@ -1,9 +1,9 @@
 import classNames from 'classnames'
 
 import {
-  IconCollectionMedium,
-  IconHashTagMedium,
-  IconImageMedium,
+  IconCollection24,
+  IconHashTag24,
+  IconImage24,
   TextIcon,
   Translate,
 } from '~/components'
@@ -64,7 +64,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
               {({ open: openSetCoverDialog }) => (
                 <button type="button" onClick={openSetCoverDialog}>
                   <TextIcon
-                    icon={<IconImageMedium size="md" />}
+                    icon={<IconImage24 size="md" />}
                     size="xm"
                     weight="md"
                     spacing="xtight"
@@ -89,7 +89,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
               {({ open: openAddMyArticlesDialog }) => (
                 <button type="button" onClick={openAddMyArticlesDialog}>
                   <TextIcon
-                    icon={<IconHashTagMedium size="md" />}
+                    icon={<IconHashTag24 size="md" />}
                     size="xm"
                     weight="md"
                     spacing="xtight"
@@ -113,7 +113,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
               {({ open: openAddMyArticlesDialog }) => (
                 <button type="button" onClick={openAddMyArticlesDialog}>
                   <TextIcon
-                    icon={<IconCollectionMedium size="md" />}
+                    icon={<IconCollection24 size="md" />}
                     size="xm"
                     weight="md"
                     spacing="xtight"

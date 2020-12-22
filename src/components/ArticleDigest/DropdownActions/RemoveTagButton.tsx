@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import _isArray from 'lodash/isArray'
 import { useRouter } from 'next/router'
 
-import { IconRemoveMedium, Menu, TextIcon, Translate } from '~/components'
+import { IconRemove24, Menu, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import updateTagArticlesCount from '~/components/GQL/updates/tagArticlesCount'
 
@@ -68,7 +68,7 @@ const RemoveTagButton = ({ article }: { article: RemoveTagButtonArticle }) => {
         )
       }}
     >
-      <TextIcon icon={<IconRemoveMedium size="md" />} size="md" spacing="base">
+      <TextIcon icon={<IconRemove24 size="md" />} size="md" spacing="base">
         <Translate zh_hant="移除作品" zh_hans="移除作品" />
       </TextIcon>
     </Menu.Item>
