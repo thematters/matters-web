@@ -24,7 +24,7 @@ import { UserDigestRichUserPublic } from './__generated__/UserDigestRichUserPubl
  *   <UserDigest.Rich user={user} />
  */
 
-type RichProps = {
+export type UserDigestRichProps = {
   user: UserDigestRichUserPublic & Partial<UserDigestRichUserPrivate>
 
   size?: 'sm' | 'lg'
@@ -84,7 +84,7 @@ const Rich = ({
   hasDescriptionReplacement = false,
 
   ...cardProps
-}: RichProps) => {
+}: UserDigestRichProps) => {
   const path = toPath({
     page: 'userProfile',
     userName: user.userName || '',
@@ -163,7 +163,9 @@ const Rich = ({
 /**
  * Memoizing
  */
-type MemoizedRichType = React.MemoExoticComponent<React.FC<RichProps>> & {
+type MemoizedRichType = React.MemoExoticComponent<
+  React.FC<UserDigestRichProps>
+> & {
   fragments: typeof fragments
 }
 
