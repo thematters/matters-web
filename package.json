@@ -90,7 +90,7 @@
     "react-waypoint": "^9.0.3",
     "subscriptions-transport-ws": "^0.9.18",
     "use-debounce": "^3.4.3",
-    "validator": "^13.1.17"
+    "validator": "^13.5.2"
   },
   "devDependencies": {
     "@babel/plugin-proposal-optional-chaining": "^7.12.7",
@@ -151,7 +151,7 @@
     "postcss-each": "^0.10.0",
     "postcss-mixins": "^6.2.3",
     "postcss-preset-env": "^6.7.0",
-    "prettier": "^2.2.0",
+    "prettier": "^2.2.1",
     "react-is": "^17.0.1",
     "styled-jsx-plugin-postcss": "^3.0.2",
     "stylelint": "^13.8.0",
