@@ -1,6 +1,8 @@
-import { IconInfo16, IconMore16, TextIcon, Translate } from '~/components'
+import { IconInfo16, TextIcon, Tooltip, Translate } from '~/components'
 
 import styles from './styles.css'
+
+import { TransactionState } from '__generated__/globalTypes'
 
 /***
  * This is a sub component of Transaction that presents canceled, failed
@@ -13,34 +15,37 @@ import styles from './styles.css'
  * ```
  */
 interface StateProps {
-  state: string | null
+  state: TransactionState
+  message: string | null
 }
 
-const State = ({ state }: StateProps) => {
-  if (!state || state === 'succeeded') {
+const State = ({ state, message }: StateProps) => {
+  if (!state || state === TransactionState.succeeded) {
     return null
   }
 
-  // canceled, failed and pending
   const StateIcon = () => {
-    switch (state) {
-      case 'canceled':
-      case 'failed':
-        return <IconInfo16 />
-      case 'pending':
-        return <IconMore16 />
-      default:
-        return null
+    if (message) {
+      return (
+        <Tooltip content={message}>
+          <span onClick={(event) => event.stopPropagation()}>
+            <IconInfo16 />
+          </span>
+        </Tooltip>
+      )
     }
+
+    return null
   }
+
   const StateText = () => {
     switch (state) {
-      case 'canceled':
+      case TransactionState.canceled:
         return <Translate id="cancel" />
-      case 'failed':
+      case TransactionState.failed:
         return <Translate zh_hant="失敗" zh_hans="失敗" />
-      case 'pending':
-        return <Translate zh_hant="進行中" zh_hans="进行中" />
+      case TransactionState.pending:
+        return <Translate zh_hant="進行中…" zh_hans="进行中…" />
       default:
         return null
     }

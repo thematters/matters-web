@@ -83,11 +83,7 @@ const DonationButton = ({ recipient, targetId }: DonationButtonProps) => {
               open()
             }}
           >
-            <TextIcon
-              icon={<IconDonate24 size="md-s" />}
-              weight="md"
-              color="white"
-            >
+            <TextIcon icon={<IconDonate24 />} weight="md" color="white">
               <Translate id="donation" />
             </TextIcon>
           </Button>
