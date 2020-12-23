@@ -11,7 +11,7 @@ import styles from '../styles.css'
 import { TagLeaveNotice as NoticeType } from './__generated__/TagLeaveNotice'
 
 const TagLeaveNotice = ({ notice }: { notice: NoticeType }) => {
-  if (!notice || !notice.actors) {
+  if (!notice.actors) {
     return null
   }
 

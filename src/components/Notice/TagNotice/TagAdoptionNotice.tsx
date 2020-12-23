@@ -11,7 +11,7 @@ import styles from '../styles.css'
 import { TagAdoptionNotice as NoticeType } from './__generated__/TagAdoptionNotice'
 
 const TagAdoptionNotice = ({ notice }: { notice: NoticeType }) => {
-  if (!notice || !notice.actors) {
+  if (!notice.actors) {
     return null
   }
 

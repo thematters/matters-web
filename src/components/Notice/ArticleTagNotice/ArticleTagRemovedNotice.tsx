@@ -12,7 +12,7 @@ import styles from '../styles.css'
 import { ArticleTagRemovedNotice as NoticeType } from './__generated__/ArticleTagRemovedNotice'
 
 const ArticleTagRemovedNotice = ({ notice }: { notice: NoticeType }) => {
-  if (!notice || !notice.actors) {
+  if (!notice.actors) {
     return null
   }
 

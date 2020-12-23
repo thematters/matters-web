@@ -20,7 +20,7 @@ const CommentPinnedNotice = ({ notice }: { notice: NoticeType }) => {
   return (
     <section className="container">
       <section className="avatar-wrap">
-        <NoticeActorAvatar user={actor} key={actor.id} />
+        <NoticeActorAvatar user={actor} />
       </section>
 
       <section className="content-wrap">

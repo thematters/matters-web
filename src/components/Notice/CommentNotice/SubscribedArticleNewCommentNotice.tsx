@@ -20,7 +20,7 @@ const SubscribedArticleNewCommentNotice = ({
 }: {
   notice: NoticeType
 }) => {
-  if (!notice || !notice.actors) {
+  if (!notice.actors) {
     return null
   }
 

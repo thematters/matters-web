@@ -12,7 +12,7 @@ import styles from '../styles.css'
 import { ArticleNewCollectedNotice as NoticeType } from './__generated__/ArticleNewCollectedNotice'
 
 const ArticleNewCollectedNotice = ({ notice }: { notice: NoticeType }) => {
-  if (!notice || !notice.actors) {
+  if (!notice.actors) {
     return null
   }
 
