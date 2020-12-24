@@ -11,7 +11,7 @@ import styles from './styles.css'
 
 import { ArticleDigestSidebarArticle } from './__generated__/ArticleDigestSidebarArticle'
 
-type ArticleDigestSidebarProps = {
+export type ArticleDigestSidebarProps = {
   article: ArticleDigestSidebarArticle
 
   titleTextSize?: ArticleDigestTitleTextSize

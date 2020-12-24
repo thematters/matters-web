@@ -5,7 +5,7 @@ import React from 'react'
 import { CircleDigest } from '~/components'
 import { CircleDigestRichProps } from '~/components/CircleDigest/Rich'
 
-import { MOCK_CIRCLE } from '../mocks'
+import { MOCK_CIRCLE } from '../../mocks'
 
 export default {
   title: 'Components/CircleDigest',

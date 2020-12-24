@@ -5,7 +5,7 @@ import React from 'react'
 import { UserDigest } from '~/components'
 import { UserDigestRichProps } from '~/components/UserDigest/Rich'
 
-import { MOCK_USER } from '../mocks'
+import { MOCK_USER } from '../../mocks'
 
 export default {
   title: 'Components/UserDigest',

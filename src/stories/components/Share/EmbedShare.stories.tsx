@@ -4,7 +4,7 @@ import React from 'react'
 import { EmbedShare, EmbedShareProps, Translate } from '~/components'
 
 export default {
-  title: 'Components/Share/EmbedShare',
+  title: 'Components/Share',
   component: EmbedShare,
 } as Meta
 
@@ -17,13 +17,7 @@ const HeaderTitle = (
   />
 )
 
-export const Default = Template.bind({})
-Default.args = {
-  headerTitle: HeaderTitle,
-}
-
-export const Wrap = Template.bind({})
-Wrap.args = {
-  wrap: true,
+export const Embed = Template.bind({})
+Embed.args = {
   headerTitle: HeaderTitle,
 }

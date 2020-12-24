@@ -25,7 +25,7 @@ export type ArticleDigestFeedControls = {
   onClickAuthor?: () => void
 } & FooterActionsControls
 
-type ArticleDigestFeedProps = {
+export type ArticleDigestFeedProps = {
   article: ArticleDigestFeedArticlePublic
 
   actor?: (props: Partial<UserDigestMiniProps>) => React.ReactNode
