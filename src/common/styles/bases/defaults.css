@@ -56,7 +56,6 @@ svg {
   display: inline-block;
   width: auto;
   user-select: none;
-  fill: currentColor;
 }
 
 img,

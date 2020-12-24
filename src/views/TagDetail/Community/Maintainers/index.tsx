@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 
 import {
   Button,
-  IconSettingsMedium,
+  IconSettings24,
   Spinner,
   TagEditorDialog,
   TextIcon,
@@ -34,7 +34,7 @@ const ManageButton = () => {
           borderColor="green"
           onClick={open}
         >
-          <TextIcon icon={<IconSettingsMedium />} weight="md" size={'xs'}>
+          <TextIcon icon={<IconSettings24 />} weight="md" size={'xs'}>
             <Translate zh_hant="管理" zh_hans="管理" />
           </TextIcon>
         </Button>

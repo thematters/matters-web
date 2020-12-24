@@ -3,7 +3,7 @@ import { useContext } from 'react'
 
 import {
   Button,
-  IconAdd,
+  IconAdd16,
   TextIcon,
   Translate,
   ViewerContext,
@@ -52,7 +52,7 @@ const Follow = ({ tag }: FollowProps) => {
       borderColor="green"
       onClick={follow}
     >
-      <TextIcon icon={<IconAdd />} weight="md" size="md-s">
+      <TextIcon icon={<IconAdd16 />} weight="md" size="md-s">
         <Translate id="follow" />
       </TextIcon>
     </Button>

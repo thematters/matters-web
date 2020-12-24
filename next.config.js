@@ -51,10 +51,6 @@ const nextConfig = {
       use: [
         {
           loader: '@svgr/webpack',
-          options: {
-            memo: true,
-            dimensions: false,
-          },
         },
         {
           loader: 'url-loader',

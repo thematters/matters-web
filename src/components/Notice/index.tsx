@@ -1,32 +1,15 @@
 import gql from 'graphql-tag'
 import React from 'react'
 
-import ArticleMentionedYouNotice from './ArticleMentionedYouNotice'
-import ArticleNewAppreciationNotice from './ArticleNewAppreciationNotice'
-import ArticleNewCollectedNotice from './ArticleNewCollectedNotice'
-import ArticleNewCommentNotice from './ArticleNewCommentNotice'
-import ArticleNewDownstreamNotice from './ArticleNewDownstreamNotice'
-import ArticleNewSubscriberNotice from './ArticleNewSubscriberNotice'
-import ArticlePublishedNotice from './ArticlePublishedNotice'
-import ArticleTagHasBeenAddedNotice from './ArticleTagHasBeenAddedNotice'
-import ArticleTagHasBeenRemovedNotice from './ArticleTagHasBeenRemovedNotice'
-import ArticleTagHasBeenUnselectedNotice from './ArticleTagHasBeenUnselectedNotice'
-import CommentMentionedYouNotice from './CommentMentionedYouNotice'
-import CommentNewReplyNotice from './CommentNewReplyNotice'
-import CommentPinnedNotice from './CommentPinnedNotice'
-import DownstreamArticleArchivedNotice from './DownstreamArticleArchivedNotice'
+import ArticleArticleNotice from './ArticleArticleNotice'
+import ArticleNotice from './ArticleNotice'
+import ArticleTagNotice from './ArticleTagNotice'
+import CommentCommentNotice from './CommentCommentNotice'
+import CommentNotice from './CommentNotice'
 import OfficialAnnouncementNotice from './OfficialAnnouncementNotice'
-import PaymentPayoutNotice from './PaymentPayoutNotice'
-import PaymentReceivedDonationNotice from './PaymentReceivedDonationNotice'
-import RevisedArticleNotPublishedNotice from './RevisedArticleNotPublishedNotice'
-import RevisedArticlePublishedNotice from './RevisedArticlePublishedNotice'
-import SubscribedArticleNewCommentNotice from './SubscribedArticleNewCommentNotice'
-import TagAddEditorNotice from './TagAddEditorNotice'
-import TagAdoptionNotice from './TagAdoptionNotice'
-import TagLeaveEditorNotice from './TagLeaveEditorNotice'
-import TagLeaveNotice from './TagLeaveNotice'
-import UpstreamArticleArchivedNotice from './UpstreamArticleArchivedNotice'
-import UserNewFollowerNotice from './UserNewFollowerNotice'
+import TagNotice from './TagNotice'
+import TransactionNotice from './TransactionNotice'
+import UserNotice from './UserNotice'
 
 import { DigestNotice } from './__generated__/DigestNotice'
 
@@ -37,168 +20,66 @@ interface NoticeProps {
 const fragments = {
   notice: gql`
     fragment DigestNotice on Notice {
-      ... on UserNewFollowerNotice {
-        ...UserNewFollowerNotice
+      ... on UserNotice {
+        ...UserNotice
       }
-      ... on ArticlePublishedNotice {
-        ...ArticlePublishedNotice
+      ... on ArticleArticleNotice {
+        ...ArticleArticleNotice
       }
-      ... on ArticleNewDownstreamNotice {
-        ...ArticleNewDownstreamNotice
+      ... on ArticleNotice {
+        ...ArticleNotice
       }
-      ... on ArticleNewCollectedNotice {
-        ...ArticleNewCollectedNotice
+      ... on ArticleTagNotice {
+        ...ArticleTagNotice
       }
-      ... on ArticleNewAppreciationNotice {
-        ...ArticleNewAppreciationNotice
+      ... on CommentCommentNotice {
+        ...CommentCommentNotice
       }
-      ... on ArticleNewSubscriberNotice {
-        ...ArticleNewSubscriberNotice
+      ... on CommentNotice {
+        ...CommentNotice
       }
-      ... on ArticleNewCommentNotice {
-        ...ArticleNewCommentNotice
+      ... on TagNotice {
+        ...TagNotice
       }
-      ... on ArticleMentionedYouNotice {
-        ...ArticleMentionedYouNotice
-      }
-      ... on SubscribedArticleNewCommentNotice {
-        ...SubscribedArticleNewCommentNotice
-      }
-      ... on UpstreamArticleArchivedNotice {
-        ...UpstreamArticleArchivedNotice
-      }
-      ... on DownstreamArticleArchivedNotice {
-        ...DownstreamArticleArchivedNotice
-      }
-      ... on CommentPinnedNotice {
-        ...CommentPinnedNotice
-      }
-      ... on CommentNewReplyNotice {
-        ...CommentNewReplyNotice
-      }
-      ... on CommentMentionedYouNotice {
-        ...CommentMentionedYouNotice
+      ... on TransactionNotice {
+        ...TransactionNotice
       }
       ... on OfficialAnnouncementNotice {
         ...OfficialAnnouncementNotice
       }
-      ... on ArticleTagHasBeenAddedNotice {
-        ...ArticleTagHasBeenAddedNotice
-      }
-      ... on ArticleTagHasBeenRemovedNotice {
-        ...ArticleTagHasBeenRemovedNotice
-      }
-      ... on ArticleTagHasBeenUnselectedNotice {
-        ...ArticleTagHasBeenUnselectedNotice
-      }
-      ... on PaymentReceivedDonationNotice {
-        ...PaymentReceivedDonationNotice
-      }
-      ... on PaymentPayoutNotice {
-        ...PaymentPayoutNotice
-      }
-      ... on TagAdoptionNotice {
-        ...TagAdoptionNotice
-      }
-      ... on TagLeaveNotice {
-        ...TagLeaveNotice
-      }
-      ... on TagAddEditorNotice {
-        ...TagAddEditorNotice
-      }
-      ... on TagLeaveEditorNotice {
-        ...TagLeaveEditorNotice
-      }
-      ... on RevisedArticlePublishedNotice {
-        ...RevisedArticlePublishedNotice
-      }
-      ... on RevisedArticleNotPublishedNotice {
-        ...RevisedArticleNotPublishedNotice
-      }
     }
-    ${ArticleNewAppreciationNotice.fragments.notice}
-    ${ArticleNewCommentNotice.fragments.notice}
-    ${ArticleNewDownstreamNotice.fragments.notice}
-    ${ArticleNewCollectedNotice.fragments.notice}
-    ${ArticleNewSubscriberNotice.fragments.notice}
-    ${ArticlePublishedNotice.fragments.notice}
-    ${ArticleMentionedYouNotice.fragments.notice}
-    ${CommentMentionedYouNotice.fragments.notice}
-    ${CommentNewReplyNotice.fragments.notice}
-    ${CommentPinnedNotice.fragments.notice}
-    ${DownstreamArticleArchivedNotice.fragments.notice}
+    ${UserNotice.fragments.notice}
+    ${ArticleArticleNotice.fragments.notice}
+    ${ArticleNotice.fragments.notice}
+    ${ArticleTagNotice.fragments.notice}
+    ${CommentCommentNotice.fragments.notice}
+    ${CommentNotice.fragments.notice}
+    ${TagNotice.fragments.notice}
+    ${TransactionNotice.fragments.notice}
     ${OfficialAnnouncementNotice.fragments.notice}
-    ${SubscribedArticleNewCommentNotice.fragments.notice}
-    ${UpstreamArticleArchivedNotice.fragments.notice}
-    ${UserNewFollowerNotice.fragments.notice}
-    ${ArticleTagHasBeenAddedNotice.fragments.notice}
-    ${ArticleTagHasBeenRemovedNotice.fragments.notice}
-    ${ArticleTagHasBeenUnselectedNotice.fragments.notice}
-    ${PaymentReceivedDonationNotice.fragments.notice}
-    ${PaymentPayoutNotice.fragments.notice}
-    ${TagAdoptionNotice.fragments.notice}
-    ${TagLeaveNotice.fragments.notice}
-    ${TagAddEditorNotice.fragments.notice}
-    ${TagLeaveEditorNotice.fragments.notice}
-    ${RevisedArticlePublishedNotice.fragments.notice}
-    ${RevisedArticleNotPublishedNotice.fragments.notice}
   `,
 }
 
 const BaseNotice: React.FC<NoticeProps> = ({ notice }) => {
   switch (notice.__typename) {
-    case 'ArticleNewAppreciationNotice':
-      return <ArticleNewAppreciationNotice notice={notice} />
-    case 'ArticleNewCommentNotice':
-      return <ArticleNewCommentNotice notice={notice} />
-    case 'ArticleNewDownstreamNotice':
-      return <ArticleNewDownstreamNotice notice={notice} />
-    case 'ArticleNewCollectedNotice':
-      return <ArticleNewCollectedNotice notice={notice} />
-    case 'ArticleNewSubscriberNotice':
-      return <ArticleNewSubscriberNotice notice={notice} />
-    case 'ArticlePublishedNotice':
-      return <ArticlePublishedNotice notice={notice} />
-    case 'ArticleMentionedYouNotice':
-      return <ArticleMentionedYouNotice notice={notice} />
-    case 'CommentMentionedYouNotice':
-      return <CommentMentionedYouNotice notice={notice} />
-    case 'CommentNewReplyNotice':
-      return <CommentNewReplyNotice notice={notice} />
-    case 'CommentPinnedNotice':
-      return <CommentPinnedNotice notice={notice} />
-    case 'DownstreamArticleArchivedNotice':
-      return <DownstreamArticleArchivedNotice notice={notice} />
+    case 'UserNotice':
+      return <UserNotice notice={notice} />
+    case 'ArticleArticleNotice':
+      return <ArticleArticleNotice notice={notice} />
+    case 'ArticleNotice':
+      return <ArticleNotice notice={notice} />
+    case 'ArticleTagNotice':
+      return <ArticleTagNotice notice={notice} />
+    case 'CommentCommentNotice':
+      return <CommentCommentNotice notice={notice} />
+    case 'CommentNotice':
+      return <CommentNotice notice={notice} />
+    case 'TagNotice':
+      return <TagNotice notice={notice} />
+    case 'TransactionNotice':
+      return <TransactionNotice notice={notice} />
     case 'OfficialAnnouncementNotice':
       return <OfficialAnnouncementNotice notice={notice} />
-    case 'SubscribedArticleNewCommentNotice':
-      return <SubscribedArticleNewCommentNotice notice={notice} />
-    case 'UpstreamArticleArchivedNotice':
-      return <UpstreamArticleArchivedNotice notice={notice} />
-    case 'UserNewFollowerNotice':
-      return <UserNewFollowerNotice notice={notice} />
-    case 'ArticleTagHasBeenAddedNotice':
-      return <ArticleTagHasBeenAddedNotice notice={notice} />
-    case 'ArticleTagHasBeenRemovedNotice':
-      return <ArticleTagHasBeenRemovedNotice notice={notice} />
-    case 'ArticleTagHasBeenUnselectedNotice':
-      return <ArticleTagHasBeenUnselectedNotice notice={notice} />
-    case 'PaymentReceivedDonationNotice':
-      return <PaymentReceivedDonationNotice notice={notice} />
-    case 'PaymentPayoutNotice':
-      return <PaymentPayoutNotice notice={notice} />
-    case 'TagAdoptionNotice':
-      return <TagAdoptionNotice notice={notice} />
-    case 'TagLeaveNotice':
-      return <TagLeaveNotice notice={notice} />
-    case 'TagAddEditorNotice':
-      return <TagAddEditorNotice notice={notice} />
-    case 'TagLeaveEditorNotice':
-      return <TagLeaveEditorNotice notice={notice} />
-    case 'RevisedArticlePublishedNotice':
-      return <RevisedArticlePublishedNotice notice={notice} />
-    case 'RevisedArticleNotPublishedNotice':
-      return <RevisedArticleNotPublishedNotice notice={notice} />
     default:
       return null
   }

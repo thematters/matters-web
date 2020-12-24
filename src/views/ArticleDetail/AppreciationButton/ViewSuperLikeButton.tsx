@@ -1,4 +1,4 @@
-import { Button, IconExternalLink, TextIcon, Translate } from '~/components'
+import { Button, IconExternalLink16, TextIcon, Translate } from '~/components'
 
 import { EXTERNAL_LINKS } from '~/common/enums'
 
@@ -11,7 +11,7 @@ const ViewSuperLikeButton = () => {
       spacing={[0, 0]}
     >
       <TextIcon
-        icon={<IconExternalLink size="xs" color="green" />}
+        icon={<IconExternalLink16 size="xs" color="green" />}
         weight="md"
         textPlacement="left"
       >

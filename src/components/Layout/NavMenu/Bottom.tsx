@@ -1,8 +1,8 @@
 import {
   CardSpacing,
-  IconHelpMedium,
-  IconLogoutMedium,
-  IconSettingsMedium,
+  IconHelp24,
+  IconLogout24,
+  IconSettings24,
   Menu,
   TextIcon,
   Translate,
@@ -66,7 +66,7 @@ const NavMenuBottom: React.FC<NavMenuBottomProps> = ({ isInSideDrawerNav }) => {
     <Menu spacingY={isInSideDrawerNav ? 0 : undefined}>
       <Menu.Item spacing={menuItemSpacing} href={PATHS.HELP}>
         <TextIcon
-          icon={<IconHelpMedium size="md" />}
+          icon={<IconHelp24 size="md" />}
           spacing="base"
           size={menuItemSize}
         >
@@ -76,7 +76,7 @@ const NavMenuBottom: React.FC<NavMenuBottomProps> = ({ isInSideDrawerNav }) => {
 
       <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_SETTINGS}>
         <TextIcon
-          icon={<IconSettingsMedium size="md" />}
+          icon={<IconSettings24 size="md" />}
           spacing="base"
           size={menuItemSize}
         >
@@ -86,7 +86,7 @@ const NavMenuBottom: React.FC<NavMenuBottomProps> = ({ isInSideDrawerNav }) => {
 
       <Menu.Item spacing={menuItemSpacing} onClick={onClickLogout}>
         <TextIcon
-          icon={<IconLogoutMedium size="md" />}
+          icon={<IconLogout24 size="md" />}
           spacing="base"
           size={menuItemSize}
         >

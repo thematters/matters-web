@@ -19,6 +19,7 @@ export const RecommendTagDialog = ({ children }: Props) => {
   const [feed, setFeed] = useState<FeedType>(defaultType)
 
   const isHottest = feed === 'hottest'
+  const isSelected = feed === 'selected'
 
   useEventListener(OPEN_RECOMMEND_TAG_DIALOG, open)
 
@@ -48,6 +49,9 @@ export const RecommendTagDialog = ({ children }: Props) => {
           <Tabs>
             <Tabs.Tab onClick={() => setFeed('hottest')} selected={isHottest}>
               <Translate zh_hant="熱門標籤" zh_hans="热门标签" />
+            </Tabs.Tab>
+            <Tabs.Tab onClick={() => setFeed('selected')} selected={isSelected}>
+              <Translate zh_hant="編輯精選" zh_hans="编辑精选" />
             </Tabs.Tab>
           </Tabs>
         </Dialog.Content>

@@ -1,4 +1,4 @@
-import { IconEdit, Menu, TextIcon, Translate } from '~/components'
+import { IconEdit16, Menu, TextIcon, Translate } from '~/components'
 
 interface EditButtonProps {
   openEditCommentDialog: () => void
@@ -7,7 +7,7 @@ interface EditButtonProps {
 const EditButton = ({ openEditCommentDialog }: EditButtonProps) => {
   return (
     <Menu.Item onClick={openEditCommentDialog}>
-      <TextIcon icon={<IconEdit size="md" />} size="md" spacing="base">
+      <TextIcon icon={<IconEdit16 size="md" />} size="md" spacing="base">
         <Translate id="edit" />
       </TextIcon>
     </Menu.Item>

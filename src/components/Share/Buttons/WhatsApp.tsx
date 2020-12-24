@@ -4,8 +4,8 @@ import { TextIcon, withIcon } from '~/components'
 
 import { analytics } from '~/common/utils'
 
-import { ReactComponent as IconShareWhatsAppCircle } from '@/public/static/icons/share-whatsapp-circle.svg'
-import { ReactComponent as IconShareWhatsApp } from '@/public/static/icons/share-whatsapp.svg'
+import { ReactComponent as IconShareWhatsApp } from '@/public/static/icons/16px/share-whatsapp.svg'
+import { ReactComponent as IconShareWhatsAppCircle } from '@/public/static/icons/40px/share-whatsapp-circle.svg'
 
 const Whatsapp = ({
   title,

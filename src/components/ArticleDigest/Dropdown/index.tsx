@@ -7,7 +7,6 @@ import { UserDigest } from '~/components/UserDigest'
 import { toPath } from '~/common/utils'
 
 import { ArticleDigestTitle, ArticleDigestTitleTextSize } from '../Title'
-import OpenExternalLink from './OpenExternalLink'
 import styles from './styles.css'
 
 import { ArticleDigestDropdownArticle } from './__generated__/ArticleDigestDropdownArticle'
@@ -99,4 +98,3 @@ export const ArticleDigestDropdown = ({
 }
 
 ArticleDigestDropdown.fragments = fragments
-ArticleDigestDropdown.OpenExternalLink = OpenExternalLink

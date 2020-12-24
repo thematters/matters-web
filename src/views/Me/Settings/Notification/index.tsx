@@ -28,7 +28,6 @@ const VIEWER_NOTIFICATION_SETTINGS = gql`
           appreciation
           articleSubscription
           commentSubscribed
-          downstream
           commentPinned
           officialNotice
           reportFeedback
@@ -55,7 +54,6 @@ const UPDATE_VIEWER_NOTIFICATION = gql`
           appreciation
           articleSubscription
           commentSubscribed
-          downstream
           commentPinned
           officialNotice
           reportFeedback
