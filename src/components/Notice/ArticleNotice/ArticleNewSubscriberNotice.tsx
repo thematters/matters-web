@@ -26,7 +26,7 @@ const ArticleNewSubscriberNotice = ({ notice }: { notice: NoticeType }) => {
     <section className="container">
       <section className="avatar-wrap">
         {isMultiActors ? (
-          <NoticeTypeIcon type="bookmark" hasSpacing />
+          <NoticeTypeIcon type="bookmark" />
         ) : (
           <NoticeActorAvatar user={notice.actors[0]} />
         )}
