@@ -150,6 +150,7 @@ export const TEXT = {
     MIGRATION_REACH_LIMIT: '導入作品累計超過 1 MB',
     migration: '搬家到 Matters',
     migrationSideBar: '一鍵搬家',
+    month: '月',
     moreActions: '更多操作',
     mutualFollowing: '互相追蹤',
     myAppreciations: '我的讚賞',
@@ -291,6 +292,7 @@ export const TEXT = {
     walletBalance: '錢包餘額',
     walletBalanceInsufficient: '錢包餘額不足',
     write: '創作',
+    year: '年',
     yourEmail: '你的電子信箱',
   },
   zh_hans: {
@@ -442,6 +444,7 @@ export const TEXT = {
     MIGRATION_REACH_LIMIT: '导入作品累計超过 1 MB',
     migration: '搬家到 Matters',
     migrationSideBar: '一鍵搬家',
+    month: '月',
     moreActions: '更多操作',
     mutualFollowing: '互相追踪',
     myAppreciations: '我的赞赏',
@@ -585,6 +588,7 @@ export const TEXT = {
     walletBalance: '钱包余额',
     walletBalanceInsufficient: '钱包余额不足',
     write: '创作',
+    year: '年',
     yourEmail: '你的邮箱',
   },
 }

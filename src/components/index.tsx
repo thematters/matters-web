@@ -52,6 +52,7 @@ export * from './DropdownDialog'
 
 export * from './ArticleDigest'
 export * from './UserDigest'
+export * from './CircleDigest'
 export * from './DraftDigest'
 export * from './Comment'
 export * from './Notice'

@@ -5,7 +5,7 @@ import React from 'react'
 import { UserDigest } from '~/components'
 import { UserDigestRichProps } from '~/components/UserDigest/Rich'
 
-import { PLACEHOLDER_USER } from '../placeholders'
+import { MOCK_USER } from '../mocks'
 
 export default {
   title: 'Components/UserDigest',
@@ -20,7 +20,7 @@ const Template: Story<UserDigestRichProps> = (args) => (
 
 export const Rich = Template.bind({})
 Rich.args = {
-  user: PLACEHOLDER_USER,
+  user: MOCK_USER,
   size: 'sm',
   spacing: [0, 0],
   bgColor: 'none',

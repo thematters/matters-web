@@ -14,6 +14,10 @@ interface ArticleArgs {
   }
 }
 
+interface CircleArgs {
+  circleName: string
+}
+
 interface CommentArgs {
   id: string
   article: ArticleArgs
@@ -27,6 +31,10 @@ type ToPathArgs =
       page: 'articleDetail'
       article: ArticleArgs
       fragment?: string
+    }
+  | {
+      page: 'circleDetail'
+      circle: CircleArgs
     }
   | {
       page: 'commentDetail'
@@ -80,6 +88,11 @@ export const toPath = (args: ToPathArgs): { href: string } => {
 
       return {
         href: args.fragment ? `${asUrl}#${args.fragment}` : asUrl,
+      }
+    }
+    case 'circleDetail': {
+      return {
+        href: `/~${args.circle.circleName}`,
       }
     }
     case 'commentDetail': {
