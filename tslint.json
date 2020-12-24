@@ -8,7 +8,15 @@
   "rules": {
     "no-implicit-dependencies": [
       true,
-      ["~", "@", "tippy.js", "dotenv", "apollo-cache", "@testing-library"]
+      [
+        "~",
+        "@",
+        "tippy.js",
+        "dotenv",
+        "apollo-cache",
+        "@testing-library",
+        "__generated__"
+      ]
     ],
     "no-bitwise": false,
     "no-submodule-imports": [false],
