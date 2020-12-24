@@ -1,0 +1,52 @@
+.container {
+  @mixin flex-center-start;
+
+  position: relative;
+}
+
+.avatar {
+  position: relative;
+  display: inline-flex;
+  margin-right: var(--spacing-x-tight);
+}
+
+header {
+  @mixin flex-center-start;
+
+  & :global(> * + *) {
+    margin-left: var(--spacing-xx-tight);
+  }
+}
+
+.content {
+  height: 3rem;
+  overflow: hidden;
+}
+
+.name,
+.description {
+  line-height: 1.5rem; /* 24px, half of the avatar height */
+}
+
+.name {
+  @mixin line-clamp;
+
+  font-size: var(--font-size-md-s);
+  font-weight: var(--font-weight-medium);
+}
+
+.description {
+  @mixin line-clamp;
+
+  font-size: var(--font-size-sm-s);
+  color: var(--color-grey-dark);
+}
+
+.extra-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: flex-start;
+}

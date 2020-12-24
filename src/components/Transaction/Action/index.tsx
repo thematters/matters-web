@@ -2,7 +2,7 @@ import { Avatar, IconSupport, IconWallet24 } from '~/components'
 
 import styles from './styles.css'
 
-import { TransactionState } from '__generated__/globalTypes'
+import { TransactionState } from '@/__generated__/globalTypes'
 import {
   DigestTransaction_recipient as Recipient,
   DigestTransaction_sender as Sender,
