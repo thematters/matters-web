@@ -26,7 +26,7 @@ const ArticleNewAppreciationNotice = ({ notice }: { notice: NoticeType }) => {
     <section className="container">
       <section className="avatar-wrap">
         {isMultiActors ? (
-          <NoticeTypeIcon type="appreciate" hasSpacing />
+          <NoticeTypeIcon type="appreciate" />
         ) : (
           <NoticeActorAvatar user={notice.actors[0]} />
         )}

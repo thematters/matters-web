@@ -32,7 +32,7 @@ const SubscribedArticleNewCommentNotice = ({
     <section className="container">
       <section className="avatar-wrap">
         {isMultiActors ? (
-          <NoticeTypeIcon type="comment" hasSpacing />
+          <NoticeTypeIcon type="comment" />
         ) : (
           <NoticeActorAvatar user={notice.actors[0]} />
         )}
