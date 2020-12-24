@@ -45,6 +45,39 @@ export const MOCK_ARTILCE = {
   subscribed: false,
 }
 
+// Comment
+export const MOCK_PARENT_COMMENT = {
+  __typename: 'Comment' as any,
+  id: 'comment-0000',
+  state: 'active' as any,
+  article: MOCK_ARTILCE,
+  parentComment: null,
+  content:
+    '中國傳統文學裡的「幽」傳統，對此的文論並不多，我聽說李歐梵教授在做此研究，蔡老師能否多講一些',
+  author: MOCK_USER,
+}
+
+export const MOCK_COMMENT = {
+  __typename: 'Comment' as any,
+  id: 'comment-0000',
+  state: 'active' as any,
+  article: MOCK_ARTILCE,
+  parentComment: MOCK_PARENT_COMMENT,
+  content:
+    '中國傳統文學裡的「幽」傳統，對此的文論並不多，我聽說李歐梵教授在做此研究，蔡老師能否多講一些',
+  author: MOCK_USER,
+}
+
+// Tag
+export const MOCK_TAG = {
+  __typename: 'Tag' as any,
+  id: 'tag-0000',
+  editors: [MOCK_USER],
+  owner: MOCK_USER,
+  content: '香港',
+  articles: [MOCK_ARTILCE],
+}
+
 // Circle
 export const MOCK_CIRCLE = {
   __typename: 'Circle' as any,
@@ -78,4 +111,13 @@ export const MOCK_CIRCLE = {
     __typename: 'ArticleConnection' as any,
     totalCount: 8,
   },
+}
+
+// Transaction
+export const MOCK_TRANSACTION = {
+  __typename: 'Transaction' as any,
+  id: 'tx-0000',
+  amount: 100,
+  currency: 'HKD',
+  target: MOCK_ARTILCE,
 }
