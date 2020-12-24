@@ -86,7 +86,6 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
             isWalletAction={isWalletAction}
             sender={sender}
             recipient={recipient}
-            state={state}
           />
         </section>
 

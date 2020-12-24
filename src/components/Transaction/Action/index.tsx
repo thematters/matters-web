@@ -2,7 +2,6 @@ import { Avatar, IconSupport, IconWallet24 } from '~/components'
 
 import styles from './styles.css'
 
-import { TransactionState } from '__generated__/globalTypes'
 import {
   DigestTransaction_recipient as Recipient,
   DigestTransaction_sender as Sender,
@@ -29,7 +28,6 @@ interface ActionProps {
   isWalletAction?: boolean
   sender?: Sender | null
   recipient?: Recipient | null
-  state: TransactionState
 }
 
 const Action = ({
@@ -37,10 +35,7 @@ const Action = ({
   isWalletAction,
   sender,
   recipient,
-  state,
 }: ActionProps) => {
-  const isSucceeded = state === TransactionState.succeeded
-
   if (isWalletAction) {
     return (
       <section className="wallet">
@@ -56,20 +51,15 @@ const Action = ({
         <section className="from">
           <Avatar size="sm" user={sender} />
           <div className="outline">
-            <IconSupport
-              size="md-s"
-              color={isSucceeded ? 'gold' : 'grey-light'}
-            />
+            <IconSupport size="md-s" color="gold" />
           </div>
         </section>
       )}
 
       {isSender && recipient && (
         <section className="to">
-          <IconSupport
-            size="md-s"
-            color={isSucceeded ? 'gold' : 'grey-light'}
-          />
+          <IconSupport size="md-s" color="grey-light" />
+
           <div className="outline">
             <Avatar size="sm" user={recipient} />
           </div>
