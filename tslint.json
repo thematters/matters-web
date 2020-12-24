@@ -16,6 +16,7 @@
         "apollo-cache",
         "@testing-library",
         "@apollo/react-testing"
+        "__generated__"
       ]
     ],
     "no-bitwise": false,
