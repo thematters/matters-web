@@ -1,6 +1,9 @@
 {
   "extends": ["../../tslint.json"],
   "rules": {
-    "no-implicit-dependencies": [true, ["@storybook", "~", "@"]]
+    "no-implicit-dependencies": [
+      true,
+      ["@storybook", "~", "@", "@apollo/react-testing"]
+    ]
   }
 }
