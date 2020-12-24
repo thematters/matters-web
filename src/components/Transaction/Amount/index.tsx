@@ -4,6 +4,8 @@ import { toAmountString } from '~/common/utils'
 
 import styles from './styles.css'
 
+import { TransactionState } from '__generated__/globalTypes'
+
 /***
  * This is a sub component of Transaction that presents
  * the amount of it, and the color of text based on it's
@@ -22,11 +24,16 @@ import styles from './styles.css'
 interface AmountProps {
   amount: number
   currency: string
-  state: string
+  state: TransactionState
 }
 
 const Amount = ({ amount, currency, state }: AmountProps) => {
-  const color = state !== 'succeeded' ? 'grey' : amount > 0 ? 'gold' : 'black'
+  const color =
+    state !== TransactionState.succeeded
+      ? 'grey'
+      : amount > 0
+      ? 'gold'
+      : 'black'
 
   return (
     <section>
