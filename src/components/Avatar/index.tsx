@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 
 import { Img } from '~/components'
 
-import ICON_AVATAR_DEFAULT from '@/public/static/icons/avatar-default.svg'
+import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
 import IMAGE_CIVIC_LIKER_RING from '@/public/static/icons/civic-liker-ring.svg'
 
 import styles from './styles.css'

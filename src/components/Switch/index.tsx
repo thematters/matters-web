@@ -1,4 +1,4 @@
-import { IconSpinner } from '~/components'
+import { IconSpinner16 } from '~/components'
 
 import { randomString } from '~/common/utils'
 
@@ -28,7 +28,7 @@ export const Switch = ({
 
       {loading && (
         <span className="loading">
-          <IconSpinner color="grey-light" />
+          <IconSpinner16 color="grey-light" />
         </span>
       )}
 

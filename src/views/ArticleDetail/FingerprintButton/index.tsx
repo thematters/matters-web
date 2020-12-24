@@ -1,7 +1,7 @@
 import {
   Button,
   FingerprintDialog,
-  IconIPFSMedium,
+  IconIPFS24,
   TextIcon,
   Translate,
 } from '~/components'
@@ -18,7 +18,7 @@ const FingerprintButton = ({ article }: FingerprintButtonProps) => {
       {({ open }) => (
         <Button onClick={open}>
           <TextIcon
-            icon={<IconIPFSMedium />}
+            icon={<IconIPFS24 />}
             size="xs"
             spacing="xxtight"
             color="grey"

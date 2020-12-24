@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { Card, CardProps, IconHashTag, TextIcon } from '~/components'
+import { Card, CardProps, IconHashTag16, TextIcon } from '~/components'
 
 import { toPath } from '~/common/utils'
 
@@ -52,7 +52,7 @@ const Rich = ({
     <Card {...path} {...cardProps}>
       <section className="content">
         <TextIcon
-          icon={<IconHashTag color="grey" />}
+          icon={<IconHashTag16 color="grey" />}
           color="black"
           size="md"
           spacing="xxtight"

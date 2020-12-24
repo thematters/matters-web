@@ -2,7 +2,7 @@ import { useContext } from 'react'
 
 import {
   Card,
-  IconRight,
+  IconArrowRight16,
   RecommendAuthorDialog,
   RecommendTagDialog,
   Translate,
@@ -10,7 +10,7 @@ import {
   withIcon,
 } from '~/components'
 
-import { ReactComponent as IconOnboardLaunch } from '@/public/static/icons/onboard-launch.svg'
+import { ReactComponent as IconOnboardLaunch } from '@/public/static/icons/40px/navigation.svg'
 
 import OnboardingTasksDialog from '../Dialog'
 import styles from './styles.css'
@@ -36,7 +36,10 @@ const NavBar = () => {
               >
                 <section className="content">
                   <section className="left">
-                    {withIcon(IconOnboardLaunch)({ size: 'xl-m' })}
+                    {withIcon(IconOnboardLaunch)({
+                      size: 'xl-m',
+                      color: 'gold',
+                    })}
 
                     <p>
                       <Translate zh_hant="星際導航" zh_hans="星际导航" />
@@ -45,7 +48,7 @@ const NavBar = () => {
                   </section>
 
                   <section className="right">
-                    <IconRight color="grey" />
+                    <IconArrowRight16 color="grey" />
                   </section>
                 </section>
               </Card>

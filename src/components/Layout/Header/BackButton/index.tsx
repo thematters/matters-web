@@ -4,8 +4,8 @@ import Router from 'next/router'
 import {
   Button,
   ButtonProps,
-  IconBackLarge,
-  IconLeftLarge,
+  IconBack32,
+  IconLeft32,
   useResponsive,
 } from '~/components'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
@@ -49,7 +49,7 @@ export const BackButton: React.FC<BackButtonProps> = ({ mode, ...props }) => {
         onClick={onBack}
         {...props}
       >
-        <IconBackLarge size="lg" color="white" />
+        <IconBack32 size="lg" color="white" />
       </Button>
     )
   }
@@ -62,14 +62,14 @@ export const BackButton: React.FC<BackButtonProps> = ({ mode, ...props }) => {
         onClick={onBack}
         {...props}
       >
-        <IconBackLarge size="lg" color="green" />
+        <IconBack32 size="lg" color="green" />
       </Button>
     )
   }
 
   return (
     <Button aria-label={TEXT.zh_hant.back} onClick={onBack} {...props}>
-      <IconLeftLarge size="lg" />
+      <IconLeft32 size="lg" />
     </Button>
   )
 }

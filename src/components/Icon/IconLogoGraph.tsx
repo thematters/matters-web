@@ -1,6 +1,7 @@
-import { ReactComponent as LogoGraph } from './icons/logo-graph.svg'
+import { ReactComponent as Icon } from '@/public/static/icons/logo-graph.svg'
+
 import { withIcon } from './withIcon'
 
 export const IconLogoGraph = withIcon((props) => (
-  <LogoGraph style={{ width: 48, height: 33 }} {...props} />
+  <Icon style={{ width: 48, height: 33 }} {...props} />
 ))

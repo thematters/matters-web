@@ -3,9 +3,9 @@ import { useQuery } from '@apollo/react-hooks'
 import {
   DropdownDialog,
   Form,
-  IconViewModeComfortable,
-  IconViewModeCompact,
-  IconViewModeDefault,
+  IconViewModeComfortable24,
+  IconViewModeCompact24,
+  IconViewModeDefault24,
   Menu,
   TextIcon,
   Translate,
@@ -43,7 +43,7 @@ const ViewMode = () => {
     <Menu width={isInDropdown ? 'sm' : undefined}>
       <Menu.Item onClick={() => setViewMode('default')}>
         <TextIcon
-          icon={<IconViewModeDefault size="md" />}
+          icon={<IconViewModeDefault24 size="md" />}
           size="md"
           spacing="base"
           weight={isDefaultMode ? 'bold' : 'normal'}
@@ -53,7 +53,7 @@ const ViewMode = () => {
       </Menu.Item>
       <Menu.Item onClick={() => setViewMode('comfortable')}>
         <TextIcon
-          icon={<IconViewModeComfortable size="md" />}
+          icon={<IconViewModeComfortable24 size="md" />}
           size="md"
           spacing="base"
           weight={isComfortableMode ? 'bold' : 'normal'}
@@ -63,7 +63,7 @@ const ViewMode = () => {
       </Menu.Item>
       <Menu.Item onClick={() => setViewMode('compact')}>
         <TextIcon
-          icon={<IconViewModeCompact size="md" />}
+          icon={<IconViewModeCompact24 size="md" />}
           size="md"
           spacing="base"
           weight={isCompactMode ? 'bold' : 'normal'}

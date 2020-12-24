@@ -8,7 +8,16 @@
   "rules": {
     "no-implicit-dependencies": [
       true,
-      ["~", "@", "tippy.js", "dotenv", "apollo-cache", "@testing-library"]
+      [
+        "~",
+        "@",
+        "tippy.js",
+        "dotenv",
+        "apollo-cache",
+        "@testing-library",
+        "@apollo/react-testing",
+        "__generated__"
+      ]
     ],
     "no-bitwise": false,
     "no-submodule-imports": [false],

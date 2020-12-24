@@ -45,6 +45,7 @@ const fragments = {
           ...ArticleDigestTitleArticle
         }
       }
+      message
     }
     ${UserDigest.Mini.fragments.user}
     ${ArticleDigestTitle.fragments.article}
@@ -61,6 +62,7 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
     recipient,
     state,
     target,
+    message,
     createdAt,
   } = tx
 
@@ -116,7 +118,7 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
 
           <section className="right">
             <Amount amount={amount} currency={currency} state={state} />
-            <State state={state} />
+            <State state={state} message={message} />
           </section>
         </section>
 

@@ -1,12 +1,6 @@
 import gql from 'graphql-tag'
 
-import {
-  IconPinMedium,
-  IconUnPinMedium,
-  Menu,
-  TextIcon,
-  Translate,
-} from '~/components'
+import { IconPin24, IconUnPin24, Menu, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import TOGGLE_PIN_COMMENT from '~/components/GQL/mutations/togglePinComment'
 
@@ -58,7 +52,7 @@ const PinButton = ({ comment }: { comment: PinButtonComment }) => {
   if (comment.pinned) {
     return (
       <Menu.Item onClick={unpinComment}>
-        <TextIcon icon={<IconUnPinMedium size="md" />} size="md" spacing="base">
+        <TextIcon icon={<IconUnPin24 size="md" />} size="md" spacing="base">
           <Translate id="unpin" />
         </TextIcon>
       </Menu.Item>
@@ -67,7 +61,7 @@ const PinButton = ({ comment }: { comment: PinButtonComment }) => {
 
   return (
     <Menu.Item onClick={canPin ? pinComment : undefined}>
-      <TextIcon icon={<IconPinMedium size="md" />} size="md" spacing="base">
+      <TextIcon icon={<IconPin24 size="md" />} size="md" spacing="base">
         <Translate id="pin" />
       </TextIcon>
     </Menu.Item>

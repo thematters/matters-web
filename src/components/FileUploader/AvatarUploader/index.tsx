@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { Avatar, AvatarProps, Spinner, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
-import { IconCameraMedium } from '~/components/Icon'
+import { IconCamera24 } from '~/components/Icon'
 
 import {
   ACCEPTED_UPLOAD_IMAGE_TYPES,
@@ -102,7 +102,7 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
       <Avatar size="xxl" {...avatarProps} src={avatar} />
 
       <div className="mask">
-        {loading ? <Spinner /> : <IconCameraMedium color="white" size="lg" />}
+        {loading ? <Spinner /> : <IconCamera24 color="white" size="lg" />}
       </div>
 
       <VisuallyHidden>

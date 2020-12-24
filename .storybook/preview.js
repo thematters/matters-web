@@ -1,4 +1,6 @@
 import React from 'react'
+import { RouterContext } from 'next/dist/next-server/lib/router-context'
+
 import { GlobalStyles } from '../src/components/GlobalStyles'
 
 export const parameters = {
@@ -9,7 +11,17 @@ export const decorators = [
   (Story) => (
     <>
       <GlobalStyles />
-      <Story />
+
+      <RouterContext.Provider
+        value={{
+          push: () => Promise.resolve(),
+          replace: () => Promise.resolve(),
+          prefetch: () => Promise.resolve(),
+        }}
+      >
+        <Story />
+      </RouterContext.Provider>
+
       <style jsx global>
         {`
           //background color should be controled by storybook

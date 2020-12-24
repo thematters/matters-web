@@ -2,7 +2,7 @@ import { useContext } from 'react'
 
 import {
   Button,
-  IconEmptyAvatar,
+  IconAvatarEmpty24,
   TagAdoptionDialog,
   TextIcon,
   Translate,
@@ -39,7 +39,7 @@ const Owner = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
       <section className="container">
         <section className="left">
           <TextIcon
-            icon={<IconEmptyAvatar size="md" />}
+            icon={<IconAvatarEmpty24 size="md" />}
             color="grey-dark"
             size="md-s"
             spacing="xtight"

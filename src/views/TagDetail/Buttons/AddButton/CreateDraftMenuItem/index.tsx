@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 
 import {
-  IconAddMedium,
+  IconAdd24,
   LanguageContext,
   Menu,
   TextIcon,
@@ -29,7 +29,7 @@ interface CreateDraftButtonProps {
 
 const BaseCreateDraftButton = ({ onClick }: { onClick: () => any }) => (
   <Menu.Item onClick={onClick}>
-    <TextIcon icon={<IconAddMedium size="md" />} size="md" spacing="base">
+    <TextIcon icon={<IconAdd24 size="md" />} size="md" spacing="base">
       <Translate zh_hant="創作新的作品" zh_hans="创作新的作品" />
     </TextIcon>
   </Menu.Item>

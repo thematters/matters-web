@@ -5,7 +5,7 @@ import { useContext } from 'react'
 import {
   Form,
   getErrorCodes,
-  IconSpinner,
+  IconSpinner16,
   Translate,
   usePullToRefresh,
   ViewerContext,
@@ -71,7 +71,7 @@ const WalletSettings = () => {
         htmlTarget="_blank"
         leftAlign="top"
         right={
-          loading ? <IconSpinner color="grey-light" size="sm" /> : undefined
+          loading ? <IconSpinner16 color="grey-light" size="sm" /> : undefined
         }
         rightText={
           shouldReAuth ? (
