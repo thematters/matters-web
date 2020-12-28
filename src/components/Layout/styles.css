@@ -18,21 +18,9 @@ article {
 
   &.hasNavBar {
     padding-bottom: var(--global-nav-height);
-    padding-bottom: calc(
-      constant(safe-area-inset-bottom) + var(--global-nav-height)
-    );
-    padding-bottom: calc(
-      env(safe-area-inset-bottom) + var(--global-nav-height)
-    );
 
     &.hasOnboardingTasks {
       padding-bottom: calc(var(--global-nav-height) * 2);
-      padding-bottom: calc(
-        constant(safe-area-inset-bottom) + var(--global-nav-height) * 2
-      );
-      padding-bottom: calc(
-        env(safe-area-inset-bottom) + var(--global-nav-height) * 2
-      );
 
       @media (--lg-up) {
         padding-bottom: 0;
