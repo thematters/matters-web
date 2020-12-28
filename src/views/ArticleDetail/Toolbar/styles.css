@@ -1,26 +1,33 @@
 .toolbar {
   @mixin shadow-border-top-grey;
-  @mixin flex-center-space-between;
+  @mixin safe-area-botttom;
 
   position: sticky;
   bottom: 0;
   z-index: var(--z-index-over-global-header);
-  height: var(--global-nav-height);
+  min-height: var(--global-nav-height);
   padding: var(--spacing-base);
-  padding-bottom: calc(constant(safe-area-inset-bottom) + var(--spacing-base));
-  padding-bottom: calc(env(safe-area-inset-bottom) + var(--spacing-base));
   background: var(--color-white);
 
-  & :global(> *) {
-    display: inline-flex;
-    flex-shrink: 0;
-  }
+  & .buttons {
+    @mixin flex-center-space-between;
 
-  & :global(> * + *) {
-    margin-left: var(--spacing-loose);
+    & :global(> *) {
+      @mixin inline-flex-center-all;
 
-    @media (--xs-down) {
-      margin-left: var(--spacing-base);
+      flex-shrink: 0;
+      width: 2rem;
+      height: 2rem;
+    }
+
+    @media (--sm-up) {
+      & :global(> *) {
+        width: auto;
+        height: auto;
+      }
+      & :global(> * + *) {
+        margin-left: var(--spacing-loose);
+      }
     }
   }
 
