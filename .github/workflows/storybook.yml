@@ -66,15 +66,19 @@ jobs:
           comment-author: 'github-actions[bot]'
           body-includes: Storybook
 
+      - name: Set Commit Hash
+        id: vars
+        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+
       - name: Create Comment
         if: ${{ steps.fc.outputs.comment-id == 0 }}
         uses: peter-evans/create-or-update-comment@v1
         with:
           issue-number: ${{ github.event.pull_request.number }}
           body: |
-            Storybook has been deployed to GitHub Pages!
+            🚀 Storybook has been deployed to GitHub Pages!
 
-            **Commit**: ${{ github.sha }}
+            **Commit**: ${{ steps.vars.outputs.sha_short }}
             **URL**: https://thematters.github.io/matters-web/storybook/${{ github.head_ref }}
 
       - name: Update comment
@@ -83,7 +87,7 @@ jobs:
         with:
           comment-id: ${{ steps.fc.outputs.comment-id }}
           body: |
-            Storybook has been deployed to GitHub Pages!
+            🚀 Storybook has been deployed to GitHub Pages!
 
-            **Commit**: ${{ github.sha }}
+            **Commit**: ${{ steps.vars.outputs.sha_short }}
             **URL**: https://thematters.github.io/matters-web/storybook/${{ github.head_ref }}
