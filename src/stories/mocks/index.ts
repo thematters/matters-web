@@ -84,7 +84,7 @@ export const MOCK_CIRCLE = {
   id: 'circle-0000',
   state: 'active',
   circleName: 'matters_class',
-  displayName: 'Matters 自由課（第一季）',
+  displayName: 'Matters 自由課（第一季第二期）',
   avatar: 'https://source.unsplash.com/256x256?cirlce',
   description:
     '《我們這個時代的自由課》是 Matters 自 2020 年起策劃的主題線上講座。從 8 月 9 日「自由課」第一場開始，至今已經完成 9 場。分別從最實用的角度，以「自由工具包」為題談自由的條件；從思想與歷史切入，以「自由讀書會」為題思考關於自由的經典。',

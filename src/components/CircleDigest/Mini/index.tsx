@@ -7,6 +7,7 @@ import { CircleAvatar } from '~/components/CircleAvatar'
 
 import { toPath } from '~/common/utils'
 
+import Counts from '../Counts'
 import styles from './styles.css'
 
 // import { CircleDigestMiniCirclePublic } from './__generated__/CircleDigestMiniCirclePublic'
@@ -45,12 +46,14 @@ const CircleDigestMini = ({
             <Link {...path}>
               <a className="name">{displayName}</a>
             </Link>
+
+            <section className="info">
+              <Counts circle={circle} />
+            </section>
           </header>
 
           {description && <p className="description">{description}</p>}
         </section>
-
-        <section className="extra-button" />
 
         <style jsx>{styles}</style>
       </section>

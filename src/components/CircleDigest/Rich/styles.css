@@ -6,7 +6,7 @@ header {
   margin-left: var(--spacing-base);
 
   & h3 {
-    margin-bottom: var(--spacing-x-tight);
+    margin-bottom: var(--spacing-xx-tight);
     font-size: var(--font-size-xm);
     font-weight: var(--font-weight-medium);
     line-height: 1.5rem;
@@ -27,12 +27,4 @@ footer {
   @mixin flex-center-space-between;
 
   margin-top: var(--spacing-base);
-
-  & .left {
-    @mixin inline-flex-center-all;
-
-    & :global(> * + *) {
-      padding-left: var(--spacing-tight);
-    }
-  }
 }

@@ -1,3 +1,8 @@
+:root {
+  --circle-digest-mini-content-height: 3rem; /* 48px, avatar height */
+  --circle-digest-mini-header-height: 1.5rem; /* 24px, half of the avatar height */
+}
+
 .container {
   @mixin flex-center-start;
 
@@ -11,7 +16,7 @@
 }
 
 header {
-  @mixin flex-center-start;
+  @mixin flex-center-space-between;
 
   & :global(> * + *) {
     margin-left: var(--spacing-xx-tight);
@@ -19,13 +24,20 @@ header {
 }
 
 .content {
-  height: 3rem;
+  height: var(--circle-digest-mini-content-height);
   overflow: hidden;
+}
+
+.info {
+  @mixin flex-center-end;
+
+  flex-shrink: 0;
+  height: 100%;
 }
 
 .name,
 .description {
-  line-height: 1.5rem; /* 24px, half of the avatar height */
+  line-height: var(--circle-digest-mini-header-height);
 }
 
 .name {
@@ -40,13 +52,4 @@ header {
 
   font-size: var(--font-size-sm-s);
   color: var(--color-grey-dark);
-}
-
-.extra-button {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  align-items: flex-start;
 }
