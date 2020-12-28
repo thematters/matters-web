@@ -55,5 +55,35 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./storybook-static
-          destination_dir: ./${{ github.head_ref }}
+          destination_dir: ./storybook/${{ github.head_ref }}
           keep_files: true
+
+      - name: Find Comment
+        uses: peter-evans/find-comment@v1
+        id: fc
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-author: 'github-actions[bot]'
+          body-includes: Storybook
+
+      - name: Create Comment
+        if: ${{ steps.fc.outputs.comment-id == 0 }}
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            Storybook has been deployed to GitHub Pages!
+
+            **Commit**: ${{ github.sha }}
+            **URL**: https://thematters.github.io/matters-web/storybook/${{ github.head_ref }}
+
+      - name: Update comment
+        if: ${{ steps.fc.outputs.comment-id != 0 }}
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          comment-id: ${{ steps.fc.outputs.comment-id }}
+          body: |
+            Storybook has been deployed to GitHub Pages!
+
+            **Commit**: ${{ github.sha }}
+            **URL**: https://thematters.github.io/matters-web/storybook/${{ github.head_ref }}
