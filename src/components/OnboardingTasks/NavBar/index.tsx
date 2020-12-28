@@ -35,20 +35,22 @@ const NavBar = () => {
                 onClick={openOnboardingTasksDialog}
               >
                 <section className="content">
-                  <section className="left">
-                    {withIcon(IconOnboardLaunch)({
-                      size: 'xl-m',
-                      color: 'gold',
-                    })}
+                  <section className="inner">
+                    <section className="left">
+                      {withIcon(IconOnboardLaunch)({
+                        size: 'xl-m',
+                        color: 'gold',
+                      })}
 
-                    <p>
-                      <Translate zh_hant="星際導航" zh_hans="星际导航" />
-                      <span className="highlight"> {doneCount}/5</span>
-                    </p>
-                  </section>
+                      <p>
+                        <Translate zh_hant="星際導航" zh_hans="星际导航" />
+                        <span className="highlight"> {doneCount}/5</span>
+                      </p>
+                    </section>
 
-                  <section className="right">
-                    <IconArrowRight16 color="grey" />
+                    <section className="right">
+                      <IconArrowRight16 color="grey" />
+                    </section>
                   </section>
                 </section>
               </Card>

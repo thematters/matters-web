@@ -165,6 +165,14 @@
   left: 0;
 }
 
+@define-mixin safe-area-botttom {
+  &::after {
+    display: block;
+    padding-bottom: env(safe-area-inset-bottom);
+    content: '';
+  }
+}
+
 @define-mixin object-fit-cover {
   position: absolute;
   top: 0;
@@ -194,16 +202,6 @@
   /* autoprefixer: ignore next */
   -webkit-box-orient: vertical;
   overflow: hidden;
-}
-
-@define-mixin max-height-scroll {
-  max-height: 50vh;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-
-  @media (--lg-up) {
-    max-height: 70vh;
-  }
 }
 
 @define-mixin hide-scrollbar {
