@@ -16,13 +16,11 @@
       @mixin inline-flex-center-all;
 
       flex-shrink: 0;
-      width: 2rem;
       height: 2rem;
     }
 
     @media (--sm-up) {
       & :global(> *) {
-        width: auto;
         height: auto;
       }
       & :global(> * + *) {
