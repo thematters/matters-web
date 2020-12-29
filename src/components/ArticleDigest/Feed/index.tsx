@@ -76,15 +76,13 @@ const fragments = {
 const BaseArticleDigestFeed = ({
   article,
 
-  inTagDetailLatest,
-  inTagDetailSelected,
-  inUserArticles,
+  actor,
+  extraHeader,
 
   onClick,
   onClickAuthor,
 
-  actor,
-  extraHeader,
+  ...controls
 }: ArticleDigestFeedProps) => {
   const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
     variables: { id: 'local' },
@@ -140,13 +138,13 @@ const BaseArticleDigestFeed = ({
           </section>
 
           <section className="right">
-            {inUserArticles && sticky && (
+            {controls.inUserArticles && sticky && (
               <TextIcon icon={<IconPin24 />} size="sm" color="grey" weight="md">
                 <Translate id="stickyArticle" />
               </TextIcon>
             )}
 
-            {inUserArticles && <InactiveState article={article} />}
+            {controls.inUserArticles && <InactiveState article={article} />}
             <CreatedAt article={article} />
           </section>
         </header>
@@ -173,13 +171,7 @@ const BaseArticleDigestFeed = ({
           </section>
         )}
 
-        <FooterActions
-          article={article}
-          inCard
-          inTagDetailLatest={inTagDetailLatest}
-          inTagDetailSelected={inTagDetailSelected}
-          inUserArticles={inUserArticles}
-        />
+        <FooterActions article={article} inCard {...controls} />
 
         <style jsx>{styles}</style>
       </section>
@@ -201,7 +193,6 @@ export const ArticleDigestFeed = React.memo(
   ({ article: prevArticle }, { article }) => {
     return (
       prevArticle.subscribed === article.subscribed &&
-      prevArticle.responseCount === article.responseCount &&
       prevArticle.articleState === article.articleState &&
       prevArticle.sticky === article.sticky &&
       prevArticle.appreciationsReceivedTotal ===

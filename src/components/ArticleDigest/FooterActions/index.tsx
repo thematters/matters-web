@@ -1,13 +1,10 @@
 import gql from 'graphql-tag'
 
 import { BookmarkButton } from '~/components/Buttons/Bookmark'
-import { ShareButton } from '~/components/Buttons/Share'
-
-import { toPath } from '~/common/utils'
 
 import DropdownActions, { DropdownActionsControls } from '../DropdownActions'
 import Appreciation from './Appreciation'
-import ResponseCount from './ResponseCount'
+import DonationCount from './DonationCount'
 import styles from './styles.css'
 
 import { FooterActionsArticlePublic } from './__generated__/FooterActionsArticlePublic'
@@ -31,12 +28,12 @@ const fragments = {
           userName
         }
         ...AppreciationArticle
-        ...ActionsResponseCountArticle
         ...DropdownActionsArticle
+        ...DonationCountArticle
       }
       ${Appreciation.fragments.article}
-      ${ResponseCount.fragments.article}
       ${DropdownActions.fragments.article}
+      ${DonationCount.fragments.article}
     `,
     private: gql`
       fragment FooterActionsArticlePrivate on Article {
@@ -47,35 +44,20 @@ const fragments = {
   },
 }
 
-const FooterActions = ({
-  article,
-  inCard = false,
-  ...controls
-}: FooterActionsProps) => {
-  const { title } = article
-  const path = toPath({
-    page: 'articleDetail',
-    article,
-  })
-
+const FooterActions = ({ article, ...controls }: FooterActionsProps) => {
   return (
     <footer
-      aria-label={`${article.appreciationsReceivedTotal} 個讚賞、${article.responseCount} 條回應`}
+      aria-label={`讚賞 ${article.appreciationsReceivedTotal}、支持 ${article.transactionsReceivedBy.totalCount}`}
     >
       <section className="left">
-        <Appreciation article={article} size="sm" />
-        <ResponseCount article={article} size="sm" inCard={inCard} />
+        <Appreciation article={article} />
+        {/* <ResponseCount article={article} /> */}
+        <DonationCount article={article} />
       </section>
 
       <section className="right">
-        <DropdownActions article={article} {...controls} inCard={inCard} />
-        <BookmarkButton article={article} inCard={inCard} />
-        <ShareButton
-          title={title}
-          path={encodeURI(path.href)}
-          iconColor="grey"
-          inCard={inCard}
-        />
+        <DropdownActions article={article} {...controls} />
+        <BookmarkButton article={article} inCard={controls.inCard} />
       </section>
 
       <style jsx>{styles}</style>

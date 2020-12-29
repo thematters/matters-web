@@ -42,6 +42,10 @@ export const MOCK_ARTILCE = {
   tags: [],
   appreciationsReceivedTotal: 1,
   responseCount: 10,
+  transactionsReceivedBy: {
+    __typename: 'AppreciationConnection' as any,
+    totalCount: 190,
+  },
   subscribed: false,
 }
 
