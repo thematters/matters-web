@@ -60,69 +60,71 @@ const BottomBar: React.FC<BottomBarProps> = ({
         <div className="l-col-three-left" />
         <div className="l-col-three-right">
           <section className="content">
-            <SetCoverDialog cover={cover} onEdit={onEditCover} {...restProps}>
-              {({ open: openSetCoverDialog }) => (
-                <button type="button" onClick={openSetCoverDialog}>
-                  <TextIcon
-                    icon={<IconImage24 size="md" />}
-                    size="xm"
-                    weight="md"
-                    spacing="xtight"
-                  >
-                    <Translate id="cover" />
-                  </TextIcon>
-                </button>
-              )}
-            </SetCoverDialog>
+            <section className="inner">
+              <SetCoverDialog cover={cover} onEdit={onEditCover} {...restProps}>
+                {({ open: openSetCoverDialog }) => (
+                  <button type="button" onClick={openSetCoverDialog}>
+                    <TextIcon
+                      icon={<IconImage24 size="md" />}
+                      size="xm"
+                      weight="md"
+                      spacing="xtight"
+                    >
+                      <Translate id="cover" />
+                    </TextIcon>
+                  </button>
+                )}
+              </SetCoverDialog>
 
-            <SearchSelectDialog
-              title="addTag"
-              hint="hintAddTag"
-              searchType="Tag"
-              onSave={(nodes: SearchSelectNode[]) =>
-                onEditTags(nodes as DigestTag[])
-              }
-              nodes={tags}
-              saving={saving}
-              creatable
-            >
-              {({ open: openAddMyArticlesDialog }) => (
-                <button type="button" onClick={openAddMyArticlesDialog}>
-                  <TextIcon
-                    icon={<IconHashTag24 size="md" />}
-                    size="xm"
-                    weight="md"
-                    spacing="xtight"
-                  >
-                    <Translate id="tag" />
-                  </TextIcon>
-                </button>
-              )}
-            </SearchSelectDialog>
+              <SearchSelectDialog
+                title="addTag"
+                hint="hintAddTag"
+                searchType="Tag"
+                onSave={(nodes: SearchSelectNode[]) =>
+                  onEditTags(nodes as DigestTag[])
+                }
+                nodes={tags}
+                saving={saving}
+                creatable
+              >
+                {({ open: openAddMyArticlesDialog }) => (
+                  <button type="button" onClick={openAddMyArticlesDialog}>
+                    <TextIcon
+                      icon={<IconHashTag24 size="md" />}
+                      size="xm"
+                      weight="md"
+                      spacing="xtight"
+                    >
+                      <Translate id="tag" />
+                    </TextIcon>
+                  </button>
+                )}
+              </SearchSelectDialog>
 
-            <SearchSelectDialog
-              title="extendArticle"
-              hint="hintEditCollection"
-              searchType="Article"
-              onSave={(nodes: SearchSelectNode[]) =>
-                onEditCollection(nodes as ArticleDigestDropdownArticle[])
-              }
-              nodes={collection}
-              saving={saving}
-            >
-              {({ open: openAddMyArticlesDialog }) => (
-                <button type="button" onClick={openAddMyArticlesDialog}>
-                  <TextIcon
-                    icon={<IconCollection24 size="md" />}
-                    size="xm"
-                    weight="md"
-                    spacing="xtight"
-                  >
-                    <Translate id="extend" />
-                  </TextIcon>
-                </button>
-              )}
-            </SearchSelectDialog>
+              <SearchSelectDialog
+                title="extendArticle"
+                hint="hintEditCollection"
+                searchType="Article"
+                onSave={(nodes: SearchSelectNode[]) =>
+                  onEditCollection(nodes as ArticleDigestDropdownArticle[])
+                }
+                nodes={collection}
+                saving={saving}
+              >
+                {({ open: openAddMyArticlesDialog }) => (
+                  <button type="button" onClick={openAddMyArticlesDialog}>
+                    <TextIcon
+                      icon={<IconCollection24 size="md" />}
+                      size="xm"
+                      weight="md"
+                      spacing="xtight"
+                    >
+                      <Translate id="extend" />
+                    </TextIcon>
+                  </button>
+                )}
+              </SearchSelectDialog>
+            </section>
           </section>
         </div>
       </div>
