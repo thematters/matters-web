@@ -2,8 +2,7 @@ import classNames from 'classnames'
 import Link from 'next/link'
 import React from 'react'
 
-import { Card, CardProps } from '~/components'
-import { CircleAvatar } from '~/components/CircleAvatar'
+import { Card, CardProps, CircleAvatar } from '~/components'
 
 import { toPath } from '~/common/utils'
 

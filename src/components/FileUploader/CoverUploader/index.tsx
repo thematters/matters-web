@@ -3,6 +3,8 @@ import { useState } from 'react'
 
 import {
   Button,
+  Cover,
+  CoverProps,
   IconCamera24,
   Spinner,
   TextIcon,
@@ -20,7 +22,6 @@ import {
   UPLOAD_IMAGE_SIZE_LIMIT,
 } from '~/common/enums'
 
-import Cover, { CoverProps } from './Cover'
 import styles from './styles.css'
 
 import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
@@ -33,8 +34,8 @@ import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/Singl
  * ```jsx
  *   <CoverUploader
  *     assetType={assetType}
- *     coverUrl={coverUrl}
- *     defaultCoverUrl={defaultCoverUrl}
+ *     cover={cover}
+ *     fallbackCover={fallbackCover}
  *     entityId={entityId}
  *     entityType={entityType}
  *     inEditor={true || false}
@@ -43,24 +44,23 @@ import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/Singl
  * ```
  */
 
-interface Props {
+export type CoverUploaderProps = {
   assetType: ASSET_TYPE.profileCover | ASSET_TYPE.tagCover
   entityId?: string
   entityType: ENTITY_TYPE.user | ENTITY_TYPE.tag
   onUpload: (assetId: string | null) => void
-  coverUrl?: string
-}
+} & CoverProps
 
 export const CoverUploader = ({
   assetType,
-  coverUrl,
-  defaultCoverUrl,
+  cover: initCover,
+  fallbackCover,
   entityId,
   entityType,
   inEditor,
   onUpload,
-}: Props & CoverProps) => {
-  const [cover, setCover] = useState<string | undefined>(coverUrl)
+}: CoverUploaderProps) => {
+  const [cover, setCover] = useState<string | undefined | null>(initCover)
   const [upload, { loading }] = useMutation<SingleFileUpload>(UPLOAD_FILE)
 
   const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
@@ -127,16 +127,12 @@ export const CoverUploader = ({
 
   return (
     <label className="uploader" htmlFor={fieldId}>
-      <Cover
-        coverUrl={cover}
-        defaultCoverUrl={defaultCoverUrl}
-        inEditor={inEditor}
-      />
+      <Cover cover={cover} fallbackCover={fallbackCover} inEditor={inEditor} />
 
       <div className="mask">
         {loading ? <Spinner /> : <IconCamera24 color="white" size="xl" />}
 
-        {coverUrl && (
+        {initCover && (
           <section className="delete">
             <Button
               size={[null, '1.25rem']}

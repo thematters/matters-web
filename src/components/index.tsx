@@ -16,7 +16,6 @@ export * from './Dialog'
 export * from './Form'
 export * from './List'
 export * from './Error'
-export * from './Avatar'
 export * from './Toast'
 export * from './Tabs'
 export * from './PageHeader'
@@ -27,6 +26,10 @@ export * from './CopyToClipboard'
 export * from './Context'
 export * from './GQL'
 export * from './PullToRefresh'
+
+export * from './Avatar'
+export * from './CircleAvatar'
+export * from './Cover'
 
 /**
  * Compositions

@@ -9,12 +9,12 @@ import styles from './styles.css'
 
 // import { CircleUser } from './__generated__/CircleUser'
 
-export type AvatarSize = 'xl' | 'xxl'
+export type CircleAvatarSize = 'xl' | 'xxl'
 
-export interface AvatarProps {
+export interface CircleAvatarProps {
   // circle?: CircleUser
   circle?: any
-  size?: AvatarSize
+  size?: CircleAvatarSize
   src?: string
 }
 
@@ -26,7 +26,7 @@ export interface AvatarProps {
 //   `,
 // }
 
-export const CircleAvatar = (props: AvatarProps) => {
+export const CircleAvatar = (props: CircleAvatarProps) => {
   const { circle, size = 'xl', src } = props
   const source = src || circle?.avatar || ICON_AVATAR_DEFAULT
   const isFallback =
