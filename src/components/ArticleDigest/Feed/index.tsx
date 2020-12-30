@@ -4,6 +4,7 @@ import gql from 'graphql-tag'
 import React from 'react'
 
 import { Card, IconPin24, Img, TextIcon, Translate } from '~/components'
+import { CircleDigest } from '~/components/CircleDigest'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { UserDigest } from '~/components/UserDigest'
 import { UserDigestMiniProps } from '~/components/UserDigest/Mini'
@@ -15,21 +16,27 @@ import FooterActions, { FooterActionsControls } from '../FooterActions'
 import { ArticleDigestTitle } from '../Title'
 import CreatedAt from './CreatedAt'
 import InactiveState from './InactiveState'
+import Label from './Label'
 import styles from './styles.css'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import { ArticleDigestFeedArticlePublic } from './__generated__/ArticleDigestFeedArticlePublic'
 
+type ExtraHeaderControls = {
+  extraHeader?: React.ReactNode
+  hasCircle?: boolean
+}
+
 export type ArticleDigestFeedControls = {
   onClick?: () => any
   onClickAuthor?: () => void
-} & FooterActionsControls
+} & ExtraHeaderControls &
+  FooterActionsControls
 
 export type ArticleDigestFeedProps = {
   article: ArticleDigestFeedArticlePublic
 
   actor?: (props: Partial<UserDigestMiniProps>) => React.ReactNode
-  extraHeader?: React.ReactNode
 } & ArticleDigestFeedControls
 
 const fragments = {
@@ -77,6 +84,8 @@ const BaseArticleDigestFeed = ({
   article,
 
   actor,
+
+  hasCircle,
   extraHeader,
 
   onClick,
@@ -91,7 +100,9 @@ const BaseArticleDigestFeed = ({
   const isCompactMode = viewMode === 'compact'
   const isDefaultMode = viewMode === 'default'
 
-  const { author, summary, sticky } = article
+  /* TODO */
+  /*  @ts-ignore */
+  const { author, summary, sticky, circle, isLimitedFree } = article
   const isBanned = article.articleState === 'banned'
   const cover = !isBanned ? article.cover : null
   const cleanedSummary = isBanned ? '' : stripHtml(summary)
@@ -120,7 +131,17 @@ const BaseArticleDigestFeed = ({
   return (
     <Card {...path} spacing={['base', 'base']} onClick={onClick}>
       <section className={containerClasses}>
-        {extraHeader}
+        {extraHeader ||
+          (hasCircle ? (
+            <section className="extraHeader">
+              <CircleDigest.Plain circle={circle} />
+              {isLimitedFree && (
+                <Label>
+                  <Translate id="limitedFree" />
+                </Label>
+              )}
+            </section>
+          ) : null)}
 
         <header>
           <section className="left">
@@ -138,6 +159,12 @@ const BaseArticleDigestFeed = ({
           </section>
 
           <section className="right">
+            {!hasCircle && isLimitedFree && (
+              <Label>
+                <Translate id="limitedFree" />
+              </Label>
+            )}
+
             {controls.inUserArticles && sticky && (
               <TextIcon icon={<IconPin24 />} size="sm" color="grey" weight="md">
                 <Translate id="stickyArticle" />

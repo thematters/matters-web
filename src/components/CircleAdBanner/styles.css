@@ -4,6 +4,7 @@
   height: 8.5rem;
   padding: var(--spacing-base);
   color: var(--color-white);
+  background-color: var(--color-matters-green);
   background-position: bottom right;
   border-radius: 1rem;
 }

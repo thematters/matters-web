@@ -22,3 +22,9 @@ export const Feed = Template.bind({})
 Feed.args = {
   article: MOCK_ARTILCE,
 }
+
+export const FeedWithCircle = Template.bind({})
+FeedWithCircle.args = {
+  article: MOCK_ARTILCE,
+  hasCircle: true,
+}
