@@ -52,6 +52,7 @@ export const MOCK_CIRCLE = {
     __typename: 'ArticleConnection' as any,
     totalCount: 8,
   },
+  // isMember: true,
 }
 
 // Article

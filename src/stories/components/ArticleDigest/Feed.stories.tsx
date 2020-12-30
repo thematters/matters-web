@@ -8,7 +8,7 @@ import { ArticleDigestFeedProps } from '~/components/ArticleDigest/Feed'
 import { MOCK_ARTILCE } from '../../mocks'
 
 export default {
-  title: 'Components/ArticleDigest',
+  title: 'Components/ArticleDigest/Feed',
   component: ArticleDigestFeed,
 } as Meta
 
@@ -18,13 +18,13 @@ const Template: Story<ArticleDigestFeedProps> = (args) => (
   </MockedProvider>
 )
 
-export const Feed = Template.bind({})
-Feed.args = {
+export const Default = Template.bind({})
+Default.args = {
   article: MOCK_ARTILCE,
 }
 
-export const FeedWithCircle = Template.bind({})
-FeedWithCircle.args = {
+export const WithCircle = Template.bind({})
+WithCircle.args = {
   article: MOCK_ARTILCE,
   hasCircle: true,
 }
