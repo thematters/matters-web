@@ -2,30 +2,52 @@ import { MockedProvider } from '@apollo/react-testing'
 import { Meta, Story } from '@storybook/react/types-6-0'
 import React from 'react'
 
-import { AvatarUploader, AvatarUploaderProps } from '~/components'
+import { AvatarUploader } from '~/components'
 
-import { MOCK_USER } from '../../mocks'
+import { MOCK_CIRCLE, MOCK_USER } from '../../mocks'
 
 export default {
-  title: 'Components/Uploader/Avatar',
+  title: 'Components/Uploader',
   component: AvatarUploader,
 } as Meta
 
-const Template: Story<AvatarUploaderProps> = (args) => (
+const Template: Story = () => (
   <MockedProvider>
-    <AvatarUploader {...args} />
+    <ul>
+      {/* User */}
+      <li>
+        <AvatarUploader hasBorder onUpload={(assetId) => alert({ assetId })} />
+      </li>
+      <li>
+        <AvatarUploader
+          user={MOCK_USER}
+          hasBorder
+          onUpload={(assetId) => alert({ assetId })}
+        />
+      </li>
+
+      {/* Circle */}
+      <li>
+        <AvatarUploader
+          type="circle"
+          onUpload={(assetId) => alert({ assetId })}
+        />
+      </li>
+      <li>
+        <AvatarUploader
+          type="circle"
+          circle={MOCK_CIRCLE}
+          onUpload={(assetId) => alert({ assetId })}
+        />
+      </li>
+
+      <style jsx>{`
+        li {
+          margin-bottom: var(--spacing-base);
+        }
+      `}</style>
+    </ul>
   </MockedProvider>
 )
 
-export const Default = Template.bind({})
-Default.args = {
-  hasBorder: true,
-  onUpload: (assetId) => alert({ assetId }),
-}
-
-export const Replace = Template.bind({})
-Replace.args = {
-  user: MOCK_USER,
-  hasBorder: true,
-  onUpload: (assetId) => alert({ assetId }),
-}
+export const Avatar = Template.bind({})

@@ -3,6 +3,7 @@ import { useState } from 'react'
 
 import {
   Button,
+  CircleCover,
   Cover,
   CoverProps,
   IconCamera24,
@@ -49,6 +50,7 @@ export type CoverUploaderProps = {
   entityId?: string
   entityType: ENTITY_TYPE.user | ENTITY_TYPE.tag
   onUpload: (assetId: string | null) => void
+  type?: 'circle'
 } & CoverProps
 
 export const CoverUploader = ({
@@ -59,6 +61,7 @@ export const CoverUploader = ({
   entityType,
   inEditor,
   onUpload,
+  type,
 }: CoverUploaderProps) => {
   const [cover, setCover] = useState<string | undefined | null>(initCover)
   const [upload, { loading }] = useMutation<SingleFileUpload>(UPLOAD_FILE)
@@ -125,29 +128,48 @@ export const CoverUploader = ({
     onUpload(null)
   }
 
+  const Mask = () => (
+    <div className="mask">
+      {loading ? <Spinner /> : <IconCamera24 color="white" size="xl" />}
+
+      {initCover && (
+        <section className="delete">
+          <Button
+            size={[null, '1.25rem']}
+            spacing={[0, 'xtight']}
+            borderColor="white"
+            borderWidth="sm"
+            onClick={removeCover}
+          >
+            <TextIcon color="white" size="xs">
+              <Translate id="delete" />
+            </TextIcon>
+          </Button>
+        </section>
+      )}
+
+      <style jsx>{styles}</style>
+    </div>
+  )
+
+  const isCircle = type === 'circle'
+
   return (
-    <label className="uploader" htmlFor={fieldId}>
-      <Cover cover={cover} fallbackCover={fallbackCover} inEditor={inEditor} />
-
-      <div className="mask">
-        {loading ? <Spinner /> : <IconCamera24 color="white" size="xl" />}
-
-        {initCover && (
-          <section className="delete">
-            <Button
-              size={[null, '1.25rem']}
-              spacing={[0, 'xtight']}
-              borderColor="white"
-              borderWidth="sm"
-              onClick={removeCover}
-            >
-              <TextIcon color="white" size="xs">
-                <Translate id="delete" />
-              </TextIcon>
-            </Button>
-          </section>
-        )}
-      </div>
+    <label htmlFor={fieldId}>
+      {!isCircle && (
+        <Cover cover={cover} fallbackCover={fallbackCover} inEditor={inEditor}>
+          <Mask />
+        </Cover>
+      )}
+      {isCircle && (
+        <CircleCover
+          cover={cover}
+          fallbackCover={fallbackCover}
+          inEditor={inEditor}
+        >
+          <Mask />
+        </CircleCover>
+      )}
 
       <VisuallyHidden>
         <input

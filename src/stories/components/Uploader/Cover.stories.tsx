@@ -2,34 +2,68 @@ import { MockedProvider } from '@apollo/react-testing'
 import { Meta, Story } from '@storybook/react/types-6-0'
 import React from 'react'
 
-import { CoverUploader, CoverUploaderProps } from '~/components'
+import { CoverUploader } from '~/components'
 
+import CIRCLE_COVER from '@/public/static/images/circle-cover.svg'
 import IMAGE_COVER from '@/public/static/images/profile-cover.png'
 import { ASSET_TYPE, ENTITY_TYPE } from '@/src/common/enums'
 
 export default {
-  title: 'Components/Uploader/Cover',
+  title: 'Components/Uploader',
   component: CoverUploader,
 } as Meta
 
-const Template: Story<CoverUploaderProps> = (args) => (
+const Template: Story = () => (
   <MockedProvider>
-    <CoverUploader {...args} />
+    <ul>
+      {/* User & Tag */}
+      <li>
+        <CoverUploader
+          assetType={ASSET_TYPE.profileCover}
+          entityType={ENTITY_TYPE.user}
+          onUpload={(assetId) => alert({ assetId })}
+          fallbackCover={IMAGE_COVER}
+        />
+      </li>
+      <li>
+        <CoverUploader
+          assetType={ASSET_TYPE.profileCover}
+          entityType={ENTITY_TYPE.user}
+          onUpload={(assetId) => alert({ assetId })}
+          fallbackCover={IMAGE_COVER}
+          cover="https://source.unsplash.com/512x512?cover"
+        />
+      </li>
+
+      {/* Circle */}
+      <li>
+        <CoverUploader
+          type="circle"
+          assetType={ASSET_TYPE.profileCover}
+          entityType={ENTITY_TYPE.user}
+          onUpload={(assetId) => alert({ assetId })}
+          fallbackCover={CIRCLE_COVER}
+        />
+      </li>
+      <li>
+        <CoverUploader
+          type="circle"
+          assetType={ASSET_TYPE.profileCover}
+          entityType={ENTITY_TYPE.user}
+          onUpload={(assetId) => alert({ assetId })}
+          fallbackCover={CIRCLE_COVER}
+          cover="https://source.unsplash.com/512x512?cirlce-cover"
+        />
+      </li>
+
+      <style jsx>{`
+        li {
+          margin: 0 -1rem;
+          margin-bottom: var(--spacing-base);
+        }
+      `}</style>
+    </ul>
   </MockedProvider>
 )
 
-export const Default = Template.bind({})
-Default.args = {
-  assetType: ASSET_TYPE.profileCover,
-  entityType: ENTITY_TYPE.user,
-  onUpload: (assetId) => alert({ assetId }),
-  fallbackCover: IMAGE_COVER,
-}
-
-export const Replace = Template.bind({})
-Replace.args = {
-  assetType: ASSET_TYPE.profileCover,
-  entityType: ENTITY_TYPE.user,
-  onUpload: (assetId) => alert({ assetId }),
-  cover: 'https://source.unsplash.com/512x512?cover',
-}
+export const Cover = Template.bind({})
