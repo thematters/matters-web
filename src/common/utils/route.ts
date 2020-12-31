@@ -150,6 +150,24 @@ export const toPath = (args: ToPathArgs): { href: string } => {
 }
 
 /**
+ * Since Next.js dynamic routes don't support matching
+ * `~[circleName]` or `@[userName]`, we share same file (`[name]`) to
+ * match user and circle routes.
+ *
+ * @see {@url https://nextjs.org/docs/routing/dynamic-routes}
+ */
+export const getNameType = ({ router }: { router: NextRouter }) => {
+  const value = router.query && router.query.name
+  const query = value instanceof Array ? value[0] : value || ''
+
+  if (query.indexOf('@') >= 0) {
+    return 'user'
+  } else if (query.indexOf('~') >= 0) {
+    return 'circle'
+  }
+}
+
+/**
  * Get a specific query value from `NextRouter` by `key`
  *
  * (works on SSR & CSR)
@@ -159,14 +177,22 @@ export const getQuery = ({
   key,
 }: {
   router: NextRouter
-  key: string
+  key:
+    | 'name'
+    | 'mediaHash'
+    | 'draftId'
+    | 'tagId'
+    | 'q'
+    | 'type'
+    | 'provider'
+    | string
 }) => {
   const value = router.query && router.query[key]
   let query = value instanceof Array ? value[0] : value || ''
 
   switch (key) {
-    case 'userName':
-      query = query.replace('@', '')
+    case 'name':
+      query = query.replace('@', '').replace('~', '')
       break
     case 'mediaHash':
     case 'draftId':
