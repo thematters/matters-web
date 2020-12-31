@@ -31,7 +31,7 @@ const SideNav = () => {
   const isLargeUp = useResponsive('lg-up')
   const router = useRouter()
   const viewer = useContext(ViewerContext)
-  const userName = getQuery({ router, key: 'userName' })
+  const userName = getQuery({ router, key: 'name' })
   const viewerUserName = viewer.userName || ''
 
   const isInHome = router.pathname === PATHS.HOME

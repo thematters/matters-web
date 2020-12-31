@@ -27,7 +27,7 @@ import { UserFolloweePublic } from './__generated__/UserFolloweePublic'
 const UserFollowees = () => {
   const viewer = useContext(ViewerContext)
   const router = useRouter()
-  const userName = getQuery({ router, key: 'userName' })
+  const userName = getQuery({ router, key: 'name' })
 
   /**
    * Data Fetching

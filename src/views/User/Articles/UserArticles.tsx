@@ -60,7 +60,7 @@ const ArticleSummaryInfo = ({ user }: { user: UserArticlesPublic_user }) => {
 const UserArticles = () => {
   const viewer = useContext(ViewerContext)
   const router = useRouter()
-  const userName = getQuery({ router, key: 'userName' })
+  const userName = getQuery({ router, key: 'name' })
   const isViewer = viewer.userName === userName
 
   let query = USER_ARTICLES_PUBLIC

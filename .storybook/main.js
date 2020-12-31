@@ -4,7 +4,11 @@ const { mergeWithCustomize } = require('webpack-merge')
 
 module.exports = {
   stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
-  addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
+  addons: [
+    '@storybook/addon-links',
+    '@storybook/addon-essentials',
+    '@storybook/addon-a11y',
+  ],
   /*
     Next.js automatically supports the tsconfig.json "paths" and "baseUrl"
     options but the webpack configuration of Storybook doesn't yet.

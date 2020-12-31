@@ -5,7 +5,7 @@ import React from 'react'
 import { UserDigest } from '~/components'
 import { UserDigestMiniProps } from '~/components/UserDigest/Mini'
 
-import { PLACEHOLDER_USER } from '../placeholders'
+import { MOCK_USER } from '../../mocks'
 
 export default {
   title: 'Components/UserDigest',
@@ -20,7 +20,7 @@ const Template: Story<UserDigestMiniProps> = (args) => (
 
 export const Mini = Template.bind({})
 Mini.args = {
-  user: PLACEHOLDER_USER,
+  user: MOCK_USER,
   avatarSize: 'xs',
   hasAvatar: true,
   hasDisplayName: true,
