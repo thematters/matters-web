@@ -19,7 +19,7 @@ interface UnsubscribeProps {
   articleId?: string
   size?: Extract<IconSize, 'md-s'>
   disabled?: boolean
-  inCard: boolean
+  inCard?: boolean
 }
 
 const Unsubscribe = ({

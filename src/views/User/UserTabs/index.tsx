@@ -7,7 +7,7 @@ import { getQuery, toPath } from '~/common/utils'
 
 const MeTabs = () => {
   const router = useRouter()
-  const userName = getQuery({ router, key: 'userName' }) || ''
+  const userName = getQuery({ router, key: 'name' }) || ''
 
   const userArticlePath = toPath({
     page: 'userProfile',

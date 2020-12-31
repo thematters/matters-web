@@ -11,7 +11,7 @@ import { BookmarkArticlePrivate } from './__generated__/BookmarkArticlePrivate'
 interface BookmarkButtonProps {
   article: Partial<BookmarkArticlePrivate>
   size?: Extract<IconSize, 'md-s'>
-  inCard: boolean
+  inCard?: boolean
 }
 
 const fragments = {

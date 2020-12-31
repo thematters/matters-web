@@ -8,7 +8,7 @@ import { CircleDigestRichProps } from '~/components/CircleDigest/Rich'
 import { MOCK_CIRCLE } from '../../mocks'
 
 export default {
-  title: 'Components/CircleDigest',
+  title: 'Components/CircleDigest/Rich',
   component: CircleDigest.Rich,
 } as Meta
 
@@ -18,9 +18,18 @@ const Template: Story<CircleDigestRichProps> = (args) => (
   </MockedProvider>
 )
 
-export const Rich = Template.bind({})
-Rich.args = {
+export const Default = Template.bind({})
+Default.args = {
   circle: MOCK_CIRCLE,
   hasFooter: true,
   hasPrice: true,
+}
+
+export const Simple = Template.bind({})
+Simple.args = {
+  circle: MOCK_CIRCLE,
+  avatarSize: 'xl',
+  hasFooter: false,
+  hasPrice: false,
+  hasOwner: false,
 }

@@ -36,7 +36,7 @@ export const UserProfile = () => {
   const viewer = useContext(ViewerContext)
 
   // public data
-  const userName = getQuery({ router, key: 'userName' })
+  const userName = getQuery({ router, key: 'name' })
   const isMe = !userName || viewer.userName === userName
   const { data, loading, client } = usePublicQuery<UserProfileUserPublic>(
     USER_PROFILE_PUBLIC,
