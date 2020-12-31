@@ -108,7 +108,7 @@
     "@types/fingerprintjs2": "^2.0.0",
     "@types/grecaptcha": "^3.0.1",
     "@types/helmet": "4.0.0",
-    "@types/jest": "^26.0.15",
+    "@types/jest": "^26.0.19",
     "@types/jump.js": "^1.0.3",
     "@types/lodash": "^4.14.165",
     "@types/nprogress": "0.2.0",
