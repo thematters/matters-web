@@ -60,24 +60,31 @@ const Toolbar = ({ article, privateFetched }: ToolbarProps) => {
 
   return (
     <section className="toolbar">
-      <ReCaptchaProvider action="appreciateArticle">
-        <AppreciationButton article={article} privateFetched={privateFetched} />
-      </ReCaptchaProvider>
+      <section className="buttons">
+        <ReCaptchaProvider action="appreciateArticle">
+          <AppreciationButton
+            article={article}
+            privateFetched={privateFetched}
+          />
+        </ReCaptchaProvider>
 
-      <DonationButton article={article} />
+        <DonationButton article={article} />
 
-      <section className="comment-bar">
-        <CommentBar article={article} />
+        <section className="comment-bar">
+          <CommentBar article={article} />
+        </section>
+
+        <BookmarkButton article={article} size="md-s" inCard={false} />
+
+        {isSmallUp && <ShareButton iconSize="md-s" inCard={false} />}
+
+        <DropdownActions
+          article={article}
+          color="black"
+          size="md-s"
+          inCard={false}
+        />
       </section>
-
-      <BookmarkButton article={article} size="md-s" inCard={false} />
-      {isSmallUp && <ShareButton iconSize="md-s" inCard={false} />}
-      <DropdownActions
-        article={article}
-        color="black"
-        size="md-s"
-        inCard={false}
-      />
 
       <style jsx>{styles}</style>
     </section>
