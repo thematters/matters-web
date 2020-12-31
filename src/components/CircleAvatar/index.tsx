@@ -9,12 +9,12 @@ import styles from './styles.css'
 
 // import { CircleUser } from './__generated__/CircleUser'
 
-export type AvatarSize = 'xl' | 'xxl'
+export type CircleAvatarSize = 'xl' | 'xxl'
 
 export interface AvatarProps {
   // circle?: CircleUser
   circle?: any
-  size?: AvatarSize
+  size?: CircleAvatarSize
   src?: string
 }
 

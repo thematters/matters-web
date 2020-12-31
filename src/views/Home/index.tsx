@@ -9,6 +9,7 @@ import {
   useResponsive,
   ViewerContext,
 } from '~/components'
+import { CircleAdBanner } from '~/components/CircleAdBanner'
 
 import Feed from './Feed'
 import Sidebar from './Sidebar'
@@ -53,6 +54,8 @@ const Home = () => {
       )}
 
       <Spacer size="xtight" />
+
+      <CircleAdBanner />
 
       <Feed />
 

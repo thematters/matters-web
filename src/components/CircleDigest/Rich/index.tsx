@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import React from 'react'
 
 import { Card } from '~/components'
-import { CircleAvatar } from '~/components/CircleAvatar'
+import { CircleAvatar, CircleAvatarSize } from '~/components/CircleAvatar'
 import { UserDigest } from '~/components/UserDigest'
 
 import { toPath } from '~/common/utils'
@@ -14,19 +14,24 @@ import styles from './styles.css'
 
 export type CircleDigestRichControls = {
   onClick?: () => any
+  hasOwner?: boolean
   hasFooter?: boolean
 } & FooterControls
 
 export type CircleDigestRichProps = {
   // circle: CircleDigestRichCirclePublic
   circle: any
+  avatarSize?: CircleAvatarSize
 } & CircleDigestRichControls
 
 const CircleDigestRich = ({
   circle,
 
+  avatarSize = 'xxl',
+
   onClick,
 
+  hasOwner = true,
   hasFooter,
 
   ...controls
@@ -45,19 +50,21 @@ const CircleDigestRich = ({
     <Card {...path} spacing={['base', 'base']} onClick={onClick}>
       <section className={containerClasses}>
         <section className="content">
-          <CircleAvatar circle={circle} size="xxl" />
+          <CircleAvatar circle={circle} size={avatarSize} />
 
           <header>
             <h3>{displayName}</h3>
 
-            <UserDigest.Mini
-              user={owner}
-              avatarSize="sm"
-              textSize="sm"
-              nameColor="grey-darker"
-              hasAvatar
-              hasDisplayName
-            />
+            {hasOwner && (
+              <UserDigest.Mini
+                user={owner}
+                avatarSize="sm"
+                textSize="sm"
+                nameColor="grey-darker"
+                hasAvatar
+                hasDisplayName
+              />
+            )}
           </header>
         </section>
 

@@ -14,20 +14,9 @@ const fragments = {
   `,
 }
 
-const Appreciation = ({
-  article,
-  size = 'sm',
-}: {
-  article: AppreciationArticle
-  size?: 'sm' | 'xs'
-}) => (
+const Appreciation = ({ article }: { article: AppreciationArticle }) => (
   <Button spacing={['xtight', 'xtight']} is="span">
-    <TextIcon
-      icon={<IconClap16 size={size === 'xs' ? 'xs' : undefined} />}
-      color="grey"
-      weight="md"
-      size={size}
-    >
+    <TextIcon icon={<IconClap16 />} color="grey" weight="md" size="sm">
       {article.appreciationsReceivedTotal > 0
         ? numAbbr(article.appreciationsReceivedTotal)
         : undefined}

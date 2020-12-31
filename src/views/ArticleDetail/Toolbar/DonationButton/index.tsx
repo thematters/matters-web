@@ -12,7 +12,7 @@ import {
 } from '~/components'
 
 import { ADD_TOAST, TEXT } from '~/common/enums'
-import { analytics } from '~/common/utils'
+import { analytics, numAbbr } from '~/common/utils'
 
 import { DonationButtonArticle } from './__generated__/DonationButtonArticle'
 
@@ -95,7 +95,9 @@ const DonationButton = ({ article }: DonationButtonProps) => {
               spacing="xtight"
               size="sm"
             >
-              {article.transactionsReceivedBy.totalCount || undefined}
+              {article.transactionsReceivedBy.totalCount > 0
+                ? numAbbr(article.transactionsReceivedBy.totalCount)
+                : undefined}
             </TextIcon>
           </Button>
         )}
