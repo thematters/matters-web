@@ -30,7 +30,7 @@ import TagDetailArticles from './Articles'
 import ArticlesCount from './ArticlesCount'
 import { TagDetailButtons } from './Buttons'
 import Community from './Community'
-import Cover from './Cover'
+import TagCover from './Cover'
 import DropdownActions from './DropdownActions'
 import Followers from './Followers'
 import { TAG_DETAIL_PRIVATE, TAG_DETAIL_PUBLIC } from './gql'
@@ -109,7 +109,7 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
       <Head title={`#${tag.content}`} />
 
       <PullToRefresh>
-        <Cover tag={tag} />
+        <TagCover tag={tag} />
 
         <section className="info">
           {features.tag_adoption && <Owner tag={tag} />}

@@ -136,8 +136,8 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
       <section className="cover-field">
         <CoverUploader
           assetType={ASSET_TYPE.profileCover}
-          coverUrl={user.info.profileCover}
-          defaultCoverUrl={IMAGE_COVER}
+          cover={user.info.profileCover}
+          fallbackCover={IMAGE_COVER}
           entityType={ENTITY_TYPE.user}
           inEditor
           onUpload={(assetId) => setFieldValue('profileCover', assetId)}

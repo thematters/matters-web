@@ -3,7 +3,7 @@ import classNames from 'classnames'
 
 import { Img } from '~/components'
 
-import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
+import ICON_CIRCLE_AVATAR_DEFAULT from '@/public/static/icons/72px/circle-avatar-default.svg'
 
 import styles from './styles.css'
 
@@ -11,11 +11,12 @@ import styles from './styles.css'
 
 export type CircleAvatarSize = 'xl' | 'xxl'
 
-export interface AvatarProps {
+export interface CircleAvatarProps {
   // circle?: CircleUser
   circle?: any
   size?: CircleAvatarSize
   src?: string
+  inEditor?: boolean
 }
 
 // const fragments = {
@@ -26,9 +27,9 @@ export interface AvatarProps {
 //   `,
 // }
 
-export const CircleAvatar = (props: AvatarProps) => {
-  const { circle, size = 'xl', src } = props
-  const source = src || circle?.avatar || ICON_AVATAR_DEFAULT
+export const CircleAvatar = (props: CircleAvatarProps) => {
+  const { circle, size = 'xl', src, inEditor } = props
+  const source = src || circle?.avatar || ICON_CIRCLE_AVATAR_DEFAULT
   const isFallback =
     (!src && !circle?.avatar) || source.indexOf('data:image') >= 0
   const avatarClasses = classNames({
@@ -38,7 +39,7 @@ export const CircleAvatar = (props: AvatarProps) => {
 
   return (
     <div className={avatarClasses}>
-      <Img url={source} size="144w" disabled={isFallback} />
+      <Img url={source} size="144w" disabled={isFallback || inEditor} />
 
       <style jsx>{styles}</style>
     </div>
