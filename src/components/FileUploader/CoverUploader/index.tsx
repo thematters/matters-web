@@ -46,9 +46,12 @@ import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/Singl
  */
 
 export type CoverUploaderProps = {
-  assetType: ASSET_TYPE.profileCover | ASSET_TYPE.tagCover
+  assetType:
+    | ASSET_TYPE.profileCover
+    | ASSET_TYPE.tagCover
+    | ASSET_TYPE.circleCover
   entityId?: string
-  entityType: ENTITY_TYPE.user | ENTITY_TYPE.tag
+  entityType: ENTITY_TYPE.user | ENTITY_TYPE.tag | ENTITY_TYPE.circle
   onUpload: (assetId: string | null) => void
   type?: 'circle'
 } & CoverProps

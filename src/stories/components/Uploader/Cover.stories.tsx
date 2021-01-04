@@ -39,8 +39,8 @@ const Template: Story = () => (
       <li>
         <CoverUploader
           type="circle"
-          assetType={ASSET_TYPE.profileCover}
-          entityType={ENTITY_TYPE.user}
+          assetType={ASSET_TYPE.circleCover}
+          entityType={ENTITY_TYPE.circle}
           onUpload={(assetId) => alert({ assetId })}
           fallbackCover={CIRCLE_COVER}
         />
@@ -48,8 +48,8 @@ const Template: Story = () => (
       <li>
         <CoverUploader
           type="circle"
-          assetType={ASSET_TYPE.profileCover}
-          entityType={ENTITY_TYPE.user}
+          assetType={ASSET_TYPE.circleCover}
+          entityType={ENTITY_TYPE.circle}
           onUpload={(assetId) => alert({ assetId })}
           fallbackCover={CIRCLE_COVER}
           cover="https://source.unsplash.com/512x512?cirlce-cover"

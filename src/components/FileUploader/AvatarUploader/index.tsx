@@ -29,13 +29,18 @@ import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/Singl
 export type AvatarUploaderProps = {
   onUpload: (assetId: string) => void
   hasBorder?: boolean
+
   type?: 'circle'
+  circleId?: string
 } & (Omit<AvatarProps, 'size'> | Omit<CircleAvatarProps, 'size'>)
 
 export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
   onUpload,
   hasBorder,
+
   type,
+  circleId,
+
   ...avatarProps
 }) => {
   const [upload, { loading }] = useMutation<SingleFileUpload>(UPLOAD_FILE)
@@ -76,8 +81,9 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
         variables: {
           input: {
             file,
-            type: ASSET_TYPE.avatar,
-            entityType: ENTITY_TYPE.user,
+            type: isCircle ? ASSET_TYPE.circleAvatar : ASSET_TYPE.avatar,
+            entityType: isCircle ? ENTITY_TYPE.circle : ENTITY_TYPE.user,
+            entityId: circleId,
           },
         },
       })
