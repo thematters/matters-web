@@ -177,7 +177,7 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
           id: 'enterUserDescription',
           lang,
         })}
-        hint={<Translate id="hintUserDescription" />}
+        hint={<Translate id="hintDescription" />}
         value={values.description}
         error={touched.description && errors.description}
         onBlur={handleBlur}

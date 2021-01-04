@@ -1,5 +1,11 @@
-import { PAYMENT_CURRENCY, PAYMENT_MINIMAL_CHARGE_AMOUNT } from '~/common/enums'
 import {
+  PAYMENT_CURRENCY,
+  PAYMENT_MAXIMUM_CIRCLE_AMOUNT,
+  PAYMENT_MINIMAL_CHARGE_AMOUNT,
+  PAYMENT_MINIMAL_CIRCLE_AMOUNT,
+} from '~/common/enums'
+import {
+  isValidCircleName,
   isValidDisplayName,
   isValidEmail,
   isValidPassword,
@@ -9,6 +15,9 @@ import {
   ValidEmailOptions,
 } from '~/common/utils'
 
+/**
+ * User
+ */
 export const validateEmail = (
   value: string,
   lang: Language,
@@ -107,6 +116,50 @@ export const validateAvatar = (value: string | null, lang: Language) => {
   }
 }
 
+/**
+ * Circle
+ */
+export const validateCircleName = (value: string, lang: Language) => {
+  if (!value) {
+    return translate({ id: 'required', lang })
+  } else if (!isValidCircleName(value)) {
+    return translate({ id: 'hintCircleName', lang })
+  }
+}
+
+export const validateCircleDisplayName = (value: string, lang: Language) => {
+  if (!value) {
+    return translate({ id: 'required', lang })
+  } else if (!isValidDisplayName(value, 12)) {
+    return translate({ id: 'hintCircleDisplayName', lang })
+  }
+}
+
+export const validateCircleAmount = (value: number, lang: Language) => {
+  if (!value) {
+    return translate({ id: 'required', lang })
+  }
+
+  if (value < PAYMENT_MINIMAL_CIRCLE_AMOUNT.HKD) {
+    return translate({
+      zh_hant: `最小金額爲 HKD ${PAYMENT_MINIMAL_CIRCLE_AMOUNT.HKD}`,
+      zh_hans: `最小金额为 HKD ${PAYMENT_MINIMAL_CIRCLE_AMOUNT.HKD}`,
+      lang,
+    })
+  }
+
+  if (value > PAYMENT_MAXIMUM_CIRCLE_AMOUNT.HKD) {
+    return translate({
+      zh_hant: `最大金額爲 HKD ${PAYMENT_MAXIMUM_CIRCLE_AMOUNT.HKD}`,
+      zh_hans: `最大金额为 HKD ${PAYMENT_MAXIMUM_CIRCLE_AMOUNT.HKD}`,
+      lang,
+    })
+  }
+}
+
+/**
+ * Payment
+ */
 export const validateAmount = (value: number, lang: Language) => {
   // TODO: multi-currency support
 
@@ -116,8 +169,8 @@ export const validateAmount = (value: number, lang: Language) => {
 
   if (value < PAYMENT_MINIMAL_CHARGE_AMOUNT.HKD) {
     return translate({
-      zh_hant: `最少储值金額爲 HKD ${PAYMENT_MINIMAL_CHARGE_AMOUNT.HKD}`,
-      zh_hans: `最少储值金额为 HKD ${PAYMENT_MINIMAL_CHARGE_AMOUNT.HKD}`,
+      zh_hant: `最小储值金額爲 HKD ${PAYMENT_MINIMAL_CHARGE_AMOUNT.HKD}`,
+      zh_hans: `最小储值金额为 HKD ${PAYMENT_MINIMAL_CHARGE_AMOUNT.HKD}`,
       lang,
     })
   }

@@ -31,7 +31,7 @@ const Template: Story = () => (
         <AvatarUploader
           type="circle"
           onUpload={(assetId) => alert({ assetId })}
-          circleId=""
+          entityId=""
         />
       </li>
       <li>
@@ -39,7 +39,7 @@ const Template: Story = () => (
           type="circle"
           circle={MOCK_CIRCLE}
           onUpload={(assetId) => alert({ assetId })}
-          circleId=""
+          entityId=""
         />
       </li>
 
