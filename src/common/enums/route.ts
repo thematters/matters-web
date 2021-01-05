@@ -94,7 +94,7 @@ export const ROUTES: {
 
   // Circle
   { key: 'CIRCLE_DETAIL', pathname: '/[name]' },
-  { key: 'CIRCLE_CREATION', pathname: '/create-circle' },
+  { key: 'CIRCLE_CREATION', pathname: '/circles/create' },
 
   // Auth
   { key: 'LOGIN', pathname: '/login' },

@@ -23,7 +23,7 @@ import {
 } from '~/common/utils'
 
 import CIRCLE_COVER from '@/public/static/images/circle-cover.svg'
-import { ASSET_TYPE, ENTITY_TYPE } from '@/src/common/enums'
+import { ADD_TOAST, ASSET_TYPE, ENTITY_TYPE } from '@/src/common/enums'
 
 import styles from './styles.css'
 
@@ -90,15 +90,14 @@ const Init: React.FC<FormProps> = ({ circle, purpose, closeDialog }) => {
           },
         })
 
-        // TODO: toast
-        // window.dispatchEvent(
-        //   new CustomEvent(ADD_TOAST, {
-        //     detail: {
-        //       color: 'green',
-        //       content: <Translate id="successEditUserProfile" />,
-        //     },
-        //   })
-        // )
+        window.dispatchEvent(
+          new CustomEvent(ADD_TOAST, {
+            detail: {
+              color: 'green',
+              content: <Translate id="successCreateCircle" />,
+            },
+          })
+        )
 
         if (data?.putCircle) {
           const path = toPath({ page: 'circleDetail', circle: data.putCircle })
