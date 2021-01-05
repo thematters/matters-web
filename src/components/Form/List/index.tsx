@@ -1,5 +1,7 @@
 import classNames from 'classnames'
 
+import { useResponsive } from '~/components'
+
 import Item from './Item'
 import styles from './styles.css'
 
@@ -13,14 +15,18 @@ import styles from './styles.css'
 interface ListProps {
   groupName?: string | React.ReactNode
   spacing?: 0 | 'xloose'
+  forceGreyStyle?: boolean
 }
 
 const List: React.FC<ListProps> & { Item: typeof Item } = ({
   groupName,
   spacing = 0,
+  forceGreyStyle,
   children,
 }) => {
+  const isSmallUp = useResponsive('sm-up')
   const listClasses = classNames({
+    greyStyle: isSmallUp || forceGreyStyle,
     [`spacing-${spacing}`]: !!spacing,
   })
 
