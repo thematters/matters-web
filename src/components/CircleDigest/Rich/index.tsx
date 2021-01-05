@@ -1,8 +1,7 @@
 import classNames from 'classnames'
 import React from 'react'
 
-import { Card } from '~/components'
-import { CircleAvatar, CircleAvatarSize } from '~/components/CircleAvatar'
+import { Card, CircleAvatar, CircleAvatarSize } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 
 import { toPath } from '~/common/utils'

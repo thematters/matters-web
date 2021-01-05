@@ -22,6 +22,7 @@ export enum ENTITY_TYPE {
   draft = 'draft',
   tag = 'tag',
   user = 'user',
+  circle = 'circle',
 }
 
 export enum ASSET_TYPE {
@@ -31,4 +32,6 @@ export enum ASSET_TYPE {
   embedaudio = 'embedaudio',
   profileCover = 'profileCover',
   tagCover = 'tagCover',
+  circleAvatar = 'circleAvatar',
+  circleCover = 'circleCover',
 }

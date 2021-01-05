@@ -2,7 +2,14 @@ import VisuallyHidden from '@reach/visually-hidden'
 import classNames from 'classnames'
 import { useState } from 'react'
 
-import { Avatar, AvatarProps, Spinner, Translate } from '~/components'
+import {
+  Avatar,
+  AvatarProps,
+  CircleAvatar,
+  CircleAvatarProps,
+  Spinner,
+  Translate,
+} from '~/components'
 import { useMutation } from '~/components/GQL'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 import { IconCamera24 } from '~/components/Icon'
@@ -22,11 +29,18 @@ import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/Singl
 export type AvatarUploaderProps = {
   onUpload: (assetId: string) => void
   hasBorder?: boolean
-} & AvatarProps
+
+  type?: 'circle'
+  circleId?: string
+} & (Omit<AvatarProps, 'size'> | Omit<CircleAvatarProps, 'size'>)
 
 export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
   onUpload,
   hasBorder,
+
+  type,
+  circleId,
+
   ...avatarProps
 }) => {
   const [upload, { loading }] = useMutation<SingleFileUpload>(UPLOAD_FILE)
@@ -67,8 +81,9 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
         variables: {
           input: {
             file,
-            type: ASSET_TYPE.avatar,
-            entityType: ENTITY_TYPE.user,
+            type: isCircle ? ASSET_TYPE.circleAvatar : ASSET_TYPE.avatar,
+            entityType: isCircle ? ENTITY_TYPE.circle : ENTITY_TYPE.user,
+            entityId: circleId,
           },
         },
       })
@@ -93,13 +108,16 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
     }
   }
 
+  const isCircle = type === 'circle'
   const labelClasses = classNames({
     'has-border': hasBorder,
+    circle: isCircle,
   })
 
   return (
     <label className={labelClasses} htmlFor={fieldId}>
-      <Avatar size="xxl" {...avatarProps} src={avatar} />
+      {!isCircle && <Avatar size="xxl" {...avatarProps} src={avatar} />}
+      {isCircle && <CircleAvatar size="xxl" {...avatarProps} src={avatar} />}
 
       <div className="mask">
         {loading ? <Spinner /> : <IconCamera24 color="white" size="lg" />}
