@@ -10,6 +10,11 @@ const DynamicUserArticles = dynamic(() => import('~/views/User/Articles'), {
   loading: Spinner,
 })
 
+const DynamicCircleDetail = dynamic(() => import('~/views/Circle/Detail'), {
+  ssr: true,
+  loading: Spinner,
+})
+
 const NameIndex = () => {
   const router = useRouter()
   const nameType = getNameType({ router })
@@ -17,8 +22,7 @@ const NameIndex = () => {
   if (nameType === 'user') {
     return <DynamicUserArticles />
   } else if (nameType === 'circle') {
-    // TODO
-    return <h1>Circle</h1>
+    return <DynamicCircleDetail />
   }
 
   return null

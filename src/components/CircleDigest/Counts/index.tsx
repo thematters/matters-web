@@ -1,15 +1,32 @@
+import gql from 'graphql-tag'
+
 import { IconArticle16, IconUser16, TextIcon } from '~/components'
 
 import { numAbbr } from '~/common/utils'
 
 import styles from './styles.css'
 
+import { CountsCircle } from './__generated__/CountsCircle'
+
 export type CountsProps = {
-  // circle: CountsCircle
-  circle: any
+  circle: CountsCircle
 }
 
-const Counts: React.FC<CountsProps> = ({ circle }) => {
+const fragments = {
+  circle: gql`
+    fragment CountsCircle on Circle {
+      id
+      members(input: { first: 0 }) {
+        totalCount
+      }
+      works(input: { first: 0 }) {
+        totalCount
+      }
+    }
+  `,
+}
+
+const Counts = ({ circle }: CountsProps) => {
   const memberCount = circle.members.totalCount
   const articleCount = circle.works.totalCount
 
@@ -39,5 +56,7 @@ const Counts: React.FC<CountsProps> = ({ circle }) => {
     </section>
   )
 }
+
+Counts.fragments = fragments
 
 export default Counts
