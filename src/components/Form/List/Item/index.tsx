@@ -19,6 +19,7 @@ type ItemProps = {
   rightText?: string | React.ReactNode
   rightTextColor?: 'green' | 'grey-darker'
   rightSubText?: string | React.ReactNode
+  forceGreyStyle?: boolean
   ref?: any
 } & CardProps
 
@@ -32,6 +33,8 @@ const Item: React.FC<ItemProps> = forwardRef(
       rightText,
       rightTextColor = 'grey-darker',
       rightSubText,
+
+      forceGreyStyle,
 
       ...cardProps
     },
@@ -47,7 +50,7 @@ const Item: React.FC<ItemProps> = forwardRef(
     return (
       <li>
         <Card
-          bgColor={isSmallUp ? 'grey-lighter' : 'white'}
+          bgColor={isSmallUp || forceGreyStyle ? 'grey-lighter' : 'white'}
           {...cardProps}
           spacing={cardProps.spacing || [0, 0]}
           ref={ref}

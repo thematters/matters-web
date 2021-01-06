@@ -22,6 +22,7 @@ import { getQuery, numAbbr, toPath } from '~/common/utils'
 import IMAGE_COVER from '@/public/static/images/profile-cover.png'
 
 import { CivicLikerBadge, SeedBadge } from './Badges'
+import CircleWidget from './CircleWidget'
 import DropdownActions from './DropdownActions'
 import EditProfileButton from './EditProfileButton'
 import { USER_PROFILE_PRIVATE, USER_PROFILE_PUBLIC } from './gql'
@@ -217,6 +218,8 @@ export const UserProfile = () => {
             </a>
           </Link>
         </footer>
+
+        <CircleWidget isMe={isMe} />
 
         <style jsx>{styles}</style>
       </section>

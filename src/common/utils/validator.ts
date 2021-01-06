@@ -1,9 +1,5 @@
 import isEmail from 'validator/lib/isEmail'
 
-import { INVALID_NAMES } from '~/common/enums'
-
-export const REGEXP_CJK = /^[A-Za-z0-9\u4E00-\u9FFF\u3400-\u4DFF\uF900-\uFAFF\u2e80-\u33ffh]*$/
-
 /**
  * Validate email address.
  */
@@ -46,53 +42,4 @@ export const isValidPaymentPassword = (password: string): boolean => {
   }
 
   return /^[\d]*$/.test(password)
-}
-
-/**
- * Validate user display name. It only accepts alphabets, chinese characters and numbers.
- *
- * @see https://mattersnews.slack.com/archives/G8877EQMS/p1546446430005500
- */
-export const isValidDisplayName = (name: string, size = 20): boolean => {
-  if (
-    !name ||
-    name.length < 2 ||
-    name.length > size ||
-    INVALID_NAMES.includes(name.toLowerCase())
-  ) {
-    return false
-  }
-  return REGEXP_CJK.test(name)
-}
-
-/**
- * Validate user name. It only accepts alphabets, numbers and _.
- *
- * @see https://mattersnews.slack.com/archives/G8877EQMS/p1546446430005500
- */
-export const isValidUserName = (name: string): boolean => {
-  if (
-    !name ||
-    name.length < 4 ||
-    name.length > 15 ||
-    INVALID_NAMES.includes(name.toLowerCase())
-  ) {
-    return false
-  }
-  return /^[a-zA-Z0-9_]*$/.test(name)
-}
-
-/**
- * Validate circle name. It only accepts alphabets, numbers and _.
- */
-export const isValidCircleName = (name: string, size = 20): boolean => {
-  if (
-    !name ||
-    name.length < 2 ||
-    name.length > size ||
-    INVALID_NAMES.includes(name.toLowerCase())
-  ) {
-    return false
-  }
-  return /^[a-zA-Z0-9_]*$/.test(name)
 }

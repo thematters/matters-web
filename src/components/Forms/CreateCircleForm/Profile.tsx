@@ -113,13 +113,7 @@ const Init: React.FC<FormProps> = ({ circle, purpose, closeDialog }) => {
         setSubmitting(false)
 
         const [messages, codes] = parseFormSubmitErrors(error, lang)
-        codes.forEach((code) => {
-          if (code.includes('USER_DISPLAYNAME_INVALID')) {
-            setFieldError('displayName', messages[code])
-          } else {
-            setFieldError('description', messages[code])
-          }
-        })
+        setFieldError('description', messages[codes[0]])
       }
     },
   })
