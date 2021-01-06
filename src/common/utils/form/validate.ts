@@ -1,9 +1,9 @@
 import {
-  INVALID_NAMES,
   PAYMENT_CURRENCY,
   PAYMENT_MAXIMUM_CIRCLE_AMOUNT,
   PAYMENT_MINIMAL_CHARGE_AMOUNT,
   PAYMENT_MINIMAL_CIRCLE_AMOUNT,
+  RESERVED_NAMES,
 } from '~/common/enums'
 import {
   isValidEmail,
@@ -133,11 +133,11 @@ export const validateDisplayName = (value: string, lang: Language) => {
     })
   }
 
-  const invalidNameIndex = INVALID_NAMES.indexOf(value)
+  const invalidNameIndex = RESERVED_NAMES.indexOf(value.toLowerCase())
   if (invalidNameIndex >= 0) {
     return translate({
-      zh_hant: `不能使用「${INVALID_NAMES[invalidNameIndex]}」`,
-      zh_hans: `不能使用 “${INVALID_NAMES[invalidNameIndex]}”`,
+      zh_hant: `不能使用「${RESERVED_NAMES[invalidNameIndex]}」`,
+      zh_hans: `不能使用 “${RESERVED_NAMES[invalidNameIndex]}”`,
       lang,
     })
   }
@@ -229,11 +229,11 @@ export const validateCircleDisplayName = (value: string, lang: Language) => {
     })
   }
 
-  const invalidNameIndex = INVALID_NAMES.indexOf(value)
+  const invalidNameIndex = RESERVED_NAMES.indexOf(value.toLowerCase())
   if (invalidNameIndex >= 0) {
     return translate({
-      zh_hant: `不能使用「${INVALID_NAMES[invalidNameIndex]}」`,
-      zh_hans: `不能使用 “${INVALID_NAMES[invalidNameIndex]}”`,
+      zh_hant: `不能使用「${RESERVED_NAMES[invalidNameIndex]}」`,
+      zh_hans: `不能使用 “${RESERVED_NAMES[invalidNameIndex]}”`,
       lang,
     })
   }
