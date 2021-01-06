@@ -1,8 +1,9 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 import throttle from 'lodash/throttle'
-import { useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 
+import { ViewerContext } from '~/components'
 import { useMutation } from '~/components/GQL'
 
 import styles from '~/common/styles/utils/content.article.css'
@@ -33,6 +34,7 @@ const Content = ({
   translation?: string | null
   translating?: boolean
 }) => {
+  const viewer = useContext(ViewerContext)
   const [read] = useMutation<ReadArticle>(READ_ARTICLE)
 
   const contentContainer = useRef(null)
@@ -53,6 +55,9 @@ const Content = ({
       window.removeEventListener('scroll', handleScroll)
     }
   }, [])
+
+  // visitor read flag
+  const [visitorRead, setVisitorRead] = useState(false)
 
   // register read
   useEffect(() => {
@@ -88,10 +93,16 @@ const Content = ({
           return !isBottomAboveCenter
         }
 
-        if (isReading()) {
+        // if user is logged in, ReadArticle mutation will be invoked multiple times
+        if (viewer.isAuthed && isReading()) {
           read({ variables: { id } })
         }
 
+        // if visitor, invoke ReadArticle mutation only once
+        if (!viewer.isAuthed && !visitorRead) {
+          read({ variables: { id } })
+          setVisitorRead(true)
+        }
         return heartbeat
       })(),
       5000
