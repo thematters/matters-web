@@ -18,7 +18,6 @@ const fragments = {
         prices {
           amount
           currency
-          billingCycle
         }
       }
     `,
@@ -38,7 +37,6 @@ const Price = ({ circle }: PriceProps) => {
     return null
   }
 
-  const isMonthly = price.billingCycle === 'month'
   const isMember = circle.isMember
   const path = toPath({
     page: 'circleDetail',
@@ -63,8 +61,7 @@ const Price = ({ circle }: PriceProps) => {
   return (
     <Button size={[null, '2rem']} spacing={[0, 'base']} bgColor="gold">
       <TextIcon weight="md" size="sm" color="white">
-        {price.amount} {price.currency} /{' '}
-        <Translate id={isMonthly ? 'month' : 'year'} />
+        {price.amount} {price.currency} / <Translate id="month" />
       </TextIcon>
     </Button>
   )

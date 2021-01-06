@@ -38,7 +38,6 @@ export const MOCK_CIRCLE = {
       state: 'active',
       amount: 5,
       currency: 'HKD' as any,
-      billingCycle: 'month' as any,
     },
   ],
   members: {
