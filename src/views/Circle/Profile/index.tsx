@@ -5,17 +5,20 @@ import { useContext, useEffect } from 'react'
 import {
   CircleAvatar,
   CircleCover,
+  Expandable,
   Layout,
   Spinner,
   Throw404,
+  Translate,
   usePublicQuery,
   ViewerContext,
 } from '~/components'
 
-import { getQuery } from '~/common/utils'
+import { getQuery, numAbbr } from '~/common/utils'
 
 import CIRCLE_COVER from '@/public/static/images/circle-cover.svg'
 
+import FollowButton from './FollowButton'
 import { CIRCLE_PROFILE_PRIVATE, CIRCLE_PROFILE_PUBLIC } from './gql'
 import styles from './styles.css'
 
@@ -86,10 +89,36 @@ const CircleProfile = () => {
         <CircleCover cover={circle.cover} fallbackCover={CIRCLE_COVER} />
 
         <header>
-          <section className="avatar">
-            <CircleAvatar size="xxl" circle={circle} />
-          </section>
+          <CircleAvatar size="xxl" circle={circle} />
+
+          <h2 className="name">{circle.displayName}</h2>
         </header>
+
+        {circle.description && (
+          <Expandable>
+            <p className="description">{circle.description}</p>
+          </Expandable>
+        )}
+
+        <footer>
+          <section className="counts">
+            <button type="button">
+              <span className="count">
+                {numAbbr(circle.members.totalCount)}
+              </span>
+              <Translate id="members" />
+            </button>
+
+            <button type="button">
+              <span className="count">
+                {numAbbr(circle.followers.totalCount)}
+              </span>
+              <Translate id="follower" />
+            </button>
+          </section>
+
+          <FollowButton circle={circle} />
+        </footer>
 
         <style jsx>{styles}</style>
       </section>

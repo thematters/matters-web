@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 
 import { CircleAvatar } from '~/components'
 
+import FollowButton from './FollowButton'
 // import DropdownActions from './DropdownActions'
 
 const fragments = {
@@ -13,6 +14,7 @@ const fragments = {
         displayName
         description
         cover
+        avatar
         members(input: { first: 0 }) {
           totalCount
         }
@@ -20,14 +22,18 @@ const fragments = {
           totalCount
         }
         ...AvatarCircle
+        ...FollowButtonCirclePrivate
       }
       ${CircleAvatar.fragments.circle}
+      ${FollowButton.fragments.circle.private}
     `,
     private: gql`
       fragment ProfileCirclePrivate on Circle {
         id
         isMember
+        ...FollowButtonCirclePrivate
       }
+      ${FollowButton.fragments.circle.private}
     `,
   },
 }
@@ -36,9 +42,11 @@ export const CIRCLE_PROFILE_PUBLIC = gql`
   query CircleProfilePublic($name: String!) {
     circle(input: { name: $name }) {
       ...ProfileCirclePublic
+      ...ProfileCirclePrivate
     }
   }
   ${fragments.circle.public}
+  ${fragments.circle.private}
 `
 
 export const CIRCLE_PROFILE_PRIVATE = gql`
