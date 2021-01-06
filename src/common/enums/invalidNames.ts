@@ -1,8 +1,8 @@
-export const INVALID_NAMES = [
-  'Matters',
+export const RESERVED_NAMES = [
   'matters',
-  'Matty',
   'matty',
   '馬特市官方',
   '马特市官方',
+  '張潔平',
+  '张洁平',
 ]
