@@ -31,7 +31,7 @@ export type AvatarUploaderProps = {
   hasBorder?: boolean
 
   type?: 'circle'
-  circleId?: string
+  entityId?: string
 } & (Omit<AvatarProps, 'size'> | Omit<CircleAvatarProps, 'size'>)
 
 export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
@@ -39,7 +39,7 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
   hasBorder,
 
   type,
-  circleId,
+  entityId,
 
   ...avatarProps
 }) => {
@@ -83,7 +83,7 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
             file,
             type: isCircle ? ASSET_TYPE.circleAvatar : ASSET_TYPE.avatar,
             entityType: isCircle ? ENTITY_TYPE.circle : ENTITY_TYPE.user,
-            entityId: circleId,
+            entityId,
           },
         },
       })
