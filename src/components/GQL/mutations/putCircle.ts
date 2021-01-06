@@ -13,7 +13,6 @@ export default gql`
         id
         amount
         currency
-        billingCycle
       }
     }
   }
