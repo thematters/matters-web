@@ -119,8 +119,8 @@ const Init: React.FC<FormProps> = ({
         <Form.Input
           label={
             <Translate
-              zh_hant="設置圍爐網址（發布後不可修改）"
-              zh_hans="设置围炉网址（发布后不可修改）"
+              zh_hant="設置圍爐網址（創建後不可修改）"
+              zh_hans="设置围炉网址（创建后不可修改）"
             />
           }
           type="text"
