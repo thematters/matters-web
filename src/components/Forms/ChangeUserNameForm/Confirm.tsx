@@ -81,7 +81,28 @@ const Confirm: React.FC<FormProps> = ({
         setSubmitting(false)
 
         const [messages, codes] = parseFormSubmitErrors(error, lang)
-        setFieldError('userName', messages[codes[0]])
+        codes.forEach((code) => {
+          if (code === 'NAME_EXISTS') {
+            setFieldError(
+              'userName',
+              translate({
+                zh_hant: 'Oops！此 Matters ID 已被使用了，換一個試試',
+                zh_hans: 'Oops！此 Matters ID 已被使用了，换一个试试',
+                lang,
+              })
+            )
+          } else if (code === 'NAME_INVALID') {
+            setFieldError(
+              'userName',
+              translate({
+                id: 'hintUserName',
+                lang,
+              })
+            )
+          } else {
+            setFieldError('userName', messages[code])
+          }
+        })
       }
     },
   })

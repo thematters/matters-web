@@ -92,7 +92,27 @@ const Init: React.FC<FormProps> = ({
         setSubmitting(false)
 
         const [messages, codes] = parseFormSubmitErrors(error, lang)
-        setFieldError('name', messages[codes[0]])
+        codes.forEach((c) => {
+          if (c === 'NAME_EXISTS') {
+            setFieldError(
+              'name',
+              translate({
+                zh_hant: 'Oops！此網址已被使用了，換一個試試',
+                zh_hans: 'Oops！此网址名称已被使用了，换一个试试',
+                lang,
+              })
+            )
+          } else if (c === 'NAME_INVALID') {
+            setFieldError('name', translate({ id: 'hintCircleName', lang }))
+          } else if (c === 'DISPLAYNAME_INVALID') {
+            setFieldError(
+              'name',
+              translate({ id: 'hintCircleDisplayName', lang })
+            )
+          } else {
+            setFieldError('name', messages[c])
+          }
+        })
       }
     },
   })

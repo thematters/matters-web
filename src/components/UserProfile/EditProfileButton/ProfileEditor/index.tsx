@@ -121,8 +121,11 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
 
         const [messages, codes] = parseFormSubmitErrors(error, lang)
         codes.forEach((code) => {
-          if (code.includes('USER_DISPLAYNAME_INVALID')) {
-            setFieldError('displayName', messages[code])
+          if (code === 'DISPLAYNAME_INVALID') {
+            setFieldError(
+              'displayName',
+              translate({ id: 'hintDisplayName', lang })
+            )
           } else {
             setFieldError('description', messages[code])
           }
