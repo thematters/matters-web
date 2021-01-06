@@ -83,6 +83,7 @@ const Init: React.FC<FormProps> = ({ circle, purpose, closeDialog }) => {
         const { data } = await update({
           variables: {
             input: {
+              id: circle.id,
               ...(avatar !== UNCHANGED_FIELD ? { avatar } : {}),
               ...(cover !== UNCHANGED_FIELD ? { cover } : {}),
               description,
