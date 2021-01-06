@@ -1,17 +1,16 @@
 import { MockedProvider } from '@apollo/react-testing'
 import { Meta, Story } from '@storybook/react/types-6-0'
 import React from 'react'
-
-import { CircleAdBanner } from '~/components/CircleAdBanner'
+import { CircleBanner } from '~/views/Home/CircleBanner'
 
 export default {
-  title: 'Components/CircleAdBanner',
-  component: CircleAdBanner,
+  title: 'Components/CircleBanner',
+  component: CircleBanner,
 } as Meta
 
 const Template: Story = () => (
   <MockedProvider>
-    <CircleAdBanner />
+    <CircleBanner />
   </MockedProvider>
 )
 

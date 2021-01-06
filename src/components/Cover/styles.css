@@ -1,4 +1,4 @@
-.profile-cover {
+.cover {
   position: relative;
 
   & :global(img) {

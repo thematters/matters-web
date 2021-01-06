@@ -9,8 +9,8 @@ import {
   useResponsive,
   ViewerContext,
 } from '~/components'
-import { CircleAdBanner } from '~/components/CircleAdBanner'
 
+import { CircleBanner } from './CircleBanner'
 import Feed from './Feed'
 import Sidebar from './Sidebar'
 import styles from './styles.css'
@@ -53,9 +53,9 @@ const Home = () => {
         />
       )}
 
-      <Spacer size="xtight" />
+      <CircleBanner />
 
-      <CircleAdBanner />
+      <Spacer size="xtight" />
 
       <Feed />
 

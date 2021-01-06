@@ -9,7 +9,6 @@ type PriceProps = {
 
 const Price: React.FC<PriceProps> = ({ circle }) => {
   const price = circle.prices && circle.prices[0]
-  const isMonthly = price.billingCycle === 'monthly'
   const isMember = circle.isMember
   const path = toPath({
     page: 'circleDetail',
@@ -38,8 +37,7 @@ const Price: React.FC<PriceProps> = ({ circle }) => {
   return (
     <Button size={[null, '2rem']} spacing={[0, 'base']} bgColor="gold">
       <TextIcon weight="md" size="sm" color="white">
-        {price.amount} {price.currency} /{' '}
-        <Translate id={isMonthly ? 'month' : 'year'} />
+        {price.amount} {price.currency} / <Translate id="month" />
       </TextIcon>
     </Button>
   )

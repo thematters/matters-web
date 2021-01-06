@@ -218,8 +218,8 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
         <section className="cover-field">
           <CoverUploader
             assetType={ASSET_TYPE.tagCover}
-            coverUrl={cover}
-            defaultCoverUrl={TAG_COVER}
+            cover={cover}
+            fallbackCover={TAG_COVER}
             entityId={id}
             entityType={ENTITY_TYPE.tag}
             inEditor

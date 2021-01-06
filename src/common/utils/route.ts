@@ -15,7 +15,7 @@ interface ArticleArgs {
 }
 
 interface CircleArgs {
-  circleName: string
+  name: string
 }
 
 interface CommentArgs {
@@ -92,7 +92,7 @@ export const toPath = (args: ToPathArgs): { href: string } => {
     }
     case 'circleDetail': {
       return {
-        href: `/~${args.circle.circleName}`,
+        href: `/~${args.circle.name}`,
       }
     }
     case 'commentDetail': {

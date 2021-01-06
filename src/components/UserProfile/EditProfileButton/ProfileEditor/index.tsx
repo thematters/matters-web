@@ -121,8 +121,11 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
 
         const [messages, codes] = parseFormSubmitErrors(error, lang)
         codes.forEach((code) => {
-          if (code.includes('USER_DISPLAYNAME_INVALID')) {
-            setFieldError('displayName', messages[code])
+          if (code === 'DISPLAYNAME_INVALID') {
+            setFieldError(
+              'displayName',
+              translate({ id: 'hintDisplayName', lang })
+            )
           } else {
             setFieldError('description', messages[code])
           }
@@ -136,8 +139,8 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
       <section className="cover-field">
         <CoverUploader
           assetType={ASSET_TYPE.profileCover}
-          coverUrl={user.info.profileCover}
-          defaultCoverUrl={IMAGE_COVER}
+          cover={user.info.profileCover}
+          fallbackCover={IMAGE_COVER}
           entityType={ENTITY_TYPE.user}
           inEditor
           onUpload={(assetId) => setFieldValue('profileCover', assetId)}
@@ -177,7 +180,7 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
           id: 'enterUserDescription',
           lang,
         })}
-        hint={<Translate id="hintUserDescription" />}
+        hint={<Translate id="hintDescription" />}
         value={values.description}
         error={touched.description && errors.description}
         onBlur={handleBlur}

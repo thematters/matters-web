@@ -3,14 +3,19 @@ import { Img } from '~/components'
 import styles from './styles.css'
 
 export interface CoverProps {
-  coverUrl?: string
-  defaultCoverUrl: string
+  cover?: string | null
+  fallbackCover: string
   inEditor?: boolean
 }
 
-export const Cover = ({ coverUrl, defaultCoverUrl, inEditor }: CoverProps) => {
-  const url = coverUrl || defaultCoverUrl
-  const isFallback = !url
+export const Cover: React.FC<CoverProps> = ({
+  cover,
+  fallbackCover,
+  inEditor,
+  children,
+}) => {
+  const url = cover || fallbackCover
+  const isFallback = !cover
 
   return (
     <div className="cover">
@@ -20,6 +25,8 @@ export const Cover = ({ coverUrl, defaultCoverUrl, inEditor }: CoverProps) => {
         smUpSize="540w"
         disabled={isFallback || inEditor}
       />
+
+      {children}
 
       <style jsx>{styles}</style>
     </div>

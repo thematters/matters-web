@@ -5,6 +5,7 @@ import { useContext, useEffect } from 'react'
 
 import {
   Avatar,
+  Cover,
   Error,
   Expandable,
   FollowButton,
@@ -19,8 +20,10 @@ import {
 
 import { getQuery, numAbbr, toPath } from '~/common/utils'
 
+import IMAGE_COVER from '@/public/static/images/profile-cover.png'
+
 import { CivicLikerBadge, SeedBadge } from './Badges'
-import Cover from './Cover'
+import CircleWidget from './CircleWidget'
 import DropdownActions from './DropdownActions'
 import EditProfileButton from './EditProfileButton'
 import { USER_PROFILE_PRIVATE, USER_PROFILE_PUBLIC } from './gql'
@@ -140,7 +143,7 @@ export const UserProfile = () => {
         <LayoutHeader />
 
         <section className="user-profile">
-          <Cover />
+          <Cover fallbackCover={IMAGE_COVER} />
 
           <header>
             <section className="avatar">
@@ -171,7 +174,7 @@ export const UserProfile = () => {
       <LayoutHeader />
 
       <section className="user-profile">
-        <Cover cover={profileCover} />
+        <Cover cover={profileCover} fallbackCover={IMAGE_COVER} />
 
         <header>
           <section className="avatar">
@@ -221,6 +224,8 @@ export const UserProfile = () => {
             </a>
           </Link>
         </footer>
+
+        <CircleWidget isMe={isMe} />
 
         <style jsx>{styles}</style>
       </section>

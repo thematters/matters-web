@@ -26,6 +26,7 @@ type ROUTE_KEY =
   | 'USER_FOLLOWEES'
   // Circle
   | 'CIRCLE_DETAIL'
+  | 'CIRCLE_CREATION'
   // Me
   | 'ME_DRAFTS'
   | 'ME_BOOKMARKS'
@@ -93,6 +94,7 @@ export const ROUTES: {
 
   // Circle
   { key: 'CIRCLE_DETAIL', pathname: '/[name]' },
+  { key: 'CIRCLE_CREATION', pathname: '/circles/create' },
 
   // Auth
   { key: 'LOGIN', pathname: '/login' },
