@@ -15,11 +15,16 @@ header {
   font-weight: var(--font-weight-semibold);
 }
 
-.description {
+.info {
   padding: 0 var(--spacing-base);
-  margin-top: var(--spacing-loose);
-  font-size: var(--font-size-md);
-  color: var(--color-grey-darker);
+
+  & .description {
+    position: relative;
+    margin-top: var(--spacing-base);
+    font-size: var(--font-size-md);
+    color: var(--color-grey-darker);
+    white-space: pre-wrap;
+  }
 }
 
 footer {

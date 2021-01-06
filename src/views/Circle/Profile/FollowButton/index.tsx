@@ -14,6 +14,7 @@ const fragments = {
     private: gql`
       fragment FollowButtonCirclePrivate on Circle {
         id
+        name
         isFollower
       }
     `,

@@ -1,10 +1,10 @@
 import _isNil from 'lodash/isNil'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 
-import { Button, TextIcon, Translate, ViewerContext } from '~/components'
+import { Button, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import TOGGLE_FOLLOW_CIRCLE from '~/components/GQL/mutations/toggleFollowCircle'
-import updateCircleFollowers from '~/components/GQL/updates/circleFollowers'
+import updateCircleFollowerCount from '~/components/GQL/updates/circleFollowerCount'
 
 import { ToggleFollowCircle } from '~/components/GQL/mutations/__generated__/ToggleFollowCircle'
 import { FollowButtonCirclePrivate } from './__generated__/FollowButtonCirclePrivate'
@@ -14,7 +14,6 @@ interface UnfollowCircleProps {
 }
 
 const Unfollow = ({ circle }: UnfollowCircleProps) => {
-  const viewer = useContext(ViewerContext)
   const [hover, setHover] = useState(false)
   const [unfollow] = useMutation<ToggleFollowCircle>(TOGGLE_FOLLOW_CIRCLE, {
     variables: { id: circle.id, enabled: false },
@@ -29,11 +28,10 @@ const Unfollow = ({ circle }: UnfollowCircleProps) => {
           }
         : undefined,
     update: (cache) => {
-      updateCircleFollowers({
+      updateCircleFollowerCount({
         cache,
-        type: 'unfollow',
-        id: circle.id,
-        viewer,
+        type: 'decrement',
+        name: circle.name,
       })
     },
   })

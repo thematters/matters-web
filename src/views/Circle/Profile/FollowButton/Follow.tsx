@@ -1,10 +1,9 @@
 import _isNil from 'lodash/isNil'
-import { useContext } from 'react'
 
-import { Button, TextIcon, Translate, ViewerContext } from '~/components'
+import { Button, TextIcon, Translate } from '~/components'
 import { useMutation } from '~/components/GQL'
 import TOGGLE_FOLLOW_CIRCLE from '~/components/GQL/mutations/toggleFollowCircle'
-import updatecircleFollowers from '~/components/GQL/updates/circleFollowers'
+import updateCircleFollowerCount from '~/components/GQL/updates/circleFollowerCount'
 
 import { ToggleFollowCircle } from '~/components/GQL/mutations/__generated__/ToggleFollowCircle'
 import { FollowButtonCirclePrivate } from './__generated__/FollowButtonCirclePrivate'
@@ -14,7 +13,6 @@ interface FollowProps {
 }
 
 const Follow = ({ circle }: FollowProps) => {
-  const viewer = useContext(ViewerContext)
   const [follow] = useMutation<ToggleFollowCircle>(TOGGLE_FOLLOW_CIRCLE, {
     variables: { id: circle.id, enabled: true },
     optimisticResponse:
@@ -28,11 +26,10 @@ const Follow = ({ circle }: FollowProps) => {
           }
         : undefined,
     update: (cache) => {
-      updatecircleFollowers({
+      updateCircleFollowerCount({
         cache,
-        id: circle.id,
-        type: 'follow',
-        viewer,
+        name: circle.name,
+        type: 'increment',
       })
     },
   })

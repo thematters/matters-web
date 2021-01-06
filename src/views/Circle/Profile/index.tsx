@@ -94,11 +94,13 @@ const CircleProfile = () => {
           <h2 className="name">{circle.displayName}</h2>
         </header>
 
-        {circle.description && (
-          <Expandable>
-            <p className="description">{circle.description}</p>
-          </Expandable>
-        )}
+        <section className="info">
+          {circle.description && (
+            <Expandable>
+              <p className="description">{circle.description}</p>
+            </Expandable>
+          )}
+        </section>
 
         <footer>
           <section className="counts">
