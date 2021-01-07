@@ -3,9 +3,8 @@ import gql from 'graphql-tag'
 import { CircleAvatar } from '~/components'
 
 import FollowButton from './FollowButton'
-// import DropdownActions from './DropdownActions'
 
-const fragments = {
+export const fragments = {
   circle: {
     public: gql`
       fragment ProfileCirclePublic on Circle {
@@ -39,23 +38,3 @@ const fragments = {
     `,
   },
 }
-
-export const CIRCLE_PROFILE_PUBLIC = gql`
-  query CircleProfilePublic($name: String!) {
-    circle(input: { name: $name }) {
-      ...ProfileCirclePublic
-      ...ProfileCirclePrivate
-    }
-  }
-  ${fragments.circle.public}
-  ${fragments.circle.private}
-`
-
-export const CIRCLE_PROFILE_PRIVATE = gql`
-  query CircleProfilePrivate($name: String!) {
-    circle(input: { name: $name }) {
-      ...ProfileCirclePrivate
-    }
-  }
-  ${fragments.circle.private}
-`

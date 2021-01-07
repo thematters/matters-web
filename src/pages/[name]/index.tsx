@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 
-import { Spinner, Throw404 } from '~/components'
+import { EmptyLayout, Spinner, Throw404 } from '~/components'
 
 import { getNameType } from '~/common/utils'
 
@@ -25,7 +25,11 @@ const NameIndex = () => {
     return <DynamicCircleDetail />
   }
 
-  return <Throw404 />
+  return (
+    <EmptyLayout>
+      <Throw404 />
+    </EmptyLayout>
+  )
 }
 
 export default NameIndex
