@@ -5,13 +5,13 @@ import { IconCircle24, TextIcon } from '~/components'
 
 import { toPath } from '~/common/utils'
 
+import { fragments } from './gql'
 import styles from './styles.css'
 
-// import { CircleDigestPlainCircle } from './__generated__/CircleDigestPlainCircle'
+import { DigestPlainCircle } from './__generated__/DigestPlainCircle'
 
 export type CircleDigestPlainProps = {
-  // circle: CircleDigestPlainCircle
-  circle: any
+  circle: DigestPlainCircle
 }
 
 const CircleDigestPlain = ({ circle }: CircleDigestPlainProps) => {
@@ -40,8 +40,6 @@ const CircleDigestPlain = ({ circle }: CircleDigestPlainProps) => {
   )
 }
 
-// TODO: Memoizing
+CircleDigestPlain.fragments = fragments
 
 export default CircleDigestPlain
-
-// CircleDigestPlain.fragments = fragments

@@ -52,7 +52,7 @@ const Template: Story = () => (
           entityType={ENTITY_TYPE.circle}
           onUpload={(assetId) => alert({ assetId })}
           fallbackCover={CIRCLE_COVER}
-          cover="https://source.unsplash.com/512x512?cirlce-cover"
+          cover="https://source.unsplash.com/512x512?circle-cover"
         />
       </li>
 

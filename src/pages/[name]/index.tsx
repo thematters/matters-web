@@ -1,11 +1,16 @@
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 
-import { Spinner } from '~/components'
+import { Spinner, Throw404 } from '~/components'
 
 import { getNameType } from '~/common/utils'
 
 const DynamicUserArticles = dynamic(() => import('~/views/User/Articles'), {
+  ssr: true,
+  loading: Spinner,
+})
+
+const DynamicCircleDetail = dynamic(() => import('~/views/Circle/Detail'), {
   ssr: true,
   loading: Spinner,
 })
@@ -17,11 +22,10 @@ const NameIndex = () => {
   if (nameType === 'user') {
     return <DynamicUserArticles />
   } else if (nameType === 'circle') {
-    // TODO
-    return <h1>Circle</h1>
+    return <DynamicCircleDetail />
   }
 
-  return null
+  return <Throw404 />
 }
 
 export default NameIndex

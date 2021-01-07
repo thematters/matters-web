@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-// import gql from 'graphql-tag'
+import gql from 'graphql-tag'
 
 import { Img } from '~/components'
 
@@ -7,25 +7,24 @@ import ICON_CIRCLE_AVATAR_DEFAULT from '@/public/static/icons/72px/circle-avatar
 
 import styles from './styles.css'
 
-// import { CircleUser } from './__generated__/CircleUser'
+import { AvatarCircle } from './__generated__/AvatarCircle'
 
 export type CircleAvatarSize = 'xl' | 'xxl'
 
 export interface CircleAvatarProps {
-  // circle?: CircleUser
-  circle?: any
+  circle?: AvatarCircle
   size?: CircleAvatarSize
   src?: string
   inEditor?: boolean
 }
 
-// const fragments = {
-//   circle: gql`
-//     fragment CircleUser on Circle {
-//       avatar
-//     }
-//   `,
-// }
+const fragments = {
+  circle: gql`
+    fragment AvatarCircle on Circle {
+      avatar
+    }
+  `,
+}
 
 export const CircleAvatar = (props: CircleAvatarProps) => {
   const { circle, size = 'xl', src, inEditor } = props
@@ -46,4 +45,4 @@ export const CircleAvatar = (props: CircleAvatarProps) => {
   )
 }
 
-// CircleAvatar.fragments = fragments
+CircleAvatar.fragments = fragments

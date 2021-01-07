@@ -26,6 +26,8 @@ type ROUTE_KEY =
   | 'USER_FOLLOWEES'
   // Circle
   | 'CIRCLE_DETAIL'
+  | 'CIRCLE_SETTINGS'
+  | 'CIRCLE_SETTINGS_EDIT_PROFILE'
   | 'CIRCLE_CREATION'
   // Me
   | 'ME_DRAFTS'
@@ -94,6 +96,11 @@ export const ROUTES: {
 
   // Circle
   { key: 'CIRCLE_DETAIL', pathname: '/[name]' },
+  { key: 'CIRCLE_SETTINGS', pathname: '/[name]/settings' },
+  {
+    key: 'CIRCLE_SETTINGS_EDIT_PROFILE',
+    pathname: '/[name]/settings/edit-profile',
+  },
   { key: 'CIRCLE_CREATION', pathname: '/circles/create' },
 
   // Auth

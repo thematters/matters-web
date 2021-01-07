@@ -1,23 +1,47 @@
+import gql from 'graphql-tag'
 import { toPath } from 'lodash'
 
 import { Button, TextIcon, Translate } from '~/components'
 
+import { PriceCirclePrivate } from './__generated__/PriceCirclePrivate'
+import { PriceCirclePublic } from './__generated__/PriceCirclePublic'
+
 type PriceProps = {
-  // circle: PriceCircle
-  circle: any
+  circle: PriceCirclePublic & Partial<PriceCirclePrivate>
 }
 
-const Price: React.FC<PriceProps> = ({ circle }) => {
+const fragments = {
+  circle: {
+    public: gql`
+      fragment PriceCirclePublic on Circle {
+        id
+        prices {
+          amount
+          currency
+        }
+      }
+    `,
+    private: gql`
+      fragment PriceCirclePrivate on Circle {
+        id
+        isMember
+      }
+    `,
+  },
+}
+
+const Price = ({ circle }: PriceProps) => {
   const price = circle.prices && circle.prices[0]
+
+  if (!price) {
+    return null
+  }
+
   const isMember = circle.isMember
   const path = toPath({
     page: 'circleDetail',
     circle,
   })
-
-  if (!price) {
-    return null
-  }
 
   if (isMember) {
     return (
@@ -42,5 +66,7 @@ const Price: React.FC<PriceProps> = ({ circle }) => {
     </Button>
   )
 }
+
+Price.fragments = fragments
 
 export default Price

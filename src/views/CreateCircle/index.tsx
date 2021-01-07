@@ -25,7 +25,11 @@ const CreateCircle = () => {
       )}
 
       {currStep === 'profile' && circle && (
-        <CreateCircleForm.Profile circle={circle} purpose="page" />
+        <CreateCircleForm.Profile
+          circle={circle}
+          type="create"
+          purpose="page"
+        />
       )}
     </Layout.Main>
   )
