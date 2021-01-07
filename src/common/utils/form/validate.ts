@@ -22,6 +22,26 @@ const REGEXP_ALL_PUNCTUATIONS = new RegExp(
 )
 
 /**
+ * Tag
+ */
+export const validateTagName = (value: string, lang: Language) => {
+  if (!value) {
+    return translate({
+      id: 'required',
+      lang,
+    })
+  }
+
+  if (REGEXP_ALL_PUNCTUATIONS.test(value)) {
+    return translate({
+      zh_hant: '不支持單獨使用標點符號',
+      zh_hans: '不支持单独使用标点符号',
+      lang,
+    })
+  }
+}
+
+/**
  * User
  */
 export const validateEmail = (
