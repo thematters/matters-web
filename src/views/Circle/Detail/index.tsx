@@ -23,6 +23,8 @@ import { getQuery } from '~/common/utils'
 import DropdownActions from './DropdownActions'
 import { CIRCLE_DETAIL_PRIVATE, CIRCLE_DETAIL_PUBLIC } from './gql'
 import CircleProfile from './Profile'
+import styles from './styles.css'
+import Works from './Works'
 
 import {
   CircleDetailPublic,
@@ -42,7 +44,7 @@ const CircleDetail = ({ circle }: { circle: CircleDetailPublic_circle }) => {
    * Render
    */
   return (
-    <Layout.Main>
+    <Layout.Main bgColor="grey-lighter">
       <Layout.Header
         left={<Layout.Header.BackButton mode="black-solid" />}
         right={
@@ -60,26 +62,33 @@ const CircleDetail = ({ circle }: { circle: CircleDetailPublic_circle }) => {
       <PullToRefresh>
         <CircleProfile circle={circle} />
 
-        <Tabs sticky>
-          <Tabs.Tab selected={isWorks} onClick={() => setFeed('works')}>
-            <Translate id="article" />
-          </Tabs.Tab>
+        <section className="content">
+          <Tabs sticky>
+            <Tabs.Tab selected={isWorks} onClick={() => setFeed('works')}>
+              <Translate id="article" />
+            </Tabs.Tab>
 
-          <Tabs.Tab
-            selected={isDiscussion}
-            onClick={() => setFeed('discussion')}
-          >
-            <Translate zh_hant="眾聊" zh_hans="" />
-          </Tabs.Tab>
+            <Tabs.Tab
+              selected={isDiscussion}
+              onClick={() => setFeed('discussion')}
+            >
+              <Translate zh_hant="眾聊" zh_hans="" />
+            </Tabs.Tab>
 
-          <Tabs.Tab selected={isBoardcast} onClick={() => setFeed('boardcast')}>
-            <Translate zh_hant="廣播" zh_hans="" />
-          </Tabs.Tab>
-        </Tabs>
+            <Tabs.Tab
+              selected={isBoardcast}
+              onClick={() => setFeed('boardcast')}
+            >
+              <Translate zh_hant="廣播" zh_hans="" />
+            </Tabs.Tab>
+          </Tabs>
 
-        {isWorks && <span>Works</span>}
-        {isDiscussion && <span>Discussion</span>}
-        {isBoardcast && <span>Boardcast</span>}
+          {isWorks && <Works name={circle.name} />}
+          {isDiscussion && <span>Discussion</span>}
+          {isBoardcast && <span>Boardcast</span>}
+
+          <style jsx>{styles}</style>
+        </section>
       </PullToRefresh>
     </Layout.Main>
   )
