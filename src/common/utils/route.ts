@@ -33,7 +33,7 @@ type ToPathArgs =
       fragment?: string
     }
   | {
-      page: 'circleDetail'
+      page: 'circleDetail' | 'circleSettings' | 'circleEditProfile'
       circle: CircleArgs
     }
   | {
@@ -93,6 +93,16 @@ export const toPath = (args: ToPathArgs): { href: string } => {
     case 'circleDetail': {
       return {
         href: `/~${args.circle.name}`,
+      }
+    }
+    case 'circleSettings': {
+      return {
+        href: `/~${args.circle.name}/settings`,
+      }
+    }
+    case 'circleEditProfile': {
+      return {
+        href: `/~${args.circle.name}/settings/edit-profile`,
       }
     }
     case 'commentDetail': {
