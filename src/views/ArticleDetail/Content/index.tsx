@@ -57,7 +57,7 @@ const Content = ({
   }, [])
 
   // visitor read flag
-  const [visitorRead, setVisitorRead] = useState(false)
+  const visitorReadRef = useRef(false)
 
   // register read
   useEffect(() => {
@@ -99,9 +99,9 @@ const Content = ({
         }
 
         // if visitor, invoke ReadArticle mutation only once
-        if (!viewer.isAuthed && !visitorRead) {
+        if (!viewer.isAuthed && !visitorReadRef.current) {
           read({ variables: { id } })
-          setVisitorRead(true)
+          visitorReadRef.current = true
         }
         return heartbeat
       })(),

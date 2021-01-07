@@ -7,20 +7,16 @@ import { Card, CardProps, CircleAvatar } from '~/components'
 import { toPath } from '~/common/utils'
 
 import Counts from '../Counts'
+import { fragments } from './gql'
 import styles from './styles.css'
 
-// import { CircleDigestMiniCirclePublic } from './__generated__/CircleDigestMiniCirclePublic'
+import { DigestMiniCircle } from './__generated__/DigestMiniCircle'
 
 export type CircleDigestMiniProps = {
-  // circle: CircleDigestMiniCirclePublic
-  circle: any
+  circle: DigestMiniCircle
 } & CardProps
 
-const CircleDigestMini = ({
-  circle,
-
-  ...cardProps
-}: CircleDigestMiniProps) => {
+const Mini = ({ circle, ...cardProps }: CircleDigestMiniProps) => {
   const { displayName, description } = circle
   const path = toPath({
     page: 'circleDetail',
@@ -60,8 +56,19 @@ const CircleDigestMini = ({
   )
 }
 
-// TODO: Memoizing
+/**
+ * Memoizing
+ */
+type MemoizedMiniType = React.MemoExoticComponent<
+  React.FC<CircleDigestMiniProps>
+> & {
+  fragments: typeof fragments
+}
 
-export default CircleDigestMini
+const MemoizedMini = React.memo(Mini, ({ circle: prevCircle }, { circle }) => {
+  return prevCircle.id === circle.id
+}) as MemoizedMiniType
 
-// CircleDigestMini.fragments = fragments
+MemoizedMini.fragments = fragments
+
+export default MemoizedMini

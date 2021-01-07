@@ -14,7 +14,6 @@ import {
   Throw404,
   Translate,
   usePublicQuery,
-  useResponsive,
   ViewerContext,
 } from '~/components'
 
@@ -32,7 +31,6 @@ import styles from './styles.css'
 import { UserProfileUserPublic } from './__generated__/UserProfileUserPublic'
 
 export const UserProfile = () => {
-  const isSmallUp = useResponsive('sm-up')
   const router = useRouter()
   const viewer = useContext(ViewerContext)
 
@@ -67,18 +65,14 @@ export const UserProfile = () => {
    */
   const LayoutHeader = () => (
     <Layout.Header
-      left={
-        <Layout.Header.BackButton
-          mode={!isSmallUp ? 'black-solid' : undefined}
-        />
-      }
+      left={<Layout.Header.BackButton mode="black-solid" />}
       right={
         <>
-          {isSmallUp ? <Layout.Header.Title id="myProfile" /> : <span />}
+          <span />
           {user && <DropdownActions user={user} isMe={isMe} />}
         </>
       }
-      mode={isSmallUp ? 'solid-fixed' : 'transparent-absolute'}
+      mode="transparent-absolute"
     />
   )
 

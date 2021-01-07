@@ -7,9 +7,11 @@ import { UserDigest } from '~/components/UserDigest'
 import { toPath } from '~/common/utils'
 
 import Footer, { FooterControls } from './Footer'
+import { fragments } from './gql'
 import styles from './styles.css'
 
-// import { CircleDigestRichCirclePublic } from './__generated__/CircleDigestRichCirclePublic'
+import { DigestRichCirclePrivate } from './__generated__/DigestRichCirclePrivate'
+import { DigestRichCirclePublic } from './__generated__/DigestRichCirclePublic'
 
 export type CircleDigestRichControls = {
   onClick?: () => any
@@ -18,12 +20,11 @@ export type CircleDigestRichControls = {
 } & FooterControls
 
 export type CircleDigestRichProps = {
-  // circle: CircleDigestRichCirclePublic
-  circle: any
+  circle: DigestRichCirclePublic & Partial<DigestRichCirclePrivate>
   avatarSize?: CircleAvatarSize
 } & CircleDigestRichControls
 
-const CircleDigestRich = ({
+const Rich = ({
   circle,
 
   avatarSize = 'xxl',
@@ -77,8 +78,19 @@ const CircleDigestRich = ({
   )
 }
 
-// TODO: Memoizing
+/**
+ * Memoizing
+ */
+type MemoizedRichType = React.MemoExoticComponent<
+  React.FC<CircleDigestRichProps>
+> & {
+  fragments: typeof fragments
+}
 
-export default CircleDigestRich
+const MemoizedRich = React.memo(Rich, ({ circle: prevCircle }, { circle }) => {
+  return prevCircle.id === circle.id && prevCircle.isMember === circle.isMember
+}) as MemoizedRichType
 
-// CircleDigestRich.fragments = fragments
+MemoizedRich.fragments = fragments
+
+export default MemoizedRich
