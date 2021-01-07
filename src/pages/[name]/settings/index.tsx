@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router'
 import CircleSettings from '~/views/Circle/Settings'
 
-import { Protected } from '~/components'
+import { Layout, Protected, Throw404 } from '~/components'
 
 import { getNameType } from '~/common/utils'
 
-const NameIndex = () => {
+const NameSettings = () => {
   const router = useRouter()
   const nameType = getNameType({ router })
 
@@ -17,7 +17,11 @@ const NameIndex = () => {
     )
   }
 
-  return null
+  return (
+    <Layout.Main>
+      <Throw404 />
+    </Layout.Main>
+  )
 }
 
-export default NameIndex
+export default NameSettings

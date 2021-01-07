@@ -41,7 +41,7 @@ const EditProfile = () => {
 
   if (!circle || !isOwner) {
     return (
-      <Layout.Main bgColor="grey-lighter">
+      <Layout.Main>
         <Throw404 />
       </Layout.Main>
     )
