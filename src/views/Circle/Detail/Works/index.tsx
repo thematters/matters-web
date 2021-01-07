@@ -13,7 +13,7 @@ import {
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
-import { mergeConnections } from '~/common/utils'
+import { analytics, mergeConnections } from '~/common/utils'
 
 import { CIRCLE_WORKS_PRIVATE, CIRCLE_WORKS_PUBLIC } from './gql'
 
@@ -79,10 +79,10 @@ const CircleDetailWorks = ({ name }: CircleWorksProps) => {
 
   // load next page
   const loadMore = async () => {
-    // analytics.trackEvent('load_more', {
-    //   type: 'tag_detail_selected'
-    //   location: edges ? edges.length : 0,
-    // })
+    analytics.trackEvent('load_more', {
+      type: 'circle_detail',
+      location: edges ? edges.length : 0,
+    })
 
     const { data: newData } = await fetchMore({
       variables: {
@@ -129,22 +129,22 @@ const CircleDetailWorks = ({ name }: CircleWorksProps) => {
           <List.Item key={cursor}>
             <ArticleDigestFeed
               article={node}
-              // onClick={() =>
-              //   analytics.trackEvent('click_feed', {
-              //     type: selected ? 'tag_detail_selected' : 'tag_detail_latest',
-              //     contentType: 'article',
-              //     styleType: 'title',
-              //     location: i,
-              //   })
-              // }
-              // onClickAuthor={() => {
-              //   analytics.trackEvent('click_feed', {
-              //     type: selected ? 'tag_detail_selected' : 'tag_detail_latest',
-              //     contentType: 'user',
-              //     styleType: 'subtitle',
-              //     location: i,
-              //   })
-              // }}
+              onClick={() =>
+                analytics.trackEvent('click_feed', {
+                  type: 'circle_detail',
+                  contentType: 'article',
+                  styleType: 'title',
+                  location: i,
+                })
+              }
+              onClickAuthor={() => {
+                analytics.trackEvent('click_feed', {
+                  type: 'circle_detail',
+                  contentType: 'user',
+                  styleType: 'subtitle',
+                  location: i,
+                })
+              }}
             />
           </List.Item>
         ))}
