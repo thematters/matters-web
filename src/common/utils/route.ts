@@ -33,7 +33,7 @@ type ToPathArgs =
       fragment?: string
     }
   | {
-      page: 'circleDetail'
+      page: 'circleDetail' | 'circleSettings' | 'circleEditProfile'
       circle: CircleArgs
     }
   | {
@@ -93,6 +93,16 @@ export const toPath = (args: ToPathArgs): { href: string } => {
     case 'circleDetail': {
       return {
         href: `/~${args.circle.name}`,
+      }
+    }
+    case 'circleSettings': {
+      return {
+        href: `/~${args.circle.name}/settings`,
+      }
+    }
+    case 'circleEditProfile': {
+      return {
+        href: `/~${args.circle.name}/settings/edit-profile`,
       }
     }
     case 'commentDetail': {
@@ -160,9 +170,9 @@ export const getNameType = ({ router }: { router: NextRouter }) => {
   const value = router.query && router.query.name
   const query = value instanceof Array ? value[0] : value || ''
 
-  if (query.indexOf('@') >= 0) {
+  if (query.indexOf('@') === 0) {
     return 'user'
-  } else if (query.indexOf('~') >= 0) {
+  } else if (/^[~～]/.test(query)) {
     return 'circle'
   }
 }
@@ -192,7 +202,7 @@ export const getQuery = ({
 
   switch (key) {
     case 'name':
-      query = query.replace('@', '').replace('~', '')
+      query = query.replace(/[@~～]/g, '')
       break
     case 'mediaHash':
     case 'draftId':

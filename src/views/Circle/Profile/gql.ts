@@ -14,7 +14,9 @@ const fragments = {
         displayName
         description
         cover
-        avatar
+        owner {
+          id
+        }
         members(input: { first: 0 }) {
           totalCount
         }

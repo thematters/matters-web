@@ -33,7 +33,11 @@ import {
 } from '~/components/GQL/mutations/__generated__/PutCircle'
 
 interface FormProps {
-  circle: PutCircle_putCircle
+  circle: Pick<
+    PutCircle_putCircle,
+    'id' | 'avatar' | 'cover' | 'description' | '__typename'
+  >
+  type: 'edit' | 'create'
   purpose: 'dialog' | 'page'
   closeDialog?: () => void
 }
@@ -49,11 +53,14 @@ interface FormValues {
  */
 const UNCHANGED_FIELD = 'UNCHANGED_FIELD'
 
-const Init: React.FC<FormProps> = ({ circle, purpose, closeDialog }) => {
+const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
   const [update] = useMutation<PutCircle>(PUT_CIRCLE)
   const { lang } = useContext(LanguageContext)
   const isInPage = purpose === 'page'
+
+  const isCreate = type === 'create'
   const formId = 'edit-circle-profile-form'
+  const titleId = isCreate ? 'circleCreation' : 'basicProfile'
 
   const {
     values,
@@ -95,7 +102,9 @@ const Init: React.FC<FormProps> = ({ circle, purpose, closeDialog }) => {
           new CustomEvent(ADD_TOAST, {
             detail: {
               color: 'green',
-              content: <Translate id="successCreateCircle" />,
+              content: (
+                <Translate id={isCreate ? 'circleCreated' : 'circleEdited'} />
+              ),
             },
           })
         )
@@ -195,7 +204,7 @@ const Init: React.FC<FormProps> = ({ circle, purpose, closeDialog }) => {
           left={<Layout.Header.BackButton />}
           right={
             <>
-              <Layout.Header.Title id="circleCreation" />
+              <Layout.Header.Title id={titleId} />
               {SubmitButton}
             </>
           }
@@ -209,7 +218,7 @@ const Init: React.FC<FormProps> = ({ circle, purpose, closeDialog }) => {
     <>
       {closeDialog && (
         <Dialog.Header
-          title="circleCreation"
+          title={titleId}
           close={closeDialog}
           rightButton={SubmitButton}
         />

@@ -3,21 +3,24 @@ import { useRouter } from 'next/router'
 import { useContext, useEffect } from 'react'
 
 import {
+  Button,
   CircleAvatar,
   CircleCover,
   Expandable,
   Layout,
   Spinner,
+  TextIcon,
   Throw404,
   Translate,
   usePublicQuery,
   ViewerContext,
 } from '~/components'
 
-import { getQuery, numAbbr } from '~/common/utils'
+import { getQuery, numAbbr, toPath } from '~/common/utils'
 
 import CIRCLE_COVER from '@/public/static/images/circle-cover.svg'
 
+import DropdownActions from './DropdownActions'
 import FollowButton from './FollowButton'
 import { CIRCLE_PROFILE_PRIVATE, CIRCLE_PROFILE_PUBLIC } from './gql'
 import styles from './styles.css'
@@ -37,6 +40,7 @@ const CircleProfile = () => {
     }
   )
   const circle = data?.circle
+  const isOwner = circle?.owner.id === viewer.id
 
   // fetch private data
   useEffect(() => {
@@ -59,6 +63,12 @@ const CircleProfile = () => {
   const LayoutHeader = () => (
     <Layout.Header
       left={<Layout.Header.BackButton mode="black-solid" />}
+      right={
+        <>
+          <span />
+          <DropdownActions />
+        </>
+      }
       mode="transparent-absolute"
     />
   )
@@ -119,7 +129,22 @@ const CircleProfile = () => {
             </button>
           </section>
 
-          <FollowButton circle={circle} />
+          {isOwner ? (
+            <Button
+              size={['6rem', '2rem']}
+              textColor="green"
+              textActiveColor="white"
+              bgActiveColor="green"
+              borderColor="green"
+              {...toPath({ page: 'circleSettings', circle })}
+            >
+              <TextIcon weight="md" size="md-s">
+                <Translate id="editCircle" />
+              </TextIcon>
+            </Button>
+          ) : (
+            <FollowButton circle={circle} />
+          )}
         </footer>
 
         <style jsx>{styles}</style>

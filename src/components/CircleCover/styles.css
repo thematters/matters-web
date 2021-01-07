@@ -103,7 +103,9 @@
     text-align: center;
 
     & img {
+      display: block;
       width: var(--circle-cover-width);
+      margin: 0 auto;
 
       @media (min-width: 375px) {
         width: var(--circle-cover-width-max);
