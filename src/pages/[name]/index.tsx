@@ -7,12 +7,20 @@ import { getNameType } from '~/common/utils'
 
 const DynamicUserArticles = dynamic(() => import('~/views/User/Articles'), {
   ssr: true,
-  loading: Spinner,
+  loading: () => (
+    <EmptyLayout>
+      <Spinner />
+    </EmptyLayout>
+  ),
 })
 
 const DynamicCircleDetail = dynamic(() => import('~/views/Circle/Detail'), {
   ssr: true,
-  loading: Spinner,
+  loading: () => (
+    <EmptyLayout>
+      <Spinner />
+    </EmptyLayout>
+  ),
 })
 
 const NameIndex = () => {

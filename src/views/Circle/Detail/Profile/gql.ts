@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 
 import { CircleAvatar } from '~/components'
 
+import AuthorWidget from './AuthorWidget'
 import FollowButton from './FollowButton'
 
 export const fragments = {
@@ -24,9 +25,11 @@ export const fragments = {
         }
         ...AvatarCircle
         ...FollowButtonCirclePrivate
+        ...AuthorWidgetCircle
       }
       ${CircleAvatar.fragments.circle}
       ${FollowButton.fragments.circle.private}
+      ${AuthorWidget.fragments.circle}
     `,
     private: gql`
       fragment ProfileCirclePrivate on Circle {
