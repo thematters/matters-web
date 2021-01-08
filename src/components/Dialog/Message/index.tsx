@@ -6,7 +6,7 @@ import styles from './styles.css'
 
 interface DialogMessageProps {
   align?: 'left'
-  error?: boolean
+  type?: 'error' | 'info'
   spacing?: 'md' | 'xxl'
 }
 
@@ -27,14 +27,14 @@ interface DialogMessageProps {
  */
 const DialogMessage: React.FC<DialogMessageProps> = ({
   align,
-  error,
+  type,
   spacing = 'base',
 
   children,
 }) => {
   const contentClasses = classNames({
     content: true,
-    error: !!error,
+    [`${type}`]: !!type,
     [`align-${align}`]: !!align,
     [`spacing-${spacing}`]: !!spacing,
   })

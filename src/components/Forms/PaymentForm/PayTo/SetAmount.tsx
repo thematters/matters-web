@@ -22,6 +22,7 @@ import {
 } from '~/common/enums'
 import { validateCurrency, validateDonationAmount } from '~/common/utils'
 
+import CivicLikerButton from './CivicLikerButton'
 import { CustomAmount } from './CustomAmount'
 import { NoLikerIdButton, NoLikerIdMessage } from './NoLiker'
 import styles from './styles.css'
@@ -261,16 +262,22 @@ const SetAmount: React.FC<FormProps> = ({
 
       <Dialog.Footer>
         {canProcess && !locked && (
-          <Dialog.Footer.Button
-            type="submit"
-            form={formId}
-            disabled={!isValid || isSubmitting || isBalanceInsufficient}
-            bgColor={color}
-            textColor="white"
-            loading={isSubmitting}
-          >
-            <Translate id="nextStep" />
-          </Dialog.Footer.Button>
+          <>
+            {isLike && recipient.liker.likerId && (
+              <CivicLikerButton likerId={recipient.liker.likerId} />
+            )}
+
+            <Dialog.Footer.Button
+              type="submit"
+              form={formId}
+              disabled={!isValid || isSubmitting || isBalanceInsufficient}
+              bgColor={color}
+              textColor="white"
+              loading={isSubmitting}
+            >
+              <Translate id="nextStep" />
+            </Dialog.Footer.Button>
+          </>
         )}
 
         {canProcess && !isLike && !locked && (
