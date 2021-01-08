@@ -26,7 +26,7 @@ import { UserTagsPublic } from './__generated__/UserTagsPublic'
 
 const UserTags = () => {
   const router = useRouter()
-  const userName = getQuery({ router, key: 'userName' })
+  const userName = getQuery({ router, key: 'name' })
 
   /**
    * Data Fetching

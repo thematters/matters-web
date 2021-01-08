@@ -41,7 +41,7 @@ type CommentedArticleComment = UserCommentsPublic_node_User_commentedArticles_ed
 
 const UserComments = () => {
   const router = useRouter()
-  const userName = getQuery({ router, key: 'userName' })
+  const userName = getQuery({ router, key: 'name' })
 
   const { data, loading, error } = useQuery<UserIdUser>(USER_ID, {
     variables: { userName },

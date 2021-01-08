@@ -23,7 +23,7 @@ interface SubscribeProps {
   articleId?: string
   size?: Extract<IconSize, 'md-s'>
   disabled?: boolean
-  inCard: boolean
+  inCard?: boolean
 }
 
 const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {

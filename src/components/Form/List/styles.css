@@ -20,7 +20,7 @@ ul {
     border-top: none;
   }
 
-  @media (--sm-up) {
+  &.greyStyle {
     margin-right: var(--spacing-base);
     margin-left: var(--spacing-base);
     border-radius: var(--spacing-x-tight);

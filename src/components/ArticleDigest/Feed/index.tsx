@@ -4,6 +4,7 @@ import gql from 'graphql-tag'
 import React from 'react'
 
 import { Card, IconPin24, Img, TextIcon, Translate } from '~/components'
+import { CircleDigest } from '~/components/CircleDigest'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { UserDigest } from '~/components/UserDigest'
 import { UserDigestMiniProps } from '~/components/UserDigest/Mini'
@@ -15,21 +16,27 @@ import FooterActions, { FooterActionsControls } from '../FooterActions'
 import { ArticleDigestTitle } from '../Title'
 import CreatedAt from './CreatedAt'
 import InactiveState from './InactiveState'
+import Label from './Label'
 import styles from './styles.css'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import { ArticleDigestFeedArticlePublic } from './__generated__/ArticleDigestFeedArticlePublic'
 
+type ExtraHeaderControls = {
+  extraHeader?: React.ReactNode
+  hasCircle?: boolean
+}
+
 export type ArticleDigestFeedControls = {
   onClick?: () => any
   onClickAuthor?: () => void
-} & FooterActionsControls
+} & ExtraHeaderControls &
+  FooterActionsControls
 
-type ArticleDigestFeedProps = {
+export type ArticleDigestFeedProps = {
   article: ArticleDigestFeedArticlePublic
 
   actor?: (props: Partial<UserDigestMiniProps>) => React.ReactNode
-  extraHeader?: React.ReactNode
 } & ArticleDigestFeedControls
 
 const fragments = {
@@ -76,15 +83,15 @@ const fragments = {
 const BaseArticleDigestFeed = ({
   article,
 
-  inTagDetailLatest,
-  inTagDetailSelected,
-  inUserArticles,
+  actor,
+
+  hasCircle,
+  extraHeader,
 
   onClick,
   onClickAuthor,
 
-  actor,
-  extraHeader,
+  ...controls
 }: ArticleDigestFeedProps) => {
   const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
     variables: { id: 'local' },
@@ -93,7 +100,9 @@ const BaseArticleDigestFeed = ({
   const isCompactMode = viewMode === 'compact'
   const isDefaultMode = viewMode === 'default'
 
-  const { author, summary, sticky } = article
+  /* TODO */
+  /*  @ts-ignore */
+  const { author, summary, sticky, circle, isLimitedFree } = article
   const isBanned = article.articleState === 'banned'
   const cover = !isBanned ? article.cover : null
   const cleanedSummary = isBanned ? '' : stripHtml(summary)
@@ -122,7 +131,17 @@ const BaseArticleDigestFeed = ({
   return (
     <Card {...path} spacing={['base', 'base']} onClick={onClick}>
       <section className={containerClasses}>
-        {extraHeader}
+        {extraHeader ||
+          (hasCircle ? (
+            <section className="extraHeader">
+              <CircleDigest.Plain circle={circle} />
+              {isLimitedFree && (
+                <Label>
+                  <Translate id="limitedFree" />
+                </Label>
+              )}
+            </section>
+          ) : null)}
 
         <header>
           <section className="left">
@@ -140,13 +159,19 @@ const BaseArticleDigestFeed = ({
           </section>
 
           <section className="right">
-            {inUserArticles && sticky && (
+            {!hasCircle && isLimitedFree && (
+              <Label>
+                <Translate id="limitedFree" />
+              </Label>
+            )}
+
+            {controls.inUserArticles && sticky && (
               <TextIcon icon={<IconPin24 />} size="sm" color="grey" weight="md">
                 <Translate id="stickyArticle" />
               </TextIcon>
             )}
 
-            {inUserArticles && <InactiveState article={article} />}
+            {controls.inUserArticles && <InactiveState article={article} />}
             <CreatedAt article={article} />
           </section>
         </header>
@@ -173,13 +198,7 @@ const BaseArticleDigestFeed = ({
           </section>
         )}
 
-        <FooterActions
-          article={article}
-          inCard
-          inTagDetailLatest={inTagDetailLatest}
-          inTagDetailSelected={inTagDetailSelected}
-          inUserArticles={inUserArticles}
-        />
+        <FooterActions article={article} inCard {...controls} />
 
         <style jsx>{styles}</style>
       </section>
@@ -201,7 +220,6 @@ export const ArticleDigestFeed = React.memo(
   ({ article: prevArticle }, { article }) => {
     return (
       prevArticle.subscribed === article.subscribed &&
-      prevArticle.responseCount === article.responseCount &&
       prevArticle.articleState === article.articleState &&
       prevArticle.sticky === article.sticky &&
       prevArticle.appreciationsReceivedTotal ===

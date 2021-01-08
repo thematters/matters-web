@@ -11,26 +11,24 @@ import {
   Head,
   Layout,
   PullToRefresh,
-  ShareButton,
   Spinner,
   Tabs,
   Throw404,
   Translate,
   usePublicQuery,
   usePullToRefresh,
-  useResponsive,
   ViewerContext,
 } from '~/components'
 import { getErrorCodes, QueryError } from '~/components/GQL'
 
 import { ERROR_CODES } from '~/common/enums'
-import { getQuery, toPath } from '~/common/utils'
+import { getQuery } from '~/common/utils'
 
 import TagDetailArticles from './Articles'
 import ArticlesCount from './ArticlesCount'
 import { TagDetailButtons } from './Buttons'
 import Community from './Community'
-import Cover from './Cover'
+import TagCover from './Cover'
 import DropdownActions from './DropdownActions'
 import Followers from './Followers'
 import { TAG_DETAIL_PRIVATE, TAG_DETAIL_PUBLIC } from './gql'
@@ -45,10 +43,8 @@ import {
 type TagFeedType = 'latest' | 'selected' | 'community'
 
 const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
-  const isSmallUp = useResponsive('sm-up')
   const viewer = useContext(ViewerContext)
   const features = useContext(FeaturesContext)
-  const path = toPath({ page: 'tagDetail', id: tag.id })
 
   // feed type
   const hasSelectedFeed = (tag?.selectedArticles.totalCount || 0) > 0
@@ -77,39 +73,26 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
   return (
     <Layout.Main>
       <Layout.Header
-        left={
-          <Layout.Header.BackButton
-            mode={!isSmallUp ? 'black-solid' : undefined}
-          />
-        }
+        left={<Layout.Header.BackButton mode="black-solid" />}
         right={
           <>
-            {isSmallUp ? <Layout.Header.Title id="tag" /> : <span />}
+            <span />
 
-            <ShareButton
-              title={tag.content}
-              path={encodeURI(path.href)}
-              bgColor={isSmallUp ? 'green-lighter' : 'half-black'}
-              iconColor={isSmallUp ? 'green' : 'white'}
-              inCard={false}
+            <DropdownActions
+              isOwner={isOwner}
+              isEditor={isEditor}
+              isMaintainer={isMaintainer}
+              tag={tag}
             />
-
-            {isMaintainer && (
-              <DropdownActions
-                isOwner={isOwner}
-                isEditor={isEditor}
-                tag={tag}
-              />
-            )}
           </>
         }
-        mode={isSmallUp ? 'solid-fixed' : 'transparent-absolute'}
+        mode="transparent-absolute"
       />
 
       <Head title={`#${tag.content}`} />
 
       <PullToRefresh>
-        <Cover tag={tag} />
+        <TagCover tag={tag} />
 
         <section className="info">
           {features.tag_adoption && <Owner tag={tag} />}

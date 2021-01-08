@@ -113,6 +113,14 @@ const BaseDropdownActions = ({
   openAppreciatorsDialog,
   openArchiveDialog,
 }: BaseDropdownActionsProps) => {
+  const hasPublic = hasAppreciators || hasFingerprint || hasExtend
+  const hasPrivate =
+    hasSticky ||
+    hasArchive ||
+    hasSetTagSelected ||
+    hasSetTagUnSelected ||
+    hasRemoveTag
+
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
     <Menu width={isInDropdown ? 'sm' : undefined}>
       {/* public */}
@@ -125,11 +133,7 @@ const BaseDropdownActions = ({
       {hasExtend && <ExtendButton article={article} />}
 
       {/* private */}
-      {(hasSticky ||
-        hasArchive ||
-        hasSetTagSelected ||
-        hasSetTagUnSelected ||
-        hasRemoveTag) && <Menu.Divider spacing="xtight" />}
+      {hasPublic && hasPrivate && <Menu.Divider spacing="xtight" />}
       {hasSticky && <StickyButton article={article} />}
       {hasArchive && <ArchiveArticle.Button openDialog={openArchiveDialog} />}
       {hasSetTagSelected && <SetTagSelectedButton article={article} />}
@@ -169,6 +173,7 @@ const BaseDropdownActions = ({
 const DropdownActions = (props: DropdownActionsProps) => {
   const {
     article,
+    inCard,
     inUserArticles,
     inTagDetailLatest,
     inTagDetailSelected,
@@ -206,9 +211,11 @@ const DropdownActions = (props: DropdownActionsProps) => {
   }
 
   const controls = {
-    hasAppreciators: article.appreciationsReceived.totalCount > 0,
-    hasFingerprint: isActive || isArticleAuthor,
-    hasExtend: !!isActive,
+    // public
+    hasAppreciators: article.appreciationsReceived.totalCount > 0 && !inCard,
+    hasFingerprint: (isActive || isArticleAuthor) && !inCard,
+    hasExtend: !!isActive && !inCard,
+    // privates
     hasSticky: !!(
       inUserArticles &&
       isArticleAuthor &&

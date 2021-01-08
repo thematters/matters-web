@@ -9,7 +9,7 @@ import { getQuery, toPath } from '~/common/utils'
 const MeTabs = () => {
   const router = useRouter()
   const viewer = useContext(ViewerContext)
-  const userName = getQuery({ router, key: 'userName' }) || ''
+  const userName = getQuery({ router, key: 'name' }) || ''
   const isMe = !userName || viewer.userName === userName
 
   const userFollowersPath = toPath({

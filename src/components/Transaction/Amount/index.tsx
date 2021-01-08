@@ -4,7 +4,7 @@ import { toAmountString } from '~/common/utils'
 
 import styles from './styles.css'
 
-import { TransactionState } from '__generated__/globalTypes'
+import { TransactionState } from '@/__generated__/globalTypes'
 
 /***
  * This is a sub component of Transaction that presents

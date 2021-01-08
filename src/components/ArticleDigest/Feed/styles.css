@@ -19,6 +19,12 @@ header {
   }
 }
 
+.extraHeader {
+  @mixin flex-center-space-between;
+
+  margin-bottom: var(--spacing-x-tight);
+}
+
 .title,
 .cover {
   margin: var(--spacing-tight) 0;
