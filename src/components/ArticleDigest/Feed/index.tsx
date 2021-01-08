@@ -1,6 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
-import gql from 'graphql-tag'
 import React from 'react'
 
 import { Card, IconPin24, Img, TextIcon, Translate } from '~/components'
@@ -11,15 +10,16 @@ import { UserDigestMiniProps } from '~/components/UserDigest/Mini'
 
 import { stripHtml, toPath } from '~/common/utils'
 
-import DropdownActions from '../DropdownActions'
 import FooterActions, { FooterActionsControls } from '../FooterActions'
 import { ArticleDigestTitle } from '../Title'
 import CreatedAt from './CreatedAt'
+import { fragments } from './gql'
 import InactiveState from './InactiveState'
 import Label from './Label'
 import styles from './styles.css'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
+import { ArticleDigestFeedArticlePrivate } from './__generated__/ArticleDigestFeedArticlePrivate'
 import { ArticleDigestFeedArticlePublic } from './__generated__/ArticleDigestFeedArticlePublic'
 
 type ExtraHeaderControls = {
@@ -34,58 +34,18 @@ export type ArticleDigestFeedControls = {
   FooterActionsControls
 
 export type ArticleDigestFeedProps = {
-  article: ArticleDigestFeedArticlePublic
+  article: ArticleDigestFeedArticlePublic &
+    Partial<ArticleDigestFeedArticlePrivate>
 
   actor?: (props: Partial<UserDigestMiniProps>) => React.ReactNode
 } & ArticleDigestFeedControls
-
-const fragments = {
-  article: {
-    public: gql`
-      fragment ArticleDigestFeedArticlePublic on Article {
-        id
-        title
-        slug
-        mediaHash
-        articleState: state
-        cover
-        summary
-        author {
-          id
-          userName
-          ...UserDigestMiniUser
-        }
-        ...CreatedAtArticle
-        ...InactiveStateArticle
-        ...ArticleDigestTitleArticle
-        ...DropdownActionsArticle
-        ...FooterActionsArticlePublic
-        ...FooterActionsArticlePrivate
-      }
-      ${UserDigest.Mini.fragments.user}
-      ${CreatedAt.fragments.article}
-      ${InactiveState.fragments.article}
-      ${ArticleDigestTitle.fragments.article}
-      ${DropdownActions.fragments.article}
-      ${FooterActions.fragments.article.public}
-      ${FooterActions.fragments.article.private}
-    `,
-    private: gql`
-      fragment ArticleDigestFeedArticlePrivate on Article {
-        id
-        ...FooterActionsArticlePrivate
-      }
-      ${FooterActions.fragments.article.private}
-    `,
-  },
-}
 
 const BaseArticleDigestFeed = ({
   article,
 
   actor,
 
-  hasCircle,
+  hasCircle = true,
   extraHeader,
 
   onClick,
@@ -100,9 +60,14 @@ const BaseArticleDigestFeed = ({
   const isCompactMode = viewMode === 'compact'
   const isDefaultMode = viewMode === 'default'
 
-  /* TODO */
-  /*  @ts-ignore */
-  const { author, summary, sticky, circle, isLimitedFree } = article
+  const {
+    author,
+    summary,
+    sticky,
+    circle,
+    // @ts-ignore
+    isLimitedFree,
+  } = article
   const isBanned = article.articleState === 'banned'
   const cover = !isBanned ? article.cover : null
   const cleanedSummary = isBanned ? '' : stripHtml(summary)
@@ -132,16 +97,17 @@ const BaseArticleDigestFeed = ({
     <Card {...path} spacing={['base', 'base']} onClick={onClick}>
       <section className={containerClasses}>
         {extraHeader ||
-          (hasCircle ? (
+          (hasCircle && circle && (
             <section className="extraHeader">
               <CircleDigest.Plain circle={circle} />
+
               {isLimitedFree && (
                 <Label>
                   <Translate id="limitedFree" />
                 </Label>
               )}
             </section>
-          ) : null)}
+          ))}
 
         <header>
           <section className="left">
