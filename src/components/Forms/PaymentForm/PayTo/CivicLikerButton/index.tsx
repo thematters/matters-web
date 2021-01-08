@@ -25,7 +25,7 @@ const CivicLikerButton: React.FC<CivicLikerButtonProps> = ({ likerId }) => {
         bgColor="white"
         borderColor="likecoin-green"
         size={['100%', '3rem']}
-        htmlHref={`${EXTERNAL_LINKS.CIVIC_LIKER}/${likerId}`}
+        htmlHref={EXTERNAL_LINKS.CIVIC_LIKER(likerId)}
         htmlTarget="_blank"
       >
         <TextIcon

@@ -9,7 +9,10 @@ export const EXTERNAL_LINKS = {
   CIVIC_LIKER_JOIN: isProd
     ? 'https://liker.land/civic?is_popup=1&utm_source=Matters&utm_medium=website&utm_campaign=regular_funnel'
     : 'https://rinkeby.liker.land/civic?is_popup=1&utm_source=Matters&utm_medium=website&utm_campaign=regular_funnel',
-  CIVIC_LIKER: isProd ? 'https://liker.land' : 'https://rinkeby.liker.land',
+  CIVIC_LIKER: (likerId: string) =>
+    isProd
+      ? `https://liker.land/${likerId}/civic?utm_source=Matters`
+      : `https://rinkeby.liker.land/${likerId}/civic?utm_source=Matters`,
   SUPER_LIKE:
     'https://docs.like.co/v/zh/user-guide/likecoin-button/superlike?utm_source=Matters&utm_medium=website&utm_campaign=superlike_funnel',
 }
