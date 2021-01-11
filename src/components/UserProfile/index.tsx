@@ -120,6 +120,7 @@ export const UserProfile = () => {
     userName,
   })
   const badges = user.info.badges || []
+  const circles = user.ownCircles || []
   const hasSeedBadge = _some(badges, { type: 'seed' })
   const profileCover = user.info.profileCover || ''
   const userState = user.status?.state as string
@@ -219,7 +220,7 @@ export const UserProfile = () => {
           </Link>
         </footer>
 
-        <CircleWidget isMe={isMe} />
+        <CircleWidget circles={circles} isMe={isMe} />
 
         <style jsx>{styles}</style>
       </section>
