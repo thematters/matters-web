@@ -39,7 +39,7 @@ const Counts = ({ circle }: CountsProps) => {
         size="sm"
         aira-label={`${memberCount} 個成員`}
       >
-        {memberCount > 0 ? numAbbr(memberCount) : undefined}
+        {numAbbr(memberCount)}
       </TextIcon>
 
       <TextIcon
@@ -49,7 +49,7 @@ const Counts = ({ circle }: CountsProps) => {
         size="sm"
         aira-label={`${articleCount} 篇作品`}
       >
-        {articleCount > 0 ? numAbbr(articleCount) : undefined}
+        {numAbbr(articleCount)}
       </TextIcon>
 
       <style jsx>{styles}</style>
