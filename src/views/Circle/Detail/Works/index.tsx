@@ -129,6 +129,7 @@ const CircleDetailWorks = ({ name }: CircleWorksProps) => {
           <List.Item key={cursor}>
             <ArticleDigestFeed
               article={node}
+              hasCircle={false}
               onClick={() =>
                 analytics.trackEvent('click_feed', {
                   type: 'circle_detail',
