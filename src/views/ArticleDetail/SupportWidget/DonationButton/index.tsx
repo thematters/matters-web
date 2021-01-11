@@ -27,12 +27,16 @@ const DonationButton = ({ recipient, targetId }: DonationButtonProps) => {
     window.dispatchEvent(new CustomEvent(REFETCH_DONATORS, {}))
   }
 
-  const forbid = () => {
+  const forbid = (isAuthor?: boolean) => {
     window.dispatchEvent(
       new CustomEvent(ADD_TOAST, {
         detail: {
           color: 'red',
-          content: <Translate id="FORBIDDEN_BY_STATE" />,
+          content: isAuthor ? (
+            <Translate zh_hant="去支持其他用戶吧" zh_hans="去支持其他用户吧" />
+          ) : (
+            <Translate id="FORBIDDEN_BY_STATE" />
+          ),
         },
       })
     )
@@ -66,17 +70,24 @@ const DonationButton = ({ recipient, targetId }: DonationButtonProps) => {
         <Button
           size={['10.5rem', '2.5rem']}
           bgColor="gold"
-          disabled={recipient.id === viewer.id}
           onClick={() => {
             analytics.trackEvent('click_button', { type: 'donate' })
+
             if (!viewer.isAuthed) {
               showLoginToast()
               return
             }
+
             if (viewer.isFrozen) {
               forbid()
               return
             }
+
+            if (recipient.id === viewer.id) {
+              forbid(true)
+              return
+            }
+
             open()
           }}
         >

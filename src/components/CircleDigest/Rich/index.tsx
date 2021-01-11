@@ -1,7 +1,13 @@
 import classNames from 'classnames'
 import React from 'react'
 
-import { Card, CardProps, CircleAvatar, CircleAvatarSize } from '~/components'
+import {
+  Card,
+  CardProps,
+  CircleAvatar,
+  CircleAvatarSize,
+  LinkWrapper,
+} from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 
 import { toPath } from '~/common/utils'
@@ -28,7 +34,6 @@ const Rich = ({
   circle,
 
   avatarSize = 'xxl',
-  borderRadius,
 
   hasOwner = true,
   hasFooter,
@@ -53,7 +58,11 @@ const Rich = ({
           <CircleAvatar circle={circle} size={avatarSize} />
 
           <header>
-            <h3>{displayName}</h3>
+            <h3>
+              <LinkWrapper {...path} textActiveColor="green">
+                <a>{displayName}</a>
+              </LinkWrapper>
+            </h3>
 
             {hasOwner && (
               <UserDigest.Mini

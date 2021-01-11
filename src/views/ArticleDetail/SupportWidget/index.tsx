@@ -45,7 +45,7 @@ const SupportWidget = ({ article }: DonationProps) => {
         <section className="circle">
           <CircleDigest.Rich
             circle={article.circle}
-            bgColor="none"
+            bgColor="grey-lighter"
             hasFooter
             hasPrice
           />
