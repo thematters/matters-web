@@ -134,6 +134,7 @@ type ArticleFeedType =
   | 'user_article'
   | 'wallet'
   | 'related_donations'
+  | 'circle_detail'
 
 type CommentFeedType = 'follow-comment' | 'user_comment'
 

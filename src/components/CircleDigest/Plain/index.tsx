@@ -15,7 +15,6 @@ export type CircleDigestPlainProps = {
 }
 
 const CircleDigestPlain = ({ circle }: CircleDigestPlainProps) => {
-  const { displayName } = circle
   const path = toPath({
     page: 'circleDetail',
     circle,
@@ -31,7 +30,7 @@ const CircleDigestPlain = ({ circle }: CircleDigestPlainProps) => {
           weight="md"
           size="md-s"
         >
-          <span className="name">{displayName}</span>
+          <span className="name">{circle.displayName}</span>
         </TextIcon>
 
         <style jsx>{styles}</style>
