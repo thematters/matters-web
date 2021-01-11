@@ -3,10 +3,10 @@ import gql from 'graphql-tag'
 import { UserDigest } from '~/components/UserDigest'
 
 import Content from './Content'
-import DonationArea from './DonationArea'
 import FingerprintButton from './FingerprintButton'
 import RelatedArticles from './RelatedArticles'
 import State from './State'
+import SupportWidget from './SupportWidget'
 import TagList from './TagList'
 import Toolbar from './Toolbar'
 
@@ -40,7 +40,7 @@ export const ARTICLE_DETAIL_PUBLIC = gql`
       ...FingerprintArticle
       ...ToolbarArticlePublic
       ...ToolbarArticlePrivate
-      ...DonationAreaArticle
+      ...SupportWidgetArticle
     }
   }
   ${Content.fragments.article}
@@ -52,7 +52,7 @@ export const ARTICLE_DETAIL_PUBLIC = gql`
   ${UserDigest.Rich.fragments.user.private}
   ${Toolbar.fragments.article.public}
   ${Toolbar.fragments.article.private}
-  ${DonationArea.fragments.article}
+  ${SupportWidget.fragments.article}
 `
 
 export const ARTICLE_DETAIL_PRIVATE = gql`

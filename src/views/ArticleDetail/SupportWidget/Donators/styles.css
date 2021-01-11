@@ -1,17 +1,3 @@
-:root {
-  --donation-area-avatar-size: 1.25rem;
-}
-
-.container {
-  @mixin flex-center-all;
-
-  position: absolute;
-  right: 0;
-  bottom: calc(var(--donation-area-avatar-size) / 2 * -1);
-  left: 0;
-  flex-direction: column;
-}
-
 .avatar-list {
   @mixin flex-center-start;
 

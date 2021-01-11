@@ -22,31 +22,29 @@ const Donators = ({ article }: DonatorsProps) => {
   return (
     <DonatorsDialog article={article}>
       {({ open }) => (
-        <section className="container">
-          <button
-            type="button"
-            onClick={open}
-            disabled={donatorsCount <= 0}
-            aria-label={TEXT.zh_hant.viewDonators}
-            aria-haspopup="true"
-          >
-            <section className="avatar-list">
-              {donators.map((user, index) => (
-                <Avatar
-                  user={user || undefined}
-                  src={user ? undefined : IMAGE_PIXEL}
-                  size="sm"
-                  key={index}
-                />
-              ))}
-              {donatorsCount > 4 && (
-                <span className="count">{donatorsCount}</span>
-              )}
-            </section>
-          </button>
+        <button
+          type="button"
+          onClick={open}
+          disabled={donatorsCount <= 0}
+          aria-label={TEXT.zh_hant.viewDonators}
+          aria-haspopup="true"
+        >
+          <section className="avatar-list">
+            {donators.map((user, index) => (
+              <Avatar
+                user={user || undefined}
+                src={user ? undefined : IMAGE_PIXEL}
+                size="sm"
+                key={index}
+              />
+            ))}
+            {donatorsCount > 4 && (
+              <span className="count">{donatorsCount}</span>
+            )}
+          </section>
 
           <style jsx>{styles}</style>
-        </section>
+        </button>
       )}
     </DonatorsDialog>
   )

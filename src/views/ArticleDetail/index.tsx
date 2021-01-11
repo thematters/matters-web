@@ -31,7 +31,6 @@ import { getQuery, toPath } from '~/common/utils'
 
 import Collection from './Collection'
 import Content from './Content'
-import DonationArea from './DonationArea'
 import EditMode from './EditMode'
 import FingerprintButton from './FingerprintButton'
 import {
@@ -42,6 +41,7 @@ import {
 import RelatedArticles from './RelatedArticles'
 import State from './State'
 import styles from './styles.css'
+import SupportWidget from './SupportWidget'
 import TagList from './TagList'
 import Toolbar from './Toolbar'
 import TranslationButton from './TranslationButton'
@@ -366,7 +366,7 @@ const ArticleDetail = () => {
             translating={translating}
           />
 
-          {features.payment && <DonationArea article={article} />}
+          {features.payment && <SupportWidget article={article} />}
 
           {collectionCount > 0 && (
             <section className="block">
