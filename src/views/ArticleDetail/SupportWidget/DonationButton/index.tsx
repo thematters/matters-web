@@ -13,8 +13,6 @@ import {
 import { ADD_TOAST, REFETCH_DONATORS } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
-import styles from './styles.css'
-
 import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
 
 interface DonationButtonProps {
@@ -59,39 +57,35 @@ const DonationButton = ({ recipient, targetId }: DonationButtonProps) => {
   }
 
   return (
-    <section className="container">
-      <DonationDialog
-        completeCallback={completeCallback}
-        recipient={recipient}
-        targetId={targetId}
-      >
-        {({ open }) => (
-          <Button
-            size={['10.5rem', '2.5rem']}
-            bgColor="red"
-            disabled={recipient.id === viewer.id}
-            onClick={() => {
-              analytics.trackEvent('click_button', { type: 'donate' })
-              if (!viewer.isAuthed) {
-                showLoginToast()
-                return
-              }
-              if (viewer.isFrozen) {
-                forbid()
-                return
-              }
-              open()
-            }}
-          >
-            <TextIcon icon={<IconDonate24 />} weight="md" color="white">
-              <Translate id="donation" />
-            </TextIcon>
-          </Button>
-        )}
-      </DonationDialog>
-
-      <style jsx>{styles}</style>
-    </section>
+    <DonationDialog
+      completeCallback={completeCallback}
+      recipient={recipient}
+      targetId={targetId}
+    >
+      {({ open }) => (
+        <Button
+          size={['10.5rem', '2.5rem']}
+          bgColor="gold"
+          disabled={recipient.id === viewer.id}
+          onClick={() => {
+            analytics.trackEvent('click_button', { type: 'donate' })
+            if (!viewer.isAuthed) {
+              showLoginToast()
+              return
+            }
+            if (viewer.isFrozen) {
+              forbid()
+              return
+            }
+            open()
+          }}
+        >
+          <TextIcon icon={<IconDonate24 />} weight="md" color="white">
+            <Translate id="donation" />
+          </TextIcon>
+        </Button>
+      )}
+    </DonationDialog>
   )
 }
 
