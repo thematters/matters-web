@@ -5,5 +5,5 @@
 .border {
   margin: 1rem;
   border-radius: var(--spacing-x-tight);
-  box-shadow: var(--shadow-sm-darker);
+  box-shadow: var(--shadow-sm-lighter);
 }
