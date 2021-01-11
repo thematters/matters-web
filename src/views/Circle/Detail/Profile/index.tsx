@@ -4,6 +4,7 @@ import { numAbbr } from '~/common/utils'
 
 import CIRCLE_COVER from '@/public/static/images/circle-cover.svg'
 
+import AuthorWidget from './AuthorWidget'
 import FollowButton from './FollowButton'
 import { fragments } from './gql'
 import styles from './styles.css'
@@ -51,6 +52,8 @@ const CircleProfile = ({ circle }: CircleProfileProps) => {
 
         <FollowButton circle={circle} />
       </footer>
+
+      <AuthorWidget circle={circle} />
 
       <style jsx>{styles}</style>
     </section>
