@@ -31,7 +31,7 @@ import { getQuery, toPath } from '~/common/utils'
 
 import Collection from './Collection'
 import Content from './Content'
-import Donation from './Donation'
+import DonationArea from './DonationArea'
 import EditMode from './EditMode'
 import FingerprintButton from './FingerprintButton'
 import {
@@ -366,7 +366,7 @@ const ArticleDetail = () => {
             translating={translating}
           />
 
-          {features.payment && <Donation article={article} />}
+          {features.payment && <DonationArea article={article} />}
 
           {collectionCount > 0 && (
             <section className="block">

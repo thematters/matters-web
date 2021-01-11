@@ -68,7 +68,7 @@ const DonationButton = ({ recipient, targetId }: DonationButtonProps) => {
         {({ open }) => (
           <Button
             size={['10.5rem', '2.5rem']}
-            bgColor="red"
+            bgColor="gold"
             disabled={recipient.id === viewer.id}
             onClick={() => {
               analytics.trackEvent('click_button', { type: 'donate' })

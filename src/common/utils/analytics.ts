@@ -145,6 +145,7 @@ type UserFeedType =
   | 'appreciations_sent'
   | 'appreciations_received'
   | 'appreciators'
+  | 'donators'
   | 'authors' // author list on home page
   | 'collection'
   | 'follow'
