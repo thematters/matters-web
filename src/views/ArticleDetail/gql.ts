@@ -40,7 +40,8 @@ export const ARTICLE_DETAIL_PUBLIC = gql`
       ...FingerprintArticle
       ...ToolbarArticlePublic
       ...ToolbarArticlePrivate
-      ...SupportWidgetArticle
+      ...SupportWidgetArticlePublic
+      ...SupportWidgetArticlePrivate
     }
   }
   ${Content.fragments.article}
@@ -52,7 +53,8 @@ export const ARTICLE_DETAIL_PUBLIC = gql`
   ${UserDigest.Rich.fragments.user.private}
   ${Toolbar.fragments.article.public}
   ${Toolbar.fragments.article.private}
-  ${SupportWidget.fragments.article}
+  ${SupportWidget.fragments.article.public}
+  ${SupportWidget.fragments.article.private}
 `
 
 export const ARTICLE_DETAIL_PRIVATE = gql`
@@ -68,10 +70,12 @@ export const ARTICLE_DETAIL_PRIVATE = gql`
         ...UserDigestRichUserPrivate
       }
       ...ToolbarArticlePrivate
+      ...SupportWidgetArticlePrivate
     }
   }
   ${UserDigest.Rich.fragments.user.private}
   ${Toolbar.fragments.article.private}
+  ${SupportWidget.fragments.article.private}
 `
 
 export const ARTICLE_TRANSLATION = gql`
