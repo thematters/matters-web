@@ -1,0 +1,6 @@
+.author-widget {
+  padding: var(--spacing-base);
+  margin: var(--spacing-base) var(--spacing-base) 0;
+  background: var(--color-grey-lighter);
+  border-radius: var(--spacing-base);
+}
