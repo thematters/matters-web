@@ -3,6 +3,7 @@ import { useContext } from 'react'
 
 import {
   CreateCircleForm,
+  EmptyLayout,
   Head,
   Layout,
   Spinner,
@@ -33,17 +34,17 @@ const EditProfile = () => {
 
   if (loading) {
     return (
-      <Layout.Main bgColor="grey-lighter">
+      <EmptyLayout>
         <Spinner />
-      </Layout.Main>
+      </EmptyLayout>
     )
   }
 
   if (!circle || !isOwner) {
     return (
-      <Layout.Main>
+      <EmptyLayout>
         <Throw404 />
-      </Layout.Main>
+      </EmptyLayout>
     )
   }
 

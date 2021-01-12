@@ -82,6 +82,10 @@ export const MOCK_ARTILCE = {
     __typename: 'AppreciationConnection' as any,
     totalCount: 190,
   },
+  donationsDialog: {
+    __typename: 'AppreciationConnection' as any,
+    totalCount: 190,
+  },
   subscribed: false,
   circle: MOCK_CIRCLE,
   isLimitedFree: true,
