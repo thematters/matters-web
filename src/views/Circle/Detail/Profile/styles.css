@@ -1,5 +1,15 @@
 .profile {
   position: relative;
+  padding-bottom: var(--spacing-loose);
+  margin-bottom: var(--spacing-x-tight);
+  background: var(--color-white);
+  border-radius: 0 0 1.25rem 1.25rem;
+
+  @media (--sm-up) {
+    padding-bottom: var(--spacing-base);
+    margin-bottom: 0;
+    border-radius: 0;
+  }
 }
 
 header {

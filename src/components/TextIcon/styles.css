@@ -89,6 +89,10 @@
   color: var(--color-red);
 }
 
+.likecoin-green {
+  color: var(--color-likecoin-green);
+}
+
 /* spacing */
 .spacing-xxxtight.hasIcon {
   &.text-right .text {

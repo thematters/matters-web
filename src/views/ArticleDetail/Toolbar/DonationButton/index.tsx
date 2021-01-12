@@ -24,7 +24,9 @@ const fragments = {
   article: gql`
     fragment DonationButtonArticle on Article {
       id
-      transactionsReceivedBy(input: { first: 0, purpose: donation }) {
+      donationsToolbar: transactionsReceivedBy(
+        input: { first: 0, purpose: donation }
+      ) {
         totalCount
       }
       author {
@@ -95,8 +97,8 @@ const DonationButton = ({ article }: DonationButtonProps) => {
               spacing="xtight"
               size="sm"
             >
-              {article.transactionsReceivedBy.totalCount > 0
-                ? numAbbr(article.transactionsReceivedBy.totalCount)
+              {article.donationsToolbar.totalCount > 0
+                ? numAbbr(article.donationsToolbar.totalCount)
                 : undefined}
             </TextIcon>
           </Button>

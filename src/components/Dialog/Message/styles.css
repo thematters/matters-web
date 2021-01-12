@@ -1,10 +1,13 @@
 .content {
   text-align: center;
 
+  & :global(h2) {
+    font-size: var(--font-size-xm);
+  }
+
   & :global(h3) {
     font-size: var(--font-size-md);
     line-height: 2rem;
-    text-align: center;
   }
 
   & :global(p) {
@@ -13,7 +16,7 @@
     color: var(--color-grey-dark);
   }
 
-  & :global(h3 + p, p + p) {
+  & :global(h2 + p, h3 + p, p + p) {
     margin-top: var(--spacing-tight);
   }
 
@@ -31,10 +34,12 @@
   }
 
   & :global(ul) {
+    margin: var(--spacing-base) 0;
     list-style-type: disc;
   }
 
   & :global(ol) {
+    margin: var(--spacing-base) 0;
     list-style-type: decimal;
   }
 }
@@ -42,6 +47,15 @@
 .error {
   & :global(h3) {
     color: var(--color-red);
+  }
+}
+
+.info {
+  & :global(h3),
+  & :global(p),
+  & :global(ul),
+  & :global(ol) {
+    color: var(--color-black);
   }
 }
 

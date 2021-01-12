@@ -1,11 +1,7 @@
-.slide {
-  & :global(h3) {
-    margin: var(--spacing-loose) 0 var(--spacing-base);
-  }
-}
-
 .image-container {
   position: relative;
+  margin: calc(var(--spacing-base) * -1) calc(var(--spacing-base) * -1)
+    var(--spacing-base);
   border-bottom: 1px solid var(--color-line-grey);
 
   & .image {
@@ -13,46 +9,6 @@
       display: block;
       padding-bottom: 38%;
       content: '';
-    }
-  }
-}
-
-.title-container {
-  padding: 0 var(--spacing-loose) 1rem;
-
-  & h3 {
-    font-size: var(--font-size-xm);
-    font-weight: var(--font-weight-medium);
-    line-height: 1.5rem;
-  }
-}
-
-.subTitle {
-  font-size: var(--font-size-sm);
-}
-
-.descriptions {
-  position: relative;
-  margin-bottom: var(--spacing-xx-loose);
-  color: var(--color-grey-darker);
-
-  & .description {
-    position: relative;
-    padding: 0 var(--spacing-xx-loose);
-    font-size: var(--font-size-sm);
-
-    & + .description {
-      margin-top: var(--spacing-base);
-    }
-
-    &::before {
-      position: absolute;
-      top: 0;
-      left: 1.5rem;
-      font-size: var(--font-size-sm);
-      font-weight: var(--font-weight-bold);
-      color: var(--color-matters-green);
-      content: attr(data-content);
     }
   }
 }

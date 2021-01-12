@@ -389,6 +389,12 @@ span.container {
   }
 }
 
+.border-likecoin-green {
+  & .hotarea {
+    border-color: var(--color-likecoin-green);
+  }
+}
+
 .border-md {
   & .hotarea {
     border-style: solid;

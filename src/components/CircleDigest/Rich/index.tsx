@@ -1,7 +1,12 @@
 import classNames from 'classnames'
 import React from 'react'
 
-import { Card, CircleAvatar, CircleAvatarSize } from '~/components'
+import {
+  Card,
+  CardBorderRadius,
+  CircleAvatar,
+  CircleAvatarSize,
+} from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 
 import { toPath } from '~/common/utils'
@@ -22,12 +27,14 @@ export type CircleDigestRichControls = {
 export type CircleDigestRichProps = {
   circle: DigestRichCirclePublic & Partial<DigestRichCirclePrivate>
   avatarSize?: CircleAvatarSize
+  borderRadius?: CardBorderRadius
 } & CircleDigestRichControls
 
 const Rich = ({
   circle,
 
   avatarSize = 'xxl',
+  borderRadius,
 
   onClick,
 
@@ -47,7 +54,12 @@ const Rich = ({
   })
 
   return (
-    <Card {...path} spacing={['base', 'base']} onClick={onClick}>
+    <Card
+      {...path}
+      borderRadius={borderRadius}
+      spacing={['base', 'base']}
+      onClick={onClick}
+    >
       <section className={containerClasses}>
         <section className="content">
           <CircleAvatar circle={circle} size={avatarSize} />

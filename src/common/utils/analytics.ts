@@ -134,6 +134,7 @@ type ArticleFeedType =
   | 'user_article'
   | 'wallet'
   | 'related_donations'
+  | 'circle_detail'
 
 type CommentFeedType = 'follow-comment' | 'user_comment'
 
@@ -144,6 +145,7 @@ type UserFeedType =
   | 'appreciations_sent'
   | 'appreciations_received'
   | 'appreciators'
+  | 'donators'
   | 'authors' // author list on home page
   | 'collection'
   | 'follow'
