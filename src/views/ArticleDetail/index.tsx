@@ -1,6 +1,7 @@
 import { useLazyQuery, useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import jump from 'jump.js'
+import _get from 'lodash/get'
 import dynamic from 'next/dynamic'
 import Router, { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
@@ -45,7 +46,8 @@ import SupportWidget from './SupportWidget'
 import TagList from './TagList'
 import Toolbar from './Toolbar'
 import TranslationButton from './TranslationButton'
-import Wall from './Wall'
+import CircleWall from './Wall/Circle'
+import VisitorWall from './Wall/Visitor'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import { ArticleDetailPublic } from './__generated__/ArticleDetailPublic'
@@ -98,6 +100,9 @@ const ArticleDetail = () => {
   const authorId = article?.author?.id
   const collectionCount = article?.collection?.totalCount || 0
   const isAuthor = viewer.id === authorId
+
+  const circle = article?.circle
+  const isMember = _get(circle, 'article.circle.isMember', false)
 
   // fetch private data
   const [privateFetched, setPrivateFetched] = useState(false)
@@ -360,11 +365,14 @@ const ArticleDetail = () => {
             </section>
           </section>
 
-          <Content
-            article={article}
-            translation={translate ? contentTranslation : null}
-            translating={translating}
-          />
+          <section className="content-outline">
+            <Content
+              article={article}
+              translation={translate ? contentTranslation : null}
+              translating={translating}
+            />
+            {circle && !isMember && <CircleWall circle={circle} />}
+          </section>
 
           {features.payment && <SupportWidget article={article} />}
 
@@ -386,7 +394,7 @@ const ArticleDetail = () => {
         {shouldShowWall && (
           <>
             <section id="comments" />
-            <Wall show={fixedWall} />
+            <VisitorWall show={fixedWall} />
           </>
         )}
       </PullToRefresh>

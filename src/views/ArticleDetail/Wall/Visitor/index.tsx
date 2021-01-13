@@ -11,11 +11,11 @@ import styles from './styles.css'
 
 const bgStyle = { backgroundImage: `url(${IMG_AD})` }
 
-interface WallProps {
+interface VisitorWallProps {
   show: boolean
 }
 
-const Wall = ({ show }: WallProps) => {
+const VisitorWall = ({ show }: VisitorWallProps) => {
   const client = useApolloClient()
   const outerClasses = classNames({ outer: true, show })
 
@@ -63,4 +63,4 @@ const Wall = ({ show }: WallProps) => {
   )
 }
 
-export default Wall
+export default VisitorWall

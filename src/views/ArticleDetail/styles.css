@@ -78,3 +78,7 @@
     color: var(--color-grey);
   }
 }
+
+.content-outline {
+  position: relative;
+}
