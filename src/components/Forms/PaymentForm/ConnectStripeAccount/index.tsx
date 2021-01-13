@@ -49,7 +49,7 @@ const ConnectStripeAccount: React.FC<Props> = ({ nextStep, windowRef }) => {
   }
 
   return (
-    <Dialog.Message error={!!error} spacing="md">
+    <Dialog.Message type={error ? 'error' : undefined} spacing="md">
       {error ? (
         <h3>
           <Translate
