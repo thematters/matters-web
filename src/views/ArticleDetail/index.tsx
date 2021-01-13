@@ -1,7 +1,6 @@
 import { useLazyQuery, useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import jump from 'jump.js'
-import _get from 'lodash/get'
 import dynamic from 'next/dynamic'
 import Router, { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
@@ -100,9 +99,7 @@ const ArticleDetail = () => {
   const authorId = article?.author?.id
   const collectionCount = article?.collection?.totalCount || 0
   const isAuthor = viewer.id === authorId
-
   const circle = article?.circle
-  const isMember = _get(circle, 'article.circle.isMember', false)
 
   // fetch private data
   const [privateFetched, setPrivateFetched] = useState(false)
@@ -371,7 +368,7 @@ const ArticleDetail = () => {
               translation={translate ? contentTranslation : null}
               translating={translating}
             />
-            {circle && !isMember && <CircleWall circle={circle} />}
+            {circle && <CircleWall circle={circle} />}
           </section>
 
           {features.payment && <SupportWidget article={article} />}
