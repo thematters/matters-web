@@ -1,5 +1,7 @@
 import gql from 'graphql-tag'
 
+import CivicLikerDialog from './CivicLikerDialog'
+
 export const fragments = {
   article: {
     public: gql`
@@ -7,10 +9,12 @@ export const fragments = {
         id
         author {
           id
+          ...CivicLikerAppreciateButtonUser
         }
         appreciationsReceivedTotal
         appreciateLimit
       }
+      ${CivicLikerDialog.fragments.user}
     `,
     private: gql`
       fragment AppreciationButtonArticlePrivate on Article {

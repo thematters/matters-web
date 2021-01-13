@@ -218,6 +218,7 @@ const AppreciationButton = ({
   if (isReachLimit && !readCivicLikerDialog) {
     return (
       <CivicLikerButton
+        user={article.author}
         onClose={() => {
           client.writeData({
             id: 'ClientPreference:local',
