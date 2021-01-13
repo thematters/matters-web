@@ -7,12 +7,14 @@ import {
   InfiniteScroll,
   List,
   Spinner,
+  useEventListener,
   usePublicQuery,
   usePullToRefresh,
   ViewerContext,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
+import { REFETCH_CIRCLE_DETAIL_ARTICLES } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import { CIRCLE_WORKS_PRIVATE, CIRCLE_WORKS_PUBLIC } from './gql'
@@ -105,6 +107,7 @@ const CircleDetailWorks = ({ name }: CircleWorksProps) => {
     loadPrivate(newData)
   }
 
+  useEventListener(REFETCH_CIRCLE_DETAIL_ARTICLES, refetch)
   usePullToRefresh.Handler(refetch)
 
   /**
