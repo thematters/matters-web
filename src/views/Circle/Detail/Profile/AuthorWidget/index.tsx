@@ -15,8 +15,9 @@ const AuthorWidget = ({ circle }: AuthorWidgetProps) => {
       <UserDigest.Rich
         user={circle.owner}
         hasFollow={false}
-        bgColor="none"
-        spacing={[0, 0]}
+        bgColor="grey-lighter"
+        borderRadius="base"
+        spacing={['base', 'base']}
       />
 
       <style jsx>{styles}</style>

@@ -1,19 +1,36 @@
 import gql from 'graphql-tag'
 
-import { DonationDialog } from '~/components'
+import { CircleDigest, DonationDialog } from '~/components'
 
 import Donators from './Donators'
 
 export const fragments = {
-  article: gql`
-    fragment SupportWidgetArticle on Article {
-      id
-      author {
-        ...UserDonationRecipient
+  article: {
+    public: gql`
+      fragment SupportWidgetArticlePublic on Article {
+        id
+        author {
+          ...UserDonationRecipient
+        }
+        circle {
+          id
+          ...DigestRichCirclePublic
+        }
+        ...DonatorsArticle
       }
-      ...DonatorsArticle
-    }
-    ${Donators.fragments.article}
-    ${DonationDialog.fragments.recipient}
-  `,
+      ${Donators.fragments.article}
+      ${DonationDialog.fragments.recipient}
+      ${CircleDigest.Rich.fragments.circle.public}
+    `,
+    private: gql`
+      fragment SupportWidgetArticlePrivate on Article {
+        id
+        circle {
+          id
+          ...DigestRichCirclePrivate
+        }
+      }
+      ${CircleDigest.Rich.fragments.circle.private}
+    `,
+  },
 }
