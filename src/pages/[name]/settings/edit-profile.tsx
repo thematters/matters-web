@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import CircleSettingsEditProfile from '~/views/Circle/Settings/EditProfile'
 
-import { Layout, Protected, Throw404 } from '~/components'
+import { EmptyLayout, Protected, Throw404 } from '~/components'
 
 import { getNameType } from '~/common/utils'
 
@@ -18,9 +18,9 @@ const NameSettingsEditProfile = () => {
   }
 
   return (
-    <Layout.Main>
+    <EmptyLayout>
       <Throw404 />
-    </Layout.Main>
+    </EmptyLayout>
   )
 }
 

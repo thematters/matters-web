@@ -9,7 +9,8 @@
           { "name": "User" },
           { "name": "Comment" },
           { "name": "Tag" },
-          { "name": "Draft" }
+          { "name": "Draft" },
+          { "name": "Circle" }
         ]
       },
       {
@@ -25,6 +26,7 @@
           { "name": "ReadHistoryConnection" },
           { "name": "RecentSearchConnection" },
           { "name": "AppreciationConnection" },
+          { "name": "MemberConnection" },
           { "name": "NoticeConnection" },
           { "name": "TransactionConnection" },
           { "name": "ResponseConnection" },
