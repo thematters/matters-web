@@ -45,7 +45,8 @@ import SupportWidget from './SupportWidget'
 import TagList from './TagList'
 import Toolbar from './Toolbar'
 import TranslationButton from './TranslationButton'
-import Wall from './Wall'
+import CircleWall from './Wall/Circle'
+import VisitorWall from './Wall/Visitor'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import { ArticleDetailPublic } from './__generated__/ArticleDetailPublic'
@@ -98,6 +99,7 @@ const ArticleDetail = () => {
   const authorId = article?.author?.id
   const collectionCount = article?.collection?.totalCount || 0
   const isAuthor = viewer.id === authorId
+  const circle = article?.circle
 
   // fetch private data
   const [privateFetched, setPrivateFetched] = useState(false)
@@ -360,11 +362,14 @@ const ArticleDetail = () => {
             </section>
           </section>
 
-          <Content
-            article={article}
-            translation={translate ? contentTranslation : null}
-            translating={translating}
-          />
+          <section className="content-outline">
+            <Content
+              article={article}
+              translation={translate ? contentTranslation : null}
+              translating={translating}
+            />
+            {circle && <CircleWall circle={circle} />}
+          </section>
 
           {features.payment && <SupportWidget article={article} />}
 
@@ -386,7 +391,7 @@ const ArticleDetail = () => {
         {shouldShowWall && (
           <>
             <section id="comments" />
-            <Wall show={fixedWall} />
+            <VisitorWall show={fixedWall} />
           </>
         )}
       </PullToRefresh>

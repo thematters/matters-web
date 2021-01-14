@@ -9,6 +9,7 @@ import State from './State'
 import SupportWidget from './SupportWidget'
 import TagList from './TagList'
 import Toolbar from './Toolbar'
+import CircleWall from './Wall/Circle'
 
 export const ARTICLE_DETAIL_PUBLIC = gql`
   query ArticleDetailPublic(
@@ -33,6 +34,9 @@ export const ARTICLE_DETAIL_PUBLIC = gql`
       collection(input: { first: 0 }) @connection(key: "articleCollection") {
         totalCount
       }
+      circle {
+        ...CircleWallCirclePublic
+      }
       ...ContentArticle
       ...TagListArticle
       ...RelatedArticles
@@ -55,6 +59,7 @@ export const ARTICLE_DETAIL_PUBLIC = gql`
   ${Toolbar.fragments.article.private}
   ${SupportWidget.fragments.article.public}
   ${SupportWidget.fragments.article.private}
+  ${CircleWall.fragments.circle.public}
 `
 
 export const ARTICLE_DETAIL_PRIVATE = gql`
@@ -69,6 +74,9 @@ export const ARTICLE_DETAIL_PRIVATE = gql`
       author {
         ...UserDigestRichUserPrivate
       }
+      circle {
+        ...CircleWallCirclePrivate
+      }
       ...ToolbarArticlePrivate
       ...SupportWidgetArticlePrivate
     }
@@ -76,6 +84,7 @@ export const ARTICLE_DETAIL_PRIVATE = gql`
   ${UserDigest.Rich.fragments.user.private}
   ${Toolbar.fragments.article.private}
   ${SupportWidget.fragments.article.private}
+  ${CircleWall.fragments.circle.private}
 `
 
 export const ARTICLE_TRANSLATION = gql`

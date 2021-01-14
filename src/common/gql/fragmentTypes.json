@@ -9,8 +9,8 @@
           { "name": "User" },
           { "name": "Comment" },
           { "name": "Tag" },
-          { "name": "Draft" },
-          { "name": "Circle" }
+          { "name": "Circle" },
+          { "name": "Draft" }
         ]
       },
       {
@@ -22,11 +22,12 @@
           { "name": "FolloweeDonatedArticleConnection" },
           { "name": "TagConnection" },
           { "name": "UserConnection" },
+          { "name": "CircleConnection" },
+          { "name": "MemberConnection" },
           { "name": "DraftConnection" },
           { "name": "ReadHistoryConnection" },
           { "name": "RecentSearchConnection" },
           { "name": "AppreciationConnection" },
-          { "name": "MemberConnection" },
           { "name": "NoticeConnection" },
           { "name": "TransactionConnection" },
           { "name": "ResponseConnection" },
