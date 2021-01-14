@@ -3,9 +3,10 @@ import React from 'react'
 
 import {
   Card,
-  CardBorderRadius,
+  CardProps,
   CircleAvatar,
   CircleAvatarSize,
+  LinkWrapper,
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 
@@ -19,7 +20,6 @@ import { DigestRichCirclePrivate } from './__generated__/DigestRichCirclePrivate
 import { DigestRichCirclePublic } from './__generated__/DigestRichCirclePublic'
 
 export type CircleDigestRichControls = {
-  onClick?: () => any
   hasOwner?: boolean
   hasFooter?: boolean
 } & FooterControls
@@ -27,21 +27,19 @@ export type CircleDigestRichControls = {
 export type CircleDigestRichProps = {
   circle: DigestRichCirclePublic & Partial<DigestRichCirclePrivate>
   avatarSize?: CircleAvatarSize
-  borderRadius?: CardBorderRadius
-} & CircleDigestRichControls
+} & CircleDigestRichControls &
+  CardProps
 
 const Rich = ({
   circle,
 
   avatarSize = 'xxl',
-  borderRadius,
-
-  onClick,
 
   hasOwner = true,
   hasFooter,
+  hasPrice,
 
-  ...controls
+  ...cardProps
 }: CircleDigestRichProps) => {
   const { displayName, description, owner } = circle
   const path = toPath({
@@ -54,18 +52,17 @@ const Rich = ({
   })
 
   return (
-    <Card
-      {...path}
-      borderRadius={borderRadius}
-      spacing={['base', 'base']}
-      onClick={onClick}
-    >
+    <Card {...path} spacing={['base', 'base']} {...cardProps}>
       <section className={containerClasses}>
         <section className="content">
           <CircleAvatar circle={circle} size={avatarSize} />
 
           <header>
-            <h3>{displayName}</h3>
+            <h3>
+              <LinkWrapper {...path} textActiveColor="green">
+                <a>{displayName}</a>
+              </LinkWrapper>
+            </h3>
 
             {hasOwner && (
               <UserDigest.Mini
@@ -82,7 +79,7 @@ const Rich = ({
 
         {description && <p className="description">{description}</p>}
 
-        {hasFooter && <Footer circle={circle} {...controls} />}
+        {hasFooter && <Footer circle={circle} hasPrice={hasPrice} />}
 
         <style jsx>{styles}</style>
       </section>

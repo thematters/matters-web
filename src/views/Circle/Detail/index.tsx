@@ -51,7 +51,7 @@ const CircleDetail = ({ circle }: { circle: CircleDetailPublic_circle }) => {
           <>
             <span />
 
-            <DropdownActions />
+            <DropdownActions circle={circle} />
           </>
         }
         mode="transparent-absolute"

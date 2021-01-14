@@ -5,9 +5,14 @@ export const ANALYTICS = 'analytics'
 export const ADD_TOAST = 'addToast'
 export const REMOVE_TOAST = 'removeToast'
 
-// Tags
+// Article
 export const REFETCH_RESPONSES = 'refetchResponses'
+
+// Tag
 export const REFETCH_TAG_DETAIL_ARTICLES = 'refetchTagDetailArticles'
+
+// Circle
+export const REFETCH_CIRCLE_DETAIL_ARTICLES = 'refetchCircleDetailArticles'
 
 // Donators
 export const REFETCH_DONATORS = 'refetchDonators'

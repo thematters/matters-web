@@ -1,15 +1,34 @@
+import gql from 'graphql-tag'
 import { useState } from 'react'
 
 import { Dialog, Translate } from '~/components'
 
 import { EXTERNAL_LINKS } from '~/common/enums'
 
+import { CivicLikerAppreciateButtonUser } from './__generated__/CivicLikerAppreciateButtonUser'
+
 interface CivicLikerDialogProps {
+  user: CivicLikerAppreciateButtonUser
   onClose: () => void
   children: ({ open }: { open: () => void }) => React.ReactNode
 }
 
-const CivicLikerDialog = ({ onClose, children }: CivicLikerDialogProps) => {
+const fragments = {
+  user: gql`
+    fragment CivicLikerAppreciateButtonUser on User {
+      id
+      liker {
+        likerId
+      }
+    }
+  `,
+}
+
+const CivicLikerDialog = ({
+  user,
+  onClose,
+  children,
+}: CivicLikerDialogProps) => {
   const [showDialog, setShowDialog] = useState(true)
   const open = () => {
     setShowDialog(true)
@@ -82,7 +101,11 @@ const CivicLikerDialog = ({ onClose, children }: CivicLikerDialogProps) => {
 
         <Dialog.Footer>
           <Dialog.Footer.Button
-            htmlHref={EXTERNAL_LINKS.CIVIC_LIKER_JOIN}
+            htmlHref={
+              user.liker.likerId
+                ? EXTERNAL_LINKS.CIVIC_LIKER(user.liker.likerId)
+                : EXTERNAL_LINKS.CIVIC_LIKER_JOIN
+            }
             htmlTarget="_blank"
             rel="noopener"
             onClick={close}
@@ -110,3 +133,5 @@ const LazyCivicLikerDialog = (props: CivicLikerDialogProps) => (
 )
 
 export default LazyCivicLikerDialog
+
+LazyCivicLikerDialog.fragments = fragments
