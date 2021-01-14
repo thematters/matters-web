@@ -4,15 +4,18 @@ import Sidebar from '~/components/Editor/Sidebar'
 import { ENTITY_TYPE } from '~/common/enums'
 
 import {
+  useEditDraftCircle,
   useEditDraftCollection,
   useEditDraftCover,
   useEditDraftTags,
 } from './hooks'
 
+import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
 import { EditMetaDraft } from './__generated__/EditMetaDraft'
 
 interface BaseSidebarProps {
   draft: EditMetaDraft
+  ownCircles?: DigestRichCirclePublic[]
 }
 
 type SidebarProps = BaseSidebarProps & { disabled: boolean }
@@ -61,6 +64,23 @@ const EditDraftTags = ({ draft, disabled }: SidebarProps) => {
   )
 }
 
+const EditDraftCircle = ({ draft, ownCircles, disabled }: SidebarProps) => {
+  const { toggle, saving } = useEditDraftCircle(draft)
+
+  if (!ownCircles) {
+    return null
+  }
+
+  return (
+    <Sidebar.Management
+      circle={draft.circle}
+      onEdit={() => toggle(ownCircles[0])}
+      saving={saving}
+      disabled={disabled}
+    />
+  )
+}
+
 const EditDraftSidebar = (props: BaseSidebarProps) => {
   const isPending = props.draft.publishState === 'pending'
   const isPublished = props.draft.publishState === 'published'
@@ -71,6 +91,7 @@ const EditDraftSidebar = (props: BaseSidebarProps) => {
       <EditDraftCover {...props} disabled={disabled} />
       <EditDraftTags {...props} disabled={disabled} />
       <EditDraftCollection {...props} disabled={disabled} />
+      <EditDraftCircle {...props} disabled={disabled} />
     </>
   )
 }

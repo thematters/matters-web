@@ -1,6 +1,7 @@
 p {
   margin-right: var(--spacing-base);
   font-size: var(--font-size-sm);
+  line-height: 1rem;
   color: var(--color-grey-darker);
 }
 

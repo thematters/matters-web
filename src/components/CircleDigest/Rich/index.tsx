@@ -22,11 +22,15 @@ import { DigestRichCirclePublic } from './__generated__/DigestRichCirclePublic'
 export type CircleDigestRichControls = {
   hasOwner?: boolean
   hasFooter?: boolean
+  hasDescription?: boolean
+
+  disabled?: boolean
 } & FooterControls
 
 export type CircleDigestRichProps = {
   circle: DigestRichCirclePublic & Partial<DigestRichCirclePrivate>
   avatarSize?: CircleAvatarSize
+  textSize?: 'md-s' | 'xm'
 } & CircleDigestRichControls &
   CardProps
 
@@ -34,10 +38,14 @@ const Rich = ({
   circle,
 
   avatarSize = 'xxl',
+  textSize = 'xm',
 
   hasOwner = true,
   hasFooter,
+  hasDescription = true,
   hasPrice,
+
+  disabled,
 
   ...cardProps
 }: CircleDigestRichProps) => {
@@ -50,17 +58,29 @@ const Rich = ({
   const containerClasses = classNames({
     container: true,
   })
+  const titleClasses = classNames({
+    title: true,
+    [`text-size-${textSize}`]: !!textSize,
+  })
 
   return (
-    <Card {...path} spacing={['base', 'base']} {...cardProps}>
+    <Card
+      href={disabled ? undefined : path.href}
+      spacing={['base', 'base']}
+      {...cardProps}
+    >
       <section className={containerClasses}>
         <section className="content">
           <CircleAvatar circle={circle} size={avatarSize} />
 
           <header>
-            <h3>
-              <LinkWrapper {...path} textActiveColor="green">
-                <a>{displayName}</a>
+            <h3 className={titleClasses}>
+              <LinkWrapper
+                {...path}
+                textActiveColor="green"
+                disabled={disabled}
+              >
+                {displayName}
               </LinkWrapper>
             </h3>
 
@@ -77,7 +97,9 @@ const Rich = ({
           </header>
         </section>
 
-        {description && <p className="description">{description}</p>}
+        {hasDescription && description && (
+          <p className="description">{description}</p>
+        )}
 
         {hasFooter && <Footer circle={circle} hasPrice={hasPrice} />}
 

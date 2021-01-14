@@ -13,19 +13,24 @@ import {
 } from '~/components/Dialogs/SearchSelectDialog'
 
 import SetCoverDialog, { BaseSetCoverDialogProps } from '../SetCoverDialog'
+import MoreActions from './MoreActions'
 import styles from './styles.css'
 
 import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
+import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
 import { Asset } from '~/components/GQL/fragments/__generated__/Asset'
 import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
 
 type BottomBarProps = {
   tags: DigestTag[]
   collection: ArticleDigestDropdownArticle[]
+  circle?: DigestRichCirclePublic | null
 
   onEditCover: (asset?: Asset) => any
   onEditCollection: (articles: ArticleDigestDropdownArticle[]) => any
   onEditTags: (tag: DigestTag[]) => any
+  onToggleCircle?: () => any
+  canToggleCircle?: boolean
 
   saving?: boolean
   disabled?: boolean
@@ -39,10 +44,13 @@ const BottomBar: React.FC<BottomBarProps> = ({
   cover,
   tags,
   collection,
+  circle,
 
   onEditCover,
   onEditCollection,
   onEditTags,
+  onToggleCircle,
+  canToggleCircle,
 
   saving,
   disabled,
@@ -124,6 +132,15 @@ const BottomBar: React.FC<BottomBarProps> = ({
                   </button>
                 )}
               </SearchSelectDialog>
+
+              {onToggleCircle && (
+                <MoreActions
+                  circle={circle}
+                  onEdit={onToggleCircle}
+                  disabled={!canToggleCircle}
+                  saving={saving}
+                />
+              )}
             </section>
           </section>
         </div>

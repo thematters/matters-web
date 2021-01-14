@@ -65,7 +65,7 @@ const AmountOption: React.FC<AmountOptionProps> = ({
     amount: true,
     [currency === CURRENCY.LIKE ? 'like' : 'hkd']: true,
     active: value === amount,
-    disabled: disabled || isBalanceInsufficient,
+    'u-area-disable': disabled || isBalanceInsufficient,
   })
 
   return (

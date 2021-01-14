@@ -21,6 +21,7 @@ import PublishState from './PublishState'
 import EditModeSidebar from './Sidebar'
 
 import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
+import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
 import { Asset } from '~/components/GQL/fragments/__generated__/Asset'
 import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
 import { ArticleDetailPublic_article } from '../__generated__/ArticleDetailPublic'
@@ -48,6 +49,9 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
   const [collection, editCollection] = useState<ArticleDigestDropdownArticle[]>(
     []
   )
+  const [circle, editCircle] = useState<DigestRichCirclePublic | null>(
+    article.circle
+  )
 
   // fetch and refetch latest metadata
   const { data, loading, error } = useQuery<EditModeArticle>(
@@ -64,6 +68,19 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
       fetchPolicy: 'network-only',
     }
   )
+
+  // Add first circle to article
+  // Note: the author can only have one circle now
+  const isAttachedCircle = !!article.circle
+  const ownCircles = data?.article?.author.ownCircles
+  const hasCircles = ownCircles && ownCircles.length >= 1
+  const toggleCircle = () => {
+    if (!ownCircles) {
+      return
+    }
+
+    editCircle(circle ? null : ownCircles[0])
+  }
 
   useEffect(() => {
     if (!data?.article) {
@@ -86,26 +103,18 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
    */
   if (loading) {
     return (
-      <Layout.Main inEditor>
-        <Layout.Header
-          right={
-            <EditModeHeader
-              article={article}
-              content={content}
-              cover={cover}
-              tags={tags}
-              collection={collection}
-              onSaved={onSaved}
-            />
-          }
-        />
+      <EmptyLayout>
         <Spinner />
-      </Layout.Main>
+      </EmptyLayout>
     )
   }
 
   if (error) {
-    return <QueryError error={error} />
+    return (
+      <EmptyLayout>
+        <QueryError error={error} />
+      </EmptyLayout>
+    )
   }
 
   const drafts = data?.article?.drafts || []
@@ -134,9 +143,12 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
           assets={data?.article?.assets || []}
           tags={tags}
           collection={collection}
+          circle={circle}
           editCover={editCover}
           editTags={editTags}
           editCollection={editCollection}
+          toggleCircle={hasCircles ? toggleCircle : undefined}
+          canToggleCircle={!isAttachedCircle}
           refetchAssets={refetchAssets}
           disabled={isEditDisabled}
         />
@@ -154,6 +166,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
             cover={cover}
             tags={tags}
             collection={collection}
+            circle={circle}
             count={count}
             isSameHash={isSameHash}
             onSaved={onSaved}
@@ -185,9 +198,12 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
           assets={data?.article?.assets || []}
           tags={tags}
           collection={collection}
+          circle={circle}
           editCover={editCover}
           editTags={editTags}
           editCollection={editCollection}
+          toggleCircle={hasCircles ? toggleCircle : undefined}
+          canToggleCircle={!isAttachedCircle}
           refetchAssets={refetchAssets}
           disabled={isEditDisabled}
         />
