@@ -9,19 +9,19 @@ import styles from './styles.css'
 
 import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
 
-interface CollectionProps {
+export interface SidebarCollectionProps {
   articles: ArticleDigestDropdownArticle[]
   onEdit: (articles: ArticleDigestDropdownArticle[]) => any
   saving?: boolean
   disabled?: boolean
 }
 
-const Collection = ({
+const SidebarCollection = ({
   articles,
   onEdit,
   saving,
   disabled,
-}: CollectionProps) => {
+}: SidebarCollectionProps) => {
   return (
     <SearchSelectDialog
       title="extendArticle"
@@ -63,4 +63,4 @@ const Collection = ({
   )
 }
 
-export default Collection
+export default SidebarCollection

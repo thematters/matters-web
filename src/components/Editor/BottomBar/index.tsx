@@ -21,15 +21,15 @@ import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generat
 import { Asset } from '~/components/GQL/fragments/__generated__/Asset'
 import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
 
-type BottomBarProps = {
+export type BottomBarProps = {
   tags: DigestTag[]
   collection: ArticleDigestDropdownArticle[]
   circle?: DigestRichCirclePublic | null
 
-  onEditCover: (asset?: Asset) => any
-  onEditCollection: (articles: ArticleDigestDropdownArticle[]) => any
-  onEditTags: (tag: DigestTag[]) => any
-  onToggleCircle?: () => any
+  editCover: (asset?: Asset) => any
+  editCollection: (articles: ArticleDigestDropdownArticle[]) => any
+  editTags: (tag: DigestTag[]) => any
+  toggleCircle?: () => any
   canToggleCircle?: boolean
 
   saving?: boolean
@@ -46,10 +46,10 @@ const BottomBar: React.FC<BottomBarProps> = ({
   collection,
   circle,
 
-  onEditCover,
-  onEditCollection,
-  onEditTags,
-  onToggleCircle,
+  editCover,
+  editCollection,
+  editTags,
+  toggleCircle,
   canToggleCircle,
 
   saving,
@@ -69,7 +69,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
         <div className="l-col-three-right">
           <section className="content">
             <section className="inner">
-              <SetCoverDialog cover={cover} onEdit={onEditCover} {...restProps}>
+              <SetCoverDialog cover={cover} onEdit={editCover} {...restProps}>
                 {({ open: openSetCoverDialog }) => (
                   <button type="button" onClick={openSetCoverDialog}>
                     <TextIcon
@@ -89,7 +89,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
                 hint="hintAddTag"
                 searchType="Tag"
                 onSave={(nodes: SearchSelectNode[]) =>
-                  onEditTags(nodes as DigestTag[])
+                  editTags(nodes as DigestTag[])
                 }
                 nodes={tags}
                 saving={saving}
@@ -114,7 +114,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
                 hint="hintEditCollection"
                 searchType="Article"
                 onSave={(nodes: SearchSelectNode[]) =>
-                  onEditCollection(nodes as ArticleDigestDropdownArticle[])
+                  editCollection(nodes as ArticleDigestDropdownArticle[])
                 }
                 nodes={collection}
                 saving={saving}
@@ -133,10 +133,10 @@ const BottomBar: React.FC<BottomBarProps> = ({
                 )}
               </SearchSelectDialog>
 
-              {onToggleCircle && (
+              {toggleCircle && (
                 <MoreActions
                   circle={circle}
-                  onEdit={onToggleCircle}
+                  onEdit={toggleCircle}
                   disabled={!canToggleCircle}
                   saving={saving}
                 />

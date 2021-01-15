@@ -11,14 +11,16 @@ import {
   Throw404,
   useResponsive,
 } from '~/components'
+import BottomBar from '~/components/Editor/BottomBar'
+import Sidebar from '~/components/Editor/Sidebar'
 import { QueryError, useImperativeQuery } from '~/components/GQL'
 
+import { ENTITY_TYPE } from '~/common/enums'
+
 import styles from '../styles.css'
-import EditModeBottomBar from './BottomBar'
 import { EDIT_MODE_ARTICLE, EDIT_MODE_ARTICLE_ASSETS } from './gql'
 import EditModeHeader from './Header'
 import PublishState from './PublishState'
-import EditModeSidebar from './Sidebar'
 
 import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
 import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
@@ -61,6 +63,9 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
       fetchPolicy: 'network-only',
     }
   )
+
+  // Cover
+  const assets = data?.article?.assets || []
   const refetchAssets = useImperativeQuery<EditModeArticleAssets>(
     EDIT_MODE_ARTICLE_ASSETS,
     {
@@ -69,26 +74,28 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
     }
   )
 
-  // Add first circle to article
+  // Circle
   // Note: the author can only have one circle now
   const isAttachedCircle = !!article.circle
   const ownCircles = data?.article?.author.ownCircles
   const hasCircles = ownCircles && ownCircles.length >= 1
-  const toggleCircle = () => {
-    if (!ownCircles) {
-      return
-    }
+  const toggleCircle = hasCircles
+    ? () => {
+        if (!ownCircles) {
+          return
+        }
 
-    editCircle(circle ? null : ownCircles[0])
-  }
+        editCircle(circle ? null : ownCircles[0])
+      }
+    : undefined
 
+  // update cover & collection from retrieved data
   useEffect(() => {
     if (!data?.article) {
       return
     }
 
     // cover, find from `article.assets` since `article.cover` isn't a `Asset`
-    const assets = data.article.assets
     const currCover = assets.find((asset) => asset.path === data.article?.cover)
     if (currCover) {
       editCover(currCover)
@@ -120,6 +127,10 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
   const drafts = data?.article?.drafts || []
   const draft = drafts[0]
   const count = 3 - (drafts.length || 0)
+  const isSameHash = draft.mediaHash === article.mediaHash
+  const isPending = draft.publishState === 'pending'
+  const isEditDisabled = !isSameHash || isPending
+  const isReviseDisabled = isEditDisabled || count <= 0
 
   if (!draft) {
     return (
@@ -129,29 +140,40 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
     )
   }
 
-  const isSameHash = draft.mediaHash === article.mediaHash
-  const isPending = draft.publishState === 'pending'
-  const isEditDisabled = !isSameHash || isPending
-  const isReviseDisabled = isEditDisabled || count <= 0
-
   return (
     <Layout.Main
       aside={
-        <EditModeSidebar
-          article={article}
-          cover={cover}
-          assets={data?.article?.assets || []}
-          tags={tags}
-          collection={collection}
-          circle={circle}
-          editCover={editCover}
-          editTags={editTags}
-          editCollection={editCollection}
-          toggleCircle={hasCircles ? toggleCircle : undefined}
-          canToggleCircle={!isAttachedCircle}
-          refetchAssets={refetchAssets}
-          disabled={isEditDisabled}
-        />
+        <>
+          <Sidebar.Cover
+            cover={cover?.path}
+            assets={assets}
+            entityId={article.id}
+            entityType={ENTITY_TYPE.article}
+            onEdit={editCover}
+            refetchAssets={refetchAssets}
+            disabled={isEditDisabled}
+          />
+
+          <Sidebar.Tags
+            tags={tags}
+            onEdit={editTags}
+            disabled={isEditDisabled}
+          />
+
+          <Sidebar.Collection
+            articles={collection}
+            onEdit={editCollection}
+            disabled={isEditDisabled}
+          />
+
+          {toggleCircle && (
+            <Sidebar.Management
+              circle={circle}
+              onEdit={toggleCircle}
+              disabled={isAttachedCircle}
+            />
+          )}
+        </>
       }
       inEditor
     >
@@ -192,20 +214,25 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
       </Layout.Spacing>
 
       {!isLargeUp && (
-        <EditModeBottomBar
-          article={article}
-          cover={cover}
-          assets={data?.article?.assets || []}
-          tags={tags}
-          collection={collection}
-          circle={circle}
-          editCover={editCover}
-          editTags={editTags}
-          editCollection={editCollection}
-          toggleCircle={hasCircles ? toggleCircle : undefined}
-          canToggleCircle={!isAttachedCircle}
-          refetchAssets={refetchAssets}
+        <BottomBar
           disabled={isEditDisabled}
+          // cover
+          cover={cover?.path}
+          assets={assets}
+          editCover={editCover}
+          refetchAssets={refetchAssets}
+          entityId={article.id}
+          entityType={ENTITY_TYPE.article}
+          // tags
+          tags={tags}
+          editTags={editTags}
+          // collection
+          collection={collection}
+          editCollection={editCollection}
+          // circle
+          circle={circle}
+          toggleCircle={toggleCircle}
+          canToggleCircle={!isAttachedCircle}
         />
       )}
 

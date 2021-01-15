@@ -27,7 +27,7 @@ const EditDraftBottomBar = ({ draft, ownCircles }: BottomBarProps) => {
     draft
   )
   const { edit: editTags, saving: tagsSaving } = useEditDraftTags(draft)
-  const { toggle: onToggleCircle, saving: circleSaving } = useEditDraftCircle(
+  const { toggle: toggleCircle, saving: circleSaving } = useEditDraftCircle(
     draft
   )
   const tags = (draft.tags || []).map(toDigestTag)
@@ -36,23 +36,25 @@ const EditDraftBottomBar = ({ draft, ownCircles }: BottomBarProps) => {
 
   return (
     <BottomBar
-      cover={draft.cover}
-      assets={draft.assets}
-      tags={tags}
-      collection={draft?.collection?.edges?.map(({ node }) => node) || []}
-      circle={draft?.circle}
-      onEditCover={editCover}
-      onEditCollection={editCollection}
-      onEditTags={editTags}
-      onToggleCircle={
-        ownCircles ? () => onToggleCircle(ownCircles[0]) : undefined
-      }
-      canToggleCircle
-      entityId={draft.id}
-      entityType={ENTITY_TYPE.draft}
-      refetchAssets={refetch}
       saving={collectionSaving || coverSaving || tagsSaving || circleSaving}
       disabled={isPending || isPublished}
+      // cover
+      cover={draft.cover}
+      assets={draft.assets}
+      editCover={editCover}
+      refetchAssets={refetch}
+      entityId={draft.id}
+      entityType={ENTITY_TYPE.draft}
+      // tags
+      tags={tags}
+      editTags={editTags}
+      // collection
+      collection={draft?.collection?.edges?.map(({ node }) => node) || []}
+      editCollection={editCollection}
+      // circle
+      circle={draft?.circle}
+      toggleCircle={ownCircles ? () => toggleCircle(ownCircles[0]) : undefined}
+      canToggleCircle
     />
   )
 }

@@ -3,9 +3,6 @@ import Cover from './Cover'
 import Management from './Management'
 import Tags from './Tags'
 
-/**
- * Editor sidebar to edit cover, tags and collection, only used on desktop
- */
 export default {
   Cover,
   Tags,

@@ -4,9 +4,9 @@ import ToggleCircle, { ToggleCircleProps } from '../../ToggleCircle'
 import Box from '../Box'
 import styles from './styles.css'
 
-type ManagementProps = ToggleCircleProps
+export type SidebarManagementProps = ToggleCircleProps
 
-const Management: React.FC<ManagementProps> = (props) => {
+const SidebarManagement: React.FC<SidebarManagementProps> = (props) => {
   return (
     <Box icon={<IconSettings24 size="md" />} title="articleManagement">
       <section className="container">
@@ -18,4 +18,4 @@ const Management: React.FC<ManagementProps> = (props) => {
   )
 }
 
-export default Management
+export default SidebarManagement

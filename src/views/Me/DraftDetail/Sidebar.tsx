@@ -22,10 +22,11 @@ type SidebarProps = BaseSidebarProps & { disabled: boolean }
 
 const EditDraftCollection = ({ draft, disabled }: SidebarProps) => {
   const { edit, saving } = useEditDraftCollection(draft)
+  const articles = draft?.collection?.edges?.map(({ node }) => node) || []
 
   return (
     <Sidebar.Collection
-      articles={draft?.collection?.edges?.map(({ node }) => node) || []}
+      articles={articles}
       onEdit={edit}
       saving={saving}
       disabled={disabled}
