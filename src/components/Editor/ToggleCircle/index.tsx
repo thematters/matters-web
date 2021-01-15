@@ -29,10 +29,7 @@ const ToggleCircle: React.FC<ToggleCircleProps> = ({
             />
           </h4>
           <p>
-            <Translate
-              zh_hant="不訂閱圍爐則納入公開創作區"
-              zh_hans="不订阅围炉则纳入公开创作区"
-            />
+            <Translate zh_hant="圍爐成員可讀" zh_hans="围炉成员可读" />
           </p>
         </section>
 

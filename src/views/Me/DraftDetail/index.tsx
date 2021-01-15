@@ -3,7 +3,14 @@ import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 
-import { Head, Layout, Spinner, Throw404, useResponsive } from '~/components'
+import {
+  EmptyLayout,
+  Head,
+  Layout,
+  Spinner,
+  Throw404,
+  useResponsive,
+} from '~/components'
 import { QueryError, useMutation } from '~/components/GQL'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 
@@ -25,13 +32,6 @@ const Editor = dynamic(() => import('~/components/Editor/Article'), {
   ssr: false,
   loading: Spinner,
 })
-
-const EmptyLayout: React.FC = ({ children }) => (
-  <Layout.Main>
-    <Layout.Header left={<Layout.Header.BackButton />} />
-    {children}
-  </Layout.Main>
-)
 
 const DraftDetail = () => {
   const isLargeUp = useResponsive('lg-up')

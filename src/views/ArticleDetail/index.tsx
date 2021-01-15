@@ -9,6 +9,7 @@ import { Waypoint } from 'react-waypoint'
 import {
   BackToHomeButton,
   DateTime,
+  EmptyLayout,
   Error,
   FeaturesContext,
   Head,
@@ -31,7 +32,6 @@ import { getQuery, toPath } from '~/common/utils'
 
 import Collection from './Collection'
 import Content from './Content'
-import EditMode from './EditMode'
 import FingerprintButton from './FingerprintButton'
 import {
   ARTICLE_DETAIL_PRIVATE,
@@ -55,12 +55,15 @@ const DynamicResponse = dynamic(() => import('./Responses'), {
   ssr: false,
   loading: Spinner,
 })
-const EmptyLayout: React.FC = ({ children }) => (
-  <Layout.Main>
-    <Layout.Header left={<Layout.Header.BackButton />} />
-    {children}
-  </Layout.Main>
-)
+
+const DynamicEditMode = dynamic(() => import('./EditMode'), {
+  ssr: false,
+  loading: () => (
+    <EmptyLayout>
+      <Spinner />
+    </EmptyLayout>
+  ),
+})
 
 const ArticleDetail = () => {
   const router = useRouter()
@@ -266,7 +269,7 @@ const ArticleDetail = () => {
    */
   if (editMode) {
     return (
-      <EditMode
+      <DynamicEditMode
         article={article}
         onCancel={exitEditMode}
         onSaved={onEditSaved}
