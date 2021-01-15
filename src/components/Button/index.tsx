@@ -51,6 +51,7 @@ type ButtonColor =
   | 'green'
   | 'gold'
   | 'red'
+  | 'likecoin-green'
 
 type ButtonTextColor = Extract<
   ButtonColor,
