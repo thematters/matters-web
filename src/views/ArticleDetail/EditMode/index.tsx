@@ -42,7 +42,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
   const isLargeUp = useResponsive('lg-up')
 
   // staging editing data
-  const [content, editContent] = useState<string | null>(null)
+  const [editData, setEditData] = useState<Record<string, any>>({})
   const [cover, editCover] = useState<Asset>()
   const [tags, editTags] = useState<DigestTag[]>(article.tags || [])
   const [collection, editCollection] = useState<ArticleDigestDropdownArticle[]>(
@@ -91,8 +91,8 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
           right={
             <EditModeHeader
               article={article}
-              content={content}
               cover={cover}
+              editData={editData}
               tags={tags}
               collection={collection}
               onSaved={onSaved}
@@ -150,8 +150,8 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
         right={
           <EditModeHeader
             article={article}
-            content={content}
             cover={cover}
+            editData={editData}
             tags={tags}
             collection={collection}
             count={count}
@@ -173,7 +173,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
           draft={draft}
           isReviseMode={!isReviseDisabled}
           isTitleReadOnly
-          update={async (update) => editContent(update.content || '')}
+          update={async (update) => setEditData(update)}
           upload={async () => ({ id: '', path: '' })}
         />
       </Layout.Spacing>
