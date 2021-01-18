@@ -13,15 +13,8 @@ interface CircleWallProps {
 }
 
 const CircleWall = ({ circle }: CircleWallProps) => {
-  const isMember = circle.isMember
-
-  if (isMember) {
-    return null
-  }
-
   return (
     <section className="container">
-      <section className="fader" />
       <section className="message">
         \\&nbsp;
         <Translate zh_hans="订阅围炉看更多" zh_hant="訂閱圍爐看更多" />

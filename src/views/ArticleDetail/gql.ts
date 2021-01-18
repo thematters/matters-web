@@ -27,6 +27,7 @@ export const ARTICLE_DETAIL_PUBLIC = gql`
       createdAt
       revisedAt
       language
+      limitedFree
       author {
         ...UserDigestRichUserPublic
         ...UserDigestRichUserPrivate
@@ -35,6 +36,7 @@ export const ARTICLE_DETAIL_PUBLIC = gql`
         totalCount
       }
       circle {
+        id
         ...CircleWallCirclePublic
       }
       ...ContentArticle

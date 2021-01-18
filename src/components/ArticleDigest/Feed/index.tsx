@@ -15,7 +15,7 @@ import { ArticleDigestTitle } from '../Title'
 import CreatedAt from './CreatedAt'
 import { fragments } from './gql'
 import InactiveState from './InactiveState'
-import Label from './Label'
+import LimitedFree from './LimitedFree'
 import styles from './styles.css'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
@@ -60,14 +60,7 @@ const BaseArticleDigestFeed = ({
   const isCompactMode = viewMode === 'compact'
   const isDefaultMode = viewMode === 'default'
 
-  const {
-    author,
-    summary,
-    sticky,
-    circle,
-    // @ts-ignore
-    isLimitedFree,
-  } = article
+  const { author, summary, sticky, circle } = article
   const isBanned = article.articleState === 'banned'
   const cover = !isBanned ? article.cover : null
   const cleanedSummary = isBanned ? '' : stripHtml(summary)
@@ -101,11 +94,7 @@ const BaseArticleDigestFeed = ({
             <section className="extraHeader">
               <CircleDigest.Plain circle={circle} />
 
-              {isLimitedFree && (
-                <Label>
-                  <Translate id="limitedFree" />
-                </Label>
-              )}
+              <LimitedFree article={article} />
             </section>
           ))}
 
@@ -125,11 +114,7 @@ const BaseArticleDigestFeed = ({
           </section>
 
           <section className="right">
-            {!hasCircle && isLimitedFree && (
-              <Label>
-                <Translate id="limitedFree" />
-              </Label>
-            )}
+            {!hasCircle && <LimitedFree article={article} />}
 
             {controls.inUserArticles && sticky && (
               <TextIcon icon={<IconPin24 />} size="sm" color="grey" weight="md">
