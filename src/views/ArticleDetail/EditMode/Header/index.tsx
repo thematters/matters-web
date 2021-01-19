@@ -18,6 +18,7 @@ import { measureDiffs, stripHtml } from '~/common/utils'
 import styles from './styles.css'
 
 import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
+import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
 import { Asset } from '~/components/GQL/fragments/__generated__/Asset'
 import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
 import { ArticleDetailPublic_article } from '../../__generated__/ArticleDetailPublic'
@@ -29,6 +30,7 @@ interface EditModeHeaderProps {
   cover?: Asset
   tags: DigestTag[]
   collection: ArticleDigestDropdownArticle[]
+  circle?: DigestRichCirclePublic | null
   count?: number
 
   isPending?: boolean
@@ -51,6 +53,7 @@ const EDIT_ARTICLE = gql`
     $cover: ID
     $tags: [String!]
     $collection: [ID!]
+    $circle: ID
     $after: String
     $first: Int = null
   ) {
@@ -61,6 +64,7 @@ const EDIT_ARTICLE = gql`
         cover: $cover
         tags: $tags
         collection: $collection
+        circle: $circle
       }
     ) {
       id
@@ -88,6 +92,8 @@ const EditModeHeader = ({
   cover,
   tags,
   collection,
+  circle,
+
   count = 3,
 
   isPending,
@@ -115,6 +121,7 @@ const EditModeHeader = ({
           cover: cover ? cover.id : null,
           tags: tags.map((tag) => tag.content),
           collection: collection.map(({ id: articleId }) => articleId),
+          ...(circle ? { circle: circle.id } : {}),
           ...(isRevised ? { content } : {}),
           first: null,
         },
