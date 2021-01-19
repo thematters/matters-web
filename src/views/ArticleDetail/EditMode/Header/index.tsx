@@ -13,7 +13,7 @@ import { useMutation } from '~/components/GQL'
 import articleFragments from '~/components/GQL/fragments/article'
 
 import { ADD_TOAST } from '~/common/enums'
-import { measureDiffs, stripHtml } from '~/common/utils'
+import { measureDiffs } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -26,8 +26,8 @@ import { EditArticle } from './__generated__/EditArticle'
 
 interface EditModeHeaderProps {
   article: ArticleDetailPublic_article
-  content: string | null
   cover?: Asset
+  editData: Record<string, any>
   tags: DigestTag[]
   collection: ArticleDigestDropdownArticle[]
   circle?: DigestRichCirclePublic | null
@@ -88,8 +88,8 @@ const EDIT_ARTICLE = gql`
 
 const EditModeHeader = ({
   article,
-  content,
   cover,
+  editData,
   tags,
   collection,
   circle,
@@ -103,8 +103,8 @@ const EditModeHeader = ({
 }: EditModeHeaderProps) => {
   const [editArticle, { loading }] = useMutation<EditArticle>(EDIT_ARTICLE)
 
-  const origin = stripHtml(article.content || '', '')
-  const diff = content ? measureDiffs(origin, stripHtml(content, '')) : 0
+  const { content, currText, initText } = editData
+  const diff = measureDiffs(initText || '', currText || '') || 0
   const diffCount = `${diff}`.padStart(2, '0')
 
   const isReachDiffLimit = diff > 50
