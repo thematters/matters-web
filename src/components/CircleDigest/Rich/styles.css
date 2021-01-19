@@ -4,13 +4,20 @@
 
 header {
   margin-left: var(--spacing-base);
+}
 
-  & h3 {
-    margin-bottom: var(--spacing-xx-tight);
-    font-size: var(--font-size-xm);
-    font-weight: var(--font-weight-medium);
-    line-height: 1.5rem;
-  }
+.title {
+  margin-bottom: var(--spacing-xx-tight);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.5rem;
+}
+
+.text-size-md-s {
+  font-size: var(--font-size-md-s);
+}
+
+.text-size-xm {
+  font-size: var(--font-size-xm);
 }
 
 .description {

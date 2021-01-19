@@ -4,11 +4,11 @@ import SetCoverDialog, { BaseSetCoverDialogProps } from '../../SetCoverDialog'
 import Box from '../Box'
 import styles from './styles.css'
 
-type AddTagsProps = {
+export type SidebarCoverProps = {
   disabled?: boolean
 } & BaseSetCoverDialogProps
 
-const AddTags = ({ cover, disabled, ...restProps }: AddTagsProps) => {
+const SidebarCover = ({ cover, disabled, ...restProps }: SidebarCoverProps) => {
   return (
     <SetCoverDialog cover={cover} {...restProps}>
       {({ open: openSetCoverDialog }) => (
@@ -33,4 +33,4 @@ const AddTags = ({ cover, disabled, ...restProps }: AddTagsProps) => {
   )
 }
 
-export default AddTags
+export default SidebarCover
