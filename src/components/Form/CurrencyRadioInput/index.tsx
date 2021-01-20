@@ -60,7 +60,7 @@ const CurrencyOption: React.FC<CurrencyOptionProps> = ({
     currency: true,
     [isLike ? 'like' : 'hkd']: true,
     inactive,
-    disabled,
+    'u-area-disable': disabled,
   })
 
   return (
