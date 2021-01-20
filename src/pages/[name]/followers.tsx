@@ -1,10 +1,30 @@
+import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
-import CircleFollowers from '~/views/Circle/Followers'
-import UserFollowers from '~/views/User/Followers'
 
-import { EmptyLayout, Throw404 } from '~/components'
+import { EmptyLayout, Spinner, Throw404 } from '~/components'
 
 import { getNameType } from '~/common/utils'
+
+const DynamicUserFollowers = dynamic(() => import('~/views/User/Followers'), {
+  ssr: true,
+  loading: () => (
+    <EmptyLayout>
+      <Spinner />
+    </EmptyLayout>
+  ),
+})
+
+const DynamicCircleFollowers = dynamic(
+  () => import('~/views/Circle/Followers'),
+  {
+    ssr: true,
+    loading: () => (
+      <EmptyLayout>
+        <Spinner />
+      </EmptyLayout>
+    ),
+  }
+)
 
 const Followers = () => {
   const router = useRouter()
@@ -12,10 +32,10 @@ const Followers = () => {
 
   switch (nameType) {
     case 'circle': {
-      return <CircleFollowers />
+      return <DynamicCircleFollowers />
     }
     case 'user': {
-      return <UserFollowers />
+      return <DynamicUserFollowers />
     }
     default: {
       return (
