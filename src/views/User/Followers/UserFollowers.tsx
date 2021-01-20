@@ -102,13 +102,35 @@ const UserFollowers = () => {
   /**
    * Render
    */
-
-  if (loading || !data || !user) {
-    return <Spinner />
+  if (loading) {
+    return (
+      <>
+        <FollowerTabs />
+        <Spinner />
+      </>
+    )
   }
 
   if (error) {
-    return <QueryError error={error} />
+    return (
+      <>
+        <FollowerTabs />
+        <QueryError error={error} />
+      </>
+    )
+  }
+
+  if (!user || user?.status?.state === 'archived') {
+    return (
+      <>
+        <FollowerTabs />
+        <EmptyWarning
+          description={
+            <Translate zh_hant="還沒有追蹤者" zh_hans="还没有追踪者" />
+          }
+        />
+      </>
+    )
   }
 
   const CustomHead = () => (

@@ -149,20 +149,33 @@ const UserArticles = () => {
    * Render
    */
   if (loading) {
-    return <Spinner />
+    return (
+      <>
+        <UserTabs />
+        <Spinner />
+      </>
+    )
   }
 
   if (error) {
-    return <QueryError error={error} />
+    return (
+      <>
+        <UserTabs />
+        <QueryError error={error} />
+      </>
+    )
   }
 
   if (!user || user?.status?.state === 'archived') {
-    return null
+    return (
+      <>
+        <UserTabs />
+        <EmptyArticle />
+      </>
+    )
   }
 
-  /**
-   * Customize title
-   */
+  // customize title
   const shareSource = getQuery({
     router,
     key: URL_QS.SHARE_SOURCE_ONBOARDING_TASKS.key,
@@ -175,10 +188,10 @@ const UserArticles = () => {
       title={{
         zh_hant: isShareOnboardingTasks
           ? `${user.displayName} 已解鎖新手獎賞，快點加入 Matters 獲得創作者獎勵吧`
-          : `${user.displayName}的創作空間站`,
+          : `${user.displayName} 的創作空間站`,
         zh_hans: isShareOnboardingTasks
           ? `${user.displayName} 已解锁新手奖赏，快点加入 Matters 获得创作者奖励吧`
-          : `${user.displayName}的创作空间站`,
+          : `${user.displayName} 的创作空间站`,
       }}
       noSuffix={isShareOnboardingTasks}
       description={user.info.description}
@@ -196,6 +209,7 @@ const UserArticles = () => {
     )
   }
 
+  const hasSubscriptions = user.subscribedCircles.totalCount > 0
   const articleEdges = edges.filter(
     ({ node }) => node.articleState === 'active' || viewer.id === node.author.id
   )
@@ -204,7 +218,7 @@ const UserArticles = () => {
     <>
       <CustomHead />
 
-      <UserTabs />
+      <UserTabs hasSubscriptions={hasSubscriptions} />
 
       <ArticleSummaryInfo user={user} />
 

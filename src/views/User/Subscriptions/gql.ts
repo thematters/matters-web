@@ -1,36 +1,32 @@
 import gql from 'graphql-tag'
 
-import { Tag } from '~/components'
+import { CircleDigest } from '~/components'
 
-export const USER_TAGS_PUBLIC = gql`
-  query UserTagsPublic($userName: String!, $after: String) {
+export const USER_SUBSCRIPTIONS = gql`
+  query UserSubscriptions($userName: String!, $after: String) {
     user(input: { userName: $userName }) {
       id
       displayName
       info {
-        description
         profileCover
+        description
       }
       status {
         state
       }
-      subscribedCircles(input: { first: 0 }) {
-        totalCount
-      }
-      tags(input: { first: 20, after: $after }) {
+      subscribedCircles(input: { first: 20, after: $after }) {
         pageInfo {
           startCursor
           endCursor
           hasNextPage
         }
         edges {
-          cursor
           node {
-            ...DigestTag
+            ...DigestMiniCircle
           }
         }
       }
     }
   }
-  ${Tag.fragments.tag}
+  ${CircleDigest.Mini.fragments.circle}
 `

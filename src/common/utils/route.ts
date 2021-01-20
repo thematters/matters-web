@@ -50,6 +50,10 @@ type ToPathArgs =
       userName: string
     }
   | {
+      page: 'userSubscriptons'
+      userName: string
+    }
+  | {
       page: 'userComments'
       userName: string
     }
@@ -128,6 +132,11 @@ export const toPath = (args: ToPathArgs): { href: string } => {
     case 'userProfile': {
       return {
         href: `/@${args.userName}`,
+      }
+    }
+    case 'userSubscriptons': {
+      return {
+        href: `/@${args.userName}/subscriptions`,
       }
     }
     case 'userComments': {

@@ -56,7 +56,12 @@ interface ClickButtonProp {
  * Event: Load More
  */
 interface LoadMoreProp {
-  type: ArticleFeedType | CommentFeedType | UserFeedType | TagFeedType
+  type:
+    | ArticleFeedType
+    | CommentFeedType
+    | UserFeedType
+    | TagFeedType
+    | CircleFeedType
   location: number
 }
 
@@ -170,6 +175,8 @@ type TagFeedType =
   | 'search_tag'
   | 'tags' // tag feed on home page
   | 'user_tag'
+
+type CircleFeedType = 'user_circle'
 
 // style type
 type StyleType =
