@@ -1,28 +1,30 @@
 .container {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
+  position: relative;
 
-.fader {
-  padding-top: var(--spacing-xx-loose);
-  background: linear-gradient(
-      rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 0.6) 40%,
-      rgba(255, 255, 255, 0.8) 70%,
-      rgba(255, 255, 255, 1) 100%
-    )
-    no-repeat;
+  &::before {
+    position: absolute;
+    right: 0;
+    bottom: 100%;
+    left: 0;
+    z-index: 2;
+    z-index: 1;
+    display: block;
+    height: 6.25rem;
+    margin-bottom: var(--spacing-xx-tight);
+    content: '';
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #fff 51.04%);
+  }
 }
 
 .message {
-  @mixin flex-center-all;
-
-  padding-top: var(--spacing-xxx-tight);
+  position: absolute;
+  right: 0;
+  bottom: 100%;
+  left: 0;
+  z-index: 2;
   padding-bottom: var(--spacing-base);
   color: var(--color-matters-gold);
-  background: var(--color-white);
+  text-align: center;
 }
 
 .circle {
