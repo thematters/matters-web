@@ -51,8 +51,8 @@ aside {
     &.in-editor {
       padding-top: var(--global-header-height);
 
-      & :global(> * + *) {
-        margin-top: var(--spacing-loose);
+      & :global(> *) {
+        margin-bottom: var(--spacing-loose);
       }
     }
   }
