@@ -11,6 +11,12 @@ export const USER_TAGS_PUBLIC = gql`
         description
         profileCover
       }
+      status {
+        state
+      }
+      subscribedCircles(input: { first: 0 }) {
+        totalCount
+      }
       tags(input: { first: 20, after: $after }) {
         pageInfo {
           startCursor

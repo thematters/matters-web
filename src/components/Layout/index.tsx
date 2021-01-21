@@ -7,6 +7,7 @@ import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
 import { PATHS } from '~/common/enums'
 
+import FixedMain from './FixedMain'
 import Header from './Header'
 import NavBar from './NavBar'
 import SideFooter from './SideFooter'
@@ -20,6 +21,7 @@ export const Layout: React.FC & {
   Main: typeof Main
   Header: typeof Header
   Spacing: typeof Spacing
+  FixedMain: typeof FixedMain
 } = ({ children }) => {
   const router = useRouter()
   const isInDraftDetail = router.pathname === PATHS.ME_DRAFT_DETAIL
@@ -119,3 +121,4 @@ const Main: React.FC<MainProps> = ({ aside, bgColor, inEditor, children }) => {
 Layout.Main = Main
 Layout.Header = Header
 Layout.Spacing = Spacing
+Layout.FixedMain = FixedMain

@@ -3,14 +3,12 @@
 @lost rounder 99.99999;
 
 .nav-bar {
-  position: fixed;
-  right: 0;
-  bottom: var(--global-nav-height);
-  left: 0;
-  z-index: var(--z-index-global-header);
+  & :global(.fixed-main) {
+    bottom: var(--global-nav-height);
 
-  @media (--sm-up) {
-    bottom: 0;
+    @media (--sm-up) {
+      bottom: 0;
+    }
   }
 }
 

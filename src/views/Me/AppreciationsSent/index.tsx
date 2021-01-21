@@ -43,7 +43,7 @@ const ME_APPRECIATIONS_SENT = gql`
   ${AppreciationTabs.fragments.userActivity}
 `
 
-const AppreciationsSent = () => {
+const BaseAppreciationsSent = () => {
   const { data, loading, fetchMore, refetch } = useQuery<MeAppreciationsSent>(
     ME_APPRECIATIONS_SENT
   )
@@ -107,7 +107,7 @@ const AppreciationsSent = () => {
   )
 }
 
-export default () => (
+const AppreciationsSent = () => (
   <Layout.Main>
     <Layout.Header
       left={<Layout.Header.BackButton />}
@@ -116,6 +116,8 @@ export default () => (
 
     <Head title={{ id: 'appreciationsSent' }} />
 
-    <AppreciationsSent />
+    <BaseAppreciationsSent />
   </Layout.Main>
 )
+
+export default AppreciationsSent

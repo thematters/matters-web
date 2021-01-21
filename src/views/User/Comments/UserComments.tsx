@@ -47,30 +47,46 @@ const UserComments = () => {
     variables: { userName },
   })
   const user = data?.user
+  const hasSubscriptions = (user?.subscribedCircles?.totalCount || 0) > 0
 
   if (loading) {
-    return <Spinner />
+    return (
+      <>
+        <UserTabs />
+        <Spinner />
+      </>
+    )
   }
 
   if (error) {
-    return <QueryError error={error} />
+    return (
+      <>
+        <UserTabs />
+        <QueryError error={error} />
+      </>
+    )
   }
 
   if (!user || user?.status?.state === 'archived') {
-    return null
+    return (
+      <>
+        <UserTabs />
+        <EmptyComment />
+      </>
+    )
   }
 
   return (
     <>
       <Head
         title={{
-          zh_hant: `${user.displayName}發布的評論`,
-          zh_hans: `${user.displayName}发布的评论`,
+          zh_hant: `${user.displayName} 發布的評論`,
+          zh_hans: `${user.displayName} 发布的评论`,
         }}
         description={user.info.description}
         image={user.info.profileCover || IMAGE_LOGO_192}
       />
-      <UserTabs />
+      <UserTabs hasSubscriptions={hasSubscriptions} />
       <BaseUserComments user={user} />
     </>
   )
@@ -164,10 +180,6 @@ const BaseUserComments = ({ user }: UserIdUser) => {
   /**
    * Render
    */
-  if (!user || !user.id) {
-    return null
-  }
-
   if (loading) {
     return <Spinner />
   }

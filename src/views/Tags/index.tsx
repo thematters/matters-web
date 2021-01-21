@@ -44,7 +44,7 @@ const ALL_TAGS = gql`
   ${CardTag.fragments.tag}
 `
 
-const Tags = () => {
+const BaseTags = () => {
   const {
     data,
     loading,
@@ -127,7 +127,7 @@ const Tags = () => {
   )
 }
 
-export default () => (
+const Tags = () => (
   <Layout.Main>
     <Head title={{ id: 'allTags' }} />
 
@@ -141,6 +141,8 @@ export default () => (
       }
     />
 
-    <Tags />
+    <BaseTags />
   </Layout.Main>
 )
+
+export default Tags

@@ -33,7 +33,12 @@ type ToPathArgs =
       fragment?: string
     }
   | {
-      page: 'circleDetail' | 'circleSettings' | 'circleEditProfile'
+      page:
+        | 'circleDetail'
+        | 'circleSettings'
+        | 'circleEditProfile'
+        | 'circleFollowers'
+        | 'circleMembers'
       circle: CircleArgs
     }
   | {
@@ -47,6 +52,10 @@ type ToPathArgs =
     }
   | {
       page: 'userProfile'
+      userName: string
+    }
+  | {
+      page: 'userSubscriptons'
       userName: string
     }
   | {
@@ -105,6 +114,16 @@ export const toPath = (args: ToPathArgs): { href: string } => {
         href: `/~${args.circle.name}/settings/edit-profile`,
       }
     }
+    case 'circleFollowers': {
+      return {
+        href: `/~${args.circle.name}/followers`,
+      }
+    }
+    case 'circleMembers': {
+      return {
+        href: `/~${args.circle.name}/members`,
+      }
+    }
     case 'commentDetail': {
       const { parentComment, id, article } = args.comment
       const fragment = parentComment?.id ? `${parentComment.id}-${id}` : id
@@ -128,6 +147,11 @@ export const toPath = (args: ToPathArgs): { href: string } => {
     case 'userProfile': {
       return {
         href: `/@${args.userName}`,
+      }
+    }
+    case 'userSubscriptons': {
+      return {
+        href: `/@${args.userName}/subscriptions`,
       }
     }
     case 'userComments': {

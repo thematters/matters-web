@@ -1,14 +1,13 @@
 .outer {
   @mixin all-transition;
 
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: var(--z-index-over-global-header);
   margin: 0;
   opacity: 0;
   transform: translateY(100%);
+
+  & :global(.fixed-main) {
+    bottom: 0;
+  }
 }
 
 .show {

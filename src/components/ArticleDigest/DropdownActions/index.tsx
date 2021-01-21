@@ -39,6 +39,10 @@ import { DropdownActionsArticle } from './__generated__/DropdownActionsArticle'
 export interface DropdownActionsControls {
   color?: IconColor
   size?: IconSize
+
+  // force to hide
+  hasFingerprint?: boolean
+
   inCard?: boolean
   inUserArticles?: boolean
   inTagDetailLatest?: boolean
@@ -183,6 +187,9 @@ const BaseDropdownActions = ({
 const DropdownActions = (props: DropdownActionsProps) => {
   const {
     article,
+
+    hasFingerprint = true,
+
     inCard,
     inUserArticles,
     inTagDetailLatest,
@@ -224,7 +231,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
     // public
     hasAppreciators: article.appreciationsReceived.totalCount > 0 && !inCard,
     hasDonators: article.donationsDialog.totalCount > 0 && !inCard,
-    hasFingerprint: (isActive || isArticleAuthor) && !inCard,
+    hasFingerprint: hasFingerprint && (isActive || isArticleAuthor) && !inCard,
     hasExtend: !!isActive && !inCard,
     // privates
     hasSticky: !!(

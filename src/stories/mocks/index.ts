@@ -88,7 +88,7 @@ export const MOCK_ARTILCE = {
   },
   subscribed: false,
   circle: MOCK_CIRCLE,
-  isLimitedFree: true,
+  limitedFree: true,
 }
 
 // Comment
