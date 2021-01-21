@@ -14,6 +14,9 @@ export const USER_ID = gql`
       status {
         state
       }
+      subscribedCircles(input: { first: 0 }) {
+        totalCount
+      }
     }
   }
 `

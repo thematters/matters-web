@@ -5,11 +5,19 @@ import { Tabs, Translate } from '~/components'
 import { PATHS } from '~/common/enums'
 import { getQuery, toPath } from '~/common/utils'
 
-const MeTabs = () => {
+type UserTabsProps = {
+  hasSubscriptions?: boolean
+}
+
+const UserTabs: React.FC<UserTabsProps> = ({ hasSubscriptions }) => {
   const router = useRouter()
   const userName = getQuery({ router, key: 'name' }) || ''
 
-  const userArticlePath = toPath({
+  const userSubscriptonsPath = toPath({
+    page: 'userSubscriptons',
+    userName,
+  })
+  const userArticlesPath = toPath({
     page: 'userProfile',
     userName,
   })
@@ -24,8 +32,17 @@ const MeTabs = () => {
 
   return (
     <Tabs sticky>
+      {hasSubscriptions && (
+        <Tabs.Tab
+          {...userSubscriptonsPath}
+          selected={router.pathname === PATHS.USER_SUBSCRIPTIONS}
+        >
+          <Translate id="subscriptions" />
+        </Tabs.Tab>
+      )}
+
       <Tabs.Tab
-        {...userArticlePath}
+        {...userArticlesPath}
         selected={router.pathname === PATHS.USER_ARTICLES}
       >
         <Translate id="article" />
@@ -48,4 +65,4 @@ const MeTabs = () => {
   )
 }
 
-export default MeTabs
+export default UserTabs
