@@ -156,7 +156,7 @@
     "prettier": "^2.2.1",
     "react-is": "^17.0.1",
     "styled-jsx-plugin-postcss": "^3.0.2",
-    "stylelint": "^13.8.0",
+    "stylelint": "^13.9.0",
     "stylelint-config-prettier": "^8.0.2",
     "stylelint-config-recess-order": "^2.3.0",
     "stylelint-config-standard": "^20.0.0",
