@@ -1,6 +1,4 @@
-import { useState } from 'react'
-
-import { Dialog } from '~/components'
+import { Dialog, useDialogSwitch } from '~/components'
 
 import Content, { TagDialogContentProps } from './Content'
 
@@ -15,15 +13,13 @@ const BaseTagDialog = ({
   content,
   ...restProps
 }: BaseTagDialogProps) => {
-  const [showDialog, setShowDialog] = useState(true)
-  const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
+  const { show, open, close } = useDialogSwitch(true)
 
   return (
     <>
       {children({ open })}
 
-      <Dialog isOpen={showDialog} onDismiss={close} fixedHeight>
+      <Dialog isOpen={show} onDismiss={close} fixedHeight>
         <Content closeDialog={close} content={content} {...restProps} />
       </Dialog>
     </>

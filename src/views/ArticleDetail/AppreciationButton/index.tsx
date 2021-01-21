@@ -182,7 +182,7 @@ const AppreciationButton = ({
         content={
           <Translate zh_hant="去讚賞其他用戶吧" zh_hans="去赞赏其他用户吧" />
         }
-        zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
+        zIndex={Z_INDEX.OVER_BOTTOM_BAR}
       >
         <span>
           <AppreciateButton disabled total={total} />
@@ -271,7 +271,7 @@ const AppreciationButton = ({
       content={
         <Translate zh_hant="你還沒有讚賞權限" zh_hans="你还没有赞赏权限" />
       }
-      zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
+      zIndex={Z_INDEX.OVER_BOTTOM_BAR}
     >
       <span>
         <AppreciateButton

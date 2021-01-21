@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router'
-import { useState } from 'react'
 
-import { Dialog, Translate } from '~/components'
+import { Dialog, Translate, useDialogSwitch } from '~/components'
 import { useMutation } from '~/components/GQL'
 import UPDATE_TAG_SETTING from '~/components/GQL/mutations/updateTagSetting'
 
@@ -16,9 +15,7 @@ interface Props {
 }
 
 const BaseDialog = ({ children, isOwner }: Props) => {
-  const [showDialog, setShowDialog] = useState(true)
-  const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
+  const { show, open, close } = useDialogSwitch(true)
 
   const router = useRouter()
   const id = getQuery({ router, key: 'tagId' })
@@ -30,7 +27,7 @@ const BaseDialog = ({ children, isOwner }: Props) => {
     <>
       {children({ open })}
 
-      <Dialog size="sm" isOpen={showDialog} onDismiss={close}>
+      <Dialog size="sm" isOpen={show} onDismiss={close}>
         <Dialog.Header
           title={<Translate zh_hant="辭去權限" zh_hans="辞去权限" />}
           close={close}

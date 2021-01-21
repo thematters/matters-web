@@ -1,7 +1,6 @@
 import gql from 'graphql-tag'
-import { useState } from 'react'
 
-import { Dialog } from '~/components'
+import { Dialog, useDialogSwitch } from '~/components'
 
 import Content from './Content'
 
@@ -25,15 +24,13 @@ const BaseFingerprintDialog = ({
   article,
   children,
 }: FingerprintDialogProps) => {
-  const [showDialog, setShowDialog] = useState(true)
-  const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
+  const { show, open, close } = useDialogSwitch(true)
 
   return (
     <>
       {children({ open })}
 
-      <Dialog isOpen={showDialog} onDismiss={close} fixedHeight>
+      <Dialog isOpen={show} onDismiss={close} fixedHeight>
         <Dialog.Header title="IPFSEntrance" close={close} closeTextId="close" />
 
         <Dialog.Content hasGrow>

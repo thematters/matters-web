@@ -9,6 +9,7 @@ import {
 } from '~/components'
 
 import { fragments } from './gql'
+import IntroDialog from './IntroDialog'
 import styles from './styles.css'
 
 import { SubscriptionBannerCirclePrivate } from './__generated__/SubscriptionBannerCirclePrivate'
@@ -32,20 +33,27 @@ const SubscriptionBanner = ({ circle }: SubscriptionBannerProps) => {
   return (
     <section className="subscription-banner">
       <Layout.FixedMain>
-        <Card bgColor="none" spacing={[0, 0]}>
-          <section className="content">
-            <section className="inner">
-              <p>
-                {price.amount} {price.currency} / <Translate id="month" />
-                <Translate zh_hant="，立即訂閱圍爐" zh_hans="，立即订阅围炉" />
-              </p>
+        <IntroDialog circle={circle} onConfirm={() => alert('CONFIRM')}>
+          {({ open: openIntroDialog }) => (
+            <Card bgColor="none" spacing={[0, 0]} onClick={openIntroDialog}>
+              <section className="content">
+                <section className="inner">
+                  <p>
+                    {price.amount} {price.currency} / <Translate id="month" />
+                    <Translate
+                      zh_hant="，立即訂閱圍爐"
+                      zh_hans="，立即订阅围炉"
+                    />
+                  </p>
 
-              <section className="right">
-                <IconArrowRight16 color="white" />
+                  <section className="right">
+                    <IconArrowRight16 color="white" />
+                  </section>
+                </section>
               </section>
-            </section>
-          </section>
-        </Card>
+            </Card>
+          )}
+        </IntroDialog>
       </Layout.FixedMain>
 
       <style jsx>{styles}</style>
