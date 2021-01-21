@@ -8,6 +8,7 @@ import FooterActions from '../FooterActions'
 import { ArticleDigestTitle } from '../Title'
 import CreatedAt from './CreatedAt'
 import InactiveState from './InactiveState'
+import LimitedFree from './LimitedFree'
 
 export const fragments = {
   article: {
@@ -31,6 +32,7 @@ export const fragments = {
           ...DigestPlainCircle
         }
         ...CreatedAtArticle
+        ...LimitedFreeArticle
         ...InactiveStateArticle
         ...ArticleDigestTitleArticle
         ...DropdownActionsArticle
@@ -38,6 +40,7 @@ export const fragments = {
       }
       ${UserDigest.Mini.fragments.user}
       ${CreatedAt.fragments.article}
+      ${LimitedFree.fragments.article}
       ${InactiveState.fragments.article}
       ${ArticleDigestTitle.fragments.article}
       ${DropdownActions.fragments.article}

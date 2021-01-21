@@ -103,6 +103,11 @@ const ArticleDetail = () => {
   const collectionCount = article?.collection?.totalCount || 0
   const isAuthor = viewer.id === authorId
   const circle = article?.circle
+  const canReadFullContent = !!(
+    isAuthor ||
+    circle?.isMember ||
+    article?.limitedFree
+  )
 
   // fetch private data
   const [privateFetched, setPrivateFetched] = useState(false)
@@ -116,7 +121,7 @@ const ArticleDetail = () => {
       fetchPolicy: 'network-only',
       variables: {
         mediaHash: article?.mediaHash,
-        includeContent: article.state !== 'active' && isAuthor,
+        includeContent: canReadFullContent,
         includeCanSuperLike: viewer.isCivicLiker,
       },
     })
@@ -349,16 +354,18 @@ const ArticleDetail = () => {
                   )}
                 </section>
 
-                <section className="features">
-                  <FingerprintButton article={article} />
+                {canReadFullContent && (
+                  <section className="features">
+                    <FingerprintButton article={article} />
 
-                  {shouldTranslate && (
-                    <TranslationButton
-                      translate={translate}
-                      setTranslate={onTranslate}
-                    />
-                  )}
-                </section>
+                    {shouldTranslate && (
+                      <TranslationButton
+                        translate={translate}
+                        setTranslate={onTranslate}
+                      />
+                    )}
+                  </section>
+                )}
               </section>
 
               <section className="right" />
@@ -371,10 +378,12 @@ const ArticleDetail = () => {
               translation={translate ? contentTranslation : null}
               translating={translating}
             />
-            {circle && <CircleWall circle={circle} />}
+            {circle && !canReadFullContent && <CircleWall circle={circle} />}
           </section>
 
-          {features.payment && <SupportWidget article={article} />}
+          {features.payment && canReadFullContent && (
+            <SupportWidget article={article} />
+          )}
 
           {collectionCount > 0 && (
             <section className="block">
@@ -389,7 +398,11 @@ const ArticleDetail = () => {
           {!isLargeUp && <RelatedArticles article={article} />}
         </section>
 
-        <Toolbar article={article} privateFetched={privateFetched} />
+        <Toolbar
+          article={article}
+          privateFetched={privateFetched}
+          hasFingerprint={canReadFullContent}
+        />
 
         {shouldShowWall && (
           <>
