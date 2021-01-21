@@ -24,6 +24,7 @@ import DropdownActions from './DropdownActions'
 import { CIRCLE_DETAIL_PRIVATE, CIRCLE_DETAIL_PUBLIC } from './gql'
 import CircleProfile from './Profile'
 import styles from './styles.css'
+import SubscriptionBanner from './SubscriptionBanner'
 import Works from './Works'
 
 import {
@@ -86,6 +87,8 @@ const CircleDetail = ({ circle }: { circle: CircleDetailPublic_circle }) => {
           {isWorks && <Works name={circle.name} />}
           {isDiscussion && <span>Discussion</span>}
           {isBoardcast && <span>Boardcast</span>}
+
+          <SubscriptionBanner circle={circle} />
 
           <style jsx>{styles}</style>
         </section>

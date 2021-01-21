@@ -2,7 +2,6 @@
   position: fixed;
   right: 0;
   left: 0;
-  z-index: var(--z-index-global-header);
   pointer-events: none;
 }
 

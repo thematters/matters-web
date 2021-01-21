@@ -1,0 +1,29 @@
+.subscription-banner {
+  & :global(.fixed-main) {
+    bottom: var(--global-nav-height);
+    z-index: var(--z-index-bottom-bar);
+
+    @media (--sm-up) {
+      bottom: 0;
+    }
+  }
+}
+
+.content {
+  @mixin safe-area-botttom;
+
+  background: var(--color-matters-gold);
+
+  @media (--sm-up) {
+    margin: var(--spacing-loose) var(--spacing-base);
+    border-radius: var(--spacing-base);
+  }
+}
+
+.inner {
+  @mixin flex-center-space-between;
+
+  padding: var(--spacing-base);
+  font-size: var(--font-size-md);
+  color: var(--color-white);
+}
