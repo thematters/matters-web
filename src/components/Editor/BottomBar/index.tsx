@@ -4,6 +4,7 @@ import {
   IconCollection24,
   IconHashTag24,
   IconImage24,
+  Layout,
   TextIcon,
   Translate,
 } from '~/components'
@@ -64,87 +65,84 @@ const BottomBar: React.FC<BottomBarProps> = ({
 
   return (
     <section className={bottomBarClasses}>
-      <div className="l-row full">
-        <div className="l-col-three-left" />
-        <div className="l-col-three-right">
-          <section className="content">
-            <section className="inner">
-              <SetCoverDialog cover={cover} onEdit={editCover} {...restProps}>
-                {({ open: openSetCoverDialog }) => (
-                  <button type="button" onClick={openSetCoverDialog}>
-                    <TextIcon
-                      icon={<IconImage24 size="md" />}
-                      size="xm"
-                      weight="md"
-                      spacing="xtight"
-                    >
-                      <Translate id="cover" />
-                    </TextIcon>
-                  </button>
-                )}
-              </SetCoverDialog>
-
-              <SearchSelectDialog
-                title="addTag"
-                hint="hintAddTag"
-                searchType="Tag"
-                onSave={(nodes: SearchSelectNode[]) =>
-                  editTags(nodes as DigestTag[])
-                }
-                nodes={tags}
-                saving={saving}
-                creatable
-              >
-                {({ open: openAddMyArticlesDialog }) => (
-                  <button type="button" onClick={openAddMyArticlesDialog}>
-                    <TextIcon
-                      icon={<IconHashTag24 size="md" />}
-                      size="xm"
-                      weight="md"
-                      spacing="xtight"
-                    >
-                      <Translate id="tag" />
-                    </TextIcon>
-                  </button>
-                )}
-              </SearchSelectDialog>
-
-              <SearchSelectDialog
-                title="extendArticle"
-                hint="hintEditCollection"
-                searchType="Article"
-                onSave={(nodes: SearchSelectNode[]) =>
-                  editCollection(nodes as ArticleDigestDropdownArticle[])
-                }
-                nodes={collection}
-                saving={saving}
-              >
-                {({ open: openAddMyArticlesDialog }) => (
-                  <button type="button" onClick={openAddMyArticlesDialog}>
-                    <TextIcon
-                      icon={<IconCollection24 size="md" />}
-                      size="xm"
-                      weight="md"
-                      spacing="xtight"
-                    >
-                      <Translate id="extend" />
-                    </TextIcon>
-                  </button>
-                )}
-              </SearchSelectDialog>
-
-              {toggleCircle && (
-                <MoreActions
-                  circle={circle}
-                  onEdit={toggleCircle}
-                  disabled={!canToggleCircle}
-                  saving={saving}
-                />
+      <Layout.FixedMain>
+        <section className="content">
+          <section className="inner">
+            <SetCoverDialog cover={cover} onEdit={editCover} {...restProps}>
+              {({ open: openSetCoverDialog }) => (
+                <button type="button" onClick={openSetCoverDialog}>
+                  <TextIcon
+                    icon={<IconImage24 size="md" />}
+                    size="xm"
+                    weight="md"
+                    spacing="xtight"
+                  >
+                    <Translate id="cover" />
+                  </TextIcon>
+                </button>
               )}
-            </section>
+            </SetCoverDialog>
+
+            <SearchSelectDialog
+              title="addTag"
+              hint="hintAddTag"
+              searchType="Tag"
+              onSave={(nodes: SearchSelectNode[]) =>
+                editTags(nodes as DigestTag[])
+              }
+              nodes={tags}
+              saving={saving}
+              creatable
+            >
+              {({ open: openAddMyArticlesDialog }) => (
+                <button type="button" onClick={openAddMyArticlesDialog}>
+                  <TextIcon
+                    icon={<IconHashTag24 size="md" />}
+                    size="xm"
+                    weight="md"
+                    spacing="xtight"
+                  >
+                    <Translate id="tag" />
+                  </TextIcon>
+                </button>
+              )}
+            </SearchSelectDialog>
+
+            <SearchSelectDialog
+              title="extendArticle"
+              hint="hintEditCollection"
+              searchType="Article"
+              onSave={(nodes: SearchSelectNode[]) =>
+                editCollection(nodes as ArticleDigestDropdownArticle[])
+              }
+              nodes={collection}
+              saving={saving}
+            >
+              {({ open: openAddMyArticlesDialog }) => (
+                <button type="button" onClick={openAddMyArticlesDialog}>
+                  <TextIcon
+                    icon={<IconCollection24 size="md" />}
+                    size="xm"
+                    weight="md"
+                    spacing="xtight"
+                  >
+                    <Translate id="extend" />
+                  </TextIcon>
+                </button>
+              )}
+            </SearchSelectDialog>
+
+            {toggleCircle && (
+              <MoreActions
+                circle={circle}
+                onEdit={toggleCircle}
+                disabled={!canToggleCircle}
+                saving={saving}
+              />
+            )}
           </section>
-        </div>
-      </div>
+        </section>
+      </Layout.FixedMain>
 
       <style jsx>{styles}</style>
     </section>

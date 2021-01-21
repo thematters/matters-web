@@ -1,10 +1,12 @@
 import { Layout, UserProfile } from '~/components'
 
-import UserFollowees from './UserFollowees'
+import BaseUserFollowees from './UserFollowees'
 
-export default () => (
+const UserFollowees = () => (
   <Layout.Main>
     <UserProfile />
-    <UserFollowees />
+    <BaseUserFollowees />
   </Layout.Main>
 )
+
+export default UserFollowees

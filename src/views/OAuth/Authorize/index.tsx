@@ -38,7 +38,7 @@ const OAUTH_CLIENT_INFO = gql`
   }
 `
 
-const OAuthAuthorize = () => {
+const BaseOAuthAuthorize = () => {
   const router = useRouter()
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
@@ -171,12 +171,14 @@ const OAuthAuthorize = () => {
   )
 }
 
-export default () => (
+const OAuthAuthorize = () => (
   <Layout.Main>
     <Layout.Header left={<Layout.Header.Title id="oauthAuthorize" />} />
 
     <Layout.Spacing>
-      <OAuthAuthorize />
+      <BaseOAuthAuthorize />
     </Layout.Spacing>
   </Layout.Main>
 )
+
+export default OAuthAuthorize

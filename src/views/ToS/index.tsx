@@ -1,6 +1,6 @@
 import { Head, Layout, Term } from '~/components'
 
-export default () => (
+const ToS = () => (
   <Layout.Main>
     <Layout.Header
       left={<Layout.Header.BackButton />}
@@ -14,3 +14,5 @@ export default () => (
     </Layout.Spacing>
   </Layout.Main>
 )
+
+export default ToS
