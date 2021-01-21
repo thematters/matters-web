@@ -101,8 +101,10 @@ const Feed = () => {
   )
 }
 
-export default () => (
+const Recommendation = () => (
   <Layout.Main>
     <Feed />
   </Layout.Main>
 )
+
+export default Recommendation

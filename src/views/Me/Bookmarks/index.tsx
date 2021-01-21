@@ -40,7 +40,7 @@ const ME_BOOKMARK_FEED = gql`
   ${ArticleDigestFeed.fragments.article.private}
 `
 
-const MeBookmarks = () => {
+const BaseMeBookmarks = () => {
   const { data, loading, error, fetchMore, refetch } = useQuery<MeBookmarkFeed>(
     ME_BOOKMARK_FEED
   )
@@ -90,7 +90,7 @@ const MeBookmarks = () => {
   )
 }
 
-export default () => (
+const MeBookmarks = () => (
   <Layout.Main>
     <Layout.Header
       left={<Layout.Header.BackButton />}
@@ -99,6 +99,8 @@ export default () => (
 
     <Head title={{ id: 'myBookmarks' }} />
 
-    <MeBookmarks />
+    <BaseMeBookmarks />
   </Layout.Main>
 )
+
+export default MeBookmarks

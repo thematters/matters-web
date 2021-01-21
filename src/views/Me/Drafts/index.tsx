@@ -39,7 +39,7 @@ const ME_DRAFTS_FEED = gql`
   ${DraftDigest.Feed.fragments.draft}
 `
 
-const MeDrafts = () => {
+const BaseMeDrafts = () => {
   const { data, loading, error, fetchMore, refetch } = useQuery<MeDraftFeed>(
     ME_DRAFTS_FEED
   )
@@ -89,7 +89,7 @@ const MeDrafts = () => {
   )
 }
 
-export default () => (
+const MeDrafts = () => (
   <Layout.Main>
     <Layout.Header
       left={<Layout.Header.BackButton />}
@@ -98,6 +98,8 @@ export default () => (
 
     <Head title={{ id: 'myDrafts' }} />
 
-    <MeDrafts />
+    <BaseMeDrafts />
   </Layout.Main>
 )
+
+export default MeDrafts

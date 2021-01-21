@@ -2,8 +2,10 @@ import CreateCircle from '~/views/CreateCircle'
 
 import { Protected } from '~/components'
 
-export default () => (
+const ProtectedCreateCircle = () => (
   <Protected>
     <CreateCircle />
   </Protected>
 )
+
+export default ProtectedCreateCircle

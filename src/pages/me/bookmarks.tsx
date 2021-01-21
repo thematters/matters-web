@@ -2,8 +2,10 @@ import MeBookmarks from '~/views/Me/Bookmarks'
 
 import { Protected } from '~/components'
 
-export default () => (
+const ProtectedMeBookMarks = () => (
   <Protected>
     <MeBookmarks />
   </Protected>
 )
+
+export default ProtectedMeBookMarks

@@ -1,10 +1,12 @@
 import { Layout, UserProfile } from '~/components'
 
-import UserArticles from './UserArticles'
+import BaseUserArticles from './UserArticles'
 
-export default () => (
+const UserArticles = () => (
   <Layout.Main>
     <UserProfile />
-    <UserArticles />
+    <BaseUserArticles />
   </Layout.Main>
 )
+
+export default UserArticles

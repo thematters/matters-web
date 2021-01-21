@@ -1,10 +1,8 @@
-import classNames from 'classnames'
-import { useRouter } from 'next/router'
 import { useState } from 'react'
 
-import { useEventListener } from '~/components'
+import { Layout, useEventListener } from '~/components'
 
-import { ADD_TOAST, PATHS, REMOVE_TOAST } from '~/common/enums'
+import { ADD_TOAST, REMOVE_TOAST } from '~/common/enums'
 
 import { ToastWithEffect } from '../Instance'
 import styles from './styles.css'
@@ -24,8 +22,6 @@ const prefix = 'toast-'
 
 const Container = () => {
   const [toasts, setToasts] = useState<any[]>([])
-  const router = useRouter()
-  const isMiscPage = router.pathname === PATHS.MIGRATION
 
   const add = (payload: { [key: string]: any }) => {
     if (!payload || Object.keys(payload).length === 0) {
@@ -44,32 +40,16 @@ const Container = () => {
   useEventListener(ADD_TOAST, add)
   useEventListener(REMOVE_TOAST, remove)
 
-  const instanceClasses = isMiscPage
-    ? classNames(
-        'l-col-4',
-        'l-col-sm-6',
-        'l-offset-sm-1',
-        'l-col-md-5',
-        'l-offset-md-2',
-        'l-col-lg-6',
-        'l-offset-lg-3'
-      )
-    : classNames('l-col-three-mid')
-
   return (
-    <>
-      <section className="toast-container">
-        <div className="l-row full">
-          <div className={isMiscPage ? '' : 'l-col-three-left'} />
-          <div className={instanceClasses}>
-            {toasts.map((toast) => (
-              <ToastWithEffect key={toast.id} {...toast} />
-            ))}
-          </div>
-        </div>
-      </section>
+    <section className="toast-container">
+      <Layout.FixedMain>
+        {toasts.map((toast) => (
+          <ToastWithEffect key={toast.id} {...toast} />
+        ))}
+      </Layout.FixedMain>
+
       <style jsx>{styles}</style>
-    </>
+    </section>
   )
 }
 

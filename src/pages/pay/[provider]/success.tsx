@@ -1,3 +1,3 @@
 import PayCallbackSuccess from '~/views/Pay/Callback/Success'
 
-export default () => <PayCallbackSuccess />
+export default PayCallbackSuccess
