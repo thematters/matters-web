@@ -41,7 +41,7 @@ const Follow = ({ circle }: FollowProps) => {
       textActiveColor="white"
       bgActiveColor="green"
       borderColor="green"
-      onClick={follow}
+      onClick={() => follow()}
     >
       <TextIcon weight="md" size="md-s">
         <Translate id="follow" />

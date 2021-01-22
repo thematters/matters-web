@@ -57,7 +57,7 @@ const Follow = ({ user, size }: FollowProps) => {
       textActiveColor="white"
       bgActiveColor="green"
       borderColor="green"
-      onClick={follow}
+      onClick={() => follow()}
     >
       <TextIcon weight="md" size={size === 'lg' ? 'sm' : 'xs'}>
         <Translate id="follow" />

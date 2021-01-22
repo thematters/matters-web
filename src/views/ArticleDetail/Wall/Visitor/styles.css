@@ -1,19 +1,21 @@
 .outer {
-  @mixin all-transition;
-
   margin: 0;
-  opacity: 0;
-  transform: translateY(100%);
 
   & :global(.fixed-main) {
+    @mixin all-transition;
+
     bottom: 0;
     z-index: var(--z-index-bottom-bar);
+    opacity: 0;
+    transform: translateY(100%);
   }
-}
 
-.show {
-  opacity: 1;
-  transform: translateY(0%);
+  &.show {
+    & :global(.fixed-main) {
+      opacity: 1;
+      transform: translateY(0%);
+    }
+  }
 }
 
 .container {

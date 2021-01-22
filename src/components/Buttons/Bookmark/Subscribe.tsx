@@ -75,7 +75,7 @@ const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
           color: 'green',
           content: <Translate id="pushDescription" />,
           customButton: (
-            <Button onClick={subscribePush}>
+            <Button onClick={() => subscribePush()}>
               <Translate id="confirmPush" />
             </Button>
           ),

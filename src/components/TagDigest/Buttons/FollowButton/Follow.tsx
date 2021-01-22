@@ -37,7 +37,7 @@ const Follow = ({ tag }: Props) => {
       textActiveColor="white"
       bgActiveColor="green"
       borderColor="green"
-      onClick={follow}
+      onClick={() => follow()}
     >
       <TextIcon weight="md" size="xs">
         <Translate id="follow" />

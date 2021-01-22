@@ -22,7 +22,6 @@ const Buttons = () => (
           spacing={['xtight', 'xtight']}
           bgActiveColor="grey-lighter-active"
           aria-haspopup="true"
-          onClick={open}
         >
           <IconMore16 color="grey" />
         </Button>

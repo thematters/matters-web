@@ -1,5 +1,7 @@
 import gql from 'graphql-tag'
 
+import { SubscribeCircleDialog } from '~/components'
+
 export const fragments = {
   circle: {
     public: gql`
@@ -9,7 +11,9 @@ export const fragments = {
           amount
           currency
         }
+        ...SubscribeCircle
       }
+      ${SubscribeCircleDialog.fragments.circle}
     `,
     private: gql`
       fragment SubscriptionBannerCirclePrivate on Circle {

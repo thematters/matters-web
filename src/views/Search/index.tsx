@@ -67,10 +67,9 @@ const Search = () => {
             <SearchBar hasDropdown={false} onChange={setTypingKey} />
 
             {showCancelButton && (
-              <Layout.Header.CancelButton
-                onClick={onCancel}
-                style={{ marginLeft: '1rem' }}
-              />
+              <span style={{ marginLeft: '1rem' }}>
+                <Layout.Header.CancelButton onClick={onCancel} />
+              </span>
             )}
           </>
         }

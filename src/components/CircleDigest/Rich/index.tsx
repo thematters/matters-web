@@ -92,6 +92,7 @@ const Rich = ({
                 nameColor="grey-darker"
                 hasAvatar
                 hasDisplayName
+                disabled={disabled}
               />
             )}
           </header>

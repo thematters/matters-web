@@ -25,8 +25,10 @@ type EventArgs =
   | ['load_more', LoadMoreProp]
   | ['share', ShareProp]
   | ['purchase', PurchaseProp]
+  | ['subscribe', SubscribeProps]
   | ['view_add_credit_dialog', ViewDialogProp]
   | ['view_donation_dialog', ViewDialogProp]
+  | ['view_subscribe_circle_dialog', ViewDialogProp]
 
 /**
  * Event: Page View
@@ -87,6 +89,15 @@ interface ShareProp {
  */
 interface PurchaseProp {
   amount: number | undefined
+  success: boolean
+  message?: string
+}
+
+/**
+ * Event: Subscribe
+ */
+interface SubscribeProps {
+  id: string | undefined
   success: boolean
   message?: string
 }

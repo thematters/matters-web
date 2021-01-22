@@ -4,9 +4,14 @@ import {
   Card,
   IconArrowRight16,
   Layout,
+  LoginButton,
+  SubscribeCircleDialog,
   Translate,
   ViewerContext,
 } from '~/components'
+
+import { ADD_TOAST } from '~/common/enums'
+import { analytics } from '~/common/utils'
 
 import { fragments } from './gql'
 import IntroDialog from './IntroDialog'
@@ -30,28 +35,64 @@ const SubscriptionBanner = ({ circle }: SubscriptionBannerProps) => {
     return null
   }
 
+  const showLoginToast = () => {
+    window.dispatchEvent(
+      new CustomEvent(ADD_TOAST, {
+        detail: {
+          color: 'green',
+          content: (
+            <Translate
+              zh_hant="請登入／註冊訂閱圍爐"
+              zh_hans="请登入／注册订阅围炉"
+            />
+          ),
+          customButton: <LoginButton isPlain />,
+          buttonPlacement: 'center',
+        },
+      })
+    )
+  }
+
   return (
     <section className="subscription-banner">
       <Layout.FixedMain>
-        <IntroDialog circle={circle} onConfirm={() => alert('CONFIRM')}>
-          {({ open: openIntroDialog }) => (
-            <Card bgColor="none" spacing={[0, 0]} onClick={openIntroDialog}>
-              <section className="content">
-                <section className="inner">
-                  <p>
-                    {price.amount} {price.currency} / <Translate id="month" />
-                    <Translate
-                      zh_hant="，立即訂閱圍爐"
-                      zh_hans="，立即订阅围炉"
-                    />
-                  </p>
+        <SubscribeCircleDialog circle={circle}>
+          {({ open: openSubscribeCircleDialog }) => (
+            <IntroDialog circle={circle} onConfirm={openSubscribeCircleDialog}>
+              {({ open: openIntroDialog }) => (
+                <Card
+                  bgColor="none"
+                  spacing={[0, 0]}
+                  onClick={() => {
+                    analytics.trackEvent('click_button', { type: 'donate' })
 
-                  <IconArrowRight16 color="white" />
-                </section>
-              </section>
-            </Card>
+                    if (!viewer.isAuthed) {
+                      showLoginToast()
+                      return
+                    }
+
+                    openIntroDialog()
+                  }}
+                >
+                  <section className="content">
+                    <section className="inner">
+                      <p>
+                        {price.amount} {price.currency} /{' '}
+                        <Translate id="month" />
+                        <Translate
+                          zh_hant="，立即訂閱圍爐"
+                          zh_hans="，立即订阅围炉"
+                        />
+                      </p>
+
+                      <IconArrowRight16 color="white" />
+                    </section>
+                  </section>
+                </Card>
+              )}
+            </IntroDialog>
           )}
-        </IntroDialog>
+        </SubscribeCircleDialog>
       </Layout.FixedMain>
 
       <style jsx>{styles}</style>

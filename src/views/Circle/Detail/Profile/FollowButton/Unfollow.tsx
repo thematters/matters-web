@@ -42,7 +42,7 @@ const Unfollow = ({ circle }: UnfollowCircleProps) => {
       textColor="white"
       bgColor="green"
       bgActiveColor="red"
-      onClick={unfollow}
+      onClick={() => unfollow()}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >

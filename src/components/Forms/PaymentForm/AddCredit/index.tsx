@@ -165,7 +165,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
             ? undefined
             : _get(STRIPE_ERROR_MESSAGES[lang], result.error.code || '')
 
-        setFieldError('checkout', msg || result.error.message)
+        setCheckoutError(msg || result.error.message)
 
         analytics.trackEvent('purchase', {
           amount,
@@ -272,7 +272,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
         <Dialog.Footer.Button
           type="submit"
           form={formId}
-          disabled={!isValid || isSubmitting || checkoutError}
+          disabled={!isValid || isSubmitting || !!checkoutError}
           loading={isSubmitting}
         >
           <Translate zh_hant="確認儲值" zh_hans="确认储值" />

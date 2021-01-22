@@ -283,7 +283,7 @@ const LatestResponses = () => {
       </List>
 
       {pageInfo && pageInfo.hasNextPage && (
-        <ViewMoreButton onClick={loadMore} loading={loading} />
+        <ViewMoreButton onClick={() => loadMore()} loading={loading} />
       )}
 
       <style jsx>{styles}</style>

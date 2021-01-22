@@ -106,7 +106,8 @@ const ArticleDetail = () => {
   const circle = article?.circle
   const canReadFullContent = !!(
     isAuthor ||
-    circle?.isMember ||
+    !circle ||
+    circle.isMember ||
     article?.limitedFree
   )
 

@@ -126,7 +126,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
               <Translate id="pushDescription" />
             ),
             customButton: !skipPushButton && (
-              <Button onClick={subscribePush}>
+              <Button onClick={() => subscribePush()}>
                 <Translate id="confirmPush" />
               </Button>
             ),
