@@ -1,5 +1,4 @@
 import { Formik } from 'formik'
-import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
 import { useDebounce } from 'use-debounce'
 
@@ -10,10 +9,11 @@ import {
   LanguageContext,
   SearchAutoComplete,
   SearchOverview,
+  useRoute,
 } from '~/components'
 
 import { INPUT_DEBOUNCE, TEXT, Z_INDEX } from '~/common/enums'
-import { getQuery, routerPush, toPath, translate } from '~/common/utils'
+import { routerPush, toPath, translate } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -36,8 +36,8 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   onChange,
   hasDropdown = true,
 }) => {
-  const router = useRouter()
-  const q = getQuery({ router, key: 'q' }) || ''
+  const { getQuery } = useRoute()
+  const q = getQuery('q')
   const { lang } = useContext(LanguageContext)
   const [search, setSearch] = useState('')
   const [debouncedSearch] = useDebounce(search, INPUT_DEBOUNCE)

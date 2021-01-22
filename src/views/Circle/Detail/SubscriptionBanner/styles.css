@@ -11,8 +11,14 @@
 
 .content {
   @mixin safe-area-botttom;
+  @mixin all-transition;
 
   background: var(--color-matters-gold);
+
+  &:hover,
+  &:focus {
+    background: var(--color-matters-gold-active);
+  }
 
   @media (--sm-up) {
     margin: var(--spacing-loose) var(--spacing-base);

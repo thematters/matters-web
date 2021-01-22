@@ -1,10 +1,7 @@
 import gql from 'graphql-tag'
-import { useRouter } from 'next/router'
 
-import { Dialog, Translate } from '~/components'
+import { Dialog, Translate, useRoute } from '~/components'
 import { useMutation } from '~/components/GQL'
-
-import { getQuery } from '~/common/utils'
 
 import PUBLISH_IMAGE from '@/public/static/images/publish-1.svg'
 
@@ -26,8 +23,8 @@ const PUBLISH_ARTICLE = gql`
 `
 
 const PublishContent: React.FC<PublishContentProps> = ({ closeDialog }) => {
-  const router = useRouter()
-  const id = getQuery({ router, key: 'draftId' })
+  const { getQuery } = useRoute()
+  const id = getQuery('draftId')
   const [publish] = useMutation<PublishArticle>(PUBLISH_ARTICLE)
 
   const onPublish = async () => {

@@ -1,5 +1,3 @@
-import { useRouter } from 'next/router'
-
 import {
   Card,
   List,
@@ -7,9 +5,10 @@ import {
   Tag,
   usePublicQuery,
   usePullToRefresh,
+  useRoute,
 } from '~/components'
 
-import { analytics, getQuery, toPath } from '~/common/utils'
+import { analytics, toPath } from '~/common/utils'
 
 import { SEARCH_AGGREGATE_TAGS_PUBLIC } from './gql'
 import styles from './styles.css'
@@ -18,8 +17,8 @@ import ViewMoreButton from './ViewMoreButton'
 import { SearchAggregateTagsPublic } from './__generated__/SearchAggregateTagsPublic'
 
 const AggregateTagResults = () => {
-  const router = useRouter()
-  const q = getQuery({ router, key: 'q' })
+  const { getQuery } = useRoute()
+  const q = getQuery('q')
 
   /**
    * Data Fetching

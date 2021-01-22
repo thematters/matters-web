@@ -64,8 +64,8 @@ const IntroDialogDialog = ({
                 </span>
                 <p>
                   <Translate
-                    zh_hant="發起眾聊，與夥伴們促膝長談，親密互動"
-                    zh_hans="发起众聊，与伙伴们促膝长谈，亲密互动"
+                    zh_hant="發起眾聊，與夥伴們親密互動"
+                    zh_hans="发起众聊，与伙伴们亲密互动"
                   />
                 </p>
               </li>
@@ -75,8 +75,8 @@ const IntroDialogDialog = ({
                 </span>
                 <p>
                   <Translate
-                    zh_hant="和圍爐一起成長，陸續解鎖更多社群玩法"
-                    zh_hans="和围炉一起成长，陆续解锁更多社群玩法"
+                    zh_hant="和圍爐一起成長，解鎖更多玩法"
+                    zh_hans="和围炉一起成长，解锁更多玩法"
                   />
                 </p>
               </li>

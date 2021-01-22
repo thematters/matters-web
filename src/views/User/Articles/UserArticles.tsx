@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router'
 import { useContext, useEffect } from 'react'
 
 import {
@@ -12,6 +11,7 @@ import {
   Translate,
   usePublicQuery,
   usePullToRefresh,
+  useRoute,
   ViewerContext,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
@@ -22,7 +22,7 @@ import {
 } from '~/components/GQL/queries/userArticles'
 
 import { URL_QS } from '~/common/enums'
-import { analytics, getQuery, mergeConnections } from '~/common/utils'
+import { analytics, mergeConnections } from '~/common/utils'
 
 import IMAGE_LOGO_192 from '@/public/static/icon-192x192.png?url'
 
@@ -59,8 +59,8 @@ const ArticleSummaryInfo = ({ user }: { user: UserArticlesPublic_user }) => {
 
 const UserArticles = () => {
   const viewer = useContext(ViewerContext)
-  const router = useRouter()
-  const userName = getQuery({ router, key: 'name' })
+  const { getQuery } = useRoute()
+  const userName = getQuery('name')
   const isViewer = viewer.userName === userName
 
   let query = USER_ARTICLES_PUBLIC
@@ -176,10 +176,7 @@ const UserArticles = () => {
   }
 
   // customize title
-  const shareSource = getQuery({
-    router,
-    key: URL_QS.SHARE_SOURCE_ONBOARDING_TASKS.key,
-  })
+  const shareSource = getQuery(URL_QS.SHARE_SOURCE_ONBOARDING_TASKS.key)
   const isShareOnboardingTasks =
     shareSource === URL_QS.SHARE_SOURCE_ONBOARDING_TASKS.value
 

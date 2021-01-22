@@ -2,7 +2,7 @@ import { useLazyQuery, useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import jump from 'jump.js'
 import dynamic from 'next/dynamic'
-import Router, { useRouter } from 'next/router'
+import Router from 'next/router'
 import { useContext, useEffect, useState } from 'react'
 import { Waypoint } from 'react-waypoint'
 
@@ -21,6 +21,7 @@ import {
   Translate,
   usePublicQuery,
   useResponsive,
+  useRoute,
   ViewerContext,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
@@ -28,7 +29,7 @@ import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { UserDigest } from '~/components/UserDigest'
 
 import { ADD_TOAST, URL_QS } from '~/common/enums'
-import { getQuery, toPath } from '~/common/utils'
+import { toPath } from '~/common/utils'
 
 import Collection from './Collection'
 import Content from './Content'
@@ -67,8 +68,8 @@ const DynamicEditMode = dynamic(() => import('./EditMode'), {
 })
 
 const ArticleDetail = () => {
-  const router = useRouter()
-  const mediaHash = getQuery({ router, key: 'mediaHash' })
+  const { getQuery } = useRoute()
+  const mediaHash = getQuery('mediaHash')
   const viewer = useContext(ViewerContext)
 
   // UI
@@ -177,7 +178,7 @@ const ArticleDetail = () => {
 
   // edit mode
   const canEdit = isAuthor && !viewer.isInactive
-  const mode = getQuery({ router, key: URL_QS.MODE_EDIT.key })
+  const mode = getQuery(URL_QS.MODE_EDIT.key)
   const [editMode, setEditMode] = useState(false)
   const exitEditMode = () => {
     if (!article) {

@@ -1,7 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import queryString from 'query-string'
 import { useContext } from 'react'
 
@@ -13,11 +12,12 @@ import {
   Throw404,
   Translate,
   UserDigest,
+  useRoute,
   ViewerContext,
 } from '~/components'
 
 import { PATHS } from '~/common/enums'
-import { appendTarget, getQuery, toReadableScope } from '~/common/utils'
+import { appendTarget, toReadableScope } from '~/common/utils'
 
 import { Box } from '../Box'
 import styles from './styles.css'
@@ -39,16 +39,16 @@ const OAUTH_CLIENT_INFO = gql`
 `
 
 const BaseOAuthAuthorize = () => {
-  const router = useRouter()
+  const { getQuery, router } = useRoute()
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
   const actionUrl = `${OAUTH_AUTHORIZE_ENDPOINT}?${queryString.stringify(
     router.query
   )}`
-  const clientId = getQuery({ router, key: 'client_id' })
-  const state = getQuery({ router, key: 'state' })
-  const requestScopes = getQuery({ router, key: 'scope' })
-  const redirectUri = getQuery({ router, key: 'redirect_uri' })
+  const clientId = getQuery('client_id')
+  const state = getQuery('state')
+  const requestScopes = getQuery('scope')
+  const redirectUri = getQuery('redirect_uri')
 
   const { data, loading } = useQuery<OAuthClientInfo>(OAUTH_CLIENT_INFO, {
     variables: { id: clientId },

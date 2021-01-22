@@ -1,11 +1,8 @@
-import { useRouter } from 'next/router'
-
-import { Dialog, Translate, useDialogSwitch } from '~/components'
+import { Dialog, Translate, useDialogSwitch, useRoute } from '~/components'
 import { useMutation } from '~/components/GQL'
 import UPDATE_TAG_SETTING from '~/components/GQL/mutations/updateTagSetting'
 
 import { ADD_TOAST } from '~/common/enums'
-import { getQuery } from '~/common/utils'
 
 import { UpdateTagSetting } from '~/components/GQL/mutations/__generated__/UpdateTagSetting'
 
@@ -26,8 +23,8 @@ const textZhHans =
 const BaseDialog = ({ children }: Props) => {
   const { show, open, close } = useDialogSwitch(true)
 
-  const router = useRouter()
-  const id = getQuery({ router, key: 'tagId' })
+  const { getQuery } = useRoute()
+  const id = getQuery('tagId')
   const [update, { loading }] = useMutation<UpdateTagSetting>(
     UPDATE_TAG_SETTING
   )

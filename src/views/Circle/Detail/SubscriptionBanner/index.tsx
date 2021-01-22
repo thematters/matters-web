@@ -46,9 +46,7 @@ const SubscriptionBanner = ({ circle }: SubscriptionBannerProps) => {
                     />
                   </p>
 
-                  <section className="right">
-                    <IconArrowRight16 color="white" />
-                  </section>
+                  <IconArrowRight16 color="white" />
                 </section>
               </section>
             </Card>

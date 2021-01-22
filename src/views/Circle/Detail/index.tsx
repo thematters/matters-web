@@ -1,6 +1,5 @@
 import _find from 'lodash/find'
 import _some from 'lodash/some'
-import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
 
 import {
@@ -14,11 +13,10 @@ import {
   Translate,
   usePublicQuery,
   usePullToRefresh,
+  useRoute,
   ViewerContext,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
-
-import { getQuery } from '~/common/utils'
 
 import DropdownActions from './DropdownActions'
 import { CIRCLE_DETAIL_PRIVATE, CIRCLE_DETAIL_PUBLIC } from './gql'
@@ -98,9 +96,9 @@ const CircleDetail = ({ circle }: { circle: CircleDetailPublic_circle }) => {
 }
 
 const CircleDetailContainer = () => {
-  const router = useRouter()
+  const { getQuery } = useRoute()
   const viewer = useContext(ViewerContext)
-  const name = getQuery({ router, key: 'name' })
+  const name = getQuery('name')
 
   /**
    * Data Fetching

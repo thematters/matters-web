@@ -1,6 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
 import _flatten from 'lodash/flatten'
-import { useRouter } from 'next/router'
 import { useContext, useEffect } from 'react'
 
 import {
@@ -14,6 +13,7 @@ import {
   Spinner,
   usePublicQuery,
   usePullToRefresh,
+  useRoute,
   ViewerContext,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
@@ -21,7 +21,6 @@ import { QueryError } from '~/components/GQL'
 import {
   analytics,
   filterComments,
-  getQuery,
   mergeConnections,
   toPath,
 } from '~/common/utils'
@@ -40,8 +39,8 @@ import { UserIdUser } from './__generated__/UserIdUser'
 type CommentedArticleComment = UserCommentsPublic_node_User_commentedArticles_edges_node_comments_edges_node
 
 const UserComments = () => {
-  const router = useRouter()
-  const userName = getQuery({ router, key: 'name' })
+  const { getQuery } = useRoute()
+  const userName = getQuery('name')
 
   const { data, loading, error } = useQuery<UserIdUser>(USER_ID, {
     variables: { userName },

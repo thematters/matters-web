@@ -1,5 +1,3 @@
-import { useRouter } from 'next/router'
-
 import {
   ArticleDigestTitle,
   Card,
@@ -7,9 +5,10 @@ import {
   Spinner,
   usePublicQuery,
   usePullToRefresh,
+  useRoute,
 } from '~/components'
 
-import { analytics, getQuery, toPath } from '~/common/utils'
+import { analytics, toPath } from '~/common/utils'
 
 import { SEARCH_AGGREGATE_ARTICLES_PUBLIC } from './gql'
 import styles from './styles.css'
@@ -18,8 +17,8 @@ import ViewMoreButton from './ViewMoreButton'
 import { SearchAggregateArticlesPublic } from './__generated__/SearchAggregateArticlesPublic'
 
 const AggregateArticleResults = () => {
-  const router = useRouter()
-  const q = getQuery({ router, key: 'q' })
+  const { getQuery } = useRoute()
+  const q = getQuery('q')
 
   /**
    * Data Fetching
