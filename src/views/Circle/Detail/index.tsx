@@ -5,6 +5,7 @@ import {
   Head,
   Layout,
   PullToRefresh,
+  Spacer,
   Spinner,
   SubscribeCircleDialog,
   Tabs,
@@ -85,6 +86,7 @@ const CircleDetail = ({ circle }: { circle: CircleDetailPublic_circle }) => {
           {isDiscussion && <span>Discussion</span>}
           {isBoardcast && <span>Boardcast</span>}
 
+          <Spacer size="xxloose" />
           <SubscribeCircleDialog circle={circle} />
           <SubscriptionBanner circle={circle} />
 

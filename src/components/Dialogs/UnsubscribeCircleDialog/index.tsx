@@ -98,7 +98,7 @@ const BaseUnsubscribeCircleDialog = ({
               loading={loading}
               onClick={() => onUnsubscribe()}
             >
-              <Translate id="block" />
+              <Translate zh_hant="轉身離開" zh_hans="转身离开" />
             </Dialog.Footer.Button>
           )}
 
