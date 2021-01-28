@@ -85,9 +85,12 @@ const BaseAddCredit: React.FC<FormProps> = ({
   })
   const balance = balanceData?.viewer?.wallet.balance.HKD || 0
 
+  const [disabled, setDisabled] = useState(true)
   const [completed, setCompleted] = useState(false)
   const [checkoutError, setCheckoutError] = useState('')
   const onCheckoutChange = (event: StripeCardElementChangeEvent) => {
+    setDisabled(!event.complete)
+
     if (event.error) {
       const msg =
         lang === 'en'
@@ -146,12 +149,14 @@ const BaseAddCredit: React.FC<FormProps> = ({
       const client_secret = data?.addCredit.client_secret
 
       if (!stripe || !elements || !client_secret) {
+        setSubmitting(false)
         return
       }
 
       const cardElement = elements.getElement(CardElement)
 
       if (!cardElement) {
+        setSubmitting(false)
         return
       }
 
@@ -272,7 +277,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
         <Dialog.Footer.Button
           type="submit"
           form={formId}
-          disabled={!isValid || isSubmitting || !!checkoutError}
+          disabled={disabled || !isValid || isSubmitting || !!checkoutError}
           loading={isSubmitting}
         >
           <Translate zh_hant="確認儲值" zh_hans="确认储值" />

@@ -6,5 +6,11 @@
 }
 
 .hint {
-  margin: var(--spacing-loose) var(--spacing-base);
+  margin: var(--spacing-base);
+}
+
+.current-card {
+  @mixin flex-center-space-between;
+
+  margin: var(--spacing-base);
 }
