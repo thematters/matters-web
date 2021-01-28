@@ -25,6 +25,7 @@ export * from './ResetPaymentPasswordDialog'
 export * from './DonationDialog'
 export * from './PayoutDialog'
 export * from './SubscribeCircleDialog'
+export * from './UnsubscribeCircleDialog'
 
 // Misc
 export * from './NewsletterDialog'

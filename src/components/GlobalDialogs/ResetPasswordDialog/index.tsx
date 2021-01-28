@@ -12,12 +12,12 @@ import { CLOSE_ACTIVE_DIALOG, OPEN_RESET_PASSWORD_DIALOG } from '~/common/enums'
 
 type Step = 'request' | 'verification_sent'
 
-const ResetPasswordDialog = () => {
+const BaseResetPasswordDialog = () => {
   // data & controls
   const { currStep, forward } = useStep<Step>('request')
 
   // dailog & global listeners
-  const [showDialog, setShowDialog] = useState(false)
+  const [showDialog, setShowDialog] = useState(true)
   const open = () => {
     forward('request')
     setShowDialog(true)
@@ -46,6 +46,19 @@ const ResetPasswordDialog = () => {
         />
       )}
     </Dialog>
+  )
+}
+
+const ResetPasswordDialog = () => {
+  const Children = ({ open }: { open: () => void }) => {
+    useEventListener(OPEN_RESET_PASSWORD_DIALOG, open)
+    return null
+  }
+
+  return (
+    <Dialog.Lazy mounted={<BaseResetPasswordDialog />}>
+      {({ open }) => <Children open={open} />}
+    </Dialog.Lazy>
   )
 }
 

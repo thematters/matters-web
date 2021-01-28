@@ -5,11 +5,13 @@ import {
   Dialog,
   PaymentForm,
   Translate,
+  useEventListener,
   useStep,
   ViewerContext,
 } from '~/components'
 import { CircleDigest } from '~/components/CircleDigest'
 
+import { OPEN_SUBSCRIBE_CIRCLE_DIALOG } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 import Complete from './Complete'
@@ -24,7 +26,7 @@ type Step =
 
 interface SubscribeCircleDialogProps {
   circle: DigestRichCirclePublic
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  children?: ({ open }: { open: () => void }) => React.ReactNode
 }
 
 const fragments = {
@@ -71,9 +73,11 @@ const BaseSubscribeCircleDialog = ({
     analytics.trackEvent('view_subscribe_circle_dialog', { step: currStep })
   }, [currStep])
 
+  useEventListener(OPEN_SUBSCRIBE_CIRCLE_DIALOG, open)
+
   return (
     <>
-      {children({ open })}
+      {children && children({ open })}
 
       <Dialog size="sm" isOpen={showDialog} onDismiss={close}>
         <Dialog.Header
@@ -124,10 +128,17 @@ const BaseSubscribeCircleDialog = ({
   )
 }
 
-export const SubscribeCircleDialog = (props: SubscribeCircleDialogProps) => (
-  <Dialog.Lazy mounted={<BaseSubscribeCircleDialog {...props} />}>
-    {({ open }) => <>{props.children({ open })}</>}
-  </Dialog.Lazy>
-)
+export const SubscribeCircleDialog = (props: SubscribeCircleDialogProps) => {
+  const Children = ({ open }: { open: () => void }) => {
+    useEventListener(OPEN_SUBSCRIBE_CIRCLE_DIALOG, open)
+    return <>{props.children && props.children({ open })}</>
+  }
+
+  return (
+    <Dialog.Lazy mounted={<BaseSubscribeCircleDialog {...props} />}>
+      {({ open }) => <Children open={open} />}
+    </Dialog.Lazy>
+  )
+}
 
 SubscribeCircleDialog.fragments = fragments

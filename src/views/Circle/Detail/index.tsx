@@ -1,5 +1,3 @@
-import _find from 'lodash/find'
-import _some from 'lodash/some'
 import { useContext, useEffect, useState } from 'react'
 
 import {
@@ -8,6 +6,7 @@ import {
   Layout,
   PullToRefresh,
   Spinner,
+  SubscribeCircleDialog,
   Tabs,
   Throw404,
   Translate,
@@ -86,6 +85,7 @@ const CircleDetail = ({ circle }: { circle: CircleDetailPublic_circle }) => {
           {isDiscussion && <span>Discussion</span>}
           {isBoardcast && <span>Boardcast</span>}
 
+          <SubscribeCircleDialog circle={circle} />
           <SubscriptionBanner circle={circle} />
 
           <style jsx>{styles}</style>

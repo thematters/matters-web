@@ -7,14 +7,16 @@ import SubscriptionBanner from './SubscriptionBanner'
 export const CIRCLE_DETAIL_PUBLIC = gql`
   query CircleDetailPublic($name: String!) {
     circle(input: { name: $name }) {
-      ...DropdownActionsCircle
+      ...DropdownActionsCirclePublic
+      ...DropdownActionsCirclePrivate
       ...ProfileCirclePublic
       ...ProfileCirclePrivate
       ...SubscriptionBannerCirclePublic
       ...SubscriptionBannerCirclePrivate
     }
   }
-  ${DropdownActions.fragments.circle}
+  ${DropdownActions.fragments.circle.public}
+  ${DropdownActions.fragments.circle.private}
   ${CircleProfile.fragments.circle.public}
   ${CircleProfile.fragments.circle.private}
   ${SubscriptionBanner.fragments.circle.public}
@@ -24,10 +26,12 @@ export const CIRCLE_DETAIL_PUBLIC = gql`
 export const CIRCLE_DETAIL_PRIVATE = gql`
   query CircleDetailPrivate($name: String!) {
     circle(input: { name: $name }) {
+      ...DropdownActionsCirclePrivate
       ...ProfileCirclePrivate
       ...SubscriptionBannerCirclePrivate
     }
   }
+  ${DropdownActions.fragments.circle.private}
   ${CircleProfile.fragments.circle.private}
   ${SubscriptionBanner.fragments.circle.private}
 `

@@ -52,6 +52,7 @@ interface ClickButtonProp {
     | 'write'
     | 'write_collection'
     | 'google_search'
+    | 'subscribe_circle_banner'
 }
 
 /**
