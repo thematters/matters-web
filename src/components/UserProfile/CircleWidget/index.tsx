@@ -1,4 +1,4 @@
-import { Form, Translate } from '~/components'
+import { Form, Translate, useFeatures } from '~/components'
 import { CircleDigest } from '~/components/CircleDigest'
 
 import { PATHS } from '~/common/enums'
@@ -17,12 +17,7 @@ type CircleWidgetProps = {
 }
 
 const CircleWidget: React.FC<CircleWidgetProps> = ({ circles, isMe }) => {
-  // TODO: viewer's circle
-  // @ts-ignore
-  // if (features.circle) {
-  //   return null
-  // }
-
+  const features = useFeatures()
   const hasCircle = circles && circles.length > 0
 
   if (!isMe && !hasCircle) {
@@ -30,6 +25,10 @@ const CircleWidget: React.FC<CircleWidgetProps> = ({ circles, isMe }) => {
   }
 
   if (isMe && !hasCircle) {
+    if (!features.circle_management) {
+      return null
+    }
+
     return (
       <section className="circle-widget">
         <Form.List forceGreyStyle>

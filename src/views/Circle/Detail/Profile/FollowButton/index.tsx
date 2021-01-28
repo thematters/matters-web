@@ -1,5 +1,7 @@
 import gql from 'graphql-tag'
 
+import { useFeatures } from '~/components'
+
 import Follow from './Follow'
 import Unfollow from './Unfollow'
 
@@ -22,6 +24,12 @@ const fragments = {
 }
 
 const FollowButton = ({ circle }: FollowButtonProps) => {
+  const features = useFeatures()
+
+  if (!features.circle_interact) {
+    return null
+  }
+
   if (circle.isFollower) {
     return <Unfollow circle={circle} />
   } else {

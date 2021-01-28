@@ -1,20 +1,19 @@
 import { useContext } from 'react'
 
 import {
-  Button,
   CircleAvatar,
   CircleCover,
   Expandable,
-  TextIcon,
   Translate,
   ViewerContext,
 } from '~/components'
 
-import { numAbbr, toPath } from '~/common/utils'
+import { numAbbr } from '~/common/utils'
 
 import CIRCLE_COVER from '@/public/static/images/circle-cover.svg'
 
 import AuthorWidget from './AuthorWidget'
+import EditButton from './EditButton'
 import FollowButton from './FollowButton'
 import { fragments } from './gql'
 import styles from './styles.css'
@@ -64,18 +63,7 @@ const CircleProfile = ({ circle }: CircleProfileProps) => {
         </section>
 
         {isOwner ? (
-          <Button
-            size={['6rem', '2rem']}
-            textColor="green"
-            textActiveColor="white"
-            bgActiveColor="green"
-            borderColor="green"
-            {...toPath({ page: 'circleSettings', circle })}
-          >
-            <TextIcon weight="md" size="md-s">
-              <Translate id="editCircle" />
-            </TextIcon>
-          </Button>
+          <EditButton circle={circle} />
         ) : (
           <FollowButton circle={circle} />
         )}

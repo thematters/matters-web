@@ -1,4 +1,4 @@
-import { toDigestTag } from '~/components'
+import { toDigestTag, useFeatures } from '~/components'
 import Sidebar from '~/components/Editor/Sidebar'
 
 import { ENTITY_TYPE } from '~/common/enums'
@@ -83,6 +83,8 @@ const EditDraftCircle = ({ draft, ownCircles, disabled }: SidebarProps) => {
 }
 
 const EditDraftSidebar = (props: BaseSidebarProps) => {
+  const features = useFeatures()
+
   const isPending = props.draft.publishState === 'pending'
   const isPublished = props.draft.publishState === 'published'
   const disabled = isPending || isPublished
@@ -92,7 +94,9 @@ const EditDraftSidebar = (props: BaseSidebarProps) => {
       <EditDraftCover {...props} disabled={disabled} />
       <EditDraftTags {...props} disabled={disabled} />
       <EditDraftCollection {...props} disabled={disabled} />
-      <EditDraftCircle {...props} disabled={disabled} />
+      {features.circle_management && (
+        <EditDraftCircle {...props} disabled={disabled} />
+      )}
     </>
   )
 }

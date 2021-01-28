@@ -11,6 +11,7 @@ import {
   ShareDialog,
   TextIcon,
   Translate,
+  useFeatures,
   ViewerContext,
 } from '~/components'
 import {
@@ -49,6 +50,8 @@ const BaseDropdownActions = ({
   openAddCircleArticlesDialog,
   openShareDialog,
 }: BaseDropdownActionsProps) => {
+  const features = useFeatures()
+
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
     <Menu width={isInDropdown ? 'sm' : undefined}>
       <Menu.Item onClick={openShareDialog}>
@@ -57,7 +60,7 @@ const BaseDropdownActions = ({
         </TextIcon>
       </Menu.Item>
 
-      {hasAddArticles && (
+      {hasAddArticles && features.circle_management && (
         <Menu.Item onClick={openAddCircleArticlesDialog}>
           <TextIcon icon={<IconAdd24 size="md" />} size="md" spacing="base">
             <Translate id="circleAddArticles" />

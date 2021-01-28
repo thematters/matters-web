@@ -9,6 +9,7 @@ import {
   ReviseArticleDialog,
   Spinner,
   Throw404,
+  useFeatures,
   useResponsive,
 } from '~/components'
 import BottomBar from '~/components/Editor/BottomBar'
@@ -43,6 +44,7 @@ const Editor = dynamic(() => import('~/components/Editor/Article'), {
 
 const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
   const isLargeUp = useResponsive('lg-up')
+  const features = useFeatures()
 
   // staging editing data
   const [editData, setEditData] = useState<Record<string, any>>({})
@@ -166,7 +168,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
             disabled={isEditDisabled}
           />
 
-          {toggleCircle && (
+          {toggleCircle && features.circle_management && (
             <Sidebar.Management
               circle={circle}
               onEdit={toggleCircle}

@@ -1,4 +1,4 @@
-import { toDigestTag } from '~/components'
+import { toDigestTag, useFeatures } from '~/components'
 import BottomBar from '~/components/Editor/BottomBar'
 
 import { ENTITY_TYPE } from '~/common/enums'
@@ -19,6 +19,7 @@ interface BottomBarProps {
 }
 
 const EditDraftBottomBar = ({ draft, ownCircles }: BottomBarProps) => {
+  const features = useFeatures()
   const {
     edit: editCollection,
     saving: collectionSaving,
@@ -53,7 +54,11 @@ const EditDraftBottomBar = ({ draft, ownCircles }: BottomBarProps) => {
       editCollection={editCollection}
       // circle
       circle={draft?.circle}
-      toggleCircle={ownCircles ? () => toggleCircle(ownCircles[0]) : undefined}
+      toggleCircle={
+        ownCircles && features.circle_management
+          ? () => toggleCircle(ownCircles[0])
+          : undefined
+      }
       canToggleCircle
     />
   )
