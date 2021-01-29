@@ -43,3 +43,9 @@ export const isValidPaymentPassword = (password: string): boolean => {
 
   return /^[\d]*$/.test(password)
 }
+
+/**
+ * Validate payment pointer.
+ */
+export const isValidPaymentPointer = (paymentPointer: string): boolean =>
+  paymentPointer.startsWith('$')
