@@ -1,10 +1,7 @@
-@lost gutter 40px;
-@lost flexbox flex;
-@lost rounder 99.99999;
-
 .nav-bar {
   & :global(.fixed-main) {
     bottom: var(--global-nav-height);
+    z-index: var(--z-index-bottom-bar);
 
     @media (--sm-up) {
       bottom: 0;

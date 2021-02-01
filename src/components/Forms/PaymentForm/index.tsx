@@ -14,8 +14,14 @@ const DynamicAddCredit = dynamic(() => import('./AddCredit'), {
   loading: Spinner,
 })
 
+const DynamicSubscribeCircle = dynamic(() => import('./SubscribeCircle'), {
+  ssr: false,
+  loading: Spinner,
+})
+
 export const PaymentForm = {
   AddCredit: DynamicAddCredit,
+  SubscribeCircle: DynamicSubscribeCircle,
   ConnectStripeAccount,
   Payout,
   PayTo,

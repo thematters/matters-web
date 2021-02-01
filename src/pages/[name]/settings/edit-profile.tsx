@@ -1,15 +1,11 @@
-import { useRouter } from 'next/router'
 import CircleSettingsEditProfile from '~/views/Circle/Settings/EditProfile'
 
-import { EmptyLayout, Protected, Throw404 } from '~/components'
-
-import { getNameType } from '~/common/utils'
+import { EmptyLayout, Protected, Throw404, useRoute } from '~/components'
 
 const NameSettingsEditProfile = () => {
-  const router = useRouter()
-  const nameType = getNameType({ router })
+  const { isPathStartWith } = useRoute()
 
-  if (nameType === 'circle') {
+  if (isPathStartWith('/~', true)) {
     return (
       <Protected>
         <CircleSettingsEditProfile />

@@ -1,6 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
 import dynamic from 'next/dynamic'
-import { useRouter } from 'next/router'
 import { useState } from 'react'
 
 import {
@@ -10,12 +9,13 @@ import {
   Spinner,
   Throw404,
   useResponsive,
+  useRoute,
 } from '~/components'
 import { QueryError, useMutation } from '~/components/GQL'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 
 import { ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
-import { getQuery, stripHtml } from '~/common/utils'
+import { stripHtml } from '~/common/utils'
 
 import BottomBar from './BottomBar'
 import { DRAFT_DETAIL, SET_CONTENT } from './gql'
@@ -35,8 +35,8 @@ const Editor = dynamic(() => import('~/components/Editor/Article'), {
 
 const DraftDetail = () => {
   const isLargeUp = useResponsive('lg-up')
-  const router = useRouter()
-  const id = getQuery({ router, key: 'draftId' })
+  const { getQuery } = useRoute()
+  const id = getQuery('draftId')
 
   const [setContent] = useMutation<SetDraftContent>(SET_CONTENT)
   const [singleFileUpload] = useMutation<SingleFileUpload>(UPLOAD_FILE)

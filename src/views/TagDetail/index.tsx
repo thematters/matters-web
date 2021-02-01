@@ -1,6 +1,5 @@
 import _find from 'lodash/find'
 import _some from 'lodash/some'
-import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
 
 import {
@@ -17,12 +16,12 @@ import {
   Translate,
   usePublicQuery,
   usePullToRefresh,
+  useRoute,
   ViewerContext,
 } from '~/components'
 import { getErrorCodes, QueryError } from '~/components/GQL'
 
 import { ERROR_CODES } from '~/common/enums'
-import { getQuery } from '~/common/utils'
 
 import TagDetailArticles from './Articles'
 import ArticlesCount from './ArticlesCount'
@@ -143,8 +142,8 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
 
 const TagDetailContainer = () => {
   const viewer = useContext(ViewerContext)
-  const router = useRouter()
-  const tagId = getQuery({ router, key: 'tagId' })
+  const { getQuery } = useRoute()
+  const tagId = getQuery('tagId')
 
   /**
    * Data Fetching

@@ -1,9 +1,6 @@
 import dynamic from 'next/dynamic'
-import { useRouter } from 'next/router'
 
-import { EmptyLayout, Spinner, Throw404 } from '~/components'
-
-import { getNameType } from '~/common/utils'
+import { EmptyLayout, Spinner, Throw404, useRoute } from '~/components'
 
 const DynamicUserFollowers = dynamic(() => import('~/views/User/Followers'), {
   ssr: true,
@@ -27,24 +24,19 @@ const DynamicCircleFollowers = dynamic(
 )
 
 const Followers = () => {
-  const router = useRouter()
-  const nameType = getNameType({ router })
+  const { isPathStartWith } = useRoute()
 
-  switch (nameType) {
-    case 'circle': {
-      return <DynamicCircleFollowers />
-    }
-    case 'user': {
-      return <DynamicUserFollowers />
-    }
-    default: {
-      return (
-        <EmptyLayout>
-          <Throw404 />
-        </EmptyLayout>
-      )
-    }
+  if (isPathStartWith('/@', true)) {
+    return <DynamicUserFollowers />
+  } else if (isPathStartWith('/~', true)) {
+    return <DynamicCircleFollowers />
   }
+
+  return (
+    <EmptyLayout>
+      <Throw404 />
+    </EmptyLayout>
+  )
 }
 
 export default Followers

@@ -31,7 +31,7 @@ const RetryButton = ({ id }: { id: string }) => {
       size={[null, '1.25rem']}
       spacing={[0, 'xtight']}
       bgActiveColor="red"
-      onClick={retry}
+      onClick={() => retry()}
     >
       <TextIcon
         color="white"

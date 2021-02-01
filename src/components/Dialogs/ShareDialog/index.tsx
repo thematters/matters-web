@@ -1,6 +1,4 @@
-import { useState } from 'react'
-
-import { Dialog, ShareButtons, Translate } from '~/components'
+import { Dialog, ShareButtons, Translate, useDialogSwitch } from '~/components'
 
 import { TextId } from '~/common/enums'
 import { isMobile } from '~/common/utils'
@@ -39,15 +37,13 @@ const BaseShareDialog = ({
 
   children,
 }: BaseShareDialogProps) => {
-  const [showDialog, setShowDialog] = useState(true)
-  const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
+  const { show, open, close } = useDialogSwitch(true)
 
   return (
     <>
       {children({ open: () => onShare(open) })}
 
-      <Dialog size="sm" isOpen={showDialog} onDismiss={close}>
+      <Dialog size="sm" isOpen={show} onDismiss={close}>
         <Dialog.Header
           title={headerTitle || 'share'}
           close={close}

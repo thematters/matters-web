@@ -1,0 +1,200 @@
+import {
+  CardElement,
+  Elements,
+  useElements,
+  useStripe,
+} from '@stripe/react-stripe-js'
+import { loadStripe, StripeCardElementChangeEvent } from '@stripe/stripe-js'
+import _get from 'lodash/get'
+import _pickBy from 'lodash/pickBy'
+import { useContext, useState } from 'react'
+
+import {
+  CircleDigest,
+  Dialog,
+  LanguageContext,
+  Translate,
+  useStep,
+} from '~/components'
+import { useMutation } from '~/components/GQL'
+
+import { STRIPE_ERROR_MESSAGES } from '~/common/enums'
+import { analytics, parseFormSubmitErrors, translate } from '~/common/utils'
+
+import StripeCheckout from '../StripeCheckout'
+import { SUBSCRIBE_CIRCLE } from './gql'
+import Hint from './Hint'
+import Price from './Price'
+import Processing from './Processing'
+import styles from './styles.css'
+
+import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
+import { SubscribeCircle as SubscribeCircleType } from './__generated__/SubscribeCircle'
+
+interface CardPaymentProps {
+  circle: DigestRichCirclePublic
+  submitCallback: () => void
+}
+
+type Step = 'confirmation' | 'processing'
+
+// Make sure to call `loadStripe` outside of a component’s render to avoid
+// recreating the `Stripe` object on every render.
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY || ''
+)
+
+const BaseCardPayment: React.FC<CardPaymentProps> = ({
+  circle,
+  submitCallback,
+}) => {
+  const stripe = useStripe()
+  const elements = useElements()
+  const { lang } = useContext(LanguageContext)
+
+  const [subscribeCircle] = useMutation<SubscribeCircleType>(SUBSCRIBE_CIRCLE)
+
+  const [disabled, setDisabled] = useState(true)
+  const [isSubmitting, setSubmitting] = useState(false)
+  const [checkoutError, setCheckoutError] = useState('')
+
+  const { currStep, forward } = useStep<Step>('confirmation')
+  const isProcessing = currStep === 'processing'
+
+  const onCheckoutChange = (event: StripeCardElementChangeEvent) => {
+    setDisabled(!event.complete)
+
+    if (event.error) {
+      const msg =
+        lang === 'en'
+          ? undefined
+          : _get(STRIPE_ERROR_MESSAGES[lang], event.error.code)
+
+      setCheckoutError(msg || event.error.message)
+    } else if (event.empty) {
+      setCheckoutError(translate({ lang, id: 'required' }))
+    } else {
+      setCheckoutError('')
+    }
+  }
+
+  const handleSubmit = async () => {
+    setSubmitting(true)
+
+    let data: SubscribeCircleType | undefined
+
+    try {
+      const subscribeResult = await subscribeCircle({
+        variables: { input: { id: circle.id } },
+      })
+      data = subscribeResult.data
+    } catch (error) {
+      const [messages, codes] = parseFormSubmitErrors(error, lang)
+      codes.forEach((code) => {
+        setCheckoutError(messages[code])
+      })
+    }
+
+    const client_secret = data?.subscribeCircle.client_secret
+
+    if (!stripe || !elements || !client_secret) {
+      setSubmitting(false)
+      return
+    }
+
+    const cardElement = elements.getElement(CardElement)
+
+    if (!cardElement) {
+      setSubmitting(false)
+      return
+    }
+
+    const result = await stripe.confirmCardSetup(client_secret, {
+      payment_method: { card: cardElement },
+    })
+
+    if (result.error) {
+      const msg =
+        lang === 'en'
+          ? undefined
+          : _get(STRIPE_ERROR_MESSAGES[lang], result.error.code || '')
+
+      setCheckoutError(msg || result.error.message)
+
+      analytics.trackEvent('subscribe', {
+        id: circle.id,
+        success: false,
+        message: JSON.stringify(result.error),
+      })
+
+      import('@sentry/browser').then((Sentry) => {
+        Sentry.captureException(result.error)
+      })
+    } else {
+      if (result.setupIntent?.status === 'succeeded') {
+        analytics.trackEvent('subscribe', { id: circle.id, success: true })
+      }
+
+      forward('processing')
+    }
+
+    setSubmitting(false)
+  }
+
+  if (isProcessing) {
+    return <Processing circleName={circle.name} nextStep={submitCallback} />
+  }
+
+  return (
+    <>
+      <Dialog.Content hasGrow>
+        <section>
+          <section className="circle">
+            <CircleDigest.Rich
+              circle={circle}
+              borderRadius="xtight"
+              bgColor="white"
+              hasFooter={false}
+              hasDescription
+              hasOwner
+              disabled
+            />
+          </section>
+
+          <Price circle={circle} />
+
+          <StripeCheckout error={checkoutError} onChange={onCheckoutChange} />
+
+          <Hint />
+        </section>
+      </Dialog.Content>
+
+      <Dialog.Footer>
+        <Dialog.Footer.Button
+          onClick={handleSubmit}
+          disabled={disabled || isSubmitting || !!checkoutError}
+          loading={isSubmitting}
+        >
+          <Translate zh_hant="確認訂閱" zh_hans="确认订阅" />
+        </Dialog.Footer.Button>
+      </Dialog.Footer>
+
+      <style jsx>{styles}</style>
+    </>
+  )
+}
+
+const CardPayment: React.FC<CardPaymentProps> = (props) => {
+  const { lang } = useContext(LanguageContext)
+
+  return (
+    <Elements
+      stripe={stripePromise}
+      options={{ locale: lang === 'zh_hans' ? 'zh' : 'en' }}
+    >
+      <BaseCardPayment {...props} />
+    </Elements>
+  )
+}
+
+export default CardPayment

@@ -1,6 +1,4 @@
-import { useState } from 'react'
-
-import { Dialog, useStep } from '~/components'
+import { Dialog, useDialogSwitch, useStep } from '~/components'
 
 import styles from './styles.css'
 import Success from './Success'
@@ -17,17 +15,16 @@ const BaseMigrationDialog = ({
   children,
   defaultStep = 'upload',
 }: MigrationDialogProps) => {
-  const [showDialog, setShowDialog] = useState(true)
+  const { show, open, close } = useDialogSwitch(true)
+
   const { currStep, forward } = useStep<Step>(defaultStep)
-  const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
   const nextStep = () => forward('success')
 
   return (
     <>
       {children({ open })}
 
-      <Dialog size="sm" isOpen={showDialog} onDismiss={close} fixedHeight>
+      <Dialog size="sm" isOpen={show} onDismiss={close} fixedHeight>
         <Dialog.Header
           title="migration"
           close={close}

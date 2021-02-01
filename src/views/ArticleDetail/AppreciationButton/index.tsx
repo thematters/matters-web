@@ -1,5 +1,4 @@
 import { useQuery } from '@apollo/react-hooks'
-import { useRouter } from 'next/router'
 import { useContext, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 
@@ -7,6 +6,7 @@ import {
   ReCaptchaContext,
   Tooltip,
   Translate,
+  useRoute,
   ViewerContext,
 } from '~/components'
 import { useMutation } from '~/components/GQL'
@@ -14,7 +14,6 @@ import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import updateAppreciation from '~/components/GQL/updates/appreciation'
 
 import { ADD_TOAST, APPRECIATE_DEBOUNCE, Z_INDEX } from '~/common/enums'
-import { getQuery } from '~/common/utils'
 
 import AnonymousButton from './AnonymousButton'
 import AppreciateButton from './AppreciateButton'
@@ -39,8 +38,8 @@ const AppreciationButton = ({
   article,
   privateFetched,
 }: AppreciationButtonProps) => {
-  const router = useRouter()
-  const mediaHash = getQuery({ router, key: 'mediaHash' })
+  const { getQuery } = useRoute()
+  const mediaHash = getQuery('mediaHash')
   const viewer = useContext(ViewerContext)
   const { token, refreshToken } = useContext(ReCaptchaContext)
   const { data, client } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
@@ -182,7 +181,7 @@ const AppreciationButton = ({
         content={
           <Translate zh_hant="去讚賞其他用戶吧" zh_hans="去赞赏其他用户吧" />
         }
-        zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
+        zIndex={Z_INDEX.OVER_BOTTOM_BAR}
       >
         <span>
           <AppreciateButton disabled total={total} />
@@ -271,7 +270,7 @@ const AppreciationButton = ({
       content={
         <Translate zh_hant="你還沒有讚賞權限" zh_hans="你还没有赞赏权限" />
       }
-      zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
+      zIndex={Z_INDEX.OVER_BOTTOM_BAR}
     >
       <span>
         <AppreciateButton

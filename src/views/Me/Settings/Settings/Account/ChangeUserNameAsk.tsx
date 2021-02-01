@@ -1,6 +1,4 @@
-import { useState } from 'react'
-
-import { Dialog, Translate } from '~/components'
+import { Dialog, Translate, useDialogSwitch } from '~/components'
 
 import { PATHS } from '~/common/enums'
 
@@ -9,15 +7,13 @@ interface AskProps {
 }
 
 const Ask = ({ children }: AskProps) => {
-  const [showDialog, setShowDialog] = useState(false)
-  const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
+  const { show, open, close } = useDialogSwitch(false)
 
   return (
     <>
       {children({ open })}
 
-      <Dialog isOpen={showDialog} onDismiss={close} size="sm">
+      <Dialog isOpen={show} onDismiss={close} size="sm">
         <Dialog.Header title="changeUserName" close={close} mode="inner" />
 
         <Dialog.Message>

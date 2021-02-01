@@ -26,6 +26,7 @@ export const OPEN_LIKE_COIN_DIALOG = 'openLikeCoinDialog'
 export const CLOSE_ONBOARDING_TASKS_DIALOG = 'closeOnboardingTasksDialog'
 export const OPEN_RECOMMEND_AUTHOR_DIALOG = 'openRecommendAuthorDialog'
 export const OPEN_RECOMMEND_TAG_DIALOG = 'openRecommendTagDialog'
+export const OPEN_SUBSCRIBE_CIRCLE_DIALOG = 'openSubscribeCircleDialog'
 
 // Onboarding Tasks
 export const ONBOARDING_TASKS_HIDE = 'onboardingTasksHide'

@@ -3,7 +3,6 @@ import _find from 'lodash/find'
 import _isEmpty from 'lodash/isEmpty'
 import _pickBy from 'lodash/pickBy'
 import _some from 'lodash/some'
-import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
 import {
@@ -17,11 +16,11 @@ import {
   IconSize,
   Menu,
   Translate,
+  useRoute,
   ViewerContext,
 } from '~/components'
 
 import { ADD_TOAST, TEXT } from '~/common/enums'
-import { getQuery } from '~/common/utils'
 
 import AppreciatorsButton from './AppreciatorsButton'
 import ArchiveArticle from './ArchiveArticle'
@@ -195,7 +194,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
     inTagDetailLatest,
     inTagDetailSelected,
   } = props
-  const router = useRouter()
+  const { getQuery } = useRoute()
   const viewer = useContext(ViewerContext)
 
   const isArticleAuthor = viewer.id === article.author.id
@@ -205,7 +204,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
   // check permission if in tag detail
   let canEditTag = false
   if (isInTagDetail) {
-    const tagId = getQuery({ router, key: 'tagId' })
+    const tagId = getQuery('tagId')
     const tag = _find(article.tags || [], (item) => item.id === tagId)
     const isEditor = _some(
       tag?.editors || [],

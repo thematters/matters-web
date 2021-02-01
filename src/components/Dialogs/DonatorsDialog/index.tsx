@@ -1,8 +1,7 @@
 import gql from 'graphql-tag'
 import dynamic from 'next/dynamic'
-import { useState } from 'react'
 
-import { Dialog, Spinner } from '~/components'
+import { Dialog, Spinner, useDialogSwitch } from '~/components'
 
 import { DonatorDialogArticle } from './__generated__/DonatorDialogArticle'
 
@@ -31,15 +30,13 @@ const DynamicConetnt = dynamic(() => import('./Content'), {
 })
 
 const BaseDonatorsDialog = ({ article, children }: DonatorsDialogProps) => {
-  const [showDialog, setShowDialog] = useState(true)
-  const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
+  const { show, open, close } = useDialogSwitch(true)
 
   return (
     <>
       {children({ open })}
 
-      <Dialog isOpen={showDialog} onDismiss={close} fixedHeight>
+      <Dialog isOpen={show} onDismiss={close} fixedHeight>
         <DynamicConetnt article={article} closeDialog={close} />
       </Dialog>
     </>
