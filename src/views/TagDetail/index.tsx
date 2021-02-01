@@ -6,7 +6,6 @@ import {
   EmptyLayout,
   EmptyTag,
   Expandable,
-  FeaturesContext,
   Head,
   Layout,
   PullToRefresh,
@@ -14,6 +13,7 @@ import {
   Tabs,
   Throw404,
   Translate,
+  useFeatures,
   usePublicQuery,
   usePullToRefresh,
   useRoute,
@@ -43,7 +43,7 @@ type TagFeedType = 'latest' | 'selected' | 'community'
 
 const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
   const viewer = useContext(ViewerContext)
-  const features = useContext(FeaturesContext)
+  const features = useFeatures()
 
   // feed type
   const hasSelectedFeed = (tag?.selectedArticles.totalCount || 0) > 0

@@ -233,7 +233,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
           editCollection={editCollection}
           // circle
           circle={circle}
-          toggleCircle={toggleCircle}
+          toggleCircle={features.circle_management ? toggleCircle : undefined}
           canToggleCircle={!isAttachedCircle}
         />
       )}
