@@ -58,7 +58,7 @@ export const CircleBanner = () => {
 
   // TODO: showing differnt UI based on viewer state
   // @ts-ignore
-  const canCreateCircle = features.circle
+  const canCreateCircle = features.circle_management
 
   return (
     <div className="container">
