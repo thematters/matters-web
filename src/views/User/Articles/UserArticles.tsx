@@ -7,6 +7,7 @@ import {
   IconDotDivider,
   InfiniteScroll,
   List,
+  QueryError,
   Spinner,
   Translate,
   usePublicQuery,
@@ -14,7 +15,6 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 import {
   USER_ARTICLES_PRIVATE,
   USER_ARTICLES_PUBLIC,

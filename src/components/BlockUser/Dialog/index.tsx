@@ -1,5 +1,4 @@
-import { Dialog, Translate, useDialogSwitch } from '~/components'
-import { useMutation } from '~/components/GQL'
+import { Dialog, Translate, useDialogSwitch, useMutation } from '~/components'
 import TOGGLE_BLOCK_USER from '~/components/GQL/mutations/toggleBlockUser'
 
 import { ADD_TOAST } from '~/common/enums'

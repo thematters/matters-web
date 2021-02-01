@@ -6,12 +6,12 @@ import {
   EmptyArticle,
   InfiniteScroll,
   List,
+  QueryError,
   Spinner,
   TextIcon,
   Translate,
   UserDigest,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 import { UserDigestMiniProps } from '~/components/UserDigest/Mini'
 
 import { analytics, mergeConnections } from '~/common/utils'

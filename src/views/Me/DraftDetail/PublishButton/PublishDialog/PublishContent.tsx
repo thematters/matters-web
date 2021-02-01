@@ -1,7 +1,6 @@
 import gql from 'graphql-tag'
 
-import { Dialog, Translate, useRoute } from '~/components'
-import { useMutation } from '~/components/GQL'
+import { Dialog, Translate, useMutation, useRoute } from '~/components'
 
 import PUBLISH_IMAGE from '@/public/static/images/publish-1.svg'
 

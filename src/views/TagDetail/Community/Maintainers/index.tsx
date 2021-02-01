@@ -3,13 +3,13 @@ import { useQuery } from '@apollo/react-hooks'
 import {
   Button,
   IconSettings24,
+  QueryError,
   Spinner,
   TagEditorDialog,
   TextIcon,
   Translate,
   UserDigest,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 import TAG_MAINTAINERS from '~/components/GQL/queries/tagMaintainers'
 
 import styles from '../styles.css'

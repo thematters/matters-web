@@ -7,9 +7,9 @@ import {
   Menu,
   TextIcon,
   Translate,
+  useMutation,
   ViewerContext,
 } from '~/components'
-import { useMutation } from '~/components/GQL'
 
 import { ADD_TOAST } from '~/common/enums'
 import { routerPush, toPath, translate } from '~/common/utils'

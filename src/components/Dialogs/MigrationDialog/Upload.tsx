@@ -1,8 +1,13 @@
 import VisuallyHidden from '@reach/visually-hidden'
 import { useContext } from 'react'
 
-import { Dialog, LoginButton, Translate, ViewerContext } from '~/components'
-import { useMutation } from '~/components/GQL'
+import {
+  Dialog,
+  LoginButton,
+  Translate,
+  useMutation,
+  ViewerContext,
+} from '~/components'
 import MIGRATION from '~/components/GQL/mutations/migration'
 
 import {

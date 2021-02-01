@@ -10,9 +10,9 @@ import {
   Spinner,
   TextIcon,
   Translate,
+  useMutation,
   withIcon,
 } from '~/components'
-import { useMutation } from '~/components/GQL'
 
 import { parseFormSubmitErrors, validatePaymentPassword } from '~/common/utils'
 
@@ -48,7 +48,11 @@ const Confirm: React.FC<FormProps> = ({
   const formId = 'subscirbe-circle-form'
 
   const { lang } = useContext(LanguageContext)
-  const [subscribeCircle] = useMutation<SubscribeCircleType>(SUBSCRIBE_CIRCLE)
+  const [subscribeCircle] = useMutation<SubscribeCircleType>(
+    SUBSCRIBE_CIRCLE,
+    undefined,
+    { showToast: false }
+  )
 
   const {
     errors,

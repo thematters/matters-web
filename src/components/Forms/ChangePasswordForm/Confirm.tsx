@@ -3,8 +3,14 @@ import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 
-import { Dialog, Form, LanguageContext, Layout, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
+import {
+  Dialog,
+  Form,
+  LanguageContext,
+  Layout,
+  Translate,
+  useMutation,
+} from '~/components'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 
 import {
@@ -45,8 +51,14 @@ const Confirm: React.FC<FormProps> = ({
   submitCallback,
   closeDialog,
 }) => {
-  const [confirm] = useMutation<ConfirmVerificationCode>(CONFIRM_CODE)
-  const [reset] = useMutation<ResetPassword>(RESET_PASSWORD)
+  const [confirm] = useMutation<ConfirmVerificationCode>(
+    CONFIRM_CODE,
+    undefined,
+    { showToast: false }
+  )
+  const [reset] = useMutation<ResetPassword>(RESET_PASSWORD, undefined, {
+    showToast: false,
+  })
   const { lang } = useContext(LanguageContext)
 
   const isForget = type === 'forget'

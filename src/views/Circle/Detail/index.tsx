@@ -5,6 +5,7 @@ import {
   Head,
   Layout,
   PullToRefresh,
+  QueryError,
   Spacer,
   Spinner,
   SubscribeCircleDialog,
@@ -16,7 +17,6 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 
 import DropdownActions from './DropdownActions'
 import { CIRCLE_DETAIL_PRIVATE, CIRCLE_DETAIL_PUBLIC } from './gql'

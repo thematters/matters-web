@@ -12,10 +12,10 @@ import {
   PullToRefresh,
   Spacer,
   Spinner,
+  useMutation,
   usePullToRefresh,
   useResponsive,
 } from '~/components'
-import { useMutation } from '~/components/GQL'
 import updateViewerUnreadNoticeCount from '~/components/GQL/updates/viewerUnreadNoticeCount'
 
 import { mergeConnections } from '~/common/utils'
