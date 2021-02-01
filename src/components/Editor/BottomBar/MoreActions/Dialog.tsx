@@ -1,7 +1,6 @@
 import _get from 'lodash/get'
-import { useState } from 'react'
 
-import { Dialog } from '~/components'
+import { Dialog, useDialogSwitch } from '~/components'
 
 import ToggleCircle, { ToggleCircleProps } from '../../ToggleCircle'
 
@@ -13,15 +12,13 @@ const BaseMoreActionDialog = ({
   children,
   ...props
 }: MoreActionDialogProps) => {
-  const [showDialog, setShowDialog] = useState(true)
-  const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
+  const { show, open, close } = useDialogSwitch(true)
 
   return (
     <>
       {children({ open })}
 
-      <Dialog isOpen={showDialog} onDismiss={close} fixedHeight>
+      <Dialog isOpen={show} onDismiss={close} fixedHeight>
         <Dialog.Header title="articleManagement" close={close} />
 
         <Dialog.Content spacing={['base', 'base']}>

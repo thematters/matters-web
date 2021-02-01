@@ -1,17 +1,14 @@
-import { useRouter } from 'next/router'
+import { Tabs, Translate, useRoute } from '~/components'
 
-import { Tabs, Translate } from '~/components'
-
-import { PATHS } from '~/common/enums'
-import { getQuery, toPath } from '~/common/utils'
+import { toPath } from '~/common/utils'
 
 type UserTabsProps = {
   hasSubscriptions?: boolean
 }
 
 const UserTabs: React.FC<UserTabsProps> = ({ hasSubscriptions }) => {
-  const router = useRouter()
-  const userName = getQuery({ router, key: 'name' }) || ''
+  const { isInPath, getQuery } = useRoute()
+  const userName = getQuery('name')
 
   const userSubscriptonsPath = toPath({
     page: 'userSubscriptons',
@@ -35,30 +32,21 @@ const UserTabs: React.FC<UserTabsProps> = ({ hasSubscriptions }) => {
       {hasSubscriptions && (
         <Tabs.Tab
           {...userSubscriptonsPath}
-          selected={router.pathname === PATHS.USER_SUBSCRIPTIONS}
+          selected={isInPath('USER_SUBSCRIPTIONS')}
         >
           <Translate id="subscriptions" />
         </Tabs.Tab>
       )}
 
-      <Tabs.Tab
-        {...userArticlesPath}
-        selected={router.pathname === PATHS.USER_ARTICLES}
-      >
+      <Tabs.Tab {...userArticlesPath} selected={isInPath('USER_ARTICLES')}>
         <Translate id="article" />
       </Tabs.Tab>
 
-      <Tabs.Tab
-        {...userCommentsPath}
-        selected={router.pathname === PATHS.USER_COMMENTS}
-      >
+      <Tabs.Tab {...userCommentsPath} selected={isInPath('USER_COMMENTS')}>
         <Translate id="comment" />
       </Tabs.Tab>
 
-      <Tabs.Tab
-        {...userTagsPath}
-        selected={router.pathname === PATHS.USER_TAGS}
-      >
+      <Tabs.Tab {...userTagsPath} selected={isInPath('USER_TAGS')}>
         <Translate id="tag" />
       </Tabs.Tab>
     </Tabs>

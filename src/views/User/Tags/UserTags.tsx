@@ -1,5 +1,3 @@
-import { useRouter } from 'next/router'
-
 import {
   Card,
   EmptyTag,
@@ -11,10 +9,11 @@ import {
   Translate,
   usePublicQuery,
   usePullToRefresh,
+  useRoute,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 
-import { analytics, getQuery, mergeConnections, toPath } from '~/common/utils'
+import { analytics, mergeConnections, toPath } from '~/common/utils'
 
 import IMAGE_LOGO_192 from '@/public/static/icon-192x192.png?url'
 
@@ -25,8 +24,8 @@ import styles from './styles.css'
 import { UserTagsPublic } from './__generated__/UserTagsPublic'
 
 const UserTags = () => {
-  const router = useRouter()
-  const userName = getQuery({ router, key: 'name' })
+  const { getQuery } = useRoute()
+  const userName = getQuery('name')
 
   /**
    * Data Fetching

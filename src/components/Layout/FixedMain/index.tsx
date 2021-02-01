@@ -1,6 +1,4 @@
-import { useRouter } from 'next/router'
-
-import { PATHS } from '~/common/enums'
+import { useRoute } from '~/components'
 
 import styles from './styles.css'
 
@@ -10,9 +8,8 @@ import styles from './styles.css'
  *
  */
 const FixedMain: React.FC = ({ children }) => {
-  const router = useRouter()
-  const isSingleColumnPage =
-    [PATHS.MIGRATION, PATHS.ABOUT].indexOf(router.pathname) >= 0
+  const { isInPath } = useRoute()
+  const isSingleColumnPage = isInPath('MIGRATION') || isInPath('ABOUT')
 
   if (isSingleColumnPage) {
     return (

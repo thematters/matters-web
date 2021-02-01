@@ -1,13 +1,10 @@
-import { useRouter } from 'next/router'
+import { Tabs, Translate, useRoute } from '~/components'
 
-import { Tabs, Translate } from '~/components'
-
-import { PATHS } from '~/common/enums'
-import { getQuery, toPath } from '~/common/utils'
+import { toPath } from '~/common/utils'
 
 const UserListTabs = () => {
-  const router = useRouter()
-  const name = getQuery({ router, key: 'name' }) || ''
+  const { isInPath, getQuery } = useRoute()
+  const name = getQuery('name')
 
   const circleMembersPath = toPath({
     page: 'circleMembers',
@@ -21,16 +18,13 @@ const UserListTabs = () => {
 
   return (
     <Tabs sticky>
-      <Tabs.Tab
-        {...circleMembersPath}
-        selected={router.pathname === PATHS.CIRCLE_MEMBERS}
-      >
+      <Tabs.Tab {...circleMembersPath} selected={isInPath('CIRCLE_MEMBERS')}>
         <Translate id="members" />
       </Tabs.Tab>
 
       <Tabs.Tab
         {...circleFollowersPath}
-        selected={router.pathname === PATHS.CIRCLE_FOLLOWERS}
+        selected={isInPath('CIRCLE_FOLLOWERS')}
       >
         <Translate id="follower" />
       </Tabs.Tab>

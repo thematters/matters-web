@@ -4,6 +4,7 @@ import {
   Button,
   DropdownDialog,
   IconAdd24,
+  IconLogout24,
   IconMore32,
   IconShare16,
   LanguageContext,
@@ -11,6 +12,7 @@ import {
   ShareDialog,
   TextIcon,
   Translate,
+  UnsubscribeCircleDialog,
   ViewerContext,
 } from '~/components'
 import {
@@ -26,28 +28,33 @@ import { translate } from '~/common/utils'
 import { fragments } from './gql'
 
 import { PutCircleArticles } from '~/components/GQL/mutations/__generated__/PutCircleArticles'
-import { DropdownActionsCircle } from './__generated__/DropdownActionsCircle'
+import { DropdownActionsCirclePrivate } from './__generated__/DropdownActionsCirclePrivate'
+import { DropdownActionsCirclePublic } from './__generated__/DropdownActionsCirclePublic'
 
 interface DialogProps {
   openAddCircleArticlesDialog: () => void
   openShareDialog: () => void
+  openUnsubscribeCircleDialog: () => void
 }
 
 type DropdownActionsProps = {
-  circle: DropdownActionsCircle
+  circle: DropdownActionsCirclePublic & Partial<DropdownActionsCirclePrivate>
 }
 
 interface Controls {
   hasAddArticles: boolean
+  hasUnsubscribeCircle: boolean
 }
 
 type BaseDropdownActionsProps = DialogProps & Controls
 
 const BaseDropdownActions = ({
   hasAddArticles,
+  hasUnsubscribeCircle,
 
   openAddCircleArticlesDialog,
   openShareDialog,
+  openUnsubscribeCircleDialog,
 }: BaseDropdownActionsProps) => {
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
     <Menu width={isInDropdown ? 'sm' : undefined}>
@@ -61,6 +68,14 @@ const BaseDropdownActions = ({
         <Menu.Item onClick={openAddCircleArticlesDialog}>
           <TextIcon icon={<IconAdd24 size="md" />} size="md" spacing="base">
             <Translate id="circleAddArticles" />
+          </TextIcon>
+        </Menu.Item>
+      )}
+
+      {hasUnsubscribeCircle && (
+        <Menu.Item onClick={openUnsubscribeCircleDialog}>
+          <TextIcon icon={<IconLogout24 size="md" />} size="md" spacing="base">
+            <Translate id="unsubscribeCircle" />
           </TextIcon>
         </Menu.Item>
       )}
@@ -118,9 +133,10 @@ const DropdownActions = ({ circle }: DropdownActionsProps) => {
   }
 
   const isOwner = circle.owner.id === viewer.id
-
+  const isMember = !!circle.isMember
   const controls = {
     hasAddArticles: isOwner,
+    hasUnsubscribeCircle: isMember,
   }
 
   return (
@@ -135,11 +151,16 @@ const DropdownActions = ({ circle }: DropdownActionsProps) => {
       {({ open: openAddCircleArticlesDialog }) => (
         <ShareDialog>
           {({ open: openShareDialog }) => (
-            <BaseDropdownActions
-              {...controls}
-              openAddCircleArticlesDialog={openAddCircleArticlesDialog}
-              openShareDialog={openShareDialog}
-            />
+            <UnsubscribeCircleDialog id={circle.id}>
+              {({ open: openUnsubscribeCircleDialog }) => (
+                <BaseDropdownActions
+                  {...controls}
+                  openAddCircleArticlesDialog={openAddCircleArticlesDialog}
+                  openShareDialog={openShareDialog}
+                  openUnsubscribeCircleDialog={openUnsubscribeCircleDialog}
+                />
+              )}
+            </UnsubscribeCircleDialog>
           )}
         </ShareDialog>
       )}

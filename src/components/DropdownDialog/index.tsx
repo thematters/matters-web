@@ -1,5 +1,5 @@
 import VisuallyHidden from '@reach/visually-hidden'
-import { forwardRef, useState } from 'react'
+import { forwardRef } from 'react'
 
 import {
   Button,
@@ -9,6 +9,7 @@ import {
   Dropdown,
   PopperProps,
   Translate,
+  useDialogSwitch,
   useResponsive,
 } from '~/components'
 
@@ -75,10 +76,8 @@ const BaseDropdownDialog = ({
   children,
 }: DropdownDialogProps) => {
   const isSmallUp = useResponsive('sm-up')
-  const [showDialog, setShowDialog] = useState(true)
-  // const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
-  const toggle = () => setShowDialog(!showDialog)
+  const { show, open, close } = useDialogSwitch(true)
+  const toggle = () => (show ? close() : open())
   const closeOnClick = (event: React.MouseEvent | React.KeyboardEvent) => {
     const target = event.target as HTMLElement
     if (target?.closest && target.closest('[data-clickable], a, button')) {
@@ -116,8 +115,8 @@ const BaseDropdownDialog = ({
         trigger={undefined}
         onHidden={close}
         onClickOutside={close}
-        visible={showDialog}
-        zIndex={Z_INDEX.OVER_STICKY_TABS}
+        visible={show}
+        zIndex={Z_INDEX.OVER_BOTTOM_BAR}
         appendTo={process.browser ? document.body : undefined}
         {...dropdown}
         content={<Content>{dropdown.content}</Content>}
@@ -134,7 +133,7 @@ const BaseDropdownDialog = ({
     <>
       {children({ open: toggle })}
 
-      <Dialog isOpen={showDialog} onDismiss={close} {...dialog} slideIn>
+      <Dialog isOpen={show} onDismiss={close} {...dialog} slideIn>
         <Dialog.Header
           title={dialog.title}
           close={close}

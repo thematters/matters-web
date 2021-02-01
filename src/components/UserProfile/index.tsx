@@ -1,6 +1,5 @@
 import _some from 'lodash/some'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import { useContext, useEffect } from 'react'
 
 import {
@@ -14,10 +13,11 @@ import {
   Throw404,
   Translate,
   usePublicQuery,
+  useRoute,
   ViewerContext,
 } from '~/components'
 
-import { getQuery, numAbbr, toPath } from '~/common/utils'
+import { numAbbr, toPath } from '~/common/utils'
 
 import IMAGE_COVER from '@/public/static/images/profile-cover.png'
 
@@ -31,11 +31,11 @@ import styles from './styles.css'
 import { UserProfileUserPublic } from './__generated__/UserProfileUserPublic'
 
 export const UserProfile = () => {
-  const router = useRouter()
+  const { getQuery } = useRoute()
   const viewer = useContext(ViewerContext)
 
   // public data
-  const userName = getQuery({ router, key: 'name' })
+  const userName = getQuery('name')
   const isMe = !userName || viewer.userName === userName
   const { data, loading, client } = usePublicQuery<UserProfileUserPublic>(
     USER_PROFILE_PUBLIC,

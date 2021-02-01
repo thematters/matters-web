@@ -1,12 +1,10 @@
-import { useRouter } from 'next/router'
+import { Form, Head, Layout, Spacer, Translate, useRoute } from '~/components'
 
-import { Form, Head, Layout, Spacer, Translate } from '~/components'
-
-import { getQuery, toPath } from '~/common/utils'
+import { toPath } from '~/common/utils'
 
 const Settings = () => {
-  const router = useRouter()
-  const name = getQuery({ router, key: 'name' })
+  const { getQuery } = useRoute()
+  const name = getQuery('name')
 
   return (
     <Layout.Main bgColor="grey-lighter">

@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
 import {
@@ -9,10 +8,9 @@ import {
   Spinner,
   Throw404,
   usePublicQuery,
+  useRoute,
   ViewerContext,
 } from '~/components'
-
-import { getQuery } from '~/common/utils'
 
 import { CIRCLE_BASIC_PROFILE } from './gql'
 
@@ -20,8 +18,8 @@ import { CircleBasicProfile } from './__generated__/CircleBasicProfile'
 
 const EditProfile = () => {
   const viewer = useContext(ViewerContext)
-  const router = useRouter()
-  const name = getQuery({ router, key: 'name' })
+  const { getQuery } = useRoute()
+  const name = getQuery('name')
 
   const { data, loading } = usePublicQuery<CircleBasicProfile>(
     CIRCLE_BASIC_PROFILE,
