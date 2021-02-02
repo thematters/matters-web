@@ -8,9 +8,9 @@ import {
   LanguageContext,
   Layout,
   Translate,
+  useMutation,
   VerificationSendCodeButton,
 } from '~/components'
-import { useMutation } from '~/components/GQL'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 
 import {

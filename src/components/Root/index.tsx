@@ -9,6 +9,7 @@ import {
   FeaturesProvider,
   LanguageProvider,
   Layout,
+  QueryError,
   Toast,
   usePublicQuery,
   useRoute,
@@ -16,7 +17,6 @@ import {
   ViewerUser,
 } from '~/components'
 import PageViewTracker from '~/components/Analytics/PageViewTracker'
-import { QueryError } from '~/components/GQL'
 import SplashScreen from '~/components/SplashScreen'
 
 import { ROOT_QUERY_PRIVATE, ROOT_QUERY_PUBLIC } from './gql'

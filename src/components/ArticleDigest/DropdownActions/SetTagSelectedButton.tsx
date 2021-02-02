@@ -1,7 +1,13 @@
 import gql from 'graphql-tag'
 
-import { IconAdd24, Menu, TextIcon, Translate, useRoute } from '~/components'
-import { useMutation } from '~/components/GQL'
+import {
+  IconAdd24,
+  Menu,
+  TextIcon,
+  Translate,
+  useMutation,
+  useRoute,
+} from '~/components'
 
 import { ADD_TOAST } from '~/common/enums'
 

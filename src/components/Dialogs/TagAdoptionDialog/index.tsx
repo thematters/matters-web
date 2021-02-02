@@ -1,5 +1,10 @@
-import { Dialog, Translate, useDialogSwitch, useRoute } from '~/components'
-import { useMutation } from '~/components/GQL'
+import {
+  Dialog,
+  Translate,
+  useDialogSwitch,
+  useMutation,
+  useRoute,
+} from '~/components'
 import UPDATE_TAG_SETTING from '~/components/GQL/mutations/updateTagSetting'
 
 import { ADD_TOAST } from '~/common/enums'
@@ -50,29 +55,25 @@ const BaseDialog = ({ children }: Props) => {
             bgColor="green"
             loading={loading}
             onClick={async () => {
-              try {
-                const result = await update({
-                  variables: { input: { id, type: 'adopt' } },
-                })
+              const result = await update({
+                variables: { input: { id, type: 'adopt' } },
+              })
 
-                if (!result) {
-                  throw new Error('tag adoption failed')
-                }
-
-                window.dispatchEvent(
-                  new CustomEvent(ADD_TOAST, {
-                    detail: {
-                      color: 'green',
-                      content: (
-                        <Translate zh_hant="認領成功" zh_hans="认领成功" />
-                      ),
-                      duration: 2000,
-                    },
-                  })
-                )
-              } catch (error) {
-                throw error
+              if (!result) {
+                throw new Error('tag adoption failed')
               }
+
+              window.dispatchEvent(
+                new CustomEvent(ADD_TOAST, {
+                  detail: {
+                    color: 'green',
+                    content: (
+                      <Translate zh_hant="認領成功" zh_hans="认领成功" />
+                    ),
+                    duration: 2000,
+                  },
+                })
+              )
             }}
           >
             <Translate zh_hant="即刻主理" zh_hans="即刻主理" />

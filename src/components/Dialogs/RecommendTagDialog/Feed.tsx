@@ -5,6 +5,7 @@ import { useContext, useEffect } from 'react'
 import {
   EmptyWarning,
   List,
+  QueryError,
   ShuffleButton,
   Spinner,
   TagDigest,
@@ -12,7 +13,6 @@ import {
   usePublicQuery,
   ViewerContext,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 
 import { HOTTEST_TAGS, SELECTED_TAGS } from './gql'
 import styles from './styles.css'

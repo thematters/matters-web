@@ -9,9 +9,9 @@ import {
   LanguageContext,
   Layout,
   Translate,
+  useMutation,
   VerificationSendCodeButton,
 } from '~/components'
-import { useMutation } from '~/components/GQL'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 
 import {
@@ -53,8 +53,14 @@ const Confirm: React.FC<FormProps> = ({
   submitCallback,
   closeDialog,
 }) => {
-  const [confirmCode] = useMutation<ConfirmVerificationCode>(CONFIRM_CODE)
-  const [changeEmail] = useMutation<ChangeEmail>(CHANGE_EMAIL)
+  const [confirmCode] = useMutation<ConfirmVerificationCode>(
+    CONFIRM_CODE,
+    undefined,
+    { showToast: false }
+  )
+  const [changeEmail] = useMutation<ChangeEmail>(CHANGE_EMAIL, undefined, {
+    showToast: false,
+  })
   const { lang } = useContext(LanguageContext)
   const isInPage = purpose === 'page'
 

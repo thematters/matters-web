@@ -1,8 +1,14 @@
 import gql from 'graphql-tag'
 import _isArray from 'lodash/isArray'
 
-import { IconRemove24, Menu, TextIcon, Translate, useRoute } from '~/components'
-import { useMutation } from '~/components/GQL'
+import {
+  IconRemove24,
+  Menu,
+  TextIcon,
+  Translate,
+  useMutation,
+  useRoute,
+} from '~/components'
 import updateTagArticlesCount from '~/components/GQL/updates/tagArticlesCount'
 
 import { REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'

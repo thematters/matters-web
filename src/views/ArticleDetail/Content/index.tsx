@@ -3,8 +3,7 @@ import gql from 'graphql-tag'
 import throttle from 'lodash/throttle'
 import { useContext, useEffect, useRef, useState } from 'react'
 
-import { ViewerContext } from '~/components'
-import { useMutation } from '~/components/GQL'
+import { useMutation, ViewerContext } from '~/components'
 
 import styles from '~/common/styles/utils/content.article.css'
 import {
@@ -35,7 +34,9 @@ const Content = ({
   translating?: boolean
 }) => {
   const viewer = useContext(ViewerContext)
-  const [read] = useMutation<ReadArticle>(READ_ARTICLE)
+  const [read] = useMutation<ReadArticle>(READ_ARTICLE, undefined, {
+    showToast: false,
+  })
 
   const contentContainer = useRef(null)
 

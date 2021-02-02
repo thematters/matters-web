@@ -1,5 +1,4 @@
-import { Dialog, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
+import { Dialog, Translate, useMutation } from '~/components'
 import UPDATE_TAG_SETTING from '~/components/GQL/mutations/updateTagSetting'
 import updateTagMaintainers from '~/components/GQL/updates/tagMaintainers'
 
@@ -62,43 +61,39 @@ const TagRemoveEditor = ({ id, editor, close }: Props) => {
           textColor="white"
           loading={loading}
           onClick={async () => {
-            try {
-              const result = await update({
-                variables: {
-                  input: { id, type: 'remove_editor', editors: [editor.id] },
-                },
-                update: (cache) =>
-                  updateTagMaintainers({
-                    cache,
-                    id,
-                    type: 'remove',
-                    editors: [editor.id],
-                  }),
-              })
+            const result = await update({
+              variables: {
+                input: { id, type: 'remove_editor', editors: [editor.id] },
+              },
+              update: (cache) =>
+                updateTagMaintainers({
+                  cache,
+                  id,
+                  type: 'remove',
+                  editors: [editor.id],
+                }),
+            })
 
-              if (!result) {
-                throw new Error('tag leave failed')
-              }
-
-              window.dispatchEvent(
-                new CustomEvent(ADD_TOAST, {
-                  detail: {
-                    color: 'green',
-                    content: (
-                      <Translate
-                        zh_hant="移除協作者成功"
-                        zh_hans="移除协作者成功"
-                      />
-                    ),
-                    duration: 2000,
-                  },
-                })
-              )
-
-              close()
-            } catch (error) {
-              throw error
+            if (!result) {
+              throw new Error('tag leave failed')
             }
+
+            window.dispatchEvent(
+              new CustomEvent(ADD_TOAST, {
+                detail: {
+                  color: 'green',
+                  content: (
+                    <Translate
+                      zh_hant="移除協作者成功"
+                      zh_hans="移除协作者成功"
+                    />
+                  ),
+                  duration: 2000,
+                },
+              })
+            )
+
+            close()
           }}
         >
           <Translate zh_hant="確認移除" zh_hans="确认移除" />

@@ -1,7 +1,12 @@
 import gql from 'graphql-tag'
 
-import { Button, IconUpVote16, IconUpVoted16, TextIcon } from '~/components'
-import { useMutation } from '~/components/GQL'
+import {
+  Button,
+  IconUpVote16,
+  IconUpVoted16,
+  TextIcon,
+  useMutation,
+} from '~/components'
 import {
   UNVOTE_COMMENT,
   VOTE_COMMENT,

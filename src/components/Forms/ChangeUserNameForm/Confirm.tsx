@@ -3,8 +3,14 @@ import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import React, { useContext } from 'react'
 
-import { Dialog, Form, LanguageContext, Layout, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
+import {
+  Dialog,
+  Form,
+  LanguageContext,
+  Layout,
+  Translate,
+  useMutation,
+} from '~/components'
 
 import {
   parseFormSubmitErrors,
@@ -40,7 +46,11 @@ const Confirm: React.FC<FormProps> = ({
   submitCallback,
   closeDialog,
 }) => {
-  const [update] = useMutation<UpdateUserInfoUserName>(UPDATE_USER_INFO)
+  const [update] = useMutation<UpdateUserInfoUserName>(
+    UPDATE_USER_INFO,
+    undefined,
+    { showToast: false }
+  )
   const { lang } = useContext(LanguageContext)
   const isInPage = purpose === 'page'
   const formId = 'username-confirm-form'

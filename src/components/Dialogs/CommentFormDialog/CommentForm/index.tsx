@@ -3,8 +3,7 @@ import gql from 'graphql-tag'
 import dynamic from 'next/dynamic'
 import { useState } from 'react'
 
-import { Button, Dialog, Spinner, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
+import { Button, Dialog, Spinner, Translate, useMutation } from '~/components'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
 import { ADD_TOAST, TEXT, TextId } from '~/common/enums'

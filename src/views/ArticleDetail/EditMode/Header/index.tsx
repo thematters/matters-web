@@ -7,9 +7,9 @@ import {
   Tag,
   TextIcon,
   Translate,
+  useMutation,
 } from '~/components'
 import { fragments as EditorFragments } from '~/components/Editor/fragments'
-import { useMutation } from '~/components/GQL'
 import articleFragments from '~/components/GQL/fragments/article'
 
 import { ADD_TOAST } from '~/common/enums'

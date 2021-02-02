@@ -1,15 +1,4 @@
-import { useContext } from 'react'
-
-import {
-  Dialog,
-  LanguageContext,
-  Translate,
-  useDialogSwitch,
-} from '~/components'
-import { useMutation } from '~/components/GQL'
-
-import { ADD_TOAST } from '~/common/enums'
-import { parseFormSubmitErrors } from '~/common/utils'
+import { Dialog, Translate, useDialogSwitch, useMutation } from '~/components'
 
 import { UNSUBSCRIBE_CIRCLE } from './gql'
 
@@ -24,7 +13,6 @@ const BaseUnsubscribeCircleDialog = ({
   id,
   children,
 }: BaseUnsubscribeCircleDialogProps) => {
-  const { lang } = useContext(LanguageContext)
   const { show, open, close } = useDialogSwitch(true)
 
   const [unsubscribe, { loading, data }] = useMutation<UnsubscribeCircle>(
@@ -35,27 +23,6 @@ const BaseUnsubscribeCircleDialog = ({
   )
   const isMember = data?.unsubscribeCircle.isMember
   const isUnsubscribed = typeof isMember === 'boolean' && !isMember
-
-  const onUnsubscribe = async () => {
-    try {
-      await unsubscribe()
-    } catch (error) {
-      const [messages, codes] = parseFormSubmitErrors(error, lang)
-
-      if (!messages[codes[0]]) {
-        return
-      }
-
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: messages[codes[0]],
-          },
-        })
-      )
-    }
-  }
 
   return (
     <>
@@ -96,7 +63,7 @@ const BaseUnsubscribeCircleDialog = ({
             <Dialog.Footer.Button
               bgColor="red"
               loading={loading}
-              onClick={() => onUnsubscribe()}
+              onClick={() => unsubscribe()}
             >
               <Translate zh_hant="轉身離開" zh_hans="转身离开" />
             </Dialog.Footer.Button>

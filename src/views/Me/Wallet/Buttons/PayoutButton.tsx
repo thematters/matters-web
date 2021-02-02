@@ -6,10 +6,9 @@ import {
   IconSpinner16,
   PayoutDialog,
   Translate,
+  useMutation,
 } from '~/components'
-import { useMutation } from '~/components/GQL'
 
-import { ADD_TOAST } from '~/common/enums'
 import { sleep } from '~/common/utils'
 
 import { ConnectStripeAccount } from './__generated__/ConnectStripeAccount'
@@ -46,22 +45,11 @@ const PayoutButton: React.FC<PayoutButtonProps> = ({
             if (hasStripeAccount) {
               open()
             } else {
-              try {
-                const { data } = await connectStripeAccount()
-                const redirectUrl = data?.connectStripeAccount.redirectUrl
-                open()
-                await sleep(2000)
-                window.open(redirectUrl, '_blank')
-              } catch (e) {
-                window.dispatchEvent(
-                  new CustomEvent(ADD_TOAST, {
-                    detail: {
-                      color: 'red',
-                      content: <Translate id="ACTION_FAILED" />,
-                    },
-                  })
-                )
-              }
+              const { data } = await connectStripeAccount()
+              const redirectUrl = data?.connectStripeAccount.redirectUrl
+              open()
+              await sleep(2000)
+              window.open(redirectUrl, '_blank')
             }
           }}
         >

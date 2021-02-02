@@ -10,8 +10,8 @@ import {
   Spinner,
   TextIcon,
   Translate,
+  useMutation,
 } from '~/components'
-import { useMutation } from '~/components/GQL'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 
 import {
@@ -67,7 +67,11 @@ export const CoverUploader = ({
   type,
 }: CoverUploaderProps) => {
   const [cover, setCover] = useState<string | undefined | null>(initCover)
-  const [upload, { loading }] = useMutation<SingleFileUpload>(UPLOAD_FILE)
+  const [upload, { loading }] = useMutation<SingleFileUpload>(
+    UPLOAD_FILE,
+    undefined,
+    { showToast: false }
+  )
 
   const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
   const fieldId = 'cover-upload-form'

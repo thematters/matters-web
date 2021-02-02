@@ -7,8 +7,8 @@ import {
   TextIcon,
   Translate,
   useDialogSwitch,
+  useMutation,
 } from '~/components'
-import { useMutation } from '~/components/GQL'
 
 import { ADD_TOAST } from '~/common/enums'
 

@@ -5,6 +5,7 @@ import {
   Head,
   Layout,
   PullToRefresh,
+  QueryError,
   Spinner,
   Throw404,
   usePublicQuery,
@@ -12,7 +13,6 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 
 import IMAGE_LOGO_192 from '@/public/static/icon-192x192.png?url'
 

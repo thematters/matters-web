@@ -3,12 +3,12 @@ import { useQuery } from '@apollo/react-hooks'
 import {
   Dialog,
   InfiniteList,
+  QueryError,
   RowRendererProps,
   Spinner,
   Translate,
   useResponsive,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 import { UserDigest } from '~/components/UserDigest'
 
 import { analytics, mergeConnections } from '~/common/utils'
