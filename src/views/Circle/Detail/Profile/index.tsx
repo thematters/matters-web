@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { useContext } from 'react'
 
 import {
@@ -30,6 +31,16 @@ const CircleProfile = ({ circle }: CircleProfileProps) => {
   const viewer = useContext(ViewerContext)
   const isOwner = circle?.owner.id === viewer.id
 
+  const circleMembersPath = toPath({
+    page: 'circleMembers',
+    circle: { name: circle.name },
+  })
+
+  const circleFollowersPath = toPath({
+    page: 'circleFollowers',
+    circle: { name: circle.name },
+  })
+
   return (
     <section className="profile">
       <CircleCover cover={circle.cover} fallbackCover={CIRCLE_COVER} />
@@ -50,17 +61,23 @@ const CircleProfile = ({ circle }: CircleProfileProps) => {
 
       <footer>
         <section className="counts">
-          <button type="button">
-            <span className="count">{numAbbr(circle.members.totalCount)}</span>
-            <Translate id="members" />
-          </button>
+          <Link {...circleMembersPath}>
+            <a>
+              <span className="count">
+                {numAbbr(circle.members.totalCount)}
+              </span>
+              <Translate id="members" />
+            </a>
+          </Link>
 
-          <button type="button">
-            <span className="count">
-              {numAbbr(circle.followers.totalCount)}
-            </span>
-            <Translate id="follower" />
-          </button>
+          <Link {...circleFollowersPath}>
+            <a>
+              <span className="count">
+                {numAbbr(circle.followers.totalCount)}
+              </span>
+              <Translate id="follower" />
+            </a>
+          </Link>
         </section>
 
         {isOwner ? (
