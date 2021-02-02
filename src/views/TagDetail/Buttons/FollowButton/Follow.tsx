@@ -6,9 +6,9 @@ import {
   IconAdd16,
   TextIcon,
   Translate,
+  useMutation,
   ViewerContext,
 } from '~/components'
-import { useMutation } from '~/components/GQL'
 import TOGGLE_FOLLOW_TAG from '~/components/GQL/mutations/toggleFollowTag'
 import updateTagFollowers from '~/components/GQL/updates/tagFollowers'
 

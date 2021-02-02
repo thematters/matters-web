@@ -4,6 +4,7 @@ import {
   Head,
   InfiniteScroll,
   List,
+  QueryError,
   Spinner,
   Tag,
   Translate,
@@ -11,7 +12,6 @@ import {
   usePullToRefresh,
   useRoute,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 
 import { analytics, mergeConnections, toPath } from '~/common/utils'
 

@@ -6,6 +6,7 @@ import { useContext, useEffect, useState } from 'react'
 import {
   EmptyResponse,
   List,
+  QueryError,
   Spinner,
   Switch,
   Title,
@@ -18,7 +19,6 @@ import {
   ViewerContext,
   ViewMoreButton,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 
 import { REFETCH_RESPONSES, URL_FRAGMENT } from '~/common/enums'
 import {

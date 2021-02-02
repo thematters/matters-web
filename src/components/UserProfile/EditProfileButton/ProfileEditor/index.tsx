@@ -10,8 +10,8 @@ import {
   Form,
   LanguageContext,
   Translate,
+  useMutation,
 } from '~/components'
-import { useMutation } from '~/components/GQL'
 
 import { ADD_TOAST, ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
 import {
@@ -62,7 +62,11 @@ const UPDATE_USER_INFO = gql`
 const UNCHANGED_FIELD = 'UNCHANGED_FIELD'
 
 const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
-  const [update] = useMutation<UpdateUserInfoProfile>(UPDATE_USER_INFO)
+  const [update] = useMutation<UpdateUserInfoProfile>(
+    UPDATE_USER_INFO,
+    undefined,
+    { showToast: false }
+  )
   const { lang } = useContext(LanguageContext)
 
   const formId = 'edit-profile-form'

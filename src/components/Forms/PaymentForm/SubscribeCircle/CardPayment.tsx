@@ -14,9 +14,9 @@ import {
   Dialog,
   LanguageContext,
   Translate,
+  useMutation,
   useStep,
 } from '~/components'
-import { useMutation } from '~/components/GQL'
 
 import { STRIPE_ERROR_MESSAGES } from '~/common/enums'
 import { analytics, parseFormSubmitErrors, translate } from '~/common/utils'
@@ -52,7 +52,11 @@ const BaseCardPayment: React.FC<CardPaymentProps> = ({
   const elements = useElements()
   const { lang } = useContext(LanguageContext)
 
-  const [subscribeCircle] = useMutation<SubscribeCircleType>(SUBSCRIBE_CIRCLE)
+  const [subscribeCircle] = useMutation<SubscribeCircleType>(
+    SUBSCRIBE_CIRCLE,
+    undefined,
+    { showToast: false }
+  )
 
   const [disabled, setDisabled] = useState(true)
   const [isSubmitting, setSubmitting] = useState(false)

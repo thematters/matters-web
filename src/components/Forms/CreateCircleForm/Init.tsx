@@ -2,8 +2,14 @@ import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useRef } from 'react'
 
-import { Dialog, Form, LanguageContext, Layout, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
+import {
+  Dialog,
+  Form,
+  LanguageContext,
+  Layout,
+  Translate,
+  useMutation,
+} from '~/components'
 import PUT_CIRCLE from '~/components/GQL/mutations/putCircle'
 
 import {
@@ -44,7 +50,9 @@ const Init: React.FC<FormProps> = ({
   submitCallback,
   closeDialog,
 }) => {
-  const [create] = useMutation<PutCircle>(PUT_CIRCLE)
+  const [create] = useMutation<PutCircle>(PUT_CIRCLE, undefined, {
+    showToast: false,
+  })
   const { lang } = useContext(LanguageContext)
   const inputRef: React.RefObject<any> | null = useRef(null)
   // const isInDialog = purpose === 'dialog'

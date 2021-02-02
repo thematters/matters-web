@@ -15,6 +15,7 @@ import {
   Head,
   Layout,
   PullToRefresh,
+  QueryError,
   Spinner,
   Throw404,
   Title,
@@ -24,7 +25,6 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { UserDigest } from '~/components/UserDigest'
 

@@ -7,9 +7,9 @@ import {
   EmptyArticle,
   InfiniteScroll,
   Layout,
+  QueryError,
   Spinner,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 
 import { mergeConnections } from '~/common/utils'
 

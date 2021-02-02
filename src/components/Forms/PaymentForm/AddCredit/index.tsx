@@ -18,8 +18,8 @@ import {
   Form,
   LanguageContext,
   Translate,
+  useMutation,
 } from '~/components'
-import { useMutation } from '~/components/GQL'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
 
 import {
@@ -78,7 +78,9 @@ const BaseAddCredit: React.FC<FormProps> = ({
   const stripe = useStripe()
   const elements = useElements()
   const { lang } = useContext(LanguageContext)
-  const [addCredit] = useMutation<AddCreditType>(ADD_CREDIT)
+  const [addCredit] = useMutation<AddCreditType>(ADD_CREDIT, undefined, {
+    showToast: false,
+  })
 
   const { data: balanceData } = useQuery<WalletBalance>(WALLET_BALANCE, {
     fetchPolicy: 'network-only',

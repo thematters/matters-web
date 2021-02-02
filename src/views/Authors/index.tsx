@@ -6,13 +6,13 @@ import {
   InfiniteScroll,
   Layout,
   List,
+  QueryError,
   Spinner,
   Translate,
   usePublicQuery,
   UserDigest,
   ViewerContext,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 
 import { analytics, mergeConnections } from '~/common/utils'
 

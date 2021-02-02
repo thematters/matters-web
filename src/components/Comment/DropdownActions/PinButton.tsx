@@ -1,7 +1,13 @@
 import gql from 'graphql-tag'
 
-import { IconPin24, IconUnPin24, Menu, TextIcon, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
+import {
+  IconPin24,
+  IconUnPin24,
+  Menu,
+  TextIcon,
+  Translate,
+  useMutation,
+} from '~/components'
 import TOGGLE_PIN_COMMENT from '~/components/GQL/mutations/togglePinComment'
 
 import { TogglePinComment } from '~/components/GQL/mutations/__generated__/TogglePinComment'
