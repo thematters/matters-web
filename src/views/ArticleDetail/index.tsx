@@ -11,7 +11,6 @@ import {
   DateTime,
   EmptyLayout,
   Error,
-  FeaturesContext,
   Head,
   Layout,
   PullToRefresh,
@@ -20,6 +19,7 @@ import {
   Throw404,
   Title,
   Translate,
+  useFeatures,
   usePublicQuery,
   useResponsive,
   useRoute,
@@ -73,7 +73,7 @@ const ArticleDetail = () => {
   const viewer = useContext(ViewerContext)
 
   // UI
-  const features = useContext(FeaturesContext)
+  const features = useFeatures()
   const isLargeUp = useResponsive('lg-up')
   const isSmallUp = useResponsive('sm-up')
   const [fixedWall, setFixedWall] = useState(false)
