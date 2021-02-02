@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router'
 import { useContext, useEffect } from 'react'
 
 import {
@@ -9,12 +8,13 @@ import {
   Translate,
   usePublicQuery,
   usePullToRefresh,
+  useRoute,
   ViewerContext,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
 import { UserDigest } from '~/components/UserDigest'
 
-import { getQuery, mergeConnections } from '~/common/utils'
+import { mergeConnections } from '~/common/utils'
 
 import UserListTabs from '../UserListTabs'
 import { CIRCLE_MEMBERS_PRIVATE, CIRCLE_MEMBERS_PUBLIC } from './gql'
@@ -23,8 +23,8 @@ import { CircleMembersPublic } from './__generated__/CircleMembersPublic'
 
 const CircleMembers = () => {
   const viewer = useContext(ViewerContext)
-  const router = useRouter()
-  const name = getQuery({ router, key: 'name' })
+  const { getQuery } = useRoute()
+  const name = getQuery('name')
 
   /**
    * Public data fetching

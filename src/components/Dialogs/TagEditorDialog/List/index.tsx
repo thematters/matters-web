@@ -41,13 +41,13 @@ interface Props {
   toRemoveStep: (editor: TagEditor) => void
 }
 
-const RemoveButton = ({ remove }: { remove: (editor: string) => void }) => (
+const RemoveButton = ({ remove }: { remove: () => void }) => (
   <section>
     <Button
       spacing={[0, 'xtight']}
       size={[null, '1.25rem']}
       bgColor="grey-lighter"
-      onClick={remove}
+      onClick={() => remove()}
     >
       <TextIcon size="xs" color="grey-dark" weight="md">
         <Translate zh_hant="移除" zh_hans="移除" />

@@ -1,13 +1,22 @@
 /* @styled-jsx=global */
 
 :root {
+  /* header */
   --z-index-global-header: 100;
   --z-index-under-global-header: 99;
-  --z-index-over-global-header: 101;
+
+  /* sticky tabs */
   --z-index-sticky-tabs: 110;
-  --z-index-over-sticky-tabs: 111;
+
+  /* bottom bar */
+  --z-index-bottom-bar: 150;
+  --z-index-over-bottom-bar: 151;
+
+  /* dialog */
   --z-index-dialog: 200;
   --z-index-over-dialog: 201;
+
+  /* others */
   --z-index-progress-bar: 300;
   --z-index-splash-screen: 400;
 }

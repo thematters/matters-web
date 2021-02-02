@@ -1,6 +1,4 @@
-import { useState } from 'react'
-
-import { Dialog } from '~/components'
+import { Dialog, useDialogSwitch } from '~/components'
 
 import CommentForm, { CommentFormProps } from './CommentForm'
 
@@ -12,9 +10,7 @@ const BaseCommentFormDialog = ({
   children,
   ...props
 }: CommentFormDialogProps) => {
-  const [showDialog, setShowDialog] = useState(true)
-  const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
+  const { show, open, close } = useDialogSwitch(true)
 
   // FIXME: editor can't be focused with dialog on Android devices
   const focusEditor = () => {
@@ -25,7 +21,7 @@ const BaseCommentFormDialog = ({
   }
 
   const onRest = () => {
-    if (showDialog) {
+    if (show) {
       focusEditor()
     }
   }
@@ -34,7 +30,7 @@ const BaseCommentFormDialog = ({
     <>
       {children && children({ open })}
 
-      <Dialog isOpen={showDialog} onDismiss={close} onRest={onRest} fixedHeight>
+      <Dialog isOpen={show} onDismiss={close} onRest={onRest} fixedHeight>
         <CommentForm {...props} closeDialog={close} />
       </Dialog>
     </>

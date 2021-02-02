@@ -1,5 +1,4 @@
 import gql from 'graphql-tag'
-import { useState } from 'react'
 
 import {
   Button,
@@ -7,6 +6,7 @@ import {
   IconDraftDelete12,
   TextIcon,
   Translate,
+  useDialogSwitch,
 } from '~/components'
 import { useMutation } from '~/components/GQL'
 
@@ -54,9 +54,7 @@ const fragments = {
 }
 
 const DeleteButton = ({ draft }: DeleteButtonProps) => {
-  const [showDialog, setShowDialog] = useState(false)
-  const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
+  const { show, open, close } = useDialogSwitch(false)
 
   const [deleteDraft] = useMutation<DeleteDraft>(DELETE_DRAFT, {
     variables: { id: draft.id },
@@ -122,7 +120,7 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
         </TextIcon>
       </Button>
 
-      <Dialog isOpen={showDialog} onDismiss={close} size="sm">
+      <Dialog isOpen={show} onDismiss={close} size="sm">
         <Dialog.Header title="deleteDraft" close={close} mode="inner" />
 
         <Dialog.Message>

@@ -1,8 +1,7 @@
 import NextHead from 'next/head'
-import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
-import { LanguageContext } from '~/components'
+import { LanguageContext, useRoute } from '~/components'
 
 import { langConvert, translate, TranslateArgs } from '~/common/utils'
 
@@ -24,7 +23,7 @@ interface HeadProps {
 }
 
 export const Head: React.FC<HeadProps> = (props) => {
-  const router = useRouter()
+  const { router } = useRoute()
   const { lang } = useContext(LanguageContext)
   const title =
     typeof props.title === 'object'

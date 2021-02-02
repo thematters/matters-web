@@ -12,10 +12,10 @@ interface Props {
   children?: ({ open }: { open: () => void }) => React.ReactNode
 }
 
-export const RecommendAuthorDialog = ({ children }: Props) => {
+const BaseRecommendAuthorDialog = ({ children }: Props) => {
   const defaultType = 'trendy'
 
-  const { show, open, close } = useDialogSwitch(false)
+  const { show, open, close } = useDialogSwitch(true)
   const [feed, setFeed] = useState<FeedType>(defaultType)
 
   const isActive = feed === 'active'
@@ -68,5 +68,18 @@ export const RecommendAuthorDialog = ({ children }: Props) => {
 
       <style jsx>{styles}</style>
     </>
+  )
+}
+
+export const RecommendAuthorDialog = (props: Props) => {
+  const Children = ({ open }: { open: () => void }) => {
+    useEventListener(OPEN_RECOMMEND_AUTHOR_DIALOG, open)
+    return <>{props.children && props.children({ open })}</>
+  }
+
+  return (
+    <Dialog.Lazy mounted={<BaseRecommendAuthorDialog {...props} />}>
+      {({ open }) => <Children open={open} />}
+    </Dialog.Lazy>
   )
 }

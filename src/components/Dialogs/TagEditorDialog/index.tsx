@@ -1,9 +1,6 @@
-import { useRouter } from 'next/router'
 import { useState } from 'react'
 
-import { Dialog, useStep } from '~/components'
-
-import { getQuery } from '~/common/utils'
+import { Dialog, useRoute, useStep } from '~/components'
 
 import TagEditorList from './List'
 import TagRemoveEditor from './Remove'
@@ -44,8 +41,8 @@ const BaseDialog = ({ children }: Props) => {
   }
   const close = () => setShowDialog(false)
 
-  const router = useRouter()
-  const id = getQuery({ router, key: 'tagId' })
+  const { getQuery } = useRoute()
+  const id = getQuery('tagId')
 
   const isAdd = currStep === 'add'
   const isList = currStep === 'list'

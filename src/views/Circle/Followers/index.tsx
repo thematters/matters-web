@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router'
 import { useContext, useEffect } from 'react'
 
 import {
@@ -10,11 +9,10 @@ import {
   Throw404,
   usePublicQuery,
   usePullToRefresh,
+  useRoute,
   ViewerContext,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
-
-import { getQuery } from '~/common/utils'
 
 import IMAGE_LOGO_192 from '@/public/static/icon-192x192.png?url'
 
@@ -28,8 +26,8 @@ import { CircleDetailPublic } from '../Detail/__generated__/CircleDetailPublic'
 
 const CircleFollowersContainer = () => {
   const viewer = useContext(ViewerContext)
-  const router = useRouter()
-  const name = getQuery({ router, key: 'name' })
+  const { getQuery } = useRoute()
+  const name = getQuery('name')
 
   /**
    * Public data fetching

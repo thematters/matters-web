@@ -1,9 +1,6 @@
 import dynamic from 'next/dynamic'
-import { useRouter } from 'next/router'
 
-import { EmptyLayout, Spinner, Throw404 } from '~/components'
-
-import { getNameType } from '~/common/utils'
+import { EmptyLayout, Spinner, Throw404, useRoute } from '~/components'
 
 const DynamicUserArticles = dynamic(() => import('~/views/User/Articles'), {
   ssr: true,
@@ -24,12 +21,11 @@ const DynamicCircleDetail = dynamic(() => import('~/views/Circle/Detail'), {
 })
 
 const NameIndex = () => {
-  const router = useRouter()
-  const nameType = getNameType({ router })
+  const { isPathStartWith } = useRoute()
 
-  if (nameType === 'user') {
+  if (isPathStartWith('/@', true)) {
     return <DynamicUserArticles />
-  } else if (nameType === 'circle') {
+  } else if (isPathStartWith('/~', true)) {
     return <DynamicCircleDetail />
   }
 
