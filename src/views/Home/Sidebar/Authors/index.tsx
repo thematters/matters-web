@@ -3,13 +3,13 @@ import { useContext, useEffect } from 'react'
 
 import {
   List,
+  QueryError,
   ShuffleButton,
   Spinner,
   usePublicQuery,
   UserDigest,
   ViewerContext,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 
 import { analytics } from '~/common/utils'
 

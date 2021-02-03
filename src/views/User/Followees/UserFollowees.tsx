@@ -5,6 +5,7 @@ import {
   Head,
   InfiniteScroll,
   List,
+  QueryError,
   Spinner,
   Translate,
   usePublicQuery,
@@ -12,7 +13,6 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 import { UserDigest } from '~/components/UserDigest'
 
 import { analytics, mergeConnections } from '~/common/utils'

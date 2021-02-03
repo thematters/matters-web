@@ -17,13 +17,13 @@ import {
   TagLeaveDialog,
   TextIcon,
   Translate,
+  useMutation,
   ViewerContext,
 } from '~/components'
 import {
   SearchSelectDialog,
   SearchSelectNode,
 } from '~/components/Dialogs/SearchSelectDialog'
-import { useMutation } from '~/components/GQL'
 import ADD_ARTICLES_TAGS from '~/components/GQL/mutations/addArticlesTags'
 import updateTagArticlesCount from '~/components/GQL/updates/tagArticlesCount'
 

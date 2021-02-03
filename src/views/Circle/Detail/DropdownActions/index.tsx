@@ -13,13 +13,14 @@ import {
   TextIcon,
   Translate,
   UnsubscribeCircleDialog,
+  useFeatures,
+  useMutation,
   ViewerContext,
 } from '~/components'
 import {
   SearchSelectDialog,
   SearchSelectNode,
 } from '~/components/Dialogs/SearchSelectDialog'
-import { useMutation } from '~/components/GQL'
 import PUT_CIRCLE_ARTICLES from '~/components/GQL/mutations/putCircleArticles'
 
 import { ADD_TOAST, REFETCH_CIRCLE_DETAIL_ARTICLES, TEXT } from '~/common/enums'
@@ -56,6 +57,8 @@ const BaseDropdownActions = ({
   openShareDialog,
   openUnsubscribeCircleDialog,
 }: BaseDropdownActionsProps) => {
+  const features = useFeatures()
+
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
     <Menu width={isInDropdown ? 'sm' : undefined}>
       <Menu.Item onClick={openShareDialog}>
@@ -64,7 +67,7 @@ const BaseDropdownActions = ({
         </TextIcon>
       </Menu.Item>
 
-      {hasAddArticles && (
+      {hasAddArticles && features.circle_management && (
         <Menu.Item onClick={openAddCircleArticlesDialog}>
           <TextIcon icon={<IconAdd24 size="md" />} size="md" spacing="base">
             <Translate id="circleAddArticles" />

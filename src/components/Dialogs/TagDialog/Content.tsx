@@ -11,8 +11,8 @@ import {
   Menu,
   Spinner,
   Translate,
+  useMutation,
 } from '~/components'
-import { useMutation } from '~/components/GQL'
 import SEARCH_TAGS from '~/components/GQL/queries/searchTags'
 
 import { ADD_TOAST, ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
@@ -133,7 +133,9 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
   description,
   closeDialog,
 }) => {
-  const [update] = useMutation<PutTag>(PUT_TAG)
+  const [update] = useMutation<PutTag>(PUT_TAG, undefined, {
+    showToast: false,
+  })
   const { lang } = useContext(LanguageContext)
   const isEditing = id && content
 

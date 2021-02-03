@@ -2,8 +2,14 @@ import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 
-import { Dialog, Form, LanguageContext, Layout, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
+import {
+  Dialog,
+  Form,
+  LanguageContext,
+  Layout,
+  Translate,
+  useMutation,
+} from '~/components'
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
 
 import { parseFormSubmitErrors, translate, validateEmail } from '~/common/utils'
@@ -37,7 +43,9 @@ const Request: React.FC<FormProps> = ({
   const titleId = isForget ? 'resetPassword' : 'changePassword'
   const redirectPath = isForget ? '/forget' : '/me/settings/change-password'
 
-  const [sendCode] = useMutation<SendVerificationCode>(SEND_CODE)
+  const [sendCode] = useMutation<SendVerificationCode>(SEND_CODE, undefined, {
+    showToast: false,
+  })
 
   const {
     values,

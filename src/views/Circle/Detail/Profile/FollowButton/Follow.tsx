@@ -1,7 +1,6 @@
 import _isNil from 'lodash/isNil'
 
-import { Button, TextIcon, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
+import { Button, TextIcon, Translate, useMutation } from '~/components'
 import TOGGLE_FOLLOW_CIRCLE from '~/components/GQL/mutations/toggleFollowCircle'
 import updateCircleFollowerCount from '~/components/GQL/updates/circleFollowerCount'
 

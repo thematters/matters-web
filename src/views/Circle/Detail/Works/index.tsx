@@ -6,13 +6,13 @@ import {
   EmptyTagArticles,
   InfiniteScroll,
   List,
+  QueryError,
   Spinner,
   useEventListener,
   usePublicQuery,
   usePullToRefresh,
   ViewerContext,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 
 import { REFETCH_CIRCLE_DETAIL_ARTICLES } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'

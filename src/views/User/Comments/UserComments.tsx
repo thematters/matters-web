@@ -10,13 +10,13 @@ import {
   Head,
   InfiniteScroll,
   List,
+  QueryError,
   Spinner,
   usePublicQuery,
   usePullToRefresh,
   useRoute,
   ViewerContext,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 
 import {
   analytics,

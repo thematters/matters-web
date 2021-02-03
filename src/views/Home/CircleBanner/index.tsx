@@ -3,9 +3,9 @@ import { useContext } from 'react'
 
 import {
   Button,
-  FeaturesContext,
   IconClose32,
   Translate,
+  useFeatures,
   ViewerContext,
 } from '~/components'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
@@ -21,7 +21,7 @@ import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientP
 
 export const CircleBanner = () => {
   const viewer = useContext(ViewerContext)
-  const features = useContext(FeaturesContext)
+  const features = useFeatures()
   const { data: clientPreferenceData, client } = useQuery<ClientPreference>(
     CLIENT_PREFERENCE,
     {
@@ -58,7 +58,7 @@ export const CircleBanner = () => {
 
   // TODO: showing differnt UI based on viewer state
   // @ts-ignore
-  const canCreateCircle = features.circle
+  const canCreateCircle = features.circle_management
 
   return (
     <div className="container">

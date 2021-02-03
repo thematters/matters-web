@@ -11,20 +11,20 @@ import {
   DateTime,
   EmptyLayout,
   Error,
-  FeaturesContext,
   Head,
   Layout,
   PullToRefresh,
+  QueryError,
   Spinner,
   Throw404,
   Title,
   Translate,
+  useFeatures,
   usePublicQuery,
   useResponsive,
   useRoute,
   ViewerContext,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { UserDigest } from '~/components/UserDigest'
 
@@ -73,7 +73,7 @@ const ArticleDetail = () => {
   const viewer = useContext(ViewerContext)
 
   // UI
-  const features = useContext(FeaturesContext)
+  const features = useFeatures()
   const isLargeUp = useResponsive('lg-up')
   const isSmallUp = useResponsive('sm-up')
   const [fixedWall, setFixedWall] = useState(false)

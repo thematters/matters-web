@@ -1,5 +1,6 @@
 export * from './useDialogSwitch'
 export * from './useEventListener'
+export * from './useFeatures'
 export * from './useNativeEventListener'
 export * from './useInterval'
 export * from './useOutsideClick'

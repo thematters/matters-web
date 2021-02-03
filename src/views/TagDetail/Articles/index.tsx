@@ -6,13 +6,13 @@ import {
   EmptyTagArticles,
   InfiniteScroll,
   List,
+  QueryError,
   Spinner,
   useEventListener,
   usePublicQuery,
   usePullToRefresh,
   ViewerContext,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 import {
   TAG_ARTICLES_PRIVATE,
   TAG_ARTICLES_PUBLIC,

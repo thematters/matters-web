@@ -2,8 +2,14 @@ import gql from 'graphql-tag'
 import _filter from 'lodash/filter'
 import _get from 'lodash/get'
 
-import { IconUnPin24, Menu, TextIcon, Translate, useRoute } from '~/components'
-import { useMutation } from '~/components/GQL'
+import {
+  IconUnPin24,
+  Menu,
+  TextIcon,
+  Translate,
+  useMutation,
+  useRoute,
+} from '~/components'
 
 import { ADD_TOAST } from '~/common/enums'
 

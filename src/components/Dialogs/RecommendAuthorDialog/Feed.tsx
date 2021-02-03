@@ -4,6 +4,7 @@ import { useContext, useEffect } from 'react'
 import {
   EmptyWarning,
   List,
+  QueryError,
   ShuffleButton,
   Spinner,
   Translate,
@@ -11,7 +12,6 @@ import {
   UserDigest,
   ViewerContext,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 
 import { RECOMMEND_AUTHORS } from './gql'
 import styles from './styles.css'

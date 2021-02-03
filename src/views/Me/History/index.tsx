@@ -8,9 +8,9 @@ import {
   InfiniteScroll,
   Layout,
   List,
+  QueryError,
   Spinner,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 
 import { analytics, mergeConnections } from '~/common/utils'
 

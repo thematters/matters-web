@@ -6,10 +6,10 @@ import {
   Head,
   InfiniteScroll,
   Layout,
+  QueryError,
   Spinner,
   usePublicQuery,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 
 import { analytics, mergeConnections, toPath } from '~/common/utils'
 

@@ -9,8 +9,8 @@ import {
   CircleAvatarProps,
   Spinner,
   Translate,
+  useMutation,
 } from '~/components'
-import { useMutation } from '~/components/GQL'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 import { IconCamera24 } from '~/components/Icon'
 
@@ -43,7 +43,11 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
 
   ...avatarProps
 }) => {
-  const [upload, { loading }] = useMutation<SingleFileUpload>(UPLOAD_FILE)
+  const [upload, { loading }] = useMutation<SingleFileUpload>(
+    UPLOAD_FILE,
+    undefined,
+    { showToast: false }
+  )
   const [avatar, setAvatar] = useState<string | undefined>(avatarProps.src)
 
   const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')

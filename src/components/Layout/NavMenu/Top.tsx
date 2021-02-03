@@ -2,7 +2,6 @@ import { useContext } from 'react'
 
 import {
   CardSpacing,
-  FeaturesContext,
   IconBookmark24,
   IconClap24,
   IconDraft24,
@@ -12,6 +11,7 @@ import {
   Menu,
   TextIcon,
   Translate,
+  useFeatures,
   ViewerContext,
 } from '~/components'
 
@@ -24,7 +24,7 @@ interface NavMenuTopProps {
 
 const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
   const viewer = useContext(ViewerContext)
-  const features = useContext(FeaturesContext)
+  const features = useFeatures()
   const viewerPath = toPath({
     page: 'userProfile',
     userName: viewer.userName || '',

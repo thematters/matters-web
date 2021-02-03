@@ -10,8 +10,8 @@ import {
   LanguageContext,
   Layout,
   Translate,
+  useMutation,
 } from '~/components'
-import { useMutation } from '~/components/GQL'
 import PUT_CIRCLE from '~/components/GQL/mutations/putCircle'
 
 import {
@@ -54,7 +54,9 @@ interface FormValues {
 const UNCHANGED_FIELD = 'UNCHANGED_FIELD'
 
 const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
-  const [update] = useMutation<PutCircle>(PUT_CIRCLE)
+  const [update] = useMutation<PutCircle>(PUT_CIRCLE, undefined, {
+    showToast: false,
+  })
   const { lang } = useContext(LanguageContext)
   const isInPage = purpose === 'page'
 
