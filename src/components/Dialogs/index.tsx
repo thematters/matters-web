@@ -30,3 +30,4 @@ export * from './UnsubscribeCircleDialog'
 // Misc
 export * from './NewsletterDialog'
 export * from './GoogleSearchDialog'
+export * from './PaymentPointerDialog'
