@@ -4,29 +4,29 @@ import { useState } from 'react'
 
 import {
   Button,
-  CommentFormType,
-  Dialog,
+  IconSpinner16,
   Spinner,
+  TextIcon,
   Translate,
   useMutation,
 } from '~/components'
 import PUT_COMMENT from '~/components/GQL/mutations/putComment'
-import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import COMMENT_DRAFT from '~/components/GQL/queries/commentDraft'
 
-import { ADD_TOAST, TEXT, TextId } from '~/common/enums'
-import { dom, stripHtml, subscribePush, trimLineBreaks } from '~/common/utils'
+import { TEXT } from '~/common/enums'
+import { dom, stripHtml, trimLineBreaks } from '~/common/utils'
 
 import styles from './styles.css'
 
 import { PutComment } from '~/components/GQL/mutations/__generated__/PutComment'
-import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import { CommentDraft } from '~/components/GQL/queries/__generated__/CommentDraft'
 
 const CommentEditor = dynamic(() => import('~/components/Editor/Comment'), {
   ssr: false,
   loading: Spinner,
 })
+
+export type CommentFormType = 'article' | 'circleDiscussion' | 'circleBroadcast'
 
 export interface CommentFormProps {
   commentId?: string
@@ -38,12 +38,11 @@ export interface CommentFormProps {
 
   defaultContent?: string | null
   submitCallback?: () => void
-  closeDialog: () => void
-  title?: TextId
-  context?: React.ReactNode
+
+  placeholder?: string
 }
 
-const CommentForm: React.FC<CommentFormProps> = ({
+export const CommentForm: React.FC<CommentFormProps> = ({
   commentId,
   replyToId,
   parentId,
@@ -53,11 +52,8 @@ const CommentForm: React.FC<CommentFormProps> = ({
 
   defaultContent,
   submitCallback,
-  closeDialog,
-  title = 'putComment',
-  context,
 
-  ...props
+  placeholder,
 }) => {
   // retrieve comment draft
   const commentDraftId = `${articleId || circleId}:${commentId || 0}:${
@@ -68,11 +64,6 @@ const CommentForm: React.FC<CommentFormProps> = ({
   const { data, client } = useQuery<CommentDraft>(COMMENT_DRAFT, {
     variables: { id: commentDraftId },
   })
-
-  // retrieve push setting
-  const { data: clientPreferenceData } = useQuery<ClientPreference>(
-    CLIENT_PREFERENCE
-  )
 
   const [putComment] = useMutation<PutComment>(PUT_COMMENT)
   const [isSubmitting, setSubmitting] = useState(false)
@@ -96,9 +87,6 @@ const CommentForm: React.FC<CommentFormProps> = ({
       },
     }
 
-    const push = clientPreferenceData?.clientPreference.push
-    const skipPushButton = !push || !push.supported || push.enabled
-
     event.preventDefault()
     setSubmitting(true)
 
@@ -113,32 +101,11 @@ const CommentForm: React.FC<CommentFormProps> = ({
         data: { content: '' },
       })
 
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'green',
-            content: skipPushButton ? (
-              <Translate zh_hant="評論已送出" zh_hans="评论已送出" />
-            ) : (
-              <Translate id="pushDescription" />
-            ),
-            customButton: !skipPushButton && (
-              <Button onClick={() => subscribePush()}>
-                <Translate id="confirmPush" />
-              </Button>
-            ),
-            buttonPlacement: 'center',
-          },
-        })
-      )
-
       setSubmitting(false)
 
       if (submitCallback) {
         submitCallback()
       }
-
-      closeDialog()
     } catch (e) {
       setSubmitting(false)
       console.error(e)
@@ -155,37 +122,40 @@ const CommentForm: React.FC<CommentFormProps> = ({
   }
 
   return (
-    <>
-      <Dialog.Header
-        title={title}
-        close={closeDialog}
-        closeTextId="close"
-        rightButton={
-          <Dialog.Header.RightButton
-            type="submit"
-            form={formId}
-            disabled={isSubmitting || !isValid}
-            text={<Translate zh_hant="送出" zh_hans="送出" />}
-            loading={isSubmitting}
-          />
-        }
-      />
+    <form
+      id={formId}
+      onSubmit={handleSubmit}
+      aria-label={TEXT.zh_hant.putComment}
+    >
+      <section className="content">
+        <CommentEditor
+          content={content}
+          update={onUpdate}
+          placeholder={placeholder}
+        />
+      </section>
 
-      <Dialog.Content spacing={['base', 'base']} hasGrow>
-        {context && <section className="context">{context}</section>}
-
-        <form
-          id={formId}
-          onSubmit={handleSubmit}
-          aria-label={TEXT.zh_hant.putComment}
+      <footer>
+        <Button
+          type="submit"
+          form={formId}
+          size={[null, '2rem']}
+          spacing={[0, 'base']}
+          bgColor="green"
+          disabled={isSubmitting || !isValid}
         >
-          <CommentEditor content={content} update={onUpdate} />
-        </form>
-      </Dialog.Content>
+          <TextIcon
+            color="white"
+            size="md-s"
+            weight="md"
+            icon={isSubmitting && <IconSpinner16 size="sm" />}
+          >
+            {isSubmitting ? null : <Translate zh_hant="送出" zh_hans="送出" />}
+          </TextIcon>
+        </Button>
+      </footer>
 
       <style jsx>{styles}</style>
-    </>
+    </form>
   )
 }
-
-export default CommentForm

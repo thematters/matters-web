@@ -1,0 +1,8 @@
+.discussion {
+  padding: 0 var(--spacing-base);
+  margin-top: var(--spacing-x-tight);
+
+  & header {
+    margin-bottom: var(--spacing-loose);
+  }
+}

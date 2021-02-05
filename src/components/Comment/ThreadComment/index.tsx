@@ -1,72 +1,39 @@
-import gql from 'graphql-tag'
 import { useState } from 'react'
 
-import { Comment } from '~/components'
+import { CommentFormType } from '~/components'
 
 import { filterComments } from '~/common/utils'
 
+import Feed from '../Feed'
 import ExpandButton from './ExpandButton'
+import { fragments } from './gql'
 import styles from './styles.css'
 
-import { ResponseCommentCommentPrivate } from './__generated__/ResponseCommentCommentPrivate'
-import { ResponseCommentCommentPublic } from './__generated__/ResponseCommentCommentPublic'
+import { ThreadCommentCommentPrivate } from './__generated__/ThreadCommentCommentPrivate'
+import { ThreadCommentCommentPublic } from './__generated__/ThreadCommentCommentPublic'
 
 const COLLAPSE_COUNT = 2
 
-interface ResponseCommentControls {
+interface ThreadCommentControls {
+  type: CommentFormType
   defaultExpand?: boolean
   hasLink?: boolean
   commentCallback?: () => void
 }
 
-type Comment = ResponseCommentCommentPublic &
-  Partial<ResponseCommentCommentPrivate>
+type Comment = ThreadCommentCommentPublic & Partial<ThreadCommentCommentPrivate>
 
-type ResponseCommentProps = {
+type ThreadCommentProps = {
   comment: Comment
-} & ResponseCommentControls
+} & ThreadCommentControls
 
-const fragments = {
-  comment: {
-    public: gql`
-      fragment ResponseCommentCommentPublic on Comment {
-        id
-        ...FeedCommentPublic
-        comments(input: { sort: oldest, first: null }) {
-          edges {
-            cursor
-            node {
-              ...FeedCommentPublic
-            }
-          }
-        }
-      }
-      ${Comment.Feed.fragments.comment.public}
-    `,
-    private: gql`
-      fragment ResponseCommentCommentPrivate on Comment {
-        id
-        ...FeedCommentPrivate
-        comments(input: { sort: oldest, first: null }) {
-          edges {
-            cursor
-            node {
-              ...FeedCommentPrivate
-            }
-          }
-        }
-      }
-      ${Comment.Feed.fragments.comment.private}
-    `,
-  },
-}
-
-const ResponseComment = ({
+export const ThreadComment = ({
   comment,
+  type,
   defaultExpand,
   hasLink,
   commentCallback,
-}: ResponseCommentProps) => {
+}: ThreadCommentProps) => {
   const descendants = filterComments(
     (comment.comments?.edges || []).map(({ node }) => node)
   ) as Comment[]
@@ -75,9 +42,9 @@ const ResponseComment = ({
 
   return (
     <section className="container">
-      <Comment.Feed
+      <Feed
         comment={comment}
-        type="article"
+        type={type}
         hasReply
         hasUserName
         hasCreatedAt
@@ -91,7 +58,7 @@ const ResponseComment = ({
             .slice(0, expand ? undefined : COLLAPSE_COUNT)
             .map((descendantComment) => (
               <li key={descendantComment.id}>
-                <Comment.Feed
+                <Feed
                   comment={descendantComment}
                   type="article"
                   avatarSize="md"
@@ -117,6 +84,4 @@ const ResponseComment = ({
   )
 }
 
-ResponseComment.fragments = fragments
-
-export default ResponseComment
+ThreadComment.fragments = fragments

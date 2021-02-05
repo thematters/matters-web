@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
 
 import {
@@ -29,6 +30,15 @@ import {
   CircleDetailPublic,
   CircleDetailPublic_circle,
 } from './__generated__/CircleDetailPublic'
+
+const DynamicDiscussion = dynamic(() => import('./Discussion'), {
+  ssr: false,
+  loading: Spinner,
+})
+const DynamicBroadcast = dynamic(() => import('./Broadcast'), {
+  ssr: false,
+  loading: Spinner,
+})
 
 type CircleFeedType = 'works' | 'discussion' | 'boardcast'
 
@@ -71,20 +81,20 @@ const CircleDetail = ({ circle }: { circle: CircleDetailPublic_circle }) => {
               selected={isDiscussion}
               onClick={() => setFeed('discussion')}
             >
-              <Translate zh_hant="眾聊" zh_hans="" />
+              <Translate id="circleDiscussion" />
             </Tabs.Tab>
 
             <Tabs.Tab
               selected={isBoardcast}
               onClick={() => setFeed('boardcast')}
             >
-              <Translate zh_hant="廣播" zh_hans="" />
+              <Translate id="circleBroadcast" />
             </Tabs.Tab>
           </Tabs>
 
           {isWorks && <Works name={circle.name} />}
-          {isDiscussion && <span>Discussion</span>}
-          {isBoardcast && <span>Boardcast</span>}
+          {isDiscussion && <DynamicDiscussion />}
+          {isBoardcast && <DynamicBroadcast />}
 
           <Spacer size="xxloose" />
           <SubscribeCircleDialog circle={circle} />

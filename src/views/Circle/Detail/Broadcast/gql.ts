@@ -2,16 +2,11 @@ import gql from 'graphql-tag'
 
 import { ThreadComment } from '~/components'
 
-export const FEATURED_COMMENTS_PUBLIC = gql`
-  query FeaturedCommentsPublic(
-    $mediaHash: String
-    $after: String
-    $first: Int = 10
-  ) {
-    article(input: { mediaHash: $mediaHash }) {
+export const BROADCAST_PUBLIC = gql`
+  query BroadcastPublic($name: String!, $after: String) {
+    circle(input: { name: $name }) {
       id
-      mediaHash
-      featuredComments(input: { first: $first, after: $after }) {
+      broadcast(input: { after: $after }) {
         totalCount
         pageInfo {
           startCursor
@@ -31,8 +26,8 @@ export const FEATURED_COMMENTS_PUBLIC = gql`
   ${ThreadComment.fragments.comment.private}
 `
 
-export const FEATURED_COMMENTS_PRIVATE = gql`
-  query FeaturedCommentsPrivate($ids: [ID!]!) {
+export const BROADCAST_PRIVATE = gql`
+  query BroadcastPrivate($ids: [ID!]!) {
     nodes(input: { ids: $ids }) {
       id
       ... on Comment {
