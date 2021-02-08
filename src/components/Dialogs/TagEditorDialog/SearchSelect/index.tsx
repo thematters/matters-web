@@ -1,8 +1,7 @@
 import _get from 'lodash/get'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 
-import { Dialog, LanguageContext, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
+import { Dialog, Translate, useMutation } from '~/components'
 import UPDATE_TAG_SETTING from '~/components/GQL/mutations/updateTagSetting'
 import updateTagMaintainers from '~/components/GQL/updates/tagMaintainers'
 import SearchingArea, {
@@ -11,7 +10,6 @@ import SearchingArea, {
 import StagingArea, { StagingNode } from '~/components/SearchSelect/StagingArea'
 
 import { ADD_TOAST } from '~/common/enums'
-import { parseFormSubmitErrors } from '~/common/utils'
 
 import { UpdateTagSetting } from '~/components/GQL/mutations/__generated__/UpdateTagSetting'
 
@@ -39,7 +37,6 @@ type Area = 'staging' | 'searching'
  * ```
  */
 const TagSearchSelectEditor = ({ id, close, toListStep }: Props) => {
-  const { lang } = useContext(LanguageContext)
   const [update, { loading }] = useMutation<UpdateTagSetting>(
     UPDATE_TAG_SETTING
   )
@@ -64,63 +61,46 @@ const TagSearchSelectEditor = ({ id, close, toListStep }: Props) => {
   }
 
   const onClickSave = async () => {
-    try {
-      const editors = stagingNodes.filter(({ selected }) => !!selected)
-      const result = await update({
-        variables: {
-          input: {
-            id,
-            type: 'add_editor',
-            editors: editors.map(({ node }) => node.id),
-          },
+    const editors = stagingNodes.filter(({ selected }) => !!selected)
+    const result = await update({
+      variables: {
+        input: {
+          id,
+          type: 'add_editor',
+          editors: editors.map(({ node }) => node.id),
         },
-        update: (cache) => {
-          // filter out matty for local cache update
-          const filteredEditors = editors.filter(
-            ({ node }) => _get(node, 'displayName') !== 'Matty'
-          )
-          updateTagMaintainers({
-            cache,
-            id,
-            type: 'add',
-            editors: filteredEditors,
-          })
+      },
+      update: (cache) => {
+        // filter out matty for local cache update
+        const filteredEditors = editors.filter(
+          ({ node }) => _get(node, 'displayName') !== 'Matty'
+        )
+        updateTagMaintainers({
+          cache,
+          id,
+          type: 'add',
+          editors: filteredEditors,
+        })
+      },
+    })
+
+    if (!result) {
+      return
+    }
+
+    window.dispatchEvent(
+      new CustomEvent(ADD_TOAST, {
+        detail: {
+          color: 'green',
+          content: (
+            <Translate zh_hant="添加協作者成功" zh_hans="添加协作者成功" />
+          ),
+          duration: 2000,
         },
       })
+    )
 
-      if (!result) {
-        return
-      }
-
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'green',
-            content: (
-              <Translate zh_hant="添加協作者成功" zh_hans="添加协作者成功" />
-            ),
-            duration: 2000,
-          },
-        })
-      )
-
-      close()
-    } catch (error) {
-      const [messages, codes] = parseFormSubmitErrors(error, lang)
-
-      if (!messages[codes[0]]) {
-        return null
-      }
-
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: messages[codes[0]],
-          },
-        })
-      )
-    }
+    close()
   }
 
   return (

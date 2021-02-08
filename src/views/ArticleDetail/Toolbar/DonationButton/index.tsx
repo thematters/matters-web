@@ -12,7 +12,7 @@ import {
 } from '~/components'
 
 import { ADD_TOAST, TEXT } from '~/common/enums'
-import { analytics } from '~/common/utils'
+import { analytics, numAbbr } from '~/common/utils'
 
 import { DonationButtonArticle } from './__generated__/DonationButtonArticle'
 
@@ -24,7 +24,9 @@ const fragments = {
   article: gql`
     fragment DonationButtonArticle on Article {
       id
-      transactionsReceivedBy(input: { first: 0, purpose: donation }) {
+      donationsToolbar: transactionsReceivedBy(
+        input: { first: 0, purpose: donation }
+      ) {
         totalCount
       }
       author {
@@ -95,7 +97,9 @@ const DonationButton = ({ article }: DonationButtonProps) => {
               spacing="xtight"
               size="sm"
             >
-              {article.transactionsReceivedBy.totalCount || undefined}
+              {article.donationsToolbar.totalCount > 0
+                ? numAbbr(article.donationsToolbar.totalCount)
+                : undefined}
             </TextIcon>
           </Button>
         )}

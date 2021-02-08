@@ -1,4 +1,4 @@
-import Router, { NextRouter } from 'next/router'
+import Router from 'next/router'
 import { Key, pathToRegexp } from 'path-to-regexp'
 import queryString from 'query-string'
 
@@ -14,9 +14,12 @@ interface ArticleArgs {
   }
 }
 
+interface CircleArgs {
+  name: string
+}
+
 interface CommentArgs {
   id: string
-  article: ArticleArgs
   parentComment: {
     id: string
   } | null
@@ -29,8 +32,18 @@ type ToPathArgs =
       fragment?: string
     }
   | {
+      page:
+        | 'circleDetail'
+        | 'circleSettings'
+        | 'circleEditProfile'
+        | 'circleFollowers'
+        | 'circleMembers'
+      circle: CircleArgs
+    }
+  | {
       page: 'commentDetail'
       comment: CommentArgs
+      article: ArticleArgs
     }
   | { page: 'draftDetail'; id: string; slug: string }
   | {
@@ -38,23 +51,13 @@ type ToPathArgs =
       id: string
     }
   | {
-      page: 'userProfile'
-      userName: string
-    }
-  | {
-      page: 'userComments'
-      userName: string
-    }
-  | {
-      page: 'userTags'
-      userName: string
-    }
-  | {
-      page: 'userFollowers'
-      userName: string
-    }
-  | {
-      page: 'userFollowees'
+      page:
+        | 'userProfile'
+        | 'userSubscriptons'
+        | 'userComments'
+        | 'userTags'
+        | 'userFollowers'
+        | 'userFollowees'
       userName: string
     }
   | {
@@ -82,13 +85,38 @@ export const toPath = (args: ToPathArgs): { href: string } => {
         href: args.fragment ? `${asUrl}#${args.fragment}` : asUrl,
       }
     }
+    case 'circleDetail': {
+      return {
+        href: `/~${args.circle.name}`,
+      }
+    }
+    case 'circleSettings': {
+      return {
+        href: `/~${args.circle.name}/settings`,
+      }
+    }
+    case 'circleEditProfile': {
+      return {
+        href: `/~${args.circle.name}/settings/edit-profile`,
+      }
+    }
+    case 'circleFollowers': {
+      return {
+        href: `/~${args.circle.name}/followers`,
+      }
+    }
+    case 'circleMembers': {
+      return {
+        href: `/~${args.circle.name}/members`,
+      }
+    }
     case 'commentDetail': {
-      const { parentComment, id, article } = args.comment
+      const { parentComment, id } = args.comment
       const fragment = parentComment?.id ? `${parentComment.id}-${id}` : id
 
       return toPath({
         page: 'articleDetail',
-        article,
+        article: args.article,
         fragment,
       })
     }
@@ -105,6 +133,11 @@ export const toPath = (args: ToPathArgs): { href: string } => {
     case 'userProfile': {
       return {
         href: `/@${args.userName}`,
+      }
+    }
+    case 'userSubscriptons': {
+      return {
+        href: `/@${args.userName}/subscriptions`,
       }
     }
     case 'userComments': {
@@ -134,34 +167,6 @@ export const toPath = (args: ToPathArgs): { href: string } => {
       }
     }
   }
-}
-
-/**
- * Get a specific query value from `NextRouter` by `key`
- *
- * (works on SSR & CSR)
- */
-export const getQuery = ({
-  router,
-  key,
-}: {
-  router: NextRouter
-  key: string
-}) => {
-  const value = router.query && router.query[key]
-  let query = value instanceof Array ? value[0] : value || ''
-
-  switch (key) {
-    case 'userName':
-      query = query.replace('@', '')
-      break
-    case 'mediaHash':
-    case 'draftId':
-      query = query.split('-').slice(-1)[0]
-      break
-  }
-
-  return query
 }
 
 export const getTarget = (url?: string) => {

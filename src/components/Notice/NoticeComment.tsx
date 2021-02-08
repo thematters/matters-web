@@ -14,14 +14,16 @@ const fragments = {
     fragment NoticeComment on Comment {
       id
       state
-      article {
-        id
-        title
-        slug
-        mediaHash
-        author {
+      node {
+        ... on Article {
           id
-          userName
+          title
+          slug
+          mediaHash
+          author {
+            id
+            userName
+          }
         }
       }
       parentComment {
@@ -36,7 +38,10 @@ const fragments = {
 }
 
 const NoticeComment = ({ comment }: { comment: NoticeCommentType | null }) => {
-  if (!comment) {
+  const article =
+    comment?.node.__typename === 'Article' ? comment.node : undefined
+
+  if (!comment || !article) {
     return null
   }
 
@@ -45,6 +50,7 @@ const NoticeComment = ({ comment }: { comment: NoticeCommentType | null }) => {
       ? toPath({
           page: 'commentDetail',
           comment,
+          article,
         })
       : {}
 

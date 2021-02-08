@@ -1,10 +1,12 @@
 import { Layout, UserProfile } from '~/components'
 
-import UserTags from './UserTags'
+import BaseUserTags from './UserTags'
 
-export default () => (
+const UserTags = () => (
   <Layout.Main>
     <UserProfile />
-    <UserTags />
+    <BaseUserTags />
   </Layout.Main>
 )
+
+export default UserTags

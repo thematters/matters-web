@@ -1,8 +1,7 @@
 import gql from 'graphql-tag'
 import { useEffect } from 'react'
 
-import { Dialog, Spinner, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
+import { Dialog, Spinner, Translate, useMutation } from '~/components'
 
 import { GenerateLikerId } from './__generated__/GenerateLikerId'
 

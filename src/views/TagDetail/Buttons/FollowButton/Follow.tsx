@@ -6,9 +6,9 @@ import {
   IconAdd16,
   TextIcon,
   Translate,
+  useMutation,
   ViewerContext,
 } from '~/components'
-import { useMutation } from '~/components/GQL'
 import TOGGLE_FOLLOW_TAG from '~/components/GQL/mutations/toggleFollowTag'
 import updateTagFollowers from '~/components/GQL/updates/tagFollowers'
 
@@ -50,7 +50,7 @@ const Follow = ({ tag }: FollowProps) => {
       textActiveColor="white"
       bgActiveColor="green"
       borderColor="green"
-      onClick={follow}
+      onClick={() => follow()}
     >
       <TextIcon icon={<IconAdd16 />} weight="md" size="md-s">
         <Translate id="follow" />

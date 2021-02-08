@@ -1,5 +1,6 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
+import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 
 import {
@@ -10,8 +11,8 @@ import {
   Menu,
   Spinner,
   Translate,
+  useMutation,
 } from '~/components'
-import { useMutation } from '~/components/GQL'
 import SEARCH_TAGS from '~/components/GQL/queries/searchTags'
 
 import { ADD_TOAST, ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
@@ -21,6 +22,7 @@ import {
   routerPush,
   toPath,
   translate,
+  validateTagName,
 } from '~/common/utils'
 
 import TAG_COVER from '@/public/static/images/tag-cover.png'
@@ -131,7 +133,9 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
   description,
   closeDialog,
 }) => {
-  const [update] = useMutation<PutTag>(PUT_TAG)
+  const [update] = useMutation<PutTag>(PUT_TAG, undefined, {
+    showToast: false,
+  })
   const { lang } = useContext(LanguageContext)
   const isEditing = id && content
 
@@ -153,17 +157,11 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
       newCover: UNCHANGED_FIELD,
       newDescription: description || '',
     },
-    validate: ({ newContent }) => {
-      if (!newContent) {
-        return {
-          newContent: translate({
-            zh_hant: '請輸入標籤名稱',
-            zh_hans: '請输入标签名称',
-            lang,
-          }),
-        }
-      }
-    },
+    validate: ({ newContent }) =>
+      _pickBy({
+        newContent: validateTagName(newContent, lang),
+      }),
+
     onSubmit: async (
       { newContent, newCover, newDescription },
       { setFieldError, setSubmitting }
@@ -218,8 +216,8 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
         <section className="cover-field">
           <CoverUploader
             assetType={ASSET_TYPE.tagCover}
-            coverUrl={cover}
-            defaultCoverUrl={TAG_COVER}
+            cover={cover}
+            fallbackCover={TAG_COVER}
             entityId={id}
             entityType={ENTITY_TYPE.tag}
             inEditor

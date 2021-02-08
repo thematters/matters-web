@@ -11,7 +11,7 @@ import styles from './styles.css'
 
 import { ArticleDigestDropdownArticle } from './__generated__/ArticleDigestDropdownArticle'
 
-type ArticleDigestDropdownProps = {
+export type ArticleDigestDropdownProps = {
   article: ArticleDigestDropdownArticle
 
   titleTextSize?: ArticleDigestTitleTextSize

@@ -77,6 +77,7 @@ const ResponseComment = ({
     <section className="container">
       <Comment.Feed
         comment={comment}
+        type="article"
         hasReply
         hasUserName
         hasCreatedAt
@@ -92,6 +93,7 @@ const ResponseComment = ({
               <li key={descendantComment.id}>
                 <Comment.Feed
                   comment={descendantComment}
+                  type="article"
                   avatarSize="md"
                   hasReply
                   hasUserName

@@ -15,8 +15,7 @@
         "dotenv",
         "apollo-cache",
         "@testing-library",
-        "@apollo/react-testing",
-        "__generated__"
+        "@apollo/react-testing"
       ]
     ],
     "no-bitwise": false,

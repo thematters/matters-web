@@ -1,8 +1,14 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { Head, Layout, PullToRefresh, Spacer, Spinner } from '~/components'
-import { useMutation } from '~/components/GQL'
+import {
+  Head,
+  Layout,
+  PullToRefresh,
+  Spacer,
+  Spinner,
+  useMutation,
+} from '~/components'
 
 import ArticleSettings from './Article'
 import CommentSettings from './Comment'
@@ -63,7 +69,7 @@ const UPDATE_VIEWER_NOTIFICATION = gql`
   }
 `
 
-const NotificationSettings = () => {
+const BaseNotificationSettings = () => {
   const [update] = useMutation<UpdateViewerNotification>(
     UPDATE_VIEWER_NOTIFICATION
   )
@@ -115,7 +121,7 @@ const NotificationSettings = () => {
   )
 }
 
-export default () => (
+const NotificationSettings = () => (
   <Layout.Main bgColor="grey-lighter">
     <Layout.Header
       left={<Layout.Header.BackButton />}
@@ -124,8 +130,10 @@ export default () => (
 
     <Head title={{ id: 'settingsNotification' }} />
 
-    <NotificationSettings />
+    <BaseNotificationSettings />
 
     <Spacer size="xxxloose" />
   </Layout.Main>
 )
+
+export default NotificationSettings

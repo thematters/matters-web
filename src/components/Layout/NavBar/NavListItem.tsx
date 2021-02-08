@@ -19,7 +19,7 @@ const NavListItem = ({
   ...props
 }: NavListItemProps) => {
   const { onClick: baseOnClick } = props
-  const onClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+  const onClick = (event?: React.MouseEvent<HTMLElement, MouseEvent>) => {
     if (baseOnClick) {
       baseOnClick()
     }

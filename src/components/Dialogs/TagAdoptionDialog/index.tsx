@@ -1,12 +1,13 @@
-import { useRouter } from 'next/router'
-import { useState } from 'react'
-
-import { Dialog, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
+import {
+  Dialog,
+  Translate,
+  useDialogSwitch,
+  useMutation,
+  useRoute,
+} from '~/components'
 import UPDATE_TAG_SETTING from '~/components/GQL/mutations/updateTagSetting'
 
 import { ADD_TOAST } from '~/common/enums'
-import { getQuery } from '~/common/utils'
 
 import { UpdateTagSetting } from '~/components/GQL/mutations/__generated__/UpdateTagSetting'
 
@@ -25,12 +26,10 @@ const textZhHans =
   '你主理的标签可以用作文集、策展，也可以变成圈子、小组、讨论区等，更多主理人玩法等你发掘！'
 
 const BaseDialog = ({ children }: Props) => {
-  const [showDialog, setShowDialog] = useState(true)
-  const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
+  const { show, open, close } = useDialogSwitch(true)
 
-  const router = useRouter()
-  const id = getQuery({ router, key: 'tagId' })
+  const { getQuery } = useRoute()
+  const id = getQuery('tagId')
   const [update, { loading }] = useMutation<UpdateTagSetting>(
     UPDATE_TAG_SETTING
   )
@@ -39,7 +38,7 @@ const BaseDialog = ({ children }: Props) => {
     <>
       {children({ open })}
 
-      <Dialog size="sm" isOpen={showDialog} onDismiss={close}>
+      <Dialog size="sm" isOpen={show} onDismiss={close}>
         <Dialog.Header
           title={<Translate zh_hant="認領標籤" zh_hans="认领标签" />}
           close={close}
@@ -56,29 +55,25 @@ const BaseDialog = ({ children }: Props) => {
             bgColor="green"
             loading={loading}
             onClick={async () => {
-              try {
-                const result = await update({
-                  variables: { input: { id, type: 'adopt' } },
-                })
+              const result = await update({
+                variables: { input: { id, type: 'adopt' } },
+              })
 
-                if (!result) {
-                  throw new Error('tag adoption failed')
-                }
-
-                window.dispatchEvent(
-                  new CustomEvent(ADD_TOAST, {
-                    detail: {
-                      color: 'green',
-                      content: (
-                        <Translate zh_hant="認領成功" zh_hans="认领成功" />
-                      ),
-                      duration: 2000,
-                    },
-                  })
-                )
-              } catch (error) {
-                throw error
+              if (!result) {
+                throw new Error('tag adoption failed')
               }
+
+              window.dispatchEvent(
+                new CustomEvent(ADD_TOAST, {
+                  detail: {
+                    color: 'green',
+                    content: (
+                      <Translate zh_hant="認領成功" zh_hans="认领成功" />
+                    ),
+                    duration: 2000,
+                  },
+                })
+              )
             }}
           >
             <Translate zh_hant="即刻主理" zh_hans="即刻主理" />

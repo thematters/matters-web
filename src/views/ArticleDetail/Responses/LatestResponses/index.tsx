@@ -1,12 +1,12 @@
 import jump from 'jump.js'
 import _differenceBy from 'lodash/differenceBy'
 import _get from 'lodash/get'
-import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
 
 import {
   EmptyResponse,
   List,
+  QueryError,
   Spinner,
   Switch,
   Title,
@@ -15,16 +15,15 @@ import {
   usePublicQuery,
   usePullToRefresh,
   useResponsive,
+  useRoute,
   ViewerContext,
   ViewMoreButton,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 
 import { REFETCH_RESPONSES, URL_FRAGMENT } from '~/common/enums'
 import {
   dom,
   filterResponses,
-  getQuery,
   mergeConnections,
   unshiftConnections,
 } from '~/common/utils'
@@ -49,8 +48,8 @@ type Response = ResponsePublic & Partial<Omit<ResponsePrivate, '__typename'>>
 const LatestResponses = () => {
   const viewer = useContext(ViewerContext)
   const isMediumUp = useResponsive('md-up')
-  const router = useRouter()
-  const mediaHash = getQuery({ router, key: 'mediaHash' })
+  const { getQuery } = useRoute()
+  const mediaHash = getQuery('mediaHash')
   const [articleOnlyMode, setArticleOnlyMode] = useState<boolean>(false)
   const [storedCursor, setStoredCursor] = useState<string | null>(null)
 
@@ -284,7 +283,7 @@ const LatestResponses = () => {
       </List>
 
       {pageInfo && pageInfo.hasNextPage && (
-        <ViewMoreButton onClick={loadMore} loading={loading} />
+        <ViewMoreButton onClick={() => loadMore()} loading={loading} />
       )}
 
       <style jsx>{styles}</style>

@@ -1,11 +1,11 @@
 import classNames from 'classnames'
-import gql from 'graphql-tag'
 
 import { LinkWrapper, Translate } from '~/components'
 import { Avatar, AvatarProps, AvatarSize } from '~/components/Avatar'
 
 import { toPath } from '~/common/utils'
 
+import { fragments } from './gql'
 import styles from './styles.css'
 
 import { UserDigestMiniUser } from './__generated__/UserDigestMiniUser'
@@ -38,21 +38,6 @@ export type UserDigestMiniProps = {
   disabled?: boolean
   onClick?: () => void
 } & AvatarProps
-
-const fragments = {
-  user: gql`
-    fragment UserDigestMiniUser on User {
-      id
-      userName
-      displayName
-      status {
-        state
-      }
-      ...AvatarUser
-    }
-    ${Avatar.fragments.user}
-  `,
-}
 
 const Mini = ({
   user,

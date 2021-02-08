@@ -1,4 +1,5 @@
 article {
+  position: relative;
   min-height: 100vh;
 
   &.bg-grey-lighter {
@@ -50,8 +51,8 @@ aside {
     &.in-editor {
       padding-top: var(--global-header-height);
 
-      & :global(> * + *) {
-        margin-top: var(--spacing-loose);
+      & :global(> *) {
+        margin-bottom: var(--spacing-loose);
       }
     }
   }

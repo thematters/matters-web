@@ -42,9 +42,4 @@
     color: var(--color-matters-green);
     background: var(--color-white);
   }
-
-  &.disabled {
-    cursor: not-allowed;
-    opacity: 0.5;
-  }
 }

@@ -6,13 +6,13 @@ import {
   Card,
   Img,
   List,
+  QueryError,
   ShuffleButton,
   Spinner,
   Tag,
   usePublicQuery,
   ViewerContext,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 
 import { analytics, toPath } from '~/common/utils'
 

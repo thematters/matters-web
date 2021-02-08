@@ -1,24 +1,22 @@
-import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
 import {
   ChangePasswordForm,
   Head,
   Layout,
+  useRoute,
   useStep,
   VerificationLinkSent,
   ViewerContext,
 } from '~/components'
 
-import { getQuery } from '~/common/utils'
-
 type Step = 'request' | 'verification_sent' | 'confirm' | 'complete'
 
 const ChangePassword = () => {
   const viewer = useContext(ViewerContext)
-  const router = useRouter()
-  const email = getQuery({ router, key: 'email' })
-  const code = getQuery({ router, key: 'code' })
+  const { getQuery } = useRoute()
+  const email = getQuery('email')
+  const code = getQuery('code')
 
   const initStep = code ? 'confirm' : 'request'
   const { currStep, forward } = useStep<Step>(initStep)

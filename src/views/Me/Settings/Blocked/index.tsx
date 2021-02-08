@@ -1,8 +1,8 @@
 import { Head, Layout } from '~/components'
 
-import SettingsBlocked from './SettingsBlocked'
+import BaseSettingsBlocked from './SettingsBlocked'
 
-export default () => (
+const SettingsBlocked = () => (
   <Layout.Main>
     <Layout.Header
       left={<Layout.Header.BackButton />}
@@ -11,6 +11,8 @@ export default () => (
 
     <Head title={{ id: 'settingsBlock' }} />
 
-    <SettingsBlocked />
+    <BaseSettingsBlocked />
   </Layout.Main>
 )
+
+export default SettingsBlocked
