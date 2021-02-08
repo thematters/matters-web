@@ -1,6 +1,11 @@
 import { Dialog, useDialogSwitch } from '~/components'
 
-import CommentForm, { CommentFormProps } from './CommentForm'
+import CommentForm, {
+  CommentFormProps,
+  CommentFormType as BaseCommentFormType,
+} from './CommentForm'
+
+export type CommentFormType = BaseCommentFormType
 
 type CommentFormDialogProps = {
   children: ({ open }: { open: () => void }) => React.ReactNode

@@ -26,7 +26,10 @@ const SubscribedArticleNewCommentNotice = ({
 
   const actorsCount = notice.actors.length
   const isMultiActors = actorsCount > 1
-  const commentArticle = notice.comment?.article
+  const commentArticle =
+    notice.comment?.node.__typename === 'Article'
+      ? notice.comment.node
+      : undefined
 
   return (
     <section className="container">
@@ -86,8 +89,10 @@ SubscribedArticleNewCommentNotice.fragments = {
       }
       comment: target {
         ...NoticeComment
-        article {
-          ...NoticeArticle
+        node {
+          ... on Article {
+            ...NoticeArticle
+          }
         }
       }
     }
