@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
-import { Translate, ViewerContext } from '~/components'
+import { CommentFormType, Translate, ViewerContext } from '~/components'
 
 import { ADD_TOAST, OPEN_LIKE_COIN_DIALOG, TextId } from '~/common/enums'
 
@@ -23,6 +23,7 @@ export type FooterActionsControls = {
 
 export type FooterActionsProps = {
   comment: FooterActionsCommentPublic & Partial<FooterActionsCommentPrivate>
+  type: CommentFormType
 } & FooterActionsControls
 
 const fragments = {
@@ -44,11 +45,20 @@ const fragments = {
     private: gql`
       fragment FooterActionsCommentPrivate on Comment {
         id
-        article {
-          id
-          author {
+        node {
+          ... on Circle {
             id
-            isBlocking
+            owner {
+              id
+              isBlocking
+            }
+          }
+          ... on Article {
+            id
+            author {
+              id
+              isBlocking
+            }
           }
         }
         ...UpvoteCommentPrivate
@@ -64,6 +74,7 @@ const fragments = {
 
 const BaseFooterActions = ({
   comment,
+  type,
   hasReply,
   hasLink,
   hasCreatedAt,
@@ -73,7 +84,11 @@ const BaseFooterActions = ({
 }: FooterActionsProps) => {
   const viewer = useContext(ViewerContext)
 
-  const { state, article } = comment
+  const { state, node } = comment
+  const article = node.__typename === 'Article' ? node : undefined
+  const circle = node.__typename === 'Circle' ? node : undefined
+  const targetAuthor = article?.author || circle?.owner
+
   const isActive = state === 'active'
   const isCollapsed = state === 'collapsed'
   const isDisabled = !isActive && !isCollapsed
@@ -94,11 +109,11 @@ const BaseFooterActions = ({
   if (viewer.shouldSetupLikerID) {
     onClick = () =>
       window.dispatchEvent(new CustomEvent(OPEN_LIKE_COIN_DIALOG, {}))
-  } else if (viewer.isOnboarding && article.author.id !== viewer.id) {
+  } else if (viewer.isOnboarding && targetAuthor?.id !== viewer.id) {
     onClick = () => addToast('failureCommentOnboarding')
   } else if (viewer.isArchived || viewer.isFrozen) {
     onClick = forbid
-  } else if (article.author.isBlocking) {
+  } else if (targetAuthor?.isBlocking) {
     onClick = () => addToast('failureCommentBlocked')
   }
 
@@ -117,6 +132,7 @@ const BaseFooterActions = ({
       <section className="left">
         {hasReply && (
           <ReplyButton
+            type={type}
             {...buttonProps}
             {...replyButtonProps}
             {...replyCustomButtonProps}
