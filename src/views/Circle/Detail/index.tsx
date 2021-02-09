@@ -41,7 +41,13 @@ const DynamicBroadcast = dynamic(() => import('./Broadcast'), {
 
 type CircleFeedType = 'works' | 'discussion' | 'boardcast'
 
-const CircleDetail = ({ circle }: { circle: CircleDetailPublic_circle }) => {
+const CircleDetail = ({
+  circle,
+  privateFetched,
+}: {
+  circle: CircleDetailPublic_circle
+  privateFetched: boolean
+}) => {
   // feed type
   const [feed, setFeed] = useState<CircleFeedType>('works')
   const isWorks = feed === 'works'
@@ -96,7 +102,7 @@ const CircleDetail = ({ circle }: { circle: CircleDetailPublic_circle }) => {
           {isBoardcast && <DynamicBroadcast />}
 
           <SubscribeCircleDialog circle={circle} />
-          <SubscriptionBanner circle={circle} />
+          {privateFetched && <SubscriptionBanner circle={circle} />}
 
           <style jsx>{styles}</style>
         </section>
@@ -109,6 +115,7 @@ const CircleDetailContainer = () => {
   const { getQuery } = useRoute()
   const viewer = useContext(ViewerContext)
   const name = getQuery('name')
+  const [privateFetched, setPrivateFetched] = useState(false)
 
   /**
    * Data Fetching
@@ -126,16 +133,18 @@ const CircleDetailContainer = () => {
   const circle = data?.circle
 
   // private data
-  const loadPrivate = () => {
+  const loadPrivate = async () => {
     if (!viewer.isAuthed || !name) {
       return
     }
 
-    client.query({
+    await client.query({
       query: CIRCLE_DETAIL_PRIVATE,
       fetchPolicy: 'network-only',
       variables: { name },
     })
+
+    setPrivateFetched(true)
   }
 
   // fetch private data for first page
@@ -178,7 +187,7 @@ const CircleDetailContainer = () => {
     )
   }
 
-  return <CircleDetail circle={circle} />
+  return <CircleDetail circle={circle} privateFetched={privateFetched} />
 }
 
 export default CircleDetailContainer
