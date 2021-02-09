@@ -13,18 +13,17 @@ import {
 import PUT_CIRCLE from '~/components/GQL/mutations/putCircle'
 
 import {
+  PAYMENT_CURRENCY,
+  PAYMENT_MAXIMUM_CIRCLE_AMOUNT,
+  PAYMENT_MINIMAL_CIRCLE_AMOUNT,
+} from '~/common/enums'
+import {
   parseFormSubmitErrors,
   translate,
   validateCircleAmount,
   validateCircleDisplayName,
   validateCircleName,
 } from '~/common/utils'
-
-import {
-  PAYMENT_CURRENCY,
-  PAYMENT_MAXIMUM_CIRCLE_AMOUNT,
-  PAYMENT_MINIMAL_CIRCLE_AMOUNT,
-} from '@/src/common/enums'
 
 import styles from './styles.css'
 

@@ -3,7 +3,7 @@ import { useContext, useEffect } from 'react'
 
 import {
   ArticleDigestFeed,
-  EmptyTagArticles,
+  EmptyArticle,
   InfiniteScroll,
   List,
   QueryError,
@@ -122,7 +122,7 @@ const CircleDetailWorks = ({ name }: CircleWorksProps) => {
   }
 
   if (!edges || edges.length <= 0 || !pageInfo) {
-    return <EmptyTagArticles />
+    return <EmptyArticle />
   }
 
   return (

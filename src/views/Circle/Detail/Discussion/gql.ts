@@ -1,11 +1,15 @@
 import gql from 'graphql-tag'
 
-import { ThreadComment } from '~/components'
+import { CircleDigest, ThreadComment } from '~/components'
 
 export const DISCUSSION_PUBLIC = gql`
   query DiscussionPublic($name: String!, $after: String) {
     circle(input: { name: $name }) {
       id
+      owner {
+        id
+      }
+      isMember
       discussion(input: { after: $after }) {
         totalCount
         pageInfo {
@@ -20,10 +24,12 @@ export const DISCUSSION_PUBLIC = gql`
           }
         }
       }
+      ...DigestRichCirclePublic
     }
   }
   ${ThreadComment.fragments.comment.public}
   ${ThreadComment.fragments.comment.private}
+  ${CircleDigest.Rich.fragments.circle.public}
 `
 
 export const DISCUSSION_PRIVATE = gql`

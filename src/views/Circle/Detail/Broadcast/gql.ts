@@ -6,6 +6,10 @@ export const BROADCAST_PUBLIC = gql`
   query BroadcastPublic($name: String!, $after: String) {
     circle(input: { name: $name }) {
       id
+      owner {
+        id
+      }
+      isMember
       broadcast(input: { after: $after }) {
         totalCount
         pageInfo {

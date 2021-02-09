@@ -6,3 +6,26 @@
     margin-bottom: var(--spacing-loose);
   }
 }
+
+:root {
+  --wall-bottom-offset: calc(
+    var(--spacing-xxx-loose) + var(--global-nav-height)
+  );
+}
+
+.wall {
+  margin-top: var(--spacing-base);
+  margin-bottom: calc(var(--wall-bottom-offset) * -1);
+  cursor: pointer;
+
+  & img {
+    display: block;
+    width: 100%;
+  }
+
+  & .brief {
+    height: calc(var(--wall-bottom-offset));
+    margin-top: calc(-1px);
+    background: var(--color-matters-green);
+  }
+}

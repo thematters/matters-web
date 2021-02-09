@@ -7,7 +7,6 @@ import {
   Layout,
   PullToRefresh,
   QueryError,
-  Spacer,
   Spinner,
   SubscribeCircleDialog,
   Tabs,
@@ -96,7 +95,6 @@ const CircleDetail = ({ circle }: { circle: CircleDetailPublic_circle }) => {
           {isDiscussion && <DynamicDiscussion />}
           {isBoardcast && <DynamicBroadcast />}
 
-          <Spacer size="xxloose" />
           <SubscribeCircleDialog circle={circle} />
           <SubscriptionBanner circle={circle} />
 

@@ -65,7 +65,7 @@ export const CommentForm: React.FC<CommentFormProps> = ({
     variables: { id: commentDraftId },
   })
 
-  const [putComment] = useMutation<PutComment>(PUT_COMMENT)
+  const [putComment] = useMutation<PutComment>(PUT_COMMENT, undefined)
   const [isSubmitting, setSubmitting] = useState(false)
   const [content, setContent] = useState(
     data?.commentDraft.content || defaultContent || ''

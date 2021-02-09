@@ -128,32 +128,35 @@ const Broadcast = () => {
     return <QueryError error={error} />
   }
 
+  const isOwner = circle?.owner.id === viewer.id
+  const onSubmitComment = () => {
+    window.dispatchEvent(
+      new CustomEvent(ADD_TOAST, {
+        detail: {
+          color: 'green',
+          content: <Translate zh_hant="評論已送出" zh_hans="评论已送出" />,
+          buttonPlacement: 'center',
+        },
+      })
+    )
+  }
+
   return (
     <section className="broadcast">
-      <header>
-        <CommentForm
-          circleId={circle?.id}
-          type="circleBroadcast"
-          placeholder={translate({
-            lang,
-            zh_hant: '公告、提醒、碎碎念…',
-            zh_hans: '公告、提醒、碎碎念…',
-          })}
-          submitCallback={() => {
-            window.dispatchEvent(
-              new CustomEvent(ADD_TOAST, {
-                detail: {
-                  color: 'green',
-                  content: (
-                    <Translate zh_hant="評論已送出" zh_hans="评论已送出" />
-                  ),
-                  buttonPlacement: 'center',
-                },
-              })
-            )
-          }}
-        />
-      </header>
+      {isOwner && (
+        <header>
+          <CommentForm
+            circleId={circle?.id}
+            type="circleBroadcast"
+            placeholder={translate({
+              lang,
+              zh_hant: '公告、提醒、碎碎念…',
+              zh_hans: '公告、提醒、碎碎念…',
+            })}
+            submitCallback={onSubmitComment}
+          />
+        </header>
+      )}
 
       {!comments ||
         (comments.length <= 0 && (

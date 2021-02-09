@@ -5,11 +5,13 @@ import { useContext, useEffect } from 'react'
 import {
   CommentForm,
   EmptyComment,
+  EmptyLayout,
   LanguageContext,
   List,
   QueryError,
   Spinner,
   ThreadComment,
+  Throw404,
   Translate,
   usePublicQuery,
   usePullToRefresh,
@@ -23,6 +25,7 @@ import { filterComments, mergeConnections, translate } from '~/common/utils'
 
 import { DISCUSSION_PRIVATE, DISCUSSION_PUBLIC } from './gql'
 import styles from './styles.css'
+import Wall from './Wall'
 
 import { DiscussionPrivate_nodes_Comment } from './__generated__/DiscussionPrivate'
 import {
@@ -126,6 +129,21 @@ const Discussion = () => {
 
   if (error) {
     return <QueryError error={error} />
+  }
+
+  if (!circle) {
+    return (
+      <EmptyLayout>
+        <Throw404 />
+      </EmptyLayout>
+    )
+  }
+
+  const isOwner = circle?.owner.id === viewer.id
+  const isMember = circle?.isMember
+
+  if (!isOwner || !isMember) {
+    return <Wall circle={circle} />
   }
 
   return (
