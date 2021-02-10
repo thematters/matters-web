@@ -1,9 +1,16 @@
 import gql from 'graphql-tag'
 
-import { Dialog, Translate, useDialogSwitch, useMutation } from '~/components'
+import {
+  CommentFormType,
+  Dialog,
+  Translate,
+  useDialogSwitch,
+  useMutation,
+} from '~/components'
 
-import { ADD_TOAST } from '~/common/enums'
+import { ADD_TOAST, COMMENT_TYPE_TEXT } from '~/common/enums'
 
+import { DropdownActionsCommentPublic } from '../__generated__/DropdownActionsCommentPublic'
 import { DeleteComment } from './__generated__/DeleteComment'
 
 const DELETE_COMMENT = gql`
@@ -16,15 +23,18 @@ const DELETE_COMMENT = gql`
 `
 
 interface DeleteCommentDialogProps {
-  commentId: string
+  comment: DropdownActionsCommentPublic
+  type: CommentFormType
   children: ({ open }: { open: () => void }) => React.ReactNode
 }
 
 const DeleteCommentDialog = ({
-  commentId,
+  comment,
+  type,
   children,
 }: DeleteCommentDialogProps) => {
   const { show, open, close } = useDialogSwitch(true)
+  const commentId = comment.id
 
   const [deleteComment] = useMutation<DeleteComment>(DELETE_COMMENT, {
     variables: { id: commentId },
@@ -44,7 +54,13 @@ const DeleteCommentDialog = ({
       new CustomEvent(ADD_TOAST, {
         detail: {
           color: 'green',
-          content: <Translate zh_hant="評論已刪除" zh_hans="评论已删除" />,
+          content: (
+            <Translate
+              zh_hant={`${COMMENT_TYPE_TEXT.zh_hant[type]}已刪除`}
+              zh_hans={`${COMMENT_TYPE_TEXT.zh_hans[type]}已删除`}
+            />
+          ),
+
           buttonPlacement: 'center',
         },
       })
@@ -56,13 +72,22 @@ const DeleteCommentDialog = ({
       {children({ open })}
 
       <Dialog isOpen={show} onDismiss={close} size="sm">
-        <Dialog.Header title="deleteComment" close={close} mode="inner" />
+        <Dialog.Header
+          title={
+            <Translate
+              zh_hant={`刪除${COMMENT_TYPE_TEXT.zh_hant[type]}`}
+              zh_hans={`删除${COMMENT_TYPE_TEXT.zh_hans[type]}`}
+            />
+          }
+          close={close}
+          mode="inner"
+        />
 
         <Dialog.Message>
           <p>
             <Translate
-              zh_hant="確認刪除評論，評論會馬上消失。"
-              zh_hans="确认删除评论，评论会马上消失。"
+              zh_hant={`確認刪除${COMMENT_TYPE_TEXT.zh_hant[type]}，${COMMENT_TYPE_TEXT.zh_hant[type]}會馬上消失。`}
+              zh_hans={`确认删除${COMMENT_TYPE_TEXT.zh_hans[type]}，${COMMENT_TYPE_TEXT.zh_hans[type]}会马上消失。`}
             />
           </p>
         </Dialog.Message>

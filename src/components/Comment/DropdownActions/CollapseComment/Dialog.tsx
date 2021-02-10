@@ -1,9 +1,16 @@
 import gql from 'graphql-tag'
 
-import { Dialog, Translate, useDialogSwitch, useMutation } from '~/components'
+import {
+  CommentFormType,
+  Dialog,
+  Translate,
+  useDialogSwitch,
+  useMutation,
+} from '~/components'
 
-import { ADD_TOAST } from '~/common/enums'
+import { ADD_TOAST, COMMENT_TYPE_TEXT } from '~/common/enums'
 
+import { DropdownActionsCommentPublic } from '../__generated__/DropdownActionsCommentPublic'
 import { CollapseComment } from './__generated__/CollapseComment'
 
 const COLLAPSE_COMMENT = gql`
@@ -16,15 +23,18 @@ const COLLAPSE_COMMENT = gql`
 `
 
 interface CollapseCommentDialogProps {
-  commentId: string
+  comment: DropdownActionsCommentPublic
+  type: CommentFormType
   children: ({ open }: { open: () => void }) => React.ReactNode
 }
 
 const CollapseCommentDialog = ({
-  commentId,
+  comment,
+  type,
   children,
 }: CollapseCommentDialogProps) => {
   const { show, open, close } = useDialogSwitch(true)
+  const commentId = comment.id
 
   const [collapseComment] = useMutation<CollapseComment>(COLLAPSE_COMMENT, {
     variables: { id: commentId, state: 'collapsed' },
@@ -46,7 +56,12 @@ const CollapseCommentDialog = ({
       new CustomEvent(ADD_TOAST, {
         detail: {
           color: 'green',
-          content: <Translate id="successCollapseComment" />,
+          content: (
+            <Translate
+              zh_hant={`已成功闔上${COMMENT_TYPE_TEXT.zh_hant[type]}`}
+              zh_hans={`已成功折叠${COMMENT_TYPE_TEXT.zh_hans[type]}`}
+            />
+          ),
         },
       })
     )
@@ -58,7 +73,12 @@ const CollapseCommentDialog = ({
 
       <Dialog isOpen={show} onDismiss={close} size="sm">
         <Dialog.Header
-          title={<Translate id="collapseComment" />}
+          title={
+            <Translate
+              zh_hant={`闔上${COMMENT_TYPE_TEXT.zh_hant[type]}`}
+              zh_hans={`折叠${COMMENT_TYPE_TEXT.zh_hans[type]}`}
+            />
+          }
           close={close}
           mode="inner"
         />
@@ -66,8 +86,8 @@ const CollapseCommentDialog = ({
         <Dialog.Message>
           <p>
             <Translate
-              zh_hant="闔上評論後，其他用戶需展開才可查看"
-              zh_hans="折叠评论后，其他用户需展开才可查看"
+              zh_hant={`闔上${COMMENT_TYPE_TEXT.zh_hant[type]}後，其他用戶需展開才可查看`}
+              zh_hans={`折叠${COMMENT_TYPE_TEXT.zh_hans[type]}后，其他用户需展开才可查看`}
             />
           </p>
         </Dialog.Message>

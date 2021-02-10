@@ -136,7 +136,7 @@ const FollowComment: React.FC<FollowCommentProps> = ({
           onClick={onClickComment}
         >
           <Expandable limit={5} buffer={2}>
-            <Comment.Content comment={comment} size="md-s" />
+            <Comment.Content comment={comment} type="article" size="md-s" />
           </Expandable>
         </Card>
       </section>

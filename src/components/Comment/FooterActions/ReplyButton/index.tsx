@@ -125,7 +125,7 @@ const ReplyButton = ({
       replyToId={id}
       parentId={parentComment?.id || id}
       submitCallback={submitCallback}
-      title="replyComment"
+      title={article ? 'replyComment' : 'reply'}
       context={<ReplyTo user={author} />}
     >
       {({ open: openCommentFormDialog }) => (

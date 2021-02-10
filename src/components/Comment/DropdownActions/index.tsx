@@ -229,14 +229,14 @@ const DropdownActions = (props: DropdownActionsProps) => {
       type={type}
       commentId={comment.id}
       defaultContent={comment.content}
-      title="editComment"
+      title={article ? 'editComment' : 'edit'}
     >
       {({ open: openEditCommentDialog }) => (
-        <DeleteComment.Dialog commentId={comment.id}>
+        <DeleteComment.Dialog comment={comment} type={type}>
           {({ open: openDeleteCommentDialog }) => (
             <BlockUser.Dialog user={comment.author}>
               {({ open: openBlockUserDialog }) => (
-                <CollapseComment.Dialog commentId={comment.id}>
+                <CollapseComment.Dialog comment={comment} type={type}>
                   {({ open: openCollapseCommentDialog }) => (
                     <BaseDropdownActions
                       {...props}

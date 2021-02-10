@@ -42,7 +42,10 @@ const AuthorWidget = ({ circle }: AuthorWidgetProps) => {
             </span>
 
             <Expandable>
-              <CommentContent comment={pinnedBroadcast} />
+              <CommentContent
+                comment={pinnedBroadcast}
+                type="circleBroadcast"
+              />
             </Expandable>
           </section>
         )}

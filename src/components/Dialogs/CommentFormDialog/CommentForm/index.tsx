@@ -14,7 +14,7 @@ import PUT_COMMENT from '~/components/GQL/mutations/putComment'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import COMMENT_DRAFT from '~/components/GQL/queries/commentDraft'
 
-import { ADD_TOAST, TEXT, TextId } from '~/common/enums'
+import { ADD_TOAST, COMMENT_TYPE_TEXT, TextId } from '~/common/enums'
 import { dom, stripHtml, subscribePush, trimLineBreaks } from '~/common/utils'
 
 import styles from './styles.css'
@@ -118,7 +118,10 @@ const CommentForm: React.FC<CommentFormProps> = ({
           detail: {
             color: 'green',
             content: skipPushButton ? (
-              <Translate zh_hant="評論已送出" zh_hans="评论已送出" />
+              <Translate
+                zh_hant={`${COMMENT_TYPE_TEXT.zh_hant[type]}已送出`}
+                zh_hans={`${COMMENT_TYPE_TEXT.zh_hans[type]}已送出`}
+              />
             ) : (
               <Translate id="pushDescription" />
             ),
@@ -174,11 +177,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
       <Dialog.Content spacing={['base', 'base']} hasGrow>
         {context && <section className="context">{context}</section>}
 
-        <form
-          id={formId}
-          onSubmit={handleSubmit}
-          aria-label={TEXT.zh_hant.putComment}
-        >
+        <form id={formId} onSubmit={handleSubmit}>
           <CommentEditor content={content} update={onUpdate} />
         </form>
       </Dialog.Content>

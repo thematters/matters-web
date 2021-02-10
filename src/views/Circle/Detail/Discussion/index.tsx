@@ -162,9 +162,7 @@ const Discussion = () => {
               new CustomEvent(ADD_TOAST, {
                 detail: {
                   color: 'green',
-                  content: (
-                    <Translate zh_hant="評論已送出" zh_hans="评论已送出" />
-                  ),
+                  content: <Translate zh_hant="已送出" zh_hans="已送出" />,
                   buttonPlacement: 'center',
                 },
               })

@@ -78,7 +78,7 @@ export const BaseCommentFeed = ({
       )}
 
       <section className="content-container">
-        <Content comment={comment} size="md-s" />
+        <Content comment={comment} type={type} size="md-s" />
         <FooterActions
           comment={comment}
           type={type}
