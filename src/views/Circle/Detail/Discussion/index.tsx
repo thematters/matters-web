@@ -146,6 +146,19 @@ const Discussion = () => {
     return <Wall circle={circle} />
   }
 
+  const submitCallback = () => {
+    window.dispatchEvent(
+      new CustomEvent(ADD_TOAST, {
+        detail: {
+          color: 'green',
+          content: <Translate zh_hant="討論已送出" zh_hans="讨论已送出" />,
+          buttonPlacement: 'center',
+        },
+      })
+    )
+    refetch()
+  }
+
   return (
     <section className="discussion">
       <header>
@@ -157,17 +170,7 @@ const Discussion = () => {
             zh_hant: '催更、提問、分享、討論…',
             zh_hans: '催更、提问、分享、讨论…',
           })}
-          submitCallback={() => {
-            window.dispatchEvent(
-              new CustomEvent(ADD_TOAST, {
-                detail: {
-                  color: 'green',
-                  content: <Translate zh_hant="已送出" zh_hans="已送出" />,
-                  buttonPlacement: 'center',
-                },
-              })
-            )
-          }}
+          submitCallback={submitCallback}
         />
       </header>
 

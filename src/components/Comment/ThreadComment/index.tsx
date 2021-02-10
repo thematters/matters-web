@@ -18,7 +18,7 @@ interface ThreadCommentControls {
   type: CommentFormType
   defaultExpand?: boolean
   hasLink?: boolean
-  commentCallback?: () => void
+  replySubmitCallback?: () => void
 }
 
 type Comment = ThreadCommentCommentPublic & Partial<ThreadCommentCommentPrivate>
@@ -31,8 +31,7 @@ export const ThreadComment = ({
   comment,
   type,
   defaultExpand,
-  hasLink,
-  commentCallback,
+  ...props
 }: ThreadCommentProps) => {
   const descendants = filterComments(
     (comment.comments?.edges || []).map(({ node }) => node)
@@ -48,8 +47,7 @@ export const ThreadComment = ({
         hasReply
         hasUserName
         hasCreatedAt
-        hasLink={hasLink}
-        commentCallback={commentCallback}
+        {...props}
       />
 
       {descendants.length > 0 && (
@@ -65,8 +63,7 @@ export const ThreadComment = ({
                   hasReply
                   hasUserName
                   hasCreatedAt
-                  hasLink={hasLink}
-                  commentCallback={commentCallback}
+                  {...props}
                 />
               </li>
             ))}

@@ -163,7 +163,7 @@ const LatestResponses = () => {
     }
   }, [pageInfo && pageInfo.startCursor])
 
-  const commentCallback = async () => {
+  const replySubmitCallback = async () => {
     const { data: newData } = await fetchMore({
       variables: {
         before: storedCursor,
@@ -276,7 +276,7 @@ const LatestResponses = () => {
                 type="article"
                 defaultExpand={response.id === parentId && !!descendantId}
                 hasLink
-                commentCallback={commentCallback}
+                replySubmitCallback={replySubmitCallback}
               />
             )}
           </List.Item>

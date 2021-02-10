@@ -129,16 +129,17 @@ const Broadcast = () => {
   }
 
   const isOwner = circle?.owner.id === viewer.id
-  const onSubmitComment = () => {
+  const submitCallback = () => {
     window.dispatchEvent(
       new CustomEvent(ADD_TOAST, {
         detail: {
           color: 'green',
-          content: <Translate zh_hant="已送出" zh_hans="已送出" />,
+          content: <Translate zh_hant="廣播已送出" zh_hans="广播已送出" />,
           buttonPlacement: 'center',
         },
       })
     )
+    refetch()
   }
 
   return (
@@ -153,7 +154,7 @@ const Broadcast = () => {
               zh_hant: '公告、提醒、碎碎念…',
               zh_hans: '公告、提醒、碎碎念…',
             })}
-            submitCallback={onSubmitComment}
+            submitCallback={submitCallback}
           />
         </header>
       )}

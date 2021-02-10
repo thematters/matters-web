@@ -26,7 +26,7 @@ import { ReplyComemnt } from './__generated__/ReplyComemnt'
 export interface ReplyButtonProps {
   comment: ReplyComemnt
   type: CommentFormType
-  commentCallback?: () => void
+  replySubmitCallback?: () => void
   onClick?: () => void
   disabled?: boolean
   inCard: boolean
@@ -80,7 +80,7 @@ const CommentButton: React.FC<ButtonProps & { inCard: boolean }> = ({
 const ReplyButton = ({
   comment,
   type,
-  commentCallback,
+  replySubmitCallback,
   onClick,
   disabled,
   inCard,
@@ -93,8 +93,8 @@ const ReplyButton = ({
   const circle = node.__typename === 'Circle' ? node : undefined
 
   const submitCallback = () => {
-    if (commentCallback) {
-      commentCallback()
+    if (replySubmitCallback) {
+      replySubmitCallback()
     }
   }
 

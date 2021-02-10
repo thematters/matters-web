@@ -31,7 +31,7 @@ export const BaseCommentFeed = ({
   type,
   avatarSize = 'lg',
   hasUserName,
-  commentCallback,
+  replySubmitCallback,
   ...actionControls
 }: CommentProps) => {
   const [refetchComment] = useLazyQuery<RefetchComment>(REFETCH_COMMENT)
@@ -39,9 +39,9 @@ export const BaseCommentFeed = ({
   const { id, replyTo, author, parentComment } = comment
   const nodeId = parentComment ? `${parentComment.id}-${id}` : id
 
-  const footerCommentCallback = () => {
-    if (commentCallback) {
-      commentCallback()
+  const submitCallback = () => {
+    if (replySubmitCallback) {
+      replySubmitCallback()
     }
 
     refetchComment({ variables: { id: parentComment?.id || id } })
@@ -82,7 +82,7 @@ export const BaseCommentFeed = ({
         <FooterActions
           comment={comment}
           type={type}
-          commentCallback={footerCommentCallback}
+          replySubmitCallback={submitCallback}
           {...actionControls}
         />
       </section>
