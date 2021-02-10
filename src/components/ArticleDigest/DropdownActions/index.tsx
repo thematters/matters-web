@@ -15,6 +15,7 @@ import {
   IconMore16,
   IconSize,
   Menu,
+  ShareDialog,
   Translate,
   ViewerContext,
 } from '~/components'
@@ -30,6 +31,7 @@ import FingerprintButton from './FingerprintButton'
 import RemoveTagButton from './RemoveTagButton'
 import SetTagSelectedButton from './SetTagSelectedButton'
 import SetTagUnselectedButton from './SetTagUnselectedButton'
+import ShareButton from './ShareButton'
 import StickyButton from './StickyButton'
 
 import { DropdownActionsArticle } from './__generated__/DropdownActionsArticle'
@@ -37,6 +39,7 @@ import { DropdownActionsArticle } from './__generated__/DropdownActionsArticle'
 export interface DropdownActionsControls {
   color?: IconColor
   size?: IconSize
+  hasShare?: boolean
   inCard?: boolean
   inUserArticles?: boolean
   inTagDetailLatest?: boolean
@@ -48,6 +51,7 @@ type DropdownActionsProps = {
 } & DropdownActionsControls
 
 interface Controls {
+  hasShare: boolean
   hasAppreciators: boolean
   hasFingerprint: boolean
   hasExtend: boolean
@@ -60,6 +64,7 @@ interface Controls {
 }
 
 interface DialogProps {
+  openShareDialog: () => void
   openFingerprintDialog: () => void
   openAppreciatorsDialog: () => void
   openArchiveDialog: () => void
@@ -99,6 +104,7 @@ const BaseDropdownActions = ({
   size,
   inCard,
 
+  hasShare,
   hasAppreciators,
   hasFingerprint,
   hasExtend,
@@ -109,6 +115,7 @@ const BaseDropdownActions = ({
   hasRemoveTag,
   hasEdit,
 
+  openShareDialog,
   openFingerprintDialog,
   openAppreciatorsDialog,
   openArchiveDialog,
@@ -116,6 +123,7 @@ const BaseDropdownActions = ({
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
     <Menu width={isInDropdown ? 'sm' : undefined}>
       {/* public */}
+      {hasShare && <ShareButton openDialog={openShareDialog} />}
       {hasAppreciators && (
         <AppreciatorsButton openDialog={openAppreciatorsDialog} />
       )}
@@ -169,6 +177,7 @@ const BaseDropdownActions = ({
 const DropdownActions = (props: DropdownActionsProps) => {
   const {
     article,
+    hasShare,
     inUserArticles,
     inTagDetailLatest,
     inTagDetailSelected,
@@ -206,6 +215,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
   }
 
   const controls = {
+    hasShare: !!hasShare,
     hasAppreciators: article.appreciationsReceived.totalCount > 0,
     hasFingerprint: isActive || isArticleAuthor,
     hasExtend: !!isActive,
@@ -227,27 +237,32 @@ const DropdownActions = (props: DropdownActionsProps) => {
   }
 
   return (
-    <FingerprintDialog article={article}>
-      {({ open: openFingerprintDialog }) => (
-        <AppreciatorsDialog article={article}>
-          {({ open: openAppreciatorsDialog }) => (
-            <ArchiveArticle.Dialog article={article}>
-              {({ open: openArchiveDialog }) => (
-                <BaseDropdownActions
-                  {...props}
-                  {...controls}
-                  openFingerprintDialog={openFingerprintDialog}
-                  openAppreciatorsDialog={openAppreciatorsDialog}
-                  openArchiveDialog={
-                    viewer.isFrozen ? forbid : openArchiveDialog
-                  }
-                />
+    <ShareDialog>
+      {({ open: openShareDialog }) => (
+        <FingerprintDialog article={article}>
+          {({ open: openFingerprintDialog }) => (
+            <AppreciatorsDialog article={article}>
+              {({ open: openAppreciatorsDialog }) => (
+                <ArchiveArticle.Dialog article={article}>
+                  {({ open: openArchiveDialog }) => (
+                    <BaseDropdownActions
+                      {...props}
+                      {...controls}
+                      openShareDialog={openShareDialog}
+                      openFingerprintDialog={openFingerprintDialog}
+                      openAppreciatorsDialog={openAppreciatorsDialog}
+                      openArchiveDialog={
+                        viewer.isFrozen ? forbid : openArchiveDialog
+                      }
+                    />
+                  )}
+                </ArchiveArticle.Dialog>
               )}
-            </ArchiveArticle.Dialog>
+            </AppreciatorsDialog>
           )}
-        </AppreciatorsDialog>
+        </FingerprintDialog>
       )}
-    </FingerprintDialog>
+    </ShareDialog>
   )
 }
 

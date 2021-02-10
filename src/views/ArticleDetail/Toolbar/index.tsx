@@ -83,6 +83,7 @@ const Toolbar = ({ article, privateFetched }: ToolbarProps) => {
           color="black"
           size="md-s"
           inCard={false}
+          hasShare={!isSmallUp}
         />
       </section>
 
