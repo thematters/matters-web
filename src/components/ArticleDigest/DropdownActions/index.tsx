@@ -15,6 +15,7 @@ import {
   IconMore16,
   IconSize,
   Menu,
+  ShareDialog,
   Translate,
   useRoute,
   ViewerContext,
@@ -31,6 +32,7 @@ import FingerprintButton from './FingerprintButton'
 import RemoveTagButton from './RemoveTagButton'
 import SetTagSelectedButton from './SetTagSelectedButton'
 import SetTagUnselectedButton from './SetTagUnselectedButton'
+import ShareButton from './ShareButton'
 import StickyButton from './StickyButton'
 
 import { DropdownActionsArticle } from './__generated__/DropdownActionsArticle'
@@ -39,6 +41,7 @@ export interface DropdownActionsControls {
   color?: IconColor
   size?: IconSize
 
+  hasShare?: boolean
   // force to hide
   hasFingerprint?: boolean
 
@@ -53,6 +56,7 @@ type DropdownActionsProps = {
 } & DropdownActionsControls
 
 interface Controls {
+  hasShare: boolean
   hasAppreciators: boolean
   hasDonators: boolean
   hasFingerprint: boolean
@@ -66,6 +70,7 @@ interface Controls {
 }
 
 interface DialogProps {
+  openShareDialog: () => void
   openFingerprintDialog: () => void
   openAppreciatorsDialog: () => void
   openDonatorsDialog: () => void
@@ -108,6 +113,7 @@ const BaseDropdownActions = ({
   size,
   inCard,
 
+  hasShare,
   hasAppreciators,
   hasDonators,
   hasFingerprint,
@@ -119,13 +125,14 @@ const BaseDropdownActions = ({
   hasRemoveTag,
   hasEdit,
 
+  openShareDialog,
   openFingerprintDialog,
   openAppreciatorsDialog,
   openDonatorsDialog,
   openArchiveDialog,
 }: BaseDropdownActionsProps) => {
   const hasPublic =
-    hasAppreciators || hasDonators || hasFingerprint || hasExtend
+    hasShare || hasAppreciators || hasDonators || hasFingerprint || hasExtend
   const hasPrivate =
     hasSticky ||
     hasArchive ||
@@ -136,6 +143,7 @@ const BaseDropdownActions = ({
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
     <Menu width={isInDropdown ? 'sm' : undefined}>
       {/* public */}
+      {hasShare && <ShareButton openDialog={openShareDialog} />}
       {hasAppreciators && (
         <AppreciatorsButton openDialog={openAppreciatorsDialog} />
       )}
@@ -187,6 +195,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
   const {
     article,
 
+    hasShare,
     hasFingerprint = true,
 
     inCard,
@@ -228,6 +237,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
 
   const controls = {
     // public
+    hasShare: !!hasShare,
     hasAppreciators: article.appreciationsReceived.totalCount > 0 && !inCard,
     hasDonators: article.donationsDialog.totalCount > 0 && !inCard,
     hasFingerprint: hasFingerprint && (isActive || isArticleAuthor) && !inCard,
@@ -251,32 +261,37 @@ const DropdownActions = (props: DropdownActionsProps) => {
   }
 
   return (
-    <FingerprintDialog article={article}>
-      {({ open: openFingerprintDialog }) => (
-        <AppreciatorsDialog article={article}>
-          {({ open: openAppreciatorsDialog }) => (
-            <DonatorsDialog article={article}>
-              {({ open: openDonatorsDialog }) => (
-                <ArchiveArticle.Dialog article={article}>
-                  {({ open: openArchiveDialog }) => (
-                    <BaseDropdownActions
-                      {...props}
-                      {...controls}
-                      openFingerprintDialog={openFingerprintDialog}
-                      openAppreciatorsDialog={openAppreciatorsDialog}
-                      openDonatorsDialog={openDonatorsDialog}
-                      openArchiveDialog={
-                        viewer.isFrozen ? forbid : openArchiveDialog
-                      }
-                    />
+    <ShareDialog>
+      {({ open: openShareDialog }) => (
+        <FingerprintDialog article={article}>
+          {({ open: openFingerprintDialog }) => (
+            <AppreciatorsDialog article={article}>
+              {({ open: openAppreciatorsDialog }) => (
+                <DonatorsDialog article={article}>
+                  {({ open: openDonatorsDialog }) => (
+                    <ArchiveArticle.Dialog article={article}>
+                      {({ open: openArchiveDialog }) => (
+                        <BaseDropdownActions
+                          {...props}
+                          {...controls}
+                          openShareDialog={openShareDialog}
+                          openFingerprintDialog={openFingerprintDialog}
+                          openAppreciatorsDialog={openAppreciatorsDialog}
+                          openDonatorsDialog={openDonatorsDialog}
+                          openArchiveDialog={
+                            viewer.isFrozen ? forbid : openArchiveDialog
+                          }
+                        />
+                      )}
+                    </ArchiveArticle.Dialog>
                   )}
-                </ArchiveArticle.Dialog>
+                </DonatorsDialog>
               )}
-            </DonatorsDialog>
+            </AppreciatorsDialog>
           )}
-        </AppreciatorsDialog>
+        </FingerprintDialog>
       )}
-    </FingerprintDialog>
+    </ShareDialog>
   )
 }
 
