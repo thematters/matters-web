@@ -33,10 +33,12 @@ import { USER_COMMENTS_PRIVATE, USER_COMMENTS_PUBLIC, USER_ID } from './gql'
 import {
   UserCommentsPublic,
   UserCommentsPublic_node_User_commentedArticles_edges_node_comments_edges_node,
+  UserCommentsPublic_node_User_commentedArticles_edges_node_comments_edges_node_node_Article,
 } from './__generated__/UserCommentsPublic'
 import { UserIdUser } from './__generated__/UserIdUser'
 
 type CommentedArticleComment = UserCommentsPublic_node_User_commentedArticles_edges_node_comments_edges_node
+type CommentArticle = UserCommentsPublic_node_User_commentedArticles_edges_node_comments_edges_node_node_Article
 
 const UserComments = () => {
   const { getQuery } = useRoute()
@@ -222,10 +224,15 @@ const BaseUserComments = ({ user }: UserIdUser) => {
                 <List.Item key={comment.id}>
                   <Card
                     spacing={['tight', 'base']}
-                    {...toPath({ page: 'commentDetail', comment })}
+                    {...toPath({
+                      page: 'commentDetail',
+                      comment,
+                      article: comment.node as CommentArticle,
+                    })}
                   >
                     <Comment.Feed
                       comment={comment}
+                      type="article"
                       hasCreatedAt
                       hasLink
                       inCard

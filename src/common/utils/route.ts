@@ -20,7 +20,6 @@ interface CircleArgs {
 
 interface CommentArgs {
   id: string
-  article: ArticleArgs
   parentComment: {
     id: string
   } | null
@@ -44,6 +43,7 @@ type ToPathArgs =
   | {
       page: 'commentDetail'
       comment: CommentArgs
+      article: ArticleArgs
     }
   | { page: 'draftDetail'; id: string; slug: string }
   | {
@@ -111,12 +111,12 @@ export const toPath = (args: ToPathArgs): { href: string } => {
       }
     }
     case 'commentDetail': {
-      const { parentComment, id, article } = args.comment
+      const { parentComment, id } = args.comment
       const fragment = parentComment?.id ? `${parentComment.id}-${id}` : id
 
       return toPath({
         page: 'articleDetail',
-        article,
+        article: args.article,
         fragment,
       })
     }
