@@ -20,6 +20,8 @@ import {
 
 import { ADD_TOAST } from '@/src/common/enums'
 
+import Explainer from './Explainer'
+
 import { UpdatePaymentPointer } from './__generated__/UpdatePaymentPointer'
 
 interface FormProps {
@@ -112,7 +114,7 @@ const SetPaymentPointerForm: React.FC<FormProps> = ({
     <Dialog.Content hasGrow>
       <Form id={formId} onSubmit={handleSubmit}>
         <Form.Input
-          label={<Translate id="paymentPointer" />}
+          label={<Explainer />}
           type="text"
           name="paymentPointer"
           required
