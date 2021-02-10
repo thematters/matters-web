@@ -24,7 +24,7 @@ const Collapsed = ({
     return (
       <>
         <div
-          className={`${className} u-content-comment `}
+          className={`${className} u-content-comment`}
           dangerouslySetInnerHTML={{
             __html: content || '',
           }}
@@ -38,7 +38,7 @@ const Collapsed = ({
   }
 
   return (
-    <p className={`${className} inactive`}>
+    <p className={`${className} u-content-comment inactive`}>
       <span>{collapsedContent}</span>
 
       {collapsed && (

@@ -196,6 +196,8 @@ const DropdownActions = (props: DropdownActionsProps) => {
   const isCollapsed = comment.state === 'collapsed'
   const isDescendantComment = comment.parentComment
 
+  console.log({ targetAuthor, isTargetAuthor, isDescendantComment, isActive })
+
   const controls = {
     hasPin: !!(isTargetAuthor && isActive && !isDescendantComment),
     hasEdit: !!(isCommentAuthor && !isBlocked && (isActive || isCollapsed)),

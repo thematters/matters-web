@@ -106,7 +106,8 @@ const CommentFeed = React.memo(
       prevComment.content === comment.content &&
       prevComment.upvotes === comment.upvotes &&
       prevComment.downvotes === comment.downvotes &&
-      prevComment.state === comment.state
+      prevComment.state === comment.state &&
+      prevComment.pinned === comment.pinned
     )
   }
 ) as MemoizedCommentFeed

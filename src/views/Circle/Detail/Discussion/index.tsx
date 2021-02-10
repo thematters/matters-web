@@ -142,7 +142,7 @@ const Discussion = () => {
   const isOwner = circle?.owner.id === viewer.id
   const isMember = circle?.isMember
 
-  if (!isOwner || !isMember) {
+  if (!isOwner && !isMember) {
     return <Wall circle={circle} />
   }
 

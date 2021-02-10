@@ -64,7 +64,9 @@ const PinButton = ({ comment }: { comment: PinButtonComment }) => {
     return (
       <Menu.Item onClick={unpinComment}>
         <TextIcon icon={<IconUnPin24 size="md" />} size="md" spacing="base">
-          <Translate id="unpin" />
+          <Translate
+            id={circle ? 'unpinCircleComment' : 'unpinArticleComment'}
+          />
         </TextIcon>
       </Menu.Item>
     )
@@ -73,7 +75,7 @@ const PinButton = ({ comment }: { comment: PinButtonComment }) => {
   return (
     <Menu.Item onClick={canPin ? pinComment : undefined}>
       <TextIcon icon={<IconPin24 size="md" />} size="md" spacing="base">
-        <Translate id="pin" />
+        <Translate id={circle ? 'pinCircleComment' : 'pinArticleComment'} />
       </TextIcon>
     </Menu.Item>
   )

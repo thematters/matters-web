@@ -10,6 +10,9 @@ export default gql`
           id
           pinCommentLeft
         }
+        ... on Circle {
+          id
+        }
       }
     }
   }

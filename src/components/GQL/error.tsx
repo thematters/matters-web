@@ -60,7 +60,7 @@ export const mutationOnError = (
       new CustomEvent(ADD_TOAST, {
         detail: {
           color: 'red',
-          content: errorCodes[0],
+          content: <Translate id={errorCodes[0]} />,
           customButton: <LoginButton isPlain />,
           buttonPlacement: 'center',
         },
