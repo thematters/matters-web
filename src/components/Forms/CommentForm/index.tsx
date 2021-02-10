@@ -56,7 +56,7 @@ export const CommentForm: React.FC<CommentFormProps> = ({
   placeholder,
 }) => {
   // retrieve comment draft
-  const commentDraftId = `${articleId || circleId}:${commentId || 0}:${
+  const commentDraftId = `${articleId || circleId}:${type}:${commentId || 0}:${
     parentId || 0
   }:${replyToId || 0}`
   const formId = `comment-form-${commentDraftId}`

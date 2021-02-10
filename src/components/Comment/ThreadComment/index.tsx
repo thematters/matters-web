@@ -58,7 +58,7 @@ export const ThreadComment = ({
               <li key={descendantComment.id}>
                 <Feed
                   comment={descendantComment}
-                  type="article"
+                  type={type}
                   avatarSize="md"
                   hasReply
                   hasUserName
