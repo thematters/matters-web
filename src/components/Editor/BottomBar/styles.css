@@ -1,9 +1,8 @@
 .bottom-bar {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: var(--z-index-over-global-header);
+  & :global(.fixed-main) {
+    bottom: 0;
+    z-index: var(--z-index-bottom-bar);
+  }
 }
 
 .content {
@@ -17,10 +16,6 @@
 .inner {
   @mixin flex-center-space-between;
 
+  justify-content: space-around;
   height: var(--global-nav-height);
-
-  & button {
-    flex: 1 1 0;
-    height: 100%;
-  }
 }

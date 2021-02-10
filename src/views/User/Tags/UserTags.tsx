@@ -1,20 +1,19 @@
-import { useRouter } from 'next/router'
-
 import {
   Card,
   EmptyTag,
   Head,
   InfiniteScroll,
   List,
+  QueryError,
   Spinner,
   Tag,
   Translate,
   usePublicQuery,
   usePullToRefresh,
+  useRoute,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 
-import { analytics, getQuery, mergeConnections, toPath } from '~/common/utils'
+import { analytics, mergeConnections, toPath } from '~/common/utils'
 
 import IMAGE_LOGO_192 from '@/public/static/icon-192x192.png?url'
 
@@ -25,8 +24,8 @@ import styles from './styles.css'
 import { UserTagsPublic } from './__generated__/UserTagsPublic'
 
 const UserTags = () => {
-  const router = useRouter()
-  const userName = getQuery({ router, key: 'userName' })
+  const { getQuery } = useRoute()
+  const userName = getQuery('name')
 
   /**
    * Data Fetching
@@ -78,22 +77,44 @@ const UserTags = () => {
    * Render
    */
   if (loading) {
-    return <Spinner />
+    return (
+      <>
+        <UserTabs />
+        <Spinner />
+      </>
+    )
   }
 
   if (error) {
-    return <QueryError error={error} />
+    return (
+      <>
+        <UserTabs />
+        <QueryError error={error} />
+      </>
+    )
   }
 
-  if (!user) {
-    return null
+  if (!user || user?.status?.state === 'archived') {
+    return (
+      <>
+        <UserTabs />
+        <EmptyTag
+          description={
+            <Translate
+              zh_hant="還沒有主理與協作標籤喔"
+              zh_hans="还没有主理与协作标签喔"
+            />
+          }
+        />
+      </>
+    )
   }
 
   const CustomHead = () => (
     <Head
       title={{
-        zh_hant: `${user.displayName}主理與協作的標籤`,
-        zh_hans: `${user.displayName}主理与协作的標籤`,
+        zh_hant: `${user.displayName} 主理與協作的標籤`,
+        zh_hans: `${user.displayName} 主理与协作的標籤`,
       }}
       description={user.info.description}
       image={user.info.profileCover || IMAGE_LOGO_192}
@@ -117,11 +138,13 @@ const UserTags = () => {
     )
   }
 
+  const hasSubscriptions = user.subscribedCircles.totalCount > 0
+
   return (
     <>
       <CustomHead />
 
-      <UserTabs />
+      <UserTabs hasSubscriptions={hasSubscriptions} />
 
       <section className="container">
         <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>

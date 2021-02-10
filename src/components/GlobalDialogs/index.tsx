@@ -10,7 +10,7 @@ const GlobalDialogs = () => {
       <LoginDialog />
       <SignUpDialog />
       <ResetPasswordDialog />
-      <LikeCoinDialog allowEventTrigger />
+      <LikeCoinDialog />
     </>
   )
 }

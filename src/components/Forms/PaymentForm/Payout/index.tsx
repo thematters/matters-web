@@ -1,7 +1,9 @@
 import Complete from './Complete'
 import Confirm from './Confirm'
 
-export default {
+const Payout = {
   Complete,
   Confirm,
 }
+
+export default Payout

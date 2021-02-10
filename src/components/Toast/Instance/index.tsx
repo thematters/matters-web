@@ -17,7 +17,7 @@ import styles from './styles.css'
  * ```
  */
 
-interface ToastProps {
+export interface ToastInstanceProps {
   color: 'green' | 'grey' | 'red'
   content?: string | React.ReactNode
   subDescription?: string | React.ReactNode
@@ -32,7 +32,7 @@ export const ToastInstance = ({
   subDescription,
   buttonPlacement = 'top',
   customButton,
-}: ToastProps) => {
+}: ToastInstanceProps) => {
   const mainClasses = classNames({
     toast: true,
     [buttonPlacement]: buttonPlacement,
@@ -89,7 +89,7 @@ export const ToastWithEffect = ({
   id: string
   duration?: number
   fixed?: boolean
-} & ToastProps) => {
+} & ToastInstanceProps) => {
   const remove = () => {
     window.dispatchEvent(new CustomEvent(REMOVE_TOAST, { detail: { id } }))
   }

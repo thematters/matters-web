@@ -1,6 +1,4 @@
-import { useState } from 'react'
-
-import { Dialog } from '~/components'
+import { Dialog, useDialogSwitch } from '~/components'
 
 import PublishContent from './PublishContent'
 
@@ -9,15 +7,13 @@ interface PublishDialogProps {
 }
 
 export const PublishDialog = ({ children }: PublishDialogProps) => {
-  const [showDialog, setShowDialog] = useState(false)
-  const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
+  const { show, open, close } = useDialogSwitch(false)
 
   return (
     <>
       {children({ open })}
 
-      <Dialog isOpen={showDialog} onDismiss={close} fixedHeight>
+      <Dialog isOpen={show} onDismiss={close} fixedHeight>
         <PublishContent closeDialog={close} />
       </Dialog>
     </>

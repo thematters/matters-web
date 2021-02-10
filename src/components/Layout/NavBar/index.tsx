@@ -1,10 +1,10 @@
-import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
 import {
   IconNavHome24,
   IconNavHomeActive24,
   IconNavSearch24,
+  useRoute,
   ViewerContext,
   WriteButton,
 } from '~/components'
@@ -16,14 +16,13 @@ import NavListItem from './NavListItem'
 import styles from './styles.css'
 
 const NavBar = () => {
-  const router = useRouter()
   const viewer = useContext(ViewerContext)
-
-  const isInHome = router.pathname === PATHS.HOME
-  const isInFollow = router.pathname === PATHS.FOLLOW
-  const isInNotification = router.pathname === PATHS.ME_NOTIFICATIONS
-  const isInSearch = router.pathname === PATHS.SEARCH
-  const isInDraftDetail = router.pathname.indexOf('/me/drafts') >= 0
+  const { isInPath } = useRoute()
+  const isInHome = isInPath('HOME')
+  const isInFollow = isInPath('FOLLOW')
+  const isInNotification = isInPath('ME_NOTIFICATIONS')
+  const isInSearch = isInPath('SEARCH')
+  const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
 
   return (
     <section className="nav-bar" role="navigation">

@@ -1,8 +1,6 @@
 import gql from 'graphql-tag'
-import { useState } from 'react'
 
-import { Dialog, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
+import { Dialog, Translate, useDialogSwitch, useMutation } from '~/components'
 
 import { ADD_TOAST } from '~/common/enums'
 
@@ -26,9 +24,7 @@ const CollapseCommentDialog = ({
   commentId,
   children,
 }: CollapseCommentDialogProps) => {
-  const [showDialog, setShowDialog] = useState(true)
-  const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
+  const { show, open, close } = useDialogSwitch(true)
 
   const [collapseComment] = useMutation<CollapseComment>(COLLAPSE_COMMENT, {
     variables: { id: commentId, state: 'collapsed' },
@@ -60,7 +56,7 @@ const CollapseCommentDialog = ({
     <>
       {children({ open })}
 
-      <Dialog isOpen={showDialog} onDismiss={close} size="sm">
+      <Dialog isOpen={show} onDismiss={close} size="sm">
         <Dialog.Header
           title={<Translate id="collapseComment" />}
           close={close}

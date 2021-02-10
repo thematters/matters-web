@@ -2,8 +2,10 @@ import MeSettingsChangePassword from '~/views/Me/Settings/ChangePassword'
 
 import { Protected } from '~/components'
 
-export default () => (
+const ProtectedMeSettingsChangePassword = () => (
   <Protected>
     <MeSettingsChangePassword />
   </Protected>
 )
+
+export default ProtectedMeSettingsChangePassword

@@ -10,8 +10,8 @@ import {
   Form,
   LanguageContext,
   Translate,
+  useMutation,
 } from '~/components'
-import { useMutation } from '~/components/GQL'
 
 import { ADD_TOAST, ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
 import {
@@ -62,7 +62,11 @@ const UPDATE_USER_INFO = gql`
 const UNCHANGED_FIELD = 'UNCHANGED_FIELD'
 
 const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
-  const [update] = useMutation<UpdateUserInfoProfile>(UPDATE_USER_INFO)
+  const [update] = useMutation<UpdateUserInfoProfile>(
+    UPDATE_USER_INFO,
+    undefined,
+    { showToast: false }
+  )
   const { lang } = useContext(LanguageContext)
 
   const formId = 'edit-profile-form'
@@ -121,8 +125,11 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
 
         const [messages, codes] = parseFormSubmitErrors(error, lang)
         codes.forEach((code) => {
-          if (code.includes('USER_DISPLAYNAME_INVALID')) {
-            setFieldError('displayName', messages[code])
+          if (code === 'DISPLAYNAME_INVALID') {
+            setFieldError(
+              'displayName',
+              translate({ id: 'hintDisplayName', lang })
+            )
           } else {
             setFieldError('description', messages[code])
           }
@@ -136,8 +143,8 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
       <section className="cover-field">
         <CoverUploader
           assetType={ASSET_TYPE.profileCover}
-          coverUrl={user.info.profileCover}
-          defaultCoverUrl={IMAGE_COVER}
+          cover={user.info.profileCover}
+          fallbackCover={IMAGE_COVER}
           entityType={ENTITY_TYPE.user}
           inEditor
           onUpload={(assetId) => setFieldValue('profileCover', assetId)}
@@ -177,7 +184,7 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
           id: 'enterUserDescription',
           lang,
         })}
-        hint={<Translate id="hintUserDescription" />}
+        hint={<Translate id="hintDescription" />}
         value={values.description}
         error={touched.description && errors.description}
         onBlur={handleBlur}

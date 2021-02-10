@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 
+import { CircleDigest } from '~/components'
 import { fragments as EditorFragments } from '~/components/Editor/fragments'
 import articleFragments from '~/components/GQL/fragments/article'
 import assetFragment from '~/components/GQL/fragments/asset'
@@ -17,6 +18,12 @@ export const EDIT_MODE_ARTICLE = gql`
       assets {
         ...Asset
       }
+      author {
+        id
+        ownCircles {
+          ...DigestRichCirclePublic
+        }
+      }
       drafts {
         mediaHash
         publishState
@@ -28,6 +35,7 @@ export const EDIT_MODE_ARTICLE = gql`
   ${assetFragment}
   ${articleFragments.articleCollection}
   ${EditorFragments.draft}
+  ${CircleDigest.Rich.fragments.circle.public}
 `
 
 export const EDIT_MODE_ARTICLE_ASSETS = gql`

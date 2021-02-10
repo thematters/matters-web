@@ -11,6 +11,9 @@ export const USER_FOLLOWERS_PUBLIC = gql`
         description
         profileCover
       }
+      status {
+        state
+      }
       followers(input: { first: 20, after: $after }) {
         pageInfo {
           startCursor

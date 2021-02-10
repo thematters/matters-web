@@ -1,10 +1,12 @@
 import { Layout, UserProfile } from '~/components'
 
-import UserComments from './UserComments'
+import BaseUserComments from './UserComments'
 
-export default () => (
+const UserComments = () => (
   <Layout.Main>
     <UserProfile />
-    <UserComments />
+    <BaseUserComments />
   </Layout.Main>
 )
+
+export default UserComments

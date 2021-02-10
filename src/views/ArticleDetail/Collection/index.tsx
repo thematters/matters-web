@@ -5,13 +5,13 @@ import _uniq from 'lodash/uniq'
 import {
   ArticleDigestSidebar,
   List,
+  QueryError,
   Spinner,
   Title,
   Translate,
   useResponsive,
   ViewMoreButton,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 import articleFragments from '~/components/GQL/fragments/article'
 
 import { analytics, mergeConnections } from '~/common/utils'

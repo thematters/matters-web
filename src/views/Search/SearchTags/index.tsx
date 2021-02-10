@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router'
 import { Fragment } from 'react'
 
 import {
@@ -9,9 +8,10 @@ import {
   Spinner,
   Tag,
   usePublicQuery,
+  useRoute,
 } from '~/components'
 
-import { analytics, getQuery, mergeConnections, toPath } from '~/common/utils'
+import { analytics, mergeConnections, toPath } from '~/common/utils'
 
 import GoogleSearchButton from '../GoogleSearchButton'
 import { SEARCH_TAGS_PUBLIC } from './gql'
@@ -19,8 +19,8 @@ import { SEARCH_TAGS_PUBLIC } from './gql'
 import { SearchTagsPublic } from './__generated__/SearchTagsPublic'
 
 const SearchTag = () => {
-  const router = useRouter()
-  const q = getQuery({ router, key: 'q' })
+  const { getQuery } = useRoute()
+  const q = getQuery('q')
 
   /**
    * Data Fetching

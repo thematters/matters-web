@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router'
 import { Fragment, useContext, useEffect } from 'react'
 
 import {
@@ -8,10 +7,11 @@ import {
   Spinner,
   usePublicQuery,
   UserDigest,
+  useRoute,
   ViewerContext,
 } from '~/components'
 
-import { analytics, getQuery, mergeConnections } from '~/common/utils'
+import { analytics, mergeConnections } from '~/common/utils'
 
 import GoogleSearchButton from '../GoogleSearchButton'
 import { SEARCH_USERS_PRIVATE, SEARCH_USERS_PUBLIC } from './gql'
@@ -20,8 +20,8 @@ import { SearchUsersPublic } from './__generated__/SearchUsersPublic'
 
 const SearchUser = () => {
   const viewer = useContext(ViewerContext)
-  const router = useRouter()
-  const q = getQuery({ router, key: 'q' })
+  const { getQuery } = useRoute()
+  const q = getQuery('q')
 
   /**
    * Data Fetching

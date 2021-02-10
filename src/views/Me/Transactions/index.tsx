@@ -45,7 +45,7 @@ const ME_TRANSACTIONS = gql`
   ${Transaction.fragments.transaction}
 `
 
-const Transactions = () => {
+const BaseTransactions = () => {
   const { data, loading, fetchMore, refetch } = useQuery<MeTransactions>(
     ME_TRANSACTIONS,
     {
@@ -103,7 +103,7 @@ const Transactions = () => {
   )
 }
 
-export default () => (
+const Transactions = () => (
   <Layout.Main>
     <Layout.Header
       left={<Layout.Header.BackButton />}
@@ -112,6 +112,8 @@ export default () => (
 
     <Head title={{ id: 'paymentTransactions' }} />
 
-    <Transactions />
+    <BaseTransactions />
   </Layout.Main>
 )
+
+export default Transactions

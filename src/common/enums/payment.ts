@@ -18,6 +18,14 @@ export const PAYMENT_MINIMAL_PAYOUT_AMOUNT = {
   HKD: 500,
 }
 
+export const PAYMENT_MINIMAL_CIRCLE_AMOUNT = {
+  HKD: 5,
+}
+
+export const PAYMENT_MAXIMUM_CIRCLE_AMOUNT = {
+  HKD: 100,
+}
+
 export enum PAYMENT_CURRENCY {
   HKD = 'HKD',
   LIKE = 'LIKE',

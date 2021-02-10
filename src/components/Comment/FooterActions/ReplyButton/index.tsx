@@ -5,6 +5,7 @@ import {
   Button,
   ButtonProps,
   CommentFormDialog,
+  CommentFormType,
   IconComment16,
   useResponsive,
   ViewerContext,
@@ -24,6 +25,7 @@ import { ReplyComemnt } from './__generated__/ReplyComemnt'
 
 export interface ReplyButtonProps {
   comment: ReplyComemnt
+  type: CommentFormType
   commentCallback?: () => void
   onClick?: () => void
   disabled?: boolean
@@ -39,10 +41,18 @@ const fragments = {
         id
         ...ReplyToUser
       }
-      article {
-        id
-        author {
+      node {
+        ... on Circle {
           id
+          owner {
+            id
+          }
+        }
+        ... on Article {
+          id
+          author {
+            id
+          }
         }
       }
       parentComment {
@@ -69,6 +79,7 @@ const CommentButton: React.FC<ButtonProps & { inCard: boolean }> = ({
 
 const ReplyButton = ({
   comment,
+  type,
   commentCallback,
   onClick,
   disabled,
@@ -77,7 +88,9 @@ const ReplyButton = ({
   const viewer = useContext(ViewerContext)
   const isSmallUp = useResponsive('sm-up')
 
-  const { id, parentComment, author, article } = comment
+  const { id, parentComment, author, node } = comment
+  const article = node.__typename === 'Article' ? node : undefined
+  const circle = node.__typename === 'Circle' ? node : undefined
 
   const submitCallback = () => {
     if (commentCallback) {
@@ -106,7 +119,9 @@ const ReplyButton = ({
 
   return (
     <CommentFormDialog
-      articleId={article.id}
+      articleId={article?.id}
+      circleId={circle?.id}
+      type={type}
       replyToId={id}
       parentId={parentComment?.id || id}
       submitCallback={submitCallback}
