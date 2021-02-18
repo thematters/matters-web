@@ -56,9 +56,9 @@ export const CommentForm: React.FC<CommentFormProps> = ({
   placeholder,
 }) => {
   // retrieve comment draft
-  const commentDraftId = `${articleId || circleId}:${type}:${commentId || 0}:${
+  const commentDraftId = `${articleId || circleId}-${type}-${commentId || 0}-${
     parentId || 0
-  }:${replyToId || 0}`
+  }-${replyToId || 0}`
   const formId = `comment-form-${commentDraftId}`
 
   const { data, client } = useQuery<CommentDraft>(COMMENT_DRAFT, {
@@ -93,19 +93,26 @@ export const CommentForm: React.FC<CommentFormProps> = ({
     try {
       await putComment({ variables: { input } })
 
-      setContent('')
+      setSubmitting(false)
+
+      if (submitCallback) {
+        submitCallback()
+      }
+
+      // clear content
+      const $editor = document.querySelector(
+        `#${formId} .ql-editor`
+      ) as HTMLElement
+
+      if ($editor) {
+        $editor.innerHTML = ''
+      }
 
       // clear draft
       client.writeData({
         id: `CommentDraft:${commentDraftId}`,
         data: { content: '' },
       })
-
-      setSubmitting(false)
-
-      if (submitCallback) {
-        submitCallback()
-      }
     } catch (e) {
       setSubmitting(false)
       console.error(e)

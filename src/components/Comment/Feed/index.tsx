@@ -34,7 +34,9 @@ export const BaseCommentFeed = ({
   replySubmitCallback,
   ...actionControls
 }: CommentProps) => {
-  const [refetchComment] = useLazyQuery<RefetchComment>(REFETCH_COMMENT)
+  const [refetchComment] = useLazyQuery<RefetchComment>(REFETCH_COMMENT, {
+    fetchPolicy: 'network-only',
+  })
 
   const { id, replyTo, author, parentComment } = comment
   const nodeId = parentComment ? `${parentComment.id}-${id}` : id

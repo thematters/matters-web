@@ -8,6 +8,10 @@ footer {
   & .left {
     @mixin inline-flex-center-all;
 
+    & :global(> *) {
+      display: inline-flex;
+    }
+
     & :global(> * + *) {
       padding-left: var(--spacing-loose);
     }

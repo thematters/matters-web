@@ -1,3 +1,5 @@
+import { useRef } from 'react'
+
 import { Dialog, useDialogSwitch } from '~/components'
 
 import CommentForm, { CommentFormProps } from './CommentForm'
@@ -11,29 +13,28 @@ const BaseCommentFormDialog = ({
   ...props
 }: CommentFormDialogProps) => {
   const { show, open, close } = useDialogSwitch(true)
+  const ref: React.RefObject<HTMLDivElement> | null = useRef(null)
 
   // FIXME: editor can't be focused with dialog on Android devices
   const focusEditor = () => {
-    const $editor = document.querySelector('.ql-editor') as HTMLElement
+    if (!show) {
+      return
+    }
+
+    const $editor = ref.current?.querySelector('.ql-editor') as HTMLElement
     if ($editor) {
       $editor.focus()
     }
   }
 
-  const onRest = () => {
-    if (show) {
-      focusEditor()
-    }
-  }
-
   return (
-    <>
+    <div ref={ref}>
       {children && children({ open })}
 
-      <Dialog isOpen={show} onDismiss={close} onRest={onRest} fixedHeight>
+      <Dialog isOpen={show} onDismiss={close} onRest={focusEditor} fixedHeight>
         <CommentForm {...props} closeDialog={close} />
       </Dialog>
-    </>
+    </div>
   )
 }
 
