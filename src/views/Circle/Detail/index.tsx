@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
 
 import {
@@ -9,109 +8,26 @@ import {
   QueryError,
   Spinner,
   SubscribeCircleDialog,
-  Tabs,
   Throw404,
-  Translate,
+  useEventListener,
   usePublicQuery,
   usePullToRefresh,
   useRoute,
   ViewerContext,
 } from '~/components'
 
+import { REFETCH_CIRCLE_DETAIL } from '~/common/enums'
+
+import CircleDetailTabs from './CircleDetailTabs'
 import DropdownActions from './DropdownActions'
 import { CIRCLE_DETAIL_PRIVATE, CIRCLE_DETAIL_PUBLIC } from './gql'
 import CircleProfile from './Profile'
 import styles from './styles.css'
 import SubscriptionBanner from './SubscriptionBanner'
-import Works from './Works'
 
-import {
-  CircleDetailPublic,
-  CircleDetailPublic_circle,
-} from './__generated__/CircleDetailPublic'
+import { CircleDetailPublic } from './__generated__/CircleDetailPublic'
 
-const DynamicDiscussion = dynamic(() => import('./Discussion'), {
-  ssr: false,
-  loading: Spinner,
-})
-const DynamicBroadcast = dynamic(() => import('./Broadcast'), {
-  ssr: false,
-  loading: Spinner,
-})
-
-type CircleFeedType = 'works' | 'discussion' | 'boardcast'
-
-const CircleDetail = ({
-  circle,
-  privateFetched,
-}: {
-  circle: CircleDetailPublic_circle
-  privateFetched: boolean
-}) => {
-  // feed type
-  const [feed, setFeed] = useState<CircleFeedType>('works')
-  const isWorks = feed === 'works'
-  const isDiscussion = feed === 'discussion'
-  const isBoardcast = feed === 'boardcast'
-
-  /**
-   * Render
-   */
-  return (
-    <Layout.Main bgColor="grey-lighter">
-      <Layout.Header
-        left={<Layout.Header.BackButton mode="black-solid" />}
-        right={
-          <>
-            <span />
-
-            <DropdownActions circle={circle} />
-          </>
-        }
-        mode="transparent-absolute"
-      />
-
-      <Head title={circle.displayName} />
-
-      <PullToRefresh>
-        <CircleProfile circle={circle} />
-
-        <section className="content">
-          <Tabs sticky>
-            <Tabs.Tab selected={isWorks} onClick={() => setFeed('works')}>
-              <Translate id="article" />
-            </Tabs.Tab>
-
-            <Tabs.Tab
-              selected={isDiscussion}
-              onClick={() => setFeed('discussion')}
-            >
-              <Translate id="circleDiscussion" />
-            </Tabs.Tab>
-
-            <Tabs.Tab
-              selected={isBoardcast}
-              onClick={() => setFeed('boardcast')}
-            >
-              <Translate id="circleBroadcast" />
-            </Tabs.Tab>
-          </Tabs>
-
-          {isWorks && <Works name={circle.name} />}
-          {isDiscussion && <DynamicDiscussion />}
-          {isBoardcast && <DynamicBroadcast />}
-
-          <SubscribeCircleDialog circle={circle} />
-          {privateFetched && <SubscriptionBanner circle={circle} />}
-
-          <style jsx>{styles}</style>
-        </section>
-      </PullToRefresh>
-    </Layout.Main>
-  )
-}
-
-const CircleDetailContainer = () => {
+const CircleDetailContainer: React.FC = ({ children }) => {
   const { getQuery } = useRoute()
   const viewer = useContext(ViewerContext)
   const name = getQuery('name')
@@ -157,6 +73,7 @@ const CircleDetailContainer = () => {
     await refetchPublic()
     loadPrivate()
   }
+  useEventListener(REFETCH_CIRCLE_DETAIL, refetch)
   usePullToRefresh.Register()
   usePullToRefresh.Handler(refetch)
 
@@ -187,7 +104,38 @@ const CircleDetailContainer = () => {
     )
   }
 
-  return <CircleDetail circle={circle} privateFetched={privateFetched} />
+  return (
+    <Layout.Main bgColor="grey-lighter">
+      <Layout.Header
+        left={<Layout.Header.BackButton mode="black-solid" />}
+        right={
+          <>
+            <span />
+
+            <DropdownActions circle={circle} />
+          </>
+        }
+        mode="transparent-absolute"
+      />
+
+      <Head title={circle.displayName} />
+
+      <PullToRefresh>
+        <CircleProfile circle={circle} />
+
+        <section className="content">
+          <CircleDetailTabs />
+
+          {children}
+
+          <SubscribeCircleDialog circle={circle} />
+          {privateFetched && <SubscriptionBanner circle={circle} />}
+
+          <style jsx>{styles}</style>
+        </section>
+      </PullToRefresh>
+    </Layout.Main>
+  )
 }
 
 export default CircleDetailContainer

@@ -34,6 +34,8 @@ type ToPathArgs =
   | {
       page:
         | 'circleDetail'
+        | 'circleDiscussion'
+        | 'circleBroadcast'
         | 'circleSettings'
         | 'circleEditProfile'
         | 'circleFollowers'
@@ -88,6 +90,16 @@ export const toPath = (args: ToPathArgs): { href: string } => {
     case 'circleDetail': {
       return {
         href: `/~${args.circle.name}`,
+      }
+    }
+    case 'circleDiscussion': {
+      return {
+        href: `/~${args.circle.name}/discussion`,
+      }
+    }
+    case 'circleBroadcast': {
+      return {
+        href: `/~${args.circle.name}/broadcast`,
       }
     }
     case 'circleSettings': {

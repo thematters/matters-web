@@ -23,6 +23,7 @@ import {
 import { ADD_TOAST } from '~/common/enums'
 import { filterComments, mergeConnections, translate } from '~/common/utils'
 
+import CircleDetailContainer from '../Detail'
 import { DISCUSSION_PRIVATE, DISCUSSION_PUBLIC } from './gql'
 import styles from './styles.css'
 import Wall from './Wall'
@@ -200,4 +201,12 @@ const Discussion = () => {
   )
 }
 
-export default Discussion
+const CricleDiscussion = () => {
+  return (
+    <CircleDetailContainer>
+      <Discussion />
+    </CircleDetailContainer>
+  )
+}
+
+export default CricleDiscussion

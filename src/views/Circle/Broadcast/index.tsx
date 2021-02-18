@@ -21,6 +21,7 @@ import {
 import { ADD_TOAST } from '~/common/enums'
 import { filterComments, mergeConnections, translate } from '~/common/utils'
 
+import CircleDetailContainer from '../Detail'
 import { BROADCAST_PRIVATE, BROADCAST_PUBLIC } from './gql'
 import styles from './styles.css'
 
@@ -185,4 +186,12 @@ const Broadcast = () => {
   )
 }
 
-export default Broadcast
+const CricleBroadcast = () => {
+  return (
+    <CircleDetailContainer>
+      <Broadcast />
+    </CircleDetailContainer>
+  )
+}
+
+export default CricleBroadcast
