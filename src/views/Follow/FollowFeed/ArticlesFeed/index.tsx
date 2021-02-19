@@ -127,7 +127,7 @@ const ArticlesFeed = () => {
         />
 
         <TextIcon size="sm" color="grey-dark">
-          <Translate zh_hant="發布了" zh_hans="发布了" />
+          <Translate zh_hant="發布了" zh_hans="发布了" en="published" />
         </TextIcon>
         <style jsx>{styles}</style>
       </section>

@@ -38,6 +38,7 @@ const PublishedState = ({ draft }: { draft: PublishStateDraft }) => {
             <Translate
               zh_hant="作品發布成功，快把作品分享到不同渠道，"
               zh_hans="作品发布成功，快把作品分享到不同渠道，"
+              en="Article published successfully."
             />
           </p>
           <p>
@@ -48,10 +49,16 @@ const PublishedState = ({ draft }: { draft: PublishStateDraft }) => {
           </p>
         </>
       }
-      headerTitle={<Translate zh_hant="作品已發布" zh_hans="作品已发布" />}
+      headerTitle={
+        <Translate
+          zh_hant="作品已發布"
+          zh_hans="作品已发布"
+          en="Article published"
+        />
+      }
       footerButtons={
         <Dialog.Footer.Button {...path}>
-          <Translate zh_hant="查看作品" zh_hans="查看作品" />
+          <Translate zh_hant="查看作品" zh_hans="查看作品" en="View article" />
         </Dialog.Footer.Button>
       }
     >
