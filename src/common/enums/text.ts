@@ -711,7 +711,7 @@ export const TEXT = {
     helpCenter: 'Help',
     hide: 'Archived',
     hintAddTag:
-      'Adding tags helps readers to find your articles. Create new one if no tag suits your article',
+      'Adding tags helps readers to find your articles. Create new one if no tag suits your article.',
     hintDisplayName:
       'Must be between 2-20 characters long. Chinese characters, English alphabets and numbers are accepted.',
     hintEditCollection:

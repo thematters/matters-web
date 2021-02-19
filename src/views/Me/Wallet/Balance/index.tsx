@@ -13,7 +13,7 @@ const Balance: React.FC<BalanceProps> = ({ balanceHKD, canPayout }) => {
   return (
     <section className="balance">
       <p className="hint">
-        <Translate zh_hant="可用餘額" zh_hans="可用余额" />
+        <Translate zh_hant="可用餘額" zh_hans="可用余额" en="Balance" />
       </p>
 
       <CurrencyAmount currency={PAYMENT_CURRENCY.HKD} amount={balanceHKD} />

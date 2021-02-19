@@ -42,15 +42,15 @@ const ArticleSummaryInfo = ({ user }: { user: UserArticlesPublic_user }) => {
 
   return (
     <div className="info">
-      <Translate zh_hant="創作了" zh_hans="创作了" />
+      <Translate zh_hant="創作了" zh_hans="创作了" en="Created" />
       <span className="num">&nbsp;{articles}&nbsp;</span>
-      <Translate zh_hant="篇作品" zh_hans="篇作品" />
+      <Translate zh_hant="篇作品" zh_hans="篇作品" en="articles" />
 
       <IconDotDivider />
 
-      <Translate zh_hant="累積創作" zh_hans="累积创作" />
+      <Translate zh_hant="累積創作" zh_hans="累积创作" en="Accumulated" />
       <span className="num">&nbsp;{words}&nbsp;</span>
-      <Translate zh_hant="字" zh_hans="字" />
+      <Translate zh_hant="字" zh_hans="字" en="words" />
 
       <style jsx>{styles}</style>
     </div>

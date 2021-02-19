@@ -43,9 +43,9 @@ const State = ({ state, message }: StateProps) => {
       case TransactionState.canceled:
         return <Translate id="cancel" />
       case TransactionState.failed:
-        return <Translate zh_hant="失敗" zh_hans="失敗" />
+        return <Translate zh_hant="失敗" zh_hans="失敗" en="Failed" />
       case TransactionState.pending:
-        return <Translate zh_hant="進行中…" zh_hans="进行中…" />
+        return <Translate zh_hant="進行中…" zh_hans="进行中…" en="Processing" />
       default:
         return null
     }

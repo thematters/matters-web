@@ -13,6 +13,7 @@ import styles from './styles.css'
 const texts: {
   zh_hant: Record<string, string>
   zh_hans: Record<string, string>
+  en: Record<string, string>
 } = {
   zh_hant: {
     intro: '搬家到 Matters',
@@ -27,6 +28,12 @@ const texts: {
       '想将过去发布在其他地方的作品，搬到 Matters，实现作品的永久保存？' +
       '从今天开始，只要三个步骤，就可以将你在 Medium 的作品轻松搬到 Matters。',
     start: '开始搬家',
+  },
+  en: {
+    intro: 'Settled in Matters',
+    content:
+      'You can effortlessly pack articles published on Medium to Matters in just 3 steps.',
+    start: 'Pack and move to Matters',
   },
 }
 
