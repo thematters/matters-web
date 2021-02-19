@@ -39,7 +39,7 @@ const CommentEditor: React.FC<Props> = ({ content, update }) => {
         editorContent={content}
         editorUpdate={update}
         eventName={ADD_TOAST}
-        language={lang.toUpperCase()}
+        language={lang.toUpperCase() as Language}
         mentionLoading={loading}
         mentionKeywordChange={mentionKeywordChange}
         mentionUsers={mentionUsers}
