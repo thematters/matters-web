@@ -179,6 +179,9 @@ const UserArticles = () => {
         zh_hans: isShareOnboardingTasks
           ? `${user.displayName} 已解锁新手奖赏，快点加入 Matters 获得创作者奖励吧`
           : `${user.displayName}的创作空间站`,
+        en: isShareOnboardingTasks
+          ? `${user.displayName} has unlocked new user reward, join Matters to get creator reward`
+          : `${user.displayName}'s creative space`,
       }}
       noSuffix={isShareOnboardingTasks}
       description={user.info.description}

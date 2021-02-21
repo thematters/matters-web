@@ -10,11 +10,16 @@ const Features = () => (
   <section className="features">
     <section className="title l-row">
       <h2>
-        <Translate zh_hant="沒有預設立場，" zh_hans="没有预设立场，" />
+        <Translate
+          zh_hant="沒有預設立場，"
+          zh_hans="没有预设立场，"
+          en="No pre-defined positions,"
+        />
         <br />
         <Translate
           zh_hant="只有誠懇而深入的討論"
           zh_hans="只有诚恳而深入的讨论"
+          en="only sincere and in-depth discussions"
         />
       </h2>
     </section>
@@ -22,11 +27,16 @@ const Features = () => (
     <section className="feature-section l-row">
       <div className="intro l-col-4 l-col-sm-4 l-col-md-4 l-col-lg-4">
         <h3>
-          <Translate zh_hant="公共記憶永久儲存" zh_hans="公共记忆永久储存" />
+          <Translate
+            zh_hant="公共記憶永久儲存"
+            zh_hans="公共记忆永久储存"
+            en="Permanent storage of public memory"
+          />
           <br />
           <Translate
             zh_hant="參與者對社會進程的完整記錄"
             zh_hans="参与者对社会进程的完整记录"
+            en="A complete record of the participant's progress in social movement"
           />
         </h3>
         <p>
@@ -37,6 +47,7 @@ const Features = () => (
             <Translate
               zh_hant="弦子、麥燒：MeToo 讓我們相信，柔軟可以改變世界"
               zh_hans="弦子、麦烧：MeToo 让我们相信，柔软可以改变世界"
+              en="Xianzi, Maishao: MeToo makes us believe that softness can change the world"
             />
           </a>
         </p>
@@ -53,11 +64,13 @@ const Features = () => (
           <Translate
             zh_hant="公共議題的知識生產"
             zh_hans="公共议题的知识生产"
+            en="Knowledge production of public issues"
           />
           <br />
           <Translate
             zh_hant="38 篇作品，200 萬的閱讀量"
             zh_hans="38 篇作品，200 万的阅读量"
+            en="38 pieces, 2 million reads"
           />
         </h3>
         <p>
@@ -68,6 +81,7 @@ const Features = () => (
             <Translate
               zh_hant="《香港第一課》簡介及目錄"
               zh_hans="《香港第一课》简介及目录"
+              en="Introduction of Hong Kong First Class"
             />
           </a>
         </p>
@@ -81,11 +95,16 @@ const Features = () => (
     <section className="feature-section l-row">
       <div className="intro l-col-4 l-col-sm-4 l-col-md-4 l-col-lg-4">
         <h3>
-          <Translate zh_hant="引入創作金流機制" zh_hans="引入创作金流机制" />
+          <Translate
+            zh_hant="引入創作金流機制"
+            zh_hans="引入创作金流机制"
+            en="Introduce a new revenue mechanism for the creation"
+          />
           <br />
           <Translate
             zh_hant="給創作者以更多回饋"
             zh_hans="给创作者以更多回馈"
+            en="Giving more reward to creators"
           />
         </h3>
         <p>
@@ -96,6 +115,7 @@ const Features = () => (
             <Translate
               zh_hant="我買了一筆 LikeCoin，成為了 Matters 所有用戶投資人"
               zh_hans="我买了一笔 LikeCoin，成为了 Matters 所有用户投资人"
+              en="I bought an amount of LikeCoin and became an investor of Matters"
             />
           </a>
         </p>

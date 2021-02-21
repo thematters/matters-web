@@ -38,7 +38,7 @@ const texts: {
 }
 
 const Intro = () => {
-  const { zh_hant, zh_hans } = texts
+  const { zh_hant, zh_hans, en } = texts
 
   return (
     <section className="intro-wrap">
@@ -46,10 +46,18 @@ const Intro = () => {
         <section className="l-col-4 l-col-md-8 l-col-lg-12">
           <section>
             <h2>
-              <Translate zh_hant={zh_hant.intro} zh_hans={zh_hans.intro} />
+              <Translate
+                zh_hant={zh_hant.intro}
+                zh_hans={zh_hans.intro}
+                en={en.intro}
+              />
             </h2>
             <p>
-              <Translate zh_hant={zh_hant.content} zh_hans={zh_hans.content} />
+              <Translate
+                zh_hant={zh_hant.content}
+                zh_hans={zh_hans.content}
+                en={en.content}
+              />
             </p>
           </section>
 
@@ -60,7 +68,11 @@ const Intro = () => {
             onClick={() => jump('#steps', { offset: 10 })}
           >
             <TextIcon color="white" weight="md">
-              <Translate zh_hant={zh_hant.start} zh_hans={zh_hans.start} />
+              <Translate
+                zh_hant={zh_hant.start}
+                zh_hans={zh_hans.start}
+                en={en.start}
+              />
             </TextIcon>
           </Button>
         </section>

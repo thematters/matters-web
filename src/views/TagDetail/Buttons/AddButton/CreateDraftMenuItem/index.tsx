@@ -30,7 +30,11 @@ interface CreateDraftButtonProps {
 const BaseCreateDraftButton = ({ onClick }: { onClick: () => any }) => (
   <Menu.Item onClick={onClick}>
     <TextIcon icon={<IconAdd24 size="md" />} size="md" spacing="base">
-      <Translate zh_hant="創作新的作品" zh_hans="创作新的作品" />
+      <Translate
+        zh_hant="創作新的作品"
+        zh_hans="创作新的作品"
+        en="create new work"
+      />
     </TextIcon>
   </Menu.Item>
 )

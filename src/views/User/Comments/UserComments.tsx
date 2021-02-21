@@ -66,6 +66,7 @@ const UserComments = () => {
         title={{
           zh_hant: `${user.displayName}發布的評論`,
           zh_hans: `${user.displayName}发布的评论`,
+          en: `${user.displayName}'s comments`,
         }}
         description={user.info.description}
         image={user.info.profileCover || IMAGE_LOGO_192}

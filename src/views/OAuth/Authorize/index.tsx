@@ -86,6 +86,7 @@ const OAuthAuthorize = () => {
           <Translate
             zh_hant=" 正在申請訪問你的 Matters 帳戶數據："
             zh_hans=" 正在申请访问你的 Matters 帐户数据："
+            en=" is asking to access your Matters account:"
           />
         </>
       }
@@ -108,6 +109,7 @@ const OAuthAuthorize = () => {
               <Translate
                 zh_hant="讀取你的公開資料"
                 zh_hans="读取你的公开资料"
+                en="access to your public profile"
               />
             </li>
             {validScopes &&
@@ -139,12 +141,16 @@ const OAuthAuthorize = () => {
 
           <p className="switch-account">
             <span>
-              <Translate zh_hant="不是你？" zh_hans="不是你？" />
+              <Translate zh_hant="不是你？" zh_hans="不是你？" en="Not you?" />
             </span>
 
             <Link {...appendTarget(PATHS.LOGIN, true)}>
               <a className="u-link-green">
-                <Translate zh_hant="切換帳戶" zh_hans="切换帐户" />
+                <Translate
+                  zh_hant="切換帳戶"
+                  zh_hans="切换帐户"
+                  en="switch account"
+                />
               </a>
             </Link>
           </p>
@@ -156,6 +162,7 @@ const OAuthAuthorize = () => {
               <Translate
                 zh_hant="請先設置 Liker ID"
                 zh_hans="请先设置 Liker ID"
+                en="Please setup Liker ID first"
               />
             </Dialog.Footer.Button>
           ) : (

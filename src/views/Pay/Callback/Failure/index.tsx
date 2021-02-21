@@ -33,13 +33,18 @@ const OAuthCallbackFailure = () => {
         <Box avatar={avatar[provider]} title={title[provider]}>
           <section className="content">
             <h2>
-              <Translate zh_hant="支付失敗了！" zh_hans="支付失败了！" />
+              <Translate
+                zh_hant="支付失敗了！"
+                zh_hans="支付失败了！"
+                en="Payment failed!"
+              />
             </h2>
 
             <p>
               <Translate
                 zh_hant="請回到原頁面重試"
                 zh_hans="请回到原页面重试"
+                en="Please retry on the original page"
               />
             </p>
             <style jsx>{styles}</style>

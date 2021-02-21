@@ -45,6 +45,7 @@ const PublishedState = ({ draft }: { draft: PublishStateDraft }) => {
             <Translate
               zh_hant="吸引更多人為你拍手！"
               zh_hans="吸引更多人为你拍手！"
+              en="Share it to different platform and receive more likes and donations!"
             />
           </p>
         </>
