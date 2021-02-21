@@ -29,6 +29,7 @@ const TagLeaveNotice = ({ notice }: { notice: NoticeType }) => {
           <Translate
             zh_hant="辭去了標籤主理人權限，你要不要試試看成為新的主理人？"
             zh_hans="辞去了标签主理人权限，你要不要试试看成为新的主理人？"
+            en="resigned from tag maintainer, do you want to give it a try?"
           />
         </NoticeHead>
 

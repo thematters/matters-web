@@ -40,13 +40,18 @@ const ArticleTagAddedNotice = ({ notice }: { notice: NoticeType }) => {
             <Translate
               zh_hant="發現你的作品，並把它加入標籤"
               zh_hans="发现你的作品，并把它加入标签"
+              en="discovery your work, and add it to tag"
             />
           )}
           {!isAuthor && isMaintainer && notice.target.author && (
             <>
-              <Translate zh_hant="將" zh_hans="將" />{' '}
+              <Translate zh_hant="將" zh_hans="將" en="put the work of" />{' '}
               <NoticeActorName user={notice?.target?.author} />{' '}
-              <Translate zh_hant="的作品加入標籤" zh_hans="的作品加入标签" />
+              <Translate
+                zh_hant="的作品加入標籤"
+                zh_hans="的作品加入标签"
+                en="into tag"
+              />
             </>
           )}
         </NoticeHead>

@@ -41,7 +41,13 @@ interface FormValues {
 const LoginDialogButton = () => (
   <Form.List spacing="xloose">
     <Form.List.Item
-      title={<Translate zh_hant="已有帳戶？" zh_hans="已有帐户？" />}
+      title={
+        <Translate
+          zh_hant="已有帳戶？"
+          zh_hans="已有帐户？"
+          en="Already have an account?"
+        />
+      }
       rightText={<Translate id="login" />}
       rightTextColor="green"
       onClick={() => {
@@ -55,7 +61,13 @@ const LoginDialogButton = () => (
 const LoginRedirectionButton = () => (
   <Form.List spacing="xloose">
     <Form.List.Item
-      title={<Translate zh_hant="已有帳戶？" zh_hans="已有帐户？" />}
+      title={
+        <Translate
+          zh_hant="已有帳戶？"
+          zh_hans="已有帐户？"
+          en="Already have an account?"
+        />
+      }
       rightText={<Translate id="login" />}
       rightTextColor="green"
       {...appendTarget(PATHS.LOGIN)}
@@ -137,6 +149,7 @@ const Init: React.FC<FormProps> = ({
         placeholder={translate({
           zh_hant: '你的站內暱稱，之後可以修改',
           zh_hans: '你的站内暱称，之后可以修改',
+          en: 'Your Matters display name, can be changed later',
           lang,
         })}
         value={values.displayName}
@@ -168,7 +181,11 @@ const Init: React.FC<FormProps> = ({
         onChange={handleChange}
         hint={
           <>
-            <Translate zh_hant="我已閱讀並同意" zh_hans="我已阅读并同意" />
+            <Translate
+              zh_hant="我已閱讀並同意"
+              zh_hans="我已阅读并同意"
+              en="I have read and agree to"
+            />
 
             <Link href={PATHS.TOS}>
               <a className="u-link-green" target="_blank">
@@ -176,6 +193,7 @@ const Init: React.FC<FormProps> = ({
                 <Translate
                   zh_hant="Matters 用戶協議和隱私政策"
                   zh_hans="Matters 用户协议和隐私政策"
+                  en="Matters user agreement and privacy policy"
                 />
               </a>
             </Link>

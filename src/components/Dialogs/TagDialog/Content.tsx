@@ -159,6 +159,7 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
           newContent: translate({
             zh_hant: '請輸入標籤名稱',
             zh_hans: '請输入标签名称',
+            en: 'please enter tag name',
             lang,
           }),
         }

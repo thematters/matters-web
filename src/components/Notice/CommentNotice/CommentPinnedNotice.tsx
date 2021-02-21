@@ -26,7 +26,11 @@ const CommentPinnedNotice = ({ notice }: { notice: NoticeType }) => {
       <section className="content-wrap">
         <NoticeHead notice={notice}>
           <NoticeActorName user={actor} />{' '}
-          <Translate zh_hant="置頂了你的評論" zh_hans="置顶了你的评论" />
+          <Translate
+            zh_hant="置頂了你的評論"
+            zh_hans="置顶了你的评论"
+            en="pinned your comment"
+          />
         </NoticeHead>
 
         <NoticeComment comment={notice.comment} />

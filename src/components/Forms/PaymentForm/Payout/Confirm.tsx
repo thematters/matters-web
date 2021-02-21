@@ -176,6 +176,7 @@ const BaseConfirm: React.FC<FormProps> = ({
                     <Translate
                       zh_hant="用於支付 Stripe 手續費，並支持 Matters 運營"
                       zh_hans="用于支付 Stripe 手续费，并支持 Matters 运营"
+                      en="used for Stripe transcation fee and Matters operation"
                     />
                   }
                   placement="top"

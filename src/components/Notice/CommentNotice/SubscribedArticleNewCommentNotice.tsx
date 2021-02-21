@@ -50,11 +50,13 @@ const SubscribedArticleNewCommentNotice = ({
             <Translate
               zh_hant={`等 ${numAbbr(actorsCount)} 人`}
               zh_hans={`等 ${numAbbr(actorsCount)} 人`}
+              en={`etc. ${numAbbr(actorsCount)} users `}
             />
           )}
           <Translate
             zh_hant="評論了你收藏的作品"
             zh_hans="评论了你收藏的作品"
+            en="commented on a work you bookmarked"
           />{' '}
           {commentArticle && <NoticeArticle article={commentArticle} />}
         </NoticeHead>

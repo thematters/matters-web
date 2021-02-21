@@ -111,9 +111,14 @@ const Complete: React.FC<Props> = ({ callback, recipient, targetId }) => {
           <Translate
             zh_hant="馬特市民愛發電。這是你支持的第 "
             zh_hans="马特市民爱发电。这是你支持的第 "
+            en="This is the "
           />
           <span className="times">{senderDonatedArticleCount}</span>
-          <Translate zh_hant=" 篇作品，" zh_hans=" 篇作品，" />
+          <Translate
+            zh_hant=" 篇作品，"
+            zh_hans=" 篇作品，"
+            en=" works you have supported"
+          />
           <br />
           <UserDigest.Mini
             user={recipient}
@@ -121,9 +126,13 @@ const Complete: React.FC<Props> = ({ callback, recipient, targetId }) => {
             nameColor="green"
             hasDisplayName
           />
-          <Translate zh_hant=" 獲得的第 " zh_hans=" 获得的第 " />
+          <Translate
+            zh_hant=" 獲得的第 "
+            zh_hans=" 获得的第 "
+            en=" received "
+          />
           <span className="times">{recipientReceivedDonationCount}</span>
-          <Translate zh_hant=" 次支持" zh_hans=" 次支持" />
+          <Translate zh_hant=" 次支持" zh_hans=" 次支持" en=" supports" />
         </section>
 
         {edges && edges.length > 0 && (
@@ -133,6 +142,7 @@ const Complete: React.FC<Props> = ({ callback, recipient, targetId }) => {
                 <Translate
                   zh_hant="支持過這篇作品的人也支持了"
                   zh_hans="支持过这篇作品的人也支持了"
+                  en="Readers support this work also supported:"
                 />
               </TextIcon>
 

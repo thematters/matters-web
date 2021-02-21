@@ -97,7 +97,11 @@ const TagSearchSelectEditor = ({ id, close, toListStep }: Props) => {
           detail: {
             color: 'green',
             content: (
-              <Translate zh_hant="添加協作者成功" zh_hans="添加协作者成功" />
+              <Translate
+                zh_hant="添加協作者成功"
+                zh_hans="添加协作者成功"
+                en="collaborator addition success"
+              />
             ),
             duration: 2000,
           },

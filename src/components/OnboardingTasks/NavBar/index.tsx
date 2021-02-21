@@ -43,7 +43,11 @@ const NavBar = () => {
                       })}
 
                       <p>
-                        <Translate zh_hant="星際導航" zh_hans="星际导航" />
+                        <Translate
+                          zh_hant="星際導航"
+                          zh_hans="星际导航"
+                          en="galaxy guide"
+                        />
                         <span className="highlight"> {doneCount}/5</span>
                       </p>
                     </section>

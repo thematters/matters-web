@@ -39,7 +39,7 @@ const Douban = ({
 
     {!circle && (
       <TextIcon icon={withIcon(IconShareDouban)({})} spacing="base">
-        <Translate zh_hant="豆瓣" zh_hans="豆瓣" />
+        <Translate zh_hant="豆瓣" zh_hans="豆瓣" en="douban" />
       </TextIcon>
     )}
   </button>

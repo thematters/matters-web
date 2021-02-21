@@ -24,6 +24,11 @@ const textZhHans =
   '你将可以为标签设置封面，编辑描述，并添加作品至精选列表。' +
   '你主理的标签可以用作文集、策展，也可以变成圈子、小组、讨论区等，更多主理人玩法等你发掘！'
 
+const textEn =
+  'After adopting the tag, you become the maintainer of it.' +
+  ' You can set the cover and description of the tag, and add works to selected feed. ' +
+  ' You can use it for writing collection, curation, or subcommunity and group discussions, be creative and discover new usages!'
+
 const BaseDialog = ({ children }: Props) => {
   const [showDialog, setShowDialog] = useState(true)
   const open = () => setShowDialog(true)
@@ -41,13 +46,15 @@ const BaseDialog = ({ children }: Props) => {
 
       <Dialog size="sm" isOpen={showDialog} onDismiss={close}>
         <Dialog.Header
-          title={<Translate zh_hant="認領標籤" zh_hans="认领标签" />}
+          title={
+            <Translate zh_hant="認領標籤" zh_hans="认领标签" en="adopt tag" />
+          }
           close={close}
           closeTextId="cancel"
         />
         <Dialog.Message>
           <p>
-            <Translate zh_hant={textZhHant} zh_hans={textZhHans} />
+            <Translate zh_hant={textZhHant} zh_hans={textZhHans} en={textEn} />
           </p>
         </Dialog.Message>
         <Dialog.Footer>
@@ -70,7 +77,11 @@ const BaseDialog = ({ children }: Props) => {
                     detail: {
                       color: 'green',
                       content: (
-                        <Translate zh_hant="認領成功" zh_hans="认领成功" />
+                        <Translate
+                          zh_hant="認領成功"
+                          zh_hans="认领成功"
+                          en=""
+                        />
                       ),
                       duration: 2000,
                     },
@@ -81,7 +92,11 @@ const BaseDialog = ({ children }: Props) => {
               }
             }}
           >
-            <Translate zh_hant="即刻主理" zh_hans="即刻主理" />
+            <Translate
+              zh_hant="即刻主理"
+              zh_hans="即刻主理"
+              en="maintain at once"
+            />
           </Dialog.Footer.Button>
 
           <Dialog.Footer.Button
@@ -89,7 +104,11 @@ const BaseDialog = ({ children }: Props) => {
             bgColor="grey-lighter"
             onClick={close}
           >
-            <Translate zh_hant="考慮一下" zh_hans="考虑一下" />
+            <Translate
+              zh_hant="考慮一下"
+              zh_hans="考虑一下"
+              en="I need to think it through"
+            />
           </Dialog.Footer.Button>
         </Dialog.Footer>
       </Dialog>

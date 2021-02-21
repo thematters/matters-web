@@ -97,7 +97,13 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
       new CustomEvent(ADD_TOAST, {
         detail: {
           color: 'green',
-          content: <Translate zh_hant="草稿已刪除" zh_hans="草稿已删除" />,
+          content: (
+            <Translate
+              zh_hant="草稿已刪除"
+              zh_hans="草稿已删除"
+              en="draft has been deleted"
+            />
+          ),
           buttonPlacement: 'center',
         },
       })
@@ -130,6 +136,7 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
             <Translate
               zh_hant="確認刪除草稿，草稿會馬上消失。"
               zh_hans="确认删除草稿，草稿会马上消失。"
+              en="Confirm draft deletion, and it will disappear at once."
             />
           </p>
         </Dialog.Message>

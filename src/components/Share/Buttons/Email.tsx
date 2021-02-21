@@ -38,7 +38,7 @@ const Email = ({
 
     {!circle && (
       <TextIcon icon={withIcon(IconShareEmail)({})} spacing="base">
-        <Translate zh_hant="郵件" zh_hans="邮件" />
+        <Translate zh_hant="郵件" zh_hans="邮件" en="email" />
       </TextIcon>
     )}
   </button>
