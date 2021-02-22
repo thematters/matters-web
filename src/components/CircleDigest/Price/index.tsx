@@ -1,7 +1,8 @@
 import gql from 'graphql-tag'
-import { toPath } from 'lodash'
 
 import { Button, TextIcon, Translate } from '~/components'
+
+import { toPath } from '~/common/utils'
 
 import { PriceCirclePrivate } from './__generated__/PriceCirclePrivate'
 import { PriceCirclePublic } from './__generated__/PriceCirclePublic'
@@ -15,6 +16,7 @@ const fragments = {
     public: gql`
       fragment PriceCirclePublic on Circle {
         id
+        name
         prices {
           amount
           currency
@@ -59,7 +61,12 @@ const Price = ({ circle }: PriceProps) => {
   }
 
   return (
-    <Button size={[null, '2rem']} spacing={[0, 'base']} bgColor="gold">
+    <Button
+      size={[null, '2rem']}
+      spacing={[0, 'base']}
+      bgColor="gold"
+      {...path}
+    >
       <TextIcon weight="md" size="sm" color="white">
         {price.amount} {price.currency} / <Translate id="month" />
       </TextIcon>

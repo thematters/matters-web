@@ -19,7 +19,7 @@ export type FooterActionsControls = {
   hasCreatedAt?: boolean
   inCard?: boolean
 } & CreatedAtControls &
-  Pick<ReplyButtonProps, 'commentCallback'>
+  Pick<ReplyButtonProps, 'replySubmitCallback'>
 
 export type FooterActionsProps = {
   comment: FooterActionsCommentPublic & Partial<FooterActionsCommentPrivate>

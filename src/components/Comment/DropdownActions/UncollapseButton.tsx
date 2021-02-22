@@ -39,7 +39,7 @@ const UncollapseButton = ({ commentId }: { commentId: string }) => {
   return (
     <Menu.Item onClick={uncollapseComment}>
       <TextIcon icon={<IconExpand16 size="md" />} size="md" spacing="base">
-        <Translate id="uncollapseComment" />
+        <Translate zh_hant="取消闔上" zh_hans="取消折叠" />
       </TextIcon>
     </Menu.Item>
   )

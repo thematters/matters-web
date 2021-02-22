@@ -3,6 +3,7 @@ import { useContext, useEffect } from 'react'
 import {
   List,
   Spinner,
+  ThreadComment,
   Title,
   Translate,
   usePublicQuery,
@@ -14,7 +15,6 @@ import {
 
 import { filterComments, mergeConnections } from '~/common/utils'
 
-import ResponseComment from '../ResponseComment'
 import styles from '../styles.css'
 import { FEATURED_COMMENTS_PRIVATE, FEATURED_COMMENTS_PUBLIC } from './gql'
 
@@ -124,7 +124,7 @@ const FeaturedComments = () => {
       <List spacing={['xloose', 0]}>
         {comments.map((comment) => (
           <List.Item key={comment.id}>
-            <ResponseComment comment={comment} />
+            <ThreadComment comment={comment} type="article" />
           </List.Item>
         ))}
       </List>

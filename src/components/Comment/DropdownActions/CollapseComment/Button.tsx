@@ -4,7 +4,7 @@ const CollapseCommentButton = ({ openDialog }: { openDialog: () => void }) => {
   return (
     <Menu.Item onClick={openDialog}>
       <TextIcon icon={<IconCollapse16 size="md" />} size="md" spacing="base">
-        <Translate id="collapseComment" />
+        <Translate zh_hant="闔上" zh_hans="折叠" />
       </TextIcon>
     </Menu.Item>
   )

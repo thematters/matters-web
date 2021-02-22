@@ -82,7 +82,7 @@ const Content = ({
     <Button
       spacing={['xtight', 'xtight']}
       bgActiveColor="grey-lighter"
-      aira-label={TEXT.zh_hant.replyComment}
+      aira-label={TEXT.zh_hant.reply}
       {...(props as ButtonProps)}
     >
       <TextIcon

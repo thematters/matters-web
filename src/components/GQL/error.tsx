@@ -56,30 +56,18 @@ export const mutationOnError = (
   const isTokenInvalid = errorMap[ERROR_CODES.TOKEN_INVALID]
 
   if (isUnauthenticated || isForbidden || isTokenInvalid) {
-    let errorMessage: React.ReactNode
-
-    if (isUnauthenticated) {
-      errorMessage = <Translate id="UNAUTHENTICATED" />
-    }
-
-    if (isForbidden) {
-      errorMessage = <Translate id="FORBIDDEN" />
-    }
-
-    if (isTokenInvalid) {
-      errorMessage = <Translate id="TOKEN_INVALID" />
-    }
-
-    return window.dispatchEvent(
+    window.dispatchEvent(
       new CustomEvent(ADD_TOAST, {
         detail: {
           color: 'red',
-          content: errorMessage,
+          content: <Translate id={errorCodes[0]} />,
           customButton: <LoginButton isPlain />,
           buttonPlacement: 'center',
         },
       })
     )
+
+    throw error
   }
 
   if (showToast) {

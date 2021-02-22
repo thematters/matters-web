@@ -1,5 +1,6 @@
 import _find from 'lodash/find'
 import _some from 'lodash/some'
+import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
 
 import {
@@ -26,7 +27,6 @@ import { ERROR_CODES } from '~/common/enums'
 import TagDetailArticles from './Articles'
 import ArticlesCount from './ArticlesCount'
 import { TagDetailButtons } from './Buttons'
-import Community from './Community'
 import TagCover from './Cover'
 import DropdownActions from './DropdownActions'
 import Followers from './Followers'
@@ -38,6 +38,11 @@ import {
   TagDetailPublic,
   TagDetailPublic_node_Tag,
 } from './__generated__/TagDetailPublic'
+
+const DynamicCommunity = dynamic(() => import('./Community'), {
+  ssr: false,
+  loading: Spinner,
+})
 
 type TagFeedType = 'latest' | 'selected' | 'community'
 
@@ -132,7 +137,7 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
         {(isSelected || isLatest) && (
           <TagDetailArticles tagId={tag.id} selected={isSelected} />
         )}
-        {isCommunity && <Community id={tag.id} isOwner={isOwner} />}
+        {isCommunity && <DynamicCommunity id={tag.id} isOwner={isOwner} />}
       </PullToRefresh>
 
       <style jsx>{styles}</style>
