@@ -7,6 +7,7 @@ export const fragments = {
       title
       publishState
       content
+      summary
     }
   `,
 }

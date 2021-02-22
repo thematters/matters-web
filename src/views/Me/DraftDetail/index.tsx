@@ -106,6 +106,7 @@ const DraftDetail = () => {
     title?: string | null
     content?: string | null
     cover?: string | null
+    summary?: string | null
   }) => {
     try {
       if (draft?.publishState === 'published') {

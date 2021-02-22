@@ -209,6 +209,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
         <Editor
           draft={draft}
           isReviseMode={!isReviseDisabled}
+          isSummaryReadOnly
           isTitleReadOnly
           update={async (update) => setEditData(update)}
           upload={async () => ({ id: '', path: '' })}
