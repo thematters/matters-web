@@ -44,7 +44,13 @@ const DeleteCommentDialog = ({
       new CustomEvent(ADD_TOAST, {
         detail: {
           color: 'green',
-          content: <Translate zh_hant="評論已刪除" zh_hans="评论已删除" />,
+          content: (
+            <Translate
+              zh_hant="評論已刪除"
+              zh_hans="评论已删除"
+              en="Comment deleted"
+            />
+          ),
           buttonPlacement: 'center',
         },
       })

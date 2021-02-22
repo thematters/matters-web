@@ -89,7 +89,11 @@ const BaseDropdownActions = ({
       {isOwner && (
         <Menu.Item onClick={openTagEditorDialog}>
           <TextIcon icon={<IconProfile24 size="md" />} size="md" spacing="base">
-            <Translate zh_hant="管理社群" zh_hans="管理社群" />
+            <Translate
+              zh_hant="管理社群"
+              zh_hans="管理社群"
+              en="manage community"
+            />
           </TextIcon>
         </Menu.Item>
       )}
@@ -101,7 +105,11 @@ const BaseDropdownActions = ({
             size="md"
             spacing="base"
           >
-            <Translate zh_hant="辭去權限" zh_hans="辞去权限" />
+            <Translate
+              zh_hant="辭去權限"
+              zh_hans="辞去权限"
+              en="resign from maintainer"
+            />
           </TextIcon>
         </Menu.Item>
       )}

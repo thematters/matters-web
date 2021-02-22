@@ -39,7 +39,7 @@ const Followers = ({ tag }: FollowersProps) => {
         <b>{numAbbr(totalCount)}</b>
         <span>
           &nbsp;
-          <Translate zh_hant="人追蹤" zh_hans="人追踪" />
+          <Translate zh_hant="人追蹤" zh_hans="人追踪" en="followers" />
         </span>
       </section>
 

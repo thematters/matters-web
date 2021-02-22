@@ -22,7 +22,7 @@ const DonatorLabel = ({ comment }: { comment: DonatorLabelComment }) => {
 
   return (
     <span className="label">
-      <Translate zh_hant="支持者" zh_hans="支持者" />
+      <Translate zh_hant="支持者" zh_hans="支持者" en="Donators" />
 
       <style jsx>{styles}</style>
     </span>

@@ -40,6 +40,7 @@ const UserNewFollowerNotice = ({ notice }: { notice: NoticeType }) => {
             <Translate
               zh_hant={`等 ${numAbbr(actorsCount)} 人`}
               zh_hans={`等 ${numAbbr(actorsCount)} 人`}
+              en={`etc. ${numAbbr(actorsCount)} users`}
             />
           )}
           <Translate id="followingYou" />

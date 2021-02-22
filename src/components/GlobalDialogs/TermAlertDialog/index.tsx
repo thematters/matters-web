@@ -92,6 +92,7 @@ const TermContent: React.FC<TermContentProps> = ({ closeDialog }) => {
           <Translate
             zh_hant="我們的用戶協議和隱私政策發生了更改，請閱讀並同意後繼續使用。"
             zh_hans="我们的用户协议和隐私政策发生了更改，请阅读并同意后继续使用。"
+            en="Our user agreement and privacy policy has changed, please read and agree to it before continue usage"
           />
         </p>
 

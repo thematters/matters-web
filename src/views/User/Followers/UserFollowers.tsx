@@ -138,6 +138,7 @@ const UserFollowers = () => {
       title={{
         zh_hant: `${user.displayName}的追蹤者`,
         zh_hans: `${user.displayName}的追踪者`,
+        en: `followers of ${user.displayName}`,
       }}
       description={user.info.description}
       image={user.info.profileCover || IMAGE_LOGO_192}
@@ -153,7 +154,11 @@ const UserFollowers = () => {
 
         <EmptyWarning
           description={
-            <Translate zh_hant="還沒有追蹤者" zh_hans="还没有追踪者" />
+            <Translate
+              zh_hant="還沒有追蹤者"
+              zh_hans="还没有追踪者"
+              en="no followers yet"
+            />
           }
         />
       </>

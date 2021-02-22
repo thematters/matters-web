@@ -34,8 +34,18 @@ export const CustomAmount: React.FC<CustomAmountProps> = ({
       <Button {...buttonProps}>
         <TextIcon weight="md" size="md">
           {fixed
-            ? translate({ zh_hant: '其他金額', zh_hans: '其他金額', lang })
-            : translate({ zh_hant: '固定金額', zh_hans: '固定金額', lang })}
+            ? translate({
+                zh_hant: '其他金額',
+                zh_hans: '其他金額',
+                en: 'other amount',
+                lang,
+              })
+            : translate({
+                zh_hant: '固定金額',
+                zh_hans: '固定金額',
+                en: 'fixed amount',
+                lang,
+              })}
         </TextIcon>
       </Button>
 

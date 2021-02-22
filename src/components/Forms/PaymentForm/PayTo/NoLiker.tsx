@@ -16,6 +16,7 @@ export const NoLikerIdMessage = ({ canPayLike, canReceiveLike }: NoLikerId) => {
       <Translate
         zh_hant="請先綁定 Liker ID， 才能用 LikeCoin 支持作者"
         zh_hans="请先绑定 Liker ID， 才能用 LikeCoin 支持作者"
+        en="Please link you Liker ID before using LikeCoin to support author"
       />
     )
   }
@@ -25,6 +26,7 @@ export const NoLikerIdMessage = ({ canPayLike, canReceiveLike }: NoLikerId) => {
       <Translate
         zh_hant="作者還沒有綁定 Liker ID，你還不能用 LikeCoin 支持他"
         zh_hans="作者还没有绑定 Liker ID，你还不能用 LikeCoin 支持他"
+        en="The author has not linked Liker ID and cannot be supported with LikeCoin."
       />
     )
   }
@@ -49,7 +51,11 @@ export const NoLikerIdButton = ({
           close()
         }}
       >
-        <Translate zh_hant="綁定 LikeID" zh_hans="綁定 LikeID" />
+        <Translate
+          zh_hant="綁定 LikeID"
+          zh_hans="綁定 LikeID"
+          en="link LikeID"
+        />
       </Dialog.Footer.Button>
     )
   }
@@ -59,7 +65,11 @@ export const NoLikerIdButton = ({
       <Dialog.Footer.Button
         onClick={() => setFieldValue('currency', CURRENCY.HKD)}
       >
-        <Translate zh_hant="使用港幣支持" zh_hans="使用港币支持" />
+        <Translate
+          zh_hant="使用港幣支持"
+          zh_hans="使用港币支持"
+          en="use HKD to support"
+        />
       </Dialog.Footer.Button>
     )
   }

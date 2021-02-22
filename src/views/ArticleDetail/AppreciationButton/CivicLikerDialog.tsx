@@ -110,7 +110,11 @@ const CivicLikerDialog = ({
             rel="noopener"
             onClick={close}
           >
-            <Translate zh_hant="立即登記" zh_hans="立即登记" />
+            <Translate
+              zh_hant="立即登記"
+              zh_hans="立即登记"
+              en="register at once"
+            />
           </Dialog.Footer.Button>
 
           <Dialog.Footer.Button

@@ -25,6 +25,7 @@ const RevisedArticleNotPublishedNotice = ({
           <Translate
             zh_hant="你的修訂作品發布失敗"
             zh_hans="你的修订作品发布失败"
+            en="failed in republishing your work"
           />
         </NoticeHead>
 

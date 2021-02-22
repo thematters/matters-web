@@ -29,6 +29,7 @@ const TagAdoptionNotice = ({ notice }: { notice: NoticeType }) => {
           <Translate
             zh_hant="成為了標籤的主理人，你的作品也在其中。快來看看其他作者的精彩創作吧"
             zh_hans="成为了标签的主理人，你的作品也在其中。快来看看其他作者的精彩创作吧"
+            en="became the tag maintainer, including your work. Come and see the work of other creators"
           />
         </NoticeHead>
 

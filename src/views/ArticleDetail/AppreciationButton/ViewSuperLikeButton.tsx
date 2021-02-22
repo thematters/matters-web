@@ -15,7 +15,7 @@ const ViewSuperLikeButton = () => {
         weight="md"
         textPlacement="left"
       >
-        <Translate zh_hant="詳情" zh_hans="详情" />
+        <Translate zh_hant="詳情" zh_hans="详情" en="More info" />
       </TextIcon>
     </Button>
   )

@@ -116,7 +116,7 @@ const NewsletterDialogContent: React.FC<NewsletterDialogContentProps> = ({
 
   const SubmitButton = (
     <Dialog.Header.RightButton
-      text={<Translate zh_hant="訂閱" zh_hans="订阅" />}
+      text={<Translate zh_hant="訂閱" zh_hans="订阅" en="subscribe" />}
       type="submit"
       form={formId}
       disabled={!isValid || isSubmitting}
@@ -128,7 +128,11 @@ const NewsletterDialogContent: React.FC<NewsletterDialogContentProps> = ({
     <>
       <Dialog.Header
         title={
-          <Translate zh_hant="訂閱 Matters 通訊" zh_hans="订阅 Matters 通讯" />
+          <Translate
+            zh_hant="訂閱 Matters 通訊"
+            zh_hans="订阅 Matters 通讯"
+            en="subscribe to Matters news letter"
+          />
         }
         close={closeDialog}
         rightButton={isSubscribe ? SubmitButton : null}
@@ -141,7 +145,11 @@ const NewsletterDialogContent: React.FC<NewsletterDialogContentProps> = ({
         {isComplete && (
           <>
             <p className="title">
-              <Translate zh_hant="訂閱服務確認" zh_hans="订阅服务确认" />
+              <Translate
+                zh_hant="訂閱服務確認"
+                zh_hans="订阅服务确认"
+                en="subscription confirmation"
+              />
             </p>
             <p className="description">
               <Translate

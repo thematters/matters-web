@@ -55,7 +55,7 @@ const Collapsed = ({
             weight="normal"
             color="grey"
           >
-            <Translate zh_hant="打開" zh_hans="展开" />
+            <Translate zh_hant="打開" zh_hans="展开" en="Expand" />
           </TextIcon>
         </Button>
       )}

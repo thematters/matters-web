@@ -170,6 +170,7 @@ const ArticleDetail = () => {
             <Translate
               zh_hant="正在翻譯為繁體中文"
               zh_hans="正在翻译为简体中文"
+              en="translating to English"
             />
           ),
         },
@@ -258,11 +259,13 @@ const ArticleDetail = () => {
               <Translate
                 zh_hant="吶，作者親手掩蓋了這篇作品的痕跡，看看別的吧"
                 zh_hans="呐，作者亲手掩盖了这篇作品的痕迹，看看别的吧"
+                en="hmm, the author hided this work, go see something else"
               />
             ) : article.state === 'banned' ? (
               <Translate
                 zh_hant="該作品因違反社區約章，已被站方強制隱藏。"
                 zh_hans="该作品因违反社区约章，已被站方强制隐藏。"
+                en="This work is archived because of violation of community guidelines."
               />
             ) : null
           }
@@ -341,7 +344,11 @@ const ArticleDetail = () => {
                 <section className="timeline">
                   <section className="time">
                     <span>
-                      <Translate zh_hant="發布於" zh_hans="發布於" />
+                      <Translate
+                        zh_hant="發布於"
+                        zh_hans="發布於"
+                        en="Published at"
+                      />
                     </span>
                     <DateTime date={article.createdAt} color="grey" />
                   </section>
@@ -349,7 +356,11 @@ const ArticleDetail = () => {
                   {article.revisedAt && (
                     <section className="time">
                       <span>
-                        <Translate zh_hant="修訂於" zh_hans="修訂於" />
+                        <Translate
+                          zh_hant="修訂於"
+                          zh_hans="修訂於"
+                          en="republished at"
+                        />
                       </span>
                       <DateTime date={article.revisedAt} color="grey" />
                     </section>

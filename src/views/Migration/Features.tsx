@@ -11,6 +11,7 @@ import styles from './styles.css'
 const texts: {
   zh_hant: Record<string, string>
   zh_hans: Record<string, string>
+  en: Record<string, string>
 } = {
   zh_hant: {
     header: '搬家完成後，你將立刻獲得以下功能',
@@ -44,6 +45,23 @@ const texts: {
     likecoin: '了解什么是 LikeCoin →',
     examples: '有多优质，请看这里 →',
   },
+  en: {
+    header:
+      'After migration, you will be able to access the following features',
+    title_1: 'Permanent storage of your works',
+    content_1:
+      'After publishing, your work will be uploaded on IPFS (InterPlanetary File System)' +
+      ', stored permenently and not able to be deleted and tampered. You can use any IPFS node to access and distribute your works.',
+    title_4: 'Constant passive income',
+    content_4:
+      'After publishing on Matters, readers can donate to your works with LikeCoin or fiat currency' +
+      '. As long as you do not archive your work, it will continuesly acquire donation.',
+    title_5: 'High quality reader feedback',
+    content_5:
+      'Matters users come from mainland China, Hongkong, Taiwan, Malaysia and around the world, forming the highest quality and most diverse Chinese writing community.',
+    likecoin: 'Learn more about LikeCoin →',
+    examples: 'See examples here →',
+  },
 }
 
 const likeCoinLink =
@@ -65,7 +83,7 @@ const Feature = ({
   index: number
   src?: string
 }) => {
-  const { zh_hant, zh_hans } = texts
+  const { zh_hant, zh_hans, en } = texts
   const titleId = `title_${index}`
   const contentId = `content_${index}`
 
@@ -76,12 +94,17 @@ const Feature = ({
       ) : (
         <>
           <section className="title">
-            <Translate zh_hant={zh_hant[titleId]} zh_hans={zh_hans[titleId]} />
+            <Translate
+              zh_hant={zh_hant[titleId]}
+              zh_hans={zh_hans[titleId]}
+              en={en[titleId]}
+            />
           </section>
           <section className="content">
             <Translate
               zh_hant={zh_hant[contentId]}
               zh_hans={zh_hans[contentId]}
+              en={en[contentId]}
             />
           </section>
         </>
@@ -93,7 +116,7 @@ const Feature = ({
 }
 
 const Features = () => {
-  const { zh_hant, zh_hans } = texts
+  const { zh_hant, zh_hans, en } = texts
 
   const isMediumUp = useResponsive('md-up')
 
@@ -105,7 +128,11 @@ const Features = () => {
       index: 4,
       children: (
         <a className="u-link-green" href={likeCoinLink} target="_blank">
-          <Translate zh_hant={zh_hant.likecoin} zh_hans={zh_hans.likecoin} />
+          <Translate
+            zh_hant={zh_hant.likecoin}
+            zh_hans={zh_hans.likecoin}
+            en={en.likecoin}
+          />
         </a>
       ),
     },
@@ -113,7 +140,11 @@ const Features = () => {
       index: 5,
       children: (
         <a className="u-link-green" href={communityLink} target="_blank">
-          <Translate zh_hant={zh_hant.examples} zh_hans={zh_hans.examples} />
+          <Translate
+            zh_hant={zh_hant.examples}
+            zh_hans={zh_hans.examples}
+            en={en.examples}
+          />
         </a>
       ),
     },
@@ -130,7 +161,11 @@ const Features = () => {
     <section className="features-wrap">
       <section className="l-row header">
         <h2>
-          <Translate zh_hant={zh_hant.header} zh_hans={zh_hans.header} />
+          <Translate
+            zh_hant={zh_hant.header}
+            zh_hans={zh_hans.header}
+            en={en.header}
+          />
         </h2>
       </section>
 

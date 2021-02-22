@@ -8,16 +8,20 @@ interface MeProps {
 }
 
 const Me = ({ settings, toggle }: MeProps) => (
-  <Form.List groupName={<Translate zh_hant="與我有關" zh_hans="与我有关" />}>
+  <Form.List
+    groupName={
+      <Translate zh_hant="與我有關" zh_hans="与我有关" en="related to me" />
+    }
+  >
     <Form.List.Item
-      title={<Translate zh_hant="提及我" zh_hans="提及我" />}
+      title={<Translate zh_hant="提及我" zh_hans="提及我" en="mentions me" />}
       right={
         <Switch checked={settings.mention} onChange={() => toggle('mention')} />
       }
     />
 
     <Form.List.Item
-      title={<Translate zh_hant="追蹤我" zh_hans="追踪我" />}
+      title={<Translate zh_hant="追蹤我" zh_hans="追踪我" en="follows me" />}
       right={
         <Switch checked={settings.follow} onChange={() => toggle('follow')} />
       }

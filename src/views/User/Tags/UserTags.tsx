@@ -115,6 +115,7 @@ const UserTags = () => {
       title={{
         zh_hant: `${user.displayName} 主理與協作的標籤`,
         zh_hans: `${user.displayName} 主理与协作的標籤`,
+        en: `Tags ${user.displayName} maintaining or collaborating`,
       }}
       description={user.info.description}
       image={user.info.profileCover || IMAGE_LOGO_192}
@@ -131,6 +132,7 @@ const UserTags = () => {
             <Translate
               zh_hant="還沒有主理與協作標籤喔"
               zh_hans="还没有主理与协作标签喔"
+              en="There is no maintaining and collabrating tags yet"
             />
           }
         />

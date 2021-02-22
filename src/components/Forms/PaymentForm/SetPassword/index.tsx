@@ -164,11 +164,13 @@ const SetPassword: React.FC<FormProps> = ({ submitCallback }) => {
             <Translate
               zh_hant="爲了保護你的資產安全"
               zh_hans="为了保护你的资产安全"
+              en="In order to protect your assets"
             />
             <br />
             <Translate
               zh_hant="在储值前請先設置交易密碼"
               zh_hans="在储值前请先设置交易密码"
+              en="set transaction password before top up"
             />
           </p>
         )}

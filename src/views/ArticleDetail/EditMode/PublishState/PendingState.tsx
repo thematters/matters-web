@@ -30,6 +30,7 @@ const PendingState = ({
         <Translate
           zh_hant="上鏈後，作品不可刪改，永久保存"
           zh_hans="上链后，作品不可删改，永久保存"
+          en="After publication, your work cannot be deleted."
         />
       }
     />

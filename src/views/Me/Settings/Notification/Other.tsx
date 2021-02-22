@@ -8,9 +8,15 @@ interface OtherProps {
 }
 
 const Other = ({ settings, toggle }: OtherProps) => (
-  <Form.List groupName={<Translate zh_hant="其他" zh_hans="其他" />}>
+  <Form.List groupName={<Translate zh_hant="其他" zh_hans="其他" en="misc." />}>
     <Form.List.Item
-      title={<Translate zh_hant="官方公告" zh_hans="官方公告" />}
+      title={
+        <Translate
+          zh_hant="官方公告"
+          zh_hans="官方公告"
+          en="official notices"
+        />
+      }
       right={
         <Switch
           checked={settings.officialNotice}
@@ -19,7 +25,13 @@ const Other = ({ settings, toggle }: OtherProps) => (
       }
     />
     <Form.List.Item
-      title={<Translate zh_hant="檢舉反饋" zh_hans="检举反馈" />}
+      title={
+        <Translate
+          zh_hant="檢舉反饋"
+          zh_hans="检举反馈"
+          en="report and feedback"
+        />
+      }
       right={
         <Switch
           checked={settings.reportFeedback}

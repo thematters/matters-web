@@ -21,6 +21,7 @@ import styles from './styles.css'
 const texts: {
   zh_hant: Record<string, string>
   zh_hans: Record<string, string>
+  en: Record<string, string>
 } = {
   zh_hant: {
     header: '三個步驟，立即搬家',
@@ -48,6 +49,20 @@ const texts: {
     title_3: '导入作品',
     content_3: '选中想要搬家的作品文件并上传，搬家成功的作品会导入你的草稿箱。',
   },
+  en: {
+    header: 'Three steps, migrate now',
+    title_1: 'Login',
+    content_1:
+      'Register or login to your Matters account, open your personal creative space.',
+    sub_content_1_1: 'Not Matters creator yet?',
+    sub_content_1_2: 'Move in now →',
+    title_2: 'Prepare documents',
+    content_2: `Go to Medium setting page to download documents, and locate HTML files under "posts" directory.`,
+    sub_content_2_1: 'Dowload documents',
+    title_3: 'Import works',
+    content_3:
+      'Choose and upload the works you want to migrate, and it will appear in your draft box.',
+  },
 }
 
 const Step = ({
@@ -59,7 +74,7 @@ const Step = ({
   src: string
   step: number
 }) => {
-  const { zh_hant, zh_hans } = texts
+  const { zh_hant, zh_hans, en } = texts
   const titleId = `title_${step}`
   const contentId = `content_${step}`
 
@@ -68,10 +83,18 @@ const Step = ({
       <img src={src} />
       <p className="title">
         <span className="number">{step}.</span>
-        <Translate zh_hant={zh_hant[titleId]} zh_hans={zh_hans[titleId]} />
+        <Translate
+          zh_hant={zh_hant[titleId]}
+          zh_hans={zh_hans[titleId]}
+          en={en[titleId]}
+        />
       </p>
       <p className="content">
-        <Translate zh_hant={zh_hant[contentId]} zh_hans={zh_hans[contentId]} />
+        <Translate
+          zh_hant={zh_hant[contentId]}
+          zh_hans={zh_hans[contentId]}
+          en={en[contentId]}
+        />
       </p>
       {children}
       <style jsx>{styles}</style>
@@ -81,7 +104,7 @@ const Step = ({
 
 const Steps = () => {
   const viewer = useContext(ViewerContext)
-  const { zh_hant, zh_hans } = texts
+  const { zh_hant, zh_hans, en } = texts
 
   const buttonProps: ButtonProps = {
     size: ['7rem', '2.5rem'],
@@ -92,7 +115,11 @@ const Steps = () => {
     <section id="steps" className="steps-wrap">
       <section className="l-row header">
         <h2>
-          <Translate zh_hant={zh_hant.header} zh_hans={zh_hans.header} />
+          <Translate
+            zh_hant={zh_hant.header}
+            zh_hans={zh_hans.header}
+            en={en.header}
+          />
         </h2>
       </section>
 
@@ -117,6 +144,7 @@ const Steps = () => {
                 <Translate
                   zh_hant={zh_hant.sub_content_1_1}
                   zh_hans={zh_hans.sub_content_1_1}
+                  en={en.sub_content_1_1}
                 />
               </p>
               <section className="sub-content-link">
@@ -124,6 +152,7 @@ const Steps = () => {
                   <Translate
                     zh_hant={zh_hant.sub_content_1_2}
                     zh_hans={zh_hans.sub_content_1_2}
+                    en={en.sub_content_1_2}
                   />
                 </SignUpButton>
               </section>
@@ -144,6 +173,7 @@ const Steps = () => {
               <Translate
                 zh_hant={zh_hant.sub_content_2_1}
                 zh_hans={zh_hans.sub_content_2_1}
+                en={en.sub_content_2_1}
               />
             </TextIcon>
           </Button>
@@ -163,6 +193,7 @@ const Steps = () => {
                   <Translate
                     zh_hant={zh_hant.title_3}
                     zh_hans={zh_hans.title_3}
+                    en={en.title_3}
                   />
                 </TextIcon>
               </Button>

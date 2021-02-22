@@ -70,7 +70,9 @@ const RelatedArticles = ({ article, inSidebar }: RelatedArticlesProps) => {
 
   const Header = (
     <PageHeader
-      title={<Translate zh_hant="推薦閱讀" zh_hans="推荐阅读" />}
+      title={
+        <Translate zh_hant="推薦閱讀" zh_hans="推荐阅读" en="Recommendations" />
+      }
       is="h2"
       hasNoBorder
     />

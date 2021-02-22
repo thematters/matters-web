@@ -26,7 +26,11 @@ const ArticleMentionedYouNotice = ({ notice }: { notice: NoticeType }) => {
       <section className="content-wrap">
         <NoticeHead notice={notice}>
           <NoticeActorName user={actor} />{' '}
-          <Translate zh_hant="在作品中提及了你" zh_hans="在作品中提及了你" />
+          <Translate
+            zh_hant="在作品中提及了你"
+            zh_hans="在作品中提及了你"
+            en="mentioned you in a work"
+          />
         </NoticeHead>
 
         <NoticeArticle article={notice.article} isBlock />

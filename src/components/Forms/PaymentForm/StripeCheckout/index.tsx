@@ -54,6 +54,7 @@ const StripeCheckout: React.FC<StripeCheckoutProps> = ({ error, onChange }) => {
             <Translate
               zh_hant="Visa / Mastercard / American Express 支付"
               zh_hans="Visa / Mastercard / American Express 支付"
+              en="Visa / Mastercard / American Express payment"
             />
           }
         />
@@ -70,6 +71,7 @@ const StripeCheckout: React.FC<StripeCheckoutProps> = ({ error, onChange }) => {
             <Translate
               zh_hant="付款信息由 Stripe 處理，不會被 Matters 儲存。"
               zh_hans="付款信息由 Stripe 处理，不会被 Matters 储存。"
+              en="Your card information will be processed by Stripe, and Matters won't keep it."
             />
           }
           error={error}
