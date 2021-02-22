@@ -25,8 +25,10 @@ type EventArgs =
   | ['load_more', LoadMoreProp]
   | ['share', ShareProp]
   | ['purchase', PurchaseProp]
+  | ['subscribe', SubscribeProps]
   | ['view_add_credit_dialog', ViewDialogProp]
   | ['view_donation_dialog', ViewDialogProp]
+  | ['view_subscribe_circle_dialog', ViewDialogProp]
 
 /**
  * Event: Page View
@@ -50,13 +52,19 @@ interface ClickButtonProp {
     | 'write'
     | 'write_collection'
     | 'google_search'
+    | 'subscribe_circle_banner'
 }
 
 /**
  * Event: Load More
  */
 interface LoadMoreProp {
-  type: ArticleFeedType | CommentFeedType | UserFeedType | TagFeedType
+  type:
+    | ArticleFeedType
+    | CommentFeedType
+    | UserFeedType
+    | TagFeedType
+    | CircleFeedType
   location: number
 }
 
@@ -82,6 +90,15 @@ interface ShareProp {
  */
 interface PurchaseProp {
   amount: number | undefined
+  success: boolean
+  message?: string
+}
+
+/**
+ * Event: Subscribe
+ */
+interface SubscribeProps {
+  id: string | undefined
   success: boolean
   message?: string
 }
@@ -134,6 +151,7 @@ type ArticleFeedType =
   | 'user_article'
   | 'wallet'
   | 'related_donations'
+  | 'circle_detail'
 
 type CommentFeedType = 'follow-comment' | 'user_comment'
 
@@ -144,6 +162,7 @@ type UserFeedType =
   | 'appreciations_sent'
   | 'appreciations_received'
   | 'appreciators'
+  | 'donators'
   | 'authors' // author list on home page
   | 'collection'
   | 'follow'
@@ -168,6 +187,8 @@ type TagFeedType =
   | 'search_tag'
   | 'tags' // tag feed on home page
   | 'user_tag'
+
+type CircleFeedType = 'user_circle'
 
 // style type
 type StyleType =

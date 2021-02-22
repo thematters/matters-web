@@ -12,8 +12,8 @@ import {
   TextIcon,
   Tooltip,
   Translate,
+  useMutation,
 } from '~/components'
-import { useMutation } from '~/components/GQL'
 import PAYOUT from '~/components/GQL/mutations/payout'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
 
@@ -58,7 +58,9 @@ const BaseConfirm: React.FC<FormProps> = ({
 
   const { lang } = useContext(LanguageContext)
   const inputRef: React.RefObject<any> | null = useRef(null)
-  const [payout] = useMutation<PayoutMutate>(PAYOUT)
+  const [payout] = useMutation<PayoutMutate>(PAYOUT, undefined, {
+    showToast: false,
+  })
 
   const {
     errors,

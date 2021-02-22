@@ -5,7 +5,7 @@ import { toPath } from '~/common/utils'
 
 import styles from './styles.css'
 
-const Help = () => {
+const BaseHelp = () => {
   const year = new Date().getFullYear()
   const downloadAppLink = toPath({
     page: 'articleDetail',
@@ -74,7 +74,7 @@ const Help = () => {
   )
 }
 
-export default () => (
+const Help = () => (
   <Layout.Main bgColor="grey-lighter">
     <Layout.Header
       left={<Layout.Header.BackButton />}
@@ -83,8 +83,10 @@ export default () => (
 
     <Spacer />
 
-    <Help />
+    <BaseHelp />
 
     <Spacer size="xxxloose" />
   </Layout.Main>
 )
+
+export default Help

@@ -1,7 +1,7 @@
 import { useLazyQuery } from '@apollo/react-hooks'
 import React from 'react'
 
-import { AvatarSize, UserDigest } from '~/components'
+import { AvatarSize, CommentFormType, UserDigest } from '~/components'
 
 import Content from '../Content'
 import DonatorLabel from '../DonatorLabel'
@@ -23,10 +23,12 @@ export type CommentControls = {
 
 export type CommentProps = {
   comment: FeedCommentPublic & Partial<FeedCommentPrivate>
+  type: CommentFormType
 } & CommentControls
 
 export const BaseCommentFeed = ({
   comment,
+  type,
   avatarSize = 'lg',
   hasUserName,
   commentCallback,
@@ -61,7 +63,11 @@ export const BaseCommentFeed = ({
         <section className="right">
           <DonatorLabel comment={comment} />
           <PinnedLabel comment={comment} />
-          <DropdownActions comment={comment} inCard={actionControls.inCard} />
+          <DropdownActions
+            comment={comment}
+            type={type}
+            inCard={actionControls.inCard}
+          />
         </section>
       </header>
 
@@ -75,6 +81,7 @@ export const BaseCommentFeed = ({
         <Content comment={comment} size="md-s" />
         <FooterActions
           comment={comment}
+          type={type}
           commentCallback={footerCommentCallback}
           {...actionControls}
         />

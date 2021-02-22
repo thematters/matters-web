@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
 import {
@@ -13,12 +12,12 @@ import {
   Menu,
   Translate,
   useResponsive,
+  useRoute,
   ViewerContext,
   WriteButton,
 } from '~/components'
 
 import { PATHS, TEXT, Z_INDEX } from '~/common/enums'
-import { getQuery } from '~/common/utils'
 
 import MeAvatar from '../MeAvatar'
 import NavMenu from '../NavMenu'
@@ -27,21 +26,21 @@ import NavListItem from './NavListItem'
 import styles from './styles.css'
 
 const SideNav = () => {
+  const { isInPath, isPathStartWith, getQuery } = useRoute()
   const isMediumUp = useResponsive('md-up')
   const isLargeUp = useResponsive('lg-up')
-  const router = useRouter()
   const viewer = useContext(ViewerContext)
-  const userName = getQuery({ router, key: 'userName' })
+
+  const userName = getQuery('name')
   const viewerUserName = viewer.userName || ''
 
-  const isInHome = router.pathname === PATHS.HOME
-  const isInFollow = router.pathname === PATHS.FOLLOW
-  const isInNotification = router.pathname === PATHS.ME_NOTIFICATIONS
-  const isInSearch = router.pathname === PATHS.SEARCH
+  const isInHome = isInPath('HOME')
+  const isInFollow = isInPath('FOLLOW')
+  const isInNotification = isInPath('ME_NOTIFICATIONS')
+  const isInSearch = isInPath('SEARCH')
+  const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
   const isInMe =
-    router.pathname !== PATHS.ME_NOTIFICATIONS &&
-    (router.pathname.indexOf('/me') >= 0 || userName === viewerUserName)
-  const isInDraftDetail = router.pathname === PATHS.ME_DRAFT_DETAIL
+    (!isInNotification && isPathStartWith('/me')) || userName === viewerUserName
 
   return (
     <section className="side-nav">
@@ -106,7 +105,7 @@ const SideNav = () => {
             placement="right-start"
             appendTo={process.browser ? document.body : undefined}
             offset={[-24, 24]}
-            zIndex={Z_INDEX.OVER_STICKY_TABS}
+            zIndex={Z_INDEX.OVER_BOTTOM_BAR}
             onShown={hidePopperOnClick}
           >
             <NavListItem

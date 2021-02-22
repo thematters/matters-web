@@ -22,6 +22,8 @@ const CommentNewReplyNotice = ({ notice }: { notice: NoticeType }) => {
 
   const actorsCount = notice.actors.length
   const isMultiActors = actorsCount > 1
+  const replyCommentArticle =
+    notice.reply?.node.__typename === 'Article' ? notice.reply.node : null
 
   return (
     <section className="container">
@@ -55,7 +57,7 @@ const CommentNewReplyNotice = ({ notice }: { notice: NoticeType }) => {
           />
         </NoticeHead>
 
-        <NoticeArticle article={notice?.reply?.article || null} isBlock />
+        <NoticeArticle article={replyCommentArticle} isBlock />
 
         <NoticeComment
           comment={isMultiActors ? notice.comment : notice.reply}
@@ -88,8 +90,10 @@ CommentNewReplyNotice.fragments = {
       }
       reply: comment {
         ...NoticeComment
-        article {
-          ...NoticeArticle
+        node {
+          ... on Article {
+            ...NoticeArticle
+          }
         }
       }
     }

@@ -1,9 +1,7 @@
-import { useRouter } from 'next/router'
-
-import { Layout, Translate } from '~/components'
+import { Layout, Translate, useRoute } from '~/components'
 
 import { OAUTH_PROVIDER, PATHS } from '~/common/enums'
-import { getQuery, routerPush } from '~/common/utils'
+import { routerPush } from '~/common/utils'
 
 import ICON_LIKECOIN from '@/public/static/icons/likecoin.svg'
 import ICON_STRIPE from '@/public/static/icons/stripe.svg'
@@ -56,9 +54,9 @@ const ERROR_TEXT = {
 }
 
 const OAuthCallbackFailure = () => {
-  const router = useRouter()
-  const code = getQuery({ router, key: 'code' })
-  const provider = getQuery({ router, key: 'provider' })
+  const { getQuery } = useRoute()
+  const code = getQuery('code')
+  const provider = getQuery('provider')
   const title: { [key: string]: any } = {
     likecoin: (
       <Translate

@@ -45,6 +45,9 @@ export default gql`
     routeHistory: [URL!]
 
     onboardingTasks: OnboardingTasks!
+
+    "Whether cicle banner is shown"
+    circleBanner: Boolean!
   }
 
   type ClientInfo {

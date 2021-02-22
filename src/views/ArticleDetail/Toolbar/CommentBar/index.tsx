@@ -189,7 +189,11 @@ const CommentBar = ({ article }: CommentBarProps) => {
   }
 
   return (
-    <CommentFormDialog articleId={article.id} submitCallback={refetchResponses}>
+    <CommentFormDialog
+      articleId={article.id}
+      type="article"
+      submitCallback={refetchResponses}
+    >
       {({ open }) => <Content {...props} aria-haspopup="true" onClick={open} />}
     </CommentFormDialog>
   )

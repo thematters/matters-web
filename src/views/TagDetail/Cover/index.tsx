@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 
-import { Img, Tag } from '~/components'
+import { Cover, Tag } from '~/components'
 
 import TAG_COVER from '@/public/static/images/tag-cover.png'
 
@@ -14,24 +14,21 @@ interface TagCoverProps {
 }
 
 const TagCover = ({ tag }: TagCoverProps) => {
-  const url = tag.cover || TAG_COVER
   const titleClasses = classNames({
     title: true,
     mask: !!tag.cover,
   })
 
   return (
-    <section className="cover">
-      <Img url={url} size="1080w" smUpSize="540w" />
-
+    <Cover cover={tag.cover} fallbackCover={TAG_COVER}>
       <div className={titleClasses}>
         <div className="content">
           <Tag tag={tag} type="title" disabled />
         </div>
-      </div>
 
-      <style jsx>{styles}</style>
-    </section>
+        <style jsx>{styles}</style>
+      </div>
+    </Cover>
   )
 }
 

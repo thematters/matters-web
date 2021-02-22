@@ -6,8 +6,8 @@ import {
   Menu,
   TextIcon,
   Translate,
+  useMutation,
 } from '~/components'
-import { useMutation } from '~/components/GQL'
 import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
 
 import { ADD_TOAST, PATHS, STORAGE_KEY_AUTH_TOKEN } from '~/common/enums'
@@ -20,7 +20,9 @@ interface NavMenuBottomProps {
 }
 
 const NavMenuBottom: React.FC<NavMenuBottomProps> = ({ isInSideDrawerNav }) => {
-  const [logout] = useMutation<UserLogout>(USER_LOGOUT)
+  const [logout] = useMutation<UserLogout>(USER_LOGOUT, undefined, {
+    showToast: false,
+  })
   const onClickLogout = async () => {
     try {
       await unsubscribePush()

@@ -1,23 +1,20 @@
-import { useRouter } from 'next/router'
-
 import {
   Head,
   Layout,
   ReCaptchaProvider,
   SignUpForm,
+  useRoute,
   useStep,
   VerificationLinkSent,
 } from '~/components'
 
-import { getQuery } from '~/common/utils'
-
 type Step = 'init' | 'verification_sent' | 'password' | 'complete'
 
 const SignUp = () => {
-  const router = useRouter()
-  const email = getQuery({ router, key: 'email' })
-  const code = getQuery({ router, key: 'code' })
-  const displayName = getQuery({ router, key: 'displayName' })
+  const { getQuery } = useRoute()
+  const email = getQuery('email')
+  const code = getQuery('code')
+  const displayName = getQuery('displayName')
 
   const initStep = email && code && displayName ? 'password' : 'init'
   const { currStep, forward } = useStep<Step>(initStep)

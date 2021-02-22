@@ -9,7 +9,6 @@ import {
   ShareDialog,
   TextIcon,
   Translate,
-  useResponsive,
 } from '~/components'
 import { BlockUser } from '~/components/BlockUser'
 
@@ -54,7 +53,6 @@ const BaseDropdownActions = ({
   openShareDialog,
   openBlockUserDialog,
 }: BaseDropdownActionsProps) => {
-  const isSmallUp = useResponsive('sm-up')
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
     <Menu width={isInDropdown ? 'sm' : undefined}>
       <Menu.Item onClick={openShareDialog}>
@@ -82,13 +80,13 @@ const BaseDropdownActions = ({
     >
       {({ open, ref }) => (
         <Button
-          bgColor={isSmallUp ? 'green-lighter' : 'half-black'}
+          bgColor="half-black"
           aria-label={TEXT.zh_hant.moreActions}
           aria-haspopup="true"
           onClick={open}
           ref={ref}
         >
-          <IconMore32 size="lg" color={isSmallUp ? 'green' : 'white'} />
+          <IconMore32 size="lg" color="white" />
         </Button>
       )}
     </DropdownDialog>

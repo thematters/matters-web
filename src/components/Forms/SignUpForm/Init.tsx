@@ -10,8 +10,8 @@ import {
   Layout,
   ReCaptchaContext,
   Translate,
+  useMutation,
 } from '~/components'
-import { useMutation } from '~/components/GQL'
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
 
 import { CLOSE_ACTIVE_DIALOG, OPEN_LOGIN_DIALOG, PATHS } from '~/common/enums'
@@ -86,7 +86,9 @@ const Init: React.FC<FormProps> = ({
   const formId = 'sign-up-init-form'
 
   const { token, refreshToken } = useContext(ReCaptchaContext)
-  const [sendCode] = useMutation<SendVerificationCode>(SEND_CODE)
+  const [sendCode] = useMutation<SendVerificationCode>(SEND_CODE, undefined, {
+    showToast: false,
+  })
 
   const {
     values,

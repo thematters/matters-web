@@ -1,5 +1,4 @@
 import { NetworkStatus } from 'apollo-client'
-import { useRouter } from 'next/router'
 import { Fragment, useContext, useEffect } from 'react'
 
 import {
@@ -9,10 +8,11 @@ import {
   List,
   Spinner,
   usePublicQuery,
+  useRoute,
   ViewerContext,
 } from '~/components'
 
-import { analytics, getQuery, mergeConnections } from '~/common/utils'
+import { analytics, mergeConnections } from '~/common/utils'
 
 import GoogleSearchButton from '../GoogleSearchButton'
 import { SEARCH_ARTICLES_PRIVATE, SEARCH_ARTICLES_PUBLIC } from './gql'
@@ -21,8 +21,8 @@ import { SearchArticlesPublic } from './__generated__/SearchArticlesPublic'
 
 const SearchArticles = () => {
   const viewer = useContext(ViewerContext)
-  const router = useRouter()
-  const q = getQuery({ router, key: 'q' })
+  const { getQuery } = useRoute()
+  const q = getQuery('q')
 
   /**
    * Data Fetching

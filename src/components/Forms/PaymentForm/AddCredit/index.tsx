@@ -18,8 +18,8 @@ import {
   Form,
   LanguageContext,
   Translate,
+  useMutation,
 } from '~/components'
-import { useMutation } from '~/components/GQL'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
 
 import {
@@ -78,16 +78,21 @@ const BaseAddCredit: React.FC<FormProps> = ({
   const stripe = useStripe()
   const elements = useElements()
   const { lang } = useContext(LanguageContext)
-  const [addCredit] = useMutation<AddCreditType>(ADD_CREDIT)
+  const [addCredit] = useMutation<AddCreditType>(ADD_CREDIT, undefined, {
+    showToast: false,
+  })
 
   const { data: balanceData } = useQuery<WalletBalance>(WALLET_BALANCE, {
     fetchPolicy: 'network-only',
   })
   const balance = balanceData?.viewer?.wallet.balance.HKD || 0
 
+  const [disabled, setDisabled] = useState(true)
   const [completed, setCompleted] = useState(false)
   const [checkoutError, setCheckoutError] = useState('')
   const onCheckoutChange = (event: StripeCardElementChangeEvent) => {
+    setDisabled(!event.complete)
+
     if (event.error) {
       const msg =
         lang === 'en'
@@ -146,12 +151,14 @@ const BaseAddCredit: React.FC<FormProps> = ({
       const client_secret = data?.addCredit.client_secret
 
       if (!stripe || !elements || !client_secret) {
+        setSubmitting(false)
         return
       }
 
       const cardElement = elements.getElement(CardElement)
 
       if (!cardElement) {
+        setSubmitting(false)
         return
       }
 
@@ -165,7 +172,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
             ? undefined
             : _get(STRIPE_ERROR_MESSAGES[lang], result.error.code || '')
 
-        setFieldError('checkout', msg || result.error.message)
+        setCheckoutError(msg || result.error.message)
 
         analytics.trackEvent('purchase', {
           amount,
@@ -275,7 +282,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
         <Dialog.Footer.Button
           type="submit"
           form={formId}
-          disabled={!isValid || isSubmitting || checkoutError}
+          disabled={disabled || !isValid || isSubmitting || !!checkoutError}
           loading={isSubmitting}
         >
           <Translate zh_hant="確認儲值" zh_hans="确认储值" en="Confirm" />

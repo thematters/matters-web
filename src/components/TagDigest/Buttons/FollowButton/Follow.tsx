@@ -1,7 +1,6 @@
 import _isNil from 'lodash/isNil'
 
-import { Button, TextIcon, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
+import { Button, TextIcon, Translate, useMutation } from '~/components'
 import TOGGLE_FOLLOW_TAG from '~/components/GQL/mutations/toggleFollowTag'
 import updateViewerFollowingTagCount from '~/components/GQL/updates/viewerFollowingTagCount'
 
@@ -37,7 +36,7 @@ const Follow = ({ tag }: Props) => {
       textActiveColor="white"
       bgActiveColor="green"
       borderColor="green"
-      onClick={follow}
+      onClick={() => follow()}
     >
       <TextIcon weight="md" size="xs">
         <Translate id="follow" />

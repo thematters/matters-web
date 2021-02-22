@@ -1,10 +1,10 @@
 import _some from 'lodash/some'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import { useContext, useEffect } from 'react'
 
 import {
   Avatar,
+  Cover,
   Error,
   Expandable,
   FollowButton,
@@ -13,14 +13,16 @@ import {
   Throw404,
   Translate,
   usePublicQuery,
-  useResponsive,
+  useRoute,
   ViewerContext,
 } from '~/components'
 
-import { getQuery, numAbbr, toPath } from '~/common/utils'
+import { numAbbr, toPath } from '~/common/utils'
+
+import IMAGE_COVER from '@/public/static/images/profile-cover.png'
 
 import { CivicLikerBadge, SeedBadge } from './Badges'
-import Cover from './Cover'
+import CircleWidget from './CircleWidget'
 import DropdownActions from './DropdownActions'
 import EditProfileButton from './EditProfileButton'
 import { USER_PROFILE_PRIVATE, USER_PROFILE_PUBLIC } from './gql'
@@ -29,12 +31,11 @@ import styles from './styles.css'
 import { UserProfileUserPublic } from './__generated__/UserProfileUserPublic'
 
 export const UserProfile = () => {
-  const isSmallUp = useResponsive('sm-up')
-  const router = useRouter()
+  const { getQuery } = useRoute()
   const viewer = useContext(ViewerContext)
 
   // public data
-  const userName = getQuery({ router, key: 'userName' })
+  const userName = getQuery('name')
   const isMe = !userName || viewer.userName === userName
   const { data, loading, client } = usePublicQuery<UserProfileUserPublic>(
     USER_PROFILE_PUBLIC,
@@ -64,18 +65,14 @@ export const UserProfile = () => {
    */
   const LayoutHeader = () => (
     <Layout.Header
-      left={
-        <Layout.Header.BackButton
-          mode={!isSmallUp ? 'black-solid' : undefined}
-        />
-      }
+      left={<Layout.Header.BackButton mode="black-solid" />}
       right={
         <>
-          {isSmallUp ? <Layout.Header.Title id="myProfile" /> : <span />}
+          <span />
           {user && <DropdownActions user={user} isMe={isMe} />}
         </>
       }
-      mode={isSmallUp ? 'solid-fixed' : 'transparent-absolute'}
+      mode="transparent-absolute"
     />
   )
 
@@ -124,6 +121,7 @@ export const UserProfile = () => {
     userName,
   })
   const badges = user.info.badges || []
+  const circles = user.ownCircles || []
   const hasSeedBadge = _some(badges, { type: 'seed' })
   const profileCover = user.info.profileCover || ''
   const userState = user.status?.state as string
@@ -141,7 +139,7 @@ export const UserProfile = () => {
         <LayoutHeader />
 
         <section className="user-profile">
-          <Cover />
+          <Cover fallbackCover={IMAGE_COVER} />
 
           <header>
             <section className="avatar">
@@ -172,7 +170,7 @@ export const UserProfile = () => {
       <LayoutHeader />
 
       <section className="user-profile">
-        <Cover cover={profileCover} />
+        <Cover cover={profileCover} fallbackCover={IMAGE_COVER} />
 
         <header>
           <section className="avatar">
@@ -222,6 +220,8 @@ export const UserProfile = () => {
             </a>
           </Link>
         </footer>
+
+        <CircleWidget circles={circles} isMe={isMe} />
 
         <style jsx>{styles}</style>
       </section>

@@ -1,5 +1,4 @@
 import { useQuery } from '@apollo/react-hooks'
-import { useRouter } from 'next/router'
 import { useContext, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 
@@ -7,14 +6,14 @@ import {
   ReCaptchaContext,
   Tooltip,
   Translate,
+  useMutation,
+  useRoute,
   ViewerContext,
 } from '~/components'
-import { useMutation } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import updateAppreciation from '~/components/GQL/updates/appreciation'
 
 import { ADD_TOAST, APPRECIATE_DEBOUNCE, Z_INDEX } from '~/common/enums'
-import { getQuery } from '~/common/utils'
 
 import AnonymousButton from './AnonymousButton'
 import AppreciateButton from './AppreciateButton'
@@ -39,8 +38,8 @@ const AppreciationButton = ({
   article,
   privateFetched,
 }: AppreciationButtonProps) => {
-  const router = useRouter()
-  const mediaHash = getQuery({ router, key: 'mediaHash' })
+  const { getQuery } = useRoute()
+  const mediaHash = getQuery('mediaHash')
   const viewer = useContext(ViewerContext)
   const { token, refreshToken } = useContext(ReCaptchaContext)
   const { data, client } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
@@ -187,7 +186,7 @@ const AppreciationButton = ({
             en="send like to other"
           />
         }
-        zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
+        zIndex={Z_INDEX.OVER_BOTTOM_BAR}
       >
         <span>
           <AppreciateButton disabled total={total} />
@@ -281,7 +280,7 @@ const AppreciationButton = ({
           en="You cannot send like yet"
         />
       }
-      zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
+      zIndex={Z_INDEX.OVER_BOTTOM_BAR}
     >
       <span>
         <AppreciateButton

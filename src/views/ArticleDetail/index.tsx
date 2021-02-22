@@ -2,37 +2,37 @@ import { useLazyQuery, useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import jump from 'jump.js'
 import dynamic from 'next/dynamic'
-import Router, { useRouter } from 'next/router'
+import Router from 'next/router'
 import { useContext, useEffect, useState } from 'react'
 import { Waypoint } from 'react-waypoint'
 
 import {
   BackToHomeButton,
   DateTime,
+  EmptyLayout,
   Error,
-  FeaturesContext,
   Head,
   Layout,
   PullToRefresh,
+  QueryError,
   Spinner,
   Throw404,
   Title,
   Translate,
+  useFeatures,
   usePublicQuery,
   useResponsive,
+  useRoute,
   ViewerContext,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { UserDigest } from '~/components/UserDigest'
 
 import { ADD_TOAST, URL_QS } from '~/common/enums'
-import { getQuery, toPath } from '~/common/utils'
+import { toPath } from '~/common/utils'
 
 import Collection from './Collection'
 import Content from './Content'
-import Donation from './Donation'
-import EditMode from './EditMode'
 import FingerprintButton from './FingerprintButton'
 import {
   ARTICLE_DETAIL_PRIVATE,
@@ -42,10 +42,12 @@ import {
 import RelatedArticles from './RelatedArticles'
 import State from './State'
 import styles from './styles.css'
+import SupportWidget from './SupportWidget'
 import TagList from './TagList'
 import Toolbar from './Toolbar'
 import TranslationButton from './TranslationButton'
-import Wall from './Wall'
+import CircleWall from './Wall/Circle'
+import VisitorWall from './Wall/Visitor'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import { ArticleDetailPublic } from './__generated__/ArticleDetailPublic'
@@ -55,20 +57,23 @@ const DynamicResponse = dynamic(() => import('./Responses'), {
   ssr: false,
   loading: Spinner,
 })
-const EmptyLayout: React.FC = ({ children }) => (
-  <Layout.Main>
-    <Layout.Header left={<Layout.Header.BackButton />} />
-    {children}
-  </Layout.Main>
-)
+
+const DynamicEditMode = dynamic(() => import('./EditMode'), {
+  ssr: false,
+  loading: () => (
+    <EmptyLayout>
+      <Spinner />
+    </EmptyLayout>
+  ),
+})
 
 const ArticleDetail = () => {
-  const router = useRouter()
-  const mediaHash = getQuery({ router, key: 'mediaHash' })
+  const { getQuery } = useRoute()
+  const mediaHash = getQuery('mediaHash')
   const viewer = useContext(ViewerContext)
 
   // UI
-  const features = useContext(FeaturesContext)
+  const features = useFeatures()
   const isLargeUp = useResponsive('lg-up')
   const isSmallUp = useResponsive('sm-up')
   const [fixedWall, setFixedWall] = useState(false)
@@ -98,6 +103,13 @@ const ArticleDetail = () => {
   const authorId = article?.author?.id
   const collectionCount = article?.collection?.totalCount || 0
   const isAuthor = viewer.id === authorId
+  const circle = article?.circle
+  const canReadFullContent = !!(
+    isAuthor ||
+    !circle ||
+    circle.isMember ||
+    article?.limitedFree
+  )
 
   // fetch private data
   const [privateFetched, setPrivateFetched] = useState(false)
@@ -111,7 +123,7 @@ const ArticleDetail = () => {
       fetchPolicy: 'network-only',
       variables: {
         mediaHash: article?.mediaHash,
-        includeContent: article.state !== 'active' && isAuthor,
+        includeContent: canReadFullContent,
         includeCanSuperLike: viewer.isCivicLiker,
       },
     })
@@ -168,7 +180,7 @@ const ArticleDetail = () => {
 
   // edit mode
   const canEdit = isAuthor && !viewer.isInactive
-  const mode = getQuery({ router, key: URL_QS.MODE_EDIT.key })
+  const mode = getQuery(URL_QS.MODE_EDIT.key)
   const [editMode, setEditMode] = useState(false)
   const exitEditMode = () => {
     if (!article) {
@@ -269,7 +281,7 @@ const ArticleDetail = () => {
    */
   if (editMode) {
     return (
-      <EditMode
+      <DynamicEditMode
         article={article}
         onCancel={exitEditMode}
         onSaved={onEditSaved}
@@ -355,29 +367,36 @@ const ArticleDetail = () => {
                   )}
                 </section>
 
-                <section className="features">
-                  <FingerprintButton article={article} />
+                {canReadFullContent && (
+                  <section className="features">
+                    <FingerprintButton article={article} />
 
-                  {shouldTranslate && (
-                    <TranslationButton
-                      translate={translate}
-                      setTranslate={onTranslate}
-                    />
-                  )}
-                </section>
+                    {shouldTranslate && (
+                      <TranslationButton
+                        translate={translate}
+                        setTranslate={onTranslate}
+                      />
+                    )}
+                  </section>
+                )}
               </section>
 
               <section className="right" />
             </section>
           </section>
 
-          <Content
-            article={article}
-            translation={translate ? contentTranslation : null}
-            translating={translating}
-          />
+          <section className="content-outline">
+            <Content
+              article={article}
+              translation={translate ? contentTranslation : null}
+              translating={translating}
+            />
+            {circle && !canReadFullContent && <CircleWall circle={circle} />}
+          </section>
 
-          {features.payment && <Donation article={article} />}
+          {features.payment && canReadFullContent && (
+            <SupportWidget article={article} />
+          )}
 
           {collectionCount > 0 && (
             <section className="block">
@@ -392,12 +411,16 @@ const ArticleDetail = () => {
           {!isLargeUp && <RelatedArticles article={article} />}
         </section>
 
-        <Toolbar article={article} privateFetched={privateFetched} />
+        <Toolbar
+          article={article}
+          privateFetched={privateFetched}
+          hasFingerprint={canReadFullContent}
+        />
 
         {shouldShowWall && (
           <>
             <section id="comments" />
-            <Wall show={fixedWall} />
+            <VisitorWall show={fixedWall} />
           </>
         )}
       </PullToRefresh>

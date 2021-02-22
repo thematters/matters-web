@@ -55,7 +55,7 @@ const fragments = {
   },
 }
 
-const Toolbar = ({ article, privateFetched }: ToolbarProps) => {
+const Toolbar = ({ article, privateFetched, ...props }: ToolbarProps) => {
   const isSmallUp = useResponsive('sm-up')
 
   return (
@@ -84,6 +84,7 @@ const Toolbar = ({ article, privateFetched }: ToolbarProps) => {
           size="md-s"
           inCard={false}
           hasShare={!isSmallUp}
+          {...props}
         />
       </section>
 

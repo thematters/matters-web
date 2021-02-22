@@ -1,4 +1,15 @@
-import { Card, IconAdd16, TextIcon, Translate } from '~/components'
+import { useContext } from 'react'
+
+import {
+  Card,
+  IconAdd16,
+  LanguageContext,
+  TextIcon,
+  Translate,
+} from '~/components'
+
+import { ADD_TOAST } from '~/common/enums'
+import { validateTagName } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -10,8 +21,27 @@ interface CreateTagProps {
 }
 
 const CreateTag: React.FC<CreateTagProps> = ({ tag, onClick }) => {
+  const { lang } = useContext(LanguageContext)
+
+  const create = () => {
+    const msg = validateTagName(tag.content, lang)
+    if (msg) {
+      window.dispatchEvent(
+        new CustomEvent(ADD_TOAST, {
+          detail: {
+            color: 'red',
+            content: msg,
+          },
+        })
+      )
+      return
+    }
+
+    onClick(tag)
+  }
+
   return (
-    <Card spacing={['base', 'base']} onClick={() => onClick(tag)}>
+    <Card spacing={['base', 'base']} onClick={create}>
       <section className="add-tag">
         <TextIcon icon={<IconAdd16 />} color="green" size="md">
           <Translate id="create" />

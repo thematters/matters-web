@@ -1,8 +1,6 @@
 import gql from 'graphql-tag'
-import { useState } from 'react'
 
-import { Dialog, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
+import { Dialog, Translate, useDialogSwitch, useMutation } from '~/components'
 
 import { ADD_TOAST } from '~/common/enums'
 
@@ -26,9 +24,7 @@ const DeleteCommentDialog = ({
   commentId,
   children,
 }: DeleteCommentDialogProps) => {
-  const [showDialog, setShowDialog] = useState(true)
-  const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
+  const { show, open, close } = useDialogSwitch(true)
 
   const [deleteComment] = useMutation<DeleteComment>(DELETE_COMMENT, {
     variables: { id: commentId },
@@ -65,7 +61,7 @@ const DeleteCommentDialog = ({
     <>
       {children({ open })}
 
-      <Dialog isOpen={showDialog} onDismiss={close} size="sm">
+      <Dialog isOpen={show} onDismiss={close} size="sm">
         <Dialog.Header title="deleteComment" close={close} mode="inner" />
 
         <Dialog.Message>

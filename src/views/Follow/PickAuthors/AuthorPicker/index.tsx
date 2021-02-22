@@ -7,12 +7,12 @@ import {
   IconReload12,
   List,
   PageHeader,
+  QueryError,
   Spinner,
   TextIcon,
   Translate,
   UserDigest,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 
 import styles from './styles.css'
 

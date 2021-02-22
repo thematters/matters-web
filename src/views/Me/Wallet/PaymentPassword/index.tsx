@@ -53,7 +53,7 @@ const BasePaymentPassword: React.FC<PaymentPasswordProps> = ({
   )
 }
 
-export default () => (
+const PaymentPassword = () => (
   <ResetPaymentPasswordDialog>
     {({ open: openResetPaymentPasswordDialog }) => (
       <BasePaymentPassword
@@ -62,3 +62,5 @@ export default () => (
     )}
   </ResetPaymentPasswordDialog>
 )
+
+export default PaymentPassword

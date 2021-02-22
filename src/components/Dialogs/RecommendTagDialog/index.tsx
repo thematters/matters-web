@@ -12,10 +12,10 @@ interface Props {
   children?: ({ open }: { open: () => void }) => React.ReactNode
 }
 
-export const RecommendTagDialog = ({ children }: Props) => {
+const BaseRecommendTagDialog = ({ children }: Props) => {
   const defaultType = 'hottest'
 
-  const { show, open, close } = useDialogSwitch(false)
+  const { show, open, close } = useDialogSwitch(true)
   const [feed, setFeed] = useState<FeedType>(defaultType)
 
   const isHottest = feed === 'hottest'
@@ -60,5 +60,18 @@ export const RecommendTagDialog = ({ children }: Props) => {
       </Dialog>
       <style jsx>{styles}</style>
     </>
+  )
+}
+
+export const RecommendTagDialog = (props: Props) => {
+  const Children = ({ open }: { open: () => void }) => {
+    useEventListener(OPEN_RECOMMEND_TAG_DIALOG, open)
+    return <>{props.children && props.children({ open })}</>
+  }
+
+  return (
+    <Dialog.Lazy mounted={<BaseRecommendTagDialog {...props} />}>
+      {({ open }) => <Children open={open} />}
+    </Dialog.Lazy>
   )
 }

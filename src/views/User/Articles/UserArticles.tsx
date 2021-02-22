@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router'
 import { useContext, useEffect } from 'react'
 
 import {
@@ -8,13 +7,14 @@ import {
   IconDotDivider,
   InfiniteScroll,
   List,
+  QueryError,
   Spinner,
   Translate,
   usePublicQuery,
   usePullToRefresh,
+  useRoute,
   ViewerContext,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 import {
   USER_ARTICLES_PRIVATE,
   USER_ARTICLES_PUBLIC,
@@ -22,7 +22,7 @@ import {
 } from '~/components/GQL/queries/userArticles'
 
 import { URL_QS } from '~/common/enums'
-import { analytics, getQuery, mergeConnections } from '~/common/utils'
+import { analytics, mergeConnections } from '~/common/utils'
 
 import IMAGE_LOGO_192 from '@/public/static/icon-192x192.png?url'
 
@@ -59,8 +59,8 @@ const ArticleSummaryInfo = ({ user }: { user: UserArticlesPublic_user }) => {
 
 const UserArticles = () => {
   const viewer = useContext(ViewerContext)
-  const router = useRouter()
-  const userName = getQuery({ router, key: 'userName' })
+  const { getQuery } = useRoute()
+  const userName = getQuery('name')
   const isViewer = viewer.userName === userName
 
   let query = USER_ARTICLES_PUBLIC
@@ -149,24 +149,34 @@ const UserArticles = () => {
    * Render
    */
   if (loading) {
-    return <Spinner />
+    return (
+      <>
+        <UserTabs />
+        <Spinner />
+      </>
+    )
   }
 
   if (error) {
-    return <QueryError error={error} />
+    return (
+      <>
+        <UserTabs />
+        <QueryError error={error} />
+      </>
+    )
   }
 
   if (!user || user?.status?.state === 'archived') {
-    return null
+    return (
+      <>
+        <UserTabs />
+        <EmptyArticle />
+      </>
+    )
   }
 
-  /**
-   * Customize title
-   */
-  const shareSource = getQuery({
-    router,
-    key: URL_QS.SHARE_SOURCE_ONBOARDING_TASKS.key,
-  })
+  // customize title
+  const shareSource = getQuery(URL_QS.SHARE_SOURCE_ONBOARDING_TASKS.key)
   const isShareOnboardingTasks =
     shareSource === URL_QS.SHARE_SOURCE_ONBOARDING_TASKS.value
 
@@ -175,10 +185,10 @@ const UserArticles = () => {
       title={{
         zh_hant: isShareOnboardingTasks
           ? `${user.displayName} 已解鎖新手獎賞，快點加入 Matters 獲得創作者獎勵吧`
-          : `${user.displayName}的創作空間站`,
+          : `${user.displayName} 的創作空間站`,
         zh_hans: isShareOnboardingTasks
           ? `${user.displayName} 已解锁新手奖赏，快点加入 Matters 获得创作者奖励吧`
-          : `${user.displayName}的创作空间站`,
+          : `${user.displayName} 的创作空间站`,
         en: isShareOnboardingTasks
           ? `${user.displayName} has unlocked new user reward, join Matters to get creator reward`
           : `${user.displayName}'s creative space`,
@@ -199,6 +209,7 @@ const UserArticles = () => {
     )
   }
 
+  const hasSubscriptions = user.subscribedCircles.totalCount > 0
   const articleEdges = edges.filter(
     ({ node }) => node.articleState === 'active' || viewer.id === node.author.id
   )
@@ -207,7 +218,7 @@ const UserArticles = () => {
     <>
       <CustomHead />
 
-      <UserTabs />
+      <UserTabs hasSubscriptions={hasSubscriptions} />
 
       <ArticleSummaryInfo user={user} />
 

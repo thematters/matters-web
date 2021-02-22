@@ -1,6 +1,4 @@
-import { useState } from 'react'
-
-import { Dialog, Translate } from '~/components'
+import { Dialog, Translate, useDialogSwitch } from '~/components'
 import { useEventListener } from '~/components/Hook'
 
 import { CLOSE_ONBOARDING_TASKS_DIALOG } from '~/common/enums'
@@ -15,9 +13,7 @@ interface OnboardingTasksDialogProps {
 const BaseOnboardingTasksDialog: React.FC<OnboardingTasksDialogProps> = ({
   children,
 }) => {
-  const [showDialog, setShowDialog] = useState(true)
-  const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
+  const { show, open, close } = useDialogSwitch(true)
 
   useEventListener(CLOSE_ONBOARDING_TASKS_DIALOG, close)
 
@@ -25,7 +21,7 @@ const BaseOnboardingTasksDialog: React.FC<OnboardingTasksDialogProps> = ({
     <>
       {children({ open })}
 
-      <Dialog size="sm" isOpen={showDialog} onDismiss={close} fixedHeight>
+      <Dialog size="sm" isOpen={show} onDismiss={close} fixedHeight>
         <Dialog.Header
           title={
             <Translate

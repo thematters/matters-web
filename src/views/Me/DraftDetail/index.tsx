@@ -1,14 +1,21 @@
 import { useQuery } from '@apollo/react-hooks'
 import dynamic from 'next/dynamic'
-import { useRouter } from 'next/router'
 import { useState } from 'react'
 
-import { Head, Layout, Spinner, Throw404, useResponsive } from '~/components'
+import {
+  EmptyLayout,
+  Head,
+  Layout,
+  Spinner,
+  Throw404,
+  useResponsive,
+  useRoute,
+} from '~/components'
 import { QueryError, useMutation } from '~/components/GQL'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 
 import { ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
-import { getQuery, stripHtml } from '~/common/utils'
+import { stripHtml } from '~/common/utils'
 
 import BottomBar from './BottomBar'
 import { DRAFT_DETAIL, SET_CONTENT } from './gql'
@@ -26,17 +33,10 @@ const Editor = dynamic(() => import('~/components/Editor/Article'), {
   loading: Spinner,
 })
 
-const EmptyLayout: React.FC = ({ children }) => (
-  <Layout.Main>
-    <Layout.Header left={<Layout.Header.BackButton />} />
-    {children}
-  </Layout.Main>
-)
-
 const DraftDetail = () => {
   const isLargeUp = useResponsive('lg-up')
-  const router = useRouter()
-  const id = getQuery({ router, key: 'draftId' })
+  const { getQuery } = useRoute()
+  const id = getQuery('draftId')
 
   const [setContent] = useMutation<SetDraftContent>(SET_CONTENT)
   const [singleFileUpload] = useMutation<SingleFileUpload>(UPLOAD_FILE)
@@ -49,6 +49,7 @@ const DraftDetail = () => {
     fetchPolicy: 'network-only',
   })
   const draft = (data?.node?.__typename === 'Draft' && data.node) || undefined
+  const ownCircles = data?.viewer?.ownCircles || undefined
 
   if (loading) {
     return (
@@ -120,7 +121,10 @@ const DraftDetail = () => {
   }
 
   return (
-    <Layout.Main aside={<Sidebar draft={draft} />} inEditor>
+    <Layout.Main
+      aside={<Sidebar draft={draft} ownCircles={ownCircles} />}
+      inEditor
+    >
       <Layout.Header
         left={<Layout.Header.BackButton />}
         right={
@@ -145,7 +149,7 @@ const DraftDetail = () => {
         <Editor draft={draft} update={update} upload={upload} />
       </Layout.Spacing>
 
-      {!isLargeUp && <BottomBar draft={draft} />}
+      {!isLargeUp && <BottomBar draft={draft} ownCircles={ownCircles} />}
     </Layout.Main>
   )
 }

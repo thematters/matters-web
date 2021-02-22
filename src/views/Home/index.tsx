@@ -10,6 +10,7 @@ import {
   ViewerContext,
 } from '~/components'
 
+import { CircleBanner } from './CircleBanner'
 import Feed from './Feed'
 import Sidebar from './Sidebar'
 import styles from './styles.css'
@@ -51,6 +52,8 @@ const Home = () => {
           }
         />
       )}
+
+      <CircleBanner />
 
       <Spacer size="xtight" />
 

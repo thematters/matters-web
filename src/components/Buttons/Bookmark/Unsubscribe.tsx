@@ -5,9 +5,9 @@ import {
   IconBookmarked16,
   IconSize,
   Translate,
+  useMutation,
   ViewerContext,
 } from '~/components'
-import { useMutation } from '~/components/GQL'
 
 import { ADD_TOAST } from '~/common/enums'
 
@@ -19,7 +19,7 @@ interface UnsubscribeProps {
   articleId?: string
   size?: Extract<IconSize, 'md-s'>
   disabled?: boolean
-  inCard: boolean
+  inCard?: boolean
 }
 
 const Unsubscribe = ({

@@ -9,9 +9,9 @@ import {
   LanguageContext,
   Spinner,
   Translate,
+  useMutation,
   useStep,
 } from '~/components'
-import { useMutation } from '~/components/GQL'
 
 import {
   parseFormSubmitErrors,
@@ -44,7 +44,11 @@ const SET_PAYMENT_PASSWORD = gql`
 `
 
 const SetPassword: React.FC<FormProps> = ({ submitCallback }) => {
-  const [setPassword] = useMutation<SetPaymentPassword>(SET_PAYMENT_PASSWORD)
+  const [setPassword] = useMutation<SetPaymentPassword>(
+    SET_PAYMENT_PASSWORD,
+    undefined,
+    { showToast: false }
+  )
   const { lang } = useContext(LanguageContext)
   const { currStep, forward } = useStep<'password' | 'comparedPassword'>(
     'password'

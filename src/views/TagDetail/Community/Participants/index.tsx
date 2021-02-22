@@ -3,13 +3,13 @@ import { NetworkStatus } from 'apollo-client'
 import {
   InfiniteScroll,
   List,
+  QueryError,
   Spinner,
   Translate,
   usePublicQuery,
   usePullToRefresh,
   UserDigest,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 
 import { analytics, mergeConnections } from '~/common/utils'
 
