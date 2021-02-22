@@ -19,6 +19,7 @@ const ServerError = () => (
   <Translate
     zh_hant="飛船正在檢修中，請稍後看看"
     zh_hans="飞船正在检修中，请稍后看看"
+    en="Spaceship maintaining, please come back later"
   />
 )
 
@@ -26,6 +27,7 @@ const NetworkError = () => (
   <Translate
     zh_hant="星球連線出現問題，請稍後看看"
     zh_hans="星球连线出现问题，请稍后看看"
+    en="Connection error, please come back later"
   />
 )
 
@@ -33,6 +35,7 @@ const NotFound = () => (
   <Translate
     zh_hant="你似乎遨遊到了一個未知空間，請返回重試"
     zh_hans="你似乎遨游到了一个未知空间，请返回重试"
+    en="It seems you've come to an unknown space, please go back and retry"
   />
 )
 

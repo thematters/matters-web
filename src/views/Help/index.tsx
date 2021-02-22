@@ -5,7 +5,7 @@ import { toPath } from '~/common/utils'
 
 import styles from './styles.css'
 
-const Help = () => {
+const BaseHelp = () => {
   const year = new Date().getFullYear()
   const downloadAppLink = toPath({
     page: 'articleDetail',
@@ -46,6 +46,7 @@ const Help = () => {
           <Translate
             zh_hant="若你希望向 Matters 提出建議，或遭遇操作異常，請發送郵件至 "
             zh_hans="若你希望向 Matters 提出建议，或遭遇操作异常，请发送邮件至 "
+            en="If you want to make a suggestion, or report a bug, please email "
           />
           <a
             className="u-link-green"
@@ -57,6 +58,7 @@ const Help = () => {
           <Translate
             zh_hant="，我們會儘快回覆！"
             zh_hans="，我们会尽快回复！"
+            en=", we will reply to you as soon as possible!"
           />
         </p>
 
@@ -72,7 +74,7 @@ const Help = () => {
   )
 }
 
-export default () => (
+const Help = () => (
   <Layout.Main bgColor="grey-lighter">
     <Layout.Header
       left={<Layout.Header.BackButton />}
@@ -81,8 +83,10 @@ export default () => (
 
     <Spacer />
 
-    <Help />
+    <BaseHelp />
 
     <Spacer size="xxxloose" />
   </Layout.Main>
 )
+
+export default Help

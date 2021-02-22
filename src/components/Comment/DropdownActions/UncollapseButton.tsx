@@ -1,7 +1,12 @@
 import gql from 'graphql-tag'
 
-import { IconExpand16, Menu, TextIcon, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
+import {
+  IconExpand16,
+  Menu,
+  TextIcon,
+  Translate,
+  useMutation,
+} from '~/components'
 
 import { UncollapseComment } from './__generated__/UncollapseComment'
 

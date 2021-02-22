@@ -7,25 +7,17 @@ import { OPEN_LIKE_COIN_DIALOG } from '~/common/enums'
 import { SetupLikeCoin } from './SetupLikeCoin'
 
 interface LikeCoinDialogProps {
-  allowEventTrigger?: boolean
   children?: ({ open }: { open: () => void }) => React.ReactNode
 }
 
-export const LikeCoinDialog: React.FC<LikeCoinDialogProps> = ({
-  allowEventTrigger = false,
-  children,
-}) => {
-  const [showDialog, setShowDialog] = useState(false)
+const BaseLikeCoinDialog: React.FC<LikeCoinDialogProps> = ({ children }) => {
+  const [showDialog, setShowDialog] = useState(true)
   const open = () => {
     setShowDialog(true)
   }
   const close = () => setShowDialog(false)
 
-  useEventListener(OPEN_LIKE_COIN_DIALOG, () => {
-    if (allowEventTrigger) {
-      open()
-    }
-  })
+  useEventListener(OPEN_LIKE_COIN_DIALOG, open)
 
   return (
     <>
@@ -35,5 +27,18 @@ export const LikeCoinDialog: React.FC<LikeCoinDialogProps> = ({
         <SetupLikeCoin closeDialog={close} />
       </Dialog>
     </>
+  )
+}
+
+export const LikeCoinDialog = (props: LikeCoinDialogProps) => {
+  const Children = ({ open }: { open: () => void }) => {
+    useEventListener(OPEN_LIKE_COIN_DIALOG, open)
+    return <>{props.children && props.children({ open })}</>
+  }
+
+  return (
+    <Dialog.Lazy mounted={<BaseLikeCoinDialog {...props} />}>
+      {({ open }) => <Children open={open} />}
+    </Dialog.Lazy>
   )
 }

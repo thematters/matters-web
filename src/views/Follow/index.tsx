@@ -2,8 +2,13 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useContext, useEffect } from 'react'
 
-import { Layout, Spinner, useResponsive, ViewerContext } from '~/components'
-import { useMutation } from '~/components/GQL'
+import {
+  Layout,
+  Spinner,
+  useMutation,
+  useResponsive,
+  ViewerContext,
+} from '~/components'
 import viewerUnreadFolloweeArticles from '~/components/GQL/updates/viewerUnreadFolloweeArticles'
 
 import FollowFeed from './FollowFeed'

@@ -35,9 +35,11 @@ const fragments = {
         id
         ...UserDigestMiniUser
       }
-      article {
-        id
-        ...ArticleDigestTitleArticle
+      node {
+        ... on Article {
+          id
+          ...ArticleDigestTitleArticle
+        }
       }
       ...CreatedAtComment
       ...ContentCommentPublic
@@ -68,13 +70,20 @@ const FollowComment: React.FC<FollowCommentProps> = ({
   const { viewMode } = data?.clientPreference || { viewMode: 'comfortable' }
   const isDefaultMode = viewMode === 'default'
 
-  const { article, author } = comment
+  const article =
+    comment.node.__typename === 'Article' ? comment.node : undefined
+
+  if (!article) {
+    return null
+  }
+
   const articlePath = toPath({ page: 'articleDetail', article })
   const path =
     comment.state === 'active'
       ? toPath({
           page: 'commentDetail',
           comment,
+          article,
         })
       : {}
 
@@ -97,7 +106,7 @@ const FollowComment: React.FC<FollowCommentProps> = ({
       <header>
         <section className="left">
           <UserDigest.Mini
-            user={author}
+            user={comment.author}
             avatarSize="lg"
             textSize="md-s"
             textWeight="md"
@@ -107,7 +116,7 @@ const FollowComment: React.FC<FollowCommentProps> = ({
             {...userDigestProps}
           />
           <TextIcon size="sm" color="grey-dark">
-            <Translate zh_hant="評論了" zh_hans="评论了" />
+            <Translate zh_hant="評論了" zh_hans="评论了" en="commented" />
           </TextIcon>
         </section>
 
@@ -132,7 +141,7 @@ const FollowComment: React.FC<FollowCommentProps> = ({
         </Card>
       </section>
 
-      <Comment.FooterActions comment={comment} inCard />
+      <Comment.FooterActions comment={comment} type="article" inCard />
 
       <style jsx>{styles}</style>
     </Card>

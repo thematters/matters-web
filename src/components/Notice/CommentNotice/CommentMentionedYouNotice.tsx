@@ -26,7 +26,11 @@ const CommentMentionedYouNotice = ({ notice }: { notice: NoticeType }) => {
       <section className="content-wrap">
         <NoticeHead notice={notice}>
           <NoticeActorName user={actor} />{' '}
-          <Translate zh_hant="在評論中提及了你" zh_hans="在评论中提及了你" />
+          <Translate
+            zh_hant="在評論中提及了你"
+            zh_hans="在评论中提及了你"
+            en="mentioned you in comment"
+          />
         </NoticeHead>
 
         <NoticeComment comment={notice.comment} />

@@ -9,7 +9,7 @@ import styles from './styles.css'
 interface BoxProps {
   icon: React.ReactNode
   title: TextId
-  onClick: () => any
+  onClick?: () => any
   disabled?: boolean
 }
 
@@ -32,14 +32,16 @@ const Box: React.FC<BoxProps> = ({
           <Translate id={title} />
         </TextIcon>
 
-        <Button
-          onClick={onClick}
-          bgActiveColor="grey-lighter"
-          spacing={['xtight', 'xtight']}
-          aira-label={TEXT.zh_hant[title]}
-        >
-          <IconEdit16 color="grey" />
-        </Button>
+        {onClick && (
+          <Button
+            onClick={onClick}
+            bgActiveColor="grey-lighter"
+            spacing={['xtight', 'xtight']}
+            aira-label={TEXT.zh_hant[title]}
+          >
+            <IconEdit16 color="grey" />
+          </Button>
+        )}
       </header>
 
       {children}

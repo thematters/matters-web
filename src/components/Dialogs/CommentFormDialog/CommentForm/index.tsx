@@ -3,8 +3,7 @@ import gql from 'graphql-tag'
 import dynamic from 'next/dynamic'
 import { useState } from 'react'
 
-import { Button, Dialog, Spinner, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
+import { Button, Dialog, Spinner, Translate, useMutation } from '~/components'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
 import { ADD_TOAST, TEXT, TextId } from '~/common/enums'
@@ -39,11 +38,15 @@ const COMMENT_DRAFT = gql`
   }
 `
 
+export type CommentFormType = 'article' | 'circleDiscussion' | 'circleBroadcast'
+
 export interface CommentFormProps {
   commentId?: string
-  articleId: string
   replyToId?: string
   parentId?: string
+  circleId?: string
+  articleId?: string
+  type: CommentFormType
 
   defaultContent?: string | null
   submitCallback?: () => void
@@ -54,20 +57,24 @@ export interface CommentFormProps {
 
 const CommentForm: React.FC<CommentFormProps> = ({
   commentId,
-  articleId,
   replyToId,
   parentId,
+  articleId,
+  circleId,
+  type,
 
   defaultContent,
   submitCallback,
   closeDialog,
   title = 'putComment',
   context,
+
+  ...props
 }) => {
   // retrieve comment draft
-  const commentDraftId = `${articleId}:${commentId || 0}:${parentId || 0}:${
-    replyToId || 0
-  }`
+  const commentDraftId = `${articleId || circleId}:${commentId || 0}:${
+    parentId || 0
+  }:${replyToId || 0}`
   const formId = `comment-form-${commentDraftId}`
 
   const { data, client } = useQuery<CommentDraft>(COMMENT_DRAFT, {
@@ -94,7 +101,9 @@ const CommentForm: React.FC<CommentFormProps> = ({
         content: trimLineBreaks(content),
         replyTo: replyToId,
         articleId,
+        circleId,
         parentId,
+        type,
         mentions,
       },
     }
@@ -126,7 +135,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
               <Translate id="pushDescription" />
             ),
             customButton: !skipPushButton && (
-              <Button onClick={subscribePush}>
+              <Button onClick={() => subscribePush()}>
                 <Translate id="confirmPush" />
               </Button>
             ),

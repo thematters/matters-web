@@ -34,7 +34,7 @@ const Weibo = ({
 
     {!circle && (
       <TextIcon icon={withIcon(IconShareWeibo)({})} spacing="base">
-        <Translate zh_hant="微博" zh_hans="微博" />
+        <Translate zh_hant="微博" zh_hans="微博" en="weibo" />
       </TextIcon>
     )}
   </button>

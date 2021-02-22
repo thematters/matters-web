@@ -3,13 +3,13 @@ import { NetworkStatus } from 'apollo-client'
 import {
   InfiniteScroll,
   List,
+  QueryError,
   Spinner,
   Translate,
   usePublicQuery,
   usePullToRefresh,
   UserDigest,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 
 import { analytics, mergeConnections } from '~/common/utils'
 
@@ -90,7 +90,7 @@ const Participants = ({ id }: Props) => {
     <>
       <section className="category">
         <section>
-          <Translate zh_hant="創作者" zh_hans="创作者" />
+          <Translate zh_hant="創作者" zh_hans="创作者" en="creators" />
           <span className="count">({count})</span>
         </section>
       </section>

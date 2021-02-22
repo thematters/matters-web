@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router'
 import { useContext, useEffect } from 'react'
 
 import {
@@ -8,11 +7,12 @@ import {
   Translate,
   usePublicQuery,
   usePullToRefresh,
+  useRoute,
   ViewerContext,
   ViewMoreButton,
 } from '~/components'
 
-import { filterComments, getQuery, mergeConnections } from '~/common/utils'
+import { filterComments, mergeConnections } from '~/common/utils'
 
 import ResponseComment from '../ResponseComment'
 import styles from '../styles.css'
@@ -30,8 +30,8 @@ type Comment = CommentPublic & Partial<CommentPrivate>
 
 const FeaturedComments = () => {
   const viewer = useContext(ViewerContext)
-  const router = useRouter()
-  const mediaHash = getQuery({ router, key: 'mediaHash' })
+  const { getQuery } = useRoute()
+  const mediaHash = getQuery('mediaHash')
 
   /**
    * Data Fetching

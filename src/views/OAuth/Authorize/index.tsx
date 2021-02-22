@@ -1,7 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import queryString from 'query-string'
 import { useContext } from 'react'
 
@@ -13,11 +12,12 @@ import {
   Throw404,
   Translate,
   UserDigest,
+  useRoute,
   ViewerContext,
 } from '~/components'
 
 import { PATHS } from '~/common/enums'
-import { appendTarget, getQuery, toReadableScope } from '~/common/utils'
+import { appendTarget, toReadableScope } from '~/common/utils'
 
 import { Box } from '../Box'
 import styles from './styles.css'
@@ -38,17 +38,17 @@ const OAUTH_CLIENT_INFO = gql`
   }
 `
 
-const OAuthAuthorize = () => {
-  const router = useRouter()
+const BaseOAuthAuthorize = () => {
+  const { getQuery, router } = useRoute()
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
   const actionUrl = `${OAUTH_AUTHORIZE_ENDPOINT}?${queryString.stringify(
     router.query
   )}`
-  const clientId = getQuery({ router, key: 'client_id' })
-  const state = getQuery({ router, key: 'state' })
-  const requestScopes = getQuery({ router, key: 'scope' })
-  const redirectUri = getQuery({ router, key: 'redirect_uri' })
+  const clientId = getQuery('client_id')
+  const state = getQuery('state')
+  const requestScopes = getQuery('scope')
+  const redirectUri = getQuery('redirect_uri')
 
   const { data, loading } = useQuery<OAuthClientInfo>(OAUTH_CLIENT_INFO, {
     variables: { id: clientId },
@@ -86,6 +86,7 @@ const OAuthAuthorize = () => {
           <Translate
             zh_hant=" 正在申請訪問你的 Matters 帳戶數據："
             zh_hans=" 正在申请访问你的 Matters 帐户数据："
+            en=" is asking to access your Matters account:"
           />
         </>
       }
@@ -108,6 +109,7 @@ const OAuthAuthorize = () => {
               <Translate
                 zh_hant="讀取你的公開資料"
                 zh_hans="读取你的公开资料"
+                en="access to your public profile"
               />
             </li>
             {validScopes &&
@@ -139,12 +141,16 @@ const OAuthAuthorize = () => {
 
           <p className="switch-account">
             <span>
-              <Translate zh_hant="不是你？" zh_hans="不是你？" />
+              <Translate zh_hant="不是你？" zh_hans="不是你？" en="Not you?" />
             </span>
 
             <Link {...appendTarget(PATHS.LOGIN, true)}>
               <a className="u-link-green">
-                <Translate zh_hant="切換帳戶" zh_hans="切换帐户" />
+                <Translate
+                  zh_hant="切換帳戶"
+                  zh_hans="切换帐户"
+                  en="switch account"
+                />
               </a>
             </Link>
           </p>
@@ -156,6 +162,7 @@ const OAuthAuthorize = () => {
               <Translate
                 zh_hant="請先設置 Liker ID"
                 zh_hans="请先设置 Liker ID"
+                en="Please setup Liker ID first"
               />
             </Dialog.Footer.Button>
           ) : (
@@ -171,12 +178,14 @@ const OAuthAuthorize = () => {
   )
 }
 
-export default () => (
+const OAuthAuthorize = () => (
   <Layout.Main>
     <Layout.Header left={<Layout.Header.Title id="oauthAuthorize" />} />
 
     <Layout.Spacing>
-      <OAuthAuthorize />
+      <BaseOAuthAuthorize />
     </Layout.Spacing>
   </Layout.Main>
 )
+
+export default OAuthAuthorize

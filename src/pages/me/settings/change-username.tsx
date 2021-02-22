@@ -2,8 +2,10 @@ import MeSettingsChangeUserName from '~/views/Me/Settings/ChangeUserName'
 
 import { Protected } from '~/components'
 
-export default () => (
+const ProtectedMeSettingsChangeUserName = () => (
   <Protected>
     <MeSettingsChangeUserName />
   </Protected>
 )
+
+export default ProtectedMeSettingsChangeUserName

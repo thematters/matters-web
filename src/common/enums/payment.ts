@@ -18,6 +18,14 @@ export const PAYMENT_MINIMAL_PAYOUT_AMOUNT = {
   HKD: 500,
 }
 
+export const PAYMENT_MINIMAL_CIRCLE_AMOUNT = {
+  HKD: 5,
+}
+
+export const PAYMENT_MAXIMUM_CIRCLE_AMOUNT = {
+  HKD: 100,
+}
+
 export enum PAYMENT_CURRENCY {
   HKD = 'HKD',
   LIKE = 'LIKE',
@@ -83,6 +91,7 @@ export const STRIPE_ERROR_MESSAGES = {
     processing_error: '操作失败，请稍候再试',
     rate_limit: '操作过于频繁，请稍候再试',
   },
+  en: {}, // Unnecessary, use Stripe's built-in message instaed.
 }
 
 export const PAYMENT_PROVIDER = ['stripe', 'likecoin']

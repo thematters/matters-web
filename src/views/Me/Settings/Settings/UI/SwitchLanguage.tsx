@@ -19,6 +19,7 @@ const LanguageSwitchContent = ({
 }) => (
   <LanguageConsumer>
     {({ lang, setLang }) => {
+      const isEnActive = lang === 'en'
       const isZhHantActive = lang === 'zh_hant'
       const isZhHansActive = lang === 'zh_hans'
 
@@ -43,6 +44,16 @@ const LanguageSwitchContent = ({
               {LANG_TEXT_MAP.zh_hans}
             </TextIcon>
           </Menu.Item>
+
+          <Menu.Item onClick={() => setLang('en')}>
+            <TextIcon
+              spacing="base"
+              size="md"
+              weight={isEnActive ? 'bold' : 'normal'}
+            >
+              {LANG_TEXT_MAP.en}
+            </TextIcon>
+          </Menu.Item>
         </Menu>
       )
     }}
@@ -60,7 +71,13 @@ const SwitchLanguage = () => {
       }}
       dialog={{
         content: <LanguageSwitchContent />,
-        title: <Translate zh_hant="修改界面語言" zh_hans="修改介面语言" />,
+        title: (
+          <Translate
+            zh_hant="修改界面語言"
+            zh_hans="修改介面语言"
+            en="Language"
+          />
+        ),
       }}
     >
       {({ open, ref }) => (

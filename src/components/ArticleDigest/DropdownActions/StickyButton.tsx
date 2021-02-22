@@ -1,7 +1,13 @@
 import gql from 'graphql-tag'
 
-import { IconPin24, IconUnPin24, Menu, TextIcon, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
+import {
+  IconPin24,
+  IconUnPin24,
+  Menu,
+  TextIcon,
+  Translate,
+  useMutation,
+} from '~/components'
 import updateUserArticles from '~/components/GQL/updates/userArticles'
 
 import { StickyButtonArticle } from './__generated__/StickyButtonArticle'

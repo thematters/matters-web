@@ -2,7 +2,6 @@ import { useContext, useState } from 'react'
 
 import {
   Button,
-  LanguageContext,
   ReCaptchaContext,
   TextIcon,
   Translate,
@@ -11,12 +10,7 @@ import {
 } from '~/components'
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
 
-import {
-  ADD_TOAST,
-  SEND_CODE_COUNTDOWN,
-  VERIFICATION_CODE_TYPES,
-} from '~/common/enums'
-import { parseFormSubmitErrors } from '~/common/utils'
+import { SEND_CODE_COUNTDOWN, VERIFICATION_CODE_TYPES } from '~/common/enums'
 
 import styles from './styles.css'
 
@@ -46,7 +40,6 @@ export const VerificationSendCodeButton: React.FC<VerificationSendCodeButtonProp
   type,
   disabled,
 }) => {
-  const { lang } = useContext(LanguageContext)
   const { token, refreshToken } = useContext(ReCaptchaContext)
 
   const [send] = useMutation<SendVerificationCode>(SEND_CODE)
@@ -57,32 +50,15 @@ export const VerificationSendCodeButton: React.FC<VerificationSendCodeButtonProp
   })
 
   const sendCode = async () => {
-    try {
-      await send({
-        variables: { input: { email, type, token } },
-      })
+    await send({
+      variables: { input: { email, type, token } },
+    })
 
-      setCountdown({ timeLeft: SEND_CODE_COUNTDOWN })
-      setSent(true)
+    setCountdown({ timeLeft: SEND_CODE_COUNTDOWN })
+    setSent(true)
 
-      if (refreshToken) {
-        refreshToken()
-      }
-    } catch (error) {
-      const [messages, codes] = parseFormSubmitErrors(error, lang)
-
-      if (!messages[codes[0]]) {
-        return
-      }
-
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: messages[codes[0]],
-          },
-        })
-      )
+    if (refreshToken) {
+      refreshToken()
     }
   }
 

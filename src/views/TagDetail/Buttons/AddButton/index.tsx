@@ -8,13 +8,13 @@ import {
   Menu,
   TextIcon,
   Translate,
+  useMutation,
   ViewerContext,
 } from '~/components'
 import {
   SearchSelectDialog,
   SearchSelectNode,
 } from '~/components/Dialogs/SearchSelectDialog'
-import { useMutation } from '~/components/GQL'
 import ADD_ARTICLES_TAGS from '~/components/GQL/mutations/addArticlesTags'
 import updateTagArticlesCount from '~/components/GQL/updates/tagArticlesCount'
 
@@ -72,7 +72,7 @@ const BaseDropdownActions = ({
           ref={ref}
         >
           <TextIcon icon={<IconPen16 />} weight="md" size="md-s">
-            <Translate zh_hant="投稿" zh_hans="投稿" />
+            <Translate zh_hant="投稿" zh_hans="投稿" en="submit" />
           </TextIcon>
         </Button>
       )}

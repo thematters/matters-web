@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router'
 import { useContext, useEffect } from 'react'
 
 import {
@@ -6,16 +5,17 @@ import {
   Head,
   InfiniteScroll,
   List,
+  QueryError,
   Spinner,
   Translate,
   usePublicQuery,
   usePullToRefresh,
+  useRoute,
   ViewerContext,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 import { UserDigest } from '~/components/UserDigest'
 
-import { analytics, getQuery, mergeConnections } from '~/common/utils'
+import { analytics, mergeConnections } from '~/common/utils'
 
 import IMAGE_LOGO_192 from '@/public/static/icon-192x192.png?url'
 
@@ -26,8 +26,8 @@ import { UserFolloweePublic } from './__generated__/UserFolloweePublic'
 
 const UserFollowees = () => {
   const viewer = useContext(ViewerContext)
-  const router = useRouter()
-  const userName = getQuery({ router, key: 'userName' })
+  const { getQuery } = useRoute()
+  const userName = getQuery('name')
 
   /**
    * Data Fetching
@@ -102,12 +102,35 @@ const UserFollowees = () => {
   /**
    * Render
    */
-  if (loading || !data || !user) {
-    return <Spinner />
+  if (loading) {
+    return (
+      <>
+        <FollowerTabs />
+        <Spinner />
+      </>
+    )
   }
 
   if (error) {
-    return <QueryError error={error} />
+    return (
+      <>
+        <FollowerTabs />
+        <QueryError error={error} />
+      </>
+    )
+  }
+
+  if (!user || user?.status?.state === 'archived') {
+    return (
+      <>
+        <FollowerTabs />
+        <EmptyWarning
+          description={
+            <Translate zh_hant="還沒有追蹤任何人" zh_hans="还没有追踪任何人" />
+          }
+        />
+      </>
+    )
   }
 
   const CustomHead = () => (
@@ -115,6 +138,7 @@ const UserFollowees = () => {
       title={{
         zh_hant: `${user.displayName}追蹤的作者`,
         zh_hans: `${user.displayName}追踪的作者`,
+        en: `followed by ${user.displayName}`,
       }}
       description={user.info.description}
       image={user.info.profileCover || IMAGE_LOGO_192}
@@ -128,7 +152,11 @@ const UserFollowees = () => {
         <FollowerTabs />
         <EmptyWarning
           description={
-            <Translate zh_hant="還沒有追蹤任何人" zh_hans="还没有追踪任何人" />
+            <Translate
+              zh_hant="還沒有追蹤任何人"
+              zh_hans="还没有追踪任何人"
+              en="not following anyone"
+            />
           }
         />
       </>

@@ -64,11 +64,16 @@ const Appreciators = ({ article }: { article: AppreciatorsArticle }) => {
               <Translate
                 zh_hant={`${numAbbr(totalReceivedCount)} 贊賞`}
                 zh_hans={`${numAbbr(totalReceivedCount)} 赞赏`}
+                en={`${numAbbr(totalReceivedCount)} likes`}
               />
             </p>
           ) : (
             <p className="received-count">
-              <Translate zh_hant="還沒有讚賞" zh_hans="还没有赞赏" />
+              <Translate
+                zh_hant="還沒有讚賞"
+                zh_hans="还没有赞赏"
+                en="no likes yet"
+              />
             </p>
           )}
 

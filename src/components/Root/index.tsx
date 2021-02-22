@@ -1,7 +1,6 @@
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
 import dynamic from 'next/dynamic'
-import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 
 import {
@@ -10,16 +9,15 @@ import {
   FeaturesProvider,
   LanguageProvider,
   Layout,
+  QueryError,
   Toast,
   usePublicQuery,
+  useRoute,
   ViewerProvider,
   ViewerUser,
 } from '~/components'
 import PageViewTracker from '~/components/Analytics/PageViewTracker'
-import { QueryError } from '~/components/GQL'
 import SplashScreen from '~/components/SplashScreen'
-
-import { PATHS } from '~/common/enums'
 
 import { ROOT_QUERY_PRIVATE, ROOT_QUERY_PUBLIC } from './gql'
 
@@ -67,9 +65,9 @@ const Root = ({
   client: ApolloClient<InMemoryCache>
   children: React.ReactNode
 }) => {
-  const router = useRouter()
-  const isInAbout = router.pathname === PATHS.ABOUT
-  const isInMigration = router.pathname === PATHS.MIGRATION
+  const { isInPath } = useRoute()
+  const isInAbout = isInPath('ABOUT')
+  const isInMigration = isInPath('MIGRATION')
   const shouldApplyLayout = !isInAbout && !isInMigration
 
   // anonymous

@@ -62,7 +62,13 @@ const WalletSettings = () => {
       />
 
       <Form.List.Item
-        title={<Translate zh_hant="我的創作價值" zh_hans="我的创作价值" />}
+        title={
+          <Translate
+            zh_hant="我的創作價值"
+            zh_hans="我的创作价值"
+            en="Rewards"
+          />
+        }
         htmlHref={
           shouldReAuth
             ? `${process.env.NEXT_PUBLIC_OAUTH_URL}/likecoin`
@@ -78,6 +84,7 @@ const WalletSettings = () => {
             <Translate
               zh_hant="重新綁定 Liker ID 后即可管理創作收益"
               zh_hans="重新绑定 Liker ID 后即可管理创作收益"
+              en="Connect Liker ID to manage your rewards"
             />
           ) : likerId ? (
             `${numRound(liker?.total || 0)} LikeCoin`
@@ -85,6 +92,7 @@ const WalletSettings = () => {
             <Translate
               zh_hant="完成設置 Liker ID 後即可管理創作收益"
               zh_hans="完成设置 Liker ID 后即可管理创作收益"
+              en="Set Liker ID to manage your rewards"
             />
           )
         }

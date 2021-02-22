@@ -10,12 +10,12 @@ import {
   EmptyFollowingTag,
   InfiniteScroll,
   List,
+  QueryError,
   Spinner,
   Tag,
   TextIcon,
   Translate,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 
 import { analytics, mergeConnections } from '~/common/utils'
 
@@ -167,7 +167,7 @@ const TagsArticles = ({ tagIds }: { tagIds: string[] }) => {
         />
 
         <TextIcon size="sm" color="grey-dark">
-          <Translate zh_hant="新增了" zh_hans="新增了" />
+          <Translate zh_hant="新增了" zh_hans="新增了" en="Created" />
         </TextIcon>
         <style jsx>{styles}</style>
       </section>

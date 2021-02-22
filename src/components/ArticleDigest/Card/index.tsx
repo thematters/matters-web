@@ -16,7 +16,7 @@ import styles from './styles.css'
 
 import { ArticleDigestCardArticle } from './__generated__/ArticleDigestCardArticle'
 
-interface ArticleDigestCardProps {
+export interface ArticleDigestCardProps {
   article: ArticleDigestCardArticle
 
   onClick?: () => any

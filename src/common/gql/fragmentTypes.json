@@ -9,6 +9,7 @@
           { "name": "User" },
           { "name": "Comment" },
           { "name": "Tag" },
+          { "name": "Circle" },
           { "name": "Draft" }
         ]
       },
@@ -21,6 +22,8 @@
           { "name": "FolloweeDonatedArticleConnection" },
           { "name": "TagConnection" },
           { "name": "UserConnection" },
+          { "name": "CircleConnection" },
+          { "name": "MemberConnection" },
           { "name": "DraftConnection" },
           { "name": "ReadHistoryConnection" },
           { "name": "RecentSearchConnection" },

@@ -28,9 +28,9 @@ const TranslationButton: FC<{
         key={translate + ''}
       >
         {translate ? (
-          <Translate zh_hant="原文" zh_hans="原文" />
+          <Translate zh_hant="原文" zh_hans="原文" en="Original" />
         ) : (
-          <Translate zh_hant="翻譯" zh_hans="翻译" />
+          <Translate zh_hant="翻譯" zh_hans="翻译" en="Translation" />
         )}
       </TextIcon>
     </Button>

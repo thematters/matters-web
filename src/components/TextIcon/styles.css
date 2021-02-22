@@ -28,6 +28,12 @@
   }
 }
 
+.size-sm-s {
+  & .text {
+    font-size: var(--font-size-sm-s);
+  }
+}
+
 .size-md {
   & .text {
     font-size: var(--font-size-md);

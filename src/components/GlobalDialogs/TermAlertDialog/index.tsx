@@ -5,16 +5,15 @@ import { useContext, useState } from 'react'
 
 import {
   Dialog,
-  LanguageContext,
   Term,
   Translate,
+  useMutation,
   ViewerContext,
 } from '~/components'
-import { useMutation } from '~/components/GQL'
 import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
 
 import { ADD_TOAST, STORAGE_KEY_AUTH_TOKEN } from '~/common/enums'
-import { parseFormSubmitErrors, storage, unsubscribePush } from '~/common/utils'
+import { storage, unsubscribePush } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -37,35 +36,20 @@ const UPDATE_AGREE_ON = gql`
 `
 
 const TermContent: React.FC<TermContentProps> = ({ closeDialog }) => {
-  const [logout] = useMutation<UserLogout>(USER_LOGOUT)
+  const [logout] = useMutation<UserLogout>(USER_LOGOUT, undefined, {
+    showToast: false,
+  })
   const [update] = useMutation<UpdateUserInfoAgreeOn>(UPDATE_AGREE_ON)
-  const { lang } = useContext(LanguageContext)
 
   const { handleSubmit, isSubmitting } = useFormik({
     initialValues: {},
     onSubmit: async (values, { setSubmitting, setFieldError }) => {
       try {
         await update({ variables: { input: { agreeOn: true } } })
-
         setSubmitting(false)
         closeDialog()
       } catch (error) {
         setSubmitting(false)
-
-        const [messages, codes] = parseFormSubmitErrors(error, lang)
-
-        if (!messages[codes[0]]) {
-          return
-        }
-
-        window.dispatchEvent(
-          new CustomEvent(ADD_TOAST, {
-            detail: {
-              color: 'red',
-              content: messages[codes[0]],
-            },
-          })
-        )
       }
     },
   })
@@ -108,6 +92,7 @@ const TermContent: React.FC<TermContentProps> = ({ closeDialog }) => {
           <Translate
             zh_hant="我們的用戶協議和隱私政策發生了更改，請閱讀並同意後繼續使用。"
             zh_hans="我们的用户协议和隐私政策发生了更改，请阅读并同意后继续使用。"
+            en="Our user agreement and privacy policy has changed, please read and agree to it before continue usage"
           />
         </p>
 

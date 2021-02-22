@@ -2,8 +2,10 @@ import MeAppreciationsReceived from '~/views/Me/AppreciationsReceived'
 
 import { Protected } from '~/components'
 
-export default () => (
+const ProtectedMeAppreciationsReceived = () => (
   <Protected>
     <MeAppreciationsReceived />
   </Protected>
 )
+
+export default ProtectedMeAppreciationsReceived

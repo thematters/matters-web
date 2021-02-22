@@ -1,12 +1,13 @@
-import { useRouter } from 'next/router'
-import { useState } from 'react'
-
-import { Dialog, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
+import {
+  Dialog,
+  Translate,
+  useDialogSwitch,
+  useMutation,
+  useRoute,
+} from '~/components'
 import UPDATE_TAG_SETTING from '~/components/GQL/mutations/updateTagSetting'
 
 import { ADD_TOAST } from '~/common/enums'
-import { getQuery } from '~/common/utils'
 
 import { UpdateTagSetting } from '~/components/GQL/mutations/__generated__/UpdateTagSetting'
 
@@ -24,13 +25,16 @@ const textZhHans =
   '你将可以为标签设置封面，编辑描述，并添加作品至精选列表。' +
   '你主理的标签可以用作文集、策展，也可以变成圈子、小组、讨论区等，更多主理人玩法等你发掘！'
 
-const BaseDialog = ({ children }: Props) => {
-  const [showDialog, setShowDialog] = useState(true)
-  const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
+const textEn =
+  'After adopting the tag, you become the maintainer of it.' +
+  ' You can set the cover and description of the tag, and add works to selected feed. ' +
+  ' You can use it for writing collection, curation, or subcommunity and group discussions, be creative and discover new usages!'
 
-  const router = useRouter()
-  const id = getQuery({ router, key: 'tagId' })
+const BaseDialog = ({ children }: Props) => {
+  const { show, open, close } = useDialogSwitch(true)
+
+  const { getQuery } = useRoute()
+  const id = getQuery('tagId')
   const [update, { loading }] = useMutation<UpdateTagSetting>(
     UPDATE_TAG_SETTING
   )
@@ -39,15 +43,17 @@ const BaseDialog = ({ children }: Props) => {
     <>
       {children({ open })}
 
-      <Dialog size="sm" isOpen={showDialog} onDismiss={close}>
+      <Dialog size="sm" isOpen={show} onDismiss={close}>
         <Dialog.Header
-          title={<Translate zh_hant="認領標籤" zh_hans="认领标签" />}
+          title={
+            <Translate zh_hant="認領標籤" zh_hans="认领标签" en="adopt tag" />
+          }
           close={close}
           closeTextId="cancel"
         />
         <Dialog.Message>
           <p>
-            <Translate zh_hant={textZhHant} zh_hans={textZhHans} />
+            <Translate zh_hant={textZhHant} zh_hans={textZhHans} en={textEn} />
           </p>
         </Dialog.Message>
         <Dialog.Footer>
@@ -56,32 +62,32 @@ const BaseDialog = ({ children }: Props) => {
             bgColor="green"
             loading={loading}
             onClick={async () => {
-              try {
-                const result = await update({
-                  variables: { input: { id, type: 'adopt' } },
-                })
+              const result = await update({
+                variables: { input: { id, type: 'adopt' } },
+              })
 
-                if (!result) {
-                  throw new Error('tag adoption failed')
-                }
-
-                window.dispatchEvent(
-                  new CustomEvent(ADD_TOAST, {
-                    detail: {
-                      color: 'green',
-                      content: (
-                        <Translate zh_hant="認領成功" zh_hans="认领成功" />
-                      ),
-                      duration: 2000,
-                    },
-                  })
-                )
-              } catch (error) {
-                throw error
+              if (!result) {
+                throw new Error('tag adoption failed')
               }
+
+              window.dispatchEvent(
+                new CustomEvent(ADD_TOAST, {
+                  detail: {
+                    color: 'green',
+                    content: (
+                      <Translate zh_hant="認領成功" zh_hans="认领成功" />
+                    ),
+                    duration: 2000,
+                  },
+                })
+              )
             }}
           >
-            <Translate zh_hant="即刻主理" zh_hans="即刻主理" />
+            <Translate
+              zh_hant="即刻主理"
+              zh_hans="即刻主理"
+              en="maintain at once"
+            />
           </Dialog.Footer.Button>
 
           <Dialog.Footer.Button
@@ -89,7 +95,11 @@ const BaseDialog = ({ children }: Props) => {
             bgColor="grey-lighter"
             onClick={close}
           >
-            <Translate zh_hant="考慮一下" zh_hans="考虑一下" />
+            <Translate
+              zh_hant="考慮一下"
+              zh_hans="考虑一下"
+              en="I need to think it through"
+            />
           </Dialog.Footer.Button>
         </Dialog.Footer>
       </Dialog>

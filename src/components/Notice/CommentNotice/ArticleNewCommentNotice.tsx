@@ -22,7 +22,10 @@ const ArticleNewCommentNotice = ({ notice }: { notice: NoticeType }) => {
 
   const actorsCount = notice.actors.length
   const isMultiActors = actorsCount > 1
-  const commentArticle = notice.comment?.article
+  const commentArticle =
+    notice.comment?.node.__typename === 'Article'
+      ? notice.comment.node
+      : undefined
 
   return (
     <section className="container">
@@ -46,9 +49,10 @@ const ArticleNewCommentNotice = ({ notice }: { notice: NoticeType }) => {
             <Translate
               zh_hant={`等 ${numAbbr(actorsCount)} 人`}
               zh_hans={`等 ${numAbbr(actorsCount)} 人`}
+              en={`etc. ${numAbbr(actorsCount)} users `}
             />
           )}
-          <Translate zh_hant="評論了" zh_hans="评论了" />{' '}
+          <Translate zh_hant="評論了" zh_hans="评论了" en="commented" />{' '}
         </NoticeHead>
 
         {commentArticle && <NoticeArticle article={commentArticle} isBlock />}
@@ -80,8 +84,10 @@ ArticleNewCommentNotice.fragments = {
       }
       comment: target {
         ...NoticeComment
-        article {
-          ...NoticeArticle
+        node {
+          ... on Article {
+            ...NoticeArticle
+          }
         }
       }
     }

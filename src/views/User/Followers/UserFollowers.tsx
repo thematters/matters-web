@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router'
 import { useContext, useEffect } from 'react'
 
 import {
@@ -6,16 +5,17 @@ import {
   Head,
   InfiniteScroll,
   List,
+  QueryError,
   Spinner,
   Translate,
   usePublicQuery,
   usePullToRefresh,
+  useRoute,
   ViewerContext,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 import { UserDigest } from '~/components/UserDigest'
 
-import { analytics, getQuery, mergeConnections } from '~/common/utils'
+import { analytics, mergeConnections } from '~/common/utils'
 
 import IMAGE_LOGO_192 from '@/public/static/icon-192x192.png?url'
 
@@ -26,8 +26,8 @@ import { UserFollowerPublic } from './__generated__/UserFollowerPublic'
 
 const UserFollowers = () => {
   const viewer = useContext(ViewerContext)
-  const router = useRouter()
-  const userName = getQuery({ router, key: 'userName' })
+  const { getQuery } = useRoute()
+  const userName = getQuery('name')
 
   /**
    * Data Fetching
@@ -102,13 +102,35 @@ const UserFollowers = () => {
   /**
    * Render
    */
-
-  if (loading || !data || !user) {
-    return <Spinner />
+  if (loading) {
+    return (
+      <>
+        <FollowerTabs />
+        <Spinner />
+      </>
+    )
   }
 
   if (error) {
-    return <QueryError error={error} />
+    return (
+      <>
+        <FollowerTabs />
+        <QueryError error={error} />
+      </>
+    )
+  }
+
+  if (!user || user?.status?.state === 'archived') {
+    return (
+      <>
+        <FollowerTabs />
+        <EmptyWarning
+          description={
+            <Translate zh_hant="還沒有追蹤者" zh_hans="还没有追踪者" />
+          }
+        />
+      </>
+    )
   }
 
   const CustomHead = () => (
@@ -116,6 +138,7 @@ const UserFollowers = () => {
       title={{
         zh_hant: `${user.displayName}的追蹤者`,
         zh_hans: `${user.displayName}的追踪者`,
+        en: `followers of ${user.displayName}`,
       }}
       description={user.info.description}
       image={user.info.profileCover || IMAGE_LOGO_192}
@@ -131,7 +154,11 @@ const UserFollowers = () => {
 
         <EmptyWarning
           description={
-            <Translate zh_hant="還沒有追蹤者" zh_hans="还没有追踪者" />
+            <Translate
+              zh_hant="還沒有追蹤者"
+              zh_hans="还没有追踪者"
+              en="no followers yet"
+            />
           }
         />
       </>

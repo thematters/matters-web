@@ -1,8 +1,13 @@
 import VisuallyHidden from '@reach/visually-hidden'
 import classNames from 'classnames'
 
-import { IconCamera16, IconSpinner16, TextIcon, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
+import {
+  IconCamera16,
+  IconSpinner16,
+  TextIcon,
+  Translate,
+  useMutation,
+} from '~/components'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 
 import {
@@ -35,7 +40,11 @@ const Uploader: React.FC<UploaderProps> = ({
   setSelected,
   refetchAssets,
 }) => {
-  const [upload, { loading }] = useMutation<SingleFileUpload>(UPLOAD_FILE)
+  const [upload, { loading }] = useMutation<SingleFileUpload>(
+    UPLOAD_FILE,
+    undefined,
+    { showToast: false }
+  )
 
   const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
   const fieldId = 'editor-cover-upload-form'
@@ -59,6 +68,7 @@ const Uploader: React.FC<UploaderProps> = ({
               <Translate
                 zh_hant="上傳檔案超過 5 MB"
                 zh_hans="上传文件超过 5 MB"
+                en="upload file exceeds 5 MB"
               />
             ),
           },
@@ -131,6 +141,7 @@ const Uploader: React.FC<UploaderProps> = ({
           <Translate
             zh_hant="上傳一張圖片用作封面，建議尺寸：1600 x 900 像素"
             zh_hans="上传一张图片用作封面，建议尺寸：1600 x 900 像素"
+            en="Upload an image as cover, suggest size: 1600 x 900 pixels"
           />
         </p>
 

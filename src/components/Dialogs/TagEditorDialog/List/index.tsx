@@ -3,12 +3,12 @@ import { useQuery } from '@apollo/react-hooks'
 import {
   Button,
   Dialog,
+  QueryError,
   Spinner,
   TextIcon,
   Translate,
   UserDigest,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 import TAG_MAINTAINERS from '~/components/GQL/queries/tagMaintainers'
 
 import styles from './styles.css'
@@ -41,16 +41,16 @@ interface Props {
   toRemoveStep: (editor: TagEditor) => void
 }
 
-const RemoveButton = ({ remove }: { remove: (editor: string) => void }) => (
+const RemoveButton = ({ remove }: { remove: () => void }) => (
   <section>
     <Button
       spacing={[0, 'xtight']}
       size={[null, '1.25rem']}
       bgColor="grey-lighter"
-      onClick={remove}
+      onClick={() => remove()}
     >
       <TextIcon size="xs" color="grey-dark" weight="md">
-        <Translate zh_hant="移除" zh_hans="移除" />
+        <Translate zh_hant="移除" zh_hans="移除" en="remove" />
       </TextIcon>
     </Button>
     <style jsx>{styles}</style>
@@ -99,7 +99,7 @@ const TagEditorList = ({ id, close, toAddStep, toRemoveStep }: Props) => {
               user={tag.owner}
               hasDescriptionReplacement
               descriptionReplacement={
-                <Translate zh_hant="主理人" zh_hans="主理人" />
+                <Translate zh_hant="主理人" zh_hans="主理人" en="maintainer" />
               }
               spacing={['tight', 'base']}
             />
@@ -117,7 +117,11 @@ const TagEditorList = ({ id, close, toAddStep, toRemoveStep }: Props) => {
                     hasDescriptionReplacement
                     hasFollow={false}
                     descriptionReplacement={
-                      <Translate zh_hant="協作者" zh_hans="协作者" />
+                      <Translate
+                        zh_hant="協作者"
+                        zh_hans="协作者"
+                        en="collaborator"
+                      />
                     }
                     extraButton={
                       <RemoveButton remove={() => toRemoveStep(editor)} />
@@ -137,6 +141,7 @@ const TagEditorList = ({ id, close, toAddStep, toRemoveStep }: Props) => {
             <Translate
               zh_hant="協作者可以與你共同管理精選"
               zh_hans="协作者可以与你共同管理精选"
+              en="collaborator can manage selected feed with you"
             />
             <br />
             {(isHavingNoneEditors || isReachingLimit) && (
@@ -144,17 +149,26 @@ const TagEditorList = ({ id, close, toAddStep, toRemoveStep }: Props) => {
                 <Translate
                   zh_hant="每個標籤最多添加"
                   zh_hans="每个标签最多添加"
+                  en="every tag can have maximum"
                 />
                 <span className="count">{' 4 '}</span>
               </>
             )}
             {isAllowAdd && isHavingEditors && (
               <>
-                <Translate zh_hant="你還可以添加" zh_hans="你还可以添加" />
+                <Translate
+                  zh_hant="你還可以添加"
+                  zh_hans="你还可以添加"
+                  en="you can still add"
+                />
                 <span className="count"> {4 - count} </span>
               </>
             )}
-            <Translate zh_hant="名協作者" zh_hans="名协作者" />
+            <Translate
+              zh_hant="名協作者"
+              zh_hans="名协作者"
+              en="collaborators"
+            />
           </p>
         </Dialog.Message>
       </Dialog.Content>
@@ -166,7 +180,11 @@ const TagEditorList = ({ id, close, toAddStep, toRemoveStep }: Props) => {
             bgColor="green"
             onClick={toAddStep}
           >
-            <Translate zh_hant="新增協作者" zh_hans="新增协作者" />
+            <Translate
+              zh_hant="新增協作者"
+              zh_hans="新增协作者"
+              en="add collaborator"
+            />
           </Dialog.Footer.Button>
         </Dialog.Footer>
       )}

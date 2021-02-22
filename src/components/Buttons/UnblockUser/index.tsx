@@ -1,8 +1,7 @@
 import gql from 'graphql-tag'
 import _isNil from 'lodash/isNil'
 
-import { Button, TextIcon, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
+import { Button, TextIcon, Translate, useMutation } from '~/components'
 import TOGGLE_BLOCK_USER from '~/components/GQL/mutations/toggleBlockUser'
 
 import { ADD_TOAST } from '~/common/enums'

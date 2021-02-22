@@ -3,13 +3,13 @@ import { useQuery } from '@apollo/react-hooks'
 import {
   Button,
   IconSettings24,
+  QueryError,
   Spinner,
   TagEditorDialog,
   TextIcon,
   Translate,
   UserDigest,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 import TAG_MAINTAINERS from '~/components/GQL/queries/tagMaintainers'
 
 import styles from '../styles.css'
@@ -35,7 +35,7 @@ const ManageButton = () => {
           onClick={open}
         >
           <TextIcon icon={<IconSettings24 />} weight="md" size={'xs'}>
-            <Translate zh_hant="管理" zh_hans="管理" />
+            <Translate zh_hant="管理" zh_hans="管理" en="manage" />
           </TextIcon>
         </Button>
       )}
@@ -72,7 +72,7 @@ const Maintainers = ({ id, isOwner }: Props) => {
         <>
           <section className="category">
             <section>
-              <Translate zh_hant="主理人" zh_hans="主理人" />
+              <Translate zh_hant="主理人" zh_hans="主理人" en="maintainer" />
             </section>
             {isOwner && (
               <section>
@@ -94,7 +94,7 @@ const Maintainers = ({ id, isOwner }: Props) => {
         <>
           <section className="category">
             <section>
-              <Translate zh_hant="協作者" zh_hans="協作者" />
+              <Translate zh_hant="協作者" zh_hans="協作者" en="collaborators" />
               <span className="count">({editors.length})</span>
             </section>
           </section>

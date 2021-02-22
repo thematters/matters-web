@@ -74,7 +74,7 @@ const Content = ({
     >
       <p>
         <Translate id="putComment" />
-        <Translate zh_hant="…" zh_hans="…" />
+        <Translate zh_hant="…" zh_hans="…" en="…" />
         <style jsx>{styles}</style>
       </p>
     </Card>
@@ -189,7 +189,11 @@ const CommentBar = ({ article }: CommentBarProps) => {
   }
 
   return (
-    <CommentFormDialog articleId={article.id} submitCallback={refetchResponses}>
+    <CommentFormDialog
+      articleId={article.id}
+      type="article"
+      submitCallback={refetchResponses}
+    >
       {({ open }) => <Content {...props} aria-haspopup="true" onClick={open} />}
     </CommentFormDialog>
   )

@@ -13,14 +13,26 @@ type ROUTE_KEY =
   | 'FOLLOW'
   | 'AUTHORS'
   | 'SEARCH'
+  // Tag
   | 'TAGS'
   | 'TAG_DETAIL'
+  // Article
+  | 'ARTICLE_DETAIL'
+  // User
   | 'USER_ARTICLES'
+  | 'USER_SUBSCRIPTIONS'
   | 'USER_COMMENTS'
   | 'USER_TAGS'
   | 'USER_FOLLOWERS'
   | 'USER_FOLLOWEES'
-  | 'ARTICLE_DETAIL'
+  // Circle
+  | 'CIRCLE_DETAIL'
+  | 'CIRCLE_SETTINGS'
+  | 'CIRCLE_SETTINGS_EDIT_PROFILE'
+  | 'CIRCLE_CREATION'
+  | 'CIRCLE_FOLLOWERS'
+  | 'CIRCLE_MEMBERS'
+  // Me
   | 'ME_DRAFTS'
   | 'ME_BOOKMARKS'
   | 'ME_HISTORY'
@@ -36,21 +48,24 @@ type ROUTE_KEY =
   | 'ME_SETTINGS_NOTIFICATION'
   | 'ME_SETTINGS_BLOCKED'
   | 'ME_DRAFT_DETAIL'
-  | 'RECOMMENDATION'
+  // Form
   | 'LOGIN'
   | 'SIGNUP'
   | 'FORGET'
+  // OAuth
   | 'OAUTH_AUTHORIZE'
   | 'OAUTH_CALLBACK_SUCCESS'
   | 'OAUTH_CALLBACK_FAILURE'
+  | 'PAY_CALLBACK_SUCCESS'
+  | 'PAY_CALLBACK_FAILURE'
+  // Misc
   | 'HELP'
   | 'MIGRATION'
   | 'ABOUT'
   | 'GUIDE'
   | 'COMMUNITY'
   | 'TOS'
-  | 'PAY_CALLBACK_SUCCESS'
-  | 'PAY_CALLBACK_FAILURE'
+  | 'RECOMMENDATION'
 
 export const ROUTES: {
   key: ROUTE_KEY
@@ -73,14 +88,26 @@ export const ROUTES: {
   { key: 'TAG_DETAIL', pathname: '/tags/[tagId]' },
 
   // User
-  { key: 'USER_ARTICLES', pathname: '/[userName]' },
-  { key: 'USER_COMMENTS', pathname: '/[userName]/comments' },
-  { key: 'USER_TAGS', pathname: '/[userName]/tags' },
-  { key: 'USER_FOLLOWERS', pathname: '/[userName]/followers' },
-  { key: 'USER_FOLLOWEES', pathname: '/[userName]/followees' },
+  { key: 'USER_ARTICLES', pathname: '/[name]' },
+  { key: 'USER_SUBSCRIPTIONS', pathname: '/[name]/subscriptions' },
+  { key: 'USER_COMMENTS', pathname: '/[name]/comments' },
+  { key: 'USER_TAGS', pathname: '/[name]/tags' },
+  { key: 'USER_FOLLOWERS', pathname: '/[name]/followers' },
+  { key: 'USER_FOLLOWEES', pathname: '/[name]/followees' },
 
   // Article
-  { key: 'ARTICLE_DETAIL', pathname: '/[userName]/[mediaHash]' },
+  { key: 'ARTICLE_DETAIL', pathname: '/[name]/[mediaHash]' },
+
+  // Circle
+  { key: 'CIRCLE_DETAIL', pathname: '/[name]' },
+  { key: 'CIRCLE_SETTINGS', pathname: '/[name]/settings' },
+  {
+    key: 'CIRCLE_SETTINGS_EDIT_PROFILE',
+    pathname: '/[name]/settings/edit-profile',
+  },
+  { key: 'CIRCLE_FOLLOWERS', pathname: '/[name]/followers' },
+  { key: 'CIRCLE_MEMBERS', pathname: '/[name]/members' },
+  { key: 'CIRCLE_CREATION', pathname: '/circles/create' },
 
   // Auth
   { key: 'LOGIN', pathname: '/login' },

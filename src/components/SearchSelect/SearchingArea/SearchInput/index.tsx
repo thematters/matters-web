@@ -30,16 +30,19 @@ const SearchInput: React.FC<SearchInputProps> = ({
     Article: translate({
       zh_hant: '搜尋作品標題…',
       zh_hans: '搜索作品标题…',
+      en: 'Search articles...',
       lang,
     }),
     Tag: translate({
       zh_hant: '搜尋標籤…',
       zh_hans: '搜索标签…',
+      en: 'Search tags...',
       lang,
     }),
     User: translate({
       zh_hant: '搜尋作者…',
       zh_hans: '搜索作者…',
+      en: 'Search authors...',
       lang,
     }),
   }

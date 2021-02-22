@@ -21,6 +21,7 @@ const ArticlePublishedNotice = ({ notice }: { notice: NoticeType }) => {
           <Translate
             zh_hant="你的作品已發布到分佈式網絡"
             zh_hans="你的作品已发布到分布式网络"
+            en="Your work has been published to decentralized network"
           />
         </NoticeHead>
 

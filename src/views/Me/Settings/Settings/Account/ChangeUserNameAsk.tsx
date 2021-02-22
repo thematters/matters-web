@@ -1,6 +1,4 @@
-import { useState } from 'react'
-
-import { Dialog, Translate } from '~/components'
+import { Dialog, Translate, useDialogSwitch } from '~/components'
 
 import { PATHS } from '~/common/enums'
 
@@ -9,15 +7,13 @@ interface AskProps {
 }
 
 const Ask = ({ children }: AskProps) => {
-  const [showDialog, setShowDialog] = useState(false)
-  const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
+  const { show, open, close } = useDialogSwitch(false)
 
   return (
     <>
       {children({ open })}
 
-      <Dialog isOpen={showDialog} onDismiss={close} size="sm">
+      <Dialog isOpen={show} onDismiss={close} size="sm">
         <Dialog.Header title="changeUserName" close={close} mode="inner" />
 
         <Dialog.Message>
@@ -25,6 +21,7 @@ const Ask = ({ children }: AskProps) => {
             <Translate
               zh_hant="您的 Matters ID 僅能永久修改一次，確定要繼續嗎？"
               zh_hans="您的 Matters ID 仅能永久修改一次，确定要继续吗？"
+              en="Your Matters ID can only be changed once. Proceed?"
             />
           </p>
         </Dialog.Message>

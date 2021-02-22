@@ -8,9 +8,17 @@ interface ArticleProps {
 }
 
 const Article = ({ settings, toggle }: ArticleProps) => (
-  <Form.List groupName={<Translate zh_hant="作品" zh_hans="作品" />}>
+  <Form.List
+    groupName={<Translate zh_hant="作品" zh_hans="作品" en="articles" />}
+  >
     <Form.List.Item
-      title={<Translate zh_hant="作品被贊賞" zh_hans="作品被赞赏" />}
+      title={
+        <Translate
+          zh_hant="作品被贊賞"
+          zh_hans="作品被赞赏"
+          en="article liked"
+        />
+      }
       right={
         <Switch
           checked={settings.appreciation}
@@ -19,7 +27,13 @@ const Article = ({ settings, toggle }: ArticleProps) => (
       }
     />
     <Form.List.Item
-      title={<Translate zh_hant="作品被收藏" zh_hans="作品被收藏" />}
+      title={
+        <Translate
+          zh_hant="作品被收藏"
+          zh_hans="作品被收藏"
+          en="article subscribed"
+        />
+      }
       right={
         <Switch
           checked={settings.articleSubscription}
@@ -29,7 +43,11 @@ const Article = ({ settings, toggle }: ArticleProps) => (
     />
     <Form.List.Item
       title={
-        <Translate zh_hant="收藏的作品有新評論" zh_hans="收藏的作品有新评论" />
+        <Translate
+          zh_hant="收藏的作品有新評論"
+          zh_hans="收藏的作品有新评论"
+          en="new comment on subscribed article"
+        />
       }
       right={
         <Switch

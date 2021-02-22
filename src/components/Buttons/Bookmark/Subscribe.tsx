@@ -6,9 +6,9 @@ import {
   IconBookmark16,
   IconSize,
   Translate,
+  useMutation,
   ViewerContext,
 } from '~/components'
-import { useMutation } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
 import { ADD_TOAST } from '~/common/enums'
@@ -23,7 +23,7 @@ interface SubscribeProps {
   articleId?: string
   size?: Extract<IconSize, 'md-s'>
   disabled?: boolean
-  inCard: boolean
+  inCard?: boolean
 }
 
 const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
@@ -75,7 +75,7 @@ const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
           color: 'green',
           content: <Translate id="pushDescription" />,
           customButton: (
-            <Button onClick={subscribePush}>
+            <Button onClick={() => subscribePush()}>
               <Translate id="confirmPush" />
             </Button>
           ),
