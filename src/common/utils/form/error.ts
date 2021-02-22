@@ -18,6 +18,7 @@ export const parseFormSubmitErrors = (
     messages[code] = translate({
       zh_hant: TEXT.zh_hant[code] || TEXT.zh_hant.UNKNOWN_ERROR,
       zh_hans: TEXT.zh_hans[code] || TEXT.zh_hans.UNKNOWN_ERROR,
+      en: TEXT.en[code] || TEXT.en.UNKNOWN_ERROR,
       lang,
     })
   })
