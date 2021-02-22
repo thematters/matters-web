@@ -1,4 +1,4 @@
-import { Avatar, IconSupport, IconWallet24 } from '~/components'
+import { Avatar, IconCircle24, IconSupport, IconWallet24 } from '~/components'
 
 import styles from './styles.css'
 
@@ -25,6 +25,7 @@ import {
 
 interface ActionProps {
   isSender?: boolean
+  isSubscription?: boolean
   isWalletAction?: boolean
   sender?: Sender | null
   recipient?: Recipient | null
@@ -32,10 +33,20 @@ interface ActionProps {
 
 const Action = ({
   isSender,
+  isSubscription,
   isWalletAction,
   sender,
   recipient,
 }: ActionProps) => {
+  if (isSubscription) {
+    return (
+      <section className="circle">
+        <IconCircle24 size="md" color="green" />
+        <style jsx>{styles}</style>
+      </section>
+    )
+  }
+
   if (isWalletAction) {
     return (
       <section className="wallet">

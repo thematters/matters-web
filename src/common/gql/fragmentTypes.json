@@ -54,7 +54,11 @@
       {
         "kind": "UNION",
         "name": "TransactionTarget",
-        "possibleTypes": [{ "name": "Article" }, { "name": "Transaction" }]
+        "possibleTypes": [
+          { "name": "Article" },
+          { "name": "Circle" },
+          { "name": "Transaction" }
+        ]
       },
       {
         "kind": "UNION",
