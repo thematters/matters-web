@@ -106,6 +106,7 @@ const DraftDetail = () => {
     title?: string | null
     content?: string | null
     cover?: string | null
+    summary?: string | null
   }) => {
     try {
       if (draft?.publishState === 'published') {
@@ -139,6 +140,7 @@ const DraftDetail = () => {
         title={{
           zh_hant: `[草稿] ${draft.title}`,
           zh_hans: `[草稿] ${draft.title}`,
+          en: `[draft] ${draft.title}`,
         }}
       />
 

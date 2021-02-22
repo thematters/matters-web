@@ -38,19 +38,29 @@ const TagRemoveEditor = ({ id, editor, close }: Props) => {
   return (
     <>
       <Dialog.Header
-        title={<Translate zh_hant="確定移除協作者" zh_hans="确定移除协作者" />}
+        title={
+          <Translate
+            zh_hant="確定移除協作者"
+            zh_hans="确定移除协作者"
+            en="confirm collaborator removal"
+          />
+        }
         close={close}
         closeTextId="cancel"
       />
 
       <Dialog.Message>
         <p>
-          <Translate zh_hant="移除後" zh_hans="移除后" />
-          {'， '}
+          <Translate
+            zh_hant="移除後， "
+            zh_hans="移除后， "
+            en="After removal, "
+          />
           <span className="name">{editor.displayName}</span>{' '}
           <Translate
             zh_hant="將無法繼續參與「精選」作品管理。"
             zh_hans="将无法继续参与「精选」作品管理。"
+            en="will not be able to manage selected feed."
           />
         </p>
       </Dialog.Message>
@@ -86,6 +96,7 @@ const TagRemoveEditor = ({ id, editor, close }: Props) => {
                     <Translate
                       zh_hant="移除協作者成功"
                       zh_hans="移除协作者成功"
+                      en="collaborator removal success"
                     />
                   ),
                   duration: 2000,
@@ -96,7 +107,11 @@ const TagRemoveEditor = ({ id, editor, close }: Props) => {
             close()
           }}
         >
-          <Translate zh_hant="確認移除" zh_hans="确认移除" />
+          <Translate
+            zh_hant="確認移除"
+            zh_hans="确认移除"
+            en="confirm removal"
+          />
         </Dialog.Footer.Button>
 
         <Dialog.Footer.Button
@@ -104,7 +119,7 @@ const TagRemoveEditor = ({ id, editor, close }: Props) => {
           bgColor="grey-lighter"
           onClick={close}
         >
-          <Translate zh_hant="取消" zh_hans="取消" />
+          <Translate zh_hant="取消" zh_hans="取消" en="cancel" />
         </Dialog.Footer.Button>
       </Dialog.Footer>
       <style jsx>{styles}</style>

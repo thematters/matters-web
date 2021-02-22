@@ -69,6 +69,7 @@ export const LanguageProvider = ({
                       <Translate
                         zh_hant="介面語言已修改"
                         zh_hans="界面语言已修改"
+                        en="Language changed"
                       />
                     ),
                   },

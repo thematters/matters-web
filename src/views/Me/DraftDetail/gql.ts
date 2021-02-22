@@ -77,8 +77,15 @@ export const DRAFT_ASSETS = gql`
  * Editing draft content, cover, tags & collection
  */
 export const SET_CONTENT = gql`
-  mutation SetDraftContent($id: ID!, $title: String, $content: String) {
-    putDraft(input: { id: $id, title: $title, content: $content }) {
+  mutation SetDraftContent(
+    $id: ID!
+    $title: String
+    $content: String
+    $summary: String
+  ) {
+    putDraft(
+      input: { id: $id, title: $title, content: $content, summary: $summary }
+    ) {
       id
       title
       content
@@ -86,6 +93,7 @@ export const SET_CONTENT = gql`
       assets {
         ...Asset
       }
+      summary
     }
   }
   ${assetFragment}

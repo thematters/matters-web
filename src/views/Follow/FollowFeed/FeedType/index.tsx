@@ -28,7 +28,7 @@ const FeedType: React.FC<FeedTypeProps> = ({ type, setFeedType }) => {
       </Tabs.Tab>
 
       <Tabs.Tab onClick={() => setFeedType('donation')} selected={isDonation}>
-        <Translate zh_hant="支持" zh_hans="支持" />
+        <Translate zh_hant="支持" zh_hans="支持" en="Donated" />
       </Tabs.Tab>
     </Tabs>
   )

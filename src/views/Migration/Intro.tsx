@@ -13,6 +13,7 @@ import styles from './styles.css'
 const texts: {
   zh_hant: Record<string, string>
   zh_hans: Record<string, string>
+  en: Record<string, string>
 } = {
   zh_hant: {
     intro: '搬家到 Matters',
@@ -28,10 +29,16 @@ const texts: {
       '从今天开始，只要三个步骤，就可以将你在 Medium 的作品轻松搬到 Matters。',
     start: '开始搬家',
   },
+  en: {
+    intro: 'Settled in Matters',
+    content:
+      'You can effortlessly pack articles published on Medium to Matters in just 3 steps.',
+    start: 'Pack and move to Matters',
+  },
 }
 
 const Intro = () => {
-  const { zh_hant, zh_hans } = texts
+  const { zh_hant, zh_hans, en } = texts
 
   return (
     <section className="intro-wrap">
@@ -39,10 +46,18 @@ const Intro = () => {
         <section className="l-col-4 l-col-md-8 l-col-lg-12">
           <section>
             <h2>
-              <Translate zh_hant={zh_hant.intro} zh_hans={zh_hans.intro} />
+              <Translate
+                zh_hant={zh_hant.intro}
+                zh_hans={zh_hans.intro}
+                en={en.intro}
+              />
             </h2>
             <p>
-              <Translate zh_hant={zh_hant.content} zh_hans={zh_hans.content} />
+              <Translate
+                zh_hant={zh_hant.content}
+                zh_hans={zh_hans.content}
+                en={en.content}
+              />
             </p>
           </section>
 
@@ -53,7 +68,11 @@ const Intro = () => {
             onClick={() => jump('#steps', { offset: 10 })}
           >
             <TextIcon color="white" weight="md">
-              <Translate zh_hant={zh_hant.start} zh_hans={zh_hans.start} />
+              <Translate
+                zh_hant={zh_hant.start}
+                zh_hans={zh_hans.start}
+                en={en.start}
+              />
             </TextIcon>
           </Button>
         </section>

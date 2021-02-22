@@ -136,9 +136,17 @@ const EditModeHeader = ({
           detail: {
             color: 'red',
             content: isRevised ? (
-              <Translate zh_hant="發布失敗" zh_hans="發布失敗" />
+              <Translate
+                zh_hant="發布失敗"
+                zh_hans="發布失敗"
+                en="failed to republish"
+              />
             ) : (
-              <Translate zh_hant="保存失敗" zh_hans="保存失敗" />
+              <Translate
+                zh_hant="保存失敗"
+                zh_hans="保存失敗"
+                en="failed to save"
+              />
             ),
           },
         })
@@ -160,8 +168,17 @@ const EditModeHeader = ({
           <>
             {isUnderLimit && (
               <>
-                <Translate zh_hant="正文剩餘" zh_hans="正文剩余" /> {count}{' '}
-                <Translate zh_hant="版修訂" zh_hans="版修订" />
+                <Translate
+                  zh_hant="正文剩餘"
+                  zh_hans="正文剩余"
+                  en="content has"
+                />{' '}
+                {count}{' '}
+                <Translate
+                  zh_hant="版修訂"
+                  zh_hans="版修订"
+                  en="republish left"
+                />
                 <span className={diffCountClasses}>
                   &nbsp;{diffCount}/50&nbsp;&nbsp;&nbsp;
                 </span>
@@ -171,6 +188,7 @@ const EditModeHeader = ({
               <Translate
                 zh_hant="正文修訂次數已達上限"
                 zh_hans="正文修订次数已达上限"
+                en="You have reached the limit of republish"
               />
             )}
             {isUnderLimit && (
@@ -178,6 +196,7 @@ const EditModeHeader = ({
                 <Translate
                   zh_hant="離開本頁將丟失全部編輯"
                   zh_hans="离开本页将丢失全部编辑"
+                  en="you will lost your changes if you leave this page"
                 />
               </span>
             )}

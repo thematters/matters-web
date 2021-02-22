@@ -44,11 +44,13 @@ const ArticleNewAppreciationNotice = ({ notice }: { notice: NoticeType }) => {
             <Translate
               zh_hant={`等 ${numAbbr(actorsCount)} 人`}
               zh_hans={`等 ${numAbbr(actorsCount)} 人`}
+              en={`etc. ${numAbbr(actorsCount)} users`}
             />
           )}
           <Translate
             zh_hant="喜歡並讚賞了你的作品"
             zh_hans="喜欢并赞赏了你的作品"
+            en="liked your work"
           />
         </NoticeHead>
 

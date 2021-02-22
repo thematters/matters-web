@@ -9,7 +9,11 @@ const ErrorState = ({ draft }: { draft: PublishStateDraft }) => (
     color="red"
     content={<Translate id="failurePublish" />}
     subDescription={
-      <Translate zh_hant="請檢查網絡後重試" zh_hans="请检查网络后重试" />
+      <Translate
+        zh_hant="請檢查網絡後重試"
+        zh_hans="请检查网络后重试"
+        en="Please refresh the page and try again."
+      />
     }
     customButton={<RetryButton id={draft.id} />}
   />

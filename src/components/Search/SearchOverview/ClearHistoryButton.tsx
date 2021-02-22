@@ -89,7 +89,11 @@ const ClearHistoryButton = () => {
             detail: {
               color: 'green',
               content: (
-                <Translate zh_hant="已清空搜尋記錄" zh_hans="已清空搜索记录" />
+                <Translate
+                  zh_hant="已清空搜尋記錄"
+                  zh_hans="已清空搜索记录"
+                  en="search history cleared"
+                />
               ),
             },
           })

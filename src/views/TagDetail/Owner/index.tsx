@@ -47,6 +47,7 @@ const Owner = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
             <Translate
               zh_hant="此標籤目前無人主理"
               zh_hans="此标签目前無人主理"
+              en="this tag currently has no maintainer"
             />
           </TextIcon>
         </section>
@@ -62,7 +63,7 @@ const Owner = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
                 onClick={viewer.isFrozen ? forbid : open}
               >
                 <TextIcon weight="md" size="xs">
-                  <Translate zh_hant="認領" zh_hans="认领" />
+                  <Translate zh_hant="認領" zh_hans="认领" en="maintain" />
                 </TextIcon>
               </Button>
             )}
@@ -84,7 +85,7 @@ const Owner = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
         />
 
         <TextIcon size="sm" color="grey-dark">
-          <Translate zh_hant="主理" zh_hans="主理" />
+          <Translate zh_hant="主理" zh_hans="主理" en="maintainer" />
         </TextIcon>
       </section>
       <section className="right">{/* editos */}</section>

@@ -32,7 +32,11 @@ const Buttons = () => {
   return (
     <Form.List.Item
       title={
-        <Translate zh_hant="管理 Stripe 賬戶" zh_hans="管理 Stripe 账户" />
+        <Translate
+          zh_hant="管理 Stripe 賬戶"
+          zh_hans="管理 Stripe 账户"
+          en="Manage Stripe account"
+        />
       }
       htmlHref={loginUrl}
       htmlTarget="_blank"

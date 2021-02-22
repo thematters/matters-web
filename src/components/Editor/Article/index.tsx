@@ -22,12 +22,14 @@ interface Props {
   draft: EditorDraft
 
   isReviseMode?: boolean
+  isSummaryReadOnly?: boolean
   isTitleReadOnly?: boolean
 
   update: (draft: {
     title?: string | null
     content?: string | null
     cover?: string | null
+    summary?: string | null
   }) => Promise<void>
   upload: (input: {
     file?: any
@@ -43,6 +45,7 @@ const ArticleEditor: FC<Props> = ({
   draft,
 
   isReviseMode = false,
+  isSummaryReadOnly = false,
   isTitleReadOnly = false,
 
   update,
@@ -51,7 +54,7 @@ const ArticleEditor: FC<Props> = ({
   const [search, searchResult] = useLazyQuery<SearchUsers>(SEARCH_USERS)
   const { lang } = useContext(LanguageContext)
 
-  const { id, content, publishState, title } = draft
+  const { id, content, publishState, summary, title } = draft
   const isPending = publishState === 'pending'
   const isPublished = publishState === 'published'
   const isReadOnly = (isPending || isPublished) && !isReviseMode
@@ -74,6 +77,7 @@ const ArticleEditor: FC<Props> = ({
           editorUpdate={update}
           editorUpload={upload}
           enableReviseMode={isReviseMode}
+          enableSummary
           enableToolbar={!isReviseMode}
           eventName={ADD_TOAST}
           language={lang}
@@ -82,6 +86,8 @@ const ArticleEditor: FC<Props> = ({
           mentionUsers={mentionUsers}
           mentionListComponent={MentionUserList}
           readOnly={isReadOnly}
+          summaryDefaultValue={summary || ''}
+          summaryReadOnly={isSummaryReadOnly}
           theme="bubble"
           titleDefaultValue={title || ''}
           titleReadOnly={isTitleReadOnly}

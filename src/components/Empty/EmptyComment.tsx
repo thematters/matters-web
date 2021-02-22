@@ -8,7 +8,13 @@ export const EmptyComment = ({
   <Empty
     icon={<IconComment16 size="xxl" />}
     description={
-      description || <Translate zh_hant="還沒有評論" zh_hans="还没有评论" />
+      description || (
+        <Translate
+          zh_hant="還沒有評論"
+          zh_hans="还没有评论"
+          en="No comments."
+        />
+      )
     }
   />
 )

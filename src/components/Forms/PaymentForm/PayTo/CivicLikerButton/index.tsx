@@ -38,6 +38,7 @@ const CivicLikerButton: React.FC<CivicLikerButtonProps> = ({ likerId }) => {
           <Translate
             zh_hant="成為讚賞公民支持作者"
             zh_hans="成为赞赏公民支持作者"
+            en="Become Civic Liker"
           />
         </TextIcon>
       </Button>

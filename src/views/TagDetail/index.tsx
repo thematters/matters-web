@@ -130,7 +130,7 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
           </Tabs.Tab>
 
           <Tabs.Tab selected={isCommunity} onClick={() => setFeed('community')}>
-            <Translate zh_hant="社群" zh_hans="社群" />
+            <Translate zh_hant="社群" zh_hans="社群" en="community" />
           </Tabs.Tab>
         </Tabs>
 

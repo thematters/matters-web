@@ -25,11 +25,16 @@ const TagLeaveEditorNotice = ({ notice }: { notice: NoticeType }) => {
 
       <section className="content-wrap">
         <NoticeHead notice={notice}>
-          <Translate zh_hant="哎呀，標籤協作者" zh_hans="哎呀，标签协作者" />{' '}
+          <Translate
+            zh_hant="哎呀，標籤協作者"
+            zh_hans="哎呀，标签协作者"
+            en="uh-oh, collaborator"
+          />{' '}
           <NoticeActorName user={actor} />{' '}
           <Translate
             zh_hant="辭去了權限。你可以邀請新的協作者加入了"
             zh_hans="辞去了权限。你可以邀请新的协作者加入了"
+            en="resigned from tag. You can invite new collaborators to join"
           />
         </NoticeHead>
 

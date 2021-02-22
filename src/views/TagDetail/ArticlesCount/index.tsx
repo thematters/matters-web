@@ -19,7 +19,7 @@ const ArticlesCount = ({ tag }: ArticlesCountProps) => {
       <b>{numAbbr(totalCount)}</b>
       <span>
         &nbsp;
-        <Translate zh_hant="篇作品" zh_hans="篇作品" />
+        <Translate zh_hant="篇作品" zh_hans="篇作品" en="works" />
       </span>
 
       <style jsx>{styles}</style>
