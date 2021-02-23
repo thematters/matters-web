@@ -95,7 +95,7 @@ const BaseDialog = ({ children }: Props) => {
             <Translate
               zh_hant="即刻主理"
               zh_hans="即刻主理"
-              en="maintain at once"
+              en="Maintain at once"
             />
           </Dialog.Footer.Button>
 
