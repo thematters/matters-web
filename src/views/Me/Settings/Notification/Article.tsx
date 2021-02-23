@@ -21,7 +21,7 @@ const Article = ({ settings, toggle }: ArticleProps) => (
       }
       right={
         <Switch
-          checked={settings.appreciation}
+          checked={settings.articleNewAppreciation}
           onChange={() => toggle('appreciation')}
         />
       }
@@ -36,7 +36,7 @@ const Article = ({ settings, toggle }: ArticleProps) => (
       }
       right={
         <Switch
-          checked={settings.articleSubscription}
+          checked={settings.articleNewSubscription}
           onChange={() => toggle('articleSubscription')}
         />
       }
@@ -51,7 +51,7 @@ const Article = ({ settings, toggle }: ArticleProps) => (
       }
       right={
         <Switch
-          checked={settings.commentSubscribed}
+          checked={settings.articleSubscribedNewComment}
           onChange={() => toggle('commentSubscribed')}
         />
       }

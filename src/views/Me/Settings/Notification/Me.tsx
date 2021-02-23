@@ -23,7 +23,10 @@ const Me = ({ settings, toggle }: MeProps) => (
     <Form.List.Item
       title={<Translate zh_hant="追蹤我" zh_hans="追踪我" en="follows me" />}
       right={
-        <Switch checked={settings.follow} onChange={() => toggle('follow')} />
+        <Switch
+          checked={settings.userNewFollower}
+          onChange={() => toggle('follow')}
+        />
       }
     />
   </Form.List>

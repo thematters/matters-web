@@ -20,7 +20,10 @@ const Comment = ({ settings, toggle }: CommentProps) => (
         />
       }
       right={
-        <Switch checked={settings.comment} onChange={() => toggle('comment')} />
+        <Switch
+          checked={settings.articleNewComment}
+          onChange={() => toggle('comment')}
+        />
       }
     />
     <Form.List.Item
@@ -33,7 +36,7 @@ const Comment = ({ settings, toggle }: CommentProps) => (
       }
       right={
         <Switch
-          checked={settings.commentPinned}
+          checked={settings.articleCommentPinned}
           onChange={() => toggle('commentPinned')}
         />
       }
