@@ -17,6 +17,10 @@ const CommentNotice = ({ notice }: { notice: NoticeType }) => {
       return <CommentPinnedNotice notice={notice} />
     case 'SubscribedArticleNewComment':
       return <SubscribedArticleNewCommentNotice notice={notice} />
+    case 'CircleNewBroadcast':
+      return <span>CircleNewBroadcast</span>
+    case 'CircleNewDiscussion':
+      return <span>CircleNewDiscussion</span>
     default:
       return null
   }

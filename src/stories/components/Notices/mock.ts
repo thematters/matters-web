@@ -1,5 +1,8 @@
 import {
   MOCK_ARTILCE,
+  MOCK_CIRCLE,
+  MOCK_CIRCLE_ARTICLE,
+  MOCK_CIRCLE_COMMENT,
   MOCK_COMMENT,
   MOCK_PARENT_COMMENT,
   MOCK_TAG,
@@ -115,6 +118,16 @@ export const MOCK_NOTICE_LIST = [
     articleNoticeType: 'RevisedArticleNotPublished' as any,
     article: MOCK_ARTILCE,
   },
+  // CircleNewArticle
+  {
+    __typename: 'ArticleNotice' as any,
+    id: 'CircleNewArticle',
+    unread: false,
+    createdAt: '2020-12-24T07:29:17.682Z',
+    actors: [MOCK_USER],
+    articleNoticeType: 'CircleNewArticle' as any,
+    article: MOCK_CIRCLE_ARTICLE,
+  },
 
   /**
    * Comment
@@ -168,6 +181,26 @@ export const MOCK_NOTICE_LIST = [
     actors: [MOCK_USER],
     commentNoticeType: 'SubscribedArticleNewComment' as any,
     comment: MOCK_COMMENT,
+  },
+  // CircleNewBroadcast
+  {
+    __typename: 'CommentNotice' as any,
+    id: 'CircleNewBroadcast',
+    unread: false,
+    createdAt: '2020-12-24T07:29:17.682Z',
+    actors: [MOCK_USER],
+    commentNoticeType: 'CircleNewBroadcast' as any,
+    comment: MOCK_CIRCLE_COMMENT,
+  },
+  // CircleNewDiscussion
+  {
+    __typename: 'CommentNotice' as any,
+    id: 'CircleNewDiscussion',
+    unread: false,
+    createdAt: '2020-12-24T07:29:17.682Z',
+    actors: [MOCK_USER],
+    commentNoticeType: 'CircleNewDiscussion' as any,
+    comment: MOCK_CIRCLE_COMMENT,
   },
 
   /**
@@ -299,6 +332,40 @@ export const MOCK_NOTICE_LIST = [
     actors: [MOCK_USER],
     txNoticeType: 'PaymentPayout' as any,
     tx: MOCK_TRANSACTION,
+  },
+
+  /**
+   * Circcle
+   */
+  // CircleNewFollower
+  {
+    __typename: 'CircleNotice' as any,
+    id: 'CircleNewFollower',
+    unread: false,
+    createdAt: '2020-12-24T07:29:17.682Z',
+    actors: [MOCK_USER],
+    circleNoticeType: 'CircleNewFollower' as any,
+    tx: MOCK_CIRCLE,
+  },
+  // CircleNewSubscriber
+  {
+    __typename: 'CircleNotice' as any,
+    id: 'CircleNewSubscriber',
+    unread: false,
+    createdAt: '2020-12-24T07:29:17.682Z',
+    actors: [MOCK_USER],
+    circleNoticeType: 'CircleNewSubscriber' as any,
+    tx: MOCK_CIRCLE,
+  },
+  // CircleNewUnsubscriber
+  {
+    __typename: 'CircleNotice' as any,
+    id: 'CircleNewUnsubscriber',
+    unread: false,
+    createdAt: '2020-12-24T07:29:17.682Z',
+    actors: [MOCK_USER],
+    circleNoticeType: 'CircleNewUnsubscriber' as any,
+    tx: MOCK_CIRCLE,
   },
 
   /**

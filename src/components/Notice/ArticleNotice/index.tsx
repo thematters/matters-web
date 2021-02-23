@@ -23,6 +23,8 @@ const ArticleNotice = ({ notice }: { notice: NoticeType }) => {
       return <RevisedArticlePublishedNotice notice={notice} />
     case 'RevisedArticleNotPublished':
       return <RevisedArticleNotPublishedNotice notice={notice} />
+    case 'CircleNewArticle':
+      return <span>CircleNewArticle</span>
     default:
       return null
   }
