@@ -9,6 +9,7 @@ import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorName from '../NoticeActorName'
 import NoticeArticle from '../NoticeArticle'
 import NoticeComment from '../NoticeComment'
+import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
 import NoticeTypeIcon from '../NoticeTypeIcon'
 import styles from '../styles.css'
@@ -36,7 +37,7 @@ const CommentNewReplyNotice = ({ notice }: { notice: NoticeType }) => {
       </section>
 
       <section className="content-wrap">
-        <NoticeHead hasDate={!isMultiActors} notice={notice}>
+        <NoticeHead>
           {notice.actors.slice(0, 2).map((actor, index) => (
             <Fragment key={index}>
               <NoticeActorName user={actor} />
@@ -70,6 +71,8 @@ const CommentNewReplyNotice = ({ notice }: { notice: NoticeType }) => {
             ))}
           </section>
         )}
+
+        <NoticeDate notice={notice} />
       </section>
 
       <style jsx>{styles}</style>
@@ -80,7 +83,7 @@ CommentNewReplyNotice.fragments = {
   notice: gql`
     fragment CommentNewReplyNotice on CommentCommentNotice {
       id
-      ...NoticeHead
+      ...NoticeDate
       actors {
         ...NoticeActorAvatarUser
         ...NoticeActorNameUser
@@ -101,7 +104,7 @@ CommentNewReplyNotice.fragments = {
     ${NoticeActorName.fragments.user}
     ${NoticeArticle.fragments.article}
     ${NoticeComment.fragments.comment}
-    ${NoticeHead.fragments.date}
+    ${NoticeDate.fragments.notice}
   `,
 }
 

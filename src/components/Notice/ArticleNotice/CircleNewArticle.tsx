@@ -3,27 +3,31 @@ import gql from 'graphql-tag'
 import { Translate } from '~/components'
 
 import NoticeArticle from '../NoticeArticle'
+import NoticeCircleName from '../NoticeCircleName'
 import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
 import NoticeTypeIcon from '../NoticeTypeIcon'
 import styles from '../styles.css'
 
-import { RevisedArticlePublishedNotice as NoticeType } from './__generated__/RevisedArticlePublishedNotice'
+import { CircleNewArticleNotice as NoticeType } from './__generated__/CircleNewArticleNotice'
 
-const RevisedArticlePublishedNotice = ({ notice }: { notice: NoticeType }) => {
+const CircleNewArticle = ({ notice }: { notice: NoticeType }) => {
+  const circle = notice.article.circle
+
+  if (!circle) {
+    return null
+  }
+
   return (
     <section className="container">
       <section className="avatar-wrap">
-        <NoticeTypeIcon type="logo" />
+        <NoticeTypeIcon type="circle" />
       </section>
 
       <section className="content-wrap">
         <NoticeHead>
-          <Translate
-            zh_hant="你的修訂作品已發布到分佈式網絡"
-            zh_hans="你的修订作品已发布到分布式网络"
-            en="you work has been repulished to decentralized network"
-          />
+          <NoticeCircleName circle={circle} />{' '}
+          <Translate zh_hant="又成長了" zh_hans="又成长了" />
         </NoticeHead>
 
         <NoticeArticle article={notice.article} isBlock />
@@ -36,18 +40,23 @@ const RevisedArticlePublishedNotice = ({ notice }: { notice: NoticeType }) => {
   )
 }
 
-RevisedArticlePublishedNotice.fragments = {
+CircleNewArticle.fragments = {
   notice: gql`
-    fragment RevisedArticlePublishedNotice on ArticleNotice {
+    fragment CircleNewArticleNotice on ArticleNotice {
       id
       ...NoticeDate
       article: target {
         ...NoticeArticle
+        circle {
+          id
+          ...NoticeCircleNameCircle
+        }
       }
     }
     ${NoticeArticle.fragments.article}
     ${NoticeDate.fragments.notice}
+    ${NoticeCircleName.fragments.circle}
   `,
 }
 
-export default RevisedArticlePublishedNotice
+export default CircleNewArticle

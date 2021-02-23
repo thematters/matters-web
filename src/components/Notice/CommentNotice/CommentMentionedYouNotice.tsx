@@ -5,6 +5,7 @@ import { Translate } from '~/components'
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorName from '../NoticeActorName'
 import NoticeComment from '../NoticeComment'
+import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
 import styles from '../styles.css'
 
@@ -24,7 +25,7 @@ const CommentMentionedYouNotice = ({ notice }: { notice: NoticeType }) => {
       </section>
 
       <section className="content-wrap">
-        <NoticeHead notice={notice}>
+        <NoticeHead>
           <NoticeActorName user={actor} />{' '}
           <Translate
             zh_hant="在評論中提及了你"
@@ -34,6 +35,8 @@ const CommentMentionedYouNotice = ({ notice }: { notice: NoticeType }) => {
         </NoticeHead>
 
         <NoticeComment comment={notice.comment} />
+
+        <NoticeDate notice={notice} />
       </section>
 
       <style jsx>{styles}</style>
@@ -45,7 +48,7 @@ CommentMentionedYouNotice.fragments = {
   notice: gql`
     fragment CommentMentionedYouNotice on CommentNotice {
       id
-      ...NoticeHead
+      ...NoticeDate
       actors {
         ...NoticeActorAvatarUser
         ...NoticeActorNameUser
@@ -57,7 +60,7 @@ CommentMentionedYouNotice.fragments = {
     ${NoticeActorAvatar.fragments.user}
     ${NoticeActorName.fragments.user}
     ${NoticeComment.fragments.comment}
-    ${NoticeHead.fragments.date}
+    ${NoticeDate.fragments.notice}
   `,
 }
 

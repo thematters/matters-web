@@ -4,6 +4,7 @@ import { Translate } from '~/components'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorName from '../NoticeActorName'
+import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
 import NoticeTag from '../NoticeTag'
 import styles from '../styles.css'
@@ -24,7 +25,7 @@ const TagAddEditorNotice = ({ notice }: { notice: NoticeType }) => {
       </section>
 
       <section className="content-wrap">
-        <NoticeHead notice={notice}>
+        <NoticeHead>
           <NoticeActorName user={actor} />{' '}
           <Translate
             zh_hant="邀請你成為標籤的協作者"
@@ -34,6 +35,8 @@ const TagAddEditorNotice = ({ notice }: { notice: NoticeType }) => {
         </NoticeHead>
 
         <NoticeTag tag={notice.tag} />
+
+        <NoticeDate notice={notice} />
       </section>
 
       <style jsx>{styles}</style>
@@ -45,7 +48,7 @@ TagAddEditorNotice.fragments = {
   notice: gql`
     fragment TagAddEditorNotice on TagNotice {
       id
-      ...NoticeHead
+      ...NoticeDate
       actors {
         ...NoticeActorAvatarUser
         ...NoticeActorNameUser

@@ -11,7 +11,16 @@ export default {
 
 const Template: Story = (args) => (
   <MockedProvider>
-    <NoticeList {...args} />
+    <div>
+      <NoticeList {...args} />
+
+      <style jsx>{`
+        div {
+          margin: 0 -1rem;
+          margin-bottom: var(--spacing-base);
+        }
+      `}</style>
+    </div>
   </MockedProvider>
 )
 

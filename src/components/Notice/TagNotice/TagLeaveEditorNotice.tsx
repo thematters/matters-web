@@ -4,6 +4,7 @@ import { Translate } from '~/components'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorName from '../NoticeActorName'
+import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
 import NoticeTag from '../NoticeTag'
 import styles from '../styles.css'
@@ -24,7 +25,7 @@ const TagLeaveEditorNotice = ({ notice }: { notice: NoticeType }) => {
       </section>
 
       <section className="content-wrap">
-        <NoticeHead notice={notice}>
+        <NoticeHead>
           <Translate
             zh_hant="哎呀，標籤協作者"
             zh_hans="哎呀，标签协作者"
@@ -39,6 +40,8 @@ const TagLeaveEditorNotice = ({ notice }: { notice: NoticeType }) => {
         </NoticeHead>
 
         <NoticeTag tag={notice.tag} />
+
+        <NoticeDate notice={notice} />
       </section>
 
       <style jsx>{styles}</style>
@@ -50,7 +53,7 @@ TagLeaveEditorNotice.fragments = {
   notice: gql`
     fragment TagLeaveEditorNotice on TagNotice {
       id
-      ...NoticeHead
+      ...NoticeDate
       actors {
         ...NoticeActorAvatarUser
         ...NoticeActorNameUser

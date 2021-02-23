@@ -7,30 +7,34 @@ import { numAbbr } from '~/common/utils'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorName from '../NoticeActorName'
-import NoticeArticle from '../NoticeArticle'
 import NoticeDate from '../NoticeDate'
+import NoticeFollower from '../NoticeFollower'
 import NoticeHead from '../NoticeHead'
 import NoticeTypeIcon from '../NoticeTypeIcon'
 import styles from '../styles.css'
 
-import { ArticleNewAppreciationNotice as NoticeType } from './__generated__/ArticleNewAppreciationNotice'
+import { CircleNewUserNotice as NoticeType } from './__generated__/CircleNewUserNotice'
 
-const ArticleNewAppreciationNotice = ({ notice }: { notice: NoticeType }) => {
+type CircleNewUserNotice = {
+  notice: NoticeType
+  userType: 'follower' | 'subscriber' | 'unsubscriber'
+}
+
+const CircleNewUserNotice = ({ notice, userType }: CircleNewUserNotice) => {
   if (!notice.actors) {
     return null
   }
 
+  const isNewFollower = userType === 'follower'
+  const isNewSubscriber = userType === 'subscriber'
+  const isNewUnsubscriber = userType === 'unsubscriber'
   const actorsCount = notice.actors.length
   const isMultiActors = actorsCount > 1
 
   return (
     <section className="container">
       <section className="avatar-wrap">
-        {isMultiActors ? (
-          <NoticeTypeIcon type="appreciate" />
-        ) : (
-          <NoticeActorAvatar user={notice.actors[0]} />
-        )}
+        <NoticeTypeIcon type="circle" />
       </section>
 
       <section className="content-wrap">
@@ -48,21 +52,25 @@ const ArticleNewAppreciationNotice = ({ notice }: { notice: NoticeType }) => {
               en={`etc. ${numAbbr(actorsCount)} users`}
             />
           )}
-          <Translate
-            zh_hant="喜歡並讚賞了你的作品"
-            zh_hans="喜欢并赞赏了你的作品"
-            en="liked your work"
-          />
+          {isNewFollower && (
+            <Translate zh_hant="追蹤了你的圍爐" zh_hans="追踪了你的围炉" />
+          )}
+          {isNewSubscriber && (
+            <Translate zh_hant="訂閱了你的圍爐" zh_hans="订阅了你的围炉" />
+          )}
+          {isNewUnsubscriber && (
+            <Translate zh_hant="退訂了你的圍爐" zh_hans="退订了你的围炉" />
+          )}
         </NoticeHead>
 
-        <NoticeArticle article={notice.article} isBlock />
-
-        {isMultiActors && (
+        {isMultiActors ? (
           <section className="multi-actor-avatars">
             {notice.actors.map((actor, index) => (
               <NoticeActorAvatar key={index} user={actor} />
             ))}
           </section>
+        ) : (
+          <NoticeFollower user={notice.actors[0]} />
         )}
 
         <NoticeDate notice={notice} />
@@ -73,24 +81,22 @@ const ArticleNewAppreciationNotice = ({ notice }: { notice: NoticeType }) => {
   )
 }
 
-ArticleNewAppreciationNotice.fragments = {
+CircleNewUserNotice.fragments = {
   notice: gql`
-    fragment ArticleNewAppreciationNotice on ArticleNotice {
+    fragment CircleNewUserNotice on CircleNotice {
       id
       ...NoticeDate
       actors {
         ...NoticeActorAvatarUser
         ...NoticeActorNameUser
-      }
-      article: target {
-        ...NoticeArticle
+        ...NoticeFollower
       }
     }
     ${NoticeActorAvatar.fragments.user}
     ${NoticeActorName.fragments.user}
-    ${NoticeArticle.fragments.article}
+    ${NoticeFollower.fragments.follower}
     ${NoticeDate.fragments.notice}
   `,
 }
 
-export default ArticleNewAppreciationNotice
+export default CircleNewUserNotice

@@ -5,6 +5,7 @@ import { Translate } from '~/components'
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorName from '../NoticeActorName'
 import NoticeArticle from '../NoticeArticle'
+import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
 import NoticeTag from '../NoticeTag'
 import styles from '../styles.css'
@@ -25,7 +26,7 @@ const ArticleTagRemovedNotice = ({ notice }: { notice: NoticeType }) => {
       </section>
 
       <section className="content-wrap overflow-hidden">
-        <NoticeHead notice={notice}>
+        <NoticeHead>
           <NoticeActorName user={actor} />{' '}
           <Translate
             zh_hant="將你的作品從標籤中拿走了"
@@ -37,6 +38,8 @@ const ArticleTagRemovedNotice = ({ notice }: { notice: NoticeType }) => {
         <NoticeArticle article={notice.target} isBlock />
 
         <NoticeTag tag={notice.tag} />
+
+        <NoticeDate notice={notice} />
       </section>
 
       <style jsx>{styles}</style>
@@ -48,7 +51,7 @@ ArticleTagRemovedNotice.fragments = {
   notice: gql`
     fragment ArticleTagRemovedNotice on ArticleTagNotice {
       id
-      ...NoticeHead
+      ...NoticeDate
       actors {
         ...NoticeActorAvatarUser
         ...NoticeActorNameUser
@@ -63,7 +66,7 @@ ArticleTagRemovedNotice.fragments = {
     ${NoticeActorAvatar.fragments.user}
     ${NoticeActorName.fragments.user}
     ${NoticeArticle.fragments.article}
-    ${NoticeHead.fragments.date}
+    ${NoticeDate.fragments.notice}
     ${NoticeTag.fragments.tag}
   `,
 }

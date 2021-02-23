@@ -1,15 +1,17 @@
 import gql from 'graphql-tag'
 
+import CircleNewUserNotice from './CircleNewUserNotice'
+
 import { CircleNotice as NoticeType } from './__generated__/CircleNotice'
 
 const CircleNotice = ({ notice }: { notice: NoticeType }) => {
   switch (notice.circleNoticeType) {
     case 'CircleNewFollower':
-      return <span>CircleNewFollower</span>
+      return <CircleNewUserNotice notice={notice} userType="follower" />
     case 'CircleNewSubscriber':
-      return <span>CircleNewSubscriber</span>
+      return <CircleNewUserNotice notice={notice} userType="subscriber" />
     case 'CircleNewUnsubscriber':
-      return <span>CircleNewUnsubscriber</span>
+      return <CircleNewUserNotice notice={notice} userType="unsubscriber" />
     default:
       return null
   }
@@ -22,7 +24,9 @@ CircleNotice.fragments = {
       unread
       __typename
       circleNoticeType: type
+      ...CircleNewUserNotice
     }
+    ${CircleNewUserNotice.fragments.notice}
   `,
 }
 

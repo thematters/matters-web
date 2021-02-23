@@ -7,6 +7,7 @@ import { Translate, ViewerContext } from '~/components'
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorName from '../NoticeActorName'
 import NoticeArticle from '../NoticeArticle'
+import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
 import NoticeTag from '../NoticeTag'
 import styles from '../styles.css'
@@ -34,7 +35,7 @@ const ArticleTagUnselectedNotice = ({ notice }: { notice: NoticeType }) => {
       </section>
 
       <section className="content-wrap overflow-hidden">
-        <NoticeHead notice={notice}>
+        <NoticeHead>
           {isAuthor && (
             <Translate zh_hant="啊喔， " zh_hans="啊喔， " en="uh-oh, " />
           )}
@@ -58,6 +59,8 @@ const ArticleTagUnselectedNotice = ({ notice }: { notice: NoticeType }) => {
         <NoticeArticle article={notice.target} isBlock />
 
         <NoticeTag tag={notice.tag} />
+
+        <NoticeDate notice={notice} />
       </section>
 
       <style jsx>{styles}</style>
@@ -69,7 +72,7 @@ ArticleTagUnselectedNotice.fragments = {
   notice: gql`
     fragment ArticleTagUnselectedNotice on ArticleTagNotice {
       id
-      ...NoticeHead
+      ...NoticeDate
       actors {
         ...NoticeActorAvatarUser
         ...NoticeActorNameUser
@@ -90,7 +93,7 @@ ArticleTagUnselectedNotice.fragments = {
     ${NoticeActorAvatar.fragments.user}
     ${NoticeActorName.fragments.user}
     ${NoticeArticle.fragments.article}
-    ${NoticeHead.fragments.date}
+    ${NoticeDate.fragments.notice}
     ${NoticeTag.fragments.tag}
   `,
 }

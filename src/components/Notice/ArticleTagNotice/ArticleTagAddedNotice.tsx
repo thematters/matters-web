@@ -7,6 +7,7 @@ import { Translate, ViewerContext } from '~/components'
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorName from '../NoticeActorName'
 import NoticeArticle from '../NoticeArticle'
+import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
 import NoticeTag from '../NoticeTag'
 import styles from '../styles.css'
@@ -34,7 +35,7 @@ const ArticleTagAddedNotice = ({ notice }: { notice: NoticeType }) => {
       </section>
 
       <section className="content-wrap overflow-hidden">
-        <NoticeHead notice={notice}>
+        <NoticeHead>
           <NoticeActorName user={actor} />{' '}
           {isAuthor && (
             <Translate
@@ -59,6 +60,8 @@ const ArticleTagAddedNotice = ({ notice }: { notice: NoticeType }) => {
         <NoticeArticle article={notice.target} isBlock />
 
         <NoticeTag tag={notice.tag} />
+
+        <NoticeDate notice={notice} />
       </section>
 
       <style jsx>{styles}</style>
@@ -70,7 +73,7 @@ ArticleTagAddedNotice.fragments = {
   notice: gql`
     fragment ArticleTagAddedNotice on ArticleTagNotice {
       id
-      ...NoticeHead
+      ...NoticeDate
       actors {
         ...NoticeActorAvatarUser
         ...NoticeActorNameUser
@@ -94,7 +97,7 @@ ArticleTagAddedNotice.fragments = {
     ${NoticeActorAvatar.fragments.user}
     ${NoticeActorName.fragments.user}
     ${NoticeArticle.fragments.article}
-    ${NoticeHead.fragments.date}
+    ${NoticeDate.fragments.notice}
     ${NoticeTag.fragments.tag}
   `,
 }

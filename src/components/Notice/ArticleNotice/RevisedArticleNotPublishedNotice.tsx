@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import { Translate } from '~/components'
 
 import NoticeArticle from '../NoticeArticle'
+import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
 import NoticeTypeIcon from '../NoticeTypeIcon'
 import styles from '../styles.css'
@@ -21,7 +22,7 @@ const RevisedArticleNotPublishedNotice = ({
       </section>
 
       <section className="content-wrap">
-        <NoticeHead notice={notice}>
+        <NoticeHead>
           <Translate
             zh_hant="你的修訂作品發布失敗"
             zh_hans="你的修订作品发布失败"
@@ -30,6 +31,8 @@ const RevisedArticleNotPublishedNotice = ({
         </NoticeHead>
 
         <NoticeArticle article={notice.article} isBlock />
+
+        <NoticeDate notice={notice} />
       </section>
 
       <style jsx>{styles}</style>
@@ -41,13 +44,13 @@ RevisedArticleNotPublishedNotice.fragments = {
   notice: gql`
     fragment RevisedArticleNotPublishedNotice on ArticleNotice {
       id
-      ...NoticeHead
+      ...NoticeDate
       article: target {
         ...NoticeArticle
       }
     }
     ${NoticeArticle.fragments.article}
-    ${NoticeHead.fragments.date}
+    ${NoticeDate.fragments.notice}
   `,
 }
 

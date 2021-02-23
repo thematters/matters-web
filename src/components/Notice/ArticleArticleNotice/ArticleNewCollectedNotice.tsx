@@ -6,6 +6,7 @@ import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorName from '../NoticeActorName'
 import NoticeArticle from '../NoticeArticle'
 import NoticeCollectionArticle from '../NoticeCollectionArticle'
+import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
 import styles from '../styles.css'
 
@@ -25,7 +26,7 @@ const ArticleNewCollectedNotice = ({ notice }: { notice: NoticeType }) => {
       </section>
 
       <section className="content-wrap">
-        <NoticeHead notice={notice}>
+        <NoticeHead>
           <NoticeActorName user={actor} />{' '}
           <Translate
             zh_hant="關聯了你的作品"
@@ -37,6 +38,8 @@ const ArticleNewCollectedNotice = ({ notice }: { notice: NoticeType }) => {
         <NoticeArticle article={notice.article} isBlock />
 
         <NoticeCollectionArticle article={notice.collection} />
+
+        <NoticeDate notice={notice} />
       </section>
 
       <style jsx>{styles}</style>
@@ -50,7 +53,7 @@ ArticleNewCollectedNotice.fragments = {
       id
       unread
       __typename
-      ...NoticeHead
+      ...NoticeDate
       actors {
         ...NoticeActorAvatarUser
         ...NoticeActorNameUser
@@ -66,7 +69,7 @@ ArticleNewCollectedNotice.fragments = {
     ${NoticeActorName.fragments.user}
     ${NoticeArticle.fragments.article}
     ${NoticeCollectionArticle.fragments.article}
-    ${NoticeHead.fragments.date}
+    ${NoticeDate.fragments.notice}
   `,
 }
 
