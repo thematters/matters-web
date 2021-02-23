@@ -10,6 +10,8 @@ import {
 } from '~/components'
 import TOGGLE_PIN_COMMENT from '~/components/GQL/mutations/togglePinComment'
 
+import { REFETCH_CIRCLE_DETAIL } from '~/common/enums'
+
 import { TogglePinComment } from '~/components/GQL/mutations/__generated__/TogglePinComment'
 import { PinButtonComment } from './__generated__/PinButtonComment'
 
@@ -62,18 +64,34 @@ const PinButton = ({ comment }: { comment: PinButtonComment }) => {
 
   if (comment.pinned) {
     return (
-      <Menu.Item onClick={unpinComment}>
+      <Menu.Item
+        onClick={async () => {
+          await unpinComment()
+          window.dispatchEvent(new CustomEvent(REFETCH_CIRCLE_DETAIL))
+        }}
+      >
         <TextIcon icon={<IconUnPin24 size="md" />} size="md" spacing="base">
-          <Translate id="unpin" />
+          <Translate
+            id={circle ? 'unpinCircleComment' : 'unpinArticleComment'}
+          />
         </TextIcon>
       </Menu.Item>
     )
   }
 
   return (
-    <Menu.Item onClick={canPin ? pinComment : undefined}>
+    <Menu.Item
+      onClick={
+        canPin
+          ? async () => {
+              await pinComment()
+              window.dispatchEvent(new CustomEvent(REFETCH_CIRCLE_DETAIL))
+            }
+          : undefined
+      }
+    >
       <TextIcon icon={<IconPin24 size="md" />} size="md" spacing="base">
-        <Translate id="pin" />
+        <Translate id={circle ? 'pinCircleComment' : 'pinArticleComment'} />
       </TextIcon>
     </Menu.Item>
   )

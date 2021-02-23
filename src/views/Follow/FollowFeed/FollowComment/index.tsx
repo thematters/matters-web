@@ -116,7 +116,7 @@ const FollowComment: React.FC<FollowCommentProps> = ({
             {...userDigestProps}
           />
           <TextIcon size="sm" color="grey-dark">
-            <Translate zh_hant="評論了" zh_hans="评论了" />
+            <Translate zh_hant="評論了" zh_hans="评论了" en="commented" />
           </TextIcon>
         </section>
 
@@ -136,7 +136,7 @@ const FollowComment: React.FC<FollowCommentProps> = ({
           onClick={onClickComment}
         >
           <Expandable limit={5} buffer={2}>
-            <Comment.Content comment={comment} size="md-s" />
+            <Comment.Content comment={comment} type="article" size="md-s" />
           </Expandable>
         </Card>
       </section>

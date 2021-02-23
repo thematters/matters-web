@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 
+import CommentContent from '~/components/Comment/Content'
 import { UserDigest } from '~/components/UserDigest'
 
 export const fragments = {
@@ -10,7 +11,13 @@ export const fragments = {
         id
         ...UserDigestRichUserPublic
       }
+      pinnedBroadcast {
+        ...ContentCommentPublic
+        ...ContentCommentPrivate
+      }
     }
     ${UserDigest.Rich.fragments.user.public}
+    ${CommentContent.fragments.comment.public}
+    ${CommentContent.fragments.comment.private}
   `,
 }

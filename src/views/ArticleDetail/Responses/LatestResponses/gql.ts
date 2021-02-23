@@ -1,7 +1,8 @@
 import gql from 'graphql-tag'
 
+import { ThreadComment } from '~/components'
+
 import ResponseArticle from '../ResponseArticle'
-import ResponseComment from '../ResponseComment'
 
 export const LATEST_RESPONSES_PUBLIC = gql`
   query LatestResponsesPublic(
@@ -40,8 +41,8 @@ export const LATEST_RESPONSES_PUBLIC = gql`
               ...ResponseArticleArticle
             }
             ... on Comment {
-              ...ResponseCommentCommentPublic
-              ...ResponseCommentCommentPrivate
+              ...ThreadCommentCommentPublic
+              ...ThreadCommentCommentPrivate
             }
           }
         }
@@ -49,8 +50,8 @@ export const LATEST_RESPONSES_PUBLIC = gql`
     }
   }
   ${ResponseArticle.fragments.article}
-  ${ResponseComment.fragments.comment.public}
-  ${ResponseComment.fragments.comment.private}
+  ${ThreadComment.fragments.comment.public}
+  ${ThreadComment.fragments.comment.private}
 `
 
 export const LATEST_RESPONSES_PRIVATE = gql`
@@ -58,9 +59,9 @@ export const LATEST_RESPONSES_PRIVATE = gql`
     nodes(input: { ids: $ids }) {
       id
       ... on Comment {
-        ...ResponseCommentCommentPrivate
+        ...ThreadCommentCommentPrivate
       }
     }
   }
-  ${ResponseComment.fragments.comment.private}
+  ${ThreadComment.fragments.comment.private}
 `

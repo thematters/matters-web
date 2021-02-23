@@ -134,7 +134,13 @@ const BaseConfirm: React.FC<FormProps> = ({
             min={PAYMENT_MINIMAL_PAYOUT_AMOUNT.HKD}
             max={balance}
             currency={currency}
-            label={<Translate zh_hant="提現金額" zh_hans="提现金额" />}
+            label={
+              <Translate
+                zh_hant="提現金額"
+                zh_hans="提现金额"
+                en="Withdraw amoumt"
+              />
+            }
             name="amount"
             value={values.amount}
             error={touched.amount && errors.amount}
@@ -153,7 +159,11 @@ const BaseConfirm: React.FC<FormProps> = ({
           <ConfirmTable>
             <ConfirmTable.Row>
               <ConfirmTable.Col>
-                <Translate zh_hant="提現金額" zh_hans="提现金额" />
+                <Translate
+                  zh_hant="提現金額"
+                  zh_hans="提现金额"
+                  en="Withdraw amount"
+                />
               </ConfirmTable.Col>
 
               <ConfirmTable.Col>
@@ -168,6 +178,7 @@ const BaseConfirm: React.FC<FormProps> = ({
                     <Translate
                       zh_hant="用於支付 Stripe 手續費，並支持 Matters 運營"
                       zh_hans="用于支付 Stripe 手续费，并支持 Matters 运营"
+                      en="used for Stripe transcation fee and Matters operation"
                     />
                   }
                   placement="top"
@@ -182,6 +193,7 @@ const BaseConfirm: React.FC<FormProps> = ({
                       <Translate
                         zh_hant="服務費 (20%)"
                         zh_hans="服务费 (20%)"
+                        en="Service fee (20%)"
                       />
                     </TextIcon>
                   </span>
@@ -195,7 +207,11 @@ const BaseConfirm: React.FC<FormProps> = ({
 
             <ConfirmTable.Row type="total">
               <ConfirmTable.Col>
-                <Translate zh_hant="實際提現" zh_hans="实际提现" />
+                <Translate
+                  zh_hant="實際提現"
+                  zh_hans="实际提现"
+                  en="Final withdraw amount"
+                />
               </ConfirmTable.Col>
 
               <ConfirmTable.Col>

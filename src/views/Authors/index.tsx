@@ -104,7 +104,13 @@ const BaseAuthors = () => {
   if (!edges || edges.length <= 0 || !pageInfo) {
     return (
       <EmptyWarning
-        description={<Translate zh_hant="還沒有作者" zh_hans="还没有作者" />}
+        description={
+          <Translate
+            zh_hant="還沒有作者"
+            zh_hans="还没有作者"
+            en="no authors yet"
+          />
+        }
       />
     )
   }

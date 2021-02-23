@@ -19,9 +19,10 @@ import {
 interface Props {
   content: string
   update: (params: { content: string }) => void
+  placeholder?: string
 }
 
-const CommentEditor: React.FC<Props> = ({ content, update }) => {
+const CommentEditor: React.FC<Props> = ({ content, update, placeholder }) => {
   const [search, { data, loading }] = useLazyQuery<SearchUsers>(SEARCH_USERS)
   const { lang } = useContext(LanguageContext)
 
@@ -39,13 +40,14 @@ const CommentEditor: React.FC<Props> = ({ content, update }) => {
         editorContent={content}
         editorUpdate={update}
         eventName={ADD_TOAST}
-        language={lang.toUpperCase() as Language}
+        language={lang}
         mentionLoading={loading}
         mentionKeywordChange={mentionKeywordChange}
         mentionUsers={mentionUsers}
         mentionListComponent={MentionUserList}
         readOnly={false}
         theme="bubble"
+        texts={placeholder ? { COMMENT_PLACEHOLDER: placeholder } : {}}
       />
 
       <style jsx>{themeStyles}</style>

@@ -91,6 +91,7 @@ export const STRIPE_ERROR_MESSAGES = {
     processing_error: '操作失败，请稍候再试',
     rate_limit: '操作过于频繁，请稍候再试',
   },
+  en: {}, // Unnecessary, use Stripe's built-in message instaed.
 }
 
 export const PAYMENT_PROVIDER = ['stripe', 'likecoin']

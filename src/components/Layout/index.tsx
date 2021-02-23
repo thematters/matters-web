@@ -53,16 +53,17 @@ interface MainProps {
 }
 
 const Main: React.FC<MainProps> = ({ aside, bgColor, inEditor, children }) => {
-  const { isInPath } = useRoute()
+  const { isInPath, isPathStartWith } = useRoute()
   const isInSearch = isInPath('SEARCH')
   const isInArticleDetail = isInPath('ARTICLE_DETAIL')
+  const isInCircle = isPathStartWith('/~', true)
 
   const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
     variables: { id: 'local' },
   })
   const onboardingTasks = data?.clientPreference.onboardingTasks
   const showOnboardingTasks =
-    !inEditor && !isInArticleDetail && onboardingTasks?.enabled
+    !inEditor && !isInArticleDetail && !isInCircle && onboardingTasks?.enabled
 
   const articleClasses = classNames({
     'l-col-three-mid': true,

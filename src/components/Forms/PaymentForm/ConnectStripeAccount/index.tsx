@@ -55,6 +55,7 @@ const ConnectStripeAccount: React.FC<Props> = ({ nextStep, windowRef }) => {
           <Translate
             zh_hant="哎呀，創建失敗了。"
             zh_hans="哎呀，创建失败了。"
+            en="Oops, failed to create account."
           />
         </h3>
       ) : (
@@ -65,6 +66,7 @@ const ConnectStripeAccount: React.FC<Props> = ({ nextStep, windowRef }) => {
             <Translate
               zh_hant="請在新頁面完成 Stripe 帳戶創建，不要關閉本窗口"
               zh_hans="请在新页面完成 Stripe 帐户创建，不要关闭本窗口"
+              en="Please create Stripe account in the new tab, do not close this tab."
             />
           </p>
         </>

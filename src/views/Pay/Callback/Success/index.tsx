@@ -31,7 +31,11 @@ const PayCallbackSuccess = () => {
         <Box avatar={avatar[provider]} title={title[provider]}>
           <section className="content">
             <h2>
-              <Translate zh_hant="支付成功！" zh_hans="支付成功！" />
+              <Translate
+                zh_hant="支付成功！"
+                zh_hans="支付成功！"
+                en="Payment success!"
+              />
             </h2>
 
             <p>

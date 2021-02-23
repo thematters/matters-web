@@ -9,6 +9,7 @@ import {
   QueryError,
   Spinner,
   Switch,
+  ThreadComment,
   Title,
   Translate,
   useEventListener,
@@ -29,7 +30,6 @@ import {
 } from '~/common/utils'
 
 import ResponseArticle from '../ResponseArticle'
-import ResponseComment from '../ResponseComment'
 import styles from '../styles.css'
 import { LATEST_RESPONSES_PRIVATE, LATEST_RESPONSES_PUBLIC } from './gql'
 
@@ -163,7 +163,7 @@ const LatestResponses = () => {
     }
   }, [pageInfo && pageInfo.startCursor])
 
-  const commentCallback = async () => {
+  const replySubmitCallback = async () => {
     const { data: newData } = await fetchMore({
       variables: {
         before: storedCursor,
@@ -271,11 +271,12 @@ const LatestResponses = () => {
             {response.__typename === 'Article' ? (
               <ResponseArticle article={response} hasCover={isMediumUp} />
             ) : (
-              <ResponseComment
+              <ThreadComment
                 comment={response}
+                type="article"
                 defaultExpand={response.id === parentId && !!descendantId}
                 hasLink
-                commentCallback={commentCallback}
+                replySubmitCallback={replySubmitCallback}
               />
             )}
           </List.Item>

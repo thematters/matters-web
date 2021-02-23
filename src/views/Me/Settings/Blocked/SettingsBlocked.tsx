@@ -65,7 +65,11 @@ const SettingsBlocked = () => {
     return (
       <EmptyWarning
         description={
-          <Translate zh_hant="還沒有封鎖用戶" zh_hans="还没有屏蔽用户" />
+          <Translate
+            zh_hant="還沒有封鎖用戶"
+            zh_hans="还没有屏蔽用户"
+            en="no user blocked yet"
+          />
         }
       />
     )

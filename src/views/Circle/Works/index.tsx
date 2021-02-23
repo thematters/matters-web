@@ -3,7 +3,7 @@ import { useContext, useEffect } from 'react'
 
 import {
   ArticleDigestFeed,
-  EmptyTagArticles,
+  EmptyArticle,
   InfiniteScroll,
   List,
   QueryError,
@@ -11,22 +11,22 @@ import {
   useEventListener,
   usePublicQuery,
   usePullToRefresh,
+  useRoute,
   ViewerContext,
 } from '~/components'
 
 import { REFETCH_CIRCLE_DETAIL_ARTICLES } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
+import CircleDetailContainer from '../Detail'
 import { CIRCLE_WORKS_PRIVATE, CIRCLE_WORKS_PUBLIC } from './gql'
 
 import { CircleWorksPublic } from './__generated__/CircleWorksPublic'
 
-interface CircleWorksProps {
-  name: string
-}
-
-const CircleDetailWorks = ({ name }: CircleWorksProps) => {
+const Works = () => {
+  const { getQuery } = useRoute()
   const viewer = useContext(ViewerContext)
+  const name = getQuery('name')
 
   /**
    * Data Fetching
@@ -122,7 +122,7 @@ const CircleDetailWorks = ({ name }: CircleWorksProps) => {
   }
 
   if (!edges || edges.length <= 0 || !pageInfo) {
-    return <EmptyTagArticles />
+    return <EmptyArticle />
   }
 
   return (
@@ -154,6 +154,14 @@ const CircleDetailWorks = ({ name }: CircleWorksProps) => {
         ))}
       </List>
     </InfiniteScroll>
+  )
+}
+
+const CircleDetailWorks = () => {
+  return (
+    <CircleDetailContainer>
+      <Works />
+    </CircleDetailContainer>
   )
 }
 

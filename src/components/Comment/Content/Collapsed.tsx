@@ -24,7 +24,7 @@ const Collapsed = ({
     return (
       <>
         <div
-          className={`${className} u-content-comment `}
+          className={`${className} u-content-comment`}
           dangerouslySetInnerHTML={{
             __html: content || '',
           }}
@@ -38,7 +38,7 @@ const Collapsed = ({
   }
 
   return (
-    <p className={`${className} inactive`}>
+    <p className={`${className} u-content-comment inactive`}>
       <span>{collapsedContent}</span>
 
       {collapsed && (
@@ -55,7 +55,7 @@ const Collapsed = ({
             weight="normal"
             color="grey"
           >
-            <Translate zh_hant="打開" zh_hans="展开" />
+            <Translate zh_hant="打開" zh_hans="展开" en="Expand" />
           </TextIcon>
         </Button>
       )}

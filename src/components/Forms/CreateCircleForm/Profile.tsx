@@ -14,6 +14,7 @@ import {
 } from '~/components'
 import PUT_CIRCLE from '~/components/GQL/mutations/putCircle'
 
+import { ADD_TOAST, ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
 import {
   parseFormSubmitErrors,
   routerPush,
@@ -23,7 +24,6 @@ import {
 } from '~/common/utils'
 
 import CIRCLE_COVER from '@/public/static/images/circle-cover.svg'
-import { ADD_TOAST, ASSET_TYPE, ENTITY_TYPE } from '@/src/common/enums'
 
 import styles from './styles.css'
 

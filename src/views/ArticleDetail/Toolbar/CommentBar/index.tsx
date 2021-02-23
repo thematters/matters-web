@@ -74,7 +74,7 @@ const Content = ({
     >
       <p>
         <Translate id="putComment" />
-        <Translate zh_hant="…" zh_hans="…" />
+        <Translate zh_hant="…" zh_hans="…" en="…" />
         <style jsx>{styles}</style>
       </p>
     </Card>
@@ -82,7 +82,7 @@ const Content = ({
     <Button
       spacing={['xtight', 'xtight']}
       bgActiveColor="grey-lighter"
-      aira-label={TEXT.zh_hant.replyComment}
+      aira-label={TEXT.zh_hant.reply}
       {...(props as ButtonProps)}
     >
       <TextIcon

@@ -147,7 +147,8 @@ const Confirm: React.FC<FormProps> = ({
         <section>
           <section className="info">
             <h4 className="to">
-              <Translate zh_hant="給" zh_hans="给" /> {recipient.displayName}
+              <Translate zh_hant="給" zh_hans="给" en="to" />{' '}
+              {recipient.displayName}
             </h4>
 
             <p className="amount">

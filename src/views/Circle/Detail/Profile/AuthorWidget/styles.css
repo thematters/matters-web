@@ -1,3 +1,20 @@
 .author-widget {
   margin: var(--spacing-base) var(--spacing-base) 0;
 }
+
+.pinnedBroadcast {
+  position: relative;
+  margin-top: var(--spacing-base);
+
+  & .icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  & :global(.content p) {
+    text-indent: 2rem;
+  }
+}

@@ -122,7 +122,7 @@ const DonationsArticles = ({ isCompactMode }: { isCompactMode: boolean }) => {
         />
 
         <TextIcon size="sm" color="grey-dark">
-          <Translate zh_hant="支持了" zh_hans="支持了" />
+          <Translate zh_hant="支持了" zh_hans="支持了" en="donated" />
         </TextIcon>
         <style jsx>{styles}</style>
       </section>

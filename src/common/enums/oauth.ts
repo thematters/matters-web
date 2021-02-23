@@ -221,7 +221,7 @@ export const OAUTH_SCOPE_TREE = {
       },
       updateCommentsState: {
         _t: {
-          zh_hant: '折疊評論',
+          zh_hant: '闔上評論',
           zh_hans: '折叠评论',
         },
       },

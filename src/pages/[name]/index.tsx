@@ -11,7 +11,7 @@ const DynamicUserArticles = dynamic(() => import('~/views/User/Articles'), {
   ),
 })
 
-const DynamicCircleDetail = dynamic(() => import('~/views/Circle/Detail'), {
+const DynamicCircleWorks = dynamic(() => import('~/views/Circle/Works'), {
   ssr: true,
   loading: () => (
     <EmptyLayout>
@@ -26,7 +26,7 @@ const NameIndex = () => {
   if (isPathStartWith('/@', true)) {
     return <DynamicUserArticles />
   } else if (isPathStartWith('/~', true)) {
-    return <DynamicCircleDetail />
+    return <DynamicCircleWorks />
   }
 
   return (

@@ -12,13 +12,12 @@ import {
 } from '~/components'
 import { useMutation } from '~/components/GQL'
 
+import { ADD_TOAST } from '~/common/enums'
 import {
   parseFormSubmitErrors,
   translate,
   validatePaymentPointer,
 } from '~/common/utils'
-
-import { ADD_TOAST } from '@/src/common/enums'
 
 import Explainer from './Explainer'
 

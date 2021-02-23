@@ -80,7 +80,7 @@ const ArticleEditor: FC<Props> = ({
           enableSummary
           enableToolbar={!isReviseMode}
           eventName={ADD_TOAST}
-          language={lang.toUpperCase() as Language}
+          language={lang}
           mentionLoading={loading}
           mentionKeywordChange={mentionKeywordChange}
           mentionUsers={mentionUsers}

@@ -6,101 +6,32 @@ import {
   Layout,
   PullToRefresh,
   QueryError,
-  Spacer,
   Spinner,
   SubscribeCircleDialog,
-  Tabs,
   Throw404,
-  Translate,
+  useEventListener,
   usePublicQuery,
   usePullToRefresh,
   useRoute,
   ViewerContext,
 } from '~/components'
 
+import { REFETCH_CIRCLE_DETAIL } from '~/common/enums'
+
+import CircleDetailTabs from './CircleDetailTabs'
 import DropdownActions from './DropdownActions'
 import { CIRCLE_DETAIL_PRIVATE, CIRCLE_DETAIL_PUBLIC } from './gql'
 import CircleProfile from './Profile'
 import styles from './styles.css'
 import SubscriptionBanner from './SubscriptionBanner'
-import Works from './Works'
 
-import {
-  CircleDetailPublic,
-  CircleDetailPublic_circle,
-} from './__generated__/CircleDetailPublic'
+import { CircleDetailPublic } from './__generated__/CircleDetailPublic'
 
-type CircleFeedType = 'works' | 'discussion' | 'boardcast'
-
-const CircleDetail = ({ circle }: { circle: CircleDetailPublic_circle }) => {
-  // feed type
-  const [feed, setFeed] = useState<CircleFeedType>('works')
-  const isWorks = feed === 'works'
-  const isDiscussion = feed === 'discussion'
-  const isBoardcast = feed === 'boardcast'
-
-  /**
-   * Render
-   */
-  return (
-    <Layout.Main bgColor="grey-lighter">
-      <Layout.Header
-        left={<Layout.Header.BackButton mode="black-solid" />}
-        right={
-          <>
-            <span />
-
-            <DropdownActions circle={circle} />
-          </>
-        }
-        mode="transparent-absolute"
-      />
-
-      <Head title={circle.displayName} />
-
-      <PullToRefresh>
-        <CircleProfile circle={circle} />
-
-        <section className="content">
-          <Tabs sticky>
-            <Tabs.Tab selected={isWorks} onClick={() => setFeed('works')}>
-              <Translate id="article" />
-            </Tabs.Tab>
-
-            <Tabs.Tab
-              selected={isDiscussion}
-              onClick={() => setFeed('discussion')}
-            >
-              <Translate zh_hant="眾聊" zh_hans="" />
-            </Tabs.Tab>
-
-            <Tabs.Tab
-              selected={isBoardcast}
-              onClick={() => setFeed('boardcast')}
-            >
-              <Translate zh_hant="廣播" zh_hans="" />
-            </Tabs.Tab>
-          </Tabs>
-
-          {isWorks && <Works name={circle.name} />}
-          {isDiscussion && <span>Discussion</span>}
-          {isBoardcast && <span>Boardcast</span>}
-
-          <Spacer size="xxloose" />
-          <SubscribeCircleDialog circle={circle} />
-          <SubscriptionBanner circle={circle} />
-
-          <style jsx>{styles}</style>
-        </section>
-      </PullToRefresh>
-    </Layout.Main>
-  )
-}
-
-const CircleDetailContainer = () => {
+const CircleDetailContainer: React.FC = ({ children }) => {
   const { getQuery } = useRoute()
   const viewer = useContext(ViewerContext)
   const name = getQuery('name')
+  const [privateFetched, setPrivateFetched] = useState(false)
 
   /**
    * Data Fetching
@@ -118,16 +49,18 @@ const CircleDetailContainer = () => {
   const circle = data?.circle
 
   // private data
-  const loadPrivate = () => {
+  const loadPrivate = async () => {
     if (!viewer.isAuthed || !name) {
       return
     }
 
-    client.query({
+    await client.query({
       query: CIRCLE_DETAIL_PRIVATE,
       fetchPolicy: 'network-only',
       variables: { name },
     })
+
+    setPrivateFetched(true)
   }
 
   // fetch private data for first page
@@ -140,6 +73,7 @@ const CircleDetailContainer = () => {
     await refetchPublic()
     loadPrivate()
   }
+  useEventListener(REFETCH_CIRCLE_DETAIL, refetch)
   usePullToRefresh.Register()
   usePullToRefresh.Handler(refetch)
 
@@ -170,7 +104,38 @@ const CircleDetailContainer = () => {
     )
   }
 
-  return <CircleDetail circle={circle} />
+  return (
+    <Layout.Main bgColor="grey-lighter">
+      <Layout.Header
+        left={<Layout.Header.BackButton mode="black-solid" />}
+        right={
+          <>
+            <span />
+
+            <DropdownActions circle={circle} />
+          </>
+        }
+        mode="transparent-absolute"
+      />
+
+      <Head title={circle.displayName} />
+
+      <PullToRefresh>
+        <CircleProfile circle={circle} />
+
+        <section className="content">
+          <CircleDetailTabs />
+
+          {children}
+
+          <SubscribeCircleDialog circle={circle} />
+          {privateFetched && <SubscriptionBanner circle={circle} />}
+
+          <style jsx>{styles}</style>
+        </section>
+      </PullToRefresh>
+    </Layout.Main>
+  )
 }
 
 export default CircleDetailContainer
