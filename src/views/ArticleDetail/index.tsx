@@ -347,7 +347,7 @@ const ArticleDetail = () => {
                         <Translate
                           zh_hant="修訂於"
                           zh_hans="修訂於"
-                          en="republished at"
+                          en="Revised at"
                         />
                       </span>
                       <DateTime date={article.revisedAt} color="grey" />

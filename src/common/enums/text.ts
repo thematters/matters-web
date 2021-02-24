@@ -683,7 +683,7 @@ export const TEXT = {
     ENTITY_NOT_FOUND: 'Entity not found',
     expand: 'Expand',
     extend: 'Collect',
-    extendArticle: 'Reply',
+    extendArticle: 'Collections',
     failureChange: 'Failed, please try again.',
     failureCommentBlocked: 'Sorry, the author does not allow you to reply.',
     failureCommentOnboarding:
