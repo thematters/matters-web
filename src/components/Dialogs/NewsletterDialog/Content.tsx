@@ -131,7 +131,7 @@ const NewsletterDialogContent: React.FC<NewsletterDialogContentProps> = ({
           <Translate
             zh_hant="訂閱 Matters 通訊"
             zh_hans="订阅 Matters 通讯"
-            en="subscribe to Matters news letter"
+            en="Subscribe to Matters news letter"
           />
         }
         close={closeDialog}

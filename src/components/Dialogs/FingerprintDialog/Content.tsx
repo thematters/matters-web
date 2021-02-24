@@ -67,12 +67,16 @@ const FingerprintDialogContent = ({ dataHash }: { dataHash: string }) => {
       <section className="gateways">
         <header>
           <h4>
-            <Translate zh_hans="公共节点" zh_hant="公共節點" />
+            <Translate
+              zh_hans="公共节点"
+              zh_hant="公共節點"
+              en="Public gateways"
+            />
           </h4>
 
           <span className="count">
             <span className="highlight">{gateways.length}</span>
-            <Translate zh_hant=" 個節點" zh_hans=" 个节点" />
+            <Translate zh_hant=" 個節點" zh_hans=" 个节点" en=" gateways" />
           </span>
         </header>
 
@@ -110,21 +114,31 @@ const FingerprintDialogContent = ({ dataHash }: { dataHash: string }) => {
 
         <p>
           <b>
-            <Translate zh_hant="作品指紋" zh_hans="作品指纹" />
+            <Translate
+              zh_hant="作品指紋"
+              zh_hans="作品指纹"
+              en="Content hash"
+            />
           </b>
           <Translate
             zh_hans={` 是一篇作品上载到 IPFS 后生成的独一无二的 ID，通过指纹可在 IPFS 不同节点调取作品内容。`}
             zh_hant={` 是一篇作品上載到 IPFS 後生成的獨一無二的 ID，通過指紋可在 IPFS 不同節點調取作品內容。`}
+            en={` is the fingerpint of your work on IPFS, you can use it to retrive your work from any IPFS node.`}
           />
         </p>
 
         <p>
           <b>
-            <Translate zh_hant="公共節點" zh_hans="公共节点" />
+            <Translate
+              zh_hant="公共節點"
+              zh_hans="公共节点"
+              en="Public gateways"
+            />
           </b>
           <Translate
-            zh_hant=" 是一篇作品在 IPFS 網絡的存儲地點，你可以使用任意公共節點地址對作品進行傳播。"
-            zh_hans=" 是一篇作品在 IPFS 网络的存储地点，你可以使用任意公共节点地址对作品进行传播。"
+            zh_hant=" 是志願提供 IPFS 網絡入口的節點，你可以使用任意公共節點地址對作品進行傳播。"
+            zh_hans=" 是志愿提供 IPFS 网络入口的节点，你可以使用任意公共节点地址对作品进行传播。"
+            en=" are volunteer nodes that provice access to IPFS, you can use them to share your work."
           />
         </p>
       </section>

@@ -29,7 +29,7 @@ const Footer = () => {
       <div className="l-row">
         <section className="footer-section l-col-4 l-col-sm-3 l-col-lg-4">
           <h2>
-            <Translate zh_hant="聯絡方式" zh_hans="联系我们" en="contact us" />
+            <Translate zh_hant="聯絡方式" zh_hans="联系我们" en="Contact us" />
           </h2>
           <p>
             <Translate
@@ -65,7 +65,7 @@ const Footer = () => {
 
         <section className="footer-section l-col-4 l-col-sm-2 l-col-lg-4">
           <h2>
-            <Translate zh_hant="追蹤我們" zh_hans="追蹤我們" en="follow us" />
+            <Translate zh_hant="追蹤我們" zh_hans="追蹤我們" en="Follow us" />
           </h2>
 
           <div className="socials">

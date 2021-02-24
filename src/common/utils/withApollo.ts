@@ -47,7 +47,7 @@ const persistedQueryLink = createPersistedQueryLink({
 /**
  * Dynamic API endpoint based on hostname
  */
-const httpLink = ({ host }: { host: string }) => {
+const httpLink = ({ host, headers }: { host: string; headers: any }) => {
   const isOAuthSite = process.env.NEXT_PUBLIC_OAUTH_SITE_DOMAIN === host
 
   const apiUrl = isOAuthSite
@@ -64,6 +64,7 @@ const httpLink = ({ host }: { host: string }) => {
 
   return createUploadLink({
     uri: apiUrl,
+    headers,
     fetchOptions: {
       agent,
     },
@@ -119,7 +120,6 @@ const authLink = setContext((operation, { headers, ...restCtx }) => {
       headers['x-access-token'] = token
     }
   }
-
   return {
     credentials: isPublicOperation ? 'omit' : 'include',
     headers: {
@@ -204,7 +204,7 @@ export default withApollo(({ ctx, headers, initialState }) => {
       agentHashLink,
       authLink,
       userGroupLink({ cookie }),
-      httpLink({ host }),
+      httpLink({ host, headers }),
     ]),
     cache,
     resolvers,
