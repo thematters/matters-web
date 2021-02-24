@@ -73,7 +73,7 @@ export const AuthorPicker = ({ title }: { title: React.ReactNode }) => {
           </Button>
 
           <span className="follow-info">
-            <Translate zh_hant="已追蹤 " zh_hans="已追踪 " en="followed" />
+            <Translate zh_hant="已追蹤 " zh_hans="已追踪 " en="followed " />
             <span className="hightlight">{followeeCount}</span>
             <Translate zh_hant=" 位" zh_hans=" 位" en=" authors" />
           </span>

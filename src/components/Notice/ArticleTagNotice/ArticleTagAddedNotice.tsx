@@ -40,7 +40,7 @@ const ArticleTagAddedNotice = ({ notice }: { notice: NoticeType }) => {
             <Translate
               zh_hant="發現你的作品，並把它加入標籤"
               zh_hans="发现你的作品，并把它加入标签"
-              en="discovery your work, and add it to tag"
+              en="discover your articles, and add it to tag"
             />
           )}
           {!isAuthor && isMaintainer && notice.target.author && (

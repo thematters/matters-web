@@ -93,7 +93,6 @@ const Root = ({
       privateWatcher.subscribe({
         next: (result) => {
           // set private viewer
-          console.log({ result })
           if (result?.data?.viewer) {
             setPrivateViewer(result?.data?.viewer)
           }

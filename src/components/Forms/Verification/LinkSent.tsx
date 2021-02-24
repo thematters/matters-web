@@ -35,15 +35,15 @@ export const VerificationLinkSent = ({
             }
             en={
               isRegister
-                ? 'We have sent register link to you 📩'
-                : 'We have sent verification link to you 📩'
+                ? 'We have sent your register link to you 📩'
+                : 'We have sent your verification link to you 📩'
             }
           />
           <br />
           <Translate
             zh_hant="快去你的電子信箱看看吧！"
             zh_hans="快去你的邮箱看看吧！"
-            en="Let's check your inbox!"
+            en="Make sure to check your inbox!"
           />
         </p>
       </Dialog.Message>
