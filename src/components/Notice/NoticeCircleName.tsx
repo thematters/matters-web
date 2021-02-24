@@ -3,12 +3,12 @@ import Link from 'next/link'
 
 import { toPath } from '~/common/utils'
 
-import { NoticeCircleNameCircle } from './__generated__/NoticeCircleNameCircle'
+import { NoticeCircleName as NoticeCircleNameType } from './__generated__/NoticeCircleName'
 
 const NoticeCircleName = ({
   circle,
 }: {
-  circle: NoticeCircleNameCircle | null
+  circle: NoticeCircleNameType | null
 }) => {
   if (!circle) {
     return null
@@ -28,7 +28,7 @@ const NoticeCircleName = ({
 
 NoticeCircleName.fragments = {
   circle: gql`
-    fragment NoticeCircleNameCircle on Circle {
+    fragment NoticeCircleName on Circle {
       id
       name
       displayName

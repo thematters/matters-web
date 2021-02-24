@@ -4,7 +4,7 @@ import { Translate } from '~/components'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorName from '../NoticeActorName'
-import NoticeArticle from '../NoticeArticle'
+import NoticeArticleCard from '../NoticeArticleCard'
 import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
 import styles from '../styles.css'
@@ -26,15 +26,15 @@ const ArticleMentionedYouNotice = ({ notice }: { notice: NoticeType }) => {
 
       <section className="content-wrap">
         <NoticeHead>
-          <NoticeActorName user={actor} />{' '}
+          <NoticeActorName user={actor} />
           <Translate
-            zh_hant="在作品中提及了你"
-            zh_hans="在作品中提及了你"
-            en="mentioned you in a work"
+            zh_hant=" 在作品中提及了你"
+            zh_hans=" 在作品中提及了你"
+            en=" mentioned you in a article"
           />
         </NoticeHead>
 
-        <NoticeArticle article={notice.article} isBlock />
+        <NoticeArticleCard article={notice.article} />
 
         <NoticeDate notice={notice} />
       </section>
@@ -54,12 +54,12 @@ ArticleMentionedYouNotice.fragments = {
         ...NoticeActorNameUser
       }
       article: target {
-        ...NoticeArticle
+        ...NoticeArticleCard
       }
     }
     ${NoticeActorAvatar.fragments.user}
     ${NoticeActorName.fragments.user}
-    ${NoticeArticle.fragments.article}
+    ${NoticeArticleCard.fragments.article}
     ${NoticeDate.fragments.notice}
   `,
 }

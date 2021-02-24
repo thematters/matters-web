@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 
 import { Translate } from '~/components'
 
-import NoticeArticle from '../NoticeArticle'
+import NoticeArticleCard from '../NoticeArticleCard'
 import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
 import NoticeTypeIcon from '../NoticeTypeIcon'
@@ -22,11 +22,11 @@ const ArticlePublishedNotice = ({ notice }: { notice: NoticeType }) => {
           <Translate
             zh_hant="你的作品已發布到分佈式網絡"
             zh_hans="你的作品已发布到分布式网络"
-            en="Your work has been published to decentralized network"
+            en="Your article has been published to decentralized network"
           />
         </NoticeHead>
 
-        <NoticeArticle article={notice.article} isBlock />
+        <NoticeArticleCard article={notice.article} />
 
         <NoticeDate notice={notice} />
       </section>
@@ -42,10 +42,10 @@ ArticlePublishedNotice.fragments = {
       id
       ...NoticeDate
       article: target {
-        ...NoticeArticle
+        ...NoticeArticleCard
       }
     }
-    ${NoticeArticle.fragments.article}
+    ${NoticeArticleCard.fragments.article}
     ${NoticeDate.fragments.notice}
   `,
 }

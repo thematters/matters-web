@@ -130,27 +130,52 @@ export const MOCK_NOTICE_LIST = [
   },
 
   /**
+   * Article - Article
+   */
+  // ArticleNewCollected
+  {
+    __typename: 'ArticleArticleNotice' as any,
+    id: 'ArticleNewCollected',
+    unread: false,
+    createdAt: '2020-12-24T07:29:17.682Z',
+    actors: [MOCK_USER],
+    articleArticleNoticeType: 'ArticleNewCollected' as any,
+    article: MOCK_CIRCLE_ARTICLE,
+    collection: MOCK_CIRCLE_ARTICLE,
+  },
+
+  /**
    * Comment
    */
-  // ArticleCommentPinned
+  // CommentPinned
   {
     __typename: 'CommentNotice' as any,
-    id: 'ArticleCommentPinned',
+    id: 'CommentPinned',
     unread: false,
     createdAt: '2020-12-24T07:29:17.682Z',
     actors: [MOCK_USER],
-    commentNoticeType: 'ArticleCommentPinned' as any,
+    commentNoticeType: 'CommentPinned' as any,
     comment: MOCK_COMMENT,
   },
-  // ArticleCommentMentionedYou
+  // CommentMentionedYou:Article
   {
     __typename: 'CommentNotice' as any,
-    id: 'ArticleCommentMentionedYou',
+    id: 'CommentMentionedYou',
     unread: false,
     createdAt: '2020-12-24T07:29:17.682Z',
     actors: [MOCK_USER],
-    commentNoticeType: 'ArticleCommentMentionedYou' as any,
+    commentNoticeType: 'CommentMentionedYou' as any,
     comment: MOCK_COMMENT,
+  },
+  // CommentMentionedYou:Circle
+  {
+    __typename: 'CommentNotice' as any,
+    id: 'CommentMentionedYou-02',
+    unread: false,
+    createdAt: '2020-12-24T07:29:17.682Z',
+    actors: [MOCK_USER],
+    commentNoticeType: 'CommentMentionedYou' as any,
+    comment: MOCK_CIRCLE_COMMENT,
   },
   // ArticleNewComment
   {
@@ -166,16 +191,6 @@ export const MOCK_NOTICE_LIST = [
   {
     __typename: 'CommentNotice' as any,
     id: 'SubscribedArticleNewComment',
-    unread: false,
-    createdAt: '2020-12-24T07:29:17.682Z',
-    actors: [MOCK_USER],
-    commentNoticeType: 'SubscribedArticleNewComment' as any,
-    comment: MOCK_COMMENT,
-  },
-  // SubscribedArticleNewComment: multi actors
-  {
-    __typename: 'CommentNotice' as any,
-    id: 'SubscribedArticleNewComment-02',
     unread: false,
     createdAt: '2020-12-24T07:29:17.682Z',
     actors: [MOCK_USER],
@@ -217,16 +232,16 @@ export const MOCK_NOTICE_LIST = [
     comment: MOCK_PARENT_COMMENT,
     reply: MOCK_COMMENT,
   },
-  // CommentNewReply: multi actors
+  // CommentNewReply:Circle
   {
     __typename: 'CommentCommentNotice' as any,
-    id: 'CommentNewReply-02',
+    id: 'CommentNewReply-03',
     unread: false,
     createdAt: '2020-12-24T07:29:17.682Z',
-    actors: [MOCK_USER, MOCK_USER],
+    actors: [MOCK_USER],
     commentCommentNoticeType: 'CommentNewReply' as any,
     comment: MOCK_PARENT_COMMENT,
-    reply: MOCK_COMMENT,
+    reply: MOCK_CIRCLE_COMMENT,
   },
 
   /**

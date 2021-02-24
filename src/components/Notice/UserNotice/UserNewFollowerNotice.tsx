@@ -8,9 +8,9 @@ import { numAbbr } from '~/common/utils'
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorName from '../NoticeActorName'
 import NoticeDate from '../NoticeDate'
-import NoticeFollower from '../NoticeFollower'
 import NoticeHead from '../NoticeHead'
 import NoticeTypeIcon from '../NoticeTypeIcon'
+import NoticeUserCard from '../NoticeUserCard'
 import styles from '../styles.css'
 
 import { UserNewFollowerNotice as NoticeType } from './__generated__/UserNewFollowerNotice'
@@ -44,17 +44,17 @@ const UserNewFollowerNotice = ({ notice }: { notice: NoticeType }) => {
               en={`etc. ${numAbbr(actorsCount)} users`}
             />
           )}
-          <Translate id="followingYou" />
+          <Translate zh_hant="追蹤了你" zh_hans="追踪了你" en=" followed you" />
         </NoticeHead>
 
         {isMultiActors ? (
           <section className="multi-actor-avatars">
             {notice.actors.map((actor, index) => (
-              <NoticeActorAvatar key={index} user={actor} />
+              <NoticeActorAvatar key={index} user={actor} size="md" />
             ))}
           </section>
         ) : (
-          <NoticeFollower user={notice.actors[0]} />
+          <NoticeUserCard user={notice.actors[0]} />
         )}
 
         <NoticeDate notice={notice} />
@@ -73,12 +73,12 @@ UserNewFollowerNotice.fragments = {
       actors {
         ...NoticeActorAvatarUser
         ...NoticeActorNameUser
-        ...NoticeFollower
+        ...NoticeUserCard
       }
     }
     ${NoticeActorAvatar.fragments.user}
     ${NoticeActorName.fragments.user}
-    ${NoticeFollower.fragments.follower}
+    ${NoticeUserCard.fragments.follower}
     ${NoticeDate.fragments.notice}
   `,
 }

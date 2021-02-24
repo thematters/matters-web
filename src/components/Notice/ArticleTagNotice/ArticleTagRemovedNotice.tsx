@@ -4,7 +4,7 @@ import { Translate } from '~/components'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorName from '../NoticeActorName'
-import NoticeArticle from '../NoticeArticle'
+import NoticeArticleTitle from '../NoticeArticleTitle'
 import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
 import NoticeTag from '../NoticeTag'
@@ -27,15 +27,21 @@ const ArticleTagRemovedNotice = ({ notice }: { notice: NoticeType }) => {
 
       <section className="content-wrap overflow-hidden">
         <NoticeHead>
-          <NoticeActorName user={actor} />{' '}
+          <NoticeActorName user={actor} />
           <Translate
-            zh_hant="將你的作品從標籤中拿走了"
-            zh_hans="将你的作品从标签中拿走了"
-            en="removed your work from tag"
+            zh_hant=" 將你的作品 "
+            zh_hans=" 将你的作品 "
+            en=" removed "
+          />
+
+          <NoticeArticleTitle article={notice.target} />
+
+          <Translate
+            zh_hant=" 從標籤中拿走了"
+            zh_hans=" 从标签中拿走了"
+            en=" from tag"
           />
         </NoticeHead>
-
-        <NoticeArticle article={notice.target} isBlock />
 
         <NoticeTag tag={notice.tag} />
 
@@ -57,7 +63,7 @@ ArticleTagRemovedNotice.fragments = {
         ...NoticeActorNameUser
       }
       target {
-        ...NoticeArticle
+        ...NoticeArticleTitle
       }
       tag {
         ...NoticeTag
@@ -65,7 +71,7 @@ ArticleTagRemovedNotice.fragments = {
     }
     ${NoticeActorAvatar.fragments.user}
     ${NoticeActorName.fragments.user}
-    ${NoticeArticle.fragments.article}
+    ${NoticeArticleTitle.fragments.article}
     ${NoticeDate.fragments.notice}
     ${NoticeTag.fragments.tag}
   `,

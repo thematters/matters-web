@@ -4,6 +4,7 @@ import { Translate } from '~/components'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorName from '../NoticeActorName'
+import NoticeArticleTitle from '../NoticeArticleTitle'
 import NoticeComment from '../NoticeComment'
 import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
@@ -17,6 +18,10 @@ const CommentPinnedNotice = ({ notice }: { notice: NoticeType }) => {
   }
 
   const actor = notice.actors[0]
+  const commentArticle =
+    notice.comment?.node.__typename === 'Article'
+      ? notice.comment.node
+      : undefined
 
   return (
     <section className="container">
@@ -26,12 +31,14 @@ const CommentPinnedNotice = ({ notice }: { notice: NoticeType }) => {
 
       <section className="content-wrap">
         <NoticeHead>
-          <NoticeActorName user={actor} />{' '}
+          <NoticeActorName user={actor} />
           <Translate
-            zh_hant="置頂了你的評論"
-            zh_hans="置顶了你的评论"
-            en="pinned your comment"
+            zh_hant=" 置頂了你在作品 "
+            zh_hans=" 置顶了你在作品 "
+            en=" pinned your comment on "
           />
+          {commentArticle && <NoticeArticleTitle article={commentArticle} />}
+          <Translate zh_hant=" 的評論" zh_hans=" 的评论" en="" />
         </NoticeHead>
 
         <NoticeComment comment={notice.comment} />
@@ -55,10 +62,16 @@ CommentPinnedNotice.fragments = {
       }
       comment: target {
         ...NoticeComment
+        node {
+          ... on Article {
+            ...NoticeArticleTitle
+          }
+        }
       }
     }
     ${NoticeActorAvatar.fragments.user}
     ${NoticeActorName.fragments.user}
+    ${NoticeArticleTitle.fragments.article}
     ${NoticeComment.fragments.comment}
     ${NoticeDate.fragments.notice}
   `,

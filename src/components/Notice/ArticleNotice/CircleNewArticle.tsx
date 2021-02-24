@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 
 import { Translate } from '~/components'
 
-import NoticeArticle from '../NoticeArticle'
+import NoticeArticleCard from '../NoticeArticleCard'
 import NoticeCircleName from '../NoticeCircleName'
 import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
@@ -25,12 +25,19 @@ const CircleNewArticle = ({ notice }: { notice: NoticeType }) => {
       </section>
 
       <section className="content-wrap">
-        <NoticeHead>
-          <NoticeCircleName circle={circle} />{' '}
-          <Translate zh_hant="又成長了" zh_hans="又成长了" />
+        <NoticeHead
+          subtitle={
+            <Translate
+              zh_hant="新作品已經加入圍爐。該作品 24 小時限免，你可以前往閱讀啦。"
+              zh_hans="新作品已经加入围炉。该作品 24 小时限免，你可以前往阅读啦。"
+            />
+          }
+        >
+          <NoticeCircleName circle={circle} />
+          <Translate zh_hant=" 又成長了" zh_hans=" 又成长了" />
         </NoticeHead>
 
-        <NoticeArticle article={notice.article} isBlock />
+        <NoticeArticleCard article={notice.article} />
 
         <NoticeDate notice={notice} />
       </section>
@@ -46,14 +53,14 @@ CircleNewArticle.fragments = {
       id
       ...NoticeDate
       article: target {
-        ...NoticeArticle
+        ...NoticeArticleCard
         circle {
           id
-          ...NoticeCircleNameCircle
+          ...NoticeCircleName
         }
       }
     }
-    ${NoticeArticle.fragments.article}
+    ${NoticeArticleCard.fragments.article}
     ${NoticeDate.fragments.notice}
     ${NoticeCircleName.fragments.circle}
   `,

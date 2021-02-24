@@ -26,11 +26,11 @@ const TagAddEditorNotice = ({ notice }: { notice: NoticeType }) => {
 
       <section className="content-wrap">
         <NoticeHead>
-          <NoticeActorName user={actor} />{' '}
+          <NoticeActorName user={actor} />
           <Translate
-            zh_hant="邀請你成為標籤的協作者"
-            zh_hans="邀请你成为標籤的协作者"
-            en="invite you to become a collaborator"
+            zh_hant=" 邀請你成為標籤的協作者"
+            zh_hans=" 邀请你成为標籤的协作者"
+            en=" invite you to become a collaborator"
           />
         </NoticeHead>
 

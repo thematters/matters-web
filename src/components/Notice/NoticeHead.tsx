@@ -1,16 +1,14 @@
-import classNames from 'classnames'
-import { ReactNode } from 'react'
-
 import styles from './styles.css'
 
-const NoticeHead = ({ children }: { children: ReactNode }) => {
-  const headWrapClasses = classNames({
-    'head-wrap': true,
-  })
+type NoticeHeadProps = {
+  subtitle?: React.ReactNode
+}
 
+const NoticeHead: React.FC<NoticeHeadProps> = ({ subtitle, children }) => {
   return (
-    <section className={headWrapClasses}>
+    <section className="head-wrap">
       <h4>{children}</h4>
+      {subtitle && <p>{subtitle}</p>}
       <style jsx>{styles}</style>
     </section>
   )

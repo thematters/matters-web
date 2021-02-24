@@ -2,9 +2,9 @@ import gql from 'graphql-tag'
 
 import { UserDigest } from '~/components'
 
-import { NoticeFollower as NoticeFollowerType } from './__generated__/NoticeFollower'
+import { NoticeUserCard as NoticeUserCardType } from './__generated__/NoticeUserCard'
 
-const NoticeFollower = ({ user }: { user: NoticeFollowerType | null }) => {
+const NoticeUserCard = ({ user }: { user: NoticeUserCardType | null }) => {
   if (!user) {
     return null
   }
@@ -20,9 +20,9 @@ const NoticeFollower = ({ user }: { user: NoticeFollowerType | null }) => {
   )
 }
 
-NoticeFollower.fragments = {
+NoticeUserCard.fragments = {
   follower: gql`
-    fragment NoticeFollower on User {
+    fragment NoticeUserCard on User {
       ...UserDigestRichUserPublic
       ...UserDigestRichUserPrivate
     }
@@ -31,4 +31,4 @@ NoticeFollower.fragments = {
   `,
 }
 
-export default NoticeFollower
+export default NoticeUserCard

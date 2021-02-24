@@ -4,12 +4,12 @@ import { ArticleDigestSidebar } from '~/components'
 
 import styles from './styles.css'
 
-import { NoticeCollectionArticle as NoticeCollectionArticleType } from './__generated__/NoticeCollectionArticle'
+import { NoticeArticleCard as NoticeArticleCardType } from './__generated__/NoticeArticleCard'
 
-const NoticeCollectionArticle = ({
+const NoticeArticleCard = ({
   article,
 }: {
-  article: NoticeCollectionArticleType | null
+  article: NoticeArticleCardType | null
 }) => {
   if (!article) {
     return null
@@ -23,9 +23,9 @@ const NoticeCollectionArticle = ({
   )
 }
 
-NoticeCollectionArticle.fragments = {
+NoticeArticleCard.fragments = {
   article: gql`
-    fragment NoticeCollectionArticle on Article {
+    fragment NoticeArticleCard on Article {
       id
       ...ArticleDigestSidebarArticle
     }
@@ -33,4 +33,4 @@ NoticeCollectionArticle.fragments = {
   `,
 }
 
-export default NoticeCollectionArticle
+export default NoticeArticleCard

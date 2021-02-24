@@ -4,7 +4,7 @@ import { Translate } from '~/components'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorName from '../NoticeActorName'
-import NoticeArticle from '../NoticeArticle'
+import NoticeArticleCard from '../NoticeArticleCard'
 import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
 import styles from '../styles.css'
@@ -46,7 +46,7 @@ const PaymentReceivedDonationNotice = ({ notice }: { notice: NoticeType }) => {
         </NoticeHead>
 
         {tx && tx.target?.__typename === 'Article' && (
-          <NoticeArticle article={tx.target} isBlock />
+          <NoticeArticleCard article={tx.target} />
         )}
 
         <NoticeDate notice={notice} />
@@ -73,7 +73,7 @@ PaymentReceivedDonationNotice.fragments = {
         target {
           __typename
           ... on Article {
-            ...NoticeArticle
+            ...NoticeArticleCard
           }
         }
       }
@@ -81,7 +81,7 @@ PaymentReceivedDonationNotice.fragments = {
     ${NoticeDate.fragments.notice}
     ${NoticeActorAvatar.fragments.user}
     ${NoticeActorName.fragments.user}
-    ${NoticeArticle.fragments.article}
+    ${NoticeArticleCard.fragments.article}
   `,
 }
 

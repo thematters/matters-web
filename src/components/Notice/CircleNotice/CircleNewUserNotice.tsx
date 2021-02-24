@@ -8,9 +8,9 @@ import { numAbbr } from '~/common/utils'
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorName from '../NoticeActorName'
 import NoticeDate from '../NoticeDate'
-import NoticeFollower from '../NoticeFollower'
 import NoticeHead from '../NoticeHead'
 import NoticeTypeIcon from '../NoticeTypeIcon'
+import NoticeUserCard from '../NoticeUserCard'
 import styles from '../styles.css'
 
 import { CircleNewUserNotice as NoticeType } from './__generated__/CircleNewUserNotice'
@@ -53,24 +53,36 @@ const CircleNewUserNotice = ({ notice, userType }: CircleNewUserNotice) => {
             />
           )}
           {isNewFollower && (
-            <Translate zh_hant="追蹤了你的圍爐" zh_hans="追踪了你的围炉" />
+            <Translate
+              zh_hant="追蹤了你的圍爐"
+              zh_hans="追踪了你的围炉"
+              en=" followed your cirlce"
+            />
           )}
           {isNewSubscriber && (
-            <Translate zh_hant="訂閱了你的圍爐" zh_hans="订阅了你的围炉" />
+            <Translate
+              zh_hant="訂閱了你的圍爐"
+              zh_hans="订阅了你的围炉"
+              en=" subscribed your cirlce"
+            />
           )}
           {isNewUnsubscriber && (
-            <Translate zh_hant="退訂了你的圍爐" zh_hans="退订了你的围炉" />
+            <Translate
+              zh_hant="退訂了你的圍爐"
+              zh_hans="退订了你的围炉"
+              en=" unsubscribed your cirlce"
+            />
           )}
         </NoticeHead>
 
         {isMultiActors ? (
           <section className="multi-actor-avatars">
             {notice.actors.map((actor, index) => (
-              <NoticeActorAvatar key={index} user={actor} />
+              <NoticeActorAvatar key={index} user={actor} size="md" />
             ))}
           </section>
         ) : (
-          <NoticeFollower user={notice.actors[0]} />
+          <NoticeUserCard user={notice.actors[0]} />
         )}
 
         <NoticeDate notice={notice} />
@@ -89,12 +101,12 @@ CircleNewUserNotice.fragments = {
       actors {
         ...NoticeActorAvatarUser
         ...NoticeActorNameUser
-        ...NoticeFollower
+        ...NoticeUserCard
       }
     }
     ${NoticeActorAvatar.fragments.user}
     ${NoticeActorName.fragments.user}
-    ${NoticeFollower.fragments.follower}
+    ${NoticeUserCard.fragments.follower}
     ${NoticeDate.fragments.notice}
   `,
 }

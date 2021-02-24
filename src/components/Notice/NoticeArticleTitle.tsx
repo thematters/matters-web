@@ -5,13 +5,13 @@ import { ArticleDigestTitle } from '~/components'
 
 import { toPath } from '~/common/utils'
 
-import { NoticeArticle as NoticeArticleType } from './__generated__/NoticeArticle'
+import { NoticeArticleTitle as NoticeArticleTitleType } from './__generated__/NoticeArticleTitle'
 
-const NoticeArticle = ({
+const NoticeArticleTitle = ({
   article,
   isBlock = false,
 }: {
-  article: NoticeArticleType | null
+  article: NoticeArticleTitleType | null
   isBlock?: boolean
 }) => {
   if (!article) {
@@ -34,9 +34,9 @@ const NoticeArticle = ({
   return <ArticleDigestTitle article={article} textSize="md-s" />
 }
 
-NoticeArticle.fragments = {
+NoticeArticleTitle.fragments = {
   article: gql`
-    fragment NoticeArticle on Article {
+    fragment NoticeArticleTitle on Article {
       id
       ...ArticleDigestTitleArticle
     }
@@ -44,4 +44,4 @@ NoticeArticle.fragments = {
   `,
 }
 
-export default NoticeArticle
+export default NoticeArticleTitle

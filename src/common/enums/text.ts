@@ -121,7 +121,6 @@ export const TEXT = {
     follower: '追蹤者',
     following: '追蹤中',
     followingMe: '追蹤我的',
-    followingYou: '追蹤了你',
     FORBIDDEN_BY_STATE: '你無權限進行該操作',
     FORBIDDEN_BY_TARGET_STATE: '你無法對此對象進行該操作',
     FORBIDDEN: '你尚無權限進行該操作',
@@ -441,7 +440,6 @@ export const TEXT = {
     follower: '追踪者',
     following: '追踪中',
     followingMe: '追踪我的',
-    followingYou: '追踪了你',
     FORBIDDEN_BY_STATE: '你无权限进行该操作',
     FORBIDDEN_BY_TARGET_STATE: '你无法对此对象进行该操作',
     FORBIDDEN: '你尚无权限进行该操作',
@@ -767,7 +765,6 @@ export const TEXT = {
     follower: 'Follower',
     following: 'Following',
     followingMe: 'Following me',
-    followingYou: 'Followed you',
     FORBIDDEN_BY_STATE: 'You do not have permission to perform this operation',
     FORBIDDEN_BY_TARGET_STATE:
       'You do not have permissionn to perform this operation',

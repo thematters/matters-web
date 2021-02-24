@@ -6,7 +6,7 @@ import { Translate, ViewerContext } from '~/components'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorName from '../NoticeActorName'
-import NoticeArticle from '../NoticeArticle'
+import NoticeArticleTitle from '../NoticeArticleTitle'
 import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
 import NoticeTag from '../NoticeTag'
@@ -23,9 +23,6 @@ const ArticleTagUnselectedNotice = ({ notice }: { notice: NoticeType }) => {
 
   const actor = notice.actors[0]
 
-  const isOwner = notice.tag?.owner?.id === viewer.id
-  const isEditor = _some(notice.tag?.editors || [], ['id', viewer.id])
-  const isMaintainer = isOwner || isEditor
   const isAuthor = notice.target.author?.id === viewer.id
 
   return (
@@ -39,24 +36,27 @@ const ArticleTagUnselectedNotice = ({ notice }: { notice: NoticeType }) => {
           {isAuthor && (
             <Translate zh_hant="啊喔， " zh_hans="啊喔， " en="uh-oh, " />
           )}
-          <NoticeActorName user={actor} />{' '}
-          {isAuthor && (
-            <Translate
-              zh_hant="將你的作品從標籤精選中拿走了"
-              zh_hans="将你的作品從标签精选中拿走了"
-              en="removed your work from selected feed"
-            />
-          )}
-          {!isAuthor && isMaintainer && (
-            <Translate
-              zh_hant="將作品從標籤精選中拿走了"
-              zh_hans="将作品從标签精选中拿走了"
-              en="removed work from selected feed"
-            />
-          )}
-        </NoticeHead>
 
-        <NoticeArticle article={notice.target} isBlock />
+          <NoticeActorName user={actor} />
+
+          {isAuthor ? (
+            <Translate
+              zh_hant=" 將你的作品 "
+              zh_hans=" 将你的作品 "
+              en=" removed "
+            />
+          ) : (
+            <Translate zh_hant=" 將作品 " zh_hans=" 将作品 " en=" removed " />
+          )}
+
+          <NoticeArticleTitle article={notice.target} />
+
+          <Translate
+            zh_hant=" 從標籤精選中拿走了"
+            zh_hans=" 從标签精选中拿走了"
+            en=" from selected feed"
+          />
+        </NoticeHead>
 
         <NoticeTag tag={notice.tag} />
 
@@ -78,21 +78,15 @@ ArticleTagUnselectedNotice.fragments = {
         ...NoticeActorNameUser
       }
       target {
-        ...NoticeArticle
+        ...NoticeArticleTitle
       }
       tag {
-        editors {
-          id
-        }
-        owner {
-          id
-        }
         ...NoticeTag
       }
     }
     ${NoticeActorAvatar.fragments.user}
     ${NoticeActorName.fragments.user}
-    ${NoticeArticle.fragments.article}
+    ${NoticeArticleTitle.fragments.article}
     ${NoticeDate.fragments.notice}
     ${NoticeTag.fragments.tag}
   `,
