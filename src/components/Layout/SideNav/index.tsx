@@ -109,7 +109,7 @@ const SideNav = () => {
             onShown={hidePopperOnClick}
           >
             <NavListItem
-              name={<Translate zh_hant="我的" zh_hans="我的" en="Mine" />}
+              name={<Translate zh_hant="我的" zh_hans="我的" en="My page" />}
               icon={<MeAvatar user={viewer} />}
               activeIcon={<MeAvatar user={viewer} active />}
               active={isInMe}

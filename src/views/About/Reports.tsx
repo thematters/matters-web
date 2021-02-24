@@ -26,7 +26,7 @@ const Reports = () => (
         <a href="https://appworks.tw/category/events/" target="_blank">
           <h3>
             Taiwan’s AppWorks Demo Day #19 Puts 18 of the Most Promising Greater
-            Southeast Asian AI / Blockchain Founders on Stage
+            Southeast ...
           </h3>
           <cite>AppWorks</cite>
         </a>
@@ -104,11 +104,11 @@ const Reports = () => (
       </div>
       <div className="item">
         <a
-          href="https://new.qq.com/omn/20180410/20180410B0LP7J.html"
+          href="https://restofworld.org/2020/chinas-fugitive-writers-find-a-home-online/"
           target="_blank"
         >
-          <h3>离开端传媒，张洁平的新实验：用区块链拯救公共讨论</h3>
-          <cite>方可成</cite>
+          <h3>China’s fugitive writers find a home online</h3>
+          <cite>Rest of World</cite>
         </a>
       </div>
     </div>

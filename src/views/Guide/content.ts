@@ -44,6 +44,6 @@ export default {
 <p><a className="u-link-green" href="https://matters.news/@hi176/matters-%E6%A8%99%E7%B1%A4%E5%8A%9F%E8 %83%BD%E5%A4%A7%E9%80%B2%E5%8C%96-%E9%96%B1%E8%AE%80%E5%88%86%E9%A1%9E-%E5 %80%8B%E4%BA%BA%E5%B0%88%E6%AC%84-%E5%AE%83%E9%83%BD%E8%83%BD%E6%BB%BF%E8% B6%B3%E4%BD%A0-bafyreifdlhuy33h6235jt5vk2k7fyxendykkhgixfvnzr6izu4677xtwui">Matters tag usage guide</a></p>
 
 
-<p>If you have any other questions or suggestions, please write to <a className="u-link-green" href="mailto:ask@matters.news" target="_blank">ask@matters.news< /a>, we will reply as soon as possible! </p>
+<p>If you have any other questions or suggestions, please write to <a className="u-link-green" href="mailto:ask@matters.news" target="_blank">ask@matters.news</a>, we will reply as soon as possible! </p>
   `,
 }
