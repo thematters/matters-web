@@ -23,7 +23,7 @@ const SortBy: React.FC<SortByProps> = ({ sortBy, setSortBy }) => {
       </Tabs.Tab>
 
       <Tabs.Tab onClick={() => setSortBy('icymi')} selected={isICYMI}>
-        <Translate zh_hant="精華" zh_hans="精华" en="Selected" />
+        <Translate zh_hant="精華" zh_hans="精华" en="Featured" />
       </Tabs.Tab>
     </Tabs>
   )

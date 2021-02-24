@@ -19,6 +19,8 @@ import {
 import PageViewTracker from '~/components/Analytics/PageViewTracker'
 import SplashScreen from '~/components/SplashScreen'
 
+import { langConvert } from '~/common/utils'
+
 import { ROOT_QUERY_PRIVATE, ROOT_QUERY_PUBLIC } from './gql'
 
 import {
@@ -80,6 +82,7 @@ const Root = ({
   // viewer
   const [privateViewer, setPrivateViewer] = useState<RootQueryPrivate_viewer>()
   const [privateFetched, setPrivateFetched] = useState(false)
+
   const fetchPrivateViewer = async () => {
     try {
       const privateWatcher = client.watchQuery<RootQueryPrivate>({
@@ -97,6 +100,11 @@ const Root = ({
           setPrivateFetched(true)
         },
         error: (e) => {
+          // set language preference from browser for visitors
+          if (viewer && !viewer.id && navigator) {
+            viewer.settings.language = langConvert.bcp472sys(navigator.language)
+          }
+
           // mark private fetched as true
           setPrivateFetched(true)
 
