@@ -25,7 +25,7 @@ import { TEXT, TextId } from '~/common/enums'
 
 interface TranslateStrings {
   zh_hant: string
-  zh_hans?: string
+  zh_hans: string
   en?: string
   lang?: Language
 }

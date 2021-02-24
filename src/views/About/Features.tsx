@@ -13,7 +13,7 @@ const Features = () => (
         <Translate
           zh_hant="沒有預設立場，"
           zh_hans="没有预设立场，"
-          en="No pre-defined positions,"
+          en="No preconception,"
         />
         <br />
         <Translate

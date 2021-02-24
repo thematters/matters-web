@@ -18,8 +18,8 @@ const FORMATS = {
     absoluteFull: 'yyyy 年 M 月 d 日',
   },
   en: {
-    absoluteToday: 'HH:mm',
-    absoluteYesterday: 'MM-dd',
+    absoluteToday: `'Today' H:mm`,
+    absoluteYesterday: `'Yesterday' H:mm`,
     absoluteThisYear: 'MM-dd',
     absoluteFull: 'yyyy-MM-dd',
   },
