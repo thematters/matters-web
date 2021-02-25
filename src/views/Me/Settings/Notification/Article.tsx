@@ -4,40 +4,38 @@ import { ViewerNotificationSettings_viewer_settings_notification } from './__gen
 
 interface ArticleProps {
   settings: ViewerNotificationSettings_viewer_settings_notification
-  toggle: (type: any) => void
+  toggle: (
+    type: keyof ViewerNotificationSettings_viewer_settings_notification
+  ) => void
 }
 
 const Article = ({ settings, toggle }: ArticleProps) => (
   <Form.List
-    groupName={<Translate zh_hant="作品" zh_hans="作品" en="articles" />}
+    groupName={<Translate zh_hant="作品" zh_hans="作品" en="Article" />}
   >
     <Form.List.Item
       title={
         <Translate
           zh_hant="作品被贊賞"
           zh_hans="作品被赞赏"
-          en="article liked"
+          en="Appreciations"
         />
       }
       right={
         <Switch
           checked={settings.articleNewAppreciation}
-          onChange={() => toggle('appreciation')}
+          onChange={() => toggle('articleNewAppreciation')}
         />
       }
     />
     <Form.List.Item
       title={
-        <Translate
-          zh_hant="作品被收藏"
-          zh_hans="作品被收藏"
-          en="article subscribed"
-        />
+        <Translate zh_hant="作品被收藏" zh_hans="作品被收藏" en="Bookmarks" />
       }
       right={
         <Switch
           checked={settings.articleNewSubscription}
-          onChange={() => toggle('articleSubscription')}
+          onChange={() => toggle('articleNewSubscription')}
         />
       }
     />
@@ -46,13 +44,13 @@ const Article = ({ settings, toggle }: ArticleProps) => (
         <Translate
           zh_hant="收藏的作品有新評論"
           zh_hans="收藏的作品有新评论"
-          en="new comment on subscribed article"
+          en="Comments on bookmarked articles"
         />
       }
       right={
         <Switch
           checked={settings.articleSubscribedNewComment}
-          onChange={() => toggle('commentSubscribed')}
+          onChange={() => toggle('articleSubscribedNewComment')}
         />
       }
     />
