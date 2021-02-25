@@ -3,6 +3,8 @@ import gql from 'graphql-tag'
 import { Translate } from '~/components'
 import { CircleDigest } from '~/components/CircleDigest'
 
+import { analytics } from '~/common/utils'
+
 import styles from './styles.css'
 
 import { CircleWallCirclePrivate } from './__generated__/CircleWallCirclePrivate'
@@ -26,6 +28,12 @@ const CircleWall = ({ circle }: CircleWallProps) => {
           circle={circle}
           hasFooter
           hasPrice
+          onClickPrice={() => {
+            analytics.trackEvent('click_button', {
+              type: 'subscribe_circle_price',
+              pageType: 'article_detail',
+            })
+          }}
         />
       </section>
       <style jsx>{styles}</style>

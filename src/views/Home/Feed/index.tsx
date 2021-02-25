@@ -233,6 +233,14 @@ const MainFeed = ({ feedSortType: sortBy, viewMode }: MainFeedProps) => {
                     location: i,
                   })
                 }}
+                onClickCircle={() => {
+                  analytics.trackEvent('click_feed', {
+                    type: sortBy,
+                    contentType: 'circle',
+                    styleType: 'subtitle',
+                    location: i,
+                  })
+                }}
               />
             </List.Item>
           )
