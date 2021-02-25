@@ -168,7 +168,13 @@ export const subscribePush = async (options?: { silent?: boolean }) => {
         new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'green',
-            content: <Translate zh_hant="推送已開啓" zh_hans="推送已开启" />,
+            content: (
+              <Translate
+                zh_hant="推送已開啓"
+                zh_hans="推送已开启"
+                en="push notification enabled"
+              />
+            ),
           },
         })
       )

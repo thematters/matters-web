@@ -85,6 +85,7 @@ export const CoverUploader = ({
               <Translate
                 zh_hant="上傳檔案超過 5 MB"
                 zh_hans="上传文件超过 5 MB"
+                en="upload file exceed 5 MB"
               />
             ),
           },

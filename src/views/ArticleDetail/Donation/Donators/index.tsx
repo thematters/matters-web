@@ -49,7 +49,11 @@ const Donators = ({ article }: DonatorsProps) => {
       {donatorsCount > 0 && (
         <section className="count">
           {numAbbr(donatorsCount)}
-          <Translate zh_hant={' 人支持了作者'} zh_hans={' 人支持了作者'} />
+          <Translate
+            zh_hant={' 人支持了作者'}
+            zh_hans={' 人支持了作者'}
+            en=" users supported author"
+          />
         </section>
       )}
 

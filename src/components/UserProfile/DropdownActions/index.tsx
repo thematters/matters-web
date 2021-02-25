@@ -59,7 +59,7 @@ const BaseDropdownActions = ({
     <Menu width={isInDropdown ? 'sm' : undefined}>
       <Menu.Item onClick={openShareDialog}>
         <TextIcon icon={<IconShare16 size="md" />} size="md" spacing="base">
-          <Translate zh_hant="分享主頁" zh_hans="分享主页" />
+          <Translate zh_hant="分享主頁" zh_hans="分享主页" en="Share" />
         </TextIcon>
       </Menu.Item>
 

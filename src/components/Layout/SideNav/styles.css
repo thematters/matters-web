@@ -27,7 +27,7 @@
 
 ul {
   & li {
-    @mixin flex-center-all;
+    @mixin flex-center-start;
 
     & + li {
       margin-top: var(--spacing-xx-loose);

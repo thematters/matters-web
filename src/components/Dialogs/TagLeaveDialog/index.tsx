@@ -32,18 +32,30 @@ const BaseDialog = ({ children, isOwner }: Props) => {
 
       <Dialog size="sm" isOpen={showDialog} onDismiss={close}>
         <Dialog.Header
-          title={<Translate zh_hant="辭去權限" zh_hans="辞去权限" />}
+          title={
+            <Translate
+              zh_hant="辭去權限"
+              zh_hans="辞去权限"
+              en="resign from tag"
+            />
+          }
           close={close}
           closeTextId="cancel"
         />
         <Dialog.Message>
           <h3>
-            <Translate zh_hant="確定要這麼做嗎" zh_hans="确定要这么做吗" /> 😭
+            <Translate
+              zh_hant="確定要這麼做嗎"
+              zh_hans="确定要这么做吗"
+              en="are you sure"
+            />{' '}
+            😭
           </h3>
           <p>
             <Translate
               zh_hant="如果辭去權限，你將無法繼續管理標籤。"
               zh_hans="如果辞去权限，你将无法继续管理标签。"
+              en="After resignation, you will not be to manage tag."
             />
           </p>
         </Dialog.Message>
@@ -72,6 +84,7 @@ const BaseDialog = ({ children, isOwner }: Props) => {
                         <Translate
                           zh_hant="辭去權限成功"
                           zh_hans="辞去权限成功"
+                          en="resignation success"
                         />
                       ),
                       duration: 2000,
@@ -85,7 +98,11 @@ const BaseDialog = ({ children, isOwner }: Props) => {
               }
             }}
           >
-            <Translate zh_hant="確認辭去" zh_hans="确认辞去" />
+            <Translate
+              zh_hant="確認辭去"
+              zh_hans="确认辞去"
+              en="confirm resignation"
+            />
           </Dialog.Footer.Button>
 
           <Dialog.Footer.Button
@@ -93,7 +110,7 @@ const BaseDialog = ({ children, isOwner }: Props) => {
             bgColor="grey-lighter"
             onClick={close}
           >
-            <Translate zh_hant="取消" zh_hans="取消" />
+            <Translate zh_hant="取消" zh_hans="取消" en="cancel" />
           </Dialog.Footer.Button>
         </Dialog.Footer>
       </Dialog>

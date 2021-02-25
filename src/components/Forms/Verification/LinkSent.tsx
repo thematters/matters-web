@@ -21,6 +21,7 @@ export const VerificationLinkSent = ({
           <Translate
             zh_hant={isRegister ? '已發送快速註冊連結' : '已發送快速驗證連結'}
             zh_hans={isRegister ? '已发送快速注册链接' : '已发送快速验证链接'}
+            en={isRegister ? 'Register link sent' : 'Verification link sent'}
           />
         </h3>
 
@@ -32,11 +33,17 @@ export const VerificationLinkSent = ({
             zh_hans={
               isRegister ? '我们已将注册链接寄出 📩' : '我们已将验证链接寄出 📩'
             }
+            en={
+              isRegister
+                ? 'We have sent your register link to you 📩'
+                : 'We have sent your verification link to you 📩'
+            }
           />
           <br />
           <Translate
             zh_hant="快去你的電子信箱看看吧！"
             zh_hans="快去你的邮箱看看吧！"
+            en="Make sure to check your inbox!"
           />
         </p>
       </Dialog.Message>

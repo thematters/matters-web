@@ -191,7 +191,9 @@ const BaseAddCredit: React.FC<FormProps> = ({
     <Form id={formId} onSubmit={handleSubmit} noBackground>
       <Form.AmountInput
         currency={currency}
-        label={<Translate zh_hant="輸入金額" zh_hans="输入金额" />}
+        label={
+          <Translate zh_hant="輸入金額" zh_hans="输入金额" en="Enter amount" />
+        }
         name="amount"
         min={0}
         max={PAYMENT_MAXIMUM_CHARGE_AMOUNT[currency]}
@@ -235,6 +237,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
             <Translate
               zh_hant="創作者們望眼欲穿，快去送上支持吧"
               zh_hans="创作者们望眼欲穿，快去送上支持吧"
+              en="Let's support creators"
             />
           </p>
           <br />
@@ -275,7 +278,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
           disabled={!isValid || isSubmitting || checkoutError}
           loading={isSubmitting}
         >
-          <Translate zh_hant="確認儲值" zh_hans="确认储值" />
+          <Translate zh_hant="確認儲值" zh_hans="确认储值" en="Confirm" />
         </Dialog.Footer.Button>
       </Dialog.Footer>
     </>

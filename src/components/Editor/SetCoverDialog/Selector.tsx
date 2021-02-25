@@ -28,6 +28,7 @@ const Selector: React.FC<SelectorProps> = ({
         <Translate
           zh_hant="你也可以選擇一張已有的圖片作為封面"
           zh_hans="你也可以选择一张已有的图片作为封面"
+          en="you can choose an existing picture as cover"
         />
       </h3>
 

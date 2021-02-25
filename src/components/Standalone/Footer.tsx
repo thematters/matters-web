@@ -23,12 +23,13 @@ const Footer = () => {
       <div className="l-row">
         <section className="footer-section l-col-4 l-col-sm-3 l-col-lg-4">
           <h2>
-            <Translate zh_hant="聯絡方式" zh_hans="联系我们" />
+            <Translate zh_hant="聯絡方式" zh_hans="联系我们" en="Contact us" />
           </h2>
           <p>
             <Translate
               zh_hant="媒體查詢、活動合作、一般查詢，請聯絡"
               zh_hans="媒体查询、活动合作、一般查询，请联系"
+              en="Press release, event collaboration and general inquiry please contact"
             />
             <br />
             <a
@@ -43,6 +44,7 @@ const Footer = () => {
             <Translate
               zh_hant="對我們的產品有任何疑問，請聯絡"
               zh_hans="对我们的产品有任何疑问，请联系"
+              en="Any quistions regarding our product please contact"
             />
             <br />
             <a
@@ -57,7 +59,7 @@ const Footer = () => {
 
         <section className="footer-section l-col-4 l-col-sm-2 l-col-lg-4">
           <h2>
-            <Translate zh_hant="追蹤我們" zh_hans="追蹤我們" />
+            <Translate zh_hant="追蹤我們" zh_hans="追蹤我們" en="Follow us" />
           </h2>
 
           <div className="socials">
@@ -84,6 +86,7 @@ const Footer = () => {
             <Translate
               zh_hant="瞭解我們的最新進展"
               zh_hans="了解我们的最新进展"
+              en="Our newest development"
             />
           </h2>
 
@@ -102,6 +105,7 @@ const Footer = () => {
                     <Translate
                       zh_hant="訂閱 Matters 通訊"
                       zh_hans="订阅 Matters 通讯"
+                      en="Subscribe to Matters newsletter"
                     />
                   </TextIcon>
                 </Button>

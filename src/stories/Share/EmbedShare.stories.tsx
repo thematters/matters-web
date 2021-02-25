@@ -14,6 +14,7 @@ const HeaderTitle = (
   <Translate
     zh_hant="邀請更多好友加入星際旅行"
     zh_hans="邀请更多好友加入星际旅行"
+    en="Invite more friends to the galaxy journey"
   />
 )
 

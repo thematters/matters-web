@@ -286,7 +286,7 @@ const SetAmount: React.FC<FormProps> = ({
             textColor="black"
             onClick={switchToAddCredit}
           >
-            <Translate zh_hant="先去儲值" zh_hans="先去储值" />
+            <Translate zh_hant="先去儲值" zh_hans="先去储值" en="Top up" />
           </Dialog.Footer.Button>
         )}
 
@@ -312,6 +312,7 @@ const SetAmount: React.FC<FormProps> = ({
             <Translate
               zh_hant="前往 Liker Land 支付"
               zh_hans="前往 Liker Land 支付"
+              en="go to Liker Land for payment"
             />
           </Dialog.Footer.Button>
         )}

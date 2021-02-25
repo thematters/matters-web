@@ -27,7 +27,11 @@ const ArticleNewCollectedNotice = ({ notice }: { notice: NoticeType }) => {
       <section className="content-wrap">
         <NoticeHead notice={notice}>
           <NoticeActorName user={actor} />{' '}
-          <Translate zh_hant="關聯了你的作品" zh_hans="关联了你的作品" />
+          <Translate
+            zh_hant="關聯了你的作品"
+            zh_hans="关联了你的作品"
+            en="replied to your work"
+          />
         </NoticeHead>
 
         <NoticeArticle article={notice.article} isBlock />

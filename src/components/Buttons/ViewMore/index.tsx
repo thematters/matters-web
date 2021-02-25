@@ -34,7 +34,7 @@ export const ViewMoreButton: React.FC<ViewMoreButtonProps> = ({
           weight="md"
           textPlacement="left"
         >
-          <Translate zh_hans="查看更多" zh_hant="查看更多" />
+          <Translate zh_hans="查看更多" zh_hant="查看更多" en="View more" />
         </TextIcon>
       </Button>
     )}

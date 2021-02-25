@@ -18,11 +18,13 @@ const Slogan = () => {
               <Translate
                 zh_hant="一個自主、永續、有價的"
                 zh_hans="一个自主、永续、有价的"
+                en="An autonomous, sustainable and valuable space"
               />
               <br />
               <Translate
                 zh_hant="創作與公共討論空間"
                 zh_hans="创作与公共讨论空间"
+                en="for creation and public discussion."
               />
             </h2>
 
@@ -34,7 +36,11 @@ const Slogan = () => {
                 href={PATHS.HOME}
               >
                 <TextIcon color="white" weight="md">
-                  <Translate zh_hant="開始創作" zh_hans="开始创作" />
+                  <Translate
+                    zh_hant="開始創作"
+                    zh_hans="开始创作"
+                    en="Start Creating"
+                  />
                 </TextIcon>
               </Button>
             </div>

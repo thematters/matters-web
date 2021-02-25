@@ -59,6 +59,7 @@ const Uploader: React.FC<UploaderProps> = ({
               <Translate
                 zh_hant="上傳檔案超過 5 MB"
                 zh_hans="上传文件超过 5 MB"
+                en="upload file exceeds 5 MB"
               />
             ),
           },
@@ -131,6 +132,7 @@ const Uploader: React.FC<UploaderProps> = ({
           <Translate
             zh_hant="上傳一張圖片用作封面，建議尺寸：1600 x 900 像素"
             zh_hans="上传一张图片用作封面，建议尺寸：1600 x 900 像素"
+            en="Upload an image as cover, suggest size: 1600 x 900 pixels"
           />
         </p>
 

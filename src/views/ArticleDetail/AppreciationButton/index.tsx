@@ -109,6 +109,7 @@ const AppreciationButton = ({
               <Translate
                 zh_hant="你對作品送出了一個 Super Like！"
                 zh_hans="你对作品送出了一个 Super Like！"
+                en="You sent a Super Like to this work!"
               />
             ),
             customButton: <ViewSuperLikeButton />,
@@ -180,7 +181,11 @@ const AppreciationButton = ({
     return (
       <Tooltip
         content={
-          <Translate zh_hant="去讚賞其他用戶吧" zh_hans="去赞赏其他用户吧" />
+          <Translate
+            zh_hant="去讚賞其他用戶吧"
+            zh_hans="去赞赏其他用户吧"
+            en="send like to other"
+          />
         }
         zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
       >
@@ -246,6 +251,7 @@ const AppreciationButton = ({
                   <Translate
                     zh_hant="12:00 或 00:00 就可以再次送出 Super Like 啦！"
                     zh_hans="12:00 或 00:00 就可以再次送出 Super Like 啦！"
+                    en="you can send another Super Like after 12:00 or 00:00"
                   />
                 ),
                 customButton: <ViewSuperLikeButton />,
@@ -269,7 +275,11 @@ const AppreciationButton = ({
   return (
     <Tooltip
       content={
-        <Translate zh_hant="你還沒有讚賞權限" zh_hans="你还没有赞赏权限" />
+        <Translate
+          zh_hant="你還沒有讚賞權限"
+          zh_hans="你还没有赞赏权限"
+          en="You cannot send like yet"
+        />
       }
       zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
     >

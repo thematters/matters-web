@@ -2,8 +2,6 @@ import { useState } from 'react'
 
 import { Button, Dialog, TextIcon, Translate } from '~/components'
 
-import { TEXT } from '~/common/enums'
-
 import ProfileEditor, { ProfileEditorUser } from './ProfileEditor'
 
 interface EditProfileButtonProps {
@@ -27,10 +25,7 @@ const EditProfileButton: React.FC<EditProfileButtonProps> = ({ user }) => {
         aria-haspopup="true"
       >
         <TextIcon size="md-s" weight="md">
-          <Translate
-            zh_hant={TEXT.zh_hant.editUserProfile}
-            zh_hans={TEXT.zh_hans.editUserProfile}
-          />
+          <Translate id="editUserProfile" />
         </TextIcon>
       </Button>
 

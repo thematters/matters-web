@@ -44,7 +44,7 @@ const DropdownDefaultItem = ({ search }: { search: string }) => {
   return (
     <Menu.Item>
       <span className="search-tag-item">
-        <Translate zh_hant="創建" zh_hans="创建" />
+        <Translate zh_hant="創建" zh_hans="创建" en="Create" />
         <span className="keyword">{search}</span>
         <style jsx>{styles}</style>
       </span>
@@ -159,6 +159,7 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
           newContent: translate({
             zh_hant: '請輸入標籤名稱',
             zh_hans: '請输入标签名称',
+            en: 'please enter tag name',
             lang,
           }),
         }

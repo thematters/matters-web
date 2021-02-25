@@ -36,22 +36,21 @@ const ArticleTagUnselectedNotice = ({ notice }: { notice: NoticeType }) => {
       <section className="content-wrap overflow-hidden">
         <NoticeHead notice={notice}>
           {isAuthor && (
-            <>
-              <Translate zh_hant="啊喔" zh_hans="啊喔" />
-              {'， '}
-            </>
+            <Translate zh_hant="啊喔， " zh_hans="啊喔， " en="uh-oh, " />
           )}
           <NoticeActorName user={actor} />{' '}
           {isAuthor && (
             <Translate
               zh_hant="將你的作品從標籤精選中拿走了"
               zh_hans="将你的作品從标签精选中拿走了"
+              en="removed your work from selected feed"
             />
           )}
           {!isAuthor && isMaintainer && (
             <Translate
               zh_hant="將作品從標籤精選中拿走了"
               zh_hans="将作品從标签精选中拿走了"
+              en="removed work from selected feed"
             />
           )}
         </NoticeHead>

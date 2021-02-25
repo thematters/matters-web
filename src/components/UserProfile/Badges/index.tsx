@@ -8,7 +8,11 @@ import { ReactComponent as IconCivicLikerBadge } from '@/public/static/icons/civ
 import styles from './styles.css'
 
 export const SeedBadge = () => (
-  <Tooltip content={<Translate zh_hant="種子用戶" zh_hans="种子用户" />}>
+  <Tooltip
+    content={
+      <Translate zh_hant="種子用戶" zh_hans="种子用户" en="seed users" />
+    }
+  >
     <span className="seed-badge">
       {withIcon(IconSeedBadge)({})}
       <style jsx>{styles}</style>

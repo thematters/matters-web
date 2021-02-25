@@ -28,7 +28,7 @@ export const toReadableScope = ({
     prefix = {
       zh_hant: '讀取你的',
       zh_hans: '读取你的',
-      en: 'Query your',
+      en: 'Read your',
     }[lang]
   }
 

@@ -135,6 +135,7 @@ const DraftDetail = () => {
         title={{
           zh_hant: `[草稿] ${draft.title}`,
           zh_hans: `[草稿] ${draft.title}`,
+          en: `[draft] ${draft.title}`,
         }}
       />
 

@@ -7,7 +7,7 @@ const Reports = () => (
     <div className="l-row">
       <div className="l-col-4 l-col-md-8 l-col-lg-12">
         <h2>
-          <Translate zh_hant="媒體報導" zh_hans="媒体报道" />
+          <Translate zh_hant="媒體報導" zh_hans="媒体报道" en="In the News" />
         </h2>
       </div>
     </div>
@@ -26,7 +26,7 @@ const Reports = () => (
         <a href="https://appworks.tw/category/events/" target="_blank">
           <h3>
             Taiwan’s AppWorks Demo Day #19 Puts 18 of the Most Promising Greater
-            Southeast Asian AI / Blockchain Founders on Stage
+            Southeast ...
           </h3>
           <cite>AppWorks</cite>
         </a>
@@ -65,8 +65,20 @@ const Reports = () => (
           href="https://www.bnext.com.tw/article/49272/blockchain-blog-content-"
           target="_blank"
         >
-          <h3>區塊鏈內容平台觀察：挑戰與現有解法</h3>
-          <cite>數位時代</cite>
+          <h3>
+            <Translate
+              zh_hant="區塊鏈內容平台觀察：挑戰與現有解法"
+              zh_hans="区块链内容平台观察：挑战与现有解法"
+              en="Blockchain Content Platform Watch: Challenges and Existing Solutions"
+            />
+          </h3>
+          <cite>
+            <Translate
+              zh_hant="數位時代"
+              zh_hans="数位时代"
+              en="Business Next"
+            />
+          </cite>
         </a>
       </div>
       <div className="item">
@@ -74,17 +86,29 @@ const Reports = () => (
           href="https://www.dw.com/zh/%E5%8C%BA%E5%9D%97%E9%93%BE%E8%AE%A9%E5%A5%BD%E6%96%B0%E9%97%BB%E6%9B%B4%E5%AE%89%E5%85%A8%E6%9B%B4%E5%80%BC%E9%92%B1/a-44329162?&zhongwen=simp"
           target="_blank"
         >
-          <h3>区块链：让好新闻更安全、更“值钱”？</h3>
-          <cite>德國之聲</cite>
+          <h3>
+            <Translate
+              zh_hant="區塊鏈：讓好新聞更安全、更“值錢”？"
+              zh_hans="区块链：让好新闻更安全、更“值钱”？"
+              en={`Blockchain: Making Good News Safer and More "Valuable"?`}
+            />
+          </h3>
+          <cite>
+            <Translate
+              zh_hant="德國之聲"
+              zh_hans="德国之声"
+              en="Deutsche Welle"
+            />
+          </cite>
         </a>
       </div>
       <div className="item">
         <a
-          href="https://new.qq.com/omn/20180410/20180410B0LP7J.html"
+          href="https://restofworld.org/2020/chinas-fugitive-writers-find-a-home-online/"
           target="_blank"
         >
-          <h3>离开端传媒，张洁平的新实验：用区块链拯救公共讨论</h3>
-          <cite>方可成</cite>
+          <h3>China’s fugitive writers find a home online</h3>
+          <cite>Rest of World</cite>
         </a>
       </div>
     </div>

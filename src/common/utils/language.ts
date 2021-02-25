@@ -1,3 +1,5 @@
+import { UserLanguage } from '__generated__/globalTypes'
+
 export const langConvert = {
   og2html: (lang: OGLanguage): HTMLLanguage => {
     return ({
@@ -27,5 +29,17 @@ export const langConvert = {
       zh_hans: 'zh-CN',
       en: 'en',
     }[lang] || 'zh_HK') as OGLanguage
+  },
+  bcp472sys: (Lang: string): UserLanguage => {
+    const lang = Lang.toLowerCase()
+    if (lang === 'zh' || lang === 'zh-cn') {
+      return UserLanguage.zh_hans
+    }
+
+    if (lang.startsWith('en')) {
+      return UserLanguage.en
+    }
+
+    return UserLanguage.zh_hant
   },
 }

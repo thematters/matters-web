@@ -25,7 +25,7 @@ import { TEXT, TextId } from '~/common/enums'
 
 interface TranslateStrings {
   zh_hant: string
-  zh_hans?: string
+  zh_hans: string
   en?: string
   lang?: Language
 }
@@ -45,6 +45,7 @@ export const translate = ({ lang, ...props }: TranslateArgs): string => {
     translations = {
       zh_hant: TEXT.zh_hant[id],
       zh_hans: TEXT.zh_hans[id],
+      en: TEXT.en[id],
     }
   } else {
     const { zh_hant, zh_hans, en } = props
