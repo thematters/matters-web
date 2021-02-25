@@ -24,7 +24,7 @@ const Slogan = () => {
               <Translate
                 zh_hant="創作與公共討論空間"
                 zh_hans="创作与公共讨论空间"
-                en="for content creation and civil discourse"
+                en="for creation and public discussion"
               />
             </h2>
 
