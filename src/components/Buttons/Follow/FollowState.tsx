@@ -25,7 +25,7 @@ const FollowState = ({ user }: FollowStateProps) => {
         {user.isFollowee ? (
           <Translate id="mutualFollowing" />
         ) : (
-          <Translate id="followingYou" />
+          <Translate zh_hant="追蹤了你" zh_hans="追踪了你" en="followed you" />
         )}
       </TextIcon>
     </Button>

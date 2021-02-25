@@ -41,12 +41,12 @@ const NoticeComment = ({ comment }: { comment: NoticeCommentType | null }) => {
   const article =
     comment?.node.__typename === 'Article' ? comment.node : undefined
 
-  if (!comment || !article) {
+  if (!comment) {
     return null
   }
 
   const path =
-    comment.state === 'active'
+    comment.state === 'active' && article
       ? toPath({
           page: 'commentDetail',
           comment,

@@ -1,0 +1,69 @@
+import gql from 'graphql-tag'
+
+import { Translate } from '~/components'
+
+import NoticeArticleCard from '../NoticeArticleCard'
+import NoticeCircleName from '../NoticeCircleName'
+import NoticeDate from '../NoticeDate'
+import NoticeHead from '../NoticeHead'
+import NoticeTypeIcon from '../NoticeTypeIcon'
+import styles from '../styles.css'
+
+import { CircleNewArticleNotice as NoticeType } from './__generated__/CircleNewArticleNotice'
+
+const CircleNewArticle = ({ notice }: { notice: NoticeType }) => {
+  const circle = notice.article.circle
+
+  if (!circle) {
+    return null
+  }
+
+  return (
+    <section className="container">
+      <section className="avatar-wrap">
+        <NoticeTypeIcon type="circle" />
+      </section>
+
+      <section className="content-wrap">
+        <NoticeHead
+          subtitle={
+            <Translate
+              zh_hant="新作品已經加入圍爐。該作品 24 小時限免，你可以前往閱讀啦。"
+              zh_hans="新作品已经加入围炉。该作品 24 小时限免，你可以前往阅读啦。"
+            />
+          }
+        >
+          <NoticeCircleName circle={circle} />
+          <Translate zh_hant=" 又成長了" zh_hans=" 又成长了" />
+        </NoticeHead>
+
+        <NoticeArticleCard article={notice.article} />
+
+        <NoticeDate notice={notice} />
+      </section>
+
+      <style jsx>{styles}</style>
+    </section>
+  )
+}
+
+CircleNewArticle.fragments = {
+  notice: gql`
+    fragment CircleNewArticleNotice on ArticleNotice {
+      id
+      ...NoticeDate
+      article: target {
+        ...NoticeArticleCard
+        circle {
+          id
+          ...NoticeCircleName
+        }
+      }
+    }
+    ${NoticeArticleCard.fragments.article}
+    ${NoticeDate.fragments.notice}
+    ${NoticeCircleName.fragments.circle}
+  `,
+}
+
+export default CircleNewArticle

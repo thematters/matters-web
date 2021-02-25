@@ -91,12 +91,17 @@ export const MOCK_ARTILCE = {
   limitedFree: true,
 }
 
+export const MOCK_CIRCLE_ARTICLE = {
+  ...MOCK_ARTILCE,
+  circle: MOCK_CIRCLE,
+}
+
 // Comment
 export const MOCK_PARENT_COMMENT = {
   __typename: 'Comment' as any,
   id: 'comment-0000',
   state: 'active' as any,
-  article: MOCK_ARTILCE,
+  node: MOCK_ARTILCE,
   parentComment: null,
   content:
     '中國傳統文學裡的「幽」傳統，對此的文論並不多，我聽說李歐梵教授在做此研究，蔡老師能否多講一些',
@@ -107,11 +112,16 @@ export const MOCK_COMMENT = {
   __typename: 'Comment' as any,
   id: 'comment-0000',
   state: 'active' as any,
-  article: MOCK_ARTILCE,
+  node: MOCK_ARTILCE,
   parentComment: MOCK_PARENT_COMMENT,
   content:
     '中國傳統文學裡的「幽」傳統，對此的文論並不多，我聽說李歐梵教授在做此研究，蔡老師能否多講一些',
   author: MOCK_USER,
+}
+
+export const MOCK_CIRCLE_COMMENT = {
+  ...MOCK_COMMENT,
+  node: MOCK_CIRCLE,
 }
 
 // Tag

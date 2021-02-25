@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 
 import ArticleNewCommentNotice from './ArticleNewCommentNotice'
+import CircleNewCommentNotice from './CircleNewCommentNotice'
 import CommentMentionedYouNotice from './CommentMentionedYouNotice'
 import CommentPinnedNotice from './CommentPinnedNotice'
 import SubscribedArticleNewCommentNotice from './SubscribedArticleNewCommentNotice'
@@ -9,14 +10,18 @@ import { CommentNotice as NoticeType } from './__generated__/CommentNotice'
 
 const CommentNotice = ({ notice }: { notice: NoticeType }) => {
   switch (notice.commentNoticeType) {
+    case 'CommentMentionedYou':
+      return <CommentMentionedYouNotice notice={notice} />
+    case 'CommentPinned':
+      return <CommentPinnedNotice notice={notice} />
     case 'ArticleNewComment':
       return <ArticleNewCommentNotice notice={notice} />
-    case 'ArticleCommentMentionedYou':
-      return <CommentMentionedYouNotice notice={notice} />
-    case 'ArticleCommentPinned':
-      return <CommentPinnedNotice notice={notice} />
     case 'SubscribedArticleNewComment':
       return <SubscribedArticleNewCommentNotice notice={notice} />
+    case 'CircleNewBroadcast':
+      return <CircleNewCommentNotice notice={notice} />
+    case 'CircleNewDiscussion':
+      return <CircleNewCommentNotice notice={notice} />
     default:
       return null
   }
@@ -29,15 +34,17 @@ CommentNotice.fragments = {
       unread
       __typename
       commentNoticeType: type
-      ...ArticleNewCommentNotice
       ...CommentMentionedYouNotice
       ...CommentPinnedNotice
+      ...ArticleNewCommentNotice
       ...SubscribedArticleNewCommentNotice
+      ...CircleNewCommentNotice
     }
-    ${ArticleNewCommentNotice.fragments.notice}
     ${CommentMentionedYouNotice.fragments.notice}
     ${CommentPinnedNotice.fragments.notice}
+    ${ArticleNewCommentNotice.fragments.notice}
     ${SubscribedArticleNewCommentNotice.fragments.notice}
+    ${CircleNewCommentNotice.fragments.notice}
   `,
 }
 
