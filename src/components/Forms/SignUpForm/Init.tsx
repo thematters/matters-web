@@ -193,7 +193,7 @@ const Init: React.FC<FormProps> = ({
                 <Translate
                   zh_hant="Matters 用戶協議和隱私政策"
                   zh_hans="Matters 用户协议和隐私政策"
-                  en="Matters user agreement and privacy policy"
+                  en="Terms and Privacy Policy"
                 />
               </a>
             </Link>
