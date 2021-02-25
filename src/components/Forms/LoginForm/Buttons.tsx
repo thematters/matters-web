@@ -38,7 +38,7 @@ export const SignUpDialogButton = () => (
         <Translate
           zh_hant="沒有帳戶？"
           zh_hans="沒有帐户？"
-          en="Haven't registered ?"
+          en="Not registered?"
         />
       }
       rightText={<Translate id="register" />}
@@ -58,7 +58,7 @@ export const SignUpRedirectionButton = () => (
         <Translate
           zh_hant="沒有帳戶？"
           zh_hans="沒有帐户？"
-          en="Haven't registered ?"
+          en="Not registered?"
         />
       }
       rightText={<Translate id="register" />}
