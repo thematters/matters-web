@@ -108,7 +108,11 @@ const FingerprintDialogContent = ({ dataHash }: { dataHash: string }) => {
       <section className="help">
         <header>
           <h4>
-            <Translate zh_hans="这是什么？" zh_hant="這是什麼？" />
+            <Translate
+              zh_hans="这是什么？"
+              zh_hant="這是什麼？"
+              en="What is this?"
+            />
           </h4>
         </header>
 

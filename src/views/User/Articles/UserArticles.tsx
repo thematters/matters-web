@@ -48,7 +48,7 @@ const ArticleSummaryInfo = ({ user }: { user: UserArticlesPublic_user }) => {
 
       <IconDotDivider />
 
-      <Translate zh_hant="累積創作" zh_hans="累积创作" en="Accumulated" />
+      <Translate zh_hant="累積創作" zh_hans="累积创作" en="In total" />
       <span className="num">&nbsp;{words}&nbsp;</span>
       <Translate zh_hant="字" zh_hans="字" en="words" />
 

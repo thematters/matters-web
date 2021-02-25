@@ -40,7 +40,7 @@ const PinnedLabel = ({ comment }: { comment: PinnedLabelComment }) => {
 
   return (
     <span className="label">
-      <Translate zh_hant="作者精選" zh_hans="作者精选" />
+      <Translate zh_hant="作者精選" zh_hans="作者精选" en="Featured" />
 
       <style jsx>{styles}</style>
     </span>
