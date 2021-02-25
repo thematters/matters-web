@@ -11,7 +11,9 @@ import { ViewerNotificationSettings_viewer_settings_notification } from './__gen
 
 interface PreferenceProps {
   settings: ViewerNotificationSettings_viewer_settings_notification
-  toggle: (type: any) => void
+  toggle: (
+    type: keyof ViewerNotificationSettings_viewer_settings_notification
+  ) => void
 }
 
 const PushSwitch = () => {
@@ -41,14 +43,14 @@ const PushSwitch = () => {
         <Translate
           zh_hant="推送通知"
           zh_hans="推送通知"
-          en="push notification"
+          en="Push Notification"
         />
       }
       subtitle={
         <Translate
           zh_hant="實時收到你關心的站內動態"
           zh_hans="实时收到你关心的站内动态"
-          en="receive activities you care in real time"
+          en="Receive activities you care in real time"
         />
       }
       right={
@@ -60,7 +62,7 @@ const PushSwitch = () => {
 
 const Preference = ({ settings, toggle }: PreferenceProps) => (
   <Form.List
-    groupName={<Translate zh_hant="偏好" zh_hans="偏好" en="preference" />}
+    groupName={<Translate zh_hant="偏好" zh_hans="偏好" en="Preference" />}
   >
     <PushSwitch />
 
@@ -69,7 +71,7 @@ const Preference = ({ settings, toggle }: PreferenceProps) => (
         <Translate
           zh_hant="電子信箱通知"
           zh_hans="邮箱通知"
-          en="email notification"
+          en="Email Notification"
         />
       }
       subtitle={

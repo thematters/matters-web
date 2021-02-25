@@ -7,8 +7,9 @@ import { numAbbr } from '~/common/utils'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorName from '../NoticeActorName'
-import NoticeArticle from '../NoticeArticle'
+import NoticeArticleTitle from '../NoticeArticleTitle'
 import NoticeComment from '../NoticeComment'
+import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
 import NoticeTypeIcon from '../NoticeTypeIcon'
 import styles from '../styles.css'
@@ -38,7 +39,7 @@ const ArticleNewCommentNotice = ({ notice }: { notice: NoticeType }) => {
       </section>
 
       <section className="content-wrap">
-        <NoticeHead hasDate={!isMultiActors} notice={notice}>
+        <NoticeHead>
           {notice.actors.slice(0, 2).map((actor, index) => (
             <Fragment key={index}>
               <NoticeActorName user={actor} />
@@ -49,23 +50,28 @@ const ArticleNewCommentNotice = ({ notice }: { notice: NoticeType }) => {
             <Translate
               zh_hant={`等 ${numAbbr(actorsCount)} 人`}
               zh_hans={`等 ${numAbbr(actorsCount)} 人`}
-              en={`etc. ${numAbbr(actorsCount)} users `}
+              en={`etc. ${numAbbr(actorsCount)} users`}
             />
           )}
-          <Translate zh_hant="評論了" zh_hans="评论了" en="commented" />{' '}
+          <Translate
+            zh_hant="評論了作品 "
+            zh_hans="评论了作品 "
+            en=" commented on "
+          />
+          {commentArticle && <NoticeArticleTitle article={commentArticle} />}
         </NoticeHead>
-
-        {commentArticle && <NoticeArticle article={commentArticle} isBlock />}
 
         {isMultiActors ? (
           <section className="multi-actor-avatars">
             {notice.actors.map((actor, index) => (
-              <NoticeActorAvatar key={index} user={actor} />
+              <NoticeActorAvatar key={index} user={actor} size="md" />
             ))}
           </section>
         ) : (
           <NoticeComment comment={notice.comment} />
         )}
+
+        <NoticeDate notice={notice} />
       </section>
 
       <style jsx>{styles}</style>
@@ -77,7 +83,7 @@ ArticleNewCommentNotice.fragments = {
   notice: gql`
     fragment ArticleNewCommentNotice on CommentNotice {
       id
-      ...NoticeHead
+      ...NoticeDate
       actors {
         ...NoticeActorAvatarUser
         ...NoticeActorNameUser
@@ -86,16 +92,16 @@ ArticleNewCommentNotice.fragments = {
         ...NoticeComment
         node {
           ... on Article {
-            ...NoticeArticle
+            ...NoticeArticleTitle
           }
         }
       }
     }
     ${NoticeActorAvatar.fragments.user}
     ${NoticeActorName.fragments.user}
-    ${NoticeArticle.fragments.article}
+    ${NoticeArticleTitle.fragments.article}
     ${NoticeComment.fragments.comment}
-    ${NoticeHead.fragments.date}
+    ${NoticeDate.fragments.notice}
   `,
 }
 

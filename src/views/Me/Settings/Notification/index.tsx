@@ -11,9 +11,9 @@ import {
 } from '~/components'
 
 import ArticleSettings from './Article'
+import CircleSettings from './Circle'
 import CommentSettings from './Comment'
 import MeSettings from './Me'
-import OtherSettings from './Other'
 import PreferenceSettings from './Preference'
 
 import { UpdateViewerNotification } from './__generated__/UpdateViewerNotification'
@@ -29,14 +29,14 @@ const VIEWER_NOTIFICATION_SETTINGS = gql`
           enable
           email
           mention
-          follow
-          comment
-          appreciation
-          articleSubscription
-          commentSubscribed
-          commentPinned
-          officialNotice
-          reportFeedback
+          userNewFollower
+          articleNewComment
+          articleNewAppreciation
+          articleNewSubscription
+          articleSubscribedNewComment
+          articleCommentPinned
+          circleNewFollower
+          circleNewDiscussion
         }
       }
     }
@@ -55,14 +55,14 @@ const UPDATE_VIEWER_NOTIFICATION = gql`
           enable
           email
           mention
-          follow
-          comment
-          appreciation
-          articleSubscription
-          commentSubscribed
-          commentPinned
-          officialNotice
-          reportFeedback
+          userNewFollower
+          articleNewComment
+          articleNewAppreciation
+          articleNewSubscription
+          articleSubscribedNewComment
+          articleCommentPinned
+          circleNewFollower
+          circleNewDiscussion
         }
       }
     }
@@ -116,7 +116,7 @@ const BaseNotificationSettings = () => {
       <MeSettings toggle={toggle} settings={settings} />
       <ArticleSettings toggle={toggle} settings={settings} />
       <CommentSettings toggle={toggle} settings={settings} />
-      <OtherSettings toggle={toggle} settings={settings} />
+      <CircleSettings toggle={toggle} settings={settings} />
     </PullToRefresh>
   )
 }

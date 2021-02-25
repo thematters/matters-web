@@ -3,34 +3,33 @@ import { Fragment } from 'react'
 
 import { Translate } from '~/components'
 
+import { COMMENT_TYPE_TEXT } from '~/common/enums'
 import { numAbbr } from '~/common/utils'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorName from '../NoticeActorName'
-import NoticeArticleTitle from '../NoticeArticleTitle'
+import NoticeCircleName from '../NoticeCircleName'
 import NoticeComment from '../NoticeComment'
 import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
 import NoticeTypeIcon from '../NoticeTypeIcon'
 import styles from '../styles.css'
 
-import { SubscribedArticleNewCommentNotice as NoticeType } from './__generated__/SubscribedArticleNewCommentNotice'
+import { CircleNewCommentNotice as NoticeType } from './__generated__/CircleNewCommentNotice'
 
-const SubscribedArticleNewCommentNotice = ({
-  notice,
-}: {
-  notice: NoticeType
-}) => {
+const CircleNewCommentNotice = ({ notice }: { notice: NoticeType }) => {
   if (!notice.actors) {
     return null
   }
 
   const actorsCount = notice.actors.length
   const isMultiActors = actorsCount > 1
-  const commentArticle =
-    notice.comment?.node.__typename === 'Article'
+  const commentCircle =
+    notice.comment?.node.__typename === 'Circle'
       ? notice.comment.node
       : undefined
+  const isBroadcast = notice.commentNoticeType === 'CircleNewBroadcast'
+  const circleCommentType = isBroadcast ? 'circleBroadcast' : 'circleDiscussion'
 
   return (
     <section className="container">
@@ -58,11 +57,15 @@ const SubscribedArticleNewCommentNotice = ({
             />
           )}
           <Translate
-            zh_hant="評論了你收藏的作品 "
-            zh_hans="评论了你收藏的作品 "
-            en=" commented on your bookmarked article "
+            zh_hant="在圍爐 "
+            zh_hans="在围炉 "
+            en={` sent a new ${COMMENT_TYPE_TEXT.en[circleCommentType]} on `}
           />
-          {commentArticle && <NoticeArticleTitle article={commentArticle} />}
+          {commentCircle && <NoticeCircleName circle={commentCircle} />}
+          <Translate
+            zh_hant={` 中發布了新${COMMENT_TYPE_TEXT.zh_hant[circleCommentType]}`}
+            zh_hans={` 中发布了新${COMMENT_TYPE_TEXT.zh_hans[circleCommentType]}`}
+          />
         </NoticeHead>
 
         {isMultiActors ? (
@@ -83,10 +86,11 @@ const SubscribedArticleNewCommentNotice = ({
   )
 }
 
-SubscribedArticleNewCommentNotice.fragments = {
+CircleNewCommentNotice.fragments = {
   notice: gql`
-    fragment SubscribedArticleNewCommentNotice on CommentNotice {
+    fragment CircleNewCommentNotice on CommentNotice {
       id
+      commentNoticeType: type
       ...NoticeDate
       actors {
         ...NoticeActorAvatarUser
@@ -95,18 +99,18 @@ SubscribedArticleNewCommentNotice.fragments = {
       comment: target {
         ...NoticeComment
         node {
-          ... on Article {
-            ...NoticeArticleTitle
+          ... on Circle {
+            ...NoticeCircleName
           }
         }
       }
     }
     ${NoticeActorAvatar.fragments.user}
     ${NoticeActorName.fragments.user}
-    ${NoticeArticleTitle.fragments.article}
+    ${NoticeCircleName.fragments.circle}
     ${NoticeComment.fragments.comment}
     ${NoticeDate.fragments.notice}
   `,
 }
 
-export default SubscribedArticleNewCommentNotice
+export default CircleNewCommentNotice

@@ -4,7 +4,8 @@ import { Translate } from '~/components'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorName from '../NoticeActorName'
-import NoticeArticle from '../NoticeArticle'
+import NoticeArticleCard from '../NoticeArticleCard'
+import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
 import styles from '../styles.css'
 
@@ -25,7 +26,7 @@ const PaymentReceivedDonationNotice = ({ notice }: { notice: NoticeType }) => {
       </section>
 
       <section className="content-wrap">
-        <NoticeHead notice={notice}>
+        <NoticeHead>
           <NoticeActorName user={actor} />{' '}
           <Translate
             zh_hant="支持了你的作品 "
@@ -45,8 +46,10 @@ const PaymentReceivedDonationNotice = ({ notice }: { notice: NoticeType }) => {
         </NoticeHead>
 
         {tx && tx.target?.__typename === 'Article' && (
-          <NoticeArticle article={tx.target} isBlock />
+          <NoticeArticleCard article={tx.target} />
         )}
+
+        <NoticeDate notice={notice} />
       </section>
 
       <style jsx>{styles}</style>
@@ -58,7 +61,7 @@ PaymentReceivedDonationNotice.fragments = {
   notice: gql`
     fragment PaymentReceivedDonationNotice on TransactionNotice {
       id
-      ...NoticeHead
+      ...NoticeDate
       actors {
         ...NoticeActorAvatarUser
         ...NoticeActorNameUser
@@ -70,15 +73,15 @@ PaymentReceivedDonationNotice.fragments = {
         target {
           __typename
           ... on Article {
-            ...NoticeArticle
+            ...NoticeArticleCard
           }
         }
       }
     }
-    ${NoticeHead.fragments.date}
+    ${NoticeDate.fragments.notice}
     ${NoticeActorAvatar.fragments.user}
     ${NoticeActorName.fragments.user}
-    ${NoticeArticle.fragments.article}
+    ${NoticeArticleCard.fragments.article}
   `,
 }
 

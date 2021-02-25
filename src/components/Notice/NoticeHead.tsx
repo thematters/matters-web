@@ -1,42 +1,17 @@
-import classNames from 'classnames'
-import gql from 'graphql-tag'
-import { ReactNode } from 'react'
-
-import NoticeDate from './NoticeDate'
 import styles from './styles.css'
 
-import { NoticeDate as NoticeDateType } from './__generated__/NoticeDate'
+type NoticeHeadProps = {
+  subtitle?: React.ReactNode
+}
 
-const NoticeHead = ({
-  children,
-  hasDate = true,
-  notice,
-}: {
-  children: ReactNode
-  hasDate?: boolean
-  notice: NoticeDateType
-}) => {
-  const headWrapClasses = classNames({
-    'head-wrap': true,
-    'has-date': hasDate,
-  })
-
+const NoticeHead: React.FC<NoticeHeadProps> = ({ subtitle, children }) => {
   return (
-    <section className={headWrapClasses}>
+    <section className="head-wrap">
       <h4>{children}</h4>
-      {hasDate && <NoticeDate notice={notice} />}
+      {subtitle && <p>{subtitle}</p>}
       <style jsx>{styles}</style>
     </section>
   )
-}
-
-NoticeHead.fragments = {
-  date: gql`
-    fragment NoticeHead on Notice {
-      ...NoticeDate
-    }
-    ${NoticeDate.fragments.notice}
-  `,
 }
 
 export default NoticeHead
