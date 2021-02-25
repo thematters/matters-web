@@ -11,6 +11,7 @@ import {
 } from '~/components'
 
 import ArticleSettings from './Article'
+import CircleSettings from './Circle'
 import CommentSettings from './Comment'
 import MeSettings from './Me'
 import PreferenceSettings from './Preference'
@@ -115,6 +116,7 @@ const BaseNotificationSettings = () => {
       <MeSettings toggle={toggle} settings={settings} />
       <ArticleSettings toggle={toggle} settings={settings} />
       <CommentSettings toggle={toggle} settings={settings} />
+      <CircleSettings toggle={toggle} settings={settings} />
     </PullToRefresh>
   )
 }
