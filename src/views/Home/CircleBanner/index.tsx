@@ -4,6 +4,7 @@ import { useContext } from 'react'
 import {
   Button,
   IconClose32,
+  LanguageContext,
   Translate,
   useFeatures,
   ViewerContext,
@@ -15,12 +16,14 @@ import { storage } from '~/common/utils'
 
 import IMAGE_CIRCLE_AD_BANNER from '@/public/static/images/circle-ad-banner.svg'
 
+import { APPLICATION_LINKS } from './applicationLinks'
 import styles from './styles.css'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 
 export const CircleBanner = () => {
   const viewer = useContext(ViewerContext)
+  const { lang } = useContext(LanguageContext)
   const features = useFeatures()
   const { data: clientPreferenceData, client } = useQuery<ClientPreference>(
     CLIENT_PREFERENCE,
@@ -56,9 +59,7 @@ export const CircleBanner = () => {
     return null
   }
 
-  // TODO: showing differnt UI based on viewer state
-  // @ts-ignore
-  const canCreateCircle = features.circle_management
+  const canCreateCircle = !features.circle_management
 
   return (
     <div className="container">
@@ -82,7 +83,7 @@ export const CircleBanner = () => {
             </p>
           </>
         ) : (
-          <>
+          <a href={APPLICATION_LINKS[lang]} target="_blank">
             <h3>
               <Translate
                 zh_hant="圍爐內測，火熱進行中"
@@ -95,7 +96,7 @@ export const CircleBanner = () => {
                 zh_hans="点击这里，致信 hi@matters.news，申请参与内测"
               />
             </p>
-          </>
+          </a>
         )}
 
         <div className="close">

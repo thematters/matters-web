@@ -1,8 +1,8 @@
 .container {
-  padding: var(--spacing-loose) var(--spacing-base) var(--spacing-x-tight);
+  padding: var(--spacing-base) var(--spacing-base) var(--spacing-x-tight);
 
   @media (--sm-up) {
-    padding: var(--spacing-x-loose) var(--spacing-base) 0;
+    padding: var(--spacing-base) var(--spacing-base) 0;
   }
 }
 
