@@ -15,9 +15,9 @@ import NoticeHead from '../NoticeHead'
 import NoticeTypeIcon from '../NoticeTypeIcon'
 import styles from '../styles.css'
 
-import { CircleNewCommentNotice as NoticeType } from './__generated__/CircleNewCommentNotice'
+import { CircleNewBroadcastNotice as NoticeType } from './__generated__/CircleNewBroadcastNotice'
 
-const CircleNewCommentNotice = ({ notice }: { notice: NoticeType }) => {
+const CircleNewBroadcastNotice = ({ notice }: { notice: NoticeType }) => {
   if (!notice.actors) {
     return null
   }
@@ -28,8 +28,6 @@ const CircleNewCommentNotice = ({ notice }: { notice: NoticeType }) => {
     notice.comment?.node.__typename === 'Circle'
       ? notice.comment.node
       : undefined
-  const isBroadcast = notice.commentNoticeType === 'CircleNewBroadcast'
-  const circleCommentType = isBroadcast ? 'circleBroadcast' : 'circleDiscussion'
 
   return (
     <section className="container">
@@ -59,12 +57,12 @@ const CircleNewCommentNotice = ({ notice }: { notice: NoticeType }) => {
           <Translate
             zh_hant="在圍爐 "
             zh_hans="在围炉 "
-            en={` sent a new ${COMMENT_TYPE_TEXT.en[circleCommentType]} on `}
+            en={` sent a new ${COMMENT_TYPE_TEXT.en.circleBroadcast} on `}
           />
           {commentCircle && <NoticeCircleName circle={commentCircle} />}
           <Translate
-            zh_hant={` 中發布了新${COMMENT_TYPE_TEXT.zh_hant[circleCommentType]}`}
-            zh_hans={` 中发布了新${COMMENT_TYPE_TEXT.zh_hans[circleCommentType]}`}
+            zh_hant={` 中發布了新${COMMENT_TYPE_TEXT.zh_hant.circleBroadcast}`}
+            zh_hans={` 中发布了新${COMMENT_TYPE_TEXT.zh_hans.circleBroadcast}`}
           />
         </NoticeHead>
 
@@ -86,9 +84,9 @@ const CircleNewCommentNotice = ({ notice }: { notice: NoticeType }) => {
   )
 }
 
-CircleNewCommentNotice.fragments = {
+CircleNewBroadcastNotice.fragments = {
   notice: gql`
-    fragment CircleNewCommentNotice on CommentNotice {
+    fragment CircleNewBroadcastNotice on CommentNotice {
       id
       commentNoticeType: type
       ...NoticeDate
@@ -113,4 +111,4 @@ CircleNewCommentNotice.fragments = {
   `,
 }
 
-export default CircleNewCommentNotice
+export default CircleNewBroadcastNotice

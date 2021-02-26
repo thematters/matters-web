@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
 import ArticleNewCommentNotice from './ArticleNewCommentNotice'
-import CircleNewCommentNotice from './CircleNewCommentNotice'
+import CircleNewBroadcastNotice from './CircleNewBroadcastNotice'
 import CommentMentionedYouNotice from './CommentMentionedYouNotice'
 import CommentPinnedNotice from './CommentPinnedNotice'
 import SubscribedArticleNewCommentNotice from './SubscribedArticleNewCommentNotice'
@@ -19,9 +19,7 @@ const CommentNotice = ({ notice }: { notice: NoticeType }) => {
     case 'SubscribedArticleNewComment':
       return <SubscribedArticleNewCommentNotice notice={notice} />
     case 'CircleNewBroadcast':
-      return <CircleNewCommentNotice notice={notice} />
-    case 'CircleNewDiscussion':
-      return <CircleNewCommentNotice notice={notice} />
+      return <CircleNewBroadcastNotice notice={notice} />
     default:
       return null
   }
@@ -38,13 +36,13 @@ CommentNotice.fragments = {
       ...CommentPinnedNotice
       ...ArticleNewCommentNotice
       ...SubscribedArticleNewCommentNotice
-      ...CircleNewCommentNotice
+      ...CircleNewBroadcastNotice
     }
     ${CommentMentionedYouNotice.fragments.notice}
     ${CommentPinnedNotice.fragments.notice}
     ${ArticleNewCommentNotice.fragments.notice}
     ${SubscribedArticleNewCommentNotice.fragments.notice}
-    ${CircleNewCommentNotice.fragments.notice}
+    ${CircleNewBroadcastNotice.fragments.notice}
   `,
 }
 
