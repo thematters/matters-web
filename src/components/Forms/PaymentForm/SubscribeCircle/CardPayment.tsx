@@ -84,6 +84,7 @@ const BaseCardPayment: React.FC<CardPaymentProps> = ({
 
   const handleSubmit = async () => {
     setSubmitting(true)
+    analytics.trackEvent('click_button', { type: 'subscribe_confirm' })
 
     let data: SubscribeCircleType | undefined
 
@@ -179,7 +180,7 @@ const BaseCardPayment: React.FC<CardPaymentProps> = ({
           disabled={disabled || isSubmitting || !!checkoutError}
           loading={isSubmitting}
         >
-          <Translate zh_hant="確認訂閱" zh_hans="确认订阅" />
+          <Translate zh_hant="確認訂閱" zh_hans="确认订阅" en="Confirm" />
         </Dialog.Footer.Button>
       </Dialog.Footer>
 

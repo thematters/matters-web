@@ -54,6 +54,7 @@ interface ClickButtonProp {
     | 'google_search'
     | 'subscribe_circle_banner'
     | 'subscribe_circle_price'
+    | 'subscribe_confirm'
     | 'create_circle'
     | 'finish_circle_creation'
   pageType?: PageType
