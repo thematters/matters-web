@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { useContext } from 'react'
 
 import {
@@ -9,14 +8,16 @@ import {
   ViewerContext,
 } from '~/components'
 
-import { numAbbr, toPath } from '~/common/utils'
+import { numAbbr } from '~/common/utils'
 
 import CIRCLE_COVER from '@/public/static/images/circle-cover.svg'
 
 import AuthorWidget from './AuthorWidget'
 import EditButton from './EditButton'
 import FollowButton from './FollowButton'
+import { FollowersDialog } from './FollowersDialog'
 import { fragments } from './gql'
+import { MembersDialog } from './MembersDialog'
 import styles from './styles.css'
 
 import { ProfileCirclePrivate } from './__generated__/ProfileCirclePrivate'
@@ -29,16 +30,6 @@ type CircleProfileProps = {
 const CircleProfile = ({ circle }: CircleProfileProps) => {
   const viewer = useContext(ViewerContext)
   const isOwner = circle?.owner.id === viewer.id
-
-  const circleMembersPath = toPath({
-    page: 'circleMembers',
-    circle: { name: circle.name },
-  })
-
-  const circleFollowersPath = toPath({
-    page: 'circleFollowers',
-    circle: { name: circle.name },
-  })
 
   return (
     <section className="profile">
@@ -60,23 +51,27 @@ const CircleProfile = ({ circle }: CircleProfileProps) => {
 
       <footer>
         <section className="counts">
-          <Link {...circleMembersPath}>
-            <a>
-              <span className="count">
-                {numAbbr(circle.members.totalCount)}
-              </span>
-              <Translate id="members" />
-            </a>
-          </Link>
+          <MembersDialog circle={circle}>
+            {({ open: openMembersDialog }) => (
+              <button type="button" onClick={openMembersDialog}>
+                <span className="count">
+                  {numAbbr(circle.members.totalCount)}
+                </span>
+                <Translate id="members" />
+              </button>
+            )}
+          </MembersDialog>
 
-          <Link {...circleFollowersPath}>
-            <a>
-              <span className="count">
-                {numAbbr(circle.followers.totalCount)}
-              </span>
-              <Translate id="follower" />
-            </a>
-          </Link>
+          <FollowersDialog circle={circle}>
+            {({ open: openFollowersDialog }) => (
+              <button type="button" onClick={openFollowersDialog}>
+                <span className="count">
+                  {numAbbr(circle.followers.totalCount)}
+                </span>
+                <Translate id="follower" />
+              </button>
+            )}
+          </FollowersDialog>
         </section>
 
         {isOwner ? (

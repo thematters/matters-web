@@ -1,5 +1,4 @@
 import _some from 'lodash/some'
-import Link from 'next/link'
 import { useContext, useEffect } from 'react'
 
 import {
@@ -17,7 +16,7 @@ import {
   ViewerContext,
 } from '~/components'
 
-import { numAbbr, toPath } from '~/common/utils'
+import { numAbbr } from '~/common/utils'
 
 import IMAGE_COVER from '@/public/static/images/profile-cover.png'
 
@@ -25,6 +24,8 @@ import { CivicLikerBadge, SeedBadge } from './Badges'
 import CircleWidget from './CircleWidget'
 import DropdownActions from './DropdownActions'
 import EditProfileButton from './EditProfileButton'
+import { FolloweesDialog } from './FolloweesDialog'
+import { FollowersDialog } from './FollowersDialog'
 import { USER_PROFILE_PRIVATE, USER_PROFILE_PUBLIC } from './gql'
 import styles from './styles.css'
 
@@ -112,14 +113,6 @@ export const UserProfile = () => {
     )
   }
 
-  const userFollowersPath = toPath({
-    page: 'userFollowers',
-    userName,
-  })
-  const userFolloweesPath = toPath({
-    page: 'userFollowees',
-    userName,
-  })
   const badges = user.info.badges || []
   const circles = user.ownCircles || []
   const hasSeedBadge = _some(badges, { type: 'seed' })
@@ -202,23 +195,27 @@ export const UserProfile = () => {
         </section>
 
         <footer>
-          <Link {...userFollowersPath}>
-            <a>
-              <span className="count">
-                {numAbbr(user.followers.totalCount)}
-              </span>
-              <Translate id="follower" />
-            </a>
-          </Link>
+          <FollowersDialog user={user}>
+            {({ open: openFollowersDialog }) => (
+              <button type="button" onClick={openFollowersDialog}>
+                <span className="count">
+                  {numAbbr(user.followers.totalCount)}
+                </span>
+                <Translate id="follower" />
+              </button>
+            )}
+          </FollowersDialog>
 
-          <Link {...userFolloweesPath}>
-            <a>
-              <span className="count">
-                {numAbbr(user.followees.totalCount)}
-              </span>
-              <Translate id="following" />
-            </a>
-          </Link>
+          <FolloweesDialog user={user}>
+            {({ open: openFolloweesDialog }) => (
+              <button type="button" onClick={openFolloweesDialog}>
+                <span className="count">
+                  {numAbbr(user.followees.totalCount)}
+                </span>
+                <Translate id="following" />
+              </button>
+            )}
+          </FolloweesDialog>
         </footer>
 
         <CircleWidget circles={circles} isMe={isMe} />

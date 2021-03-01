@@ -129,7 +129,12 @@ interface ClickFeedProp {
 type ContentType = 'article' | 'comment' | 'circle' | 'user' | 'tag'
 
 // feed type
-type FeedType = ArticleFeedType | CommentFeedType | UserFeedType | TagFeedType
+type FeedType =
+  | ArticleFeedType
+  | CommentFeedType
+  | UserFeedType
+  | TagFeedType
+  | CircleFeedType
 
 type ArticleFeedType =
   | 'all_authors'
@@ -193,7 +198,7 @@ type TagFeedType =
   | 'tags' // tag feed on home page
   | 'user_tag'
 
-type CircleFeedType = 'user_circle'
+type CircleFeedType = 'user_circle' | 'circle_follower' | 'circle_member'
 
 // style type
 type StyleType =
