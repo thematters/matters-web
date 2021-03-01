@@ -1,8 +1,8 @@
 import { useContext, useEffect } from 'react'
 
 import {
+  Dialog,
   EmptyWarning,
-  Head,
   InfiniteScroll,
   List,
   QueryError,
@@ -17,14 +17,11 @@ import { UserDigest } from '~/components/UserDigest'
 
 import { analytics, mergeConnections } from '~/common/utils'
 
-import IMAGE_LOGO_192 from '@/public/static/icon-192x192.png?url'
+import { USER_FOLLOWEES_PRIVATE, USER_FOLLOWEES_PUBLIC } from './gql'
 
-import FollowerTabs from '../FollowerTabs'
-import { USER_FOLLOWERS_PRIVATE, USER_FOLLOWERS_PUBLIC } from './gql'
+import { UserFolloweePublic } from './__generated__/UserFolloweePublic'
 
-import { UserFollowerPublic } from './__generated__/UserFollowerPublic'
-
-const UserFollowers = () => {
+const FolloweesDialogContent = () => {
   const viewer = useContext(ViewerContext)
   const { getQuery } = useRoute()
   const userName = getQuery('name')
@@ -40,26 +37,26 @@ const UserFollowers = () => {
     fetchMore,
     refetch: refetchPublic,
     client,
-  } = usePublicQuery<UserFollowerPublic>(USER_FOLLOWERS_PUBLIC, {
+  } = usePublicQuery<UserFolloweePublic>(USER_FOLLOWEES_PUBLIC, {
     variables: { userName },
   })
 
   // pagination
   const user = data?.user
-  const connectionPath = 'user.followers'
-  const { edges, pageInfo } = user?.followers || {}
+  const connectionPath = 'user.followees'
+  const { edges, pageInfo } = user?.followees || {}
 
   // private data
-  const loadPrivate = (publicData?: UserFollowerPublic) => {
+  const loadPrivate = (publicData?: UserFolloweePublic) => {
     if (!viewer.isAuthed || !publicData || !user) {
       return
     }
 
-    const publiceEdges = publicData.user?.followers.edges || []
+    const publiceEdges = publicData.user?.followees.edges || []
     const publicIds = publiceEdges.map(({ node }) => node.id)
 
     client.query({
-      query: USER_FOLLOWERS_PRIVATE,
+      query: USER_FOLLOWEES_PRIVATE,
       fetchPolicy: 'network-only',
       variables: { ids: publicIds },
     })
@@ -73,7 +70,7 @@ const UserFollowers = () => {
   // load next page
   const loadMore = async () => {
     analytics.trackEvent('load_more', {
-      type: 'follower',
+      type: 'followee',
       location: edges?.length || 0,
     })
     const { data: newData } = await fetchMore({
@@ -103,74 +100,35 @@ const UserFollowers = () => {
    * Render
    */
   if (loading) {
-    return (
-      <>
-        <FollowerTabs />
-        <Spinner />
-      </>
-    )
+    return <Spinner />
   }
 
   if (error) {
-    return (
-      <>
-        <FollowerTabs />
-        <QueryError error={error} />
-      </>
-    )
+    return <QueryError error={error} />
   }
 
-  if (!user || user?.status?.state === 'archived') {
+  if (
+    !user ||
+    user?.status?.state === 'archived' ||
+    !edges ||
+    edges.length <= 0 ||
+    !pageInfo
+  ) {
     return (
-      <>
-        <FollowerTabs />
-        <EmptyWarning
-          description={
-            <Translate zh_hant="還沒有追蹤者" zh_hans="还没有追踪者" />
-          }
-        />
-      </>
-    )
-  }
-
-  const CustomHead = () => (
-    <Head
-      title={{
-        zh_hant: `${user.displayName}的追蹤者`,
-        zh_hans: `${user.displayName}的追踪者`,
-        en: `followers of ${user.displayName}`,
-      }}
-      description={user.info.description}
-      image={user.info.profileCover || IMAGE_LOGO_192}
-    />
-  )
-
-  if (!edges || edges.length <= 0 || !pageInfo) {
-    return (
-      <>
-        <CustomHead />
-
-        <FollowerTabs />
-
-        <EmptyWarning
-          description={
-            <Translate
-              zh_hant="還沒有追蹤者"
-              zh_hans="还没有追踪者"
-              en="no followers yet"
-            />
-          }
-        />
-      </>
+      <EmptyWarning
+        description={
+          <Translate
+            zh_hant="還沒有追蹤任何人"
+            zh_hans="还没有追踪任何人"
+            en="No following yet"
+          />
+        }
+      />
     )
   }
 
   return (
-    <>
-      <CustomHead />
-
-      <FollowerTabs />
-
+    <Dialog.Content spacing={['base', 0]}>
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
         <List hasBorder={false}>
           {edges.map(({ node, cursor }, i) => (
@@ -179,7 +137,7 @@ const UserFollowers = () => {
                 user={node}
                 onClick={() =>
                   analytics.trackEvent('click_feed', {
-                    type: 'follower',
+                    type: 'followee',
                     contentType: 'user',
                     styleType: 'card',
                     location: i,
@@ -190,8 +148,8 @@ const UserFollowers = () => {
           ))}
         </List>
       </InfiniteScroll>
-    </>
+    </Dialog.Content>
   )
 }
 
-export default UserFollowers
+export default FolloweesDialogContent

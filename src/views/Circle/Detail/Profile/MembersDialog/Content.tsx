@@ -1,6 +1,7 @@
 import { useContext, useEffect } from 'react'
 
 import {
+  Dialog,
   EmptyWarning,
   InfiniteScroll,
   List,
@@ -14,14 +15,13 @@ import {
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 
-import { mergeConnections } from '~/common/utils'
+import { analytics, mergeConnections } from '~/common/utils'
 
-import UserListTabs from '../UserListTabs'
 import { CIRCLE_MEMBERS_PRIVATE, CIRCLE_MEMBERS_PUBLIC } from './gql'
 
 import { CircleMembersPublic } from './__generated__/CircleMembersPublic'
 
-const CircleMembers = () => {
+const MembersDialogContent = () => {
   const viewer = useContext(ViewerContext)
   const { getQuery } = useRoute()
   const name = getQuery('name')
@@ -68,7 +68,10 @@ const CircleMembers = () => {
    * Fetch more public and private data
    */
   const loadMore = async () => {
-    // TODO: add analytics
+    analytics.trackEvent('load_more', {
+      type: 'circle_member',
+      location: edges?.length || 0,
+    })
 
     const { data: newData } = await fetchMore({
       variables: {
@@ -106,34 +109,41 @@ const CircleMembers = () => {
 
   if (!edges || edges.length <= 0 || !pageInfo) {
     return (
-      <>
-        <UserListTabs />
-        <EmptyWarning
-          description={<Translate zh_hant="還沒有成員" zh_hans="还没有成員" />}
-        />
-      </>
+      <EmptyWarning
+        description={
+          <Translate
+            zh_hant="還沒有成員"
+            zh_hans="还没有成員"
+            en="No members yet"
+          />
+        }
+      />
     )
   }
 
   return (
-    <>
-      <UserListTabs />
+    <Dialog.Content spacing={['base', 0]}>
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
         <List hasBorder={false}>
           {edges.map(({ node, cursor }, i) => (
             <List.Item key={cursor}>
               <UserDigest.Rich
                 user={node.user}
-                onClick={() => {
-                  // TODO: add analtyics tracker
-                }}
+                onClick={() =>
+                  analytics.trackEvent('click_feed', {
+                    type: 'circle_member',
+                    contentType: 'user',
+                    styleType: 'card',
+                    location: i,
+                  })
+                }
               />
             </List.Item>
           ))}
         </List>
       </InfiniteScroll>
-    </>
+    </Dialog.Content>
   )
 }
 
-export default CircleMembers
+export default MembersDialogContent

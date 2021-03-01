@@ -1,6 +1,7 @@
 import { useContext, useEffect } from 'react'
 
 import {
+  Dialog,
   EmptyWarning,
   InfiniteScroll,
   List,
@@ -14,14 +15,13 @@ import {
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 
-import { mergeConnections } from '~/common/utils'
+import { analytics, mergeConnections } from '~/common/utils'
 
-import UserListTabs from '../UserListTabs'
 import { CIRCLE_FOLLOWERS_PRIVATE, CIRCLE_FOLLOWERS_PUBLIC } from './gql'
 
 import { CircleFollowersPublic } from './__generated__/CircleFollowersPublic'
 
-const CircleFollowers = () => {
+const FollowersDialogContent = () => {
   const viewer = useContext(ViewerContext)
   const { getQuery } = useRoute()
   const name = getQuery('name')
@@ -68,8 +68,10 @@ const CircleFollowers = () => {
    * Fetch more public and private data
    */
   const loadMore = async () => {
-    // TODO: add analytics
-
+    analytics.trackEvent('load_more', {
+      type: 'circle_follower',
+      location: edges?.length || 0,
+    })
     const { data: newData } = await fetchMore({
       variables: {
         after: pageInfo?.endCursor,
@@ -106,36 +108,41 @@ const CircleFollowers = () => {
 
   if (!edges || edges.length <= 0 || !pageInfo) {
     return (
-      <>
-        <UserListTabs />
-        <EmptyWarning
-          description={
-            <Translate zh_hant="還沒有追蹤者" zh_hans="还没有追踪者" />
-          }
-        />
-      </>
+      <EmptyWarning
+        description={
+          <Translate
+            zh_hant="還沒有追蹤者"
+            zh_hans="还没有追踪者"
+            en="No followers yet"
+          />
+        }
+      />
     )
   }
 
   return (
-    <>
-      <UserListTabs />
+    <Dialog.Content spacing={['base', 0]}>
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
         <List hasBorder={false}>
           {edges.map(({ node, cursor }, i) => (
             <List.Item key={cursor}>
               <UserDigest.Rich
                 user={node}
-                onClick={() => {
-                  // TODO: add analtyics tracker
-                }}
+                onClick={() =>
+                  analytics.trackEvent('click_feed', {
+                    type: 'circle_follower',
+                    contentType: 'user',
+                    styleType: 'card',
+                    location: i,
+                  })
+                }
               />
             </List.Item>
           ))}
         </List>
       </InfiniteScroll>
-    </>
+    </Dialog.Content>
   )
 }
 
-export default CircleFollowers
+export default FollowersDialogContent
