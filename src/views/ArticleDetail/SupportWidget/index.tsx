@@ -2,6 +2,8 @@ import classNames from 'classnames'
 
 import { CircleDigest, Translate } from '~/components'
 
+import { analytics } from '~/common/utils'
+
 import DonationButton from './DonationButton'
 import Donators from './Donators'
 import { fragments } from './gql'
@@ -48,6 +50,12 @@ const SupportWidget = ({ article }: DonationProps) => {
             bgColor="grey-lighter"
             hasFooter
             hasPrice
+            onClickPrice={() => {
+              analytics.trackEvent('click_button', {
+                type: 'subscribe_circle_price',
+                pageType: 'article_detail',
+              })
+            }}
           />
         </section>
       )}

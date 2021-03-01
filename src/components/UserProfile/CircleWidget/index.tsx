@@ -2,6 +2,7 @@ import { Form, Translate, useFeatures } from '~/components'
 import { CircleDigest } from '~/components/CircleDigest'
 
 import { PATHS } from '~/common/enums'
+import { analytics } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -41,6 +42,9 @@ const CircleWidget: React.FC<CircleWidgetProps> = ({ circles, isMe }) => {
               />
             }
             href={PATHS.CIRCLE_CREATION}
+            onClick={() => {
+              analytics.trackEvent('click_button', { type: 'create_circle' })
+            }}
           />
         </Form.List>
 
@@ -61,6 +65,12 @@ const CircleWidget: React.FC<CircleWidgetProps> = ({ circles, isMe }) => {
           hasFooter
           hasOwner={false}
           hasPrice={!isMe}
+          onClickPrice={() => {
+            analytics.trackEvent('click_button', {
+              type: 'subscribe_circle_price',
+              pageType: 'user_profile',
+            })
+          }}
         />
       </section>
       <style jsx>{styles}</style>
