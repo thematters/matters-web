@@ -120,7 +120,7 @@ const FolloweesDialogContent = () => {
           <Translate
             zh_hant="還沒有追蹤任何人"
             zh_hans="还没有追踪任何人"
-            en="No following yet"
+            en="Not following anyone"
           />
         }
       />

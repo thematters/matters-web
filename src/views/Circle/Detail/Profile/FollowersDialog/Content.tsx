@@ -98,7 +98,7 @@ const FollowersDialogContent = () => {
   /**
    * Render
    */
-  if (loading || !data || !circle) {
+  if (loading) {
     return <Spinner />
   }
 
@@ -106,7 +106,7 @@ const FollowersDialogContent = () => {
     return <QueryError error={error} />
   }
 
-  if (!edges || edges.length <= 0 || !pageInfo) {
+  if (!data || !circle || !edges || edges.length <= 0 || !pageInfo) {
     return (
       <EmptyWarning
         description={
