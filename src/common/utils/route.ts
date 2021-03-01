@@ -38,8 +38,6 @@ type ToPathArgs =
         | 'circleBroadcast'
         | 'circleSettings'
         | 'circleEditProfile'
-        | 'circleFollowers'
-        | 'circleMembers'
       circle: CircleArgs
     }
   | {
@@ -53,13 +51,8 @@ type ToPathArgs =
       id: string
     }
   | {
-      page:
-        | 'userProfile'
-        | 'userSubscriptons'
-        | 'userComments'
-        | 'userTags'
-        | 'userFollowers'
-        | 'userFollowees'
+      page: 'userProfile' | 'userSubscriptons' | 'userComments' | 'userTags'
+
       userName: string
     }
   | {
@@ -112,16 +105,6 @@ export const toPath = (args: ToPathArgs): { href: string } => {
         href: `/~${args.circle.name}/settings/edit-profile`,
       }
     }
-    case 'circleFollowers': {
-      return {
-        href: `/~${args.circle.name}/followers`,
-      }
-    }
-    case 'circleMembers': {
-      return {
-        href: `/~${args.circle.name}/members`,
-      }
-    }
     case 'commentDetail': {
       const { parentComment, id } = args.comment
       const fragment = parentComment?.id ? `${parentComment.id}-${id}` : id
@@ -162,16 +145,7 @@ export const toPath = (args: ToPathArgs): { href: string } => {
         href: `/@${args.userName}/tags`,
       }
     }
-    case 'userFollowers': {
-      return {
-        href: `/@${args.userName}/followers`,
-      }
-    }
-    case 'userFollowees': {
-      return {
-        href: `/@${args.userName}/followees`,
-      }
-    }
+
     case 'search': {
       const typeStr = args.type ? `&type=${args.type}` : ''
       return {
