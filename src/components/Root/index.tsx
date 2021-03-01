@@ -19,7 +19,7 @@ import {
 import PageViewTracker from '~/components/Analytics/PageViewTracker'
 import SplashScreen from '~/components/SplashScreen'
 
-import { langConvert } from '~/common/utils'
+import { langConvert, sleep } from '~/common/utils'
 
 import { ROOT_QUERY_PRIVATE, ROOT_QUERY_PUBLIC } from './gql'
 
@@ -111,6 +111,12 @@ const Root = ({
           console.error(e)
         },
       })
+
+      // timeout to mark private fetched as true
+      await sleep(1000)
+      if (!privateFetched) {
+        setPrivateFetched(true)
+      }
     } catch (e) {
       console.error(e)
     }
