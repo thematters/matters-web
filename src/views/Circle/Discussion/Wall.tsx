@@ -12,7 +12,7 @@ import { ADD_TOAST, OPEN_SUBSCRIBE_CIRCLE_DIALOG } from '~/common/enums'
 import CIRCLE_DISCUSSION_WALL_SM from '@/public/static/images/circle-discussion-wall-sm.svg'
 import CIRCLE_DISCUSSION_WALL from '@/public/static/images/circle-discussion-wall.svg'
 
-import IntroDialog from '../Detail/SubscriptionBanner/IntroDialog'
+import IntroDialog from '../SubscriptionBanner/IntroDialog'
 import styles from './styles.css'
 
 import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'

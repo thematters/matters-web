@@ -8,7 +8,7 @@ import Unfollow from './Unfollow'
 import { FollowButtonCirclePrivate } from './__generated__/FollowButtonCirclePrivate'
 
 interface FollowButtonProps {
-  circle: FollowButtonCirclePrivate
+  circle: Partial<FollowButtonCirclePrivate>
 }
 
 const fragments = {

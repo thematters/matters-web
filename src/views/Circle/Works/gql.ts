@@ -2,11 +2,13 @@ import gql from 'graphql-tag'
 
 import { ArticleDigestFeed } from '~/components'
 
+import SubscriptionBanner from '../SubscriptionBanner'
+
 export const CIRCLE_WORKS_PUBLIC = gql`
   query CircleWorksPublic($name: String!, $after: String) {
     circle(input: { name: $name }) {
       id
-      works(input: { first: 10, after: $after }) {
+      articles: works(input: { first: 10, after: $after }) {
         pageInfo {
           startCursor
           endCursor
@@ -20,14 +22,22 @@ export const CIRCLE_WORKS_PUBLIC = gql`
           }
         }
       }
+      ...SubscriptionBannerCirclePublic
+      ...SubscriptionBannerCirclePrivate
     }
   }
   ${ArticleDigestFeed.fragments.article.public}
   ${ArticleDigestFeed.fragments.article.private}
+  ${SubscriptionBanner.fragments.circle.public}
+  ${SubscriptionBanner.fragments.circle.private}
 `
 
 export const CIRCLE_WORKS_PRIVATE = gql`
-  query CircleWorksPrivate($ids: [ID!]!) {
+  query CircleWorksPrivate($name: String!, $ids: [ID!]!) {
+    circle(input: { name: $name }) {
+      id
+      ...SubscriptionBannerCirclePrivate
+    }
     nodes(input: { ids: $ids }) {
       id
       ... on Article {
@@ -36,4 +46,5 @@ export const CIRCLE_WORKS_PRIVATE = gql`
     }
   }
   ${ArticleDigestFeed.fragments.article.private}
+  ${SubscriptionBanner.fragments.circle.private}
 `
