@@ -178,7 +178,7 @@ const Discussion = () => {
         (comments.length <= 0 && (
           <EmptyComment
             description={
-              <Translate zh_hant="還沒有討論" zh_hans="还没有讨论" />
+              <Translate zh_hant="還沒有眾聊" zh_hans="还没有众聊" />
             }
           />
         ))}
