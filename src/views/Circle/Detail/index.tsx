@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 
 import {
   EmptyLayout,
@@ -7,7 +7,6 @@ import {
   PullToRefresh,
   QueryError,
   Spinner,
-  SubscribeCircleDialog,
   Throw404,
   useEventListener,
   usePublicQuery,
@@ -23,15 +22,13 @@ import DropdownActions from './DropdownActions'
 import { CIRCLE_DETAIL_PRIVATE, CIRCLE_DETAIL_PUBLIC } from './gql'
 import CircleProfile from './Profile'
 import styles from './styles.css'
-import SubscriptionBanner from './SubscriptionBanner'
 
 import { CircleDetailPublic } from './__generated__/CircleDetailPublic'
 
-const CircleDetailContainer: React.FC = ({ children }) => {
+const BaseCircleDetailContainer: React.FC = ({ children }) => {
   const { getQuery } = useRoute()
   const viewer = useContext(ViewerContext)
   const name = getQuery('name')
-  const [privateFetched, setPrivateFetched] = useState(false)
 
   /**
    * Data Fetching
@@ -59,8 +56,6 @@ const CircleDetailContainer: React.FC = ({ children }) => {
       fetchPolicy: 'network-only',
       variables: { name },
     })
-
-    setPrivateFetched(true)
   }
 
   // fetch private data for first page
@@ -128,14 +123,21 @@ const CircleDetailContainer: React.FC = ({ children }) => {
 
           {children}
 
-          <SubscribeCircleDialog circle={circle} />
-          {privateFetched && <SubscriptionBanner circle={circle} />}
-
           <style jsx>{styles}</style>
         </section>
       </PullToRefresh>
     </Layout.Main>
   )
 }
+
+/**
+ * Memoizing
+ */
+type MemoizedCircleDetailContainerType = React.MemoExoticComponent<React.FC>
+
+const CircleDetailContainer = React.memo(
+  BaseCircleDetailContainer,
+  () => true
+) as MemoizedCircleDetailContainerType
 
 export default CircleDetailContainer
