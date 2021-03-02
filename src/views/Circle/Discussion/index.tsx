@@ -187,7 +187,12 @@ const Discussion = () => {
         <List spacing={['xloose', 0]}>
           {comments.map((comment) => (
             <List.Item key={comment.id}>
-              <ThreadComment comment={comment} type="circleDiscussion" />
+              <ThreadComment
+                comment={comment}
+                type="circleDiscussion"
+                hasUpvote={false}
+                hasDownvote={false}
+              />
             </List.Item>
           ))}
         </List>

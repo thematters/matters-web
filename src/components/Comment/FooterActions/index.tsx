@@ -17,6 +17,8 @@ import { FooterActionsCommentPublic } from './__generated__/FooterActionsComment
 export type FooterActionsControls = {
   hasReply?: boolean
   hasCreatedAt?: boolean
+  hasUpvote?: boolean
+  hasDownvote?: boolean
   inCard?: boolean
 } & CreatedAtControls &
   Pick<ReplyButtonProps, 'replySubmitCallback'>
@@ -78,6 +80,8 @@ const BaseFooterActions = ({
   hasReply,
   hasLink,
   hasCreatedAt,
+  hasUpvote = true,
+  hasDownvote = true,
   inCard = false,
 
   ...replyButtonProps
@@ -139,9 +143,9 @@ const BaseFooterActions = ({
           />
         )}
 
-        <UpvoteButton {...buttonProps} />
+        {hasUpvote && <UpvoteButton {...buttonProps} />}
 
-        <DownvoteButton {...buttonProps} />
+        {hasDownvote && <DownvoteButton {...buttonProps} />}
       </section>
 
       {hasCreatedAt && <CreatedAt comment={comment} hasLink={hasLink} />}
