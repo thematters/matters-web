@@ -18,6 +18,8 @@ interface ThreadCommentControls {
   type: CommentFormType
   defaultExpand?: boolean
   hasLink?: boolean
+  hasUpvote?: boolean
+  hasDownvote?: boolean
   replySubmitCallback?: () => void
 }
 
