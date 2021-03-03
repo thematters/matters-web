@@ -51,7 +51,8 @@
     mask-size: var(--circle-cover-width);
 
     & :global(img) {
-      @mixin object-fit-cover;
+      width: var(--circle-cover-width);
+      margin: 0 auto;
     }
 
     & :global(.mask svg) {
@@ -69,6 +70,10 @@
 
     @media (min-width: 375px) {
       mask-size: var(--circle-cover-width-max);
+
+      & :global(img) {
+        width: var(--circle-cover-width-max);
+      }
 
       &::after {
         padding-bottom: 180px;
