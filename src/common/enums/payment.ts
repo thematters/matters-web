@@ -19,11 +19,11 @@ export const PAYMENT_MINIMAL_PAYOUT_AMOUNT = {
 }
 
 export const PAYMENT_MINIMAL_CIRCLE_AMOUNT = {
-  HKD: 5,
+  HKD: 20,
 }
 
 export const PAYMENT_MAXIMUM_CIRCLE_AMOUNT = {
-  HKD: 100,
+  HKD: 5000,
 }
 
 export enum PAYMENT_CURRENCY {
