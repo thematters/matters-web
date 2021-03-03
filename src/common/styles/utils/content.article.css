@@ -325,9 +325,10 @@
   }
 }
 
+.u-summary,
 .editor-summary {
   position: relative;
-  margin-bottom: var(--spacing-loose);
+  margin: var(--spacing-loose) 0;
   background: transparent;
 
   & :global(textarea) {

@@ -33,6 +33,7 @@ import { toPath } from '~/common/utils'
 
 import Collection from './Collection'
 import Content from './Content'
+import CustomizedSummary from './CustomizedSummary'
 import FingerprintButton from './FingerprintButton'
 import {
   ARTICLE_DETAIL_PRIVATE,
@@ -110,6 +111,7 @@ const ArticleDetail = () => {
     circle.isMember ||
     article?.limitedFree
   )
+  const summary = article?.summary
 
   // fetch private data
   const [privateFetched, setPrivateFetched] = useState(false)
@@ -386,6 +388,9 @@ const ArticleDetail = () => {
           </section>
 
           <section className="content-outline">
+            {article?.summaryCustomized && (
+              <CustomizedSummary summary={summary} />
+            )}
             <Content
               article={article}
               translation={translate ? contentTranslation : null}
