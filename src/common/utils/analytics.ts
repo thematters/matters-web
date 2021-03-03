@@ -53,6 +53,11 @@ interface ClickButtonProp {
     | 'write_collection'
     | 'google_search'
     | 'subscribe_circle_banner'
+    | 'subscribe_circle_price'
+    | 'subscribe_confirm'
+    | 'create_circle'
+    | 'finish_circle_creation'
+  pageType?: PageType
 }
 
 /**
@@ -121,10 +126,15 @@ interface ClickFeedProp {
 }
 
 // content type
-type ContentType = 'article' | 'comment' | 'user' | 'tag'
+type ContentType = 'article' | 'comment' | 'circle' | 'user' | 'tag'
 
 // feed type
-type FeedType = ArticleFeedType | CommentFeedType | UserFeedType | TagFeedType
+type FeedType =
+  | ArticleFeedType
+  | CommentFeedType
+  | UserFeedType
+  | TagFeedType
+  | CircleFeedType
 
 type ArticleFeedType =
   | 'all_authors'
@@ -188,12 +198,13 @@ type TagFeedType =
   | 'tags' // tag feed on home page
   | 'user_tag'
 
-type CircleFeedType = 'user_circle'
+type CircleFeedType = 'user_circle' | 'circle_follower' | 'circle_member'
 
 // style type
 type StyleType =
   | ArticleStyleType
   | CommentStyleType
+  | CircleStyleType
   | UserStyleType
   | TagStyleType
 
@@ -206,6 +217,10 @@ type ArticleStyleType =
 
 type CommentStyleType = 'card'
 
+type CircleStyleType = 'subtitle'
+
 type UserStyleType = 'subtitle' | 'card'
 
 type TagStyleType = 'title' | 'article'
+
+type PageType = 'article_detail' | 'user_profile' | 'circle_detail'

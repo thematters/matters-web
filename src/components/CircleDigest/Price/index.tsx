@@ -9,6 +9,8 @@ import { PriceCirclePublic } from './__generated__/PriceCirclePublic'
 
 type PriceProps = {
   circle: PriceCirclePublic & Partial<PriceCirclePrivate>
+
+  onClick?: () => void
 }
 
 const fragments = {
@@ -32,7 +34,7 @@ const fragments = {
   },
 }
 
-const Price = ({ circle }: PriceProps) => {
+const Price = ({ circle, onClick }: PriceProps) => {
   const price = circle.prices && circle.prices[0]
 
   if (!price) {
@@ -65,6 +67,7 @@ const Price = ({ circle }: PriceProps) => {
       size={[null, '2rem']}
       spacing={[0, 'base']}
       bgColor="gold"
+      onClick={onClick}
       {...path}
     >
       <TextIcon weight="md" size="sm" color="white">

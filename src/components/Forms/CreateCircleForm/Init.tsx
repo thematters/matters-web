@@ -18,6 +18,7 @@ import {
   PAYMENT_MINIMAL_CIRCLE_AMOUNT,
 } from '~/common/enums'
 import {
+  analytics,
   parseFormSubmitErrors,
   translate,
   validateCircleAmount,
@@ -85,6 +86,8 @@ const Init: React.FC<FormProps> = ({
       { setFieldError, setSubmitting }
     ) => {
       try {
+        analytics.trackEvent('click_button', { type: 'finish_circle_creation' })
+
         const { data } = await create({
           variables: { input: { name, displayName, amount } },
         })

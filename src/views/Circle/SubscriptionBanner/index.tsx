@@ -66,6 +66,7 @@ const SubscriptionBanner = ({ circle }: SubscriptionBannerProps) => {
               onClick={() => {
                 analytics.trackEvent('click_button', {
                   type: 'subscribe_circle_banner',
+                  pageType: 'circle_detail',
                 })
 
                 if (!viewer.isAuthed) {

@@ -20,28 +20,3 @@
     color: var(--color-grey-dark);
   }
 }
-
-footer {
-  margin-top: var(--spacing-base);
-  font-size: var(--font-size-sm);
-  color: var(--color-grey);
-
-  & :global(> *) {
-    display: inline-flex;
-    align-items: center;
-    line-height: 1.5rem;
-
-    & + * {
-      margin-left: var(--spacing-loose);
-    }
-  }
-
-  & .count {
-    display: block;
-    padding-right: var(--spacing-x-tight);
-    font-size: var(--font-size-lg);
-    font-weight: var(--font-weight-bold);
-    line-height: 1.5rem;
-    color: var(--color-black);
-  }
-}

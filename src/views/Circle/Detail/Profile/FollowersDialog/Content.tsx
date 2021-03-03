@@ -1,6 +1,7 @@
 import { useContext, useEffect } from 'react'
 
 import {
+  Dialog,
   EmptyWarning,
   InfiniteScroll,
   List,
@@ -14,14 +15,13 @@ import {
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 
-import { mergeConnections } from '~/common/utils'
+import { analytics, mergeConnections } from '~/common/utils'
 
-import UserListTabs from '../UserListTabs'
-import { CIRCLE_MEMBERS_PRIVATE, CIRCLE_MEMBERS_PUBLIC } from './gql'
+import { CIRCLE_FOLLOWERS_PRIVATE, CIRCLE_FOLLOWERS_PUBLIC } from './gql'
 
-import { CircleMembersPublic } from './__generated__/CircleMembersPublic'
+import { CircleFollowersPublic } from './__generated__/CircleFollowersPublic'
 
-const CircleMembers = () => {
+const FollowersDialogContent = () => {
   const viewer = useContext(ViewerContext)
   const { getQuery } = useRoute()
   const name = getQuery('name')
@@ -36,27 +36,27 @@ const CircleMembers = () => {
     fetchMore,
     refetch: refetchPublic,
     client,
-  } = usePublicQuery<CircleMembersPublic>(CIRCLE_MEMBERS_PUBLIC, {
+  } = usePublicQuery<CircleFollowersPublic>(CIRCLE_FOLLOWERS_PUBLIC, {
     variables: { name },
   })
 
   const circle = data?.circle
-  const connectionPath = 'circle.members'
-  const { edges, pageInfo } = circle?.members || {}
+  const connectionPath = 'circle.followers'
+  const { edges, pageInfo } = circle?.followers || {}
 
   /**
    * Private data fetching
    */
-  const loadPrivate = (publicData?: CircleMembersPublic) => {
+  const loadPrivate = (publicData?: CircleFollowersPublic) => {
     if (!viewer.isAuthed || !publicData || !circle) {
       return
     }
 
-    const publicEdges = publicData.circle?.members.edges || []
-    const publicIds = publicEdges.map(({ node }) => node.user.id)
+    const publicEdges = publicData.circle?.followers.edges || []
+    const publicIds = publicEdges.map(({ node }) => node.id)
 
     client.query({
-      query: CIRCLE_MEMBERS_PRIVATE,
+      query: CIRCLE_FOLLOWERS_PRIVATE,
       fetchPolicy: 'network-only',
       variables: { ids: publicIds },
     })
@@ -68,8 +68,10 @@ const CircleMembers = () => {
    * Fetch more public and private data
    */
   const loadMore = async () => {
-    // TODO: add analytics
-
+    analytics.trackEvent('load_more', {
+      type: 'circle_follower',
+      location: edges?.length || 0,
+    })
     const { data: newData } = await fetchMore({
       variables: {
         after: pageInfo?.endCursor,
@@ -96,7 +98,7 @@ const CircleMembers = () => {
   /**
    * Render
    */
-  if (loading || !data || !circle) {
+  if (loading) {
     return <Spinner />
   }
 
@@ -104,36 +106,43 @@ const CircleMembers = () => {
     return <QueryError error={error} />
   }
 
-  if (!edges || edges.length <= 0 || !pageInfo) {
+  if (!data || !circle || !edges || edges.length <= 0 || !pageInfo) {
     return (
-      <>
-        <UserListTabs />
-        <EmptyWarning
-          description={<Translate zh_hant="還沒有成員" zh_hans="还没有成員" />}
-        />
-      </>
+      <EmptyWarning
+        description={
+          <Translate
+            zh_hant="還沒有追蹤者"
+            zh_hans="还没有追踪者"
+            en="No followers yet"
+          />
+        }
+      />
     )
   }
 
   return (
-    <>
-      <UserListTabs />
+    <Dialog.Content spacing={['base', 0]}>
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
         <List hasBorder={false}>
           {edges.map(({ node, cursor }, i) => (
             <List.Item key={cursor}>
               <UserDigest.Rich
-                user={node.user}
-                onClick={() => {
-                  // TODO: add analtyics tracker
-                }}
+                user={node}
+                onClick={() =>
+                  analytics.trackEvent('click_feed', {
+                    type: 'circle_follower',
+                    contentType: 'user',
+                    styleType: 'card',
+                    location: i,
+                  })
+                }
               />
             </List.Item>
           ))}
         </List>
       </InfiniteScroll>
-    </>
+    </Dialog.Content>
   )
 }
 
-export default CircleMembers
+export default FollowersDialogContent

@@ -24,11 +24,9 @@ export const fragments = {
           totalCount
         }
         ...AvatarCircle
-        ...FollowButtonCirclePrivate
         ...AuthorWidgetCircle
       }
       ${CircleAvatar.fragments.circle}
-      ${FollowButton.fragments.circle.private}
       ${AuthorWidget.fragments.circle}
     `,
     private: gql`

@@ -1,7 +1,6 @@
-import Link from 'next/link'
 import React from 'react'
 
-import { IconCircle24, TextIcon } from '~/components'
+import { IconCircle24, LinkWrapper, TextIcon } from '~/components'
 
 import { toPath } from '~/common/utils'
 
@@ -12,17 +11,19 @@ import { DigestPlainCircle } from './__generated__/DigestPlainCircle'
 
 export type CircleDigestPlainProps = {
   circle: DigestPlainCircle
+
+  onClick?: () => void
 }
 
-const CircleDigestPlain = ({ circle }: CircleDigestPlainProps) => {
+const CircleDigestPlain = ({ circle, onClick }: CircleDigestPlainProps) => {
   const path = toPath({
     page: 'circleDetail',
     circle,
   })
 
   return (
-    <Link {...path}>
-      <a>
+    <LinkWrapper {...path} onClick={onClick}>
+      <section>
         <TextIcon
           icon={<IconCircle24 size="md" />}
           color="green"
@@ -32,10 +33,10 @@ const CircleDigestPlain = ({ circle }: CircleDigestPlainProps) => {
         >
           <span className="name">{circle.displayName}</span>
         </TextIcon>
+      </section>
 
-        <style jsx>{styles}</style>
-      </a>
-    </Link>
+      <style jsx>{styles}</style>
+    </LinkWrapper>
   )
 }
 
