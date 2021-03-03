@@ -24,8 +24,8 @@ import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
 
 import {
   PAYMENT_CURRENCY,
-  PAYMENT_DEFAULT_CHARGE_AMOUNT,
-  PAYMENT_MAXIMUM_CHARGE_AMOUNT,
+  PAYMENT_DEFAULT_ADD_CREDIT_AMOUNT,
+  PAYMENT_MAXIMUM_ADD_CREDIT_AMOUNT,
   STRIPE_ERROR_MESSAGES,
 } from '~/common/enums'
 import {
@@ -123,7 +123,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
     isSubmitting,
   } = useFormik<FormValues>({
     initialValues: {
-      amount: defaultAmount || PAYMENT_DEFAULT_CHARGE_AMOUNT[currency],
+      amount: defaultAmount || PAYMENT_DEFAULT_ADD_CREDIT_AMOUNT[currency],
     },
     validate: ({ amount }) =>
       _pickBy({
@@ -203,7 +203,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
         }
         name="amount"
         min={0}
-        max={PAYMENT_MAXIMUM_CHARGE_AMOUNT[currency]}
+        max={PAYMENT_MAXIMUM_ADD_CREDIT_AMOUNT[currency]}
         step="1"
         ref={inputRef}
         required
@@ -214,14 +214,13 @@ const BaseAddCredit: React.FC<FormProps> = ({
           const amount = e.target.valueAsNumber || 0
           const sanitizedAmount = Math.min(
             Math.floor(amount),
-            PAYMENT_MAXIMUM_CHARGE_AMOUNT[currency]
+            PAYMENT_MAXIMUM_ADD_CREDIT_AMOUNT[currency]
           )
 
-          /// remove extra left pad 0
+          // remove extra left pad 0
           if (inputRef.current) {
             inputRef.current.value = sanitizedAmount
           }
-
           setFieldValue('amount', sanitizedAmount)
         }}
         autoFocus
