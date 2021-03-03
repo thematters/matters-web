@@ -1,26 +1,32 @@
-import { useQuery } from '@apollo/react-hooks'
-import { useContext } from 'react'
+import { useLazyQuery, useQuery } from '@apollo/react-hooks'
+import Link from 'next/link'
+import { useContext, useEffect } from 'react'
 
 import {
   Button,
   IconClose32,
+  LanguageContext,
   Translate,
   useFeatures,
   ViewerContext,
 } from '~/components'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
-import { STORAGE_KEY_CIRCLE_BANNER, TEXT } from '~/common/enums'
+import { PATHS, STORAGE_KEY_CIRCLE_BANNER, TEXT } from '~/common/enums'
 import { storage } from '~/common/utils'
 
 import IMAGE_CIRCLE_AD_BANNER from '@/public/static/images/circle-ad-banner.svg'
 
+import { APPLICATION_LINKS } from './applicationLinks'
+import { CIRCLE_BANNER } from './gql'
 import styles from './styles.css'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
+import { CircleBanner as CircleBannerType } from './__generated__/CircleBanner'
 
 export const CircleBanner = () => {
   const viewer = useContext(ViewerContext)
+  const { lang } = useContext(LanguageContext)
   const features = useFeatures()
   const { data: clientPreferenceData, client } = useQuery<ClientPreference>(
     CLIENT_PREFERENCE,
@@ -28,6 +34,18 @@ export const CircleBanner = () => {
       variables: { id: 'local' },
     }
   )
+  const [getOwnCircles, { data }] = useLazyQuery<CircleBannerType>(
+    CIRCLE_BANNER
+  )
+  const ownCirclesCount = data?.viewer?.ownCircles?.length || 0
+  const hasCircle = ownCirclesCount > 0
+
+  useEffect(() => {
+    if (!viewer.id) {
+      return
+    }
+    getOwnCircles()
+  }, [viewer.id])
 
   // skip if it's server-side rendering
   if (!process.browser) {
@@ -52,37 +70,23 @@ export const CircleBanner = () => {
     })
   }
 
-  if (!viewer.isAuthed || !enabled) {
+  if (!viewer.isAuthed || !enabled || !data || hasCircle) {
     return null
   }
 
-  // TODO: showing differnt UI based on viewer state
-  // @ts-ignore
-  const canCreateCircle = features.circle_management
+  const canCreateCircle = !features.circle_management
 
   return (
     <div className="container">
-      <section
-        className="banner"
-        style={{ backgroundImage: `url(${IMAGE_CIRCLE_AD_BANNER})` }}
-      >
-        {canCreateCircle ? (
-          <>
-            <h3>
-              <Translate
-                zh_hant="爐子起好了，快來加薪火"
-                zh_hans="炉子起好了，快来加薪火"
-              />
-            </h3>
-            <p>
-              <Translate
-                zh_hant="聯結所有支持者，搭建你的可持續創作生態圈"
-                zh_hans="联结所有支持者，搭建你的可持续创作生态圈"
-              />
-            </p>
-          </>
-        ) : (
-          <>
+      {!canCreateCircle && (
+        <a
+          href={APPLICATION_LINKS[lang] || APPLICATION_LINKS.zh_hant}
+          target="_blank"
+        >
+          <section
+            className="banner"
+            style={{ backgroundImage: `url(${IMAGE_CIRCLE_AD_BANNER})` }}
+          >
             <h3>
               <Translate
                 zh_hant="圍爐內測，火熱進行中"
@@ -95,20 +99,44 @@ export const CircleBanner = () => {
                 zh_hans="点击这里，致信 hi@matters.news，申请参与内测"
               />
             </p>
-          </>
-        )}
+          </section>
+        </a>
+      )}
 
-        <div className="close">
-          <Button
-            spacing={[0, 0]}
-            bgActiveColor="green"
-            aria-label={TEXT.zh_hant.close}
-            onClick={hideBanner}
-          >
-            <IconClose32 size="lg" />
-          </Button>
-        </div>
-      </section>
+      {canCreateCircle && (
+        <Link href={PATHS.CIRCLE_CREATION}>
+          <a>
+            <section
+              className="banner"
+              style={{ backgroundImage: `url(${IMAGE_CIRCLE_AD_BANNER})` }}
+            >
+              <h3>
+                <Translate
+                  zh_hant="爐子起好了，快來加薪火"
+                  zh_hans="炉子起好了，快来加薪火"
+                />
+              </h3>
+              <p>
+                <Translate
+                  zh_hant="聯結所有支持者，搭建你的可持續創作生態圈"
+                  zh_hans="联结所有支持者，搭建你的可持续创作生态圈"
+                />
+              </p>
+            </section>
+          </a>
+        </Link>
+      )}
+
+      <div className="close">
+        <Button
+          spacing={[0, 0]}
+          bgActiveColor="green"
+          aria-label={TEXT.zh_hant.close}
+          onClick={hideBanner}
+        >
+          <IconClose32 size="lg" />
+        </Button>
+      </div>
 
       <style jsx>{styles}</style>
     </div>
