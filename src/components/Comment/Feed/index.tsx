@@ -103,13 +103,14 @@ type MemoizedCommentFeed = React.MemoExoticComponent<React.FC<CommentProps>> & {
 
 const CommentFeed = React.memo(
   BaseCommentFeed,
-  ({ comment: prevComment }, { comment }) => {
+  ({ comment: prevComment, disabled: prevDisabled }, { comment, disabled }) => {
     return (
       prevComment.content === comment.content &&
       prevComment.upvotes === comment.upvotes &&
       prevComment.downvotes === comment.downvotes &&
       prevComment.state === comment.state &&
-      prevComment.pinned === comment.pinned
+      prevComment.pinned === comment.pinned &&
+      prevDisabled === disabled
     )
   }
 ) as MemoizedCommentFeed
