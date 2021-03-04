@@ -22,6 +22,7 @@ import { ToolbarArticlePublic } from './__generated__/ToolbarArticlePublic'
 export type ToolbarProps = {
   article: ToolbarArticlePublic & Partial<ToolbarArticlePrivate>
   privateFetched: boolean
+  lock: boolean
 } & DropdownActionsControls
 
 const fragments = {
@@ -55,7 +56,7 @@ const fragments = {
   },
 }
 
-const Toolbar = ({ article, privateFetched, ...props }: ToolbarProps) => {
+const Toolbar = ({ article, privateFetched, lock, ...props }: ToolbarProps) => {
   const isSmallUp = useResponsive('sm-up')
 
   return (
@@ -65,13 +66,14 @@ const Toolbar = ({ article, privateFetched, ...props }: ToolbarProps) => {
           <AppreciationButton
             article={article}
             privateFetched={privateFetched}
+            disabled={lock}
           />
         </ReCaptchaProvider>
 
-        <DonationButton article={article} />
+        <DonationButton article={article} disabled={lock} />
 
         <section className="comment-bar">
-          <CommentBar article={article} />
+          <CommentBar article={article} disabled={lock} />
         </section>
 
         <BookmarkButton article={article} size="md-s" inCard={false} />
@@ -84,6 +86,7 @@ const Toolbar = ({ article, privateFetched, ...props }: ToolbarProps) => {
           size="md-s"
           inCard={false}
           hasShare={!isSmallUp}
+          hasExtend={!lock}
           {...props}
         />
       </section>

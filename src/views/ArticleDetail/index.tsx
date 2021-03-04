@@ -413,6 +413,7 @@ const ArticleDetail = () => {
           article={article}
           privateFetched={privateFetched}
           hasFingerprint={canReadFullContent}
+          lock={!!circle && (!isAuthor || !circle.isMember)}
         />
 
         {shouldShowWall && (

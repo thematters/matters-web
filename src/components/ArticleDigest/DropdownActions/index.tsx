@@ -41,10 +41,15 @@ export interface DropdownActionsControls {
   color?: IconColor
   size?: IconSize
 
-  hasShare?: boolean
+  /**
+   * options to control visibility
+   */
   // force to hide
+  hasShare?: boolean
   hasFingerprint?: boolean
+  hasExtend?: boolean
 
+  // based on type
   inCard?: boolean
   inUserArticles?: boolean
   inTagDetailLatest?: boolean
@@ -197,6 +202,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
 
     hasShare,
     hasFingerprint = true,
+    hasExtend = true,
 
     inCard,
     inUserArticles,
@@ -241,7 +247,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
     hasAppreciators: article.appreciationsReceived.totalCount > 0 && !inCard,
     hasDonators: article.donationsDialog.totalCount > 0 && !inCard,
     hasFingerprint: hasFingerprint && (isActive || isArticleAuthor) && !inCard,
-    hasExtend: !!isActive && !inCard,
+    hasExtend: hasExtend && !!isActive && !inCard,
     // privates
     hasSticky: !!(
       inUserArticles &&
