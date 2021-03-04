@@ -1,11 +1,6 @@
 import { useContext } from 'react'
 
-import {
-  LoginButton,
-  Translate,
-  useResponsive,
-  ViewerContext,
-} from '~/components'
+import { LoginButton, Translate, ViewerContext } from '~/components'
 
 import { ADD_TOAST, OPEN_SUBSCRIBE_CIRCLE_DIALOG } from '~/common/enums'
 
@@ -15,14 +10,13 @@ import CIRCLE_DISCUSSION_WALL from '@/public/static/images/circle-discussion-wal
 import IntroDialog from '../SubscriptionBanner/IntroDialog'
 import styles from './styles.css'
 
-import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
+import { DiscussionPublic_circle } from './__generated__/DiscussionPublic'
 
 type WallProps = {
-  circle: DigestRichCirclePublic
+  circle: DiscussionPublic_circle
 }
 
 const Wall = ({ circle }: WallProps) => {
-  const isSmallUp = useResponsive('sm-up')
   const viewer = useContext(ViewerContext)
 
   const showLoginToast = () => {
@@ -46,6 +40,8 @@ const Wall = ({ circle }: WallProps) => {
   const openSubscribeCircleDialog = () =>
     window.dispatchEvent(new CustomEvent(OPEN_SUBSCRIBE_CIRCLE_DIALOG, {}))
 
+  const discussionCount = circle.discussion.totalCount || 0
+
   return (
     <IntroDialog circle={circle} onConfirm={openSubscribeCircleDialog}>
       {({ open: openIntroDialog }) => (
@@ -62,14 +58,24 @@ const Wall = ({ circle }: WallProps) => {
             openIntroDialog()
           }}
         >
-          <img
-            src={isSmallUp ? CIRCLE_DISCUSSION_WALL : CIRCLE_DISCUSSION_WALL_SM}
-          />
+          <picture>
+            <source
+              media="(min-width: 768px)"
+              srcSet={CIRCLE_DISCUSSION_WALL}
+            />
+
+            <img src={CIRCLE_DISCUSSION_WALL_SM} />
+          </picture>
 
           <section className="brief">
-            {/* <p>
-        <Translate zh_hant="聽說目前共累積 67 串討論，138 則迴響" />
-      </p> */}
+            {discussionCount > 0 && (
+              <p>
+                <Translate
+                  zh_hant={`聽說目前共累積 ${discussionCount} 串討論`}
+                  zh_hans={`听说目前共累积 ${discussionCount} 串讨论`}
+                />
+              </p>
+            )}
           </section>
 
           <style jsx>{styles}</style>
