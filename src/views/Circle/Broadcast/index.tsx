@@ -65,7 +65,7 @@ const Broadcast = () => {
   const connectionPath = 'circle.broadcast'
   const circle = data?.circle
   const { edges, pageInfo } = circle?.broadcast || {}
-  const circleId = circle && circle.id
+  const circleId = circle?.id
   const comments = filterComments<CommentPublic>(
     (edges || []).map(({ node }) => node)
   )
@@ -73,7 +73,7 @@ const Broadcast = () => {
   // private data
   const [privateFetched, setPrivateFetched] = useState(false)
   const loadPrivate = async (publicData?: BroadcastPublic) => {
-    if (!viewer.isAuthed || !publicData || !circleId) {
+    if (!viewer.isAuthed || !publicData) {
       return
     }
 
@@ -94,10 +94,18 @@ const Broadcast = () => {
     setPrivateFetched(true)
   }
 
-  // fetch private data for first page
+  // fetch private data
   useEffect(() => {
-    loadPrivate(data)
-  }, [circleId, viewer.id])
+    if (!circleId) {
+      return
+    }
+
+    if (viewer.id) {
+      loadPrivate(data)
+    } else {
+      setPrivateFetched(true)
+    }
+  }, [circleId])
 
   // load next page
   const loadMore = async () => {
@@ -182,14 +190,19 @@ const Broadcast = () => {
         <List spacing={['xloose', 0]}>
           {comments.map((comment) => (
             <List.Item key={comment.id}>
-              <ThreadComment comment={comment} type="circleBroadcast" />
+              <ThreadComment
+                comment={comment}
+                type="circleBroadcast"
+                hasUpvote={false}
+                hasDownvote={false}
+              />
             </List.Item>
           ))}
         </List>
       </InfiniteScroll>
 
       <SubscribeCircleDialog circle={circle} />
-      {!privateFetched && <SubscriptionBanner circle={circle} />}
+      {privateFetched && <SubscriptionBanner circle={circle} />}
 
       <style jsx>{styles}</style>
     </section>

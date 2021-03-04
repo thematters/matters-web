@@ -46,8 +46,9 @@ const Works = () => {
   })
 
   // pagination
-  const connectionPath = 'node.articles'
+  const connectionPath = 'circle.articles'
   const circle = data?.circle
+  const circleId = circle?.id
   const { edges, pageInfo } = circle?.articles || {}
 
   // private data
@@ -70,20 +71,24 @@ const Works = () => {
     setPrivateFetched(true)
   }
 
-  // fetch private data for first page
+  // fetch private data
   useEffect(() => {
-    if (loading || !edges) {
+    if (!circleId) {
       return
     }
 
-    loadPrivate(data)
-  }, [!!edges, loading, viewer.id])
+    if (viewer.id) {
+      loadPrivate(data)
+    } else {
+      setPrivateFetched(true)
+    }
+  }, [circleId])
 
   // load next page
   const loadMore = async () => {
     analytics.trackEvent('load_more', {
       type: 'circle_detail',
-      location: edges ? edges.length : 0,
+      location: edges?.length || 0,
     })
 
     const { data: newData } = await fetchMore({
@@ -159,7 +164,7 @@ const Works = () => {
       </InfiniteScroll>
 
       <SubscribeCircleDialog circle={circle} />
-      {!privateFetched && <SubscriptionBanner circle={circle} />}
+      {privateFetched && <SubscriptionBanner circle={circle} />}
     </section>
   )
 }

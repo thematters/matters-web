@@ -8,7 +8,7 @@ export const CIRCLE_WORKS_PUBLIC = gql`
   query CircleWorksPublic($name: String!, $after: String) {
     circle(input: { name: $name }) {
       id
-      articles: works(input: { first: 10, after: $after }) {
+      articles: works(input: { first: 3, after: $after }) {
         pageInfo {
           startCursor
           endCursor
