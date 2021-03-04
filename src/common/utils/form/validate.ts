@@ -1,7 +1,7 @@
 import {
   PAYMENT_CURRENCY,
   PAYMENT_MAXIMUM_CIRCLE_AMOUNT,
-  PAYMENT_MINIMAL_CHARGE_AMOUNT,
+  PAYMENT_MINIMAL_ADD_CREDIT_AMOUNT,
   PAYMENT_MINIMAL_CIRCLE_AMOUNT,
   RESERVED_NAMES,
 } from '~/common/enums'
@@ -309,10 +309,10 @@ export const validateAmount = (value: number, lang: Language) => {
     return translate({ id: 'required', lang })
   }
 
-  if (value < PAYMENT_MINIMAL_CHARGE_AMOUNT.HKD) {
+  if (value < PAYMENT_MINIMAL_ADD_CREDIT_AMOUNT.HKD) {
     return translate({
-      zh_hant: `最小储值金額爲 HKD ${PAYMENT_MINIMAL_CHARGE_AMOUNT.HKD}`,
-      zh_hans: `最小储值金额为 HKD ${PAYMENT_MINIMAL_CHARGE_AMOUNT.HKD}`,
+      zh_hant: `最小储值金額爲 HKD ${PAYMENT_MINIMAL_ADD_CREDIT_AMOUNT.HKD}`,
+      zh_hans: `最小储值金额为 HKD ${PAYMENT_MINIMAL_ADD_CREDIT_AMOUNT.HKD}`,
       lang,
     })
   }
