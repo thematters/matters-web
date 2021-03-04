@@ -385,14 +385,12 @@ const ArticleDetail = () => {
             </section>
           </section>
 
-          <section className="content-outline">
-            <Content
-              article={article}
-              translation={translate ? contentTranslation : null}
-              translating={translating}
-            />
-            {circle && !canReadFullContent && <CircleWall circle={circle} />}
-          </section>
+          <Content
+            article={article}
+            translation={translate ? contentTranslation : null}
+            translating={translating}
+          />
+          {circle && !canReadFullContent && <CircleWall circle={circle} />}
 
           {features.payment && canReadFullContent && (
             <SupportWidget article={article} />
