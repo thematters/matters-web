@@ -154,7 +154,7 @@ const Discussion = () => {
     return <QueryError error={error} />
   }
 
-  if (!circle || !pageInfo) {
+  if (!circle) {
     return <Throw404 />
   }
 
@@ -187,7 +187,7 @@ const Discussion = () => {
             ))}
 
           <InfiniteScroll
-            hasNextPage={pageInfo.hasNextPage}
+            hasNextPage={!!pageInfo?.hasNextPage}
             loadMore={loadMore}
           >
             <List spacing={['xloose', 0]}>
