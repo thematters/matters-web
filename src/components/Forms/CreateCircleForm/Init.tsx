@@ -134,6 +134,7 @@ const Init: React.FC<FormProps> = ({
         type="text"
         name="displayName"
         required
+        autoFocus
         placeholder={translate({
           zh_hant: '給圍爐取一個吸引人的名字吧',
           zh_hans: '给围炉取一个吸引人的名字吧',
@@ -165,14 +166,12 @@ const Init: React.FC<FormProps> = ({
           error={touched.name && errors.name}
           onBlur={handleBlur}
           onChange={handleChange}
-          autoFocus
         />
 
         <style jsx>{styles}</style>
       </section>
 
       <Form.AmountInput
-        autoFocus
         required
         min={PAYMENT_MINIMAL_CIRCLE_AMOUNT.HKD}
         max={PAYMENT_MAXIMUM_CIRCLE_AMOUNT.HKD}

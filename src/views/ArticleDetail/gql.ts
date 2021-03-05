@@ -67,12 +67,11 @@ export const ARTICLE_DETAIL_PUBLIC = gql`
 export const ARTICLE_DETAIL_PRIVATE = gql`
   query ArticleDetailPrivate(
     $mediaHash: String
-    $includeContent: Boolean!
     $includeCanSuperLike: Boolean!
   ) {
     article(input: { mediaHash: $mediaHash }) {
       id
-      content @include(if: $includeContent)
+      content
       author {
         ...UserDigestRichUserPrivate
       }

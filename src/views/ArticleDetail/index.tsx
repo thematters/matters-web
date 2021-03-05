@@ -123,7 +123,6 @@ const ArticleDetail = () => {
       fetchPolicy: 'network-only',
       variables: {
         mediaHash: article?.mediaHash,
-        includeContent: canReadFullContent,
         includeCanSuperLike: viewer.isCivicLiker,
       },
     })
