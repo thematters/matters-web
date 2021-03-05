@@ -18,6 +18,7 @@ import { DonationButtonArticle } from './__generated__/DonationButtonArticle'
 
 interface DonationButtonProps {
   article: DonationButtonArticle
+  disabled: boolean
 }
 
 const fragments = {
@@ -37,7 +38,7 @@ const fragments = {
   `,
 }
 
-const DonationButton = ({ article }: DonationButtonProps) => {
+const DonationButton = ({ article, disabled }: DonationButtonProps) => {
   const viewer = useContext(ViewerContext)
 
   const forbid = () => {
@@ -78,7 +79,7 @@ const DonationButton = ({ article }: DonationButtonProps) => {
             spacing={['xtight', 'xtight']}
             bgActiveColor="grey-lighter"
             aria-label={TEXT.zh_hant.donation}
-            disabled={article.author.id === viewer.id}
+            disabled={disabled || article.author.id === viewer.id}
             onClick={() => {
               analytics.trackEvent('click_button', { type: 'donate' })
               if (!viewer.isAuthed) {
