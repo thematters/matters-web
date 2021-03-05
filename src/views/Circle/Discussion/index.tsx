@@ -164,7 +164,14 @@ const Discussion = () => {
   const isMember = circle?.isMember
 
   if (privateFetched && !isOwner && !isMember) {
-    return <Wall circle={circle} />
+    return (
+      <>
+        <Wall circle={circle} />
+
+        <SubscribeCircleDialog circle={circle} />
+        {privateFetched && <SubscriptionBanner circle={circle} />}
+      </>
+    )
   }
 
   return (
