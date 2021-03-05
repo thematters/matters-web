@@ -66,7 +66,7 @@ const Discussion = () => {
   const connectionPath = 'circle.discussion'
   const circle = data?.circle
   const { edges, pageInfo } = circle?.discussion || {}
-  const circleId = circle && circle.id
+  const circleId = circle?.id
   const comments = filterComments<CommentPublic>(
     (edges || []).map(({ node }) => node)
   )
@@ -74,7 +74,7 @@ const Discussion = () => {
   // private data
   const [privateFetched, setPrivateFetched] = useState(false)
   const loadPrivate = async (publicData?: DiscussionPublic) => {
-    if (!viewer.isAuthed || !publicData || !circleId) {
+    if (!viewer.isAuthed || !publicData) {
       return
     }
 
@@ -95,10 +95,18 @@ const Discussion = () => {
     setPrivateFetched(true)
   }
 
-  // fetch private data for first page
+  // fetch private data
   useEffect(() => {
-    loadPrivate(data)
-  }, [circleId, viewer.id])
+    if (!circleId) {
+      return
+    }
+
+    if (viewer.id) {
+      loadPrivate(data)
+    } else {
+      setPrivateFetched(true)
+    }
+  }, [circleId])
 
   // load next page
   const loadMore = async () => {
@@ -140,7 +148,7 @@ const Discussion = () => {
   /**
    * Render
    */
-  if (loading) {
+  if (loading || !privateFetched) {
     return <Spinner />
   }
 
@@ -156,7 +164,14 @@ const Discussion = () => {
   const isMember = circle?.isMember
 
   if (privateFetched && !isOwner && !isMember) {
-    return <Wall circle={circle} />
+    return (
+      <>
+        <Wall circle={circle} />
+
+        <SubscribeCircleDialog circle={circle} />
+        {privateFetched && <SubscriptionBanner circle={circle} />}
+      </>
+    )
   }
 
   return (
@@ -199,7 +214,7 @@ const Discussion = () => {
       </InfiniteScroll>
 
       <SubscribeCircleDialog circle={circle} />
-      {!privateFetched && <SubscriptionBanner circle={circle} />}
+      {privateFetched && <SubscriptionBanner circle={circle} />}
 
       <style jsx>{styles}</style>
     </section>

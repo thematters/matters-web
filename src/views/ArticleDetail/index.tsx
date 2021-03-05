@@ -112,6 +112,11 @@ const ArticleDetail = () => {
     article?.limitedFree
   )
   const summary = article?.summary
+  const lockActions = !!(
+    circle &&
+    viewer.isAuthed &&
+    (!isAuthor || !circle.isMember)
+  )
 
   // fetch private data
   const [privateFetched, setPrivateFetched] = useState(false)
@@ -387,17 +392,16 @@ const ArticleDetail = () => {
             </section>
           </section>
 
-          <section className="content-outline">
-            {article?.summaryCustomized && (
-              <CustomizedSummary summary={summary} />
-            )}
-            <Content
-              article={article}
-              translation={translate ? contentTranslation : null}
-              translating={translating}
-            />
-            {circle && !canReadFullContent && <CircleWall circle={circle} />}
-          </section>
+          {article?.summaryCustomized && (
+            <CustomizedSummary summary={summary} />
+          )}
+
+          <Content
+            article={article}
+            translation={translate ? contentTranslation : null}
+            translating={translating}
+          />
+          {circle && !canReadFullContent && <CircleWall circle={circle} />}
 
           {features.payment && canReadFullContent && (
             <SupportWidget article={article} />
@@ -410,7 +414,7 @@ const ArticleDetail = () => {
           )}
 
           <section className="block">
-            <DynamicResponse />
+            <DynamicResponse lock={lockActions} />
           </section>
 
           {!isLargeUp && <RelatedArticles article={article} />}
@@ -420,6 +424,7 @@ const ArticleDetail = () => {
           article={article}
           privateFetched={privateFetched}
           hasFingerprint={canReadFullContent}
+          lock={lockActions}
         />
 
         {shouldShowWall && (

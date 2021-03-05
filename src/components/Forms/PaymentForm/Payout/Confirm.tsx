@@ -146,8 +146,13 @@ const BaseConfirm: React.FC<FormProps> = ({
             error={touched.amount && errors.amount}
             onBlur={handleBlur}
             onChange={(e) => {
-              const value = e.target.valueAsNumber || 0
-              const sanitizedAmount = Math.abs(Math.max(Math.floor(value), 0))
+              const amount = e.target.valueAsNumber || 0
+              const sanitizedAmount = Math.max(
+                Math.floor(amount),
+                PAYMENT_MINIMAL_PAYOUT_AMOUNT.HKD
+              )
+
+              // remove extra left pad 0
               if (inputRef.current) {
                 inputRef.current.value = sanitizedAmount
               }

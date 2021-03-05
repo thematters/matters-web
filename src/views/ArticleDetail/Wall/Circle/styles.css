@@ -1,5 +1,10 @@
+:root {
+  --circle-wall-top-height: 6.25rem;
+}
+
 .container {
   position: relative;
+  margin-top: var(--circle-wall-top-height);
 
   &::before {
     position: absolute;
@@ -9,7 +14,7 @@
     z-index: 2;
     z-index: 1;
     display: block;
-    height: 6.25rem;
+    height: var(--circle-wall-top-height);
     margin-bottom: var(--spacing-xx-tight);
     content: '';
     background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #fff 51.04%);

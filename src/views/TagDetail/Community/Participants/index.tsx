@@ -51,7 +51,7 @@ const Participants = ({ id }: Props) => {
   const loadMore = async () => {
     analytics.trackEvent('load_more', {
       type: 'tag_detail_community',
-      location: edges ? edges.length : 0,
+      location: edges?.length || 0,
     })
 
     await fetchMore({

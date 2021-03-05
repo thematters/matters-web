@@ -28,7 +28,7 @@ type CommentPublic = FeaturedCommentsPublic_article_featuredComments_edges_node
 type CommentPrivate = FeaturedCommentsPrivate_nodes_Comment
 type Comment = CommentPublic & Partial<CommentPrivate>
 
-const FeaturedComments = () => {
+const FeaturedComments = ({ lock }: { lock: boolean }) => {
   const viewer = useContext(ViewerContext)
   const { getQuery } = useRoute()
   const mediaHash = getQuery('mediaHash')
@@ -124,7 +124,7 @@ const FeaturedComments = () => {
       <List spacing={['xloose', 0]}>
         {comments.map((comment) => (
           <List.Item key={comment.id}>
-            <ThreadComment comment={comment} type="article" />
+            <ThreadComment comment={comment} type="article" disabled={lock} />
           </List.Item>
         ))}
       </List>
