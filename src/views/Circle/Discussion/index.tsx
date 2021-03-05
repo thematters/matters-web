@@ -1,3 +1,4 @@
+import { useLazyQuery } from '@apollo/react-hooks'
 import _differenceBy from 'lodash/differenceBy'
 import _get from 'lodash/get'
 import { useContext, useEffect, useState } from 'react'
@@ -25,19 +26,21 @@ import { filterComments, mergeConnections, translate } from '~/common/utils'
 
 import CircleDetailContainer from '../Detail'
 import SubscriptionBanner from '../SubscriptionBanner'
-import { DISCUSSION_PRIVATE, DISCUSSION_PUBLIC } from './gql'
+import {
+  DISCUSSION_COMMENTS,
+  DISCUSSION_PRIVATE,
+  DISCUSSION_PUBLIC,
+} from './gql'
 import styles from './styles.css'
 import Wall from './Wall'
 
-import { DiscussionPrivate_nodes_Comment } from './__generated__/DiscussionPrivate'
 import {
-  DiscussionPublic,
-  DiscussionPublic_circle_discussion_edges_node,
-} from './__generated__/DiscussionPublic'
+  DiscussionComments,
+  DiscussionComments_circle_discussion_edges_node,
+} from './__generated__/DiscussionComments'
+import { DiscussionPublic } from './__generated__/DiscussionPublic'
 
-type CommentPublic = DiscussionPublic_circle_discussion_edges_node
-type CommentPrivate = DiscussionPrivate_nodes_Comment
-type Comment = CommentPublic & Partial<Omit<CommentPrivate, '__typename'>>
+type Comment = DiscussionComments_circle_discussion_edges_node
 
 const Discussion = () => {
   const { getQuery } = useRoute()
@@ -48,26 +51,31 @@ const Discussion = () => {
   /**
    * Data Fetching
    */
-  // public data
-  const {
-    data,
-    loading,
-    error,
-    fetchMore,
-    refetch: refetchPublic,
-    client,
-  } = usePublicQuery<DiscussionPublic>(DISCUSSION_PUBLIC, {
-    variables: {
-      name,
-    },
+  const [
+    fetchDicussion,
+    { data: discussionData, loading: discussionLoading, fetchMore, refetch },
+  ] = useLazyQuery<DiscussionComments>(DISCUSSION_COMMENTS, {
+    fetchPolicy: 'network-only',
+    variables: { name },
   })
+
+  // public data
+  const { data, loading, error, client } = usePublicQuery<DiscussionPublic>(
+    DISCUSSION_PUBLIC,
+    {
+      variables: { name },
+    }
+  )
+  const circle = data?.circle
+  const circleId = circle?.id
+  const isOwner = circle?.owner.id === viewer.id
+  const isMember = circle?.isMember
+  const hasPermission = isOwner || isMember
 
   // pagination
   const connectionPath = 'circle.discussion'
-  const circle = data?.circle
-  const { edges, pageInfo } = circle?.discussion || {}
-  const circleId = circle?.id
-  const comments = filterComments<CommentPublic>(
+  const { edges, pageInfo } = discussionData?.circle?.discussion || {}
+  const comments = filterComments<Comment>(
     (edges || []).map(({ node }) => node)
   )
 
@@ -78,39 +86,36 @@ const Discussion = () => {
       return
     }
 
-    const publiceEdges = publicData.circle?.discussion.edges || []
-    const publicComments = filterComments<Comment>(
-      publiceEdges.map(({ node }) => node)
-    )
-    const publicIds = publicComments
-      .filter((node) => node.__typename === 'Comment')
-      .map((node) => node.id)
-
     await client.query({
       query: DISCUSSION_PRIVATE,
       fetchPolicy: 'network-only',
-      variables: { name, ids: publicIds },
+      variables: { name },
     })
 
     setPrivateFetched(true)
   }
 
-  // fetch private data
   useEffect(() => {
     if (!circleId) {
       return
     }
 
+    // fetch private data
     if (viewer.id) {
       loadPrivate(data)
     } else {
       setPrivateFetched(true)
     }
-  }, [circleId])
+
+    // fetch discussion
+    if (hasPermission) {
+      fetchDicussion()
+    }
+  }, [circleId, hasPermission])
 
   // load next page
-  const loadMore = async () => {
-    const { data: newData } = await fetchMore({
+  const loadMore = () =>
+    fetchMore({
       variables: {
         after: pageInfo && pageInfo.endCursor,
       },
@@ -122,14 +127,7 @@ const Discussion = () => {
         }),
     })
 
-    loadPrivate(newData)
-  }
-
   // refetch & pull to refresh
-  const refetch = async () => {
-    const { data: newData } = await refetchPublic()
-    loadPrivate(newData)
-  }
   usePullToRefresh.Handler(refetch)
 
   const submitCallback = () => {
@@ -148,7 +146,7 @@ const Discussion = () => {
   /**
    * Render
    */
-  if (loading || !privateFetched) {
+  if (loading || discussionLoading || !privateFetched) {
     return <Spinner />
   }
 
@@ -156,69 +154,64 @@ const Discussion = () => {
     return <QueryError error={error} />
   }
 
-  if (!circle || !pageInfo) {
+  if (!circle) {
     return <Throw404 />
   }
 
-  const isOwner = circle?.owner.id === viewer.id
-  const isMember = circle?.isMember
-
-  if (privateFetched && !isOwner && !isMember) {
-    return (
-      <>
-        <Wall circle={circle} />
-
-        <SubscribeCircleDialog circle={circle} />
-        {privateFetched && <SubscriptionBanner circle={circle} />}
-      </>
-    )
-  }
-
   return (
-    <section className="discussion">
-      <header>
-        <CommentForm
-          circleId={circle?.id}
-          type="circleDiscussion"
-          placeholder={translate({
-            lang,
-            zh_hant: '催更、提問、分享、討論…',
-            zh_hans: '催更、提问、分享、讨论…',
-          })}
-          submitCallback={submitCallback}
-        />
-      </header>
+    <>
+      {privateFetched && !hasPermission ? (
+        <Wall circle={circle} />
+      ) : (
+        <section className="discussion">
+          <header>
+            <CommentForm
+              circleId={circle?.id}
+              type="circleDiscussion"
+              placeholder={translate({
+                lang,
+                zh_hant: '催更、提問、分享、討論…',
+                zh_hans: '催更、提问、分享、讨论…',
+              })}
+              submitCallback={submitCallback}
+            />
+          </header>
 
-      {!comments ||
-        (comments.length <= 0 && (
-          <EmptyComment
-            description={
-              <Translate zh_hant="還沒有眾聊" zh_hans="还没有众聊" />
-            }
-          />
-        ))}
-
-      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-        <List spacing={['xloose', 0]}>
-          {comments.map((comment) => (
-            <List.Item key={comment.id}>
-              <ThreadComment
-                comment={comment}
-                type="circleDiscussion"
-                hasUpvote={false}
-                hasDownvote={false}
-                hasPin={false}
+          {!comments ||
+            (comments.length <= 0 && (
+              <EmptyComment
+                description={
+                  <Translate zh_hant="還沒有眾聊" zh_hans="还没有众聊" />
+                }
               />
-            </List.Item>
-          ))}
-        </List>
-      </InfiniteScroll>
+            ))}
+
+          <InfiniteScroll
+            hasNextPage={!!pageInfo?.hasNextPage}
+            loadMore={loadMore}
+          >
+            <List spacing={['xloose', 0]}>
+              {comments.map((comment) => (
+                <List.Item key={comment.id}>
+                  <ThreadComment
+                    comment={comment}
+                    type="circleDiscussion"
+                    hasUpvote={false}
+                    hasDownvote={false}
+                    hasPin={false}
+                  />
+                </List.Item>
+              ))}
+            </List>
+          </InfiniteScroll>
+
+          <style jsx>{styles}</style>
+        </section>
+      )}
 
       <SubscribeCircleDialog circle={circle} />
       {privateFetched && <SubscriptionBanner circle={circle} />}
-
-      <style jsx>{styles}</style>
-    </section>
+    </>
   )
 }
 
