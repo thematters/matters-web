@@ -35,6 +35,7 @@ type CommentBarArticle = CommentBarArticlePublic &
 
 interface CommentBarProps {
   article: CommentBarArticle
+  disabled?: boolean
 }
 
 const fragments = {
@@ -96,7 +97,7 @@ const Content = ({
     </Button>
   )
 
-const CommentBar = ({ article }: CommentBarProps) => {
+const CommentBar = ({ article, disabled }: CommentBarProps) => {
   const viewer = useContext(ViewerContext)
   const isSmallUp = useResponsive('sm-up')
 
@@ -107,6 +108,10 @@ const CommentBar = ({ article }: CommentBarProps) => {
   const props = {
     isSmallUp,
     article,
+  }
+
+  if (disabled) {
+    return <Content {...props} disabled />
   }
 
   if (viewer.shouldSetupLikerID) {

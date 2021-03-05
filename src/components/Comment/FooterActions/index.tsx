@@ -20,6 +20,7 @@ export type FooterActionsControls = {
   hasUpvote?: boolean
   hasDownvote?: boolean
   inCard?: boolean
+  disabled?: boolean
 } & CreatedAtControls &
   Pick<ReplyButtonProps, 'replySubmitCallback'>
 
@@ -83,6 +84,7 @@ const BaseFooterActions = ({
   hasUpvote = true,
   hasDownvote = true,
   inCard = false,
+  disabled,
 
   ...replyButtonProps
 }: FooterActionsProps) => {
@@ -95,7 +97,7 @@ const BaseFooterActions = ({
 
   const isActive = state === 'active'
   const isCollapsed = state === 'collapsed'
-  const isDisabled = !isActive && !isCollapsed
+  const isDisabled = disabled || (!isActive && !isCollapsed)
   const addToast = (id: TextId) => {
     window.dispatchEvent(
       new CustomEvent(ADD_TOAST, {

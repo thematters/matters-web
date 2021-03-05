@@ -110,6 +110,11 @@ const ArticleDetail = () => {
     circle.isMember ||
     article?.limitedFree
   )
+  const lockActions = !!(
+    circle &&
+    viewer.isAuthed &&
+    (!isAuthor || !circle.isMember)
+  )
 
   // fetch private data
   const [privateFetched, setPrivateFetched] = useState(false)
@@ -403,7 +408,7 @@ const ArticleDetail = () => {
           )}
 
           <section className="block">
-            <DynamicResponse />
+            <DynamicResponse lock={lockActions} />
           </section>
 
           {!isLargeUp && <RelatedArticles article={article} />}
@@ -413,6 +418,7 @@ const ArticleDetail = () => {
           article={article}
           privateFetched={privateFetched}
           hasFingerprint={canReadFullContent}
+          lock={lockActions}
         />
 
         {shouldShowWall && (

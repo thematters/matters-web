@@ -21,6 +21,7 @@ interface ThreadCommentControls {
   hasUpvote?: boolean
   hasDownvote?: boolean
   replySubmitCallback?: () => void
+  disabled?: boolean
 }
 
 type Comment = ThreadCommentCommentPublic & Partial<ThreadCommentCommentPrivate>
