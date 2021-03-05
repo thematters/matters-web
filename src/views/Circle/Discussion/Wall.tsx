@@ -40,7 +40,8 @@ const Wall = ({ circle }: WallProps) => {
   const openSubscribeCircleDialog = () =>
     window.dispatchEvent(new CustomEvent(OPEN_SUBSCRIBE_CIRCLE_DIALOG, {}))
 
-  const discussionCount = circle.discussion.totalCount || 0
+  const discussionCount = circle.discussionCount || 0
+  const discussionThreadCount = circle.discussionThreadCount || 0
 
   return (
     <IntroDialog circle={circle} onConfirm={openSubscribeCircleDialog}>
@@ -68,11 +69,11 @@ const Wall = ({ circle }: WallProps) => {
           </picture>
 
           <section className="brief">
-            {discussionCount > 0 && (
+            {discussionThreadCount > 0 && (
               <p>
                 <Translate
-                  zh_hant={`聽說目前共累積 ${discussionCount} 串討論`}
-                  zh_hans={`听说目前共累积 ${discussionCount} 串讨论`}
+                  zh_hant={`聽說目前共累積 ${discussionThreadCount} 串討論，${discussionCount} 則迴響`}
+                  zh_hans={`听说目前共累积 ${discussionThreadCount} 串讨论，${discussionCount} 则回响`}
                 />
               </p>
             )}
