@@ -207,6 +207,7 @@ const Discussion = () => {
                 type="circleDiscussion"
                 hasUpvote={false}
                 hasDownvote={false}
+                hasPin={false}
               />
             </List.Item>
           ))}

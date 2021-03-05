@@ -17,6 +17,7 @@ const COLLAPSE_COUNT = 2
 interface ThreadCommentControls {
   type: CommentFormType
   defaultExpand?: boolean
+  hasPin?: boolean
   hasLink?: boolean
   hasUpvote?: boolean
   hasDownvote?: boolean
