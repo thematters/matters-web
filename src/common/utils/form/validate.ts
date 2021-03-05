@@ -122,6 +122,14 @@ export const validateUserName = (value: string, lang: Language) => {
     })
   }
 
+  if (REGEXP_ALL_PUNCTUATIONS.test(value)) {
+    return translate({
+      zh_hant: '不支持單獨使用標點符號',
+      zh_hans: '不支持单独使用标点符号',
+      lang,
+    })
+  }
+
   if (!/^[a-zA-Z0-9_]*$/.test(value)) {
     return translate({
       id: 'hintUserName',
@@ -226,6 +234,14 @@ export const validateCircleName = (value: string, lang: Language) => {
     return translate({
       zh_hant: '輸入字數過長，僅供輸入 2-20 個字元',
       zh_hans: '输入字数过长，仅供输入 2-20 个字符',
+      lang,
+    })
+  }
+
+  if (REGEXP_ALL_PUNCTUATIONS.test(value)) {
+    return translate({
+      zh_hant: '不支持單獨使用標點符號',
+      zh_hans: '不支持单独使用标点符号',
       lang,
     })
   }

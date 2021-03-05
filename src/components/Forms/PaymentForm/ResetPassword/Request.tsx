@@ -97,6 +97,7 @@ const Request: React.FC<FormProps> = ({
         type="email"
         name="email"
         required
+        autoFocus
         placeholder={translate({
           id: 'enterEmail',
           lang,
@@ -125,7 +126,6 @@ const Request: React.FC<FormProps> = ({
             disabled={!!errors.email}
           />
         }
-        autoFocus
       />
     </Form>
   )
