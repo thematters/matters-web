@@ -69,6 +69,7 @@ export const BaseCommentFeed = ({
           <DropdownActions
             comment={comment}
             type={type}
+            hasPin={actionControls.hasPin}
             inCard={actionControls.inCard}
           />
         </section>
