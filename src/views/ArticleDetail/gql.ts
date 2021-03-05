@@ -24,6 +24,7 @@ export const ARTICLE_DETAIL_PUBLIC = gql`
       state
       cover
       summary
+      summaryCustomized
       createdAt
       revisedAt
       language

@@ -32,11 +32,13 @@ interface AppreciationButtonProps {
   article: AppreciationButtonArticlePublic &
     Partial<AppreciationButtonArticlePrivate>
   privateFetched: boolean
+  disabled?: boolean
 }
 
 const AppreciationButton = ({
   article,
   privateFetched,
+  disabled,
 }: AppreciationButtonProps) => {
   const { getQuery } = useRoute()
   const mediaHash = getQuery('mediaHash')
@@ -206,7 +208,7 @@ const AppreciationButton = ({
   }
 
   // Appreciable
-  if (canAppreciate) {
+  if (canAppreciate && !disabled) {
     return (
       <AppreciateButton
         onClick={appreciate}

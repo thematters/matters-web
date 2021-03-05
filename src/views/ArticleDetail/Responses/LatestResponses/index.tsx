@@ -45,7 +45,7 @@ type ResponsePublic = LatestResponsesPublic_article_responses_edges_node
 type ResponsePrivate = LatestResponsesPrivate_nodes_Comment
 type Response = ResponsePublic & Partial<Omit<ResponsePrivate, '__typename'>>
 
-const LatestResponses = () => {
+const LatestResponses = ({ lock }: { lock: boolean }) => {
   const viewer = useContext(ViewerContext)
   const isMediumUp = useResponsive('md-up')
   const { getQuery } = useRoute()
@@ -276,6 +276,7 @@ const LatestResponses = () => {
                 type="article"
                 defaultExpand={response.id === parentId && !!descendantId}
                 hasLink
+                disabled={lock}
                 replySubmitCallback={replySubmitCallback}
               />
             )}

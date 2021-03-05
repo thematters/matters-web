@@ -33,6 +33,7 @@ import { toPath } from '~/common/utils'
 
 import Collection from './Collection'
 import Content from './Content'
+import CustomizedSummary from './CustomizedSummary'
 import FingerprintButton from './FingerprintButton'
 import {
   ARTICLE_DETAIL_PRIVATE,
@@ -109,6 +110,12 @@ const ArticleDetail = () => {
     !circle ||
     circle.isMember ||
     article?.limitedFree
+  )
+  const summary = article?.summary
+  const lockActions = !!(
+    circle &&
+    viewer.isAuthed &&
+    (!isAuthor || !circle.isMember)
   )
 
   // fetch private data
@@ -384,6 +391,10 @@ const ArticleDetail = () => {
             </section>
           </section>
 
+          {article?.summaryCustomized && (
+            <CustomizedSummary summary={summary} />
+          )}
+
           <Content
             article={article}
             translation={translate ? contentTranslation : null}
@@ -402,7 +413,7 @@ const ArticleDetail = () => {
           )}
 
           <section className="block">
-            <DynamicResponse />
+            <DynamicResponse lock={lockActions} />
           </section>
 
           {!isLargeUp && <RelatedArticles article={article} />}
@@ -412,6 +423,7 @@ const ArticleDetail = () => {
           article={article}
           privateFetched={privateFetched}
           hasFingerprint={canReadFullContent}
+          lock={lockActions}
         />
 
         {shouldShowWall && (

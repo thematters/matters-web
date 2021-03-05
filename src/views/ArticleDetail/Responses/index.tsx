@@ -25,7 +25,7 @@ const ARTICLE_RESPONSE = gql`
   ${ResponseCount.fragments.article}
 `
 
-const Responses = () => {
+const Responses = ({ lock }: { lock: boolean }) => {
   const { getQuery } = useRoute()
   const mediaHash = getQuery('mediaHash')
 
@@ -48,8 +48,8 @@ const Responses = () => {
         </Title>
       </header>
 
-      <FeatureComments />
-      <LatestResponses />
+      <FeatureComments lock={lock} />
+      <LatestResponses lock={lock} />
     </section>
   )
 }
