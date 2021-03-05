@@ -14,7 +14,7 @@
     height: 1.5rem;
   }
 
-  & :global(.content) {
+  & :global(.u-content-comment) {
     text-indent: 2rem;
   }
 }

@@ -8,7 +8,7 @@ import { ToggleFollowCircle } from '~/components/GQL/mutations/__generated__/Tog
 import { FollowButtonCirclePrivate } from './__generated__/FollowButtonCirclePrivate'
 
 interface FollowProps {
-  circle: FollowButtonCirclePrivate
+  circle: Partial<FollowButtonCirclePrivate>
 }
 
 const Follow = ({ circle }: FollowProps) => {
@@ -27,7 +27,7 @@ const Follow = ({ circle }: FollowProps) => {
     update: (cache) => {
       updateCircleFollowerCount({
         cache,
-        name: circle.name,
+        name: circle.name || '',
         type: 'increment',
       })
     },

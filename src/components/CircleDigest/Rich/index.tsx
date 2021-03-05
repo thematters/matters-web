@@ -46,6 +46,7 @@ const Rich = ({
   hasPrice,
 
   disabled,
+  onClickPrice,
 
   ...cardProps
 }: CircleDigestRichProps) => {
@@ -102,7 +103,13 @@ const Rich = ({
           <p className="description">{description}</p>
         )}
 
-        {hasFooter && <Footer circle={circle} hasPrice={hasPrice} />}
+        {hasFooter && (
+          <Footer
+            circle={circle}
+            hasPrice={hasPrice}
+            onClickPrice={onClickPrice}
+          />
+        )}
 
         <style jsx>{styles}</style>
       </section>

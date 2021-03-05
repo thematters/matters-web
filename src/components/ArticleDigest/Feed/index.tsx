@@ -30,6 +30,7 @@ type ExtraHeaderControls = {
 export type ArticleDigestFeedControls = {
   onClick?: () => any
   onClickAuthor?: () => void
+  onClickCircle?: () => void
 } & ExtraHeaderControls &
   FooterActionsControls
 
@@ -50,6 +51,7 @@ const BaseArticleDigestFeed = ({
 
   onClick,
   onClickAuthor,
+  onClickCircle,
 
   ...controls
 }: ArticleDigestFeedProps) => {
@@ -92,7 +94,7 @@ const BaseArticleDigestFeed = ({
         {extraHeader ||
           (hasCircle && circle && (
             <section className="extraHeader">
-              <CircleDigest.Plain circle={circle} />
+              <CircleDigest.Plain circle={circle} onClick={onClickCircle} />
 
               <LimitedFree article={article} />
             </section>

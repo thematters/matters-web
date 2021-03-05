@@ -23,8 +23,6 @@ type ROUTE_KEY =
   | 'USER_SUBSCRIPTIONS'
   | 'USER_COMMENTS'
   | 'USER_TAGS'
-  | 'USER_FOLLOWERS'
-  | 'USER_FOLLOWEES'
   // Circle
   | 'CIRCLE_DETAIL'
   | 'CIRCLE_DISCUSSION'
@@ -32,8 +30,6 @@ type ROUTE_KEY =
   | 'CIRCLE_SETTINGS'
   | 'CIRCLE_SETTINGS_EDIT_PROFILE'
   | 'CIRCLE_CREATION'
-  | 'CIRCLE_FOLLOWERS'
-  | 'CIRCLE_MEMBERS'
   // Me
   | 'ME_DRAFTS'
   | 'ME_BOOKMARKS'
@@ -94,8 +90,6 @@ export const ROUTES: {
   { key: 'USER_SUBSCRIPTIONS', pathname: '/[name]/subscriptions' },
   { key: 'USER_COMMENTS', pathname: '/[name]/comments' },
   { key: 'USER_TAGS', pathname: '/[name]/tags' },
-  { key: 'USER_FOLLOWERS', pathname: '/[name]/followers' },
-  { key: 'USER_FOLLOWEES', pathname: '/[name]/followees' },
 
   // Article
   { key: 'ARTICLE_DETAIL', pathname: '/[name]/[mediaHash]' },
@@ -109,8 +103,6 @@ export const ROUTES: {
     key: 'CIRCLE_SETTINGS_EDIT_PROFILE',
     pathname: '/[name]/settings/edit-profile',
   },
-  { key: 'CIRCLE_FOLLOWERS', pathname: '/[name]/followers' },
-  { key: 'CIRCLE_MEMBERS', pathname: '/[name]/members' },
   { key: 'CIRCLE_CREATION', pathname: '/circles/create' },
 
   // Auth

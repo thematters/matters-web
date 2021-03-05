@@ -1,16 +1,14 @@
 import gql from 'graphql-tag'
 
-import { CircleDigest, ThreadComment } from '~/components'
+import { ThreadComment } from '~/components'
+
+import SubscriptionBanner from '../SubscriptionBanner'
 
 export const DISCUSSION_PUBLIC = gql`
   query DiscussionPublic($name: String!, $after: String) {
     circle(input: { name: $name }) {
       id
-      owner {
-        id
-      }
-      isMember
-      discussion(input: { after: $after }) {
+      discussion(input: { first: 10, after: $after }) {
         totalCount
         pageInfo {
           startCursor
@@ -24,16 +22,22 @@ export const DISCUSSION_PUBLIC = gql`
           }
         }
       }
-      ...DigestRichCirclePublic
+      ...SubscriptionBannerCirclePublic
+      ...SubscriptionBannerCirclePrivate
     }
   }
   ${ThreadComment.fragments.comment.public}
   ${ThreadComment.fragments.comment.private}
-  ${CircleDigest.Rich.fragments.circle.public}
+  ${SubscriptionBanner.fragments.circle.public}
+  ${SubscriptionBanner.fragments.circle.private}
 `
 
 export const DISCUSSION_PRIVATE = gql`
-  query DiscussionPrivate($ids: [ID!]!) {
+  query DiscussionPrivate($name: String!, $ids: [ID!]!) {
+    circle(input: { name: $name }) {
+      id
+      ...SubscriptionBannerCirclePrivate
+    }
     nodes(input: { ids: $ids }) {
       id
       ... on Comment {
@@ -42,4 +46,5 @@ export const DISCUSSION_PRIVATE = gql`
     }
   }
   ${ThreadComment.fragments.comment.private}
+  ${SubscriptionBanner.fragments.circle.private}
 `

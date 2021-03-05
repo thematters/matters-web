@@ -1,15 +1,16 @@
 import _differenceBy from 'lodash/differenceBy'
 import _get from 'lodash/get'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import {
   CommentForm,
   EmptyComment,
-  EmptyLayout,
+  InfiniteScroll,
   LanguageContext,
   List,
   QueryError,
   Spinner,
+  SubscribeCircleDialog,
   ThreadComment,
   Throw404,
   Translate,
@@ -17,13 +18,13 @@ import {
   usePullToRefresh,
   useRoute,
   ViewerContext,
-  ViewMoreButton,
 } from '~/components'
 
 import { ADD_TOAST } from '~/common/enums'
 import { filterComments, mergeConnections, translate } from '~/common/utils'
 
 import CircleDetailContainer from '../Detail'
+import SubscriptionBanner from '../SubscriptionBanner'
 import { DISCUSSION_PRIVATE, DISCUSSION_PUBLIC } from './gql'
 import styles from './styles.css'
 import Wall from './Wall'
@@ -59,21 +60,21 @@ const Discussion = () => {
     variables: {
       name,
     },
-    notifyOnNetworkStatusChange: true,
   })
 
   // pagination
   const connectionPath = 'circle.discussion'
   const circle = data?.circle
-  const { edges, pageInfo } = (circle && circle.discussion) || {}
-  const circleId = circle && circle.id
+  const { edges, pageInfo } = circle?.discussion || {}
+  const circleId = circle?.id
   const comments = filterComments<CommentPublic>(
     (edges || []).map(({ node }) => node)
   )
 
   // private data
-  const loadPrivate = (publicData?: DiscussionPublic) => {
-    if (!viewer.isAuthed || !publicData || !circleId) {
+  const [privateFetched, setPrivateFetched] = useState(false)
+  const loadPrivate = async (publicData?: DiscussionPublic) => {
+    if (!viewer.isAuthed || !publicData) {
       return
     }
 
@@ -85,17 +86,27 @@ const Discussion = () => {
       .filter((node) => node.__typename === 'Comment')
       .map((node) => node.id)
 
-    client.query({
+    await client.query({
       query: DISCUSSION_PRIVATE,
       fetchPolicy: 'network-only',
-      variables: { ids: publicIds },
+      variables: { name, ids: publicIds },
     })
+
+    setPrivateFetched(true)
   }
 
-  // fetch private data for first page
+  // fetch private data
   useEffect(() => {
-    loadPrivate(data)
-  }, [circleId, viewer.id])
+    if (!circleId) {
+      return
+    }
+
+    if (viewer.id) {
+      loadPrivate(data)
+    } else {
+      setPrivateFetched(true)
+    }
+  }, [circleId])
 
   // load next page
   const loadMore = async () => {
@@ -121,32 +132,6 @@ const Discussion = () => {
   }
   usePullToRefresh.Handler(refetch)
 
-  /**
-   * Render
-   */
-  if (loading && !data) {
-    return <Spinner />
-  }
-
-  if (error) {
-    return <QueryError error={error} />
-  }
-
-  if (!circle) {
-    return (
-      <EmptyLayout>
-        <Throw404 />
-      </EmptyLayout>
-    )
-  }
-
-  const isOwner = circle?.owner.id === viewer.id
-  const isMember = circle?.isMember
-
-  if (!isOwner && !isMember) {
-    return <Wall circle={circle} />
-  }
-
   const submitCallback = () => {
     window.dispatchEvent(
       new CustomEvent(ADD_TOAST, {
@@ -158,6 +143,28 @@ const Discussion = () => {
       })
     )
     refetch()
+  }
+
+  /**
+   * Render
+   */
+  if (loading || !privateFetched) {
+    return <Spinner />
+  }
+
+  if (error) {
+    return <QueryError error={error} />
+  }
+
+  if (!circle || !pageInfo) {
+    return <Throw404 />
+  }
+
+  const isOwner = circle?.owner.id === viewer.id
+  const isMember = circle?.isMember
+
+  if (privateFetched && !isOwner && !isMember) {
+    return <Wall circle={circle} />
   }
 
   return (
@@ -179,22 +186,28 @@ const Discussion = () => {
         (comments.length <= 0 && (
           <EmptyComment
             description={
-              <Translate zh_hant="還沒有討論" zh_hans="还没有讨论" />
+              <Translate zh_hant="還沒有眾聊" zh_hans="还没有众聊" />
             }
           />
         ))}
 
-      <List spacing={['xloose', 0]}>
-        {comments.map((comment) => (
-          <List.Item key={comment.id}>
-            <ThreadComment comment={comment} type="circleDiscussion" />
-          </List.Item>
-        ))}
-      </List>
+      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+        <List spacing={['xloose', 0]}>
+          {comments.map((comment) => (
+            <List.Item key={comment.id}>
+              <ThreadComment
+                comment={comment}
+                type="circleDiscussion"
+                hasUpvote={false}
+                hasDownvote={false}
+              />
+            </List.Item>
+          ))}
+        </List>
+      </InfiniteScroll>
 
-      {pageInfo && pageInfo.hasNextPage && (
-        <ViewMoreButton onClick={() => loadMore()} loading={loading} />
-      )}
+      <SubscribeCircleDialog circle={circle} />
+      {privateFetched && <SubscriptionBanner circle={circle} />}
 
       <style jsx>{styles}</style>
     </section>

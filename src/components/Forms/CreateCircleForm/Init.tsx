@@ -18,6 +18,7 @@ import {
   PAYMENT_MINIMAL_CIRCLE_AMOUNT,
 } from '~/common/enums'
 import {
+  analytics,
   parseFormSubmitErrors,
   translate,
   validateCircleAmount,
@@ -72,7 +73,7 @@ const Init: React.FC<FormProps> = ({
     initialValues: {
       name: '',
       displayName: '',
-      amount: 0,
+      amount: PAYMENT_MINIMAL_CIRCLE_AMOUNT.HKD,
     },
     validate: ({ name, displayName, amount }) =>
       _pickBy({
@@ -85,6 +86,8 @@ const Init: React.FC<FormProps> = ({
       { setFieldError, setSubmitting }
     ) => {
       try {
+        analytics.trackEvent('click_button', { type: 'finish_circle_creation' })
+
         const { data } = await create({
           variables: { input: { name, displayName, amount } },
         })
@@ -185,8 +188,13 @@ const Init: React.FC<FormProps> = ({
         error={touched.amount && errors.amount}
         onBlur={handleBlur}
         onChange={(e) => {
-          const value = e.target.valueAsNumber || 0
-          const sanitizedAmount = Math.abs(Math.max(Math.floor(value), 0))
+          const amount = e.target.valueAsNumber || 0
+          const sanitizedAmount = Math.max(
+            Math.min(Math.floor(amount), PAYMENT_MAXIMUM_CIRCLE_AMOUNT.HKD),
+            PAYMENT_MINIMAL_CIRCLE_AMOUNT.HKD
+          )
+
+          // remove extra left pad 0
           if (inputRef.current) {
             inputRef.current.value = sanitizedAmount
           }

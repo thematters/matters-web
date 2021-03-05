@@ -9,6 +9,8 @@ import { FooterCirclePublic } from './__generated__/FooterCirclePublic'
 
 export type FooterControls = {
   hasPrice?: boolean
+
+  onClickPrice?: () => void
 }
 
 export type FooterProps = {
@@ -36,12 +38,12 @@ const fragments = {
   },
 }
 
-const Footer = ({ circle, hasPrice }: FooterProps) => {
+const Footer = ({ circle, hasPrice, onClickPrice }: FooterProps) => {
   return (
     <footer>
       <Counts circle={circle} />
 
-      {hasPrice && <Price circle={circle} />}
+      {hasPrice && <Price circle={circle} onClick={onClickPrice} />}
 
       <style jsx>{styles}</style>
     </footer>

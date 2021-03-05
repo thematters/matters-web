@@ -1,5 +1,4 @@
-import { NetworkStatus } from 'apollo-client'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import {
   ArticleDigestFeed,
@@ -8,6 +7,8 @@ import {
   List,
   QueryError,
   Spinner,
+  SubscribeCircleDialog,
+  Throw404,
   useEventListener,
   usePublicQuery,
   usePullToRefresh,
@@ -19,6 +20,7 @@ import { REFETCH_CIRCLE_DETAIL_ARTICLES } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
 import CircleDetailContainer from '../Detail'
+import SubscriptionBanner from '../SubscriptionBanner'
 import { CIRCLE_WORKS_PRIVATE, CIRCLE_WORKS_PUBLIC } from './gql'
 
 import { CircleWorksPublic } from './__generated__/CircleWorksPublic'
@@ -38,52 +40,55 @@ const Works = () => {
     error,
     fetchMore,
     refetch: refetchPublic,
-    networkStatus,
     client,
   } = usePublicQuery<CircleWorksPublic>(CIRCLE_WORKS_PUBLIC, {
     variables: { name },
-    notifyOnNetworkStatusChange: true,
   })
 
   // pagination
-  const connectionPath = 'node.articles'
-  const { edges, pageInfo } = data?.circle?.works || {}
-  const isNewLoading =
-    [NetworkStatus.loading, NetworkStatus.setVariables].indexOf(
-      networkStatus
-    ) >= 0
+  const connectionPath = 'circle.articles'
+  const circle = data?.circle
+  const circleId = circle?.id
+  const { edges, pageInfo } = circle?.articles || {}
 
   // private data
-  const loadPrivate = (publicData?: CircleWorksPublic) => {
+  const [privateFetched, setPrivateFetched] = useState(false)
+  const loadPrivate = async (publicData?: CircleWorksPublic) => {
     if (!viewer.isAuthed || !publicData) {
       return
     }
 
-    const publiceEdges = publicData.circle?.works.edges || []
+    const publiceEdges = publicData.circle?.articles.edges || []
 
     const publicIds = publiceEdges.map(({ node }) => node.id)
 
-    client.query({
+    await client.query({
       query: CIRCLE_WORKS_PRIVATE,
       fetchPolicy: 'network-only',
-      variables: { ids: publicIds },
+      variables: { name, ids: publicIds },
     })
+
+    setPrivateFetched(true)
   }
 
-  // fetch private data for first page
+  // fetch private data
   useEffect(() => {
-    if (loading || !edges) {
+    if (!circleId) {
       return
     }
 
-    loadPrivate(data)
-  }, [!!edges, loading, viewer.id])
+    if (viewer.id) {
+      loadPrivate(data)
+    } else {
+      setPrivateFetched(true)
+    }
+  }, [circleId])
 
   // load next page
   const loadMore = async () => {
     analytics.trackEvent('load_more', {
       type: 'circle_detail',
-      location: edges ? edges.length : 0,
+      location: edges?.length || 0,
     })
 
     const { data: newData } = await fetchMore({
@@ -113,7 +118,7 @@ const Works = () => {
   /**
    * Render
    */
-  if (loading && (!edges || isNewLoading)) {
+  if (loading) {
     return <Spinner />
   }
 
@@ -121,39 +126,46 @@ const Works = () => {
     return <QueryError error={error} />
   }
 
-  if (!edges || edges.length <= 0 || !pageInfo) {
-    return <EmptyArticle />
+  if (!circle || !pageInfo) {
+    return <Throw404 />
   }
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-      <List>
-        {(edges || []).map(({ node, cursor }, i) => (
-          <List.Item key={cursor}>
-            <ArticleDigestFeed
-              article={node}
-              hasCircle={false}
-              onClick={() =>
-                analytics.trackEvent('click_feed', {
-                  type: 'circle_detail',
-                  contentType: 'article',
-                  styleType: 'title',
-                  location: i,
-                })
-              }
-              onClickAuthor={() => {
-                analytics.trackEvent('click_feed', {
-                  type: 'circle_detail',
-                  contentType: 'user',
-                  styleType: 'subtitle',
-                  location: i,
-                })
-              }}
-            />
-          </List.Item>
-        ))}
-      </List>
-    </InfiniteScroll>
+    <section className="works">
+      {!edges || (edges.length <= 0 && <EmptyArticle />)}
+
+      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+        <List>
+          {(edges || []).map(({ node, cursor }, i) => (
+            <List.Item key={cursor}>
+              <ArticleDigestFeed
+                article={node}
+                hasCircle={false}
+                onClick={() =>
+                  analytics.trackEvent('click_feed', {
+                    type: 'circle_detail',
+                    contentType: 'article',
+                    styleType: 'title',
+                    location: i,
+                  })
+                }
+                onClickAuthor={() => {
+                  analytics.trackEvent('click_feed', {
+                    type: 'circle_detail',
+                    contentType: 'user',
+                    styleType: 'subtitle',
+                    location: i,
+                  })
+                }}
+              />
+            </List.Item>
+          ))}
+        </List>
+      </InfiniteScroll>
+
+      <SubscribeCircleDialog circle={circle} />
+      {privateFetched && <SubscriptionBanner circle={circle} />}
+    </section>
   )
 }
 

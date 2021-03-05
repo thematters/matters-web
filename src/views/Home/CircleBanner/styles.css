@@ -1,8 +1,9 @@
 .container {
-  padding: var(--spacing-loose) var(--spacing-base) var(--spacing-x-tight);
+  position: relative;
+  padding: var(--spacing-base) var(--spacing-base) var(--spacing-x-tight);
 
   @media (--sm-up) {
-    padding: var(--spacing-x-loose) var(--spacing-base) 0;
+    padding: var(--spacing-base) var(--spacing-base) 0;
   }
 }
 
@@ -31,8 +32,9 @@ p {
 
 .close {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: var(--spacing-base);
+  right: var(--spacing-base);
+  z-index: 1;
   display: inline-flex;
   padding: var(--spacing-x-tight);
 }
