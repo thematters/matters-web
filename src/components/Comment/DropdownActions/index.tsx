@@ -189,7 +189,7 @@ const BaseDropdownActions = ({
 }
 
 const DropdownActions = (props: DropdownActionsProps) => {
-  const { comment, type, hasPin } = props
+  const { comment, type, hasPin = true } = props
   const viewer = useContext(ViewerContext)
   const { isArchived, isBanned, isFrozen } = viewer
 
@@ -207,7 +207,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
   const isDescendantComment = comment.parentComment
 
   const controls = {
-    hasPin: hasPin || !!(isTargetAuthor && isActive && !isDescendantComment),
+    hasPin: hasPin && !!(isTargetAuthor && isActive && !isDescendantComment),
     hasEdit: !!(isCommentAuthor && !isBlocked && (isActive || isCollapsed)),
     hasDelete: !!(isCommentAuthor && isActive),
     hasBlockUser: !isCommentAuthor,
