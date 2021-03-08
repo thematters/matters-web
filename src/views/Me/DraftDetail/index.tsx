@@ -43,6 +43,7 @@ const DraftDetail = () => {
   const [saveStatus, setSaveStatus] = useState<
     'saved' | 'saving' | 'saveFailed'
   >()
+  const [hasValidSummary, setHasValidSummary] = useState<boolean>(true)
 
   const { data, loading, error } = useQuery<DraftDetailQuery>(DRAFT_DETAIL, {
     variables: { id },
@@ -79,7 +80,8 @@ const DraftDetail = () => {
     draft?.content && stripHtml(draft.content).trim().length > 0
   const hasTitle = draft?.title && draft.title.length > 0
   const isUnpublished = draft?.publishState === 'unpublished'
-  const publishable = id && isUnpublished && hasContent && hasTitle
+  const publishable =
+    id && isUnpublished && hasContent && hasTitle && hasValidSummary
 
   const upload = async (input: { [key: string]: any }) => {
     const result = await singleFileUpload({
@@ -116,8 +118,16 @@ const DraftDetail = () => {
       setSaveStatus('saving')
       await setContent({ variables: { id: draft?.id, ...newDraft } })
       setSaveStatus('saved')
+
+      if (newDraft.summary && !hasValidSummary) {
+        setHasValidSummary(true)
+      }
     } catch (error) {
       setSaveStatus('saveFailed')
+
+      if (newDraft.summary && hasValidSummary) {
+        setHasValidSummary(false)
+      }
     }
   }
 
