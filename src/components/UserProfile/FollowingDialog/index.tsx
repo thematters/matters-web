@@ -4,7 +4,7 @@ import { Dialog, Spinner, Translate, useDialogSwitch } from '~/components'
 
 import { UserProfileUserPublic_user } from '../__generated__/UserProfileUserPublic'
 
-interface FolloweesDialogProps {
+interface FollowingDialogProps {
   user: UserProfileUserPublic_user
   children: ({ open }: { open: () => void }) => React.ReactNode
 }
@@ -14,7 +14,7 @@ const DynamicConetnt = dynamic(() => import('./Content'), {
   loading: Spinner,
 })
 
-const BaseFolloweesDialog = ({ user, children }: FolloweesDialogProps) => {
+const BaseFollowingDialog = ({ user, children }: FollowingDialogProps) => {
   const { show, open, close } = useDialogSwitch(true)
 
   return (
@@ -24,11 +24,7 @@ const BaseFolloweesDialog = ({ user, children }: FolloweesDialogProps) => {
       <Dialog isOpen={show} onDismiss={close} fixedHeight>
         <Dialog.Header
           title={
-            <Translate
-              zh_hant={`${user.displayName} 追蹤的作者`}
-              zh_hans={`${user.displayName} 追踪的作者`}
-              en={`Followed by ${user.displayName}`}
-            />
+            <Translate zh_hant="追蹤內容" zh_hans="追踪内容" en={`Following`} />
           }
           close={close}
           closeTextId="close"
@@ -40,8 +36,8 @@ const BaseFolloweesDialog = ({ user, children }: FolloweesDialogProps) => {
   )
 }
 
-export const FolloweesDialog = (props: FolloweesDialogProps) => (
-  <Dialog.Lazy mounted={<BaseFolloweesDialog {...props} />}>
+export const FollowingDialog = (props: FollowingDialogProps) => (
+  <Dialog.Lazy mounted={<BaseFollowingDialog {...props} />}>
     {({ open }) => <>{props.children({ open })}</>}
   </Dialog.Lazy>
 )

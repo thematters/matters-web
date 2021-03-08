@@ -1,7 +1,6 @@
 import { useContext, useEffect } from 'react'
 
 import {
-  Dialog,
   EmptyWarning,
   InfiniteScroll,
   List,
@@ -10,18 +9,21 @@ import {
   Translate,
   usePublicQuery,
   usePullToRefresh,
+  UserDigest,
   useRoute,
   ViewerContext,
 } from '~/components'
-import { UserDigest } from '~/components/UserDigest'
 
 import { analytics, mergeConnections } from '~/common/utils'
 
-import { USER_FOLLOWEES_PRIVATE, USER_FOLLOWEES_PUBLIC } from './gql'
+import {
+  USER_FOLLOWING_USERS_PRIVATE,
+  USER_FOLLOWING_USERS_PUBLIC,
+} from './gql'
 
-import { UserFolloweePublic } from './__generated__/UserFolloweePublic'
+import { UserFollowingUsersPublic } from './__generated__/UserFollowingUsersPublic'
 
-const FolloweesDialogContent = () => {
+const UsersFeed = () => {
   const viewer = useContext(ViewerContext)
   const { getQuery } = useRoute()
   const userName = getQuery('name')
@@ -37,26 +39,25 @@ const FolloweesDialogContent = () => {
     fetchMore,
     refetch: refetchPublic,
     client,
-  } = usePublicQuery<UserFolloweePublic>(USER_FOLLOWEES_PUBLIC, {
+  } = usePublicQuery<UserFollowingUsersPublic>(USER_FOLLOWING_USERS_PUBLIC, {
     variables: { userName },
   })
 
   // pagination
   const user = data?.user
-  const connectionPath = 'user.followees'
-  const { edges, pageInfo } = user?.followees || {}
+  const connectionPath = 'user.following.users'
+  const { edges, pageInfo } = user?.following?.users || {}
 
   // private data
-  const loadPrivate = (publicData?: UserFolloweePublic) => {
+  const loadPrivate = (publicData?: UserFollowingUsersPublic) => {
     if (!viewer.isAuthed || !publicData || !user) {
       return
     }
 
-    const publiceEdges = publicData.user?.followees.edges || []
-    const publicIds = publiceEdges.map(({ node }) => node.id)
-
+    const publicEdges = publicData.user?.following?.users.edges || []
+    const publicIds = publicEdges.map(({ node }) => node.id)
     client.query({
-      query: USER_FOLLOWEES_PRIVATE,
+      query: USER_FOLLOWING_USERS_PRIVATE,
       fetchPolicy: 'network-only',
       variables: { ids: publicIds },
     })
@@ -128,28 +129,26 @@ const FolloweesDialogContent = () => {
   }
 
   return (
-    <Dialog.Content spacing={['base', 0]}>
-      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-        <List hasBorder={false}>
-          {edges.map(({ node, cursor }, i) => (
-            <List.Item key={cursor}>
-              <UserDigest.Rich
-                user={node}
-                onClick={() =>
-                  analytics.trackEvent('click_feed', {
-                    type: 'followee',
-                    contentType: 'user',
-                    styleType: 'card',
-                    location: i,
-                  })
-                }
-              />
-            </List.Item>
-          ))}
-        </List>
-      </InfiniteScroll>
-    </Dialog.Content>
+    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+      <List hasBorder={false}>
+        {edges.map(({ node, cursor }, i) => (
+          <List.Item key={cursor}>
+            <UserDigest.Rich
+              user={node}
+              onClick={() =>
+                analytics.trackEvent('click_feed', {
+                  type: 'followee',
+                  contentType: 'user',
+                  styleType: 'card',
+                  location: i,
+                })
+              }
+            />
+          </List.Item>
+        ))}
+      </List>
+    </InfiniteScroll>
   )
 }
 
-export default FolloweesDialogContent
+export default UsersFeed

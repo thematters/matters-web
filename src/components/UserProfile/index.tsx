@@ -24,8 +24,8 @@ import { CivicLikerBadge, SeedBadge } from './Badges'
 import CircleWidget from './CircleWidget'
 import DropdownActions from './DropdownActions'
 import EditProfileButton from './EditProfileButton'
-import { FolloweesDialog } from './FolloweesDialog'
 import { FollowersDialog } from './FollowersDialog'
+import { FollowingDialog } from './FollowingDialog'
 import { USER_PROFILE_PRIVATE, USER_PROFILE_PUBLIC } from './gql'
 import styles from './styles.css'
 
@@ -206,16 +206,16 @@ export const UserProfile = () => {
             )}
           </FollowersDialog>
 
-          <FolloweesDialog user={user}>
-            {({ open: openFolloweesDialog }) => (
-              <button type="button" onClick={openFolloweesDialog}>
+          <FollowingDialog user={user}>
+            {({ open: openFollowingDialog }) => (
+              <button type="button" onClick={openFollowingDialog}>
                 <span className="count">
                   {numAbbr(user.followees.totalCount)}
                 </span>
                 <Translate id="following" />
               </button>
             )}
-          </FolloweesDialog>
+          </FollowingDialog>
         </footer>
 
         <CircleWidget circles={circles} isMe={isMe} />
