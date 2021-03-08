@@ -5,7 +5,7 @@ import { AvatarSize, CommentFormType, UserDigest } from '~/components'
 
 import Content from '../Content'
 import DonatorLabel from '../DonatorLabel'
-import DropdownActions from '../DropdownActions'
+import DropdownActions, { DropdownActionsControls } from '../DropdownActions'
 import FooterActions, { FooterActionsControls } from '../FooterActions'
 import PinnedLabel from '../PinnedLabel'
 import ReplyTo from '../ReplyTo'
@@ -19,7 +19,8 @@ import { RefetchComment } from './__generated__/RefetchComment'
 export type CommentControls = {
   avatarSize?: Extract<AvatarSize, 'md' | 'lg'>
   hasUserName?: boolean
-} & FooterActionsControls
+} & FooterActionsControls &
+  DropdownActionsControls
 
 export type CommentProps = {
   comment: FeedCommentPublic & Partial<FeedCommentPrivate>
@@ -68,6 +69,7 @@ export const BaseCommentFeed = ({
           <DropdownActions
             comment={comment}
             type={type}
+            hasPin={actionControls.hasPin}
             inCard={actionControls.inCard}
           />
         </section>

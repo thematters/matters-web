@@ -33,6 +33,7 @@ import { toPath } from '~/common/utils'
 
 import Collection from './Collection'
 import Content from './Content'
+import CustomizedSummary from './CustomizedSummary'
 import FingerprintButton from './FingerprintButton'
 import {
   ARTICLE_DETAIL_PRIVATE,
@@ -110,6 +111,7 @@ const ArticleDetail = () => {
     circle.isMember ||
     article?.limitedFree
   )
+  const summary = article?.summary
   const lockActions = !!(
     circle &&
     viewer.isAuthed &&
@@ -128,7 +130,6 @@ const ArticleDetail = () => {
       fetchPolicy: 'network-only',
       variables: {
         mediaHash: article?.mediaHash,
-        includeContent: canReadFullContent,
         includeCanSuperLike: viewer.isCivicLiker,
       },
     })
@@ -389,6 +390,10 @@ const ArticleDetail = () => {
               <section className="right" />
             </section>
           </section>
+
+          {article?.summaryCustomized && (
+            <CustomizedSummary summary={summary} />
+          )}
 
           <Content
             article={article}

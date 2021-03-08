@@ -148,7 +148,7 @@ const Broadcast = () => {
 
   const isOwner = circle?.owner.id === viewer.id
   const isMember = circle?.isMember
-  const lock = viewer.isAuthed && (!isOwner || !isMember)
+  const lock = viewer.isAuthed && !isOwner && !isMember
   const submitCallback = () => {
     window.dispatchEvent(
       new CustomEvent(ADD_TOAST, {

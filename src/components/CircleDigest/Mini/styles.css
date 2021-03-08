@@ -24,6 +24,7 @@ header {
 }
 
 .content {
+  flex-grow: 1;
   height: var(--circle-digest-mini-content-height);
   overflow: hidden;
 }

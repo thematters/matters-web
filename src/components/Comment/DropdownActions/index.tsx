@@ -26,11 +26,21 @@ import UncollapseButton from './UncollapseButton'
 import { DropdownActionsCommentPrivate } from './__generated__/DropdownActionsCommentPrivate'
 import { DropdownActionsCommentPublic } from './__generated__/DropdownActionsCommentPublic'
 
-interface DropdownActionsProps {
-  comment: DropdownActionsCommentPublic & Partial<DropdownActionsCommentPrivate>
-  type: CommentFormType
+export type DropdownActionsControls = {
+  /**
+   * options to control visibility
+   */
+  // force to hide
+  hasPin?: boolean
+
+  // based on type
   inCard?: boolean
 }
+
+type DropdownActionsProps = {
+  comment: DropdownActionsCommentPublic & Partial<DropdownActionsCommentPrivate>
+  type: CommentFormType
+} & DropdownActionsControls
 
 interface Controls {
   hasPin: boolean
@@ -179,7 +189,7 @@ const BaseDropdownActions = ({
 }
 
 const DropdownActions = (props: DropdownActionsProps) => {
-  const { comment, type } = props
+  const { comment, type, hasPin = true } = props
   const viewer = useContext(ViewerContext)
   const { isArchived, isBanned, isFrozen } = viewer
 
@@ -197,7 +207,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
   const isDescendantComment = comment.parentComment
 
   const controls = {
-    hasPin: !!(isTargetAuthor && isActive && !isDescendantComment),
+    hasPin: hasPin && !!(isTargetAuthor && isActive && !isDescendantComment),
     hasEdit: !!(isCommentAuthor && !isBlocked && (isActive || isCollapsed)),
     hasDelete: !!(isCommentAuthor && isActive),
     hasBlockUser: !isCommentAuthor,
