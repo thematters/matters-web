@@ -2,12 +2,15 @@ import gql from 'graphql-tag'
 
 import { ThreadComment } from '~/components'
 
-import SubscriptionBanner from '../SubscriptionBanner'
-
 export const BROADCAST_PUBLIC = gql`
   query BroadcastPublic($name: String!, $after: String) {
     circle(input: { name: $name }) {
       id
+      owner {
+        id
+      }
+      # use alias to prevent overwriting <CircleProfile>'s
+      circleIsMember: isMember @connection(key: "circleBroadcastIsMember")
       broadcast(input: { first: 10, after: $after }) {
         totalCount
         pageInfo {
@@ -22,21 +25,21 @@ export const BROADCAST_PUBLIC = gql`
           }
         }
       }
-      ...SubscriptionBannerCirclePublic
-      ...SubscriptionBannerCirclePrivate
     }
   }
   ${ThreadComment.fragments.comment.public}
   ${ThreadComment.fragments.comment.private}
-  ${SubscriptionBanner.fragments.circle.public}
-  ${SubscriptionBanner.fragments.circle.private}
 `
 
 export const BROADCAST_PRIVATE = gql`
   query BroadcastPrivate($name: String!, $ids: [ID!]!) {
-    circle(input: { name: $name }) {
+    circle(input: { name: $name }) @connection(key: "circleBroadcast") {
       id
-      ...SubscriptionBannerCirclePrivate
+      owner {
+        id
+      }
+      # use alias to prevent overwriting <CircleProfile>'s
+      circleIsMember: isMember @connection(key: "circleBroadcastIsMember")
     }
     nodes(input: { ids: $ids }) {
       id
@@ -46,5 +49,4 @@ export const BROADCAST_PRIVATE = gql`
     }
   }
   ${ThreadComment.fragments.comment.private}
-  ${SubscriptionBanner.fragments.circle.private}
 `
