@@ -100,12 +100,12 @@ const Broadcast = () => {
       return
     }
 
-    if (viewer.id) {
+    if (viewer.isAuthed) {
       loadPrivate(data)
-    } else {
+    } else if (viewer.privateFetched) {
       setPrivateFetched(true)
     }
-  }, [circleId])
+  }, [circleId, viewer.privateFetched])
 
   // load next page
   const loadMore = async () => {

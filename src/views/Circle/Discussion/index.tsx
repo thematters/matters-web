@@ -95,23 +95,25 @@ const Discussion = () => {
     setPrivateFetched(true)
   }
 
+  // fetch private data
   useEffect(() => {
     if (!circleId) {
       return
     }
 
-    // fetch private data
-    if (viewer.id) {
+    if (viewer.isAuthed) {
       loadPrivate(data)
-    } else {
+    } else if (viewer.privateFetched) {
       setPrivateFetched(true)
     }
+  }, [circleId, viewer.privateFetched])
 
-    // fetch discussion
+  // fetch discussion
+  useEffect(() => {
     if (hasPermission) {
       fetchDicussion()
     }
-  }, [circleId, hasPermission])
+  }, [hasPermission])
 
   // load next page
   const loadMore = () =>
