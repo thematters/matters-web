@@ -45,6 +45,7 @@ const UserTags = () => {
   const user = data?.user
   const connectionPath = 'user.tags'
   const { edges, pageInfo } = user?.tags || {}
+  const hasSubscriptions = (user?.subscribedCircles.totalCount || 0) > 0
 
   // load next page
   const loadMore = async () => {
@@ -79,7 +80,7 @@ const UserTags = () => {
   if (loading) {
     return (
       <>
-        <UserTabs />
+        <UserTabs hasSubscriptions={hasSubscriptions} />
         <Spinner />
       </>
     )
@@ -88,7 +89,7 @@ const UserTags = () => {
   if (error) {
     return (
       <>
-        <UserTabs />
+        <UserTabs hasSubscriptions={hasSubscriptions} />
         <QueryError error={error} />
       </>
     )
@@ -97,7 +98,7 @@ const UserTags = () => {
   if (!user || user?.status?.state === 'archived') {
     return (
       <>
-        <UserTabs />
+        <UserTabs hasSubscriptions={hasSubscriptions} />
         <EmptyTag
           description={
             <Translate
@@ -126,7 +127,7 @@ const UserTags = () => {
     return (
       <>
         <CustomHead />
-        <UserTabs />
+        <UserTabs hasSubscriptions={hasSubscriptions} />
         <EmptyTag
           description={
             <Translate
@@ -139,8 +140,6 @@ const UserTags = () => {
       </>
     )
   }
-
-  const hasSubscriptions = user.subscribedCircles.totalCount > 0
 
   return (
     <>

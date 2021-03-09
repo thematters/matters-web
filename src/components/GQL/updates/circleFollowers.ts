@@ -1,9 +1,9 @@
 import { DataProxy } from 'apollo-cache'
-import { CIRCLE_FOLLOWERS_PUBLIC } from '~/views/Circle/Detail/Profile/FollowersDialog/gql'
+import { CIRCLE_FOLLOWERS_PUBLIC } from '~/views/Circle/Profile/FollowersDialog/gql'
 
 import { ERROR_CODES } from '~/common/enums'
 
-import { CircleFollowersPublic } from '~/views/Circle/Detail/Profile/FollowersDialog/__generated__/CircleFollowersPublic'
+import { CircleFollowersPublic } from '~/views/Circle/Profile/FollowersDialog/__generated__/CircleFollowersPublic'
 
 const update = ({
   cache,

@@ -53,7 +53,7 @@ const UserComments = () => {
   if (loading) {
     return (
       <>
-        <UserTabs />
+        <UserTabs hasSubscriptions={hasSubscriptions} />
         <Spinner />
       </>
     )
@@ -62,7 +62,7 @@ const UserComments = () => {
   if (error) {
     return (
       <>
-        <UserTabs />
+        <UserTabs hasSubscriptions={hasSubscriptions} />
         <QueryError error={error} />
       </>
     )
@@ -71,7 +71,7 @@ const UserComments = () => {
   if (!user || user?.status?.state === 'archived') {
     return (
       <>
-        <UserTabs />
+        <UserTabs hasSubscriptions={hasSubscriptions} />
         <EmptyComment />
       </>
     )

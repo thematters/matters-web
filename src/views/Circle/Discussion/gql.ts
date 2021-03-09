@@ -2,30 +2,32 @@ import gql from 'graphql-tag'
 
 import { ThreadComment } from '~/components'
 
-import SubscriptionBanner from '../SubscriptionBanner'
-
 export const DISCUSSION_PUBLIC = gql`
   query DiscussionPublic($name: String!) {
     circle(input: { name: $name }) {
       id
+      owner {
+        id
+      }
+      # use alias to prevent overwriting <CircleProfile>'s
+      circleIsMember: isMember @connection(key: "circleDiscussionIsMember")
       discussionCount
       discussionThreadCount
-      ...SubscriptionBannerCirclePublic
-      ...SubscriptionBannerCirclePrivate
     }
   }
-  ${SubscriptionBanner.fragments.circle.public}
-  ${SubscriptionBanner.fragments.circle.private}
 `
 
 export const DISCUSSION_PRIVATE = gql`
   query DiscussionPrivate($name: String!) {
     circle(input: { name: $name }) {
       id
-      ...SubscriptionBannerCirclePrivate
+      owner {
+        id
+      }
+      # use alias to prevent overwriting <CircleProfile>'s
+      circleIsMember: isMember @connection(key: "circleDiscussionIsMember")
     }
   }
-  ${SubscriptionBanner.fragments.circle.private}
 `
 
 export const DISCUSSION_COMMENTS = gql`

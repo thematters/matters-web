@@ -1,3 +1,15 @@
+.container {
+  padding-top: var(--spacing-x-tight);
+  padding-bottom: var(--spacing-xxx-loose);
+  background: var(--color-white);
+  border-radius: 1.25rem 1.25rem 0 0;
+
+  @media (--sm-up) {
+    padding-top: 0;
+    padding-bottom: var(--spacing-xx-loose);
+  }
+}
+
 .discussion {
   padding: 0 var(--spacing-base);
   margin-top: var(--spacing-x-tight);
@@ -16,7 +28,6 @@
 .wall {
   margin-top: var(--spacing-base);
   margin-bottom: calc(var(--wall-bottom-offset) * -1);
-  cursor: pointer;
 
   & img {
     display: block;
