@@ -115,7 +115,8 @@ const ArticleDetail = () => {
   const lockActions = !!(
     circle &&
     viewer.isAuthed &&
-    (!isAuthor || !circle.isMember)
+    !isAuthor &&
+    !circle.isMember
   )
 
   // fetch private data
