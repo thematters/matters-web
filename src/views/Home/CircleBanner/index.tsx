@@ -8,7 +8,6 @@ import {
   LanguageContext,
   Translate,
   useFeatures,
-  ViewerContext,
 } from '~/components'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
@@ -25,7 +24,6 @@ import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientP
 import { CircleBanner as CircleBannerType } from './__generated__/CircleBanner'
 
 export const CircleBanner = () => {
-  const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
   const features = useFeatures()
   const { data: clientPreferenceData, client } = useQuery<ClientPreference>(
@@ -41,11 +39,8 @@ export const CircleBanner = () => {
   const hasCircle = ownCirclesCount > 0
 
   useEffect(() => {
-    if (!viewer.id) {
-      return
-    }
     getOwnCircles()
-  }, [viewer.id])
+  }, [])
 
   // skip if it's server-side rendering
   if (!process.browser) {
@@ -70,11 +65,11 @@ export const CircleBanner = () => {
     })
   }
 
-  if (!viewer.isAuthed || !enabled || !data || hasCircle) {
+  if (!enabled || !data || hasCircle) {
     return null
   }
 
-  const canCreateCircle = !features.circle_management
+  const canCreateCircle = features.circle_management
 
   return (
     <div className="container">
@@ -134,7 +129,7 @@ export const CircleBanner = () => {
           aria-label={TEXT.zh_hant.close}
           onClick={hideBanner}
         >
-          <IconClose32 size="lg" />
+          <IconClose32 size="lg" color="white" />
         </Button>
       </div>
 

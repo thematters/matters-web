@@ -186,18 +186,20 @@ const CricleDiscussion = () => {
       <CircleDetailTabs />
 
       <section className="discussion">
-        <header>
-          <CommentForm
-            circleId={circle?.id}
-            type="circleDiscussion"
-            placeholder={translate({
-              lang,
-              zh_hant: '催更、提問、分享、討論…',
-              zh_hans: '催更、提问、分享、讨论…',
-            })}
-            submitCallback={submitCallback}
-          />
-        </header>
+        {!circle.owner.isBlocking && (
+          <header>
+            <CommentForm
+              circleId={circle?.id}
+              type="circleDiscussion"
+              placeholder={translate({
+                lang,
+                zh_hant: '催更、提問、分享、討論…',
+                zh_hans: '催更、提问、分享、讨论…',
+              })}
+              submitCallback={submitCallback}
+            />
+          </header>
+        )}
 
         {!comments ||
           (comments.length <= 0 && (
