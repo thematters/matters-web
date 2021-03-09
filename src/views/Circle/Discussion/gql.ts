@@ -8,6 +8,7 @@ export const DISCUSSION_PUBLIC = gql`
       id
       owner {
         id
+        isBlocking
       }
       # use alias to prevent overwriting <CircleProfile>'s
       circleIsMember: isMember @connection(key: "circleDiscussionIsMember")
@@ -23,6 +24,7 @@ export const DISCUSSION_PRIVATE = gql`
       id
       owner {
         id
+        isBlocking
       }
       # use alias to prevent overwriting <CircleProfile>'s
       circleIsMember: isMember @connection(key: "circleDiscussionIsMember")
