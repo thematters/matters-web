@@ -25,6 +25,7 @@ const ViewerFragments = {
         }
         info {
           createdAt
+          description
           email
           agreeOn
           userNameEditable
