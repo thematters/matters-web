@@ -20,6 +20,7 @@ import {
   routerPush,
   toPath,
   translate,
+  validateCircleDisplayName,
   validateDescription,
 } from '~/common/utils'
 
@@ -35,7 +36,7 @@ import {
 interface FormProps {
   circle: Pick<
     PutCircle_putCircle,
-    'id' | 'avatar' | 'cover' | 'description' | '__typename'
+    'id' | 'avatar' | 'cover' | 'displayName' | 'description' | '__typename'
   >
   type: 'edit' | 'create'
   purpose: 'dialog' | 'page'
@@ -45,6 +46,7 @@ interface FormProps {
 interface FormValues {
   avatar: string | null
   cover: string | null
+  displayName: string
   description: string
 }
 
@@ -78,14 +80,18 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
     initialValues: {
       avatar: UNCHANGED_FIELD,
       cover: UNCHANGED_FIELD,
+      displayName: circle.displayName || '',
       description: circle.description || '',
     },
-    validate: ({ description }) =>
+    validate: ({ displayName, description }) =>
       _pickBy({
+        displayName: !isCreate
+          ? validateCircleDisplayName(displayName, lang)
+          : undefined,
         description: validateDescription(description, lang),
       }),
     onSubmit: async (
-      { avatar, cover, description },
+      { avatar, cover, displayName, description },
       { setSubmitting, setFieldError }
     ) => {
       try {
@@ -95,6 +101,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
               id: circle.id,
               ...(avatar !== UNCHANGED_FIELD ? { avatar } : {}),
               ...(cover !== UNCHANGED_FIELD ? { cover } : {}),
+              ...(!isCreate ? { displayName } : {}),
               description,
             },
           },
@@ -168,6 +175,25 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
           entityId={circle.id}
         />
       </section>
+
+      {!isCreate && (
+        <Form.Input
+          label={<Translate zh_hant="圍爐名稱" zh_hans="围炉名称" />}
+          type="text"
+          name="displayName"
+          required
+          autoFocus
+          placeholder={translate({
+            zh_hant: '給圍爐取一個吸引人的名字吧',
+            zh_hans: '给围炉取一个吸引人的名字吧',
+            lang,
+          })}
+          value={values.displayName}
+          error={touched.displayName && errors.displayName}
+          onBlur={handleBlur}
+          onChange={handleChange}
+        />
+      )}
 
       <Form.Textarea
         label={<Translate zh_hant="圍爐描述" zh_hans="围炉描述" />}

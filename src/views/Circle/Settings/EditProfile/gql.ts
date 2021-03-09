@@ -6,6 +6,8 @@ export const CIRCLE_BASIC_PROFILE = gql`
   query CircleBasicProfile($name: String!) {
     circle(input: { name: $name }) {
       id
+      name
+      displayName
       description
       cover
       owner {
