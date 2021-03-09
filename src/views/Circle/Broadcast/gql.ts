@@ -33,7 +33,7 @@ export const BROADCAST_PUBLIC = gql`
 
 export const BROADCAST_PRIVATE = gql`
   query BroadcastPrivate($name: String!, $ids: [ID!]!) {
-    circle(input: { name: $name }) @connection(key: "circleBroadcast") {
+    circle(input: { name: $name }) {
       id
       owner {
         id
