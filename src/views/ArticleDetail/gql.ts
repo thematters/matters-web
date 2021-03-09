@@ -30,6 +30,7 @@ export const ARTICLE_DETAIL_PUBLIC = gql`
       language
       limitedFree
       author {
+        id
         ...UserDigestRichUserPublic
         ...UserDigestRichUserPrivate
       }
@@ -39,6 +40,7 @@ export const ARTICLE_DETAIL_PUBLIC = gql`
       circle {
         id
         ...CircleWallCirclePublic
+        ...CircleWallCirclePrivate
       }
       ...ContentArticle
       ...TagListArticle
@@ -63,6 +65,7 @@ export const ARTICLE_DETAIL_PUBLIC = gql`
   ${SupportWidget.fragments.article.public}
   ${SupportWidget.fragments.article.private}
   ${CircleWall.fragments.circle.public}
+  ${CircleWall.fragments.circle.private}
 `
 
 export const ARTICLE_DETAIL_PRIVATE = gql`
@@ -74,9 +77,11 @@ export const ARTICLE_DETAIL_PRIVATE = gql`
       id
       content
       author {
+        id
         ...UserDigestRichUserPrivate
       }
       circle {
+        id
         ...CircleWallCirclePrivate
       }
       ...ToolbarArticlePrivate

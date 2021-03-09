@@ -28,19 +28,13 @@ const fragments = {
         }
         ...AvatarCircle
         ...AuthorWidgetCircle
-        ...FollowButtonCirclePrivate
         ...DropdownActionsCirclePublic
-        ...DropdownActionsCirclePrivate
         ...SubscriptionBannerCirclePublic
-        ...SubscriptionBannerCirclePrivate
       }
       ${CircleAvatar.fragments.circle}
       ${AuthorWidget.fragments.circle}
-      ${FollowButton.fragments.circle.private}
       ${DropdownActions.fragments.circle.public}
-      ${DropdownActions.fragments.circle.private}
       ${SubscriptionBanner.fragments.circle.public}
-      ${SubscriptionBanner.fragments.circle.private}
     `,
     private: gql`
       fragment ProfileCirclePrivate on Circle {
