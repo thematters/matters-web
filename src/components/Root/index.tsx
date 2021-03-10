@@ -113,7 +113,7 @@ const Root = ({
       })
 
       // timeout to mark private fetched as true
-      await sleep(1000)
+      await sleep(2000)
       if (!privateFetched) {
         setPrivateFetched(true)
       }
