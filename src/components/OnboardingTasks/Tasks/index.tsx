@@ -5,14 +5,13 @@ import {
   EmbedShare,
   LanguageContext,
   Translate,
+  useMutation,
   useResponsive,
   ViewerContext,
 } from '~/components'
-import { useMutation } from '~/components/GQL'
 import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
 
 import {
-  ADD_TOAST,
   CLOSE_ONBOARDING_TASKS_DIALOG,
   ONBOARDING_TASKS_HIDE,
   OPEN_LIKE_COIN_DIALOG,
@@ -20,13 +19,7 @@ import {
   OPEN_RECOMMEND_TAG_DIALOG,
   URL_QS,
 } from '~/common/enums'
-import {
-  analytics,
-  parseFormSubmitErrors,
-  routerPush,
-  toPath,
-  translate,
-} from '~/common/utils'
+import { analytics, routerPush, toPath, translate } from '~/common/utils'
 
 import styles from './styles.css'
 import TaskItem from './TaskItem'
@@ -45,32 +38,15 @@ const Tasks = () => {
     },
   })
   const createDraft = async () => {
-    try {
-      analytics.trackEvent('click_button', {
-        type: 'write',
-      })
-      const result = await putDraft()
-      const { slug, id } = result?.data?.putDraft || {}
+    analytics.trackEvent('click_button', {
+      type: 'write',
+    })
+    const result = await putDraft()
+    const { slug, id } = result?.data?.putDraft || {}
 
-      if (slug && id) {
-        const path = toPath({ page: 'draftDetail', slug, id })
-        routerPush(path.href)
-      }
-    } catch (error) {
-      const [messages, codes] = parseFormSubmitErrors(error, lang)
-
-      if (!messages[codes[0]]) {
-        return null
-      }
-
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: messages[codes[0]],
-          },
-        })
-      )
+    if (slug && id) {
+      const path = toPath({ page: 'draftDetail', slug, id })
+      routerPush(path.href)
     }
   }
 
@@ -101,6 +77,7 @@ const Tasks = () => {
             <Translate
               zh_hant="設置 Liker ID 化讚為賞"
               zh_hans="设置 Liker ID 化赞为赏"
+              en="Setup Liker ID and turn likes into income"
             />
           }
           done={viewer.onboardingTasks.tasks.likerId}
@@ -119,6 +96,7 @@ const Tasks = () => {
             <Translate
               zh_hant="追蹤 5 位喜歡的創作者"
               zh_hans="追踪 5 位喜欢的创作者"
+              en="follow at least 5 creators"
             />
           }
           done={viewer.onboardingTasks.tasks.followee}
@@ -134,6 +112,7 @@ const Tasks = () => {
             <Translate
               zh_hant="追蹤 5 個感興趣的標籤"
               zh_hans="追踪 5 个感兴趣的标签"
+              en="follow at least 5 interested tags"
             />
           }
           done={viewer.onboardingTasks.tasks.followingTag}
@@ -149,12 +128,14 @@ const Tasks = () => {
             <Translate
               zh_hant="用第一篇創作同社區問好"
               zh_hans="用第一篇创作同社区问好"
+              en="say hi to the community with your first work"
             />
           }
           subtitle={
             <Translate
               zh_hant="參與 #新人打卡 關注"
               zh_hans="参与 #新人打卡 关注"
+              en="join #新人打卡"
             />
           }
           done={viewer.onboardingTasks.tasks.article}
@@ -167,12 +148,14 @@ const Tasks = () => {
             <Translate
               zh_hant="解鎖評論權限參與更多互動"
               zh_hans="解锁评论权限参与更多互动"
+              en="unlock comment feature to participate more interaction"
             />
           }
           subtitle={
             <Translate
               zh_hant="獲得拍手數 × 2 + 閱讀篇數 ≥ 10"
               zh_hans="获得拍手数 × 2 + 阅读篇数 ≥ 10"
+              en="received likes × 2 + read article ≥ 10"
             />
           }
           done={viewer.onboardingTasks.tasks.commentPermission}
@@ -188,13 +171,18 @@ const Tasks = () => {
               textColor="white"
               onClick={hideTasks}
             >
-              <Translate zh_hant="繼續閱讀航程" zh_hans="继续阅读航程" />
+              <Translate
+                zh_hant="繼續閱讀航程"
+                zh_hans="继续阅读航程"
+                en="continue your reading journey"
+              />
             </Dialog.Footer.Button>
           ) : (
             <Dialog.Footer.Button type="button" onClick={hideTasks} implicit>
               <Translate
                 zh_hant="不跟導航自己逛逛 😌"
                 zh_hans="不跟导航自己逛逛 😌"
+                en="skip the guide and try it out yourself"
               />
             </Dialog.Footer.Button>
           )}
@@ -212,6 +200,7 @@ const Tasks = () => {
                   <Translate
                     zh_hant="邀請更多好友加入星際旅行"
                     zh_hans="邀请更多好友加入星际旅行"
+                    en="invite more firends to join galaxy journey"
                   />
                 }
                 wrap={isLargeUp}

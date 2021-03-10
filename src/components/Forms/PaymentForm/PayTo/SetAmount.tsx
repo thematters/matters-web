@@ -10,9 +10,9 @@ import {
   LanguageContext,
   Spinner,
   Translate,
+  useMutation,
   ViewerContext,
 } from '~/components'
-import { useMutation } from '~/components/GQL'
 import PAY_TO from '~/components/GQL/mutations/payTo'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
 
@@ -22,6 +22,7 @@ import {
 } from '~/common/enums'
 import { validateCurrency, validateDonationAmount } from '~/common/utils'
 
+import CivicLikerButton from './CivicLikerButton'
 import { CustomAmount } from './CustomAmount'
 import { NoLikerIdButton, NoLikerIdMessage } from './NoLiker'
 import styles from './styles.css'
@@ -261,16 +262,22 @@ const SetAmount: React.FC<FormProps> = ({
 
       <Dialog.Footer>
         {canProcess && !locked && (
-          <Dialog.Footer.Button
-            type="submit"
-            form={formId}
-            disabled={!isValid || isSubmitting || isBalanceInsufficient}
-            bgColor={color}
-            textColor="white"
-            loading={isSubmitting}
-          >
-            <Translate id="nextStep" />
-          </Dialog.Footer.Button>
+          <>
+            {isLike && recipient.liker.likerId && (
+              <CivicLikerButton likerId={recipient.liker.likerId} />
+            )}
+
+            <Dialog.Footer.Button
+              type="submit"
+              form={formId}
+              disabled={!isValid || isSubmitting || isBalanceInsufficient}
+              bgColor={color}
+              textColor="white"
+              loading={isSubmitting}
+            >
+              <Translate id="nextStep" />
+            </Dialog.Footer.Button>
+          </>
         )}
 
         {canProcess && !isLike && !locked && (
@@ -279,7 +286,7 @@ const SetAmount: React.FC<FormProps> = ({
             textColor="black"
             onClick={switchToAddCredit}
           >
-            <Translate zh_hant="先去儲值" zh_hans="先去储值" />
+            <Translate zh_hant="先去儲值" zh_hans="先去储值" en="Top up" />
           </Dialog.Footer.Button>
         )}
 
@@ -305,6 +312,7 @@ const SetAmount: React.FC<FormProps> = ({
             <Translate
               zh_hant="前往 Liker Land 支付"
               zh_hans="前往 Liker Land 支付"
+              en="go to Liker Land for payment"
             />
           </Dialog.Footer.Button>
         )}

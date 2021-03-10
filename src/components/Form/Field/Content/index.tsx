@@ -1,7 +1,7 @@
 import styles from './styles.css'
 
 const Content: React.FC = ({ children }) => (
-  <section>
+  <section className="input-container">
     {children}
 
     <style jsx>{styles}</style>

@@ -28,6 +28,12 @@
   }
 }
 
+.size-sm-s {
+  & .text {
+    font-size: var(--font-size-sm-s);
+  }
+}
+
 .size-md {
   & .text {
     font-size: var(--font-size-md);
@@ -87,6 +93,10 @@
 
 .red {
   color: var(--color-red);
+}
+
+.likecoin-green {
+  color: var(--color-likecoin-green);
 }
 
 /* spacing */

@@ -1,90 +1,59 @@
 import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
-import gql from 'graphql-tag'
 import React from 'react'
 
 import { Card, IconPin24, Img, TextIcon, Translate } from '~/components'
+import { CircleDigest } from '~/components/CircleDigest'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { UserDigest } from '~/components/UserDigest'
 import { UserDigestMiniProps } from '~/components/UserDigest/Mini'
 
 import { stripHtml, toPath } from '~/common/utils'
 
-import DropdownActions from '../DropdownActions'
 import FooterActions, { FooterActionsControls } from '../FooterActions'
 import { ArticleDigestTitle } from '../Title'
 import CreatedAt from './CreatedAt'
+import { fragments } from './gql'
 import InactiveState from './InactiveState'
+import LimitedFree from './LimitedFree'
 import styles from './styles.css'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
+import { ArticleDigestFeedArticlePrivate } from './__generated__/ArticleDigestFeedArticlePrivate'
 import { ArticleDigestFeedArticlePublic } from './__generated__/ArticleDigestFeedArticlePublic'
+
+type ExtraHeaderControls = {
+  extraHeader?: React.ReactNode
+  hasCircle?: boolean
+}
 
 export type ArticleDigestFeedControls = {
   onClick?: () => any
   onClickAuthor?: () => void
-} & FooterActionsControls
+  onClickCircle?: () => void
+} & ExtraHeaderControls &
+  FooterActionsControls
 
-type ArticleDigestFeedProps = {
-  article: ArticleDigestFeedArticlePublic
+export type ArticleDigestFeedProps = {
+  article: ArticleDigestFeedArticlePublic &
+    Partial<ArticleDigestFeedArticlePrivate>
 
   actor?: (props: Partial<UserDigestMiniProps>) => React.ReactNode
-  extraHeader?: React.ReactNode
 } & ArticleDigestFeedControls
-
-const fragments = {
-  article: {
-    public: gql`
-      fragment ArticleDigestFeedArticlePublic on Article {
-        id
-        title
-        slug
-        mediaHash
-        articleState: state
-        cover
-        summary
-        author {
-          id
-          userName
-          ...UserDigestMiniUser
-        }
-        ...CreatedAtArticle
-        ...InactiveStateArticle
-        ...ArticleDigestTitleArticle
-        ...DropdownActionsArticle
-        ...FooterActionsArticlePublic
-        ...FooterActionsArticlePrivate
-      }
-      ${UserDigest.Mini.fragments.user}
-      ${CreatedAt.fragments.article}
-      ${InactiveState.fragments.article}
-      ${ArticleDigestTitle.fragments.article}
-      ${DropdownActions.fragments.article}
-      ${FooterActions.fragments.article.public}
-      ${FooterActions.fragments.article.private}
-    `,
-    private: gql`
-      fragment ArticleDigestFeedArticlePrivate on Article {
-        id
-        ...FooterActionsArticlePrivate
-      }
-      ${FooterActions.fragments.article.private}
-    `,
-  },
-}
 
 const BaseArticleDigestFeed = ({
   article,
 
-  inTagDetailLatest,
-  inTagDetailSelected,
-  inUserArticles,
+  actor,
+
+  hasCircle = true,
+  extraHeader,
 
   onClick,
   onClickAuthor,
+  onClickCircle,
 
-  actor,
-  extraHeader,
+  ...controls
 }: ArticleDigestFeedProps) => {
   const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
     variables: { id: 'local' },
@@ -93,7 +62,7 @@ const BaseArticleDigestFeed = ({
   const isCompactMode = viewMode === 'compact'
   const isDefaultMode = viewMode === 'default'
 
-  const { author, summary, sticky } = article
+  const { author, summary, sticky, circle } = article
   const isBanned = article.articleState === 'banned'
   const cover = !isBanned ? article.cover : null
   const cleanedSummary = isBanned ? '' : stripHtml(summary)
@@ -122,7 +91,14 @@ const BaseArticleDigestFeed = ({
   return (
     <Card {...path} spacing={['base', 'base']} onClick={onClick}>
       <section className={containerClasses}>
-        {extraHeader}
+        {extraHeader ||
+          (hasCircle && circle && (
+            <section className="extraHeader">
+              <CircleDigest.Plain circle={circle} onClick={onClickCircle} />
+
+              <LimitedFree article={article} />
+            </section>
+          ))}
 
         <header>
           <section className="left">
@@ -140,13 +116,15 @@ const BaseArticleDigestFeed = ({
           </section>
 
           <section className="right">
-            {inUserArticles && sticky && (
+            {!hasCircle && <LimitedFree article={article} />}
+
+            {controls.inUserArticles && sticky && (
               <TextIcon icon={<IconPin24 />} size="sm" color="grey" weight="md">
                 <Translate id="stickyArticle" />
               </TextIcon>
             )}
 
-            {inUserArticles && <InactiveState article={article} />}
+            {controls.inUserArticles && <InactiveState article={article} />}
             <CreatedAt article={article} />
           </section>
         </header>
@@ -173,13 +151,7 @@ const BaseArticleDigestFeed = ({
           </section>
         )}
 
-        <FooterActions
-          article={article}
-          inCard
-          inTagDetailLatest={inTagDetailLatest}
-          inTagDetailSelected={inTagDetailSelected}
-          inUserArticles={inUserArticles}
-        />
+        <FooterActions article={article} inCard {...controls} />
 
         <style jsx>{styles}</style>
       </section>
@@ -201,7 +173,6 @@ export const ArticleDigestFeed = React.memo(
   ({ article: prevArticle }, { article }) => {
     return (
       prevArticle.subscribed === article.subscribed &&
-      prevArticle.responseCount === article.responseCount &&
       prevArticle.articleState === article.articleState &&
       prevArticle.sticky === article.sticky &&
       prevArticle.appreciationsReceivedTotal ===

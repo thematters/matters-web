@@ -1,8 +1,7 @@
 import gql from 'graphql-tag'
 import { createContext, useContext, useState } from 'react'
 
-import { Translate, ViewerContext } from '~/components'
-import { useMutation } from '~/components/GQL'
+import { Translate, useMutation, ViewerContext } from '~/components'
 
 import { ADD_TOAST, DEFAULT_LANG } from '~/common/enums'
 import { langConvert } from '~/common/utils'
@@ -70,6 +69,7 @@ export const LanguageProvider = ({
                       <Translate
                         zh_hant="介面語言已修改"
                         zh_hans="界面语言已修改"
+                        en="Language changed"
                       />
                     ),
                   },

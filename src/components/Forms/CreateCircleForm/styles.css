@@ -1,0 +1,36 @@
+.displayNameInput :global(.input-container) {
+  position: relative;
+
+  &::before {
+    position: absolute;
+    top: 0;
+    left: var(--spacing-base);
+    line-height: var(--input-height);
+    color: var(--color-black);
+    content: 'matters.news/~';
+  }
+
+  & :global(input) {
+    padding-left: 8.5rem;
+  }
+}
+
+.avatar-field {
+  margin: var(--spacing-loose) var(--spacing-base);
+
+  @mixin flex-start-start;
+
+  & header {
+    order: 1;
+    margin-left: var(--spacing-base);
+    color: var(--color-grey-dark);
+
+    & .label {
+      font-size: var(--font-size-sm);
+    }
+    & .msg {
+      margin-top: var(--spacing-xx-tight);
+      font-size: var(--font-size-xs);
+    }
+  }
+}

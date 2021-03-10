@@ -4,6 +4,7 @@ import ArticleMentionedYouNotice from './ArticleMentionedYouNotice'
 import ArticleNewAppreciationNotice from './ArticleNewAppreciationNotice'
 import ArticleNewSubscriberNotice from './ArticleNewSubscriberNotice'
 import ArticlePublishedNotice from './ArticlePublishedNotice'
+import CircleNewArticle from './CircleNewArticle'
 import RevisedArticleNotPublishedNotice from './RevisedArticleNotPublishedNotice'
 import RevisedArticlePublishedNotice from './RevisedArticlePublishedNotice'
 
@@ -23,6 +24,8 @@ const ArticleNotice = ({ notice }: { notice: NoticeType }) => {
       return <RevisedArticlePublishedNotice notice={notice} />
     case 'RevisedArticleNotPublished':
       return <RevisedArticleNotPublishedNotice notice={notice} />
+    case 'CircleNewArticle':
+      return <CircleNewArticle notice={notice} />
     default:
       return null
   }
@@ -41,6 +44,7 @@ ArticleNotice.fragments = {
       ...ArticlePublishedNotice
       ...RevisedArticleNotPublishedNotice
       ...RevisedArticlePublishedNotice
+      ...CircleNewArticleNotice
     }
     ${ArticleMentionedYouNotice.fragments.notice}
     ${ArticleNewAppreciationNotice.fragments.notice}
@@ -48,6 +52,7 @@ ArticleNotice.fragments = {
     ${ArticlePublishedNotice.fragments.notice}
     ${RevisedArticleNotPublishedNotice.fragments.notice}
     ${RevisedArticlePublishedNotice.fragments.notice}
+    ${CircleNewArticle.fragments.notice}
   `,
 }
 

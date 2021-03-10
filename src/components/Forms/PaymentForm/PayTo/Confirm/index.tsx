@@ -3,8 +3,14 @@ import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useEffect } from 'react'
 
-import { Dialog, Form, LanguageContext, Spinner, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
+import {
+  Dialog,
+  Form,
+  LanguageContext,
+  Spinner,
+  Translate,
+  useMutation,
+} from '~/components'
 import PAY_TO from '~/components/GQL/mutations/payTo'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
 
@@ -46,7 +52,9 @@ const Confirm: React.FC<FormProps> = ({
   const formId = 'pay-to-confirm-form'
 
   const { lang } = useContext(LanguageContext)
-  const [payTo] = useMutation<PayToMutate>(PAY_TO)
+  const [payTo] = useMutation<PayToMutate>(PAY_TO, undefined, {
+    showToast: false,
+  })
 
   const { data, loading } = useQuery<WalletBalance>(WALLET_BALANCE, {
     fetchPolicy: 'network-only',
@@ -139,7 +147,8 @@ const Confirm: React.FC<FormProps> = ({
         <section>
           <section className="info">
             <h4 className="to">
-              <Translate zh_hant="給" zh_hans="给" /> {recipient.displayName}
+              <Translate zh_hant="給" zh_hans="给" en="to" />{' '}
+              {recipient.displayName}
             </h4>
 
             <p className="amount">

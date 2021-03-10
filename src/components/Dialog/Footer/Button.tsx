@@ -3,13 +3,10 @@ import { forwardRef } from 'react'
 import { Button, ButtonProps, IconSpinner16, TextIcon } from '~/components'
 
 type DialogFooterButtonProps = {
-  textColor?: 'black' | 'white' | 'grey'
-  bgColor?: 'green' | 'grey-lighter' | 'red' | 'white' | 'gold'
   icon?: React.ReactNode
-
   loading?: boolean
   implicit?: boolean
-} & Omit<ButtonProps, 'bgColor'>
+} & ButtonProps
 
 const DialogFooterButton: React.FC<DialogFooterButtonProps> = forwardRef(
   (

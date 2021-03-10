@@ -1,12 +1,10 @@
 import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
-import { useRouter } from 'next/router'
 
-import { Head, OnboardingTasks, SearchBar } from '~/components'
+import { Head, OnboardingTasks, SearchBar, useRoute } from '~/components'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
-import { PATHS } from '~/common/enums'
-
+import FixedMain from './FixedMain'
 import Header from './Header'
 import NavBar from './NavBar'
 import SideFooter from './SideFooter'
@@ -20,9 +18,10 @@ export const Layout: React.FC & {
   Main: typeof Main
   Header: typeof Header
   Spacing: typeof Spacing
+  FixedMain: typeof FixedMain
 } = ({ children }) => {
-  const router = useRouter()
-  const isInDraftDetail = router.pathname === PATHS.ME_DRAFT_DETAIL
+  const { isInPath } = useRoute()
+  const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
 
   return (
     <>
@@ -54,16 +53,17 @@ interface MainProps {
 }
 
 const Main: React.FC<MainProps> = ({ aside, bgColor, inEditor, children }) => {
-  const router = useRouter()
-  const isInSearch = router.pathname === PATHS.SEARCH
-  const isInArticleDetail = router.pathname === PATHS.ARTICLE_DETAIL
+  const { isInPath, isPathStartWith } = useRoute()
+  const isInSearch = isInPath('SEARCH')
+  const isInArticleDetail = isInPath('ARTICLE_DETAIL')
+  const isInCircle = isPathStartWith('/~', true)
 
   const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
     variables: { id: 'local' },
   })
   const onboardingTasks = data?.clientPreference.onboardingTasks
   const showOnboardingTasks =
-    !inEditor && !isInArticleDetail && onboardingTasks?.enabled
+    !inEditor && !isInArticleDetail && !isInCircle && onboardingTasks?.enabled
 
   const articleClasses = classNames({
     'l-col-three-mid': true,
@@ -119,3 +119,4 @@ const Main: React.FC<MainProps> = ({ aside, bgColor, inEditor, children }) => {
 Layout.Main = Main
 Layout.Header = Header
 Layout.Spacing = Spacing
+Layout.FixedMain = FixedMain

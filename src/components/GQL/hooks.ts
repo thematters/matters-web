@@ -13,24 +13,36 @@ import { DocumentNode } from 'graphql'
 
 import { GQL_CONTEXT_PUBLIC_QUERY_KEY } from '~/common/enums'
 
-import { mutationOnError } from './error'
+import { mutationOnError, MutationOnErrorOptions } from './error'
+
+/**
+ * `useMutation` wrapper with error catching
+ *
+ */
+type CustomMutationProps = MutationOnErrorOptions
 
 export const useMutation = <TData = any, TVariables = OperationVariables>(
   mutation: DocumentNode,
-  options?: MutationHookOptions<TData, TVariables>
+  options?: MutationHookOptions<TData, TVariables>,
+  customMutationProps?: CustomMutationProps
 ): MutationTuple<TData, TVariables> => {
   const [mutate, result] = baseUseMutation(mutation, {
-    onError: (error) => mutationOnError(error),
+    onError: (error) => mutationOnError(error, customMutationProps),
     ...options,
   })
 
   return [mutate, result]
 }
 
+/**
+ * `useQuery` wrappers work with `authLink` of `withApollo.ts` for separating
+ * public and private queries;
+ *
+ * @see {@url https://github.com/thematters/matters-web/issues/1051}
+ */
 interface CustomQueryProps {
   publicQuery?: boolean
 }
-
 export const usePublicQuery = <TData = any, TVariables = OperationVariables>(
   query: DocumentNode,
   options?: QueryHookOptions<TData, TVariables>,

@@ -1,6 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
 import _flatten from 'lodash/flatten'
-import { useRouter } from 'next/router'
 import { useContext, useEffect } from 'react'
 
 import {
@@ -11,17 +10,17 @@ import {
   Head,
   InfiniteScroll,
   List,
+  QueryError,
   Spinner,
   usePublicQuery,
   usePullToRefresh,
+  useRoute,
   ViewerContext,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 
 import {
   analytics,
   filterComments,
-  getQuery,
   mergeConnections,
   toPath,
 } from '~/common/utils'
@@ -34,43 +33,62 @@ import { USER_COMMENTS_PRIVATE, USER_COMMENTS_PUBLIC, USER_ID } from './gql'
 import {
   UserCommentsPublic,
   UserCommentsPublic_node_User_commentedArticles_edges_node_comments_edges_node,
+  UserCommentsPublic_node_User_commentedArticles_edges_node_comments_edges_node_node_Article,
 } from './__generated__/UserCommentsPublic'
 import { UserIdUser } from './__generated__/UserIdUser'
 
 type CommentedArticleComment = UserCommentsPublic_node_User_commentedArticles_edges_node_comments_edges_node
+type CommentArticle = UserCommentsPublic_node_User_commentedArticles_edges_node_comments_edges_node_node_Article
 
 const UserComments = () => {
-  const router = useRouter()
-  const userName = getQuery({ router, key: 'userName' })
+  const { getQuery } = useRoute()
+  const userName = getQuery('name')
 
   const { data, loading, error } = useQuery<UserIdUser>(USER_ID, {
     variables: { userName },
   })
   const user = data?.user
+  const hasSubscriptions = (user?.subscribedCircles?.totalCount || 0) > 0
 
   if (loading) {
-    return <Spinner />
+    return (
+      <>
+        <UserTabs hasSubscriptions={hasSubscriptions} />
+        <Spinner />
+      </>
+    )
   }
 
   if (error) {
-    return <QueryError error={error} />
+    return (
+      <>
+        <UserTabs hasSubscriptions={hasSubscriptions} />
+        <QueryError error={error} />
+      </>
+    )
   }
 
   if (!user || user?.status?.state === 'archived') {
-    return null
+    return (
+      <>
+        <UserTabs hasSubscriptions={hasSubscriptions} />
+        <EmptyComment />
+      </>
+    )
   }
 
   return (
     <>
       <Head
         title={{
-          zh_hant: `${user.displayName}發布的評論`,
-          zh_hans: `${user.displayName}发布的评论`,
+          zh_hant: `${user.displayName} 發布的評論`,
+          zh_hans: `${user.displayName} 发布的评论`,
+          en: `${user.displayName}'s comments`,
         }}
         description={user.info.description}
         image={user.info.profileCover || IMAGE_LOGO_192}
       />
-      <UserTabs />
+      <UserTabs hasSubscriptions={hasSubscriptions} />
       <BaseUserComments user={user} />
     </>
   )
@@ -164,10 +182,6 @@ const BaseUserComments = ({ user }: UserIdUser) => {
   /**
    * Render
    */
-  if (!user || !user.id) {
-    return null
-  }
-
   if (loading) {
     return <Spinner />
   }
@@ -211,10 +225,15 @@ const BaseUserComments = ({ user }: UserIdUser) => {
                 <List.Item key={comment.id}>
                   <Card
                     spacing={['tight', 'base']}
-                    {...toPath({ page: 'commentDetail', comment })}
+                    {...toPath({
+                      page: 'commentDetail',
+                      comment,
+                      article: comment.node as CommentArticle,
+                    })}
                   >
                     <Comment.Feed
                       comment={comment}
+                      type="article"
                       hasCreatedAt
                       hasLink
                       inCard

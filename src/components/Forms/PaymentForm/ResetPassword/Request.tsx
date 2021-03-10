@@ -7,9 +7,9 @@ import {
   Form,
   LanguageContext,
   Translate,
+  useMutation,
   VerificationSendCodeButton,
 } from '~/components'
-import { useMutation } from '~/components/GQL'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 
 import {
@@ -35,7 +35,11 @@ const Request: React.FC<FormProps> = ({
   defaultEmail = '',
   submitCallback,
 }) => {
-  const [confirmCode] = useMutation<ConfirmVerificationCode>(CONFIRM_CODE)
+  const [confirmCode] = useMutation<ConfirmVerificationCode>(
+    CONFIRM_CODE,
+    undefined,
+    { showToast: false }
+  )
   const { lang } = useContext(LanguageContext)
 
   const formId = `payment-password-reset-request-form`
@@ -93,6 +97,7 @@ const Request: React.FC<FormProps> = ({
         type="email"
         name="email"
         required
+        autoFocus
         placeholder={translate({
           id: 'enterEmail',
           lang,
@@ -121,7 +126,6 @@ const Request: React.FC<FormProps> = ({
             disabled={!!errors.email}
           />
         }
-        autoFocus
       />
     </Form>
   )

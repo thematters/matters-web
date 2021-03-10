@@ -6,19 +6,13 @@ import {
   Menu,
   TextIcon,
   Translate,
+  useMutation,
   ViewerContext,
 } from '~/components'
-import { useMutation } from '~/components/GQL'
 import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
 
 import { ADD_TOAST, OPEN_LIKE_COIN_DIALOG } from '~/common/enums'
-import {
-  analytics,
-  parseFormSubmitErrors,
-  routerPush,
-  toPath,
-  translate,
-} from '~/common/utils'
+import { analytics, routerPush, toPath, translate } from '~/common/utils'
 
 import { CreateDraft } from '~/components/GQL/mutations/__generated__/CreateDraft'
 import { TagDetailPublic_node_Tag } from '../../../__generated__/TagDetailPublic'
@@ -30,7 +24,11 @@ interface CreateDraftButtonProps {
 const BaseCreateDraftButton = ({ onClick }: { onClick: () => any }) => (
   <Menu.Item onClick={onClick}>
     <TextIcon icon={<IconAdd24 size="md" />} size="md" spacing="base">
-      <Translate zh_hant="創作新的作品" zh_hans="创作新的作品" />
+      <Translate
+        zh_hant="創作新的作品"
+        zh_hans="创作新的作品"
+        en="create new work"
+      />
     </TextIcon>
   </Menu.Item>
 )
@@ -47,45 +45,28 @@ const CreateDraftButton: React.FC<CreateDraftButtonProps> = ({ tag }) => {
   })
 
   const createDraft = async () => {
-    try {
-      if (viewer.isInactive) {
-        window.dispatchEvent(
-          new CustomEvent(ADD_TOAST, {
-            detail: {
-              color: 'red',
-              content: <Translate id="FORBIDDEN" />,
-            },
-          })
-        )
-        return
-      }
-
-      analytics.trackEvent('click_button', {
-        type: 'write',
-      })
-
-      const result = await putDraft()
-      const { slug, id } = result?.data?.putDraft || {}
-
-      if (slug && id) {
-        const path = toPath({ page: 'draftDetail', slug, id })
-        routerPush(path.href)
-      }
-    } catch (error) {
-      const [messages, codes] = parseFormSubmitErrors(error, lang)
-
-      if (!messages[codes[0]]) {
-        return null
-      }
-
+    if (viewer.isInactive) {
       window.dispatchEvent(
         new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'red',
-            content: messages[codes[0]],
+            content: <Translate id="FORBIDDEN" />,
           },
         })
       )
+      return
+    }
+
+    analytics.trackEvent('click_button', {
+      type: 'write',
+    })
+
+    const result = await putDraft()
+    const { slug, id } = result?.data?.putDraft || {}
+
+    if (slug && id) {
+      const path = toPath({ page: 'draftDetail', slug, id })
+      routerPush(path.href)
     }
   }
 

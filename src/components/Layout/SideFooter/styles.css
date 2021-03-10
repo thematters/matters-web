@@ -1,9 +1,7 @@
 footer {
+  @mixin safe-area-botttom;
+
   margin-bottom: var(--global-nav-height);
-  margin-bottom: calc(
-    constant(safe-area-inset-bottom) + var(--global-nav-height)
-  );
-  margin-bottom: calc(env(safe-area-inset-bottom) + var(--global-nav-height));
   font-size: var(--font-size-sm-s);
   color: var(--color-grey);
 

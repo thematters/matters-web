@@ -7,8 +7,10 @@ import { numAbbr } from '~/common/utils'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorName from '../NoticeActorName'
-import NoticeArticle from '../NoticeArticle'
+import NoticeArticleTitle from '../NoticeArticleTitle'
+import NoticeCircleName from '../NoticeCircleName'
 import NoticeComment from '../NoticeComment'
+import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
 import NoticeTypeIcon from '../NoticeTypeIcon'
 import styles from '../styles.css'
@@ -22,19 +24,23 @@ const CommentNewReplyNotice = ({ notice }: { notice: NoticeType }) => {
 
   const actorsCount = notice.actors.length
   const isMultiActors = actorsCount > 1
+  const replyCommentArticle =
+    notice.reply?.node.__typename === 'Article' ? notice.reply.node : null
+  const replyCommentCircle =
+    notice.reply?.node.__typename === 'Circle' ? notice.reply.node : null
 
   return (
     <section className="container">
       <section className="avatar-wrap">
         {isMultiActors ? (
-          <NoticeTypeIcon type="comment" hasSpacing />
+          <NoticeTypeIcon type="comment" />
         ) : (
           <NoticeActorAvatar user={notice.actors[0]} />
         )}
       </section>
 
       <section className="content-wrap">
-        <NoticeHead hasDate={!isMultiActors} notice={notice}>
+        <NoticeHead>
           {notice.actors.slice(0, 2).map((actor, index) => (
             <Fragment key={index}>
               <NoticeActorName user={actor} />
@@ -45,12 +51,32 @@ const CommentNewReplyNotice = ({ notice }: { notice: NoticeType }) => {
             <Translate
               zh_hant={`等 ${numAbbr(actorsCount)} 人`}
               zh_hans={`等 ${numAbbr(actorsCount)} 人`}
+              en={`etc. ${numAbbr(actorsCount)} users`}
             />
           )}
-          <Translate zh_hant="回覆了你的評論" zh_hans="回复了你的评论" />
+          {replyCommentArticle && (
+            <>
+              <Translate
+                zh_hant="回覆了你在作品 "
+                zh_hans="回复了你在作品 "
+                en=" replied to your comment on "
+              />
+              <NoticeArticleTitle article={replyCommentArticle} />
+              <Translate zh_hant=" 的評論" zh_hans=" 的评论" en="" />
+            </>
+          )}
+          {replyCommentCircle && (
+            <>
+              <Translate
+                zh_hant="回覆了你在圍爐 "
+                zh_hans="回复了你在围炉 "
+                en=" replied to your discussion on "
+              />
+              <NoticeCircleName circle={replyCommentCircle} />
+              <Translate zh_hant=" 中的發言" zh_hans=" 中的发言" en="" />
+            </>
+          )}
         </NoticeHead>
-
-        <NoticeArticle article={notice?.reply?.article || null} isBlock />
 
         <NoticeComment
           comment={isMultiActors ? notice.comment : notice.reply}
@@ -59,10 +85,12 @@ const CommentNewReplyNotice = ({ notice }: { notice: NoticeType }) => {
         {isMultiActors && (
           <section className="multi-actor-avatars">
             {notice.actors.map((actor, index) => (
-              <NoticeActorAvatar key={index} user={actor} />
+              <NoticeActorAvatar key={index} user={actor} size="md" />
             ))}
           </section>
         )}
+
+        <NoticeDate notice={notice} />
       </section>
 
       <style jsx>{styles}</style>
@@ -73,7 +101,7 @@ CommentNewReplyNotice.fragments = {
   notice: gql`
     fragment CommentNewReplyNotice on CommentCommentNotice {
       id
-      ...NoticeHead
+      ...NoticeDate
       actors {
         ...NoticeActorAvatarUser
         ...NoticeActorNameUser
@@ -83,16 +111,22 @@ CommentNewReplyNotice.fragments = {
       }
       reply: comment {
         ...NoticeComment
-        article {
-          ...NoticeArticle
+        node {
+          ... on Article {
+            ...NoticeArticleTitle
+          }
+          ... on Circle {
+            ...NoticeCircleName
+          }
         }
       }
     }
     ${NoticeActorAvatar.fragments.user}
     ${NoticeActorName.fragments.user}
-    ${NoticeArticle.fragments.article}
+    ${NoticeArticleTitle.fragments.article}
+    ${NoticeCircleName.fragments.circle}
     ${NoticeComment.fragments.comment}
-    ${NoticeHead.fragments.date}
+    ${NoticeDate.fragments.notice}
   `,
 }
 

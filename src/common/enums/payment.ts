@@ -1,21 +1,29 @@
-export const PAYMENT_MINIMAL_CHARGE_AMOUNT = {
-  HKD: 20,
+export enum PAYMENT_MINIMAL_ADD_CREDIT_AMOUNT {
+  HKD = 20,
 }
 
-export const PAYMENT_DEFAULT_CHARGE_AMOUNT = {
-  HKD: 100,
+export enum PAYMENT_DEFAULT_ADD_CREDIT_AMOUNT {
+  HKD = 100,
 }
 
-export const PAYMENT_MAXIMUM_CHARGE_AMOUNT = {
-  HKD: 99999,
+export enum PAYMENT_MAXIMUM_ADD_CREDIT_AMOUNT {
+  HKD = 99999,
 }
 
-export const PAYMENT_MAXIMUM_PAYTO_AMOUNT = {
-  HKD: 5000,
+export enum PAYMENT_MAXIMUM_PAYTO_AMOUNT {
+  HKD = 5000,
 }
 
-export const PAYMENT_MINIMAL_PAYOUT_AMOUNT = {
-  HKD: 500,
+export enum PAYMENT_MINIMAL_PAYOUT_AMOUNT {
+  HKD = 500,
+}
+
+export enum PAYMENT_MINIMAL_CIRCLE_AMOUNT {
+  HKD = 20,
+}
+
+export enum PAYMENT_MAXIMUM_CIRCLE_AMOUNT {
+  HKD = 5000,
 }
 
 export enum PAYMENT_CURRENCY {
@@ -83,6 +91,7 @@ export const STRIPE_ERROR_MESSAGES = {
     processing_error: '操作失败，请稍候再试',
     rate_limit: '操作过于频繁，请稍候再试',
   },
+  en: {}, // Unnecessary, use Stripe's built-in message instaed.
 }
 
 export const PAYMENT_PROVIDER = ['stripe', 'likecoin']

@@ -34,7 +34,13 @@ export const PasswordResetRedirectButton = () => (
 export const SignUpDialogButton = () => (
   <Form.List spacing="xloose">
     <Form.List.Item
-      title={<Translate zh_hant="沒有帳戶？" zh_hans="沒有帐户？" />}
+      title={
+        <Translate
+          zh_hant="沒有帳戶？"
+          zh_hans="沒有帐户？"
+          en="Not registered?"
+        />
+      }
       rightText={<Translate id="register" />}
       rightTextColor="green"
       onClick={() => {
@@ -48,7 +54,13 @@ export const SignUpDialogButton = () => (
 export const SignUpRedirectionButton = () => (
   <Form.List spacing="xloose">
     <Form.List.Item
-      title={<Translate zh_hant="沒有帳戶？" zh_hans="沒有帐户？" />}
+      title={
+        <Translate
+          zh_hant="沒有帳戶？"
+          zh_hans="沒有帐户？"
+          en="Not registered?"
+        />
+      }
       rightText={<Translate id="register" />}
       rightTextColor="green"
       {...appendTarget(PATHS.SIGNUP)}

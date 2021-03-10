@@ -25,8 +25,10 @@ type EventArgs =
   | ['load_more', LoadMoreProp]
   | ['share', ShareProp]
   | ['purchase', PurchaseProp]
+  | ['subscribe', SubscribeProps]
   | ['view_add_credit_dialog', ViewDialogProp]
   | ['view_donation_dialog', ViewDialogProp]
+  | ['view_subscribe_circle_dialog', ViewDialogProp]
 
 /**
  * Event: Page View
@@ -50,13 +52,24 @@ interface ClickButtonProp {
     | 'write'
     | 'write_collection'
     | 'google_search'
+    | 'subscribe_circle_banner'
+    | 'subscribe_circle_price'
+    | 'subscribe_confirm'
+    | 'create_circle'
+    | 'finish_circle_creation'
+  pageType?: PageType
 }
 
 /**
  * Event: Load More
  */
 interface LoadMoreProp {
-  type: ArticleFeedType | CommentFeedType | UserFeedType | TagFeedType
+  type:
+    | ArticleFeedType
+    | CommentFeedType
+    | UserFeedType
+    | TagFeedType
+    | CircleFeedType
   location: number
 }
 
@@ -87,6 +100,15 @@ interface PurchaseProp {
 }
 
 /**
+ * Event: Subscribe
+ */
+interface SubscribeProps {
+  id: string | undefined
+  success: boolean
+  message?: string
+}
+
+/**
  * Event: View Dialog
  */
 interface ViewDialogProp {
@@ -104,10 +126,15 @@ interface ClickFeedProp {
 }
 
 // content type
-type ContentType = 'article' | 'comment' | 'user' | 'tag'
+type ContentType = 'article' | 'comment' | 'circle' | 'user' | 'tag'
 
 // feed type
-type FeedType = ArticleFeedType | CommentFeedType | UserFeedType | TagFeedType
+type FeedType =
+  | ArticleFeedType
+  | CommentFeedType
+  | UserFeedType
+  | TagFeedType
+  | CircleFeedType
 
 type ArticleFeedType =
   | 'all_authors'
@@ -134,6 +161,7 @@ type ArticleFeedType =
   | 'user_article'
   | 'wallet'
   | 'related_donations'
+  | 'circle_detail'
 
 type CommentFeedType = 'follow-comment' | 'user_comment'
 
@@ -144,6 +172,7 @@ type UserFeedType =
   | 'appreciations_sent'
   | 'appreciations_received'
   | 'appreciators'
+  | 'donators'
   | 'authors' // author list on home page
   | 'collection'
   | 'follow'
@@ -169,10 +198,13 @@ type TagFeedType =
   | 'tags' // tag feed on home page
   | 'user_tag'
 
+type CircleFeedType = 'user_circle' | 'circle_follower' | 'circle_member'
+
 // style type
 type StyleType =
   | ArticleStyleType
   | CommentStyleType
+  | CircleStyleType
   | UserStyleType
   | TagStyleType
 
@@ -185,6 +217,10 @@ type ArticleStyleType =
 
 type CommentStyleType = 'card'
 
+type CircleStyleType = 'subtitle'
+
 type UserStyleType = 'subtitle' | 'card'
 
 type TagStyleType = 'title' | 'article'
+
+type PageType = 'article_detail' | 'user_profile' | 'circle_detail'

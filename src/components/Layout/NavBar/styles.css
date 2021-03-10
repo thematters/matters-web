@@ -1,15 +1,14 @@
 .nav-bar {
   @mixin shadow-border-top-grey;
+  @mixin safe-area-botttom;
 
   position: fixed;
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: var(--z-index-global-header);
-  height: var(--global-nav-height);
+  z-index: var(--z-index-bottom-bar);
+  min-height: var(--global-nav-height);
   padding: var(--spacing-base) var(--spacing-x-loose);
-  padding-bottom: calc(constant(safe-area-inset-bottom) + var(--spacing-base));
-  padding-bottom: calc(env(safe-area-inset-bottom) + var(--spacing-base));
   background: var(--color-white);
 
   @media (--xs-down) {

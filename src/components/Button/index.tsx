@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import Link from 'next/link'
-import { forwardRef, useRef } from 'react'
+import { forwardRef, RefObject, useRef } from 'react'
 
 import styles from './styles.css'
 
@@ -51,10 +51,11 @@ type ButtonColor =
   | 'green'
   | 'gold'
   | 'red'
+  | 'likecoin-green'
 
 type ButtonTextColor = Extract<
   ButtonColor,
-  'white' | 'black' | 'green' | 'gold' | 'red'
+  'white' | 'black' | 'green' | 'gold' | 'red' | 'grey'
 >
 
 export type ButtonBgColor = Extract<
@@ -79,7 +80,7 @@ type ButtonBgActiveColor = Extract<
   | 'red'
 >
 
-export interface ButtonProps {
+export type ButtonProps = {
   size?: [ButtonWidth, ButtonHeight]
   spacing?: [ButtonSpacingY, ButtonSpacingX]
 
@@ -98,10 +99,18 @@ export interface ButtonProps {
 
   is?: 'span'
 
+  ref?: RefObject<any> | ((instance: any) => void) | null | undefined
+
   // navtive props
   htmlHref?: string
   htmlTarget?: '_blank'
-  [key: string]: any
+  type?: 'button' | 'submit'
+  disabled?: boolean
+  form?: string
+  rel?: string
+  onClick?: (event?: React.MouseEvent<HTMLElement, MouseEvent>) => any
+  onMouseEnter?: (event?: React.MouseEvent<HTMLElement, MouseEvent>) => any
+  onMouseLeave?: (event?: React.MouseEvent<HTMLElement, MouseEvent>) => any
 }
 
 /**
@@ -157,7 +166,7 @@ export const Button: React.FC<ButtonProps> = forwardRef(
       htmlHref,
       htmlTarget,
       type = 'button',
-      className,
+
       children,
       ...restProps
     },
@@ -185,7 +194,6 @@ export const Button: React.FC<ButtonProps> = forwardRef(
       [`border-${borderWidth}`]: borderWidth && borderColor,
       [`text-${textColor}`]: !!textColor,
       [`text-active-${textActiveColor}`]: !!textActiveColor && isClickable,
-      [`${className}`]: !!className,
     })
 
     // handle click

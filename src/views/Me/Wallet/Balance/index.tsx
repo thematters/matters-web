@@ -13,7 +13,7 @@ const Balance: React.FC<BalanceProps> = ({ balanceHKD, canPayout }) => {
   return (
     <section className="balance">
       <p className="hint">
-        <Translate zh_hant="可用餘額" zh_hans="可用余额" />
+        <Translate zh_hant="可用餘額" zh_hans="可用余额" en="Balance" />
       </p>
 
       <CurrencyAmount currency={PAYMENT_CURRENCY.HKD} amount={balanceHKD} />
@@ -24,6 +24,7 @@ const Balance: React.FC<BalanceProps> = ({ balanceHKD, canPayout }) => {
             <Translate
               zh_hant={`餘額超過 ${PAYMENT_MINIMAL_PAYOUT_AMOUNT.HKD} HKD 就可以提現啦！`}
               zh_hans={`余额超过 ${PAYMENT_MINIMAL_PAYOUT_AMOUNT.HKD} HKD 就可以提现啦！`}
+              en={`You can withdraw when your balance is over ${PAYMENT_MINIMAL_PAYOUT_AMOUNT.HKD} HKD!`}
             />
           </span>
         </p>

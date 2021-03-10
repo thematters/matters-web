@@ -18,14 +18,14 @@ import {
   Form,
   LanguageContext,
   Translate,
+  useMutation,
 } from '~/components'
-import { useMutation } from '~/components/GQL'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
 
 import {
   PAYMENT_CURRENCY,
-  PAYMENT_DEFAULT_CHARGE_AMOUNT,
-  PAYMENT_MAXIMUM_CHARGE_AMOUNT,
+  PAYMENT_DEFAULT_ADD_CREDIT_AMOUNT,
+  PAYMENT_MAXIMUM_ADD_CREDIT_AMOUNT,
   STRIPE_ERROR_MESSAGES,
 } from '~/common/enums'
 import {
@@ -78,16 +78,21 @@ const BaseAddCredit: React.FC<FormProps> = ({
   const stripe = useStripe()
   const elements = useElements()
   const { lang } = useContext(LanguageContext)
-  const [addCredit] = useMutation<AddCreditType>(ADD_CREDIT)
+  const [addCredit] = useMutation<AddCreditType>(ADD_CREDIT, undefined, {
+    showToast: false,
+  })
 
   const { data: balanceData } = useQuery<WalletBalance>(WALLET_BALANCE, {
     fetchPolicy: 'network-only',
   })
   const balance = balanceData?.viewer?.wallet.balance.HKD || 0
 
+  const [disabled, setDisabled] = useState(true)
   const [completed, setCompleted] = useState(false)
   const [checkoutError, setCheckoutError] = useState('')
   const onCheckoutChange = (event: StripeCardElementChangeEvent) => {
+    setDisabled(!event.complete)
+
     if (event.error) {
       const msg =
         lang === 'en'
@@ -118,7 +123,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
     isSubmitting,
   } = useFormik<FormValues>({
     initialValues: {
-      amount: defaultAmount || PAYMENT_DEFAULT_CHARGE_AMOUNT[currency],
+      amount: defaultAmount || PAYMENT_DEFAULT_ADD_CREDIT_AMOUNT[currency],
     },
     validate: ({ amount }) =>
       _pickBy({
@@ -146,12 +151,14 @@ const BaseAddCredit: React.FC<FormProps> = ({
       const client_secret = data?.addCredit.client_secret
 
       if (!stripe || !elements || !client_secret) {
+        setSubmitting(false)
         return
       }
 
       const cardElement = elements.getElement(CardElement)
 
       if (!cardElement) {
+        setSubmitting(false)
         return
       }
 
@@ -165,7 +172,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
             ? undefined
             : _get(STRIPE_ERROR_MESSAGES[lang], result.error.code || '')
 
-        setFieldError('checkout', msg || result.error.message)
+        setCheckoutError(msg || result.error.message)
 
         analytics.trackEvent('purchase', {
           amount,
@@ -191,10 +198,12 @@ const BaseAddCredit: React.FC<FormProps> = ({
     <Form id={formId} onSubmit={handleSubmit} noBackground>
       <Form.AmountInput
         currency={currency}
-        label={<Translate zh_hant="輸入金額" zh_hans="输入金额" />}
+        label={
+          <Translate zh_hant="輸入金額" zh_hans="输入金额" en="Enter amount" />
+        }
         name="amount"
         min={0}
-        max={PAYMENT_MAXIMUM_CHARGE_AMOUNT[currency]}
+        max={PAYMENT_MAXIMUM_ADD_CREDIT_AMOUNT[currency]}
         step="1"
         ref={inputRef}
         required
@@ -205,14 +214,13 @@ const BaseAddCredit: React.FC<FormProps> = ({
           const amount = e.target.valueAsNumber || 0
           const sanitizedAmount = Math.min(
             Math.floor(amount),
-            PAYMENT_MAXIMUM_CHARGE_AMOUNT[currency]
+            PAYMENT_MAXIMUM_ADD_CREDIT_AMOUNT[currency]
           )
 
-          /// remove extra left pad 0
+          // remove extra left pad 0
           if (inputRef.current) {
             inputRef.current.value = sanitizedAmount
           }
-
           setFieldValue('amount', sanitizedAmount)
         }}
         autoFocus
@@ -235,6 +243,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
             <Translate
               zh_hant="創作者們望眼欲穿，快去送上支持吧"
               zh_hans="创作者们望眼欲穿，快去送上支持吧"
+              en="Let's support creators"
             />
           </p>
           <br />
@@ -272,10 +281,10 @@ const BaseAddCredit: React.FC<FormProps> = ({
         <Dialog.Footer.Button
           type="submit"
           form={formId}
-          disabled={!isValid || isSubmitting || checkoutError}
+          disabled={disabled || !isValid || isSubmitting || !!checkoutError}
           loading={isSubmitting}
         >
-          <Translate zh_hant="確認儲值" zh_hans="确认储值" />
+          <Translate zh_hant="確認儲值" zh_hans="确认储值" en="Confirm" />
         </Dialog.Footer.Button>
       </Dialog.Footer>
     </>

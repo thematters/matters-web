@@ -38,7 +38,13 @@ const BasePaymentPassword: React.FC<PaymentPasswordProps> = ({
     >
       {({ open, ref }) => (
         <Form.List.Item
-          title={<Translate zh_hant="管理交易密碼" zh_hans="管理交易密码" />}
+          title={
+            <Translate
+              zh_hant="管理交易密碼"
+              zh_hans="管理交易密码"
+              en="Manage transaction password"
+            />
+          }
           onClick={open}
           ref={ref}
         />
@@ -47,7 +53,7 @@ const BasePaymentPassword: React.FC<PaymentPasswordProps> = ({
   )
 }
 
-export default () => (
+const PaymentPassword = () => (
   <ResetPaymentPasswordDialog>
     {({ open: openResetPaymentPasswordDialog }) => (
       <BasePaymentPassword
@@ -56,3 +62,5 @@ export default () => (
     )}
   </ResetPaymentPasswordDialog>
 )
+
+export default PaymentPassword

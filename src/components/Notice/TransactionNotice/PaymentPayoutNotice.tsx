@@ -19,7 +19,7 @@ const PaymentPayoutNotice = ({ notice }: { notice: NoticeType }) => {
 
       <section className="content-wrap">
         <p>
-          <Translate zh_hant="你的 " zh_hans="你的 " />
+          <Translate zh_hant="你的 " zh_hans="你的 " en="Your " />
           {tx && (
             <span className="highlight">
               {tx.amount} {tx.currency}
@@ -28,6 +28,9 @@ const PaymentPayoutNotice = ({ notice }: { notice: NoticeType }) => {
           <Translate
             zh_hant={' 提現流程已開始，到帳時間請關注銀行提醒。'}
             zh_hans={' 提现流程已开始，到帐时间请关注银行提醒。'}
+            en={
+              ' withdraw process has started, please refer to your bank for the payout date.'
+            }
           />
         </p>
 

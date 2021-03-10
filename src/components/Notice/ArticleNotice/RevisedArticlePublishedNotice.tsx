@@ -2,7 +2,8 @@ import gql from 'graphql-tag'
 
 import { Translate } from '~/components'
 
-import NoticeArticle from '../NoticeArticle'
+import NoticeArticleCard from '../NoticeArticleCard'
+import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
 import NoticeTypeIcon from '../NoticeTypeIcon'
 import styles from '../styles.css'
@@ -17,14 +18,17 @@ const RevisedArticlePublishedNotice = ({ notice }: { notice: NoticeType }) => {
       </section>
 
       <section className="content-wrap">
-        <NoticeHead notice={notice}>
+        <NoticeHead>
           <Translate
             zh_hant="你的修訂作品已發布到分佈式網絡"
             zh_hans="你的修订作品已发布到分布式网络"
+            en="Your article has been republished to decentralized network"
           />
         </NoticeHead>
 
-        <NoticeArticle article={notice.article} isBlock />
+        <NoticeArticleCard article={notice.article} />
+
+        <NoticeDate notice={notice} />
       </section>
 
       <style jsx>{styles}</style>
@@ -36,13 +40,13 @@ RevisedArticlePublishedNotice.fragments = {
   notice: gql`
     fragment RevisedArticlePublishedNotice on ArticleNotice {
       id
-      ...NoticeHead
+      ...NoticeDate
       article: target {
-        ...NoticeArticle
+        ...NoticeArticleCard
       }
     }
-    ${NoticeArticle.fragments.article}
-    ${NoticeHead.fragments.date}
+    ${NoticeArticleCard.fragments.article}
+    ${NoticeDate.fragments.notice}
   `,
 }
 

@@ -15,8 +15,8 @@ const FeedHeader = ({ type, rightButton }: SidebarHeaderProps) => {
     tags: PATHS.TAGS,
   }
   const titleMap = {
-    authors: <Translate zh_hant="值得關注" zh_hans="值得关注" />,
-    tags: <Translate zh_hant="找你想看的" zh_hans="找你想看的" />,
+    authors: <Translate zh_hant="值得關注" zh_hans="值得关注" en="Authors" />,
+    tags: <Translate zh_hant="找你想看的" zh_hans="找你想看的" en="Topics" />,
   }
   const path = pathMap[type]
 

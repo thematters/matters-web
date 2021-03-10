@@ -8,8 +8,8 @@ import {
   ButtonWidth,
   TextIcon,
   Translate,
+  useMutation,
 } from '~/components'
-import { useMutation } from '~/components/GQL'
 import TOGGLE_FOLLOW_USER from '~/components/GQL/mutations/toggleFollowUser'
 import updateUserFollowerCount from '~/components/GQL/updates/userFollowerCount'
 import updateViewerFolloweeCount from '~/components/GQL/updates/viewerFolloweeCount'
@@ -58,7 +58,7 @@ const Unfollow = ({ user, size }: UnfollowProps) => {
       textColor="white"
       bgColor="green"
       bgActiveColor="red"
-      onClick={unfollow}
+      onClick={() => unfollow()}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >

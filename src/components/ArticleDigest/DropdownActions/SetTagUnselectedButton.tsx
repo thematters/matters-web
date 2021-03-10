@@ -1,13 +1,17 @@
 import gql from 'graphql-tag'
 import _filter from 'lodash/filter'
 import _get from 'lodash/get'
-import { useRouter } from 'next/router'
 
-import { IconUnPin24, Menu, TextIcon, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
+import {
+  IconUnPin24,
+  Menu,
+  TextIcon,
+  Translate,
+  useMutation,
+  useRoute,
+} from '~/components'
 
 import { ADD_TOAST } from '~/common/enums'
-import { getQuery } from '~/common/utils'
 
 import {
   TagArticlesPublic,
@@ -51,8 +55,8 @@ const SetTagUnselectedButton = ({
 }: {
   article: SetTagUnselectedButtonArticle
 }) => {
-  const router = useRouter()
-  const tagId = getQuery({ router, key: 'tagId' })
+  const { getQuery } = useRoute()
+  const tagId = getQuery('tagId')
   const [update] = useMutation<SetTagUnselected>(SET_TAG_UNSELECTED, {
     variables: { id: tagId, articles: [article.id] },
     update: (cache) => {

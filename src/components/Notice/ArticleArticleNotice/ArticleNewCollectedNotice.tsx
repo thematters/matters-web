@@ -4,8 +4,9 @@ import { Translate } from '~/components'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorName from '../NoticeActorName'
-import NoticeArticle from '../NoticeArticle'
-import NoticeCollectionArticle from '../NoticeCollectionArticle'
+import NoticeArticleCard from '../NoticeArticleCard'
+import NoticeArticleTitle from '../NoticeArticleTitle'
+import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
 import styles from '../styles.css'
 
@@ -25,14 +26,19 @@ const ArticleNewCollectedNotice = ({ notice }: { notice: NoticeType }) => {
       </section>
 
       <section className="content-wrap">
-        <NoticeHead notice={notice}>
-          <NoticeActorName user={actor} />{' '}
-          <Translate zh_hant="關聯了你的作品" zh_hans="关联了你的作品" />
+        <NoticeHead>
+          <NoticeActorName user={actor} />
+          <Translate
+            zh_hant=" 關聯了你的作品 "
+            zh_hans=" 关联了你的作品 "
+            en=" replied to "
+          />
+          <NoticeArticleTitle article={notice.article} />
         </NoticeHead>
 
-        <NoticeArticle article={notice.article} isBlock />
+        <NoticeArticleCard article={notice.collection} />
 
-        <NoticeCollectionArticle article={notice.collection} />
+        <NoticeDate notice={notice} />
       </section>
 
       <style jsx>{styles}</style>
@@ -46,23 +52,23 @@ ArticleNewCollectedNotice.fragments = {
       id
       unread
       __typename
-      ...NoticeHead
+      ...NoticeDate
       actors {
         ...NoticeActorAvatarUser
         ...NoticeActorNameUser
       }
       article: target {
-        ...NoticeArticle
+        ...NoticeArticleTitle
       }
       collection: article {
-        ...NoticeCollectionArticle
+        ...NoticeArticleCard
       }
     }
     ${NoticeActorAvatar.fragments.user}
     ${NoticeActorName.fragments.user}
-    ${NoticeArticle.fragments.article}
-    ${NoticeCollectionArticle.fragments.article}
-    ${NoticeHead.fragments.date}
+    ${NoticeArticleTitle.fragments.article}
+    ${NoticeArticleCard.fragments.article}
+    ${NoticeDate.fragments.notice}
   `,
 }
 

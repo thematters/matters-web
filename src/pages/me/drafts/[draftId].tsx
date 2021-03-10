@@ -2,8 +2,10 @@ import MeDraftDetail from '~/views/Me/DraftDetail'
 
 import { Protected } from '~/components'
 
-export default () => (
+const ProtectedMeDraftDetail = () => (
   <Protected>
     <MeDraftDetail />
   </Protected>
 )
+
+export default ProtectedMeDraftDetail

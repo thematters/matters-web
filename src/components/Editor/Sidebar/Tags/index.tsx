@@ -1,5 +1,3 @@
-import _uniq from 'lodash/uniq'
-
 import { IconHashTag24, Tag } from '~/components'
 import {
   SearchSelectDialog,
@@ -11,14 +9,14 @@ import styles from './styles.css'
 
 import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
 
-interface AddTagsProps {
+export interface SidebarTagsProps {
   tags: DigestTag[]
   onEdit: (tag: DigestTag[]) => any
   saving?: boolean
   disabled?: boolean
 }
 
-const AddTags = ({ tags, onEdit, saving, disabled }: AddTagsProps) => {
+const SidebarTags = ({ tags, onEdit, saving, disabled }: SidebarTagsProps) => {
   return (
     <SearchSelectDialog
       title="addTag"
@@ -53,4 +51,4 @@ const AddTags = ({ tags, onEdit, saving, disabled }: AddTagsProps) => {
   )
 }
 
-export default AddTags
+export default SidebarTags

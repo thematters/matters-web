@@ -44,7 +44,11 @@ const ResponseArticle = ({ hasCover, article }: ResponseArticleProps) => {
         />
 
         <span className="collected">
-          <Translate zh_hant="關聯了本作品" zh_hans="关联了本作品" />
+          <Translate
+            zh_hant="關聯了本作品"
+            zh_hans="关联了本作品"
+            en="responded to this article"
+          />
         </span>
       </header>
 

@@ -4,37 +4,53 @@ import { ViewerNotificationSettings_viewer_settings_notification } from './__gen
 
 interface ArticleProps {
   settings: ViewerNotificationSettings_viewer_settings_notification
-  toggle: (type: any) => void
+  toggle: (
+    type: keyof ViewerNotificationSettings_viewer_settings_notification
+  ) => void
 }
 
 const Article = ({ settings, toggle }: ArticleProps) => (
-  <Form.List groupName={<Translate zh_hant="作品" zh_hans="作品" />}>
+  <Form.List
+    groupName={<Translate zh_hant="作品" zh_hans="作品" en="Article" />}
+  >
     <Form.List.Item
-      title={<Translate zh_hant="作品被贊賞" zh_hans="作品被赞赏" />}
-      right={
-        <Switch
-          checked={settings.appreciation}
-          onChange={() => toggle('appreciation')}
+      title={
+        <Translate
+          zh_hant="作品被贊賞"
+          zh_hans="作品被赞赏"
+          en="Appreciations"
         />
       }
-    />
-    <Form.List.Item
-      title={<Translate zh_hant="作品被收藏" zh_hans="作品被收藏" />}
       right={
         <Switch
-          checked={settings.articleSubscription}
-          onChange={() => toggle('articleSubscription')}
+          checked={settings.articleNewAppreciation}
+          onChange={() => toggle('articleNewAppreciation')}
         />
       }
     />
     <Form.List.Item
       title={
-        <Translate zh_hant="收藏的作品有新評論" zh_hans="收藏的作品有新评论" />
+        <Translate zh_hant="作品被收藏" zh_hans="作品被收藏" en="Bookmarks" />
       }
       right={
         <Switch
-          checked={settings.commentSubscribed}
-          onChange={() => toggle('commentSubscribed')}
+          checked={settings.articleNewSubscription}
+          onChange={() => toggle('articleNewSubscription')}
+        />
+      }
+    />
+    <Form.List.Item
+      title={
+        <Translate
+          zh_hant="收藏的作品有新評論"
+          zh_hans="收藏的作品有新评论"
+          en="Comments on bookmarked articles"
+        />
+      }
+      right={
+        <Switch
+          checked={settings.articleSubscribedNewComment}
+          onChange={() => toggle('articleSubscribedNewComment')}
         />
       }
     />

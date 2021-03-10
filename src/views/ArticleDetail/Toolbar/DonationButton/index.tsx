@@ -12,19 +12,22 @@ import {
 } from '~/components'
 
 import { ADD_TOAST, TEXT } from '~/common/enums'
-import { analytics } from '~/common/utils'
+import { analytics, numAbbr } from '~/common/utils'
 
 import { DonationButtonArticle } from './__generated__/DonationButtonArticle'
 
 interface DonationButtonProps {
   article: DonationButtonArticle
+  disabled: boolean
 }
 
 const fragments = {
   article: gql`
     fragment DonationButtonArticle on Article {
       id
-      transactionsReceivedBy(input: { first: 0, purpose: donation }) {
+      donationsToolbar: transactionsReceivedBy(
+        input: { first: 0, purpose: donation }
+      ) {
         totalCount
       }
       author {
@@ -35,7 +38,7 @@ const fragments = {
   `,
 }
 
-const DonationButton = ({ article }: DonationButtonProps) => {
+const DonationButton = ({ article, disabled }: DonationButtonProps) => {
   const viewer = useContext(ViewerContext)
 
   const forbid = () => {
@@ -58,6 +61,7 @@ const DonationButton = ({ article }: DonationButtonProps) => {
             <Translate
               zh_hant="請登入／註冊支持作者"
               zh_hans="请登入／注册支持作者"
+              en="Please login to support the author"
             />
           ),
           customButton: <LoginButton isPlain />,
@@ -75,7 +79,7 @@ const DonationButton = ({ article }: DonationButtonProps) => {
             spacing={['xtight', 'xtight']}
             bgActiveColor="grey-lighter"
             aria-label={TEXT.zh_hant.donation}
-            disabled={article.author.id === viewer.id}
+            disabled={disabled || article.author.id === viewer.id}
             onClick={() => {
               analytics.trackEvent('click_button', { type: 'donate' })
               if (!viewer.isAuthed) {
@@ -95,7 +99,9 @@ const DonationButton = ({ article }: DonationButtonProps) => {
               spacing="xtight"
               size="sm"
             >
-              {article.transactionsReceivedBy.totalCount || undefined}
+              {article.donationsToolbar.totalCount > 0
+                ? numAbbr(article.donationsToolbar.totalCount)
+                : undefined}
             </TextIcon>
           </Button>
         )}

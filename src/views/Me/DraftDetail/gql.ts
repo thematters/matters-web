@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { ArticleDigestDropdown } from '~/components'
+import { ArticleDigestDropdown, CircleDigest } from '~/components'
 import { fragments as EditorFragments } from '~/components/Editor/fragments'
 import assetFragment from '~/components/GQL/fragments/asset'
 
@@ -25,9 +25,13 @@ export const editMetaFragment = gql`
         }
       }
     }
+    circle {
+      ...DigestRichCirclePublic
+    }
   }
   ${ArticleDigestDropdown.fragments.article}
   ${assetFragment}
+  ${CircleDigest.Rich.fragments.circle.public}
 `
 
 /**
@@ -35,6 +39,12 @@ export const editMetaFragment = gql`
  */
 export const DRAFT_DETAIL = gql`
   query DraftDetailQuery($id: ID!) {
+    viewer {
+      id
+      ownCircles {
+        ...DigestRichCirclePublic
+      }
+    }
     node(input: { id: $id }) {
       id
       ... on Draft {
@@ -67,8 +77,15 @@ export const DRAFT_ASSETS = gql`
  * Editing draft content, cover, tags & collection
  */
 export const SET_CONTENT = gql`
-  mutation SetDraftContent($id: ID!, $title: String, $content: String) {
-    putDraft(input: { id: $id, title: $title, content: $content }) {
+  mutation SetDraftContent(
+    $id: ID!
+    $title: String
+    $content: String
+    $summary: String
+  ) {
+    putDraft(
+      input: { id: $id, title: $title, content: $content, summary: $summary }
+    ) {
       id
       title
       content
@@ -76,6 +93,7 @@ export const SET_CONTENT = gql`
       assets {
         ...Asset
       }
+      summary
     }
   }
   ${assetFragment}
@@ -115,4 +133,16 @@ export const SET_TAGS = gql`
     }
   }
   ${editMetaFragment}
+`
+
+export const SET_CIRCLE = gql`
+  mutation SetDraftCircle($id: ID!, $circle: ID) {
+    putDraft(input: { id: $id, circle: $circle }) {
+      id
+      circle {
+        ...DigestRichCirclePublic
+      }
+    }
+  }
+  ${CircleDigest.Rich.fragments.circle.public}
 `

@@ -1,13 +1,17 @@
 import gql from 'graphql-tag'
 import _isArray from 'lodash/isArray'
-import { useRouter } from 'next/router'
 
-import { IconRemove24, Menu, TextIcon, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
+import {
+  IconRemove24,
+  Menu,
+  TextIcon,
+  Translate,
+  useMutation,
+  useRoute,
+} from '~/components'
 import updateTagArticlesCount from '~/components/GQL/updates/tagArticlesCount'
 
 import { REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
-import { getQuery } from '~/common/utils'
 
 import { DeleteArticlesTags } from './__generated__/DeleteArticlesTags'
 import { RemoveTagButtonArticle } from './__generated__/RemoveTagButtonArticle'
@@ -41,8 +45,8 @@ const fragments = {
 }
 
 const RemoveTagButton = ({ article }: { article: RemoveTagButtonArticle }) => {
-  const router = useRouter()
-  const id = getQuery({ router, key: 'tagId' })
+  const { getQuery } = useRoute()
+  const id = getQuery('tagId')
 
   const [deleteArticlesTags] = useMutation<DeleteArticlesTags>(
     DELETE_ARTICLES_TAGS,

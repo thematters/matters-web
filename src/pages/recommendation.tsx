@@ -7,9 +7,9 @@ import {
   EmptyArticle,
   InfiniteScroll,
   Layout,
+  QueryError,
   Spinner,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 
 import { mergeConnections } from '~/common/utils'
 
@@ -101,8 +101,10 @@ const Feed = () => {
   )
 }
 
-export default () => (
+const Recommendation = () => (
   <Layout.Main>
     <Feed />
   </Layout.Main>
 )
+
+export default Recommendation

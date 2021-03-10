@@ -41,9 +41,12 @@
   &.overflow-hidden {
     overflow: hidden;
   }
+}
+
+.head-wrap {
+  margin-bottom: var(--spacing-x-tight);
 
   & h4 {
-    margin-bottom: var(--spacing-xx-tight);
     font-weight: var(--font-weight-normal);
     color: var(--color-grey);
 
@@ -53,19 +56,9 @@
     }
   }
 
-  & .head-wrap {
-    @mixin flex-start-space-between;
-
-    margin-bottom: var(--spacing-x-tight);
-
-    & h4 {
-      margin: 0;
-    }
-
-    & section.date {
-      flex-shrink: 0;
-      margin: 0 0 0 var(--spacing-xx-tight);
-    }
+  & p {
+    margin-top: var(--spacing-xx-tight);
+    color: var(--color-grey);
   }
 }
 

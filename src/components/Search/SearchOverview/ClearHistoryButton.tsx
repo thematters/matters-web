@@ -1,7 +1,6 @@
 import gql from 'graphql-tag'
 
-import { Button, TextIcon, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
+import { Button, TextIcon, Translate, useMutation } from '~/components'
 
 import { ADD_TOAST } from '~/common/enums'
 
@@ -90,7 +89,11 @@ const ClearHistoryButton = () => {
             detail: {
               color: 'green',
               content: (
-                <Translate zh_hant="已清空搜尋記錄" zh_hans="已清空搜索记录" />
+                <Translate
+                  zh_hant="已清空搜尋記錄"
+                  zh_hans="已清空搜索记录"
+                  en="search history cleared"
+                />
               ),
             },
           })

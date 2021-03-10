@@ -6,13 +6,13 @@ import {
   EmptyTagArticles,
   InfiniteScroll,
   List,
+  QueryError,
   Spinner,
   useEventListener,
   usePublicQuery,
   usePullToRefresh,
   ViewerContext,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 import {
   TAG_ARTICLES_PRIVATE,
   TAG_ARTICLES_PUBLIC,
@@ -98,7 +98,7 @@ const TagDetailArticles = ({ tagId, selected }: TagArticlesProps) => {
   const loadMore = async () => {
     analytics.trackEvent('load_more', {
       type: selected ? 'tag_detail_selected' : 'tag_detail_latest',
-      location: edges ? edges.length : 0,
+      location: edges?.length || 0,
     })
 
     const { data: newData } = await fetchMore({

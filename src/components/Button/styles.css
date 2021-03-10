@@ -29,6 +29,10 @@ span.container {
   color: var(--color-red);
 }
 
+.text-grey {
+  color: var(--color-grey);
+}
+
 .text-active-white {
   &:hover,
   &:focus {
@@ -386,6 +390,12 @@ span.container {
 .border-red {
   & .hotarea {
     border-color: var(--color-red);
+  }
+}
+
+.border-likecoin-green {
+  & .hotarea {
+    border-color: var(--color-likecoin-green);
   }
 }
 

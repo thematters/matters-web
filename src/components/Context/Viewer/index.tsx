@@ -14,6 +14,7 @@ const ViewerFragments = {
         userName
         displayName
         avatar
+        paymentPointer
         liker {
           likerId
           civicLiker
@@ -24,6 +25,7 @@ const ViewerFragments = {
         }
         info {
           createdAt
+          description
           email
           agreeOn
           userNameEditable

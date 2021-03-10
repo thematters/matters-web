@@ -4,6 +4,7 @@ import React, { useContext } from 'react'
 import {
   ArticleDigestTitle,
   Card,
+  CircleDigest,
   DateTime,
   Translate,
   UserDigest,
@@ -44,11 +45,15 @@ const fragments = {
         ... on Article {
           ...ArticleDigestTitleArticle
         }
+        ... on Circle {
+          ...DigestPlainCircle
+        }
       }
       message
     }
     ${UserDigest.Mini.fragments.user}
     ${ArticleDigestTitle.fragments.article}
+    ${CircleDigest.Plain.fragments.circle}
   `,
 }
 
@@ -67,15 +72,22 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
   } = tx
 
   const isViewerSender = sender && viewer.id === sender.id
+  const isViewerRecipient = recipient && viewer.id === recipient.id
 
   const isAddCredit = purpose === 'addCredit'
   const isRefund = purpose === 'refund'
   const isDonation = purpose === 'donation'
   const isPayout = purpose === 'payout'
+  const isSubscription = purpose === 'subscriptionSplit'
   const isWalletAction = isAddCredit || isRefund || isPayout
 
   const article = target?.__typename === 'Article' && target
-  const path = article ? toPath({ page: 'articleDetail', article }) : null
+  const circle = target?.__typename === 'Circle' && target
+  const path = article
+    ? toPath({ page: 'articleDetail', article })
+    : circle
+    ? toPath({ page: 'circleDetail', circle })
+    : null
 
   return (
     <Card {...path} spacing={['base', 'base']}>
@@ -83,6 +95,7 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
         <section className="tx-icon">
           <Action
             isSender={!!isViewerSender}
+            isSubscription={isSubscription}
             isWalletAction={isWalletAction}
             sender={sender}
             recipient={recipient}
@@ -109,6 +122,24 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
                   {isPayout && <Translate id="paymentPayout" />}
                 </p>
               </section>
+            )}
+
+            {isSubscription && circle && (
+              <>
+                <section className="subscription">
+                  <p>
+                    {isViewerRecipient && (
+                      <Translate zh_hant="圍爐營收" zh_hans="围炉营收" />
+                    )}
+                    {isViewerSender && (
+                      <Translate zh_hant="圍爐訂閱" zh_hans="围炉订阅" />
+                    )}
+                  </p>
+                </section>
+                <section className="title">
+                  <CircleDigest.Title circle={circle} is="h2" />
+                </section>
+              </>
             )}
 
             <section>

@@ -22,6 +22,7 @@ import { ToolbarArticlePublic } from './__generated__/ToolbarArticlePublic'
 export type ToolbarProps = {
   article: ToolbarArticlePublic & Partial<ToolbarArticlePrivate>
   privateFetched: boolean
+  lock: boolean
 } & DropdownActionsControls
 
 const fragments = {
@@ -55,29 +56,40 @@ const fragments = {
   },
 }
 
-const Toolbar = ({ article, privateFetched }: ToolbarProps) => {
+const Toolbar = ({ article, privateFetched, lock, ...props }: ToolbarProps) => {
   const isSmallUp = useResponsive('sm-up')
 
   return (
     <section className="toolbar">
-      <ReCaptchaProvider action="appreciateArticle">
-        <AppreciationButton article={article} privateFetched={privateFetched} />
-      </ReCaptchaProvider>
+      <section className="buttons">
+        <ReCaptchaProvider action="appreciateArticle">
+          <AppreciationButton
+            article={article}
+            privateFetched={privateFetched}
+            disabled={lock}
+          />
+        </ReCaptchaProvider>
 
-      <DonationButton article={article} />
+        <DonationButton article={article} disabled={lock} />
 
-      <section className="comment-bar">
-        <CommentBar article={article} />
+        <section className="comment-bar">
+          <CommentBar article={article} disabled={lock} />
+        </section>
+
+        <BookmarkButton article={article} size="md-s" inCard={false} />
+
+        {isSmallUp && <ShareButton iconSize="md-s" inCard={false} />}
+
+        <DropdownActions
+          article={article}
+          color="black"
+          size="md-s"
+          inCard={false}
+          hasShare={!isSmallUp}
+          hasExtend={!lock}
+          {...props}
+        />
       </section>
-
-      <BookmarkButton article={article} size="md-s" inCard={false} />
-      {isSmallUp && <ShareButton iconSize="md-s" inCard={false} />}
-      <DropdownActions
-        article={article}
-        color="black"
-        size="md-s"
-        inCard={false}
-      />
 
       <style jsx>{styles}</style>
     </section>

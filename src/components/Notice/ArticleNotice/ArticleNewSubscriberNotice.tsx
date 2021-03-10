@@ -7,7 +7,8 @@ import { numAbbr } from '~/common/utils'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorName from '../NoticeActorName'
-import NoticeArticle from '../NoticeArticle'
+import NoticeArticleCard from '../NoticeArticleCard'
+import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
 import NoticeTypeIcon from '../NoticeTypeIcon'
 import styles from '../styles.css'
@@ -26,14 +27,14 @@ const ArticleNewSubscriberNotice = ({ notice }: { notice: NoticeType }) => {
     <section className="container">
       <section className="avatar-wrap">
         {isMultiActors ? (
-          <NoticeTypeIcon type="bookmark" hasSpacing />
+          <NoticeTypeIcon type="bookmark" />
         ) : (
           <NoticeActorAvatar user={notice.actors[0]} />
         )}
       </section>
 
       <section className="content-wrap">
-        <NoticeHead hasDate={!isMultiActors} notice={notice}>
+        <NoticeHead>
           {notice.actors.slice(0, 2).map((actor, index) => (
             <Fragment key={index}>
               <NoticeActorName user={actor} />
@@ -44,20 +45,27 @@ const ArticleNewSubscriberNotice = ({ notice }: { notice: NoticeType }) => {
             <Translate
               zh_hant={`等 ${numAbbr(actorsCount)} 人`}
               zh_hans={`等 ${numAbbr(actorsCount)} 人`}
+              en={`etc. ${numAbbr(actorsCount)} users`}
             />
           )}
-          <Translate zh_hant="收藏了你的作品" zh_hans="收藏了你的作品" />
+          <Translate
+            zh_hant="收藏了你的作品"
+            zh_hans="收藏了你的作品"
+            en="bookmarked your article"
+          />
         </NoticeHead>
 
-        <NoticeArticle article={notice.article} isBlock />
+        <NoticeArticleCard article={notice.article} />
 
         {isMultiActors && (
           <section className="multi-actor-avatars">
             {notice.actors.map((actor, index) => (
-              <NoticeActorAvatar key={index} user={actor} />
+              <NoticeActorAvatar key={index} user={actor} size="md" />
             ))}
           </section>
         )}
+
+        <NoticeDate notice={notice} />
       </section>
 
       <style jsx>{styles}</style>
@@ -69,19 +77,19 @@ ArticleNewSubscriberNotice.fragments = {
   notice: gql`
     fragment ArticleNewSubscriberNotice on ArticleNotice {
       id
-      ...NoticeHead
+      ...NoticeDate
       actors {
         ...NoticeActorAvatarUser
         ...NoticeActorNameUser
       }
       article: target {
-        ...NoticeArticle
+        ...NoticeArticleCard
       }
     }
     ${NoticeActorAvatar.fragments.user}
     ${NoticeActorName.fragments.user}
-    ${NoticeArticle.fragments.article}
-    ${NoticeHead.fragments.date}
+    ${NoticeArticleCard.fragments.article}
+    ${NoticeDate.fragments.notice}
   `,
 }
 

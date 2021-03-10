@@ -1,8 +1,7 @@
 import gql from 'graphql-tag'
 import { useEffect } from 'react'
 
-import { Dialog, Spinner, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
+import { Dialog, Spinner, Translate, useMutation } from '~/components'
 
 import { GenerateLikerId } from './__generated__/GenerateLikerId'
 
@@ -41,7 +40,7 @@ const Generating: React.FC<Props> = ({ prevStep, nextStep }) => {
 
   return (
     <>
-      <Dialog.Message error={!!error} spacing="md">
+      <Dialog.Message type={error ? 'error' : undefined} spacing="md">
         {error ? (
           <h3>
             <Translate

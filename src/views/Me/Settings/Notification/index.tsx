@@ -1,13 +1,19 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { Head, Layout, PullToRefresh, Spacer, Spinner } from '~/components'
-import { useMutation } from '~/components/GQL'
+import {
+  Head,
+  Layout,
+  PullToRefresh,
+  Spacer,
+  Spinner,
+  useMutation,
+} from '~/components'
 
 import ArticleSettings from './Article'
+import CircleSettings from './Circle'
 import CommentSettings from './Comment'
 import MeSettings from './Me'
-import OtherSettings from './Other'
 import PreferenceSettings from './Preference'
 
 import { UpdateViewerNotification } from './__generated__/UpdateViewerNotification'
@@ -23,14 +29,14 @@ const VIEWER_NOTIFICATION_SETTINGS = gql`
           enable
           email
           mention
-          follow
-          comment
-          appreciation
-          articleSubscription
-          commentSubscribed
-          commentPinned
-          officialNotice
-          reportFeedback
+          userNewFollower
+          articleNewComment
+          articleNewAppreciation
+          articleNewSubscription
+          articleSubscribedNewComment
+          articleCommentPinned
+          circleNewFollower
+          circleNewDiscussion
         }
       }
     }
@@ -49,21 +55,21 @@ const UPDATE_VIEWER_NOTIFICATION = gql`
           enable
           email
           mention
-          follow
-          comment
-          appreciation
-          articleSubscription
-          commentSubscribed
-          commentPinned
-          officialNotice
-          reportFeedback
+          userNewFollower
+          articleNewComment
+          articleNewAppreciation
+          articleNewSubscription
+          articleSubscribedNewComment
+          articleCommentPinned
+          circleNewFollower
+          circleNewDiscussion
         }
       }
     }
   }
 `
 
-const NotificationSettings = () => {
+const BaseNotificationSettings = () => {
   const [update] = useMutation<UpdateViewerNotification>(
     UPDATE_VIEWER_NOTIFICATION
   )
@@ -110,12 +116,12 @@ const NotificationSettings = () => {
       <MeSettings toggle={toggle} settings={settings} />
       <ArticleSettings toggle={toggle} settings={settings} />
       <CommentSettings toggle={toggle} settings={settings} />
-      <OtherSettings toggle={toggle} settings={settings} />
+      <CircleSettings toggle={toggle} settings={settings} />
     </PullToRefresh>
   )
 }
 
-export default () => (
+const NotificationSettings = () => (
   <Layout.Main bgColor="grey-lighter">
     <Layout.Header
       left={<Layout.Header.BackButton />}
@@ -124,8 +130,10 @@ export default () => (
 
     <Head title={{ id: 'settingsNotification' }} />
 
-    <NotificationSettings />
+    <BaseNotificationSettings />
 
     <Spacer size="xxxloose" />
   </Layout.Main>
 )
+
+export default NotificationSettings

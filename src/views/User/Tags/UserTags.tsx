@@ -1,20 +1,19 @@
-import { useRouter } from 'next/router'
-
 import {
   Card,
   EmptyTag,
   Head,
   InfiniteScroll,
   List,
+  QueryError,
   Spinner,
   Tag,
   Translate,
   usePublicQuery,
   usePullToRefresh,
+  useRoute,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 
-import { analytics, getQuery, mergeConnections, toPath } from '~/common/utils'
+import { analytics, mergeConnections, toPath } from '~/common/utils'
 
 import IMAGE_LOGO_192 from '@/public/static/icon-192x192.png?url'
 
@@ -25,8 +24,8 @@ import styles from './styles.css'
 import { UserTagsPublic } from './__generated__/UserTagsPublic'
 
 const UserTags = () => {
-  const router = useRouter()
-  const userName = getQuery({ router, key: 'userName' })
+  const { getQuery } = useRoute()
+  const userName = getQuery('name')
 
   /**
    * Data Fetching
@@ -46,6 +45,7 @@ const UserTags = () => {
   const user = data?.user
   const connectionPath = 'user.tags'
   const { edges, pageInfo } = user?.tags || {}
+  const hasSubscriptions = (user?.subscribedCircles.totalCount || 0) > 0
 
   // load next page
   const loadMore = async () => {
@@ -78,33 +78,27 @@ const UserTags = () => {
    * Render
    */
   if (loading) {
-    return <Spinner />
+    return (
+      <>
+        <UserTabs hasSubscriptions={hasSubscriptions} />
+        <Spinner />
+      </>
+    )
   }
 
   if (error) {
-    return <QueryError error={error} />
-  }
-
-  if (!user) {
-    return null
-  }
-
-  const CustomHead = () => (
-    <Head
-      title={{
-        zh_hant: `${user.displayName}主理與協作的標籤`,
-        zh_hans: `${user.displayName}主理与协作的標籤`,
-      }}
-      description={user.info.description}
-      image={user.info.profileCover || IMAGE_LOGO_192}
-    />
-  )
-
-  if (!edges || edges.length <= 0 || !pageInfo) {
     return (
       <>
-        <CustomHead />
-        <UserTabs />
+        <UserTabs hasSubscriptions={hasSubscriptions} />
+        <QueryError error={error} />
+      </>
+    )
+  }
+
+  if (!user || user?.status?.state === 'archived') {
+    return (
+      <>
+        <UserTabs hasSubscriptions={hasSubscriptions} />
         <EmptyTag
           description={
             <Translate
@@ -117,11 +111,41 @@ const UserTags = () => {
     )
   }
 
+  const CustomHead = () => (
+    <Head
+      title={{
+        zh_hant: `${user.displayName} 主理與協作的標籤`,
+        zh_hans: `${user.displayName} 主理与协作的標籤`,
+        en: `Tags ${user.displayName} maintaining or collaborating`,
+      }}
+      description={user.info.description}
+      image={user.info.profileCover || IMAGE_LOGO_192}
+    />
+  )
+
+  if (!edges || edges.length <= 0 || !pageInfo) {
+    return (
+      <>
+        <CustomHead />
+        <UserTabs hasSubscriptions={hasSubscriptions} />
+        <EmptyTag
+          description={
+            <Translate
+              zh_hant="還沒有主理與協作標籤喔"
+              zh_hans="还没有主理与协作标签喔"
+              en="There is no maintaining and collabrating tags yet"
+            />
+          }
+        />
+      </>
+    )
+  }
+
   return (
     <>
       <CustomHead />
 
-      <UserTabs />
+      <UserTabs hasSubscriptions={hasSubscriptions} />
 
       <section className="container">
         <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>

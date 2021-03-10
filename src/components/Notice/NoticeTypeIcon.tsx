@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import {
   IconAvatarLogo32,
   IconBookmark16,
+  IconCircle16,
   IconClap16,
   IconComment16,
   IconUpVote16,
@@ -20,6 +21,7 @@ type IconType =
   | 'user'
   | 'upvote'
   | 'volume'
+  | 'circle'
 
 const getIcon = (type: IconType) => {
   switch (type) {
@@ -29,28 +31,24 @@ const getIcon = (type: IconType) => {
       return <IconBookmark16 color="green" />
     case 'comment':
       return <IconComment16 color="green" />
-    case 'logo':
-      return <IconAvatarLogo32 size="lg" />
     case 'user':
-      return <IconUser16 color="green" size="lg" />
+      return <IconUser16 color="green" />
     case 'upvote':
       return <IconUpVote16 color="green" />
     case 'volume':
       return <IconVolume32 color="grey-dark" size="lg" />
+    case 'circle':
+      return <IconCircle16 color="grey-dark" />
+    case 'logo':
+      return <IconAvatarLogo32 size="lg" />
   }
 }
 
-const NoticeTypeIcon = ({
-  hasSpacing,
-  type,
-}: {
-  hasSpacing?: boolean
-  type: IconType
-}) => {
+const NoticeTypeIcon = ({ type }: { type: IconType }) => {
   const icon = getIcon(type)
 
   const iconWrapClasses = classNames({
-    'icon-wrap': hasSpacing,
+    'icon-wrap': ['logo', 'volume'].indexOf(type) < 0,
   })
 
   return (

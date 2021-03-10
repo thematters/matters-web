@@ -6,12 +6,12 @@ import {
   EmptyArticle,
   InfiniteScroll,
   List,
+  QueryError,
   Spinner,
   TextIcon,
   Translate,
   UserDigest,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 import { UserDigestMiniProps } from '~/components/UserDigest/Mini'
 
 import { analytics, mergeConnections } from '~/common/utils'
@@ -127,7 +127,7 @@ const ArticlesFeed = () => {
         />
 
         <TextIcon size="sm" color="grey-dark">
-          <Translate zh_hant="發布了" zh_hans="发布了" />
+          <Translate zh_hant="發布了" zh_hans="发布了" en="published" />
         </TextIcon>
         <style jsx>{styles}</style>
       </section>

@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import ResponseComment from '../ResponseComment'
+import { ThreadComment } from '~/components'
 
 export const FEATURED_COMMENTS_PUBLIC = gql`
   query FeaturedCommentsPublic(
@@ -20,15 +20,15 @@ export const FEATURED_COMMENTS_PUBLIC = gql`
         }
         edges {
           node {
-            ...ResponseCommentCommentPublic
-            ...ResponseCommentCommentPrivate
+            ...ThreadCommentCommentPublic
+            ...ThreadCommentCommentPrivate
           }
         }
       }
     }
   }
-  ${ResponseComment.fragments.comment.public}
-  ${ResponseComment.fragments.comment.private}
+  ${ThreadComment.fragments.comment.public}
+  ${ThreadComment.fragments.comment.private}
 `
 
 export const FEATURED_COMMENTS_PRIVATE = gql`
@@ -36,9 +36,9 @@ export const FEATURED_COMMENTS_PRIVATE = gql`
     nodes(input: { ids: $ids }) {
       id
       ... on Comment {
-        ...ResponseCommentCommentPrivate
+        ...ThreadCommentCommentPrivate
       }
     }
   }
-  ${ResponseComment.fragments.comment.private}
+  ${ThreadComment.fragments.comment.private}
 `

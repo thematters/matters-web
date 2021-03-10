@@ -6,13 +6,13 @@ import {
   InfiniteScroll,
   Layout,
   List,
+  QueryError,
   Spinner,
   Translate,
   usePublicQuery,
   UserDigest,
   ViewerContext,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 
 import { analytics, mergeConnections } from '~/common/utils'
 
@@ -20,7 +20,7 @@ import { ALL_AUTHORS_PRIVATE, ALL_AUTHORS_PUBLIC } from './gql'
 
 import { AllAuthorsPublic } from './__generated__/AllAuthorsPublic'
 
-const Authors = () => {
+const BaseAuthors = () => {
   const viewer = useContext(ViewerContext)
 
   /**
@@ -104,7 +104,13 @@ const Authors = () => {
   if (!edges || edges.length <= 0 || !pageInfo) {
     return (
       <EmptyWarning
-        description={<Translate zh_hant="還沒有作者" zh_hans="还没有作者" />}
+        description={
+          <Translate
+            zh_hant="還沒有作者"
+            zh_hans="还没有作者"
+            en="no authors yet"
+          />
+        }
       />
     )
   }
@@ -136,7 +142,7 @@ const Authors = () => {
   )
 }
 
-export default () => (
+const Authors = () => (
   <Layout.Main>
     <Layout.Header
       left={<Layout.Header.BackButton />}
@@ -145,6 +151,8 @@ export default () => (
 
     <Head title={{ id: 'allAuthors' }} />
 
-    <Authors />
+    <BaseAuthors />
   </Layout.Main>
 )
+
+export default Authors

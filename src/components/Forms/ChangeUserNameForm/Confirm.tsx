@@ -3,8 +3,14 @@ import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import React, { useContext } from 'react'
 
-import { Dialog, Form, LanguageContext, Layout, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
+import {
+  Dialog,
+  Form,
+  LanguageContext,
+  Layout,
+  Translate,
+  useMutation,
+} from '~/components'
 
 import {
   parseFormSubmitErrors,
@@ -40,7 +46,11 @@ const Confirm: React.FC<FormProps> = ({
   submitCallback,
   closeDialog,
 }) => {
-  const [update] = useMutation<UpdateUserInfoUserName>(UPDATE_USER_INFO)
+  const [update] = useMutation<UpdateUserInfoUserName>(
+    UPDATE_USER_INFO,
+    undefined,
+    { showToast: false }
+  )
   const { lang } = useContext(LanguageContext)
   const isInPage = purpose === 'page'
   const formId = 'username-confirm-form'
@@ -81,7 +91,28 @@ const Confirm: React.FC<FormProps> = ({
         setSubmitting(false)
 
         const [messages, codes] = parseFormSubmitErrors(error, lang)
-        setFieldError('userName', messages[codes[0]])
+        codes.forEach((code) => {
+          if (code === 'NAME_EXISTS') {
+            setFieldError(
+              'userName',
+              translate({
+                zh_hant: 'Oops！此 Matters ID 已被使用了，換一個試試',
+                zh_hans: 'Oops！此 Matters ID 已被使用了，换一个试试',
+                lang,
+              })
+            )
+          } else if (code === 'NAME_INVALID') {
+            setFieldError(
+              'userName',
+              translate({
+                id: 'hintUserName',
+                lang,
+              })
+            )
+          } else {
+            setFieldError('userName', messages[code])
+          }
+        })
       }
     },
   })

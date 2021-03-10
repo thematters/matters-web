@@ -1,3 +1,5 @@
+import { UserLanguage } from '@/__generated__/globalTypes'
+
 export const langConvert = {
   og2html: (lang: OGLanguage): HTMLLanguage => {
     return ({
@@ -16,10 +18,10 @@ export const langConvert = {
   },
   html2sys: (lang: HTMLLanguage): Language => {
     return ({
-      'zh-Hans': 'zh_hans',
-      'zh-Hant': 'zh_hant',
-      en: 'en',
-    }[lang] || 'zh_hant') as Language
+      'zh-Hans': UserLanguage.zh_hans,
+      'zh-Hant': UserLanguage.zh_hant,
+      en: UserLanguage.en,
+    }[lang] || UserLanguage.zh_hant) as Language
   },
   sys2Og: (lang: Language): OGLanguage => {
     return ({
@@ -27,5 +29,17 @@ export const langConvert = {
       zh_hans: 'zh-CN',
       en: 'en',
     }[lang] || 'zh_HK') as OGLanguage
+  },
+  bcp472sys: (Lang: string): UserLanguage => {
+    const lang = Lang.toLowerCase()
+    if (lang === 'zh' || lang === 'zh-cn') {
+      return UserLanguage.zh_hans
+    }
+
+    if (lang.startsWith('en')) {
+      return UserLanguage.en
+    }
+
+    return UserLanguage.zh_hant
   },
 }

@@ -3,6 +3,7 @@ import { useContext } from 'react'
 import {
   Card,
   IconArrowRight16,
+  Layout,
   RecommendAuthorDialog,
   RecommendTagDialog,
   Translate,
@@ -24,17 +25,16 @@ const NavBar = () => {
 
   return (
     <section className="nav-bar">
-      <div className="l-row full">
-        <div className="l-col-three-left" />
-        <div className="l-col-three-right">
-          <OnboardingTasksDialog>
-            {({ open: openOnboardingTasksDialog }) => (
-              <Card
-                bgColor="none"
-                spacing={[0, 0]}
-                onClick={openOnboardingTasksDialog}
-              >
-                <section className="content">
+      <Layout.FixedMain>
+        <OnboardingTasksDialog>
+          {({ open: openOnboardingTasksDialog }) => (
+            <Card
+              bgColor="none"
+              spacing={[0, 0]}
+              onClick={openOnboardingTasksDialog}
+            >
+              <section className="content">
+                <section className="inner">
                   <section className="left">
                     {withIcon(IconOnboardLaunch)({
                       size: 'xl-m',
@@ -42,7 +42,11 @@ const NavBar = () => {
                     })}
 
                     <p>
-                      <Translate zh_hant="星際導航" zh_hans="星际导航" />
+                      <Translate
+                        zh_hant="星際導航"
+                        zh_hans="星际导航"
+                        en="galaxy guide"
+                      />
                       <span className="highlight"> {doneCount}/5</span>
                     </p>
                   </section>
@@ -51,11 +55,11 @@ const NavBar = () => {
                     <IconArrowRight16 color="grey" />
                   </section>
                 </section>
-              </Card>
-            )}
-          </OnboardingTasksDialog>
-        </div>
-      </div>
+              </section>
+            </Card>
+          )}
+        </OnboardingTasksDialog>
+      </Layout.FixedMain>
 
       <RecommendAuthorDialog />
       <RecommendTagDialog />

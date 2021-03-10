@@ -7,12 +7,12 @@ import {
   IconReload12,
   List,
   PageHeader,
+  QueryError,
   Spinner,
   TextIcon,
   Translate,
   UserDigest,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 
 import styles from './styles.css'
 
@@ -73,9 +73,9 @@ export const AuthorPicker = ({ title }: { title: React.ReactNode }) => {
           </Button>
 
           <span className="follow-info">
-            <Translate zh_hant="已追蹤 " zh_hans="已追踪 " />
+            <Translate zh_hant="已追蹤 " zh_hans="已追踪 " en="followed " />
             <span className="hightlight">{followeeCount}</span>
-            <Translate zh_hant=" 位" zh_hans=" 位" />
+            <Translate zh_hant=" 位" zh_hans=" 位" en=" authors" />
           </span>
         </section>
       </PageHeader>

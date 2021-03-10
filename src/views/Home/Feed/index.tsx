@@ -7,12 +7,12 @@ import {
   EmptyArticle,
   InfiniteScroll,
   List,
+  QueryError,
   Spinner,
   usePublicQuery,
   useResponsive,
   ViewerContext,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
 import { analytics, mergeConnections } from '~/common/utils'
@@ -229,6 +229,14 @@ const MainFeed = ({ feedSortType: sortBy, viewMode }: MainFeedProps) => {
                   analytics.trackEvent('click_feed', {
                     type: sortBy,
                     contentType: 'user',
+                    styleType: 'subtitle',
+                    location: i,
+                  })
+                }}
+                onClickCircle={() => {
+                  analytics.trackEvent('click_feed', {
+                    type: sortBy,
+                    contentType: 'circle',
                     styleType: 'subtitle',
                     location: i,
                   })
