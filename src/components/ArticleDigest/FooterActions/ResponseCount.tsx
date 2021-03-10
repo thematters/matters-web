@@ -10,8 +10,6 @@ import { ActionsResponseCountArticle } from './__generated__/ActionsResponseCoun
 
 interface ResponseCountProps {
   article: ActionsResponseCountArticle
-  size?: 'sm' | 'xs'
-  inCard: boolean
 }
 
 const fragments = {
@@ -29,11 +27,7 @@ const fragments = {
   `,
 }
 
-const ResponseCount = ({
-  article,
-  size = 'sm',
-  inCard,
-}: ResponseCountProps) => {
+const ResponseCount = ({ article }: ResponseCountProps) => {
   const { articleState: state } = article
   const path = toPath({
     page: 'articleDetail',
@@ -45,17 +39,12 @@ const ResponseCount = ({
   return (
     <Button
       spacing={['xtight', 'xtight']}
-      bgActiveColor={inCard ? 'grey-lighter-active' : 'grey-lighter'}
+      bgActiveColor="grey-lighter-active"
       {...path}
       disabled={isBanned}
       aira-label="查看評論"
     >
-      <TextIcon
-        icon={<IconComment16 size={size === 'xs' ? 'xs' : undefined} />}
-        color="grey"
-        weight="md"
-        size={size}
-      >
+      <TextIcon icon={<IconComment16 />} color="grey" weight="md" size="sm">
         {article.responseCount > 0 ? numAbbr(article.responseCount) : undefined}
       </TextIcon>
     </Button>

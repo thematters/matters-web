@@ -8,9 +8,9 @@ import {
   InfiniteScroll,
   Layout,
   List,
+  QueryError,
   Spinner,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 
 import { analytics, mergeConnections } from '~/common/utils'
 
@@ -44,7 +44,7 @@ const ME_HISTORY_FEED = gql`
   ${ArticleDigestFeed.fragments.article.private}
 `
 
-const MeHistory = () => {
+const BaseMeHistory = () => {
   const { data, loading, error, fetchMore, refetch } = useQuery<MeHistoryFeed>(
     ME_HISTORY_FEED
   )
@@ -117,7 +117,7 @@ const MeHistory = () => {
   )
 }
 
-export default () => (
+const MeHistory = () => (
   <Layout.Main>
     <Layout.Header
       left={<Layout.Header.BackButton />}
@@ -126,6 +126,8 @@ export default () => (
 
     <Head title={{ id: 'readHistory' }} />
 
-    <MeHistory />
+    <BaseMeHistory />
   </Layout.Main>
 )
+
+export default MeHistory

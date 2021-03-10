@@ -6,12 +6,12 @@ import {
   EmptyFolloweeDonatedArticles,
   InfiniteScroll,
   List,
+  QueryError,
   Spinner,
   TextIcon,
   Translate,
   UserDigest,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { UserDigestMiniProps } from '~/components/UserDigest/Mini'
 

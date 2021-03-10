@@ -13,10 +13,10 @@ import { CLOSE_ACTIVE_DIALOG, OPEN_SIGNUP_DIALOG } from '~/common/enums'
 
 type Step = 'init' | 'verification_sent'
 
-const SignUpDialog = () => {
+const BaseSignUpDialog = () => {
   const { currStep, forward } = useStep<Step>('init')
 
-  const [showDialog, setShowDialog] = useState(false)
+  const [showDialog, setShowDialog] = useState(true)
   const open = () => {
     forward('init')
     setShowDialog(true)
@@ -54,6 +54,19 @@ const SignUpDialog = () => {
         />
       )}
     </Dialog>
+  )
+}
+
+const SignUpDialog = () => {
+  const Children = ({ open }: { open: () => void }) => {
+    useEventListener(OPEN_SIGNUP_DIALOG, open)
+    return null
+  }
+
+  return (
+    <Dialog.Lazy mounted={<BaseSignUpDialog />}>
+      {({ open }) => <Children open={open} />}
+    </Dialog.Lazy>
   )
 }
 

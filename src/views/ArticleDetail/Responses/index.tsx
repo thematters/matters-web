@@ -1,10 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { useRouter } from 'next/router'
 
-import { Title, Translate } from '~/components'
-
-import { getQuery } from '~/common/utils'
+import { Title, Translate, useRoute } from '~/components'
 
 import FeatureComments from './FeaturedComments'
 import LatestResponses from './LatestResponses'
@@ -28,9 +25,9 @@ const ARTICLE_RESPONSE = gql`
   ${ResponseCount.fragments.article}
 `
 
-const Responses = () => {
-  const router = useRouter()
-  const mediaHash = getQuery({ router, key: 'mediaHash' })
+const Responses = ({ lock }: { lock: boolean }) => {
+  const { getQuery } = useRoute()
+  const mediaHash = getQuery('mediaHash')
 
   const { data, loading } = useQuery<ArticleResponse>(ARTICLE_RESPONSE, {
     variables: { mediaHash },
@@ -51,8 +48,8 @@ const Responses = () => {
         </Title>
       </header>
 
-      <FeatureComments />
-      <LatestResponses />
+      <FeatureComments lock={lock} />
+      <LatestResponses lock={lock} />
     </section>
   )
 }

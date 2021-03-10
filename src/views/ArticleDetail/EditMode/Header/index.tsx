@@ -7,17 +7,18 @@ import {
   Tag,
   TextIcon,
   Translate,
+  useMutation,
 } from '~/components'
 import { fragments as EditorFragments } from '~/components/Editor/fragments'
-import { useMutation } from '~/components/GQL'
 import articleFragments from '~/components/GQL/fragments/article'
 
 import { ADD_TOAST } from '~/common/enums'
-import { measureDiffs, stripHtml } from '~/common/utils'
+import { measureDiffs } from '~/common/utils'
 
 import styles from './styles.css'
 
 import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
+import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
 import { Asset } from '~/components/GQL/fragments/__generated__/Asset'
 import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
 import { ArticleDetailPublic_article } from '../../__generated__/ArticleDetailPublic'
@@ -25,10 +26,11 @@ import { EditArticle } from './__generated__/EditArticle'
 
 interface EditModeHeaderProps {
   article: ArticleDetailPublic_article
-  content: string | null
   cover?: Asset
+  editData: Record<string, any>
   tags: DigestTag[]
   collection: ArticleDigestDropdownArticle[]
+  circle?: DigestRichCirclePublic | null
   count?: number
 
   isPending?: boolean
@@ -51,6 +53,7 @@ const EDIT_ARTICLE = gql`
     $cover: ID
     $tags: [String!]
     $collection: [ID!]
+    $circle: ID
     $after: String
     $first: Int = null
   ) {
@@ -61,6 +64,7 @@ const EDIT_ARTICLE = gql`
         cover: $cover
         tags: $tags
         collection: $collection
+        circle: $circle
       }
     ) {
       id
@@ -84,10 +88,12 @@ const EDIT_ARTICLE = gql`
 
 const EditModeHeader = ({
   article,
-  content,
   cover,
+  editData,
   tags,
   collection,
+  circle,
+
   count = 3,
 
   isPending,
@@ -97,8 +103,8 @@ const EditModeHeader = ({
 }: EditModeHeaderProps) => {
   const [editArticle, { loading }] = useMutation<EditArticle>(EDIT_ARTICLE)
 
-  const origin = stripHtml(article.content || '', '')
-  const diff = content ? measureDiffs(origin, stripHtml(content, '')) : 0
+  const { content, currText, initText } = editData
+  const diff = measureDiffs(initText || '', currText || '') || 0
   const diffCount = `${diff}`.padStart(2, '0')
 
   const isReachDiffLimit = diff > 50
@@ -115,6 +121,7 @@ const EditModeHeader = ({
           cover: cover ? cover.id : null,
           tags: tags.map((tag) => tag.content),
           collection: collection.map(({ id: articleId }) => articleId),
+          ...(circle ? { circle: circle.id } : {}),
           ...(isRevised ? { content } : {}),
           first: null,
         },

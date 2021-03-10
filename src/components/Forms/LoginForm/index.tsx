@@ -3,8 +3,14 @@ import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 
-import { Dialog, Form, LanguageContext, Layout, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
+import {
+  Dialog,
+  Form,
+  LanguageContext,
+  Layout,
+  Translate,
+  useMutation,
+} from '~/components'
 
 import { ADD_TOAST, STORAGE_KEY_AUTH_TOKEN } from '~/common/enums'
 import {
@@ -54,7 +60,9 @@ export const LoginForm: React.FC<FormProps> = ({
   submitCallback,
   closeDialog,
 }) => {
-  const [login] = useMutation<UserLogin>(USER_LOGIN)
+  const [login] = useMutation<UserLogin>(USER_LOGIN, undefined, {
+    showToast: false,
+  })
   const { lang } = useContext(LanguageContext)
 
   const isInDialog = purpose === 'dialog'

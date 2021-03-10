@@ -35,6 +35,7 @@ type CommentBarArticle = CommentBarArticlePublic &
 
 interface CommentBarProps {
   article: CommentBarArticle
+  disabled?: boolean
 }
 
 const fragments = {
@@ -82,7 +83,7 @@ const Content = ({
     <Button
       spacing={['xtight', 'xtight']}
       bgActiveColor="grey-lighter"
-      aira-label={TEXT.zh_hant.replyComment}
+      aira-label={TEXT.zh_hant.reply}
       {...(props as ButtonProps)}
     >
       <TextIcon
@@ -96,7 +97,7 @@ const Content = ({
     </Button>
   )
 
-const CommentBar = ({ article }: CommentBarProps) => {
+const CommentBar = ({ article, disabled }: CommentBarProps) => {
   const viewer = useContext(ViewerContext)
   const isSmallUp = useResponsive('sm-up')
 
@@ -107,6 +108,10 @@ const CommentBar = ({ article }: CommentBarProps) => {
   const props = {
     isSmallUp,
     article,
+  }
+
+  if (disabled) {
+    return <Content {...props} disabled />
   }
 
   if (viewer.shouldSetupLikerID) {
@@ -189,7 +194,11 @@ const CommentBar = ({ article }: CommentBarProps) => {
   }
 
   return (
-    <CommentFormDialog articleId={article.id} submitCallback={refetchResponses}>
+    <CommentFormDialog
+      articleId={article.id}
+      type="article"
+      submitCallback={refetchResponses}
+    >
       {({ open }) => <Content {...props} aria-haspopup="true" onClick={open} />}
     </CommentFormDialog>
   )

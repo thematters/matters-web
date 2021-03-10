@@ -7,18 +7,12 @@ import {
   LanguageContext,
   TextIcon,
   Translate,
+  useMutation,
 } from '~/components'
-import { useMutation } from '~/components/GQL'
 import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
 
 import { ADD_TOAST, OPEN_LIKE_COIN_DIALOG, TEXT } from '~/common/enums'
-import {
-  analytics,
-  parseFormSubmitErrors,
-  routerPush,
-  toPath,
-  translate,
-} from '~/common/utils'
+import { analytics, routerPush, toPath, translate } from '~/common/utils'
 
 import { CreateDraft } from '~/components/GQL/mutations/__generated__/CreateDraft'
 
@@ -82,44 +76,27 @@ export const WriteButton = ({ allowed, isLarge, forbidden }: Props) => {
     <BaseWriteButton
       isLarge={isLarge}
       onClick={async () => {
-        try {
-          if (forbidden) {
-            window.dispatchEvent(
-              new CustomEvent(ADD_TOAST, {
-                detail: {
-                  color: 'red',
-                  content: <Translate id="FORBIDDEN_BY_STATE" />,
-                },
-              })
-            )
-            return
-          }
-
-          analytics.trackEvent('click_button', {
-            type: 'write',
-          })
-          const result = await putDraft()
-          const { slug, id } = result?.data?.putDraft || {}
-
-          if (slug && id) {
-            const path = toPath({ page: 'draftDetail', slug, id })
-            routerPush(path.href)
-          }
-        } catch (error) {
-          const [messages, codes] = parseFormSubmitErrors(error, lang)
-
-          if (!messages[codes[0]]) {
-            return null
-          }
-
+        if (forbidden) {
           window.dispatchEvent(
             new CustomEvent(ADD_TOAST, {
               detail: {
                 color: 'red',
-                content: messages[codes[0]],
+                content: <Translate id="FORBIDDEN_BY_STATE" />,
               },
             })
           )
+          return
+        }
+
+        analytics.trackEvent('click_button', {
+          type: 'write',
+        })
+        const result = await putDraft()
+        const { slug, id } = result?.data?.putDraft || {}
+
+        if (slug && id) {
+          const path = toPath({ page: 'draftDetail', slug, id })
+          routerPush(path.href)
         }
       }}
       loading={loading}

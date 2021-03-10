@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import {
   IconAvatarLogo32,
   IconBookmark16,
+  IconCircle16,
   IconClap16,
   IconComment16,
   IconUpVote16,
@@ -20,6 +21,7 @@ type IconType =
   | 'user'
   | 'upvote'
   | 'volume'
+  | 'circle'
 
 const getIcon = (type: IconType) => {
   switch (type) {
@@ -35,6 +37,8 @@ const getIcon = (type: IconType) => {
       return <IconUpVote16 color="green" />
     case 'volume':
       return <IconVolume32 color="grey-dark" size="lg" />
+    case 'circle':
+      return <IconCircle16 color="grey-dark" />
     case 'logo':
       return <IconAvatarLogo32 size="lg" />
   }

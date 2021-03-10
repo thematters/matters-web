@@ -6,7 +6,8 @@ import { Translate, ViewerContext } from '~/components'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorName from '../NoticeActorName'
-import NoticeArticle from '../NoticeArticle'
+import NoticeArticleTitle from '../NoticeArticleTitle'
+import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
 import NoticeTag from '../NoticeTag'
 import styles from '../styles.css'
@@ -21,10 +22,6 @@ const ArticleTagAddedNotice = ({ notice }: { notice: NoticeType }) => {
   }
 
   const actor = notice.actors[0]
-
-  const isOwner = notice.tag?.owner?.id === viewer.id
-  const isEditor = _some(notice.tag?.editors || [], ['id', viewer.id])
-  const isMaintainer = isOwner || isEditor
   const isAuthor = notice.target.author?.id === viewer.id
 
   return (
@@ -34,31 +31,34 @@ const ArticleTagAddedNotice = ({ notice }: { notice: NoticeType }) => {
       </section>
 
       <section className="content-wrap overflow-hidden">
-        <NoticeHead notice={notice}>
-          <NoticeActorName user={actor} />{' '}
-          {isAuthor && (
+        <NoticeHead>
+          <NoticeActorName user={actor} />
+          {isAuthor ? (
             <Translate
-              zh_hant="發現你的作品，並把它加入標籤"
-              zh_hans="发现你的作品，并把它加入标签"
-              en="discover your articles, and add it to tag"
+              zh_hant=" 發現了你的作品 "
+              zh_hans=" 发现了你的作品 "
+              en=" discovered "
+            />
+          ) : (
+            <Translate
+              zh_hant=" 發現了作品 "
+              zh_hans=" 发现了作品 "
+              en=" discovered "
             />
           )}
-          {!isAuthor && isMaintainer && notice.target.author && (
-            <>
-              <Translate zh_hant="將" zh_hans="將" en="put the work of" />{' '}
-              <NoticeActorName user={notice?.target?.author} />{' '}
-              <Translate
-                zh_hant="的作品加入標籤"
-                zh_hans="的作品加入标签"
-                en="into tag"
-              />
-            </>
-          )}
+
+          <NoticeArticleTitle article={notice.target} />
+
+          <Translate
+            zh_hant=" ，並把它加入標籤"
+            zh_hans=" ，并把它加入标签"
+            en=" and added it to tag"
+          />
         </NoticeHead>
 
-        <NoticeArticle article={notice.target} isBlock />
-
         <NoticeTag tag={notice.tag} />
+
+        <NoticeDate notice={notice} />
       </section>
 
       <style jsx>{styles}</style>
@@ -70,7 +70,7 @@ ArticleTagAddedNotice.fragments = {
   notice: gql`
     fragment ArticleTagAddedNotice on ArticleTagNotice {
       id
-      ...NoticeHead
+      ...NoticeDate
       actors {
         ...NoticeActorAvatarUser
         ...NoticeActorNameUser
@@ -79,22 +79,16 @@ ArticleTagAddedNotice.fragments = {
         author {
           displayName
         }
-        ...NoticeArticle
+        ...NoticeArticleTitle
       }
       tag {
-        editors {
-          id
-        }
-        owner {
-          id
-        }
         ...NoticeTag
       }
     }
     ${NoticeActorAvatar.fragments.user}
     ${NoticeActorName.fragments.user}
-    ${NoticeArticle.fragments.article}
-    ${NoticeHead.fragments.date}
+    ${NoticeArticleTitle.fragments.article}
+    ${NoticeDate.fragments.notice}
     ${NoticeTag.fragments.tag}
   `,
 }

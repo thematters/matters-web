@@ -1,36 +1,33 @@
 import _find from 'lodash/find'
 import _some from 'lodash/some'
-import { useRouter } from 'next/router'
+import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
 
 import {
   EmptyLayout,
   EmptyTag,
   Expandable,
-  FeaturesContext,
   Head,
   Layout,
   PullToRefresh,
-  ShareButton,
   Spinner,
   Tabs,
   Throw404,
   Translate,
+  useFeatures,
   usePublicQuery,
   usePullToRefresh,
-  useResponsive,
+  useRoute,
   ViewerContext,
 } from '~/components'
 import { getErrorCodes, QueryError } from '~/components/GQL'
 
 import { ERROR_CODES } from '~/common/enums'
-import { getQuery, toPath } from '~/common/utils'
 
 import TagDetailArticles from './Articles'
 import ArticlesCount from './ArticlesCount'
 import { TagDetailButtons } from './Buttons'
-import Community from './Community'
-import Cover from './Cover'
+import TagCover from './Cover'
 import DropdownActions from './DropdownActions'
 import Followers from './Followers'
 import { TAG_DETAIL_PRIVATE, TAG_DETAIL_PUBLIC } from './gql'
@@ -42,13 +39,16 @@ import {
   TagDetailPublic_node_Tag,
 } from './__generated__/TagDetailPublic'
 
+const DynamicCommunity = dynamic(() => import('./Community'), {
+  ssr: false,
+  loading: Spinner,
+})
+
 type TagFeedType = 'latest' | 'selected' | 'community'
 
 const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
-  const isSmallUp = useResponsive('sm-up')
   const viewer = useContext(ViewerContext)
-  const features = useContext(FeaturesContext)
-  const path = toPath({ page: 'tagDetail', id: tag.id })
+  const features = useFeatures()
 
   // feed type
   const hasSelectedFeed = (tag?.selectedArticles.totalCount || 0) > 0
@@ -77,39 +77,26 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
   return (
     <Layout.Main>
       <Layout.Header
-        left={
-          <Layout.Header.BackButton
-            mode={!isSmallUp ? 'black-solid' : undefined}
-          />
-        }
+        left={<Layout.Header.BackButton mode="black-solid" />}
         right={
           <>
-            {isSmallUp ? <Layout.Header.Title id="tag" /> : <span />}
+            <span />
 
-            <ShareButton
-              title={tag.content}
-              path={encodeURI(path.href)}
-              bgColor={isSmallUp ? 'green-lighter' : 'half-black'}
-              iconColor={isSmallUp ? 'green' : 'white'}
-              inCard={false}
+            <DropdownActions
+              isOwner={isOwner}
+              isEditor={isEditor}
+              isMaintainer={isMaintainer}
+              tag={tag}
             />
-
-            {isMaintainer && (
-              <DropdownActions
-                isOwner={isOwner}
-                isEditor={isEditor}
-                tag={tag}
-              />
-            )}
           </>
         }
-        mode={isSmallUp ? 'solid-fixed' : 'transparent-absolute'}
+        mode="transparent-absolute"
       />
 
       <Head title={`#${tag.content}`} />
 
       <PullToRefresh>
-        <Cover tag={tag} />
+        <TagCover tag={tag} />
 
         <section className="info">
           {features.tag_adoption && <Owner tag={tag} />}
@@ -150,7 +137,7 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
         {(isSelected || isLatest) && (
           <TagDetailArticles tagId={tag.id} selected={isSelected} />
         )}
-        {isCommunity && <Community id={tag.id} isOwner={isOwner} />}
+        {isCommunity && <DynamicCommunity id={tag.id} isOwner={isOwner} />}
       </PullToRefresh>
 
       <style jsx>{styles}</style>
@@ -160,8 +147,8 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
 
 const TagDetailContainer = () => {
   const viewer = useContext(ViewerContext)
-  const router = useRouter()
-  const tagId = getQuery({ router, key: 'tagId' })
+  const { getQuery } = useRoute()
+  const tagId = getQuery('tagId')
 
   /**
    * Data Fetching

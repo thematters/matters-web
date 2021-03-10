@@ -1,4 +1,4 @@
-import { Router, useRouter } from 'next/router'
+import { Router } from 'next/router'
 import { useEffect, useState } from 'react'
 
 import {
@@ -9,9 +9,10 @@ import {
   SearchBar,
   SearchOverview,
   useResponsive,
+  useRoute,
 } from '~/components'
 
-import { getQuery, routerPush, toPath } from '~/common/utils'
+import { routerPush, toPath } from '~/common/utils'
 
 import AggregateResults from './AggregateResults'
 // import EmptySearch from './EmptySearch'
@@ -20,9 +21,9 @@ import SearchTags from './SearchTags'
 import SearchUsers from './SearchUsers'
 
 const Search = () => {
-  const router = useRouter()
-  const type = getQuery({ router, key: 'type' })
-  const q = getQuery({ router, key: 'q' })
+  const { getQuery } = useRoute()
+  const type = getQuery('type')
+  const q = getQuery('q')
   const isSmallUp = useResponsive('sm-up')
   const [typingKey, setTypingKey] = useState('')
   const resetAutoComplete = () => setTypingKey('')
@@ -66,10 +67,9 @@ const Search = () => {
             <SearchBar hasDropdown={false} onChange={setTypingKey} />
 
             {showCancelButton && (
-              <Layout.Header.CancelButton
-                onClick={onCancel}
-                style={{ marginLeft: '1rem' }}
-              />
+              <span style={{ marginLeft: '1rem' }}>
+                <Layout.Header.CancelButton onClick={onCancel} />
+              </span>
             )}
           </>
         }

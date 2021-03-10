@@ -7,11 +7,13 @@ type TitleType = 'article' | 'feed' | 'sidebar' | 'nav' | 'tag'
 
 type TitleIs = 'h1' | 'h2' | 'h3'
 
-interface TitleProps {
+type TitleProps = {
   type: TitleType
   is?: TitleIs
-  className?: string
-}
+} & React.DetailedHTMLProps<
+  React.HTMLAttributes<HTMLHeadingElement>,
+  HTMLHeadingElement
+>
 
 /**
  * Usage:
@@ -26,22 +28,30 @@ interface TitleProps {
 export const Title: React.FC<TitleProps> = ({
   type,
   is = 'h1',
-  className,
+
   children,
+
+  ...props
 }) => {
   const titleClasses = classNames({
     [type]: true,
-    [className || '']: !!className,
+    clickable: !!props.onClick,
   })
 
   return (
     <>
       {is === 'h1' ? (
-        <h1 className={titleClasses}>{children}</h1>
+        <h1 className={titleClasses} {...props}>
+          {children}
+        </h1>
       ) : is === 'h2' ? (
-        <h2 className={titleClasses}>{children}</h2>
+        <h2 className={titleClasses} {...props}>
+          {children}
+        </h2>
       ) : (
-        <h3 className={titleClasses}>{children}</h3>
+        <h3 className={titleClasses} {...props}>
+          {children}
+        </h3>
       )}
 
       <style jsx>{styles}</style>

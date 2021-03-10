@@ -6,6 +6,7 @@ import { useContext } from 'react'
 import {
   Button,
   CommentFormDialog,
+  CommentFormType,
   DropdownDialog,
   IconMore16,
   Menu,
@@ -25,10 +26,21 @@ import UncollapseButton from './UncollapseButton'
 import { DropdownActionsCommentPrivate } from './__generated__/DropdownActionsCommentPrivate'
 import { DropdownActionsCommentPublic } from './__generated__/DropdownActionsCommentPublic'
 
-interface DropdownActionsProps {
-  comment: DropdownActionsCommentPublic & Partial<DropdownActionsCommentPrivate>
+export type DropdownActionsControls = {
+  /**
+   * options to control visibility
+   */
+  // force to hide
+  hasPin?: boolean
+
+  // based on type
   inCard?: boolean
 }
+
+type DropdownActionsProps = {
+  comment: DropdownActionsCommentPublic & Partial<DropdownActionsCommentPrivate>
+  type: CommentFormType
+} & DropdownActionsControls
 
 interface Controls {
   hasPin: boolean
@@ -62,11 +74,20 @@ const fragments = {
         parentComment {
           id
         }
-        article {
-          id
-          mediaHash
-          author {
+        node {
+          ... on Circle {
             id
+            name
+            owner {
+              id
+            }
+          }
+          ... on Article {
+            id
+            mediaHash
+            author {
+              id
+            }
           }
         }
         ...PinButtonComment
@@ -81,11 +102,20 @@ const fragments = {
           id
           ...BlockUserPrivate
         }
-        article {
-          id
-          author {
+        node {
+          ... on Circle {
             id
-            isBlocking
+            owner {
+              id
+              isBlocking
+            }
+          }
+          ... on Article {
+            id
+            author {
+              id
+              isBlocking
+            }
           }
         }
       }
@@ -96,6 +126,7 @@ const fragments = {
 
 const BaseDropdownActions = ({
   comment,
+  type,
   inCard,
 
   hasPin,
@@ -158,20 +189,25 @@ const BaseDropdownActions = ({
 }
 
 const DropdownActions = (props: DropdownActionsProps) => {
-  const { comment } = props
+  const { comment, type, hasPin = true } = props
   const viewer = useContext(ViewerContext)
-
   const { isArchived, isBanned, isFrozen } = viewer
-  const isArticleAuthor = viewer.id === comment.article.author.id
+
+  const article =
+    comment.node.__typename === 'Article' ? comment.node : undefined
+  const circle = comment.node.__typename === 'Circle' ? comment.node : undefined
+  const targetAuthor = article?.author || circle?.owner
+
+  const isTargetAuthor = viewer.id === targetAuthor?.id
+  const isBlocked = targetAuthor?.isBlocking
   const isCommentAuthor = viewer.id === comment.author.id
   const isActive = comment.state === 'active'
-  const isAbleCollapse = isArticleAuthor && !isCommentAuthor
+  const isAbleCollapse = isTargetAuthor && !isCommentAuthor
   const isCollapsed = comment.state === 'collapsed'
-  const isBlocked = comment.article.author.isBlocking
   const isDescendantComment = comment.parentComment
 
   const controls = {
-    hasPin: !!(isArticleAuthor && isActive && !isDescendantComment),
+    hasPin: hasPin && !!(isTargetAuthor && isActive && !isDescendantComment),
     hasEdit: !!(isCommentAuthor && !isBlocked && (isActive || isCollapsed)),
     hasDelete: !!(isCommentAuthor && isActive),
     hasBlockUser: !isCommentAuthor,
@@ -196,17 +232,19 @@ const DropdownActions = (props: DropdownActionsProps) => {
 
   return (
     <CommentFormDialog
+      articleId={article?.id}
+      circleId={circle?.id}
+      type={type}
       commentId={comment.id}
-      articleId={comment.article.id}
       defaultContent={comment.content}
-      title="editComment"
+      title={article ? 'editComment' : 'edit'}
     >
       {({ open: openEditCommentDialog }) => (
-        <DeleteComment.Dialog commentId={comment.id}>
+        <DeleteComment.Dialog comment={comment} type={type}>
           {({ open: openDeleteCommentDialog }) => (
             <BlockUser.Dialog user={comment.author}>
               {({ open: openBlockUserDialog }) => (
-                <CollapseComment.Dialog commentId={comment.id}>
+                <CollapseComment.Dialog comment={comment} type={type}>
                   {({ open: openCollapseCommentDialog }) => (
                     <BaseDropdownActions
                       {...props}

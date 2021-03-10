@@ -8,9 +8,9 @@ import {
   LanguageContext,
   Layout,
   Translate,
+  useMutation,
   VerificationSendCodeButton,
 } from '~/components'
-import { useMutation } from '~/components/GQL'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 
 import {
@@ -99,6 +99,7 @@ const Request: React.FC<FormProps> = ({
         name="email"
         disabled
         required
+        autoFocus
         value={values.email}
         error={touched.email && errors.email}
         onBlur={handleBlur}
@@ -115,7 +116,6 @@ const Request: React.FC<FormProps> = ({
         error={touched.code && errors.code}
         onBlur={handleBlur}
         onChange={handleChange}
-        autoFocus
         extraButton={
           <VerificationSendCodeButton
             email={values.email}

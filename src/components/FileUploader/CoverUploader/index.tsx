@@ -3,12 +3,15 @@ import { useState } from 'react'
 
 import {
   Button,
+  CircleCover,
+  Cover,
+  CoverProps,
   IconCamera24,
   Spinner,
   TextIcon,
   Translate,
+  useMutation,
 } from '~/components'
-import { useMutation } from '~/components/GQL'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 
 import {
@@ -20,7 +23,6 @@ import {
   UPLOAD_IMAGE_SIZE_LIMIT,
 } from '~/common/enums'
 
-import Cover, { CoverProps } from './Cover'
 import styles from './styles.css'
 
 import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
@@ -33,8 +35,8 @@ import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/Singl
  * ```jsx
  *   <CoverUploader
  *     assetType={assetType}
- *     coverUrl={coverUrl}
- *     defaultCoverUrl={defaultCoverUrl}
+ *     cover={cover}
+ *     fallbackCover={fallbackCover}
  *     entityId={entityId}
  *     entityType={entityType}
  *     inEditor={true || false}
@@ -43,25 +45,33 @@ import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/Singl
  * ```
  */
 
-interface Props {
-  assetType: ASSET_TYPE.profileCover | ASSET_TYPE.tagCover
+export type CoverUploaderProps = {
+  assetType:
+    | ASSET_TYPE.profileCover
+    | ASSET_TYPE.tagCover
+    | ASSET_TYPE.circleCover
   entityId?: string
-  entityType: ENTITY_TYPE.user | ENTITY_TYPE.tag
+  entityType: ENTITY_TYPE.user | ENTITY_TYPE.tag | ENTITY_TYPE.circle
   onUpload: (assetId: string | null) => void
-  coverUrl?: string
-}
+  type?: 'circle'
+} & CoverProps
 
 export const CoverUploader = ({
   assetType,
-  coverUrl,
-  defaultCoverUrl,
+  cover: initCover,
+  fallbackCover,
   entityId,
   entityType,
   inEditor,
   onUpload,
-}: Props & CoverProps) => {
-  const [cover, setCover] = useState<string | undefined>(coverUrl)
-  const [upload, { loading }] = useMutation<SingleFileUpload>(UPLOAD_FILE)
+  type,
+}: CoverUploaderProps) => {
+  const [cover, setCover] = useState<string | undefined | null>(initCover)
+  const [upload, { loading }] = useMutation<SingleFileUpload>(
+    UPLOAD_FILE,
+    undefined,
+    { showToast: false }
+  )
 
   const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
   const fieldId = 'cover-upload-form'
@@ -126,33 +136,48 @@ export const CoverUploader = ({
     onUpload(null)
   }
 
+  const Mask = () => (
+    <div className="mask">
+      {loading ? <Spinner /> : <IconCamera24 color="white" size="xl" />}
+
+      {initCover && (
+        <section className="delete">
+          <Button
+            size={[null, '1.25rem']}
+            spacing={[0, 'xtight']}
+            borderColor="white"
+            borderWidth="sm"
+            onClick={removeCover}
+          >
+            <TextIcon color="white" size="xs">
+              <Translate id="delete" />
+            </TextIcon>
+          </Button>
+        </section>
+      )}
+
+      <style jsx>{styles}</style>
+    </div>
+  )
+
+  const isCircle = type === 'circle'
+
   return (
-    <label className="uploader" htmlFor={fieldId}>
-      <Cover
-        coverUrl={cover}
-        defaultCoverUrl={defaultCoverUrl}
-        inEditor={inEditor}
-      />
-
-      <div className="mask">
-        {loading ? <Spinner /> : <IconCamera24 color="white" size="xl" />}
-
-        {coverUrl && (
-          <section className="delete">
-            <Button
-              size={[null, '1.25rem']}
-              spacing={[0, 'xtight']}
-              borderColor="white"
-              borderWidth="sm"
-              onClick={removeCover}
-            >
-              <TextIcon color="white" size="xs">
-                <Translate id="delete" />
-              </TextIcon>
-            </Button>
-          </section>
-        )}
-      </div>
+    <label htmlFor={fieldId}>
+      {!isCircle && (
+        <Cover cover={cover} fallbackCover={fallbackCover} inEditor={inEditor}>
+          <Mask />
+        </Cover>
+      )}
+      {isCircle && (
+        <CircleCover
+          cover={cover}
+          fallbackCover={fallbackCover}
+          inEditor={inEditor}
+        >
+          <Mask />
+        </CircleCover>
+      )}
 
       <VisuallyHidden>
         <input

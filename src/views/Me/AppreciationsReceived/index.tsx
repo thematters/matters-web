@@ -43,7 +43,7 @@ const ME_APPRECIATED_RECEIVED = gql`
   ${AppreciationTabs.fragments.userActivity}
 `
 
-const AppreciationsReceived = () => {
+const BaseAppreciationsReceived = () => {
   const {
     data,
     loading,
@@ -110,7 +110,7 @@ const AppreciationsReceived = () => {
   )
 }
 
-export default () => (
+const AppreciationsReceived = () => (
   <Layout.Main>
     <Layout.Header
       left={<Layout.Header.BackButton />}
@@ -119,6 +119,8 @@ export default () => (
 
     <Head title={{ id: 'appreciationsReceived' }} />
 
-    <AppreciationsReceived />
+    <BaseAppreciationsReceived />
   </Layout.Main>
 )
+
+export default AppreciationsReceived

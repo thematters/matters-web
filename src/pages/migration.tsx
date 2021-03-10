@@ -1,3 +1,3 @@
 import Migration from '~/views/Migration'
 
-export default () => <Migration />
+export default Migration

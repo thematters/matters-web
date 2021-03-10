@@ -1,0 +1,8 @@
+section {
+  &:hover,
+  &:focus {
+    & .name {
+      text-decoration: underline;
+    }
+  }
+}

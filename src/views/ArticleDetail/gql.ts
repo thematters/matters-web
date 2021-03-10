@@ -3,12 +3,13 @@ import gql from 'graphql-tag'
 import { UserDigest } from '~/components/UserDigest'
 
 import Content from './Content'
-import Donation from './Donation'
 import FingerprintButton from './FingerprintButton'
 import RelatedArticles from './RelatedArticles'
 import State from './State'
+import SupportWidget from './SupportWidget'
 import TagList from './TagList'
 import Toolbar from './Toolbar'
+import CircleWall from './Wall/Circle'
 
 export const ARTICLE_DETAIL_PUBLIC = gql`
   query ArticleDetailPublic(
@@ -23,15 +24,23 @@ export const ARTICLE_DETAIL_PUBLIC = gql`
       state
       cover
       summary
+      summaryCustomized
       createdAt
       revisedAt
       language
+      limitedFree
       author {
+        id
         ...UserDigestRichUserPublic
         ...UserDigestRichUserPrivate
       }
       collection(input: { first: 0 }) @connection(key: "articleCollection") {
         totalCount
+      }
+      circle {
+        id
+        ...CircleWallCirclePublic
+        ...CircleWallCirclePrivate
       }
       ...ContentArticle
       ...TagListArticle
@@ -40,7 +49,8 @@ export const ARTICLE_DETAIL_PUBLIC = gql`
       ...FingerprintArticle
       ...ToolbarArticlePublic
       ...ToolbarArticlePrivate
-      ...DonationArticle
+      ...SupportWidgetArticlePublic
+      ...SupportWidgetArticlePrivate
     }
   }
   ${Content.fragments.article}
@@ -52,26 +62,36 @@ export const ARTICLE_DETAIL_PUBLIC = gql`
   ${UserDigest.Rich.fragments.user.private}
   ${Toolbar.fragments.article.public}
   ${Toolbar.fragments.article.private}
-  ${Donation.fragments.article}
+  ${SupportWidget.fragments.article.public}
+  ${SupportWidget.fragments.article.private}
+  ${CircleWall.fragments.circle.public}
+  ${CircleWall.fragments.circle.private}
 `
 
 export const ARTICLE_DETAIL_PRIVATE = gql`
   query ArticleDetailPrivate(
     $mediaHash: String
-    $includeContent: Boolean!
     $includeCanSuperLike: Boolean!
   ) {
     article(input: { mediaHash: $mediaHash }) {
       id
-      content @include(if: $includeContent)
+      content
       author {
+        id
         ...UserDigestRichUserPrivate
       }
+      circle {
+        id
+        ...CircleWallCirclePrivate
+      }
       ...ToolbarArticlePrivate
+      ...SupportWidgetArticlePrivate
     }
   }
   ${UserDigest.Rich.fragments.user.private}
   ${Toolbar.fragments.article.private}
+  ${SupportWidget.fragments.article.private}
+  ${CircleWall.fragments.circle.private}
 `
 
 export const ARTICLE_TRANSLATION = gql`

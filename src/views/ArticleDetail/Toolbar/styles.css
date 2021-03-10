@@ -4,7 +4,7 @@
 
   position: sticky;
   bottom: 0;
-  z-index: var(--z-index-over-global-header);
+  z-index: var(--z-index-over-bottom-bar);
   min-height: var(--global-nav-height);
   padding: var(--spacing-base);
   background: var(--color-white);

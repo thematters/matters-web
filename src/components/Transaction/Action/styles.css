@@ -28,6 +28,7 @@
   }
 }
 
+.circle,
 .wallet {
   @mixin flex-center-end;
 
@@ -36,6 +37,7 @@
 
 .to,
 .from,
+.circle,
 .wallet {
   margin-top: calc(var(--spacing-xx-tight) * -1);
 }

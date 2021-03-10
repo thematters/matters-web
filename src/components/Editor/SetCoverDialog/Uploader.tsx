@@ -1,8 +1,13 @@
 import VisuallyHidden from '@reach/visually-hidden'
 import classNames from 'classnames'
 
-import { IconCamera16, IconSpinner16, TextIcon, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
+import {
+  IconCamera16,
+  IconSpinner16,
+  TextIcon,
+  Translate,
+  useMutation,
+} from '~/components'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 
 import {
@@ -35,7 +40,11 @@ const Uploader: React.FC<UploaderProps> = ({
   setSelected,
   refetchAssets,
 }) => {
-  const [upload, { loading }] = useMutation<SingleFileUpload>(UPLOAD_FILE)
+  const [upload, { loading }] = useMutation<SingleFileUpload>(
+    UPLOAD_FILE,
+    undefined,
+    { showToast: false }
+  )
 
   const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
   const fieldId = 'editor-cover-upload-form'

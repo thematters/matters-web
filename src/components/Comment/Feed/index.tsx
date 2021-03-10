@@ -1,11 +1,11 @@
 import { useLazyQuery } from '@apollo/react-hooks'
 import React from 'react'
 
-import { AvatarSize, UserDigest } from '~/components'
+import { AvatarSize, CommentFormType, UserDigest } from '~/components'
 
 import Content from '../Content'
 import DonatorLabel from '../DonatorLabel'
-import DropdownActions from '../DropdownActions'
+import DropdownActions, { DropdownActionsControls } from '../DropdownActions'
 import FooterActions, { FooterActionsControls } from '../FooterActions'
 import PinnedLabel from '../PinnedLabel'
 import ReplyTo from '../ReplyTo'
@@ -19,27 +19,32 @@ import { RefetchComment } from './__generated__/RefetchComment'
 export type CommentControls = {
   avatarSize?: Extract<AvatarSize, 'md' | 'lg'>
   hasUserName?: boolean
-} & FooterActionsControls
+} & FooterActionsControls &
+  DropdownActionsControls
 
 export type CommentProps = {
   comment: FeedCommentPublic & Partial<FeedCommentPrivate>
+  type: CommentFormType
 } & CommentControls
 
 export const BaseCommentFeed = ({
   comment,
+  type,
   avatarSize = 'lg',
   hasUserName,
-  commentCallback,
+  replySubmitCallback,
   ...actionControls
 }: CommentProps) => {
-  const [refetchComment] = useLazyQuery<RefetchComment>(REFETCH_COMMENT)
+  const [refetchComment] = useLazyQuery<RefetchComment>(REFETCH_COMMENT, {
+    fetchPolicy: 'network-only',
+  })
 
   const { id, replyTo, author, parentComment } = comment
   const nodeId = parentComment ? `${parentComment.id}-${id}` : id
 
-  const footerCommentCallback = () => {
-    if (commentCallback) {
-      commentCallback()
+  const submitCallback = () => {
+    if (replySubmitCallback) {
+      replySubmitCallback()
     }
 
     refetchComment({ variables: { id: parentComment?.id || id } })
@@ -61,7 +66,12 @@ export const BaseCommentFeed = ({
         <section className="right">
           <DonatorLabel comment={comment} />
           <PinnedLabel comment={comment} />
-          <DropdownActions comment={comment} inCard={actionControls.inCard} />
+          <DropdownActions
+            comment={comment}
+            type={type}
+            hasPin={actionControls.hasPin}
+            inCard={actionControls.inCard}
+          />
         </section>
       </header>
 
@@ -72,10 +82,11 @@ export const BaseCommentFeed = ({
       )}
 
       <section className="content-container">
-        <Content comment={comment} size="md-s" />
+        <Content comment={comment} type={type} size="md-s" />
         <FooterActions
           comment={comment}
-          commentCallback={footerCommentCallback}
+          type={type}
+          replySubmitCallback={submitCallback}
           {...actionControls}
         />
       </section>
@@ -94,13 +105,14 @@ type MemoizedCommentFeed = React.MemoExoticComponent<React.FC<CommentProps>> & {
 
 const CommentFeed = React.memo(
   BaseCommentFeed,
-  ({ comment: prevComment }, { comment }) => {
+  ({ comment: prevComment, disabled: prevDisabled }, { comment, disabled }) => {
     return (
       prevComment.content === comment.content &&
       prevComment.upvotes === comment.upvotes &&
       prevComment.downvotes === comment.downvotes &&
       prevComment.state === comment.state &&
-      prevComment.pinned === comment.pinned
+      prevComment.pinned === comment.pinned &&
+      prevDisabled === disabled
     )
   }
 ) as MemoizedCommentFeed

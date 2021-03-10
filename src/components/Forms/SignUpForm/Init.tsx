@@ -10,8 +10,8 @@ import {
   Layout,
   ReCaptchaContext,
   Translate,
+  useMutation,
 } from '~/components'
-import { useMutation } from '~/components/GQL'
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
 
 import { CLOSE_ACTIVE_DIALOG, OPEN_LOGIN_DIALOG, PATHS } from '~/common/enums'
@@ -86,7 +86,9 @@ const Init: React.FC<FormProps> = ({
   const formId = 'sign-up-init-form'
 
   const { token, refreshToken } = useContext(ReCaptchaContext)
-  const [sendCode] = useMutation<SendVerificationCode>(SEND_CODE)
+  const [sendCode] = useMutation<SendVerificationCode>(SEND_CODE, undefined, {
+    showToast: false,
+  })
 
   const {
     values,
@@ -146,6 +148,7 @@ const Init: React.FC<FormProps> = ({
         type="text"
         name="displayName"
         required
+        autoFocus
         placeholder={translate({
           zh_hant: '你的站內暱稱，之後可以修改',
           zh_hans: '你的站内暱称，之后可以修改',
@@ -171,7 +174,6 @@ const Init: React.FC<FormProps> = ({
         error={touched.email && errors.email}
         onBlur={handleBlur}
         onChange={handleChange}
-        autoFocus
       />
 
       <Form.CheckBox

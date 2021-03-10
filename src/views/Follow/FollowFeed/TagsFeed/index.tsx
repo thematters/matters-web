@@ -10,12 +10,12 @@ import {
   EmptyFollowingTag,
   InfiniteScroll,
   List,
+  QueryError,
   Spinner,
   Tag,
   TextIcon,
   Translate,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 
 import { analytics, mergeConnections } from '~/common/utils'
 

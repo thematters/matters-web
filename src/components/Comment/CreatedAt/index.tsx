@@ -21,12 +21,14 @@ const fragments = {
       parentComment {
         id
       }
-      article {
-        id
-        slug
-        mediaHash
-        author {
-          userName
+      node {
+        ... on Article {
+          id
+          slug
+          mediaHash
+          author {
+            userName
+          }
         }
       }
       createdAt
@@ -35,7 +37,13 @@ const fragments = {
 }
 
 const CreatedAt = ({ comment, hasLink }: CreatedAtProps) => {
-  const path = toPath({ page: 'commentDetail', comment })
+  const article = comment.node.__typename === 'Article' && comment.node
+
+  if (!article) {
+    return <DateTime date={comment.createdAt} />
+  }
+
+  const path = toPath({ page: 'commentDetail', comment, article })
 
   return (
     <LinkWrapper {...path} disabled={!hasLink}>

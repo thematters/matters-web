@@ -5,10 +5,10 @@ import {
   EmptyWarning,
   InfiniteScroll,
   List,
+  QueryError,
   Spinner,
   Translate,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
 import { UserDigest } from '~/components/UserDigest'
 
 import { mergeConnections } from '~/common/utils'

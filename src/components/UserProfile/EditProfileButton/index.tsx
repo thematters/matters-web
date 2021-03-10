@@ -1,6 +1,10 @@
-import { useState } from 'react'
-
-import { Button, Dialog, TextIcon, Translate } from '~/components'
+import {
+  Button,
+  Dialog,
+  TextIcon,
+  Translate,
+  useDialogSwitch,
+} from '~/components'
 
 import ProfileEditor, { ProfileEditorUser } from './ProfileEditor'
 
@@ -9,9 +13,7 @@ interface EditProfileButtonProps {
 }
 
 const EditProfileButton: React.FC<EditProfileButtonProps> = ({ user }) => {
-  const [showDialog, setShowDialog] = useState(false)
-  const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
+  const { show, open, close } = useDialogSwitch(false)
 
   return (
     <>
@@ -29,7 +31,7 @@ const EditProfileButton: React.FC<EditProfileButtonProps> = ({ user }) => {
         </TextIcon>
       </Button>
 
-      <Dialog isOpen={showDialog} onDismiss={close} fixedHeight>
+      <Dialog isOpen={show} onDismiss={close} fixedHeight>
         <ProfileEditor user={user} closeDialog={close} />
       </Dialog>
     </>

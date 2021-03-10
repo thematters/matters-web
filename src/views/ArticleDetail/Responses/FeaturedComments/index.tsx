@@ -1,20 +1,20 @@
-import { useRouter } from 'next/router'
 import { useContext, useEffect } from 'react'
 
 import {
   List,
   Spinner,
+  ThreadComment,
   Title,
   Translate,
   usePublicQuery,
   usePullToRefresh,
+  useRoute,
   ViewerContext,
   ViewMoreButton,
 } from '~/components'
 
-import { filterComments, getQuery, mergeConnections } from '~/common/utils'
+import { filterComments, mergeConnections } from '~/common/utils'
 
-import ResponseComment from '../ResponseComment'
 import styles from '../styles.css'
 import { FEATURED_COMMENTS_PRIVATE, FEATURED_COMMENTS_PUBLIC } from './gql'
 
@@ -28,10 +28,10 @@ type CommentPublic = FeaturedCommentsPublic_article_featuredComments_edges_node
 type CommentPrivate = FeaturedCommentsPrivate_nodes_Comment
 type Comment = CommentPublic & Partial<CommentPrivate>
 
-const FeaturedComments = () => {
+const FeaturedComments = ({ lock }: { lock: boolean }) => {
   const viewer = useContext(ViewerContext)
-  const router = useRouter()
-  const mediaHash = getQuery({ router, key: 'mediaHash' })
+  const { getQuery } = useRoute()
+  const mediaHash = getQuery('mediaHash')
 
   /**
    * Data Fetching
@@ -124,7 +124,7 @@ const FeaturedComments = () => {
       <List spacing={['xloose', 0]}>
         {comments.map((comment) => (
           <List.Item key={comment.id}>
-            <ResponseComment comment={comment} />
+            <ThreadComment comment={comment} type="article" disabled={lock} />
           </List.Item>
         ))}
       </List>

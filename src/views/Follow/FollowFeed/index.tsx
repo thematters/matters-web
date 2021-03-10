@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 
-import { Head } from '~/components'
+import { Head, Spacer } from '~/components'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
 import ArticlesFeed from './ArticlesFeed'
@@ -30,6 +30,8 @@ const FollowFeed = () => {
   return (
     <>
       <Head title={{ id: 'follow' }} />
+
+      <Spacer size="xtight" />
 
       <FeedType
         type={followFeedType as FollowFeedType}

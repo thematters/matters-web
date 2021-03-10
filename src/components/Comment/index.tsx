@@ -5,6 +5,8 @@ import Feed from './Feed'
 import FooterActions from './FooterActions'
 import PinnedLabel from './PinnedLabel'
 
+export * from './ThreadComment'
+
 export const Comment = {
   Content,
   DropdownActions,

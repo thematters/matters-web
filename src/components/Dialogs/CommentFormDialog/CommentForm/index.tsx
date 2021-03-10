@@ -1,49 +1,40 @@
 import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
 import dynamic from 'next/dynamic'
 import { useState } from 'react'
 
-import { Button, Dialog, Spinner, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
+import {
+  Button,
+  CommentFormType,
+  Dialog,
+  Spinner,
+  Translate,
+  useMutation,
+} from '~/components'
+import PUT_COMMENT from '~/components/GQL/mutations/putComment'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
+import COMMENT_DRAFT from '~/components/GQL/queries/commentDraft'
 
-import { ADD_TOAST, TEXT, TextId } from '~/common/enums'
+import { ADD_TOAST, COMMENT_TYPE_TEXT, TextId } from '~/common/enums'
 import { dom, stripHtml, subscribePush, trimLineBreaks } from '~/common/utils'
 
 import styles from './styles.css'
 
+import { PutComment } from '~/components/GQL/mutations/__generated__/PutComment'
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
-import { CommentDraft } from './__generated__/CommentDraft'
-import { PutComment } from './__generated__/PutComment'
+import { CommentDraft } from '~/components/GQL/queries/__generated__/CommentDraft'
 
 const CommentEditor = dynamic(() => import('~/components/Editor/Comment'), {
   ssr: false,
   loading: Spinner,
 })
 
-export const PUT_COMMENT = gql`
-  mutation PutComment($input: PutCommentInput!) {
-    putComment(input: $input) {
-      id
-      content
-    }
-  }
-`
-
-const COMMENT_DRAFT = gql`
-  query CommentDraft($id: ID!) {
-    commentDraft(input: { id: $id }) @client(always: true) {
-      id
-      content
-    }
-  }
-`
-
 export interface CommentFormProps {
   commentId?: string
-  articleId: string
   replyToId?: string
   parentId?: string
+  circleId?: string
+  articleId?: string
+  type: CommentFormType
 
   defaultContent?: string | null
   submitCallback?: () => void
@@ -54,20 +45,24 @@ export interface CommentFormProps {
 
 const CommentForm: React.FC<CommentFormProps> = ({
   commentId,
-  articleId,
   replyToId,
   parentId,
+  articleId,
+  circleId,
+  type,
 
   defaultContent,
   submitCallback,
   closeDialog,
   title = 'putComment',
   context,
+
+  ...props
 }) => {
   // retrieve comment draft
-  const commentDraftId = `${articleId}:${commentId || 0}:${parentId || 0}:${
-    replyToId || 0
-  }`
+  const commentDraftId = `${articleId || circleId}:${commentId || 0}:${
+    parentId || 0
+  }:${replyToId || 0}`
   const formId = `comment-form-${commentDraftId}`
 
   const { data, client } = useQuery<CommentDraft>(COMMENT_DRAFT, {
@@ -94,7 +89,9 @@ const CommentForm: React.FC<CommentFormProps> = ({
         content: trimLineBreaks(content),
         replyTo: replyToId,
         articleId,
+        circleId,
         parentId,
+        type,
         mentions,
       },
     }
@@ -121,12 +118,15 @@ const CommentForm: React.FC<CommentFormProps> = ({
           detail: {
             color: 'green',
             content: skipPushButton ? (
-              <Translate zh_hant="評論已送出" zh_hans="评论已送出" />
+              <Translate
+                zh_hant={`${COMMENT_TYPE_TEXT.zh_hant[type]}已送出`}
+                zh_hans={`${COMMENT_TYPE_TEXT.zh_hans[type]}已送出`}
+              />
             ) : (
               <Translate id="pushDescription" />
             ),
             customButton: !skipPushButton && (
-              <Button onClick={subscribePush}>
+              <Button onClick={() => subscribePush()}>
                 <Translate id="confirmPush" />
               </Button>
             ),
@@ -177,11 +177,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
       <Dialog.Content spacing={['base', 'base']} hasGrow>
         {context && <section className="context">{context}</section>}
 
-        <form
-          id={formId}
-          onSubmit={handleSubmit}
-          aria-label={TEXT.zh_hant.putComment}
-        >
+        <form id={formId} onSubmit={handleSubmit}>
           <CommentEditor content={content} update={onUpdate} />
         </form>
       </Dialog.Content>

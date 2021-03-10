@@ -1,4 +1,4 @@
-import { UserLanguage } from '__generated__/globalTypes'
+import { UserLanguage } from '@/__generated__/globalTypes'
 
 export const langConvert = {
   og2html: (lang: OGLanguage): HTMLLanguage => {
@@ -18,10 +18,10 @@ export const langConvert = {
   },
   html2sys: (lang: HTMLLanguage): Language => {
     return ({
-      'zh-Hans': 'zh_hans',
-      'zh-Hant': 'zh_hant',
-      en: 'en',
-    }[lang] || 'zh_hant') as Language
+      'zh-Hans': UserLanguage.zh_hans,
+      'zh-Hant': UserLanguage.zh_hant,
+      en: UserLanguage.en,
+    }[lang] || UserLanguage.zh_hant) as Language
   },
   sys2Og: (lang: Language): OGLanguage => {
     return ({

@@ -28,11 +28,13 @@
       }
 
       & .title,
-      & .wallet-action {
+      & .wallet-action,
+      & .subscription {
         margin-bottom: var(--spacing-xx-tight);
       }
 
-      & .wallet-action {
+      & .wallet-action,
+      & .subscription {
         @mixin flex-center-start;
 
         & p {

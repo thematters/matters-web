@@ -1,12 +1,13 @@
-import { useRouter } from 'next/router'
-import { useState } from 'react'
-
-import { Dialog, Translate } from '~/components'
-import { useMutation } from '~/components/GQL'
+import {
+  Dialog,
+  Translate,
+  useDialogSwitch,
+  useMutation,
+  useRoute,
+} from '~/components'
 import UPDATE_TAG_SETTING from '~/components/GQL/mutations/updateTagSetting'
 
 import { ADD_TOAST } from '~/common/enums'
-import { getQuery } from '~/common/utils'
 
 import { UpdateTagSetting } from '~/components/GQL/mutations/__generated__/UpdateTagSetting'
 
@@ -16,12 +17,10 @@ interface Props {
 }
 
 const BaseDialog = ({ children, isOwner }: Props) => {
-  const [showDialog, setShowDialog] = useState(true)
-  const open = () => setShowDialog(true)
-  const close = () => setShowDialog(false)
+  const { show, open, close } = useDialogSwitch(true)
 
-  const router = useRouter()
-  const id = getQuery({ router, key: 'tagId' })
+  const { getQuery } = useRoute()
+  const id = getQuery('tagId')
   const [update, { loading }] = useMutation<UpdateTagSetting>(
     UPDATE_TAG_SETTING
   )
@@ -30,7 +29,7 @@ const BaseDialog = ({ children, isOwner }: Props) => {
     <>
       {children({ open })}
 
-      <Dialog size="sm" isOpen={showDialog} onDismiss={close}>
+      <Dialog size="sm" isOpen={show} onDismiss={close}>
         <Dialog.Header
           title={
             <Translate
@@ -65,37 +64,33 @@ const BaseDialog = ({ children, isOwner }: Props) => {
             bgColor="red"
             loading={loading}
             onClick={async () => {
-              try {
-                const result = await update({
-                  variables: {
-                    input: { id, type: isOwner ? 'leave' : 'leave_editor' },
+              const result = await update({
+                variables: {
+                  input: { id, type: isOwner ? 'leave' : 'leave_editor' },
+                },
+              })
+
+              if (!result) {
+                throw new Error('tag leave failed')
+              }
+
+              window.dispatchEvent(
+                new CustomEvent(ADD_TOAST, {
+                  detail: {
+                    color: 'green',
+                    content: (
+                      <Translate
+                        zh_hant="辭去權限成功"
+                        zh_hans="辞去权限成功"
+                        en="resignation success"
+                      />
+                    ),
+                    duration: 2000,
                   },
                 })
+              )
 
-                if (!result) {
-                  throw new Error('tag leave failed')
-                }
-
-                window.dispatchEvent(
-                  new CustomEvent(ADD_TOAST, {
-                    detail: {
-                      color: 'green',
-                      content: (
-                        <Translate
-                          zh_hant="辭去權限成功"
-                          zh_hans="辞去权限成功"
-                          en="resignation success"
-                        />
-                      ),
-                      duration: 2000,
-                    },
-                  })
-                )
-
-                close()
-              } catch (error) {
-                throw error
-              }
+              close()
             }}
           >
             <Translate

@@ -1,8 +1,9 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 
-import { Translate } from '~/components'
+import { CommentFormType, Translate } from '~/components'
 
+import { COMMENT_TYPE_TEXT } from '~/common/enums'
 import contentCommentStyles from '~/common/styles/utils/content.comment.css'
 import { captureClicks } from '~/common/utils'
 
@@ -14,7 +15,7 @@ import { ContentCommentPublic } from './__generated__/ContentCommentPublic'
 
 interface ContentProps {
   comment: ContentCommentPublic & Partial<ContentCommentPrivate>
-
+  type: CommentFormType
   size?: 'sm' | 'md-s'
 }
 
@@ -39,7 +40,7 @@ const fragments = {
   },
 }
 
-const Content = ({ comment, size }: ContentProps) => {
+const Content = ({ comment, type, size }: ContentProps) => {
   const { content, state } = comment
   const isBlocked = comment.author?.isBlocked
 
@@ -54,9 +55,12 @@ const Content = ({ comment, size }: ContentProps) => {
         content={content}
         collapsedContent={
           isBlocked ? (
-            <Translate id="commentBlocked" />
+            <Translate zh_hant="你屏蔽了该用户" zh_hans="你封鎖了該用戶" />
           ) : (
-            <Translate id="commentCollapsed" />
+            <Translate
+              zh_hant={`${COMMENT_TYPE_TEXT.zh_hant[type]}被創作者闔上`}
+              zh_hans={`${COMMENT_TYPE_TEXT.zh_hans[type]}被创作者折叠`}
+            />
           )
         }
         className={contentClasses}
@@ -85,8 +89,8 @@ const Content = ({ comment, size }: ContentProps) => {
     return (
       <p className={`${contentClasses} inactive`}>
         <Translate
-          zh_hant="此評論因違反用戶協定而被隱藏"
-          zh_hans="此评论因违反用户协定而被隐藏"
+          zh_hant={`此${COMMENT_TYPE_TEXT.zh_hant[type]}因違反用戶協定而被隱藏`}
+          zh_hans={`此${COMMENT_TYPE_TEXT.zh_hans[type]}因违反用户协定而被隐藏`}
         />
 
         <style jsx>{styles}</style>
@@ -97,7 +101,10 @@ const Content = ({ comment, size }: ContentProps) => {
   if (state === 'archived') {
     return (
       <p className={`${contentClasses} inactive`}>
-        <Translate id="commentDeleted" />
+        <Translate
+          zh_hant={`${COMMENT_TYPE_TEXT.zh_hant[type]}被原作者刪除`}
+          zh_hans={`${COMMENT_TYPE_TEXT.zh_hans[type]}被原作者删除`}
+        />
 
         <style jsx>{styles}</style>
       </p>

@@ -5,9 +5,14 @@ export default gql`
     togglePinComment(input: { id: $id, enabled: $enabled }) {
       id
       pinned
-      article {
-        id
-        pinCommentLeft
+      node {
+        ... on Article {
+          id
+          pinCommentLeft
+        }
+        ... on Circle {
+          id
+        }
       }
     }
   }

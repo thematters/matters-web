@@ -14,14 +14,16 @@ const fragments = {
     fragment NoticeComment on Comment {
       id
       state
-      article {
-        id
-        title
-        slug
-        mediaHash
-        author {
+      node {
+        ... on Article {
           id
-          userName
+          title
+          slug
+          mediaHash
+          author {
+            id
+            userName
+          }
         }
       }
       parentComment {
@@ -36,15 +38,19 @@ const fragments = {
 }
 
 const NoticeComment = ({ comment }: { comment: NoticeCommentType | null }) => {
+  const article =
+    comment?.node.__typename === 'Article' ? comment.node : undefined
+
   if (!comment) {
     return null
   }
 
   const path =
-    comment.state === 'active'
+    comment.state === 'active' && article
       ? toPath({
           page: 'commentDetail',
           comment,
+          article,
         })
       : {}
 
@@ -57,7 +63,7 @@ const NoticeComment = ({ comment }: { comment: NoticeCommentType | null }) => {
         borderRadius="xtight"
       >
         <Expandable>
-          <CommentContent comment={comment} size="sm" />
+          <CommentContent comment={comment} type="article" size="sm" />
         </Expandable>
       </Card>
 
