@@ -1,7 +1,7 @@
 import jump from 'jump.js'
 import _differenceBy from 'lodash/differenceBy'
 import _get from 'lodash/get'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 
 import {
   EmptyResponse,
@@ -51,7 +51,7 @@ const LatestResponses = ({ lock }: { lock: boolean }) => {
   const { getQuery } = useRoute()
   const mediaHash = getQuery('mediaHash')
   const [articleOnlyMode, setArticleOnlyMode] = useState<boolean>(false)
-  const [storedCursor, setStoredCursor] = useState<string | null>(null)
+  const storedCursorRef = useRef<string | null>(null)
 
   /**
    * Fragment Patterns
@@ -93,8 +93,8 @@ const LatestResponses = ({ lock }: { lock: boolean }) => {
   // pagination
   const connectionPath = 'article.responses'
   const article = data?.article
-  const { edges, pageInfo } = (article && article.responses) || {}
-  const articleId = article && article.id
+  const { edges, pageInfo } = article?.responses || {}
+  const articleId = article?.id
   const responses = filterResponses<ResponsePublic>(
     (edges || []).map(({ node }) => node)
   )
@@ -127,12 +127,12 @@ const LatestResponses = ({ lock }: { lock: boolean }) => {
 
   // load next page
   const loadMore = async (params?: { before: string }) => {
-    const loadBefore = (params && params.before) || null
-    const noLimit = loadBefore && pageInfo && pageInfo.endCursor
+    const loadBefore = params?.before || null
+    const noLimit = loadBefore && pageInfo?.endCursor
 
     const { data: newData } = await fetchMore({
       variables: {
-        after: pageInfo && pageInfo.endCursor,
+        after: pageInfo?.endCursor,
         before: loadBefore,
         first: noLimit ? null : RESPONSES_COUNT,
         includeBefore: !!loadBefore,
@@ -158,15 +158,15 @@ const LatestResponses = ({ lock }: { lock: boolean }) => {
   usePullToRefresh.Handler(refetch)
 
   useEffect(() => {
-    if (pageInfo && pageInfo.startCursor) {
-      setStoredCursor(pageInfo.startCursor)
+    if (pageInfo?.startCursor) {
+      storedCursorRef.current = pageInfo.startCursor
     }
-  }, [pageInfo && pageInfo.startCursor])
+  }, [pageInfo?.startCursor])
 
   const replySubmitCallback = async () => {
     const { data: newData } = await fetchMore({
       variables: {
-        before: storedCursor,
+        before: storedCursorRef.current,
         includeBefore: false,
         articleOnly: articleOnlyMode,
       },
@@ -201,7 +201,7 @@ const LatestResponses = ({ lock }: { lock: boolean }) => {
           null
         )
         if (newStartCursor) {
-          setStoredCursor(newStartCursor)
+          storedCursorRef.current = newStartCursor
         }
         return newResult
       },
@@ -284,7 +284,7 @@ const LatestResponses = ({ lock }: { lock: boolean }) => {
         ))}
       </List>
 
-      {pageInfo && pageInfo.hasNextPage && (
+      {pageInfo?.hasNextPage && (
         <ViewMoreButton onClick={() => loadMore()} loading={loading} />
       )}
 
