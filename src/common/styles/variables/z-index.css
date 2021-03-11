@@ -9,6 +9,7 @@
   --z-index-sticky-tabs: 110;
 
   /* bottom bar */
+  --z-index-global-bottom-bar: 149;
   --z-index-bottom-bar: 150;
   --z-index-over-bottom-bar: 151;
 
