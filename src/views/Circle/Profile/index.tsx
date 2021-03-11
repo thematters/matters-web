@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react'
 
 import {
   CircleAvatar,
-  CircleCover,
+  Cover,
   Expandable,
   Layout,
   Spinner,
@@ -127,7 +127,7 @@ const CircleProfile = () => {
       <LayoutHeader />
 
       <section className="profile">
-        <CircleCover cover={circle.cover} fallbackCover={CIRCLE_COVER} />
+        <Cover cover={circle.cover} fallbackCover={CIRCLE_COVER} />
 
         <header>
           <CircleAvatar size="xxl" circle={circle} />

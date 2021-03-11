@@ -30,7 +30,6 @@ export * from './PullToRefresh'
 export * from './Avatar'
 export * from './CircleAvatar'
 export * from './Cover'
-export * from './CircleCover'
 
 /**
  * Compositions
