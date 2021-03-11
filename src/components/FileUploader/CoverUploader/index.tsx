@@ -3,7 +3,6 @@ import { useState } from 'react'
 
 import {
   Button,
-  CircleCover,
   Cover,
   CoverProps,
   IconCamera24,
@@ -170,13 +169,9 @@ export const CoverUploader = ({
         </Cover>
       )}
       {isCircle && (
-        <CircleCover
-          cover={cover}
-          fallbackCover={fallbackCover}
-          inEditor={inEditor}
-        >
+        <Cover cover={cover} fallbackCover={fallbackCover} inEditor={inEditor}>
           <Mask />
-        </CircleCover>
+        </Cover>
       )}
 
       <VisuallyHidden>
