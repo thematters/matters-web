@@ -5,7 +5,7 @@
     @mixin all-transition;
 
     bottom: 0;
-    z-index: var(--z-index-bottom-bar);
+    z-index: var(--z-index-over-bottom-bar);
     opacity: 0;
     transform: translateY(100%);
   }
