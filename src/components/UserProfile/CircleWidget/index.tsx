@@ -57,22 +57,21 @@ const CircleWidget: React.FC<CircleWidgetProps> = ({ circles, isMe }) => {
 
   return (
     <section className="circle-widget">
-      <section className="border">
-        <CircleDigest.Rich
-          avatarSize="xl"
-          borderRadius="xtight"
-          circle={circle}
-          hasFooter
-          hasOwner={false}
-          hasPrice={!isMe}
-          onClickPrice={() => {
-            analytics.trackEvent('click_button', {
-              type: 'subscribe_circle_price',
-              pageType: 'user_profile',
-            })
-          }}
-        />
-      </section>
+      <CircleDigest.Rich
+        avatarSize="xl"
+        borderRadius="xtight"
+        borderColor="line-grey-light"
+        circle={circle}
+        hasFooter
+        hasOwner={false}
+        hasPrice={!isMe}
+        onClickPrice={() => {
+          analytics.trackEvent('click_button', {
+            type: 'subscribe_circle_price',
+            pageType: 'user_profile',
+          })
+        }}
+      />
       <style jsx>{styles}</style>
     </section>
   )

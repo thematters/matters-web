@@ -10,7 +10,6 @@ import _pickBy from 'lodash/pickBy'
 import { useContext, useState } from 'react'
 
 import {
-  CircleDigest,
   Dialog,
   LanguageContext,
   Translate,
@@ -23,8 +22,8 @@ import { analytics, parseFormSubmitErrors, translate } from '~/common/utils'
 
 import StripeCheckout from '../StripeCheckout'
 import { SUBSCRIBE_CIRCLE } from './gql'
+import Head from './Head'
 import Hint from './Hint'
-import Price from './Price'
 import Processing from './Processing'
 import styles from './styles.css'
 
@@ -154,19 +153,7 @@ const BaseCardPayment: React.FC<CardPaymentProps> = ({
     <>
       <Dialog.Content hasGrow>
         <section>
-          <section className="circle">
-            <CircleDigest.Rich
-              circle={circle}
-              borderRadius="xtight"
-              bgColor="white"
-              hasFooter={false}
-              hasDescription
-              hasOwner
-              disabled
-            />
-          </section>
-
-          <Price circle={circle} />
+          <Head circle={circle} />
 
           <StripeCheckout error={checkoutError} onChange={onCheckoutChange} />
 
