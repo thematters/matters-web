@@ -49,7 +49,7 @@ const ViewerFragments = {
           totalCount
         }
         following {
-          tags(input: { first : 0 }) {
+          tags(input: { first: 0 }) {
             totalCount
           }
         }
