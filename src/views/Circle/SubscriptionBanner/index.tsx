@@ -84,6 +84,7 @@ const SubscriptionBanner = ({ circle }: SubscriptionBannerProps) => {
                     <Translate
                       zh_hant="，立即訂閱圍爐"
                       zh_hans="，立即订阅围炉"
+                      en=", subscribe to this Circle"
                     />
                   </p>
 
