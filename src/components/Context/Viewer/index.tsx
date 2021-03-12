@@ -48,8 +48,8 @@ const ViewerFragments = {
         articles(input: { first: 0 }) {
           totalCount
         }
-        recommendation {
-          followingTags(input: { first: 0 }) {
+        following {
+          tags(input: { first : 0 }) {
             totalCount
           }
         }
@@ -99,7 +99,7 @@ export const processViewer = (
 
   // Onbooarding Tasks
   const hasLikerId = !!viewer.liker.likerId
-  const hasFollowingTag = viewer?.recommendation?.followingTags.totalCount >= 5
+  const hasFollowingTag = viewer?.following?.tags.totalCount >= 5
   const hasArticle = viewer?.articles?.totalCount >= 1
   const hasFollowee = viewer?.followees?.totalCount >= 5
   const hasCommentPermission = isAuthed && !isOnboarding

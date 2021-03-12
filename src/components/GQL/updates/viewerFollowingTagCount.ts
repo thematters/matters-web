@@ -9,8 +9,8 @@ const VIEWER_FOLLOWING_TAG_COUNT = gql`
   query ViewerFollowingTagCount {
     viewer {
       id
-      recommendation {
-        followingTags(input: { first: 0 }) {
+      following {
+        tags(input: { first: 0 }) {
           totalCount
         }
       }
@@ -35,9 +35,9 @@ const update = ({
     }
 
     if (type === 'increment') {
-      cacheData.viewer.recommendation.followingTags.totalCount++
+      cacheData.viewer.following.tags.totalCount++
     } else {
-      cacheData.viewer.recommendation.followingTags.totalCount--
+      cacheData.viewer.following.tags.totalCount--
     }
 
     cache.writeQuery({
