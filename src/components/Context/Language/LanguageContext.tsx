@@ -41,12 +41,16 @@ export const LanguageProvider = ({
   let viewerLanguage = viewer?.settings?.language
 
   // set language preference from browser for visitors
-  if ((!viewer || !viewer.id) && navigator && navigator.language) {
+  if (
+    (!viewer || !viewer.id) &&
+    process.browser &&
+    navigator &&
+    navigator.language
+  ) {
     viewerLanguage = langConvert.bcp472sys(navigator.language)
   }
 
   const [lang, setLang] = useState<Language>(viewerLanguage || defaultLang)
-  console.log({ viewerLanguage, lang })
 
   return (
     <LanguageContext.Provider
