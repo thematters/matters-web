@@ -3,10 +3,14 @@ name: Build and Deploy Storybook
 on:
   pull_request:
     branches:
-      - '*'
+      - develop
+      - stage
+    types:
+      - labeled
 
 jobs:
   build-and-deploy-storybook:
+    if: ${{ github.event.label.name == 'storybook' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
@@ -30,22 +34,16 @@ jobs:
         run: npm ci
 
       - name: Generate Types
-        if: github.ref == 'refs/heads/develop' || github.base_ref == 'develop'
+        if: github.base_ref == 'develop'
         run: |
           npm run gen:clean \
           && npm run gen:type
 
       - name: Generate Types
-        if: github.ref == 'refs/heads/stage' || github.base_ref == 'stage'
+        if: github.base_ref == 'stage'
         run: |
           npm run gen:clean \
           && npm run gen:type
-
-      - name: Generate Types (production)
-        if: github.ref == 'refs/heads/master' || github.base_ref == 'master'
-        run: |
-          npm run gen:clean \
-          && npm run gen:type:prod
 
       - name: Build
         run: npm run build-storybook
