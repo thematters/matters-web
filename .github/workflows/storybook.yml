@@ -3,10 +3,14 @@ name: Build and Deploy Storybook
 on:
   pull_request:
     branches:
-      - '*'
+      - develop
+      - stage
+    types:
+      - labeled
 
 jobs:
   build-and-deploy-storybook:
+    if: ${{ github.event.label.name == 'storybook' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
