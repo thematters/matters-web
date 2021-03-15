@@ -37,20 +37,20 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
-      - name: Generate Types
-        if: github.ref == 'refs/heads/develop' || github.base_ref == 'develop'
+      - name: Generate Types (develop)
+        if: github.ref == 'refs/heads/develop'
         run: |
           npm run gen:clean \
           && npm run gen:type
 
-      - name: Generate Types
-        if: github.ref == 'refs/heads/stage' || github.base_ref == 'stage'
+      - name: Generate Types (stage)
+        if: github.ref == 'refs/heads/stage'
         run: |
           npm run gen:clean \
           && npm run gen:type
 
       - name: Generate Types (production)
-        if: github.ref == 'refs/heads/master' || github.base_ref == 'master'
+        if: github.ref == 'refs/heads/master'
         run: |
           npm run gen:clean \
           && npm run gen:type:prod
@@ -71,17 +71,17 @@ jobs:
 
       # === `develop` branch ===
       - name: Build (develop)
-        if: github.ref == 'refs/heads/develop' || github.base_ref == 'develop'
+        if: github.ref == 'refs/heads/develop'
         run: cp .env.dev .env && npm run build
 
       # === `stage` branch ===
       - name: Build (stage)
-        if: github.ref == 'refs/heads/stage' || github.base_ref == 'stage'
+        if: github.ref == 'refs/heads/stage'
         run: cp .env.stage .env && npm run build
 
       # === `master` branch ===
       - name: Build (production)
-        if: github.ref == 'refs/heads/master' || github.base_ref == 'master'
+        if: github.ref == 'refs/heads/master'
         run: cp .env.prod .env && npm run build
 
       - name: Setup AWS
