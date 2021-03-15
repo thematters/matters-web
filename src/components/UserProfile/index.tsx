@@ -210,7 +210,7 @@ export const UserProfile = () => {
             {({ open: openFollowingDialog }) => (
               <button type="button" onClick={openFollowingDialog}>
                 <span className="count">
-                  {numAbbr(user.followees.totalCount)}
+                  {numAbbr(user.following.users.totalCount)}
                 </span>
                 <Translate id="following" />
               </button>
