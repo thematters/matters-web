@@ -9,8 +9,10 @@ const VIEWER_FOLLOWEE_COUNT = gql`
   query ViewerFolloweeCount {
     viewer {
       id
-      followees(input: { first: 0 }) {
-        totalCount
+      following {
+        users(input: { first: 0 }) {
+          totalCount
+        }
       }
     }
   }
@@ -33,9 +35,9 @@ const update = ({
     }
 
     if (type === 'increment') {
-      cacheData.viewer.followees.totalCount++
+      cacheData.viewer.following.users.totalCount++
     } else {
-      cacheData.viewer.followees.totalCount--
+      cacheData.viewer.following.users.totalCount--
     }
 
     cache.writeQuery({
