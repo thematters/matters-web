@@ -78,7 +78,11 @@ const SubscriptionBanner = ({ circle }: SubscriptionBannerProps) => {
             <section className="inner">
               <p>
                 {price.amount} {price.currency} / <Translate id="month" />
-                <Translate zh_hant="，立即訂閱圍爐" zh_hans="，立即订阅围炉" />
+                <Translate
+                  zh_hant="，立即訂閱圍爐"
+                  zh_hans="，立即订阅围炉"
+                  en=", subscribe to this Circle"
+                />
               </p>
 
               <IconArrowRight16 color="white" />

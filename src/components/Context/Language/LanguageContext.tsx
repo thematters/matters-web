@@ -37,7 +37,19 @@ export const LanguageProvider = ({
 }) => {
   const [updateLanguage] = useMutation<UpdateLanguage>(UPDATE_VIEWER_LANGUAGE)
   const viewer = useContext(ViewerContext)
-  const viewerLanguage = viewer?.settings?.language
+
+  let viewerLanguage = viewer?.settings?.language
+
+  // set language preference from browser for visitors
+  if (
+    (!viewer || !viewer.id) &&
+    process.browser &&
+    navigator &&
+    navigator.language
+  ) {
+    viewerLanguage = langConvert.bcp472sys(navigator.language)
+  }
+
   const [lang, setLang] = useState<Language>(viewerLanguage || defaultLang)
 
   return (
