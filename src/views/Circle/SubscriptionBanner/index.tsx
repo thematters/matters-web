@@ -13,7 +13,6 @@ import { ADD_TOAST, OPEN_SUBSCRIBE_CIRCLE_DIALOG } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 import { fragments } from './gql'
-import IntroDialog from './IntroDialog'
 import styles from './styles.css'
 
 import { SubscriptionBannerCirclePrivate } from './__generated__/SubscriptionBannerCirclePrivate'
@@ -58,42 +57,38 @@ const SubscriptionBanner = ({ circle }: SubscriptionBannerProps) => {
   return (
     <section className="subscription-banner">
       <Layout.FixedMain>
-        <IntroDialog circle={circle} onConfirm={openSubscribeCircleDialog}>
-          {({ open: openIntroDialog }) => (
-            <Card
-              bgColor="none"
-              spacing={[0, 0]}
-              onClick={() => {
-                analytics.trackEvent('click_button', {
-                  type: 'subscribe_circle_banner',
-                  pageType: 'circle_detail',
-                })
+        <Card
+          bgColor="none"
+          spacing={[0, 0]}
+          onClick={() => {
+            analytics.trackEvent('click_button', {
+              type: 'subscribe_circle_banner',
+              pageType: 'circle_detail',
+            })
 
-                if (!viewer.isAuthed) {
-                  showLoginToast()
-                  return
-                }
+            if (!viewer.isAuthed) {
+              showLoginToast()
+              return
+            }
 
-                openIntroDialog()
-              }}
-            >
-              <section className="content">
-                <section className="inner">
-                  <p>
-                    {price.amount} {price.currency} / <Translate id="month" />
-                    <Translate
-                      zh_hant="，立即訂閱圍爐"
-                      zh_hans="，立即订阅围炉"
-                      en=", subscribe to this Circle"
-                    />
-                  </p>
+            openSubscribeCircleDialog()
+          }}
+        >
+          <section className="content">
+            <section className="inner">
+              <p>
+                {price.amount} {price.currency} / <Translate id="month" />
+                <Translate
+                  zh_hant="，立即訂閱圍爐"
+                  zh_hans="，立即订阅围炉"
+                  en=", subscribe to this Circle"
+                />
+              </p>
 
-                  <IconArrowRight16 color="white" />
-                </section>
-              </section>
-            </Card>
-          )}
-        </IntroDialog>
+              <IconArrowRight16 color="white" />
+            </section>
+          </section>
+        </Card>
       </Layout.FixedMain>
 
       <style jsx>{styles}</style>
