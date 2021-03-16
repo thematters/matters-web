@@ -32,7 +32,7 @@ const BasePaymentPointerDialog: React.FC<PaymentPointerProps> = ({
               type="submit"
               form={formId}
               disabled={isSubmitting || !isValid}
-              text={<Translate zh_hant="確認" zh_hans="确认" />}
+              text={<Translate zh_hant="確認" zh_hans="确认" en="Submit" />}
               loading={isSubmitting}
             />
           }
