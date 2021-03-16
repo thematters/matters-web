@@ -48,3 +48,27 @@ export const SELECT_SEARCH = gql`
   ${ArticleDigestDropdown.fragments.article}
   ${Tag.fragments.tag}
 `
+
+export const LIST_VIEWER_ARTICLES = gql`
+  query ListViewerArticles($after: String) {
+    viewer {
+      id
+      articles(input: { first: 10, after: $after }) {
+        totalCount
+        pageInfo {
+          startCursor
+          endCursor
+          hasNextPage
+        }
+        edges {
+          cursor
+          node {
+            id
+            ...ArticleDigestDropdownArticle
+          }
+        }
+      }
+    }
+  }
+  ${ArticleDigestDropdown.fragments.article}
+`

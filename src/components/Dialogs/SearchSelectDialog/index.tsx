@@ -89,11 +89,10 @@ const BaseSearchSelectDialog = ({
     initStagingNodes
   )
   const addNodeToStaging = (node: SelectNode) => {
-    const isExists = stagingNodes.some(({ node: n }) => n.id === node.id)
-
-    if (!isExists) {
-      setStagingNodes([...stagingNodes, { node, selected: true }])
-    }
+    setStagingNodes([
+      ...stagingNodes.filter(({ node: n }) => n.id !== node.id),
+      { node, selected: true },
+    ])
 
     toStagingArea()
   }
