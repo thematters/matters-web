@@ -102,6 +102,7 @@ const ArticleDetail = () => {
 
   const article = data?.article
   const authorId = article?.author?.id
+  const paymentPointer = article?.author?.paymentPointer || undefined
   const collectionCount = article?.collection?.totalCount || 0
   const isAuthor = viewer.id === authorId
   const circle = article?.circle
@@ -318,6 +319,7 @@ const ArticleDetail = () => {
         description={article.summary}
         keywords={(article.tags || []).map(({ content }) => content)}
         image={article.cover}
+        paymentPointer={paymentPointer}
       />
 
       <PullToRefresh>
