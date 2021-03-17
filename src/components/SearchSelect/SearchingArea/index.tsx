@@ -6,18 +6,20 @@ import {
   EmptySearch,
   InfiniteScroll,
   Spinner,
-  toDigestTag,
+  toDigestTagPlaceholder,
   usePublicLazyQuery,
   ViewerContext,
 } from '~/components'
+import { toUserDigestMiniPlaceholder } from '~/components/UserDigest/Mini'
 
 import { INPUT_DEBOUNCE } from '~/common/enums'
-import { analytics, mergeConnections } from '~/common/utils'
+import { analytics, isValidEmail, mergeConnections } from '~/common/utils'
 
 import SearchSelectNode from '../SearchSelectNode'
 import styles from '../styles.css'
 import CreateTag from './CreateTag'
 import { LIST_VIEWER_ARTICLES, SELECT_SEARCH } from './gql'
+import InviteEmail from './InviteEmail'
 import SearchInput, { SearchType as SearchInputType } from './SearchInput'
 
 import { ListViewerArticles } from './__generated__/ListViewerArticles'
@@ -54,7 +56,8 @@ interface SearchingAreaProps {
   toSearchingArea: () => void
   addNodeToStaging: (node: SelectNode) => void
 
-  creatable?: boolean
+  createTag?: boolean
+  inviteEmail?: boolean
 }
 
 type Mode = 'search' | 'list'
@@ -68,11 +71,13 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
   toSearchingArea,
   addNodeToStaging,
 
-  creatable,
+  createTag,
+  inviteEmail,
 }) => {
   const viewer = useContext(ViewerContext)
 
   const isArticle = searchType === 'Article'
+  const isUser = searchType === 'User'
   const isTag = searchType === 'Tag'
   const hasListMode = viewer.id === searchFilter?.authorId && isArticle
   const [mode, setMode] = useState<Mode>(hasListMode ? 'list' : 'search')
@@ -218,10 +223,15 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
   const canCreateTag =
     isTag &&
     searchKey &&
-    creatable &&
+    createTag &&
     !searchNodes.some(
       (node) => node.__typename === 'Tag' && node.content === searchKey
     )
+  const canInviteEmail =
+    isUser &&
+    inviteEmail &&
+    searchKey &&
+    isValidEmail(searchKey.trim(), { allowPlusSign: false })
 
   /**
    * Render
@@ -242,33 +252,48 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
           {searching && <Spinner />}
 
           {/* Search */}
-          {isSearchMode && !searching && !hasNodes && !canCreateTag && (
-            <EmptySearch />
-          )}
+          {isSearchMode &&
+            !searching &&
+            !hasNodes &&
+            !canCreateTag &&
+            !canInviteEmail && <EmptySearch />}
 
-          {isSearchMode && !searching && (hasNodes || canCreateTag) && (
-            <InfiniteScroll
-              hasNextPage={!!searchPageInfo?.hasNextPage}
-              loadMore={loadMore}
-            >
-              <ul className="nodes">
-                {canCreateTag && (
-                  <li>
-                    <CreateTag
-                      tag={toDigestTag(searchKey)}
-                      onClick={addNodeToStaging}
-                    />
-                  </li>
-                )}
+          {isSearchMode &&
+            !searching &&
+            (hasNodes || canCreateTag || canInviteEmail) && (
+              <InfiniteScroll
+                hasNextPage={!!searchPageInfo?.hasNextPage}
+                loadMore={loadMore}
+              >
+                <ul className="nodes">
+                  {canCreateTag && (
+                    <li>
+                      <CreateTag
+                        tag={toDigestTagPlaceholder(searchKey)}
+                        onClick={addNodeToStaging}
+                      />
+                    </li>
+                  )}
+                  {canInviteEmail && (
+                    <li>
+                      <InviteEmail
+                        user={toUserDigestMiniPlaceholder(searchKey.trim())}
+                        onClick={addNodeToStaging}
+                      />
+                    </li>
+                  )}
 
-                {searchingNodes.map((node) => (
-                  <li key={node.id}>
-                    <SearchSelectNode node={node} onClick={addNodeToStaging} />
-                  </li>
-                ))}
-              </ul>
-            </InfiniteScroll>
-          )}
+                  {searchingNodes.map((node) => (
+                    <li key={node.id}>
+                      <SearchSelectNode
+                        node={node}
+                        onClick={addNodeToStaging}
+                      />
+                    </li>
+                  ))}
+                </ul>
+              </InfiniteScroll>
+            )}
 
           {/* List */}
           {isListMode && !searching && !haslistNode && <EmptySearch />}

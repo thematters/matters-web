@@ -39,6 +39,20 @@ export type UserDigestMiniProps = {
   onClick?: () => void
 } & AvatarProps
 
+export const toUserDigestMiniPlaceholder = (displayName: string) =>
+  ({
+    __typename: 'User',
+    id: '',
+    userName: '',
+    displayName,
+    status: null,
+    avatar: null,
+    liker: {
+      __typename: 'Liker',
+      civicLiker: false,
+    },
+  } as UserDigestMiniUser)
+
 const Mini = ({
   user,
 
@@ -100,7 +114,9 @@ const Mini = ({
           {hasDisplayName && (
             <span className="displayname">{user.displayName}</span>
           )}
-          {hasUserName && <span className="username">@{user.userName}</span>}
+          {hasUserName && user.userName && (
+            <span className="username">@{user.userName}</span>
+          )}
         </span>
 
         <style jsx>{styles}</style>

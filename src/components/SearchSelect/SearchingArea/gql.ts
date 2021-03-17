@@ -29,9 +29,6 @@ export const SELECT_SEARCH = gql`
         node {
           id
           ... on User {
-            info {
-              description
-            }
             ...UserDigestMiniUser
           }
           ... on Article {
