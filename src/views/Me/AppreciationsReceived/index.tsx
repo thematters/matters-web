@@ -55,7 +55,7 @@ const BaseAppreciationsReceived = () => {
     return <Spinner />
   }
 
-  if (!data || !data.viewer) {
+  if (!data?.viewer) {
     return null
   }
 

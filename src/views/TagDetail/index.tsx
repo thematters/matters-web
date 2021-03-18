@@ -219,7 +219,7 @@ const TagDetailContainer = () => {
     )
   }
 
-  if (!data || !data.node || data.node.__typename !== 'Tag') {
+  if (data?.node?.__typename !== 'Tag') {
     return (
       <EmptyLayout>
         <EmptyTag />

@@ -143,7 +143,7 @@ const BaseDropdownActions = ({
 }: BaseDropdownActionsProps) => {
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
     <Menu width={isInDropdown ? 'sm' : undefined}>
-      {hasPin && <PinButton comment={comment} />}
+      {hasPin && <PinButton comment={comment} type={type} />}
       {hasEdit && <EditButton openEditCommentDialog={openEditCommentDialog} />}
       {hasDelete && (
         <DeleteComment.Button openDialog={openDeleteCommentDialog} />
