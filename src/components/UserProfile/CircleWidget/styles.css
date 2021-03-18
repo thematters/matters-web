@@ -1,4 +1,7 @@
 .circle-widget {
-  padding: var(--spacing-base);
   margin-top: var(--spacing-loose);
+
+  &:not(.banner) {
+    padding: 0 var(--spacing-base);
+  }
 }
