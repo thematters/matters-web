@@ -31,8 +31,8 @@ const FOLLOWING_TAGS = gql`
   query FollowingTagsFeed {
     viewer {
       id
-      recommendation {
-        followingTags(input: { first: null }) {
+      following {
+        tags(input: { first: null }) {
           edges {
             node {
               ... on Tag {
@@ -213,7 +213,7 @@ const TagsFeed = () => {
     return <QueryError error={error} />
   }
 
-  const { edges } = data?.viewer?.recommendation.followingTags || {}
+  const { edges } = data?.viewer?.following.tags || {}
 
   if (!edges || edges.length <= 0) {
     return <EmptyFollowingTag />

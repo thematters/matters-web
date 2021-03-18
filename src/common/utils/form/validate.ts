@@ -3,6 +3,7 @@ import {
   PAYMENT_MAXIMUM_CIRCLE_AMOUNT,
   PAYMENT_MINIMAL_ADD_CREDIT_AMOUNT,
   PAYMENT_MINIMAL_CIRCLE_AMOUNT,
+  RESERVED_CIRCLE_NAMES,
   RESERVED_NAMES,
 } from '~/common/enums'
 import {
@@ -233,6 +234,15 @@ export const validateCircleName = (value: string, lang: Language) => {
     return translate({
       zh_hant: '輸入字數過長，僅供輸入 2-20 個字元',
       zh_hans: '输入字数过长，仅供输入 2-20 个字符',
+      lang,
+    })
+  }
+
+  const invalidNameIndex = RESERVED_CIRCLE_NAMES.indexOf(value.toLowerCase())
+  if (invalidNameIndex >= 0) {
+    return translate({
+      zh_hant: `不能使用「${RESERVED_CIRCLE_NAMES[invalidNameIndex]}」`,
+      zh_hans: `不能使用 “${RESERVED_CIRCLE_NAMES[invalidNameIndex]}”`,
       lang,
     })
   }
