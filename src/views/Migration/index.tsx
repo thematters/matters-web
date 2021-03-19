@@ -2,11 +2,11 @@ import Link from 'next/link'
 import { useContext } from 'react'
 
 import { Head, IconLogo, LanguageContext } from '~/components'
-import Footer from '~/components/Standalone/Footer'
 
 import { PATHS, TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
 
+import Footer from '../About/Footer'
 import Banner from './Banner'
 import Features from './Features'
 import Intro from './Intro'

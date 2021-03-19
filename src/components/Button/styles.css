@@ -287,6 +287,12 @@ span.container {
   }
 }
 
+.bg-black {
+  & .hotarea {
+    background: var(--color-black);
+  }
+}
+
 /* Background:hover */
 .bg-active-grey-lighter {
   &:hover,
