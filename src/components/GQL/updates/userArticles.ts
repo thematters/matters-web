@@ -3,7 +3,7 @@ import { DataProxy } from 'apollo-cache'
 import {
   UserArticlesPublic,
   UserArticlesPublic_user_articles_edges,
-} from '~/components/GQL/queries/__generated__/UserArticlesPublic'
+} from '~/views/User/Articles/__generated__/UserArticlesPublic'
 
 const sortEdgesByCreatedAtDesc = (
   edges: UserArticlesPublic_user_articles_edges[]
@@ -26,9 +26,7 @@ const update = ({
   type: 'sticky' | 'unsticky' | 'archive'
 }) => {
   // FIXME: circular dependencies
-  const {
-    USER_ARTICLES_PUBLIC,
-  } = require('~/components/GQL/queries/userArticles')
+  const { USER_ARTICLES_PUBLIC } = require('~/views/User/Articles/gql')
 
   if (!userName) {
     return
@@ -40,7 +38,7 @@ const update = ({
       variables: { userName },
     })
 
-    if (!data || !data.user || !data.user.status || !data.user.articles.edges) {
+    if (!data?.user?.status || !data.user.articles.edges) {
       return
     }
 

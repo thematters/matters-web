@@ -57,7 +57,7 @@ const BaseTransactions = () => {
     return <Spinner />
   }
 
-  if (!data || !data.viewer) {
+  if (!data?.viewer) {
     return null
   }
 

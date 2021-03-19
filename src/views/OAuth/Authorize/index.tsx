@@ -66,7 +66,7 @@ const BaseOAuthAuthorize = () => {
     )
   }
 
-  if (!data || !data.oauthClient || !data.oauthClient.id) {
+  if (!data?.oauthClient?.id) {
     return <Throw404 />
   }
 
