@@ -35,6 +35,7 @@ const CircleWidget: React.FC<CircleWidgetProps> = ({ circles, isMe }) => {
         <Form.List forceGreyStyle>
           <Form.List.Item
             forceGreyStyle
+            bold
             title={
               <Translate
                 zh_hant="快來搭建圍爐，呼召你的支持者加入"

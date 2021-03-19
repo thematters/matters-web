@@ -14,12 +14,15 @@ import styles from './styles.css'
 type ItemProps = {
   title: string | React.ReactNode
   subtitle?: string | React.ReactNode
+
   leftAlign?: 'top'
   right?: React.ReactNode
   rightText?: string | React.ReactNode
   rightTextColor?: 'green' | 'grey-darker'
   rightSubText?: string | React.ReactNode
   forceGreyStyle?: boolean
+  bold?: boolean
+
   ref?: any
 } & CardProps
 
@@ -35,6 +38,7 @@ const Item: React.FC<ItemProps> = forwardRef(
       rightSubText,
 
       forceGreyStyle,
+      bold,
 
       ...cardProps
     },
@@ -45,6 +49,7 @@ const Item: React.FC<ItemProps> = forwardRef(
     const leftClasses = classNames({
       left: true,
       top: leftAlign === 'top',
+      bold: !!bold,
     })
 
     return (
@@ -64,7 +69,11 @@ const Item: React.FC<ItemProps> = forwardRef(
             <section className="right">
               {right || (
                 <TextIcon
-                  icon={clickable && <IconArrowRight16 color="grey" />}
+                  icon={
+                    clickable && (
+                      <IconArrowRight16 color={bold ? 'black' : 'grey'} />
+                    )
+                  }
                   size="md"
                   textPlacement="left"
                   spacing="xtight"
