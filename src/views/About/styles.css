@@ -9,56 +9,6 @@ h2 {
   }
 }
 
-header {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  z-index: 1;
-  padding: var(--spacing-x-loose) 0;
-
-  & .logo {
-    & :global(svg) {
-      width: 97px;
-      height: 20px;
-    }
-  }
-}
-
-.slogan {
-  @mixin flex-center-space-between;
-
-  position: relative;
-  align-items: flex-start;
-  height: 100vh;
-  height: calc(var(--vh) * 100);
-  padding-top: 8.125rem;
-  text-align: center;
-  background-color: var(--color-green-lighter);
-  background-repeat: no-repeat;
-  background-position: right bottom;
-  background-size: contain;
-
-  @media (--sm-up) {
-    align-items: center;
-    height: 50rem;
-    padding-top: 0;
-    text-align: left;
-    background-position: right center;
-  }
-
-  & img {
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 100%;
-  }
-
-  & .buttons {
-    margin-top: var(--spacing-xx-loose);
-  }
-}
-
 .goal {
   padding: var(--spacing-xxx-loose) 0;
 
@@ -165,77 +115,6 @@ header {
 
         & p {
           margin-bottom: 0;
-        }
-      }
-    }
-  }
-}
-
-.reports {
-  margin-top: 5rem;
-  margin-bottom: var(--spacing-xxx-loose);
-
-  & h2 {
-    margin-bottom: var(--spacing-xx-loose);
-    text-align: center;
-  }
-
-  & .item {
-    width: 100%;
-    padding: 0 var(--spacing-x-tight);
-    margin-bottom: var(--spacing-base);
-
-    @media (--sm-up) {
-      width: 50%;
-    }
-
-    @media (--lg-up) {
-      width: 25%;
-    }
-
-    & a {
-      @mixin all-transition;
-
-      position: relative;
-      display: block;
-      padding: var(--spacing-base);
-      background: var(--color-grey-lighter);
-
-      &:hover,
-      &:focus {
-        background: var(--color-green-lighter);
-
-        & h3 {
-          color: var(--color-matters-green);
-        }
-      }
-
-      & h3 {
-        @mixin font-serif;
-
-        margin-bottom: var(--spacing-x-tight);
-        font-size: var(--font-size-xl);
-        line-height: 1.3333333;
-      }
-    }
-  }
-
-  @media (--sm-up) {
-    margin-top: 7.5rem;
-    margin-bottom: 4.5rem;
-
-    & .item {
-      & a {
-        height: 17rem;
-
-        & cite {
-          position: absolute;
-          right: var(--spacing-base);
-          bottom: var(--spacing-base);
-          left: var(--spacing-base);
-          font-style: normal;
-          font-weight: var(--font-weight-medium);
-          color: var(--color-grey-darker);
         }
       }
     }

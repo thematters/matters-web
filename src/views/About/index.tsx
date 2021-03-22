@@ -1,14 +1,7 @@
-import Link from 'next/link'
+import { Head } from '~/components'
 
-import { Head, IconLogo } from '~/components'
-
-import { PATHS, TEXT } from '~/common/enums'
-
-import Features from './Features'
 import Footer from './Footer'
-import Goal from './Goal'
-import Reports from './Reports'
-import Slogan from './Slogan'
+import Hero from './Hero'
 import styles from './styles.css'
 
 const About = () => {
@@ -16,20 +9,7 @@ const About = () => {
     <main>
       <Head title={{ id: 'about' }} />
 
-      <header>
-        <section className="l-row">
-          <Link href={PATHS.HOME}>
-            <a className="logo" aria-label={TEXT.zh_hant.discover}>
-              <IconLogo />
-            </a>
-          </Link>
-        </section>
-      </header>
-
-      <Slogan />
-      <Goal />
-      <Features />
-      <Reports />
+      <Hero />
       <Footer />
 
       <style jsx>{styles}</style>

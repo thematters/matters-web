@@ -26,7 +26,7 @@ const Footer = () => {
   return (
     <footer>
       <div className="l-row">
-        <div className="l-col-4 l-col-md-8 l-col-lg-12">
+        <div className="l-col-4 l-col-sm-8 l-col-md-9 l-col-lg-12">
           <div className="container">
             <section className="contactUs">
               <h2>
