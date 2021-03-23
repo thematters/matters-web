@@ -4,7 +4,7 @@ import { useWindowResize } from '~/components'
 
 import defaultsStyles from '~/common/styles/bases/defaults.css'
 import resetStyles from '~/common/styles/bases/reset.css'
-import gridsStyles from '~/common/styles/layouts/grids.css'
+import layoutStyles from '~/common/styles/layouts.css'
 import displayStyles from '~/common/styles/utils/display.css'
 import interactionStyles from '~/common/styles/utils/interaction.css'
 import linkStyles from '~/common/styles/utils/link.css'
@@ -40,7 +40,7 @@ export const GlobalStyles = () => {
 
       {/* layout */}
       <style jsx global>
-        {gridsStyles}
+        {layoutStyles}
       </style>
 
       {/* utils */}

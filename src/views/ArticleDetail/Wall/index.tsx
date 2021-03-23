@@ -30,36 +30,37 @@ const Wall = ({ show }: WallProps) => {
 
   return (
     <section className={outerClasses}>
-      <div className="l-row full">
-        <div className="l-col-three-left" />
-        <div className="l-col-three-mid">
-          <section className="container" style={bgStyle}>
-            <h2 className="slogan">
-              <Translate
-                zh_hant="看不過癮？"
-                zh_hans="看不过瘾？"
-                en="Want to read more?"
-              />
-            </h2>
+      <div className="l-container full">
+        <div className="l-row">
+          <div className="l-col-three-mid">
+            <section className="container" style={bgStyle}>
+              <h2 className="slogan">
+                <Translate
+                  zh_hant="看不過癮？"
+                  zh_hans="看不过瘾？"
+                  en="Want to read more?"
+                />
+              </h2>
 
-            <p className="desc">
-              <Translate
-                zh_hant="一鍵登入，即可加入全球最優質中文創作社區"
-                zh_hans="一键登入，即可加入全球最优质中文创作社区"
-                en="Login with one click and join the most diverse creator community."
-              />
-            </p>
+              <p className="desc">
+                <Translate
+                  zh_hant="一鍵登入，即可加入全球最優質中文創作社區"
+                  zh_hans="一键登入，即可加入全球最优质中文创作社区"
+                  en="Login with one click and join the most diverse creator community."
+                />
+              </p>
 
-            <div className="signup">
-              <LoginButton bgColor="green" />
-            </div>
+              <div className="signup">
+                <LoginButton bgColor="green" />
+              </div>
 
-            <div className="close">
-              <Button onClick={close} aria-label={TEXT.zh_hant.close}>
-                <IconClear16 color="grey" />
-              </Button>
-            </div>
-          </section>
+              <div className="close">
+                <Button onClick={close} aria-label={TEXT.zh_hant.close}>
+                  <IconClear16 color="grey" />
+                </Button>
+              </div>
+            </section>
+          </div>
         </div>
       </div>
 

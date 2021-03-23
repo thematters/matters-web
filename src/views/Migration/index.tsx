@@ -33,14 +33,16 @@ const Migration = () => {
         })}
       />
 
-      <header>
-        <section className="l-row">
-          <Link href={PATHS.HOME}>
-            <a className="logo" aria-label={TEXT.zh_hant.discover}>
-              <IconLogo />
-            </a>
-          </Link>
-        </section>
+      <header className="l-container">
+        <div className="l-row">
+          <div className="l-col-full">
+            <Link href={PATHS.HOME}>
+              <a className="logo" aria-label={TEXT.zh_hant.discover}>
+                <IconLogo />
+              </a>
+            </Link>
+          </div>
+        </div>
       </header>
 
       <Intro />

@@ -37,9 +37,7 @@ const Container: React.FC<
   const containerClasses = classNames({
     container: true,
     'fixed-height': !!fixedHeight,
-    'l-col-4 l-col-sm-6 l-offset-sm-1 l-col-md-5 l-offset-md-2 l-col-lg-6 l-offset-lg-3':
-      size === 'lg',
-    'l-col-4 l-col-sm-4 l-offset-sm-2 l-col-lg-4 l-offset-lg-4': size === 'sm',
+    [size]: true,
   })
 
   const bind = useDrag(({ down, movement: [, my] }) => {
@@ -53,21 +51,23 @@ const Container: React.FC<
   useOutsideClick(node, onDismiss)
 
   return (
-    <div
-      ref={node}
-      className={containerClasses}
-      style={style}
-      onKeyDown={(event) => {
-        if (event.keyCode === KEYCODES.escape) {
-          onDismiss()
-        }
-      }}
-    >
-      {children}
+    <div className="l-row">
+      <div
+        ref={node}
+        className={containerClasses}
+        style={style}
+        onKeyDown={(event) => {
+          if (event.keyCode === KEYCODES.escape) {
+            onDismiss()
+          }
+        }}
+      >
+        {children}
 
-      {!isSmallUp && <Handle close={onDismiss} {...bind()} />}
+        {!isSmallUp && <Handle close={onDismiss} {...bind()} />}
 
-      <style jsx>{styles}</style>
+        <style jsx>{styles}</style>
+      </div>
     </div>
   )
 }
@@ -138,7 +138,10 @@ const Dialog: React.FC<DialogProps> = (props) => {
       <AnimatedDialogOverlay className="dialog">
         <AnimatedOverlay style={{ opacity: opacity as any }} />
 
-        <DialogContent className="l-row full" aria-labelledby="dialog-title">
+        <DialogContent
+          className="l-container full"
+          aria-labelledby="dialog-title"
+        >
           <AnimatedContainer
             style={{
               transform: !isSmallUp && slideIn ? transform : undefined,

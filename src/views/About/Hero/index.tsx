@@ -16,45 +16,55 @@ const Hero = () => {
   return (
     <section className="hero">
       <header className="logo">
-        <div className="l-row">
-          <div className="l-col-4 l-col-sm-8 l-col-md-9 l-col-lg-12">
-            <Link href={PATHS.HOME}>
-              <a aria-label={TEXT.zh_hant.discover}>
-                <IconLogo />
-              </a>
-            </Link>
+        <div className="l-container">
+          <div className="l-row">
+            <div className="l-col-full">
+              <Link href={PATHS.HOME}>
+                <a aria-label={TEXT.zh_hant.discover}>
+                  <IconLogo />
+                </a>
+              </Link>
+            </div>
           </div>
         </div>
       </header>
 
-      <div className="l-row">
-        <div className="l-col-4 l-col-sm-8 l-col-md-9 l-col-lg-12">
-          <section className="slogan">
-            <section>
-              <h2>
-                <Translate zh_hant="去中心化的寫作" zh_hans="去中心化的写作" />
-                <br />
-                <Translate zh_hant="社群與內容生態" zh_hans="社群与内容生态" />
-              </h2>
-
-              <Button
-                size={[null, '2.25rem']}
-                spacing={[0, 'base']}
-                bgColor="green"
-                href={PATHS.HOME}
-              >
-                <TextIcon color="white" weight="md">
+      <div className="l-container">
+        <div className="l-row">
+          <div className="l-col-full">
+            <section className="slogan">
+              <section>
+                <h2>
                   <Translate
-                    zh_hant="開始創作"
-                    zh_hans="开始创作"
-                    en="Start Creating"
+                    zh_hant="去中心化的寫作"
+                    zh_hans="去中心化的写作"
                   />
-                </TextIcon>
-              </Button>
-            </section>
+                  <br />
+                  <Translate
+                    zh_hant="社群與內容生態"
+                    zh_hans="社群与内容生态"
+                  />
+                </h2>
 
-            <div className="ilusCity" />
-          </section>
+                <Button
+                  size={[null, '2.25rem']}
+                  spacing={[0, 'base']}
+                  bgColor="green"
+                  href={PATHS.HOME}
+                >
+                  <TextIcon color="white" weight="md">
+                    <Translate
+                      zh_hant="開始創作"
+                      zh_hans="开始创作"
+                      en="Start Creating"
+                    />
+                  </TextIcon>
+                </Button>
+              </section>
+
+              <div className="ilusCity" />
+            </section>
+          </div>
         </div>
       </div>
 
