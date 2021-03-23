@@ -1,0 +1,21 @@
+.team {
+  padding: 5rem 0;
+
+  & h2 {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    text-align: center;
+  }
+
+  @media (--sm-up) {
+    padding: 7.5rem 0;
+
+    & h2 {
+      font-size: 2.25rem;
+    }
+  }
+
+  @media (--md-up) {
+    padding: 10rem 0 7.5rem;
+  }
+}
