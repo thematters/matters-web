@@ -95,13 +95,13 @@ const Features = () => {
         <li className="l-container">
           <div className="l-row">
             <section className="content">
-              <h4>
+              <h3>
                 <Translate
                   zh_hant={zh_hant.title_1}
                   zh_hans={zh_hans.title_1}
                   en={en.title_1}
                 />
-              </h4>
+              </h3>
               <p>
                 <Translate
                   zh_hant={zh_hant.content_1}
@@ -118,13 +118,13 @@ const Features = () => {
         <li className="l-container">
           <div className="l-row">
             <section className="content">
-              <h4>
+              <h3>
                 <Translate
                   zh_hant={zh_hant.title_2}
                   zh_hans={zh_hans.title_2}
                   en={en.title_2}
                 />
-              </h4>
+              </h3>
               <p>
                 <Translate
                   zh_hant={zh_hant.content_2}
@@ -150,13 +150,13 @@ const Features = () => {
         <li className="l-container">
           <div className="l-row">
             <section className="content">
-              <h4>
+              <h3>
                 <Translate
                   zh_hant={zh_hant.title_3}
                   zh_hans={zh_hans.title_3}
                   en={en.title_3}
                 />
-              </h4>
+              </h3>
               <p>
                 <Translate
                   zh_hant={zh_hant.content_3}
