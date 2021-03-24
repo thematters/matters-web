@@ -32,7 +32,7 @@ const fragments = {
   `,
 }
 
-export const toDigestTag = (content: string) =>
+export const toDigestTagPlaceholder = (content: string) =>
   ({
     __typename: 'Tag',
     id: content,
