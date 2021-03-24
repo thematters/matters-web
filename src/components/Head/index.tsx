@@ -20,6 +20,7 @@ interface HeadProps {
   path?: string
   image?: string
   noSuffix?: boolean
+  paymentPointer?: string
 }
 
 export const Head: React.FC<HeadProps> = (props) => {
@@ -86,6 +87,9 @@ export const Head: React.FC<HeadProps> = (props) => {
         key="opensearch"
       />
       <link rel="canonical" href={canonicalUrl} key="canonical" />
+      {props.paymentPointer && (
+        <meta name="monetization" content={props.paymentPointer} />
+      )}
 
       {/* noindex for non-production enviroment */}
       {!isProd && (

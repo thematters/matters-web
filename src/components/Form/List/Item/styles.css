@@ -25,6 +25,12 @@
     line-height: 1rem;
     color: var(--color-grey);
   }
+
+  &.bold {
+    & .title {
+      font-weight: var(--font-weight-medium);
+    }
+  }
 }
 
 .right {

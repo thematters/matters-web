@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 
 import {
+  CommentFormType,
   IconPin24,
   IconUnPin24,
   Menu,
@@ -9,6 +10,7 @@ import {
   useMutation,
 } from '~/components'
 import TOGGLE_PIN_COMMENT from '~/components/GQL/mutations/togglePinComment'
+import updateCircleBroadcast from '~/components/GQL/updates/circleBroadcast'
 
 import { REFETCH_CIRCLE_DETAIL } from '~/common/enums'
 
@@ -27,17 +29,25 @@ const fragments = {
         }
         ... on Circle {
           id
+          name
         }
       }
     }
   `,
 }
 
-const PinButton = ({ comment }: { comment: PinButtonComment }) => {
+const PinButton = ({
+  type,
+  comment,
+}: {
+  type: CommentFormType
+  comment: PinButtonComment
+}) => {
   const article =
     comment.node.__typename === 'Article' ? comment.node : undefined
   const circle = comment.node.__typename === 'Circle' ? comment.node : undefined
   const canPin = !!circle || (article?.pinCommentLeft || 0) > 0
+  const isCircleBroadcast = type === 'circleBroadcast'
 
   const [unpinComment] = useMutation<TogglePinComment>(TOGGLE_PIN_COMMENT, {
     variables: { id: comment.id, enabled: false },
@@ -49,6 +59,18 @@ const PinButton = ({ comment }: { comment: PinButtonComment }) => {
         __typename: 'Comment',
       },
     },
+    update: (cache) => {
+      if (!circle || !isCircleBroadcast) {
+        return
+      }
+
+      updateCircleBroadcast({
+        cache,
+        commentId: comment.id,
+        name: circle.name,
+        type: 'unpin',
+      })
+    },
   })
   const [pinComment] = useMutation<TogglePinComment>(TOGGLE_PIN_COMMENT, {
     variables: { id: comment.id, enabled: true },
@@ -59,6 +81,18 @@ const PinButton = ({ comment }: { comment: PinButtonComment }) => {
         node: comment.node,
         __typename: 'Comment',
       },
+    },
+    update: (cache) => {
+      if (!circle || !isCircleBroadcast) {
+        return
+      }
+
+      updateCircleBroadcast({
+        cache,
+        commentId: comment.id,
+        name: circle.name,
+        type: 'pin',
+      })
     },
   })
 
