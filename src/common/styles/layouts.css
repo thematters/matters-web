@@ -4,8 +4,7 @@
   display: grid;
   grid-template-areas: 'spacingLeft content spacingRight';
   grid-template-columns: 1fr var(--layout-width) 1fr;
-  margin-right: 1rem;
-  margin-left: 1rem;
+  margin: 0 var(--spacing-base);
 
   @media (--sm-up) {
     grid-template-columns: 1fr var(--layout-width-sm-up) 1fr;
@@ -20,8 +19,7 @@
   }
 
   &.full {
-    margin-right: auto;
-    margin-left: auto;
+    margin: 0 auto;
   }
 }
 
