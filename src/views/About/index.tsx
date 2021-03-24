@@ -3,6 +3,7 @@ import { Head } from '~/components'
 import Footer from './Footer'
 import Hero from './Hero'
 import Intro from './Intro'
+import JoinUs from './JoinUs'
 import Stats from './Stats'
 import styles from './styles.css'
 import Team from './Team'
@@ -18,6 +19,7 @@ const About = () => {
       <Stats />
       <Timeline />
       <Team />
+      <JoinUs />
       <Footer />
 
       <style jsx>{styles}</style>
