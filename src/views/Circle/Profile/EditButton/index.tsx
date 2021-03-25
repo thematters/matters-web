@@ -23,7 +23,7 @@ const EditButton = ({ circle }: EditButtonProps) => {
       {...toPath({ page: 'circleSettings', circle })}
     >
       <TextIcon weight="md" size="md-s">
-        <Translate id="editCircle" />
+        <Translate id="manageCircle" />
       </TextIcon>
     </Button>
   )
