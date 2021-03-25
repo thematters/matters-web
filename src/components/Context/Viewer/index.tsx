@@ -23,6 +23,10 @@ const ViewerFragments = {
           state
           hasPaymentPassword
         }
+        ownCircles {
+          id
+          name
+        }
         info {
           createdAt
           description
