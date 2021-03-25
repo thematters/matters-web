@@ -1,9 +1,11 @@
 import { useMutation } from '@apollo/react-hooks'
+import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
 
 import {
   Dialog,
   LanguageContext,
+  Spinner,
   useDialogSwitch,
   ViewerContext,
 } from '~/components'
@@ -16,14 +18,17 @@ import PUT_CIRCLE_ARTICLES from '~/components/GQL/mutations/putCircleArticles'
 import { ADD_TOAST, REFETCH_CIRCLE_DETAIL_ARTICLES } from '~/common/enums'
 import { translate } from '~/common/utils'
 
-import Content from './Content'
-
 import { PutCircleArticles } from '~/components/GQL/mutations/__generated__/PutCircleArticles'
 
 interface AddCircleArticleDialogProps {
   circle: { id: string }
   children: ({ open }: { open: () => void }) => React.ReactNode
 }
+
+const DynamicContent = dynamic(() => import('./Content'), {
+  ssr: false,
+  loading: Spinner,
+})
 
 const AddCircleArticleDialog = ({
   circle,
@@ -75,7 +80,7 @@ const AddCircleArticleDialog = ({
           {children({ open: openAddCircleArticlesDialog })}
 
           <Dialog isOpen={show} onDismiss={close} size="sm">
-            <Content
+            <DynamicContent
               onConfirm={addArticlesToCircle}
               closeDialog={close}
               loading={loading}

@@ -11,7 +11,7 @@ interface EditProfileDialogProps {
   children: ({ open }: { open: () => void }) => React.ReactNode
 }
 
-const DynamicConetnt = dynamic(() => import('./Content'), {
+const DynamicContent = dynamic(() => import('./Content'), {
   ssr: false,
   loading: Spinner,
 })
@@ -24,7 +24,7 @@ const BaseEditProfileDialog = ({ user, children }: EditProfileDialogProps) => {
       {children({ open })}
 
       <Dialog isOpen={show} onDismiss={close} fixedHeight>
-        <DynamicConetnt user={user} closeDialog={close} />
+        <DynamicContent user={user} closeDialog={close} />
       </Dialog>
     </>
   )
