@@ -44,8 +44,8 @@ interface SearchSelectDialogProps {
 
   children: ({ open }: { open: () => void }) => React.ReactNode
 
-  // to create a new tag
-  creatable?: boolean
+  createTag?: boolean
+  inviteEmail?: boolean
 }
 
 const BaseSearchSelectDialog = ({
@@ -63,7 +63,8 @@ const BaseSearchSelectDialog = ({
 
   children,
 
-  creatable,
+  createTag,
+  inviteEmail,
 }: SearchSelectDialogProps) => {
   const initStagingNodes =
     nodes?.map((node) => ({ node, selected: true })) || []
@@ -89,11 +90,10 @@ const BaseSearchSelectDialog = ({
     initStagingNodes
   )
   const addNodeToStaging = (node: SelectNode) => {
-    const isExists = stagingNodes.some(({ node: n }) => n.id === node.id)
-
-    if (!isExists) {
-      setStagingNodes([...stagingNodes, { node, selected: true }])
-    }
+    setStagingNodes([
+      ...stagingNodes.filter(({ node: n }) => n.id !== node.id),
+      { node, selected: true },
+    ])
 
     toStagingArea()
   }
@@ -130,7 +130,8 @@ const BaseSearchSelectDialog = ({
           toStagingArea={toStagingArea}
           toSearchingArea={toSearchingArea}
           addNodeToStaging={addNodeToStaging}
-          creatable={creatable}
+          createTag={createTag}
+          inviteEmail={inviteEmail}
         />
 
         <StagingArea
