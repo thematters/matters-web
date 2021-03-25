@@ -92,7 +92,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
               }
               nodes={tags}
               saving={saving}
-              creatable
+              createTag
             >
               {({ open: openAddMyArticlesDialog }) => (
                 <button type="button" onClick={openAddMyArticlesDialog}>

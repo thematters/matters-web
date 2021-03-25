@@ -23,7 +23,7 @@ import { numAbbr } from '~/common/utils'
 import CIRCLE_COVER from '@/public/static/images/circle-cover.svg'
 
 import SubscriptionBanner from '../SubscriptionBanner'
-import AddArticlesButton from './AddArticlesButton'
+import { AddCircleArticle } from './AddCircleArticle'
 import AuthorWidget from './AuthorWidget'
 import DropdownActions from './DropdownActions'
 import FollowButton from './FollowButton'
@@ -188,7 +188,7 @@ const CircleProfile = () => {
           </section>
 
           {isOwner ? (
-            <AddArticlesButton circle={circle} />
+            <AddCircleArticle.Button circle={circle} />
           ) : (
             <FollowButton circle={circle} />
           )}

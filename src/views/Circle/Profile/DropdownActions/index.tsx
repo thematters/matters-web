@@ -98,7 +98,6 @@ const BaseDropdownActions = ({
 
 const DropdownActions = ({ circle }: DropdownActionsProps) => {
   const viewer = useContext(ViewerContext)
-
   const isOwner = circle.owner.id === viewer.id
   const isMember = !!circle.isMember
   const controls = {

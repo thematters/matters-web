@@ -53,6 +53,10 @@ export const MOCK_CIRCLE = {
     totalCount: 8,
   },
   isMember: true,
+  invitedBy: {
+    id: 'circle-invitation-000',
+    freePeriod: 3,
+  },
 }
 
 // Article
