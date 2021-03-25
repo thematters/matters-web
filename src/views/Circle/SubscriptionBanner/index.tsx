@@ -2,9 +2,9 @@ import { useContext } from 'react'
 
 import {
   Card,
-  IconArrowRight16,
-  Layout,
+  IconCircle16,
   LoginButton,
+  TextIcon,
   Translate,
   ViewerContext,
 } from '~/components'
@@ -27,9 +27,8 @@ const SubscriptionBanner = ({ circle }: SubscriptionBannerProps) => {
   const viewer = useContext(ViewerContext)
   const isMember = circle.isMember
   const isOwner = circle?.owner?.id === viewer.id
-  const price = circle.prices && circle.prices[0]
 
-  if (isMember || isOwner || !price) {
+  if (isMember || isOwner) {
     return null
   }
 
@@ -55,44 +54,36 @@ const SubscriptionBanner = ({ circle }: SubscriptionBannerProps) => {
     window.dispatchEvent(new CustomEvent(OPEN_SUBSCRIBE_CIRCLE_DIALOG, {}))
 
   return (
-    <section className="subscription-banner">
-      <Layout.FixedMain>
-        <Card
-          bgColor="none"
-          spacing={[0, 0]}
-          onClick={() => {
-            analytics.trackEvent('click_button', {
-              type: 'subscribe_circle_banner',
-              pageType: 'circle_detail',
-            })
+    <Card
+      bgColor="none"
+      spacing={[0, 0]}
+      onClick={() => {
+        analytics.trackEvent('click_button', {
+          type: 'subscribe_circle_banner',
+          pageType: 'circle_detail',
+        })
 
-            if (!viewer.isAuthed) {
-              showLoginToast()
-              return
-            }
+        if (!viewer.isAuthed) {
+          showLoginToast()
+          return
+        }
 
-            openSubscribeCircleDialog()
-          }}
+        openSubscribeCircleDialog()
+      }}
+    >
+      <section className="subscription-banner">
+        <TextIcon
+          icon={<IconCircle16 size="md-s" />}
+          size="xm"
+          color="white"
+          weight="md"
         >
-          <section className="content">
-            <section className="inner">
-              <p>
-                {price.amount} {price.currency} / <Translate id="month" />
-                <Translate
-                  zh_hant="，立即訂閱圍爐"
-                  zh_hans="，立即订阅围炉"
-                  en=", subscribe to this Circle"
-                />
-              </p>
+          <Translate zh_hant="訂閱圍爐" zh_hans="订阅围炉" en="Subscribe" />
+        </TextIcon>
 
-              <IconArrowRight16 color="white" />
-            </section>
-          </section>
-        </Card>
-      </Layout.FixedMain>
-
-      <style jsx>{styles}</style>
-    </section>
+        <style jsx>{styles}</style>
+      </section>
+    </Card>
   )
 }
 

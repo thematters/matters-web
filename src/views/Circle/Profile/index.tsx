@@ -49,6 +49,7 @@ const CircleProfile = () => {
   })
   const circle = data?.circle
   const isOwner = circle?.owner.id === viewer.id
+  const price = circle?.prices && circle?.prices[0]
 
   // private data
   const [privateFetched, setPrivateFetched] = useState(false)
@@ -130,18 +131,29 @@ const CircleProfile = () => {
         <Cover cover={circle.cover} fallbackCover={CIRCLE_COVER} />
 
         <header>
-          <CircleAvatar size="xxl" circle={circle} />
+          <section className="info">
+            <CircleAvatar size="xxl" circle={circle} />
+            <h2 className="name">{circle.displayName}</h2>
+          </section>
 
-          <h2 className="name">{circle.displayName}</h2>
+          {price && (
+            <section className="price">
+              <span className="amount">{price.amount}</span>
+              <br />
+              {price.currency} / <Translate id="month" />
+            </section>
+          )}
         </header>
 
-        <section className="info">
-          {circle.description && (
+        {circle.description && (
+          <section className="description">
             <Expandable>
-              <p className="description">{circle.description}</p>
+              <p>{circle.description}</p>
             </Expandable>
-          )}
-        </section>
+          </section>
+        )}
+
+        {privateFetched && <SubscriptionBanner circle={circle} />}
 
         <footer>
           <section className="counts">
@@ -177,7 +189,6 @@ const CircleProfile = () => {
         <AuthorWidget circle={circle} />
 
         <SubscribeCircleDialog circle={circle} />
-        {privateFetched && <SubscriptionBanner circle={circle} />}
 
         <style jsx>{styles}</style>
       </section>

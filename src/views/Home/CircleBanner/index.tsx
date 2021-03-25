@@ -65,7 +65,7 @@ export const CircleBanner = () => {
   const canCreateCircle = features.circle_management
 
   return (
-    <div className="container">
+    <div className="wrapper">
       {!canCreateCircle && (
         <a
           href={APPLICATION_LINKS[lang] || APPLICATION_LINKS.zh_hant}
