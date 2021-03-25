@@ -21,6 +21,7 @@ import {
   ViewerContext,
 } from '~/components'
 import { getErrorCodes, QueryError } from '~/components/GQL'
+import ShareButton from '~/components/Layout/Header/ShareButton'
 
 import { ERROR_CODES } from '~/common/enums'
 
@@ -81,6 +82,8 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
         right={
           <>
             <span />
+
+            <ShareButton />
 
             <DropdownActions
               isOwner={isOwner}

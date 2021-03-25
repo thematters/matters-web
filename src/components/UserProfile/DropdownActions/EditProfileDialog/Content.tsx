@@ -25,13 +25,11 @@ import IMAGE_COVER from '@/public/static/images/profile-cover.png'
 
 import styles from './styles.css'
 
-import { ProfileUserPublic } from '~/components/UserProfile/__generated__/ProfileUserPublic'
+import { EditProfileDialogUserPublic } from './__generated__/EditProfileDialogUserPublic'
 import { UpdateUserInfoProfile } from './__generated__/UpdateUserInfoProfile'
 
-export type ProfileEditorUser = ProfileUserPublic
-
 interface FormProps {
-  user: ProfileEditorUser
+  user: EditProfileDialogUserPublic
   closeDialog: () => void
 }
 
@@ -61,7 +59,10 @@ const UPDATE_USER_INFO = gql`
  */
 const UNCHANGED_FIELD = 'UNCHANGED_FIELD'
 
-const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
+const EditProfileDialogContent: React.FC<FormProps> = ({
+  user,
+  closeDialog,
+}) => {
   const [update] = useMutation<UpdateUserInfoProfile>(
     UPDATE_USER_INFO,
     undefined,
@@ -218,4 +219,4 @@ const ProfileEditor: React.FC<FormProps> = ({ user, closeDialog }) => {
   )
 }
 
-export default ProfileEditor
+export default EditProfileDialogContent

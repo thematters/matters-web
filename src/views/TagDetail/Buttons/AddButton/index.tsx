@@ -72,7 +72,7 @@ const BaseDropdownActions = ({
           ref={ref}
         >
           <TextIcon icon={<IconPen16 />} weight="md" size="md-s">
-            <Translate zh_hant="投稿" zh_hans="投稿" en="submit" />
+            <Translate zh_hant="投稿" zh_hans="投稿" en="Submit" />
           </TextIcon>
         </Button>
       )}

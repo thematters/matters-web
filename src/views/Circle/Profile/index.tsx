@@ -15,6 +15,7 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
+import ShareButton from '~/components/Layout/Header/ShareButton'
 
 import { REFETCH_CIRCLE_DETAIL } from '~/common/enums'
 import { numAbbr } from '~/common/utils'
@@ -22,9 +23,9 @@ import { numAbbr } from '~/common/utils'
 import CIRCLE_COVER from '@/public/static/images/circle-cover.svg'
 
 import SubscriptionBanner from '../SubscriptionBanner'
+import AddArticlesButton from './AddArticlesButton'
 import AuthorWidget from './AuthorWidget'
 import DropdownActions from './DropdownActions'
-import EditButton from './EditButton'
 import FollowButton from './FollowButton'
 import { FollowersDialog } from './FollowersDialog'
 import { CIRCLE_PROFILE_PRIVATE, CIRCLE_PROFILE_PUBLIC } from './gql'
@@ -98,7 +99,13 @@ const CircleProfile = () => {
       right={
         <>
           <span />
-          {circle && <DropdownActions circle={circle} />}
+          {circle && (
+            <section className="buttons">
+              <ShareButton />
+              <DropdownActions circle={circle} />
+              <style jsx>{styles}</style>
+            </section>
+          )}
         </>
       }
       mode="transparent-absolute"
@@ -181,7 +188,7 @@ const CircleProfile = () => {
           </section>
 
           {isOwner ? (
-            <EditButton circle={circle} />
+            <AddArticlesButton circle={circle} />
           ) : (
             <FollowButton circle={circle} />
           )}

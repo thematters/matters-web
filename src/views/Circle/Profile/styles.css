@@ -1,3 +1,9 @@
+.buttons {
+  & :global(> * + *) {
+    margin-left: var(--spacing-base);
+  }
+}
+
 .profile {
   position: relative;
   padding-bottom: var(--spacing-loose);
