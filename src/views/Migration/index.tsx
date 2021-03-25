@@ -2,11 +2,11 @@ import Link from 'next/link'
 import { useContext } from 'react'
 
 import { Head, IconLogo, LanguageContext } from '~/components'
-import Footer from '~/components/Standalone/Footer'
 
 import { PATHS, TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
 
+import Footer from '../About/Footer'
 import Banner from './Banner'
 import Features from './Features'
 import Intro from './Intro'
@@ -33,14 +33,16 @@ const Migration = () => {
         })}
       />
 
-      <header>
-        <section className="l-row">
-          <Link href={PATHS.HOME}>
-            <a className="logo" aria-label={TEXT.zh_hant.discover}>
-              <IconLogo />
-            </a>
-          </Link>
-        </section>
+      <header className="l-container">
+        <div className="l-row">
+          <div className="l-col-full">
+            <Link href={PATHS.HOME}>
+              <a className="logo" aria-label={TEXT.zh_hant.discover}>
+                <IconLogo />
+              </a>
+            </Link>
+          </div>
+        </div>
       </header>
 
       <Intro />

@@ -42,7 +42,7 @@ const BasePaymentPassword: React.FC<PaymentPasswordProps> = ({
             <Translate
               zh_hant="管理交易密碼"
               zh_hans="管理交易密码"
-              en="Manage transaction password"
+              en="Payment Password"
             />
           }
           onClick={open}

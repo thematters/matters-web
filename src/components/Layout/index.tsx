@@ -27,13 +27,15 @@ export const Layout: React.FC & {
     <>
       <Head />
 
-      <main className="l-row full">
-        <nav role="navigation" className="l-col-three-left u-sm-down-hide">
-          <SideNav />
-        </nav>
+      <div className="l-container full">
+        <main className="l-row">
+          <nav role="navigation" className="l-col-three-left u-sm-down-hide">
+            <SideNav />
+          </nav>
 
-        {children}
-      </main>
+          {children}
+        </main>
+      </div>
 
       {!isInDraftDetail && (
         <footer className="u-sm-up-hide">

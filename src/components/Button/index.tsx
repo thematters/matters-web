@@ -68,6 +68,7 @@ export type ButtonBgColor = Extract<
   | 'red'
   | 'white'
   | 'half-black'
+  | 'black'
 >
 
 type ButtonBgActiveColor = Extract<
