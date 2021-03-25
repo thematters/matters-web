@@ -15,6 +15,7 @@ interface SearchInputProps {
   onChange: (value: string) => void
   onSubmit: (value: string) => void
   onFocus: () => void
+  onBlur: () => void
 }
 
 const SearchInput: React.FC<SearchInputProps> = ({
@@ -23,6 +24,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
   onChange,
   onSubmit,
   onFocus,
+  onBlur,
 }) => {
   const { lang } = useContext(LanguageContext)
   const textAriaLabel = translate({ id: 'search', lang })
@@ -67,6 +69,9 @@ const SearchInput: React.FC<SearchInputProps> = ({
           }}
           onFocus={() => {
             onFocus()
+          }}
+          onBlur={() => {
+            onBlur()
           }}
         />
 
