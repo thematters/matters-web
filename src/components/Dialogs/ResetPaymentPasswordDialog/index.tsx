@@ -1,10 +1,16 @@
+import dynamic from 'next/dynamic'
 import { useState } from 'react'
 
-import { Dialog, PaymentForm } from '~/components'
+import { Dialog, Spinner } from '~/components'
 
 interface ResetPaymentPasswordProps {
   children: ({ open }: { open: () => void }) => React.ReactNode
 }
+
+const DynamicPaymentResetPasswordForm = dynamic(
+  () => import('~/components/Forms/PaymentForm/ResetPassword'),
+  { loading: Spinner }
+)
 
 const BaseResetPaymentPasswordDialog: React.FC<ResetPaymentPasswordProps> = ({
   children,
@@ -24,7 +30,7 @@ const BaseResetPaymentPasswordDialog: React.FC<ResetPaymentPasswordProps> = ({
           closeTextId="close"
         />
 
-        <PaymentForm.ResetPassword close={close} />
+        <DynamicPaymentResetPasswordForm close={close} />
       </Dialog>
     </>
   )

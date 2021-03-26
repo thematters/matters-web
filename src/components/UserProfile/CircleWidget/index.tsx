@@ -1,4 +1,9 @@
-import { Form, Translate, useFeatures } from '~/components'
+import {
+  Form,
+  SubscribeCircleDialog,
+  Translate,
+  useFeatures,
+} from '~/components'
 import { CircleDigest } from '~/components/CircleDigest'
 
 import { PATHS } from '~/common/enums'
@@ -73,6 +78,9 @@ const CircleWidget: React.FC<CircleWidgetProps> = ({ circles, isMe }) => {
           })
         }}
       />
+
+      {!isMe && <SubscribeCircleDialog circle={circle} />}
+
       <style jsx>{styles}</style>
     </section>
   )

@@ -72,6 +72,15 @@ const Hero = () => {
         <ul>
           <li>
             <a
+              href="https://restofworld.org/2020/chinas-fugitive-writers-find-a-home-online/"
+              target="_blank"
+            >
+              <h3>China’s fugitive writers find a home online</h3>
+              <cite>Rest of World</cite>
+            </a>
+          </li>
+          <li>
+            <a
               href="https://www.blog.google/around-the-globe/google-asia/gni-innovation-challenge-apac/"
               target="_blank"
             >
@@ -80,7 +89,10 @@ const Hero = () => {
             </a>
           </li>
           <li>
-            <a href="https://appworks.tw/category/events/" target="_blank">
+            <a
+              href="https://appworks.tw/taiwans-appworks-demo-day-19-puts-18-of-the-most-promising-greater-southeast-asian-ai-blockchain-founders-on-stage/"
+              target="_blank"
+            >
               <h3>
                 Taiwan’s AppWorks Demo Day #19 Puts 18 of the Most Promising
                 Greater Southeast ...
@@ -158,15 +170,6 @@ const Hero = () => {
                   en="Deutsche Welle"
                 />
               </cite>
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://restofworld.org/2020/chinas-fugitive-writers-find-a-home-online/"
-              target="_blank"
-            >
-              <h3>China’s fugitive writers find a home online</h3>
-              <cite>Rest of World</cite>
             </a>
           </li>
         </ul>
