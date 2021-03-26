@@ -24,7 +24,7 @@ const fragments = {
   `,
 }
 
-const DynamicConetnt = dynamic(() => import('./Content'), {
+const DynamicContent = dynamic(() => import('./Content'), {
   ssr: false,
   loading: Spinner,
 })
@@ -37,7 +37,7 @@ const BaseDonatorsDialog = ({ article, children }: DonatorsDialogProps) => {
       {children({ open })}
 
       <Dialog isOpen={show} onDismiss={close} fixedHeight>
-        <DynamicConetnt article={article} closeDialog={close} />
+        <DynamicContent article={article} closeDialog={close} />
       </Dialog>
     </>
   )

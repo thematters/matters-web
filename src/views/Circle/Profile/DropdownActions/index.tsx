@@ -3,30 +3,27 @@ import { useContext } from 'react'
 import {
   Button,
   DropdownDialog,
-  IconAdd24,
+  IconEdit16,
   IconLogout24,
   IconMore32,
-  IconShare16,
+  IconSettings32,
   Menu,
-  ShareDialog,
   TextIcon,
   Translate,
   UnsubscribeCircleDialog,
-  useFeatures,
   ViewerContext,
 } from '~/components'
 
 import { TEXT } from '~/common/enums'
+import { toPath } from '~/common/utils'
 
-import { AddCircleArticleDialog } from './AddCircleArticleDialog'
 import { fragments } from './gql'
 
 import { DropdownActionsCirclePrivate } from './__generated__/DropdownActionsCirclePrivate'
 import { DropdownActionsCirclePublic } from './__generated__/DropdownActionsCirclePublic'
 
 interface DialogProps {
-  openAddCircleArticlesDialog: () => void
-  openShareDialog: () => void
+  circle: DropdownActionsCirclePublic & Partial<DropdownActionsCirclePrivate>
   openUnsubscribeCircleDialog: () => void
 }
 
@@ -35,34 +32,26 @@ type DropdownActionsProps = {
 }
 
 interface Controls {
-  hasAddArticles: boolean
+  hasEditCircle: boolean
   hasUnsubscribeCircle: boolean
 }
 
 type BaseDropdownActionsProps = DialogProps & Controls
 
 const BaseDropdownActions = ({
-  hasAddArticles,
+  circle,
+
+  hasEditCircle,
   hasUnsubscribeCircle,
 
-  openAddCircleArticlesDialog,
-  openShareDialog,
   openUnsubscribeCircleDialog,
 }: BaseDropdownActionsProps) => {
-  const features = useFeatures()
-
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
     <Menu width={isInDropdown ? 'sm' : undefined}>
-      <Menu.Item onClick={openShareDialog}>
-        <TextIcon icon={<IconShare16 size="md" />} size="md" spacing="base">
-          <Translate zh_hant="分享圍爐" zh_hans="分享围炉" />
-        </TextIcon>
-      </Menu.Item>
-
-      {hasAddArticles && features.circle_management && (
-        <Menu.Item onClick={openAddCircleArticlesDialog}>
-          <TextIcon icon={<IconAdd24 size="md" />} size="md" spacing="base">
-            <Translate id="addArticles" />
+      {hasEditCircle && (
+        <Menu.Item {...toPath({ page: 'circleSettings', circle })}>
+          <TextIcon icon={<IconEdit16 size="md" />} size="md" spacing="base">
+            <Translate id="editCircle" />
           </TextIcon>
         </Menu.Item>
       )}
@@ -96,7 +85,11 @@ const BaseDropdownActions = ({
           onClick={open}
           ref={ref}
         >
-          <IconMore32 size="lg" color="white" />
+          {hasEditCircle ? (
+            <IconSettings32 size="lg" color="white" />
+          ) : (
+            <IconMore32 size="lg" color="white" />
+          )}
         </Button>
       )}
     </DropdownDialog>
@@ -108,29 +101,24 @@ const DropdownActions = ({ circle }: DropdownActionsProps) => {
   const isOwner = circle.owner.id === viewer.id
   const isMember = !!circle.isMember
   const controls = {
-    hasAddArticles: isOwner,
+    hasEditCircle: isOwner,
     hasUnsubscribeCircle: isMember,
   }
 
+  if (!controls.hasEditCircle && !controls.hasUnsubscribeCircle) {
+    return null
+  }
+
   return (
-    <AddCircleArticleDialog circle={circle}>
-      {({ open: openAddCircleArticlesDialog }) => (
-        <ShareDialog>
-          {({ open: openShareDialog }) => (
-            <UnsubscribeCircleDialog id={circle.id}>
-              {({ open: openUnsubscribeCircleDialog }) => (
-                <BaseDropdownActions
-                  {...controls}
-                  openAddCircleArticlesDialog={openAddCircleArticlesDialog}
-                  openShareDialog={openShareDialog}
-                  openUnsubscribeCircleDialog={openUnsubscribeCircleDialog}
-                />
-              )}
-            </UnsubscribeCircleDialog>
-          )}
-        </ShareDialog>
+    <UnsubscribeCircleDialog id={circle.id}>
+      {({ open: openUnsubscribeCircleDialog }) => (
+        <BaseDropdownActions
+          circle={circle}
+          {...controls}
+          openUnsubscribeCircleDialog={openUnsubscribeCircleDialog}
+        />
       )}
-    </AddCircleArticleDialog>
+    </UnsubscribeCircleDialog>
   )
 }
 

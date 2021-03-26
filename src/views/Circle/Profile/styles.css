@@ -1,3 +1,9 @@
+.buttons {
+  & :global(> * + *) {
+    margin-left: var(--spacing-base);
+  }
+}
+
 .profile {
   position: relative;
   padding-bottom: var(--spacing-loose);
@@ -13,22 +19,42 @@
 }
 
 header {
+  @mixin flex-start-space-between;
+
   padding: 0 var(--spacing-base);
   margin-top: var(--spacing-base);
 
-  @mixin flex-start-start;
+  & .info {
+    @mixin flex-start-start;
+
+    & .name {
+      margin-left: var(--spacing-base);
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-semibold);
+    }
+  }
+
+  & .price {
+    @mixin border-left-grey;
+
+    flex-shrink: 0;
+    padding-left: var(--spacing-loose);
+    margin-left: var(--spacing-loose);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-matters-gold);
+
+    & .amount {
+      font-size: var(--font-size-xxl);
+      line-height: 2.25rem;
+    }
+  }
 }
 
-.name {
-  margin-left: var(--spacing-base);
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-semibold);
-}
-
-.info {
+.description {
   padding: 0 var(--spacing-base);
 
-  & .description {
+  & p {
     position: relative;
     margin-top: var(--spacing-base);
     font-size: var(--font-size-md);

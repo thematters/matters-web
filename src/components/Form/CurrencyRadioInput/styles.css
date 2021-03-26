@@ -26,7 +26,7 @@
 
 .hkd {
   background: var(--color-red);
-  border: 1.5px solid var(--color-red);
+  border: 2px solid var(--color-red);
 
   &.inactive {
     color: var(--color-red);
@@ -36,7 +36,7 @@
 
 .like {
   background: var(--color-matters-green);
-  border: 1.5px solid var(--color-matters-green);
+  border: 2px solid var(--color-matters-green);
 
   &.inactive {
     color: var(--color-matters-green);

@@ -1,0 +1,122 @@
+footer {
+  padding: 4rem 0;
+  color: var(--color-white);
+  background: var(--color-black);
+
+  @media (--sm-up) {
+    padding: 7.5rem 0;
+  }
+}
+
+.container {
+  display: grid;
+  grid-template: auto / repeat(1, 1fr);
+  grid-gap: var(--spacing-xx-loose);
+
+  & h2 {
+    margin-bottom: var(--spacing-loose);
+    font-size: var(--font-size-lg);
+  }
+
+  & a {
+    color: var(--color-white);
+  }
+
+  & p {
+    color: var(--color-grey);
+
+    & + p {
+      margin-top: var(--spacing-base);
+    }
+  }
+
+  & .followUs {
+    & .socials {
+      & :global(> *) {
+        display: inline-block;
+      }
+
+      & :global(> * + *) {
+        margin-left: var(--spacing-x-loose);
+      }
+    }
+  }
+
+  & .subscribeUs {
+    & form {
+      position: relative;
+
+      & input {
+        display: inline-block;
+        height: calc(2.5rem + 2px);
+        padding: var(--spacing-x-tight) var(--spacing-base);
+        margin-right: var(--spacing-base);
+        color: var(--color-black);
+        background: var(--color-white);
+        border-radius: 1.25rem;
+
+        &::placeholder {
+          color: var(--color-grey-light);
+          opacity: 1; /* Firefox */
+        }
+      }
+
+      & :global(button) {
+        position: absolute;
+        top: 1px;
+        right: 1px;
+      }
+    }
+  }
+
+  & .copyright {
+    font-size: var(--font-size-sm);
+    color: var(--color-grey);
+  }
+
+  @media (--sm-up) {
+    grid-template: auto / repeat(2, 1fr);
+    grid-template-areas:
+      'topLeft topRight'
+      'bottomLeft bottomRight';
+    grid-gap: 0;
+
+    & .contactUs {
+      grid-area: topLeft;
+    }
+    & .copyright {
+      grid-area: bottomLeft;
+      align-self: end;
+    }
+    & .followUs {
+      grid-column: topRight;
+    }
+    & .subscribeUs {
+      grid-column: bottomRight;
+      align-self: end;
+    }
+  }
+
+  @media (--lg-up) {
+    grid-template: auto / repeat(3, 1fr);
+    grid-template-areas:
+      'topLeft topMiddle topRight'
+      'bottomLeft bottomMiddle bottomRight';
+    grid-row-gap: var(--spacing-xxx-loose);
+
+    & .contactUs {
+      grid-area: topLeft;
+    }
+    & .copyright {
+      grid-area: bottomLeft;
+      align-self: initial;
+    }
+    & .followUs {
+      grid-column: topMiddle;
+    }
+    & .subscribeUs {
+      grid-column: topRight;
+      align-self: initial;
+    }
+  }
+}

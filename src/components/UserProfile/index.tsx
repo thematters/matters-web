@@ -15,6 +15,7 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
+import ShareButton from '~/components/Layout/Header/ShareButton'
 
 import { numAbbr } from '~/common/utils'
 
@@ -23,7 +24,6 @@ import IMAGE_COVER from '@/public/static/images/profile-cover.png'
 import { CivicLikerBadge, SeedBadge } from './Badges'
 import CircleWidget from './CircleWidget'
 import DropdownActions from './DropdownActions'
-import EditProfileButton from './EditProfileButton'
 import { FollowersDialog } from './FollowersDialog'
 import { FollowingDialog } from './FollowingDialog'
 import { USER_PROFILE_PRIVATE, USER_PROFILE_PUBLIC } from './gql'
@@ -70,7 +70,13 @@ export const UserProfile = () => {
       right={
         <>
           <span />
-          {user && <DropdownActions user={user} isMe={isMe} />}
+          {user && (
+            <section className="buttons">
+              <ShareButton />
+              <DropdownActions user={user} isMe={isMe} />
+              <style jsx>{styles}</style>
+            </section>
+          )}
         </>
       }
       mode="transparent-absolute"
@@ -170,11 +176,7 @@ export const UserProfile = () => {
             <Avatar size="xxl" user={user} />
           </section>
 
-          {!isMe ? (
-            <FollowButton user={user} size="lg" />
-          ) : (
-            <EditProfileButton user={user} />
-          )}
+          {!isMe && <FollowButton user={user} size="lg" />}
         </header>
 
         <section className="info">
