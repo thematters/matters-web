@@ -1,0 +1,28 @@
+:root {
+  --text-size: 4.25rem;
+  --button-size: 5.25rem;
+}
+
+.container {
+  padding-right: calc(var(--text-size) + var(--button-size));
+
+  & :global(> * .name > span) {
+    @mixin line-clamp;
+  }
+}
+
+.info {
+  @mixin inline-flex-center-end;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  padding-right: var(--spacing-base);
+
+  & .period {
+    margin-right: var(--spacing-base);
+    font-size: var(--font-size-xs);
+    color: var(--color-grey-darker);
+  }
+}
