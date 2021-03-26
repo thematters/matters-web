@@ -408,7 +408,7 @@ span.container {
 .border-md {
   & .hotarea {
     border-style: solid;
-    border-width: 1.5px;
+    border-width: 2px;
   }
 }
 

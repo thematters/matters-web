@@ -22,7 +22,7 @@ const fragments = {
   `,
 }
 
-const DynamicConetnt = dynamic(() => import('./Content'), {
+const DynamicContent = dynamic(() => import('./Content'), {
   ssr: false,
   loading: Spinner,
 })
@@ -38,7 +38,7 @@ const BaseAppreciatorsDialog = ({
       {children({ open })}
 
       <Dialog isOpen={show} onDismiss={close} fixedHeight>
-        <DynamicConetnt mediaHash={article.mediaHash} closeDialog={close} />
+        <DynamicContent mediaHash={article.mediaHash} closeDialog={close} />
       </Dialog>
     </>
   )

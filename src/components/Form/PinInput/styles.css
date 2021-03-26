@@ -13,7 +13,7 @@
     line-height: 1.5rem;
     color: var(--color-black);
     text-align: center;
-    border: 1.5px solid var(--color-grey-light);
+    border: 2px solid var(--color-grey-light);
 
     & + .pin-input-item {
       border-left: 0;

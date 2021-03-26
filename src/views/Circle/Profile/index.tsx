@@ -15,6 +15,7 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
+import ShareButton from '~/components/Layout/Header/ShareButton'
 
 import { REFETCH_CIRCLE_DETAIL } from '~/common/enums'
 import { numAbbr } from '~/common/utils'
@@ -22,9 +23,9 @@ import { numAbbr } from '~/common/utils'
 import CIRCLE_COVER from '@/public/static/images/circle-cover.svg'
 
 import SubscriptionBanner from '../SubscriptionBanner'
+import { AddCircleArticle } from './AddCircleArticle'
 import AuthorWidget from './AuthorWidget'
 import DropdownActions from './DropdownActions'
-import EditButton from './EditButton'
 import FollowButton from './FollowButton'
 import { FollowersDialog } from './FollowersDialog'
 import { CIRCLE_PROFILE_PRIVATE, CIRCLE_PROFILE_PUBLIC } from './gql'
@@ -49,6 +50,7 @@ const CircleProfile = () => {
   })
   const circle = data?.circle
   const isOwner = circle?.owner.id === viewer.id
+  const price = circle?.prices && circle?.prices[0]
 
   // private data
   const [privateFetched, setPrivateFetched] = useState(false)
@@ -97,7 +99,13 @@ const CircleProfile = () => {
       right={
         <>
           <span />
-          {circle && <DropdownActions circle={circle} />}
+          {circle && (
+            <section className="buttons">
+              <ShareButton />
+              <DropdownActions circle={circle} />
+              <style jsx>{styles}</style>
+            </section>
+          )}
         </>
       }
       mode="transparent-absolute"
@@ -130,18 +138,29 @@ const CircleProfile = () => {
         <Cover cover={circle.cover} fallbackCover={CIRCLE_COVER} />
 
         <header>
-          <CircleAvatar size="xxl" circle={circle} />
+          <section className="info">
+            <CircleAvatar size="xxl" circle={circle} />
+            <h2 className="name">{circle.displayName}</h2>
+          </section>
 
-          <h2 className="name">{circle.displayName}</h2>
+          {price && (
+            <section className="price">
+              <span className="amount">{price.amount}</span>
+              <br />
+              {price.currency} / <Translate id="month" />
+            </section>
+          )}
         </header>
 
-        <section className="info">
-          {circle.description && (
+        {circle.description && (
+          <section className="description">
             <Expandable>
-              <p className="description">{circle.description}</p>
+              <p>{circle.description}</p>
             </Expandable>
-          )}
-        </section>
+          </section>
+        )}
+
+        {privateFetched && <SubscriptionBanner circle={circle} />}
 
         <footer>
           <section className="counts">
@@ -169,7 +188,7 @@ const CircleProfile = () => {
           </section>
 
           {isOwner ? (
-            <EditButton circle={circle} />
+            <AddCircleArticle.Button circle={circle} />
           ) : (
             <FollowButton circle={circle} />
           )}
@@ -177,7 +196,6 @@ const CircleProfile = () => {
         <AuthorWidget circle={circle} />
 
         <SubscribeCircleDialog circle={circle} />
-        {privateFetched && <SubscriptionBanner circle={circle} />}
 
         <style jsx>{styles}</style>
       </section>

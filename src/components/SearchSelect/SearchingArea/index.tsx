@@ -139,7 +139,10 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
 
   const searchNodes = searchEdges?.map(({ node }) => node) || []
   const searchNodeIds = searchNodes.map((n) => n.id).join(',')
-  const listNode = listEdges?.map(({ node }) => node) || []
+  const listNode =
+    listEdges
+      ?.map(({ node }) => node)
+      .filter((node) => node.articleState === 'active') || []
   const listNodeIds = listNode.map((n) => n.id).join(',')
   const search = (key: string) => {
     lazySearch({
