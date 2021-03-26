@@ -19,6 +19,10 @@ export const MOCK_USER = {
   },
 }
 
+export const MOCK_BLANK_USER = {
+  email: 'blank@matters.news',
+}
+
 // Circle
 export const MOCK_CIRCLE = {
   __typename: 'Circle' as any,
