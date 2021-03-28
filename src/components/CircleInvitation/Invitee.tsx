@@ -1,4 +1,5 @@
 import { UserDigest } from '~/components'
+import { toUserDigestMiniPlaceholder } from '~/components/UserDigest/Mini'
 
 import {
   CircleInvitation_invitee as CircleInvitationInviteeType,
@@ -24,7 +25,14 @@ const CircleInvitationInvitee = ({ invitee }: CircleInvitationInviteeProps) => {
   switch (invitee.__typename) {
     case 'Person': {
       const user = invitee as CircleInvitationInviteePerson
-      return <UserDigest.Blank user={user} hasAvatar disabled />
+      return (
+        <UserDigest.Mini
+          user={toUserDigestMiniPlaceholder(user.email)}
+          hasAvatar
+          hasDisplayName
+          disabled
+        />
+      )
     }
     case 'User': {
       const user = invitee as CircleInvitationInviteeUser
