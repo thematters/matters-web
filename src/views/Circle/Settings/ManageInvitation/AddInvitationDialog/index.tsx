@@ -53,8 +53,8 @@ const AddCircleInvitationDialog = ({ children }: Props) => {
 
   const close = () => {
     // prevent click outside
-    const innerNode = document.getElementById('period-option')
-    if (innerNode) {
+    const node = document.getElementById('period-option')
+    if (node) {
       return
     }
     baseClose()

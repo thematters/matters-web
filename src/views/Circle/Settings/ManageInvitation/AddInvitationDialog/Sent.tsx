@@ -4,29 +4,34 @@ interface Props {
   close: () => void
 }
 
+const InvitationSentTitle = (
+  <Translate
+    zh_hant="成功發送邀請"
+    zh_hans="成功发送邀请"
+    en="Invitation Sent"
+  />
+)
+
+/**
+ * This component shows sucessful message after sent invitations.
+ *
+ * Usage:
+ *
+ * ```tsx
+ *   <InvitationSent close={close} />
+ * ```
+ */
 const InvitationSent = ({ close }: Props) => (
   <>
     <Dialog.Header
-      title={
-        <Translate
-          zh_hant="成功發送邀請"
-          zh_hans="成功发送邀请"
-          en="Invitation Sent"
-        />
-      }
+      title={InvitationSentTitle}
       close={close}
       closeTextId="cancel"
       mode="hidden"
     />
 
     <Dialog.Message>
-      <h3>
-        <Translate
-          zh_hant="成功發送邀請"
-          zh_hans="成功发送邀请"
-          en="Invitation Sent"
-        />
-      </h3>
+      <h3>{InvitationSentTitle}</h3>
       <p>
         <Translate
           zh_hant="你已寄出邀請給朋友們快去已邀請管理查看他們加入的進度吧！"

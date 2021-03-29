@@ -137,7 +137,7 @@ const BaseInviteePreSend = ({ close, confirm, invitees }: Props) => {
           <Translate
             zh_hant="確認發送"
             zh_hans="确认发送"
-            en="Confirm to Send"
+            en="Confirm and Send"
           />
         </Dialog.Footer.Button>
 
