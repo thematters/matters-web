@@ -30,6 +30,7 @@ export const Form: React.FC<FormProps> & {
   CurrencyRadioInput: typeof CurrencyRadioInput
 } = ({ noBackground, children, ...formProps }) => (
   <form
+    method="POST"
     className={noBackground ? 'no-background' : ''}
     autoComplete="off"
     {...formProps}
