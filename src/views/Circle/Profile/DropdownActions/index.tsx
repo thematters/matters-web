@@ -51,7 +51,7 @@ const BaseDropdownActions = ({
       {hasEditCircle && (
         <Menu.Item {...toPath({ page: 'circleSettings', circle })}>
           <TextIcon icon={<IconEdit16 size="md" />} size="md" spacing="base">
-            <Translate id="editCircle" />
+            <Translate id="manageCircle" />
           </TextIcon>
         </Menu.Item>
       )}

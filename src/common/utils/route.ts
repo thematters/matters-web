@@ -38,6 +38,7 @@ type ToPathArgs =
         | 'circleBroadcast'
         | 'circleSettings'
         | 'circleEditProfile'
+        | 'circleManageInvitation'
       circle: CircleArgs
     }
   | {
@@ -103,6 +104,11 @@ export const toPath = (args: ToPathArgs): { href: string } => {
     case 'circleEditProfile': {
       return {
         href: `/~${args.circle.name}/settings/edit-profile`,
+      }
+    }
+    case 'circleManageInvitation': {
+      return {
+        href: `/~${args.circle.name}/settings/manage-invitation`,
       }
     }
     case 'commentDetail': {
