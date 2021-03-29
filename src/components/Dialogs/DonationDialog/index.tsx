@@ -1,9 +1,10 @@
 import gql from 'graphql-tag'
+import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
 
 import {
   Dialog,
-  PaymentForm,
+  Spinner,
   Translate,
   useStep,
   ViewerContext,
@@ -42,6 +43,35 @@ interface DonationDialogProps {
   recipient: UserDonationRecipient
   targetId: string
 }
+
+const DynamicPayToFormComplete = dynamic(
+  () => import('~/components/Forms/PaymentForm/PayTo/Complete'),
+  { loading: Spinner }
+)
+const DynamicPayToFormConfirm = dynamic(
+  () => import('~/components/Forms/PaymentForm/PayTo/Confirm'),
+  { loading: Spinner }
+)
+const DynamicPayToFormSetAmount = dynamic(
+  () => import('~/components/Forms/PaymentForm/PayTo/SetAmount'),
+  { loading: Spinner }
+)
+const DynamicPaymentProcessingForm = dynamic(
+  () => import('~/components/Forms/PaymentForm/Processing'),
+  { loading: Spinner }
+)
+const DynamicPaymentResetPasswordForm = dynamic(
+  () => import('~/components/Forms/PaymentForm/ResetPassword'),
+  { loading: Spinner }
+)
+const DynamicPaymentSetPasswordForm = dynamic(
+  () => import('~/components/Forms/PaymentForm/SetPassword'),
+  { loading: Spinner }
+)
+const DynamicAddCreditForm = dynamic(
+  () => import('~/components/Forms/PaymentForm/AddCredit'),
+  { loading: Spinner }
+)
 
 const fragments = {
   recipient: gql`
@@ -171,7 +201,7 @@ const BaseDonationDialog = ({
         />
 
         {isSetAmount && (
-          <PaymentForm.PayTo.SetAmount
+          <DynamicPayToFormSetAmount
             close={close}
             defaultCurrency={currency}
             openTabCallback={setAmountOpenTabCallback}
@@ -185,7 +215,7 @@ const BaseDonationDialog = ({
         )}
 
         {isConfirm && (
-          <PaymentForm.PayTo.Confirm
+          <DynamicPayToFormConfirm
             amount={amount}
             currency={currency}
             recipient={recipient}
@@ -196,7 +226,7 @@ const BaseDonationDialog = ({
         )}
 
         {isProcessing && (
-          <PaymentForm.Processing
+          <DynamicPaymentProcessingForm
             nextStep={() => forward('complete')}
             txId={payToTx?.id || ''}
             windowRef={windowRef}
@@ -204,7 +234,7 @@ const BaseDonationDialog = ({
         )}
 
         {isComplete && (
-          <PaymentForm.PayTo.Complete
+          <DynamicPayToFormComplete
             callback={completeCallback}
             recipient={recipient}
             targetId={targetId}
@@ -212,15 +242,17 @@ const BaseDonationDialog = ({
         )}
 
         {isSetPaymentPassword && (
-          <PaymentForm.SetPassword submitCallback={() => forward('confirm')} />
+          <DynamicPaymentSetPasswordForm
+            submitCallback={() => forward('confirm')}
+          />
         )}
 
         {isAddCredit && (
-          <PaymentForm.AddCredit callbackButtons={ContinueDonationButton} />
+          <DynamicAddCreditForm callbackButtons={ContinueDonationButton} />
         )}
 
         {isResetPassword && (
-          <PaymentForm.ResetPassword
+          <DynamicPaymentResetPasswordForm
             callbackButtons={ContinueDonationButton}
             close={close}
           />

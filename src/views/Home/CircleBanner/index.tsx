@@ -28,15 +28,12 @@ export const CircleBanner = () => {
   const features = useFeatures()
   const { data: clientPreferenceData, client } = useQuery<ClientPreference>(
     CLIENT_PREFERENCE,
-    {
-      variables: { id: 'local' },
-    }
+    { variables: { id: 'local' } }
   )
   const ownCirclesCount = viewer?.ownCircles?.length || 0
   const hasCircle = ownCirclesCount > 0
 
-  // skip if it's server-side rendering
-  if (!process.browser) {
+  if (!process.browser && !viewer.privateFetched) {
     return null
   }
 
@@ -65,7 +62,7 @@ export const CircleBanner = () => {
   const canCreateCircle = features.circle_management
 
   return (
-    <div className="wrapper">
+    <div className="container">
       {!canCreateCircle && (
         <a
           href={APPLICATION_LINKS[lang] || APPLICATION_LINKS.zh_hant}

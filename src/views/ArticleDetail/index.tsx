@@ -16,6 +16,7 @@ import {
   PullToRefresh,
   QueryError,
   Spinner,
+  SubscribeCircleDialog,
   Throw404,
   Title,
   Translate,
@@ -430,6 +431,8 @@ const ArticleDetail = () => {
           </>
         )}
       </PullToRefresh>
+
+      {article.circle && <SubscribeCircleDialog circle={article.circle} />}
 
       <style jsx>{styles}</style>
     </Layout.Main>

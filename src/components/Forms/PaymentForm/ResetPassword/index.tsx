@@ -21,7 +21,10 @@ interface DonationDialogProps {
   close: () => void
 }
 
-const ResetPassword = ({ callbackButtons, close }: DonationDialogProps) => {
+const PaymentResetPasswordForm = ({
+  callbackButtons,
+  close,
+}: DonationDialogProps) => {
   const viewer = useContext(ViewerContext)
   const { currStep, forward } = useStep<Step>('resetPasswordRequest')
 
@@ -62,4 +65,4 @@ const ResetPassword = ({ callbackButtons, close }: DonationDialogProps) => {
   )
 }
 
-export default ResetPassword
+export default PaymentResetPasswordForm
