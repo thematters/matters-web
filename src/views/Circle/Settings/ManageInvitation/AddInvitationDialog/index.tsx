@@ -40,7 +40,7 @@ const DynamicInvitationSent = dynamic(() => import('./Sent'), {
 const AddCircleInvitationDialog = ({ children }: Props) => {
   const defaultStep = 'search'
 
-  const { show, open: baseOpen, close: baseClose } = useDialogSwitch(true)
+  const { show, open: baseOpen, close: baseClose } = useDialogSwitch(false)
   const { currStep, forward, reset } = useStep<Step>(defaultStep)
   const [invitees, setInvitees] = useState<StagingNode[]>([])
 

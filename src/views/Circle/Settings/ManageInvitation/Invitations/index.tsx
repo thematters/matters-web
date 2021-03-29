@@ -10,12 +10,14 @@ import {
   Spinner,
   Throw404,
   Translate,
+  useEventListener,
   usePullToRefresh,
   useRoute,
   ViewerContext,
 } from '~/components'
-import { CIRCLE_INVITATIONS } from '~/components/GQL/queries/circleInvitations'
+import CIRCLE_INVITATIONS from '~/components/GQL/queries/circleInvitations'
 
+import { REFETCH_CIRCLE_INVITATIONS } from '~/common/enums'
 import { mergeConnections } from '~/common/utils'
 
 import styles from './styles.css'
@@ -70,6 +72,7 @@ const Invitations = () => {
     })
   }
 
+  useEventListener(REFETCH_CIRCLE_INVITATIONS, refetch)
   usePullToRefresh.Handler(refetch)
 
   /**

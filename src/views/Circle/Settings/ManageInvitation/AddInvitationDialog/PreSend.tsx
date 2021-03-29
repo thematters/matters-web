@@ -16,6 +16,8 @@ import {
 import INVITE_CIRCLE from '~/components/GQL/mutations/invite'
 import { StagingNode } from '~/components/SearchSelect/StagingArea'
 
+import { REFETCH_CIRCLE_INVITATIONS } from '~/common/enums'
+
 import { INVITATIONS_CIRCLE } from './gql'
 import PeriodOption from './Option'
 
@@ -95,6 +97,7 @@ const BaseInviteePreSend = ({ close, confirm, invitees }: Props) => {
       return
     }
 
+    window.dispatchEvent(new CustomEvent(REFETCH_CIRCLE_INVITATIONS))
     confirm()
   }
 
