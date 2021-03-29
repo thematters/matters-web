@@ -1,4 +1,6 @@
 import gql from 'graphql-tag'
+import _isEmpty from 'lodash/isEmpty'
+import _pickBy from 'lodash/pickBy'
 
 import {
   Button,
@@ -117,7 +119,7 @@ const DropdownActions = ({ user, isMe }: DropdownActionsProps) => {
     hasBlockUser: !isMe,
   }
 
-  if (!controls.hasEditProfile && !controls.hasBlockUser) {
+  if (_isEmpty(_pickBy(controls))) {
     return null
   }
 

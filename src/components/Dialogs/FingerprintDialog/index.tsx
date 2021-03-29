@@ -19,10 +19,7 @@ const fragments = {
   `,
 }
 
-const DynamicContent = dynamic(() => import('./Content'), {
-  ssr: false,
-  loading: Spinner,
-})
+const DynamicContent = dynamic(() => import('./Content'), { loading: Spinner })
 
 const BaseFingerprintDialog = ({
   article,

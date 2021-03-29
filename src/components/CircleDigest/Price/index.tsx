@@ -1,8 +1,15 @@
 import gql from 'graphql-tag'
+import { useContext } from 'react'
 
-import { Button, TextIcon, Translate } from '~/components'
+import {
+  Button,
+  LoginButton,
+  TextIcon,
+  Translate,
+  ViewerContext,
+} from '~/components'
 
-import { OPEN_SUBSCRIBE_CIRCLE_DIALOG } from '~/common/enums'
+import { ADD_TOAST, OPEN_SUBSCRIBE_CIRCLE_DIALOG } from '~/common/enums'
 import { toPath } from '~/common/utils'
 
 import { PriceCirclePrivate } from './__generated__/PriceCirclePrivate'
@@ -41,6 +48,7 @@ const fragments = {
 }
 
 const Price = ({ circle, onClick }: PriceProps) => {
+  const viewer = useContext(ViewerContext)
   const price = circle.prices && circle.prices[0]
 
   if (!price) {
@@ -68,6 +76,24 @@ const Price = ({ circle, onClick }: PriceProps) => {
     )
   }
 
+  const showLoginToast = () => {
+    window.dispatchEvent(
+      new CustomEvent(ADD_TOAST, {
+        detail: {
+          color: 'green',
+          content: (
+            <Translate
+              zh_hant="請登入／註冊訂閱圍爐"
+              zh_hans="请登入／注册订阅围炉"
+            />
+          ),
+          customButton: <LoginButton isPlain />,
+          buttonPlacement: 'center',
+        },
+      })
+    )
+  }
+
   const openSubscribeCircleDialog = () =>
     window.dispatchEvent(new CustomEvent(OPEN_SUBSCRIBE_CIRCLE_DIALOG, {}))
 
@@ -77,6 +103,11 @@ const Price = ({ circle, onClick }: PriceProps) => {
       spacing={[0, 'base']}
       bgColor="gold"
       onClick={() => {
+        if (!viewer.isAuthed) {
+          showLoginToast()
+          return
+        }
+
         openSubscribeCircleDialog()
 
         if (onClick) {

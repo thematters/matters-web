@@ -29,7 +29,6 @@ interface StagingAreaProps {
 }
 
 const DynamicDraggableNodes = dynamic(() => import('./DraggableNodes'), {
-  ssr: false,
   loading: Spinner,
 })
 

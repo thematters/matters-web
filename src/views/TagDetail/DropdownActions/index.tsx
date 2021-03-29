@@ -1,3 +1,5 @@
+import _isEmpty from 'lodash/isEmpty'
+import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 
 import {
@@ -211,12 +213,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
     hasTagLeave: props.isOwner || props.isEditor,
   }
 
-  if (
-    !controls.hasEditTag &&
-    !controls.hasAddSelectedArticle &&
-    !controls.hasManageCommunity &&
-    !controls.hasTagLeave
-  ) {
+  if (_isEmpty(_pickBy(controls))) {
     return null
   }
 
