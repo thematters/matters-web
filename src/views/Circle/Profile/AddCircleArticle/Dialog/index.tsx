@@ -25,10 +25,7 @@ interface AddCircleArticleDialogProps {
   children: ({ open }: { open: () => void }) => React.ReactNode
 }
 
-const DynamicContent = dynamic(() => import('./Content'), {
-  ssr: false,
-  loading: Spinner,
-})
+const DynamicContent = dynamic(() => import('./Content'), { loading: Spinner })
 
 const AddCircleArticleDialog = ({
   circle,

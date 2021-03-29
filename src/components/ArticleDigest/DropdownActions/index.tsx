@@ -23,6 +23,7 @@ import {
 
 import { ADD_TOAST, TEXT } from '~/common/enums'
 
+import AddCircleArticle from './AddCircleArticle'
 import AppreciatorsButton from './AppreciatorsButton'
 import ArchiveArticle from './ArchiveArticle'
 import DonatorsButton from './DonatorsButton'
@@ -72,6 +73,7 @@ interface Controls {
   hasSetTagUnSelected: boolean
   hasRemoveTag: boolean
   hasEdit: boolean
+  hasAddToCircle: boolean
 }
 
 interface DialogProps {
@@ -80,6 +82,7 @@ interface DialogProps {
   openAppreciatorsDialog: () => void
   openDonatorsDialog: () => void
   openArchiveDialog: () => void
+  openAddCircleArticleDialog: () => void
 }
 
 type BaseDropdownActionsProps = DropdownActionsProps & Controls & DialogProps
@@ -98,6 +101,7 @@ const fragments = {
       ...EditArticleButtonArticle
       ...SetTagSelectedButtonArticle
       ...SetTagUnselectedButtonArticle
+      ...AddCircleArticleButtonArticle
     }
     ${AppreciatorsDialog.fragments.article}
     ${DonatorsDialog.fragments.article}
@@ -109,6 +113,7 @@ const fragments = {
     ${EditButton.fragments.article}
     ${SetTagSelectedButton.fragments.article}
     ${SetTagUnselectedButton.fragments.article}
+    ${AddCircleArticle.fragments.article}
   `,
 }
 
@@ -129,12 +134,14 @@ const BaseDropdownActions = ({
   hasSetTagUnSelected,
   hasRemoveTag,
   hasEdit,
+  hasAddToCircle,
 
   openShareDialog,
   openFingerprintDialog,
   openAppreciatorsDialog,
   openDonatorsDialog,
   openArchiveDialog,
+  openAddCircleArticleDialog,
 }: BaseDropdownActionsProps) => {
   const hasPublic =
     hasShare || hasAppreciators || hasDonators || hasFingerprint || hasExtend
@@ -161,6 +168,9 @@ const BaseDropdownActions = ({
       {/* private */}
       {hasPublic && hasPrivate && <Menu.Divider spacing="xtight" />}
       {hasSticky && <StickyButton article={article} />}
+      {hasAddToCircle && (
+        <AddCircleArticle.Button openDialog={openAddCircleArticleDialog} />
+      )}
       {hasArchive && <ArchiveArticle.Button openDialog={openArchiveDialog} />}
       {hasSetTagSelected && <SetTagSelectedButton article={article} />}
       {hasSetTagUnSelected && <SetTagUnselectedButton article={article} />}
@@ -241,6 +251,9 @@ const DropdownActions = (props: DropdownActionsProps) => {
     )
   }
 
+  const hasCircles =
+    article.author.ownCircles && article.author.ownCircles.length >= 1
+  const isAttachedCircle = !!article.circle
   const controls = {
     // public
     hasShare: !!hasShare,
@@ -260,6 +273,12 @@ const DropdownActions = (props: DropdownActionsProps) => {
     hasSetTagUnSelected: !!(inTagDetailSelected && canEditTag),
     hasRemoveTag: !!(isInTagDetail && canEditTag),
     hasEdit: isActive && isArticleAuthor,
+    hasAddToCircle: !!(
+      isActive &&
+      isArticleAuthor &&
+      hasCircles &&
+      !isAttachedCircle
+    ),
   }
 
   if (_isEmpty(_pickBy(controls))) {
@@ -277,17 +296,26 @@ const DropdownActions = (props: DropdownActionsProps) => {
                   {({ open: openDonatorsDialog }) => (
                     <ArchiveArticle.Dialog article={article}>
                       {({ open: openArchiveDialog }) => (
-                        <BaseDropdownActions
-                          {...props}
-                          {...controls}
-                          openShareDialog={openShareDialog}
-                          openFingerprintDialog={openFingerprintDialog}
-                          openAppreciatorsDialog={openAppreciatorsDialog}
-                          openDonatorsDialog={openDonatorsDialog}
-                          openArchiveDialog={
-                            viewer.isFrozen ? forbid : openArchiveDialog
-                          }
-                        />
+                        <AddCircleArticle.Dialog article={article}>
+                          {({ open: openAddCircleArticleDialog }) => (
+                            <BaseDropdownActions
+                              {...props}
+                              {...controls}
+                              openShareDialog={openShareDialog}
+                              openFingerprintDialog={openFingerprintDialog}
+                              openAppreciatorsDialog={openAppreciatorsDialog}
+                              openDonatorsDialog={openDonatorsDialog}
+                              openArchiveDialog={
+                                viewer.isFrozen ? forbid : openArchiveDialog
+                              }
+                              openAddCircleArticleDialog={
+                                viewer.isFrozen
+                                  ? forbid
+                                  : openAddCircleArticleDialog
+                              }
+                            />
+                          )}
+                        </AddCircleArticle.Dialog>
                       )}
                     </ArchiveArticle.Dialog>
                   )}

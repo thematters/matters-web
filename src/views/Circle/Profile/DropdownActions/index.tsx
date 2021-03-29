@@ -1,3 +1,5 @@
+import _isEmpty from 'lodash/isEmpty'
+import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 
 import {
@@ -105,7 +107,7 @@ const DropdownActions = ({ circle }: DropdownActionsProps) => {
     hasUnsubscribeCircle: isMember,
   }
 
-  if (!controls.hasEditCircle && !controls.hasUnsubscribeCircle) {
+  if (_isEmpty(_pickBy(controls))) {
     return null
   }
 
