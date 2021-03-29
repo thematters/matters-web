@@ -54,7 +54,9 @@ export const MOCK_CIRCLE = {
   },
   isMember: true,
   invitedBy: {
+    __typename: 'Invitation' as any,
     id: 'circle-invitation-000',
+    accepted: false,
     freePeriod: 3,
   },
 }

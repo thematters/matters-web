@@ -11,9 +11,9 @@ export const fragments = {
           amount
           currency
         }
-        ...SubscribeCircle
+        ...SubscribeCirclePublic
       }
-      ${SubscribeCircleDialog.fragments.circle}
+      ${SubscribeCircleDialog.fragments.circle.public}
     `,
     private: gql`
       fragment SubscriptionBannerCirclePrivate on Circle {
@@ -22,7 +22,9 @@ export const fragments = {
           id
         }
         isMember
+        ...SubscribeCirclePrivate
       }
+      ${SubscribeCircleDialog.fragments.circle.private}
     `,
   },
 }

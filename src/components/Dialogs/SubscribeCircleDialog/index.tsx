@@ -17,6 +17,7 @@ import { analytics } from '~/common/utils'
 
 import Complete from './Complete'
 
+import { DigestRichCirclePrivate } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePrivate'
 import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
 
 type Step =
@@ -26,7 +27,7 @@ type Step =
   | 'complete'
 
 interface SubscribeCircleDialogProps {
-  circle: DigestRichCirclePublic
+  circle: DigestRichCirclePublic & DigestRichCirclePrivate
   children?: ({ open }: { open: () => void }) => React.ReactNode
 }
 
@@ -44,13 +45,22 @@ const DynamicSubscribeCircleForm = dynamic(
 )
 
 const fragments = {
-  circle: gql`
-    fragment SubscribeCircle on Circle {
-      id
-      ...DigestRichCirclePublic
-    }
-    ${CircleDigest.Rich.fragments.circle.public}
-  `,
+  circle: {
+    public: gql`
+      fragment SubscribeCirclePublic on Circle {
+        id
+        ...DigestRichCirclePublic
+      }
+      ${CircleDigest.Rich.fragments.circle.public}
+    `,
+    private: gql`
+      fragment SubscribeCirclePrivate on Circle {
+        id
+        ...DigestRichCirclePrivate
+      }
+      ${CircleDigest.Rich.fragments.circle.private}
+    `,
+  },
 }
 
 const BaseSubscribeCircleDialog = ({

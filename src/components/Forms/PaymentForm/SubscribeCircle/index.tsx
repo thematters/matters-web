@@ -9,11 +9,12 @@ import CardPayment from './CardPayment'
 import { WALLET_PAYMENT_METHOD } from './gql'
 import PasswordPayment from './PasswordPayment'
 
+import { DigestRichCirclePrivate } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePrivate'
 import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
 import { WalletPaymentMethod } from './__generated__/WalletPaymentMethod'
 
 interface FormProps {
-  circle: DigestRichCirclePublic
+  circle: DigestRichCirclePublic & DigestRichCirclePrivate
   submitCallback: () => void
   switchToResetPassword: () => void
 }
