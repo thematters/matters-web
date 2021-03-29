@@ -30,6 +30,11 @@ const fragments = {
       fragment PriceCirclePrivate on Circle {
         id
         isMember
+        invitedBy {
+          id
+          accepted
+          freePeriod
+        }
       }
     `,
   },
