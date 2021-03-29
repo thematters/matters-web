@@ -10,6 +10,7 @@ export const TEXT = {
     ACTION_LIMIT_EXCEEDED: '操作過於頻繁，請稍候重試',
     addArticles: '添加作品',
     addArticleTag: '添加作品',
+    addCircleInvitation: '新增邀請',
     addedArticleCircle: '作品已添加至圍爐',
     addedArticleTag: '作品已添加標籤',
     addTag: '添加標籤',
@@ -134,6 +135,7 @@ export const TEXT = {
     hide: '站內隱藏',
     hintAddTag:
       '通過添加標籤幫助讀者更好地找到你的作品。如果沒有合適的標籤，你可以創建新的。',
+    hintAddCircleInvitee: '添加站內或站外朋友加入圍爐',
     hintCircleAddArticles: '將公開作品加入圍爐，成為永久收費作品。',
     hintCircleDisplayName: '2-12 個字元',
     hintCircleName: '2-20 個字元，僅支持英文、數字或下劃線',
@@ -335,6 +337,7 @@ export const TEXT = {
     ACTION_LIMIT_EXCEEDED: '操作过于频繁，请稍候重试',
     addArticles: '添加作品',
     addArticleTag: '添加作品',
+    addCircleInvitation: '新增邀请',
     addedArticleCircle: '作品已添加至围炉',
     addedArticleTag: '作品已添加标签',
     addTag: '添加标签',
@@ -459,6 +462,7 @@ export const TEXT = {
     hide: '站内隐藏',
     hintAddTag:
       '通过添加标签帮助读者更好地找到你的作品。如果没有合适的标签，你可以创建新的。',
+    hintAddCircleInvitee: '添加站内或站外朋友加入围炉',
     hintCircleAddArticles: '将公开作品加入围炉，成为永久收费作品。',
     hintCircleDisplayName: '2-12 个字符',
     hintCircleName: '2-20 个字符，仅支持英文、数字或下划线',
@@ -660,6 +664,7 @@ export const TEXT = {
     ACTION_LIMIT_EXCEEDED: 'Operation too frequent, please try again later.',
     addArticles: 'Add Articles',
     addArticleTag: 'Add articles',
+    addCircleInvitation: 'Add Invitation',
     addedArticleCircle: 'Articles added',
     addedArticleTag: 'Tags added',
     addTag: 'Add Tag',
@@ -791,6 +796,7 @@ export const TEXT = {
     hide: 'Archived',
     hintAddTag:
       'Adding tags helps readers to find your articles. Create new one if no tag suits your article.',
+    hintAddCircleInvitee: 'Invite users or others to join your circle',
     hintCircleAddArticles:
       'Adding articles to the circle and make them under the paywall.',
     hintCircleDisplayName: 'Must be between 2-12 characters long.',

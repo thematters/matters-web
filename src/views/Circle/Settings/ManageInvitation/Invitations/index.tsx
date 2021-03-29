@@ -10,18 +10,29 @@ import {
   Spinner,
   Throw404,
   Translate,
+  useEventListener,
   usePullToRefresh,
   useRoute,
   ViewerContext,
 } from '~/components'
+import CIRCLE_INVITATIONS from '~/components/GQL/queries/circleInvitations'
 
+import { REFETCH_CIRCLE_INVITATIONS } from '~/common/enums'
 import { mergeConnections } from '~/common/utils'
 
-import { CIRCLE_INVITATIONS } from './gql'
 import styles from './styles.css'
 
-import { CircleInvitations as CircleInvitationsType } from './__generated__/CircleInvitations'
+import { CircleInvitations as CircleInvitationsType } from '~/components/GQL/queries/__generated__/CircleInvitations'
 
+/**
+ * This component is for listing circle invitees.
+ *
+ * Usage:
+ *
+ * ```
+ *   <Invitations />
+ * ```
+ */
 const Invitations = () => {
   const viewer = useContext(ViewerContext)
   const { getQuery } = useRoute()
@@ -61,6 +72,7 @@ const Invitations = () => {
     })
   }
 
+  useEventListener(REFETCH_CIRCLE_INVITATIONS, refetch)
   usePullToRefresh.Handler(refetch)
 
   /**

@@ -27,11 +27,12 @@ import Hint from './Hint'
 import Processing from './Processing'
 import styles from './styles.css'
 
+import { DigestRichCirclePrivate } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePrivate'
 import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
 import { SubscribeCircle as SubscribeCircleType } from './__generated__/SubscribeCircle'
 
 interface CardPaymentProps {
-  circle: DigestRichCirclePublic
+  circle: DigestRichCirclePublic & DigestRichCirclePrivate
   submitCallback: () => void
 }
 

@@ -77,7 +77,7 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
   const viewer = useContext(ViewerContext)
 
   const isArticle = searchType === 'Article'
-  const isUser = searchType === 'User'
+  const isUser = searchType === 'User' || searchType === 'Invitee'
   const isTag = searchType === 'Tag'
   const hasListMode = viewer.id === searchFilter?.authorId && isArticle
   const [mode, setMode] = useState<Mode>(hasListMode ? 'list' : 'search')
@@ -145,8 +145,9 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
       .filter((node) => node.articleState === 'active') || []
   const listNodeIds = listNode.map((n) => n.id).join(',')
   const search = (key: string) => {
+    const type = searchType === 'Invitee' ? 'User' : searchType
     lazySearch({
-      variables: { key, type: searchType, filter: searchFilter, first: 10 },
+      variables: { key, type, filter: searchFilter, first: 10 },
     })
   }
 
