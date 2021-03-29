@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 
 import { CircleInvitation } from '~/components'
 
-export const CIRCLE_INVITATIONS = gql`
+export default gql`
   query CircleInvitations($name: String!, $after: String) {
     circle(input: { name: $name }) {
       id

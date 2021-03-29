@@ -7,7 +7,7 @@ import { translate } from '~/common/utils'
 
 import styles from './styles.css'
 
-export type SearchType = 'Article' | 'Tag' | 'User'
+export type SearchType = 'Article' | 'Tag' | 'User' | 'Invitee'
 
 interface SearchInputProps {
   type: SearchType
@@ -45,6 +45,12 @@ const SearchInput: React.FC<SearchInputProps> = ({
       zh_hant: '搜尋作者…',
       zh_hans: '搜索作者…',
       en: 'Search authors...',
+      lang,
+    }),
+    Invitee: translate({
+      zh_hant: '搜尋名稱、Matters ID，站外請輸入電子信箱',
+      zh_hans: '搜寻名称、Matters ID，站外请输入电子信箱',
+      en: 'Search users, or enter email',
       lang,
     }),
   }

@@ -14,6 +14,7 @@ export const REFETCH_TAG_DETAIL_ARTICLES = 'refetchTagDetailArticles'
 // Circle
 export const REFETCH_CIRCLE_DETAIL_ARTICLES = 'refetchCircleDetailArticles'
 export const REFETCH_CIRCLE_DETAIL = 'refetchCircleDetail'
+export const REFETCH_CIRCLE_INVITATIONS = 'refetchCircleInvitations'
 
 // Donators
 export const REFETCH_DONATORS = 'refetchDonators'
