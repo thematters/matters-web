@@ -13,6 +13,15 @@ interface Props {
 
 type Area = 'staging' | 'searching'
 
+/**
+ * This component is about search and select new invitees.
+ *
+ * Usage:
+ *
+ * ```tsx
+ *   <InviteeSearchEditor close={close} save={save} />
+ * ```
+ */
 const InviteeSearchEditor = ({ close, save }: Props) => {
   // area
   const [area, setArea] = useState<Area>('staging')

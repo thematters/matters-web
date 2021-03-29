@@ -8,7 +8,7 @@ import AddInvitationDialog from '../AddInvitationDialog'
  * Usage:
  *
  * ```tsx
- *
+ *   <CircleInvitationAddButton />
  * ```
  */
 const CircleInvitationAddButton = () => {

@@ -17,7 +17,7 @@ import INVITE_CIRCLE from '~/components/GQL/mutations/invite'
 import { StagingNode } from '~/components/SearchSelect/StagingArea'
 
 import { INVITATIONS_CIRCLE } from './gql'
-import PeriodOption from './PeriodOption'
+import PeriodOption from './Option'
 
 import { InviteCircle } from '~/components/GQL/mutations/__generated__/InviteCircle'
 import { InvitationsCircle } from './__generated__/InvitationsCircle'
@@ -28,12 +28,19 @@ interface Props {
   invitees: StagingNode[]
 }
 
-const BaseInviteePreSend = ({
-  circleName,
-  close,
-  confirm,
-  invitees,
-}: Props & { circleName: string }) => {
+/**
+ * This component is displaying selected invitees and free period.
+ *
+ * Usage:
+ *
+ * ```tsx
+ *   <BaseInviteePreSend />
+ * ```
+ */
+const BaseInviteePreSend = ({ close, confirm, invitees }: Props) => {
+  const { getQuery } = useRoute()
+  const name = getQuery('name')
+
   const [period, setPeriod] = useState<number>(1)
   const [invite, { loading: inviteLoading }] = useMutation<InviteCircle>(
     INVITE_CIRCLE
@@ -45,7 +52,7 @@ const BaseInviteePreSend = ({
   const { data, loading, error } = useQuery<InvitationsCircle>(
     INVITATIONS_CIRCLE,
     {
-      variables: { name: circleName },
+      variables: { name },
     }
   )
 
@@ -67,17 +74,27 @@ const BaseInviteePreSend = ({
   }
 
   const send = async () => {
+    const nodes = invitees.map(({ node }) => {
+      if (node.__typename === 'User') {
+        return {
+          id: node.id || null,
+          email: node.id ? null : node.displayName,
+        }
+      }
+    })
+
     const result = await invite({
       variables: {
         circleId: circle.id,
         freePeriod: period,
-        invitees: [],
+        invitees: nodes,
       },
     })
 
     if (!result) {
       return
     }
+
     confirm()
   }
 
@@ -136,20 +153,24 @@ const BaseInviteePreSend = ({
   )
 }
 
-const InviteePreSend = (props: Props) => {
-  const { getQuery } = useRoute()
-  const name = getQuery('name')
-
-  return (
-    <>
-      <Dialog.Header
-        title={<Translate zh_hant="寄出邀請" zh_hans="寄出邀请" en="Send" />}
-        close={close}
-        closeTextId="cancel"
-      />
-      <BaseInviteePreSend circleName={name} {...props} />
-    </>
-  )
-}
+/**
+ * This is a wrapper component of invitaiton pre-send list.
+ *
+ * Usage:
+ *
+ * ```tsx
+ *   <InviteePreSend close={close} confirm={confirm} invitees={[]} />
+ * ```
+ */
+const InviteePreSend = (props: Props) => (
+  <>
+    <Dialog.Header
+      title={<Translate zh_hant="寄出邀請" zh_hans="寄出邀请" en="Send" />}
+      close={close}
+      closeTextId="cancel"
+    />
+    <BaseInviteePreSend {...props} />
+  </>
+)
 
 export default InviteePreSend

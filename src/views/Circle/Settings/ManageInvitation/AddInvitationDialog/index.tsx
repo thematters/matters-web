@@ -20,6 +20,23 @@ const DynamicInviteePreSend = dynamic(() => import('./PreSend'), {
   loading: Spinner,
 })
 
+const DynamicInvitationSent = dynamic(() => import('./Sent'), {
+  ssr: false,
+  loading: Spinner,
+})
+
+/**
+ * This dialog component is for sending new invitations.
+ *
+ * Usage:
+ *
+ * ```tsx
+ *   <AddCircleInvitationDialog>
+ *     {({ open }) => (<Component open={open} />)}
+ *   </AddCircleInvitationDialog>
+ * ```
+ *
+ */
 const AddCircleInvitationDialog = ({ children }: Props) => {
   const defaultStep = 'search'
 
@@ -35,6 +52,7 @@ const AddCircleInvitationDialog = ({ children }: Props) => {
   }
 
   const close = () => {
+    // prevent click outside
     const innerNode = document.getElementById('period-option')
     if (innerNode) {
       return
@@ -67,7 +85,7 @@ const AddCircleInvitationDialog = ({ children }: Props) => {
           />
         )}
 
-        {isSent && <></>}
+        {isSent && <DynamicInvitationSent close={close} />}
       </Dialog>
     </>
   )

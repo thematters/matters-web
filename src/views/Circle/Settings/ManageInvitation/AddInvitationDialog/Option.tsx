@@ -24,6 +24,15 @@ const PeriodOptionTitle = (
   />
 )
 
+/**
+ * This sub component is for options of circle trial period.
+ *
+ * Usage:
+ *
+ * ```tsx
+ *   <PeriodOptionContent period={period} onClick={onClick} />
+ * ```
+ */
 const PeriodOptionContent = ({
   period,
   onClick,
@@ -47,7 +56,7 @@ const PeriodOptionContent = ({
 )
 
 /**
- * This component is rendering options of circle trial period.
+ * This component is for rendering options of circle trial period.
  *
  * Usage:
  *
