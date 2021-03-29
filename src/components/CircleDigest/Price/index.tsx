@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 
 import { Button, TextIcon, Translate } from '~/components'
 
+import { OPEN_SUBSCRIBE_CIRCLE_DIALOG } from '~/common/enums'
 import { toPath } from '~/common/utils'
 
 import { PriceCirclePrivate } from './__generated__/PriceCirclePrivate'
@@ -62,13 +63,21 @@ const Price = ({ circle, onClick }: PriceProps) => {
     )
   }
 
+  const openSubscribeCircleDialog = () =>
+    window.dispatchEvent(new CustomEvent(OPEN_SUBSCRIBE_CIRCLE_DIALOG, {}))
+
   return (
     <Button
       size={[null, '2rem']}
       spacing={[0, 'base']}
       bgColor="gold"
-      onClick={onClick}
-      {...path}
+      onClick={() => {
+        openSubscribeCircleDialog()
+
+        if (onClick) {
+          onClick()
+        }
+      }}
     >
       <TextIcon weight="md" size="sm" color="white">
         {price.amount} {price.currency} / <Translate id="month" />

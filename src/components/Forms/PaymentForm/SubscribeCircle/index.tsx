@@ -18,7 +18,7 @@ interface FormProps {
   switchToResetPassword: () => void
 }
 
-const SubscribeCircle: React.FC<FormProps> = (props) => {
+const SubscribeCircleForm: React.FC<FormProps> = (props) => {
   const { data: walletData, loading } = useQuery<WalletPaymentMethod>(
     WALLET_PAYMENT_METHOD
   )
@@ -52,4 +52,4 @@ const SubscribeCircle: React.FC<FormProps> = (props) => {
   )
 }
 
-export default SubscribeCircle
+export default SubscribeCircleForm

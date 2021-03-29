@@ -34,7 +34,11 @@ const VIEWER_TX_STATE = gql`
   }
 `
 
-const Processing: React.FC<Props> = ({ txId, nextStep, windowRef }) => {
+const PaymentProcessingForm: React.FC<Props> = ({
+  txId,
+  nextStep,
+  windowRef,
+}) => {
   const [polling, setPolling] = useState(true)
   const { data, error } = useQuery<ViewerTxState>(VIEWER_TX_STATE, {
     variables: { id: txId },
@@ -72,4 +76,4 @@ const Processing: React.FC<Props> = ({ txId, nextStep, windowRef }) => {
   )
 }
 
-export default Processing
+export default PaymentProcessingForm

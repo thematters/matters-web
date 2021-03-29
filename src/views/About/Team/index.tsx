@@ -21,14 +21,14 @@ const CREW = [
     type: 'founder',
     people: [
       {
+        avatar: IMAGE_JIEPING,
+        title: 'Founder, CEO',
+        name: <Translate zh_hant="張潔平" zh_hans="张洁平" />,
+      },
+      {
         avatar: IMAGE_BERYL,
         title: 'Co-founder, Operation',
         name: 'Beryl Liu',
-      },
-      {
-        avatar: IMAGE_JIEPING,
-        title: 'Co-founder, Operation',
-        name: <Translate zh_hant="張潔平" zh_hans="张洁平" />,
       },
       {
         avatar: IMAGE_GUO,

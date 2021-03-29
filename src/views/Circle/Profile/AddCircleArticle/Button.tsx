@@ -33,7 +33,11 @@ const AddArticlesButton = ({ circle }: AddArticlesButtonProps) => {
           aria-haspopup="true"
         >
           <TextIcon icon={<IconPen16 />} weight="md" size="md-s">
-            <Translate id="circleAddArticles" />
+            <Translate
+              zh_hant="添加作品"
+              zh_hans="添加作品"
+              en="Add Articles"
+            />
           </TextIcon>
         </Button>
       )}

@@ -291,7 +291,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
   )
 }
 
-const AddCredit: React.FC<FormProps> = (props) => {
+const AddCreditForm: React.FC<FormProps> = (props) => {
   const { lang } = useContext(LanguageContext)
 
   return (
@@ -304,4 +304,4 @@ const AddCredit: React.FC<FormProps> = (props) => {
   )
 }
 
-export default AddCredit
+export default AddCreditForm

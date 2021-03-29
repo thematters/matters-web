@@ -1,9 +1,10 @@
 import gql from 'graphql-tag'
+import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
 
 import {
   Dialog,
-  PaymentForm,
+  Spinner,
   Translate,
   useEventListener,
   useStep,
@@ -28,6 +29,19 @@ interface SubscribeCircleDialogProps {
   circle: DigestRichCirclePublic
   children?: ({ open }: { open: () => void }) => React.ReactNode
 }
+
+const DynamicPaymentResetPasswordForm = dynamic(
+  () => import('~/components/Forms/PaymentForm/ResetPassword'),
+  { loading: Spinner }
+)
+const DynamicPaymentSetPasswordForm = dynamic(
+  () => import('~/components/Forms/PaymentForm/SetPassword'),
+  { loading: Spinner }
+)
+const DynamicSubscribeCircleForm = dynamic(
+  () => import('~/components/Forms/PaymentForm/SubscribeCircle'),
+  { loading: Spinner }
+)
 
 const fragments = {
   circle: gql`
@@ -102,13 +116,13 @@ const BaseSubscribeCircleDialog = ({
         />
 
         {isSetPaymentPassword && (
-          <PaymentForm.SetPassword
+          <DynamicPaymentSetPasswordForm
             submitCallback={() => forward('subscribeCircle')}
           />
         )}
 
         {isSubscribeCircle && (
-          <PaymentForm.SubscribeCircle
+          <DynamicSubscribeCircleForm
             circle={circle}
             submitCallback={() => forward('complete')}
             switchToResetPassword={() => forward('resetPassword')}
@@ -116,7 +130,7 @@ const BaseSubscribeCircleDialog = ({
         )}
 
         {isResetPassword && (
-          <PaymentForm.ResetPassword
+          <DynamicPaymentResetPasswordForm
             callbackButtons={ContinueSubscribeButton}
             close={close}
           />
