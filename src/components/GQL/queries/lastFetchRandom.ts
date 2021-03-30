@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 
 export default gql`
-  query FetchRecord {
-    fetchRecord @client {
+  query LastFetchRandom {
+    lastFetchRandom @client {
       id
       sidebarTags
       feedTags

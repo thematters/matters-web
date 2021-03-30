@@ -49,9 +49,7 @@ const Feed = ({ type }: Props) => {
       notifyOnNetworkStatusChange: true,
       variables: { random: 0 },
     },
-    {
-      publicQuery: !viewer.isAuthed,
-    }
+    { publicQuery: !viewer.isAuthed }
   )
 
   const edges = _get(

@@ -14,14 +14,14 @@ import {
   usePublicQuery,
   ViewerContext,
 } from '~/components'
-import FETCH_RECORD from '~/components/GQL/queries/fetchRecord'
+import FETCH_RECORD from '~/components/GQL/queries/lastFetchRandom'
 
 import { analytics, toPath } from '~/common/utils'
 
 import SectionHeader from '../../SectionHeader'
 import styles from './styles.css'
 
-import { FetchRecord } from '~/components/GQL/queries/__generated__/FetchRecord'
+import { LastFetchRandom } from '~/components/GQL/queries/__generated__/LastFetchRandom'
 import { SidebarTagsPublic } from './__generated__/SidebarTagsPublic'
 
 const SIDEBAR_TAGS = gql`
@@ -49,19 +49,19 @@ const SIDEBAR_TAGS = gql`
 const Tags = () => {
   const viewer = useContext(ViewerContext)
 
-  const { data: fetchRecord, client } = useQuery<FetchRecord>(FETCH_RECORD, {
-    variables: { id: 'local' },
-  })
+  const { data: lastFetchRandom, client } = useQuery<LastFetchRandom>(
+    FETCH_RECORD,
+    { variables: { id: 'local' } }
+  )
+  const lastRandom = lastFetchRandom?.lastFetchRandom.sidebarTags
 
   const { data, loading, error, refetch } = usePublicQuery<SidebarTagsPublic>(
     SIDEBAR_TAGS,
     {
       notifyOnNetworkStatusChange: true,
-      variables: { random: 0 },
+      variables: { random: lastRandom || 0 },
     },
-    {
-      publicQuery: !viewer.isAuthed,
-    }
+    { publicQuery: !viewer.isAuthed }
   )
 
   const randomMaxSize = 50
@@ -70,19 +70,19 @@ const Tags = () => {
   )
   const edges = data?.viewer?.recommendation.tags.edges
 
-  const shuffle = () =>
-    refetch({ random: _random(0, Math.min(randomMaxSize, size)) })
+  const shuffle = () => {
+    const random = _random(0, Math.min(randomMaxSize, size))
+    refetch({ random })
+
+    client.writeData({
+      id: 'LastFetchRandom:local',
+      data: { sidebarTags: random },
+    })
+  }
 
   useEffect(() => {
-    const fetched = fetchRecord?.fetchRecord.sidebarTags
-
-    if (viewer.isAuthed && !fetched) {
+    if (viewer.isAuthed && lastRandom === null) {
       shuffle()
-
-      client.writeData({
-        id: 'FetchRecord:local',
-        data: { sidebarTags: true },
-      })
     }
   }, [viewer.isAuthed])
 

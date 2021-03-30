@@ -5,7 +5,7 @@ export default gql`
     commentDraft(input: CommentDraftInput!): CommentDraft!
     clientPreference: ClientPreference!
     clientInfo: ClientInfo!
-    fetchRecord: FetchRecord!
+    lastFetchRandom: LastFetchRandom!
   }
 
   extend type Official {
@@ -56,12 +56,13 @@ export default gql`
     viewportSize: ViewportSize!
   }
 
-  type FetchRecord {
+  "To record the last random variable on homepage queries"
+  type LastFetchRandom {
     id: ID!
-    sidebarTags: Boolean!
-    feedTags: Boolean!
-    sidebarAuthors: Boolean!
-    feedAuthors: Boolean!
+    sidebarTags: Int
+    feedTags: Int
+    sidebarAuthors: Int
+    feedAuthors: Int
   }
 
   type Push {

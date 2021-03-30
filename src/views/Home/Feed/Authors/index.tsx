@@ -12,22 +12,24 @@ import {
   UserDigest,
   ViewerContext,
 } from '~/components'
-import FETCH_RECORD from '~/components/GQL/queries/fetchRecord'
+import FETCH_RECORD from '~/components/GQL/queries/lastFetchRandom'
 
 import { analytics } from '~/common/utils'
 
 import SectionHeader from '../../SectionHeader'
 import { FEED_AUTHORS } from './gql'
 
-import { FetchRecord } from '~/components/GQL/queries/__generated__/FetchRecord'
+import { LastFetchRandom } from '~/components/GQL/queries/__generated__/LastFetchRandom'
 import { FeedAuthors } from './__generated__/FeedAuthors'
 
 const Authors = () => {
   const viewer = useContext(ViewerContext)
 
-  const { data: fetchRecord, client } = useQuery<FetchRecord>(FETCH_RECORD, {
-    variables: { id: 'local' },
-  })
+  const { data: lastFetchRandom, client } = useQuery<LastFetchRandom>(
+    FETCH_RECORD,
+    { variables: { id: 'local' } }
+  )
+  const lastRandom = lastFetchRandom?.lastFetchRandom.feedAuthors
 
   /**
    * Data Fetching
@@ -36,29 +38,26 @@ const Authors = () => {
     FEED_AUTHORS,
     {
       notifyOnNetworkStatusChange: true,
-      variables: { random: 0 },
+      variables: { random: lastRandom || 0 },
     },
-    {
-      publicQuery: !viewer.isAuthed,
-    }
+    { publicQuery: !viewer.isAuthed }
   )
 
   const edges = data?.viewer?.recommendation.authors.edges
 
   const shuffle = () => {
-    refetch({ random: _random(0, 50) })
+    const random = _random(0, 50)
+    refetch({ random })
+
+    client.writeData({
+      id: 'LastFetchRandom:local',
+      data: { feedAuthors: random },
+    })
   }
 
   useEffect(() => {
-    const fetched = fetchRecord?.fetchRecord.feedAuthors
-
-    if (viewer.isAuthed && !fetched) {
+    if (viewer.isAuthed && lastRandom === null) {
       shuffle()
-
-      client.writeData({
-        id: 'FetchRecord:local',
-        data: { feedAuthors: true },
-      })
     }
   }, [viewer.isAuthed])
 

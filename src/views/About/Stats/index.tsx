@@ -11,7 +11,7 @@ const Stats = () => {
             <p className="type">
               <Translate zh_hant="創作者人數" zh_hans="创作者人数" />
             </p>
-            <span className="num">15K +</span>
+            <span className="num">60K +</span>
           </li>
           <li>
             <p className="type">
@@ -26,7 +26,7 @@ const Stats = () => {
                 zh_hans="单篇文章最多获得（以 LikeCoin 换算市价）"
               />
             </p>
-            <span className="num">HK$ 8K</span>
+            <span className="num">US$ 2K</span>
           </li>
         </ul>
       </div>

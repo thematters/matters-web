@@ -11,14 +11,14 @@ import {
   usePublicQuery,
   ViewerContext,
 } from '~/components'
-import FETCH_RECORD from '~/components/GQL/queries/fetchRecord'
+import FETCH_RECORD from '~/components/GQL/queries/lastFetchRandom'
 
 import { analytics } from '~/common/utils'
 
 import SectionHeader from '../../SectionHeader'
 import TagFeedDigest from './TagFeedDigest'
 
-import { FetchRecord } from '~/components/GQL/queries/__generated__/FetchRecord'
+import { LastFetchRandom } from '~/components/GQL/queries/__generated__/LastFetchRandom'
 import { FeedTagsPublic } from './__generated__/FeedTagsPublic'
 
 const FEED_TAGS = gql`
@@ -44,19 +44,19 @@ const FEED_TAGS = gql`
 const TagsFeed = () => {
   const viewer = useContext(ViewerContext)
 
-  const { data: fetchRecord, client } = useQuery<FetchRecord>(FETCH_RECORD, {
-    variables: { id: 'local' },
-  })
+  const { data: lastFetchRandom, client } = useQuery<LastFetchRandom>(
+    FETCH_RECORD,
+    { variables: { id: 'local' } }
+  )
+  const lastRandom = lastFetchRandom?.lastFetchRandom.feedTags
 
   const { data, loading, error, refetch } = usePublicQuery<FeedTagsPublic>(
     FEED_TAGS,
     {
       notifyOnNetworkStatusChange: true,
-      variables: { random: 0 },
+      variables: { random: lastRandom || 0 },
     },
-    {
-      publicQuery: !viewer.isAuthed,
-    }
+    { publicQuery: !viewer.isAuthed }
   )
   const randomMaxSize = 50
   const size = Math.round(
@@ -65,19 +65,18 @@ const TagsFeed = () => {
   const edges = data?.viewer?.recommendation.tags.edges
 
   const shuffle = () => {
-    refetch({ random: _random(0, Math.min(randomMaxSize, size)) })
+    const random = _random(0, Math.min(randomMaxSize, size))
+    refetch({ random })
+
+    client.writeData({
+      id: 'LastFetchRandom:local',
+      data: { feedTags: random },
+    })
   }
 
   useEffect(() => {
-    const fetched = fetchRecord?.fetchRecord.feedTags
-
-    if (viewer.isAuthed && !fetched) {
+    if (viewer.isAuthed && lastRandom === null) {
       shuffle()
-
-      client.writeData({
-        id: 'FetchRecord:local',
-        data: { feedTags: true },
-      })
     }
   }, [viewer.isAuthed])
 
