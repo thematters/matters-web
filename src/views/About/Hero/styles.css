@@ -1,19 +1,23 @@
 .hero {
   position: relative;
   padding: var(--spacing-xx-loose) 0 var(--spacing-x-tight);
-  background-position: right top, top 8rem right -70px, left bottom;
-  background-size: 162px, 281px, 123px;
+  background-position: right top, top 128px right -70px, left bottom;
+  background-size: 258px, 281px, 123px;
 
   @media (--sm-up) {
     padding-bottom: 5rem;
-    background-position: right top, top 16.25rem right var(--spacing-x-loose),
+    background-position: right top, top 259px right var(--spacing-x-loose),
       left bottom;
-    background-size: 328px, 270px;
+    background-size: 521px, 258px, 270px;
   }
 
   @media (--md-up) {
-    background-position: right top, top 6.25rem right 5rem, left bottom;
-    background-size: 328px, 357px;
+    background-position: right top, top 98px right 5rem, left bottom;
+    background-size: 521px, 308px, 270px;
+  }
+
+  @media (--md-up) {
+    background-size: 521px, 308px, 357px;
   }
 }
 
@@ -82,33 +86,36 @@
 }
 
 .reports {
+  position: relative;
   display: grid;
   grid-template-columns: 1fr var(--layout-width) 1fr;
   padding: 5rem var(--spacing-base) 0;
-  background-size: 0;
+  overflow: hidden;
 
   & ul {
     @mixin hide-scrollbar;
 
     display: flex;
     grid-column: 2 / -1;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x mandatory;
+    cursor: inherit;
 
     & li {
       position: relative;
+      flex: 0 0 auto;
+      padding-right: var(--spacing-loose);
       margin: 0;
-      scroll-snap-align: start;
+      cursor: inherit;
 
       & a {
         @mixin border-grey;
         @mixin all-transition;
 
+        position: relative;
         display: block;
         width: 272px;
         height: 136px;
         padding: var(--spacing-base);
+        cursor: inherit;
         background: var(--color-grey-lighter);
         border-radius: 0.5rem;
 
@@ -139,17 +146,11 @@
         font-weight: var(--font-weight-medium);
       }
     }
-
-    & li + li {
-      margin-left: var(--spacing-loose);
-    }
   }
 
   @media (--sm-up) {
     grid-template-columns: 1fr var(--layout-width-sm-up) 1fr;
-    padding: 4rem 0 0;
-    background-position: right var(--spacing-base);
-    background-size: 9px 42px;
+    padding: 10rem 0 0;
 
     & ul {
       & li {
@@ -172,10 +173,26 @@
   @media (--md-up) {
     grid-template-columns: 1fr var(--layout-width-md-up) 1fr;
     padding-top: 17rem;
-    background-position: right 3.25rem;
   }
 
   @media (--lg-up) {
     grid-template-columns: 1fr var(--layout-width-lg-up) 1fr;
+  }
+}
+
+.scrollHint {
+  background-size: 0;
+
+  @media (--sm-up) {
+    position: absolute;
+    grid-column: 2 / 3;
+    width: 100%;
+    height: 100%;
+    background-position: right var(--spacing-base);
+    background-size: 9px 42px;
+  }
+
+  @media (--md-up) {
+    background-position: right 3.25rem;
   }
 }

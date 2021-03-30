@@ -11,13 +11,13 @@ const Stats = () => {
             <p className="type">
               <Translate zh_hant="創作者人數" zh_hans="创作者人数" />
             </p>
-            <span className="num">15K +</span>
+            <span className="num">15K+</span>
           </li>
           <li>
             <p className="type">
               <Translate zh_hant="每月發布文章" zh_hans="每月发布文章" />
             </p>
-            <span className="num">9K +</span>
+            <span className="num">9K+</span>
           </li>
           <li>
             <p className="type">

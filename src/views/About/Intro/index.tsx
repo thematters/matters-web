@@ -1,4 +1,4 @@
-import { Translate } from '~/components'
+import { Button, Translate } from '~/components'
 
 import ILLUSTRATION_1 from '@/public/static/images/about/intro-illustration-1.png'
 import ILLUSTRATION_2 from '@/public/static/images/about/intro-illustration-2.png'
@@ -49,6 +49,21 @@ const Intro = () => {
                   zh_hans="Matters 是立足去中心化生态建立的，一个代码开源、创作者自治的写作社区。创作者可以在这里写作、发表、阅读、讨论，同时，为社区建立「共同生活、共同决定」的规则，未来进一步应用到去中心生态的其它社区。"
                 />
               </p>
+              <section className="buttons">
+                <Button
+                  borderColor="white"
+                  borderWidth="sm"
+                  spacing={['xtight', 'loose']}
+                  htmlHref="https://github.com/thematters/developer-resource"
+                  htmlTarget="_blank"
+                  rel="noopener"
+                >
+                  <Translate
+                    zh_hant="GitHub 代碼倉庫"
+                    zh_hans="GitHub 代码仓库"
+                  />
+                </Button>
+              </section>
             </section>
           </div>
         </li>
