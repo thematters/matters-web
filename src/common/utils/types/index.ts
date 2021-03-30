@@ -5,6 +5,7 @@ export default gql`
     commentDraft(input: CommentDraftInput!): CommentDraft!
     clientPreference: ClientPreference!
     clientInfo: ClientInfo!
+    fetchRecord: FetchRecord!
   }
 
   extend type Official {
@@ -53,6 +54,14 @@ export default gql`
   type ClientInfo {
     id: ID!
     viewportSize: ViewportSize!
+  }
+
+  type FetchRecord {
+    id: ID!
+    sidebarTags: Boolean!
+    feedTags: Boolean!
+    sidebarAuthors: Boolean!
+    feedAuthors: Boolean!
   }
 
   type Push {

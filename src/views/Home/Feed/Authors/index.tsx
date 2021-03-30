@@ -1,3 +1,4 @@
+import { useQuery } from '@apollo/react-hooks'
 import _chunk from 'lodash/chunk'
 import _random from 'lodash/random'
 import { useContext, useEffect } from 'react'
@@ -11,16 +12,22 @@ import {
   UserDigest,
   ViewerContext,
 } from '~/components'
+import FETCH_RECORD from '~/components/GQL/queries/fetchRecord'
 
 import { analytics } from '~/common/utils'
 
 import SectionHeader from '../../SectionHeader'
 import { FEED_AUTHORS } from './gql'
 
+import { FetchRecord } from '~/components/GQL/queries/__generated__/FetchRecord'
 import { FeedAuthors } from './__generated__/FeedAuthors'
 
 const Authors = () => {
   const viewer = useContext(ViewerContext)
+
+  const { data: fetchRecord, client } = useQuery<FetchRecord>(FETCH_RECORD, {
+    variables: { id: 'local' },
+  })
 
   /**
    * Data Fetching
@@ -29,9 +36,7 @@ const Authors = () => {
     FEED_AUTHORS,
     {
       notifyOnNetworkStatusChange: true,
-      variables: {
-        random: 0,
-      },
+      variables: { random: 0 },
     },
     {
       publicQuery: !viewer.isAuthed,
@@ -45,8 +50,15 @@ const Authors = () => {
   }
 
   useEffect(() => {
-    if (viewer.isAuthed) {
+    const fetched = fetchRecord?.fetchRecord.feedAuthors
+
+    if (viewer.isAuthed && !fetched) {
       shuffle()
+
+      client.writeData({
+        id: 'FetchRecord:local',
+        data: { feedAuthors: true },
+      })
     }
   }, [viewer.isAuthed])
 

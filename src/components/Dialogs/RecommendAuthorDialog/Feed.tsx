@@ -31,10 +31,7 @@ const Feed = ({ type }: Props) => {
     RECOMMEND_AUTHORS,
     {
       notifyOnNetworkStatusChange: true,
-      variables: {
-        random: 0,
-        type,
-      },
+      variables: { random: 0, type },
     },
     {
       publicQuery: !viewer.isAuthed,

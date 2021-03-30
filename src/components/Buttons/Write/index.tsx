@@ -56,9 +56,7 @@ const BaseWriteButton = ({
 export const WriteButton = ({ allowed, isLarge, forbidden }: Props) => {
   const { lang } = useContext(LanguageContext)
   const [putDraft, { loading }] = useMutation<CreateDraft>(CREATE_DRAFT, {
-    variables: {
-      title: translate({ id: 'untitle', lang }),
-    },
+    variables: { title: translate({ id: 'untitle', lang }) },
   })
 
   if (!allowed) {

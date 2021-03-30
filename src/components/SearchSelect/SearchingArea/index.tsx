@@ -112,9 +112,7 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
     })
 
     fetchMore({
-      variables: {
-        after: searchPageInfo?.endCursor,
-      },
+      variables: { after: searchPageInfo?.endCursor },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
           oldData: previousResult,
@@ -125,9 +123,7 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
   }
   const loadMoreList = async () => {
     fetchMoreList({
-      variables: {
-        after: listPageInfo?.endCursor,
-      },
+      variables: { after: listPageInfo?.endCursor },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
           oldData: previousResult,

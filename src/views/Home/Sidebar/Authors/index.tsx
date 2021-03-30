@@ -1,3 +1,4 @@
+import { useQuery } from '@apollo/react-hooks'
 import _random from 'lodash/random'
 import { useContext, useEffect } from 'react'
 
@@ -10,6 +11,7 @@ import {
   UserDigest,
   ViewerContext,
 } from '~/components'
+import FETCH_RECORD from '~/components/GQL/queries/fetchRecord'
 
 import { analytics } from '~/common/utils'
 
@@ -17,10 +19,15 @@ import SectionHeader from '../../SectionHeader'
 import { SIDEBAR_AUTHORS } from './gql'
 import styles from './styles.css'
 
+import { FetchRecord } from '~/components/GQL/queries/__generated__/FetchRecord'
 import { SidebarAuthors } from './__generated__/SidebarAuthors'
 
 const Authors = () => {
   const viewer = useContext(ViewerContext)
+
+  const { data: fetchRecord, client } = useQuery<FetchRecord>(FETCH_RECORD, {
+    variables: { id: 'local' },
+  })
 
   /**
    * Data Fetching
@@ -29,9 +36,7 @@ const Authors = () => {
     SIDEBAR_AUTHORS,
     {
       notifyOnNetworkStatusChange: true,
-      variables: {
-        random: 0,
-      },
+      variables: { random: 0 },
     },
     {
       publicQuery: !viewer.isAuthed,
@@ -39,13 +44,18 @@ const Authors = () => {
   )
   const edges = data?.viewer?.recommendation.authors.edges
 
-  const shuffle = () => {
-    refetch({ random: _random(0, 50) })
-  }
+  const shuffle = () => refetch({ random: _random(0, 50) })
 
   useEffect(() => {
-    if (viewer.isAuthed) {
+    const fetched = fetchRecord?.fetchRecord.sidebarAuthors
+
+    if (viewer.isAuthed && !fetched) {
       shuffle()
+
+      client.writeData({
+        id: 'FetchRecord:local',
+        data: { sidebarAuthors: true },
+      })
     }
   }, [viewer.isAuthed])
 

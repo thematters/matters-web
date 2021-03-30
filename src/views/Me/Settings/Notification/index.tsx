@@ -89,10 +89,7 @@ const BaseNotificationSettings = () => {
 
   const toggle = (type: keyof typeof settings) => {
     update({
-      variables: {
-        type,
-        enabled: !settings[type],
-      },
+      variables: { type, enabled: !settings[type] },
       optimisticResponse: {
         updateNotificationSetting: {
           id,

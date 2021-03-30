@@ -33,10 +33,7 @@ export const useEditDraftCover = (draft: EditMetaDraft) => {
 
   const edit = (asset?: any) =>
     update({
-      variables: {
-        id: draftId,
-        cover: asset ? asset.id : null,
-      },
+      variables: { id: draftId, cover: asset ? asset.id : null },
     })
 
   return { edit, saving, refetch }

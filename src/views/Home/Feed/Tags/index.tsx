@@ -1,3 +1,4 @@
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import _random from 'lodash/random'
 import { useContext, useEffect } from 'react'
@@ -10,12 +11,14 @@ import {
   usePublicQuery,
   ViewerContext,
 } from '~/components'
+import FETCH_RECORD from '~/components/GQL/queries/fetchRecord'
 
 import { analytics } from '~/common/utils'
 
 import SectionHeader from '../../SectionHeader'
 import TagFeedDigest from './TagFeedDigest'
 
+import { FetchRecord } from '~/components/GQL/queries/__generated__/FetchRecord'
 import { FeedTagsPublic } from './__generated__/FeedTagsPublic'
 
 const FEED_TAGS = gql`
@@ -40,13 +43,16 @@ const FEED_TAGS = gql`
 
 const TagsFeed = () => {
   const viewer = useContext(ViewerContext)
+
+  const { data: fetchRecord, client } = useQuery<FetchRecord>(FETCH_RECORD, {
+    variables: { id: 'local' },
+  })
+
   const { data, loading, error, refetch } = usePublicQuery<FeedTagsPublic>(
     FEED_TAGS,
     {
       notifyOnNetworkStatusChange: true,
-      variables: {
-        random: 0,
-      },
+      variables: { random: 0 },
     },
     {
       publicQuery: !viewer.isAuthed,
@@ -63,8 +69,15 @@ const TagsFeed = () => {
   }
 
   useEffect(() => {
-    if (viewer.isAuthed) {
+    const fetched = fetchRecord?.fetchRecord.feedTags
+
+    if (viewer.isAuthed && !fetched) {
       shuffle()
+
+      client.writeData({
+        id: 'FetchRecord:local',
+        data: { feedTags: true },
+      })
     }
   }, [viewer.isAuthed])
 

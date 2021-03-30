@@ -47,9 +47,7 @@ const Feed = ({ type }: Props) => {
     query,
     {
       notifyOnNetworkStatusChange: true,
-      variables: {
-        random: 0,
-      },
+      variables: { random: 0 },
     },
     {
       publicQuery: !viewer.isAuthed,

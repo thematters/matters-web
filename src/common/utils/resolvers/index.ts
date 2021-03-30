@@ -1,6 +1,7 @@
 import clientInfo from './clientInfo'
 import clientPreference from './clientPreference'
 import commentDraft from './commentDraft'
+import fetchRecord from './fetchRecord'
 import gatewayUrls from './gatewayUrls'
 
 export default {
@@ -8,6 +9,7 @@ export default {
     commentDraft,
     clientPreference,
     clientInfo,
+    fetchRecord,
   },
   Official: {
     gatewayUrls,
