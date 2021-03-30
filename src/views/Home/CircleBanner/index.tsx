@@ -22,7 +22,7 @@ import styles from './styles.css'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 
-export const CircleBanner = () => {
+const CircleBanner = () => {
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
   const features = useFeatures()
@@ -32,10 +32,6 @@ export const CircleBanner = () => {
   )
   const ownCirclesCount = viewer?.ownCircles?.length || 0
   const hasCircle = ownCirclesCount > 0
-
-  if (!process.browser && !viewer.privateFetched) {
-    return null
-  }
 
   // determine whether banner should be shown or not
   const storedCircleBanner = storage.get(STORAGE_KEY_CIRCLE_BANNER)
@@ -127,3 +123,5 @@ export const CircleBanner = () => {
     </div>
   )
 }
+
+export default CircleBanner
