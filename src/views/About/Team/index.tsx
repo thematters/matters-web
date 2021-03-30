@@ -26,14 +26,14 @@ const CREW = [
         name: <Translate zh_hant="張潔平" zh_hans="张洁平" />,
       },
       {
-        avatar: IMAGE_BERYL,
-        title: 'Co-founder, Operation',
-        name: 'Beryl Liu',
-      },
-      {
         avatar: IMAGE_GUO,
         title: 'Co-founder, CTO',
         name: <Translate zh_hant="劉果" zh_hans="刘果" />,
+      },
+      {
+        avatar: IMAGE_BERYL,
+        title: 'Co-founder, Operation',
+        name: 'Beryl Liu',
       },
     ],
   },

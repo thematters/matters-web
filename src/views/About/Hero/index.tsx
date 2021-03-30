@@ -1,3 +1,4 @@
+import { useEmblaCarousel } from 'embla-carousel/react'
 import Link from 'next/link'
 
 import { Button, IconLogo, TextIcon, Translate } from '~/components'
@@ -5,6 +6,7 @@ import { Button, IconLogo, TextIcon, Translate } from '~/components'
 import { PATHS, TEXT } from '~/common/enums'
 
 import IMAGE_ARROW_DOWN from '@/public/static/images/about/arrow-down.svg'
+import SLIDE_CURSOR from '@/public/static/images/about/cursor.svg'
 import ILLUSTRATION_1 from '@/public/static/images/about/hero-illustration-1.png'
 import ILLUSTRATION_2 from '@/public/static/images/about/hero-illustration-2.png'
 import IMAGE_WAVE_1 from '@/public/static/images/about/wave-hero-1.svg'
@@ -13,6 +15,13 @@ import IMAGE_WAVE_2 from '@/public/static/images/about/wave-hero-2.svg'
 import styles from './styles.css'
 
 const Hero = () => {
+  const [emblaRef] = useEmblaCarousel({
+    dragFree: true,
+    draggable: true,
+    loop: false,
+    containScroll: 'trimSnaps',
+  })
+
   return (
     <section className="hero">
       <header className="logo">
@@ -68,7 +77,7 @@ const Hero = () => {
         </div>
       </div>
 
-      <section className="reports">
+      <section className="reports " ref={emblaRef}>
         <ul>
           <li>
             <a
@@ -184,8 +193,11 @@ const Hero = () => {
         .ilusCity {
           background-image: url(${ILLUSTRATION_2});
         }
-        .reports {
+        .scrollHint {
           background-image: url(${IMAGE_ARROW_DOWN});
+        }
+        .reports {
+          cursor: url(${SLIDE_CURSOR}), auto;
         }
       `}</style>
     </section>

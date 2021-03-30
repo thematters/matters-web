@@ -104,6 +104,15 @@ img {
     margin-bottom: 3rem;
   }
 
+  & .buttons {
+    margin-top: var(--spacing-x-loose);
+    text-align: center;
+
+    & :global(> * + *) {
+      margin-left: var(--spacing-x-loose);
+    }
+  }
+
   @media (--sm-up) {
     padding: 5rem 0;
 
@@ -116,6 +125,10 @@ img {
   @media (--md-up) {
     & img {
       margin-bottom: 0;
+    }
+
+    & .buttons {
+      text-align: left;
     }
   }
 }
