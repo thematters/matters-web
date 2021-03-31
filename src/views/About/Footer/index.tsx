@@ -41,7 +41,7 @@ const Footer = () => {
                   <Translate
                     zh_hant="媒體查詢、活動合作、一般查詢，請聯絡"
                     zh_hans="媒体查询、活动合作、一般查询，请联系"
-                    en="For media and business inquiries, please email us at"
+                    en="For media and business inquiries, please email"
                   />
                   <br />
                   <a
@@ -56,7 +56,7 @@ const Footer = () => {
                   <Translate
                     zh_hant="對我們的產品有任何疑問，請聯絡"
                     zh_hans="对我们的产品有任何疑问，请联系"
-                    en="Any inquiries about our product, please email us at"
+                    en="Any inquiries about our product, please email"
                   />
                   <br />
                   <a
@@ -128,7 +128,7 @@ const Footer = () => {
                   <Translate
                     zh_hant="訂閱我們"
                     zh_hans="订阅我们"
-                    en="Subscribe Us"
+                    en="Subscribe to Us"
                   />
                 </h2>
 
