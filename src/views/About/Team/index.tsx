@@ -23,12 +23,14 @@ const CREW = [
       {
         avatar: IMAGE_JIEPING,
         title: 'Founder, CEO',
-        name: <Translate zh_hant="張潔平" zh_hans="张洁平" />,
+        name: (
+          <Translate zh_hant="張潔平" zh_hans="张洁平" en="Jieping Zhang" />
+        ),
       },
       {
         avatar: IMAGE_GUO,
         title: 'Co-founder, CTO',
-        name: <Translate zh_hant="劉果" zh_hans="刘果" />,
+        name: <Translate zh_hant="劉果" zh_hans="刘果" en="Guo Liu" />,
       },
       {
         avatar: IMAGE_BERYL,
@@ -38,23 +40,23 @@ const CREW = [
     ],
   },
   {
-    group: <Translate zh_hant="產品" zh_hans="产品" />,
+    group: <Translate zh_hant="產品" zh_hans="产品" en="Product" />,
     type: 'product',
     people: [
       {
         avatar: IMAGE_YUE,
         title: 'Product Manager',
-        name: <Translate zh_hant="小月" zh_hans="小月" />,
+        name: <Translate zh_hant="小月" zh_hans="小月" en="Yue" />,
       },
       {
         avatar: IMAGE_YH,
         title: 'UI/UX Designer',
-        name: <Translate zh_hant="黃亦涵" zh_hans="黄亦涵" />,
+        name: <Translate zh_hant="黃亦涵" zh_hans="黄亦涵" en="Yihan Huang" />,
       },
     ],
   },
   {
-    group: <Translate zh_hant="運營" zh_hans="运营" />,
+    group: <Translate zh_hant="運營" zh_hans="运营" en="Content Operation" />,
     type: 'community',
     people: [
       {
@@ -65,7 +67,7 @@ const CREW = [
       {
         avatar: IMAGE_YS,
         title: 'Community Facilitator',
-        name: <Translate zh_hant="李映昕" zh_hans="李映昕" />,
+        name: <Translate zh_hant="李映昕" zh_hans="李映昕" en="Yingshin Lee" />,
       },
       {
         avatar: IMAGE_XY,
@@ -76,7 +78,7 @@ const CREW = [
   },
 
   {
-    group: <Translate zh_hant="開發" zh_hans="开发" />,
+    group: <Translate zh_hant="開發" zh_hans="开发" en="Development" />,
     type: 'dev',
     people: [
       {
@@ -97,7 +99,7 @@ const CREW = [
     ],
   },
   {
-    group: <Translate zh_hant="數據" zh_hans="数据" />,
+    group: <Translate zh_hant="數據" zh_hans="数据" en="Data" />,
     type: 'data',
     people: [
       {
@@ -116,7 +118,7 @@ const Team = () => {
         <div className="l-row">
           <div className="l-col-full">
             <h2>
-              <Translate zh_hant="團隊成員" zh_hans="团队成员" />
+              <Translate zh_hant="團隊成員" zh_hans="团队成员" en="Our Team" />
             </h2>
           </div>
 
