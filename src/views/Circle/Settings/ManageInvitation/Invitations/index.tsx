@@ -60,9 +60,7 @@ const Invitations = () => {
   // load next page
   const loadMore = async () => {
     await fetchMore({
-      variables: {
-        after: pageInfo?.endCursor,
-      },
+      variables: { after: pageInfo?.endCursor },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
           oldData: previousResult,

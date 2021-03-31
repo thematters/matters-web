@@ -55,9 +55,7 @@ export const UserProfile = () => {
     client.query({
       query: USER_PROFILE_PRIVATE,
       fetchPolicy: 'network-only',
-      variables: {
-        userName,
-      },
+      variables: { userName },
     })
   }, [user?.id, viewer.id])
 

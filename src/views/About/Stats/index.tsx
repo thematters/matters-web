@@ -15,7 +15,7 @@ const Stats = () => {
                 en="Number of Creators"
               />
             </p>
-            <span className="num">15K+</span>
+            <span className="num">60K +</span>
           </li>
           <li>
             <p className="type">
@@ -25,7 +25,7 @@ const Stats = () => {
                 en="Monthly New Articles"
               />
             </p>
-            <span className="num">9K+</span>
+            <span className="num">9K +</span>
           </li>
           <li>
             <p className="type">
@@ -35,7 +35,7 @@ const Stats = () => {
                 en="Heighest Rewarded Article"
               />
             </p>
-            <span className="num">HK$ 8K</span>
+            <span className="num">US$ 2K</span>
           </li>
         </ul>
       </div>

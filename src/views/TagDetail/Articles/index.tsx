@@ -102,9 +102,7 @@ const TagDetailArticles = ({ tagId, selected }: TagArticlesProps) => {
     })
 
     const { data: newData } = await fetchMore({
-      variables: {
-        after: pageInfo?.endCursor,
-      },
+      variables: { after: pageInfo?.endCursor },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
           oldData: previousResult,
@@ -133,19 +131,13 @@ const TagDetailArticles = ({ tagId, selected }: TagArticlesProps) => {
     switch (event) {
       case 'add':
         const { data: addData } = await refetchPublic({
-          variables: {
-            id: tagId,
-            first: count + differences,
-          },
+          variables: { id: tagId, first: count + differences },
         })
         loadPrivate(addData)
         break
       case 'delete':
         const { data: deleteData } = await refetchPublic({
-          variables: {
-            id: tagId,
-            first: Math.max(count - 1, 0),
-          },
+          variables: { id: tagId, first: Math.max(count - 1, 0) },
         })
         loadPrivate(deleteData)
         break

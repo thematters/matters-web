@@ -1,3 +1,4 @@
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import _random from 'lodash/random'
 import { useContext, useEffect } from 'react'
@@ -13,12 +14,14 @@ import {
   usePublicQuery,
   ViewerContext,
 } from '~/components'
+import FETCH_RECORD from '~/components/GQL/queries/lastFetchRandom'
 
 import { analytics, toPath } from '~/common/utils'
 
 import SectionHeader from '../../SectionHeader'
 import styles from './styles.css'
 
+import { LastFetchRandom } from '~/components/GQL/queries/__generated__/LastFetchRandom'
 import { SidebarTagsPublic } from './__generated__/SidebarTagsPublic'
 
 const SIDEBAR_TAGS = gql`
@@ -45,18 +48,22 @@ const SIDEBAR_TAGS = gql`
 
 const Tags = () => {
   const viewer = useContext(ViewerContext)
+
+  const { data: lastFetchRandom, client } = useQuery<LastFetchRandom>(
+    FETCH_RECORD,
+    { variables: { id: 'local' } }
+  )
+  const lastRandom = lastFetchRandom?.lastFetchRandom.sidebarTags
+
   const { data, loading, error, refetch } = usePublicQuery<SidebarTagsPublic>(
     SIDEBAR_TAGS,
     {
       notifyOnNetworkStatusChange: true,
-      variables: {
-        random: 0,
-      },
+      variables: { random: lastRandom || 0 },
     },
-    {
-      publicQuery: !viewer.isAuthed,
-    }
+    { publicQuery: !viewer.isAuthed }
   )
+
   const randomMaxSize = 50
   const size = Math.round(
     (data?.viewer?.recommendation.tags.totalCount || randomMaxSize) / 5
@@ -64,11 +71,17 @@ const Tags = () => {
   const edges = data?.viewer?.recommendation.tags.edges
 
   const shuffle = () => {
-    refetch({ random: _random(0, Math.min(randomMaxSize, size)) })
+    const random = _random(0, Math.min(randomMaxSize, size))
+    refetch({ random })
+
+    client.writeData({
+      id: 'LastFetchRandom:local',
+      data: { sidebarTags: random },
+    })
   }
 
   useEffect(() => {
-    if (viewer.isAuthed) {
+    if (viewer.isAuthed && lastRandom === null) {
       shuffle()
     }
   }, [viewer.isAuthed])

@@ -75,9 +75,7 @@ const SearchUser = () => {
     })
 
     const { data: newData } = await fetchMore({
-      variables: {
-        after: pageInfo?.endCursor,
-      },
+      variables: { after: pageInfo?.endCursor },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
           oldData: previousResult,

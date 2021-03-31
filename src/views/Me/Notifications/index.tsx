@@ -84,10 +84,7 @@ const BaseNotifications = () => {
 
   const loadMore = () =>
     fetchMore({
-      variables: {
-        first: 20,
-        after: pageInfo.endCursor,
-      },
+      variables: { first: 20, after: pageInfo.endCursor },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
           oldData: previousResult,
