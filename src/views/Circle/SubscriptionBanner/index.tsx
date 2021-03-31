@@ -27,6 +27,7 @@ const SubscriptionBanner = ({ circle }: SubscriptionBannerProps) => {
   const viewer = useContext(ViewerContext)
   const isMember = circle.isMember
   const isOwner = circle?.owner?.id === viewer.id
+  const isInvited = circle?.invitedBy?.accepted === false
 
   if (isMember || isOwner) {
     return null
@@ -78,7 +79,11 @@ const SubscriptionBanner = ({ circle }: SubscriptionBannerProps) => {
           color="white"
           weight="md"
         >
-          <Translate zh_hant="訂閱圍爐" zh_hans="订阅围炉" en="Subscribe" />
+          {isInvited ? (
+            <Translate zh_hant="免費體驗" zh_hans="免费体验" en="Free Trial" />
+          ) : (
+            <Translate zh_hant="訂閱圍爐" zh_hans="订阅围炉" en="Subscribe" />
+          )}
         </TextIcon>
 
         <style jsx>{styles}</style>
