@@ -1,4 +1,3 @@
-import _some from 'lodash/some'
 import { useContext, useEffect } from 'react'
 
 import {
@@ -21,7 +20,12 @@ import { numAbbr } from '~/common/utils'
 
 import IMAGE_COVER from '@/public/static/images/profile-cover.png'
 
-import { CivicLikerBadge, SeedBadge } from './Badges'
+import {
+  ArchitectBadge,
+  CivicLikerBadge,
+  GoldenMotorBadge,
+  SeedBadge,
+} from './Badges'
 import CircleWidget from './CircleWidget'
 import DropdownActions from './DropdownActions'
 import { FollowersDialog } from './FollowersDialog'
@@ -119,7 +123,9 @@ export const UserProfile = () => {
 
   const badges = user.info.badges || []
   const circles = user.ownCircles || []
-  const hasSeedBadge = _some(badges, { type: 'seed' })
+  const hasSeedBadge = badges.map((b) => b.type === 'seed')
+  const hasArchitectBadge = badges.map((b) => b.type === 'architect')
+  const hasGoldenMotorBadge = badges.map((b) => b.type === 'golden_motor')
   const profileCover = user.info.profileCover || ''
   const userState = user.status?.state as string
   const isCivicLiker = user.liker.civicLiker
@@ -181,6 +187,8 @@ export const UserProfile = () => {
           <section className="display-name">
             <h1 className="name">{user.displayName}</h1>
             {hasSeedBadge && <SeedBadge />}
+            {hasGoldenMotorBadge && <GoldenMotorBadge />}
+            {hasArchitectBadge && <ArchitectBadge />}
             {isCivicLiker && <CivicLikerBadge />}
           </section>
 
