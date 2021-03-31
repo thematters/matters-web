@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { Card, Translate, UserDigest } from '~/components'
+import { Card, FreePeriod, UserDigest } from '~/components'
 
 import CircleInvitationInvitee from './Invitee'
 import CircleInvitationResendButton from './Resend'
@@ -10,26 +10,6 @@ import { CircleInvitation as CircleInvitationType } from './__generated__/Circle
 
 interface CircleInvitationProps {
   invitation: CircleInvitationType
-}
-
-const convertFreePeriod = (period: number) => {
-  switch (period) {
-    case 1: {
-      return <Translate zh_hant="一個月" zh_hans="一个月" en="1 month" />
-    }
-    case 3: {
-      return <Translate zh_hant="三個月" zh_hans="三个月" en="3 months" />
-    }
-    case 6: {
-      return <Translate zh_hant="六個月" zh_hans="六个月" en="6 months" />
-    }
-    case 12: {
-      return <Translate zh_hant="一年" zh_hans="一年" en="1 year" />
-    }
-    default: {
-      return <></>
-    }
-  }
 }
 
 /**
@@ -49,7 +29,6 @@ const convertFreePeriod = (period: number) => {
  */
 export const CircleInvitation = ({ invitation }: CircleInvitationProps) => {
   const { circle, freePeriod, invitee } = invitation
-  const period = convertFreePeriod(freePeriod)
 
   if (!invitee) {
     return null
@@ -67,7 +46,9 @@ export const CircleInvitation = ({ invitation }: CircleInvitationProps) => {
       <section className="container">
         <CircleInvitationInvitee invitee={invitee} />
         <section className="info">
-          <span className="period">{period}</span>
+          <span className="period">
+            <FreePeriod period={freePeriod} />
+          </span>
           <CircleInvitationResendButton
             circleId={circle.id}
             freePeriod={freePeriod}
