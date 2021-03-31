@@ -123,9 +123,9 @@ export const UserProfile = () => {
 
   const badges = user.info.badges || []
   const circles = user.ownCircles || []
-  const hasSeedBadge = badges.map((b) => b.type === 'seed')
-  const hasArchitectBadge = badges.map((b) => b.type === 'architect')
-  const hasGoldenMotorBadge = badges.map((b) => b.type === 'golden_motor')
+  const hasSeedBadge = badges.some((b) => b.type === 'seed')
+  const hasArchitectBadge = badges.some((b) => b.type === 'architect')
+  const hasGoldenMotorBadge = badges.some((b) => b.type === 'golden_motor')
   const profileCover = user.info.profileCover || ''
   const userState = user.status?.state as string
   const isCivicLiker = user.liker.civicLiker
