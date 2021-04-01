@@ -16,7 +16,7 @@ export default {
 
 <h4>社區自治</h4>
 <p>Matters 社區實行社區自治。當用戶認為出現違反社區共識的行為時，可以發起訴訟，啟動社區審判。一旦社區審判中，出現「贊同懲罰」的多數意見，即實行懲罰，這些案例同時成為社區治理的判例，被納入社區約章作為社區治理準則。</p>
-<p>如何發起訴訟？具體方法請 <a class="u-link-green" href="https://matters.news/@hi176/%E7%A4%BE%E5%8D%80%E8%87%AA%E6%B2%BB%E8%AA%BF%E6%95%B4-%E8%A8%B4%E8%A8%9F%E9%96%80%E6%AA%BB%E6%8F%90%E9%AB%98%E7%82%BA10%E4%BA%BA%E9%BB%9E%E8%B4%8A-zdpuAwqFF6Y5TnCvJXDoXQUNJLLb4LorkD3dYdjtRQzp3RxDH">點擊這裡</a>。</p>
+<p>如何發起訴訟？具體方法請 <a class="u-link-green" href="https://matters.news/@hi176/%E9%A6%AC%E7%89%B9%E5%B8%82%E8%A8%B4%E8%A8%9F%E5%88%B6%E5%BA%A63-0-%E7%94%B1%E5%BB%BA%E7%AF%89%E5%B8%AB%E9%99%AA%E5%AF%A9%E5%9C%98%E5%8F%96%E4%BB%A3-%E5%85%A8%E6%B0%91%E6%8A%95%E7%A5%A8%E5%88%B6-bafyreidutbv2hq4bwtj5qhznamfhhxz7kjkgtdkkrsxev5oknx4vvva3ve">點擊這裡</a>。</p>
 
 <h4>社區約章</h4>
 <p>根據 Matters 適用法律與社區自治判例，針對以下行為，Matters 會做出刪除發言、禁言、凍結及註銷帳戶等不同程度的處理：</p>
@@ -54,7 +54,7 @@ export default {
 
 <h4>社区自治</h4>
 <p>Matters 社区实行社区自治。当用户认为出现违反社区共识的行为时，可以发起诉讼，启动社区审判。一旦社区审判中，出现“赞同惩罚”的多数意见，即实行惩罚，这些案例同时成为社区治理的判例，被纳入社区约章作为社区治理准则。</p>
-<p>如何发起诉讼？具体方法请 <a class="u-link-green" href="https://matters.news/@hi176/%E7%A4%BE%E5%8D%80%E8%87%AA%E6%B2%BB%E8%AA%BF%E6%95%B4-%E8%A8%B4%E8%A8%9F%E9%96%80%E6%AA%BB%E6%8F%90%E9%AB%98%E7%82%BA10%E4%BA%BA%E9%BB%9E%E8%B4%8A-zdpuAwqFF6Y5TnCvJXDoXQUNJLLb4LorkD3dYdjtRQzp3RxDH">点击这里</a>。</p>
+<p>如何发起诉讼？具体方法请 <a class="u-link-green" href="https://matters.news/@hi176/%E9%A6%AC%E7%89%B9%E5%B8%82%E8%A8%B4%E8%A8%9F%E5%88%B6%E5%BA%A63-0-%E7%94%B1%E5%BB%BA%E7%AF%89%E5%B8%AB%E9%99%AA%E5%AF%A9%E5%9C%98%E5%8F%96%E4%BB%A3-%E5%85%A8%E6%B0%91%E6%8A%95%E7%A5%A8%E5%88%B6-bafyreidutbv2hq4bwtj5qhznamfhhxz7kjkgtdkkrsxev5oknx4vvva3ve">点击这里</a>。</p>
 
 <h4>社区约章</h4>
 <p>根据 Matters 适用法律与社区自治判例，针对以下行为，Matters 会做出删除发言、禁言、冻结及注销帐户等不同程度的处理：</p>
