@@ -22,8 +22,10 @@ const fragments = {
           description
           profileCover
         }
-        followees(input: { first: 0 }) {
-          totalCount
+        following {
+          users(input: { first: 0 }) {
+            totalCount
+          }
         }
         followers(input: { first: 0 }) {
           totalCount

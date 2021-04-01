@@ -1,6 +1,7 @@
+import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
 
-import { Dialog, PaymentForm, useStep, ViewerContext } from '~/components'
+import { Dialog, Spinner, useStep, ViewerContext } from '~/components'
 
 import { analytics } from '~/common/utils'
 
@@ -9,6 +10,16 @@ type Step = 'setPaymentPassword' | 'addCredit'
 interface AddCreditDialogProps {
   children: ({ open }: { open: () => void }) => React.ReactNode
 }
+
+const DynamicPaymentSetPasswordForm = dynamic(
+  () => import('~/components/Forms/PaymentForm/SetPassword'),
+  { loading: Spinner }
+)
+
+const DynamicAddCreditForm = dynamic(
+  () => import('~/components/Forms/PaymentForm/AddCredit'),
+  { loading: Spinner }
+)
 
 const BaseAddCreditDialog = ({ children }: AddCreditDialogProps) => {
   const viewer = useContext(ViewerContext)
@@ -45,12 +56,12 @@ const BaseAddCreditDialog = ({ children }: AddCreditDialogProps) => {
         />
 
         {isSetPaymentPassword && (
-          <PaymentForm.SetPassword
+          <DynamicPaymentSetPasswordForm
             submitCallback={() => forward('addCredit')}
           />
         )}
 
-        {isAddCredit && <PaymentForm.AddCredit />}
+        {isAddCredit && <DynamicAddCreditForm />}
       </Dialog>
     </>
   )

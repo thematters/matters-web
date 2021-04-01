@@ -6,6 +6,10 @@ interface RowProps {
   type?: 'balance' | 'total' | 'insufficient' | 'breaker'
 }
 
+interface ColProps {
+  type?: 'insufficient'
+}
+
 const Row: React.FC<RowProps> = ({ type, children }) => {
   const rowClasses = classNames({
     row: true,
@@ -20,12 +24,19 @@ const Row: React.FC<RowProps> = ({ type, children }) => {
   )
 }
 
-const Col: React.FC = ({ children }) => (
-  <section className="col">
-    {children}
-    <style jsx>{styles}</style>
-  </section>
-)
+const Col: React.FC<ColProps> = ({ type, children }) => {
+  const colClasses = classNames({
+    col: true,
+    [`${type}`]: !!type,
+  })
+
+  return (
+    <section className={colClasses}>
+      {children}
+      <style jsx>{styles}</style>
+    </section>
+  )
+}
 
 const ConfirmTable: React.FC & {
   Row: typeof Row

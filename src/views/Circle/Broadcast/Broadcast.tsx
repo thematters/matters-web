@@ -98,9 +98,7 @@ const CricleBroadcast = () => {
   // load next page
   const loadMore = async () => {
     const { data: newData } = await fetchMore({
-      variables: {
-        after: pageInfo && pageInfo.endCursor,
-      },
+      variables: { after: pageInfo?.endCursor },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
           oldData: previousResult,

@@ -23,6 +23,10 @@ const ViewerFragments = {
           state
           hasPaymentPassword
         }
+        ownCircles {
+          id
+          name
+        }
         info {
           createdAt
           description
@@ -34,8 +38,13 @@ const ViewerFragments = {
         settings {
           language
         }
-        followees(input: { first: 0 }) {
-          totalCount
+        following {
+          users(input: { first: 0 }) {
+            totalCount
+          }
+          tags(input: { first: 0 }) {
+            totalCount
+          }
         }
         followers(input: { first: 0 }) {
           totalCount
@@ -47,11 +56,6 @@ const ViewerFragments = {
         id
         articles(input: { first: 0 }) {
           totalCount
-        }
-        recommendation {
-          followingTags(input: { first: 0 }) {
-            totalCount
-          }
         }
       }
     `,
@@ -99,9 +103,9 @@ export const processViewer = (
 
   // Onbooarding Tasks
   const hasLikerId = !!viewer.liker.likerId
-  const hasFollowingTag = viewer?.recommendation?.followingTags.totalCount >= 5
+  const hasFollowingTag = viewer?.following?.tags.totalCount >= 5
   const hasArticle = viewer?.articles?.totalCount >= 1
-  const hasFollowee = viewer?.followees?.totalCount >= 5
+  const hasFollowee = viewer?.following.users?.totalCount >= 5
   const hasCommentPermission = isAuthed && !isOnboarding
   const isOnboardingTasksFinished =
     hasLikerId &&

@@ -24,7 +24,7 @@ const VIEWER_STRIPE_ACCOUNT = gql`
   }
 `
 
-const ConnectStripeAccount: React.FC<Props> = ({ nextStep, windowRef }) => {
+const ConnectStripeAccountForm: React.FC<Props> = ({ nextStep, windowRef }) => {
   const [polling, setPolling] = useState(true)
   const { data, error } = useQuery<ViewerStripeAccount>(VIEWER_STRIPE_ACCOUNT, {
     pollInterval: polling ? 1000 : undefined,
@@ -75,4 +75,4 @@ const ConnectStripeAccount: React.FC<Props> = ({ nextStep, windowRef }) => {
   )
 }
 
-export default ConnectStripeAccount
+export default ConnectStripeAccountForm

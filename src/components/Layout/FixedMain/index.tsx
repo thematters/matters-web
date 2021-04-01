@@ -13,12 +13,13 @@ const FixedMain: React.FC = ({ children }) => {
 
   if (isSingleColumnPage) {
     return (
-      <div className="fixed-main">
-        <div className="l-row full">
-          <div className="inner l-col-4 l-col-sm-6 l-offset-sm-1 l-col-md-5 l-offset-md-2 l-col-lg-6 l-offset-lg-3">
-            {children}
+      <div className="fixed-main single-col">
+        <div className="l-container full">
+          <div className="l-row">
+            <div className="content">{children}</div>
           </div>
         </div>
+
         <style jsx>{styles}</style>
       </div>
     )
@@ -26,10 +27,12 @@ const FixedMain: React.FC = ({ children }) => {
 
   return (
     <div className="fixed-main">
-      <div className="l-row full">
-        <div className="l-col-three-left" />
-        <div className="l-col-three-mid inner">{children}</div>
+      <div className="l-container full">
+        <div className="l-row">
+          <div className="l-col-three-mid content">{children}</div>
+        </div>
       </div>
+
       <style jsx>{styles}</style>
     </div>
   )

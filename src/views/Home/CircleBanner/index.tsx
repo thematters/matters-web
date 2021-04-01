@@ -1,6 +1,6 @@
-import { useLazyQuery, useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/react-hooks'
 import Link from 'next/link'
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 
 import {
   Button,
@@ -8,6 +8,7 @@ import {
   LanguageContext,
   Translate,
   useFeatures,
+  ViewerContext,
 } from '~/components'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
@@ -17,35 +18,20 @@ import { storage } from '~/common/utils'
 import IMAGE_CIRCLE_AD_BANNER from '@/public/static/images/circle-ad-banner.svg'
 
 import { APPLICATION_LINKS } from './applicationLinks'
-import { CIRCLE_BANNER } from './gql'
 import styles from './styles.css'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
-import { CircleBanner as CircleBannerType } from './__generated__/CircleBanner'
 
-export const CircleBanner = () => {
+const CircleBanner = () => {
+  const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
   const features = useFeatures()
   const { data: clientPreferenceData, client } = useQuery<ClientPreference>(
     CLIENT_PREFERENCE,
-    {
-      variables: { id: 'local' },
-    }
+    { variables: { id: 'local' } }
   )
-  const [getOwnCircles, { data }] = useLazyQuery<CircleBannerType>(
-    CIRCLE_BANNER
-  )
-  const ownCirclesCount = data?.viewer?.ownCircles?.length || 0
+  const ownCirclesCount = viewer?.ownCircles?.length || 0
   const hasCircle = ownCirclesCount > 0
-
-  useEffect(() => {
-    getOwnCircles()
-  }, [])
-
-  // skip if it's server-side rendering
-  if (!process.browser) {
-    return null
-  }
 
   // determine whether banner should be shown or not
   const storedCircleBanner = storage.get(STORAGE_KEY_CIRCLE_BANNER)
@@ -65,7 +51,7 @@ export const CircleBanner = () => {
     })
   }
 
-  if (!enabled || !data || hasCircle) {
+  if (!enabled || hasCircle) {
     return null
   }
 
@@ -137,3 +123,5 @@ export const CircleBanner = () => {
     </div>
   )
 }
+
+export default CircleBanner

@@ -9,7 +9,7 @@ interface MembersDialogProps {
   children: ({ open }: { open: () => void }) => React.ReactNode
 }
 
-const DynamicConetnt = dynamic(() => import('./Content'), {
+const DynamicContent = dynamic(() => import('./Content'), {
   ssr: false,
   loading: Spinner,
 })
@@ -34,7 +34,7 @@ const BaseMembersDialog = ({ circle, children }: MembersDialogProps) => {
           closeTextId="close"
         />
 
-        <DynamicConetnt />
+        <DynamicContent />
       </Dialog>
     </>
   )

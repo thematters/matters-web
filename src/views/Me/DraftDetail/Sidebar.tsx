@@ -1,4 +1,4 @@
-import { toDigestTag, useFeatures } from '~/components'
+import { toDigestTagPlaceholder, useFeatures } from '~/components'
 import Sidebar from '~/components/Editor/Sidebar'
 
 import { ENTITY_TYPE } from '~/common/enums'
@@ -53,7 +53,7 @@ const EditDraftCover = ({ draft, disabled }: SidebarProps) => {
 
 const EditDraftTags = ({ draft, disabled }: SidebarProps) => {
   const { edit, saving } = useEditDraftTags(draft)
-  const tags = (draft.tags || []).map(toDigestTag)
+  const tags = (draft.tags || []).map(toDigestTagPlaceholder)
 
   return (
     <Sidebar.Tags

@@ -1,9 +1,10 @@
 import gql from 'graphql-tag'
+import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
 
 import {
   Dialog,
-  PaymentForm,
+  Spinner,
   Translate,
   useEventListener,
   useStep,
@@ -16,6 +17,7 @@ import { analytics } from '~/common/utils'
 
 import Complete from './Complete'
 
+import { DigestRichCirclePrivate } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePrivate'
 import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
 
 type Step =
@@ -25,18 +27,40 @@ type Step =
   | 'complete'
 
 interface SubscribeCircleDialogProps {
-  circle: DigestRichCirclePublic
+  circle: DigestRichCirclePublic & DigestRichCirclePrivate
   children?: ({ open }: { open: () => void }) => React.ReactNode
 }
 
+const DynamicPaymentResetPasswordForm = dynamic(
+  () => import('~/components/Forms/PaymentForm/ResetPassword'),
+  { loading: Spinner }
+)
+const DynamicPaymentSetPasswordForm = dynamic(
+  () => import('~/components/Forms/PaymentForm/SetPassword'),
+  { loading: Spinner }
+)
+const DynamicSubscribeCircleForm = dynamic(
+  () => import('~/components/Forms/PaymentForm/SubscribeCircle'),
+  { loading: Spinner }
+)
+
 const fragments = {
-  circle: gql`
-    fragment SubscribeCircle on Circle {
-      id
-      ...DigestRichCirclePublic
-    }
-    ${CircleDigest.Rich.fragments.circle.public}
-  `,
+  circle: {
+    public: gql`
+      fragment SubscribeCirclePublic on Circle {
+        id
+        ...DigestRichCirclePublic
+      }
+      ${CircleDigest.Rich.fragments.circle.public}
+    `,
+    private: gql`
+      fragment SubscribeCirclePrivate on Circle {
+        id
+        ...DigestRichCirclePrivate
+      }
+      ${CircleDigest.Rich.fragments.circle.private}
+    `,
+  },
 }
 
 const BaseSubscribeCircleDialog = ({
@@ -102,13 +126,13 @@ const BaseSubscribeCircleDialog = ({
         />
 
         {isSetPaymentPassword && (
-          <PaymentForm.SetPassword
+          <DynamicPaymentSetPasswordForm
             submitCallback={() => forward('subscribeCircle')}
           />
         )}
 
         {isSubscribeCircle && (
-          <PaymentForm.SubscribeCircle
+          <DynamicSubscribeCircleForm
             circle={circle}
             submitCallback={() => forward('complete')}
             switchToResetPassword={() => forward('resetPassword')}
@@ -116,7 +140,7 @@ const BaseSubscribeCircleDialog = ({
         )}
 
         {isResetPassword && (
-          <PaymentForm.ResetPassword
+          <DynamicPaymentResetPasswordForm
             callbackButtons={ContinueSubscribeButton}
             close={close}
           />

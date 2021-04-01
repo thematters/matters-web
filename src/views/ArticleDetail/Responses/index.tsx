@@ -33,7 +33,7 @@ const Responses = ({ lock }: { lock: boolean }) => {
     variables: { mediaHash },
   })
 
-  if (loading || !data || !data.article) {
+  if (loading || !data?.article) {
     return null
   }
 

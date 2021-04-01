@@ -16,6 +16,7 @@ import {
   PullToRefresh,
   QueryError,
   Spinner,
+  SubscribeCircleDialog,
   Throw404,
   Title,
   Translate,
@@ -82,9 +83,7 @@ const ArticleDetail = () => {
   // wall
   const { data: clientPreferenceData } = useQuery<ClientPreference>(
     CLIENT_PREFERENCE,
-    {
-      variables: { id: 'local' },
-    }
+    { variables: { id: 'local' } }
   )
   const { wall } = clientPreferenceData?.clientPreference || { wall: true }
   const shouldShowWall = !viewer.isAuthed && wall
@@ -102,6 +101,7 @@ const ArticleDetail = () => {
 
   const article = data?.article
   const authorId = article?.author?.id
+  const paymentPointer = article?.author?.paymentPointer || undefined
   const collectionCount = article?.collection?.totalCount || 0
   const isAuthor = viewer.id === authorId
   const circle = article?.circle
@@ -318,6 +318,7 @@ const ArticleDetail = () => {
         description={article.summary}
         keywords={(article.tags || []).map(({ content }) => content)}
         image={article.cover}
+        paymentPointer={paymentPointer}
       />
 
       <PullToRefresh>
@@ -428,6 +429,8 @@ const ArticleDetail = () => {
           </>
         )}
       </PullToRefresh>
+
+      {article.circle && <SubscribeCircleDialog circle={article.circle} />}
 
       <style jsx>{styles}</style>
     </Layout.Main>

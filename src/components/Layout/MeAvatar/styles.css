@@ -2,6 +2,6 @@
   @mixin flex-center-all;
 
   &.active :global(.avatar img) {
-    box-shadow: 0 0 0 1.5px var(--color-matters-green);
+    box-shadow: 0 0 0 2px var(--color-matters-green);
   }
 }

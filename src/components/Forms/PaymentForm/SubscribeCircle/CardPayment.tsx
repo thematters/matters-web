@@ -10,7 +10,6 @@ import _pickBy from 'lodash/pickBy'
 import { useContext, useState } from 'react'
 
 import {
-  CircleDigest,
   Dialog,
   LanguageContext,
   Translate,
@@ -23,16 +22,17 @@ import { analytics, parseFormSubmitErrors, translate } from '~/common/utils'
 
 import StripeCheckout from '../StripeCheckout'
 import { SUBSCRIBE_CIRCLE } from './gql'
+import Head from './Head'
 import Hint from './Hint'
-import Price from './Price'
 import Processing from './Processing'
 import styles from './styles.css'
 
+import { DigestRichCirclePrivate } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePrivate'
 import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
 import { SubscribeCircle as SubscribeCircleType } from './__generated__/SubscribeCircle'
 
 interface CardPaymentProps {
-  circle: DigestRichCirclePublic
+  circle: DigestRichCirclePublic & DigestRichCirclePrivate
   submitCallback: () => void
 }
 
@@ -154,19 +154,7 @@ const BaseCardPayment: React.FC<CardPaymentProps> = ({
     <>
       <Dialog.Content hasGrow>
         <section>
-          <section className="circle">
-            <CircleDigest.Rich
-              circle={circle}
-              borderRadius="xtight"
-              bgColor="white"
-              hasFooter={false}
-              hasDescription
-              hasOwner
-              disabled
-            />
-          </section>
-
-          <Price circle={circle} />
+          <Head circle={circle} />
 
           <StripeCheckout error={checkoutError} onChange={onCheckoutChange} />
 

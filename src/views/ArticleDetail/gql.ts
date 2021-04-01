@@ -31,6 +31,7 @@ export const ARTICLE_DETAIL_PUBLIC = gql`
       limitedFree
       author {
         id
+        paymentPointer
         ...UserDigestRichUserPublic
         ...UserDigestRichUserPrivate
       }

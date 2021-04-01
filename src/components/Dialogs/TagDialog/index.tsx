@@ -1,8 +1,15 @@
-import { Dialog, useDialogSwitch } from '~/components'
+import dynamic from 'next/dynamic'
 
-import Content, { TagDialogContentProps } from './Content'
+import { Dialog, Spinner, useDialogSwitch } from '~/components'
+
+import { TagDialogContentProps } from './Content'
 
 export type TagDialogProps = TagDialogContentProps
+
+const DynamicContent = dynamic(() => import('./Content'), {
+  ssr: false,
+  loading: Spinner,
+})
 
 type BaseTagDialogProps = {
   children: ({ open }: { open: () => void }) => React.ReactNode
@@ -20,7 +27,7 @@ const BaseTagDialog = ({
       {children({ open })}
 
       <Dialog isOpen={show} onDismiss={close} fixedHeight>
-        <Content closeDialog={close} content={content} {...restProps} />
+        <DynamicContent closeDialog={close} content={content} {...restProps} />
       </Dialog>
     </>
   )

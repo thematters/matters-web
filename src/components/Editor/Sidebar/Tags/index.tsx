@@ -25,7 +25,7 @@ const SidebarTags = ({ tags, onEdit, saving, disabled }: SidebarTagsProps) => {
       onSave={(nodes: SearchSelectNode[]) => onEdit(nodes as DigestTag[])}
       nodes={tags}
       saving={saving}
-      creatable
+      createTag
     >
       {({ open: openAddMyArticlesDialog }) => (
         <Box

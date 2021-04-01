@@ -1,8 +1,7 @@
 import gql from 'graphql-tag'
+import dynamic from 'next/dynamic'
 
-import { Dialog, useDialogSwitch } from '~/components'
-
-import Content from './Content'
+import { Dialog, Spinner, useDialogSwitch } from '~/components'
 
 import { FingerprintArticle } from './__generated__/FingerprintArticle'
 
@@ -20,6 +19,8 @@ const fragments = {
   `,
 }
 
+const DynamicContent = dynamic(() => import('./Content'), { loading: Spinner })
+
 const BaseFingerprintDialog = ({
   article,
   children,
@@ -34,7 +35,7 @@ const BaseFingerprintDialog = ({
         <Dialog.Header title="IPFSEntrance" close={close} closeTextId="close" />
 
         <Dialog.Content hasGrow>
-          <Content dataHash={article.dataHash || ''} />
+          <DynamicContent dataHash={article.dataHash || ''} />
         </Dialog.Content>
       </Dialog>
     </>

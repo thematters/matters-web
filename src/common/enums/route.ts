@@ -29,6 +29,7 @@ type ROUTE_KEY =
   | 'CIRCLE_BROADCAST'
   | 'CIRCLE_SETTINGS'
   | 'CIRCLE_SETTINGS_EDIT_PROFILE'
+  | 'CIRCLE_SETTINGS_MANAGE_INVITATION'
   | 'CIRCLE_CREATION'
   // Me
   | 'ME_DRAFTS'
@@ -102,6 +103,10 @@ export const ROUTES: {
   {
     key: 'CIRCLE_SETTINGS_EDIT_PROFILE',
     pathname: '/[name]/settings/edit-profile',
+  },
+  {
+    key: 'CIRCLE_SETTINGS_MANAGE_INVITATION',
+    pathname: '/[name]/settings/manage-invitation',
   },
   { key: 'CIRCLE_CREATION', pathname: '/circles/create' },
 

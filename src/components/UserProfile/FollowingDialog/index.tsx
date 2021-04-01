@@ -9,10 +9,7 @@ interface FollowingDialogProps {
   children: ({ open }: { open: () => void }) => React.ReactNode
 }
 
-const DynamicConetnt = dynamic(() => import('./Content'), {
-  ssr: false,
-  loading: Spinner,
-})
+const DynamicContent = dynamic(() => import('./Content'), { loading: Spinner })
 
 const BaseFollowingDialog = ({ user, children }: FollowingDialogProps) => {
   const { show, open, close } = useDialogSwitch(true)
@@ -30,7 +27,7 @@ const BaseFollowingDialog = ({ user, children }: FollowingDialogProps) => {
           closeTextId="close"
         />
 
-        <DynamicConetnt />
+        <DynamicContent />
       </Dialog>
     </>
   )

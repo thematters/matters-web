@@ -29,7 +29,6 @@ import { DraftDetailQuery } from './__generated__/DraftDetailQuery'
 import { SetDraftContent } from './__generated__/SetDraftContent'
 
 const Editor = dynamic(() => import('~/components/Editor/Article'), {
-  ssr: false,
   loading: Spinner,
 })
 
@@ -150,7 +149,7 @@ const DraftDetail = () => {
         title={{
           zh_hant: `[草稿] ${draft.title}`,
           zh_hans: `[草稿] ${draft.title}`,
-          en: `[draft] ${draft.title}`,
+          en: `[Draft] ${draft.title}`,
         }}
       />
 

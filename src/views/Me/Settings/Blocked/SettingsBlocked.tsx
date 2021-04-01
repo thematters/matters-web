@@ -77,9 +77,7 @@ const SettingsBlocked = () => {
 
   const loadMore = () => {
     return fetchMore({
-      variables: {
-        after: pageInfo.endCursor,
-      },
+      variables: { after: pageInfo.endCursor },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
           oldData: previousResult,

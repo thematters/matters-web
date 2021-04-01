@@ -76,9 +76,7 @@ const Feed = () => {
       hasNextPage={pageInfo.hasNextPage}
       loadMore={() =>
         fetchMore({
-          variables: {
-            after: pageInfo.endCursor,
-          },
+          variables: { after: pageInfo.endCursor },
           updateQuery: (previousResult, { fetchMoreResult }) =>
             mergeConnections({
               oldData: previousResult,

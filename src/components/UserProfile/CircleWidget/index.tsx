@@ -1,4 +1,9 @@
-import { Form, Translate, useFeatures } from '~/components'
+import {
+  Form,
+  SubscribeCircleDialog,
+  Translate,
+  useFeatures,
+} from '~/components'
 import { CircleDigest } from '~/components/CircleDigest'
 
 import { PATHS } from '~/common/enums'
@@ -35,6 +40,7 @@ const CircleWidget: React.FC<CircleWidgetProps> = ({ circles, isMe }) => {
         <Form.List forceGreyStyle>
           <Form.List.Item
             forceGreyStyle
+            bold
             title={
               <Translate
                 zh_hant="快來搭建圍爐，呼召你的支持者加入"
@@ -57,22 +63,24 @@ const CircleWidget: React.FC<CircleWidgetProps> = ({ circles, isMe }) => {
 
   return (
     <section className="circle-widget">
-      <section className="border">
-        <CircleDigest.Rich
-          avatarSize="xl"
-          borderRadius="xtight"
-          circle={circle}
-          hasFooter
-          hasOwner={false}
-          hasPrice={!isMe}
-          onClickPrice={() => {
-            analytics.trackEvent('click_button', {
-              type: 'subscribe_circle_price',
-              pageType: 'user_profile',
-            })
-          }}
-        />
-      </section>
+      <CircleDigest.Rich
+        avatarSize="xl"
+        borderRadius="xtight"
+        borderColor="line-grey-light"
+        circle={circle}
+        hasFooter
+        hasOwner={false}
+        hasPrice={!isMe}
+        onClickPrice={() => {
+          analytics.trackEvent('click_button', {
+            type: 'subscribe_circle_price',
+            pageType: 'user_profile',
+          })
+        }}
+      />
+
+      {!isMe && <SubscribeCircleDialog circle={circle} />}
+
       <style jsx>{styles}</style>
     </section>
   )

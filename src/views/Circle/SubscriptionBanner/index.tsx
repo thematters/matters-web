@@ -2,9 +2,9 @@ import { useContext } from 'react'
 
 import {
   Card,
-  IconArrowRight16,
-  Layout,
+  IconCircle16,
   LoginButton,
+  TextIcon,
   Translate,
   ViewerContext,
 } from '~/components'
@@ -13,7 +13,6 @@ import { ADD_TOAST, OPEN_SUBSCRIBE_CIRCLE_DIALOG } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 import { fragments } from './gql'
-import IntroDialog from './IntroDialog'
 import styles from './styles.css'
 
 import { SubscriptionBannerCirclePrivate } from './__generated__/SubscriptionBannerCirclePrivate'
@@ -28,9 +27,9 @@ const SubscriptionBanner = ({ circle }: SubscriptionBannerProps) => {
   const viewer = useContext(ViewerContext)
   const isMember = circle.isMember
   const isOwner = circle?.owner?.id === viewer.id
-  const price = circle.prices && circle.prices[0]
+  const isInvited = circle?.invitedBy?.accepted === false
 
-  if (isMember || isOwner || !price) {
+  if (isMember || isOwner) {
     return null
   }
 
@@ -56,47 +55,40 @@ const SubscriptionBanner = ({ circle }: SubscriptionBannerProps) => {
     window.dispatchEvent(new CustomEvent(OPEN_SUBSCRIBE_CIRCLE_DIALOG, {}))
 
   return (
-    <section className="subscription-banner">
-      <Layout.FixedMain>
-        <IntroDialog circle={circle} onConfirm={openSubscribeCircleDialog}>
-          {({ open: openIntroDialog }) => (
-            <Card
-              bgColor="none"
-              spacing={[0, 0]}
-              onClick={() => {
-                analytics.trackEvent('click_button', {
-                  type: 'subscribe_circle_banner',
-                  pageType: 'circle_detail',
-                })
+    <Card
+      bgColor="none"
+      spacing={[0, 0]}
+      onClick={() => {
+        analytics.trackEvent('click_button', {
+          type: 'subscribe_circle_banner',
+          pageType: 'circle_detail',
+        })
 
-                if (!viewer.isAuthed) {
-                  showLoginToast()
-                  return
-                }
+        if (!viewer.isAuthed) {
+          showLoginToast()
+          return
+        }
 
-                openIntroDialog()
-              }}
-            >
-              <section className="content">
-                <section className="inner">
-                  <p>
-                    {price.amount} {price.currency} / <Translate id="month" />
-                    <Translate
-                      zh_hant="，立即訂閱圍爐"
-                      zh_hans="，立即订阅围炉"
-                    />
-                  </p>
-
-                  <IconArrowRight16 color="white" />
-                </section>
-              </section>
-            </Card>
+        openSubscribeCircleDialog()
+      }}
+    >
+      <section className="subscription-banner">
+        <TextIcon
+          icon={<IconCircle16 size="md-s" />}
+          size="xm"
+          color="white"
+          weight="md"
+        >
+          {isInvited ? (
+            <Translate zh_hant="免費體驗" zh_hans="免费体验" en="Free Trial" />
+          ) : (
+            <Translate zh_hant="訂閱圍爐" zh_hans="订阅围炉" en="Subscribe" />
           )}
-        </IntroDialog>
-      </Layout.FixedMain>
+        </TextIcon>
 
-      <style jsx>{styles}</style>
-    </section>
+        <style jsx>{styles}</style>
+      </section>
+    </Card>
   )
 }
 

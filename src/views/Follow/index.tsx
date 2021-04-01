@@ -27,8 +27,10 @@ const ME_FOLLOW = gql`
   query MeFollow {
     viewer {
       id
-      followees(input: { first: 0 }) {
-        totalCount
+      following {
+        users(input: { first: 0 }) {
+          totalCount
+        }
       }
     }
   }
@@ -58,7 +60,7 @@ const BaseFollow = () => {
     return null
   }
 
-  const followeeCount = data?.viewer?.followees.totalCount || 0
+  const followeeCount = data?.viewer?.following.users.totalCount || 0
 
   if (followeeCount < 5) {
     return <PickAuthors />

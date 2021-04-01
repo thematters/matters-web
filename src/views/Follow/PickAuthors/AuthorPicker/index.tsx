@@ -22,8 +22,10 @@ const AUTHOR_PICKER = gql`
   query AuthorPicker($random: NonNegativeInt) {
     viewer {
       id
-      followees(input: { first: 0 }) {
-        totalCount
+      following {
+        users(input: { first: 0 }) {
+          totalCount
+        }
       }
       recommendation {
         authors(input: { first: 5, filter: { random: $random } }) {
@@ -51,7 +53,7 @@ export const AuthorPicker = ({ title }: { title: React.ReactNode }) => {
     }
   )
   const edges = data?.viewer?.recommendation.authors.edges || []
-  const followeeCount = data?.viewer?.followees.totalCount || 0
+  const followeeCount = data?.viewer?.following.users.totalCount || 0
 
   const shuffle = () => {
     refetch({ random: _random(0, 50) })

@@ -15,11 +15,6 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-import {
-  USER_ARTICLES_PRIVATE,
-  USER_ARTICLES_PUBLIC,
-  VIEWER_ARTICLES,
-} from '~/components/GQL/queries/userArticles'
 
 import { URL_QS } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
@@ -27,12 +22,17 @@ import { analytics, mergeConnections } from '~/common/utils'
 import IMAGE_LOGO_192 from '@/public/static/icon-192x192.png?url'
 
 import UserTabs from '../UserTabs'
+import {
+  USER_ARTICLES_PRIVATE,
+  USER_ARTICLES_PUBLIC,
+  VIEWER_ARTICLES,
+} from './gql'
 import styles from './styles.css'
 
 import {
   UserArticlesPublic,
   UserArticlesPublic_user,
-} from '~/components/GQL/queries/__generated__/UserArticlesPublic'
+} from './__generated__/UserArticlesPublic'
 
 const ArticleSummaryInfo = ({ user }: { user: UserArticlesPublic_user }) => {
   const { articleCount: articles, totalWordCount: words } = user.status || {
@@ -124,9 +124,7 @@ const UserArticles = () => {
     })
 
     const { data: newData } = await fetchMore({
-      variables: {
-        after: pageInfo?.endCursor,
-      },
+      variables: { after: pageInfo?.endCursor },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
           oldData: previousResult,

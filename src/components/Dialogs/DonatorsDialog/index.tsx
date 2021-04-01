@@ -24,10 +24,7 @@ const fragments = {
   `,
 }
 
-const DynamicConetnt = dynamic(() => import('./Content'), {
-  ssr: false,
-  loading: Spinner,
-})
+const DynamicContent = dynamic(() => import('./Content'), { loading: Spinner })
 
 const BaseDonatorsDialog = ({ article, children }: DonatorsDialogProps) => {
   const { show, open, close } = useDialogSwitch(true)
@@ -37,7 +34,7 @@ const BaseDonatorsDialog = ({ article, children }: DonatorsDialogProps) => {
       {children({ open })}
 
       <Dialog isOpen={show} onDismiss={close} fixedHeight>
-        <DynamicConetnt article={article} closeDialog={close} />
+        <DynamicContent article={article} closeDialog={close} />
       </Dialog>
     </>
   )

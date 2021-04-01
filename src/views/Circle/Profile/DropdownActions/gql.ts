@@ -5,6 +5,7 @@ export const fragments = {
     public: gql`
       fragment DropdownActionsCirclePublic on Circle {
         id
+        name
         owner {
           id
         }

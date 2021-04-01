@@ -57,7 +57,7 @@ const Maintainers = ({ id, isOwner }: Props) => {
     return <QueryError error={error} />
   }
 
-  if (!data || !data.node || data.node.__typename !== 'Tag') {
+  if (data?.node?.__typename !== 'Tag') {
     return null
   }
 

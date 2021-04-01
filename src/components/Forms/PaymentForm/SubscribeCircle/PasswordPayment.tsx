@@ -3,7 +3,6 @@ import _pickBy from 'lodash/pickBy'
 import { useContext, useEffect } from 'react'
 
 import {
-  CircleDigest,
   Dialog,
   Form,
   LanguageContext,
@@ -19,15 +18,16 @@ import { parseFormSubmitErrors, validatePaymentPassword } from '~/common/utils'
 import { ReactComponent as IconStripeCard } from '@/public/static/icons/stripe-card.svg'
 
 import { SUBSCRIBE_CIRCLE } from './gql'
+import Head from './Head'
 import Hint from './Hint'
-import Price from './Price'
 import styles from './styles.css'
 
+import { DigestRichCirclePrivate } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePrivate'
 import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
 import { SubscribeCircle as SubscribeCircleType } from './__generated__/SubscribeCircle'
 
 interface FormProps {
-  circle: DigestRichCirclePublic
+  circle: DigestRichCirclePublic & DigestRichCirclePrivate
   cardLast4: string
   submitCallback: () => void
   switchToCardPayment: () => void
@@ -122,19 +122,7 @@ const Confirm: React.FC<FormProps> = ({
     <>
       <Dialog.Content hasGrow>
         <section>
-          <section className="circle">
-            <CircleDigest.Rich
-              circle={circle}
-              borderRadius="xtight"
-              bgColor="white"
-              hasFooter={false}
-              hasDescription
-              hasOwner
-              disabled
-            />
-          </section>
-
-          <Price circle={circle} />
+          <Head circle={circle} />
 
           <section className="current-card">
             <TextIcon
