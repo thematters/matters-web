@@ -52,7 +52,7 @@ const BaseAppreciationsSent = () => {
     return <Spinner />
   }
 
-  if (!data || !data.viewer) {
+  if (!data?.viewer) {
     return null
   }
 
@@ -74,9 +74,7 @@ const BaseAppreciationsSent = () => {
       location: edges.length,
     })
     return fetchMore({
-      variables: {
-        after: pageInfo.endCursor,
-      },
+      variables: { after: pageInfo.endCursor },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
           oldData: previousResult,

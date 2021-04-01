@@ -1,6 +1,7 @@
+import dynamic from 'next/dynamic'
 import { useState } from 'react'
 
-import { Dialog, PaymentForm, Translate, useStep } from '~/components'
+import { Dialog, Spinner, Translate, useStep } from '~/components'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 
@@ -15,6 +16,23 @@ interface PayoutDialogProps {
   hasStripeAccount: boolean
   children: ({ open }: { open: () => void }) => React.ReactNode
 }
+
+const DynamicPaymentResetPasswordForm = dynamic(
+  () => import('~/components/Forms/PaymentForm/ResetPassword'),
+  { loading: Spinner }
+)
+const DynamicPayoutFormComplete = dynamic(
+  () => import('~/components/Forms/PaymentForm/Payout/Complete'),
+  { loading: Spinner }
+)
+const DynamicPayoutFormConfirm = dynamic(
+  () => import('~/components/Forms/PaymentForm/Payout/Confirm'),
+  { loading: Spinner }
+)
+const DynamicConnectStripeAccountForm = dynamic(
+  () => import('~/components/Forms/PaymentForm/ConnectStripeAccount'),
+  { loading: Spinner }
+)
 
 const BasePayoutDialog = ({
   hasStripeAccount,
@@ -68,23 +86,23 @@ const BasePayoutDialog = ({
         />
 
         {isConnectStripeAccount && (
-          <PaymentForm.ConnectStripeAccount
+          <DynamicConnectStripeAccountForm
             nextStep={() => forward('confirm')}
           />
         )}
 
         {isConfirm && (
-          <PaymentForm.Payout.Confirm
+          <DynamicPayoutFormConfirm
             currency={CURRENCY.HKD}
             submitCallback={() => forward('complete')}
             switchToResetPassword={() => forward('resetPassword')}
           />
         )}
 
-        {isComplete && <PaymentForm.Payout.Complete close={close} />}
+        {isComplete && <DynamicPayoutFormComplete close={close} />}
 
         {isResetPassword && (
-          <PaymentForm.ResetPassword
+          <DynamicPaymentResetPasswordForm
             callbackButtons={ContinuePayoutButton}
             close={close}
           />

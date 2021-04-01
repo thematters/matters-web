@@ -31,14 +31,9 @@ const Feed = ({ type }: Props) => {
     RECOMMEND_AUTHORS,
     {
       notifyOnNetworkStatusChange: true,
-      variables: {
-        random: 0,
-        type,
-      },
+      variables: { random: 0, type },
     },
-    {
-      publicQuery: !viewer.isAuthed,
-    }
+    { publicQuery: !viewer.isAuthed }
   )
   const edges = data?.viewer?.recommendation.authors.edges
 

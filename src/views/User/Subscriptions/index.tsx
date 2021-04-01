@@ -1,10 +1,12 @@
 import { Layout, UserProfile } from '~/components'
 
-import UserSubscriptions from './UserSubscriptions'
+import BaseUserSubscriptions from './UserSubscriptions'
 
-export default () => (
+const UserSubscriptions = () => (
   <Layout.Main>
     <UserProfile />
-    <UserSubscriptions />
+    <BaseUserSubscriptions />
   </Layout.Main>
 )
+
+export default UserSubscriptions

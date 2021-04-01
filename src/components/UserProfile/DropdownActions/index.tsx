@@ -1,12 +1,14 @@
 import gql from 'graphql-tag'
+import _isEmpty from 'lodash/isEmpty'
+import _pickBy from 'lodash/pickBy'
 
 import {
   Button,
   DropdownDialog,
+  IconEdit16,
   IconMore32,
-  IconShare16,
+  IconSettings32,
   Menu,
-  ShareDialog,
   TextIcon,
   Translate,
 } from '~/components'
@@ -14,7 +16,26 @@ import { BlockUser } from '~/components/BlockUser'
 
 import { TEXT } from '~/common/enums'
 
+import { EditProfileDialog } from './EditProfileDialog'
+
 import { DropdownActionsUserPublic } from './__generated__/DropdownActionsUserPublic'
+
+interface DropdownActionsProps {
+  user: DropdownActionsUserPublic
+  isMe: boolean
+}
+
+interface DialogProps {
+  openEditProfileDialog: () => void
+  openBlockUserDialog: () => void
+}
+
+interface Controls {
+  hasEditProfile: boolean
+  hasBlockUser: boolean
+}
+
+type BaseDropdownActionsProps = DropdownActionsProps & DialogProps & Controls
 
 const fragments = {
   user: {
@@ -22,8 +43,10 @@ const fragments = {
       fragment DropdownActionsUserPublic on User {
         id
         ...BlockUserPublic
+        ...EditProfileDialogUserPublic
       }
       ${BlockUser.fragments.user.public}
+      ${EditProfileDialog.fragments.user}
     `,
     private: gql`
       fragment DropdownActionsUserPrivate on User {
@@ -35,33 +58,26 @@ const fragments = {
   },
 }
 
-interface DropdownActionsProps {
-  user: DropdownActionsUserPublic
-  isMe: boolean
-}
-
-interface DialogProps {
-  openShareDialog: () => void
-  openBlockUserDialog: () => void
-}
-
-type BaseDropdownActionsProps = DropdownActionsProps & DialogProps
-
 const BaseDropdownActions = ({
   user,
-  isMe,
-  openShareDialog,
+
+  hasEditProfile,
+  hasBlockUser,
+
+  openEditProfileDialog,
   openBlockUserDialog,
 }: BaseDropdownActionsProps) => {
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
     <Menu width={isInDropdown ? 'sm' : undefined}>
-      <Menu.Item onClick={openShareDialog}>
-        <TextIcon icon={<IconShare16 size="md" />} size="md" spacing="base">
-          <Translate zh_hant="分享主頁" zh_hans="分享主页" en="Share" />
-        </TextIcon>
-      </Menu.Item>
+      {hasEditProfile && (
+        <Menu.Item onClick={openEditProfileDialog}>
+          <TextIcon icon={<IconEdit16 size="md" />} size="md" spacing="base">
+            <Translate id="editUserProfile" />
+          </TextIcon>
+        </Menu.Item>
+      )}
 
-      {!isMe && (
+      {hasBlockUser && (
         <BlockUser.Button user={user} openDialog={openBlockUserDialog} />
       )}
     </Menu>
@@ -86,7 +102,11 @@ const BaseDropdownActions = ({
           onClick={open}
           ref={ref}
         >
-          <IconMore32 size="lg" color="white" />
+          {hasEditProfile ? (
+            <IconSettings32 size="lg" color="white" />
+          ) : (
+            <IconMore32 size="lg" color="white" />
+          )}
         </Button>
       )}
     </DropdownDialog>
@@ -94,21 +114,31 @@ const BaseDropdownActions = ({
 }
 
 const DropdownActions = ({ user, isMe }: DropdownActionsProps) => {
+  const controls = {
+    hasEditProfile: isMe,
+    hasBlockUser: !isMe,
+  }
+
+  if (_isEmpty(_pickBy(controls))) {
+    return null
+  }
+
   return (
-    <ShareDialog>
-      {({ open: openShareDialog }) => (
+    <EditProfileDialog user={user}>
+      {({ open: openEditProfileDialog }) => (
         <BlockUser.Dialog user={user}>
           {({ open: openBlockUserDialog }) => (
             <BaseDropdownActions
               user={user}
               isMe={isMe}
-              openShareDialog={openShareDialog}
+              {...controls}
+              openEditProfileDialog={openEditProfileDialog}
               openBlockUserDialog={openBlockUserDialog}
             />
           )}
         </BlockUser.Dialog>
       )}
-    </ShareDialog>
+    </EditProfileDialog>
   )
 }
 

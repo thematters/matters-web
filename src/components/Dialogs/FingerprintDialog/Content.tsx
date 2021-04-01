@@ -70,7 +70,7 @@ const FingerprintDialogContent = ({ dataHash }: { dataHash: string }) => {
             <Translate
               zh_hans="公共节点"
               zh_hant="公共節點"
-              en="Public gateways"
+              en="Public Gateways"
             />
           </h4>
 
@@ -111,18 +111,14 @@ const FingerprintDialogContent = ({ dataHash }: { dataHash: string }) => {
             <Translate
               zh_hans="这是什么？"
               zh_hant="這是什麼？"
-              en="What is this?"
+              en="What Is This?"
             />
           </h4>
         </header>
 
         <p>
           <b>
-            <Translate
-              zh_hant="作品指紋"
-              zh_hans="作品指纹"
-              en="Content hash"
-            />
+            <Translate id="articleFingerprint" />
           </b>
           <Translate
             zh_hans={` 是一篇作品上载到 IPFS 后生成的独一无二的 ID，通过指纹可在 IPFS 不同节点调取作品内容。`}
@@ -136,7 +132,7 @@ const FingerprintDialogContent = ({ dataHash }: { dataHash: string }) => {
             <Translate
               zh_hant="公共節點"
               zh_hans="公共节点"
-              en="Public gateways"
+              en="Public Gateways"
             />
           </b>
           <Translate

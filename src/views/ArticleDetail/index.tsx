@@ -16,6 +16,7 @@ import {
   PullToRefresh,
   QueryError,
   Spinner,
+  SubscribeCircleDialog,
   Throw404,
   Title,
   Translate,
@@ -82,9 +83,7 @@ const ArticleDetail = () => {
   // wall
   const { data: clientPreferenceData } = useQuery<ClientPreference>(
     CLIENT_PREFERENCE,
-    {
-      variables: { id: 'local' },
-    }
+    { variables: { id: 'local' } }
   )
   const { wall } = clientPreferenceData?.clientPreference || { wall: true }
   const shouldShowWall = !viewer.isAuthed && wall
@@ -430,6 +429,8 @@ const ArticleDetail = () => {
           </>
         )}
       </PullToRefresh>
+
+      {article.circle && <SubscribeCircleDialog circle={article.circle} />}
 
       <style jsx>{styles}</style>
     </Layout.Main>

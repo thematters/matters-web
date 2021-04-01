@@ -1,0 +1,231 @@
+/* @styled-jsx=global */
+
+/* Layouts
+   ========================================================================== */
+@define-mixin flex-center-all {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@define-mixin flex-center-space-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@define-mixin flex-center-start {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+@define-mixin flex-center-end {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+@define-mixin flex-start-space-between {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+@define-mixin flex-start-center {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+@define-mixin flex-start-start {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+@define-mixin flex-end-space-between {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+@define-mixin inline-flex-center-all {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@define-mixin inline-flex-center-start {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+@define-mixin inline-flex-center-end {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* Fonts
+   ========================================================================== */
+@define-mixin font-serif {
+  font-family: var(--font-serif-tc);
+
+  &[lang='zh-Hans'] {
+    font-family: var(--font-serif-sc);
+  }
+}
+
+@define-mixin font-sans {
+  font-family: var(--font-sans-tc);
+
+  &[lang='zh-Hans'] {
+    font-family: var(--font-sans-sc);
+  }
+}
+
+/* Borders
+   ========================================================================== */
+@define-mixin border-grey {
+  border: 1px solid var(--color-line-grey-light);
+}
+
+@define-mixin border-bottom-grey {
+  border-bottom: 1px solid var(--color-line-grey-light);
+}
+
+@define-mixin border-top-grey {
+  border-top: 1px solid var(--color-line-grey-light);
+}
+
+@define-mixin border-left-grey {
+  border-left: 1px solid var(--color-line-grey-light);
+}
+
+@define-mixin border-right-grey {
+  border-right: 1px solid var(--color-line-grey-light);
+}
+
+@define-mixin shadow-border-bottom-grey {
+  box-shadow: 0 1px 0 0 var(--color-line-grey-light);
+}
+
+@define-mixin shadow-border-top-grey {
+  box-shadow: 0 -1px 0 0 var(--color-line-grey-light);
+}
+
+/* Form
+   ========================================================================== */
+@define-mixin form-input {
+  @mixin all-transition;
+  @mixin border-top-grey;
+  @mixin border-bottom-grey;
+
+  padding: var(--spacing-base);
+  font-size: var(--font-size-md);
+  background-color: var(--color-white);
+
+  &:disabled {
+    color: var(--color-grey-darker);
+  }
+
+  &::placeholder {
+    color: var(--color-grey-light);
+    opacity: 1; /* Firefox */
+  }
+
+  &:-webkit-autofill::first-line {
+    font-size: var(--font-size-md);
+  }
+}
+
+@define-mixin form-input-grey {
+  @mixin all-transition;
+
+  padding: var(--spacing-base);
+  font-size: var(--font-size-md);
+  background-color: var(--color-grey-lighter);
+  border-top: none;
+  border-bottom: 1px solid var(--color-grey-light);
+  border-radius: var(--spacing-xxx-tight);
+
+  &:focus,
+  &.focus {
+    background-color: var(--color-green-lighter);
+    border-bottom-color: var(--color-matters-green);
+  }
+
+  &::placeholder {
+    color: var(--color-grey);
+    opacity: 1; /* Firefox */
+  }
+
+  &:-webkit-autofill::first-line {
+    font-size: var(--font-size-md);
+  }
+}
+
+/* Utilities
+   ========================================================================== */
+@define-mixin expand-to-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+@define-mixin safe-area-botttom {
+  &::after {
+    display: block;
+    padding-bottom: env(safe-area-inset-bottom);
+    content: '';
+  }
+}
+
+@define-mixin object-fit-cover {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@define-mixin all-transition {
+  transition: all 0.2s ease-in-out;
+}
+
+@define-mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: normal;
+  white-space: nowrap;
+}
+
+@define-mixin line-clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+
+  /* autoprefixer: ignore next */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@define-mixin hide-scrollbar {
+  /* IE 10+ */
+  -ms-overflow-style: none;
+
+  /* Firefox */
+  overflow: -moz-scrollbars-none;
+
+  /* Chrome & Safari */
+  &::-webkit-scrollbar {
+    width: 0 !important;
+    height: 0 !important;
+  }
+}

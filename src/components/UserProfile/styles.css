@@ -2,6 +2,12 @@
   margin-bottom: var(--spacing-base);
 }
 
+.buttons {
+  & :global(> * + *) {
+    margin-left: var(--spacing-base);
+  }
+}
+
 header {
   @mixin flex-end-space-between;
 

@@ -392,6 +392,16 @@ export const MOCK_NOTICE_LIST = [
     circleNoticeType: 'CircleNewUnsubscriber' as any,
     tx: MOCK_CIRCLE,
   },
+  // CircleInvitation
+  {
+    __typename: 'CircleNotice' as any,
+    id: 'CircleInvitation',
+    unread: false,
+    createdAt: '2020-12-24T07:29:17.682Z',
+    actors: [MOCK_USER],
+    circleNoticeType: 'CircleInvitation' as any,
+    circle: MOCK_CIRCLE,
+  },
 
   /**
    * Misc

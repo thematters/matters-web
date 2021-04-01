@@ -1,16 +1,14 @@
 module.exports = {
   plugins: {
-    'postcss-each': {},
-    'postcss-conditionals': {},
-    lost: {},
     'postcss-mixins': {
-      mixinsFiles: './src/common/styles/mixins/mixins.css',
+      mixinsFiles: './src/common/styles/mixins.css',
     },
     'postcss-preset-env': {
       stage: 0,
       preserve: false,
       importFrom: [
         './src/common/styles/variables/breakpoints.css',
+        './src/common/styles/variables/layouts.css',
         './src/common/styles/variables/colors.css',
         './src/common/styles/variables/sizing.css',
         './src/common/styles/variables/z-index.css',

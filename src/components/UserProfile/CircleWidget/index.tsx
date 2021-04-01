@@ -1,4 +1,9 @@
-import { Form, Translate, useFeatures } from '~/components'
+import {
+  Form,
+  SubscribeCircleDialog,
+  Translate,
+  useFeatures,
+} from '~/components'
 import { CircleDigest } from '~/components/CircleDigest'
 
 import { PATHS } from '~/common/enums'
@@ -35,6 +40,7 @@ const CircleWidget: React.FC<CircleWidgetProps> = ({ circles, isMe }) => {
         <Form.List forceGreyStyle>
           <Form.List.Item
             forceGreyStyle
+            bold
             title={
               <Translate
                 zh_hant="快來搭建圍爐，呼召你的支持者加入"
@@ -72,6 +78,9 @@ const CircleWidget: React.FC<CircleWidgetProps> = ({ circles, isMe }) => {
           })
         }}
       />
+
+      {!isMe && <SubscribeCircleDialog circle={circle} />}
+
       <style jsx>{styles}</style>
     </section>
   )

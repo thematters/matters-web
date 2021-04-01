@@ -1,4 +1,4 @@
-import { toDigestTag, useFeatures } from '~/components'
+import { toDigestTagPlaceholder, useFeatures } from '~/components'
 import BottomBar from '~/components/Editor/BottomBar'
 
 import { ENTITY_TYPE } from '~/common/enums'
@@ -31,7 +31,7 @@ const EditDraftBottomBar = ({ draft, ownCircles }: BottomBarProps) => {
   const { toggle: toggleCircle, saving: circleSaving } = useEditDraftCircle(
     draft
   )
-  const tags = (draft.tags || []).map(toDigestTag)
+  const tags = (draft.tags || []).map(toDigestTagPlaceholder)
   const isPending = draft.publishState === 'pending'
   const isPublished = draft.publishState === 'published'
 

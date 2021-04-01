@@ -12,7 +12,7 @@
 
   &.multi {
     & :global(.avatar) {
-      border: 1.5px solid var(--color-white);
+      border: 2px solid var(--color-white);
     }
 
     & :global(> *) {

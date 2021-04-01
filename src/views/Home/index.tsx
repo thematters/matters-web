@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic'
 import { useContext } from 'react'
 
 import {
@@ -10,10 +11,13 @@ import {
   ViewerContext,
 } from '~/components'
 
-import { CircleBanner } from './CircleBanner'
 import Feed from './Feed'
 import Sidebar from './Sidebar'
 import styles from './styles.css'
+
+const DynamicCircleBanner = dynamic(() => import('./CircleBanner'), {
+  ssr: false,
+})
 
 const Home = () => {
   const isSmallUp = useResponsive('sm-up')
@@ -53,7 +57,7 @@ const Home = () => {
         />
       )}
 
-      <CircleBanner />
+      <DynamicCircleBanner />
 
       <Spacer size="xtight" />
 

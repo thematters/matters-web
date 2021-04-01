@@ -2,7 +2,7 @@ import { Translate } from '~/components'
 
 import styles from './styles.css'
 
-export default () => (
+const PaymentPointerExplainer = () => (
   <>
     <p>
       <a href="https://interledger.org/" target="_blank">
@@ -70,3 +70,5 @@ export default () => (
     <style jsx>{styles}</style>
   </>
 )
+
+export default PaymentPointerExplainer

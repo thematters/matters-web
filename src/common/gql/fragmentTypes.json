@@ -24,6 +24,7 @@
           { "name": "UserConnection" },
           { "name": "CircleConnection" },
           { "name": "MemberConnection" },
+          { "name": "InvitationConnection" },
           { "name": "DraftConnection" },
           { "name": "ReadHistoryConnection" },
           { "name": "RecentSearchConnection" },
@@ -35,6 +36,11 @@
           { "name": "OAuthClientConnection" },
           { "name": "SkippedListItemsConnection" }
         ]
+      },
+      {
+        "kind": "UNION",
+        "name": "Invitee",
+        "possibleTypes": [{ "name": "Person" }, { "name": "User" }]
       },
       {
         "kind": "INTERFACE",

@@ -30,7 +30,7 @@ const update = ({
     })
 
     const data = _cloneDeep(cacheData)
-    if (!data || !data.node || data.node.__typename !== 'Tag') {
+    if (data?.node?.__typename !== 'Tag') {
       return
     }
 

@@ -99,9 +99,7 @@ const Password: React.FC<FormProps> = ({
 
         // finish registration
         await register({
-          variables: {
-            input: { email, codeId, displayName, password },
-          },
+          variables: { input: { email, codeId, displayName, password } },
         })
 
         analytics.identifyUser()

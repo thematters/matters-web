@@ -17,6 +17,7 @@ export const MOCK_USER = {
     __typename: 'Liker' as any,
     civicLiker: false,
   },
+  ownCircles: null,
 }
 
 // Circle
@@ -53,6 +54,12 @@ export const MOCK_CIRCLE = {
     totalCount: 8,
   },
   isMember: true,
+  invitedBy: {
+    __typename: 'Invitation' as any,
+    id: 'circle-invitation-000',
+    accepted: false,
+    freePeriod: 3,
+  },
 }
 
 // Article

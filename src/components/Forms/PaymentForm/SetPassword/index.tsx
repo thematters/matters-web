@@ -43,7 +43,7 @@ const SET_PAYMENT_PASSWORD = gql`
   }
 `
 
-const SetPassword: React.FC<FormProps> = ({ submitCallback }) => {
+const PaymentSetPasswordForm: React.FC<FormProps> = ({ submitCallback }) => {
   const [setPassword] = useMutation<SetPaymentPassword>(
     SET_PAYMENT_PASSWORD,
     undefined,
@@ -193,4 +193,4 @@ const SetPassword: React.FC<FormProps> = ({ submitCallback }) => {
   )
 }
 
-export default SetPassword
+export default PaymentSetPasswordForm

@@ -40,13 +40,13 @@
 }
 
 .displayname {
-  line-height: 1;
+  line-height: 1.25;
 }
 
 .username {
   margin-left: var(--spacing-xx-tight);
   font-size: var(--font-size-sm);
-  line-height: 1;
+  line-height: 1.25;
   color: var(--color-grey);
 }
 

@@ -1,21 +1,20 @@
-import { Dialog, ShareButtons, Translate, useDialogSwitch } from '~/components'
+import dynamic from 'next/dynamic'
 
-import { TextId } from '~/common/enums'
+import { Dialog, Spinner, useDialogSwitch } from '~/components'
+
 import { isMobile } from '~/common/utils'
 
-import Copy from './Copy'
-import styles from './styles.css'
+import { ShareDialogContentProps } from './Content'
 
-export interface ShareDialogProps {
+export type ShareDialogProps = {
   title?: string
   path?: string
 
-  headerTitle?: TextId | React.ReactElement
-  description?: React.ReactNode
-  footerButtons?: React.ReactNode
-
   children: ({ open }: { open: () => void }) => React.ReactNode
-}
+} & Pick<
+  ShareDialogContentProps,
+  'description' | 'footerButtons' | 'headerTitle'
+>
 
 type BaseShareDialogProps = {
   onShare: (fallbackShare: () => void) => void
@@ -26,16 +25,17 @@ type BaseShareDialogProps = {
   'children' | 'headerTitle' | 'description' | 'footerButtons'
 >
 
+const DynamicContent = dynamic(() => import('./Content'), {
+  ssr: false,
+  loading: Spinner,
+})
+
 const BaseShareDialog = ({
   onShare,
-  shareTitle,
-  shareLink,
-
-  headerTitle,
-  description,
-  footerButtons,
 
   children,
+
+  ...props
 }: BaseShareDialogProps) => {
   const { show, open, close } = useDialogSwitch(true)
 
@@ -44,54 +44,7 @@ const BaseShareDialog = ({
       {children({ open: () => onShare(open) })}
 
       <Dialog size="sm" isOpen={show} onDismiss={close}>
-        <Dialog.Header
-          title={headerTitle || 'share'}
-          close={close}
-          closeTextId="close"
-          mode={headerTitle ? 'inner' : 'hidden'}
-        />
-
-        <Dialog.Content>
-          {description && (
-            <section className="description">
-              {description}
-
-              <style jsx>{styles}</style>
-            </section>
-          )}
-
-          <section className="socials-container">
-            <section className="left">
-              <ShareButtons.LINE title={shareTitle} link={shareLink} />
-              <ShareButtons.WhatsApp title={shareTitle} link={shareLink} />
-              <ShareButtons.Telegram title={shareTitle} link={shareLink} />
-              <ShareButtons.Douban title={shareTitle} link={shareLink} />
-            </section>
-
-            <section className="right">
-              <ShareButtons.Twitter title={shareTitle} link={shareLink} />
-              <ShareButtons.Facebook title={shareTitle} link={shareLink} />
-              <ShareButtons.Weibo title={shareTitle} link={shareLink} />
-              <ShareButtons.Email title={shareTitle} link={shareLink} />
-            </section>
-
-            <style jsx>{styles}</style>
-          </section>
-
-          <Copy link={shareLink} />
-        </Dialog.Content>
-
-        <Dialog.Footer>
-          {footerButtons || (
-            <Dialog.Footer.Button
-              bgColor="grey-lighter"
-              textColor="black"
-              onClick={close}
-            >
-              <Translate id="close" />
-            </Dialog.Footer.Button>
-          )}
-        </Dialog.Footer>
+        <DynamicContent {...props} />
       </Dialog>
     </>
   )

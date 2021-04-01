@@ -9,18 +9,22 @@ import { ReactComponent as IconCircleFeatureReading } from '@/public/static/icon
 import ConfirmTable from '../ConfirmTable'
 import styles from './styles.css'
 
+import { DigestRichCirclePrivate } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePrivate'
 import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
 
 type HeadProps = {
-  circle: DigestRichCirclePublic
+  circle: DigestRichCirclePublic & DigestRichCirclePrivate
 }
 
 const Head: React.FC<HeadProps> = ({ circle }) => {
   const price = circle.prices && circle.prices[0]
+  const invitation = circle.invitedBy
 
   if (!price) {
     return null
   }
+
+  const isInvited = invitation && invitation.accepted === false
 
   return (
     <section className="head">
@@ -76,6 +80,32 @@ const Head: React.FC<HeadProps> = ({ circle }) => {
             {price.currency} {toAmountString(price.amount)}
           </ConfirmTable.Col>
         </ConfirmTable.Row>
+
+        {isInvited && (
+          <>
+            <ConfirmTable.Row type="balance">
+              <ConfirmTable.Col>
+                <Translate zh_hant="免費資格" zh_hans="免费资格" />
+                {` ${invitation?.freePeriod} `}
+                <Translate zh_hant="個月" zh_hans="个月" />
+              </ConfirmTable.Col>
+
+              <ConfirmTable.Col type="insufficient">
+                - {price.currency} {toAmountString(price.amount)}
+              </ConfirmTable.Col>
+            </ConfirmTable.Row>
+
+            <ConfirmTable.Row type="total">
+              <ConfirmTable.Col>
+                <Translate zh_hant="總金額" zh_hans="总金额" />
+              </ConfirmTable.Col>
+
+              <ConfirmTable.Col>
+                {price.currency} {toAmountString(0)}
+              </ConfirmTable.Col>
+            </ConfirmTable.Row>
+          </>
+        )}
       </ConfirmTable>
 
       <style jsx>{styles}</style>
