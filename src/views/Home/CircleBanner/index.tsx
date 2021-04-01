@@ -72,12 +72,14 @@ const CircleBanner = () => {
               <Translate
                 zh_hant="圍爐內測，火熱進行中"
                 zh_hans="围炉内测，火热进行中"
+                en="Circle alpha testing, build your backer community!"
               />
             </h3>
             <p>
               <Translate
                 zh_hant="點擊這裡，致信 hi@matters.news，申請參與內測"
                 zh_hans="点击这里，致信 hi@matters.news，申请参与内测"
+                en="Click here to email hi@matters.news and apply"
               />
             </p>
           </section>
