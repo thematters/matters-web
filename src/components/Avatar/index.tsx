@@ -4,6 +4,7 @@ import gql from 'graphql-tag'
 import { Img } from '~/components'
 
 import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
+import IMAGE_MATTERS_ARCHITECT_RING from '@/public/static/icons/architect-ring.svg'
 import IMAGE_CIVIC_LIKER_RING from '@/public/static/icons/civic-liker-ring.svg'
 
 import styles from './styles.css'
@@ -26,6 +27,11 @@ const fragments = {
       liker {
         civicLiker
       }
+      info {
+        badges {
+          type
+        }
+      }
     }
   `,
 }
@@ -36,23 +42,29 @@ export const Avatar = (props: AvatarProps) => {
   const isFallback =
     (!src && !user?.avatar) || source.indexOf('data:image') >= 0
   const isCivicLiker = user?.liker.civicLiker
+  const badges = user?.info.badges || []
+  const hasArchitectBadge = badges.some((b) => b.type === 'architect')
   const avatarClasses = classNames({
     avatar: true,
     [size]: true,
-    'civic-liker': isCivicLiker,
+    hasRing: isCivicLiker || hasArchitectBadge,
   })
 
   return (
     <div className={avatarClasses}>
       <Img url={source} size="144w" disabled={isFallback || inEditor} />
 
-      {isCivicLiker && <span className="ring" />}
+      {isCivicLiker && <span className="civic-liker ring" />}
+      {hasArchitectBadge && <span className="architect ring" />}
 
       <style jsx>{styles}</style>
 
       <style jsx>{`
-        .ring {
+        .civic-liker.ring {
           background-image: url(${IMAGE_CIVIC_LIKER_RING});
+        }
+        .architect.ring {
+          background-image: url(${IMAGE_MATTERS_ARCHITECT_RING});
         }
       `}</style>
     </div>
