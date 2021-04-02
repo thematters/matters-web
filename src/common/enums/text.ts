@@ -732,7 +732,7 @@ export const TEXT = {
     deleteComment: 'Delete',
     deleteDraft: 'Delete',
     disagree: 'Disagree',
-    discover: 'Discovery',
+    discover: 'Discover',
     DISPLAYNAME_INVALID: 'Invalid display name',
     displayName: 'Displayname',
     donation: 'Support Author',
