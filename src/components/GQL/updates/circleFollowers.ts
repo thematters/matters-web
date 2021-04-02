@@ -47,6 +47,7 @@ const update = ({
             id: viewer.id,
             info: {
               description: viewer.info.description,
+              badges: viewer.info.badges,
               __typename: 'UserInfo',
             },
             isBlocked: false,

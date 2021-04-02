@@ -15,9 +15,9 @@
 }
 
 /**
- * Civic Liker Ring
+ * Ring
  */
-.civic-liker {
+.hasRing {
   margin: 2px 0;
 
   & .ring {
@@ -62,7 +62,7 @@
   width: 2.5rem;
   height: 2.5rem;
 
-  &.civic-liker {
+  &.hasRing {
     margin: 4px 0;
 
     & .ring {
@@ -79,7 +79,7 @@
   width: 3rem;
   height: 3rem;
 
-  &.civic-liker {
+  &.hasRing {
     & .ring {
       top: -5px;
       right: -5px;
@@ -94,7 +94,7 @@
   width: 4.5rem;
   height: 4.5rem;
 
-  &.civic-liker {
+  &.hasRing {
     & .ring {
       top: -8px;
       right: -8px;

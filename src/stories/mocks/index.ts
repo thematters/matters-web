@@ -11,6 +11,7 @@ export const MOCK_USER = {
   avatar: 'https://source.unsplash.com/256x256?user',
   info: {
     __typename: 'UserInfo' as any,
+    badges: null,
     description: 'Matters 唯一官方帳號',
   },
   liker: {
