@@ -12,6 +12,7 @@ import {
   EmptyLayout,
   Error,
   Head,
+  LanguageContext,
   Layout,
   PullToRefresh,
   QueryError,
@@ -143,7 +144,9 @@ const ArticleDetail = () => {
   // translation
   const [translate, setTranslate] = useState(false)
   const language = article?.language
-  const viewerLanguage = viewer.settings.language
+
+  const { lang: viewerLanguage } = useContext(LanguageContext)
+
   const shouldTranslate = language && language !== viewerLanguage
 
   const [
