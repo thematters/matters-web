@@ -42,7 +42,7 @@ export const Avatar = (props: AvatarProps) => {
   const isFallback =
     (!src && !user?.avatar) || source.indexOf('data:image') >= 0
   const isCivicLiker = user?.liker.civicLiker
-  const badges = user?.info.badges || []
+  const badges = user?.info?.badges || []
   const hasArchitectBadge = badges.some((b) => b.type === 'architect')
   const avatarClasses = classNames({
     avatar: true,
