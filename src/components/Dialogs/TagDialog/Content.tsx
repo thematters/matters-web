@@ -1,6 +1,7 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
+import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
 import {
@@ -19,7 +20,6 @@ import { ADD_TOAST, ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
 import {
   numAbbr,
   parseFormSubmitErrors,
-  routerPush,
   toPath,
   translate,
   validateTagName,
@@ -133,6 +133,7 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
   description,
   closeDialog,
 }) => {
+  const router = useRouter()
   const [update] = useMutation<PutTag>(PUT_TAG, undefined, {
     showToast: false,
   })
@@ -195,7 +196,7 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
         if (!id) {
           // if created, then redirect to tag detail page
           const path = toPath({ page: 'tagDetail', id: returnedTagId || '' })
-          routerPush(path.href)
+          router.push(path.href)
         } else {
           closeDialog()
         }

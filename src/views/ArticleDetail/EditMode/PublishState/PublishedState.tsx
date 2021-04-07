@@ -1,8 +1,9 @@
+import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
 import { Dialog, ShareDialog, Translate } from '~/components'
 
-import { routerPush, toPath } from '~/common/utils'
+import { toPath } from '~/common/utils'
 
 import { EditModeArticle_article_drafts as EditModeDraft } from '../__generated__/EditModeArticle'
 
@@ -32,6 +33,8 @@ const BasePublishedState = ({
 }
 
 const PublishedState = ({ article, draft, cancel }: Props) => {
+  const router = useRouter()
+
   const path = toPath({
     page: 'articleDetail',
     article: { ...article, mediaHash: draft.mediaHash },
@@ -70,7 +73,7 @@ const PublishedState = ({ article, draft, cancel }: Props) => {
         <Dialog.Footer.Button
           onClick={() => {
             cancel()
-            routerPush(path.href)
+            router.push(path.href)
           }}
         >
           <Translate

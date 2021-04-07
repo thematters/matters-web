@@ -199,7 +199,7 @@ export const redirectToTarget = ({
 export const redirectToLogin = () => {
   const target = getTarget() || getEncodedCurrent()
 
-  return routerPush(`${PATHS.LOGIN}?target=${target}`)
+  return Router.push(`${PATHS.LOGIN}?target=${target}`)
 }
 
 /**
@@ -224,23 +224,6 @@ export const appendTarget = (href: string, fallbackCurrent?: boolean) => {
       href,
     }
   }
-}
-
-/**
- * Scroll to page top after `Route.push`
- *
- * @see {@url https://github.com/zeit/next.js/blob/canary/packages/next/client/link.tsx#L203-L211}
- * @see {@url https://github.com/zeit/next.js/issues/3249#issuecomment-574817539}
- */
-export const routerPush = (url: string, options?: {}) => {
-  Router.push(url, options).then((success: boolean) => {
-    if (!success) {
-      return
-    }
-
-    window.scrollTo(0, 0)
-    document.body.focus()
-  })
 }
 
 /**
@@ -317,6 +300,6 @@ export const captureClicks = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
   })
 
   if (matched) {
-    routerPush(el.href)
+    Router.push(el.href)
   }
 }

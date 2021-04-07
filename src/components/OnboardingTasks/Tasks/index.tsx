@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
 import {
@@ -19,7 +20,7 @@ import {
   OPEN_RECOMMEND_TAG_DIALOG,
   URL_QS,
 } from '~/common/enums'
-import { analytics, routerPush, toPath, translate } from '~/common/utils'
+import { analytics, toPath, translate } from '~/common/utils'
 
 import styles from './styles.css'
 import TaskItem from './TaskItem'
@@ -27,6 +28,7 @@ import TaskItem from './TaskItem'
 import { CreateDraft } from '~/components/GQL/mutations/__generated__/CreateDraft'
 
 const Tasks = () => {
+  const router = useRouter()
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
   const isLargeUp = useResponsive('lg-up')
@@ -46,7 +48,7 @@ const Tasks = () => {
 
     if (slug && id) {
       const path = toPath({ page: 'draftDetail', slug, id })
-      routerPush(path.href)
+      router.push(path.href)
     }
   }
 

@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
 import {
@@ -12,7 +13,7 @@ import {
 } from '~/components'
 
 import { ADD_TOAST } from '~/common/enums'
-import { routerPush, toPath, translate } from '~/common/utils'
+import { toPath, translate } from '~/common/utils'
 
 import { ExtendArticle } from './__generated__/ExtendArticle'
 import { ExtendButtonArticle } from './__generated__/ExtendButtonArticle'
@@ -36,6 +37,7 @@ const fragments = {
 }
 
 const ExtendButton = ({ article }: { article: ExtendButtonArticle }) => {
+  const router = useRouter()
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
   const [extendArticle] = useMutation<ExtendArticle>(EXTEND_ARTICLE, {
@@ -65,7 +67,7 @@ const ExtendButton = ({ article }: { article: ExtendButtonArticle }) => {
 
         if (slug && id) {
           const path = toPath({ page: 'draftDetail', slug, id })
-          routerPush(path.href)
+          router.push(path.href)
         }
       }}
     >

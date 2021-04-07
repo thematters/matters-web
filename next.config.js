@@ -13,6 +13,10 @@ const URL_PUSH_SW = isProd
   : './firebase-messaging-sw-develop.js'
 
 const nextConfig = {
+  future: {
+    // webpack5: true,
+    strictPostcssConfiguration: true,
+  },
   /**
    * Runtime configs
    *

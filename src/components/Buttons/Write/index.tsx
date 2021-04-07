@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
 import {
@@ -12,7 +13,7 @@ import {
 import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
 
 import { ADD_TOAST, OPEN_LIKE_COIN_DIALOG, TEXT } from '~/common/enums'
-import { analytics, routerPush, toPath, translate } from '~/common/utils'
+import { analytics, toPath, translate } from '~/common/utils'
 
 import { CreateDraft } from '~/components/GQL/mutations/__generated__/CreateDraft'
 
@@ -54,6 +55,7 @@ const BaseWriteButton = ({
 }
 
 export const WriteButton = ({ allowed, isLarge, forbidden }: Props) => {
+  const router = useRouter()
   const { lang } = useContext(LanguageContext)
   const [putDraft, { loading }] = useMutation<CreateDraft>(CREATE_DRAFT, {
     variables: { title: translate({ id: 'untitle', lang }) },
@@ -94,7 +96,7 @@ export const WriteButton = ({ allowed, isLarge, forbidden }: Props) => {
 
         if (slug && id) {
           const path = toPath({ page: 'draftDetail', slug, id })
-          routerPush(path.href)
+          router.push(path.href)
         }
       }}
       loading={loading}
