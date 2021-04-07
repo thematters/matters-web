@@ -1,7 +1,6 @@
 import { Layout, Translate, useRoute } from '~/components'
 
 import { OAUTH_PROVIDER, PATHS } from '~/common/enums'
-import { routerPush } from '~/common/utils'
 
 import ICON_LIKECOIN from '@/public/static/icons/likecoin.svg'
 import ICON_STRIPE from '@/public/static/icons/stripe.svg'
@@ -54,7 +53,7 @@ const ERROR_TEXT = {
 }
 
 const OAuthCallbackFailure = () => {
-  const { getQuery } = useRoute()
+  const { getQuery, router } = useRoute()
   const code = getQuery('code')
   const provider = getQuery('provider')
   const title: { [key: string]: any } = {
@@ -73,7 +72,7 @@ const OAuthCallbackFailure = () => {
   const errorDetail = ERROR_TEXT[code as any]
 
   if (!provider || OAUTH_PROVIDER.indexOf(provider) < 0) {
-    routerPush(PATHS.HOME)
+    router.push(PATHS.HOME)
     return null
   }
 

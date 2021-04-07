@@ -1,7 +1,7 @@
 import { DialogContent, DialogOverlay } from '@reach/dialog'
 import classNames from 'classnames'
 import { useEffect, useRef, useState } from 'react'
-import { animated, Globals, useSpring } from 'react-spring'
+import { animated, Globals, useSpring } from 'react-spring/web'
 import { useDrag } from 'react-use-gesture'
 
 import { useOutsideClick, useResponsive } from '~/components'
@@ -78,9 +78,7 @@ const Dialog: React.FC<DialogProps> = (props) => {
   const isSmallUp = useResponsive('sm-up')
 
   // Drag
-  const [{ top }, setDragGoal] = useSpring(() => ({
-    top: 0,
-  }))
+  const [{ top }, setDragGoal] = useSpring(() => ({ top: 0 }))
 
   // Fade In/ Fade Out
   const [{ opacity, transform }, setFade] = useSpring<{
