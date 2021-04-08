@@ -26,10 +26,13 @@ export const fragments = {
           userName
           ...UserDigestMiniUser
         }
-        circle {
-          id
-          name
-          ...DigestPlainCircle
+        access {
+          type
+          circle {
+            id
+            name
+            ...DigestPlainCircle
+          }
         }
         ...CreatedAtArticle
         ...LimitedFreeArticle

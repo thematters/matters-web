@@ -52,6 +52,7 @@ import TranslationButton from './TranslationButton'
 import CircleWall from './Wall/Circle'
 import VisitorWall from './Wall/Visitor'
 
+import { ArticleAccessType } from '@/__generated__/globalTypes'
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import { ArticleDetailPublic } from './__generated__/ArticleDetailPublic'
 import { ArticleTranslation } from './__generated__/ArticleTranslation'
@@ -105,12 +106,12 @@ const ArticleDetail = () => {
   const paymentPointer = article?.author?.paymentPointer || undefined
   const collectionCount = article?.collection?.totalCount || 0
   const isAuthor = viewer.id === authorId
-  const circle = article?.circle
+  const circle = article?.access.circle
   const canReadFullContent = !!(
     isAuthor ||
     !circle ||
     circle.isMember ||
-    article?.limitedFree
+    article?.access.type === ArticleAccessType.limitedFree
   )
   const summary = article?.summary
 
@@ -433,7 +434,9 @@ const ArticleDetail = () => {
         )}
       </PullToRefresh>
 
-      {article.circle && <SubscribeCircleDialog circle={article.circle} />}
+      {article.access.circle && (
+        <SubscribeCircleDialog circle={article.access.circle} />
+      )}
 
       <style jsx>{styles}</style>
     </Layout.Main>

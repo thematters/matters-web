@@ -62,7 +62,12 @@ const BaseArticleDigestFeed = ({
   const isCompactMode = viewMode === 'compact'
   const isDefaultMode = viewMode === 'default'
 
-  const { author, summary, sticky, circle } = article
+  const {
+    author,
+    summary,
+    sticky,
+    access: { circle },
+  } = article
   const isBanned = article.articleState === 'banned'
   const cover = !isBanned ? article.cover : null
   const cleanedSummary = isBanned ? '' : stripHtml(summary)

@@ -4,18 +4,19 @@ import { useImperativeQuery, useMutation } from '~/components/GQL'
 
 import {
   DRAFT_ASSETS,
-  SET_CIRCLE,
+  SET_ACCESS,
   SET_COLLECTION,
   SET_COVER,
   SET_TAGS,
 } from './gql'
 
+import { ArticleAccessType } from '@/__generated__/globalTypes'
 import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
 import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
 import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
 import { DraftAssets } from './__generated__/DraftAssets'
 import { EditMetaDraft } from './__generated__/EditMetaDraft'
-import { SetDraftCircle } from './__generated__/SetDraftCircle'
+import { SetDraftAccess } from './__generated__/SetDraftAccess'
 import { SetDraftCollection } from './__generated__/SetDraftCollection'
 import { SetDraftCover } from './__generated__/SetDraftCover'
 import { SetDraftTags } from './__generated__/SetDraftTags'
@@ -71,19 +72,30 @@ export const useEditDraftCollection = (draft: EditMetaDraft) => {
   return { edit, saving }
 }
 
-export const useEditDraftCircle = (draft: EditMetaDraft) => {
+export const useEditDraftAccess = (
+  draft: EditMetaDraft,
+  circle?: DigestRichCirclePublic
+) => {
   const draftId = draft.id
-  const [setCircle, { loading: saving }] = useMutation<SetDraftCircle>(
-    SET_CIRCLE
+  const [setCircle, { loading: saving }] = useMutation<SetDraftAccess>(
+    SET_ACCESS
   )
 
-  const toggle = (circle: DigestRichCirclePublic) =>
+  const edit = (addToCircle: boolean, paywalled: boolean) => {
+    if (!circle) {
+      return
+    }
+
     setCircle({
       variables: {
         id: draftId,
-        circle: draft.circle ? null : circle.id,
+        circle: addToCircle ? circle.id : null,
+        accessType: paywalled
+          ? ArticleAccessType.paywall
+          : ArticleAccessType.public,
       },
     })
+  }
 
-  return { toggle, saving }
+  return { edit, saving }
 }

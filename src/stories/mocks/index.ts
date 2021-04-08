@@ -95,8 +95,11 @@ export const MOCK_ARTILCE = {
     totalCount: 190,
   },
   subscribed: false,
-  circle: MOCK_CIRCLE,
-  limitedFree: true,
+  access: {
+    __typename: 'ArticleAccess' as any,
+    type: 'limitedFree' as any,
+    circle: MOCK_CIRCLE,
+  },
 }
 
 export const MOCK_CIRCLE_ARTICLE = {

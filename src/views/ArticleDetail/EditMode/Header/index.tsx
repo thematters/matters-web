@@ -54,6 +54,7 @@ const EDIT_ARTICLE = gql`
     $tags: [String!]
     $collection: [ID!]
     $circle: ID
+    $accessType: ArticleAccessType
     $after: String
     $first: Int = null
   ) {
@@ -65,6 +66,7 @@ const EDIT_ARTICLE = gql`
         tags: $tags
         collection: $collection
         circle: $circle
+        accessType: $accessType
       }
     ) {
       id
@@ -72,6 +74,9 @@ const EDIT_ARTICLE = gql`
       tags {
         ...DigestTag
         selected(input: { mediaHash: $mediaHash })
+      }
+      access {
+        type
       }
       drafts {
         mediaHash

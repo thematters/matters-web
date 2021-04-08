@@ -4,6 +4,7 @@ import { Translate } from '~/components'
 
 import Label from './Label'
 
+import { ArticleAccessType } from '@/__generated__/globalTypes'
 import { LimitedFreeArticle } from './__generated__/LimitedFreeArticle'
 
 type LimitedFreeProps = {
@@ -14,13 +15,15 @@ const fragments = {
   article: gql`
     fragment LimitedFreeArticle on Article {
       id
-      limitedFree
+      access {
+        type
+      }
     }
   `,
 }
 
 const LimitedFree = ({ article }: LimitedFreeProps) => {
-  if (!article.limitedFree) {
+  if (article.access.type !== ArticleAccessType.limitedFree) {
     return null
   }
 

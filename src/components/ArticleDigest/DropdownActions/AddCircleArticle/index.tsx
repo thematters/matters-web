@@ -7,14 +7,16 @@ const fragments = {
   article: gql`
     fragment AddCircleArticleButtonArticle on Article {
       id
-      circle {
-        id
-      }
       author {
         id
         ownCircles {
           id
           name
+        }
+      }
+      access {
+        circle {
+          id
         }
       }
     }

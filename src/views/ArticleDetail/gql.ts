@@ -28,7 +28,6 @@ export const ARTICLE_DETAIL_PUBLIC = gql`
       createdAt
       revisedAt
       language
-      limitedFree
       author {
         id
         paymentPointer
@@ -38,10 +37,13 @@ export const ARTICLE_DETAIL_PUBLIC = gql`
       collection(input: { first: 0 }) @connection(key: "articleCollection") {
         totalCount
       }
-      circle {
-        id
-        ...CircleWallCirclePublic
-        ...CircleWallCirclePrivate
+      access {
+        type
+        circle {
+          id
+          ...CircleWallCirclePublic
+          ...CircleWallCirclePrivate
+        }
       }
       ...ContentArticle
       ...TagListArticle
@@ -81,9 +83,11 @@ export const ARTICLE_DETAIL_PRIVATE = gql`
         id
         ...UserDigestRichUserPrivate
       }
-      circle {
-        id
-        ...CircleWallCirclePrivate
+      access {
+        circle {
+          id
+          ...CircleWallCirclePrivate
+        }
       }
       ...ToolbarArticlePrivate
       ...SupportWidgetArticlePrivate

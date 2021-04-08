@@ -253,7 +253,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
 
   const hasCircles =
     article.author.ownCircles && article.author.ownCircles.length >= 1
-  const isAttachedCircle = !!article.circle
+  const isAttachedCircle = !!article.access.circle
   const controls = {
     // public
     hasShare: !!hasShare,
