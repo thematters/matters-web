@@ -40,7 +40,7 @@ const DialogMessage: React.FC<DialogMessageProps> = ({
   })
 
   return (
-    <Dialog.Content spacing={['base', 'base']}>
+    <Dialog.Content spacing={['base', 'base']} hasFixed>
       <section className={contentClasses}>{children}</section>
 
       <style jsx>{styles}</style>
