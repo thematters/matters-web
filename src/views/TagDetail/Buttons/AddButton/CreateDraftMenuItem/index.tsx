@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
 import {
@@ -12,7 +13,7 @@ import {
 import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
 
 import { ADD_TOAST, OPEN_LIKE_COIN_DIALOG } from '~/common/enums'
-import { analytics, routerPush, toPath, translate } from '~/common/utils'
+import { analytics, toPath, translate } from '~/common/utils'
 
 import { CreateDraft } from '~/components/GQL/mutations/__generated__/CreateDraft'
 import { TagDetailPublic_node_Tag } from '../../../__generated__/TagDetailPublic'
@@ -34,6 +35,7 @@ const BaseCreateDraftButton = ({ onClick }: { onClick: () => any }) => (
 )
 
 const CreateDraftButton: React.FC<CreateDraftButtonProps> = ({ tag }) => {
+  const router = useRouter()
   const { lang } = useContext(LanguageContext)
   const viewer = useContext(ViewerContext)
 
@@ -66,7 +68,7 @@ const CreateDraftButton: React.FC<CreateDraftButtonProps> = ({ tag }) => {
 
     if (slug && id) {
       const path = toPath({ page: 'draftDetail', slug, id })
-      routerPush(path.href)
+      router.push(path.href)
     }
   }
 
