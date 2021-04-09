@@ -1,0 +1,14 @@
+.switch {
+  @mixin flex-center-space-between;
+  @mixin border-top-grey;
+  @mixin border-bottom-grey;
+
+  padding: var(--spacing-base);
+  margin: 0 calc(var(--spacing-base) * -1) var(--spacing-loose);
+
+  & p {
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-medium);
+    line-height: 1;
+  }
+}

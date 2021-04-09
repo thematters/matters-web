@@ -5,7 +5,7 @@ import styles from './styles.css'
 import { ArticleAccessType } from '@/__generated__/globalTypes'
 import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
 
-export type ToggleCircleProps = {
+export type ToggleAccessProps = {
   circle?: DigestRichCirclePublic | null
   accessType?: ArticleAccessType | null
 
@@ -16,7 +16,7 @@ export type ToggleCircleProps = {
   canTogglePaywall: boolean
 }
 
-const ToggleCircle: React.FC<ToggleCircleProps> = ({
+const ToggleAccess: React.FC<ToggleAccessProps> = ({
   circle,
   accessType,
 
@@ -58,18 +58,9 @@ const ToggleCircle: React.FC<ToggleCircleProps> = ({
           </section>
 
           <section className="switch">
-            <div>
-              <h4>
-                <Translate zh_hant="上鎖" zh_hans="上锁" en="Paywalled" />
-              </h4>
-              <p>
-                <Translate
-                  zh_hant="前 24 小時限免後永久上鎖"
-                  zh_hans="前 24 小时限免后永久上锁"
-                  en="Free for 24 hours, then paywalled forever"
-                />
-              </p>
-            </div>
+            <h4>
+              <Translate zh_hant="上鎖" zh_hans="上锁" en="Paywalled" />
+            </h4>
 
             <Switch
               checked={paywalled}
@@ -92,4 +83,4 @@ const ToggleCircle: React.FC<ToggleCircleProps> = ({
   )
 }
 
-export default ToggleCircle
+export default ToggleAccess

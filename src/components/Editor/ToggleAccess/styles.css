@@ -6,12 +6,6 @@
     font-weight: var(--font-weight-medium);
     line-height: 1;
   }
-
-  & p {
-    margin-top: var(--spacing-xx-tight);
-    font-size: var(--font-size-sm-s);
-    color: var(--color-grey-darker);
-  }
 }
 
 .widget {

@@ -59,7 +59,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
     article.access.type
   )
 
-  // fetch and refetch latest metadata
+  // fetch latest metadata
   const { data, loading, error } = useQuery<EditModeArticle>(
     EDIT_MODE_ARTICLE,
     {
@@ -68,19 +68,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
     }
   )
 
-  // Cover
-  const assets = data?.article?.assets || []
-  const refetchAssets = useImperativeQuery<EditModeArticleAssets>(
-    EDIT_MODE_ARTICLE_ASSETS,
-    {
-      variables: { mediaHash: article.mediaHash },
-      fetchPolicy: 'network-only',
-    }
-  )
-
-  // Circle
-  // Note: the author can only have one circle now
-  const isPrevAttachedCircle = !!article.access.circle
+  // access
   const isPrevPublic = article.access.type === ArticleAccessType.public
   const ownCircles = data?.article?.author.ownCircles
   const hasCircles = ownCircles && ownCircles.length >= 1
@@ -94,6 +82,16 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
       paywalled ? ArticleAccessType.paywall : ArticleAccessType.public
     )
   }
+
+  // cover
+  const assets = data?.article?.assets || []
+  const refetchAssets = useImperativeQuery<EditModeArticleAssets>(
+    EDIT_MODE_ARTICLE_ASSETS,
+    {
+      variables: { mediaHash: article.mediaHash },
+      fetchPolicy: 'network-only',
+    }
+  )
 
   // update cover & collection from retrieved data
   useEffect(() => {
@@ -177,7 +175,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
               circle={circle}
               accessType={accessType}
               editAccess={editAccess}
-              canToggleCircle={!isPrevAttachedCircle}
+              canToggleCircle={isPrevPublic}
               canTogglePaywall={isPrevPublic}
               saving={false}
             />
@@ -198,6 +196,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
             tags={tags}
             collection={collection}
             circle={circle}
+            accessType={accessType}
             count={count}
             isSameHash={isSameHash}
             onSaved={onSaved}
@@ -243,7 +242,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
           circle={circle}
           accessType={accessType}
           editAccess={hasCircles ? editAccess : undefined}
-          canToggleCircle={!isPrevAttachedCircle}
+          canToggleCircle={isPrevPublic}
           canTogglePaywall={isPrevPublic}
         />
       )}

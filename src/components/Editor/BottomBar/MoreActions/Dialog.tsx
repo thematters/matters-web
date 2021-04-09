@@ -2,11 +2,11 @@ import _get from 'lodash/get'
 
 import { Dialog, useDialogSwitch } from '~/components'
 
-import ToggleCircle, { ToggleCircleProps } from '../../ToggleCircle'
+import ToggleAccess, { ToggleAccessProps } from '../../ToggleAccess'
 
 type MoreActionDialogProps = {
   children: ({ open }: { open: () => void }) => React.ReactNode
-} & ToggleCircleProps
+} & ToggleAccessProps
 
 const BaseMoreActionDialog = ({
   children,
@@ -22,7 +22,7 @@ const BaseMoreActionDialog = ({
         <Dialog.Header title="articleManagement" close={close} />
 
         <Dialog.Content spacing={['base', 'base']}>
-          <ToggleCircle {...props} />
+          <ToggleAccess {...props} />
         </Dialog.Content>
       </Dialog>
     </>

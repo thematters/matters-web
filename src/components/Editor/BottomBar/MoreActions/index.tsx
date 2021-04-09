@@ -2,10 +2,10 @@ import { Button, IconCircle24, TextIcon, Translate } from '~/components'
 
 import { TEXT } from '~/common/enums'
 
-import { ToggleCircleProps } from '../../ToggleCircle'
+import { ToggleAccessProps } from '../../ToggleAccess'
 import { MoreActionDialog } from './Dialog'
 
-type MoreActionProps = ToggleCircleProps
+type MoreActionProps = ToggleAccessProps
 
 const MoreAction: React.FC<MoreActionProps> = (props) => (
   <MoreActionDialog {...props}>

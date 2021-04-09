@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import { UserDigest } from '~/components/UserDigest'
 
 import Content from './Content'
-import FingerprintButton from './FingerprintButton'
+import MetaInfo from './MetaInfo'
 import RelatedArticles from './RelatedArticles'
 import State from './State'
 import SupportWidget from './SupportWidget'
@@ -45,22 +45,22 @@ export const ARTICLE_DETAIL_PUBLIC = gql`
           ...CircleWallCirclePrivate
         }
       }
+      ...MetaInfoArticle
       ...ContentArticle
       ...TagListArticle
       ...RelatedArticles
       ...StateArticle
-      ...FingerprintArticle
       ...ToolbarArticlePublic
       ...ToolbarArticlePrivate
       ...SupportWidgetArticlePublic
       ...SupportWidgetArticlePrivate
     }
   }
+  ${MetaInfo.fragments.article}
   ${Content.fragments.article}
   ${TagList.fragments.article}
   ${RelatedArticles.fragments.article}
   ${State.fragments.article}
-  ${FingerprintButton.fragments.article}
   ${UserDigest.Rich.fragments.user.public}
   ${UserDigest.Rich.fragments.user.private}
   ${Toolbar.fragments.article.public}
