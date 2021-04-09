@@ -31,16 +31,21 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
   return (
     <section className="container">
       <section className="switch">
-        <h4>
-          <Translate zh_hant="加入圍爐" zh_hans="加入围炉" en="Add to Circle" />
-        </h4>
+        <header>
+          <h4>
+            <Translate
+              zh_hant="加入圍爐"
+              zh_hans="加入围炉"
+              en="Add to Circle"
+            />
+          </h4>
 
-        <Switch
-          checked={!!circle}
-          onChange={() => editAccess && editAccess(!circle, false)}
-          loading={saving}
-          disabled={!canToggleCircle}
-        />
+          <Switch
+            checked={!!circle}
+            onChange={() => editAccess && editAccess(!circle, false)}
+            disabled={!canToggleCircle}
+          />
+        </header>
       </section>
 
       {circle && (
@@ -58,22 +63,25 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
           </section>
 
           <section className="switch">
-            <h4>
-              <Translate zh_hant="上鎖" zh_hans="上锁" en="Paywalled" />
-            </h4>
+            <header>
+              <h4>
+                <Translate zh_hant="上鎖" zh_hans="上锁" en="Paywalled" />
+              </h4>
 
-            <Switch
-              checked={paywalled}
-              onChange={() => {
-                if (!editAccess) {
-                  return
-                }
+              <Switch
+                checked={paywalled}
+                onChange={() => editAccess && editAccess(true, !paywalled)}
+                disabled={!canTogglePaywall}
+              />
+            </header>
 
-                editAccess(true, !paywalled)
-              }}
-              loading={saving}
-              disabled={!canTogglePaywall}
-            />
+            <p className="description">
+              <Translate
+                zh_hant="前 24 小時限免，上鎖後無法轉公開"
+                zh_hans="前 24 小时限免，上锁后无法转公开"
+                en="Limited free for 24 hours, can't be undone"
+              />
+            </p>
           </section>
         </section>
       )}
