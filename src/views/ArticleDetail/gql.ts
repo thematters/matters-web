@@ -45,6 +45,11 @@ export const ARTICLE_DETAIL_PUBLIC = gql`
           ...CircleWallCirclePrivate
         }
       }
+      drafts {
+        id
+        mediaHash
+        publishState
+      }
       ...MetaInfoArticle
       ...ContentArticle
       ...TagListArticle

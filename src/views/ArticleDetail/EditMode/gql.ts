@@ -28,6 +28,7 @@ export const EDIT_MODE_ARTICLE = gql`
         type
       }
       drafts {
+        id
         mediaHash
         publishState
         ...EditorDraft
