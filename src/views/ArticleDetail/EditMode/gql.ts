@@ -24,6 +24,9 @@ export const EDIT_MODE_ARTICLE = gql`
           ...DigestRichCirclePublic
         }
       }
+      access {
+        type
+      }
       drafts {
         mediaHash
         publishState

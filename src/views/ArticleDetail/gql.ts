@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import { UserDigest } from '~/components/UserDigest'
 
 import Content from './Content'
-import FingerprintButton from './FingerprintButton'
+import MetaInfo from './MetaInfo'
 import RelatedArticles from './RelatedArticles'
 import State from './State'
 import SupportWidget from './SupportWidget'
@@ -28,7 +28,6 @@ export const ARTICLE_DETAIL_PUBLIC = gql`
       createdAt
       revisedAt
       language
-      limitedFree
       author {
         id
         paymentPointer
@@ -38,27 +37,30 @@ export const ARTICLE_DETAIL_PUBLIC = gql`
       collection(input: { first: 0 }) @connection(key: "articleCollection") {
         totalCount
       }
-      circle {
-        id
-        ...CircleWallCirclePublic
-        ...CircleWallCirclePrivate
+      access {
+        type
+        circle {
+          id
+          ...CircleWallCirclePublic
+          ...CircleWallCirclePrivate
+        }
       }
+      ...MetaInfoArticle
       ...ContentArticle
       ...TagListArticle
       ...RelatedArticles
       ...StateArticle
-      ...FingerprintArticle
       ...ToolbarArticlePublic
       ...ToolbarArticlePrivate
       ...SupportWidgetArticlePublic
       ...SupportWidgetArticlePrivate
     }
   }
+  ${MetaInfo.fragments.article}
   ${Content.fragments.article}
   ${TagList.fragments.article}
   ${RelatedArticles.fragments.article}
   ${State.fragments.article}
-  ${FingerprintButton.fragments.article}
   ${UserDigest.Rich.fragments.user.public}
   ${UserDigest.Rich.fragments.user.private}
   ${Toolbar.fragments.article.public}
@@ -81,9 +83,11 @@ export const ARTICLE_DETAIL_PRIVATE = gql`
         id
         ...UserDigestRichUserPrivate
       }
-      circle {
-        id
-        ...CircleWallCirclePrivate
+      access {
+        circle {
+          id
+          ...CircleWallCirclePrivate
+        }
       }
       ...ToolbarArticlePrivate
       ...SupportWidgetArticlePrivate

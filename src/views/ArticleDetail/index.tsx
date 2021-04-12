@@ -1,5 +1,4 @@
 import { useLazyQuery, useQuery } from '@apollo/react-hooks'
-import classNames from 'classnames'
 import jump from 'jump.js'
 import dynamic from 'next/dynamic'
 import Router from 'next/router'
@@ -8,7 +7,6 @@ import { Waypoint } from 'react-waypoint'
 
 import {
   BackToHomeButton,
-  DateTime,
   EmptyLayout,
   Error,
   Head,
@@ -36,22 +34,22 @@ import { toPath } from '~/common/utils'
 import Collection from './Collection'
 import Content from './Content'
 import CustomizedSummary from './CustomizedSummary'
-import FingerprintButton from './FingerprintButton'
 import {
   ARTICLE_DETAIL_PRIVATE,
   ARTICLE_DETAIL_PUBLIC,
   ARTICLE_TRANSLATION,
 } from './gql'
+import MetaInfo from './MetaInfo'
 import RelatedArticles from './RelatedArticles'
 import State from './State'
 import styles from './styles.css'
 import SupportWidget from './SupportWidget'
 import TagList from './TagList'
 import Toolbar from './Toolbar'
-import TranslationButton from './TranslationButton'
 import CircleWall from './Wall/Circle'
 import VisitorWall from './Wall/Visitor'
 
+import { ArticleAccessType } from '@/__generated__/globalTypes'
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import { ArticleDetailPublic } from './__generated__/ArticleDetailPublic'
 import { ArticleTranslation } from './__generated__/ArticleTranslation'
@@ -78,7 +76,6 @@ const ArticleDetail = () => {
   // UI
   const features = useFeatures()
   const isLargeUp = useResponsive('lg-up')
-  const isSmallUp = useResponsive('sm-up')
   const [fixedWall, setFixedWall] = useState(false)
 
   // wall
@@ -105,12 +102,12 @@ const ArticleDetail = () => {
   const paymentPointer = article?.author?.paymentPointer || undefined
   const collectionCount = article?.collection?.totalCount || 0
   const isAuthor = viewer.id === authorId
-  const circle = article?.circle
+  const circle = article?.access.circle
   const canReadFullContent = !!(
     isAuthor ||
     !circle ||
     circle.isMember ||
-    article?.limitedFree
+    article?.access.type === ArticleAccessType.limitedFree
   )
   const summary = article?.summary
 
@@ -142,29 +139,24 @@ const ArticleDetail = () => {
   }, [article?.mediaHash, viewer.id])
 
   // translation
-  const [translate, setTranslate] = useState(false)
+  const [translated, setTranslate] = useState(false)
   const language = article?.language
-
   const { lang: viewerLanguage } = useContext(LanguageContext)
-
-  const shouldTranslate = language && language !== viewerLanguage
-
+  const shouldTranslate = !!(language && language !== viewerLanguage)
   const [
     getTranslation,
     { data: translationData, loading: translating },
   ] = useLazyQuery<ArticleTranslation>(ARTICLE_TRANSLATION)
   const titleTranslation = translationData?.article?.translation?.title
   const contentTranslation = translationData?.article?.translation?.content
-  const onTranslate = (newTranslate: boolean) => {
-    setTranslate(newTranslate)
+  const toggleTranslate = () => {
+    setTranslate(!translated)
 
-    if (!newTranslate) {
+    if (!translated) {
       return
     }
 
-    getTranslation({
-      variables: { mediaHash, language: viewerLanguage },
-    })
+    getTranslation({ variables: { mediaHash, language: viewerLanguage } })
 
     window.dispatchEvent(
       new CustomEvent(ADD_TOAST, {
@@ -174,7 +166,7 @@ const ArticleDetail = () => {
             <Translate
               zh_hant="正在翻譯為繁體中文"
               zh_hans="正在翻译为简体中文"
-              en="translating to English"
+              en="Translating to English"
             />
           ),
         },
@@ -296,11 +288,6 @@ const ArticleDetail = () => {
   /**
    * Render
    */
-  const infoClasses = classNames({
-    info: true,
-    split: !!article.revisedAt && !isSmallUp,
-  })
-
   return (
     <Layout.Main aside={<RelatedArticles article={article} inSidebar />}>
       <Layout.Header
@@ -332,7 +319,9 @@ const ArticleDetail = () => {
 
           <section className="title">
             <Title type="article">
-              {translate && titleTranslation ? titleTranslation : article.title}
+              {translated && titleTranslation
+                ? titleTranslation
+                : article.title}
             </Title>
 
             <Waypoint
@@ -344,50 +333,13 @@ const ArticleDetail = () => {
               }}
             />
 
-            <section className={infoClasses}>
-              <section className="left">
-                <section className="timeline">
-                  <section className="time">
-                    <span>
-                      <Translate
-                        zh_hant="發布於"
-                        zh_hans="發布於"
-                        en="Published at"
-                      />
-                    </span>
-                    <DateTime date={article.createdAt} color="grey" />
-                  </section>
-
-                  {article.revisedAt && (
-                    <section className="time">
-                      <span>
-                        <Translate
-                          zh_hant="修訂於"
-                          zh_hans="修訂於"
-                          en="Revised at"
-                        />
-                      </span>
-                      <DateTime date={article.revisedAt} color="grey" />
-                    </section>
-                  )}
-                </section>
-
-                {canReadFullContent && (
-                  <section className="features">
-                    <FingerprintButton article={article} />
-
-                    {shouldTranslate && (
-                      <TranslationButton
-                        translate={translate}
-                        setTranslate={onTranslate}
-                      />
-                    )}
-                  </section>
-                )}
-              </section>
-
-              <section className="right" />
-            </section>
+            <MetaInfo
+              article={article}
+              translated={translated}
+              shouldTranslate={shouldTranslate}
+              toggleTranslate={toggleTranslate}
+              canReadFullContent={canReadFullContent}
+            />
           </section>
 
           {article?.summaryCustomized && (
@@ -396,7 +348,7 @@ const ArticleDetail = () => {
 
           <Content
             article={article}
-            translation={translate ? contentTranslation : null}
+            translation={translated ? contentTranslation : null}
             translating={translating}
           />
           {circle && !canReadFullContent && <CircleWall circle={circle} />}
@@ -427,13 +379,15 @@ const ArticleDetail = () => {
 
         {shouldShowWall && (
           <>
-            <section id="comments" />
+            <span id="comments" />
             <VisitorWall show={fixedWall} />
           </>
         )}
       </PullToRefresh>
 
-      {article.circle && <SubscribeCircleDialog circle={article.circle} />}
+      {article.access.circle && (
+        <SubscribeCircleDialog circle={article.access.circle} />
+      )}
 
       <style jsx>{styles}</style>
     </Layout.Main>

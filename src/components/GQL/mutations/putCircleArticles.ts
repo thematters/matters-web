@@ -5,8 +5,16 @@ export default gql`
     $id: ID!
     $articles: [ID!]
     $type: PutCircleArticlesType!
+    $accessType: ArticleAccessType!
   ) {
-    putCircleArticles(input: { id: $id, articles: $articles, type: $type }) {
+    putCircleArticles(
+      input: {
+        id: $id
+        articles: $articles
+        type: $type
+        accessType: $accessType
+      }
+    ) {
       id
     }
   }

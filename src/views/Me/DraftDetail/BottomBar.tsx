@@ -1,10 +1,10 @@
-import { toDigestTagPlaceholder, useFeatures } from '~/components'
+import { toDigestTagPlaceholder } from '~/components'
 import BottomBar from '~/components/Editor/BottomBar'
 
 import { ENTITY_TYPE } from '~/common/enums'
 
 import {
-  useEditDraftCircle,
+  useEditDraftAccess,
   useEditDraftCollection,
   useEditDraftCover,
   useEditDraftTags,
@@ -19,7 +19,6 @@ interface BottomBarProps {
 }
 
 const EditDraftBottomBar = ({ draft, ownCircles }: BottomBarProps) => {
-  const features = useFeatures()
   const {
     edit: editCollection,
     saving: collectionSaving,
@@ -28,8 +27,9 @@ const EditDraftBottomBar = ({ draft, ownCircles }: BottomBarProps) => {
     draft
   )
   const { edit: editTags, saving: tagsSaving } = useEditDraftTags(draft)
-  const { toggle: toggleCircle, saving: circleSaving } = useEditDraftCircle(
-    draft
+  const { edit: editAccess, saving: accessSaving } = useEditDraftAccess(
+    draft,
+    ownCircles && ownCircles[0]
   )
   const tags = (draft.tags || []).map(toDigestTagPlaceholder)
   const isPending = draft.publishState === 'pending'
@@ -37,7 +37,7 @@ const EditDraftBottomBar = ({ draft, ownCircles }: BottomBarProps) => {
 
   return (
     <BottomBar
-      saving={collectionSaving || coverSaving || tagsSaving || circleSaving}
+      saving={collectionSaving || coverSaving || tagsSaving || accessSaving}
       disabled={isPending || isPublished}
       // cover
       cover={draft.cover}
@@ -53,13 +53,11 @@ const EditDraftBottomBar = ({ draft, ownCircles }: BottomBarProps) => {
       collection={draft?.collection?.edges?.map(({ node }) => node) || []}
       editCollection={editCollection}
       // circle
-      circle={draft?.circle}
-      toggleCircle={
-        ownCircles && features.circle_management
-          ? () => toggleCircle(ownCircles[0])
-          : undefined
-      }
+      circle={draft?.access.circle}
+      accessType={draft.access.type}
+      editAccess={editAccess}
       canToggleCircle
+      canTogglePaywall
     />
   )
 }

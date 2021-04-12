@@ -12,69 +12,10 @@
   margin-bottom: var(--spacing-base);
 }
 
-.info {
-  @mixin flex-center-space-between;
-
-  padding-top: var(--spacing-x-tight);
-
-  & .right {
-    @mixin inline-flex-center-all;
-
-    & :global(> * + *) {
-      margin-left: var(--spacing-base);
-    }
-  }
-
-  & .left {
-    @mixin inline-flex-center-start;
-
-    & .timeline,
-    & .features {
-      @mixin inline-flex-center-start;
-
-      & :global(> * + *) {
-        margin-left: var(--spacing-base);
-      }
-    }
-
-    & .features {
-      margin-left: var(--spacing-base);
-    }
-  }
-}
-
-.split {
-  & .right {
-    flex-grow: 0;
-  }
-
-  & .left {
-    flex-direction: column;
-    flex-grow: 1;
-    align-items: flex-start;
-
-    & .features {
-      margin: var(--spacing-x-tight) 0;
-    }
-  }
-}
-
 .block {
   @mixin border-top-grey;
 
   padding: var(--spacing-loose) var(--spacing-base) 0;
   margin: var(--spacing-loose) calc(var(--spacing-base) * -1)
     var(--spacing-base);
-}
-
-.time {
-  flex-shrink: 0;
-  font-size: var(--font-size-timestamp);
-  font-weight: var(--font-weight-timestamp);
-  line-height: var(--line-height-timestamp);
-
-  & span {
-    margin-right: var(--spacing-xx-tight);
-    color: var(--color-grey);
-  }
 }

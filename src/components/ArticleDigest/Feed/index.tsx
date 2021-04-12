@@ -12,10 +12,10 @@ import { stripHtml, toPath } from '~/common/utils'
 
 import FooterActions, { FooterActionsControls } from '../FooterActions'
 import { ArticleDigestTitle } from '../Title'
+import AccessLabel from './AccessLabel'
 import CreatedAt from './CreatedAt'
 import { fragments } from './gql'
 import InactiveState from './InactiveState'
-import LimitedFree from './LimitedFree'
 import styles from './styles.css'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
@@ -62,7 +62,12 @@ const BaseArticleDigestFeed = ({
   const isCompactMode = viewMode === 'compact'
   const isDefaultMode = viewMode === 'default'
 
-  const { author, summary, sticky, circle } = article
+  const {
+    author,
+    summary,
+    sticky,
+    access: { circle },
+  } = article
   const isBanned = article.articleState === 'banned'
   const cover = !isBanned ? article.cover : null
   const cleanedSummary = isBanned ? '' : stripHtml(summary)
@@ -96,7 +101,7 @@ const BaseArticleDigestFeed = ({
             <section className="extraHeader">
               <CircleDigest.Plain circle={circle} onClick={onClickCircle} />
 
-              <LimitedFree article={article} />
+              <AccessLabel article={article} />
             </section>
           ))}
 
@@ -116,7 +121,7 @@ const BaseArticleDigestFeed = ({
           </section>
 
           <section className="right">
-            {!hasCircle && <LimitedFree article={article} />}
+            {!hasCircle && <AccessLabel article={article} />}
 
             {controls.inUserArticles && sticky && (
               <TextIcon icon={<IconPin24 />} size="sm" color="grey" weight="md">

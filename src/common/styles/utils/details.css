@@ -3,36 +3,18 @@
 .u-details {
   & summary {
     position: relative;
-    display: block;
-    padding-left: var(--spacing-loose);
     cursor: pointer;
     user-select: none;
-
-    &::-webkit-details-marker {
-      position: absolute;
-      top: 0.45rem;
-      left: 0;
-      display: inline-block;
-      width: 0.6rem;
-      height: 0.6rem;
-    }
 
     &:focus {
       outline: 0;
     }
-  }
 
-  & details {
-    padding-left: var(--spacing-loose);
-
-    & summary {
-      padding-left: var(--spacing-base);
-
-      &::-webkit-details-marker {
-        top: 0.4rem;
-        width: 0.5rem;
-        height: 0.5rem;
-      }
+    & h1,
+    & h2,
+    & h3,
+    & h4 {
+      display: inline-block;
     }
   }
 }
