@@ -3,8 +3,8 @@ import gql from 'graphql-tag'
 import { UserDigest } from '~/components/UserDigest'
 
 export default gql`
-  query SearchUsers($search: String!) {
-    search(input: { key: $search, type: User, first: 5 }) {
+  query SearchUsers($search: String!, $exclude: SearchExclude) {
+    search(input: { key: $search, type: User, first: 5, exclude: $exclude }) {
       edges {
         node {
           ... on User {
