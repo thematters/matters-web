@@ -42,7 +42,7 @@ const Editor = dynamic(() => import('~/components/Editor/Article'), {
   loading: Spinner,
 })
 
-const MAX_REVISION_COUNT = 3
+const MAX_REVISION_COUNT = 2
 
 const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
   const isLargeUp = useResponsive('lg-up')
