@@ -128,11 +128,11 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
     )
   }
 
-  const drafts = data?.article?.drafts || []
-  const draft = drafts[0]
-  const count = 3 - (drafts.length || 0)
-  const isSameHash = draft.mediaHash === article.mediaHash
-  const isPending = draft.publishState === 'pending'
+  const drafts = data?.article?.drafts
+  const draft = drafts && drafts[0]
+  const count = 3 - (drafts?.length || 0)
+  const isSameHash = draft?.mediaHash === article.mediaHash
+  const isPending = draft?.publishState === 'pending'
   const isEditDisabled = !isSameHash || isPending
   const isReviseDisabled = isEditDisabled || count <= 0
 
