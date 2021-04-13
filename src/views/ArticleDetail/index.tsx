@@ -69,7 +69,7 @@ const DynamicEditMode = dynamic(() => import('./EditMode'), {
 })
 
 const ArticleDetail = () => {
-  const { getQuery } = useRoute()
+  const { getQuery, router } = useRoute()
   const mediaHash = getQuery('mediaHash')
   const viewer = useContext(ViewerContext)
 
@@ -137,6 +137,33 @@ const ArticleDetail = () => {
   useEffect(() => {
     loadPrivate()
   }, [article?.mediaHash, viewer.id])
+
+  // redirect to latest published article
+  const latestArticle = article?.drafts?.filter(
+    (d) => d.publishState === 'published'
+  )[0]
+  const latestHash = latestArticle?.mediaHash
+  useEffect(() => {
+    if (!article || !latestHash) {
+      return
+    }
+
+    const isSameHash = latestHash === mediaHash
+
+    if (isSameHash) {
+      return
+    }
+
+    const newPath = toPath({
+      page: 'articleDetail',
+      article: {
+        ...article,
+        mediaHash: latestHash,
+      },
+    })
+
+    router.push(newPath.href, undefined, { shallow: true })
+  }, [latestHash])
 
   // translation
   const [translated, setTranslate] = useState(false)
