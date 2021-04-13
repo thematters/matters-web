@@ -17,7 +17,7 @@ import SetCoverDialog, { BaseSetCoverDialogProps } from '../SetCoverDialog'
 import MoreActions from './MoreActions'
 import styles from './styles.css'
 
-import { ArticleAccessType } from '@/__generated__/globalTypes'
+import { ArticleAccessType, SearchExclude } from '@/__generated__/globalTypes'
 import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
 import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
 import { Asset } from '~/components/GQL/fragments/__generated__/Asset'
@@ -121,6 +121,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
               title="extendArticle"
               hint="hintEditCollection"
               searchType="Article"
+              searchExclude={SearchExclude.blocked}
               onSave={(nodes: SearchSelectNode[]) =>
                 editCollection(nodes as ArticleDigestDropdownArticle[])
               }

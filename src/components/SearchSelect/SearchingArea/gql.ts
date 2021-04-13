@@ -9,6 +9,7 @@ export const SELECT_SEARCH = gql`
     $filter: SearchFilter
     $after: String
     $first: Int
+    $exclude: SearchExclude
   ) {
     search(
       input: {
@@ -17,6 +18,7 @@ export const SELECT_SEARCH = gql`
         filter: $filter
         after: $after
         first: $first
+        exclude: $exclude
       }
     ) {
       pageInfo {
