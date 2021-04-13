@@ -97,6 +97,7 @@ export const SET_CONTENT = gql`
         ...Asset
       }
       summary
+      summaryCustomized
     }
   }
   ${assetFragment}

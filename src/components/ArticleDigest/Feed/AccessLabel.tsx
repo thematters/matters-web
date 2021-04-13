@@ -1,6 +1,11 @@
 import gql from 'graphql-tag'
 
-import { IconPaywall16, TextIcon, Translate } from '~/components'
+import {
+  IconLimitedFree16,
+  IconPaywall16,
+  TextIcon,
+  Translate,
+} from '~/components'
 
 import Label from './Label'
 
@@ -33,7 +38,16 @@ const AccessLabel = ({ article }: AccessLabelProps) => {
 
   return (
     <Label>
-      <TextIcon icon={<IconPaywall16 size="sm" />} size="xs">
+      <TextIcon
+        icon={
+          isLimitedFree ? (
+            <IconLimitedFree16 size="sm" />
+          ) : (
+            <IconPaywall16 size="sm" />
+          )
+        }
+        size="xs"
+      >
         {isLimitedFree && (
           <Translate zh_hant="限免" zh_hans="限免" en="Limited Free" />
         )}
