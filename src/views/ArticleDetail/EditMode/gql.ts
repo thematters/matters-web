@@ -27,6 +27,7 @@ export const EDIT_MODE_ARTICLE = gql`
       access {
         type
       }
+      revisionCount
       drafts {
         id
         mediaHash

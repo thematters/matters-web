@@ -7,6 +7,7 @@ import {
 import Box from '../Box'
 import styles from './styles.css'
 
+import { SearchExclude } from '@/__generated__/globalTypes'
 import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
 
 export interface SidebarCollectionProps {
@@ -27,6 +28,7 @@ const SidebarCollection = ({
       title="extendArticle"
       hint="hintEditCollection"
       searchType="Article"
+      searchExclude={SearchExclude.blocked}
       onSave={(nodes: SearchSelectNode[]) =>
         onEdit(nodes as ArticleDigestDropdownArticle[])
       }

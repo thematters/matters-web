@@ -2,13 +2,14 @@ import { useState } from 'react'
 
 import { Dialog, Translate } from '~/components'
 import SearchingArea, {
-  SearchFilter,
   SearchType,
   SelectNode,
 } from '~/components/SearchSelect/SearchingArea'
 import StagingArea, { StagingNode } from '~/components/SearchSelect/StagingArea'
 
 import { TextId } from '~/common/enums'
+
+import { SearchExclude, SearchFilter } from '@/__generated__/globalTypes'
 
 /**
  * <SearchSelectDialog> is a dialog component for
@@ -39,6 +40,7 @@ interface SearchSelectDialogProps {
 
   searchType: SearchType
   searchFilter?: SearchFilter
+  searchExclude?: SearchExclude
 
   draggable?: boolean
 
@@ -58,6 +60,7 @@ const BaseSearchSelectDialog = ({
 
   searchType,
   searchFilter,
+  searchExclude,
 
   draggable,
 
@@ -127,6 +130,7 @@ const BaseSearchSelectDialog = ({
           inSearchingArea={inSearchingArea}
           searchType={searchType}
           searchFilter={searchFilter}
+          searchExclude={searchExclude}
           toStagingArea={toStagingArea}
           toSearchingArea={toSearchingArea}
           addNodeToStaging={addNodeToStaging}

@@ -132,7 +132,10 @@ const EditModeHeader = ({
           tags: tags.map((tag) => tag.content),
           collection: collection.map(({ id: articleId }) => articleId),
           circle: circle ? circle.id : null,
-          accessType,
+          accessType:
+            accessType === ArticleAccessType.limitedFree
+              ? ArticleAccessType.paywall
+              : accessType,
           ...(isRevised ? { content } : {}),
           first: null,
         },
