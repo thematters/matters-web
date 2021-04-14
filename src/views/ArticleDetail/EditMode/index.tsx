@@ -42,6 +42,8 @@ const Editor = dynamic(() => import('~/components/Editor/Article'), {
   loading: Spinner,
 })
 
+const MAX_REVISION_COUNT = 2
+
 const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
   const isLargeUp = useResponsive('lg-up')
 
@@ -130,7 +132,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
 
   const drafts = data?.article?.drafts
   const draft = drafts && drafts[0]
-  const count = 3 - (drafts?.length || 0)
+  const count = MAX_REVISION_COUNT - (data?.article?.revisionCount || 0)
   const isSameHash = draft?.mediaHash === article.mediaHash
   const isPending = draft?.publishState === 'pending'
   const isEditDisabled = !isSameHash || isPending
