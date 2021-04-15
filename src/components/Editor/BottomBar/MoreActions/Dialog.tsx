@@ -1,6 +1,6 @@
 import _get from 'lodash/get'
 
-import { Dialog, useDialogSwitch } from '~/components'
+import { Dialog, Translate, useDialogSwitch } from '~/components'
 
 import ToggleAccess, { ToggleAccessProps } from '../../ToggleAccess'
 
@@ -19,7 +19,17 @@ const BaseMoreActionDialog = ({
       {children({ open })}
 
       <Dialog isOpen={show} onDismiss={close} fixedHeight>
-        <Dialog.Header title="articleManagement" close={close} />
+        <Dialog.Header
+          title="articleManagement"
+          close={close}
+          leftButton={<span />}
+          rightButton={
+            <Dialog.Header.RightButton
+              onClick={close}
+              text={<Translate id="done" />}
+            />
+          }
+        />
 
         <Dialog.Content spacing={['base', 'base']}>
           <ToggleAccess {...props} />
