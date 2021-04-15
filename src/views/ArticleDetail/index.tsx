@@ -401,6 +401,7 @@ const ArticleDetail = () => {
           article={article}
           privateFetched={privateFetched}
           hasFingerprint={canReadFullContent}
+          hasExtend={!article.author?.isBlocking}
           lock={!canReadFullContent}
         />
 
