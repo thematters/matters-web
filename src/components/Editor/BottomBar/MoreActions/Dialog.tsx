@@ -22,10 +22,11 @@ const BaseMoreActionDialog = ({
         <Dialog.Header
           title="articleManagement"
           close={close}
+          leftButton={<span />}
           rightButton={
             <Dialog.Header.RightButton
               onClick={close}
-              text={<Translate id="save" />}
+              text={<Translate id="done" />}
             />
           }
         />
