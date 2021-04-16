@@ -6,6 +6,8 @@ import Copy from './Copy'
 import styles from './styles.css'
 
 export interface ShareDialogContentProps {
+  close: () => void
+
   shareTitle: string
   shareLink: string
 
@@ -15,6 +17,8 @@ export interface ShareDialogContentProps {
 }
 
 const ShareDialogContent: React.FC<ShareDialogContentProps> = ({
+  close,
+
   shareTitle,
   shareLink,
 
