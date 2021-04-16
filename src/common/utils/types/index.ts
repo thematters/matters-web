@@ -30,9 +30,6 @@ export default gql`
     "Feed type in follow page"
     followFeedType: FollowFeedType
 
-    "View Mode for entity's card UI"
-    viewMode: ViewMode
-
     "Whether civic liker dialog is hidden"
     readCivicLikerDialog: Boolean!
 
@@ -89,11 +86,5 @@ export default gql`
     comment
     tag
     donation
-  }
-
-  enum ViewMode {
-    default
-    comfortable
-    compact
   }
 `

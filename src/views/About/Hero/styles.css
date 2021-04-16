@@ -88,7 +88,7 @@
 .reports {
   position: relative;
   display: grid;
-  grid-template-columns: 1fr var(--layout-width) 1fr;
+  grid-template-columns: minmax(0, 1fr) var(--layout-width) minmax(0, 1fr);
   padding: 5rem var(--spacing-base) 0;
   overflow: hidden;
 
@@ -149,7 +149,10 @@
   }
 
   @media (--sm-up) {
-    grid-template-columns: 1fr var(--layout-width-sm-up) 1fr;
+    grid-template-columns: minmax(0, 1fr) var(--layout-width-sm-up) minmax(
+        0,
+        1fr
+      );
     padding: 10rem 0 0;
 
     & ul {
@@ -171,12 +174,18 @@
   }
 
   @media (--md-up) {
-    grid-template-columns: 1fr var(--layout-width-md-up) 1fr;
+    grid-template-columns: minmax(0, 1fr) var(--layout-width-md-up) minmax(
+        0,
+        1fr
+      );
     padding-top: 17rem;
   }
 
   @media (--lg-up) {
-    grid-template-columns: 1fr var(--layout-width-lg-up) 1fr;
+    grid-template-columns: minmax(0, 1fr) var(--layout-width-lg-up) minmax(
+        0,
+        1fr
+      );
   }
 }
 

@@ -1,10 +1,4 @@
-import {
-  Button,
-  IconPen16,
-  TextIcon,
-  Translate,
-  useFeatures,
-} from '~/components'
+import { Button, IconPen16, TextIcon, Translate } from '~/components'
 
 import AddCircleArticleDialog from './Dialog'
 
@@ -13,12 +7,6 @@ interface AddArticlesButtonProps {
 }
 
 const AddArticlesButton = ({ circle }: AddArticlesButtonProps) => {
-  const features = useFeatures()
-
-  if (!features.circle_management) {
-    return null
-  }
-
   return (
     <AddCircleArticleDialog circle={circle}>
       {({ open: openAddCircleArticlesDialog }) => (

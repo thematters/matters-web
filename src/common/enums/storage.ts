@@ -1,7 +1,5 @@
 export const STORAGE_KEY_PUSH = '__PUSH'
 
-export const STORAGE_KEY_VIEW_MODE = '__VIEW_MODE'
-
 export const STORAGE_KEY_AGENT_HASH = '__AGENT_HASH'
 
 export const STORAGE_KEY_AUTH_TOKEN = '__TOKEN'

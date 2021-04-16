@@ -57,7 +57,6 @@ interface FeedLocation {
 
 interface MainFeedProps {
   feedSortType: SortByType
-  viewMode: string | null
 }
 
 const horizontalFeeds: FeedLocation = {
@@ -65,7 +64,7 @@ const horizontalFeeds: FeedLocation = {
   5: () => <Authors />,
 }
 
-const MainFeed = ({ feedSortType: sortBy, viewMode }: MainFeedProps) => {
+const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
   const viewer = useContext(ViewerContext)
   const isLargeUp = useResponsive('lg-up')
   const isHottestFeed = sortBy === 'hottest'
@@ -215,12 +214,7 @@ const MainFeed = ({ feedSortType: sortBy, viewMode }: MainFeedProps) => {
                 onClick={() =>
                   analytics.trackEvent('click_feed', {
                     type: sortBy,
-                    styleType:
-                      viewMode === 'default'
-                        ? 'small_cover'
-                        : viewMode === 'compact'
-                        ? 'no_cover'
-                        : 'large_cover',
+                    styleType: 'small_cover',
                     contentType: 'article',
                     location: i,
                   })
@@ -254,7 +248,6 @@ const HomeFeed = () => {
   const { data, client } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
     variables: { id: 'local' },
   })
-  const { viewMode } = data?.clientPreference || { viewMode: 'default' }
   const { feedSortType } = data?.clientPreference || {
     feedSortType: 'hottest',
   }
@@ -271,7 +264,7 @@ const HomeFeed = () => {
     <>
       <SortBy sortBy={feedSortType as SortByType} setSortBy={setSortBy} />
 
-      <MainFeed feedSortType={feedSortType as SortByType} viewMode={viewMode} />
+      <MainFeed feedSortType={feedSortType as SortByType} />
     </>
   )
 }

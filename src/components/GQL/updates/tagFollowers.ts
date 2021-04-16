@@ -43,6 +43,10 @@ const update = ({
             civicLiker: viewer.liker.civicLiker,
             __typename: 'Liker',
           },
+          info: {
+            badges: viewer.info.badges,
+            __typename: 'UserInfo',
+          },
           __typename: 'User',
         },
         __typename: 'UserEdge',

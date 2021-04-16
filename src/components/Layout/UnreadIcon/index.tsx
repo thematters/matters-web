@@ -1,7 +1,9 @@
 import Follow from './Follow'
 import Notification from './Notification'
 
-export default {
+const UnreadIcon = {
   Notification,
   Follow,
 }
+
+export default UnreadIcon

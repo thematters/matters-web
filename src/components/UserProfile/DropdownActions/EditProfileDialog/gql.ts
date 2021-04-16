@@ -9,6 +9,9 @@ export const fragments = {
       info {
         profileCover
         description
+        badges {
+          type
+        }
       }
       liker {
         civicLiker

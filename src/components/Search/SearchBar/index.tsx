@@ -13,7 +13,7 @@ import {
 } from '~/components'
 
 import { INPUT_DEBOUNCE, TEXT, Z_INDEX } from '~/common/enums'
-import { routerPush, toPath, translate } from '~/common/utils'
+import { toPath, translate } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -36,7 +36,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   onChange,
   hasDropdown = true,
 }) => {
-  const { getQuery } = useRoute()
+  const { getQuery, router } = useRoute()
   const q = getQuery('q')
   const { lang } = useContext(LanguageContext)
   const [search, setSearch] = useState('')
@@ -69,7 +69,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
           page: 'search',
           q: values.q.slice(0, 100),
         })
-        routerPush(path.href)
+        router.push(path.href)
         close()
       }}
     >

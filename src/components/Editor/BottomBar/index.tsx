@@ -17,21 +17,26 @@ import SetCoverDialog, { BaseSetCoverDialogProps } from '../SetCoverDialog'
 import MoreActions from './MoreActions'
 import styles from './styles.css'
 
+import { ArticleAccessType, SearchExclude } from '@/__generated__/globalTypes'
 import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
 import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
 import { Asset } from '~/components/GQL/fragments/__generated__/Asset'
 import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
 
 export type BottomBarProps = {
-  tags: DigestTag[]
-  collection: ArticleDigestDropdownArticle[]
-  circle?: DigestRichCirclePublic | null
-
   editCover: (asset?: Asset) => any
+
+  collection: ArticleDigestDropdownArticle[]
   editCollection: (articles: ArticleDigestDropdownArticle[]) => any
+
+  tags: DigestTag[]
   editTags: (tag: DigestTag[]) => any
-  toggleCircle?: () => any
-  canToggleCircle?: boolean
+
+  circle?: DigestRichCirclePublic | null
+  accessType?: ArticleAccessType
+  editAccess?: (addToCircle: boolean, paywalled: boolean) => any
+  canToggleCircle: boolean
+  canTogglePaywall: boolean
 
   saving?: boolean
   disabled?: boolean
@@ -43,15 +48,19 @@ export type BottomBarProps = {
  */
 const BottomBar: React.FC<BottomBarProps> = ({
   cover,
-  tags,
-  collection,
-  circle,
-
   editCover,
+
+  collection,
   editCollection,
+
+  tags,
   editTags,
-  toggleCircle,
+
+  circle,
+  editAccess,
+  accessType,
   canToggleCircle,
+  canTogglePaywall,
 
   saving,
   disabled,
@@ -73,7 +82,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
                 <button type="button" onClick={openSetCoverDialog}>
                   <TextIcon
                     icon={<IconImage24 size="md" />}
-                    size="xm"
+                    size="md-s"
                     weight="md"
                     spacing="xtight"
                   >
@@ -98,7 +107,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
                 <button type="button" onClick={openAddMyArticlesDialog}>
                   <TextIcon
                     icon={<IconHashTag24 size="md" />}
-                    size="xm"
+                    size="md-s"
                     weight="md"
                     spacing="xtight"
                   >
@@ -112,6 +121,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
               title="extendArticle"
               hint="hintEditCollection"
               searchType="Article"
+              searchExclude={SearchExclude.blocked}
               onSave={(nodes: SearchSelectNode[]) =>
                 editCollection(nodes as ArticleDigestDropdownArticle[])
               }
@@ -122,7 +132,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
                 <button type="button" onClick={openAddMyArticlesDialog}>
                   <TextIcon
                     icon={<IconCollection24 size="md" />}
-                    size="xm"
+                    size="md-s"
                     weight="md"
                     spacing="xtight"
                   >
@@ -132,12 +142,14 @@ const BottomBar: React.FC<BottomBarProps> = ({
               )}
             </SearchSelectDialog>
 
-            {toggleCircle && (
+            {editAccess && (
               <MoreActions
                 circle={circle}
-                onEdit={toggleCircle}
-                disabled={!canToggleCircle}
-                saving={saving}
+                accessType={accessType}
+                editAccess={editAccess}
+                saving={!!saving}
+                canToggleCircle={canToggleCircle}
+                canTogglePaywall={canTogglePaywall}
               />
             )}
           </section>

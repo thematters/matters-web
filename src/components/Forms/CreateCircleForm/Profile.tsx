@@ -1,5 +1,6 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
+import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
 import {
@@ -17,7 +18,6 @@ import PUT_CIRCLE from '~/components/GQL/mutations/putCircle'
 import { ADD_TOAST, ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
 import {
   parseFormSubmitErrors,
-  routerPush,
   toPath,
   translate,
   validateCircleDisplayName,
@@ -56,6 +56,7 @@ interface FormValues {
 const UNCHANGED_FIELD = 'UNCHANGED_FIELD'
 
 const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
+  const router = useRouter()
   const [update] = useMutation<PutCircle>(PUT_CIRCLE, undefined, {
     showToast: false,
   })
@@ -120,7 +121,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
 
         if (data?.putCircle) {
           const path = toPath({ page: 'circleDetail', circle: data.putCircle })
-          routerPush(path.href)
+          router.push(path.href)
         }
 
         setSubmitting(false)

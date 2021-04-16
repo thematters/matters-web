@@ -29,6 +29,7 @@
   line-height: 1;
   background: var(--switch-background);
   border-radius: var(--switch-border-radius);
+  transform: translateX(var(--switch-spacing));
 }
 
 .switch input + span::after {
@@ -45,9 +46,10 @@
 
   position: absolute;
   top: var(--switch-spacing);
-  left: var(--switch-spacing);
+  left: 0;
   width: var(--switch-thumb-width);
   height: var(--switch-thumb-width);
+  transform: translateX(var(--switch-spacing));
 }
 
 .switch input:checked {
@@ -58,8 +60,10 @@
 
 .switch input:checked + span::after,
 .switch input:checked + span + .loading :global(svg) {
-  left: calc(
-    var(--switch-width) - var(--switch-thumb-width) - var(--switch-spacing)
+  transform: translateX(
+    calc(
+      var(--switch-width) - var(--switch-thumb-width) - var(--switch-spacing)
+    )
   );
 }
 

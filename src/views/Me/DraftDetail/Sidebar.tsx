@@ -1,10 +1,10 @@
-import { toDigestTagPlaceholder, useFeatures } from '~/components'
+import { toDigestTagPlaceholder } from '~/components'
 import Sidebar from '~/components/Editor/Sidebar'
 
 import { ENTITY_TYPE } from '~/common/enums'
 
 import {
-  useEditDraftCircle,
+  useEditDraftAccess,
   useEditDraftCollection,
   useEditDraftCover,
   useEditDraftTags,
@@ -65,8 +65,11 @@ const EditDraftTags = ({ draft, disabled }: SidebarProps) => {
   )
 }
 
-const EditDraftCircle = ({ draft, ownCircles, disabled }: SidebarProps) => {
-  const { toggle, saving } = useEditDraftCircle(draft)
+const EditDraftCircle = ({ draft, ownCircles }: SidebarProps) => {
+  const { edit, saving } = useEditDraftAccess(
+    draft,
+    ownCircles && ownCircles[0]
+  )
 
   if (!ownCircles) {
     return null
@@ -74,17 +77,17 @@ const EditDraftCircle = ({ draft, ownCircles, disabled }: SidebarProps) => {
 
   return (
     <Sidebar.Management
-      circle={draft.circle}
-      onEdit={() => toggle(ownCircles[0])}
+      circle={draft.access.circle}
+      accessType={draft.access.type}
+      editAccess={edit}
       saving={saving}
-      disabled={disabled}
+      canToggleCircle
+      canTogglePaywall
     />
   )
 }
 
 const EditDraftSidebar = (props: BaseSidebarProps) => {
-  const features = useFeatures()
-
   const isPending = props.draft.publishState === 'pending'
   const isPublished = props.draft.publishState === 'published'
   const disabled = isPending || isPublished
@@ -94,9 +97,7 @@ const EditDraftSidebar = (props: BaseSidebarProps) => {
       <EditDraftCover {...props} disabled={disabled} />
       <EditDraftTags {...props} disabled={disabled} />
       <EditDraftCollection {...props} disabled={disabled} />
-      {features.circle_management && (
-        <EditDraftCircle {...props} disabled={disabled} />
-      )}
+      <EditDraftCircle {...props} disabled={disabled} />
     </>
   )
 }

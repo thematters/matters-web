@@ -22,6 +22,7 @@ import { LIST_VIEWER_ARTICLES, SELECT_SEARCH } from './gql'
 import InviteEmail from './InviteEmail'
 import SearchInput, { SearchType as SearchInputType } from './SearchInput'
 
+import { SearchExclude, SearchFilter } from '@/__generated__/globalTypes'
 import { ListViewerArticles } from './__generated__/ListViewerArticles'
 import {
   SelectSearch,
@@ -38,10 +39,6 @@ import {
  *
  */
 export type SearchType = SearchInputType
-export interface SearchFilter {
-  authorId: string
-}
-
 export type SelectNode = SelectSearch_search_edges_node
 export type SelectArticle = SelectSearch_search_edges_node_Article
 export type SelectTag = SelectSearch_search_edges_node_Tag
@@ -50,6 +47,7 @@ export type SelectUser = SelectSearch_search_edges_node_User
 interface SearchingAreaProps {
   searchType: SearchType
   searchFilter?: SearchFilter
+  searchExclude?: SearchExclude
 
   inSearchingArea: boolean
   toStagingArea: () => void
@@ -65,6 +63,7 @@ type Mode = 'search' | 'list'
 const SearchingArea: React.FC<SearchingAreaProps> = ({
   searchType,
   searchFilter,
+  searchExclude,
 
   inSearchingArea,
   toStagingArea,
@@ -143,7 +142,13 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
   const search = (key: string) => {
     const type = searchType === 'Invitee' ? 'User' : searchType
     lazySearch({
-      variables: { key, type, filter: searchFilter, first: 10 },
+      variables: {
+        key,
+        type,
+        filter: searchFilter,
+        exclude: searchExclude,
+        first: 10,
+      },
     })
   }
 

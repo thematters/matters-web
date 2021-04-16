@@ -6,7 +6,6 @@ export default gql`
       id
       feedSortType
       followFeedType
-      viewMode
       readCivicLikerDialog
       wall
       push {
