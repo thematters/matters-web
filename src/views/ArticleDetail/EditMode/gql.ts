@@ -24,7 +24,12 @@ export const EDIT_MODE_ARTICLE = gql`
           ...DigestRichCirclePublic
         }
       }
+      access {
+        type
+      }
+      revisionCount
       drafts {
+        id
         mediaHash
         publishState
         ...EditorDraft

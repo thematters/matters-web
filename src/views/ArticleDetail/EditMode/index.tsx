@@ -9,7 +9,6 @@ import {
   ReviseArticleDialog,
   Spinner,
   Throw404,
-  useFeatures,
   useResponsive,
 } from '~/components'
 import BottomBar from '~/components/Editor/BottomBar'
@@ -23,6 +22,7 @@ import { EDIT_MODE_ARTICLE, EDIT_MODE_ARTICLE_ASSETS } from './gql'
 import EditModeHeader from './Header'
 import PublishState from './PublishState'
 
+import { ArticleAccessType } from '@/__generated__/globalTypes'
 import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
 import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
 import { Asset } from '~/components/GQL/fragments/__generated__/Asset'
@@ -42,9 +42,10 @@ const Editor = dynamic(() => import('~/components/Editor/Article'), {
   loading: Spinner,
 })
 
+const MAX_REVISION_COUNT = 2
+
 const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
   const isLargeUp = useResponsive('lg-up')
-  const features = useFeatures()
 
   // staging editing data
   const [editData, setEditData] = useState<Record<string, any>>({})
@@ -54,10 +55,13 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
     []
   )
   const [circle, editCircle] = useState<DigestRichCirclePublic | null>(
-    article.circle
+    article.access.circle
+  )
+  const [accessType, editAccessType] = useState<ArticleAccessType>(
+    article.access.type
   )
 
-  // fetch and refetch latest metadata
+  // fetch latest metadata
   const { data, loading, error } = useQuery<EditModeArticle>(
     EDIT_MODE_ARTICLE,
     {
@@ -66,7 +70,22 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
     }
   )
 
-  // Cover
+  // access
+  const isPrevPublic = article.access.type === ArticleAccessType.public
+  const ownCircles = data?.article?.author.ownCircles
+  const hasCircles = ownCircles && ownCircles.length >= 1
+  const editAccess = (addToCircle: boolean, paywalled: boolean) => {
+    if (!ownCircles) {
+      return
+    }
+
+    editCircle(addToCircle ? ownCircles[0] : null)
+    editAccessType(
+      paywalled ? ArticleAccessType.paywall : ArticleAccessType.public
+    )
+  }
+
+  // cover
   const assets = data?.article?.assets || []
   const refetchAssets = useImperativeQuery<EditModeArticleAssets>(
     EDIT_MODE_ARTICLE_ASSETS,
@@ -75,21 +94,6 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
       fetchPolicy: 'network-only',
     }
   )
-
-  // Circle
-  // Note: the author can only have one circle now
-  const isAttachedCircle = !!article.circle
-  const ownCircles = data?.article?.author.ownCircles
-  const hasCircles = ownCircles && ownCircles.length >= 1
-  const toggleCircle = hasCircles
-    ? () => {
-        if (!ownCircles) {
-          return
-        }
-
-        editCircle(circle ? null : ownCircles[0])
-      }
-    : undefined
 
   // update cover & collection from retrieved data
   useEffect(() => {
@@ -126,11 +130,11 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
     )
   }
 
-  const drafts = data?.article?.drafts || []
-  const draft = drafts[0]
-  const count = 3 - (drafts.length || 0)
-  const isSameHash = draft.mediaHash === article.mediaHash
-  const isPending = draft.publishState === 'pending'
+  const drafts = data?.article?.drafts
+  const draft = drafts && drafts[0]
+  const count = MAX_REVISION_COUNT - (data?.article?.revisionCount || 0)
+  const isSameHash = draft?.mediaHash === article.mediaHash
+  const isPending = draft?.publishState === 'pending'
   const isEditDisabled = !isSameHash || isPending
   const isReviseDisabled = isEditDisabled || count <= 0
 
@@ -168,11 +172,14 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
             disabled={isEditDisabled}
           />
 
-          {toggleCircle && features.circle_management && (
+          {hasCircles && (
             <Sidebar.Management
               circle={circle}
-              onEdit={toggleCircle}
-              disabled={isAttachedCircle}
+              accessType={accessType}
+              editAccess={editAccess}
+              canToggleCircle={isPrevPublic}
+              canTogglePaywall={isPrevPublic}
+              saving={false}
             />
           )}
         </>
@@ -191,6 +198,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
             tags={tags}
             collection={collection}
             circle={circle}
+            accessType={accessType}
             count={count}
             isSameHash={isSameHash}
             onSaved={onSaved}
@@ -234,8 +242,10 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
           editCollection={editCollection}
           // circle
           circle={circle}
-          toggleCircle={features.circle_management ? toggleCircle : undefined}
-          canToggleCircle={!isAttachedCircle}
+          accessType={accessType}
+          editAccess={hasCircles ? editAccess : undefined}
+          canToggleCircle={isPrevPublic}
+          canTogglePaywall={isPrevPublic}
         />
       )}
 

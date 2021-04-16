@@ -12,9 +12,11 @@ export const fragments = {
         author {
           ...UserDonationRecipient
         }
-        circle {
-          id
-          ...DigestRichCirclePublic
+        access {
+          circle {
+            id
+            ...DigestRichCirclePublic
+          }
         }
         ...DonatorsArticle
       }
@@ -25,9 +27,11 @@ export const fragments = {
     private: gql`
       fragment SupportWidgetArticlePrivate on Article {
         id
-        circle {
-          id
-          ...DigestRichCirclePrivate
+        access {
+          circle {
+            id
+            ...DigestRichCirclePrivate
+          }
         }
       }
       ${CircleDigest.Rich.fragments.circle.private}

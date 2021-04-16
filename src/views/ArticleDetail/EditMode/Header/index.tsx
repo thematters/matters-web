@@ -17,6 +17,7 @@ import { measureDiffs } from '~/common/utils'
 
 import styles from './styles.css'
 
+import { ArticleAccessType } from '@/__generated__/globalTypes'
 import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
 import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
 import { Asset } from '~/components/GQL/fragments/__generated__/Asset'
@@ -31,6 +32,8 @@ interface EditModeHeaderProps {
   tags: DigestTag[]
   collection: ArticleDigestDropdownArticle[]
   circle?: DigestRichCirclePublic | null
+  accessType?: ArticleAccessType
+
   count?: number
 
   isPending?: boolean
@@ -54,6 +57,7 @@ const EDIT_ARTICLE = gql`
     $tags: [String!]
     $collection: [ID!]
     $circle: ID
+    $accessType: ArticleAccessType
     $after: String
     $first: Int = null
   ) {
@@ -65,6 +69,7 @@ const EDIT_ARTICLE = gql`
         tags: $tags
         collection: $collection
         circle: $circle
+        accessType: $accessType
       }
     ) {
       id
@@ -73,7 +78,11 @@ const EDIT_ARTICLE = gql`
         ...DigestTag
         selected(input: { mediaHash: $mediaHash })
       }
+      access {
+        type
+      }
       drafts {
+        id
         mediaHash
         publishState
         ...EditorDraft
@@ -93,6 +102,7 @@ const EditModeHeader = ({
   tags,
   collection,
   circle,
+  accessType,
 
   count = 3,
 
@@ -121,7 +131,11 @@ const EditModeHeader = ({
           cover: cover ? cover.id : null,
           tags: tags.map((tag) => tag.content),
           collection: collection.map(({ id: articleId }) => articleId),
-          ...(circle ? { circle: circle.id } : {}),
+          circle: circle ? circle.id : null,
+          accessType:
+            accessType === ArticleAccessType.limitedFree
+              ? ArticleAccessType.paywall
+              : accessType,
           ...(isRevised ? { content } : {}),
           first: null,
         },

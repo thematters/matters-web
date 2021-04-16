@@ -3,9 +3,11 @@ import Cover from './Cover'
 import Management from './Management'
 import Tags from './Tags'
 
-export default {
+const Sidebar = {
   Cover,
   Tags,
   Collection,
   Management,
 }
+
+export default Sidebar

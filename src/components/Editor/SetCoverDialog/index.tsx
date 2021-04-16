@@ -21,7 +21,7 @@ type SetCoverDialogProps = BaseSetCoverDialogProps & {
   children: ({ open }: { open: () => void }) => React.ReactNode
 }
 
-const SetCoverDialog = ({
+const BaseSetCoverDialog = ({
   cover,
   assets,
 
@@ -88,8 +88,10 @@ const SetCoverDialog = ({
   )
 }
 
-export default (props: SetCoverDialogProps) => (
-  <Dialog.Lazy mounted={<SetCoverDialog {...props} />}>
+const SetCoverDialog = (props: SetCoverDialogProps) => (
+  <Dialog.Lazy mounted={<BaseSetCoverDialog {...props} />}>
     {({ open }) => <>{props.children({ open })}</>}
   </Dialog.Lazy>
 )
+
+export default SetCoverDialog

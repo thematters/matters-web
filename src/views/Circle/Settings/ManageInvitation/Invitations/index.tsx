@@ -52,7 +52,7 @@ const Invitations = () => {
   })
 
   // pagination
-  const connectionPath = 'circle.invitaitons'
+  const connectionPath = 'circle.invitations'
   const circle = data?.circle
   const { edges, pageInfo } = circle?.invitations || {}
   const isOwner = circle?.owner.id === viewer.id

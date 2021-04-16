@@ -1,11 +1,11 @@
-import { Button, IconMore32 } from '~/components'
+import { Button, IconCircle24, TextIcon, Translate } from '~/components'
 
 import { TEXT } from '~/common/enums'
 
-import { ToggleCircleProps } from '../../ToggleCircle'
+import { ToggleAccessProps } from '../../ToggleAccess'
 import { MoreActionDialog } from './Dialog'
 
-type MoreActionProps = ToggleCircleProps
+type MoreActionProps = ToggleAccessProps
 
 const MoreAction: React.FC<MoreActionProps> = (props) => (
   <MoreActionDialog {...props}>
@@ -15,7 +15,14 @@ const MoreAction: React.FC<MoreActionProps> = (props) => (
         aria-haspopup="true"
         onClick={open}
       >
-        <IconMore32 size="lg" color="black" />
+        <TextIcon
+          icon={<IconCircle24 size="md" />}
+          size="md-s"
+          weight="md"
+          spacing="xtight"
+        >
+          <Translate zh_hant="圍爐" zh_hans="围炉" en="Circle" />
+        </TextIcon>
       </Button>
     )}
   </MoreActionDialog>

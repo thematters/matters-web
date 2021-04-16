@@ -1,4 +1,3 @@
-import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import React from 'react'
 
@@ -11,13 +10,11 @@ import {
   Translate,
   UserDigest,
 } from '~/components'
-import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
 import { toPath } from '~/common/utils'
 
 import styles from './styles.css'
 
-import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import { FollowComment as FollowCommentType } from './__generated__/FollowComment'
 
 interface FollowCommentProps {
@@ -64,12 +61,6 @@ const FollowComment: React.FC<FollowCommentProps> = ({
   onClickArticle,
   onClickAuthor,
 }) => {
-  const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
-    variables: { id: 'local' },
-  })
-  const { viewMode } = data?.clientPreference || { viewMode: 'comfortable' }
-  const isDefaultMode = viewMode === 'default'
-
   const article =
     comment.node.__typename === 'Article' ? comment.node : undefined
 
@@ -87,33 +78,18 @@ const FollowComment: React.FC<FollowCommentProps> = ({
         })
       : {}
 
-  let userDigestProps = {}
-  if (isDefaultMode) {
-    userDigestProps = {
-      avatarSize: 'lg',
-      textSize: 'md-s',
-      textWeight: 'md',
-    }
-  } else {
-    userDigestProps = {
-      avatarSize: 'sm',
-      textSize: 'sm',
-    }
-  }
-
   return (
     <Card {...articlePath} spacing={['base', 'base']} onClick={onClickArticle}>
       <header>
         <section className="left">
           <UserDigest.Mini
             user={comment.author}
-            avatarSize="lg"
-            textSize="md-s"
+            avatarSize="sm"
+            textSize="sm"
             textWeight="md"
             hasAvatar
             hasDisplayName
             onClick={onClickAuthor}
-            {...userDigestProps}
           />
           <TextIcon size="sm" color="grey-dark">
             <Translate zh_hant="評論了" zh_hans="评论了" en="commented" />

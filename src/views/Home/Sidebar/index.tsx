@@ -1,7 +1,9 @@
 import Authors from './Authors'
 import Tags from './Tags'
 
-export default {
+const Sidebar = {
   Tags,
   Authors,
 }
+
+export default Sidebar

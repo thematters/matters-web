@@ -9,6 +9,10 @@
     flex-direction: column;
     flex-grow: 1;
   }
+
+  &.has-fixed {
+    flex-shrink: 0;
+  }
 }
 
 .spacing-x-0 {

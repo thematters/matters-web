@@ -6,9 +6,9 @@ import { UserDigest } from '~/components/UserDigest'
 import DropdownActions from '../DropdownActions'
 import FooterActions from '../FooterActions'
 import { ArticleDigestTitle } from '../Title'
+import AccessLabel from './AccessLabel'
 import CreatedAt from './CreatedAt'
 import InactiveState from './InactiveState'
-import LimitedFree from './LimitedFree'
 
 export const fragments = {
   article: {
@@ -26,13 +26,16 @@ export const fragments = {
           userName
           ...UserDigestMiniUser
         }
-        circle {
-          id
-          name
-          ...DigestPlainCircle
+        access {
+          type
+          circle {
+            id
+            name
+            ...DigestPlainCircle
+          }
         }
         ...CreatedAtArticle
-        ...LimitedFreeArticle
+        ...AccessLabelArticle
         ...InactiveStateArticle
         ...ArticleDigestTitleArticle
         ...DropdownActionsArticle
@@ -40,7 +43,7 @@ export const fragments = {
       }
       ${UserDigest.Mini.fragments.user}
       ${CreatedAt.fragments.article}
-      ${LimitedFree.fragments.article}
+      ${AccessLabel.fragments.article}
       ${InactiveState.fragments.article}
       ${ArticleDigestTitle.fragments.article}
       ${DropdownActions.fragments.article}

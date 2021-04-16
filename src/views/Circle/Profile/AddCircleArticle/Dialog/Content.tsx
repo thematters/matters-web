@@ -1,8 +1,12 @@
-import { Dialog, Translate } from '~/components'
+import { useState } from 'react'
+
+import { Dialog, Switch, Translate } from '~/components'
+
+import styles from './styles.css'
 
 interface ContentProps {
   loading: boolean
-  onConfirm: () => void
+  onConfirm: (paywalled: boolean) => void
   closeDialog: () => void
 }
 
@@ -11,6 +15,8 @@ const Content: React.FC<ContentProps> = ({
   onConfirm,
   closeDialog,
 }) => {
+  const [paywalled, setPaywalled] = useState(false)
+
   return (
     <>
       <Dialog.Header
@@ -20,26 +26,42 @@ const Content: React.FC<ContentProps> = ({
       />
 
       <Dialog.Message align="left" type="info">
+        <section className="switch">
+          <p>
+            <Translate zh_hant="上鎖" zh_hans="上锁" en="Paywalled" />
+          </p>
+
+          <Switch
+            checked={paywalled}
+            onChange={() => setPaywalled(!paywalled)}
+          />
+        </section>
+
         <ul>
           <li>
             <Translate
-              zh_hant="作品進入圍爐後自動開啟 24 小時限免"
-              zh_hans="作品进入围炉后自动开启 24 小时限免"
-              en="Articles added to Circle will be free to read for 24 hours."
+              zh_hant="上鎖作品 24 小時內限免，過後僅圍爐成員可閱讀"
+              zh_hans="上锁作品 24 小时内限免，过后仅围炉成员可阅读"
+              en="Paywalled article will be free to read for 24 hours, then circle members only."
             />
           </li>
           <li>
             <Translate
-              zh_hant="進入圍爐的作品暫不支持移出圍爐"
-              zh_hans="进入围炉的作品暂不支持移出围炉"
-              en="This action cannot be undone."
+              zh_hant="作品上鎖後，不支持撤銷或移出圍爐"
+              zh_hans="作品上锁后，不支持撤销或移出围炉"
+              en="You can't undo changes on paywalled article"
             />
           </li>
         </ul>
+
+        <style jsx>{styles}</style>
       </Dialog.Message>
 
       <Dialog.Footer>
-        <Dialog.Footer.Button onClick={onConfirm} loading={loading}>
+        <Dialog.Footer.Button
+          onClick={() => onConfirm(paywalled)}
+          loading={loading}
+        >
           <Translate
             zh_hant="確認添加"
             zh_hans="确认添加"

@@ -12,7 +12,7 @@ import {
   useRoute,
 } from '~/components'
 
-import { routerPush, toPath } from '~/common/utils'
+import { toPath } from '~/common/utils'
 
 import AggregateResults from './AggregateResults'
 // import EmptySearch from './EmptySearch'
@@ -21,7 +21,7 @@ import SearchTags from './SearchTags'
 import SearchUsers from './SearchUsers'
 
 const Search = () => {
-  const { getQuery } = useRoute()
+  const { getQuery, router } = useRoute()
   const type = getQuery('type')
   const q = getQuery('q')
   const isSmallUp = useResponsive('sm-up')
@@ -29,7 +29,7 @@ const Search = () => {
   const resetAutoComplete = () => setTypingKey('')
   const onCancel = () => {
     const path = toPath({ page: 'search' })
-    routerPush(path.href)
+    router.push(path.href)
   }
 
   const isOverview = !q && !typingKey

@@ -12,14 +12,12 @@ import {
   Translate,
   UserDigest,
 } from '~/components'
-import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { UserDigestMiniProps } from '~/components/UserDigest/Mini'
 
 import { analytics, mergeConnections } from '~/common/utils'
 
 import styles from './styles.css'
 
-import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import {
   FolloweeDonatedArticlesFeed,
   FolloweeDonatedArticlesFeed_viewer_recommendation_followeeDonatedArticles_edges_node_followee as FolloweeDonatedArticlesFeedFollowee,
@@ -59,7 +57,7 @@ const FOLLOWEE_DONATED_ARTICLES = gql`
   ${UserDigest.Mini.fragments.user}
 `
 
-const DonationsArticles = ({ isCompactMode }: { isCompactMode: boolean }) => {
+const DonationsArticles = () => {
   const {
     data,
     loading,
@@ -163,14 +161,4 @@ const DonationsArticles = ({ isCompactMode }: { isCompactMode: boolean }) => {
   )
 }
 
-const DonationsFeed = () => {
-  const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
-    variables: { id: 'local' },
-  })
-  const { viewMode } = data?.clientPreference || { viewMode: 'comfortable' }
-  const isCompactMode = viewMode === 'compact'
-
-  return <DonationsArticles isCompactMode={isCompactMode} />
-}
-
-export default DonationsFeed
+export default DonationsArticles

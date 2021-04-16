@@ -12,7 +12,7 @@ import styles from '../styles.css'
 import { CircleNewArticleNotice as NoticeType } from './__generated__/CircleNewArticleNotice'
 
 const CircleNewArticle = ({ notice }: { notice: NoticeType }) => {
-  const circle = notice.article.circle
+  const circle = notice.article.access.circle
 
   if (!circle) {
     return null
@@ -54,9 +54,11 @@ CircleNewArticle.fragments = {
       ...NoticeDate
       article: target {
         ...NoticeArticleCard
-        circle {
-          id
-          ...NoticeCircleName
+        access {
+          circle {
+            id
+            ...NoticeCircleName
+          }
         }
       }
     }

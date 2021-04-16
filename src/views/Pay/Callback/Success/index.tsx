@@ -1,7 +1,6 @@
 import { Layout, Translate, useRoute } from '~/components'
 
 import { PATHS, PAYMENT_PROVIDER } from '~/common/enums'
-import { routerPush } from '~/common/utils'
 
 import ICON_LIKECOIN from '@/public/static/icons/likecoin.svg'
 
@@ -9,7 +8,7 @@ import { Box } from '../../Box'
 import styles from '../styles.css'
 
 const PayCallbackSuccess = () => {
-  const { getQuery } = useRoute()
+  const { getQuery, router } = useRoute()
   const provider = getQuery('provider')
   const title: { [key: string]: any } = {
     likecoin: <Translate id="donation" />,
@@ -19,7 +18,7 @@ const PayCallbackSuccess = () => {
   }
 
   if (!provider || PAYMENT_PROVIDER.indexOf(provider) < 0) {
-    routerPush(PATHS.HOME)
+    router.push(PATHS.HOME)
     return null
   }
 

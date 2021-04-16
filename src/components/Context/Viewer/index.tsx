@@ -34,6 +34,9 @@ const ViewerFragments = {
           agreeOn
           userNameEditable
           group
+          badges {
+            type
+          }
         }
         settings {
           language

@@ -11,7 +11,7 @@ import Root from '~/components/Root'
 
 import withApollo from '~/common/utils/withApollo'
 
-const MattersApp = ({
+const InnerApp = ({
   Component,
   pageProps,
   apollo,
@@ -29,4 +29,6 @@ const MattersApp = ({
   </ErrorBoundary>
 )
 
-export default withApollo(MattersApp, { getDataFromTree })
+const MattersApp = withApollo(InnerApp, { getDataFromTree })
+
+export default MattersApp

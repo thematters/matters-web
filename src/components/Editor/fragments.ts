@@ -8,6 +8,7 @@ export const fragments = {
       publishState
       content
       summary
+      summaryCustomized
     }
   `,
 }

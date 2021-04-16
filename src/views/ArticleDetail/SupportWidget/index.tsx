@@ -19,7 +19,7 @@ interface DonationProps {
 const SupportWidget = ({ article }: DonationProps) => {
   const supportWidgetClasses = classNames({
     'support-widget': true,
-    hasCircle: article.circle,
+    hasCircle: article.access.circle,
   })
 
   return (
@@ -48,10 +48,10 @@ const SupportWidget = ({ article }: DonationProps) => {
         </section>
       </section>
 
-      {article.circle && (
+      {article.access.circle && (
         <section className="circle">
           <CircleDigest.Rich
-            circle={article.circle}
+            circle={article.access.circle}
             bgColor="grey-lighter"
             hasFooter
             hasPrice

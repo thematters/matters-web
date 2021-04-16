@@ -1,8 +1,8 @@
 import classNames from 'classnames'
+import { useRouter } from 'next/router'
 import { forwardRef, useRef } from 'react'
 
 import { KEYCODES } from '~/common/enums'
-import { routerPush } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -53,6 +53,8 @@ export const Card: React.FC<CardProps> = forwardRef(
     },
     ref
   ) => {
+    const router = useRouter()
+
     const disabled = !href && !htmlHref && !onClick
     const fallbackRef = useRef(null)
     const cardRef = (ref || fallbackRef) as React.RefObject<any> | null
@@ -109,7 +111,7 @@ export const Card: React.FC<CardProps> = forwardRef(
         if (newTab && href) {
           window.open(href, '_blank')
         } else {
-          routerPush(href)
+          router.push(href)
         }
       }
 

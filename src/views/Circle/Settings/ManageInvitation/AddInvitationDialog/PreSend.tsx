@@ -113,25 +113,27 @@ const BaseInviteePreSend = ({ close, confirm, invitees }: Props) => {
         </p>
       </Dialog.Message>
 
-      <List hasBorder={false}>
-        {invitees.map(
-          ({ node }, i) =>
-            node.__typename === 'User' && (
-              <List.Item key={i}>
-                <Card spacing={['xtight', 'base']}>
-                  <UserDigest.Mini
-                    user={node}
-                    direction="column"
-                    hasAvatar
-                    hasDisplayName
-                    hasUserName
-                    disabled
-                  />
-                </Card>
-              </List.Item>
-            )
-        )}
-      </List>
+      <Dialog.Content hasGrow>
+        <List hasBorder={false}>
+          {invitees.map(
+            ({ node }, i) =>
+              node.__typename === 'User' && (
+                <List.Item key={i}>
+                  <Card spacing={['xtight', 'base']}>
+                    <UserDigest.Mini
+                      user={node}
+                      direction="column"
+                      hasAvatar
+                      hasDisplayName
+                      hasUserName
+                      disabled
+                    />
+                  </Card>
+                </List.Item>
+              )
+          )}
+        </List>
+      </Dialog.Content>
 
       <PeriodOption period={period} onClick={setPeriod} />
 

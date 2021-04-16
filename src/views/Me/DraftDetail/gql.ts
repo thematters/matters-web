@@ -25,8 +25,11 @@ export const editMetaFragment = gql`
         }
       }
     }
-    circle {
-      ...DigestRichCirclePublic
+    access {
+      type
+      circle {
+        ...DigestRichCirclePublic
+      }
     }
   }
   ${ArticleDigestDropdown.fragments.article}
@@ -94,6 +97,7 @@ export const SET_CONTENT = gql`
         ...Asset
       }
       summary
+      summaryCustomized
     }
   }
   ${assetFragment}
@@ -135,12 +139,19 @@ export const SET_TAGS = gql`
   ${editMetaFragment}
 `
 
-export const SET_CIRCLE = gql`
-  mutation SetDraftCircle($id: ID!, $circle: ID) {
-    putDraft(input: { id: $id, circle: $circle }) {
+export const SET_ACCESS = gql`
+  mutation SetDraftAccess(
+    $id: ID!
+    $circle: ID
+    $accessType: ArticleAccessType
+  ) {
+    putDraft(input: { id: $id, circle: $circle, accessType: $accessType }) {
       id
-      circle {
-        ...DigestRichCirclePublic
+      access {
+        type
+        circle {
+          ...DigestRichCirclePublic
+        }
       }
     }
   }
