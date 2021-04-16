@@ -1,6 +1,6 @@
 .container {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
+  grid-template-columns: repeat(12, mimmax(0, 1fr));
   margin: 0 var(--spacing-base);
 }
 

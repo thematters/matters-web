@@ -10,7 +10,7 @@ footer {
 
 .container {
   display: grid;
-  grid-template: auto / repeat(1, 1fr);
+  grid-template: auto / repeat(1, minmax(0, 1fr));
   grid-gap: var(--spacing-xx-loose);
 
   & h2 {
@@ -75,7 +75,7 @@ footer {
   }
 
   @media (--sm-up) {
-    grid-template: auto / repeat(2, 1fr);
+    grid-template: auto / repeat(2, minmax(0, 1fr));
     grid-template-areas:
       'topLeft topRight'
       'bottomLeft bottomRight';
@@ -98,7 +98,7 @@ footer {
   }
 
   @media (--lg-up) {
-    grid-template: auto / repeat(3, 1fr);
+    grid-template: auto / repeat(3, minmax(0, 1fr));
     grid-template-areas:
       'topLeft topMiddle topRight'
       'bottomLeft bottomMiddle bottomRight';
