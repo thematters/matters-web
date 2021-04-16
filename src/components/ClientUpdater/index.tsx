@@ -9,7 +9,6 @@ import { useEventListener, useWindowResize, ViewerContext } from '~/components'
 import {
   ONBOARDING_TASKS_HIDE,
   STORAGE_KEY_ONBOARDING_TASKS,
-  STORAGE_KEY_VIEW_MODE,
 } from '~/common/enums'
 import { storage } from '~/common/utils'
 
@@ -60,24 +59,6 @@ export const ClientUpdater = () => {
   useEffect(() => {
     Router.events.on('routeChangeComplete', routeChangeComplete)
     return () => Router.events.off('routeChangeComplete', routeChangeComplete)
-  }, [])
-
-  /**
-   * View Mode
-   */
-  useEffect(() => {
-    const storedViewMode = storage.get(STORAGE_KEY_VIEW_MODE)
-
-    if (!storedViewMode) {
-      return
-    }
-
-    client.writeData({
-      id: 'ClientPreference:local',
-      data: {
-        viewMode: storedViewMode,
-      },
-    })
   }, [])
 
   /**

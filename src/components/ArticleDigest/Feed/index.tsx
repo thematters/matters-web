@@ -1,10 +1,7 @@
-import { useQuery } from '@apollo/react-hooks'
-import classNames from 'classnames'
 import React from 'react'
 
 import { Card, IconPin24, Img, TextIcon, Translate } from '~/components'
 import { CircleDigest } from '~/components/CircleDigest'
-import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { UserDigest } from '~/components/UserDigest'
 import { UserDigestMiniProps } from '~/components/UserDigest/Mini'
 
@@ -18,7 +15,6 @@ import { fragments } from './gql'
 import InactiveState from './InactiveState'
 import styles from './styles.css'
 
-import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import { ArticleDigestFeedArticlePrivate } from './__generated__/ArticleDigestFeedArticlePrivate'
 import { ArticleDigestFeedArticlePublic } from './__generated__/ArticleDigestFeedArticlePublic'
 
@@ -55,13 +51,6 @@ const BaseArticleDigestFeed = ({
 
   ...controls
 }: ArticleDigestFeedProps) => {
-  const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
-    variables: { id: 'local' },
-  })
-  const { viewMode } = data?.clientPreference || { viewMode: 'comfortable' }
-  const isCompactMode = viewMode === 'compact'
-  const isDefaultMode = viewMode === 'default'
-
   const {
     author,
     summary,
@@ -75,27 +64,10 @@ const BaseArticleDigestFeed = ({
     page: 'articleDetail',
     article,
   })
-  const containerClasses = classNames({
-    [`mode-${viewMode}`]: !!viewMode,
-  })
-
-  let userDigestProps = {}
-  if (isCompactMode) {
-    userDigestProps = {
-      avatarSize: 'sm',
-      textSize: 'sm',
-    }
-  } else {
-    userDigestProps = {
-      avatarSize: 'lg',
-      textSize: 'md-s',
-      textWeight: 'md',
-    }
-  }
 
   return (
     <Card {...path} spacing={['base', 'base']} onClick={onClick}>
-      <section className={containerClasses}>
+      <section>
         {extraHeader ||
           (hasCircle && circle && (
             <section className="extraHeader">
@@ -108,14 +80,18 @@ const BaseArticleDigestFeed = ({
         <header>
           <section className="left">
             {actor ? (
-              actor(userDigestProps)
+              actor({
+                avatarSize: 'sm',
+                textSize: 'sm',
+              })
             ) : (
               <UserDigest.Mini
                 user={author}
+                avatarSize="sm"
+                textSize="sm"
                 hasAvatar
                 hasDisplayName
                 onClick={onClickAuthor}
-                {...userDigestProps}
               />
             )}
           </section>
@@ -135,26 +111,17 @@ const BaseArticleDigestFeed = ({
         </header>
 
         <section className="title">
-          <ArticleDigestTitle
-            article={article}
-            textSize={isCompactMode ? 'md' : 'xm'}
-          />
+          <ArticleDigestTitle article={article} textSize="xm" />
         </section>
 
-        {!isCompactMode && (
-          <section className="content">
-            {cover && (
-              <div className="cover">
-                <Img
-                  url={cover}
-                  size={isDefaultMode ? '540w' : '144w'}
-                  smUpSize={isDefaultMode ? '1080w' : '360w'}
-                />
-              </div>
-            )}
-            {<p className="description">{cleanedSummary}</p>}
-          </section>
-        )}
+        <section className="content">
+          {cover && (
+            <div className="cover">
+              <Img url={cover} size="144w" smUpSize="360w" />
+            </div>
+          )}
+          {<p className="description">{cleanedSummary}</p>}
+        </section>
 
         <FooterActions article={article} inCard {...controls} />
 
