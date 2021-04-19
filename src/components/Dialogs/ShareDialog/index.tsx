@@ -44,7 +44,7 @@ const BaseShareDialog = ({
       {children({ open: () => onShare(open) })}
 
       <Dialog size="sm" isOpen={show} onDismiss={close}>
-        <DynamicContent {...props} />
+        <DynamicContent {...props} close={close} />
       </Dialog>
     </>
   )
