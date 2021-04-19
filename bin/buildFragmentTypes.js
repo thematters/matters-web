@@ -4,48 +4,52 @@ const dotenv = require('dotenv')
 
 // load environment variables from .env
 const dotEnvResult = dotenv.config({
-  path: '.env.dev'
+  path: '.env.dev',
 })
 if (dotEnvResult.error) {
   console.error(dotEnvResult.error)
 }
 
-
 fetch(process.env.NEXT_PUBLIC_API_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      variables: {},
-      query: `
-      {
-        __schema {
-          types {
-            kind
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    variables: {},
+    query: `
+    {
+      __schema {
+        types {
+          kind
+          name
+          possibleTypes {
             name
-            possibleTypes {
-              name
-            }
           }
         }
       }
-    `
+    }
+  `,
+  }),
+})
+  .then((result) => result.json())
+  .then((result) => {
+    const possibleTypes = {}
+
+    result.data.__schema.types.forEach((supertype) => {
+      if (supertype.possibleTypes) {
+        possibleTypes[supertype.name] = supertype.possibleTypes.map(
+          (subtype) => subtype.name
+        )
+      }
     })
-  })
-  .then(result => result.json())
-  .then(result => {
-    // here we're filtering out any type information unrelated to unions or interfaces
-    const filteredData = result.data.__schema.types.filter(
-      type => type.possibleTypes !== null
-    )
-    result.data.__schema.types = filteredData
+
     fs.writeFile(
       'src/common/gql/fragmentTypes.json',
-      JSON.stringify(result.data),
-      err => {
+      JSON.stringify(possibleTypes),
+      (err) => {
         if (err) {
-          console.error('Error writing fragmentTypes file', err)
+          console.error('Error writing possibleTypes.json', err)
         } else {
           console.log('Fragment types successfully extracted!')
         }

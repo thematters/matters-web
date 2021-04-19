@@ -1,13 +1,10 @@
-import { createUploadLink } from '@matters/apollo-upload-client'
-import {
-  InMemoryCache,
-  IntrospectionFragmentMatcher,
-} from 'apollo-cache-inmemory'
-import { ApolloClient } from 'apollo-client'
-import { ApolloLink } from 'apollo-link'
-import { setContext } from 'apollo-link-context'
-import { onError } from 'apollo-link-error'
-import { createPersistedQueryLink } from 'apollo-link-persisted-queries'
+import { ApolloClient, from } from '@apollo/client'
+import { InMemoryCache } from '@apollo/client/cache'
+import { setContext } from '@apollo/client/link/context'
+import { onError } from '@apollo/client/link/error'
+import { createPersistedQueryLink } from '@apollo/client/link/persisted-queries'
+import { createUploadLink } from 'apollo-upload-client'
+import { sha256 } from 'crypto-hash'
 import http from 'http'
 import https from 'https'
 import _get from 'lodash/get'
@@ -20,7 +17,7 @@ import {
   STORAGE_KEY_AGENT_HASH,
   STORAGE_KEY_AUTH_TOKEN,
 } from '~/common/enums'
-import introspectionQueryResultData from '~/common/gql/fragmentTypes.json'
+import possibleTypes from '~/common/gql/fragmentTypes.json'
 import { randomString } from '~/common/utils'
 
 import { getCookie } from './cookie'
@@ -30,17 +27,14 @@ import typeDefs from './types'
 
 // import { setupPersistCache } from './cache'
 
-const fragmentMatcher = new IntrospectionFragmentMatcher({
-  introspectionQueryResultData,
-})
-
 const isProd = process.env.NODE_ENV === 'production'
 const isStaticBuild = process.env.NEXT_PUBLIC_BUILD_TYPE === 'static'
 
 /**
  * Links
  */
-const persistedQueryLink = createPersistedQueryLink({
+const persistedQueriesLink = createPersistedQueryLink({
+  sha256,
   useGETForHashedQueries: true,
 })
 
@@ -186,7 +180,9 @@ const agentHashLink = setContext((_, { headers }) => {
 })
 
 export default withApollo(({ ctx, headers, initialState }) => {
-  const cache = new InMemoryCache({ fragmentMatcher })
+  const cache = new InMemoryCache({
+    possibleTypes: possibleTypes as any,
+  })
   cache.restore(initialState || {})
 
   // setupPersistCache(cache)
@@ -197,8 +193,8 @@ export default withApollo(({ ctx, headers, initialState }) => {
   const cookie = headers?.cookie || (process.browser ? document.cookie : '')
 
   const client = new ApolloClient({
-    link: ApolloLink.from([
-      persistedQueryLink,
+    link: from([
+      persistedQueriesLink,
       errorLink,
       sentryLink,
       agentHashLink,

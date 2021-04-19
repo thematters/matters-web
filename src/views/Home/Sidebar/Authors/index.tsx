@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import _random from 'lodash/random'
 import { useContext, useEffect } from 'react'
 
@@ -48,7 +48,8 @@ const Authors = () => {
     const random = _random(0, 50)
     refetch({ random })
 
-    client.writeData({
+    client.writeQuery({
+      query: FETCH_RECORD,
       id: 'LastFetchRandom:local',
       data: { sidebarAuthors: random },
     })

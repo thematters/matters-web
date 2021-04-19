@@ -1,5 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
-import { NetworkStatus } from 'apollo-client'
+import { NetworkStatus, useQuery } from '@apollo/client'
 import { useContext, useEffect, useRef } from 'react'
 
 import {
@@ -253,7 +252,8 @@ const HomeFeed = () => {
   }
   const setSortBy = (type: SortByType) => {
     if (client) {
-      client.writeData({
+      client.writeQuery({
+        query: CLIENT_PREFERENCE,
         id: 'ClientPreference:local',
         data: { feedSortType: type },
       })

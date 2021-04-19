@@ -1,5 +1,5 @@
+import { gql } from '@apollo/client'
 import classNames from 'classnames'
-import gql from 'graphql-tag'
 
 import { ArticleDigestTitle, Card, CardProps, Img, Tag } from '~/components'
 

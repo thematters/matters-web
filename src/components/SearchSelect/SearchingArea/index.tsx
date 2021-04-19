@@ -1,4 +1,4 @@
-import { useLazyQuery } from '@apollo/react-hooks'
+import { useLazyQuery } from '@apollo/client'
 import { useContext, useEffect, useState } from 'react'
 import { useDebounce } from 'use-debounce'
 
@@ -110,7 +110,11 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
       location: searchEdges?.length || 0,
     })
 
-    fetchMore({
+    if (!fetchMore) {
+      return
+    }
+
+    return fetchMore({
       variables: { after: searchPageInfo?.endCursor },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
@@ -121,7 +125,11 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
     })
   }
   const loadMoreList = async () => {
-    fetchMoreList({
+    if (!fetchMoreList) {
+      return
+    }
+
+    return fetchMoreList({
       variables: { after: listPageInfo?.endCursor },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({

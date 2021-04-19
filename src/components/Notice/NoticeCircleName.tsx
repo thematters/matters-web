@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 import Link from 'next/link'
 
 import { toPath } from '~/common/utils'

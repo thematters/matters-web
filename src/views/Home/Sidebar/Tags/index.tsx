@@ -1,5 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
+import { gql, useQuery } from '@apollo/client'
 import _random from 'lodash/random'
 import { useContext, useEffect } from 'react'
 
@@ -74,7 +73,8 @@ const Tags = () => {
     const random = _random(0, Math.min(randomMaxSize, size))
     refetch({ random })
 
-    client.writeData({
+    client.writeQuery({
+      query: FETCH_RECORD,
       id: 'LastFetchRandom:local',
       data: { sidebarTags: random },
     })

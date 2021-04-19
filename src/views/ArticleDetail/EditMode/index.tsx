@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import _uniq from 'lodash/uniq'
 import dynamic from 'next/dynamic'
 import { useEffect, useState } from 'react'

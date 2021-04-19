@@ -1,4 +1,4 @@
-import { MockedProvider } from '@apollo/react-testing'
+import { MockedProvider } from '@apollo/client/testing'
 import { Meta, Story } from '@storybook/react/types-6-0'
 import React from 'react'
 

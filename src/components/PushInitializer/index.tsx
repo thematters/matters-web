@@ -1,4 +1,4 @@
-import ApolloClient from 'apollo-client'
+import { ApolloClient } from '@apollo/client'
 import { useContext, useEffect } from 'react'
 
 import { initializePush } from '~/common/utils'

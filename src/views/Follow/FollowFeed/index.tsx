@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 
 import { Head, Spacer } from '~/components'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
@@ -20,7 +20,8 @@ const FollowFeed = () => {
   }
   const setFeedType = (type: FollowFeedType) => {
     if (client) {
-      client.writeData({
+      client.writeQuery({
+        query: CLIENT_PREFERENCE,
         id: 'ClientPreference:local',
         data: { followFeedType: type },
       })

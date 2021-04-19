@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 import { AppreciatorsDialog, Translate } from '~/components'
 import { Avatar } from '~/components/Avatar'

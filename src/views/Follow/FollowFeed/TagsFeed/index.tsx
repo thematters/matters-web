@@ -1,5 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
+import { gql, useQuery } from '@apollo/client'
 import _find from 'lodash/find'
 import _intersection from 'lodash/intersection'
 import _reverse from 'lodash/reverse'

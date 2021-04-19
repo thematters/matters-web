@@ -1,4 +1,4 @@
-import { DataProxy } from 'apollo-cache'
+import { DataProxy } from '@apollo/client/cache'
 import _omit from 'lodash/omit'
 
 import TAG_MAINTAINERS from '~/components/GQL/queries/tagMaintainers'

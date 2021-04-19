@@ -1,7 +1,6 @@
-import { ApolloProvider } from '@apollo/react-hooks'
-import { getDataFromTree } from '@apollo/react-ssr'
-import { InMemoryCache } from 'apollo-cache-inmemory'
-import { ApolloClient } from 'apollo-client'
+import { ApolloClient, ApolloProvider } from '@apollo/client'
+import { InMemoryCache } from '@apollo/client/cache'
+import { getDataFromTree } from '@apollo/client/react/ssr'
 import { AppProps } from 'next/app'
 
 import { ErrorBoundary } from '~/components'

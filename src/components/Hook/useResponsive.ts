@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 
 import CLIENT_INFO from '~/components/GQL/queries/clientInfo'
 

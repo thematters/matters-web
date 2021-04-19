@@ -1,14 +1,15 @@
-import { OperationVariables, QueryResult } from '@apollo/react-common'
 import {
   LazyQueryHookOptions,
   MutationHookOptions,
   MutationTuple,
+  OperationVariables,
   QueryHookOptions,
+  QueryResult,
   QueryTuple,
   useLazyQuery as baseUseLazyQuery,
   useMutation as baseUseMutation,
   useQuery as baseUseQuery,
-} from '@apollo/react-hooks'
+} from '@apollo/client'
 import { DocumentNode } from 'graphql'
 
 import { GQL_CONTEXT_PUBLIC_QUERY_KEY } from '~/common/enums'

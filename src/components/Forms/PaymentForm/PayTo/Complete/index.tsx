@@ -1,4 +1,4 @@
-import { NetworkStatus } from 'apollo-client'
+import { NetworkStatus } from '@apollo/client'
 import _random from 'lodash/random'
 import _range from 'lodash/range'
 import { useContext, useEffect, useRef } from 'react'

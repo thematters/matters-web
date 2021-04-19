@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 import { Card, Expandable } from '~/components'
 import CommentContent from '~/components/Comment/Content'

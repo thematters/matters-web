@@ -86,7 +86,7 @@ const BaseCardPayment: React.FC<CardPaymentProps> = ({
     setSubmitting(true)
     analytics.trackEvent('click_button', { type: 'subscribe_confirm' })
 
-    let data: SubscribeCircleType | undefined
+    let data: SubscribeCircleType | undefined | null
 
     try {
       const subscribeResult = await subscribeCircle({

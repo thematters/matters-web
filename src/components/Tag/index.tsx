@@ -1,5 +1,5 @@
+import { gql } from '@apollo/client'
 import classNames from 'classnames'
-import gql from 'graphql-tag'
 import Link from 'next/link'
 
 import { IconHashTag16, IconProps, TextIcon, TextIconProps } from '~/components'

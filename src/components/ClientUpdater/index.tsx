@@ -1,10 +1,12 @@
-import { useApolloClient } from '@apollo/react-hooks'
+import { useApolloClient } from '@apollo/client'
 import differenceInDays from 'date-fns/differenceInDays'
 import parseISO from 'date-fns/parseISO'
 import { Router } from 'next/router'
 import { useContext, useEffect, useRef } from 'react'
 
 import { useEventListener, useWindowResize, ViewerContext } from '~/components'
+import CLIENT_INFO from '~/components/GQL/queries/clientInfo'
+import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
 import {
   ONBOARDING_TASKS_HIDE,
@@ -26,7 +28,8 @@ export const ClientUpdater = () => {
       return
     }
 
-    client.writeData({
+    client.writeQuery({
+      query: CLIENT_INFO,
       id: `ClientInfo:local`,
       data: {
         viewportSize: {
@@ -43,14 +46,15 @@ export const ClientUpdater = () => {
    */
   const routeHistoryRef = useRef<string[]>([])
   const routeChangeComplete = (url: string) => {
-    if (!client?.writeData) {
+    if (!client?.writeQuery) {
       return
     }
 
     const newRouteHistory = [...routeHistoryRef.current, url]
     routeHistoryRef.current = newRouteHistory
 
-    client.writeData({
+    client.writeQuery({
+      query: CLIENT_PREFERENCE,
       id: 'ClientPreference:local',
       data: { routeHistory: newRouteHistory },
     })
@@ -84,7 +88,8 @@ export const ClientUpdater = () => {
       })
     }
 
-    client.writeData({
+    client.writeQuery({
+      query: CLIENT_PREFERENCE,
       id: 'ClientPreference:local',
       data: {
         onboardingTasks: {
@@ -104,7 +109,8 @@ export const ClientUpdater = () => {
       enabled: false,
     })
 
-    client.writeData({
+    client.writeQuery({
+      query: CLIENT_PREFERENCE,
       id: 'ClientPreference:local',
       data: {
         onboardingTasks: { __typename: 'OnboardingTasks', enabled: false },
@@ -124,7 +130,8 @@ export const ClientUpdater = () => {
       return
     }
 
-    client.writeData({
+    client.writeQuery({
+      query: CLIENT_PREFERENCE,
       id: 'ClientPreference:local',
       data: { feedSortType: 'icymi' },
     })

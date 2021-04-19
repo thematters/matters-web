@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 import CircleInvitationNotice from './CircleInvitationNotice'
 import CircleNewUserNotice from './CircleNewUserNotice'

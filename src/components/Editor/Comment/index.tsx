@@ -1,4 +1,4 @@
-import { useLazyQuery } from '@apollo/react-hooks'
+import { useLazyQuery } from '@apollo/client'
 import { MattersCommentEditor } from '@matters/matters-editor'
 import { useContext } from 'react'
 

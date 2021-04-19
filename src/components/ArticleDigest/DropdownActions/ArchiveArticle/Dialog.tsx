@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 import { Dialog, Translate, useDialogSwitch, useMutation } from '~/components'
 import updateUserArticles from '~/components/GQL/updates/userArticles'

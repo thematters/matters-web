@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { gql, useQuery } from '@apollo/client'
 import {
   CardElement,
   Elements,
@@ -7,7 +7,6 @@ import {
 } from '@stripe/react-stripe-js'
 import { loadStripe, StripeCardElementChangeEvent } from '@stripe/stripe-js'
 import { useFormik } from 'formik'
-import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useRef, useState } from 'react'
@@ -133,7 +132,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
       /**
        * Create Transaction
        */
-      let data: AddCreditType | undefined
+      let data: AddCreditType | undefined | null
 
       try {
         const txResult = await addCredit({ variables: { input: { amount } } })
