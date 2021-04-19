@@ -29,6 +29,7 @@ import { DraftDetailQuery } from './__generated__/DraftDetailQuery'
 import { SetDraftContent } from './__generated__/SetDraftContent'
 
 const Editor = dynamic(() => import('~/components/Editor/Article'), {
+  ssr: false,
   loading: Spinner,
 })
 
