@@ -144,7 +144,7 @@
     "next-compose-plugins": "^2.2.1",
     "next-offline": "^5.0.5",
     "next-optimized-images": "^2.6.2",
-    "nightwatch": "^1.6.2",
+    "nightwatch": "^1.6.3",
     "nightwatch-api": "^3.0.2",
     "node-fetch": "^2.6.1",
     "postcss-calc": "^7.0.5",
