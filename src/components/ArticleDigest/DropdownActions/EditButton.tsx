@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 import { IconEdit16, Menu, TextIcon, Translate } from '~/components'
 

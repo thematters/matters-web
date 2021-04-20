@@ -1,5 +1,5 @@
+import { gql } from '@apollo/client'
 import { useFormik } from 'formik'
-import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import { useRouter } from 'next/router'
 import { useContext } from 'react'

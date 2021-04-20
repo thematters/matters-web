@@ -1,7 +1,7 @@
-import ApolloClient from 'apollo-client'
-import gql from 'graphql-tag'
+import { ApolloClient, gql } from '@apollo/client'
 
 import { Translate, Viewer } from '~/components'
+import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
 import { ADD_TOAST, STORAGE_KEY_PUSH } from '~/common/enums'
 import { initializeFirebase, storage } from '~/common/utils'
@@ -37,7 +37,8 @@ export const initializePush = async ({
   cachedClient = client
 
   if (firebase?.messaging.isSupported()) {
-    client.writeData({
+    client.writeQuery({
+      query: CLIENT_PREFERENCE,
       id: 'ClientPreference:local',
       data: {
         push: {
@@ -92,7 +93,8 @@ export const initializePush = async ({
     await unsubscribePush()
   }
 
-  client.writeData({
+  client.writeQuery({
+    query: CLIENT_PREFERENCE,
     id: 'ClientPreference:local',
     data: {
       push: {
@@ -148,7 +150,8 @@ export const subscribePush = async (options?: { silent?: boolean }) => {
     })
 
     // Update local state
-    cachedClient.writeData({
+    cachedClient.writeQuery({
+      query: CLIENT_PREFERENCE,
       id: 'ClientPreference:local',
       data: {
         push: {
@@ -228,7 +231,8 @@ export const unsubscribePush = async () => {
     return
   }
 
-  cachedClient.writeData({
+  cachedClient.writeQuery({
+    query: CLIENT_PREFERENCE,
     id: 'ClientPreference:local',
     data: {
       push: {

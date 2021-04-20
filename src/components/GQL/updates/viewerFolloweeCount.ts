@@ -1,5 +1,5 @@
-import { DataProxy } from 'apollo-cache'
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
+import { DataProxy } from '@apollo/client/cache'
 
 import { ERROR_CODES } from '~/common/enums'
 

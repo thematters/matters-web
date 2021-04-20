@@ -1,5 +1,5 @@
+import { gql } from '@apollo/client'
 import classNames from 'classnames'
-import gql from 'graphql-tag'
 import throttle from 'lodash/throttle'
 import { useContext, useEffect, useRef, useState } from 'react'
 

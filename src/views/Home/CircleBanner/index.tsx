@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import Link from 'next/link'
 import { useContext } from 'react'
 
@@ -43,7 +43,8 @@ const CircleBanner = () => {
   const hideBanner = () => {
     storage.set(STORAGE_KEY_CIRCLE_BANNER, false)
 
-    client.writeData({
+    client.writeQuery({
+      query: CLIENT_PREFERENCE,
       id: 'ClientPreference:local',
       data: {
         circleBanner: false,

@@ -1,4 +1,4 @@
-import { useLazyQuery } from '@apollo/react-hooks'
+import { useLazyQuery } from '@apollo/client'
 import _differenceBy from 'lodash/differenceBy'
 import _get from 'lodash/get'
 import { useContext, useEffect, useState } from 'react'
@@ -113,8 +113,12 @@ const CricleDiscussion = () => {
   }, [hasPermission])
 
   // load next page
-  const loadMore = () =>
-    fetchMore({
+  const loadMore = async () => {
+    if (!fetchMore) {
+      return
+    }
+
+    return fetchMore({
       variables: { after: pageInfo?.endCursor },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
@@ -123,9 +127,16 @@ const CricleDiscussion = () => {
           path: connectionPath,
         }),
     })
+  }
 
   // refetch & pull to refresh
-  usePullToRefresh.Handler(refetch)
+  usePullToRefresh.Handler(async () => {
+    if (!refetch) {
+      return
+    }
+
+    return refetch()
+  })
 
   const submitCallback = () => {
     window.dispatchEvent(
@@ -137,6 +148,11 @@ const CricleDiscussion = () => {
         },
       })
     )
+
+    if (!refetch) {
+      return
+    }
+
     refetch()
   }
 

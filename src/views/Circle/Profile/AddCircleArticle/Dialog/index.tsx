@@ -1,4 +1,4 @@
-import { useMutation } from '@apollo/react-hooks'
+import { useMutation } from '@apollo/client'
 import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
 

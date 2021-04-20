@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import { useContext, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 
@@ -226,7 +226,8 @@ const AppreciationButton = ({
       <CivicLikerButton
         user={article.author}
         onClose={() => {
-          client.writeData({
+          client.writeQuery({
+            query: CLIENT_PREFERENCE,
             id: 'ClientPreference:local',
             data: { readCivicLikerDialog: true },
           })

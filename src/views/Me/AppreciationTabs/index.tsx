@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 import { Spacer, Tabs, Translate, useRoute } from '~/components'
 

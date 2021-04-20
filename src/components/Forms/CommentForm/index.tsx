@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import dynamic from 'next/dynamic'
 import { useState } from 'react'
 
@@ -109,7 +109,8 @@ export const CommentForm: React.FC<CommentFormProps> = ({
       }
 
       // clear draft
-      client.writeData({
+      client.writeQuery({
+        query: COMMENT_DRAFT,
         id: `CommentDraft:${commentDraftId}`,
         data: { content: '' },
       })
@@ -122,7 +123,8 @@ export const CommentForm: React.FC<CommentFormProps> = ({
   const onUpdate = ({ content: newContent }: { content: string }) => {
     setContent(newContent)
 
-    client.writeData({
+    client.writeQuery({
+      query: COMMENT_DRAFT,
       id: `CommentDraft:${commentDraftId}`,
       data: { content: newContent },
     })

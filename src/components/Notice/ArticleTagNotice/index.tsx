@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 import ArticleTagAddedNotice from './ArticleTagAddedNotice'
 import ArticleTagRemovedNotice from './ArticleTagRemovedNotice'
