@@ -9,6 +9,7 @@ import {
   useMutation,
 } from '~/components'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
+import updateDraftAssets from '~/components/GQL/updates/draftAssets'
 
 import {
   ACCEPTED_UPLOAD_IMAGE_TYPES,
@@ -42,7 +43,17 @@ const Uploader: React.FC<UploaderProps> = ({
 }) => {
   const [upload, { loading }] = useMutation<SingleFileUpload>(
     UPLOAD_FILE,
-    undefined,
+    {
+      update: (cache, { data }) => {
+        if (data?.singleFileUpload) {
+          updateDraftAssets({
+            cache,
+            id: entityId,
+            asset: data.singleFileUpload,
+          })
+        }
+      },
+    },
     { showToast: false }
   )
 
@@ -88,8 +99,6 @@ const Uploader: React.FC<UploaderProps> = ({
           },
         },
       })
-
-      await refetchAssets()
 
       if (data?.singleFileUpload) {
         setSelected(data?.singleFileUpload)
