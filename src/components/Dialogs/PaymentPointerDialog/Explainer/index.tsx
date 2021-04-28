@@ -24,7 +24,7 @@ const PaymentPointerExplainer = () => (
           en="Interledger Protocol"
         />
       </a>
-      <Translate zh_hant="與" zh_hans="与" en=" and " />
+      <Translate zh_hant=" 與 " zh_hans=" 与 " en=" and " />
       <a href="https://webmonetization.org/" target="_blank">
         <Translate
           zh_hant="Web Monetization 標準"

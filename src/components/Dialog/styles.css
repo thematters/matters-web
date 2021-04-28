@@ -55,6 +55,10 @@
       grid-column: col-start 3 / span 4;
     }
 
+    @media (--md-up) {
+      grid-column: col-start 3 / span 5;
+    }
+
     @media (--lg-up) {
       grid-column: col-start 5 / span 4;
     }

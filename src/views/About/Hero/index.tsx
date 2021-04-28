@@ -45,14 +45,14 @@ const Hero = () => {
               <section>
                 <h2>
                   <Translate
-                    zh_hant="去中心化的寫作"
-                    zh_hans="去中心化的写作"
+                    zh_hant="去中心化的"
+                    zh_hans="去中心化的"
                     en="The Next Decentralized"
                   />
                   <br />
                   <Translate
-                    zh_hant="社群與內容生態"
-                    zh_hans="社群与内容生态"
+                    zh_hant="寫作社群與內容生態"
+                    zh_hans="写作社群与内容生态"
                     en="Content Ecosystem"
                   />
                 </h2>

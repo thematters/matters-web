@@ -1,4 +1,6 @@
 .group {
+  user-select: none;
+
   & .name {
     padding: 0 var(--spacing-base);
     margin: var(--spacing-loose) 0 var(--spacing-x-tight);
