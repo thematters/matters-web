@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Dialog, Translate } from '~/components'
 
@@ -34,19 +34,24 @@ const BaseSetCoverDialog = ({
 }: SetCoverDialogProps) => {
   // dialog
   const [showDialog, setShowDialog] = useState(true)
-  const open = () => {
-    setShowDialog(true)
-  }
+  const open = () => setShowDialog(true)
   const close = () => setShowDialog(false)
 
   // cover
-  const [selected, setSelected] = useState(
-    assets.find((ast) => ast.path === cover)
-  )
+  const filter = (ast: Asset) => ast.path === cover
+  const [selected, setSelected] = useState(assets.find(filter))
   const onSave = async () => {
-    await onEdit(selected)
+    const result = await onEdit(selected)
+    // set selected cover if fallback cover specified by server
+    if (cover && cover === result.data?.putDraft?.cover && !selected) {
+      setSelected(assets.find(filter))
+    }
     close()
   }
+
+  useEffect(() => {
+    setSelected(assets.find(filter))
+  }, [cover])
 
   return (
     <>
