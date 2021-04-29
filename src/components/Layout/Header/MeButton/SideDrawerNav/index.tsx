@@ -1,6 +1,6 @@
 import { DialogContent, DialogOverlay } from '@reach/dialog'
-import { useEffect, useRef } from 'react'
-import { animated, Globals, useTransition } from 'react-spring'
+import { useRef } from 'react'
+import { animated, useTransition } from 'react-spring'
 
 import DrawerContent from './DrawerContent'
 import Overlay from './Overlay'
@@ -13,18 +13,6 @@ export interface SideDrawerNavProps {
 
 const SideDrawerNav: React.FC<SideDrawerNavProps> = ({ isOpen, onDismiss }) => {
   const closeButtonRef: React.RefObject<any> | null = useRef(null)
-
-  // FIXME: https://github.com/react-spring/react-spring/issues/664#issuecomment-585748356
-  useEffect(() => {
-    if (performance.mark && performance.getEntries) {
-      performance.mark('dummy_check')
-      const entries = performance.getEntries()
-
-      Globals.assign({
-        skipAnimation: entries && entries.length === 0,
-      })
-    }
-  }, [])
 
   const transition = useTransition(isOpen ? [true] : [], {
     from: {
