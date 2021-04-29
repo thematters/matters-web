@@ -62,7 +62,7 @@ const AppreciationButton = ({
   const total = article.appreciationsReceivedTotal + amount
   const appreciatedCount = limit - left
   const isReachLimit = left <= 0 || isArticleAuthor
-  const [debouncedSendAppreciation] = useDebouncedCallback(async () => {
+  const debouncedSendAppreciation = useDebouncedCallback(async () => {
     try {
       await sendAppreciation({
         variables: {

@@ -138,7 +138,8 @@ const MemoizedFollowComment = React.memo(
   ({ comment: prevComment }, { comment }) => {
     return (
       prevComment.upvotes === comment.upvotes &&
-      prevComment.downvotes === comment.downvotes
+      prevComment.downvotes === comment.downvotes &&
+      prevComment.author.isBlocked === comment.author.isBlocked
     )
   }
 ) as MemoizedFollowCommentType
