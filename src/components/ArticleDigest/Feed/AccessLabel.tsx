@@ -1,11 +1,6 @@
 import gql from 'graphql-tag'
 
-import {
-  IconLimitedFree16,
-  IconPaywall16,
-  TextIcon,
-  Translate,
-} from '~/components'
+import { IconPaywall16, TextIcon, Translate } from '~/components'
 
 import Label from './Label'
 
@@ -29,7 +24,6 @@ const fragments = {
 
 const AccessLabel = ({ article }: AccessLabelProps) => {
   const isPublic = article.access.type === ArticleAccessType.public
-  const isLimitedFree = article.access.type === ArticleAccessType.limitedFree
   const isPaywalled = article.access.type === ArticleAccessType.paywall
 
   if (isPublic) {
@@ -38,19 +32,7 @@ const AccessLabel = ({ article }: AccessLabelProps) => {
 
   return (
     <Label>
-      <TextIcon
-        icon={
-          isLimitedFree ? (
-            <IconLimitedFree16 size="sm" />
-          ) : (
-            <IconPaywall16 size="sm" />
-          )
-        }
-        size="xs"
-      >
-        {isLimitedFree && (
-          <Translate zh_hant="限免" zh_hans="限免" en="Limited Free" />
-        )}
+      <TextIcon icon={<IconPaywall16 size="sm" />} size="xs">
         {isPaywalled && (
           <Translate zh_hant="上鎖" zh_hans="上锁" en="Paywalled" />
         )}

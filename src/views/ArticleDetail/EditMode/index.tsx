@@ -73,7 +73,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
   // access
   const isPrevPublic = article.access.type === ArticleAccessType.public
   const ownCircles = data?.article?.author.ownCircles
-  const hasCircles = ownCircles && ownCircles.length >= 1
+  const hasOwnCircle = ownCircles && ownCircles.length >= 1
   const editAccess = (addToCircle: boolean, paywalled: boolean) => {
     if (!ownCircles) {
       return
@@ -172,7 +172,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
             disabled={isEditDisabled}
           />
 
-          {hasCircles && (
+          {hasOwnCircle && (
             <Sidebar.Management
               circle={circle}
               accessType={accessType}
@@ -243,7 +243,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
           // circle
           circle={circle}
           accessType={accessType}
-          editAccess={hasCircles ? editAccess : undefined}
+          editAccess={hasOwnCircle ? editAccess : undefined}
           canToggleCircle={isPrevPublic}
           canTogglePaywall={isPrevPublic}
         />

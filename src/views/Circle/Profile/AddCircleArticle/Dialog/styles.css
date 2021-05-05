@@ -1,14 +1,23 @@
 .switch {
-  @mixin flex-center-space-between;
   @mixin border-top-grey;
   @mixin border-bottom-grey;
 
   padding: var(--spacing-base);
   margin: 0 calc(var(--spacing-base) * -1) var(--spacing-loose);
 
-  & p {
+  & header {
+    @mixin flex-center-space-between;
+  }
+
+  & h4 {
     font-size: var(--font-size-md);
     font-weight: var(--font-weight-medium);
     line-height: 1;
+  }
+
+  & .description {
+    margin-top: var(--spacing-xx-tight);
+    font-size: var(--font-size-sm-s);
+    color: var(--color-grey-darker);
   }
 }
