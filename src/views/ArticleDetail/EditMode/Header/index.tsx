@@ -12,7 +12,7 @@ import {
 import { fragments as EditorFragments } from '~/components/Editor/fragments'
 import articleFragments from '~/components/GQL/fragments/article'
 
-import { ADD_TOAST } from '~/common/enums'
+import { ADD_TOAST, MAX_ARTICLE_REVISION_DIFF } from '~/common/enums'
 import { measureDiffs } from '~/common/utils'
 
 import styles from './styles.css'
@@ -34,7 +34,7 @@ interface EditModeHeaderProps {
   circle?: DigestRichCirclePublic | null
   accessType?: ArticleAccessType
 
-  count?: number
+  countLeft: number
 
   isPending?: boolean
   isSameHash?: boolean
@@ -104,7 +104,7 @@ const EditModeHeader = ({
   circle,
   accessType,
 
-  count = 3,
+  countLeft,
 
   isPending,
   isSameHash,
@@ -117,10 +117,10 @@ const EditModeHeader = ({
   const diff = measureDiffs(initText || '', currText || '') || 0
   const diffCount = `${diff}`.padStart(2, '0')
 
-  const isReachDiffLimit = diff > 50
+  const isReachDiffLimit = diff > MAX_ARTICLE_REVISION_DIFF
   const isRevised = diff > 0
-  const isUnderLimit = count > 0 && count <= 3
-  const isOverLimit = count <= 0
+  const isUnderLimit = countLeft > 0
+  const isOverLimit = countLeft <= 0
 
   const onSave = async () => {
     try {
@@ -184,7 +184,7 @@ const EditModeHeader = ({
                   zh_hans="正文及作品管理剩 "
                   en="content and article management has "
                 />
-                {count}
+                {countLeft}
                 <Translate
                   zh_hant=" 版修訂"
                   zh_hans=" 次修订"
@@ -201,15 +201,6 @@ const EditModeHeader = ({
                 zh_hans="正文及作品管理修订次数已达上限"
                 en="You have reached the limit of republish"
               />
-            )}
-            {isUnderLimit && (
-              <span className="notice">
-                <Translate
-                  zh_hant="離開本頁將丟失全部編輯"
-                  zh_hans="离开本页将丢失全部编辑"
-                  en="you will lost your changes if you leave this page"
-                />
-              </span>
             )}
           </>
         )}
