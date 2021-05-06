@@ -71,7 +71,6 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
   )
 
   // access
-  const isPrevPublic = article.access.type === ArticleAccessType.public
   const ownCircles = data?.article?.author.ownCircles
   const hasOwnCircle = ownCircles && ownCircles.length >= 1
   const editAccess = (addToCircle: boolean, paywalled: boolean) => {
@@ -138,6 +137,8 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
   const isEditDisabled = !isSameHash || isPending
   const isReviseDisabled = isEditDisabled || count <= 0
 
+  console.log({ isReviseDisabled, count, ccc: data?.article?.revisionCount })
+
   if (!draft) {
     return (
       <EmptyLayout>
@@ -177,8 +178,8 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
               circle={circle}
               accessType={accessType}
               editAccess={editAccess}
-              canToggleCircle={isPrevPublic}
-              canTogglePaywall={isPrevPublic}
+              canToggleCircle={!isReviseDisabled}
+              canTogglePaywall={!isReviseDisabled}
               saving={false}
             />
           )}
@@ -244,8 +245,8 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
           circle={circle}
           accessType={accessType}
           editAccess={hasOwnCircle ? editAccess : undefined}
-          canToggleCircle={isPrevPublic}
-          canTogglePaywall={isPrevPublic}
+          canToggleCircle={!isReviseDisabled}
+          canTogglePaywall={!isReviseDisabled}
         />
       )}
 
