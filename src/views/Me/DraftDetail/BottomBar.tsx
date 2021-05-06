@@ -31,6 +31,7 @@ const EditDraftBottomBar = ({ draft, ownCircles }: BottomBarProps) => {
     draft,
     ownCircles && ownCircles[0]
   )
+  const hasOwnCircle = ownCircles && ownCircles.length >= 1
   const tags = (draft.tags || []).map(toDigestTagPlaceholder)
   const isPending = draft.publishState === 'pending'
   const isPublished = draft.publishState === 'published'
@@ -55,7 +56,7 @@ const EditDraftBottomBar = ({ draft, ownCircles }: BottomBarProps) => {
       // circle
       circle={draft?.access.circle}
       accessType={draft.access.type}
-      editAccess={editAccess}
+      editAccess={hasOwnCircle ? editAccess : undefined}
       canToggleCircle
       canTogglePaywall
     />

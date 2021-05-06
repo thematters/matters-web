@@ -31,7 +31,7 @@ const CircleBanner = () => {
     { variables: { id: 'local' } }
   )
   const ownCirclesCount = viewer?.ownCircles?.length || 0
-  const hasCircle = ownCirclesCount > 0
+  const hasOwnCircle = ownCirclesCount > 0
 
   // determine whether banner should be shown or not
   const storedCircleBanner = storage.get(STORAGE_KEY_CIRCLE_BANNER)
@@ -51,7 +51,7 @@ const CircleBanner = () => {
     })
   }
 
-  if (!enabled || hasCircle) {
+  if (!enabled || hasOwnCircle) {
     return null
   }
 

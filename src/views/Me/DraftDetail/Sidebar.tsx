@@ -70,8 +70,9 @@ const EditDraftCircle = ({ draft, ownCircles }: SidebarProps) => {
     draft,
     ownCircles && ownCircles[0]
   )
+  const hasOwnCircle = ownCircles && ownCircles.length >= 1
 
-  if (!ownCircles) {
+  if (!hasOwnCircle) {
     return null
   }
 

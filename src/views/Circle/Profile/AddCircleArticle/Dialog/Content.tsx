@@ -27,32 +27,25 @@ const Content: React.FC<ContentProps> = ({
 
       <Dialog.Message align="left" type="info">
         <section className="switch">
-          <p>
-            <Translate zh_hant="上鎖" zh_hans="上锁" en="Paywalled" />
+          <header>
+            <h4>
+              <Translate zh_hant="上鎖" zh_hans="上锁" en="Paywalled" />
+            </h4>
+
+            <Switch
+              checked={paywalled}
+              onChange={() => setPaywalled(!paywalled)}
+            />
+          </header>
+
+          <p className="description">
+            <Translate
+              zh_hant="未訂閱者無法閱讀摘要外的正文"
+              zh_hans="未订阅者无法阅读摘要外的正文"
+              en="Member-only content"
+            />
           </p>
-
-          <Switch
-            checked={paywalled}
-            onChange={() => setPaywalled(!paywalled)}
-          />
         </section>
-
-        <ul>
-          <li>
-            <Translate
-              zh_hant="上鎖作品 24 小時內限免，過後僅圍爐成員可閱讀"
-              zh_hans="上锁作品 24 小时内限免，过后仅围炉成员可阅读"
-              en="Paywalled article will be free to read for 24 hours, then circle members only."
-            />
-          </li>
-          <li>
-            <Translate
-              zh_hant="作品上鎖後，不支持撤銷或移出圍爐"
-              zh_hans="作品上锁后，不支持撤销或移出围炉"
-              en="You can't undo changes on paywalled article"
-            />
-          </li>
-        </ul>
 
         <style jsx>{styles}</style>
       </Dialog.Message>
