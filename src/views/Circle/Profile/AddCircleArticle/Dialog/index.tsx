@@ -71,8 +71,6 @@ const AddCircleArticleDialog = ({
     open()
   }
 
-  console.log(articles)
-
   return (
     <SearchSelectDialog
       title="circleAddArticles"
