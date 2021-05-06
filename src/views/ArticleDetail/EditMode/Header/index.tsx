@@ -197,8 +197,8 @@ const EditModeHeader = ({
             )}
             {isOverLimit && (
               <Translate
-                zh_hant="正文修訂次數已達上限"
-                zh_hans="正文修订次数已达上限"
+                zh_hant="正文及作品管理修訂次數已達上限"
+                zh_hans="正文及作品管理修订次数已达上限"
                 en="You have reached the limit of republish"
               />
             )}
