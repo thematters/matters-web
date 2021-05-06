@@ -44,3 +44,6 @@ export const VERIFICATION_CODE_TYPES = {
 
 export const COOKIE_TOKEN_NAME = '__token'
 export const COOKIE_USER_GROUP = '__user_group'
+
+export const MAX_ARTICLE_REVISION_COUNT = 2
+export const MAX_ARTICLE_REVISION_DIFF = 50
