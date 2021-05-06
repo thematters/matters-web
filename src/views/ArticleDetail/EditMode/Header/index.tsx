@@ -180,15 +180,15 @@ const EditModeHeader = ({
             {isUnderLimit && (
               <>
                 <Translate
-                  zh_hant="正文剩餘"
-                  zh_hans="正文剩余"
-                  en="content has"
-                />{' '}
-                {count}{' '}
+                  zh_hant="正文及作品管理剩 "
+                  zh_hans="正文及作品管理剩 "
+                  en="content and article management has "
+                />
+                {count}
                 <Translate
-                  zh_hant="版修訂"
-                  zh_hans="版修订"
-                  en="republish left"
+                  zh_hant=" 版修訂"
+                  zh_hans=" 次修订"
+                  en=" republish left"
                 />
                 <span className={diffCountClasses}>
                   &nbsp;{diffCount}/50&nbsp;&nbsp;&nbsp;
