@@ -28,8 +28,8 @@ const CircleNewArticle = ({ notice }: { notice: NoticeType }) => {
         <NoticeHead
           subtitle={
             <Translate
-              zh_hant="新作品已經加入圍爐。該作品 24 小時限免，你可以前往閱讀啦。"
-              zh_hans="新作品已经加入围炉。该作品 24 小时限免，你可以前往阅读啦。"
+              zh_hant="新作品已經加入圍爐，馬上前往閱讀吧！"
+              zh_hans="新作品已经加入围炉，马上前往阅读吧！"
             />
           }
         >

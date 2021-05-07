@@ -77,9 +77,9 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
 
             <p className="description">
               <Translate
-                zh_hant="前 24 小時限免，上鎖後無法轉公開"
-                zh_hans="前 24 小时限免，上锁后无法转公开"
-                en="Limited free for 24 hours, can't be undone"
+                zh_hant="未訂閱者無法閱讀摘要外的正文"
+                zh_hans="未订阅者无法阅读摘要外的正文"
+                en="Member-only content"
               />
             </p>
           </section>

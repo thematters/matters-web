@@ -107,7 +107,6 @@ const ArticleDetail = () => {
     isAuthor ||
     !circle ||
     circle.isMember ||
-    article?.access.type === ArticleAccessType.limitedFree ||
     article?.access.type === ArticleAccessType.public
   )
   const summary = article?.summary
