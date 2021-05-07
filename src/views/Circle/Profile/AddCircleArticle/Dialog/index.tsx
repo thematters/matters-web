@@ -1,4 +1,3 @@
-import { useMutation } from '@apollo/react-hooks'
 import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
 
@@ -7,6 +6,7 @@ import {
   LanguageContext,
   Spinner,
   useDialogSwitch,
+  useMutation,
   ViewerContext,
 } from '~/components'
 import {

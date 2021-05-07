@@ -4,10 +4,10 @@ import styles from './styles.css'
 
 interface Props {
   children?: ({ open }: { open: () => void }) => React.ReactNode
-  count: number
+  countLeft: number
 }
 
-export const ReviseArticleDialog = ({ children, count }: Props) => {
+export const ReviseArticleDialog = ({ children, countLeft }: Props) => {
   const { show, open, close } = useDialogSwitch(true)
 
   return (
@@ -44,7 +44,7 @@ export const ReviseArticleDialog = ({ children, count }: Props) => {
           <p>
             <b>
               <Translate zh_hant="你還可以修訂" zh_hans="你还可以修订" />
-              <span className="count"> {count} </span>
+              <span className="count"> {countLeft} </span>
               <Translate zh_hant="版" zh_hans="版" />
             </b>
           </p>

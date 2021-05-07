@@ -15,9 +15,9 @@ import BottomBar from '~/components/Editor/BottomBar'
 import Sidebar from '~/components/Editor/Sidebar'
 import { QueryError, useImperativeQuery } from '~/components/GQL'
 
-import { ENTITY_TYPE } from '~/common/enums'
+import { ENTITY_TYPE, MAX_ARTICLE_REVISION_COUNT } from '~/common/enums'
 
-import styles from '../styles.css'
+import ConfirmExitDialog from './ConfirmExitDialog'
 import { EDIT_MODE_ARTICLE, EDIT_MODE_ARTICLE_ASSETS } from './gql'
 import EditModeHeader from './Header'
 import PublishState from './PublishState'
@@ -41,8 +41,6 @@ const Editor = dynamic(() => import('~/components/Editor/Article'), {
   ssr: false,
   loading: Spinner,
 })
-
-const MAX_REVISION_COUNT = 2
 
 const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
   const isLargeUp = useResponsive('lg-up')
@@ -71,9 +69,8 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
   )
 
   // access
-  const isPrevPublic = article.access.type === ArticleAccessType.public
   const ownCircles = data?.article?.author.ownCircles
-  const hasCircles = ownCircles && ownCircles.length >= 1
+  const hasOwnCircle = ownCircles && ownCircles.length >= 1
   const editAccess = (addToCircle: boolean, paywalled: boolean) => {
     if (!ownCircles) {
       return
@@ -132,11 +129,13 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
 
   const drafts = data?.article?.drafts
   const draft = drafts && drafts[0]
-  const count = MAX_REVISION_COUNT - (data?.article?.revisionCount || 0)
+  const countLeft =
+    MAX_ARTICLE_REVISION_COUNT - (data?.article?.revisionCount || 0)
   const isSameHash = draft?.mediaHash === article.mediaHash
   const isPending = draft?.publishState === 'pending'
   const isEditDisabled = !isSameHash || isPending
-  const isReviseDisabled = isEditDisabled || count <= 0
+  const isOverLimit = countLeft <= 0
+  const isReviseDisabled = isEditDisabled || isOverLimit
 
   if (!draft) {
     return (
@@ -147,112 +146,119 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
   }
 
   return (
-    <Layout.Main
-      aside={
-        <>
-          <Sidebar.Cover
-            cover={cover?.path}
-            assets={assets}
-            entityId={article.id}
-            entityType={ENTITY_TYPE.article}
-            onEdit={editCover}
-            refetchAssets={refetchAssets}
-            disabled={isEditDisabled}
-          />
+    <>
+      <ConfirmExitDialog onExit={onCancel}>
+        {({ open: openConfirmExitDialog }) => (
+          <Layout.Main
+            aside={
+              <>
+                <Sidebar.Cover
+                  cover={cover?.path}
+                  assets={assets}
+                  entityId={article.id}
+                  entityType={ENTITY_TYPE.article}
+                  onEdit={editCover}
+                  refetchAssets={refetchAssets}
+                  disabled={isEditDisabled}
+                />
 
-          <Sidebar.Tags
-            tags={tags}
-            onEdit={editTags}
-            disabled={isEditDisabled}
-          />
+                <Sidebar.Tags
+                  tags={tags}
+                  onEdit={editTags}
+                  disabled={isEditDisabled}
+                />
 
-          <Sidebar.Collection
-            articles={collection}
-            onEdit={editCollection}
-            disabled={isEditDisabled}
-          />
+                <Sidebar.Collection
+                  articles={collection}
+                  onEdit={editCollection}
+                  disabled={isEditDisabled}
+                />
 
-          {hasCircles && (
-            <Sidebar.Management
-              circle={circle}
-              accessType={accessType}
-              editAccess={editAccess}
-              canToggleCircle={isPrevPublic}
-              canTogglePaywall={isPrevPublic}
-              saving={false}
+                {hasOwnCircle && (
+                  <Sidebar.Management
+                    circle={circle}
+                    accessType={accessType}
+                    editAccess={editAccess}
+                    canToggleCircle={!isReviseDisabled}
+                    canTogglePaywall={!isReviseDisabled}
+                    saving={false}
+                  />
+                )}
+              </>
+            }
+            inEditor
+          >
+            <Layout.Header
+              left={
+                <Layout.Header.BackButton
+                  onClick={isOverLimit ? onCancel : openConfirmExitDialog}
+                  disabled={isPending}
+                />
+              }
+              right={
+                <EditModeHeader
+                  article={article}
+                  cover={cover}
+                  editData={editData}
+                  tags={tags}
+                  collection={collection}
+                  circle={circle}
+                  accessType={accessType}
+                  countLeft={countLeft}
+                  isSameHash={isSameHash}
+                  onSaved={onSaved}
+                />
+              }
             />
-          )}
-        </>
-      }
-      inEditor
-    >
-      <Layout.Header
-        left={
-          <Layout.Header.BackButton onClick={onCancel} disabled={isPending} />
-        }
-        right={
-          <EditModeHeader
-            article={article}
-            cover={cover}
-            editData={editData}
-            tags={tags}
-            collection={collection}
-            circle={circle}
-            accessType={accessType}
-            count={count}
-            isSameHash={isSameHash}
-            onSaved={onSaved}
-          />
-        }
-      />
 
-      <PublishState
-        article={article}
-        draft={draft}
-        isSameHash={isSameHash}
-        cancel={onCancel}
-      />
+            <PublishState
+              article={article}
+              draft={draft}
+              isSameHash={isSameHash}
+              cancel={onCancel}
+            />
 
-      <Layout.Spacing>
-        <Editor
-          draft={draft}
-          isReviseMode={!isReviseDisabled}
-          isSummaryReadOnly
-          isTitleReadOnly
-          update={async (update) => setEditData(update)}
-          upload={async () => ({ id: '', path: '' })}
-        />
-      </Layout.Spacing>
+            <Layout.Spacing>
+              <Editor
+                draft={draft}
+                isReviseMode={!isReviseDisabled}
+                isSummaryReadOnly
+                isTitleReadOnly
+                update={async (update) => setEditData(update)}
+                upload={async () => ({ id: '', path: '' })}
+              />
+            </Layout.Spacing>
 
-      {!isLargeUp && (
-        <BottomBar
-          disabled={isEditDisabled}
-          // cover
-          cover={cover?.path}
-          assets={assets}
-          editCover={editCover}
-          refetchAssets={refetchAssets}
-          entityId={article.id}
-          entityType={ENTITY_TYPE.article}
-          // tags
-          tags={tags}
-          editTags={editTags}
-          // collection
-          collection={collection}
-          editCollection={editCollection}
-          // circle
-          circle={circle}
-          accessType={accessType}
-          editAccess={hasCircles ? editAccess : undefined}
-          canToggleCircle={isPrevPublic}
-          canTogglePaywall={isPrevPublic}
-        />
-      )}
+            {!isLargeUp && (
+              <BottomBar
+                disabled={isEditDisabled}
+                // cover
+                cover={cover?.path}
+                assets={assets}
+                editCover={editCover}
+                refetchAssets={refetchAssets}
+                entityId={article.id}
+                entityType={ENTITY_TYPE.article}
+                // tags
+                tags={tags}
+                editTags={editTags}
+                // collection
+                collection={collection}
+                editCollection={editCollection}
+                // circle
+                circle={circle}
+                accessType={accessType}
+                editAccess={hasOwnCircle ? editAccess : undefined}
+                canToggleCircle={!isReviseDisabled}
+                canTogglePaywall={!isReviseDisabled}
+              />
+            )}
+          </Layout.Main>
+        )}
+      </ConfirmExitDialog>
 
-      {!isReviseDisabled && <ReviseArticleDialog count={count} />}
-
-      <style jsx>{styles}</style>
-    </Layout.Main>
+      {!isReviseDisabled && <ReviseArticleDialog countLeft={countLeft} />}
+    </>
   )
 }
 

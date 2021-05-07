@@ -97,7 +97,7 @@ export const MOCK_ARTILCE = {
   subscribed: false,
   access: {
     __typename: 'ArticleAccess' as any,
-    type: 'limitedFree' as any,
+    type: 'paywall' as any,
     circle: MOCK_CIRCLE,
   },
 }
