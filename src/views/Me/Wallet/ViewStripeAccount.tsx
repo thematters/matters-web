@@ -25,7 +25,7 @@ const GET_STRIPE_LOGIN_URL = gql`
   }
 `
 
-const Buttons = () => {
+const ViewStripeAccount = () => {
   const { data, loading } = useQuery<GetStripeLoginUrl>(GET_STRIPE_LOGIN_URL)
   const loginUrl = data?.viewer?.wallet.stripeAccount?.loginUrl
 
@@ -51,4 +51,4 @@ const Buttons = () => {
   )
 }
 
-export default Buttons
+export default ViewStripeAccount
