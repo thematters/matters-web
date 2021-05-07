@@ -31,7 +31,7 @@ const CommentEditor: React.FC<Props> = ({ content, update, placeholder }) => {
   ) as SearchUsers_search_edges_node_User[]
 
   const mentionKeywordChange = (keyword: string) => {
-    search({ variables: { search: keyword } })
+    search({ variables: { search: keyword, exclude: 'blocked' } })
   }
 
   return (
