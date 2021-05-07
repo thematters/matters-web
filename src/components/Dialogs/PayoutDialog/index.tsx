@@ -88,6 +88,7 @@ const BasePayoutDialog = ({
         {isConnectStripeAccount && (
           <DynamicConnectStripeAccountForm
             nextStep={() => forward('confirm')}
+            close={close}
           />
         )}
 
