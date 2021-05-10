@@ -11,7 +11,7 @@ import {
   Translate,
 } from '~/components'
 
-import { LANG_TEXT_MAP } from '~/common/enums'
+import { LANG_TEXT_MAP, Z_INDEX } from '~/common/enums'
 
 import { UserLanguage } from '@/__generated__/globalTypes'
 
@@ -71,6 +71,7 @@ export const LanguageSwitch = () => {
       dropdown={{
         content: <LanguageSwitchContent isInDropdown />,
         placement: 'bottom-end',
+        zIndex: Z_INDEX.OVER_DIALOG,
       }}
       dialog={{
         content: <LanguageSwitchContent />,

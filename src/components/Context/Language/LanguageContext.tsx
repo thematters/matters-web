@@ -51,8 +51,6 @@ export const LanguageProvider = ({
     storage.get(STORAGE_KEY_LANGUAGE)
   let lang = (viewer.isAuthed && viewerLang) || localLang
 
-  console.log({ lang, viewerLang, localLang })
-
   // fallback to browser preference
   if (process.browser && !lang && navigator?.language) {
     console.log('.fallback', langConvert.bcp472sys(navigator.language))
