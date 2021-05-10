@@ -1,11 +1,15 @@
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext } from 'react'
 
 import { Translate, useMutation, ViewerContext } from '~/components'
+import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
-import { ADD_TOAST, DEFAULT_LANG } from '~/common/enums'
-import { langConvert } from '~/common/utils'
+import { ADD_TOAST, STORAGE_KEY_LANGUAGE } from '~/common/enums'
+import { langConvert, storage } from '~/common/utils'
 
+import { UserLanguage } from '@/__generated__/globalTypes'
+import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import { UpdateLanguage } from './__generated__/UpdateLanguage'
 
 const UPDATE_VIEWER_LANGUAGE = gql`
@@ -21,8 +25,8 @@ const UPDATE_VIEWER_LANGUAGE = gql`
 
 export const LanguageContext = createContext(
   {} as {
-    lang: Language
-    setLang: (lang: Language) => void
+    lang: UserLanguage
+    setLang: (lang: UserLanguage) => void
   }
 )
 
@@ -30,32 +34,51 @@ export const LanguageConsumer = LanguageContext.Consumer
 
 export const LanguageProvider = ({
   children,
-  defaultLang = DEFAULT_LANG,
 }: {
   children: React.ReactNode
-  defaultLang?: Language
 }) => {
+  const { data: clientPreferenceData, client } = useQuery<ClientPreference>(
+    CLIENT_PREFERENCE,
+    { variables: { id: 'local' } }
+  )
+
   const [updateLanguage] = useMutation<UpdateLanguage>(UPDATE_VIEWER_LANGUAGE)
   const viewer = useContext(ViewerContext)
 
-  let viewerLanguage = viewer?.settings?.language
+  const viewerLang = viewer?.settings?.language
+  const localLang =
+    clientPreferenceData?.clientPreference?.language ||
+    storage.get(STORAGE_KEY_LANGUAGE)
+  let lang = (viewer.isAuthed && viewerLang) || localLang
 
-  // set language preference from browser for visitors
-  if (
-    (!viewer || !viewer.id) &&
-    process.browser &&
-    navigator &&
-    navigator.language
-  ) {
-    viewerLanguage = langConvert.bcp472sys(navigator.language)
+  console.log({ lang, viewerLang, localLang })
+
+  // fallback to browser preference
+  if (process.browser && !lang && navigator?.language) {
+    console.log('.fallback', langConvert.bcp472sys(navigator.language))
+    lang = langConvert.bcp472sys(navigator.language)
   }
 
-  const [lang, setLang] = useState<Language>(viewerLanguage || defaultLang)
+  const setLang = (targetLang: UserLanguage) => {
+    storage.set(STORAGE_KEY_LANGUAGE, targetLang)
+
+    client.writeData({
+      id: 'ClientPreference:local',
+      data: {
+        language: targetLang,
+      },
+    })
+
+    document.documentElement.setAttribute(
+      'lang',
+      langConvert.sys2html(targetLang)
+    )
+  }
 
   return (
     <LanguageContext.Provider
       value={{
-        lang: viewerLanguage || lang,
+        lang,
         setLang: async (targetLang) => {
           if (viewer.isAuthed) {
             try {
@@ -100,13 +123,6 @@ export const LanguageProvider = ({
           }
 
           setLang(targetLang)
-
-          if (process.browser) {
-            document.documentElement.setAttribute(
-              'lang',
-              langConvert.sys2html(targetLang)
-            )
-          }
         },
       }}
     >

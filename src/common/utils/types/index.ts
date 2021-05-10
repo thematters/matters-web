@@ -46,6 +46,9 @@ export default gql`
 
     "Whether cicle banner is shown"
     circleBanner: Boolean!
+
+    "Local language setting"
+    language: Language
   }
 
   type ClientInfo {
@@ -86,5 +89,11 @@ export default gql`
     comment
     tag
     donation
+  }
+
+  enum Language {
+    en
+    zh_hans
+    zh_hant
   }
 `

@@ -13,6 +13,8 @@ import {
 
 import { LANG_TEXT_MAP } from '~/common/enums'
 
+import { UserLanguage } from '@/__generated__/globalTypes'
+
 const LanguageSwitchContent = ({
   isInDropdown,
 }: {
@@ -26,7 +28,7 @@ const LanguageSwitchContent = ({
 
       return (
         <Menu width={isInDropdown ? 'sm' : undefined}>
-          <Menu.Item onClick={() => setLang('zh_hant')}>
+          <Menu.Item onClick={() => setLang(UserLanguage.zh_hant)}>
             <TextIcon
               spacing="base"
               size="md"
@@ -36,7 +38,7 @@ const LanguageSwitchContent = ({
             </TextIcon>
           </Menu.Item>
 
-          <Menu.Item onClick={() => setLang('zh_hans')}>
+          <Menu.Item onClick={() => setLang(UserLanguage.zh_hans)}>
             <TextIcon
               spacing="base"
               size="md"
@@ -46,7 +48,7 @@ const LanguageSwitchContent = ({
             </TextIcon>
           </Menu.Item>
 
-          <Menu.Item onClick={() => setLang('en')}>
+          <Menu.Item onClick={() => setLang(UserLanguage.en)}>
             <TextIcon
               spacing="base"
               size="md"
