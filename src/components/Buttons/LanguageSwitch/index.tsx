@@ -1,8 +1,9 @@
 import { useContext } from 'react'
 
 import {
+  Button,
   DropdownDialog,
-  Form,
+  IconWorld16,
   LanguageConsumer,
   LanguageContext,
   Menu,
@@ -60,7 +61,7 @@ const LanguageSwitchContent = ({
   </LanguageConsumer>
 )
 
-const SwitchLanguage = () => {
+export const LanguageSwitch = () => {
   const { lang } = useContext(LanguageContext)
 
   return (
@@ -81,15 +82,23 @@ const SwitchLanguage = () => {
       }}
     >
       {({ open, ref }) => (
-        <Form.List.Item
-          title={<Translate id="settingsLanguage" />}
+        <Button
+          size={[null, '1.25rem']}
+          spacing={[0, 'xtight']}
+          bgColor="grey-lighter"
           onClick={open}
-          rightText={LANG_TEXT_MAP[lang]}
           ref={ref}
-        />
+        >
+          <TextIcon
+            icon={<IconWorld16 size="xs" />}
+            size="xs"
+            color="grey"
+            weight="md"
+          >
+            {LANG_TEXT_MAP[lang]}
+          </TextIcon>
+        </Button>
       )}
     </DropdownDialog>
   )
 }
-
-export default SwitchLanguage

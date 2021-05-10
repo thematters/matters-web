@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { Translate } from '~/components'
+import { LanguageSwitch, Translate } from '~/components'
 
 import { PATHS } from '~/common/enums'
 import { toPath } from '~/common/utils'
@@ -21,55 +21,61 @@ const SideFooter = () => {
 
   return (
     <footer>
-      <Link href={PATHS.ABOUT}>
-        <a>
-          <Translate id="about" />
+      <section className="buttons">
+        <LanguageSwitch />
+      </section>
+
+      <section className="links">
+        <Link href={PATHS.ABOUT}>
+          <a>
+            <Translate id="about" />
+          </a>
+        </Link>
+
+        <Link href={PATHS.GUIDE}>
+          <a>
+            <Translate id="guide" />
+          </a>
+        </Link>
+
+        <Link href={PATHS.COMMUNITY}>
+          <a>
+            <Translate id="community" />
+          </a>
+        </Link>
+
+        <Link href={PATHS.MIGRATION}>
+          <a>
+            <Translate id="migrationSideBar" />
+          </a>
+        </Link>
+
+        <Link href={PATHS.TOS}>
+          <a>
+            <Translate id="term" />
+          </a>
+        </Link>
+
+        <a
+          href="https://github.com/thematters/developer-resource"
+          target="_blank"
+          rel="noopener"
+        >
+          <Translate id="openCommunity" />
         </a>
-      </Link>
 
-      <Link href={PATHS.GUIDE}>
-        <a>
-          <Translate id="guide" />
-        </a>
-      </Link>
+        <Link {...downloadAppLink}>
+          <a>
+            <Translate id="downloadApp" />
+          </a>
+        </Link>
 
-      <Link href={PATHS.COMMUNITY}>
-        <a>
-          <Translate id="community" />
-        </a>
-      </Link>
-
-      <Link href={PATHS.MIGRATION}>
-        <a>
-          <Translate id="migrationSideBar" />
-        </a>
-      </Link>
-
-      <Link href={PATHS.TOS}>
-        <a>
-          <Translate id="term" />
-        </a>
-      </Link>
-
-      <a
-        href="https://github.com/thematters/developer-resource"
-        target="_blank"
-        rel="noopener"
-      >
-        <Translate id="openCommunity" />
-      </a>
-
-      <Link {...downloadAppLink}>
-        <a>
-          <Translate id="downloadApp" />
-        </a>
-      </Link>
-
-      <span className="copyright">
-        {'@ '}
-        <span itemProp="copyrightYear">{year}</span>{' '}
-        <span itemProp="copyrightHolder">Matters</span>
-      </span>
+        <span className="copyright">
+          {'@ '}
+          <span itemProp="copyrightYear">{year}</span>{' '}
+          <span itemProp="copyrightHolder">Matters</span>
+        </span>
+      </section>
 
       <style jsx>{styles}</style>
     </footer>
