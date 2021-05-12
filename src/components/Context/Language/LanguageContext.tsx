@@ -53,7 +53,6 @@ export const LanguageProvider = ({
 
   // fallback to browser preference
   if (process.browser && !lang && navigator?.language) {
-    console.log('.fallback', langConvert.bcp472sys(navigator.language))
     lang = langConvert.bcp472sys(navigator.language)
   }
 
