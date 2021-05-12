@@ -1,8 +1,9 @@
 import { useContext } from 'react'
 
 import {
+  Button,
   DropdownDialog,
-  Form,
+  IconWorld16,
   LanguageConsumer,
   LanguageContext,
   Menu,
@@ -10,7 +11,9 @@ import {
   Translate,
 } from '~/components'
 
-import { LANG_TEXT_MAP } from '~/common/enums'
+import { LANG_TEXT_MAP, Z_INDEX } from '~/common/enums'
+
+import { UserLanguage } from '@/__generated__/globalTypes'
 
 const LanguageSwitchContent = ({
   isInDropdown,
@@ -25,7 +28,7 @@ const LanguageSwitchContent = ({
 
       return (
         <Menu width={isInDropdown ? 'sm' : undefined}>
-          <Menu.Item onClick={() => setLang('zh_hant')}>
+          <Menu.Item onClick={() => setLang(UserLanguage.zh_hant)}>
             <TextIcon
               spacing="base"
               size="md"
@@ -35,7 +38,7 @@ const LanguageSwitchContent = ({
             </TextIcon>
           </Menu.Item>
 
-          <Menu.Item onClick={() => setLang('zh_hans')}>
+          <Menu.Item onClick={() => setLang(UserLanguage.zh_hans)}>
             <TextIcon
               spacing="base"
               size="md"
@@ -45,7 +48,7 @@ const LanguageSwitchContent = ({
             </TextIcon>
           </Menu.Item>
 
-          <Menu.Item onClick={() => setLang('en')}>
+          <Menu.Item onClick={() => setLang(UserLanguage.en)}>
             <TextIcon
               spacing="base"
               size="md"
@@ -60,7 +63,7 @@ const LanguageSwitchContent = ({
   </LanguageConsumer>
 )
 
-const SwitchLanguage = () => {
+export const LanguageSwitch = () => {
   const { lang } = useContext(LanguageContext)
 
   return (
@@ -68,6 +71,7 @@ const SwitchLanguage = () => {
       dropdown={{
         content: <LanguageSwitchContent isInDropdown />,
         placement: 'bottom-end',
+        zIndex: Z_INDEX.OVER_DIALOG,
       }}
       dialog={{
         content: <LanguageSwitchContent />,
@@ -81,15 +85,23 @@ const SwitchLanguage = () => {
       }}
     >
       {({ open, ref }) => (
-        <Form.List.Item
-          title={<Translate id="settingsLanguage" />}
+        <Button
+          size={[null, '1.25rem']}
+          spacing={[0, 'xtight']}
+          bgColor="grey-lighter"
           onClick={open}
-          rightText={LANG_TEXT_MAP[lang]}
           ref={ref}
-        />
+        >
+          <TextIcon
+            icon={<IconWorld16 size="xs" />}
+            size="xs"
+            color="grey"
+            weight="md"
+          >
+            {LANG_TEXT_MAP[lang]}
+          </TextIcon>
+        </Button>
       )}
     </DropdownDialog>
   )
 }
-
-export default SwitchLanguage
