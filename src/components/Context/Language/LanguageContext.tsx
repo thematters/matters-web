@@ -46,9 +46,14 @@ export const LanguageProvider = ({
   const viewer = useContext(ViewerContext)
 
   const viewerLang = viewer?.settings?.language
+  let storedLang
+
+  if (process.browser) {
+    storedLang = storage.get(STORAGE_KEY_LANGUAGE)
+  }
+
   const localLang =
-    clientPreferenceData?.clientPreference?.language ||
-    storage.get(STORAGE_KEY_LANGUAGE)
+    clientPreferenceData?.clientPreference?.language || storedLang
   let lang = (viewer.isAuthed && viewerLang) || localLang
 
   // fallback to browser preference
