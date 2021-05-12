@@ -17,7 +17,7 @@ const clientPreferenceResolver = (_: any) => {
       __typename: 'OnboardingTasks',
     },
     circleBanner: true,
-    language: undefined,
+    language: '',
   }
 }
 
