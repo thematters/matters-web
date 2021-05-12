@@ -5,26 +5,46 @@
 	"build": {
 		"dockerfile": "Dockerfile",
 		// Update 'VARIANT' to pick a Node version: 12, 14, 16
-		"args": { 
+		"args": {
 			"VARIANT": "12"
 		}
 	},
 
 	// Set *default* container specific settings.json values on container create.
-	"settings": { 
+	"settings": {
 		"terminal.integrated.shell.linux": "/bin/bash"
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"ms-azuretools.vscode-docker",
+
+		// linting & formatting
 		"dbaeumer.vscode-eslint",
 		"esbenp.prettier-vscode",
-		"tobermory.es6-string-html",
+    "stylelint.vscode-stylelint",
+
+		// highlighting
 		"blanu.vscode-styled-jsx",
+		"tobermory.es6-string-html",
+		"apollographql.vscode-apollo",
+		"editorconfig.editorconfig",
+
+		// styling
 		"coenraads.bracket-pair-colorizer",
 		"ricard.postcss",
-		"wayou.vscode-todo-highlight"
+		"wayou.vscode-todo-highlight",
+		"mikestead.dotenv",
+		"naumovs.color-highlight",
+    "oderwat.indent-rainbow",
+
+		// themes
+		"github.github-vscode-theme",
+		"linusu.auto-dark-mode",
+    "qinjia.seti-icons",
+
+    // info
+    "wix.vscode-import-cost",
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
@@ -34,5 +54,10 @@
 	"postCreateCommand": "npm install",
 
 	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-	"remoteUser": "node"
+	"remoteUser": "node",
+
+	"containerEnv": {
+		"EDITOR": "vim",
+		"VISUAL": "vim"
+	}
 }

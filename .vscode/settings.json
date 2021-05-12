@@ -1,30 +1,68 @@
 {
-  "editor.formatOnSave": true,
-  "editor.wordWrap": "on",
-
-  "files.associations": {
-    "*.css": "postcss"
+  "editor.fontSize": 17,
+  "files.exclude": {
+    "**/.DS_Store": true,
+    "**/.git": true,
+    "**/.hg": true,
+    "**/.svn": true,
+    "**/*.pyc": true,
+    "**/CVS": true,
+    "**/node_modules": true
   },
-
-  "emmet.includeLanguages": {
+  "search.exclude": {
+    "**/build": true,
+  },
+  "explorer.confirmDelete": false,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "prettier.requireConfig": true,
+  "editor.formatOnSave": true,
+  "emmet.includeLanguages":{
     "postcss": "css"
   },
   "emmet.syntaxProfiles": {
     "postcss": "css"
   },
-
-  "css.validate": false,
-  "less.validate": false,
-  "scss.validate": false,
-
-  "prettier.requireConfig": true,
-
-  "javascript.updateImportsOnFileMove.enabled": "never",
-  "typescript.updateImportsOnFileMove.enabled": "never",
-
-  "editor.codeActionsOnSave": {
-    "source.fixAll": true
+  "files.associations": {
+    "*.css": "postcss"
   },
-
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "typescript.updateImportsOnFileMove.enabled": "never",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.tslint": true,
+    "source.fixAll.eslint": true
+  },
+  "editor.wordWrap": "on",
+  "eslint.autoFixOnSave": true,
+  "eslint.alwaysShowStatus": true,
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "workbench.startupEditor": "newUntitledFile",
+  "editor.rulers": [
+    80,120
+  ],
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "explorer.confirmDragAndDrop": false,
+  "workbench.editorAssociations": [
+    {
+      "viewType": "jupyter.notebook.ipynb",
+      "filenamePattern": "*.ipynb"
+    }
+  ],
+  "autoDarkMode.darkTheme": "GitHub Dark Dimmed",
+  "workbench.preferredDarkColorTheme": "GitHub Dark Dimmed",
+  "autoDarkMode.lightTheme": "GitHub Light Default",
+  "autoDarkMode.darkIconTheme": "Seti (Visual Studio Code)",
+  "autoDarkMode.lightIconTheme": "Seti (Visual Studio Code)",
+  "workbench.iconTheme": "vs-seti",
+  "git.autofetch": true,
+  "workbench.colorTheme": "GitHub Dark Dimmed",
+  "workbench.editor.untitled.hint": "hidden",
 }

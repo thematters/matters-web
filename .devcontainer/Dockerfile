@@ -4,11 +4,9 @@
 ARG VARIANT="12-buster"
 FROM mcr.microsoft.com/vscode/devcontainers/typescript-node:0-${VARIANT}
 
-# Install vim and set it as default editor (for commitizen)
+# Install vim as default editor (for commitizen)
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get -y install --no-install-recommends vim
-RUN export EDITOR='program'
-RUN export VISUAL='program'
 
 # [Optional] Uncomment if you want to install an additional version of node using nvm
 # ARG EXTRA_NODE_VERSION=10
