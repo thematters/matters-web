@@ -18,7 +18,7 @@ import { ReactComponent as IconArrowDown } from '@/public/static/icons/8px/arrow
 
 import { UserLanguage } from '@/__generated__/globalTypes'
 
-const LanguageSwitchContent = ({
+export const LanguageSwitchContent = ({
   isInDropdown,
 }: {
   isInDropdown?: boolean

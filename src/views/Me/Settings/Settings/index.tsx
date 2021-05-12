@@ -1,6 +1,7 @@
 import { Head, Layout, PullToRefresh, Spacer } from '~/components'
 
 import AccountSettings from './Account'
+import UISettings from './UI'
 import WalletSettings from './Wallet'
 
 const Settings = () => {
@@ -13,6 +14,7 @@ const Settings = () => {
       <Head title={{ id: 'settings' }} />
 
       <PullToRefresh>
+        <UISettings />
         <AccountSettings />
         <WalletSettings />
       </PullToRefresh>
