@@ -7,6 +7,7 @@
 }
 
 .text {
+  display: inline-flex;
   line-height: 1;
 }
 
@@ -101,71 +102,71 @@
 
 /* spacing */
 .spacing-xxxtight.hasIcon {
-  &.text-right .text {
+  &.text-right > .text {
     padding-left: var(--spacing-xxx-tight);
   }
 
-  &.text-left .text {
+  &.text-left > .text {
     padding-right: var(--spacing-xxx-tight);
   }
 
-  &.text-bottom .text {
+  &.text-bottom > .text {
     padding-top: var(--spacing-xxx-tight);
   }
 }
 
 .spacing-xxtight.hasIcon {
-  &.text-right .text {
+  &.text-right > .text {
     padding-left: var(--spacing-xx-tight);
   }
 
-  &.text-left .text {
+  &.text-left > .text {
     padding-right: var(--spacing-xx-tight);
   }
 
-  &.text-bottom .text {
+  &.text-bottom > .text {
     padding-top: var(--spacing-xx-tight);
   }
 }
 
 .spacing-xtight.hasIcon {
-  &.text-right .text {
+  &.text-right > .text {
     padding-left: var(--spacing-x-tight);
   }
 
-  &.text-left .text {
+  &.text-left > .text {
     padding-right: var(--spacing-x-tight);
   }
 
-  &.text-bottom .text {
+  &.text-bottom > .text {
     padding-top: var(--spacing-x-tight);
   }
 }
 
 .spacing-tight.hasIcon {
-  &.text-right .text {
+  &.text-right > .text {
     padding-left: var(--spacing-tight);
   }
 
-  &.text-left .text {
+  &.text-left > .text {
     padding-right: var(--spacing-tight);
   }
 
-  &.text-bottom .text {
+  &.text-bottom > .text {
     padding-top: var(--spacing-tight);
   }
 }
 
 .spacing-base.hasIcon {
-  &.text-right .text {
+  &.text-right > .text {
     padding-left: var(--spacing-base);
   }
 
-  &.text-left .text {
+  &.text-left > .text {
     padding-right: var(--spacing-base);
   }
 
-  &.text-bottom .text {
+  &.text-bottom > .text {
     padding-top: var(--spacing-base);
   }
 }
