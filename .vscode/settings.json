@@ -1,68 +1,74 @@
 {
-  "editor.fontSize": 17,
-  "files.exclude": {
-    "**/.DS_Store": true,
-    "**/.git": true,
-    "**/.hg": true,
-    "**/.svn": true,
-    "**/*.pyc": true,
-    "**/CVS": true,
-    "**/node_modules": true
-  },
-  "search.exclude": {
-    "**/build": true,
-  },
-  "explorer.confirmDelete": false,
-  "javascript.updateImportsOnFileMove.enabled": "always",
-  "prettier.requireConfig": true,
-  "editor.formatOnSave": true,
-  "emmet.includeLanguages":{
-    "postcss": "css"
-  },
-  "emmet.syntaxProfiles": {
-    "postcss": "css"
-  },
-  "files.associations": {
-    "*.css": "postcss"
-  },
-  "typescript.updateImportsOnFileMove.enabled": "never",
-  "editor.codeActionsOnSave": {
-    "source.fixAll.tslint": true,
-    "source.fixAll.eslint": true
-  },
-  "editor.wordWrap": "on",
-  "eslint.autoFixOnSave": true,
-  "eslint.alwaysShowStatus": true,
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "workbench.startupEditor": "newUntitledFile",
-  "editor.rulers": [
-    80,120
-  ],
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[javascriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "explorer.confirmDragAndDrop": false,
-  "workbench.editorAssociations": [
-    {
-      "viewType": "jupyter.notebook.ipynb",
-      "filenamePattern": "*.ipynb"
-    }
-  ],
-  "autoDarkMode.darkTheme": "GitHub Dark Dimmed",
-  "workbench.preferredDarkColorTheme": "GitHub Dark Dimmed",
-  "autoDarkMode.lightTheme": "GitHub Light Default",
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
   "autoDarkMode.darkIconTheme": "Seti (Visual Studio Code)",
+  "autoDarkMode.darkTheme": "GitHub Dark Dimmed",
   "autoDarkMode.lightIconTheme": "Seti (Visual Studio Code)",
-  "workbench.iconTheme": "vs-seti",
+  "autoDarkMode.lightTheme": "GitHub Light Default",
+
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
+  "editor.formatOnSave": true,
+  "editor.rulers": [
+    80,
+    120
+  ],
+  "editor.wordWrap": "on",
+
+  "emmet.includeLanguages": {
+    "postcss": "css"
+  },
+  "emmet.syntaxProfiles": {
+    "postcss": "css"
+  },
+
+  "eslint.alwaysShowStatus": true,
+
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+
+  "files.associations": {
+    "*.css": "postcss"
+  },
+  "files.exclude": {
+    "**/*.pyc": true,
+    "**/.DS_Store": true,
+    "**/.git": true,
+    "**/.hg": true,
+    "**/.svn": true,
+    "**/CVS": true,
+    "**/node_modules": true
+  },
+
   "git.autofetch": true,
+
+  "javascript.updateImportsOnFileMove.enabled": "always",
+
+  "prettier.requireConfig": true,
+
+  "typescript.updateImportsOnFileMove.enabled": "never",
+
   "workbench.colorTheme": "GitHub Dark Dimmed",
   "workbench.editor.untitled.hint": "hidden",
+  "workbench.editorAssociations": [
+    {
+      "filenamePattern": "*.ipynb",
+      "viewType": "jupyter.notebook.ipynb"
+    }
+  ],
+  "workbench.iconTheme": "vs-seti",
+  "workbench.preferredDarkColorTheme": "GitHub Dark Dimmed",
+  "workbench.startupEditor": "newUntitledFile"
 }
