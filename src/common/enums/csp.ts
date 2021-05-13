@@ -50,12 +50,15 @@ const CONNECT_SRC = [
 
   // API
   process.env.NEXT_PUBLIC_API_URL,
+  process.env.NEXT_PUBLIC_OAUTH_API_URL,
 
   // GA
   'www.google-analytics.com',
 
   // Firebase
   'firebase.googleapis.com',
+  'firebaseinstallations.googleapis.com',
+  'fcmregistrations.googleapis.com',
 
   // Stripe
   'api.stripe.com',
