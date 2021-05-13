@@ -193,7 +193,6 @@ const SetAmount: React.FC<FormProps> = ({
 
       {!fixed && canProcess && (
         <Form.AmountInput
-          autoFocus
           required
           className={isHKD ? 'red-style' : undefined}
           disabled={locked}

@@ -151,7 +151,6 @@ const Init: React.FC<FormProps> = ({
         type="text"
         name="displayName"
         required
-        autoFocus
         placeholder={translate({
           zh_hant: '你的站內暱稱，之後可以修改',
           zh_hans: '你的站内暱称，之后可以修改',

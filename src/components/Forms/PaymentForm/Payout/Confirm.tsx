@@ -129,7 +129,6 @@ const BaseConfirm: React.FC<FormProps> = ({
           </ConfirmTable>
 
           <Form.AmountInput
-            autoFocus
             required
             min={PAYMENT_MINIMAL_PAYOUT_AMOUNT.HKD}
             max={balance}
@@ -147,16 +146,12 @@ const BaseConfirm: React.FC<FormProps> = ({
             onBlur={handleBlur}
             onChange={(e) => {
               const amount = e.target.valueAsNumber || 0
-              const sanitizedAmount = Math.max(
-                Math.floor(amount),
-                PAYMENT_MINIMAL_PAYOUT_AMOUNT.HKD
-              )
 
               // remove extra left pad 0
               if (inputRef.current) {
-                inputRef.current.value = sanitizedAmount
+                inputRef.current.value = amount
               }
-              setFieldValue('amount', sanitizedAmount)
+              setFieldValue('amount', amount)
             }}
             ref={inputRef}
           />
