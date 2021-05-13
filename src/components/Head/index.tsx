@@ -11,7 +11,7 @@ import IMAGE_FAVICON_32 from '@/public/static/favicon-32x32.png?url'
 import IMAGE_FAVICON_64 from '@/public/static/favicon-64x64.png?url'
 import IMAGE_INTRO from '@/public/static/images/intro.jpg?url'
 
-const isProd = process.env.NODE_ENV === 'production'
+const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
 interface HeadProps {
   title?: string | TranslateArgs

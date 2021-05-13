@@ -15,8 +15,10 @@ declare global {
   }
 }
 
+const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
+
 const analyticsDebugger = (event: string, params: any) => {
-  if (process.env.NODE_ENV !== 'production') {
+  if (!isProd) {
     console.log(
       `%c[Analytics debugger]%c ${event} %cVariables`,
       'background: #800080; color: #fff',

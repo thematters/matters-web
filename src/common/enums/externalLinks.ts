@@ -1,4 +1,4 @@
-const isProd = process.env.NODE_ENV === 'production'
+const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
 export const EXTERNAL_LINKS = {
   FACEBOOK: 'https://www.facebook.com/MattersLab2018',
