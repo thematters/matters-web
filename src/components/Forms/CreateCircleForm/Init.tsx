@@ -134,7 +134,6 @@ const Init: React.FC<FormProps> = ({
         type="text"
         name="displayName"
         required
-        autoFocus
         placeholder={translate({
           zh_hant: '給圍爐取一個吸引人的名字吧',
           zh_hans: '给围炉取一个吸引人的名字吧',
@@ -188,9 +187,9 @@ const Init: React.FC<FormProps> = ({
         onBlur={handleBlur}
         onChange={(e) => {
           const amount = e.target.valueAsNumber || 0
-          const sanitizedAmount = Math.max(
-            Math.min(Math.floor(amount), PAYMENT_MAXIMUM_CIRCLE_AMOUNT.HKD),
-            PAYMENT_MINIMAL_CIRCLE_AMOUNT.HKD
+          const sanitizedAmount = Math.min(
+            Math.floor(amount),
+            PAYMENT_MAXIMUM_CIRCLE_AMOUNT.HKD
           )
 
           // remove extra left pad 0

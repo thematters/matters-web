@@ -99,7 +99,6 @@ const Request: React.FC<FormProps> = ({
         name="email"
         disabled
         required
-        autoFocus
         value={values.email}
         error={touched.email && errors.email}
         onBlur={handleBlur}

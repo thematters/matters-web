@@ -174,7 +174,6 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
         error={touched.displayName && errors.displayName}
         onBlur={handleBlur}
         onChange={handleChange}
-        autoFocus
       />
 
       <Form.Textarea

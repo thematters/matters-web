@@ -133,7 +133,6 @@ const Confirm: React.FC<FormProps> = ({
         error={touched.userName && errors.userName}
         onBlur={handleBlur}
         onChange={handleChange}
-        autoFocus
       />
 
       <Form.Input
