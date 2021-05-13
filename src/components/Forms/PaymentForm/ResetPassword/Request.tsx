@@ -97,7 +97,6 @@ const Request: React.FC<FormProps> = ({
         type="email"
         name="email"
         required
-        autoFocus
         placeholder={translate({
           id: 'enterEmail',
           lang,

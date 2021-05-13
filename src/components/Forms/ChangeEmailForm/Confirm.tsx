@@ -136,7 +136,6 @@ const Confirm: React.FC<FormProps> = ({
         error={touched.email && errors.email}
         onBlur={handleBlur}
         onChange={handleChange}
-        autoFocus
       />
 
       <Form.Input
