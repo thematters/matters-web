@@ -210,6 +210,12 @@ span.container {
 }
 
 /* Background */
+.bg-grey-darkest {
+  & .hotarea {
+    background: var(--color-grey-darkest);
+  }
+}
+
 .bg-grey {
   & .hotarea {
     background: var(--color-grey);
