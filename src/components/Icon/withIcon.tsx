@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import styles from './styles.css'
 
 export type IconSize =
+  | 'xxs'
   | 'xs'
   | 'sm'
   | 'md-s'

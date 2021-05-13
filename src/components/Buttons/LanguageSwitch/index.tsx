@@ -9,13 +9,16 @@ import {
   Menu,
   TextIcon,
   Translate,
+  withIcon,
 } from '~/components'
 
 import { LANG_TEXT_MAP, Z_INDEX } from '~/common/enums'
 
+import { ReactComponent as IconArrowDown } from '@/public/static/icons/8px/arrow-down.svg'
+
 import { UserLanguage } from '@/__generated__/globalTypes'
 
-const LanguageSwitchContent = ({
+export const LanguageSwitchContent = ({
   isInDropdown,
 }: {
   isInDropdown?: boolean
@@ -63,8 +66,19 @@ const LanguageSwitchContent = ({
   </LanguageConsumer>
 )
 
-export const LanguageSwitch = () => {
+type LanguageSwitchProps = {
+  size?: 'sm' | 'lg'
+  bgColor?: 'grey-lighter' | 'grey-darkest'
+}
+
+export const LanguageSwitch: React.FC<LanguageSwitchProps> = ({
+  size = 'sm',
+  bgColor = 'grey-lighter',
+}) => {
   const { lang } = useContext(LanguageContext)
+
+  const iconColor = bgColor === 'grey-lighter' ? 'grey' : 'white'
+  const textSize = size === 'sm' ? 'xs' : 'md'
 
   return (
     <DropdownDialog
@@ -86,19 +100,23 @@ export const LanguageSwitch = () => {
     >
       {({ open, ref }) => (
         <Button
-          size={[null, '1.25rem']}
+          size={[null, size === 'sm' ? '1.25rem' : '1.75rem']}
           spacing={[0, 'xtight']}
-          bgColor="grey-lighter"
+          bgColor={bgColor}
           onClick={open}
           ref={ref}
         >
-          <TextIcon
-            icon={<IconWorld16 size="xs" />}
-            size="xs"
-            color="grey"
-            weight="md"
-          >
-            {LANG_TEXT_MAP[lang]}
+          <TextIcon icon={<IconWorld16 />} size={textSize} color={iconColor}>
+            <TextIcon
+              icon={withIcon(IconArrowDown)({ size: 'xxs' })}
+              size={textSize}
+              color={iconColor}
+              weight="md"
+              spacing="xxtight"
+              textPlacement="left"
+            >
+              {LANG_TEXT_MAP[lang]}
+            </TextIcon>
           </TextIcon>
         </Button>
       )}
