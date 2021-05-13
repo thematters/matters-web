@@ -20,6 +20,7 @@ import Buttons from './Buttons'
 import PaymentPassword from './PaymentPassword'
 import PaymentPointer from './PaymentPointer'
 import ViewStripeAccount from './ViewStripeAccount'
+import ViewStripeCustomerPortal from './ViewStripeCustomerPortal'
 
 import { WalletBalance } from '~/components/GQL/queries/__generated__/WalletBalance'
 
@@ -67,6 +68,7 @@ const Wallet = () => {
             title={<Translate id="paymentTransactions" />}
             href={PATHS.ME_WALLET_TRANSACTIONS}
           />
+          <ViewStripeCustomerPortal />
           {hasPaymentPassword && <PaymentPassword />}
           {hasStripeAccount && <ViewStripeAccount />}
           <PaymentPointer />

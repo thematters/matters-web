@@ -2,7 +2,7 @@ import { CachePersistor } from 'apollo-cache-persist'
 
 import { storage } from './storage'
 
-const isProd = process.env.NODE_ENV === 'production'
+const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
 const APP_VERSION = process.env.APP_VERSION || '__UNVERSIONING__'
 const APP_VERSION_KEY = 'app-version'

@@ -8,7 +8,7 @@ import { initializeFirebase, storage } from '~/common/utils'
 
 import { ToggleSubscribePush } from './__generated__/ToggleSubscribePush'
 
-const isProd = process.env.NODE_ENV === 'production'
+const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
 const TOGGLE_SUBSCRIBE_PUSH = gql`
   mutation ToggleSubscribePush($id: ID!, $enabled: Boolean!) {

@@ -5,7 +5,7 @@ const withOffline = require('next-offline')
 
 const packageJson = require('./package.json')
 
-const isProd = process.env.NODE_ENV === 'production'
+const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 const isStatic = process.env.NEXT_PUBLIC_BUILD_TYPE === 'static'
 
 const URL_PUSH_SW = isProd

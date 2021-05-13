@@ -3,6 +3,7 @@ import { useContext } from 'react'
 import {
   Button,
   LanguageContext,
+  LanguageSwitch,
   TextIcon,
   Tooltip,
   Translate,
@@ -131,7 +132,6 @@ const Footer = () => {
                     en="Subscribe to Us"
                   />
                 </h2>
-
                 <div id="mc_embed_signup">
                   <form
                     action="https://news.us12.list-manage.com/subscribe/post?u=d5d5a3cc17a4dfebbee549e7f&amp;id=82f8e18b83"
@@ -166,6 +166,10 @@ const Footer = () => {
                     </Button>
                   </form>
                 </div>
+
+                <section className="languageSwitch">
+                  <LanguageSwitch size="lg" bgColor="grey-darkest" />
+                </section>
               </section>
 
               <section className="copyright">

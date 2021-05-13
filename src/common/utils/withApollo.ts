@@ -34,7 +34,7 @@ const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData,
 })
 
-const isProd = process.env.NODE_ENV === 'production'
+const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 const isStaticBuild = process.env.NEXT_PUBLIC_BUILD_TYPE === 'static'
 
 /**
@@ -101,7 +101,7 @@ const authLink = setContext((operation, { headers, ...restCtx }) => {
   const operationVariables = operation.variables || {}
   const isPublicOperation = restCtx[GQL_CONTEXT_PUBLIC_QUERY_KEY]
 
-  if (process.env.NODE_ENV !== 'production') {
+  if (!isProd) {
     console.log(
       `%c[GraphQL operation]%c ${operationName} ` +
         `${isPublicOperation ? '' : '(w/ credentials)'}` +

@@ -1,4 +1,8 @@
-footer {
+.buttons {
+  margin-bottom: var(--spacing-base);
+}
+
+.links {
   @mixin safe-area-botttom;
 
   margin-bottom: var(--global-nav-height);
