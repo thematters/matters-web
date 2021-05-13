@@ -6,7 +6,7 @@ import IMAGE_ILLUSTRATION_EMPTY from '@/public/static/images/illustration-empty.
 
 import styles from './styles.css'
 
-const isProd = process.env.NODE_ENV === 'production'
+const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
 interface ErrorProps {
   statusCode?: number | string | null
