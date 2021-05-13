@@ -1,3 +1,5 @@
+const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
+
 const parseJSON = (data: string | null) => {
   if (!data) {
     return null
@@ -21,19 +23,19 @@ const parseJSON = (data: string | null) => {
  */
 export const storage = {
   get: (key: string) => {
-    if (process.env.NODE_ENV !== 'production') {
+    if (!isProd) {
       console.log(`[storage:GET] ${key}`)
     }
     return parseJSON(localStorage.getItem(key))
   },
   set: (key: string, value: any) => {
-    if (process.env.NODE_ENV !== 'production') {
+    if (!isProd) {
       console.log(`[storage:SET] ${key}`, value)
     }
     return localStorage.setItem(key, JSON.stringify(value))
   },
   remove: (key: string) => {
-    if (process.env.NODE_ENV !== 'production') {
+    if (!isProd) {
       console.log(`[storage:REMOVE] ${key}`)
     }
     return localStorage.removeItem(key)

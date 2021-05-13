@@ -95,3 +95,38 @@ export const STRIPE_ERROR_MESSAGES = {
 }
 
 export const PAYMENT_PROVIDER = ['stripe', 'likecoin']
+
+export enum PAYOUT_COUNTRY {
+  Australia = 'Australia',
+  Austria = 'Austria',
+  Belgium = 'Belgium',
+  Bulgaria = 'Bulgaria',
+  Canada = 'Canada',
+  Cyprus = 'Cyprus',
+  Denmark = 'Denmark',
+  Estonia = 'Estonia',
+  Finland = 'Finland',
+  France = 'France',
+  Germany = 'Germany',
+  Greece = 'Greece',
+  HongKong = 'HongKong',
+  Ireland = 'Ireland',
+  Italy = 'Italy',
+  Latvia = 'Latvia',
+  Lithuania = 'Lithuania',
+  Luxembourg = 'Luxembourg',
+  Malta = 'Malta',
+  Netherlands = 'Netherlands',
+  NewZealand = 'NewZealand',
+  Norway = 'Norway',
+  Poland = 'Poland',
+  Portugal = 'Portugal',
+  Romania = 'Romania',
+  Singapore = 'Singapore',
+  Slovakia = 'Slovakia',
+  Slovenia = 'Slovenia',
+  Spain = 'Spain',
+  Sweden = 'Sweden',
+  UnitedKingdom = 'UnitedKingdom',
+  UnitedStates = 'UnitedStates',
+}

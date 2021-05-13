@@ -22,6 +22,7 @@ export type ButtonHeight =
   | '1rem'
   | '1.25rem'
   | '1.5rem'
+  | '1.75rem'
   | '2rem'
   | '2.25rem'
   | '2.5rem'
@@ -43,6 +44,7 @@ type ButtonColor =
   | 'white'
   | 'black'
   | 'half-black'
+  | 'grey-darkest'
   | 'grey'
   | 'grey-light'
   | 'grey-lighter'
@@ -60,6 +62,7 @@ type ButtonTextColor = Extract<
 
 export type ButtonBgColor = Extract<
   ButtonColor,
+  | 'grey-darkest'
   | 'grey'
   | 'grey-lighter'
   | 'green-lighter'

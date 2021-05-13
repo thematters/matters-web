@@ -17,6 +17,8 @@ const OAUTH_CALLBACK_ERROR_CODE = {
   stripeAccountNotFound: 4,
   stripeAuthFailed: 5,
   stripeAccountExists: 6,
+  // https://stripe.com/docs/api/account_links/create#create_account_link-refresh_url
+  stripeAccountRefresh: 7,
 }
 
 const ERROR_TEXT = {
@@ -49,6 +51,12 @@ const ERROR_TEXT = {
     zh_hant: '你已創建 Stripe 帳戶',
     zh_hans: '你已创建 Stripe 帐户',
     en: 'You have created Stripe account',
+  },
+  [OAUTH_CALLBACK_ERROR_CODE.stripeAccountRefresh]: {
+    zh_hant: 'Stripe 帳戶創建失敗，請回到原頁面重新操作',
+    zh_hans: 'Stripe 帐户创建失败，请回到原页面重新操作',
+    en:
+      'Failed to create Stripe Account, please return to your previous page and retry',
   },
 }
 

@@ -5,6 +5,9 @@ import { CircleDigest } from '~/components/CircleDigest'
 
 import { analytics } from '~/common/utils'
 
+import IMAGE_WALL_BACKGROUND_MD from '@/public/static/images/circle-wall-background-md.jpg'
+import IMAGE_WALL_BACKGROUND_SM from '@/public/static/images/circle-wall-background-sm.jpg'
+
 import styles from './styles.css'
 
 import { CircleWallCirclePrivate } from './__generated__/CircleWallCirclePrivate'
@@ -38,6 +41,17 @@ const CircleWall = ({ circle }: CircleWallProps) => {
       />
 
       <style jsx>{styles}</style>
+      <style jsx>{`
+        .container {
+          background-image: url(${IMAGE_WALL_BACKGROUND_SM});
+          background-size: cover;
+          background-position: center top;
+
+          @media (--sm-up) {
+            background-image: url(${IMAGE_WALL_BACKGROUND_MD});
+          }
+        }
+      `}</style>
     </section>
   )
 }

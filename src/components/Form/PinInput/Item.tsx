@@ -13,7 +13,7 @@ type ItemProps = {
     React.InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
   >,
-  'id' | 'value' | 'autoFocus'
+  'id' | 'value'
 >
 
 const Item = forwardRef(

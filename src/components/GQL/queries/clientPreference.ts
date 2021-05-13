@@ -17,6 +17,7 @@ export default gql`
         enabled
       }
       circleBanner
+      language
     }
   }
 `

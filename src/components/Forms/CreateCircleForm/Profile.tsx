@@ -183,7 +183,6 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
           type="text"
           name="displayName"
           required
-          autoFocus
           placeholder={translate({
             zh_hant: '給圍爐取一個吸引人的名字吧',
             zh_hans: '给围炉取一个吸引人的名字吧',

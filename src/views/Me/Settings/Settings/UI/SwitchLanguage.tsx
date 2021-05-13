@@ -3,62 +3,12 @@ import { useContext } from 'react'
 import {
   DropdownDialog,
   Form,
-  LanguageConsumer,
   LanguageContext,
-  Menu,
-  TextIcon,
+  LanguageSwitchContent,
   Translate,
 } from '~/components'
 
 import { LANG_TEXT_MAP } from '~/common/enums'
-
-const LanguageSwitchContent = ({
-  isInDropdown,
-}: {
-  isInDropdown?: boolean
-}) => (
-  <LanguageConsumer>
-    {({ lang, setLang }) => {
-      const isEnActive = lang === 'en'
-      const isZhHantActive = lang === 'zh_hant'
-      const isZhHansActive = lang === 'zh_hans'
-
-      return (
-        <Menu width={isInDropdown ? 'sm' : undefined}>
-          <Menu.Item onClick={() => setLang('zh_hant')}>
-            <TextIcon
-              spacing="base"
-              size="md"
-              weight={isZhHantActive ? 'bold' : 'normal'}
-            >
-              {LANG_TEXT_MAP.zh_hant}
-            </TextIcon>
-          </Menu.Item>
-
-          <Menu.Item onClick={() => setLang('zh_hans')}>
-            <TextIcon
-              spacing="base"
-              size="md"
-              weight={isZhHansActive ? 'bold' : 'normal'}
-            >
-              {LANG_TEXT_MAP.zh_hans}
-            </TextIcon>
-          </Menu.Item>
-
-          <Menu.Item onClick={() => setLang('en')}>
-            <TextIcon
-              spacing="base"
-              size="md"
-              weight={isEnActive ? 'bold' : 'normal'}
-            >
-              {LANG_TEXT_MAP.en}
-            </TextIcon>
-          </Menu.Item>
-        </Menu>
-      )
-    }}
-  </LanguageConsumer>
-)
 
 const SwitchLanguage = () => {
   const { lang } = useContext(LanguageContext)
