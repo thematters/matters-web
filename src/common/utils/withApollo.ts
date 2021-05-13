@@ -34,7 +34,7 @@ const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData,
 })
 
-const isProd = process.env.NODE_ENV === 'production'
+const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 const isStaticBuild = process.env.NEXT_PUBLIC_BUILD_TYPE === 'static'
 
 /**

@@ -8,7 +8,7 @@ import Document, {
 } from 'next/document'
 import React from 'react'
 
-import { GA_TRACKING_ID } from '~/common/enums'
+import { CSP_POLICY, GA_TRACKING_ID } from '~/common/enums'
 import { langConvert } from '~/common/utils'
 
 interface MattersDocumentProps {
@@ -58,6 +58,7 @@ class MattersDocument extends Document<MattersDocumentProps> {
               `,
             }}
           />
+          <meta httpEquiv="Content-Security-Policy" content={CSP_POLICY} />
         </Head>
 
         <body>
