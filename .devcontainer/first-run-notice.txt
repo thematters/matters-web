@@ -1,0 +1,15 @@
+  __  __       _   _
+ |  \/  | __ _| |_| |_ ___ _ __ ___
+ | |\/| |/ _` | __| __/ _ \ '__/ __|
+ | |  | | (_| | |_| ||  __/ |  \__ \
+ |_|  |_|\__,_|\__|\__\___|_|  |___/
+
+
+👋 Welcome to the dev environment for building the Matters community and tools!
+
+👀 Read the README.md before your start building.
+
+🔧 More developer resources: https://github.com/thematters/developer-resource
+
+🌍 Visit Matters Community: https://matters.news
+
