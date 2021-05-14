@@ -128,7 +128,6 @@ const SetPaymentPointerForm: React.FC<FormProps> = ({
             handleChange(e)
             updateValidity()
           }}
-          autoFocus
         />
       </Form>
     </Dialog.Content>

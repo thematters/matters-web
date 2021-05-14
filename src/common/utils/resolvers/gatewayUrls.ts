@@ -5,7 +5,6 @@ import { timeout } from '~/common/utils'
 const TEST_HASH = 'Qmaisz6NMhDB51cCvNWa1GMS7LU1pAxdF4Ld6Ft9kZEP2a'
 const PUBLIC_GATEWAYS: string[] = [
   'https://ipfs.io/ipfs/:hash',
-  'https://:hash.ipfs.dweb.link',
   'https://gateway.ipfs.io/ipfs/:hash',
   'https://ipfs.infura.io/ipfs/:hash',
   'https://ninetailed.ninja/ipfs/:hash',
@@ -13,7 +12,6 @@ const PUBLIC_GATEWAYS: string[] = [
   'https://ipfs.eternum.io/ipfs/:hash',
   'https://hardbin.com/ipfs/:hash',
   'https://cloudflare-ipfs.com/ipfs/:hash',
-  'https://:hash.ipfs.cf-ipfs.com',
   'https://ipns.co/:hash',
   'https://gateway.pinata.cloud/ipfs/:hash',
   'https://ipfs.sloppyta.co/ipfs/:hash',
@@ -24,7 +22,6 @@ const PUBLIC_GATEWAYS: string[] = [
   'https://permaweb.io/ipfs/:hash',
   'https://ipfs.stibarc.com/ipfs/:hash',
   'https://ipfs.best-practice.se/ipfs/:hash',
-  'https://:hash.ipfs.2read.net',
   'https://ipfs.2read.net/ipfs/:hash',
 ]
 

@@ -7,6 +7,7 @@ import {
   Dialog,
   Form,
   LanguageContext,
+  LanguageSwitch,
   Layout,
   ReCaptchaContext,
   Translate,
@@ -23,6 +24,8 @@ import {
   validateEmail,
   validateToS,
 } from '~/common/utils'
+
+import styles from './styles.css'
 
 import { SendVerificationCode } from '~/components/GQL/mutations/__generated__/SendVerificationCode'
 
@@ -148,7 +151,6 @@ const Init: React.FC<FormProps> = ({
         type="text"
         name="displayName"
         required
-        autoFocus
         placeholder={translate({
           zh_hant: '你的站內暱稱，之後可以修改',
           zh_hans: '你的站内暱称，之后可以修改',
@@ -231,7 +233,13 @@ const Init: React.FC<FormProps> = ({
             </>
           }
         />
+
         {InnerForm}
+
+        <footer>
+          <LanguageSwitch />
+          <style jsx>{styles}</style>
+        </footer>
       </>
     )
   }

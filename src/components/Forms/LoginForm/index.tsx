@@ -7,6 +7,7 @@ import {
   Dialog,
   Form,
   LanguageContext,
+  LanguageSwitch,
   Layout,
   Translate,
   useMutation,
@@ -30,6 +31,7 @@ import {
   SignUpDialogButton,
   SignUpRedirectionButton,
 } from './Buttons'
+import styles from './styles.css'
 
 import { UserLogin } from './__generated__/UserLogin'
 
@@ -147,7 +149,6 @@ export const LoginForm: React.FC<FormProps> = ({
         error={touched.email && errors.email}
         onBlur={handleBlur}
         onChange={handleChange}
-        autoFocus
       />
 
       <Form.Input
@@ -197,6 +198,11 @@ export const LoginForm: React.FC<FormProps> = ({
         />
 
         {InnerForm}
+
+        <footer>
+          <LanguageSwitch />
+          <style jsx>{styles}</style>
+        </footer>
       </>
     )
   }

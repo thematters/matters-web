@@ -6,6 +6,11 @@
   height: 1rem;
 
   /* Sizes */
+  &.xxs {
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+
   &.xs {
     width: 0.75rem;
     height: 0.75rem;

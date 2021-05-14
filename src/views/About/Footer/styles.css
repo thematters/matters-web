@@ -69,6 +69,10 @@ footer {
     }
   }
 
+  & .languageSwitch {
+    margin-top: var(--spacing-xx-loose);
+  }
+
   & .copyright {
     font-size: var(--font-size-sm);
     color: var(--color-grey);
