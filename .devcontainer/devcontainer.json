@@ -52,7 +52,7 @@
   ],
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
-  "forwardPorts": [4000, 4569, 6379],
+  "forwardPorts": [3000],
 
   // Use 'postCreateCommand' to run commands after the container is created.
   // "oryx build" will automatically install your dependencies and attempt to build your project
