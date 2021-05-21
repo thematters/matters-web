@@ -41,6 +41,9 @@ const InviteeSearchEditor = ({ close, save }: Props) => {
     toStagingArea()
   }
 
+  const selectedNodes = stagingNodes.filter(({ selected }) => !!selected)
+  const disabled = selectedNodes.length === 0
+
   return (
     <>
       <Dialog.Header
@@ -49,9 +52,8 @@ const InviteeSearchEditor = ({ close, save }: Props) => {
         closeTextId="cancel"
         rightButton={
           <Dialog.Header.RightButton
-            onClick={() =>
-              save({ nodes: stagingNodes.filter(({ selected }) => !!selected) })
-            }
+            disabled={disabled}
+            onClick={() => save({ nodes: selectedNodes })}
             text={<Translate id="confirm" />}
           />
         }
