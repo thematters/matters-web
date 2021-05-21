@@ -6,13 +6,23 @@ import { Translate } from '~/components'
 
 import styles from './styles.css'
 
-import { CircleInvitation as CircleInvitationType } from './__generated__/CircleInvitation'
+import { CircleInvitation } from './__generated__/CircleInvitation'
 
-type PeriodProps = Pick<
-  CircleInvitationType,
-  'freePeriod' | 'acceptedAt' | 'state'
->
+type PeriodProps = Pick<CircleInvitation, 'freePeriod' | 'acceptedAt' | 'state'>
 
+/**
+ * CircleInvitationPeriod is a component for displaying free period in days.
+ *
+ * Usage:
+ *
+ * ```tsx
+ *   <CircleInvitationPeriod
+ *     freePeriod={freePeriod}
+ *     acceptedAt={acceptedAt}
+ *     state={state}
+ *   />
+ * ```
+ */
 const Period = ({ freePeriod, acceptedAt, state }: PeriodProps) => {
   const isPending = state === 'pending'
   const isAccepted = state === 'accepted'
@@ -38,8 +48,8 @@ const Period = ({ freePeriod, acceptedAt, state }: PeriodProps) => {
 
     return (
       <span className={classes}>
-        <Translate zh_hant="剩餘" zh_hans="剩余" en="Trial ends in" /> {remainDays}{' '}
-        <Translate id="days" />
+        <Translate zh_hant="剩餘" zh_hans="剩余" en="Trial ends in" />{' '}
+        {remainDays} <Translate id="days" />
         <style jsx>{styles}</style>
       </span>
     )

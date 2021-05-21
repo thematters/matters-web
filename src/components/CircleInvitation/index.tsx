@@ -20,6 +20,31 @@ interface CircleInvitationProps {
   invitation: CircleInvitationType
 }
 
+const CircleInvitationFailedInfo = () => (
+  <Tooltip
+    content={
+      <Translate
+        zh_hant="轉付費訂閱過程出錯"
+        zh_hans="转付费订阅过程出错"
+        en="Subscription failed"
+      />
+    }
+    placement="left"
+  >
+    <span>
+      <TextIcon
+        icon={<IconInfo16 />}
+        color="grey"
+        size="xs"
+        spacing="xxxtight"
+        textPlacement="left"
+      >
+        <Translate zh_hant="失敗" zh_hans="失败" en="Failed" />
+      </TextIcon>
+    </span>
+  </Tooltip>
+)
+
 /**
  * This component is for representing Circle invitation, and it shows:
  *
@@ -63,6 +88,7 @@ export const CircleInvitation = ({ invitation }: CircleInvitationProps) => {
             acceptedAt={acceptedAt}
             state={state}
           />
+
           {isPending && (
             <CircleInvitationResendButton
               circleId={circle.id}
@@ -70,30 +96,9 @@ export const CircleInvitation = ({ invitation }: CircleInvitationProps) => {
               invitees={invitees}
             />
           )}
-          {isFailed && (
-            <Tooltip
-              content={
-                <Translate
-                  zh_hant="轉付費訂閱過程出錯"
-                  zh_hans="转付费订阅过程出错"
-                  en="Subscription failed"
-                />
-              }
-              placement="left"
-            >
-              <span>
-                <TextIcon
-                  icon={<IconInfo16 />}
-                  color="grey"
-                  size="xs"
-                  spacing="xxxtight"
-                  textPlacement="left"
-                >
-                  <Translate zh_hant="失敗" zh_hans="失败" en="Failed" />
-                </TextIcon>
-              </span>
-            </Tooltip>
-          )}
+
+          {isFailed && <CircleInvitationFailedInfo />}
+
           {isSucceeded && (
             <span className="succeeded">
               <Translate

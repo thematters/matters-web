@@ -20,7 +20,7 @@ import { mergeConnections } from '~/common/utils'
 
 import styles from './styles.css'
 
-import { CircleAcceptedInvites as CircleAcceptedInvitesType } from '~/components/GQL/queries/__generated__/CircleAcceptedInvites'
+import { CircleAcceptedInvites } from '~/components/GQL/queries/__generated__/CircleAcceptedInvites'
 
 /**
  * This component is for listing circle accepted invitations.
@@ -45,7 +45,7 @@ const AcceptedInvites = () => {
     error,
     fetchMore,
     refetch,
-  } = useQuery<CircleAcceptedInvitesType>(CIRCLE_ACCEPTED_INVITES, {
+  } = useQuery<CircleAcceptedInvites>(CIRCLE_ACCEPTED_INVITES, {
     variables: { name },
   })
 

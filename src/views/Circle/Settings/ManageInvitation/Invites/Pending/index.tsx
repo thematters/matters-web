@@ -22,7 +22,7 @@ import { mergeConnections } from '~/common/utils'
 
 import styles from './styles.css'
 
-import { CirclePendingInvites as CirclePendingInvitesType } from '~/components/GQL/queries/__generated__/CirclePendingInvites'
+import { CirclePendingInvites } from '~/components/GQL/queries/__generated__/CirclePendingInvites'
 
 /**
  * This component is for listing circle pending invitations.
@@ -47,7 +47,7 @@ const PendingInvites = () => {
     error,
     fetchMore,
     refetch,
-  } = useQuery<CirclePendingInvitesType>(CIRCLE_PENDING_INVITES, {
+  } = useQuery<CirclePendingInvites>(CIRCLE_PENDING_INVITES, {
     variables: { name },
   })
 
