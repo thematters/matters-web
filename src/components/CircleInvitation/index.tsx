@@ -1,8 +1,16 @@
 import gql from 'graphql-tag'
 
-import { Card, FreePeriod, UserDigest } from '~/components'
+import {
+  Card,
+  IconInfo16,
+  TextIcon,
+  Tooltip,
+  Translate,
+  UserDigest,
+} from '~/components'
 
 import CircleInvitationInvitee from './Invitee'
+import CircleInvitationPeriod from './Period'
 import CircleInvitationResendButton from './Resend'
 import styles from './styles.css'
 
@@ -28,7 +36,7 @@ interface CircleInvitationProps {
  * ```
  */
 export const CircleInvitation = ({ invitation }: CircleInvitationProps) => {
-  const { circle, freePeriod, invitee } = invitation
+  const { circle, freePeriod, invitee, acceptedAt, state } = invitation
 
   if (!invitee) {
     return null
@@ -41,19 +49,60 @@ export const CircleInvitation = ({ invitation }: CircleInvitationProps) => {
     },
   ]
 
+  const isPending = state === 'pending'
+  const isFailed = state === 'transfer_failed'
+  const isSucceeded = state === 'transfer_succeeded'
+
   return (
     <Card spacing={['xtight', 'base']}>
       <section className="container">
         <CircleInvitationInvitee invitee={invitee} />
         <section className="info">
-          <span className="period">
-            <FreePeriod period={freePeriod} />
-          </span>
-          <CircleInvitationResendButton
-            circleId={circle.id}
+          <CircleInvitationPeriod
             freePeriod={freePeriod}
-            invitees={invitees}
+            acceptedAt={acceptedAt}
+            state={state}
           />
+          {isPending && (
+            <CircleInvitationResendButton
+              circleId={circle.id}
+              freePeriod={freePeriod}
+              invitees={invitees}
+            />
+          )}
+          {isFailed && (
+            <Tooltip
+              content={
+                <Translate
+                  zh_hant="轉付費訂閱過程出錯"
+                  zh_hans="转付费订阅过程出错"
+                  en="Subscription failed"
+                />
+              }
+              placement="left"
+            >
+              <span>
+                <TextIcon
+                  icon={<IconInfo16 />}
+                  color="grey"
+                  size="xs"
+                  spacing="xxxtight"
+                  textPlacement="left"
+                >
+                  <Translate zh_hant="失敗" zh_hans="失败" en="Failed" />
+                </TextIcon>
+              </span>
+            </Tooltip>
+          )}
+          {isSucceeded && (
+            <span className="succeeded">
+              <Translate
+                zh_hant="付費訂閱中"
+                zh_hans="付费订阅中"
+                en="Subscribed"
+              />
+            </span>
+          )}
         </section>
         <style jsx>{styles}</style>
       </section>
@@ -80,6 +129,8 @@ CircleInvitation.fragments = {
         }
         __typename
       }
+      acceptedAt
+      state
     }
     ${UserDigest.Mini.fragments.user}
   `,

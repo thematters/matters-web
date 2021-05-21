@@ -20,9 +20,19 @@
   height: 100%;
   padding-right: var(--spacing-base);
 
-  & .period {
-    margin-right: var(--spacing-base);
+  & span {
     font-size: var(--font-size-xs);
+  }
+
+  & .period {
     color: var(--color-grey-darker);
+  }
+
+  & .succeeded {
+    color: var(--color-matters-gold);
+  }
+
+  & .margin-right {
+    margin-right: var(--spacing-base);
   }
 }

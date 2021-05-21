@@ -10,30 +10,28 @@ import {
   Spinner,
   Throw404,
   Translate,
-  useEventListener,
   usePullToRefresh,
   useRoute,
   ViewerContext,
 } from '~/components'
-import CIRCLE_INVITATIONS from '~/components/GQL/queries/circleInvitations'
+import CIRCLE_ACCEPTED_INVITES from '~/components/GQL/queries/circleAcceptedInvites'
 
-import { REFETCH_CIRCLE_INVITATIONS } from '~/common/enums'
 import { mergeConnections } from '~/common/utils'
 
 import styles from './styles.css'
 
-import { CircleInvitations as CircleInvitationsType } from '~/components/GQL/queries/__generated__/CircleInvitations'
+import { CircleAcceptedInvites as CircleAcceptedInvitesType } from '~/components/GQL/queries/__generated__/CircleAcceptedInvites'
 
 /**
- * This component is for listing circle invitees.
+ * This component is for listing circle accepted invitations.
  *
  * Usage:
  *
  * ```
- *   <Invitations />
+ *   <AcceptedInvites />
  * ```
  */
-const Invitations = () => {
+const AcceptedInvites = () => {
   const viewer = useContext(ViewerContext)
   const { getQuery } = useRoute()
   const name = getQuery('name')
@@ -47,14 +45,14 @@ const Invitations = () => {
     error,
     fetchMore,
     refetch,
-  } = useQuery<CircleInvitationsType>(CIRCLE_INVITATIONS, {
+  } = useQuery<CircleAcceptedInvitesType>(CIRCLE_ACCEPTED_INVITES, {
     variables: { name },
   })
 
   // pagination
-  const connectionPath = 'circle.invitations'
+  const connectionPath = 'circle.invites.accepted'
   const circle = data?.circle
-  const { edges, pageInfo } = circle?.invitations || {}
+  const { edges, pageInfo } = circle?.invites.accepted || {}
   const isOwner = circle?.owner.id === viewer.id
 
   // load next page
@@ -70,7 +68,6 @@ const Invitations = () => {
     })
   }
 
-  useEventListener(REFETCH_CIRCLE_INVITATIONS, refetch)
   usePullToRefresh.Handler(refetch)
 
   /**
@@ -93,9 +90,9 @@ const Invitations = () => {
       <EmptyWarning
         description={
           <Translate
-            zh_hant="你還沒有邀請任何用戶喔！點擊新增邀請，添加站內或站外朋友加入圍爐贈與對方免費資格的固定時長"
-            zh_hans="你还没有邀请任何用户喔！点击新增邀请，添加站内或站外朋友加入围炉赠与对方免费资格的固定时长"
-            en="You have not invited anyone! Invite others to join your circle by clicking add trial invitation button."
+            zh_hant="還沒有任何用戶回覆你的邀請喔！"
+            zh_hans="还没有任何用户回覆你的邀请喔！"
+            en="Invitees have not accepted your inivtations."
           />
         }
       />
@@ -119,4 +116,4 @@ const Invitations = () => {
   )
 }
 
-export default Invitations
+export default AcceptedInvites
