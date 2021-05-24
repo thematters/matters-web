@@ -9,6 +9,7 @@ import { ReactComponent as IconCircleFeatureReading } from '@/public/static/icon
 import ConfirmTable from '../ConfirmTable'
 import styles from './styles.css'
 
+import { InvitationState } from '@/__generated__/globalTypes'
 import { DigestRichCirclePrivate } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePrivate'
 import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
 
@@ -24,7 +25,7 @@ const Head: React.FC<HeadProps> = ({ circle }) => {
     return null
   }
 
-  const isInvited = invitation && invitation.accepted === false
+  const isInvited = invitation && invitation.state === InvitationState.pending
 
   return (
     <section className="head">

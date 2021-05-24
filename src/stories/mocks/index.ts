@@ -58,8 +58,8 @@ export const MOCK_CIRCLE = {
   invitedBy: {
     __typename: 'Invitation' as any,
     id: 'circle-invitation-000',
-    accepted: false,
-    freePeriod: 3,
+    state: 'pending' as any,
+    freePeriod: 30,
   },
 }
 
