@@ -39,7 +39,7 @@ const fragments = {
         isMember
         invitedBy {
           id
-          accepted
+          state
           freePeriod
         }
       }

@@ -15,6 +15,7 @@ import { analytics } from '~/common/utils'
 import { fragments } from './gql'
 import styles from './styles.css'
 
+import { InvitationState } from '@/__generated__/globalTypes'
 import { SubscriptionBannerCirclePrivate } from './__generated__/SubscriptionBannerCirclePrivate'
 import { SubscriptionBannerCirclePublic } from './__generated__/SubscriptionBannerCirclePublic'
 
@@ -27,7 +28,7 @@ const SubscriptionBanner = ({ circle }: SubscriptionBannerProps) => {
   const viewer = useContext(ViewerContext)
   const isMember = circle.isMember
   const isOwner = circle?.owner?.id === viewer.id
-  const isInvited = circle?.invitedBy?.accepted === false
+  const isInvited = circle?.invitedBy?.state === InvitationState.pending
 
   if (isMember || isOwner) {
     return null
