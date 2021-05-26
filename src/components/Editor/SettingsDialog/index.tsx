@@ -5,11 +5,11 @@ import { Dialog, Spinner, useStep } from '~/components'
 import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
 
 import SettingsList from './List'
+import { ToggleAccessProps } from './List/ToggleAccess'
 import SetCover, { SetCoverProps } from './SetCover'
 
-import { ArticleAccessType, SearchExclude } from '@/__generated__/globalTypes'
+import { SearchExclude } from '@/__generated__/globalTypes'
 import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
-import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
 import { Asset } from '~/components/GQL/fragments/__generated__/Asset'
 import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
 
@@ -17,7 +17,7 @@ type Step = 'list' | 'cover' | 'tag' | 'collection' | 'circle'
 
 export type EditorSettingsDialogProps = {
   editCover: (asset?: Asset) => Promise<any>
-  coverSaving?: boolean
+  coverSaving: boolean
 
   collection: ArticleDigestDropdownArticle[]
   editCollection: (articles: ArticleDigestDropdownArticle[]) => Promise<any>
@@ -25,20 +25,15 @@ export type EditorSettingsDialogProps = {
 
   tags: DigestTag[]
   editTags: (tag: DigestTag[]) => Promise<any>
-  tagsSaving?: boolean
+  tagsSaving: boolean
 
-  circle?: DigestRichCirclePublic | null
-  accessType?: ArticleAccessType
-  editAccess?: (addToCircle: boolean, paywalled: boolean) => Promise<any>
-  accessSaving?: boolean
-  canToggleCircle: boolean
-  canTogglePaywall: boolean
-
-  saving?: boolean
+  saving: boolean
   disabled?: boolean
+  footerButtons: React.ReactNode
 
   children: ({ open }: { open: () => void }) => React.ReactNode
-} & Omit<SetCoverProps, 'onEdit' | 'onBack'>
+} & Omit<SetCoverProps, 'onEdit' | 'onBack'> &
+  ToggleAccessProps
 
 const DynamicSearchSelectForm = dynamic(
   () => import('~/components/Forms/SearchSelectForm'),
@@ -71,6 +66,7 @@ const BaseEditorSettingsDialog = ({
 
   saving,
   disabled,
+  footerButtons,
 
   children,
 }: EditorSettingsDialogProps) => {
@@ -103,6 +99,13 @@ const BaseEditorSettingsDialog = ({
             gotoCover={() => forward('cover')}
             gotoTag={() => forward('tag')}
             gotoCollection={() => forward('collection')}
+            circle={circle}
+            editAccess={editAccess}
+            accessSaving={accessSaving}
+            accessType={accessType}
+            canToggleCircle={canToggleCircle}
+            canTogglePaywall={canTogglePaywall}
+            footerButtons={footerButtons}
           />
         )}
 

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 import {
   Button,
+  Dialog,
   IconSpinner16,
   RevisedArticlePublishDialog,
   TextIcon,
@@ -194,22 +195,46 @@ const EditModeHeader = ({
       <EditorSettingsDialog
         disabled={disabled}
         saving={false}
+        footerButtons={
+          <Dialog.Footer>
+            <Dialog.Footer.Button bgColor="green">
+              {!isRevised && (
+                <Translate
+                  zh_hant="保存修訂"
+                  zh_hans="保存修订"
+                  en="Save Revision"
+                />
+              )}
+              {isRevised && (
+                <Translate zh_hant="立即發布" zh_hans="立即发布" en="Publish" />
+              )}
+            </Dialog.Footer.Button>
+
+            <Dialog.Footer.Button bgColor="grey-lighter" textColor="black">
+              <Translate id="cancel" />
+            </Dialog.Footer.Button>
+          </Dialog.Footer>
+        }
         // cover
         cover={cover?.path}
         assets={assets}
+        coverSaving={false}
         editCover={async (...props) => editCover(...props)}
         refetchAssets={refetchAssets}
         entityId={article.id}
         entityType={ENTITY_TYPE.article}
         // tags
         tags={tags}
+        tagsSaving={false}
         editTags={async (...props) => editTags(...props)}
         // collection
         collection={collection}
+        collectionSaving={false}
         editCollection={async (...props) => editCollection(...props)}
         // circle
         circle={circle}
         accessType={accessType}
+        accessSaving={false}
         editAccess={
           hasOwnCircle ? async (...props) => editAccess(...props) : undefined
         }

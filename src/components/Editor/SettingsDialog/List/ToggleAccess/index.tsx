@@ -9,8 +9,8 @@ export type ToggleAccessProps = {
   circle?: DigestRichCirclePublic | null
   accessType?: ArticleAccessType | null
 
-  editAccess: (addToCircle: boolean, paywalled: boolean) => any
-  saving: boolean
+  editAccess?: (addToCircle: boolean, paywalled: boolean) => any
+  accessSaving: boolean
 
   canToggleCircle: boolean
   canTogglePaywall: boolean
@@ -21,7 +21,7 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
   accessType,
 
   editAccess,
-  saving,
+  accessSaving,
 
   canToggleCircle,
   canTogglePaywall,
@@ -32,18 +32,19 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
     <section className="container">
       <section className="switch">
         <header>
-          <h4>
+          <h3>
             <Translate
               zh_hant="加入圍爐"
               zh_hans="加入围炉"
               en="Add to Circle"
             />
-          </h4>
+          </h3>
 
           <Switch
             checked={!!circle}
             onChange={() => editAccess && editAccess(!circle, false)}
             disabled={!canToggleCircle}
+            loading={accessSaving}
           />
         </header>
       </section>
@@ -64,9 +65,9 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
 
           <section className="switch">
             <header>
-              <h4>
+              <h3>
                 <Translate zh_hant="上鎖" zh_hans="上锁" en="Paywalled" />
-              </h4>
+              </h3>
 
               <Switch
                 checked={paywalled}
