@@ -1,9 +1,8 @@
-import { useState } from 'react'
-
 import {
   Dialog,
   ReCaptchaProvider,
   SignUpForm,
+  useDialogSwitch,
   useEventListener,
   useStep,
   VerificationLinkSent,
@@ -16,13 +15,10 @@ type Step = 'init' | 'verification_sent'
 const BaseSignUpDialog = () => {
   const { currStep, forward } = useStep<Step>('init')
 
-  const [showDialog, setShowDialog] = useState(true)
+  const { show, open: baseOpen, close } = useDialogSwitch(true)
   const open = () => {
     forward('init')
-    setShowDialog(true)
-  }
-  const close = () => {
-    setShowDialog(false)
+    baseOpen()
   }
 
   useEventListener(CLOSE_ACTIVE_DIALOG, close)
@@ -31,7 +27,7 @@ const BaseSignUpDialog = () => {
   return (
     <Dialog
       size="sm"
-      isOpen={showDialog}
+      isOpen={show}
       onDismiss={close}
       fixedHeight={currStep !== 'verification_sent'}
     >

@@ -1,7 +1,7 @@
 import _get from 'lodash/get'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
-import { Dialog } from '~/components'
+import { Dialog, useDialogSwitch } from '~/components'
 import { Translate } from '~/components/Context'
 
 import { captureClicks, dom } from '~/common/utils'
@@ -58,12 +58,11 @@ const renderCSE = (defer?: boolean) => {
 }
 
 const BaseGoogleSearchDialog = ({ children }: GoogleSearchDialogProps) => {
-  const [showDialog, setShowDialog] = useState(true)
+  const { show, open: baseOpen, close } = useDialogSwitch(true)
   const open = () => {
-    setShowDialog(true)
+    baseOpen()
     renderCSE(true)
   }
-  const close = () => setShowDialog(false)
 
   useEffect(() => {
     if (dom.$(`#${GCSE_SCRIPT_ID}`)) {
@@ -102,7 +101,7 @@ const BaseGoogleSearchDialog = ({ children }: GoogleSearchDialogProps) => {
     <>
       {children({ open })}
 
-      <Dialog isOpen={showDialog} onDismiss={close} fixedHeight>
+      <Dialog isOpen={show} onDismiss={close} fixedHeight>
         <Dialog.Header
           close={close}
           title={<Translate zh_hant="Google 搜尋" zh_hans="Google 搜索" />}

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Dialog, useRoute, useStep } from '~/components'
+import { Dialog, useDialogSwitch, useRoute, useStep } from '~/components'
 
 import TagEditorList from './List'
 import TagRemoveEditor from './Remove'
@@ -28,7 +28,7 @@ interface Props {
 const BaseDialog = ({ children }: Props) => {
   const defaultStep = 'list'
 
-  const [showDialog, setShowDialog] = useState(true)
+  const { show, open: baseOpen, close } = useDialogSwitch(true)
   const [removeEditor, setRemoveEditor] = useState<TagEditor>()
   const { currStep, forward, reset } = useStep<Step>(defaultStep)
 
@@ -37,9 +37,8 @@ const BaseDialog = ({ children }: Props) => {
       reset(defaultStep)
     }
     setRemoveEditor(undefined)
-    setShowDialog(true)
+    baseOpen()
   }
-  const close = () => setShowDialog(false)
 
   const { getQuery } = useRoute()
   const id = getQuery('tagId')
@@ -52,7 +51,7 @@ const BaseDialog = ({ children }: Props) => {
     <>
       {children({ open })}
 
-      <Dialog size="sm" isOpen={showDialog} onDismiss={close} fixedHeight>
+      <Dialog size="sm" isOpen={show} onDismiss={close} fixedHeight>
         {isList && (
           <TagEditorList
             id={id}

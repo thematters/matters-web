@@ -1,7 +1,13 @@
 import dynamic from 'next/dynamic'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect } from 'react'
 
-import { Dialog, Spinner, useStep, ViewerContext } from '~/components'
+import {
+  Dialog,
+  Spinner,
+  useDialogSwitch,
+  useStep,
+  ViewerContext,
+} from '~/components'
 
 import { analytics } from '~/common/utils'
 
@@ -23,7 +29,7 @@ const DynamicAddCreditForm = dynamic(
 
 const BaseAddCreditDialog = ({ children }: AddCreditDialogProps) => {
   const viewer = useContext(ViewerContext)
-  const [showDialog, setShowDialog] = useState(true)
+  const { show, open: baseOpen, close } = useDialogSwitch(true)
 
   const initialStep = viewer.status?.hasPaymentPassword
     ? 'addCredit'
@@ -32,10 +38,8 @@ const BaseAddCreditDialog = ({ children }: AddCreditDialogProps) => {
 
   const open = () => {
     forward(initialStep)
-    setShowDialog(true)
+    baseOpen()
   }
-
-  const close = () => setShowDialog(false)
 
   const isSetPaymentPassword = currStep === 'setPaymentPassword'
   const isAddCredit = currStep === 'addCredit'
@@ -48,7 +52,7 @@ const BaseAddCreditDialog = ({ children }: AddCreditDialogProps) => {
     <>
       {children({ open })}
 
-      <Dialog size="sm" isOpen={showDialog} onDismiss={close} fixedHeight>
+      <Dialog size="sm" isOpen={show} onDismiss={close} fixedHeight>
         <Dialog.Header
           title={isSetPaymentPassword ? 'paymentPassword' : 'topUp'}
           close={close}

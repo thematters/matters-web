@@ -1,11 +1,12 @@
 import gql from 'graphql-tag'
 import dynamic from 'next/dynamic'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect } from 'react'
 
 import {
   Dialog,
   Spinner,
   Translate,
+  useDialogSwitch,
   useEventListener,
   useStep,
   ViewerContext,
@@ -68,7 +69,7 @@ const BaseSubscribeCircleDialog = ({
   children,
 }: SubscribeCircleDialogProps) => {
   const viewer = useContext(ViewerContext)
-  const [showDialog, setShowDialog] = useState(true)
+  const { show, open: baseOpen, close } = useDialogSwitch(true)
 
   const initialStep = viewer.status?.hasPaymentPassword
     ? 'subscribeCircle'
@@ -77,10 +78,8 @@ const BaseSubscribeCircleDialog = ({
 
   const open = () => {
     forward(initialStep)
-    setShowDialog(true)
+    baseOpen()
   }
-
-  const close = () => setShowDialog(false)
 
   const ContinueSubscribeButton = (
     <Dialog.Footer.Button onClick={() => forward('subscribeCircle')}>
@@ -103,7 +102,7 @@ const BaseSubscribeCircleDialog = ({
     <>
       {children && children({ open })}
 
-      <Dialog size="sm" isOpen={showDialog} onDismiss={close}>
+      <Dialog size="sm" isOpen={show} onDismiss={close}>
         <Dialog.Header
           leftButton={
             prevStep ? <Dialog.Header.BackButton onClick={back} /> : <span />

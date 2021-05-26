@@ -1,12 +1,13 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import Router from 'next/router'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 
 import {
   Dialog,
   Term,
   Translate,
+  useDialogSwitch,
   useMutation,
   ViewerContext,
 } from '~/components'
@@ -127,12 +128,10 @@ const TermContent: React.FC<TermContentProps> = ({ closeDialog }) => {
 const TermAlertDialog = () => {
   const viewer = useContext(ViewerContext)
   const disagreedToS = viewer.info.agreeOn === null
-
-  const close = () => setShowDialog(false)
-  const [showDialog, setShowDialog] = useState(disagreedToS)
+  const { show, close } = useDialogSwitch(disagreedToS)
 
   return (
-    <Dialog isOpen={showDialog} onDismiss={close}>
+    <Dialog isOpen={show} onDismiss={close}>
       <TermContent closeDialog={close} />
     </Dialog>
   )

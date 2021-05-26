@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Dialog, Translate } from '~/components'
+import { Dialog, Translate, useDialogSwitch } from '~/components'
 
 import SetPaymentPointerForm from './SetPaymentPointerForm'
 
@@ -14,15 +14,13 @@ const BasePaymentPointerDialog: React.FC<PaymentPointerProps> = ({
   const formId = `set-payment-pointer-form`
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isValid, setIsValid] = useState(false)
-
-  const [showDialog, setShowDialog] = useState(true)
-  const close = () => setShowDialog(false)
+  const { show, open, close } = useDialogSwitch(true)
 
   return (
     <>
       {children({ open })}
 
-      <Dialog size="sm" isOpen={showDialog} onDismiss={close} fixedHeight>
+      <Dialog size="sm" isOpen={show} onDismiss={close} fixedHeight>
         <Dialog.Header
           title="paymentPointer"
           close={close}

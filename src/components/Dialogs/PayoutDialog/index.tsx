@@ -1,7 +1,12 @@
 import dynamic from 'next/dynamic'
-import { useState } from 'react'
 
-import { Dialog, Spinner, Translate, useStep } from '~/components'
+import {
+  Dialog,
+  Spinner,
+  Translate,
+  useDialogSwitch,
+  useStep,
+} from '~/components'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 
@@ -40,14 +45,13 @@ const BasePayoutDialog = ({
 }: PayoutDialogProps) => {
   const initialStep = hasStripeAccount ? 'confirm' : 'connectStripeAccount'
 
-  const [showDialog, setShowDialog] = useState(true)
+  const { show, open: baseOpen, close } = useDialogSwitch(true)
   const { currStep, forward, prevStep, back } = useStep<Step>(initialStep)
 
   const open = () => {
     forward(initialStep)
-    setShowDialog(true)
+    baseOpen()
   }
-  const close = () => setShowDialog(false)
 
   const ContinuePayoutButton = (
     <Dialog.Footer.Button type="button" onClick={() => forward('confirm')}>
@@ -64,7 +68,7 @@ const BasePayoutDialog = ({
     <>
       {children({ open })}
 
-      <Dialog size="sm" isOpen={showDialog} onDismiss={close} fixedHeight>
+      <Dialog size="sm" isOpen={show} onDismiss={close} fixedHeight>
         <Dialog.Header
           leftButton={
             prevStep ? <Dialog.Header.BackButton onClick={back} /> : <span />

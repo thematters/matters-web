@@ -6,6 +6,7 @@ import {
   Dialog,
   Spinner,
   Translate,
+  useDialogSwitch,
   useStep,
   ViewerContext,
 } from '~/components'
@@ -96,7 +97,7 @@ const BaseDonationDialog = ({
 }: DonationDialogProps) => {
   const viewer = useContext(ViewerContext)
 
-  const [showDialog, setShowDialog] = useState(true)
+  const { show, open: baseOpen, close: baseClose } = useDialogSwitch(true)
   const { currStep, prevStep, forward, back } = useStep<Step>(defaultStep)
   const [windowRef, setWindowRef] = useState<Window | undefined>(undefined)
 
@@ -106,12 +107,12 @@ const BaseDonationDialog = ({
 
   const open = () => {
     forward(defaultStep)
-    setShowDialog(true)
+    baseOpen()
   }
 
   const close = () => {
     setCurrency(CURRENCY.HKD)
-    setShowDialog(false)
+    baseClose()
   }
 
   const setAmountCallback = (values: SetAmountCallbackValues) => {
@@ -171,7 +172,7 @@ const BaseDonationDialog = ({
 
       <Dialog
         size={isComplete ? 'lg' : 'sm'}
-        isOpen={showDialog}
+        isOpen={show}
         onDismiss={close}
         fixedHeight
       >

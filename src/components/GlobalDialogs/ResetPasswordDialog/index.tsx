@@ -1,8 +1,7 @@
-import { useState } from 'react'
-
 import {
   ChangePasswordForm,
   Dialog,
+  useDialogSwitch,
   useEventListener,
   useStep,
   VerificationLinkSent,
@@ -17,18 +16,17 @@ const BaseResetPasswordDialog = () => {
   const { currStep, forward } = useStep<Step>('request')
 
   // dailog & global listeners
-  const [showDialog, setShowDialog] = useState(true)
+  const { show, open: baseOpen, close } = useDialogSwitch(true)
   const open = () => {
     forward('request')
-    setShowDialog(true)
+    baseOpen()
   }
-  const close = () => setShowDialog(false)
 
   useEventListener(CLOSE_ACTIVE_DIALOG, close)
   useEventListener(OPEN_RESET_PASSWORD_DIALOG, open)
 
   return (
-    <Dialog isOpen={showDialog} onDismiss={close} size="sm">
+    <Dialog isOpen={show} onDismiss={close} size="sm">
       {currStep === 'request' && (
         <ChangePasswordForm.Request
           type="forget"

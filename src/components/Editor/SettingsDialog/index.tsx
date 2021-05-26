@@ -1,7 +1,6 @@
 import dynamic from 'next/dynamic'
-import { useState } from 'react'
 
-import { Dialog, Spinner, useStep } from '~/components'
+import { Dialog, Spinner, useDialogSwitch, useStep } from '~/components'
 import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
 
 import SettingsList from './List'
@@ -70,17 +69,15 @@ const BaseEditorSettingsDialog = ({
 
   children,
 }: EditorSettingsDialogProps) => {
-  const [showDialog, setShowDialog] = useState(true)
+  const { show, open: baseOpen, close } = useDialogSwitch(true)
 
   const initialStep = 'list'
   const { currStep, forward } = useStep<Step>(initialStep)
 
   const open = () => {
     forward(initialStep)
-    setShowDialog(true)
+    baseOpen()
   }
-
-  const close = () => setShowDialog(false)
 
   const isList = currStep === 'list'
   const isCover = currStep === 'cover'
@@ -92,7 +89,7 @@ const BaseEditorSettingsDialog = ({
     <>
       {children({ open })}
 
-      <Dialog size="sm" isOpen={showDialog} onDismiss={close} fixedHeight>
+      <Dialog size="sm" isOpen={show} onDismiss={close} fixedHeight>
         {isList && (
           <SettingsList
             saving={saving}

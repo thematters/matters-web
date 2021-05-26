@@ -1,6 +1,4 @@
-import { useState } from 'react'
-
-import { Dialog, useEventListener } from '~/components'
+import { Dialog, useDialogSwitch, useEventListener } from '~/components'
 
 import { OPEN_LIKE_COIN_DIALOG } from '~/common/enums'
 
@@ -11,11 +9,7 @@ interface LikeCoinDialogProps {
 }
 
 const BaseLikeCoinDialog: React.FC<LikeCoinDialogProps> = ({ children }) => {
-  const [showDialog, setShowDialog] = useState(true)
-  const open = () => {
-    setShowDialog(true)
-  }
-  const close = () => setShowDialog(false)
+  const { show, open, close } = useDialogSwitch(true)
 
   useEventListener(OPEN_LIKE_COIN_DIALOG, open)
 
@@ -23,7 +17,7 @@ const BaseLikeCoinDialog: React.FC<LikeCoinDialogProps> = ({ children }) => {
     <>
       {children && children({ open })}
 
-      <Dialog isOpen={showDialog} onDismiss={close} size="sm">
+      <Dialog isOpen={show} onDismiss={close} size="sm">
         <SetupLikeCoin closeDialog={close} />
       </Dialog>
     </>

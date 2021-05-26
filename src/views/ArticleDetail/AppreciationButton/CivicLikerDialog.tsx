@@ -1,7 +1,6 @@
 import gql from 'graphql-tag'
-import { useState } from 'react'
 
-import { Dialog, Translate } from '~/components'
+import { Dialog, Translate, useDialogSwitch } from '~/components'
 
 import { EXTERNAL_LINKS } from '~/common/enums'
 
@@ -29,12 +28,9 @@ const CivicLikerDialog = ({
   onClose,
   children,
 }: CivicLikerDialogProps) => {
-  const [showDialog, setShowDialog] = useState(true)
-  const open = () => {
-    setShowDialog(true)
-  }
+  const { show, open, close: baseClose } = useDialogSwitch(true)
   const close = () => {
-    setShowDialog(false)
+    baseClose()
     onClose()
   }
 
@@ -42,7 +38,7 @@ const CivicLikerDialog = ({
     <>
       {children({ open })}
 
-      <Dialog isOpen={showDialog} onDismiss={close} size="sm">
+      <Dialog isOpen={show} onDismiss={close} size="sm">
         <Dialog.Header
           title="joinCivicLiker"
           close={close}

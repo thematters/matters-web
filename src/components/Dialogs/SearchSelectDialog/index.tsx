@@ -1,7 +1,6 @@
 import dynamic from 'next/dynamic'
-import { useState } from 'react'
 
-import { Dialog, Spinner } from '~/components'
+import { Dialog, Spinner, useDialogSwitch } from '~/components'
 import { SearchSelectFormProps } from '~/components/Forms/SearchSelectForm'
 
 type SearchSelectDialogProps = SearchSelectFormProps & {
@@ -17,16 +16,13 @@ const BaseSearchSelectDialog = ({
   children,
   ...props
 }: SearchSelectDialogProps) => {
-  const [showDialog, setShowDialog] = useState(true)
-  const open = () => {
-    setShowDialog(true)
-  }
+  const { show, open, close } = useDialogSwitch(true)
 
   return (
     <>
       {children({ open })}
 
-      <Dialog isOpen={showDialog} onDismiss={close} fixedHeight>
+      <Dialog isOpen={show} onDismiss={close} fixedHeight>
         <DynamicSearchSelectForm {...props} />
       </Dialog>
     </>
