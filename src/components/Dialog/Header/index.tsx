@@ -10,7 +10,7 @@ import styles from './styles.css'
 
 export interface HeaderProps {
   title: TextId | React.ReactElement
-  close: () => void
+  close?: () => void
   closeTextId?: TextId
   mode?: 'hidden' | 'inner'
   leftButton?: React.ReactNode
@@ -41,9 +41,12 @@ const BaseHeader = ({
         </span>
       </h1>
 
-      <section className="left">
-        {leftButton || <CloseButton close={close} textId={closeTextId} />}
-      </section>
+      {(leftButton || close) && (
+        <section className="left">
+          {leftButton ||
+            (close ? <CloseButton close={close} textId={closeTextId} /> : null)}
+        </section>
+      )}
 
       {rightButton && <section className="right">{rightButton}</section>}
 

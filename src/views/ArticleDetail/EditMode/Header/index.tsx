@@ -1,20 +1,24 @@
-import gql from 'graphql-tag'
+import { useEffect, useState } from 'react'
 
 import {
   Button,
   IconSpinner16,
   RevisedArticlePublishDialog,
-  Tag,
   TextIcon,
   Translate,
   useMutation,
 } from '~/components'
-import { fragments as EditorFragments } from '~/components/Editor/fragments'
-import articleFragments from '~/components/GQL/fragments/article'
+import { EditorSettingsDialog } from '~/components/Editor/SettingsDialog'
+import { useImperativeQuery } from '~/components/GQL'
 
-import { ADD_TOAST, MAX_ARTICLE_REVISION_DIFF } from '~/common/enums'
+import {
+  ADD_TOAST,
+  ENTITY_TYPE,
+  MAX_ARTICLE_REVISION_DIFF,
+} from '~/common/enums'
 import { measureDiffs } from '~/common/utils'
 
+import { EDIT_ARTICLE, EDIT_MODE_ARTICLE_ASSETS } from './gql'
 import styles from './styles.css'
 
 import { ArticleAccessType } from '@/__generated__/globalTypes'
@@ -22,101 +26,87 @@ import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdow
 import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
 import { Asset } from '~/components/GQL/fragments/__generated__/Asset'
 import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
-import { ArticleDetailPublic_article } from '../../__generated__/ArticleDetailPublic'
+import { EditModeArticle_article } from '../__generated__/EditModeArticle'
 import { EditArticle } from './__generated__/EditArticle'
+import { EditModeArticleAssets } from './__generated__/EditModeArticleAssets'
 
-interface EditModeHeaderProps {
-  article: ArticleDetailPublic_article
-  cover?: Asset
+type EditModeHeaderProps = {
+  article: EditModeArticle_article
   editData: Record<string, any>
-  tags: DigestTag[]
-  collection: ArticleDigestDropdownArticle[]
-  circle?: DigestRichCirclePublic | null
-  accessType?: ArticleAccessType
-
   countLeft: number
-
-  isPending?: boolean
-  isSameHash?: boolean
-
+  isSameHash: boolean
+  isReviseDisabled: boolean
   onSaved: () => any
+  disabled: boolean
 }
-
-/**
- * Note:
- *
- * The response of this mutation is aligned with `COLLECTION_LIST` in `CollectionList.tsx`,
- * so that it will auto update the local cache and prevent refetch logics
- */
-const EDIT_ARTICLE = gql`
-  mutation EditArticle(
-    $id: ID!
-    $mediaHash: String!
-    $content: String
-    $cover: ID
-    $tags: [String!]
-    $collection: [ID!]
-    $circle: ID
-    $accessType: ArticleAccessType
-    $after: String
-    $first: Int = null
-  ) {
-    editArticle(
-      input: {
-        id: $id
-        content: $content
-        cover: $cover
-        tags: $tags
-        collection: $collection
-        circle: $circle
-        accessType: $accessType
-      }
-    ) {
-      id
-      cover
-      tags {
-        ...DigestTag
-        selected(input: { mediaHash: $mediaHash })
-      }
-      access {
-        type
-      }
-      drafts {
-        id
-        mediaHash
-        publishState
-        ...EditorDraft
-      }
-      ...ArticleCollection
-    }
-  }
-  ${Tag.fragments.tag}
-  ${articleFragments.articleCollection}
-  ${EditorFragments.draft}
-`
 
 const EditModeHeader = ({
   article,
-  cover,
   editData,
-  tags,
-  collection,
-  circle,
-  accessType,
-
   countLeft,
-
-  isPending,
   isSameHash,
-
+  isReviseDisabled,
   onSaved,
+  disabled,
 }: EditModeHeaderProps) => {
+  // tags
+  const [tags, editTags] = useState<DigestTag[]>(article.tags || [])
+  const [collection, editCollection] = useState<ArticleDigestDropdownArticle[]>(
+    []
+  )
+
+  // access
+  const [circle, editCircle] = useState<DigestRichCirclePublic | null>(
+    article.access.circle
+  )
+  const [accessType, editAccessType] = useState<ArticleAccessType>(
+    article.access.type
+  )
+  const ownCircles = article?.author.ownCircles
+  const hasOwnCircle = ownCircles && ownCircles.length >= 1
+  const editAccess = (addToCircle: boolean, paywalled: boolean) => {
+    if (!ownCircles) {
+      return
+    }
+
+    editCircle(addToCircle ? ownCircles[0] : null)
+    editAccessType(
+      paywalled ? ArticleAccessType.paywall : ArticleAccessType.public
+    )
+  }
+
+  // cover
+  const [cover, editCover] = useState<Asset>()
+  const assets = article?.assets || []
+  const refetchAssets = useImperativeQuery<EditModeArticleAssets>(
+    EDIT_MODE_ARTICLE_ASSETS,
+    {
+      variables: { mediaHash: article.mediaHash },
+      fetchPolicy: 'network-only',
+    }
+  )
+
+  // update cover & collection from retrieved data
+  useEffect(() => {
+    if (!article) {
+      return
+    }
+
+    // cover, find from `article.assets` since `article.cover` isn't a `Asset`
+    const currCover = assets.find((asset) => asset.path === article?.cover)
+    if (currCover) {
+      editCover(currCover)
+    }
+
+    // collection
+    editCollection(article.collection.edges?.map(({ node }) => node) || [])
+  }, [article?.id])
+
   const [editArticle, { loading }] = useMutation<EditArticle>(EDIT_ARTICLE)
 
   const { content, currText, initText } = editData
   const diff = measureDiffs(initText || '', currText || '') || 0
   const diffCount = `${diff}`.padStart(2, '0')
-
   const isReachDiffLimit = diff > MAX_ARTICLE_REVISION_DIFF
   const isRevised = diff > 0
   const isUnderLimit = countLeft > 0
@@ -166,11 +156,6 @@ const EditModeHeader = ({
   }
 
   const diffCountClasses = isReachDiffLimit ? 'red' : 'green'
-  const saveButtonText = isRevised ? (
-    <Translate id="publish" />
-  ) : (
-    <Translate id="save" />
-  )
 
   return (
     <>
@@ -206,26 +191,55 @@ const EditModeHeader = ({
         )}
       </p>
 
-      <RevisedArticlePublishDialog onSave={onSave}>
-        {({ open }) => (
-          <Button
-            size={['4rem', '2rem']}
-            bgColor="green"
-            onClick={isRevised ? open : onSave}
-            aria-haspopup="true"
-            disabled={isPending || !isSameHash || isReachDiffLimit}
-          >
-            <TextIcon
-              color="white"
-              size="md"
-              weight="md"
-              icon={loading && <IconSpinner16 size="sm" />}
-            >
-              {loading ? null : saveButtonText}
-            </TextIcon>
-          </Button>
+      <EditorSettingsDialog
+        disabled={disabled}
+        saving={false}
+        // cover
+        cover={cover?.path}
+        assets={assets}
+        editCover={async (...props) => editCover(...props)}
+        refetchAssets={refetchAssets}
+        entityId={article.id}
+        entityType={ENTITY_TYPE.article}
+        // tags
+        tags={tags}
+        editTags={async (...props) => editTags(...props)}
+        // collection
+        collection={collection}
+        editCollection={async (...props) => editCollection(...props)}
+        // circle
+        circle={circle}
+        accessType={accessType}
+        editAccess={
+          hasOwnCircle ? async (...props) => editAccess(...props) : undefined
+        }
+        canToggleCircle={!isReviseDisabled}
+        canTogglePaywall={!isReviseDisabled}
+      >
+        {({ open: openEditorSettingsDialog }) => (
+          <RevisedArticlePublishDialog onSave={onSave}>
+            {({ open: openRevisedArticlePublishDialog }) => (
+              <Button
+                size={[null, '2rem']}
+                spacing={[0, 'base']}
+                bgColor="green"
+                onClick={openEditorSettingsDialog}
+                aria-haspopup="true"
+                disabled={disabled || !isSameHash || isReachDiffLimit}
+              >
+                <TextIcon
+                  color="white"
+                  size="md"
+                  weight="md"
+                  icon={loading && <IconSpinner16 size="sm" />}
+                >
+                  <Translate id="nextStep" />
+                </TextIcon>
+              </Button>
+            )}
+          </RevisedArticlePublishDialog>
         )}
-      </RevisedArticlePublishDialog>
+      </EditorSettingsDialog>
 
       <style jsx>{styles}</style>
     </>

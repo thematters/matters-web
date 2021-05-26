@@ -81,12 +81,12 @@ export const useEditDraftAccess = (
     SET_ACCESS
   )
 
-  const edit = (addToCircle: boolean, paywalled: boolean) => {
+  const edit = async (addToCircle: boolean, paywalled: boolean) => {
     if (!circle) {
       return
     }
 
-    setCircle({
+    return setCircle({
       variables: {
         id: draftId,
         circle: addToCircle ? circle.id : null,
