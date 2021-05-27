@@ -1,4 +1,5 @@
 ul {
+  margin-top: var(--spacing-base);
   overflow: hidden;
 }
 

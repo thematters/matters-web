@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic'
 import { Dialog, Spinner, useDialogSwitch, useStep } from '~/components'
 import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
 
-import SettingsList from './List'
+import SettingsList, { SettingsListDialogButtons } from './List'
 import { ToggleAccessProps } from './List/ToggleAccess'
 import SetCover, { SetCoverProps } from './SetCover'
 
@@ -12,7 +12,18 @@ import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdow
 import { Asset } from '~/components/GQL/fragments/__generated__/Asset'
 import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
 
-type Step = 'list' | 'cover' | 'tag' | 'collection' | 'circle'
+export type Step =
+  | 'list'
+  | 'cover'
+  | 'tag'
+  | 'collection'
+  | 'circle'
+  | 'confirm'
+
+export type ConfirmStepContentProps = {
+  onBack: () => void
+  closeDialog: () => void
+}
 
 export type EditorSettingsDialogProps = {
   editCover: (asset?: Asset) => Promise<any>
@@ -28,11 +39,12 @@ export type EditorSettingsDialogProps = {
 
   saving: boolean
   disabled?: boolean
-  footerButtons: React.ReactNode
+  ConfirmStepContent: React.FC<ConfirmStepContentProps>
 
   children: ({ open }: { open: () => void }) => React.ReactNode
 } & Omit<SetCoverProps, 'onEdit' | 'onBack'> &
-  ToggleAccessProps
+  ToggleAccessProps &
+  SettingsListDialogButtons
 
 const DynamicSearchSelectForm = dynamic(
   () => import('~/components/Forms/SearchSelectForm'),
@@ -65,8 +77,9 @@ const BaseEditorSettingsDialog = ({
 
   saving,
   disabled,
-  footerButtons,
-
+  confirmButtonText,
+  cancelButtonText,
+  ConfirmStepContent,
   children,
 }: EditorSettingsDialogProps) => {
   const { show, open: baseOpen, close } = useDialogSwitch(true)
@@ -84,6 +97,7 @@ const BaseEditorSettingsDialog = ({
   const isTag = currStep === 'tag'
   const isCollection = currStep === 'collection'
   // const isCircle = currStep === 'circle'
+  const isConfirm = currStep === 'confirm'
 
   return (
     <>
@@ -93,16 +107,16 @@ const BaseEditorSettingsDialog = ({
         {isList && (
           <SettingsList
             saving={saving}
-            gotoCover={() => forward('cover')}
-            gotoTag={() => forward('tag')}
-            gotoCollection={() => forward('collection')}
+            forward={forward}
+            closeDialog={close}
+            confirmButtonText={confirmButtonText}
+            cancelButtonText={cancelButtonText}
             circle={circle}
             editAccess={editAccess}
             accessSaving={accessSaving}
             accessType={accessType}
             canToggleCircle={canToggleCircle}
             canTogglePaywall={canTogglePaywall}
-            footerButtons={footerButtons}
           />
         )}
 
@@ -152,6 +166,13 @@ const BaseEditorSettingsDialog = ({
             nodes={tags}
             saving={tagsSaving}
             createTag
+          />
+        )}
+
+        {isConfirm && (
+          <ConfirmStepContent
+            onBack={() => forward('list')}
+            closeDialog={close}
           />
         )}
       </Dialog>

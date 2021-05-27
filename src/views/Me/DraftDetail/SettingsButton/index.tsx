@@ -2,7 +2,6 @@ import { useContext } from 'react'
 
 import {
   Button,
-  Dialog,
   TextIcon,
   toDigestTagPlaceholder,
   Translate,
@@ -18,6 +17,7 @@ import {
   useEditDraftCover,
   useEditDraftTags,
 } from '../hooks'
+import ConfirmPublishDialogContent from './ConfirmPublishDialogContent'
 
 import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
 import { EditMetaDraft } from '../__generated__/EditMetaDraft'
@@ -78,21 +78,13 @@ const SettingsButton = ({
       <EditorSettingsDialog
         saving={collectionSaving || coverSaving || tagsSaving || accessSaving}
         disabled={isPending || isPublished}
-        footerButtons={
-          <Dialog.Footer>
-            <Dialog.Footer.Button bgColor="green">
-              <Translate zh_hant="立即發布" zh_hans="立即发布" en="Publish" />
-            </Dialog.Footer.Button>
-
-            <Dialog.Footer.Button bgColor="grey-lighter" textColor="black">
-              <Translate
-                zh_hant="存至草稿"
-                zh_hans="存至草稿"
-                en="Save as Draft"
-              />
-            </Dialog.Footer.Button>
-          </Dialog.Footer>
+        confirmButtonText={
+          <Translate zh_hant="立即發布" zh_hans="立即发布" en="Publish" />
         }
+        cancelButtonText={
+          <Translate zh_hant="存至草稿" zh_hans="存至草稿" en="Save as Draft" />
+        }
+        ConfirmStepContent={ConfirmPublishDialogContent}
         // cover
         cover={draft.cover}
         assets={draft.assets}
@@ -117,7 +109,9 @@ const SettingsButton = ({
         canToggleCircle
         canTogglePaywall
       >
-        {({ open }) => <NextStepButton open={open} disabled={disabled} />}
+        {({ open: openEditorSettingsDialog }) => (
+          <NextStepButton open={openEditorSettingsDialog} disabled={disabled} />
+        )}
       </EditorSettingsDialog>
     )
   }

@@ -2,14 +2,15 @@ import { useEffect, useState } from 'react'
 
 import {
   Button,
-  Dialog,
   IconSpinner16,
-  RevisedArticlePublishDialog,
   TextIcon,
   Translate,
   useMutation,
 } from '~/components'
-import { EditorSettingsDialog } from '~/components/Editor/SettingsDialog'
+import {
+  ConfirmStepContentProps,
+  EditorSettingsDialog,
+} from '~/components/Editor/SettingsDialog'
 import { useImperativeQuery } from '~/components/GQL'
 
 import {
@@ -19,6 +20,7 @@ import {
 } from '~/common/enums'
 import { measureDiffs } from '~/common/utils'
 
+import ConfirmRevisedPublishDialogContent from './ConfirmRevisedPublishDialogContent'
 import { EDIT_ARTICLE, EDIT_MODE_ARTICLE_ASSETS } from './gql'
 import styles from './styles.css'
 
@@ -103,16 +105,14 @@ const EditModeHeader = ({
     editCollection(article.collection.edges?.map(({ node }) => node) || [])
   }, [article?.id])
 
-  const [editArticle, { loading }] = useMutation<EditArticle>(EDIT_ARTICLE)
-
   const { content, currText, initText } = editData
   const diff = measureDiffs(initText || '', currText || '') || 0
   const diffCount = `${diff}`.padStart(2, '0')
   const isReachDiffLimit = diff > MAX_ARTICLE_REVISION_DIFF
   const isRevised = diff > 0
-  const isUnderLimit = countLeft > 0
   const isOverLimit = countLeft <= 0
 
+  const [editArticle, { loading }] = useMutation<EditArticle>(EDIT_ARTICLE)
   const onSave = async () => {
     try {
       await editArticle({
@@ -156,32 +156,33 @@ const EditModeHeader = ({
     }
   }
 
-  const diffCountClasses = isReachDiffLimit ? 'red' : 'green'
+  const ConfirmStepContent = (props: ConfirmStepContentProps) => (
+    <ConfirmRevisedPublishDialogContent onSave={onSave} {...props} />
+  )
+
+  const OverLimitText = () => (
+    <>
+      <Translate
+        zh_hant="正文及作品管理剩 "
+        zh_hans="正文及作品管理剩 "
+        en="content and article management has "
+      />
+      {countLeft}
+      <Translate zh_hant=" 版修訂" zh_hans=" 次修订" en=" republish left" />
+      <span className={isReachDiffLimit ? 'red' : 'green'}>
+        &nbsp;{diffCount}/50&nbsp;&nbsp;&nbsp;
+      </span>
+    </>
+  )
 
   return (
     <>
       <p>
         {isSameHash && (
           <>
-            {isUnderLimit && (
-              <>
-                <Translate
-                  zh_hant="正文及作品管理剩 "
-                  zh_hans="正文及作品管理剩 "
-                  en="content and article management has "
-                />
-                {countLeft}
-                <Translate
-                  zh_hant=" 版修訂"
-                  zh_hans=" 次修订"
-                  en=" republish left"
-                />
-                <span className={diffCountClasses}>
-                  &nbsp;{diffCount}/50&nbsp;&nbsp;&nbsp;
-                </span>
-              </>
-            )}
-            {isOverLimit && (
+            {isOverLimit ? (
+              <OverLimitText />
+            ) : (
               <Translate
                 zh_hant="正文及作品管理修訂次數已達上限"
                 zh_hans="正文及作品管理修订次数已达上限"
@@ -192,88 +193,68 @@ const EditModeHeader = ({
         )}
       </p>
 
-      <RevisedArticlePublishDialog onSave={onSave}>
-        {({ open: openRevisedArticlePublishDialog }) => (
-          <EditorSettingsDialog
-            disabled={disabled}
-            saving={false}
-            footerButtons={
-              <Dialog.Footer>
-                <Dialog.Footer.Button
-                  bgColor="green"
-                  onClick={openRevisedArticlePublishDialog}
-                >
-                  {!isRevised && (
-                    <Translate
-                      zh_hant="保存修訂"
-                      zh_hans="保存修订"
-                      en="Save Revision"
-                    />
-                  )}
-                  {isRevised && (
-                    <Translate
-                      zh_hant="立即發布"
-                      zh_hans="立即发布"
-                      en="Publish"
-                    />
-                  )}
-                </Dialog.Footer.Button>
-
-                <Dialog.Footer.Button bgColor="grey-lighter" textColor="black">
-                  <Translate id="cancel" />
-                </Dialog.Footer.Button>
-              </Dialog.Footer>
-            }
-            // cover
-            cover={cover?.path}
-            assets={assets}
-            coverSaving={false}
-            editCover={async (...props) => editCover(...props)}
-            refetchAssets={refetchAssets}
-            entityId={article.id}
-            entityType={ENTITY_TYPE.article}
-            // tags
-            tags={tags}
-            tagsSaving={false}
-            editTags={async (...props) => editTags(...props)}
-            // collection
-            collection={collection}
-            collectionSaving={false}
-            editCollection={async (...props) => editCollection(...props)}
-            // circle
-            circle={circle}
-            accessType={accessType}
-            accessSaving={false}
-            editAccess={
-              hasOwnCircle
-                ? async (...props) => editAccess(...props)
-                : undefined
-            }
-            canToggleCircle={!isReviseDisabled}
-            canTogglePaywall={!isReviseDisabled}
+      <EditorSettingsDialog
+        disabled={disabled}
+        saving={false}
+        confirmButtonText={
+          isRevised ? (
+            <Translate zh_hant="立即發布" zh_hans="立即发布" en="Publish" />
+          ) : (
+            <Translate
+              zh_hant="保存修訂"
+              zh_hans="保存修订"
+              en="Save Revision"
+            />
+          )
+        }
+        cancelButtonText={<Translate id="cancel" />}
+        ConfirmStepContent={ConfirmStepContent}
+        // cover
+        cover={cover?.path}
+        assets={assets}
+        coverSaving={false}
+        editCover={async (...props) => editCover(...props)}
+        refetchAssets={refetchAssets}
+        entityId={article.id}
+        entityType={ENTITY_TYPE.article}
+        // tags
+        tags={tags}
+        tagsSaving={false}
+        editTags={async (...props) => editTags(...props)}
+        // collection
+        collection={collection}
+        collectionSaving={false}
+        editCollection={async (...props) => editCollection(...props)}
+        // circle
+        circle={circle}
+        accessType={accessType}
+        accessSaving={false}
+        editAccess={
+          hasOwnCircle ? async (...props) => editAccess(...props) : undefined
+        }
+        canToggleCircle={!isReviseDisabled}
+        canTogglePaywall={!isReviseDisabled}
+      >
+        {({ open: openEditorSettingsDialog }) => (
+          <Button
+            size={[null, '2rem']}
+            spacing={[0, 'base']}
+            bgColor="green"
+            onClick={openEditorSettingsDialog}
+            aria-haspopup="true"
+            disabled={disabled || !isSameHash || isReachDiffLimit}
           >
-            {({ open: openEditorSettingsDialog }) => (
-              <Button
-                size={[null, '2rem']}
-                spacing={[0, 'base']}
-                bgColor="green"
-                onClick={openEditorSettingsDialog}
-                aria-haspopup="true"
-                disabled={disabled || !isSameHash || isReachDiffLimit}
-              >
-                <TextIcon
-                  color="white"
-                  size="md"
-                  weight="md"
-                  icon={loading && <IconSpinner16 size="sm" />}
-                >
-                  <Translate id="nextStep" />
-                </TextIcon>
-              </Button>
-            )}
-          </EditorSettingsDialog>
+            <TextIcon
+              color="white"
+              size="md"
+              weight="md"
+              icon={loading && <IconSpinner16 size="sm" />}
+            >
+              <Translate id="nextStep" />
+            </TextIcon>
+          </Button>
         )}
-      </RevisedArticlePublishDialog>
+      </EditorSettingsDialog>
 
       <style jsx>{styles}</style>
     </>

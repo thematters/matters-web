@@ -6,18 +6,22 @@ import {
   Translate,
 } from '~/components'
 
+import { Step } from '../../SettingsDialog'
 import styles from './styles.css'
 import ToggleAccess, { ToggleAccessProps } from './ToggleAccess'
+
+export type SettingsListDialogButtons = {
+  confirmButtonText?: string | React.ReactNode
+  cancelButtonText?: string | React.ReactNode
+}
 
 export type SettingsListDialogProps = {
   saving: boolean
 
-  gotoCover: () => any
-  gotoTag: () => any
-  gotoCollection: () => any
-
-  footerButtons: React.ReactNode
-} & ToggleAccessProps
+  forward: (nextStep: Step) => void
+  closeDialog: () => void
+} & SettingsListDialogButtons &
+  ToggleAccessProps
 
 const ListItem = ({
   title,
@@ -43,11 +47,11 @@ const ListItem = ({
 const SettingsList = ({
   saving,
 
-  gotoCover,
-  gotoTag,
-  gotoCollection,
+  forward,
+  closeDialog,
 
-  footerButtons,
+  confirmButtonText,
+  cancelButtonText,
 
   ...restProps
 }: SettingsListDialogProps) => {
@@ -60,19 +64,19 @@ const SettingsList = ({
         mode="hidden"
       />
 
-      <Dialog.Content hasGrow spacing={['base', 0]}>
+      <Dialog.Content hasGrow>
         <ul>
           <ListItem
             title={
               <Translate zh_hant="設定封面" zh_hans="设定封面" en="Set Cover" />
             }
-            onClick={gotoCover}
+            onClick={() => forward('cover')}
           />
           <ListItem
             title={
               <Translate zh_hant="添加標籤" zh_hans="添加标签" en="Add Tags" />
             }
-            onClick={gotoTag}
+            onClick={() => forward('tag')}
           />
           <ListItem
             title={
@@ -82,12 +86,35 @@ const SettingsList = ({
                 en="Set Collection"
               />
             }
-            onClick={gotoCollection}
+            onClick={() => forward('collection')}
           />
 
           <ToggleAccess {...restProps} />
 
-          {footerButtons}
+          {(confirmButtonText || cancelButtonText) && (
+            <Dialog.Footer>
+              {confirmButtonText && (
+                <Dialog.Footer.Button
+                  bgColor="green"
+                  onClick={() => forward('confirm')}
+                  loading={saving}
+                >
+                  {confirmButtonText}
+                </Dialog.Footer.Button>
+              )}
+
+              {cancelButtonText && (
+                <Dialog.Footer.Button
+                  bgColor="grey-lighter"
+                  textColor="black"
+                  onClick={closeDialog}
+                  disabled={saving}
+                >
+                  {cancelButtonText}
+                </Dialog.Footer.Button>
+              )}
+            </Dialog.Footer>
+          )}
         </ul>
       </Dialog.Content>
 

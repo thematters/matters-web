@@ -8,7 +8,8 @@ import styles from './styles.css'
 
 import { PublishArticle } from './__generated__/PublishArticle'
 
-interface PublishContentProps {
+interface ConfirmPublishDialogContentProps {
+  onBack: () => void
   closeDialog: () => void
 }
 
@@ -21,7 +22,10 @@ const PUBLISH_ARTICLE = gql`
   }
 `
 
-const PublishContent: React.FC<PublishContentProps> = ({ closeDialog }) => {
+const ConfirmPublishDialogContent: React.FC<ConfirmPublishDialogContentProps> = ({
+  onBack,
+  closeDialog,
+}) => {
   const { getQuery } = useRoute()
   const id = getQuery('draftId')
   const [publish] = useMutation<PublishArticle>(PUBLISH_ARTICLE)
@@ -41,8 +45,8 @@ const PublishContent: React.FC<PublishContentProps> = ({ closeDialog }) => {
   return (
     <>
       <Dialog.Header
-        title="publish"
-        close={closeDialog}
+        title={<Translate zh_hant="發布須知" zh_hans="發布须知" />}
+        leftButton={<Dialog.Header.BackButton onClick={onBack} />}
         rightButton={SubmitButton}
       />
 
@@ -91,11 +95,11 @@ const PublishContent: React.FC<PublishContentProps> = ({ closeDialog }) => {
             />
           </li>
         </ul>
-
-        <style jsx>{styles}</style>
       </Dialog.Message>
+
+      <style jsx>{styles}</style>
     </>
   )
 }
 
-export default PublishContent
+export default ConfirmPublishDialogContent
