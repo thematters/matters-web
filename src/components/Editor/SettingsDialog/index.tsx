@@ -76,8 +76,7 @@ const BaseEditorSettingsDialog = ({
   editAccess,
   accessSaving,
   accessType,
-  canToggleCircle,
-  canTogglePaywall,
+  license,
 
   saving,
   disabled,
@@ -123,8 +122,7 @@ const BaseEditorSettingsDialog = ({
             editAccess={editAccess}
             accessSaving={accessSaving}
             accessType={accessType}
-            canToggleCircle={canToggleCircle}
-            canTogglePaywall={canTogglePaywall}
+            license={license}
           />
         )}
 

@@ -16,7 +16,10 @@ import PUT_CIRCLE_ARTICLES from '~/components/GQL/mutations/putCircleArticles'
 import { ADD_TOAST, REFETCH_CIRCLE_DETAIL_ARTICLES } from '~/common/enums'
 import { translate } from '~/common/utils'
 
-import { ArticleAccessType } from '@/__generated__/globalTypes'
+import {
+  ArticleAccessType,
+  ArticleLicenseType,
+} from '@/__generated__/globalTypes'
 import { PutCircleArticles } from '~/components/GQL/mutations/__generated__/PutCircleArticles'
 
 interface AddCircleArticleDialogProps {
@@ -37,7 +40,10 @@ const AddCircleArticleDialog = ({
 
   const [articles, setArticles] = useState<SearchSelectNode[]>([])
   const [add, { loading }] = useMutation<PutCircleArticles>(PUT_CIRCLE_ARTICLES)
-  const addArticlesToCircle = async (paywalled: boolean) => {
+  const addArticlesToCircle = async (
+    paywalled: boolean,
+    license: ArticleLicenseType
+  ) => {
     const articleIds = articles.map((article) => article.id)
 
     await add({
@@ -48,6 +54,7 @@ const AddCircleArticleDialog = ({
         accessType: paywalled
           ? ArticleAccessType.paywall
           : ArticleAccessType.public,
+        license,
       },
     })
 

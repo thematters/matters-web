@@ -4,9 +4,11 @@ import { Dialog, Switch, Translate } from '~/components'
 
 import styles from './styles.css'
 
+import { ArticleLicenseType } from '@/__generated__/globalTypes'
+
 interface ContentProps {
   loading: boolean
-  onConfirm: (paywalled: boolean) => void
+  onConfirm: (paywalled: boolean, license: ArticleLicenseType) => void
   closeDialog: () => void
 }
 
@@ -52,7 +54,7 @@ const Content: React.FC<ContentProps> = ({
 
       <Dialog.Footer>
         <Dialog.Footer.Button
-          onClick={() => onConfirm(paywalled)}
+          onClick={() => onConfirm(paywalled, ArticleLicenseType.cc_by_nc_nd_2)}
           loading={loading}
         >
           <Translate

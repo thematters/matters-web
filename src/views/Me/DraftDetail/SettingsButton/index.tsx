@@ -105,10 +105,9 @@ const SettingsButton = ({
         // circle
         circle={draft?.access.circle}
         accessType={draft.access.type}
+        license={draft.license}
         editAccess={hasOwnCircle ? editAccess : undefined}
         accessSaving={accessSaving}
-        canToggleCircle
-        canTogglePaywall
       >
         {({ open: openEditorSettingsDialog }) => (
           <NextStepButton open={openEditorSettingsDialog} disabled={disabled} />

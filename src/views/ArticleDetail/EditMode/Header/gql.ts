@@ -21,6 +21,7 @@ export const EDIT_ARTICLE = gql`
     $collection: [ID!]
     $circle: ID
     $accessType: ArticleAccessType
+    $license: ArticleLicenseType
     $after: String
     $first: Int = null
   ) {
@@ -33,6 +34,7 @@ export const EDIT_ARTICLE = gql`
         collection: $collection
         circle: $circle
         accessType: $accessType
+        license: $license
       }
     ) {
       id
@@ -44,6 +46,7 @@ export const EDIT_ARTICLE = gql`
       access {
         type
       }
+      license
       drafts {
         id
         mediaHash

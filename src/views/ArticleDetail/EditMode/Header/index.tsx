@@ -18,7 +18,10 @@ import ConfirmRevisedPublishDialogContent from './ConfirmRevisedPublishDialogCon
 import { EDIT_ARTICLE, EDIT_MODE_ARTICLE_ASSETS } from './gql'
 import styles from './styles.css'
 
-import { ArticleAccessType } from '@/__generated__/globalTypes'
+import {
+  ArticleAccessType,
+  ArticleLicenseType,
+} from '@/__generated__/globalTypes'
 import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
 import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
 import { Asset } from '~/components/GQL/fragments/__generated__/Asset'
@@ -77,9 +80,14 @@ const EditModeHeader = ({
   const [accessType, editAccessType] = useState<ArticleAccessType>(
     article.access.type
   )
+  const [license, editLicense] = useState<ArticleLicenseType>(article.license)
   const ownCircles = article?.author.ownCircles
   const hasOwnCircle = ownCircles && ownCircles.length >= 1
-  const editAccess = (addToCircle: boolean, paywalled: boolean) => {
+  const editAccess = (
+    addToCircle: boolean,
+    paywalled: boolean,
+    newLicense: ArticleLicenseType
+  ) => {
     if (!ownCircles) {
       return
     }
@@ -88,6 +96,7 @@ const EditModeHeader = ({
     editAccessType(
       paywalled ? ArticleAccessType.paywall : ArticleAccessType.public
     )
+    editLicense(newLicense)
   }
 
   // UI
@@ -215,12 +224,13 @@ const EditModeHeader = ({
         // circle
         circle={circle}
         accessType={accessType}
+        license={license}
         accessSaving={false}
         editAccess={
-          hasOwnCircle ? async (...props) => editAccess(...props) : undefined
+          hasOwnCircle && !isReviseDisabled
+            ? async (...props) => editAccess(...props)
+            : undefined
         }
-        canToggleCircle={!isReviseDisabled}
-        canTogglePaywall={!isReviseDisabled}
       >
         {({ open: openEditorSettingsDialog }) => (
           <Button

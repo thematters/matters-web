@@ -36,6 +36,7 @@ export const EDIT_MODE_ARTICLE = gql`
           ...DigestRichCirclePublic
         }
       }
+      license
       revisionCount
       drafts {
         id

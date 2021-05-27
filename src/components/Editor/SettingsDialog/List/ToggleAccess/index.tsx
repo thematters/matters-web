@@ -1,33 +1,35 @@
 import { CircleDigest, Switch, Translate } from '~/components'
 
+import LicenseOption from './LicenseOption'
 import styles from './styles.css'
 
-import { ArticleAccessType } from '@/__generated__/globalTypes'
+import {
+  ArticleAccessType,
+  ArticleLicenseType,
+} from '@/__generated__/globalTypes'
 import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
 
 export type ToggleAccessProps = {
   circle?: DigestRichCirclePublic | null
   accessType?: ArticleAccessType | null
+  license: ArticleLicenseType
 
-  editAccess?: (addToCircle: boolean, paywalled: boolean) => any
+  editAccess?: (
+    addToCircle: boolean,
+    paywalled: boolean,
+    license: ArticleLicenseType
+  ) => any
   accessSaving: boolean
-
-  canToggleCircle: boolean
-  canTogglePaywall: boolean
 }
 
 const ToggleAccess: React.FC<ToggleAccessProps> = ({
   circle,
   accessType,
+  license,
 
   editAccess,
   accessSaving,
-
-  canToggleCircle,
-  canTogglePaywall,
 }) => {
-  const paywalled = accessType !== 'public'
-
   return (
     <section className="container">
       <section className="switch">
@@ -42,8 +44,8 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
 
           <Switch
             checked={!!circle}
-            onChange={() => editAccess && editAccess(!circle, false)}
-            disabled={!canToggleCircle}
+            onChange={() => editAccess && editAccess(!circle, false, license)}
+            disabled={!!editAccess}
             loading={accessSaving}
           />
         </header>
@@ -62,30 +64,21 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
               disabled
             />
           </section>
-
-          <section className="switch">
-            <header>
-              <h3>
-                <Translate zh_hant="上鎖" zh_hans="上锁" en="Paywalled" />
-              </h3>
-
-              <Switch
-                checked={paywalled}
-                onChange={() => editAccess && editAccess(true, !paywalled)}
-                disabled={!canTogglePaywall}
-              />
-            </header>
-
-            <p className="description">
-              <Translate
-                zh_hant="未訂閱者無法閱讀摘要外的正文"
-                zh_hans="未订阅者无法阅读摘要外的正文"
-                en="Member-only content"
-              />
-            </p>
-          </section>
         </section>
       )}
+
+      <LicenseOption
+        isInCircle={!!circle}
+        license={license}
+        onSelect={(newLicense) =>
+          editAccess &&
+          editAccess(
+            !!circle,
+            newLicense === ArticleLicenseType.arr,
+            newLicense
+          )
+        }
+      />
 
       <style jsx>{styles}</style>
     </section>
