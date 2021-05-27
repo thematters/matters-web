@@ -25,7 +25,7 @@ import { EditMetaDraft } from '../__generated__/EditMetaDraft'
 interface SettingsButtonProps {
   draft: EditMetaDraft
   ownCircles?: DigestRichCirclePublic[]
-  disabled?: boolean
+  publishable?: boolean
 }
 
 const NextStepButton = ({
@@ -52,7 +52,7 @@ const NextStepButton = ({
 const SettingsButton = ({
   draft,
   ownCircles,
-  disabled,
+  publishable,
 }: SettingsButtonProps) => {
   const viewer = useContext(ViewerContext)
 
@@ -72,12 +72,13 @@ const SettingsButton = ({
   const tags = (draft.tags || []).map(toDigestTagPlaceholder)
   const isPending = draft.publishState === 'pending'
   const isPublished = draft.publishState === 'published'
+  const disabled = !publishable || isPending || isPublished
 
   if (!viewer.shouldSetupLikerID) {
     return (
       <EditorSettingsDialog
-        saving={collectionSaving || coverSaving || tagsSaving || accessSaving}
-        disabled={isPending || isPublished}
+        saving={false}
+        disabled={collectionSaving || coverSaving || tagsSaving || accessSaving}
         confirmButtonText={
           <Translate zh_hant="立即發布" zh_hans="立即发布" en="Publish" />
         }

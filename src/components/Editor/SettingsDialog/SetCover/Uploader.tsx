@@ -133,41 +133,39 @@ const Uploader: React.FC<UploaderProps> = ({
 
   return (
     <label className={labelClasses} htmlFor={fieldId}>
-      <div>
-        <h3>
-          <TextIcon
-            icon={<IconCamera16 />}
-            color="green"
-            size="sm"
-            weight="md"
-            spacing="xtight"
-          >
-            <Translate id="uploadCover" />
-          </TextIcon>
-        </h3>
+      <h3>
+        <TextIcon
+          icon={<IconCamera16 />}
+          color="green"
+          size="sm"
+          weight="md"
+          spacing="xtight"
+        >
+          <Translate id="uploadCover" />
+        </TextIcon>
 
-        <p>
-          <Translate
-            zh_hant="上傳一張圖片用作封面，建議尺寸：1600 x 900 像素"
-            zh_hans="上传一张图片用作封面，建议尺寸：1600 x 900 像素"
-            en="Upload an image as cover, suggest size: 1600 x 900 pixels"
-          />
-        </p>
+        {loading && <IconSpinner16 color="grey-light" />}
+      </h3>
 
-        <VisuallyHidden>
-          <input
-            id={fieldId}
-            type="file"
-            name="file"
-            aria-label={TEXT.zh_hant.uploadCover}
-            accept={acceptTypes}
-            multiple={false}
-            onChange={handleChange}
-          />
-        </VisuallyHidden>
-      </div>
+      <p>
+        <Translate
+          zh_hant="上傳一張圖片用作封面，建議尺寸：1600 x 900 像素"
+          zh_hans="上传一张图片用作封面，建议尺寸：1600 x 900 像素"
+          en="Upload an image as cover, suggest size: 1600 x 900 pixels"
+        />
+      </p>
 
-      {loading && <IconSpinner16 color="grey-light" size="md" />}
+      <VisuallyHidden>
+        <input
+          id={fieldId}
+          type="file"
+          name="file"
+          aria-label={TEXT.zh_hant.uploadCover}
+          accept={acceptTypes}
+          multiple={false}
+          onChange={handleChange}
+        />
+      </VisuallyHidden>
 
       <style jsx>{styles}</style>
     </label>

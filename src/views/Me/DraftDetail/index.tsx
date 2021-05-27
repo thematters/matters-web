@@ -150,7 +150,7 @@ const DraftDetail = () => {
               <SettingsButton
                 draft={draft}
                 ownCircles={ownCircles}
-                disabled={!publishable}
+                publishable={!!publishable}
               />
             )}
           </>

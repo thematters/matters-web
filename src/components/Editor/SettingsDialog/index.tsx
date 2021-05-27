@@ -5,7 +5,7 @@ import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
 
 import SettingsList, { SettingsListDialogButtons } from './List'
 import { ToggleAccessProps } from './List/ToggleAccess'
-import SetCover, { SetCoverProps } from './SetCover'
+import { SetCoverProps } from './SetCover'
 
 import { SearchExclude } from '@/__generated__/globalTypes'
 import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
@@ -38,7 +38,7 @@ export type EditorSettingsDialogProps = {
   tagsSaving: boolean
 
   saving: boolean
-  disabled?: boolean
+  disabled: boolean
   ConfirmStepContent: React.FC<ConfirmStepContentProps>
 
   children: ({ open }: { open: () => void }) => React.ReactNode
@@ -50,6 +50,10 @@ const DynamicSearchSelectForm = dynamic(
   () => import('~/components/Forms/SearchSelectForm'),
   { loading: Spinner }
 )
+
+const DynamicSetCover = dynamic(() => import('./SetCover'), {
+  loading: Spinner,
+})
 
 const BaseEditorSettingsDialog = ({
   cover,
@@ -109,6 +113,7 @@ const BaseEditorSettingsDialog = ({
         {isList && (
           <SettingsList
             saving={saving}
+            disabled={disabled}
             forward={forward}
             closeDialog={close}
             confirmButtonText={confirmButtonText}
@@ -124,7 +129,7 @@ const BaseEditorSettingsDialog = ({
         )}
 
         {isCover && (
-          <SetCover
+          <DynamicSetCover
             onBack={() => forward('list')}
             cover={cover}
             onEdit={editCover}

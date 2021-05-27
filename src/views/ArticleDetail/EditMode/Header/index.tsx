@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import { Button, TextIcon, Translate, useMutation } from '~/components'
 import {
@@ -30,26 +30,44 @@ import { EditModeArticleAssets } from './__generated__/EditModeArticleAssets'
 type EditModeHeaderProps = {
   article: EditModeArticle_article
   editData: Record<string, any>
-  countLeft: number
+
+  revisionCountLeft: number
+  isOverRevisionLimit: boolean
   isSameHash: boolean
+  isEditDisabled: boolean
   isReviseDisabled: boolean
+
   onSaved: () => any
-  disabled: boolean
 }
 
 const EditModeHeader = ({
   article,
   editData,
-  countLeft,
+
+  revisionCountLeft,
+  isOverRevisionLimit,
   isSameHash,
+  isEditDisabled,
   isReviseDisabled,
+
   onSaved,
-  disabled,
 }: EditModeHeaderProps) => {
+  // cover
+  const assets = article?.assets || []
+  const currCover = assets.find((asset) => asset.path === article?.cover)
+  const [cover, editCover] = useState<Asset | undefined>(currCover)
+  const refetchAssets = useImperativeQuery<EditModeArticleAssets>(
+    EDIT_MODE_ARTICLE_ASSETS,
+    {
+      variables: { mediaHash: article.mediaHash },
+      fetchPolicy: 'network-only',
+    }
+  )
+
   // tags
   const [tags, editTags] = useState<DigestTag[]>(article.tags || [])
   const [collection, editCollection] = useState<ArticleDigestDropdownArticle[]>(
-    []
+    article.collection.edges?.map(({ node }) => node) || []
   )
 
   // access
@@ -72,40 +90,14 @@ const EditModeHeader = ({
     )
   }
 
-  // cover
-  const [cover, editCover] = useState<Asset>()
-  const assets = article?.assets || []
-  const refetchAssets = useImperativeQuery<EditModeArticleAssets>(
-    EDIT_MODE_ARTICLE_ASSETS,
-    {
-      variables: { mediaHash: article.mediaHash },
-      fetchPolicy: 'network-only',
-    }
-  )
-
-  // update cover & collection from retrieved data
-  useEffect(() => {
-    if (!article) {
-      return
-    }
-
-    // cover, find from `article.assets` since `article.cover` isn't a `Asset`
-    const currCover = assets.find((asset) => asset.path === article?.cover)
-    if (currCover) {
-      editCover(currCover)
-    }
-
-    // collection
-    editCollection(article.collection.edges?.map(({ node }) => node) || [])
-  }, [article?.id])
-
+  // UI
   const { content, currText, initText } = editData
   const diff = measureDiffs(initText || '', currText || '') || 0
   const diffCount = `${diff}`.padStart(2, '0')
-  const isReachDiffLimit = diff > MAX_ARTICLE_REVISION_DIFF
+  const isOverDiffLimit = diff > MAX_ARTICLE_REVISION_DIFF
   const isRevised = diff > 0
-  const isOverLimit = countLeft <= 0
 
+  // save or republish
   const [editArticle, { loading }] = useMutation<EditArticle>(EDIT_ARTICLE)
   const onSave = async () => {
     try {
@@ -154,16 +146,16 @@ const EditModeHeader = ({
     <ConfirmRevisedPublishDialogContent onSave={onSave} {...props} />
   )
 
-  const OverLimitText = () => (
+  const UnderLimitText = () => (
     <>
       <Translate
         zh_hant="正文及作品管理剩 "
         zh_hans="正文及作品管理剩 "
         en="content and article management has "
       />
-      {countLeft}
+      {revisionCountLeft}
       <Translate zh_hant=" 版修訂" zh_hans=" 次修订" en=" republish left" />
-      <span className={isReachDiffLimit ? 'red' : 'green'}>
+      <span className={isOverDiffLimit ? 'red' : 'green'}>
         &nbsp;{diffCount}/50&nbsp;&nbsp;&nbsp;
       </span>
     </>
@@ -174,8 +166,8 @@ const EditModeHeader = ({
       <p>
         {isSameHash && (
           <>
-            {isOverLimit ? (
-              <OverLimitText />
+            {!isOverRevisionLimit ? (
+              <UnderLimitText />
             ) : (
               <Translate
                 zh_hant="正文及作品管理修訂次數已達上限"
@@ -188,8 +180,8 @@ const EditModeHeader = ({
       </p>
 
       <EditorSettingsDialog
-        disabled={disabled}
         saving={loading}
+        disabled={loading}
         confirmButtonText={
           isRevised ? (
             <Translate zh_hant="立即發布" zh_hans="立即发布" en="Publish" />
@@ -237,7 +229,7 @@ const EditModeHeader = ({
             bgColor="green"
             onClick={openEditorSettingsDialog}
             aria-haspopup="true"
-            disabled={disabled || !isSameHash || isReachDiffLimit}
+            disabled={isEditDisabled || isOverDiffLimit}
           >
             <TextIcon color="white" size="md" weight="md">
               <Translate id="nextStep" />

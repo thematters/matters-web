@@ -18,6 +18,7 @@ export type SettingsListDialogButtons = {
 
 export type SettingsListDialogProps = {
   saving: boolean
+  disabled: boolean
 
   forward: (nextStep: Step) => void
   closeDialog: () => void
@@ -47,6 +48,7 @@ const ListItem = ({
 
 const SettingsList = ({
   saving,
+  disabled,
 
   forward,
   closeDialog,
@@ -100,6 +102,7 @@ const SettingsList = ({
                   bgColor="green"
                   onClick={onConfirm ? onConfirm : () => forward('confirm')}
                   loading={saving}
+                  disabled={disabled}
                 >
                   {confirmButtonText}
                 </Dialog.Footer.Button>
@@ -110,7 +113,7 @@ const SettingsList = ({
                   bgColor="grey-lighter"
                   textColor="black"
                   onClick={closeDialog}
-                  disabled={saving}
+                  disabled={disabled}
                 >
                   {cancelButtonText}
                 </Dialog.Footer.Button>

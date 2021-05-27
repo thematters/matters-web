@@ -65,13 +65,13 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
   const editModeArticle = data?.article
   const drafts = data?.article?.drafts
   const draft = drafts && drafts[0]
-  const countLeft =
+  const revisionCountLeft =
     MAX_ARTICLE_REVISION_COUNT - (data?.article?.revisionCount || 0)
+  const isOverRevisionLimit = revisionCountLeft <= 0
   const isSameHash = draft?.mediaHash === article.mediaHash
   const isPending = draft?.publishState === 'pending'
   const isEditDisabled = !isSameHash || isPending
-  const isOverLimit = countLeft <= 0
-  const isReviseDisabled = isEditDisabled || isOverLimit
+  const isReviseDisabled = isEditDisabled || isOverRevisionLimit
 
   if (!draft || !editModeArticle) {
     return (
@@ -89,7 +89,9 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
             <Layout.Header
               left={
                 <Layout.Header.BackButton
-                  onClick={isOverLimit ? onCancel : openConfirmExitDialog}
+                  onClick={
+                    isOverRevisionLimit ? onCancel : openConfirmExitDialog
+                  }
                   disabled={isEditDisabled}
                 />
               }
@@ -97,11 +99,12 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
                 <EditModeHeader
                   article={editModeArticle}
                   editData={editData}
-                  countLeft={countLeft}
+                  revisionCountLeft={revisionCountLeft}
+                  isOverRevisionLimit={isOverRevisionLimit}
                   isSameHash={isSameHash}
+                  isEditDisabled={isEditDisabled}
                   isReviseDisabled={isReviseDisabled}
                   onSaved={onSaved}
-                  disabled={isEditDisabled}
                 />
               }
             />
@@ -127,7 +130,9 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
         )}
       </ConfirmExitDialog>
 
-      {!isReviseDisabled && <ReviseArticleDialog countLeft={countLeft} />}
+      {!isReviseDisabled && (
+        <ReviseArticleDialog revisionCountLeft={revisionCountLeft} />
+      )}
     </>
   )
 }
