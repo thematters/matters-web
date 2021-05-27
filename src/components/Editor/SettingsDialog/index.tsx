@@ -80,6 +80,8 @@ const BaseEditorSettingsDialog = ({
   confirmButtonText,
   cancelButtonText,
   ConfirmStepContent,
+  onConfirm,
+
   children,
 }: EditorSettingsDialogProps) => {
   const { show, open: baseOpen, close } = useDialogSwitch(true)
@@ -111,6 +113,7 @@ const BaseEditorSettingsDialog = ({
             closeDialog={close}
             confirmButtonText={confirmButtonText}
             cancelButtonText={cancelButtonText}
+            onConfirm={onConfirm}
             circle={circle}
             editAccess={editAccess}
             accessSaving={accessSaving}

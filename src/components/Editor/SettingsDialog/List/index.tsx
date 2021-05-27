@@ -13,6 +13,7 @@ import ToggleAccess, { ToggleAccessProps } from './ToggleAccess'
 export type SettingsListDialogButtons = {
   confirmButtonText?: string | React.ReactNode
   cancelButtonText?: string | React.ReactNode
+  onConfirm?: () => any
 }
 
 export type SettingsListDialogProps = {
@@ -52,6 +53,7 @@ const SettingsList = ({
 
   confirmButtonText,
   cancelButtonText,
+  onConfirm,
 
   ...restProps
 }: SettingsListDialogProps) => {
@@ -96,7 +98,7 @@ const SettingsList = ({
               {confirmButtonText && (
                 <Dialog.Footer.Button
                   bgColor="green"
-                  onClick={() => forward('confirm')}
+                  onClick={onConfirm ? onConfirm : () => forward('confirm')}
                   loading={saving}
                 >
                   {confirmButtonText}

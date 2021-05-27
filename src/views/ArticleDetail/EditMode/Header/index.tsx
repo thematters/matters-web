@@ -1,12 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import {
-  Button,
-  IconSpinner16,
-  TextIcon,
-  Translate,
-  useMutation,
-} from '~/components'
+import { Button, TextIcon, Translate, useMutation } from '~/components'
 import {
   ConfirmStepContentProps,
   EditorSettingsDialog,
@@ -195,7 +189,7 @@ const EditModeHeader = ({
 
       <EditorSettingsDialog
         disabled={disabled}
-        saving={false}
+        saving={loading}
         confirmButtonText={
           isRevised ? (
             <Translate zh_hant="立即發布" zh_hans="立即发布" en="Publish" />
@@ -208,6 +202,7 @@ const EditModeHeader = ({
           )
         }
         cancelButtonText={<Translate id="cancel" />}
+        onConfirm={isRevised ? undefined : onSave}
         ConfirmStepContent={ConfirmStepContent}
         // cover
         cover={cover?.path}
@@ -244,12 +239,7 @@ const EditModeHeader = ({
             aria-haspopup="true"
             disabled={disabled || !isSameHash || isReachDiffLimit}
           >
-            <TextIcon
-              color="white"
-              size="md"
-              weight="md"
-              icon={loading && <IconSpinner16 size="sm" />}
-            >
+            <TextIcon color="white" size="md" weight="md">
               <Translate id="nextStep" />
             </TextIcon>
           </Button>
