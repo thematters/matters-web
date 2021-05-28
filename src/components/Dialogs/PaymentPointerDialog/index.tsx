@@ -5,7 +5,7 @@ import { Dialog, Translate, useDialogSwitch } from '~/components'
 import SetPaymentPointerForm from './SetPaymentPointerForm'
 
 interface PaymentPointerProps {
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
 const BasePaymentPointerDialog: React.FC<PaymentPointerProps> = ({
@@ -14,16 +14,16 @@ const BasePaymentPointerDialog: React.FC<PaymentPointerProps> = ({
   const formId = `set-payment-pointer-form`
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isValid, setIsValid] = useState(false)
-  const { show, open, close } = useDialogSwitch(true)
+  const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
   return (
     <>
-      {children({ open })}
+      {children({ openDialog })}
 
-      <Dialog size="sm" isOpen={show} onDismiss={close} fixedHeight>
+      <Dialog size="sm" isOpen={show} onDismiss={closeDialog} fixedHeight>
         <Dialog.Header
           title="paymentPointer"
-          close={close}
+          closeDialog={closeDialog}
           closeTextId="close"
           rightButton={
             <Dialog.Header.RightButton
@@ -40,7 +40,7 @@ const BasePaymentPointerDialog: React.FC<PaymentPointerProps> = ({
           setIsSubmitting={setIsSubmitting}
           setIsValid={setIsValid}
           formId={formId}
-          close={close}
+          closeDialog={closeDialog}
         />
       </Dialog>
     </>
@@ -49,6 +49,6 @@ const BasePaymentPointerDialog: React.FC<PaymentPointerProps> = ({
 
 export const PaymentPointerDialog = (props: PaymentPointerProps) => (
   <Dialog.Lazy mounted={<BasePaymentPointerDialog {...props} />}>
-    {({ open }) => <>{props.children({ open })}</>}
+    {({ openDialog }) => <>{props.children({ openDialog })}</>}
   </Dialog.Lazy>
 )

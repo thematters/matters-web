@@ -165,7 +165,7 @@ const CircleProfile = () => {
         <footer>
           <section className="counts">
             <MembersDialog circle={circle}>
-              {({ open: openMembersDialog }) => (
+              {({ openDialog: openMembersDialog }) => (
                 <button type="button" onClick={openMembersDialog}>
                   <span className="count">
                     {numAbbr(circle.members.totalCount)}
@@ -176,7 +176,7 @@ const CircleProfile = () => {
             </MembersDialog>
 
             <FollowersDialog circle={circle}>
-              {({ open: openFollowersDialog }) => (
+              {({ openDialog: openFollowersDialog }) => (
                 <button type="button" onClick={openFollowersDialog}>
                   <span className="count">
                     {numAbbr(circle.followers.totalCount)}

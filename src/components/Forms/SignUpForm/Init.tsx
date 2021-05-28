@@ -249,7 +249,7 @@ const Init: React.FC<FormProps> = ({
       {closeDialog && (
         <Dialog.Header
           title="register"
-          close={closeDialog}
+          closeDialog={closeDialog}
           rightButton={SubmitButton}
         />
       )}

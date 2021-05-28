@@ -2,9 +2,9 @@ import { useState } from 'react'
 
 interface DialogLazyProps {
   children: ({
-    open,
+    openDialog,
   }: {
-    open: () => void
+    openDialog: () => void
   }) => React.ReactChild | React.ReactChild[] | React.ReactNode
   mounted: React.ReactChild | React.ReactChild[] | React.ReactNode
 }
@@ -20,7 +20,7 @@ const DialogLazy = ({
     return <>{mountedChildren}</>
   }
 
-  return <>{children({ open: mount })}</>
+  return <>{children({ openDialog: mount })}</>
 }
 
 export default DialogLazy

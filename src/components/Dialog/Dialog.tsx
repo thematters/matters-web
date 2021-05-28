@@ -81,7 +81,7 @@ const Container: React.FC<
       >
         {children}
 
-        {!isSmallUp && <Handle close={onDismiss} {...bind()} />}
+        {!isSmallUp && <Handle closeDialog={onDismiss} {...bind()} />}
 
         <style jsx>{styles}</style>
       </div>

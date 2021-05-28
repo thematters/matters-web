@@ -201,13 +201,13 @@ const Steps = () => {
 
           <Step src={IMAGE_STEP_3} step={3}>
             <MigrationDialog>
-              {({ open }) => (
+              {({ openDialog }) => (
                 <Button
                   aria-haspopup="true"
                   bgColor="green"
                   size={['7rem', '2.5rem']}
                   spacing={[0, 0]}
-                  onClick={open}
+                  onClick={openDialog}
                 >
                   <TextIcon color="white" size="md" weight="md">
                     <Translate

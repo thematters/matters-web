@@ -34,6 +34,8 @@ export type SearchSelectFormProps = {
   title: TextId | React.ReactNode
   hint: TextId
   headerLeftButton?: React.ReactNode
+  headerRightButtonText?: string | React.ReactNode
+  closeDialog: () => void
 
   nodes?: SelectNode[]
   onSave: (nodes: SelectNode[]) => Promise<any>
@@ -53,6 +55,8 @@ const SearchSelectForm = ({
   title,
   hint,
   headerLeftButton,
+  headerRightButtonText,
+  closeDialog,
 
   nodes,
   onSave,
@@ -99,20 +103,20 @@ const SearchSelectForm = ({
     await onSave(
       stagingNodes.filter(({ selected }) => !!selected).map(({ node }) => node)
     )
-    close()
   }
 
   return (
     <>
       <Dialog.Header
         title={title}
-        close={close}
+        closeDialog={closeDialog}
         closeTextId="close"
         leftButton={headerLeftButton}
         rightButton={
           <Dialog.Header.RightButton
             onClick={onClickSave}
-            text={<Translate id="save" />}
+            disabled={stagingNodes.length <= 0}
+            text={headerRightButtonText || <Translate id="save" />}
             loading={saving}
           />
         }

@@ -29,17 +29,17 @@ interface SettingsButtonProps {
 }
 
 const NextStepButton = ({
-  open,
+  openDialog,
   disabled,
 }: {
-  open: () => void
+  openDialog: () => void
   disabled?: boolean
 }) => (
   <Button
     size={[null, '2rem']}
     spacing={[0, 'base']}
     bgColor="green"
-    onClick={open}
+    onClick={openDialog}
     disabled={disabled}
     aria-haspopup="true"
   >
@@ -110,8 +110,11 @@ const SettingsButton = ({
         accessSaving={accessSaving}
         canToggleCircle={!!hasOwnCircle}
       >
-        {({ open: openEditorSettingsDialog }) => (
-          <NextStepButton open={openEditorSettingsDialog} disabled={disabled} />
+        {({ openDialog: openEditorSettingsDialog }) => (
+          <NextStepButton
+            openDialog={openEditorSettingsDialog}
+            disabled={disabled}
+          />
         )}
       </EditorSettingsDialog>
     )
@@ -119,7 +122,7 @@ const SettingsButton = ({
 
   return (
     <NextStepButton
-      open={() =>
+      openDialog={() =>
         window.dispatchEvent(new CustomEvent(OPEN_LIKE_COIN_DIALOG, {}))
       }
       disabled={disabled}

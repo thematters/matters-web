@@ -153,7 +153,7 @@ const AppreciatorsDialogContent = ({
             zh_hans={`${totalCount} 人赞赏了作品`}
           />
         }
-        close={closeDialog}
+        closeDialog={closeDialog}
         closeTextId="close"
       />
 

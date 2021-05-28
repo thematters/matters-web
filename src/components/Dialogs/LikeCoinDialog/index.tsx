@@ -5,34 +5,34 @@ import { OPEN_LIKE_COIN_DIALOG } from '~/common/enums'
 import { SetupLikeCoin } from './SetupLikeCoin'
 
 interface LikeCoinDialogProps {
-  children?: ({ open }: { open: () => void }) => React.ReactNode
+  children?: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
 const BaseLikeCoinDialog: React.FC<LikeCoinDialogProps> = ({ children }) => {
-  const { show, open, close } = useDialogSwitch(true)
+  const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
-  useEventListener(OPEN_LIKE_COIN_DIALOG, open)
+  useEventListener(OPEN_LIKE_COIN_DIALOG, openDialog)
 
   return (
     <>
-      {children && children({ open })}
+      {children && children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={close} size="sm">
-        <SetupLikeCoin closeDialog={close} />
+      <Dialog isOpen={show} onDismiss={closeDialog} size="sm">
+        <SetupLikeCoin closeDialog={closeDialog} />
       </Dialog>
     </>
   )
 }
 
 export const LikeCoinDialog = (props: LikeCoinDialogProps) => {
-  const Children = ({ open }: { open: () => void }) => {
-    useEventListener(OPEN_LIKE_COIN_DIALOG, open)
-    return <>{props.children && props.children({ open })}</>
+  const Children = ({ openDialog }: { openDialog: () => void }) => {
+    useEventListener(OPEN_LIKE_COIN_DIALOG, openDialog)
+    return <>{props.children && props.children({ openDialog })}</>
   }
 
   return (
     <Dialog.Lazy mounted={<BaseLikeCoinDialog {...props} />}>
-      {({ open }) => <Children open={open} />}
+      {({ openDialog }) => <Children openDialog={openDialog} />}
     </Dialog.Lazy>
   )
 }

@@ -29,7 +29,7 @@ type Step =
 
 interface SubscribeCircleDialogProps {
   circle: DigestRichCirclePublic & DigestRichCirclePrivate
-  children?: ({ open }: { open: () => void }) => React.ReactNode
+  children?: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
 const DynamicPaymentResetPasswordForm = dynamic(
@@ -69,16 +69,18 @@ const BaseSubscribeCircleDialog = ({
   children,
 }: SubscribeCircleDialogProps) => {
   const viewer = useContext(ViewerContext)
-  const { show, open: baseOpen, close } = useDialogSwitch(true)
+  const { show, openDialog: baseOpenDialog, closeDialog } = useDialogSwitch(
+    true
+  )
 
   const initialStep = viewer.status?.hasPaymentPassword
     ? 'subscribeCircle'
     : 'setPaymentPassword'
   const { currStep, forward, prevStep, back } = useStep<Step>(initialStep)
 
-  const open = () => {
+  const openDialog = () => {
     forward(initialStep)
-    baseOpen()
+    baseOpenDialog()
   }
 
   const ContinueSubscribeButton = (
@@ -96,19 +98,22 @@ const BaseSubscribeCircleDialog = ({
     analytics.trackEvent('view_subscribe_circle_dialog', { step: currStep })
   }, [currStep])
 
-  useEventListener(OPEN_SUBSCRIBE_CIRCLE_DIALOG, open)
+  useEventListener(OPEN_SUBSCRIBE_CIRCLE_DIALOG, openDialog)
 
   return (
     <>
-      {children && children({ open })}
+      {children && children({ openDialog })}
 
-      <Dialog size="sm" isOpen={show} onDismiss={close}>
+      <Dialog size="sm" isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           leftButton={
             prevStep ? <Dialog.Header.BackButton onClick={back} /> : <span />
           }
           rightButton={
-            <Dialog.Header.CloseButton close={close} textId="close" />
+            <Dialog.Header.CloseButton
+              closeDialog={closeDialog}
+              textId="close"
+            />
           }
           title={
             isSetPaymentPassword
@@ -119,7 +124,7 @@ const BaseSubscribeCircleDialog = ({
               ? 'resetPaymentPassword'
               : 'subscribeCircle'
           }
-          close={close}
+          closeDialog={closeDialog}
           closeTextId="close"
           mode={isComplete ? 'inner' : undefined}
         />
@@ -141,7 +146,7 @@ const BaseSubscribeCircleDialog = ({
         {isResetPassword && (
           <DynamicPaymentResetPasswordForm
             callbackButtons={ContinueSubscribeButton}
-            close={close}
+            closeDialog={closeDialog}
           />
         )}
 
@@ -152,14 +157,14 @@ const BaseSubscribeCircleDialog = ({
 }
 
 export const SubscribeCircleDialog = (props: SubscribeCircleDialogProps) => {
-  const Children = ({ open }: { open: () => void }) => {
-    useEventListener(OPEN_SUBSCRIBE_CIRCLE_DIALOG, open)
-    return <>{props.children && props.children({ open })}</>
+  const Children = ({ openDialog }: { openDialog: () => void }) => {
+    useEventListener(OPEN_SUBSCRIBE_CIRCLE_DIALOG, openDialog)
+    return <>{props.children && props.children({ openDialog })}</>
   }
 
   return (
     <Dialog.Lazy mounted={<BaseSubscribeCircleDialog {...props} />}>
-      {({ open }) => <Children open={open} />}
+      {({ openDialog }) => <Children openDialog={openDialog} />}
     </Dialog.Lazy>
   )
 }

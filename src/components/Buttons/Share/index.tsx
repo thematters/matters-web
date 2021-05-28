@@ -44,7 +44,7 @@ export const ShareButton: React.FC<ShareButtonProps> = ({
 
   return (
     <ShareDialog {...props}>
-      {({ open }) => (
+      {({ openDialog }) => (
         <Button
           bgColor={bgColor}
           size={size}
@@ -52,7 +52,7 @@ export const ShareButton: React.FC<ShareButtonProps> = ({
           bgActiveColor={buttonBgActiveColor}
           aria-label={TEXT.zh_hant.share}
           aria-haspopup="true"
-          onClick={open}
+          onClick={openDialog}
         >
           {hasIcon && <IconShare16 size={iconSize} color={iconColor} />}
           {children}

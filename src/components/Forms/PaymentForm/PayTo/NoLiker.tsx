@@ -37,10 +37,10 @@ export const NoLikerIdMessage = ({ canPayLike, canReceiveLike }: NoLikerId) => {
 export const NoLikerIdButton = ({
   canPayLike,
   canReceiveLike,
-  close,
+  closeDialog,
   setFieldValue,
 }: NoLikerId & {
-  close: () => void
+  closeDialog: () => void
   setFieldValue: (field: string, value: any) => void
 }) => {
   if (!canPayLike) {
@@ -48,7 +48,7 @@ export const NoLikerIdButton = ({
       <Dialog.Footer.Button
         onClick={() => {
           window.dispatchEvent(new CustomEvent(OPEN_LIKE_COIN_DIALOG, {}))
-          close()
+          closeDialog()
         }}
       >
         <Translate

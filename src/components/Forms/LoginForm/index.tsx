@@ -212,7 +212,7 @@ export const LoginForm: React.FC<FormProps> = ({
       {closeDialog && (
         <Dialog.Header
           title="login"
-          close={closeDialog}
+          closeDialog={closeDialog}
           rightButton={SubmitButton}
         />
       )}

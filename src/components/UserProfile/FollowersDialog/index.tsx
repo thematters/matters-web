@@ -6,19 +6,19 @@ import { UserProfileUserPublic_user } from '../__generated__/UserProfileUserPubl
 
 interface FollowersDialogProps {
   user: UserProfileUserPublic_user
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
 const DynamicContent = dynamic(() => import('./Content'), { loading: Spinner })
 
 const BaseFollowersDialog = ({ user, children }: FollowersDialogProps) => {
-  const { show, open, close } = useDialogSwitch(true)
+  const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
   return (
     <>
-      {children({ open })}
+      {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={close} fixedHeight>
+      <Dialog isOpen={show} onDismiss={closeDialog} fixedHeight>
         <Dialog.Header
           title={
             <Translate
@@ -27,7 +27,7 @@ const BaseFollowersDialog = ({ user, children }: FollowersDialogProps) => {
               en={`Followers of ${user.displayName}`}
             />
           }
-          close={close}
+          closeDialog={closeDialog}
           closeTextId="close"
         />
 
@@ -39,6 +39,6 @@ const BaseFollowersDialog = ({ user, children }: FollowersDialogProps) => {
 
 export const FollowersDialog = (props: FollowersDialogProps) => (
   <Dialog.Lazy mounted={<BaseFollowersDialog {...props} />}>
-    {({ open }) => <>{props.children({ open })}</>}
+    {({ openDialog }) => <>{props.children({ openDialog })}</>}
   </Dialog.Lazy>
 )

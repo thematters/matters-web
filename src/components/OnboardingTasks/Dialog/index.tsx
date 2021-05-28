@@ -7,21 +7,21 @@ import Tasks from '../Tasks'
 import styles from './styles.css'
 
 interface OnboardingTasksDialogProps {
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
 const BaseOnboardingTasksDialog: React.FC<OnboardingTasksDialogProps> = ({
   children,
 }) => {
-  const { show, open, close } = useDialogSwitch(true)
+  const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
-  useEventListener(CLOSE_ONBOARDING_TASKS_DIALOG, close)
+  useEventListener(CLOSE_ONBOARDING_TASKS_DIALOG, closeDialog)
 
   return (
     <>
-      {children({ open })}
+      {children({ openDialog })}
 
-      <Dialog size="sm" isOpen={show} onDismiss={close} fixedHeight>
+      <Dialog size="sm" isOpen={show} onDismiss={closeDialog} fixedHeight>
         <Dialog.Header
           title={
             <Translate
@@ -30,7 +30,7 @@ const BaseOnboardingTasksDialog: React.FC<OnboardingTasksDialogProps> = ({
               en="Welcome to the Matters galaxy"
             />
           }
-          close={close}
+          closeDialog={closeDialog}
           closeTextId="close"
         />
         <Dialog.Content hasGrow spacing={[0, 0]}>
@@ -59,7 +59,7 @@ const BaseOnboardingTasksDialog: React.FC<OnboardingTasksDialogProps> = ({
 
 const OnboardingTasksDialog = (props: OnboardingTasksDialogProps) => (
   <Dialog.Lazy mounted={<BaseOnboardingTasksDialog {...props} />}>
-    {({ open }) => <>{props.children({ open })}</>}
+    {({ openDialog }) => <>{props.children({ openDialog })}</>}
   </Dialog.Lazy>
 )
 

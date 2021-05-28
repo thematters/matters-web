@@ -41,10 +41,10 @@ import { KEYCODES, TEXT, TextId, Z_INDEX } from '~/common/enums'
  */
 
 type DropdownDialogNode = ({
-  open,
+  openDialog,
   ref,
 }: {
-  open: () => void
+  openDialog: () => void
   ref?: React.Ref<any>
 }) => React.ReactChild | React.ReactChild[]
 
@@ -61,12 +61,12 @@ type DropdownDialogProps = {
 } & DropdownDialogChildren
 
 type ForwardChildrenProps = {
-  open: () => void
+  openDialog: () => void
 } & DropdownDialogChildren
 
 const ForwardChildren = forwardRef(
-  ({ open, children }: ForwardChildrenProps, ref) => (
-    <>{children({ open, ref })}</>
+  ({ openDialog, children }: ForwardChildrenProps, ref) => (
+    <>{children({ openDialog, ref })}</>
   )
 )
 
@@ -76,12 +76,12 @@ const BaseDropdownDialog = ({
   children,
 }: DropdownDialogProps) => {
   const isSmallUp = useResponsive('sm-up')
-  const { show, open, close } = useDialogSwitch(true)
-  const toggle = () => (show ? close() : open())
+  const { show, openDialog, closeDialog } = useDialogSwitch(true)
+  const toggle = () => (show ? closeDialog() : openDialog())
   const closeOnClick = (event: React.MouseEvent | React.KeyboardEvent) => {
     const target = event.target as HTMLElement
     if (target?.closest && target.closest('[data-clickable], a, button')) {
-      close()
+      closeDialog()
     }
     event.stopPropagation()
   }
@@ -98,7 +98,7 @@ const BaseDropdownDialog = ({
         onClick={closeOnClick}
       >
         <VisuallyHidden>
-          <Button aria-label={TEXT.zh_hant.close} onClick={close} />
+          <Button aria-label={TEXT.zh_hant.close} onClick={closeDialog} />
         </VisuallyHidden>
 
         {contentChildren}
@@ -113,15 +113,15 @@ const BaseDropdownDialog = ({
     return (
       <Dropdown
         trigger={undefined}
-        onHidden={close}
-        onClickOutside={close}
+        onHidden={closeDialog}
+        onClickOutside={closeDialog}
         visible={show}
         zIndex={Z_INDEX.OVER_BOTTOM_BAR}
         appendTo={process.browser ? document.body : undefined}
         {...dropdown}
         content={<Content>{dropdown.content}</Content>}
       >
-        <ForwardChildren open={toggle} children={children} />
+        <ForwardChildren openDialog={toggle} children={children} />
       </Dropdown>
     )
   }
@@ -131,12 +131,12 @@ const BaseDropdownDialog = ({
    */
   return (
     <>
-      {children({ open: toggle })}
+      {children({ openDialog: toggle })}
 
-      <Dialog isOpen={show} onDismiss={close} {...dialog} slideIn>
+      <Dialog isOpen={show} onDismiss={closeDialog} {...dialog} slideIn>
         <Dialog.Header
           title={dialog.title}
-          close={close}
+          closeDialog={closeDialog}
           closeTextId="close"
           mode="hidden"
         />
@@ -147,7 +147,7 @@ const BaseDropdownDialog = ({
           <Dialog.Footer.Button
             bgColor="grey-lighter"
             textColor="black"
-            onClick={close}
+            onClick={closeDialog}
           >
             <Translate id="close" />
           </Dialog.Footer.Button>
@@ -159,6 +159,6 @@ const BaseDropdownDialog = ({
 
 export const DropdownDialog: React.FC<DropdownDialogProps> = (props) => (
   <Dialog.Lazy mounted={<BaseDropdownDialog {...props} />}>
-    {({ open }) => <>{props.children({ open })}</>}
+    {({ openDialog }) => <>{props.children({ openDialog })}</>}
   </Dialog.Lazy>
 )

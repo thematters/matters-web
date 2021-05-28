@@ -6,7 +6,7 @@ import Copy from './Copy'
 import styles from './styles.css'
 
 export interface ShareDialogContentProps {
-  close: () => void
+  closeDialog: () => void
 
   shareTitle: string
   shareLink: string
@@ -17,7 +17,7 @@ export interface ShareDialogContentProps {
 }
 
 const ShareDialogContent: React.FC<ShareDialogContentProps> = ({
-  close,
+  closeDialog,
 
   shareTitle,
   shareLink,
@@ -29,7 +29,7 @@ const ShareDialogContent: React.FC<ShareDialogContentProps> = ({
   <>
     <Dialog.Header
       title={headerTitle || 'share'}
-      close={close}
+      closeDialog={closeDialog}
       closeTextId="close"
       mode={headerTitle ? 'inner' : 'hidden'}
     />
@@ -69,7 +69,7 @@ const ShareDialogContent: React.FC<ShareDialogContentProps> = ({
         <Dialog.Footer.Button
           bgColor="grey-lighter"
           textColor="black"
-          onClick={close}
+          onClick={closeDialog}
         >
           <Translate id="close" />
         </Dialog.Footer.Button>

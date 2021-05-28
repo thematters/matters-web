@@ -16,7 +16,7 @@ import { UpdateTagSetting } from '~/components/GQL/mutations/__generated__/Updat
 interface Props {
   id: string
 
-  close: () => void
+  closeDialog: () => void
   toListStep: () => void
 }
 
@@ -31,12 +31,12 @@ type Area = 'staging' | 'searching'
  * ```tsx
  *   <TagSearchSelectEditor
  *     id={id}
- *     close={close}
+ *     closeDialog={closeDialog}
  *     toListStep={() => {}}
  *   />
  * ```
  */
-const TagSearchSelectEditor = ({ id, close, toListStep }: Props) => {
+const TagSearchSelectEditor = ({ id, closeDialog, toListStep }: Props) => {
   const [update, { loading }] = useMutation<UpdateTagSetting>(
     UPDATE_TAG_SETTING
   )
@@ -104,14 +104,14 @@ const TagSearchSelectEditor = ({ id, close, toListStep }: Props) => {
       })
     )
 
-    close()
+    closeDialog()
   }
 
   return (
     <>
       <Dialog.Header
         title="tagAddEditor"
-        close={close}
+        closeDialog={closeDialog}
         closeTextId="cancel"
         rightButton={
           <Dialog.Header.RightButton

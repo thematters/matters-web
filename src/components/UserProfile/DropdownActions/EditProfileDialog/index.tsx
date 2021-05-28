@@ -8,20 +8,20 @@ import { EditProfileDialogUserPublic } from './__generated__/EditProfileDialogUs
 
 interface EditProfileDialogProps {
   user: EditProfileDialogUserPublic
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
 const DynamicContent = dynamic(() => import('./Content'), { loading: Spinner })
 
 const BaseEditProfileDialog = ({ user, children }: EditProfileDialogProps) => {
-  const { show, open, close } = useDialogSwitch(true)
+  const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
   return (
     <>
-      {children({ open })}
+      {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={close} fixedHeight>
-        <DynamicContent user={user} closeDialog={close} />
+      <Dialog isOpen={show} onDismiss={closeDialog} fixedHeight>
+        <DynamicContent user={user} closeDialog={closeDialog} />
       </Dialog>
     </>
   )
@@ -29,7 +29,7 @@ const BaseEditProfileDialog = ({ user, children }: EditProfileDialogProps) => {
 
 export const EditProfileDialog = (props: EditProfileDialogProps) => (
   <Dialog.Lazy mounted={<BaseEditProfileDialog {...props} />}>
-    {({ open }) => <>{props.children({ open })}</>}
+    {({ openDialog }) => <>{props.children({ openDialog })}</>}
   </Dialog.Lazy>
 )
 

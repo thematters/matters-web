@@ -15,20 +15,22 @@ type Step = 'init' | 'verification_sent'
 const BaseSignUpDialog = () => {
   const { currStep, forward } = useStep<Step>('init')
 
-  const { show, open: baseOpen, close } = useDialogSwitch(true)
-  const open = () => {
+  const { show, openDialog: baseOpenDialog, closeDialog } = useDialogSwitch(
+    true
+  )
+  const openDialog = () => {
     forward('init')
-    baseOpen()
+    baseOpenDialog()
   }
 
-  useEventListener(CLOSE_ACTIVE_DIALOG, close)
-  useEventListener(OPEN_SIGNUP_DIALOG, open)
+  useEventListener(CLOSE_ACTIVE_DIALOG, closeDialog)
+  useEventListener(OPEN_SIGNUP_DIALOG, openDialog)
 
   return (
     <Dialog
       size="sm"
       isOpen={show}
-      onDismiss={close}
+      onDismiss={closeDialog}
       fixedHeight={currStep !== 'verification_sent'}
     >
       {currStep === 'init' && (
@@ -38,7 +40,7 @@ const BaseSignUpDialog = () => {
             submitCallback={() => {
               forward('verification_sent')
             }}
-            closeDialog={close}
+            closeDialog={closeDialog}
           />
         </ReCaptchaProvider>
       )}
@@ -46,7 +48,7 @@ const BaseSignUpDialog = () => {
         <VerificationLinkSent
           type="register"
           purpose="dialog"
-          closeDialog={close}
+          closeDialog={closeDialog}
         />
       )}
     </Dialog>
@@ -54,14 +56,14 @@ const BaseSignUpDialog = () => {
 }
 
 const SignUpDialog = () => {
-  const Children = ({ open }: { open: () => void }) => {
-    useEventListener(OPEN_SIGNUP_DIALOG, open)
+  const Children = ({ openDialog }: { openDialog: () => void }) => {
+    useEventListener(OPEN_SIGNUP_DIALOG, openDialog)
     return null
   }
 
   return (
     <Dialog.Lazy mounted={<BaseSignUpDialog />}>
-      {({ open }) => <Children open={open} />}
+      {({ openDialog }) => <Children openDialog={openDialog} />}
     </Dialog.Lazy>
   )
 }

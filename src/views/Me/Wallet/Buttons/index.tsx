@@ -16,10 +16,10 @@ const Buttons: React.FC<ButtonsProps> = ({ canPayout, hasStripeAccount }) => {
     <div className="container">
       <section className="buttons">
         <AddCreditDialog>
-          {({ open }) => (
+          {({ openDialog }) => (
             <Dialog.Footer.Button
               onClick={() => {
-                open()
+                openDialog()
                 analytics.trackEvent('click_button', { type: 'top_up' })
               }}
             >

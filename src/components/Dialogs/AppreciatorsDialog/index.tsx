@@ -7,7 +7,7 @@ import { AppreciatorsDialogArticle } from './__generated__/AppreciatorsDialogArt
 
 interface AppreciatorsDialogProps {
   article: AppreciatorsDialogArticle
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
 const fragments = {
@@ -28,14 +28,17 @@ const BaseAppreciatorsDialog = ({
   article,
   children,
 }: AppreciatorsDialogProps) => {
-  const { show, open, close } = useDialogSwitch(true)
+  const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
   return (
     <>
-      {children({ open })}
+      {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={close} fixedHeight>
-        <DynamicContent mediaHash={article.mediaHash} closeDialog={close} />
+      <Dialog isOpen={show} onDismiss={closeDialog} fixedHeight>
+        <DynamicContent
+          mediaHash={article.mediaHash}
+          closeDialog={closeDialog}
+        />
       </Dialog>
     </>
   )
@@ -43,7 +46,7 @@ const BaseAppreciatorsDialog = ({
 
 export const AppreciatorsDialog = (props: AppreciatorsDialogProps) => (
   <Dialog.Lazy mounted={<BaseAppreciatorsDialog {...props} />}>
-    {({ open }) => <>{props.children({ open })}</>}
+    {({ openDialog }) => <>{props.children({ openDialog })}</>}
   </Dialog.Lazy>
 )
 

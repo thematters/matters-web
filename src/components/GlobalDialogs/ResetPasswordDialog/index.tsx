@@ -16,23 +16,25 @@ const BaseResetPasswordDialog = () => {
   const { currStep, forward } = useStep<Step>('request')
 
   // dailog & global listeners
-  const { show, open: baseOpen, close } = useDialogSwitch(true)
-  const open = () => {
+  const { show, openDialog: baseOpenDialog, closeDialog } = useDialogSwitch(
+    true
+  )
+  const openDialog = () => {
     forward('request')
-    baseOpen()
+    baseOpenDialog()
   }
 
-  useEventListener(CLOSE_ACTIVE_DIALOG, close)
-  useEventListener(OPEN_RESET_PASSWORD_DIALOG, open)
+  useEventListener(CLOSE_ACTIVE_DIALOG, closeDialog)
+  useEventListener(OPEN_RESET_PASSWORD_DIALOG, openDialog)
 
   return (
-    <Dialog isOpen={show} onDismiss={close} size="sm">
+    <Dialog isOpen={show} onDismiss={closeDialog} size="sm">
       {currStep === 'request' && (
         <ChangePasswordForm.Request
           type="forget"
           purpose="dialog"
           submitCallback={() => forward('verification_sent')}
-          closeDialog={close}
+          closeDialog={closeDialog}
         />
       )}
 
@@ -40,7 +42,7 @@ const BaseResetPasswordDialog = () => {
         <VerificationLinkSent
           type="resetPassword"
           purpose="dialog"
-          closeDialog={close}
+          closeDialog={closeDialog}
         />
       )}
     </Dialog>
@@ -48,14 +50,14 @@ const BaseResetPasswordDialog = () => {
 }
 
 const ResetPasswordDialog = () => {
-  const Children = ({ open }: { open: () => void }) => {
-    useEventListener(OPEN_RESET_PASSWORD_DIALOG, open)
+  const Children = ({ openDialog }: { openDialog: () => void }) => {
+    useEventListener(OPEN_RESET_PASSWORD_DIALOG, openDialog)
     return null
   }
 
   return (
     <Dialog.Lazy mounted={<BaseResetPasswordDialog />}>
-      {({ open }) => <Children open={open} />}
+      {({ openDialog }) => <Children openDialog={openDialog} />}
     </Dialog.Lazy>
   )
 }

@@ -124,13 +124,13 @@ const BaseDropdownActions = ({
         title: 'moreActions',
       }}
     >
-      {({ open, ref }) => (
+      {({ openDialog, ref }) => (
         <section className="container">
           <Button
             bgColor="half-black"
             aria-label={TEXT.zh_hant.moreActions}
             aria-haspopup="true"
-            onClick={open}
+            onClick={openDialog}
             ref={ref}
           >
             <IconSettings32 size="lg" color="white" />
@@ -217,7 +217,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
 
   return (
     <TagDialog {...props.tag}>
-      {({ open: openTagDialog }) => (
+      {({ openDialog: openTagDialog }) => (
         <SearchSelectDialog
           title="tagAddSelectedArticle"
           hint="hintEditCollection"
@@ -225,11 +225,11 @@ const DropdownActions = (props: DropdownActionsProps) => {
           onSave={addArticlesToTag(true)}
           saving={loading}
         >
-          {({ open: openTagAddSelectedArticlesDialog }) => (
+          {({ openDialog: openTagAddSelectedArticlesDialog }) => (
             <TagLeaveDialog {...props}>
-              {({ open: openTagLeaveDialog }) => (
+              {({ openDialog: openTagLeaveDialog }) => (
                 <TagEditorDialog {...props}>
-                  {({ open: openTagEditorDialog }) => (
+                  {({ openDialog: openTagEditorDialog }) => (
                     <BaseDropdownActions
                       {...props}
                       {...controls}

@@ -5,14 +5,14 @@ import { Dialog, useDialogSwitch } from '~/components'
 import CommentForm, { CommentFormProps } from './CommentForm'
 
 type CommentFormDialogProps = {
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 } & Omit<CommentFormProps, 'closeDialog'>
 
 const BaseCommentFormDialog = ({
   children,
   ...props
 }: CommentFormDialogProps) => {
-  const { show, open, close } = useDialogSwitch(true)
+  const { show, openDialog, closeDialog } = useDialogSwitch(true)
   const ref: React.RefObject<HTMLDivElement> | null = useRef(null)
 
   // FIXME: editor can't be focused with dialog on Android devices
@@ -29,10 +29,15 @@ const BaseCommentFormDialog = ({
 
   return (
     <div ref={ref}>
-      {children && children({ open })}
+      {children && children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={close} onRest={focusEditor} fixedHeight>
-        <CommentForm {...props} closeDialog={close} />
+      <Dialog
+        isOpen={show}
+        onDismiss={closeDialog}
+        onRest={focusEditor}
+        fixedHeight
+      >
+        <CommentForm {...props} closeDialog={closeDialog} />
       </Dialog>
     </div>
   )
@@ -40,6 +45,6 @@ const BaseCommentFormDialog = ({
 
 export const CommentFormDialog = (props: CommentFormDialogProps) => (
   <Dialog.Lazy mounted={<BaseCommentFormDialog {...props} />}>
-    {({ open }) => <>{props.children({ open })}</>}
+    {({ openDialog }) => <>{props.children({ openDialog })}</>}
   </Dialog.Lazy>
 )

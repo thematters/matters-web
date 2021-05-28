@@ -10,7 +10,7 @@ export type ShareDialogProps = {
   title?: string
   path?: string
 
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 } & Pick<
   ShareDialogContentProps,
   'description' | 'footerButtons' | 'headerTitle'
@@ -37,14 +37,14 @@ const BaseShareDialog = ({
 
   ...props
 }: BaseShareDialogProps) => {
-  const { show, open, close } = useDialogSwitch(true)
+  const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
   return (
     <>
-      {children({ open: () => onShare(open) })}
+      {children({ openDialog: () => onShare(openDialog) })}
 
-      <Dialog size="sm" isOpen={show} onDismiss={close}>
-        <DynamicContent {...props} close={close} />
+      <Dialog size="sm" isOpen={show} onDismiss={closeDialog}>
+        <DynamicContent {...props} closeDialog={closeDialog} />
       </Dialog>
     </>
   )
@@ -88,7 +88,9 @@ export const ShareDialog = (props: ShareDialogProps) => {
         />
       }
     >
-      {({ open }) => <>{props.children({ open: () => onShare(open) })}</>}
+      {({ openDialog }) => (
+        <>{props.children({ openDialog: () => onShare(openDialog) })}</>
+      )}
     </Dialog.Lazy>
   )
 }

@@ -7,7 +7,7 @@ import { DonatorDialogArticle } from './__generated__/DonatorDialogArticle'
 
 interface DonatorsDialogProps {
   article: DonatorDialogArticle
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
 const fragments = {
@@ -27,14 +27,14 @@ const fragments = {
 const DynamicContent = dynamic(() => import('./Content'), { loading: Spinner })
 
 const BaseDonatorsDialog = ({ article, children }: DonatorsDialogProps) => {
-  const { show, open, close } = useDialogSwitch(true)
+  const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
   return (
     <>
-      {children({ open })}
+      {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={close} fixedHeight>
-        <DynamicContent article={article} closeDialog={close} />
+      <Dialog isOpen={show} onDismiss={closeDialog} fixedHeight>
+        <DynamicContent article={article} closeDialog={closeDialog} />
       </Dialog>
     </>
   )
@@ -42,7 +42,7 @@ const BaseDonatorsDialog = ({ article, children }: DonatorsDialogProps) => {
 
 export const DonatorsDialog = (props: DonatorsDialogProps) => (
   <Dialog.Lazy mounted={<BaseDonatorsDialog {...props} />}>
-    {({ open }) => <>{props.children({ open })}</>}
+    {({ openDialog }) => <>{props.children({ openDialog })}</>}
   </Dialog.Lazy>
 )
 

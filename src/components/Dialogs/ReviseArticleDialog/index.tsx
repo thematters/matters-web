@@ -3,21 +3,21 @@ import { Dialog, Translate, useDialogSwitch } from '~/components'
 import styles from './styles.css'
 
 interface Props {
-  children?: ({ open }: { open: () => void }) => React.ReactNode
+  children?: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
   revisionCountLeft: number
 }
 
 export const ReviseArticleDialog = ({ children, revisionCountLeft }: Props) => {
-  const { show, open, close } = useDialogSwitch(true)
+  const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
   return (
     <>
-      {children && children({ open })}
+      {children && children({ openDialog })}
 
-      <Dialog size="sm" isOpen={show} onDismiss={close}>
+      <Dialog size="sm" isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           title={<Translate zh_hant="修訂須知" zh_hans="修订须知" />}
-          close={close}
+          closeDialog={closeDialog}
           closeTextId="cancel"
           mode="inner"
         />
@@ -51,7 +51,7 @@ export const ReviseArticleDialog = ({ children, revisionCountLeft }: Props) => {
         </Dialog.Message>
 
         <Dialog.Footer>
-          <Dialog.Footer.Button onClick={close}>
+          <Dialog.Footer.Button onClick={closeDialog}>
             <Translate zh_hant="開始修訂" zh_hans="开始修订" />
           </Dialog.Footer.Button>
         </Dialog.Footer>

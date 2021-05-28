@@ -199,7 +199,9 @@ const CommentBar = ({ article, disabled }: CommentBarProps) => {
       type="article"
       submitCallback={refetchResponses}
     >
-      {({ open }) => <Content {...props} aria-haspopup="true" onClick={open} />}
+      {({ openDialog }) => (
+        <Content {...props} aria-haspopup="true" onClick={openDialog} />
+      )}
     </CommentFormDialog>
   )
 }

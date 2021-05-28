@@ -25,7 +25,7 @@ const COLLAPSE_COMMENT = gql`
 interface CollapseCommentDialogProps {
   comment: DropdownActionsCommentPublic
   type: CommentFormType
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
 const CollapseCommentDialog = ({
@@ -33,7 +33,7 @@ const CollapseCommentDialog = ({
   type,
   children,
 }: CollapseCommentDialogProps) => {
-  const { show, open, close } = useDialogSwitch(true)
+  const { show, openDialog, closeDialog } = useDialogSwitch(true)
   const commentId = comment.id
 
   const [collapseComment] = useMutation<CollapseComment>(COLLAPSE_COMMENT, {
@@ -69,9 +69,9 @@ const CollapseCommentDialog = ({
 
   return (
     <>
-      {children({ open })}
+      {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={close} size="sm">
+      <Dialog isOpen={show} onDismiss={closeDialog} size="sm">
         <Dialog.Header
           title={
             <Translate
@@ -79,7 +79,7 @@ const CollapseCommentDialog = ({
               zh_hans={`折叠${COMMENT_TYPE_TEXT.zh_hans[type]}`}
             />
           }
-          close={close}
+          closeDialog={closeDialog}
           mode="inner"
         />
 
@@ -96,7 +96,7 @@ const CollapseCommentDialog = ({
           <Dialog.Footer.Button
             onClick={() => {
               onCollapse()
-              close()
+              closeDialog()
             }}
           >
             <Translate id="confirm" />
@@ -104,7 +104,7 @@ const CollapseCommentDialog = ({
           <Dialog.Footer.Button
             bgColor="grey-lighter"
             textColor="black"
-            onClick={close}
+            onClick={closeDialog}
           >
             <Translate id="cancel" />
           </Dialog.Footer.Button>
@@ -116,7 +116,7 @@ const CollapseCommentDialog = ({
 
 const LazyCollapseCommentDialog = (props: CollapseCommentDialogProps) => (
   <Dialog.Lazy mounted={<CollapseCommentDialog {...props} />}>
-    {({ open }) => <>{props.children({ open })}</>}
+    {({ openDialog }) => <>{props.children({ openDialog })}</>}
   </Dialog.Lazy>
 )
 

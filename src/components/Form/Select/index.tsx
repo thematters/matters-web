@@ -89,7 +89,7 @@ const Select: React.FC<SelectProps> = ({
         title: title || label,
       }}
     >
-      {({ open, ref }) => (
+      {({ openDialog, ref }) => (
         <ul
           id={fieldId}
           role="listbox"
@@ -101,7 +101,7 @@ const Select: React.FC<SelectProps> = ({
             name={selectedOption.name}
             subtitle={selectedOption.subtitle}
             selected
-            onClick={open}
+            onClick={openDialog}
             aria-haspopup="listbox"
             ref={ref}
           />

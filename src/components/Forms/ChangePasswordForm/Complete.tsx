@@ -24,7 +24,7 @@ const Complete: React.FC<Props> = ({ type, purpose, closeDialog }) => {
       {closeDialog && (
         <Dialog.Header
           title={titleId}
-          close={closeDialog}
+          closeDialog={closeDialog}
           closeTextId="close"
           mode="inner"
         />

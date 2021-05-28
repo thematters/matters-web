@@ -5,11 +5,12 @@ import {
   Dialog,
   LanguageContext,
   Spinner,
+  Translate,
   useDialogSwitch,
   useMutation,
+  useStep,
   ViewerContext,
 } from '~/components'
-import { SearchSelectDialog } from '~/components/Dialogs/SearchSelectDialog'
 import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
 import PUT_CIRCLE_ARTICLES from '~/components/GQL/mutations/putCircleArticles'
 
@@ -22,18 +23,38 @@ import {
 } from '@/__generated__/globalTypes'
 import { PutCircleArticles } from '~/components/GQL/mutations/__generated__/PutCircleArticles'
 
+export type Step = 'select' | 'confirm'
+
 interface AddCircleArticleDialogProps {
   circle: { id: string }
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
-const DynamicContent = dynamic(() => import('./Content'), { loading: Spinner })
+const DynamicSearchSelectForm = dynamic(
+  () => import('~/components/Forms/SearchSelectForm'),
+  { loading: Spinner }
+)
+
+const DynamicConfirmContent = dynamic(() => import('./ConfirmContent'), {
+  loading: Spinner,
+})
 
 const AddCircleArticleDialog = ({
   circle,
   children,
 }: AddCircleArticleDialogProps) => {
-  const { show, open, close } = useDialogSwitch(false)
+  const { show, openDialog: baseOpenDialog, closeDialog } = useDialogSwitch(
+    true
+  )
+
+  const initialStep = 'select'
+  const { currStep, forward } = useStep<Step>(initialStep)
+  const openDialog = () => {
+    forward(initialStep)
+    baseOpenDialog()
+  }
+  const isSelect = currStep === 'select'
+  const isConfirm = currStep === 'confirm'
 
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
@@ -69,37 +90,46 @@ const AddCircleArticleDialog = ({
 
     window.dispatchEvent(new CustomEvent(REFETCH_CIRCLE_DETAIL_ARTICLES))
 
-    close()
+    closeDialog()
   }
   const onSaveArticles = async (nodes: SearchSelectNode[]) => {
     setArticles(nodes)
-    open()
+    forward('confirm')
   }
 
   return (
-    <SearchSelectDialog
-      title="circleAddArticles"
-      hint="hintCircleAddArticles"
-      searchType="Article"
-      searchFilter={{ authorId: viewer.id }}
-      onSave={onSaveArticles}
-      saving={loading}
-    >
-      {({ open: openAddCircleArticlesDialog }) => (
-        <>
-          {children({ open: openAddCircleArticlesDialog })}
+    <>
+      {children({ openDialog })}
 
-          <Dialog isOpen={show} onDismiss={close} size="sm">
-            <DynamicContent
-              onConfirm={addArticlesToCircle}
-              closeDialog={close}
-              loading={loading}
-            />
-          </Dialog>
-        </>
-      )}
-    </SearchSelectDialog>
+      <Dialog isOpen={show} onDismiss={closeDialog} size="sm" fixedHeight>
+        {isSelect && (
+          <DynamicSearchSelectForm
+            title="addArticles"
+            hint="hintCircleAddArticles"
+            searchType="Article"
+            searchFilter={{ authorId: viewer.id }}
+            onSave={onSaveArticles}
+            nodes={articles}
+            saving={loading}
+            headerRightButtonText={<Translate id="nextStep" />}
+            closeDialog={closeDialog}
+          />
+        )}
+
+        {isConfirm && (
+          <DynamicConfirmContent
+            onConfirm={addArticlesToCircle}
+            onBack={() => forward('select')}
+            loading={loading}
+          />
+        )}
+      </Dialog>
+    </>
   )
 }
 
-export default AddCircleArticleDialog
+export default (props: AddCircleArticleDialogProps) => (
+  <Dialog.Lazy mounted={<AddCircleArticleDialog {...props} />}>
+    {({ openDialog }) => <>{props.children({ openDialog })}</>}
+  </Dialog.Lazy>
+)

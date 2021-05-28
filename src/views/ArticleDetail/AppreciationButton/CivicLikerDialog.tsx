@@ -9,7 +9,7 @@ import { CivicLikerAppreciateButtonUser } from './__generated__/CivicLikerApprec
 interface CivicLikerDialogProps {
   user: CivicLikerAppreciateButtonUser
   onClose: () => void
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
 const fragments = {
@@ -28,20 +28,22 @@ const CivicLikerDialog = ({
   onClose,
   children,
 }: CivicLikerDialogProps) => {
-  const { show, open, close: baseClose } = useDialogSwitch(true)
-  const close = () => {
-    baseClose()
+  const { show, openDialog, closeDialog: baseCloseDialog } = useDialogSwitch(
+    true
+  )
+  const closeDialog = () => {
+    baseCloseDialog()
     onClose()
   }
 
   return (
     <>
-      {children({ open })}
+      {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={close} size="sm">
+      <Dialog isOpen={show} onDismiss={closeDialog} size="sm">
         <Dialog.Header
           title="joinCivicLiker"
-          close={close}
+          closeDialog={closeDialog}
           closeTextId="close"
           mode="inner"
         />
@@ -104,7 +106,7 @@ const CivicLikerDialog = ({
             }
             htmlTarget="_blank"
             rel="noopener"
-            onClick={close}
+            onClick={closeDialog}
           >
             <Translate
               zh_hant="立即登記"
@@ -116,7 +118,7 @@ const CivicLikerDialog = ({
           <Dialog.Footer.Button
             bgColor="grey-lighter"
             textColor="black"
-            onClick={close}
+            onClick={closeDialog}
           >
             <Translate id="understood" />
           </Dialog.Footer.Button>
@@ -128,7 +130,7 @@ const CivicLikerDialog = ({
 
 const LazyCivicLikerDialog = (props: CivicLikerDialogProps) => (
   <Dialog.Lazy mounted={<CivicLikerDialog {...props} />}>
-    {({ open }) => <>{props.children({ open })}</>}
+    {({ openDialog }) => <>{props.children({ openDialog })}</>}
   </Dialog.Lazy>
 )
 

@@ -181,13 +181,13 @@ const BaseDropdownActions = ({
         title: 'moreActions',
       }}
     >
-      {({ open, ref }) => (
+      {({ openDialog, ref }) => (
         <Button
           spacing={['xtight', 'xtight']}
           bgActiveColor={inCard ? 'grey-lighter-active' : 'grey-lighter'}
           aria-label={TEXT.zh_hant.moreActions}
           aria-haspopup="true"
-          onClick={open}
+          onClick={openDialog}
           ref={ref}
         >
           <IconMore16 color={color} size={size} />
@@ -269,15 +269,15 @@ const DropdownActions = (props: DropdownActionsProps) => {
 
   return (
     <ShareDialog>
-      {({ open: openShareDialog }) => (
+      {({ openDialog: openShareDialog }) => (
         <FingerprintDialog article={article}>
-          {({ open: openFingerprintDialog }) => (
+          {({ openDialog: openFingerprintDialog }) => (
             <AppreciatorsDialog article={article}>
-              {({ open: openAppreciatorsDialog }) => (
+              {({ openDialog: openAppreciatorsDialog }) => (
                 <DonatorsDialog article={article}>
-                  {({ open: openDonatorsDialog }) => (
+                  {({ openDialog: openDonatorsDialog }) => (
                     <ArchiveArticle.Dialog article={article}>
-                      {({ open: openArchiveDialog }) => (
+                      {({ openDialog: openArchiveDialog }) => (
                         <BaseDropdownActions
                           {...props}
                           {...controls}

@@ -19,7 +19,7 @@ import { TagMaintainers_node_Tag_editors as TagEditor } from '~/components/GQL/q
  *   <TagRemoveEditor
  *     id={id}
  *     editor={''}
- *     close={() => {}}
+ *     closeDialog={() => {}}
  *   />
  * ```
  */
@@ -27,10 +27,10 @@ interface Props {
   id: string
   editor: TagEditor
 
-  close: () => void
+  closeDialog: () => void
 }
 
-const TagRemoveEditor = ({ id, editor, close }: Props) => {
+const TagRemoveEditor = ({ id, editor, closeDialog }: Props) => {
   const [update, { loading }] = useMutation<UpdateTagSetting>(
     UPDATE_TAG_SETTING
   )
@@ -45,7 +45,7 @@ const TagRemoveEditor = ({ id, editor, close }: Props) => {
             en="confirm collaborator removal"
           />
         }
-        close={close}
+        closeDialog={closeDialog}
         closeTextId="cancel"
       />
 
@@ -104,7 +104,7 @@ const TagRemoveEditor = ({ id, editor, close }: Props) => {
               })
             )
 
-            close()
+            closeDialog()
           }}
         >
           <Translate
@@ -117,7 +117,7 @@ const TagRemoveEditor = ({ id, editor, close }: Props) => {
         <Dialog.Footer.Button
           textColor="black"
           bgColor="grey-lighter"
-          onClick={close}
+          onClick={closeDialog}
         >
           <Translate zh_hant="取消" zh_hans="取消" en="cancel" />
         </Dialog.Footer.Button>

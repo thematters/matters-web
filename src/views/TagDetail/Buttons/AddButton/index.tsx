@@ -58,14 +58,14 @@ const BaseDropdownActions = ({
         title: 'moreActions',
       }}
     >
-      {({ open, ref }) => (
+      {({ openDialog, ref }) => (
         <Button
           size={['5rem', '2rem']}
           textColor="gold"
           textActiveColor="white"
           bgActiveColor="gold"
           borderColor="gold"
-          onClick={open}
+          onClick={openDialog}
           aria-haspopup="true"
           ref={ref}
         >
@@ -152,7 +152,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
       onSave={addArticlesToTag(false)}
       saving={loading}
     >
-      {({ open: openAddMyArticlesDialog }) => (
+      {({ openDialog: openAddMyArticlesDialog }) => (
         <BaseDropdownActions
           {...props}
           openAddMyArticlesDialog={

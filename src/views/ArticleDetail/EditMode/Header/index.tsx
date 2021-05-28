@@ -230,7 +230,7 @@ const EditModeHeader = ({
         editAccess={async (...props) => editAccess(...props)}
         canToggleCircle={!!hasOwnCircle && !isReviseDisabled}
       >
-        {({ open: openEditorSettingsDialog }) => (
+        {({ openDialog: openEditorSettingsDialog }) => (
           <Button
             size={[null, '2rem']}
             spacing={[0, 'base']}

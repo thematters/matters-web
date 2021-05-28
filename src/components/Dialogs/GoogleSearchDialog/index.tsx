@@ -16,7 +16,7 @@ declare global {
 }
 
 interface GoogleSearchDialogProps {
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
 const GCSE_SCRIPT_ID = '__GCSE'
@@ -58,9 +58,11 @@ const renderCSE = (defer?: boolean) => {
 }
 
 const BaseGoogleSearchDialog = ({ children }: GoogleSearchDialogProps) => {
-  const { show, open: baseOpen, close } = useDialogSwitch(true)
-  const open = () => {
-    baseOpen()
+  const { show, openDialog: baseOpenDialog, closeDialog } = useDialogSwitch(
+    true
+  )
+  const openDialog = () => {
+    baseOpenDialog()
     renderCSE(true)
   }
 
@@ -99,11 +101,11 @@ const BaseGoogleSearchDialog = ({ children }: GoogleSearchDialogProps) => {
 
   return (
     <>
-      {children({ open })}
+      {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={close} fixedHeight>
+      <Dialog isOpen={show} onDismiss={closeDialog} fixedHeight>
         <Dialog.Header
-          close={close}
+          closeDialog={closeDialog}
           title={<Translate zh_hant="Google 搜尋" zh_hans="Google 搜索" />}
         />
 
@@ -122,6 +124,6 @@ const BaseGoogleSearchDialog = ({ children }: GoogleSearchDialogProps) => {
 
 export const GoogleSearchDialog = (props: GoogleSearchDialogProps) => (
   <Dialog.Lazy mounted={<BaseGoogleSearchDialog {...props} />}>
-    {({ open }) => <>{props.children({ open })}</>}
+    {({ openDialog }) => <>{props.children({ openDialog })}</>}
   </Dialog.Lazy>
 )

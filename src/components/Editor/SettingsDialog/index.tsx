@@ -41,7 +41,7 @@ export type EditorSettingsDialogProps = {
   disabled: boolean
   ConfirmStepContent: React.FC<ConfirmStepContentProps>
 
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 } & Omit<SetCoverProps, 'onEdit' | 'onBack'> &
   ToggleAccessProps &
   SettingsListDialogButtons
@@ -88,14 +88,16 @@ const BaseEditorSettingsDialog = ({
 
   children,
 }: EditorSettingsDialogProps) => {
-  const { show, open: baseOpen, close } = useDialogSwitch(true)
+  const { show, openDialog: baseOpenDialog, closeDialog } = useDialogSwitch(
+    true
+  )
 
   const initialStep = 'list'
   const { currStep, forward } = useStep<Step>(initialStep)
 
-  const open = () => {
+  const openDialog = () => {
     forward(initialStep)
-    baseOpen()
+    baseOpenDialog()
   }
 
   const isList = currStep === 'list'
@@ -107,15 +109,15 @@ const BaseEditorSettingsDialog = ({
 
   return (
     <>
-      {children({ open })}
+      {children({ openDialog })}
 
-      <Dialog size="sm" isOpen={show} onDismiss={close} fixedHeight>
+      <Dialog size="sm" isOpen={show} onDismiss={closeDialog} fixedHeight>
         {isList && (
           <SettingsList
             saving={saving}
             disabled={disabled}
             forward={forward}
-            closeDialog={close}
+            closeDialog={closeDialog}
             confirmButtonText={confirmButtonText}
             cancelButtonText={cancelButtonText}
             onConfirm={onConfirm}
@@ -156,6 +158,7 @@ const BaseEditorSettingsDialog = ({
             }}
             nodes={collection}
             saving={collectionSaving}
+            closeDialog={closeDialog}
           />
         )}
 
@@ -174,13 +177,14 @@ const BaseEditorSettingsDialog = ({
             nodes={tags}
             saving={tagsSaving}
             createTag
+            closeDialog={closeDialog}
           />
         )}
 
         {isConfirm && (
           <ConfirmStepContent
             onBack={() => forward('list')}
-            closeDialog={close}
+            closeDialog={closeDialog}
           />
         )}
       </Dialog>
@@ -190,6 +194,6 @@ const BaseEditorSettingsDialog = ({
 
 export const EditorSettingsDialog = (props: EditorSettingsDialogProps) => (
   <Dialog.Lazy mounted={<BaseEditorSettingsDialog {...props} />}>
-    {({ open }) => <>{props.children({ open })}</>}
+    {({ openDialog }) => <>{props.children({ openDialog })}</>}
   </Dialog.Lazy>
 )

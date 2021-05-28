@@ -11,11 +11,11 @@ import { BlockUserPublic } from '../__generated__/BlockUserPublic'
 
 interface BlockUserDialogProps {
   user: BlockUserPublic & Partial<BlockUserPrivate>
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
 const BlockUserDialog = ({ user, children }: BlockUserDialogProps) => {
-  const { show, open, close } = useDialogSwitch(true)
+  const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
   const [blockUser] = useMutation<ToggleBlockUser>(TOGGLE_BLOCK_USER, {
     variables: { id: user.id, enabled: true },
@@ -45,10 +45,14 @@ const BlockUserDialog = ({ user, children }: BlockUserDialogProps) => {
 
   return (
     <>
-      {children({ open })}
+      {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={close} size="sm">
-        <Dialog.Header title="blockUser" close={close} mode="inner" />
+      <Dialog isOpen={show} onDismiss={closeDialog} size="sm">
+        <Dialog.Header
+          title="blockUser"
+          closeDialog={closeDialog}
+          mode="inner"
+        />
 
         <Dialog.Message>
           <p>
@@ -65,7 +69,7 @@ const BlockUserDialog = ({ user, children }: BlockUserDialogProps) => {
             bgColor="red"
             onClick={() => {
               onBlock()
-              close()
+              closeDialog()
             }}
           >
             <Translate id="block" />
@@ -74,7 +78,7 @@ const BlockUserDialog = ({ user, children }: BlockUserDialogProps) => {
           <Dialog.Footer.Button
             bgColor="grey-lighter"
             textColor="black"
-            onClick={close}
+            onClick={closeDialog}
           >
             <Translate id="cancel" />
           </Dialog.Footer.Button>
@@ -86,7 +90,7 @@ const BlockUserDialog = ({ user, children }: BlockUserDialogProps) => {
 
 const LazyBlockUserDialog = (props: BlockUserDialogProps) => (
   <Dialog.Lazy mounted={<BlockUserDialog {...props} />}>
-    {({ open }) => <>{props.children({ open })}</>}
+    {({ openDialog }) => <>{props.children({ openDialog })}</>}
   </Dialog.Lazy>
 )
 

@@ -84,7 +84,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
   return (
     <>
       <ConfirmExitDialog onExit={onCancel}>
-        {({ open: openConfirmExitDialog }) => (
+        {({ openDialog: openConfirmExitDialog }) => (
           <Layout.Main>
             <Layout.Header
               left={

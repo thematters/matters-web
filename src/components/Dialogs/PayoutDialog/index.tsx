@@ -19,7 +19,7 @@ type Step =
 
 interface PayoutDialogProps {
   hasStripeAccount: boolean
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
 const DynamicPaymentResetPasswordForm = dynamic(
@@ -45,12 +45,14 @@ const BasePayoutDialog = ({
 }: PayoutDialogProps) => {
   const initialStep = hasStripeAccount ? 'confirm' : 'connectStripeAccount'
 
-  const { show, open: baseOpen, close } = useDialogSwitch(true)
+  const { show, openDialog: baseOpenDialog, closeDialog } = useDialogSwitch(
+    true
+  )
   const { currStep, forward, prevStep, back } = useStep<Step>(initialStep)
 
-  const open = () => {
+  const openDialog = () => {
     forward(initialStep)
-    baseOpen()
+    baseOpenDialog()
   }
 
   const ContinuePayoutButton = (
@@ -66,15 +68,18 @@ const BasePayoutDialog = ({
 
   return (
     <>
-      {children({ open })}
+      {children({ openDialog })}
 
-      <Dialog size="sm" isOpen={show} onDismiss={close} fixedHeight>
+      <Dialog size="sm" isOpen={show} onDismiss={closeDialog} fixedHeight>
         <Dialog.Header
           leftButton={
             prevStep ? <Dialog.Header.BackButton onClick={back} /> : <span />
           }
           rightButton={
-            <Dialog.Header.CloseButton close={close} textId="close" />
+            <Dialog.Header.CloseButton
+              closeDialog={closeDialog}
+              textId="close"
+            />
           }
           title={
             isConnectStripeAccount
@@ -85,14 +90,14 @@ const BasePayoutDialog = ({
               ? 'paymentPayoutComplete'
               : 'paymentPayout'
           }
-          close={close}
+          closeDialog={closeDialog}
           closeTextId="close"
         />
 
         {isConnectStripeAccount && (
           <DynamicConnectStripeAccountForm
             nextStep={() => forward('confirm')}
-            close={close}
+            closeDialog={closeDialog}
           />
         )}
 
@@ -104,12 +109,12 @@ const BasePayoutDialog = ({
           />
         )}
 
-        {isComplete && <DynamicPayoutFormComplete close={close} />}
+        {isComplete && <DynamicPayoutFormComplete closeDialog={closeDialog} />}
 
         {isResetPassword && (
           <DynamicPaymentResetPasswordForm
             callbackButtons={ContinuePayoutButton}
-            close={close}
+            closeDialog={closeDialog}
           />
         )}
       </Dialog>
@@ -119,6 +124,6 @@ const BasePayoutDialog = ({
 
 export const PayoutDialog = (props: PayoutDialogProps) => (
   <Dialog.Lazy mounted={<BasePayoutDialog {...props} />}>
-    {({ open }) => <>{props.children({ open })}</>}
+    {({ openDialog }) => <>{props.children({ openDialog })}</>}
   </Dialog.Lazy>
 )

@@ -37,7 +37,7 @@ const AccountSettings = () => {
   return (
     <Form.List groupName={<Translate id="settingsAccount" />}>
       <ChangeUserNameAsk>
-        {({ open }) => (
+        {({ openDialog }) => (
           <Form.List.Item
             title="Matters ID"
             onClick={userNameEditable ? open : undefined}

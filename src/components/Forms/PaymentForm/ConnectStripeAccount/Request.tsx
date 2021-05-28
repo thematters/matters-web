@@ -18,7 +18,7 @@ import { ConnectStripeAccount } from './__generated__/ConnectStripeAccount'
 
 interface Props {
   nextStep: () => void
-  close: () => void
+  closeDialog: () => void
 }
 
 const CONNECT_STRIPE_ACCOUNT = gql`
@@ -29,7 +29,7 @@ const CONNECT_STRIPE_ACCOUNT = gql`
   }
 `
 
-const Request: React.FC<Props> = ({ nextStep, close }) => {
+const Request: React.FC<Props> = ({ nextStep, closeDialog }) => {
   const { lang } = useContext(LanguageContext)
   const [country, setCountry] = useState<PAYOUT_COUNTRY>(
     PAYOUT_COUNTRY.HongKong
@@ -77,7 +77,7 @@ const Request: React.FC<Props> = ({ nextStep, close }) => {
         <Dialog.Footer.Button
           bgColor="grey-lighter"
           textColor="black"
-          onClick={close}
+          onClick={closeDialog}
         >
           <Translate id="cancel" />
         </Dialog.Footer.Button>

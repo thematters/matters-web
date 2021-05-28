@@ -6,14 +6,14 @@ import { UnsubscribeCircle } from './__generated__/UnsubscribeCircle'
 
 interface BaseUnsubscribeCircleDialogProps {
   id: string
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
 const BaseUnsubscribeCircleDialog = ({
   id,
   children,
 }: BaseUnsubscribeCircleDialogProps) => {
-  const { show, open, close } = useDialogSwitch(true)
+  const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
   const [unsubscribe, { loading, data }] = useMutation<UnsubscribeCircle>(
     UNSUBSCRIBE_CIRCLE,
@@ -26,12 +26,12 @@ const BaseUnsubscribeCircleDialog = ({
 
   return (
     <>
-      {children({ open })}
+      {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={close} size="sm">
+      <Dialog isOpen={show} onDismiss={closeDialog} size="sm">
         <Dialog.Header
           title={isUnsubscribed ? 'unsubscribed' : 'unsubscribeCircle'}
-          close={close}
+          closeDialog={closeDialog}
           mode="inner"
         />
 
@@ -73,7 +73,7 @@ const BaseUnsubscribeCircleDialog = ({
             <Dialog.Footer.Button
               bgColor="grey-lighter"
               textColor="black"
-              onClick={close}
+              onClick={closeDialog}
             >
               <Translate zh_hant="等等再說" zh_hans="等等再说" />
             </Dialog.Footer.Button>
@@ -83,7 +83,7 @@ const BaseUnsubscribeCircleDialog = ({
             <Dialog.Footer.Button
               bgColor="grey-lighter"
               textColor="black"
-              onClick={close}
+              onClick={closeDialog}
             >
               <Translate id="close" />
             </Dialog.Footer.Button>
@@ -98,6 +98,6 @@ export const UnsubscribeCircleDialog = (
   props: BaseUnsubscribeCircleDialogProps
 ) => (
   <Dialog.Lazy mounted={<BaseUnsubscribeCircleDialog {...props} />}>
-    {({ open }) => <>{props.children({ open })}</>}
+    {({ openDialog }) => <>{props.children({ openDialog })}</>}
   </Dialog.Lazy>
 )

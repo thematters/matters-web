@@ -8,27 +8,31 @@ import {
 import { CLOSE_ACTIVE_DIALOG, OPEN_LOGIN_DIALOG } from '~/common/enums'
 
 const BaseLoginDialog = () => {
-  const { show, open, close } = useDialogSwitch(true)
+  const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
-  useEventListener(CLOSE_ACTIVE_DIALOG, close)
-  useEventListener(OPEN_LOGIN_DIALOG, open)
+  useEventListener(CLOSE_ACTIVE_DIALOG, closeDialog)
+  useEventListener(OPEN_LOGIN_DIALOG, openDialog)
 
   return (
-    <Dialog size="sm" isOpen={show} onDismiss={close} fixedHeight>
-      <LoginForm purpose="dialog" submitCallback={close} closeDialog={close} />
+    <Dialog size="sm" isOpen={show} onDismiss={closeDialog} fixedHeight>
+      <LoginForm
+        purpose="dialog"
+        submitCallback={closeDialog}
+        closeDialog={closeDialog}
+      />
     </Dialog>
   )
 }
 
 const LoginDialog = () => {
-  const Children = ({ open }: { open: () => void }) => {
-    useEventListener(OPEN_LOGIN_DIALOG, open)
+  const Children = ({ openDialog }: { openDialog: () => void }) => {
+    useEventListener(OPEN_LOGIN_DIALOG, openDialog)
     return null
   }
 
   return (
     <Dialog.Lazy mounted={<BaseLoginDialog />}>
-      {({ open }) => <Children open={open} />}
+      {({ openDialog }) => <Children openDialog={openDialog} />}
     </Dialog.Lazy>
   )
 }

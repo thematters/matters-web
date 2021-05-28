@@ -63,7 +63,7 @@ const SettingsList = ({
     <>
       <Dialog.Header
         title={<Translate zh_hant="設定" zh_hans="设定" en="Settings" />}
-        close={close}
+        closeDialog={closeDialog}
         closeTextId="close"
         mode="hidden"
       />

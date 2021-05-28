@@ -14,7 +14,7 @@ import { analytics } from '~/common/utils'
 type Step = 'setPaymentPassword' | 'addCredit'
 
 interface AddCreditDialogProps {
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
 const DynamicPaymentSetPasswordForm = dynamic(
@@ -29,16 +29,18 @@ const DynamicAddCreditForm = dynamic(
 
 const BaseAddCreditDialog = ({ children }: AddCreditDialogProps) => {
   const viewer = useContext(ViewerContext)
-  const { show, open: baseOpen, close } = useDialogSwitch(true)
+  const { show, openDialog: baseOpenDialog, closeDialog } = useDialogSwitch(
+    true
+  )
 
   const initialStep = viewer.status?.hasPaymentPassword
     ? 'addCredit'
     : 'setPaymentPassword'
   const { currStep, forward } = useStep<Step>(initialStep)
 
-  const open = () => {
+  const openDialog = () => {
     forward(initialStep)
-    baseOpen()
+    baseOpenDialog()
   }
 
   const isSetPaymentPassword = currStep === 'setPaymentPassword'
@@ -50,12 +52,12 @@ const BaseAddCreditDialog = ({ children }: AddCreditDialogProps) => {
 
   return (
     <>
-      {children({ open })}
+      {children({ openDialog })}
 
-      <Dialog size="sm" isOpen={show} onDismiss={close} fixedHeight>
+      <Dialog size="sm" isOpen={show} onDismiss={closeDialog} fixedHeight>
         <Dialog.Header
           title={isSetPaymentPassword ? 'paymentPassword' : 'topUp'}
-          close={close}
+          closeDialog={closeDialog}
           closeTextId="close"
         />
 
@@ -73,6 +75,6 @@ const BaseAddCreditDialog = ({ children }: AddCreditDialogProps) => {
 
 export const AddCreditDialog = (props: AddCreditDialogProps) => (
   <Dialog.Lazy mounted={<BaseAddCreditDialog {...props} />}>
-    {({ open }) => <>{props.children({ open })}</>}
+    {({ openDialog }) => <>{props.children({ openDialog })}</>}
   </Dialog.Lazy>
 )

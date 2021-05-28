@@ -204,7 +204,7 @@ export const UserProfile = () => {
 
         <footer>
           <FollowersDialog user={user}>
-            {({ open: openFollowersDialog }) => (
+            {({ openDialog: openFollowersDialog }) => (
               <button type="button" onClick={openFollowersDialog}>
                 <span className="count">
                   {numAbbr(user.followers.totalCount)}
@@ -215,7 +215,7 @@ export const UserProfile = () => {
           </FollowersDialog>
 
           <FollowingDialog user={user}>
-            {({ open: openFollowingDialog }) => (
+            {({ openDialog: openFollowingDialog }) => (
               <button type="button" onClick={openFollowingDialog}>
                 <span className="count">
                   {numAbbr(user.following.users.totalCount)}

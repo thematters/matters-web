@@ -15,8 +15,8 @@ const CivicLikerButton = ({
   total: number
 }) => (
   <CivicLikerDialog user={user} onClose={onClose}>
-    {({ open }) => (
-      <AppreciateButton onClick={open} count={count} total={total} />
+    {({ openDialog }) => (
+      <AppreciateButton onClick={openDialog} count={count} total={total} />
     )}
   </CivicLikerDialog>
 )

@@ -79,12 +79,12 @@ const BaseDropdownActions = ({
         title: 'moreActions',
       }}
     >
-      {({ open, ref }) => (
+      {({ openDialog, ref }) => (
         <Button
           bgColor="half-black"
           aria-label={TEXT.zh_hant.moreActions}
           aria-haspopup="true"
-          onClick={open}
+          onClick={openDialog}
           ref={ref}
         >
           {hasEditCircle ? (
@@ -113,7 +113,7 @@ const DropdownActions = ({ circle }: DropdownActionsProps) => {
 
   return (
     <UnsubscribeCircleDialog id={circle.id}>
-      {({ open: openUnsubscribeCircleDialog }) => (
+      {({ openDialog: openUnsubscribeCircleDialog }) => (
         <BaseDropdownActions
           circle={circle}
           {...controls}
