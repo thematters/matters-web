@@ -109,6 +109,9 @@ const DraftDetail = () => {
     content?: string | null
     cover?: string | null
     summary?: string | null
+
+    initText?: string | null
+    currText?: string | null
   }) => {
     try {
       if (draft?.publishState === 'published') {
@@ -116,6 +119,15 @@ const DraftDetail = () => {
       }
 
       setSaveStatus('saving')
+
+      // remove unwanted props passing from editor module
+      if (newDraft.initText) {
+        delete newDraft.initText
+      }
+      if (newDraft.currText) {
+        delete newDraft.currText
+      }
+
       await setContent({ variables: { id: draft?.id, ...newDraft } })
       setSaveStatus('saved')
 

@@ -63,9 +63,9 @@ const PublishContent: React.FC<PublishContentProps> = ({ closeDialog }) => {
         </h2>
         <p>
           <Translate
-            zh_hant="你的作品即將永久存儲在星際文件系統（IPFS）分佈式節點中。在 IPFS 的存儲費用目前由 Matters 平台支付。"
-            zh_hans="你的作品即将永久存储在星际文件系统（IPFS）分布式节点中。在 IPFS 的存储费用目前由 Matters 平台支付。"
-            en="Your work will be permanently stored in IPFS network. Currently the fee is covered by Matters."
+            zh_hant="你的作品即將存儲在星際文件系統（IPFS）分佈式節點中。在 IPFS 的存儲費用目前由 Matters 平台支付。"
+            zh_hans="你的作品即将存储在星际文件系统（IPFS）分布式节点中。在 IPFS 的存储费用目前由 Matters 平台支付。"
+            en="Your work will be stored in IPFS network. Currently the fee is covered by Matters."
           />
         </p>
         <ul>
