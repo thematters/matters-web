@@ -135,7 +135,7 @@ const BaseInviteePreSend = ({ close, confirm, invitees }: Props) => {
         </List>
       </Dialog.Content>
 
-      <SelectPeriod period={period} onClick={setPeriod} />
+      <SelectPeriod period={period} onChange={setPeriod} />
 
       <Dialog.Footer>
         <Dialog.Footer.Button onClick={() => send()} loading={inviteLoading}>

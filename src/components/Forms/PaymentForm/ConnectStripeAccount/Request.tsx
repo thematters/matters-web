@@ -61,7 +61,7 @@ const Request: React.FC<Props> = ({ nextStep, close }) => {
   return (
     <>
       <Dialog.Content hasGrow>
-        <SelectCountry country={country} onClick={setCountry} />
+        <SelectCountry country={country} onChange={setCountry} />
         <Spacer size="xxloose" />
       </Dialog.Content>
 

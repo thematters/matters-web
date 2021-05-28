@@ -31,7 +31,7 @@ type Area = 'staging' | 'searching'
 export type SearchSelectNode = SelectNode
 
 export type SearchSelectFormProps = {
-  title: TextId | React.ReactElement
+  title: TextId | React.ReactNode
   hint: TextId
   headerLeftButton?: React.ReactNode
 

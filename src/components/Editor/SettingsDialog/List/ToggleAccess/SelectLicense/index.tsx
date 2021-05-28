@@ -1,26 +1,14 @@
 import { useContext } from 'react'
 
-import {
-  DropdownDialog,
-  LanguageContext,
-  Menu,
-  Select,
-  Translate,
-} from '~/components'
-
-import { Z_INDEX } from '~/common/enums'
+import { Form, LanguageContext, Translate } from '~/components'
 
 import { ArticleLicenseType } from '@/__generated__/globalTypes'
 
 interface Props {
   isInCircle: boolean
   license: ArticleLicenseType
-  onSelect: (license: ArticleLicenseType) => void
+  onChange: (license: ArticleLicenseType) => void
 }
-
-const SelectLicenseTitle = (
-  <Translate zh_hant="版權聲明" zh_hans="版权声明" en="Article License" />
-)
 
 const LICENSE_TEXT = {
   1: {
@@ -73,22 +61,9 @@ const LICENSE_TEXT = {
   },
 }
 
-/**
- * This sub component is for rendering options of article license.
- *
- * Usage:
- *
- * ```tsx
- *   <LicenseOptions isInCircle={isInCircle} license={license} onSelect={onSelect} />
- * ```
- */
-const LicenseOptions = ({
-  isInCircle,
-  license,
-  onSelect,
-  isInDropdown,
-}: Props & { isInDropdown?: boolean }) => {
+const SelectLicense = ({ isInCircle, license, onChange }: Props) => {
   const { lang } = useContext(LanguageContext)
+
   const options = isInCircle
     ? [
         ArticleLicenseType.cc_by_nc_nd_2,
@@ -98,62 +73,19 @@ const LicenseOptions = ({
     : [ArticleLicenseType.cc_by_nc_nd_2, ArticleLicenseType.cc_0]
 
   return (
-    <Menu width={isInDropdown ? 'md' : undefined}>
-      {options.map((option) => {
-        const licenseText = LICENSE_TEXT[isInCircle ? 1 : 0][option]
-        return (
-          <Select.Option
-            title={licenseText.title[lang]}
-            subtitle={licenseText.subtitle[lang]}
-            selected={option === license}
-            expanded
-            key={option}
-            onClick={() => onSelect(option)}
-          />
-        )
-      })}
-    </Menu>
-  )
-}
-
-/**
- * This component is for rendering selected option of article license.
- *
- * Usage:
- *
- * ```tsx
- *   <SelectLicense isInCircle={isInCircle} license={license} onSelect={onSelect}/>
- * ```
- */
-const SelectLicense = (props: Props) => {
-  const { lang } = useContext(LanguageContext)
-  const licenseText = LICENSE_TEXT[props.isInCircle ? 1 : 0][props.license]
-
-  return (
-    <Select>
-      <DropdownDialog
-        dropdown={{
-          appendTo: 'parent',
-          content: <LicenseOptions {...props} isInDropdown />,
-          placement: 'bottom-end',
-          zIndex: Z_INDEX.OVER_DIALOG,
-        }}
-        dialog={{
-          content: <LicenseOptions {...props} />,
-          title: SelectLicenseTitle,
-        }}
-      >
-        {({ open, ref }) => (
-          <Select.Option
-            title={licenseText.title[lang]}
-            subtitle={licenseText.subtitle[lang]}
-            selected
-            onClick={open}
-            ref={ref}
-          />
-        )}
-      </DropdownDialog>
-    </Select>
+    <Form.Select
+      name="license-country"
+      title={
+        <Translate zh_hant="版權聲明" zh_hans="版权声明" en="Article License" />
+      }
+      onChange={(option) => onChange(option.value)}
+      options={options.map((value) => ({
+        name: LICENSE_TEXT[isInCircle ? 1 : 0][value].title[lang],
+        subtitle: LICENSE_TEXT[isInCircle ? 1 : 0][value].subtitle[lang],
+        value,
+        selected: license === value,
+      }))}
+    />
   )
 }
 

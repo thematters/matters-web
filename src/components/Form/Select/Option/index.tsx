@@ -5,7 +5,7 @@ import { Card, CardProps, IconArrowDown16, TextIcon } from '~/components'
 import styles from './styles.css'
 
 type OptionProps = {
-  title: string | React.ReactNode
+  name: string | React.ReactNode
   subtitle?: string | React.ReactNode
 
   selected?: boolean
@@ -17,7 +17,7 @@ type OptionProps = {
 const Option: React.FC<OptionProps> = forwardRef(
   (
     {
-      title,
+      name,
       subtitle,
 
       selected,
@@ -37,7 +37,7 @@ const Option: React.FC<OptionProps> = forwardRef(
         >
           <section className="container">
             <section className="left">
-              <h5 className="title">{title}</h5>
+              <h5 className="name">{name}</h5>
               {subtitle && <p className="subtitle">{subtitle}</p>}
             </section>
 

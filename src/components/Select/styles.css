@@ -1,6 +1,0 @@
-ul {
-  overflow: hidden;
-  user-select: none;
-  border-radius: var(--spacing-x-tight);
-  -webkit-tap-highlight-color: transparent;
-}

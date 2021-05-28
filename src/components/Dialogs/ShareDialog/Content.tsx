@@ -11,7 +11,7 @@ export interface ShareDialogContentProps {
   shareTitle: string
   shareLink: string
 
-  headerTitle?: TextId | React.ReactElement
+  headerTitle?: TextId | React.ReactNode
   description?: React.ReactNode
   footerButtons?: React.ReactNode
 }

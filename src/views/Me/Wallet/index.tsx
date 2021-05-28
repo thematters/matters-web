@@ -61,7 +61,7 @@ const Wallet = () => {
 
         <Balance balanceHKD={balanceHKD} canPayout={canPayout} />
 
-        <Buttons canPayout={canPayout} hasStripeAccount={hasStripeAccount} />
+        <Buttons canPayout hasStripeAccount={hasStripeAccount} />
 
         <Form.List>
           <Form.List.Item

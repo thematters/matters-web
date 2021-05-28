@@ -57,7 +57,7 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
               )
             }
             disabled={!canToggleCircle}
-            loading
+            loading={accessSaving}
           />
         </header>
       </section>
@@ -81,7 +81,7 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
           <SelectLicense
             isInCircle={!!circle}
             license={license}
-            onSelect={(newLicense) =>
+            onChange={(newLicense) =>
               editAccess(
                 !!circle,
                 newLicense === ArticleLicenseType.arr,

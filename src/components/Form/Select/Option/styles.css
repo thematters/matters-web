@@ -5,13 +5,13 @@
   line-height: 1;
 }
 
-.title {
+.name {
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-normal);
   line-height: 1rem;
 }
 
-/* [aria-selected='true'] .title {
+/* [aria-selected='true'] .name {
   font-weight: var(--font-weight-medium);
 } */
 

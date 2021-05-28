@@ -9,7 +9,7 @@ import { BackButton, CloseButton, RightButton } from './Button'
 import styles from './styles.css'
 
 export interface HeaderProps {
-  title: TextId | React.ReactElement
+  title: TextId | React.ReactNode
   close?: () => void
   closeTextId?: TextId
   mode?: 'hidden' | 'inner'

@@ -56,7 +56,7 @@ type DropdownDialogProps = {
   dropdown: Omit<PopperProps, 'children'>
   dialog: Omit<DialogProps, keyof DialogOverlayProps> & {
     content: React.ReactNode
-    title: React.ReactElement | TextId
+    title: TextId | React.ReactNode
   }
 } & DropdownDialogChildren
 

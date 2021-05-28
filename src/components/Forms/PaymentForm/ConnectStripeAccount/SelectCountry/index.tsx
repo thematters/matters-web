@@ -1,20 +1,12 @@
 import { useContext } from 'react'
 
-import {
-  DropdownDialog,
-  LanguageContext,
-  Menu,
-  Select,
-  Translate,
-} from '~/components'
+import { Form, LanguageContext, Translate } from '~/components'
 
-import { PAYOUT_COUNTRY, Z_INDEX } from '~/common/enums'
-
-import styles from './styles.css'
+import { PAYOUT_COUNTRY } from '~/common/enums'
 
 interface Props {
   country: PAYOUT_COUNTRY
-  onClick: (country: PAYOUT_COUNTRY) => void
+  onChange: (country: PAYOUT_COUNTRY) => void
 }
 
 const COUNTRY_TEXT = {
@@ -52,93 +44,29 @@ const COUNTRY_TEXT = {
   UnitedStates: { zh_hant: '美國', zh_hans: '美国', en: 'United States' },
 }
 
-const options = Object.keys(COUNTRY_TEXT) as PAYOUT_COUNTRY[]
-
-const SelectCountryTitle = (
-  <Translate
-    zh_hant="選擇你的提現帳號的國家地區"
-    zh_hans="选择你的提现帐号的国家地区"
-    en="Select your country to payout"
-  />
-)
-
-const SelectCountryText = ({ country }: { country: PAYOUT_COUNTRY }) => {
+const SelectCountry = ({ country, onChange }: Props) => {
   const { lang } = useContext(LanguageContext)
-  return <>{COUNTRY_TEXT[country][lang] || country}</>
-}
 
-/**
- * This sub component is for options of Stripe supported countries.
- *
- * Usage:
- *
- * ```tsx
- *   <CountryOptions country={country} onClick={onClick} />
- * ```
- */
-const CountryOptions = ({
-  country,
-  onClick,
-  isInDropdown,
-}: Props & { isInDropdown?: boolean }) => (
-  <section className="optionContent">
-    <Menu width={isInDropdown ? 'md' : undefined}>
-      {options.map((option) => (
-        <Select.Option
-          title={<SelectCountryText country={option} />}
-          onClick={() => onClick(option)}
-          selected={country === option}
-          expanded
-          key={option}
+  const options = Object.keys(COUNTRY_TEXT) as PAYOUT_COUNTRY[]
+
+  return (
+    <Form.Select
+      name="select-country"
+      label={
+        <Translate
+          zh_hant="選擇你的提現帳號的國家地區"
+          zh_hans="选择你的提现帐号的国家地区"
+          en="Select your country to payout"
         />
-      ))}
-    </Menu>
-
-    <style jsx>{styles}</style>
-  </section>
-)
-
-/**
- * This component is for rendering selected option of Stripe supported countries.
- *
- * Usage:
- *
- * ```tsx
- *   <SelectCountry country={country} onClick={onClick}/>
- * ```
- */
-const SelectCountry = ({ country, onClick }: Props) => (
-  <section className="container">
-    <h3 className="title">{SelectCountryTitle}</h3>
-
-    <Select>
-      <DropdownDialog
-        dropdown={{
-          appendTo: 'parent',
-          content: (
-            <CountryOptions country={country} onClick={onClick} isInDropdown />
-          ),
-          placement: 'bottom-end',
-          zIndex: Z_INDEX.OVER_DIALOG,
-        }}
-        dialog={{
-          content: <CountryOptions country={country} onClick={onClick} />,
-          title: SelectCountryTitle,
-        }}
-      >
-        {({ open, ref }) => (
-          <Select.Option
-            title={<SelectCountryText country={country} />}
-            selected
-            onClick={open}
-            ref={ref}
-          />
-        )}
-      </DropdownDialog>
-    </Select>
-
-    <style jsx>{styles}</style>
-  </section>
-)
+      }
+      onChange={(option) => onChange(option.value as PAYOUT_COUNTRY)}
+      options={options.map((value) => ({
+        name: COUNTRY_TEXT[value][lang],
+        value,
+        selected: country === value,
+      }))}
+    />
+  )
+}
 
 export default SelectCountry
