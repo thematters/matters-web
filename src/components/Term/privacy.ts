@@ -314,7 +314,7 @@ const Privacy: { zh_hant: string; zh_hans: string; en: string } = {
 
 <p>11.2 The Users understand and acknowledge that the Data Controller never ask the Users to share with other Users their Private Keys for their use of the Services. </p>
 
-<p>11.3 The Users understand and acknowledge that this Privacy Policy does not apply to any unsolicited information they provide to the Data Controller through the Services or through any other means. All unsolicited information shall be deemed to be non-confidential and the Data Controller shall be free to reproduce, use, discloseDialog, and distribute such unsolicited information to others without limitation or attribution. </p>
+<p>11.3 The Users understand and acknowledge that this Privacy Policy does not apply to any unsolicited information they provide to the Data Controller through the Services or through any other means. All unsolicited information shall be deemed to be non-confidential and the Data Controller shall be free to reproduce, use, disclose, and distribute such unsolicited information to others without limitation or attribution. </p>
 
 <p>11.4 The Users understand and acknowledge that their User Contents are posted on and transmitted to others at their own risk. Although the Data Controller limits access to certain pages, the Users acknowledge that no security measures are perfect or impenetrable. Additionally, the Users understand and acknowledge that the Data Controller cannot control the actions of other Users with whom the Users may choose to share their User Contents. Therefore, the Users understand and acknowledge that the Data Controller cannot and do not guarantee that their User Contents will not be reviewed by unauthorized persons. </p>
 
