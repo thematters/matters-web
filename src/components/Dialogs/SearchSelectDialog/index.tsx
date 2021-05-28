@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic'
 
 import { Dialog, Spinner, useDialogSwitch } from '~/components'
 import { SearchSelectFormProps } from '~/components/Forms/SearchSelectForm'
+import { SelectNode } from '~/components/SearchSelect/SearchingArea'
 
 type SearchSelectDialogProps = Omit<SearchSelectFormProps, 'closeDialog'> & {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
@@ -23,7 +24,14 @@ const BaseSearchSelectDialog = ({
       {children({ openDialog })}
 
       <Dialog isOpen={show} onDismiss={closeDialog} fixedHeight>
-        <DynamicSearchSelectForm {...props} closeDialog={closeDialog} />
+        <DynamicSearchSelectForm
+          {...props}
+          onSave={async (nodes: SelectNode[]) => {
+            await props.onSave(nodes)
+            closeDialog()
+          }}
+          closeDialog={closeDialog}
+        />
       </Dialog>
     </>
   )
