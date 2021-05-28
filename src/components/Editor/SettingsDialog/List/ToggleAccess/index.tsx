@@ -1,6 +1,6 @@
 import { CircleDigest, Switch, Translate } from '~/components'
 
-import LicenseOption from './LicenseOption'
+import SelectLicense from './SelectLicense'
 import styles from './styles.css'
 
 import {
@@ -11,15 +11,17 @@ import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generat
 
 export type ToggleAccessProps = {
   circle?: DigestRichCirclePublic | null
-  accessType?: ArticleAccessType | null
+  accessType: ArticleAccessType
   license: ArticleLicenseType
 
-  editAccess?: (
+  editAccess: (
     addToCircle: boolean,
     paywalled: boolean,
     license: ArticleLicenseType
   ) => any
+
   accessSaving: boolean
+  canToggleCircle: boolean
 }
 
 const ToggleAccess: React.FC<ToggleAccessProps> = ({
@@ -29,6 +31,7 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
 
   editAccess,
   accessSaving,
+  canToggleCircle,
 }) => {
   return (
     <section className="container">
@@ -44,15 +47,17 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
 
           <Switch
             checked={!!circle}
-            onChange={() => editAccess && editAccess(!circle, false, license)}
-            disabled={!!editAccess}
+            onChange={() =>
+              editAccess(!circle, false, ArticleLicenseType.cc_by_nc_nd_2)
+            }
+            disabled={!canToggleCircle}
             loading={accessSaving}
           />
         </header>
       </section>
 
-      {circle && (
-        <section className="widget">
+      <section className="widget">
+        {circle && (
           <section className="circle">
             <CircleDigest.Rich
               circle={circle}
@@ -64,21 +69,22 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
               disabled
             />
           </section>
-        </section>
-      )}
+        )}
 
-      <LicenseOption
-        isInCircle={!!circle}
-        license={license}
-        onSelect={(newLicense) =>
-          editAccess &&
-          editAccess(
-            !!circle,
-            newLicense === ArticleLicenseType.arr,
-            newLicense
-          )
-        }
-      />
+        <section className="license">
+          <SelectLicense
+            isInCircle={!!circle}
+            license={license}
+            onSelect={(newLicense) =>
+              editAccess(
+                !!circle,
+                newLicense === ArticleLicenseType.arr,
+                newLicense
+              )
+            }
+          />
+        </section>
+      </section>
 
       <style jsx>{styles}</style>
     </section>

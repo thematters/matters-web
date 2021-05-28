@@ -40,7 +40,7 @@ const DynamicInvitationSent = dynamic(() => import('./Sent'), {
 const AddCircleInvitationDialog = ({ children }: Props) => {
   const defaultStep = 'search'
 
-  const { show, open: baseOpen, close: baseClose } = useDialogSwitch(false)
+  const { show, open: baseOpen, close } = useDialogSwitch(false)
   const { currStep, forward, reset } = useStep<Step>(defaultStep)
   const [invitees, setInvitees] = useState<StagingNode[]>([])
 
@@ -49,15 +49,6 @@ const AddCircleInvitationDialog = ({ children }: Props) => {
       reset(defaultStep)
     }
     baseOpen()
-  }
-
-  const close = () => {
-    // prevent click outside
-    const node = document.getElementById('period-option')
-    if (node) {
-      return
-    }
-    baseClose()
   }
 
   const save = ({ nodes }: { nodes: StagingNode[] }) => {

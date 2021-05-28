@@ -19,7 +19,7 @@ import { StagingNode } from '~/components/SearchSelect/StagingArea'
 import { REFETCH_CIRCLE_PENDING_INVITES } from '~/common/enums'
 
 import { INVITATIONS_CIRCLE } from './gql'
-import PeriodOption from './Option'
+import SelectPeriod from './SelectPeriod'
 
 import { InviteCircle } from '~/components/GQL/mutations/__generated__/InviteCircle'
 import { InvitationsCircle } from './__generated__/InvitationsCircle'
@@ -135,7 +135,7 @@ const BaseInviteePreSend = ({ close, confirm, invitees }: Props) => {
         </List>
       </Dialog.Content>
 
-      <PeriodOption period={period} onClick={setPeriod} />
+      <SelectPeriod period={period} onClick={setPeriod} />
 
       <Dialog.Footer>
         <Dialog.Footer.Button onClick={() => send()} loading={inviteLoading}>

@@ -226,11 +226,8 @@ const EditModeHeader = ({
         accessType={accessType}
         license={license}
         accessSaving={false}
-        editAccess={
-          hasOwnCircle && !isReviseDisabled
-            ? async (...props) => editAccess(...props)
-            : undefined
-        }
+        editAccess={async (...props) => editAccess(...props)}
+        canToggleCircle={!!hasOwnCircle && !isReviseDisabled}
       >
         {({ open: openEditorSettingsDialog }) => (
           <Button

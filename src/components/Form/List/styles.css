@@ -12,6 +12,8 @@
 
 ul {
   overflow: hidden;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 
   & :global(> li) {
     @mixin border-top-grey;

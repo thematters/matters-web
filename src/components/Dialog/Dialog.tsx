@@ -8,6 +8,7 @@ import { useDrag } from 'react-use-gesture'
 import { useOutsideClick, useResponsive } from '~/components'
 
 import { KEYCODES } from '~/common/enums'
+import { dom } from '~/common/utils'
 
 import Handle from './Handle'
 import Overlay from './Overlay'
@@ -41,6 +42,21 @@ const Container: React.FC<
     [size]: true,
   })
 
+  const closeTopDialog = () => {
+    const dialogs = Array.prototype.slice.call(
+      dom.$$('[data-reach-dialog-overlay]')
+    ) as Element[]
+    const topDialog = dialogs[dialogs.length - 1]
+    const isTopDialog =
+      topDialog && node.current && topDialog.contains(node.current)
+
+    if (!isTopDialog) {
+      return
+    }
+
+    onDismiss()
+  }
+
   const bind = useDrag(({ down, movement: [, my] }) => {
     if (!down && my > 30) {
       onDismiss()
@@ -49,7 +65,7 @@ const Container: React.FC<
     }
   })
 
-  useOutsideClick(node, onDismiss)
+  useOutsideClick(node, closeTopDialog)
 
   return (
     <div className="l-row">
@@ -59,7 +75,7 @@ const Container: React.FC<
         style={style}
         onKeyDown={(event) => {
           if (event.keyCode === KEYCODES.escape) {
-            onDismiss()
+            closeTopDialog()
           }
         }}
       >

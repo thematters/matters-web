@@ -77,6 +77,7 @@ const BaseEditorSettingsDialog = ({
   accessSaving,
   accessType,
   license,
+  canToggleCircle,
 
   saving,
   disabled,
@@ -123,6 +124,7 @@ const BaseEditorSettingsDialog = ({
             accessSaving={accessSaving}
             accessType={accessType}
             license={license}
+            canToggleCircle={canToggleCircle}
           />
         )}
 

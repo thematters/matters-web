@@ -12,7 +12,7 @@ import {
 import { ADD_TOAST, PAYOUT_COUNTRY } from '~/common/enums'
 import { parseFormSubmitErrors, sleep } from '~/common/utils'
 
-import CountryOption from './CountryOption'
+import SelectCountry from './SelectCountry'
 
 import { ConnectStripeAccount } from './__generated__/ConnectStripeAccount'
 
@@ -61,7 +61,7 @@ const Request: React.FC<Props> = ({ nextStep, close }) => {
   return (
     <>
       <Dialog.Content hasGrow>
-        <CountryOption country={country} onClick={setCountry} />
+        <SelectCountry country={country} onClick={setCountry} />
         <Spacer size="xxloose" />
       </Dialog.Content>
 

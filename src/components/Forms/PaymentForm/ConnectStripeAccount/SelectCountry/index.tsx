@@ -2,10 +2,9 @@ import { useContext } from 'react'
 
 import {
   DropdownDialog,
-  Form,
   LanguageContext,
   Menu,
-  TextIcon,
+  Select,
   Translate,
 } from '~/components'
 
@@ -55,7 +54,7 @@ const COUNTRY_TEXT = {
 
 const options = Object.keys(COUNTRY_TEXT) as PAYOUT_COUNTRY[]
 
-const CountryOptionTitle = (
+const SelectCountryTitle = (
   <Translate
     zh_hant="選擇你的提現帳號的國家地區"
     zh_hans="选择你的提现帐号的国家地区"
@@ -63,7 +62,7 @@ const CountryOptionTitle = (
   />
 )
 
-const CountryOptionText = ({ country }: { country: PAYOUT_COUNTRY }) => {
+const SelectCountryText = ({ country }: { country: PAYOUT_COUNTRY }) => {
   const { lang } = useContext(LanguageContext)
   return <>{COUNTRY_TEXT[country][lang] || country}</>
 }
@@ -74,10 +73,10 @@ const CountryOptionText = ({ country }: { country: PAYOUT_COUNTRY }) => {
  * Usage:
  *
  * ```tsx
- *   <CountryOptionContent country={country} onClick={onClick} />
+ *   <CountryOptions country={country} onClick={onClick} />
  * ```
  */
-const CountryOptionContent = ({
+const CountryOptions = ({
   country,
   onClick,
   isInDropdown,
@@ -85,15 +84,13 @@ const CountryOptionContent = ({
   <section className="optionContent">
     <Menu width={isInDropdown ? 'md' : undefined}>
       {options.map((option) => (
-        <Menu.Item key={option} onClick={() => onClick(option)}>
-          <TextIcon
-            spacing="base"
-            size="md"
-            weight={option === country ? 'bold' : 'normal'}
-          >
-            <CountryOptionText country={option} />
-          </TextIcon>
-        </Menu.Item>
+        <Select.Option
+          title={<SelectCountryText country={option} />}
+          onClick={() => onClick(option)}
+          selected={country === option}
+          expanded
+          key={option}
+        />
       ))}
     </Menu>
 
@@ -102,43 +99,46 @@ const CountryOptionContent = ({
 )
 
 /**
- * This component is for rendering options of Stripe supported countries.
+ * This component is for rendering selected option of Stripe supported countries.
  *
  * Usage:
  *
  * ```tsx
- *   <CountryOption country={country} onClick={onClick}/>
+ *   <SelectCountry country={country} onClick={onClick}/>
  * ```
  */
-const CountryOption = ({ country, onClick }: Props) => (
-  <Form.List groupName={CountryOptionTitle}>
-    <DropdownDialog
-      dropdown={{
-        appendTo: 'parent',
-        content: (
-          <CountryOptionContent
-            country={country}
-            onClick={onClick}
-            isInDropdown
+const SelectCountry = ({ country, onClick }: Props) => (
+  <section className="container">
+    <h3 className="title">{SelectCountryTitle}</h3>
+
+    <Select>
+      <DropdownDialog
+        dropdown={{
+          appendTo: 'parent',
+          content: (
+            <CountryOptions country={country} onClick={onClick} isInDropdown />
+          ),
+          placement: 'bottom-end',
+          zIndex: Z_INDEX.OVER_DIALOG,
+        }}
+        dialog={{
+          content: <CountryOptions country={country} onClick={onClick} />,
+          title: SelectCountryTitle,
+        }}
+      >
+        {({ open, ref }) => (
+          <Select.Option
+            title={<SelectCountryText country={country} />}
+            selected
+            onClick={open}
+            ref={ref}
           />
-        ),
-        placement: 'bottom-end',
-        zIndex: Z_INDEX.OVER_DIALOG,
-      }}
-      dialog={{
-        content: <CountryOptionContent country={country} onClick={onClick} />,
-        title: CountryOptionTitle,
-      }}
-    >
-      {({ open, ref }) => (
-        <Form.List.Item
-          title={<CountryOptionText country={country} />}
-          onClick={open}
-          ref={ref}
-        />
-      )}
-    </DropdownDialog>
-  </Form.List>
+        )}
+      </DropdownDialog>
+    </Select>
+
+    <style jsx>{styles}</style>
+  </section>
 )
 
-export default CountryOption
+export default SelectCountry

@@ -106,8 +106,9 @@ const SettingsButton = ({
         circle={draft?.access.circle}
         accessType={draft.access.type}
         license={draft.license}
-        editAccess={hasOwnCircle ? editAccess : undefined}
+        editAccess={editAccess}
         accessSaving={accessSaving}
+        canToggleCircle={!!hasOwnCircle}
       >
         {({ open: openEditorSettingsDialog }) => (
           <NextStepButton open={openEditorSettingsDialog} disabled={disabled} />
