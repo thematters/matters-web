@@ -1,10 +1,10 @@
 import { Head, Layout } from '~/components'
 
 import CircleInvitationAddButton from './AddButton'
-import Invitations from './Invitations'
+import InvitesFeed from './Invites'
 
 const ManageInvitation = () => (
-  <Layout.Main bgColor="grey-lighter">
+  <Layout.Main>
     <Layout.Header
       left={<Layout.Header.BackButton />}
       right={
@@ -17,7 +17,7 @@ const ManageInvitation = () => (
 
     <Head title={{ id: 'manageCircleInvitation' }} />
 
-    <Invitations />
+    <InvitesFeed />
   </Layout.Main>
 )
 

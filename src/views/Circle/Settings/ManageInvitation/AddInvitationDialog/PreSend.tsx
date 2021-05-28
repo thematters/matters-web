@@ -16,7 +16,7 @@ import {
 import INVITE_CIRCLE from '~/components/GQL/mutations/invite'
 import { StagingNode } from '~/components/SearchSelect/StagingArea'
 
-import { REFETCH_CIRCLE_INVITATIONS } from '~/common/enums'
+import { REFETCH_CIRCLE_PENDING_INVITES } from '~/common/enums'
 
 import { INVITATIONS_CIRCLE } from './gql'
 import PeriodOption from './Option'
@@ -43,7 +43,7 @@ const BaseInviteePreSend = ({ close, confirm, invitees }: Props) => {
   const { getQuery } = useRoute()
   const name = getQuery('name')
 
-  const [period, setPeriod] = useState<number>(1)
+  const [period, setPeriod] = useState<number>(30)
   const [invite, { loading: inviteLoading }] = useMutation<InviteCircle>(
     INVITE_CIRCLE
   )
@@ -97,7 +97,7 @@ const BaseInviteePreSend = ({ close, confirm, invitees }: Props) => {
       return
     }
 
-    window.dispatchEvent(new CustomEvent(REFETCH_CIRCLE_INVITATIONS))
+    window.dispatchEvent(new CustomEvent(REFETCH_CIRCLE_PENDING_INVITES))
     confirm()
   }
 

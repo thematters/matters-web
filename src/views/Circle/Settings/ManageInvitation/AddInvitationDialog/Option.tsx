@@ -1,11 +1,4 @@
-import {
-  DropdownDialog,
-  Form,
-  FreePeriod,
-  Menu,
-  TextIcon,
-  Translate,
-} from '~/components'
+import { DropdownDialog, Form, Menu, TextIcon, Translate } from '~/components'
 
 import { Z_INDEX } from '~/common/enums'
 
@@ -14,7 +7,7 @@ interface Props {
   onClick: (period: number) => void
 }
 
-const options = [1, 3, 6, 12]
+const options = [30, 90, 180, 360]
 
 const PeriodOptionTitle = (
   <Translate
@@ -47,7 +40,7 @@ const PeriodOptionContent = ({
             size="md"
             weight={option === period ? 'bold' : 'normal'}
           >
-            <FreePeriod period={option} />
+            {option} <Translate id="days" />
           </TextIcon>
         </Menu.Item>
       ))}
@@ -82,7 +75,11 @@ const PeriodOption = ({ period, onClick }: Props) => (
     >
       {({ open, ref }) => (
         <Form.List.Item
-          title={<FreePeriod period={period} />}
+          title={
+            <>
+              {period} <Translate id="days" />
+            </>
+          }
           onClick={open}
           ref={ref}
         />
