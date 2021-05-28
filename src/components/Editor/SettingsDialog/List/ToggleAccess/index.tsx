@@ -48,10 +48,16 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
           <Switch
             checked={!!circle}
             onChange={() =>
-              editAccess(!circle, false, ArticleLicenseType.cc_by_nc_nd_2)
+              editAccess(
+                !circle,
+                false,
+                circle && license === ArticleLicenseType.arr
+                  ? ArticleLicenseType.cc_by_nc_nd_2
+                  : license
+              )
             }
             disabled={!canToggleCircle}
-            loading={accessSaving}
+            loading
           />
         </header>
       </section>

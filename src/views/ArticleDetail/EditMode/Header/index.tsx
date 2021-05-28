@@ -119,6 +119,7 @@ const EditModeHeader = ({
           collection: collection.map(({ id: articleId }) => articleId),
           circle: circle ? circle.id : null,
           accessType,
+          license,
           ...(isRevised ? { content } : {}),
           first: null,
         },
