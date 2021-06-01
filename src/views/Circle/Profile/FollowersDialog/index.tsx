@@ -6,19 +6,19 @@ import { ProfileCirclePublic } from '../__generated__/ProfileCirclePublic'
 
 interface FollowersDialogProps {
   circle: ProfileCirclePublic
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
 const DynamicContent = dynamic(() => import('./Content'), { loading: Spinner })
 
 const BaseFollowersDialog = ({ circle, children }: FollowersDialogProps) => {
-  const { show, open, close } = useDialogSwitch(true)
+  const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
   return (
     <>
-      {children({ open })}
+      {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={close} fixedHeight>
+      <Dialog isOpen={show} onDismiss={closeDialog} fixedHeight>
         <Dialog.Header
           title={
             <Translate
@@ -27,7 +27,7 @@ const BaseFollowersDialog = ({ circle, children }: FollowersDialogProps) => {
               en={`Followers of ${circle.displayName}`}
             />
           }
-          close={close}
+          closeDialog={closeDialog}
           closeTextId="close"
         />
 
@@ -39,6 +39,6 @@ const BaseFollowersDialog = ({ circle, children }: FollowersDialogProps) => {
 
 export const FollowersDialog = (props: FollowersDialogProps) => (
   <Dialog.Lazy mounted={<BaseFollowersDialog {...props} />}>
-    {({ open }) => <>{props.children({ open })}</>}
+    {({ openDialog }) => <>{props.children({ openDialog })}</>}
   </Dialog.Lazy>
 )

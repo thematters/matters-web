@@ -20,10 +20,8 @@ import {
   useMutation,
   ViewerContext,
 } from '~/components'
-import {
-  SearchSelectDialog,
-  SearchSelectNode,
-} from '~/components/Dialogs/SearchSelectDialog'
+import { SearchSelectDialog } from '~/components/Dialogs/SearchSelectDialog'
+import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
 import ADD_ARTICLES_TAGS from '~/components/GQL/mutations/addArticlesTags'
 import updateTagArticlesCount from '~/components/GQL/updates/tagArticlesCount'
 
@@ -126,13 +124,13 @@ const BaseDropdownActions = ({
         title: 'moreActions',
       }}
     >
-      {({ open, ref }) => (
+      {({ openDialog, ref }) => (
         <section className="container">
           <Button
             bgColor="half-black"
             aria-label={TEXT.zh_hant.moreActions}
             aria-haspopup="true"
-            onClick={open}
+            onClick={openDialog}
             ref={ref}
           >
             <IconSettings32 size="lg" color="white" />
@@ -219,7 +217,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
 
   return (
     <TagDialog {...props.tag}>
-      {({ open: openTagDialog }) => (
+      {({ openDialog: openTagDialog }) => (
         <SearchSelectDialog
           title="tagAddSelectedArticle"
           hint="hintEditCollection"
@@ -227,11 +225,11 @@ const DropdownActions = (props: DropdownActionsProps) => {
           onSave={addArticlesToTag(true)}
           saving={loading}
         >
-          {({ open: openTagAddSelectedArticlesDialog }) => (
+          {({ openDialog: openTagAddSelectedArticlesDialog }) => (
             <TagLeaveDialog {...props}>
-              {({ open: openTagLeaveDialog }) => (
+              {({ openDialog: openTagLeaveDialog }) => (
                 <TagEditorDialog {...props}>
-                  {({ open: openTagEditorDialog }) => (
+                  {({ openDialog: openTagEditorDialog }) => (
                     <BaseDropdownActions
                       {...props}
                       {...controls}

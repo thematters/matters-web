@@ -16,7 +16,11 @@ const Complete = ({
       )}
 
       {closeDialog && (
-        <Dialog.Header title="changeEmail" close={closeDialog} mode="inner" />
+        <Dialog.Header
+          title="changeEmail"
+          closeDialog={closeDialog}
+          mode="inner"
+        />
       )}
 
       <Dialog.Message spacing="md">

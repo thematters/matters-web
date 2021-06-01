@@ -7,7 +7,7 @@ import Upload from './Upload'
 type Step = 'upload' | 'success'
 
 interface MigrationDialogProps {
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
   defaultStep?: Step
 }
 
@@ -15,19 +15,19 @@ const BaseMigrationDialog = ({
   children,
   defaultStep = 'upload',
 }: MigrationDialogProps) => {
-  const { show, open, close } = useDialogSwitch(true)
+  const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
   const { currStep, forward } = useStep<Step>(defaultStep)
   const nextStep = () => forward('success')
 
   return (
     <>
-      {children({ open })}
+      {children({ openDialog })}
 
-      <Dialog size="sm" isOpen={show} onDismiss={close} fixedHeight>
+      <Dialog size="sm" isOpen={show} onDismiss={closeDialog} fixedHeight>
         <Dialog.Header
           title="migration"
-          close={close}
+          closeDialog={closeDialog}
           closeTextId={currStep === 'success' ? 'close' : 'cancel'}
         />
         {currStep === 'upload' && <Upload nextStep={nextStep} />}
@@ -40,6 +40,6 @@ const BaseMigrationDialog = ({
 
 export const MigrationDialog = (props: MigrationDialogProps) => (
   <Dialog.Lazy mounted={<BaseMigrationDialog {...props} />}>
-    {({ open }) => <>{props.children({ open })}</>}
+    {({ openDialog }) => <>{props.children({ openDialog })}</>}
   </Dialog.Lazy>
 )

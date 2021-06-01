@@ -10,7 +10,10 @@ import {
   SET_TAGS,
 } from './gql'
 
-import { ArticleAccessType } from '@/__generated__/globalTypes'
+import {
+  ArticleAccessType,
+  ArticleLicenseType,
+} from '@/__generated__/globalTypes'
 import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
 import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
 import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
@@ -81,18 +84,23 @@ export const useEditDraftAccess = (
     SET_ACCESS
   )
 
-  const edit = (addToCircle: boolean, paywalled: boolean) => {
+  const edit = async (
+    addToCircle: boolean,
+    paywalled: boolean,
+    license: ArticleLicenseType
+  ) => {
     if (!circle) {
       return
     }
 
-    setCircle({
+    return setCircle({
       variables: {
         id: draftId,
         circle: addToCircle ? circle.id : null,
         accessType: paywalled
           ? ArticleAccessType.paywall
           : ArticleAccessType.public,
+        license,
       },
     })
   }

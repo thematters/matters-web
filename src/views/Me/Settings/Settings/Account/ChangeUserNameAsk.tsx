@@ -3,18 +3,22 @@ import { Dialog, Translate, useDialogSwitch } from '~/components'
 import { PATHS } from '~/common/enums'
 
 interface AskProps {
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
 const Ask = ({ children }: AskProps) => {
-  const { show, open, close } = useDialogSwitch(false)
+  const { show, openDialog, closeDialog } = useDialogSwitch(false)
 
   return (
     <>
-      {children({ open })}
+      {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={close} size="sm">
-        <Dialog.Header title="changeUserName" close={close} mode="inner" />
+      <Dialog isOpen={show} onDismiss={closeDialog} size="sm">
+        <Dialog.Header
+          title="changeUserName"
+          closeDialog={closeDialog}
+          mode="inner"
+        />
 
         <Dialog.Message>
           <p>
@@ -34,7 +38,7 @@ const Ask = ({ children }: AskProps) => {
           <Dialog.Footer.Button
             bgColor="grey-lighter"
             textColor="black"
-            onClick={close}
+            onClick={closeDialog}
           >
             <Translate id="close" />
           </Dialog.Footer.Button>

@@ -9,28 +9,28 @@ import Feed, { FeedType } from './Feed'
 import styles from './styles.css'
 
 interface Props {
-  children?: ({ open }: { open: () => void }) => React.ReactNode
+  children?: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
 const BaseRecommendTagDialog = ({ children }: Props) => {
   const defaultType = 'hottest'
 
-  const { show, open, close } = useDialogSwitch(true)
+  const { show, openDialog, closeDialog } = useDialogSwitch(true)
   const [feed, setFeed] = useState<FeedType>(defaultType)
 
   const isHottest = feed === 'hottest'
   const isSelected = feed === 'selected'
 
-  useEventListener(OPEN_RECOMMEND_TAG_DIALOG, open)
+  useEventListener(OPEN_RECOMMEND_TAG_DIALOG, openDialog)
 
   return (
     <>
-      {children && children({ open })}
+      {children && children({ openDialog })}
 
-      <Dialog size="sm" isOpen={show} onDismiss={close} fixedHeight>
+      <Dialog size="sm" isOpen={show} onDismiss={closeDialog} fixedHeight>
         <Dialog.Header
           title={<Translate zh_hant="追蹤標籤" zh_hans="追踪标签" />}
-          close={close}
+          closeDialog={closeDialog}
           closeTextId="cancel"
         />
 
@@ -64,14 +64,14 @@ const BaseRecommendTagDialog = ({ children }: Props) => {
 }
 
 export const RecommendTagDialog = (props: Props) => {
-  const Children = ({ open }: { open: () => void }) => {
-    useEventListener(OPEN_RECOMMEND_TAG_DIALOG, open)
-    return <>{props.children && props.children({ open })}</>
+  const Children = ({ openDialog }: { openDialog: () => void }) => {
+    useEventListener(OPEN_RECOMMEND_TAG_DIALOG, openDialog)
+    return <>{props.children && props.children({ openDialog })}</>
   }
 
   return (
     <Dialog.Lazy mounted={<BaseRecommendTagDialog {...props} />}>
-      {({ open }) => <Children open={open} />}
+      {({ openDialog }) => <Children openDialog={openDialog} />}
     </Dialog.Lazy>
   )
 }

@@ -7,7 +7,7 @@ import { StagingNode } from '~/components/SearchSelect/StagingArea'
 type Step = 'search' | 'pre-send' | 'sent'
 
 interface Props {
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
 const DynamicInviteeSearch = dynamic(() => import('./Search'), {
@@ -32,7 +32,7 @@ const DynamicInvitationSent = dynamic(() => import('./Sent'), {
  *
  * ```tsx
  *   <AddCircleInvitationDialog>
- *     {({ open }) => (<Component open={open} />)}
+ *     {({ openDialog }) => (<Component openDialog={openDialog} />)}
  *   </AddCircleInvitationDialog>
  * ```
  *
@@ -40,24 +40,17 @@ const DynamicInvitationSent = dynamic(() => import('./Sent'), {
 const AddCircleInvitationDialog = ({ children }: Props) => {
   const defaultStep = 'search'
 
-  const { show, open: baseOpen, close: baseClose } = useDialogSwitch(false)
+  const { show, openDialog: baseOpenDialog, closeDialog } = useDialogSwitch(
+    false
+  )
   const { currStep, forward, reset } = useStep<Step>(defaultStep)
   const [invitees, setInvitees] = useState<StagingNode[]>([])
 
-  const open = () => {
+  const openDialog = () => {
     if (currStep !== defaultStep) {
       reset(defaultStep)
     }
-    baseOpen()
-  }
-
-  const close = () => {
-    // prevent click outside
-    const node = document.getElementById('period-option')
-    if (node) {
-      return
-    }
-    baseClose()
+    baseOpenDialog()
   }
 
   const save = ({ nodes }: { nodes: StagingNode[] }) => {
@@ -72,20 +65,22 @@ const AddCircleInvitationDialog = ({ children }: Props) => {
 
   return (
     <>
-      {children({ open })}
+      {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={close} size="sm" fixedHeight>
-        {isSearch && <DynamicInviteeSearch close={close} save={save} />}
+      <Dialog isOpen={show} onDismiss={closeDialog} size="sm" fixedHeight>
+        {isSearch && (
+          <DynamicInviteeSearch closeDialog={closeDialog} save={save} />
+        )}
 
         {isPreSend && (
           <DynamicInviteePreSend
-            close={close}
+            closeDialog={closeDialog}
             confirm={confirm}
             invitees={invitees}
           />
         )}
 
-        {isSent && <DynamicInvitationSent close={close} />}
+        {isSent && <DynamicInvitationSent closeDialog={closeDialog} />}
       </Dialog>
     </>
   )

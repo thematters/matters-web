@@ -27,7 +27,7 @@ import {
  * ```tsx
  *   <TagEditorList
  *     id={id}
- *     close={() => {}}
+ *     closeDialog={() => {}}
  *     toAddStep={() => {}}
  *     toRemoveStep={() => {}}
  *   />
@@ -36,7 +36,7 @@ import {
 interface Props {
   id: string
 
-  close: () => void
+  closeDialog: () => void
   toAddStep: () => void
   toRemoveStep: (editor: TagEditor) => void
 }
@@ -57,7 +57,7 @@ const RemoveButton = ({ remove }: { remove: () => void }) => (
   </section>
 )
 
-const TagEditorList = ({ id, close, toAddStep, toRemoveStep }: Props) => {
+const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
   const { data, loading, error } = useQuery<TagMaintainers>(TAG_MAINTAINERS, {
     variables: { id },
   })
@@ -88,7 +88,7 @@ const TagEditorList = ({ id, close, toAddStep, toRemoveStep }: Props) => {
     <>
       <Dialog.Header
         title="tagManageEditor"
-        close={close}
+        closeDialog={closeDialog}
         closeTextId="cancel"
       />
 

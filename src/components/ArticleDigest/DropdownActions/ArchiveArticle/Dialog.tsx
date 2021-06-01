@@ -20,14 +20,14 @@ const ARCHIVE_ARTICLE = gql`
 
 interface ArchiveArticleDialogProps {
   article: ArchiveArticleArticle
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
 const ArchiveArticleDialog = ({
   article,
   children,
 }: ArchiveArticleDialogProps) => {
-  const { show, open, close } = useDialogSwitch(true)
+  const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
   const [archiveArticle] = useMutation<ArchiveArticle>(ARCHIVE_ARTICLE, {
     variables: { id: article.id },
@@ -65,10 +65,10 @@ const ArchiveArticleDialog = ({
 
   return (
     <>
-      {children({ open })}
+      {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={close} size="sm">
-        <Dialog.Header title="hide" close={close} mode="inner" />
+      <Dialog isOpen={show} onDismiss={closeDialog} size="sm">
+        <Dialog.Header title="hide" closeDialog={closeDialog} mode="inner" />
 
         <Dialog.Message>
           <p>
@@ -84,7 +84,7 @@ const ArchiveArticleDialog = ({
             bgColor="red"
             onClick={() => {
               onArchive()
-              close()
+              closeDialog()
             }}
           >
             <Translate id="archived" />
@@ -93,7 +93,7 @@ const ArchiveArticleDialog = ({
           <Dialog.Footer.Button
             bgColor="grey-lighter"
             textColor="black"
-            onClick={close}
+            onClick={closeDialog}
           >
             <Translate id="cancel" />
           </Dialog.Footer.Button>
@@ -105,7 +105,7 @@ const ArchiveArticleDialog = ({
 
 const LazyArchiveArticleDialog = (props: ArchiveArticleDialogProps) => (
   <Dialog.Lazy mounted={<ArchiveArticleDialog {...props} />}>
-    {({ open }) => <>{props.children({ open })}</>}
+    {({ openDialog }) => <>{props.children({ openDialog })}</>}
   </Dialog.Lazy>
 )
 

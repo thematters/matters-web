@@ -128,7 +128,7 @@ const ReplyButton = ({
       title={article ? 'replyComment' : 'reply'}
       context={<ReplyTo user={author} />}
     >
-      {({ open: openCommentFormDialog }) => (
+      {({ openDialog: openCommentFormDialog }) => (
         <CommentButton
           onClick={openCommentFormDialog}
           inCard={inCard}

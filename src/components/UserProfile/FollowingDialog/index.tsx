@@ -6,24 +6,24 @@ import { UserProfileUserPublic_user } from '../__generated__/UserProfileUserPubl
 
 interface FollowingDialogProps {
   user: UserProfileUserPublic_user
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
 const DynamicContent = dynamic(() => import('./Content'), { loading: Spinner })
 
 const BaseFollowingDialog = ({ user, children }: FollowingDialogProps) => {
-  const { show, open, close } = useDialogSwitch(true)
+  const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
   return (
     <>
-      {children({ open })}
+      {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={close} fixedHeight>
+      <Dialog isOpen={show} onDismiss={closeDialog} fixedHeight>
         <Dialog.Header
           title={
             <Translate zh_hant="追蹤內容" zh_hans="追踪内容" en={`Following`} />
           }
-          close={close}
+          closeDialog={closeDialog}
           closeTextId="close"
         />
 
@@ -35,6 +35,6 @@ const BaseFollowingDialog = ({ user, children }: FollowingDialogProps) => {
 
 export const FollowingDialog = (props: FollowingDialogProps) => (
   <Dialog.Lazy mounted={<BaseFollowingDialog {...props} />}>
-    {({ open }) => <>{props.children({ open })}</>}
+    {({ openDialog }) => <>{props.children({ openDialog })}</>}
   </Dialog.Lazy>
 )

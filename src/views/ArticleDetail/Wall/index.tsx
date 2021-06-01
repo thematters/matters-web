@@ -19,7 +19,7 @@ const Wall = ({ show }: WallProps) => {
   const client = useApolloClient()
   const outerClasses = classNames({ outer: true, show })
 
-  const close = () => {
+  const closeDialog = () => {
     if (client?.writeData) {
       client.writeData({
         id: 'ClientPreference:local',
@@ -55,7 +55,7 @@ const Wall = ({ show }: WallProps) => {
               </div>
 
               <div className="close">
-                <Button onClick={close} aria-label={TEXT.zh_hant.close}>
+                <Button onClick={closeDialog} aria-label={TEXT.zh_hant.close}>
                   <IconClear16 color="grey" />
                 </Button>
               </div>

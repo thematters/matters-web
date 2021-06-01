@@ -6,6 +6,7 @@ export default gql`
     $articles: [ID!]
     $type: PutCircleArticlesType!
     $accessType: ArticleAccessType!
+    $license: ArticleLicenseType!
   ) {
     putCircleArticles(
       input: {
@@ -13,6 +14,7 @@ export default gql`
         articles: $articles
         type: $type
         accessType: $accessType
+        license: $license
       }
     ) {
       id

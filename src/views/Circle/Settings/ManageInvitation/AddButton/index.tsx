@@ -14,11 +14,11 @@ import AddInvitationDialog from '../AddInvitationDialog'
 const CircleInvitationAddButton = () => {
   return (
     <AddInvitationDialog>
-      {({ open }) => (
+      {({ openDialog }) => (
         <Button
           size={['6rem', '2rem']}
           bgActiveColor="grey-lighter"
-          onClick={open}
+          onClick={openDialog}
         >
           <TextIcon color="green" size="md" weight="md">
             <Translate id="addCircleInvitation" />

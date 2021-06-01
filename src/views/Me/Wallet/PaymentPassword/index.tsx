@@ -36,7 +36,7 @@ const BasePaymentPassword: React.FC<PaymentPasswordProps> = ({
         title: 'moreActions',
       }}
     >
-      {({ open, ref }) => (
+      {({ openDialog, ref }) => (
         <Form.List.Item
           title={
             <Translate
@@ -45,7 +45,7 @@ const BasePaymentPassword: React.FC<PaymentPasswordProps> = ({
               en="Payment Password"
             />
           }
-          onClick={open}
+          onClick={openDialog}
           ref={ref}
         />
       )}
@@ -55,7 +55,7 @@ const BasePaymentPassword: React.FC<PaymentPasswordProps> = ({
 
 const PaymentPassword = () => (
   <ResetPaymentPasswordDialog>
-    {({ open: openResetPaymentPasswordDialog }) => (
+    {({ openDialog: openResetPaymentPasswordDialog }) => (
       <BasePaymentPassword
         openResetPaymentPasswordDialog={openResetPaymentPasswordDialog}
       />

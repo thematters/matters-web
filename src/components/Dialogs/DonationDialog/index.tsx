@@ -6,6 +6,7 @@ import {
   Dialog,
   Spinner,
   Translate,
+  useDialogSwitch,
   useStep,
   ViewerContext,
 } from '~/components'
@@ -37,7 +38,7 @@ interface SetAmountOpenTabCallbackValues {
 }
 
 interface DonationDialogProps {
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
   completeCallback?: () => void
   defaultStep?: Step
   recipient: UserDonationRecipient
@@ -96,7 +97,11 @@ const BaseDonationDialog = ({
 }: DonationDialogProps) => {
   const viewer = useContext(ViewerContext)
 
-  const [showDialog, setShowDialog] = useState(true)
+  const {
+    show,
+    openDialog: baseOpenDialog,
+    closeDialog: baseCloseDialog,
+  } = useDialogSwitch(true)
   const { currStep, prevStep, forward, back } = useStep<Step>(defaultStep)
   const [windowRef, setWindowRef] = useState<Window | undefined>(undefined)
 
@@ -104,14 +109,14 @@ const BaseDonationDialog = ({
   const [currency, setCurrency] = useState<CURRENCY>(CURRENCY.HKD)
   const [payToTx, setPayToTx] = useState<Omit<PayToTx, '__typename'>>()
 
-  const open = () => {
+  const openDialog = () => {
     forward(defaultStep)
-    setShowDialog(true)
+    baseOpenDialog()
   }
 
-  const close = () => {
+  const closeDialog = () => {
     setCurrency(CURRENCY.HKD)
-    setShowDialog(false)
+    baseCloseDialog()
   }
 
   const setAmountCallback = (values: SetAmountCallbackValues) => {
@@ -167,16 +172,16 @@ const BaseDonationDialog = ({
 
   return (
     <>
-      {children({ open })}
+      {children({ openDialog })}
 
       <Dialog
         size={isComplete ? 'lg' : 'sm'}
-        isOpen={showDialog}
-        onDismiss={close}
+        isOpen={show}
+        onDismiss={closeDialog}
         fixedHeight
       >
         <Dialog.Header
-          close={close}
+          closeDialog={closeDialog}
           leftButton={
             prevStep && !isComplete ? (
               <Dialog.Header.BackButton onClick={back} />
@@ -185,7 +190,10 @@ const BaseDonationDialog = ({
             )
           }
           rightButton={
-            <Dialog.Header.CloseButton close={close} textId="close" />
+            <Dialog.Header.CloseButton
+              closeDialog={closeDialog}
+              textId="close"
+            />
           }
           title={
             isAddCredit
@@ -202,7 +210,7 @@ const BaseDonationDialog = ({
 
         {isSetAmount && (
           <DynamicPayToFormSetAmount
-            close={close}
+            closeDialog={closeDialog}
             defaultCurrency={currency}
             openTabCallback={setAmountOpenTabCallback}
             recipient={recipient}
@@ -254,7 +262,7 @@ const BaseDonationDialog = ({
         {isResetPassword && (
           <DynamicPaymentResetPasswordForm
             callbackButtons={ContinueDonationButton}
-            close={close}
+            closeDialog={closeDialog}
           />
         )}
       </Dialog>
@@ -264,7 +272,7 @@ const BaseDonationDialog = ({
 
 export const DonationDialog = (props: DonationDialogProps) => (
   <Dialog.Lazy mounted={<BaseDonationDialog {...props} />}>
-    {({ open }) => <>{props.children({ open })}</>}
+    {({ openDialog }) => <>{props.children({ openDialog })}</>}
   </Dialog.Lazy>
 )
 

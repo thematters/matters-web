@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import _uniq from 'lodash/uniq'
 import dynamic from 'next/dynamic'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import {
   EmptyLayout,
@@ -9,27 +9,18 @@ import {
   ReviseArticleDialog,
   Spinner,
   Throw404,
-  useResponsive,
 } from '~/components'
-import BottomBar from '~/components/Editor/BottomBar'
-import Sidebar from '~/components/Editor/Sidebar'
-import { QueryError, useImperativeQuery } from '~/components/GQL'
+import { QueryError } from '~/components/GQL'
 
-import { ENTITY_TYPE, MAX_ARTICLE_REVISION_COUNT } from '~/common/enums'
+import { MAX_ARTICLE_REVISION_COUNT } from '~/common/enums'
 
 import ConfirmExitDialog from './ConfirmExitDialog'
-import { EDIT_MODE_ARTICLE, EDIT_MODE_ARTICLE_ASSETS } from './gql'
+import { EDIT_MODE_ARTICLE } from './gql'
 import EditModeHeader from './Header'
 import PublishState from './PublishState'
 
-import { ArticleAccessType } from '@/__generated__/globalTypes'
-import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
-import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
-import { Asset } from '~/components/GQL/fragments/__generated__/Asset'
-import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
 import { ArticleDetailPublic_article } from '../__generated__/ArticleDetailPublic'
 import { EditModeArticle } from './__generated__/EditModeArticle'
-import { EditModeArticleAssets } from './__generated__/EditModeArticleAssets'
 
 interface EditModeProps {
   article: ArticleDetailPublic_article
@@ -43,23 +34,7 @@ const Editor = dynamic(() => import('~/components/Editor/Article'), {
 })
 
 const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
-  const isLargeUp = useResponsive('lg-up')
-
-  // staging editing data
   const [editData, setEditData] = useState<Record<string, any>>({})
-  const [cover, editCover] = useState<Asset>()
-  const [tags, editTags] = useState<DigestTag[]>(article.tags || [])
-  const [collection, editCollection] = useState<ArticleDigestDropdownArticle[]>(
-    []
-  )
-  const [circle, editCircle] = useState<DigestRichCirclePublic | null>(
-    article.access.circle
-  )
-  const [accessType, editAccessType] = useState<ArticleAccessType>(
-    article.access.type
-  )
-
-  // fetch latest metadata
   const { data, loading, error } = useQuery<EditModeArticle>(
     EDIT_MODE_ARTICLE,
     {
@@ -67,46 +42,6 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
       fetchPolicy: 'network-only',
     }
   )
-
-  // access
-  const ownCircles = data?.article?.author.ownCircles
-  const hasOwnCircle = ownCircles && ownCircles.length >= 1
-  const editAccess = (addToCircle: boolean, paywalled: boolean) => {
-    if (!ownCircles) {
-      return
-    }
-
-    editCircle(addToCircle ? ownCircles[0] : null)
-    editAccessType(
-      paywalled ? ArticleAccessType.paywall : ArticleAccessType.public
-    )
-  }
-
-  // cover
-  const assets = data?.article?.assets || []
-  const refetchAssets = useImperativeQuery<EditModeArticleAssets>(
-    EDIT_MODE_ARTICLE_ASSETS,
-    {
-      variables: { mediaHash: article.mediaHash },
-      fetchPolicy: 'network-only',
-    }
-  )
-
-  // update cover & collection from retrieved data
-  useEffect(() => {
-    if (!data?.article) {
-      return
-    }
-
-    // cover, find from `article.assets` since `article.cover` isn't a `Asset`
-    const currCover = assets.find((asset) => asset.path === data.article?.cover)
-    if (currCover) {
-      editCover(currCover)
-    }
-
-    // collection
-    editCollection(data.article.collection.edges?.map(({ node }) => node) || [])
-  }, [data?.article?.id])
 
   /**
    * Render
@@ -127,17 +62,18 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
     )
   }
 
+  const editModeArticle = data?.article
   const drafts = data?.article?.drafts
   const draft = drafts && drafts[0]
-  const countLeft =
+  const revisionCountLeft =
     MAX_ARTICLE_REVISION_COUNT - (data?.article?.revisionCount || 0)
+  const isOverRevisionLimit = revisionCountLeft <= 0
   const isSameHash = draft?.mediaHash === article.mediaHash
   const isPending = draft?.publishState === 'pending'
   const isEditDisabled = !isSameHash || isPending
-  const isOverLimit = countLeft <= 0
-  const isReviseDisabled = isEditDisabled || isOverLimit
+  const isReviseDisabled = isEditDisabled || isOverRevisionLimit
 
-  if (!draft) {
+  if (!draft || !editModeArticle) {
     return (
       <EmptyLayout>
         <Throw404 />
@@ -148,64 +84,26 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
   return (
     <>
       <ConfirmExitDialog onExit={onCancel}>
-        {({ open: openConfirmExitDialog }) => (
-          <Layout.Main
-            aside={
-              <>
-                <Sidebar.Cover
-                  cover={cover?.path}
-                  assets={assets}
-                  entityId={article.id}
-                  entityType={ENTITY_TYPE.article}
-                  onEdit={editCover}
-                  refetchAssets={refetchAssets}
-                  disabled={isEditDisabled}
-                />
-
-                <Sidebar.Tags
-                  tags={tags}
-                  onEdit={editTags}
-                  disabled={isEditDisabled}
-                />
-
-                <Sidebar.Collection
-                  articles={collection}
-                  onEdit={editCollection}
-                  disabled={isEditDisabled}
-                />
-
-                {hasOwnCircle && (
-                  <Sidebar.Management
-                    circle={circle}
-                    accessType={accessType}
-                    editAccess={editAccess}
-                    canToggleCircle={!isReviseDisabled}
-                    canTogglePaywall={!isReviseDisabled}
-                    saving={false}
-                  />
-                )}
-              </>
-            }
-            inEditor
-          >
+        {({ openDialog: openConfirmExitDialog }) => (
+          <Layout.Main>
             <Layout.Header
               left={
                 <Layout.Header.BackButton
-                  onClick={isOverLimit ? onCancel : openConfirmExitDialog}
-                  disabled={isPending}
+                  onClick={
+                    isOverRevisionLimit ? onCancel : openConfirmExitDialog
+                  }
+                  disabled={isEditDisabled}
                 />
               }
               right={
                 <EditModeHeader
-                  article={article}
-                  cover={cover}
+                  article={editModeArticle}
                   editData={editData}
-                  tags={tags}
-                  collection={collection}
-                  circle={circle}
-                  accessType={accessType}
-                  countLeft={countLeft}
+                  revisionCountLeft={revisionCountLeft}
+                  isOverRevisionLimit={isOverRevisionLimit}
                   isSameHash={isSameHash}
+                  isEditDisabled={isEditDisabled}
+                  isReviseDisabled={isReviseDisabled}
                   onSaved={onSaved}
                 />
               }
@@ -228,36 +126,13 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
                 upload={async () => ({ id: '', path: '' })}
               />
             </Layout.Spacing>
-
-            {!isLargeUp && (
-              <BottomBar
-                disabled={isEditDisabled}
-                // cover
-                cover={cover?.path}
-                assets={assets}
-                editCover={editCover}
-                refetchAssets={refetchAssets}
-                entityId={article.id}
-                entityType={ENTITY_TYPE.article}
-                // tags
-                tags={tags}
-                editTags={editTags}
-                // collection
-                collection={collection}
-                editCollection={editCollection}
-                // circle
-                circle={circle}
-                accessType={accessType}
-                editAccess={hasOwnCircle ? editAccess : undefined}
-                canToggleCircle={!isReviseDisabled}
-                canTogglePaywall={!isReviseDisabled}
-              />
-            )}
           </Layout.Main>
         )}
       </ConfirmExitDialog>
 
-      {!isReviseDisabled && <ReviseArticleDialog countLeft={countLeft} />}
+      {!isReviseDisabled && (
+        <ReviseArticleDialog revisionCountLeft={revisionCountLeft} />
+      )}
     </>
   )
 }

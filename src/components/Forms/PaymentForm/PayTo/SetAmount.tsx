@@ -45,7 +45,7 @@ interface SetAmountOpenTabCallbackValues {
 }
 
 interface FormProps {
-  close: () => void
+  closeDialog: () => void
   defaultCurrency?: CURRENCY
   openTabCallback: (values: SetAmountOpenTabCallbackValues) => void
   recipient: UserDonationRecipient
@@ -70,7 +70,7 @@ const AMOUNT_OPTIONS = {
 }
 
 const SetAmount: React.FC<FormProps> = ({
-  close,
+  closeDialog,
   defaultCurrency,
   openTabCallback,
   recipient,
@@ -293,7 +293,7 @@ const SetAmount: React.FC<FormProps> = ({
           <NoLikerIdButton
             canPayLike={canPayLike}
             canReceiveLike={canReceiveLike}
-            close={close}
+            closeDialog={closeDialog}
             setFieldValue={setFieldValue}
           />
         )}

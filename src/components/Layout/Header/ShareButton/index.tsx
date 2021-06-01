@@ -5,7 +5,7 @@ import { TEXT } from '~/common/enums'
 export const ShareButton: React.FC = () => {
   return (
     <ShareDialog>
-      {({ open: openShareDialog }) => (
+      {({ openDialog: openShareDialog }) => (
         <Button
           aria-label={TEXT.zh_hant.back}
           bgColor="half-black"

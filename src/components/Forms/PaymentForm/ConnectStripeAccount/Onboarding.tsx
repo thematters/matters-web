@@ -8,7 +8,7 @@ import { ViewerStripeAccount } from './__generated__/ViewerStripeAccount'
 
 interface Props {
   nextStep: () => void
-  close: () => void
+  closeDialog: () => void
 }
 
 const VIEWER_STRIPE_ACCOUNT = gql`

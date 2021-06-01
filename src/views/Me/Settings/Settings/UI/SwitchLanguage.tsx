@@ -30,10 +30,10 @@ const SwitchLanguage = () => {
         ),
       }}
     >
-      {({ open, ref }) => (
+      {({ openDialog, ref }) => (
         <Form.List.Item
           title={<Translate id="settingsLanguage" />}
-          onClick={open}
+          onClick={openDialog}
           rightText={LANG_TEXT_MAP[lang]}
           ref={ref}
         />

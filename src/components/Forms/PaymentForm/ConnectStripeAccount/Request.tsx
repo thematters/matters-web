@@ -12,13 +12,13 @@ import {
 import { ADD_TOAST, PAYOUT_COUNTRY } from '~/common/enums'
 import { parseFormSubmitErrors, sleep } from '~/common/utils'
 
-import CountryOption from './CountryOption'
+import SelectCountry from './SelectCountry'
 
 import { ConnectStripeAccount } from './__generated__/ConnectStripeAccount'
 
 interface Props {
   nextStep: () => void
-  close: () => void
+  closeDialog: () => void
 }
 
 const CONNECT_STRIPE_ACCOUNT = gql`
@@ -29,7 +29,7 @@ const CONNECT_STRIPE_ACCOUNT = gql`
   }
 `
 
-const Request: React.FC<Props> = ({ nextStep, close }) => {
+const Request: React.FC<Props> = ({ nextStep, closeDialog }) => {
   const { lang } = useContext(LanguageContext)
   const [country, setCountry] = useState<PAYOUT_COUNTRY>(
     PAYOUT_COUNTRY.HongKong
@@ -61,7 +61,7 @@ const Request: React.FC<Props> = ({ nextStep, close }) => {
   return (
     <>
       <Dialog.Content hasGrow>
-        <CountryOption country={country} onClick={setCountry} />
+        <SelectCountry country={country} onChange={setCountry} />
         <Spacer size="xxloose" />
       </Dialog.Content>
 
@@ -77,7 +77,7 @@ const Request: React.FC<Props> = ({ nextStep, close }) => {
         <Dialog.Footer.Button
           bgColor="grey-lighter"
           textColor="black"
-          onClick={close}
+          onClick={closeDialog}
         >
           <Translate id="cancel" />
         </Dialog.Footer.Button>

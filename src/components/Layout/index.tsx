@@ -51,10 +51,9 @@ export const Layout: React.FC & {
 interface MainProps {
   aside?: React.ReactNode
   bgColor?: 'grey-lighter'
-  inEditor?: boolean
 }
 
-const Main: React.FC<MainProps> = ({ aside, bgColor, inEditor, children }) => {
+const Main: React.FC<MainProps> = ({ aside, bgColor, children }) => {
   const { isInPath, isPathStartWith } = useRoute()
   const isInSearch = isInPath('SEARCH')
   const isInArticleDetail = isInPath('ARTICLE_DETAIL')
@@ -65,18 +64,17 @@ const Main: React.FC<MainProps> = ({ aside, bgColor, inEditor, children }) => {
   })
   const onboardingTasks = data?.clientPreference.onboardingTasks
   const showOnboardingTasks =
-    !inEditor && !isInArticleDetail && !isInCircle && onboardingTasks?.enabled
+    !isInArticleDetail && !isInCircle && onboardingTasks?.enabled
 
   const articleClasses = classNames({
     'l-col-three-mid': true,
     [`bg-${bgColor}`]: !!bgColor,
-    hasNavBar: !isInArticleDetail && !inEditor,
+    hasNavBar: !isInArticleDetail,
     hasOnboardingTasks: showOnboardingTasks,
   })
   const asideClasses = classNames({
     'l-col-three-right': true,
     'u-lg-down-hide': true,
-    'in-editor': inEditor,
   })
 
   return (
@@ -92,7 +90,7 @@ const Main: React.FC<MainProps> = ({ aside, bgColor, inEditor, children }) => {
       </article>
 
       <aside className={asideClasses}>
-        {!isInSearch && !inEditor && (
+        {!isInSearch && (
           <section className="u-lg-down-hide">
             <SearchBar />
           </section>
@@ -106,11 +104,9 @@ const Main: React.FC<MainProps> = ({ aside, bgColor, inEditor, children }) => {
 
         {aside}
 
-        {!inEditor && (
-          <section className="u-lg-down-hide">
-            <SideFooter />
-          </section>
-        )}
+        <section className="u-lg-down-hide">
+          <SideFooter />
+        </section>
       </aside>
 
       <style jsx>{styles}</style>

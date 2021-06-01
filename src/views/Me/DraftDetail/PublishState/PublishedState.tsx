@@ -63,7 +63,7 @@ const PublishedState = ({ draft }: { draft: PublishStateDraft }) => {
         </Dialog.Footer.Button>
       }
     >
-      {({ open }) => <BasePublishedState openShareDialog={open} />}
+      {({ openDialog }) => <BasePublishedState openShareDialog={openDialog} />}
     </ShareDialog>
   )
 }

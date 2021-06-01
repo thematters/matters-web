@@ -158,7 +158,7 @@ const Request: React.FC<FormProps> = ({
       {closeDialog && (
         <Dialog.Header
           title="changeEmail"
-          close={closeDialog}
+          closeDialog={closeDialog}
           rightButton={SubmitButton}
         />
       )}

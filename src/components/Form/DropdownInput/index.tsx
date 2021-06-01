@@ -53,8 +53,8 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
   const [search, setSearch] = useState('')
   const [debouncedSearch] = useDebounce(search, INPUT_DEBOUNCE)
   const [showDropdown, setShowDropdown] = useState(false)
-  const open = () => setShowDropdown(true)
-  const close = () => setShowDropdown(false)
+  const openDropdown = () => setShowDropdown(true)
+  const closeDropdown = () => setShowDropdown(false)
 
   const dropdownContentCallback = (params: any) => {
     setSearch('')
@@ -84,7 +84,7 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
     search,
     items,
     callback: dropdownContentCallback,
-    hideDropdown: close,
+    hideDropdown: closeDropdown,
     width: getDropdownSize(),
   }
 
@@ -102,7 +102,7 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
           zIndex={dropdownZIndex}
           appendTo={document.getElementById(dropdownAppendTo) || document.body}
           onShown={hidePopperOnClick}
-          onClickOutside={close}
+          onClickOutside={closeDropdown}
           visible={showDropdown}
         >
           <input
@@ -117,7 +117,7 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
               }
 
               if (search) {
-                open()
+                openDropdown()
               }
             }}
             onFocus={(e) => {
@@ -126,7 +126,7 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
               }
 
               if (search) {
-                open()
+                openDropdown()
               }
             }}
             onChange={(e) => {
@@ -139,9 +139,9 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
               setSearch(trimedValue)
 
               if (trimedValue) {
-                open()
+                openDropdown()
               } else {
-                close()
+                closeDropdown()
               }
             }}
           />

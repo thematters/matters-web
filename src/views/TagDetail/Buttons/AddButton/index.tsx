@@ -11,10 +11,8 @@ import {
   useMutation,
   ViewerContext,
 } from '~/components'
-import {
-  SearchSelectDialog,
-  SearchSelectNode,
-} from '~/components/Dialogs/SearchSelectDialog'
+import { SearchSelectDialog } from '~/components/Dialogs/SearchSelectDialog'
+import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
 import ADD_ARTICLES_TAGS from '~/components/GQL/mutations/addArticlesTags'
 import updateTagArticlesCount from '~/components/GQL/updates/tagArticlesCount'
 
@@ -60,14 +58,14 @@ const BaseDropdownActions = ({
         title: 'moreActions',
       }}
     >
-      {({ open, ref }) => (
+      {({ openDialog, ref }) => (
         <Button
           size={['5rem', '2rem']}
           textColor="gold"
           textActiveColor="white"
           bgActiveColor="gold"
           borderColor="gold"
-          onClick={open}
+          onClick={openDialog}
           aria-haspopup="true"
           ref={ref}
         >
@@ -154,7 +152,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
       onSave={addArticlesToTag(false)}
       saving={loading}
     >
-      {({ open: openAddMyArticlesDialog }) => (
+      {({ openDialog: openAddMyArticlesDialog }) => (
         <BaseDropdownActions
           {...props}
           openAddMyArticlesDialog={

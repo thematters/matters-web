@@ -39,6 +39,7 @@ import {
   ARTICLE_DETAIL_PUBLIC,
   ARTICLE_TRANSLATION,
 } from './gql'
+import License from './License'
 import MetaInfo from './MetaInfo'
 import RelatedArticles from './RelatedArticles'
 import State from './State'
@@ -383,6 +384,8 @@ const ArticleDetail = () => {
           {features.payment && canReadFullContent && (
             <SupportWidget article={article} />
           )}
+
+          <License license={article.license} />
 
           {collectionCount > 0 && (
             <section className="block">

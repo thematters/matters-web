@@ -8,7 +8,7 @@ import SideDrawerNav from './SideDrawerNav'
 const MeButton = () => {
   const viewer = useContext(ViewerContext)
   const [showNav, setShowNav] = useState(false)
-  const close = () => setShowNav(false)
+  const closeNav = () => setShowNav(false)
 
   if (!viewer.isAuthed) {
     return null
@@ -20,7 +20,7 @@ const MeButton = () => {
         <MeAvatar user={viewer} size="lg" />
       </Button>
 
-      <SideDrawerNav isOpen={showNav} onDismiss={close} />
+      <SideDrawerNav isOpen={showNav} onDismiss={closeNav} />
     </>
   )
 }

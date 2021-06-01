@@ -235,7 +235,7 @@ const Init: React.FC<FormProps> = ({
       {closeDialog && (
         <Dialog.Header
           title="circleCreation"
-          close={closeDialog}
+          closeDialog={closeDialog}
           rightButton={SubmitButton}
         />
       )}

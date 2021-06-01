@@ -15,8 +15,8 @@ interface FingerprintButtonProps {
 const FingerprintButton = ({ article }: FingerprintButtonProps) => {
   return (
     <FingerprintDialog article={article}>
-      {({ open }) => (
-        <Button onClick={open}>
+      {({ openDialog }) => (
+        <Button onClick={openDialog}>
           <TextIcon
             icon={<IconIPFS24 />}
             size="xs"

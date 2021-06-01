@@ -1,8 +1,0 @@
-.optionContent {
-  max-height: 50vh;
-  overflow: auto;
-
-  @media (--sm-up) {
-    max-height: 30vh;
-  }
-}

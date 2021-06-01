@@ -1,0 +1,33 @@
+.container {
+  padding: var(--spacing-base);
+}
+
+.switch {
+  & header {
+    @mixin flex-center-space-between;
+  }
+
+  & h3 {
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-normal);
+    line-height: 1rem;
+  }
+
+  & .description {
+    margin-top: var(--spacing-xx-tight);
+    font-size: var(--font-size-sm-s);
+    color: var(--color-grey-darker);
+  }
+}
+
+.widget {
+  margin-top: var(--spacing-base);
+  background: var(--color-grey-lighter);
+  border-radius: var(--spacing-x-tight);
+
+  & .circle {
+    background: var(--color-white);
+    border: 1px solid var(--color-line-grey-light);
+    border-radius: var(--spacing-x-tight);
+  }
+}

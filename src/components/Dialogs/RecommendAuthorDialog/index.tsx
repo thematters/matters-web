@@ -9,29 +9,29 @@ import Feed, { FeedType } from './Feed'
 import styles from './styles.css'
 
 interface Props {
-  children?: ({ open }: { open: () => void }) => React.ReactNode
+  children?: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
 const BaseRecommendAuthorDialog = ({ children }: Props) => {
   const defaultType = 'trendy'
 
-  const { show, open, close } = useDialogSwitch(true)
+  const { show, openDialog, closeDialog } = useDialogSwitch(true)
   const [feed, setFeed] = useState<FeedType>(defaultType)
 
   const isActive = feed === 'active'
   const isAppreciated = feed === 'appreciated'
   const isTrendy = feed === 'trendy'
 
-  useEventListener(OPEN_RECOMMEND_AUTHOR_DIALOG, open)
+  useEventListener(OPEN_RECOMMEND_AUTHOR_DIALOG, openDialog)
 
   return (
     <>
-      {children && children({ open })}
+      {children && children({ openDialog })}
 
-      <Dialog size="sm" isOpen={show} onDismiss={close} fixedHeight>
+      <Dialog size="sm" isOpen={show} onDismiss={closeDialog} fixedHeight>
         <Dialog.Header
           title={<Translate id="followAuthor" />}
-          close={close}
+          closeDialog={closeDialog}
           closeTextId="cancel"
         />
 
@@ -72,14 +72,14 @@ const BaseRecommendAuthorDialog = ({ children }: Props) => {
 }
 
 export const RecommendAuthorDialog = (props: Props) => {
-  const Children = ({ open }: { open: () => void }) => {
-    useEventListener(OPEN_RECOMMEND_AUTHOR_DIALOG, open)
-    return <>{props.children && props.children({ open })}</>
+  const Children = ({ openDialog }: { openDialog: () => void }) => {
+    useEventListener(OPEN_RECOMMEND_AUTHOR_DIALOG, openDialog)
+    return <>{props.children && props.children({ openDialog })}</>
   }
 
   return (
     <Dialog.Lazy mounted={<BaseRecommendAuthorDialog {...props} />}>
-      {({ open }) => <Children open={open} />}
+      {({ openDialog }) => <Children openDialog={openDialog} />}
     </Dialog.Lazy>
   )
 }

@@ -9,7 +9,7 @@ interface AddArticlesButtonProps {
 const AddArticlesButton = ({ circle }: AddArticlesButtonProps) => {
   return (
     <AddCircleArticleDialog circle={circle}>
-      {({ open: openAddCircleArticlesDialog }) => (
+      {({ openDialog: openAddCircleArticlesDialog }) => (
         <Button
           size={['7rem', '2rem']}
           textColor="gold"

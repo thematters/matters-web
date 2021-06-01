@@ -1,7 +1,7 @@
 import { Dialog, Translate } from '~/components'
 
 interface Props {
-  close: () => void
+  closeDialog: () => void
 }
 
 const InvitationSentTitle = (
@@ -18,14 +18,14 @@ const InvitationSentTitle = (
  * Usage:
  *
  * ```tsx
- *   <InvitationSent close={close} />
+ *   <InvitationSent closeDialog={closeDialog} />
  * ```
  */
-const InvitationSent = ({ close }: Props) => (
+const InvitationSent = ({ closeDialog }: Props) => (
   <>
     <Dialog.Header
       title={InvitationSentTitle}
-      close={close}
+      closeDialog={closeDialog}
       closeTextId="cancel"
       mode="hidden"
     />
@@ -45,7 +45,7 @@ const InvitationSent = ({ close }: Props) => (
       <Dialog.Footer.Button
         bgColor="grey-lighter"
         textColor="black"
-        onClick={close}
+        onClick={closeDialog}
       >
         <Translate id="understood" />
       </Dialog.Footer.Button>

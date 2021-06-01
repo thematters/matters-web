@@ -53,14 +53,14 @@ const Owner = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
         </section>
         <section className="right">
           <TagAdoptionDialog>
-            {({ open }) => (
+            {({ openDialog }) => (
               <Button
                 size={['3rem', '1.5rem']}
                 textColor="green"
                 textActiveColor="white"
                 bgActiveColor="green"
                 borderColor="green"
-                onClick={viewer.isFrozen ? forbid : open}
+                onClick={viewer.isFrozen ? forbid : openDialog}
               >
                 <TextIcon weight="md" size="xs">
                   <Translate zh_hant="認領" zh_hans="认领" en="maintain" />

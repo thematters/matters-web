@@ -19,13 +19,13 @@ import { StagingNode } from '~/components/SearchSelect/StagingArea'
 import { REFETCH_CIRCLE_PENDING_INVITES } from '~/common/enums'
 
 import { INVITATIONS_CIRCLE } from './gql'
-import PeriodOption from './Option'
+import SelectPeriod from './SelectPeriod'
 
 import { InviteCircle } from '~/components/GQL/mutations/__generated__/InviteCircle'
 import { InvitationsCircle } from './__generated__/InvitationsCircle'
 
 interface Props {
-  close: () => void
+  closeDialog: () => void
   confirm: () => void
   invitees: StagingNode[]
 }
@@ -39,7 +39,7 @@ interface Props {
  *   <BaseInviteePreSend />
  * ```
  */
-const BaseInviteePreSend = ({ close, confirm, invitees }: Props) => {
+const BaseInviteePreSend = ({ closeDialog, confirm, invitees }: Props) => {
   const { getQuery } = useRoute()
   const name = getQuery('name')
 
@@ -135,7 +135,7 @@ const BaseInviteePreSend = ({ close, confirm, invitees }: Props) => {
         </List>
       </Dialog.Content>
 
-      <PeriodOption period={period} onClick={setPeriod} />
+      <SelectPeriod period={period} onChange={setPeriod} />
 
       <Dialog.Footer>
         <Dialog.Footer.Button onClick={() => send()} loading={inviteLoading}>
@@ -149,7 +149,7 @@ const BaseInviteePreSend = ({ close, confirm, invitees }: Props) => {
         <Dialog.Footer.Button
           bgColor="grey-lighter"
           textColor="black"
-          onClick={close}
+          onClick={closeDialog}
         >
           <Translate zh_hant="暫時不要" zh_hans="暂时不要" en="Not Now" />
         </Dialog.Footer.Button>
@@ -164,14 +164,14 @@ const BaseInviteePreSend = ({ close, confirm, invitees }: Props) => {
  * Usage:
  *
  * ```tsx
- *   <InviteePreSend close={close} confirm={confirm} invitees={[]} />
+ *   <InviteePreSend closeDialog={closeDialog} confirm={confirm} invitees={[]} />
  * ```
  */
 const InviteePreSend = (props: Props) => (
   <>
     <Dialog.Header
       title={<Translate zh_hant="寄出邀請" zh_hans="寄出邀请" en="Send" />}
-      close={close}
+      closeDialog={props.closeDialog}
       closeTextId="cancel"
     />
     <BaseInviteePreSend {...props} />

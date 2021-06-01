@@ -18,12 +18,12 @@ interface ResetPasswordData {
 
 interface DonationDialogProps {
   callbackButtons?: React.ReactNode
-  close: () => void
+  closeDialog: () => void
 }
 
 const PaymentResetPasswordForm = ({
   callbackButtons,
-  close,
+  closeDialog,
 }: DonationDialogProps) => {
   const viewer = useContext(ViewerContext)
   const { currStep, forward } = useStep<Step>('resetPasswordRequest')
@@ -59,7 +59,7 @@ const PaymentResetPasswordForm = ({
       )}
 
       {isResetPasswordComplete && (
-        <Complete closeDialog={close} callbackButtons={callbackButtons} />
+        <Complete closeDialog={closeDialog} callbackButtons={callbackButtons} />
       )}
     </>
   )

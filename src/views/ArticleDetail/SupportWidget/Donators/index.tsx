@@ -21,10 +21,10 @@ const Donators = ({ article }: DonatorsProps) => {
 
   return (
     <DonatorsDialog article={article}>
-      {({ open }) => (
+      {({ openDialog }) => (
         <button
           type="button"
-          onClick={open}
+          onClick={openDialog}
           disabled={donatorsCount <= 0}
           aria-label={TEXT.zh_hant.viewDonators}
           aria-haspopup="true"

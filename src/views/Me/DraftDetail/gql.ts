@@ -31,6 +31,7 @@ export const editMetaFragment = gql`
         ...DigestRichCirclePublic
       }
     }
+    license
   }
   ${ArticleDigestDropdown.fragments.article}
   ${assetFragment}
@@ -144,8 +145,16 @@ export const SET_ACCESS = gql`
     $id: ID!
     $circle: ID
     $accessType: ArticleAccessType
+    $license: ArticleLicenseType
   ) {
-    putDraft(input: { id: $id, circle: $circle, accessType: $accessType }) {
+    putDraft(
+      input: {
+        id: $id
+        circle: $circle
+        accessType: $accessType
+        license: $license
+      }
+    ) {
       id
       access {
         type
@@ -153,6 +162,7 @@ export const SET_ACCESS = gql`
           ...DigestRichCirclePublic
         }
       }
+      license
     }
   }
   ${CircleDigest.Rich.fragments.circle.public}

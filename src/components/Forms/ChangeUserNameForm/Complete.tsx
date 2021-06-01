@@ -18,7 +18,7 @@ const Complete = ({
       {closeDialog && (
         <Dialog.Header
           title="changeUserName"
-          close={closeDialog}
+          closeDialog={closeDialog}
           closeTextId="close"
           mode="inner"
         />

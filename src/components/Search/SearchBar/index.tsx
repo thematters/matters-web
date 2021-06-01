@@ -51,8 +51,8 @@ export const SearchBar: React.FC<SearchBarProps> = ({
 
   // dropdown
   const [showDropdown, setShowDropdown] = useState(false)
-  const close = () => setShowDropdown(false)
-  const open = () => setShowDropdown(true)
+  const closeDropdown = () => setShowDropdown(false)
+  const openDropdown = () => setShowDropdown(true)
 
   useEffect(() => {
     if (onChange) {
@@ -70,7 +70,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
           q: values.q.slice(0, 100),
         })
         router.push(path.href)
-        close()
+        closeDropdown()
       }}
     >
       {({ values, handleSubmit, handleChange }) => {
@@ -114,7 +114,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
             trigger={undefined}
             appendTo={process.browser ? document.body : undefined}
             placement="bottom-start"
-            onClickOutside={close}
+            onClickOutside={closeDropdown}
             visible={showDropdown}
             zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
           >
@@ -128,10 +128,10 @@ export const SearchBar: React.FC<SearchBarProps> = ({
                 onChange={(e) => {
                   handleChange(e)
                   setSearch(e.target.value)
-                  open()
+                  openDropdown()
                 }}
-                onFocus={open}
-                onClick={open}
+                onFocus={openDropdown}
+                onClick={openDropdown}
               />
 
               <SearchButton />

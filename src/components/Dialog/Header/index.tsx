@@ -9,8 +9,8 @@ import { BackButton, CloseButton, RightButton } from './Button'
 import styles from './styles.css'
 
 export interface HeaderProps {
-  title: TextId | React.ReactElement
-  close: () => void
+  title: TextId | React.ReactNode
+  closeDialog?: () => void
   closeTextId?: TextId
   mode?: 'hidden' | 'inner'
   leftButton?: React.ReactNode
@@ -19,7 +19,7 @@ export interface HeaderProps {
 
 const BaseHeader = ({
   title,
-  close,
+  closeDialog,
   closeTextId,
   mode,
   leftButton,
@@ -41,9 +41,14 @@ const BaseHeader = ({
         </span>
       </h1>
 
-      <section className="left">
-        {leftButton || <CloseButton close={close} textId={closeTextId} />}
-      </section>
+      {(leftButton || closeDialog) && (
+        <section className="left">
+          {leftButton ||
+            (closeDialog ? (
+              <CloseButton closeDialog={closeDialog} textId={closeTextId} />
+            ) : null)}
+        </section>
+      )}
 
       {rightButton && <section className="right">{rightButton}</section>}
 
