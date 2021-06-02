@@ -34,7 +34,11 @@ const License: React.FC<LicenseProps> = ({ license }) => {
           weight="md"
           spacing="xtight"
         >
-          <Translate zh_hant="NO RIGHTS RESERVED 版權聲明" zh_hans="" />
+          <Translate
+            zh_hant="NO RIGHTS RESERVED 版權聲明"
+            zh_hans="NO RIGHTS RESERVED 版权声明"
+            en="NO RIGHTS RESERVED"
+          />
         </TextIcon>
       )}
 
@@ -50,7 +54,11 @@ const License: React.FC<LicenseProps> = ({ license }) => {
           weight="md"
           spacing="xtight"
         >
-          <Translate zh_hant="ALL RIGHTS RESERVED 版權聲明" zh_hans="" />
+          <Translate
+            zh_hant="ALL RIGHTS RESERVED 版權聲明"
+            zh_hans="ALL RIGHTS RESERVED 版权声明"
+            en="ALL RIGHTS RESERVED"
+          />
         </TextIcon>
       )}
 
@@ -69,7 +77,11 @@ const License: React.FC<LicenseProps> = ({ license }) => {
           weight="md"
           spacing="xtight"
         >
-          <Translate zh_hant="CC BY-NC-ND 2.0 版權聲明" zh_hans="" />
+          <Translate
+            zh_hant="CC BY-NC-ND 2.0 版權聲明"
+            zh_hans="CC BY-NC-ND 2.0 版权声明"
+            en="CC BY-NC-ND 2.0"
+          />
         </TextIcon>
       )}
 
