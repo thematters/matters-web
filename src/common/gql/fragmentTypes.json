@@ -1,1 +1,77 @@
-{"__schema":{"types":[{"kind":"INTERFACE","name":"Node","possibleTypes":[{"name":"Article"},{"name":"User"},{"name":"Comment"},{"name":"Tag"},{"name":"Circle"},{"name":"Draft"}]},{"kind":"INTERFACE","name":"Connection","possibleTypes":[{"name":"ArticleConnection"},{"name":"CommentConnection"},{"name":"FolloweeDonatedArticleConnection"},{"name":"TagConnection"},{"name":"UserConnection"},{"name":"CircleConnection"},{"name":"MemberConnection"},{"name":"InvitationConnection"},{"name":"DraftConnection"},{"name":"ReadHistoryConnection"},{"name":"RecentSearchConnection"},{"name":"AppreciationConnection"},{"name":"NoticeConnection"},{"name":"TransactionConnection"},{"name":"ResponseConnection"},{"name":"SearchResultConnection"},{"name":"OAuthClientConnection"},{"name":"SkippedListItemsConnection"}]},{"kind":"UNION","name":"Invitee","possibleTypes":[{"name":"Person"},{"name":"User"}]},{"kind":"INTERFACE","name":"Notice","possibleTypes":[{"name":"UserNotice"},{"name":"ArticleNotice"},{"name":"ArticleArticleNotice"},{"name":"CommentNotice"},{"name":"CommentCommentNotice"},{"name":"ArticleTagNotice"},{"name":"TagNotice"},{"name":"TransactionNotice"},{"name":"CircleNotice"},{"name":"OfficialAnnouncementNotice"}]},{"kind":"UNION","name":"TransactionTarget","possibleTypes":[{"name":"Article"},{"name":"Circle"},{"name":"Transaction"}]},{"kind":"UNION","name":"Response","possibleTypes":[{"name":"Article"},{"name":"Comment"}]}]}}
+{
+  "__schema": {
+    "types": [
+      {
+        "kind": "INTERFACE",
+        "name": "Node",
+        "possibleTypes": [
+          { "name": "Article" },
+          { "name": "User" },
+          { "name": "Comment" },
+          { "name": "Tag" },
+          { "name": "Circle" },
+          { "name": "Draft" }
+        ]
+      },
+      {
+        "kind": "INTERFACE",
+        "name": "Connection",
+        "possibleTypes": [
+          { "name": "ArticleConnection" },
+          { "name": "CommentConnection" },
+          { "name": "FolloweeDonatedArticleConnection" },
+          { "name": "TagConnection" },
+          { "name": "UserConnection" },
+          { "name": "CircleConnection" },
+          { "name": "MemberConnection" },
+          { "name": "InvitationConnection" },
+          { "name": "DraftConnection" },
+          { "name": "ReadHistoryConnection" },
+          { "name": "RecentSearchConnection" },
+          { "name": "AppreciationConnection" },
+          { "name": "NoticeConnection" },
+          { "name": "TransactionConnection" },
+          { "name": "ResponseConnection" },
+          { "name": "SearchResultConnection" },
+          { "name": "OAuthClientConnection" },
+          { "name": "SkippedListItemsConnection" }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "Invitee",
+        "possibleTypes": [{ "name": "Person" }, { "name": "User" }]
+      },
+      {
+        "kind": "INTERFACE",
+        "name": "Notice",
+        "possibleTypes": [
+          { "name": "UserNotice" },
+          { "name": "ArticleNotice" },
+          { "name": "ArticleArticleNotice" },
+          { "name": "CommentNotice" },
+          { "name": "CommentCommentNotice" },
+          { "name": "ArticleTagNotice" },
+          { "name": "TagNotice" },
+          { "name": "TransactionNotice" },
+          { "name": "CircleNotice" },
+          { "name": "OfficialAnnouncementNotice" }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "TransactionTarget",
+        "possibleTypes": [
+          { "name": "Article" },
+          { "name": "Circle" },
+          { "name": "Transaction" }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "Response",
+        "possibleTypes": [{ "name": "Article" }, { "name": "Comment" }]
+      }
+    ]
+  }
+}
