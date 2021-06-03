@@ -1,16 +1,10 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import {
-  Button,
-  CopyToClipboard,
-  IconCopy16,
-  Spinner,
-  Translate,
-} from '~/components'
+import { Spinner, Translate } from '~/components'
 
-import { TEXT } from '~/common/enums'
-
+import AricleSecret from './ArticleSecret'
+import CopyButton from './CopyButton'
 import styles from './styles.css'
 
 import { Gateways } from './__generated__/Gateways'
@@ -23,21 +17,13 @@ const GATEWAYS = gql`
   }
 `
 
-const CopyButton = ({ text }: { text: string }) => {
-  return (
-    <CopyToClipboard text={text}>
-      <Button
-        spacing={['xtight', 'xtight']}
-        bgActiveColor="grey-lighter"
-        aira-label={TEXT.zh_hant.copy}
-      >
-        <IconCopy16 color="grey" />
-      </Button>
-    </CopyToClipboard>
-  )
-}
-
-const FingerprintDialogContent = ({ dataHash }: { dataHash: string }) => {
+const FingerprintDialogContent = ({
+  dataHash,
+  showSecret,
+}: {
+  dataHash: string
+  showSecret: boolean
+}) => {
   const { loading, data } = useQuery<Gateways>(GATEWAYS)
 
   const gateways = data?.official.gatewayUrls || []
@@ -62,6 +48,9 @@ const FingerprintDialogContent = ({ dataHash }: { dataHash: string }) => {
           />
         </section>
       </section>
+
+      {/* secret */}
+      {showSecret && <AricleSecret />}
 
       {/* gateways */}
       <section className="gateways">
@@ -126,6 +115,19 @@ const FingerprintDialogContent = ({ dataHash }: { dataHash: string }) => {
             en={` is the fingerpint of your work on IPFS, you can use it to retrive your work from any IPFS node.`}
           />
         </p>
+
+        {showSecret && (
+          <p>
+            <b>
+              <Translate id="secret" />
+            </b>
+            <Translate
+              zh_hans={` 是非公开文章加密解密所使用的钥匙，只有掌握了密钥才能够解锁 IPFS 中的非公开文章。请妥善保管密钥，勿随意泄漏。`}
+              zh_hant={` 是非公開文章加密解密所使用的鑰匙，只有掌握了密鑰才能夠解鎖 IPFS 中的非公開文章。請妥善保管密鑰，勿隨意洩漏。`}
+              en={` is the encryption and decryption key for non-public articles, one can only unlock non-public articles on IPFS with it. Please keep the secret confidential and only share it with people you trust.`}
+            />
+          </p>
+        )}
 
         <p>
           <b>
