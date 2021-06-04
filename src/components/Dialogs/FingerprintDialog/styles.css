@@ -30,6 +30,18 @@ header {
   }
 }
 
+.secret {
+  margin-bottom: var(--spacing-loose);
+
+  & input {
+    padding: var(--spacing-x-tight) var(--spacing-base);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-sm);
+    color: var(--color-matters-green);
+    background: var(--color-green-lighter);
+  }
+}
+
 .gateways {
   margin-bottom: var(--spacing-base);
 
@@ -69,6 +81,10 @@ header {
       }
     }
   }
+}
+
+.subtitle {
+  color: var(--color-grey);
 }
 
 .help {
