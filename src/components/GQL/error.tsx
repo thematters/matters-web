@@ -2,7 +2,7 @@ import { ApolloError } from 'apollo-client'
 
 import { Error, LoginButton, Translate } from '~/components'
 
-import { ADD_TOAST, ErrorCodeKeys, ERROR_CODES } from '~/common/enums'
+import { ADD_TOAST, ErrorCodeKeys, ERROR_CODES, TEXT } from '~/common/enums'
 
 export const getErrorCodes = (error?: ApolloError): ErrorCodeKeys[] => {
   const errorCodes: ErrorCodeKeys[] = []
@@ -20,6 +20,12 @@ export const getErrorCodes = (error?: ApolloError): ErrorCodeKeys[] => {
 
   return errorCodes
 }
+
+/**
+ * Check error code has corresponding text
+ */
+export const isErrorCodeValid = (code: string) =>
+  code in TEXT.zh_hant && code in TEXT.zh_hans && code in TEXT.en
 
 /**
  * Check mutation on error to throw a `<Toast>`
@@ -48,6 +54,15 @@ export const mutationOnError = (
     errorMap[code] = true
   })
 
+  // Get error code and check corresponding content, if it's invalid
+  // then expose error code
+  const errorCode = errorCodes[0] || ''
+  const errorContent = isErrorCodeValid(errorCode) ? (
+    <Translate id={errorCode} />
+  ) : (
+    errorCode
+  )
+
   /**
    * Catch auth errors
    */
@@ -60,7 +75,7 @@ export const mutationOnError = (
       new CustomEvent(ADD_TOAST, {
         detail: {
           color: 'red',
-          content: <Translate id={errorCodes[0]} />,
+          content: errorContent,
           customButton: <LoginButton isPlain />,
           buttonPlacement: 'center',
         },
@@ -75,7 +90,7 @@ export const mutationOnError = (
       new CustomEvent(ADD_TOAST, {
         detail: {
           color: 'red',
-          content: <Translate id={errorCodes[0]} />,
+          content: errorContent,
         },
       })
     )
