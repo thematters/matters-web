@@ -52,6 +52,9 @@ const CONNECT_SRC = [
   process.env.NEXT_PUBLIC_API_URL,
   process.env.NEXT_PUBLIC_OAUTH_API_URL,
 
+  // Sentry
+  'sentry.matters.one',
+
   // GA
   'www.google-analytics.com',
 
