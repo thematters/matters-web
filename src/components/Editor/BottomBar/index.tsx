@@ -4,6 +4,7 @@ import {
   IconCollection24,
   IconHashTag24,
   IconImage24,
+  IconSettings24,
   Layout,
   TextIcon,
   Translate,
@@ -17,8 +18,10 @@ import {
 } from '~/components/Editor'
 import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
 
+import { TEXT } from '~/common/enums'
+
 import SetCover from '../SetCover'
-import Management from './Management'
+import AccessDialog from './AccessDialog'
 import styles from './styles.css'
 
 import { SearchExclude } from '@/__generated__/globalTypes'
@@ -151,14 +154,31 @@ const BottomBar: React.FC<BottomBarProps> = ({
             </SearchSelectDialog>
 
             {/* Circle & License */}
-            <Management
+            <AccessDialog
               circle={circle}
               accessType={accessType}
               license={license}
               editAccess={editAccess}
               accessSaving={accessSaving}
               canToggleCircle={canToggleCircle}
-            />
+            >
+              {({ openDialog }) => (
+                <button
+                  aria-label={TEXT.zh_hant.articleManagement}
+                  aria-haspopup="true"
+                  onClick={openDialog}
+                >
+                  <TextIcon
+                    icon={<IconSettings24 size="md" />}
+                    size="md-s"
+                    weight="md"
+                    spacing="xtight"
+                  >
+                    <Translate zh_hant="管理" zh_hans="管理" en="Manage" />
+                  </TextIcon>
+                </button>
+              )}
+            </AccessDialog>
           </section>
         </section>
       </Layout.FixedMain>
