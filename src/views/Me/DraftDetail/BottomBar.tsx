@@ -1,4 +1,10 @@
 import { toDigestTagPlaceholder } from '~/components'
+import {
+  SetCollectionProps,
+  SetCoverProps,
+  SetTagsProps,
+  ToggleAccessProps,
+} from '~/components/Editor'
 import BottomBar from '~/components/Editor/BottomBar'
 
 import { ENTITY_TYPE } from '~/common/enums'
@@ -34,33 +40,42 @@ const EditDraftBottomBar = ({ draft, ownCircles }: BottomBarProps) => {
   const hasOwnCircle = ownCircles && ownCircles.length >= 1
   const tags = (draft.tags || []).map(toDigestTagPlaceholder)
 
+  const coverProps: SetCoverProps = {
+    cover: draft.cover,
+    assets: draft.assets,
+    editCover,
+    refetchAssets: refetch,
+    entityId: draft.id,
+    entityType: ENTITY_TYPE.draft,
+    coverSaving,
+  }
+  const tagsProps: SetTagsProps = {
+    tags,
+    editTags,
+    tagsSaving,
+  }
+  const collectionProps: SetCollectionProps = {
+    collection: draft?.collection?.edges?.map(({ node }) => node) || [],
+    editCollection,
+    collectionSaving,
+  }
+  const accessProps: ToggleAccessProps = {
+    circle: draft?.access.circle,
+    accessType: draft.access.type,
+    license: draft.license,
+    editAccess,
+    accessSaving,
+    canToggleCircle: !!hasOwnCircle,
+  }
+
   return (
     <BottomBar
       saving={false}
       disabled={collectionSaving || coverSaving || tagsSaving || accessSaving}
-      // cover
-      cover={draft.cover}
-      assets={draft.assets}
-      editCover={editCover}
-      refetchAssets={refetch}
-      entityId={draft.id}
-      entityType={ENTITY_TYPE.draft}
-      coverSaving={coverSaving}
-      // tags
-      tags={tags}
-      editTags={editTags}
-      tagsSaving={tagsSaving}
-      // collection
-      collection={draft?.collection?.edges?.map(({ node }) => node) || []}
-      editCollection={editCollection}
-      collectionSaving={collectionSaving}
-      // circle
-      circle={draft?.access.circle}
-      accessType={draft.access.type}
-      license={draft.license}
-      editAccess={editAccess}
-      accessSaving={accessSaving}
-      canToggleCircle={!!hasOwnCircle}
+      {...coverProps}
+      {...tagsProps}
+      {...collectionProps}
+      {...accessProps}
     />
   )
 }

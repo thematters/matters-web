@@ -1,16 +1,16 @@
 import { IconImage24 } from '~/components'
 
-import SetCoverDialog, { BaseSetCoverDialogProps } from '../../SetCover/Dialog'
+import SetCover, { SetCoverProps } from '../../SetCover'
 import Box from '../Box'
 import styles from './styles.css'
 
 export type SidebarCoverProps = {
   disabled?: boolean
-} & BaseSetCoverDialogProps
+} & SetCoverProps
 
 const SidebarCover = ({ cover, disabled, ...restProps }: SidebarCoverProps) => {
   return (
-    <SetCoverDialog cover={cover} {...restProps}>
+    <SetCover.Dialog cover={cover} {...restProps}>
       {({ openDialog: openSetCoverDialog }) => (
         <Box
           icon={<IconImage24 size="md" />}
@@ -29,7 +29,7 @@ const SidebarCover = ({ cover, disabled, ...restProps }: SidebarCoverProps) => {
           )}
         </Box>
       )}
-    </SetCoverDialog>
+    </SetCover.Dialog>
   )
 }
 

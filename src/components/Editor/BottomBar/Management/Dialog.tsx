@@ -4,14 +4,14 @@ import { Dialog, Translate, useDialogSwitch } from '~/components'
 
 import ToggleAccess, { ToggleAccessProps } from '../../ToggleAccess'
 
-type MoreActionDialogProps = {
+type ManagementDialogProps = {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 } & ToggleAccessProps
 
-const BaseMoreActionDialog = ({
+const BaseManagementDialog = ({
   children,
   ...props
-}: MoreActionDialogProps) => {
+}: ManagementDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
   return (
@@ -39,8 +39,8 @@ const BaseMoreActionDialog = ({
   )
 }
 
-export const MoreActionDialog = (props: MoreActionDialogProps) => (
-  <Dialog.Lazy mounted={<BaseMoreActionDialog {...props} />}>
+export const ManagementDialog = (props: ManagementDialogProps) => (
+  <Dialog.Lazy mounted={<BaseManagementDialog {...props} />}>
     {({ openDialog }) => <>{props.children({ openDialog })}</>}
   </Dialog.Lazy>
 )

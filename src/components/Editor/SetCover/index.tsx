@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { Dialog, Translate } from '~/components'
 
+import SetCoverDialog from './Dialog'
 import Selector from './Selector'
 import styles from './styles.css'
 import Uploader, { UploadEntity } from './Uploader'
@@ -20,7 +21,7 @@ export type SetCoverProps = {
   coverSaving?: boolean
 } & UploadEntity
 
-const SetCover = ({
+const SetCover: React.FC<SetCoverProps> & { Dialog: typeof SetCoverDialog } = ({
   onBack,
   onClose,
 
@@ -31,7 +32,7 @@ const SetCover = ({
   coverSaving,
 
   ...uploadEntity
-}: SetCoverProps) => {
+}) => {
   // cover
   const filter = (ast: Asset) => ast.path === cover
   const [selected, setSelected] = useState(assets.find(filter))
@@ -90,5 +91,7 @@ const SetCover = ({
     </>
   )
 }
+
+SetCover.Dialog = SetCoverDialog
 
 export default SetCover

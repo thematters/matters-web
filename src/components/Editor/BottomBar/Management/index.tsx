@@ -3,12 +3,12 @@ import { Button, IconSettings24, TextIcon, Translate } from '~/components'
 import { TEXT } from '~/common/enums'
 
 import { ToggleAccessProps } from '../../ToggleAccess'
-import { MoreActionDialog } from './Dialog'
+import { ManagementDialog } from './Dialog'
 
-type MoreActionProps = ToggleAccessProps
+type ManagementProps = ToggleAccessProps
 
-const MoreAction: React.FC<MoreActionProps> = (props) => (
-  <MoreActionDialog {...props}>
+const Management: React.FC<ManagementProps> = (props) => (
+  <ManagementDialog {...props}>
     {({ openDialog }) => (
       <Button
         aria-label={TEXT.zh_hant.articleManagement}
@@ -25,7 +25,7 @@ const MoreAction: React.FC<MoreActionProps> = (props) => (
         </TextIcon>
       </Button>
     )}
-  </MoreActionDialog>
+  </ManagementDialog>
 )
 
-export default MoreAction
+export default Management

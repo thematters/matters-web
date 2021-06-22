@@ -9,34 +9,28 @@ import {
   Translate,
 } from '~/components'
 import { SearchSelectDialog } from '~/components/Dialogs/SearchSelectDialog'
+import {
+  SetCollectionProps,
+  SetCoverProps,
+  SetTagsProps,
+  ToggleAccessProps,
+} from '~/components/Editor'
 import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
 
-import { SetCoverProps } from '../SetCover'
-import SetCoverDialog from '../SetCover/Dialog'
-import { ToggleAccessProps } from '../ToggleAccess'
-import MoreActions from './MoreActions'
+import SetCover from '../SetCover'
+import Management from './Management'
 import styles from './styles.css'
 
 import { SearchExclude } from '@/__generated__/globalTypes'
 import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
-import { Asset } from '~/components/GQL/fragments/__generated__/Asset'
 import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
 
 export type BottomBarProps = {
-  editCover: (asset?: Asset) => Promise<any>
-  coverSaving: boolean
-
-  collection: ArticleDigestDropdownArticle[]
-  editCollection: (articles: ArticleDigestDropdownArticle[]) => Promise<any>
-  collectionSaving?: boolean
-
-  tags: DigestTag[]
-  editTags: (tag: DigestTag[]) => Promise<any>
-  tagsSaving: boolean
-
   saving: boolean
   disabled: boolean
-} & Omit<SetCoverProps, 'onEdit' | 'onBack'> &
+} & SetCoverProps &
+  SetCollectionProps &
+  SetTagsProps &
   ToggleAccessProps
 
 /**
@@ -81,7 +75,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
         <section className="content">
           <section className="inner">
             {/* Cover */}
-            <SetCoverDialog
+            <SetCover.Dialog
               cover={cover}
               editCover={editCover}
               assets={assets}
@@ -102,7 +96,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
                   </TextIcon>
                 </button>
               )}
-            </SetCoverDialog>
+            </SetCover.Dialog>
 
             {/* Tags */}
             <SearchSelectDialog
@@ -157,7 +151,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
             </SearchSelectDialog>
 
             {/* Circle & License */}
-            <MoreActions
+            <Management
               circle={circle}
               accessType={accessType}
               license={license}

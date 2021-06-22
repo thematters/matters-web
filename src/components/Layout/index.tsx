@@ -70,13 +70,12 @@ const Main: React.FC<MainProps> = ({ aside, bgColor, inEditor, children }) => {
   const articleClasses = classNames({
     'l-col-three-mid': true,
     [`bg-${bgColor}`]: !!bgColor,
-    hasNavBar: !isInArticleDetail && !inEditor,
+    hasNavBar: !isInArticleDetail,
     hasOnboardingTasks: showOnboardingTasks,
   })
   const asideClasses = classNames({
     'l-col-three-right': true,
     'u-lg-down-hide': true,
-    'in-editor': inEditor,
   })
 
   return (

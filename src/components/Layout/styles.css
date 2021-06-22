@@ -47,9 +47,5 @@ aside {
     margin-right: 0 !important;
     border-right: none;
     border-left: none;
-
-    &.in-editor {
-      padding-top: var(--global-header-height);
-    }
   }
 }

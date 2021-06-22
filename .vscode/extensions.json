@@ -1,6 +1,5 @@
 {
     "recommendations": [
-        "stripe.vscode-stripe",
         "esbenp.prettier-vscode",
         "editorconfig.editorconfig",
         "dbaeumer.vscode-eslint",

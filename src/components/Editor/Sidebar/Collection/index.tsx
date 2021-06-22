@@ -1,5 +1,6 @@
 import { ArticleDigestDropdown, IconCollection24 } from '~/components'
 import { SearchSelectDialog } from '~/components/Dialogs/SearchSelectDialog'
+import { SetCollectionProps } from '~/components/Editor'
 import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
 
 import Box from '../Box'
@@ -8,17 +9,14 @@ import styles from './styles.css'
 import { SearchExclude } from '@/__generated__/globalTypes'
 import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
 
-export interface SidebarCollectionProps {
-  collection: ArticleDigestDropdownArticle[]
-  editCollection: (articles: ArticleDigestDropdownArticle[]) => any
-  saving?: boolean
+export type SidebarCollectionProps = {
   disabled?: boolean
-}
+} & SetCollectionProps
 
 const SidebarCollection = ({
   collection,
   editCollection,
-  saving,
+  collectionSaving,
   disabled,
 }: SidebarCollectionProps) => {
   return (
@@ -31,7 +29,7 @@ const SidebarCollection = ({
         editCollection(nodes as ArticleDigestDropdownArticle[])
       }
       nodes={collection}
-      saving={saving}
+      saving={collectionSaving}
     >
       {({ openDialog: openAddMyArticlesDialog }) => (
         <Box

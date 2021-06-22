@@ -29,7 +29,7 @@ const EditDraftCollection = ({ draft, disabled }: SidebarProps) => {
     <Sidebar.Collection
       collection={articles}
       editCollection={edit}
-      saving={saving}
+      collectionSaving={saving}
       disabled={disabled}
     />
   )

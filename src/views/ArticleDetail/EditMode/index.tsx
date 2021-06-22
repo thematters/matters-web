@@ -11,6 +11,12 @@ import {
   Throw404,
   useResponsive,
 } from '~/components'
+import {
+  SetCollectionProps,
+  SetCoverProps,
+  SetTagsProps,
+  ToggleAccessProps,
+} from '~/components/Editor'
 import BottomBar from '~/components/Editor/BottomBar'
 import Sidebar from '~/components/Editor/Sidebar'
 import { QueryError, useImperativeQuery } from '~/components/GQL'
@@ -154,7 +160,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
     )
   }
 
-  const coverProps = {
+  const coverProps: SetCoverProps = {
     cover: cover?.path,
     assets,
     coverSaving: false,
@@ -163,18 +169,18 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
     entityId: article.id,
     entityType: ENTITY_TYPE.article as ENTITY_TYPE.article,
   }
-  const tagProps = {
+  const tagsProps: SetTagsProps = {
     tags,
     tagsSaving: false,
     editTags: async (t: DigestTag[]) => editTags(t),
   }
-  const collectionProps = {
+  const collectionProps: SetCollectionProps = {
     collection,
     collectionSaving: false,
     editCollection: async (c: ArticleDigestDropdownArticle[]) =>
       editCollection(c),
   }
-  const accessProps = {
+  const accessProps: ToggleAccessProps = {
     circle,
     accessType,
     license,
@@ -191,7 +197,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
             aside={
               <section className="sidebar">
                 <Sidebar.Cover {...coverProps} />
-                <Sidebar.Tags {...tagProps} />
+                <Sidebar.Tags {...tagsProps} />
                 <Sidebar.Collection {...collectionProps} />
                 <Sidebar.Management {...accessProps} />
                 <style jsx>{styles}</style>
@@ -211,7 +217,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
               right={
                 <EditModeHeader
                   {...coverProps}
-                  {...tagProps}
+                  {...tagsProps}
                   {...collectionProps}
                   {...accessProps}
                   article={article}
@@ -249,7 +255,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
                 saving={loading}
                 disabled={loading}
                 {...coverProps}
-                {...tagProps}
+                {...tagsProps}
                 {...collectionProps}
                 {...accessProps}
               />
