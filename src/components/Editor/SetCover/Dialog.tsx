@@ -14,9 +14,9 @@ export type BaseSetCoverDialogProps = {
   cover?: string
   assets: Asset[]
 
-  onEdit: (asset?: Asset) => any
+  editCover: (asset?: Asset) => any
   refetchAssets: () => any
-  saving?: boolean
+  coverSaving?: boolean
 } & UploadEntity
 
 type SetCoverDialogProps = BaseSetCoverDialogProps & {
@@ -27,8 +27,8 @@ const BaseSetCoverDialog = ({
   cover,
   assets,
 
-  onEdit,
-  saving,
+  editCover,
+  coverSaving,
 
   children,
 
@@ -44,7 +44,7 @@ const BaseSetCoverDialog = ({
         <DynamicSetCover
           cover={cover}
           onClose={closeDialog}
-          onEdit={onEdit}
+          editCover={editCover}
           assets={assets}
           {...uploadEntity}
         />

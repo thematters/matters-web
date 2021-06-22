@@ -8,10 +8,11 @@ import {
   useEditDraftCollection,
   useEditDraftCover,
   useEditDraftTags,
-} from './hooks'
+} from '../hooks'
+import styles from './styles.css'
 
 import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
-import { EditMetaDraft } from './__generated__/EditMetaDraft'
+import { EditMetaDraft } from '../__generated__/EditMetaDraft'
 
 interface BaseSidebarProps {
   draft: EditMetaDraft
@@ -26,8 +27,8 @@ const EditDraftCollection = ({ draft, disabled }: SidebarProps) => {
 
   return (
     <Sidebar.Collection
-      articles={articles}
-      onEdit={edit}
+      collection={articles}
+      editCollection={edit}
       saving={saving}
       disabled={disabled}
     />
@@ -43,9 +44,9 @@ const EditDraftCover = ({ draft, disabled }: SidebarProps) => {
       assets={draft.assets}
       entityId={draft.id}
       entityType={ENTITY_TYPE.draft}
-      onEdit={edit}
+      editCover={edit}
       refetchAssets={refetch}
-      saving={saving}
+      coverSaving={saving}
       disabled={disabled}
     />
   )
@@ -58,7 +59,7 @@ const EditDraftTags = ({ draft, disabled }: SidebarProps) => {
   return (
     <Sidebar.Tags
       tags={tags}
-      onEdit={edit}
+      editTags={edit}
       saving={saving}
       disabled={disabled}
     />
@@ -90,12 +91,14 @@ const EditDraftSidebar = (props: BaseSidebarProps) => {
   const disabled = isPending || isPublished
 
   return (
-    <>
+    <section className="sidebar">
       <EditDraftCover {...props} disabled={disabled} />
       <EditDraftTags {...props} disabled={disabled} />
       <EditDraftCollection {...props} disabled={disabled} />
       <EditDraftCircle {...props} disabled={disabled} />
-    </>
+
+      <style jsx>{styles}</style>
+    </section>
   )
 }
 

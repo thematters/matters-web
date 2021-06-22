@@ -50,10 +50,6 @@ aside {
 
     &.in-editor {
       padding-top: var(--global-header-height);
-
-      & :global(> *) {
-        margin-bottom: var(--spacing-loose);
-      }
     }
   }
 }

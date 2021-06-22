@@ -137,12 +137,12 @@ const BaseEditorSettingsDialog = ({
           <DynamicSetCover
             onBack={() => forward('list')}
             cover={cover}
-            onEdit={editCover}
+            editCover={editCover}
             assets={assets}
             refetchAssets={refetchAssets}
             entityId={entityId}
             entityType={entityType}
-            saving={coverSaving}
+            coverSaving={coverSaving}
           />
         )}
 

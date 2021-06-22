@@ -9,15 +9,15 @@ import { SearchExclude } from '@/__generated__/globalTypes'
 import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
 
 export interface SidebarCollectionProps {
-  articles: ArticleDigestDropdownArticle[]
-  onEdit: (articles: ArticleDigestDropdownArticle[]) => any
+  collection: ArticleDigestDropdownArticle[]
+  editCollection: (articles: ArticleDigestDropdownArticle[]) => any
   saving?: boolean
   disabled?: boolean
 }
 
 const SidebarCollection = ({
-  articles,
-  onEdit,
+  collection,
+  editCollection,
   saving,
   disabled,
 }: SidebarCollectionProps) => {
@@ -28,9 +28,9 @@ const SidebarCollection = ({
       searchType="Article"
       searchExclude={SearchExclude.blocked}
       onSave={(nodes: SearchSelectNode[]) =>
-        onEdit(nodes as ArticleDigestDropdownArticle[])
+        editCollection(nodes as ArticleDigestDropdownArticle[])
       }
-      nodes={articles}
+      nodes={collection}
       saving={saving}
     >
       {({ openDialog: openAddMyArticlesDialog }) => (
@@ -40,9 +40,9 @@ const SidebarCollection = ({
           onClick={openAddMyArticlesDialog}
           disabled={disabled}
         >
-          {articles.length > 0 && (
+          {collection.length > 0 && (
             <ul>
-              {articles.map((article) => (
+              {collection.map((article) => (
                 <li key={article.id}>
                   <ArticleDigestDropdown
                     article={article}

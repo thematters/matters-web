@@ -83,12 +83,12 @@ const BottomBar: React.FC<BottomBarProps> = ({
             {/* Cover */}
             <SetCoverDialog
               cover={cover}
-              onEdit={editCover}
+              editCover={editCover}
               assets={assets}
               refetchAssets={refetchAssets}
               entityId={entityId}
               entityType={entityType}
-              saving={coverSaving}
+              coverSaving={coverSaving}
             >
               {({ openDialog: openSetCoverDialog }) => (
                 <button type="button" onClick={openSetCoverDialog}>

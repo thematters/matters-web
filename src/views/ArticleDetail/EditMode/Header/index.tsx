@@ -1,105 +1,56 @@
-import { useState } from 'react'
-
 import { Button, TextIcon, Translate, useMutation } from '~/components'
 import {
   ConfirmStepContentProps,
   EditorSettingsDialog,
+  EditorSettingsDialogProps,
 } from '~/components/Editor/SettingsDialog'
-import { useImperativeQuery } from '~/components/GQL'
 
-import {
-  ADD_TOAST,
-  ENTITY_TYPE,
-  MAX_ARTICLE_REVISION_DIFF,
-} from '~/common/enums'
+import { ADD_TOAST, MAX_ARTICLE_REVISION_DIFF } from '~/common/enums'
 import { measureDiffs } from '~/common/utils'
 
 import ConfirmRevisedPublishDialogContent from './ConfirmRevisedPublishDialogContent'
-import { EDIT_ARTICLE, EDIT_MODE_ARTICLE_ASSETS } from './gql'
+import { EDIT_ARTICLE } from './gql'
 import styles from './styles.css'
 
-import {
-  ArticleAccessType,
-  ArticleLicenseType,
-} from '@/__generated__/globalTypes'
-import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
-import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
-import { Asset } from '~/components/GQL/fragments/__generated__/Asset'
-import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
-import { EditModeArticle_article } from '../__generated__/EditModeArticle'
+import { ArticleDetailPublic_article } from '../../__generated__/ArticleDetailPublic'
 import { EditArticle } from './__generated__/EditArticle'
-import { EditModeArticleAssets } from './__generated__/EditModeArticleAssets'
 
 type EditModeHeaderProps = {
-  article: EditModeArticle_article
+  article: ArticleDetailPublic_article
   editData: Record<string, any>
+  coverId?: string
 
   revisionCountLeft: number
   isOverRevisionLimit: boolean
   isSameHash: boolean
   isEditDisabled: boolean
-  isReviseDisabled: boolean
 
   onSaved: () => any
-}
+} & Omit<
+  EditorSettingsDialogProps,
+  | 'saving'
+  | 'disabled'
+  | 'confirmButtonText'
+  | 'cancelButtonText'
+  | 'onConfirm'
+  | 'ConfirmStepContent'
+  | 'children'
+>
 
 const EditModeHeader = ({
   article,
   editData,
+  coverId,
 
   revisionCountLeft,
   isOverRevisionLimit,
   isSameHash,
   isEditDisabled,
-  isReviseDisabled,
 
   onSaved,
+
+  ...restProps
 }: EditModeHeaderProps) => {
-  // cover
-  const assets = article?.assets || []
-  const currCover = assets.find((asset) => asset.path === article?.cover)
-  const [cover, editCover] = useState<Asset | undefined>(currCover)
-  const refetchAssets = useImperativeQuery<EditModeArticleAssets>(
-    EDIT_MODE_ARTICLE_ASSETS,
-    {
-      variables: { mediaHash: article.mediaHash },
-      fetchPolicy: 'network-only',
-    }
-  )
-
-  // tags
-  const [tags, editTags] = useState<DigestTag[]>(article.tags || [])
-  const [collection, editCollection] = useState<ArticleDigestDropdownArticle[]>(
-    article.collection.edges?.map(({ node }) => node) || []
-  )
-
-  // access
-  const [circle, editCircle] = useState<DigestRichCirclePublic | null>(
-    article.access.circle
-  )
-  const [accessType, editAccessType] = useState<ArticleAccessType>(
-    article.access.type
-  )
-  const [license, editLicense] = useState<ArticleLicenseType>(article.license)
-  const ownCircles = article?.author.ownCircles
-  const hasOwnCircle = ownCircles && ownCircles.length >= 1
-  const editAccess = (
-    addToCircle: boolean,
-    paywalled: boolean,
-    newLicense: ArticleLicenseType
-  ) => {
-    if (!ownCircles) {
-      return
-    }
-
-    editCircle(addToCircle ? ownCircles[0] : null)
-    editAccessType(
-      paywalled ? ArticleAccessType.paywall : ArticleAccessType.public
-    )
-    editLicense(newLicense)
-  }
-
-  // UI
   const { content, currText, initText } = editData
   const diff = measureDiffs(initText || '', currText || '') || 0
   const diffCount = `${diff}`.padStart(2, '0')
@@ -107,6 +58,7 @@ const EditModeHeader = ({
   const isRevised = diff > 0
 
   // save or republish
+  const { tags, collection, circle, accessType, license } = restProps
   const [editArticle, { loading }] = useMutation<EditArticle>(EDIT_ARTICLE)
   const onSave = async () => {
     try {
@@ -114,7 +66,7 @@ const EditModeHeader = ({
         variables: {
           id: article.id,
           mediaHash: article.mediaHash,
-          cover: cover ? cover.id : null,
+          cover: coverId || null,
           tags: tags.map((tag) => tag.content),
           collection: collection.map(({ id: articleId }) => articleId),
           circle: circle ? circle.id : null,
@@ -190,6 +142,7 @@ const EditModeHeader = ({
       </p>
 
       <EditorSettingsDialog
+        {...restProps}
         saving={loading}
         disabled={loading}
         confirmButtonText={
@@ -206,29 +159,6 @@ const EditModeHeader = ({
         cancelButtonText={<Translate id="cancel" />}
         onConfirm={isRevised ? undefined : onSave}
         ConfirmStepContent={ConfirmStepContent}
-        // cover
-        cover={cover?.path}
-        assets={assets}
-        coverSaving={false}
-        editCover={async (...props) => editCover(...props)}
-        refetchAssets={refetchAssets}
-        entityId={article.id}
-        entityType={ENTITY_TYPE.article}
-        // tags
-        tags={tags}
-        tagsSaving={false}
-        editTags={async (...props) => editTags(...props)}
-        // collection
-        collection={collection}
-        collectionSaving={false}
-        editCollection={async (...props) => editCollection(...props)}
-        // circle
-        circle={circle}
-        accessType={accessType}
-        license={license}
-        accessSaving={false}
-        editAccess={async (...props) => editAccess(...props)}
-        canToggleCircle={!!hasOwnCircle && !isReviseDisabled}
       >
         {({ openDialog: openEditorSettingsDialog }) => (
           <Button

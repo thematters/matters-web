@@ -9,18 +9,23 @@ import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
 
 export interface SidebarTagsProps {
   tags: DigestTag[]
-  onEdit: (tag: DigestTag[]) => any
+  editTags: (tag: DigestTag[]) => any
   saving?: boolean
   disabled?: boolean
 }
 
-const SidebarTags = ({ tags, onEdit, saving, disabled }: SidebarTagsProps) => {
+const SidebarTags = ({
+  tags,
+  editTags,
+  saving,
+  disabled,
+}: SidebarTagsProps) => {
   return (
     <SearchSelectDialog
       title="addTag"
       hint="hintAddTag"
       searchType="Tag"
-      onSave={(nodes: SearchSelectNode[]) => onEdit(nodes as DigestTag[])}
+      onSave={(nodes: SearchSelectNode[]) => editTags(nodes as DigestTag[])}
       nodes={tags}
       saving={saving}
       createTag

@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import _uniq from 'lodash/uniq'
 import dynamic from 'next/dynamic'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import {
   EmptyLayout,
@@ -9,18 +9,31 @@ import {
   ReviseArticleDialog,
   Spinner,
   Throw404,
+  useResponsive,
 } from '~/components'
-import { QueryError } from '~/components/GQL'
+import BottomBar from '~/components/Editor/BottomBar'
+import Sidebar from '~/components/Editor/Sidebar'
+import { QueryError, useImperativeQuery } from '~/components/GQL'
 
-import { MAX_ARTICLE_REVISION_COUNT } from '~/common/enums'
+import { ENTITY_TYPE, MAX_ARTICLE_REVISION_COUNT } from '~/common/enums'
 
 import ConfirmExitDialog from './ConfirmExitDialog'
-import { EDIT_MODE_ARTICLE } from './gql'
+import { EDIT_MODE_ARTICLE, EDIT_MODE_ARTICLE_ASSETS } from './gql'
 import EditModeHeader from './Header'
 import PublishState from './PublishState'
+import styles from './styles.css'
 
+import {
+  ArticleAccessType,
+  ArticleLicenseType,
+} from '@/__generated__/globalTypes'
+import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
+import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
+import { Asset } from '~/components/GQL/fragments/__generated__/Asset'
+import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
 import { ArticleDetailPublic_article } from '../__generated__/ArticleDetailPublic'
 import { EditModeArticle } from './__generated__/EditModeArticle'
+import { EditModeArticleAssets } from './__generated__/EditModeArticleAssets'
 
 interface EditModeProps {
   article: ArticleDetailPublic_article
@@ -34,6 +47,8 @@ const Editor = dynamic(() => import('~/components/Editor/Article'), {
 })
 
 const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
+  const isLargeUp = useResponsive('lg-up')
+
   const [editData, setEditData] = useState<Record<string, any>>({})
   const { data, loading, error } = useQuery<EditModeArticle>(
     EDIT_MODE_ARTICLE,
@@ -42,6 +57,65 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
       fetchPolicy: 'network-only',
     }
   )
+
+  // cover
+  const assets = data?.article?.assets || []
+  const [cover, editCover] = useState<Asset>()
+  const refetchAssets = useImperativeQuery<EditModeArticleAssets>(
+    EDIT_MODE_ARTICLE_ASSETS,
+    {
+      variables: { mediaHash: article.mediaHash },
+      fetchPolicy: 'network-only',
+    }
+  )
+
+  // tags
+  const [tags, editTags] = useState<DigestTag[]>(article.tags || [])
+  const [collection, editCollection] = useState<ArticleDigestDropdownArticle[]>(
+    []
+  )
+
+  // access
+  const [circle, editCircle] = useState<DigestRichCirclePublic | null>(
+    article.access.circle
+  )
+  const [accessType, editAccessType] = useState<ArticleAccessType>(
+    article.access.type
+  )
+  const [license, editLicense] = useState<ArticleLicenseType>(article.license)
+  const ownCircles = data?.article?.author.ownCircles
+  const hasOwnCircle = ownCircles && ownCircles.length >= 1
+  const editAccess = (
+    addToCircle: boolean,
+    paywalled: boolean,
+    newLicense: ArticleLicenseType
+  ) => {
+    if (!ownCircles) {
+      return
+    }
+
+    editCircle(addToCircle ? ownCircles[0] : null)
+    editAccessType(
+      paywalled ? ArticleAccessType.paywall : ArticleAccessType.public
+    )
+    editLicense(newLicense)
+  }
+
+  // update cover & collection from retrieved data
+  useEffect(() => {
+    if (!data?.article) {
+      return
+    }
+
+    // cover, find from `article.assets` since `article.cover` isn't a `Asset`
+    const currCover = assets.find((asset) => asset.path === data.article?.cover)
+    if (currCover) {
+      editCover(currCover)
+    }
+
+    // collection
+    editCollection(data.article.collection.edges?.map(({ node }) => node) || [])
+  }, [data?.article?.id])
 
   /**
    * Render
@@ -62,7 +136,6 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
     )
   }
 
-  const editModeArticle = data?.article
   const drafts = data?.article?.drafts
   const draft = drafts && drafts[0]
   const revisionCountLeft =
@@ -73,7 +146,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
   const isEditDisabled = !isSameHash || isPending
   const isReviseDisabled = isEditDisabled || isOverRevisionLimit
 
-  if (!draft || !editModeArticle) {
+  if (!draft || !data?.article) {
     return (
       <EmptyLayout>
         <Throw404 />
@@ -81,11 +154,51 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
     )
   }
 
+  const coverProps = {
+    cover: cover?.path,
+    assets,
+    coverSaving: false,
+    editCover: async (asset?: Asset) => editCover(asset),
+    refetchAssets,
+    entityId: article.id,
+    entityType: ENTITY_TYPE.article as ENTITY_TYPE.article,
+  }
+  const tagProps = {
+    tags,
+    tagsSaving: false,
+    editTags: async (t: DigestTag[]) => editTags(t),
+  }
+  const collectionProps = {
+    collection,
+    collectionSaving: false,
+    editCollection: async (c: ArticleDigestDropdownArticle[]) =>
+      editCollection(c),
+  }
+  const accessProps = {
+    circle,
+    accessType,
+    license,
+    accessSaving: false,
+    editAccess,
+    canToggleCircle: !!hasOwnCircle && !isReviseDisabled,
+  }
+
   return (
     <>
       <ConfirmExitDialog onExit={onCancel}>
         {({ openDialog: openConfirmExitDialog }) => (
-          <Layout.Main>
+          <Layout.Main
+            aside={
+              <section className="sidebar">
+                <Sidebar.Cover {...coverProps} />
+                <Sidebar.Tags {...tagProps} />
+                <Sidebar.Collection {...collectionProps} />
+                <Sidebar.Management {...accessProps} />
+                <style jsx>{styles}</style>
+              </section>
+            }
+            inEditor
+          >
             <Layout.Header
               left={
                 <Layout.Header.BackButton
@@ -97,13 +210,17 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
               }
               right={
                 <EditModeHeader
-                  article={editModeArticle}
+                  {...coverProps}
+                  {...tagProps}
+                  {...collectionProps}
+                  {...accessProps}
+                  article={article}
                   editData={editData}
+                  coverId={cover?.id}
                   revisionCountLeft={revisionCountLeft}
                   isOverRevisionLimit={isOverRevisionLimit}
                   isSameHash={isSameHash}
                   isEditDisabled={isEditDisabled}
-                  isReviseDisabled={isReviseDisabled}
                   onSaved={onSaved}
                 />
               }
@@ -126,6 +243,17 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
                 upload={async () => ({ id: '', path: '' })}
               />
             </Layout.Spacing>
+
+            {!isLargeUp && (
+              <BottomBar
+                saving={loading}
+                disabled={loading}
+                {...coverProps}
+                {...tagProps}
+                {...collectionProps}
+                {...accessProps}
+              />
+            )}
           </Layout.Main>
         )}
       </ConfirmExitDialog>

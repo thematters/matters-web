@@ -15,9 +15,9 @@ export type SetCoverProps = {
   cover?: string
   assets: Asset[]
 
-  onEdit: (asset?: Asset) => any
+  editCover: (asset?: Asset) => any
   refetchAssets: () => any
-  saving?: boolean
+  coverSaving?: boolean
 } & UploadEntity
 
 const SetCover = ({
@@ -27,8 +27,8 @@ const SetCover = ({
   cover,
   assets,
 
-  onEdit,
-  saving,
+  editCover,
+  coverSaving,
 
   ...uploadEntity
 }: SetCoverProps) => {
@@ -36,7 +36,7 @@ const SetCover = ({
   const filter = (ast: Asset) => ast.path === cover
   const [selected, setSelected] = useState(assets.find(filter))
   const onSave = async () => {
-    const result = await onEdit(selected)
+    const result = await editCover(selected)
     // set selected cover if fallback cover specified by server
     if (cover && cover === result.data?.putDraft?.cover && !selected) {
       setSelected(assets.find(filter))
@@ -65,7 +65,7 @@ const SetCover = ({
           <Dialog.Header.RightButton
             onClick={onSave}
             text={<Translate id="save" />}
-            loading={saving}
+            loading={coverSaving}
           />
         }
       />
