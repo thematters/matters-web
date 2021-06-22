@@ -10,7 +10,7 @@ const SelectPeriod = ({ period, onChange }: Props) => {
 
   return (
     <Form.Select
-      name="period-country"
+      name="select-period"
       label={
         <Translate
           zh_hant="免費資格時長"

@@ -122,24 +122,7 @@ See `.vscode/settings.json`
 
 #### Extensions
 
-##### Recommdation
-
-- [blanu.vscode-styled-jsx](https://marketplace.visualstudio.com/items?itemName=blanu.vscode-styled-jsx)
-- [attilabuti.vscode-mjml](https://marketplace.visualstudio.com/items?itemName=attilabuti.vscode-mjml)
-- [esbenp.prettier-vscode](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
-- [mikestead.dotenv](https://marketplace.visualstudio.com/items?itemName=mikestead.dotenv)
-- [ms-vscode.vscode-typescript-tslint-plugin]()
-- [Prisma.vscode-graphql](https://marketplace.visualstudio.com/items?itemName=Prisma.vscode-graphql)
-- [stylelint.vscode-stylelint](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint)
-- [ricard.postcss](https://marketplace.visualstudio.com/items?itemName=ricard.PostCSS)
-
-##### Optional
-
-- [EditorConfig.EditorConfig](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
-- [wix.vscode-import-cost](https://marketplace.visualstudio.com/items?itemName=wix.vscode-import-cost)
-- [oderwat.indent-rainbow](https://marketplace.visualstudio.com/items?itemName=oderwat.indent-rainbow)
-- [CoenraadS.bracket-pair-colorizer](https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket-pair-colorizer)
-- [naumovs.color-highlight]()
+See `.vscode/extensions.json`
 
 ### Vim
 

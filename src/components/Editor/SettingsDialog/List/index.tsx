@@ -1,9 +1,9 @@
 import { Dialog, Translate } from '~/components'
 
 import { Step } from '../../SettingsDialog'
+import ToggleAccess, { ToggleAccessProps } from '../../ToggleAccess'
 import ListItem from './ListItem'
 import styles from './styles.css'
-import ToggleAccess, { ToggleAccessProps } from './ToggleAccess'
 
 export type SettingsListDialogButtons = {
   confirmButtonText?: string | React.ReactNode
@@ -83,7 +83,9 @@ const SettingsList = ({
             <ListItem.NumberIndicator num={collectionCount} />
           </ListItem>
 
-          <ToggleAccess {...restProps} />
+          <section className="access">
+            <ToggleAccess {...restProps} />
+          </section>
 
           {(confirmButtonText || cancelButtonText) && (
             <Dialog.Footer>

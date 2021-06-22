@@ -34,7 +34,7 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
   canToggleCircle,
 }) => {
   return (
-    <section className="container">
+    <section>
       <section className="switch">
         <header>
           <h3>

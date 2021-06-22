@@ -94,7 +94,7 @@ const SelectLicense = ({ isInCircle, license, onChange }: Props) => {
 
   return (
     <Form.Select
-      name="license-country"
+      name="select-license"
       title={
         <Translate zh_hant="版權聲明" zh_hans="版权声明" en="Article License" />
       }

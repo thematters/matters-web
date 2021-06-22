@@ -2,3 +2,7 @@ ul {
   margin-top: var(--spacing-base);
   overflow: hidden;
 }
+
+.access {
+  padding: var(--spacing-base);
+}

@@ -28,7 +28,7 @@ interface SettingsButtonProps {
   publishable?: boolean
 }
 
-const NextStepButton = ({
+const ConfirmButton = ({
   openDialog,
   disabled,
 }: {
@@ -44,7 +44,7 @@ const NextStepButton = ({
     aria-haspopup="true"
   >
     <TextIcon color="white" size="md" weight="md">
-      <Translate id="nextStep" />
+      <Translate id="publish" />
     </TextIcon>
   </Button>
 )
@@ -111,7 +111,7 @@ const SettingsButton = ({
         canToggleCircle={!!hasOwnCircle}
       >
         {({ openDialog: openEditorSettingsDialog }) => (
-          <NextStepButton
+          <ConfirmButton
             openDialog={openEditorSettingsDialog}
             disabled={disabled}
           />
@@ -121,7 +121,7 @@ const SettingsButton = ({
   }
 
   return (
-    <NextStepButton
+    <ConfirmButton
       openDialog={() =>
         window.dispatchEvent(new CustomEvent(OPEN_LIKE_COIN_DIALOG, {}))
       }

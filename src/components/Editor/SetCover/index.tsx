@@ -9,7 +9,8 @@ import Uploader, { UploadEntity } from './Uploader'
 import { Asset } from '~/components/GQL/fragments/__generated__/Asset'
 
 export type SetCoverProps = {
-  onBack: () => any
+  onBack?: () => any
+  onClose?: () => any
 
   cover?: string
   assets: Asset[]
@@ -21,6 +22,7 @@ export type SetCoverProps = {
 
 const SetCover = ({
   onBack,
+  onClose,
 
   cover,
   assets,
@@ -39,7 +41,12 @@ const SetCover = ({
     if (cover && cover === result.data?.putDraft?.cover && !selected) {
       setSelected(assets.find(filter))
     }
-    onBack()
+
+    if (onBack) {
+      onBack()
+    } else if (onClose) {
+      onClose()
+    }
   }
 
   useEffect(() => {
@@ -50,7 +57,10 @@ const SetCover = ({
     <>
       <Dialog.Header
         title="setCover"
-        leftButton={<Dialog.Header.BackButton onClick={onBack} />}
+        closeDialog={onClose}
+        leftButton={
+          onBack ? <Dialog.Header.BackButton onClick={onBack} /> : undefined
+        }
         rightButton={
           <Dialog.Header.RightButton
             onClick={onSave}

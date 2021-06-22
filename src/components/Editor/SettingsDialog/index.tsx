@@ -3,9 +3,9 @@ import dynamic from 'next/dynamic'
 import { Dialog, Spinner, useDialogSwitch, useStep } from '~/components'
 import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
 
+import { SetCoverProps } from '../SetCover'
+import { ToggleAccessProps } from '../ToggleAccess'
 import SettingsList, { SettingsListDialogButtons } from './List'
-import { ToggleAccessProps } from './List/ToggleAccess'
-import { SetCoverProps } from './SetCover'
 
 import { SearchExclude } from '@/__generated__/globalTypes'
 import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
@@ -51,7 +51,7 @@ const DynamicSearchSelectForm = dynamic(
   { loading: Spinner }
 )
 
-const DynamicSetCover = dynamic(() => import('./SetCover'), {
+const DynamicSetCover = dynamic(() => import('../SetCover'), {
   loading: Spinner,
 })
 
