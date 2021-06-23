@@ -11,6 +11,7 @@ import { ArticleSecret } from './__generated__/ArticleSecret'
 const SECRET = gql`
   query ArticleSecret($mediaHash: String!) {
     article(input: { mediaHash: $mediaHash }) {
+      id
       access {
         secret
       }
