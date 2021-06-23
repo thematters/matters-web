@@ -30,11 +30,11 @@ const SidebarTags = ({
       saving={saving}
       createTag
     >
-      {({ openDialog: openAddMyArticlesDialog }) => (
+      {({ openDialog }) => (
         <Box
           icon={<IconHashTag24 size="md" />}
           title="addTag"
-          onClick={openAddMyArticlesDialog}
+          onClick={openDialog}
           disabled={disabled}
         >
           {tags.length > 0 && (

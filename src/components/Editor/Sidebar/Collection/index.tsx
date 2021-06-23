@@ -31,11 +31,11 @@ const SidebarCollection = ({
       nodes={collection}
       saving={collectionSaving}
     >
-      {({ openDialog: openAddMyArticlesDialog }) => (
+      {({ openDialog }) => (
         <Box
           icon={<IconCollection24 size="md" />}
           title="extendArticle"
-          onClick={openAddMyArticlesDialog}
+          onClick={openDialog}
           disabled={disabled}
         >
           {collection.length > 0 && (

@@ -72,21 +72,31 @@ const BottomBar: React.FC<BottomBarProps> = ({
     'u-area-disable': disabled,
   })
 
+  const coverProps: SetCoverProps = {
+    cover,
+    editCover,
+    assets,
+    refetchAssets,
+    entityId,
+    entityType,
+    coverSaving,
+  }
+  const accessProps: ToggleAccessProps = {
+    circle,
+    accessType,
+    license,
+    editAccess,
+    accessSaving,
+    canToggleCircle,
+  }
+
   return (
     <section className={bottomBarClasses}>
       <Layout.FixedMain>
         <section className="content">
           <section className="inner">
             {/* Cover */}
-            <SetCover.Dialog
-              cover={cover}
-              editCover={editCover}
-              assets={assets}
-              refetchAssets={refetchAssets}
-              entityId={entityId}
-              entityType={entityType}
-              coverSaving={coverSaving}
-            >
+            <SetCover.Dialog {...coverProps}>
               {({ openDialog: openSetCoverDialog }) => (
                 <button type="button" onClick={openSetCoverDialog}>
                   <TextIcon
@@ -113,8 +123,8 @@ const BottomBar: React.FC<BottomBarProps> = ({
               saving={tagsSaving}
               createTag
             >
-              {({ openDialog: openAddMyArticlesDialog }) => (
-                <button type="button" onClick={openAddMyArticlesDialog}>
+              {({ openDialog }) => (
+                <button type="button" onClick={openDialog}>
                   <TextIcon
                     icon={<IconHashTag24 size="md" />}
                     size="md-s"
@@ -139,8 +149,8 @@ const BottomBar: React.FC<BottomBarProps> = ({
               nodes={collection}
               saving={collectionSaving}
             >
-              {({ openDialog: openAddMyArticlesDialog }) => (
-                <button type="button" onClick={openAddMyArticlesDialog}>
+              {({ openDialog }) => (
+                <button type="button" onClick={openDialog}>
                   <TextIcon
                     icon={<IconCollection24 size="md" />}
                     size="md-s"
@@ -154,14 +164,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
             </SearchSelectDialog>
 
             {/* Circle & License */}
-            <AccessDialog
-              circle={circle}
-              accessType={accessType}
-              license={license}
-              editAccess={editAccess}
-              accessSaving={accessSaving}
-              canToggleCircle={canToggleCircle}
-            >
+            <AccessDialog {...accessProps}>
               {({ openDialog }) => (
                 <button
                   aria-label={TEXT.zh_hant.articleManagement}

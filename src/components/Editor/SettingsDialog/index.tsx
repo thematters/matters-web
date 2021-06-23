@@ -101,6 +101,24 @@ const BaseEditorSettingsDialog = ({
   // const isCircle = currStep === 'circle'
   const isConfirm = currStep === 'confirm'
 
+  const coverProps: SetCoverProps = {
+    cover,
+    editCover,
+    assets,
+    refetchAssets,
+    entityId,
+    entityType,
+    coverSaving,
+  }
+  const accessProps: ToggleAccessProps = {
+    circle,
+    editAccess,
+    accessSaving,
+    accessType,
+    license,
+    canToggleCircle,
+  }
+
   return (
     <>
       {children({ openDialog })}
@@ -118,26 +136,12 @@ const BaseEditorSettingsDialog = ({
             cover={cover}
             collectionCount={collection.length}
             tagsCount={tags.length}
-            circle={circle}
-            editAccess={editAccess}
-            accessSaving={accessSaving}
-            accessType={accessType}
-            license={license}
-            canToggleCircle={canToggleCircle}
+            {...accessProps}
           />
         )}
 
         {isCover && (
-          <DynamicSetCover
-            onBack={() => forward('list')}
-            cover={cover}
-            editCover={editCover}
-            assets={assets}
-            refetchAssets={refetchAssets}
-            entityId={entityId}
-            entityType={entityType}
-            coverSaving={coverSaving}
-          />
+          <DynamicSetCover onBack={() => forward('list')} {...coverProps} />
         )}
 
         {isCollection && (

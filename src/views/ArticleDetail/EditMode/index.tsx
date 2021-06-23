@@ -167,7 +167,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
     editCover: async (asset?: Asset) => editCover(asset),
     refetchAssets,
     entityId: article.id,
-    entityType: ENTITY_TYPE.article as ENTITY_TYPE.article,
+    entityType: ENTITY_TYPE.article,
   }
   const tagsProps: SetTagsProps = {
     tags,
