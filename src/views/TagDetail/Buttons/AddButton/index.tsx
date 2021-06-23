@@ -152,12 +152,10 @@ const DropdownActions = (props: DropdownActionsProps) => {
       onSave={addArticlesToTag(false)}
       saving={loading}
     >
-      {({ openDialog: openAddMyArticlesDialog }) => (
+      {({ openDialog }) => (
         <BaseDropdownActions
           {...props}
-          openAddMyArticlesDialog={
-            viewer.isFrozen ? forbid : openAddMyArticlesDialog
-          }
+          openAddMyArticlesDialog={viewer.isFrozen ? forbid : openDialog}
         />
       )}
     </SearchSelectDialog>

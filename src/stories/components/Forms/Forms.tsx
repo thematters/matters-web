@@ -90,7 +90,7 @@ const Forms = () => (
       {/* Form.Select */}
       <li>
         <Form.Select
-          name="period-country"
+          name="select-period"
           onChange={() => null}
           label={
             <Translate

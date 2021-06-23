@@ -3,7 +3,6 @@ import gql from 'graphql-tag'
 import { Tag } from '~/components'
 import { fragments as EditorFragments } from '~/components/Editor/fragments'
 import articleFragments from '~/components/GQL/fragments/article'
-import assetFragment from '~/components/GQL/fragments/asset'
 
 /**
  * Note:
@@ -59,16 +58,4 @@ export const EDIT_ARTICLE = gql`
   ${Tag.fragments.tag}
   ${articleFragments.articleCollection}
   ${EditorFragments.draft}
-`
-
-export const EDIT_MODE_ARTICLE_ASSETS = gql`
-  query EditModeArticleAssets($mediaHash: String!) {
-    article(input: { mediaHash: $mediaHash }) {
-      id
-      assets {
-        ...Asset
-      }
-    }
-  }
-  ${assetFragment}
 `

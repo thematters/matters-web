@@ -1,7 +1,3 @@
-.container {
-  padding: var(--spacing-base);
-}
-
 .switch {
   & header {
     @mixin flex-center-space-between;

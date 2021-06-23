@@ -53,3 +53,15 @@ export const EDIT_MODE_ARTICLE = gql`
   ${EditorFragments.draft}
   ${CircleDigest.Rich.fragments.circle.public}
 `
+
+export const EDIT_MODE_ARTICLE_ASSETS = gql`
+  query EditModeArticleAssets($mediaHash: String!) {
+    article(input: { mediaHash: $mediaHash }) {
+      id
+      assets {
+        ...Asset
+      }
+    }
+  }
+  ${assetFragment}
+`

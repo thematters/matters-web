@@ -8,6 +8,7 @@ import {
   Layout,
   Spinner,
   Throw404,
+  useResponsive,
   useRoute,
 } from '~/components'
 import { QueryError, useMutation } from '~/components/GQL'
@@ -16,10 +17,12 @@ import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 import { ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
 import { stripHtml } from '~/common/utils'
 
+import BottomBar from './BottomBar'
 import { DRAFT_DETAIL, SET_CONTENT } from './gql'
 import PublishState from './PublishState'
 import SaveStatus from './SaveStatus'
 import SettingsButton from './SettingsButton'
+import Sidebar from './Sidebar'
 
 import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
 import { DraftDetailQuery } from './__generated__/DraftDetailQuery'
@@ -31,6 +34,7 @@ const Editor = dynamic(() => import('~/components/Editor/Article'), {
 })
 
 const DraftDetail = () => {
+  const isLargeUp = useResponsive('lg-up')
   const { getQuery } = useRoute()
   const id = getQuery('draftId')
 
@@ -140,7 +144,10 @@ const DraftDetail = () => {
   }
 
   return (
-    <Layout.Main>
+    <Layout.Main
+      aside={<Sidebar draft={draft} ownCircles={ownCircles} />}
+      inEditor
+    >
       <Layout.Header
         left={<Layout.Header.BackButton />}
         right={
@@ -170,6 +177,8 @@ const DraftDetail = () => {
       <Layout.Spacing>
         <Editor draft={draft} update={update} upload={upload} />
       </Layout.Spacing>
+
+      {!isLargeUp && <BottomBar draft={draft} ownCircles={ownCircles} />}
     </Layout.Main>
   )
 }

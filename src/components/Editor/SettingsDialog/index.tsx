@@ -1,15 +1,18 @@
 import dynamic from 'next/dynamic'
 
 import { Dialog, Spinner, useDialogSwitch, useStep } from '~/components'
+import {
+  SetCollectionProps,
+  SetCoverProps,
+  SetTagsProps,
+  ToggleAccessProps,
+} from '~/components/Editor'
 import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
 
 import SettingsList, { SettingsListDialogButtons } from './List'
-import { ToggleAccessProps } from './List/ToggleAccess'
-import { SetCoverProps } from './SetCover'
 
 import { SearchExclude } from '@/__generated__/globalTypes'
 import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
-import { Asset } from '~/components/GQL/fragments/__generated__/Asset'
 import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
 
 export type Step =
@@ -26,23 +29,14 @@ export type ConfirmStepContentProps = {
 }
 
 export type EditorSettingsDialogProps = {
-  editCover: (asset?: Asset) => Promise<any>
-  coverSaving: boolean
-
-  collection: ArticleDigestDropdownArticle[]
-  editCollection: (articles: ArticleDigestDropdownArticle[]) => Promise<any>
-  collectionSaving?: boolean
-
-  tags: DigestTag[]
-  editTags: (tag: DigestTag[]) => Promise<any>
-  tagsSaving: boolean
-
   saving: boolean
   disabled: boolean
   ConfirmStepContent: React.FC<ConfirmStepContentProps>
 
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
-} & Omit<SetCoverProps, 'onEdit' | 'onBack'> &
+} & SetCoverProps &
+  SetCollectionProps &
+  SetTagsProps &
   ToggleAccessProps &
   SettingsListDialogButtons
 
@@ -51,7 +45,7 @@ const DynamicSearchSelectForm = dynamic(
   { loading: Spinner }
 )
 
-const DynamicSetCover = dynamic(() => import('./SetCover'), {
+const DynamicSetCover = dynamic(() => import('../SetCover'), {
   loading: Spinner,
 })
 
@@ -107,6 +101,24 @@ const BaseEditorSettingsDialog = ({
   // const isCircle = currStep === 'circle'
   const isConfirm = currStep === 'confirm'
 
+  const coverProps: SetCoverProps = {
+    cover,
+    editCover,
+    assets,
+    refetchAssets,
+    entityId,
+    entityType,
+    coverSaving,
+  }
+  const accessProps: ToggleAccessProps = {
+    circle,
+    editAccess,
+    accessSaving,
+    accessType,
+    license,
+    canToggleCircle,
+  }
+
   return (
     <>
       {children({ openDialog })}
@@ -121,26 +133,15 @@ const BaseEditorSettingsDialog = ({
             confirmButtonText={confirmButtonText}
             cancelButtonText={cancelButtonText}
             onConfirm={onConfirm}
-            circle={circle}
-            editAccess={editAccess}
-            accessSaving={accessSaving}
-            accessType={accessType}
-            license={license}
-            canToggleCircle={canToggleCircle}
+            cover={cover}
+            collectionCount={collection.length}
+            tagsCount={tags.length}
+            {...accessProps}
           />
         )}
 
         {isCover && (
-          <DynamicSetCover
-            onBack={() => forward('list')}
-            cover={cover}
-            onEdit={editCover}
-            assets={assets}
-            refetchAssets={refetchAssets}
-            entityId={entityId}
-            entityType={entityType}
-            saving={coverSaving}
-          />
+          <DynamicSetCover onBack={() => forward('list')} {...coverProps} />
         )}
 
         {isCollection && (

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { Dialog, Translate } from '~/components'
-import SelectLicense from '~/components/Editor/SettingsDialog/List/ToggleAccess/SelectLicense'
+import SelectLicense from '~/components/Editor/ToggleAccess/SelectLicense'
 
 import { ArticleLicenseType } from '@/__generated__/globalTypes'
 

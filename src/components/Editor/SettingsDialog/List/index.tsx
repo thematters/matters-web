@@ -1,14 +1,9 @@
-import {
-  Card,
-  Dialog,
-  IconArrowRight16,
-  TextIcon,
-  Translate,
-} from '~/components'
+import { Dialog, Translate } from '~/components'
 
 import { Step } from '../../SettingsDialog'
+import ToggleAccess, { ToggleAccessProps } from '../../ToggleAccess'
+import ListItem from './ListItem'
 import styles from './styles.css'
-import ToggleAccess, { ToggleAccessProps } from './ToggleAccess'
 
 export type SettingsListDialogButtons = {
   confirmButtonText?: string | React.ReactNode
@@ -22,29 +17,12 @@ export type SettingsListDialogProps = {
 
   forward: (nextStep: Step) => void
   closeDialog: () => void
+
+  cover?: string
+  collectionCount: number
+  tagsCount: number
 } & SettingsListDialogButtons &
   ToggleAccessProps
-
-const ListItem = ({
-  title,
-  onClick,
-}: {
-  title: string | React.ReactNode
-  onClick?: () => any
-}) => {
-  return (
-    <li>
-      <Card bgColor="white" spacing={[0, 0]} onClick={onClick}>
-        <section className="item">
-          <h3 className="title">{title}</h3>
-          <TextIcon icon={<IconArrowRight16 color="grey" />} size="md" />
-        </section>
-      </Card>
-
-      <style jsx>{styles}</style>
-    </li>
-  )
-}
 
 const SettingsList = ({
   saving,
@@ -56,6 +34,10 @@ const SettingsList = ({
   confirmButtonText,
   cancelButtonText,
   onConfirm,
+
+  cover,
+  collectionCount,
+  tagsCount,
 
   ...restProps
 }: SettingsListDialogProps) => {
@@ -75,13 +57,19 @@ const SettingsList = ({
               <Translate zh_hant="設定封面" zh_hans="设定封面" en="Set Cover" />
             }
             onClick={() => forward('cover')}
-          />
+          >
+            <ListItem.CoverIndicator cover={cover} />
+          </ListItem>
+
           <ListItem
             title={
               <Translate zh_hant="添加標籤" zh_hans="添加标签" en="Add Tags" />
             }
             onClick={() => forward('tag')}
-          />
+          >
+            <ListItem.NumberIndicator num={tagsCount} />
+          </ListItem>
+
           <ListItem
             title={
               <Translate
@@ -91,9 +79,13 @@ const SettingsList = ({
               />
             }
             onClick={() => forward('collection')}
-          />
+          >
+            <ListItem.NumberIndicator num={collectionCount} />
+          </ListItem>
 
-          <ToggleAccess {...restProps} />
+          <section className="access">
+            <ToggleAccess {...restProps} />
+          </section>
 
           {(confirmButtonText || cancelButtonText) && (
             <Dialog.Footer>

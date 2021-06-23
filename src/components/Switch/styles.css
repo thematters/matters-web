@@ -29,7 +29,6 @@
   line-height: 1;
   background: var(--switch-background);
   border-radius: var(--switch-border-radius);
-  transform: translateX(var(--switch-spacing));
 }
 
 .switch input + span::after {
@@ -41,7 +40,7 @@
 }
 
 .switch input + span::after,
-.switch .loading :global(svg) {
+.switch .loading {
   @mixin all-transition;
 
   position: absolute;
@@ -52,6 +51,12 @@
   transform: translateX(var(--switch-spacing));
 }
 
+.switch .loading :global(svg) {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 .switch input:checked {
   & + span {
     box-shadow: inset 0 0 0 var(--switch-height) var(--color-matters-green);
@@ -59,7 +64,7 @@
 }
 
 .switch input:checked + span::after,
-.switch input:checked + span + .loading :global(svg) {
+.switch input:checked + span + .loading {
   transform: translateX(
     calc(
       var(--switch-width) - var(--switch-thumb-width) - var(--switch-spacing)

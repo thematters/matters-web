@@ -6,7 +6,7 @@
 }
 
 .name {
-  font-size: var(--font-size-md);
+  font-size: var(--font-size-sm-s);
   font-weight: var(--font-weight-normal);
   line-height: 1rem;
 }

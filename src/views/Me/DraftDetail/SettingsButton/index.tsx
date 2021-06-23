@@ -7,6 +7,12 @@ import {
   Translate,
   ViewerContext,
 } from '~/components'
+import {
+  SetCollectionProps,
+  SetCoverProps,
+  SetTagsProps,
+  ToggleAccessProps,
+} from '~/components/Editor'
 import { EditorSettingsDialog } from '~/components/Editor/SettingsDialog'
 
 import { ENTITY_TYPE, OPEN_LIKE_COIN_DIALOG } from '~/common/enums'
@@ -28,7 +34,7 @@ interface SettingsButtonProps {
   publishable?: boolean
 }
 
-const NextStepButton = ({
+const ConfirmButton = ({
   openDialog,
   disabled,
 }: {
@@ -44,7 +50,7 @@ const NextStepButton = ({
     aria-haspopup="true"
   >
     <TextIcon color="white" size="md" weight="md">
-      <Translate id="nextStep" />
+      <Translate id="publish" />
     </TextIcon>
   </Button>
 )
@@ -74,6 +80,34 @@ const SettingsButton = ({
   const isPublished = draft.publishState === 'published'
   const disabled = !publishable || isPending || isPublished
 
+  const coverProps: SetCoverProps = {
+    cover: draft.cover,
+    assets: draft.assets,
+    editCover,
+    refetchAssets: refetch,
+    entityId: draft.id,
+    entityType: ENTITY_TYPE.draft,
+    coverSaving,
+  }
+  const tagsProps: SetTagsProps = {
+    tags,
+    editTags,
+    tagsSaving,
+  }
+  const collectionProps: SetCollectionProps = {
+    collection: draft?.collection?.edges?.map(({ node }) => node) || [],
+    editCollection,
+    collectionSaving,
+  }
+  const accessProps: ToggleAccessProps = {
+    circle: draft?.access.circle,
+    accessType: draft.access.type,
+    license: draft.license,
+    editAccess,
+    accessSaving,
+    canToggleCircle: !!hasOwnCircle,
+  }
+
   if (!viewer.shouldSetupLikerID) {
     return (
       <EditorSettingsDialog
@@ -86,32 +120,13 @@ const SettingsButton = ({
           <Translate zh_hant="存至草稿" zh_hans="存至草稿" en="Save as Draft" />
         }
         ConfirmStepContent={ConfirmPublishDialogContent}
-        // cover
-        cover={draft.cover}
-        assets={draft.assets}
-        editCover={editCover}
-        refetchAssets={refetch}
-        entityId={draft.id}
-        entityType={ENTITY_TYPE.draft}
-        coverSaving={coverSaving}
-        // tags
-        tags={tags}
-        editTags={editTags}
-        tagsSaving={tagsSaving}
-        // collection
-        collection={draft?.collection?.edges?.map(({ node }) => node) || []}
-        editCollection={editCollection}
-        collectionSaving={collectionSaving}
-        // circle
-        circle={draft?.access.circle}
-        accessType={draft.access.type}
-        license={draft.license}
-        editAccess={editAccess}
-        accessSaving={accessSaving}
-        canToggleCircle={!!hasOwnCircle}
+        {...coverProps}
+        {...tagsProps}
+        {...collectionProps}
+        {...accessProps}
       >
         {({ openDialog: openEditorSettingsDialog }) => (
-          <NextStepButton
+          <ConfirmButton
             openDialog={openEditorSettingsDialog}
             disabled={disabled}
           />
@@ -121,7 +136,7 @@ const SettingsButton = ({
   }
 
   return (
-    <NextStepButton
+    <ConfirmButton
       openDialog={() =>
         window.dispatchEvent(new CustomEvent(OPEN_LIKE_COIN_DIALOG, {}))
       }

@@ -35,7 +35,7 @@ const ManageButton = () => {
           onClick={openDialog}
         >
           <TextIcon icon={<IconSettings24 />} weight="md" size={'xs'}>
-            <Translate zh_hant="管理" zh_hans="管理" en="manage" />
+            <Translate zh_hant="管理" zh_hans="管理" en="Manage" />
           </TextIcon>
         </Button>
       )}

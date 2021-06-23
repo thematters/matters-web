@@ -100,6 +100,8 @@ const Uploader: React.FC<UploaderProps> = ({
         },
       })
 
+      refetchAssets()
+
       if (data?.singleFileUpload) {
         setSelected(data?.singleFileUpload)
       } else {
