@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import { forwardRef } from 'react'
 
 import { Card, CardProps, IconArrowDown16, TextIcon } from '~/components'
@@ -11,6 +12,8 @@ type OptionProps = {
   selected?: boolean
   expanded?: boolean
 
+  size?: 'md' | 'sm'
+
   ref?: any
 } & CardProps
 
@@ -23,10 +26,17 @@ const Option: React.FC<OptionProps> = forwardRef(
       selected,
       expanded,
 
+      size = 'md',
+
       ...cardProps
     },
     ref
   ) => {
+    const nameClasses = classNames({
+      name: true,
+      [`${size}`]: !!size,
+    })
+
     return (
       <li role="option" aria-selected={!!selected}>
         <Card
@@ -37,7 +47,7 @@ const Option: React.FC<OptionProps> = forwardRef(
         >
           <section className="container">
             <section className="left">
-              <h5 className="name">{name}</h5>
+              <h5 className={nameClasses}>{name}</h5>
               {subtitle && <p className="subtitle">{subtitle}</p>}
             </section>
 

@@ -33,6 +33,7 @@ type SelectProps = {
   name: string
   title?: React.ReactNode
   options: Option[]
+  size?: 'md' | 'sm'
   onChange: (option: Option) => void
 } & Omit<FieldProps, 'fieldMsgId'>
 
@@ -43,6 +44,8 @@ const Select: React.FC<SelectProps> = ({
 
   options,
   onChange,
+
+  size,
 
   hint,
   error,
@@ -67,6 +70,7 @@ const Select: React.FC<SelectProps> = ({
             onClick={() => onChange(option)}
             selected={option.selected}
             expanded
+            size={size}
             key={option.value}
           />
         ))}
@@ -101,6 +105,7 @@ const Select: React.FC<SelectProps> = ({
             name={selectedOption.name}
             subtitle={selectedOption.subtitle}
             selected
+            size={size}
             onClick={openDialog}
             aria-haspopup="listbox"
             ref={ref}
