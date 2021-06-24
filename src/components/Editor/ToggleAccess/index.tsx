@@ -33,6 +33,8 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
   accessSaving,
   canToggleCircle,
 }) => {
+  const hasCircle = !!circle
+
   return (
     <section>
       <section className="switch">
@@ -46,7 +48,7 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
           </h3>
 
           <Switch
-            checked={!!circle}
+            checked={hasCircle}
             onChange={() =>
               editAccess(
                 !circle,
@@ -79,11 +81,11 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
 
         <section className="license">
           <SelectLicense
-            isInCircle={!!circle}
+            isInCircle={hasCircle}
             license={license}
             onChange={(newLicense) =>
               editAccess(
-                !!circle,
+                hasCircle,
                 newLicense === ArticleLicenseType.arr,
                 newLicense
               )

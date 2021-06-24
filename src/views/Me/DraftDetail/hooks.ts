@@ -89,14 +89,10 @@ export const useEditDraftAccess = (
     paywalled: boolean,
     license: ArticleLicenseType
   ) => {
-    if (!circle) {
-      return
-    }
-
     return setCircle({
       variables: {
         id: draftId,
-        circle: addToCircle ? circle.id : null,
+        circle: (addToCircle && circle?.id) || null,
         accessType: paywalled
           ? ArticleAccessType.paywall
           : ArticleAccessType.public,
