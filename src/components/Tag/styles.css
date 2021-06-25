@@ -2,12 +2,10 @@
   --list-tag-count-width: 3rem;
 }
 
-.tag {
-  & :global(.text) {
-    @mixin line-clamp;
+.tag .name {
+  @mixin line-clamp;
 
-    line-height: inherit;
-  }
+  line-height: inherit;
 }
 
 .list {
@@ -69,5 +67,11 @@
     & :global(svg) {
       opacity: 0.5;
     }
+  }
+}
+
+.plain {
+  & :global(svg) {
+    opacity: 0.5;
   }
 }

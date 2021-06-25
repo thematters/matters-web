@@ -142,7 +142,11 @@ export const MOCK_TAG = {
   editors: [MOCK_USER],
   owner: MOCK_USER,
   content: '香港',
-  articles: [MOCK_ARTILCE],
+  articles: {
+    __typename: 'ArticleConnection' as any,
+    totalCount: 8,
+    edges: [{ node: MOCK_ARTILCE }],
+  },
 }
 
 // Transaction
