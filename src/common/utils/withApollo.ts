@@ -185,7 +185,7 @@ const agentHashLink = setContext((_, { headers }) => {
   }
 })
 
-export default withApollo(({ ctx, headers, initialState }) => {
+const customWithApollo = withApollo(({ ctx, headers, initialState }) => {
   const cache = new InMemoryCache({ fragmentMatcher })
   cache.restore(initialState || {})
 
@@ -213,3 +213,5 @@ export default withApollo(({ ctx, headers, initialState }) => {
 
   return client
 })
+
+export default customWithApollo

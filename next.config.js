@@ -14,7 +14,6 @@ const URL_PUSH_SW = isProd
 
 const nextConfig = {
   future: {
-    // webpack5: true,
     strictPostcssConfiguration: true,
   },
   /**
