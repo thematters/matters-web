@@ -143,7 +143,7 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
             )}
 
             <section>
-              <DateTime date={createdAt} color="grey" />
+              <DateTime date={createdAt} />
             </section>
           </section>
 

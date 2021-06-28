@@ -1,17 +1,16 @@
 import gql from 'graphql-tag'
 
-import AccessLabel from '~/components/ArticleDigest/Feed/AccessLabel'
-
 import FingerprintButton from './FingerprintButton'
 
 export const fragments = {
   article: gql`
     fragment MetaInfoArticle on Article {
       id
+      access {
+        type
+      }
       ...FingerprintArticle
-      ...AccessLabelArticle
     }
     ${FingerprintButton.fragments.article}
-    ${AccessLabel.fragments.article}
   `,
 }

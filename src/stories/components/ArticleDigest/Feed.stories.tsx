@@ -23,8 +23,8 @@ Default.args = {
   article: MOCK_ARTILCE,
 }
 
-export const WithCircle = Template.bind({})
-WithCircle.args = {
+export const InUserArticles = Template.bind({})
+InUserArticles.args = {
   article: MOCK_ARTILCE,
-  hasCircle: true,
+  inUserArticles: true,
 }
