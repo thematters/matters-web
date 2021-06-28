@@ -74,13 +74,8 @@ const FOLLOWING_TAGS_ARTICLES = gql`
 `
 
 const TagsArticles = ({ tagIds }: { tagIds: string[] }) => {
-  const {
-    data,
-    loading,
-    error,
-    fetchMore,
-    refetch,
-  } = useQuery<FollowingTagsArticlesFeed>(FOLLOWING_TAGS_ARTICLES)
+  const { data, loading, error, fetchMore, refetch } =
+    useQuery<FollowingTagsArticlesFeed>(FOLLOWING_TAGS_ARTICLES)
 
   if (loading) {
     return <Spinner />

@@ -58,9 +58,11 @@ const renderCSE = (defer?: boolean) => {
 }
 
 const BaseGoogleSearchDialog = ({ children }: GoogleSearchDialogProps) => {
-  const { show, openDialog: baseOpenDialog, closeDialog } = useDialogSwitch(
-    true
-  )
+  const {
+    show,
+    openDialog: baseOpenDialog,
+    closeDialog,
+  } = useDialogSwitch(true)
   const openDialog = () => {
     baseOpenDialog()
     renderCSE(true)

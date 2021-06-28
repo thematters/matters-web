@@ -1,6 +1,6 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
-import Router from 'next/router'
+import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
 import {
@@ -37,6 +37,7 @@ const UPDATE_AGREE_ON = gql`
 `
 
 const TermContent: React.FC<TermContentProps> = ({ closeDialog }) => {
+  const router = useRouter()
   const [logout] = useMutation<UserLogout>(USER_LOGOUT, undefined, {
     showToast: false,
   })
@@ -71,7 +72,7 @@ const TermContent: React.FC<TermContentProps> = ({ closeDialog }) => {
 
       closeDialog()
 
-      Router.replace('/')
+      router.replace('/')
     } catch (e) {
       window.dispatchEvent(
         new CustomEvent(ADD_TOAST, {

@@ -32,24 +32,28 @@ export interface IconProps {
   [key: string]: any
 }
 
-export const withIcon = (
-  WrappedIcon: React.FunctionComponent<React.SVGProps<HTMLOrSVGElement>>
-) => (props: IconProps) => {
-  const { size = '', color = '', className, ...restProps } = props
-  const iconClasses = classNames({
-    icon: true,
-    [size]: !!size,
-    [color]: !!color,
-    [className]: !!className,
-  })
+export const withIcon =
+  (WrappedIcon: React.FunctionComponent<React.SVGProps<HTMLOrSVGElement>>) =>
+  (props: IconProps) => {
+    const { size = '', color = '', className, ...restProps } = props
+    const iconClasses = classNames({
+      icon: true,
+      [size]: !!size,
+      [color]: !!color,
+      [className]: !!className,
+    })
 
-  return (
-    <>
-      <WrappedIcon className={iconClasses} aria-hidden="true" {...restProps} />
+    return (
+      <>
+        <WrappedIcon
+          className={iconClasses}
+          aria-hidden="true"
+          {...restProps}
+        />
 
-      <style jsx global>
-        {styles}
-      </style>
-    </>
-  )
-}
+        <style jsx global>
+          {styles}
+        </style>
+      </>
+    )
+  }

@@ -50,13 +50,8 @@ const FOLLOWEE_DONATED_ARTICLES = gql`
 `
 
 const DonationsArticles = () => {
-  const {
-    data,
-    loading,
-    error,
-    fetchMore,
-    refetch,
-  } = useQuery<FolloweeDonatedArticlesFeed>(FOLLOWEE_DONATED_ARTICLES)
+  const { data, loading, error, fetchMore, refetch } =
+    useQuery<FolloweeDonatedArticlesFeed>(FOLLOWEE_DONATED_ARTICLES)
 
   if (loading) {
     return <Spinner />

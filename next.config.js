@@ -1,5 +1,7 @@
 const withPlugins = require('next-compose-plugins')
-const withBundleAnalyzer = require('@zeit/next-bundle-analyzer')
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+})
 const optimizedImages = require('next-optimized-images')
 const withOffline = require('next-offline')
 
@@ -14,7 +16,6 @@ const URL_PUSH_SW = isProd
 
 const nextConfig = {
   future: {
-    // webpack5: true,
     strictPostcssConfiguration: true,
   },
   /**
@@ -115,23 +116,7 @@ let plugins = [
   ],
 
   // bundle analyzer
-  [
-    withBundleAnalyzer,
-    {
-      analyzeServer: ['server', 'both'].includes(process.env.BUNDLE_ANALYZE),
-      analyzeBrowser: ['browser', 'both'].includes(process.env.BUNDLE_ANALYZE),
-      bundleAnalyzerConfig: {
-        server: {
-          analyzerMode: 'static',
-          reportFilename: './bundles/server.html',
-        },
-        browser: {
-          analyzerMode: 'static',
-          reportFilename: './bundles/client.html',
-        },
-      },
-    },
-  ],
+  [withBundleAnalyzer],
 ]
 
 if (!isStatic) {

@@ -29,9 +29,11 @@ const DynamicAddCreditForm = dynamic(
 
 const BaseAddCreditDialog = ({ children }: AddCreditDialogProps) => {
   const viewer = useContext(ViewerContext)
-  const { show, openDialog: baseOpenDialog, closeDialog } = useDialogSwitch(
-    true
-  )
+  const {
+    show,
+    openDialog: baseOpenDialog,
+    closeDialog,
+  } = useDialogSwitch(true)
 
   const initialStep = viewer.status?.hasPaymentPassword
     ? 'addCredit'

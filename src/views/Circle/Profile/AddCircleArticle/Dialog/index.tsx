@@ -43,9 +43,11 @@ const AddCircleArticleDialog = ({
   circle,
   children,
 }: AddCircleArticleDialogProps) => {
-  const { show, openDialog: baseOpenDialog, closeDialog } = useDialogSwitch(
-    true
-  )
+  const {
+    show,
+    openDialog: baseOpenDialog,
+    closeDialog,
+  } = useDialogSwitch(true)
 
   const initialStep = 'select'
   const { currStep, forward } = useStep<Step>(initialStep)

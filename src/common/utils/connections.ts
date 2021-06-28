@@ -14,10 +14,11 @@ export const mergeConnections = ({
   dedupe?: boolean
 }) => {
   try {
-    const { edges: oldEdges, pageInfo: oldPageInfo, ...rest } = _get(
-      oldData,
-      path
-    )
+    const {
+      edges: oldEdges,
+      pageInfo: oldPageInfo,
+      ...rest
+    } = _get(oldData, path)
 
     const { edges: newEdges, pageInfo: newPageInfo } = _get(newData, path)
 
@@ -54,10 +55,11 @@ export const unshiftConnections = ({
   path: string
 }) => {
   const { edges: oldEdges, pageInfo: oldPageInfo } = _get(oldData, path)
-  const { edges: newEdges, pageInfo: newPageInfo, ...rest } = _get(
-    newData,
-    path
-  )
+  const {
+    edges: newEdges,
+    pageInfo: newPageInfo,
+    ...rest
+  } = _get(newData, path)
   const copy = JSON.parse(JSON.stringify(newData))
   return _set(copy, path, {
     ...rest,

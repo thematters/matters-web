@@ -31,15 +31,10 @@ const Subscriptions = () => {
    * Data Fetching
    */
   // public data
-  const {
-    data,
-    loading,
-    error,
-    refetch,
-    fetchMore,
-  } = usePublicQuery<UserSubscriptions>(USER_SUBSCRIPTIONS, {
-    variables: { userName },
-  })
+  const { data, loading, error, refetch, fetchMore } =
+    usePublicQuery<UserSubscriptions>(USER_SUBSCRIPTIONS, {
+      variables: { userName },
+    })
 
   // pagination
   const connectionPath = 'user.subscribedCircles'

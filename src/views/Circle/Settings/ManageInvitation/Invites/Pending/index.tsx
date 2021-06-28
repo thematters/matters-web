@@ -41,15 +41,10 @@ const PendingInvites = () => {
   /**
    * Data Fetching
    */
-  const {
-    data,
-    loading,
-    error,
-    fetchMore,
-    refetch,
-  } = useQuery<CirclePendingInvites>(CIRCLE_PENDING_INVITES, {
-    variables: { name },
-  })
+  const { data, loading, error, fetchMore, refetch } =
+    useQuery<CirclePendingInvites>(CIRCLE_PENDING_INVITES, {
+      variables: { name },
+    })
 
   // pagination
   const connectionPath = 'circle.invites.pending'
