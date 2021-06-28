@@ -1,7 +1,6 @@
 import { useLazyQuery, useQuery } from '@apollo/react-hooks'
 import jump from 'jump.js'
 import dynamic from 'next/dynamic'
-import Router from 'next/router'
 import { useContext, useEffect, useState } from 'react'
 import { Waypoint } from 'react-waypoint'
 
@@ -212,7 +211,7 @@ const ArticleDetail = () => {
     }
 
     const path = toPath({ page: 'articleDetail', article })
-    Router.replace(path.href)
+    router.replace(path.href)
   }
 
   const onEditSaved = async () => {

@@ -1,7 +1,7 @@
 import { useApolloClient } from '@apollo/react-hooks'
 import differenceInDays from 'date-fns/differenceInDays'
 import parseISO from 'date-fns/parseISO'
-import { Router } from 'next/router'
+import { useRouter } from 'next/router'
 import { useContext, useEffect, useRef } from 'react'
 
 import { useEventListener, useWindowResize, ViewerContext } from '~/components'
@@ -13,6 +13,7 @@ import {
 import { storage } from '~/common/utils'
 
 export const ClientUpdater = () => {
+  const router = useRouter()
   const client = useApolloClient()
   const viewer = useContext(ViewerContext)
 
@@ -57,8 +58,8 @@ export const ClientUpdater = () => {
   }
 
   useEffect(() => {
-    Router.events.on('routeChangeComplete', routeChangeComplete)
-    return () => Router.events.off('routeChangeComplete', routeChangeComplete)
+    router.events.on('routeChangeComplete', routeChangeComplete)
+    return () => router.events.off('routeChangeComplete', routeChangeComplete)
   }, [])
 
   /**

@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
-import Router from 'next/router'
+import { useRouter } from 'next/router'
 
 import {
   Button,
@@ -19,6 +19,7 @@ type BackButtonProps = {
 } & ButtonProps
 
 export const BackButton: React.FC<BackButtonProps> = ({ mode, ...props }) => {
+  const router = useRouter()
   const isSmallUp = useResponsive('sm-up')
   const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
     variables: { id: 'local' },
@@ -35,9 +36,9 @@ export const BackButton: React.FC<BackButtonProps> = ({ mode, ...props }) => {
     const routeHistory = data?.clientPreference.routeHistory || []
 
     if (routeHistory.length > 0) {
-      Router.back()
+      router.back()
     } else {
-      Router.push(PATHS.HOME)
+      router.push(PATHS.HOME)
     }
   }
 

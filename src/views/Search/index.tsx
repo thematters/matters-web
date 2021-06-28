@@ -1,4 +1,3 @@
-import { Router } from 'next/router'
 import { useEffect, useState } from 'react'
 
 import {
@@ -48,8 +47,8 @@ const Search = () => {
   const showCancelButton = !isOverview
 
   useEffect(() => {
-    Router.events.on('routeChangeStart', resetAutoComplete)
-    return () => Router.events.off('routeChangeStart', resetAutoComplete)
+    router.events.on('routeChangeStart', resetAutoComplete)
+    return () => router.events.off('routeChangeStart', resetAutoComplete)
   }, [])
 
   return (
