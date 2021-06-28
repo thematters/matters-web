@@ -43,16 +43,10 @@ const query = gql`
 `
 
 const Feed = () => {
-  const {
-    data,
-    error,
-    loading,
-    fetchMore,
-    networkStatus,
-    refetch,
-  } = useQuery<RecommendationArticles>(query, {
-    notifyOnNetworkStatusChange: true,
-  })
+  const { data, error, loading, fetchMore, networkStatus, refetch } =
+    useQuery<RecommendationArticles>(query, {
+      notifyOnNetworkStatusChange: true,
+    })
 
   const connectionPath = 'viewer.recommendation.recommendArticles'
   const result = data?.viewer?.recommendation.recommendArticles

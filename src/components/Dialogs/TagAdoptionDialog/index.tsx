@@ -35,9 +35,8 @@ const BaseDialog = ({ children }: Props) => {
 
   const { getQuery } = useRoute()
   const id = getQuery('tagId')
-  const [update, { loading }] = useMutation<UpdateTagSetting>(
-    UPDATE_TAG_SETTING
-  )
+  const [update, { loading }] =
+    useMutation<UpdateTagSetting>(UPDATE_TAG_SETTING)
 
   return (
     <>

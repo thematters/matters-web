@@ -37,9 +37,8 @@ type Area = 'staging' | 'searching'
  * ```
  */
 const TagSearchSelectEditor = ({ id, closeDialog, toListStep }: Props) => {
-  const [update, { loading }] = useMutation<UpdateTagSetting>(
-    UPDATE_TAG_SETTING
-  )
+  const [update, { loading }] =
+    useMutation<UpdateTagSetting>(UPDATE_TAG_SETTING)
 
   // area
   const [area, setArea] = useState<Area>('staging')

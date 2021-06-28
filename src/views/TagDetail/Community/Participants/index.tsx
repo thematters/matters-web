@@ -23,17 +23,11 @@ interface Props {
 }
 
 const Participants = ({ id }: Props) => {
-  const {
-    data,
-    loading,
-    error,
-    fetchMore,
-    refetch,
-    networkStatus,
-  } = usePublicQuery<TagParticipants>(TAG_PARTICIPANTS, {
-    variables: { id },
-    notifyOnNetworkStatusChange: true,
-  })
+  const { data, loading, error, fetchMore, refetch, networkStatus } =
+    usePublicQuery<TagParticipants>(TAG_PARTICIPANTS, {
+      variables: { id },
+      notifyOnNetworkStatusChange: true,
+    })
 
   // pagination
   const connectionPath = 'node.participants'

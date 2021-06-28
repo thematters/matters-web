@@ -28,9 +28,11 @@ interface Props {
 const BaseDialog = ({ children }: Props) => {
   const defaultStep = 'list'
 
-  const { show, openDialog: baseOpenDialog, closeDialog } = useDialogSwitch(
-    true
-  )
+  const {
+    show,
+    openDialog: baseOpenDialog,
+    closeDialog,
+  } = useDialogSwitch(true)
   const [removeEditor, setRemoveEditor] = useState<TagEditor>()
   const { currStep, forward, reset } = useStep<Step>(defaultStep)
 

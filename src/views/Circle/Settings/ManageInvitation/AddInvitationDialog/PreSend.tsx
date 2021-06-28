@@ -44,9 +44,8 @@ const BaseInviteePreSend = ({ closeDialog, confirm, invitees }: Props) => {
   const name = getQuery('name')
 
   const [period, setPeriod] = useState<number>(30)
-  const [invite, { loading: inviteLoading }] = useMutation<InviteCircle>(
-    INVITE_CIRCLE
-  )
+  const [invite, { loading: inviteLoading }] =
+    useMutation<InviteCircle>(INVITE_CIRCLE)
 
   /**
    * Data Fetching

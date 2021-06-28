@@ -53,13 +53,8 @@ const FOLLOW_ARTICLES = gql`
 `
 
 const ArticlesFeed = () => {
-  const {
-    data,
-    loading,
-    error,
-    fetchMore,
-    refetch,
-  } = useQuery<FollowArticlesFeed>(FOLLOW_ARTICLES)
+  const { data, loading, error, fetchMore, refetch } =
+    useQuery<FollowArticlesFeed>(FOLLOW_ARTICLES)
 
   if (loading) {
     return <Spinner />
@@ -93,44 +88,40 @@ const ArticlesFeed = () => {
     })
   }
 
-  const actor = ({
-    node,
-    index,
-  }: {
-    node: FollowArticlesFeedAuthor
-    index: number
-  }) => (props: Partial<UserDigestMiniProps>) => {
-    if (!node) {
-      return null
+  const actor =
+    ({ node, index }: { node: FollowArticlesFeedAuthor; index: number }) =>
+    (props: Partial<UserDigestMiniProps>) => {
+      if (!node) {
+        return null
+      }
+
+      return (
+        <section className="author">
+          <UserDigest.Mini
+            user={node}
+            avatarSize="lg"
+            textSize="md-s"
+            textWeight="md"
+            hasAvatar
+            hasDisplayName
+            onClick={() => {
+              analytics.trackEvent('click_feed', {
+                type: 'follow-article',
+                contentType: 'user',
+                styleType: 'subtitle',
+                location: index,
+              })
+            }}
+            {...props}
+          />
+
+          <TextIcon size="sm" color="grey-dark">
+            <Translate zh_hant="發布了" zh_hans="发布了" en="published" />
+          </TextIcon>
+          <style jsx>{styles}</style>
+        </section>
+      )
     }
-
-    return (
-      <section className="author">
-        <UserDigest.Mini
-          user={node}
-          avatarSize="lg"
-          textSize="md-s"
-          textWeight="md"
-          hasAvatar
-          hasDisplayName
-          onClick={() => {
-            analytics.trackEvent('click_feed', {
-              type: 'follow-article',
-              contentType: 'user',
-              styleType: 'subtitle',
-              location: index,
-            })
-          }}
-          {...props}
-        />
-
-        <TextIcon size="sm" color="grey-dark">
-          <Translate zh_hant="發布了" zh_hans="发布了" en="published" />
-        </TextIcon>
-        <style jsx>{styles}</style>
-      </section>
-    )
-  }
 
   return (
     <InfiniteScroll

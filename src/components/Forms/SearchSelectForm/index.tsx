@@ -87,9 +87,8 @@ const SearchSelectForm = ({
   }, [])
 
   // data
-  const [stagingNodes, setStagingNodes] = useState<StagingNode[]>(
-    initStagingNodes
-  )
+  const [stagingNodes, setStagingNodes] =
+    useState<StagingNode[]>(initStagingNodes)
   const addNodeToStaging = (node: SelectNode) => {
     setStagingNodes([
       ...stagingNodes.filter(({ node: n }) => n.id !== node.id),

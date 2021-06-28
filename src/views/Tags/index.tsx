@@ -45,13 +45,8 @@ const ALL_TAGS = gql`
 `
 
 const BaseTags = () => {
-  const {
-    data,
-    loading,
-    error,
-    fetchMore,
-    refetch,
-  } = usePublicQuery<AllTagsPublic>(ALL_TAGS)
+  const { data, loading, error, fetchMore, refetch } =
+    usePublicQuery<AllTagsPublic>(ALL_TAGS)
 
   if (loading) {
     return <Spinner />

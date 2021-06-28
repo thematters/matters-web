@@ -39,15 +39,10 @@ const AcceptedInvites = () => {
   /**
    * Data Fetching
    */
-  const {
-    data,
-    loading,
-    error,
-    fetchMore,
-    refetch,
-  } = useQuery<CircleAcceptedInvites>(CIRCLE_ACCEPTED_INVITES, {
-    variables: { name },
-  })
+  const { data, loading, error, fetchMore, refetch } =
+    useQuery<CircleAcceptedInvites>(CIRCLE_ACCEPTED_INVITES, {
+      variables: { name },
+    })
 
   // pagination
   const connectionPath = 'circle.invites.accepted'

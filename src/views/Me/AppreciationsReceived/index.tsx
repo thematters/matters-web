@@ -44,12 +44,8 @@ const ME_APPRECIATED_RECEIVED = gql`
 `
 
 const BaseAppreciationsReceived = () => {
-  const {
-    data,
-    loading,
-    fetchMore,
-    refetch,
-  } = useQuery<MeAppreciationsReceived>(ME_APPRECIATED_RECEIVED)
+  const { data, loading, fetchMore, refetch } =
+    useQuery<MeAppreciationsReceived>(ME_APPRECIATED_RECEIVED)
 
   if (loading) {
     return <Spinner />
