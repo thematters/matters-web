@@ -28,9 +28,11 @@ const CivicLikerDialog = ({
   onClose,
   children,
 }: CivicLikerDialogProps) => {
-  const { show, openDialog, closeDialog: baseCloseDialog } = useDialogSwitch(
-    true
-  )
+  const {
+    show,
+    openDialog,
+    closeDialog: baseCloseDialog,
+  } = useDialogSwitch(true)
   const closeDialog = () => {
     baseCloseDialog()
     onClose()

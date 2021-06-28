@@ -82,9 +82,11 @@ const BaseEditorSettingsDialog = ({
 
   children,
 }: EditorSettingsDialogProps) => {
-  const { show, openDialog: baseOpenDialog, closeDialog } = useDialogSwitch(
-    true
-  )
+  const {
+    show,
+    openDialog: baseOpenDialog,
+    closeDialog,
+  } = useDialogSwitch(true)
 
   const initialStep = 'list'
   const { currStep, forward } = useStep<Step>(initialStep)

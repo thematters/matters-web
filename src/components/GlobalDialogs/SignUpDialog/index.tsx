@@ -15,9 +15,11 @@ type Step = 'init' | 'verification_sent'
 const BaseSignUpDialog = () => {
   const { currStep, forward } = useStep<Step>('init')
 
-  const { show, openDialog: baseOpenDialog, closeDialog } = useDialogSwitch(
-    true
-  )
+  const {
+    show,
+    openDialog: baseOpenDialog,
+    closeDialog,
+  } = useDialogSwitch(true)
   const openDialog = () => {
     forward('init')
     baseOpenDialog()

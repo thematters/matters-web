@@ -73,9 +73,8 @@ const Root = ({
   const shouldApplyLayout = !isInAbout && !isInMigration
 
   // anonymous
-  const { loading, data, error } = usePublicQuery<RootQueryPublic>(
-    ROOT_QUERY_PUBLIC
-  )
+  const { loading, data, error } =
+    usePublicQuery<RootQueryPublic>(ROOT_QUERY_PUBLIC)
   const viewer = data?.viewer
   const official = data?.official
 

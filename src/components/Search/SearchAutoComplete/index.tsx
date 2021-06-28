@@ -25,12 +25,10 @@ const SEARCH_AUTOCOMPLETE = gql`
 
 export const SearchAutoComplete = (props: SearchAutoCompleteProps) => {
   const { searchKey, inPage } = props
-  const [
-    getAutoComplete,
-    { data, loading },
-  ] = useLazyQuery<SearchAutoCompleteType>(SEARCH_AUTOCOMPLETE, {
-    variables: { searchKey },
-  })
+  const [getAutoComplete, { data, loading }] =
+    useLazyQuery<SearchAutoCompleteType>(SEARCH_AUTOCOMPLETE, {
+      variables: { searchKey },
+    })
   const frequentSearch = data?.frequentSearch || []
   const showFrequentSearch = frequentSearch.length > 0
 

@@ -58,13 +58,8 @@ const FOLLOWEE_DONATED_ARTICLES = gql`
 `
 
 const DonationsArticles = () => {
-  const {
-    data,
-    loading,
-    error,
-    fetchMore,
-    refetch,
-  } = useQuery<FolloweeDonatedArticlesFeed>(FOLLOWEE_DONATED_ARTICLES)
+  const { data, loading, error, fetchMore, refetch } =
+    useQuery<FolloweeDonatedArticlesFeed>(FOLLOWEE_DONATED_ARTICLES)
 
   if (loading) {
     return <Spinner />
@@ -98,32 +93,32 @@ const DonationsArticles = () => {
     })
   }
 
-  const actor = ({ node }: { node: FolloweeDonatedArticlesFeedFollowee }) => (
-    props: Partial<UserDigestMiniProps>
-  ) => {
-    if (!node) {
-      return null
+  const actor =
+    ({ node }: { node: FolloweeDonatedArticlesFeedFollowee }) =>
+    (props: Partial<UserDigestMiniProps>) => {
+      if (!node) {
+        return null
+      }
+
+      return (
+        <section className="followee">
+          <UserDigest.Mini
+            user={node}
+            avatarSize="lg"
+            textSize="md-s"
+            textWeight="md"
+            hasAvatar
+            hasDisplayName
+            {...props}
+          />
+
+          <TextIcon size="sm" color="grey-dark">
+            <Translate zh_hant="支持了" zh_hans="支持了" en="donated" />
+          </TextIcon>
+          <style jsx>{styles}</style>
+        </section>
+      )
     }
-
-    return (
-      <section className="followee">
-        <UserDigest.Mini
-          user={node}
-          avatarSize="lg"
-          textSize="md-s"
-          textWeight="md"
-          hasAvatar
-          hasDisplayName
-          {...props}
-        />
-
-        <TextIcon size="sm" color="grey-dark">
-          <Translate zh_hant="支持了" zh_hans="支持了" en="donated" />
-        </TextIcon>
-        <style jsx>{styles}</style>
-      </section>
-    )
-  }
 
   return (
     <InfiniteScroll

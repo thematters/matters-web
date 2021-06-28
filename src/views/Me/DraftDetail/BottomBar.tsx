@@ -25,13 +25,13 @@ interface BottomBarProps {
 }
 
 const EditDraftBottomBar = ({ draft, ownCircles }: BottomBarProps) => {
+  const { edit: editCollection, saving: collectionSaving } =
+    useEditDraftCollection(draft)
   const {
-    edit: editCollection,
-    saving: collectionSaving,
-  } = useEditDraftCollection(draft)
-  const { edit: editCover, saving: coverSaving, refetch } = useEditDraftCover(
-    draft
-  )
+    edit: editCover,
+    saving: coverSaving,
+    refetch,
+  } = useEditDraftCover(draft)
   const { edit: editTags, saving: tagsSaving } = useEditDraftTags(draft)
   const { edit: editAccess, saving: accessSaving } = useEditDraftAccess(
     draft,

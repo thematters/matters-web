@@ -170,10 +170,8 @@ const ArticleDetail = () => {
   const language = article?.language
   const { lang: viewerLanguage } = useContext(LanguageContext)
   const shouldTranslate = !!(language && language !== viewerLanguage)
-  const [
-    getTranslation,
-    { data: translationData, loading: translating },
-  ] = useLazyQuery<ArticleTranslation>(ARTICLE_TRANSLATION)
+  const [getTranslation, { data: translationData, loading: translating }] =
+    useLazyQuery<ArticleTranslation>(ARTICLE_TRANSLATION)
   const titleTranslation = translationData?.article?.translation?.title
   const contentTranslation = translationData?.article?.translation?.content
   const toggleTranslate = () => {
