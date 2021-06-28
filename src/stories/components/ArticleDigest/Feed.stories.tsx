@@ -23,8 +23,14 @@ Default.args = {
   article: MOCK_ARTILCE,
 }
 
-export const InUserArticles = Template.bind({})
-InUserArticles.args = {
-  article: MOCK_ARTILCE,
+export const Sticky = Template.bind({})
+Sticky.args = {
+  article: { ...MOCK_ARTILCE, sticky: true },
+  inUserArticles: true,
+}
+
+export const Archived = Template.bind({})
+Archived.args = {
+  article: { ...MOCK_ARTILCE, articleState: 'archived' as any },
   inUserArticles: true,
 }

@@ -5,7 +5,6 @@ footer {
   font-size: var(--font-size-timestamp);
   font-weight: var(--font-weight-timestamp);
   line-height: var(--line-height-timestamp);
-  color: var(--color-grey-dark);
 
   & .left,
   & .right {
@@ -13,11 +12,15 @@ footer {
   }
 
   & .left {
+    color: var(--color-grey-dark);
+
     & :global(> * + *) {
       padding-left: var(--spacing-xx-tight);
     }
   }
   & .right {
+    color: var(--color-black);
+
     & :global(> * + *) {
       padding-left: var(--spacing-loose);
     }

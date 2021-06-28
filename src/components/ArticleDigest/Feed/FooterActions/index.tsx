@@ -25,7 +25,7 @@ const FooterActions = ({ article, ...controls }: FooterActionsProps) => {
       <section className="left">
         <DateTime date={article.createdAt} />
 
-        {article.sticky && (
+        {article.access.type === 'paywall' && (
           <>
             <IconDotDivider />
             <IconPaywall16 />
