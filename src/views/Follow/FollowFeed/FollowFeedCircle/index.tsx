@@ -7,16 +7,15 @@ import { toPath } from '~/common/utils'
 import { fragments } from './gql'
 import styles from './styles.css'
 
-import { DigestFeedCircle } from './__generated__/DigestFeedCircle'
+import { FollowFeedCircle } from './__generated__/FollowFeedCircle'
 
 export type CircleDigestFeedProps = {
-  circle: DigestFeedCircle
-
+  circle: FollowFeedCircle
   header?: React.ReactNode
   date?: Date | string | number
 }
 
-const Feed = ({ circle, header, date }: CircleDigestFeedProps) => {
+const FeedCircle = ({ circle, header, date }: CircleDigestFeedProps) => {
   const { displayName, description } = circle
 
   const path = toPath({
@@ -61,16 +60,19 @@ const Feed = ({ circle, header, date }: CircleDigestFeedProps) => {
 /**
  * Memoizing
  */
-type MemoizedFeedType = React.MemoExoticComponent<
+type MemoizedFeedCircleType = React.MemoExoticComponent<
   React.FC<CircleDigestFeedProps>
 > & {
   fragments: typeof fragments
 }
 
-const MemoizedFeed = React.memo(Feed, ({ circle: prevCircle }, { circle }) => {
-  return prevCircle.id === circle.id
-}) as MemoizedFeedType
+const MemoizedFeedCircle = React.memo(
+  FeedCircle,
+  ({ circle: prevCircle }, { circle }) => {
+    return prevCircle.id === circle.id
+  }
+) as MemoizedFeedCircleType
 
-MemoizedFeed.fragments = fragments
+MemoizedFeedCircle.fragments = fragments
 
-export default MemoizedFeed
+export default MemoizedFeedCircle

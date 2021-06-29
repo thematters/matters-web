@@ -1,6 +1,6 @@
 import styles from './styles.css'
 
-const FollowHead: React.FC = ({ children }) => {
+const FollowFeedHead: React.FC = ({ children }) => {
   return (
     <section className="head">
       <h4>{children}</h4>
@@ -10,4 +10,4 @@ const FollowHead: React.FC = ({ children }) => {
   )
 }
 
-export default FollowHead
+export default FollowFeedHead

@@ -5,7 +5,7 @@ import UserDigestMini from '~/components/UserDigest/Mini'
 
 export const fragments = {
   circle: gql`
-    fragment DigestFeedCircle on Circle {
+    fragment FollowFeedCircle on Circle {
       id
       name
       displayName
