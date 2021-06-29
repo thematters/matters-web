@@ -24,6 +24,8 @@
 }
 
 .author {
+  @mixin flex-center-start;
+
   margin-top: var(--spacing-tight);
 }
 

@@ -19,6 +19,8 @@ export const MOCK_USER = {
     civicLiker: false,
   },
   ownCircles: null,
+  isFollower: false,
+  isFollowee: false,
 }
 
 // Circle

@@ -6,6 +6,7 @@ import { UserDigest } from '~/components/UserDigest'
 import { stripHtml, toPath } from '~/common/utils'
 
 import { ArticleDigestTitle } from '../Title'
+import FollowButton from './FollowButton'
 import FooterActions, { FooterActionsControls } from './FooterActions'
 import { fragments } from './gql'
 import styles from './styles.css'
@@ -16,7 +17,6 @@ import { ArticleDigestFeedArticlePublic } from './__generated__/ArticleDigestFee
 export type ArticleDigestFeedControls = {
   onClick?: () => any
   onClickAuthor?: () => void
-  onClickCircle?: () => void
 } & FooterActionsControls
 
 export type ArticleDigestFeedProps = {
@@ -29,7 +29,6 @@ const BaseArticleDigestFeed = ({
 
   onClick,
   onClickAuthor,
-  onClickCircle,
 
   ...controls
 }: ArticleDigestFeedProps) => {
@@ -59,6 +58,8 @@ const BaseArticleDigestFeed = ({
               hasDisplayName
               onClick={onClickAuthor}
             />
+
+            <FollowButton user={article.author} />
           </section>
         </section>
 
@@ -94,8 +95,7 @@ export const ArticleDigestFeed = React.memo(
       prevArticle.subscribed === article.subscribed &&
       prevArticle.articleState === article.articleState &&
       prevArticle.sticky === article.sticky &&
-      prevArticle.appreciationsReceivedTotal ===
-        article.appreciationsReceivedTotal
+      prevArticle.author.isFollowee === article.author.isFollowee
     )
   }
 ) as MemoizedArticleDigestFeed
