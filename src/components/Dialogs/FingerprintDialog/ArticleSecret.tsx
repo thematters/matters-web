@@ -8,7 +8,7 @@ import styles from './styles.css'
 
 import { ArticleSecret } from './__generated__/ArticleSecret'
 
-const SECRET = gql`
+export const QUERY_SECRET = gql`
   query ArticleSecret($mediaHash: String!) {
     article(input: { mediaHash: $mediaHash }) {
       id
@@ -22,7 +22,7 @@ const SECRET = gql`
 const ArticleSecretSection = () => {
   const { getQuery } = useRoute()
   const mediaHash = getQuery('mediaHash')
-  const { data, loading, error } = useQuery<ArticleSecret>(SECRET, {
+  const { data, loading, error } = useQuery<ArticleSecret>(QUERY_SECRET, {
     variables: { mediaHash },
   })
   const secret = data?.article?.access?.secret
