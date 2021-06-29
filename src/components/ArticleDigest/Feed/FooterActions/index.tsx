@@ -15,15 +15,16 @@ import { FooterActionsArticlePublic } from './__generated__/FooterActionsArticle
 
 export type FooterActionsControls = DropdownActionsControls
 
-type FooterActionsProps = {
+export type FooterActionsProps = {
   article: FooterActionsArticlePublic
+  date?: Date | string | number
 } & FooterActionsControls
 
-const FooterActions = ({ article, ...controls }: FooterActionsProps) => {
+const FooterActions = ({ article, date, ...controls }: FooterActionsProps) => {
   return (
     <footer>
       <section className="left">
-        <DateTime date={article.createdAt} />
+        <DateTime date={date || article.createdAt} />
 
         {article.access.type === 'paywall' && (
           <>

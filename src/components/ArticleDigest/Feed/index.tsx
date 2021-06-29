@@ -7,7 +7,7 @@ import { stripHtml, toPath } from '~/common/utils'
 
 import { ArticleDigestTitle } from '../Title'
 import FollowButton from './FollowButton'
-import FooterActions, { FooterActionsControls } from './FooterActions'
+import FooterActions, { FooterActionsProps } from './FooterActions'
 import { fragments } from './gql'
 import styles from './styles.css'
 
@@ -17,15 +17,21 @@ import { ArticleDigestFeedArticlePublic } from './__generated__/ArticleDigestFee
 export type ArticleDigestFeedControls = {
   onClick?: () => any
   onClickAuthor?: () => void
-} & FooterActionsControls
+}
 
 export type ArticleDigestFeedProps = {
   article: ArticleDigestFeedArticlePublic &
     Partial<ArticleDigestFeedArticlePrivate>
-} & ArticleDigestFeedControls
+
+  header?: React.ReactNode
+} & ArticleDigestFeedControls &
+  FooterActionsProps
 
 const BaseArticleDigestFeed = ({
   article,
+
+  header,
+  date,
 
   onClick,
   onClickAuthor,
@@ -43,6 +49,8 @@ const BaseArticleDigestFeed = ({
 
   return (
     <Card {...path} spacing={['base', 'base']} onClick={onClick}>
+      {header}
+
       <section className="content">
         <section className="head">
           <section className="title">
@@ -72,7 +80,7 @@ const BaseArticleDigestFeed = ({
         )}
       </section>
 
-      <FooterActions article={article} inCard {...controls} />
+      <FooterActions article={article} inCard date={date} {...controls} />
 
       <style jsx>{styles}</style>
     </Card>
