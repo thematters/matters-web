@@ -87,46 +87,45 @@ const DropdownActions = (props: DropdownActionsProps) => {
    * Data
    */
   const [add, { loading }] = useMutation<AddArticlesTags>(ADD_ARTICLES_TAGS)
-  const addArticlesToTag = (selected: boolean) => async (
-    articles: SearchSelectNode[]
-  ) => {
-    const articleIds = articles.map((article) => article.id)
+  const addArticlesToTag =
+    (selected: boolean) => async (articles: SearchSelectNode[]) => {
+      const articleIds = articles.map((article) => article.id)
 
-    await add({
-      variables: { id: tag.id, articles: articleIds, selected },
-      update: (cache, { data }) => {
-        if (selected) {
-          const newCount = data?.addArticlesTags?.articles?.totalCount || 0
-          const oldCount = tag.articles.totalCount || 0
-          updateTagArticlesCount({
-            cache,
-            id: tag.id,
-            count: newCount - oldCount,
-            type: 'increment',
-          })
-        }
-      },
-    })
-
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'green',
-          content: translate({ id: 'addedArticleTag', lang }),
-          duration: 2000,
+      await add({
+        variables: { id: tag.id, articles: articleIds, selected },
+        update: (cache, { data }) => {
+          if (selected) {
+            const newCount = data?.addArticlesTags?.articles?.totalCount || 0
+            const oldCount = tag.articles.totalCount || 0
+            updateTagArticlesCount({
+              cache,
+              id: tag.id,
+              count: newCount - oldCount,
+              type: 'increment',
+            })
+          }
         },
       })
-    )
 
-    window.dispatchEvent(
-      new CustomEvent(REFETCH_TAG_DETAIL_ARTICLES, {
-        detail: {
-          event: 'add',
-          differences: articles.length,
-        },
-      })
-    )
-  }
+      window.dispatchEvent(
+        new CustomEvent(ADD_TOAST, {
+          detail: {
+            color: 'green',
+            content: translate({ id: 'addedArticleTag', lang }),
+            duration: 2000,
+          },
+        })
+      )
+
+      window.dispatchEvent(
+        new CustomEvent(REFETCH_TAG_DETAIL_ARTICLES, {
+          detail: {
+            event: 'add',
+            differences: articles.length,
+          },
+        })
+      )
+    }
 
   const forbid = () => {
     window.dispatchEvent(

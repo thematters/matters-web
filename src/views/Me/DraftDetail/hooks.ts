@@ -60,9 +60,8 @@ export const useEditDraftTags = (draft: EditMetaDraft) => {
 
 export const useEditDraftCollection = (draft: EditMetaDraft) => {
   const draftId = draft.id
-  const [setCollection, { loading: saving }] = useMutation<SetDraftCollection>(
-    SET_COLLECTION
-  )
+  const [setCollection, { loading: saving }] =
+    useMutation<SetDraftCollection>(SET_COLLECTION)
 
   const edit = (newArticles: ArticleDigestDropdownArticle[]) =>
     setCollection({
@@ -80,9 +79,8 @@ export const useEditDraftAccess = (
   circle?: DigestRichCirclePublic
 ) => {
   const draftId = draft.id
-  const [setCircle, { loading: saving }] = useMutation<SetDraftAccess>(
-    SET_ACCESS
-  )
+  const [setCircle, { loading: saving }] =
+    useMutation<SetDraftAccess>(SET_ACCESS)
 
   const edit = async (
     addToCircle: boolean,

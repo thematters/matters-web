@@ -41,7 +41,10 @@ const ME_DRAFTS_FEED = gql`
 
 const BaseMeDrafts = () => {
   const { data, loading, error, fetchMore, refetch } = useQuery<MeDraftFeed>(
-    ME_DRAFTS_FEED
+    ME_DRAFTS_FEED,
+    {
+      fetchPolicy: 'no-cache',
+    }
   )
 
   if (loading) {

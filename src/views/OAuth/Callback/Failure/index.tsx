@@ -55,8 +55,7 @@ const ERROR_TEXT = {
   [OAUTH_CALLBACK_ERROR_CODE.stripeAccountRefresh]: {
     zh_hant: 'Stripe 帳戶創建失敗，請回到原頁面重新操作',
     zh_hans: 'Stripe 帐户创建失败，请回到原页面重新操作',
-    en:
-      'Failed to create Stripe Account, please return to your previous page and retry',
+    en: 'Failed to create Stripe Account, please return to your previous page and retry',
   },
 }
 

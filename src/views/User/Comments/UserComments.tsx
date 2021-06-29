@@ -37,8 +37,10 @@ import {
 } from './__generated__/UserCommentsPublic'
 import { UserIdUser } from './__generated__/UserIdUser'
 
-type CommentedArticleComment = UserCommentsPublic_node_User_commentedArticles_edges_node_comments_edges_node
-type CommentArticle = UserCommentsPublic_node_User_commentedArticles_edges_node_comments_edges_node_node_Article
+type CommentedArticleComment =
+  UserCommentsPublic_node_User_commentedArticles_edges_node_comments_edges_node
+type CommentArticle =
+  UserCommentsPublic_node_User_commentedArticles_edges_node_comments_edges_node_node_Article
 
 const UserComments = () => {
   const { getQuery } = useRoute()

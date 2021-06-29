@@ -31,9 +31,8 @@ interface Props {
 }
 
 const TagRemoveEditor = ({ id, editor, closeDialog }: Props) => {
-  const [update, { loading }] = useMutation<UpdateTagSetting>(
-    UPDATE_TAG_SETTING
-  )
+  const [update, { loading }] =
+    useMutation<UpdateTagSetting>(UPDATE_TAG_SETTING)
 
   return (
     <>

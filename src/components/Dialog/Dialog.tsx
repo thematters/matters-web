@@ -2,7 +2,7 @@ import { DialogContent, DialogOverlay } from '@reach/dialog'
 import classNames from 'classnames'
 import _get from 'lodash/get'
 import { useEffect, useRef, useState } from 'react'
-import { animated, useSpring } from 'react-spring/web'
+import { animated, useSpring } from 'react-spring'
 import { useDrag } from 'react-use-gesture'
 
 import { useOutsideClick, useResponsive } from '~/components'

@@ -26,14 +26,10 @@ const SearchTag = () => {
    * Data Fetching
    */
   // public data
-  const {
-    data,
-    loading,
-    fetchMore,
-    refetch,
-  } = usePublicQuery<SearchTagsPublic>(SEARCH_TAGS_PUBLIC, {
-    variables: { key: q },
-  })
+  const { data, loading, fetchMore, refetch } =
+    usePublicQuery<SearchTagsPublic>(SEARCH_TAGS_PUBLIC, {
+      variables: { key: q },
+    })
 
   // pagination
   const connectionPath = 'search'

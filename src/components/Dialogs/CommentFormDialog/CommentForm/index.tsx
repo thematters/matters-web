@@ -70,9 +70,8 @@ const CommentForm: React.FC<CommentFormProps> = ({
   })
 
   // retrieve push setting
-  const { data: clientPreferenceData } = useQuery<ClientPreference>(
-    CLIENT_PREFERENCE
-  )
+  const { data: clientPreferenceData } =
+    useQuery<ClientPreference>(CLIENT_PREFERENCE)
 
   const [putComment] = useMutation<PutComment>(PUT_COMMENT)
   const [isSubmitting, setSubmitting] = useState(false)

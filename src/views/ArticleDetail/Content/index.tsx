@@ -86,9 +86,9 @@ const Content = ({
           }
 
           // if bottom is above center
-          const {
-            bottom,
-          } = ((contentContainer.current as unknown) as Element).getBoundingClientRect()
+          const { bottom } = (
+            contentContainer.current as unknown as Element
+          ).getBoundingClientRect()
 
           const isBottomAboveCenter = bottom <= window.innerHeight / 2
           return !isBottomAboveCenter

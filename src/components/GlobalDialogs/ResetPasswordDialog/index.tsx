@@ -16,9 +16,11 @@ const BaseResetPasswordDialog = () => {
   const { currStep, forward } = useStep<Step>('request')
 
   // dailog & global listeners
-  const { show, openDialog: baseOpenDialog, closeDialog } = useDialogSwitch(
-    true
-  )
+  const {
+    show,
+    openDialog: baseOpenDialog,
+    closeDialog,
+  } = useDialogSwitch(true)
   const openDialog = () => {
     forward('request')
     baseOpenDialog()
