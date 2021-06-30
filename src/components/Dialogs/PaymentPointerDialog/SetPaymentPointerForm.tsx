@@ -26,7 +26,7 @@ import { UpdatePaymentPointer } from './__generated__/UpdatePaymentPointer'
 interface FormProps {
   setIsSubmitting: (submitting: boolean) => void
   setIsValid: (valid: boolean) => void
-  close: () => void
+  closeDialog: () => void
   formId?: string
 }
 
@@ -45,7 +45,7 @@ const UPDATE_PAYMENT_POINTER = gql`
 const SetPaymentPointerForm: React.FC<FormProps> = ({
   setIsValid,
   setIsSubmitting,
-  close,
+  closeDialog,
   formId = `set-payment-pointer-form`,
 }) => {
   const [submitPaymentPointer] = useMutation<UpdatePaymentPointer>(
@@ -94,7 +94,7 @@ const SetPaymentPointerForm: React.FC<FormProps> = ({
 
         setDefaultPaymentPointer(paymentPointer)
         setIsSubmitting(false)
-        close()
+        closeDialog()
       } catch (error) {
         setIsSubmitting(false)
 

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Dialog, useRoute, useStep } from '~/components'
+import { Dialog, useDialogSwitch, useRoute, useStep } from '~/components'
 
 import TagEditorList from './List'
 import TagRemoveEditor from './Remove'
@@ -22,24 +22,27 @@ import { TagMaintainers_node_Tag_editors as TagEditor } from '~/components/GQL/q
 type Step = 'list' | 'add' | 'remove'
 
 interface Props {
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
 const BaseDialog = ({ children }: Props) => {
   const defaultStep = 'list'
 
-  const [showDialog, setShowDialog] = useState(true)
+  const {
+    show,
+    openDialog: baseOpenDialog,
+    closeDialog,
+  } = useDialogSwitch(true)
   const [removeEditor, setRemoveEditor] = useState<TagEditor>()
   const { currStep, forward, reset } = useStep<Step>(defaultStep)
 
-  const open = () => {
+  const openDialog = () => {
     if (currStep !== defaultStep) {
       reset(defaultStep)
     }
     setRemoveEditor(undefined)
-    setShowDialog(true)
+    baseOpenDialog()
   }
-  const close = () => setShowDialog(false)
 
   const { getQuery } = useRoute()
   const id = getQuery('tagId')
@@ -50,13 +53,13 @@ const BaseDialog = ({ children }: Props) => {
 
   return (
     <>
-      {children({ open })}
+      {children({ openDialog })}
 
-      <Dialog size="sm" isOpen={showDialog} onDismiss={close} fixedHeight>
+      <Dialog size="sm" isOpen={show} onDismiss={closeDialog} fixedHeight>
         {isList && (
           <TagEditorList
             id={id}
-            close={close}
+            closeDialog={closeDialog}
             toAddStep={() => forward('add')}
             toRemoveStep={(editor: TagEditor) => {
               setRemoveEditor(editor)
@@ -68,13 +71,17 @@ const BaseDialog = ({ children }: Props) => {
         {isAdd && (
           <TagSearchSelectEditor
             id={id}
-            close={close}
+            closeDialog={closeDialog}
             toListStep={() => forward('list')}
           />
         )}
 
         {isRemove && removeEditor && (
-          <TagRemoveEditor id={id} editor={removeEditor} close={close} />
+          <TagRemoveEditor
+            id={id}
+            editor={removeEditor}
+            closeDialog={closeDialog}
+          />
         )}
       </Dialog>
     </>
@@ -83,6 +90,6 @@ const BaseDialog = ({ children }: Props) => {
 
 export const TagEditorDialog = (props: Props) => (
   <Dialog.Lazy mounted={<BaseDialog {...props} />}>
-    {({ open }) => <>{props.children({ open })}</>}
+    {({ openDialog }) => <>{props.children({ openDialog })}</>}
   </Dialog.Lazy>
 )

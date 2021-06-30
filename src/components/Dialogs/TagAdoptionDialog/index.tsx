@@ -12,7 +12,7 @@ import { ADD_TOAST } from '~/common/enums'
 import { UpdateTagSetting } from '~/components/GQL/mutations/__generated__/UpdateTagSetting'
 
 interface Props {
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
 const textZhHant =
@@ -31,24 +31,23 @@ const textEn =
   ' You can use it for writing collection, curation, or subcommunity and group discussions, be creative and discover new usages!'
 
 const BaseDialog = ({ children }: Props) => {
-  const { show, open, close } = useDialogSwitch(true)
+  const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
   const { getQuery } = useRoute()
   const id = getQuery('tagId')
-  const [update, { loading }] = useMutation<UpdateTagSetting>(
-    UPDATE_TAG_SETTING
-  )
+  const [update, { loading }] =
+    useMutation<UpdateTagSetting>(UPDATE_TAG_SETTING)
 
   return (
     <>
-      {children({ open })}
+      {children({ openDialog })}
 
-      <Dialog size="sm" isOpen={show} onDismiss={close}>
+      <Dialog size="sm" isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           title={
             <Translate zh_hant="認領標籤" zh_hans="认领标签" en="adopt tag" />
           }
-          close={close}
+          closeDialog={closeDialog}
           closeTextId="cancel"
         />
         <Dialog.Message>
@@ -93,7 +92,7 @@ const BaseDialog = ({ children }: Props) => {
           <Dialog.Footer.Button
             textColor="black"
             bgColor="grey-lighter"
-            onClick={close}
+            onClick={closeDialog}
           >
             <Translate
               zh_hant="考慮一下"
@@ -109,6 +108,6 @@ const BaseDialog = ({ children }: Props) => {
 
 export const TagAdoptionDialog = (props: Props) => (
   <Dialog.Lazy mounted={<BaseDialog {...props} />}>
-    {({ open }) => <>{props.children({ open })}</>}
+    {({ openDialog }) => <>{props.children({ openDialog })}</>}
   </Dialog.Lazy>
 )

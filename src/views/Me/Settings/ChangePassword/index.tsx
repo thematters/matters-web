@@ -29,9 +29,8 @@ const ChangePassword = () => {
         <ChangePasswordForm.Request
           defaultEmail={viewer.info.email}
           type="change"
-          purpose="dialog"
+          purpose="page"
           submitCallback={() => forward('verification_sent')}
-          closeDialog={close}
         />
       )}
 

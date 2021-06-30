@@ -6,15 +6,15 @@ import { useState } from 'react'
  * Usage:
  *
  * ```tsx
- *   const { showDialog, setShowDialog, open, close } = useDialogSwitch<boolean>(false)
+ *   const { show, setShow, openDialog, closeDialog } = useDialogSwitch<boolean>(false)
  * ```
  */
 export const useDialogSwitch = (value: boolean) => {
   const [show, setShow] = useState<boolean>(value)
 
-  const open = () => setShow(true)
+  const openDialog = () => setShow(true)
 
-  const close = () => setShow(false)
+  const closeDialog = () => setShow(false)
 
-  return { show, setShow, open, close }
+  return { show, setShow, openDialog, closeDialog }
 }

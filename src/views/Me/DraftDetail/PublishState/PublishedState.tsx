@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
 import { Dialog, ShareDialog, Translate } from '~/components'
@@ -19,6 +20,8 @@ const BasePublishedState = ({
 }
 
 const PublishedState = ({ draft }: { draft: PublishStateDraft }) => {
+  const router = useRouter()
+
   if (!draft.article) {
     return null
   }
@@ -58,12 +61,12 @@ const PublishedState = ({ draft }: { draft: PublishStateDraft }) => {
         />
       }
       footerButtons={
-        <Dialog.Footer.Button {...path}>
+        <Dialog.Footer.Button onClick={() => router.replace(path.href)}>
           <Translate zh_hant="查看作品" zh_hans="查看作品" en="View article" />
         </Dialog.Footer.Button>
       }
     >
-      {({ open }) => <BasePublishedState openShareDialog={open} />}
+      {({ openDialog }) => <BasePublishedState openShareDialog={openDialog} />}
     </ShareDialog>
   )
 }

@@ -55,7 +55,7 @@ export const useImmersiveMode = (hookSelector?: string) => {
   useEffect(() => {
     window.addEventListener('scroll', onScroll, false)
 
-    const $hook = hookSelector && dom.$(hookSelector)
+    const $hook = hookSelector && (dom.$(hookSelector) as any)
     if ($hook) {
       topOffset = $hook.offsetTop
     }

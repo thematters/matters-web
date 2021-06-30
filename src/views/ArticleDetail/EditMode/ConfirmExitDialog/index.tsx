@@ -2,20 +2,20 @@ import { Dialog, Translate, useDialogSwitch } from '~/components'
 
 interface ConfirmExitDialogProps {
   onExit: () => any
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
 const ConfirmExitDialog = ({ onExit, children }: ConfirmExitDialogProps) => {
-  const { show, open, close } = useDialogSwitch(true)
+  const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
   return (
     <>
-      {children({ open })}
+      {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={close} size="sm">
+      <Dialog isOpen={show} onDismiss={closeDialog} size="sm">
         <Dialog.Header
           title={<Translate zh_hant="修訂須知" zh_hans="修订须知" />}
-          close={close}
+          closeDialog={closeDialog}
           mode="inner"
         />
 
@@ -34,7 +34,7 @@ const ConfirmExitDialog = ({ onExit, children }: ConfirmExitDialogProps) => {
             bgColor="red"
             onClick={() => {
               onExit()
-              close()
+              closeDialog()
             }}
           >
             <Translate id="confirm" />
@@ -43,7 +43,7 @@ const ConfirmExitDialog = ({ onExit, children }: ConfirmExitDialogProps) => {
           <Dialog.Footer.Button
             bgColor="grey-lighter"
             textColor="black"
-            onClick={close}
+            onClick={closeDialog}
           >
             <Translate id="cancel" />
           </Dialog.Footer.Button>
@@ -55,7 +55,7 @@ const ConfirmExitDialog = ({ onExit, children }: ConfirmExitDialogProps) => {
 
 const LazyConfirmExitDialog = (props: ConfirmExitDialogProps) => (
   <Dialog.Lazy mounted={<ConfirmExitDialog {...props} />}>
-    {({ open }) => <>{props.children({ open })}</>}
+    {({ openDialog }) => <>{props.children({ openDialog })}</>}
   </Dialog.Lazy>
 )
 

@@ -19,7 +19,7 @@ const Weibo = ({
   <button
     type="button"
     onClick={() => {
-      const cover = dom.$('meta[property="og:image"]').getAttribute('content')
+      const cover = dom.$('meta[property="og:image"]')?.getAttribute('content')
       const shareUrl =
         'http://service.weibo.com/share/share.php?' +
         queryString.stringify({

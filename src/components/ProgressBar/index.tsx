@@ -1,10 +1,12 @@
-import Router from 'next/router'
+import { useRouter } from 'next/router'
 import NProgress from 'nprogress'
 import { useEffect } from 'react'
 
 import styles from './styles.css'
 
 const ProgressBar = () => {
+  const router = useRouter()
+
   const showAfterMs = 300
   let timer: any = null
 
@@ -21,15 +23,15 @@ const ProgressBar = () => {
   useEffect(() => {
     NProgress.configure({ showSpinner: false })
 
-    Router.events.on('routeChangeStart', routeChangeStart)
-    Router.events.on('routeChangeComplete', routeChangeEnd)
-    Router.events.on('routeChangeError', routeChangeEnd)
+    router.events.on('routeChangeStart', routeChangeStart)
+    router.events.on('routeChangeComplete', routeChangeEnd)
+    router.events.on('routeChangeError', routeChangeEnd)
 
     return () => {
       clearTimeout(timer)
-      Router.events.off('routeChangeStart', routeChangeStart)
-      Router.events.off('routeChangeComplete', routeChangeEnd)
-      Router.events.off('routeChangeError', routeChangeEnd)
+      router.events.off('routeChangeStart', routeChangeStart)
+      router.events.off('routeChangeComplete', routeChangeEnd)
+      router.events.off('routeChangeError', routeChangeEnd)
     }
   }, [])
 

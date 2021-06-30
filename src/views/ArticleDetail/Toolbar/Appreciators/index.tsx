@@ -50,11 +50,11 @@ const Appreciators = ({ article }: { article: AppreciatorsArticle }) => {
 
   return (
     <AppreciatorsDialog article={article}>
-      {({ open }) => (
+      {({ openDialog }) => (
         <button
           type="button"
           className="container"
-          onClick={open}
+          onClick={openDialog}
           disabled={totalReceivedCount <= 0}
           aria-label={TEXT.zh_hant.viewAppreciators}
           aria-haspopup="true"

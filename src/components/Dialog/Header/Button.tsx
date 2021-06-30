@@ -12,16 +12,16 @@ import { useResponsive } from '~/components/Hook'
 import { TEXT, TextId } from '~/common/enums'
 
 interface CloseButtonProps {
-  close: () => void
+  closeDialog: () => void
   textId?: TextId
 }
 
-export const CloseButton = ({ close, textId }: CloseButtonProps) => {
+export const CloseButton = ({ closeDialog, textId }: CloseButtonProps) => {
   const isSmallUp = useResponsive('sm-up')
 
   return (
     <Button
-      onClick={close}
+      onClick={closeDialog}
       aria-label={TEXT.zh_hant[textId || 'cancel']}
       bgColor={isSmallUp ? 'green-lighter' : undefined}
       size={isSmallUp ? ['2rem', '2rem'] : undefined}

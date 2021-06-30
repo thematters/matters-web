@@ -165,6 +165,7 @@ export const getTarget = (url?: string) => {
   url = url || window.location.href
   const qs = queryString.parseUrl(url).query
   const target = encodeURIComponent((qs.target as string) || '')
+
   return target
 }
 
@@ -186,9 +187,14 @@ export const redirectToTarget = ({
     fallback === 'homepage'
       ? `/` // FIXME: to purge cache
       : window.location.href
-  const target = getTarget() || fallbackTarget
+  let target = decodeURIComponent(getTarget())
 
-  window.location.href = decodeURIComponent(target)
+  const isValidTarget = /^((http|https):\/\/)/.test(target)
+  if (!isValidTarget) {
+    target = fallbackTarget
+  }
+
+  window.location.href = target || fallbackTarget
 }
 
 /**

@@ -41,9 +41,8 @@ const ME_BOOKMARK_FEED = gql`
 `
 
 const BaseMeBookmarks = () => {
-  const { data, loading, error, fetchMore, refetch } = useQuery<MeBookmarkFeed>(
-    ME_BOOKMARK_FEED
-  )
+  const { data, loading, error, fetchMore, refetch } =
+    useQuery<MeBookmarkFeed>(ME_BOOKMARK_FEED)
 
   if (loading) {
     return <Spinner />

@@ -25,17 +25,17 @@ interface Props {
 const ManageButton = () => {
   return (
     <TagEditorDialog>
-      {({ open }) => (
+      {({ openDialog }) => (
         <Button
           size={['4rem', '1.5rem']}
           textColor="green"
           textActiveColor="white"
           bgActiveColor="green"
           borderColor="green"
-          onClick={open}
+          onClick={openDialog}
         >
           <TextIcon icon={<IconSettings24 />} weight="md" size={'xs'}>
-            <Translate zh_hant="管理" zh_hans="管理" en="manage" />
+            <Translate zh_hant="管理" zh_hans="管理" en="Manage" />
           </TextIcon>
         </Button>
       )}

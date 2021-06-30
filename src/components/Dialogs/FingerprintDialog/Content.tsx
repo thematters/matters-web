@@ -1,16 +1,11 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import {
-  Button,
-  CopyToClipboard,
-  IconCopy16,
-  Spinner,
-  Translate,
-} from '~/components'
+import { Spinner, Translate } from '~/components'
 
-import { TEXT } from '~/common/enums'
-
+import ArticleSecret from './ArticleSecret'
+import ArticleSecretDesc from './ArticleSecretDesc'
+import CopyButton from './CopyButton'
 import styles from './styles.css'
 
 import { Gateways } from './__generated__/Gateways'
@@ -23,21 +18,13 @@ const GATEWAYS = gql`
   }
 `
 
-const CopyButton = ({ text }: { text: string }) => {
-  return (
-    <CopyToClipboard text={text}>
-      <Button
-        spacing={['xtight', 'xtight']}
-        bgActiveColor="grey-lighter"
-        aira-label={TEXT.zh_hant.copy}
-      >
-        <IconCopy16 color="grey" />
-      </Button>
-    </CopyToClipboard>
-  )
-}
-
-const FingerprintDialogContent = ({ dataHash }: { dataHash: string }) => {
+const FingerprintDialogContent = ({
+  dataHash,
+  showSecret,
+}: {
+  dataHash: string
+  showSecret: boolean
+}) => {
   const { loading, data } = useQuery<Gateways>(GATEWAYS)
 
   const gateways = data?.official.gatewayUrls || []
@@ -62,6 +49,9 @@ const FingerprintDialogContent = ({ dataHash }: { dataHash: string }) => {
           />
         </section>
       </section>
+
+      {/* secret */}
+      {showSecret && <ArticleSecret />}
 
       {/* gateways */}
       <section className="gateways">
@@ -126,6 +116,8 @@ const FingerprintDialogContent = ({ dataHash }: { dataHash: string }) => {
             en={` is the fingerpint of your work on IPFS, you can use it to retrive your work from any IPFS node.`}
           />
         </p>
+
+        {showSecret && <ArticleSecretDesc />}
 
         <p>
           <b>

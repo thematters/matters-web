@@ -7,6 +7,7 @@ import Field from './Field'
 import Input from './Input'
 import List from './List'
 import PinInput from './PinInput'
+import Select from './Select'
 import styles from './styles.css'
 import Textarea from './Textarea'
 
@@ -26,6 +27,7 @@ export const Form: React.FC<FormProps> & {
   AmountInput: typeof AmountInput
   List: typeof List
   Field: typeof Field
+  Select: typeof Select
   AmountRadioInput: typeof AmountRadioInput
   CurrencyRadioInput: typeof CurrencyRadioInput
 } = ({ noBackground, children, ...formProps }) => (
@@ -49,5 +51,6 @@ Form.DropdownInput = DropdownInput
 Form.AmountInput = AmountInput
 Form.List = List
 Form.Field = Field
+Form.Select = Select
 Form.AmountRadioInput = AmountRadioInput
 Form.CurrencyRadioInput = CurrencyRadioInput

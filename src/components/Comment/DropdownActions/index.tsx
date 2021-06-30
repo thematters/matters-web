@@ -172,13 +172,13 @@ const BaseDropdownActions = ({
         title: 'moreActions',
       }}
     >
-      {({ open, ref }) => (
+      {({ openDialog, ref }) => (
         <Button
           spacing={['xtight', 'xtight']}
           bgActiveColor={inCard ? 'grey-lighter-active' : 'grey-lighter'}
           aria-label={TEXT.zh_hant.moreActions}
           aria-haspopup="true"
-          onClick={open}
+          onClick={openDialog}
           ref={ref}
         >
           <IconMore16 color="grey" />
@@ -239,13 +239,13 @@ const DropdownActions = (props: DropdownActionsProps) => {
       defaultContent={comment.content}
       title={article ? 'editComment' : 'edit'}
     >
-      {({ open: openEditCommentDialog }) => (
+      {({ openDialog: openEditCommentDialog }) => (
         <DeleteComment.Dialog comment={comment} type={type}>
-          {({ open: openDeleteCommentDialog }) => (
+          {({ openDialog: openDeleteCommentDialog }) => (
             <BlockUser.Dialog user={comment.author}>
-              {({ open: openBlockUserDialog }) => (
+              {({ openDialog: openBlockUserDialog }) => (
                 <CollapseComment.Dialog comment={comment} type={type}>
-                  {({ open: openCollapseCommentDialog }) => (
+                  {({ openDialog: openCollapseCommentDialog }) => (
                     <BaseDropdownActions
                       {...props}
                       {...controls}

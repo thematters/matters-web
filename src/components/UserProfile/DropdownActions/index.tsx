@@ -94,12 +94,12 @@ const BaseDropdownActions = ({
         title: 'moreActions',
       }}
     >
-      {({ open, ref }) => (
+      {({ openDialog, ref }) => (
         <Button
           bgColor="half-black"
           aria-label={TEXT.zh_hant.moreActions}
           aria-haspopup="true"
-          onClick={open}
+          onClick={openDialog}
           ref={ref}
         >
           {hasEditProfile ? (
@@ -125,9 +125,9 @@ const DropdownActions = ({ user, isMe }: DropdownActionsProps) => {
 
   return (
     <EditProfileDialog user={user}>
-      {({ open: openEditProfileDialog }) => (
+      {({ openDialog: openEditProfileDialog }) => (
         <BlockUser.Dialog user={user}>
-          {({ open: openBlockUserDialog }) => (
+          {({ openDialog: openBlockUserDialog }) => (
             <BaseDropdownActions
               user={user}
               isMe={isMe}

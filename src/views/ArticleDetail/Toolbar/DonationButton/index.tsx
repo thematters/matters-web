@@ -74,7 +74,7 @@ const DonationButton = ({ article, disabled }: DonationButtonProps) => {
   return (
     <section className="container">
       <DonationDialog recipient={article.author} targetId={article.id}>
-        {({ open }) => (
+        {({ openDialog }) => (
           <Button
             spacing={['xtight', 'xtight']}
             bgActiveColor="grey-lighter"
@@ -90,7 +90,7 @@ const DonationButton = ({ article, disabled }: DonationButtonProps) => {
                 forbid()
                 return
               }
-              open()
+              openDialog()
             }}
           >
             <TextIcon

@@ -182,7 +182,7 @@ const Confirm: React.FC<FormProps> = ({
       {closeDialog && (
         <Dialog.Header
           title="changeUserName"
-          close={closeDialog}
+          closeDialog={closeDialog}
           rightButton={SubmitButton}
         />
       )}

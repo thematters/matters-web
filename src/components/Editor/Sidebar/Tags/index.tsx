@@ -1,8 +1,6 @@
 import { IconHashTag24, Tag } from '~/components'
-import {
-  SearchSelectDialog,
-  SearchSelectNode,
-} from '~/components/Dialogs/SearchSelectDialog'
+import { SearchSelectDialog } from '~/components/Dialogs/SearchSelectDialog'
+import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
 
 import Box from '../Box'
 import styles from './styles.css'
@@ -11,27 +9,32 @@ import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
 
 export interface SidebarTagsProps {
   tags: DigestTag[]
-  onEdit: (tag: DigestTag[]) => any
+  editTags: (tag: DigestTag[]) => any
   saving?: boolean
   disabled?: boolean
 }
 
-const SidebarTags = ({ tags, onEdit, saving, disabled }: SidebarTagsProps) => {
+const SidebarTags = ({
+  tags,
+  editTags,
+  saving,
+  disabled,
+}: SidebarTagsProps) => {
   return (
     <SearchSelectDialog
       title="addTag"
       hint="hintAddTag"
       searchType="Tag"
-      onSave={(nodes: SearchSelectNode[]) => onEdit(nodes as DigestTag[])}
+      onSave={(nodes: SearchSelectNode[]) => editTags(nodes as DigestTag[])}
       nodes={tags}
       saving={saving}
       createTag
     >
-      {({ open: openAddMyArticlesDialog }) => (
+      {({ openDialog }) => (
         <Box
           icon={<IconHashTag24 size="md" />}
           title="addTag"
-          onClick={openAddMyArticlesDialog}
+          onClick={openDialog}
           disabled={disabled}
         >
           {tags.length > 0 && (

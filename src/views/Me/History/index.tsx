@@ -45,9 +45,8 @@ const ME_HISTORY_FEED = gql`
 `
 
 const BaseMeHistory = () => {
-  const { data, loading, error, fetchMore, refetch } = useQuery<MeHistoryFeed>(
-    ME_HISTORY_FEED
-  )
+  const { data, loading, error, fetchMore, refetch } =
+    useQuery<MeHistoryFeed>(ME_HISTORY_FEED)
 
   if (loading) {
     return <Spinner />

@@ -12,24 +12,23 @@ import { ADD_TOAST } from '~/common/enums'
 import { UpdateTagSetting } from '~/components/GQL/mutations/__generated__/UpdateTagSetting'
 
 interface Props {
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
   isOwner?: boolean
 }
 
 const BaseDialog = ({ children, isOwner }: Props) => {
-  const { show, open, close } = useDialogSwitch(true)
+  const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
   const { getQuery } = useRoute()
   const id = getQuery('tagId')
-  const [update, { loading }] = useMutation<UpdateTagSetting>(
-    UPDATE_TAG_SETTING
-  )
+  const [update, { loading }] =
+    useMutation<UpdateTagSetting>(UPDATE_TAG_SETTING)
 
   return (
     <>
-      {children({ open })}
+      {children({ openDialog })}
 
-      <Dialog size="sm" isOpen={show} onDismiss={close}>
+      <Dialog size="sm" isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           title={
             <Translate
@@ -38,7 +37,7 @@ const BaseDialog = ({ children, isOwner }: Props) => {
               en="resign from tag"
             />
           }
-          close={close}
+          closeDialog={closeDialog}
           closeTextId="cancel"
         />
         <Dialog.Message>
@@ -90,7 +89,7 @@ const BaseDialog = ({ children, isOwner }: Props) => {
                 })
               )
 
-              close()
+              closeDialog()
             }}
           >
             <Translate
@@ -103,7 +102,7 @@ const BaseDialog = ({ children, isOwner }: Props) => {
           <Dialog.Footer.Button
             textColor="black"
             bgColor="grey-lighter"
-            onClick={close}
+            onClick={closeDialog}
           >
             <Translate zh_hant="取消" zh_hans="取消" en="cancel" />
           </Dialog.Footer.Button>
@@ -115,6 +114,6 @@ const BaseDialog = ({ children, isOwner }: Props) => {
 
 export const TagLeaveDialog = (props: Props) => (
   <Dialog.Lazy mounted={<BaseDialog {...props} />}>
-    {({ open }) => <>{props.children({ open })}</>}
+    {({ openDialog }) => <>{props.children({ openDialog })}</>}
   </Dialog.Lazy>
 )

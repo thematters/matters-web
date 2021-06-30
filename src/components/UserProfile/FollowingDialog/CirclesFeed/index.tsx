@@ -25,18 +25,10 @@ const CirclesFeed = () => {
    * Data Fetching
    */
   // public data
-  const {
-    data,
-    loading,
-    error,
-    fetchMore,
-    refetch,
-  } = usePublicQuery<UserFollowingCirclesPublic>(
-    USER_FOLLOWING_CIRCLES_PUBLIC,
-    {
+  const { data, loading, error, fetchMore, refetch } =
+    usePublicQuery<UserFollowingCirclesPublic>(USER_FOLLOWING_CIRCLES_PUBLIC, {
       variables: { userName },
-    }
-  )
+    })
 
   // pagination
   const user = data?.user

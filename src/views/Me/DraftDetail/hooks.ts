@@ -10,7 +10,10 @@ import {
   SET_TAGS,
 } from './gql'
 
-import { ArticleAccessType } from '@/__generated__/globalTypes'
+import {
+  ArticleAccessType,
+  ArticleLicenseType,
+} from '@/__generated__/globalTypes'
 import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
 import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
 import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
@@ -57,9 +60,8 @@ export const useEditDraftTags = (draft: EditMetaDraft) => {
 
 export const useEditDraftCollection = (draft: EditMetaDraft) => {
   const draftId = draft.id
-  const [setCollection, { loading: saving }] = useMutation<SetDraftCollection>(
-    SET_COLLECTION
-  )
+  const [setCollection, { loading: saving }] =
+    useMutation<SetDraftCollection>(SET_COLLECTION)
 
   const edit = (newArticles: ArticleDigestDropdownArticle[]) =>
     setCollection({
@@ -77,22 +79,22 @@ export const useEditDraftAccess = (
   circle?: DigestRichCirclePublic
 ) => {
   const draftId = draft.id
-  const [setCircle, { loading: saving }] = useMutation<SetDraftAccess>(
-    SET_ACCESS
-  )
+  const [setCircle, { loading: saving }] =
+    useMutation<SetDraftAccess>(SET_ACCESS)
 
-  const edit = (addToCircle: boolean, paywalled: boolean) => {
-    if (!circle) {
-      return
-    }
-
-    setCircle({
+  const edit = async (
+    addToCircle: boolean,
+    paywalled: boolean,
+    license: ArticleLicenseType
+  ) => {
+    return setCircle({
       variables: {
         id: draftId,
-        circle: addToCircle ? circle.id : null,
+        circle: (addToCircle && circle?.id) || null,
         accessType: paywalled
           ? ArticleAccessType.paywall
           : ArticleAccessType.public,
+        license,
       },
     })
   }

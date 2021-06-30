@@ -4,7 +4,6 @@ export * from './RecommendAuthorDialog'
 
 // Article
 export * from './ReviseArticleDialog'
-export * from './RevisedArticlePublishDialog'
 export * from './FingerprintDialog'
 export * from './DonatorsDialog'
 export * from './AppreciatorsDialog'

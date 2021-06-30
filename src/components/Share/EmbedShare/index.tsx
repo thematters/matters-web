@@ -10,7 +10,7 @@ export interface EmbedShareProps {
   path?: string
   description?: React.ReactNode
 
-  headerTitle: React.ReactElement
+  headerTitle: React.ReactNode
   wrap?: boolean
 }
 

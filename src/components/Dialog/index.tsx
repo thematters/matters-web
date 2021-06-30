@@ -16,9 +16,9 @@ import Message from './Message'
  *
  * ```tsx
  * <Dialog>
- *   <Dialog.Header title={title} close={close} />
+ *   <Dialog.Header title={title} closeDialog={closeDialog} />
  *
- *   <Dialog.Content isOpen={showDialog} onDismiss={close}>
+ *   <Dialog.Content isOpen={showDialog} onDismiss={closeDialog}>
  *      ...
  *   </Dialog.Content>
  *

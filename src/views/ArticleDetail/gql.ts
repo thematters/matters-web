@@ -45,6 +45,7 @@ export const ARTICLE_DETAIL_PUBLIC = gql`
           ...CircleWallCirclePrivate
         }
       }
+      license
       drafts {
         id
         mediaHash

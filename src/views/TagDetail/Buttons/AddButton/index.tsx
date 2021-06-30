@@ -11,10 +11,8 @@ import {
   useMutation,
   ViewerContext,
 } from '~/components'
-import {
-  SearchSelectDialog,
-  SearchSelectNode,
-} from '~/components/Dialogs/SearchSelectDialog'
+import { SearchSelectDialog } from '~/components/Dialogs/SearchSelectDialog'
+import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
 import ADD_ARTICLES_TAGS from '~/components/GQL/mutations/addArticlesTags'
 import updateTagArticlesCount from '~/components/GQL/updates/tagArticlesCount'
 
@@ -60,14 +58,14 @@ const BaseDropdownActions = ({
         title: 'moreActions',
       }}
     >
-      {({ open, ref }) => (
+      {({ openDialog, ref }) => (
         <Button
           size={['5rem', '2rem']}
           textColor="gold"
           textActiveColor="white"
           bgActiveColor="gold"
           borderColor="gold"
-          onClick={open}
+          onClick={openDialog}
           aria-haspopup="true"
           ref={ref}
         >
@@ -89,46 +87,45 @@ const DropdownActions = (props: DropdownActionsProps) => {
    * Data
    */
   const [add, { loading }] = useMutation<AddArticlesTags>(ADD_ARTICLES_TAGS)
-  const addArticlesToTag = (selected: boolean) => async (
-    articles: SearchSelectNode[]
-  ) => {
-    const articleIds = articles.map((article) => article.id)
+  const addArticlesToTag =
+    (selected: boolean) => async (articles: SearchSelectNode[]) => {
+      const articleIds = articles.map((article) => article.id)
 
-    await add({
-      variables: { id: tag.id, articles: articleIds, selected },
-      update: (cache, { data }) => {
-        if (selected) {
-          const newCount = data?.addArticlesTags?.articles?.totalCount || 0
-          const oldCount = tag.articles.totalCount || 0
-          updateTagArticlesCount({
-            cache,
-            id: tag.id,
-            count: newCount - oldCount,
-            type: 'increment',
-          })
-        }
-      },
-    })
-
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'green',
-          content: translate({ id: 'addedArticleTag', lang }),
-          duration: 2000,
+      await add({
+        variables: { id: tag.id, articles: articleIds, selected },
+        update: (cache, { data }) => {
+          if (selected) {
+            const newCount = data?.addArticlesTags?.articles?.totalCount || 0
+            const oldCount = tag.articles.totalCount || 0
+            updateTagArticlesCount({
+              cache,
+              id: tag.id,
+              count: newCount - oldCount,
+              type: 'increment',
+            })
+          }
         },
       })
-    )
 
-    window.dispatchEvent(
-      new CustomEvent(REFETCH_TAG_DETAIL_ARTICLES, {
-        detail: {
-          event: 'add',
-          differences: articles.length,
-        },
-      })
-    )
-  }
+      window.dispatchEvent(
+        new CustomEvent(ADD_TOAST, {
+          detail: {
+            color: 'green',
+            content: translate({ id: 'addedArticleTag', lang }),
+            duration: 2000,
+          },
+        })
+      )
+
+      window.dispatchEvent(
+        new CustomEvent(REFETCH_TAG_DETAIL_ARTICLES, {
+          detail: {
+            event: 'add',
+            differences: articles.length,
+          },
+        })
+      )
+    }
 
   const forbid = () => {
     window.dispatchEvent(
@@ -154,12 +151,10 @@ const DropdownActions = (props: DropdownActionsProps) => {
       onSave={addArticlesToTag(false)}
       saving={loading}
     >
-      {({ open: openAddMyArticlesDialog }) => (
+      {({ openDialog }) => (
         <BaseDropdownActions
           {...props}
-          openAddMyArticlesDialog={
-            viewer.isFrozen ? forbid : openAddMyArticlesDialog
-          }
+          openAddMyArticlesDialog={viewer.isFrozen ? forbid : openDialog}
         />
       )}
     </SearchSelectDialog>

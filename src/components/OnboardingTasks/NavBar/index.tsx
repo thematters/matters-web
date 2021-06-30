@@ -27,7 +27,7 @@ const NavBar = () => {
     <section className="nav-bar">
       <Layout.FixedMain>
         <OnboardingTasksDialog>
-          {({ open: openOnboardingTasksDialog }) => (
+          {({ openDialog: openOnboardingTasksDialog }) => (
             <Card
               bgColor="none"
               spacing={[0, 0]}

@@ -98,12 +98,12 @@ export const LanguageSwitch: React.FC<LanguageSwitchProps> = ({
         ),
       }}
     >
-      {({ open, ref }) => (
+      {({ openDialog, ref }) => (
         <Button
           size={[null, size === 'sm' ? '1.25rem' : '1.75rem']}
           spacing={[0, 'xtight']}
           bgColor={bgColor}
-          onClick={open}
+          onClick={openDialog}
           ref={ref}
         >
           <TextIcon icon={<IconWorld16 />} size={textSize} color={iconColor}>

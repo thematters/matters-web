@@ -1,10 +1,9 @@
 import dynamic from 'next/dynamic'
-import { useState } from 'react'
 
-import { Dialog, Spinner } from '~/components'
+import { Dialog, Spinner, useDialogSwitch } from '~/components'
 
 interface ResetPaymentPasswordProps {
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
 const DynamicPaymentResetPasswordForm = dynamic(
@@ -15,22 +14,20 @@ const DynamicPaymentResetPasswordForm = dynamic(
 const BaseResetPaymentPasswordDialog: React.FC<ResetPaymentPasswordProps> = ({
   children,
 }) => {
-  const [showDialog, setShowDialog] = useState(true)
-
-  const close = () => setShowDialog(false)
+  const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
   return (
     <>
-      {children({ open })}
+      {children({ openDialog })}
 
-      <Dialog size="sm" isOpen={showDialog} onDismiss={close} fixedHeight>
+      <Dialog size="sm" isOpen={show} onDismiss={closeDialog} fixedHeight>
         <Dialog.Header
           title="resetPaymentPassword"
-          close={close}
+          closeDialog={closeDialog}
           closeTextId="close"
         />
 
-        <DynamicPaymentResetPasswordForm close={close} />
+        <DynamicPaymentResetPasswordForm closeDialog={closeDialog} />
       </Dialog>
     </>
   )
@@ -40,6 +37,6 @@ export const ResetPaymentPasswordDialog = (
   props: ResetPaymentPasswordProps
 ) => (
   <Dialog.Lazy mounted={<BaseResetPaymentPasswordDialog {...props} />}>
-    {({ open }) => <>{props.children({ open })}</>}
+    {({ openDialog }) => <>{props.children({ openDialog })}</>}
   </Dialog.Lazy>
 )

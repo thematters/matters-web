@@ -7,7 +7,7 @@ type Step = 'request' | 'onboarding'
 
 interface Props {
   nextStep: () => void
-  close: () => void
+  closeDialog: () => void
 }
 
 const ConnectStripeAccountForm: React.FC<Props> = (props) => {

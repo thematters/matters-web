@@ -1,4 +1,4 @@
-import Router from 'next/router'
+import { useRouter } from 'next/router'
 import { useContext, useEffect, useRef } from 'react'
 
 import { ViewerContext } from '~/components'
@@ -6,6 +6,7 @@ import { ViewerContext } from '~/components'
 import { analytics } from '~/common/utils'
 
 const PageViewTracker = () => {
+  const router = useRouter()
   const viewer = useContext(ViewerContext)
   const referrer = useRef('')
 
@@ -31,10 +32,10 @@ const PageViewTracker = () => {
       referrer.current = window.location.pathname
     }
 
-    Router.events.on('routeChangeComplete', trackPage)
+    router.events.on('routeChangeComplete', trackPage)
 
     return () => {
-      Router.events.off('routeChangeComplete', trackPage)
+      router.events.off('routeChangeComplete', trackPage)
     }
   }, [viewer.privateFetched])
 

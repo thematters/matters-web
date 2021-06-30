@@ -272,7 +272,7 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
     <>
       <Dialog.Header
         title={isEditing ? 'editTag' : 'createTag'}
-        close={closeDialog}
+        closeDialog={closeDialog}
         rightButton={SubmitButton}
       />
 

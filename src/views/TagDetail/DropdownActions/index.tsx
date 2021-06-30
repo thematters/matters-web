@@ -20,10 +20,8 @@ import {
   useMutation,
   ViewerContext,
 } from '~/components'
-import {
-  SearchSelectDialog,
-  SearchSelectNode,
-} from '~/components/Dialogs/SearchSelectDialog'
+import { SearchSelectDialog } from '~/components/Dialogs/SearchSelectDialog'
+import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
 import ADD_ARTICLES_TAGS from '~/components/GQL/mutations/addArticlesTags'
 import updateTagArticlesCount from '~/components/GQL/updates/tagArticlesCount'
 
@@ -126,13 +124,13 @@ const BaseDropdownActions = ({
         title: 'moreActions',
       }}
     >
-      {({ open, ref }) => (
+      {({ openDialog, ref }) => (
         <section className="container">
           <Button
             bgColor="half-black"
             aria-label={TEXT.zh_hant.moreActions}
             aria-haspopup="true"
-            onClick={open}
+            onClick={openDialog}
             ref={ref}
           >
             <IconSettings32 size="lg" color="white" />
@@ -153,46 +151,45 @@ const DropdownActions = (props: DropdownActionsProps) => {
    * Data
    */
   const [add, { loading }] = useMutation<AddArticlesTags>(ADD_ARTICLES_TAGS)
-  const addArticlesToTag = (selected: boolean) => async (
-    articles: SearchSelectNode[]
-  ) => {
-    const articleIds = articles.map((article) => article.id)
+  const addArticlesToTag =
+    (selected: boolean) => async (articles: SearchSelectNode[]) => {
+      const articleIds = articles.map((article) => article.id)
 
-    await add({
-      variables: { id: tag.id, articles: articleIds, selected },
-      update: (cache, { data }) => {
-        if (selected) {
-          const newCount = data?.addArticlesTags?.articles?.totalCount || 0
-          const oldCount = tag.articles.totalCount || 0
-          updateTagArticlesCount({
-            cache,
-            id: tag.id,
-            count: newCount - oldCount,
-            type: 'increment',
-          })
-        }
-      },
-    })
-
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'green',
-          content: translate({ id: 'addedArticleTag', lang }),
-          duration: 2000,
+      await add({
+        variables: { id: tag.id, articles: articleIds, selected },
+        update: (cache, { data }) => {
+          if (selected) {
+            const newCount = data?.addArticlesTags?.articles?.totalCount || 0
+            const oldCount = tag.articles.totalCount || 0
+            updateTagArticlesCount({
+              cache,
+              id: tag.id,
+              count: newCount - oldCount,
+              type: 'increment',
+            })
+          }
         },
       })
-    )
 
-    window.dispatchEvent(
-      new CustomEvent(REFETCH_TAG_DETAIL_ARTICLES, {
-        detail: {
-          event: 'add',
-          differences: articles.length,
-        },
-      })
-    )
-  }
+      window.dispatchEvent(
+        new CustomEvent(ADD_TOAST, {
+          detail: {
+            color: 'green',
+            content: translate({ id: 'addedArticleTag', lang }),
+            duration: 2000,
+          },
+        })
+      )
+
+      window.dispatchEvent(
+        new CustomEvent(REFETCH_TAG_DETAIL_ARTICLES, {
+          detail: {
+            event: 'add',
+            differences: articles.length,
+          },
+        })
+      )
+    }
 
   const forbid = () => {
     window.dispatchEvent(
@@ -219,7 +216,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
 
   return (
     <TagDialog {...props.tag}>
-      {({ open: openTagDialog }) => (
+      {({ openDialog: openTagDialog }) => (
         <SearchSelectDialog
           title="tagAddSelectedArticle"
           hint="hintEditCollection"
@@ -227,11 +224,11 @@ const DropdownActions = (props: DropdownActionsProps) => {
           onSave={addArticlesToTag(true)}
           saving={loading}
         >
-          {({ open: openTagAddSelectedArticlesDialog }) => (
+          {({ openDialog: openTagAddSelectedArticlesDialog }) => (
             <TagLeaveDialog {...props}>
-              {({ open: openTagLeaveDialog }) => (
+              {({ openDialog: openTagLeaveDialog }) => (
                 <TagEditorDialog {...props}>
-                  {({ open: openTagEditorDialog }) => (
+                  {({ openDialog: openTagEditorDialog }) => (
                     <BaseDropdownActions
                       {...props}
                       {...controls}

@@ -4,43 +4,37 @@ import {
   IconCollection24,
   IconHashTag24,
   IconImage24,
+  IconSettings24,
   Layout,
   TextIcon,
   Translate,
 } from '~/components'
+import { SearchSelectDialog } from '~/components/Dialogs/SearchSelectDialog'
 import {
-  SearchSelectDialog,
-  SearchSelectNode,
-} from '~/components/Dialogs/SearchSelectDialog'
+  SetCollectionProps,
+  SetCoverProps,
+  SetTagsProps,
+  ToggleAccessProps,
+} from '~/components/Editor'
+import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
 
-import SetCoverDialog, { BaseSetCoverDialogProps } from '../SetCoverDialog'
-import MoreActions from './MoreActions'
+import { TEXT } from '~/common/enums'
+
+import SetCover from '../SetCover'
+import AccessDialog from './AccessDialog'
 import styles from './styles.css'
 
-import { ArticleAccessType, SearchExclude } from '@/__generated__/globalTypes'
+import { SearchExclude } from '@/__generated__/globalTypes'
 import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
-import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
-import { Asset } from '~/components/GQL/fragments/__generated__/Asset'
 import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
 
 export type BottomBarProps = {
-  editCover: (asset?: Asset) => any
-
-  collection: ArticleDigestDropdownArticle[]
-  editCollection: (articles: ArticleDigestDropdownArticle[]) => any
-
-  tags: DigestTag[]
-  editTags: (tag: DigestTag[]) => any
-
-  circle?: DigestRichCirclePublic | null
-  accessType?: ArticleAccessType
-  editAccess?: (addToCircle: boolean, paywalled: boolean) => any
-  canToggleCircle: boolean
-  canTogglePaywall: boolean
-
-  saving?: boolean
-  disabled?: boolean
-} & Omit<BaseSetCoverDialogProps, 'onEdit'>
+  saving: boolean
+  disabled: boolean
+} & SetCoverProps &
+  SetCollectionProps &
+  SetTagsProps &
+  ToggleAccessProps
 
 /**
  * Editor toolbar that fixed on bottom to edit cover, tags and collection,
@@ -49,36 +43,61 @@ export type BottomBarProps = {
 const BottomBar: React.FC<BottomBarProps> = ({
   cover,
   editCover,
+  assets,
+  refetchAssets,
+  entityId,
+  entityType,
+  coverSaving,
 
   collection,
   editCollection,
+  collectionSaving,
 
   tags,
   editTags,
+  tagsSaving,
 
   circle,
   editAccess,
+  accessSaving,
   accessType,
+  license,
   canToggleCircle,
-  canTogglePaywall,
 
   saving,
   disabled,
-
-  ...restProps
 }) => {
   const bottomBarClasses = classNames({
     'bottom-bar': true,
     'u-area-disable': disabled,
   })
 
+  const coverProps: SetCoverProps = {
+    cover,
+    editCover,
+    assets,
+    refetchAssets,
+    entityId,
+    entityType,
+    coverSaving,
+  }
+  const accessProps: ToggleAccessProps = {
+    circle,
+    accessType,
+    license,
+    editAccess,
+    accessSaving,
+    canToggleCircle,
+  }
+
   return (
     <section className={bottomBarClasses}>
       <Layout.FixedMain>
         <section className="content">
           <section className="inner">
-            <SetCoverDialog cover={cover} onEdit={editCover} {...restProps}>
-              {({ open: openSetCoverDialog }) => (
+            {/* Cover */}
+            <SetCover.Dialog {...coverProps}>
+              {({ openDialog: openSetCoverDialog }) => (
                 <button type="button" onClick={openSetCoverDialog}>
                   <TextIcon
                     icon={<IconImage24 size="md" />}
@@ -90,8 +109,9 @@ const BottomBar: React.FC<BottomBarProps> = ({
                   </TextIcon>
                 </button>
               )}
-            </SetCoverDialog>
+            </SetCover.Dialog>
 
+            {/* Tags */}
             <SearchSelectDialog
               title="addTag"
               hint="hintAddTag"
@@ -100,11 +120,11 @@ const BottomBar: React.FC<BottomBarProps> = ({
                 editTags(nodes as DigestTag[])
               }
               nodes={tags}
-              saving={saving}
+              saving={tagsSaving}
               createTag
             >
-              {({ open: openAddMyArticlesDialog }) => (
-                <button type="button" onClick={openAddMyArticlesDialog}>
+              {({ openDialog }) => (
+                <button type="button" onClick={openDialog}>
                   <TextIcon
                     icon={<IconHashTag24 size="md" />}
                     size="md-s"
@@ -117,6 +137,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
               )}
             </SearchSelectDialog>
 
+            {/* Collection */}
             <SearchSelectDialog
               title="extendArticle"
               hint="hintEditCollection"
@@ -126,10 +147,10 @@ const BottomBar: React.FC<BottomBarProps> = ({
                 editCollection(nodes as ArticleDigestDropdownArticle[])
               }
               nodes={collection}
-              saving={saving}
+              saving={collectionSaving}
             >
-              {({ open: openAddMyArticlesDialog }) => (
-                <button type="button" onClick={openAddMyArticlesDialog}>
+              {({ openDialog }) => (
+                <button type="button" onClick={openDialog}>
                   <TextIcon
                     icon={<IconCollection24 size="md" />}
                     size="md-s"
@@ -142,16 +163,25 @@ const BottomBar: React.FC<BottomBarProps> = ({
               )}
             </SearchSelectDialog>
 
-            {editAccess && (
-              <MoreActions
-                circle={circle}
-                accessType={accessType}
-                editAccess={editAccess}
-                saving={!!saving}
-                canToggleCircle={canToggleCircle}
-                canTogglePaywall={canTogglePaywall}
-              />
-            )}
+            {/* Circle & License */}
+            <AccessDialog {...accessProps}>
+              {({ openDialog }) => (
+                <button
+                  aria-label={TEXT.zh_hant.articleManagement}
+                  aria-haspopup="true"
+                  onClick={openDialog}
+                >
+                  <TextIcon
+                    icon={<IconSettings24 size="md" />}
+                    size="md-s"
+                    weight="md"
+                    spacing="xtight"
+                  >
+                    <Translate zh_hant="管理" zh_hans="管理" en="Manage" />
+                  </TextIcon>
+                </button>
+              )}
+            </AccessDialog>
           </section>
         </section>
       </Layout.FixedMain>

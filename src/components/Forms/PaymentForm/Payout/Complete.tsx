@@ -3,10 +3,10 @@ import { Dialog, Translate } from '~/components'
 import { PATHS } from '~/common/enums'
 
 interface Props {
-  close: () => void
+  closeDialog: () => void
 }
 
-const Complete: React.FC<Props> = ({ close }) => {
+const Complete: React.FC<Props> = ({ closeDialog }) => {
   return (
     <>
       <Dialog.Message spacing="md">
@@ -43,7 +43,7 @@ const Complete: React.FC<Props> = ({ close }) => {
         <Dialog.Footer.Button
           bgColor="grey-lighter"
           textColor="black"
-          onClick={close}
+          onClick={closeDialog}
         >
           <Translate zh_hant="完成交易" zh_hans="完成交易" en="finish payout" />
         </Dialog.Footer.Button>

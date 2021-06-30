@@ -10,7 +10,7 @@ const PayoutButton: React.FC<PayoutButtonProps> = ({
 }) => {
   return (
     <PayoutDialog hasStripeAccount={hasStripeAccount}>
-      {({ open: openPayoutDialog }) => (
+      {({ openDialog: openPayoutDialog }) => (
         <Dialog.Footer.Button
           {...buttonProps}
           bgColor="grey-lighter"

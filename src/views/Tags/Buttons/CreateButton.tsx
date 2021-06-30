@@ -19,7 +19,7 @@ const CreateButton = () => {
 
   return (
     <TagDialog>
-      {({ open }) => (
+      {({ openDialog }) => (
         <Button
           size={['6rem', '2rem']}
           bgActiveColor="grey-lighter"
@@ -36,7 +36,7 @@ const CreateButton = () => {
               return
             }
 
-            open()
+            openDialog()
           }}
         >
           <TextIcon color="green" size="md" weight="md">

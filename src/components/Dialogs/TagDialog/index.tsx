@@ -12,7 +12,7 @@ const DynamicContent = dynamic(() => import('./Content'), {
 })
 
 type BaseTagDialogProps = {
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 } & TagDialogProps
 
 const BaseTagDialog = ({
@@ -20,14 +20,18 @@ const BaseTagDialog = ({
   content,
   ...restProps
 }: BaseTagDialogProps) => {
-  const { show, open, close } = useDialogSwitch(true)
+  const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
   return (
     <>
-      {children({ open })}
+      {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={close} fixedHeight>
-        <DynamicContent closeDialog={close} content={content} {...restProps} />
+      <Dialog isOpen={show} onDismiss={closeDialog} fixedHeight>
+        <DynamicContent
+          closeDialog={closeDialog}
+          content={content}
+          {...restProps}
+        />
       </Dialog>
     </>
   )
@@ -35,6 +39,6 @@ const BaseTagDialog = ({
 
 export const TagDialog = (props: BaseTagDialogProps) => (
   <Dialog.Lazy mounted={<BaseTagDialog {...props} />}>
-    {({ open }) => <>{props.children({ open })}</>}
+    {({ openDialog }) => <>{props.children({ openDialog })}</>}
   </Dialog.Lazy>
 )

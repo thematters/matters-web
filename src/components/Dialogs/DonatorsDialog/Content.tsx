@@ -120,7 +120,7 @@ const DonatorsDialogContent = ({
             zh_hans={`${totalCount} 人支持了作品`}
           />
         }
-        close={closeDialog}
+        closeDialog={closeDialog}
         closeTextId="close"
       />
 

@@ -1,7 +1,6 @@
 import { useLazyQuery, useQuery } from '@apollo/react-hooks'
 import jump from 'jump.js'
 import dynamic from 'next/dynamic'
-import Router from 'next/router'
 import { useContext, useEffect, useState } from 'react'
 import { Waypoint } from 'react-waypoint'
 
@@ -39,6 +38,7 @@ import {
   ARTICLE_DETAIL_PUBLIC,
   ARTICLE_TRANSLATION,
 } from './gql'
+import License from './License'
 import MetaInfo from './MetaInfo'
 import RelatedArticles from './RelatedArticles'
 import State from './State'
@@ -170,10 +170,8 @@ const ArticleDetail = () => {
   const language = article?.language
   const { lang: viewerLanguage } = useContext(LanguageContext)
   const shouldTranslate = !!(language && language !== viewerLanguage)
-  const [
-    getTranslation,
-    { data: translationData, loading: translating },
-  ] = useLazyQuery<ArticleTranslation>(ARTICLE_TRANSLATION)
+  const [getTranslation, { data: translationData, loading: translating }] =
+    useLazyQuery<ArticleTranslation>(ARTICLE_TRANSLATION)
   const titleTranslation = translationData?.article?.translation?.title
   const contentTranslation = translationData?.article?.translation?.content
   const toggleTranslate = () => {
@@ -211,7 +209,7 @@ const ArticleDetail = () => {
     }
 
     const path = toPath({ page: 'articleDetail', article })
-    Router.replace(path.href)
+    router.replace(path.href)
   }
 
   const onEditSaved = async () => {
@@ -383,6 +381,8 @@ const ArticleDetail = () => {
           {features.payment && canReadFullContent && (
             <SupportWidget article={article} />
           )}
+
+          <License license={article.license} />
 
           {collectionCount > 0 && (
             <section className="block">

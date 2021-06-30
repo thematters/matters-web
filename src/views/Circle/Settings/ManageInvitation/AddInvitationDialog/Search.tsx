@@ -7,7 +7,7 @@ import SearchingArea, {
 import StagingArea, { StagingNode } from '~/components/SearchSelect/StagingArea'
 
 interface Props {
-  close: () => void
+  closeDialog: () => void
   save: ({ nodes }: { nodes: StagingNode[] }) => void
 }
 
@@ -19,10 +19,10 @@ type Area = 'staging' | 'searching'
  * Usage:
  *
  * ```tsx
- *   <InviteeSearchEditor close={close} save={save} />
+ *   <InviteeSearchEditor closeDialog={closeDialog} save={save} />
  * ```
  */
-const InviteeSearchEditor = ({ close, save }: Props) => {
+const InviteeSearchEditor = ({ closeDialog, save }: Props) => {
   // area
   const [area, setArea] = useState<Area>('staging')
   const inStagingArea = area === 'staging'
@@ -48,7 +48,7 @@ const InviteeSearchEditor = ({ close, save }: Props) => {
     <>
       <Dialog.Header
         title="addCircleInvitation"
-        close={close}
+        closeDialog={closeDialog}
         closeTextId="cancel"
         rightButton={
           <Dialog.Header.RightButton

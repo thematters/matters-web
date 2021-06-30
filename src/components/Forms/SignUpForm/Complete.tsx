@@ -20,7 +20,7 @@ const Complete = ({
       {closeDialog && (
         <Dialog.Header
           title="successRegister"
-          close={closeDialog}
+          closeDialog={closeDialog}
           closeTextId="close"
           mode="inner"
         />

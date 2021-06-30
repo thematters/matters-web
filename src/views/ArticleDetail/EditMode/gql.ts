@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { CircleDigest } from '~/components'
+import { CircleDigest, Tag } from '~/components'
 import { fragments as EditorFragments } from '~/components/Editor/fragments'
 import articleFragments from '~/components/GQL/fragments/article'
 import assetFragment from '~/components/GQL/fragments/asset'
@@ -13,10 +13,15 @@ export const EDIT_MODE_ARTICLE = gql`
   ) {
     article(input: { mediaHash: $mediaHash }) {
       id
-      cover
       slug
+      mediaHash
+      cover
       assets {
         ...Asset
+      }
+      tags {
+        ...DigestTag
+        selected(input: { mediaHash: $mediaHash })
       }
       author {
         id
@@ -26,7 +31,12 @@ export const EDIT_MODE_ARTICLE = gql`
       }
       access {
         type
+        circle {
+          id
+          ...DigestRichCirclePublic
+        }
       }
+      license
       revisionCount
       drafts {
         id
@@ -38,6 +48,7 @@ export const EDIT_MODE_ARTICLE = gql`
     }
   }
   ${assetFragment}
+  ${Tag.fragments.tag}
   ${articleFragments.articleCollection}
   ${EditorFragments.draft}
   ${CircleDigest.Rich.fragments.circle.public}

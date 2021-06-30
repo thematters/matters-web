@@ -54,7 +54,7 @@ const fragments = {
 }
 
 const DeleteButton = ({ draft }: DeleteButtonProps) => {
-  const { show, open, close } = useDialogSwitch(false)
+  const { show, openDialog, closeDialog } = useDialogSwitch(false)
 
   const [deleteDraft] = useMutation<DeleteDraft>(DELETE_DRAFT, {
     variables: { id: draft.id },
@@ -114,7 +114,7 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
         spacing={[0, 'xtight']}
         size={[null, '1.25rem']}
         bgColor="grey-lighter"
-        onClick={open}
+        onClick={openDialog}
       >
         <TextIcon
           icon={<IconDraftDelete12 size="xs" />}
@@ -126,8 +126,12 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
         </TextIcon>
       </Button>
 
-      <Dialog isOpen={show} onDismiss={close} size="sm">
-        <Dialog.Header title="deleteDraft" close={close} mode="inner" />
+      <Dialog isOpen={show} onDismiss={closeDialog} size="sm">
+        <Dialog.Header
+          title="deleteDraft"
+          closeDialog={closeDialog}
+          mode="inner"
+        />
 
         <Dialog.Message>
           <p>
@@ -144,7 +148,7 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
             bgColor="red"
             onClick={() => {
               onDelete()
-              close()
+              closeDialog()
             }}
           >
             <Translate id="confirm" />
@@ -153,7 +157,7 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
           <Dialog.Footer.Button
             bgColor="grey-lighter"
             textColor="black"
-            onClick={close}
+            onClick={closeDialog}
           >
             <Translate id="cancel" />
           </Dialog.Footer.Button>

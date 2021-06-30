@@ -1,4 +1,10 @@
 import { toDigestTagPlaceholder } from '~/components'
+import {
+  SetCollectionProps,
+  SetCoverProps,
+  SetTagsProps,
+  ToggleAccessProps,
+} from '~/components/Editor'
 import BottomBar from '~/components/Editor/BottomBar'
 
 import { ENTITY_TYPE } from '~/common/enums'
@@ -19,13 +25,13 @@ interface BottomBarProps {
 }
 
 const EditDraftBottomBar = ({ draft, ownCircles }: BottomBarProps) => {
+  const { edit: editCollection, saving: collectionSaving } =
+    useEditDraftCollection(draft)
   const {
-    edit: editCollection,
-    saving: collectionSaving,
-  } = useEditDraftCollection(draft)
-  const { edit: editCover, saving: coverSaving, refetch } = useEditDraftCover(
-    draft
-  )
+    edit: editCover,
+    saving: coverSaving,
+    refetch,
+  } = useEditDraftCover(draft)
   const { edit: editTags, saving: tagsSaving } = useEditDraftTags(draft)
   const { edit: editAccess, saving: accessSaving } = useEditDraftAccess(
     draft,
@@ -33,32 +39,43 @@ const EditDraftBottomBar = ({ draft, ownCircles }: BottomBarProps) => {
   )
   const hasOwnCircle = ownCircles && ownCircles.length >= 1
   const tags = (draft.tags || []).map(toDigestTagPlaceholder)
-  const isPending = draft.publishState === 'pending'
-  const isPublished = draft.publishState === 'published'
+
+  const coverProps: SetCoverProps = {
+    cover: draft.cover,
+    assets: draft.assets,
+    editCover,
+    refetchAssets: refetch,
+    entityId: draft.id,
+    entityType: ENTITY_TYPE.draft,
+    coverSaving,
+  }
+  const tagsProps: SetTagsProps = {
+    tags,
+    editTags,
+    tagsSaving,
+  }
+  const collectionProps: SetCollectionProps = {
+    collection: draft?.collection?.edges?.map(({ node }) => node) || [],
+    editCollection,
+    collectionSaving,
+  }
+  const accessProps: ToggleAccessProps = {
+    circle: draft?.access.circle,
+    accessType: draft.access.type,
+    license: draft.license,
+    editAccess,
+    accessSaving,
+    canToggleCircle: !!hasOwnCircle,
+  }
 
   return (
     <BottomBar
-      saving={collectionSaving || coverSaving || tagsSaving || accessSaving}
-      disabled={isPending || isPublished}
-      // cover
-      cover={draft.cover}
-      assets={draft.assets}
-      editCover={editCover}
-      refetchAssets={refetch}
-      entityId={draft.id}
-      entityType={ENTITY_TYPE.draft}
-      // tags
-      tags={tags}
-      editTags={editTags}
-      // collection
-      collection={draft?.collection?.edges?.map(({ node }) => node) || []}
-      editCollection={editCollection}
-      // circle
-      circle={draft?.access.circle}
-      accessType={draft.access.type}
-      editAccess={hasOwnCircle ? editAccess : undefined}
-      canToggleCircle
-      canTogglePaywall
+      saving={false}
+      disabled={collectionSaving || coverSaving || tagsSaving || accessSaving}
+      {...coverProps}
+      {...tagsProps}
+      {...collectionProps}
+      {...accessProps}
     />
   )
 }

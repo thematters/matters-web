@@ -1,13 +1,15 @@
 import gql from 'graphql-tag'
 import dynamic from 'next/dynamic'
+import { useContext } from 'react'
 
-import { Dialog, Spinner, useDialogSwitch } from '~/components'
+import { Dialog, Spinner, useDialogSwitch, ViewerContext } from '~/components'
 
+import { ArticleAccessType } from '@/__generated__/globalTypes'
 import { FingerprintArticle } from './__generated__/FingerprintArticle'
 
 interface FingerprintDialogProps {
   article: FingerprintArticle
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
 const fragments = {
@@ -15,6 +17,12 @@ const fragments = {
     fragment FingerprintArticle on Article {
       id
       dataHash
+      author {
+        id
+      }
+      access {
+        type
+      }
     }
   `,
 }
@@ -25,17 +33,30 @@ const BaseFingerprintDialog = ({
   article,
   children,
 }: FingerprintDialogProps) => {
-  const { show, open, close } = useDialogSwitch(true)
+  const { show, openDialog, closeDialog } = useDialogSwitch(true)
+  const viewer = useContext(ViewerContext)
+
+  // only show secret when viewer is author and access type is paywall
+  const showSecret =
+    viewer.id === article.author.id &&
+    article?.access.type === ArticleAccessType.paywall
 
   return (
     <>
-      {children({ open })}
+      {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={close} fixedHeight>
-        <Dialog.Header title="IPFSEntrance" close={close} closeTextId="close" />
+      <Dialog isOpen={show} onDismiss={closeDialog} fixedHeight>
+        <Dialog.Header
+          title="IPFSEntrance"
+          closeDialog={closeDialog}
+          closeTextId="close"
+        />
 
         <Dialog.Content hasGrow>
-          <DynamicContent dataHash={article.dataHash || ''} />
+          <DynamicContent
+            dataHash={article.dataHash || ''}
+            showSecret={showSecret}
+          />
         </Dialog.Content>
       </Dialog>
     </>
@@ -44,7 +65,7 @@ const BaseFingerprintDialog = ({
 
 export const FingerprintDialog = (props: FingerprintDialogProps) => (
   <Dialog.Lazy mounted={<BaseFingerprintDialog {...props} />}>
-    {({ open }) => <>{props.children({ open })}</>}
+    {({ openDialog }) => <>{props.children({ openDialog })}</>}
   </Dialog.Lazy>
 )
 

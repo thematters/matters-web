@@ -2,10 +2,10 @@ import { Form, PaymentPointerDialog, Translate } from '~/components'
 
 const PaymentPointer = () => (
   <PaymentPointerDialog>
-    {({ open }) => (
+    {({ openDialog }) => (
       <Form.List.Item
         title={<Translate id="paymentPointer" />}
-        onClick={open}
+        onClick={openDialog}
       />
     )}
   </PaymentPointerDialog>

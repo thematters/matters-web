@@ -67,7 +67,7 @@ const DonationButton = ({ recipient, targetId }: DonationButtonProps) => {
       recipient={recipient}
       targetId={targetId}
     >
-      {({ open }) => (
+      {({ openDialog }) => (
         <Button
           size={['10.5rem', '2.5rem']}
           bgColor="gold"
@@ -89,7 +89,7 @@ const DonationButton = ({ recipient, targetId }: DonationButtonProps) => {
               return
             }
 
-            open()
+            openDialog()
           }}
         >
           <TextIcon icon={<IconDonate24 />} weight="md" color="white">

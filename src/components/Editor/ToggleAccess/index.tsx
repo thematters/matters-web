@@ -1,90 +1,107 @@
 import { CircleDigest, Switch, Translate } from '~/components'
 
+import SelectLicense from './SelectLicense'
 import styles from './styles.css'
 
-import { ArticleAccessType } from '@/__generated__/globalTypes'
+import {
+  ArticleAccessType,
+  ArticleLicenseType,
+} from '@/__generated__/globalTypes'
 import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
 
 export type ToggleAccessProps = {
   circle?: DigestRichCirclePublic | null
-  accessType?: ArticleAccessType | null
+  accessType: ArticleAccessType
+  license: ArticleLicenseType
 
-  editAccess: (addToCircle: boolean, paywalled: boolean) => any
-  saving: boolean
+  editAccess: (
+    addToCircle: boolean,
+    paywalled: boolean,
+    license: ArticleLicenseType
+  ) => any
 
+  accessSaving: boolean
   canToggleCircle: boolean
-  canTogglePaywall: boolean
+
+  inSidebar?: boolean
 }
 
 const ToggleAccess: React.FC<ToggleAccessProps> = ({
   circle,
   accessType,
+  license,
 
   editAccess,
-  saving,
-
+  accessSaving,
   canToggleCircle,
-  canTogglePaywall,
+
+  inSidebar,
 }) => {
-  const paywalled = accessType !== 'public'
-
   return (
-    <section className="container">
-      <section className="switch">
-        <header>
-          <h4>
-            <Translate
-              zh_hant="加入圍爐"
-              zh_hans="加入围炉"
-              en="Add to Circle"
-            />
-          </h4>
+    <section className={inSidebar ? 'inSidebar' : ''}>
+      {canToggleCircle && (
+        <section className="circle">
+          <section className="switch">
+            <header>
+              <h3>
+                <Translate
+                  zh_hant="加入圍爐"
+                  zh_hans="加入围炉"
+                  en="Add to Circle"
+                />
+              </h3>
 
-          <Switch
-            checked={!!circle}
-            onChange={() => editAccess && editAccess(!circle, false)}
-            disabled={!canToggleCircle}
-          />
-        </header>
-      </section>
+              <Switch
+                checked={!!circle}
+                onChange={() =>
+                  editAccess(
+                    !circle,
+                    false,
+                    circle && license === ArticleLicenseType.arr
+                      ? ArticleLicenseType.cc_by_nc_nd_2
+                      : license
+                  )
+                }
+                disabled={!canToggleCircle}
+                loading={accessSaving}
+              />
+            </header>
+          </section>
 
-      {circle && (
-        <section className="widget">
-          <section className="circle">
+          {circle && (
             <CircleDigest.Rich
               circle={circle}
-              bgColor="none"
+              bgColor="grey-lighter"
+              borderRadius="xtight"
               avatarSize="xl"
               textSize="md-s"
               hasOwner={false}
               hasDescription={false}
               disabled
             />
-          </section>
-
-          <section className="switch">
-            <header>
-              <h4>
-                <Translate zh_hant="上鎖" zh_hans="上锁" en="Paywalled" />
-              </h4>
-
-              <Switch
-                checked={paywalled}
-                onChange={() => editAccess && editAccess(true, !paywalled)}
-                disabled={!canTogglePaywall}
-              />
-            </header>
-
-            <p className="description">
-              <Translate
-                zh_hant="未訂閱者無法閱讀摘要外的正文"
-                zh_hans="未订阅者无法阅读摘要外的正文"
-                en="Member-only content"
-              />
-            </p>
-          </section>
+          )}
         </section>
       )}
+
+      <section className="widget">
+        <h3>
+          <Translate zh_hant="版權聲明" zh_hans="版权声明" en="License" />
+        </h3>
+
+        <section className="license">
+          <SelectLicense
+            isInCircle={!!circle}
+            license={license}
+            onChange={(newLicense) =>
+              editAccess(
+                !!circle,
+                newLicense === ArticleLicenseType.arr,
+                newLicense
+              )
+            }
+          />
+        </section>
+      </section>
 
       <style jsx>{styles}</style>
     </section>

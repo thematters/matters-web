@@ -6,7 +6,7 @@ import { ProfileCirclePublic } from '../__generated__/ProfileCirclePublic'
 
 interface MembersDialogProps {
   circle: ProfileCirclePublic
-  children: ({ open }: { open: () => void }) => React.ReactNode
+  children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
 const DynamicContent = dynamic(() => import('./Content'), {
@@ -15,13 +15,13 @@ const DynamicContent = dynamic(() => import('./Content'), {
 })
 
 const BaseMembersDialog = ({ circle, children }: MembersDialogProps) => {
-  const { show, open, close } = useDialogSwitch(true)
+  const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
   return (
     <>
-      {children({ open })}
+      {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={close} fixedHeight>
+      <Dialog isOpen={show} onDismiss={closeDialog} fixedHeight>
         <Dialog.Header
           title={
             <Translate
@@ -30,7 +30,7 @@ const BaseMembersDialog = ({ circle, children }: MembersDialogProps) => {
               en={`Members of ${circle.displayName}`}
             />
           }
-          close={close}
+          closeDialog={closeDialog}
           closeTextId="close"
         />
 
@@ -42,6 +42,6 @@ const BaseMembersDialog = ({ circle, children }: MembersDialogProps) => {
 
 export const MembersDialog = (props: MembersDialogProps) => (
   <Dialog.Lazy mounted={<BaseMembersDialog {...props} />}>
-    {({ open }) => <>{props.children({ open })}</>}
+    {({ openDialog }) => <>{props.children({ openDialog })}</>}
   </Dialog.Lazy>
 )

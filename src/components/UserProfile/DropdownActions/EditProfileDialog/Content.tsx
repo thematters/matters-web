@@ -209,7 +209,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
     <>
       <Dialog.Header
         title="editUserProfile"
-        close={closeDialog}
+        closeDialog={closeDialog}
         rightButton={SubmitButton}
       />
 

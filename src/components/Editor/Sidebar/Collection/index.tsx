@@ -1,8 +1,7 @@
 import { ArticleDigestDropdown, IconCollection24 } from '~/components'
-import {
-  SearchSelectDialog,
-  SearchSelectNode,
-} from '~/components/Dialogs/SearchSelectDialog'
+import { SearchSelectDialog } from '~/components/Dialogs/SearchSelectDialog'
+import { SetCollectionProps } from '~/components/Editor'
+import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
 
 import Box from '../Box'
 import styles from './styles.css'
@@ -10,17 +9,14 @@ import styles from './styles.css'
 import { SearchExclude } from '@/__generated__/globalTypes'
 import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
 
-export interface SidebarCollectionProps {
-  articles: ArticleDigestDropdownArticle[]
-  onEdit: (articles: ArticleDigestDropdownArticle[]) => any
-  saving?: boolean
+export type SidebarCollectionProps = {
   disabled?: boolean
-}
+} & SetCollectionProps
 
 const SidebarCollection = ({
-  articles,
-  onEdit,
-  saving,
+  collection,
+  editCollection,
+  collectionSaving,
   disabled,
 }: SidebarCollectionProps) => {
   return (
@@ -30,21 +26,21 @@ const SidebarCollection = ({
       searchType="Article"
       searchExclude={SearchExclude.blocked}
       onSave={(nodes: SearchSelectNode[]) =>
-        onEdit(nodes as ArticleDigestDropdownArticle[])
+        editCollection(nodes as ArticleDigestDropdownArticle[])
       }
-      nodes={articles}
-      saving={saving}
+      nodes={collection}
+      saving={collectionSaving}
     >
-      {({ open: openAddMyArticlesDialog }) => (
+      {({ openDialog }) => (
         <Box
           icon={<IconCollection24 size="md" />}
           title="extendArticle"
-          onClick={openAddMyArticlesDialog}
+          onClick={openDialog}
           disabled={disabled}
         >
-          {articles.length > 0 && (
+          {collection.length > 0 && (
             <ul>
-              {articles.map((article) => (
+              {collection.map((article) => (
                 <li key={article.id}>
                   <ArticleDigestDropdown
                     article={article}

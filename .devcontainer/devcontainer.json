@@ -36,6 +36,7 @@
     "blanu.vscode-styled-jsx",
     "tobermory.es6-string-html",
     "apollographql.vscode-apollo",
+    "graphql.vscode-graphql",
     "editorconfig.editorconfig",
 
     // styling

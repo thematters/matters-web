@@ -19,9 +19,9 @@ import { stripHtml } from '~/common/utils'
 
 import BottomBar from './BottomBar'
 import { DRAFT_DETAIL, SET_CONTENT } from './gql'
-import PublishButton from './PublishButton'
 import PublishState from './PublishState'
 import SaveStatus from './SaveStatus'
+import SettingsButton from './SettingsButton'
 import Sidebar from './Sidebar'
 
 import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
@@ -153,7 +153,13 @@ const DraftDetail = () => {
         right={
           <>
             <SaveStatus status={saveStatus} />
-            {draft && <PublishButton disabled={!publishable} />}
+            {draft && (
+              <SettingsButton
+                draft={draft}
+                ownCircles={ownCircles}
+                publishable={!!publishable}
+              />
+            )}
           </>
         }
       />
