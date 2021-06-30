@@ -15,19 +15,12 @@ const URL_PUSH_SW = isProd
   : './firebase-messaging-sw-develop.js'
 
 const nextConfig = {
-  future: {
-    strictPostcssConfiguration: true,
-  },
-  /**
-   * Runtime configs
-   *
-   * @see {@url https://github.com/zeit/next.js#exposing-configuration-to-the-server--client-side}
-   */
-  poweredByHeader: false,
-
   /**
    * Build time configs
    */
+  future: {
+    strictPostcssConfiguration: true,
+  },
   pageExtensions: ['tsx'],
   env: {
     APP_VERSION: packageJson.version,
@@ -36,6 +29,7 @@ const nextConfig = {
     ignoreDevErrors: false,
   },
   crossOrigin: 'anonymous',
+
   webpack(config, { defaultLoaders, isServer }) {
     /**
      * Styles in regular CSS files
@@ -87,6 +81,7 @@ const nextConfig = {
 
     return config
   },
+
   // filter out server side path for static export
   exportPathMap: async function (
     defaultPathMap,
@@ -101,6 +96,35 @@ const nextConfig = {
         return obj
       }, {})
     return filtered
+  },
+
+  /**
+   * Runtime configs
+   *
+   */
+  poweredByHeader: false,
+
+  // custom HTTP headers
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        has: !isProd
+          ? undefined
+          : [
+              {
+                type: 'host',
+                value: process.env.NEXT_PUBLIC_OAUTH_SITE_DOMAIN,
+              },
+            ],
+        headers: [
+          {
+            key: 'X-Robots-Tag',
+            value: 'noindex',
+          },
+        ],
+      },
+    ]
   },
 }
 

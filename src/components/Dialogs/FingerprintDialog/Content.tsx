@@ -3,7 +3,8 @@ import gql from 'graphql-tag'
 
 import { Spinner, Translate } from '~/components'
 
-import AricleSecret from './ArticleSecret'
+import ArticleSecret from './ArticleSecret'
+import ArticleSecretDesc from './ArticleSecretDesc'
 import CopyButton from './CopyButton'
 import styles from './styles.css'
 
@@ -50,7 +51,7 @@ const FingerprintDialogContent = ({
       </section>
 
       {/* secret */}
-      {showSecret && <AricleSecret />}
+      {showSecret && <ArticleSecret />}
 
       {/* gateways */}
       <section className="gateways">
@@ -116,18 +117,7 @@ const FingerprintDialogContent = ({
           />
         </p>
 
-        {showSecret && (
-          <p>
-            <b>
-              <Translate id="secret" />
-            </b>
-            <Translate
-              zh_hans={` 是非公开文章加密解密所使用的钥匙，只有掌握了密钥才能够解锁 IPFS 中的非公开文章。请妥善保管密钥，勿随意泄漏。`}
-              zh_hant={` 是非公開文章加密解密所使用的鑰匙，只有掌握了密鑰才能夠解鎖 IPFS 中的非公開文章。請妥善保管密鑰，勿隨意洩漏。`}
-              en={` is the encryption and decryption key for non-public articles, one can only unlock non-public articles on IPFS with it. Please keep the secret confidential and only share it with people you trust.`}
-            />
-          </p>
-        )}
+        {showSecret && <ArticleSecretDesc />}
 
         <p>
           <b>
