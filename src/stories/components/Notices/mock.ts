@@ -269,17 +269,6 @@ export const MOCK_NOTICE_LIST = [
     target: MOCK_ARTILCE,
     tag: MOCK_TAG,
   },
-  // ArticleTagUnselected
-  {
-    __typename: 'ArticleTagNotice' as any,
-    id: 'ArticleTagUnselected',
-    unread: false,
-    createdAt: '2020-12-24T07:29:17.682Z',
-    actors: [MOCK_USER],
-    articleTagNoticeType: 'ArticleTagUnselected' as any,
-    target: MOCK_ARTILCE,
-    tag: MOCK_TAG,
-  },
 
   /**
    *  Tag

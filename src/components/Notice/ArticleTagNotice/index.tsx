@@ -2,7 +2,6 @@ import gql from 'graphql-tag'
 
 import ArticleTagAddedNotice from './ArticleTagAddedNotice'
 import ArticleTagRemovedNotice from './ArticleTagRemovedNotice'
-import ArticleTagUnselectedNotice from './ArticleTagUnselectedNotice'
 
 import { ArticleTagNotice as NoticeType } from './__generated__/ArticleTagNotice'
 
@@ -12,8 +11,6 @@ const ArticleTagNotice = ({ notice }: { notice: NoticeType }) => {
       return <ArticleTagAddedNotice notice={notice} />
     case 'ArticleTagRemoved':
       return <ArticleTagRemovedNotice notice={notice} />
-    case 'ArticleTagUnselected':
-      return <ArticleTagUnselectedNotice notice={notice} />
     default:
       return null
   }
@@ -28,11 +25,9 @@ ArticleTagNotice.fragments = {
       articleTagNoticeType: type
       ...ArticleTagAddedNotice
       ...ArticleTagRemovedNotice
-      ...ArticleTagUnselectedNotice
     }
     ${ArticleTagAddedNotice.fragments.notice}
     ${ArticleTagRemovedNotice.fragments.notice}
-    ${ArticleTagUnselectedNotice.fragments.notice}
   `,
 }
 
