@@ -25,7 +25,7 @@ import {
   validateTagName,
 } from '~/common/utils'
 
-import TAG_COVER from '@/public/static/images/tag-cover.png'
+import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
 
 import styles from './styles.css'
 
@@ -218,7 +218,7 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
           <CoverUploader
             assetType={ASSET_TYPE.tagCover}
             cover={cover}
-            fallbackCover={TAG_COVER}
+            fallbackCover={IMAGE_TAG_COVER.src}
             entityId={id}
             entityType={ENTITY_TYPE.tag}
             inEditor

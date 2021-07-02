@@ -25,7 +25,7 @@ import {
   toPath,
 } from '~/common/utils'
 
-import IMAGE_LOGO_192 from '@/public/static/icon-192x192.png?url'
+import IMAGE_LOGO_192 from '@/public/static/icon-192x192.png'
 
 import UserTabs from '../UserTabs'
 import { USER_COMMENTS_PRIVATE, USER_COMMENTS_PUBLIC, USER_ID } from './gql'
@@ -88,7 +88,7 @@ const UserComments = () => {
           en: `${user.displayName}'s comments`,
         }}
         description={user.info.description}
-        image={user.info.profileCover || IMAGE_LOGO_192}
+        image={user.info.profileCover || IMAGE_LOGO_192.src}
       />
       <UserTabs hasSubscriptions={hasSubscriptions} />
       <BaseUserComments user={user} />

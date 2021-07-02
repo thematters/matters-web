@@ -5,11 +5,11 @@ import { LanguageContext, useRoute } from '~/components'
 
 import { langConvert, translate, TranslateArgs } from '~/common/utils'
 
-import IMAGE_APPLE_TOUCH_ICON from '@/public/static/apple-touch-icon.png?url'
-import IMAGE_FAVICON_16 from '@/public/static/favicon-16x16.png?url'
-import IMAGE_FAVICON_32 from '@/public/static/favicon-32x32.png?url'
-import IMAGE_FAVICON_64 from '@/public/static/favicon-64x64.png?url'
-import IMAGE_INTRO from '@/public/static/images/intro.jpg?url'
+import IMAGE_APPLE_TOUCH_ICON from '@/public/static/apple-touch-icon.png'
+import IMAGE_FAVICON_16 from '@/public/static/favicon-16x16.png'
+import IMAGE_FAVICON_32 from '@/public/static/favicon-32x32.png'
+import IMAGE_FAVICON_64 from '@/public/static/favicon-64x64.png'
+import IMAGE_INTRO from '@/public/static/images/intro.jpg'
 
 const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
@@ -44,7 +44,7 @@ export const Head: React.FC<HeadProps> = (props) => {
       : router.asPath
       ? `//${process.env.NEXT_PUBLIC_SITE_DOMAIN}${router.asPath}`
       : '//' + process.env.NEXT_PUBLIC_SITE_DOMAIN,
-    image: props.image || IMAGE_INTRO,
+    image: props.image || IMAGE_INTRO.src,
   }
   const canonicalUrl = head.url?.split('#')[0].split('?')[0]
 
@@ -62,21 +62,21 @@ export const Head: React.FC<HeadProps> = (props) => {
       <link
         rel="icon"
         type="image/png"
-        href={IMAGE_FAVICON_16}
+        href={IMAGE_FAVICON_16.src}
         sizes="16x16"
         key="favicon-16"
       />
       <link
         rel="icon"
         type="image/png"
-        href={IMAGE_FAVICON_32}
+        href={IMAGE_FAVICON_32.src}
         sizes="32x32"
         key="favicon-32"
       />
       <link
         rel="icon"
         type="image/png"
-        href={IMAGE_FAVICON_64}
+        href={IMAGE_FAVICON_64.src}
         sizes="64x64"
         key="favicon-64"
       />
@@ -146,7 +146,7 @@ export const Head: React.FC<HeadProps> = (props) => {
       <link
         rel="apple-touch-icon"
         key="apple-touch-icon"
-        href={IMAGE_APPLE_TOUCH_ICON}
+        href={IMAGE_APPLE_TOUCH_ICON.src}
       />
       <meta name="application-name" key="application-name" content="Matters" />
       <meta name="theme-color" key="theme-color" content="#fff" />

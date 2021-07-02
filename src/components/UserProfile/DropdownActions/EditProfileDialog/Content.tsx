@@ -145,7 +145,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
         <CoverUploader
           assetType={ASSET_TYPE.profileCover}
           cover={user.info.profileCover}
-          fallbackCover={IMAGE_COVER}
+          fallbackCover={IMAGE_COVER.src}
           entityType={ENTITY_TYPE.user}
           inEditor
           onUpload={(assetId) => setFieldValue('profileCover', assetId)}

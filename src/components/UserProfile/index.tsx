@@ -142,7 +142,7 @@ export const UserProfile = () => {
         <LayoutHeader />
 
         <section className="user-profile">
-          <Cover fallbackCover={IMAGE_COVER} />
+          <Cover fallbackCover={IMAGE_COVER.src} />
 
           <header>
             <section className="avatar">
@@ -173,7 +173,7 @@ export const UserProfile = () => {
       <LayoutHeader />
 
       <section className="user-profile">
-        <Cover cover={profileCover} fallbackCover={IMAGE_COVER} />
+        <Cover cover={profileCover} fallbackCover={IMAGE_COVER.src} />
 
         <header>
           <section className="avatar">

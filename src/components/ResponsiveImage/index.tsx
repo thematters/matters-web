@@ -6,14 +6,19 @@ import { toSizedImageURL, ToSizedImageURLSize } from '~/common/utils'
  * Responsive Image
  */
 
-interface ImgProps {
+interface ResponsiveImageProps {
   url: string
   size: ToSizedImageURLSize
   smUpSize?: ToSizedImageURLSize
   disabled?: boolean
 }
 
-const BaseImg = ({ url, size, smUpSize, disabled }: ImgProps) => {
+const BaseResponsiveImage = ({
+  url,
+  size,
+  smUpSize,
+  disabled,
+}: ResponsiveImageProps) => {
   const [error, setError] = useState(false)
 
   // Fallback to the raw `url` if manually disable or responsive image is failed to load
@@ -58,13 +63,18 @@ const BaseImg = ({ url, size, smUpSize, disabled }: ImgProps) => {
 /**
  * Memoizing
  */
-type MemoizedImg = React.MemoExoticComponent<React.FC<ImgProps>>
+type MemoizedResponsiveImage = React.MemoExoticComponent<
+  React.FC<ResponsiveImageProps>
+>
 
-export const Img = React.memo(BaseImg, (prevProps, props) => {
-  return (
-    prevProps.url === props.url &&
-    prevProps.size === props.size &&
-    prevProps.smUpSize === props.smUpSize &&
-    prevProps.disabled === props.disabled
-  )
-}) as MemoizedImg
+export const ResponsiveImage = React.memo(
+  BaseResponsiveImage,
+  (prevProps, props) => {
+    return (
+      prevProps.url === props.url &&
+      prevProps.size === props.size &&
+      prevProps.smUpSize === props.smUpSize &&
+      prevProps.disabled === props.disabled
+    )
+  }
+) as MemoizedResponsiveImage
