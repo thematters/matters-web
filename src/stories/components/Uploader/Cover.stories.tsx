@@ -23,7 +23,7 @@ const Template: Story = () => (
           assetType={ASSET_TYPE.profileCover}
           entityType={ENTITY_TYPE.user}
           onUpload={(assetId) => alert({ assetId })}
-          fallbackCover={IMAGE_COVER}
+          fallbackCover={IMAGE_COVER.src}
         />
       </li>
       <li>
@@ -31,7 +31,7 @@ const Template: Story = () => (
           assetType={ASSET_TYPE.profileCover}
           entityType={ENTITY_TYPE.user}
           onUpload={(assetId) => alert({ assetId })}
-          fallbackCover={IMAGE_COVER}
+          fallbackCover={IMAGE_COVER.src}
           cover="https://source.unsplash.com/512x512?cover"
         />
       </li>

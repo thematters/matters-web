@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 
 import { Cover, Tag } from '~/components'
 
-import TAG_COVER from '@/public/static/images/tag-cover.png'
+import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
 
 import styles from './styles.css'
 
@@ -20,7 +20,7 @@ const TagCover = ({ tag }: TagCoverProps) => {
   })
 
   return (
-    <Cover cover={tag.cover} fallbackCover={TAG_COVER}>
+    <Cover cover={tag.cover} fallbackCover={IMAGE_TAG_COVER.src}>
       <div className={titleClasses}>
         <div className="content">
           <Tag tag={tag} type="title" disabled />

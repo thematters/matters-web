@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 
-import { Img } from '~/components'
+import { ResponsiveImage } from '~/components'
 
 import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
 import IMAGE_MATTERS_ARCHITECT_RING from '@/public/static/icons/architect-ring.svg'
@@ -52,7 +52,11 @@ export const Avatar = (props: AvatarProps) => {
 
   return (
     <div className={avatarClasses}>
-      <Img url={source} size="144w" disabled={isFallback || inEditor} />
+      <ResponsiveImage
+        url={source}
+        size="144w"
+        disabled={isFallback || inEditor}
+      />
 
       {isCivicLiker && <span className="civic-liker ring" />}
       {hasArchitectBadge && <span className="architect ring" />}

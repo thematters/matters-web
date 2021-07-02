@@ -1,4 +1,4 @@
-import { Img } from '~/components'
+import { ResponsiveImage } from '~/components'
 
 import styles from './styles.css'
 
@@ -19,7 +19,7 @@ export const Cover: React.FC<CoverProps> = ({
 
   return (
     <div className="cover">
-      <Img
+      <ResponsiveImage
         url={url}
         size="1080w"
         smUpSize="540w"

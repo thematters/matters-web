@@ -1,11 +1,17 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 
-import { ArticleDigestTitle, Card, CardProps, Img, Tag } from '~/components'
+import {
+  ArticleDigestTitle,
+  Card,
+  CardProps,
+  ResponsiveImage,
+  Tag,
+} from '~/components'
 
 import { analytics, toPath } from '~/common/utils'
 
-import TAG_COVER from '@/public/static/images/tag-cover.png'
+import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
 
 import styles from './styles.css'
 
@@ -46,7 +52,7 @@ const TagFeedDigest = ({ tag, ...cardProps }: TagFeedDigestProps) => {
     <section className="container">
       <Card {...path} spacing={[0, 0]} {...cardProps}>
         <header>
-          <Img url={tag.cover || TAG_COVER} size="360w" />
+          <ResponsiveImage url={tag.cover || IMAGE_TAG_COVER.src} size="360w" />
 
           <div className={maskClasses}>
             <Tag tag={tag} type="title" />

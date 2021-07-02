@@ -1,6 +1,12 @@
 import React from 'react'
 
-import { Card, IconPin24, Img, TextIcon, Translate } from '~/components'
+import {
+  Card,
+  IconPin24,
+  ResponsiveImage,
+  TextIcon,
+  Translate,
+} from '~/components'
 import { CircleDigest } from '~/components/CircleDigest'
 import { UserDigest } from '~/components/UserDigest'
 import { UserDigestMiniProps } from '~/components/UserDigest/Mini'
@@ -117,7 +123,7 @@ const BaseArticleDigestFeed = ({
         <section className="content">
           {cover && (
             <div className="cover">
-              <Img url={cover} size="144w" smUpSize="360w" />
+              <ResponsiveImage url={cover} size="144w" smUpSize="360w" />
             </div>
           )}
           {<p className="description">{cleanedSummary}</p>}

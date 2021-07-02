@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 
-import { Img } from '~/components'
+import { ResponsiveImage } from '~/components'
 
 import ICON_CIRCLE_AVATAR_DEFAULT from '@/public/static/icons/72px/circle-avatar-default.svg'
 
@@ -38,7 +38,11 @@ export const CircleAvatar = (props: CircleAvatarProps) => {
 
   return (
     <div className={avatarClasses}>
-      <Img url={source} size="144w" disabled={isFallback || inEditor} />
+      <ResponsiveImage
+        url={source}
+        size="144w"
+        disabled={isFallback || inEditor}
+      />
 
       <style jsx>{styles}</style>
     </div>

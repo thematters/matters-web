@@ -84,7 +84,7 @@ export const makeTitle = (text: string, limit: number) => {
  * 1) Add loading=lazy attribute
  * 2) Responsive Images
  *
- * @see `<Img>`
+ * @see `<ResponsiveImage>`
  */
 export const optimizeEmbed = (content: string) => {
   return content

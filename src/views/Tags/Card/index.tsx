@@ -2,11 +2,11 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import { Img } from '~/components'
+import { ResponsiveImage } from '~/components'
 
 import { toPath } from '~/common/utils'
 
-import TAG_COVER from '@/public/static/images/tag-cover.png'
+import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
 
 import styles from './styles.css'
 
@@ -18,14 +18,14 @@ interface CardProps {
 
 const Card = ({ tag }: CardProps) => {
   const path = toPath({ page: 'tagDetail', id: tag.id })
-  const url = tag.cover || TAG_COVER
+  const url = tag.cover || IMAGE_TAG_COVER.src
   const nameClasses = classNames({ name: true, mask: !!tag.cover })
 
   return (
     <Link {...path}>
       <a>
         <section className="card">
-          <Img url={url} size="360w" />
+          <ResponsiveImage url={url} size="360w" />
 
           <div className={nameClasses}>
             <h4>{tag.content}</h4>
