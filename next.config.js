@@ -21,6 +21,9 @@ const nextConfig = {
   future: {
     strictPostcssConfiguration: true,
   },
+  images: {
+    disableStaticImages: true,
+  },
   pageExtensions: ['tsx'],
   env: {
     APP_VERSION: packageJson.version,
