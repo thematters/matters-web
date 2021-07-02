@@ -43,12 +43,12 @@ const CircleWall = ({ circle }: CircleWallProps) => {
       <style jsx>{styles}</style>
       <style jsx>{`
         .container {
-          background-image: url(${IMAGE_WALL_BACKGROUND_SM});
+          background-image: url(${IMAGE_WALL_BACKGROUND_SM.src});
           background-size: cover;
           background-position: center top;
 
           @media (--sm-up) {
-            background-image: url(${IMAGE_WALL_BACKGROUND_MD});
+            background-image: url(${IMAGE_WALL_BACKGROUND_MD.src});
           }
         }
       `}</style>

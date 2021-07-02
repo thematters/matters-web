@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 
-import { Card, CardProps, Img } from '~/components'
+import { Card, CardProps, ResponsiveImage } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 
 import { toPath } from '~/common/utils'
@@ -86,7 +86,7 @@ export const ArticleDigestSidebar = ({
 
         {cover && (
           <aside className="cover">
-            <Img url={cover} size="144w" />
+            <ResponsiveImage url={cover} size="144w" />
           </aside>
         )}
 

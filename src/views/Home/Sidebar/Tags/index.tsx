@@ -5,9 +5,9 @@ import { useContext, useEffect } from 'react'
 
 import {
   Card,
-  Img,
   List,
   QueryError,
+  ResponsiveImage,
   ShuffleButton,
   Spinner,
   Tag,
@@ -133,7 +133,7 @@ const Tags = () => {
 
                     {node.cover && (
                       <div className="cover">
-                        <Img url={node.cover} size="144w" />
+                        <ResponsiveImage url={node.cover} size="144w" />
                       </div>
                     )}
                   </section>
