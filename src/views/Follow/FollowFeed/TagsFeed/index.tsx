@@ -13,18 +13,11 @@ import {
   QueryError,
   Spinner,
   Tag,
-  TextIcon,
-  Translate,
 } from '~/components'
 
 import { analytics, mergeConnections } from '~/common/utils'
 
-import styles from './styles.css'
-
-import {
-  FollowingTagsArticlesFeed,
-  FollowingTagsArticlesFeed_viewer_recommendation_followingTagsArticles_edges_node as FollowingTagsArticlesFeedNode,
-} from './__generated__/FollowingTagsArticlesFeed'
+import { FollowingTagsArticlesFeed } from './__generated__/FollowingTagsArticlesFeed'
 import { FollowingTagsFeed } from './__generated__/FollowingTagsFeed'
 
 const FOLLOWING_TAGS = gql`
@@ -116,56 +109,56 @@ const TagsArticles = ({ tagIds }: { tagIds: string[] }) => {
     })
   }
 
-  const TagComponent = ({
-    node,
-    index,
-  }: {
-    node: FollowingTagsArticlesFeedNode
-    index: number
-  }) => {
-    if (!node || !node.tags || node.tags.length <= 0) {
-      return null
-    }
+  // const TagComponent = ({
+  //   node,
+  //   index,
+  // }: {
+  //   node: FollowingTagsArticlesFeedNode
+  //   index: number
+  // }) => {
+  //   if (!node || !node.tags || node.tags.length <= 0) {
+  //     return null
+  //   }
 
-    const tags = _sortBy(node?.tags || [], ['createdAt'])
-    const matches = _intersection(
-      tags.map(({ id }) => id),
-      tagIds
-    )
+  //   const tags = _sortBy(node?.tags || [], ['createdAt'])
+  //   const matches = _intersection(
+  //     tags.map(({ id }) => id),
+  //     tagIds
+  //   )
 
-    if (!matches || matches.length <= 0) {
-      return null
-    }
+  //   if (!matches || matches.length <= 0) {
+  //     return null
+  //   }
 
-    const tag = _find(tags, { id: matches[0] })
+  //   const tag = _find(tags, { id: matches[0] })
 
-    if (!tag) {
-      return null
-    }
+  //   if (!tag) {
+  //     return null
+  //   }
 
-    return (
-      <section className="tag">
-        <Tag
-          tag={tag}
-          type="inline"
-          active
-          onClick={() => {
-            analytics.trackEvent('click_feed', {
-              type: 'follow-tag',
-              contentType: 'tag',
-              styleType: 'title',
-              location: index,
-            })
-          }}
-        />
+  //   return (
+  //     <section className="tag">
+  //       <Tag
+  //         tag={tag}
+  //         type="inline"
+  //         active
+  //         onClick={() => {
+  //           analytics.trackEvent('click_feed', {
+  //             type: 'follow-tag',
+  //             contentType: 'tag',
+  //             styleType: 'title',
+  //             location: index,
+  //           })
+  //         }}
+  //       />
 
-        <TextIcon size="sm" color="grey-dark">
-          <Translate zh_hant="新增了" zh_hans="新增了" en="Created" />
-        </TextIcon>
-        <style jsx>{styles}</style>
-      </section>
-    )
-  }
+  //       <TextIcon size="sm" color="grey-dark">
+  //         <Translate zh_hant="新增了" zh_hans="新增了" en="Created" />
+  //       </TextIcon>
+  //       <style jsx>{styles}</style>
+  //     </section>
+  //   )
+  // }
 
   return (
     <InfiniteScroll
@@ -186,7 +179,6 @@ const TagsArticles = ({ tagIds }: { tagIds: string[] }) => {
                   location: i,
                 })
               }
-              extraHeader={<TagComponent node={node} index={i} />}
             />
           </List.Item>
         ))}

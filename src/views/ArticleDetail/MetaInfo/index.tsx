@@ -1,5 +1,4 @@
-import { DateTime, Translate } from '~/components'
-import AccessLabel from '~/components/ArticleDigest/Feed/AccessLabel'
+import { DateTime, IconPaywall16, Translate } from '~/components'
 
 import FingerprintButton from './FingerprintButton'
 import { fragments } from './gql'
@@ -29,7 +28,7 @@ const MetaInfo = ({
         <span>
           <Translate zh_hant="發布於" zh_hans="發布於" en="Published at" />
         </span>
-        <DateTime date={article.createdAt} color="grey" />
+        <DateTime date={article.createdAt} />
       </section>
 
       {article.revisedAt && (
@@ -37,7 +36,7 @@ const MetaInfo = ({
           <span>
             <Translate zh_hant="修訂於" zh_hans="修訂於" en="Revised at" />
           </span>
-          <DateTime date={article.revisedAt} color="grey" />
+          <DateTime date={article.revisedAt} />
         </section>
       )}
 
@@ -54,7 +53,7 @@ const MetaInfo = ({
         </>
       )}
 
-      <AccessLabel article={article} />
+      {article.sticky && <IconPaywall16 />}
 
       <style jsx>{styles}</style>
     </section>

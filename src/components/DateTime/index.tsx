@@ -9,7 +9,6 @@ import styles from './styles.css'
 interface DateTimeProps {
   date: Date | string | number
   type?: 'absolute' | 'relative' | 'standard'
-  color?: 'grey-light' | 'grey'
 }
 
 /**
@@ -28,15 +27,11 @@ interface DateTimeProps {
  * ```
  */
 
-const BaseDateTime = ({
-  date,
-  type = 'absolute',
-  color = 'grey-light',
-}: DateTimeProps) => {
+const BaseDateTime = ({ date, type = 'absolute' }: DateTimeProps) => {
   const { lang } = useContext(LanguageContext)
 
   return (
-    <time className={color} dateTime={new Date(date).toISOString()}>
+    <time dateTime={new Date(date).toISOString()}>
       {datetimeFormat[type](date, lang)}
 
       <style jsx>{styles}</style>

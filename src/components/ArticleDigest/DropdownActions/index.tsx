@@ -11,7 +11,6 @@ import {
   DonatorsDialog,
   DropdownDialog,
   FingerprintDialog,
-  IconColor,
   IconMore16,
   IconSize,
   Menu,
@@ -38,7 +37,6 @@ import StickyButton from './StickyButton'
 import { DropdownActionsArticle } from './__generated__/DropdownActionsArticle'
 
 export interface DropdownActionsControls {
-  color?: IconColor
   size?: IconSize
 
   /**
@@ -114,7 +112,6 @@ const fragments = {
 
 const BaseDropdownActions = ({
   article,
-  color = 'grey',
   size,
   inCard,
 
@@ -190,7 +187,7 @@ const BaseDropdownActions = ({
           onClick={openDialog}
           ref={ref}
         >
-          <IconMore16 color={color} size={size} />
+          <IconMore16 size={size} />
         </Button>
       )}
     </DropdownDialog>

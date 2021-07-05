@@ -8,20 +8,12 @@ import {
   List,
   QueryError,
   Spinner,
-  TextIcon,
-  Translate,
   UserDigest,
 } from '~/components'
-import { UserDigestMiniProps } from '~/components/UserDigest/Mini'
 
 import { analytics, mergeConnections } from '~/common/utils'
 
-import styles from './styles.css'
-
-import {
-  FolloweeDonatedArticlesFeed,
-  FolloweeDonatedArticlesFeed_viewer_recommendation_followeeDonatedArticles_edges_node_followee as FolloweeDonatedArticlesFeedFollowee,
-} from './__generated__/FolloweeDonatedArticlesFeed'
+import { FolloweeDonatedArticlesFeed } from './__generated__/FolloweeDonatedArticlesFeed'
 
 const FOLLOWEE_DONATED_ARTICLES = gql`
   query FolloweeDonatedArticlesFeed($after: String) {
@@ -93,32 +85,32 @@ const DonationsArticles = () => {
     })
   }
 
-  const actor =
-    ({ node }: { node: FolloweeDonatedArticlesFeedFollowee }) =>
-    (props: Partial<UserDigestMiniProps>) => {
-      if (!node) {
-        return null
-      }
+  // const actor =
+  //   ({ node }: { node: FolloweeDonatedArticlesFeedFollowee }) =>
+  //   (props: Partial<UserDigestMiniProps>) => {
+  //     if (!node) {
+  //       return null
+  //     }
 
-      return (
-        <section className="followee">
-          <UserDigest.Mini
-            user={node}
-            avatarSize="lg"
-            textSize="md-s"
-            textWeight="md"
-            hasAvatar
-            hasDisplayName
-            {...props}
-          />
+  //     return (
+  //       <section className="followee">
+  //         <UserDigest.Mini
+  //           user={node}
+  //           avatarSize="lg"
+  //           textSize="md-s"
+  //           textWeight="md"
+  //           hasAvatar
+  //           hasDisplayName
+  //           {...props}
+  //         />
 
-          <TextIcon size="sm" color="grey-dark">
-            <Translate zh_hant="支持了" zh_hans="支持了" en="donated" />
-          </TextIcon>
-          <style jsx>{styles}</style>
-        </section>
-      )
-    }
+  //         <TextIcon size="sm" color="grey-dark">
+  //           <Translate zh_hant="支持了" zh_hans="支持了" en="donated" />
+  //         </TextIcon>
+  //         <style jsx>{styles}</style>
+  //       </section>
+  //     )
+  //   }
 
   return (
     <InfiniteScroll
@@ -147,7 +139,6 @@ const DonationsArticles = () => {
                   location: i,
                 })
               }}
-              actor={actor({ node: node.followee })}
             />
           </List.Item>
         ))}

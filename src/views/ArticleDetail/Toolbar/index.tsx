@@ -82,7 +82,6 @@ const Toolbar = ({ article, privateFetched, lock, ...props }: ToolbarProps) => {
 
         <DropdownActions
           article={article}
-          color="black"
           size="md-s"
           inCard={false}
           hasShare={!isSmallUp}
