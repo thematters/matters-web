@@ -2,7 +2,6 @@ const withPlugins = require('next-compose-plugins')
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
-const optimizedImages = require('next-optimized-images')
 const withOffline = require('next-offline')
 
 const packageJson = require('./package.json')
@@ -62,23 +61,6 @@ const nextConfig = {
       ],
     })
 
-    /***
-     * Import files as URL
-     */
-    // config.module.rules.push({
-    //   test: /\.xml$/,
-    //   use: [
-    //     {
-    //       loader: 'file-loader',
-    //       options: {
-    //         publicPath: '/_next/static/',
-    //         outputPath: `${isServer ? '../' : ''}static/`,
-    //         name: '[name]-[hash].[ext]'
-    //       }
-    //     }
-    //   ]
-    // })
-
     return config
   },
 
@@ -129,16 +111,6 @@ const nextConfig = {
 }
 
 let plugins = [
-  // images
-  [
-    optimizedImages,
-    {
-      handleImages: ['jpeg', 'png'],
-      optimizeImagesInDev: true,
-      inlineImageLimit: 1024,
-    },
-  ],
-
   // bundle analyzer
   [withBundleAnalyzer],
 ]

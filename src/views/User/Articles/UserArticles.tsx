@@ -19,7 +19,7 @@ import {
 import { URL_QS } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
-import IMAGE_LOGO_192 from '@/public/static/icon-192x192.png?url'
+import IMAGE_LOGO_192 from '@/public/static/icon-192x192.png'
 
 import UserTabs from '../UserTabs'
 import {
@@ -194,7 +194,7 @@ const UserArticles = () => {
       }}
       noSuffix={isShareOnboardingTasks}
       description={user.info.description}
-      image={user.info.profileCover || IMAGE_LOGO_192}
+      image={user.info.profileCover || IMAGE_LOGO_192.src}
     />
   )
 

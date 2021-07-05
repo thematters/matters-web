@@ -15,7 +15,7 @@ import {
 
 import { analytics, mergeConnections } from '~/common/utils'
 
-import IMAGE_LOGO_192 from '@/public/static/icon-192x192.png?url'
+import IMAGE_LOGO_192 from '@/public/static/icon-192x192.png'
 
 import UserTabs from '../UserTabs'
 import { USER_SUBSCRIPTIONS } from './gql'
@@ -101,7 +101,7 @@ const Subscriptions = () => {
         zh_hans: `${user.displayName} 的订阅`,
       }}
       description={user.info.description}
-      image={user.info.profileCover || IMAGE_LOGO_192}
+      image={user.info.profileCover || IMAGE_LOGO_192.src}
     />
   )
 

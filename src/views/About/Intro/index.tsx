@@ -1,8 +1,8 @@
 import { Button, Translate } from '~/components'
 
-import ILLUSTRATION_1 from '@/public/static/images/about/intro-illustration-1.png'
-import ILLUSTRATION_2 from '@/public/static/images/about/intro-illustration-2.png'
-import ILLUSTRATION_3 from '@/public/static/images/about/intro-illustration-3.png'
+import IMAGE_ILLUSTRATION_1 from '@/public/static/images/about/intro-illustration-1.png'
+import IMAGE_ILLUSTRATION_2 from '@/public/static/images/about/intro-illustration-2.png'
+import IMAGE_ILLUSTRATION_3 from '@/public/static/images/about/intro-illustration-3.png'
 import IMAGE_WAVE_1 from '@/public/static/images/about/wave-intro-1.svg'
 import IMAGE_WAVE_2 from '@/public/static/images/about/wave-intro-2.svg'
 
@@ -14,7 +14,7 @@ const Intro = () => {
       <ul>
         <li className="l-container full ecosystem">
           <div className="l-row">
-            <img src={ILLUSTRATION_1} />
+            <img src={IMAGE_ILLUSTRATION_1.src} />
 
             <section className="content">
               <h3>
@@ -36,7 +36,7 @@ const Intro = () => {
         </li>
         <li className="l-container full community">
           <div className="l-row">
-            <img src={ILLUSTRATION_2} />
+            <img src={IMAGE_ILLUSTRATION_2.src} />
 
             <section className="content">
               <h3>
@@ -98,7 +98,7 @@ const Intro = () => {
               </p>
             </section>
 
-            <img src={ILLUSTRATION_3} />
+            <img src={IMAGE_ILLUSTRATION_3.src} />
           </div>
         </li>
       </ul>

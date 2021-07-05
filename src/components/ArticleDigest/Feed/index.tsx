@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Card, Img } from '~/components'
+import { Card, ResponsiveImage } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 
 import { stripHtml, toPath } from '~/common/utils'
@@ -75,7 +75,7 @@ const BaseArticleDigestFeed = ({
 
         {cover && (
           <div className="cover">
-            <Img url={cover} size="144w" smUpSize="360w" />
+            <ResponsiveImage url={cover} size="144w" smUpSize="360w" />
           </div>
         )}
       </section>

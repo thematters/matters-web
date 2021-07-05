@@ -7,8 +7,8 @@ import { PATHS, TEXT } from '~/common/enums'
 
 import IMAGE_ARROW_DOWN from '@/public/static/images/about/arrow-down.svg'
 import SLIDE_CURSOR from '@/public/static/images/about/cursor.svg'
-import ILLUSTRATION_1 from '@/public/static/images/about/hero-illustration-1.png'
-import ILLUSTRATION_2 from '@/public/static/images/about/hero-illustration-2.png'
+import IMAGE_ILLUSTRATION_1 from '@/public/static/images/about/hero-illustration-1.png'
+import IMAGE_ILLUSTRATION_2 from '@/public/static/images/about/hero-illustration-2.png'
 import IMAGE_WAVE_1 from '@/public/static/images/about/wave-hero-1.svg'
 import IMAGE_WAVE_2 from '@/public/static/images/about/wave-hero-2.svg'
 
@@ -189,11 +189,11 @@ const Hero = () => {
       <style jsx>{styles}</style>
       <style jsx>{`
         .hero {
-          background-image: url(${IMAGE_WAVE_1}), url(${ILLUSTRATION_1}),
-            url(${IMAGE_WAVE_2});
+          background-image: url(${IMAGE_WAVE_1}),
+            url(${IMAGE_ILLUSTRATION_1.src}), url(${IMAGE_WAVE_2});
         }
         .ilusCity {
-          background-image: url(${ILLUSTRATION_2});
+          background-image: url(${IMAGE_ILLUSTRATION_2.src});
         }
         .scrollHint {
           background-image: url(${IMAGE_ARROW_DOWN});

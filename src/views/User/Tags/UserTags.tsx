@@ -15,7 +15,7 @@ import {
 
 import { analytics, mergeConnections, toPath } from '~/common/utils'
 
-import IMAGE_LOGO_192 from '@/public/static/icon-192x192.png?url'
+import IMAGE_LOGO_192 from '@/public/static/icon-192x192.png'
 
 import UserTabs from '../UserTabs'
 import { USER_TAGS_PUBLIC } from './gql'
@@ -117,7 +117,7 @@ const UserTags = () => {
         en: `Tags ${user.displayName} maintaining or collaborating`,
       }}
       description={user.info.description}
-      image={user.info.profileCover || IMAGE_LOGO_192}
+      image={user.info.profileCover || IMAGE_LOGO_192.src}
     />
   )
 
