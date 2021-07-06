@@ -1,7 +1,13 @@
 import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 
-import { Head, OnboardingTasks, SearchBar, useResponsive, useRoute } from '~/components'
+import {
+  Head,
+  OnboardingTasks,
+  SearchBar,
+  useResponsive,
+  useRoute,
+} from '~/components'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
 import FixedMain from './FixedMain'
