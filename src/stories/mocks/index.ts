@@ -86,6 +86,7 @@ export const MOCK_ARTILCE = {
   },
   dataHash: 'article-data-hash',
   sticky: false,
+  readTime: 1234.5,
   tags: [],
   appreciationsReceivedTotal: 1,
   responseCount: 10,

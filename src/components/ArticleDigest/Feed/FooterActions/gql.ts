@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import { BookmarkButton } from '~/components'
 
 import DropdownActions from '../../DropdownActions'
+import ReadTime from './ReadTime'
 
 export const fragments = {
   article: {
@@ -18,8 +19,10 @@ export const fragments = {
           userName
         }
         ...DropdownActionsArticle
+        ...ActionsReadTimeArticle
       }
       ${DropdownActions.fragments.article}
+      ${ReadTime.fragments.article}
     `,
     private: gql`
       fragment FooterActionsArticlePrivate on Article {

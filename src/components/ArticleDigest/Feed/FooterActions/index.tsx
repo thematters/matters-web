@@ -9,6 +9,7 @@ import {
 
 import DropdownActions, { DropdownActionsControls } from '../../DropdownActions'
 import { fragments } from './gql'
+import ReadTime from './ReadTime'
 import styles from './styles.css'
 
 import { FooterActionsArticlePublic } from './__generated__/FooterActionsArticlePublic'
@@ -24,6 +25,8 @@ const FooterActions = ({ article, date, ...controls }: FooterActionsProps) => {
   return (
     <footer>
       <section className="left">
+        <ReadTime article={article} />
+
         <DateTime date={date || article.createdAt} />
 
         {article.access.type === 'paywall' && (
