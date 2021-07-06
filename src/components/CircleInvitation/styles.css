@@ -5,10 +5,6 @@
 
 .container {
   padding-right: calc(var(--text-size) + var(--button-size));
-
-  & :global(> * .name > span) {
-    @mixin line-clamp;
-  }
 }
 
 .info {

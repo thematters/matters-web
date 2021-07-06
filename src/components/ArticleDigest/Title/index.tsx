@@ -9,15 +9,22 @@ import styles from './styles.css'
 
 import { ArticleDigestTitleArticle } from './__generated__/ArticleDigestTitleArticle'
 
-export type ArticleDigestTitleTextSize = 'sm' | 'md-s' | 'md' | 'xm' | 'xl'
+export type ArticleDigestTitleTextSize =
+  | 'sm-s'
+  | 'sm'
+  | 'md-s'
+  | 'md'
+  | 'xm'
+  | 'xl'
 export type ArticleDigestTitleTextWeight = 'normal' | 'md' | 'semibold'
-export type ArticleDigestTitleIs = 'h2' | 'h3' | 'h4'
+export type ArticleDigestTitleIs = 'h2' | 'h3' | 'h4' | 'h5'
 
 type ArticleDigestTitleProps = {
   article: ArticleDigestTitleArticle
 
   textSize?: ArticleDigestTitleTextSize
   textWeight?: ArticleDigestTitleTextWeight
+  lineClamp?: boolean
   is?: ArticleDigestTitleIs
 
   disabled?: boolean
@@ -45,6 +52,7 @@ export const ArticleDigestTitle = ({
 
   textSize = 'md',
   textWeight = 'md',
+  lineClamp,
   is = 'h2',
 
   disabled,
@@ -63,6 +71,7 @@ export const ArticleDigestTitle = ({
     title: true,
     [`text-size-${textSize}`]: !!textSize,
     [`text-weight-${textWeight}`]: !!textWeight,
+    'line-clamp': lineClamp,
   })
   const isClickable = !disabled && !isBanned
 
@@ -79,8 +88,10 @@ export const ArticleDigestTitle = ({
           <h2 className={titleClasses}>{title}</h2>
         ) : is === 'h3' ? (
           <h3 className={titleClasses}>{title}</h3>
-        ) : (
+        ) : is === 'h4' ? (
           <h4 className={titleClasses}>{title}</h4>
+        ) : (
+          <h5 className={titleClasses}>{title}</h5>
         )}
 
         <style jsx>{styles}</style>

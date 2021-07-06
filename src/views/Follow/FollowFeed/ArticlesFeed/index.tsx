@@ -8,20 +8,11 @@ import {
   List,
   QueryError,
   Spinner,
-  TextIcon,
-  Translate,
-  UserDigest,
 } from '~/components'
-import { UserDigestMiniProps } from '~/components/UserDigest/Mini'
 
 import { analytics, mergeConnections } from '~/common/utils'
 
-import styles from './styles.css'
-
-import {
-  FollowArticlesFeed,
-  FollowArticlesFeed_viewer_recommendation_followeeArticles_edges_node_author as FollowArticlesFeedAuthor,
-} from './__generated__/FollowArticlesFeed'
+import { FollowArticlesFeed } from './__generated__/FollowArticlesFeed'
 
 const FOLLOW_ARTICLES = gql`
   query FollowArticlesFeed($after: String) {
@@ -88,40 +79,40 @@ const ArticlesFeed = () => {
     })
   }
 
-  const actor =
-    ({ node, index }: { node: FollowArticlesFeedAuthor; index: number }) =>
-    (props: Partial<UserDigestMiniProps>) => {
-      if (!node) {
-        return null
-      }
+  // const actor =
+  //   ({ node, index }: { node: FollowArticlesFeedAuthor; index: number }) =>
+  //   (props: Partial<UserDigestMiniProps>) => {
+  //     if (!node) {
+  //       return null
+  //     }
 
-      return (
-        <section className="author">
-          <UserDigest.Mini
-            user={node}
-            avatarSize="lg"
-            textSize="md-s"
-            textWeight="md"
-            hasAvatar
-            hasDisplayName
-            onClick={() => {
-              analytics.trackEvent('click_feed', {
-                type: 'follow-article',
-                contentType: 'user',
-                styleType: 'subtitle',
-                location: index,
-              })
-            }}
-            {...props}
-          />
+  //     return (
+  //       <section className="author">
+  //         <UserDigest.Mini
+  //           user={node}
+  //           avatarSize="lg"
+  //           textSize="md-s"
+  //           textWeight="md"
+  //           hasAvatar
+  //           hasDisplayName
+  //           onClick={() => {
+  //             analytics.trackEvent('click_feed', {
+  //               type: 'follow-article',
+  //               contentType: 'user',
+  //               styleType: 'subtitle',
+  //               location: index,
+  //             })
+  //           }}
+  //           {...props}
+  //         />
 
-          <TextIcon size="sm" color="grey-dark">
-            <Translate zh_hant="發布了" zh_hans="发布了" en="published" />
-          </TextIcon>
-          <style jsx>{styles}</style>
-        </section>
-      )
-    }
+  //         <TextIcon size="sm" color="grey-dark">
+  //           <Translate zh_hant="發布了" zh_hans="发布了" en="published" />
+  //         </TextIcon>
+  //         <style jsx>{styles}</style>
+  //       </section>
+  //     )
+  //   }
 
   return (
     <InfiniteScroll
@@ -142,7 +133,6 @@ const ArticlesFeed = () => {
                   location: i,
                 })
               }
-              actor={actor({ node: node.author, index: i })}
             />
           </List.Item>
         ))}

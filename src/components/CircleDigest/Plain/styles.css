@@ -1,8 +1,9 @@
 section {
-  &:hover,
-  &:focus {
-    & .name {
-      text-decoration: underline;
-    }
+  & :global(svg) {
+    opacity: 0.5;
   }
+}
+
+.name {
+  @mixin line-clamp;
 }

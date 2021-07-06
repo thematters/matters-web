@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { IconCircle24, LinkWrapper, TextIcon } from '~/components'
+import { IconCircle16, LinkWrapper, TextIcon } from '~/components'
 
 import { toPath } from '~/common/utils'
 
@@ -23,17 +23,15 @@ const CircleDigestPlain = ({ circle, onClick }: CircleDigestPlainProps) => {
 
   return (
     <LinkWrapper {...path} onClick={onClick}>
-      <section>
-        <TextIcon
-          icon={<IconCircle24 size="md" />}
-          color="green"
-          spacing="xxtight"
-          weight="md"
-          size="md-s"
-        >
-          <span className="name">{circle.displayName}</span>
-        </TextIcon>
-      </section>
+      <TextIcon
+        icon={<IconCircle16 size="sm" />}
+        color="green"
+        spacing="xxtight"
+        weight="normal"
+        size="sm-s"
+      >
+        <span className="name">{circle.displayName}</span>
+      </TextIcon>
 
       <style jsx>{styles}</style>
     </LinkWrapper>

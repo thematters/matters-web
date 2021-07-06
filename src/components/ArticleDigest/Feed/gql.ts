@@ -1,14 +1,10 @@
 import gql from 'graphql-tag'
 
-import { CircleDigest } from '~/components/CircleDigest'
 import { UserDigest } from '~/components/UserDigest'
 
-import DropdownActions from '../DropdownActions'
-import FooterActions from '../FooterActions'
 import { ArticleDigestTitle } from '../Title'
-import AccessLabel from './AccessLabel'
-import CreatedAt from './CreatedAt'
-import InactiveState from './InactiveState'
+import FollowButton from './FollowButton'
+import FooterActions from './FooterActions'
 
 export const fragments = {
   article: {
@@ -28,34 +24,24 @@ export const fragments = {
         }
         access {
           type
-          circle {
-            id
-            name
-            ...DigestPlainCircle
-          }
         }
-        ...CreatedAtArticle
-        ...AccessLabelArticle
-        ...InactiveStateArticle
         ...ArticleDigestTitleArticle
-        ...DropdownActionsArticle
         ...FooterActionsArticlePublic
       }
       ${UserDigest.Mini.fragments.user}
-      ${CreatedAt.fragments.article}
-      ${AccessLabel.fragments.article}
-      ${InactiveState.fragments.article}
       ${ArticleDigestTitle.fragments.article}
-      ${DropdownActions.fragments.article}
       ${FooterActions.fragments.article.public}
-      ${CircleDigest.Plain.fragments.circle}
     `,
     private: gql`
       fragment ArticleDigestFeedArticlePrivate on Article {
         id
+        author {
+          ...ArticleFeedFollowButtonUserPrivate
+        }
         ...FooterActionsArticlePrivate
       }
       ${FooterActions.fragments.article.private}
+      ${FollowButton.fragments.user.private}
     `,
   },
 }

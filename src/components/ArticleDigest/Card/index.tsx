@@ -1,5 +1,4 @@
 import classNames from 'classnames'
-import gql from 'graphql-tag'
 
 import { Card } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
@@ -12,6 +11,7 @@ import {
 } from '~/common/utils'
 
 import { ArticleDigestTitle } from '../Title'
+import { fragments } from './gql'
 import styles from './styles.css'
 
 import { ArticleDigestCardArticle } from './__generated__/ArticleDigestCardArticle'
@@ -21,28 +21,6 @@ export interface ArticleDigestCardProps {
 
   onClick?: () => any
   onClickAuthor?: () => void
-}
-
-const fragments = {
-  article: gql`
-    fragment ArticleDigestCardArticle on Article {
-      id
-      state
-      title
-      slug
-      mediaHash
-      cover
-      summary
-      author {
-        id
-        userName
-        ...UserDigestMiniUser
-      }
-      ...ArticleDigestTitleArticle
-    }
-    ${UserDigest.Mini.fragments.user}
-    ${ArticleDigestTitle.fragments.article}
-  `,
 }
 
 export const ArticleDigestCard = ({
