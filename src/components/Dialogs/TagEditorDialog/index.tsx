@@ -15,7 +15,7 @@ import { TagMaintainers_node_Tag_editors as TagEditor } from '~/components/GQL/q
  *
  * ```tsx
  * <TagEditorDialog>
- *   {({ open })=> (<Component />)}
+ *   {({ openDialog })=> (<Component />)}
  * </TagEditorDialog>
  * ```
  */
