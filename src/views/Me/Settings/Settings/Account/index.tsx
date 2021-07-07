@@ -40,7 +40,7 @@ const AccountSettings = () => {
         {({ openDialog }) => (
           <Form.List.Item
             title="Matters ID"
-            onClick={userNameEditable ? open : undefined}
+            onClick={userNameEditable ? openDialog : undefined}
             rightText={viewer.userName}
           />
         )}
