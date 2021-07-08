@@ -29,6 +29,7 @@ export const TAG_DETAIL_PUBLIC = gql`
         selectedArticles: articles(input: { first: 0, selected: true }) {
           totalCount
         }
+        isOfficial
         ...FollowersTag
         ...ArticleCountTag
         ...FollowButtonTagPrivate
