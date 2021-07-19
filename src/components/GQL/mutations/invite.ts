@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 export default gql`
   mutation InviteCircle(
     $circleId: ID!
-    $freePeriod: PositiveInt!
+    $freePeriod: freePeriod_Int_NotNull_exclusiveMin_0!
     $invitees: [InviteCircleInvitee!]!
   ) {
     invite(

@@ -22,7 +22,7 @@ import { LastFetchRandom } from '~/components/GQL/queries/__generated__/LastFetc
 import { FeedTagsPublic } from './__generated__/FeedTagsPublic'
 
 const FEED_TAGS = gql`
-  query FeedTagsPublic($random: NonNegativeInt) {
+  query FeedTagsPublic($random: random_Int_min_0_max_49) {
     viewer @connection(key: "viewerFeedTags") {
       id
       recommendation {

@@ -13,7 +13,7 @@ import CircleWall from './Wall/Circle'
 
 export const ARTICLE_DETAIL_PUBLIC = gql`
   query ArticleDetailPublic(
-    $mediaHash: String
+    $mediaHash: String!
     $includeCanSuperLike: Boolean = true
   ) {
     article(input: { mediaHash: $mediaHash }) {
@@ -79,7 +79,7 @@ export const ARTICLE_DETAIL_PUBLIC = gql`
 
 export const ARTICLE_DETAIL_PRIVATE = gql`
   query ArticleDetailPrivate(
-    $mediaHash: String
+    $mediaHash: String!
     $includeCanSuperLike: Boolean!
   ) {
     article(input: { mediaHash: $mediaHash }) {
@@ -106,7 +106,7 @@ export const ARTICLE_DETAIL_PRIVATE = gql`
 `
 
 export const ARTICLE_TRANSLATION = gql`
-  query ArticleTranslation($mediaHash: String, $language: UserLanguage!) {
+  query ArticleTranslation($mediaHash: String!, $language: UserLanguage!) {
     article(input: { mediaHash: $mediaHash }) {
       id
       translation(input: { language: $language }) {

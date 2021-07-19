@@ -8,7 +8,7 @@ export const SELECT_SEARCH = gql`
     $type: SearchTypes!
     $filter: SearchFilter
     $after: String
-    $first: Int
+    $first: first_Int_min_0
     $exclude: SearchExclude
   ) {
     search(

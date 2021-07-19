@@ -9,7 +9,7 @@ export const EDIT_MODE_ARTICLE = gql`
   query EditModeArticle(
     $mediaHash: String!
     $after: String
-    $first: Int = null
+    $first: first_Int_min_0 = null
   ) {
     article(input: { mediaHash: $mediaHash }) {
       id
