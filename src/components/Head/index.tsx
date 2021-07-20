@@ -18,7 +18,7 @@ interface HeadProps {
   description?: string | null
   keywords?: string[]
   path?: string
-  image?: string
+  image?: string | null
   noSuffix?: boolean
   paymentPointer?: string
 }

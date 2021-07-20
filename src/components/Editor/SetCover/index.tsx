@@ -13,7 +13,7 @@ export type SetCoverProps = {
   onBack?: () => any
   onClose?: () => any
 
-  cover?: string
+  cover?: string | null
   assets: Asset[]
 
   editCover: (asset?: Asset) => any

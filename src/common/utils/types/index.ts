@@ -27,9 +27,6 @@ export default gql`
     "Feed type in homepage"
     feedSortType: FeedSortType
 
-    "Feed type in follow page"
-    followFeedType: FollowFeedType
-
     "Whether civic liker dialog is hidden"
     readCivicLikerDialog: Boolean!
 
