@@ -3,7 +3,7 @@ import { Avatar } from '~/components/Avatar'
 import styles from './styles.css'
 
 interface Props {
-  avatar?: string
+  avatar?: string | null
   title?: React.ReactNode | string
   titleAlign?: 'left' | 'center'
 }

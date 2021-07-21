@@ -48,7 +48,9 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
     undefined,
     { showToast: false }
   )
-  const [avatar, setAvatar] = useState<string | undefined>(avatarProps.src)
+  const [avatar, setAvatar] = useState<string | undefined | null>(
+    avatarProps.src
+  )
 
   const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
   const fieldId = 'avatar-upload-form'

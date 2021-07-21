@@ -14,7 +14,7 @@ export type CircleAvatarSize = 'xl' | 'xxl'
 export interface CircleAvatarProps {
   circle?: AvatarCircle
   size?: CircleAvatarSize
-  src?: string
+  src?: string | null
   inEditor?: boolean
 }
 

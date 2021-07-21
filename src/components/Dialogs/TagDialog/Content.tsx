@@ -110,7 +110,7 @@ const DropdownListWithDefaultItem = (props: DropdownListBaseProps) => {
 export interface TagDialogContentProps {
   id?: string
   content?: string
-  cover?: string
+  cover?: string | null
   description?: string | null
 }
 

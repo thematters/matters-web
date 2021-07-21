@@ -80,7 +80,11 @@ const BaseOAuthAuthorize = () => {
       avatar={avatar}
       title={
         <>
-          <a className="u-link-green" href={website} target="_blank">
+          <a
+            className="u-link-green"
+            href={website || undefined}
+            target="_blank"
+          >
             {name}
           </a>
           <Translate
