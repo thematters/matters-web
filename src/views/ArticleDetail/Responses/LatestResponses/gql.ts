@@ -6,10 +6,10 @@ import ResponseArticle from '../ResponseArticle'
 
 export const LATEST_RESPONSES_PUBLIC = gql`
   query LatestResponsesPublic(
-    $mediaHash: String
+    $mediaHash: String!
     $before: String
     $after: String
-    $first: Int = 8
+    $first: first_Int_min_0 = 8
     $includeAfter: Boolean
     $includeBefore: Boolean
     $articleOnly: Boolean

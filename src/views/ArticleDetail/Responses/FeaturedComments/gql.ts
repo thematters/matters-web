@@ -4,9 +4,9 @@ import { ThreadComment } from '~/components'
 
 export const FEATURED_COMMENTS_PUBLIC = gql`
   query FeaturedCommentsPublic(
-    $mediaHash: String
+    $mediaHash: String!
     $after: String
-    $first: Int = 10
+    $first: first_Int_min_0 = 10
   ) {
     article(input: { mediaHash: $mediaHash }) {
       id

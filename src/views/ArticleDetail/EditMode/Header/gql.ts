@@ -22,7 +22,7 @@ export const EDIT_ARTICLE = gql`
     $accessType: ArticleAccessType
     $license: ArticleLicenseType
     $after: String
-    $first: Int = null
+    $first: first_Int_min_0 = null
   ) {
     editArticle(
       input: {

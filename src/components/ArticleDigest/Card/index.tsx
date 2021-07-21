@@ -56,9 +56,11 @@ export const ArticleDigestCard = ({
       <section
         className={containerClasses}
         style={
-          cover && {
-            backgroundImage: `linear-gradient(180deg, rgba(0, 0, 0, 0.16) 0%, rgba(0, 0, 0, 0.64) 100%), url("${cover}")`,
-          }
+          cover
+            ? {
+                backgroundImage: `linear-gradient(180deg, rgba(0, 0, 0, 0.16) 0%, rgba(0, 0, 0, 0.64) 100%), url("${cover}")`,
+              }
+            : undefined
         }
       >
         <header>

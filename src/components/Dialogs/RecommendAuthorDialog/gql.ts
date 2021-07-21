@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import { UserDigest } from '~/components/UserDigest'
 
 export const RECOMMEND_AUTHORS = gql`
-  query RecommendAuthors($random: NonNegativeInt, $type: AuthorsType) {
+  query RecommendAuthors($random: random_Int_min_0_max_49, $type: AuthorsType) {
     viewer @connection(key: "viewerRecommendAuthors") {
       id
       recommendation {

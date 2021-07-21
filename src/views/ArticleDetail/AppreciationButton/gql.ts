@@ -30,7 +30,7 @@ export const fragments = {
 export const APPRECIATE_ARTICLE = gql`
   mutation AppreciateArticle(
     $id: ID!
-    $amount: PositiveInt!
+    $amount: amount_Int_NotNull_min_1!
     $token: String!
     $superLike: Boolean
   ) {

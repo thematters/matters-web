@@ -7,7 +7,7 @@ type ListItemProps = {
   onClick?: () => any
 }
 
-const CoverIndicator = ({ cover }: { cover?: string }) => (
+const CoverIndicator = ({ cover }: { cover?: string | null }) => (
   <span className="rect">
     {cover ? <img src={cover} /> : <IconAdd16 size="xs" />}
     <style jsx>{styles}</style>

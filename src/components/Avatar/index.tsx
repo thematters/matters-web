@@ -16,7 +16,7 @@ export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
 export interface AvatarProps {
   user?: AvatarUser
   size?: AvatarSize
-  src?: string
+  src?: string | null
   inEditor?: boolean
 }
 

@@ -18,7 +18,7 @@ export type SettingsListDialogProps = {
   forward: (nextStep: Step) => void
   closeDialog: () => void
 
-  cover?: string
+  cover?: string | null
   collectionCount: number
   tagsCount: number
 } & SettingsListDialogButtons &

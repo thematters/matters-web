@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 
 export default gql`
   mutation PayTo(
-    $amount: PositiveFloat!
+    $amount: amount_Float_NotNull_exclusiveMin_0!
     $currency: TransactionCurrency!
     $purpose: TransactionPurpose!
     $recipientId: ID!

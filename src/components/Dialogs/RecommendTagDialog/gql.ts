@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import { TagDigest } from '~/components/TagDigest'
 
 export const HOTTEST_TAGS = gql`
-  query HottestTags($random: NonNegativeInt) {
+  query HottestTags($random: random_Int_min_0_max_49) {
     viewer @connection(key: "viewerHottestTags") {
       id
       recommendation {
@@ -26,7 +26,7 @@ export const HOTTEST_TAGS = gql`
 `
 
 export const SELECTED_TAGS = gql`
-  query SelectedTags($random: NonNegativeInt) {
+  query SelectedTags($random: random_Int_min_0_max_49) {
     viewer @connection(key: "viewerSelectedTags") {
       id
       recommendation {

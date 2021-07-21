@@ -19,7 +19,7 @@ import styles from './styles.css'
 import { AuthorPicker as AuthorPickerType } from './__generated__/AuthorPicker'
 
 const AUTHOR_PICKER = gql`
-  query AuthorPicker($random: NonNegativeInt) {
+  query AuthorPicker($random: random_Int_min_0_max_49) {
     viewer {
       id
       following {

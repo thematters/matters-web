@@ -2,58 +2,6 @@
   "__schema": {
     "types": [
       {
-        "kind": "INTERFACE",
-        "name": "Node",
-        "possibleTypes": [
-          { "name": "Article" },
-          { "name": "User" },
-          { "name": "Comment" },
-          { "name": "Circle" },
-          { "name": "Tag" },
-          { "name": "Draft" }
-        ]
-      },
-      {
-        "kind": "INTERFACE",
-        "name": "Connection",
-        "possibleTypes": [
-          { "name": "FollowingActivityConnection" },
-          { "name": "CommentConnection" },
-          { "name": "MemberConnection" },
-          { "name": "UserConnection" },
-          { "name": "ArticleConnection" },
-          { "name": "InvitationConnection" },
-          { "name": "FolloweeDonatedArticleConnection" },
-          { "name": "TagConnection" },
-          { "name": "CircleConnection" },
-          { "name": "DraftConnection" },
-          { "name": "ReadHistoryConnection" },
-          { "name": "RecentSearchConnection" },
-          { "name": "AppreciationConnection" },
-          { "name": "NoticeConnection" },
-          { "name": "TransactionConnection" },
-          { "name": "ResponseConnection" },
-          { "name": "SearchResultConnection" },
-          { "name": "OAuthClientConnection" },
-          { "name": "SkippedListItemsConnection" }
-        ]
-      },
-      {
-        "kind": "UNION",
-        "name": "FollowingActivity",
-        "possibleTypes": [
-          { "name": "UserPublishArticleActivity" },
-          { "name": "UserBroadcastCircleActivity" },
-          { "name": "UserCreateCircleActivity" },
-          { "name": "UserCollectArticleActivity" },
-          { "name": "UserSubscribeCircleActivity" },
-          { "name": "UserFollowUserActivity" },
-          { "name": "UserDonateArticleActivity" },
-          { "name": "UserBookmarkArticleActivity" },
-          { "name": "UserAddArticleTagActivity" }
-        ]
-      },
-      {
         "kind": "UNION",
         "name": "Invitee",
         "possibleTypes": [{ "name": "Person" }, { "name": "User" }]
@@ -75,6 +23,63 @@
         ]
       },
       {
+        "kind": "INTERFACE",
+        "name": "Node",
+        "possibleTypes": [
+          { "name": "Article" },
+          { "name": "Tag" },
+          { "name": "Circle" },
+          { "name": "Comment" },
+          { "name": "Draft" },
+          { "name": "User" }
+        ]
+      },
+      {
+        "kind": "INTERFACE",
+        "name": "Connection",
+        "possibleTypes": [
+          { "name": "ArticleConnection" },
+          { "name": "TagConnection" },
+          { "name": "CircleConnection" },
+          { "name": "MemberConnection" },
+          { "name": "InvitationConnection" },
+          { "name": "CommentConnection" },
+          { "name": "DraftConnection" },
+          { "name": "NoticeConnection" },
+          { "name": "SearchResultConnection" },
+          { "name": "SkippedListItemsConnection" },
+          { "name": "UserConnection" },
+          { "name": "ReadHistoryConnection" },
+          { "name": "RecentSearchConnection" },
+          { "name": "AppreciationConnection" },
+          { "name": "FollowingActivityConnection" },
+          { "name": "FolloweeDonatedArticleConnection" },
+          { "name": "ResponseConnection" },
+          { "name": "TransactionConnection" },
+          { "name": "OAuthClientConnection" }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "FollowingActivity",
+        "possibleTypes": [
+          { "name": "UserPublishArticleActivity" },
+          { "name": "UserBroadcastCircleActivity" },
+          { "name": "UserCreateCircleActivity" },
+          { "name": "UserCollectArticleActivity" },
+          { "name": "UserSubscribeCircleActivity" },
+          { "name": "UserFollowUserActivity" },
+          { "name": "UserDonateArticleActivity" },
+          { "name": "UserBookmarkArticleActivity" },
+          { "name": "UserAddArticleTagActivity" }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "Response",
+        "possibleTypes": [{ "name": "Article" }, { "name": "Comment" }]
+      },
+      {
         "kind": "UNION",
         "name": "TransactionTarget",
         "possibleTypes": [
@@ -82,11 +87,6 @@
           { "name": "Circle" },
           { "name": "Transaction" }
         ]
-      },
-      {
-        "kind": "UNION",
-        "name": "Response",
-        "possibleTypes": [{ "name": "Article" }, { "name": "Comment" }]
       }
     ]
   }
