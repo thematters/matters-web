@@ -72,6 +72,10 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
   const isMatty = viewer.info.email === 'hi@matters.news'
   const isMaintainer = isOwner || isEditor || isMatty
 
+  // TODO: uncomment if the following feed is ready
+  // const isOfficial = !!tag?.isOfficial
+  // const canAdd = !isOfficial || (isOfficial && isMatty)
+
   /**
    * Render
    */
