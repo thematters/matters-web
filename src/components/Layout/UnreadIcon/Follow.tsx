@@ -7,13 +7,13 @@ import {
   IconNavFollowingActive24,
   ViewerContext,
 } from '~/components'
-import UNREAD_FOLLOWEE_ARTICLES from '~/components/GQL/queries/unreadFolloweeArticles'
+import UNREAD_FOLLOWEE_ARTICLES from '~/components/GQL/queries/unreadFollowing'
 
 import { POLL_INTERVAL } from '~/common/enums'
 
 import styles from './styles.css'
 
-import { UnreadFolloweeArticles } from '~/components/GQL/queries/__generated__/UnreadFolloweeArticles'
+import { UnreadFollowing } from '~/components/GQL/queries/__generated__/UnreadFollowing'
 
 interface FollowUnreadIconProps {
   active?: boolean
@@ -21,7 +21,7 @@ interface FollowUnreadIconProps {
 
 const FollowUnreadIcon: React.FC<FollowUnreadIconProps> = ({ active }) => {
   const viewer = useContext(ViewerContext)
-  const { data, startPolling } = useQuery<UnreadFolloweeArticles>(
+  const { data, startPolling } = useQuery<UnreadFollowing>(
     UNREAD_FOLLOWEE_ARTICLES,
     {
       errorPolicy: 'none',
@@ -37,7 +37,7 @@ const FollowUnreadIcon: React.FC<FollowUnreadIconProps> = ({ active }) => {
     }
   }, [])
 
-  const unread = data?.viewer?.status?.unreadFolloweeArticles
+  const unread = data?.viewer?.status?.unreadFollowing
   const iconClasses = classNames({ 'unread-icon': true, unread })
 
   return (

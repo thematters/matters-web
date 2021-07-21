@@ -9,17 +9,17 @@ import {
   useResponsive,
   ViewerContext,
 } from '~/components'
-import viewerUnreadFolloweeArticles from '~/components/GQL/updates/viewerUnreadFolloweeArticles'
+import viewerUnreadFollowing from '~/components/GQL/updates/viewerUnreadFollowing'
 
 import Feed from './Feed'
 import PickAuthors from './PickAuthors'
 
 import { MeFollow } from './__generated__/MeFollow'
-import { ReadFolloweeArticles } from './__generated__/ReadFolloweeArticles'
+import { ReadFollowingFeed } from './__generated__/ReadFollowingFeed'
 
-const READ_FOLLOWEE_ARTICLES = gql`
-  mutation ReadFolloweeArticles {
-    logRecord(input: { type: ReadFolloweeArticles })
+const READ_FOLLOWING = gql`
+  mutation ReadFollowingFeed {
+    logRecord(input: { type: ReadFollowingFeed })
   }
 `
 
@@ -38,17 +38,14 @@ const ME_FOLLOW = gql`
 
 const BaseFollow = () => {
   const viewer = useContext(ViewerContext)
-  const [readFolloweeArticles] = useMutation<ReadFolloweeArticles>(
-    READ_FOLLOWEE_ARTICLES,
-    {
-      update: viewerUnreadFolloweeArticles,
-    }
-  )
+  const [readFollowing] = useMutation<ReadFollowingFeed>(READ_FOLLOWING, {
+    update: viewerUnreadFollowing,
+  })
   const { data, loading } = useQuery<MeFollow>(ME_FOLLOW)
 
   useEffect(() => {
     if (viewer.isAuthed) {
-      readFolloweeArticles()
+      readFollowing()
     }
   }, [])
 
