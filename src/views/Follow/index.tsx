@@ -11,7 +11,7 @@ import {
 } from '~/components'
 import viewerUnreadFolloweeArticles from '~/components/GQL/updates/viewerUnreadFolloweeArticles'
 
-import FollowFeed from './FollowFeed'
+import Feed from './Feed'
 import PickAuthors from './PickAuthors'
 
 import { MeFollow } from './__generated__/MeFollow'
@@ -65,7 +65,7 @@ const BaseFollow = () => {
   if (followeeCount < 5) {
     return <PickAuthors />
   } else {
-    return <FollowFeed />
+    return <Feed />
   }
 }
 

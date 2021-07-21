@@ -5,7 +5,7 @@ import { Comment } from '~/components'
 export const fragments = {
   comment: {
     public: gql`
-      fragment FollowFeedCommentPublic on Comment {
+      fragment FollowingFeedCommentPublic on Comment {
         id
         createdAt
         ...ContentCommentPublic
@@ -13,7 +13,7 @@ export const fragments = {
       ${Comment.Content.fragments.comment.public}
     `,
     private: gql`
-      fragment FollowFeedCommentPrivate on Comment {
+      fragment FollowingFeedCommentPrivate on Comment {
         id
         ...ContentCommentPrivate
       }

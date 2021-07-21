@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
+import _get from 'lodash/get'
 
 import {
   ArticleDigestFeed,
@@ -17,13 +18,18 @@ import {
 
 import { analytics, mergeConnections } from '~/common/utils'
 
-import FollowFeedCircle from './FollowFeedCircle'
-import FollowFeedComment from './FollowFeedComment'
-import FollowFeedHead from './FollowFeedHead'
-import FollowFeedUser from './FollowFeedUser'
+import FeedCircle from './FollowingFeedCircle'
+import FeedComment from './FollowingFeedComment'
+import FeedHead from './FollowingFeedHead'
+import FeedUser from './FollowingFeedUser'
 import { FOLLOWING_FEED } from './gql'
 
-import { FollowingFeed as FollowingFeedType } from './__generated__/FollowingFeed'
+import {
+  FollowingFeed as FollowingFeedType,
+  FollowingFeed_viewer_recommendation_following_edges,
+} from './__generated__/FollowingFeed'
+
+type FollowingEdge = FollowingFeed_viewer_recommendation_following_edges
 
 const FollowingFeed = () => {
   const { data, loading, error, fetchMore, refetch } =
@@ -74,6 +80,25 @@ const FollowingFeed = () => {
     })
   }
 
+  // deduplicate edges with same `node.node`
+  const dedupedNodeIds: string[] = []
+  const dedupedEdges: FollowingEdge[] = []
+  edges.forEach((edge) => {
+    const { node } = edge
+    const nodeId =
+      _get(node, 'nodeArticle.id') ||
+      _get(node, 'nodeComment.id') ||
+      _get(node, 'nodeUser.id') ||
+      _get(node, 'nodeCircle.id') ||
+      ''
+    const hasSameNode = dedupedNodeIds.indexOf(nodeId) >= 0
+
+    if (!hasSameNode) {
+      dedupedNodeIds.push(nodeId)
+      dedupedEdges.push(edge)
+    }
+  })
+
   return (
     <>
       <Head title={{ id: 'follow' }} />
@@ -84,12 +109,12 @@ const FollowingFeed = () => {
         pullToRefresh={refetch}
       >
         <List>
-          {edges.map(({ node, cursor }, i) => (
+          {dedupedEdges.map(({ node, cursor }, i) => (
             <List.Item key={cursor}>
               {node.__typename === 'UserPublishArticleActivity' && (
                 <ArticleDigestFeed
                   header={
-                    <FollowFeedHead>
+                    <FeedHead>
                       <UserDigest.Plain user={node.actor} />
                       <span>
                         {node.nodeArticle.access.circle ? (
@@ -105,13 +130,13 @@ const FollowingFeed = () => {
                             en="published on"
                           />
                         )}
-                        {node.nodeArticle.access.circle && (
-                          <CircleDigest.Plain
-                            circle={node.nodeArticle.access.circle}
-                          />
-                        )}
                       </span>
-                    </FollowFeedHead>
+                      {node.nodeArticle.access.circle && (
+                        <CircleDigest.Plain
+                          circle={node.nodeArticle.access.circle}
+                        />
+                      )}
+                    </FeedHead>
                   }
                   article={node.nodeArticle}
                   date={node.createdAt}
@@ -119,9 +144,9 @@ const FollowingFeed = () => {
               )}
 
               {node.__typename === 'UserBroadcastCircleActivity' && (
-                <FollowFeedComment
+                <FeedComment
                   header={
-                    <FollowFeedHead>
+                    <FeedHead>
                       <UserDigest.Plain user={node.actor} />
                       <span>
                         <Translate
@@ -131,7 +156,7 @@ const FollowingFeed = () => {
                         />
                       </span>
                       <CircleDigest.Plain circle={node.targetCircle} />
-                    </FollowFeedHead>
+                    </FeedHead>
                   }
                   comment={node.nodeComment}
                   date={node.createdAt}
@@ -139,14 +164,14 @@ const FollowingFeed = () => {
               )}
 
               {node.__typename === 'UserCreateCircleActivity' && (
-                <FollowFeedCircle
+                <FeedCircle
                   header={
-                    <FollowFeedHead>
+                    <FeedHead>
                       <UserDigest.Plain user={node.actor} />
                       <span>
                         <Translate zh_hant="創建" zh_hans="创建" en="created" />
                       </span>
-                    </FollowFeedHead>
+                    </FeedHead>
                   }
                   circle={node.nodeCircle}
                   date={new Date()}
@@ -156,7 +181,7 @@ const FollowingFeed = () => {
               {node.__typename === 'UserCollectArticleActivity' && (
                 <ArticleDigestFeed
                   header={
-                    <FollowFeedHead>
+                    <FeedHead>
                       <UserDigest.Plain user={node.actor} />
                       <span>
                         <Translate
@@ -172,16 +197,17 @@ const FollowingFeed = () => {
                         lineClamp
                         is="h5"
                       />
-                    </FollowFeedHead>
+                    </FeedHead>
                   }
+                  hasFollow
                   article={node.nodeArticle}
                 />
               )}
 
               {node.__typename === 'UserSubscribeCircleActivity' && (
-                <FollowFeedCircle
+                <FeedCircle
                   header={
-                    <FollowFeedHead>
+                    <FeedHead>
                       <UserDigest.Plain user={node.actor} />
                       <span>
                         <Translate
@@ -190,16 +216,16 @@ const FollowingFeed = () => {
                           en="subscribed"
                         />
                       </span>
-                    </FollowFeedHead>
+                    </FeedHead>
                   }
                   circle={node.nodeCircle}
                 />
               )}
 
               {node.__typename === 'UserFollowUserActivity' && (
-                <FollowFeedUser
+                <FeedUser
                   header={
-                    <FollowFeedHead>
+                    <FeedHead>
                       <UserDigest.Plain user={node.actor} />
                       <span>
                         <Translate
@@ -208,7 +234,7 @@ const FollowingFeed = () => {
                           en="followed"
                         />
                       </span>
-                    </FollowFeedHead>
+                    </FeedHead>
                   }
                   user={node.nodeUser}
                   date={new Date()}
@@ -218,13 +244,14 @@ const FollowingFeed = () => {
               {node.__typename === 'UserDonateArticleActivity' && (
                 <ArticleDigestFeed
                   header={
-                    <FollowFeedHead>
+                    <FeedHead>
                       <UserDigest.Plain user={node.actor} />
                       <span>
                         <Translate zh_hant="支持" zh_hans="支持" en="donated" />
                       </span>
-                    </FollowFeedHead>
+                    </FeedHead>
                   }
+                  hasFollow
                   article={node.nodeArticle}
                 />
               )}
@@ -232,7 +259,7 @@ const FollowingFeed = () => {
               {node.__typename === 'UserBookmarkArticleActivity' && (
                 <ArticleDigestFeed
                   header={
-                    <FollowFeedHead>
+                    <FeedHead>
                       <UserDigest.Plain user={node.actor} />
                       <span>
                         <Translate
@@ -241,8 +268,9 @@ const FollowingFeed = () => {
                           en="bookmarked"
                         />
                       </span>
-                    </FollowFeedHead>
+                    </FeedHead>
                   }
+                  hasFollow
                   article={node.nodeArticle}
                 />
               )}
@@ -250,7 +278,7 @@ const FollowingFeed = () => {
               {node.__typename === 'UserAddArticleTagActivity' && (
                 <ArticleDigestFeed
                   header={
-                    <FollowFeedHead>
+                    <FeedHead>
                       <span>
                         <Translate
                           zh_hant="添加精選於"
@@ -259,8 +287,9 @@ const FollowingFeed = () => {
                         />
                       </span>
                       <Tag tag={node.targetTag} type="plain" />
-                    </FollowFeedHead>
+                    </FeedHead>
                   }
+                  hasFollow
                   article={node.nodeArticle}
                 />
               )}

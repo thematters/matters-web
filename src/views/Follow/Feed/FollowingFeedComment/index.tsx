@@ -5,16 +5,16 @@ import { Comment, DateTime, Expandable } from '~/components'
 import { fragments } from './gql'
 import styles from './styles.css'
 
-import { FollowFeedCommentPrivate } from './__generated__/FollowFeedCommentPrivate'
-import { FollowFeedCommentPublic } from './__generated__/FollowFeedCommentPublic'
+import { FollowingFeedCommentPrivate } from './__generated__/FollowingFeedCommentPrivate'
+import { FollowingFeedCommentPublic } from './__generated__/FollowingFeedCommentPublic'
 
-interface FollowFeedCommentProps {
-  comment: FollowFeedCommentPublic & Partial<FollowFeedCommentPrivate>
+interface FollowingFeedCommentProps {
+  comment: FollowingFeedCommentPublic & Partial<FollowingFeedCommentPrivate>
   header?: React.ReactNode
   date: Date | string | number
 }
 
-const FollowFeedComment: React.FC<FollowFeedCommentProps> & {
+const FollowingFeedComment: React.FC<FollowingFeedCommentProps> & {
   fragments: typeof fragments
 } = ({ comment, header, date }) => {
   return (
@@ -40,6 +40,6 @@ const FollowFeedComment: React.FC<FollowFeedCommentProps> & {
   )
 }
 
-FollowFeedComment.fragments = fragments
+FollowingFeedComment.fragments = fragments
 
-export default FollowFeedComment
+export default FollowingFeedComment

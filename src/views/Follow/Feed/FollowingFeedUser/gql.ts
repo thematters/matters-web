@@ -5,14 +5,14 @@ import { UserDigest } from '~/components'
 export const fragments = {
   user: {
     public: gql`
-      fragment FollowFeedUserPublic on User {
+      fragment FollowingFeedUserPublic on User {
         id
         ...UserDigestRichUserPublic
       }
       ${UserDigest.Rich.fragments.user.public}
     `,
     private: gql`
-      fragment FollowFeedUserPrivate on User {
+      fragment FollowingFeedUserPrivate on User {
         id
         ...UserDigestRichUserPrivate
       }

@@ -2,9 +2,9 @@ import gql from 'graphql-tag'
 
 import { ArticleDigestFeed, CircleDigest, Tag, UserDigest } from '~/components'
 
-import FollowFeedCircle from './FollowFeedCircle'
-import FollowFeedComment from './FollowFeedComment'
-import FollowFeedUser from './FollowFeedUser'
+import FollowingFeedCircle from './FollowingFeedCircle'
+import FollowingFeedComment from './FollowingFeedComment'
+import FollowingFeedUser from './FollowingFeedUser'
 
 export const FOLLOWING_FEED = gql`
   query FollowingFeed($after: String) {
@@ -42,11 +42,11 @@ export const FOLLOWING_FEED = gql`
                 }
                 createdAt
                 nodeComment: node {
-                  ...FollowFeedCommentPublic
-                  ...FollowFeedCommentPrivate
+                  ...FollowingFeedCommentPublic
+                  ...FollowingFeedCommentPrivate
                 }
                 targetCircle: target {
-                  ...FollowFeedCircle
+                  ...FollowingFeedCircle
                 }
               }
               ... on UserCreateCircleActivity {
@@ -55,7 +55,7 @@ export const FOLLOWING_FEED = gql`
                 }
                 createdAt
                 nodeCircle: node {
-                  ...FollowFeedCircle
+                  ...FollowingFeedCircle
                 }
               }
               ... on UserCollectArticleActivity {
@@ -78,7 +78,7 @@ export const FOLLOWING_FEED = gql`
                 }
                 createdAt
                 nodeCircle: node {
-                  ...FollowFeedCircle
+                  ...FollowingFeedCircle
                 }
               }
               ... on UserFollowUserActivity {
@@ -135,9 +135,9 @@ export const FOLLOWING_FEED = gql`
   ${Tag.fragments.tag}
   ${ArticleDigestFeed.fragments.article.public}
   ${ArticleDigestFeed.fragments.article.private}
-  ${FollowFeedComment.fragments.comment.public}
-  ${FollowFeedComment.fragments.comment.private}
-  ${FollowFeedCircle.fragments.circle}
-  ${FollowFeedUser.fragments.user.public}
-  ${FollowFeedUser.fragments.user.private}
+  ${FollowingFeedComment.fragments.comment.public}
+  ${FollowingFeedComment.fragments.comment.private}
+  ${FollowingFeedCircle.fragments.circle}
+  ${FollowingFeedUser.fragments.user.public}
+  ${FollowingFeedUser.fragments.user.private}
 `

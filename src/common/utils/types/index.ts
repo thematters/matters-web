@@ -79,13 +79,7 @@ export default gql`
   enum FeedSortType {
     hottest
     newest
-  }
-
-  enum FollowFeedType {
-    article
-    comment
-    tag
-    donation
+    icymi
   }
 
   enum Language {
