@@ -8,8 +8,8 @@
           { "name": "Article" },
           { "name": "User" },
           { "name": "Comment" },
-          { "name": "Tag" },
           { "name": "Circle" },
+          { "name": "Tag" },
           { "name": "Draft" }
         ]
       },
@@ -17,14 +17,15 @@
         "kind": "INTERFACE",
         "name": "Connection",
         "possibleTypes": [
-          { "name": "ArticleConnection" },
+          { "name": "FollowingActivityConnection" },
           { "name": "CommentConnection" },
+          { "name": "MemberConnection" },
+          { "name": "UserConnection" },
+          { "name": "ArticleConnection" },
+          { "name": "InvitationConnection" },
           { "name": "FolloweeDonatedArticleConnection" },
           { "name": "TagConnection" },
-          { "name": "UserConnection" },
           { "name": "CircleConnection" },
-          { "name": "MemberConnection" },
-          { "name": "InvitationConnection" },
           { "name": "DraftConnection" },
           { "name": "ReadHistoryConnection" },
           { "name": "RecentSearchConnection" },
@@ -35,6 +36,21 @@
           { "name": "SearchResultConnection" },
           { "name": "OAuthClientConnection" },
           { "name": "SkippedListItemsConnection" }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "FollowingActivity",
+        "possibleTypes": [
+          { "name": "UserPublishArticleActivity" },
+          { "name": "UserBroadcastCircleActivity" },
+          { "name": "UserCreateCircleActivity" },
+          { "name": "UserCollectArticleActivity" },
+          { "name": "UserSubscribeCircleActivity" },
+          { "name": "UserFollowUserActivity" },
+          { "name": "UserDonateArticleActivity" },
+          { "name": "UserBookmarkArticleActivity" },
+          { "name": "UserAddArticleTagActivity" }
         ]
       },
       {
