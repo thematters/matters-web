@@ -71,10 +71,8 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
   const isEditor = _some(tag?.editors || [], ['id', viewer.id])
   const isMatty = viewer.info.email === 'hi@matters.news'
   const isMaintainer = isOwner || isEditor || isMatty
-
-  // TODO: uncomment if the following feed is ready
-  // const isOfficial = !!tag?.isOfficial
-  // const canAdd = !isOfficial || (isOfficial && isMatty)
+  const isOfficial = !!tag?.isOfficial
+  const canAdd = !isOfficial || (isOfficial && isMatty)
 
   /**
    * Render
@@ -121,7 +119,7 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
 
           <section className="buttons">
             <TagDetailButtons.FollowButton tag={tag} />
-            <TagDetailButtons.AddButton tag={tag} />
+            {canAdd && <TagDetailButtons.AddButton tag={tag} />}
           </section>
         </section>
 
