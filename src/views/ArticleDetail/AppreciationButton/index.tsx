@@ -87,7 +87,7 @@ const AppreciationButton = ({
       await sendAppreciation({
         variables: {
           id: article.id,
-          amount,
+          amount: 1,
           token,
           superLike: true,
         },
