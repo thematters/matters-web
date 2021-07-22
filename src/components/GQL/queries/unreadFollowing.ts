@@ -1,11 +1,11 @@
 import gql from 'graphql-tag'
 
 export default gql`
-  query UnreadFolloweeArticles {
+  query UnreadFollowing {
     viewer {
       id
       status {
-        unreadFolloweeArticles
+        unreadFollowing
       }
     }
   }
