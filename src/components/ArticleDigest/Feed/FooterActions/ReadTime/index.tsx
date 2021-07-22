@@ -1,8 +1,7 @@
 import { IconDotDivider, IconReadTime12, TextIcon } from '~/components'
+import { Translate } from '~/components/Context'
 
 import { numAbbr, numRound } from '~/common/utils'
-
-import { Translate } from '@/src/components/Context'
 
 import { fragments } from './gql'
 

@@ -9,9 +9,9 @@ import Unfollow from './Unfollow'
 
 import { FollowButtonUserPrivate } from './__generated__/FollowButtonUserPrivate'
 
-interface FollowButtonProps {
+interface FollowUserButtonProps {
   user: Partial<FollowButtonUserPrivate>
-  size?: FollowButtonSize
+  size?: FollowUserButtonSize
 }
 
 const fragments = {
@@ -26,9 +26,12 @@ const fragments = {
   },
 }
 
-export type FollowButtonSize = 'lg' | 'md' | 'md-s'
+export type FollowUserButtonSize = 'lg' | 'md' | 'md-s'
 
-export const FollowButton = ({ user, size = 'md' }: FollowButtonProps) => {
+export const FollowUserButton = ({
+  user,
+  size = 'md',
+}: FollowUserButtonProps) => {
   const viewer = useContext(ViewerContext)
 
   if (viewer.isInactive || viewer.id === user.id) {
@@ -42,5 +45,5 @@ export const FollowButton = ({ user, size = 'md' }: FollowButtonProps) => {
   }
 }
 
-FollowButton.fragments = fragments
-FollowButton.State = FollowState
+FollowUserButton.fragments = fragments
+FollowUserButton.State = FollowState

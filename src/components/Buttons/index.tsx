@@ -1,6 +1,6 @@
 export * from './BackToHome'
 export * from './Bookmark'
-export * from './Follow'
+export * from './FollowUser'
 export * from './Share'
 export * from './SignUp'
 export * from './UnblockUser'

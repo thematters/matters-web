@@ -2,21 +2,22 @@ import React from 'react'
 
 import { Comment, DateTime, Expandable } from '~/components'
 
+import DropdownActions, { DropdownActionsControls } from '../DropdownActions'
 import { fragments } from './gql'
 import styles from './styles.css'
 
 import { FollowingFeedCommentPrivate } from './__generated__/FollowingFeedCommentPrivate'
 import { FollowingFeedCommentPublic } from './__generated__/FollowingFeedCommentPublic'
 
-interface FollowingFeedCommentProps {
+type FollowingFeedCommentProps = {
   comment: FollowingFeedCommentPublic & Partial<FollowingFeedCommentPrivate>
   header?: React.ReactNode
   date: Date | string | number
-}
+} & DropdownActionsControls
 
 const FollowingFeedComment: React.FC<FollowingFeedCommentProps> & {
   fragments: typeof fragments
-} = ({ comment, header, date }) => {
+} = ({ comment, header, date, actions }) => {
   return (
     <section className="container">
       {header}
@@ -32,7 +33,13 @@ const FollowingFeedComment: React.FC<FollowingFeedCommentProps> & {
       </section>
 
       <footer>
-        <DateTime date={date || comment.createdAt} />
+        <section className="left">
+          <DateTime date={date || comment.createdAt} />
+        </section>
+
+        <section className="right">
+          <DropdownActions actions={actions} />
+        </section>
       </footer>
 
       <style jsx>{styles}</style>
