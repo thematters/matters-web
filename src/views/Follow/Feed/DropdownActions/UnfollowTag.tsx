@@ -67,8 +67,8 @@ const UnfollowTagActionButton = ({ tag }: UnfollowTagActionButtonProps) => {
               color: 'green',
               content: (
                 <Translate
-                  zh_hant={`已取消追蹤 ${tag.content}`}
-                  zh_hans={`已取消追踪 ${tag.content}`}
+                  zh_hant={`已取消追蹤 #${tag.content}`}
+                  zh_hans={`已取消追踪 #${tag.content}`}
                 />
               ),
             },
@@ -78,8 +78,8 @@ const UnfollowTagActionButton = ({ tag }: UnfollowTagActionButtonProps) => {
     >
       <TextIcon icon={<IconRemove24 size="md" />} size="md" spacing="base">
         <Translate
-          zh_hant={`取消追蹤 ${tag.content}`}
-          zh_hans={`取消追踪 ${tag.content}`}
+          zh_hant={`取消追蹤 #${tag.content}`}
+          zh_hans={`取消追踪 #${tag.content}`}
         />
       </TextIcon>
     </Menu.Item>
