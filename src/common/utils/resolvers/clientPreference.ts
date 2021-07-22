@@ -3,7 +3,6 @@ const clientPreferenceResolver = (_: any) => {
     __typename: 'ClientPreference',
     id: 'local',
     feedSortType: 'hottest',
-    followFeedType: 'article',
     readCivicLikerDialog: false,
     wall: true,
     push: {

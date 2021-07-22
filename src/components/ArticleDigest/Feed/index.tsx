@@ -17,22 +17,22 @@ import { ArticleDigestFeedArticlePublic } from './__generated__/ArticleDigestFee
 export type ArticleDigestFeedControls = {
   onClick?: () => any
   onClickAuthor?: () => void
+  hasFollow?: boolean
 }
 
 export type ArticleDigestFeedProps = {
   article: ArticleDigestFeedArticlePublic &
     Partial<ArticleDigestFeedArticlePrivate>
-
   header?: React.ReactNode
 } & ArticleDigestFeedControls &
   FooterActionsProps
 
 const BaseArticleDigestFeed = ({
   article,
-
   header,
   date,
 
+  hasFollow,
   onClick,
   onClickAuthor,
 
@@ -67,7 +67,7 @@ const BaseArticleDigestFeed = ({
               onClick={onClickAuthor}
             />
 
-            <FollowButton user={article.author} />
+            {hasFollow && <FollowButton user={article.author} />}
           </section>
         </section>
 

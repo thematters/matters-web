@@ -7,10 +7,10 @@ import { toPath } from '~/common/utils'
 import { fragments } from './gql'
 import styles from './styles.css'
 
-import { FollowFeedCircle } from './__generated__/FollowFeedCircle'
+import { FollowingFeedCircle } from './__generated__/FollowingFeedCircle'
 
 export type CircleDigestFeedProps = {
-  circle: FollowFeedCircle
+  circle: FollowingFeedCircle
   header?: React.ReactNode
   date?: Date | string | number
 }

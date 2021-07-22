@@ -27,9 +27,6 @@ export default gql`
     "Feed type in homepage"
     feedSortType: FeedSortType
 
-    "Feed type in follow page"
-    followFeedType: FollowFeedType
-
     "Whether civic liker dialog is hidden"
     readCivicLikerDialog: Boolean!
 
@@ -82,13 +79,7 @@ export default gql`
   enum FeedSortType {
     hottest
     newest
-  }
-
-  enum FollowFeedType {
-    article
-    comment
-    tag
-    donation
+    icymi
   }
 
   enum Language {
