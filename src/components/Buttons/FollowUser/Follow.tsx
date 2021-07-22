@@ -13,17 +13,17 @@ import TOGGLE_FOLLOW_USER from '~/components/GQL/mutations/toggleFollowUser'
 import updateUserFollowerCount from '~/components/GQL/updates/userFollowerCount'
 import updateViewerFolloweeCount from '~/components/GQL/updates/viewerFolloweeCount'
 
-import { FollowButtonSize } from './index'
+import { FollowUserButtonSize } from './index'
 
 import { ToggleFollowUser } from '~/components/GQL/mutations/__generated__/ToggleFollowUser'
 import { FollowButtonUserPrivate } from './__generated__/FollowButtonUserPrivate'
 
-interface FollowProps {
+interface FollowUserProps {
   user: Partial<FollowButtonUserPrivate>
-  size: FollowButtonSize
+  size: FollowUserButtonSize
 }
 
-const Follow = ({ user, size }: FollowProps) => {
+const FollowUser = ({ user, size }: FollowUserProps) => {
   const [follow] = useMutation<ToggleFollowUser>(TOGGLE_FOLLOW_USER, {
     variables: { id: user.id, enabled: true },
     optimisticResponse:
@@ -44,7 +44,7 @@ const Follow = ({ user, size }: FollowProps) => {
     },
   })
 
-  const sizes: Record<FollowButtonSize, [ButtonWidth, ButtonHeight]> = {
+  const sizes: Record<FollowUserButtonSize, [ButtonWidth, ButtonHeight]> = {
     lg: ['6rem', '2rem'],
     md: ['4rem', '1.5rem'],
     'md-s': ['3rem', '1.5rem'],
@@ -66,4 +66,4 @@ const Follow = ({ user, size }: FollowProps) => {
   )
 }
 
-export default Follow
+export default FollowUser

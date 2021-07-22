@@ -18,6 +18,8 @@ import {
 
 import { analytics, mergeConnections } from '~/common/utils'
 
+import UnfollowTagActionButton from './DropdownActions/UnfollowTag'
+import UnfollowUserActionButton from './DropdownActions/UnfollowUser'
 import FeedCircle from './FollowingFeedCircle'
 import FeedComment from './FollowingFeedComment'
 import FeedHead from './FollowingFeedHead'
@@ -140,6 +142,9 @@ const FollowingFeed = () => {
                   }
                   article={node.nodeArticle}
                   date={node.createdAt}
+                  morePublicActions={
+                    <UnfollowUserActionButton user={node.actor} />
+                  }
                 />
               )}
 
@@ -175,6 +180,7 @@ const FollowingFeed = () => {
                   }
                   circle={node.nodeCircle}
                   date={new Date()}
+                  actions={<UnfollowUserActionButton user={node.actor} />}
                 />
               )}
 
@@ -201,6 +207,9 @@ const FollowingFeed = () => {
                   }
                   hasFollow
                   article={node.nodeArticle}
+                  morePublicActions={
+                    <UnfollowUserActionButton user={node.actor} />
+                  }
                 />
               )}
 
@@ -219,6 +228,7 @@ const FollowingFeed = () => {
                     </FeedHead>
                   }
                   circle={node.nodeCircle}
+                  actions={<UnfollowUserActionButton user={node.actor} />}
                 />
               )}
 
@@ -238,6 +248,7 @@ const FollowingFeed = () => {
                   }
                   user={node.nodeUser}
                   date={new Date()}
+                  actions={<UnfollowUserActionButton user={node.actor} />}
                 />
               )}
 
@@ -253,6 +264,9 @@ const FollowingFeed = () => {
                   }
                   hasFollow
                   article={node.nodeArticle}
+                  morePublicActions={
+                    <UnfollowUserActionButton user={node.actor} />
+                  }
                 />
               )}
 
@@ -272,6 +286,9 @@ const FollowingFeed = () => {
                   }
                   hasFollow
                   article={node.nodeArticle}
+                  morePublicActions={
+                    <UnfollowUserActionButton user={node.actor} />
+                  }
                 />
               )}
 
@@ -291,6 +308,9 @@ const FollowingFeed = () => {
                   }
                   hasFollow
                   article={node.nodeArticle}
+                  morePublicActions={
+                    <UnfollowTagActionButton tag={node.targetTag} />
+                  }
                 />
               )}
             </List.Item>

@@ -4,6 +4,7 @@ import { Card, CircleAvatar, DateTime, LinkWrapper } from '~/components'
 
 import { toPath } from '~/common/utils'
 
+import DropdownActions, { DropdownActionsControls } from '../DropdownActions'
 import { fragments } from './gql'
 import styles from './styles.css'
 
@@ -13,9 +14,14 @@ export type CircleDigestFeedProps = {
   circle: FollowingFeedCircle
   header?: React.ReactNode
   date?: Date | string | number
-}
+} & DropdownActionsControls
 
-const FeedCircle = ({ circle, header, date }: CircleDigestFeedProps) => {
+const FeedCircle = ({
+  circle,
+  header,
+  date,
+  actions,
+}: CircleDigestFeedProps) => {
   const { displayName, description } = circle
 
   const path = toPath({
@@ -49,7 +55,13 @@ const FeedCircle = ({ circle, header, date }: CircleDigestFeedProps) => {
       </Card>
 
       <footer>
-        <DateTime date={date || circle.createdAt} />
+        <section className="left">
+          <DateTime date={date || circle.createdAt} />
+        </section>
+
+        <section className="right">
+          <DropdownActions actions={actions} />
+        </section>
       </footer>
 
       <style jsx>{styles}</style>

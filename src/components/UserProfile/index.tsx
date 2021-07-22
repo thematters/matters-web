@@ -5,7 +5,7 @@ import {
   Cover,
   Error,
   Expandable,
-  FollowButton,
+  FollowUserButton,
   Layout,
   Spinner,
   Throw404,
@@ -180,7 +180,7 @@ export const UserProfile = () => {
             <Avatar size="xxl" user={user} />
           </section>
 
-          {!isMe && <FollowButton user={user} size="lg" />}
+          {!isMe && <FollowUserButton user={user} size="lg" />}
         </header>
 
         <section className="info">
@@ -194,7 +194,7 @@ export const UserProfile = () => {
 
           <section className="username">
             <span className="name">@{user.userName}</span>
-            {!isMe && <FollowButton.State user={user} />}
+            {!isMe && <FollowUserButton.State user={user} />}
           </section>
 
           <Expandable>
