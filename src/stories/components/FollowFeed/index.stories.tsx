@@ -1,13 +1,13 @@
 import { MockedProvider } from '@apollo/react-testing'
 import { Meta, Story } from '@storybook/react/types-6-0'
 import React from 'react'
-import FollowFeed from '~/views/Follow/FollowFeed'
+import FollowingFeed from '~/views/Follow/Feed'
 
 import Feed from './Feed'
 
 export default {
-  title: 'Components/FollowFeed',
-  component: FollowFeed,
+  title: 'Components/FollowingFeed',
+  component: FollowingFeed,
 } as Meta
 
 const Template: Story = () => (

@@ -5,11 +5,11 @@ import { fragments } from '~/components/UserDigest/Rich/gql'
 
 import styles from './styles.css'
 
-import { FollowFeedUserPrivate } from './__generated__/FollowFeedUserPrivate'
-import { FollowFeedUserPublic } from './__generated__/FollowFeedUserPublic'
+import { FollowingFeedUserPrivate } from './__generated__/FollowingFeedUserPrivate'
+import { FollowingFeedUserPublic } from './__generated__/FollowingFeedUserPublic'
 
 export type FeedUserProps = {
-  user: FollowFeedUserPublic & Partial<FollowFeedUserPrivate>
+  user: FollowingFeedUserPublic & Partial<FollowingFeedUserPrivate>
   header?: React.ReactNode
   date: Date | string | number
 }

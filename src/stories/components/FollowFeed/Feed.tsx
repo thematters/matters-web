@@ -1,8 +1,8 @@
 import React from 'react'
-import FollowFeedCircle from '~/views/Follow/FollowFeed/FollowFeedCircle'
-import FollowFeedComment from '~/views/Follow/FollowFeed/FollowFeedComment'
-import FollowFeedHead from '~/views/Follow/FollowFeed/FollowFeedHead'
-import FollowFeedUser from '~/views/Follow/FollowFeed/FollowFeedUser'
+import FollowingFeedCircle from '~/views/Follow/Feed/FollowingFeedCircle'
+import FollowingFeedComment from '~/views/Follow/Feed/FollowingFeedComment'
+import FollowingFeedHead from '~/views/Follow/Feed/FollowingFeedHead'
+import FollowingFeedUser from '~/views/Follow/Feed/FollowingFeedUser'
 
 import {
   ArticleDigestFeed,
@@ -29,13 +29,14 @@ const Heads = () => (
       <List.Item>
         <ArticleDigestFeed
           header={
-            <FollowFeedHead>
+            <FollowingFeedHead>
               <UserDigest.Plain user={MOCK_USER} />
               <span>
                 <Translate zh_hant="發布" zh_hans="發布" />
               </span>
-            </FollowFeedHead>
+            </FollowingFeedHead>
           }
+          hasFollow
           article={MOCK_ARTILCE}
           date={new Date()}
         />
@@ -45,14 +46,15 @@ const Heads = () => (
       <List.Item>
         <ArticleDigestFeed
           header={
-            <FollowFeedHead>
+            <FollowingFeedHead>
               <UserDigest.Plain user={MOCK_USER} />
               <span>
                 <Translate zh_hant="發布於" zh_hans="發布於" />
               </span>
               <CircleDigest.Plain circle={MOCK_CIRCLE} />
-            </FollowFeedHead>
+            </FollowingFeedHead>
           }
+          hasFollow
           article={MOCK_ARTILCE}
           date={new Date()}
         />
@@ -60,15 +62,15 @@ const Heads = () => (
 
       {/* New Broadcast */}
       <List.Item>
-        <FollowFeedComment
+        <FollowingFeedComment
           header={
-            <FollowFeedHead>
+            <FollowingFeedHead>
               <UserDigest.Plain user={MOCK_USER} />
               <span>
                 <Translate zh_hant="廣播於" zh_hans="廣播於" />
               </span>
               <CircleDigest.Plain circle={MOCK_CIRCLE} />
-            </FollowFeedHead>
+            </FollowingFeedHead>
           }
           comment={MOCK_COMMENT}
           date={new Date()}
@@ -79,14 +81,15 @@ const Heads = () => (
       <List.Item>
         <ArticleDigestFeed
           header={
-            <FollowFeedHead>
+            <FollowingFeedHead>
               <UserDigest.Plain user={MOCK_USER} />
               <span>
                 <Translate zh_hant="發布於" zh_hans="發布於" />
               </span>
               <Tag tag={MOCK_TAG} type="plain" />
-            </FollowFeedHead>
+            </FollowingFeedHead>
           }
+          hasFollow
           article={{
             ...MOCK_ARTILCE,
             author: {
@@ -103,13 +106,14 @@ const Heads = () => (
       <List.Item>
         <ArticleDigestFeed
           header={
-            <FollowFeedHead>
+            <FollowingFeedHead>
               <UserDigest.Plain user={MOCK_USER} />
               <span>
                 <Translate zh_hant="收藏" zh_hans="收藏" />
               </span>
-            </FollowFeedHead>
+            </FollowingFeedHead>
           }
+          hasFollow
           article={MOCK_ARTILCE}
         />
       </List.Item>
@@ -118,13 +122,14 @@ const Heads = () => (
       <List.Item>
         <ArticleDigestFeed
           header={
-            <FollowFeedHead>
+            <FollowingFeedHead>
               <span>
                 <Translate zh_hant="添加精選於" zh_hans="添加精選於" />
               </span>
               <Tag tag={MOCK_TAG} type="plain" />
-            </FollowFeedHead>
+            </FollowingFeedHead>
           }
+          hasFollow
           article={MOCK_ARTILCE}
         />
       </List.Item>
@@ -133,12 +138,12 @@ const Heads = () => (
       <List.Item>
         <ArticleDigestFeed
           header={
-            <FollowFeedHead>
+            <FollowingFeedHead>
               <UserDigest.Plain user={MOCK_USER} />
               <span>
                 <Translate zh_hant="支持" zh_hans="支持" />
               </span>
-            </FollowFeedHead>
+            </FollowingFeedHead>
           }
           article={MOCK_ARTILCE}
         />
@@ -146,14 +151,14 @@ const Heads = () => (
 
       {/* Circle was created */}
       <List.Item>
-        <FollowFeedCircle
+        <FollowingFeedCircle
           header={
-            <FollowFeedHead>
+            <FollowingFeedHead>
               <UserDigest.Plain user={MOCK_USER} />
               <span>
                 <Translate zh_hant="創建" zh_hans="創建" />
               </span>
-            </FollowFeedHead>
+            </FollowingFeedHead>
           }
           circle={MOCK_CIRCLE}
           date={new Date()}
@@ -162,14 +167,14 @@ const Heads = () => (
 
       {/* Circle has a new subscriber */}
       <List.Item>
-        <FollowFeedCircle
+        <FollowingFeedCircle
           header={
-            <FollowFeedHead>
+            <FollowingFeedHead>
               <UserDigest.Plain user={MOCK_USER} />
               <span>
                 <Translate zh_hant="訂閱" zh_hans="訂閱" />
               </span>
-            </FollowFeedHead>
+            </FollowingFeedHead>
           }
           circle={MOCK_CIRCLE}
         />
@@ -179,7 +184,7 @@ const Heads = () => (
       <List.Item>
         <ArticleDigestFeed
           header={
-            <FollowFeedHead>
+            <FollowingFeedHead>
               <UserDigest.Plain user={MOCK_USER} />
               <span>
                 <Translate zh_hant="關聯了作品" zh_hans="關聯了作品" />
@@ -191,22 +196,23 @@ const Heads = () => (
                 lineClamp
                 is="h5"
               />
-            </FollowFeedHead>
+            </FollowingFeedHead>
           }
+          hasFollow
           article={MOCK_ARTILCE}
         />
       </List.Item>
 
       {/* User has a new follower */}
       <List.Item>
-        <FollowFeedUser
+        <FollowingFeedUser
           header={
-            <FollowFeedHead>
+            <FollowingFeedHead>
               <UserDigest.Plain user={MOCK_USER} />
               <span>
                 <Translate zh_hant="追蹤" zh_hans="追蹤" />
               </span>
-            </FollowFeedHead>
+            </FollowingFeedHead>
           }
           user={MOCK_USER}
           date={new Date()}

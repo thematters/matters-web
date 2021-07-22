@@ -56,7 +56,7 @@ export const AuthorPicker = ({ title }: { title: React.ReactNode }) => {
   const followeeCount = data?.viewer?.following.users.totalCount || 0
 
   const shuffle = () => {
-    refetch({ random: _random(0, 50) })
+    refetch({ random: _random(0, 49) })
   }
 
   return (
