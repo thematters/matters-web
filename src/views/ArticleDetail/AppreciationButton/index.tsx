@@ -121,6 +121,7 @@ const AppreciationButton = ({
     } catch (e) {
       setSuperLiked(false)
       console.error(e)
+      throw e
     }
   }
 
