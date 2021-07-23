@@ -1,8 +1,11 @@
+import classNames from 'classnames'
+
 import { LinkWrapper } from '~/components'
 
 import { toPath } from '~/common/utils'
 
 import { fragments } from './gql'
+import styles from './styles.css'
 
 import { UserDigestPlainUser } from './__generated__/UserDigestPlainUser'
 
@@ -19,14 +22,18 @@ const Plain = ({ user, disabled, onClick }: UserDigestPlainProps) => {
     userName: user.userName || '',
   })
 
+  const containerClasses = classNames({
+    container: true,
+    disabled,
+  })
+
   return (
-    <LinkWrapper
-      {...path}
-      textActiveColor={!disabled ? 'green' : undefined}
-      disabled={disabled}
-      onClick={onClick}
-    >
-      {user.displayName}
+    <LinkWrapper {...path} disabled={disabled} onClick={onClick}>
+      <section className={containerClasses}>
+        <span className="name">{user.displayName}</span>
+
+        <style jsx>{styles}</style>
+      </section>
     </LinkWrapper>
   )
 }
