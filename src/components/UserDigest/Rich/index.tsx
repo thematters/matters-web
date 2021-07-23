@@ -4,7 +4,7 @@ import React from 'react'
 
 import { Card, CardProps, Translate } from '~/components'
 import { Avatar, AvatarProps } from '~/components/Avatar'
-import { FollowButton } from '~/components/Buttons/Follow'
+import { FollowUserButton } from '~/components/Buttons/FollowUser'
 import { UnblockUserButton } from '~/components/Buttons/UnblockUser'
 
 import { toPath } from '~/common/utils'
@@ -105,7 +105,7 @@ const Rich = ({
             <Link {...path}>
               <a className="name">{user.displayName}</a>
             </Link>
-            {hasState && <FollowButton.State user={user} />}
+            {hasState && <FollowUserButton.State user={user} />}
           </header>
 
           {!hasDescriptionReplacement && user.info.description && (
@@ -118,7 +118,7 @@ const Rich = ({
 
         <section className="extra-button">
           {hasUnblock && <UnblockUserButton user={user} />}
-          {hasFollow && <FollowButton user={user} size="md-s" />}
+          {hasFollow && <FollowUserButton user={user} size="md-s" />}
           {extraButton}
         </section>
 

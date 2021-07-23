@@ -14,17 +14,17 @@ import TOGGLE_FOLLOW_USER from '~/components/GQL/mutations/toggleFollowUser'
 import updateUserFollowerCount from '~/components/GQL/updates/userFollowerCount'
 import updateViewerFolloweeCount from '~/components/GQL/updates/viewerFolloweeCount'
 
-import { FollowButtonSize } from './index'
+import { FollowUserButtonSize } from './index'
 
 import { ToggleFollowUser } from '~/components/GQL/mutations/__generated__/ToggleFollowUser'
 import { FollowButtonUserPrivate } from './__generated__/FollowButtonUserPrivate'
 
 interface UnfollowProps {
   user: Partial<FollowButtonUserPrivate>
-  size: FollowButtonSize
+  size: FollowUserButtonSize
 }
 
-const Unfollow = ({ user, size }: UnfollowProps) => {
+const UnfollowUser = ({ user, size }: UnfollowProps) => {
   const [hover, setHover] = useState(false)
   const [unfollow] = useMutation<ToggleFollowUser>(TOGGLE_FOLLOW_USER, {
     variables: { id: user.id, enabled: false },
@@ -46,7 +46,7 @@ const Unfollow = ({ user, size }: UnfollowProps) => {
     },
   })
 
-  const sizes: Record<FollowButtonSize, [ButtonWidth, ButtonHeight]> = {
+  const sizes: Record<FollowUserButtonSize, [ButtonWidth, ButtonHeight]> = {
     lg: ['6rem', '2rem'],
     md: ['4rem', '1.5rem'],
     'md-s': ['3.25rem', '1.5rem'],
@@ -69,4 +69,4 @@ const Unfollow = ({ user, size }: UnfollowProps) => {
   )
 }
 
-export default Unfollow
+export default UnfollowUser

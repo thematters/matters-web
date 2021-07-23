@@ -3,6 +3,7 @@ import React from 'react'
 import { DateTime, UserDigest } from '~/components'
 import { fragments } from '~/components/UserDigest/Rich/gql'
 
+import DropdownActions, { DropdownActionsControls } from '../DropdownActions'
 import styles from './styles.css'
 
 import { FollowingFeedUserPrivate } from './__generated__/FollowingFeedUserPrivate'
@@ -12,9 +13,9 @@ export type FeedUserProps = {
   user: FollowingFeedUserPublic & Partial<FollowingFeedUserPrivate>
   header?: React.ReactNode
   date: Date | string | number
-}
+} & DropdownActionsControls
 
-const FeedUser = ({ user, header, date }: FeedUserProps) => {
+const FeedUser = ({ user, header, date, actions }: FeedUserProps) => {
   return (
     <section className="container">
       {header}
@@ -26,7 +27,13 @@ const FeedUser = ({ user, header, date }: FeedUserProps) => {
       />
 
       <footer>
-        <DateTime date={date} />
+        <section className="left">
+          <DateTime date={date} />
+        </section>
+
+        <section className="right">
+          <DropdownActions actions={actions} />
+        </section>
       </footer>
 
       <style jsx>{styles}</style>

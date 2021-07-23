@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { Avatar, FollowButton } from '~/components'
+import { Avatar, FollowUserButton } from '~/components'
 import { CircleDigest } from '~/components/CircleDigest'
 
 import DropdownActions from './DropdownActions'
@@ -53,7 +53,7 @@ const fragments = {
         ...DropdownActionsUserPrivate
       }
       ${CircleDigest.Rich.fragments.circle.private}
-      ${FollowButton.fragments.user.private}
+      ${FollowUserButton.fragments.user.private}
       ${DropdownActions.fragments.user.private}
     `,
   },

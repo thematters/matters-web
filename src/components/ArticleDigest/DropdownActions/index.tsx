@@ -1,4 +1,3 @@
-import gql from 'graphql-tag'
 import _find from 'lodash/find'
 import _isEmpty from 'lodash/isEmpty'
 import _pickBy from 'lodash/pickBy'
@@ -28,6 +27,7 @@ import DonatorsButton from './DonatorsButton'
 import EditButton from './EditButton'
 import ExtendButton from './ExtendButton'
 import FingerprintButton from './FingerprintButton'
+import { fragments } from './gql'
 import RemoveTagButton from './RemoveTagButton'
 import SetTagSelectedButton from './SetTagSelectedButton'
 import SetTagUnselectedButton from './SetTagUnselectedButton'
@@ -52,6 +52,8 @@ export interface DropdownActionsControls {
   inUserArticles?: boolean
   inTagDetailLatest?: boolean
   inTagDetailSelected?: boolean
+
+  morePublicActions?: React.ReactNode
 }
 
 type DropdownActionsProps = {
@@ -82,38 +84,13 @@ interface DialogProps {
 
 type BaseDropdownActionsProps = DropdownActionsProps & Controls & DialogProps
 
-const fragments = {
-  article: gql`
-    fragment DropdownActionsArticle on Article {
-      id
-      ...AppreciatorsDialogArticle
-      ...DonatorDialogArticle
-      ...FingerprintArticle
-      ...ArchiveArticleArticle
-      ...StickyButtonArticle
-      ...ExtendButtonArticle
-      ...RemoveTagButtonArticle
-      ...EditArticleButtonArticle
-      ...SetTagSelectedButtonArticle
-      ...SetTagUnselectedButtonArticle
-    }
-    ${AppreciatorsDialog.fragments.article}
-    ${DonatorsDialog.fragments.article}
-    ${FingerprintDialog.fragments.article}
-    ${StickyButton.fragments.article}
-    ${ArchiveArticle.fragments.article}
-    ${ExtendButton.fragments.article}
-    ${RemoveTagButton.fragments.article}
-    ${EditButton.fragments.article}
-    ${SetTagSelectedButton.fragments.article}
-    ${SetTagUnselectedButton.fragments.article}
-  `,
-}
-
 const BaseDropdownActions = ({
   article,
+
   size,
   inCard,
+
+  morePublicActions,
 
   hasShare,
   hasAppreciators,
@@ -134,7 +111,12 @@ const BaseDropdownActions = ({
   openArchiveDialog,
 }: BaseDropdownActionsProps) => {
   const hasPublic =
-    hasShare || hasAppreciators || hasDonators || hasFingerprint || hasExtend
+    hasShare ||
+    hasAppreciators ||
+    hasDonators ||
+    hasFingerprint ||
+    hasExtend ||
+    morePublicActions
   const hasPrivate =
     hasSticky ||
     hasArchive ||
@@ -154,6 +136,7 @@ const BaseDropdownActions = ({
         <FingerprintButton openDialog={openFingerprintDialog} />
       )}
       {hasExtend && <ExtendButton article={article} />}
+      {morePublicActions}
 
       {/* private */}
       {hasPublic && hasPrivate && <Menu.Divider spacing="xtight" />}
@@ -197,6 +180,7 @@ const BaseDropdownActions = ({
 const DropdownActions = (props: DropdownActionsProps) => {
   const {
     article,
+    morePublicActions,
 
     hasShare,
     hasFingerprint = true,
@@ -246,6 +230,8 @@ const DropdownActions = (props: DropdownActionsProps) => {
     hasDonators: article.donationsDialog.totalCount > 0 && !inCard,
     hasFingerprint: hasFingerprint && (isActive || isArticleAuthor) && !inCard,
     hasExtend: hasExtend && !!isActive && !inCard,
+    morePublicActions,
+
     // privates
     hasSticky: !!(
       inUserArticles &&

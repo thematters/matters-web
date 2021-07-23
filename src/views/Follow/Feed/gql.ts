@@ -2,6 +2,8 @@ import gql from 'graphql-tag'
 
 import { ArticleDigestFeed, CircleDigest, Tag, UserDigest } from '~/components'
 
+import UnfollowTag from './DropdownActions/UnfollowTag'
+import UnfollowUser from './DropdownActions/UnfollowUser'
 import FollowingFeedCircle from './FollowingFeedCircle'
 import FollowingFeedComment from './FollowingFeedComment'
 import FollowingFeedUser from './FollowingFeedUser'
@@ -24,6 +26,7 @@ export const FOLLOWING_FEED = gql`
               ... on UserPublishArticleActivity {
                 actor {
                   ...UserDigestPlainUser
+                  ...UnfollowActionButtonUserPrivate
                 }
                 createdAt
                 nodeArticle: node {
@@ -52,6 +55,7 @@ export const FOLLOWING_FEED = gql`
               ... on UserCreateCircleActivity {
                 actor {
                   ...UserDigestPlainUser
+                  ...UnfollowActionButtonUserPrivate
                 }
                 createdAt
                 nodeCircle: node {
@@ -61,6 +65,7 @@ export const FOLLOWING_FEED = gql`
               ... on UserCollectArticleActivity {
                 actor {
                   ...UserDigestPlainUser
+                  ...UnfollowActionButtonUserPrivate
                 }
                 createdAt
                 nodeArticle: node {
@@ -75,6 +80,7 @@ export const FOLLOWING_FEED = gql`
               ... on UserSubscribeCircleActivity {
                 actor {
                   ...UserDigestPlainUser
+                  ...UnfollowActionButtonUserPrivate
                 }
                 createdAt
                 nodeCircle: node {
@@ -84,6 +90,7 @@ export const FOLLOWING_FEED = gql`
               ... on UserFollowUserActivity {
                 actor {
                   ...UserDigestPlainUser
+                  ...UnfollowActionButtonUserPrivate
                 }
                 createdAt
                 nodeUser: node {
@@ -94,6 +101,7 @@ export const FOLLOWING_FEED = gql`
               ... on UserDonateArticleActivity {
                 actor {
                   ...UserDigestPlainUser
+                  ...UnfollowActionButtonUserPrivate
                 }
                 createdAt
                 nodeArticle: node {
@@ -104,6 +112,7 @@ export const FOLLOWING_FEED = gql`
               ... on UserBookmarkArticleActivity {
                 actor {
                   ...UserDigestPlainUser
+                  ...UnfollowActionButtonUserPrivate
                 }
                 createdAt
                 nodeArticle: node {
@@ -122,6 +131,7 @@ export const FOLLOWING_FEED = gql`
                 }
                 targetTag: target {
                   ...DigestTag
+                  ...UnfollowActionButtonTagPrivate
                 }
               }
             }
@@ -133,6 +143,8 @@ export const FOLLOWING_FEED = gql`
   ${UserDigest.Plain.fragments.user}
   ${CircleDigest.Plain.fragments.circle}
   ${Tag.fragments.tag}
+  ${UnfollowUser.fragments.user.private}
+  ${UnfollowTag.fragments.tag.private}
   ${ArticleDigestFeed.fragments.article.public}
   ${ArticleDigestFeed.fragments.article.private}
   ${FollowingFeedComment.fragments.comment.public}
