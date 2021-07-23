@@ -87,7 +87,7 @@ const AppreciationButton = ({
       await sendAppreciation({
         variables: {
           id: article.id,
-          amount,
+          amount: 1,
           token,
           superLike: true,
         },
@@ -121,6 +121,7 @@ const AppreciationButton = ({
     } catch (e) {
       setSuperLiked(false)
       console.error(e)
+      throw e
     }
   }
 
