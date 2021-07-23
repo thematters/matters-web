@@ -34,7 +34,7 @@ const FollowingFeedComment: React.FC<FollowingFeedCommentProps> & {
 
       <footer>
         <section className="left">
-          <DateTime date={date || comment.createdAt} />
+          <DateTime date={date} />
         </section>
 
         <section className="right">

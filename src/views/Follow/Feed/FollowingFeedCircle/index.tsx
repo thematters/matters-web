@@ -13,7 +13,7 @@ import { FollowingFeedCircle } from './__generated__/FollowingFeedCircle'
 export type CircleDigestFeedProps = {
   circle: FollowingFeedCircle
   header?: React.ReactNode
-  date?: Date | string | number
+  date: Date | string | number
 } & DropdownActionsControls
 
 const FeedCircle = ({
@@ -56,7 +56,7 @@ const FeedCircle = ({
 
       <footer>
         <section className="left">
-          <DateTime date={date || circle.createdAt} />
+          <DateTime date={date} />
         </section>
 
         <section className="right">

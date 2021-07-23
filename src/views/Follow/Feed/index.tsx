@@ -2,29 +2,27 @@ import { useQuery } from '@apollo/react-hooks'
 import _get from 'lodash/get'
 
 import {
-  ArticleDigestFeed,
-  ArticleDigestTitle,
-  CircleDigest,
   EmptyWarning,
   Head,
   InfiniteScroll,
   List,
   QueryError,
   Spinner,
-  Tag,
   Translate,
-  UserDigest,
 } from '~/components'
 
 import { analytics, mergeConnections } from '~/common/utils'
 
-import UnfollowTagActionButton from './DropdownActions/UnfollowTag'
-import UnfollowUserActionButton from './DropdownActions/UnfollowUser'
-import FeedCircle from './FollowingFeedCircle'
-import FeedComment from './FollowingFeedComment'
-import FeedHead from './FollowingFeedHead'
-import FeedUser from './FollowingFeedUser'
 import { FOLLOWING_FEED } from './gql'
+import UserAddArticleTagActivity from './UserAddArticleTagActivity'
+import UserBookmarkArticleActivity from './UserBookmarkArticleActivity'
+import UserBroadcastCircleActivity from './UserBroadcastCircleActivity'
+import UserCollectArticleActivity from './UserCollectArticleActivity'
+import UserCreateCircleActivity from './UserCreateCircleActivity'
+import UserDonateArticleActivity from './UserDonateArticleActivity'
+import UserFollowUserActivity from './UserFollowUserActivity'
+import UserPublishArticleActivity from './UserPublishArticleActivity'
+import UserSubscribeCircleActivity from './UserSubscribeCircleActivity'
 
 import {
   FollowingFeed as FollowingFeedType,
@@ -114,204 +112,31 @@ const FollowingFeed = () => {
           {dedupedEdges.map(({ node, cursor }, i) => (
             <List.Item key={cursor}>
               {node.__typename === 'UserPublishArticleActivity' && (
-                <ArticleDigestFeed
-                  header={
-                    <FeedHead>
-                      <UserDigest.Plain user={node.actor} />
-                      <span>
-                        {node.nodeArticle.access.circle ? (
-                          <Translate
-                            zh_hant="發布於"
-                            zh_hans="发布于"
-                            en="published"
-                          />
-                        ) : (
-                          <Translate
-                            zh_hant="發布"
-                            zh_hans="发布"
-                            en="published on"
-                          />
-                        )}
-                      </span>
-                      {node.nodeArticle.access.circle && (
-                        <CircleDigest.Plain
-                          circle={node.nodeArticle.access.circle}
-                        />
-                      )}
-                    </FeedHead>
-                  }
-                  article={node.nodeArticle}
-                  date={node.createdAt}
-                  morePublicActions={
-                    <UnfollowUserActionButton user={node.actor} />
-                  }
-                />
+                <UserPublishArticleActivity {...node} />
               )}
-
               {node.__typename === 'UserBroadcastCircleActivity' && (
-                <FeedComment
-                  header={
-                    <FeedHead>
-                      <UserDigest.Plain user={node.actor} />
-                      <span>
-                        <Translate
-                          zh_hant="廣播於"
-                          zh_hans="广播于"
-                          en="broadcasted on"
-                        />
-                      </span>
-                      <CircleDigest.Plain circle={node.targetCircle} />
-                    </FeedHead>
-                  }
-                  comment={node.nodeComment}
-                  date={node.createdAt}
-                />
+                <UserBroadcastCircleActivity {...node} />
               )}
-
               {node.__typename === 'UserCreateCircleActivity' && (
-                <FeedCircle
-                  header={
-                    <FeedHead>
-                      <UserDigest.Plain user={node.actor} />
-                      <span>
-                        <Translate zh_hant="創建" zh_hans="创建" en="created" />
-                      </span>
-                    </FeedHead>
-                  }
-                  circle={node.nodeCircle}
-                  date={new Date()}
-                  actions={<UnfollowUserActionButton user={node.actor} />}
-                />
+                <UserCreateCircleActivity {...node} />
               )}
-
               {node.__typename === 'UserCollectArticleActivity' && (
-                <ArticleDigestFeed
-                  header={
-                    <FeedHead>
-                      <UserDigest.Plain user={node.actor} />
-                      <span>
-                        <Translate
-                          zh_hant="關聯了作品"
-                          zh_hans="关联了作品"
-                          en="collected"
-                        />
-                      </span>
-                      <ArticleDigestTitle
-                        article={node.targetArticle}
-                        textSize="sm-s"
-                        textWeight="normal"
-                        lineClamp
-                        is="h5"
-                      />
-                    </FeedHead>
-                  }
-                  hasFollow
-                  article={node.nodeArticle}
-                  morePublicActions={
-                    <UnfollowUserActionButton user={node.actor} />
-                  }
-                />
+                <UserCollectArticleActivity {...node} />
               )}
-
               {node.__typename === 'UserSubscribeCircleActivity' && (
-                <FeedCircle
-                  header={
-                    <FeedHead>
-                      <UserDigest.Plain user={node.actor} />
-                      <span>
-                        <Translate
-                          zh_hant="訂閱"
-                          zh_hans="订阅"
-                          en="subscribed"
-                        />
-                      </span>
-                    </FeedHead>
-                  }
-                  circle={node.nodeCircle}
-                  actions={<UnfollowUserActionButton user={node.actor} />}
-                />
+                <UserSubscribeCircleActivity {...node} />
               )}
-
               {node.__typename === 'UserFollowUserActivity' && (
-                <FeedUser
-                  header={
-                    <FeedHead>
-                      <UserDigest.Plain user={node.actor} />
-                      <span>
-                        <Translate
-                          zh_hant="追蹤"
-                          zh_hans="追踪"
-                          en="followed"
-                        />
-                      </span>
-                    </FeedHead>
-                  }
-                  user={node.nodeUser}
-                  date={new Date()}
-                  actions={<UnfollowUserActionButton user={node.actor} />}
-                />
+                <UserFollowUserActivity {...node} />
               )}
-
               {node.__typename === 'UserDonateArticleActivity' && (
-                <ArticleDigestFeed
-                  header={
-                    <FeedHead>
-                      <UserDigest.Plain user={node.actor} />
-                      <span>
-                        <Translate zh_hant="支持" zh_hans="支持" en="donated" />
-                      </span>
-                    </FeedHead>
-                  }
-                  hasFollow
-                  article={node.nodeArticle}
-                  morePublicActions={
-                    <UnfollowUserActionButton user={node.actor} />
-                  }
-                />
+                <UserDonateArticleActivity {...node} />
               )}
-
               {node.__typename === 'UserBookmarkArticleActivity' && (
-                <ArticleDigestFeed
-                  header={
-                    <FeedHead>
-                      <UserDigest.Plain user={node.actor} />
-                      <span>
-                        <Translate
-                          zh_hant="收藏"
-                          zh_hans="收藏"
-                          en="bookmarked"
-                        />
-                      </span>
-                    </FeedHead>
-                  }
-                  hasFollow
-                  article={node.nodeArticle}
-                  morePublicActions={
-                    <UnfollowUserActionButton user={node.actor} />
-                  }
-                />
+                <UserBookmarkArticleActivity {...node} />
               )}
-
               {node.__typename === 'UserAddArticleTagActivity' && (
-                <ArticleDigestFeed
-                  header={
-                    <FeedHead>
-                      <span>
-                        <Translate
-                          zh_hant="添加精選於"
-                          zh_hans="添加精选于"
-                          en="selected by"
-                        />
-                      </span>
-                      <Tag tag={node.targetTag} type="plain" />
-                    </FeedHead>
-                  }
-                  hasFollow
-                  article={node.nodeArticle}
-                  morePublicActions={
-                    <UnfollowTagActionButton tag={node.targetTag} />
-                  }
-                />
+                <UserAddArticleTagActivity {...node} />
               )}
             </List.Item>
           ))}
