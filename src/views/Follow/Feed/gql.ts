@@ -1,12 +1,14 @@
 import gql from 'graphql-tag'
 
-import { ArticleDigestFeed, CircleDigest, Tag, UserDigest } from '~/components'
-
-import UnfollowTag from './DropdownActions/UnfollowTag'
-import UnfollowUser from './DropdownActions/UnfollowUser'
-import FollowingFeedCircle from './FollowingFeedCircle'
-import FollowingFeedComment from './FollowingFeedComment'
-import FollowingFeedUser from './FollowingFeedUser'
+import UserAddArticleTagActivity from './UserAddArticleTagActivity'
+import UserBookmarkArticleActivity from './UserBookmarkArticleActivity'
+import UserBroadcastCircleActivity from './UserBroadcastCircleActivity'
+import UserCollectArticleActivity from './UserCollectArticleActivity'
+import UserCreateCircleActivity from './UserCreateCircleActivity'
+import UserDonateArticleActivity from './UserDonateArticleActivity'
+import UserFollowUserActivity from './UserFollowUserActivity'
+import UserPublishArticleActivity from './UserPublishArticleActivity'
+import UserSubscribeCircleActivity from './UserSubscribeCircleActivity'
 
 export const FOLLOWING_FEED = gql`
   query FollowingFeed($after: String) {
@@ -24,115 +26,31 @@ export const FOLLOWING_FEED = gql`
             node {
               __typename
               ... on UserPublishArticleActivity {
-                actor {
-                  ...UserDigestPlainUser
-                  ...UnfollowActionButtonUserPrivate
-                }
-                createdAt
-                nodeArticle: node {
-                  access {
-                    circle {
-                      ...DigestPlainCircle
-                    }
-                  }
-                  ...ArticleDigestFeedArticlePublic
-                  ...ArticleDigestFeedArticlePrivate
-                }
+                ...UserPublishArticleActivity
               }
               ... on UserBroadcastCircleActivity {
-                actor {
-                  ...UserDigestPlainUser
-                }
-                createdAt
-                nodeComment: node {
-                  ...FollowingFeedCommentPublic
-                  ...FollowingFeedCommentPrivate
-                }
-                targetCircle: target {
-                  ...FollowingFeedCircle
-                }
+                ...UserBroadcastCircleActivity
               }
               ... on UserCreateCircleActivity {
-                actor {
-                  ...UserDigestPlainUser
-                  ...UnfollowActionButtonUserPrivate
-                }
-                createdAt
-                nodeCircle: node {
-                  ...FollowingFeedCircle
-                }
+                ...UserCreateCircleActivity
               }
               ... on UserCollectArticleActivity {
-                actor {
-                  ...UserDigestPlainUser
-                  ...UnfollowActionButtonUserPrivate
-                }
-                createdAt
-                nodeArticle: node {
-                  ...ArticleDigestFeedArticlePublic
-                  ...ArticleDigestFeedArticlePrivate
-                }
-                targetArticle: target {
-                  ...ArticleDigestFeedArticlePublic
-                  ...ArticleDigestFeedArticlePrivate
-                }
+                ...UserCollectArticleActivity
               }
               ... on UserSubscribeCircleActivity {
-                actor {
-                  ...UserDigestPlainUser
-                  ...UnfollowActionButtonUserPrivate
-                }
-                createdAt
-                nodeCircle: node {
-                  ...FollowingFeedCircle
-                }
+                ...UserSubscribeCircleActivity
               }
               ... on UserFollowUserActivity {
-                actor {
-                  ...UserDigestPlainUser
-                  ...UnfollowActionButtonUserPrivate
-                }
-                createdAt
-                nodeUser: node {
-                  ...UserDigestRichUserPublic
-                  ...UserDigestRichUserPrivate
-                }
+                ...UserFollowUserActivity
               }
               ... on UserDonateArticleActivity {
-                actor {
-                  ...UserDigestPlainUser
-                  ...UnfollowActionButtonUserPrivate
-                }
-                createdAt
-                nodeArticle: node {
-                  ...ArticleDigestFeedArticlePublic
-                  ...ArticleDigestFeedArticlePrivate
-                }
+                ...UserDonateArticleActivity
               }
               ... on UserBookmarkArticleActivity {
-                actor {
-                  ...UserDigestPlainUser
-                  ...UnfollowActionButtonUserPrivate
-                }
-                createdAt
-                nodeArticle: node {
-                  ...ArticleDigestFeedArticlePublic
-                  ...ArticleDigestFeedArticlePrivate
-                }
+                ...UserBookmarkArticleActivity
               }
               ... on UserAddArticleTagActivity {
-                actor {
-                  ...UserDigestPlainUser
-                }
-                createdAt
-                nodeArticle: node {
-                  ...ArticleDigestFeedArticlePublic
-                  ...ArticleDigestFeedArticlePrivate
-                }
-                targetTag: target {
-                  ...DigestTag
-                  ...UnfollowActionButtonTagPrivate
-                }
+                ...UserAddArticleTagActivity
               }
             }
           }
@@ -140,16 +58,13 @@ export const FOLLOWING_FEED = gql`
       }
     }
   }
-  ${UserDigest.Plain.fragments.user}
-  ${CircleDigest.Plain.fragments.circle}
-  ${Tag.fragments.tag}
-  ${UnfollowUser.fragments.user.private}
-  ${UnfollowTag.fragments.tag.private}
-  ${ArticleDigestFeed.fragments.article.public}
-  ${ArticleDigestFeed.fragments.article.private}
-  ${FollowingFeedComment.fragments.comment.public}
-  ${FollowingFeedComment.fragments.comment.private}
-  ${FollowingFeedCircle.fragments.circle}
-  ${FollowingFeedUser.fragments.user.public}
-  ${FollowingFeedUser.fragments.user.private}
+  ${UserAddArticleTagActivity.fragments}
+  ${UserBookmarkArticleActivity.fragments}
+  ${UserBroadcastCircleActivity.fragments}
+  ${UserCollectArticleActivity.fragments}
+  ${UserCreateCircleActivity.fragments}
+  ${UserDonateArticleActivity.fragments}
+  ${UserFollowUserActivity.fragments}
+  ${UserPublishArticleActivity.fragments}
+  ${UserSubscribeCircleActivity.fragments}
 `
