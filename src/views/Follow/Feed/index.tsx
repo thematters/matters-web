@@ -1,4 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
+import _chunk from 'lodash/chunk'
+import _flatten from 'lodash/flatten'
 import _get from 'lodash/get'
 
 import {
@@ -14,6 +16,7 @@ import {
 import { analytics, mergeConnections } from '~/common/utils'
 
 import { FOLLOWING_FEED } from './gql'
+import RecommendArticleActivity from './RecommendArticleActivity'
 import UserAddArticleTagActivity from './UserAddArticleTagActivity'
 import UserBookmarkArticleActivity from './UserBookmarkArticleActivity'
 import UserBroadcastCircleActivity from './UserBroadcastCircleActivity'
@@ -27,9 +30,13 @@ import UserSubscribeCircleActivity from './UserSubscribeCircleActivity'
 import {
   FollowingFeed as FollowingFeedType,
   FollowingFeed_viewer_recommendation_following_edges,
+  FollowingFeed_viewer_recommendation_readTagsArticles_edges,
 } from './__generated__/FollowingFeed'
 
+const RECOMMEND_APPEND_EVERY = 3
+
 type FollowingEdge = FollowingFeed_viewer_recommendation_following_edges
+type RecommendEdge = FollowingFeed_viewer_recommendation_readTagsArticles_edges
 
 const FollowingFeed = () => {
   const { data, loading, error, fetchMore, refetch } =
@@ -45,6 +52,9 @@ const FollowingFeed = () => {
 
   const connectionPath = 'viewer.recommendation.following'
   const { edges, pageInfo } = data?.viewer?.recommendation.following || {}
+  const recommendConnectionPath = 'viewer.recommendation.readTagsArticles'
+  const { edges: recommendEdges, pageInfo: recommendPageInfo } =
+    data?.viewer?.recommendation.readTagsArticles || {}
 
   if (!edges || edges.length <= 0 || !pageInfo) {
     return (
@@ -69,23 +79,53 @@ const FollowingFeed = () => {
       type: 'follow',
       location: edges.length,
     })
+
+    const { hasNextPage: recommendHasNextPage, endCursor: recommendEndCursor } =
+      recommendPageInfo || {}
+
     return fetchMore({
-      variables: { after: pageInfo.endCursor },
-      updateQuery: (previousResult, { fetchMoreResult }) =>
-        mergeConnections({
-          oldData: previousResult,
+      variables: {
+        followingAfter: pageInfo.endCursor,
+        ...(recommendHasNextPage && recommendEndCursor
+          ? { recommendAfter: recommendEndCursor }
+          : {}),
+      },
+      updateQuery: (previousResult, { fetchMoreResult }) => {
+        let prevResult = previousResult
+        if (recommendHasNextPage && recommendEndCursor) {
+          prevResult = mergeConnections({
+            oldData: prevResult,
+            newData: fetchMoreResult,
+            path: recommendConnectionPath,
+          })
+        }
+
+        return mergeConnections({
+          oldData: prevResult,
           newData: fetchMoreResult,
           path: connectionPath,
-        }),
+        })
+      },
     })
   }
 
+  // every 3 following activities append with 1 recommending article
+  const mixEdges = _flatten(
+    _chunk(edges, RECOMMEND_APPEND_EVERY).map((chunk, index) => {
+      const recommendEdge = recommendEdges && recommendEdges[index]
+      return chunk.length === RECOMMEND_APPEND_EVERY && recommendEdge
+        ? [...chunk, recommendEdge]
+        : chunk
+    })
+  )
+
   // deduplicate edges with same `node.node`
   const dedupedNodeIds: string[] = []
-  const dedupedEdges: FollowingEdge[] = []
-  edges.forEach((edge) => {
+  const dedupedEdges: (FollowingEdge | RecommendEdge)[] = []
+  mixEdges.forEach((edge) => {
     const { node } = edge
     const nodeId =
+      _get(node, 'id') ||
       _get(node, 'nodeArticle.id') ||
       _get(node, 'nodeComment.id') ||
       _get(node, 'nodeUser.id') ||
@@ -109,8 +149,11 @@ const FollowingFeed = () => {
         pullToRefresh={refetch}
       >
         <List>
-          {dedupedEdges.map(({ node, cursor }, i) => (
-            <List.Item key={cursor}>
+          {dedupedEdges.map(({ node, cursor }) => (
+            <List.Item key={node.__typename + cursor}>
+              {node.__typename === 'Article' && (
+                <RecommendArticleActivity article={node} />
+              )}
               {node.__typename === 'UserPublishArticleActivity' && (
                 <UserPublishArticleActivity {...node} />
               )}

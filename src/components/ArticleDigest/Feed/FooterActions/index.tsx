@@ -18,7 +18,7 @@ export type FooterActionsControls = DropdownActionsControls
 
 export type FooterActionsProps = {
   article: FooterActionsArticlePublic
-  date?: Date | string | number
+  date?: Date | string | number | boolean
 } & FooterActionsControls
 
 const FooterActions = ({ article, date, ...controls }: FooterActionsProps) => {
@@ -27,7 +27,7 @@ const FooterActions = ({ article, date, ...controls }: FooterActionsProps) => {
       <section className="left">
         <ReadTime article={article} />
 
-        <DateTime date={date || article.createdAt} />
+        {date !== false && <DateTime date={date || article.createdAt} />}
 
         {article.access.type === 'paywall' && (
           <>
