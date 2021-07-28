@@ -5,6 +5,7 @@ import styles from './styles.css'
 export type IconSize =
   | 'xxs'
   | 'xs'
+  | 'sm-s'
   | 'sm'
   | 'md-s'
   | 'md'

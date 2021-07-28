@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Card, ResponsiveImage } from '~/components'
+import { Card, CircleDigest, ResponsiveImage } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 
 import { stripHtml, toPath } from '~/common/utils'
@@ -18,6 +18,7 @@ export type ArticleDigestFeedControls = {
   onClick?: () => any
   onClickAuthor?: () => void
   hasFollow?: boolean
+  hasCircle?: boolean
 }
 
 export type ArticleDigestFeedProps = {
@@ -33,12 +34,17 @@ const BaseArticleDigestFeed = ({
   date,
 
   hasFollow,
+  hasCircle = true,
   onClick,
   onClickAuthor,
 
   ...controls
 }: ArticleDigestFeedProps) => {
-  const { author, summary } = article
+  const {
+    author,
+    summary,
+    access: { circle },
+  } = article
   const isBanned = article.articleState === 'banned'
   const cover = !isBanned ? article.cover : null
   const cleanedSummary = isBanned ? '' : stripHtml(summary)
@@ -49,7 +55,12 @@ const BaseArticleDigestFeed = ({
 
   return (
     <Card {...path} spacing={['base', 'base']} onClick={onClick}>
-      {header}
+      {header ||
+        (hasCircle && circle && (
+          <header>
+            <CircleDigest.Plain circle={circle} />
+          </header>
+        ))}
 
       <section className="content">
         <section className="head">

@@ -16,6 +16,11 @@
     height: 0.75rem;
   }
 
+  &.sm-s {
+    width: 0.8125rem;
+    height: 0.8125rem;
+  }
+
   &.sm {
     width: 0.875rem;
     height: 0.875rem;

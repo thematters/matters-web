@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 
+import RecommendArticleActivity from './RecommendArticleActivity'
 import UserAddArticleTagActivity from './UserAddArticleTagActivity'
 import UserBookmarkArticleActivity from './UserBookmarkArticleActivity'
 import UserBroadcastCircleActivity from './UserBroadcastCircleActivity'
@@ -11,11 +12,11 @@ import UserPublishArticleActivity from './UserPublishArticleActivity'
 import UserSubscribeCircleActivity from './UserSubscribeCircleActivity'
 
 export const FOLLOWING_FEED = gql`
-  query FollowingFeed($after: String) {
+  query FollowingFeed($followingAfter: String, $recommendAfter: String) {
     viewer {
       id
       recommendation {
-        following(input: { first: 10, after: $after }) {
+        following(input: { first: 12, after: $followingAfter }) {
           pageInfo {
             startCursor
             endCursor
@@ -55,6 +56,21 @@ export const FOLLOWING_FEED = gql`
             }
           }
         }
+        # every 3 following activities append with 1 recommending article
+        readTagsArticles(input: { first: 4, after: $recommendAfter }) {
+          pageInfo {
+            startCursor
+            endCursor
+            hasNextPage
+          }
+          edges {
+            cursor
+            node {
+              __typename
+              ...RecommendArticleActivity
+            }
+          }
+        }
       }
     }
   }
@@ -67,4 +83,5 @@ export const FOLLOWING_FEED = gql`
   ${UserFollowUserActivity.fragments}
   ${UserPublishArticleActivity.fragments}
   ${UserSubscribeCircleActivity.fragments}
+  ${RecommendArticleActivity.fragments}
 `

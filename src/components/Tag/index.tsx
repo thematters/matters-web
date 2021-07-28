@@ -13,7 +13,8 @@ import { DigestTag } from './__generated__/DigestTag'
 interface TagProps {
   tag: DigestTag
   type?: 'list' | 'title' | 'inline' | 'plain'
-  textSize?: 'sm'
+  textSize?: 'sm' | 'sm-s'
+  iconSize?: 'sm-s'
   active?: boolean
   disabled?: boolean
   hasCount?: boolean
@@ -47,6 +48,7 @@ export const Tag = ({
   tag,
   type = 'list',
   textSize,
+  iconSize,
   active,
   disabled,
   hasCount = true,
@@ -104,7 +106,7 @@ export const Tag = ({
       break
     case 'plain':
       iconProps = {
-        size: 'sm',
+        size: iconSize || 'sm',
       }
       textIconProps = {
         size: 'sm-s',
