@@ -173,7 +173,6 @@ const TagDetailArticles = ({ tagId, selected }: TagArticlesProps) => {
                 analytics.trackEvent('click_feed', {
                   type: selected ? 'tag_detail_selected' : 'tag_detail_latest',
                   contentType: 'article',
-                  styleType: 'title',
                   location: i,
                 })
               }
@@ -181,7 +180,6 @@ const TagDetailArticles = ({ tagId, selected }: TagArticlesProps) => {
                 analytics.trackEvent('click_feed', {
                   type: selected ? 'tag_detail_selected' : 'tag_detail_latest',
                   contentType: 'user',
-                  styleType: 'subtitle',
                   location: i,
                 })
               }}

@@ -100,7 +100,6 @@ const AppreciatorsDialogContent = ({
               analytics.trackEvent('click_feed', {
                 type: 'appreciators',
                 contentType: 'user',
-                styleType: 'card',
                 location: index,
               })
             }}

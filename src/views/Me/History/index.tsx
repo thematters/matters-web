@@ -94,7 +94,6 @@ const BaseMeHistory = () => {
                 analytics.trackEvent('click_feed', {
                   type: 'read_history',
                   contentType: 'article',
-                  styleType: 'no_cover',
                   location: i,
                 })
               }
@@ -102,7 +101,6 @@ const BaseMeHistory = () => {
                 analytics.trackEvent('click_feed', {
                   type: 'read_history',
                   contentType: 'user',
-                  styleType: 'subtitle',
                   location: i,
                 })
               }}

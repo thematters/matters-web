@@ -130,7 +130,6 @@ const FollowersDialogContent = () => {
                   analytics.trackEvent('click_feed', {
                     type: 'circle_follower',
                     contentType: 'user',
-                    styleType: 'card',
                     location: i,
                   })
                 }

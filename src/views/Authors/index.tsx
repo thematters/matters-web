@@ -127,7 +127,6 @@ const BaseAuthors = () => {
               onClick={() =>
                 analytics.trackEvent('click_feed', {
                   type: 'all_authors',
-                  styleType: 'card',
                   contentType: 'user',
                   location: i,
                 })

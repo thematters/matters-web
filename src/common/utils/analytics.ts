@@ -122,13 +122,23 @@ interface ViewDialogProp {
  */
 interface ClickFeedProp {
   type: FeedType
-  contentType: ContentType
-  styleType: StyleType
+  contentType: ContentType | ActivityType
   location: number
 }
 
 // content type
 type ContentType = 'article' | 'comment' | 'circle' | 'user' | 'tag'
+type ActivityType =
+  | 'UserPublishArticleActivity'
+  | 'UserBroadcastCircleActivity'
+  | 'UserCreateCircleActivity'
+  | 'UserCollectArticleActivity'
+  | 'UserSubscribeCircleActivity'
+  | 'UserFollowUserActivity'
+  | 'UserDonateArticleActivity'
+  | 'UserBookmarkArticleActivity'
+  | 'UserAddArticleTagActivity'
+  | 'RecommendArticleActivity'
 
 // feed type
 type FeedType =
@@ -137,6 +147,7 @@ type FeedType =
   | UserFeedType
   | TagFeedType
   | CircleFeedType
+  | 'following'
 
 type ArticleFeedType =
   | 'all_authors'
@@ -146,8 +157,8 @@ type ArticleFeedType =
   | 'all_topics'
   | 'authors' // author feed on home page
   | 'collection'
-  | 'follow-article'
-  | 'followee-donated-article'
+  // | 'follow-article'
+  // | 'followee-donated-article'
   | 'hottest'
   | 'icymi'
   | 'newest'
@@ -165,7 +176,9 @@ type ArticleFeedType =
   | 'related_donations'
   | 'circle_detail'
 
-type CommentFeedType = 'follow-comment' | 'user_comment'
+type CommentFeedType =
+  //  'follow-comment' |
+  'user_comment'
 
 type UserFeedType =
   | 'all_authors'
@@ -194,35 +207,12 @@ type UserFeedType =
 
 type TagFeedType =
   | 'all_tags' // all tags page
-  | 'follow-tag'
+  // | 'follow-tag'
   | 'search'
   | 'search_tag'
   | 'tags' // tag feed on home page
   | 'user_tag'
 
 type CircleFeedType = 'user_circle' | 'circle_follower' | 'circle_member'
-
-// style type
-type StyleType =
-  | ArticleStyleType
-  | CommentStyleType
-  | CircleStyleType
-  | UserStyleType
-  | TagStyleType
-
-type ArticleStyleType =
-  | 'card' // cover photo as background, such as related articles
-  | 'large_cover'
-  | 'small_cover'
-  | 'no_cover'
-  | 'title'
-
-type CommentStyleType = 'card'
-
-type CircleStyleType = 'subtitle'
-
-type UserStyleType = 'subtitle' | 'card'
-
-type TagStyleType = 'title' | 'article'
 
 type PageType = 'article_detail' | 'user_profile' | 'circle_detail'

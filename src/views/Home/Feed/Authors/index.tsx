@@ -101,7 +101,6 @@ const Authors = () => {
                     analytics.trackEvent('click_feed', {
                       type: 'authors',
                       contentType: 'user',
-                      styleType: 'card',
                       location: (edgeIndex + 1) * (nodeIndex + 1) - 1,
                     })
                   }

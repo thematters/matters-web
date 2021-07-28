@@ -99,7 +99,6 @@ const Participants = ({ id }: Props) => {
                   analytics.trackEvent('click_feed', {
                     type: 'tag_detail_community',
                     contentType: 'user',
-                    styleType: 'card',
                     location: i,
                   })
                 }
