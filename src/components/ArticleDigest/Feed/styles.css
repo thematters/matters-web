@@ -65,3 +65,8 @@
     height: var(--article-feed-cover-height);
   }
 }
+
+header {
+  margin-bottom: var(--spacing-base);
+  line-height: 1;
+}

@@ -9,9 +9,10 @@ import { ActionsReadTimeArticle } from './__generated__/ActionsReadTimeArticle'
 
 interface ResponseCountProps {
   article: ActionsReadTimeArticle
+  hasDate: boolean
 }
 
-const ResponseCount = ({ article }: ResponseCountProps) => {
+const ResponseCount = ({ article, hasDate }: ResponseCountProps) => {
   if (!article.readTime) {
     return null
   }
@@ -29,7 +30,7 @@ const ResponseCount = ({ article }: ResponseCountProps) => {
         <Translate zh_hant="小時" zh_hans="小时" en="hours" />
       </TextIcon>
 
-      <IconDotDivider />
+      {hasDate && <IconDotDivider />}
     </>
   )
 }

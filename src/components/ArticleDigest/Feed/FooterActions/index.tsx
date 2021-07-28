@@ -22,12 +22,14 @@ export type FooterActionsProps = {
 } & FooterActionsControls
 
 const FooterActions = ({ article, date, ...controls }: FooterActionsProps) => {
+  const hasDate = date !== false
+
   return (
     <footer>
       <section className="left">
-        <ReadTime article={article} />
+        <ReadTime article={article} hasDate={hasDate} />
 
-        {date !== false && <DateTime date={date || article.createdAt} />}
+        {hasDate && <DateTime date={date || article.createdAt} />}
 
         {article.access.type === 'paywall' && (
           <>

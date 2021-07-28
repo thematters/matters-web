@@ -57,7 +57,7 @@ export const FOLLOWING_FEED = gql`
           }
         }
         # every 3 following activities append with 1 recommending article
-        readTagsArticles(input: { first: 3, after: $recommendAfter }) {
+        readTagsArticles(input: { first: 4, after: $recommendAfter }) {
           pageInfo {
             startCursor
             endCursor

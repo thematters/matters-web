@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 
+import { CircleDigest } from '~/components/CircleDigest'
 import { UserDigest } from '~/components/UserDigest'
 
 import { ArticleDigestTitle } from '../Title'
@@ -24,6 +25,11 @@ export const fragments = {
         }
         access {
           type
+          circle {
+            id
+            name
+            ...DigestPlainCircle
+          }
         }
         ...ArticleDigestTitleArticle
         ...FooterActionsArticlePublic
@@ -31,6 +37,7 @@ export const fragments = {
       ${UserDigest.Mini.fragments.user}
       ${ArticleDigestTitle.fragments.article}
       ${FooterActions.fragments.article.public}
+      ${CircleDigest.Plain.fragments.circle}
     `,
     private: gql`
       fragment ArticleDigestFeedArticlePrivate on Article {
