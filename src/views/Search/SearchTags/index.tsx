@@ -89,7 +89,6 @@ const SearchTag = () => {
                       analytics.trackEvent('click_feed', {
                         type: 'search_tag',
                         contentType: 'tag',
-                        styleType: 'title',
                         location: i,
                       })
                     }

@@ -94,7 +94,6 @@ const Authors = () => {
                   analytics.trackEvent('click_feed', {
                     type: 'authors',
                     contentType: 'user',
-                    styleType: 'card',
                     location: i,
                   })
                 }

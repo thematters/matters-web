@@ -137,7 +137,6 @@ const UsersFeed = () => {
                 analytics.trackEvent('click_feed', {
                   type: 'followee',
                   contentType: 'user',
-                  styleType: 'card',
                   location: i,
                 })
               }

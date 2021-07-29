@@ -61,7 +61,6 @@ const AggregateTagResults = () => {
                     analytics.trackEvent('click_feed', {
                       type: 'search',
                       contentType: 'tag',
-                      styleType: 'title',
                       location: i,
                     })
                   }

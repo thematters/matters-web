@@ -95,7 +95,6 @@ const Collection: React.FC<{
               onClick={() =>
                 analytics.trackEvent('click_feed', {
                   type: 'collection',
-                  styleType: 'small_cover',
                   contentType: 'article',
                   location: i,
                 })
@@ -104,7 +103,6 @@ const Collection: React.FC<{
                 analytics.trackEvent('click_feed', {
                   type: 'collection',
                   contentType: 'user',
-                  styleType: 'subtitle',
                   location: i,
                 })
               }}

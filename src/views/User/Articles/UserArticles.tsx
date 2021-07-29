@@ -231,7 +231,6 @@ const UserArticles = () => {
                   analytics.trackEvent('click_feed', {
                     type: 'user_article',
                     contentType: 'article',
-                    styleType: 'no_cover',
                     location: i,
                   })
                 }
@@ -239,7 +238,6 @@ const UserArticles = () => {
                   analytics.trackEvent('click_feed', {
                     type: 'user_article',
                     contentType: 'user',
-                    styleType: 'subtitle',
                     location: i,
                   })
                 }}

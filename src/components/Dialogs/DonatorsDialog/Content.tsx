@@ -67,7 +67,6 @@ const DonatorsDialogContent = ({
               analytics.trackEvent('click_feed', {
                 type: 'donators',
                 contentType: 'user',
-                styleType: 'card',
                 location: index,
               })
             }}

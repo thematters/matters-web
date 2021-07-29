@@ -112,7 +112,6 @@ const TagsFeed = () => {
                 analytics.trackEvent('click_feed', {
                   type: 'tags',
                   contentType: 'tag',
-                  styleType: 'article',
                   location: i,
                 })
               }

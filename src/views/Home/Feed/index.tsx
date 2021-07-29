@@ -214,7 +214,6 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
                 onClick={() =>
                   analytics.trackEvent('click_feed', {
                     type: sortBy,
-                    styleType: 'small_cover',
                     contentType: 'article',
                     location: i,
                   })
@@ -223,7 +222,6 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
                   analytics.trackEvent('click_feed', {
                     type: sortBy,
                     contentType: 'user',
-                    styleType: 'subtitle',
                     location: i,
                   })
                 }}

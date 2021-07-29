@@ -149,8 +149,20 @@ const FollowingFeed = () => {
         pullToRefresh={refetch}
       >
         <List>
-          {dedupedEdges.map(({ node, cursor }) => (
-            <List.Item key={node.__typename + cursor}>
+          {dedupedEdges.map(({ node, cursor }, i) => (
+            <List.Item
+              key={node.__typename + cursor}
+              onClick={() => {
+                analytics.trackEvent('click_feed', {
+                  type: 'following',
+                  contentType:
+                    node.__typename === 'Article'
+                      ? 'RecommendArticleActivity'
+                      : node.__typename,
+                  location: i,
+                })
+              }}
+            >
               {node.__typename === 'Article' && (
                 <RecommendArticleActivity article={node} />
               )}

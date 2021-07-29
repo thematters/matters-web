@@ -158,7 +158,6 @@ const CircleDetailWorks = () => {
                     analytics.trackEvent('click_feed', {
                       type: 'circle_detail',
                       contentType: 'article',
-                      styleType: 'title',
                       location: i,
                     })
                   }
@@ -166,7 +165,6 @@ const CircleDetailWorks = () => {
                     analytics.trackEvent('click_feed', {
                       type: 'circle_detail',
                       contentType: 'user',
-                      styleType: 'subtitle',
                       location: i,
                     })
                   }}

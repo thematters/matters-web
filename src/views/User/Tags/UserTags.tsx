@@ -160,7 +160,6 @@ const UserTags = () => {
                     analytics.trackEvent('click_feed', {
                       type: 'user_tag',
                       contentType: 'tag',
-                      styleType: 'title',
                       location: i,
                     })
                   }
