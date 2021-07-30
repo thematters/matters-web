@@ -61,7 +61,6 @@ const AggregateUserResults = () => {
                     analytics.trackEvent('click_feed', {
                       type: 'search',
                       contentType: 'user',
-                      styleType: 'card',
                       location: i,
                     })
                   }

@@ -99,7 +99,6 @@ const BaseTags = () => {
                 analytics.trackEvent('click_feed', {
                   type: 'all_tags',
                   contentType: 'tag',
-                  styleType: 'title',
                   location: i,
                 })
               }

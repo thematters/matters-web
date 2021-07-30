@@ -167,6 +167,37 @@
   }
 }
 
+/* Components
+   ========================================================================== */
+@define-mixin feed-footer-actions {
+  @mixin flex-center-space-between;
+
+  margin-top: var(--spacing-base);
+  font-size: var(--font-size-timestamp);
+  font-weight: var(--font-weight-timestamp);
+  line-height: var(--line-height-timestamp);
+
+  & .left,
+  & .right {
+    @mixin inline-flex-center-all;
+  }
+
+  & .left {
+    color: var(--color-grey-dark);
+
+    & :global(> * + *) {
+      padding-left: var(--spacing-xx-tight);
+    }
+  }
+  & .right {
+    color: var(--color-black);
+
+    & :global(> * + *) {
+      padding-left: var(--spacing-loose);
+    }
+  }
+}
+
 /* Utilities
    ========================================================================== */
 @define-mixin expand-to-container {

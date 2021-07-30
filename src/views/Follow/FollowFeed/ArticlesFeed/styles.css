@@ -1,9 +1,0 @@
-.author {
-  @mixin flex-center-start;
-
-  width: 100%;
-
-  & :global(> * + *) {
-    margin-left: var(--spacing-x-tight);
-  }
-}

@@ -131,7 +131,6 @@ const MembersDialogContent = () => {
                   analytics.trackEvent('click_feed', {
                     type: 'circle_member',
                     contentType: 'user',
-                    styleType: 'card',
                     location: i,
                   })
                 }

@@ -7,8 +7,8 @@ export const RELATED_DONATIONS = gql`
     $senderUserName: String!
     $recipientUserName: String!
     $targetId: ID!
-    $first: Int!
-    $random: NonNegativeInt!
+    $first: first_Int_min_0
+    $random: random_Int_min_0_max_49!
   ) {
     sender: user(input: { userName: $senderUserName }) {
       id

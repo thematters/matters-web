@@ -126,7 +126,6 @@ const SearchArticles = () => {
                       analytics.trackEvent('click_feed', {
                         type: 'search_article',
                         contentType: 'article',
-                        styleType: 'title',
                         location: i,
                       })
                     }
@@ -134,7 +133,6 @@ const SearchArticles = () => {
                       analytics.trackEvent('click_feed', {
                         type: 'search_tag',
                         contentType: 'user',
-                        styleType: 'subtitle',
                         location: i,
                       })
                     }}

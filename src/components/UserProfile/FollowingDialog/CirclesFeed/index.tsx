@@ -99,7 +99,6 @@ const CirclesFeed = () => {
                 analytics.trackEvent('click_feed', {
                   type: 'user_circle',
                   contentType: 'circle',
-                  styleType: 'card',
                   location: i,
                 })
               }

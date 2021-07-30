@@ -7,13 +7,11 @@ import {
   IconNavFollowingActive24,
   ViewerContext,
 } from '~/components'
-import UNREAD_FOLLOWEE_ARTICLES from '~/components/GQL/queries/unreadFolloweeArticles'
-
-import { POLL_INTERVAL } from '~/common/enums'
+import UNREAD_FOLLOWING from '~/components/GQL/queries/unreadFollowing'
 
 import styles from './styles.css'
 
-import { UnreadFolloweeArticles } from '~/components/GQL/queries/__generated__/UnreadFolloweeArticles'
+import { UnreadFollowing } from '~/components/GQL/queries/__generated__/UnreadFollowing'
 
 interface FollowUnreadIconProps {
   active?: boolean
@@ -21,23 +19,20 @@ interface FollowUnreadIconProps {
 
 const FollowUnreadIcon: React.FC<FollowUnreadIconProps> = ({ active }) => {
   const viewer = useContext(ViewerContext)
-  const { data, startPolling } = useQuery<UnreadFolloweeArticles>(
-    UNREAD_FOLLOWEE_ARTICLES,
-    {
-      errorPolicy: 'none',
-      fetchPolicy: 'network-only',
-      skip: !viewer.isAuthed || !process.browser,
-    }
-  )
+  const { data, startPolling } = useQuery<UnreadFollowing>(UNREAD_FOLLOWING, {
+    errorPolicy: 'none',
+    fetchPolicy: 'network-only',
+    skip: !viewer.isAuthed || !process.browser,
+  })
 
   // FIXME: https://github.com/apollographql/apollo-client/issues/3775
   useEffect(() => {
     if (viewer.isAuthed) {
-      startPolling(POLL_INTERVAL)
+      startPolling(1000 * 60) // 60s
     }
   }, [])
 
-  const unread = data?.viewer?.status?.unreadFolloweeArticles
+  const unread = data?.viewer?.status?.unreadFollowing
   const iconClasses = classNames({ 'unread-icon': true, unread })
 
   return (

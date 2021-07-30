@@ -1,5 +1,5 @@
-.title {
-  line-height: 1.5rem;
+.text-size-sm-s {
+  font-size: var(--font-size-sm-s);
 }
 
 .text-size-sm {
@@ -32,4 +32,8 @@
 
 .text-weight-semibold {
   font-weight: var(--font-weight-semibold);
+}
+
+.line-clamp {
+  @mixin line-clamp;
 }

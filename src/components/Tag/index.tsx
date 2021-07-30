@@ -12,8 +12,9 @@ import { DigestTag } from './__generated__/DigestTag'
 
 interface TagProps {
   tag: DigestTag
-  type?: 'list' | 'title' | 'inline'
-  textSize?: 'sm'
+  type?: 'list' | 'title' | 'inline' | 'plain'
+  textSize?: 'sm' | 'sm-s'
+  iconSize?: 'sm-s'
   active?: boolean
   disabled?: boolean
   hasCount?: boolean
@@ -47,6 +48,7 @@ export const Tag = ({
   tag,
   type = 'list',
   textSize,
+  iconSize,
   active,
   disabled,
   hasCount = true,
@@ -102,6 +104,17 @@ export const Tag = ({
         color: active ? 'green' : 'grey-darker',
       }
       break
+    case 'plain':
+      iconProps = {
+        size: iconSize || 'sm',
+      }
+      textIconProps = {
+        size: 'sm-s',
+        weight: 'normal',
+        spacing: 'xxxtight',
+        color: 'green',
+      }
+      break
   }
 
   const tagCount = numAbbr(tag.articles.totalCount || 0)
@@ -113,7 +126,7 @@ export const Tag = ({
         {...textIconProps}
         size={textSize || textIconProps.size}
       >
-        {tag.content}
+        <span className="name">{tag.content}</span>
       </TextIcon>
 
       {hasCount && type === 'list' && <span className="count">{tagCount}</span>}

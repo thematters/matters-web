@@ -22,7 +22,11 @@ import { ArticleDetailPublic_article } from '../__generated__/ArticleDetailPubli
 import { CollectionList as CollectionListTypes } from './__generated__/CollectionList'
 
 const COLLECTION_LIST = gql`
-  query CollectionList($mediaHash: String, $after: String, $first: Int) {
+  query CollectionList(
+    $mediaHash: String!
+    $after: String
+    $first: first_Int_min_0
+  ) {
     article(input: { mediaHash: $mediaHash }) {
       id
       ...ArticleCollection
@@ -91,7 +95,6 @@ const Collection: React.FC<{
               onClick={() =>
                 analytics.trackEvent('click_feed', {
                   type: 'collection',
-                  styleType: 'small_cover',
                   contentType: 'article',
                   location: i,
                 })
@@ -100,7 +103,6 @@ const Collection: React.FC<{
                 analytics.trackEvent('click_feed', {
                   type: 'collection',
                   contentType: 'user',
-                  styleType: 'subtitle',
                   location: i,
                 })
               }}

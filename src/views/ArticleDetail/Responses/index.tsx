@@ -11,7 +11,7 @@ import { ArticleResponse } from './__generated__/ArticleResponse'
 
 const ARTICLE_RESPONSE = gql`
   query ArticleResponse(
-    $mediaHash: String # $after: String # $first: Int = 8
+    $mediaHash: String! # $after: String # $first: first_Int_min_0 = 8
   ) {
     article(input: { mediaHash: $mediaHash }) {
       id

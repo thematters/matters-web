@@ -9,7 +9,7 @@ export default gql`
   }
 
   extend type Official {
-    gatewayUrls: [URL!]
+    gatewayUrls: [String!]
   }
 
   type CommentDraft {
@@ -27,9 +27,6 @@ export default gql`
     "Feed type in homepage"
     feedSortType: FeedSortType
 
-    "Feed type in follow page"
-    followFeedType: FollowFeedType
-
     "Whether civic liker dialog is hidden"
     readCivicLikerDialog: Boolean!
 
@@ -40,7 +37,7 @@ export default gql`
     push: Push!
 
     "Log route history for page back button"
-    routeHistory: [URL!]
+    routeHistory: [String!]
 
     onboardingTasks: OnboardingTasks!
 
@@ -82,13 +79,7 @@ export default gql`
   enum FeedSortType {
     hottest
     newest
-  }
-
-  enum FollowFeedType {
-    article
-    comment
-    tag
-    donation
+    icymi
   }
 
   enum Language {

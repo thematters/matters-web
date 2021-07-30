@@ -46,7 +46,7 @@ const Authors = () => {
   const edges = data?.viewer?.recommendation.authors.edges
 
   const shuffle = () => {
-    const random = _random(0, 50)
+    const random = _random(0, 49)
     refetch({ random })
 
     client.writeData({
@@ -101,7 +101,6 @@ const Authors = () => {
                     analytics.trackEvent('click_feed', {
                       type: 'authors',
                       contentType: 'user',
-                      styleType: 'card',
                       location: (edgeIndex + 1) * (nodeIndex + 1) - 1,
                     })
                   }

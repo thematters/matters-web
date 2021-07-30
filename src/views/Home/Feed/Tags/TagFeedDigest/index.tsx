@@ -69,7 +69,6 @@ const TagFeedDigest = ({ tag, ...cardProps }: TagFeedDigestProps) => {
                 analytics.trackEvent('click_feed', {
                   type: 'tags',
                   contentType: 'article',
-                  styleType: 'title',
                   location: i,
                 })
               }

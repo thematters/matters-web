@@ -3,7 +3,11 @@ import gql from 'graphql-tag'
 import { ArticleDigestFeed } from '~/components'
 
 export const SEARCH_ARTICLES_PUBLIC = gql`
-  query SearchArticlesPublic($key: String!, $first: Int!, $after: String) {
+  query SearchArticlesPublic(
+    $key: String!
+    $first: first_Int_min_0
+    $after: String
+  ) {
     search(input: { key: $key, type: Article, first: $first, after: $after }) {
       pageInfo {
         startCursor

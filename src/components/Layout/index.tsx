@@ -1,7 +1,13 @@
 import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 
-import { Head, OnboardingTasks, SearchBar, useRoute } from '~/components'
+import {
+  Head,
+  OnboardingTasks,
+  SearchBar,
+  useResponsive,
+  useRoute,
+} from '~/components'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
 import FixedMain from './FixedMain'
@@ -59,6 +65,7 @@ const Main: React.FC<MainProps> = ({ aside, bgColor, inEditor, children }) => {
   const isInSearch = isInPath('SEARCH')
   const isInArticleDetail = isInPath('ARTICLE_DETAIL')
   const isInCircle = isPathStartWith('/~', true)
+  const isLargeUp = useResponsive('lg-up')
 
   const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
     variables: { id: 'local' },
@@ -83,7 +90,7 @@ const Main: React.FC<MainProps> = ({ aside, bgColor, inEditor, children }) => {
       <article className={articleClasses}>
         {children}
 
-        {showOnboardingTasks && (
+        {showOnboardingTasks && !isLargeUp && (
           <section className="u-lg-up-hide">
             <OnboardingTasks.NavBar />
           </section>
@@ -97,7 +104,7 @@ const Main: React.FC<MainProps> = ({ aside, bgColor, inEditor, children }) => {
           </section>
         )}
 
-        {showOnboardingTasks && (
+        {showOnboardingTasks && isLargeUp && (
           <section className="u-lg-down-hide">
             <OnboardingTasks.Widget />
           </section>

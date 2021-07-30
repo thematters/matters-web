@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import { UserDigest } from '~/components/UserDigest'
 
 export const ARTICLE_DONATORS = gql`
-  query ArticleDonators($mediaHash: String, $after: String) {
+  query ArticleDonators($mediaHash: String!, $after: String) {
     article(input: { mediaHash: $mediaHash }) {
       id
       donations: transactionsReceivedBy(

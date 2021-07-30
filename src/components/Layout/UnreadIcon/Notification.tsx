@@ -9,8 +9,6 @@ import {
 } from '~/components'
 import { UNREAD_NOTICE_COUNT } from '~/components/GQL/queries/notice'
 
-import { POLL_INTERVAL } from '~/common/enums'
-
 import styles from './styles.css'
 
 import { UnreadNoticeCount } from '~/components/GQL/queries/__generated__/UnreadNoticeCount'
@@ -33,7 +31,7 @@ const NotificationUnreadIcon: React.FC<UnreadIconProps> = ({ active }) => {
   // FIXME: https://github.com/apollographql/apollo-client/issues/3775
   useEffect(() => {
     if (viewer.isAuthed) {
-      startPolling(POLL_INTERVAL)
+      startPolling(1000 * 20) // 20s
     }
   }, [])
 

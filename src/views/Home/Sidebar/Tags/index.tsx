@@ -25,7 +25,7 @@ import { LastFetchRandom } from '~/components/GQL/queries/__generated__/LastFetc
 import { SidebarTagsPublic } from './__generated__/SidebarTagsPublic'
 
 const SIDEBAR_TAGS = gql`
-  query SidebarTagsPublic($random: NonNegativeInt) {
+  query SidebarTagsPublic($random: random_Int_min_0_max_49) {
     viewer @connection(key: "viewerSidebarTags") {
       id
       recommendation {
@@ -120,7 +120,6 @@ const Tags = () => {
                   analytics.trackEvent('click_feed', {
                     type: 'tags',
                     contentType: 'tag',
-                    styleType: 'title',
                     location: i,
                   })
                 }

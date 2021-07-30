@@ -1,66 +1,48 @@
 import React from 'react'
 
-import {
-  Card,
-  IconPin24,
-  ResponsiveImage,
-  TextIcon,
-  Translate,
-} from '~/components'
-import { CircleDigest } from '~/components/CircleDigest'
+import { Card, CircleDigest, ResponsiveImage } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
-import { UserDigestMiniProps } from '~/components/UserDigest/Mini'
 
 import { stripHtml, toPath } from '~/common/utils'
 
-import FooterActions, { FooterActionsControls } from '../FooterActions'
 import { ArticleDigestTitle } from '../Title'
-import AccessLabel from './AccessLabel'
-import CreatedAt from './CreatedAt'
+import FollowButton from './FollowButton'
+import FooterActions, { FooterActionsProps } from './FooterActions'
 import { fragments } from './gql'
-import InactiveState from './InactiveState'
 import styles from './styles.css'
 
 import { ArticleDigestFeedArticlePrivate } from './__generated__/ArticleDigestFeedArticlePrivate'
 import { ArticleDigestFeedArticlePublic } from './__generated__/ArticleDigestFeedArticlePublic'
 
-type ExtraHeaderControls = {
-  extraHeader?: React.ReactNode
-  hasCircle?: boolean
-}
-
 export type ArticleDigestFeedControls = {
   onClick?: () => any
   onClickAuthor?: () => void
-  onClickCircle?: () => void
-} & ExtraHeaderControls &
-  FooterActionsControls
+  hasFollow?: boolean
+  hasCircle?: boolean
+}
 
 export type ArticleDigestFeedProps = {
   article: ArticleDigestFeedArticlePublic &
     Partial<ArticleDigestFeedArticlePrivate>
-
-  actor?: (props: Partial<UserDigestMiniProps>) => React.ReactNode
-} & ArticleDigestFeedControls
+  header?: React.ReactNode
+} & ArticleDigestFeedControls &
+  FooterActionsProps
 
 const BaseArticleDigestFeed = ({
   article,
+  header,
+  date,
 
-  actor,
-
+  hasFollow,
   hasCircle = true,
-  extraHeader,
-
   onClick,
   onClickAuthor,
-  onClickCircle,
 
   ...controls
 }: ArticleDigestFeedProps) => {
   const {
     author,
     summary,
-    sticky,
     access: { circle },
   } = article
   const isBanned = article.articleState === 'banned'
@@ -73,66 +55,45 @@ const BaseArticleDigestFeed = ({
 
   return (
     <Card {...path} spacing={['base', 'base']} onClick={onClick}>
-      <section>
-        {extraHeader ||
-          (hasCircle && circle && (
-            <section className="extraHeader">
-              <CircleDigest.Plain circle={circle} onClick={onClickCircle} />
+      {header ||
+        (hasCircle && circle && (
+          <header>
+            <CircleDigest.Plain circle={circle} />
+          </header>
+        ))}
 
-              <AccessLabel article={article} />
-            </section>
-          ))}
-
-        <header>
-          <section className="left">
-            {actor ? (
-              actor({
-                avatarSize: 'sm',
-                textSize: 'sm',
-              })
-            ) : (
-              <UserDigest.Mini
-                user={author}
-                avatarSize="sm"
-                textSize="sm"
-                hasAvatar
-                hasDisplayName
-                onClick={onClickAuthor}
-              />
-            )}
+      <section className="content">
+        <section className="head">
+          <section className="title">
+            <ArticleDigestTitle article={article} textSize="xm" />
           </section>
 
-          <section className="right">
-            {!hasCircle && <AccessLabel article={article} />}
+          <section className="author">
+            <UserDigest.Mini
+              user={author}
+              avatarSize="sm"
+              textSize="sm"
+              hasAvatar
+              hasDisplayName
+              onClick={onClickAuthor}
+            />
 
-            {controls.inUserArticles && sticky && (
-              <TextIcon icon={<IconPin24 />} size="sm" color="grey" weight="md">
-                <Translate id="stickyArticle" />
-              </TextIcon>
-            )}
-
-            {controls.inUserArticles && <InactiveState article={article} />}
-            <CreatedAt article={article} />
+            {hasFollow && <FollowButton user={article.author} />}
           </section>
-        </header>
-
-        <section className="title">
-          <ArticleDigestTitle article={article} textSize="xm" />
         </section>
 
-        <section className="content">
-          {cover && (
-            <div className="cover">
-              <ResponsiveImage url={cover} size="144w" smUpSize="360w" />
-            </div>
-          )}
-          {<p className="description">{cleanedSummary}</p>}
-        </section>
+        <p className="description">{cleanedSummary}</p>
 
-        <FooterActions article={article} inCard {...controls} />
-
-        <style jsx>{styles}</style>
+        {cover && (
+          <div className="cover">
+            <ResponsiveImage url={cover} size="144w" smUpSize="360w" />
+          </div>
+        )}
       </section>
+
+      <FooterActions article={article} inCard date={date} {...controls} />
+
+      <style jsx>{styles}</style>
     </Card>
   )
 }
@@ -153,8 +114,7 @@ export const ArticleDigestFeed = React.memo(
       prevArticle.subscribed === article.subscribed &&
       prevArticle.articleState === article.articleState &&
       prevArticle.sticky === article.sticky &&
-      prevArticle.appreciationsReceivedTotal ===
-        article.appreciationsReceivedTotal
+      prevArticle.author.isFollowee === article.author.isFollowee
     )
   }
 ) as MemoizedArticleDigestFeed

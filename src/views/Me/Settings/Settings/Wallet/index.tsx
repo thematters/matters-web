@@ -43,8 +43,10 @@ const WalletSettings = () => {
   const shouldReAuth = errorCodes.some((code) => code === 'OAUTH_TOKEN_INVALID')
 
   const liker = data?.viewer?.liker
-  const USDPrice = numRound(liker?.rateUSD * liker?.total || 0)
-  const equalSign = liker?.total > 0 ? '≈' : '='
+  const rateUSD = liker?.rateUSD || 0
+  const total = liker?.total || 0
+  const USDPrice = numRound(rateUSD * total)
+  const equalSign = total > 0 ? '≈' : '='
 
   usePullToRefresh.Handler(refetch)
 

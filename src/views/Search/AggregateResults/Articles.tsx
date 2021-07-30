@@ -62,7 +62,6 @@ const AggregateArticleResults = () => {
                     analytics.trackEvent('click_feed', {
                       type: 'search',
                       contentType: 'article',
-                      styleType: 'title',
                       location: i,
                     })
                   }

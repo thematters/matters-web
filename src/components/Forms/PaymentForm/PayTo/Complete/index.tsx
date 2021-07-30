@@ -168,7 +168,6 @@ const Complete: React.FC<Props> = ({ callback, recipient, targetId }) => {
                       onClick={() =>
                         analytics.trackEvent('click_feed', {
                           type: 'related_donations',
-                          styleType: 'small_cover',
                           contentType: 'article',
                           location: i,
                         })
@@ -177,7 +176,6 @@ const Complete: React.FC<Props> = ({ callback, recipient, targetId }) => {
                         analytics.trackEvent('click_feed', {
                           type: 'related_donations',
                           contentType: 'user',
-                          styleType: 'subtitle',
                           location: i,
                         })
                       }}

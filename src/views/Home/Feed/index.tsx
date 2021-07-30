@@ -208,13 +208,12 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
           }
 
           return (
-            <List.Item key={edge.cursor}>
+            <List.Item key={`${sortBy}:${edge.node.id}`}>
               <ArticleDigestFeed
                 article={edge.node}
                 onClick={() =>
                   analytics.trackEvent('click_feed', {
                     type: sortBy,
-                    styleType: 'small_cover',
                     contentType: 'article',
                     location: i,
                   })
@@ -223,15 +222,6 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
                   analytics.trackEvent('click_feed', {
                     type: sortBy,
                     contentType: 'user',
-                    styleType: 'subtitle',
-                    location: i,
-                  })
-                }}
-                onClickCircle={() => {
-                  analytics.trackEvent('click_feed', {
-                    type: sortBy,
-                    contentType: 'circle',
-                    styleType: 'subtitle',
                     location: i,
                   })
                 }}

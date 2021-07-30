@@ -122,7 +122,6 @@ const SearchUser = () => {
                       analytics.trackEvent('click_feed', {
                         type: 'search_user',
                         contentType: 'user',
-                        styleType: 'card',
                         location: i,
                       })
                     }

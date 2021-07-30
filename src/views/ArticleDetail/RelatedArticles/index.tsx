@@ -55,7 +55,6 @@ const RelatedArticles = ({ article, inSidebar }: RelatedArticlesProps) => {
     analytics.trackEvent('click_feed', {
       type: 'related_article',
       contentType: 'article',
-      styleType: 'card',
       location: i,
     })
 
@@ -63,7 +62,6 @@ const RelatedArticles = ({ article, inSidebar }: RelatedArticlesProps) => {
     analytics.trackEvent('click_feed', {
       type: 'related_article',
       contentType: 'user',
-      styleType: 'subtitle',
       location: i,
     })
   }
