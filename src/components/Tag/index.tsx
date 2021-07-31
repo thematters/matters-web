@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 import { IconHashTag16, IconProps, TextIcon, TextIconProps } from '~/components'
 
-import { numAbbr, toPath } from '~/common/utils'
+import { toPath } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -26,9 +26,9 @@ const fragments = {
     fragment DigestTag on Tag {
       id
       content
-      articles(input: { first: 0 }) {
-        totalCount
-      }
+      # articles(input: { first: 0 }) {
+      #   totalCount
+      # }
     }
   `,
 }
@@ -117,7 +117,7 @@ export const Tag = ({
       break
   }
 
-  const tagCount = numAbbr(tag.articles.totalCount || 0)
+  // const tagCount = numAbbr(tag.articles.totalCount || 0)
 
   const Inner = () => (
     <>
@@ -129,7 +129,7 @@ export const Tag = ({
         <span className="name">{tag.content}</span>
       </TextIcon>
 
-      {hasCount && type === 'list' && <span className="count">{tagCount}</span>}
+      {/* {hasCount && type === 'list' && <span className="count">{tagCount}</span>} */}
 
       <style jsx>{styles}</style>
     </>
