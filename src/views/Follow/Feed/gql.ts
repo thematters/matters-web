@@ -16,7 +16,7 @@ export const FOLLOWING_FEED = gql`
     viewer {
       id
       recommendation {
-        following(input: { first: 12, after: $followingAfter }) {
+        following(input: { first: 6, after: $followingAfter }) {
           pageInfo {
             startCursor
             endCursor
@@ -57,7 +57,7 @@ export const FOLLOWING_FEED = gql`
           }
         }
         # every 3 following activities append with 1 recommending article
-        readTagsArticles(input: { first: 4, after: $recommendAfter }) {
+        readTagsArticles(input: { first: 2, after: $recommendAfter }) {
           pageInfo {
             startCursor
             endCursor
