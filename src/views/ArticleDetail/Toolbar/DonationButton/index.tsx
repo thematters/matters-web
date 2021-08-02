@@ -78,9 +78,7 @@ const DonationButton = ({ article, disabled }: DonationButtonProps) => {
           <Button
             spacing={['xtight', 'xtight']}
             bgActiveColor="grey-lighter"
-            aria-label={`${TEXT.zh_hant.donation} ${
-              TEXT.zh_hant.donationCount
-            }: ${
+            aria-label={`${TEXT.zh_hant.donation} 支持數量 ${
               article.donationsToolbar.totalCount > 0
                 ? article.donationsToolbar.totalCount
                 : 0
