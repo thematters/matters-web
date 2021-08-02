@@ -53,6 +53,7 @@ export * from './Forms'
 export * from './Dialogs'
 export * from './Dropdowns'
 export * from './DropdownDialog'
+export * from './Charts'
 
 export * from './ArticleDigest'
 export * from './UserDigest'

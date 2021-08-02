@@ -1,0 +1,5 @@
+.chart {
+  & :global(svg) {
+    background: var(--color-grey-lighter);
+  }
+}
