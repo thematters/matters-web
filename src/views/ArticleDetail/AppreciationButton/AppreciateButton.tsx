@@ -8,6 +8,7 @@ import { numAbbr } from '~/common/utils'
 import * as clap from './clap'
 import clapStyles from './styles.clap.css'
 import styles from './styles.css'
+import { TEXT } from '@/src/common/enums'
 
 interface AppreciateButtonProps {
   disabled?: boolean
@@ -38,7 +39,9 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
       <Button
         spacing={['xtight', 'xtight']}
         bgActiveColor="grey-lighter"
-        aria-label="讚賞作品"
+        aria-label={`${TEXT.zh_hant.appreciate} ${
+          TEXT.zh_hant.appreciateCount
+        }: ${total > 0 ? total : 0}`}
         disabled={disabled}
         onClick={() => {
           if (iconRef.current) {
