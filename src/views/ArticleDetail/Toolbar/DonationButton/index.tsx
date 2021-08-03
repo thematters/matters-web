@@ -78,7 +78,11 @@ const DonationButton = ({ article, disabled }: DonationButtonProps) => {
           <Button
             spacing={['xtight', 'xtight']}
             bgActiveColor="grey-lighter"
-            aria-label={TEXT.zh_hant.donation}
+            aria-label={`${TEXT.zh_hant.donation} 支持數量 ${
+              article.donationsToolbar.totalCount > 0
+                ? article.donationsToolbar.totalCount
+                : 0
+            }`}
             disabled={disabled || article.author.id === viewer.id}
             onClick={() => {
               analytics.trackEvent('click_button', { type: 'donate' })
