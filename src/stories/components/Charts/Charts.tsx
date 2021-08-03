@@ -15,7 +15,15 @@ const Charts = () => (
   <section>
     <ul>
       <li>
-        <AreaChart data={MOCK_INCOME_ANALYTICS.history} />
+        <AreaChart data={MOCK_INCOME_ANALYTICS.history}>
+          {(props) => (
+            <>
+              <AreaChart.Axis {...props} />
+              <AreaChart.Area {...props} />
+              <AreaChart.Tooltip {...props} />
+            </>
+          )}
+        </AreaChart>
       </li>
     </ul>
 
