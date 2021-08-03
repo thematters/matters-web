@@ -4,17 +4,15 @@ import { format as d3Format } from 'd3-format'
 import { select as d3Select } from 'd3-selection'
 import { useEffect, useRef } from 'react'
 
-import { Datum, Dimensions, Scales } from './'
+import { InnerChart } from './'
+import styles from './styles.css'
 
-type AxisProps = {
-  data: Datum[]
-} & Required<Dimensions> &
-  Scales
+type AxisProps = InnerChart
 
 const Axis: React.FC<AxisProps> = ({
   width,
   height,
-  margin: { left, bottom },
+  margin: { left, bottom, right },
   xScale,
   yScale,
   yMax,
@@ -36,16 +34,7 @@ const Axis: React.FC<AxisProps> = ({
           .tickSize(0)
           .tickFormat((t) => (t as Date).getMonth() + 1 + ' 月')
       )
-      .call((g) =>
-        g.select('.tick:last-of-type text').attr('text-anchor', 'end')
-      )
-      .call((g) =>
-        g
-          .selectAll('text')
-          .attr('color', '#b3b3b3')
-          .attr('font-size', '.75rem')
-          .attr('y', '.625rem')
-      )
+      .call((g) => g.selectAll('text').attr('y', '.625rem'))
       .call((g) => g.select('.domain').remove())
 
     // Draw Y Axis
@@ -53,25 +42,24 @@ const Axis: React.FC<AxisProps> = ({
       .call(
         d3AxisLeft(yScale)
           .tickValues(d3Range(yMin, yMax + yTickStep, yTickStep))
-          .tickSizeInner(-width + left)
+          .tickSizeInner(-width + left + right)
           .tickSizeOuter(0)
           .tickFormat((d, index) => (index % 2 ? `${d3Format('d')(d)}` : ``))
       )
-      .call((g) => g.selectAll('line').attr('stroke', 'rgba(13, 103, 99, .08)'))
-      .call((g) =>
-        g
-          .selectAll('text')
-          .attr('color', '#b3b3b3')
-          .attr('font-size', '.75rem')
-          .attr('x', '-.75rem')
-      )
+      .call((g) => g.selectAll('text').attr('x', '-.75rem'))
       .call((g) => g.select('.domain').remove())
   }, [xScale, yScale])
 
   return (
     <>
-      <g ref={xAxisRef} transform={`translate(0, ${height - bottom})`} />
-      <g ref={yAxisRef} transform={`translate(${left},0)`} />
+      <g
+        className="xAxis"
+        ref={xAxisRef}
+        transform={`translate(0, ${height - bottom})`}
+      />
+      <g className="yAxis" ref={yAxisRef} transform={`translate(${left},0)`} />
+
+      <style jsx>{styles}</style>
     </>
   )
 }

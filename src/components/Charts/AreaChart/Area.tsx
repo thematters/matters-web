@@ -3,18 +3,33 @@ import { interpolate as d3Interpolate } from 'd3-interpolate'
 import { select as d3Select } from 'd3-selection'
 import { area as d3Area, curveCardinal as d3CurveCardinal } from 'd3-shape'
 import { transition as d3Transition } from 'd3-transition'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
-import { Datum, Dimensions, Scales } from './'
+import { randomString } from '~/common/utils'
 
-type AreaProps = {
-  data: Datum[]
-} & Required<Dimensions> &
-  Scales
+import { Datum, InnerChart } from './'
 
-const Area: React.FC<AreaProps> = ({ data, xScale, yScale, yMin }) => {
+type AreaProps = InnerChart & {
+  dataKey: string
+  areaColor?: string
+  lineColor?: string
+}
+
+const Area: React.FC<AreaProps> = ({
+  data,
+  xScale,
+  yScale,
+  yMin,
+
+  dataKey,
+  areaColor = '#E1F9F8',
+  lineColor = '#9AE5E2',
+}) => {
+  const [areaName] = useState(randomString())
   const areaRef: React.RefObject<any> = useRef(null)
   const lineRef: React.RefObject<any> = useRef(null)
+
+  const areaData = data[dataKey]
 
   const area = d3Area<Datum>()
     .curve(d3CurveCardinal)
@@ -24,11 +39,11 @@ const Area: React.FC<AreaProps> = ({ data, xScale, yScale, yMin }) => {
 
   useEffect(() => {
     // Draw area
-    d3Select(areaRef.current).datum(data).attr('d', area)
+    d3Select(areaRef.current).datum(areaData).attr('d', area)
 
     // Draw line
     d3Select(lineRef.current)
-      .datum(data)
+      .datum(areaData)
       .attr('d', area.lineY1())
       .transition(d3Transition() as any)
       .duration(1000)
@@ -41,43 +56,29 @@ const Area: React.FC<AreaProps> = ({ data, xScale, yScale, yMin }) => {
 
   return (
     <>
-      <path ref={areaRef} fill="url(#area)" />
+      <path ref={areaRef} fill={`url(#area-${areaName})`} />
 
       <path
         ref={lineRef}
         fill="none"
-        stroke="url(#area-line)"
+        stroke={`url(#line-${areaName})`}
         strokeWidth={3}
         strokeLinecap="round"
         strokeLinejoin="round"
       />
 
       <defs>
-        <linearGradient
-          id="area"
-          x1="188.389"
-          y1="40.7631"
-          x2="188.389"
-          y2="161"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop stopColor="#E1F9F8" />
-          <stop offset="0.833333" stopColor="#E0F8F7" stopOpacity="0.333333" />
-          <stop offset="1" stopColor="white" stopOpacity="0" />
+        <linearGradient id={`area-${areaName}`} x1="0" y1="0" x2="0" y2="1">
+          <stop stopColor={areaColor} />
+          <stop offset="83.33%" stopColor={areaColor} stopOpacity="0.333333" />
+          <stop offset="100%" stopColor="white" stopOpacity="0" />
         </linearGradient>
 
-        <linearGradient
-          id="area-line"
-          x1="34.3102"
-          y1="101.905"
-          x2="336.64"
-          y2="41.1964"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop stopColor="#9AE5E2" stopOpacity="0" />
-          <stop offset="0.203125" stopColor="#9AE6E2" />
-          <stop offset="0.786458" stopColor="#9AE5E2" />
-          <stop offset="1" stopColor="#9AE5E2" stopOpacity="0" />
+        <linearGradient id={`line-${areaName}`} x1="0" y1="0" x2="1" y2="0">
+          <stop stopColor={lineColor} stopOpacity="0" />
+          <stop offset="20%" stopColor={lineColor} />
+          <stop offset="80%" stopColor={lineColor} />
+          <stop offset="100%" stopColor={lineColor} stopOpacity="0" />
         </linearGradient>
       </defs>
     </>

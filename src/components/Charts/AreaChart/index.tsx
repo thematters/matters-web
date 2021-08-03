@@ -1,11 +1,18 @@
-import { extent as d3Extent, max as d3Max, min as d3Min } from 'd3-array'
+import {
+  extent as d3Extent,
+  max as d3Max,
+  merge as d3Merge,
+  min as d3Min,
+} from 'd3-array'
 import {
   ScaleLinear,
   scaleLinear as d3ScaleLinear,
   ScaleTime,
   scaleTime as d3ScaleTime,
 } from 'd3-scale'
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
+
+import { useWindowResize } from '~/components'
 
 import Area from './Area'
 import Axis from './Axis'
@@ -25,26 +32,27 @@ export type Scales = {
   yScale: ScaleLinear<number, number, never>
   yMax: number
   yMin: number
-  xTicks: number
-  yTicks: number
 }
 
+export type Ticks = {
+  xTicks?: number
+  yTicks?: number
+}
+
+export type InnerChart = {
+  data: { [key: string]: Datum[] }
+  svgRef: React.RefObject<any>
+} & Required<Dimensions> &
+  Scales &
+  Required<Ticks>
+
 type AreaChartProps = {
-  data: Datum[]
-  children: (props: {
-    data: Datum[]
-    width: number
-    height: number
-    margin: { top: number; right: number; bottom: number; left: number }
-    xScale: ScaleTime<number, number, never>
-    yScale: ScaleLinear<number, number, never>
-    yMax: number
-    yMin: number
-    xTicks: number
-    yTicks: number
-    svgRef: React.RefObject<any>
-  }) => React.ReactChild | React.ReactChild[] | React.ReactNode
-} & Dimensions
+  data: { [key: string]: Datum[] }
+  children: (
+    props: InnerChart
+  ) => React.ReactChild | React.ReactChild[] | React.ReactNode
+} & Dimensions &
+  Ticks
 
 export const AreaChart: React.FC<AreaChartProps> & {
   Axis: typeof Axis
@@ -52,7 +60,7 @@ export const AreaChart: React.FC<AreaChartProps> & {
   Tooltip: typeof Tooltip
 } = ({
   data,
-  width = 300,
+  width,
   height = 200,
   margin = {
     top: 24,
@@ -60,44 +68,60 @@ export const AreaChart: React.FC<AreaChartProps> & {
     bottom: 24,
     left: 48,
   },
+  xTicks = 3,
+  yTicks = 5,
   children,
 }) => {
+  const [windowWidth] = useWindowResize()
+
+  const containerRef: React.RefObject<any> = useRef(null)
   const svgRef: React.RefObject<any> = useRef(null)
 
+  const mergedData = d3Merge<Datum>(Object.values(data))
+
   const { top, right, bottom, left } = margin
-  const svgWidth = width
+  const [svgWidth, setSvgWidth] = useState(width || 0)
   const svgHeight = height
-  const xTicks = 3
-  const yTicks = 5
-  const yMax = d3Max(data.map((d) => d.value)) as number
-  const yMinOriginal = d3Min(data.map((d) => d.value)) as number
+  const yMax = d3Max(mergedData.map((d) => d.value)) as number
+  const yMinOriginal = d3Min(mergedData.map((d) => d.value)) as number
   const yMin = yMinOriginal - (yMax - yMinOriginal) / yTicks
 
   // Scales
   const xScale = d3ScaleTime()
-    .domain(d3Extent(data, (d) => d.time) as Date[])
-    .range([left, width - right])
+    .domain(d3Extent(mergedData, (d) => d.time) as Date[])
+    .range([left, svgWidth - right])
 
   const yScale = d3ScaleLinear()
     .domain([yMin, yMax])
     .range([height - bottom, top])
 
+  useEffect(() => {
+    if (!windowWidth || !containerRef.current) {
+      return
+    }
+
+    console.log(containerRef.current)
+
+    setSvgWidth(containerRef.current.getBoundingClientRect().width)
+  }, [windowWidth])
+
   return (
-    <div className="chart">
+    <div ref={containerRef}>
       <svg ref={svgRef} width={svgWidth} height={svgHeight}>
-        {children({
-          data,
-          width,
-          height,
-          margin,
-          xScale,
-          yScale,
-          xTicks,
-          yTicks,
-          yMin,
-          yMax,
-          svgRef,
-        })}
+        {svgWidth > 0 &&
+          children({
+            data,
+            width: svgWidth,
+            height: svgHeight,
+            margin,
+            xScale,
+            yScale,
+            xTicks,
+            yTicks,
+            yMin,
+            yMax,
+            svgRef,
+          })}
       </svg>
       <style jsx>{styles}</style>
     </div>

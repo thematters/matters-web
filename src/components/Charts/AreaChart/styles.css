@@ -1,5 +1,19 @@
-.chart {
-  & :global(svg) {
-    background: var(--color-grey-lighter);
+.xAxis,
+.yAxis {
+  & :global(text) {
+    font-size: var(--font-size-xs);
+    color: var(--color-grey);
+  }
+}
+
+.xAxis {
+  & :global(.tick:last-of-type text) {
+    text-anchor: end;
+  }
+}
+
+.yAxis {
+  & :global(line) {
+    stroke: rgba(13, 103, 99, 0.08);
   }
 }
