@@ -92,12 +92,7 @@ export const AreaChart: React.FC<AreaChartProps> = ({
           .tickSizeOuter(0)
           .tickFormat((d, index) => (index % 2 ? `${d3.format('d')(d)}` : ``))
       )
-      .call((g) =>
-        g
-          .selectAll('line')
-          .attr('stroke', 'rgba(13, 103, 99, .08)')
-          .style('mix-blend-mode', 'darken')
-      )
+      .call((g) => g.selectAll('line').attr('stroke', 'rgba(13, 103, 99, .08)'))
       .call((g) =>
         g
           .selectAll('text')
@@ -137,6 +132,58 @@ export const AreaChart: React.FC<AreaChartProps> = ({
             return d3.interpolate(`0,${length}`, `${length},${length}`)
           })
       )
+
+    // Tooltip
+    const mouseGroup = svg.append('g').attr('class', 'mouse-over-effects')
+    const mouseLine = mouseGroup
+      .append('line')
+      .attr('class', 'mouse-line')
+      .style('stroke', 'rgba(154, 229, 226, .4)')
+      .style('stroke-width', 1)
+      .style('opacity', '0')
+      .attr('x1', 0)
+      .attr('y1', 0)
+      .attr('x2', 0)
+      .attr('y2', height - bottom)
+    const mouseCircle = mouseGroup
+      .append('circle')
+      .attr('class', 'mouse-circle')
+      .attr('r', 8)
+      .style('stroke', 'white')
+      .style('stroke-width', 2)
+      .style('fill', '#9AE5E2')
+      .style('opacity', '0')
+
+    svg
+      .attr('pointer-events', 'all')
+      // on mouse out hide line, circle and tooltip
+      .on('mouseout', () => {
+        d3.select('.mouse-line').style('opacity', '0')
+        d3.selectAll('.mouse-circle').style('opacity', '0')
+      })
+      // on mouse in show line, circle and tooltip
+      .on('mouseover', () => {
+        d3.select('.mouse-line').style('opacity', '1')
+        d3.selectAll('.mouse-circle').style('opacity', '1')
+      })
+      .on('mousemove', (event) => {
+        const bisectDate = d3.bisector<Datum, any>((d) => d.time).left
+
+        const date = x.invert(event.offsetX)
+        const i = bisectDate(data, date, 1)
+        const a = data[i - 1]
+        const b = data[i]
+        const selectedData = +date - +a.time > +b.time - +date ? b : a
+
+        // update position
+        mouseLine
+          .attr('x1', x(selectedData.time))
+          .attr('x2', x(selectedData.time))
+          .attr('y1', y(selectedData.value))
+        mouseCircle
+          .attr('cx', x(selectedData.time))
+          .attr('cy', y(selectedData.value))
+      })
   }
 
   useEffect(() => {
