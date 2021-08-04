@@ -20,6 +20,7 @@ import styles from './styles.css'
 import Tooltip from './Tooltip'
 
 export type Datum = { time: Date; value: number }
+export type ChartData = { [key: string]: Datum[] }
 
 export type Dimensions = {
   width?: number
@@ -40,7 +41,7 @@ export type Ticks = {
 }
 
 export type InnerChart = {
-  data: { [key: string]: Datum[] }
+  data: ChartData
   svgRef: React.RefObject<any>
 } & Required<Dimensions> &
   Scales &

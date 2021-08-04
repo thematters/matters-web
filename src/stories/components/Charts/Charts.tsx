@@ -55,7 +55,17 @@ const Charts = () => (
                 lineColor="#F1BA4C"
               />
               <AreaChart.Area {...props} dataKey="paid" />
-              <AreaChart.Tooltip {...props} />
+              <AreaChart.Tooltip
+                {...props}
+                formatter={(data) =>
+                  Object.keys(data)
+                    .map((key) => {
+                      const keyName = key === 'invitation' ? '免費' : '付費'
+                      return `<span>${keyName}: ${data[key].value}</span>`
+                    })
+                    .join('<br/>')
+                }
+              />
             </>
           )}
         </AreaChart>
