@@ -68,7 +68,7 @@ export const AreaChart: React.FC<AreaChartProps> & {
     bottom: 24,
     left: 48,
   },
-  xTicks = 3,
+  xTicks = 4,
   yTicks = 5,
   children,
 }) => {
@@ -82,9 +82,12 @@ export const AreaChart: React.FC<AreaChartProps> & {
   const { top, right, bottom, left } = margin
   const [svgWidth, setSvgWidth] = useState(width || 0)
   const svgHeight = height
-  const yMax = d3Max(mergedData.map((d) => d.value)) as number
-  const yMinOriginal = d3Min(mergedData.map((d) => d.value)) as number
-  const yMin = yMinOriginal - (yMax - yMinOriginal) / yTicks
+
+  const _yMax = d3Max(mergedData.map((d) => d.value)) as number
+  const _yMin = d3Min(mergedData.map((d) => d.value)) as number
+  const tickDistance = (_yMax - _yMin) / yTicks
+  const yMax = _yMax + tickDistance / 2 // more space to the top tick
+  const yMin = _yMin - tickDistance / 2 // more space to the down tick
 
   // Scales
   const xScale = d3ScaleTime()
@@ -99,8 +102,6 @@ export const AreaChart: React.FC<AreaChartProps> & {
     if (!windowWidth || !containerRef.current) {
       return
     }
-
-    console.log(containerRef.current)
 
     setSvgWidth(containerRef.current.getBoundingClientRect().width)
   }, [windowWidth])
