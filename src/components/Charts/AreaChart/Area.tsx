@@ -1,10 +1,11 @@
 import { easeLinear as d3EaseLinear } from 'd3-ease'
 import { interpolate as d3Interpolate } from 'd3-interpolate'
 import { select as d3Select } from 'd3-selection'
-import { area as d3Area, curveCardinal as d3CurveCardinal } from 'd3-shape'
+import { area as d3Area, curveNatural as d3CurveNatural } from 'd3-shape'
 import { transition as d3Transition } from 'd3-transition'
 import { useEffect, useRef, useState } from 'react'
 
+import { CHART_COLOR } from '~/common/enums'
 import { randomString } from '~/common/utils'
 
 import { Datum, InnerChart } from './'
@@ -22,8 +23,8 @@ const Area: React.FC<AreaProps> = ({
   yMin,
 
   dataKey,
-  areaColor = '#E1F9F8',
-  lineColor = '#9AE5E2',
+  areaColor = CHART_COLOR.green.area,
+  lineColor = CHART_COLOR.green.line,
 }) => {
   const [areaName] = useState(randomString())
   const areaRef: React.RefObject<any> = useRef(null)
@@ -32,14 +33,21 @@ const Area: React.FC<AreaProps> = ({
   const areaData = data[dataKey]
 
   const area = d3Area<Datum>()
-    .curve(d3CurveCardinal)
+    .curve(d3CurveNatural)
     .x((d) => xScale(d.time))
     .y0(yScale(yMin))
     .y1((d) => yScale(d.value))
 
   useEffect(() => {
     // Draw area
-    d3Select(areaRef.current).datum(areaData).attr('d', area)
+    d3Select(areaRef.current)
+      .datum(areaData)
+      .attr('d', area)
+      .style('opacity', 0)
+      .transition(d3Transition() as any)
+      .duration(1000)
+      .ease(d3EaseLinear)
+      .style('opacity', 1)
 
     // Draw line
     d3Select(lineRef.current)

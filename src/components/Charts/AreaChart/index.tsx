@@ -36,7 +36,7 @@ export type Scales = {
 }
 
 export type Ticks = {
-  xTicks?: number
+  // xTicks?: number
   yTicks?: number
 }
 
@@ -69,7 +69,6 @@ export const AreaChart: React.FC<AreaChartProps> & {
     bottom: 24,
     left: 48,
   },
-  xTicks = 4,
   yTicks = 5,
   children,
 }) => {
@@ -118,7 +117,6 @@ export const AreaChart: React.FC<AreaChartProps> & {
             margin,
             xScale,
             yScale,
-            xTicks,
             yTicks,
             yMin,
             yMax,
