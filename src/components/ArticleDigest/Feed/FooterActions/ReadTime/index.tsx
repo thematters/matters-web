@@ -33,8 +33,8 @@ const ReadTime = ({ article, hasDivider }: ResponseCountProps) => {
       <Tooltip
         content={
           <Translate
-            zh_hant="累計閱讀時間"
-            zh_hans="累计阅读时间"
+            zh_hant="累計閱讀時數"
+            zh_hans="累计阅读时长"
             en="Accumulated reading times"
           />
         }
