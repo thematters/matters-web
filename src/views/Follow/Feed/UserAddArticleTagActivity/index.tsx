@@ -16,8 +16,8 @@ const UserAddArticleTagActivity = ({
       <FeedHead>
         <span>
           <Translate
-            zh_hant="添加精選於"
-            zh_hans="添加精选于"
+            zh_hant="追蹤標籤有新作品"
+            zh_hans="追踪标签有新作品"
             en="selected by"
           />
         </span>
