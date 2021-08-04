@@ -1,4 +1,4 @@
-import { IconDotDivider, IconReadTime12, TextIcon } from '~/components'
+import { IconDotDivider, IconReadTimeTotal16, TextIcon } from '~/components'
 import { Translate } from '~/components/Context'
 
 import { numAbbr, numRound } from '~/common/utils'
@@ -9,10 +9,10 @@ import { ActionsReadTimeArticle } from './__generated__/ActionsReadTimeArticle'
 
 interface ResponseCountProps {
   article: ActionsReadTimeArticle
-  hasDate: boolean
+  hasDivider: boolean
 }
 
-const ResponseCount = ({ article, hasDate }: ResponseCountProps) => {
+const ReadTime = ({ article, hasDivider }: ResponseCountProps) => {
   if (!article.readTime) {
     return null
   }
@@ -25,16 +25,16 @@ const ResponseCount = ({ article, hasDate }: ResponseCountProps) => {
 
   return (
     <>
-      <TextIcon icon={<IconReadTime12 size="xs" />} size="xs" color="grey-dark">
+      <TextIcon icon={<IconReadTimeTotal16 />} size="xs" color="grey-dark">
         {numAbbr(readHour, 1)}{' '}
         <Translate zh_hant="小時" zh_hans="小时" en="hours" />
       </TextIcon>
 
-      {hasDate && <IconDotDivider />}
+      {hasDivider && <IconDotDivider />}
     </>
   )
 }
 
-ResponseCount.fragments = fragments
+ReadTime.fragments = fragments
 
-export default ResponseCount
+export default ReadTime
