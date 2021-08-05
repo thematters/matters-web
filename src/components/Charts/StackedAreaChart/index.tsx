@@ -1,15 +1,12 @@
-import {
-  extent as d3Extent,
-  max as d3Max,
-  merge as d3Merge,
-  min as d3Min,
-} from 'd3-array'
+import { extent as d3Extent, max as d3Max, min as d3Min } from 'd3-array'
 import {
   ScaleLinear,
   scaleLinear as d3ScaleLinear,
   ScaleTime,
   scaleTime as d3ScaleTime,
 } from 'd3-scale'
+import { Series, stack as d3Stack } from 'd3-shape'
+import _uniqBy from 'lodash/uniqBy'
 import { useEffect, useRef, useState } from 'react'
 
 import { useWindowResize } from '~/components'
@@ -19,8 +16,8 @@ import Axis from './Axis'
 import styles from './styles.css'
 import Tooltip from './Tooltip'
 
-export type Datum = { time: Date; value: number }
-export type ChartData = { [key: string]: Datum[] }
+export type Datum = Record<'time' | string, number | Date>
+export type Data = Datum[]
 
 export type Dimensions = {
   width?: number
@@ -36,26 +33,26 @@ export type Scales = {
 }
 
 export type Ticks = {
-  // xTicks?: number
   yTicks?: number
 }
 
 export type InnerChart = {
-  data: ChartData
+  data: Data
+  series: Series<{ [key: string]: number }, string>[]
   svgRef: React.RefObject<any>
 } & Required<Dimensions> &
   Scales &
   Required<Ticks>
 
-type AreaChartProps = {
-  data: { [key: string]: Datum[] }
+type StackedAreaChartProps = {
+  data: Data
   children: (
     props: InnerChart
   ) => React.ReactChild | React.ReactChild[] | React.ReactNode
 } & Dimensions &
   Ticks
 
-export const AreaChart: React.FC<AreaChartProps> & {
+export const StackedAreaChart: React.FC<StackedAreaChartProps> & {
   Axis: typeof Axis
   Area: typeof Area
   Tooltip: typeof Tooltip
@@ -77,21 +74,23 @@ export const AreaChart: React.FC<AreaChartProps> & {
   const containerRef: React.RefObject<any> = useRef(null)
   const svgRef: React.RefObject<any> = useRef(null)
 
-  const mergedData = d3Merge<Datum>(Object.values(data))
-
   const { top, right, bottom, left } = margin
   const [svgWidth, setSvgWidth] = useState(width || 0)
   const svgHeight = height
 
-  const _yMax = d3Max(mergedData.map((d) => d.value)) as number
-  const _yMin = d3Min(mergedData.map((d) => d.value)) as number
+  // Data Transformation
+  const [_, ...stackedKeys] = Object.keys(data[0])
+  const series = d3Stack().keys(stackedKeys)(data as any)
+
+  // Scales
+  const _yMax = d3Max(series, (d) => d3Max(d, (dd) => dd[1])) as number
+  const _yMin = d3Min(series, (d) => d3Min(d, (dd) => dd[1])) as number
   const tickDistance = (_yMax - _yMin) / yTicks
   const yMax = _yMax + tickDistance / 2 // more space to the top tick
   const yMin = _yMin - tickDistance / 2 // more space to the down tick
 
-  // Scales
   const xScale = d3ScaleTime()
-    .domain(d3Extent(mergedData, (d) => d.time) as Date[])
+    .domain(d3Extent(data, (d) => d.time) as [Date, Date])
     .range([left, svgWidth - right])
 
   const yScale = d3ScaleLinear()
@@ -112,6 +111,7 @@ export const AreaChart: React.FC<AreaChartProps> & {
         {svgWidth > 0 &&
           children({
             data,
+            series,
             width: svgWidth,
             height: svgHeight,
             margin,
@@ -128,6 +128,6 @@ export const AreaChart: React.FC<AreaChartProps> & {
   )
 }
 
-AreaChart.Axis = Axis
-AreaChart.Area = Area
-AreaChart.Tooltip = Tooltip
+StackedAreaChart.Axis = Axis
+StackedAreaChart.Area = Area
+StackedAreaChart.Tooltip = Tooltip

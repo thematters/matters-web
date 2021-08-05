@@ -1,1 +1,1 @@
-export * from './AreaChart'
+export * from './StackedAreaChart'

@@ -1,4 +1,4 @@
-import { bisector as d3Bisector } from 'd3-array'
+import { bisector as d3Bisector, sum as d3Sum } from 'd3-array'
 import { select as d3Select } from 'd3-selection'
 import { useEffect, useRef, useState } from 'react'
 import tippy, { Instance as TippyInstance } from 'tippy.js'
@@ -8,17 +8,17 @@ import { Datum, InnerChart } from './'
 type TooltipProps = InnerChart & {
   // pass selected data to formatter and
   // return a HTML string to render Tooltip content
-  formatter?: (data: { [key: string]: Datum }) => string
+  formatter?: (datum: Datum) => string
 }
 
-const defaultFormatter = (data: { [key: string]: Datum }) =>
-  Object.values(data)
-    .map((datum) => `${datum.value}`)
-    .join('<br/>')
+const defaultFormatter = (datum: Datum) => {
+  const { time, ...values } = datum
+  return Object.values(values).join('<br/>')
+}
 
 const Tooltip: React.FC<TooltipProps> = ({
   data,
-  width,
+  series,
   height,
   margin: { bottom },
   xScale,
@@ -29,12 +29,12 @@ const Tooltip: React.FC<TooltipProps> = ({
   const lineRef: React.RefObject<any> = useRef(null)
   const circleRef: React.RefObject<any> = useRef(null)
 
-  const selectTarget = (d: Datum[], offsetX: number) => {
+  const selectTargetDatum = (offsetX: number) => {
     const bisectDate = d3Bisector<Datum, any>((di) => di.time).left
     const date = xScale.invert(offsetX)
-    const i = bisectDate(d, date, 1)
-    const a = d[i - 1]
-    const b = d[i]
+    const i = bisectDate(data, date, 1)
+    const a = data[i - 1]
+    const b = data[i]
 
     if (!a || !b) {
       return a || b
@@ -75,30 +75,20 @@ const Tooltip: React.FC<TooltipProps> = ({
     }
 
     // select closest data point
-    const targetData: { [key: string]: Datum } = {}
-    let maxTarget: Datum = { time: new Date(), value: 0 }
-    Object.keys(data).map((key) => {
-      const target = selectTarget(data[key], offsetX)
+    const targetDatum: Datum = selectTargetDatum(offsetX)
 
-      Object.assign(targetData, { [key]: target })
-
-      // max target datum
-      if (target.value > maxTarget.value) {
-        maxTarget = target
-      }
-    })
+    const { time, ...values } = targetDatum
+    const sumY = d3Sum(Object.values(values)) as number
 
     // update the positions of line & circle
     line
-      .attr('x1', xScale(maxTarget.time))
-      .attr('x2', xScale(maxTarget.time))
-      .attr('y1', yScale(maxTarget.value))
-    circle
-      .attr('cx', xScale(maxTarget.time))
-      .attr('cy', yScale(maxTarget.value))
+      .attr('x1', xScale(targetDatum.time))
+      .attr('x2', xScale(targetDatum.time))
+      .attr('y1', yScale(sumY))
+    circle.attr('cx', xScale(targetDatum.time)).attr('cy', yScale(sumY))
 
     // show tooltip
-    tooltip?.setContent(formatter(targetData))
+    tooltip?.setContent(formatter(targetDatum))
     tooltip?.show()
   }
 

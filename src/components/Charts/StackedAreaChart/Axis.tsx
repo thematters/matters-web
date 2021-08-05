@@ -1,4 +1,4 @@
-import { merge as d3Merge, range as d3Range } from 'd3-array'
+import { range as d3Range } from 'd3-array'
 import { axisBottom as d3AxisBottom, axisLeft as d3AxisLeft } from 'd3-axis'
 import { format as d3Format } from 'd3-format'
 import { select as d3Select } from 'd3-selection'
@@ -8,7 +8,7 @@ import { useContext, useEffect, useRef } from 'react'
 
 import { LanguageContext } from '~/components'
 
-import { Datum, InnerChart } from './'
+import { InnerChart } from './'
 import styles from './styles.css'
 
 type AxisProps = InnerChart
@@ -28,7 +28,6 @@ const Axis: React.FC<AxisProps> = ({
   const xAxisRef: React.RefObject<any> = useRef(null)
   const yAxisRef: React.RefObject<any> = useRef(null)
 
-  const mergedData = d3Merge<Datum>(Object.values(data))
   const yTickStep = (yMax - yMin) / yTicks
 
   useEffect(() => {
@@ -36,12 +35,7 @@ const Axis: React.FC<AxisProps> = ({
     d3Select(xAxisRef.current)
       .call(
         d3AxisBottom<Date>(xScale)
-          .tickValues(
-            _uniqBy(
-              mergedData.map((d) => d.time),
-              (d) => d.getMonth()
-            )
-          )
+          .tickValues(data.map((d) => d.time as Date))
           .tickSize(0)
           .tickFormat((t) => {
             if (lang === 'en') {

@@ -165,6 +165,7 @@
   font-weight: var(--font-weight-medium);
   line-height: 1rem;
   color: var(--color-white);
+  text-align: left;
   background: var(--color-grey-darker);
   border-radius: var(--spacing-xx-tight);
 

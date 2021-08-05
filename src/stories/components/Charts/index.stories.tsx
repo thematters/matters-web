@@ -2,13 +2,13 @@ import { MockedProvider } from '@apollo/react-testing'
 import { Meta, Story } from '@storybook/react/types-6-0'
 import React from 'react'
 
-import { AreaChart } from '~/components'
+import { StackedAreaChart } from '~/components'
 
 import Charts from './Charts'
 
 export default {
   title: 'Components/Charts',
-  component: AreaChart,
+  component: StackedAreaChart,
 } as Meta
 
 const Template: Story = () => (
