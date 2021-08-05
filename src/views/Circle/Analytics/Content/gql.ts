@@ -1,5 +1,7 @@
 import gql from 'graphql-tag'
 
+import ContentDigest from './ContentDigest'
+
 export const CIRCLE_CONTENT_ANALYTICS = {
   public: gql`
     query CircleContentAnalyticsPublic($name: String!) {
@@ -10,6 +12,7 @@ export const CIRCLE_CONTENT_ANALYTICS = {
             public {
               node {
                 id
+                ...CircleContentAnalyticsArticle
               }
               readCount
             }
@@ -17,6 +20,7 @@ export const CIRCLE_CONTENT_ANALYTICS = {
         }
       }
     }
+    ${ContentDigest.fragments.article}
   `,
   paywall: gql`
     query CircleContentAnalyticsPaywall($name: String!) {
@@ -27,6 +31,7 @@ export const CIRCLE_CONTENT_ANALYTICS = {
             paywall {
               node {
                 id
+                ...CircleContentAnalyticsArticle
               }
               readCount
             }
@@ -34,5 +39,6 @@ export const CIRCLE_CONTENT_ANALYTICS = {
         }
       }
     }
+    ${ContentDigest.fragments.article}
   `,
 }

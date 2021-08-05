@@ -15,6 +15,7 @@
   --color-green-lighter: #f2faf7;
   --color-yellow-lighter: #faf7f0;
   --color-likecoin-green: #40bfa5;
+  --color-analytics-red: #c25050;
 
   /* hover */
   --color-matters-gold-active: color(var(--color-matters-gold) shade(5%));
