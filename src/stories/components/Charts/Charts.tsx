@@ -1,4 +1,5 @@
 import { sum as d3Sum } from 'd3-array'
+import _random from 'lodash/random'
 
 import { StackedAreaChart } from '~/components'
 
@@ -10,31 +11,31 @@ const MOCK_INCOME_ANALYTICS = [
 ]
 
 const MOCK_SUBSCRIBER_ANALYTICS = [
-  { time: new Date('May 1, 2021 00:00:00 GMT+00:00'), paid: 5, invitation: 12 },
+  { time: new Date('May 1, 2021 00:00:00 GMT+00:00'), invitation: 5, paid: 12 },
   {
     time: new Date('June 1, 2021 00:00:00 GMT+00:00'),
-    paid: 12,
-    invitation: 15,
+    invitation: 12,
+    paid: 15,
   },
   {
     time: new Date('July 1, 2021 00:00:00 GMT+00:00'),
-    paid: 15,
-    invitation: 22,
+    invitation: 15,
+    paid: 22,
   },
   {
     time: new Date('August 1, 2021 00:00:00 GMT+00:00'),
-    paid: 20,
-    invitation: 10,
+    invitation: 20,
+    paid: 10,
   },
   {
     time: new Date('September 1, 2021 00:00:00 GMT+00:00'),
-    paid: 18,
-    invitation: 4,
+    invitation: 18,
+    paid: 4,
   },
   {
     time: new Date('October 1, 2021 00:00:00 GMT+00:00'),
-    paid: 24,
-    invitation: 8,
+    invitation: 24,
+    paid: 8,
   },
 ]
 
@@ -79,6 +80,24 @@ const Charts = () => (
                   ].join('<br/>')
                 }}
               />
+            </>
+          )}
+        </StackedAreaChart>
+      </li>
+
+      <li>
+        <StackedAreaChart
+          data={MOCK_SUBSCRIBER_ANALYTICS.map((d) => {
+            const abc = d.paid + _random(1, 10)
+            const def = abc + _random(5, 20)
+            return { ...d, abc, def }
+          })}
+        >
+          {(props) => (
+            <>
+              <StackedAreaChart.Axis {...props} />
+              <StackedAreaChart.Area {...props} />
+              <StackedAreaChart.Tooltip {...props} />
             </>
           )}
         </StackedAreaChart>

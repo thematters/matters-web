@@ -45,7 +45,7 @@ const Axis: React.FC<AxisProps> = ({
             }
           })
       )
-      .call((g) => g.selectAll('text').attr('y', '.625rem'))
+      .call((g) => g.selectAll('text').attr('y', 10))
       .call((g) => g.select('.domain').remove())
 
     // Draw Y Axis
@@ -57,7 +57,7 @@ const Axis: React.FC<AxisProps> = ({
           .tickSizeOuter(0)
           .tickFormat((d, index) => (index % 2 ? `${d3Format('d')(d)}` : ``))
       )
-      .call((g) => g.selectAll('text').attr('x', '-.75rem'))
+      .call((g) => g.selectAll('text').attr('x', -12))
       .call((g) => g.select('.domain').remove())
   }, [xScale, yScale])
 
