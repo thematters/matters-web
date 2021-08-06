@@ -6,6 +6,7 @@ import _get from 'lodash/get'
 import {
   EmptyWarning,
   Head,
+  Help,
   InfiniteScroll,
   List,
   QueryError,
@@ -17,6 +18,7 @@ import { analytics, mergeConnections } from '~/common/utils'
 
 import { FOLLOWING_FEED } from './gql'
 import RecommendArticleActivity from './RecommendArticleActivity'
+import styles from './styles.css'
 import UserAddArticleTagActivity from './UserAddArticleTagActivity'
 import UserBookmarkArticleActivity from './UserBookmarkArticleActivity'
 import UserBroadcastCircleActivity from './UserBroadcastCircleActivity'
@@ -143,6 +145,10 @@ const FollowingFeed = () => {
     <>
       <Head title={{ id: 'follow' }} />
 
+      <section className="help">
+        <Help hasTime />
+      </section>
+
       <InfiniteScroll
         hasNextPage={pageInfo.hasNextPage}
         loadMore={loadMore}
@@ -197,6 +203,8 @@ const FollowingFeed = () => {
           ))}
         </List>
       </InfiniteScroll>
+
+      <style jsx>{styles}</style>
     </>
   )
 }
