@@ -2,13 +2,22 @@ import { useQuery } from '@apollo/react-hooks'
 import _get from 'lodash/get'
 import { useState } from 'react'
 
-import { List, QueryError, Spinner, useRoute } from '~/components'
+import {
+  IconContentAnalytics24,
+  List,
+  QueryError,
+  Spinner,
+  TextIcon,
+  Translate,
+  useRoute,
+} from '~/components'
 
 import ContentDigest from './ContentDigest'
 import CircleContentAnalyticsTabs, {
   CircleContentAnalyticsType,
 } from './ContentTabs'
 import { CIRCLE_CONTENT_ANALYTICS } from './gql'
+import styles from './styles.css'
 
 import {
   CircleContentAnalyticsPaywall,
@@ -73,9 +82,26 @@ const CircleContentAnalytics = () => {
 
   return (
     <section className="container">
+      <section className="head">
+        <TextIcon
+          icon={<IconContentAnalytics24 size="md" />}
+          size="xm"
+          spacing="tight"
+          weight="md"
+        >
+          <Translate
+            zh_hant="閱讀次數排行"
+            zh_hans="閱讀次數排行"
+            en="Read Counts Ranking"
+          />
+        </TextIcon>
+      </section>
+
       <CircleContentAnalyticsTabs type={type} setType={setType} />
 
       <Feed type={type} />
+
+      <style jsx>{styles}</style>
     </section>
   )
 }
