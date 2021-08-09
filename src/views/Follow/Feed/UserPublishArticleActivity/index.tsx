@@ -1,6 +1,7 @@
 import {
   ArticleDigestFeed,
   CircleDigest,
+  IconDisallow16,
   Translate,
   UserDigest,
 } from '~/components'
@@ -35,6 +36,7 @@ const UserPublishArticleActivity = ({
     article={node}
     date={createdAt}
     morePublicActions={<UnfollowUserActionButton user={actor} />}
+    icon={<IconDisallow16 />}
   />
 )
 
