@@ -18,27 +18,15 @@ import { analytics, mergeConnections } from '~/common/utils'
 
 import { FOLLOWING_FEED } from './gql'
 import RecommendArticleActivity from './RecommendArticleActivity'
+import RecommendCircleActivity from './RecommendCircleActivity'
+import RecommendUserActivity from './RecommendUserActivity'
 import styles from './styles.css'
 import UserAddArticleTagActivity from './UserAddArticleTagActivity'
-import UserBookmarkArticleActivity from './UserBookmarkArticleActivity'
 import UserBroadcastCircleActivity from './UserBroadcastCircleActivity'
-import UserCollectArticleActivity from './UserCollectArticleActivity'
 import UserCreateCircleActivity from './UserCreateCircleActivity'
-import UserDonateArticleActivity from './UserDonateArticleActivity'
-import UserFollowUserActivity from './UserFollowUserActivity'
 import UserPublishArticleActivity from './UserPublishArticleActivity'
-import UserSubscribeCircleActivity from './UserSubscribeCircleActivity'
 
-import {
-  FollowingFeed as FollowingFeedType,
-  FollowingFeed_viewer_recommendation_following_edges,
-  FollowingFeed_viewer_recommendation_readTagsArticles_edges,
-} from './__generated__/FollowingFeed'
-
-const RECOMMEND_APPEND_EVERY = 3
-
-type FollowingEdge = FollowingFeed_viewer_recommendation_following_edges
-type RecommendEdge = FollowingFeed_viewer_recommendation_readTagsArticles_edges
+import { FollowingFeed as FollowingFeedType } from './__generated__/FollowingFeed'
 
 const FollowingFeed = () => {
   const { data, loading, error, fetchMore, refetch } =
@@ -54,9 +42,6 @@ const FollowingFeed = () => {
 
   const connectionPath = 'viewer.recommendation.following'
   const { edges, pageInfo } = data?.viewer?.recommendation.following || {}
-  const recommendConnectionPath = 'viewer.recommendation.readTagsArticles'
-  const { edges: recommendEdges, pageInfo: recommendPageInfo } =
-    data?.viewer?.recommendation.readTagsArticles || {}
 
   if (!edges || edges.length <= 0 || !pageInfo) {
     return (
@@ -82,64 +67,19 @@ const FollowingFeed = () => {
       location: edges.length,
     })
 
-    const { hasNextPage: recommendHasNextPage, endCursor: recommendEndCursor } =
-      recommendPageInfo || {}
-
     return fetchMore({
       variables: {
-        followingAfter: pageInfo.endCursor,
-        ...(recommendHasNextPage && recommendEndCursor
-          ? { recommendAfter: recommendEndCursor }
-          : {}),
+        after: pageInfo.endCursor,
       },
       updateQuery: (previousResult, { fetchMoreResult }) => {
-        let prevResult = previousResult
-        if (recommendHasNextPage && recommendEndCursor) {
-          prevResult = mergeConnections({
-            oldData: prevResult,
-            newData: fetchMoreResult,
-            path: recommendConnectionPath,
-          })
-        }
-
         return mergeConnections({
-          oldData: prevResult,
+          oldData: previousResult,
           newData: fetchMoreResult,
           path: connectionPath,
         })
       },
     })
   }
-
-  // every 3 following activities append with 1 recommending article
-  const mixEdges = _flatten(
-    _chunk(edges, RECOMMEND_APPEND_EVERY).map((chunk, index) => {
-      const recommendEdge = recommendEdges && recommendEdges[index]
-      return chunk.length === RECOMMEND_APPEND_EVERY && recommendEdge
-        ? [...chunk, recommendEdge]
-        : chunk
-    })
-  )
-
-  // deduplicate edges with same `node.node`
-  const dedupedNodeIds: string[] = []
-  const dedupedEdges: (FollowingEdge | RecommendEdge)[] = []
-  mixEdges.forEach((edge) => {
-    const { node } = edge
-    const nodeId =
-      _get(node, 'id') ||
-      _get(node, 'nodeArticle.id') ||
-      _get(node, 'nodeComment.id') ||
-      _get(node, 'nodeUser.id') ||
-      _get(node, 'nodeCircle.id') ||
-      ''
-    const hasSameNode = dedupedNodeIds.indexOf(nodeId) >= 0
-
-    if (!hasSameNode) {
-      dedupedNodeIds.push(nodeId)
-      dedupedEdges.push(edge)
-    }
-  })
 
   return (
     <>
@@ -155,23 +95,17 @@ const FollowingFeed = () => {
         pullToRefresh={refetch}
       >
         <List>
-          {dedupedEdges.map(({ node, cursor }, i) => (
+          {edges.map(({ node, cursor }, i) => (
             <List.Item
               key={node.__typename + cursor}
               onClick={() => {
                 analytics.trackEvent('click_feed', {
                   type: 'following',
-                  contentType:
-                    node.__typename === 'Article'
-                      ? 'RecommendArticleActivity'
-                      : node.__typename,
+                  contentType: node.__typename,
                   location: i,
                 })
               }}
             >
-              {node.__typename === 'Article' && (
-                <RecommendArticleActivity article={node} />
-              )}
               {node.__typename === 'UserPublishArticleActivity' && (
                 <UserPublishArticleActivity {...node} />
               )}
@@ -181,23 +115,20 @@ const FollowingFeed = () => {
               {node.__typename === 'UserCreateCircleActivity' && (
                 <UserCreateCircleActivity {...node} />
               )}
-              {node.__typename === 'UserCollectArticleActivity' && (
-                <UserCollectArticleActivity {...node} />
-              )}
-              {node.__typename === 'UserSubscribeCircleActivity' && (
-                <UserSubscribeCircleActivity {...node} />
-              )}
-              {node.__typename === 'UserFollowUserActivity' && (
-                <UserFollowUserActivity {...node} />
-              )}
-              {node.__typename === 'UserDonateArticleActivity' && (
-                <UserDonateArticleActivity {...node} />
-              )}
-              {node.__typename === 'UserBookmarkArticleActivity' && (
-                <UserBookmarkArticleActivity {...node} />
-              )}
               {node.__typename === 'UserAddArticleTagActivity' && (
                 <UserAddArticleTagActivity {...node} />
+              )}
+              {node.__typename === 'ArticleRecommendationActivity' && (
+                <RecommendArticleActivity
+                  articles={node.recommendArticles}
+                  source={node.source}
+                />
+              )}
+              {node.__typename === 'CircleRecommendationActivity' && (
+                <RecommendCircleActivity circles={node.recommendCircles} />
+              )}
+              {node.__typename === 'UserRecommendationActivity' && (
+                <RecommendUserActivity users={node.recommendUsers} />
               )}
             </List.Item>
           ))}
