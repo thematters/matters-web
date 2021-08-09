@@ -9,7 +9,7 @@ import styles from './styles.css'
 
 import { AvatarCircle } from './__generated__/AvatarCircle'
 
-export type CircleAvatarSize = 'xl' | 'xxl'
+export type CircleAvatarSize = 'xl' | 'xxl' | 'xxxl'
 
 export interface CircleAvatarProps {
   circle?: AvatarCircle

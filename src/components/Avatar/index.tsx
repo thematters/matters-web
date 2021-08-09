@@ -11,7 +11,7 @@ import styles from './styles.css'
 
 import { AvatarUser } from './__generated__/AvatarUser'
 
-export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
+export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxxl'
 
 export interface AvatarProps {
   user?: AvatarUser

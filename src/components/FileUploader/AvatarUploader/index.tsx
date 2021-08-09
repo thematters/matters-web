@@ -123,8 +123,8 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
 
   return (
     <label className={labelClasses} htmlFor={fieldId}>
-      {!isCircle && <Avatar size="xxl" {...avatarProps} src={avatar} />}
-      {isCircle && <CircleAvatar size="xxl" {...avatarProps} src={avatar} />}
+      {!isCircle && <Avatar size="xxxl" {...avatarProps} src={avatar} />}
+      {isCircle && <CircleAvatar size="xxxl" {...avatarProps} src={avatar} />}
 
       <div className="mask">
         {loading ? <Spinner /> : <IconCamera24 color="white" size="lg" />}
