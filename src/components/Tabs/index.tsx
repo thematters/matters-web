@@ -37,19 +37,21 @@ const Tab: React.FC<TabProps> = ({ selected, children, ...buttonProps }) => {
 
 interface TabsProps {
   sticky?: boolean
+  side?: React.ReactNode
 }
 
 export const Tabs: React.FC<TabsProps> & {
   Tab: typeof Tab
-} = ({ sticky, children }) => {
+} = ({ sticky, side, children }) => {
   const navClasses = classNames({
     sticky,
+    hasSide: !!side,
   })
 
   return (
     <nav className={navClasses}>
       <ul role="tablist">{children}</ul>
-
+      {side}
       <style jsx>{styles}</style>
     </nav>
   )
