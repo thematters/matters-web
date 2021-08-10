@@ -38,7 +38,7 @@ const BaseDropdownActions = ({ actions }: BaseDropdownActionsProps) => {
           onClick={openDialog}
           ref={ref}
         >
-          <IconUnfollow24 style={{ width: '1.125rem', height: '1.125rem'}} />
+          <IconUnfollow24 style={{ width: '1.125rem', height: '1.125rem' }} />
         </Button>
       )}
     </DropdownDialog>

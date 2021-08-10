@@ -36,7 +36,7 @@ const UserPublishArticleActivity = ({
     article={node}
     date={createdAt}
     morePublicActions={<UnfollowUserActionButton user={actor} />}
-    icon={<IconUnfollow24 style={{ width: '1.125rem', height: '1.125rem' }}/>}
+    icon={<IconUnfollow24 style={{ width: '1.125rem', height: '1.125rem' }} />}
   />
 )
 
