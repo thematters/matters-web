@@ -3,6 +3,7 @@ import { Slides } from '~/components'
 import FollowingRecommendArticle from '../FollowingRecommendArticle'
 import FollowingRecommendHead from '../FollowingRecommendHead'
 import { fragments } from './gql'
+import styles from './styles.css'
 
 import { ArticleRecommendationActivitySource } from '@/__generated__/globalTypes'
 import { RecommendArticleActivity_recommendArticles } from './__generated__/RecommendArticleActivity'
@@ -26,11 +27,13 @@ const RecommendArticleActivity = ({ articles, source }: Props) => {
     >
       {articles.map((article, index) => (
         <Slides.Item size="md" key={index}>
-          <section>
+          <section className="item">
             <FollowingRecommendArticle article={article} />
           </section>
         </Slides.Item>
       ))}
+
+      <style jsx>{styles}</style>
     </Slides>
   )
 }

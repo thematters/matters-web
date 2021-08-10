@@ -3,6 +3,7 @@ import { Slides } from '~/components'
 import FollowingRecommendCircle from '../FollowingRecommendCircle'
 import FollowingRecommendHead from '../FollowingRecommendHead'
 import { fragments } from './gql'
+import styles from './styles.css'
 
 import { RecommendCircleActivity_recommendCircles } from './__generated__/RecommendCircleActivity'
 
@@ -22,11 +23,12 @@ const RecommendCircleActivity = ({ circles }: Props) => {
     >
       {circles.map((circle, index) => (
         <Slides.Item size="md" key={index}>
-          <section>
+          <section className="item">
             <FollowingRecommendCircle circle={circle} />
           </section>
         </Slides.Item>
       ))}
+      <style jsx>{styles}</style>
     </Slides>
   )
 }

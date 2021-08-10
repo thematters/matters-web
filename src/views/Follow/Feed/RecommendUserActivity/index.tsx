@@ -3,6 +3,7 @@ import { Slides } from '~/components'
 import FollowingRecommendHead from '../FollowingRecommendHead'
 import FollowingRecommendUser from '../FollowingRecommendUser'
 import { fragments } from './gql'
+import styles from './styles.css'
 
 import { RecommendUserActivity_recommendUsers } from './__generated__/RecommendUserActivity'
 
@@ -22,11 +23,12 @@ const RecommendUserActivity = ({ users }: Props) => {
     >
       {users.map((user, index) => (
         <Slides.Item size="md" key={index}>
-          <section>
+          <section className="item">
             <FollowingRecommendUser user={user} />
           </section>
         </Slides.Item>
       ))}
+      <style jsx>{styles}</style>
     </Slides>
   )
 }
