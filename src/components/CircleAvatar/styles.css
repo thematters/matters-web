@@ -23,8 +23,18 @@
   }
 }
 
-/* 72px */
+/* 56px */
 .xxl {
+  width: 3.5rem;
+  height: 3.5rem;
+
+  & :global(img) {
+    border-radius: 1rem;
+  }
+}
+
+/* 72px */
+.xxxl {
   width: 4.5rem;
   height: 4.5rem;
 

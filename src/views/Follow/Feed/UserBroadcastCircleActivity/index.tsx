@@ -1,5 +1,6 @@
 import { CircleDigest, Translate, UserDigest } from '~/components'
 
+import UnfollowCircleActionButton from '../DropdownActions/UnfollowCircle'
 import FeedComment from '../FollowingFeedComment'
 import FeedHead from '../FollowingFeedHead'
 import { fragments } from './gql'
@@ -24,6 +25,7 @@ const UserBroadcastCircleActivity = ({
     }
     comment={node}
     date={createdAt}
+    actions={<UnfollowCircleActionButton circle={target} />}
   />
 )
 

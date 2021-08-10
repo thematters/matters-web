@@ -1,4 +1,4 @@
-import { ArticleDigestFeed, Tag, Translate } from '~/components'
+import { ArticleDigestFeed, IconDisallow16, Tag, Translate } from '~/components'
 
 import UnfollowTagActionButton from '../DropdownActions/UnfollowTag'
 import FeedHead from '../FollowingFeedHead'
@@ -28,6 +28,7 @@ const UserAddArticleTagActivity = ({
     article={node}
     date={createdAt}
     morePublicActions={<UnfollowTagActionButton tag={target} />}
+    icon={<IconDisallow16 />}
   />
 )
 

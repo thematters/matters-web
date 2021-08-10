@@ -17,7 +17,7 @@ export const Box: React.FC<Props> = ({
   return (
     <section className="container">
       <header>
-        <Avatar size="xxl" src={avatar} />
+        <Avatar size="xxxl" src={avatar} />
         <h1 className={titleAlign}>{title}</h1>
       </header>
 
