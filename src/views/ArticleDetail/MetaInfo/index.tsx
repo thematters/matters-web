@@ -53,7 +53,7 @@ const MetaInfo = ({
         </>
       )}
 
-      {article.sticky && <IconPaywall16 />}
+      {article.access.type === 'paywall' && <IconPaywall16 color="grey" />}
 
       <style jsx>{styles}</style>
     </section>
