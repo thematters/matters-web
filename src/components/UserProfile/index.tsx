@@ -146,7 +146,7 @@ export const UserProfile = () => {
 
           <header>
             <section className="avatar">
-              <Avatar size="xxl" />
+              <Avatar size="xxxl" />
             </section>
           </header>
 
@@ -177,7 +177,7 @@ export const UserProfile = () => {
 
         <header>
           <section className="avatar">
-            <Avatar size="xxl" user={user} />
+            <Avatar size="xxxl" user={user} />
           </section>
 
           {!isMe && <FollowUserButton user={user} size="lg" />}

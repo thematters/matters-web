@@ -8,6 +8,7 @@ import {
 } from '~/components'
 
 import DropdownActions, { DropdownActionsControls } from '../../DropdownActions'
+import DonationCount from './DonationCount'
 import { fragments } from './gql'
 import ReadTime from './ReadTime'
 import styles from './styles.css'
@@ -23,11 +24,14 @@ export type FooterActionsProps = {
 
 const FooterActions = ({ article, date, ...controls }: FooterActionsProps) => {
   const hasDate = date !== false
+  const hasDonation = article.transactionsReceivedBy.totalCount > 0
 
   return (
     <footer>
       <section className="left">
-        <ReadTime article={article} hasDate={hasDate} />
+        <ReadTime article={article} hasDivider={hasDate || hasDonation} />
+
+        <DonationCount article={article} hasDivider={hasDate} />
 
         {hasDate && <DateTime date={date || article.createdAt} />}
 

@@ -139,6 +139,9 @@ type ActivityType =
   | 'UserBookmarkArticleActivity'
   | 'UserAddArticleTagActivity'
   | 'RecommendArticleActivity'
+  | 'ArticleRecommendationActivity'
+  | 'CircleRecommendationActivity'
+  | 'UserRecommendationActivity'
 
 // feed type
 type FeedType =

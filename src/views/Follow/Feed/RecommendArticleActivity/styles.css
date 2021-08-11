@@ -1,0 +1,12 @@
+:root {
+  --recommend-article-card-height: 163px;
+}
+
+.item {
+  border-radius: var(--spacing-x-tight);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+
+  & :global(.card) {
+    height: var(--recommend-article-card-height);
+  }
+}

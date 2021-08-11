@@ -38,7 +38,7 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
       <Button
         spacing={['xtight', 'xtight']}
         bgActiveColor="grey-lighter"
-        aria-label="讚賞作品"
+        aria-label={`讚賞作品 讚賞數量 ${total > 0 ? total : 0}`}
         disabled={disabled}
         onClick={() => {
           if (iconRef.current) {
