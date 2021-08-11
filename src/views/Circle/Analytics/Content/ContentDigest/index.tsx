@@ -49,13 +49,16 @@ const ContentDigest = ({
     <Card {...path} spacing={[0, 0]}>
       <section className="container">
         <section className="number">{index + 1}</section>
+
         <section className="article">
           <section className="content">
             <section className="title-wrap">
               <p className="title">{title}</p>
             </section>
+
             <Count count={count} />
           </section>
+
           <DateTime date={createdAt} />
         </section>
       </section>

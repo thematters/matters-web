@@ -90,8 +90,8 @@ const CircleContentAnalytics = () => {
           weight="md"
         >
           <Translate
-            zh_hant="閱讀次數排行"
-            zh_hans="閱讀次數排行"
+            zh_hant="站內閱讀熱門排行"
+            zh_hans="站内阅读热门排行"
             en="Read Counts Ranking"
           />
         </TextIcon>
