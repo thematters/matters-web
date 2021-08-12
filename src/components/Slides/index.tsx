@@ -1,4 +1,5 @@
 import classNames from 'classnames'
+import { useEmblaCarousel } from 'embla-carousel/react'
 
 import styles from './styles.css'
 
@@ -29,6 +30,13 @@ export const Slides: React.FC<SlidesProps> & { Item: typeof SlideItem } = ({
   header,
   children,
 }) => {
+  const [emblaRef] = useEmblaCarousel({
+    dragFree: true,
+    draggable: true,
+    loop: false,
+    containScroll: 'trimSnaps',
+  })
+
   const slidesClasses = classNames({
     slides: true,
     [`bg-${bgColor}`]: !!bgColor,
@@ -38,7 +46,9 @@ export const Slides: React.FC<SlidesProps> & { Item: typeof SlideItem } = ({
     <section className={slidesClasses}>
       {header}
 
-      <ul>{children}</ul>
+      <section className="wrap" ref={emblaRef}>
+        <ul>{children}</ul>
+      </section>
 
       <style jsx>{styles}</style>
     </section>
