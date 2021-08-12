@@ -6,8 +6,6 @@
 
     display: flex;
     margin-right: calc(var(--spacing-base) * -1);
-    -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x mandatory;
 
     & li {
       position: relative;
@@ -23,6 +21,8 @@
   @mixin hide-scrollbar;
 
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
 }
 
 .bg-yellow-lighter {
