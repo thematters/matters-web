@@ -29,3 +29,6 @@ export * from './UnsubscribeCircleDialog'
 // Misc
 export * from './GoogleSearchDialog'
 export * from './PaymentPointerDialog'
+
+// Help
+export * from './HelpDialog'

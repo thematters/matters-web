@@ -1,7 +1,7 @@
 import _isEmpty from 'lodash/isEmpty'
 import _pickBy from 'lodash/pickBy'
 
-import { Button, DropdownDialog, IconMore16, Menu } from '~/components'
+import { Button, DropdownDialog, IconUnfollow24, Menu } from '~/components'
 
 import { TEXT } from '~/common/enums'
 
@@ -38,7 +38,7 @@ const BaseDropdownActions = ({ actions }: BaseDropdownActionsProps) => {
           onClick={openDialog}
           ref={ref}
         >
-          <IconMore16 />
+          <IconUnfollow24 style={{ width: '1.125rem', height: '1.125rem' }} />
         </Button>
       )}
     </DropdownDialog>

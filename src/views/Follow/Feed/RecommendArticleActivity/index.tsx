@@ -1,29 +1,40 @@
-import { ArticleDigestFeed, Tag, Translate } from '~/components'
+import { Slides } from '~/components'
 
-import FeedHead from '../FollowingFeedHead'
+import FollowingRecommendArticle from '../FollowingRecommendArticle'
+import FollowingRecommendHead from '../FollowingRecommendHead'
 import { fragments } from './gql'
+import styles from './styles.css'
 
-import { RecommendArticleActivity as Activity } from './__generated__/RecommendArticleActivity'
+import { ArticleRecommendationActivitySource } from '@/__generated__/globalTypes'
+import { RecommendArticleActivity_recommendArticles } from './__generated__/RecommendArticleActivity'
 
-const RecommendArticleActivity = ({ article }: { article: Activity }) => {
-  const tag = article.tags && article.tags[0]
+interface Props {
+  articles: RecommendArticleActivity_recommendArticles[] | null
+  source: ArticleRecommendationActivitySource | null
+}
+
+const RecommendArticleActivity = ({ articles, source }: Props) => {
+  if (!articles || articles.length <= 0 || !source) {
+    return null
+  }
+
+  const type = source === 'UserDonation' ? 'article' : 'recommend'
 
   return (
-    <ArticleDigestFeed
-      header={
-        tag && (
-          <FeedHead>
-            <span>
-              <Translate zh_hant="發布於" zh_hans="发布于" en="published on" />
-            </span>
-            <Tag type="plain" tag={tag} textSize="sm-s" iconSize="sm-s" />
-          </FeedHead>
-        )
-      }
-      hasFollow
-      article={article}
-      date={false}
-    />
+    <Slides
+      bgColor="grey-lighter"
+      header={<FollowingRecommendHead type={type} />}
+    >
+      {articles.map((article, index) => (
+        <Slides.Item size="md" key={index}>
+          <section className="item">
+            <FollowingRecommendArticle article={article} />
+          </section>
+        </Slides.Item>
+      ))}
+
+      <style jsx>{styles}</style>
+    </Slides>
   )
 }
 

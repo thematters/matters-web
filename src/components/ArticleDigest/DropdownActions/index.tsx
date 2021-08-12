@@ -37,6 +37,7 @@ import StickyButton from './StickyButton'
 import { DropdownActionsArticle } from './__generated__/DropdownActionsArticle'
 
 export interface DropdownActionsControls {
+  icon?: React.ReactNode
   size?: IconSize
 
   /**
@@ -87,6 +88,7 @@ type BaseDropdownActionsProps = DropdownActionsProps & Controls & DialogProps
 const BaseDropdownActions = ({
   article,
 
+  icon,
   size,
   inCard,
 
@@ -170,7 +172,7 @@ const BaseDropdownActions = ({
           onClick={openDialog}
           ref={ref}
         >
-          <IconMore16 size={size} />
+          {icon ? icon : <IconMore16 size={size} />}
         </Button>
       )}
     </DropdownDialog>

@@ -1,4 +1,4 @@
-import { Tabs, Translate } from '~/components'
+import { Help, Tabs, Translate } from '~/components'
 
 export type SortByType = 'hottest' | 'newest' | 'icymi'
 
@@ -13,7 +13,7 @@ const SortBy: React.FC<SortByProps> = ({ sortBy, setSortBy }) => {
   const isICYMI = sortBy === 'icymi'
 
   return (
-    <Tabs sticky>
+    <Tabs sticky side={<Help hasTime />}>
       <Tabs.Tab onClick={() => setSortBy('hottest')} selected={isHottest}>
         <Translate zh_hant="熱門" zh_hans="热门" en="Trending" />
       </Tabs.Tab>
