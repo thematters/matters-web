@@ -71,6 +71,7 @@ export * from './FileUploader'
 export * from './Term'
 export * from './OnboardingTasks'
 export * from './TagDigest'
+export * from './Help'
 
 export * from './CircleInvitation'
 export * from './FreePeriod'

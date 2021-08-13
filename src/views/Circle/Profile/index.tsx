@@ -139,7 +139,7 @@ const CircleProfile = () => {
 
         <header>
           <section className="info">
-            <CircleAvatar size="xxl" circle={circle} />
+            <CircleAvatar size="xxxl" circle={circle} />
             <h2 className="name">{circle.displayName}</h2>
           </section>
 

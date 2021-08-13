@@ -1,4 +1,4 @@
-import { ArticleDigestFeed, Tag, Translate } from '~/components'
+import { ArticleDigestFeed, IconUnfollow24, Tag, Translate } from '~/components'
 
 import UnfollowTagActionButton from '../DropdownActions/UnfollowTag'
 import FeedHead from '../FollowingFeedHead'
@@ -16,8 +16,8 @@ const UserAddArticleTagActivity = ({
       <FeedHead>
         <span>
           <Translate
-            zh_hant="添加精選於"
-            zh_hans="添加精选于"
+            zh_hant="追蹤標籤有新作品"
+            zh_hans="追踪标签有新作品"
             en="selected by"
           />
         </span>
@@ -28,6 +28,7 @@ const UserAddArticleTagActivity = ({
     article={node}
     date={createdAt}
     morePublicActions={<UnfollowTagActionButton tag={target} />}
+    icon={<IconUnfollow24 style={{ width: '1.125rem', height: '1.125rem' }} />}
   />
 )
 

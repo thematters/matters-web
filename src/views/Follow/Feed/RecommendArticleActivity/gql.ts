@@ -1,16 +1,15 @@
 import gql from 'graphql-tag'
 
-import { ArticleDigestFeed, Tag } from '~/components'
+import FollowingRecommendArticle from '../FollowingRecommendArticle'
 
 export const fragments = gql`
-  fragment RecommendArticleActivity on Article {
-    ...ArticleDigestFeedArticlePublic
-    ...ArticleDigestFeedArticlePrivate
-    tags {
-      ...DigestTag
+  fragment RecommendArticleActivity on ArticleRecommendationActivity {
+    source
+    recommendArticles: nodes {
+      ...FollowingFeedRecommendArticlePublic
+      ...FollowingFeedRecommendArticlePrivate
     }
   }
-  ${ArticleDigestFeed.fragments.article.public}
-  ${ArticleDigestFeed.fragments.article.private}
-  ${Tag.fragments.tag}
+  ${FollowingRecommendArticle.fragments.article.public}
+  ${FollowingRecommendArticle.fragments.article.private}
 `

@@ -89,8 +89,23 @@
   }
 }
 
-/* 72px */
+/* 56px */
 .xxl {
+  width: 3.5rem;
+  height: 3.5rem;
+
+  &.hasRing {
+    & .ring {
+      top: -6px;
+      right: -6px;
+      bottom: -6px;
+      left: -6px;
+    }
+  }
+}
+
+/* 72px */
+.xxxl {
   width: 4.5rem;
   height: 4.5rem;
 

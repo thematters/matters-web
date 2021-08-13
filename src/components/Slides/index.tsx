@@ -1,4 +1,6 @@
 import classNames from 'classnames'
+import { useEmblaCarousel } from 'embla-carousel/react'
+import { useEffect, useState } from 'react'
 
 import styles from './styles.css'
 
@@ -29,16 +31,51 @@ export const Slides: React.FC<SlidesProps> & { Item: typeof SlideItem } = ({
   header,
   children,
 }) => {
+  const [scrolling, setScrolling] = useState(false)
+  const [settled, setSettled] = useState(true)
+
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    dragFree: true,
+    draggable: true,
+    loop: false,
+    containScroll: 'trimSnaps',
+  })
+
   const slidesClasses = classNames({
     slides: true,
     [`bg-${bgColor}`]: !!bgColor,
   })
 
+  const onCaptureClick = (event: any) => {
+    if (scrolling) {
+      event.preventDefault()
+      event.stopPropagation()
+    }
+  }
+
+  useEffect(() => {
+    if (emblaApi) {
+      emblaApi.on('scroll', (event) => {
+        if (!scrolling && settled) {
+          setScrolling(true)
+          setSettled(false)
+        }
+      })
+
+      emblaApi.on('settle', (event) => {
+        setScrolling(false)
+        setSettled(true)
+      })
+    }
+  }, [emblaApi])
+
   return (
     <section className={slidesClasses}>
       {header}
 
-      <ul>{children}</ul>
+      <section className="wrap" ref={emblaRef} onClickCapture={onCaptureClick}>
+        <ul>{children}</ul>
+      </section>
 
       <style jsx>{styles}</style>
     </section>

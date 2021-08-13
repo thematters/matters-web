@@ -51,6 +51,15 @@
   }
 }
 
+.bg-active-none {
+  &:not(.disabled) {
+    &:hover,
+    &:focus {
+      background: var(--color-white);
+    }
+  }
+}
+
 /* Spacing */
 .spacing-y-xtight {
   padding-top: var(--spacing-x-tight);
