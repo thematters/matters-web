@@ -1,0 +1,24 @@
+svg {
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.xAxis,
+.yAxis {
+  & :global(text) {
+    font-size: var(--font-size-xs);
+    color: var(--color-grey);
+  }
+}
+
+.xAxis {
+  & :global(.tick:last-of-type text) {
+    text-anchor: end;
+  }
+}
+
+.yAxis {
+  & :global(line) {
+    stroke: rgba(13, 103, 99, 0.08);
+  }
+}
