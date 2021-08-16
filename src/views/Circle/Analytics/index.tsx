@@ -1,6 +1,9 @@
 import { Head, Layout } from '~/components'
 
-import CircleContentAnalytics from './Content'
+import ContentAnalytics from './Content'
+import FollowerAnalytics from './Follower'
+import IncomeAnalytics from './Income'
+import SubscriberAnalytics from './Subscriber'
 
 const CircleAnalytics = () => {
   return (
@@ -12,7 +15,10 @@ const CircleAnalytics = () => {
 
       <Head title={{ id: 'circleAnalytics' }} />
 
-      <CircleContentAnalytics />
+      <IncomeAnalytics />
+      <SubscriberAnalytics />
+      <FollowerAnalytics />
+      <ContentAnalytics />
     </Layout.Main>
   )
 }

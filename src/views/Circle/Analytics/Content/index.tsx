@@ -3,14 +3,16 @@ import _get from 'lodash/get'
 import { useState } from 'react'
 
 import {
-  IconContentAnalytics24,
   List,
   QueryError,
   Spinner,
   TextIcon,
   Translate,
   useRoute,
+  withIcon,
 } from '~/components'
+
+import { ReactComponent as IconAnalyticsContent24 } from '@/public/static/icons/24px/analytics-content.svg'
 
 import ContentDigest from './ContentDigest'
 import CircleContentAnalyticsTabs, {
@@ -84,7 +86,7 @@ const CircleContentAnalytics = () => {
     <section className="container">
       <section className="head">
         <TextIcon
-          icon={<IconContentAnalytics24 size="md" />}
+          icon={withIcon(IconAnalyticsContent24)({ size: 'md' })}
           size="xm"
           spacing="tight"
           weight="md"
