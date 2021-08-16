@@ -1,0 +1,77 @@
+:root {
+  --announcement-height: 7.5rem;
+}
+
+.outer {
+  position: relative;
+  width: 100%;
+  padding: 1rem 1rem 0;
+}
+
+.viewport {
+  width: 100%;
+  overflow: hidden;
+
+  &.is-draggable {
+    cursor: move;
+    cursor: grab;
+  }
+
+  &.is-dragging {
+    cursor: grabbing;
+  }
+}
+
+.container {
+  display: flex;
+  margin-left: -8px;
+}
+
+.slide {
+  position: relative;
+  min-width: 100%;
+  padding-left: 8px;
+}
+
+.slide_inner {
+  position: relative;
+  height: var(--announcement-height);
+  overflow: hidden;
+  border-radius: 1rem;
+}
+
+.dots {
+  @mixin flex-center-all;
+
+  position: absolute;
+  right: 0;
+  bottom: var(--spacing-x-tight);
+  left: 0;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  margin: 0 0.2rem;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 100%;
+
+  &.selected {
+    background: rgba(255, 255, 255, 0.8);
+  }
+}
+
+.close {
+  position: absolute;
+  top: var(--spacing-base);
+  right: var(--spacing-base);
+  padding: var(--spacing-x-tight);
+}
+
+.type {
+  position: absolute;
+  top: 1.25rem;
+  right: 3.5rem;
+  padding: var(--spacing-x-tight);
+}

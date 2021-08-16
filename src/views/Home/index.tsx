@@ -15,6 +15,8 @@ import Feed from './Feed'
 import Sidebar from './Sidebar'
 import styles from './styles.css'
 
+const DynamicAnnouncements = dynamic(() => import('./Announcements'))
+
 const DynamicCircleBanner = dynamic(() => import('./CircleBanner'), {
   ssr: false,
 })
@@ -56,6 +58,8 @@ const Home = () => {
           }
         />
       )}
+
+      <DynamicAnnouncements />
 
       <DynamicCircleBanner />
 
