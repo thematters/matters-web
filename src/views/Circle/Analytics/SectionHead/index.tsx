@@ -12,14 +12,16 @@ type SectionHeadProps = {
 const SectionHead: React.FC<SectionHeadProps> = ({ icon, title }) => {
   return (
     <section className="head">
-      <TextIcon
-        icon={withIcon(icon)({ size: 'md' })}
-        size="xm"
-        spacing="tight"
-        weight="md"
-      >
-        {title}
-      </TextIcon>
+      <h2>
+        <TextIcon
+          icon={withIcon(icon)({ size: 'md' })}
+          size="xm"
+          spacing="tight"
+          weight="md"
+        >
+          {title}
+        </TextIcon>
+      </h2>
 
       <style jsx>{styles}</style>
     </section>

@@ -4,6 +4,7 @@ import {
   Card,
   DateTime,
   IconRead16,
+  LinkWrapper,
   TextIcon,
   Tooltip,
   Translate,
@@ -53,7 +54,9 @@ const ContentDigest = ({
         <section className="article">
           <section className="content">
             <section className="title-wrap">
-              <p className="title">{title}</p>
+              <LinkWrapper {...path} textActiveColor="green">
+                <h3 className="title">{title}</h3>
+              </LinkWrapper>
             </section>
 
             <Count count={count} />

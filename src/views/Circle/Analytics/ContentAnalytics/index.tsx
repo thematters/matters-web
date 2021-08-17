@@ -83,7 +83,7 @@ const CircleContentAnalytics = () => {
           <Translate
             zh_hant="站內閱讀熱門排行"
             zh_hans="站内阅读热门排行"
-            en="Read Counts Ranking"
+            en="Hottest"
           />
         }
       />

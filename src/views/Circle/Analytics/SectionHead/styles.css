@@ -4,3 +4,7 @@
   padding: var(--spacing-loose) var(--spacing-base) 0;
   margin-bottom: var(--spacing-base);
 }
+
+h2 {
+  line-height: 1;
+}
