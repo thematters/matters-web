@@ -6,15 +6,15 @@ import {
   QueryError,
   Spinner,
   StackedAreaChart,
-  TextIcon,
   Translate,
   useRoute,
-  withIcon,
 } from '~/components'
 
 import { ReactComponent as IconAnalyticsSubscriber24 } from '@/public/static/icons/24px/analytics-subscriber.svg'
 import { translate } from '@/src/common/utils'
 
+import InfoTiles from '../InfoTiles'
+import SectionHead from '../SectionHead'
 import { CIRCLE_SUBSCRIBER_ANALYTICS } from './gql'
 import styles from './styles.css'
 
@@ -94,52 +94,42 @@ const Content = () => {
   }
 
   return (
-    <section className="content">
-      <section className="tiles">
-        <ul>
-          <li>
-            <h3>
+    <>
+      <InfoTiles>
+        <InfoTiles.Group primary>
+          <InfoTiles.Tile
+            title={
               <Translate
                 zh_hant="目前總訂閱人數"
                 zh_hans="目前总订阅人数"
                 en="Current Total"
               />
-            </h3>
-            <p>
-              {subscriber.currentSubscriber + subscriber.currentInvitee}{' '}
-              <span className="unit">
-                <Translate zh_hant="人" zh_hans="人" en="" />
-              </span>
-            </p>
-          </li>
-          <li>
-            <h3>
+            }
+            value={subscriber.currentSubscriber + subscriber.currentInvitee}
+            unit={<Translate zh_hant="人" zh_hans="人" en="" />}
+          />
+        </InfoTiles.Group>
+        <InfoTiles.Group>
+          <InfoTiles.Tile
+            title={
               <Translate
                 zh_hant="付費人數"
                 zh_hans="付费人数"
                 en="Subscribers"
               />
-            </h3>
-            <p>
-              {subscriber.currentSubscriber}{' '}
-              <span className="unit">
-                <Translate zh_hant="人" zh_hans="人" en="" />
-              </span>
-            </p>
-          </li>
-          <li className="divider">
-            <h3>
+            }
+            value={subscriber.currentSubscriber}
+            unit={<Translate zh_hant="人" zh_hans="人" en="" />}
+          />
+          <InfoTiles.Tile
+            title={
               <Translate zh_hant="免費邀請" zh_hans="免费邀请" en="Invitees" />
-            </h3>
-            <p>
-              {subscriber.currentInvitee}{' '}
-              <span className="unit">
-                <Translate zh_hant="人" zh_hans="人" en="" />
-              </span>
-            </p>
-          </li>
-        </ul>
-      </section>
+            }
+            value={subscriber.currentInvitee}
+            unit={<Translate zh_hant="人" zh_hans="人" en="" />}
+          />
+        </InfoTiles.Group>
+      </InfoTiles>
 
       {chartData && (
         <section className="chart">
@@ -159,23 +149,17 @@ const Content = () => {
       )}
 
       <style jsx>{styles}</style>
-    </section>
+    </>
   )
 }
 
 const SubscriberAnalytics = () => {
   return (
     <section className="container">
-      <section className="head">
-        <TextIcon
-          icon={withIcon(IconAnalyticsSubscriber24)({ size: 'md' })}
-          size="xm"
-          spacing="tight"
-          weight="md"
-        >
-          <Translate zh_hant="訂閱" zh_hans="订阅" en="Subscribers" />
-        </TextIcon>
-      </section>
+      <SectionHead
+        icon={IconAnalyticsSubscriber24}
+        title={<Translate zh_hant="訂閱" zh_hans="订阅" en="Subscribers" />}
+      />
 
       <Content />
 

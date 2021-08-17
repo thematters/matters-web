@@ -5,15 +5,15 @@ import {
   QueryError,
   Spinner,
   StackedAreaChart,
-  TextIcon,
   Translate,
   useRoute,
-  withIcon,
 } from '~/components'
 
 import { ReactComponent as IconAnalyticsIncome24 } from '@/public/static/icons/24px/analytics-income.svg'
 import { toAmountString } from '@/src/common/utils'
 
+import InfoTiles from '../InfoTiles'
+import SectionHead from '../SectionHead'
 import { CIRCLE_INCOME_ANALYTICS } from './gql'
 import styles from './styles.css'
 
@@ -49,46 +49,55 @@ const Content = () => {
     value: datum.value,
   }))
 
+  const percentageChangeLastMonth =
+    ((income.lastMonth - income.history[income.history.length - 2].value) /
+      income.lastMonth) *
+    100
+
+  const percentageChangeThisMonth =
+    ((income.thisMonth - income.history[income.history.length - 1].value) /
+      income.thisMonth) *
+    100
+
   return (
-    <section className="content">
-      <section className="tiles">
-        <ul>
-          <li>
-            <h3>
+    <>
+      <InfoTiles>
+        <InfoTiles.Group primary>
+          <InfoTiles.Tile
+            title={
               <Translate
                 zh_hant="上月營收"
                 zh_hans="上月营收"
                 en="Last Month"
               />
-            </h3>
-            <p>
-              {toAmountString(income.lastMonth)}{' '}
-              <span className="unit">HKD</span>
-            </p>
-          </li>
-          <li>
-            <h3>
+            }
+            value={toAmountString(income.lastMonth)}
+            unit="HKD"
+            percentageChange={percentageChangeLastMonth}
+          />
+          <InfoTiles.Tile
+            title={
               <Translate
                 zh_hant="本月預期營收"
                 zh_hans="本月预期营收"
                 en="This Month (Estimation)"
               />
-            </h3>
-            <p>
-              {toAmountString(income.thisMonth)}{' '}
-              <span className="unit">HKD</span>
-            </p>
-          </li>
-          <li className="divider">
-            <h3>
+            }
+            value={toAmountString(income.thisMonth)}
+            unit="HKD"
+            percentageChange={percentageChangeThisMonth}
+          />
+        </InfoTiles.Group>
+        <InfoTiles.Group>
+          <InfoTiles.Tile
+            title={
               <Translate zh_hant="目前總營收" zh_hans="目前总营收" en="Total" />
-            </h3>
-            <p>
-              {toAmountString(income.total)} <span className="unit">HKD</span>
-            </p>
-          </li>
-        </ul>
-      </section>
+            }
+            value={toAmountString(income.total)}
+            unit="HKD"
+          />
+        </InfoTiles.Group>
+      </InfoTiles>
 
       {chartData && (
         <section className="chart">
@@ -110,23 +119,17 @@ const Content = () => {
       )}
 
       <style jsx>{styles}</style>
-    </section>
+    </>
   )
 }
 
 const IncomeAnalytics = () => {
   return (
     <section className="container">
-      <section className="head">
-        <TextIcon
-          icon={withIcon(IconAnalyticsIncome24)({ size: 'md' })}
-          size="xm"
-          spacing="tight"
-          weight="md"
-        >
-          <Translate zh_hant="營收" zh_hans="营收" en="Income" />
-        </TextIcon>
-      </section>
+      <SectionHead
+        icon={IconAnalyticsIncome24}
+        title={<Translate zh_hant="營收" zh_hans="营收" en="Income" />}
+      />
 
       <Content />
 

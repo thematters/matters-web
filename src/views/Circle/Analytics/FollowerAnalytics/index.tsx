@@ -5,16 +5,16 @@ import {
   QueryError,
   Spinner,
   StackedAreaChart,
-  TextIcon,
   Translate,
   useRoute,
-  withIcon,
 } from '~/components'
 
 import { translate } from '~/common/utils'
 
 import { ReactComponent as IconAnalyticsFollower24 } from '@/public/static/icons/24px/analytics-follower.svg'
 
+import InfoTiles from '../InfoTiles'
+import SectionHead from '../SectionHead'
 import { CIRCLE_FOLLOWER_ANALYTICS } from './gql'
 import styles from './styles.css'
 
@@ -45,59 +45,56 @@ const Content = () => {
     return null
   }
 
-  const newFollowersThisMonth =
-    (follower.current || 0) - (follower.history[0].value || 0)
+  const followersLastMonth = follower.history[0].value || 0
+  const newFollowersThisMonth = follower.current - followersLastMonth
   const chartData = follower.history.map((datum) => ({
     time: new Date(datum.date),
     value: datum.value,
   }))
+  const percentageChangeThisMonth =
+    (newFollowersThisMonth / followersLastMonth) * 100
 
   return (
-    <section className="content">
-      <section className="tiles">
-        <ul>
-          <li>
-            <h3>
+    <>
+      <InfoTiles>
+        <InfoTiles.Group primary>
+          <InfoTiles.Tile
+            title={
               <Translate
                 zh_hant="目前總追蹤人數"
                 zh_hans="目前总追踪人数"
                 en="Current Followers"
               />
-            </h3>
-            <p>
-              {follower.current}{' '}
-              <span className="unit">
-                <Translate zh_hant="人" zh_hans="人" en="" />
-              </span>
-            </p>
-          </li>
-          <li>
-            <h3>
+            }
+            value={follower.current}
+            unit={<Translate zh_hant="人" zh_hans="人" en="" />}
+          />
+          <InfoTiles.Tile
+            title={
               <Translate
                 zh_hant="本月新增追蹤人數"
                 zh_hans="本月新增追踪人数"
                 en="New Followers This Month"
               />
-            </h3>
-            <p>
-              {newFollowersThisMonth}{' '}
-              <span className="unit">
-                <Translate zh_hant="人" zh_hans="人" en="" />
-              </span>
-            </p>
-          </li>
-          <li className="divider">
-            <h3>
+            }
+            value={newFollowersThisMonth}
+            unit={<Translate zh_hant="人" zh_hans="人" en="" />}
+            percentageChange={percentageChangeThisMonth}
+          />
+        </InfoTiles.Group>
+        <InfoTiles.Group>
+          <InfoTiles.Tile
+            title={
               <Translate
                 zh_hant="已追蹤用戶佔總觀看人數比例"
                 zh_hans="已追踪用户占总观看人数比例"
                 en="Conversion Rate of Followers"
               />
-            </h3>
-            <p>{follower.followerPercentage}%</p>
-          </li>
-        </ul>
-      </section>
+            }
+            value={`${follower.followerPercentage}%`}
+          />
+        </InfoTiles.Group>
+      </InfoTiles>
 
       {chartData && (
         <section className="chart">
@@ -123,23 +120,17 @@ const Content = () => {
       )}
 
       <style jsx>{styles}</style>
-    </section>
+    </>
   )
 }
 
 const FollowerAnalytics = () => {
   return (
     <section className="container">
-      <section className="head">
-        <TextIcon
-          icon={withIcon(IconAnalyticsFollower24)({ size: 'md' })}
-          size="xm"
-          spacing="tight"
-          weight="md"
-        >
-          <Translate zh_hant="追蹤" zh_hans="追踪" en="Followers" />
-        </TextIcon>
-      </section>
+      <SectionHead
+        icon={IconAnalyticsFollower24}
+        title={<Translate zh_hant="追蹤" zh_hans="追踪" en="Followers" />}
+      />
 
       <Content />
 

@@ -1,9 +1,9 @@
 import { Head, Layout } from '~/components'
 
-import ContentAnalytics from './Content'
-import FollowerAnalytics from './Follower'
-import IncomeAnalytics from './Income'
-import SubscriberAnalytics from './Subscriber'
+import ContentAnalytics from './ContentAnalytics'
+import FollowerAnalytics from './FollowerAnalytics'
+import IncomeAnalytics from './IncomeAnalytics'
+import SubscriberAnalytics from './SubscriberAnalytics'
 
 const CircleAnalytics = () => {
   return (
