@@ -11,6 +11,8 @@ import {
   withIcon,
 } from '~/components'
 
+import { translate } from '~/common/utils'
+
 import { ReactComponent as IconAnalyticsFollower24 } from '@/public/static/icons/24px/analytics-follower.svg'
 
 import { CIRCLE_FOLLOWER_ANALYTICS } from './gql'
@@ -104,7 +106,16 @@ const Content = () => {
               <>
                 <StackedAreaChart.Axis {...props} />
                 <StackedAreaChart.Area {...props} />
-                <StackedAreaChart.Tooltip {...props} />
+                <StackedAreaChart.Tooltip
+                  {...props}
+                  formatter={(datum: any) =>
+                    `<span>&nbsp;${datum.value}${translate({
+                      zh_hant: ' 人',
+                      zh_hans: ' 人',
+                      en: '',
+                    })}&nbsp;</span>`
+                  }
+                />
               </>
             )}
           </StackedAreaChart>

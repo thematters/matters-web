@@ -84,7 +84,7 @@ const Content = () => {
               <Translate zh_hant="目前總營收" zh_hans="目前总营收" en="Total" />
             </h3>
             <p>
-              ${toAmountString(income.total)} <span className="unit">HKD</span>
+              {toAmountString(income.total)} <span className="unit">HKD</span>
             </p>
           </li>
         </ul>
