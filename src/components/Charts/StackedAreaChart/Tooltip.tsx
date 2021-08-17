@@ -5,6 +5,8 @@ import tippy, { Instance as TippyInstance } from 'tippy.js'
 
 import { Datum, InnerChart } from './'
 
+export const TOOLTIP_CIRCLE_RADIUS = 8
+
 type TooltipProps = InnerChart & {
   // pass selected data to formatter and
   // return a HTML string to render Tooltip content
@@ -127,7 +129,7 @@ const Tooltip: React.FC<TooltipProps> = ({
       />
       <circle
         ref={circleRef}
-        r="8"
+        r={TOOLTIP_CIRCLE_RADIUS}
         stroke="white"
         strokeWidth={2}
         fill="#9AE5E2"

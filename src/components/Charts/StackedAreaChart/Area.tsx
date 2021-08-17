@@ -25,6 +25,9 @@ const Area: React.FC<AreaProps> = ({ data, series, xScale, yScale, yMin }) => {
   ]
 
   useEffect(() => {
+    // Clear
+    d3Select(gRef.current).selectAll('path').remove()
+
     // Define color scales
     const areaColor = d3ScaleOrdinal<string>()
       .domain(stackedKeys)
