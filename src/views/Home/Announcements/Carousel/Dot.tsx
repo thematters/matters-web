@@ -2,13 +2,13 @@ import classnames from 'classnames'
 
 import styles from './styles.css'
 
-interface DotProps {
+interface Props {
   index: number
   scroll: (index: number) => void
   selected: boolean
 }
 
-const Dot = ({ index, scroll, selected }: DotProps) => {
+const Dot = ({ index, scroll, selected }: Props) => {
   const dotClasses = classnames({ dot: true, selected })
   return (
     <>

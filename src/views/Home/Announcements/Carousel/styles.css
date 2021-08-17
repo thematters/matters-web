@@ -33,11 +33,27 @@
   padding-left: 8px;
 }
 
-.slide_inner {
+.slide-inner {
   position: relative;
   height: var(--announcement-height);
+  padding: var(--spacing-base);
   overflow: hidden;
+  background-position: bottom right;
   border-radius: 1rem;
+
+  & h3 {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.5rem;
+    color: var(--color-white);
+  }
+
+  & p {
+    margin-top: var(--spacing-xx-tight);
+    font-size: var(--font-size-sm-s);
+    line-height: 1.5rem;
+    color: var(--color-white);
+  }
 }
 
 .dots {
@@ -71,7 +87,7 @@
 
 .type {
   position: absolute;
-  top: 1.25rem;
+  top: 1.35rem;
   right: 3.5rem;
   padding: var(--spacing-x-tight);
 }

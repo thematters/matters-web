@@ -13,15 +13,18 @@ import { AnnouncementsPublic_official_announcements as AnnouncementPublicType } 
 
 type CarouselProps = {
   items: AnnouncementPublicType[]
+  hide: () => void
 } & DropdownActionsProps
 
 const Carousel = ({
   type,
   setType,
   items,
+  hide,
   ...controlsProps
 }: CarouselProps) => {
   const [dot, setDot] = useState(0)
+  // @ts-ignore
   const [snaps, setSnaps] = useState<any[]>([])
   const [carousel, carouselApi] = useEmblaCarousel({ skipSnaps: false })
 
@@ -41,11 +44,12 @@ const Carousel = ({
   const { play, stop } = useCarousel(autoplay, 4000)
 
   const scroll = (index: number) => {
-    if (carouselApi) {
-      setDot(index)
-      carouselApi.scrollTo(index)
-      stop()
+    if (!carouselApi) {
+      return
     }
+    setDot(index)
+    carouselApi.scrollTo(index)
+    stop()
   }
 
   const onSelect = () => {
@@ -58,16 +62,18 @@ const Carousel = ({
     if (!carouselApi) {
       return
     }
-    setDot(carouselApi.selectedScrollSnap())
+
+    carouselApi.reInit()
+    carouselApi.scrollTo(0)
+
+    setDot(0)
     setSnaps(carouselApi.scrollSnapList())
 
     carouselApi.on('select', onSelect)
     carouselApi.on('pointerDown', stop)
-  }, [carouselApi])
 
-  useEffect(() => {
     play()
-  }, [play])
+  }, [items, carouselApi])
 
   return (
     <div className="outer">
@@ -80,9 +86,12 @@ const Carousel = ({
             return (
               <div key={item.id} className="slide">
                 <div
-                  className="slide_inner"
+                  className="slide-inner"
                   style={{ backgroundImage: `url(${item.cover})` }}
-                />
+                >
+                  <h3>{item.title}</h3>
+                  <p>{item.content}</p>
+                </div>
               </div>
             )
           })}
@@ -90,7 +99,7 @@ const Carousel = ({
       </div>
 
       <div className="dots">
-        {snaps.map((_, index) => (
+        {items.map((_, index) => (
           <Dot
             key={index}
             index={index}
@@ -105,7 +114,11 @@ const Carousel = ({
       </div>
 
       <div className="close">
-        <Button spacing={[0, 0]} arial-label={TEXT.zh_hant.close}>
+        <Button
+          spacing={[0, 0]}
+          arial-label={TEXT.zh_hant.close}
+          onClick={hide}
+        >
           <IconClose32 size="lg" color="white" />
         </Button>
       </div>

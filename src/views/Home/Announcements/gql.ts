@@ -5,7 +5,9 @@ export const ANNOUNCEMENTS_PUBLIC = gql`
     official {
       announcements(input: {}) {
         id
+        title
         cover
+        content
         link
         type
         visible
