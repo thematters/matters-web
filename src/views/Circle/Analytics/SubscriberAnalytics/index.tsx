@@ -1,17 +1,21 @@
 import { useQuery } from '@apollo/react-hooks'
 import { sum as d3Sum } from 'd3-array'
 import _get from 'lodash/get'
+import { MembersDialog } from '~/views/Circle/Profile/MembersDialog'
 
 import {
+  Button,
   QueryError,
   Spinner,
   StackedAreaChart,
+  TextIcon,
   Translate,
   useRoute,
 } from '~/components'
 
+import { translate } from '~/common/utils'
+
 import { ReactComponent as IconAnalyticsSubscriber24 } from '@/public/static/icons/24px/analytics-subscriber.svg'
-import { translate } from '@/src/common/utils'
 
 import InfoTiles from '../InfoTiles'
 import SectionHead from '../SectionHead'
@@ -159,7 +163,26 @@ const SubscriberAnalytics = () => {
       <SectionHead
         icon={IconAnalyticsSubscriber24}
         title={<Translate zh_hant="訂閱" zh_hans="订阅" en="Subscribers" />}
-      />
+      >
+        <MembersDialog>
+          {({ openDialog: openMembersDialog }) => (
+            <Button
+              borderColor="grey-light"
+              borderWidth="sm"
+              spacing={['xxtight', 'xtight']}
+              onClick={openMembersDialog}
+            >
+              <TextIcon color="grey-darker" size="xs">
+                <Translate
+                  zh_hant="查看名單"
+                  zh_hans="查看名单"
+                  en="View Members"
+                />
+              </TextIcon>
+            </Button>
+          )}
+        </MembersDialog>
+      </SectionHead>
 
       <Content />
 

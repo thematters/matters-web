@@ -9,8 +9,9 @@ import {
   useRoute,
 } from '~/components'
 
+import { toAmountString } from '~/common/utils'
+
 import { ReactComponent as IconAnalyticsIncome24 } from '@/public/static/icons/24px/analytics-income.svg'
-import { toAmountString } from '@/src/common/utils'
 
 import InfoTiles from '../InfoTiles'
 import SectionHead from '../SectionHead'
