@@ -31,6 +31,7 @@ type EventArgs =
   | ['view_add_credit_dialog', ViewDialogProp]
   | ['view_donation_dialog', ViewDialogProp]
   | ['view_subscribe_circle_dialog', ViewDialogProp]
+  | ['card_exposure', CardExposureProp]
 
 /**
  * Event: Page View
@@ -126,9 +127,21 @@ interface ClickFeedProp {
   location: number
 }
 
+/**
+ * Event: Card Exposure
+ */
+
+interface CardExposureProp {
+  articleId: string
+  feedType: FeedType
+  contentType: ContentType | ActivityType
+  location: number | string
+  isVisitor: boolean
+}
+
 // content type
-type ContentType = 'article' | 'comment' | 'circle' | 'user' | 'tag'
-type ActivityType =
+export type ContentType = 'article' | 'comment' | 'circle' | 'user' | 'tag'
+export type ActivityType =
   | 'UserPublishArticleActivity'
   | 'UserBroadcastCircleActivity'
   | 'UserCreateCircleActivity'
@@ -144,7 +157,7 @@ type ActivityType =
   | 'UserRecommendationActivity'
 
 // feed type
-type FeedType =
+export type FeedType =
   | ArticleFeedType
   | CommentFeedType
   | UserFeedType
@@ -160,8 +173,6 @@ type ArticleFeedType =
   | 'all_topics'
   | 'authors' // author feed on home page
   | 'collection'
-  // | 'follow-article'
-  // | 'followee-donated-article'
   | 'hottest'
   | 'icymi'
   | 'newest'

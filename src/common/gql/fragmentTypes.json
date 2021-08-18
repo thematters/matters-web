@@ -64,14 +64,17 @@
         "name": "FollowingActivity",
         "possibleTypes": [
           { "name": "UserPublishArticleActivity" },
+          { "name": "UserAddArticleTagActivity" },
           { "name": "UserBroadcastCircleActivity" },
           { "name": "UserCreateCircleActivity" },
-          { "name": "UserCollectArticleActivity" },
+          { "name": "UserRecommendationActivity" },
+          { "name": "ArticleRecommendationActivity" },
+          { "name": "CircleRecommendationActivity" },
           { "name": "UserSubscribeCircleActivity" },
           { "name": "UserFollowUserActivity" },
           { "name": "UserDonateArticleActivity" },
           { "name": "UserBookmarkArticleActivity" },
-          { "name": "UserAddArticleTagActivity" }
+          { "name": "UserCollectArticleActivity" }
         ]
       },
       {

@@ -107,7 +107,7 @@ const FollowingFeed = () => {
               }}
             >
               {node.__typename === 'UserPublishArticleActivity' && (
-                <UserPublishArticleActivity {...node} />
+                <UserPublishArticleActivity location={i} {...node} />
               )}
               {node.__typename === 'UserBroadcastCircleActivity' && (
                 <UserBroadcastCircleActivity {...node} />
@@ -116,10 +116,11 @@ const FollowingFeed = () => {
                 <UserCreateCircleActivity {...node} />
               )}
               {node.__typename === 'UserAddArticleTagActivity' && (
-                <UserAddArticleTagActivity {...node} />
+                <UserAddArticleTagActivity location={i} {...node} />
               )}
               {node.__typename === 'ArticleRecommendationActivity' && (
                 <RecommendArticleActivity
+                  location={i}
                   articles={node.recommendArticles}
                   source={node.source}
                 />
