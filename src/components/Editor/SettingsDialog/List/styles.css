@@ -1,6 +1,6 @@
 ul {
   margin-top: var(--spacing-base);
-  overflow: hidden;
+  overflow-y: auto;
 }
 
 .access {
