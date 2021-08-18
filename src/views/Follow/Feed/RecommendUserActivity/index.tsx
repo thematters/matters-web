@@ -1,4 +1,8 @@
-import { Slides } from '~/components'
+import { useContext } from 'react'
+
+import { Slides, ViewerContext } from '~/components'
+
+import { analytics } from '~/common/utils'
 
 import FollowingRecommendHead from '../FollowingRecommendHead'
 import FollowingRecommendUser from '../FollowingRecommendUser'
@@ -12,6 +16,8 @@ interface Props {
 }
 
 const RecommendUserActivity = ({ users }: Props) => {
+  const viewer = useContext(ViewerContext)
+
   if (!users || users.length <= 0) {
     return null
   }
@@ -22,7 +28,19 @@ const RecommendUserActivity = ({ users }: Props) => {
       header={<FollowingRecommendHead type="user" />}
     >
       {users.map((user, index) => (
-        <Slides.Item size="md" key={index}>
+        <Slides.Item
+          size="md"
+          key={index}
+          onClick={() => {
+            analytics.trackEvent('click_feed', {
+              type: 'following',
+              contentType: 'UserRecommendationActivity',
+              location: `${location}.${index}`,
+              id: user.id,
+              userId: viewer.id,
+            })
+          }}
+        >
           <section className="item">
             <FollowingRecommendUser user={user} />
           </section>

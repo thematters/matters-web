@@ -32,7 +32,7 @@ export const CardExposureTracker = ({
               feedType,
               contentType,
               location,
-              isVisitor: !viewer.id,
+              userId: viewer.id,
               articleId,
             })
           }

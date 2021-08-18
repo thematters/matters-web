@@ -98,13 +98,13 @@ const FollowingFeed = () => {
           {edges.map(({ node, cursor }, i) => (
             <List.Item
               key={node.__typename + cursor}
-              onClick={() => {
-                analytics.trackEvent('click_feed', {
-                  type: 'following',
-                  contentType: node.__typename,
-                  location: i,
-                })
-              }}
+              // onClick={() => {
+              //   analytics.trackEvent('click_feed', {
+              //     type: 'following',
+              //     contentType: node.__typename,
+              //     location: i,
+              //   })
+              // }}
             >
               {node.__typename === 'UserPublishArticleActivity' && (
                 <UserPublishArticleActivity location={i} {...node} />
@@ -113,7 +113,7 @@ const FollowingFeed = () => {
                 <UserBroadcastCircleActivity {...node} />
               )}
               {node.__typename === 'UserCreateCircleActivity' && (
-                <UserCreateCircleActivity {...node} />
+                <UserCreateCircleActivity location={i} {...node} />
               )}
               {node.__typename === 'UserAddArticleTagActivity' && (
                 <UserAddArticleTagActivity location={i} {...node} />
@@ -126,7 +126,10 @@ const FollowingFeed = () => {
                 />
               )}
               {node.__typename === 'CircleRecommendationActivity' && (
-                <RecommendCircleActivity circles={node.recommendCircles} />
+                <RecommendCircleActivity
+                  location={i}
+                  circles={node.recommendCircles}
+                />
               )}
               {node.__typename === 'UserRecommendationActivity' && (
                 <RecommendUserActivity users={node.recommendUsers} />

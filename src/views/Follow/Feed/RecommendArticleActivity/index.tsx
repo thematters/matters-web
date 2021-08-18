@@ -1,4 +1,8 @@
-import { CardExposureTracker, Slides } from '~/components'
+import { useContext } from 'react'
+
+import { CardExposureTracker, Slides, ViewerContext } from '~/components'
+
+import { analytics } from '~/common/utils'
 
 import FollowingRecommendArticle from '../FollowingRecommendArticle'
 import FollowingRecommendHead from '../FollowingRecommendHead'
@@ -15,11 +19,18 @@ interface Props {
 }
 
 const RecommendArticleActivity = ({ articles, source, location }: Props) => {
+  const viewer = useContext(ViewerContext)
+
   if (!articles || articles.length <= 0 || !source) {
     return null
   }
 
+  // from followee donation or from tag recommendation
   const type = source === 'UserDonation' ? 'article' : 'recommend'
+  const contentType =
+    source === 'UserDonation'
+      ? 'UserDonateArticleActivity'
+      : 'ArticleRecommendationActivity'
 
   return (
     <Slides
@@ -27,13 +38,25 @@ const RecommendArticleActivity = ({ articles, source, location }: Props) => {
       header={<FollowingRecommendHead type={type} />}
     >
       {articles.map((article, index) => (
-        <Slides.Item size="md" key={index}>
+        <Slides.Item
+          size="md"
+          key={index}
+          onClick={() => {
+            analytics.trackEvent('click_feed', {
+              type: 'following',
+              contentType,
+              location: `${location}.${index}`,
+              id: article.id,
+              userId: viewer.id,
+            })
+          }}
+        >
           <section className="item">
             <FollowingRecommendArticle article={article} />
             <CardExposureTracker
               location={`${location}.${index}`}
               feedType="following"
-              contentType="RecommendArticleActivity"
+              contentType={contentType}
               articleId={article.id}
             />
           </section>

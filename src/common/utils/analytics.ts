@@ -124,7 +124,9 @@ interface ViewDialogProp {
 interface ClickFeedProp {
   type: FeedType
   contentType: ContentType | ActivityType
-  location: number
+  location: number | string
+  id?: string
+  userId?: string
 }
 
 /**
@@ -136,7 +138,7 @@ interface CardExposureProp {
   feedType: FeedType
   contentType: ContentType | ActivityType
   location: number | string
-  isVisitor: boolean
+  userId?: string
 }
 
 // content type

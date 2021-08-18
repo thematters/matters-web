@@ -11,6 +11,7 @@ interface SlidesProps {
 
 interface SlideItemProps {
   size?: 'sm' | 'md'
+  onClick?: () => any
 }
 
 const SlideItem: React.FC<SlideItemProps> = ({ size = 'sm', children }) => {
