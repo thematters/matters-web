@@ -1,4 +1,4 @@
-import { toAmountString } from '~/common/utils'
+import { formatAmount } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -13,7 +13,7 @@ export const CurrencyAmount: React.FC<CurrencyAmountProps> = ({
 }) => (
   <section>
     <span className="currency">{currency}</span>
-    <span className="amount">{toAmountString(amount)}</span>
+    <span className="amount">{formatAmount(amount)}</span>
 
     <style jsx>{styles}</style>
   </section>

@@ -5,6 +5,7 @@ import {
   ScaleTime,
   scaleTime as d3ScaleTime,
 } from 'd3-scale'
+import { select as d3Select } from 'd3-selection'
 import { Series, stack as d3Stack } from 'd3-shape'
 import _uniqBy from 'lodash/uniqBy'
 import { useEffect, useRef, useState } from 'react'
@@ -12,9 +13,9 @@ import { useEffect, useRef, useState } from 'react'
 import { useWindowResize } from '~/components'
 
 import Area from './Area'
-import Axis from './Axis'
+import Axis, { AXIS_OFFSET_X, AXIS_OFFSET_Y } from './Axis'
 import styles from './styles.css'
-import Tooltip from './Tooltip'
+import Tooltip, { TOOLTIP_CIRCLE_RADIUS } from './Tooltip'
 
 export type Datum = Record<'time' | string, number | Date>
 export type Data = Datum[]
@@ -56,27 +57,21 @@ export const StackedAreaChart: React.FC<StackedAreaChartProps> & {
   Axis: typeof Axis
   Area: typeof Area
   Tooltip: typeof Tooltip
-} = ({
-  data,
-  width,
-  height = 200,
-  margin = {
-    top: 24,
-    right: 12,
-    bottom: 24,
-    left: 48,
-  },
-  yTicks = 5,
-  children,
-}) => {
+} = ({ data, height = 200, yTicks = 5, children }) => {
   const [windowWidth] = useWindowResize()
 
   const containerRef: React.RefObject<any> = useRef(null)
   const svgRef: React.RefObject<any> = useRef(null)
 
-  const { top, right, bottom, left } = margin
-  const [svgWidth, setSvgWidth] = useState(width || 0)
+  const [maxLabelSize, setMaxLabelSize] = useState({ width: 0, height: 0 })
+  const [svgWidth, setSvgWidth] = useState(0)
   const svgHeight = height
+  const margin = {
+    top: maxLabelSize.height / 2,
+    right: TOOLTIP_CIRCLE_RADIUS,
+    bottom: maxLabelSize.height + AXIS_OFFSET_X,
+    left: maxLabelSize.width + AXIS_OFFSET_Y,
+  }
 
   // Data Transformation
   const [_, ...stackedKeys] = Object.keys(data[0])
@@ -91,18 +86,32 @@ export const StackedAreaChart: React.FC<StackedAreaChartProps> & {
 
   const xScale = d3ScaleTime()
     .domain(d3Extent(data, (d) => d.time) as [Date, Date])
-    .range([left, svgWidth - right])
+    .range([margin.left, svgWidth - margin.right])
 
   const yScale = d3ScaleLinear()
     .domain([yMin, yMax])
-    .range([height - bottom, top])
+    .range([height - margin.bottom, margin.top])
 
   useEffect(() => {
     if (!windowWidth || !containerRef.current) {
       return
     }
 
+    // update width
     setSvgWidth(containerRef.current.getBoundingClientRect().width)
+
+    // update margins
+    d3Select(svgRef.current)
+      .append('text')
+      .text(_yMax)
+      .style('font-size', '12')
+      .each(function () {
+        setMaxLabelSize({
+          width: this.getBBox().width,
+          height: this.getBBox().height,
+        })
+      })
+      .remove()
   }, [windowWidth])
 
   return (

@@ -1,6 +1,6 @@
 import { CircleDigest, TextIcon, Translate, withIcon } from '~/components'
 
-import { toAmountString } from '~/common/utils'
+import { formatAmount } from '~/common/utils'
 
 import { ReactComponent as IconCircleFeatureConnection } from '@/public/static/icons/circle-feature-connection.svg'
 import { ReactComponent as IconCircleFeatureDiscussion } from '@/public/static/icons/circle-feature-discussion.svg'
@@ -78,7 +78,7 @@ const Head: React.FC<HeadProps> = ({ circle }) => {
           </ConfirmTable.Col>
 
           <ConfirmTable.Col>
-            {price.currency} {toAmountString(price.amount)}
+            {price.currency} {formatAmount(price.amount)}
           </ConfirmTable.Col>
         </ConfirmTable.Row>
 
@@ -92,7 +92,7 @@ const Head: React.FC<HeadProps> = ({ circle }) => {
               </ConfirmTable.Col>
 
               <ConfirmTable.Col type="insufficient">
-                - {price.currency} {toAmountString(price.amount)}
+                - {price.currency} {formatAmount(price.amount)}
               </ConfirmTable.Col>
             </ConfirmTable.Row>
 
@@ -102,7 +102,7 @@ const Head: React.FC<HeadProps> = ({ circle }) => {
               </ConfirmTable.Col>
 
               <ConfirmTable.Col>
-                {price.currency} {toAmountString(0)}
+                {price.currency} {formatAmount(0)}
               </ConfirmTable.Col>
             </ConfirmTable.Row>
           </>

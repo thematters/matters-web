@@ -3,15 +3,17 @@ import _get from 'lodash/get'
 import { useState } from 'react'
 
 import {
-  IconContentAnalytics24,
+  EmptyAnalytics,
   List,
   QueryError,
   Spinner,
-  TextIcon,
   Translate,
   useRoute,
 } from '~/components'
 
+import { ReactComponent as IconAnalyticsContent24 } from '@/public/static/icons/24px/analytics-content.svg'
+
+import SectionHead from '../SectionHead'
 import ContentDigest from './ContentDigest'
 import CircleContentAnalyticsTabs, {
   CircleContentAnalyticsType,
@@ -62,6 +64,10 @@ const Feed: React.FC<FeedProps> = ({ type }) => {
     return <QueryError error={error} />
   }
 
+  if (contents.length === 0) {
+    return <EmptyAnalytics />
+  }
+
   return (
     <List>
       {contents.map((content, i) => (
@@ -82,20 +88,16 @@ const CircleContentAnalytics = () => {
 
   return (
     <section className="container">
-      <section className="head">
-        <TextIcon
-          icon={<IconContentAnalytics24 size="md" />}
-          size="xm"
-          spacing="tight"
-          weight="md"
-        >
+      <SectionHead
+        icon={IconAnalyticsContent24}
+        title={
           <Translate
             zh_hant="站內閱讀熱門排行"
             zh_hans="站内阅读热门排行"
-            en="Read Counts Ranking"
+            en="Hottest"
           />
-        </TextIcon>
-      </section>
+        }
+      />
 
       <CircleContentAnalyticsTabs type={type} setType={setType} />
 
