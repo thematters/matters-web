@@ -2,7 +2,14 @@ import { useQuery } from '@apollo/react-hooks'
 import _get from 'lodash/get'
 import { useState } from 'react'
 
-import { List, QueryError, Spinner, Translate, useRoute } from '~/components'
+import {
+  EmptyAnalytics,
+  List,
+  QueryError,
+  Spinner,
+  Translate,
+  useRoute,
+} from '~/components'
 
 import { ReactComponent as IconAnalyticsContent24 } from '@/public/static/icons/24px/analytics-content.svg'
 
@@ -55,6 +62,10 @@ const Feed: React.FC<FeedProps> = ({ type }) => {
 
   if (error) {
     return <QueryError error={error} />
+  }
+
+  if (contents.length === 0) {
+    return <EmptyAnalytics />
   }
 
   return (
