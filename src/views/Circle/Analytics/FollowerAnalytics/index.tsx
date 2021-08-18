@@ -45,14 +45,17 @@ const Content = () => {
     return null
   }
 
-  const followersLastMonth = follower.history[0].value || 0
+  const followersLastMonth =
+    follower.history[follower.history.length - 2].value || 0
   const newFollowersThisMonth = follower.current - followersLastMonth
   const chartData = follower.history.map((datum) => ({
     time: new Date(datum.date),
     value: datum.value,
   }))
   const percentageChangeThisMonth =
-    (newFollowersThisMonth / followersLastMonth) * 100
+    followersLastMonth > 0
+      ? (newFollowersThisMonth / followersLastMonth) * 100
+      : undefined
 
   return (
     <>

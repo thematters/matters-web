@@ -50,15 +50,18 @@ const Content = () => {
     value: datum.value,
   }))
 
+  const incomeTwoMonthsAgo =
+    income.history[income.history.length - 2].value || 0
+
   const percentageChangeLastMonth =
-    ((income.lastMonth - income.history[income.history.length - 2].value) /
-      income.lastMonth) *
-    100
+    incomeTwoMonthsAgo > 0
+      ? ((income.lastMonth - incomeTwoMonthsAgo) / incomeTwoMonthsAgo) * 100
+      : undefined
 
   const percentageChangeThisMonth =
-    ((income.thisMonth - income.history[income.history.length - 1].value) /
-      income.thisMonth) *
-    100
+    income.lastMonth > 0
+      ? ((income.thisMonth - income.lastMonth) / income.lastMonth) * 100
+      : undefined
 
   return (
     <>
