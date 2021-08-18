@@ -1,7 +1,7 @@
 import { useEmblaCarousel } from 'embla-carousel/react'
 import { useCallback, useEffect, useState } from 'react'
 
-import { Button, IconClose32, useCarousel } from '~/components'
+import { Button, Card, IconClose32, useCarousel } from '~/components'
 
 import { TEXT } from '~/common/enums'
 
@@ -85,13 +85,15 @@ const Carousel = ({
             }
             return (
               <div key={item.id} className="slide">
-                <div
-                  className="slide-inner"
-                  style={{ backgroundImage: `url(${item.cover})` }}
-                >
-                  <h3>{item.title}</h3>
-                  <p>{item.content}</p>
-                </div>
+                <Card htmlHref={item.link || ''} spacing={[0, 0]}>
+                  <div
+                    className="slide-inner"
+                    style={{ backgroundImage: `url(${item.cover})` }}
+                  >
+                    <h3>{item.title}</h3>
+                    <p>{item.content}</p>
+                  </div>
+                </Card>
               </div>
             )
           })}
