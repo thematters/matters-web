@@ -9,7 +9,7 @@ import {
   useRoute,
 } from '~/components'
 
-import { toAmountString } from '~/common/utils'
+import { formatAmount } from '~/common/utils'
 
 import { ReactComponent as IconAnalyticsIncome24 } from '@/public/static/icons/24px/analytics-income.svg'
 
@@ -75,7 +75,7 @@ const Content = () => {
                 en="Last Month"
               />
             }
-            value={toAmountString(income.lastMonth)}
+            value={formatAmount(income.lastMonth, 0)}
             unit="HKD"
             percentageChange={percentageChangeLastMonth}
           />
@@ -87,7 +87,7 @@ const Content = () => {
                 en="This Month (Estimation)"
               />
             }
-            value={toAmountString(income.thisMonth)}
+            value={formatAmount(income.thisMonth, 0)}
             unit="HKD"
             percentageChange={percentageChangeThisMonth}
           />
@@ -97,7 +97,7 @@ const Content = () => {
             title={
               <Translate zh_hant="目前總營收" zh_hans="目前总营收" en="Total" />
             }
-            value={toAmountString(income.total)}
+            value={formatAmount(income.total, 0)}
             unit="HKD"
           />
         </InfoTiles.Group>
@@ -113,7 +113,7 @@ const Content = () => {
                 <StackedAreaChart.Tooltip
                   {...props}
                   formatter={(datum: any) =>
-                    `<span>${toAmountString(datum.value)} HKD</span>`
+                    `<span>${formatAmount(datum.value, 0)} HKD</span>`
                   }
                 />
               </>

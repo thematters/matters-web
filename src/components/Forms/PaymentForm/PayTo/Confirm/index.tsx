@@ -16,8 +16,8 @@ import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import {
+  formatAmount,
   parseFormSubmitErrors,
-  toAmountString,
   validatePaymentPassword,
 } from '~/common/utils'
 
@@ -169,7 +169,7 @@ const Confirm: React.FC<FormProps> = ({
               </ConfirmTable.Col>
 
               <ConfirmTable.Col>
-                {currency} {toAmountString(balance)}
+                {currency} {formatAmount(balance)}
               </ConfirmTable.Col>
             </ConfirmTable.Row>
           </ConfirmTable>

@@ -9,7 +9,7 @@ import {
 } from '~/components'
 
 import { PAYMENT_CURRENCY } from '~/common/enums'
-import { toAmountString, translate } from '~/common/utils'
+import { formatAmount, translate } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -57,7 +57,7 @@ export const CustomAmount: React.FC<CustomAmountProps> = ({
             />
           </TextIcon>
           <TextIcon weight="md" size="sm">
-            &nbsp;{PAYMENT_CURRENCY.HKD}&nbsp;{toAmountString(balance)}
+            &nbsp;{PAYMENT_CURRENCY.HKD}&nbsp;{formatAmount(balance)}
           </TextIcon>
         </span>
       )}
