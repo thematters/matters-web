@@ -96,16 +96,7 @@ const FollowingFeed = () => {
       >
         <List>
           {edges.map(({ node, cursor }, i) => (
-            <List.Item
-              key={node.__typename + cursor}
-              // onClick={() => {
-              //   analytics.trackEvent('click_feed', {
-              //     type: 'following',
-              //     contentType: node.__typename,
-              //     location: i,
-              //   })
-              // }}
-            >
+            <List.Item key={node.__typename + cursor}>
               {node.__typename === 'UserPublishArticleActivity' && (
                 <UserPublishArticleActivity location={i} {...node} />
               )}

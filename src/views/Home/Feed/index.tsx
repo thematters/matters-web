@@ -4,6 +4,7 @@ import { useContext, useEffect, useRef } from 'react'
 
 import {
   ArticleDigestFeed,
+  CardExposureTracker,
   EmptyArticle,
   InfiniteScroll,
   List,
@@ -216,6 +217,8 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
                     type: sortBy,
                     contentType: 'article',
                     location: i,
+                    id: edge.node.id,
+                    userId: viewer.id,
                   })
                 }
                 onClickAuthor={() => {
@@ -223,8 +226,16 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
                     type: sortBy,
                     contentType: 'user',
                     location: i,
+                    id: edge.node.author.id,
+                    userId: viewer.id,
                   })
                 }}
+              />
+              <CardExposureTracker
+                contentType="article"
+                feedType={sortBy}
+                location={i}
+                articleId={edge.node.id}
               />
             </List.Item>
           )
