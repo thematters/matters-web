@@ -2,13 +2,13 @@
   padding: 0 var(--spacing-base);
   margin: var(--spacing-loose) 0 0;
 
-  @media (--sm-up) {
+  @media (--md-up) {
     @mixin flex-center-start;
   }
 }
 
 .group {
-  @media (--sm-up) {
+  @media (--md-up) {
     @mixin flex-center-start;
 
     & + :global(.group) {
@@ -75,7 +75,7 @@
     }
   }
 
-  @media (--sm-up) {
+  @media (--md-up) {
     flex-direction: column;
     align-items: start;
 
