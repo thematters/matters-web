@@ -30,8 +30,8 @@ import {
 } from '~/common/enums'
 import {
   analytics,
+  formatAmount,
   parseFormSubmitErrors,
-  toAmountString,
   translate,
   validateAmount,
 } from '~/common/utils'
@@ -266,7 +266,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
               </ConfirmTable.Col>
 
               <ConfirmTable.Col>
-                {currency} {toAmountString(balance)}
+                {currency} {formatAmount(balance)}
               </ConfirmTable.Col>
             </ConfirmTable.Row>
           </ConfirmTable>
