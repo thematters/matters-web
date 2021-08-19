@@ -141,7 +141,7 @@ const Content = () => {
             }
             value={subscriber.currentSubscriber}
             unit={<Translate zh_hant="人" zh_hans="人" en="" />}
-            indicatorColor={CHART_COLOR.yellow.line}
+            indicatorColor={colors[DatumKey.subscriber].line}
           />
           <InfoTiles.Tile
             title={
@@ -149,7 +149,7 @@ const Content = () => {
             }
             value={subscriber.currentInvitee}
             unit={<Translate zh_hant="人" zh_hans="人" en="" />}
-            indicatorColor={CHART_COLOR.green.line}
+            indicatorColor={colors[DatumKey.invitee].line}
           />
         </InfoTiles.Group>
       </InfoTiles>
