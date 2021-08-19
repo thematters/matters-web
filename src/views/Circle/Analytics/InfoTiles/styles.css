@@ -23,10 +23,21 @@
   @mixin flex-center-space-between;
 
   & .title {
+    position: relative;
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-medium);
     line-height: 1.5rem;
     color: var(--color-grey-dark);
+
+    & .indicator {
+      position: absolute;
+      top: calc(50% - 0.25rem);
+      left: calc(100% + 0.5rem);
+      width: 0.5rem;
+      height: 0.5rem;
+      background: currentColor;
+      border-radius: 50%;
+    }
   }
 
   & .value {
@@ -94,6 +105,11 @@
 
     & .title {
       color: var(--color-grey-dark) !important;
+
+      & .indicator {
+        right: calc(100% + 0.25rem);
+        left: auto;
+      }
     }
 
     & .value {

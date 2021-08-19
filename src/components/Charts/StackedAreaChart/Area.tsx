@@ -7,22 +7,23 @@ import { transition as d3Transition } from 'd3-transition'
 import _uniqBy from 'lodash/uniqBy'
 import { Fragment, useEffect, useRef } from 'react'
 
-import { CHART_COLOR } from '~/common/enums'
-
 import { InnerChart } from './'
 
-type AreaProps = InnerChart
+type AreaProps = InnerChart & {
+  colors: { [key: string]: { area: string; line: string } }
+}
 
-const Area: React.FC<AreaProps> = ({ data, series, xScale, yScale, yMin }) => {
+const Area: React.FC<AreaProps> = ({
+  colors,
+  data,
+  series,
+  xScale,
+  yScale,
+  yMin,
+}) => {
   const gRef: React.RefObject<any> = useRef(null)
 
   const [_, ...stackedKeys] = Object.keys(data[0])
-  const stackedColors = [
-    CHART_COLOR.green,
-    CHART_COLOR.yellow,
-    CHART_COLOR.red,
-    CHART_COLOR.blue,
-  ]
 
   useEffect(() => {
     // Clear
@@ -95,13 +96,13 @@ const Area: React.FC<AreaProps> = ({ data, series, xScale, yScale, yMin }) => {
   return (
     <g ref={gRef}>
       <defs>
-        {stackedKeys.map((key, index) => (
+        {stackedKeys.map((key) => (
           <Fragment key={key}>
             <linearGradient id={`area-${key}-1`} x1="0" y1="0" x2="0" y2="1">
-              <stop stopColor={stackedColors[index].area} />
+              <stop stopColor={colors[key].area} />
               <stop
                 offset="83.33%"
-                stopColor={stackedColors[index].area}
+                stopColor={colors[key].area}
                 stopOpacity="0.333333"
               />
               <stop offset="100%" stopColor="white" stopOpacity="0" />
@@ -116,8 +117,8 @@ const Area: React.FC<AreaProps> = ({ data, series, xScale, yScale, yMin }) => {
 
             <linearGradient id={`line-${key}`} x1="0" y1="0" x2="1" y2="0">
               <stop stopColor="white" stopOpacity="0" />
-              <stop offset="13.5%" stopColor={stackedColors[index].line} />
-              <stop offset="87.5%" stopColor={stackedColors[index].line} />
+              <stop offset="13.5%" stopColor={colors[key].line} />
+              <stop offset="87.5%" stopColor={colors[key].line} />
               <stop offset="100%" stopColor="white" stopOpacity="0" />
             </linearGradient>
           </Fragment>

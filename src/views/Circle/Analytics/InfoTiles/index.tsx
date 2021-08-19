@@ -16,6 +16,7 @@ type InfoTilesTileProps = {
   title: React.ReactNode
   value: string | React.ReactNode
   unit?: string | React.ReactNode
+  indicatorColor?: string
   percentageChange?: number
 }
 
@@ -40,6 +41,7 @@ const InfoTilesTile: React.FC<InfoTilesTileProps> = ({
   title,
   value,
   unit,
+  indicatorColor,
   percentageChange,
 }) => {
   const changeClasses = classNames({
@@ -52,7 +54,12 @@ const InfoTilesTile: React.FC<InfoTilesTileProps> = ({
 
   return (
     <section className="tile">
-      <h3 className="title">{title}</h3>
+      <h3 className="title">
+        {indicatorColor && (
+          <span className="indicator" style={{ color: indicatorColor }} />
+        )}
+        {title}
+      </h3>
 
       <div className="content">
         <span className="value">{value}</span>

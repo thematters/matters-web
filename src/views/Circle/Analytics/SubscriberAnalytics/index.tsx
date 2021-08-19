@@ -13,6 +13,7 @@ import {
   useRoute,
 } from '~/components'
 
+import { CHART_COLOR } from '~/common/enums'
 import { translate } from '~/common/utils'
 
 import { ReactComponent as IconAnalyticsSubscriber24 } from '@/public/static/icons/24px/analytics-subscriber.svg'
@@ -21,8 +22,14 @@ import InfoTiles from '../InfoTiles'
 import SectionHead from '../SectionHead'
 import { CIRCLE_SUBSCRIBER_ANALYTICS } from './gql'
 import styles from './styles.css'
+import globalStyles from './styles.global.css'
 
 import { CircleSubscriberAnalytics } from './__generated__/CircleSubscriberAnalytics'
+
+enum DatumKey {
+  invitee = 'invitee',
+  subscriber = 'subscriber',
+}
 
 const Content = () => {
   const { getQuery } = useRoute()
@@ -62,37 +69,47 @@ const Content = () => {
       [datum.date]: datum.value,
     }))
   )
-  const chartData = dates?.map((date) => {
-    return {
-      time: new Date(date),
-      subscriber: subscriberMap[date],
-      invitee: inviteeMap[date],
-    }
-  })
+  const chartData = dates?.map((date) => ({
+    time: new Date(date),
+    [DatumKey.invitee]: inviteeMap[date],
+    [DatumKey.subscriber]: subscriberMap[date],
+  }))
+
+  const colors = {
+    [DatumKey.invitee]: CHART_COLOR.green,
+    [DatumKey.subscriber]: CHART_COLOR.yellow,
+  }
 
   const tooltipFormatter = (datum: any) => {
     const { time, ...values } = datum
 
     return [
-      `<span>${translate({
-        zh_hant: '總數',
-        zh_hans: '总数',
-        en: 'Total',
-      })}: ${d3Sum(Object.values(values))}</span>`,
-      ...Object.keys(values).map((key) => {
+      `<span class="subscriber-tooltip-item">
+        <span class="indicator rect" style="color: #EDEDED"></span>
+        ${translate({
+          zh_hant: '總數',
+          zh_hans: '总数',
+          en: 'Total',
+        })}: ${d3Sum(Object.values(values))}
+      </span>`,
+      ...[DatumKey.subscriber, DatumKey.invitee].map((key) => {
         const keyName = {
-          subscriber: translate({
+          [DatumKey.subscriber]: translate({
             zh_hant: '付費',
             zh_hans: '付费',
             en: 'Subscribers',
           }),
-          invitee: translate({
+          [DatumKey.invitee]: translate({
             zh_hant: '免費',
             zh_hans: '免费',
             en: ' Invitees',
           }),
         }[key]
-        return `<span>${keyName}: ${datum[key]}</span>`
+        return `
+          <span class="subscriber-tooltip-item">
+            <span class="indicator" style="color: ${colors[key].line}"></span>
+            ${keyName}: ${datum[key]}
+          </span>`
       }),
     ].join('<br/>')
   }
@@ -124,6 +141,7 @@ const Content = () => {
             }
             value={subscriber.currentSubscriber}
             unit={<Translate zh_hant="人" zh_hans="人" en="" />}
+            indicatorColor={CHART_COLOR.yellow.line}
           />
           <InfoTiles.Tile
             title={
@@ -131,6 +149,7 @@ const Content = () => {
             }
             value={subscriber.currentInvitee}
             unit={<Translate zh_hant="人" zh_hans="人" en="" />}
+            indicatorColor={CHART_COLOR.green.line}
           />
         </InfoTiles.Group>
       </InfoTiles>
@@ -141,7 +160,7 @@ const Content = () => {
             {(props) => (
               <>
                 <StackedAreaChart.Axis {...props} />
-                <StackedAreaChart.Area {...props} />
+                <StackedAreaChart.Area {...props} colors={colors} />
                 <StackedAreaChart.Tooltip
                   {...props}
                   formatter={tooltipFormatter}
@@ -187,6 +206,9 @@ const SubscriberAnalytics = () => {
       <Content />
 
       <style jsx>{styles}</style>
+      <style jsx global>
+        {globalStyles}
+      </style>
     </section>
   )
 }

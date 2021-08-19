@@ -9,6 +9,7 @@ import {
   useRoute,
 } from '~/components'
 
+import { CHART_COLOR } from '~/common/enums'
 import { formatAmount } from '~/common/utils'
 
 import { ReactComponent as IconAnalyticsIncome24 } from '@/public/static/icons/24px/analytics-income.svg'
@@ -109,7 +110,12 @@ const Content = () => {
             {(props) => (
               <>
                 <StackedAreaChart.Axis {...props} />
-                <StackedAreaChart.Area {...props} />
+                <StackedAreaChart.Area
+                  {...props}
+                  colors={{
+                    value: CHART_COLOR.green,
+                  }}
+                />
                 <StackedAreaChart.Tooltip
                   {...props}
                   formatter={(datum: any) =>
