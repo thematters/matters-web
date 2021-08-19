@@ -57,7 +57,7 @@ const RecommendArticleActivity = ({ articles, source, location }: Props) => {
               location={`${location}.${index}`}
               feedType="following"
               contentType={contentType}
-              articleId={article.id}
+              id={article.id}
             />
           </section>
         </Slides.Item>

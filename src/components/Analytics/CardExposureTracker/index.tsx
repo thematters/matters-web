@@ -1,43 +1,46 @@
-import { useContext, useRef } from 'react'
+import { useContext, useRef, useState } from 'react'
 import { Waypoint } from 'react-waypoint'
 
-import { useInView, ViewerContext } from '~/components'
+import { ViewerContext } from '~/components'
 
 import { ActivityType, analytics, ContentType, FeedType } from '~/common/utils'
 
 export const CardExposureTracker = ({
-  articleId,
+  id,
   location,
   feedType,
   contentType,
 }: {
   location: number | string
-  articleId: string
+  id: string
   feedType: FeedType
   contentType: ContentType | ActivityType
 }) => {
   const viewer = useContext(ViewerContext)
   const ref = useRef(null)
-  const isVisible = useInView(ref)
+  const [timerId, setTimerId] = useState<number>()
 
   return (
     <Waypoint
       ref={ref}
       onEnter={() => {
         // start timing 500ms after scroll into view
-        setTimeout(() => {
-          // analytics
-          if (isVisible) {
+        // only start timer if it has not been setup
+        if (!timerId) {
+          const timer = window.setTimeout(() => {
+            // analytics
             analytics.trackEvent('card_exposure', {
               feedType,
               contentType,
               location,
               userId: viewer.id,
-              articleId,
+              id,
             })
-          }
-        }, 500)
+          }, 500)
+          setTimerId(timer)
+        }
       }}
+      onLeave={() => window.clearTimeout(timerId)}
     />
   )
 }

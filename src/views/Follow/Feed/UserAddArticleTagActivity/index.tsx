@@ -62,7 +62,7 @@ const UserAddArticleTagActivity = ({
         location={location}
         feedType="following"
         contentType={__typename}
-        articleId={node.id}
+        id={node.id}
       />
     </>
   )

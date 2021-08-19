@@ -134,7 +134,7 @@ interface ClickFeedProp {
  */
 
 interface CardExposureProp {
-  articleId: string
+  id: string
   feedType: FeedType
   contentType: ContentType | ActivityType
   location: number | string

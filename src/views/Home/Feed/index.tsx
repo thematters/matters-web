@@ -235,7 +235,7 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
                 contentType="article"
                 feedType={sortBy}
                 location={i}
-                articleId={edge.node.id}
+                id={edge.node.id}
               />
             </List.Item>
           )

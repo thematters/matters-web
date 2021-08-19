@@ -62,7 +62,7 @@ const UserPublishArticleActivity = ({
         }
       />
       <CardExposureTracker
-        articleId={node.id}
+        id={node.id}
         location={location}
         feedType="following"
         contentType={__typename}
