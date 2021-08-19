@@ -11,7 +11,7 @@ export const CIRCLE_INCOME_ANALYTICS = gql`
             date
           }
           thisMonth
-          lastMonth
+          nextMonth
           total
         }
       }
