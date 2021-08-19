@@ -1,6 +1,6 @@
 import { TextIcon } from '~/components'
 
-import { toAmountString } from '~/common/utils'
+import { formatAmount } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -42,7 +42,7 @@ const Amount = ({ amount, currency, state }: AmountProps) => {
         &nbsp;
         {currency}
         &nbsp;
-        {toAmountString(Math.abs(amount))}
+        {formatAmount(Math.abs(amount))}
       </TextIcon>
       <style jsx>{styles}</style>
     </section>

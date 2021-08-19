@@ -158,6 +158,44 @@
   box-shadow: var(--shadow-dark);
 }
 
+/* theme:tooltip:chart */
+.tippy-box[data-theme='tooltip:chart'] {
+  padding: var(--spacing-xx-tight);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  line-height: 1rem;
+  color: var(--color-white);
+  text-align: left;
+  background: var(--color-grey-darker);
+  border-radius: var(--spacing-xx-tight);
+
+  & > .tippy-arrow {
+    color: var(--color-grey-darker);
+  }
+
+  &[data-placement^='top'] > .tippy-arrow::before {
+    bottom: -5px;
+    left: 2px;
+    border-width: 6px 6px 0;
+  }
+
+  &[data-placement^='bottom'] > .tippy-arrow::before {
+    top: -5px;
+    left: 2px;
+    border-width: 0 6px 6px;
+  }
+
+  &[data-placement^='left'] > .tippy-arrow::before {
+    right: -5px;
+    border-width: 6px 0 6px 6px;
+  }
+
+  &[data-placement^='right'] > .tippy-arrow::before {
+    left: -5px;
+    border-width: 6px 6px 6px 0;
+  }
+}
+
 /* shadow */
 .tippy-box {
   &[data-theme='shadow-light'] {

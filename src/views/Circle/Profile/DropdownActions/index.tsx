@@ -5,6 +5,7 @@ import { useContext } from 'react'
 import {
   Button,
   DropdownDialog,
+  IconAnalytics24,
   IconEdit16,
   IconLogout24,
   IconMore32,
@@ -34,7 +35,7 @@ type DropdownActionsProps = {
 }
 
 interface Controls {
-  hasEditCircle: boolean
+  isCircleOwner: boolean
   hasUnsubscribeCircle: boolean
 }
 
@@ -43,17 +44,29 @@ type BaseDropdownActionsProps = DialogProps & Controls
 const BaseDropdownActions = ({
   circle,
 
-  hasEditCircle,
+  isCircleOwner,
   hasUnsubscribeCircle,
 
   openUnsubscribeCircleDialog,
 }: BaseDropdownActionsProps) => {
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
     <Menu width={isInDropdown ? 'sm' : undefined}>
-      {hasEditCircle && (
+      {isCircleOwner && (
         <Menu.Item {...toPath({ page: 'circleSettings', circle })}>
           <TextIcon icon={<IconEdit16 size="md" />} size="md" spacing="base">
             <Translate id="manageCircle" />
+          </TextIcon>
+        </Menu.Item>
+      )}
+
+      {isCircleOwner && (
+        <Menu.Item {...toPath({ page: 'circleAnalytics', circle })}>
+          <TextIcon
+            icon={<IconAnalytics24 size="md" />}
+            size="md"
+            spacing="base"
+          >
+            <Translate id="circleAnalytics" />
           </TextIcon>
         </Menu.Item>
       )}
@@ -87,7 +100,7 @@ const BaseDropdownActions = ({
           onClick={openDialog}
           ref={ref}
         >
-          {hasEditCircle ? (
+          {isCircleOwner ? (
             <IconSettings32 size="lg" color="white" />
           ) : (
             <IconMore32 size="lg" color="white" />
@@ -103,7 +116,7 @@ const DropdownActions = ({ circle }: DropdownActionsProps) => {
   const isOwner = circle.owner.id === viewer.id
   const isMember = !!circle.isMember
   const controls = {
-    hasEditCircle: isOwner,
+    isCircleOwner: isOwner,
     hasUnsubscribeCircle: isMember,
   }
 

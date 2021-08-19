@@ -1,7 +1,7 @@
 import { numRound } from './number'
 
 // https://stackoverflow.com/a/14428340/3786947
-export const toAmountString = (
+export const formatAmount = (
   num: number,
   decPlaces: number = 2,
   sections: number = 3

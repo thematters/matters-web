@@ -24,9 +24,9 @@ import {
 } from '~/common/enums'
 import {
   calcMattersFee,
+  formatAmount,
   numRound,
   parseFormSubmitErrors,
-  toAmountString,
   validatePaymentPassword,
   validatePayoutAmount,
 } from '~/common/utils'
@@ -123,7 +123,7 @@ const BaseConfirm: React.FC<FormProps> = ({
               </ConfirmTable.Col>
 
               <ConfirmTable.Col>
-                {currency} {toAmountString(balance)}
+                {currency} {formatAmount(balance)}
               </ConfirmTable.Col>
             </ConfirmTable.Row>
           </ConfirmTable>
@@ -167,7 +167,7 @@ const BaseConfirm: React.FC<FormProps> = ({
               </ConfirmTable.Col>
 
               <ConfirmTable.Col>
-                {currency} {toAmountString(values.amount)}
+                {currency} {formatAmount(values.amount)}
               </ConfirmTable.Col>
             </ConfirmTable.Row>
 
@@ -201,7 +201,7 @@ const BaseConfirm: React.FC<FormProps> = ({
               </ConfirmTable.Col>
 
               <ConfirmTable.Col>
-                - {currency} {toAmountString(fee)}
+                - {currency} {formatAmount(fee)}
               </ConfirmTable.Col>
             </ConfirmTable.Row>
 
@@ -215,7 +215,7 @@ const BaseConfirm: React.FC<FormProps> = ({
               </ConfirmTable.Col>
 
               <ConfirmTable.Col>
-                {currency} {toAmountString(total)}
+                {currency} {formatAmount(total)}
               </ConfirmTable.Col>
             </ConfirmTable.Row>
           </ConfirmTable>
