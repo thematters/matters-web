@@ -3,6 +3,8 @@ import _random from 'lodash/random'
 
 import { StackedAreaChart } from '~/components'
 
+import { CHART_COLOR } from '~/common/enums'
+
 const MOCK_INCOME_ANALYTICS = [
   { time: new Date(2021, 0, 1), income: 255 },
   { time: new Date(2021, 1, 1), income: 433 },
@@ -48,7 +50,12 @@ const Charts = () => (
           {(props) => (
             <>
               <StackedAreaChart.Axis {...props} />
-              <StackedAreaChart.Area {...props} />
+              <StackedAreaChart.Area
+                {...props}
+                colors={{
+                  income: CHART_COLOR.green,
+                }}
+              />
               <StackedAreaChart.Tooltip {...props} />
             </>
           )}
@@ -61,7 +68,13 @@ const Charts = () => (
           {(props) => (
             <>
               <StackedAreaChart.Axis {...props} />
-              <StackedAreaChart.Area {...props} />
+              <StackedAreaChart.Area
+                {...props}
+                colors={{
+                  invitation: CHART_COLOR.green,
+                  paid: CHART_COLOR.yellow,
+                }}
+              />
               <StackedAreaChart.Tooltip
                 {...props}
                 formatter={(datum) => {
@@ -96,7 +109,13 @@ const Charts = () => (
           {(props) => (
             <>
               <StackedAreaChart.Axis {...props} />
-              <StackedAreaChart.Area {...props} />
+              <StackedAreaChart.Area
+                {...props}
+                colors={{
+                  invitation: CHART_COLOR.green,
+                  paid: CHART_COLOR.yellow,
+                }}
+              />
               <StackedAreaChart.Tooltip {...props} />
             </>
           )}
