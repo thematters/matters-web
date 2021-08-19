@@ -13,6 +13,9 @@ import styles from './styles.css'
 
 type AxisProps = InnerChart
 
+export const AXIS_OFFSET_X = 10
+export const AXIS_OFFSET_Y = 12
+
 const Axis: React.FC<AxisProps> = ({
   data,
   width,
@@ -45,7 +48,7 @@ const Axis: React.FC<AxisProps> = ({
             }
           })
       )
-      .call((g) => g.selectAll('text').attr('y', 10))
+      .call((g) => g.selectAll('text').attr('y', AXIS_OFFSET_X))
       .call((g) => g.select('.domain').remove())
 
     // Draw Y Axis
@@ -57,7 +60,7 @@ const Axis: React.FC<AxisProps> = ({
           .tickSizeOuter(0)
           .tickFormat((d, index) => (index % 2 ? `${d3Format('d')(d)}` : ``))
       )
-      .call((g) => g.selectAll('text').attr('x', -12))
+      .call((g) => g.selectAll('text').attr('x', -AXIS_OFFSET_Y))
       .call((g) => g.select('.domain').remove())
   }, [xScale, yScale])
 

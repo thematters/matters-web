@@ -12,6 +12,9 @@ svg {
 }
 
 .xAxis {
+  & :global(.tick:first-of-type text) {
+    text-anchor: start;
+  }
   & :global(.tick:last-of-type text) {
     text-anchor: end;
   }

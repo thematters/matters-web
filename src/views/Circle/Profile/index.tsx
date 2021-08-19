@@ -164,7 +164,7 @@ const CircleProfile = () => {
 
         <footer>
           <section className="counts">
-            <MembersDialog circle={circle}>
+            <MembersDialog>
               {({ openDialog: openMembersDialog }) => (
                 <button type="button" onClick={openMembersDialog}>
                   <span className="count">

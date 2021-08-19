@@ -25,35 +25,44 @@ const Area: React.FC<AreaProps> = ({ data, series, xScale, yScale, yMin }) => {
   ]
 
   useEffect(() => {
+    // Clear
+    d3Select(gRef.current).selectAll('path').remove()
+
     // Define color scales
-    const areaColor = d3ScaleOrdinal<string>()
+    const areaColor1 = d3ScaleOrdinal<string>()
       .domain(stackedKeys)
-      .range(stackedKeys.map((k) => `url(#area-${k})`))
+      .range(stackedKeys.map((k) => `url(#area-${k}-1)`))
+
+    const areaColor2 = d3ScaleOrdinal<string>()
+      .domain(stackedKeys)
+      .range(stackedKeys.map((k) => `url(#area-${k}-2)`))
 
     const lineColor = d3ScaleOrdinal<string>()
       .domain(stackedKeys)
       .range(stackedKeys.map((k) => `url(#line-${k})`))
 
     // Draw area
-    d3Select(gRef.current)
-      .selectAll()
-      .data(series)
-      .join('path')
-      .attr(
-        'd',
-        d3Area<any>()
-          .curve(d3CurveNatural)
-          .x((d) => xScale(d.data.time))
-          // yMin is the minimum value of the y0
-          .y0((d) => yScale(d[0] || yMin))
-          .y1((d) => yScale(d[1]))
-      )
-      .style('fill', (d) => areaColor(d.key))
-      .style('opacity', 0)
-      .transition(d3Transition() as any)
-      .duration(1000)
-      .ease(d3EaseLinear)
-      .style('opacity', 1)
+    ;[1, 2].forEach((i) => {
+      d3Select(gRef.current)
+        .selectAll()
+        .data(series)
+        .join('path')
+        .attr(
+          'd',
+          d3Area<any>()
+            .curve(d3CurveNatural)
+            .x((d) => xScale(d.data.time))
+            // yMin is the minimum value of the y0
+            .y0((d) => yScale(d[0] || yMin))
+            .y1((d) => yScale(d[1]))
+        )
+        .style('fill', (d) => (i === 1 ? areaColor1(d.key) : areaColor2(d.key)))
+        .style('opacity', 0)
+        .transition(d3Transition() as any)
+        .duration(1000)
+        .ease(d3EaseLinear)
+        .style('opacity', 1)
+    })
 
     // Draw line
     d3Select(gRef.current)
@@ -88,7 +97,7 @@ const Area: React.FC<AreaProps> = ({ data, series, xScale, yScale, yMin }) => {
       <defs>
         {stackedKeys.map((key, index) => (
           <Fragment key={key}>
-            <linearGradient id={`area-${key}`} x1="0" y1="0" x2="0" y2="1">
+            <linearGradient id={`area-${key}-1`} x1="0" y1="0" x2="0" y2="1">
               <stop stopColor={stackedColors[index].area} />
               <stop
                 offset="83.33%"
@@ -98,15 +107,18 @@ const Area: React.FC<AreaProps> = ({ data, series, xScale, yScale, yMin }) => {
               <stop offset="100%" stopColor="white" stopOpacity="0" />
             </linearGradient>
 
+            <linearGradient id={`area-${key}-2`} x1="0" y1="0" x2="1" y2="0">
+              <stop stopColor="white" />
+              <stop offset="13.5%" stopColor="white" stopOpacity="0" />
+              <stop offset="87.5%" stopColor="white" stopOpacity="0" />
+              <stop offset="100%" stopColor="white" />
+            </linearGradient>
+
             <linearGradient id={`line-${key}`} x1="0" y1="0" x2="1" y2="0">
-              <stop stopColor={stackedColors[index].line} stopOpacity="0" />
-              <stop offset="20%" stopColor={stackedColors[index].line} />
-              <stop offset="80%" stopColor={stackedColors[index].line} />
-              <stop
-                offset="100%"
-                stopColor={stackedColors[index].line}
-                stopOpacity="0"
-              />
+              <stop stopColor="white" stopOpacity="0" />
+              <stop offset="13.5%" stopColor={stackedColors[index].line} />
+              <stop offset="87.5%" stopColor={stackedColors[index].line} />
+              <stop offset="100%" stopColor="white" stopOpacity="0" />
             </linearGradient>
           </Fragment>
         ))}
