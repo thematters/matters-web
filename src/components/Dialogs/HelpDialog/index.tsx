@@ -1,6 +1,5 @@
 import {
   Dialog,
-  IconRead16,
   IconReadTimeTotal16,
   TextIcon,
   Translate,
@@ -55,7 +54,7 @@ const ReadTime = () => (
 const ReadCount = () => (
   <>
     <h2 className="title">
-      <TextIcon icon={<IconRead16 size="md" />} weight="md">
+      <TextIcon icon={<IconReadTimeTotal16 size="md" />} weight="md">
         <Translate id="readCount" />
       </TextIcon>
     </h2>
