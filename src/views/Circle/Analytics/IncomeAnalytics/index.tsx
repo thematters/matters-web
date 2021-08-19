@@ -9,6 +9,7 @@ import {
   useRoute,
 } from '~/components'
 
+import { CHART_COLOR } from '~/common/enums'
 import { formatAmount } from '~/common/utils'
 
 import { ReactComponent as IconAnalyticsIncome24 } from '@/public/static/icons/24px/analytics-income.svg'
@@ -50,17 +51,17 @@ const Content = () => {
     value: datum.value,
   }))
 
-  const incomeTwoMonthsAgo =
+  const incomeLastMonthsAgo =
     income.history[income.history.length - 2].value || 0
 
-  const percentageChangeLastMonth =
-    incomeTwoMonthsAgo > 0
-      ? ((income.lastMonth - incomeTwoMonthsAgo) / incomeTwoMonthsAgo) * 100
+  const percentageChangeThisMonth =
+    incomeLastMonthsAgo > 0
+      ? ((income.thisMonth - incomeLastMonthsAgo) / incomeLastMonthsAgo) * 100
       : undefined
 
-  const percentageChangeThisMonth =
-    income.lastMonth > 0
-      ? ((income.thisMonth - income.lastMonth) / income.lastMonth) * 100
+  const percentageChangeNextMonth =
+    income.thisMonth > 0
+      ? ((income.nextMonth - income.thisMonth) / income.thisMonth) * 100
       : undefined
 
   return (
@@ -70,26 +71,26 @@ const Content = () => {
           <InfoTiles.Tile
             title={
               <Translate
-                zh_hant="上月營收"
-                zh_hans="上月营收"
-                en="Last Month"
-              />
-            }
-            value={formatAmount(income.lastMonth, 0)}
-            unit="HKD"
-            percentageChange={percentageChangeLastMonth}
-          />
-          <InfoTiles.Tile
-            title={
-              <Translate
-                zh_hant="本月預期營收"
-                zh_hans="本月预期营收"
-                en="This Month (Estimation)"
+                zh_hant="本月營收"
+                zh_hans="本月营收"
+                en="This Month"
               />
             }
             value={formatAmount(income.thisMonth, 0)}
             unit="HKD"
             percentageChange={percentageChangeThisMonth}
+          />
+          <InfoTiles.Tile
+            title={
+              <Translate
+                zh_hant="下月預期營收"
+                zh_hans="下月预期营收"
+                en="Next Month (Estimation)"
+              />
+            }
+            value={formatAmount(income.nextMonth, 0)}
+            unit="HKD"
+            percentageChange={percentageChangeNextMonth}
           />
         </InfoTiles.Group>
         <InfoTiles.Group>
@@ -109,7 +110,12 @@ const Content = () => {
             {(props) => (
               <>
                 <StackedAreaChart.Axis {...props} />
-                <StackedAreaChart.Area {...props} />
+                <StackedAreaChart.Area
+                  {...props}
+                  colors={{
+                    value: CHART_COLOR.green,
+                  }}
+                />
                 <StackedAreaChart.Tooltip
                   {...props}
                   formatter={(datum: any) =>
