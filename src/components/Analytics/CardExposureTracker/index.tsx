@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from 'react'
+import { useContext, useState } from 'react'
 import { Waypoint } from 'react-waypoint'
 
 import { ViewerContext } from '~/components'
@@ -17,12 +17,10 @@ export const CardExposureTracker = ({
   contentType: ContentType | ActivityType
 }) => {
   const viewer = useContext(ViewerContext)
-  const ref = useRef(null)
   const [timerId, setTimerId] = useState<number>()
 
   return (
     <Waypoint
-      ref={ref}
       onEnter={() => {
         // start timing 500ms after scroll into view
         // only start timer if it has not been setup

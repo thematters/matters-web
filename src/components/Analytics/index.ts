@@ -67,16 +67,19 @@ const handleAnalytics = async ({
 
   // if we have an event of type identify
   if (type === ANALYTIC_TYPES.IDENTIFY) {
+    let id
     // logged in
     if (user && 'id' in user && 'info' in user) {
-      const { id } = user as AnalyticsUser
+      id = user.id
       window.gtag('config', GA_TRACKING_ID, {
         user_id: id,
       })
       analytics?.setUserId(id, { global: true })
-    } else {
-      // visitor
     }
+    analyticsDebugger(ANALYTIC_TYPES.IDENTIFY, {
+      id,
+      setUserId: analytics?.setUserId,
+    })
   }
 }
 
