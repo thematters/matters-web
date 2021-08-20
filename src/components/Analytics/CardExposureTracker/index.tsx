@@ -18,13 +18,14 @@ export const CardExposureTracker = ({
 }) => {
   const viewer = useContext(ViewerContext)
   const [timerId, setTimerId] = useState<number>()
+  const [recorded, setRecorded] = useState(false)
 
   return (
     <Waypoint
       onEnter={() => {
         // start timing 500ms after scroll into view
         // only start timer if it has not been setup
-        if (!timerId) {
+        if (!recorded) {
           const timer = window.setTimeout(() => {
             // analytics
             analytics.trackEvent('card_exposure', {
@@ -34,6 +35,7 @@ export const CardExposureTracker = ({
               userId: viewer.id,
               id,
             })
+            setRecorded(true)
           }, 500)
           setTimerId(timer)
         }
