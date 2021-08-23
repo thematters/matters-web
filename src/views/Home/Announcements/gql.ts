@@ -1,9 +1,12 @@
 import gql from 'graphql-tag'
 
-export const ANNOUNCEMENTS_PUBLIC = gql`
-  query AnnouncementsPublic {
+export const VISIBLE_ANNOUNCEMENTS = gql`
+  query VisibleAnnouncements($input: AnnouncementsInput!) {
+    viewer {
+      id
+    }
     official {
-      announcements(input: { visible: true }) {
+      announcements(input: $input) {
         id
         title
         cover
