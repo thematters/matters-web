@@ -4,28 +4,30 @@ import _get from 'lodash/get'
 import _some from 'lodash/some'
 import { useState } from 'react'
 
-import { QueryError, Spinner, Translate, usePublicQuery } from '~/components'
+import { QueryError, Spinner, Translate } from '~/components'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
 import { ADD_TOAST, STORAGE_KEY_ANNOUNCEMENT } from '~/common/enums'
 import { storage } from '~/common/utils'
 
 import Carousel from './Carousel'
-import { ANNOUNCEMENTS_PUBLIC } from './gql'
+import { VISIBLE_ANNOUNCEMENTS } from './gql'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import {
-  AnnouncementsPublic,
-  AnnouncementsPublic_official_announcements as AnnouncementPublicType,
-} from './__generated__/AnnouncementsPublic'
+  VisibleAnnouncements,
+  VisibleAnnouncements_official_announcements as VisibleAnnouncementsType,
+} from './__generated__/VisibleAnnouncements'
 
 type BaseAnnouncementsProps = {
   hide: () => void
 }
 
 const BaseAnnouncements = ({ hide }: BaseAnnouncementsProps) => {
-  const { data, error, loading } =
-    usePublicQuery<AnnouncementsPublic>(ANNOUNCEMENTS_PUBLIC)
+  const { data, error, loading } = useQuery<VisibleAnnouncements>(
+    VISIBLE_ANNOUNCEMENTS,
+    { variables: { input: { visible: true } } }
+  )
   const [type, setType] = useState('all')
 
   if (loading) {
@@ -40,7 +42,7 @@ const BaseAnnouncements = ({ hide }: BaseAnnouncementsProps) => {
     data,
     'official.announcements',
     []
-  ) as AnnouncementPublicType[]
+  ) as VisibleAnnouncementsType[]
 
   if (!allItems || allItems.length === 0) {
     return null
