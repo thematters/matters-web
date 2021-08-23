@@ -9,10 +9,10 @@ import DropdownActions, { DropdownActionsProps } from '../DropdownActions'
 import Dot from './Dot'
 import styles from './styles.css'
 
-import { AnnouncementsPublic_official_announcements as AnnouncementPublicType } from '../__generated__/AnnouncementsPublic'
+import { VisibleAnnouncements_official_announcements as VisibleAnnouncementsType } from '../__generated__/VisibleAnnouncements'
 
 type CarouselProps = {
-  items: AnnouncementPublicType[]
+  items: VisibleAnnouncementsType[]
   hide: () => void
 } & DropdownActionsProps
 
