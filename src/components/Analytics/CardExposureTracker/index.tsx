@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Waypoint } from 'react-waypoint'
 
 import { ViewerContext } from '~/components'
@@ -20,6 +20,9 @@ export const CardExposureTracker = ({
   const [timerId, setTimerId] = useState<number>()
   const [recorded, setRecorded] = useState(false)
 
+  // clean up when unmount
+  useEffect(() => () => window.clearTimeout(timerId), [timerId])
+
   return (
     <Waypoint
       onEnter={() => {
@@ -40,6 +43,7 @@ export const CardExposureTracker = ({
           setTimerId(timer)
         }
       }}
+      // cancel timer on leave
       onLeave={() => window.clearTimeout(timerId)}
     />
   )
