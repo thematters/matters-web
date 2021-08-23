@@ -1,3 +1,4 @@
+export * from './useCarousel'
 export * from './useDialogSwitch'
 export * from './useEventListener'
 export * from './useFeatures'

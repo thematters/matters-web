@@ -44,6 +44,9 @@ export default gql`
     "Whether cicle banner is shown"
     circleBanner: Boolean!
 
+    "Whether announcement is shown"
+    announcement: Int
+
     "Local language setting"
     language: Language
   }

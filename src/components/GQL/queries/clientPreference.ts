@@ -16,6 +16,7 @@ export default gql`
         enabled
       }
       circleBanner
+      announcement
       language
     }
   }
