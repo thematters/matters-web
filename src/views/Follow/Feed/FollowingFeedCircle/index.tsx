@@ -14,6 +14,7 @@ export type CircleDigestFeedProps = {
   circle: FollowingFeedCircle
   header?: React.ReactNode
   date: Date | string | number
+  onClick?: () => any
 } & DropdownActionsControls
 
 const FeedCircle = ({
@@ -21,6 +22,7 @@ const FeedCircle = ({
   header,
   date,
   actions,
+  ...rest
 }: CircleDigestFeedProps) => {
   const { displayName, description } = circle
 
@@ -38,6 +40,7 @@ const FeedCircle = ({
         spacing={['base', 'base']}
         bgColor="grey-lighter"
         borderRadius="xtight"
+        {...rest}
       >
         <section className="content">
           <h3 className="title">
