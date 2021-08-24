@@ -46,7 +46,7 @@ const BaseOnboardingTasksDialog: React.FC<OnboardingTasksDialogProps> = ({
                 en="The guide will lead you to more precious creators and marvelous work."
               />
             </span>
-              <br />
+            <br />
             <span className="bold">
               <Translate
                 zh_hant="點擊下面 5 顆星球查看任務提示！"
@@ -56,9 +56,9 @@ const BaseOnboardingTasksDialog: React.FC<OnboardingTasksDialogProps> = ({
             </span>
           </section>
 
-          <Galaxy task={task} onClick={setTask}/>
+          <Galaxy task={task} onClick={setTask} />
 
-          <Tasks task={task}/>
+          <Tasks task={task} />
         </Dialog.Content>
       </Dialog>
 
