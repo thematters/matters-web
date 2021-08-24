@@ -1,5 +1,5 @@
 import { useEmblaCarousel } from 'embla-carousel/react'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { Button, Card, IconClose32, useCarousel } from '~/components'
 
@@ -28,6 +28,10 @@ const Carousel = ({
   const [snaps, setSnaps] = useState<any[]>([])
   const [carousel, carouselApi] = useEmblaCarousel({ skipSnaps: false })
 
+  // state of carusel
+  const scrolling = useRef(false)
+  const settled = useRef(true)
+
   const autoplay = useCallback(() => {
     if (!carouselApi) {
       return
@@ -41,7 +45,7 @@ const Carousel = ({
     }
   }, [carouselApi])
 
-  const { play, stop } = useCarousel(autoplay, 4000)
+  const { play, stop } = useCarousel(autoplay, 5000)
 
   const scroll = (index: number) => {
     if (!carouselApi) {
@@ -58,6 +62,13 @@ const Carousel = ({
     }
   }
 
+  const onCaptureClick = (event: any) => {
+    if (scrolling.current) {
+      event.preventDefault()
+      event.stopPropagation()
+    }
+  }
+
   useEffect(() => {
     if (!carouselApi) {
       return
@@ -69,15 +80,25 @@ const Carousel = ({
     setDot(0)
     setSnaps(carouselApi.scrollSnapList())
 
-    carouselApi.on('select', onSelect)
     carouselApi.on('pointerDown', stop)
+    carouselApi.on('select', onSelect)
+    carouselApi.on('scroll', () => {
+      if (!scrolling.current && settled.current) {
+        scrolling.current = true
+        settled.current = false
+      }
+    })
+    carouselApi.on('settle', () => {
+      scrolling.current = false
+      settled.current = true
+    })
 
     play()
   }, [items, carouselApi])
 
   return (
     <div className="outer">
-      <div className="viewport" ref={carousel}>
+      <div className="viewport" ref={carousel} onClickCapture={onCaptureClick}>
         <div className="container">
           {items.map((item) => {
             if (!item.cover) {
