@@ -94,7 +94,6 @@ const Carousel = ({
     })
 
     play()
-
   }, [items, carouselApi])
 
   return (
