@@ -27,7 +27,11 @@ import TaskItem from './TaskItem'
 
 import { CreateDraft } from '~/components/GQL/mutations/__generated__/CreateDraft'
 
-const Tasks = () => {
+interface Props {
+  task: number
+}
+
+const Tasks = ({ task }: Props) => {
   const router = useRouter()
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
@@ -73,96 +77,122 @@ const Tasks = () => {
 
   return (
     <>
-      <ul>
-        <TaskItem
-          title={
-            <Translate
-              zh_hant="設置 Liker ID 化讚為賞"
-              zh_hans="设置 Liker ID 化赞为赏"
-              en="Setup Liker ID and turn likes into income"
-            />
-          }
-          done={viewer.onboardingTasks.tasks.likerId}
-          onClick={
-            viewer.onboardingTasks.tasks.likerId
-              ? undefined
-              : () =>
-                  window.dispatchEvent(
-                    new CustomEvent(OPEN_LIKE_COIN_DIALOG, {})
-                  )
-          }
-        />
+      <section className="task">
+        {task === 1 && (
+          <TaskItem
+            order={
+              <Translate zh_hant="任務一" zh_hans="任务一" en="First task" />
+            }
+            title={
+              <Translate
+                zh_hant="設置 Liker ID 化讚為賞"
+                zh_hans="设置 Liker ID 化赞为赏"
+                en="Setup Liker ID and turn likes into income"
+              />
+            }
+            done={viewer.onboardingTasks.tasks.likerId}
+            onClick={
+              viewer.onboardingTasks.tasks.likerId
+                ? undefined
+                : () =>
+                    window.dispatchEvent(
+                      new CustomEvent(OPEN_LIKE_COIN_DIALOG, {})
+                    )
+            }
+          />
+        )}
 
-        <TaskItem
-          title={
-            <Translate
-              zh_hant="追蹤 5 位喜歡的創作者"
-              zh_hans="追踪 5 位喜欢的创作者"
-              en="Follow at least 5 creators"
-            />
-          }
-          done={viewer.onboardingTasks.tasks.followee}
-          onClick={
-            viewer.onboardingTasks.tasks.followee
-              ? undefined
-              : openRecommendAuthorDialog
-          }
-        />
+        {task === 2 && (
+          <TaskItem
+            order={
+              <Translate zh_hant="任務二" zh_hans="任务二" en="Second task" />
+            }
+            title={
+              <Translate
+                zh_hant="追蹤 5 位喜歡的創作者"
+                zh_hans="追踪 5 位喜欢的创作者"
+                en="Follow at least 5 creators"
+              />
+            }
+            done={viewer.onboardingTasks.tasks.followee}
+            onClick={
+              viewer.onboardingTasks.tasks.followee
+                ? undefined
+                : openRecommendAuthorDialog
+            }
+          />
+        )}
 
-        <TaskItem
-          title={
-            <Translate
-              zh_hant="追蹤 5 個感興趣的標籤"
-              zh_hans="追踪 5 个感兴趣的标签"
-              en="Follow at least 5 interested tags"
-            />
-          }
-          done={viewer.onboardingTasks.tasks.followingTag}
-          onClick={
-            viewer.onboardingTasks.tasks.followingTag
-              ? undefined
-              : openRecommendTagDialog
-          }
-        />
+        {task === 3 && (
+          <TaskItem
+            order={
+              <Translate zh_hant="任務三" zh_hans="任务三" en="Third task" />
+            }
+            title={
+              <Translate
+                zh_hant="追蹤 5 個感興趣的標籤"
+                zh_hans="追踪 5 个感兴趣的标签"
+                en="Follow at least 5 interested tags"
+              />
+            }
+            done={viewer.onboardingTasks.tasks.followingTag}
+            onClick={
+              viewer.onboardingTasks.tasks.followingTag
+                ? undefined
+                : openRecommendTagDialog
+            }
+          />
+        )}
 
-        <TaskItem
-          title={
-            <Translate
-              zh_hant="用第一篇創作同社區問好"
-              zh_hans="用第一篇创作同社区问好"
-              en="Say hi to the community with your first work"
-            />
-          }
-          subtitle={
-            <Translate
-              zh_hant="參與 #新人打卡 關注"
-              zh_hans="参与 #新人打卡 关注"
-              en="Join #新人打卡"
-            />
-          }
-          done={viewer.onboardingTasks.tasks.article}
-          onClick={
-            viewer.onboardingTasks.tasks.article ? undefined : createDraft
-          }
-        />
-        <TaskItem
-          title={
-            <Translate
-              zh_hant="解鎖評論權限參與更多互動"
-              zh_hans="解锁评论权限参与更多互动"
-              en="Unlock comment feature to participate more interaction"
-            />
-          }
-          subtitle={
-            <Translate
-              zh_hant="獲得拍手數 × 2 + 閱讀篇數 ≥ 10"
-              zh_hans="获得拍手数 × 2 + 阅读篇数 ≥ 10"
-              en="Received likes × 2 + read article ≥ 10"
-            />
-          }
-          done={viewer.onboardingTasks.tasks.commentPermission}
-        />
-      </ul>
+        {task === 4 && (
+          <TaskItem
+            order={
+              <Translate zh_hant="任務四" zh_hans="任务四" en="Fourth task" />
+            }
+            title={
+              <Translate
+                zh_hant="用第一篇創作同社區問好"
+                zh_hans="用第一篇创作同社区问好"
+                en="Say hi to the community with your first work"
+              />
+            }
+            subtitle={
+              <Translate
+                zh_hant="參與 #新人打卡 關注"
+                zh_hans="参与 #新人打卡 关注"
+                en="Join #新人打卡"
+              />
+            }
+            done={viewer.onboardingTasks.tasks.article}
+            onClick={
+              viewer.onboardingTasks.tasks.article ? undefined : createDraft
+            }
+          />
+        )}
+
+        {task === 5 && (
+          <TaskItem
+            order={
+              <Translate zh_hant="任務五" zh_hans="任务五" en="Fifth task" />
+            }
+            title={
+              <Translate
+                zh_hant="解鎖評論權限參與更多互動"
+                zh_hans="解锁评论权限参与更多互动"
+                en="Unlock comment feature to participate more interaction"
+              />
+            }
+            subtitle={
+              <Translate
+                zh_hant="獲得拍手數 × 2 + 閱讀篇數 ≥ 10"
+                zh_hans="获得拍手数 × 2 + 阅读篇数 ≥ 10"
+                en="Received likes × 2 + read article ≥ 10"
+              />
+            }
+            done={viewer.onboardingTasks.tasks.commentPermission}
+          />
+        )}
+      </section>
 
       <section className={viewer.onboardingTasks.finished ? 'allDone' : ''}>
         <Dialog.Footer>

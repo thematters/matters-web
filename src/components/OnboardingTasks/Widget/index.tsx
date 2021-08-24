@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import {
   RecommendAuthorDialog,
   RecommendTagDialog,
@@ -5,10 +7,13 @@ import {
   Translate,
 } from '~/components'
 
+import Galaxy from '../Galaxy'
 import Tasks from '../Tasks'
 import styles from './styles.css'
 
 const OnboardingTasksWidget = () => {
+  const [task, setTask] = useState(1)
+
   return (
     <section className="widget">
       <header>
@@ -20,28 +25,29 @@ const OnboardingTasksWidget = () => {
           />
         </Title>
 
-        <p>
-          <Translate
-            zh_hant="導航帶你發現更多寶藏作者與優質作品，"
-            zh_hans="导航带你发现更多宝藏作者与优质作品，"
-            en="This guide will lead you to more precious creators and marvelous work,"
-          />
+        <section>
+          <span>
+            <Translate
+              zh_hant="導航帶你發現更多寶藏作者與優質作品。"
+              zh_hans="导航带你发现更多宝藏作者与优质作品。"
+              en="This guide will lead you to more precious creators and marvelous work."
+            />
+          </span>
           <br />
-          <Translate
-            zh_hant="更有首發限定好禮，留下創作足跡，"
-            zh_hans="更有首发限定好礼，留下创作足迹，"
-            en="as well as gifts for first publication,"
-          />
-          <br />
-          <Translate
-            zh_hant="即拿 LikeCoin 獎賞！🎉"
-            zh_hans="即拿 LikeCoin 奖赏！🎉"
-            en="leave your creation footprint and get LikeCoin reward! 🎉"
-          />
-        </p>
+          <span className="bold">
+            <Translate
+              zh_hant="點擊下面 5 顆星球查看任務提示！"
+              zh_hans="点击下面 5 颗星球查看任务提示！"
+              en="Click planets to see instructions."
+            />
+          </span>
+        </section>
       </header>
 
-      <Tasks />
+      <Galaxy task={task} onClick={setTask} />
+
+      <Tasks task={task} />
+
       <RecommendAuthorDialog />
       <RecommendTagDialog />
 

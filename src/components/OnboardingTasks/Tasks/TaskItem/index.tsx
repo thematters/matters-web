@@ -1,5 +1,3 @@
-import classNames from 'classnames'
-
 import { Card, CardProps, IconArrowRight16, withIcon } from '~/components'
 
 import { ReactComponent as IconOnboardChecked } from '@/public/static/icons/40px/done.svg'
@@ -7,49 +5,49 @@ import { ReactComponent as IconOnboardChecked } from '@/public/static/icons/40px
 import styles from './styles.css'
 
 type TaskItemProps = {
+  order: React.ReactNode
   title: React.ReactNode
   subtitle?: React.ReactNode
   done?: boolean
 } & CardProps
 
 const TaskItem: React.FC<TaskItemProps> = ({
+  order,
   title,
   subtitle,
   done,
   ...cardProps
 }) => {
-  const clickable = cardProps.href || cardProps.onClick
-
-  const containerClasses = classNames({
-    container: true,
-    done,
-  })
-
   return (
-    <li>
-      <Card bgColor="white" {...cardProps} spacing={['tight', 'base']}>
-        <section className={containerClasses}>
+    <section>
+      <Card
+        bgColor="grey-lighter"
+        borderRadius="base"
+        spacing={['tight', 'base']}
+        {...cardProps}
+      >
+        <section className="container">
           <section className="left">
-            <span className="check">
-              {withIcon(IconOnboardChecked)({ size: 'xl-m', color: 'gold' })}
-            </span>
-
             <section className="content">
+              <p className="order">{order}</p>
               <h5 className="title">{title}</h5>
               {subtitle && <p className="subtitle">{subtitle}</p>}
             </section>
           </section>
 
-          {clickable && (
-            <section className="right">
-              <IconArrowRight16 color="grey" />
-            </section>
-          )}
+          <section className="right">
+            {done && (
+              <span className="check">
+                {withIcon(IconOnboardChecked)({ size: 'sm', color: 'gold' })}
+              </span>
+            )}
+            {!done && <IconArrowRight16 color="grey" />}
+          </section>
         </section>
       </Card>
 
       <style jsx>{styles}</style>
-    </li>
+    </section>
   )
 }
 
