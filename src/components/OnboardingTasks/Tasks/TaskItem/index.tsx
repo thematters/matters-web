@@ -9,6 +9,8 @@ type TaskItemProps = {
   title: React.ReactNode
   subtitle?: React.ReactNode
   done?: boolean
+
+  hasArrowIcon?: boolean
 } & CardProps
 
 const TaskItem: React.FC<TaskItemProps> = ({
@@ -16,6 +18,7 @@ const TaskItem: React.FC<TaskItemProps> = ({
   title,
   subtitle,
   done,
+  hasArrowIcon = true,
   ...cardProps
 }) => {
   return (
@@ -41,7 +44,7 @@ const TaskItem: React.FC<TaskItemProps> = ({
                 {withIcon(IconOnboardChecked)({ size: 'sm', color: 'gold' })}
               </span>
             )}
-            {!done && <IconArrowRight16 color="grey" />}
+            {!done && hasArrowIcon && <IconArrowRight16 color="grey" />}
           </section>
         </section>
       </Card>
