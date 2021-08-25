@@ -17,6 +17,7 @@ import { ADD_TOAST, APPRECIATE_DEBOUNCE, Z_INDEX } from '~/common/enums'
 
 import AnonymousButton from './AnonymousButton'
 import AppreciateButton from './AppreciateButton'
+import BlockedButton from './BlockedButton'
 import CivicLikerButton from './CivicLikerButton'
 import ForbiddenButton from './ForbiddenButton'
 import { APPRECIATE_ARTICLE, fragments } from './gql'
@@ -171,6 +172,11 @@ const AppreciationButton = ({
   // Anonymous
   if (!viewer.isAuthed) {
     return <AnonymousButton total={total} />
+  }
+
+  // Blocked
+  if (article.author.isBlocking) {
+    return <BlockedButton total={total} />
   }
 
   // Frobidden
