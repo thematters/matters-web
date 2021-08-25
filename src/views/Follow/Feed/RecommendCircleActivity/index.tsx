@@ -1,4 +1,8 @@
-import { Slides } from '~/components'
+import { useContext } from 'react'
+
+import { Slides, ViewerContext } from '~/components'
+
+import { analytics } from '~/common/utils'
 
 import FollowingRecommendCircle from '../FollowingRecommendCircle'
 import FollowingRecommendHead from '../FollowingRecommendHead'
@@ -9,9 +13,12 @@ import { RecommendCircleActivity_recommendCircles } from './__generated__/Recomm
 
 interface Props {
   circles: RecommendCircleActivity_recommendCircles[] | null
+  location: number
 }
 
-const RecommendCircleActivity = ({ circles }: Props) => {
+const RecommendCircleActivity = ({ circles, location }: Props) => {
+  const viewer = useContext(ViewerContext)
+
   if (!circles || circles.length <= 0) {
     return null
   }
@@ -22,7 +29,19 @@ const RecommendCircleActivity = ({ circles }: Props) => {
       header={<FollowingRecommendHead type="circle" />}
     >
       {circles.map((circle, index) => (
-        <Slides.Item size="md" key={index}>
+        <Slides.Item
+          size="md"
+          key={index}
+          onClick={() => {
+            analytics.trackEvent('click_feed', {
+              type: 'following',
+              contentType: 'CircleRecommendationActivity',
+              location: `${location}.${index}`,
+              id: circle.id,
+              userId: viewer.id,
+            })
+          }}
+        >
           <section className="item">
             <FollowingRecommendCircle circle={circle} />
           </section>

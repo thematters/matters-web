@@ -38,6 +38,11 @@ const handleAnalytics = async ({
   user: AnalyticsUser | {}
   analytics?: firebase.analytics.Analytics
 }) => {
+  let id
+  if (user && 'id' in user) {
+    id = user.id
+  }
+
   // get the information out of the tracked event
   const { type, args } = detail
 
@@ -53,30 +58,35 @@ const handleAnalytics = async ({
         page_referrer: referrer,
       })
 
-      analytics?.logEvent('page_view', {
+      const eventData = {
         page_referrer: referrer,
-      })
-      analyticsDebugger('page_view', {
-        page_referrer: referrer,
-      })
+        user_id: id,
+      }
+      analytics?.logEvent('page_view', eventData)
+      analyticsDebugger('page_view', eventData)
     } else {
-      analytics?.logEvent(args[0], args[1])
-      analyticsDebugger(args[0], args[1])
+      const eventData = {
+        user_id: id,
+        ...args[1],
+      }
+      analytics?.logEvent(args[0], eventData)
+      analyticsDebugger(args[0], eventData)
     }
   }
 
   // if we have an event of type identify
   if (type === ANALYTIC_TYPES.IDENTIFY) {
     // logged in
-    if (user && 'id' in user && 'info' in user) {
-      const { id } = user as AnalyticsUser
+    if (id) {
       window.gtag('config', GA_TRACKING_ID, {
         user_id: id,
       })
       analytics?.setUserId(id, { global: true })
-    } else {
-      // visitor
     }
+    analyticsDebugger(ANALYTIC_TYPES.IDENTIFY, {
+      id,
+      setUserId: analytics?.setUserId,
+    })
   }
 }
 
@@ -114,3 +124,6 @@ AnalyticsListener.fragments = {
     }
   `,
 }
+
+export * from './CardExposureTracker'
+export * from './PageViewTracker'
