@@ -93,7 +93,6 @@ const UserArticles = () => {
   const connectionPath = 'user.articles'
   const user = data?.user
   const { edges, pageInfo } = user?.articles || {}
-  const hasSubscriptions = (user?.subscribedCircles.totalCount || 0) > 0
 
   // private data
   const loadPrivate = (publicData?: UserArticlesPublic) => {
@@ -150,7 +149,7 @@ const UserArticles = () => {
   if (loading) {
     return (
       <>
-        <UserTabs hasSubscriptions={hasSubscriptions} />
+        <UserTabs />
         <Spinner />
       </>
     )
@@ -159,7 +158,7 @@ const UserArticles = () => {
   if (error) {
     return (
       <>
-        <UserTabs hasSubscriptions={hasSubscriptions} />
+        <UserTabs />
         <QueryError error={error} />
       </>
     )
@@ -168,7 +167,7 @@ const UserArticles = () => {
   if (!user || user?.status?.state === 'archived') {
     return (
       <>
-        <UserTabs hasSubscriptions={hasSubscriptions} />
+        <UserTabs />
         <EmptyArticle />
       </>
     )
@@ -202,7 +201,7 @@ const UserArticles = () => {
     return (
       <>
         <CustomHead />
-        <UserTabs hasSubscriptions={hasSubscriptions} />
+        <UserTabs />
         <EmptyArticle />
       </>
     )
@@ -216,7 +215,7 @@ const UserArticles = () => {
     <>
       <CustomHead />
 
-      <UserTabs hasSubscriptions={hasSubscriptions} />
+      <UserTabs />
 
       <ArticleSummaryInfo user={user} />
 

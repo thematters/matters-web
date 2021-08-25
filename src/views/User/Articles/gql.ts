@@ -27,9 +27,6 @@ const fragment = gql`
         }
       }
     }
-    subscribedCircles(input: { first: 0 }) {
-      totalCount
-    }
     status {
       state
       articleCount
