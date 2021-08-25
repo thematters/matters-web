@@ -45,8 +45,8 @@ const BaseRecommendAuthorDialog = ({ children }: Props) => {
               />
               <span> 5 </span>
               <Translate
-                zh_hant="位感興趣的創作者，以開啟追蹤頁的動態時間線，並收到創作者發佈的作品和動態。"
-                zh_hans="位感兴趣的创作者，以开启追踪页的动态时间线，并收到创作者发布的作品和动态。"
+                zh_hant="位感興趣的創作者，以開啟個性化的訂閱時間線，並收到創作者最新發佈的作品和動態。"
+                zh_hans="位感兴趣的创作者，以开启个性化的订阅时间线，并收到创作者最新发布的作品和动态。"
                 en="creators to enable your personal feed and receive updates."
               />
             </p>
