@@ -26,7 +26,10 @@ const Carousel = ({
   const [dot, setDot] = useState(0)
   // @ts-ignore
   const [snaps, setSnaps] = useState<any[]>([])
-  const [carousel, carouselApi] = useEmblaCarousel({ skipSnaps: false })
+  const [carousel, carouselApi] = useEmblaCarousel({
+    loop: true,
+    skipSnaps: false,
+  })
 
   // state of carusel
   const scrolling = useRef(false)
