@@ -22,6 +22,10 @@ export const fragments = {
         hasAppreciate
         appreciateLeft
         canSuperLike @include(if: $includeCanSuperLike)
+        author {
+          id
+          isBlocking
+        }
       }
     `,
   },
