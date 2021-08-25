@@ -96,36 +96,31 @@ const FollowingFeed = () => {
       >
         <List>
           {edges.map(({ node, cursor }, i) => (
-            <List.Item
-              key={node.__typename + cursor}
-              onClick={() => {
-                analytics.trackEvent('click_feed', {
-                  type: 'following',
-                  contentType: node.__typename,
-                  location: i,
-                })
-              }}
-            >
+            <List.Item key={node.__typename + cursor}>
               {node.__typename === 'UserPublishArticleActivity' && (
-                <UserPublishArticleActivity {...node} />
+                <UserPublishArticleActivity location={i} {...node} />
               )}
               {node.__typename === 'UserBroadcastCircleActivity' && (
                 <UserBroadcastCircleActivity {...node} />
               )}
               {node.__typename === 'UserCreateCircleActivity' && (
-                <UserCreateCircleActivity {...node} />
+                <UserCreateCircleActivity location={i} {...node} />
               )}
               {node.__typename === 'UserAddArticleTagActivity' && (
-                <UserAddArticleTagActivity {...node} />
+                <UserAddArticleTagActivity location={i} {...node} />
               )}
               {node.__typename === 'ArticleRecommendationActivity' && (
                 <RecommendArticleActivity
+                  location={i}
                   articles={node.recommendArticles}
                   source={node.source}
                 />
               )}
               {node.__typename === 'CircleRecommendationActivity' && (
-                <RecommendCircleActivity circles={node.recommendCircles} />
+                <RecommendCircleActivity
+                  location={i}
+                  circles={node.recommendCircles}
+                />
               )}
               {node.__typename === 'UserRecommendationActivity' && (
                 <RecommendUserActivity users={node.recommendUsers} />

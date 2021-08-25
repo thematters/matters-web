@@ -11,15 +11,20 @@ interface SlidesProps {
 
 interface SlideItemProps {
   size?: 'sm' | 'md'
+  onClick?: () => any
 }
 
-const SlideItem: React.FC<SlideItemProps> = ({ size = 'sm', children }) => {
+const SlideItem: React.FC<SlideItemProps> = ({
+  size = 'sm',
+  children,
+  ...rest
+}) => {
   const slidesItemClasses = classNames({
     [`size-${size}`]: !!size,
   })
 
   return (
-    <li className={slidesItemClasses}>
+    <li className={slidesItemClasses} {...rest}>
       {children}
       <style jsx>{styles}</style>
     </li>
