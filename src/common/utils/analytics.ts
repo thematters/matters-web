@@ -138,7 +138,6 @@ interface CardExposureProp {
   feedType: FeedType
   contentType: ContentType | ActivityType
   location: number | string
-  userId?: string
 }
 
 // content type

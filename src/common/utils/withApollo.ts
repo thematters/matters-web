@@ -124,6 +124,8 @@ const authLink = setContext((operation, { headers, ...restCtx }) => {
     credentials: isPublicOperation ? 'omit' : 'include',
     headers: {
       ...headers,
+      'x-access-token':
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU1OSIsImlhdCI6MTYyOTE3NjU1OSwiZXhwIjoxNjM2OTUyNTU5fQ.K4Ja4JAK0ww4cBnwDtWz64xIunJArZFcspWgs-uqq7A',
     },
   }
 })
