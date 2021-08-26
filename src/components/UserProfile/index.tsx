@@ -138,23 +138,21 @@ export const UserProfile = () => {
       <>
         <LayoutHeader />
 
-        <section className="user-profile">
-          <Cover fallbackCover={IMAGE_COVER.src} />
-
+        <section className="container">
           <header>
-            <section className="avatar">
-              <Avatar size="xxxl" />
+            <Cover fallbackCover={IMAGE_COVER.src} type="user" />
+
+            <section className="info">
+              <Avatar size="xl" />
+
+              <section className="name">
+                <h2 className="displayName">
+                  {isUserArchived && <Translate id="accountArchived" />}
+                  {isUserBanned && <Translate id="accountBanned" />}
+                </h2>
+              </section>
             </section>
           </header>
-
-          <section className="info">
-            <section className="display-name">
-              <h1 className="name">
-                {isUserArchived && <Translate id="accountArchived" />}
-                {isUserBanned && <Translate id="accountBanned" />}
-              </h1>
-            </section>
-          </section>
 
           <style jsx>{styles}</style>
         </section>
@@ -169,36 +167,42 @@ export const UserProfile = () => {
     <>
       <LayoutHeader />
 
-      <section className="user-profile">
-        <Cover cover={profileCover} fallbackCover={IMAGE_COVER.src} />
-
+      <section className="container">
         <header>
-          <section className="avatar">
-            <Avatar size="xxxl" user={user} />
+          <Cover
+            cover={profileCover}
+            fallbackCover={IMAGE_COVER.src}
+            type="user"
+          />
+
+          <section className="info">
+            <Avatar size="xl" user={user} />
+
+            <section className="name">
+              <h2 className="displayName">{user.displayName}</h2>
+              <p className="userName">@{user.userName}</p>
+            </section>
           </section>
 
-          {!isMe && <FollowUserButton user={user} size="lg" />}
+          {!isMe && (
+            <section className="followButton">
+              <FollowUserButton user={user} inProfile />
+            </section>
+          )}
         </header>
 
-        <section className="info">
-          <section className="display-name">
-            <h1 className="name">{user.displayName}</h1>
-            <AboutMeButton userName={userName} />
-            {hasSeedBadge && <SeedBadge />}
-            {hasGoldenMotorBadge && <GoldenMotorBadge />}
-            {hasArchitectBadge && <ArchitectBadge />}
-            {isCivicLiker && <CivicLikerBadge />}
-          </section>
-
-          <section className="username">
-            <span className="name">@{user.userName}</span>
-            {!isMe && <FollowUserButton.State user={user} />}
-          </section>
-
-          <Expandable>
-            <p className="description">{user.info.description}</p>
-          </Expandable>
+        <section className="badges">
+          <AboutMeButton userName={userName} />
+          {hasSeedBadge && <SeedBadge />}
+          {hasGoldenMotorBadge && <GoldenMotorBadge />}
+          {hasArchitectBadge && <ArchitectBadge />}
+          {isCivicLiker && <CivicLikerBadge />}
+          {!isMe && <FollowUserButton.State user={user} />}
         </section>
+
+        <Expandable>
+          <p className="description">{user.info.description}</p>
+        </Expandable>
 
         <CircleWidget circles={circles} isMe={isMe} />
 

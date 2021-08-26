@@ -52,7 +52,6 @@ export type CoverUploaderProps = {
   entityId?: string
   entityType: ENTITY_TYPE.user | ENTITY_TYPE.tag | ENTITY_TYPE.circle
   onUpload: (assetId: string | null) => void
-  type?: 'circle'
 } & CoverProps
 
 export const CoverUploader = ({
@@ -164,12 +163,22 @@ export const CoverUploader = ({
   return (
     <label htmlFor={fieldId}>
       {!isCircle && (
-        <Cover cover={cover} fallbackCover={fallbackCover} inEditor={inEditor}>
+        <Cover
+          cover={cover}
+          fallbackCover={fallbackCover}
+          inEditor={inEditor}
+          type={type}
+        >
           <Mask />
         </Cover>
       )}
       {isCircle && (
-        <Cover cover={cover} fallbackCover={fallbackCover} inEditor={inEditor}>
+        <Cover
+          cover={cover}
+          fallbackCover={fallbackCover}
+          inEditor={inEditor}
+          type={type}
+        >
           <Mask />
         </Cover>
       )}

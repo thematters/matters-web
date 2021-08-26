@@ -11,7 +11,7 @@ import { FollowButtonUserPrivate } from './__generated__/FollowButtonUserPrivate
 
 interface FollowUserButtonProps {
   user: Partial<FollowButtonUserPrivate>
-  size?: FollowUserButtonSize
+  inProfile?: boolean
 }
 
 const fragments = {
@@ -26,11 +26,9 @@ const fragments = {
   },
 }
 
-export type FollowUserButtonSize = 'lg' | 'md' | 'md-s'
-
 export const FollowUserButton = ({
   user,
-  size = 'md',
+  inProfile,
 }: FollowUserButtonProps) => {
   const viewer = useContext(ViewerContext)
 
@@ -39,9 +37,9 @@ export const FollowUserButton = ({
   }
 
   if (user.isFollowee) {
-    return <Unfollow user={user} size={size} />
+    return <Unfollow user={user} inProfile={inProfile} />
   } else {
-    return <Follow user={user} size={size} />
+    return <Follow user={user} inProfile={inProfile} />
   }
 }
 

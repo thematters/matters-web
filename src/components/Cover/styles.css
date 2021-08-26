@@ -7,13 +7,34 @@
     background-color: var(--color-grey-lighter);
   }
 
-  &::after {
+  &::before {
     display: block;
     padding-bottom: 46.93%;
     content: '';
 
     @media (--sm-up) {
       padding-bottom: 30.14%;
+    }
+  }
+
+  &::after {
+    @mixin expand-to-container;
+
+    content: '';
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.6) 100%
+    );
+  }
+}
+
+.user {
+  &::before {
+    padding-bottom: 70.93%;
+
+    @media (--sm-up) {
+      padding-bottom: 30.9%;
     }
   }
 }
