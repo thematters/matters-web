@@ -1,6 +1,6 @@
 import { Tabs, Translate } from '~/components'
 
-export type FollowingFeedType = 'user' | 'circle' | 'tag'
+export type FollowingFeedType = 'user' | 'tag'
 
 interface FeedTypeProps {
   type: FollowingFeedType
@@ -8,22 +8,25 @@ interface FeedTypeProps {
 }
 
 const FeedType = ({ type, setFeedType }: FeedTypeProps) => {
-  const isCircle = type === 'circle'
   const isTag = type === 'tag'
   const isUser = type === 'user'
 
   return (
     <Tabs sticky>
       <Tabs.Tab onClick={() => setFeedType('user')} selected={isUser}>
-        <Translate zh_hant="作者" zh_hans="作者" en="Author" />
-      </Tabs.Tab>
-
-      <Tabs.Tab onClick={() => setFeedType('circle')} selected={isCircle}>
-        <Translate zh_hant="圍爐" zh_hans="围炉" en="Circle" />
+        <Translate
+          zh_hant="追蹤的用戶"
+          zh_hans="追踪的用戶"
+          en="Following Users"
+        />
       </Tabs.Tab>
 
       <Tabs.Tab onClick={() => setFeedType('tag')} selected={isTag}>
-        <Translate zh_hant="標籤" zh_hans="标签" en="Tag" />
+        <Translate
+          zh_hant="追蹤的標籤"
+          zh_hans="追踪的标签"
+          en="Following Tags"
+        />
       </Tabs.Tab>
     </Tabs>
   )

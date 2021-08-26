@@ -6,24 +6,21 @@ import {
   List,
   QueryError,
   Spinner,
+  TagDigest,
   Translate,
   usePublicQuery,
   usePullToRefresh,
-  UserDigest,
   useRoute,
   ViewerContext,
 } from '~/components'
 
 import { analytics, mergeConnections } from '~/common/utils'
 
-import {
-  USER_FOLLOWING_USERS_PRIVATE,
-  USER_FOLLOWING_USERS_PUBLIC,
-} from './gql'
+import { USER_FOLLOWING_TAGS_PRIVATE, USER_FOLLOWING_TAGS_PUBLIC } from './gql'
 
-import { UserFollowingUsersPublic } from './__generated__/UserFollowingUsersPublic'
+import { UserFollowingTagsPublic } from './__generated__/UserFollowingTagsPublic'
 
-const UsersFeed = () => {
+const FollowingTags = () => {
   const viewer = useContext(ViewerContext)
   const { getQuery } = useRoute()
   const userName = getQuery('name')
@@ -39,25 +36,25 @@ const UsersFeed = () => {
     fetchMore,
     refetch: refetchPublic,
     client,
-  } = usePublicQuery<UserFollowingUsersPublic>(USER_FOLLOWING_USERS_PUBLIC, {
+  } = usePublicQuery<UserFollowingTagsPublic>(USER_FOLLOWING_TAGS_PUBLIC, {
     variables: { userName },
   })
 
   // pagination
   const user = data?.user
-  const connectionPath = 'user.following.users'
-  const { edges, pageInfo } = user?.following?.users || {}
+  const connectionPath = 'user.following.tags'
+  const { edges, pageInfo } = user?.following?.tags || {}
 
   // private data
-  const loadPrivate = (publicData?: UserFollowingUsersPublic) => {
+  const loadPrivate = (publicData?: UserFollowingTagsPublic) => {
     if (!viewer.isAuthed || !publicData || !user) {
       return
     }
 
-    const publicEdges = publicData.user?.following?.users.edges || []
+    const publicEdges = publicData.user?.following?.tags.edges || []
     const publicIds = publicEdges.map(({ node }) => node.id)
     client.query({
-      query: USER_FOLLOWING_USERS_PRIVATE,
+      query: USER_FOLLOWING_TAGS_PRIVATE,
       fetchPolicy: 'network-only',
       variables: { ids: publicIds },
     })
@@ -117,9 +114,9 @@ const UsersFeed = () => {
       <EmptyWarning
         description={
           <Translate
-            zh_hant="還沒有追蹤任何人"
-            zh_hans="还没有追踪任何人"
-            en="Not following anyone"
+            zh_hant="還沒有追蹤任標籤"
+            zh_hans="还没有追踪任标签"
+            en="Not following any tag"
           />
         }
       />
@@ -131,15 +128,13 @@ const UsersFeed = () => {
       <List hasBorder={false}>
         {edges.map(({ node, cursor }, i) => (
           <List.Item key={cursor}>
-            <UserDigest.Rich
-              user={node}
-              onClick={() =>
-                analytics.trackEvent('click_feed', {
-                  type: 'followee',
-                  contentType: 'user',
-                  location: i,
-                })
-              }
+            <TagDigest.Rich
+              tag={node}
+              spacing={['base', 'tight']}
+              bgColor="none"
+              bgActiveColor="grey-lighter"
+              hasDesc
+              hasFollow
             />
           </List.Item>
         ))}
@@ -148,4 +143,4 @@ const UsersFeed = () => {
   )
 }
 
-export default UsersFeed
+export default FollowingTags

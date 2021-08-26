@@ -22,14 +22,6 @@ const fragments = {
           description
           profileCover
         }
-        following {
-          users(input: { first: 0 }) {
-            totalCount
-          }
-        }
-        followers(input: { first: 0 }) {
-          totalCount
-        }
         status {
           state
         }

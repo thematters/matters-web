@@ -1,0 +1,7 @@
+.content {
+  display: inline-flex;
+
+  & :global(svg) {
+    transform: rotate(-90deg);
+  }
+}

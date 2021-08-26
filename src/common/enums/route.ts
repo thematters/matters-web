@@ -20,6 +20,7 @@ type ROUTE_KEY =
   | 'ARTICLE_DETAIL'
   // User
   | 'USER_ARTICLES'
+  | 'USER_ABOUT'
   // Circle
   | 'CIRCLE_DETAIL'
   | 'CIRCLE_DISCUSSION'
@@ -85,6 +86,7 @@ export const ROUTES: {
 
   // User
   { key: 'USER_ARTICLES', pathname: '/[name]' },
+  { key: 'USER_ABOUT', pathname: '/[name]/about' },
 
   // Article
   { key: 'ARTICLE_DETAIL', pathname: '/[name]/[mediaHash]' },

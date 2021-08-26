@@ -16,10 +16,9 @@ import {
 } from '~/components'
 import ShareButton from '~/components/Layout/Header/ShareButton'
 
-import { numAbbr } from '~/common/utils'
-
 import IMAGE_COVER from '@/public/static/images/profile-cover.png'
 
+import AboutMeButton from './AboutMeButton'
 import {
   ArchitectBadge,
   CivicLikerBadge,
@@ -28,8 +27,6 @@ import {
 } from './Badges'
 import CircleWidget from './CircleWidget'
 import DropdownActions from './DropdownActions'
-import { FollowersDialog } from './FollowersDialog'
-import { FollowingDialog } from './FollowingDialog'
 import { USER_PROFILE_PRIVATE, USER_PROFILE_PUBLIC } from './gql'
 import styles from './styles.css'
 
@@ -186,6 +183,7 @@ export const UserProfile = () => {
         <section className="info">
           <section className="display-name">
             <h1 className="name">{user.displayName}</h1>
+            <AboutMeButton userName={userName} />
             {hasSeedBadge && <SeedBadge />}
             {hasGoldenMotorBadge && <GoldenMotorBadge />}
             {hasArchitectBadge && <ArchitectBadge />}
@@ -201,30 +199,6 @@ export const UserProfile = () => {
             <p className="description">{user.info.description}</p>
           </Expandable>
         </section>
-
-        <footer>
-          <FollowersDialog user={user}>
-            {({ openDialog: openFollowersDialog }) => (
-              <button type="button" onClick={openFollowersDialog}>
-                <span className="count">
-                  {numAbbr(user.followers.totalCount)}
-                </span>
-                <Translate id="follower" />
-              </button>
-            )}
-          </FollowersDialog>
-
-          <FollowingDialog user={user}>
-            {({ openDialog: openFollowingDialog }) => (
-              <button type="button" onClick={openFollowingDialog}>
-                <span className="count">
-                  {numAbbr(user.following.users.totalCount)}
-                </span>
-                <Translate id="following" />
-              </button>
-            )}
-          </FollowingDialog>
-        </footer>
 
         <CircleWidget circles={circles} isMe={isMe} />
 

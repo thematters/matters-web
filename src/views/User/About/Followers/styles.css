@@ -1,0 +1,27 @@
+.container {
+  @mixin shadow-border-top-grey;
+
+  padding: var(--spacing-loose) var(--spacing-base);
+}
+
+header {
+  @mixin flex-center-space-between;
+}
+
+ul {
+  @mixin hide-scrollbar;
+
+  display: flex;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+
+  & li {
+    @mixin inline-flex-center-all;
+
+    position: relative;
+    flex-shrink: 0;
+    margin-right: var(--spacing-base);
+    scroll-snap-align: start;
+  }
+}
