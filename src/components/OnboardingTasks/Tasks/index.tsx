@@ -229,7 +229,7 @@ const Tasks = ({ task }: Props) => {
 
             <section className="share">
               <EmbedShare
-                title={`${viewer.displayName} 已解鎖新手獎賞，快點加入 Matters 獲得創作者獎勵吧`}
+                title={`${viewer.displayName} 已完成新手導航`}
                 path={`${sharePath}?${URL_QS.SHARE_SOURCE_ONBOARDING_TASKS.key}=${URL_QS.SHARE_SOURCE_ONBOARDING_TASKS.value}`}
                 headerTitle={
                   <Translate
