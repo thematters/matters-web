@@ -38,11 +38,16 @@ const BaseRecommendTagDialog = ({ children }: Props) => {
           <Dialog.Message align="left">
             <p className="message">
               <Translate
-                zh_hant="「追蹤」你好奇的標籤，即可看到標籤內精選作品。日後你還可以主理標籤，打造個人專欄或營造小社群，先看看其他用戶怎麼玩吧！請追蹤至少"
-                zh_hans="「追踪」你好奇的标签，即可看到标签内精选作品。日后你还可以主理标签，打造个人专栏或营造小社群，先看看其他用户怎么玩吧！请追踪至少"
+                zh_hant="挑選至少"
+                zh_hans="挑选至少"
+                en="Follow at least"
               />
               <span> 5 </span>
-              <Translate zh_hant="個標籤。" zh_hans="个标签。" />
+              <Translate
+                zh_hant="個標籤，追蹤後可以收到標籤內新作品的動態，以及標籤相關的推薦內容。"
+                zh_hans="个标签，追踪后可以收到标签内新作品的动态，以及标签相关的推荐内容。"
+                en="tags to receive updates and related contents."
+              />
             </p>
           </Dialog.Message>
 
