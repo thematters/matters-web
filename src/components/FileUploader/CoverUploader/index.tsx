@@ -1,11 +1,12 @@
 import VisuallyHidden from '@reach/visually-hidden'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 
 import {
   Button,
   Cover,
   CoverProps,
   IconCamera24,
+  LanguageContext,
   Spinner,
   TextIcon,
   Translate,
@@ -18,9 +19,9 @@ import {
   ADD_TOAST,
   ASSET_TYPE,
   ENTITY_TYPE,
-  TEXT,
   UPLOAD_IMAGE_SIZE_LIMIT,
 } from '~/common/enums'
+import { translate } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -65,6 +66,8 @@ export const CoverUploader = ({
   onUpload,
   type,
 }: CoverUploaderProps) => {
+  const { lang } = useContext(LanguageContext)
+
   const [cover, setCover] = useState<string | undefined | null>(initCover)
   const [upload, { loading }] = useMutation<SingleFileUpload>(
     UPLOAD_FILE,
@@ -179,7 +182,7 @@ export const CoverUploader = ({
           id={fieldId}
           type="file"
           name="file"
-          aria-label={TEXT.zh_hant.uploadCover}
+          aria-label={translate({ id: 'uploadCover', lang })}
           accept={acceptTypes}
           multiple={false}
           onChange={handleChange}

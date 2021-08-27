@@ -12,7 +12,7 @@ import {
 } from '~/components'
 import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
 
-import { ADD_TOAST, OPEN_LIKE_COIN_DIALOG, TEXT } from '~/common/enums'
+import { ADD_TOAST, OPEN_LIKE_COIN_DIALOG } from '~/common/enums'
 import { analytics, toPath, translate } from '~/common/utils'
 
 import { CreateDraft } from '~/components/GQL/mutations/__generated__/CreateDraft'
@@ -32,6 +32,8 @@ const BaseWriteButton = ({
   loading?: boolean
   isLarge?: boolean
 }) => {
+  const { lang } = useContext(LanguageContext)
+
   const WriteIcon = loading ? (
     <IconSpinner16 size="sm" color="white" />
   ) : (
@@ -44,7 +46,7 @@ const BaseWriteButton = ({
         size={isLarge ? ['5rem', '2.25rem'] : ['2rem', '2rem']}
         bgColor="gold"
         onClick={onClick}
-        aria-label={TEXT.zh_hant.write}
+        aria-label={translate({ id: 'write', lang })}
       >
         <TextIcon icon={WriteIcon} weight="md" color="white">
           {isLarge && <Translate id="write" />}

@@ -3,6 +3,7 @@ import { useContext } from 'react'
 
 import {
   Dialog,
+  LanguageContext,
   LoginButton,
   Translate,
   useMutation,
@@ -16,6 +17,7 @@ import {
   UPLOAD_FILE_COUNT_LIMIT,
   UPLOAD_MIGRATION_SIZE_LIMIT,
 } from '~/common/enums'
+import { translate } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -48,6 +50,8 @@ interface MigrationDialogUploadProps {
 }
 
 const MigrationDialogUpload = ({ nextStep }: MigrationDialogUploadProps) => {
+  const { lang } = useContext(LanguageContext)
+
   const { zh_hant, zh_hans } = texts
   const acceptTypes = ACCEPTED_UPLOAD_MIGRATION_TYPES.join(',')
 
@@ -163,7 +167,12 @@ const MigrationDialogUpload = ({ nextStep }: MigrationDialogUploadProps) => {
                 id={fieldId}
                 type="file"
                 name="file"
-                aira-label="上傳檔案"
+                aria-label={translate({
+                  zh_hant: '上傳檔案',
+                  zh_hans: '上传档案',
+                  en: 'Upload file',
+                  lang,
+                })}
                 accept={acceptTypes}
                 multiple
                 onChange={handleChange}

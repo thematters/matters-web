@@ -5,6 +5,7 @@ import {
   Button,
   IconBookmark16,
   IconSize,
+  LanguageContext,
   Translate,
   useMutation,
   ViewerContext,
@@ -12,7 +13,7 @@ import {
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
 import { ADD_TOAST } from '~/common/enums'
-import { subscribePush } from '~/common/utils'
+import { subscribePush, translate } from '~/common/utils'
 
 import TOGGLE_SUBSCRIBE_ARTICLE from '../../GQL/mutations/toggleSubscribeArticle'
 
@@ -28,6 +29,8 @@ interface SubscribeProps {
 
 const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
   const viewer = useContext(ViewerContext)
+  const { lang } = useContext(LanguageContext)
+
   const [subscribe] = useMutation<ToggleSubscribeArticle>(
     TOGGLE_SUBSCRIBE_ARTICLE,
     {
@@ -89,7 +92,12 @@ const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
     <Button
       spacing={['xtight', 'xtight']}
       bgActiveColor={inCard ? 'grey-lighter-active' : 'grey-lighter'}
-      aria-label="收藏"
+      aria-label={translate({
+        zh_hant: '收藏',
+        zh_hans: '收藏',
+        en: 'Bookmark',
+        lang,
+      })}
       onClick={onClick}
       disabled={disabled}
     >

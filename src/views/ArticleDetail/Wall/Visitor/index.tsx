@@ -1,15 +1,17 @@
 import { useApolloClient } from '@apollo/react-hooks'
 import classNames from 'classnames'
+import { useContext } from 'react'
 
 import {
   Button,
   IconClear16,
+  LanguageContext,
   Layout,
   LoginButton,
   Translate,
 } from '~/components'
 
-import { TEXT } from '~/common/enums'
+import { translate } from '~/common/utils'
 
 import IMG_AD from '@/public/static/images/ad.svg'
 
@@ -22,6 +24,8 @@ interface VisitorWallProps {
 }
 
 const VisitorWall = ({ show }: VisitorWallProps) => {
+  const { lang } = useContext(LanguageContext)
+
   const client = useApolloClient()
   const outerClasses = classNames({ outer: true, show })
 
@@ -54,7 +58,10 @@ const VisitorWall = ({ show }: VisitorWallProps) => {
           </div>
 
           <div className="close">
-            <Button onClick={closeDialog} aria-label={TEXT.zh_hant.close}>
+            <Button
+              onClick={closeDialog}
+              aria-label={translate({ id: 'close', lang })}
+            >
               <IconClear16 color="grey" />
             </Button>
           </div>
