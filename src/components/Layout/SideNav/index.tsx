@@ -1,5 +1,7 @@
+import VisuallyHidden from '@reach/visually-hidden'
 import Link from 'next/link'
 import { useContext } from 'react'
+import FocusLock from 'react-focus-lock'
 
 import {
   Dropdown,
@@ -96,11 +98,18 @@ const SideNav = () => {
         {viewer.isAuthed && (
           <Dropdown
             content={
-              <section className="dropdown-menu">
-                <NavMenu.Top />
-                <Menu.Divider />
-                <NavMenu.Bottom />
-              </section>
+              <FocusLock>
+                <section className="dropdown-menu">
+                  <VisuallyHidden>
+                    <button type="button">
+                      <Translate id="close" />
+                    </button>
+                  </VisuallyHidden>
+                  <NavMenu.Top />
+                  <Menu.Divider />
+                  <NavMenu.Bottom />
+                </section>
+              </FocusLock>
             }
             placement="right-start"
             appendTo={process.browser ? document.body : undefined}

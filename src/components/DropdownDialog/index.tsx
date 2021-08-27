@@ -1,5 +1,6 @@
 import VisuallyHidden from '@reach/visually-hidden'
 import { forwardRef } from 'react'
+import FocusLock from 'react-focus-lock'
 
 import {
   Button,
@@ -119,7 +120,11 @@ const BaseDropdownDialog = ({
         zIndex={Z_INDEX.OVER_BOTTOM_BAR}
         appendTo={process.browser ? document.body : undefined}
         {...dropdown}
-        content={<Content>{dropdown.content}</Content>}
+        content={
+          <FocusLock>
+            <Content>{dropdown.content}</Content>
+          </FocusLock>
+        }
       >
         <ForwardChildren openDialog={toggle} children={children} />
       </Dropdown>
