@@ -1,8 +1,12 @@
 import { Tabs, Translate, useRoute } from '~/components'
 
-import { toPath } from '~/common/utils'
+import { numAbbr, toPath } from '~/common/utils'
 
-const UserTabs: React.FC = () => {
+type UserTabsProps = {
+  articleCount: number
+}
+
+const UserTabs: React.FC<UserTabsProps> = ({ articleCount }) => {
   const { isInPath, getQuery } = useRoute()
   const userName = getQuery('name')
 
@@ -13,8 +17,13 @@ const UserTabs: React.FC = () => {
 
   return (
     <Tabs sticky>
-      <Tabs.Tab {...userArticlesPath} selected={isInPath('USER_ARTICLES')}>
-        <Translate id="article" />
+      <Tabs.Tab
+        {...userArticlesPath}
+        selected={isInPath('USER_ARTICLES')}
+        count={numAbbr(articleCount)}
+        plain
+      >
+        <Translate zh_hant="所有作品" zh_hans="所有作品" en="All Articles" />
       </Tabs.Tab>
     </Tabs>
   )

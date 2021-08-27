@@ -44,7 +44,7 @@ const BaseUserAbout = () => {
     <>
       <Profile user={user} />
       <Followers user={user} />
-      <Following />
+      <Following user={user} />
     </>
   )
 }

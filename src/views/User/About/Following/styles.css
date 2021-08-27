@@ -1,5 +1,5 @@
 .container {
   @mixin shadow-border-top-grey;
 
-  padding: var(--spacing-loose) var(--spacing-base);
+  padding-top: var(--spacing-x-tight);
 }

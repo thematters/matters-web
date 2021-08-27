@@ -1,5 +1,5 @@
 .container {
-  margin-bottom: var(--spacing-xx-loose);
+  padding-bottom: var(--spacing-base);
 }
 
 .buttons {

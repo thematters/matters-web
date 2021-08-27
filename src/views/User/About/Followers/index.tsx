@@ -1,3 +1,5 @@
+import { useEmblaCarousel } from 'embla-carousel/react'
+
 import { Avatar, Tabs, Translate, ViewAllButton } from '~/components'
 
 import { numAbbr } from '~/common/utils'
@@ -13,13 +15,19 @@ type FollowersProps = {
 }
 
 const Followers = ({ user }: FollowersProps) => {
+  const [emblaRef] = useEmblaCarousel({
+    dragFree: true,
+    draggable: true,
+    loop: false,
+    containScroll: 'trimSnaps',
+  })
+
   return (
     <section className="container">
       <header>
         <Tabs sticky={false}>
-          <Tabs.Tab>
+          <Tabs.Tab count={numAbbr(user.followers.totalCount)} plain>
             <Translate id="followers" />
-            <span>{numAbbr(user.followers.totalCount)}</span>
           </Tabs.Tab>
         </Tabs>
 
@@ -32,13 +40,17 @@ const Followers = ({ user }: FollowersProps) => {
         </FollowersDialog>
       </header>
 
-      <ul>
-        {user.followers.edges?.map(({ node }) => (
-          <li key={node.id}>
-            <Avatar user={node} />
-          </li>
-        ))}
-      </ul>
+      <section className="content">
+        <div className="wrap" ref={emblaRef}>
+          <ul>
+            {user.followers.edges?.map(({ node }) => (
+              <li key={node.id}>
+                <Avatar user={node} />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
 
       <style jsx>{styles}</style>
     </section>

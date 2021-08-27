@@ -6,9 +6,39 @@ import styles from './styles.css'
 
 type TabProps = {
   selected?: boolean
+  count?: number | string
+  plain?: boolean
 } & ButtonProps
 
-const Tab: React.FC<TabProps> = ({ selected, children, ...buttonProps }) => {
+const Tab: React.FC<TabProps> = ({
+  selected,
+  count,
+  plain,
+  children,
+  ...buttonProps
+}) => {
+  if (plain) {
+    return (
+      <li
+        role="tab"
+        aria-disabled={buttonProps.disabled}
+        aria-selected={selected}
+      >
+        <TextIcon size="md" color="black" weight="md">
+          {children}
+        </TextIcon>
+
+        {count && (
+          <TextIcon size="md" color="green" weight="md">
+            &nbsp;{count}
+          </TextIcon>
+        )}
+
+        <style jsx>{styles}</style>
+      </li>
+    )
+  }
+
   return (
     <li
       role="tab"
@@ -21,13 +51,15 @@ const Tab: React.FC<TabProps> = ({ selected, children, ...buttonProps }) => {
         bgActiveColor={selected ? 'green-lighter' : 'grey-lighter'}
         {...buttonProps}
       >
-        <TextIcon
-          size="md"
-          color={selected ? 'green' : 'grey'}
-          weight="semibold"
-        >
+        <TextIcon size="md" color={selected ? 'black' : 'grey'} weight="md">
           {children}
         </TextIcon>
+
+        {count && (
+          <TextIcon size="md" color={selected ? 'green' : 'grey'} weight="md">
+            &nbsp;{count}
+          </TextIcon>
+        )}
       </Button>
 
       <style jsx>{styles}</style>

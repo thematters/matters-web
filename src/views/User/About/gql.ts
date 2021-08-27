@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 
 import Followers from './Followers'
+import Following from './Following'
 import Profile from './Profile'
 
 export const USER_ABOUT_PUBLIC = gql`
@@ -12,8 +13,10 @@ export const USER_ABOUT_PUBLIC = gql`
       }
       ...UserAboutFollowersUser
       ...UserAboutProfileUser
+      ...FollowingFeedTypeUser
     }
   }
   ${Followers.fragments.user}
   ${Profile.fragments.user}
+  ${Following.fragments.user}
 `
