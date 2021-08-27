@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { Avatar } from '~/components'
+import { UserDigest } from '~/components'
 
 export const fragments = {
   user: gql`
@@ -18,8 +18,8 @@ export const fragments = {
         description
         profileCover
       }
-      ...AvatarUser
+      ...UserDigestMiniUser
     }
-    ${Avatar.fragments.user}
+    ${UserDigest.Mini.fragments.user}
   `,
 }

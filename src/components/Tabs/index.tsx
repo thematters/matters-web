@@ -26,13 +26,13 @@ const Tab: React.FC<TabProps> = ({
       >
         <TextIcon size="md" color="black" weight="md">
           {children}
-        </TextIcon>
 
-        {count && (
-          <TextIcon size="md" color="green" weight="md">
-            &nbsp;{count}
-          </TextIcon>
-        )}
+          {count && (
+            <TextIcon size="md" color="green" weight="md">
+              &nbsp;{count}
+            </TextIcon>
+          )}
+        </TextIcon>
 
         <style jsx>{styles}</style>
       </li>
@@ -53,13 +53,13 @@ const Tab: React.FC<TabProps> = ({
       >
         <TextIcon size="md" color={selected ? 'black' : 'grey'} weight="md">
           {children}
-        </TextIcon>
 
-        {count && (
-          <TextIcon size="md" color={selected ? 'green' : 'grey'} weight="md">
-            &nbsp;{count}
-          </TextIcon>
-        )}
+          {count && (
+            <TextIcon size="md" color={selected ? 'green' : 'grey'} weight="md">
+              &nbsp;{count}
+            </TextIcon>
+          )}
+        </TextIcon>
       </Button>
 
       <style jsx>{styles}</style>

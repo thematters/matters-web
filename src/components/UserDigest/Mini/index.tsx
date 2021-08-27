@@ -25,7 +25,7 @@ import { UserDigestMiniUser } from './__generated__/UserDigestMiniUser'
 export type UserDigestMiniProps = {
   user: UserDigestMiniUser
 
-  avatarSize?: Extract<AvatarSize, 'xs' | 'sm' | 'md' | 'lg'>
+  avatarSize?: Extract<AvatarSize, 'xs' | 'sm' | 'md' | 'lg' | 'xxxl'>
   textSize?: 'xs' | 'sm-s' | 'sm' | 'md-s' | 'md'
   textWeight?: 'md'
   nameColor?: 'black' | 'white' | 'grey-darker' | 'green'

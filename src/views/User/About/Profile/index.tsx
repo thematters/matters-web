@@ -1,4 +1,4 @@
-import { Avatar } from '~/components'
+import { UserDigest } from '~/components'
 import {
   ArchitectBadge,
   CivicLikerBadge,
@@ -25,7 +25,7 @@ const Profile = ({ user }: ProfileProps) => {
   return (
     <section className="profile">
       <section className="avatar">
-        <Avatar user={user} size="xxxl" />
+        <UserDigest.Mini user={user} avatarSize="xxxl" hasAvatar />
       </section>
 
       <section className="badges">

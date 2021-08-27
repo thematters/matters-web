@@ -13,6 +13,8 @@ import TOGGLE_FOLLOW_USER from '~/components/GQL/mutations/toggleFollowUser'
 import updateUserFollowerCount from '~/components/GQL/updates/userFollowerCount'
 import updateViewerFolloweeCount from '~/components/GQL/updates/viewerFolloweeCount'
 
+import { TEXT } from '~/common/enums'
+
 import { ReactComponent as IconProfileUnfollow } from '@/public/static/icons/48px/profile-unfollow.svg'
 
 import { ToggleFollowUser } from '~/components/GQL/mutations/__generated__/ToggleFollowUser'
@@ -54,6 +56,7 @@ const UnfollowUser = ({ user, inProfile }: UnfollowProps) => {
       onClick={() => unfollow()}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
+      aria-label={TEXT.zh_hant.unfollow}
     >
       {inProfile && withIcon(IconProfileUnfollow)({ size: 'xl' })}
       {!inProfile && (

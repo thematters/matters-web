@@ -3,6 +3,8 @@
 }
 
 .avatar {
+  @mixin flex-center-all;
+
   margin: var(--spacing-loose) 0 var(--spacing-base);
 }
 

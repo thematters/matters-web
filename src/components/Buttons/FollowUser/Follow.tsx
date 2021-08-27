@@ -12,6 +12,8 @@ import TOGGLE_FOLLOW_USER from '~/components/GQL/mutations/toggleFollowUser'
 import updateUserFollowerCount from '~/components/GQL/updates/userFollowerCount'
 import updateViewerFolloweeCount from '~/components/GQL/updates/viewerFolloweeCount'
 
+import { TEXT } from '~/common/enums'
+
 import { ReactComponent as IconProfileFollow } from '@/public/static/icons/48px/profile-follow.svg'
 
 import { ToggleFollowUser } from '~/components/GQL/mutations/__generated__/ToggleFollowUser'
@@ -52,6 +54,7 @@ const FollowUser = ({ user, inProfile }: FollowUserProps) => {
       bgActiveColor={inProfile ? undefined : 'green'}
       borderColor={inProfile ? undefined : 'green'}
       onClick={() => follow()}
+      aria-label={TEXT.zh_hant.follow}
     >
       {inProfile && withIcon(IconProfileFollow)({ size: 'xl' })}
       {!inProfile && (
