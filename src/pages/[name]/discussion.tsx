@@ -1,3 +1,3 @@
-import CircleDiscussion from '~/views/Circle/Discussion'
+import UserDiscussion from '~/views/User/Discussion'
 
-export default CircleDiscussion
+export default UserDiscussion

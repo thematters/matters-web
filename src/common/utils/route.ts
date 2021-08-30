@@ -53,7 +53,7 @@ type ToPathArgs =
       id: string
     }
   | {
-      page: 'userProfile' | 'userAbout'
+      page: 'userProfile' | 'userAbout' | 'userBroadcast' | 'userDiscussion'
       userName: string
     }
   | {
@@ -144,6 +144,16 @@ export const toPath = (args: ToPathArgs): { href: string } => {
     case 'userAbout': {
       return {
         href: `/@${args.userName}/about`,
+      }
+    }
+    case 'userBroadcast': {
+      return {
+        href: `/@${args.userName}/broadcast`,
+      }
+    }
+    case 'userDiscussion': {
+      return {
+        href: `/@${args.userName}/discussion`,
       }
     }
     case 'search': {
