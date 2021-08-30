@@ -1,0 +1,37 @@
+.container {
+  @mixin shadow-border-top-grey;
+}
+
+header {
+  @mixin flex-center-space-between;
+
+  padding-top: var(--spacing-x-tight);
+  padding-right: var(--spacing-base);
+}
+
+.content {
+  padding: 0 var(--spacing-base) var(--spacing-loose);
+}
+
+.wrap {
+  @mixin hide-scrollbar;
+
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+}
+
+ul {
+  @mixin hide-scrollbar;
+
+  display: flex;
+
+  & li {
+    @mixin inline-flex-center-all;
+
+    position: relative;
+    flex-shrink: 0;
+    margin-right: var(--spacing-base);
+    scroll-snap-align: start;
+  }
+}

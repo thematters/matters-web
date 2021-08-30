@@ -3,7 +3,6 @@ import { useContext } from 'react'
 import {
   CardSpacing,
   IconBookmark24,
-  IconCircle24,
   IconClap24,
   IconDraft24,
   IconHistory24,
@@ -31,14 +30,6 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
     userName: viewer.userName || '',
   })
 
-  const circle = viewer.ownCircles && viewer.ownCircles[0]
-  const circlePath =
-    circle &&
-    toPath({
-      page: 'circleDetail',
-      circle,
-    })
-
   const menuItemSpacing = isInSideDrawerNav
     ? (['base', 'loose'] as [CardSpacing, CardSpacing])
     : undefined
@@ -55,18 +46,6 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
           <Translate id="myProfile" />
         </TextIcon>
       </Menu.Item>
-
-      {circlePath && (
-        <Menu.Item spacing={menuItemSpacing} href={circlePath.href}>
-          <TextIcon
-            icon={<IconCircle24 size="md" />}
-            spacing="base"
-            size={menuItemSize}
-          >
-            <Translate id="myCircle" />
-          </TextIcon>
-        </Menu.Item>
-      )}
 
       <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_DRAFTS}>
         <TextIcon

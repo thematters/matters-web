@@ -1,5 +1,5 @@
-.user-profile {
-  margin-bottom: var(--spacing-base);
+.container {
+  padding-bottom: var(--spacing-base);
 }
 
 .buttons {
@@ -9,78 +9,56 @@
 }
 
 header {
-  @mixin flex-end-space-between;
+  position: relative;
 
-  padding: 0 var(--spacing-base);
-  margin-bottom: var(--spacing-base);
+  & .info {
+    @mixin flex-start-start;
 
-  & .avatar {
-    display: inline-flex;
-    margin-top: calc(var(--spacing-loose) * -1);
-    border-radius: 50%;
-    box-shadow: 0 0 0 3px var(--color-white);
+    position: absolute;
+    bottom: var(--spacing-loose);
+    left: var(--spacing-base);
+  }
+
+  & .followButton {
+    position: absolute;
+    right: var(--spacing-base);
+    bottom: -1.5rem;
   }
 }
 
-.info {
-  padding: 0 var(--spacing-base);
-  margin-bottom: var(--spacing-base);
+.name {
+  margin-left: var(--spacing-base);
+  color: var(--color-white);
 
-  & .display-name,
-  & .username {
-    @mixin flex-center-start;
-
-    & :global(> * + *) {
-      margin-left: var(--spacing-x-tight);
-    }
-  }
-
-  & .display-name {
+  & .displayName {
     font-size: var(--font-size-xl);
-    line-height: 1;
-
-    & .name {
-      line-height: 1.5rem;
-    }
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.75rem;
   }
 
-  & .username {
-    margin-top: var(--spacing-x-tight);
+  & .userName {
+    margin-top: var(--spacing-xx-tight);
     font-size: var(--font-size-md);
-    line-height: 1;
-    color: var(--color-grey-dark);
-  }
-
-  & .description {
-    position: relative;
-    margin-top: var(--spacing-base);
-    font-size: var(--font-size-md);
-    color: var(--color-grey-darker);
-    white-space: pre-wrap;
+    font-weight: var(--font-weight-normal);
+    line-height: 1rem;
   }
 }
 
-footer {
+.badges {
+  @mixin flex-center-start;
+
   padding: 0 var(--spacing-base);
-  font-size: var(--font-size-sm);
-  color: var(--color-grey);
+  margin: var(--spacing-base) 0;
 
-  & :global(> *) {
-    display: inline-flex;
-    align-items: center;
-    line-height: 1.5rem;
-
-    & + * {
-      margin-left: var(--spacing-loose);
-    }
+  & :global(> * + *) {
+    margin-left: var(--spacing-x-tight);
   }
+}
 
-  & .count {
-    display: block;
-    padding-right: var(--spacing-x-tight);
-    font-size: var(--font-size-lg);
-    font-weight: var(--font-weight-bold);
-    line-height: 1.5rem;
-    color: var(--color-black);
-  }
+.description {
+  padding: 0 var(--spacing-base);
+  font-size: var(--font-size-md-s);
+  font-weight: var(--font-weight-normal);
+  line-height: 1.5rem;
+  color: var(--color-grey-darker);
 }

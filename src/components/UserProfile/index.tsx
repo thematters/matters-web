@@ -16,10 +16,9 @@ import {
 } from '~/components'
 import ShareButton from '~/components/Layout/Header/ShareButton'
 
-import { numAbbr } from '~/common/utils'
-
 import IMAGE_COVER from '@/public/static/images/profile-cover.png'
 
+import AboutMeButton from './AboutMeButton'
 import {
   ArchitectBadge,
   CivicLikerBadge,
@@ -28,8 +27,6 @@ import {
 } from './Badges'
 import CircleWidget from './CircleWidget'
 import DropdownActions from './DropdownActions'
-import { FollowersDialog } from './FollowersDialog'
-import { FollowingDialog } from './FollowingDialog'
 import { USER_PROFILE_PRIVATE, USER_PROFILE_PUBLIC } from './gql'
 import styles from './styles.css'
 
@@ -141,23 +138,21 @@ export const UserProfile = () => {
       <>
         <LayoutHeader />
 
-        <section className="user-profile">
-          <Cover fallbackCover={IMAGE_COVER.src} />
-
+        <section className="container">
           <header>
-            <section className="avatar">
-              <Avatar size="xxxl" />
+            <Cover fallbackCover={IMAGE_COVER.src} type="user" />
+
+            <section className="info">
+              <Avatar size="xl" />
+
+              <section className="name">
+                <h2 className="displayName">
+                  {isUserArchived && <Translate id="accountArchived" />}
+                  {isUserBanned && <Translate id="accountBanned" />}
+                </h2>
+              </section>
             </section>
           </header>
-
-          <section className="info">
-            <section className="display-name">
-              <h1 className="name">
-                {isUserArchived && <Translate id="accountArchived" />}
-                {isUserBanned && <Translate id="accountBanned" />}
-              </h1>
-            </section>
-          </section>
 
           <style jsx>{styles}</style>
         </section>
@@ -172,59 +167,42 @@ export const UserProfile = () => {
     <>
       <LayoutHeader />
 
-      <section className="user-profile">
-        <Cover cover={profileCover} fallbackCover={IMAGE_COVER.src} />
-
+      <section className="container">
         <header>
-          <section className="avatar">
-            <Avatar size="xxxl" user={user} />
+          <Cover
+            cover={profileCover}
+            fallbackCover={IMAGE_COVER.src}
+            type="user"
+          />
+
+          <section className="info">
+            <Avatar size="xl" user={user} />
+
+            <section className="name">
+              <h2 className="displayName">{user.displayName}</h2>
+              <p className="userName">@{user.userName}</p>
+            </section>
           </section>
 
-          {!isMe && <FollowUserButton user={user} size="lg" />}
+          {!isMe && (
+            <section className="followButton">
+              <FollowUserButton user={user} inProfile />
+            </section>
+          )}
         </header>
 
-        <section className="info">
-          <section className="display-name">
-            <h1 className="name">{user.displayName}</h1>
-            {hasSeedBadge && <SeedBadge />}
-            {hasGoldenMotorBadge && <GoldenMotorBadge />}
-            {hasArchitectBadge && <ArchitectBadge />}
-            {isCivicLiker && <CivicLikerBadge />}
-          </section>
-
-          <section className="username">
-            <span className="name">@{user.userName}</span>
-            {!isMe && <FollowUserButton.State user={user} />}
-          </section>
-
-          <Expandable>
-            <p className="description">{user.info.description}</p>
-          </Expandable>
+        <section className="badges">
+          <AboutMeButton userName={userName} />
+          {hasSeedBadge && <SeedBadge />}
+          {hasGoldenMotorBadge && <GoldenMotorBadge />}
+          {hasArchitectBadge && <ArchitectBadge />}
+          {isCivicLiker && <CivicLikerBadge />}
+          {!isMe && <FollowUserButton.State user={user} />}
         </section>
 
-        <footer>
-          <FollowersDialog user={user}>
-            {({ openDialog: openFollowersDialog }) => (
-              <button type="button" onClick={openFollowersDialog}>
-                <span className="count">
-                  {numAbbr(user.followers.totalCount)}
-                </span>
-                <Translate id="follower" />
-              </button>
-            )}
-          </FollowersDialog>
-
-          <FollowingDialog user={user}>
-            {({ openDialog: openFollowingDialog }) => (
-              <button type="button" onClick={openFollowingDialog}>
-                <span className="count">
-                  {numAbbr(user.following.users.totalCount)}
-                </span>
-                <Translate id="following" />
-              </button>
-            )}
-          </FollowingDialog>
-        </footer>
+        <Expandable>
+          <p className="description">{user.info.description}</p>
+        </Expandable>
 
         <CircleWidget circles={circles} isMe={isMe} />
 

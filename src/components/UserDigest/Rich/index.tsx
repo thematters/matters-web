@@ -118,7 +118,7 @@ const Rich = ({
 
         <section className="extra-button">
           {hasUnblock && <UnblockUserButton user={user} />}
-          {hasFollow && <FollowUserButton user={user} size="md-s" />}
+          {hasFollow && <FollowUserButton user={user} />}
           {extraButton}
         </section>
 

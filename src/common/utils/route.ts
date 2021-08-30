@@ -53,8 +53,7 @@ type ToPathArgs =
       id: string
     }
   | {
-      page: 'userProfile' | 'userSubscriptons' | 'userComments' | 'userTags'
-
+      page: 'userProfile' | 'userAbout'
       userName: string
     }
   | {
@@ -142,22 +141,11 @@ export const toPath = (args: ToPathArgs): { href: string } => {
         href: `/@${args.userName}`,
       }
     }
-    case 'userSubscriptons': {
+    case 'userAbout': {
       return {
-        href: `/@${args.userName}/subscriptions`,
+        href: `/@${args.userName}/about`,
       }
     }
-    case 'userComments': {
-      return {
-        href: `/@${args.userName}/comments`,
-      }
-    }
-    case 'userTags': {
-      return {
-        href: `/@${args.userName}/tags`,
-      }
-    }
-
     case 'search': {
       const typeStr = args.type ? `&type=${args.type}` : ''
       return {

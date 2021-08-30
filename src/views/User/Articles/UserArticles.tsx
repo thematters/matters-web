@@ -4,12 +4,10 @@ import {
   ArticleDigestFeed,
   EmptyArticle,
   Head,
-  IconDotDivider,
   InfiniteScroll,
   List,
   QueryError,
   Spinner,
-  Translate,
   usePublicQuery,
   usePullToRefresh,
   useRoute,
@@ -27,35 +25,8 @@ import {
   USER_ARTICLES_PUBLIC,
   VIEWER_ARTICLES,
 } from './gql'
-import styles from './styles.css'
 
-import {
-  UserArticlesPublic,
-  UserArticlesPublic_user,
-} from './__generated__/UserArticlesPublic'
-
-const ArticleSummaryInfo = ({ user }: { user: UserArticlesPublic_user }) => {
-  const { articleCount: articles, totalWordCount: words } = user.status || {
-    articleCount: 0,
-    totalWordCount: 0,
-  }
-
-  return (
-    <div className="info">
-      <Translate zh_hant="創作了" zh_hans="创作了" en="Created" />
-      <span className="num">&nbsp;{articles}&nbsp;</span>
-      <Translate zh_hant="篇作品" zh_hans="篇作品" en="articles" />
-
-      <IconDotDivider />
-
-      <Translate zh_hant="累積創作" zh_hans="累积创作" en="In total" />
-      <span className="num">&nbsp;{words}&nbsp;</span>
-      <Translate zh_hant="字" zh_hans="字" en="words" />
-
-      <style jsx>{styles}</style>
-    </div>
-  )
-}
+import { UserArticlesPublic } from './__generated__/UserArticlesPublic'
 
 const UserArticles = () => {
   const viewer = useContext(ViewerContext)
@@ -93,7 +64,6 @@ const UserArticles = () => {
   const connectionPath = 'user.articles'
   const user = data?.user
   const { edges, pageInfo } = user?.articles || {}
-  const hasSubscriptions = (user?.subscribedCircles.totalCount || 0) > 0
 
   // private data
   const loadPrivate = (publicData?: UserArticlesPublic) => {
@@ -148,30 +118,15 @@ const UserArticles = () => {
    * Render
    */
   if (loading) {
-    return (
-      <>
-        <UserTabs hasSubscriptions={hasSubscriptions} />
-        <Spinner />
-      </>
-    )
+    return <Spinner />
   }
 
   if (error) {
-    return (
-      <>
-        <UserTabs hasSubscriptions={hasSubscriptions} />
-        <QueryError error={error} />
-      </>
-    )
+    return <QueryError error={error} />
   }
 
   if (!user || user?.status?.state === 'archived') {
-    return (
-      <>
-        <UserTabs hasSubscriptions={hasSubscriptions} />
-        <EmptyArticle />
-      </>
-    )
+    return <EmptyArticle />
   }
 
   // customize title
@@ -202,7 +157,7 @@ const UserArticles = () => {
     return (
       <>
         <CustomHead />
-        <UserTabs hasSubscriptions={hasSubscriptions} />
+        <UserTabs articleCount={user.articles.totalCount} />
         <EmptyArticle />
       </>
     )
@@ -216,9 +171,7 @@ const UserArticles = () => {
     <>
       <CustomHead />
 
-      <UserTabs hasSubscriptions={hasSubscriptions} />
-
-      <ArticleSummaryInfo user={user} />
+      <UserTabs articleCount={user.articles.totalCount} />
 
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
         <List>
