@@ -20,7 +20,7 @@ const PageViewTracker = () => {
     setTimeout(() => {
       analytics.identifyUser()
       analytics.trackPage()
-    }, 3000)
+    }, 1000)
 
     referrer.current = window.location.pathname
   }, [viewer.privateFetched])
