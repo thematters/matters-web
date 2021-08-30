@@ -159,6 +159,7 @@ const CircleDetailWorks = () => {
                       type: 'circle_detail',
                       contentType: 'article',
                       location: i,
+                      id: node.id,
                     })
                   }
                   onClickAuthor={() => {
@@ -166,6 +167,7 @@ const CircleDetailWorks = () => {
                       type: 'circle_detail',
                       contentType: 'user',
                       location: i,
+                      id: node.author.id,
                     })
                   }}
                 />

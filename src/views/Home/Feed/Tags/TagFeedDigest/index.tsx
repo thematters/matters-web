@@ -70,6 +70,7 @@ const TagFeedDigest = ({ tag, ...cardProps }: TagFeedDigestProps) => {
                   type: 'tags',
                   contentType: 'article',
                   location: i,
+                  id: node.id,
                 })
               }
             >

@@ -95,6 +95,7 @@ const BaseMeHistory = () => {
                   type: 'read_history',
                   contentType: 'article',
                   location: i,
+                  id: node.article.id,
                 })
               }
               onClickAuthor={() => {
@@ -102,6 +103,7 @@ const BaseMeHistory = () => {
                   type: 'read_history',
                   contentType: 'user',
                   location: i,
+                  id: node.article.author.id,
                 })
               }}
             />

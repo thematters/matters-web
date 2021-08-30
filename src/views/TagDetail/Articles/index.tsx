@@ -174,6 +174,7 @@ const TagDetailArticles = ({ tagId, selected }: TagArticlesProps) => {
                   type: selected ? 'tag_detail_selected' : 'tag_detail_latest',
                   contentType: 'article',
                   location: i,
+                  id: node.id,
                 })
               }
               onClickAuthor={() => {
@@ -181,6 +182,7 @@ const TagDetailArticles = ({ tagId, selected }: TagArticlesProps) => {
                   type: selected ? 'tag_detail_selected' : 'tag_detail_latest',
                   contentType: 'user',
                   location: i,
+                  id: node.author.id,
                 })
               }}
               inTagDetailSelected={selected}

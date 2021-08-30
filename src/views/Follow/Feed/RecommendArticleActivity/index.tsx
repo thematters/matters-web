@@ -1,7 +1,7 @@
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import { Waypoint } from 'react-waypoint'
 
-import { CardExposureTracker, Slides, ViewerContext } from '~/components'
+import { CardExposureTracker, Slides } from '~/components'
 
 import { analytics } from '~/common/utils'
 
@@ -20,8 +20,6 @@ interface Props {
 }
 
 const RecommendArticleActivity = ({ articles, source, location }: Props) => {
-  const viewer = useContext(ViewerContext)
-
   // only mount horizontal scroll tracker when container is in view
   const [mountTracker, setMountTracker] = useState(false)
 
@@ -52,7 +50,6 @@ const RecommendArticleActivity = ({ articles, source, location }: Props) => {
                 contentType,
                 location: `${location}.${index}`,
                 id: article.id,
-                userId: viewer.id,
               })
             }}
           >

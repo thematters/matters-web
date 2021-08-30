@@ -126,7 +126,6 @@ interface ClickFeedProp {
   contentType: ContentType | ActivityType
   location: number | string
   id?: string
-  userId?: string
 }
 
 /**

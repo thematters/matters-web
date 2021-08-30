@@ -97,6 +97,7 @@ const Collection: React.FC<{
                   type: 'collection',
                   contentType: 'article',
                   location: i,
+                  id: node.id,
                 })
               }
               onClickAuthor={() => {
@@ -104,6 +105,7 @@ const Collection: React.FC<{
                   type: 'collection',
                   contentType: 'user',
                   location: i,
+                  id: node.author.id,
                 })
               }}
             />

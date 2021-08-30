@@ -95,6 +95,7 @@ const Authors = () => {
                     type: 'authors',
                     contentType: 'user',
                     location: i,
+                    id: node.id,
                   })
                 }
                 hasState={false}
