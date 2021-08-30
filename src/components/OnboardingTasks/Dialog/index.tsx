@@ -1,8 +1,11 @@
+import { useState } from 'react'
+
 import { Dialog, Translate, useDialogSwitch } from '~/components'
 import { useEventListener } from '~/components/Hook'
 
 import { CLOSE_ONBOARDING_TASKS_DIALOG } from '~/common/enums'
 
+import Galaxy from '../Galaxy'
 import Tasks from '../Tasks'
 import styles from './styles.css'
 
@@ -13,6 +16,7 @@ interface OnboardingTasksDialogProps {
 const BaseOnboardingTasksDialog: React.FC<OnboardingTasksDialogProps> = ({
   children,
 }) => {
+  const [task, setTask] = useState(1)
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
   useEventListener(CLOSE_ONBOARDING_TASKS_DIALOG, closeDialog)
@@ -33,22 +37,28 @@ const BaseOnboardingTasksDialog: React.FC<OnboardingTasksDialogProps> = ({
           closeDialog={closeDialog}
           closeTextId="close"
         />
-        <Dialog.Content hasGrow spacing={[0, 0]}>
-          <p>
-            <Translate
-              zh_hant="導航帶你發現更多寶藏作者和優質作品。"
-              zh_hans="导航带你发现更多宝藏作者和优质作品。"
-              en="The guide will lead you to more precious creators and marvelous work."
-            />
+        <Dialog.Content hasGrow spacing={[0, 'base']}>
+          <section className="description">
+            <span>
+              <Translate
+                zh_hant="導航帶你發現更多寶藏作者和優質作品。"
+                zh_hans="导航带你发现更多宝藏作者和优质作品。"
+                en="The guide will lead you to more precious creators and marvelous work."
+              />
+            </span>
             <br />
-            <Translate
-              zh_hant="留下創作足跡，獲得更多支持！🙌"
-              zh_hans="留下创作足迹，获得更多支持！🙌"
-              en="Leave the footprint of your creation and receive more support! 🙌"
-            />
-          </p>
+            <span className="bold">
+              <Translate
+                zh_hant="點擊下面 5 顆星球查看任務提示！"
+                zh_hans="点击下面 5 颗星球查看任务提示！"
+                en="Click planets to see instructions."
+              />
+            </span>
+          </section>
 
-          <Tasks />
+          <Galaxy task={task} onClick={setTask} />
+
+          <Tasks task={task} />
         </Dialog.Content>
       </Dialog>
 

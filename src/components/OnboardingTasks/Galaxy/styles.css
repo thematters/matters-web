@@ -1,0 +1,78 @@
+.galaxy {
+  position: relative;
+  width: 16.5rem;
+  height: 12.75rem;
+  min-height: 12.75rem;
+  margin: 0 auto;
+}
+
+.check {
+  position: absolute;
+  color: rgba(255, 255, 255, 0.45);
+  cursor: pointer;
+
+  & :global(> svg) {
+    & :global(path:first-child) {
+      opacity: 0;
+    }
+  }
+
+  &:hover {
+    color: rgba(255, 255, 255, 0.65);
+
+    & :global(> svg) {
+      & :global(path:first-child) {
+        opacity: 0.8;
+      }
+    }
+  }
+}
+
+.check-1 {
+  top: 37px;
+  right: 55px;
+  width: 48px;
+  height: 48px;
+}
+
+.check-2 {
+  top: 100px;
+  right: 34.5px;
+  width: 54px;
+  height: 54px;
+}
+
+.check-3 {
+  bottom: 37.5px;
+  left: 85px;
+  width: 42px;
+  height: 42px;
+}
+
+.check-4 {
+  top: 70px;
+  left: 34px;
+  width: 38px;
+  height: 38px;
+}
+
+.check-5 {
+  top: 31px;
+  left: 94.5px;
+  width: 33px;
+  height: 33px;
+}
+
+.checked {
+  color: rgba(255, 255, 255, 1);
+
+  & :global(> svg) {
+    &:global(path:first-child) {
+      opacity: 1;
+    }
+  }
+
+  &:hover {
+    color: rgba(255, 255, 255, 1);
+  }
+}

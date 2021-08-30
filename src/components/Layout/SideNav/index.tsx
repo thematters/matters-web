@@ -120,10 +120,11 @@ const SideNav = () => {
           </Dropdown>
         )}
 
-        {viewer.isAuthed && !isInDraftDetail && (
+        {!isInDraftDetail && (
           <li>
             <WriteButton
               allowed={!viewer.shouldSetupLikerID}
+              authed={viewer.isAuthed}
               isLarge={isMediumUp}
               forbidden={viewer.isInactive}
             />
