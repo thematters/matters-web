@@ -16,8 +16,12 @@ const PageViewTracker = () => {
       return
     }
 
-    analytics.identifyUser()
-    analytics.trackPage()
+    // add time out to wait for analytic listener to be ready
+    setTimeout(() => {
+      analytics.identifyUser()
+      analytics.trackPage()
+    }, 3000)
+
     referrer.current = window.location.pathname
   }, [viewer.privateFetched])
 

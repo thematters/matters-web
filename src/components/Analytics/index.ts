@@ -82,11 +82,10 @@ const handleAnalytics = async ({
         user_id: id,
       })
       analytics?.setUserId(id, { global: true })
+      analyticsDebugger(ANALYTIC_TYPES.IDENTIFY, {
+        id,
+      })
     }
-    analyticsDebugger(ANALYTIC_TYPES.IDENTIFY, {
-      id,
-      setUserId: analytics?.setUserId,
-    })
   }
 }
 
