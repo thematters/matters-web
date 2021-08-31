@@ -81,11 +81,6 @@ export const toPath = (args: ToPathArgs): { href: string } => {
         href: args.fragment ? `${asUrl}#${args.fragment}` : asUrl,
       }
     }
-    case 'circleDetail': {
-      return {
-        href: `/~${args.circle.name}`,
-      }
-    }
     case 'circleDiscussion': {
       return {
         href: `/~${args.circle.name}/discussion`,
@@ -94,6 +89,11 @@ export const toPath = (args: ToPathArgs): { href: string } => {
     case 'circleBroadcast': {
       return {
         href: `/~${args.circle.name}/broadcast`,
+      }
+    }
+    case 'circleDetail': {
+      return {
+        href: `/~${args.circle.name}`,
       }
     }
     case 'circleSettings': {

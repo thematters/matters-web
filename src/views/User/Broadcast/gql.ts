@@ -8,8 +8,8 @@ export const USER_BROADCAST = gql`
       id
       displayName
       ownCircles {
+        id
         name
-        isMember
       }
     }
   }

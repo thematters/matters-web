@@ -2,6 +2,19 @@ import gql from 'graphql-tag'
 
 import { ThreadComment } from '~/components'
 
+export const USER_DISCUSSION = gql`
+  query UserDiscussion($userName: String!) {
+    user(input: { userName: $userName }) {
+      id
+      displayName
+      ownCircles {
+        id
+        name
+      }
+    }
+  }
+`
+
 export const DISCUSSION_PUBLIC = gql`
   query UserDiscussionPublic($name: String!) {
     circle(input: { name: $name }) {

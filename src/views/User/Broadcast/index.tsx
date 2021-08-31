@@ -20,7 +20,6 @@ const Broadcast = () => {
     USER_BROADCAST,
     { variables: { userName } }
   )
-
   const user = data?.user
 
   if (loading) {
