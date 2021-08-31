@@ -1,9 +1,11 @@
 import gql from 'graphql-tag'
+import { useContext } from 'react'
 
 import {
   Button,
   IconUpVote16,
   IconUpVoted16,
+  LanguageContext,
   TextIcon,
   useMutation,
 } from '~/components'
@@ -12,7 +14,7 @@ import {
   VOTE_COMMENT,
 } from '~/components/GQL/mutations/voteComment'
 
-import { numAbbr } from '~/common/utils'
+import { numAbbr, translate } from '~/common/utils'
 
 import { UnvoteComment } from '~/components/GQL/mutations/__generated__/UnvoteComment'
 import { VoteComment } from '~/components/GQL/mutations/__generated__/VoteComment'
@@ -50,6 +52,8 @@ const UpvoteButton = ({
   disabled,
   inCard,
 }: UpvoteButtonProps) => {
+  const { lang } = useContext(LanguageContext)
+
   const [unvote] = useMutation<UnvoteComment>(UNVOTE_COMMENT, {
     variables: { id: comment.id },
     optimisticResponse: {
@@ -85,7 +89,12 @@ const UpvoteButton = ({
           onClick ? onClick() : unvote()
         }}
         disabled={disabled}
-        aira-label="取消點讚"
+        aria-label={translate({
+          zh_hant: '取消點讚',
+          zh_hans: '取消点赞',
+          en: 'Undo Upvote',
+          lang,
+        })}
       >
         <TextIcon icon={<IconUpVoted16 />} color="green" weight="md">
           {comment.upvotes > 0 ? numAbbr(comment.upvotes) : undefined}
@@ -102,7 +111,12 @@ const UpvoteButton = ({
         onClick ? onClick() : upvote()
       }}
       disabled={disabled}
-      aira-label="點讚"
+      aria-label={translate({
+        zh_hant: '點讚',
+        zh_hans: '点赞',
+        en: 'Upvote',
+        lang,
+      })}
     >
       <TextIcon icon={<IconUpVote16 color="grey" />} color="grey" weight="md">
         {comment.upvotes > 0 ? numAbbr(comment.upvotes) : undefined}

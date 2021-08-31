@@ -1,17 +1,28 @@
-import { Button, CopyToClipboard, IconCopy16 } from '~/components'
+import { useContext } from 'react'
 
-import { TEXT } from '~/common/enums'
+import {
+  Button,
+  CopyToClipboard,
+  IconCopy16,
+  LanguageContext,
+} from '~/components'
 
-const CopyButton = ({ text }: { text: string }) => (
-  <CopyToClipboard text={text}>
-    <Button
-      spacing={['xtight', 'xtight']}
-      bgActiveColor="grey-lighter"
-      aira-label={TEXT.zh_hant.copy}
-    >
-      <IconCopy16 color="grey" />
-    </Button>
-  </CopyToClipboard>
-)
+import { translate } from '~/common/utils'
+
+const CopyButton = ({ text }: { text: string }) => {
+  const { lang } = useContext(LanguageContext)
+
+  return (
+    <CopyToClipboard text={text}>
+      <Button
+        spacing={['xtight', 'xtight']}
+        bgActiveColor="grey-lighter"
+        aria-label={translate({ id: 'copy', lang })}
+      >
+        <IconCopy16 color="grey" />
+      </Button>
+    </CopyToClipboard>
+  )
+}
 
 export default CopyButton

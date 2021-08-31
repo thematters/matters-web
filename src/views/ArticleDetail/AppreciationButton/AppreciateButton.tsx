@@ -1,9 +1,15 @@
 import classNames from 'classnames'
-import { useRef } from 'react'
+import { useContext, useRef } from 'react'
 
-import { Button, IconClap16, IconSuperLike, TextIcon } from '~/components'
+import {
+  Button,
+  IconClap16,
+  IconSuperLike,
+  LanguageContext,
+  TextIcon,
+} from '~/components'
 
-import { numAbbr } from '~/common/utils'
+import { numAbbr, translate } from '~/common/utils'
 
 import * as clap from './clap'
 import clapStyles from './styles.clap.css'
@@ -26,6 +32,8 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
   isSuperLike,
   superLiked,
 }) => {
+  const { lang } = useContext(LanguageContext)
+
   const iconRef = useRef<HTMLButtonElement>(null)
   const buttonClasses = classNames({
     'appreciate-button': true,
@@ -38,7 +46,12 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
       <Button
         spacing={['xtight', 'xtight']}
         bgActiveColor="grey-lighter"
-        aria-label={`讚賞作品 讚賞數量 ${total > 0 ? total : 0}`}
+        aria-label={translate({
+          zh_hant: `讚賞作品（當前 ${total} 次讚賞）`,
+          zh_hans: `赞赏作品（当前 ${total} 次赞赏）`,
+          en: `appreciate article (current ${total} appreciations)`,
+          lang,
+        })}
         disabled={disabled}
         onClick={() => {
           if (iconRef.current) {

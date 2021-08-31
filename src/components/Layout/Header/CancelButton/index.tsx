@@ -1,20 +1,25 @@
+import { useContext } from 'react'
+
 import {
   Button,
   ButtonProps,
   IconClose32,
+  LanguageContext,
   TextIcon,
   Translate,
   useResponsive,
 } from '~/components'
 
-import { TEXT } from '~/common/enums'
+import { translate } from '~/common/utils'
 
 const CancelButton = (props: ButtonProps) => {
+  const { lang } = useContext(LanguageContext)
+
   const isSmallUp = useResponsive('sm-up')
 
   return (
     <Button
-      aria-label={TEXT.zh_hant.cancel}
+      aria-label={translate({ id: 'cancel', lang })}
       bgColor={isSmallUp ? 'green-lighter' : undefined}
       size={isSmallUp ? ['2rem', '2rem'] : undefined}
       {...props}

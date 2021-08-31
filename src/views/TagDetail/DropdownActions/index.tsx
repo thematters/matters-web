@@ -25,7 +25,7 @@ import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
 import ADD_ARTICLES_TAGS from '~/components/GQL/mutations/addArticlesTags'
 import updateTagArticlesCount from '~/components/GQL/updates/tagArticlesCount'
 
-import { ADD_TOAST, REFETCH_TAG_DETAIL_ARTICLES, TEXT } from '~/common/enums'
+import { ADD_TOAST, REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
 import { translate } from '~/common/utils'
 
 import styles from './styles.css'
@@ -67,6 +67,8 @@ const BaseDropdownActions = ({
   openTagEditorDialog,
   openTagLeaveDialog,
 }: BaseDropdownActionsProps) => {
+  const { lang } = useContext(LanguageContext)
+
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
     <Menu width={isInDropdown ? 'sm' : undefined}>
       {hasEditTag && (
@@ -128,7 +130,7 @@ const BaseDropdownActions = ({
         <section className="container">
           <Button
             bgColor="half-black"
-            aria-label={TEXT.zh_hant.moreActions}
+            aria-label={translate({ id: 'moreActions', lang })}
             aria-haspopup="true"
             onClick={openDialog}
             ref={ref}
