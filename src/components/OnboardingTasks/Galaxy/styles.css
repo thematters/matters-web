@@ -1,8 +1,15 @@
+:root {
+  --check-color-white: rgba(255, 255, 255, 1);
+}
+
 .galaxy {
   position: relative;
   width: 16.5rem;
+  min-width: 16.5rem;
+  max-width: 16.5rem;
   height: 12.75rem;
   min-height: 12.75rem;
+  max-height: 12.75rem;
   margin: 0 auto;
 }
 
@@ -12,34 +19,51 @@
   cursor: pointer;
 
   & :global(> svg) {
-    & :global(path:first-child) {
-      opacity: 0;
-    }
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: 50%;
   }
 
   &:hover {
     color: rgba(255, 255, 255, 0.65);
+  }
+}
 
-    & :global(> svg) {
-      & :global(path:first-child) {
-        opacity: 0.8;
-      }
-    }
+.checked {
+  color: var(--check-color-white);
+
+  &:hover {
+    color: var(--check-color-white);
   }
 }
 
 .check-1 {
-  top: 37px;
-  right: 55px;
-  width: 48px;
-  height: 48px;
+  top: 43px;
+  right: 62px;
+  width: 35px;
+  height: 35px;
+
+  &.checked,
+  &.selected,
+  &:hover {
+    & :global(> svg) {
+      border: 1px solid #9bcfb3;
+    }
+  }
 }
 
 .check-2 {
   top: 100px;
-  right: 34.5px;
+  right: 35px;
   width: 54px;
   height: 54px;
+
+  &.checked,
+  &.selected,
+  &:hover {
+    & :global(> svg) {
+      border: 1px solid #da887c;
+    }
+  }
 }
 
 .check-3 {
@@ -47,6 +71,14 @@
   left: 85px;
   width: 42px;
   height: 42px;
+
+  &.checked,
+  &.selected,
+  &:hover {
+    & :global(> svg) {
+      border: 1px solid #8bcbd4;
+    }
+  }
 }
 
 .check-4 {
@@ -54,25 +86,27 @@
   left: 34px;
   width: 38px;
   height: 38px;
+
+  &.checked,
+  &.selected,
+  &:hover {
+    & :global(> svg) {
+      border: 1px solid #e1c999;
+    }
+  }
 }
 
 .check-5 {
   top: 31px;
-  left: 94.5px;
+  left: 95px;
   width: 33px;
   height: 33px;
-}
 
-.checked {
-  color: rgba(255, 255, 255, 1);
-
-  & :global(> svg) {
-    &:global(path:first-child) {
-      opacity: 1;
-    }
-  }
-
+  &.checked,
+  &.selected,
   &:hover {
-    color: rgba(255, 255, 255, 1);
+    & :global(> svg) {
+      border: 1px solid #9396c2;
+    }
   }
 }
