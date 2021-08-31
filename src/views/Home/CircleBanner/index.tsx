@@ -12,8 +12,8 @@ import {
 } from '~/components'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
-import { PATHS, STORAGE_KEY_CIRCLE_BANNER, TEXT } from '~/common/enums'
-import { storage } from '~/common/utils'
+import { PATHS, STORAGE_KEY_CIRCLE_BANNER } from '~/common/enums'
+import { storage, translate } from '~/common/utils'
 
 import IMAGE_CIRCLE_AD_BANNER from '@/public/static/images/circle-ad-banner.svg'
 
@@ -114,7 +114,7 @@ const CircleBanner = () => {
         <Button
           spacing={[0, 0]}
           bgActiveColor="green"
-          aria-label={TEXT.zh_hant.close}
+          aria-label={translate({ id: 'close', lang })}
           onClick={hideBanner}
         >
           <IconClose32 size="lg" color="white" />

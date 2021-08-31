@@ -3,7 +3,7 @@ import { useContext } from 'react'
 
 import { Head, IconLogo, LanguageContext } from '~/components'
 
-import { PATHS, TEXT } from '~/common/enums'
+import { PATHS } from '~/common/enums'
 import { translate } from '~/common/utils'
 
 import Footer from '../About/Footer'
@@ -37,7 +37,10 @@ const Migration = () => {
         <div className="l-row">
           <div className="l-col-full">
             <Link href={PATHS.HOME}>
-              <a className="logo" aria-label={TEXT.zh_hant.discover}>
+              <a
+                className="logo"
+                aira-label={translate({ id: 'discover', lang })}
+              >
                 <IconLogo />
               </a>
             </Link>

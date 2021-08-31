@@ -5,6 +5,7 @@ import {
   Button,
   DonationDialog,
   IconDonate24,
+  LanguageContext,
   LoginButton,
   TextIcon,
   Translate,
@@ -12,7 +13,7 @@ import {
 } from '~/components'
 
 import { ADD_TOAST, TEXT } from '~/common/enums'
-import { analytics, numAbbr } from '~/common/utils'
+import { analytics, numAbbr, translate } from '~/common/utils'
 
 import { DonationButtonArticle } from './__generated__/DonationButtonArticle'
 
@@ -40,6 +41,7 @@ const fragments = {
 
 const DonationButton = ({ article, disabled }: DonationButtonProps) => {
   const viewer = useContext(ViewerContext)
+  const { lang } = useContext(LanguageContext)
 
   const forbid = () => {
     window.dispatchEvent(
@@ -71,6 +73,11 @@ const DonationButton = ({ article, disabled }: DonationButtonProps) => {
     )
   }
 
+  const donationCount =
+    article.donationsToolbar.totalCount > 0
+      ? article.donationsToolbar.totalCount
+      : 0
+
   return (
     <section className="container">
       <DonationDialog recipient={article.author} targetId={article.id}>
@@ -78,11 +85,12 @@ const DonationButton = ({ article, disabled }: DonationButtonProps) => {
           <Button
             spacing={['xtight', 'xtight']}
             bgActiveColor="grey-lighter"
-            aria-label={`${TEXT.zh_hant.donation} 支持數量 ${
-              article.donationsToolbar.totalCount > 0
-                ? article.donationsToolbar.totalCount
-                : 0
-            }`}
+            aria-label={translate({
+              zh_hant: `${TEXT.zh_hant.donation}（當前 ${donationCount} 次支持）`,
+              zh_hans: `${TEXT.zh_hans.donation}（当前 ${donationCount} 次支持）`,
+              en: `${TEXT.en.donation} (current ${donationCount} supports)`,
+              lang,
+            })}
             disabled={disabled || article.author.id === viewer.id}
             onClick={() => {
               analytics.trackEvent('click_button', { type: 'donate' })

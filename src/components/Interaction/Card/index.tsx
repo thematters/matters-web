@@ -1,8 +1,11 @@
 import classNames from 'classnames'
 import { useRouter } from 'next/router'
-import { forwardRef, useRef } from 'react'
+import { forwardRef, useContext, useRef } from 'react'
+
+import { LanguageContext } from '~/components'
 
 import { KEYCODES } from '~/common/enums'
+import { translate } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -54,6 +57,7 @@ export const Card: React.FC<CardProps> = forwardRef(
     ref
   ) => {
     const router = useRouter()
+    const { lang } = useContext(LanguageContext)
 
     const disabled = !href && !htmlHref && !onClick
     const fallbackRef = useRef(null)
@@ -72,7 +76,14 @@ export const Card: React.FC<CardProps> = forwardRef(
       disabled,
     })
     const ariaLabel =
-      htmlHref || href ? `跳轉至 ${href || htmlHref}` : undefined
+      htmlHref || href
+        ? translate({
+            zh_hant: `跳轉至 ${href || htmlHref}`,
+            zh_hans: `跳转至 ${href || htmlHref}`,
+            en: `Go to ${href || htmlHref}`,
+            lang,
+          })
+        : undefined
 
     const openLink = ({
       newTab,

@@ -1,9 +1,11 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import _uniq from 'lodash/uniq'
+import { useContext } from 'react'
 
 import {
   ArticleDigestSidebar,
+  LanguageContext,
   List,
   QueryError,
   Spinner,
@@ -14,7 +16,7 @@ import {
 } from '~/components'
 import articleFragments from '~/components/GQL/fragments/article'
 
-import { analytics, mergeConnections } from '~/common/utils'
+import { analytics, mergeConnections, translate } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -39,6 +41,8 @@ const Collection: React.FC<{
   article: ArticleDetailPublic_article
   collectionCount?: number
 }> = ({ article, collectionCount }) => {
+  const { lang } = useContext(LanguageContext)
+
   const isMediumUp = useResponsive('md-up')
   const { data, loading, error, fetchMore } = useQuery<CollectionListTypes>(
     COLLECTION_LIST,
@@ -79,7 +83,15 @@ const Collection: React.FC<{
         <Title type="nav" is="h2">
           <Translate id="extendArticle" />
 
-          <span className="count" aira-label={`${collectionCount} 篇關聯作品`}>
+          <span
+            className="count"
+            aria-label={translate({
+              zh_hant: `${collectionCount} 篇關聯作品`,
+              zh_hans: `${collectionCount} 篇关联作品`,
+              en: `${collectionCount} collected articles`,
+              lang,
+            })}
+          >
             {collectionCount}
           </span>
         </Title>

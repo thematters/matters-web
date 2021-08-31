@@ -1,16 +1,17 @@
 import gql from 'graphql-tag'
-import React from 'react'
+import React, { useContext } from 'react'
 
 import {
   ArticleDigestTitle,
   Card,
   IconClap16,
+  LanguageContext,
   TextIcon,
   Translate,
   UserDigest,
 } from '~/components'
 
-import { toPath } from '~/common/utils'
+import { toPath, translate } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -43,6 +44,8 @@ const fragments = {
 }
 
 const BaseAppreciation = ({ type, appreciation }: AppreciationProps) => {
+  const { lang } = useContext(LanguageContext)
+
   const { amount, content, purpose, recipient, sender, target } = appreciation
 
   const showContent = purpose !== 'appreciate'
@@ -98,7 +101,15 @@ const BaseAppreciation = ({ type, appreciation }: AppreciationProps) => {
         </section>
 
         <section className="right">
-          <div className="num" aria-label={`${amount} 次讚賞`}>
+          <div
+            className="num"
+            aria-label={translate({
+              zh_hant: `${amount} 次讚賞`,
+              zh_hans: `${amount} 次赞赏`,
+              en: `${amount} appreciations`,
+              lang,
+            })}
+          >
             <TextIcon
               icon={<IconClap16 />}
               spacing="xtight"

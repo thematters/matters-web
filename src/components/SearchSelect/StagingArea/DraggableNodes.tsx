@@ -1,3 +1,4 @@
+import { useContext } from 'react'
 import {
   DragDropContext,
   Draggable,
@@ -5,7 +6,9 @@ import {
   DropResult,
 } from 'react-beautiful-dnd'
 
-import { IconSort16 } from '~/components'
+import { IconSort16, LanguageContext } from '~/components'
+
+import { translate } from '~/common/utils'
 
 import { SelectNode } from '../SearchingArea'
 import SearchSelectNode from '../SearchSelectNode'
@@ -34,6 +37,8 @@ const DraggableNodes: React.FC<DraggableNodesProps> = ({
   setNodes,
   toggleSelectNode,
 }) => {
+  const { lang } = useContext(LanguageContext)
+
   const onDragEnd = (result: DropResult) => {
     if (!result.destination) {
       return
@@ -72,7 +77,15 @@ const DraggableNodes: React.FC<DraggableNodesProps> = ({
                     {...dragProvided.draggableProps}
                     {...dragProvided.dragHandleProps}
                   >
-                    <span className="drag-handler" aria-label="拖拽">
+                    <span
+                      className="drag-handler"
+                      aria-label={translate({
+                        zh_hant: '拖拽',
+                        zh_hans: '拖拽',
+                        en: 'Drag',
+                        lang,
+                      })}
+                    >
                       <IconSort16 color="grey-light" />
                     </span>
 
