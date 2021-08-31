@@ -69,12 +69,7 @@
           { "name": "UserCreateCircleActivity" },
           { "name": "UserRecommendationActivity" },
           { "name": "ArticleRecommendationActivity" },
-          { "name": "CircleRecommendationActivity" },
-          { "name": "UserSubscribeCircleActivity" },
-          { "name": "UserFollowUserActivity" },
-          { "name": "UserDonateArticleActivity" },
-          { "name": "UserBookmarkArticleActivity" },
-          { "name": "UserCollectArticleActivity" }
+          { "name": "CircleRecommendationActivity" }
         ]
       },
       {
