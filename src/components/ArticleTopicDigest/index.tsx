@@ -2,10 +2,13 @@ import classNames from 'classnames'
 
 import {
   ArticleDigestTitle,
+  Button,
   Card,
+  IconArrowRight16,
   IconArticle16,
   IconChapter16,
   IconDotDivider,
+  LinkWrapper,
   ResponsiveImage,
   TextIcon,
   Translate,
@@ -60,7 +63,11 @@ export const ArticleTopicDigest = ({ topic }: ArticleTopicDigestProps) => {
           </div>
 
           <section className="head">
-            <h3 className="title">{topic.title}</h3>
+            <h3 className="title">
+              <LinkWrapper {...path} textActiveColor="green">
+                {topic.title}
+              </LinkWrapper>
+            </h3>
 
             <section className="info">
               {chapterCount > 0 && (
@@ -100,6 +107,13 @@ export const ArticleTopicDigest = ({ topic }: ArticleTopicDigestProps) => {
           <p className="description">{topic.description}</p>
 
           <section className="latestArticle">
+            <TextIcon size="md-s" weight="md">
+              <Translate
+                zh_hant="最新&nbsp;|&nbsp;"
+                zh_hans="最新&nbsp;|&nbsp;"
+                en="Latest&nbsp;|&nbsp;"
+              />
+            </TextIcon>
             <ArticleDigestTitle
               article={topic.articles.edges[0].node}
               is="h4"
@@ -108,6 +122,30 @@ export const ArticleTopicDigest = ({ topic }: ArticleTopicDigestProps) => {
               lineClamp
             />
           </section>
+        </section>
+
+        <section className="viewAll">
+          <Button
+            size={[null, '1.25rem']}
+            spacing={[0, 'xtight']}
+            bgActiveColor="grey-lighter-active"
+            href={path.href}
+          >
+            <TextIcon
+              icon={<IconArrowRight16 size="xs" />}
+              color="grey-darker"
+              size="xs"
+              weight="md"
+              spacing="xxtight"
+              textPlacement="left"
+            >
+              <Translate
+                zh_hant="查看全部作品"
+                zh_hans="查看全部作品"
+                en="View All"
+              />
+            </TextIcon>
+          </Button>
         </section>
 
         <style jsx>{styles}</style>

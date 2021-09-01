@@ -79,6 +79,18 @@
 }
 
 .latestArticle {
+  @mixin flex-center-start;
+
   grid-area: latestArticle;
   margin-top: var(--spacing-x-tight);
+
+  & :global(> *:first-child) {
+    flex-shrink: 0;
+  }
+}
+
+.viewAll {
+  @mixin flex-center-end;
+
+  margin-top: var(--spacing-base);
 }
