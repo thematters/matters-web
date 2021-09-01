@@ -1,6 +1,4 @@
-import { useContext } from 'react'
-
-import { Slides, ViewerContext } from '~/components'
+import { Slides } from '~/components'
 
 import { analytics } from '~/common/utils'
 
@@ -17,8 +15,6 @@ interface Props {
 }
 
 const RecommendCircleActivity = ({ circles, location }: Props) => {
-  const viewer = useContext(ViewerContext)
-
   if (!circles || circles.length <= 0) {
     return null
   }
@@ -38,7 +34,6 @@ const RecommendCircleActivity = ({ circles, location }: Props) => {
               contentType: 'CircleRecommendationActivity',
               location: `${location}.${index}`,
               id: circle.id,
-              userId: viewer.id,
             })
           }}
         >

@@ -121,6 +121,7 @@ const Tags = () => {
                     type: 'tags',
                     contentType: 'tag',
                     location: i,
+                    id: node.id,
                   })
                 }
               >

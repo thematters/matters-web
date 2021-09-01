@@ -62,6 +62,7 @@ const AggregateUserResults = () => {
                       type: 'search',
                       contentType: 'user',
                       location: i,
+                      id: node.id,
                     })
                   }
                 >

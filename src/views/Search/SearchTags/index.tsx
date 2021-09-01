@@ -90,6 +90,7 @@ const SearchTag = () => {
                         type: 'search_tag',
                         contentType: 'tag',
                         location: i,
+                        id: node.id,
                       })
                     }
                   >

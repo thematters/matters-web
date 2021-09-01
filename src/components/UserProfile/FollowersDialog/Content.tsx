@@ -138,6 +138,7 @@ const FollowersDialogContent = () => {
                     type: 'follower',
                     contentType: 'user',
                     location: i,
+                    id: node.id,
                   })
                 }
               />
