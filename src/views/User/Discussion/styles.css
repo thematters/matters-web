@@ -24,28 +24,39 @@
 }
 
 .wall {
-  margin-top: var(--spacing-base);
   margin-bottom: calc(var(--wall-bottom-offset) * -1);
 
-  & img {
-    display: block;
+  & .info,
+  & .slogan {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
   }
 
-  & .brief {
-    height: calc(var(--wall-bottom-offset));
-    margin-top: calc(-1px);
-    text-align: center;
-    background: var(--color-matters-green);
+  & .info {
+    padding: var(--spacing-x-loose) 0 4.5rem;
 
-    & p {
-      display: inline-block;
-      padding: var(--spacing-x-tight) var(--spacing-base);
-      margin-top: var(--spacing-base);
+    & .price {
+      margin-bottom: var(--spacing-x-tight);
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-semibold);
+    }
+  }
+
+  & .slogan {
+    padding: 0 var(--spacing-base);
+    margin-top: calc(var(--spacing-xxx-loose) * -1);
+
+    & .title {
+      margin-bottom: var(--spacing-x-tight);
+      font-size: var(--font-size-xm);
+      font-weight: var(--font-weight-medium);
+    }
+
+    & .desc {
+      margin-bottom: var(--spacing-loose);
       font-size: var(--font-size-md-s);
-      color: var(--color-white);
-      background: #095552;
-      border-radius: 3rem;
     }
   }
 }

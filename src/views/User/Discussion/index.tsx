@@ -52,8 +52,8 @@ const Discussion = () => {
         left={<Layout.Header.BackButton />}
         right={
           <Layout.Header.Title
-            zh_hant={`${user.displayName}的眾聊`}
-            zh_hans={`${user.displayName}的众聊`}
+            zh_hant={`${user.displayName}的眾聊室`}
+            zh_hans={`${user.displayName}的众聊室`}
             en={`${user.displayName}'s discussion`}
           />
         }

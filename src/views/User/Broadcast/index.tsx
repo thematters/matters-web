@@ -52,8 +52,8 @@ const Broadcast = () => {
         left={<Layout.Header.BackButton />}
         right={
           <Layout.Header.Title
-            zh_hant={`${user.displayName}的廣播`}
-            zh_hans={`${user.displayName}的广播`}
+            zh_hant={`${user.displayName}的廣播間`}
+            zh_hans={`${user.displayName}的广播间`}
             en={`${user.displayName}'s broadcast`}
           />
         }

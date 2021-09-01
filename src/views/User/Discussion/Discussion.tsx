@@ -156,7 +156,7 @@ const Discussion = ({ name }: Props) => {
   }
 
   if (privateFetched && !hasPermission) {
-    return <Wall />
+    return <Wall circle={circle} />
   }
 
   return (
