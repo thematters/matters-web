@@ -18,7 +18,7 @@ const Select: React.FC<SelectProps> = ({ startGenerate, startBind }) => {
           title={<Translate zh_hant="生成 Liker ID" zh_hans="生成 Liker ID" />}
           subtitle={
             <Translate
-              zh_hant="同意 Matters 帮我创建 Liker ID"
+              zh_hant="同意 Matters 幫我創建 Liker ID"
               zh_hans="同意 Matters 帮我创建 Liker ID"
             />
           }
