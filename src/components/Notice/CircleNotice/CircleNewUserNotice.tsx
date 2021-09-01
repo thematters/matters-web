@@ -17,7 +17,7 @@ import { CircleNewUserNotice as NoticeType } from './__generated__/CircleNewUser
 
 type CircleNewUserNotice = {
   notice: NoticeType
-  userType: 'follower' | 'subscriber' | 'unsubscriber'
+  userType: 'subscriber' | 'unsubscriber'
 }
 
 const CircleNewUserNotice = ({ notice, userType }: CircleNewUserNotice) => {
@@ -25,7 +25,6 @@ const CircleNewUserNotice = ({ notice, userType }: CircleNewUserNotice) => {
     return null
   }
 
-  const isNewFollower = userType === 'follower'
   const isNewSubscriber = userType === 'subscriber'
   const isNewUnsubscriber = userType === 'unsubscriber'
   const actorsCount = notice.actors.length
@@ -50,13 +49,6 @@ const CircleNewUserNotice = ({ notice, userType }: CircleNewUserNotice) => {
               zh_hant={`等 ${numAbbr(actorsCount)} 人`}
               zh_hans={`等 ${numAbbr(actorsCount)} 人`}
               en={`etc. ${numAbbr(actorsCount)} users`}
-            />
-          )}
-          {isNewFollower && (
-            <Translate
-              zh_hant="追蹤了你的圍爐"
-              zh_hans="追踪了你的围炉"
-              en=" followed your cirlce"
             />
           )}
           {isNewSubscriber && (
