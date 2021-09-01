@@ -144,7 +144,7 @@ const DropdownActions = ({ user, isMe }: DropdownActionsProps) => {
   const controls = {
     hasEditProfile: isMe,
     hasBlockUser: !isMe,
-    isCircleMember: isMe && !!circle?.isMember && !!circle.id,
+    isCircleMember: !isMe && !!circle?.isMember && !!circle.id,
     isCircleOwner: isMe && circle?.owner.id === user.id,
   }
 
