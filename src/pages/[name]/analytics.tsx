@@ -1,23 +1,13 @@
-import CircleAnalytics from '~/views/Circle/Analytics'
+import UserAnalytics from '~/views/User/Analytics'
 
-import { EmptyLayout, Protected, Throw404, useRoute } from '~/components'
+import { Protected } from '~/components'
 
-const NameCircleAnalytics = () => {
-  const { isPathStartWith } = useRoute()
-
-  if (isPathStartWith('/~', true)) {
-    return (
-      <Protected>
-        <CircleAnalytics />
-      </Protected>
-    )
-  }
-
+const NameUserAnalytics = () => {
   return (
-    <EmptyLayout>
-      <Throw404 />
-    </EmptyLayout>
+    <Protected>
+      <UserAnalytics />
+    </Protected>
   )
 }
 
-export default NameCircleAnalytics
+export default NameUserAnalytics

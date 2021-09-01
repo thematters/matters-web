@@ -3,24 +3,27 @@ import gql from 'graphql-tag'
 import { CircleInvitation } from '~/components'
 
 export default gql`
-  query CirclePendingInvites($name: String!, $after: String) {
-    circle(input: { name: $name }) {
+  query CirclePendingInvites($userName: String!, $after: String) {
+    user(input: { userName: $userName }) {
       id
-      owner {
+      ownCircles {
         id
-      }
-      invites {
-        pending(input: { first: 20, after: $after }) {
-          pageInfo {
-            startCursor
-            endCursor
-            hasNextPage
-          }
-          edges {
-            cursor
-            node {
-              id
-              ...CircleInvitation
+        owner {
+          id
+        }
+        invites {
+          pending(input: { first: 20, after: $after }) {
+            pageInfo {
+              startCursor
+              endCursor
+              hasNextPage
+            }
+            edges {
+              cursor
+              node {
+                id
+                ...CircleInvitation
+              }
             }
           }
         }

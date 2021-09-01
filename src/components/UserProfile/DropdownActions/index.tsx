@@ -1,71 +1,62 @@
-import gql from 'graphql-tag'
 import _isEmpty from 'lodash/isEmpty'
 import _pickBy from 'lodash/pickBy'
 
 import {
   Button,
   DropdownDialog,
+  IconAnalytics24,
   IconEdit16,
+  IconLogout24,
+  IconMail24,
   IconMore32,
   IconSettings32,
   Menu,
   TextIcon,
   Translate,
+  UnsubscribeCircleDialog,
 } from '~/components'
 import { BlockUser } from '~/components/BlockUser'
 
 import { TEXT } from '~/common/enums'
+import { toPath } from '~/common/utils'
 
 import { EditProfileDialog } from './EditProfileDialog'
+import { fragments } from './gql'
 
+import { DropdownActionsUserPrivate } from './__generated__/DropdownActionsUserPrivate'
 import { DropdownActionsUserPublic } from './__generated__/DropdownActionsUserPublic'
 
 interface DropdownActionsProps {
-  user: DropdownActionsUserPublic
+  user: DropdownActionsUserPublic & Partial<DropdownActionsUserPrivate>
   isMe: boolean
 }
 
 interface DialogProps {
   openEditProfileDialog: () => void
   openBlockUserDialog: () => void
+  openUnsubscribeCircleDialog: () => void
 }
 
 interface Controls {
   hasEditProfile: boolean
   hasBlockUser: boolean
+  isCircleMember: boolean
+  isCircleOwner: boolean
 }
 
 type BaseDropdownActionsProps = DropdownActionsProps & DialogProps & Controls
-
-const fragments = {
-  user: {
-    public: gql`
-      fragment DropdownActionsUserPublic on User {
-        id
-        ...BlockUserPublic
-        ...EditProfileDialogUserPublic
-      }
-      ${BlockUser.fragments.user.public}
-      ${EditProfileDialog.fragments.user}
-    `,
-    private: gql`
-      fragment DropdownActionsUserPrivate on User {
-        id
-        ...BlockUserPrivate
-      }
-      ${BlockUser.fragments.user.private}
-    `,
-  },
-}
 
 const BaseDropdownActions = ({
   user,
 
   hasEditProfile,
   hasBlockUser,
+  isCircleMember,
+  isCircleOwner,
 
   openEditProfileDialog,
   openBlockUserDialog,
+  openUnsubscribeCircleDialog,
 }: BaseDropdownActionsProps) => {
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
     <Menu width={isInDropdown ? 'sm' : undefined}>
@@ -77,8 +68,43 @@ const BaseDropdownActions = ({
         </Menu.Item>
       )}
 
+      {isCircleOwner && (
+        <Menu.Item
+          {...toPath({
+            page: 'userManageCircleInvitation',
+            userName: user.userName || '',
+          })}
+        >
+          <TextIcon icon={<IconMail24 size="md" />} size="md" spacing="base">
+            <Translate id="manageCircleInvitation" />
+          </TextIcon>
+        </Menu.Item>
+      )}
+
+      {isCircleOwner && (
+        <Menu.Item
+          {...toPath({ page: 'userAnalytics', userName: user.userName || '' })}
+        >
+          <TextIcon
+            icon={<IconAnalytics24 size="md" />}
+            size="md"
+            spacing="base"
+          >
+            <Translate id="circleAnalytics" />
+          </TextIcon>
+        </Menu.Item>
+      )}
+
       {hasBlockUser && (
         <BlockUser.Button user={user} openDialog={openBlockUserDialog} />
+      )}
+
+      {isCircleMember && (
+        <Menu.Item onClick={openUnsubscribeCircleDialog}>
+          <TextIcon icon={<IconLogout24 size="md" />} size="md" spacing="base">
+            <Translate id="unsubscribeCircle" />
+          </TextIcon>
+        </Menu.Item>
       )}
     </Menu>
   )
@@ -114,9 +140,12 @@ const BaseDropdownActions = ({
 }
 
 const DropdownActions = ({ user, isMe }: DropdownActionsProps) => {
+  const circle = user.ownCircles && user.ownCircles[0]
   const controls = {
     hasEditProfile: isMe,
     hasBlockUser: !isMe,
+    isCircleMember: isMe && !!circle?.isMember && !!circle.id,
+    isCircleOwner: isMe && circle?.owner.id === user.id,
   }
 
   if (_isEmpty(_pickBy(controls))) {
@@ -124,21 +153,26 @@ const DropdownActions = ({ user, isMe }: DropdownActionsProps) => {
   }
 
   return (
-    <EditProfileDialog user={user}>
-      {({ openDialog: openEditProfileDialog }) => (
-        <BlockUser.Dialog user={user}>
-          {({ openDialog: openBlockUserDialog }) => (
-            <BaseDropdownActions
-              user={user}
-              isMe={isMe}
-              {...controls}
-              openEditProfileDialog={openEditProfileDialog}
-              openBlockUserDialog={openBlockUserDialog}
-            />
+    <UnsubscribeCircleDialog id={circle?.id || ''}>
+      {({ openDialog: openUnsubscribeCircleDialog }) => (
+        <EditProfileDialog user={user}>
+          {({ openDialog: openEditProfileDialog }) => (
+            <BlockUser.Dialog user={user}>
+              {({ openDialog: openBlockUserDialog }) => (
+                <BaseDropdownActions
+                  user={user}
+                  isMe={isMe}
+                  {...controls}
+                  openEditProfileDialog={openEditProfileDialog}
+                  openBlockUserDialog={openBlockUserDialog}
+                  openUnsubscribeCircleDialog={openUnsubscribeCircleDialog}
+                />
+              )}
+            </BlockUser.Dialog>
           )}
-        </BlockUser.Dialog>
+        </EditProfileDialog>
       )}
-    </EditProfileDialog>
+    </UnsubscribeCircleDialog>
   )
 }
 
