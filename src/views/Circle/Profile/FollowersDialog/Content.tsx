@@ -40,7 +40,7 @@ const FollowersDialogContent = () => {
     variables: { name },
   })
 
-  const circle = data?.circle
+  const circle = data?.user?.ownCircles && data.user.ownCircles[0]
   const connectionPath = 'circle.followers'
   const { edges, pageInfo } = circle?.followers || {}
 
@@ -52,7 +52,9 @@ const FollowersDialogContent = () => {
       return
     }
 
-    const publicEdges = publicData.circle?.followers.edges || []
+    const publicCircle =
+      publicData.user?.ownCircles && publicData.user.ownCircles[0]
+    const publicEdges = publicCircle?.followers.edges || []
     const publicIds = publicEdges.map(({ node }) => node.id)
 
     client.query({

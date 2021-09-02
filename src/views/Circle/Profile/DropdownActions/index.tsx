@@ -5,8 +5,6 @@ import { useContext } from 'react'
 import {
   Button,
   DropdownDialog,
-  IconAnalytics24,
-  IconEdit16,
   IconLogout24,
   IconMore32,
   IconSettings32,
@@ -18,7 +16,6 @@ import {
 } from '~/components'
 
 import { TEXT } from '~/common/enums'
-import { toPath } from '~/common/utils'
 
 import { fragments } from './gql'
 
@@ -51,26 +48,6 @@ const BaseDropdownActions = ({
 }: BaseDropdownActionsProps) => {
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
     <Menu width={isInDropdown ? 'sm' : undefined}>
-      {isCircleOwner && (
-        <Menu.Item {...toPath({ page: 'circleSettings', circle })}>
-          <TextIcon icon={<IconEdit16 size="md" />} size="md" spacing="base">
-            <Translate id="manageCircle" />
-          </TextIcon>
-        </Menu.Item>
-      )}
-
-      {isCircleOwner && (
-        <Menu.Item {...toPath({ page: 'circleAnalytics', circle })}>
-          <TextIcon
-            icon={<IconAnalytics24 size="md" />}
-            size="md"
-            spacing="base"
-          >
-            <Translate id="circleAnalytics" />
-          </TextIcon>
-        </Menu.Item>
-      )}
-
       {hasUnsubscribeCircle && (
         <Menu.Item onClick={openUnsubscribeCircleDialog}>
           <TextIcon icon={<IconLogout24 size="md" />} size="md" spacing="base">

@@ -3,9 +3,10 @@ import gql from 'graphql-tag'
 import { UserDigest } from '~/components/UserDigest'
 
 export const CIRCLE_FOLLOWERS_PUBLIC = gql`
-  query CircleFollowersPublic($name: String!, $after: String) {
-    circle(input: { name: $name }) {
-      ... on Circle {
+  query CircleFollowersPublic($userName: String!, $after: String) {
+    user(input: { userName: $userName }) {
+      id
+      ownCircles {
         id
         cover
         displayName
