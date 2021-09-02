@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { Avatar, ThreadComment } from '~/components'
+import { Avatar, SubscribeCircleDialog, ThreadComment } from '~/components'
 
 export const USER_DISCUSSION = gql`
   query UserDiscussion($userName: String!) {
@@ -26,7 +26,7 @@ export const DISCUSSION_PUBLIC = gql`
         prices {
           amount
         }
-        members(input: { first: 4 }) {
+        latestMembers: members(input: { first: 4 }) {
           totalCount
           edges {
             cursor
@@ -38,15 +38,15 @@ export const DISCUSSION_PUBLIC = gql`
             }
           }
         }
-
-        # use alias to prevent overwriting <UserProfile>'s
-        circleIsMember: isMember @connection(key: "userDiscussionIsMember")
+        isMember
         discussionCount
         discussionThreadCount
+        ...SubscribeCirclePublic
       }
     }
   }
   ${Avatar.fragments.user}
+  ${SubscribeCircleDialog.fragments.circle.public}
 `
 
 export const DISCUSSION_PRIVATE = gql`
@@ -58,11 +58,12 @@ export const DISCUSSION_PRIVATE = gql`
           id
           isBlocking
         }
-        # use alias to prevent overwriting <UserProfile>'s
-        circleIsMember: isMember @connection(key: "userDiscussionIsMember")
+        isMember
+        ...SubscribeCirclePrivate
       }
     }
   }
+  ${SubscribeCircleDialog.fragments.circle.private}
 `
 
 export const DISCUSSION_COMMENTS = gql`

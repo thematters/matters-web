@@ -4,7 +4,7 @@ import styles from './styles.css'
 
 import {
   UserDiscussionPublic_node_Circle,
-  UserDiscussionPublic_node_Circle_members_edges,
+  UserDiscussionPublic_node_Circle_latestMembers_edges,
 } from './__generated__/UserDiscussionPublic'
 
 interface Props {
@@ -12,8 +12,8 @@ interface Props {
 }
 
 const Members = ({ circle }: Props) => {
-  const members = (circle?.members.edges ||
-    []) as UserDiscussionPublic_node_Circle_members_edges[]
+  const members = (circle?.latestMembers.edges ||
+    []) as UserDiscussionPublic_node_Circle_latestMembers_edges[]
 
   if (members.length === 0) {
     return null

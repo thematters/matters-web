@@ -1,31 +1,36 @@
 import classNames from 'classnames'
+import { useContext } from 'react'
 
 import {
   Button,
-  // SubscribeCircleDialog,
+  LoginButton,
+  SubscribeCircleDialog,
   TextIcon,
   Throw404,
   Translate,
   useResponsive,
+  ViewerContext,
 } from '~/components'
 
-import { OPEN_SUBSCRIBE_CIRCLE_DIALOG } from '~/common/enums'
+import { ADD_TOAST, OPEN_SUBSCRIBE_CIRCLE_DIALOG } from '~/common/enums'
 
-import BACKGROUND_SM from '@/public/static/images/discussion/background-sm.png'
-import BACKGROUND from '@/public/static/images/discussion/background.png'
-import MAIN_SM from '@/public/static/images/discussion/main-sm.svg'
-import MAIN from '@/public/static/images/discussion/main.svg'
+import IMAGE_BACKGROUND_SM from '@/public/static/images/discussion/background-sm.png'
+import IMAGE_BACKGROUND from '@/public/static/images/discussion/background.png'
+import IMAGE_MAIN_SM from '@/public/static/images/discussion/main-sm.svg'
+import IMAGE_MAIN from '@/public/static/images/discussion/main.svg'
 
 import Members from './Members'
 import styles from './styles.css'
 
+import { UserDiscussionPrivate_node_Circle } from './__generated__/UserDiscussionPrivate'
 import { UserDiscussionPublic_node_Circle } from './__generated__/UserDiscussionPublic'
 
-interface Props {
-  circle: UserDiscussionPublic_node_Circle
+interface WallProps {
+  circle: UserDiscussionPublic_node_Circle & UserDiscussionPrivate_node_Circle
 }
 
-const Wall = ({ circle }: Props) => {
+const Wall = ({ circle }: WallProps) => {
+  const viewer = useContext(ViewerContext)
   const isSmallUp = useResponsive('sm-up')
 
   const prices = circle?.prices || []
@@ -35,14 +40,39 @@ const Wall = ({ circle }: Props) => {
     return <Throw404 />
   }
 
-  const openSubscribeCircleDialog = () =>
+  const showLoginToast = () => {
+    window.dispatchEvent(
+      new CustomEvent(ADD_TOAST, {
+        detail: {
+          color: 'green',
+          content: (
+            <Translate
+              zh_hant="請登入／註冊訂閱圍爐"
+              zh_hans="请登入／注册订阅围炉"
+            />
+          ),
+          customButton: <LoginButton isPlain />,
+          buttonPlacement: 'center',
+        },
+      })
+    )
+  }
+
+  const openSubscribeCircleDialog = () => {
+    if (!viewer.isAuthed) {
+      showLoginToast()
+      return
+    }
     window.dispatchEvent(new CustomEvent(OPEN_SUBSCRIBE_CIRCLE_DIALOG, {}))
+  }
 
   const wallClasses = classNames({
     wall: true,
   })
   const wallStyles = {
-    backgroundImage: `url(${isSmallUp ? BACKGROUND.src : BACKGROUND_SM.src})`,
+    backgroundImage: `url(${
+      isSmallUp ? IMAGE_BACKGROUND.src : IMAGE_BACKGROUND_SM.src
+    })`,
   }
 
   const sloganClasses = classNames({
@@ -65,9 +95,9 @@ const Wall = ({ circle }: Props) => {
       </section>
 
       <picture>
-        <source media="(min-width: 768px)" srcSet={MAIN} />
+        <source media="(min-width: 768px)" srcSet={IMAGE_MAIN} />
 
-        <img src={MAIN_SM} />
+        <img src={IMAGE_MAIN_SM} />
       </picture>
 
       <section className={sloganClasses}>
@@ -97,9 +127,7 @@ const Wall = ({ circle }: Props) => {
         </Button>
       </section>
 
-      {/*
       <SubscribeCircleDialog circle={circle} />
-      */}
 
       <style jsx>{styles}</style>
     </section>

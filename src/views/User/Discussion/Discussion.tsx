@@ -35,6 +35,7 @@ import {
   UserDiscussionComments_node_Circle,
   UserDiscussionComments_node_Circle_discussion_edges_node,
 } from './__generated__/UserDiscussionComments'
+import { UserDiscussionPrivate_node_Circle } from './__generated__/UserDiscussionPrivate'
 import {
   UserDiscussionPublic,
   UserDiscussionPublic_node_Circle,
@@ -70,7 +71,7 @@ const Discussion = ({ id }: DiscussionProps) => {
   )
   const circle = data?.node as UserDiscussionPublic_node_Circle
   const isOwner = circle?.owner.id === viewer.id
-  const isMember = circle?.circleIsMember
+  const isMember = circle?.isMember
   const hasPermission = isOwner || isMember
 
   // pagination
@@ -162,7 +163,9 @@ const Discussion = ({ id }: DiscussionProps) => {
   }
 
   if (privateFetched && !hasPermission) {
-    return <Wall circle={circle} />
+    const wallCircle = circle as UserDiscussionPublic_node_Circle &
+      UserDiscussionPrivate_node_Circle
+    return <Wall circle={wallCircle} />
   }
 
   return (
