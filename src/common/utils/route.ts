@@ -32,14 +32,7 @@ type ToPathArgs =
       fragment?: string
     }
   | {
-      page:
-        | 'circleDetail'
-        | 'circleDiscussion'
-        | 'circleBroadcast'
-        | 'circleSettings'
-        | 'circleAnalytics'
-        | 'circleEditProfile'
-        | 'circleManageInvitation'
+      page: 'circleDetail'
       circle: CircleArgs
     }
   | {
@@ -53,7 +46,13 @@ type ToPathArgs =
       id: string
     }
   | {
-      page: 'userProfile' | 'userAbout' | 'userBroadcast' | 'userDiscussion'
+      page:
+        | 'userProfile'
+        | 'userAbout'
+        | 'userAnalytics'
+        | 'userBroadcast'
+        | 'userDiscussion'
+        | 'userManageCircleInvitation'
       userName: string
     }
   | {
@@ -81,39 +80,9 @@ export const toPath = (args: ToPathArgs): { href: string } => {
         href: args.fragment ? `${asUrl}#${args.fragment}` : asUrl,
       }
     }
-    case 'circleDiscussion': {
-      return {
-        href: `/~${args.circle.name}/discussion`,
-      }
-    }
-    case 'circleBroadcast': {
-      return {
-        href: `/~${args.circle.name}/broadcast`,
-      }
-    }
     case 'circleDetail': {
       return {
         href: `/~${args.circle.name}`,
-      }
-    }
-    case 'circleSettings': {
-      return {
-        href: `/~${args.circle.name}/settings`,
-      }
-    }
-    case 'circleAnalytics': {
-      return {
-        href: `/~${args.circle.name}/analytics`,
-      }
-    }
-    case 'circleEditProfile': {
-      return {
-        href: `/~${args.circle.name}/settings/edit-profile`,
-      }
-    }
-    case 'circleManageInvitation': {
-      return {
-        href: `/~${args.circle.name}/settings/manage-invitation`,
       }
     }
     case 'commentDetail': {
@@ -146,6 +115,11 @@ export const toPath = (args: ToPathArgs): { href: string } => {
         href: `/@${args.userName}/about`,
       }
     }
+    case 'userAnalytics': {
+      return {
+        href: `/@${args.userName}/analytics`,
+      }
+    }
     case 'userBroadcast': {
       return {
         href: `/@${args.userName}/broadcast`,
@@ -154,6 +128,11 @@ export const toPath = (args: ToPathArgs): { href: string } => {
     case 'userDiscussion': {
       return {
         href: `/@${args.userName}/discussion`,
+      }
+    }
+    case 'userManageCircleInvitation': {
+      return {
+        href: `/@${args.userName}/manage-invitation`,
       }
     }
     case 'search': {
