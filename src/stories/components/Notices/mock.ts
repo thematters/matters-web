@@ -352,26 +352,6 @@ export const MOCK_NOTICE_LIST = [
   /**
    * Circcle
    */
-  // CircleNewFollower: single actor
-  {
-    __typename: 'CircleNotice' as any,
-    id: 'CircleNewFollower',
-    unread: false,
-    createdAt: '2020-12-24T07:29:17.682Z',
-    actors: [MOCK_USER],
-    circleNoticeType: 'CircleNewFollower' as any,
-    tx: MOCK_CIRCLE,
-  },
-  // CircleNewFollower: multi actors
-  {
-    __typename: 'CircleNotice' as any,
-    id: 'CircleNewFollower',
-    unread: false,
-    createdAt: '2020-12-24T07:29:17.682Z',
-    actors: [MOCK_USER, MOCK_USER, MOCK_USER],
-    circleNoticeType: 'CircleNewFollower' as any,
-    tx: MOCK_CIRCLE,
-  },
   // CircleNewSubscriber
   {
     __typename: 'CircleNotice' as any,
