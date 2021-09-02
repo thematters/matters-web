@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { ThreadComment } from '~/components'
+import { Avatar, ThreadComment } from '~/components'
 
 export const USER_DISCUSSION = gql`
   query UserDiscussion($userName: String!) {
@@ -9,57 +9,79 @@ export const USER_DISCUSSION = gql`
       displayName
       ownCircles {
         id
-        name
       }
     }
   }
 `
 
 export const DISCUSSION_PUBLIC = gql`
-  query UserDiscussionPublic($name: String!) {
-    circle(input: { name: $name }) {
-      id
-      owner {
+  query UserDiscussionPublic($id: ID!) {
+    node(input: { id: $id }) {
+      ... on Circle {
         id
-        isBlocking
+        owner {
+          id
+          isBlocking
+        }
+        prices {
+          amount
+        }
+        members(input: { first: 4 }) {
+          totalCount
+          edges {
+            cursor
+            node {
+              user {
+                id
+                ...AvatarUser
+              }
+            }
+          }
+        }
+
+        # use alias to prevent overwriting <UserProfile>'s
+        circleIsMember: isMember @connection(key: "userDiscussionIsMember")
+        discussionCount
+        discussionThreadCount
       }
-      # use alias to prevent overwriting <CircleProfile>'s
-      circleIsMember: isMember @connection(key: "circleDiscussionIsMember")
-      discussionCount
-      discussionThreadCount
     }
   }
+  ${Avatar.fragments.user}
 `
 
 export const DISCUSSION_PRIVATE = gql`
-  query UserDiscussionPrivate($name: String!) {
-    circle(input: { name: $name }) {
-      id
-      owner {
+  query UserDiscussionPrivate($id: ID!) {
+    node(input: { id: $id }) {
+      ... on Circle {
         id
-        isBlocking
+        owner {
+          id
+          isBlocking
+        }
+        # use alias to prevent overwriting <UserProfile>'s
+        circleIsMember: isMember @connection(key: "userDiscussionIsMember")
       }
-      # use alias to prevent overwriting <CircleProfile>'s
-      circleIsMember: isMember @connection(key: "circleDiscussionIsMember")
     }
   }
 `
 
 export const DISCUSSION_COMMENTS = gql`
-  query UserDiscussionComments($name: String!, $after: String) {
-    circle(input: { name: $name }) {
-      id
-      discussion(input: { first: 10, after: $after }) {
-        totalCount
-        pageInfo {
-          startCursor
-          endCursor
-          hasNextPage
-        }
-        edges {
-          node {
-            ...ThreadCommentCommentPublic
-            ...ThreadCommentCommentPrivate
+  query UserDiscussionComments($id: ID!, $after: String) {
+    node(input: { id: $id }) {
+      ... on Circle {
+        id
+        discussion(input: { first: 10, after: $after }) {
+          totalCount
+          pageInfo {
+            startCursor
+            endCursor
+            hasNextPage
+          }
+          edges {
+            node {
+              ...ThreadCommentCommentPublic
+              ...ThreadCommentCommentPrivate
+            }
           }
         }
       }

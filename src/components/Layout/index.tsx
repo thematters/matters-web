@@ -61,10 +61,11 @@ interface MainProps {
 }
 
 const Main: React.FC<MainProps> = ({ aside, bgColor, inEditor, children }) => {
-  const { isInPath, isPathStartWith } = useRoute()
+  const { isInPath } = useRoute()
   const isInSearch = isInPath('SEARCH')
   const isInArticleDetail = isInPath('ARTICLE_DETAIL')
-  const isInCircle = isPathStartWith('/~', true)
+  const isInUserBroadcast = isInPath('USER_BROADCAST')
+  const isInUserDiscussion = isInPath('USER_DISCUSSION')
   const isLargeUp = useResponsive('lg-up')
 
   const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
@@ -72,7 +73,11 @@ const Main: React.FC<MainProps> = ({ aside, bgColor, inEditor, children }) => {
   })
   const onboardingTasks = data?.clientPreference.onboardingTasks
   const showOnboardingTasks =
-    !inEditor && !isInArticleDetail && !isInCircle && onboardingTasks?.enabled
+    !inEditor &&
+    !isInArticleDetail &&
+    !isInUserBroadcast &&
+    !isInUserDiscussion &&
+    onboardingTasks?.enabled
 
   const articleClasses = classNames({
     'l-col-three-mid': true,

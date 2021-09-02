@@ -9,32 +9,34 @@ export const USER_BROADCAST = gql`
       displayName
       ownCircles {
         id
-        name
       }
     }
   }
 `
 
 export const BROADCAST_PUBLIC = gql`
-  query UserBroadcastPublic($name: String!, $after: String) {
-    circle(input: { name: $name }) {
-      id
-      owner {
+  query UserBroadcastPublic($id: ID!, $after: String) {
+    node(input: { id: $id }) {
+      ... on Circle {
         id
-      }
-      # use alias to prevent overwriting <CircleProfile>'s
-      circleIsMember: isMember @connection(key: "circleBroadcastIsMember")
-      broadcast(input: { first: 10, after: $after }) {
-        totalCount
-        pageInfo {
-          startCursor
-          endCursor
-          hasNextPage
+        name
+        owner {
+          id
         }
-        edges {
-          node {
-            ...ThreadCommentCommentPublic
-            ...ThreadCommentCommentPrivate
+        # use alias to prevent overwriting <UserProfile>'s
+        circleIsMember: isMember @connection(key: "userBroadcastIsMember")
+        broadcast(input: { first: 10, after: $after }) {
+          totalCount
+          pageInfo {
+            startCursor
+            endCursor
+            hasNextPage
+          }
+          edges {
+            node {
+              ...ThreadCommentCommentPublic
+              ...ThreadCommentCommentPrivate
+            }
           }
         }
       }
@@ -45,14 +47,16 @@ export const BROADCAST_PUBLIC = gql`
 `
 
 export const BROADCAST_PRIVATE = gql`
-  query UserBroadcastPrivate($name: String!, $ids: [ID!]!) {
-    circle(input: { name: $name }) {
-      id
-      owner {
+  query UserBroadcastPrivate($id: ID!, $ids: [ID!]!) {
+    node(input: { id: $id }) {
+      ... on Circle {
         id
+        owner {
+          id
+        }
+        # use alias to prevent overwriting <UserProfile>'s
+        circleIsMember: isMember @connection(key: "userBroadcastIsMember")
       }
-      # use alias to prevent overwriting <CircleProfile>'s
-      circleIsMember: isMember @connection(key: "circleBroadcastIsMember")
     }
     nodes(input: { ids: $ids }) {
       id

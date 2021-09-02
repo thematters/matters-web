@@ -32,17 +32,21 @@ import Wall from './Wall'
 
 import {
   UserDiscussionComments,
-  UserDiscussionComments_circle_discussion_edges_node,
+  UserDiscussionComments_node_Circle,
+  UserDiscussionComments_node_Circle_discussion_edges_node,
 } from './__generated__/UserDiscussionComments'
-import { UserDiscussionPublic } from './__generated__/UserDiscussionPublic'
+import {
+  UserDiscussionPublic,
+  UserDiscussionPublic_node_Circle,
+} from './__generated__/UserDiscussionPublic'
 
-interface Props {
-  name: string
+interface DiscussionProps {
+  id: string
 }
 
-type Comment = UserDiscussionComments_circle_discussion_edges_node
+type Comment = UserDiscussionComments_node_Circle_discussion_edges_node
 
-const Discussion = ({ name }: Props) => {
+const Discussion = ({ id }: DiscussionProps) => {
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
 
@@ -54,24 +58,26 @@ const Discussion = ({ name }: Props) => {
     { data: discussionData, loading: discussionLoading, fetchMore, refetch },
   ] = useLazyQuery<UserDiscussionComments>(DISCUSSION_COMMENTS, {
     fetchPolicy: 'network-only',
-    variables: { name },
+    variables: { id },
   })
 
   // public data
   const { data, loading, error, client } = usePublicQuery<UserDiscussionPublic>(
     DISCUSSION_PUBLIC,
     {
-      variables: { name },
+      variables: { id },
     }
   )
-  const circle = data?.circle
+  const circle = data?.node as UserDiscussionPublic_node_Circle
   const isOwner = circle?.owner.id === viewer.id
   const isMember = circle?.circleIsMember
   const hasPermission = isOwner || isMember
 
   // pagination
-  const connectionPath = 'circle.discussion'
-  const { edges, pageInfo } = discussionData?.circle?.discussion || {}
+  const connectionPath = 'node.discussion'
+  const discussionCircle =
+    discussionData?.node as UserDiscussionComments_node_Circle
+  const { edges, pageInfo } = discussionCircle?.discussion || {}
   const comments = filterComments<Comment>(
     (edges || []).map(({ node }) => node)
   )
@@ -86,7 +92,7 @@ const Discussion = ({ name }: Props) => {
     await client.query({
       query: DISCUSSION_PRIVATE,
       fetchPolicy: 'network-only',
-      variables: { name },
+      variables: { id },
     })
 
     setPrivateFetched(true)
@@ -165,7 +171,7 @@ const Discussion = ({ name }: Props) => {
         {!circle.owner.isBlocking && (
           <header>
             <CommentForm
-              circleId={circle?.id}
+              circleId={id}
               type="circleDiscussion"
               placeholder={translate({
                 lang,

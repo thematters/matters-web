@@ -59,7 +59,7 @@ const Discussion = () => {
         }
       />
 
-      <BaseDiscussion name={circle.name} />
+      <BaseDiscussion id={circle.id} />
     </Layout.Main>
   )
 }

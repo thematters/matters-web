@@ -59,7 +59,7 @@ const Broadcast = () => {
         }
       />
 
-      <BaseBroadcast name={circle.name} />
+      <BaseBroadcast id={circle.id} />
     </Layout.Main>
   )
 }

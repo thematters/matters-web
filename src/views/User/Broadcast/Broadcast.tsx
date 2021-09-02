@@ -27,18 +27,19 @@ import styles from './styles.css'
 import { UserBroadcastPrivate_nodes_Comment } from './__generated__/UserBroadcastPrivate'
 import {
   UserBroadcastPublic,
-  UserBroadcastPublic_circle_broadcast_edges_node,
+  UserBroadcastPublic_node_Circle,
+  UserBroadcastPublic_node_Circle_broadcast_edges_node,
 } from './__generated__/UserBroadcastPublic'
 
-interface Props {
-  name: string
+interface BroadcastProps {
+  id: string
 }
 
-type CommentPublic = UserBroadcastPublic_circle_broadcast_edges_node
+type CommentPublic = UserBroadcastPublic_node_Circle_broadcast_edges_node
 type CommentPrivate = UserBroadcastPrivate_nodes_Comment
 type Comment = CommentPublic & Partial<Omit<CommentPrivate, '__typename'>>
 
-const Broadcast = ({ name }: Props) => {
+const Broadcast = ({ id }: BroadcastProps) => {
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
 
@@ -54,12 +55,12 @@ const Broadcast = ({ name }: Props) => {
     refetch: refetchPublic,
     client,
   } = usePublicQuery<UserBroadcastPublic>(BROADCAST_PUBLIC, {
-    variables: { name },
+    variables: { id },
   })
 
   // pagination
-  const connectionPath = 'circle.broadcast'
-  const circle = data?.circle
+  const connectionPath = 'node.broadcast'
+  const circle = data?.node as UserBroadcastPublic_node_Circle
   const { edges, pageInfo } = circle?.broadcast || {}
   const comments = filterComments<CommentPublic>(
     (edges || []).map(({ node }) => node)
@@ -71,7 +72,8 @@ const Broadcast = ({ name }: Props) => {
       return
     }
 
-    const publiceEdges = publicData.circle?.broadcast.edges || []
+    const publicCircle = publicData.node as UserBroadcastPublic_node_Circle
+    const publiceEdges = publicCircle.broadcast.edges || []
     const publicComments = filterComments<Comment>(
       publiceEdges.map(({ node }) => node)
     )
@@ -82,7 +84,7 @@ const Broadcast = ({ name }: Props) => {
     await client.query({
       query: BROADCAST_PRIVATE,
       fetchPolicy: 'network-only',
-      variables: { name, ids: publicIds },
+      variables: { id, ids: publicIds },
     })
   }
 
