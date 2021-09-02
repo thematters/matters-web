@@ -32,20 +32,20 @@ import Wall from './Wall'
 
 import {
   UserDiscussionComments,
-  UserDiscussionComments_node_Circle,
-  UserDiscussionComments_node_Circle_discussion_edges_node,
+  UserDiscussionComments_node_Circle as UserDiscussionCommentsCircle,
+  UserDiscussionComments_node_Circle_discussion_edges_node as UserDiscussionCommentsCircleEdgesNode,
 } from './__generated__/UserDiscussionComments'
-import { UserDiscussionPrivate_node_Circle } from './__generated__/UserDiscussionPrivate'
+import { UserDiscussionPrivate_node_Circle as UserDiscussionPrivateCircle } from './__generated__/UserDiscussionPrivate'
 import {
   UserDiscussionPublic,
-  UserDiscussionPublic_node_Circle,
+  UserDiscussionPublic_node_Circle as UserDiscussionPublicCircle,
 } from './__generated__/UserDiscussionPublic'
 
 interface DiscussionProps {
   id: string
 }
 
-type Comment = UserDiscussionComments_node_Circle_discussion_edges_node
+type Comment = UserDiscussionCommentsCircleEdgesNode
 
 const Discussion = ({ id }: DiscussionProps) => {
   const viewer = useContext(ViewerContext)
@@ -69,15 +69,14 @@ const Discussion = ({ id }: DiscussionProps) => {
       variables: { id },
     }
   )
-  const circle = data?.node as UserDiscussionPublic_node_Circle
+  const circle = data?.node as UserDiscussionPublicCircle
   const isOwner = circle?.owner.id === viewer.id
   const isMember = circle?.isMember
   const hasPermission = isOwner || isMember
 
   // pagination
   const connectionPath = 'node.discussion'
-  const discussionCircle =
-    discussionData?.node as UserDiscussionComments_node_Circle
+  const discussionCircle = discussionData?.node as UserDiscussionCommentsCircle
   const { edges, pageInfo } = discussionCircle?.discussion || {}
   const comments = filterComments<Comment>(
     (edges || []).map(({ node }) => node)
@@ -163,8 +162,8 @@ const Discussion = ({ id }: DiscussionProps) => {
   }
 
   if (privateFetched && !hasPermission) {
-    const wallCircle = circle as UserDiscussionPublic_node_Circle &
-      UserDiscussionPrivate_node_Circle
+    const wallCircle = circle as UserDiscussionPublicCircle &
+      UserDiscussionPrivateCircle
     return <Wall circle={wallCircle} />
   }
 

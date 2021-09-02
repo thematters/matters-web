@@ -22,11 +22,11 @@ import IMAGE_MAIN from '@/public/static/images/discussion/main.svg'
 import Members from './Members'
 import styles from './styles.css'
 
-import { UserDiscussionPrivate_node_Circle } from './__generated__/UserDiscussionPrivate'
-import { UserDiscussionPublic_node_Circle } from './__generated__/UserDiscussionPublic'
+import { UserDiscussionPrivate_node_Circle as UserDiscussionPrivateCircle } from './__generated__/UserDiscussionPrivate'
+import { UserDiscussionPublic_node_Circle as UserDiscussionPublicCircle } from './__generated__/UserDiscussionPublic'
 
 interface WallProps {
-  circle: UserDiscussionPublic_node_Circle & UserDiscussionPrivate_node_Circle
+  circle: UserDiscussionPublicCircle & UserDiscussionPrivateCircle
 }
 
 const Wall = ({ circle }: WallProps) => {

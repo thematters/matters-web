@@ -3,17 +3,17 @@ import { Avatar, Translate } from '~/components'
 import styles from './styles.css'
 
 import {
-  UserDiscussionPublic_node_Circle,
-  UserDiscussionPublic_node_Circle_latestMembers_edges,
+  UserDiscussionPublic_node_Circle as UserDiscussionPublicCircle,
+  UserDiscussionPublic_node_Circle_latestMembers_edges as UserDiscussionPublicCircleLatestMembersEdges,
 } from './__generated__/UserDiscussionPublic'
 
 interface Props {
-  circle: UserDiscussionPublic_node_Circle
+  circle: UserDiscussionPublicCircle
 }
 
 const Members = ({ circle }: Props) => {
   const members = (circle?.latestMembers.edges ||
-    []) as UserDiscussionPublic_node_Circle_latestMembers_edges[]
+    []) as UserDiscussionPublicCircleLatestMembersEdges[]
 
   if (members.length === 0) {
     return null

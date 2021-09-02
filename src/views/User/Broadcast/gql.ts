@@ -23,8 +23,7 @@ export const BROADCAST_PUBLIC = gql`
         owner {
           id
         }
-        # use alias to prevent overwriting <UserProfile>'s
-        circleIsMember: isMember @connection(key: "userBroadcastIsMember")
+        isMember
         broadcast(input: { first: 10, after: $after }) {
           totalCount
           pageInfo {
@@ -54,8 +53,7 @@ export const BROADCAST_PRIVATE = gql`
         owner {
           id
         }
-        # use alias to prevent overwriting <UserProfile>'s
-        circleIsMember: isMember @connection(key: "userBroadcastIsMember")
+        isMember
       }
     }
     nodes(input: { ids: $ids }) {

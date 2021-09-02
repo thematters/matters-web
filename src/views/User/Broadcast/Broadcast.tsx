@@ -27,15 +27,15 @@ import styles from './styles.css'
 import { UserBroadcastPrivate_nodes_Comment } from './__generated__/UserBroadcastPrivate'
 import {
   UserBroadcastPublic,
-  UserBroadcastPublic_node_Circle,
-  UserBroadcastPublic_node_Circle_broadcast_edges_node,
+  UserBroadcastPublic_node_Circle as UserBroadcastPublicCircle,
+  UserBroadcastPublic_node_Circle_broadcast_edges_node as UserBroadcastPublicCircleEdgesNode,
 } from './__generated__/UserBroadcastPublic'
 
 interface BroadcastProps {
   id: string
 }
 
-type CommentPublic = UserBroadcastPublic_node_Circle_broadcast_edges_node
+type CommentPublic = UserBroadcastPublicCircleEdgesNode
 type CommentPrivate = UserBroadcastPrivate_nodes_Comment
 type Comment = CommentPublic & Partial<Omit<CommentPrivate, '__typename'>>
 
@@ -60,7 +60,7 @@ const Broadcast = ({ id }: BroadcastProps) => {
 
   // pagination
   const connectionPath = 'node.broadcast'
-  const circle = data?.node as UserBroadcastPublic_node_Circle
+  const circle = data?.node as UserBroadcastPublicCircle
   const { edges, pageInfo } = circle?.broadcast || {}
   const comments = filterComments<CommentPublic>(
     (edges || []).map(({ node }) => node)
@@ -72,7 +72,7 @@ const Broadcast = ({ id }: BroadcastProps) => {
       return
     }
 
-    const publicCircle = publicData.node as UserBroadcastPublic_node_Circle
+    const publicCircle = publicData.node as UserBroadcastPublicCircle
     const publiceEdges = publicCircle.broadcast.edges || []
     const publicComments = filterComments<Comment>(
       publiceEdges.map(({ node }) => node)
@@ -135,7 +135,7 @@ const Broadcast = ({ id }: BroadcastProps) => {
   }
 
   const isOwner = circle?.owner.id === viewer.id
-  const isMember = circle?.circleIsMember
+  const isMember = circle?.isMember
   const lock = viewer.isAuthed && !isOwner && !isMember
   const submitCallback = () => {
     window.dispatchEvent(
