@@ -129,6 +129,7 @@ const BaseAuthors = () => {
                   type: 'all_authors',
                   contentType: 'user',
                   location: i,
+                  id: node.id,
                 })
               }
             />

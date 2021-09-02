@@ -1,16 +1,19 @@
 import { useQuery } from '@apollo/react-hooks'
 import { useRouter } from 'next/router'
+import { useContext } from 'react'
 
 import {
   Button,
   ButtonProps,
   IconBack32,
   IconLeft32,
+  LanguageContext,
   useResponsive,
 } from '~/components'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
-import { PATHS, TEXT } from '~/common/enums'
+import { PATHS } from '~/common/enums'
+import { translate } from '~/common/utils'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 
@@ -19,6 +22,8 @@ type BackButtonProps = {
 } & ButtonProps
 
 export const BackButton: React.FC<BackButtonProps> = ({ mode, ...props }) => {
+  const { lang } = useContext(LanguageContext)
+
   const router = useRouter()
   const isSmallUp = useResponsive('sm-up')
   const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
@@ -45,7 +50,7 @@ export const BackButton: React.FC<BackButtonProps> = ({ mode, ...props }) => {
   if (mode === 'black-solid') {
     return (
       <Button
-        aria-label={TEXT.zh_hant.back}
+        aria-label={translate({ id: 'back', lang })}
         bgColor="half-black"
         onClick={onBack}
         {...props}
@@ -58,7 +63,7 @@ export const BackButton: React.FC<BackButtonProps> = ({ mode, ...props }) => {
   if (isSmallUp) {
     return (
       <Button
-        aria-label={TEXT.zh_hant.back}
+        aria-label={translate({ id: 'back', lang })}
         bgColor="green-lighter"
         onClick={onBack}
         {...props}
@@ -69,7 +74,11 @@ export const BackButton: React.FC<BackButtonProps> = ({ mode, ...props }) => {
   }
 
   return (
-    <Button aria-label={TEXT.zh_hant.back} onClick={onBack} {...props}>
+    <Button
+      aria-label={translate({ id: 'back', lang })}
+      onClick={onBack}
+      {...props}
+    >
       <IconLeft32 size="lg" />
     </Button>
   )

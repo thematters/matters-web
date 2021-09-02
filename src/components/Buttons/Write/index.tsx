@@ -12,13 +12,14 @@ import {
 } from '~/components'
 import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
 
-import { ADD_TOAST, OPEN_LIKE_COIN_DIALOG, TEXT } from '~/common/enums'
+import { ADD_TOAST, OPEN_LIKE_COIN_DIALOG } from '~/common/enums'
 import { analytics, toPath, translate } from '~/common/utils'
 
 import { CreateDraft } from '~/components/GQL/mutations/__generated__/CreateDraft'
 
 interface Props {
   allowed: boolean
+  authed?: boolean
   isLarge?: boolean
   forbidden?: boolean
 }
@@ -32,6 +33,8 @@ const BaseWriteButton = ({
   loading?: boolean
   isLarge?: boolean
 }) => {
+  const { lang } = useContext(LanguageContext)
+
   const WriteIcon = loading ? (
     <IconSpinner16 size="sm" color="white" />
   ) : (
@@ -44,7 +47,7 @@ const BaseWriteButton = ({
         size={isLarge ? ['5rem', '2.25rem'] : ['2rem', '2rem']}
         bgColor="gold"
         onClick={onClick}
-        aria-label={TEXT.zh_hant.write}
+        aria-label={translate({ id: 'write', lang })}
       >
         <TextIcon icon={WriteIcon} weight="md" color="white">
           {isLarge && <Translate id="write" />}
@@ -54,7 +57,7 @@ const BaseWriteButton = ({
   )
 }
 
-export const WriteButton = ({ allowed, isLarge, forbidden }: Props) => {
+export const WriteButton = ({ allowed, authed, isLarge, forbidden }: Props) => {
   const router = useRouter()
   const { lang } = useContext(LanguageContext)
   const [putDraft, { loading }] = useMutation<CreateDraft>(CREATE_DRAFT, {
@@ -76,6 +79,24 @@ export const WriteButton = ({ allowed, isLarge, forbidden }: Props) => {
     <BaseWriteButton
       isLarge={isLarge}
       onClick={async () => {
+        if (!authed) {
+          window.dispatchEvent(
+            new CustomEvent(ADD_TOAST, {
+              detail: {
+                color: 'green',
+                content: (
+                  <Translate
+                    zh_hant="請登入／註冊開始創作"
+                    zh_hans="请登入／注册开始创作"
+                    en="Please login to write"
+                  />
+                ),
+              },
+            })
+          )
+          return
+        }
+
         if (forbidden) {
           window.dispatchEvent(
             new CustomEvent(ADD_TOAST, {

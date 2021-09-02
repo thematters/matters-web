@@ -2,7 +2,6 @@ import { useContext } from 'react'
 
 import { IconClear16, IconSearch16, LanguageContext } from '~/components'
 
-import { TEXT } from '~/common/enums'
 import { translate } from '~/common/utils'
 
 import styles from './styles.css'
@@ -84,7 +83,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
         <button
           className="search"
           type="submit"
-          aria-label={TEXT.zh_hant.search}
+          aria-label={translate({ id: 'search', lang })}
         >
           <IconSearch16 color="grey" />
         </button>
@@ -93,7 +92,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
           <button
             className="clear"
             type="button"
-            aria-label={TEXT.zh_hant.clear}
+            aria-label={translate({ id: 'clear', lang })}
             onClick={() => onChange('')}
           >
             <IconClear16 color="grey" />

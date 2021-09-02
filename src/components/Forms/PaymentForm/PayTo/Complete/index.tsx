@@ -170,6 +170,7 @@ const Complete: React.FC<Props> = ({ callback, recipient, targetId }) => {
                           type: 'related_donations',
                           contentType: 'article',
                           location: i,
+                          id: node.id,
                         })
                       }
                       onClickAuthor={() => {
@@ -177,6 +178,7 @@ const Complete: React.FC<Props> = ({ callback, recipient, targetId }) => {
                           type: 'related_donations',
                           contentType: 'user',
                           location: i,
+                          id: node.author.id,
                         })
                       }}
                     />

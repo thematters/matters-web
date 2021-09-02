@@ -161,6 +161,7 @@ const UserTags = () => {
                       type: 'user_tag',
                       contentType: 'tag',
                       location: i,
+                      id: node.id,
                     })
                   }
                 >

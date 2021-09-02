@@ -43,6 +43,7 @@ const ARTICLE_APPRECIATORS = gql`
             ... on Appreciation {
               amount
               sender {
+                id
                 ...UserDigestRichUserPublic
                 ...UserDigestRichUserPrivate
               }
@@ -101,6 +102,7 @@ const AppreciatorsDialogContent = ({
                 type: 'appreciators',
                 contentType: 'user',
                 location: index,
+                id: node.sender?.id,
               })
             }}
           />

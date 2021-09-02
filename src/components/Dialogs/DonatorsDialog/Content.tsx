@@ -68,6 +68,7 @@ const DonatorsDialogContent = ({
                 type: 'donators',
                 contentType: 'user',
                 location: index,
+                id: node.id,
               })
             }}
           />

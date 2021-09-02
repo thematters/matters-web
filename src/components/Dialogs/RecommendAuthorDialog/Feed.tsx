@@ -73,16 +73,13 @@ const Feed = ({ type }: Props) => {
       {loading && <Spinner />}
 
       {!loading && (
-        <List hasBorder={false}>
+        <List>
           {edges.map(({ node, cursor }, i) => (
             <List.Item key={cursor}>
-              <UserDigest.Rich
+              <UserDigest.Verbose
                 user={node}
-                spacing={['xtight', 'base']}
-                bgColor="none"
-                bgActiveColor="grey-lighter"
+                spacing={['base', 'base']}
                 borderRadius="xtight"
-                hasState={false}
               />
             </List.Item>
           ))}

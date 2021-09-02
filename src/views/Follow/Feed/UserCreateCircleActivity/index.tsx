@@ -1,6 +1,4 @@
-import { useContext } from 'react'
-
-import { Translate, UserDigest, ViewerContext } from '~/components'
+import { Translate, UserDigest } from '~/components'
 
 import { analytics } from '~/common/utils'
 
@@ -18,8 +16,6 @@ const UserCreateCircleActivity = ({
   location,
   __typename,
 }: Activity & { location: number }) => {
-  const viewer = useContext(ViewerContext)
-
   return (
     <FeedCircle
       header={
@@ -39,7 +35,6 @@ const UserCreateCircleActivity = ({
           contentType: __typename,
           location,
           id: node.id,
-          userId: viewer.id,
         })
       }}
     />

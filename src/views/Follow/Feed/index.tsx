@@ -95,8 +95,8 @@ const FollowingFeed = () => {
         pullToRefresh={refetch}
       >
         <List>
-          {edges.map(({ node, cursor }, i) => (
-            <List.Item key={node.__typename + cursor}>
+          {edges.map(({ node }, i) => (
+            <List.Item key={`${node.__typename}:${i}`}>
               {node.__typename === 'UserPublishArticleActivity' && (
                 <UserPublishArticleActivity location={i} {...node} />
               )}

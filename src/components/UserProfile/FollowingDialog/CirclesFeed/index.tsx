@@ -100,6 +100,7 @@ const CirclesFeed = () => {
                   type: 'user_circle',
                   contentType: 'circle',
                   location: i,
+                  id: node.id,
                 })
               }
             />

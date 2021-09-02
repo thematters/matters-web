@@ -17,14 +17,14 @@ export const RECOMMEND_AUTHORS = gql`
           edges {
             cursor
             node {
-              ...UserDigestRichUserPublic
-              ...UserDigestRichUserPrivate
+              ...UserDigestVerboseUserPublic
+              ...UserDigestVerboseUserPrivate
             }
           }
         }
       }
     }
   }
-  ${UserDigest.Rich.fragments.user.public}
-  ${UserDigest.Rich.fragments.user.private}
+  ${UserDigest.Verbose.fragments.user.public}
+  ${UserDigest.Verbose.fragments.user.private}
 `

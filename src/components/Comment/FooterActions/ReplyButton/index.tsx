@@ -7,17 +7,13 @@ import {
   CommentFormDialog,
   CommentFormType,
   IconComment16,
+  LanguageContext,
   useResponsive,
   ViewerContext,
 } from '~/components'
 
-import {
-  CLOSE_ACTIVE_DIALOG,
-  OPEN_LOGIN_DIALOG,
-  PATHS,
-  TEXT,
-} from '~/common/enums'
-import { appendTarget } from '~/common/utils'
+import { CLOSE_ACTIVE_DIALOG, OPEN_LOGIN_DIALOG, PATHS } from '~/common/enums'
+import { appendTarget, translate } from '~/common/utils'
 
 import ReplyTo from '../../ReplyTo'
 
@@ -66,16 +62,20 @@ const fragments = {
 const CommentButton: React.FC<ButtonProps & { inCard: boolean }> = ({
   inCard,
   ...props
-}) => (
-  <Button
-    spacing={['xtight', 'xtight']}
-    bgActiveColor={inCard ? 'grey-lighter-active' : 'grey-lighter'}
-    aira-label={TEXT.zh_hant.replyComment}
-    {...props}
-  >
-    <IconComment16 />
-  </Button>
-)
+}) => {
+  const { lang } = useContext(LanguageContext)
+
+  return (
+    <Button
+      spacing={['xtight', 'xtight']}
+      bgActiveColor={inCard ? 'grey-lighter-active' : 'grey-lighter'}
+      aria-label={translate({ id: 'replyComment', lang })}
+      {...props}
+    >
+      <IconComment16 />
+    </Button>
+  )
+}
 
 const ReplyButton = ({
   comment,

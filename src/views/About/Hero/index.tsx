@@ -1,9 +1,17 @@
 import { useEmblaCarousel } from 'embla-carousel/react'
 import Link from 'next/link'
+import { useContext } from 'react'
 
-import { Button, IconLogo, TextIcon, Translate } from '~/components'
+import {
+  Button,
+  IconLogo,
+  LanguageContext,
+  TextIcon,
+  Translate,
+} from '~/components'
 
-import { PATHS, TEXT } from '~/common/enums'
+import { PATHS } from '~/common/enums'
+import { translate } from '~/common/utils'
 
 import IMAGE_ARROW_DOWN from '@/public/static/images/about/arrow-down.svg'
 import SLIDE_CURSOR from '@/public/static/images/about/cursor.svg'
@@ -15,6 +23,8 @@ import IMAGE_WAVE_2 from '@/public/static/images/about/wave-hero-2.svg'
 import styles from './styles.css'
 
 const Hero = () => {
+  const { lang } = useContext(LanguageContext)
+
   const [emblaRef] = useEmblaCarousel({
     dragFree: true,
     draggable: true,
@@ -29,7 +39,7 @@ const Hero = () => {
           <div className="l-row">
             <div className="l-col-full">
               <Link href={PATHS.HOME}>
-                <a aria-label={TEXT.zh_hant.discover}>
+                <a aria-label={translate({ id: 'discover', lang })}>
                   <IconLogo />
                 </a>
               </Link>
