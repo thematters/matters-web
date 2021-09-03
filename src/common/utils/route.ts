@@ -32,7 +32,7 @@ type ToPathArgs =
       fragment?: string
     }
   | {
-      page: 'circleDetail' | 'circleDiscussion' | 'circleBroadcast'
+      page: 'circleDetail'
       circle: CircleArgs
     }
   | {
@@ -50,6 +50,8 @@ type ToPathArgs =
         | 'userProfile'
         | 'userAbout'
         | 'userAnalytics'
+        | 'userBroadcast'
+        | 'userDiscussion'
         | 'userManageCircleInvitation'
       userName: string
     }
@@ -81,16 +83,6 @@ export const toPath = (args: ToPathArgs): { href: string } => {
     case 'circleDetail': {
       return {
         href: `/~${args.circle.name}`,
-      }
-    }
-    case 'circleDiscussion': {
-      return {
-        href: `/~${args.circle.name}/discussion`,
-      }
-    }
-    case 'circleBroadcast': {
-      return {
-        href: `/~${args.circle.name}/broadcast`,
       }
     }
     case 'commentDetail': {
@@ -126,6 +118,16 @@ export const toPath = (args: ToPathArgs): { href: string } => {
     case 'userAnalytics': {
       return {
         href: `/@${args.userName}/analytics`,
+      }
+    }
+    case 'userBroadcast': {
+      return {
+        href: `/@${args.userName}/broadcast`,
+      }
+    }
+    case 'userDiscussion': {
+      return {
+        href: `/@${args.userName}/discussion`,
       }
     }
     case 'userManageCircleInvitation': {

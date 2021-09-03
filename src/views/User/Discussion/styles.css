@@ -1,0 +1,118 @@
+.container {
+  padding-top: var(--spacing-x-tight);
+  background: var(--color-white);
+  border-radius: 1.25rem 1.25rem 0 0;
+
+  @media (--sm-up) {
+    padding-top: 0;
+  }
+}
+
+.discussion {
+  padding: 0 var(--spacing-base);
+  margin-top: var(--spacing-x-tight);
+
+  & header {
+    margin-bottom: var(--spacing-loose);
+  }
+}
+
+:root {
+  --wall-join-button-width: 21.25rem;
+  --wall-slogan-offset: 8rem;
+  --wall-bottom-offset: calc(
+    var(--spacing-xxx-loose) + var(--global-nav-height)
+  );
+}
+
+.wall {
+  & .info,
+  & .slogan {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  & .info {
+    padding: var(--spacing-xx-loose) 0 4.5rem;
+
+    & .price {
+      margin-bottom: var(--spacing-x-tight);
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-semibold);
+    }
+  }
+
+  & .slogan {
+    padding: 0 var(--spacing-base);
+
+    & .title {
+      margin-bottom: var(--spacing-x-tight);
+      font-size: var(--font-size-xm);
+      font-weight: var(--font-weight-medium);
+    }
+
+    & .desc {
+      margin-bottom: var(--spacing-loose);
+      font-size: var(--font-size-md-s);
+    }
+
+    &.size-md {
+      margin-top: calc(var(--spacing-xxx-loose) * -1);
+
+      & :global(> button) {
+        width: var(--wall-join-button-width);
+      }
+    }
+
+    &.size-sm {
+      margin-top: calc(var(--wall-slogan-offset) * -1);
+
+      & :global(> button) {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.members {
+  display: flex;
+  align-items: center;
+
+  & .member-list {
+    @mixin flex-center-start;
+
+    & :global(> *) {
+      position: relative;
+      box-shadow: 0 0 0 2px var(--color-white);
+
+      &:nth-child(1) {
+        z-index: 4;
+      }
+
+      &:nth-child(2) {
+        z-index: 3;
+      }
+
+      &:nth-child(3) {
+        z-index: 2;
+      }
+
+      &:nth-child(4) {
+        z-index: 1;
+      }
+    }
+  }
+
+  & .member-desc {
+    margin-left: var(--spacing-x-tight);
+    font-size: var(--font-size-md-s);
+  }
+}
+
+picture {
+  & img {
+    width: 100%;
+  }
+}
