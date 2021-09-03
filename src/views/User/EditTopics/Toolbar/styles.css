@@ -1,0 +1,5 @@
+header {
+  @mixin flex-center-space-between;
+
+  padding: var(--spacing-base);
+}
