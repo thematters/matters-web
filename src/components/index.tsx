@@ -56,6 +56,7 @@ export * from './DropdownDialog'
 export * from './Charts'
 
 export * from './ArticleDigest'
+export * from './ArticleTopicDigest'
 export * from './UserDigest'
 export * from './CircleDigest'
 export * from './DraftDigest'

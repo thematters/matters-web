@@ -32,7 +32,7 @@ type ToPathArgs =
       fragment?: string
     }
   | {
-      page: 'circleDetail' | 'circleDiscussion' | 'circleBroadcast'
+      page: 'circleDetail'
       circle: CircleArgs
     }
   | {
@@ -50,14 +50,16 @@ type ToPathArgs =
         | 'userProfile'
         | 'userAbout'
         | 'userAnalytics'
+        | 'userBroadcast'
+        | 'userDiscussion'
         | 'userManageCircleInvitation'
         | 'userEditTopics'
       userName: string
     }
   | {
       page: 'userTopicDetail'
+      topicId: string
       userName: string
-      id: string
     }
   | {
       page: 'search'
@@ -87,16 +89,6 @@ export const toPath = (args: ToPathArgs): { href: string } => {
     case 'circleDetail': {
       return {
         href: `/~${args.circle.name}`,
-      }
-    }
-    case 'circleDiscussion': {
-      return {
-        href: `/~${args.circle.name}/discussion`,
-      }
-    }
-    case 'circleBroadcast': {
-      return {
-        href: `/~${args.circle.name}/broadcast`,
       }
     }
     case 'commentDetail': {
@@ -134,19 +126,29 @@ export const toPath = (args: ToPathArgs): { href: string } => {
         href: `/@${args.userName}/analytics`,
       }
     }
+    case 'userBroadcast': {
+      return {
+        href: `/@${args.userName}/broadcast`,
+      }
+    }
+    case 'userDiscussion': {
+      return {
+        href: `/@${args.userName}/discussion`,
+      }
+    }
     case 'userManageCircleInvitation': {
       return {
         href: `/@${args.userName}/manage-invitation`,
       }
     }
-    case 'userTopicDetail': {
-      return {
-        href: `/@${args.userName}/topics/${args.id}`,
-      }
-    }
     case 'userEditTopics': {
       return {
         href: `/@${args.userName}/edit-topics`,
+      }
+    }
+    case 'userTopicDetail': {
+      return {
+        href: `/@${args.userName}/topics/${args.topicId}`,
       }
     }
     case 'search': {
