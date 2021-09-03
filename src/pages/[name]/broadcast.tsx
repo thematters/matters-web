@@ -1,3 +1,3 @@
-import CircleBroadcast from '~/views/Circle/Broadcast'
+import UserBroadcast from '~/views/User/Broadcast'
 
-export default CircleBroadcast
+export default UserBroadcast

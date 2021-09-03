@@ -48,7 +48,7 @@ export const ArticleTopicDigest = ({ topic }: ArticleTopicDigestProps) => {
   })
   const path = toPath({
     page: 'userTopicDetail',
-    id: topic.id,
+    topicId: topic.id,
     userName: topic.author.userName,
   })
   const chapterCount = topic.chapters.totalCount

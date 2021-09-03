@@ -26,16 +26,13 @@ const update = ({
       query: CIRCLE_FOLLOWERS_PUBLIC,
       variables,
     })
+    const circle = cacheData?.user?.ownCircles && cacheData.user.ownCircles[0]
 
-    if (
-      !cacheData ||
-      !cacheData.circle ||
-      cacheData.circle.__typename !== 'Circle'
-    ) {
+    if (!circle || circle?.__typename !== 'Circle') {
       return
     }
 
-    const followers = cacheData.circle.followers.edges || []
+    const followers = circle.followers.edges || []
 
     switch (type) {
       case 'follow': {
@@ -69,7 +66,7 @@ const update = ({
         break
       }
       case 'unfollow': {
-        cacheData.circle.followers.edges = followers.filter(
+        circle.followers.edges = followers.filter(
           (follower) => follower.node.id !== viewer.id
         )
         break

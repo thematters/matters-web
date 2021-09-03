@@ -31,22 +31,6 @@ const Me = ({ settings, toggle }: MeProps) => (
         />
       }
     />
-
-    <Form.List.Item
-      title={
-        <Translate
-          zh_hant="追蹤我的圍爐"
-          zh_hans="追踪我的围炉"
-          en="Circle followers"
-        />
-      }
-      right={
-        <Switch
-          checked={settings.circleNewFollower}
-          onChange={() => toggle('circleNewFollower')}
-        />
-      }
-    />
   </Form.List>
 )
 

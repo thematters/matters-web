@@ -32,14 +32,7 @@ type ToPathArgs =
       fragment?: string
     }
   | {
-      page:
-        | 'circleDetail'
-        | 'circleDiscussion'
-        | 'circleBroadcast'
-        | 'circleSettings'
-        | 'circleAnalytics'
-        | 'circleEditProfile'
-        | 'circleManageInvitation'
+      page: 'circleDetail'
       circle: CircleArgs
     }
   | {
@@ -53,12 +46,18 @@ type ToPathArgs =
       id: string
     }
   | {
-      page: 'userProfile' | 'userAbout'
+      page:
+        | 'userProfile'
+        | 'userAbout'
+        | 'userAnalytics'
+        | 'userBroadcast'
+        | 'userDiscussion'
+        | 'userManageCircleInvitation'
       userName: string
     }
   | {
       page: 'userTopicDetail'
-      id: string
+      topicId: string
       userName: string
     }
   | {
@@ -91,36 +90,6 @@ export const toPath = (args: ToPathArgs): { href: string } => {
         href: `/~${args.circle.name}`,
       }
     }
-    case 'circleDiscussion': {
-      return {
-        href: `/~${args.circle.name}/discussion`,
-      }
-    }
-    case 'circleBroadcast': {
-      return {
-        href: `/~${args.circle.name}/broadcast`,
-      }
-    }
-    case 'circleSettings': {
-      return {
-        href: `/~${args.circle.name}/settings`,
-      }
-    }
-    case 'circleAnalytics': {
-      return {
-        href: `/~${args.circle.name}/analytics`,
-      }
-    }
-    case 'circleEditProfile': {
-      return {
-        href: `/~${args.circle.name}/settings/edit-profile`,
-      }
-    }
-    case 'circleManageInvitation': {
-      return {
-        href: `/~${args.circle.name}/settings/manage-invitation`,
-      }
-    }
     case 'commentDetail': {
       const { parentComment, id } = args.comment
       const fragment = parentComment?.id ? `${parentComment.id}-${id}` : id
@@ -151,9 +120,29 @@ export const toPath = (args: ToPathArgs): { href: string } => {
         href: `/@${args.userName}/about`,
       }
     }
+    case 'userAnalytics': {
+      return {
+        href: `/@${args.userName}/analytics`,
+      }
+    }
+    case 'userBroadcast': {
+      return {
+        href: `/@${args.userName}/broadcast`,
+      }
+    }
+    case 'userDiscussion': {
+      return {
+        href: `/@${args.userName}/discussion`,
+      }
+    }
+    case 'userManageCircleInvitation': {
+      return {
+        href: `/@${args.userName}/manage-invitation`,
+      }
+    }
     case 'userTopicDetail': {
       return {
-        href: `/@${args.userName}/topics/${args.id}`,
+        href: `/@${args.userName}/topics/${args.topicId}`,
       }
     }
     case 'search': {

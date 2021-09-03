@@ -25,6 +25,7 @@ import {
   GoldenMotorBadge,
   SeedBadge,
 } from './Badges'
+import CircleFeatures from './CircleFeatures'
 import CircleWidget from './CircleWidget'
 import DropdownActions from './DropdownActions'
 import { USER_PROFILE_PRIVATE, USER_PROFILE_PUBLIC } from './gql'
@@ -203,6 +204,8 @@ export const UserProfile = () => {
         <Expandable>
           <p className="description">{user.info.description}</p>
         </Expandable>
+
+        <CircleFeatures userName={user?.userName} circles={circles} />
 
         <CircleWidget circles={circles} isMe={isMe} />
 

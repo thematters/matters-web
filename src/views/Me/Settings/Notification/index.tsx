@@ -35,7 +35,6 @@ const VIEWER_NOTIFICATION_SETTINGS = gql`
           articleNewSubscription
           articleSubscribedNewComment
           articleCommentPinned
-          circleNewFollower
           circleNewDiscussion
         }
       }
@@ -61,7 +60,6 @@ const UPDATE_VIEWER_NOTIFICATION = gql`
           articleNewSubscription
           articleSubscribedNewComment
           articleCommentPinned
-          circleNewFollower
           circleNewDiscussion
         }
       }
