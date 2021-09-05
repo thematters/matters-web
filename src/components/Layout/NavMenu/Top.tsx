@@ -4,7 +4,9 @@ import {
   CardSpacing,
   IconBookmark24,
   IconClap24,
+  IconComment24,
   IconDraft24,
+  IconHashTag24,
   IconHistory24,
   IconProfile24,
   IconWallet24,
@@ -76,6 +78,26 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
           size={menuItemSize}
         >
           <Translate id="myBookmarks" />
+        </TextIcon>
+      </Menu.Item>
+
+      <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_BOOKMARKS}>
+        <TextIcon
+          icon={<IconComment24 size="md" />}
+          spacing="base"
+          size={menuItemSize}
+        >
+          <Translate id="myComments" />
+        </TextIcon>
+      </Menu.Item>
+
+      <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_BOOKMARKS}>
+        <TextIcon
+          icon={<IconHashTag24 size="md" />}
+          spacing="base"
+          size={menuItemSize}
+        >
+          <Translate id="myTags" />
         </TextIcon>
       </Menu.Item>
 
