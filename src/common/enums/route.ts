@@ -32,6 +32,7 @@ type ROUTE_KEY =
   // Me
   | 'ME_DRAFTS'
   | 'ME_BOOKMARKS'
+  | 'ME_COMMENTS'
   | 'ME_HISTORY'
   | 'ME_APPRECIATIONS_SENT'
   | 'ME_APPRECIATIONS_RECEIVED'
@@ -125,6 +126,7 @@ export const ROUTES: {
   // Me
   { key: 'ME_DRAFTS', pathname: '/me/drafts' },
   { key: 'ME_BOOKMARKS', pathname: '/me/bookmarks' },
+  { key: 'ME_COMMENTS', pathname: '/me/comments' },
   { key: 'ME_HISTORY', pathname: '/me/history' },
   { key: 'ME_APPRECIATIONS_SENT', pathname: '/me/appreciations/sent' },
   { key: 'ME_APPRECIATIONS_RECEIVED', pathname: '/me/appreciations/received' },
