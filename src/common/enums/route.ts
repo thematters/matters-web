@@ -35,6 +35,7 @@ type ROUTE_KEY =
   // Me
   | 'ME_DRAFTS'
   | 'ME_BOOKMARKS'
+  | 'ME_COMMENTS'
   | 'ME_HISTORY'
   | 'ME_APPRECIATIONS_SENT'
   | 'ME_APPRECIATIONS_RECEIVED'
@@ -47,6 +48,8 @@ type ROUTE_KEY =
   | 'ME_SETTINGS_CHANGE_PASSWORD'
   | 'ME_SETTINGS_NOTIFICATION'
   | 'ME_SETTINGS_BLOCKED'
+  | 'ME_SUBSCRIPTIONS'
+  | 'ME_TAGS'
   | 'ME_DRAFT_DETAIL'
   // Form
   | 'LOGIN'
@@ -131,12 +134,15 @@ export const ROUTES: {
   // Me
   { key: 'ME_DRAFTS', pathname: '/me/drafts' },
   { key: 'ME_BOOKMARKS', pathname: '/me/bookmarks' },
+  { key: 'ME_COMMENTS', pathname: '/me/comments' },
   { key: 'ME_HISTORY', pathname: '/me/history' },
   { key: 'ME_APPRECIATIONS_SENT', pathname: '/me/appreciations/sent' },
   { key: 'ME_APPRECIATIONS_RECEIVED', pathname: '/me/appreciations/received' },
   { key: 'ME_NOTIFICATIONS', pathname: '/me/notifications' },
   { key: 'ME_WALLET', pathname: '/me/wallet' },
   { key: 'ME_WALLET_TRANSACTIONS', pathname: '/me/wallet/transactions' },
+  { key: 'ME_SUBSCRIPTIONS', pathname: '/me/subscriptions' },
+  { key: 'ME_TAGS', pathname: '/me/tags' },
 
   // Settings
   { key: 'ME_SETTINGS', pathname: '/me/settings' },
