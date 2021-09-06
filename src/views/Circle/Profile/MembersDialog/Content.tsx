@@ -132,6 +132,7 @@ const MembersDialogContent = () => {
                     type: 'circle_member',
                     contentType: 'user',
                     location: i,
+                    id: node.user.id,
                   })
                 }
               />

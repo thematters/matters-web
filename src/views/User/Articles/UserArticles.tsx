@@ -185,6 +185,7 @@ const UserArticles = () => {
                     type: 'user_article',
                     contentType: 'article',
                     location: i,
+                    id: node.id,
                   })
                 }
                 onClickAuthor={() => {
@@ -192,6 +193,7 @@ const UserArticles = () => {
                     type: 'user_article',
                     contentType: 'user',
                     location: i,
+                    id: node.author.id,
                   })
                 }}
               />

@@ -1,14 +1,17 @@
+import { useContext } from 'react'
+
 import {
   Button,
   ButtonProps,
   IconColor,
   IconShare16,
   IconSize,
+  LanguageContext,
   ShareDialog,
   ShareDialogProps,
 } from '~/components'
 
-import { TEXT } from '~/common/enums'
+import { translate } from '~/common/utils'
 
 type ShareButtonBaseProps = {
   hasIcon?: boolean
@@ -32,6 +35,8 @@ export const ShareButton: React.FC<ShareButtonProps> = ({
   spacing,
   ...props
 }) => {
+  const { lang } = useContext(LanguageContext)
+
   const isGreen = bgColor === 'green'
   const isHalfBlack = bgColor === 'half-black'
   const buttonBgActiveColor =
@@ -50,7 +55,7 @@ export const ShareButton: React.FC<ShareButtonProps> = ({
           size={size}
           spacing={buttonSpacing}
           bgActiveColor={buttonBgActiveColor}
-          aria-label={TEXT.zh_hant.share}
+          aria-label={translate({ id: 'share', lang })}
           aria-haspopup="true"
           onClick={openDialog}
         >

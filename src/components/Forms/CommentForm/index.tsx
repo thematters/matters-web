@@ -1,10 +1,11 @@
 import { useQuery } from '@apollo/react-hooks'
 import dynamic from 'next/dynamic'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 
 import {
   Button,
   IconSpinner16,
+  LanguageContext,
   Spinner,
   TextIcon,
   Translate,
@@ -13,8 +14,7 @@ import {
 import PUT_COMMENT from '~/components/GQL/mutations/putComment'
 import COMMENT_DRAFT from '~/components/GQL/queries/commentDraft'
 
-import { TEXT } from '~/common/enums'
-import { dom, stripHtml, trimLineBreaks } from '~/common/utils'
+import { dom, stripHtml, translate, trimLineBreaks } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -55,6 +55,8 @@ export const CommentForm: React.FC<CommentFormProps> = ({
 
   placeholder,
 }) => {
+  const { lang } = useContext(LanguageContext)
+
   // retrieve comment draft
   const commentDraftId = `${articleId || circleId}-${type}-${commentId || 0}-${
     parentId || 0
@@ -132,7 +134,7 @@ export const CommentForm: React.FC<CommentFormProps> = ({
     <form
       id={formId}
       onSubmit={handleSubmit}
-      aria-label={TEXT.zh_hant.putComment}
+      aria-label={translate({ id: 'putComment', lang })}
     >
       <section className="content">
         <CommentEditor

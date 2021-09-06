@@ -126,7 +126,6 @@ interface ClickFeedProp {
   contentType: ContentType | ActivityType
   location: number | string
   id?: string
-  userId?: string
 }
 
 /**
@@ -138,7 +137,6 @@ interface CardExposureProp {
   feedType: FeedType
   contentType: ContentType | ActivityType
   location: number | string
-  userId?: string
 }
 
 // content type

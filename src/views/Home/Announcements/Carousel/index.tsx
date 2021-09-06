@@ -1,9 +1,15 @@
 import { useEmblaCarousel } from 'embla-carousel/react'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useContext, useEffect, useRef, useState } from 'react'
 
-import { Button, Card, IconClose32, useCarousel } from '~/components'
+import {
+  Button,
+  Card,
+  IconClose32,
+  LanguageContext,
+  useCarousel,
+} from '~/components'
 
-import { TEXT } from '~/common/enums'
+import { translate } from '~/common/utils'
 
 import DropdownActions, { DropdownActionsProps } from '../DropdownActions'
 import Dot from './Dot'
@@ -23,6 +29,8 @@ const Carousel = ({
   hide,
   ...controlsProps
 }: CarouselProps) => {
+  const { lang } = useContext(LanguageContext)
+
   const [dot, setDot] = useState(0)
   // @ts-ignore
   const [snaps, setSnaps] = useState<any[]>([])
@@ -142,7 +150,7 @@ const Carousel = ({
       <div className="close">
         <Button
           spacing={[0, 0]}
-          arial-label={TEXT.zh_hant.close}
+          aria-label={translate({ id: 'close', lang })}
           onClick={hide}
         >
           <IconClose32 size="lg" color="white" />

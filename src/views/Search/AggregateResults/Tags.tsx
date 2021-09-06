@@ -62,6 +62,7 @@ const AggregateTagResults = () => {
                       type: 'search',
                       contentType: 'tag',
                       location: i,
+                      id: node.id,
                     })
                   }
                 >

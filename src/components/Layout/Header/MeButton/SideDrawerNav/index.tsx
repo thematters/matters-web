@@ -1,6 +1,10 @@
 import { DialogContent, DialogOverlay } from '@reach/dialog'
-import { useRef } from 'react'
+import { useContext, useRef } from 'react'
 import { animated, useTransition } from 'react-spring'
+
+import { LanguageContext } from '~/components'
+
+import { translate } from '~/common/utils'
 
 import DrawerContent from './DrawerContent'
 import Overlay from './Overlay'
@@ -12,6 +16,8 @@ export interface SideDrawerNavProps {
 }
 
 const SideDrawerNav: React.FC<SideDrawerNavProps> = ({ isOpen, onDismiss }) => {
+  const { lang } = useContext(LanguageContext)
+
   const closeButtonRef: React.RefObject<any> | null = useRef(null)
 
   const transition = useTransition(isOpen ? [true] : [], {
@@ -40,7 +46,14 @@ const SideDrawerNav: React.FC<SideDrawerNavProps> = ({ isOpen, onDismiss }) => {
         >
           <AnimatedOverlay style={{ opacity: opacity as any }} />
 
-          <DialogContent aria-labelledby="菜單 - 我的">
+          <DialogContent
+            aria-labelledby={translate({
+              zh_hant: '菜單 - 我的',
+              zh_hans: '菜单 - 我的',
+              en: 'Menu: Me',
+              lang,
+            })}
+          >
             <AnimatedDrawerContent
               style={{ transform }}
               onDismiss={onDismiss}

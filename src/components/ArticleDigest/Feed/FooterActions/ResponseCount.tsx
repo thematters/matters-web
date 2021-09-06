@@ -1,10 +1,11 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
+import { useContext } from 'react'
 
-import { Button, IconComment16, TextIcon } from '~/components'
+import { Button, IconComment16, LanguageContext, TextIcon } from '~/components'
 
 import { URL_FRAGMENT } from '~/common/enums'
-import { numAbbr, toPath } from '~/common/utils'
+import { numAbbr, toPath, translate } from '~/common/utils'
 
 import { ActionsResponseCountArticle } from './__generated__/ActionsResponseCountArticle'
 
@@ -28,6 +29,8 @@ const fragments = {
 }
 
 const ResponseCount = ({ article }: ResponseCountProps) => {
+  const { lang } = useContext(LanguageContext)
+
   const { articleState: state } = article
   const path = toPath({
     page: 'articleDetail',
@@ -42,7 +45,12 @@ const ResponseCount = ({ article }: ResponseCountProps) => {
       bgActiveColor="grey-lighter-active"
       {...path}
       disabled={isBanned}
-      aira-label="查看評論"
+      aria-label={translate({
+        zh_hant: '查看回應',
+        zh_hans: '查看回应',
+        en: 'View responses',
+        lang,
+      })}
     >
       <TextIcon icon={<IconComment16 />} color="grey" weight="md" size="sm">
         {article.responseCount > 0 ? numAbbr(article.responseCount) : undefined}

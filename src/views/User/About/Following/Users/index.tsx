@@ -138,6 +138,7 @@ const FollowingUsers = () => {
                   type: 'followee',
                   contentType: 'user',
                   location: i,
+                  id: node.id,
                 })
               }
             />

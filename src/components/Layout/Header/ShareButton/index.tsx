@@ -1,13 +1,17 @@
-import { Button, IconShare32, ShareDialog } from '~/components'
+import { useContext } from 'react'
 
-import { TEXT } from '~/common/enums'
+import { Button, IconShare32, LanguageContext, ShareDialog } from '~/components'
+
+import { translate } from '~/common/utils'
 
 export const ShareButton: React.FC = () => {
+  const { lang } = useContext(LanguageContext)
+
   return (
     <ShareDialog>
       {({ openDialog: openShareDialog }) => (
         <Button
-          aria-label={TEXT.zh_hant.back}
+          aria-label={translate({ id: 'back', lang })}
           bgColor="half-black"
           onClick={openShareDialog}
         >

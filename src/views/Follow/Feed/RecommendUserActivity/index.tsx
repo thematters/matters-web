@@ -1,6 +1,4 @@
-import { useContext } from 'react'
-
-import { Slides, ViewerContext } from '~/components'
+import { Slides } from '~/components'
 
 import { analytics } from '~/common/utils'
 
@@ -16,8 +14,6 @@ interface Props {
 }
 
 const RecommendUserActivity = ({ users }: Props) => {
-  const viewer = useContext(ViewerContext)
-
   if (!users || users.length <= 0) {
     return null
   }
@@ -37,7 +33,6 @@ const RecommendUserActivity = ({ users }: Props) => {
               contentType: 'UserRecommendationActivity',
               location: `${location}.${index}`,
               id: user.id,
-              userId: viewer.id,
             })
           }}
         >

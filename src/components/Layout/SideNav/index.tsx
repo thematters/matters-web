@@ -1,5 +1,7 @@
+import VisuallyHidden from '@reach/visually-hidden'
 import Link from 'next/link'
 import { useContext } from 'react'
+import FocusLock from 'react-focus-lock'
 
 import {
   Dropdown,
@@ -9,6 +11,7 @@ import {
   IconNavHome24,
   IconNavHomeActive24,
   IconNavSearch24,
+  LanguageContext,
   Menu,
   Translate,
   useResponsive,
@@ -17,7 +20,8 @@ import {
   WriteButton,
 } from '~/components'
 
-import { PATHS, TEXT, Z_INDEX } from '~/common/enums'
+import { PATHS, Z_INDEX } from '~/common/enums'
+import { translate } from '~/common/utils'
 
 import MeAvatar from '../MeAvatar'
 import NavMenu from '../NavMenu'
@@ -26,6 +30,8 @@ import NavListItem from './NavListItem'
 import styles from './styles.css'
 
 const SideNav = () => {
+  const { lang } = useContext(LanguageContext)
+
   const { isInPath, isPathStartWith, getQuery } = useRoute()
   const isMediumUp = useResponsive('md-up')
   const isLargeUp = useResponsive('lg-up')
@@ -46,7 +52,7 @@ const SideNav = () => {
     <section className="side-nav">
       <section className="logo">
         <Link href={PATHS.HOME}>
-          <a aria-label={TEXT.zh_hant.discover}>
+          <a aria-label={translate({ id: 'discover', lang })}>
             {isMediumUp ? <IconLogo /> : <IconLogoGraph />}
           </a>
         </Link>
@@ -96,11 +102,18 @@ const SideNav = () => {
         {viewer.isAuthed && (
           <Dropdown
             content={
-              <section className="dropdown-menu">
-                <NavMenu.Top />
-                <Menu.Divider />
-                <NavMenu.Bottom />
-              </section>
+              <FocusLock>
+                <section className="dropdown-menu">
+                  <VisuallyHidden>
+                    <button type="button">
+                      <Translate id="close" />
+                    </button>
+                  </VisuallyHidden>
+                  <NavMenu.Top />
+                  <Menu.Divider />
+                  <NavMenu.Bottom />
+                </section>
+              </FocusLock>
             }
             placement="right-start"
             appendTo={process.browser ? document.body : undefined}

@@ -1,9 +1,11 @@
 import VisuallyHidden from '@reach/visually-hidden'
 import classNames from 'classnames'
+import { useContext } from 'react'
 
 import {
   IconCamera16,
   IconSpinner16,
+  LanguageContext,
   TextIcon,
   Translate,
   useMutation,
@@ -16,9 +18,9 @@ import {
   ADD_TOAST,
   ASSET_TYPE,
   ENTITY_TYPE,
-  TEXT,
   UPLOAD_IMAGE_SIZE_LIMIT,
 } from '~/common/enums'
+import { translate } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -41,6 +43,8 @@ const Uploader: React.FC<UploaderProps> = ({
   setSelected,
   refetchAssets,
 }) => {
+  const { lang } = useContext(LanguageContext)
+
   const [upload, { loading }] = useMutation<SingleFileUpload>(
     UPLOAD_FILE,
     {
@@ -162,7 +166,7 @@ const Uploader: React.FC<UploaderProps> = ({
           id={fieldId}
           type="file"
           name="file"
-          aria-label={TEXT.zh_hant.uploadCover}
+          aria-label={translate({ id: 'uploadCover', lang })}
           accept={acceptTypes}
           multiple={false}
           onChange={handleChange}

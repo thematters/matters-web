@@ -12,7 +12,7 @@ import {
   useRoute,
 } from '~/components'
 
-import { INPUT_DEBOUNCE, TEXT, Z_INDEX } from '~/common/enums'
+import { INPUT_DEBOUNCE, Z_INDEX } from '~/common/enums'
 import { toPath, translate } from '~/common/utils'
 
 import styles from './styles.css'
@@ -22,15 +22,19 @@ interface SearchBarProps {
   hasDropdown?: boolean
 }
 
-const SearchButton = () => (
-  <Button
-    size={['2rem', '2rem']}
-    type="submit"
-    aria-label={TEXT.zh_hant.search}
-  >
-    <IconSearch16 color="grey-dark" />
-  </Button>
-)
+const SearchButton = () => {
+  const { lang } = useContext(LanguageContext)
+
+  return (
+    <Button
+      size={['2rem', '2rem']}
+      type="submit"
+      aria-label={translate({ id: 'search', lang })}
+    >
+      <IconSearch16 color="grey-dark" />
+    </Button>
+  )
+}
 
 export const SearchBar: React.FC<SearchBarProps> = ({
   onChange,

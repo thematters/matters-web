@@ -1,6 +1,9 @@
-import { IconChecked, Translate } from '~/components'
+import { useContext } from 'react'
+
+import { IconChecked, LanguageContext, Translate } from '~/components'
 
 import { ASSET_TYPE } from '~/common/enums'
+import { translate } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -17,6 +20,8 @@ const Selector: React.FC<SelectorProps> = ({
   selected,
   setSelected,
 }) => {
+  const { lang } = useContext(LanguageContext)
+
   const imageAssets = assets.filter(
     (asset) =>
       [ASSET_TYPE.embed, ASSET_TYPE.cover].indexOf(asset.type as any) >= 0
@@ -43,7 +48,12 @@ const Selector: React.FC<SelectorProps> = ({
               onClick={() =>
                 setSelected(asset.id === selected?.id ? undefined : asset)
               }
-              aria-label={`設置第 ${index + 1} 張圖片為封面`}
+              aria-labelledby={translate({
+                zh_hant: `設置第 ${index + 1} 張圖片為封面`,
+                zh_hans: `设置第 ${index + 1} 张图片为封面`,
+                en: `Set as cover`,
+                lang,
+              })}
             >
               <img src={asset.path} />
 

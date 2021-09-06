@@ -4,12 +4,14 @@ import {
   Button,
   IconBookmarked16,
   IconSize,
+  LanguageContext,
   Translate,
   useMutation,
   ViewerContext,
 } from '~/components'
 
 import { ADD_TOAST } from '~/common/enums'
+import { translate } from '~/common/utils'
 
 import TOGGLE_SUBSCRIBE_ARTICLE from '../../GQL/mutations/toggleSubscribeArticle'
 
@@ -29,6 +31,8 @@ const Unsubscribe = ({
   inCard,
 }: UnsubscribeProps) => {
   const viewer = useContext(ViewerContext)
+  const { lang } = useContext(LanguageContext)
+
   const [unsubscribe] = useMutation<ToggleSubscribeArticle>(
     TOGGLE_SUBSCRIBE_ARTICLE,
     {
@@ -49,7 +53,12 @@ const Unsubscribe = ({
     <Button
       spacing={['xtight', 'xtight']}
       bgActiveColor={inCard ? 'grey-lighter-active' : 'grey-lighter'}
-      aria-label="取消收藏"
+      aria-label={translate({
+        zh_hant: '取消收藏',
+        zh_hans: '取消收藏',
+        en: 'Undo bookmark',
+        lang,
+      })}
       onClick={async () => {
         if (viewer.isFrozen) {
           window.dispatchEvent(

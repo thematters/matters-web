@@ -1,10 +1,11 @@
 import gql from 'graphql-tag'
+import { useContext } from 'react'
 
-import { AppreciatorsDialog, Translate } from '~/components'
+import { AppreciatorsDialog, LanguageContext, Translate } from '~/components'
 import { Avatar } from '~/components/Avatar'
 
-import { IMAGE_PIXEL, TEXT } from '~/common/enums'
-import { numAbbr } from '~/common/utils'
+import { IMAGE_PIXEL } from '~/common/enums'
+import { numAbbr, translate } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -37,6 +38,8 @@ const fragments = {
 }
 
 const Appreciators = ({ article }: { article: AppreciatorsArticle }) => {
+  const { lang } = useContext(LanguageContext)
+
   const edges = article.received.edges
   const totalReceivedCount = article.appreciationsReceivedTotal
   const appreciatorCount = Math.min(article.received.totalCount, 99)
@@ -56,7 +59,7 @@ const Appreciators = ({ article }: { article: AppreciatorsArticle }) => {
           className="container"
           onClick={openDialog}
           disabled={totalReceivedCount <= 0}
-          aria-label={TEXT.zh_hant.viewAppreciators}
+          aria-label={translate({ id: 'viewAppreciators', lang })}
           aria-haspopup="true"
         >
           {totalReceivedCount > 0 ? (

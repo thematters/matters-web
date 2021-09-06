@@ -1,7 +1,5 @@
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Waypoint } from 'react-waypoint'
-
-import { ViewerContext } from '~/components'
 
 import { ActivityType, analytics, ContentType, FeedType } from '~/common/utils'
 
@@ -10,13 +8,14 @@ export const CardExposureTracker = ({
   location,
   feedType,
   contentType,
+  horizontal = false,
 }: {
   location: number | string
   id: string
   feedType: FeedType
   contentType: ContentType | ActivityType
+  horizontal?: boolean
 }) => {
-  const viewer = useContext(ViewerContext)
   const [timerId, setTimerId] = useState<number>()
   const [recorded, setRecorded] = useState(false)
 
@@ -35,7 +34,6 @@ export const CardExposureTracker = ({
               feedType,
               contentType,
               location,
-              userId: viewer.id,
               id,
             })
             setRecorded(true)
@@ -45,6 +43,7 @@ export const CardExposureTracker = ({
       }}
       // cancel timer on leave
       onLeave={() => window.clearTimeout(timerId)}
+      horizontal={horizontal}
     />
   )
 }
