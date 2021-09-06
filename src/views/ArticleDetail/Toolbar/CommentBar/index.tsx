@@ -8,6 +8,7 @@ import {
   CardProps,
   CommentFormDialog,
   IconComment16,
+  LanguageContext,
   TextIcon,
   Translate,
   useResponsive,
@@ -21,9 +22,8 @@ import {
   OPEN_LOGIN_DIALOG,
   PATHS,
   REFETCH_RESPONSES,
-  TEXT,
 } from '~/common/enums'
-import { appendTarget, numAbbr } from '~/common/utils'
+import { appendTarget, numAbbr, translate } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -65,8 +65,10 @@ const Content = ({
 }: (CardProps | ButtonProps) & {
   isSmallUp: boolean
   article: CommentBarArticle
-}) =>
-  isSmallUp ? (
+}) => {
+  const { lang } = useContext(LanguageContext)
+
+  return isSmallUp ? (
     <Card
       bgColor="grey-lighter"
       spacing={[0, 0]}
@@ -83,7 +85,7 @@ const Content = ({
     <Button
       spacing={['xtight', 'xtight']}
       bgActiveColor="grey-lighter"
-      aira-label={TEXT.zh_hant.reply}
+      aria-label={translate({ id: 'reply', lang })}
       {...(props as ButtonProps)}
     >
       <TextIcon
@@ -96,6 +98,7 @@ const Content = ({
       </TextIcon>
     </Button>
   )
+}
 
 const CommentBar = ({ article, disabled }: CommentBarProps) => {
   const viewer = useContext(ViewerContext)

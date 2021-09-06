@@ -1,18 +1,19 @@
 import VisuallyHidden from '@reach/visually-hidden'
 import classNames from 'classnames'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 
 import {
   Avatar,
   AvatarProps,
   CircleAvatar,
   CircleAvatarProps,
+  IconCamera24,
+  LanguageContext,
   Spinner,
   Translate,
   useMutation,
 } from '~/components'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
-import { IconCamera24 } from '~/components/Icon'
 
 import {
   ACCEPTED_UPLOAD_IMAGE_TYPES,
@@ -21,6 +22,7 @@ import {
   ENTITY_TYPE,
   UPLOAD_IMAGE_SIZE_LIMIT,
 } from '~/common/enums'
+import { translate } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -43,6 +45,8 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
 
   ...avatarProps
 }) => {
+  const { lang } = useContext(LanguageContext)
+
   const [upload, { loading }] = useMutation<SingleFileUpload>(
     UPLOAD_FILE,
     undefined,
@@ -135,7 +139,12 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
           id={fieldId}
           type="file"
           name="file"
-          aria-label="上傳頭像"
+          aria-label={translate({
+            zh_hant: '上傳頭像',
+            zh_hans: '上传头像',
+            en: 'Upload avatar',
+            lang,
+          })}
           accept={acceptTypes}
           multiple={false}
           onChange={handleChange}

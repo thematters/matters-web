@@ -133,6 +133,7 @@ const FollowersDialogContent = () => {
                     type: 'circle_follower',
                     contentType: 'user',
                     location: i,
+                    id: node.id,
                   })
                 }
               />

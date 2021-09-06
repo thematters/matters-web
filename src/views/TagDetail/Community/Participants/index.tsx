@@ -100,6 +100,7 @@ const Participants = ({ id }: Props) => {
                     type: 'tag_detail_community',
                     contentType: 'user',
                     location: i,
+                    id: node.id,
                   })
                 }
               />

@@ -1,9 +1,15 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
-import { CommentFormType, Translate, ViewerContext } from '~/components'
+import {
+  CommentFormType,
+  LanguageContext,
+  Translate,
+  ViewerContext,
+} from '~/components'
 
 import { ADD_TOAST, OPEN_LIKE_COIN_DIALOG, TextId } from '~/common/enums'
+import { translate } from '~/common/utils'
 
 import CreatedAt, { CreatedAtControls } from '../CreatedAt'
 import DownvoteButton from './DownvoteButton'
@@ -89,6 +95,7 @@ const BaseFooterActions = ({
   ...replyButtonProps
 }: FooterActionsProps) => {
   const viewer = useContext(ViewerContext)
+  const { lang } = useContext(LanguageContext)
 
   const { state, node } = comment
   const article = node.__typename === 'Article' ? node : undefined
@@ -134,7 +141,14 @@ const BaseFooterActions = ({
   const replyCustomButtonProps = viewer.isBanned ? { onClick: forbid } : {}
 
   return (
-    <footer aira-label={`${comment.upvotes} 點讚、${comment.downvotes} 點踩`}>
+    <footer
+      aria-label={translate({
+        zh_hant: `${comment.upvotes} 點讚、${comment.downvotes} 點踩`,
+        zh_hans: `${comment.upvotes} 点赞、${comment.downvotes} 点踩`,
+        en: `${comment.upvotes} upvotes, ${comment.downvotes} downvotes`,
+        lang,
+      })}
+    >
       <section className="left">
         {hasReply && (
           <ReplyButton

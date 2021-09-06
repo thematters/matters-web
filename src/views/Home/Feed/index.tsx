@@ -218,7 +218,6 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
                     contentType: 'article',
                     location: i,
                     id: edge.node.id,
-                    userId: viewer.id,
                   })
                 }
                 onClickAuthor={() => {
@@ -227,7 +226,6 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
                     contentType: 'user',
                     location: i,
                     id: edge.node.author.id,
-                    userId: viewer.id,
                   })
                 }}
               />

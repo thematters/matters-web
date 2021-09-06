@@ -1,5 +1,6 @@
 import VisuallyHidden from '@reach/visually-hidden'
-import { forwardRef } from 'react'
+import { forwardRef, useContext } from 'react'
+import FocusLock from 'react-focus-lock'
 
 import {
   Button,
@@ -7,13 +8,15 @@ import {
   DialogOverlayProps,
   DialogProps,
   Dropdown,
+  LanguageContext,
   PopperProps,
   Translate,
   useDialogSwitch,
   useResponsive,
 } from '~/components'
 
-import { KEYCODES, TEXT, TextId, Z_INDEX } from '~/common/enums'
+import { KEYCODES, TextId, Z_INDEX } from '~/common/enums'
+import { translate } from '~/common/utils'
 
 /**
  * This is a responsive component which will show
@@ -75,6 +78,8 @@ const BaseDropdownDialog = ({
   dialog,
   children,
 }: DropdownDialogProps) => {
+  const { lang } = useContext(LanguageContext)
+
   const isSmallUp = useResponsive('sm-up')
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
   const toggle = () => (show ? closeDialog() : openDialog())
@@ -98,7 +103,10 @@ const BaseDropdownDialog = ({
         onClick={closeOnClick}
       >
         <VisuallyHidden>
-          <Button aria-label={TEXT.zh_hant.close} onClick={closeDialog} />
+          <Button
+            aria-label={translate({ id: 'close', lang })}
+            onClick={closeDialog}
+          />
         </VisuallyHidden>
 
         {contentChildren}
@@ -119,7 +127,11 @@ const BaseDropdownDialog = ({
         zIndex={Z_INDEX.OVER_BOTTOM_BAR}
         appendTo={process.browser ? document.body : undefined}
         {...dropdown}
-        content={<Content>{dropdown.content}</Content>}
+        content={
+          <FocusLock>
+            <Content>{dropdown.content}</Content>
+          </FocusLock>
+        }
       >
         <ForwardChildren openDialog={toggle} children={children} />
       </Dropdown>

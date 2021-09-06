@@ -8,6 +8,7 @@ import {
   IconLogout24,
   IconMore32,
   IconSettings32,
+  LanguageContext,
   Menu,
   TextIcon,
   Translate,
@@ -15,7 +16,7 @@ import {
   ViewerContext,
 } from '~/components'
 
-import { TEXT } from '~/common/enums'
+import { translate } from '~/common/utils'
 
 import { fragments } from './gql'
 
@@ -46,6 +47,8 @@ const BaseDropdownActions = ({
 
   openUnsubscribeCircleDialog,
 }: BaseDropdownActionsProps) => {
+  const { lang } = useContext(LanguageContext)
+
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
     <Menu width={isInDropdown ? 'sm' : undefined}>
       {hasUnsubscribeCircle && (
@@ -72,7 +75,7 @@ const BaseDropdownActions = ({
       {({ openDialog, ref }) => (
         <Button
           bgColor="half-black"
-          aria-label={TEXT.zh_hant.moreActions}
+          aria-label={translate({ id: 'moreActions', lang })}
           aria-haspopup="true"
           onClick={openDialog}
           ref={ref}
