@@ -9,6 +9,7 @@ import {
   IconHashTag24,
   IconHistory24,
   IconProfile24,
+  IconSubscription24,
   IconWallet24,
   Menu,
   TextIcon,
@@ -46,6 +47,16 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
           size={menuItemSize}
         >
           <Translate id="myProfile" />
+        </TextIcon>
+      </Menu.Item>
+
+      <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_SUBSCRIPTIONS}>
+        <TextIcon
+          icon={<IconSubscription24 size="md" />}
+          spacing="base"
+          size={menuItemSize}
+        >
+          <Translate id="mySubscriptions" />
         </TextIcon>
       </Menu.Item>
 
