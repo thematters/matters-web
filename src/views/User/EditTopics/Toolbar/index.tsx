@@ -3,18 +3,16 @@ import { useContext } from 'react'
 import {
   Button,
   ButtonProps,
+  IconDelete24,
+  IconHide24,
+  IconLock24,
+  IconMove24,
+  IconUnlock24,
   LanguageContext,
   Translate,
-  withIcon,
 } from '~/components'
 
 import { translate } from '~/common/utils'
-
-import { ReactComponent as IconDelete24 } from '@/public/static/icons/24px/delete.svg'
-import { ReactComponent as IconHide24 } from '@/public/static/icons/24px/hide.svg'
-import { ReactComponent as IconLock24 } from '@/public/static/icons/24px/lock.svg'
-import { ReactComponent as IconMove24 } from '@/public/static/icons/24px/move.svg'
-import { ReactComponent as IconUnlock24 } from '@/public/static/icons/24px/unlock.svg'
 
 import styles from './styles.css'
 
@@ -86,7 +84,7 @@ const Toolbar: React.FC<ToolbarProps> = ({
             lang,
           })}
         >
-          {withIcon(IconHide24)({ size: 'md' })}
+          <IconHide24 size="md" />
         </Button>
         <Button
           {...actionButtonProps}
@@ -98,7 +96,7 @@ const Toolbar: React.FC<ToolbarProps> = ({
             lang,
           })}
         >
-          {withIcon(IconLock24)({ size: 'md' })}
+          <IconLock24 size="md" />
         </Button>
         <Button
           {...actionButtonProps}
@@ -110,7 +108,7 @@ const Toolbar: React.FC<ToolbarProps> = ({
             lang,
           })}
         >
-          {withIcon(IconUnlock24)({ size: 'md' })}
+          <IconUnlock24 size="md" />
         </Button>
         <Button
           {...actionButtonProps}
@@ -122,7 +120,7 @@ const Toolbar: React.FC<ToolbarProps> = ({
             lang,
           })}
         >
-          {withIcon(IconMove24)({ size: 'md' })}
+          <IconMove24 size="md" />
         </Button>
         <Button
           {...actionButtonProps}
@@ -134,7 +132,7 @@ const Toolbar: React.FC<ToolbarProps> = ({
             lang,
           })}
         >
-          {withIcon(IconDelete24)({ size: 'md' })}
+          <IconDelete24 size="md" />
         </Button>
       </section>
 

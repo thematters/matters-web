@@ -5,9 +5,6 @@ import {
   Button,
   Card,
   IconArrowRight16,
-  IconArticle16,
-  IconChapter16,
-  IconDotDivider,
   LinkWrapper,
   ResponsiveImage,
   TextIcon,
@@ -17,6 +14,7 @@ import {
 import { toPath } from '~/common/utils'
 
 import styles from './styles.css'
+import TopicCounts from './TopicCounts'
 
 import { ArticleDigestTitleArticle } from '../ArticleDigest/Title/__generated__/ArticleDigestTitleArticle'
 
@@ -69,39 +67,10 @@ export const ArticleTopicDigest = ({ topic }: ArticleTopicDigestProps) => {
               </LinkWrapper>
             </h3>
 
-            <section className="info">
-              {chapterCount > 0 && (
-                <>
-                  <TextIcon
-                    icon={<IconChapter16 />}
-                    size="sm-s"
-                    spacing="xxtight"
-                  >
-                    <Translate
-                      zh_hant={`${chapterCount} 個章節`}
-                      zh_hans={`${chapterCount} 个章节`}
-                      en={`${chapterCount} chapters`}
-                    />
-                  </TextIcon>
-
-                  <IconDotDivider />
-                </>
-              )}
-
-              {articleCount > 9 && (
-                <TextIcon
-                  icon={<IconArticle16 />}
-                  size="sm-s"
-                  spacing="xxtight"
-                >
-                  <Translate
-                    zh_hant={`${articleCount} 篇作品`}
-                    zh_hans={`${articleCount} 篇作品`}
-                    en={`${articleCount} articles`}
-                  />
-                </TextIcon>
-              )}
-            </section>
+            <TopicCounts
+              chapterCount={chapterCount}
+              articleCount={articleCount}
+            />
           </section>
 
           <p className="description">{topic.description}</p>

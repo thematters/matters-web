@@ -31,12 +31,6 @@
     line-height: 1.5rem;
   }
 
-  & .info {
-    @mixin flex-center-start;
-
-    margin-top: var(--spacing-x-tight);
-  }
-
   @media (--sm-up) {
     & .title {
       font-size: var(--font-size-xl);

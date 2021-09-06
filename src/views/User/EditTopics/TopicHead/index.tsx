@@ -1,15 +1,25 @@
 import { Button, IconAdd16, TextIcon, Translate } from '~/components'
+import TopicCounts from '~/components/ArticleTopicDigest/TopicCounts'
 
 type TopicHeadProps = {
   title: React.ReactNode | string
+  chapterCount: number
+  articleCount: number
   onAdd: () => void
 }
 
-const TopicHead: React.FC<TopicHeadProps> = ({ title, onAdd }) => {
+const TopicHead: React.FC<TopicHeadProps> = ({
+  title,
+  chapterCount,
+  articleCount,
+  onAdd,
+}) => {
   return (
     <header>
       <section>
         <h2>{title}</h2>
+
+        <TopicCounts chapterCount={chapterCount} articleCount={articleCount} />
       </section>
 
       <Button

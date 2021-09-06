@@ -1,0 +1,13 @@
+.item {
+  @mixn flex-center-space-between;
+}
+
+& h3 {
+  @mixn line-clamp;
+}
+
+& .count {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-grey);
+}
