@@ -1,17 +1,19 @@
 import classNames from 'classnames'
+import { useContext } from 'react'
 
 import {
   ArticleDigestTitle,
   Button,
   Card,
   IconArrowRight16,
+  LanguageContext,
   LinkWrapper,
   ResponsiveImage,
   TextIcon,
   Translate,
 } from '~/components'
 
-import { toPath } from '~/common/utils'
+import { toPath, translate } from '~/common/utils'
 
 import { fragments } from './gql'
 import styles from './styles.css'
@@ -24,6 +26,8 @@ export interface ArticleTopicDigestProps {
 }
 
 export const ArticleTopicDigest = ({ topic }: ArticleTopicDigestProps) => {
+  const { lang } = useContext(LanguageContext)
+
   const containerClasses = classNames({
     container: true,
   })
@@ -33,7 +37,12 @@ export const ArticleTopicDigest = ({ topic }: ArticleTopicDigestProps) => {
     userName: topic.author.userName || '',
   })
 
-  const latestArticle = topic.articles[0]
+  const latestArticlePrefix = translate({
+    zh_hant: '最新 | ',
+    zh_hans: '最新 | ',
+    en: 'Latest | ',
+    lang,
+  })
 
   return (
     <Card {...path} spacing={['base', 'base']} borderRadius="xtight">
@@ -56,17 +65,12 @@ export const ArticleTopicDigest = ({ topic }: ArticleTopicDigestProps) => {
           <p className="description">{topic.description}</p>
 
           <section className="latestArticle">
-            <TextIcon size="md-s" weight="md">
-              <Translate
-                zh_hant="最新&nbsp;|&nbsp;"
-                zh_hans="最新&nbsp;|&nbsp;"
-                en="Latest&nbsp;|&nbsp;"
-              />
-            </TextIcon>
-
-            {latestArticle && (
+            {topic.latestArticle && (
               <ArticleDigestTitle
-                article={latestArticle}
+                article={{
+                  ...topic.latestArticle,
+                  title: latestArticlePrefix + topic.latestArticle.title,
+                }}
                 is="h4"
                 textSize="md-s"
                 textWeight="md"

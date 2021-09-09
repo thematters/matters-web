@@ -22,7 +22,7 @@ import {
 } from './__generated__/UserLanding'
 
 const BaseUserLanding = ({ user }: { user: UserLanding_user }) => {
-  const hasTopics = user.topics.length > 0
+  const hasTopics = user.topics.totalCount > 0
   const [feed, setFeed] = useState<FeedType>(hasTopics ? 'topics' : 'articles')
 
   return (

@@ -15,13 +15,7 @@ export const fragments = {
         id
         userName
       }
-      chapters {
-        id
-        articles {
-          ...ArticleDigestTitleArticle
-        }
-      }
-      articles {
+      latestArticle {
         ...ArticleDigestTitleArticle
       }
       ...TopicCountsTopic

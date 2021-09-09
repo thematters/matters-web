@@ -14,7 +14,7 @@ type UserTabsProps = {
 
 const UserTabs: React.FC<UserTabsProps> = ({ user, feed, setFeed }) => {
   const articleCount = user.articles.totalCount
-  const topicCount = user.topics.length
+  const topicCount = user.topics.totalCount
   const hasTopics = topicCount > 0
 
   if (hasTopics) {

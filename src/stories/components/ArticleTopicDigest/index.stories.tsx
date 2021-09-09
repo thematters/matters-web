@@ -30,7 +30,6 @@ Default.args = {
     author: MOCK_USER,
     chapterCount: 6,
     articleCount: 3,
-    articles: [MOCK_ARTILCE],
-    chapters: [{ id: '213', articles: [MOCK_ARTILCE], __typename: 'Chapter' }],
+    latestArticle: MOCK_ARTILCE,
   },
 }

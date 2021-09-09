@@ -16,8 +16,8 @@ export const USER_LANDING = gql`
       articles(input: { first: 0 }) {
         totalCount
       }
-      topics {
-        id
+      topics(input: { first: 0 }) {
+        totalCount
       }
     }
   }

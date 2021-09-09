@@ -7,6 +7,7 @@ import {
 } from '~/components'
 
 import { fragments } from './gql'
+import styles from './styles.css'
 
 import { TopicCountsTopic } from './__generated__/TopicCountsTopic'
 
@@ -41,6 +42,8 @@ const TopicCounts = ({ topic }: TopicCountsProps) => {
           />
         </TextIcon>
       )}
+
+      <style jsx>{styles}</style>
     </section>
   )
 }
