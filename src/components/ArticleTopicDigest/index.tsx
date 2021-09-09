@@ -5,9 +5,6 @@ import {
   Button,
   Card,
   IconArrowRight16,
-  IconArticle16,
-  IconChapter16,
-  IconDotDivider,
   LinkWrapper,
   ResponsiveImage,
   TextIcon,
@@ -16,30 +13,14 @@ import {
 
 import { toPath } from '~/common/utils'
 
+import { fragments } from './gql'
 import styles from './styles.css'
+import TopicCounts from './TopicCounts'
 
-import { ArticleDigestTitleArticle } from '../ArticleDigest/Title/__generated__/ArticleDigestTitleArticle'
+import { ArticleTopicDigestTopic } from './__generated__/ArticleTopicDigestTopic'
 
 export interface ArticleTopicDigestProps {
-  topic: {
-    id: string
-    title: string
-    description: string
-    cover: string
-    author: {
-      id: string
-      userName: string
-    }
-    chapters: {
-      totalCount: number
-    }
-    articles: {
-      totalCount: number
-      edges: {
-        node: ArticleDigestTitleArticle
-      }[]
-    }
-  }
+  topic: ArticleTopicDigestTopic
 }
 
 export const ArticleTopicDigest = ({ topic }: ArticleTopicDigestProps) => {
@@ -49,10 +30,10 @@ export const ArticleTopicDigest = ({ topic }: ArticleTopicDigestProps) => {
   const path = toPath({
     page: 'userTopicDetail',
     topicId: topic.id,
-    userName: topic.author.userName,
+    userName: topic.author.userName || '',
   })
-  const chapterCount = topic.chapters.totalCount
-  const articleCount = topic.articles.totalCount
+
+  const latestArticle = topic.articles[0]
 
   return (
     <Card {...path} spacing={['base', 'base']} borderRadius="xtight">
@@ -69,39 +50,7 @@ export const ArticleTopicDigest = ({ topic }: ArticleTopicDigestProps) => {
               </LinkWrapper>
             </h3>
 
-            <section className="info">
-              {chapterCount > 0 && (
-                <>
-                  <TextIcon
-                    icon={<IconChapter16 />}
-                    size="sm-s"
-                    spacing="xxtight"
-                  >
-                    <Translate
-                      zh_hant={`${chapterCount} 個章節`}
-                      zh_hans={`${chapterCount} 个章节`}
-                      en={`${chapterCount} chapters`}
-                    />
-                  </TextIcon>
-
-                  <IconDotDivider />
-                </>
-              )}
-
-              {articleCount > 9 && (
-                <TextIcon
-                  icon={<IconArticle16 />}
-                  size="sm-s"
-                  spacing="xxtight"
-                >
-                  <Translate
-                    zh_hant={`${articleCount} 篇作品`}
-                    zh_hans={`${articleCount} 篇作品`}
-                    en={`${articleCount} articles`}
-                  />
-                </TextIcon>
-              )}
-            </section>
+            <TopicCounts topic={topic} />
           </section>
 
           <p className="description">{topic.description}</p>
@@ -114,13 +63,16 @@ export const ArticleTopicDigest = ({ topic }: ArticleTopicDigestProps) => {
                 en="Latest&nbsp;|&nbsp;"
               />
             </TextIcon>
-            <ArticleDigestTitle
-              article={topic.articles.edges[0].node}
-              is="h4"
-              textSize="md-s"
-              textWeight="md"
-              lineClamp
-            />
+
+            {latestArticle && (
+              <ArticleDigestTitle
+                article={latestArticle}
+                is="h4"
+                textSize="md-s"
+                textWeight="md"
+                lineClamp
+              />
+            )}
           </section>
         </section>
 
@@ -153,3 +105,5 @@ export const ArticleTopicDigest = ({ topic }: ArticleTopicDigestProps) => {
     </Card>
   )
 }
+
+ArticleTopicDigest.fragments = fragments

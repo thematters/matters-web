@@ -5,11 +5,6 @@ import { ArticleDigestFeed } from '~/components'
 const fragment = gql`
   fragment ArticlesUser on User {
     id
-    displayName
-    info {
-      description
-      profileCover
-    }
     articles(input: { first: 10, after: $after }) {
       totalCount
       pageInfo {
@@ -26,11 +21,6 @@ const fragment = gql`
           ...ArticleDigestFeedArticlePrivate
         }
       }
-    }
-    status {
-      state
-      articleCount
-      totalWordCount
     }
   }
   ${ArticleDigestFeed.fragments.article.public}

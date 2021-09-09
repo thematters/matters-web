@@ -3,7 +3,7 @@ import { DataProxy } from 'apollo-cache'
 import {
   UserArticlesPublic,
   UserArticlesPublic_user_articles_edges,
-} from '~/views/User/Articles/__generated__/UserArticlesPublic'
+} from '~/views/User/Landing/Articles/__generated__/UserArticlesPublic'
 
 const sortEdgesByCreatedAtDesc = (
   edges: UserArticlesPublic_user_articles_edges[]
@@ -26,7 +26,7 @@ const update = ({
   type: 'sticky' | 'unsticky' | 'archive'
 }) => {
   // FIXME: circular dependencies
-  const { USER_ARTICLES_PUBLIC } = require('~/views/User/Articles/gql')
+  const { USER_ARTICLES_PUBLIC } = require('~/views/User/Landing/Articles/gql')
 
   if (!userName) {
     return
@@ -38,12 +38,11 @@ const update = ({
       variables: { userName },
     })
 
-    if (!data?.user?.status || !data.user.articles.edges) {
+    if (!data?.user?.articles.edges) {
       return
     }
 
     let edges = data.user.articles.edges
-    let { articleCount, totalWordCount } = data.user.status
     const targetEdge = edges.filter(({ node }) => node.id === articleId)[0]
 
     switch (type) {
@@ -66,8 +65,6 @@ const update = ({
         edges = sortEdgesByCreatedAtDesc(edges)
         break
       case 'archive':
-        articleCount = articleCount - 1
-        totalWordCount = totalWordCount - (targetEdge.node.wordCount || 0)
         break
     }
 
@@ -80,11 +77,6 @@ const update = ({
           articles: {
             ...data.user.articles,
             edges,
-          },
-          status: {
-            ...data.user.status,
-            articleCount,
-            totalWordCount,
           },
         },
       },

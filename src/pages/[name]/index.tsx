@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic'
 
 import { EmptyLayout, Spinner, Throw404, useRoute } from '~/components'
 
-const DynamicUserArticles = dynamic(() => import('~/views/User/Articles'), {
+const DynamicUserLanding = dynamic(() => import('~/views/User/Landing'), {
   ssr: true,
   loading: () => (
     <EmptyLayout>
@@ -24,7 +24,7 @@ const NameIndex = () => {
   const { isPathStartWith } = useRoute()
 
   if (isPathStartWith('/@', true)) {
-    return <DynamicUserArticles />
+    return <DynamicUserLanding />
   } else if (isPathStartWith('/~', true)) {
     return <DynamicCircleLanding />
   }
