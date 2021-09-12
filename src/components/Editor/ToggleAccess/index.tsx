@@ -73,9 +73,7 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
               circle={circle}
               bgColor="grey-lighter"
               borderRadius="xtight"
-              avatarSize="xl"
               textSize="md-s"
-              hasOwner={false}
               hasDescription={false}
               disabled
             />

@@ -31,8 +31,8 @@ const CircleWall = ({ circle }: CircleWallProps) => {
         borderColor="line-grey-light"
         circle={circle}
         hasFooter
-        hasPrice
-        onClickPrice={() => {
+        hasSubscribe
+        onClickSubscribe={() => {
           analytics.trackEvent('click_button', {
             type: 'subscribe_circle_price',
             pageType: 'article_detail',

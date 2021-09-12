@@ -54,8 +54,8 @@ const SupportWidget = ({ article }: DonationProps) => {
             circle={article.access.circle}
             bgColor="grey-lighter"
             hasFooter
-            hasPrice
-            onClickPrice={() => {
+            hasSubscribe
+            onClickSubscribe={() => {
               analytics.trackEvent('click_button', {
                 type: 'subscribe_circle_price',
                 pageType: 'article_detail',

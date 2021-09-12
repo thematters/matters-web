@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 
-import { CircleAvatar } from '~/components/CircleAvatar'
 import UserDigestMini from '~/components/UserDigest/Mini'
 
 import Footer from './Footer'
@@ -16,11 +15,9 @@ export const fragments = {
         owner {
           ...UserDigestMiniUser
         }
-        ...AvatarCircle
         ...FooterCirclePublic
       }
       ${UserDigestMini.fragments.user}
-      ${CircleAvatar.fragments.circle}
       ${Footer.fragments.circle.public}
     `,
     private: gql`

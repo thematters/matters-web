@@ -64,14 +64,12 @@ const CircleWidget: React.FC<CircleWidgetProps> = ({ circles, isMe }) => {
   return (
     <section className="circle-widget">
       <CircleDigest.Rich
-        avatarSize="xl"
         borderRadius="xtight"
         borderColor="line-grey-light"
         circle={circle}
         hasFooter
-        hasOwner={false}
-        hasPrice={!isMe}
-        onClickPrice={() => {
+        hasSubscribe={!isMe}
+        onClickSubscribe={() => {
           analytics.trackEvent('click_button', {
             type: 'subscribe_circle_price',
             pageType: 'user_profile',
