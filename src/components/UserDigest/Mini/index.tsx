@@ -66,7 +66,7 @@ const Mini = ({
   hasAvatar,
   hasDisplayName,
   hasUserName,
-  hasCircle,
+  hasCircle = false,
   disabled,
 
   onClick,

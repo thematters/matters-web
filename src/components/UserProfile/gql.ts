@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 
 import { Avatar, FollowUserButton } from '~/components'
-import { CircleDigest } from '~/components/CircleDigest'
 
+import CircleWidget from './CircleWidget'
 import DropdownActions from './DropdownActions'
 
 const fragments = {
@@ -26,25 +26,25 @@ const fragments = {
           state
         }
         ownCircles {
-          ...DigestRichCirclePublic
+          ...CircleWidgetCirclePublic
         }
         ...AvatarUser
         ...DropdownActionsUserPublic
       }
       ${Avatar.fragments.user}
-      ${CircleDigest.Rich.fragments.circle.public}
+      ${CircleWidget.fragments.circle.public}
       ${DropdownActions.fragments.user.public}
     `,
     private: gql`
       fragment ProfileUserPrivate on User {
         id
         ownCircles {
-          ...DigestRichCirclePrivate
+          ...CircleWidgetCirclePrivate
         }
         ...FollowButtonUserPrivate
         ...DropdownActionsUserPrivate
       }
-      ${CircleDigest.Rich.fragments.circle.private}
+      ${CircleWidget.fragments.circle.private}
       ${FollowUserButton.fragments.user.private}
       ${DropdownActions.fragments.user.private}
     `,
