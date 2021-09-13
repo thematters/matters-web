@@ -3,9 +3,11 @@ import { useContext } from 'react'
 
 import {
   IconArticle16,
+  IconPrice12,
   IconUser16,
   LanguageContext,
   TextIcon,
+  Translate,
 } from '~/components'
 
 import { numAbbr, translate } from '~/common/utils'
@@ -22,6 +24,10 @@ const fragments = {
   circle: gql`
     fragment CountsCircle on Circle {
       id
+      prices {
+        amount
+        currency
+      }
       members(input: { first: 0 }) {
         totalCount
       }
@@ -35,6 +41,7 @@ const fragments = {
 const Counts = ({ circle }: CountsProps) => {
   const { lang } = useContext(LanguageContext)
 
+  const price = circle.prices && circle.prices[0]
   const memberCount = circle.members.totalCount
   const articleCount = circle.works.totalCount
 
@@ -69,6 +76,23 @@ const Counts = ({ circle }: CountsProps) => {
       >
         {numAbbr(articleCount)}
       </TextIcon>
+
+      {price && (
+        <TextIcon
+          icon={<IconPrice12 size="xs" />}
+          color="grey"
+          weight="md"
+          size="sm"
+          aria-label={translate({
+            zh_hant: `每月訂閱費用 ${price.amount} ${price.currency}`,
+            zh_hans: `每月订阅费用 ${price.amount} ${price.currency}`,
+            en: `Pay ${price.amount} ${price.currency} montly`,
+            lang,
+          })}
+        >
+          {price.amount} {price.currency} / <Translate id="month" />
+        </TextIcon>
+      )}
 
       <style jsx>{styles}</style>
     </section>

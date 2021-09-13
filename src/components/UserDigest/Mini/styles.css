@@ -97,3 +97,15 @@
     color: var(--color-matters-green);
   }
 }
+
+.circle {
+  @mixin flex-center-all;
+
+  margin-left: var(--spacing-xx-tight);
+
+  & :global(> svg) {
+    & :global(path) {
+      fill: var(--color-matters-green);
+    }
+  }
+}

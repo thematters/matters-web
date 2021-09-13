@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 
-import { LinkWrapper, Translate } from '~/components'
+import { IconCircle16, LinkWrapper, Translate } from '~/components'
 import { Avatar, AvatarProps, AvatarSize } from '~/components/Avatar'
 
 import { toPath } from '~/common/utils'
@@ -34,6 +34,7 @@ export type UserDigestMiniProps = {
   hasAvatar?: boolean
   hasDisplayName?: boolean
   hasUserName?: boolean
+  hasCircle?: boolean
 
   disabled?: boolean
   onClick?: () => void
@@ -65,6 +66,7 @@ const Mini = ({
   hasAvatar,
   hasDisplayName,
   hasUserName,
+  hasCircle = false,
   disabled,
 
   onClick,
@@ -119,6 +121,11 @@ const Mini = ({
           )}
         </span>
 
+        {hasCircle && (
+          <span className="circle">
+            <IconCircle16 size="sm" color="green" />
+          </span>
+        )}
         <style jsx>{styles}</style>
       </section>
     </LinkWrapper>

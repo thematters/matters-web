@@ -1,13 +1,7 @@
 import classNames from 'classnames'
 import React from 'react'
 
-import {
-  Card,
-  CardProps,
-  CircleAvatar,
-  CircleAvatarSize,
-  LinkWrapper,
-} from '~/components'
+import { Card, CardProps } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 
 import { toPath } from '~/common/utils'
@@ -20,7 +14,6 @@ import { DigestRichCirclePrivate } from './__generated__/DigestRichCirclePrivate
 import { DigestRichCirclePublic } from './__generated__/DigestRichCirclePublic'
 
 export type CircleDigestRichControls = {
-  hasOwner?: boolean
   hasFooter?: boolean
   hasDescription?: boolean
 
@@ -29,7 +22,6 @@ export type CircleDigestRichControls = {
 
 export type CircleDigestRichProps = {
   circle: DigestRichCirclePublic & Partial<DigestRichCirclePrivate>
-  avatarSize?: CircleAvatarSize
   textSize?: 'md-s' | 'xm'
 } & CircleDigestRichControls &
   CardProps
@@ -37,31 +29,25 @@ export type CircleDigestRichProps = {
 const Rich = ({
   circle,
 
-  avatarSize = 'xxl',
   textSize = 'xm',
 
-  hasOwner = true,
   hasFooter,
   hasDescription = true,
-  hasPrice,
+  hasSubscribe,
 
   disabled,
-  onClickPrice,
+  onClickSubscribe,
 
   ...cardProps
 }: CircleDigestRichProps) => {
-  const { displayName, description, owner } = circle
+  const { description, owner } = circle
   const path = toPath({
-    page: 'circleDetail',
-    circle,
+    page: 'userProfile',
+    userName: owner.userName || '',
   })
 
   const containerClasses = classNames({
     container: true,
-  })
-  const titleClasses = classNames({
-    title: true,
-    [`text-size-${textSize}`]: !!textSize,
   })
 
   return (
@@ -72,30 +58,18 @@ const Rich = ({
     >
       <section className={containerClasses}>
         <section className="content">
-          <CircleAvatar circle={circle} size={avatarSize} />
-
           <header>
-            <h3 className={titleClasses}>
-              <LinkWrapper
-                {...path}
-                textActiveColor="green"
-                disabled={disabled}
-              >
-                {displayName}
-              </LinkWrapper>
-            </h3>
-
-            {hasOwner && (
-              <UserDigest.Mini
-                user={owner}
-                avatarSize="sm"
-                textSize="sm"
-                nameColor="grey-darker"
-                hasAvatar
-                hasDisplayName
-                disabled={disabled}
-              />
-            )}
+            <UserDigest.Mini
+              user={owner}
+              avatarSize="sm"
+              textSize="md-s"
+              textWeight="md"
+              nameColor="black"
+              hasAvatar
+              hasDisplayName
+              hasCircle
+              disabled={disabled}
+            />
           </header>
         </section>
 
@@ -106,8 +80,8 @@ const Rich = ({
         {hasFooter && (
           <Footer
             circle={circle}
-            hasPrice={hasPrice}
-            onClickPrice={onClickPrice}
+            hasSubscribe={hasSubscribe}
+            onClickSubscribe={onClickSubscribe}
           />
         )}
 

@@ -22,8 +22,7 @@ const NoticeCircleCard = ({
         borderRadius="xtight"
         circle={circle}
         hasFooter
-        hasOwner
-        hasPrice
+        hasSubscribe
       />
       <style jsx>{styles}</style>
     </section>
