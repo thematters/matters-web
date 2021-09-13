@@ -1,0 +1,35 @@
+header {
+  margin-bottom: var(--spacing-xx-loose);
+
+  & .title {
+    padding: 0 var(--spacing-base);
+    margin-top: var(--spacing-base);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    line-height: 2.25rem;
+  }
+}
+
+.chapter {
+  & .title {
+    padding: 0 var(--spacing-base);
+    margin-top: var(--spacing-xx-loose);
+    font-size: var(--font-size-xm);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5rem;
+  }
+}
+
+.description {
+  padding: 0 var(--spacing-base);
+  margin-top: var(--spacing-x-tight);
+  font-size: var(--font-size-md-s);
+  line-height: 1.5rem;
+  color: var(--color-grey-darker);
+}
+
+.articles {
+  @mixin shadow-border-top-grey;
+
+  margin-top: var(--spacing-loose);
+}
