@@ -1,3 +1,3 @@
-import UserTopics from '~/views/User/Topics'
+import UserTopicDetail from '~/views/User/TopicDetail'
 
-export default UserTopics
+export default UserTopicDetail

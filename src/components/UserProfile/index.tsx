@@ -207,7 +207,7 @@ export const UserProfile = () => {
 
         <CircleFeatures userName={user?.userName} circles={circles} />
 
-        <CircleWidget circles={circles} isMe={isMe} />
+        {!isMe && <CircleWidget circles={circles} isMe={isMe} />}
 
         <style jsx>{styles}</style>
       </section>

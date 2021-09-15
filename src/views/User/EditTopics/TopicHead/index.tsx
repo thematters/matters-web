@@ -1,5 +1,5 @@
 import { Button, IconAdd16, TextIcon, Translate } from '~/components'
-import TopicCounts from '~/components/ArticleTopicDigest/TopicCounts'
+// import TopicCounts from '~/components/ArticleTopicDigest/TopicCounts'
 
 type TopicHeadProps = {
   title: React.ReactNode | string
@@ -19,7 +19,7 @@ const TopicHead: React.FC<TopicHeadProps> = ({
       <section>
         <h2>{title}</h2>
 
-        <TopicCounts chapterCount={chapterCount} articleCount={articleCount} />
+        {/* <TopicCounts chapterCount={chapterCount} articleCount={articleCount} /> */}
       </section>
 
       <Button

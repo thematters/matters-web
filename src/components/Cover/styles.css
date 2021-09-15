@@ -38,3 +38,16 @@
     }
   }
 }
+
+.topic {
+  &::before {
+    padding-bottom: 89.33%;
+
+    @media (--sm-up) {
+      padding-bottom: 52.33%;
+    }
+  }
+  &::after {
+    background: none;
+  }
+}

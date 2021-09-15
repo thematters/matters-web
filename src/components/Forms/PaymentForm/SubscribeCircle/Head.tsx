@@ -36,7 +36,6 @@ const Head: React.FC<HeadProps> = ({ circle }) => {
           borderColor="line-grey-light"
           hasFooter={false}
           hasDescription
-          hasOwner
           disabled
         />
       </section>

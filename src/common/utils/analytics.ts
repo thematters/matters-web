@@ -73,6 +73,7 @@ interface LoadMoreProp {
     | UserFeedType
     | TagFeedType
     | CircleFeedType
+    | TopicFeedType
   location: number
 }
 
@@ -159,6 +160,7 @@ export type FeedType =
   | UserFeedType
   | TagFeedType
   | CircleFeedType
+  | TopicFeedType
   | 'following'
 
 type ArticleFeedType =
@@ -185,6 +187,7 @@ type ArticleFeedType =
   | 'wallet'
   | 'related_donations'
   | 'circle_detail'
+  | 'topic_article'
 
 type CommentFeedType =
   //  'follow-comment' |
@@ -224,5 +227,7 @@ type TagFeedType =
   | 'user_tag'
 
 type CircleFeedType = 'user_circle' | 'circle_follower' | 'circle_member'
+
+type TopicFeedType = 'user_topics'
 
 type PageType = 'article_detail' | 'user_profile' | 'circle_detail'
