@@ -124,6 +124,11 @@ const CircleWidget = ({ circles, isMe }: CircleWidgetProps) => {
   }
 
   const circle = circles[0]
+
+  if (circle.isMember) {
+    return null
+  }
+
   const members = circle.latestMembers.edges || []
   const membersCount = (circle.latestMembers.totalCount || 0) + 1
 

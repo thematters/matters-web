@@ -1,0 +1,15 @@
+.container {
+  margin: var(--spacing-loose) var(--spacing-base);
+}
+
+.broadcast {
+  display: flex;
+}
+
+.content {
+  @mixin line-clamp;
+
+  margin-left: var(--spacing-x-tight);
+  font-size: var(--font-size-sm);
+  -webkit-line-clamp: 2;
+}
