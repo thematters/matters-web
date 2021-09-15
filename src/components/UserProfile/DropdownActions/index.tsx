@@ -11,6 +11,7 @@ import {
   IconMail24,
   IconMore32,
   IconSettings32,
+  IconTopic24,
   LanguageContext,
   Menu,
   TextIcon,
@@ -40,6 +41,7 @@ interface DialogProps {
 
 interface Controls {
   hasEditProfile: boolean
+  hasEditTopic: boolean
   hasBlockUser: boolean
   isCircleMember: boolean
   isCircleOwner: boolean
@@ -51,6 +53,7 @@ const BaseDropdownActions = ({
   user,
 
   hasEditProfile,
+  hasEditTopic,
   hasBlockUser,
   isCircleMember,
   isCircleOwner,
@@ -67,6 +70,19 @@ const BaseDropdownActions = ({
         <Menu.Item onClick={openEditProfileDialog}>
           <TextIcon icon={<IconEdit16 size="md" />} size="md" spacing="base">
             <Translate id="editUserProfile" />
+          </TextIcon>
+        </Menu.Item>
+      )}
+
+      {hasEditTopic && (
+        <Menu.Item
+          {...toPath({
+            page: 'userEditTopics',
+            userName: user.userName || '',
+          })}
+        >
+          <TextIcon icon={<IconTopic24 size="md" />} size="md" spacing="base">
+            <Translate id="manageTopic" />
           </TextIcon>
         </Menu.Item>
       )}
@@ -146,6 +162,7 @@ const DropdownActions = ({ user, isMe }: DropdownActionsProps) => {
   const circle = user.ownCircles && user.ownCircles[0]
   const controls = {
     hasEditProfile: isMe,
+    hasEditTopic: isMe,
     hasBlockUser: !isMe,
     isCircleMember: !isMe && !!circle?.isMember && !!circle.id,
     isCircleOwner: isMe && circle?.owner.id === user.id,

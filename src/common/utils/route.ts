@@ -143,7 +143,7 @@ export const toPath = (args: ToPathArgs): { href: string } => {
     }
     case 'userEditTopics': {
       return {
-        href: `/@${args.userName}/edit-topics`,
+        href: `/@${args.userName}/topics/edit`,
       }
     }
     case 'userTopicDetail': {
