@@ -187,6 +187,7 @@ type ArticleFeedType =
   | 'wallet'
   | 'related_donations'
   | 'circle_detail'
+  | 'topic_article'
 
 type CommentFeedType =
   //  'follow-comment' |

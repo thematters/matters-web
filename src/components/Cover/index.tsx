@@ -8,7 +8,7 @@ export interface CoverProps {
   cover?: string | null
   fallbackCover: string
   inEditor?: boolean
-  type?: 'user' | 'circle' | 'tag'
+  type?: 'user' | 'circle' | 'tag' | 'topic'
 }
 
 export const Cover: React.FC<CoverProps> = ({
