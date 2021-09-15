@@ -15,9 +15,7 @@ const Broadcast = ({ circles }: BroadcastProps) => {
         <section className="icon">
           <IconVolume32 />
         </section>
-        <section className="content">
-          {''}
-        </section>
+        <section className="content">{''}</section>
       </Card>
 
       <style jsx>{styles}</style>
