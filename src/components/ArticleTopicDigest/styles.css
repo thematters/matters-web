@@ -19,6 +19,7 @@
       'cover head'
       'cover description'
       'cover latestArticle';
+    grid-template-rows: auto 1fr;
   }
 }
 
@@ -29,12 +30,6 @@
     font-size: var(--font-size-lg);
     font-weight: var(--font-weight-semibold);
     line-height: 1.5rem;
-  }
-
-  & .info {
-    @mixin flex-center-start;
-
-    margin-top: var(--spacing-x-tight);
   }
 
   @media (--sm-up) {
@@ -79,14 +74,8 @@
 }
 
 .latestArticle {
-  @mixin flex-center-start;
-
   grid-area: latestArticle;
   margin-top: var(--spacing-x-tight);
-
-  & :global(> *:first-child) {
-    flex-shrink: 0;
-  }
 }
 
 .viewAll {

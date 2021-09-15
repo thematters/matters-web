@@ -1,0 +1,5 @@
+.counts {
+  @mixin flex-center-start;
+
+  margin-top: var(--spacing-x-tight);
+}
