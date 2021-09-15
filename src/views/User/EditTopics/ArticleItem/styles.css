@@ -1,7 +1,0 @@
-.item {
-  @mixn flex-center-space-between;
-}
-
-& h3 {
-  @mixn line-clamp;
-}

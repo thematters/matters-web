@@ -6,7 +6,7 @@ export const USER_TOPICS_PUBLIC = gql`
   query UserTopicsPublic($userName: String!, $after: String) {
     user(input: { userName: $userName }) {
       id
-      topics(input: { first: 10, after: $after }) {
+      topics(input: { first: 10, after: $after, filter: { public: true } }) {
         totalCount
         pageInfo {
           startCursor

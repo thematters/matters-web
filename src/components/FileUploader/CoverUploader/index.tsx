@@ -50,8 +50,13 @@ export type CoverUploaderProps = {
     | ASSET_TYPE.profileCover
     | ASSET_TYPE.tagCover
     | ASSET_TYPE.circleCover
+    | ASSET_TYPE.topicCover
   entityId?: string
-  entityType: ENTITY_TYPE.user | ENTITY_TYPE.tag | ENTITY_TYPE.circle
+  entityType:
+    | ENTITY_TYPE.user
+    | ENTITY_TYPE.tag
+    | ENTITY_TYPE.circle
+    | ENTITY_TYPE.topic
   onUpload: (assetId: string | null) => void
 } & CoverProps
 

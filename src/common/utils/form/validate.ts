@@ -325,6 +325,21 @@ export const validateCircleAmount = (value: number, lang: Language) => {
 }
 
 /**
+ * Topic
+ */
+export const validateTopicTitle = (value: string, lang: Language) => {
+  if (!value) {
+    return translate({ id: 'required', lang })
+  } else if (value.length > 20) {
+    return translate({
+      zh_hant: `已超過 20 字，目前 ${value.length} 字`,
+      zh_hans: `已超过 20 字，目前 ${value.length} 字`,
+      lang,
+    })
+  }
+}
+
+/**
  * Payment
  */
 export const validateAmount = (value: number, lang: Language) => {

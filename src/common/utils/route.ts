@@ -57,7 +57,7 @@ type ToPathArgs =
       userName: string
     }
   | {
-      page: 'userTopicDetail'
+      page: 'userTopicDetail' | 'userEditTopicsTopic'
       topicId: string
       userName: string
     }
@@ -141,14 +141,19 @@ export const toPath = (args: ToPathArgs): { href: string } => {
         href: `/@${args.userName}/manage-invitation`,
       }
     }
+    case 'userTopicDetail': {
+      return {
+        href: `/@${args.userName}/topics/${args.topicId}`,
+      }
+    }
     case 'userEditTopics': {
       return {
         href: `/@${args.userName}/topics/edit`,
       }
     }
-    case 'userTopicDetail': {
+    case 'userEditTopicsTopic': {
       return {
-        href: `/@${args.userName}/topics/${args.topicId}`,
+        href: `/@${args.userName}/topics/edit/${args.topicId}`,
       }
     }
     case 'search': {
