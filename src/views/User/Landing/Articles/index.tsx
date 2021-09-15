@@ -3,7 +3,6 @@ import { useContext, useEffect } from 'react'
 import {
   ArticleDigestFeed,
   EmptyArticle,
-  Head,
   InfiniteScroll,
   List,
   QueryError,
@@ -14,12 +13,8 @@ import {
   ViewerContext,
 } from '~/components'
 
-import { URL_QS } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
-import IMAGE_LOGO_192 from '@/public/static/icon-192x192.png'
-
-import UserTabs from '../UserTabs'
 import {
   USER_ARTICLES_PRIVATE,
   USER_ARTICLES_PUBLIC,
@@ -54,9 +49,7 @@ const UserArticles = () => {
     client,
   } = usePublicQuery<UserArticlesPublic>(
     query,
-    {
-      variables: { userName },
-    },
+    { variables: { userName } },
     { publicQuery }
   )
 
@@ -125,42 +118,8 @@ const UserArticles = () => {
     return <QueryError error={error} />
   }
 
-  if (!user || user?.status?.state === 'archived') {
-    return <EmptyArticle />
-  }
-
-  // customize title
-  const shareSource = getQuery(URL_QS.SHARE_SOURCE_ONBOARDING_TASKS.key)
-  const isShareOnboardingTasks =
-    shareSource === URL_QS.SHARE_SOURCE_ONBOARDING_TASKS.value
-
-  const CustomHead = () => (
-    <Head
-      title={{
-        zh_hant: isShareOnboardingTasks
-          ? `${user.displayName} 已解鎖新手獎賞，快點加入 Matters 獲得創作者獎勵吧`
-          : `${user.displayName} 的創作空間站`,
-        zh_hans: isShareOnboardingTasks
-          ? `${user.displayName} 已解锁新手奖赏，快点加入 Matters 获得创作者奖励吧`
-          : `${user.displayName} 的创作空间站`,
-        en: isShareOnboardingTasks
-          ? `${user.displayName} has unlocked new user reward, join Matters to get creator reward`
-          : `${user.displayName}'s creative space`,
-      }}
-      noSuffix={isShareOnboardingTasks}
-      description={user.info.description}
-      image={user.info.profileCover || IMAGE_LOGO_192.src}
-    />
-  )
-
   if (!edges || edges.length <= 0 || !pageInfo) {
-    return (
-      <>
-        <CustomHead />
-        <UserTabs articleCount={user.articles.totalCount} />
-        <EmptyArticle />
-      </>
-    )
+    return <EmptyArticle />
   }
 
   const articleEdges = edges.filter(
@@ -168,40 +127,34 @@ const UserArticles = () => {
   )
 
   return (
-    <>
-      <CustomHead />
-
-      <UserTabs articleCount={user.articles.totalCount} />
-
-      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-        <List>
-          {articleEdges.map(({ node, cursor }, i) => (
-            <List.Item key={cursor}>
-              <ArticleDigestFeed
-                article={node}
-                inUserArticles
-                onClick={() =>
-                  analytics.trackEvent('click_feed', {
-                    type: 'user_article',
-                    contentType: 'article',
-                    location: i,
-                    id: node.id,
-                  })
-                }
-                onClickAuthor={() => {
-                  analytics.trackEvent('click_feed', {
-                    type: 'user_article',
-                    contentType: 'user',
-                    location: i,
-                    id: node.author.id,
-                  })
-                }}
-              />
-            </List.Item>
-          ))}
-        </List>
-      </InfiniteScroll>
-    </>
+    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+      <List>
+        {articleEdges.map(({ node, cursor }, i) => (
+          <List.Item key={cursor}>
+            <ArticleDigestFeed
+              article={node}
+              inUserArticles
+              onClick={() =>
+                analytics.trackEvent('click_feed', {
+                  type: 'user_article',
+                  contentType: 'article',
+                  location: i,
+                  id: node.id,
+                })
+              }
+              onClickAuthor={() => {
+                analytics.trackEvent('click_feed', {
+                  type: 'user_article',
+                  contentType: 'user',
+                  location: i,
+                  id: node.author.id,
+                })
+              }}
+            />
+          </List.Item>
+        ))}
+      </List>
+    </InfiniteScroll>
   )
 }
 

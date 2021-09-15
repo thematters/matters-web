@@ -1,16 +1,16 @@
 import gql from 'graphql-tag'
 
 import Counts from '../Counts'
-import Price from '../Price'
+import Subscribe from '../Subscribe'
 import styles from './styles.css'
 
 import { FooterCirclePrivate } from './__generated__/FooterCirclePrivate'
 import { FooterCirclePublic } from './__generated__/FooterCirclePublic'
 
 export type FooterControls = {
-  hasPrice?: boolean
+  hasSubscribe?: boolean
 
-  onClickPrice?: () => void
+  onClickSubscribe?: () => void
 }
 
 export type FooterProps = {
@@ -23,27 +23,27 @@ const fragments = {
       fragment FooterCirclePublic on Circle {
         id
         ...CountsCircle
-        ...PriceCirclePublic
+        ...SubscribeButtonCirclePublic
       }
       ${Counts.fragments.circle}
-      ${Price.fragments.circle.public}
+      ${Subscribe.fragments.circle.public}
     `,
     private: gql`
       fragment FooterCirclePrivate on Circle {
         id
-        ...PriceCirclePrivate
+        ...SubscribeButtonCirclePrivate
       }
-      ${Price.fragments.circle.private}
+      ${Subscribe.fragments.circle.private}
     `,
   },
 }
 
-const Footer = ({ circle, hasPrice, onClickPrice }: FooterProps) => {
+const Footer = ({ circle, hasSubscribe, onClickSubscribe }: FooterProps) => {
   return (
     <footer>
       <Counts circle={circle} />
 
-      {hasPrice && <Price circle={circle} onClick={onClickPrice} />}
+      {hasSubscribe && <Subscribe circle={circle} onClick={onClickSubscribe} />}
 
       <style jsx>{styles}</style>
     </footer>

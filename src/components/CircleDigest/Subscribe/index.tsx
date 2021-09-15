@@ -12,11 +12,11 @@ import {
 import { ADD_TOAST, OPEN_SUBSCRIBE_CIRCLE_DIALOG } from '~/common/enums'
 import { toPath } from '~/common/utils'
 
-import { PriceCirclePrivate } from './__generated__/PriceCirclePrivate'
-import { PriceCirclePublic } from './__generated__/PriceCirclePublic'
+import { SubscribeButtonCirclePrivate } from './__generated__/SubscribeButtonCirclePrivate'
+import { SubscribeButtonCirclePublic } from './__generated__/SubscribeButtonCirclePublic'
 
-type PriceProps = {
-  circle: PriceCirclePublic & Partial<PriceCirclePrivate>
+type SubscribeProps = {
+  circle: SubscribeButtonCirclePublic & Partial<SubscribeButtonCirclePrivate>
 
   onClick?: () => void
 }
@@ -24,17 +24,15 @@ type PriceProps = {
 const fragments = {
   circle: {
     public: gql`
-      fragment PriceCirclePublic on Circle {
+      fragment SubscribeButtonCirclePublic on Circle {
         id
-        name
-        prices {
-          amount
-          currency
+        owner {
+          userName
         }
       }
     `,
     private: gql`
-      fragment PriceCirclePrivate on Circle {
+      fragment SubscribeButtonCirclePrivate on Circle {
         id
         isMember
         invitedBy {
@@ -47,18 +45,12 @@ const fragments = {
   },
 }
 
-const Price = ({ circle, onClick }: PriceProps) => {
+const Subscribe = ({ circle, onClick }: SubscribeProps) => {
   const viewer = useContext(ViewerContext)
-  const price = circle.prices && circle.prices[0]
-
-  if (!price) {
-    return null
-  }
-
   const isMember = circle.isMember
   const path = toPath({
-    page: 'circleDetail',
-    circle,
+    page: 'userProfile',
+    userName: circle.owner.userName || '',
   })
 
   if (isMember) {
@@ -70,7 +62,7 @@ const Price = ({ circle, onClick }: PriceProps) => {
         {...path}
       >
         <TextIcon weight="md" size="sm" color="white">
-          <Translate zh_hant="進入圍爐" zh_hans="进入围炉" />
+          <Translate zh_hant="回到主頁" zh_hans="回到主页" />
         </TextIcon>
       </Button>
     )
@@ -101,7 +93,7 @@ const Price = ({ circle, onClick }: PriceProps) => {
     <Button
       size={[null, '2rem']}
       spacing={[0, 'base']}
-      bgColor="gold"
+      bgColor="green"
       onClick={() => {
         if (!viewer.isAuthed) {
           showLoginToast()
@@ -116,12 +108,12 @@ const Price = ({ circle, onClick }: PriceProps) => {
       }}
     >
       <TextIcon weight="md" size="sm" color="white">
-        {price.amount} {price.currency} / <Translate id="month" />
+        <Translate zh_hant="訂閱圍爐" zh_hans="订阅围炉" en="Subscribe" />
       </TextIcon>
     </Button>
   )
 }
 
-Price.fragments = fragments
+Subscribe.fragments = fragments
 
-export default Price
+export default Subscribe

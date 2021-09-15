@@ -2,22 +2,10 @@
   @mixin flex-start-start;
 }
 
-header {
-  margin-left: var(--spacing-base);
-}
-
 .title {
   margin-bottom: var(--spacing-xx-tight);
   font-weight: var(--font-weight-medium);
   line-height: 1.5rem;
-}
-
-.text-size-md-s {
-  font-size: var(--font-size-md-s);
-}
-
-.text-size-xm {
-  font-size: var(--font-size-xm);
 }
 
 .description {

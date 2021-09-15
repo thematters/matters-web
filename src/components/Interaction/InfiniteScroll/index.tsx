@@ -1,6 +1,6 @@
 import { Waypoint } from 'react-waypoint'
 
-import { PullToRefresh, Spinner } from '~/components'
+import { EOF, PullToRefresh, Spinner } from '~/components'
 
 /**
  *  Usage:
@@ -59,6 +59,7 @@ export const InfiniteScroll: React.FC<Props> = ({
           {children}
           {hasNextPage && <Waypoint onEnter={loadMore} />}
           {hasNextPage && loader}
+          {!hasNextPage && <EOF />}
         </>
       </PullToRefresh>
     )
@@ -69,6 +70,7 @@ export const InfiniteScroll: React.FC<Props> = ({
       {children}
       {hasNextPage && <Waypoint onEnter={loadMore} />}
       {hasNextPage && loader}
+      {!hasNextPage && <EOF />}
     </>
   )
 }

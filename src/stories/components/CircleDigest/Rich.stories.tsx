@@ -22,14 +22,12 @@ export const Default = Template.bind({})
 Default.args = {
   circle: MOCK_CIRCLE,
   hasFooter: true,
-  hasPrice: true,
+  hasSubscribe: true,
 }
 
 export const Simple = Template.bind({})
 Simple.args = {
   circle: MOCK_CIRCLE,
-  avatarSize: 'xl',
   hasFooter: false,
-  hasPrice: false,
-  hasOwner: false,
+  hasSubscribe: false,
 }

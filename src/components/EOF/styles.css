@@ -1,0 +1,7 @@
+.eof {
+  padding: var(--spacing-base) var(--spacing-base) var(--spacing-loose);
+  font-size: var(--font-size-sm-s);
+  line-height: 1rem;
+  color: var(--color-grey);
+  text-align: center;
+}
