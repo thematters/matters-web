@@ -1,8 +1,7 @@
 import classNames from 'classnames'
-import Link from 'next/link'
 import React from 'react'
 
-import { Card, CardProps, CircleAvatar } from '~/components'
+import { Card, CardProps, UserDigest } from '~/components'
 
 import { toPath } from '~/common/utils'
 
@@ -17,10 +16,10 @@ export type CircleDigestMiniProps = {
 } & CardProps
 
 const Mini = ({ circle, ...cardProps }: CircleDigestMiniProps) => {
-  const { displayName, description } = circle
+  const { description, owner } = circle
   const path = toPath({
-    page: 'circleDetail',
-    circle,
+    page: 'userProfile',
+    userName: owner.userName || '',
   })
 
   const containerClasses = classNames({
@@ -30,17 +29,17 @@ const Mini = ({ circle, ...cardProps }: CircleDigestMiniProps) => {
   return (
     <Card {...path} spacing={[0, 0]} {...cardProps}>
       <section className={containerClasses}>
-        <Link {...path}>
-          <a className="avatar">
-            <CircleAvatar circle={circle} size="xl" />
-          </a>
-        </Link>
-
         <section className="content">
           <header>
-            <Link {...path}>
-              <a className="name">{displayName}</a>
-            </Link>
+            <UserDigest.Mini
+              user={owner}
+              avatarSize="sm"
+              textSize="md-s"
+              textWeight="md"
+              nameColor="black"
+              hasAvatar
+              hasDisplayName
+            />
 
             <section className="info">
               <Counts circle={circle} />

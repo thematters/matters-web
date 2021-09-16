@@ -38,9 +38,6 @@ const CircleFeatures = ({ circles, userName }: Props) => {
     userName,
   })
 
-  console.log(broadcastPath)
-  console.log(discussionPath)
-
   return (
     <section className="container">
       <Button

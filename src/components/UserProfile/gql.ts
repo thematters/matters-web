@@ -26,6 +26,14 @@ const fragments = {
           state
         }
         ownCircles {
+          id
+          broadcast(input: { first: 1 }) {
+            edges {
+              node {
+                content
+              }
+            }
+          }
           ...CircleWidgetCirclePublic
         }
         ...AvatarUser

@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { CircleAvatar } from '~/components/CircleAvatar'
+import UserDigestMini from '~/components/UserDigest/Mini'
 
 import Counts from '../Counts'
 
@@ -11,10 +11,12 @@ export const fragments = {
       name
       displayName
       description
-      ...AvatarCircle
+      owner {
+        ...UserDigestMiniUser
+      }
       ...CountsCircle
     }
-    ${CircleAvatar.fragments.circle}
+    ${UserDigestMini.fragments.user}
     ${Counts.fragments.circle}
   `,
 }
