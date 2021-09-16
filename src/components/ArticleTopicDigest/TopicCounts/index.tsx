@@ -16,32 +16,28 @@ type TopicCountsProps = {
 }
 
 const TopicCounts = ({ topic }: TopicCountsProps) => {
-  const hasChapter = topic.chapterCount > 0
-  const hasArticle = topic.articleCount > 0
+  const chapterCount = topic.chapterCount || 0
+  const articleCount = topic.articleCount || 0
 
   return (
     <section className="counts">
-      {hasChapter && (
-        <TextIcon icon={<IconChapter16 />} size="sm-s" spacing="xxtight">
-          <Translate
-            zh_hant={`${topic.chapterCount} 個章節`}
-            zh_hans={`${topic.chapterCount} 个章节`}
-            en={`${topic.chapterCount} chapters`}
-          />
-        </TextIcon>
-      )}
+      <TextIcon icon={<IconChapter16 />} size="sm-s" spacing="xxtight">
+        <Translate
+          zh_hant={`${chapterCount} 個章節`}
+          zh_hans={`${chapterCount} 个章节`}
+          en={`${chapterCount} chapters`}
+        />
+      </TextIcon>
 
-      {hasChapter && hasArticle && <IconDotDivider />}
+      <IconDotDivider />
 
-      {hasArticle && (
-        <TextIcon icon={<IconArticle16 />} size="sm-s" spacing="xxtight">
-          <Translate
-            zh_hant={`${topic.articleCount} 篇作品`}
-            zh_hans={`${topic.articleCount} 篇作品`}
-            en={`${topic.articleCount} articles`}
-          />
-        </TextIcon>
-      )}
+      <TextIcon icon={<IconArticle16 />} size="sm-s" spacing="xxtight">
+        <Translate
+          zh_hant={`${articleCount} 篇作品`}
+          zh_hans={`${articleCount} 篇作品`}
+          en={`${articleCount} articles`}
+        />
+      </TextIcon>
 
       <style jsx>{styles}</style>
     </section>

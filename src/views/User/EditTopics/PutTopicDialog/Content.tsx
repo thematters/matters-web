@@ -93,6 +93,7 @@ const PutTopicDialogContent: React.FC<FormProps> = ({
         const { data } = await putTopic({
           variables: {
             input: {
+              ...(topic ? { id: topic.id } : {}),
               ...(cover !== UNCHANGED_FIELD ? { cover } : {}),
               title,
               description,
@@ -104,7 +105,7 @@ const PutTopicDialogContent: React.FC<FormProps> = ({
         setSubmitting(false)
 
         // close dialog if topic is edited or creation is finished
-        if (isCreateStep2 && !isCreate) {
+        if (isCreateStep2 || !isCreate) {
           closeDialog()
         }
 

@@ -1,0 +1,11 @@
+header {
+  @mixin flex-center-space-between;
+
+  padding: var(--spacing-loose) var(--spacing-base);
+}
+
+h2 {
+  margin-bottom: var(--spacing-x-tight);
+  font-size: var(--font-size-lg);
+  line-height: 1.5rem;
+}

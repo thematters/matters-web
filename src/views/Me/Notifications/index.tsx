@@ -58,12 +58,12 @@ const BaseNotifications = () => {
       update: updateViewerUnreadNoticeCount,
     }
   )
-  const { data, loading, fetchMore, refetch } = useQuery<
-    MeNotifications,
-    { first: number; after?: number }
-  >(ME_NOTIFICATIONS, {
-    fetchPolicy: 'network-only',
-  })
+  const { data, loading, fetchMore, refetch } = useQuery<MeNotifications>(
+    ME_NOTIFICATIONS,
+    {
+      fetchPolicy: 'network-only',
+    }
+  )
 
   useEffect(() => {
     markAllNoticesAsRead()

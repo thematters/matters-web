@@ -1,7 +1,0 @@
-header {
-  @mixin flex-center-space-between;
-}
-
-h2 {
-  margin-bottom: var(--spacing-x-tight);
-}

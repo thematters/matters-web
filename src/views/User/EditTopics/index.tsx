@@ -16,26 +16,26 @@ import {
 
 import { mergeConnections, toPath, translate } from '~/common/utils'
 
-import { USER_TOPICS } from './gql'
+import { EDIT_TOPIC_TOPICS } from './gql'
 import PutTopicDialog from './PutTopicDialog'
 import styles from './styles.css'
 import TitleItem from './TitleItem'
 
 import {
-  UserTopics,
-  UserTopics_viewer_topics_edges_node as UserTopicsTopic,
-} from './__generated__/UserTopics'
+  EditTopicTopics,
+  EditTopicTopics_viewer_topics_edges_node as EditTopicTopicsTopic,
+} from './__generated__/EditTopicTopics'
 
 const BaseEditTopics = () => {
   const { getQuery } = useRoute()
   const userName = getQuery('name')
 
-  const { data, loading, fetchMore } = useQuery<
-    UserTopics,
-    { first: number; after?: number }
-  >(USER_TOPICS, {
-    fetchPolicy: 'network-only',
-  })
+  const { data, loading, fetchMore } = useQuery<EditTopicTopics>(
+    EDIT_TOPIC_TOPICS,
+    {
+      fetchPolicy: 'network-only',
+    }
+  )
 
   const connectionPath = 'viewer.topics'
   const { edges, pageInfo } = data?.viewer?.topics || {}
@@ -59,7 +59,7 @@ const BaseEditTopics = () => {
         }),
     })
 
-  const totalArticleCount = (node: UserTopicsTopic) => {
+  const totalArticleCount = (node: EditTopicTopicsTopic) => {
     const topicArticleCount = node.articleCount
     const chapterArticleCount =
       node.chapters

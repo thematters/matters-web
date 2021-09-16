@@ -1,10 +1,20 @@
 import { Empty, IconEmptyWarning72, Translate } from '~/components'
 
-export const EmptyArticle = () => (
+export const EmptyArticle = ({
+  description,
+}: {
+  description?: string | React.ReactNode
+}) => (
   <Empty
     icon={<IconEmptyWarning72 size="xxl" />}
     description={
-      <Translate zh_hant="還沒有創作" zh_hans="还没有创作" en="No articles." />
+      description || (
+        <Translate
+          zh_hant="還沒有創作"
+          zh_hans="还没有创作"
+          en="No articles."
+        />
+      )
     }
   />
 )
