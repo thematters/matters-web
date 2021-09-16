@@ -1,6 +1,6 @@
-import { Button, IconAdd16, TextIcon, Translate } from '~/components'
 import TopicCounts from '~/components/ArticleTopicDigest/TopicCounts'
 
+import AddButton from './AddButton'
 import { fragments } from './gql'
 import styles from './styles.css'
 
@@ -19,16 +19,7 @@ const TopicHead = ({ topic }: TopicHeadProps) => {
         <TopicCounts topic={topic} />
       </section>
 
-      <Button
-        borderColor="black"
-        spacing={[0, 'tight']}
-        size={[null, '2rem']}
-        borderWidth="sm"
-      >
-        <TextIcon icon={<IconAdd16 />} size="md-s" weight="md">
-          <Translate id="add" />
-        </TextIcon>
-      </Button>
+      <AddButton topic={topic} />
 
       <style jsx>{styles}</style>
     </header>

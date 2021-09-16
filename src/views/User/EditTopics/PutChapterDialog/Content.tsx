@@ -1,10 +1,9 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useRouter } from 'next/router'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 
 import {
-  CoverUploader,
   Dialog,
   Form,
   LanguageContext,
@@ -13,7 +12,6 @@ import {
   useRoute,
 } from '~/components'
 
-import { ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
 import {
   parseFormSubmitErrors,
   toPath,
@@ -22,47 +20,37 @@ import {
   validateTopicTitle,
 } from '~/common/utils'
 
-import IMAGE_COVER from '@/public/static/images/tag-cover.png'
+import { PUT_CHAPTER } from './gql'
 
-import { PUT_TOPIC } from './gql'
-
-import { PutTopic } from './__generated__/PutTopic'
-import { PutTopicDialogTopic } from './__generated__/PutTopicDialogTopic'
+import { PutChapter } from './__generated__/PutChapter'
+import { PutChapterDialogChapter } from './__generated__/PutChapterDialogChapter'
 
 interface FormProps {
-  topic?: PutTopicDialogTopic
+  topicId: string
+  chapter?: PutChapterDialogChapter
   closeDialog: () => void
 }
 
 interface FormValues {
-  cover: string | null
   title: string
   description: string
 }
 
-/**
- * To identify `cover` is changed since it may be `null`
- */
-const UNCHANGED_FIELD = 'UNCHANGED_FIELD'
-
-const PutTopicDialogContent: React.FC<FormProps> = ({
-  topic: initTopic,
+const PutChapterDialogContent: React.FC<FormProps> = ({
+  topicId,
+  chapter,
   closeDialog,
 }) => {
   const router = useRouter()
   const { getQuery } = useRoute()
   const userName = getQuery('name')
 
-  const [topic, setTopic] = useState(initTopic)
-  const [putTopic] = useMutation<PutTopic>(PUT_TOPIC, undefined, {
+  const [putChapter] = useMutation<PutChapter>(PUT_CHAPTER, undefined, {
     showToast: false,
   })
   const { lang } = useContext(LanguageContext)
 
-  const formId = 'put-topic-form'
-  const isCreate = !initTopic
-  const isCreateStep1 = isCreate && !topic
-  const isCreateStep2 = isCreate && topic
+  const formId = 'put-chapter-form'
 
   const {
     values,
@@ -73,12 +61,10 @@ const PutTopicDialogContent: React.FC<FormProps> = ({
     handleSubmit,
     isSubmitting,
     isValid,
-    setFieldValue,
   } = useFormik<FormValues>({
     initialValues: {
-      cover: UNCHANGED_FIELD,
-      title: topic?.title || '',
-      description: topic?.description || '',
+      title: chapter?.title || '',
+      description: chapter?.description || '',
     },
     validate: ({ title, description }) =>
       _pickBy({
@@ -86,43 +72,37 @@ const PutTopicDialogContent: React.FC<FormProps> = ({
         description: validateDescription(description, lang),
       }),
     onSubmit: async (
-      { cover, title, description },
+      { title, description },
       { setSubmitting, setFieldError }
     ) => {
       try {
-        const { data } = await putTopic({
+        const { data } = await putChapter({
           variables: {
             input: {
-              ...(topic ? { id: topic.id } : {}),
-              ...(cover !== UNCHANGED_FIELD ? { cover } : {}),
+              topic: topicId,
+              ...(chapter ? { id: chapter.id } : {}),
               title,
               description,
             },
           },
         })
-        const newTopic = data?.putTopic
+        const newChapter = data?.putChapter
 
         setSubmitting(false)
 
-        // close dialog if topic is edited or creation is finished
-        if (isCreateStep2 || !isCreate) {
-          closeDialog()
-        }
+        closeDialog()
 
-        // Set topic to continue next step of topic creation
-        if (isCreateStep1) {
-          setTopic(newTopic)
-        }
-
-        // redirect to detail page if topic creation is finished
-        if (isCreateStep2 && newTopic) {
+        if (!chapter && newChapter) {
           const path = toPath({
-            page: 'userEditTopicsTopic',
+            page: 'userEditTopicsTopicChapter',
             userName,
-            topicId: newTopic.id,
+            topicId,
+            chapterId: newChapter.id,
           })
           router.push(path.href)
         }
+
+        // TODO: refresh chapter
       } catch (error) {
         setSubmitting(false)
 
@@ -136,32 +116,17 @@ const PutTopicDialogContent: React.FC<FormProps> = ({
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
-      {(isCreateStep2 || !isCreate) && topic && (
-        <section className="cover-field">
-          <CoverUploader
-            assetType={ASSET_TYPE.topicCover}
-            cover={topic.cover}
-            fallbackCover={IMAGE_COVER.src}
-            entityType={ENTITY_TYPE.topic}
-            entityId={topic.id}
-            inEditor
-            type="topic"
-            onUpload={(assetId) => setFieldValue('cover', assetId)}
-          />
-        </section>
-      )}
-
       <Form.Input
         label={
-          <Translate zh_hant="主題名稱" zh_hans="主题名称" en="Topic Title" />
+          <Translate zh_hant="章節名稱" zh_hans="章节名称" en="Chapter Title" />
         }
         type="text"
         name="title"
         required
         placeholder={translate({
-          zh_hant: '輸入主題名稱',
-          zh_hans: '输入主题名称',
-          en: 'Enter topic title',
+          zh_hant: '輸入章節名稱',
+          zh_hans: '输入章节名称',
+          en: 'Enter chapter title',
           lang,
         })}
         hint={
@@ -180,17 +145,17 @@ const PutTopicDialogContent: React.FC<FormProps> = ({
       <Form.Textarea
         label={
           <Translate
-            zh_hant="主題描述"
-            zh_hans="主题描述"
-            en="Topic Description"
+            zh_hant="章節描述"
+            zh_hans="章节描述"
+            en="Chapter Description"
           />
         }
         name="description"
         required
         placeholder={translate({
-          zh_hant: '輸入主題描述',
-          zh_hans: '输入主题描述',
-          en: 'Enter topic description',
+          zh_hant: '輸入章節描述',
+          zh_hans: '输入章节描述',
+          en: 'Enter chapter description',
           lang,
         })}
         hint={<Translate id="hintDescription" />}
@@ -207,7 +172,7 @@ const PutTopicDialogContent: React.FC<FormProps> = ({
       type="submit"
       form={formId}
       disabled={!isValid || isSubmitting}
-      text={<Translate id={topic ? 'save' : 'create'} />}
+      text={<Translate id={chapter ? 'save' : 'create'} />}
       loading={isSubmitting}
     />
   )
@@ -215,7 +180,7 @@ const PutTopicDialogContent: React.FC<FormProps> = ({
   return (
     <>
       <Dialog.Header
-        title={topic ? 'editTopic' : 'createTopic'}
+        title={chapter ? 'editChapter' : 'createChapter'}
         closeDialog={closeDialog}
         rightButton={SubmitButton}
       />
@@ -225,4 +190,4 @@ const PutTopicDialogContent: React.FC<FormProps> = ({
   )
 }
 
-export default PutTopicDialogContent
+export default PutChapterDialogContent

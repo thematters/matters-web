@@ -58,8 +58,14 @@ type ToPathArgs =
     }
   | {
       page: 'userTopicDetail' | 'userEditTopicsTopic'
-      topicId: string
       userName: string
+      topicId: string
+    }
+  | {
+      page: 'userEditTopicsTopicChapter'
+      userName: string
+      topicId: string
+      chapterId: string
     }
   | {
       page: 'search'
@@ -154,6 +160,11 @@ export const toPath = (args: ToPathArgs): { href: string } => {
     case 'userEditTopicsTopic': {
       return {
         href: `/@${args.userName}/topics/edit/${args.topicId}`,
+      }
+    }
+    case 'userEditTopicsTopicChapter': {
+      return {
+        href: `/@${args.userName}/topics/edit/${args.topicId}/${args.chapterId}`,
       }
     }
     case 'search': {
