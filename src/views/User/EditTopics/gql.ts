@@ -20,6 +20,7 @@ export const USER_TOPICS = gql`
             chapters {
               id
               title
+              articleCount
             }
           }
         }

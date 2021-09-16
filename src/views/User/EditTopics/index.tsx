@@ -21,7 +21,10 @@ import PutTopicDialog from './PutTopicDialog'
 import styles from './styles.css'
 import TitleItem from './TitleItem'
 
-import { UserTopics } from './__generated__/UserTopics'
+import {
+  UserTopics,
+  UserTopics_viewer_topics_edges_node as UserTopicsTopic,
+} from './__generated__/UserTopics'
 
 const BaseEditTopics = () => {
   const { getQuery } = useRoute()
@@ -56,6 +59,15 @@ const BaseEditTopics = () => {
         }),
     })
 
+  const totalArticleCount = (node: UserTopicsTopic) => {
+    const topicArticleCount = node.articleCount
+    const chapterArticleCount =
+      node.chapters
+        ?.map((c) => c.articleCount)
+        .reduce((prev, curr) => prev + curr, 0) || 0
+    return topicArticleCount + chapterArticleCount
+  }
+
   return (
     <>
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
@@ -73,12 +85,20 @@ const BaseEditTopics = () => {
               >
                 <section className="topic-card">
                   <section className="topic">
-                    <TitleItem title={node.title} is="h3" />
+                    <TitleItem
+                      title={node.title}
+                      count={totalArticleCount(node)}
+                      is="h3"
+                    />
                   </section>
 
                   {node.chapters?.map((chapter) => (
                     <section className="chapter" key={chapter.id}>
-                      <TitleItem title={chapter.title} is="h4" />
+                      <TitleItem
+                        title={chapter.title}
+                        count={chapter.articleCount}
+                        is="h4"
+                      />
                     </section>
                   ))}
                 </section>

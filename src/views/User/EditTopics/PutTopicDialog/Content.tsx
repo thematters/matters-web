@@ -1,7 +1,7 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useRouter } from 'next/router'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 
 import {
   CoverUploader,
@@ -13,7 +13,7 @@ import {
   useRoute,
 } from '~/components'
 
-import { ADD_TOAST, ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
+import { ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
 import {
   parseFormSubmitErrors,
   toPath,
@@ -22,7 +22,7 @@ import {
   validateTopicTitle,
 } from '~/common/utils'
 
-import IMAGE_COVER from '@/public/static/images/profile-cover.png'
+import IMAGE_COVER from '@/public/static/images/tag-cover.png'
 
 import { PUT_TOPIC } from './gql'
 
@@ -45,18 +45,24 @@ interface FormValues {
  */
 const UNCHANGED_FIELD = 'UNCHANGED_FIELD'
 
-const PutTopicDialogContent: React.FC<FormProps> = ({ topic, closeDialog }) => {
+const PutTopicDialogContent: React.FC<FormProps> = ({
+  topic: initTopic,
+  closeDialog,
+}) => {
   const router = useRouter()
   const { getQuery } = useRoute()
   const userName = getQuery('name')
 
+  const [topic, setTopic] = useState(initTopic)
   const [putTopic] = useMutation<PutTopic>(PUT_TOPIC, undefined, {
     showToast: false,
   })
   const { lang } = useContext(LanguageContext)
 
-  const formId = 'edit-profile-form'
-  const isEdit = !!topic
+  const formId = 'put-topic-form'
+  const isCreate = !initTopic
+  const isCreateStep1 = isCreate && !topic
+  const isCreateStep2 = isCreate && topic
 
   const {
     values,
@@ -93,29 +99,26 @@ const PutTopicDialogContent: React.FC<FormProps> = ({ topic, closeDialog }) => {
             },
           },
         })
-        const topicId = data?.putTopic.id
-
-        window.dispatchEvent(
-          new CustomEvent(ADD_TOAST, {
-            detail: {
-              color: 'green',
-              content: (
-                <Translate
-                  id={isEdit ? 'successEditTopic' : 'successAddTopic'}
-                />
-              ),
-            },
-          })
-        )
+        const newTopic = data?.putTopic
 
         setSubmitting(false)
-        closeDialog()
 
-        if (topicId) {
+        // close dialog if topic is edited or creation is finished
+        if (isCreateStep2 && !isCreate) {
+          closeDialog()
+        }
+
+        // Set topic to continue next step of topic creation
+        if (isCreateStep1) {
+          setTopic(newTopic)
+        }
+
+        // redirect to detail page if topic creation is finished
+        if (isCreateStep2 && newTopic) {
           const path = toPath({
             page: 'userEditTopicsTopic',
             userName,
-            topicId,
+            topicId: newTopic.id,
           })
           router.push(path.href)
         }
@@ -139,17 +142,20 @@ const PutTopicDialogContent: React.FC<FormProps> = ({ topic, closeDialog }) => {
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
-      <section className="cover-field">
-        <CoverUploader
-          assetType={ASSET_TYPE.topicCover}
-          cover={topic?.cover}
-          fallbackCover={IMAGE_COVER.src}
-          entityType={ENTITY_TYPE.topic}
-          inEditor
-          type="topic"
-          onUpload={(assetId) => setFieldValue('cover', assetId)}
-        />
-      </section>
+      {(isCreateStep2 || !isCreate) && topic && (
+        <section className="cover-field">
+          <CoverUploader
+            assetType={ASSET_TYPE.topicCover}
+            cover={topic.cover}
+            fallbackCover={IMAGE_COVER.src}
+            entityType={ENTITY_TYPE.topic}
+            entityId={topic.id}
+            inEditor
+            type="topic"
+            onUpload={(assetId) => setFieldValue('cover', assetId)}
+          />
+        </section>
+      )}
 
       <Form.Input
         label={
@@ -206,7 +212,7 @@ const PutTopicDialogContent: React.FC<FormProps> = ({ topic, closeDialog }) => {
       type="submit"
       form={formId}
       disabled={!isValid || isSubmitting}
-      text={<Translate id="save" />}
+      text={<Translate id={topic ? 'save' : 'create'} />}
       loading={isSubmitting}
     />
   )
@@ -214,7 +220,7 @@ const PutTopicDialogContent: React.FC<FormProps> = ({ topic, closeDialog }) => {
   return (
     <>
       <Dialog.Header
-        title={isEdit ? 'editTopic' : 'addTopic'}
+        title={topic ? 'editTopic' : 'createTopic'}
         closeDialog={closeDialog}
         rightButton={SubmitButton}
       />
