@@ -1,7 +1,14 @@
-import { Dialog, Translate, useDialogSwitch, useMutation } from '~/components'
+import {
+  Dialog,
+  Translate,
+  useDialogSwitch,
+  useMutation,
+  useRoute,
+} from '~/components'
 import DELETE_TOPICS from '~/components/GQL/mutations/deleteTopics'
 
 import { ADD_TOAST } from '~/common/enums'
+import { toPath } from '~/common/utils'
 
 import { DeleteTopics } from '~/components/GQL/mutations/__generated__/DeleteTopics'
 
@@ -12,6 +19,8 @@ interface DeleteTopicDialogProps {
 
 const DeleteTopicDialog = ({ topicIds, children }: DeleteTopicDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
+  const { router, getQuery } = useRoute()
+  const userName = getQuery('name')
 
   const [deleteTopics] = useMutation<DeleteTopics>(DELETE_TOPICS, {
     variables: { ids: topicIds },
@@ -34,6 +43,12 @@ const DeleteTopicDialog = ({ topicIds, children }: DeleteTopicDialogProps) => {
         },
       })
     )
+
+    const path = toPath({
+      page: 'userEditTopics',
+      userName,
+    })
+    router.push(path.href)
   }
 
   return (

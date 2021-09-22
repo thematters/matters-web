@@ -9,9 +9,13 @@ import {
   LanguageContext,
   Layout,
   Spinner,
+  useEventListener,
+  usePullToRefresh,
+  useRoute,
 } from '~/components'
 
-import { mergeConnections, translate } from '~/common/utils'
+import { REFETCH_TOPIC } from '~/common/enums'
+import { mergeConnections, toPath, translate } from '~/common/utils'
 
 import TopicList from './ContentList/TopicList'
 import PutTopicDialog from './Dialogs/PutTopicDialog'
@@ -20,13 +24,16 @@ import { EDIT_TOPIC_TOPICS } from './gql'
 import { EditTopicTopics } from './__generated__/EditTopicTopics'
 
 const BaseEditTopics = () => {
-  const { data, loading, fetchMore } = useQuery<EditTopicTopics>(
+  const { data, loading, fetchMore, refetch } = useQuery<EditTopicTopics>(
     EDIT_TOPIC_TOPICS,
     { fetchPolicy: 'network-only' }
   )
 
   const connectionPath = 'viewer.topics'
   const { edges, pageInfo } = data?.viewer?.topics || {}
+
+  useEventListener(REFETCH_TOPIC, refetch)
+  usePullToRefresh.Handler(refetch)
 
   if (loading) {
     return <Spinner />
@@ -56,11 +63,18 @@ const BaseEditTopics = () => {
 
 const EditTopics = () => {
   const { lang } = useContext(LanguageContext)
+  const { getQuery } = useRoute()
+  const userName = getQuery('name')
+
+  const userPath = toPath({
+    page: 'userProfile',
+    userName,
+  })
 
   return (
     <Layout.Main bgColor="grey-lighter">
       <Layout.Header
-        left={<Layout.Header.BackButton />}
+        left={<Layout.Header.BackButton {...userPath} />}
         right={
           <>
             <Layout.Header.Title id="editTopics" />

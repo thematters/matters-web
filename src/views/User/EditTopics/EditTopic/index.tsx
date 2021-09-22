@@ -7,8 +7,13 @@ import {
   Spinner,
   Throw404,
   Translate,
+  useEventListener,
+  usePullToRefresh,
   useRoute,
 } from '~/components'
+
+import { REFETCH_TOPIC } from '~/common/enums'
+import { toPath } from '~/common/utils'
 
 import ArticleList from '../ContentList/ArticleList'
 import ChapterList from '../ContentList/ChapterList'
@@ -20,16 +25,19 @@ import TopicHead from './TopicHead'
 import { EditTopicTopicDetail } from './__generated__/EditTopicTopicDetail'
 
 const EditTopicsTopic = () => {
-  // const { lang } = useContext(LanguageContext)
   const { getQuery } = useRoute()
+  const userName = getQuery('name')
   const id = getQuery('topicId')
 
-  const { data, loading } = useQuery<EditTopicTopicDetail>(
+  const { data, loading, refetch } = useQuery<EditTopicTopicDetail>(
     EDIT_TOPIC_TOPIC_DETAIL,
     { fetchPolicy: 'network-only', variables: { id } }
   )
 
   const topic = data?.node?.__typename === 'Topic' ? data.node : null
+
+  useEventListener(REFETCH_TOPIC, refetch)
+  usePullToRefresh.Handler(refetch)
 
   if (loading) {
     return (
@@ -47,10 +55,15 @@ const EditTopicsTopic = () => {
     )
   }
 
+  const editTopicsPath = toPath({
+    page: 'userEditTopics',
+    userName,
+  })
+
   const TopicLayout: React.FC = ({ children }) => (
     <Layout.Main bgColor="grey-lighter">
       <Layout.Header
-        left={<Layout.Header.BackButton />}
+        left={<Layout.Header.BackButton {...editTopicsPath} />}
         right={
           <>
             <Layout.Header.Title id="topic" />

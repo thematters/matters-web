@@ -13,7 +13,7 @@ import {
   useRoute,
 } from '~/components'
 
-import { ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
+import { ASSET_TYPE, ENTITY_TYPE, REFETCH_TOPIC } from '~/common/enums'
 import {
   parseFormSubmitErrors,
   toPath,
@@ -103,6 +103,8 @@ const PutTopicDialogContent: React.FC<FormProps> = ({
         const newTopic = data?.putTopic
 
         setSubmitting(false)
+
+        window.dispatchEvent(new CustomEvent(REFETCH_TOPIC, {}))
 
         // close dialog if topic is edited or creation is finished
         if (isCreateStep2 || !isCreate) {

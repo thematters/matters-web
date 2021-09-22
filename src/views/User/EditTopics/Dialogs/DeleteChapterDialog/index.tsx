@@ -1,6 +1,13 @@
-import { Dialog, Translate, useDialogSwitch, useMutation } from '~/components'
+import {
+  Dialog,
+  Translate,
+  useDialogSwitch,
+  useMutation,
+  useRoute,
+} from '~/components'
 
 import { ADD_TOAST } from '~/common/enums'
+import { toPath } from '~/common/utils'
 
 import { DELETE_CHAPTER, fragments } from './gql'
 
@@ -17,11 +24,13 @@ const DeleteChapterDialog = ({
   children,
 }: DeleteChapterDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
+  const { router, getQuery } = useRoute()
+  const userName = getQuery('name')
 
   const topicId = chapter.topic.id
-  const newChapterIds = (chapter.topic.chapters || []).filter(
-    (c) => c.id !== chapter.id
-  )
+  const newChapterIds = (chapter.topic.chapters || [])
+    .filter((c) => c.id !== chapter.id)
+    .map((c) => c.id)
   const [deleteChapter] = useMutation<DeleteChapter>(DELETE_CHAPTER, {
     variables: { id: topicId, chapters: newChapterIds },
   })
@@ -43,6 +52,13 @@ const DeleteChapterDialog = ({
         },
       })
     )
+
+    const path = toPath({
+      page: 'userEditTopicsTopic',
+      userName,
+      topicId,
+    })
+    router.push(path.href)
   }
 
   return (

@@ -16,6 +16,9 @@ export const REFETCH_CIRCLE_DETAIL_ARTICLES = 'refetchCircleDetailArticles'
 export const REFETCH_CIRCLE_DETAIL = 'refetchCircleDetail'
 export const REFETCH_CIRCLE_PENDING_INVITES = 'refetchCirclePendingInvites'
 
+// Topic
+export const REFETCH_TOPIC = 'refetchTopic'
+
 // Donators
 export const REFETCH_DONATORS = 'refetchDonators'
 

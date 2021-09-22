@@ -15,7 +15,7 @@ import {
 import { SearchSelectDialog } from '~/components/Dialogs/SearchSelectDialog'
 import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
 
-import { ADD_TOAST } from '~/common/enums'
+import { ADD_TOAST, REFETCH_TOPIC } from '~/common/enums'
 import { translate } from '~/common/utils'
 
 import { ADD_CHAPTER_ARTICLES, fragments } from './gql'
@@ -106,13 +106,7 @@ const AddButton = ({ chapter }: AddButtonProps) => {
       })
     )
 
-    // window.dispatchEvent(
-    //   new CustomEvent(REFETCH_TOPIC_DETAIL, {
-    //     detail: {
-    //       event: 'add',
-    //     },
-    //   })
-    // )
+    window.dispatchEvent(new CustomEvent(REFETCH_TOPIC, {}))
   }
 
   /**

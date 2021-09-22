@@ -12,6 +12,7 @@ import {
   useRoute,
 } from '~/components'
 
+import { REFETCH_TOPIC } from '~/common/enums'
 import {
   parseFormSubmitErrors,
   toPath,
@@ -102,7 +103,7 @@ const PutChapterDialogContent: React.FC<FormProps> = ({
           router.push(path.href)
         }
 
-        // TODO: refresh chapter
+        window.dispatchEvent(new CustomEvent(REFETCH_TOPIC, {}))
       } catch (error) {
         setSubmitting(false)
 
