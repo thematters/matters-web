@@ -13,6 +13,6 @@ export const fragments = {
       ...AddButtonTopic
     }
     ${TopicCounts.fragments.topic}
-    ${AddButton.fragments}
+    ${AddButton.fragments.topic}
   `,
 }

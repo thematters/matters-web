@@ -11,11 +11,13 @@ export const PUT_TOPIC = gql`
   }
 `
 
-export const fragments = gql`
-  fragment PutTopicDialogTopic on Topic {
-    id
-    title
-    description
-    cover
-  }
-`
+export const fragments = {
+  topic: gql`
+    fragment PutTopicDialogTopic on Topic {
+      id
+      title
+      description
+      cover
+    }
+  `,
+}

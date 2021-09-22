@@ -8,14 +8,16 @@ export const ADD_TOPIC_ARTICLES = gql`
   }
 `
 
-export const fragments = gql`
-  fragment AddButtonTopic on Topic {
-    id
-    articles {
+export const fragments = {
+  topic: gql`
+    fragment AddButtonTopic on Topic {
       id
+      articles {
+        id
+      }
+      chapters {
+        id
+      }
     }
-    chapters {
-      id
-    }
-  }
-`
+  `,
+}

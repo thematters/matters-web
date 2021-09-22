@@ -10,26 +10,26 @@ import {
   useRoute,
 } from '~/components'
 
+import ChapterHead from './ChapterHead'
 import DropdownActions from './DropdownActions'
-import { EDIT_TOPIC_TOPIC_DETAIL } from './gql'
-import TopicHead from './TopicHead'
+import { EDIT_TOPIC_CHAPTER_DETAIL } from './gql'
 
-import { EditTopicTopicDetail } from './__generated__/EditTopicTopicDetail'
+import { EditTopicChapterDetail } from './__generated__/EditTopicChapterDetail'
 
-const EditTopicsTopic = () => {
+const EditTopicsChapter = () => {
   // const { lang } = useContext(LanguageContext)
   const { getQuery } = useRoute()
-  const id = getQuery('topicId')
+  const id = getQuery('chapterId')
 
-  const { data, loading } = useQuery<EditTopicTopicDetail>(
-    EDIT_TOPIC_TOPIC_DETAIL,
+  const { data, loading } = useQuery<EditTopicChapterDetail>(
+    EDIT_TOPIC_CHAPTER_DETAIL,
     {
       fetchPolicy: 'network-only',
       variables: { id },
     }
   )
 
-  const topic = data?.node?.__typename === 'Topic' ? data.node : null
+  const chapter = data?.node?.__typename === 'Chapter' ? data.node : null
 
   if (loading) {
     return (
@@ -39,7 +39,7 @@ const EditTopicsTopic = () => {
     )
   }
 
-  if (!topic) {
+  if (!chapter) {
     return (
       <Layout.Main bgColor="grey-lighter">
         <Throw404 />
@@ -47,7 +47,7 @@ const EditTopicsTopic = () => {
     )
   }
 
-  const hasContents = topic.chapterCount > 0 || topic.chapterCount > 0
+  const hasContents = chapter.articleCount > 0
 
   return (
     <Layout.Main bgColor="grey-lighter">
@@ -55,16 +55,16 @@ const EditTopicsTopic = () => {
         left={<Layout.Header.BackButton />}
         right={
           <>
-            <Layout.Header.Title id="topic" />
+            <Layout.Header.Title id="chapter" />
 
-            <DropdownActions topic={topic} />
+            <DropdownActions chapter={chapter} />
           </>
         }
       />
 
-      <Head title={{ id: 'topic' }} />
+      <Head title={{ id: 'chapter' }} />
 
-      <TopicHead topic={topic} />
+      <ChapterHead chapter={chapter} />
 
       {!hasContents && (
         <EmptyArticle
@@ -77,9 +77,9 @@ const EditTopicsTopic = () => {
               />
               <br />
               <Translate
-                zh_hant="點擊＋新增，添加作品和章節豐富主題"
-                zh_hans="点击＋新增，添加作品和章节丰富主题"
-                en="Click + to add chapter or article"
+                zh_hant="點擊＋新增，添加作品豐富主題"
+                zh_hans="点击＋新增，添加作品丰富主题"
+                en="Click + to add article"
               />
             </>
           }
@@ -89,4 +89,4 @@ const EditTopicsTopic = () => {
   )
 }
 
-export default EditTopicsTopic
+export default EditTopicsChapter

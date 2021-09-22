@@ -18,6 +18,7 @@ export const EDIT_TOPIC_TOPIC_DETAIL = gql`
         chapters {
           id
           title
+          articleCount
           articles {
             id
             title
@@ -29,5 +30,5 @@ export const EDIT_TOPIC_TOPIC_DETAIL = gql`
     }
   }
   ${TopicHead.fragments.topic}
-  ${PutTopicDialog.fragments}
+  ${PutTopicDialog.fragments.topic}
 `
