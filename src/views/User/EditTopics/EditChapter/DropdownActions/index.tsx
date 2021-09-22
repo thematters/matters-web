@@ -16,8 +16,8 @@ import {
 
 import { translate } from '~/common/utils'
 
-import PutChapterDialog from '../../PutChapterDialog'
-import DeleteChapterDialog from './DeleteChapterDialog'
+import DeleteChapterDialog from '../../Dialogs/DeleteChapterDialog'
+import PutChapterDialog from '../../Dialogs/PutChapterDialog'
 import { fragments } from './gql'
 
 import { DropdownActionsChapter } from './__generated__/DropdownActionsChapter'

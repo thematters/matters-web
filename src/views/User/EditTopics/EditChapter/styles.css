@@ -1,0 +1,3 @@
+.articles {
+  @mixin shadow-border-top-grey;
+}

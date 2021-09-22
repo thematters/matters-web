@@ -4,7 +4,7 @@ import { IconArticle16, IconChapter16, IconLock24 } from '~/components'
 
 import styles from './styles.css'
 
-type TitleItemProps = {
+export type ContentListItemProps = {
   title: React.ReactNode | string
   count?: number
   type?: 'chapter' | 'article'
@@ -12,7 +12,7 @@ type TitleItemProps = {
   is?: 'h3' | 'h4'
 }
 
-const TitleItem: React.FC<TitleItemProps> = ({
+const ContentListItem: React.FC<ContentListItemProps> = ({
   title,
   count,
   type,
@@ -50,4 +50,4 @@ const TitleItem: React.FC<TitleItemProps> = ({
   )
 }
 
-export default TitleItem
+export default ContentListItem

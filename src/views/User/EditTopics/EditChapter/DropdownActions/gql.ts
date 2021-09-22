@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
-import PutChapterDialog from '../../PutChapterDialog'
-import DeleteChapterDialog from './DeleteChapterDialog'
+import DeleteChapterDialog from '../../Dialogs/DeleteChapterDialog'
+import PutChapterDialog from '../../Dialogs/PutChapterDialog'
 
 export const fragments = {
   chapter: gql`

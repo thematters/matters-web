@@ -1,3 +1,8 @@
+.articles,
 .chapters {
-  margin-top: var(--spacing-base);
+  @mixin shadow-border-top-grey;
+}
+
+.chapters {
+  margin-top: var(--spacing-loose);
 }

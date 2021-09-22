@@ -19,7 +19,7 @@ import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
 import { ADD_TOAST } from '~/common/enums'
 import { translate } from '~/common/utils'
 
-import PutChapterDialog from '../../../PutChapterDialog'
+import PutChapterDialog from '../../../Dialogs/PutChapterDialog'
 import { ADD_TOPIC_ARTICLES, fragments } from './gql'
 
 import { AddButtonTopic } from './__generated__/AddButtonTopic'

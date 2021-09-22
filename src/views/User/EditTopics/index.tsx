@@ -2,39 +2,27 @@ import { useQuery } from '@apollo/react-hooks'
 import { useContext } from 'react'
 
 import {
-  Card,
   EmptyTopic,
   Head,
   IconAdd16,
   InfiniteScroll,
   LanguageContext,
   Layout,
-  List,
   Spinner,
-  useRoute,
 } from '~/components'
 
-import { mergeConnections, toPath, translate } from '~/common/utils'
+import { mergeConnections, translate } from '~/common/utils'
 
+import TopicList from './ContentList/TopicList'
+import PutTopicDialog from './Dialogs/PutTopicDialog'
 import { EDIT_TOPIC_TOPICS } from './gql'
-import PutTopicDialog from './PutTopicDialog'
-import styles from './styles.css'
-import TitleItem from './TitleItem'
 
-import {
-  EditTopicTopics,
-  EditTopicTopics_viewer_topics_edges_node as EditTopicTopicsTopic,
-} from './__generated__/EditTopicTopics'
+import { EditTopicTopics } from './__generated__/EditTopicTopics'
 
 const BaseEditTopics = () => {
-  const { getQuery } = useRoute()
-  const userName = getQuery('name')
-
   const { data, loading, fetchMore } = useQuery<EditTopicTopics>(
     EDIT_TOPIC_TOPICS,
-    {
-      fetchPolicy: 'network-only',
-    }
+    { fetchPolicy: 'network-only' }
   )
 
   const connectionPath = 'viewer.topics'
@@ -59,57 +47,10 @@ const BaseEditTopics = () => {
         }),
     })
 
-  const totalArticleCount = (node: EditTopicTopicsTopic) => {
-    const topicArticleCount = node.articleCount
-    const chapterArticleCount =
-      node.chapters
-        ?.map((c) => c.articleCount)
-        .reduce((prev, curr) => prev + curr, 0) || 0
-    return topicArticleCount + chapterArticleCount
-  }
-
   return (
-    <>
-      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-        <List>
-          {edges.map(({ node, cursor }) => (
-            <List.Item key={cursor}>
-              <Card
-                {...toPath({
-                  page: 'userEditTopicsTopic',
-                  userName,
-                  topicId: node.id,
-                })}
-                spacing={['base', 'base']}
-                bgColor="white"
-              >
-                <section className="topic-card">
-                  <section className="topic">
-                    <TitleItem
-                      title={node.title}
-                      count={totalArticleCount(node)}
-                      is="h3"
-                    />
-                  </section>
-
-                  {node.chapters?.map((chapter) => (
-                    <section className="chapter" key={chapter.id}>
-                      <TitleItem
-                        title={chapter.title}
-                        count={chapter.articleCount}
-                        is="h4"
-                      />
-                    </section>
-                  ))}
-                </section>
-              </Card>
-            </List.Item>
-          ))}
-        </List>
-
-        <style jsx>{styles}</style>
-      </InfiniteScroll>
-    </>
+    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+      <TopicList topics={edges.map((edge) => edge.node)} />
+    </InfiniteScroll>
   )
 }
 

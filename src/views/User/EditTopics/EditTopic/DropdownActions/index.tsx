@@ -16,10 +16,10 @@ import {
 
 import { translate } from '~/common/utils'
 
-import DeleteTopicsDialog from '../../DeleteTopicsDialog'
-import PutTopicDialog from '../../PutTopicDialog'
+import DeleteTopicsDialog from '../../Dialogs/DeleteTopicsDialog'
+import PutTopicDialog from '../../Dialogs/PutTopicDialog'
 
-import { PutTopicDialogTopic } from '../../PutTopicDialog/__generated__/PutTopicDialogTopic'
+import { PutTopicDialogTopic } from '../../Dialogs/PutTopicDialog/__generated__/PutTopicDialogTopic'
 
 interface DropdownActionsProps {
   topic: PutTopicDialogTopic

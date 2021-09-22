@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 
-import PutChapterDialog from '../PutChapterDialog'
+import ArticleList from '../ContentList/ArticleList'
+import PutChapterDialog from '../Dialogs/PutChapterDialog'
 import ChapterHead from './ChapterHead'
 import DropdownActions from './DropdownActions'
 
@@ -13,7 +14,7 @@ export const EDIT_TOPIC_CHAPTER_DETAIL = gql`
         articleCount
         articles {
           id
-          title
+          ...TopicArticleListArticle
         }
         ...ChapterHeadChapter
         ...PutChapterDialogChapter
@@ -21,6 +22,7 @@ export const EDIT_TOPIC_CHAPTER_DETAIL = gql`
       }
     }
   }
+  ${ArticleList.fragments.article}
   ${ChapterHead.fragments.chapter}
   ${PutChapterDialog.fragments.chapter}
   ${DropdownActions.fragments.chapter}

@@ -1,0 +1,7 @@
+.chapter {
+  padding-top: var(--spacing-base);
+
+  & + .chapter {
+    padding-top: var(--spacing-tight);
+  }
+}

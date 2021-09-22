@@ -1,5 +1,7 @@
 import gql from 'graphql-tag'
 
+import TopicList from './ContentList/TopicList'
+
 export const EDIT_TOPIC_TOPICS = gql`
   query EditTopicTopics($after: String) {
     viewer {
@@ -14,17 +16,11 @@ export const EDIT_TOPIC_TOPICS = gql`
         edges {
           cursor
           node {
-            id
-            title
-            articleCount
-            chapters {
-              id
-              title
-              articleCount
-            }
+            ...TopicListTopic
           }
         }
       }
     }
   }
+  ${TopicList.fragments.topic}
 `

@@ -1,20 +1,17 @@
 import { useQuery } from '@apollo/react-hooks'
 
 import {
-  Card,
   EmptyArticle,
   Head,
   Layout,
-  List,
   Spinner,
   Throw404,
   Translate,
   useRoute,
 } from '~/components'
 
-import { toPath } from '~/common/utils'
-
-import TitleItem from '../TitleItem'
+import ArticleList from '../ContentList/ArticleList'
+import ChapterList from '../ContentList/ChapterList'
 import DropdownActions from './DropdownActions'
 import { EDIT_TOPIC_TOPIC_DETAIL } from './gql'
 import styles from './styles.css'
@@ -25,15 +22,11 @@ import { EditTopicTopicDetail } from './__generated__/EditTopicTopicDetail'
 const EditTopicsTopic = () => {
   // const { lang } = useContext(LanguageContext)
   const { getQuery } = useRoute()
-  const userName = getQuery('name')
   const id = getQuery('topicId')
 
   const { data, loading } = useQuery<EditTopicTopicDetail>(
     EDIT_TOPIC_TOPIC_DETAIL,
-    {
-      fetchPolicy: 'network-only',
-      variables: { id },
-    }
+    { fetchPolicy: 'network-only', variables: { id } }
   )
 
   const topic = data?.node?.__typename === 'Topic' ? data.node : null
@@ -54,8 +47,6 @@ const EditTopicsTopic = () => {
     )
   }
 
-  const hasContents = topic.chapterCount > 0 || topic.articleCount > 0
-
   const TopicLayout: React.FC = ({ children }) => (
     <Layout.Main bgColor="grey-lighter">
       <Layout.Header
@@ -63,7 +54,6 @@ const EditTopicsTopic = () => {
         right={
           <>
             <Layout.Header.Title id="topic" />
-
             <DropdownActions topic={topic} />
           </>
         }
@@ -77,7 +67,9 @@ const EditTopicsTopic = () => {
     </Layout.Main>
   )
 
-  if (!hasContents) {
+  const hasContent = topic.chapterCount > 0 || topic.articleCount > 0
+
+  if (!hasContent) {
     return (
       <TopicLayout>
         <EmptyArticle
@@ -105,48 +97,17 @@ const EditTopicsTopic = () => {
     <TopicLayout>
       {topic.articles && topic.articles.length > 0 && (
         <section className="articles">
-          <List>
-            {topic.articles.map((article) => (
-              <List.Item key={article.id}>
-                <Card spacing={['base', 'base']} bgColor="white">
-                  <TitleItem title={article.title} type="article" />
-                </Card>
-              </List.Item>
-            ))}
-          </List>
+          <ArticleList articles={topic.articles} />
         </section>
       )}
 
       {topic.chapters && topic.chapters.length > 0 && (
         <section className="chapters">
-          <List>
-            {topic.chapters.map((chapter) => (
-              <List.Item key={chapter.id}>
-                <Card
-                  {...toPath({
-                    page: 'userEditTopicsTopicChapter',
-                    userName,
-                    topicId: topic.id,
-                    chapterId: chapter.id,
-                  })}
-                  spacing={['base', 'base']}
-                  bgColor="white"
-                >
-                  <section className="topic-card">
-                    <TitleItem
-                      title={chapter.title}
-                      type="chapter"
-                      count={chapter.articleCount}
-                    />
-                  </section>
-                </Card>
-              </List.Item>
-            ))}
-          </List>
-
-          <style jsx>{styles}</style>
+          <ChapterList chapters={topic.chapters} />
         </section>
       )}
+
+      <style jsx>{styles}</style>
     </TopicLayout>
   )
 }
