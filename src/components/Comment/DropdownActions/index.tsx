@@ -9,13 +9,15 @@ import {
   CommentFormType,
   DropdownDialog,
   IconMore16,
+  LanguageContext,
   Menu,
   Translate,
   ViewerContext,
 } from '~/components'
 import { BlockUser } from '~/components/BlockUser'
 
-import { ADD_TOAST, TEXT } from '~/common/enums'
+import { ADD_TOAST } from '~/common/enums'
+import { translate } from '~/common/utils'
 
 import CollapseComment from './CollapseComment'
 import DeleteComment from './DeleteComment'
@@ -141,6 +143,8 @@ const BaseDropdownActions = ({
   openBlockUserDialog,
   openCollapseCommentDialog,
 }: BaseDropdownActionsProps) => {
+  const { lang } = useContext(LanguageContext)
+
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
     <Menu width={isInDropdown ? 'sm' : undefined}>
       {hasPin && <PinButton comment={comment} type={type} />}
@@ -176,7 +180,7 @@ const BaseDropdownActions = ({
         <Button
           spacing={['xtight', 'xtight']}
           bgActiveColor={inCard ? 'grey-lighter-active' : 'grey-lighter'}
-          aria-label={TEXT.zh_hant.moreActions}
+          aria-label={translate({ id: 'moreActions', lang })}
           aria-haspopup="true"
           onClick={openDialog}
           ref={ref}

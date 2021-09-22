@@ -1,8 +1,16 @@
 import classNames from 'classnames'
+import { useContext } from 'react'
 
-import { Button, IconEdit16, TextIcon, Translate } from '~/components'
+import {
+  Button,
+  IconEdit16,
+  LanguageContext,
+  TextIcon,
+  Translate,
+} from '~/components'
 
-import { TEXT, TextId } from '~/common/enums'
+import { TextId } from '~/common/enums'
+import { translate } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -20,6 +28,8 @@ const Box: React.FC<BoxProps> = ({
   disabled,
   children,
 }) => {
+  const { lang } = useContext(LanguageContext)
+
   const boxClasses = classNames({
     box: true,
     'u-area-disable': disabled,
@@ -37,7 +47,7 @@ const Box: React.FC<BoxProps> = ({
             onClick={onClick}
             bgActiveColor="grey-lighter"
             spacing={['xtight', 'xtight']}
-            aira-label={TEXT.zh_hant[title]}
+            aria-label={translate({ id: title, lang })}
           >
             <IconEdit16 color="grey" />
           </Button>

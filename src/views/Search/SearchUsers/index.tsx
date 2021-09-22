@@ -123,6 +123,7 @@ const SearchUser = () => {
                         type: 'search_user',
                         contentType: 'user',
                         location: i,
+                        id: node.id,
                       })
                     }
                   />

@@ -1,15 +1,19 @@
+import { useContext } from 'react'
+
 import {
   Button,
   ButtonProps,
   IconBack32,
   IconClose32,
   IconSpinner16,
+  LanguageContext,
   TextIcon,
   Translate,
 } from '~/components'
 import { useResponsive } from '~/components/Hook'
 
-import { TEXT, TextId } from '~/common/enums'
+import { TextId } from '~/common/enums'
+import { translate } from '~/common/utils'
 
 interface CloseButtonProps {
   closeDialog: () => void
@@ -17,12 +21,14 @@ interface CloseButtonProps {
 }
 
 export const CloseButton = ({ closeDialog, textId }: CloseButtonProps) => {
+  const { lang } = useContext(LanguageContext)
+
   const isSmallUp = useResponsive('sm-up')
 
   return (
     <Button
       onClick={closeDialog}
-      aria-label={TEXT.zh_hant[textId || 'cancel']}
+      aria-label={translate({ id: textId || 'cancel', lang })}
       bgColor={isSmallUp ? 'green-lighter' : undefined}
       size={isSmallUp ? ['2rem', '2rem'] : undefined}
     >
@@ -39,11 +45,13 @@ export const CloseButton = ({ closeDialog, textId }: CloseButtonProps) => {
 type BackButton = ButtonProps
 
 export const BackButton: React.FC<BackButton> = (props) => {
+  const { lang } = useContext(LanguageContext)
+
   const isSmallUp = useResponsive('sm-up')
 
   return (
     <Button
-      aria-label={TEXT.zh_hant.previousStep}
+      aria-label={translate({ id: 'previousStep', lang })}
       bgColor={isSmallUp ? 'green-lighter' : undefined}
       size={isSmallUp ? ['2rem', '2rem'] : undefined}
       {...props}

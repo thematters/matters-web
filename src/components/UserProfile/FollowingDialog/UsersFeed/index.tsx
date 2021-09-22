@@ -138,6 +138,7 @@ const UsersFeed = () => {
                   type: 'followee',
                   contentType: 'user',
                   location: i,
+                  id: node.id,
                 })
               }
             />

@@ -1,10 +1,12 @@
 import classNames from 'classnames'
+import { useContext } from 'react'
 
 import {
   IconCollection24,
   IconHashTag24,
   IconImage24,
   IconSettings24,
+  LanguageContext,
   Layout,
   TextIcon,
   Translate,
@@ -18,7 +20,7 @@ import {
 } from '~/components/Editor'
 import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
 
-import { TEXT } from '~/common/enums'
+import { translate } from '~/common/utils'
 
 import SetCover from '../SetCover'
 import AccessDialog from './AccessDialog'
@@ -67,6 +69,8 @@ const BottomBar: React.FC<BottomBarProps> = ({
   saving,
   disabled,
 }) => {
+  const { lang } = useContext(LanguageContext)
+
   const bottomBarClasses = classNames({
     'bottom-bar': true,
     'u-area-disable': disabled,
@@ -167,7 +171,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
             <AccessDialog {...accessProps}>
               {({ openDialog }) => (
                 <button
-                  aria-label={TEXT.zh_hant.articleManagement}
+                  aria-label={translate({ id: 'articleManagement', lang })}
                   aria-haspopup="true"
                   onClick={openDialog}
                 >

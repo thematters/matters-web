@@ -102,6 +102,7 @@ const Authors = () => {
                       type: 'authors',
                       contentType: 'user',
                       location: (edgeIndex + 1) * (nodeIndex + 1) - 1,
+                      id: node.id,
                     })
                   }
                 />

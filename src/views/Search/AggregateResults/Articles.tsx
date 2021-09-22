@@ -63,6 +63,7 @@ const AggregateArticleResults = () => {
                       type: 'search',
                       contentType: 'article',
                       location: i,
+                      id: node.id,
                     })
                   }
                 >

@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 import _isEmpty from 'lodash/isEmpty'
 import _pickBy from 'lodash/pickBy'
+import { useContext } from 'react'
 
 import {
   Button,
@@ -8,13 +9,14 @@ import {
   IconEdit16,
   IconMore32,
   IconSettings32,
+  LanguageContext,
   Menu,
   TextIcon,
   Translate,
 } from '~/components'
 import { BlockUser } from '~/components/BlockUser'
 
-import { TEXT } from '~/common/enums'
+import { translate } from '~/common/utils'
 
 import { EditProfileDialog } from './EditProfileDialog'
 
@@ -67,6 +69,8 @@ const BaseDropdownActions = ({
   openEditProfileDialog,
   openBlockUserDialog,
 }: BaseDropdownActionsProps) => {
+  const { lang } = useContext(LanguageContext)
+
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
     <Menu width={isInDropdown ? 'sm' : undefined}>
       {hasEditProfile && (
@@ -97,7 +101,7 @@ const BaseDropdownActions = ({
       {({ openDialog, ref }) => (
         <Button
           bgColor="half-black"
-          aria-label={TEXT.zh_hant.moreActions}
+          aria-label={translate({ id: 'moreActions', lang })}
           aria-haspopup="true"
           onClick={openDialog}
           ref={ref}

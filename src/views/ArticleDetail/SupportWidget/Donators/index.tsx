@@ -1,7 +1,10 @@
-import { DonatorsDialog } from '~/components'
+import { useContext } from 'react'
+
+import { DonatorsDialog, LanguageContext } from '~/components'
 import { Avatar } from '~/components/Avatar'
 
-import { IMAGE_PIXEL, TEXT } from '~/common/enums'
+import { IMAGE_PIXEL } from '~/common/enums'
+import { translate } from '~/common/utils'
 
 import { fragments } from './gql'
 import styles from './styles.css'
@@ -13,6 +16,8 @@ interface DonatorsProps {
 }
 
 const Donators = ({ article }: DonatorsProps) => {
+  const { lang } = useContext(LanguageContext)
+
   const edges = article.donations.edges
   const donatorsCount = article.donations.totalCount
   const donators = (
@@ -26,7 +31,7 @@ const Donators = ({ article }: DonatorsProps) => {
           type="button"
           onClick={openDialog}
           disabled={donatorsCount <= 0}
-          aria-label={TEXT.zh_hant.viewDonators}
+          aria-label={translate({ id: 'viewDonators', lang })}
           aria-haspopup="true"
         >
           <section className="avatar-list">

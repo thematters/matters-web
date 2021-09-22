@@ -127,6 +127,7 @@ const SearchArticles = () => {
                         type: 'search_article',
                         contentType: 'article',
                         location: i,
+                        id: node.id,
                       })
                     }
                     onClickAuthor={() => {
@@ -134,6 +135,7 @@ const SearchArticles = () => {
                         type: 'search_tag',
                         contentType: 'user',
                         location: i,
+                        id: node.author.id,
                       })
                     }}
                   />

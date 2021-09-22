@@ -1,8 +1,14 @@
 import gql from 'graphql-tag'
+import { useContext } from 'react'
 
-import { IconArticle16, IconUser16, TextIcon } from '~/components'
+import {
+  IconArticle16,
+  IconUser16,
+  LanguageContext,
+  TextIcon,
+} from '~/components'
 
-import { numAbbr } from '~/common/utils'
+import { numAbbr, translate } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -27,6 +33,8 @@ const fragments = {
 }
 
 const Counts = ({ circle }: CountsProps) => {
+  const { lang } = useContext(LanguageContext)
+
   const memberCount = circle.members.totalCount
   const articleCount = circle.works.totalCount
 
@@ -37,7 +45,12 @@ const Counts = ({ circle }: CountsProps) => {
         color="grey"
         weight="md"
         size="sm"
-        aira-label={`${memberCount} 個成員`}
+        aria-label={translate({
+          zh_hant: `${memberCount} 個成員`,
+          zh_hans: `${memberCount} 个成员`,
+          en: `${memberCount} members`,
+          lang,
+        })}
       >
         {numAbbr(memberCount)}
       </TextIcon>
@@ -47,7 +60,12 @@ const Counts = ({ circle }: CountsProps) => {
         color="grey"
         weight="md"
         size="sm"
-        aira-label={`${articleCount} 篇作品`}
+        aria-label={translate({
+          zh_hant: `${articleCount} 篇作品`,
+          zh_hans: `${articleCount} 篇作品`,
+          en: `${articleCount} articles`,
+          lang,
+        })}
       >
         {numAbbr(articleCount)}
       </TextIcon>

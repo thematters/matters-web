@@ -1,12 +1,19 @@
-import { useRef } from 'react'
+import { useContext, useRef } from 'react'
 
-import { Button, CopyToClipboard, IconCopy16 } from '~/components'
+import {
+  Button,
+  CopyToClipboard,
+  IconCopy16,
+  LanguageContext,
+} from '~/components'
 
-import { TEXT } from '~/common/enums'
+import { translate } from '~/common/utils'
 
 import styles from './styles.css'
 
 const Copy = ({ link }: { link: string }) => {
+  const { lang } = useContext(LanguageContext)
+
   const inputRef: React.RefObject<any> | null = useRef(null)
 
   return (
@@ -15,7 +22,7 @@ const Copy = ({ link }: { link: string }) => {
         <Button
           spacing={['xtight', 'xtight']}
           bgActiveColor="grey-lighter"
-          aira-label={TEXT.zh_hant.copy}
+          aria-label={translate({ id: 'copy', lang })}
         >
           <IconCopy16 color="grey" />
         </Button>

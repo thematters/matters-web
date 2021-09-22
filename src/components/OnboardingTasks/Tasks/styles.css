@@ -1,11 +1,5 @@
-ul {
-  & :global(li) {
-    @mixin border-top-grey;
-  }
-
-  & :global(li:last-child) {
-    @mixin border-bottom-grey;
-  }
+.task {
+  margin-top: var(--spacing-loose);
 }
 
 .allDone {

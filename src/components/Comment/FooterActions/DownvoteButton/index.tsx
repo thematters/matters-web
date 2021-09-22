@@ -1,9 +1,11 @@
 import gql from 'graphql-tag'
+import { useContext } from 'react'
 
 import {
   Button,
   IconDownVote16,
   IconDownVoted16,
+  LanguageContext,
   TextIcon,
   useMutation,
 } from '~/components'
@@ -12,7 +14,7 @@ import {
   VOTE_COMMENT,
 } from '~/components/GQL/mutations/voteComment'
 
-import { numAbbr } from '~/common/utils'
+import { numAbbr, translate } from '~/common/utils'
 
 import { UnvoteComment } from '~/components/GQL/mutations/__generated__/UnvoteComment'
 import { VoteComment } from '~/components/GQL/mutations/__generated__/VoteComment'
@@ -51,6 +53,8 @@ const DownvoteButton = ({
   disabled,
   inCard,
 }: DownvoteButtonProps) => {
+  const { lang } = useContext(LanguageContext)
+
   const [unvote] = useMutation<UnvoteComment>(UNVOTE_COMMENT, {
     variables: { id: comment.id },
     optimisticResponse: {
@@ -86,7 +90,12 @@ const DownvoteButton = ({
           onClick ? onClick() : unvote()
         }}
         disabled={disabled}
-        aria-label="取消點踩"
+        aria-label={translate({
+          zh_hant: '取消點踩',
+          zh_hans: '取消点踩',
+          en: 'Undo Downvote',
+          lang,
+        })}
       >
         <TextIcon icon={<IconDownVoted16 />} color="green" weight="md">
           {comment.downvotes > 0 ? numAbbr(comment.downvotes) : undefined}
@@ -103,7 +112,12 @@ const DownvoteButton = ({
         onClick ? onClick() : downvote()
       }}
       disabled={disabled}
-      aria-label="點踩"
+      aria-label={translate({
+        zh_hant: '點踩',
+        zh_hans: '点踩',
+        en: 'Downvote',
+        lang,
+      })}
     >
       <TextIcon icon={<IconDownVote16 color="grey" />} color="grey" weight="md">
         {comment.downvotes > 0 ? numAbbr(comment.downvotes) : undefined}

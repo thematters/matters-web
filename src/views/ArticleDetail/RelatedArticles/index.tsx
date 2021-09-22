@@ -51,18 +51,20 @@ const RelatedArticles = ({ article, inSidebar }: RelatedArticlesProps) => {
     inSidebar,
   })
 
-  const onClick = (i: number) => () =>
+  const onClick = (i: number, id: string) => () =>
     analytics.trackEvent('click_feed', {
       type: 'related_article',
       contentType: 'article',
       location: i,
+      id,
     })
 
-  const onClickAuthor = (i: number) => () => {
+  const onClickAuthor = (i: number, id: string) => () => {
     analytics.trackEvent('click_feed', {
       type: 'related_article',
       contentType: 'user',
       location: i,
+      id,
     })
   }
 
@@ -84,8 +86,8 @@ const RelatedArticles = ({ article, inSidebar }: RelatedArticlesProps) => {
             <Slides.Item key={cursor}>
               <ArticleDigestCard
                 article={node}
-                onClick={onClick(i)}
-                onClickAuthor={onClickAuthor(i)}
+                onClick={onClick(i, node.id)}
+                onClickAuthor={onClickAuthor(i, node.author.id)}
               />
             </Slides.Item>
           ))}
@@ -106,8 +108,8 @@ const RelatedArticles = ({ article, inSidebar }: RelatedArticlesProps) => {
               article={node}
               titleTextSize="sm"
               hasCover
-              onClick={onClick(i)}
-              onClickAuthor={onClickAuthor(i)}
+              onClick={onClick(i, node.id)}
+              onClickAuthor={onClickAuthor(i, node.author.id)}
               bgActiveColor="grey-lighter"
             />
           </li>

@@ -12,6 +12,7 @@ import {
   FingerprintDialog,
   IconMore16,
   IconSize,
+  LanguageContext,
   Menu,
   ShareDialog,
   Translate,
@@ -19,7 +20,8 @@ import {
   ViewerContext,
 } from '~/components'
 
-import { ADD_TOAST, TEXT } from '~/common/enums'
+import { ADD_TOAST } from '~/common/enums'
+import { translate } from '~/common/utils'
 
 import AppreciatorsButton from './AppreciatorsButton'
 import ArchiveArticle from './ArchiveArticle'
@@ -112,6 +114,8 @@ const BaseDropdownActions = ({
   openDonatorsDialog,
   openArchiveDialog,
 }: BaseDropdownActionsProps) => {
+  const { lang } = useContext(LanguageContext)
+
   const hasPublic =
     hasShare ||
     hasAppreciators ||
@@ -167,7 +171,7 @@ const BaseDropdownActions = ({
         <Button
           spacing={['xtight', 'xtight']}
           bgActiveColor={inCard ? 'grey-lighter-active' : 'grey-lighter'}
-          aria-label={TEXT.zh_hant.moreActions}
+          aria-label={translate({ id: 'moreActions', lang })}
           aria-haspopup="true"
           onClick={openDialog}
           ref={ref}

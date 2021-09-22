@@ -1,7 +1,9 @@
 import { useContext } from 'react'
 import { RemoveScroll } from 'react-remove-scroll'
 
-import { ViewerContext, withIcon } from '~/components'
+import { LanguageContext, ViewerContext, withIcon } from '~/components'
+
+import { translate } from '~/common/utils'
 
 import { ReactComponent as IconSplashScreenLogo } from '@/public/static/icons/splash-scren-logo.svg'
 
@@ -9,6 +11,7 @@ import styles from './styles.css'
 
 const SplashScreen = () => {
   const viewer = useContext(ViewerContext)
+  const { lang } = useContext(LanguageContext)
 
   if (viewer.privateFetched) {
     return null
@@ -16,7 +19,15 @@ const SplashScreen = () => {
 
   return (
     <RemoveScroll>
-      <div className="splash-screen" aira-label="Matters Logo, Splash Screen">
+      <div
+        className="splash-screen"
+        aria-label={translate({
+          zh_hant: '啟動頁',
+          zh_hans: '启动页',
+          en: 'Splash Screen',
+          lang,
+        })}
+      >
         {withIcon(IconSplashScreenLogo)({})}
 
         <style jsx>{styles}</style>

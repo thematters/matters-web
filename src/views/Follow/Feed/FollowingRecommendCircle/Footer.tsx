@@ -1,14 +1,16 @@
 import gql from 'graphql-tag'
+import { useContext } from 'react'
 
 import {
   IconArticle16,
   IconPrice12,
   IconUser16,
+  LanguageContext,
   TextIcon,
   Translate,
 } from '~/components'
 
-import { numAbbr } from '~/common/utils'
+import { numAbbr, translate } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -52,6 +54,7 @@ const fragments = {
 }
 
 const Footer = ({ circle }: Props) => {
+  const { lang } = useContext(LanguageContext)
   const { members, works, prices } = circle
 
   const price = prices ? prices[0] : null
@@ -64,7 +67,12 @@ const Footer = ({ circle }: Props) => {
           color="grey"
           weight="md"
           size="sm"
-          aira-label={`${members.totalCount} 個成員`}
+          aira-label={translate({
+            zh_hant: `${members.totalCount} 個成員`,
+            zh_hans: `${members.totalCount} 个成员`,
+            en: `${members.totalCount} members`,
+            lang,
+          })}
         >
           {numAbbr(members.totalCount)}
         </TextIcon>
@@ -74,7 +82,12 @@ const Footer = ({ circle }: Props) => {
           color="grey"
           weight="md"
           size="sm"
-          aira-label={`${works.totalCount} 篇作品`}
+          aira-label={translate({
+            zh_hant: `${works.totalCount} 篇作品`,
+            zh_hans: `${works.totalCount} 篇作品`,
+            en: `${works.totalCount} articles`,
+            lang,
+          })}
         >
           {numAbbr(works.totalCount)}
         </TextIcon>

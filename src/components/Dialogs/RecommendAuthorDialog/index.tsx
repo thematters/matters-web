@@ -39,11 +39,16 @@ const BaseRecommendAuthorDialog = ({ children }: Props) => {
           <Dialog.Message align="left">
             <p className="message">
               <Translate
-                zh_hant="「追蹤」你感興趣的創作者。你將看到創作者發佈的作品、評論，以及他們支持的優質創作。開啟你的訂閱時間線，追蹤至少"
-                zh_hans="「追踪」你感兴趣的创作者。你将看到创作者发布的作品、评论，以及他们支持的优质创作。开启你的订阅时间线，追踪至少"
+                zh_hant="追蹤至少"
+                zh_hans="追踪至少"
+                en="Follow at least"
               />
               <span> 5 </span>
-              <Translate zh_hant="位創作者。" zh_hans="位创作者。" />
+              <Translate
+                zh_hant="位感興趣的創作者，以開啟個性化的訂閱時間線，並收到創作者最新發佈的作品和動態。"
+                zh_hans="位感兴趣的创作者，以开启个性化的订阅时间线，并收到创作者最新发布的作品和动态。"
+                en="creators to enable your personal feed and receive updates."
+              />
             </p>
           </Dialog.Message>
 

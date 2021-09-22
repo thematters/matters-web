@@ -100,6 +100,7 @@ const BaseTags = () => {
                   type: 'all_tags',
                   contentType: 'tag',
                   location: i,
+                  id: node.id,
                 })
               }
             >
