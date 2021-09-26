@@ -334,6 +334,19 @@ const ArticleDetail = () => {
         keywords={(article.tags || []).map(({ content }) => content)}
         image={article.cover}
         paymentPointer={paymentPointer}
+        jsonLdData={{
+          '@context': 'https://schema.org',
+          '@type': 'Article',
+          headline: summary,
+          image: article.cover,
+          datePublished: article.createdAt /* "2015-02-05T08:00:00+08:00", */,
+          dateModified: article.revisedAt /* "2015-02-05T09:20:00+08:00", */,
+          author: {
+            '@type': 'Person',
+            name: article.author.displayName,
+            url: `https://matters.news/@${article.author.userName}`,
+          },
+        }}
       />
 
       <PullToRefresh>
