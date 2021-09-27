@@ -99,7 +99,7 @@ jobs:
       # === `feature/user-profile` branch ===
       - name: Build (user-profile)
         if: github.base_ref == 'feature/user-profile'
-        run: cp .env.prod .env && npm run build
+        run: cp .env.dev .env && npm run build
 
       - name: Setup AWS
         if: github.base_ref == 'develop' || github.base_ref == 'stage' || github.base_ref == 'master' || github.base_ref == 'feature/user-profile'
@@ -183,9 +183,9 @@ jobs:
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          application_name: matters-prod
-          environment_name: matters-client-web-prod-new
-          version_label: matters-web-prod-new-${{ hashFiles('deploy.zip') }}
+          application_name: matters-stage
+          environment_name: matters-client-web-develop-user-profile
+          version_label: matters-web-develop-user-profile-${{ hashFiles('deploy.zip') }}
           version_description: ${{ github.SHA }}
           region: ap-southeast-1
           deployment_package: deploy.zip
