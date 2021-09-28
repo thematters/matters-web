@@ -89,6 +89,11 @@ const CONNECT_SRC = [
   'ipfs.stibarc.com/ipfs/',
   'ipfs.best-practice.se/ipfs/',
   'ipfs.2read.net/ipfs/',
+
+  // Web3
+  'https://registry.walletconnect.org/',
+  'wss://*.bridge.walletconnect.org/',
+  'https://*.infura.io/',
 ].join(' ')
 
 const FRAME_SRC = [
