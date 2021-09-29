@@ -182,6 +182,7 @@ export const Head: React.FC<HeadProps> = (props) => {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(props.jsonLdData) }}
+          key="ld-json-data"
         />
       )}
     </NextHead>

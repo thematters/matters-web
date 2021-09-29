@@ -1,4 +1,5 @@
 import { useLazyQuery, useQuery } from '@apollo/react-hooks'
+import formatISO from 'date-fns/formatISO'
 import jump from 'jump.js'
 import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
@@ -310,6 +311,8 @@ const ArticleDetail = () => {
     )
   }
 
+  const keywords = (article.tags || []).map(({ content }) => content)
+
   /**
    * Render
    */
@@ -331,20 +334,26 @@ const ArticleDetail = () => {
         title={`${article.title} - ${article?.author.displayName} (@${article.author.userName})`}
         noSuffix
         description={article.summary}
-        keywords={(article.tags || []).map(({ content }) => content)}
+        keywords={keywords}
         image={article.cover}
         paymentPointer={paymentPointer}
         jsonLdData={{
           '@context': 'https://schema.org',
           '@type': 'Article',
           headline: summary,
-          image: article.cover,
-          datePublished: article.createdAt /* "2015-02-05T08:00:00+08:00", */,
-          dateModified: article.revisedAt /* "2015-02-05T09:20:00+08:00", */,
+          /* wordCount: ... */
+          keywords,
+          datePublished: formatISO(
+            Date.parse(article.createdAt)
+          ) /* "2015-02-05T08:00:00+08:00", */,
+          dateModified: article.revisedAt
+            ? formatISO(Date.parse(article.revisedAt))
+            : undefined /* "2015-02-05T09:20:00+08:00", */,
+          image: article.cover || undefined,
           author: {
             '@type': 'Person',
             name: article.author.displayName,
-            url: `https://matters.news/@${article.author.userName}`,
+            url: `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/@${article.author.userName}`,
           },
         }}
       />
