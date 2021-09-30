@@ -21,6 +21,7 @@ interface HeadProps {
   image?: string | null
   noSuffix?: boolean
   paymentPointer?: string
+  jsonLdData?: object | null
 }
 
 export const Head: React.FC<HeadProps> = (props) => {
@@ -176,6 +177,14 @@ export const Head: React.FC<HeadProps> = (props) => {
       {/* DNS */}
       <link rel="dns-prefetch" href="https://www.gstatic.com" />
       <link rel="dns-prefetch" href="https://sentry.matters.one" />
+
+      {props.jsonLdData && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(props.jsonLdData) }}
+          key="ld-json-data"
+        />
+      )}
     </NextHead>
   )
 }
