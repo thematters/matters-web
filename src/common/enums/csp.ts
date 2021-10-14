@@ -39,6 +39,9 @@ const IMG_SRC = [
   'data:',
   process.env.NEXT_PUBLIC_ASSET_DOMAIN,
 
+  // for some old articles were using this s3 urls directly
+  'matters-server-production.s3-ap-southeast-1.amazonaws.com',
+
   // GA
   'www.google-analytics.com',
 ].join(' ')

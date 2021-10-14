@@ -19,7 +19,8 @@ import {
 import { URL_QS } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 
-import IMAGE_LOGO_192 from '@/public/static/icon-192x192.png'
+import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
+import PROFILE_COVER_DEFAULT from '@/public/static/images/profile-cover.png'
 
 import UserTabs from '../UserTabs'
 import {
@@ -194,7 +195,20 @@ const UserArticles = () => {
       }}
       noSuffix={isShareOnboardingTasks}
       description={user.info.description}
-      image={user.info.profileCover || IMAGE_LOGO_192.src}
+      image={
+        user.info.profileCover ||
+        `//${process.env.NEXT_PUBLIC_SITE_DOMAIN}${PROFILE_COVER_DEFAULT.src}`
+      }
+      jsonLdData={{
+        '@context': 'https://schema.org',
+        '@type': 'Person',
+        name: user.displayName,
+        description: user.info.description,
+        image:
+          user.avatar ||
+          `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}${ICON_AVATAR_DEFAULT.src}`,
+        url: `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/@${user.userName}`,
+      }}
     />
   )
 
