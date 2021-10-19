@@ -5,7 +5,9 @@ import { ArticleDigestFeed } from '~/components'
 const fragment = gql`
   fragment ArticlesUser on User {
     id
+    userName
     displayName
+    avatar
     info {
       description
       profileCover
