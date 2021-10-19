@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import { useContext } from 'react'
 
 import {
   Button,
@@ -12,9 +13,10 @@ import {
 
 import { ADD_TOAST } from '~/common/enums'
 
+import { DraftContext } from '../../../views/Me/Drafts/context'
+
 import { DeleteButtonDraft } from './__generated__/DeleteButtonDraft'
 import { DeleteDraft } from './__generated__/DeleteDraft'
-import { ViewerDrafts } from './__generated__/ViewerDrafts'
 
 interface DeleteButtonProps {
   draft: DeleteButtonDraft
@@ -25,26 +27,6 @@ const DELETE_DRAFT = gql`
     deleteDraft(input: { id: $id })
   }
 `
-
-const ME_DRADTS = gql`
-  query ViewerDrafts {
-    viewer {
-      id
-      drafts(input: { first: null }) @connection(key: "viewerDrafts") {
-        edges {
-          cursor
-          node {
-            id
-            title
-            slug
-            updatedAt
-          }
-        }
-      }
-    }
-  }
-`
-
 const fragments = {
   draft: gql`
     fragment DeleteButtonDraft on Draft {
@@ -55,36 +37,14 @@ const fragments = {
 
 const DeleteButton = ({ draft }: DeleteButtonProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(false)
+  const { edges, setEdges } = useContext(DraftContext)
 
   const [deleteDraft] = useMutation<DeleteDraft>(DELETE_DRAFT, {
     variables: { id: draft.id },
-    update: (cache) => {
-      try {
-        const data = cache.readQuery<ViewerDrafts>({ query: ME_DRADTS })
+    update: () => {
+      const filteredEdges = edges.filter(({ node }) => node.id !== draft.id)
 
-        if (!data?.viewer?.drafts.edges) {
-          return
-        }
-
-        const edges = data.viewer.drafts.edges.filter(
-          ({ node }) => node.id !== draft.id
-        )
-
-        cache.writeQuery({
-          query: ME_DRADTS,
-          data: {
-            viewer: {
-              ...data.viewer,
-              drafts: {
-                ...data.viewer.drafts,
-                edges,
-              },
-            },
-          },
-        })
-      } catch (e) {
-        console.error(e)
-      }
+      setEdges(filteredEdges)
     },
   })
 

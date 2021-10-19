@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
+import { useState } from 'react'
 
 import {
   DraftDigest,
@@ -14,7 +15,12 @@ import {
 
 import { mergeConnections } from '~/common/utils'
 
-import { MeDraftFeed } from './__generated__/MeDraftFeed'
+import { DraftContext } from './context'
+
+import {
+  MeDraftFeed,
+  MeDraftFeed_viewer_drafts_edges,
+} from './__generated__/MeDraftFeed'
 
 const ME_DRAFTS_FEED = gql`
   query MeDraftFeed($after: String) {
@@ -39,11 +45,14 @@ const ME_DRAFTS_FEED = gql`
   ${DraftDigest.Feed.fragments.draft}
 `
 
-const BaseMeDrafts = () => {
+export const BaseMeDrafts = () => {
+  const [edges, setEdges] = useState<MeDraftFeed_viewer_drafts_edges[]>([])
+
   const { data, loading, error, fetchMore, refetch } = useQuery<MeDraftFeed>(
     ME_DRAFTS_FEED,
     {
       fetchPolicy: 'no-cache',
+      onCompleted: () => setEdges(data?.viewer?.drafts.edges ?? []),
     }
   )
 
@@ -56,9 +65,9 @@ const BaseMeDrafts = () => {
   }
 
   const connectionPath = 'viewer.drafts'
-  const { edges, pageInfo } = data?.viewer?.drafts || {}
+  const { pageInfo } = data?.viewer?.drafts || {}
 
-  if (!edges || edges.length <= 0 || !pageInfo) {
+  if (edges.length <= 0 || !pageInfo) {
     return <EmptyDraft />
   }
 
@@ -74,19 +83,21 @@ const BaseMeDrafts = () => {
     })
 
   return (
-    <InfiniteScroll
-      hasNextPage={pageInfo.hasNextPage}
-      loadMore={loadMore}
-      pullToRefresh={refetch}
-    >
-      <List>
-        {edges.map(({ node, cursor }) => (
-          <List.Item key={cursor}>
-            <DraftDigest.Feed draft={node} />
-          </List.Item>
-        ))}
-      </List>
-    </InfiniteScroll>
+    <DraftContext.Provider value={{ edges, setEdges }}>
+      <InfiniteScroll
+        hasNextPage={pageInfo.hasNextPage}
+        loadMore={loadMore}
+        pullToRefresh={refetch}
+      >
+        <List>
+          {edges.map(({ node, cursor }) => (
+            <List.Item key={cursor}>
+              <DraftDigest.Feed draft={node} />
+            </List.Item>
+          ))}
+        </List>
+      </InfiniteScroll>
+    </DraftContext.Provider>
   )
 }
 
