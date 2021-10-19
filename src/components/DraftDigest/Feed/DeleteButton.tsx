@@ -13,7 +13,7 @@ import {
 
 import { ADD_TOAST } from '~/common/enums'
 
-import { DraftContext } from '../../../views/Me/Drafts/context'
+import { DraftsContext } from '../../../views/Me/Drafts'
 
 import { DeleteButtonDraft } from './__generated__/DeleteButtonDraft'
 import { DeleteDraft } from './__generated__/DeleteDraft'
@@ -37,12 +37,14 @@ const fragments = {
 
 const DeleteButton = ({ draft }: DeleteButtonProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(false)
-  const { edges, setEdges } = useContext(DraftContext)
+  const [edges, setEdges] = useContext(DraftsContext)
 
   const [deleteDraft] = useMutation<DeleteDraft>(DELETE_DRAFT, {
     variables: { id: draft.id },
     update: () => {
-      const filteredEdges = edges.filter(({ node }) => node.id !== draft.id)
+      const filteredEdges = (edges ?? []).filter(
+        ({ node }) => node.id !== draft.id
+      )
 
       setEdges(filteredEdges)
     },
