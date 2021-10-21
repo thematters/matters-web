@@ -181,10 +181,30 @@ export const Head: React.FC<HeadProps> = (props) => {
       {props.jsonLdData && (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(props.jsonLdData) }}
+          dangerouslySetInnerHTML={{
+            __html: sanitize(JSON.stringify(props.jsonLdData)),
+          }}
           key="ld-json-data"
         />
       )}
     </NextHead>
+  )
+}
+
+// https://redux.js.org/usage/server-rendering/#security-considerations
+// from https://github.com/yahoo/serialize-javascript/blob/main/index.js#L19-L31
+// except the '/'
+const ESCAPED_CHARS: Record<string, string> = {
+  '<': '\\u003C',
+  '>': '\\u003E',
+  // '/'     : '\\u002F',
+  '\u2028': '\\u2028',
+  '\u2029': '\\u2029',
+}
+
+function sanitize(str: string): string {
+  return str.replace(
+    /[<>\u2028\u2029]/g,
+    (unsafeChar) => ESCAPED_CHARS[unsafeChar] || ''
   )
 }
