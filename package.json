@@ -1,6 +1,6 @@
 {
   "name": "matters-web",
-  "version": "3.31.0",
+  "version": "3.32.1",
   "description": "codebase of Matters' website",
   "sideEffects": false,
   "author": "Matters <hi@matters.news>",
@@ -39,7 +39,7 @@
     "@apollo/react-hooks": "^3.1.3",
     "@apollo/react-ssr": "^3.1.3",
     "@matters/apollo-upload-client": "^11.1.0",
-    "@matters/matters-editor": "^0.1.22",
+    "@matters/matters-editor": "^0.1.24",
     "@reach/alert": "^0.16.0",
     "@reach/dialog": "^0.16.0",
     "@reach/visually-hidden": "^0.16.0",
