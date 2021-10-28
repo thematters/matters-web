@@ -162,3 +162,10 @@ export const MOCK_TRANSACTION = {
   currency: 'HKD',
   target: MOCK_ARTILCE,
 }
+
+// Crypto wallet
+export const MOCK_CRYPTO_WALLET = {
+  __typename: 'CryptoWallet' as any,
+  id: 'crypto-wallet-0000',
+  address: '0x0x0x0x0x0x0x0x0x0x0x',
+}
