@@ -18,9 +18,9 @@ const CryptoWalletAirdropNotice = ({ notice }: { notice: NoticeType }) => {
       <section className="content-wrap">
         <p>
           <Translate
-            zh_hant="你已成功參加空投且完成以太坊錢包設定，空投活動將在 2021/11/12 進行。你設定的空投地址："
-            zh_hans="你已成功参加空投且完成以太坊钱包设定，空投活动将在 2021/11/12 进行。你设定的空投地址："
-            en="You've completed registration for airdrop, and your NFT will be revealed on 2021/11/12. Connected crypto wallet address:"
+            zh_hant="你已成功登記參加空投且完成以太坊錢包設定，空投活動將在 2021/11/12 進行。你設定的空投地址："
+            zh_hans="你已成功登記参加空投且完成以太坊钱包设定，空投活动将在 2021/11/12 进行。你设定的空投地址："
+            en="You have successfully registered for airdrops and completed Ethereum wallet settings. Airdrops begin on November 12, 2021. Please confirm airdrop address:"
           />
         </p>
         <p className="highlight">{notice.target.address}</p>
