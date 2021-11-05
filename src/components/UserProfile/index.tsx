@@ -25,6 +25,7 @@ import {
   CivicLikerBadge,
   GoldenMotorBadge,
   SeedBadge,
+  TraveloggersBadge,
 } from './Badges'
 import CircleWidget from './CircleWidget'
 import DropdownActions from './DropdownActions'
@@ -126,6 +127,8 @@ export const UserProfile = () => {
   const hasSeedBadge = badges.some((b) => b.type === 'seed')
   const hasArchitectBadge = badges.some((b) => b.type === 'architect')
   const hasGoldenMotorBadge = badges.some((b) => b.type === 'golden_motor')
+  // TODO: replacle default value by quering api
+  const hasTraveloggersBadge = false
   const profileCover = user.info.profileCover || ''
   const userState = user.status?.state as string
   const isCivicLiker = user.liker.civicLiker
@@ -186,6 +189,7 @@ export const UserProfile = () => {
         <section className="info">
           <section className="display-name">
             <h1 className="name">{user.displayName}</h1>
+            {hasTraveloggersBadge && <TraveloggersBadge />}
             {hasSeedBadge && <SeedBadge />}
             {hasGoldenMotorBadge && <GoldenMotorBadge />}
             {hasArchitectBadge && <ArchitectBadge />}
