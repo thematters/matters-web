@@ -4,10 +4,11 @@ import { Dialog, Spinner, useDialogSwitch } from '~/components'
 
 import { fragments } from './gql'
 
-import { EditProfileDialogUserPublic } from './__generated__/EditProfileDialogUserPublic'
+import { EditProfileDialogUserPrivate } from './__generated__/EditProfileDialogUserPrivate'
+// import { EditProfileDialogUserPublic } from './__generated__/EditProfileDialogUserPublic'
 
 interface EditProfileDialogProps {
-  user: EditProfileDialogUserPublic
+  user: EditProfileDialogUserPrivate
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 

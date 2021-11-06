@@ -25,11 +25,14 @@ import IMAGE_COVER from '@/public/static/images/profile-cover.png'
 
 import styles from './styles.css'
 
-import { EditProfileDialogUserPublic } from './__generated__/EditProfileDialogUserPublic'
+import {
+  EditProfileDialogUserPrivate,
+  EditProfileDialogUserPrivate_info_cryptoWallet_nfts,
+} from './__generated__/EditProfileDialogUserPrivate'
 import { UpdateUserInfoProfile } from './__generated__/UpdateUserInfoProfile'
 
 interface FormProps {
-  user: EditProfileDialogUserPublic
+  user: EditProfileDialogUserPrivate
   closeDialog: () => void
 }
 
@@ -139,6 +142,39 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
     },
   })
 
+  const NFTAssets = ({
+    nfts,
+  }: {
+    nfts: EditProfileDialogUserPrivate_info_cryptoWallet_nfts[]
+  }) =>
+    nfts.length > 0 ? (
+      <section className="nft-field">
+        <Form.Field.Header
+          label={
+            <Translate
+              zh_hant={`我的 NFT 收藏（${nfts.length}）`}
+              zh_hans={`我的 NFT 收藏（${nfts.length}）`}
+              en={`My NFTs (${nfts.length})`}
+            />
+          }
+        />
+        <div>
+          {nfts.map(({ id, name, description, imageUrl, imagePreviewUrl }) => (
+            <li key={id}>
+              <img
+                src={imagePreviewUrl || ''}
+                title={`${name} - ${description}`}
+              />
+            </li>
+          ))}
+        </div>
+        {/* <pre>{JSON.stringify(nfts)}</pre> */}
+        <style jsx>{styles}</style>
+      </section>
+    ) : (
+      <></>
+    )
+
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       <section className="cover-field">
@@ -159,6 +195,14 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
           hasBorder
         />
       </section>
+      {Array.isArray(user.info.cryptoWallet?.nfts) && (
+        <NFTAssets
+          nfts={
+            user.info.cryptoWallet
+              ?.nfts as EditProfileDialogUserPrivate_info_cryptoWallet_nfts[]
+          }
+        />
+      )}
 
       <Form.Input
         label={<Translate id="displayName" />}

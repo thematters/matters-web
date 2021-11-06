@@ -33,6 +33,7 @@ import { FollowingDialog } from './FollowingDialog'
 import { USER_PROFILE_PRIVATE, USER_PROFILE_PUBLIC } from './gql'
 import styles from './styles.css'
 
+import { UserProfileUserPrivate_user_info_cryptoWallet_nfts } from './__generated__/UserProfileUserPrivate'
 import { UserProfileUserPublic } from './__generated__/UserProfileUserPublic'
 
 export const UserProfile = () => {
@@ -62,6 +63,13 @@ export const UserProfile = () => {
       variables: { userName },
     })
   }, [user?.id, viewer.id])
+
+  const hasLogbook =
+    Array.isArray(user?.info?.cryptoWallet?.nfts) &&
+    (
+      user?.info?.cryptoWallet
+        ?.nfts as UserProfileUserPrivate_user_info_cryptoWallet_nfts[]
+    ).length > 0
 
   /**
    * Render
@@ -177,7 +185,7 @@ export const UserProfile = () => {
 
         <header>
           <section className="avatar">
-            <Avatar size="xxxl" user={user} />
+            <Avatar size="xxxl" user={user} hasLogbook={hasLogbook} />
           </section>
 
           {!isMe && <FollowUserButton user={user} size="lg" />}

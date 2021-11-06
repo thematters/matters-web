@@ -4,6 +4,13 @@ on:
   pull_request:
     branches:
       - '*'
+  push:
+    branches-ignore:
+      - develop
+      - main
+      - master
+      - stage
+      - gh-pages
 
 jobs:
   build_and_test:
@@ -30,13 +37,7 @@ jobs:
         run: npm ci
 
       - name: Generate Types
-        if: github.base_ref == 'develop'
-        run: |
-          npm run gen:clean \
-          && npm run gen:type
-
-      - name: Generate Types (stage)
-        if: github.base_ref == 'stage'
+        if: github.base_ref != 'master'
         run: |
           npm run gen:clean \
           && npm run gen:type

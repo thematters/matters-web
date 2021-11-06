@@ -39,6 +39,8 @@ const IMG_SRC = [
   'data:',
   process.env.NEXT_PUBLIC_ASSET_DOMAIN,
 
+  'lh3.googleusercontent.com',
+
   // for some old articles were using this s3 urls directly
   'matters-server-production.s3-ap-southeast-1.amazonaws.com',
 

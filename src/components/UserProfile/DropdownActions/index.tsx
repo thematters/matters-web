@@ -20,10 +20,11 @@ import { translate } from '~/common/utils'
 
 import { EditProfileDialog } from './EditProfileDialog'
 
+import { DropdownActionsUserPrivate } from './__generated__/DropdownActionsUserPrivate'
 import { DropdownActionsUserPublic } from './__generated__/DropdownActionsUserPublic'
 
 interface DropdownActionsProps {
-  user: DropdownActionsUserPublic
+  user: DropdownActionsUserPrivate & DropdownActionsUserPublic
   isMe: boolean
 }
 
@@ -34,6 +35,7 @@ interface DialogProps {
 
 interface Controls {
   hasEditProfile: boolean
+  // hasLogbook: boolean
   hasBlockUser: boolean
 }
 
@@ -48,14 +50,16 @@ const fragments = {
         ...EditProfileDialogUserPublic
       }
       ${BlockUser.fragments.user.public}
-      ${EditProfileDialog.fragments.user}
+      ${EditProfileDialog.fragments.user.public}
     `,
     private: gql`
       fragment DropdownActionsUserPrivate on User {
         id
         ...BlockUserPrivate
+        ...EditProfileDialogUserPrivate
       }
       ${BlockUser.fragments.user.private}
+      ${EditProfileDialog.fragments.user.private}
     `,
   },
 }
@@ -64,6 +68,7 @@ const BaseDropdownActions = ({
   user,
 
   hasEditProfile,
+  // hasLogbook,
   hasBlockUser,
 
   openEditProfileDialog,
@@ -120,6 +125,7 @@ const BaseDropdownActions = ({
 const DropdownActions = ({ user, isMe }: DropdownActionsProps) => {
   const controls = {
     hasEditProfile: isMe,
+    // hasLogbook: false,
     hasBlockUser: !isMe,
   }
 

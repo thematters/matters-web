@@ -2,3 +2,30 @@
   padding-left: var(--spacing-base);
   margin-top: calc(var(--spacing-xx-loose) * -1);
 }
+
+.nft-field {
+  --img-width: 100px;
+
+  margin: 1rem;
+
+  & > div {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 0.25rem;
+
+    & li {
+      list-style: none;
+    }
+    & img {
+      width: var(--img-width);
+      height: var(--img-width);
+
+      &:hover,
+      &:active,
+      &:focus {
+        border: 1px solid var(--color-matters-green-active);
+        border-radius: 0.5rem;
+      }
+    }
+  }
+}
