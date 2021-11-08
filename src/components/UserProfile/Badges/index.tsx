@@ -5,6 +5,7 @@ import { EXTERNAL_LINKS } from '~/common/enums'
 import { ReactComponent as IconArchitectBadge } from '@/public/static/icons/16px/badge-architect.svg'
 import { ReactComponent as IconGoldenMotorBadge } from '@/public/static/icons/16px/badge-golden-motor.svg'
 import { ReactComponent as IconSeedBadge } from '@/public/static/icons/16px/badge-seed.svg'
+import { ReactComponent as IconTraveloggersBadge } from '@/public/static/icons/16px/traveloggers.svg'
 import { ReactComponent as IconCivicLikerBadge } from '@/public/static/icons/badge-civic-liker.svg'
 
 import styles from './styles.css'
@@ -60,4 +61,21 @@ export const CivicLikerBadge = () => (
       <IconCivicLikerBadge style={{ width: 67, height: 16 }} {...props} />
     ))({})}
   </Button>
+)
+
+export const TraveloggersBadge = () => (
+  <Tooltip
+    content={
+      <Translate
+        zh_hant="Traveloggers"
+        zh_hans="Traveloggers"
+        en="Traveloggers"
+      />
+    }
+  >
+    <span className="badge">
+      {withIcon(IconTraveloggersBadge)({})}
+      <style jsx>{styles}</style>
+    </span>
+  </Tooltip>
 )
