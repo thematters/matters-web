@@ -34,6 +34,7 @@ import { FollowingDialog } from './FollowingDialog'
 import { USER_PROFILE_PRIVATE, USER_PROFILE_PUBLIC } from './gql'
 import styles from './styles.css'
 
+import { UserProfileUserPrivate_user_info_cryptoWallet_nfts } from './__generated__/UserProfileUserPrivate'
 import { UserProfileUserPublic } from './__generated__/UserProfileUserPublic'
 
 export const UserProfile = () => {
@@ -127,8 +128,13 @@ export const UserProfile = () => {
   const hasSeedBadge = badges.some((b) => b.type === 'seed')
   const hasArchitectBadge = badges.some((b) => b.type === 'architect')
   const hasGoldenMotorBadge = badges.some((b) => b.type === 'golden_motor')
-  // TODO: replacle default value by quering api
-  const hasTraveloggersBadge = false
+  const hasTraveloggersBadge =
+    Array.isArray(user.info.cryptoWallet?.nfts) &&
+    (
+      user?.info.cryptoWallet
+        ?.nfts as UserProfileUserPrivate_user_info_cryptoWallet_nfts[]
+    ).length > 0
+
   const profileCover = user.info.profileCover || ''
   const userState = user.status?.state as string
   const isCivicLiker = user.liker.civicLiker
