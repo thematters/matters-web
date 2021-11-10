@@ -18,9 +18,9 @@ const CryptoWalletConnectedNotice = ({ notice }: { notice: NoticeType }) => {
       <section className="content-wrap">
         <p>
           <Translate
-            zh_hant="你已成功設定加密錢包。錢包地址："
-            zh_hans="你已成功设定加密钱包，钱包地址："
-            en="You've connected a crypto wallet, and the address:"
+            zh_hant="你已完成以太坊錢包設定。你設定的地址："
+            zh_hans="你已完成以太坊钱包设定。你设定的地址："
+            en="You have successfully completed Ethereum wallet settings. Please confirm wallet address:"
           />
           <p className="highlight">{notice.target.address}</p>
         </p>
