@@ -78,7 +78,7 @@ const gatewayUrlsResolver = async () => {
   const gatwayUrls = checkers.filter(({ alive }) => alive).map(({ url }) => url)
 
   // meson network use 302 redirect, so we have to push it in mannually
-  gatwayUrls.push('https://matters-meson.net/api/cdn/10vbg9/ipfs/:hash')
+  gatwayUrls.unshift('https://matters-meson.net/api/cdn/10vbg9/ipfs/:hash')
 
   return gatwayUrls
 }
