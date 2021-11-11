@@ -25,6 +25,7 @@ import {
   CivicLikerBadge,
   GoldenMotorBadge,
   SeedBadge,
+  TraveloggersBadge,
 } from './Badges'
 import CircleWidget from './CircleWidget'
 import DropdownActions from './DropdownActions'
@@ -33,6 +34,7 @@ import { FollowingDialog } from './FollowingDialog'
 import { USER_PROFILE_PRIVATE, USER_PROFILE_PUBLIC } from './gql'
 import styles from './styles.css'
 
+import { UserProfileUserPrivate_user_info_cryptoWallet_nfts } from './__generated__/UserProfileUserPrivate'
 import { UserProfileUserPublic } from './__generated__/UserProfileUserPublic'
 
 export const UserProfile = () => {
@@ -126,6 +128,13 @@ export const UserProfile = () => {
   const hasSeedBadge = badges.some((b) => b.type === 'seed')
   const hasArchitectBadge = badges.some((b) => b.type === 'architect')
   const hasGoldenMotorBadge = badges.some((b) => b.type === 'golden_motor')
+  const hasTraveloggersBadge =
+    Array.isArray(user.info.cryptoWallet?.nfts) &&
+    (
+      user?.info.cryptoWallet
+        ?.nfts as UserProfileUserPrivate_user_info_cryptoWallet_nfts[]
+    ).length > 0
+
   const profileCover = user.info.profileCover || ''
   const userState = user.status?.state as string
   const isCivicLiker = user.liker.civicLiker
@@ -186,6 +195,7 @@ export const UserProfile = () => {
         <section className="info">
           <section className="display-name">
             <h1 className="name">{user.displayName}</h1>
+            {hasTraveloggersBadge && <TraveloggersBadge />}
             {hasSeedBadge && <SeedBadge />}
             {hasGoldenMotorBadge && <GoldenMotorBadge />}
             {hasArchitectBadge && <ArchitectBadge />}
