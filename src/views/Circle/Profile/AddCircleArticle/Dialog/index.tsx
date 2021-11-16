@@ -130,8 +130,10 @@ const AddCircleArticleDialog = ({
   )
 }
 
-export default (props: AddCircleArticleDialogProps) => (
+const DialogWrapper = (props: AddCircleArticleDialogProps) => (
   <Dialog.Lazy mounted={<AddCircleArticleDialog {...props} />}>
     {({ openDialog }) => <>{props.children({ openDialog })}</>}
   </Dialog.Lazy>
 )
+
+export default DialogWrapper
