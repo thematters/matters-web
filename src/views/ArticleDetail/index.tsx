@@ -174,9 +174,10 @@ const ArticleDetail = () => {
   const [getTranslation, { data: translationData, loading: translating }] =
     useLazyQuery<ArticleTranslation>(ARTICLE_TRANSLATION)
 
-  console.log({ translating })
   const titleTranslation = translationData?.article?.translation?.title
   const contentTranslation = translationData?.article?.translation?.content
+  const summaryTranslation = translationData?.article?.translation?.summary
+
   const toggleTranslate = () => {
     setTranslate(!translated)
 
@@ -390,7 +391,9 @@ const ArticleDetail = () => {
           </section>
 
           {article?.summaryCustomized && (
-            <CustomizedSummary summary={summary} />
+            <CustomizedSummary
+              summary={translated ? summaryTranslation : summary}
+            />
           )}
 
           <Content
