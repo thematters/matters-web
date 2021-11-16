@@ -173,31 +173,31 @@ const ArticleDetail = () => {
   const shouldTranslate = !!(language && language !== viewerLanguage)
   const [getTranslation, { data: translationData, loading: translating }] =
     useLazyQuery<ArticleTranslation>(ARTICLE_TRANSLATION)
+
+  console.log({ translating })
   const titleTranslation = translationData?.article?.translation?.title
   const contentTranslation = translationData?.article?.translation?.content
   const toggleTranslate = () => {
     setTranslate(!translated)
 
     if (!translated) {
-      return
+      getTranslation({ variables: { mediaHash, language: viewerLanguage } })
+
+      window.dispatchEvent(
+        new CustomEvent(ADD_TOAST, {
+          detail: {
+            color: 'green',
+            content: (
+              <Translate
+                zh_hant="正在翻譯為繁體中文"
+                zh_hans="正在翻译为简体中文"
+                en="Translating to English"
+              />
+            ),
+          },
+        })
+      )
     }
-
-    getTranslation({ variables: { mediaHash, language: viewerLanguage } })
-
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'green',
-          content: (
-            <Translate
-              zh_hant="正在翻譯為繁體中文"
-              zh_hans="正在翻译为简体中文"
-              en="Translating to English"
-            />
-          ),
-        },
-      })
-    )
   }
 
   // edit mode

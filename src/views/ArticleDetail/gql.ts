@@ -112,6 +112,7 @@ export const ARTICLE_TRANSLATION = gql`
       translation(input: { language: $language }) {
         content
         title
+        summary
       }
     }
   }
