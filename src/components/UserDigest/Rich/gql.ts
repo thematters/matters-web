@@ -18,8 +18,10 @@ export const fragments = {
           state
         }
         ...AvatarUser
+        ...AvatarUserLogbook
       }
       ${Avatar.fragments.user}
+      ${Avatar.fragments.logbook}
     `,
     private: gql`
       fragment UserDigestRichUserPrivate on User {

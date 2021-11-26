@@ -37,9 +37,11 @@ const fragments = {
           ...DigestRichCirclePublic
         }
         ...AvatarUser
+        ...AvatarUserLogbook
         ...DropdownActionsUserPublic
       }
       ${Avatar.fragments.user}
+      ${Avatar.fragments.logbook}
       ${CircleDigest.Rich.fragments.circle.public}
       ${DropdownActions.fragments.user.public}
     `,

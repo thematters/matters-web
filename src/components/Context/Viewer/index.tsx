@@ -37,6 +37,12 @@ const ViewerFragments = {
           badges {
             type
           }
+          cryptoWallet {
+            id
+            nfts {
+              id
+            }
+          }
         }
         settings {
           language
