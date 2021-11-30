@@ -1,7 +1,7 @@
 import summaryStyles from '~/common/styles/utils/content.article.css'
 
 interface CustomizedSummaryProps {
-  summary?: string
+  summary?: string | null
 }
 
 const CustomizedSummary = ({ summary }: CustomizedSummaryProps) => {

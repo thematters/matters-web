@@ -1,8 +1,8 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { useState } from 'react'
 
 import {
+  createCacheContext,
   DraftDigest,
   EmptyDraft,
   Head,
@@ -11,11 +11,10 @@ import {
   List,
   QueryError,
   Spinner,
+  useCache,
 } from '~/components'
 
 import { mergeConnections } from '~/common/utils'
-
-import { DraftContext } from './context'
 
 import {
   MeDraftFeed,
@@ -45,8 +44,13 @@ const ME_DRAFTS_FEED = gql`
   ${DraftDigest.Feed.fragments.draft}
 `
 
+export const DraftsContext =
+  createCacheContext<MeDraftFeed_viewer_drafts_edges[]>()
+
 export const BaseMeDrafts = () => {
-  const [edges, setEdges] = useState<MeDraftFeed_viewer_drafts_edges[]>([])
+  const [edges, setEdges, DraftsContextProvider] = useCache<
+    MeDraftFeed_viewer_drafts_edges[]
+  >([], DraftsContext)
 
   const { data, loading, error, fetchMore, refetch } = useQuery<MeDraftFeed>(
     ME_DRAFTS_FEED,
@@ -83,7 +87,7 @@ export const BaseMeDrafts = () => {
     })
 
   return (
-    <DraftContext.Provider value={{ edges, setEdges }}>
+    <DraftsContextProvider>
       <InfiniteScroll
         hasNextPage={pageInfo.hasNextPage}
         loadMore={loadMore}
@@ -97,7 +101,7 @@ export const BaseMeDrafts = () => {
           ))}
         </List>
       </InfiniteScroll>
-    </DraftContext.Provider>
+    </DraftsContextProvider>
   )
 }
 
