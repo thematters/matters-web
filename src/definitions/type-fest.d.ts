@@ -20,3 +20,7 @@ type SetRequired<BaseType, Keys extends keyof BaseType = keyof BaseType> =
     Required<Pick<BaseType, Keys>> extends infer InferredType // If `InferredType` extends the previous, then for each key, use the inferred type key.
     ? { [KeyType in keyof InferredType]: InferredType[KeyType] }
     : never
+
+type PartialDeep<T> = {
+  [P in keyof T]?: PartialDeep<T[P]>
+}

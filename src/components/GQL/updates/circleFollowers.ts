@@ -48,6 +48,7 @@ const update = ({
             info: {
               description: viewer.info.description,
               badges: viewer.info.badges,
+              cryptoWallet: viewer.info.cryptoWallet,
               __typename: 'UserInfo',
             },
             isBlocked: false,

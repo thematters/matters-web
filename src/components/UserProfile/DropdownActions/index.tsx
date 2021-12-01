@@ -7,6 +7,7 @@ import {
   Button,
   DropdownDialog,
   IconEdit16,
+  IconLogbook24,
   IconMore32,
   IconSettings32,
   LanguageContext,
@@ -35,6 +36,7 @@ interface DialogProps {
 interface Controls {
   hasEditProfile: boolean
   hasBlockUser: boolean
+  hasLogbook: boolean
 }
 
 type BaseDropdownActionsProps = DropdownActionsProps & DialogProps & Controls
@@ -44,6 +46,14 @@ const fragments = {
     public: gql`
       fragment DropdownActionsUserPublic on User {
         id
+        info {
+          cryptoWallet {
+            id
+            nfts {
+              id
+            }
+          }
+        }
         ...BlockUserPublic
         ...EditProfileDialogUserPublic
       }
@@ -67,11 +77,15 @@ const BaseDropdownActions = ({
 
   hasEditProfile,
   hasBlockUser,
+  hasLogbook,
 
   openEditProfileDialog,
   openBlockUserDialog,
 }: BaseDropdownActionsProps) => {
   const { lang } = useContext(LanguageContext)
+  const logbookUrl = `https://traveloggers.matters.news${
+    lang === 'en' ? '/' : '/zh/'
+  }logbooks`
 
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
     <Menu width={isInDropdown ? 'sm' : undefined}>
@@ -79,6 +93,14 @@ const BaseDropdownActions = ({
         <Menu.Item onClick={openEditProfileDialog}>
           <TextIcon icon={<IconEdit16 size="md" />} size="md" spacing="base">
             <Translate id="editUserProfile" />
+          </TextIcon>
+        </Menu.Item>
+      )}
+
+      {hasLogbook && (
+        <Menu.Item htmlHref={logbookUrl} htmlTarget="_blank">
+          <TextIcon icon={<IconLogbook24 size="md" />} size="md" spacing="base">
+            <Translate id="logbook" />
           </TextIcon>
         </Menu.Item>
       )}
@@ -120,9 +142,15 @@ const BaseDropdownActions = ({
 }
 
 const DropdownActions = ({ user, isMe }: DropdownActionsProps) => {
+  const {
+    info: { cryptoWallet },
+  } = user
   const controls = {
     hasEditProfile: isMe,
     hasBlockUser: !isMe,
+    hasLogbook:
+      Array.isArray(cryptoWallet?.nfts) &&
+      (cryptoWallet?.nfts || []).length > 0,
   }
 
   if (_isEmpty(_pickBy(controls))) {

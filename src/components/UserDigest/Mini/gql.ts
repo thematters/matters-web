@@ -12,7 +12,9 @@ export const fragments = {
         state
       }
       ...AvatarUser
+      ...AvatarUserLogbook
     }
     ${Avatar.fragments.user}
+    ${Avatar.fragments.logbook}
   `,
 }

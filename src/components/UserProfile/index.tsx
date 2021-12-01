@@ -6,6 +6,7 @@ import {
   Error,
   Expandable,
   FollowUserButton,
+  LanguageContext,
   Layout,
   Spinner,
   Throw404,
@@ -40,6 +41,7 @@ import { UserProfileUserPublic } from './__generated__/UserProfileUserPublic'
 export const UserProfile = () => {
   const { getQuery } = useRoute()
   const viewer = useContext(ViewerContext)
+  const { lang } = useContext(LanguageContext)
 
   // public data
   const userName = getQuery('name')
@@ -141,6 +143,9 @@ export const UserProfile = () => {
   const isUserArchived = userState === 'archived'
   const isUserBanned = userState === 'banned'
   const isUserInactive = isUserArchived || isUserBanned
+  const logbookUrl = `https://traveloggers.matters.news${
+    lang === 'en' ? '/' : '/zh/'
+  }logbooks`
 
   /**
    * Inactive User
@@ -186,7 +191,13 @@ export const UserProfile = () => {
 
         <header>
           <section className="avatar">
-            <Avatar size="xxxl" user={user} />
+            {hasTraveloggersBadge ? (
+              <a href={logbookUrl} target="_blank">
+                <Avatar size="xxxl" user={user} />
+              </a>
+            ) : (
+              <Avatar size="xxxl" user={user} />
+            )}
           </section>
 
           {!isMe && <FollowUserButton user={user} size="lg" />}

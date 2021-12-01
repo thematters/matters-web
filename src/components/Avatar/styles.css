@@ -29,6 +29,21 @@
   }
 }
 
+.hasBadge {
+  & .badge {
+    @mixin flex-center-all;
+
+    position: absolute;
+    right: 0;
+    bottom: 0;
+
+    & :global(svg) {
+      height: auto;
+      transform: translateX(50%);
+    }
+  }
+}
+
 /**
  * Sizes
  */
@@ -37,24 +52,56 @@
 .xs {
   width: 1rem;
   height: 1rem;
+
+  &.hasBadge {
+    & .badge {
+      & :global(svg) {
+        width: calc(1rem * 0.35);
+      }
+    }
+  }
 }
 
 /* 20px */
 .sm {
   width: 1.25rem;
   height: 1.25rem;
+
+  &.hasBadge {
+    & .badge {
+      & :global(svg) {
+        width: calc(1.25rem * 0.35);
+      }
+    }
+  }
 }
 
 /* 24px */
 .md {
   width: 1.5rem;
   height: 1.5rem;
+
+  &.hasBadge {
+    & .badge {
+      & :global(svg) {
+        width: calc(1.5rem * 0.35);
+      }
+    }
+  }
 }
 
 /* 32px */
 .lg {
   width: 2rem;
   height: 2rem;
+
+  &.hasBadge {
+    & .badge {
+      & :global(svg) {
+        width: calc(2rem * 0.35);
+      }
+    }
+  }
 }
 
 /* 40px */
@@ -70,6 +117,14 @@
       right: -4px;
       bottom: -4px;
       left: -4px;
+    }
+  }
+
+  &.hasBadge {
+    & .badge {
+      & :global(svg) {
+        width: calc(2.5rem * 0.35);
+      }
     }
   }
 }
@@ -115,6 +170,14 @@
       right: -8px;
       bottom: -8px;
       left: -8px;
+    }
+  }
+
+  &.hasBadge {
+    & .badge {
+      & :global(svg) {
+        transform: translateX(25%);
+      }
     }
   }
 }
