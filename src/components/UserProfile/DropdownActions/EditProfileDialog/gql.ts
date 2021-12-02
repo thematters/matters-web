@@ -35,6 +35,8 @@ export const fragments = {
             address
             nfts {
               id
+              imageUrl
+              imagePreviewUrl
               name
               description
             }
