@@ -49,6 +49,7 @@ const fragments = {
         info {
           cryptoWallet {
             id
+            address
             nfts {
               id
             }
@@ -83,9 +84,9 @@ const BaseDropdownActions = ({
   openBlockUserDialog,
 }: BaseDropdownActionsProps) => {
   const { lang } = useContext(LanguageContext)
-  const logbookUrl = `https://traveloggers.matters.news${
-    lang === 'en' ? '/' : '/zh/'
-  }logbooks`
+  const logbookUrl = `${process.env.NEXT_PUBLIC_TRAVELOGGERS_URL}${
+    lang === 'en' ? '/' : 'zh/'
+  }owner/${user.info.cryptoWallet?.address}`
 
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
     <Menu width={isInDropdown ? 'sm' : undefined}>
@@ -142,15 +143,12 @@ const BaseDropdownActions = ({
 }
 
 const DropdownActions = ({ user, isMe }: DropdownActionsProps) => {
-  const {
-    info: { cryptoWallet },
-  } = user
   const controls = {
     hasEditProfile: isMe,
     hasBlockUser: !isMe,
     hasLogbook:
-      Array.isArray(cryptoWallet?.nfts) &&
-      (cryptoWallet?.nfts || []).length > 0,
+      Array.isArray(user.info.cryptoWallet?.nfts) &&
+      (user.info.cryptoWallet?.nfts || []).length > 0,
   }
 
   if (_isEmpty(_pickBy(controls))) {

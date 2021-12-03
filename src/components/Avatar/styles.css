@@ -6,7 +6,7 @@
   flex-shrink: 0;
   border-radius: 50%;
 
-  & :global(img) {
+  & :global(> img) {
     @mixin object-fit-cover;
 
     background-color: var(--color-grey-lighter);
@@ -37,6 +37,12 @@
     right: 0;
     bottom: 0;
 
+    & :global(img) {
+      width: var(--spacing-base);
+      height: auto;
+      transform: translateX(25%);
+    }
+
     & :global(svg) {
       height: auto;
       transform: translateX(50%);
@@ -56,7 +62,7 @@
   &.hasBadge {
     & .badge {
       & :global(svg) {
-        width: calc(1rem * 0.35);
+        width: calc(1rem * 0.4);
       }
     }
   }
@@ -70,7 +76,7 @@
   &.hasBadge {
     & .badge {
       & :global(svg) {
-        width: calc(1.25rem * 0.35);
+        width: calc(1.25rem * 0.4);
       }
     }
   }
@@ -98,7 +104,7 @@
   &.hasBadge {
     & .badge {
       & :global(svg) {
-        width: calc(2rem * 0.35);
+        width: calc(2rem * 0.3);
       }
     }
   }
@@ -123,7 +129,7 @@
   &.hasBadge {
     & .badge {
       & :global(svg) {
-        width: calc(2.5rem * 0.35);
+        width: calc(2.5rem * 0.3);
       }
     }
   }
@@ -142,6 +148,15 @@
       left: -5px;
     }
   }
+
+  &.hasBadge {
+    & .badge {
+      & :global(svg) {
+        width: calc(3rem * 0.3);
+        transform: translateX(20%);
+      }
+    }
+  }
 }
 
 /* 56px */
@@ -155,6 +170,14 @@
       right: -6px;
       bottom: -6px;
       left: -6px;
+    }
+  }
+
+  &.hasBadge {
+    & .badge {
+      & :global(svg) {
+        transform: translateX(25%);
+      }
     }
   }
 }
