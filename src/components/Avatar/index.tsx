@@ -6,6 +6,7 @@ import { IconLogbookBadge16, ResponsiveImage } from '~/components'
 import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
 import IMAGE_MATTERS_ARCHITECT_RING from '@/public/static/icons/architect-ring.svg'
 import IMAGE_CIVIC_LIKER_RING from '@/public/static/icons/civic-liker-ring.svg'
+import LOGBOOK from '@/public/static/images/logbook.gif'
 
 import styles from './styles.css'
 
@@ -21,6 +22,7 @@ export interface AvatarProps {
   size?: AvatarSize
   src?: string | null
   inEditor?: boolean
+  inProfile?: boolean
 }
 
 const fragments = {
@@ -42,6 +44,7 @@ const fragments = {
       info {
         cryptoWallet {
           id
+          address
           nfts {
             id
           }
@@ -52,7 +55,7 @@ const fragments = {
 }
 
 export const Avatar = (props: AvatarProps) => {
-  const { user, size = 'default', src, inEditor } = props
+  const { user, size = 'default', src, inEditor, inProfile } = props
   const source = src || user?.avatar || ICON_AVATAR_DEFAULT
   const isFallback =
     (!src && !user?.avatar) || source.indexOf('data:image') >= 0
@@ -81,7 +84,7 @@ export const Avatar = (props: AvatarProps) => {
       {hasArchitectBadge && <span className="architect ring" />}
       {hasLogbook && (
         <section className="logbook badge">
-          <IconLogbookBadge16 />
+          {inProfile ? <img src={LOGBOOK.src} /> : <IconLogbookBadge16 />}
         </section>
       )}
 

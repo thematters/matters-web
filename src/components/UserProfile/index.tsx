@@ -10,6 +10,7 @@ import {
   Layout,
   Spinner,
   Throw404,
+  Tooltip,
   Translate,
   usePublicQuery,
   useRoute,
@@ -143,9 +144,9 @@ export const UserProfile = () => {
   const isUserArchived = userState === 'archived'
   const isUserBanned = userState === 'banned'
   const isUserInactive = isUserArchived || isUserBanned
-  const logbookUrl = `https://traveloggers.matters.news${
+  const logbookUrl = `${process.env.NEXT_PUBLIC_TRAVELOGGERS_URL}${
     lang === 'en' ? '/' : '/zh/'
-  }logbooks`
+  }owner/${user.info.cryptoWallet?.address}`
 
   /**
    * Inactive User
@@ -192,11 +193,21 @@ export const UserProfile = () => {
         <header>
           <section className="avatar">
             {hasTraveloggersBadge ? (
-              <a href={logbookUrl} target="_blank">
-                <Avatar size="xxxl" user={user} />
-              </a>
+              <Tooltip
+                content={
+                  <Translate
+                    zh_hant={`查看 ${user.displayName} 的航行日誌`}
+                    zh_hans={`查看 ${user.displayName} 的航行日志`}
+                    en={`View Logbooks owned by ${user.displayName}`}
+                  />
+                }
+              >
+                <a href={logbookUrl} target="_blank">
+                  <Avatar size="xxxl" user={user} inProfile />
+                </a>
+              </Tooltip>
             ) : (
-              <Avatar size="xxxl" user={user} />
+              <Avatar size="xxxl" user={user} inProfile />
             )}
           </section>
 
