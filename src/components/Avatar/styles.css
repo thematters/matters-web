@@ -6,7 +6,7 @@
   flex-shrink: 0;
   border-radius: 50%;
 
-  & :global(> img) {
+  & :global(picture > img) {
     @mixin object-fit-cover;
 
     background-color: var(--color-grey-lighter);
