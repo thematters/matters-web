@@ -21,10 +21,11 @@ import { translate } from '~/common/utils'
 
 import { EditProfileDialog } from './EditProfileDialog'
 
+import { DropdownActionsUserPrivate } from './__generated__/DropdownActionsUserPrivate'
 import { DropdownActionsUserPublic } from './__generated__/DropdownActionsUserPublic'
 
 interface DropdownActionsProps {
-  user: DropdownActionsUserPublic
+  user: DropdownActionsUserPublic & Partial<DropdownActionsUserPrivate>
   isMe: boolean
 }
 
