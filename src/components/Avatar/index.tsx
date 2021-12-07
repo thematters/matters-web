@@ -83,8 +83,12 @@ export const Avatar = (props: AvatarProps) => {
       {isCivicLiker && <span className="civic-liker ring" />}
       {hasArchitectBadge && <span className="architect ring" />}
       {hasLogbook && (
-        <section className="logbook badge">
-          {inProfile ? <img src={LOGBOOK.src} /> : <IconLogbookBadge16 />}
+        <section className="badge">
+          {inProfile ? (
+            <img className="logbook" src={LOGBOOK.src} />
+          ) : (
+            <IconLogbookBadge16 />
+          )}
         </section>
       )}
 
