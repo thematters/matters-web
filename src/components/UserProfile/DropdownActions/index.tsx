@@ -86,7 +86,7 @@ const BaseDropdownActions = ({
 }: BaseDropdownActionsProps) => {
   const { lang } = useContext(LanguageContext)
   const logbookUrl = `${process.env.NEXT_PUBLIC_TRAVELOGGERS_URL}${
-    lang === 'en' ? '/' : 'zh/'
+    lang === 'en' ? '/' : '/zh/'
   }owner/${user.info.cryptoWallet?.address}`
 
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
