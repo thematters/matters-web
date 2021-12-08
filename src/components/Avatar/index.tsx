@@ -45,9 +45,7 @@ const fragments = {
         cryptoWallet {
           id
           address
-          nfts {
-            id
-          }
+          # nfts { id }
         }
       }
     }
@@ -62,9 +60,9 @@ export const Avatar = (props: AvatarProps) => {
   const isCivicLiker = user?.liker.civicLiker
   const badges = user?.info?.badges || []
   const hasArchitectBadge = badges.some((b) => b.type === 'architect')
-  const hasLogbook =
+  const hasLogbook = false /*
     Array.isArray(user?.info?.cryptoWallet?.nfts) &&
-    (user?.info?.cryptoWallet?.nfts || []).length > 0
+    (user?.info?.cryptoWallet?.nfts || []).length > 0 */
   const avatarClasses = classNames({
     avatar: true,
     [size]: true,
