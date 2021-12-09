@@ -32,12 +32,20 @@ const STYLE_SRC = [
   'www.google.com/cse/',
 ].join(' ')
 
+/* const { hostname: NEXT_PUBLIC_API_HOSTNAME } = new URL(
+  process.env.NEXT_PUBLIC_API_URL as string
+) */
+
 const IMG_SRC = [
   "'self'",
 
   // Asssets
   'data:',
   process.env.NEXT_PUBLIC_ASSET_DOMAIN,
+
+  // 'server-develop.matters.news',
+  // NEXT_PUBLIC_API_HOSTNAME as string,
+  new URL(process.env.NEXT_PUBLIC_API_URL as string).hostname,
 
   // for some old articles were using this s3 urls directly
   'matters-server-production.s3-ap-southeast-1.amazonaws.com',
@@ -54,6 +62,8 @@ const CONNECT_SRC = [
   // API
   process.env.NEXT_PUBLIC_API_URL,
   process.env.NEXT_PUBLIC_OAUTH_API_URL,
+
+  // 'server-develop.matters.news',
 
   // Sentry
   'sentry.matters.one',

@@ -13,6 +13,17 @@ export const MOCK_USER = {
     __typename: 'UserInfo' as any,
     badges: null,
     description: 'Matters 唯一官方帳號',
+    cryptoWallet: {
+      __typename: 'CryptoWallet' as any,
+      id: 'crypto-wallet-0000',
+      address: '0x0x0x0x0x0x0x0x0x0x0x',
+      nfts: [
+        {
+          __typename: 'NFTAsset' as any,
+          id: '1',
+        },
+      ],
+    },
   },
   liker: {
     __typename: 'Liker' as any,
@@ -168,4 +179,10 @@ export const MOCK_CRYPTO_WALLET = {
   __typename: 'CryptoWallet' as any,
   id: 'crypto-wallet-0000',
   address: '0x0x0x0x0x0x0x0x0x0x0x',
+  nfts: [
+    {
+      __typename: 'NFTAsset' as any,
+      id: '1',
+    },
+  ],
 }

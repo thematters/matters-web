@@ -7,6 +7,7 @@ import {
   Button,
   DropdownDialog,
   IconEdit16,
+  IconLogbook24,
   IconMore32,
   IconSettings32,
   LanguageContext,
@@ -20,10 +21,11 @@ import { translate } from '~/common/utils'
 
 import { EditProfileDialog } from './EditProfileDialog'
 
+import { DropdownActionsUserPrivate } from './__generated__/DropdownActionsUserPrivate'
 import { DropdownActionsUserPublic } from './__generated__/DropdownActionsUserPublic'
 
 interface DropdownActionsProps {
-  user: DropdownActionsUserPublic
+  user: DropdownActionsUserPublic & Partial<DropdownActionsUserPrivate>
   isMe: boolean
 }
 
@@ -35,6 +37,7 @@ interface DialogProps {
 interface Controls {
   hasEditProfile: boolean
   hasBlockUser: boolean
+  hasLogbook: boolean
 }
 
 type BaseDropdownActionsProps = DropdownActionsProps & DialogProps & Controls
@@ -44,6 +47,15 @@ const fragments = {
     public: gql`
       fragment DropdownActionsUserPublic on User {
         id
+        info {
+          cryptoWallet {
+            id
+            address
+            nfts {
+              id
+            }
+          }
+        }
         ...BlockUserPublic
         ...EditProfileDialogUserPublic
       }
@@ -67,11 +79,15 @@ const BaseDropdownActions = ({
 
   hasEditProfile,
   hasBlockUser,
+  hasLogbook,
 
   openEditProfileDialog,
   openBlockUserDialog,
 }: BaseDropdownActionsProps) => {
   const { lang } = useContext(LanguageContext)
+  const logbookUrl = `${process.env.NEXT_PUBLIC_TRAVELOGGERS_URL}${
+    lang === 'en' ? '/' : '/zh/'
+  }owner/${user.info.cryptoWallet?.address}`
 
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
     <Menu width={isInDropdown ? 'sm' : undefined}>
@@ -79,6 +95,14 @@ const BaseDropdownActions = ({
         <Menu.Item onClick={openEditProfileDialog}>
           <TextIcon icon={<IconEdit16 size="md" />} size="md" spacing="base">
             <Translate id="editUserProfile" />
+          </TextIcon>
+        </Menu.Item>
+      )}
+
+      {hasLogbook && (
+        <Menu.Item htmlHref={logbookUrl} htmlTarget="_blank">
+          <TextIcon icon={<IconLogbook24 size="md" />} size="md" spacing="base">
+            <Translate id="logbook" />
           </TextIcon>
         </Menu.Item>
       )}
@@ -123,6 +147,9 @@ const DropdownActions = ({ user, isMe }: DropdownActionsProps) => {
   const controls = {
     hasEditProfile: isMe,
     hasBlockUser: !isMe,
+    hasLogbook:
+      Array.isArray(user.info.cryptoWallet?.nfts) &&
+      (user.info.cryptoWallet?.nfts || []).length > 0,
   }
 
   if (_isEmpty(_pickBy(controls))) {

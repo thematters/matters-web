@@ -6,9 +6,11 @@ import {
   Error,
   Expandable,
   FollowUserButton,
+  LanguageContext,
   Layout,
   Spinner,
   Throw404,
+  Tooltip,
   Translate,
   usePublicQuery,
   useRoute,
@@ -40,6 +42,7 @@ import { UserProfileUserPublic } from './__generated__/UserProfileUserPublic'
 export const UserProfile = () => {
   const { getQuery } = useRoute()
   const viewer = useContext(ViewerContext)
+  const { lang } = useContext(LanguageContext)
 
   // public data
   const userName = getQuery('name')
@@ -141,6 +144,9 @@ export const UserProfile = () => {
   const isUserArchived = userState === 'archived'
   const isUserBanned = userState === 'banned'
   const isUserInactive = isUserArchived || isUserBanned
+  const logbookUrl = `${process.env.NEXT_PUBLIC_TRAVELOGGERS_URL}${
+    lang === 'en' ? '/' : '/zh/'
+  }owner/${user.info.cryptoWallet?.address}`
 
   /**
    * Inactive User
@@ -186,7 +192,23 @@ export const UserProfile = () => {
 
         <header>
           <section className="avatar">
-            <Avatar size="xxxl" user={user} />
+            {hasTraveloggersBadge ? (
+              <Tooltip
+                content={
+                  <Translate
+                    zh_hant={`查看 ${user.displayName} 的航行日誌`}
+                    zh_hans={`查看 ${user.displayName} 的航行日志`}
+                    en={`View Logbooks owned by ${user.displayName}`}
+                  />
+                }
+              >
+                <a href={logbookUrl} target="_blank">
+                  <Avatar size="xxxl" user={user} inProfile />
+                </a>
+              </Tooltip>
+            ) : (
+              <Avatar size="xxxl" user={user} inProfile />
+            )}
           </section>
 
           {!isMe && <FollowUserButton user={user} size="lg" />}

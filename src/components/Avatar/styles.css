@@ -6,7 +6,7 @@
   flex-shrink: 0;
   border-radius: 50%;
 
-  & :global(img) {
+  & :global(img:not(.logbook)) {
     @mixin object-fit-cover;
 
     background-color: var(--color-grey-lighter);
@@ -29,6 +29,27 @@
   }
 }
 
+.hasBadge {
+  & .badge {
+    @mixin flex-center-all;
+
+    position: absolute;
+    right: 0;
+    bottom: 0;
+
+    & :global(img) {
+      width: var(--spacing-base);
+      height: auto;
+      transform: translateX(25%);
+    }
+
+    & :global(svg) {
+      height: auto;
+      transform: translateX(50%);
+    }
+  }
+}
+
 /**
  * Sizes
  */
@@ -37,24 +58,56 @@
 .xs {
   width: 1rem;
   height: 1rem;
+
+  &.hasBadge {
+    & .badge {
+      & :global(svg) {
+        width: calc(1rem * 0.4);
+      }
+    }
+  }
 }
 
 /* 20px */
 .sm {
   width: 1.25rem;
   height: 1.25rem;
+
+  &.hasBadge {
+    & .badge {
+      & :global(svg) {
+        width: calc(1.25rem * 0.4);
+      }
+    }
+  }
 }
 
 /* 24px */
 .md {
   width: 1.5rem;
   height: 1.5rem;
+
+  &.hasBadge {
+    & .badge {
+      & :global(svg) {
+        width: calc(1.5rem * 0.35);
+      }
+    }
+  }
 }
 
 /* 32px */
 .lg {
   width: 2rem;
   height: 2rem;
+
+  &.hasBadge {
+    & .badge {
+      & :global(svg) {
+        width: calc(2rem * 0.3);
+      }
+    }
+  }
 }
 
 /* 40px */
@@ -72,6 +125,14 @@
       left: -4px;
     }
   }
+
+  &.hasBadge {
+    & .badge {
+      & :global(svg) {
+        width: calc(2.5rem * 0.3);
+      }
+    }
+  }
 }
 
 /* 48px */
@@ -85,6 +146,15 @@
       right: -5px;
       bottom: -5px;
       left: -5px;
+    }
+  }
+
+  &.hasBadge {
+    & .badge {
+      & :global(svg) {
+        width: calc(3rem * 0.3);
+        transform: translateX(20%);
+      }
     }
   }
 }
@@ -102,6 +172,14 @@
       left: -6px;
     }
   }
+
+  &.hasBadge {
+    & .badge {
+      & :global(svg) {
+        transform: translateX(25%);
+      }
+    }
+  }
 }
 
 /* 72px */
@@ -115,6 +193,14 @@
       right: -8px;
       bottom: -8px;
       left: -8px;
+    }
+  }
+
+  &.hasBadge {
+    & .badge {
+      & :global(svg) {
+        transform: translateX(25%);
+      }
     }
   }
 }
