@@ -40,9 +40,7 @@ const ViewerFragments = {
           cryptoWallet {
             id
             address
-            nfts {
-              id
-            }
+            # nfts { id }
           }
         }
         settings {
