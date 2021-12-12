@@ -17,6 +17,7 @@ export const MOCK_USER = {
       __typename: 'CryptoWallet' as any,
       id: 'crypto-wallet-0000',
       address: '0x0x0x0x0x0x0x0x0x0x0x',
+      hasNFTs: true,
       nfts: [
         {
           __typename: 'NFTAsset' as any,
@@ -179,6 +180,7 @@ export const MOCK_CRYPTO_WALLET = {
   __typename: 'CryptoWallet' as any,
   id: 'crypto-wallet-0000',
   address: '0x0x0x0x0x0x0x0x0x0x0x',
+  hasNFTs: false,
   nfts: [
     {
       __typename: 'NFTAsset' as any,
