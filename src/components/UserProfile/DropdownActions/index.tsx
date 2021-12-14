@@ -51,9 +51,7 @@ const fragments = {
           cryptoWallet {
             id
             address
-            nfts {
-              id
-            }
+            hasNFTs
           }
         }
         ...BlockUserPublic
@@ -147,9 +145,9 @@ const DropdownActions = ({ user, isMe }: DropdownActionsProps) => {
   const controls = {
     hasEditProfile: isMe,
     hasBlockUser: !isMe,
-    hasLogbook:
+    hasLogbook: !!user.info.cryptoWallet?.hasNFTs /*
       Array.isArray(user.info.cryptoWallet?.nfts) &&
-      (user.info.cryptoWallet?.nfts || []).length > 0,
+      (user.info.cryptoWallet?.nfts || []).length > 0, */,
   }
 
   if (_isEmpty(_pickBy(controls))) {
