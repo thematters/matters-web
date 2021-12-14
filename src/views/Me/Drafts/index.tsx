@@ -2,7 +2,6 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
 import {
-  createCacheContext,
   DraftDigest,
   EmptyDraft,
   Head,
@@ -15,6 +14,8 @@ import {
 } from '~/components'
 
 import { mergeConnections } from '~/common/utils'
+
+import { DraftsContext } from './context'
 
 import {
   MeDraftFeed,
@@ -43,9 +44,6 @@ const ME_DRAFTS_FEED = gql`
   }
   ${DraftDigest.Feed.fragments.draft}
 `
-
-export const DraftsContext =
-  createCacheContext<MeDraftFeed_viewer_drafts_edges[]>()
 
 export const BaseMeDrafts = () => {
   const [edges, setEdges, DraftsContextProvider] = useCache<

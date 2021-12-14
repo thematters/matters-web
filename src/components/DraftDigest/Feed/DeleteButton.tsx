@@ -13,7 +13,7 @@ import {
 
 import { ADD_TOAST } from '~/common/enums'
 
-import { DraftsContext } from '../../../views/Me/Drafts'
+import { DraftsContext } from '../../../views/Me/Drafts/context'
 
 import { DeleteButtonDraft } from './__generated__/DeleteButtonDraft'
 import { DeleteDraft } from './__generated__/DeleteDraft'
@@ -45,7 +45,6 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
       const filteredEdges = (edges ?? []).filter(
         ({ node }) => node.id !== draft.id
       )
-
       setEdges(filteredEdges)
     },
   })
