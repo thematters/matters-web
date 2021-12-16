@@ -79,25 +79,24 @@ export const useEditDraftAccess = (
   circle?: DigestRichCirclePublic
 ) => {
   const draftId = draft.id
-  const [setCircle, { loading: saving }] =
+  const [setAccess, { loading: saving }] =
     useMutation<SetDraftAccess>(SET_ACCESS)
 
   const edit = async (
     addToCircle: boolean,
     paywalled: boolean,
     license: ArticleLicenseType
-  ) => {
-    return setCircle({
+  ) =>
+    setAccess({
       variables: {
         id: draftId,
         circle: (addToCircle && circle?.id) || null,
+        license,
         accessType: paywalled
           ? ArticleAccessType.paywall
           : ArticleAccessType.public,
-        license,
       },
     })
-  }
 
   return { edit, saving }
 }
