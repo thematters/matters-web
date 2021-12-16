@@ -53,18 +53,19 @@ const BaseShareDialog = ({
 function tryDecodeUrl(url: string) {
   try {
     return decodeURIComponent(url)
-  } catch(err) {
+  } catch (err) {
     return url
   }
 }
 
 export const ShareDialog = (props: ShareDialogProps) => {
   const { title, path } = props
-  const shareLink = tryDecodeUrl(process.browser
-    ? path
-      ? `${window.location.origin}${path}`
-      : window.location.href
-    : ''
+  const shareLink = tryDecodeUrl(
+    process.browser
+      ? path
+        ? `${window.location.origin}${path}`
+        : window.location.href
+      : ''
   )
   const shareTitle =
     title || (process.browser ? window.document.title || '' : '')
