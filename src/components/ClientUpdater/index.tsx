@@ -1,10 +1,14 @@
 import { useApolloClient } from '@apollo/react-hooks'
 import differenceInDays from 'date-fns/differenceInDays'
 import parseISO from 'date-fns/parseISO'
-import { useRouter } from 'next/router'
 import { useContext, useEffect, useRef } from 'react'
 
-import { useEventListener, useWindowResize, ViewerContext } from '~/components'
+import {
+  useEventListener,
+  useRoute,
+  useWindowResize,
+  ViewerContext,
+} from '~/components'
 
 import {
   ONBOARDING_TASKS_HIDE,
@@ -13,7 +17,7 @@ import {
 import { storage } from '~/common/utils'
 
 export const ClientUpdater = () => {
-  const router = useRouter()
+  const { router, isInPath, setQuery } = useRoute()
   const client = useApolloClient()
   const viewer = useContext(ViewerContext)
 
@@ -125,16 +129,14 @@ export const ClientUpdater = () => {
       return
     }
 
-    client.writeData({
-      id: 'ClientPreference:local',
-      data: { feedSortType: 'icymi' },
-    })
+    setQuery('type', 'icymi')
   }
 
   useEffect(() => {
     const viewerCreatedAt = viewer?.info.createdAt
+    const isHome = isInPath('HOME')
 
-    if (!viewerCreatedAt) {
+    if (!viewerCreatedAt || !isHome) {
       return
     }
 

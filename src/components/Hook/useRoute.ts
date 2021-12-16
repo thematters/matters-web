@@ -49,5 +49,10 @@ export const useRoute = () => {
     return query || ''
   }
 
-  return { isInPath, isPathStartWith, getQuery, router }
+  const setQuery = (key: QueryKey, value: string) => {
+    const query = { ...router.query, [key]: value }
+    router.push({ query })
+  }
+
+  return { isInPath, isPathStartWith, getQuery, setQuery, router }
 }

@@ -1,32 +1,36 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useEffect, useState } from 'react'
 
-import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
+import { useRoute } from '~/components'
 
 import MainFeed from './MainFeed'
 import SortBy, { SortByType } from './SortBy'
 
-import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
-
 const HomeFeed = () => {
-  const { data, client } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
-    variables: { id: 'local' },
-  })
-  const { feedSortType } = data?.clientPreference || {
-    feedSortType: 'hottest',
+  const { getQuery, setQuery } = useRoute()
+  const qsType = getQuery('type') as SortByType
+
+  const [type, setType] = useState<SortByType>('hottest')
+
+  const setSortBy = (newType: SortByType) => {
+    setQuery('type', newType)
+    setType(newType)
   }
-  const setSortBy = (type: SortByType) => {
-    if (client) {
-      client.writeData({
-        id: 'ClientPreference:local',
-        data: { feedSortType: type },
-      })
+
+  // read from query
+  useEffect(() => {
+    const validTypes: SortByType[] = ['hottest', 'newest', 'icymi']
+    const newType = validTypes.indexOf(qsType) >= 0 ? qsType : ''
+
+    if (newType) {
+      console.log({ newType })
+      setType(newType)
     }
-  }
+  }, [qsType])
 
   return (
     <>
-      <SortBy sortBy={feedSortType as SortByType} setSortBy={setSortBy} />
-      <MainFeed feedSortType={feedSortType as SortByType} />
+      <SortBy sortBy={type} setSortBy={setSortBy} />
+      <MainFeed feedSortType={type} />
     </>
   )
 }
