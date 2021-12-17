@@ -75,7 +75,11 @@ const LICENSE_TEXT = {
       },
     },
     [ArticleLicenseType.arr]: {
-      title: { zh_hant: '', zh_hans: '', en: '' },
+      title: {
+        zh_hant: '作者保留所有權利',
+        zh_hans: '作者保留所有权利',
+        en: 'All Rights Reserved',
+      },
       subtitle: { zh_hant: '', zh_hans: '', en: '' },
     },
   },
@@ -84,13 +88,11 @@ const LICENSE_TEXT = {
 const SelectLicense = ({ isInCircle, license, onChange }: Props) => {
   const { lang } = useContext(LanguageContext)
 
-  const options = isInCircle
-    ? [
-        ArticleLicenseType.cc_by_nc_nd_2,
-        ArticleLicenseType.cc_0,
-        ArticleLicenseType.arr,
-      ]
-    : [ArticleLicenseType.cc_by_nc_nd_2, ArticleLicenseType.cc_0]
+  const options = [
+    ArticleLicenseType.cc_by_nc_nd_2,
+    ArticleLicenseType.cc_0,
+    ArticleLicenseType.arr,
+  ]
 
   return (
     <Form.Select
