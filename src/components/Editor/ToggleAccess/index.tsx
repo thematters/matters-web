@@ -95,7 +95,7 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
             onChange={(newLicense) =>
               editAccess(
                 !!circle,
-                newLicense === ArticleLicenseType.arr,
+                !!circle && newLicense === ArticleLicenseType.arr,
                 newLicense
               )
             }

@@ -24,9 +24,6 @@ export default gql`
   type ClientPreference {
     id: ID!
 
-    "Feed type in homepage"
-    feedSortType: FeedSortType
-
     "Whether civic liker dialog is hidden"
     readCivicLikerDialog: Boolean!
 
@@ -77,12 +74,6 @@ export default gql`
 
   type OnboardingTasks {
     enabled: Boolean!
-  }
-
-  enum FeedSortType {
-    hottest
-    newest
-    icymi
   }
 
   enum Language {
