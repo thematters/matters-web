@@ -1,4 +1,5 @@
 export * from './LoginForm'
+export * from './LoginSignUpForm'
 export * from './ChangePasswordForm'
 export * from './SignUpForm'
 export * from './ChangeEmailForm'

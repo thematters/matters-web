@@ -4,8 +4,9 @@ import { useContext } from 'react'
 import {
   IconLogo,
   Layout,
-  LoginButton,
-  SignUpButton,
+  // LoginButton,
+  // SignUpButton,
+  LoginSignUpButton,
   Spacer,
   useResponsive,
   ViewerContext,
@@ -48,8 +49,8 @@ const Home = () => {
 
               {!viewer.isAuthed && (
                 <section className="buttons">
-                  <LoginButton size={[null, '2rem']} />
-                  <SignUpButton size={[null, '2rem']} />
+                  {/* <LoginButton size={[null, '2rem']} /> */}
+                  <LoginSignUpButton size={[null, '2rem']} />
                 </section>
               )}
             </>

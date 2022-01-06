@@ -50,6 +50,7 @@ interface ClickButtonProp {
     | 'share_article'
     | 'share_user'
     | 'signup'
+    | 'login/signup'
     | 'top_up'
     | 'translation' // translation button
     | 'write'
