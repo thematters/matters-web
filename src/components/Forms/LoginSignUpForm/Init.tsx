@@ -49,7 +49,7 @@ const Init: React.FC<FormProps> = ({
   const InnerForm = (
     <Form id={formId} onSubmit={submitCallback}>
       <label>
-        <Translate id="connectMethod" />
+        <Translate zh_hant="選擇管道" zh_hans="選擇管道" en="Connect Method" />
       </label>
       <Form.List spacing="xloose">
         <Form.List.Item

@@ -1,30 +1,27 @@
-import gql from 'graphql-tag'
+import { useWeb3React } from '@web3-react/core'
+import { ethers } from 'ethers'
+import React, { useEffect } from 'react'
+// import gql from 'graphql-tag'
 
 import {
   Dialog,
   Form, // Layout,
   Translate,
-  useMutation,
+  // useMutation,
 } from '~/components'
 
-import { GenerateSigningMessage } from './__generated__/GenerateSigningMessage'
+import {
+  CLOSE_ACTIVE_DIALOG,
+  OPEN_WALLET_SIGNUP_DIALOG,
+  WalletConnector,
+} from '~/common/enums'
+import { analytics, walletConnectors } from '~/common/utils'
 
 interface FormProps {
   purpose: 'dialog' | 'page'
   submitCallback: () => void
   closeDialog?: () => void
 }
-
-const GENERATE_SIGNING_MESSAGE = gql`
-  mutation GenerateSigningMessage($address: String!) {
-    generateSigningMessage(address: $address) {
-      nonce
-      signingMessage
-      createdAt
-      expiredAt
-    }
-  }
-`
 
 const ConnectWallet: React.FC<FormProps> = ({
   purpose,
@@ -33,13 +30,29 @@ const ConnectWallet: React.FC<FormProps> = ({
 }) => {
   const formId = 'login-sign-up-connect-wallet-form'
 
-  const [generateSigningMessage] = useMutation<GenerateSigningMessage>(
+  const {
+    activate,
+    connector,
+    account, // error,
+  } = useWeb3React<ethers.providers.Web3Provider>()
+
+  const connectorMetaMask = walletConnectors[WalletConnector.MetaMask]
+  const connectorWalletConnect = walletConnectors[WalletConnector.WalletConnect]
+
+  const [activatingConnector, setActivatingConnector] = React.useState<any>()
+  useEffect(() => {
+    if (activatingConnector && activatingConnector === connector) {
+      setActivatingConnector(undefined)
+    }
+  }, [activatingConnector, connector])
+
+  /* const [generateSigningMessage] = useMutation<GenerateSigningMessage>(
     GENERATE_SIGNING_MESSAGE,
     undefined,
     {
       showToast: false,
     }
-  )
+  ) */
 
   const SubmitButton = (
     <Dialog.Header.RightButton
@@ -64,26 +77,15 @@ const ConnectWallet: React.FC<FormProps> = ({
             />
           }
           onClick={async () => {
-            const res = await window.ethereum.request({
-              method: 'eth_requestAccounts',
+            analytics.trackEvent('click_button', {
+              type: 'connectorMetaMask',
             })
-            console.log('connect metamask:', res)
-            const address = res[0]
-            const res2 = await generateSigningMessage({
-              variables: { address },
-            })
-            const signingMessage =
-              res2?.data?.generateSigningMessage?.signingMessage
-            const nonce = res2?.data?.generateSigningMessage?.nonce
-            console.log('got sign message:', res2, nonce, signingMessage)
-            const signature = await window.ethereum.request({
-              method: 'personal_sign',
-              params: [
-                signingMessage,
-                address, // .toLowerCase(),
-              ],
-            }) // .then(console.log)
-            console.log('signature:', signature)
+            setActivatingConnector(connectorMetaMask)
+            activate(connectorMetaMask)
+
+            console.log(`connect'ed via MetaMask`, account)
+            window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
+            window.dispatchEvent(new CustomEvent(OPEN_WALLET_SIGNUP_DIALOG))
           }}
         />
         <Form.List.Item
@@ -95,7 +97,15 @@ const ConnectWallet: React.FC<FormProps> = ({
             />
           }
           onClick={() => {
-            console.log('connect via WalletConnect')
+            analytics.trackEvent('click_button', {
+              type: 'connectorWalletConnect',
+            })
+            setActivatingConnector(connectorWalletConnect)
+            activate(connectorWalletConnect)
+
+            console.log(`connect'ed via WalletConnect`, account)
+            window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
+            window.dispatchEvent(new CustomEvent(OPEN_WALLET_SIGNUP_DIALOG))
           }}
         />
       </Form.List>

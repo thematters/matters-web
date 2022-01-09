@@ -1,5 +1,6 @@
+import { useWeb3React } from '@web3-react/core'
+import { ethers } from 'ethers'
 import { useFormik } from 'formik'
-// import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 
@@ -7,7 +8,6 @@ import {
   Dialog,
   Form,
   LanguageContext,
-  Layout,
   Translate,
   useMutation,
   VerificationSendCodeButton,
@@ -18,43 +18,50 @@ import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 import {
   parseFormSubmitErrors,
   translate,
+  // validateDisplayName,
   validateCode,
   validateEmail,
+  // validateToS,
 } from '~/common/utils'
-
-import { ChangeEmail } from '~/components/GQL/mutations/__generated__/ChangeEmail'
-import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
-
-interface FormProps {
-  oldData: { email: string; codeId: string }
-  purpose: 'dialog' | 'page'
-  submitCallback: () => void
-  closeDialog?: () => void
-}
+// import SEND_CODE from '~/components/GQL/mutations/sendCode'
 
 interface FormValues {
   email: string
   code: string
 }
 
-const Confirm: React.FC<FormProps> = ({
-  oldData,
+interface FormProps {
+  purpose: 'dialog' | 'page'
+  // submitCallback: () => void
+  submitCallback?: (codeId: string) => void
+  closeDialog?: () => void
+}
+
+// import { SendVerificationCode } from '~/components/GQL/mutations/__generated__/SendVerificationCode'
+import { ChangeEmail } from '~/components/GQL/mutations/__generated__/ChangeEmail'
+import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
+
+const Verify: React.FC<FormProps> = ({
   purpose,
   submitCallback,
   closeDialog,
 }) => {
-  const [confirmCode] = useMutation<ConfirmVerificationCode>(
-    CONFIRM_CODE,
-    undefined,
-    { showToast: false }
-  )
+  const { lang } = useContext(LanguageContext)
+
+  const formId = 'wallet-sign-up-verify-form'
+
+  /* const [sendCode] = useMutation<SendVerificationCode>(SEND_CODE, undefined, {
+    showToast: false,
+  }) */
+  const [confirmCode] = useMutation<ConfirmVerificationCode>(CONFIRM_CODE)
+
   const [changeEmail] = useMutation<ChangeEmail>(CHANGE_EMAIL, undefined, {
     showToast: false,
   })
-  const { lang } = useContext(LanguageContext)
-  const isInPage = purpose === 'page'
 
-  const formId = 'change-email-confirm-form'
+  const {
+    account, // library
+  } = useWeb3React<ethers.providers.Web3Provider>()
 
   const {
     values,
@@ -72,35 +79,41 @@ const Confirm: React.FC<FormProps> = ({
     },
     validate: ({ email, code }) =>
       _pickBy({
+        // displayName: validateDisplayName(displayName, lang),
         email: validateEmail(email, lang, { allowPlusSign: false }),
+        // tos: validateToS(tos, lang),
         code: validateCode(code, lang),
       }),
     onSubmit: async ({ email, code }, { setFieldError, setSubmitting }) => {
       try {
+        if (!account) {
+          console.error('no account connected')
+          return
+        }
+
         const { data } = await confirmCode({
-          variables: { input: { email, type: 'email_reset_confirm', code } },
+          variables: { input: { email, type: 'register', code } },
         })
         const confirmVerificationCode = data?.confirmVerificationCode
-        const params = {
-          variables: {
-            input: {
-              oldEmail: oldData.email,
-              oldEmailCodeId: oldData.codeId,
-              newEmail: email,
-              newEmailCodeId: confirmVerificationCode,
+
+        // setSubmitting(false)
+
+        if (submitCallback && confirmVerificationCode) {
+          await changeEmail({
+            variables: {
+              input: {
+                // oldEmail: oldData.email,
+                // oldEmailCodeId: oldData.codeId,
+                ethAddress: account,
+                newEmail: email,
+                newEmailCodeId: confirmVerificationCode,
+              },
             },
-          },
-        }
-
-        await changeEmail(params)
-
-        setSubmitting(false)
-
-        if (submitCallback) {
-          submitCallback()
+          })
+          submitCallback(confirmVerificationCode)
         }
       } catch (error) {
-        setSubmitting(false)
+        // setSubmitting(false)
 
         const [messages, codes] = parseFormSubmitErrors(error, lang)
         codes.forEach((c) => {
@@ -110,18 +123,30 @@ const Confirm: React.FC<FormProps> = ({
             setFieldError('email', messages[c])
           }
         })
+      } finally {
+        setSubmitting(false)
       }
     },
   })
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
+      <div>
+        <Translate
+          zh_hant="所有重要訊息將通過郵件通知你。請注意，此郵箱將不作為登入管道使用。"
+          zh_hans="所有重要訊息將通過郵件通知你。請注意，此郵箱將不作為登入管道使用。"
+          en="for notification purpose only, this email is not to use as login"
+        />
+      </div>
       <Form.Input
-        label={<Translate id="email" />}
+        label={<Translate zh_hant="E-email" zh_hans="E-email" en="E-email" />}
         type="email"
         name="email"
         required
-        placeholder={translate({ id: 'enterNewEmail', lang })}
+        placeholder={translate({
+          id: 'enterEmail',
+          lang,
+        })}
         value={values.email}
         error={touched.email && errors.email}
         onBlur={handleBlur}
@@ -141,7 +166,7 @@ const Confirm: React.FC<FormProps> = ({
         extraButton={
           <VerificationSendCodeButton
             email={values.email}
-            type="email_reset_confirm"
+            type="register"
             disabled={!!errors.email}
           />
         }
@@ -154,34 +179,16 @@ const Confirm: React.FC<FormProps> = ({
       type="submit"
       form={formId}
       disabled={!isValid || isSubmitting}
-      text={<Translate id="confirm" />}
+      text={<Translate id="nextStep" />}
       loading={isSubmitting}
     />
   )
-
-  if (isInPage) {
-    return (
-      <>
-        <Layout.Header
-          left={<Layout.Header.BackButton />}
-          right={
-            <>
-              <Layout.Header.Title id="changeEmail" />
-              {SubmitButton}
-            </>
-          }
-        />
-
-        {InnerForm}
-      </>
-    )
-  }
 
   return (
     <>
       {closeDialog && (
         <Dialog.Header
-          title="changeEmail"
+          title="register"
           closeDialog={closeDialog}
           rightButton={SubmitButton}
         />
@@ -192,4 +199,4 @@ const Confirm: React.FC<FormProps> = ({
   )
 }
 
-export default Confirm
+export default Verify
