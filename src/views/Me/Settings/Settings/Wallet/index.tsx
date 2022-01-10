@@ -11,7 +11,10 @@ import {
   ViewerContext,
 } from '~/components'
 
-import { OPEN_LIKE_COIN_DIALOG } from '~/common/enums'
+import {
+  OPEN_LIKE_COIN_DIALOG,
+  OPEN_WALLET_SIGNUP_DIALOG,
+} from '~/common/enums'
 import { numRound } from '~/common/utils'
 
 import { ViewerLikeInfo } from './__generated__/ViewerLikeInfo'
@@ -20,6 +23,10 @@ const VIEWER_LIKE_INFO = gql`
   query ViewerLikeInfo {
     viewer {
       id
+      info {
+        email
+        ethAddress
+      }
       liker {
         total
         rateUSD
@@ -47,6 +54,8 @@ const WalletSettings = () => {
   const total = liker?.total || 0
   const USDPrice = numRound(rateUSD * total)
   const equalSign = total > 0 ? '≈' : '='
+
+  const ethAddress = data?.viewer?.info?.ethAddress
 
   usePullToRefresh.Handler(refetch)
 
@@ -101,6 +110,22 @@ const WalletSettings = () => {
         rightSubText={
           !shouldReAuth && likerId && `${equalSign} ${USDPrice} USD`
         }
+      />
+
+      <Form.List.Item
+        title={
+          <Translate zh_hant="加密錢包登入" zh_hans="加密钱包登入" en="Crypto Wallet Login" />
+        }
+        onClick={
+          !ethAddress
+            ? () =>
+                window.dispatchEvent(
+                  new CustomEvent(OPEN_WALLET_SIGNUP_DIALOG, {})
+                )
+            : undefined
+        }
+        rightText={ethAddress || <Translate zh_hant="新上線！前往設置" zh_hans="新上线！前往设置" en="New! Click to Setup" />}
+        rightTextColor={ethAddress ? "grey-darker" : "green"}
       />
     </Form.List>
   )
