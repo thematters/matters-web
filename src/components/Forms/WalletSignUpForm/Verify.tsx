@@ -92,7 +92,8 @@ const Verify: React.FC<FormProps> = ({
         }
 
         const { data } = await confirmCode({
-          variables: { input: { email, type: 'register', code } },
+          // variables: { input: { email, type: 'register', code } },
+          variables: { input: { email, type: 'email_reset_confirm', code } },
         })
         const confirmVerificationCode = data?.confirmVerificationCode
 
@@ -166,7 +167,7 @@ const Verify: React.FC<FormProps> = ({
         extraButton={
           <VerificationSendCodeButton
             email={values.email}
-            type="register"
+            type="email_reset_confirm"
             disabled={!!errors.email}
           />
         }

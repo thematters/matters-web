@@ -12,7 +12,6 @@ type Step = 'request' | 'confirm' | 'complete'
 
 const ChangeEmail = () => {
   const viewer = useContext(ViewerContext)
-  const { currStep, forward } = useStep<Step>('request')
   const [data, setData] = useState<{ email: string; codeId: string }>({
     email: viewer.info.email,
     codeId: '',
@@ -21,6 +20,11 @@ const ChangeEmail = () => {
     setData({ ...data, codeId })
     forward('confirm')
   }
+
+  // skip request code for old email if did not have email before
+  const { currStep, forward } = useStep<Step>(
+    data.email ? 'request' : 'confirm'
+  )
 
   return (
     <Layout.Main bgColor="grey-lighter">
