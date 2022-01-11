@@ -105,7 +105,7 @@ const Verify: React.FC<FormProps> = ({
               input: {
                 // oldEmail: oldData.email,
                 // oldEmailCodeId: oldData.codeId,
-                ethAddress: account,
+                // ethAddress: account,
                 newEmail: email,
                 newEmailCodeId: confirmVerificationCode,
               },
