@@ -101,7 +101,7 @@ const Init: React.FC<FormProps> = ({
     </Form>
   )
 
-  const SubmitButton = (
+  /* const SubmitButton = (
     <Dialog.Header.RightButton
       type="submit"
       form={formId}
@@ -109,7 +109,7 @@ const Init: React.FC<FormProps> = ({
       text={<Translate id="nextStep" />}
       // loading={isSubmitting}
     />
-  )
+  ) */
 
   if (isInPage) {
     return (
@@ -140,7 +140,7 @@ const Init: React.FC<FormProps> = ({
         <Dialog.Header
           title="loginSignUp"
           closeDialog={closeDialog}
-          rightButton={SubmitButton}
+          // rightButton={SubmitButton}
         />
       )}
 

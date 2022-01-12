@@ -11,7 +11,9 @@ import {
 
 import { CLOSE_ACTIVE_DIALOG, OPEN_WALLET_SIGNUP_DIALOG } from '~/common/enums'
 
-type Step = 'init' | 'connect-wallet' | 'verify-email' | 'complete'
+import { AuthResultType } from '@/__generated__/globalTypes'
+
+type Step = 'connect-wallet' | 'select-account' | 'verify-email' | 'complete'
 
 const BaseSignUpDialog = () => {
   const { currStep, forward } = useStep<Step>('connect-wallet')
@@ -35,19 +37,20 @@ const BaseSignUpDialog = () => {
         <WalletSignUpForm.ConnectWallet
           purpose="dialog"
           submitCallback={() => {
-            forward('init')
+            forward('select-account')
           }}
           closeDialog={closeDialog}
         />
       )}
-      {currStep === 'init' && (
+      {currStep === 'select-account' && (
         <ReCaptchaProvider>
-          <WalletSignUpForm.Init
+          <WalletSignUpForm.SelectAccount // Init
             purpose="dialog"
-            submitCallback={(ethAddress: string) => {
-              console.log('after init:', ethAddress)
-              forward('connect-wallet')
-              // forward('verify-email')
+            submitCallback={(ethAddress: string, type: AuthResultType) => {
+              console.log('after select-account:', ethAddress)
+              forward(
+                type === AuthResultType.Signup ? 'verify-email' : 'complete'
+              )
             }}
             closeDialog={closeDialog}
           />

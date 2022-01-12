@@ -14,7 +14,7 @@ import {
   OPEN_LINK_WALLET_DIALOG,
 } from '~/common/enums'
 
-type Step = 'init' | 'connect-wallet' | 'complete'
+type Step = 'connect-wallet' | 'select-account' | 'complete'
 
 const BaseLinkWalletDialog = () => {
   const { currStep, forward } = useStep<Step>('connect-wallet')
@@ -38,18 +38,17 @@ const BaseLinkWalletDialog = () => {
         <WalletSignUpForm.ConnectWallet
           purpose="dialog"
           submitCallback={() => {
-            forward('init')
+            forward('select-account')
           }}
           closeDialog={closeDialog}
         />
       )}
-      {currStep === 'init' && (
-        <WalletSignUpForm.Init
+      {currStep === 'select-account' && (
+        <WalletSignUpForm.SelectAccount
           purpose="dialog"
           submitCallback={(ethAddress: string) => {
-            console.log('after init:', ethAddress)
-            // forward('complete')
-            // forward('verify-email')
+            console.log('after select-account:', ethAddress)
+
             window.dispatchEvent(
               new CustomEvent(ADD_TOAST, {
                 detail: {

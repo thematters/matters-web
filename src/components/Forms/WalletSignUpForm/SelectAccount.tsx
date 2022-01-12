@@ -40,7 +40,7 @@ const isStaticBuild = process.env.NEXT_PUBLIC_BUILD_TYPE === 'static'
 interface FormProps {
   purpose: 'dialog' | 'page'
   // submitCallback: () => void
-  submitCallback?: (ethAddress: string) => void
+  submitCallback?: (ethAddress: string, type: AuthResultType) => void
   closeDialog?: () => void
 }
 
@@ -70,7 +70,7 @@ const WALLET_LOGIN_MESSAGE = gql`
   }
 `
 
-const Init: React.FC<FormProps> = ({
+const SelectAccount: React.FC<FormProps> = ({
   purpose,
   submitCallback,
   closeDialog,
@@ -78,7 +78,7 @@ const Init: React.FC<FormProps> = ({
   const { lang } = useContext(LanguageContext)
   // const isInDialog = purpose === 'dialog'
   const isInPage = purpose === 'page'
-  const formId = 'wallet-sign-up-init-form'
+  const formId = 'wallet-sign-up-select-account-form'
 
   const [generateSigningMessage] = useMutation<GenerateSigningMessage>(
     GENERATE_SIGNING_MESSAGE,
@@ -173,6 +173,12 @@ const Init: React.FC<FormProps> = ({
         })
 
         console.log('wallet-signup-result:', result)
+        const { data: signupData } = result
+        if (!signupData) {
+          // console.error()
+          setFieldError('address', 'eth-address-not-correct')
+          return
+        }
 
         window.dispatchEvent(
           new CustomEvent(ADD_TOAST, {
@@ -184,17 +190,17 @@ const Init: React.FC<FormProps> = ({
         )
         analytics.identifyUser()
 
-        const token = result.data?.walletLogin.token
+        const token = signupData.walletLogin.token
         if (isStaticBuild && token) {
           storage.set(STORAGE_KEY_AUTH_TOKEN, token)
         }
 
-        if (result.data?.walletLogin.type === AuthResultType.Login) {
+        if (signupData.walletLogin.type === AuthResultType.Login) {
           redirectToTarget({
             fallback: isInPage ? 'homepage' : 'current',
           })
-        } else if (submitCallback && result.data?.walletLogin) {
-          submitCallback(address)
+        } else if (submitCallback && signupData.walletLogin) {
+          submitCallback(address, signupData.walletLogin.type)
         }
       } catch (err) {
         console.error('ERROR:', err)
@@ -310,4 +316,4 @@ const Init: React.FC<FormProps> = ({
   )
 }
 
-export default Init
+export default SelectAccount
