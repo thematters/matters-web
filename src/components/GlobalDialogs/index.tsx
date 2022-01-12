@@ -3,6 +3,7 @@ import { ethers } from 'ethers'
 
 import { LikeCoinDialog } from '~/components'
 
+import LinkWalletDialog from './LinkWalletDialog'
 import LoginDialog from './LoginDialog'
 import LoginSignUpDialog from './LoginSignUpDialog'
 import ResetPasswordDialog from './ResetPasswordDialog'
@@ -20,6 +21,7 @@ const GlobalDialogs = () => {
       <SignUpDialog />
       <LoginSignUpDialog />
       <WalletSignUpDialog />
+      <LinkWalletDialog />
       <ResetPasswordDialog />
       <LikeCoinDialog />
     </Web3ReactProvider>

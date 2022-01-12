@@ -1,19 +1,22 @@
 import {
   Dialog,
-  ReCaptchaProvider,
-  SignUpForm,
+  // SignUpForm,
+  Translate,
   useDialogSwitch,
   useEventListener,
   useStep,
-  // VerificationLinkSent,
   WalletSignUpForm,
 } from '~/components'
 
-import { CLOSE_ACTIVE_DIALOG, OPEN_WALLET_SIGNUP_DIALOG } from '~/common/enums'
+import {
+  ADD_TOAST,
+  CLOSE_ACTIVE_DIALOG,
+  OPEN_LINK_WALLET_DIALOG,
+} from '~/common/enums'
 
-type Step = 'init' | 'connect-wallet' | 'verify-email' | 'complete'
+type Step = 'init' | 'connect-wallet' | 'complete'
 
-const BaseSignUpDialog = () => {
+const BaseLinkWalletDialog = () => {
   const { currStep, forward } = useStep<Step>('connect-wallet')
 
   const {
@@ -27,7 +30,7 @@ const BaseSignUpDialog = () => {
   }
 
   useEventListener(CLOSE_ACTIVE_DIALOG, closeDialog)
-  useEventListener(OPEN_WALLET_SIGNUP_DIALOG, openDialog)
+  useEventListener(OPEN_LINK_WALLET_DIALOG, openDialog)
 
   return (
     <Dialog size="sm" isOpen={show} onDismiss={closeDialog}>
@@ -41,44 +44,41 @@ const BaseSignUpDialog = () => {
         />
       )}
       {currStep === 'init' && (
-        <ReCaptchaProvider>
-          <WalletSignUpForm.Init
-            purpose="dialog"
-            submitCallback={(ethAddress: string) => {
-              console.log('after init:', ethAddress)
-              forward('connect-wallet')
-              // forward('verify-email')
-            }}
-            closeDialog={closeDialog}
-          />
-        </ReCaptchaProvider>
-      )}
-      {currStep === 'verify-email' && (
-        <WalletSignUpForm.Verify
+        <WalletSignUpForm.Init
           purpose="dialog"
-          submitCallback={() => {
-            forward('complete')
+          submitCallback={(ethAddress: string) => {
+            console.log('after init:', ethAddress)
+            // forward('complete')
+            // forward('verify-email')
+            window.dispatchEvent(
+              new CustomEvent(ADD_TOAST, {
+                detail: {
+                  color: 'green',
+                  content: <Translate id="successLinkWallet" />,
+                },
+              })
+            )
           }}
           closeDialog={closeDialog}
         />
       )}
-      {currStep === 'complete' && <SignUpForm.Complete purpose="page" />}
+      {/* currStep === 'complete' && <SignUpForm.Complete purpose="page" /> */}
       {/* <pre>{JSON.stringify({ account })}</pre> */}
     </Dialog>
   )
 }
 
-const WalletSignUpDialog = () => {
+const LinkWalletDialog = () => {
   const Children = ({ openDialog }: { openDialog: () => void }) => {
-    useEventListener(OPEN_WALLET_SIGNUP_DIALOG, openDialog)
+    useEventListener(OPEN_LINK_WALLET_DIALOG, openDialog)
     return null
   }
 
   return (
-    <Dialog.Lazy mounted={<BaseSignUpDialog />}>
+    <Dialog.Lazy mounted={<BaseLinkWalletDialog />}>
       {({ openDialog }) => <Children openDialog={openDialog} />}
     </Dialog.Lazy>
   )
 }
 
-export default WalletSignUpDialog
+export default LinkWalletDialog

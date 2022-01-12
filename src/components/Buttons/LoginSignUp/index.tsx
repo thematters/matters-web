@@ -32,7 +32,11 @@ export const LoginSignUpButton: React.FC<LoginSignUpButtonProps> = ({
             type: 'login/signup',
           })
           window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
-          window.dispatchEvent(new CustomEvent(OPEN_LOGIN_SIGNUP_DIALOG))
+          window.dispatchEvent(
+            new CustomEvent(OPEN_LOGIN_SIGNUP_DIALOG, {
+              detail: { initStep: 'init' },
+            })
+          )
         },
       }
     : {

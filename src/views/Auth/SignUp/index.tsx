@@ -1,11 +1,12 @@
 import {
   Head,
   Layout,
+  LoginSignUpForm,
   ReCaptchaProvider,
   SignUpForm,
   useRoute,
   useStep,
-  VerificationLinkSent,
+  // VerificationLinkSent,
 } from '~/components'
 
 type Step = 'init' | 'verification_sent' | 'password' | 'complete'
@@ -25,29 +26,13 @@ const SignUp = () => {
 
       {currStep === 'init' && (
         <ReCaptchaProvider>
-          <SignUpForm.Init
+          <LoginSignUpForm.Init
             purpose="page"
             submitCallback={() => {
-              forward('verification_sent')
+              forward('complete')
             }}
           />
         </ReCaptchaProvider>
-      )}
-
-      {currStep === 'verification_sent' && (
-        <VerificationLinkSent type="register" purpose="page" />
-      )}
-
-      {currStep === 'password' && (
-        <SignUpForm.Password
-          email={email}
-          code={code}
-          displayName={displayName}
-          purpose="page"
-          submitCallback={() => {
-            forward('complete')
-          }}
-        />
       )}
 
       {currStep === 'complete' && <SignUpForm.Complete purpose="page" />}

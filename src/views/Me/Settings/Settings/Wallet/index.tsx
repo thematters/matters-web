@@ -13,7 +13,9 @@ import {
 
 import {
   OPEN_LIKE_COIN_DIALOG,
-  OPEN_WALLET_SIGNUP_DIALOG,
+  // OPEN_LOGIN_SIGNUP_DIALOG,
+  // OPEN_WALLET_SIGNUP_DIALOG,
+  OPEN_LINK_WALLET_DIALOG,
 } from '~/common/enums'
 import { numRound } from '~/common/utils'
 
@@ -114,18 +116,32 @@ const WalletSettings = () => {
 
       <Form.List.Item
         title={
-          <Translate zh_hant="加密錢包登入" zh_hans="加密钱包登入" en="Crypto Wallet Login" />
+          <Translate
+            zh_hant="加密錢包登入"
+            zh_hans="加密钱包登入"
+            en="Crypto Wallet Login"
+          />
         }
         onClick={
           !ethAddress
             ? () =>
                 window.dispatchEvent(
-                  new CustomEvent(OPEN_WALLET_SIGNUP_DIALOG, {})
+                  new CustomEvent(OPEN_LINK_WALLET_DIALOG, {
+                    detail: { initStep: 'connect-wallet' },
+                  })
                 )
             : undefined
         }
-        rightText={ethAddress || <Translate zh_hant="新上線！前往設置" zh_hans="新上线！前往设置" en="New! Click to Setup" />}
-        rightTextColor={ethAddress ? "grey-darker" : "green"}
+        rightText={
+          ethAddress || (
+            <Translate
+              zh_hant="新上線！前往設置"
+              zh_hans="新上线！前往设置"
+              en="New! Click to Setup"
+            />
+          )
+        }
+        rightTextColor={ethAddress ? 'grey-darker' : 'green'}
       />
     </Form.List>
   )

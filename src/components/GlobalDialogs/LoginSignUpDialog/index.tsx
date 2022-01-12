@@ -6,6 +6,7 @@ import {
   useEventListener,
   useStep,
   VerificationLinkSent,
+  WalletSignUpForm,
 } from '~/components'
 
 import {
@@ -16,8 +17,12 @@ import {
 
 type Step = 'init' | 'connect_wallet' | 'verification_sent'
 
-const BaseLoginSignUpDialog = () => {
-  const { currStep, forward } = useStep<Step>('init')
+interface FormProps {
+  initStep?: Step
+}
+
+const BaseLoginSignUpDialog: React.FC<FormProps> = ({ initStep = 'init' }) => {
+  const { currStep, forward } = useStep<Step>(initStep)
 
   const {
     show,
@@ -25,7 +30,7 @@ const BaseLoginSignUpDialog = () => {
     closeDialog,
   } = useDialogSwitch(true)
   const openDialog = () => {
-    forward('init')
+    forward(initStep)
     baseOpenDialog()
   }
 
@@ -49,7 +54,7 @@ const BaseLoginSignUpDialog = () => {
         />
       )}
       {currStep === 'connect_wallet' && (
-        <LoginSignUpForm.ConnectWallet
+        <WalletSignUpForm.ConnectWallet
           purpose="dialog"
           submitCallback={() => {
             console.log('submit connect-wallet')
@@ -68,14 +73,18 @@ const BaseLoginSignUpDialog = () => {
   )
 }
 
-const LoginSignUpDialog = () => {
-  const Children = ({ openDialog }: { openDialog: () => void }) => {
+const LoginSignUpDialog: React.FC<FormProps> = ({ initStep = 'init' }) => {
+  const Children = ({
+    openDialog,
+  }: {
+    openDialog: ({ initStep }: { initStep: Step }) => void
+  }) => {
     useEventListener(OPEN_LOGIN_SIGNUP_DIALOG, openDialog)
     return null
   }
 
   return (
-    <Dialog.Lazy mounted={<BaseLoginSignUpDialog />}>
+    <Dialog.Lazy mounted={<BaseLoginSignUpDialog initStep={initStep} />}>
       {({ openDialog }) => <Children openDialog={openDialog} />}
     </Dialog.Lazy>
   )

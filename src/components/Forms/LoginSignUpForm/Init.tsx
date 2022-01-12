@@ -16,7 +16,11 @@ import {
 
 // import SEND_CODE from '~/components/GQL/mutations/sendCode'
 
-import { CLOSE_ACTIVE_DIALOG, OPEN_LOGIN_DIALOG } from '~/common/enums'
+import {
+  CLOSE_ACTIVE_DIALOG,
+  OPEN_LOGIN_DIALOG,
+  OPEN_WALLET_SIGNUP_DIALOG,
+} from '~/common/enums'
 // import {
 // appendTarget,
 // parseFormSubmitErrors,
@@ -32,7 +36,7 @@ import styles from './styles.css'
 
 interface FormProps {
   purpose: 'dialog' | 'page'
-  submitCallback: () => void
+  submitCallback?: () => void
   closeDialog?: () => void
 }
 
@@ -63,9 +67,14 @@ const Init: React.FC<FormProps> = ({
           // rightText={<Translate id="login" />}
           // rightTextColor="green"
           onClick={() => {
-            // window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
-            // window.dispatchEvent(new CustomEvent(OPEN_LOGIN_DIALOG))
-            submitCallback()
+            window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
+            window.dispatchEvent(
+              new CustomEvent(OPEN_WALLET_SIGNUP_DIALOG, {
+                detail: { initStep: 'init' },
+              })
+            )
+
+            submitCallback?.()
           }}
         />
         <Form.List.Item
@@ -110,7 +119,7 @@ const Init: React.FC<FormProps> = ({
           right={
             <>
               <Layout.Header.Title id="loginSignUp" />
-              {SubmitButton}
+              {/* SubmitButton */}
             </>
           }
         />

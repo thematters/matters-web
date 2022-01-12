@@ -11,8 +11,8 @@ import {
 } from '~/components'
 
 import {
-  CLOSE_ACTIVE_DIALOG,
-  OPEN_WALLET_SIGNUP_DIALOG,
+  // CLOSE_ACTIVE_DIALOG,
+  // OPEN_WALLET_SIGNUP_DIALOG,
   WalletConnector,
 } from '~/common/enums'
 import { analytics, walletConnectors } from '~/common/utils'
@@ -54,7 +54,7 @@ const ConnectWallet: React.FC<FormProps> = ({
     }
   ) */
 
-  const SubmitButton = (
+  /* const SubmitButton = (
     <Dialog.Header.RightButton
       type="submit"
       form={formId}
@@ -62,7 +62,7 @@ const ConnectWallet: React.FC<FormProps> = ({
       text={<Translate id="nextStep" />}
       // loading={isSubmitting}
     />
-  )
+  ) */
 
   const InnerForm = (
     <Form id={formId} onSubmit={submitCallback}>
@@ -84,8 +84,9 @@ const ConnectWallet: React.FC<FormProps> = ({
             activate(connectorMetaMask)
 
             console.log(`connect'ed via MetaMask`, account)
-            window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
-            window.dispatchEvent(new CustomEvent(OPEN_WALLET_SIGNUP_DIALOG))
+            // window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
+            // window.dispatchEvent(new CustomEvent(OPEN_WALLET_SIGNUP_DIALOG))
+            submitCallback()
           }}
         />
         <Form.List.Item
@@ -104,8 +105,10 @@ const ConnectWallet: React.FC<FormProps> = ({
             activate(connectorWalletConnect)
 
             console.log(`connect'ed via WalletConnect`, account)
-            window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
-            window.dispatchEvent(new CustomEvent(OPEN_WALLET_SIGNUP_DIALOG))
+            // window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
+            // window.dispatchEvent(new CustomEvent(OPEN_WALLET_SIGNUP_DIALOG))
+
+            submitCallback()
           }}
         />
       </Form.List>
@@ -119,7 +122,7 @@ const ConnectWallet: React.FC<FormProps> = ({
           title="loginSignUp"
           closeDialog={closeDialog}
           // left={<Layout.Header.BackButton />}
-          rightButton={SubmitButton}
+          // rightButton={SubmitButton}
         />
       )}
 

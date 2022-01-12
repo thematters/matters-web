@@ -17,23 +17,20 @@ import {
   useMutation,
 } from '~/components'
 
+import { ADD_TOAST, PATHS, STORAGE_KEY_AUTH_TOKEN } from '~/common/enums'
 import {
-  // CLOSE_ACTIVE_DIALOG, OPEN_LOGIN_DIALOG,
-  PATHS,
-  STORAGE_KEY_AUTH_TOKEN,
-} from '~/common/enums'
-import {
+  analytics,
   // appendTarget,
   // parseFormSubmitErrors,
+  redirectToTarget,
   storage,
   translate,
-  // validateDisplayName,
-  // validateEmail,
   validateToS,
 } from '~/common/utils'
 
 import styles from './styles.css'
 
+import { AuthResultType } from '@/__generated__/globalTypes'
 // import { SendVerificationCode } from '~/components/GQL/mutations/__generated__/SendVerificationCode'
 import { GenerateSigningMessage } from './__generated__/GenerateSigningMessage'
 import { WalletLogin } from './__generated__/WalletLogin'
@@ -48,8 +45,6 @@ interface FormProps {
 }
 
 interface FormValues {
-  // displayName: string
-  // email: string
   address: string
   tos: boolean
 }
@@ -65,11 +60,12 @@ const GENERATE_SIGNING_MESSAGE = gql`
   }
 `
 
-const WALLET_SIGNUP_MESSAGE = gql`
+const WALLET_LOGIN_MESSAGE = gql`
   mutation WalletLogin($input: WalletLoginInput!) {
     walletLogin(input: $input) {
       token
       auth
+      type
     }
   }
 `
@@ -91,8 +87,8 @@ const Init: React.FC<FormProps> = ({
       showToast: false,
     }
   )
-  const [walletSignup] = useMutation<WalletLogin>(
-    WALLET_SIGNUP_MESSAGE,
+  const [walletLogin] = useMutation<WalletLogin>(
+    WALLET_LOGIN_MESSAGE,
     undefined,
     {
       showToast: false,
@@ -124,25 +120,28 @@ const Init: React.FC<FormProps> = ({
       address: account ?? '',
       tos: false,
     },
-    validate: ({ address, tos }) =>
+    validate: ({ tos }) =>
       _pickBy({
         // displayName: validateDisplayName(displayName, lang),
         // email: validateEmail(email, lang, { allowPlusSign: false }),
         tos: validateToS(tos, lang),
-        // code: validateCode(code, lang),
       }),
-    onSubmit: async ({ address }, { setFieldError, setSubmitting }) => {
+    onSubmit: async (
+      { address = account },
+      { setFieldError, setSubmitting }
+    ) => {
       try {
         if (!library || !account) {
           setFieldError('address', 'eth-address-not-correct')
           return
         }
+        if (!address) address = account
 
-        const { data } = await generateSigningMessage({
+        const { data: dataSigningMessage } = await generateSigningMessage({
           variables: { address },
         })
 
-        const signingMessage = data?.generateSigningMessage
+        const signingMessage = dataSigningMessage?.generateSigningMessage
         if (!signingMessage) {
           setFieldError('address', 'signingMessage error')
           return
@@ -162,7 +161,7 @@ const Init: React.FC<FormProps> = ({
 
         // setSubmitting(false)
 
-        const result = await walletSignup({
+        const result = await walletLogin({
           variables: {
             input: {
               ethAddress: address,
@@ -175,12 +174,26 @@ const Init: React.FC<FormProps> = ({
 
         console.log('wallet-signup-result:', result)
 
+        window.dispatchEvent(
+          new CustomEvent(ADD_TOAST, {
+            detail: {
+              color: 'green',
+              content: <Translate id="successLogin" />,
+            },
+          })
+        )
+        analytics.identifyUser()
+
         const token = result.data?.walletLogin.token
         if (isStaticBuild && token) {
           storage.set(STORAGE_KEY_AUTH_TOKEN, token)
         }
 
-        if (submitCallback && data && result.data?.walletLogin) {
+        if (result.data?.walletLogin.type === AuthResultType.Login) {
+          redirectToTarget({
+            fallback: isInPage ? 'homepage' : 'current',
+          })
+        } else if (submitCallback && result.data?.walletLogin) {
           submitCallback(address)
         }
       } catch (err) {
@@ -205,15 +218,12 @@ const Init: React.FC<FormProps> = ({
         name="ethAddress"
         required
         placeholder={translate({
-          // zh_hant: '你的站內暱稱，之後可以修改',
-          // zh_hans: '你的站内暱称，之后可以修改',
-          en: 'Your Wallet',
           zh_hant: 'Your Wallet',
           zh_hans: 'Your Wallet',
+          en: 'Your Wallet',
           lang,
         })}
-        // value={values.displayName}
-        value={values.address}
+        value={values.address || account || ''}
         error={touched.address && errors.address}
         onBlur={handleBlur}
         onChange={handleChange}
