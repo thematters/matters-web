@@ -118,7 +118,7 @@ const SelectAccount: React.FC<FormProps> = ({
   } = useFormik<FormValues>({
     initialValues: {
       address: account ?? '',
-      tos: false,
+      tos: true, // false,
     },
     validate: ({ tos }) =>
       _pickBy({
