@@ -66,16 +66,9 @@ const ConnectWallet: React.FC<FormProps> = ({
 
   const InnerForm = (
     <Form id={formId} onSubmit={submitCallback}>
-      <div>Connect Wallet</div>
-      <Form.List spacing="xloose">
+      <Form.List groupName={<Translate id="connectWallet" />}>
         <Form.List.Item
-          title={
-            <Translate
-              zh_hant="連接 Metamask 錢包"
-              zh_hans="連接 Metamask 錢包"
-              en="connect Metamask"
-            />
-          }
+          title="MetaMask"
           onClick={async () => {
             analytics.trackEvent('click_button', {
               type: 'connectorMetaMask',
@@ -90,13 +83,7 @@ const ConnectWallet: React.FC<FormProps> = ({
           }}
         />
         <Form.List.Item
-          title={
-            <Translate
-              zh_hant="連接 WalletConnect"
-              zh_hans="連接 WalletConnect"
-              en="connect WalletConnect"
-            />
-          }
+          title="WalletConnect"
           onClick={() => {
             analytics.trackEvent('click_button', {
               type: 'connectorWalletConnect',
