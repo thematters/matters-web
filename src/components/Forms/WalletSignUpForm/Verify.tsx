@@ -18,12 +18,9 @@ import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 import {
   parseFormSubmitErrors,
   translate,
-  // validateDisplayName,
   validateCode,
   validateEmail,
-  // validateToS,
 } from '~/common/utils'
-// import SEND_CODE from '~/components/GQL/mutations/sendCode'
 
 interface FormValues {
   email: string
@@ -32,12 +29,10 @@ interface FormValues {
 
 interface FormProps {
   purpose: 'dialog' | 'page'
-  // submitCallback: () => void
   submitCallback?: (codeId: string) => void
   closeDialog?: () => void
 }
 
-// import { SendVerificationCode } from '~/components/GQL/mutations/__generated__/SendVerificationCode'
 import { ChangeEmail } from '~/components/GQL/mutations/__generated__/ChangeEmail'
 import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
 
@@ -50,9 +45,6 @@ const Verify: React.FC<FormProps> = ({
 
   const formId = 'wallet-sign-up-verify-form'
 
-  /* const [sendCode] = useMutation<SendVerificationCode>(SEND_CODE, undefined, {
-    showToast: false,
-  }) */
   const [confirmCode] = useMutation<ConfirmVerificationCode>(CONFIRM_CODE)
 
   const [changeEmail] = useMutation<ChangeEmail>(CHANGE_EMAIL, undefined, {

@@ -4,7 +4,7 @@ import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import Link from 'next/link'
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import {
   Dialog,
@@ -12,26 +12,27 @@ import {
   LanguageContext,
   LanguageSwitch,
   Layout,
-  // ReCaptchaContext,
+  TextIcon,
   Translate,
   useMutation,
+  withIcon,
 } from '~/components'
 
 import { ADD_TOAST, PATHS, STORAGE_KEY_AUTH_TOKEN } from '~/common/enums'
 import {
   analytics,
-  // appendTarget,
-  // parseFormSubmitErrors,
+  chainName,
+  maskAddress,
   redirectToTarget,
   storage,
-  translate,
   validateToS,
 } from '~/common/utils'
+
+import { ReactComponent as IconIndicator } from '@/public/static/icons/indicator.svg'
 
 import styles from './styles.css'
 
 import { AuthResultType } from '@/__generated__/globalTypes'
-// import { SendVerificationCode } from '~/components/GQL/mutations/__generated__/SendVerificationCode'
 import { GenerateSigningMessage } from './__generated__/GenerateSigningMessage'
 import { WalletLogin } from './__generated__/WalletLogin'
 
@@ -95,47 +96,54 @@ const SelectAccount: React.FC<FormProps> = ({
     }
   )
 
-  const { account, library } = useWeb3React<ethers.providers.Web3Provider>()
+  const { account, deactivate, library } =
+    useWeb3React<ethers.providers.Web3Provider>()
   // const [signing, setSigning] = useState(false)
 
-  // const address = account ? `${account.substring(0, 6)}...${account.substring(account.length - 4)}` : ''
+  const [chainId, setChainId] = useState(0)
 
-  // const { token, refreshToken } = useContext(ReCaptchaContext)
+  const updateChainId = async () => {
+    const id = (await library?.getNetwork())?.chainId
 
-  /* const handleChange = (params) => {
-    console.log('handleChange:', params)
-  } */
+    if (!id) return
+
+    setChainId(id)
+  }
+
+  useEffect(() => {
+    if (!library) return
+
+    updateChainId()
+  }, [library])
+
+  useEffect(() => {
+    setFieldValue('address', account)
+  }, [account])
 
   const {
     values,
     errors,
     touched,
-    handleBlur,
     handleChange,
     handleSubmit,
     isSubmitting,
     isValid,
+    setFieldValue,
   } = useFormik<FormValues>({
     initialValues: {
-      address: account ?? '',
-      tos: false,
+      address: '',
+      tos: true,
     },
     validate: ({ tos }) =>
       _pickBy({
-        // displayName: validateDisplayName(displayName, lang),
-        // email: validateEmail(email, lang, { allowPlusSign: false }),
         tos: validateToS(tos, lang),
       }),
-    onSubmit: async (
-      { address = account },
-      { setFieldError, setSubmitting }
-    ) => {
+    onSubmit: async ({ address }, { setFieldError, setSubmitting }) => {
       try {
         if (!library || !account) {
           setFieldError('address', 'eth-address-not-correct')
           return
         }
-        if (!address) address = account
 
         const { data: dataSigningMessage } = await generateSigningMessage({
           variables: { address },
@@ -161,7 +169,7 @@ const SelectAccount: React.FC<FormProps> = ({
 
         // setSubmitting(false)
 
-        const result = await walletLogin({
+        const { data: signupData } = await walletLogin({
           variables: {
             input: {
               ethAddress: address,
@@ -172,10 +180,7 @@ const SelectAccount: React.FC<FormProps> = ({
           },
         })
 
-        console.log('wallet-signup-result:', result)
-        const { data: signupData } = result
         if (!signupData) {
-          // console.error()
           setFieldError('address', 'eth-address-not-correct')
           return
         }
@@ -212,27 +217,26 @@ const SelectAccount: React.FC<FormProps> = ({
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
-      <Form.Input
-        label={
-          <Translate
-            en="Wallet Account"
-            zh_hant="Wallet Account"
-            zh_hans="Wallet Account"
-          />
+      <Form.List.Item
+        title={maskAddress(account || '')}
+        subtitle={
+          <TextIcon
+            icon={withIcon(IconIndicator)({ size: 'xxs', color: 'green' })}
+            spacing="xxtight"
+          >
+            {chainName[chainId]}
+          </TextIcon>
         }
-        type="text"
-        name="ethAddress"
-        required
-        placeholder={translate({
-          zh_hant: 'Your Wallet',
-          zh_hans: 'Your Wallet',
-          en: 'Your Wallet',
-          lang,
-        })}
-        value={values.address || account || ''}
-        error={touched.address && errors.address}
-        onBlur={handleBlur}
-        onChange={handleChange}
+        right={
+          <div className={styles.change}>
+            <div role="button" onClick={deactivate}>
+              <TextIcon size="xs">
+                <Translate zh_hant="變更" zh_hans="变更" en="Edit" />
+              </TextIcon>
+            </div>
+          </div>
+        }
+        // disabled={!!error}
       />
 
       <Form.CheckBox
@@ -262,9 +266,6 @@ const SelectAccount: React.FC<FormProps> = ({
         }
         required
       />
-
-      {/* isInDialog && <LoginDialogButton /> */}
-      {/* isInPage && <LoginRedirectionButton /> */}
     </Form>
   )
 

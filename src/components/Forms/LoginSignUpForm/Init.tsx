@@ -1,38 +1,12 @@
-// import { useFormik } from 'formik'
-// import _pickBy from 'lodash/pickBy'
-// import Link from 'next/link'
-// import { useContext } from 'react'
-
-import {
-  Dialog,
-  Form,
-  // LanguageContext,
-  LanguageSwitch,
-  Layout,
-  // ReCaptchaContext,
-  Translate,
-  // useMutation,
-} from '~/components'
-
-// import SEND_CODE from '~/components/GQL/mutations/sendCode'
+import { Dialog, Form, LanguageSwitch, Layout, Translate } from '~/components'
 
 import {
   CLOSE_ACTIVE_DIALOG,
   OPEN_LOGIN_DIALOG,
   OPEN_WALLET_SIGNUP_DIALOG,
 } from '~/common/enums'
-// import {
-// appendTarget,
-// parseFormSubmitErrors,
-// translate,
-// validateDisplayName,
-// validateEmail,
-// validateToS,
-// } from '~/common/utils'
 
 import styles from './styles.css'
-
-// import { SendVerificationCode } from '~/components/GQL/mutations/__generated__/SendVerificationCode'
 
 interface FormProps {
   purpose: 'dialog' | 'page'
@@ -45,8 +19,6 @@ const Init: React.FC<FormProps> = ({
   submitCallback,
   closeDialog,
 }) => {
-  // const { lang } = useContext(LanguageContext)
-  // const isInDialog = purpose === 'dialog'
   const isInPage = purpose === 'page'
   const formId = 'login-sign-up-init-form'
 
@@ -64,8 +36,6 @@ const Init: React.FC<FormProps> = ({
               en="connect CryptoWallet?"
             />
           }
-          // rightText={<Translate id="login" />}
-          // rightTextColor="green"
           onClick={() => {
             window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
             window.dispatchEvent(
@@ -85,8 +55,6 @@ const Init: React.FC<FormProps> = ({
               en="with Email/Password?"
             />
           }
-          // rightText={<Translate id="login" />}
-          // rightTextColor="green"
           onClick={() => {
             window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
             window.dispatchEvent(new CustomEvent(OPEN_LOGIN_DIALOG))
@@ -101,16 +69,6 @@ const Init: React.FC<FormProps> = ({
     </Form>
   )
 
-  /* const SubmitButton = (
-    <Dialog.Header.RightButton
-      type="submit"
-      form={formId}
-      // disabled={!isValid || isSubmitting}
-      text={<Translate id="nextStep" />}
-      // loading={isSubmitting}
-    />
-  ) */
-
   if (isInPage) {
     return (
       <>
@@ -119,7 +77,6 @@ const Init: React.FC<FormProps> = ({
           right={
             <>
               <Layout.Header.Title id="loginSignUp" />
-              {/* SubmitButton */}
             </>
           }
         />
@@ -137,11 +94,7 @@ const Init: React.FC<FormProps> = ({
   return (
     <>
       {closeDialog && (
-        <Dialog.Header
-          title="loginSignUp"
-          closeDialog={closeDialog}
-          // rightButton={SubmitButton}
-        />
+        <Dialog.Header title="loginSignUp" closeDialog={closeDialog} />
       )}
 
       <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>

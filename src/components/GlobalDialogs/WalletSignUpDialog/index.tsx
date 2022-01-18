@@ -5,7 +5,6 @@ import {
   useDialogSwitch,
   useEventListener,
   useStep,
-  // VerificationLinkSent,
   WalletSignUpForm,
 } from '~/components'
 
@@ -47,7 +46,6 @@ const BaseSignUpDialog = () => {
           <WalletSignUpForm.SelectAccount // Init
             purpose="dialog"
             submitCallback={(ethAddress: string, type: AuthResultType) => {
-              console.log('after select-account:', ethAddress)
               forward(
                 type === AuthResultType.Signup ? 'verify-email' : 'complete'
               )
@@ -66,7 +64,6 @@ const BaseSignUpDialog = () => {
         />
       )}
       {currStep === 'complete' && <SignUpForm.Complete purpose="page" />}
-      {/* <pre>{JSON.stringify({ account })}</pre> */}
     </Dialog>
   )
 }

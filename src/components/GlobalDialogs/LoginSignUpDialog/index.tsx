@@ -1,6 +1,5 @@
 import {
   Dialog,
-  // ReCaptchaProvider,
   LoginSignUpForm,
   useDialogSwitch,
   useEventListener,
@@ -9,11 +8,7 @@ import {
   WalletSignUpForm,
 } from '~/components'
 
-import {
-  CLOSE_ACTIVE_DIALOG,
-  // OPEN_SIGNUP_DIALOG,
-  OPEN_LOGIN_SIGNUP_DIALOG,
-} from '~/common/enums'
+import { CLOSE_ACTIVE_DIALOG, OPEN_LOGIN_SIGNUP_DIALOG } from '~/common/enums'
 
 type Step = 'init' | 'connect_wallet' | 'verification_sent'
 

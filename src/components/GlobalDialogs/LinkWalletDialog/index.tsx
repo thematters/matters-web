@@ -1,6 +1,5 @@
 import {
   Dialog,
-  // SignUpForm,
   Translate,
   useDialogSwitch,
   useEventListener,
@@ -61,8 +60,6 @@ const BaseLinkWalletDialog = () => {
           closeDialog={closeDialog}
         />
       )}
-      {/* currStep === 'complete' && <SignUpForm.Complete purpose="page" /> */}
-      {/* <pre>{JSON.stringify({ account })}</pre> */}
     </Dialog>
   )
 }
