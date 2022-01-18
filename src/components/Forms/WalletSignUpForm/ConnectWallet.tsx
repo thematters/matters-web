@@ -1,20 +1,10 @@
 import { useWeb3React } from '@web3-react/core'
 import { ethers } from 'ethers'
 import React, { useEffect } from 'react'
-// import gql from 'graphql-tag'
 
-import {
-  Dialog,
-  Form, // Layout,
-  Translate,
-  // useMutation,
-} from '~/components'
+import { Dialog, Form, Spacer, Translate } from '~/components'
 
-import {
-  // CLOSE_ACTIVE_DIALOG,
-  // OPEN_WALLET_SIGNUP_DIALOG,
-  WalletConnector,
-} from '~/common/enums'
+import { WalletConnector } from '~/common/enums'
 import { analytics, walletConnectors } from '~/common/utils'
 
 interface FormProps {
@@ -30,11 +20,7 @@ const ConnectWallet: React.FC<FormProps> = ({
 }) => {
   const formId = 'login-sign-up-connect-wallet-form'
 
-  const {
-    activate,
-    connector,
-    account, // error,
-  } = useWeb3React<ethers.providers.Web3Provider>()
+  const { activate, connector } = useWeb3React<ethers.providers.Web3Provider>()
 
   const connectorMetaMask = walletConnectors[WalletConnector.MetaMask]
   const connectorWalletConnect = walletConnectors[WalletConnector.WalletConnect]
@@ -45,24 +31,6 @@ const ConnectWallet: React.FC<FormProps> = ({
       setActivatingConnector(undefined)
     }
   }, [activatingConnector, connector])
-
-  /* const [generateSigningMessage] = useMutation<GenerateSigningMessage>(
-    GENERATE_SIGNING_MESSAGE,
-    undefined,
-    {
-      showToast: false,
-    }
-  ) */
-
-  /* const SubmitButton = (
-    <Dialog.Header.RightButton
-      type="submit"
-      form={formId}
-      // disabled={!isValid || isSubmitting}
-      text={<Translate id="nextStep" />}
-      // loading={isSubmitting}
-    />
-  ) */
 
   const InnerForm = (
     <Form id={formId} onSubmit={submitCallback}>
@@ -75,10 +43,6 @@ const ConnectWallet: React.FC<FormProps> = ({
             })
             setActivatingConnector(connectorMetaMask)
             activate(connectorMetaMask)
-
-            console.log(`connect'ed via MetaMask`, account)
-            // window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
-            // window.dispatchEvent(new CustomEvent(OPEN_WALLET_SIGNUP_DIALOG))
             submitCallback()
           }}
         />
@@ -90,11 +54,6 @@ const ConnectWallet: React.FC<FormProps> = ({
             })
             setActivatingConnector(connectorWalletConnect)
             activate(connectorWalletConnect)
-
-            console.log(`connect'ed via WalletConnect`, account)
-            // window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
-            // window.dispatchEvent(new CustomEvent(OPEN_WALLET_SIGNUP_DIALOG))
-
             submitCallback()
           }}
         />
@@ -105,15 +64,14 @@ const ConnectWallet: React.FC<FormProps> = ({
   return (
     <>
       {closeDialog && (
-        <Dialog.Header
-          title="loginSignUp"
-          closeDialog={closeDialog}
-          // left={<Layout.Header.BackButton />}
-          // rightButton={SubmitButton}
-        />
+        <Dialog.Header title="loginSignUp" closeDialog={closeDialog} />
       )}
 
-      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+      <Dialog.Content hasGrow>
+        {InnerForm}
+
+        <Spacer size="xloose" />
+      </Dialog.Content>
     </>
   )
 }
