@@ -305,7 +305,7 @@ const SelectAccount: React.FC<FormProps> = ({
     <>
       {closeDialog && (
         <Dialog.Header
-          title="register"
+          title="loginSignUp"
           closeDialog={closeDialog}
           rightButton={SubmitButton}
         />

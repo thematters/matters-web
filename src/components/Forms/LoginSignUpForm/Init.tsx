@@ -1,38 +1,22 @@
-// import { useFormik } from 'formik'
-// import _pickBy from 'lodash/pickBy'
-// import Link from 'next/link'
-// import { useContext } from 'react'
-
 import {
   Dialog,
   Form,
-  // LanguageContext,
+  IconEmail24,
+  IconWallet24,
   LanguageSwitch,
   Layout,
-  // ReCaptchaContext,
+  Spacer,
+  TextIcon,
   Translate,
-  // useMutation,
 } from '~/components'
-
-// import SEND_CODE from '~/components/GQL/mutations/sendCode'
 
 import {
   CLOSE_ACTIVE_DIALOG,
   OPEN_LOGIN_DIALOG,
   OPEN_WALLET_SIGNUP_DIALOG,
 } from '~/common/enums'
-// import {
-// appendTarget,
-// parseFormSubmitErrors,
-// translate,
-// validateDisplayName,
-// validateEmail,
-// validateToS,
-// } from '~/common/utils'
 
 import styles from './styles.css'
-
-// import { SendVerificationCode } from '~/components/GQL/mutations/__generated__/SendVerificationCode'
 
 interface FormProps {
   purpose: 'dialog' | 'page'
@@ -45,27 +29,23 @@ const Init: React.FC<FormProps> = ({
   submitCallback,
   closeDialog,
 }) => {
-  // const { lang } = useContext(LanguageContext)
-  // const isInDialog = purpose === 'dialog'
   const isInPage = purpose === 'page'
   const formId = 'login-sign-up-init-form'
 
   const InnerForm = (
     <Form id={formId} onSubmit={submitCallback}>
-      <label>
-        <Translate zh_hant="選擇管道" zh_hans="選擇管道" en="Connect Method" />
-      </label>
-      <Form.List spacing="xloose">
+      <Form.List groupName={<Translate id="connectMethod" />}>
         <Form.List.Item
           title={
-            <Translate
-              zh_hant="連接加密錢包"
-              zh_hans="連接加密錢包"
-              en="connect CryptoWallet?"
-            />
+            <TextIcon
+              color="black"
+              icon={<IconWallet24 size="md" />}
+              size="md"
+              spacing="xtight"
+            >
+              <Translate id="useWallet" />
+            </TextIcon>
           }
-          // rightText={<Translate id="login" />}
-          // rightTextColor="green"
           onClick={() => {
             window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
             window.dispatchEvent(
@@ -79,49 +59,30 @@ const Init: React.FC<FormProps> = ({
         />
         <Form.List.Item
           title={
-            <Translate
-              zh_hant="透過電子郵箱密碼"
-              zh_hans="透過電子郵箱密碼"
-              en="with Email/Password?"
-            />
+            <TextIcon
+              color="black"
+              icon={<IconEmail24 size="md" />}
+              size="md"
+              spacing="xtight"
+            >
+              <Translate id="useEmail" />
+            </TextIcon>
           }
-          // rightText={<Translate id="login" />}
-          // rightTextColor="green"
           onClick={() => {
             window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
             window.dispatchEvent(new CustomEvent(OPEN_LOGIN_DIALOG))
           }}
         />
       </Form.List>
-      <style jsx>{`
-        label {
-          margin: var(--spacing-base);
-        }
-      `}</style>
     </Form>
   )
-
-  /* const SubmitButton = (
-    <Dialog.Header.RightButton
-      type="submit"
-      form={formId}
-      // disabled={!isValid || isSubmitting}
-      text={<Translate id="nextStep" />}
-      // loading={isSubmitting}
-    />
-  ) */
 
   if (isInPage) {
     return (
       <>
         <Layout.Header
           left={<Layout.Header.BackButton />}
-          right={
-            <>
-              <Layout.Header.Title id="loginSignUp" />
-              {/* SubmitButton */}
-            </>
-          }
+          right={<Layout.Header.Title id="loginSignUp" />}
         />
 
         {InnerForm}
@@ -137,14 +98,14 @@ const Init: React.FC<FormProps> = ({
   return (
     <>
       {closeDialog && (
-        <Dialog.Header
-          title="loginSignUp"
-          closeDialog={closeDialog}
-          // rightButton={SubmitButton}
-        />
+        <Dialog.Header title="loginSignUp" closeDialog={closeDialog} />
       )}
 
-      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+      <Dialog.Content hasGrow>
+        {InnerForm}
+
+        <Spacer size="xloose" />
+      </Dialog.Content>
     </>
   )
 }
