@@ -57,6 +57,7 @@ import('@sentry/browser').then((Sentry) => {
   Sentry.init({
     dsn: process.env.NEXT_PUBLIC_SENTRY_DSN || '',
     ignoreErrors: [/.*Timeout.*/, /.*Network.*/],
+    sampleRate: 0.1,
   })
 })
 

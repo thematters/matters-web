@@ -10,18 +10,25 @@ import {
 
 import { WalletConnector } from '~/common/enums'
 
-// NEXT_PUBLIC_RUNTIME_ENV
-const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
-
-// 1 for mainnet; 4 for rinkeby
-const supportedChainId = isProd ? 1 : 4
+// const supportedChainId = [
+//   1, // Mainnet
+//   3, // Ropsten
+//   4, // Rinkeby
+//   5, // Goerli
+//   137, // Polygon
+//   80001, // Polygon Mumbai
+//   10, // Optimistic
+//   69, // Optimistic Kovan
+//   42161, // Arbitrum One
+//   43114, // Avalanche Mainnet
+//   250, // Fantom Opera
+//   56, // BSC
+//   97, // BSC Testnet
+// ]
 
 export const walletConnectors = {
-  [WalletConnector.MetaMask]: new InjectedConnector({
-    supportedChainIds: [supportedChainId],
-  }),
+  [WalletConnector.MetaMask]: new InjectedConnector({}),
   [WalletConnector.WalletConnect]: new WalletConnectConnector({
     // infuraId: env.infuraId,
-    supportedChainIds: [supportedChainId],
   }),
 }
