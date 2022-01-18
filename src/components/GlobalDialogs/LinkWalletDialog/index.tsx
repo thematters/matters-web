@@ -1,6 +1,5 @@
 import {
   Dialog,
-  // SignUpForm,
   Translate,
   useDialogSwitch,
   useEventListener,
@@ -33,9 +32,10 @@ const BaseLinkWalletDialog = () => {
   useEventListener(OPEN_LINK_WALLET_DIALOG, openDialog)
 
   return (
-    <Dialog size="sm" isOpen={show} onDismiss={closeDialog}>
+    <Dialog size="lg" isOpen={show} onDismiss={closeDialog}>
       {currStep === 'connect-wallet' && (
         <WalletSignUpForm.ConnectWallet
+          type="connectForSetting"
           purpose="dialog"
           submitCallback={() => {
             forward('select-account')
@@ -61,8 +61,6 @@ const BaseLinkWalletDialog = () => {
           closeDialog={closeDialog}
         />
       )}
-      {/* currStep === 'complete' && <SignUpForm.Complete purpose="page" /> */}
-      {/* <pre>{JSON.stringify({ account })}</pre> */}
     </Dialog>
   )
 }

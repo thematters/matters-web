@@ -11,12 +11,7 @@ import {
   ViewerContext,
 } from '~/components'
 
-import {
-  OPEN_LIKE_COIN_DIALOG,
-  // OPEN_LOGIN_SIGNUP_DIALOG,
-  // OPEN_WALLET_SIGNUP_DIALOG,
-  OPEN_LINK_WALLET_DIALOG,
-} from '~/common/enums'
+import { OPEN_LIKE_COIN_DIALOG, OPEN_LINK_WALLET_DIALOG } from '~/common/enums'
 import { numRound } from '~/common/utils'
 
 import { ViewerLikeInfo } from './__generated__/ViewerLikeInfo'
@@ -116,11 +111,15 @@ const WalletSettings = () => {
 
       <Form.List.Item
         title={
-          <Translate
-            zh_hant="加密錢包登入"
-            zh_hans="加密钱包登入"
-            en="Crypto Wallet Login"
-          />
+          ethAddress ? (
+            <Translate id="walletAddress" />
+          ) : (
+            <Translate
+              zh_hant="使用加密錢包登入"
+              zh_hans="使用加密钱包登入"
+              en="Connect wallet"
+            />
+          )
         }
         onClick={
           !ethAddress
@@ -135,9 +134,9 @@ const WalletSettings = () => {
         rightText={
           ethAddress || (
             <Translate
-              zh_hant="新上線！前往設置"
-              zh_hans="新上线！前往设置"
-              en="New! Click to Setup"
+              zh_hant="前往設定"
+              zh_hans="前往设置"
+              en="Click to connect"
             />
           )
         }
