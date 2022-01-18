@@ -52,18 +52,14 @@ const Init: React.FC<FormProps> = ({
 
   const InnerForm = (
     <Form id={formId} onSubmit={submitCallback}>
+      {/*
       <label>
-        <Translate zh_hant="選擇管道" zh_hans="選擇管道" en="Connect Method" />
+        <Translate id="connectMethod" />
       </label>
-      <Form.List spacing="xloose">
+      */}
+      <Form.List groupName={<Translate id="connectMethod" />}>
         <Form.List.Item
-          title={
-            <Translate
-              zh_hant="連接加密錢包"
-              zh_hans="連接加密錢包"
-              en="connect CryptoWallet?"
-            />
-          }
+          title={<Translate id="useWallet" />}
           // rightText={<Translate id="login" />}
           // rightTextColor="green"
           onClick={() => {
@@ -78,13 +74,7 @@ const Init: React.FC<FormProps> = ({
           }}
         />
         <Form.List.Item
-          title={
-            <Translate
-              zh_hant="透過電子郵箱密碼"
-              zh_hans="透過電子郵箱密碼"
-              en="with Email/Password?"
-            />
-          }
+          title={<Translate id="useEmail" />}
           // rightText={<Translate id="login" />}
           // rightTextColor="green"
           onClick={() => {
