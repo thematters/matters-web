@@ -12,7 +12,11 @@ import {
   ViewerContext,
 } from '~/components'
 
-import { CLOSE_ACTIVE_DIALOG, OPEN_LOGIN_DIALOG, PATHS } from '~/common/enums'
+import {
+  CLOSE_ACTIVE_DIALOG,
+  OPEN_LOGIN_SIGNUP_DIALOG,
+  PATHS,
+} from '~/common/enums'
 import { appendTarget, translate } from '~/common/utils'
 
 import ReplyTo from '../../ReplyTo'
@@ -103,7 +107,7 @@ const ReplyButton = ({
       ? {
           onClick: () => {
             window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
-            window.dispatchEvent(new CustomEvent(OPEN_LOGIN_DIALOG))
+            window.dispatchEvent(new CustomEvent(OPEN_LOGIN_SIGNUP_DIALOG))
           },
         }
       : appendTarget(PATHS.LOGIN, true)
