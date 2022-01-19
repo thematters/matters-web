@@ -6,6 +6,7 @@ import {
   Dialog,
   Form,
   IconMetaMask24,
+  IconSpinner16,
   IconWalletConnect24,
   Layout,
   Spacer,
@@ -70,11 +71,13 @@ const Select: React.FC<FormProps> = ({
   const viewer = useContext(ViewerContext)
   const formId = 'wallet-auth-select-form'
   const isInPage = purpose === 'page'
+  const isConnect = type === 'connect'
 
   const {
     activate,
     connector,
-    // account, error
+    account,
+    // error
   } = useWeb3React<ethers.providers.Web3Provider>()
 
   // handle logic to recognize the connector currently being activated
@@ -87,7 +90,34 @@ const Select: React.FC<FormProps> = ({
 
   const connectorMetaMask = walletConnectors[WalletConnector.MetaMask]
   const connectorWalletConnect = walletConnectors[WalletConnector.WalletConnect]
-  const isConnect = type === 'connect'
+
+  const isMetaMaskLoading = activatingConnector === connectorMetaMask
+  const isWalletConnectLoading = activatingConnector === connectorWalletConnect
+
+  useEffect(() => {
+    if (!account || !activatingConnector) return
+
+    submitCallback()
+  }, [account])
+
+  const onClickMetaMask = () => {
+    if (connector === connectorMetaMask && account) {
+      submitCallback()
+    }
+
+    analytics.trackEvent('click_button', { type: 'connectorMetaMask' })
+    setActivatingConnector(connectorMetaMask)
+    activate(connectorMetaMask)
+  }
+  const onClickWalletConnect = () => {
+    if (connector === connectorWalletConnect && account) {
+      submitCallback()
+    }
+
+    analytics.trackEvent('click_button', { type: 'connectorWalletConnect' })
+    setActivatingConnector(connectorWalletConnect)
+    activate(connectorWalletConnect)
+  }
 
   const Intro = () => {
     if (!isConnect) return null
@@ -139,14 +169,8 @@ const Select: React.FC<FormProps> = ({
               MetaMask
             </TextIcon>
           }
-          onClick={async () => {
-            analytics.trackEvent('click_button', {
-              type: 'connectorMetaMask',
-            })
-            setActivatingConnector(connectorMetaMask)
-            activate(connectorMetaMask)
-            submitCallback()
-          }}
+          onClick={onClickMetaMask}
+          right={isMetaMaskLoading ? <IconSpinner16 color="grey" /> : null}
         />
         <Form.List.Item
           title={
@@ -159,16 +183,23 @@ const Select: React.FC<FormProps> = ({
               WalletConnect
             </TextIcon>
           }
-          onClick={() => {
-            analytics.trackEvent('click_button', {
-              type: 'connectorWalletConnect',
-            })
-            setActivatingConnector(connectorWalletConnect)
-            activate(connectorWalletConnect)
-            submitCallback()
-          }}
+          onClick={onClickWalletConnect}
+          right={isWalletConnectLoading ? <IconSpinner16 color="grey" /> : null}
         />
-        {/* TODO: error message */}
+        {/* {error && (
+          <Dialog.Message>
+            <p>{getWalletErrorMessage({ error, lang })}</p>
+          </Dialog.Message>
+        )}
+        {activatingConnector && (
+          <Dialog.Message type="warning">
+            <p>
+              {locale === Lang.en
+                ? 'Please confirm the connection in your wallet.'
+                : '請打開你的錢包完成連接操作'}
+            </p>
+          </Dialog.Message>
+        )} */}
       </Form.List>
     </Form>
   )

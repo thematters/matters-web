@@ -1,9 +1,12 @@
 import {
   Dialog,
   Form,
+  IconEmail24,
+  IconWallet24,
   LanguageSwitch,
   Layout,
   Spacer,
+  TextIcon,
   Translate,
 } from '~/components'
 
@@ -28,21 +31,27 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
     <Form.List groupName={<Translate id="authMethod" />}>
       <Form.List.Item
         title={
-          <Translate
-            zh_hant="連接加密錢包"
-            zh_hans="連接加密錢包"
-            en="Wallet"
-          />
+          <TextIcon
+            color="black"
+            icon={<IconWallet24 size="md" />}
+            size="md"
+            spacing="xtight"
+          >
+            <Translate id="useWallet" />
+          </TextIcon>
         }
         onClick={gotoWalletAuth}
       />
       <Form.List.Item
         title={
-          <Translate
-            zh_hant="透過電子郵箱密碼"
-            zh_hans="透過電子郵箱密碼"
-            en="Email"
-          />
+          <TextIcon
+            color="black"
+            icon={<IconEmail24 size="md" />}
+            size="md"
+            spacing="xtight"
+          >
+            <Translate id="useEmail" />
+          </TextIcon>
         }
         onClick={gotoEmailLogin}
       />

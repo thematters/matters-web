@@ -70,8 +70,7 @@ const Connect: React.FC<FormProps> = ({
     showToast: false,
   })
 
-  const { account, deactivate, library } =
-    useWeb3React<ethers.providers.Web3Provider>()
+  const { account, library } = useWeb3React<ethers.providers.Web3Provider>()
 
   const [chainId, setChainId] = useState(0)
   const updateChainId = async () => {
@@ -213,15 +212,6 @@ const Connect: React.FC<FormProps> = ({
               {chainName[chainId]}
             </TextIcon>
           }
-          right={
-            <div className={styles.change}>
-              <div role="button" onClick={deactivate}>
-                <TextIcon size="xs">
-                  <Translate zh_hant="變更" zh_hans="变更" en="Edit" />
-                </TextIcon>
-              </div>
-            </div>
-          }
           // TODO: disabled={!!error}
         />
       </Form.List>
@@ -253,6 +243,8 @@ const Connect: React.FC<FormProps> = ({
         }
         required
       />
+
+      <style jsx>{styles}</style>
     </Form>
   )
 
@@ -283,8 +275,9 @@ const Connect: React.FC<FormProps> = ({
 
         <footer>
           <LanguageSwitch />
-          <style jsx>{styles}</style>
         </footer>
+
+        <style jsx>{styles}</style>
       </>
     )
   }
