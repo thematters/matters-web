@@ -1,20 +1,10 @@
 import { useWeb3React } from '@web3-react/core'
 import { ethers } from 'ethers'
-import React, { useEffect } from 'react'
-// import gql from 'graphql-tag'
+import React, { useEffect, useState } from 'react'
 
-import {
-  Dialog,
-  Form, // Layout,
-  Translate,
-  // useMutation,
-} from '~/components'
+import { Dialog, Form, Translate } from '~/components'
 
-import {
-  // CLOSE_ACTIVE_DIALOG,
-  // OPEN_WALLET_SIGNUP_DIALOG,
-  WalletConnector,
-} from '~/common/enums'
+import { WalletConnector } from '~/common/enums'
 import { analytics, walletConnectors } from '~/common/utils'
 
 interface FormProps {
@@ -23,35 +13,47 @@ interface FormProps {
   closeDialog?: () => void
 }
 
-const ConnectWallet: React.FC<FormProps> = ({
+const Select: React.FC<FormProps> = ({
   purpose,
   submitCallback,
   closeDialog,
 }) => {
-  const formId = 'login-sign-up-connect-wallet-form'
+  const formId = 'wallet-login-select-form'
 
-  const { activate, connector } = useWeb3React<ethers.providers.Web3Provider>()
+  const {
+    activate,
+    connector,
+    // account, error
+  } = useWeb3React<ethers.providers.Web3Provider>()
 
-  const connectorMetaMask = walletConnectors[WalletConnector.MetaMask]
-  const connectorWalletConnect = walletConnectors[WalletConnector.WalletConnect]
-
-  const [activatingConnector, setActivatingConnector] = React.useState<any>()
+  // handle logic to recognize the connector currently being activated
+  const [activatingConnector, setActivatingConnector] = useState<any>()
   useEffect(() => {
     if (activatingConnector && activatingConnector === connector) {
       setActivatingConnector(undefined)
     }
   }, [activatingConnector, connector])
 
+  const connectorMetaMask = walletConnectors[WalletConnector.MetaMask]
+  const connectorWalletConnect = walletConnectors[WalletConnector.WalletConnect]
+
   const InnerForm = (
     <Form id={formId} onSubmit={submitCallback}>
-      <div>Connect Wallet</div>
-      <Form.List spacing="xloose">
+      <Form.List
+        groupName={
+          <Translate
+            zh_hans="连接加密钱包"
+            zh_hant="連接加密錢包"
+            en="Connect Wallet"
+          />
+        }
+      >
         <Form.List.Item
           title={
             <Translate
               zh_hant="連接 MetaMask 錢包"
               zh_hans="連接 MetaMask 錢包"
-              en="connect MetaMask"
+              en="MetaMask"
             />
           }
           onClick={async () => {
@@ -60,7 +62,6 @@ const ConnectWallet: React.FC<FormProps> = ({
             })
             setActivatingConnector(connectorMetaMask)
             activate(connectorMetaMask)
-
             submitCallback()
           }}
         />
@@ -69,7 +70,7 @@ const ConnectWallet: React.FC<FormProps> = ({
             <Translate
               zh_hant="連接 WalletConnect"
               zh_hans="連接 WalletConnect"
-              en="connect WalletConnect"
+              en="WalletConnect"
             />
           }
           onClick={() => {
@@ -78,10 +79,10 @@ const ConnectWallet: React.FC<FormProps> = ({
             })
             setActivatingConnector(connectorWalletConnect)
             activate(connectorWalletConnect)
-
             submitCallback()
           }}
         />
+        {/* TODO: error message */}
       </Form.List>
     </Form>
   )
@@ -89,12 +90,7 @@ const ConnectWallet: React.FC<FormProps> = ({
   return (
     <>
       {closeDialog && (
-        <Dialog.Header
-          title="loginSignUp"
-          closeDialog={closeDialog}
-          // left={<Layout.Header.BackButton />}
-          // rightButton={SubmitButton}
-        />
+        <Dialog.Header title="loginSignUp" closeDialog={closeDialog} />
       )}
 
       <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
@@ -102,4 +98,4 @@ const ConnectWallet: React.FC<FormProps> = ({
   )
 }
 
-export default ConnectWallet
+export default Select

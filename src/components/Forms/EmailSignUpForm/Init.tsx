@@ -15,9 +15,8 @@ import {
 } from '~/components'
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
 
-import { CLOSE_ACTIVE_DIALOG, OPEN_LOGIN_DIALOG, PATHS } from '~/common/enums'
+import { PATHS } from '~/common/enums'
 import {
-  appendTarget,
   parseFormSubmitErrors,
   translate,
   validateDisplayName,
@@ -25,6 +24,7 @@ import {
   validateToS,
 } from '~/common/utils'
 
+import { EmailLoginButton } from './Buttons'
 import styles from './styles.css'
 
 import { SendVerificationCode } from '~/components/GQL/mutations/__generated__/SendVerificationCode'
@@ -32,6 +32,7 @@ import { SendVerificationCode } from '~/components/GQL/mutations/__generated__/S
 interface FormProps {
   purpose: 'dialog' | 'page'
   submitCallback: () => void
+  gotoEmailLogin: () => void
   closeDialog?: () => void
 }
 
@@ -41,52 +42,15 @@ interface FormValues {
   tos: boolean
 }
 
-const LoginDialogButton = () => (
-  <Form.List spacing="xloose">
-    <Form.List.Item
-      title={
-        <Translate
-          zh_hant="已有帳戶？"
-          zh_hans="已有帐户？"
-          en="Already have an account?"
-        />
-      }
-      rightText={<Translate id="login" />}
-      rightTextColor="green"
-      onClick={() => {
-        window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
-        window.dispatchEvent(new CustomEvent(OPEN_LOGIN_DIALOG))
-      }}
-    />
-  </Form.List>
-)
-
-const LoginRedirectionButton = () => (
-  <Form.List spacing="xloose">
-    <Form.List.Item
-      title={
-        <Translate
-          zh_hant="已有帳戶？"
-          zh_hans="已有帐户？"
-          en="Already have an account?"
-        />
-      }
-      rightText={<Translate id="login" />}
-      rightTextColor="green"
-      {...appendTarget(PATHS.LOGIN)}
-    />
-  </Form.List>
-)
-
 const Init: React.FC<FormProps> = ({
   purpose,
   submitCallback,
+  gotoEmailLogin,
   closeDialog,
 }) => {
   const { lang } = useContext(LanguageContext)
-  const isInDialog = purpose === 'dialog'
   const isInPage = purpose === 'page'
-  const formId = 'sign-up-init-form'
+  const formId = 'email-sign-up-init-form'
 
   const { token, refreshToken } = useContext(ReCaptchaContext)
   const [sendCode] = useMutation<SendVerificationCode>(SEND_CODE, undefined, {
@@ -206,8 +170,7 @@ const Init: React.FC<FormProps> = ({
         required
       />
 
-      {isInDialog && <LoginDialogButton />}
-      {isInPage && <LoginRedirectionButton />}
+      <EmailLoginButton gotoEmailLogin={gotoEmailLogin} />
     </Form>
   )
 

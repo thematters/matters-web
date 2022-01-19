@@ -1,7 +1,6 @@
 import { useWeb3React } from '@web3-react/core'
 import { ethers } from 'ethers'
 import { useFormik } from 'formik'
-import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import Link from 'next/link'
 import { useContext, useEffect, useState } from 'react'
@@ -30,6 +29,7 @@ import {
 
 import { ReactComponent as IconIndicator } from '@/public/static/icons/indicator.svg'
 
+import { GENERATE_SIGNING_MESSAGE, WALLET_LOGIN } from './gql'
 import styles from './styles.css'
 
 import { AuthResultType } from '@/__generated__/globalTypes'
@@ -50,58 +50,28 @@ interface FormValues {
   tos: boolean
 }
 
-const GENERATE_SIGNING_MESSAGE = gql`
-  mutation GenerateSigningMessage($address: String!) {
-    generateSigningMessage(address: $address) {
-      nonce
-      signingMessage
-      createdAt
-      expiredAt
-    }
-  }
-`
-
-const WALLET_LOGIN_MESSAGE = gql`
-  mutation WalletLogin($input: WalletLoginInput!) {
-    walletLogin(input: $input) {
-      token
-      auth
-      type
-    }
-  }
-`
-
-const SelectAccount: React.FC<FormProps> = ({
+const Connect: React.FC<FormProps> = ({
   purpose,
   submitCallback,
   closeDialog,
 }) => {
   const { lang } = useContext(LanguageContext)
-  // const isInDialog = purpose === 'dialog'
   const isInPage = purpose === 'page'
-  const formId = 'wallet-sign-up-select-account-form'
+  const formId = 'wallet-login-connect-form'
 
   const [generateSigningMessage] = useMutation<GenerateSigningMessage>(
     GENERATE_SIGNING_MESSAGE,
     undefined,
-    {
-      showToast: false,
-    }
+    { showToast: false }
   )
-  const [walletLogin] = useMutation<WalletLogin>(
-    WALLET_LOGIN_MESSAGE,
-    undefined,
-    {
-      showToast: false,
-    }
-  )
+  const [walletLogin] = useMutation<WalletLogin>(WALLET_LOGIN, undefined, {
+    showToast: false,
+  })
 
   const { account, deactivate, library } =
     useWeb3React<ethers.providers.Web3Provider>()
-  // const [signing, setSigning] = useState(false)
 
   const [chainId, setChainId] = useState(0)
-
   const updateChainId = async () => {
     const id = (await library?.getNetwork())?.chainId
 
@@ -109,7 +79,6 @@ const SelectAccount: React.FC<FormProps> = ({
 
     setChainId(id)
   }
-
   useEffect(() => {
     if (!library) return
 
@@ -141,17 +110,21 @@ const SelectAccount: React.FC<FormProps> = ({
     onSubmit: async ({ address }, { setFieldError, setSubmitting }) => {
       try {
         if (!library || !account) {
+          // TODO: error message
           setFieldError('address', 'eth-address-not-correct')
+          setSubmitting(false)
           return
         }
 
-        const { data: dataSigningMessage } = await generateSigningMessage({
+        const { data: signingMessageData } = await generateSigningMessage({
           variables: { address },
         })
 
-        const signingMessage = dataSigningMessage?.generateSigningMessage
+        const signingMessage = signingMessageData?.generateSigningMessage
         if (!signingMessage) {
+          // TODO: error message
           setFieldError('address', 'signingMessage error')
+          setSubmitting(false)
           return
         }
 
@@ -161,15 +134,13 @@ const SelectAccount: React.FC<FormProps> = ({
         try {
           signature = await signer.signMessage(signingMessage.signingMessage)
         } catch (err) {
-          console.log('signing-error:', err)
+          // TODO: error message
           setFieldError('address', err)
-          // setSigning(false)
+          setSubmitting(false)
           return
         }
 
-        // setSubmitting(false)
-
-        const { data: signupData } = await walletLogin({
+        const { data } = await walletLogin({
           variables: {
             input: {
               ethAddress: address,
@@ -180,11 +151,14 @@ const SelectAccount: React.FC<FormProps> = ({
           },
         })
 
-        if (!signupData) {
+        if (!data) {
+          // TODO: error message
           setFieldError('address', 'eth-address-not-correct')
+          setSubmitting(false)
           return
         }
 
+        // TODO: only for login/signup
         window.dispatchEvent(
           new CustomEvent(ADD_TOAST, {
             detail: {
@@ -195,49 +169,60 @@ const SelectAccount: React.FC<FormProps> = ({
         )
         analytics.identifyUser()
 
-        const token = signupData.walletLogin.token
+        const token = data.walletLogin.token
         if (isStaticBuild && token) {
           storage.set(STORAGE_KEY_AUTH_TOKEN, token)
         }
 
-        if (signupData.walletLogin.type === AuthResultType.Login) {
+        if (data.walletLogin.type === AuthResultType.Login) {
           redirectToTarget({
             fallback: isInPage ? 'homepage' : 'current',
           })
-        } else if (submitCallback && signupData.walletLogin) {
-          submitCallback(address, signupData.walletLogin.type)
+        } else if (submitCallback) {
+          submitCallback(address, data.walletLogin.type)
         }
       } catch (err) {
+        // TODO: error message
         console.error('ERROR:', err)
-      } finally {
-        setSubmitting(false)
       }
+
+      setSubmitting(false)
     },
   })
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
-      <Form.List.Item
-        title={maskAddress(account || '')}
-        subtitle={
-          <TextIcon
-            icon={withIcon(IconIndicator)({ size: 'xxs', color: 'green' })}
-            spacing="xxtight"
-          >
-            {chainName[chainId]}
-          </TextIcon>
+      <Form.List
+        groupName={
+          <Translate
+            zh_hans="连接加密钱包"
+            zh_hant="連接加密錢包"
+            en="Connect Wallet"
+          />
         }
-        right={
-          <div className={styles.change}>
-            <div role="button" onClick={deactivate}>
-              <TextIcon size="xs">
-                <Translate zh_hant="變更" zh_hans="变更" en="Edit" />
-              </TextIcon>
+      >
+        <Form.List.Item
+          title={maskAddress(account || '')}
+          subtitle={
+            <TextIcon
+              icon={withIcon(IconIndicator)({ size: 'xxs', color: 'green' })}
+              spacing="xxtight"
+            >
+              {chainName[chainId]}
+            </TextIcon>
+          }
+          right={
+            <div className={styles.change}>
+              <div role="button" onClick={deactivate}>
+                <TextIcon size="xs">
+                  <Translate zh_hant="變更" zh_hans="变更" en="Edit" />
+                </TextIcon>
+              </div>
             </div>
-          </div>
-        }
-        // disabled={!!error}
-      />
+          }
+          // TODO: disabled={!!error}
+        />
+      </Form.List>
 
       <Form.CheckBox
         name="tos"
@@ -317,4 +302,4 @@ const SelectAccount: React.FC<FormProps> = ({
   )
 }
 
-export default SelectAccount
+export default Connect

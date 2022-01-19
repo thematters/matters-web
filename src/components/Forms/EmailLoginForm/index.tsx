@@ -26,10 +26,9 @@ import {
 } from '~/common/utils'
 
 import {
+  EmailSignUpDialogButton,
   PasswordResetDialogButton,
   PasswordResetRedirectButton,
-  SignUpDialogButton,
-  SignUpRedirectionButton,
 } from './Buttons'
 import styles from './styles.css'
 
@@ -38,6 +37,8 @@ import { UserLogin } from './__generated__/UserLogin'
 interface FormProps {
   purpose: 'dialog' | 'page'
   submitCallback?: () => void
+  gotoResetPassword?: () => void
+  gotoEmailSignUp?: () => void
   closeDialog?: () => void
 }
 
@@ -57,9 +58,11 @@ export const USER_LOGIN = gql`
   }
 `
 
-export const LoginForm: React.FC<FormProps> = ({
+export const EmailLoginForm: React.FC<FormProps> = ({
   purpose,
   submitCallback,
+  gotoEmailSignUp,
+  gotoResetPassword,
   closeDialog,
 }) => {
   const [login] = useMutation<UserLogin>(USER_LOGIN, undefined, {
@@ -69,7 +72,7 @@ export const LoginForm: React.FC<FormProps> = ({
 
   const isInDialog = purpose === 'dialog'
   const isInPage = purpose === 'page'
-  const formId = 'login-form'
+  const formId = 'email-login-form'
 
   const {
     values,
@@ -163,14 +166,19 @@ export const LoginForm: React.FC<FormProps> = ({
         onChange={handleChange}
         extraButton={
           <>
-            {isInDialog && <PasswordResetDialogButton />}
+            {isInDialog && gotoResetPassword && (
+              <PasswordResetDialogButton
+                gotoResetPassword={gotoResetPassword}
+              />
+            )}
             {isInPage && <PasswordResetRedirectButton />}
           </>
         }
       />
 
-      {isInDialog && <SignUpDialogButton />}
-      {isInPage && <SignUpRedirectionButton />}
+      {gotoEmailSignUp && (
+        <EmailSignUpDialogButton gotoEmailSignUp={gotoEmailSignUp} />
+      )}
     </Form>
   )
 

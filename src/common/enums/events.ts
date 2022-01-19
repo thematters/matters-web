@@ -20,12 +20,7 @@ export const REFETCH_CIRCLE_PENDING_INVITES = 'refetchCirclePendingInvites'
 export const REFETCH_DONATORS = 'refetchDonators'
 
 // Dialogs
-export const OPEN_LOGIN_DIALOG = 'openLoginDialog'
-export const OPEN_SIGNUP_DIALOG = 'openSignUpDialog'
-export const OPEN_LOGIN_SIGNUP_DIALOG = 'openLoginSignUpDialog'
-export const OPEN_WALLET_SIGNUP_DIALOG = 'openWalletSignUpDialog'
-export const OPEN_LINK_WALLET_DIALOG = 'openLinkWalletDialog'
-export const OPEN_RESET_PASSWORD_DIALOG = 'openPassword'
+export const OPEN_UNIVERSAL_AUTH_DIALOG = 'openUniversalAuthDialog'
 export const CLOSE_ACTIVE_DIALOG = 'closeActiveDialog'
 export const OPEN_LIKE_COIN_DIALOG = 'openLikeCoinDialog'
 export const CLOSE_ONBOARDING_TASKS_DIALOG = 'closeOnboardingTasksDialog'

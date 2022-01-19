@@ -11,12 +11,7 @@ import {
   ViewerContext,
 } from '~/components'
 
-import {
-  OPEN_LIKE_COIN_DIALOG,
-  // OPEN_LOGIN_SIGNUP_DIALOG,
-  // OPEN_WALLET_SIGNUP_DIALOG,
-  OPEN_LINK_WALLET_DIALOG,
-} from '~/common/enums'
+import { OPEN_LIKE_COIN_DIALOG } from '~/common/enums'
 import { numRound } from '~/common/utils'
 
 import { ViewerLikeInfo } from './__generated__/ViewerLikeInfo'
@@ -124,12 +119,7 @@ const WalletSettings = () => {
         }
         onClick={
           !ethAddress
-            ? () =>
-                window.dispatchEvent(
-                  new CustomEvent(OPEN_LINK_WALLET_DIALOG, {
-                    detail: { initStep: 'connect-wallet' },
-                  })
-                )
+            ? () => console.log('Crypto Wallet') // TODO: connect page
             : undefined
         }
         rightText={

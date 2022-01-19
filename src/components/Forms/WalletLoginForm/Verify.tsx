@@ -1,5 +1,3 @@
-import { useWeb3React } from '@web3-react/core'
-import { ethers } from 'ethers'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
@@ -43,17 +41,13 @@ const Verify: React.FC<FormProps> = ({
 }) => {
   const { lang } = useContext(LanguageContext)
 
-  const formId = 'wallet-sign-up-verify-form'
+  const formId = 'wallet-login-verify-form'
 
   const [confirmCode] = useMutation<ConfirmVerificationCode>(CONFIRM_CODE)
 
   const [changeEmail] = useMutation<ChangeEmail>(CHANGE_EMAIL, undefined, {
     showToast: false,
   })
-
-  const {
-    account, // library
-  } = useWeb3React<ethers.providers.Web3Provider>()
 
   const {
     values,
@@ -78,11 +72,6 @@ const Verify: React.FC<FormProps> = ({
       }),
     onSubmit: async ({ email, code }, { setFieldError, setSubmitting }) => {
       try {
-        if (!account) {
-          console.error('no account connected')
-          return
-        }
-
         const { data } = await confirmCode({
           // variables: { input: { email, type: 'register', code } },
           variables: { input: { email, type: 'email_reset_confirm', code } },

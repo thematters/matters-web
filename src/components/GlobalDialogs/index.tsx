@@ -3,12 +3,7 @@ import { ethers } from 'ethers'
 
 import { LikeCoinDialog } from '~/components'
 
-import LinkWalletDialog from './LinkWalletDialog'
-import LoginDialog from './LoginDialog'
-import LoginSignUpDialog from './LoginSignUpDialog'
-import ResetPasswordDialog from './ResetPasswordDialog'
-import SignUpDialog from './SignUpDialog'
-import WalletSignUpDialog from './WalletSignUpDialog'
+import UniversalAuthDialog from './UniversalAuthDialog'
 
 function getLibrary(provider?: any) {
   return new ethers.providers.Web3Provider(provider)
@@ -17,12 +12,7 @@ function getLibrary(provider?: any) {
 const GlobalDialogs = () => {
   return (
     <Web3ReactProvider getLibrary={getLibrary}>
-      <LoginDialog />
-      <SignUpDialog />
-      <LoginSignUpDialog />
-      <WalletSignUpDialog />
-      <LinkWalletDialog />
-      <ResetPasswordDialog />
+      <UniversalAuthDialog />
       <LikeCoinDialog />
     </Web3ReactProvider>
   )
