@@ -1,6 +1,6 @@
 import { useWeb3React } from '@web3-react/core'
 import { ethers } from 'ethers'
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 
 import {
   Dialog,
@@ -10,6 +10,7 @@ import {
   Spacer,
   TextIcon,
   Translate,
+  ViewerContext,
 } from '~/components'
 
 import { WalletConnector } from '~/common/enums'
@@ -65,6 +66,7 @@ const ConnectWallet: React.FC<ConnectWalletFormProps> = ({
 }) => {
   const formId = 'login-sign-up-connect-wallet-form'
 
+  const viewer = useContext(ViewerContext)
   const { activate, connector } = useWeb3React<ethers.providers.Web3Provider>()
 
   const connectorMetaMask = walletConnectors[WalletConnector.MetaMask]
@@ -77,8 +79,18 @@ const ConnectWallet: React.FC<ConnectWalletFormProps> = ({
     }
   }, [activatingConnector, connector])
 
+  const isConnectForSetting = type === 'connectForSetting'
+
   const InnerForm = (
     <Form id={formId} onSubmit={submitCallback}>
+      {isConnectForSetting && (
+        <Form.List
+          groupName={<Translate zh_hant="帳戶" zh_hans="帳戶" en="Account" />}
+        >
+          <Form.List.Item title="Matters ID" rightText={viewer.userName} />
+        </Form.List>
+      )}
+
       <Form.List groupName={<Translate id="connectWallet" />}>
         <Form.List.Item
           title={
@@ -123,8 +135,6 @@ const ConnectWallet: React.FC<ConnectWalletFormProps> = ({
       </Form.List>
     </Form>
   )
-
-  const isConnectForSetting = type === 'connectForSetting'
 
   return (
     <>

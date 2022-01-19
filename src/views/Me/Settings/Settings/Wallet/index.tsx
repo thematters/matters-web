@@ -3,16 +3,22 @@ import gql from 'graphql-tag'
 import { useContext } from 'react'
 
 import {
+  Button,
+  CopyToClipboard,
   Form,
   getErrorCodes,
+  IconCopy16,
   IconSpinner16,
+  LanguageContext,
   Translate,
   usePullToRefresh,
   ViewerContext,
 } from '~/components'
 
 import { OPEN_LIKE_COIN_DIALOG, OPEN_LINK_WALLET_DIALOG } from '~/common/enums'
-import { numRound } from '~/common/utils'
+import { numRound, translate } from '~/common/utils'
+
+import styles from './styles.css'
 
 import { ViewerLikeInfo } from './__generated__/ViewerLikeInfo'
 
@@ -34,6 +40,8 @@ const VIEWER_LIKE_INFO = gql`
 
 const WalletSettings = () => {
   const viewer = useContext(ViewerContext)
+  const { lang } = useContext(LanguageContext)
+
   const likerId = viewer.liker.likerId
   const { data, loading, refetch, error } = useQuery<ViewerLikeInfo>(
     VIEWER_LIKE_INFO,
@@ -53,6 +61,11 @@ const WalletSettings = () => {
   const equalSign = total > 0 ? '≈' : '='
 
   const ethAddress = data?.viewer?.info?.ethAddress
+  const shortAddress = ethAddress
+    ? `${ethAddress.substring(0, 6)}...${ethAddress.substring(
+        ethAddress.length - 4
+      )}`
+    : ''
 
   usePullToRefresh.Handler(refetch)
 
@@ -132,7 +145,20 @@ const WalletSettings = () => {
             : undefined
         }
         rightText={
-          ethAddress || (
+          ethAddress ? (
+            <>
+              <span className="address">{shortAddress}</span>
+              <CopyToClipboard text={ethAddress}>
+                <Button
+                  spacing={['xtight', 'xtight']}
+                  bgActiveColor="grey-lighter"
+                  aria-label={translate({ id: 'copy', lang })}
+                >
+                  <IconCopy16 color="grey" />
+                </Button>
+              </CopyToClipboard>
+            </>
+          ) : (
             <Translate
               zh_hant="前往設定"
               zh_hans="前往设置"
@@ -142,6 +168,8 @@ const WalletSettings = () => {
         }
         rightTextColor={ethAddress ? 'grey-darker' : 'green'}
       />
+
+      <style jsx>{styles}</style>
     </Form.List>
   )
 }
