@@ -3,16 +3,22 @@ import gql from 'graphql-tag'
 import { useContext } from 'react'
 
 import {
+  Button,
+  CopyToClipboard,
   Form,
   getErrorCodes,
+  IconCopy16,
   IconSpinner16,
+  LanguageContext,
   Translate,
   usePullToRefresh,
   ViewerContext,
 } from '~/components'
 
 import { OPEN_LIKE_COIN_DIALOG } from '~/common/enums'
-import { numRound } from '~/common/utils'
+import { numRound, translate } from '~/common/utils'
+
+import styles from './styles.css'
 
 import { ViewerLikeInfo } from './__generated__/ViewerLikeInfo'
 
@@ -34,6 +40,8 @@ const VIEWER_LIKE_INFO = gql`
 
 const WalletSettings = () => {
   const viewer = useContext(ViewerContext)
+  const { lang } = useContext(LanguageContext)
+
   const likerId = viewer.liker.likerId
   const { data, loading, refetch, error } = useQuery<ViewerLikeInfo>(
     VIEWER_LIKE_INFO,
@@ -53,6 +61,11 @@ const WalletSettings = () => {
   const equalSign = total > 0 ? '≈' : '='
 
   const ethAddress = data?.viewer?.info?.ethAddress
+  const shortAddress = ethAddress
+    ? `${ethAddress.substring(0, 6)}...${ethAddress.substring(
+        ethAddress.length - 4
+      )}`
+    : ''
 
   usePullToRefresh.Handler(refetch)
 
@@ -111,11 +124,15 @@ const WalletSettings = () => {
 
       <Form.List.Item
         title={
-          <Translate
-            zh_hant="加密錢包登入"
-            zh_hans="加密钱包登入"
-            en="Crypto Wallet Login"
-          />
+          ethAddress ? (
+            <Translate id="walletAddress" />
+          ) : (
+            <Translate
+              zh_hant="使用加密錢包登入"
+              zh_hans="使用加密钱包登入"
+              en="Connect wallet"
+            />
+          )
         }
         onClick={
           !ethAddress
@@ -123,16 +140,31 @@ const WalletSettings = () => {
             : undefined
         }
         rightText={
-          ethAddress || (
+          ethAddress ? (
+            <>
+              <span className="address">{shortAddress}</span>
+              <CopyToClipboard text={ethAddress}>
+                <Button
+                  spacing={['xtight', 'xtight']}
+                  bgActiveColor="grey-lighter"
+                  aria-label={translate({ id: 'copy', lang })}
+                >
+                  <IconCopy16 color="grey" />
+                </Button>
+              </CopyToClipboard>
+            </>
+          ) : (
             <Translate
-              zh_hant="新上線！前往設置"
-              zh_hans="新上线！前往设置"
-              en="New! Click to Setup"
+              zh_hant="前往設定"
+              zh_hans="前往设置"
+              en="Click to connect"
             />
           )
         }
         rightTextColor={ethAddress ? 'grey-darker' : 'green'}
       />
+
+      <style jsx>{styles}</style>
     </Form.List>
   )
 }
