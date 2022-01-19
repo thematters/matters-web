@@ -16,7 +16,7 @@ import {
 } from '~/components'
 
 import { OPEN_LIKE_COIN_DIALOG } from '~/common/enums'
-import { numRound, translate } from '~/common/utils'
+import { maskAddress, numRound, translate } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -61,11 +61,7 @@ const WalletSettings = () => {
   const equalSign = total > 0 ? '≈' : '='
 
   const ethAddress = data?.viewer?.info?.ethAddress
-  const shortAddress = ethAddress
-    ? `${ethAddress.substring(0, 6)}...${ethAddress.substring(
-        ethAddress.length - 4
-      )}`
-    : ''
+  const shortAddress = ethAddress ? maskAddress(ethAddress) : ''
 
   usePullToRefresh.Handler(refetch)
 
@@ -130,7 +126,7 @@ const WalletSettings = () => {
             <Translate
               zh_hant="使用加密錢包登入"
               zh_hans="使用加密钱包登入"
-              en="Connect wallet"
+              en="Connect Wallet"
             />
           )
         }

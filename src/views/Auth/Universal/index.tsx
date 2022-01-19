@@ -4,11 +4,11 @@ import {
   Head,
   Layout,
   ReCaptchaProvider,
-  SelectLoginMethodForm,
+  SelectAuthMethodForm,
   useRoute,
   useStep,
   VerificationLinkSent,
-  WalletLoginForm,
+  WalletAuthForm,
 } from '~/components'
 
 import { AuthResultType } from '@/__generated__/globalTypes'
@@ -44,34 +44,36 @@ const UniversalAuth = () => {
       <Head title={{ id: 'register' }} />
 
       {currStep === 'select-login-method' && (
-        <SelectLoginMethodForm
+        <SelectAuthMethodForm
           purpose="page"
-          gotoWalletLogin={() => forward('wallet-select')}
+          gotoWalletAuth={() => forward('wallet-select')}
           gotoEmailLogin={() => forward('email-login')}
         />
       )}
 
       {/* Wallet */}
       {currStep === 'wallet-select' && (
-        <WalletLoginForm.Select
+        <WalletAuthForm.Select
           purpose="page"
           submitCallback={() => {
             forward('wallet-connect')
           }}
+          back={() => forward('select-login-method')}
         />
       )}
       {currStep === 'wallet-connect' && (
-        <WalletLoginForm.Connect
+        <WalletAuthForm.Connect
           purpose="page"
           submitCallback={(ethAddress: string, type: AuthResultType) => {
             forward(
               type === AuthResultType.Signup ? 'wallet-verify' : 'complete'
             )
           }}
+          back={() => forward('wallet-select')}
         />
       )}
       {currStep === 'wallet-verify' && (
-        <WalletLoginForm.Verify
+        <WalletAuthForm.Verify
           purpose="page"
           submitCallback={() => {
             forward('complete')
@@ -84,6 +86,7 @@ const UniversalAuth = () => {
         <EmailLoginForm
           purpose="page"
           gotoEmailSignUp={() => forward('email-sign-up-init')}
+          back={() => forward('select-login-method')}
         />
       )}
       {currStep === 'email-sign-up-init' && (
@@ -92,6 +95,7 @@ const UniversalAuth = () => {
             purpose="page"
             submitCallback={() => forward('email-verification-sent')}
             gotoEmailLogin={() => forward('email-login')}
+            back={() => forward('email-login')}
           />
         </ReCaptchaProvider>
       )}

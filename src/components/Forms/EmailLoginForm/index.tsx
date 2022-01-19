@@ -40,6 +40,7 @@ interface FormProps {
   gotoResetPassword?: () => void
   gotoEmailSignUp?: () => void
   closeDialog?: () => void
+  back?: () => void
 }
 
 interface FormValues {
@@ -64,6 +65,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
   gotoEmailSignUp,
   gotoResetPassword,
   closeDialog,
+  back,
 }) => {
   const [login] = useMutation<UserLogin>(USER_LOGIN, undefined, {
     showToast: false,
@@ -196,7 +198,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
     return (
       <>
         <Layout.Header
-          left={<Layout.Header.BackButton />}
+          left={<Layout.Header.BackButton onClick={back} />}
           right={
             <>
               <Layout.Header.Title id="login" />
@@ -220,6 +222,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
       {closeDialog && (
         <Dialog.Header
           title="login"
+          leftButton={back ? <Dialog.Header.BackButton onClick={back} /> : null}
           closeDialog={closeDialog}
           rightButton={SubmitButton}
         />

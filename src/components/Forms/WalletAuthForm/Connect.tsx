@@ -43,6 +43,7 @@ interface FormProps {
   // submitCallback: () => void
   submitCallback?: (ethAddress: string, type: AuthResultType) => void
   closeDialog?: () => void
+  back?: () => void
 }
 
 interface FormValues {
@@ -54,10 +55,11 @@ const Connect: React.FC<FormProps> = ({
   purpose,
   submitCallback,
   closeDialog,
+  back,
 }) => {
   const { lang } = useContext(LanguageContext)
   const isInPage = purpose === 'page'
-  const formId = 'wallet-login-connect-form'
+  const formId = 'wallet-auth-connect-form'
 
   const [generateSigningMessage] = useMutation<GenerateSigningMessage>(
     GENERATE_SIGNING_MESSAGE,
@@ -268,7 +270,7 @@ const Connect: React.FC<FormProps> = ({
     return (
       <>
         <Layout.Header
-          left={<Layout.Header.BackButton />}
+          left={<Layout.Header.BackButton onClick={back} />}
           right={
             <>
               <Layout.Header.Title id="register" />
@@ -291,7 +293,8 @@ const Connect: React.FC<FormProps> = ({
     <>
       {closeDialog && (
         <Dialog.Header
-          title="loginSignUp"
+          title="authEntries"
+          leftButton={back ? <Dialog.Header.BackButton onClick={back} /> : null}
           closeDialog={closeDialog}
           rightButton={SubmitButton}
         />

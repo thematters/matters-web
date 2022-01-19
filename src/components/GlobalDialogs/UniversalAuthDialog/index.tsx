@@ -4,12 +4,12 @@ import {
   EmailLoginForm,
   EmailSignUpForm,
   ReCaptchaProvider,
-  SelectLoginMethodForm,
+  SelectAuthMethodForm,
   useDialogSwitch,
   useEventListener,
   useStep,
   VerificationLinkSent,
-  WalletLoginForm,
+  WalletAuthForm,
 } from '~/components'
 
 import { CLOSE_ACTIVE_DIALOG, OPEN_UNIVERSAL_AUTH_DIALOG } from '~/common/enums'
@@ -49,25 +49,27 @@ const BaseUniversalAuthDialog = () => {
   return (
     <Dialog size="sm" isOpen={show} onDismiss={closeDialog}>
       {currStep === 'select-login-method' && (
-        <SelectLoginMethodForm
+        <SelectAuthMethodForm
           purpose="dialog"
-          gotoWalletLogin={() => forward('wallet-select')}
+          gotoWalletAuth={() => forward('wallet-select')}
           gotoEmailLogin={() => forward('email-login')}
+          closeDialog={closeDialog}
         />
       )}
 
       {/* Wallet */}
       {currStep === 'wallet-select' && (
-        <WalletLoginForm.Select
+        <WalletAuthForm.Select
           purpose="dialog"
           submitCallback={() => {
             forward('wallet-connect')
           }}
           closeDialog={closeDialog}
+          back={() => forward('select-login-method')}
         />
       )}
       {currStep === 'wallet-connect' && (
-        <WalletLoginForm.Connect
+        <WalletAuthForm.Connect
           purpose="dialog"
           submitCallback={(ethAddress: string, type: AuthResultType) => {
             forward(
@@ -75,10 +77,11 @@ const BaseUniversalAuthDialog = () => {
             )
           }}
           closeDialog={closeDialog}
+          back={() => forward('wallet-select')}
         />
       )}
       {currStep === 'wallet-verify' && (
-        <WalletLoginForm.Verify
+        <WalletAuthForm.Verify
           purpose="dialog"
           submitCallback={() => {
             forward('complete')
@@ -94,6 +97,7 @@ const BaseUniversalAuthDialog = () => {
           closeDialog={closeDialog}
           gotoEmailSignUp={() => forward('email-sign-up-init')}
           gotoResetPassword={() => forward('reset-password-request')}
+          back={() => forward('select-login-method')}
         />
       )}
       {currStep === 'email-sign-up-init' && (
@@ -103,6 +107,7 @@ const BaseUniversalAuthDialog = () => {
             submitCallback={() => forward('email-verification-sent')}
             gotoEmailLogin={() => forward('email-login')}
             closeDialog={closeDialog}
+            back={() => forward('email-login')}
           />
         </ReCaptchaProvider>
       )}
@@ -115,6 +120,7 @@ const BaseUniversalAuthDialog = () => {
           purpose="dialog"
           submitCallback={() => forward('email-verification-sent')}
           closeDialog={closeDialog}
+          back={() => forward('email-login')}
         />
       )}
 

@@ -34,6 +34,7 @@ interface FormProps {
   submitCallback: () => void
   gotoEmailLogin: () => void
   closeDialog?: () => void
+  back?: () => void
 }
 
 interface FormValues {
@@ -47,6 +48,7 @@ const Init: React.FC<FormProps> = ({
   submitCallback,
   gotoEmailLogin,
   closeDialog,
+  back,
 }) => {
   const { lang } = useContext(LanguageContext)
   const isInPage = purpose === 'page'
@@ -188,7 +190,7 @@ const Init: React.FC<FormProps> = ({
     return (
       <>
         <Layout.Header
-          left={<Layout.Header.BackButton />}
+          left={<Layout.Header.BackButton onClick={back} />}
           right={
             <>
               <Layout.Header.Title id="register" />
@@ -212,6 +214,7 @@ const Init: React.FC<FormProps> = ({
       {closeDialog && (
         <Dialog.Header
           title="register"
+          leftButton={back ? <Dialog.Header.BackButton onClick={back} /> : null}
           closeDialog={closeDialog}
           rightButton={SubmitButton}
         />

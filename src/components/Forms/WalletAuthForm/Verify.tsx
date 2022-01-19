@@ -41,7 +41,7 @@ const Verify: React.FC<FormProps> = ({
 }) => {
   const { lang } = useContext(LanguageContext)
 
-  const formId = 'wallet-login-verify-form'
+  const formId = 'wallet-auth-verify-form'
 
   const [confirmCode] = useMutation<ConfirmVerificationCode>(CONFIRM_CODE)
 

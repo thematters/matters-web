@@ -7,6 +7,7 @@ import {
   Form,
   IconMetaMask24,
   IconWalletConnect24,
+  Layout,
   Spacer,
   TextIcon,
   Translate,
@@ -19,10 +20,11 @@ import { analytics, walletConnectors } from '~/common/utils'
 import styles from './styles.css'
 
 export interface FormProps {
-  type?: 'connectForSetting' | 'loginSignUp'
+  type?: 'connect' | 'auth'
   purpose: 'dialog' | 'page'
   submitCallback: () => void
   closeDialog?: () => void
+  back?: () => void
 }
 
 const Desc = {
@@ -63,9 +65,11 @@ const Select: React.FC<FormProps> = ({
   purpose,
   submitCallback,
   closeDialog,
+  back,
 }) => {
   const viewer = useContext(ViewerContext)
-  const formId = 'wallet-login-select-form'
+  const formId = 'wallet-auth-select-form'
+  const isInPage = purpose === 'page'
 
   const {
     activate,
@@ -83,11 +87,31 @@ const Select: React.FC<FormProps> = ({
 
   const connectorMetaMask = walletConnectors[WalletConnector.MetaMask]
   const connectorWalletConnect = walletConnectors[WalletConnector.WalletConnect]
-  const isConnectForSetting = type === 'connectForSetting'
+  const isConnect = type === 'connect'
+
+  const Intro = () => {
+    if (!isConnect) return null
+
+    return (
+      <Dialog.Message>
+        <ul className="connectWalletDesc">
+          <li>
+            <Translate {...Desc.section1} />
+          </li>
+          <li>
+            <Translate {...Desc.section2} />
+          </li>
+          <li>
+            <Translate {...Desc.section3} />
+          </li>
+        </ul>
+      </Dialog.Message>
+    )
+  }
 
   const InnerForm = (
     <Form id={formId} onSubmit={submitCallback}>
-      {isConnectForSetting && (
+      {isConnect && (
         <Form.List
           groupName={<Translate zh_hant="帳戶" zh_hans="帳戶" en="Account" />}
         >
@@ -149,41 +173,39 @@ const Select: React.FC<FormProps> = ({
     </Form>
   )
 
+  if (isInPage) {
+    return (
+      <>
+        <Layout.Header
+          left={<Layout.Header.BackButton onClick={back} />}
+          right={
+            <Layout.Header.Title
+              id={isConnect ? 'loginWithWallet' : 'authEntries'}
+            />
+          }
+        />
+
+        <Intro />
+
+        {InnerForm}
+      </>
+    )
+  }
+
   return (
     <>
       {closeDialog && (
         <Dialog.Header
+          leftButton={back ? <Dialog.Header.BackButton onClick={back} /> : null}
           title={
-            isConnectForSetting ? (
-              <Translate
-                zh_hant="使用加密錢包登入"
-                zh_hans="使用加密钱包登入"
-                en="Connect Wallet"
-              />
-            ) : (
-              'loginSignUp'
-            )
+            <Translate id={isConnect ? 'loginWithWallet' : 'authEntries'} />
           }
           closeDialog={closeDialog}
         />
       )}
 
       <Dialog.Content hasGrow>
-        {isConnectForSetting && (
-          <Dialog.Message>
-            <ul className="connectWalletDesc">
-              <li>
-                <Translate {...Desc.section1} />
-              </li>
-              <li>
-                <Translate {...Desc.section2} />
-              </li>
-              <li>
-                <Translate {...Desc.section3} />
-              </li>
-            </ul>
-          </Dialog.Message>
-        )}
+        <Intro />
 
         {InnerForm}
 

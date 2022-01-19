@@ -60,7 +60,7 @@ export const LoginSignUpButton: React.FC<LoginSignUpButtonProps> = ({
       {...clickProps}
     >
       <TextIcon color="white" weight="md">
-        <Translate id="loginSignUp" />
+        <Translate id="authEntries" />
       </TextIcon>
     </Button>
   )

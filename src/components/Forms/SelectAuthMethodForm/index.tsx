@@ -1,24 +1,31 @@
-import { Dialog, Form, LanguageSwitch, Layout, Translate } from '~/components'
+import {
+  Dialog,
+  Form,
+  LanguageSwitch,
+  Layout,
+  Spacer,
+  Translate,
+} from '~/components'
 
 import styles from './styles.css'
 
 interface FormProps {
   purpose: 'dialog' | 'page'
-  gotoWalletLogin: () => void
+  gotoWalletAuth: () => void
   gotoEmailLogin: () => void
   closeDialog?: () => void
 }
 
-export const SelectLoginMethodForm: React.FC<FormProps> = ({
+export const SelectAuthMethodForm: React.FC<FormProps> = ({
   purpose,
-  gotoWalletLogin,
+  gotoWalletAuth,
   gotoEmailLogin,
   closeDialog,
 }) => {
   const isInPage = purpose === 'page'
 
   const InnerForm = (
-    <Form.List groupName={<Translate id="connectMethod" />}>
+    <Form.List groupName={<Translate id="authMethod" />}>
       <Form.List.Item
         title={
           <Translate
@@ -27,7 +34,7 @@ export const SelectLoginMethodForm: React.FC<FormProps> = ({
             en="Wallet"
           />
         }
-        onClick={gotoWalletLogin}
+        onClick={gotoWalletAuth}
       />
       <Form.List.Item
         title={
@@ -47,7 +54,7 @@ export const SelectLoginMethodForm: React.FC<FormProps> = ({
       <>
         <Layout.Header
           left={<Layout.Header.BackButton />}
-          right={<Layout.Header.Title id="loginSignUp" />}
+          right={<Layout.Header.Title id="authEntries" />}
         />
 
         {InnerForm}
@@ -63,10 +70,14 @@ export const SelectLoginMethodForm: React.FC<FormProps> = ({
   return (
     <>
       {closeDialog && (
-        <Dialog.Header title="loginSignUp" closeDialog={closeDialog} />
+        <Dialog.Header title="authEntries" closeDialog={closeDialog} />
       )}
 
-      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+      <Dialog.Content hasGrow>
+        {InnerForm}
+
+        <Spacer size="xloose" />
+      </Dialog.Content>
     </>
   )
 }
