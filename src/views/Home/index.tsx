@@ -2,12 +2,11 @@ import dynamic from 'next/dynamic'
 import { useContext } from 'react'
 
 import {
+  ConnectWalletButton,
   IconLogo,
   Layout,
-  // LoginButton,
-  // SignUpButton,
-  LoginSignUpButton,
   Spacer,
+  UniversalAuthButton,
   useResponsive,
   ViewerContext,
 } from '~/components'
@@ -47,12 +46,13 @@ const Home = () => {
                 <Layout.Header.Title id="discover" />
               )}
 
-              {!viewer.isAuthed && (
-                <section className="buttons">
-                  {/* <LoginButton size={[null, '2rem']} /> */}
-                  <LoginSignUpButton size={[null, '2rem']} />
-                </section>
-              )}
+              <section className="buttons">
+                {viewer.isAuthed && !viewer.info.ethAddress ? (
+                  <ConnectWalletButton />
+                ) : (
+                  <UniversalAuthButton size={[null, '2rem']} />
+                )}
+              </section>
             </>
           }
         />

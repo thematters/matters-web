@@ -13,11 +13,11 @@ import {
 } from '~/common/enums'
 import { analytics, appendTarget } from '~/common/utils'
 
-type LoginSignUpButtonProps = {
+type UniversalAuthButtonProps = {
   isPlain?: boolean
 } & Pick<ButtonProps, 'size'>
 
-export const LoginSignUpButton: React.FC<LoginSignUpButtonProps> = ({
+export const UniversalAuthButton: React.FC<UniversalAuthButtonProps> = ({
   children,
   isPlain,
   size,
