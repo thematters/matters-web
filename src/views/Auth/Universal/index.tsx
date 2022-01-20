@@ -41,7 +41,7 @@ const UniversalAuth = () => {
 
   return (
     <Layout.Main bgColor="grey-lighter">
-      <Head title={{ id: 'register' }} />
+      <Head title={{ id: 'authEntries' }} />
 
       {currStep === 'select-login-method' && (
         <SelectAuthMethodForm
@@ -64,7 +64,7 @@ const UniversalAuth = () => {
       {currStep === 'wallet-connect' && (
         <WalletAuthForm.Connect
           purpose="page"
-          submitCallback={(ethAddress: string, type: AuthResultType) => {
+          submitCallback={(type?: AuthResultType) => {
             forward(
               type === AuthResultType.Signup ? 'wallet-verify' : 'complete'
             )

@@ -71,7 +71,7 @@ const BaseUniversalAuthDialog = () => {
       {currStep === 'wallet-connect' && (
         <WalletAuthForm.Connect
           purpose="dialog"
-          submitCallback={(ethAddress: string, type: AuthResultType) => {
+          submitCallback={(type?: AuthResultType) => {
             forward(
               type === AuthResultType.Signup ? 'wallet-verify' : 'complete'
             )

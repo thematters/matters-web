@@ -8,6 +8,7 @@ import {
   IconMetaMask24,
   IconSpinner16,
   IconWalletConnect24,
+  LanguageContext,
   Layout,
   Spacer,
   TextIcon,
@@ -16,9 +17,12 @@ import {
 } from '~/components'
 
 import { WalletConnector } from '~/common/enums'
-import { analytics, walletConnectors } from '~/common/utils'
-
-import styles from './styles.css'
+import {
+  analytics,
+  getWalletErrorMessage,
+  translate,
+  walletConnectors,
+} from '~/common/utils'
 
 export interface FormProps {
   type?: 'connect' | 'auth'
@@ -69,16 +73,15 @@ const Select: React.FC<FormProps> = ({
   back,
 }) => {
   const viewer = useContext(ViewerContext)
+  const { lang } = useContext(LanguageContext)
+
   const formId = 'wallet-auth-select-form'
+  const fieldMsgId = 'wall-auth-select-msg'
   const isInPage = purpose === 'page'
   const isConnect = type === 'connect'
 
-  const {
-    activate,
-    connector,
-    account,
-    // error
-  } = useWeb3React<ethers.providers.Web3Provider>()
+  const { activate, connector, account, error } =
+    useWeb3React<ethers.providers.Web3Provider>()
 
   // handle logic to recognize the connector currently being activated
   const [activatingConnector, setActivatingConnector] = useState<any>()
@@ -124,7 +127,7 @@ const Select: React.FC<FormProps> = ({
 
     return (
       <Dialog.Message align="left">
-        <ul className="connectWalletDesc">
+        <ul>
           <li>
             <Translate {...Desc.section1} />
           </li>
@@ -186,20 +189,23 @@ const Select: React.FC<FormProps> = ({
           onClick={onClickWalletConnect}
           right={isWalletConnectLoading ? <IconSpinner16 color="grey" /> : null}
         />
-        {/* {error && (
-          <Dialog.Message>
-            <p>{getWalletErrorMessage({ error, lang })}</p>
-          </Dialog.Message>
+        {error && (
+          <Form.Field.Footer
+            fieldMsgId={fieldMsgId}
+            error={getWalletErrorMessage({ error, lang })}
+          />
         )}
         {activatingConnector && (
-          <Dialog.Message type="warning">
-            <p>
-              {locale === Lang.en
-                ? 'Please confirm the connection in your wallet.'
-                : '請打開你的錢包完成連接操作'}
-            </p>
-          </Dialog.Message>
-        )} */}
+          <Form.Field.Footer
+            fieldMsgId={fieldMsgId}
+            hint={translate({
+              lang,
+              zh_hant: '請打開你的錢包完成連接操作',
+              zh_hans: '请打开你的钱包完成连接操作',
+              en: 'Please confirm the connection in your wallet.',
+            })}
+          />
+        )}
       </Form.List>
     </Form>
   )
@@ -242,8 +248,6 @@ const Select: React.FC<FormProps> = ({
 
         <Spacer size="xloose" />
       </Dialog.Content>
-
-      <style jsx>{styles}</style>
     </>
   )
 }

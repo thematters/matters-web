@@ -3,34 +3,34 @@ import { ethers } from 'ethers'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import Link from 'next/link'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect } from 'react'
 
 import {
   Dialog,
   Form,
   LanguageContext,
-  LanguageSwitch,
   Layout,
-  TextIcon,
   Translate,
   useMutation,
-  withIcon,
 } from '~/components'
 
-import { ADD_TOAST, PATHS, STORAGE_KEY_AUTH_TOKEN } from '~/common/enums'
+import {
+  ADD_TOAST,
+  PATHS,
+  STORAGE_KEY_AUTH_TOKEN,
+  WalletErrorType,
+} from '~/common/enums'
 import {
   analytics,
-  chainName,
+  getWalletErrorMessage,
   maskAddress,
+  parseFormSubmitErrors,
   redirectToTarget,
   storage,
   validateToS,
 } from '~/common/utils'
 
-import { ReactComponent as IconIndicator } from '@/public/static/icons/indicator.svg'
-
 import { GENERATE_SIGNING_MESSAGE, WALLET_LOGIN } from './gql'
-import styles from './styles.css'
 
 import { AuthResultType } from '@/__generated__/globalTypes'
 import { GenerateSigningMessage } from './__generated__/GenerateSigningMessage'
@@ -40,8 +40,7 @@ const isStaticBuild = process.env.NEXT_PUBLIC_BUILD_TYPE === 'static'
 
 interface FormProps {
   purpose: 'dialog' | 'page'
-  // submitCallback: () => void
-  submitCallback?: (ethAddress: string, type: AuthResultType) => void
+  submitCallback?: (type?: AuthResultType) => void
   closeDialog?: () => void
   back?: () => void
 }
@@ -60,6 +59,7 @@ const Connect: React.FC<FormProps> = ({
   const { lang } = useContext(LanguageContext)
   const isInPage = purpose === 'page'
   const formId = 'wallet-auth-connect-form'
+  const fieldMsgId = 'wallet-auth-connect-msg'
 
   const [generateSigningMessage] = useMutation<GenerateSigningMessage>(
     GENERATE_SIGNING_MESSAGE,
@@ -72,22 +72,12 @@ const Connect: React.FC<FormProps> = ({
 
   const { account, library } = useWeb3React<ethers.providers.Web3Provider>()
 
-  const [chainId, setChainId] = useState(0)
-  const updateChainId = async () => {
-    const id = (await library?.getNetwork())?.chainId
-
-    if (!id) return
-
-    setChainId(id)
-  }
   useEffect(() => {
-    if (!library) return
+    if (!account && back) {
+      back()
+    }
 
-    updateChainId()
-  }, [library])
-
-  useEffect(() => {
-    setFieldValue('address', account)
+    setFieldValue('address', account || '')
   }, [account])
 
   const {
@@ -97,11 +87,10 @@ const Connect: React.FC<FormProps> = ({
     handleChange,
     handleSubmit,
     isSubmitting,
-    isValid,
     setFieldValue,
   } = useFormik<FormValues>({
     initialValues: {
-      address: '',
+      address: account || '',
       tos: true,
     },
     validate: ({ tos }) =>
@@ -110,9 +99,14 @@ const Connect: React.FC<FormProps> = ({
       }),
     onSubmit: async ({ address }, { setFieldError, setSubmitting }) => {
       try {
-        if (!library || !account) {
-          // TODO: error message
-          setFieldError('address', 'eth-address-not-correct')
+        if (!library || !address) {
+          setFieldError(
+            'address',
+            getWalletErrorMessage({
+              type: WalletErrorType.invalidAddress,
+              lang,
+            })
+          )
           setSubmitting(false)
           return
         }
@@ -123,8 +117,13 @@ const Connect: React.FC<FormProps> = ({
 
         const signingMessage = signingMessageData?.generateSigningMessage
         if (!signingMessage) {
-          // TODO: error message
-          setFieldError('address', 'signingMessage error')
+          setFieldError(
+            'address',
+            getWalletErrorMessage({
+              type: WalletErrorType.unknown,
+              lang,
+            })
+          )
           setSubmitting(false)
           return
         }
@@ -135,13 +134,18 @@ const Connect: React.FC<FormProps> = ({
         try {
           signature = await signer.signMessage(signingMessage.signingMessage)
         } catch (err) {
-          // TODO: error message
-          setFieldError('address', err)
+          setFieldError(
+            'address',
+            getWalletErrorMessage({
+              type: WalletErrorType.userRejectedSignMessage,
+              lang,
+            })
+          )
           setSubmitting(false)
           return
         }
 
-        const { data } = await walletLogin({
+        const { data: loginData } = await walletLogin({
           variables: {
             input: {
               ethAddress: address,
@@ -152,39 +156,31 @@ const Connect: React.FC<FormProps> = ({
           },
         })
 
-        if (!data) {
-          // TODO: error message
-          setFieldError('address', 'eth-address-not-correct')
-          setSubmitting(false)
-          return
-        }
-
-        // TODO: only for login/signup
-        window.dispatchEvent(
-          new CustomEvent(ADD_TOAST, {
-            detail: {
-              color: 'green',
-              content: <Translate id="successLogin" />,
-            },
-          })
-        )
         analytics.identifyUser()
 
-        const token = data.walletLogin.token
+        const token = loginData?.walletLogin.token
         if (isStaticBuild && token) {
           storage.set(STORAGE_KEY_AUTH_TOKEN, token)
         }
 
-        if (data.walletLogin.type === AuthResultType.Login) {
+        if (loginData?.walletLogin.type === AuthResultType.Login) {
+          window.dispatchEvent(
+            new CustomEvent(ADD_TOAST, {
+              detail: {
+                color: 'green',
+                content: <Translate id="successLogin" />,
+              },
+            })
+          )
           redirectToTarget({
             fallback: isInPage ? 'homepage' : 'current',
           })
         } else if (submitCallback) {
-          submitCallback(address, data.walletLogin.type)
+          submitCallback(loginData?.walletLogin.type)
         }
-      } catch (err) {
-        // TODO: error message
-        console.error('ERROR:', err)
+      } catch (error) {
+        const [messages, codes] = parseFormSubmitErrors(error, lang)
+        setFieldError('address', messages[codes[0]])
       }
 
       setSubmitting(false)
@@ -202,18 +198,11 @@ const Connect: React.FC<FormProps> = ({
           />
         }
       >
-        <Form.List.Item
-          title={maskAddress(account || '')}
-          subtitle={
-            <TextIcon
-              icon={withIcon(IconIndicator)({ size: 'xxs', color: 'green' })}
-              spacing="xxtight"
-            >
-              {chainName[chainId]}
-            </TextIcon>
-          }
-          // TODO: disabled={!!error}
-        />
+        <Form.List.Item title={maskAddress(values.address)} />
+
+        {errors.address && (
+          <Form.Field.Footer fieldMsgId={fieldMsgId} error={errors.address} />
+        )}
       </Form.List>
 
       <Form.CheckBox
@@ -243,8 +232,6 @@ const Connect: React.FC<FormProps> = ({
         }
         required
       />
-
-      <style jsx>{styles}</style>
     </Form>
   )
 
@@ -252,7 +239,7 @@ const Connect: React.FC<FormProps> = ({
     <Dialog.Header.RightButton
       type="submit"
       form={formId}
-      disabled={!isValid || isSubmitting}
+      disabled={isSubmitting || !account}
       text={<Translate id="nextStep" />}
       loading={isSubmitting}
     />
@@ -265,19 +252,13 @@ const Connect: React.FC<FormProps> = ({
           left={<Layout.Header.BackButton onClick={back} />}
           right={
             <>
-              <Layout.Header.Title id="register" />
+              <Layout.Header.Title id="authEntries" />
               {SubmitButton}
             </>
           }
         />
 
         {InnerForm}
-
-        <footer>
-          <LanguageSwitch />
-        </footer>
-
-        <style jsx>{styles}</style>
       </>
     )
   }
