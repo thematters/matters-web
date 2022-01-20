@@ -15,7 +15,7 @@ import {
   ViewerContext,
 } from '~/components'
 
-import { OPEN_LIKE_COIN_DIALOG } from '~/common/enums'
+import { OPEN_LIKE_COIN_DIALOG, PATHS } from '~/common/enums'
 import { maskAddress, numRound, translate } from '~/common/utils'
 
 import styles from './styles.css'
@@ -130,11 +130,7 @@ const WalletSettings = () => {
             />
           )
         }
-        onClick={
-          !ethAddress
-            ? () => console.log('Crypto Wallet') // TODO: connect page
-            : undefined
-        }
+        href={ethAddress ? undefined : PATHS.ME_SETTINGS_CONNECT_WALLET}
         rightText={
           ethAddress ? (
             <>

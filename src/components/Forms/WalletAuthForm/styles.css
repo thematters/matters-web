@@ -3,13 +3,3 @@ footer {
 
   margin: var(--spacing-x-loose) 0;
 }
-
-.connectWalletDesc {
-  margin-bottom: 0;
-
-  & li {
-    padding-left: 0;
-    font-size: var(--font-size-sm);
-    text-align: left;
-  }
-}

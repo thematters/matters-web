@@ -123,7 +123,7 @@ const Select: React.FC<FormProps> = ({
     if (!isConnect) return null
 
     return (
-      <Dialog.Message>
+      <Dialog.Message align="left">
         <ul className="connectWalletDesc">
           <li>
             <Translate {...Desc.section1} />
