@@ -197,6 +197,13 @@ const Connect: React.FC<FormProps> = ({
             en="Connect Wallet"
           />
         }
+        hint={
+          <Translate
+            zh_hans="若要变更地址，请直接操作钱包切換"
+            zh_hant="若要變更地址，請直接操作錢包切換"
+            en="To change, switch it directly on your wallet"
+          />
+        }
       >
         <Form.List.Item title={maskAddress(values.address)} />
 
