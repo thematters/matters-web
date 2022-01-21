@@ -1,3 +1,3 @@
-import AuthLogin from '~/views/Auth/Login'
+import AuthUniversal from '~/views/Auth/Universal'
 
-export default AuthLogin
+export default AuthUniversal

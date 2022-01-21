@@ -1,4 +1,12 @@
-import { Help, Tabs, Translate } from '~/components'
+import { useContext } from 'react'
+
+import {
+  ConnectWalletButton,
+  Help,
+  Tabs,
+  Translate,
+  ViewerContext,
+} from '~/components'
 
 export type SortByType = 'hottest' | 'newest' | 'icymi'
 
@@ -8,12 +16,24 @@ interface SortByProps {
 }
 
 const SortBy: React.FC<SortByProps> = ({ sortBy, setSortBy }) => {
+  const viewer = useContext(ViewerContext)
   const isHottest = sortBy === 'hottest'
   const isNewset = sortBy === 'newest'
   const isICYMI = sortBy === 'icymi'
 
+  const isConnectedWallet = !!viewer.info.ethAddress
+
   return (
-    <Tabs sticky side={<Help hasTime />}>
+    <Tabs
+      sticky
+      side={
+        viewer.isAuthed && !isConnectedWallet ? (
+          <ConnectWalletButton />
+        ) : (
+          <Help hasTime />
+        )
+      }
+    >
       <Tabs.Tab onClick={() => setSortBy('hottest')} selected={isHottest}>
         <Translate zh_hant="熱門" zh_hans="热门" en="Trending" />
       </Tabs.Tab>

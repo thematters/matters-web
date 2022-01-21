@@ -22,7 +22,6 @@ const HomeFeed = () => {
     const newType = validTypes.indexOf(qsType) >= 0 ? qsType : ''
 
     if (newType) {
-      console.log({ newType })
       setType(newType)
     }
   }, [qsType])

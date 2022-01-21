@@ -9,7 +9,7 @@ import {
 
 import {
   CLOSE_ACTIVE_DIALOG,
-  OPEN_LOGIN_SIGNUP_DIALOG,
+  OPEN_UNIVERSAL_AUTH_DIALOG,
   PATHS,
 } from '~/common/enums'
 import { appendTarget } from '~/common/utils'
@@ -34,7 +34,7 @@ export const LoginButton: React.FC<LoginButtonProps> = ({
     ? {
         onClick: () => {
           window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
-          window.dispatchEvent(new CustomEvent(OPEN_LOGIN_SIGNUP_DIALOG))
+          window.dispatchEvent(new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG))
         },
       }
     : appendTarget(PATHS.LOGIN, true)

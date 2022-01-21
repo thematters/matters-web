@@ -58,6 +58,7 @@ const MEDIA_SRC = IMG_SRC
 
 const CONNECT_SRC = [
   "'self'",
+  'wss:',
 
   // API
   process.env.NEXT_PUBLIC_API_URL,
@@ -78,6 +79,9 @@ const CONNECT_SRC = [
 
   // Stripe
   'api.stripe.com',
+
+  // WalletConnect
+  '*.walletconnect.org',
 
   // IPFS Gateways
   'ipfs.io/ipfs/',

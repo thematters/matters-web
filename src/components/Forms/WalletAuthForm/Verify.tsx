@@ -1,5 +1,3 @@
-import { useWeb3React } from '@web3-react/core'
-import { ethers } from 'ethers'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
@@ -8,6 +6,7 @@ import {
   Dialog,
   Form,
   LanguageContext,
+  Layout,
   Translate,
   useMutation,
   VerificationSendCodeButton,
@@ -18,12 +17,9 @@ import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 import {
   parseFormSubmitErrors,
   translate,
-  // validateDisplayName,
   validateCode,
   validateEmail,
-  // validateToS,
 } from '~/common/utils'
-// import SEND_CODE from '~/components/GQL/mutations/sendCode'
 
 interface FormValues {
   email: string
@@ -32,12 +28,10 @@ interface FormValues {
 
 interface FormProps {
   purpose: 'dialog' | 'page'
-  // submitCallback: () => void
   submitCallback?: (codeId: string) => void
   closeDialog?: () => void
 }
 
-// import { SendVerificationCode } from '~/components/GQL/mutations/__generated__/SendVerificationCode'
 import { ChangeEmail } from '~/components/GQL/mutations/__generated__/ChangeEmail'
 import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
 
@@ -47,21 +41,14 @@ const Verify: React.FC<FormProps> = ({
   closeDialog,
 }) => {
   const { lang } = useContext(LanguageContext)
+  const isInPage = purpose === 'page'
+  const formId = 'wallet-auth-verify-form'
 
-  const formId = 'wallet-sign-up-verify-form'
-
-  /* const [sendCode] = useMutation<SendVerificationCode>(SEND_CODE, undefined, {
-    showToast: false,
-  }) */
   const [confirmCode] = useMutation<ConfirmVerificationCode>(CONFIRM_CODE)
 
   const [changeEmail] = useMutation<ChangeEmail>(CHANGE_EMAIL, undefined, {
     showToast: false,
   })
-
-  const {
-    account, // library
-  } = useWeb3React<ethers.providers.Web3Provider>()
 
   const {
     values,
@@ -79,33 +66,20 @@ const Verify: React.FC<FormProps> = ({
     },
     validate: ({ email, code }) =>
       _pickBy({
-        // displayName: validateDisplayName(displayName, lang),
         email: validateEmail(email, lang, { allowPlusSign: false }),
-        // tos: validateToS(tos, lang),
         code: validateCode(code, lang),
       }),
     onSubmit: async ({ email, code }, { setFieldError, setSubmitting }) => {
       try {
-        if (!account) {
-          console.error('no account connected')
-          return
-        }
-
         const { data } = await confirmCode({
-          // variables: { input: { email, type: 'register', code } },
           variables: { input: { email, type: 'email_reset_confirm', code } },
         })
         const confirmVerificationCode = data?.confirmVerificationCode
-
-        // setSubmitting(false)
 
         if (submitCallback && confirmVerificationCode) {
           await changeEmail({
             variables: {
               input: {
-                // oldEmail: oldData.email,
-                // oldEmailCodeId: oldData.codeId,
-                // ethAddress: account,
                 newEmail: email,
                 newEmailCodeId: confirmVerificationCode,
               },
@@ -114,8 +88,6 @@ const Verify: React.FC<FormProps> = ({
           submitCallback(confirmVerificationCode)
         }
       } catch (error) {
-        // setSubmitting(false)
-
         const [messages, codes] = parseFormSubmitErrors(error, lang)
         codes.forEach((c) => {
           if (c.includes('CODE_')) {
@@ -124,23 +96,29 @@ const Verify: React.FC<FormProps> = ({
             setFieldError('email', messages[c])
           }
         })
-      } finally {
-        setSubmitting(false)
       }
+      setSubmitting(false)
     },
   })
 
+  const Intro = () => {
+    return (
+      <Dialog.Message align="left">
+        <p>
+          <Translate
+            zh_hant="未來所有重要訊息將透過郵件通知，填入電子信箱完成設定。提醒，電子信箱將不作為登入使用，僅作為聯繫渠道。另外，Matters 不會透過任何渠道主動詢問你的錢包私鑰。"
+            zh_hans="未来所有重要讯息将透过邮件通知，填入电子信箱完成设定。提醒，电子信箱将不作为登入使用，仅作为联系渠道。另外，Matters 不会透过任何渠道主动询问你的钱包私钥。"
+            en="未来所有重要讯息将透过邮件通知，填入电子信箱完成设定。提醒，电子信箱将不作为登入使用，仅作为联系渠道。另外，Matters 不会透过任何渠道主动询问你的钱包私钥。"
+          />
+        </p>
+      </Dialog.Message>
+    )
+  }
+
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
-      <div>
-        <Translate
-          zh_hant="所有重要訊息將通過郵件通知你。請注意，此郵箱將不作為登入管道使用。"
-          zh_hans="所有重要訊息將通過郵件通知你。請注意，此郵箱將不作為登入管道使用。"
-          en="for notification purpose only, this email is not to use as login"
-        />
-      </div>
       <Form.Input
-        label={<Translate zh_hant="E-email" zh_hans="E-email" en="E-email" />}
+        label={<Translate id="email" />}
         type="email"
         name="email"
         required
@@ -185,17 +163,39 @@ const Verify: React.FC<FormProps> = ({
     />
   )
 
+  if (isInPage) {
+    return (
+      <>
+        <Layout.Header
+          right={
+            <>
+              <Layout.Header.Title id="authEntries" />
+              {SubmitButton}
+            </>
+          }
+        />
+
+        <Intro />
+
+        {InnerForm}
+      </>
+    )
+  }
+
   return (
     <>
       {closeDialog && (
         <Dialog.Header
-          title="register"
+          title="authEntries"
           closeDialog={closeDialog}
           rightButton={SubmitButton}
         />
       )}
 
-      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+      <Dialog.Content hasGrow>
+        <Intro />
+        {InnerForm}
+      </Dialog.Content>
     </>
   )
 }

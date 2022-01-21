@@ -1,12 +1,15 @@
 import { useWeb3React } from '@web3-react/core'
 import { ethers } from 'ethers'
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import {
   Dialog,
   Form,
   IconMetaMask24,
+  IconSpinner16,
   IconWalletConnect24,
+  LanguageContext,
+  Layout,
   Spacer,
   TextIcon,
   Translate,
@@ -14,15 +17,19 @@ import {
 } from '~/components'
 
 import { WalletConnector } from '~/common/enums'
-import { analytics, walletConnectors } from '~/common/utils'
+import {
+  analytics,
+  getWalletErrorMessage,
+  translate,
+  walletConnectors,
+} from '~/common/utils'
 
-import styles from './styles.css'
-
-export interface ConnectWalletFormProps {
-  type?: 'connectForSetting' | 'loginSignUp'
+export interface FormProps {
+  type?: 'connect' | 'auth'
   purpose: 'dialog' | 'page'
   submitCallback: () => void
   closeDialog?: () => void
+  back?: () => void
 }
 
 const Desc = {
@@ -58,32 +65,86 @@ const Desc = {
   },
 }
 
-const ConnectWallet: React.FC<ConnectWalletFormProps> = ({
+const Select: React.FC<FormProps> = ({
   type,
   purpose,
   submitCallback,
   closeDialog,
+  back,
 }) => {
-  const formId = 'login-sign-up-connect-wallet-form'
-
   const viewer = useContext(ViewerContext)
-  const { activate, connector } = useWeb3React<ethers.providers.Web3Provider>()
+  const { lang } = useContext(LanguageContext)
 
-  const connectorMetaMask = walletConnectors[WalletConnector.MetaMask]
-  const connectorWalletConnect = walletConnectors[WalletConnector.WalletConnect]
+  const formId = 'wallet-auth-select-form'
+  const fieldMsgId = 'wall-auth-select-msg'
+  const isInPage = purpose === 'page'
+  const isConnect = type === 'connect'
 
-  const [activatingConnector, setActivatingConnector] = React.useState<any>()
+  const { activate, connector, account, error } =
+    useWeb3React<ethers.providers.Web3Provider>()
+
+  // handle logic to recognize the connector currently being activated
+  const [activatingConnector, setActivatingConnector] = useState<any>()
   useEffect(() => {
     if (activatingConnector && activatingConnector === connector) {
       setActivatingConnector(undefined)
     }
   }, [activatingConnector, connector])
 
-  const isConnectForSetting = type === 'connectForSetting'
+  const connectorMetaMask = walletConnectors[WalletConnector.MetaMask]
+  const connectorWalletConnect = walletConnectors[WalletConnector.WalletConnect]
+
+  const isMetaMaskLoading = activatingConnector === connectorMetaMask
+  const isWalletConnectLoading = activatingConnector === connectorWalletConnect
+
+  useEffect(() => {
+    if (!account || !activatingConnector) return
+
+    submitCallback()
+  }, [account])
+
+  const onClickMetaMask = () => {
+    if (connector === connectorMetaMask && account) {
+      submitCallback()
+    }
+
+    analytics.trackEvent('click_button', { type: 'connectorMetaMask' })
+    setActivatingConnector(connectorMetaMask)
+    activate(connectorMetaMask)
+  }
+  const onClickWalletConnect = () => {
+    if (connector === connectorWalletConnect && account) {
+      submitCallback()
+    }
+
+    analytics.trackEvent('click_button', { type: 'connectorWalletConnect' })
+    setActivatingConnector(connectorWalletConnect)
+    activate(connectorWalletConnect)
+  }
+
+  const Intro = () => {
+    if (!isConnect) return null
+
+    return (
+      <Dialog.Message align="left">
+        <ul>
+          <li>
+            <Translate {...Desc.section1} />
+          </li>
+          <li>
+            <Translate {...Desc.section2} />
+          </li>
+          <li>
+            <Translate {...Desc.section3} />
+          </li>
+        </ul>
+      </Dialog.Message>
+    )
+  }
 
   const InnerForm = (
     <Form id={formId} onSubmit={submitCallback}>
-      {isConnectForSetting && (
+      {isConnect && (
         <Form.List
           groupName={<Translate zh_hant="帳戶" zh_hans="帳戶" en="Account" />}
         >
@@ -91,7 +152,15 @@ const ConnectWallet: React.FC<ConnectWalletFormProps> = ({
         </Form.List>
       )}
 
-      <Form.List groupName={<Translate id="connectWallet" />}>
+      <Form.List
+        groupName={
+          <Translate
+            zh_hans="连接加密钱包"
+            zh_hant="連接加密錢包"
+            en="Connect Wallet"
+          />
+        }
+      >
         <Form.List.Item
           title={
             <TextIcon
@@ -103,14 +172,8 @@ const ConnectWallet: React.FC<ConnectWalletFormProps> = ({
               MetaMask
             </TextIcon>
           }
-          onClick={async () => {
-            analytics.trackEvent('click_button', {
-              type: 'connectorMetaMask',
-            })
-            setActivatingConnector(connectorMetaMask)
-            activate(connectorMetaMask)
-            submitCallback()
-          }}
+          onClick={onClickMetaMask}
+          right={isMetaMaskLoading ? <IconSpinner16 color="grey" /> : null}
         />
         <Form.List.Item
           title={
@@ -123,62 +186,70 @@ const ConnectWallet: React.FC<ConnectWalletFormProps> = ({
               WalletConnect
             </TextIcon>
           }
-          onClick={() => {
-            analytics.trackEvent('click_button', {
-              type: 'connectorWalletConnect',
-            })
-            setActivatingConnector(connectorWalletConnect)
-            activate(connectorWalletConnect)
-            submitCallback()
-          }}
+          onClick={onClickWalletConnect}
+          right={isWalletConnectLoading ? <IconSpinner16 color="grey" /> : null}
         />
+        {error && (
+          <Form.Field.Footer
+            fieldMsgId={fieldMsgId}
+            error={getWalletErrorMessage({ error, lang })}
+          />
+        )}
+        {activatingConnector && (
+          <Form.Field.Footer
+            fieldMsgId={fieldMsgId}
+            hint={translate({
+              lang,
+              zh_hant: '請打開你的錢包完成連接操作',
+              zh_hans: '请打开你的钱包完成连接操作',
+              en: 'Please confirm the connection in your wallet.',
+            })}
+          />
+        )}
       </Form.List>
     </Form>
   )
+
+  if (isInPage) {
+    return (
+      <>
+        <Layout.Header
+          left={<Layout.Header.BackButton onClick={back} />}
+          right={
+            <Layout.Header.Title
+              id={isConnect ? 'loginWithWallet' : 'authEntries'}
+            />
+          }
+        />
+
+        <Intro />
+
+        {InnerForm}
+      </>
+    )
+  }
 
   return (
     <>
       {closeDialog && (
         <Dialog.Header
+          leftButton={back ? <Dialog.Header.BackButton onClick={back} /> : null}
           title={
-            isConnectForSetting ? (
-              <Translate
-                zh_hant="使用加密錢包登入"
-                zh_hans="使用加密钱包登入"
-                en="Connect Wallet"
-              />
-            ) : (
-              'loginSignUp'
-            )
+            <Translate id={isConnect ? 'loginWithWallet' : 'authEntries'} />
           }
           closeDialog={closeDialog}
         />
       )}
 
       <Dialog.Content hasGrow>
-        {isConnectForSetting && (
-          <Dialog.Message>
-            <ul className="connectWalletDesc">
-              <li>
-                <Translate {...Desc.section1} />
-              </li>
-              <li>
-                <Translate {...Desc.section2} />
-              </li>
-              <li>
-                <Translate {...Desc.section3} />
-              </li>
-            </ul>
-          </Dialog.Message>
-        )}
+        <Intro />
 
         {InnerForm}
 
         <Spacer size="xloose" />
       </Dialog.Content>
-      <style jsx>{styles}</style>
     </>
   )
 }
 
-export default ConnectWallet
+export default Select

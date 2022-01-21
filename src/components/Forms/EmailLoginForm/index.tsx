@@ -26,10 +26,9 @@ import {
 } from '~/common/utils'
 
 import {
+  EmailSignUpDialogButton,
   PasswordResetDialogButton,
   PasswordResetRedirectButton,
-  SignUpDialogButton,
-  SignUpRedirectionButton,
 } from './Buttons'
 import styles from './styles.css'
 
@@ -38,7 +37,10 @@ import { UserLogin } from './__generated__/UserLogin'
 interface FormProps {
   purpose: 'dialog' | 'page'
   submitCallback?: () => void
+  gotoResetPassword?: () => void
+  gotoEmailSignUp?: () => void
   closeDialog?: () => void
+  back?: () => void
 }
 
 interface FormValues {
@@ -57,10 +59,13 @@ export const USER_LOGIN = gql`
   }
 `
 
-export const LoginForm: React.FC<FormProps> = ({
+export const EmailLoginForm: React.FC<FormProps> = ({
   purpose,
   submitCallback,
+  gotoEmailSignUp,
+  gotoResetPassword,
   closeDialog,
+  back,
 }) => {
   const [login] = useMutation<UserLogin>(USER_LOGIN, undefined, {
     showToast: false,
@@ -69,7 +74,7 @@ export const LoginForm: React.FC<FormProps> = ({
 
   const isInDialog = purpose === 'dialog'
   const isInPage = purpose === 'page'
-  const formId = 'login-form'
+  const formId = 'email-login-form'
 
   const {
     values,
@@ -163,14 +168,19 @@ export const LoginForm: React.FC<FormProps> = ({
         onChange={handleChange}
         extraButton={
           <>
-            {isInDialog && <PasswordResetDialogButton />}
+            {isInDialog && gotoResetPassword && (
+              <PasswordResetDialogButton
+                gotoResetPassword={gotoResetPassword}
+              />
+            )}
             {isInPage && <PasswordResetRedirectButton />}
           </>
         }
       />
 
-      {isInDialog && <SignUpDialogButton />}
-      {isInPage && <SignUpRedirectionButton />}
+      {gotoEmailSignUp && (
+        <EmailSignUpDialogButton gotoEmailSignUp={gotoEmailSignUp} />
+      )}
     </Form>
   )
 
@@ -188,7 +198,7 @@ export const LoginForm: React.FC<FormProps> = ({
     return (
       <>
         <Layout.Header
-          left={<Layout.Header.BackButton />}
+          left={<Layout.Header.BackButton onClick={back} />}
           right={
             <>
               <Layout.Header.Title id="login" />
@@ -212,6 +222,7 @@ export const LoginForm: React.FC<FormProps> = ({
       {closeDialog && (
         <Dialog.Header
           title="login"
+          leftButton={back ? <Dialog.Header.BackButton onClick={back} /> : null}
           closeDialog={closeDialog}
           rightButton={SubmitButton}
         />

@@ -37,6 +37,7 @@ const ViewerFragments = {
           badges {
             type
           }
+          ethAddress
           cryptoWallet {
             id
             address

@@ -1,5 +1,7 @@
+import { Web3ReactProvider } from '@web3-react/core'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
+import { ethers } from 'ethers'
 import dynamic from 'next/dynamic'
 import React, { useEffect, useState } from 'react'
 
@@ -60,6 +62,10 @@ import('@sentry/browser').then((Sentry) => {
     sampleRate: 0.1,
   })
 })
+
+function getLibrary(provider?: any) {
+  return new ethers.providers.Web3Provider(provider)
+}
 
 const Root = ({
   client,
@@ -139,26 +145,28 @@ const Root = ({
   }
 
   return (
-    <ViewerProvider
-      viewer={(privateViewer || viewer) as ViewerUser}
-      privateFetched={privateFetched}
-    >
-      <SplashScreen />
-      <PageViewTracker />
+    <Web3ReactProvider getLibrary={getLibrary}>
+      <ViewerProvider
+        viewer={(privateViewer || viewer) as ViewerUser}
+        privateFetched={privateFetched}
+      >
+        <SplashScreen />
+        <PageViewTracker />
 
-      <LanguageProvider>
-        <FeaturesProvider official={official}>
-          {shouldApplyLayout ? <Layout>{children}</Layout> : children}
+        <LanguageProvider>
+          <FeaturesProvider official={official}>
+            {shouldApplyLayout ? <Layout>{children}</Layout> : children}
 
-          <Toast.Container />
-          <AnalyticsListener user={viewer || {}} />
-          <DynamicGlobalDialogs />
-          <DynamicProgressBar />
-          <DynamicPushInitializer client={client} />
-          <DynamicFingerprint />
-        </FeaturesProvider>
-      </LanguageProvider>
-    </ViewerProvider>
+            <Toast.Container />
+            <AnalyticsListener user={viewer || {}} />
+            <DynamicGlobalDialogs />
+            <DynamicProgressBar />
+            <DynamicPushInitializer client={client} />
+            <DynamicFingerprint />
+          </FeaturesProvider>
+        </LanguageProvider>
+      </ViewerProvider>
+    </Web3ReactProvider>
   )
 }
 

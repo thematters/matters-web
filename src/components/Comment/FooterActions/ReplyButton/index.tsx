@@ -14,7 +14,7 @@ import {
 
 import {
   CLOSE_ACTIVE_DIALOG,
-  OPEN_LOGIN_SIGNUP_DIALOG,
+  OPEN_UNIVERSAL_AUTH_DIALOG,
   PATHS,
 } from '~/common/enums'
 import { appendTarget, translate } from '~/common/utils'
@@ -107,7 +107,7 @@ const ReplyButton = ({
       ? {
           onClick: () => {
             window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
-            window.dispatchEvent(new CustomEvent(OPEN_LOGIN_SIGNUP_DIALOG))
+            window.dispatchEvent(new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG))
           },
         }
       : appendTarget(PATHS.LOGIN, true)

@@ -19,7 +19,7 @@ import {
   ADD_TOAST,
   CLOSE_ACTIVE_DIALOG,
   OPEN_LIKE_COIN_DIALOG,
-  OPEN_LOGIN_SIGNUP_DIALOG,
+  OPEN_UNIVERSAL_AUTH_DIALOG,
   PATHS,
   REFETCH_RESPONSES,
 } from '~/common/enums'
@@ -188,7 +188,7 @@ const CommentBar = ({ article, disabled }: CommentBarProps) => {
       ? {
           onClick: () => {
             window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
-            window.dispatchEvent(new CustomEvent(OPEN_LOGIN_SIGNUP_DIALOG))
+            window.dispatchEvent(new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG))
           },
         }
       : appendTarget(PATHS.LOGIN, true)
