@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
+import { getAddress } from '@ethersproject/address'
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
@@ -61,6 +62,8 @@ const WalletSettings = () => {
   const equalSign = total > 0 ? '≈' : '='
 
   const ethAddress = data?.viewer?.info?.ethAddress
+    ? getAddress(data.viewer.info.ethAddress)
+    : ''
   const shortAddress = ethAddress ? maskAddress(ethAddress) : ''
 
   usePullToRefresh.Handler(refetch)
@@ -123,11 +126,7 @@ const WalletSettings = () => {
           ethAddress ? (
             <Translate id="walletAddress" />
           ) : (
-            <Translate
-              zh_hant="使用加密錢包登入"
-              zh_hans="使用加密钱包登入"
-              en="Connect Wallet"
-            />
+            <Translate id="loginWithWallet" />
           )
         }
         href={ethAddress ? undefined : PATHS.ME_SETTINGS_CONNECT_WALLET}

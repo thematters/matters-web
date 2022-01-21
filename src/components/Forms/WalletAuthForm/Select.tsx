@@ -1,5 +1,5 @@
+import { Web3Provider as EthersWeb3Provider } from '@ethersproject/providers'
 import { useWeb3React } from '@web3-react/core'
-import { ethers } from 'ethers'
 import React, { useContext, useEffect, useState } from 'react'
 
 import {
@@ -81,7 +81,7 @@ const Select: React.FC<FormProps> = ({
   const isConnect = type === 'connect'
 
   const { activate, connector, account, error } =
-    useWeb3React<ethers.providers.Web3Provider>()
+    useWeb3React<EthersWeb3Provider>()
 
   // handle logic to recognize the connector currently being activated
   const [activatingConnector, setActivatingConnector] = useState<any>()

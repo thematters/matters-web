@@ -1,5 +1,5 @@
+import { Web3Provider as EthersWeb3Provider } from '@ethersproject/providers'
 import { useWeb3React } from '@web3-react/core'
-import { ethers } from 'ethers'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import Link from 'next/link'
@@ -70,7 +70,7 @@ const Connect: React.FC<FormProps> = ({
     showToast: false,
   })
 
-  const { account, library } = useWeb3React<ethers.providers.Web3Provider>()
+  const { account, library } = useWeb3React<EthersWeb3Provider>()
 
   useEffect(() => {
     if (!account && back) {

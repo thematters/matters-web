@@ -1,20 +1,57 @@
+import dynamic from 'next/dynamic'
+
 import {
-  ChangePasswordForm,
   Dialog,
-  EmailLoginForm,
-  EmailSignUpForm,
   ReCaptchaProvider,
-  SelectAuthMethodForm,
+  Spinner,
   useDialogSwitch,
   useEventListener,
   useStep,
   VerificationLinkSent,
-  WalletAuthForm,
 } from '~/components'
 
 import { CLOSE_ACTIVE_DIALOG, OPEN_UNIVERSAL_AUTH_DIALOG } from '~/common/enums'
 
 import { AuthResultType } from '@/__generated__/globalTypes'
+
+const DynamicSelectAuthMethodForm = dynamic<any>(
+  () =>
+    import('~/components/Forms/SelectAuthMethodForm').then(
+      (mod) => mod.SelectAuthMethodForm
+    ),
+  { ssr: false, loading: Spinner }
+)
+const DynamicChangePasswordFormRequest = dynamic(
+  () => import('~/components/Forms/ChangePasswordForm/Request'),
+  { ssr: false, loading: Spinner }
+)
+const DynamicEmailLoginForm = dynamic<any>(
+  () =>
+    import('~/components/Forms/EmailLoginForm').then(
+      (mod) => mod.EmailLoginForm
+    ),
+  { ssr: false, loading: Spinner }
+)
+const DynamicEmailSignUpFormInit = dynamic(
+  () => import('~/components/Forms/EmailSignUpForm/Init'),
+  { ssr: false, loading: Spinner }
+)
+const DynamicWalletAuthFormSelect = dynamic(
+  () => import('~/components/Forms/WalletAuthForm/Select'),
+  { ssr: false, loading: Spinner }
+)
+const DynamicWalletAuthFormConnect = dynamic(
+  () => import('~/components/Forms/WalletAuthForm/Connect'),
+  { ssr: false, loading: Spinner }
+)
+const DynamicWalletAuthFormVerify = dynamic(
+  () => import('~/components/Forms/WalletAuthForm/Verify'),
+  { ssr: false, loading: Spinner }
+)
+const DynamicEmailSignUpFormComplete = dynamic(
+  () => import('~/components/Forms/EmailSignUpForm/Complete'),
+  { ssr: false, loading: Spinner }
+)
 
 type Step =
   | 'select-login-method'
@@ -49,7 +86,7 @@ const BaseUniversalAuthDialog = () => {
   return (
     <Dialog size="sm" isOpen={show} onDismiss={closeDialog}>
       {currStep === 'select-login-method' && (
-        <SelectAuthMethodForm
+        <DynamicSelectAuthMethodForm
           purpose="dialog"
           gotoWalletAuth={() => forward('wallet-select')}
           gotoEmailLogin={() => forward('email-login')}
@@ -59,7 +96,7 @@ const BaseUniversalAuthDialog = () => {
 
       {/* Wallet */}
       {currStep === 'wallet-select' && (
-        <WalletAuthForm.Select
+        <DynamicWalletAuthFormSelect
           purpose="dialog"
           submitCallback={() => {
             forward('wallet-connect')
@@ -69,7 +106,7 @@ const BaseUniversalAuthDialog = () => {
         />
       )}
       {currStep === 'wallet-connect' && (
-        <WalletAuthForm.Connect
+        <DynamicWalletAuthFormConnect
           purpose="dialog"
           submitCallback={(type?: AuthResultType) => {
             forward(
@@ -81,7 +118,7 @@ const BaseUniversalAuthDialog = () => {
         />
       )}
       {currStep === 'wallet-verify' && (
-        <WalletAuthForm.Verify
+        <DynamicWalletAuthFormVerify
           purpose="dialog"
           submitCallback={() => {
             forward('complete')
@@ -92,7 +129,7 @@ const BaseUniversalAuthDialog = () => {
 
       {/* Email */}
       {currStep === 'email-login' && (
-        <EmailLoginForm
+        <DynamicEmailLoginForm
           purpose="dialog"
           closeDialog={closeDialog}
           gotoEmailSignUp={() => forward('email-sign-up-init')}
@@ -102,7 +139,7 @@ const BaseUniversalAuthDialog = () => {
       )}
       {currStep === 'email-sign-up-init' && (
         <ReCaptchaProvider>
-          <EmailSignUpForm.Init
+          <DynamicEmailSignUpFormInit
             purpose="dialog"
             submitCallback={() => forward('email-verification-sent')}
             gotoEmailLogin={() => forward('email-login')}
@@ -115,7 +152,7 @@ const BaseUniversalAuthDialog = () => {
         <VerificationLinkSent type="changePassword" purpose="dialog" />
       )}
       {currStep === 'reset-password-request' && (
-        <ChangePasswordForm.Request
+        <DynamicChangePasswordFormRequest
           type="forget"
           purpose="dialog"
           submitCallback={() => forward('email-verification-sent')}
@@ -125,7 +162,9 @@ const BaseUniversalAuthDialog = () => {
       )}
 
       {/* Misc */}
-      {currStep === 'complete' && <EmailSignUpForm.Complete purpose="dialog" />}
+      {currStep === 'complete' && (
+        <DynamicEmailSignUpFormComplete purpose="dialog" />
+      )}
     </Dialog>
   )
 }
