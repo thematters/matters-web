@@ -14,12 +14,14 @@ import styles from './styles.css'
 
 interface ListProps {
   groupName?: string | React.ReactNode
+  hint?: string | React.ReactNode
   spacing?: 0 | 'xloose'
   forceGreyStyle?: boolean
 }
 
 const List: React.FC<ListProps> & { Item: typeof Item } = ({
   groupName,
+  hint,
   spacing = 0,
   forceGreyStyle,
   children,
@@ -35,6 +37,8 @@ const List: React.FC<ListProps> & { Item: typeof Item } = ({
       {groupName && <h4 className="name">{groupName}</h4>}
 
       <ul className={listClasses}>{children}</ul>
+
+      {hint && <p className="hint">{hint}</p>}
 
       <style jsx>{styles}</style>
     </section>

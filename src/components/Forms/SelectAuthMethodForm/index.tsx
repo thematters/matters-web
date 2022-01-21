@@ -40,6 +40,13 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
             <Translate id="useWallet" />
           </TextIcon>
         }
+        subtitle={
+          <Translate
+            zh_hans="欢迎未注册或已启用钱包登入的朋友多加利用"
+            zh_hant="歡迎未註冊或已啟用錢包登入的朋友多加利用"
+            en="For unregistered or users enabled wallet login"
+          />
+        }
         onClick={gotoWalletAuth}
       />
       <Form.List.Item
@@ -52,6 +59,13 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
           >
             <Translate id="useEmail" />
           </TextIcon>
+        }
+        subtitle={
+          <Translate
+            zh_hans="持续支持邮箱進入，登入后可随时启用钱包登入"
+            zh_hant="持續提供信箱進入，登入後可隨時啟用錢包登入"
+            en="User registered by email can login and enable wallet login later"
+          />
         }
         onClick={gotoEmailLogin}
       />
