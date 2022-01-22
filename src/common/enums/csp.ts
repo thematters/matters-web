@@ -83,6 +83,9 @@ const CONNECT_SRC = [
   // WalletConnect
   '*.walletconnect.org',
 
+  // Alchemy
+  '*.alchemyapi.io',
+
   // IPFS Gateways
   'ipfs.io/ipfs/',
   'gateway.ipfs.io/ipfs/',

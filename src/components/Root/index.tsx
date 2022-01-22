@@ -33,18 +33,14 @@ import { RootQueryPublic } from './__generated__/RootQueryPublic'
 
 const DynamicPushInitializer = dynamic(
   () => import('~/components/PushInitializer'),
-  {
-    ssr: false,
-  }
+  { ssr: false }
 )
 const DynamicProgressBar = dynamic(() => import('~/components/ProgressBar'), {
   ssr: false,
 })
 const DynamicGlobalDialogs = dynamic(
   () => import('~/components/GlobalDialogs'),
-  {
-    ssr: false,
-  }
+  { ssr: false }
 )
 const DynamicFingerprint = dynamic(() => import('~/components/Fingerprint'), {
   ssr: false,
