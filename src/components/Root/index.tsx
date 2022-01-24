@@ -1,7 +1,7 @@
+import { Web3Provider as EthersWeb3Provider } from '@ethersproject/providers'
 import { Web3ReactProvider } from '@web3-react/core'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
-import { ethers } from 'ethers'
 import dynamic from 'next/dynamic'
 import React, { useEffect, useState } from 'react'
 
@@ -33,18 +33,14 @@ import { RootQueryPublic } from './__generated__/RootQueryPublic'
 
 const DynamicPushInitializer = dynamic(
   () => import('~/components/PushInitializer'),
-  {
-    ssr: false,
-  }
+  { ssr: false }
 )
 const DynamicProgressBar = dynamic(() => import('~/components/ProgressBar'), {
   ssr: false,
 })
 const DynamicGlobalDialogs = dynamic(
   () => import('~/components/GlobalDialogs'),
-  {
-    ssr: false,
-  }
+  { ssr: false }
 )
 const DynamicFingerprint = dynamic(() => import('~/components/Fingerprint'), {
   ssr: false,
@@ -64,7 +60,7 @@ import('@sentry/browser').then((Sentry) => {
 })
 
 function getLibrary(provider?: any) {
-  return new ethers.providers.Web3Provider(provider)
+  return new EthersWeb3Provider(provider)
 }
 
 const Root = ({

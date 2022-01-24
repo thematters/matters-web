@@ -42,8 +42,8 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
         }
         subtitle={
           <Translate
-            zh_hans="欢迎未注册或已启用钱包登入的朋友多加利用"
-            zh_hant="歡迎未註冊或已啟用錢包登入的朋友多加利用"
+            zh_hans="欢迎未注册或已启用钱包登入的朋友使用"
+            zh_hant="歡迎未註冊或已啟用錢包登入的朋友使用"
             en="For unregistered or users enabled wallet login"
           />
         }
@@ -62,8 +62,8 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
         }
         subtitle={
           <Translate
-            zh_hans="持续支持邮箱進入，登入后可随时启用钱包登入"
-            zh_hant="持續提供信箱進入，登入後可隨時啟用錢包登入"
+            zh_hans="持续支持邮箱進入，未來可随时启用钱包登入"
+            zh_hant="持續提供信箱進入，未來可隨時啟用錢包登入"
             en="User registered by email can login and enable wallet login later"
           />
         }

@@ -1,5 +1,5 @@
+import { Web3Provider as EthersWeb3Provider } from '@ethersproject/providers'
 import { useWeb3React } from '@web3-react/core'
-import { ethers } from 'ethers'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import Link from 'next/link'
@@ -70,7 +70,7 @@ const Connect: React.FC<FormProps> = ({
     showToast: false,
   })
 
-  const { account, library } = useWeb3React<ethers.providers.Web3Provider>()
+  const { account, library } = useWeb3React<EthersWeb3Provider>()
 
   useEffect(() => {
     if (!account && back) {
@@ -197,18 +197,23 @@ const Connect: React.FC<FormProps> = ({
             en="Connect Wallet"
           />
         }
-        hint={
-          <Translate
-            zh_hans="若要变更地址，请直接操作钱包切換"
-            zh_hant="若要變更地址，請直接操作錢包切換"
-            en="To change, switch it directly on your wallet"
-          />
-        }
       >
         <Form.List.Item title={maskAddress(values.address)} />
 
         {errors.address && (
           <Form.Field.Footer fieldMsgId={fieldMsgId} error={errors.address} />
+        )}
+        {!errors.address && (
+          <Form.Field.Footer
+            fieldMsgId={fieldMsgId}
+            hint={
+              <Translate
+                zh_hans="若要变更地址，请直接操作钱包切換"
+                zh_hant="若要變更地址，請直接操作錢包切換"
+                en="To change, switch it directly on your wallet"
+              />
+            }
+          />
         )}
       </Form.List>
 
