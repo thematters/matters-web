@@ -38,10 +38,6 @@ const DynamicWalletAuthFormConnect = dynamic(
   () => import('~/components/Forms/WalletAuthForm/Connect'),
   { ssr: false, loading: Spinner }
 )
-const DynamicWalletAuthFormVerify = dynamic(
-  () => import('~/components/Forms/WalletAuthForm/Verify'),
-  { ssr: false, loading: Spinner }
-)
 const DynamicEmailSignUpFormPassword = dynamic(
   () => import('~/components/Forms/EmailSignUpForm/Password'),
   { ssr: false, loading: Spinner }
@@ -56,7 +52,6 @@ type Step =
   // wallet
   | 'wallet-select'
   | 'wallet-connect'
-  | 'wallet-verify'
   // email
   | 'email-login'
   | 'email-sign-up-init'
@@ -100,23 +95,17 @@ const UniversalAuth = () => {
         />
       )}
       {currStep === 'wallet-connect' && (
-        <DynamicWalletAuthFormConnect
-          purpose="page"
-          submitCallback={(type?: AuthResultType) => {
-            forward(
-              type === AuthResultType.Signup ? 'wallet-verify' : 'complete'
-            )
-          }}
-          back={() => forward('wallet-select')}
-        />
-      )}
-      {currStep === 'wallet-verify' && (
-        <DynamicWalletAuthFormVerify
-          purpose="page"
-          submitCallback={() => {
-            forward('complete')
-          }}
-        />
+        <ReCaptchaProvider>
+          <DynamicWalletAuthFormConnect
+            purpose="page"
+            submitCallback={(type?: AuthResultType) => {
+              if (type === AuthResultType.Signup) {
+                forward('complete')
+              }
+            }}
+            back={() => forward('wallet-select')}
+          />
+        </ReCaptchaProvider>
       )}
 
       {/* Email */}
