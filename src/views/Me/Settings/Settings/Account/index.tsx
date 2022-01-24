@@ -31,6 +31,7 @@ const AccountSettings = () => {
   )
   const totalBlockCount = data?.viewer?.blockList?.totalCount
   const userNameEditable = viewer.info.userNameEditable
+  const userPasswordEditable = !viewer.info.isWalletAuth
 
   usePullToRefresh.Handler(refetch)
 
@@ -51,10 +52,12 @@ const AccountSettings = () => {
         href={PATHS.ME_SETTINGS_CHANGE_EMAIL}
         rightText={viewer.info.email}
       />
-      <Form.List.Item
-        title={<Translate id="loginPassword" />}
-        href={PATHS.ME_SETTINGS_CHANGE_PASSWORD}
-      />
+      {userPasswordEditable && (
+        <Form.List.Item
+          title={<Translate id="loginPassword" />}
+          href={PATHS.ME_SETTINGS_CHANGE_PASSWORD}
+        />
+      )}
       <Form.List.Item
         title={<Translate id="settingsNotification" />}
         href={PATHS.ME_SETTINGS_NOTIFICATION}

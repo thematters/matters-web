@@ -44,6 +44,7 @@ const ViewerFragments = {
             hasNFTs
             # nfts { id }
           }
+          isWalletAuth
         }
         settings {
           language
