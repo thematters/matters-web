@@ -19,6 +19,7 @@ import styles from './styles.css'
  */
 
 const prefix = 'toast-'
+const maxToasts = 5 // number of toasts at most to display in the same time
 
 const Container = () => {
   const [toasts, setToasts] = useState<any[]>([])
@@ -27,7 +28,10 @@ const Container = () => {
     if (!payload || Object.keys(payload).length === 0) {
       return false
     }
-    setToasts((prev) => [{ id: `${prefix}${Date.now()}`, ...payload }, ...prev])
+    setToasts((prev) => [
+      { id: `${prefix}${Date.now()}`, ...payload },
+      ...prev.slice(0, maxToasts - 1),
+    ])
   }
 
   const remove = ({ id }: { id: string }) => {
