@@ -1,3 +1,4 @@
+import { useLazyQuery } from '@apollo/react-hooks'
 import { Web3Provider as EthersWeb3Provider } from '@ethersproject/providers'
 import { useWeb3React } from '@web3-react/core'
 import { useFormik } from 'formik'
@@ -12,7 +13,9 @@ import {
   Layout,
   Translate,
   useMutation,
+  VerificationSendCodeButton,
 } from '~/components'
+import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 
 import {
   ADD_TOAST,
@@ -27,12 +30,17 @@ import {
   parseFormSubmitErrors,
   redirectToTarget,
   storage,
+  translate,
+  validateCode,
+  validateEmail,
   validateToS,
 } from '~/common/utils'
 
-import { GENERATE_SIGNING_MESSAGE, WALLET_LOGIN } from './gql'
+import { ETH_ADDRESS_USER, GENERATE_SIGNING_MESSAGE, WALLET_LOGIN } from './gql'
 
 import { AuthResultType } from '@/__generated__/globalTypes'
+import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
+import { ETHAddressUser } from './__generated__/ETHAddressUser'
 import { GenerateSigningMessage } from './__generated__/GenerateSigningMessage'
 import { WalletLogin } from './__generated__/WalletLogin'
 
@@ -48,6 +56,22 @@ interface FormProps {
 interface FormValues {
   address: string
   tos: boolean
+  email: string
+  code: string
+}
+
+const Intro = () => {
+  return (
+    <Dialog.Message align="left">
+      <p>
+        <Translate
+          zh_hant="未來所有重要訊息將透過郵件通知，請填入電子信箱完成設定。提醒，電子信箱將不作為登入使用，僅作為聯繫渠道。另外，Matters 不會透過任何渠道主動詢問你的錢包私鑰。"
+          zh_hans="未来所有重要讯息将透过邮件通知，請填入电子邮箱完成设定。提醒，电子邮箱将不作为登入使用，仅作为联系渠道。另外，Matters 不会透过任何渠道主动询问你的钱包私钥。"
+          en="All Important information will be notified by email. So filling in your email address will be strongly recommended. As a reminder, the email address will not be used as a login but only as a contact channel. Also, Matters will never ask for your wallet mnemonic through any channel."
+        />
+      </p>
+    </Dialog.Message>
+  )
 }
 
 const Connect: React.FC<FormProps> = ({
@@ -69,8 +93,15 @@ const Connect: React.FC<FormProps> = ({
   const [walletLogin] = useMutation<WalletLogin>(WALLET_LOGIN, undefined, {
     showToast: false,
   })
+  const [confirmCode] = useMutation<ConfirmVerificationCode>(CONFIRM_CODE)
+
+  const [queryEthAddressUser, { data, loading }] =
+    useLazyQuery<ETHAddressUser>(ETH_ADDRESS_USER)
 
   const { account, library } = useWeb3React<EthersWeb3Provider>()
+
+  // sign up if eth address didn't bind with a user
+  const isSignUp = !!(data && account && !data?.user?.id)
 
   useEffect(() => {
     if (!account && back) {
@@ -78,6 +109,8 @@ const Connect: React.FC<FormProps> = ({
     }
 
     setFieldValue('address', account || '')
+
+    queryEthAddressUser({ variables: { ethAddress: account } })
   }, [account])
 
   const {
@@ -86,18 +119,28 @@ const Connect: React.FC<FormProps> = ({
     touched,
     handleChange,
     handleSubmit,
+    handleBlur,
     isSubmitting,
     setFieldValue,
   } = useFormik<FormValues>({
     initialValues: {
       address: account || '',
       tos: true,
+      email: '',
+      code: '',
     },
-    validate: ({ tos }) =>
+    validate: ({ tos, email, code }) =>
       _pickBy({
         tos: validateToS(tos, lang),
+        email: isSignUp
+          ? validateEmail(email, lang, { allowPlusSign: false })
+          : undefined,
+        code: isSignUp ? validateCode(code, lang) : undefined,
       }),
-    onSubmit: async ({ address }, { setFieldError, setSubmitting }) => {
+    onSubmit: async (
+      { address, email, code },
+      { setFieldError, setSubmitting }
+    ) => {
       try {
         if (!library || !address) {
           setFieldError(
@@ -111,6 +154,7 @@ const Connect: React.FC<FormProps> = ({
           return
         }
 
+        // get signing message
         const { data: signingMessageData } = await generateSigningMessage({
           variables: { address },
         })
@@ -128,8 +172,8 @@ const Connect: React.FC<FormProps> = ({
           return
         }
 
+        // let user sign the message
         const signer = library.getSigner()
-
         let signature = ''
         try {
           signature = await signer.signMessage(signingMessage.signingMessage)
@@ -145,6 +189,16 @@ const Connect: React.FC<FormProps> = ({
           return
         }
 
+        // verifiy email (sign up only)
+        let codeId = ''
+        if (isSignUp && email && code) {
+          const { data: confirmCodeData } = await confirmCode({
+            variables: { input: { email, type: 'register', code } },
+          })
+          codeId = confirmCodeData?.confirmVerificationCode || ''
+        }
+
+        // confirm auth
         const { data: loginData } = await walletLogin({
           variables: {
             input: {
@@ -152,6 +206,8 @@ const Connect: React.FC<FormProps> = ({
               nonce: signingMessage.nonce,
               signedMessage: signingMessage.signingMessage,
               signature,
+              ...(email ? { email } : {}),
+              ...(codeId ? { codeId } : {}),
             },
           },
         })
@@ -180,7 +236,13 @@ const Connect: React.FC<FormProps> = ({
         }
       } catch (error) {
         const [messages, codes] = parseFormSubmitErrors(error, lang)
-        setFieldError('address', messages[codes[0]])
+        codes.forEach((c) => {
+          if (c.includes('CODE_')) {
+            setFieldError('code', messages[c])
+          } else {
+            setFieldError('address', messages[c])
+          }
+        })
       }
 
       setSubmitting(false)
@@ -217,6 +279,44 @@ const Connect: React.FC<FormProps> = ({
         )}
       </Form.List>
 
+      {isSignUp && (
+        <Form.Input
+          label={<Translate id="email" />}
+          type="email"
+          name="email"
+          required
+          placeholder={translate({
+            id: 'enterEmail',
+            lang,
+          })}
+          value={values.email}
+          error={touched.email && errors.email}
+          onBlur={handleBlur}
+          onChange={handleChange}
+        />
+      )}
+
+      {isSignUp && (
+        <Form.Input
+          label={<Translate id="verificationCode" />}
+          type="text"
+          name="code"
+          required
+          placeholder={translate({ id: 'enterVerificationCode', lang })}
+          value={values.code}
+          error={touched.code && errors.code}
+          onBlur={handleBlur}
+          onChange={handleChange}
+          extraButton={
+            <VerificationSendCodeButton
+              email={values.email}
+              type="register"
+              disabled={!!errors.email}
+            />
+          }
+        />
+      )}
+
       <Form.CheckBox
         name="tos"
         checked={values.tos}
@@ -251,9 +351,9 @@ const Connect: React.FC<FormProps> = ({
     <Dialog.Header.RightButton
       type="submit"
       form={formId}
-      disabled={isSubmitting || !account}
+      disabled={isSubmitting || loading || !account}
       text={<Translate id="nextStep" />}
-      loading={isSubmitting}
+      loading={isSubmitting || loading}
     />
   )
 
@@ -271,6 +371,8 @@ const Connect: React.FC<FormProps> = ({
         />
 
         {InnerForm}
+
+        {isSignUp && <Intro />}
       </>
     )
   }
@@ -286,7 +388,11 @@ const Connect: React.FC<FormProps> = ({
         />
       )}
 
-      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+      <Dialog.Content hasGrow>
+        {InnerForm}
+
+        {isSignUp && <Intro />}
+      </Dialog.Content>
     </>
   )
 }
