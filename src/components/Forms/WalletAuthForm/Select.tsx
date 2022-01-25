@@ -24,6 +24,8 @@ import {
   walletConnectors,
 } from '~/common/utils'
 
+import styles from './styles.css'
+
 export interface FormProps {
   type?: 'connect' | 'auth'
   purpose: 'dialog' | 'page'
@@ -189,24 +191,29 @@ const Select: React.FC<FormProps> = ({
           onClick={onClickWalletConnect}
           right={isWalletConnectLoading ? <IconSpinner16 color="grey" /> : null}
         />
-        {error && (
-          <Form.Field.Footer
-            fieldMsgId={fieldMsgId}
-            error={getWalletErrorMessage({ error, lang })}
-          />
-        )}
-        {activatingConnector && (
-          <Form.Field.Footer
-            fieldMsgId={fieldMsgId}
-            hint={translate({
-              lang,
-              zh_hant: '請打開你的錢包完成連接操作',
-              zh_hans: '请打开你的钱包完成连接操作',
-              en: 'Please confirm the connection in your wallet.',
-            })}
-          />
-        )}
       </Form.List>
+
+      {(error || activatingConnector) && (
+        <section className="msg">
+          <Form.Field>
+            <Form.Field.Footer
+              fieldMsgId={fieldMsgId}
+              hint={
+                activatingConnector
+                  ? translate({
+                      lang,
+                      zh_hant: '請打開你的錢包完成連接操作',
+                      zh_hans: '请打开你的钱包完成连接操作',
+                      en: 'Please confirm the connection in your wallet.',
+                    })
+                  : undefined
+              }
+              error={error ? getWalletErrorMessage({ error, lang }) : undefined}
+            />
+          </Form.Field>
+          <style jsx>{styles}</style>
+        </section>
+      )}
     </Form>
   )
 

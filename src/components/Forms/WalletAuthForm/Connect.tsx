@@ -39,6 +39,7 @@ import {
 } from '~/common/utils'
 
 import { ETH_ADDRESS_USER, GENERATE_SIGNING_MESSAGE, WALLET_LOGIN } from './gql'
+import styles from './styles.css'
 
 import { AuthResultType } from '@/__generated__/globalTypes'
 import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
@@ -264,23 +265,25 @@ const Connect: React.FC<FormProps> = ({
         }
       >
         <Form.List.Item title={maskAddress(values.address)} />
+      </Form.List>
 
-        {errors.address && (
-          <Form.Field.Footer fieldMsgId={fieldMsgId} error={errors.address} />
-        )}
-        {!errors.address && (
-          <Form.Field.Footer
-            fieldMsgId={fieldMsgId}
-            hint={
+      <section className="msg">
+        <Form.Field.Footer
+          fieldMsgId={fieldMsgId}
+          hint={
+            !errors.address ? (
               <Translate
                 zh_hans="若要变更地址，请直接操作钱包切換"
                 zh_hant="若要變更地址，請直接操作錢包切換"
                 en="To change, switch it directly on your wallet"
               />
-            }
-          />
-        )}
-      </Form.List>
+            ) : undefined
+          }
+          error={errors.address}
+        />
+
+        <style jsx>{styles}</style>
+      </section>
 
       {isSignUp && (
         <Form.Input
