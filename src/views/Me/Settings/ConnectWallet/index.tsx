@@ -1,12 +1,10 @@
-import { Head, Layout, useRoute, useStep, WalletAuthForm } from '~/components'
+import { Head, Layout, useStep, WalletAuthForm } from '~/components'
 
 import { PATHS } from '~/common/enums'
 
 type Step = 'wallet-select' | 'wallet-connect'
 
 const ConnectWallet = () => {
-  const { router } = useRoute()
-
   const initStep = 'wallet-select'
   const { currStep, forward } = useStep<Step>(initStep)
 
@@ -26,7 +24,7 @@ const ConnectWallet = () => {
       {currStep === 'wallet-connect' && (
         <WalletAuthForm.Connect
           purpose="page"
-          submitCallback={() => router.push(PATHS.ME_SETTINGS)}
+          submitCallback={() => (window.location.href = PATHS.ME_SETTINGS)}
           back={() => forward('wallet-select')}
         />
       )}
