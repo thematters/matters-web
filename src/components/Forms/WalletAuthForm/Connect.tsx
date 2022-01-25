@@ -11,6 +11,7 @@ import {
   Form,
   LanguageContext,
   Layout,
+  Spacer,
   Translate,
   useMutation,
   VerificationSendCodeButton,
@@ -133,7 +134,7 @@ const Connect: React.FC<FormProps> = ({
     },
     validate: ({ tos, email, code }) =>
       _pickBy({
-        tos: validateToS(tos, lang),
+        tos: isSignUp ? validateToS(tos, lang) : undefined,
         email: isSignUp
           ? validateEmail(email, lang, { allowPlusSign: false })
           : undefined,
@@ -319,33 +320,37 @@ const Connect: React.FC<FormProps> = ({
         />
       )}
 
-      <Form.CheckBox
-        name="tos"
-        checked={values.tos}
-        error={touched.tos && errors.tos}
-        onChange={handleChange}
-        hint={
-          <>
-            <Translate
-              zh_hant="我已閱讀並同意"
-              zh_hans="我已阅读并同意"
-              en="I have read and agree to"
-            />
+      {!isSignUp && <Spacer size="loose" />}
 
-            <Link href={PATHS.TOS}>
-              <a className="u-link-green" target="_blank">
-                &nbsp;
-                <Translate
-                  zh_hant="Matters 用戶協議和隱私政策"
-                  zh_hans="Matters 用户协议和隐私政策"
-                  en="Terms and Privacy Policy"
-                />
-              </a>
-            </Link>
-          </>
-        }
-        required
-      />
+      {isSignUp && (
+        <Form.CheckBox
+          name="tos"
+          checked={values.tos}
+          error={touched.tos && errors.tos}
+          onChange={handleChange}
+          hint={
+            <>
+              <Translate
+                zh_hant="我已閱讀並同意"
+                zh_hans="我已阅读并同意"
+                en="I have read and agree to"
+              />
+
+              <Link href={PATHS.TOS}>
+                <a className="u-link-green" target="_blank">
+                  &nbsp;
+                  <Translate
+                    zh_hant="Matters 用戶協議和隱私政策"
+                    zh_hans="Matters 用户协议和隐私政策"
+                    en="Terms and Privacy Policy"
+                  />
+                </a>
+              </Link>
+            </>
+          }
+          required
+        />
+      )}
     </Form>
   )
 
