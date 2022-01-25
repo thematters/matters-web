@@ -14,6 +14,7 @@ import {
   Translate,
   useMutation,
   VerificationSendCodeButton,
+  ViewerContext,
 } from '~/components'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 
@@ -81,6 +82,7 @@ const Connect: React.FC<FormProps> = ({
   back,
 }) => {
   const { lang } = useContext(LanguageContext)
+  const viewer = useContext(ViewerContext)
   const isInPage = purpose === 'page'
   const formId = 'wallet-auth-connect-form'
   const fieldMsgId = 'wallet-auth-connect-msg'
@@ -101,7 +103,7 @@ const Connect: React.FC<FormProps> = ({
   const { account, library } = useWeb3React<EthersWeb3Provider>()
 
   // sign up if eth address didn't bind with a user
-  const isSignUp = !!(data && account && !data?.user?.id)
+  const isSignUp = !!(data && account && !data?.user?.id && !viewer.isAuthed)
 
   useEffect(() => {
     if (!account && back) {
