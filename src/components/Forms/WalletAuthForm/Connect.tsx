@@ -11,9 +11,11 @@ import {
   Form,
   LanguageContext,
   Layout,
+  Spacer,
   Translate,
   useMutation,
   VerificationSendCodeButton,
+  ViewerContext,
 } from '~/components'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 
@@ -65,9 +67,9 @@ const Intro = () => {
     <Dialog.Message align="left">
       <p>
         <Translate
-          zh_hant="提醒：所有重要訊息將透過郵件通知，請填入信箱完成設定。信箱將不作為登入使用，僅作為聯繫渠道。另外，Matters 不會透過任何渠道主動詢問你的錢包私鑰。"
-          zh_hans="提醒：所有重要讯息将透过邮件通知，請填入邮箱完成设定。邮箱将不作为登入使用，仅作为联系渠道。另外，Matters 不会透过任何渠道主动询问你的钱包私钥。"
-          en="All important information will be notified by email. So filling in your email address will be required. As a reminder, the email address will not be used as a login but only as a contact channel. Also, Matters will never ask for your wallet mnemonic through any channel."
+          zh_hant="提醒：重要訊息將透過郵件通知，請填入信箱完成設定。信箱將不作為登入使用，僅作為聯繫渠道。Matters 不會透過任何渠道詢問你的錢包私鑰。"
+          zh_hans="提醒：重要讯息将透过邮件通知，請填入邮箱完成设定。邮箱将不作为登入使用，仅作为联系渠道。Matters 不会透过任何渠道询问你的钱包私钥。"
+          en="Important information will be notified by email. So filling in your email address will be required. As a reminder, the email address will not be used as a login but only as a contact channel. Also, Matters will never ask for your wallet mnemonic through any channel."
         />
       </p>
     </Dialog.Message>
@@ -81,6 +83,7 @@ const Connect: React.FC<FormProps> = ({
   back,
 }) => {
   const { lang } = useContext(LanguageContext)
+  const viewer = useContext(ViewerContext)
   const isInPage = purpose === 'page'
   const formId = 'wallet-auth-connect-form'
   const fieldMsgId = 'wallet-auth-connect-msg'
@@ -101,7 +104,7 @@ const Connect: React.FC<FormProps> = ({
   const { account, library } = useWeb3React<EthersWeb3Provider>()
 
   // sign up if eth address didn't bind with a user
-  const isSignUp = !!(data && account && !data?.user?.id)
+  const isSignUp = !!(data && account && !data?.user?.id && !viewer.isAuthed)
 
   useEffect(() => {
     if (!account && back) {
@@ -131,7 +134,7 @@ const Connect: React.FC<FormProps> = ({
     },
     validate: ({ tos, email, code }) =>
       _pickBy({
-        tos: validateToS(tos, lang),
+        tos: isSignUp ? validateToS(tos, lang) : undefined,
         email: isSignUp
           ? validateEmail(email, lang, { allowPlusSign: false })
           : undefined,
@@ -317,33 +320,37 @@ const Connect: React.FC<FormProps> = ({
         />
       )}
 
-      <Form.CheckBox
-        name="tos"
-        checked={values.tos}
-        error={touched.tos && errors.tos}
-        onChange={handleChange}
-        hint={
-          <>
-            <Translate
-              zh_hant="我已閱讀並同意"
-              zh_hans="我已阅读并同意"
-              en="I have read and agree to"
-            />
+      {!isSignUp && <Spacer size="loose" />}
 
-            <Link href={PATHS.TOS}>
-              <a className="u-link-green" target="_blank">
-                &nbsp;
-                <Translate
-                  zh_hant="Matters 用戶協議和隱私政策"
-                  zh_hans="Matters 用户协议和隐私政策"
-                  en="Terms and Privacy Policy"
-                />
-              </a>
-            </Link>
-          </>
-        }
-        required
-      />
+      {isSignUp && (
+        <Form.CheckBox
+          name="tos"
+          checked={values.tos}
+          error={touched.tos && errors.tos}
+          onChange={handleChange}
+          hint={
+            <>
+              <Translate
+                zh_hant="我已閱讀並同意"
+                zh_hans="我已阅读并同意"
+                en="I have read and agree to"
+              />
+
+              <Link href={PATHS.TOS}>
+                <a className="u-link-green" target="_blank">
+                  &nbsp;
+                  <Translate
+                    zh_hant="Matters 用戶協議和隱私政策"
+                    zh_hans="Matters 用户协议和隐私政策"
+                    en="Terms and Privacy Policy"
+                  />
+                </a>
+              </Link>
+            </>
+          }
+          required
+        />
+      )}
     </Form>
   )
 
