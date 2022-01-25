@@ -19,9 +19,14 @@ import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientP
 
 type BackButtonProps = {
   mode?: 'black-solid'
+  onClick?: () => void
 } & ButtonProps
 
-export const BackButton: React.FC<BackButtonProps> = ({ mode, ...props }) => {
+export const BackButton: React.FC<BackButtonProps> = ({
+  mode,
+  onClick,
+  ...props
+}) => {
   const { lang } = useContext(LanguageContext)
 
   const router = useRouter()
@@ -31,10 +36,8 @@ export const BackButton: React.FC<BackButtonProps> = ({ mode, ...props }) => {
   })
 
   const onBack = () => {
-    if (props.href || props.onClick) {
-      if (props.onClick) {
-        props.onClick()
-      }
+    if (props.href || onClick) {
+      onClick?.()
       return
     }
 

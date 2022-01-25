@@ -54,7 +54,7 @@ export const UniversalAuthButton: React.FC<UniversalAuthButtonProps> = ({
   return (
     <Button
       bgColor="green"
-      size={size || [null, '2.25rem']}
+      size={size || [null, '2rem']}
       spacing={[0, 'loose']}
       aria-haspopup="true"
       {...clickProps}
