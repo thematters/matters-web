@@ -1,18 +1,25 @@
 import { useQuery } from '@apollo/react-hooks'
+import { getAddress } from '@ethersproject/address'
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
 import {
+  Button,
+  CopyToClipboard,
   Form,
   getErrorCodes,
+  IconCopy16,
   IconSpinner16,
+  LanguageContext,
   Translate,
   usePullToRefresh,
   ViewerContext,
 } from '~/components'
 
-import { OPEN_LIKE_COIN_DIALOG } from '~/common/enums'
-import { numRound } from '~/common/utils'
+import { OPEN_LIKE_COIN_DIALOG, PATHS } from '~/common/enums'
+import { maskAddress, numRound, translate } from '~/common/utils'
+
+import styles from './styles.css'
 
 import { ViewerLikeInfo } from './__generated__/ViewerLikeInfo'
 
@@ -20,6 +27,10 @@ const VIEWER_LIKE_INFO = gql`
   query ViewerLikeInfo {
     viewer {
       id
+      info {
+        email
+        ethAddress
+      }
       liker {
         total
         rateUSD
@@ -30,6 +41,8 @@ const VIEWER_LIKE_INFO = gql`
 
 const WalletSettings = () => {
   const viewer = useContext(ViewerContext)
+  const { lang } = useContext(LanguageContext)
+
   const likerId = viewer.liker.likerId
   const { data, loading, refetch, error } = useQuery<ViewerLikeInfo>(
     VIEWER_LIKE_INFO,
@@ -47,6 +60,11 @@ const WalletSettings = () => {
   const total = liker?.total || 0
   const USDPrice = numRound(rateUSD * total)
   const equalSign = total > 0 ? '≈' : '='
+
+  const ethAddress = data?.viewer?.info?.ethAddress
+    ? getAddress(data.viewer.info.ethAddress)
+    : ''
+  const shortAddress = ethAddress ? maskAddress(ethAddress) : ''
 
   usePullToRefresh.Handler(refetch)
 
@@ -102,6 +120,42 @@ const WalletSettings = () => {
           !shouldReAuth && likerId && `${equalSign} ${USDPrice} USD`
         }
       />
+
+      <Form.List.Item
+        title={
+          ethAddress ? (
+            <Translate id="walletAddress" />
+          ) : (
+            <Translate id="loginWithWallet" />
+          )
+        }
+        href={ethAddress ? undefined : PATHS.ME_SETTINGS_CONNECT_WALLET}
+        rightText={
+          ethAddress ? (
+            <>
+              <span className="address">{shortAddress}</span>
+              <CopyToClipboard text={ethAddress}>
+                <Button
+                  spacing={['xtight', 'xtight']}
+                  bgActiveColor="grey-lighter"
+                  aria-label={translate({ id: 'copy', lang })}
+                >
+                  <IconCopy16 color="grey" />
+                </Button>
+              </CopyToClipboard>
+            </>
+          ) : (
+            <Translate
+              zh_hant="前往設定"
+              zh_hans="前往设置"
+              en="Click to connect"
+            />
+          )
+        }
+        rightTextColor={ethAddress ? 'grey-darker' : 'green'}
+      />
+
+      <style jsx>{styles}</style>
     </Form.List>
   )
 }

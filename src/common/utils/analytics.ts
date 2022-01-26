@@ -50,6 +50,9 @@ interface ClickButtonProp {
     | 'share_article'
     | 'share_user'
     | 'signup'
+    | 'login/signup'
+    | 'connectorMetaMask'
+    | 'connectorWalletConnect'
     | 'top_up'
     | 'translation' // translation button
     | 'write'

@@ -7,7 +7,11 @@ import {
   useResponsive,
 } from '~/components'
 
-import { CLOSE_ACTIVE_DIALOG, OPEN_LOGIN_DIALOG, PATHS } from '~/common/enums'
+import {
+  CLOSE_ACTIVE_DIALOG,
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  PATHS,
+} from '~/common/enums'
 import { appendTarget } from '~/common/utils'
 
 interface LoginButtonBaseProps {
@@ -30,7 +34,7 @@ export const LoginButton: React.FC<LoginButtonProps> = ({
     ? {
         onClick: () => {
           window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
-          window.dispatchEvent(new CustomEvent(OPEN_LOGIN_DIALOG))
+          window.dispatchEvent(new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG))
         },
       }
     : appendTarget(PATHS.LOGIN, true)

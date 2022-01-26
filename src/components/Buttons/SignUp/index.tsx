@@ -6,7 +6,11 @@ import {
   useResponsive,
 } from '~/components'
 
-import { CLOSE_ACTIVE_DIALOG, OPEN_SIGNUP_DIALOG, PATHS } from '~/common/enums'
+import {
+  CLOSE_ACTIVE_DIALOG,
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  PATHS,
+} from '~/common/enums'
 import { analytics, appendTarget } from '~/common/utils'
 
 type SignUpButtonProps = {
@@ -27,7 +31,7 @@ export const SignUpButton: React.FC<SignUpButtonProps> = ({
             type: 'signup',
           })
           window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
-          window.dispatchEvent(new CustomEvent(OPEN_SIGNUP_DIALOG))
+          window.dispatchEvent(new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG))
         },
       }
     : {

@@ -22,6 +22,7 @@ interface FormProps {
   purpose: 'dialog' | 'page'
   submitCallback: () => void
   closeDialog?: () => void
+  back?: () => void
 }
 
 interface FormValues {
@@ -34,6 +35,7 @@ const Request: React.FC<FormProps> = ({
   purpose,
   submitCallback,
   closeDialog,
+  back,
 }) => {
   const { lang } = useContext(LanguageContext)
 
@@ -119,7 +121,7 @@ const Request: React.FC<FormProps> = ({
     return (
       <>
         <Layout.Header
-          left={<Layout.Header.BackButton />}
+          left={<Layout.Header.BackButton onClick={back} />}
           right={
             <>
               <Layout.Header.Title id={titleId} />
@@ -138,6 +140,7 @@ const Request: React.FC<FormProps> = ({
       {closeDialog && (
         <Dialog.Header
           title={titleId}
+          leftButton={back ? <Dialog.Header.BackButton onClick={back} /> : null}
           closeDialog={closeDialog}
           rightButton={SubmitButton}
         />

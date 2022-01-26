@@ -64,7 +64,7 @@ const Password: React.FC<FormProps> = ({
   })
   const { lang } = useContext(LanguageContext)
   const isInPage = purpose === 'page'
-  const formId = 'sign-up-password-form'
+  const formId = 'email-sign-up-password-form'
 
   const {
     values,

@@ -1,3 +1,5 @@
+import { Web3Provider as EthersWeb3Provider } from '@ethersproject/providers'
+import { Web3ReactProvider } from '@web3-react/core'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
 import dynamic from 'next/dynamic'
@@ -31,18 +33,14 @@ import { RootQueryPublic } from './__generated__/RootQueryPublic'
 
 const DynamicPushInitializer = dynamic(
   () => import('~/components/PushInitializer'),
-  {
-    ssr: false,
-  }
+  { ssr: false }
 )
 const DynamicProgressBar = dynamic(() => import('~/components/ProgressBar'), {
   ssr: false,
 })
 const DynamicGlobalDialogs = dynamic(
   () => import('~/components/GlobalDialogs'),
-  {
-    ssr: false,
-  }
+  { ssr: false }
 )
 const DynamicFingerprint = dynamic(() => import('~/components/Fingerprint'), {
   ssr: false,
@@ -57,8 +55,13 @@ import('@sentry/browser').then((Sentry) => {
   Sentry.init({
     dsn: process.env.NEXT_PUBLIC_SENTRY_DSN || '',
     ignoreErrors: [/.*Timeout.*/, /.*Network.*/],
+    sampleRate: 0.1,
   })
 })
+
+function getLibrary(provider?: any) {
+  return new EthersWeb3Provider(provider)
+}
 
 const Root = ({
   client,
@@ -138,26 +141,28 @@ const Root = ({
   }
 
   return (
-    <ViewerProvider
-      viewer={(privateViewer || viewer) as ViewerUser}
-      privateFetched={privateFetched}
-    >
-      <SplashScreen />
-      <PageViewTracker />
+    <Web3ReactProvider getLibrary={getLibrary}>
+      <ViewerProvider
+        viewer={(privateViewer || viewer) as ViewerUser}
+        privateFetched={privateFetched}
+      >
+        <SplashScreen />
+        <PageViewTracker />
 
-      <LanguageProvider>
-        <FeaturesProvider official={official}>
-          {shouldApplyLayout ? <Layout>{children}</Layout> : children}
+        <LanguageProvider>
+          <FeaturesProvider official={official}>
+            {shouldApplyLayout ? <Layout>{children}</Layout> : children}
 
-          <Toast.Container />
-          <AnalyticsListener user={viewer || {}} />
-          <DynamicGlobalDialogs />
-          <DynamicProgressBar />
-          <DynamicPushInitializer client={client} />
-          <DynamicFingerprint />
-        </FeaturesProvider>
-      </LanguageProvider>
-    </ViewerProvider>
+            <Toast.Container />
+            <AnalyticsListener user={viewer || {}} />
+            <DynamicGlobalDialogs />
+            <DynamicProgressBar />
+            <DynamicPushInitializer client={client} />
+            <DynamicFingerprint />
+          </FeaturesProvider>
+        </LanguageProvider>
+      </ViewerProvider>
+    </Web3ReactProvider>
   )
 }
 

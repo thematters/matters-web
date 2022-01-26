@@ -16,6 +16,7 @@ export * from './payment'
 export * from './url'
 export * from './csp'
 export * from './chart'
+export * from './wallet'
 
 export const Z_INDEX = {
   GLOBAL_HEADER: 100,

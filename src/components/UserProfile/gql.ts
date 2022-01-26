@@ -21,6 +21,7 @@ const fragments = {
           }
           description
           profileCover
+          ethAddress
         }
         following {
           users(input: { first: 0 }) {

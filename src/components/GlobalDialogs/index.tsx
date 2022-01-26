@@ -1,15 +1,11 @@
 import { LikeCoinDialog } from '~/components'
 
-import LoginDialog from './LoginDialog'
-import ResetPasswordDialog from './ResetPasswordDialog'
-import SignUpDialog from './SignUpDialog'
+import UniversalAuthDialog from './UniversalAuthDialog'
 
 const GlobalDialogs = () => {
   return (
     <>
-      <LoginDialog />
-      <SignUpDialog />
-      <ResetPasswordDialog />
+      <UniversalAuthDialog />
       <LikeCoinDialog />
     </>
   )

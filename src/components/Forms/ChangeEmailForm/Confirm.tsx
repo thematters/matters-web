@@ -1,5 +1,5 @@
 import { useFormik } from 'formik'
-import gql from 'graphql-tag'
+// import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 
@@ -12,6 +12,7 @@ import {
   useMutation,
   VerificationSendCodeButton,
 } from '~/components'
+import { CHANGE_EMAIL } from '~/components/GQL/mutations/changeEmail'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 
 import {
@@ -21,8 +22,8 @@ import {
   validateEmail,
 } from '~/common/utils'
 
+import { ChangeEmail } from '~/components/GQL/mutations/__generated__/ChangeEmail'
 import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
-import { ChangeEmail } from './__generated__/ChangeEmail'
 
 interface FormProps {
   oldData: { email: string; codeId: string }
@@ -35,17 +36,6 @@ interface FormValues {
   email: string
   code: string
 }
-
-const CHANGE_EMAIL = gql`
-  mutation ChangeEmail($input: ChangeEmailInput!) {
-    changeEmail(input: $input) {
-      id
-      info {
-        email
-      }
-    }
-  }
-`
 
 const Confirm: React.FC<FormProps> = ({
   oldData,

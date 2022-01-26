@@ -46,6 +46,7 @@ type ROUTE_KEY =
   | 'ME_SETTINGS_CHANGE_PASSWORD'
   | 'ME_SETTINGS_NOTIFICATION'
   | 'ME_SETTINGS_BLOCKED'
+  | 'ME_SETTINGS_CONNECT_WALLET'
   | 'ME_DRAFT_DETAIL'
   // Form
   | 'LOGIN'
@@ -149,6 +150,10 @@ export const ROUTES: {
   },
   { key: 'ME_SETTINGS_NOTIFICATION', pathname: '/me/settings/notification' },
   { key: 'ME_SETTINGS_BLOCKED', pathname: '/me/settings/blocked' },
+  {
+    key: 'ME_SETTINGS_CONNECT_WALLET',
+    pathname: '/me/settings/connect-wallet',
+  },
 
   // Draft
   { key: 'ME_DRAFT_DETAIL', pathname: '/me/drafts/[draftId]' },
