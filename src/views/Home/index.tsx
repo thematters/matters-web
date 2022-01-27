@@ -22,7 +22,9 @@ const DynamicAnnouncements = dynamic(() => import('./Announcements'), {
 const Home = () => {
   const isSmallUp = useResponsive('sm-up')
   const viewer = useContext(ViewerContext)
+
   const hasLogo = !viewer.isAuthed && !isSmallUp
+  const showConnect = viewer.isAuthed && !viewer.info.ethAddress
 
   return (
     <Layout.Main
@@ -46,13 +48,12 @@ const Home = () => {
                 <Layout.Header.Title id="discover" />
               )}
 
-              <section className="buttons">
-                {viewer.isAuthed && !viewer.info.ethAddress ? (
-                  <ConnectWalletButton />
-                ) : (
-                  <UniversalAuthButton size={[null, '2rem']} />
-                )}
-              </section>
+              {(!viewer.isAuthed || showConnect) && (
+                <section className="buttons">
+                  {showConnect && <ConnectWalletButton />}
+                  {!viewer.isAuthed && <UniversalAuthButton />}
+                </section>
+              )}
             </>
           }
         />

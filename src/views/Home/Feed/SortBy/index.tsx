@@ -5,6 +5,7 @@ import {
   Help,
   Tabs,
   Translate,
+  useResponsive,
   ViewerContext,
 } from '~/components'
 
@@ -20,6 +21,7 @@ const SortBy: React.FC<SortByProps> = ({ sortBy, setSortBy }) => {
   const isHottest = sortBy === 'hottest'
   const isNewset = sortBy === 'newest'
   const isICYMI = sortBy === 'icymi'
+  const isSmallUp = useResponsive('sm-up')
 
   const isConnectedWallet = !!viewer.info.ethAddress
 
@@ -27,7 +29,7 @@ const SortBy: React.FC<SortByProps> = ({ sortBy, setSortBy }) => {
     <Tabs
       sticky
       side={
-        viewer.isAuthed && !isConnectedWallet ? (
+        viewer.isAuthed && !isConnectedWallet && isSmallUp ? (
           <ConnectWalletButton />
         ) : (
           <Help hasTime />
