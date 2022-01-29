@@ -56,11 +56,11 @@ export const mutationOnError = (
 
   // Get error code and check corresponding content, if it's invalid
   // then expose error code
-  const errorCode = errorCodes[0] || ''
-  const errorContent = isErrorCodeValid(errorCode) ? (
-    <Translate id={errorCode} />
+  const errorCodeOrMessage = errorCodes[0] || error.message
+  const errorContent = isErrorCodeValid(errorCodeOrMessage) ? (
+    <Translate id={errorCodeOrMessage} />
   ) : (
-    errorCode
+    errorCodeOrMessage
   )
 
   /**
