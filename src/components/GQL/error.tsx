@@ -28,6 +28,16 @@ export const isErrorCodeValid = (code: string) =>
   code in TEXT.zh_hant && code in TEXT.zh_hans && code in TEXT.en
 
 /**
+ * Return translated error content, provide zh_hant message, error code, or error message as fallback
+ */
+export const getErrorContent = (code: ErrorCodeKeys, error: ApolloError) => {
+  if (isErrorCodeValid(code)) return <Translate id={code} />
+  else if (code in TEXT.zh_hant) return TEXT.zh_hant[code]
+  else if (code) return code
+  else return error.message
+}
+
+/**
  * Check mutation on error to throw a `<Toast>`
  */
 export type MutationOnErrorOptions = {
@@ -57,13 +67,7 @@ export const mutationOnError = (
   // Get error code and check corresponding content, if it's invalid
   // then expose error code
   const errorCode = errorCodes[0] || ''
-  const errorContent = isErrorCodeValid(errorCode) ? (
-    <Translate id={errorCode} />
-  ) : errorCode ? (
-    errorCode
-  ) : (
-    error.message
-  )
+  const errorContent = getErrorContent(errorCode, error)
 
   /**
    * Catch auth errors
