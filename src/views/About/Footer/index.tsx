@@ -68,6 +68,21 @@ const Footer = () => {
                     ask@matters.news
                   </a>
                 </p>
+                <p>
+                  <Translate
+                    zh_hant="探索更多專案，搭上 Web3 啟航之旅"
+                    zh_hans="探索更多专案，搭上 Web3 启航之旅"
+                    en="Enter and explore Matterverse"
+                  />
+                  <br />
+                  <a
+                    className="u-link-green"
+                    href="https://matters-lab.io/"
+                    target="_blank"
+                  >
+                    Matters Lab
+                  </a>
+                </p>
               </section>
 
               <section className="followUs">
