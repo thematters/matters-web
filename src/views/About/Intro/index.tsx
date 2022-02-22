@@ -1,4 +1,4 @@
-import { Button, Translate } from '~/components'
+import { Button, TextIcon, Translate } from '~/components'
 
 import IMAGE_ILLUSTRATION_1 from '@/public/static/images/about/intro-illustration-1.png'
 import IMAGE_ILLUSTRATION_2 from '@/public/static/images/about/intro-illustration-2.png'
@@ -31,6 +31,24 @@ const Intro = () => {
                   en="Matters is building a decentralized content publication ecosystem on top of IPFS, allowing creators to be truly independent from any platform. We also partner with LikeCoin fundation, to reward creativity in the form of cryptocurrency LikeCoin."
                 />
               </p>
+              <section className="buttons">
+                <Button
+                  bgColor="green"
+                  textColor="white"
+                  spacing={['tight', 'loose']}
+                  htmlHref="https://matters-lab.io/"
+                  htmlTarget="_blank"
+                  rel="noopener"
+                >
+                  <TextIcon color="white" size="md" weight="md">
+                    <Translate
+                      zh_hant="探索更多"
+                      zh_hans="探索更多"
+                      en="Explore"
+                    />
+                  </TextIcon>
+                </Button>
+              </section>
             </section>
           </div>
         </li>
