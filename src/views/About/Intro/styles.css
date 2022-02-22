@@ -68,6 +68,15 @@ img {
     margin-bottom: 3.75rem;
   }
 
+  & .buttons {
+    margin-top: var(--spacing-x-loose);
+    text-align: center;
+
+    & :global(> * + *) {
+      margin-left: var(--spacing-x-loose);
+    }
+  }
+
   @media (--sm-up) {
     padding: 4rem 0 7.5rem;
     background-size: 408px;
@@ -81,6 +90,10 @@ img {
   @media (--md-up) {
     & img {
       margin-bottom: 0;
+    }
+
+    & .buttons {
+      text-align: left;
     }
   }
 
