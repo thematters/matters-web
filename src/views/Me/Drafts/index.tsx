@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
+import { useEffect } from 'react'
 
 import {
   DraftDigest,
@@ -50,13 +51,12 @@ export const BaseMeDrafts = () => {
     MeDraftFeed_viewer_drafts_edges[]
   >([], DraftsContext)
 
-  const { data, loading, error, fetchMore, refetch } = useQuery<MeDraftFeed>(
-    ME_DRAFTS_FEED,
-    {
-      fetchPolicy: 'no-cache',
-      onCompleted: () => setEdges(data?.viewer?.drafts.edges ?? []),
-    }
-  )
+  const { data, loading, error, fetchMore, refetch } =
+    useQuery<MeDraftFeed>(ME_DRAFTS_FEED)
+
+  useEffect(() => {
+    setEdges(data?.viewer?.drafts.edges ?? [])
+  }, [data])
 
   if (loading) {
     return <Spinner />
