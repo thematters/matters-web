@@ -15,14 +15,14 @@ export const Term = () => {
 
   return (
     <section className="term">
-      <section
+      {lang ?.startsWith('zh') && <section
         dangerouslySetInnerHTML={{
           __html: translate({
             ...ToS,
             lang,
           }),
         }}
-      />
+      />}
 
       <section
         dangerouslySetInnerHTML={{
@@ -33,14 +33,14 @@ export const Term = () => {
         }}
       />
 
-      <section
+      {lang ?.startsWith('zh') && <section
         dangerouslySetInnerHTML={{
           __html: translate({
             ...Privacy,
             lang,
           }),
         }}
-      />
+      />}
 
       <section
         dangerouslySetInnerHTML={{
