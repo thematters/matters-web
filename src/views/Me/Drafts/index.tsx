@@ -56,7 +56,7 @@ export const BaseMeDrafts = () => {
 
   useEffect(() => {
     setEdges(data?.viewer?.drafts.edges ?? [])
-  }, [data])
+  }, [data?.viewer?.drafts.edges?.length])
 
   if (loading) {
     return <Spinner />
