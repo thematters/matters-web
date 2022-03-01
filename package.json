@@ -1,6 +1,6 @@
 {
   "name": "matters-web",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "codebase of Matters' website",
   "sideEffects": false,
   "author": "Matters <hi@matters.news>",
@@ -85,7 +85,7 @@
     "isomorphic-unfetch": "^3.1.0",
     "jump.js": "^1.0.2",
     "lodash": "^4.17.21",
-    "next": "^12.0.9",
+    "next": "^12.1.0",
     "next-with-apollo": "^5.2.1",
     "nprogress": "^0.2.0",
     "number-precision": "^1.5.1",
