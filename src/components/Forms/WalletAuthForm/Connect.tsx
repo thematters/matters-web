@@ -160,7 +160,7 @@ const Connect: React.FC<FormProps> = ({
 
         // get signing message
         const { data: signingMessageData } = await generateSigningMessage({
-          variables: { address },
+          variables: { input: { address } },
         })
 
         const signingMessage = signingMessageData?.generateSigningMessage
