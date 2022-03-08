@@ -6,7 +6,6 @@ import {
   Error,
   Expandable,
   FollowUserButton,
-  LanguageContext,
   Layout,
   Spinner,
   Throw404,
@@ -34,6 +33,7 @@ import DropdownActions from './DropdownActions'
 import { FollowersDialog } from './FollowersDialog'
 import { FollowingDialog } from './FollowingDialog'
 import { USER_PROFILE_PRIVATE, USER_PROFILE_PUBLIC } from './gql'
+import { LogbookDialog } from './LogbookDialog'
 import styles from './styles.css'
 import WalletAddress from './WalletAddress'
 
@@ -44,7 +44,6 @@ import { UserProfileUserPublic } from './__generated__/UserProfileUserPublic'
 export const UserProfile = () => {
   const { getQuery } = useRoute()
   const viewer = useContext(ViewerContext)
-  const { lang } = useContext(LanguageContext)
 
   // public data
   const userName = getQuery('name')
@@ -141,9 +140,6 @@ export const UserProfile = () => {
   const isUserArchived = userState === 'archived'
   const isUserBanned = userState === 'banned'
   const isUserInactive = isUserArchived || isUserBanned
-  const logbookUrl = `${process.env.NEXT_PUBLIC_TRAVELOGGERS_URL}${
-    lang === 'en' ? '/' : '/zh/'
-  }owner/${user.info.cryptoWallet?.address}`
 
   /**
    * Inactive User
@@ -199,9 +195,15 @@ export const UserProfile = () => {
                   />
                 }
               >
-                <a href={logbookUrl} target="_blank">
-                  <Avatar size="xxxl" user={user} inProfile />
-                </a>
+                <LogbookDialog
+                  address={user.info.cryptoWallet?.address as string}
+                >
+                  {({ openDialog }) => (
+                    <button type="button" onClick={openDialog}>
+                      <Avatar size="xxxl" user={user} inProfile />
+                    </button>
+                  )}
+                </LogbookDialog>
               </Tooltip>
             ) : (
               <Avatar size="xxxl" user={user} inProfile />

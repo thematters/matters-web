@@ -168,6 +168,8 @@ export const TEXT = {
     LIKER_NOT_FOUND: 'Liker ID 不存在',
     LIKER_USER_ID_EXISTS: 'Liker ID 已被其他人使用',
     logbook: '航行日誌',
+    logbook2LaunchText:
+      'Logbook 2.0 剛剛推出。如果你是 Traveloggers 的所有者，且尚未領取，你可以從新的日誌頁面領取：',
     myNFTCollections: '我的 NFT 收藏',
     login: '登入',
     authEntries: '進入',
@@ -509,6 +511,8 @@ export const TEXT = {
     LIKER_NOT_FOUND: 'Liker ID 不存在',
     LIKER_USER_ID_EXISTS: 'Liker ID 已被其他人使用',
     logbook: '航行日志',
+    logbook2LaunchText:
+      'Logbook 2.0 刚刚推出。如果你是 Traveloggers 的所有者，且尚未领取，你可以从新的日志页面领取：',
     myNFTCollections: '我的 NFT 收藏',
     login: '登录',
     authEntries: '进入',
@@ -867,6 +871,8 @@ export const TEXT = {
     LIKER_NOT_FOUND: 'Liker ID not found',
     LIKER_USER_ID_EXISTS: 'Liker ID is already used by others.',
     logbook: 'Logbook',
+    logbook2LaunchText:
+      "Logbook 2.0 has just launched. If you are an owner of Traveloggers, and haven't claimed, you may claim one from the new Logbook page:",
     myNFTCollections: 'My NFT Collections',
     login: 'Log in',
     authEntries: 'Entries',
