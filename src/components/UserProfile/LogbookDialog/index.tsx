@@ -87,7 +87,8 @@ export const LogbookDialog: React.FC<LogbookDialogProps> = ({
           `}</style>
           <Form.List>
             <Form.List.Item
-              href={logbook2Url}
+              htmlHref={logbook2Url}
+              htmlTarget="_blank"
               title={
                 <TextIcon
                   color="black"
@@ -107,7 +108,8 @@ export const LogbookDialog: React.FC<LogbookDialogProps> = ({
           <Spacer />
           <Form.List>
             <Form.List.Item
-              href={logbook1Url}
+              htmlHref={logbook1Url}
+              htmlTarget="_blank"
               title={
                 <TextIcon
                   color="black"
