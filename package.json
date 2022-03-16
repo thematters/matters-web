@@ -1,6 +1,6 @@
 {
   "name": "matters-web",
-  "version": "4.0.1",
+  "version": "4.0.3",
   "description": "codebase of Matters' website",
   "sideEffects": false,
   "author": "Matters <hi@matters.news>",
