@@ -45,7 +45,7 @@ const Item: React.FC<ItemProps> = forwardRef(
     ref
   ) => {
     const isSmallUp = useResponsive('sm-up')
-    const clickable = cardProps.href || cardProps.onClick
+    const clickable = cardProps.href || cardProps.htmlHref || cardProps.onClick
     const leftClasses = classNames({
       left: true,
       top: leftAlign === 'top',
