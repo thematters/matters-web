@@ -5,11 +5,12 @@ import { Card, IconChecked, IconUnChecked, Tag } from '~/components'
 import styles from '../styles.css'
 
 import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
+import { DigestTagSearchResult } from '~/components/Tag/__generated__/DigestTagSearchResult'
 
 interface SearchSelectTagProps {
-  tag: DigestTag
+  tag: DigestTag | DigestTagSearchResult
   selected?: boolean
-  onClick: (tag: DigestTag) => void
+  onClick: (tag: DigestTag | DigestTagSearchResult) => void
   inStagingArea?: boolean
 }
 
@@ -27,7 +28,7 @@ const SearchSelectTag: React.FC<SearchSelectTagProps> = ({
   return (
     <Card spacing={['base', 'base']} onClick={() => onClick(tag)}>
       <section className={nodeClass}>
-        <Tag tag={tag} type="list" hasCount={!inStagingArea} disabled />
+        <Tag tag={tag} type="list" hasCount disabled />
 
         <span className="icon-select">
           {inStagingArea && selected && (
@@ -38,7 +39,7 @@ const SearchSelectTag: React.FC<SearchSelectTagProps> = ({
           )}
         </span>
 
-        <style jsx> {styles}</style>
+        <style jsx>{styles}</style>
       </section>
     </Card>
   )
