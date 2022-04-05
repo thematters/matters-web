@@ -1,9 +1,10 @@
-import { Card, IconAdd16 } from '~/components'
+import { Card, IconAdd16, IconExclaimHint } from '~/components'
 
 import styles from './styles.css'
 
 type ListItemProps = {
   title: string | React.ReactNode
+  subTitle?: string | React.ReactNode
   onClick?: () => any
 }
 
@@ -14,22 +15,39 @@ const CoverIndicator = ({ cover }: { cover?: string | null }) => (
   </span>
 )
 
-const NumberIndicator = ({ num }: { num: number }) => (
-  <span className={`rect ${num > 0 ? 'num' : ''}`}>
-    {num}
-    <style jsx>{styles}</style>
+const NumberIndicator = ({
+  num,
+  withHintOverlay = false,
+}: {
+  num: number
+  withHintOverlay?: boolean
+}) => (
+  <span style={{ position: 'relative', width: '2.25rem', height: '2.25rem' }}>
+    <span
+      className={`rect ${num > 0 ? 'num' : ''}`}
+      style={{ position: 'absolute', bottom: 0, left: 0 }}
+    >
+      {num}
+      <style jsx>{styles}</style>
+    </span>
+    {withHintOverlay && num === 0 && (
+      <IconExclaimHint style={{ position: 'absolute', top: 0, right: 0 }} />
+    )}
   </span>
 )
 
 const ListItem: React.FC<ListItemProps> & {
   CoverIndicator: typeof CoverIndicator
   NumberIndicator: typeof NumberIndicator
-} = ({ title, onClick, children }) => {
+} = ({ title, subTitle, onClick, children }) => {
   return (
     <li>
       <Card bgColor="white" spacing={[0, 0]} onClick={onClick}>
         <section className="item">
-          <h3 className="title">{title}</h3>
+          <section>
+            <h3 className="title">{title}</h3>
+            <h4 className="subtitle">{subTitle}</h4>
+          </section>
 
           {children}
         </section>

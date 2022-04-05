@@ -10,6 +10,13 @@ li .item {
     line-height: 1rem;
   }
 
+  & .subtitle {
+    margin-top: 0.5rem;
+    font-size: var(--font-size-xs);
+    line-height: 1rem;
+    color: var(--color-matters-gold);
+  }
+
   &:hover,
   &:focus {
     & .rect {

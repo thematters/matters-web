@@ -141,6 +141,7 @@ export const TEXT = {
     hide: '站內隱藏',
     hintAddTag:
       '通過添加標籤幫助讀者更好地找到你的作品。如果沒有合適的標籤，你可以創建新的。',
+    hintAddTag2: '目前尚無標籤，立即添加提高作品曝光度！',
     hintAddCircleInvitee: '添加站內或站外朋友加入圍爐',
     hintCircleAddArticles: '將公開作品加入圍爐，成為永久收費作品。',
     hintCircleDisplayName: '2-12 個字元',
@@ -484,6 +485,7 @@ export const TEXT = {
     hide: '站内隐藏',
     hintAddTag:
       '通过添加标签帮助读者更好地找到你的作品。如果没有合适的标签，你可以创建新的。',
+    hintAddTag2: '目前尚无标签，立即添加提高作品曝光度！',
     hintAddCircleInvitee: '添加站内或站外朋友加入围炉',
     hintCircleAddArticles: '将公开作品加入围炉，成为永久收费作品。',
     hintCircleDisplayName: '2-12 个字符',
@@ -834,6 +836,7 @@ export const TEXT = {
     hide: 'Archived',
     hintAddTag:
       'Adding tags helps readers to find your articles. Create new one if no tag suits your article.',
+    hintAddTag2: '目前尚無標籤，立即添加提高作品曝光度！',
     hintAddCircleInvitee: 'Invite users or others to join your circle',
     hintCircleAddArticles:
       'Adding articles to the circle and make them under the paywall.',
