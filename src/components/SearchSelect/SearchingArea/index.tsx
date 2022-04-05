@@ -90,7 +90,11 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
   const [searchKey, setSearchKey] = useState('')
   const [debouncedSearchKey] = useDebounce(searchKey, INPUT_DEBOUNCE)
   const [lazySearch, { data, loading, fetchMore }] =
-    usePublicLazyQuery<SelectSearch>(SELECT_SEARCH)
+    usePublicLazyQuery<SelectSearch>(
+      SELECT_SEARCH,
+      {},
+      { publicQuery: !viewer.isAuthed }
+    )
   const [
     loadList,
     { data: listData, loading: listLoading, fetchMore: fetchMoreList },
@@ -200,6 +204,21 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
     setSearching(loading)
     setSearchingNodes(searchNodes)
   }, [loading, searchNodeIds])
+
+  useEffect(() => {
+    if (!isTag) return
+
+    lazySearch({
+      variables: {
+        key: '',
+        includeAuthorTags: true,
+        type: 'Tag',
+        filter: searchFilter,
+        exclude: searchExclude,
+        first: 10,
+      },
+    })
+  }, [isTag])
 
   // list
   useEffect(() => {
