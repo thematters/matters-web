@@ -12,6 +12,12 @@ export const stripHtml = (html: string | null, replacement = ' ') =>
     .replace(/&lt;/g, '<')
     .replace(/&gt;/g, '>')
 
+export const stripPunctPrefixSuffix = (content: string) =>
+  `${content}`
+    .trim() // strip white space in both ends
+    .replace(/^\p{Punctuation}+/gu, '') // strip prefix punctuation
+    .replace(/\p{Punctuation}+$/gu, '') // strip suffix punctuation
+
 export const makeSummary = (html: string, length = 140) => {
   // buffer for search
   const buffer = 20
