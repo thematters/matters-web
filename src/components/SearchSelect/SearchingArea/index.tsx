@@ -205,21 +205,6 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
     setSearchingNodes(searchNodes)
   }, [loading, searchNodeIds])
 
-  useEffect(() => {
-    if (!isTag) return
-
-    lazySearch({
-      variables: {
-        key: '',
-        includeAuthorTags: true,
-        type: 'Tag',
-        filter: searchFilter,
-        exclude: searchExclude,
-        first: 10,
-      },
-    })
-  }, [isTag])
-
   // list
   useEffect(() => {
     if (!isListMode) {
