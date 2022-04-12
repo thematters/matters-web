@@ -17,6 +17,7 @@ export const stripPunctPrefixSuffix = (content: string) =>
     .trim() // strip white space in both ends
     .replace(/^\p{Punctuation}+/gu, '') // strip prefix punctuation
     .replace(/\p{Punctuation}+$/gu, '') // strip suffix punctuation
+    .trim() // strip white space again
 
 export const makeSummary = (html: string, length = 140) => {
   // buffer for search
