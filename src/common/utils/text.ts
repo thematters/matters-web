@@ -12,12 +12,14 @@ export const stripHtml = (html: string | null, replacement = ' ') =>
     .replace(/&lt;/g, '<')
     .replace(/&gt;/g, '>')
 
+const nonAlphaNumUni = String.raw`[^\p{Letter}\p{Number}]+`
+const prefixOrSuffixNonAlphaNum = new RegExp(
+  `(^${nonAlphaNumUni}|${nonAlphaNumUni}$)`,
+  'gu'
+)
+
 export const stripPunctPrefixSuffix = (content: string) =>
-  `${content}`
-    .trim() // strip white space in both ends
-    .replace(/^[^\p{Letter}\p{Number}]+/gu, '') // strip prefix punctuation
-    .replace(/[^\p{Letter}\p{Number}]+$/gu, '') // strip suffix punctuation
-    .trim() // strip white space again
+  `${content}`.replace(prefixOrSuffixNonAlphaNum, '') // strip prefix or suffix punct
 
 export const makeSummary = (html: string, length = 140) => {
   // buffer for search
