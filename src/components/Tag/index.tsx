@@ -2,7 +2,13 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import { IconHashTag16, IconProps, TextIcon, TextIconProps } from '~/components'
+import {
+  IconClear16,
+  IconHashTag16,
+  IconProps,
+  TextIcon,
+  TextIconProps,
+} from '~/components'
 
 import { toPath } from '~/common/utils'
 
@@ -19,6 +25,8 @@ interface TagProps {
   active?: boolean
   disabled?: boolean
   hasCount?: boolean
+  hasClose?: boolean
+  removeTag?: (tag: DigestTag | DigestTagSearchResult) => void
   onClick?: () => void
 }
 
@@ -61,6 +69,8 @@ export const Tag = ({
   active,
   disabled,
   hasCount = true,
+  hasClose,
+  removeTag,
   onClick,
 }: TagProps) => {
   const tagClasses = classNames({
@@ -137,6 +147,17 @@ export const Tag = ({
       >
         <span className="name">{tag.content}</span>
       </TextIcon>
+
+      {hasClose && (
+        <button
+          className="close"
+          onClick={() => {
+            removeTag?.(tag)
+          }}
+        >
+          <IconClear16 color="grey" />
+        </button>
+      )}
 
       {hasCount && type === 'list' && (
         <span className="count">

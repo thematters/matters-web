@@ -63,6 +63,7 @@ interface ClickButtonProp {
     | 'subscribe_confirm'
     | 'create_circle'
     | 'finish_circle_creation'
+    | 'remove_tag'
   pageType?: PageType
 }
 
@@ -232,4 +233,8 @@ type TagFeedType =
 
 type CircleFeedType = 'user_circle' | 'circle_follower' | 'circle_member'
 
-type PageType = 'article_detail' | 'user_profile' | 'circle_detail'
+type PageType =
+  | 'article_detail'
+  | 'user_profile'
+  | 'circle_detail'
+  | 'edit_draft'
