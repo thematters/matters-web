@@ -2,7 +2,7 @@ import { useContext } from 'react'
 
 import { IconClear16, IconSearch16, LanguageContext } from '~/components'
 
-import { stripPunctPrefixSuffix, translate } from '~/common/utils'
+import { translate } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -70,10 +70,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
           aria-label={textAriaLabel}
           placeholder={textPlaceholder[type]}
           onChange={(e) => {
-            onChange(
-              (type === 'Tag' && stripPunctPrefixSuffix(e.target.value)) || // if strip got '' still fallback to below full value
-                e.target.value
-            )
+            onChange(e.target.value)
           }}
           onFocus={() => {
             onFocus()
