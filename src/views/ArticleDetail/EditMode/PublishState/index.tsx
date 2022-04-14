@@ -6,6 +6,7 @@ import { EditModeArticle_article_drafts as EditModeDraft } from '../__generated_
 
 interface Props {
   article: {
+    id: string
     title: string
     slug: string
     mediaHash: string

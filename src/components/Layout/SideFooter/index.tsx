@@ -13,6 +13,7 @@ const SideFooter = () => {
   const downloadAppLink = toPath({
     page: 'articleDetail',
     article: {
+      id: 'QXJ0aWNsZToyNDQzOQ',
       slug: 'guidance-如何让你的matters之旅更便捷',
       mediaHash: 'bafyreiayiuxi4qc2a7qpgjp3fe42wmaoppqykckcvtq4hiukl5pgs3dn2m',
       author: { userName: '1ampa55ag3' },
