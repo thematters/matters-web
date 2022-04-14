@@ -93,14 +93,11 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
 
   const [searchKey, setSearchKey] = useState('')
   const [debouncedSearchKey, setdebouncedSearchKey] = useState('')
-  const debouncedSetSearchKey = useDebouncedCallback(
-    (sk0) => {
-      const sk = isTag ? stripPunctPrefixSuffix(sk0) : sk0
-      setdebouncedSearchKey(sk)
-      setSearchKey(sk)
-    },
-    INPUT_DEBOUNCE
-  )
+  const debouncedSetSearchKey = useDebouncedCallback((sk0) => {
+    const sk = isTag ? stripPunctPrefixSuffix(sk0) : sk0
+    setdebouncedSearchKey(sk)
+    setSearchKey(sk)
+  }, INPUT_DEBOUNCE)
 
   // Data Fetching
   const [lazySearch, { data, loading, fetchMore }] =
@@ -247,7 +244,8 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
     searchKey &&
     createTag &&
     !searchNodes.some(
-      (node) => node.__typename === 'TagSearchResult' && node.content === searchKey
+      (node) =>
+        node.__typename === 'TagSearchResult' && node.content === searchKey
     )
   const canInviteEmail =
     isUser &&

@@ -20,6 +20,7 @@ import {
   Title,
   Translate,
   useFeatures,
+  // usePublicLazyQuery,
   usePublicQuery,
   useResponsive,
   useRoute,
@@ -29,7 +30,7 @@ import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { UserDigest } from '~/components/UserDigest'
 
 import { ADD_TOAST, URL_QS } from '~/common/enums'
-import { toPath } from '~/common/utils'
+import { toGlobalId, toPath } from '~/common/utils'
 
 import Collection from './Collection'
 import Content from './Content'
@@ -37,6 +38,7 @@ import CustomizedSummary from './CustomizedSummary'
 import {
   ARTICLE_DETAIL_PRIVATE,
   ARTICLE_DETAIL_PUBLIC,
+  ARTICLE_DETAIL_PUBLIC_BY_NODE_ID,
   ARTICLE_TRANSLATION,
 } from './gql'
 import License from './License'
@@ -53,6 +55,7 @@ import VisitorWall from './Wall/Visitor'
 import { ArticleAccessType } from '@/__generated__/globalTypes'
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import { ArticleDetailPublic } from './__generated__/ArticleDetailPublic'
+// import { ArticleDetailPublicByNodeId } from './__generated__/ArticleDetailPublicByNodeId'
 import { ArticleTranslation } from './__generated__/ArticleTranslation'
 
 const DynamicResponse = dynamic(() => import('./Responses'), {
@@ -69,9 +72,24 @@ const DynamicEditMode = dynamic(() => import('./EditMode'), {
   ),
 })
 
+const isValidMediaHash = (mediaHash: string | null | undefined) => {
+  // is there a better way to detect valid?
+  // a valid mediaHash, should have length 49 or 59 chars
+  // 'zdpuAsCXC87Tm1fFvAbysV7HVt7J8aV6chaTKeJZ5ryLALK3Z'
+  // 'bafyreief6bryqsa4byabnmx222jvo4khlodvpypw27af43frecbumn6ocq'
+
+  return (
+    mediaHash &&
+    ((mediaHash?.length === 49 && mediaHash.startsWith('zdpu')) ||
+      (mediaHash?.length === 59 && mediaHash.startsWith('bafy')))
+  )
+}
+
 const ArticleDetail = () => {
   const { getQuery, router } = useRoute()
   const mediaHash = getQuery('mediaHash')
+  const articleId =
+    (router.query.mediaHash as string)?.match(/^(\d+)/)?.[1] || ''
   const viewer = useContext(ViewerContext)
 
   // UI
@@ -88,15 +106,40 @@ const ArticleDetail = () => {
   const shouldShowWall = !viewer.isAuthed && wall
 
   // public data
+  const data1 = usePublicQuery<ArticleDetailPublic>(ARTICLE_DETAIL_PUBLIC, {
+    variables: { mediaHash },
+  })
+  const data2 = usePublicQuery<ArticleDetailPublic>(
+    ARTICLE_DETAIL_PUBLIC_BY_NODE_ID,
+    {
+      variables: { id: toGlobalId({ type: 'Article', id: articleId }) },
+      skip: articleId?.length === 0,
+    }
+  )
+
+  useEffect(() => {
+    if (
+      !isValidMediaHash(mediaHash) &&
+      isValidMediaHash(data2?.data?.article?.mediaHash)
+    ) {
+      // if getByNodeId got something looks like a valid mediaHash, call refetch with it
+      data1.refetch({
+        mediaHash: data2?.data?.article?.mediaHash as string,
+      })
+    }
+  }, [mediaHash, data2])
+
   const {
     data,
     loading,
     error,
     client,
     refetch: refetchPublic,
-  } = usePublicQuery<ArticleDetailPublic>(ARTICLE_DETAIL_PUBLIC, {
-    variables: { mediaHash },
-  })
+  } = isValidMediaHash(mediaHash) ||
+  isValidMediaHash(data1?.data?.article?.mediaHash) || // if something look like a valid mediaHash
+  data2.error
+    ? data1
+    : data2 // data2 from node id is in-use for server-side rendering only
 
   const article = data?.article
   const authorId = article?.author?.id
@@ -149,12 +192,6 @@ const ArticleDetail = () => {
       return
     }
 
-    const isSameHash = latestHash === mediaHash
-
-    if (isSameHash) {
-      return
-    }
-
     const newPath = toPath({
       page: 'articleDetail',
       article: {
@@ -163,7 +200,9 @@ const ArticleDetail = () => {
       },
     })
 
-    router.push(newPath.href, undefined, { shallow: true })
+    if (newPath.href !== router.asPath) {
+      router.push(newPath.href, undefined, { shallow: true })
+    }
   }, [latestHash])
 
   // translation
@@ -333,6 +372,7 @@ const ArticleDetail = () => {
 
       <Head
         title={`${article.title} - ${article?.author.displayName} (@${article.author.userName})`}
+        path={toPath({ page: 'articleDetail', article }).href}
         noSuffix
         description={article.summary}
         keywords={keywords}
