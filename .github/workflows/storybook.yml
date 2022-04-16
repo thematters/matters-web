@@ -19,7 +19,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2.5.0
         with:
-          node-version: '12.22'
+          node-version: '14.19'
 
       - name: Cache Dependencies
         id: cache
