@@ -1,4 +1,4 @@
-FROM node:16.14
+FROM node:15.14
 
 # install os level packages
 RUN apt-get update && apt-get -y install \
