@@ -99,7 +99,7 @@ jobs:
         run: |
           rm -rf node_modules \
           && npm install --production --legacy-peer-deps \
-          && zip -r deploy.zip . -x .git/\*
+          && zip -r --symlinks deploy.zip . -x .git/\*
 
       # === `develop` branch ===
       - name: Upload Assets (develop)
