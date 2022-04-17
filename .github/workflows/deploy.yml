@@ -96,7 +96,10 @@ jobs:
 
       - name: Generate deployment package
         if: github.base_ref == 'develop' || github.base_ref == 'stage' || github.base_ref == 'master'
-        run: zip -r deploy.zip . -x node_modules/\* .git/\*
+        run: |
+          rm -rf node_modules \
+          && npm install --production --legacy-peer-deps \
+          && zip -r deploy.zip . -x .git/\*
 
       # === `develop` branch ===
       - name: Upload Assets (develop)
