@@ -131,7 +131,7 @@ export const SET_COVER = gql`
 `
 
 export const SET_TAGS = gql`
-  mutation SetDraftTags($id: ID!, $tags: [String]!) {
+  mutation SetDraftTags($id: ID!, $tags: [String!]!) {
     putDraft(input: { id: $id, tags: $tags }) {
       id
       ...EditMetaDraft
