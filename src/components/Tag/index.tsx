@@ -9,9 +9,10 @@ import { toPath } from '~/common/utils'
 import styles from './styles.css'
 
 import { DigestTag } from './__generated__/DigestTag'
+import { DigestTagSearchResult } from './__generated__/DigestTagSearchResult'
 
 interface TagProps {
-  tag: DigestTag
+  tag: DigestTag | DigestTagSearchResult
   type?: 'list' | 'title' | 'inline' | 'plain'
   textSize?: 'sm' | 'sm-s'
   iconSize?: 'sm-s'
@@ -29,6 +30,14 @@ const fragments = {
       # articles(input: { first: 0 }) {
       #   totalCount
       # }
+    }
+  `,
+  tagSearchResult: gql`
+    fragment DigestTagSearchResult on TagSearchResult {
+      id
+      content
+      numArticles
+      # numAuthors
     }
   `,
 }
@@ -129,7 +138,11 @@ export const Tag = ({
         <span className="name">{tag.content}</span>
       </TextIcon>
 
-      {/* {hasCount && type === 'list' && <span className="count">{tagCount}</span>} */}
+      {hasCount && type === 'list' && (
+        <span className="count">
+          {(tag as DigestTagSearchResult).numArticles}
+        </span>
+      )}
 
       <style jsx>{styles}</style>
     </>

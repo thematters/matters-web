@@ -20,6 +20,7 @@ import { ADD_TOAST, ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
 import {
   numAbbr,
   parseFormSubmitErrors,
+  stripPunctPrefixSuffix,
   toPath,
   translate,
   validateTagName,
@@ -87,7 +88,7 @@ const DropdownList = ({
           <Menu.Item key={item.content}>
             <span className="search-tag-item">
               <span>{item.content}</span>
-              <span className="count">{numAbbr(item.articles.totalCount)}</span>
+              <span className="count">{numAbbr(item.numArticles)}</span>
             </span>
           </Menu.Item>
         ))}
@@ -234,11 +235,14 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
         placeholder={translate({ id: id ? 'tagName' : 'searchTag', lang })}
         value={values.newContent}
         error={touched.newContent && errors.newContent}
-        onBlur={(e) => {
-          setFieldValue('content', e.target.value.trim())
-          handleBlur(e)
+        onBlur={handleBlur}
+        onChange={(e) => {
+          const newContent = stripPunctPrefixSuffix(e.target.value)
+          // console.log('set newContent:', { newContent, old: e.target.value })
+          setFieldValue('newContent', newContent)
+          // setFieldValue('content', newContent)
+          // handleChange(e)
         }}
-        onChange={handleChange}
         dropdownAppendTo={formId}
         dropdownAutoSizing
         DropdownContent={DropdownContent}

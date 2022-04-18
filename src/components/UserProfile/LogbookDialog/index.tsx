@@ -15,6 +15,7 @@ import {
 
 interface LogbookDialogProps {
   // user: UserProfileUserPublic_user
+  title: string | React.ReactNode
   address: string
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
@@ -22,6 +23,7 @@ interface LogbookDialogProps {
 // const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
 export const LogbookDialog: React.FC<LogbookDialogProps> = ({
+  title,
   address,
   children,
 }) => {
@@ -53,13 +55,7 @@ export const LogbookDialog: React.FC<LogbookDialogProps> = ({
       {children({ openDialog })}
       <Dialog isOpen={show} onDismiss={closeDialog} fixedHeight>
         <Dialog.Header
-          title={
-            <Translate
-              en="My Logbook"
-              zh_hant="My Logbook"
-              zh_hans="My Logbook"
-            />
-          }
+          title={title}
           closeDialog={closeDialog}
           closeTextId="close"
         />

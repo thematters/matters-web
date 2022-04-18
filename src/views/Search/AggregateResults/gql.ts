@@ -37,11 +37,15 @@ export const SEARCH_AGGREGATE_TAGS_PUBLIC = gql`
           ... on Tag {
             ...DigestTag
           }
+          ... on TagSearchResult {
+            ...DigestTagSearchResult
+          }
         }
       }
     }
   }
   ${Tag.fragments.tag}
+  ${Tag.fragments.tagSearchResult}
 `
 
 export const SEARCH_AGGREGATE_USERS_PUBLIC = gql`

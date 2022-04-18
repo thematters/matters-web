@@ -173,6 +173,9 @@ export const UserProfile = () => {
     )
   }
 
+  const isOwner =
+    user.info.cryptoWallet?.address === viewer.info.cryptoWallet?.address
+
   /**
    * Active or Onboarding User
    */
@@ -196,6 +199,23 @@ export const UserProfile = () => {
                 }
               >
                 <LogbookDialog
+                  title={
+                    <Translate
+                      en={
+                        isOwner ? 'My Logbook' : `${user.displayName}'s Logbook`
+                      }
+                      zh_hant={
+                        isOwner
+                          ? '我的 Logbook'
+                          : `${user.displayName} 的航行日誌`
+                      }
+                      zh_hans={
+                        isOwner
+                          ? '我的 Logbook'
+                          : `${user.displayName} 的航行日志`
+                      }
+                    />
+                  }
                   address={user.info.cryptoWallet?.address as string}
                 >
                   {({ openDialog }) => (

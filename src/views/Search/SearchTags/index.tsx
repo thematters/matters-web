@@ -76,7 +76,7 @@ const SearchTag = () => {
       <List>
         {edges.map(
           ({ node, cursor }, i) =>
-            node.__typename === 'Tag' && (
+            node.__typename === 'TagSearchResult' && (
               <Fragment>
                 <List.Item key={cursor}>
                   <Card

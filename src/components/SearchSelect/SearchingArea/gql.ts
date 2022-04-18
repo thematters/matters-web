@@ -10,6 +10,7 @@ export const SELECT_SEARCH = gql`
     $after: String
     $first: first_Int_min_0
     $exclude: SearchExclude
+    $includeAuthorTags: Boolean = false
   ) {
     search(
       input: {
@@ -19,6 +20,7 @@ export const SELECT_SEARCH = gql`
         after: $after
         first: $first
         exclude: $exclude
+        includeAuthorTags: $includeAuthorTags
       }
     ) {
       pageInfo {
@@ -39,6 +41,9 @@ export const SELECT_SEARCH = gql`
           ... on Tag {
             ...DigestTag
           }
+          ... on TagSearchResult {
+            ...DigestTagSearchResult
+          }
         }
       }
     }
@@ -46,6 +51,7 @@ export const SELECT_SEARCH = gql`
   ${UserDigest.Mini.fragments.user}
   ${ArticleDigestDropdown.fragments.article}
   ${Tag.fragments.tag}
+  ${Tag.fragments.tagSearchResult}
 `
 
 export const LIST_VIEWER_ARTICLES = gql`

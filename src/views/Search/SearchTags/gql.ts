@@ -16,9 +16,13 @@ export const SEARCH_TAGS_PUBLIC = gql`
           ... on Tag {
             ...DigestTag
           }
+          ... on TagSearchResult {
+            ...DigestTagSearchResult
+          }
         }
       }
     }
   }
   ${Tag.fragments.tag}
+  ${Tag.fragments.tagSearchResult}
 `

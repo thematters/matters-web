@@ -12,6 +12,15 @@ export const stripHtml = (html: string | null, replacement = ' ') =>
     .replace(/&lt;/g, '<')
     .replace(/&gt;/g, '>')
 
+const nonAlphaNumUni = String.raw`[^\p{Letter}\p{Number}]+`
+const prefixOrSuffixNonAlphaNum = new RegExp(
+  `(^${nonAlphaNumUni}|${nonAlphaNumUni}$)`,
+  'gu'
+)
+
+export const stripPunctPrefixSuffix = (content: string) =>
+  `${content}`.replace(prefixOrSuffixNonAlphaNum, '') // strip prefix or suffix punct
+
 export const makeSummary = (html: string, length = 140) => {
   // buffer for search
   const buffer = 20
