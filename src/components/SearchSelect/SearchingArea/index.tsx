@@ -99,7 +99,7 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
       setdebouncedSearchKey(sk)
       setSearchKey(sk)
     },
-    isTag ? 1300 : INPUT_DEBOUNCE
+    INPUT_DEBOUNCE
   )
 
   // Data Fetching
