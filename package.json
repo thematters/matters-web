@@ -5,7 +5,7 @@
   "sideEffects": false,
   "author": "Matters <hi@matters.news>",
   "engines": {
-    "node": ">=16.14"
+    "node": ">=14.x"
   },
   "license": "Apache-2.0",
   "scripts": {
@@ -83,6 +83,7 @@
     "graphql": "^14.7.0",
     "graphql-tag": "^2.11.0",
     "isomorphic-unfetch": "^3.1.0",
+    "js-base64": "^3.7.2",
     "jump.js": "^1.0.2",
     "lodash": "^4.17.21",
     "next": "^12.1.0",
