@@ -70,7 +70,7 @@ const CommentNewReplyNotice = ({ notice }: { notice: NoticeType }) => {
               <Translate
                 zh_hant="回覆了你在圍爐 "
                 zh_hans="回复了你在围炉 "
-                en=" replied to your discussion on "
+                en=" replied to your response on "
               />
               <NoticeCircleName circle={replyCommentCircle} />
               <Translate zh_hant=" 中的發言" zh_hans=" 中的发言" en="" />

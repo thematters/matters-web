@@ -88,7 +88,7 @@ export const WriteButton = ({ allowed, authed, isLarge, forbidden }: Props) => {
                   <Translate
                     zh_hant="請登入／註冊開始創作"
                     zh_hans="请登入／注册开始创作"
-                    en="Please login to write"
+                    en="Log in to start writing"
                   />
                 ),
               },

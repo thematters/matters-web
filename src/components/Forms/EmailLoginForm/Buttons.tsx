@@ -38,7 +38,7 @@ export const EmailSignUpDialogButton = ({
         <Translate
           zh_hant="沒有帳戶？"
           zh_hans="沒有帐户？"
-          en="Not registered?"
+          en="Not Registered?"
         />
       }
       rightText={<Translate id="register" />}

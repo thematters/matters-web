@@ -45,7 +45,7 @@ const BaseDialog = ({ children }: Props) => {
       <Dialog size="sm" isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           title={
-            <Translate zh_hant="認領標籤" zh_hans="认领标签" en="adopt tag" />
+            <Translate zh_hant="認領標籤" zh_hans="认领标签" en="Adopt tag" />
           }
           closeDialog={closeDialog}
           closeTextId="cancel"
@@ -85,7 +85,7 @@ const BaseDialog = ({ children }: Props) => {
             <Translate
               zh_hant="即刻主理"
               zh_hans="即刻主理"
-              en="Maintain at once"
+              en="Maintain immediately"
             />
           </Dialog.Footer.Button>
 
@@ -97,7 +97,7 @@ const BaseDialog = ({ children }: Props) => {
             <Translate
               zh_hant="考慮一下"
               zh_hans="考虑一下"
-              en="I need to think it through"
+              en="Let me think about it"
             />
           </Dialog.Footer.Button>
         </Dialog.Footer>

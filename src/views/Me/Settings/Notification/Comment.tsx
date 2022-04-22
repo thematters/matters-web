@@ -33,7 +33,7 @@ const Comment = ({ settings, toggle }: CommentProps) => (
         <Translate
           zh_hant="評論被置頂"
           zh_hans="评论被置顶"
-          en="Pinned comments"
+          en="Pinned Comments"
         />
       }
       right={

@@ -33,13 +33,13 @@ const SupportWidget = ({ article }: DonationProps) => {
           <Translate
             zh_hant="喜歡我的文章嗎？"
             zh_hans="喜欢我的文章吗？"
-            en="Enjoy my work?"
+            en="Like my work??"
           />
           <br />
           <Translate
             zh_hant="別忘了給點支持與讚賞，讓我知道創作的路上有你陪伴。"
             zh_hans="别忘了给点支持与赞赏，让我知道创作的路上有你陪伴。"
-            en="Don't forget to support and like, so I can know your companionship."
+            en="Don't forget to support or like, so I know you are with me.."
           />
         </p>
 

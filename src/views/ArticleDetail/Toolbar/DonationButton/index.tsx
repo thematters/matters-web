@@ -63,7 +63,7 @@ const DonationButton = ({ article, disabled }: DonationButtonProps) => {
             <Translate
               zh_hant="請登入／註冊支持作者"
               zh_hans="请登入／注册支持作者"
-              en="Please login to support the author"
+              en="Please log in to support the author"
             />
           ),
           customButton: <LoginButton isPlain />,

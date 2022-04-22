@@ -50,7 +50,7 @@ const PushSwitch = () => {
         <Translate
           zh_hant="實時收到你關心的站內動態"
           zh_hans="实时收到你关心的站内动态"
-          en="Receive activities you care in real time"
+          en="Receive personalized real-time updates"
         />
       }
       right={

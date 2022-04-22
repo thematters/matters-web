@@ -31,7 +31,7 @@ import { AppreciationButtonArticlePublic } from './__generated__/AppreciationBut
 
 interface AppreciationButtonProps {
   article: AppreciationButtonArticlePublic &
-    Partial<AppreciationButtonArticlePrivate>
+  Partial<AppreciationButtonArticlePrivate>
   privateFetched: boolean
   disabled?: boolean
 }
@@ -111,7 +111,7 @@ const AppreciationButton = ({
               <Translate
                 zh_hant="你對作品送出了一個 Super Like！"
                 zh_hans="你对作品送出了一个 Super Like！"
-                en="You sent a Super Like to this work!"
+                en="You sent a Super Like to this article!"
               />
             ),
             customButton: <ViewSuperLikeButton />,
@@ -192,7 +192,7 @@ const AppreciationButton = ({
           <Translate
             zh_hant="去讚賞其他用戶吧"
             zh_hans="去赞赏其他用户吧"
-            en="send like to other"
+            en="send Likes to others"
           />
         }
         zIndex={Z_INDEX.OVER_BOTTOM_BAR}
@@ -286,7 +286,7 @@ const AppreciationButton = ({
         <Translate
           zh_hant="你還沒有讚賞權限"
           zh_hans="你还没有赞赏权限"
-          en="You cannot send like yet"
+          en="You can't send Likes yet"
         />
       }
       zIndex={Z_INDEX.OVER_BOTTOM_BAR}

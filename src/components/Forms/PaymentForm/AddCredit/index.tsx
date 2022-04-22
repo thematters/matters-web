@@ -243,7 +243,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
             <Translate
               zh_hant="創作者們望眼欲穿，快去送上支持吧"
               zh_hans="创作者们望眼欲穿，快去送上支持吧"
-              en="Let's support creators"
+              en="Creators need your support! Go support creators you like"
             />
           </p>
           <br />

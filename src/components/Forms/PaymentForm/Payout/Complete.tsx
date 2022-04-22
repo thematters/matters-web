@@ -14,7 +14,7 @@ const Complete: React.FC<Props> = ({ closeDialog }) => {
           <Translate
             zh_hant="感謝你對 Matters 社區的信任與支持。"
             zh_hans="感谢你对 Matters 社区的信任与支持。"
-            en="Thank you for your support and trust to Matters community."
+            en="Thank you for your support and trust in the Matters community."
           />
           <br />
           <Translate
@@ -36,7 +36,7 @@ const Complete: React.FC<Props> = ({ closeDialog }) => {
           <Translate
             zh_hant="查看交易"
             zh_hans="查看交易"
-            en="view transaction"
+            en="View Tansaction"
           />
         </Dialog.Footer.Button>
 
@@ -45,7 +45,7 @@ const Complete: React.FC<Props> = ({ closeDialog }) => {
           textColor="black"
           onClick={closeDialog}
         >
-          <Translate zh_hant="完成交易" zh_hans="完成交易" en="finish payout" />
+          <Translate zh_hant="完成交易" zh_hans="完成交易" en="Complete Transaction" />
         </Dialog.Footer.Button>
       </Dialog.Footer>
     </>

@@ -4,7 +4,7 @@ export const EmptyAnalytics = () => (
   <Empty
     icon={<IconEmptyWarning72 size="xxl" />}
     description={
-      <Translate zh_hant="還沒有數據" zh_hans="还没有数据" en="No analytics." />
+      <Translate zh_hant="還沒有數據" zh_hans="还没有数据" en="No Analytics." />
     }
   />
 )

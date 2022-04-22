@@ -88,7 +88,7 @@ const Tasks = ({ task }: Props) => {
                 <Translate
                   zh_hant="設置 Liker ID 化讚為賞"
                   zh_hans="设置 Liker ID 化赞为赏"
-                  en="Setup Liker ID and turn likes into income"
+                  en="Set up Liker ID and get rewards for Likes"
                 />
               }
               done={viewer.onboardingTasks.tasks.likerId}
@@ -96,9 +96,9 @@ const Tasks = ({ task }: Props) => {
                 viewer.onboardingTasks.tasks.likerId
                   ? undefined
                   : () =>
-                      window.dispatchEvent(
-                        new CustomEvent(OPEN_LIKE_COIN_DIALOG, {})
-                      )
+                    window.dispatchEvent(
+                      new CustomEvent(OPEN_LIKE_COIN_DIALOG, {})
+                    )
               }
             />
           )}
@@ -133,7 +133,7 @@ const Tasks = ({ task }: Props) => {
                 <Translate
                   zh_hant="追蹤 5 個感興趣的標籤"
                   zh_hans="追踪 5 个感兴趣的标签"
-                  en="Follow at least 5 interested tags"
+                  en="Follow at least 5 tags"
                 />
               }
               done={viewer.onboardingTasks.tasks.followingTag}
@@ -161,7 +161,7 @@ const Tasks = ({ task }: Props) => {
                 <Translate
                   zh_hant="參與 #新人打卡 關注"
                   zh_hans="参与 #新人打卡 关注"
-                  en="Join #新人打卡"
+                  en="Say hi at #MeetNewFriends"
                 />
               }
               done={viewer.onboardingTasks.tasks.article}
@@ -180,14 +180,14 @@ const Tasks = ({ task }: Props) => {
                 <Translate
                   zh_hant="解鎖評論權限參與更多互動"
                   zh_hans="解锁评论权限参与更多互动"
-                  en="Unlock comment feature to participate more interaction"
+                  en="Unlock comment feature for more interaction"
                 />
               }
               subtitle={
                 <Translate
                   zh_hant="獲得拍手數 × 2 + 閱讀篇數 ≥ 10"
                   zh_hans="获得拍手数 × 2 + 阅读篇数 ≥ 10"
-                  en="Received likes × 2 + read article ≥ 10"
+                  en="Likes received × 2 + articles read ≥ 10"
                 />
               }
               done={viewer.onboardingTasks.tasks.commentPermission}
@@ -209,7 +209,7 @@ const Tasks = ({ task }: Props) => {
               <Translate
                 zh_hant="繼續閱讀航程"
                 zh_hans="继续阅读航程"
-                en="Continue your reading journey"
+                en="Continue reading journey"
               />
             </Dialog.Footer.Button>
           ) : (

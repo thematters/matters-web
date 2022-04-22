@@ -14,7 +14,7 @@ const GoogleSearchButton = () => {
               <Translate
                 zh_hant="找不到你想要的結果嗎？"
                 zh_hans="找不到你想要的结果吗？"
-                en="Cannot fnd what you are looking for?"
+                en="Can't find what you are looking for?"
               />
             </TextIcon>
           </p>
@@ -30,7 +30,7 @@ const GoogleSearchButton = () => {
             <Translate
               zh_hant="改使用 Google 搜尋關鍵字"
               zh_hans="改使用 Google 搜索关键字"
-              en="Search Matters with Google"
+              en="Search Matters on Google"
             />
           </Dialog.Footer.Button>
 

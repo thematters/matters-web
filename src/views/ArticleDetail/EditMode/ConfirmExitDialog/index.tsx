@@ -14,7 +14,7 @@ const ConfirmExitDialog = ({ onExit, children }: ConfirmExitDialogProps) => {
 
       <Dialog isOpen={show} onDismiss={closeDialog} size="sm">
         <Dialog.Header
-          title={<Translate zh_hant="修訂須知" zh_hans="修订须知" />}
+          title={<Translate zh_hant="修訂須知" zh_hans="修订须知" en="Notice" />}
           closeDialog={closeDialog}
           mode="inner"
         />
@@ -24,7 +24,7 @@ const ConfirmExitDialog = ({ onExit, children }: ConfirmExitDialogProps) => {
             <Translate
               zh_hant="跳出該頁，本次操作不會保存"
               zh_hans="跳出该页，本次操作不会保存"
-              en="You will lost your changes if you leave this page"
+              en="If you leave before saving, your changes will be lost. "
             />
           </p>
         </Dialog.Message>
