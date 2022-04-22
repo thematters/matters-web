@@ -67,11 +67,11 @@ const Content = () => {
               <Translate
                 zh_hant="目前總追蹤人數"
                 zh_hans="目前总追踪人数"
-                en="Current Followers"
+                en=""
               />
             }
             value={follower.current}
-            unit={<Translate zh_hant="人" zh_hans="人" en="" />}
+            unit={<Translate zh_hant="人" zh_hans="人" en="followers" />}
           />
           <InfoTiles.Tile
             title={

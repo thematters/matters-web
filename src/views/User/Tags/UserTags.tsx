@@ -131,7 +131,7 @@ const UserTags = () => {
             <Translate
               zh_hant="還沒有主理與協作標籤喔"
               zh_hans="还没有主理与协作标签喔"
-              en="There is no maintaining and collabrating tags yet"
+              en="No maintaining or collabrating tags yet"
             />
           }
         />

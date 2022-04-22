@@ -47,7 +47,7 @@ const BaseRecommendAuthorDialog = ({ children }: Props) => {
               <Translate
                 zh_hant="位感興趣的創作者，以開啟個性化的訂閱時間線，並收到創作者最新發佈的作品和動態。"
                 zh_hans="位感兴趣的创作者，以开启个性化的订阅时间线，并收到创作者最新发布的作品和动态。"
-                en="creators to enable your personal feed and receive updates."
+                en="users to enable personal feed and receive updates."
               />
             </p>
           </Dialog.Message>

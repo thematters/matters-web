@@ -44,7 +44,7 @@ const UserNewFollowerNotice = ({ notice }: { notice: NoticeType }) => {
               en={`etc. ${numAbbr(actorsCount)} users`}
             />
           )}
-          <Translate zh_hant="追蹤了你" zh_hans="追踪了你" en=" followed you" />
+          <Translate zh_hant="追蹤了你" zh_hans="追踪了你" en=" Followed You" />
         </NoticeHead>
 
         {isMultiActors ? (

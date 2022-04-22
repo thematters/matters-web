@@ -95,7 +95,7 @@ const TagSearchSelectEditor = ({ id, closeDialog, toListStep }: Props) => {
             <Translate
               zh_hant="添加協作者成功"
               zh_hans="添加协作者成功"
-              en="collaborator addition success"
+              en="successfully added collaborator"
             />
           ),
           duration: 2000,

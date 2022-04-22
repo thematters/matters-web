@@ -36,7 +36,7 @@ const InvitationSent = ({ closeDialog }: Props) => (
         <Translate
           zh_hant="你已寄出邀請給朋友們快去已邀請管理查看他們加入的進度吧！"
           zh_hans="你已寄出邀请给朋友们快去已邀请管理查看他们加入的进度吧！"
-          en="Invitaions have been sent. You can check in invitation management page."
+          en="Invitations have been sent. You can check invitation status on the invitation management page."
         />
       </p>
     </Dialog.Message>

@@ -61,7 +61,7 @@ const Onboarding: React.FC<Props> = ({ nextStep }) => {
             <Translate
               zh_hant="請在新頁面完成 Stripe 帳戶創建，不要關閉本窗口"
               zh_hans="请在新页面完成 Stripe 帐户创建，不要关闭本窗口"
-              en="Please create Stripe account in the new tab, do not close this tab."
+              en="Please create Stripe account on a new page. Do not close this page."
             />
           </p>
         </>

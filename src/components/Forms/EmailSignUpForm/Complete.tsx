@@ -39,7 +39,7 @@ const Complete = ({
           <Translate
             zh_hant="現在，去為你喜歡的作者打賞吧！你的每一次打賞都將為作者帶來收入。"
             zh_hans="现在，去为你喜欢的作者打赏吧！你的每一次打赏都将为作者带来收入。"
-            en="Now go like the authors you support! Your like will turn into income for them."
+            en="Now, go like the authors you support! Your Likes will become their income"
           />
         </p>
 
@@ -47,7 +47,7 @@ const Complete = ({
           <Translate
             zh_hant="你已擁有個人創作空間站，期待你的第一篇作品。"
             zh_hans="你已拥有个人创作空间站，期待你的第一篇作品。"
-            en="You have created your own creative space, waiting for your first work."
+            en="You have created your personal creative space. Publish your first work!"
           />
         </p>
 
@@ -71,7 +71,7 @@ const Complete = ({
           <Translate
             zh_hant="進入社區"
             zh_hans="进入社区"
-            en="enter community"
+            en="Enter Community"
           />
         </Dialog.Footer.Button>
       </Dialog.Footer>

@@ -90,7 +90,7 @@ const ConfirmPublishDialogContent: React.FC<
             <Translate
               zh_hant="首次發布作品後有兩次正文修訂機會，你也可以隱藏原文重新發布作品。"
               zh_hans="首次发布作品后有两次正文修订机会，你也可以隐藏原文重新发布作品。"
-              en="You have 2 resions after publishing, and you can archive and publish a new version."
+              en="You can edit the article twice after publishing it. You can also archive the original and republish.."
             />
           </li>
         </ul>

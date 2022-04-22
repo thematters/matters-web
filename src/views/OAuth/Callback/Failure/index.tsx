@@ -94,7 +94,7 @@ const OAuthCallbackFailure = () => {
               <Translate
                 zh_hant="出錯了"
                 zh_hans="出错了"
-                en="something is wrong"
+                en="Sorry, something went wrong"
               />
             </h2>
 

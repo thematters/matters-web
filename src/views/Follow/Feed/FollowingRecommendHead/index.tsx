@@ -10,21 +10,21 @@ const RecommendHead = ({ type }: Props) => {
       <Translate
         zh_hant="你追蹤的人支持了"
         zh_hans="你追踪的人支持了"
-        en="Followees also support"
+        en="People you follow also support"
       />
     ),
     circle: (
       <Translate
         zh_hant="你追蹤的人加入了"
         zh_hans="你追踪的人加入了"
-        en="Followees also subscribe"
+        en="People you follow also subscribe to"
       />
     ),
     user: (
       <Translate
         zh_hant="你追蹤的人關注了"
         zh_hans="你追踪的人关注了"
-        en="Followees also follow"
+        en="People you follow also follow"
       />
     ),
     recommend: (

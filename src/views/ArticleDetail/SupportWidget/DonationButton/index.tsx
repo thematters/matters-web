@@ -51,7 +51,7 @@ const DonationButton = ({ recipient, targetId }: DonationButtonProps) => {
             <Translate
               zh_hant="請登入／註冊支持作者"
               zh_hans="请登入／注册支持作者"
-              en="Please login to support author"
+              en="Please log in to support author"
             />
           ),
           customButton: <LoginButton isPlain />,

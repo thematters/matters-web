@@ -33,7 +33,7 @@ const OAuthCallbackFailure = () => {
               <Translate
                 zh_hant="支付失敗了！"
                 zh_hans="支付失败了！"
-                en="Payment failed!"
+                en="Payment Failed!"
               />
             </h2>
 
@@ -41,7 +41,7 @@ const OAuthCallbackFailure = () => {
               <Translate
                 zh_hant="請回到原頁面重試"
                 zh_hans="请回到原页面重试"
-                en="Please retry on the original page"
+                en="Please return to previous page and retry"
               />
             </p>
             <style jsx>{styles}</style>
