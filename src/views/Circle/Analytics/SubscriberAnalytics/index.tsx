@@ -87,10 +87,10 @@ const Content = () => {
       `<span class="subscriber-tooltip-item">
         <span class="indicator rect" style="color: #EDEDED"></span>
         ${translate({
-        zh_hant: '總數',
-        zh_hans: '总数',
-        en: 'Total',
-      })}: ${d3Sum(Object.values(values))}
+          zh_hant: '總數',
+          zh_hans: '总数',
+          en: 'Total',
+        })}: ${d3Sum(Object.values(values))}
       </span>`,
       ...[DatumKey.subscriber, DatumKey.invitee].map((key) => {
         const keyName = {

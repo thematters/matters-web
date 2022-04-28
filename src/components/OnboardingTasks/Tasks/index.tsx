@@ -96,9 +96,9 @@ const Tasks = ({ task }: Props) => {
                 viewer.onboardingTasks.tasks.likerId
                   ? undefined
                   : () =>
-                    window.dispatchEvent(
-                      new CustomEvent(OPEN_LIKE_COIN_DIALOG, {})
-                    )
+                      window.dispatchEvent(
+                        new CustomEvent(OPEN_LIKE_COIN_DIALOG, {})
+                      )
               }
             />
           )}

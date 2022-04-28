@@ -46,7 +46,11 @@ const ArticleTagUnselectedNotice = ({ notice }: { notice: NoticeType }) => {
               en=" removed "
             />
           ) : (
-            <Translate zh_hant=" 將作品 " zh_hans=" 将作品 " en=" removed your article " />
+            <Translate
+              zh_hant=" 將作品 "
+              zh_hans=" 将作品 "
+              en=" removed your article "
+            />
           )}
 
           <NoticeArticleTitle article={notice.target} />

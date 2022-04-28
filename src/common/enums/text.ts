@@ -853,7 +853,7 @@ export const TEXT = {
     hintPaymentPassword: 'Enter a 6-digit transaction password.',
     hintPaymentPointer: 'The wallet address starts with "$".',
     hintTerm:
-      "We have amended or modified our Terms and Privacy Policy. Agree and accept all Terms to continue using our Services.",
+      'We have amended or modified our Terms and Privacy Policy. Agree and accept all Terms to continue using our Services.',
     hintUserDescription: 'Recommended within 50 words and 200 words maximum.',
     hintUserName:
       'Must be between 4-15 characters long. Only English alphabets, numbers and underline are accepted.',
@@ -865,8 +865,7 @@ export const TEXT = {
     invalidEmail: 'Invalid Email',
     invalidUserName: 'Invalid Matters ID',
     IPFSEntrance: 'IPFS',
-    joinCivicLiker:
-      'Become a Civil Liker and support creators you like! ',
+    joinCivicLiker: 'Become a Civil Liker and support creators you like! ',
     latest: 'Latest',
     latestArticles: 'Latest Articles',
     latestResponses: 'Latest Responses',
@@ -1015,7 +1014,7 @@ export const TEXT = {
     term: 'Term of Services',
     termAndPrivacy: 'Terms and Privacy Policy',
     termHint:
-      "We have updated our Terms and Privacy Policy. To continue, you must agree to the Terms.",
+      'We have updated our Terms and Privacy Policy. To continue, you must agree to the Terms.',
     thinkAboutIt: 'Maybe later',
     TOKEN_INVALID: 'Please log in again',
     topic: 'Topic',

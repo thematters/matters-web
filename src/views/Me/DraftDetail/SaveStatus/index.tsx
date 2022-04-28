@@ -13,7 +13,11 @@ const SaveStatus: React.FC<SaveStatus> = ({ status }) => {
         <Translate zh_hans="草稿已保存" zh_hant="草稿已保存" en="Draft Saved" />
       )}
       {status === 'saving' && (
-        <Translate zh_hans="草稿保存中" zh_hant="草稿保存中" en="Saving Draft" />
+        <Translate
+          zh_hans="草稿保存中"
+          zh_hant="草稿保存中"
+          en="Saving Draft"
+        />
       )}
       {status === 'saveFailed' && (
         <Translate

@@ -14,7 +14,9 @@ const ConfirmExitDialog = ({ onExit, children }: ConfirmExitDialogProps) => {
 
       <Dialog isOpen={show} onDismiss={closeDialog} size="sm">
         <Dialog.Header
-          title={<Translate zh_hant="修訂須知" zh_hans="修订须知" en="Notice" />}
+          title={
+            <Translate zh_hant="修訂須知" zh_hans="修订须知" en="Notice" />
+          }
           closeDialog={closeDialog}
           mode="inner"
         />

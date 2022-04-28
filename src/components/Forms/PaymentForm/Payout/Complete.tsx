@@ -45,7 +45,11 @@ const Complete: React.FC<Props> = ({ closeDialog }) => {
           textColor="black"
           onClick={closeDialog}
         >
-          <Translate zh_hant="完成交易" zh_hans="完成交易" en="Complete Transaction" />
+          <Translate
+            zh_hant="完成交易"
+            zh_hans="完成交易"
+            en="Complete Transaction"
+          />
         </Dialog.Footer.Button>
       </Dialog.Footer>
     </>

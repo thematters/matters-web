@@ -31,7 +31,7 @@ import { AppreciationButtonArticlePublic } from './__generated__/AppreciationBut
 
 interface AppreciationButtonProps {
   article: AppreciationButtonArticlePublic &
-  Partial<AppreciationButtonArticlePrivate>
+    Partial<AppreciationButtonArticlePrivate>
   privateFetched: boolean
   disabled?: boolean
 }

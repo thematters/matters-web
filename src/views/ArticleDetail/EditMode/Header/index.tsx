@@ -116,7 +116,11 @@ const EditModeHeader = ({
         en=""
       />
       {revisionCountLeft}
-      <Translate zh_hant=" 版修訂" zh_hans=" 次修订" en=" revisions remaining" />
+      <Translate
+        zh_hant=" 版修訂"
+        zh_hans=" 次修订"
+        en=" revisions remaining"
+      />
       <span className={isOverDiffLimit ? 'red' : 'green'}>
         &nbsp;{diffCount}/50&nbsp;&nbsp;&nbsp;
       </span>
