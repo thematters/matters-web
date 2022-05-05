@@ -1,14 +1,22 @@
 import { useContext } from 'react'
 
-import { Button, IconShare32, LanguageContext, ShareDialog } from '~/components'
+import {
+  Button,
+  IconShare32,
+  LanguageContext,
+  ShareDialog,
+  ShareDialogProps,
+} from '~/components'
 
 import { translate } from '~/common/utils'
 
-export const ShareButton: React.FC = () => {
+export const ShareButton: React.FC<Omit<ShareDialogProps, 'children'>> = (
+  props
+) => {
   const { lang } = useContext(LanguageContext)
 
   return (
-    <ShareDialog>
+    <ShareDialog {...props}>
       {({ openDialog: openShareDialog }) => (
         <Button
           aria-label={translate({ id: 'back', lang })}

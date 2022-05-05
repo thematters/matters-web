@@ -80,7 +80,11 @@ export const UserProfile = () => {
           <span />
           {user && (
             <section className="buttons">
-              <ShareButton />
+              <ShareButton
+                tags={
+                  [user.displayName, user.userName].filter(Boolean) as string[]
+                }
+              />
               <DropdownActions user={user} isMe={isMe} />
               <style jsx>{styles}</style>
             </section>

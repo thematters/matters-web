@@ -10,6 +10,7 @@ export interface ShareDialogContentProps {
 
   shareTitle: string
   shareLink: string
+  shareTags?: string[]
 
   headerTitle?: TextId | React.ReactNode
   description?: React.ReactNode
@@ -21,6 +22,7 @@ const ShareDialogContent: React.FC<ShareDialogContentProps> = ({
 
   shareTitle,
   shareLink,
+  shareTags,
 
   headerTitle,
   description,
@@ -52,7 +54,11 @@ const ShareDialogContent: React.FC<ShareDialogContentProps> = ({
         </section>
 
         <section className="right">
-          <ShareButtons.Twitter title={shareTitle} link={shareLink} />
+          <ShareButtons.Twitter
+            title={shareTitle}
+            link={shareLink}
+            tags={shareTags}
+          />
           <ShareButtons.Facebook title={shareTitle} link={shareLink} />
           <ShareButtons.Weibo title={shareTitle} link={shareLink} />
           <ShareButtons.Email title={shareTitle} link={shareLink} />

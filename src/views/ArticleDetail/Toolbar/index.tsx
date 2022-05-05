@@ -10,6 +10,8 @@ import DropdownActions, {
   DropdownActionsControls,
 } from '~/components/ArticleDigest/DropdownActions'
 
+import { stripPunctPrefixSuffix, toPath } from '~/common/utils'
+
 import AppreciationButton from '../AppreciationButton'
 import Appreciators from './Appreciators'
 import CommentBar from './CommentBar'
@@ -30,6 +32,10 @@ const fragments = {
     public: gql`
       fragment ToolbarArticlePublic on Article {
         id
+        title
+        tags {
+          content
+        }
         ...AppreciatorsArticle
         ...DropdownActionsArticle
         ...DonationButtonArticle
@@ -78,7 +84,24 @@ const Toolbar = ({ article, privateFetched, lock, ...props }: ToolbarProps) => {
 
         <BookmarkButton article={article} size="md-s" inCard={false} />
 
-        {isSmallUp && <ShareButton iconSize="md-s" inCard={false} />}
+        {isSmallUp && (
+          <ShareButton
+            iconSize="md-s"
+            inCard={false}
+            // title={makeTitle(article.title)}
+            path={
+              toPath({
+                page: 'articleDetail',
+                article,
+              }).href
+            }
+            tags={article.tags
+              ?.map(({ content }) => content)
+              .join(' ')
+              .split(/\s+/)
+              .map(stripPunctPrefixSuffix)}
+          />
+        )}
 
         <DropdownActions
           article={article}

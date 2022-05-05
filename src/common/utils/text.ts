@@ -137,3 +137,10 @@ export const optimizeEmbed = (content: string) => {
  */
 export const measureDiffs = (source: string, target: string) =>
   distance(source, target)
+
+// for Twitter and others which do not support non-English in URL
+export const stripNonEnglishUrl = (url: string) =>
+  // get the beginning portion of all printable ascii, and must ends with a '\w'
+  url.match(/^[\x21-\x7e]+[A-Za-z0-9]/)?.[0] ||
+  // fallback to full url
+  url

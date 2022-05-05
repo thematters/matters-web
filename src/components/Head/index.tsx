@@ -134,7 +134,11 @@ export const Head: React.FC<HeadProps> = (props) => {
         content="zh_CN"
       />
       <meta name="twitter:url" key="twitter:url" content={head.url} />
-      <meta name="twitter:card" key="twitter:card" content="summary" />
+      <meta
+        name="twitter:card"
+        key="twitter:card"
+        content="summary_large_image"
+      />
       <meta name="twitter:title" key="twitter:title" content={head.title} />
       <meta
         name="twitter:description"

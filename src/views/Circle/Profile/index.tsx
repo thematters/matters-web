@@ -4,6 +4,7 @@ import {
   CircleAvatar,
   Cover,
   Expandable,
+  Head,
   Layout,
   Spinner,
   SubscribeCircleDialog,
@@ -20,6 +21,7 @@ import ShareButton from '~/components/Layout/Header/ShareButton'
 import { REFETCH_CIRCLE_DETAIL } from '~/common/enums'
 import { numAbbr } from '~/common/utils'
 
+import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
 import CIRCLE_COVER from '@/public/static/images/circle-cover.svg'
 
 import SubscriptionBanner from '../SubscriptionBanner'
@@ -94,22 +96,63 @@ const CircleProfile = () => {
    * Render
    */
   const LayoutHeader = () => (
-    <Layout.Header
-      left={<Layout.Header.BackButton mode="black-solid" />}
-      right={
-        <>
-          <span />
-          {circle && (
-            <section className="buttons">
-              <ShareButton />
-              <DropdownActions circle={circle} />
-              <style jsx>{styles}</style>
-            </section>
-          )}
-        </>
-      }
-      mode="transparent-absolute"
-    />
+    <>
+      {circle && (
+        <Head
+          title={`${circle.displayName} by ${circle.owner.displayName} (@circle.owner.userName)`}
+          // title={`Matters - ${user.displayName} (@${user.userName})`}
+          // noSuffix={false}
+          description={circle.description}
+          keywords={
+            [
+              circle.displayName,
+              circle.name,
+              circle.owner.displayName,
+              circle.owner.userName,
+            ] as string[]
+          } // add top10 most used tags?
+          image={
+            circle.cover ||
+            `//${process.env.NEXT_PUBLIC_SITE_DOMAIN}${CIRCLE_COVER.src}`
+          }
+          jsonLdData={{
+            '@context': 'https://schema.org',
+            '@type': 'Organization',
+            name: circle.displayName,
+            description: circle.description,
+            image:
+              circle.avatar ||
+              `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}${ICON_AVATAR_DEFAULT.src}`,
+            url: `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/~${circle.name}`,
+          }}
+        />
+      )}
+      <Layout.Header
+        left={<Layout.Header.BackButton mode="black-solid" />}
+        right={
+          <>
+            <span />
+            {circle && (
+              <section className="buttons">
+                <ShareButton
+                  tags={
+                    [
+                      circle.displayName,
+                      circle.name,
+                      circle.owner.displayName,
+                      circle.owner.userName,
+                    ].filter(Boolean) as string[]
+                  }
+                />
+                <DropdownActions circle={circle} />
+                <style jsx>{styles}</style>
+              </section>
+            )}
+          </>
+        }
+        mode="transparent-absolute"
+      />
+    </>
   )
 
   if (loading) {

@@ -18,6 +18,8 @@ const fragments = {
         cover
         owner {
           id
+          userName
+          displayName
         }
         isMember
         members(input: { first: 0 }) {

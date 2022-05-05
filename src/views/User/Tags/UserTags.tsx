@@ -116,6 +116,7 @@ const UserTags = () => {
         zh_hans: `${user.displayName} 主理与协作的標籤`,
         en: `Tags ${user.displayName} maintaining or collaborating`,
       }}
+      // keywords={...} // show user's top10 most used tags?
       description={user.info.description}
       image={user.info.profileCover || IMAGE_LOGO_192.src}
     />
