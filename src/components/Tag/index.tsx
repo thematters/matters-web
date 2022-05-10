@@ -144,6 +144,7 @@ export const Tag = ({
         icon={<IconHashTag16 {...iconProps} />}
         {...textIconProps}
         size={textSize || textIconProps.size}
+        allowUserSelect
       >
         <span className="name">{tag.content}</span>
       </TextIcon>

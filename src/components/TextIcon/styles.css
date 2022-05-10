@@ -3,6 +3,9 @@
   align-items: center;
   justify-content: flex-start;
   vertical-align: middle;
+}
+
+.none-select {
   user-select: none;
 }
 
