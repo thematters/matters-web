@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import Link from 'next/link'
-import queryString from 'query-string'
+// import queryString from 'query-string'
 import { useContext } from 'react'
 
 import {
@@ -39,12 +39,10 @@ const OAUTH_CLIENT_INFO = gql`
 `
 
 const BaseOAuthAuthorize = () => {
-  const { getQuery, router } = useRoute()
+  const { getQuery } = useRoute()
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
-  const actionUrl = `${OAUTH_AUTHORIZE_ENDPOINT}?${queryString.stringify(
-    router.query
-  )}`
+  const actionUrl = `${OAUTH_AUTHORIZE_ENDPOINT}${window.location.search}`
   const clientId = getQuery('client_id')
   const state = getQuery('state')
   const requestScopes = getQuery('scope')

@@ -1,6 +1,6 @@
 import Router from 'next/router'
 import { Key, pathToRegexp } from 'path-to-regexp'
-import queryString from 'query-string'
+// import queryString from 'query-string'
 
 import { PATHS, ROUTES } from '~/common/enums'
 
@@ -180,9 +180,8 @@ export const toPath = (args: ToPathArgs): { href: string } => {
 }
 
 export const getTarget = (url?: string) => {
-  url = url || window.location.href
-  const qs = queryString.parseUrl(url).query
-  const target = encodeURIComponent((qs.target as string) || '')
+  const qs = new URL(url || window.location.href).searchParams
+  const target = encodeURIComponent((qs.get('target') as string) || '')
 
   return target
 }
@@ -308,7 +307,7 @@ export const captureClicks = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     const result = regexp.exec(url.pathname)
 
     if (result) {
-      const searchQuery = queryString.parse(url.search) || {}
+      const searchQuery = new URLSearchParams(url.search) || {}
       const matchedQuery: { [key: string]: string } = {}
       keys.forEach((k, i) => (matchedQuery[k.name] = result[i + 1]))
 

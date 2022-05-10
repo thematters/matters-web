@@ -1,4 +1,4 @@
-import queryString from 'query-string'
+// import queryString from 'query-string'
 
 import { TextIcon, Translate, withIcon } from '~/components'
 
@@ -22,12 +22,10 @@ const Email = ({
       const description = dom
         .$('meta[name="description"]')
         ?.getAttribute('content')
-      const shareUrl =
-        'mailto:?' +
-        queryString.stringify({
-          subject: title,
-          body: `${description}\n\n${link}`,
-        })
+      const shareUrl = `mailto:?${new URLSearchParams({
+        subject: title,
+        body: `${description}\n\n${link}`,
+      }).toString()}`
       analytics.trackEvent('share', {
         type: 'email',
       })

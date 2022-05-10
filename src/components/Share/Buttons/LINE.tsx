@@ -1,4 +1,4 @@
-import queryString from 'query-string'
+// import queryString from 'query-string'
 
 import { TextIcon, withIcon } from '~/components'
 
@@ -19,12 +19,12 @@ const LINE = ({
   <button
     type="button"
     onClick={() => {
-      const shareUrl =
-        'https://social-plugins.line.me/lineit/share?' +
-        queryString.stringify({
+      const shareUrl = `https://social-plugins.line.me/lineit/share?${new URLSearchParams(
+        {
           url: link,
           text: title,
-        })
+        }
+      ).toString()}`
 
       analytics.trackEvent('share', {
         type: 'line',
