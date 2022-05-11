@@ -7,7 +7,7 @@ ul {
   @mixin hide-scrollbar;
 
   display: flex;
-  overflow-x: auto;
+  flex-flow: row wrap;
   -webkit-overflow-scrolling: touch;
 
   & li {

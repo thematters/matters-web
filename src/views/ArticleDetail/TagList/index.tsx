@@ -27,7 +27,7 @@ const TagList = ({ article }: { article: TagListArticle }) => {
   return (
     <section className="tag-list">
       <ul>
-        {article.tags.map((tag, i) => (
+        {article.tags.slice(0, 20).map((tag, i) => (
           <li key={tag.id}>
             <Tag
               tag={tag}

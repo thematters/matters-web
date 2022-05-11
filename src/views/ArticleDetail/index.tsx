@@ -266,8 +266,6 @@ const BaseArticleDetail = ({
         <State article={article} />
 
         <section className="content">
-          <TagList article={article} />
-
           <section className="title">
             <Title type="article">{title}</Title>
 
@@ -303,6 +301,8 @@ const BaseArticleDetail = ({
           {features.payment && canReadFullContent && (
             <SupportWidget article={article} />
           )}
+
+          <TagList article={article} />
 
           <License license={article.license} />
 
