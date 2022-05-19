@@ -140,7 +140,7 @@ const CircleProfile = () => {
                       circle.displayName,
                       circle.name,
                       circle.owner.displayName,
-                      circle.owner.userName,
+                      // circle.owner.userName,
                     ].filter(Boolean) as string[]
                   }
                 />
