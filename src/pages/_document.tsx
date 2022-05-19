@@ -44,27 +44,27 @@ class MattersDocument extends Document<MattersDocumentProps> {
     return (
       <Html lang={this.props.lang}>
         <Head>
-          {/* Global Site Tag (gtag.js) - Google Analytics */}
-          <Script
-            async
-            src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
-          />
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '${GA_TRACKING_ID}');
-              `,
-            }}
-          />
           <meta httpEquiv="Content-Security-Policy" content={CSP_POLICY} />
         </Head>
 
         <body>
           <Main />
           <NextScript />
+
+          {/* Global Site Tag (gtag.js) - Google Analytics */}
+          <Script
+            strategy="afterInteractive"
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+            // strategy="lazyOnload"
+          />
+          <Script
+            strategy="afterInteractive"
+            id="ga-tracking"
+            dangerouslySetInnerHTML={{
+              __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);} gtag('js', new Date); gtag('config', '${GA_TRACKING_ID}');`,
+            }}
+          />
         </body>
       </Html>
     )

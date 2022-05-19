@@ -99,7 +99,7 @@ const CircleProfile = () => {
     <>
       {circle && (
         <Head
-          title={`${circle.displayName} by ${circle.owner.displayName} (@circle.owner.userName)`}
+          title={`${circle.displayName} by ${circle.owner.displayName} (@${circle.owner.userName})`}
           // title={`Matters - ${user.displayName} (@${user.userName})`}
           // noSuffix={false}
           description={circle.description}
@@ -108,12 +108,12 @@ const CircleProfile = () => {
               circle.displayName,
               circle.name,
               circle.owner.displayName,
-              circle.owner.userName,
+              // circle.owner.userName,
             ] as string[]
           } // add top10 most used tags?
           image={
             circle.cover ||
-            `//${process.env.NEXT_PUBLIC_SITE_DOMAIN}${CIRCLE_COVER.src}`
+            `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}${CIRCLE_COVER.src}`
           }
           jsonLdData={{
             '@context': 'https://schema.org',
