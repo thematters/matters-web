@@ -6,10 +6,9 @@ import Document, {
   Main,
   NextScript,
 } from 'next/document'
-import Script from 'next/script'
 import React from 'react'
 
-import { CSP_POLICY, GA_TRACKING_ID } from '~/common/enums'
+import { CSP_POLICY } from '~/common/enums'
 import { langConvert } from '~/common/utils'
 
 interface MattersDocumentProps {
@@ -50,21 +49,6 @@ class MattersDocument extends Document<MattersDocumentProps> {
         <body>
           <Main />
           <NextScript />
-
-          {/* Global Site Tag (gtag.js) - Google Analytics */}
-          <Script
-            strategy="afterInteractive"
-            async
-            src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
-            // strategy="lazyOnload"
-          />
-          <Script
-            strategy="afterInteractive"
-            id="ga-tracking"
-            dangerouslySetInnerHTML={{
-              __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);} gtag('js', new Date); gtag('config', '${GA_TRACKING_ID}');`,
-            }}
-          />
         </body>
       </Html>
     )
