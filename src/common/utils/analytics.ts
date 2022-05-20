@@ -26,6 +26,7 @@ type EventArgs =
   | ['click_button', ClickButtonProp]
   | ['load_more', LoadMoreProp]
   | ['share', ShareProp]
+  | ['share_dialog', ViewDialogProp]
   | ['purchase', PurchaseProp]
   | ['subscribe', SubscribeProps]
   | ['view_add_credit_dialog', ViewDialogProp]

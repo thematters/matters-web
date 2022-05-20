@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic'
 
 import { Dialog, Spinner, useDialogSwitch } from '~/components'
 
-import { isMobile } from '~/common/utils'
+import { analytics, isMobile } from '~/common/utils'
 
 import { ShareDialogContentProps } from './Content'
 
@@ -74,6 +74,8 @@ export const ShareDialog = (props: ShareDialogProps) => {
 
   const onShare = async (fallbackShare: () => void) => {
     const navigator = window.navigator as any
+
+    analytics.trackEvent('share_dialog', { step: 'open_share' })
 
     if (navigator.share && isMobile()) {
       try {
