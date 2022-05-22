@@ -27,7 +27,7 @@ const ManageButton = () => {
     <TagEditorDialog>
       {({ openDialog }) => (
         <Button
-          size={['4rem', '1.5rem']}
+          spacing={['xtight', 'xtight']}
           textColor="green"
           textActiveColor="white"
           bgActiveColor="green"
