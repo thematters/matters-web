@@ -17,6 +17,8 @@ const SCRIPT_SRC = [
   // GA
   'www.google-analytics.com',
   'ssl.google-analytics.com',
+  '*.google-analytics.com',
+  '*.analytics.google.com',
 
   // Stripe
   'js.stripe.com',
