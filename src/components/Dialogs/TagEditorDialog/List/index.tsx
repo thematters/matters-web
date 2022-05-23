@@ -159,7 +159,7 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
                 <Translate
                   zh_hant="你還可以添加"
                   zh_hans="你还可以添加"
-                  en="you can still add"
+                  en="you can add"
                 />
                 <span className="count"> {4 - count} </span>
               </>
@@ -167,7 +167,7 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
             <Translate
               zh_hant="名協作者"
               zh_hans="名协作者"
-              en="collaborators"
+              en="more collaborators"
             />
           </p>
         </Dialog.Message>

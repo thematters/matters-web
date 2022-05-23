@@ -14,7 +14,7 @@ const Timeline = () => {
                 <Translate
                   zh_hant="Prototype 上線"
                   zh_hans="Prototype 上线"
-                  en="Prototype went live"
+                  en="Prototype is now available"
                 />
               </p>
             </li>
@@ -36,7 +36,7 @@ const Timeline = () => {
                 <Translate
                   zh_hant="網站 Beta 版上線"
                   zh_hans="网站 Beta 版上线"
-                  en="Beta version website went live"
+                  en="Beta version is now available"
                 />
               </p>
             </li>
@@ -47,7 +47,7 @@ const Timeline = () => {
                 <Translate
                   zh_hant="Matters 開放註冊"
                   zh_hans="Matters 开放注册"
-                  en="Public registration"
+                  en="Public Registration"
                 />
               </p>
             </li>
@@ -71,7 +71,7 @@ const Timeline = () => {
                 <Translate
                   zh_hant="網站 2.0 上線"
                   zh_hans="网站 2.0 上线"
-                  en="Website 2.0 went live"
+                  en="Website 2.0 is now available"
                 />
               </p>
             </li>
@@ -82,7 +82,7 @@ const Timeline = () => {
                 <Translate
                   zh_hant="Matters Pay 上線"
                   zh_hans="Matters Pay 上线"
-                  en="Matters Pay went live"
+                  en="Matters Pay is now available"
                 />
               </p>
             </li>
@@ -93,7 +93,7 @@ const Timeline = () => {
                 <Translate
                   zh_hant="圍爐功能上線"
                   zh_hans="围炉功能上线"
-                  en="Matters Circle went live"
+                  en="Matters Circle is now available"
                 />
               </p>
             </li>

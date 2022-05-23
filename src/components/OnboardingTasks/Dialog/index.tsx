@@ -43,7 +43,7 @@ const BaseOnboardingTasksDialog: React.FC<OnboardingTasksDialogProps> = ({
               <Translate
                 zh_hant="導航帶你發現更多寶藏作者和優質作品。"
                 zh_hans="导航带你发现更多宝藏作者和优质作品。"
-                en="The guide will lead you to more precious creators and marvelous work."
+                en="The guide will help you explore more amazing creators and articles."
               />
             </span>
             <br />

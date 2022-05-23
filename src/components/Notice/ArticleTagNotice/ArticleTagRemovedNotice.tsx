@@ -31,7 +31,7 @@ const ArticleTagRemovedNotice = ({ notice }: { notice: NoticeType }) => {
           <Translate
             zh_hant=" 將你的作品 "
             zh_hans=" 将你的作品 "
-            en=" removed "
+            en=" removed your article "
           />
 
           <NoticeArticleTitle article={notice.target} />

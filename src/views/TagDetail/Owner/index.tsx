@@ -47,7 +47,7 @@ const Owner = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
             <Translate
               zh_hant="此標籤目前無人主理"
               zh_hans="此标签目前無人主理"
-              en="this tag currently has no maintainer"
+              en="this tag has no manager currently"
             />
           </TextIcon>
         </section>

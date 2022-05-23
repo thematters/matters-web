@@ -99,7 +99,9 @@ const Subscriptions = () => {
       title={{
         zh_hant: `${user.displayName} 的訂閱`,
         zh_hans: `${user.displayName} 的订阅`,
+        en: `${user.displayName}'s subscriptions`,
       }}
+      // keywords={...} // show user's top10 most used tags?
       description={user.info.description}
       image={user.info.profileCover || IMAGE_LOGO_192.src}
     />

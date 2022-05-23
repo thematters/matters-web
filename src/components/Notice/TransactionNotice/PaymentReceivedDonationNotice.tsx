@@ -31,7 +31,7 @@ const PaymentReceivedDonationNotice = ({ notice }: { notice: NoticeType }) => {
           <Translate
             zh_hant="支持了你的作品 "
             zh_hans="支持了你的作品 "
-            en="supported your work"
+            en="supported your article"
           />
           {tx && (
             <span className="highlight">
@@ -41,7 +41,7 @@ const PaymentReceivedDonationNotice = ({ notice }: { notice: NoticeType }) => {
           <Translate
             zh_hant="，快去查看自己的收入吧！"
             zh_hans="，快去查看自己的收入吧！"
-            en=", take a look at your income!"
+            en=". Take a look at your income"
           />
         </NoticeHead>
 

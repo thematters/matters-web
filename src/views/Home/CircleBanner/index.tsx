@@ -79,7 +79,7 @@ const CircleBanner = () => {
               <Translate
                 zh_hant="點擊這裡，致信 hi@matters.news，申請參與內測"
                 zh_hans="点击这里，致信 hi@matters.news，申请参与内测"
-                en="Click here to email hi@matters.news and apply"
+                en="Email hi@matters.news to apply"
               />
             </p>
           </section>

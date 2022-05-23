@@ -32,7 +32,7 @@ const Stats = () => {
               <Translate
                 zh_hant="單篇文章最多獲得（以 LikeCoin 換算市價）"
                 zh_hans="单篇文章最多获得（以 LikeCoin 换算市价）"
-                en="Heighest Rewarded Article"
+                en="Highest Rewarded Article"
               />
             </p>
             <span className="num">US$ 2K</span>

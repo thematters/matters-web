@@ -26,7 +26,7 @@ const CircleInvitationFailedInfo = () => (
       <Translate
         zh_hant="轉付費訂閱過程出錯"
         zh_hans="转付费订阅过程出错"
-        en="Subscription failed"
+        en="Subscription Failed"
       />
     }
     placement="left"

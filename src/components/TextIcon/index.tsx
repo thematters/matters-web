@@ -21,6 +21,7 @@ export interface TextIconProps {
   size?: 'xs' | 'sm' | 'sm-s' | 'md-s' | 'md' | 'xm' | 'lg'
   spacing?: 0 | 'xxxtight' | 'xxtight' | 'xtight' | 'tight' | 'base'
   weight?: 'light' | 'normal' | 'md' | 'semibold' | 'bold'
+  allowUserSelect?: boolean
 
   textPlacement?: 'bottom' | 'left' | 'right'
   textDecoration?: 'underline'
@@ -48,6 +49,7 @@ export const TextIcon: React.FC<TextIconProps> = ({
   size = 'sm',
   spacing = 'xxtight',
   weight,
+  allowUserSelect = false,
 
   textPlacement = 'right',
   textDecoration,
@@ -56,6 +58,7 @@ export const TextIcon: React.FC<TextIconProps> = ({
 }) => {
   const textIconClasses = classNames({
     'text-icon': true,
+    'none-select': !allowUserSelect,
     [color || '']: !!color,
     [`text-${textPlacement}`]: true,
     [`text-${textDecoration}`]: true,

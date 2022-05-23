@@ -12,7 +12,7 @@ import styles from './styles.css'
 
 export const SeedBadge = () => (
   <Tooltip
-    content={<Translate zh_hant="種子用戶" zh_hans="种子用户" en="Seed user" />}
+    content={<Translate zh_hant="種子用戶" zh_hans="种子用户" en="Seed User" />}
   >
     <span className="badge">
       {withIcon(IconSeedBadge)({})}
@@ -27,7 +27,7 @@ export const GoldenMotorBadge = () => (
       <Translate
         zh_hant="支持超過 100 次"
         zh_hans="支持超过 100 次"
-        en="Support more than 100 times"
+        en="More than 100 supports"
       />
     }
   >

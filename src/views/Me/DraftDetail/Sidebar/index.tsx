@@ -92,8 +92,8 @@ const EditDraftSidebar = (props: BaseSidebarProps) => {
 
   return (
     <section className="sidebar">
-      <EditDraftCover {...props} disabled={disabled} />
       <EditDraftTags {...props} disabled={disabled} />
+      <EditDraftCover {...props} disabled={disabled} />
       <EditDraftCollection {...props} disabled={disabled} />
       <EditDraftCircle {...props} disabled={disabled} />
 

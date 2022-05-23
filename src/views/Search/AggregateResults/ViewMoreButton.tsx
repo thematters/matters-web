@@ -25,7 +25,7 @@ const ViewMoreButton = ({ q, type }: ViewMoreButtonProps) => {
       <Translate
         zh_hant="更多作品搜索結果"
         zh_hans="更多作品搜索结果"
-        en="more results for works"
+        en="more results for articles"
       />
     )
 

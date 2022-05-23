@@ -18,14 +18,14 @@ const BannedHeader = () => (
   <Translate
     zh_hant="此作品因違反用戶協定而被強制隱藏。"
     zh_hans="此作品因违反用户协定而被强制隐藏。"
-    en="This work is archived because of violating user agreement."
+    en="This work is archived due to violation of user agreement."
   />
 )
 const ArchivedHeader = () => (
   <Translate
     zh_hant="此作品已在站內隱藏。"
     zh_hans="此作品已在站內隐藏。"
-    en="This work is achived on Matters."
+    en="This work is archived on Matters."
   />
 )
 

@@ -59,7 +59,7 @@ const TagRemoveEditor = ({ id, editor, closeDialog }: Props) => {
           <Translate
             zh_hant="將無法繼續參與「精選」作品管理。"
             zh_hans="将无法继续参与「精选」作品管理。"
-            en="will not be able to manage selected feed."
+            en="user will not be able to manage selected feed."
           />
         </p>
       </Dialog.Message>
@@ -95,7 +95,7 @@ const TagRemoveEditor = ({ id, editor, closeDialog }: Props) => {
                     <Translate
                       zh_hant="移除協作者成功"
                       zh_hans="移除协作者成功"
-                      en="collaborator removal success"
+                      en="successfully removed collaborator"
                     />
                   ),
                   duration: 2000,
@@ -109,7 +109,7 @@ const TagRemoveEditor = ({ id, editor, closeDialog }: Props) => {
           <Translate
             zh_hant="確認移除"
             zh_hans="确认移除"
-            en="confirm removal"
+            en="Confirm Removal"
           />
         </Dialog.Footer.Button>
 

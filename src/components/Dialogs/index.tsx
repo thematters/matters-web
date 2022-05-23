@@ -18,6 +18,9 @@ export * from './TagEditorDialog'
 export * from './TagLeaveDialog'
 export * from './RecommendTagDialog'
 
+// Re-use
+export * from './SearchSelectDialog'
+
 // Payment
 export * from './AddCreditDialog'
 export * from './ResetPaymentPasswordDialog'

@@ -12,7 +12,7 @@ export const EmptyComment = ({
         <Translate
           zh_hant="還沒有評論"
           zh_hans="还没有评论"
-          en="No comments."
+          en="No Comments."
         />
       )
     }

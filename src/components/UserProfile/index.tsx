@@ -80,7 +80,11 @@ export const UserProfile = () => {
           <span />
           {user && (
             <section className="buttons">
-              <ShareButton />
+              <ShareButton
+                tags={
+                  [user.displayName, user.userName].filter(Boolean) as string[]
+                }
+              />
               <DropdownActions user={user} isMe={isMe} />
               <style jsx>{styles}</style>
             </section>
@@ -119,7 +123,7 @@ export const UserProfile = () => {
             <Translate
               zh_hant="此帳戶因為違反社區約章而被註銷"
               zh_hans="此帐户因为违反社区约章而被注销"
-              en="This account is archived because of violating community guidelines"
+              en="This account is archived due to violation of community guidelines"
             />
           }
         />

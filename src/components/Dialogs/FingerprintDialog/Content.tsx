@@ -130,7 +130,7 @@ const FingerprintDialogContent = ({
           <Translate
             zh_hant=" 是志願提供 IPFS 網絡入口的節點，你可以使用任意公共節點地址對作品進行傳播。"
             zh_hans=" 是志愿提供 IPFS 网络入口的节点，你可以使用任意公共节点地址对作品进行传播。"
-            en=" are volunteer nodes that provice access to IPFS, you can use them to share your work."
+            en=" are volunteer nodes that provice access to IPFS, You can use them to share your work."
           />
         </p>
       </section>
