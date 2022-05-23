@@ -30,7 +30,7 @@ const ArticleMentionedYouNotice = ({ notice }: { notice: NoticeType }) => {
           <Translate
             zh_hant=" 在作品中提及了你"
             zh_hans=" 在作品中提及了你"
-            en=" mentioned you in a article"
+            en=" mentioned you in an article"
           />
         </NoticeHead>
 

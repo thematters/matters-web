@@ -29,7 +29,7 @@ const PaymentPayoutNotice = ({ notice }: { notice: NoticeType }) => {
             zh_hant={' 提現流程已開始，到帳時間請關注銀行提醒。'}
             zh_hans={' 提现流程已开始，到帐时间请关注银行提醒。'}
             en={
-              ' withdraw process has started, please refer to your bank for the payout date.'
+              ' withdrawal process has started. Please refer to your bank for payout status.'
             }
           />
         </p>

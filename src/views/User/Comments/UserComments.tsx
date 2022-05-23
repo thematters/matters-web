@@ -87,6 +87,7 @@ const UserComments = () => {
           zh_hans: `${user.displayName} 发布的评论`,
           en: `${user.displayName}'s comments`,
         }}
+        // keywords={...} // show user's top10 most used tags?
         description={user.info.description}
         image={user.info.profileCover || IMAGE_LOGO_192.src}
       />

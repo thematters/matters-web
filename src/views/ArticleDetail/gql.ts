@@ -77,6 +77,74 @@ export const ARTICLE_DETAIL_PUBLIC = gql`
   ${CircleWall.fragments.circle.private}
 `
 
+export const ARTICLE_DETAIL_PUBLIC_BY_NODE_ID = gql`
+  query ArticleDetailPublicByNodeId(
+    $id: ID!
+    $includeCanSuperLike: Boolean = true
+  ) {
+    article: node(input: { id: $id }) {
+      ... on Article {
+        id
+        title
+        slug
+        mediaHash
+        state
+        cover
+        summary
+        summaryCustomized
+        createdAt
+        revisedAt
+        language
+        author {
+          id
+          paymentPointer
+          ...UserDigestRichUserPublic
+          ...UserDigestRichUserPrivate
+        }
+        collection(input: { first: 0 }) @connection(key: "articleCollection") {
+          totalCount
+        }
+        access {
+          type
+          circle {
+            id
+            ...CircleWallCirclePublic
+            ...CircleWallCirclePrivate
+          }
+        }
+        license
+        drafts {
+          id
+          mediaHash
+          publishState
+        }
+        ...MetaInfoArticle
+        ...ContentArticle
+        ### ...TagListArticle
+        ...RelatedArticles
+        ...StateArticle
+        ...ToolbarArticlePublic
+        ...ToolbarArticlePrivate
+        ...SupportWidgetArticlePublic
+        ...SupportWidgetArticlePrivate
+      }
+    }
+  }
+  ${MetaInfo.fragments.article}
+  ${Content.fragments.article}
+  ### $ {TagList.fragments.article}
+  ${RelatedArticles.fragments.article}
+  ${State.fragments.article}
+  ${UserDigest.Rich.fragments.user.public}
+  ${UserDigest.Rich.fragments.user.private}
+  ${Toolbar.fragments.article.public}
+  ${Toolbar.fragments.article.private}
+  ${SupportWidget.fragments.article.public}
+  ${SupportWidget.fragments.article.private}
+  ${CircleWall.fragments.circle.public}
+  ${CircleWall.fragments.circle.private}
+`
+
 export const ARTICLE_DETAIL_PRIVATE = gql`
   query ArticleDetailPrivate(
     $mediaHash: String!

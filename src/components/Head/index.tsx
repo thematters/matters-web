@@ -41,10 +41,10 @@ export const Head: React.FC<HeadProps> = (props) => {
       ? `${props.keywords.join(',')},matters,matters.news,創作有價`
       : 'matters,matters.news,創作有價',
     url: props.path
-      ? `//${process.env.NEXT_PUBLIC_SITE_DOMAIN}${props.path}`
+      ? `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}${props.path}`
       : router.asPath
-      ? `//${process.env.NEXT_PUBLIC_SITE_DOMAIN}${router.asPath}`
-      : '//' + process.env.NEXT_PUBLIC_SITE_DOMAIN,
+      ? `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}${router.asPath}`
+      : 'https://' + process.env.NEXT_PUBLIC_SITE_DOMAIN,
     image: props.image || IMAGE_INTRO.src,
   }
   const canonicalUrl = head.url?.split('#')[0].split('?')[0]
@@ -55,7 +55,7 @@ export const Head: React.FC<HeadProps> = (props) => {
       <meta
         name="viewport"
         key="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover"
+        content="width=device-width, viewport-fit=cover"
       />
       <title>{head.title}</title>
       <meta name="description" key="description" content={head.description} />
@@ -134,7 +134,11 @@ export const Head: React.FC<HeadProps> = (props) => {
         content="zh_CN"
       />
       <meta name="twitter:url" key="twitter:url" content={head.url} />
-      <meta name="twitter:card" key="twitter:card" content="summary" />
+      <meta
+        name="twitter:card"
+        key="twitter:card"
+        content="summary_large_image"
+      />
       <meta name="twitter:title" key="twitter:title" content={head.title} />
       <meta
         name="twitter:description"

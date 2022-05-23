@@ -123,11 +123,11 @@ const Content = () => {
               <Translate
                 zh_hant="目前總訂閱人數"
                 zh_hans="目前总订阅人数"
-                en="Current Total"
+                en=""
               />
             }
             value={subscriber.currentSubscriber + subscriber.currentInvitee}
-            unit={<Translate zh_hant="人" zh_hans="人" en="" />}
+            unit={<Translate zh_hant="人" zh_hans="人" en="subscribers" />}
           />
         </InfoTiles.Group>
         <InfoTiles.Group>

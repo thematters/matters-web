@@ -33,7 +33,7 @@ const PayCallbackSuccess = () => {
               <Translate
                 zh_hant="支付成功！"
                 zh_hans="支付成功！"
-                en="Payment success!"
+                en="Payment Successful!"
               />
             </h2>
 

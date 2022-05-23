@@ -46,7 +46,6 @@ const fragments = {
           id
           address
           hasNFTs
-          # nfts { id }
         }
       }
     }

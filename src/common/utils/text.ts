@@ -12,6 +12,15 @@ export const stripHtml = (html: string | null, replacement = ' ') =>
     .replace(/&lt;/g, '<')
     .replace(/&gt;/g, '>')
 
+const nonAlphaNumUni = String.raw`[^\p{Letter}\p{Number}]+`
+const prefixOrSuffixNonAlphaNum = new RegExp(
+  `(^${nonAlphaNumUni}|${nonAlphaNumUni}$)`,
+  'gu'
+)
+
+export const stripPunctPrefixSuffix = (content: string) =>
+  `${content}`.replace(prefixOrSuffixNonAlphaNum, '') // strip prefix or suffix punct
+
 export const makeSummary = (html: string, length = 140) => {
   // buffer for search
   const buffer = 20
@@ -128,3 +137,10 @@ export const optimizeEmbed = (content: string) => {
  */
 export const measureDiffs = (source: string, target: string) =>
   distance(source, target)
+
+// for Twitter and others which do not support non-English in URL
+export const stripNonEnglishUrl = (url: string) =>
+  // get the beginning portion of all printable ascii, and must ends with a '\w'
+  url.match(/^[\x21-\x7e]+[A-Za-z0-9]/)?.[0] ||
+  // fallback to full url
+  url

@@ -8,9 +8,13 @@ const EDIT_MODE_ARTICLE_DRAFTS = gql`
       id
       content
       mediaHash
+      tags {
+        content
+      }
       drafts {
         id
         mediaHash
+        tags
         publishState
         ...EditorDraft
       }

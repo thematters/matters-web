@@ -90,7 +90,7 @@ const PendingInvites = () => {
           <Translate
             zh_hant="你還沒有邀請任何用戶喔！點擊新增邀請，添加站內或站外朋友加入圍爐贈與對方免費資格的固定時長"
             zh_hans="你还没有邀请任何用户喔！点击新增邀请，添加站内或站外朋友加入围炉赠与对方免费资格的固定时长"
-            en="You have not invited anyone! Invite others to join your circle by clicking add trial invitation button."
+            en='You have not invited anyone yet! Invite friends to join your circle by clicking "invite friends".'
           />
         }
       />

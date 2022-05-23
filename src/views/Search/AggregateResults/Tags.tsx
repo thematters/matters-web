@@ -49,7 +49,7 @@ const AggregateTagResults = () => {
       <List>
         {edges.map(
           ({ node, cursor }, i) =>
-            node.__typename === 'Tag' && (
+            node.__typename === 'TagSearchResult' && (
               <List.Item key={cursor}>
                 <Card
                   spacing={['base', 'base']}

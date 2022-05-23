@@ -193,8 +193,10 @@ const UserArticles = () => {
           ? `${user.displayName} has unlocked new user reward, join Matters to get creator reward`
           : `${user.displayName}'s creative space`,
       }}
+      // title={`Matters - ${user.displayName} (@${user.userName})`}
       noSuffix={isShareOnboardingTasks}
       description={user.info.description}
+      // keywords={...} // show user's top10 most used tags?
       image={
         user.info.profileCover ||
         `//${process.env.NEXT_PUBLIC_SITE_DOMAIN}${PROFILE_COVER_DEFAULT.src}`

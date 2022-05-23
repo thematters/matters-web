@@ -7,7 +7,9 @@ import {
   Button,
   DropdownDialog,
   IconEdit16,
-  IconLogbook24,
+  IconLogbook1,
+  IconLogbook2,
+  // IconLogbook24,
   IconMore32,
   IconSettings32,
   LanguageContext,
@@ -83,9 +85,11 @@ const BaseDropdownActions = ({
   openBlockUserDialog,
 }: BaseDropdownActionsProps) => {
   const { lang } = useContext(LanguageContext)
-  const logbookUrl = `${process.env.NEXT_PUBLIC_TRAVELOGGERS_URL}${
+  const address = user.info.cryptoWallet?.address
+  const logbook1Url = `${process.env.NEXT_PUBLIC_TRAVELOGGERS_URL}${
     lang === 'en' ? '/' : '/zh/'
-  }owner/${user.info.cryptoWallet?.address}`
+  }owner/${address}`
+  const logbook2Url = `${process.env.NEXT_PUBLIC_LOGBOOKS_URL}/bookcase/?address=${address}`
 
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
     <Menu width={isInDropdown ? 'sm' : undefined}>
@@ -98,11 +102,34 @@ const BaseDropdownActions = ({
       )}
 
       {hasLogbook && (
-        <Menu.Item htmlHref={logbookUrl} htmlTarget="_blank">
-          <TextIcon icon={<IconLogbook24 size="md" />} size="md" spacing="base">
-            <Translate id="logbook" />
-          </TextIcon>
-        </Menu.Item>
+        <>
+          <Menu.Item htmlHref={logbook2Url} htmlTarget="_blank">
+            <TextIcon
+              icon={<IconLogbook2 size="md" />}
+              size="md"
+              spacing="base"
+            >
+              <Translate
+                zh_hant="航行日誌 2.0"
+                zh_hans="航行日志 2.0"
+                en="Logbook 2.0"
+              />
+            </TextIcon>
+          </Menu.Item>
+          <Menu.Item htmlHref={logbook1Url} htmlTarget="_blank">
+            <TextIcon
+              icon={<IconLogbook1 size="md" />}
+              size="md"
+              spacing="base"
+            >
+              <Translate
+                zh_hant="航行日誌 1.0"
+                zh_hans="航行日志 1.0"
+                en="Logbook 1.0"
+              />
+            </TextIcon>
+          </Menu.Item>
+        </>
       )}
 
       {hasBlockUser && (
@@ -145,9 +172,7 @@ const DropdownActions = ({ user, isMe }: DropdownActionsProps) => {
   const controls = {
     hasEditProfile: isMe,
     hasBlockUser: !isMe,
-    hasLogbook: !!user.info.cryptoWallet?.hasNFTs /*
-      Array.isArray(user.info.cryptoWallet?.nfts) &&
-      (user.info.cryptoWallet?.nfts || []).length > 0, */,
+    hasLogbook: !!user.info.cryptoWallet?.hasNFTs,
   }
 
   if (_isEmpty(_pickBy(controls))) {

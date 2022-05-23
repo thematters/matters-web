@@ -1,6 +1,6 @@
 import { useLazyQuery } from '@apollo/react-hooks'
 import { useContext, useEffect, useState } from 'react'
-import { useDebounce } from 'use-debounce'
+import { useDebouncedCallback } from 'use-debounce'
 
 import {
   EmptySearch,
@@ -13,7 +13,12 @@ import {
 import { toUserDigestMiniPlaceholder } from '~/components/UserDigest/Mini'
 
 import { INPUT_DEBOUNCE } from '~/common/enums'
-import { analytics, isValidEmail, mergeConnections } from '~/common/utils'
+import {
+  analytics,
+  isValidEmail,
+  mergeConnections,
+  stripPunctPrefixSuffix,
+} from '~/common/utils'
 
 import SearchSelectNode from '../SearchSelectNode'
 import styles from '../styles.css'
@@ -86,11 +91,21 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
   const [searching, setSearching] = useState(false)
   const [searchingNodes, setSearchingNodes] = useState<SelectNode[]>([])
 
-  // Data Fetching
   const [searchKey, setSearchKey] = useState('')
-  const [debouncedSearchKey] = useDebounce(searchKey, INPUT_DEBOUNCE)
+  const [debouncedSearchKey, setdebouncedSearchKey] = useState('')
+  const debouncedSetSearchKey = useDebouncedCallback((sk0) => {
+    const sk = isTag ? stripPunctPrefixSuffix(sk0) : sk0
+    setdebouncedSearchKey(sk)
+    setSearchKey(sk)
+  }, INPUT_DEBOUNCE)
+
+  // Data Fetching
   const [lazySearch, { data, loading, fetchMore }] =
-    usePublicLazyQuery<SelectSearch>(SELECT_SEARCH)
+    usePublicLazyQuery<SelectSearch>(
+      SELECT_SEARCH,
+      {},
+      { publicQuery: !viewer.isAuthed }
+    )
   const [
     loadList,
     { data: listData, loading: listLoading, fetchMore: fetchMoreList },
@@ -153,6 +168,7 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
   // handling changes from search input
   const onSearchInputChange = (value: string) => {
     setSearchKey(value)
+    debouncedSetSearchKey(value)
 
     if (hasListMode) {
       setMode(value ? 'search' : 'list')
@@ -228,7 +244,8 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
     searchKey &&
     createTag &&
     !searchNodes.some(
-      (node) => node.__typename === 'Tag' && node.content === searchKey
+      (node) =>
+        node.__typename === 'TagSearchResult' && node.content === searchKey
     )
   const canInviteEmail =
     isUser &&
@@ -272,7 +289,9 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
                   {canCreateTag && (
                     <li>
                       <CreateTag
-                        tag={toDigestTagPlaceholder(searchKey)}
+                        tag={toDigestTagPlaceholder(
+                          stripPunctPrefixSuffix(searchKey)
+                        )}
                         onClick={addNodeToStaging}
                       />
                     </li>

@@ -87,7 +87,7 @@ const AcceptedInvites = () => {
           <Translate
             zh_hant="還沒有任何用戶回覆你的邀請喔！"
             zh_hans="还没有任何用户回覆你的邀请喔！"
-            en="Invitees have not accepted your inivtations."
+            en="friends have not accepted your inivtations."
           />
         }
       />

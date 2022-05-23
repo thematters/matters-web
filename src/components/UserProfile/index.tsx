@@ -6,7 +6,6 @@ import {
   Error,
   Expandable,
   FollowUserButton,
-  LanguageContext,
   Layout,
   Spinner,
   Throw404,
@@ -34,6 +33,7 @@ import DropdownActions from './DropdownActions'
 import { FollowersDialog } from './FollowersDialog'
 import { FollowingDialog } from './FollowingDialog'
 import { USER_PROFILE_PRIVATE, USER_PROFILE_PUBLIC } from './gql'
+import { LogbookDialog } from './LogbookDialog'
 import styles from './styles.css'
 import WalletAddress from './WalletAddress'
 
@@ -44,7 +44,6 @@ import { UserProfileUserPublic } from './__generated__/UserProfileUserPublic'
 export const UserProfile = () => {
   const { getQuery } = useRoute()
   const viewer = useContext(ViewerContext)
-  const { lang } = useContext(LanguageContext)
 
   // public data
   const userName = getQuery('name')
@@ -81,7 +80,11 @@ export const UserProfile = () => {
           <span />
           {user && (
             <section className="buttons">
-              <ShareButton />
+              <ShareButton
+                tags={
+                  [user.displayName, user.userName].filter(Boolean) as string[]
+                }
+              />
               <DropdownActions user={user} isMe={isMe} />
               <style jsx>{styles}</style>
             </section>
@@ -120,7 +123,7 @@ export const UserProfile = () => {
             <Translate
               zh_hant="此帳戶因為違反社區約章而被註銷"
               zh_hans="此帐户因为违反社区约章而被注销"
-              en="This account is archived because of violating community guidelines"
+              en="This account is archived due to violation of community guidelines"
             />
           }
         />
@@ -141,9 +144,6 @@ export const UserProfile = () => {
   const isUserArchived = userState === 'archived'
   const isUserBanned = userState === 'banned'
   const isUserInactive = isUserArchived || isUserBanned
-  const logbookUrl = `${process.env.NEXT_PUBLIC_TRAVELOGGERS_URL}${
-    lang === 'en' ? '/' : '/zh/'
-  }owner/${user.info.cryptoWallet?.address}`
 
   /**
    * Inactive User
@@ -177,6 +177,9 @@ export const UserProfile = () => {
     )
   }
 
+  const isOwner =
+    user.info.cryptoWallet?.address === viewer.info.cryptoWallet?.address
+
   /**
    * Active or Onboarding User
    */
@@ -199,9 +202,32 @@ export const UserProfile = () => {
                   />
                 }
               >
-                <a href={logbookUrl} target="_blank">
-                  <Avatar size="xxxl" user={user} inProfile />
-                </a>
+                <LogbookDialog
+                  title={
+                    <Translate
+                      en={
+                        isOwner ? 'My Logbook' : `${user.displayName}'s Logbook`
+                      }
+                      zh_hant={
+                        isOwner
+                          ? '我的 Logbook'
+                          : `${user.displayName} 的航行日誌`
+                      }
+                      zh_hans={
+                        isOwner
+                          ? '我的 Logbook'
+                          : `${user.displayName} 的航行日志`
+                      }
+                    />
+                  }
+                  address={user.info.cryptoWallet?.address as string}
+                >
+                  {({ openDialog }) => (
+                    <button type="button" onClick={openDialog}>
+                      <Avatar size="xxxl" user={user} inProfile />
+                    </button>
+                  )}
+                </LogbookDialog>
               </Tooltip>
             ) : (
               <Avatar size="xxxl" user={user} inProfile />

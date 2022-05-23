@@ -8,13 +8,13 @@ export const EmptyBookmark = () => (
         <Translate
           zh_hant="看到好作品"
           zh_hans="看到好作品"
-          en="find a good work"
+          en="bookmark articles you like"
         />
         <br />
         <Translate
           zh_hant="可以點右下角收藏哦"
           zh_hans="可以点右下角收藏哦"
-          en="bookmark it by clicking the bottom right button"
+          en="by clicking the bottom right corner"
         />
       </>
     }

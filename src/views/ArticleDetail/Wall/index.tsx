@@ -55,7 +55,7 @@ const Wall = ({ show }: WallProps) => {
                 <Translate
                   zh_hant="一鍵登入，即可加入全球最優質中文創作社區"
                   zh_hans="一键登入，即可加入全球最优质中文创作社区"
-                  en="Login with one click and join the most diverse creator community."
+                  en="Log in with one click and join the most diverse creator community globally."
                 />
               </p>
 

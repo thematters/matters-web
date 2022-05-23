@@ -99,7 +99,7 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
             <Translate
               zh_hant="確認刪除草稿，草稿會馬上消失。"
               zh_hans="确认删除草稿，草稿会马上消失。"
-              en="Confirm draft deletion, and it will disappear at once."
+              en="Are you sure you want to delete draft?."
             />
           </p>
         </Dialog.Message>

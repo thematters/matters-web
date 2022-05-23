@@ -17,7 +17,7 @@ const BlockedButton = ({ count, total }: { count?: number; total: number }) => (
               <Translate
                 zh_hant="因为作者设置，你無法讚賞此文章。"
                 zh_hans="因为作者设置，你无法赞赏此文章。"
-                en="Sorry, the author does not allow you to appreciate this article.'"
+                en="Sorry, the author has disabled likes for this article.'"
               />
             ),
           },

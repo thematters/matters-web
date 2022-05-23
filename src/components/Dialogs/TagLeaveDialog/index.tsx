@@ -34,7 +34,7 @@ const BaseDialog = ({ children, isOwner }: Props) => {
             <Translate
               zh_hant="辭去權限"
               zh_hans="辞去权限"
-              en="resign from tag"
+              en="resign as tag maintainer"
             />
           }
           closeDialog={closeDialog}
@@ -53,7 +53,7 @@ const BaseDialog = ({ children, isOwner }: Props) => {
             <Translate
               zh_hant="如果辭去權限，你將無法繼續管理標籤。"
               zh_hans="如果辞去权限，你将无法继续管理标签。"
-              en="After resignation, you will not be to manage tag."
+              en="After resignation, you will not be able to manage tags."
             />
           </p>
         </Dialog.Message>
@@ -81,7 +81,7 @@ const BaseDialog = ({ children, isOwner }: Props) => {
                       <Translate
                         zh_hant="辭去權限成功"
                         zh_hans="辞去权限成功"
-                        en="resignation success"
+                        en="Resignation Success"
                       />
                     ),
                     duration: 2000,
@@ -95,7 +95,7 @@ const BaseDialog = ({ children, isOwner }: Props) => {
             <Translate
               zh_hant="確認辭去"
               zh_hans="确认辞去"
-              en="confirm resignation"
+              en="Confirm Resignation"
             />
           </Dialog.Footer.Button>
 

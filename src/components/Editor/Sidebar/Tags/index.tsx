@@ -1,6 +1,12 @@
-import { IconHashTag24, Tag } from '~/components'
-import { SearchSelectDialog } from '~/components/Dialogs/SearchSelectDialog'
+import {
+  IconHashTag24,
+  SearchSelectDialog,
+  // SearchSelectNode,
+  Tag,
+} from '~/components'
 import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
+
+import { analytics } from '~/common/utils'
 
 import Box from '../Box'
 import styles from './styles.css'
@@ -41,7 +47,20 @@ const SidebarTags = ({
             <ul>
               {tags.map((tag) => (
                 <li key={tag.id}>
-                  <Tag tag={tag} type="inline" disabled />
+                  <Tag
+                    tag={tag}
+                    type="inline"
+                    disabled
+                    hasClose
+                    removeTag={() => {
+                      // console.log('in removeTag:', tag)
+                      editTags(tags.filter((t) => t.content !== tag.content))
+                      analytics.trackEvent('click_button', {
+                        type: 'remove_tag',
+                        pageType: 'edit_draft',
+                      })
+                    }}
+                  />
                 </li>
               ))}
 

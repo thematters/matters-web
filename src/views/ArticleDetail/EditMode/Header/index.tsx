@@ -113,10 +113,14 @@ const EditModeHeader = ({
       <Translate
         zh_hant="正文及作品管理剩 "
         zh_hans="正文及作品管理剩 "
-        en="content and article management has "
+        en=""
       />
       {revisionCountLeft}
-      <Translate zh_hant=" 版修訂" zh_hans=" 次修订" en=" republish left" />
+      <Translate
+        zh_hant=" 版修訂"
+        zh_hans=" 次修订"
+        en=" revisions remaining"
+      />
       <span className={isOverDiffLimit ? 'red' : 'green'}>
         &nbsp;{diffCount}/50&nbsp;&nbsp;&nbsp;
       </span>
@@ -134,7 +138,7 @@ const EditModeHeader = ({
               <Translate
                 zh_hant="正文及作品管理修訂次數已達上限"
                 zh_hans="正文及作品管理修订次数已达上限"
-                en="You have reached the limit of republish"
+                en="You have reached the limit of republished articles"
               />
             )}
           </>
@@ -152,7 +156,7 @@ const EditModeHeader = ({
             <Translate
               zh_hant="保存修訂"
               zh_hans="保存修订"
-              en="Save Revision"
+              en="Save Revisions"
             />
           )
         }

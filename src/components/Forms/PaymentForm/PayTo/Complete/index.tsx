@@ -142,7 +142,7 @@ const Complete: React.FC<Props> = ({ callback, recipient, targetId }) => {
                 <Translate
                   zh_hant="支持過這篇作品的人也支持了"
                   zh_hans="支持过这篇作品的人也支持了"
-                  en="Readers support this work also supported:"
+                  en="Supporters of this work also supported:"
                 />
               </TextIcon>
 

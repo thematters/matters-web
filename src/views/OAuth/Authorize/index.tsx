@@ -90,7 +90,7 @@ const BaseOAuthAuthorize = () => {
           <Translate
             zh_hant=" 正在申請訪問你的 Matters 帳戶數據："
             zh_hans=" 正在申请访问你的 Matters 帐户数据："
-            en=" is asking to access your Matters account:"
+            en=" has requested permission to access your Matters account:"
           />
         </>
       }
@@ -113,7 +113,7 @@ const BaseOAuthAuthorize = () => {
               <Translate
                 zh_hant="讀取你的公開資料"
                 zh_hans="读取你的公开资料"
-                en="access to your public profile"
+                en="view your public profile"
               />
             </li>
             {validScopes &&

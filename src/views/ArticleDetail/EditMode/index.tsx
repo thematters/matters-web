@@ -196,8 +196,8 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
           <Layout.Main
             aside={
               <section className="sidebar">
-                <Sidebar.Cover {...coverProps} />
                 <Sidebar.Tags {...tagsProps} />
+                <Sidebar.Cover {...coverProps} />
                 <Sidebar.Collection {...collectionProps} />
                 <Sidebar.Management {...accessProps} />
                 <style jsx>{styles}</style>

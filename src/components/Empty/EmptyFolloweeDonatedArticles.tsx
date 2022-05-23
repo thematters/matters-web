@@ -7,7 +7,7 @@ export const EmptyFolloweeDonatedArticles = () => (
       <Translate
         zh_hant="還沒有支持的作品"
         zh_hans="还没有支持的作品"
-        en="No donated articles."
+        en="No donations"
       />
     }
   />

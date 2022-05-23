@@ -41,7 +41,7 @@ const ArticleSecretSection = () => {
                 <Translate
                   zh_hans="（仅你可见，请妥善保管）"
                   zh_hant="（僅你可見，請妥善保管）"
-                  en="(Only you can see the secret, please keep it confidential)"
+                  en="(Only visible to you. Please keep it confidential)"
                 />
               </span>
             </span>

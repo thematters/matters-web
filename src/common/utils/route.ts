@@ -4,9 +4,11 @@ import queryString from 'query-string'
 
 import { PATHS, ROUTES } from '~/common/enums'
 
+import { fromGlobalId } from './globalId'
 import { parseURL } from './url'
 
 interface ArticleArgs {
+  id?: string
   slug: string
   mediaHash: string | null
   author: {
@@ -72,11 +74,21 @@ export const toPath = (args: ToPathArgs): { href: string } => {
   switch (args.page) {
     case 'articleDetail': {
       const {
+        id,
         slug,
         mediaHash,
         author: { userName },
       } = args.article
-      const asUrl = `/@${userName}/${slug}-${mediaHash}`
+
+      let asUrl = `/@${userName}/${slug}-${mediaHash}`
+      try {
+        if (id) {
+          const { id: articleId } = fromGlobalId(id as string)
+          asUrl = `/@${userName}/${articleId}-${slug}-${mediaHash}`
+        }
+      } catch (err) {
+        console.error(`unable to parse global id:`, { id }, err)
+      }
 
       return {
         href: args.fragment ? `${asUrl}#${args.fragment}` : asUrl,

@@ -107,7 +107,7 @@ const BaseInviteePreSend = ({ closeDialog, confirm, invitees }: Props) => {
           <Translate
             zh_hant="用戶將收到你的圍爐免費資格邀請函，設置免費的時限，邀請他們一起加入吧！"
             zh_hans="用户将收到你的围炉免费资格邀请函，设置免费的时限，邀请他们一起加入吧！"
-            en="Invitees will receiving trial invitations, so set the free period and send invitations"
+            en="Friends will receive free trial invitations to Circle. Set up your invitations now!"
           />
         </p>
       </Dialog.Message>

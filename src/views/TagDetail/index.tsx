@@ -24,6 +24,9 @@ import { getErrorCodes, QueryError } from '~/components/GQL'
 import ShareButton from '~/components/Layout/Header/ShareButton'
 
 import { ERROR_CODES } from '~/common/enums'
+import { makeTitle, stripPunctPrefixSuffix } from '~/common/utils'
+
+import IMAGE_INTRO from '@/public/static/images/intro.jpg'
 
 import TagDetailArticles from './Articles'
 import ArticlesCount from './ArticlesCount'
@@ -74,6 +77,15 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
   const isOfficial = !!tag?.isOfficial
   const canAdd = !isOfficial || (isOfficial && isMatty)
 
+  const title =
+    (tag.description ? `${makeTitle(tag.description, 80)} ` : '') +
+    '#' +
+    stripPunctPrefixSuffix(tag.content)
+  const keywords = tag.content
+    .split(/\s+/)
+    .filter(Boolean)
+    .map(stripPunctPrefixSuffix)
+
   /**
    * Render
    */
@@ -85,7 +97,7 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
           <>
             <span />
 
-            <ShareButton />
+            <ShareButton title={title} tags={keywords} />
 
             <DropdownActions
               isOwner={isOwner}
@@ -98,7 +110,25 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
         mode="transparent-absolute"
       />
 
-      <Head title={`#${tag.content}`} />
+      <Head
+        title={title}
+        description={tag.description || stripPunctPrefixSuffix(tag.content)}
+        keywords={keywords} // add top10 most using author names?
+        image={
+          tag.cover ||
+          `//${process.env.NEXT_PUBLIC_SITE_DOMAIN}${IMAGE_INTRO.src}`
+        }
+        jsonLdData={{
+          '@context': 'https://schema.org',
+          '@type': 'Organization',
+          name: stripPunctPrefixSuffix(tag.content),
+          description: tag.description,
+          image:
+            tag.cover ||
+            `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}${IMAGE_INTRO.src}`,
+          url: `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/tags/${tag.id}`,
+        }}
+      />
 
       <PullToRefresh>
         <TagCover tag={tag} />

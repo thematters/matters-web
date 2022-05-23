@@ -7,7 +7,7 @@ export const EmptyNotice = () => (
       <Translate
         zh_hant="還沒有通知"
         zh_hans="还没有通知"
-        en="No notifications."
+        en="No Notifications."
       />
     }
   />

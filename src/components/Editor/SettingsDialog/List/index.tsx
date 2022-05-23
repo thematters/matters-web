@@ -65,9 +65,10 @@ const SettingsList = ({
             title={
               <Translate zh_hant="添加標籤" zh_hans="添加标签" en="Add Tags" />
             }
+            subTitle={tagsCount === 0 && <Translate id="hintAddTag2" />}
             onClick={() => forward('tag')}
           >
-            <ListItem.NumberIndicator num={tagsCount} />
+            <ListItem.NumberIndicator num={tagsCount} withHintOverlay />
           </ListItem>
 
           <ListItem

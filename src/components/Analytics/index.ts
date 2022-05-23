@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useEffect, useRef } from 'react'
 
-import { ANALYTICS, ANALYTIC_TYPES, GA_TRACKING_ID } from '~/common/enums'
+import { ANALYTICS, ANALYTIC_TYPES } from '~/common/enums'
 import { deferTry, initializeFirebase } from '~/common/utils'
 
 import { useEventListener } from '../Hook'
@@ -50,13 +50,13 @@ const handleAnalytics = async ({
   if (type === ANALYTIC_TYPES.TRACK || type === ANALYTIC_TYPES.PAGE) {
     // GA & firebase tracking
     if (type === ANALYTIC_TYPES.PAGE) {
-      const path = window.location.pathname
+      // const path = window.location.pathname
       const referrer = _get(args[1], 'page_referrer')
 
-      window.gtag('config', GA_TRACKING_ID, {
+      /* window.gtag('config', GA_TRACKING_ID, {
         page_location: path,
         page_referrer: referrer,
-      })
+      }) */
 
       const eventData = {
         page_referrer: referrer,
@@ -78,9 +78,10 @@ const handleAnalytics = async ({
   if (type === ANALYTIC_TYPES.IDENTIFY) {
     // logged in
     if (id) {
-      window.gtag('config', GA_TRACKING_ID, {
+      /* window.gtag('config', GA_TRACKING_ID, {
         user_id: id,
-      })
+      }) */
+
       analytics?.setUserId(id, { global: true })
       analyticsDebugger(ANALYTIC_TYPES.IDENTIFY, {
         id,
