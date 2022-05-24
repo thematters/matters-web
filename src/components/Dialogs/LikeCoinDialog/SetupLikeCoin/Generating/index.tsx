@@ -46,6 +46,7 @@ const Generating: React.FC<Props> = ({ prevStep, nextStep }) => {
             <Translate
               zh_hant="哎呀，設置失敗了。"
               zh_hans="哎呀，设置失败了。"
+              en="Oops! Setup failed."
             />
           </h3>
         ) : (
@@ -56,6 +57,7 @@ const Generating: React.FC<Props> = ({ prevStep, nextStep }) => {
               <Translate
                 zh_hant="正在生成 Liker ID"
                 zh_hans="正在生成 Liker ID"
+                en="Generating Liker ID"
               />
             </p>
           </>

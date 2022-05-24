@@ -57,6 +57,7 @@ const Binding: React.FC<Props> = ({ prevStep, nextStep, windowRef }) => {
             <Translate
               zh_hant="哎呀，設置失敗了。"
               zh_hans="哎呀，设置失败了。"
+              en="Oops! Setup failed."
             />
           </h3>
         ) : (
@@ -67,6 +68,7 @@ const Binding: React.FC<Props> = ({ prevStep, nextStep, windowRef }) => {
               <Translate
                 zh_hant="請在新頁面完成綁定，不要關閉本窗口"
                 zh_hans="请在新页面完成绑定，不要关闭本窗口"
+                en="Processing... Don't leave the page."
               />
             </p>
           </>
