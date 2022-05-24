@@ -21,6 +21,7 @@ export const EDIT_ARTICLE = gql`
     $circle: ID
     $accessType: ArticleAccessType
     $license: ArticleLicenseType
+    $iscnPublish: Boolean
     $after: String
     $first: first_Int_min_0 = null
   ) {
@@ -34,6 +35,7 @@ export const EDIT_ARTICLE = gql`
         circle: $circle
         accessType: $accessType
         license: $license
+        iscnPublish: $iscnPublish
       }
     ) {
       id

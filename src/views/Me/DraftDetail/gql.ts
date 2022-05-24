@@ -32,6 +32,7 @@ export const editMetaFragment = gql`
       }
     }
     license
+    iscnPublish
   }
   ${ArticleDigestDropdown.fragments.article}
   ${assetFragment}
@@ -133,6 +134,16 @@ export const SET_COVER = gql`
 export const SET_TAGS = gql`
   mutation SetDraftTags($id: ID!, $tags: [String!]!) {
     putDraft(input: { id: $id, tags: $tags }) {
+      id
+      ...EditMetaDraft
+    }
+  }
+  ${editMetaFragment}
+`
+
+export const SET_PUBLISH_ISCN = gql`
+  mutation SetDraftPublishISCN($id: ID!, $iscnPublish: Boolean) {
+    putDraft(input: { id: $id, iscnPublish: $iscnPublish }) {
       id
       ...EditMetaDraft
     }

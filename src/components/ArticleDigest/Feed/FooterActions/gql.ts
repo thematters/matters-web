@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { BookmarkButton } from '~/components'
+import { BookmarkButton } from '~/components/Buttons/Bookmark'
 
 import DropdownActions from '../../DropdownActions'
 import DonationCount from './DonationCount'

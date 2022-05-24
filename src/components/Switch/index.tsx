@@ -2,7 +2,7 @@ import classNames from 'classnames'
 
 import { IconSpinner16 } from '~/components'
 
-import { randomString } from '~/common/utils'
+// import { randomString } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -19,7 +19,7 @@ export const Switch: React.FC<SwitchProps> = ({
   loading,
   disabled,
 }) => {
-  const fieldId = randomString()
+  // const fieldId = randomString()
 
   const labelClasses = classNames({
     switch: true,
@@ -27,10 +27,13 @@ export const Switch: React.FC<SwitchProps> = ({
   })
 
   return (
-    <label className={labelClasses} htmlFor={fieldId}>
+    <label
+      className={labelClasses}
+      // htmlFor={fieldId}
+    >
       <input
         type="checkbox"
-        id={fieldId}
+        // id={fieldId}
         onChange={onChange}
         checked={checked}
         disabled={disabled}

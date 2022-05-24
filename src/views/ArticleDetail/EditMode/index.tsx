@@ -14,6 +14,7 @@ import {
 import {
   SetCollectionProps,
   SetCoverProps,
+  SetPublishISCNProps,
   SetTagsProps,
   ToggleAccessProps,
 } from '~/components/Editor'
@@ -123,6 +124,10 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
     editCollection(data.article.collection.edges?.map(({ node }) => node) || [])
   }, [data?.article?.id])
 
+  const [iscnPublish, setIscnPublish] = useState<boolean>(
+    article.drafts?.[0].iscnPublish || false
+  )
+
   /**
    * Render
    */
@@ -143,7 +148,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
   }
 
   const drafts = data?.article?.drafts
-  const draft = drafts && drafts[0]
+  const draft = drafts?.[0]
   const revisionCountLeft =
     MAX_ARTICLE_REVISION_COUNT - (data?.article?.revisionCount || 0)
   const isOverRevisionLimit = revisionCountLeft <= 0
@@ -189,6 +194,14 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
     canToggleCircle: !!hasOwnCircle && !isReviseDisabled,
   }
 
+  const iscnPublishProps: SetPublishISCNProps = {
+    iscnPublish, // : false, // : draft.iscnPublish, // : boolean
+    togglePublishISCN() {
+      setIscnPublish(!iscnPublish)
+    }, // : (iscnPublish: boolean) => Promise<any>
+    iscnPublishSaving: false,
+  }
+
   return (
     <>
       <ConfirmExitDialog onExit={onCancel}>
@@ -220,6 +233,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
                   {...tagsProps}
                   {...collectionProps}
                   {...accessProps}
+                  {...iscnPublishProps}
                   article={article}
                   editData={editData}
                   coverId={cover?.id}

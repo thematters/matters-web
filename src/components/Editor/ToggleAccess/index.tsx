@@ -44,11 +44,7 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
           <section className="switch">
             <header>
               <h3>
-                <Translate
-                  zh_hant="加入圍爐"
-                  zh_hans="加入围炉"
-                  en="Add to Circle"
-                />
+                <Translate id="addToCircle" />
               </h3>
 
               <Switch
@@ -85,7 +81,7 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
 
       <section className="widget">
         <h3>
-          <Translate zh_hant="版權聲明" zh_hans="版权声明" en="License" />
+          <Translate id="license" />
         </h3>
 
         <section className="license">

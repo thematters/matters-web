@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { ArticleDigestSidebar } from '~/components'
+import { ArticleDigestSidebar } from '~/components/ArticleDigest'
 
 import styles from './styles.css'
 

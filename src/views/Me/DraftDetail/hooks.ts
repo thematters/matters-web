@@ -7,6 +7,7 @@ import {
   SET_ACCESS,
   SET_COLLECTION,
   SET_COVER,
+  SET_PUBLISH_ISCN,
   SET_TAGS,
 } from './gql'
 
@@ -22,6 +23,7 @@ import { EditMetaDraft } from './__generated__/EditMetaDraft'
 import { SetDraftAccess } from './__generated__/SetDraftAccess'
 import { SetDraftCollection } from './__generated__/SetDraftCollection'
 import { SetDraftCover } from './__generated__/SetDraftCover'
+import { SetDraftPublishISCN } from './__generated__/SetDraftPublishISCN'
 import { SetDraftTags } from './__generated__/SetDraftTags'
 
 /**
@@ -52,6 +54,22 @@ export const useEditDraftTags = (draft: EditMetaDraft) => {
       variables: {
         id: draftId,
         tags: _uniq(newTags.map(({ content }) => content)),
+      },
+    })
+
+  return { edit, saving }
+}
+
+export const useEditDraftPublishISCN = (draft: EditMetaDraft) => {
+  const draftId = draft.id
+  const [update, { loading: saving }] =
+    useMutation<SetDraftPublishISCN>(SET_PUBLISH_ISCN)
+
+  const edit = (iscnPublish: boolean) =>
+    update({
+      variables: {
+        id: draftId,
+        iscnPublish,
       },
     })
 

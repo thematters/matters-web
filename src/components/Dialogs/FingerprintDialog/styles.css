@@ -1,58 +1,19 @@
 .container {
   padding: var(--spacing-base) var(--spacing-base) var(--spacing-xx-loose);
   text-align: left;
+  background-color: var(--color-grey-lighter);
+
+  & > section:global(.card) + section:global(.card) {
+    margin-top: var(--spacing-base);
+  }
 
   @media (--sm-up) {
     padding: var(--spacing-base);
   }
 }
 
-header {
-  @mixin flex-center-space-between;
-
-  margin-bottom: var(--spacing-base);
-
-  & h4 {
-    font-size: var(--font-size-md);
-    font-weight: var(--font-weight-semibold);
-  }
-}
-
-.hash {
-  margin-bottom: var(--spacing-loose);
-
-  & input {
-    padding: var(--spacing-x-tight) var(--spacing-base);
-    font-family: var(--font-mono);
-    font-size: var(--font-size-sm);
-    color: var(--color-matters-gold);
-    background: var(--color-yellow-lighter);
-  }
-}
-
-.secret {
-  margin-bottom: var(--spacing-loose);
-
-  & input {
-    padding: var(--spacing-x-tight) var(--spacing-base);
-    font-family: var(--font-mono);
-    font-size: var(--font-size-sm);
-    color: var(--color-matters-green);
-    background: var(--color-green-lighter);
-  }
-}
-
 .gateways {
   margin-bottom: var(--spacing-base);
-
-  & .count {
-    font-size: var(--font-size-sm);
-    color: var(--color-grey-dark);
-
-    & .highlight {
-      color: var(--color-matters-green);
-    }
-  }
 
   & ul {
     @mixin border-top-grey;
@@ -68,34 +29,73 @@ header {
     & li {
       @mixin flex-center-space-between;
 
+      background-color: var(--color-grey-lighter);
+      border-radius: 4px;
+
       & :global(:not(.gateway-url)) {
         flex-shrink: 0;
       }
 
       & .gateway-url {
+        @mixin flex-center-space-between;
         @mixin truncate;
 
         margin-right: var(--spacing-x-tight);
         font-size: var(--font-size-md);
         line-height: 2.5rem;
+        color: var(--color-grey-darker);
       }
+    }
+
+    & > li + li {
+      margin-top: 0.5rem;
     }
   }
 }
 
+.secret {
+  margin-bottom: var(--spacing-loose);
+
+  & input {
+    padding: var(--spacing-x-tight) var(--spacing-base);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-sm);
+    color: var(--color-matters-green);
+    background: var(--color-green-lighter);
+  }
+}
+
 .subtitle {
+  font-size: var(--font-size-sm-s);
+  font-weight: var(--font-weight-normal);
   color: var(--color-grey);
 }
 
-.help {
-  & p {
-    margin-top: var(--spacing-base);
-    font-size: var(--font-size-sm);
-    color: var(--color-grey-darker);
+.hash {
+  margin-bottom: var(--spacing-loose);
 
-    & b {
-      font-weight: var(--font-weight-medium);
-      color: var(--color-black);
+  & input {
+    padding: var(--spacing-x-tight) var(--spacing-base);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-sm);
+    color: var(--color-matters-gold);
+    background: var(--color-green-lighter);
+  }
+}
+
+.item {
+  & .title {
+    @mixin flex-center-space-between;
+
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    line-height: 1;
+  }
+
+  &:hover,
+  &:focus {
+    & .rect {
+      background: var(--color-grey-light);
     }
   }
 }

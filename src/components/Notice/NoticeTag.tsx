@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { Tag } from '~/components'
+import { Tag } from '~/components/Tag'
 
 import styles from './styles.css'
 

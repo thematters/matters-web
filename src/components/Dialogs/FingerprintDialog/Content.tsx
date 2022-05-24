@@ -1,11 +1,23 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { Spinner, Translate } from '~/components'
+import {
+  Card,
+  // Divider,
+  IconExternalLink16,
+  IconIPFS24,
+  IconISCN24,
+  Spinner,
+  TextIcon,
+  Translate,
+} from '~/components'
+
+import { iscnLinkUrl } from '~/common/utils'
 
 import ArticleSecret from './ArticleSecret'
-import ArticleSecretDesc from './ArticleSecretDesc'
-import CopyButton from './CopyButton'
+// import ArticleSecretDesc from './ArticleSecretDesc'
+// import CopyButton from './CopyButton'
+// import ListItem from './ListItem'
 import styles from './styles.css'
 
 import { Gateways } from './__generated__/Gateways'
@@ -18,12 +30,58 @@ const GATEWAYS = gql`
   }
 `
 
+const SectionCard: React.FC<{
+  title: string | React.ReactNode
+  subTitle?: string | React.ReactNode
+  right?: string | React.ReactNode
+  href?: string
+}> = ({ title, subTitle, right, href, children }) => {
+  const Header = () => (
+    <header>
+      <h3 className="title">
+        {title}
+        {right || <section className="right">{right}</section>}
+      </h3>
+    </header>
+  )
+
+  return (
+    <Card bgColor="white" spacing={['base', 'base']}>
+      <section className="item">
+        {href ? (
+          <a href={href} target="_blank">
+            <Header />
+          </a>
+        ) : (
+          <Header />
+        )}
+        <h4 className="subtitle">{subTitle}</h4>
+      </section>
+
+      {children}
+      <style jsx>{`
+        .item {
+          & .title {
+            @mixin flex-center-space-between;
+
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-semibold);
+            line-height: 1;
+          }
+        }
+      `}</style>
+    </Card>
+  )
+}
+
 const FingerprintDialogContent = ({
   dataHash,
   showSecret,
+  iscnId,
 }: {
   dataHash: string
   showSecret: boolean
+  iscnId: string
 }) => {
   const { loading, data } = useQuery<Gateways>(GATEWAYS)
 
@@ -31,109 +89,110 @@ const FingerprintDialogContent = ({
 
   return (
     <section className="container">
-      {/* hash */}
-      <section className="hash">
-        <header>
-          <h4>
-            <Translate id="articleFingerprint" />
-          </h4>
-          <CopyButton text={dataHash} />
-        </header>
+      <SectionCard
+        title={
+          <TextIcon icon={<IconIPFS24 />} size="lg">
+            IPFS
+          </TextIcon>
+        }
+        subTitle={'去中心化內容存儲網絡'}
+      >
+        <hr style={{ margin: '0.5rem 0 1rem' }} />
 
-        <section>
-          <input
-            type="text"
-            value={dataHash}
-            readOnly
-            onClick={(event) => event.currentTarget.select()}
-          />
-        </section>
-      </section>
-
-      {/* secret */}
-      {showSecret && <ArticleSecret />}
-
-      {/* gateways */}
-      <section className="gateways">
-        <header>
-          <h4>
+        {/* gateways */}
+        <section className="gateways">
+          <header>
+            <h4 className="title">
+              <Translate
+                zh_hans="公共节点"
+                zh_hant="公共節點"
+                en="Public Gateways"
+              />
+            </h4>
+          </header>
+          <span className="subtitle">
             <Translate
-              zh_hans="公共节点"
-              zh_hant="公共節點"
-              en="Public Gateways"
+              zh_hans="內容分佈節點，可以複製以下地址對作品進行傳播"
+              zh_hant="內容分佈節點，可以複製以下地址對作品進行傳播"
+              en="you may access via a decentralized gateway"
             />
-          </h4>
-
-          <span className="count">
-            <span className="highlight">{gateways.length}</span>
-            <Translate zh_hant=" 個節點" zh_hans=" 个节点" en=" gateways" />
           </span>
-        </header>
 
-        <ul>
-          {(!data || loading) && <Spinner />}
+          <ul>
+            {(!data || loading) && <Spinner />}
 
-          {gateways.map((url) => {
-            const gatewayUrl = url.replace(':hash', dataHash)
-            const hostname = url.replace(/(https:\/\/|\/ipfs\/|:hash.?)/g, '')
+            {gateways.map((url) => {
+              const gatewayUrl = url.replace(':hash', dataHash)
+              const hostname = url.replace(/(https:\/\/|\/ipfs\/|:hash.?)/g, '')
 
-            return (
-              <li key={url}>
-                <a
-                  href={gatewayUrl}
-                  target="_blank"
-                  className="gateway-url u-link-green"
-                >
-                  {hostname}
-                </a>
+              return (
+                <li key={url}>
+                  <a href={gatewayUrl} target="_blank" className="gateway-url">
+                    {/* hostname */}
+                    <TextIcon
+                      icon={<IconExternalLink16 />}
+                      textPlacement="left"
+                    >
+                      {hostname}
+                    </TextIcon>
+                  </a>
+                </li>
+              )
+            })}
+          </ul>
+        </section>
 
-                <CopyButton text={gatewayUrl} />
-              </li>
-            )
-          })}
-        </ul>
-      </section>
+        {/* secret */}
+        {showSecret && <ArticleSecret />}
 
-      {/* help */}
-      <section className="help">
-        <header>
-          <h4>
+        <hr style={{ margin: '1rem 0' }} />
+
+        {/* hash */}
+        <section className="hash">
+          <header>
+            <h4 className="title">
+              <Translate id="articleFingerprint" />
+            </h4>
+          </header>
+          <span className="subtitle">
             <Translate
-              zh_hans="这是什么？"
-              zh_hant="這是什麼？"
-              en="What Is This?"
+              zh_hant="使用 IPFS 生成的作品指紋，通過它可在節點調取內容"
+              zh_hans="使用 IPFS 生成的作品指紋，通過它可在節點調取內容"
+              en="The Fingerprint from IPFS, you can read it via a gateway"
             />
-          </h4>
-        </header>
+          </span>
 
-        <p>
-          <b>
-            <Translate id="articleFingerprint" />
-          </b>
-          <Translate
-            zh_hans={` 是一篇作品上载到 IPFS 后生成的独一无二的 ID，通过指纹可在 IPFS 不同节点调取作品内容。`}
-            zh_hant={` 是一篇作品上載到 IPFS 後生成的獨一無二的 ID，通過指紋可在 IPFS 不同節點調取作品內容。`}
-            en={` is the fingerpint of your work on IPFS, you can use it to retrive your work from any IPFS node.`}
-          />
-        </p>
-
-        {showSecret && <ArticleSecretDesc />}
-
-        <p>
-          <b>
-            <Translate
-              zh_hant="公共節點"
-              zh_hans="公共节点"
-              en="Public Gateways"
+          <section>
+            {/* <CopyButton text={dataHash} /> */}
+            <input
+              type="text"
+              value={dataHash}
+              readOnly
+              onClick={(event) => event.currentTarget.select()}
             />
-          </b>
-          <Translate
-            zh_hant=" 是志願提供 IPFS 網絡入口的節點，你可以使用任意公共節點地址對作品進行傳播。"
-            zh_hans=" 是志愿提供 IPFS 网络入口的节点，你可以使用任意公共节点地址对作品进行传播。"
-            en=" are volunteer nodes that provice access to IPFS, You can use them to share your work."
-          />
-        </p>
-      </section>
+          </section>
+        </section>
+      </SectionCard>
+
+      {/* iscnId */}
+      {iscnId && (
+        <SectionCard
+          title={
+            <TextIcon icon={<IconISCN24 />} size="lg">
+              ISCN
+            </TextIcon>
+          }
+          subTitle={'已在 LikeCoin 鏈上註冊的元數據'}
+          right={
+            <a href={iscnLinkUrl(iscnId)} target="_blank">
+              <IconExternalLink16 />
+            </a>
+          }
+          // href={iscnLinkUrl(iscnId)}
+        >
+          {/* <pre>{iscnId}</pre> */}
+        </SectionCard>
+      )}
 
       <style jsx>{styles}</style>
     </section>

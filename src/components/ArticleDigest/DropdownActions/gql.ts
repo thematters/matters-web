@@ -3,11 +3,9 @@ import _find from 'lodash/find'
 import _isEmpty from 'lodash/isEmpty'
 import _pickBy from 'lodash/pickBy'
 
-import {
-  AppreciatorsDialog,
-  DonatorsDialog,
-  FingerprintDialog,
-} from '~/components'
+import { AppreciatorsDialog } from '~/components/Dialogs/AppreciatorsDialog'
+import { DonatorsDialog } from '~/components/Dialogs/DonatorsDialog'
+import { FingerprintDialog } from '~/components/Dialogs/FingerprintDialog'
 
 import ArchiveArticle from './ArchiveArticle'
 import EditButton from './EditButton'

@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { CircleDigest } from '~/components'
+import { CircleDigest } from '~/components/CircleDigest'
 
 import styles from './styles.css'
 

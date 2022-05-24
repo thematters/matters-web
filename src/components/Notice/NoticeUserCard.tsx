@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { UserDigest } from '~/components'
+import { UserDigest } from '~/components/UserDigest'
 
 import { NoticeUserCard as NoticeUserCardType } from './__generated__/NoticeUserCard'
 

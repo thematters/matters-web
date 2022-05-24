@@ -1,4 +1,5 @@
-import { Dialog, Translate } from '~/components'
+import { Dialog, Switch, Translate } from '~/components'
+import { SetPublishISCNProps } from '~/components/Editor'
 
 import { Step } from '../../SettingsDialog'
 import ToggleAccess, { ToggleAccessProps } from '../../ToggleAccess'
@@ -22,7 +23,8 @@ export type SettingsListDialogProps = {
   collectionCount: number
   tagsCount: number
 } & SettingsListDialogButtons &
-  ToggleAccessProps
+  ToggleAccessProps &
+  SetPublishISCNProps
 
 const SettingsList = ({
   saving,
@@ -39,12 +41,16 @@ const SettingsList = ({
   collectionCount,
   tagsCount,
 
+  iscnPublish, // : draft.iscnPublish, // : boolean
+  togglePublishISCN, // : (iscnPublish: boolean) => Promise<any>
+  iscnPublishSaving,
+
   ...restProps
 }: SettingsListDialogProps) => {
   return (
     <>
       <Dialog.Header
-        title={<Translate zh_hant="設定" zh_hans="设定" en="Settings" />}
+        title={<Translate id="settings" />}
         closeDialog={closeDialog}
         closeTextId="close"
         mode="hidden"
@@ -53,18 +59,14 @@ const SettingsList = ({
       <Dialog.Content hasGrow>
         <ul>
           <ListItem
-            title={
-              <Translate zh_hant="設定封面" zh_hans="设定封面" en="Set Cover" />
-            }
+            title={<Translate id="setCover" />}
             onClick={() => forward('cover')}
           >
             <ListItem.CoverIndicator cover={cover} />
           </ListItem>
 
           <ListItem
-            title={
-              <Translate zh_hant="添加標籤" zh_hans="添加标签" en="Add Tags" />
-            }
+            title={<Translate id="addTags" />}
             subTitle={tagsCount === 0 && <Translate id="hintAddTag2" />}
             onClick={() => forward('tag')}
           >
@@ -72,13 +74,7 @@ const SettingsList = ({
           </ListItem>
 
           <ListItem
-            title={
-              <Translate
-                zh_hant="關聯作品"
-                zh_hans="关联作品"
-                en="Set Collection"
-              />
-            }
+            title={<Translate id="setCollection" />}
             onClick={() => forward('collection')}
           >
             <ListItem.NumberIndicator num={collectionCount} />
@@ -87,6 +83,21 @@ const SettingsList = ({
           <section className="access">
             <ToggleAccess {...restProps} />
           </section>
+
+          <ListItem
+            title={<Translate id="publishToISCN" />}
+            subTitle={<Translate id="publishToISCNHint" />}
+            onClick={() => console.log('publishISCN switch')}
+          >
+            <Switch
+              checked={!!iscnPublish}
+              onChange={() => {
+                // console.log('toogle change')
+                togglePublishISCN(!iscnPublish)
+              }}
+              loading={iscnPublishSaving}
+            />
+          </ListItem>
 
           {(confirmButtonText || cancelButtonText) && (
             <Dialog.Footer>

@@ -17,6 +17,7 @@ const fragments = {
     fragment FingerprintArticle on Article {
       id
       dataHash
+      iscnId
       author {
         id
       }
@@ -55,6 +56,7 @@ const BaseFingerprintDialog = ({
         <Dialog.Content hasGrow>
           <DynamicContent
             dataHash={article.dataHash || ''}
+            iscnId={article.iscnId || ''}
             showSecret={showSecret}
           />
         </Dialog.Content>

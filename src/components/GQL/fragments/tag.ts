@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { Avatar } from '~/components'
+import { Avatar } from '~/components/Avatar'
 
 export default {
   followers: gql`

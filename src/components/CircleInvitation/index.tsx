@@ -6,8 +6,9 @@ import {
   TextIcon,
   Tooltip,
   Translate,
-  UserDigest,
+  // UserDigest,
 } from '~/components'
+import { UserDigest } from '~/components/UserDigest'
 
 import CircleInvitationInvitee from './Invitee'
 import CircleInvitationPeriod from './Period'

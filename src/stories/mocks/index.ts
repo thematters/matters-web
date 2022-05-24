@@ -97,6 +97,7 @@ export const MOCK_ARTILCE = {
     totalCount: 0,
   },
   dataHash: 'article-data-hash',
+  iscnId: '',
   sticky: false,
   readTime: 1234.5,
   tags: [],

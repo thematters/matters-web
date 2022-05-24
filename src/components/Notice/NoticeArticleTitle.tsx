@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import { ArticleDigestTitle } from '~/components'
+import { ArticleDigestTitle } from '~/components/ArticleDigest'
 
 import { toPath } from '~/common/utils'
 

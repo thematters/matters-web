@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 
-import { Avatar, FollowUserButton } from '~/components'
+import { Avatar } from '~/components/Avatar'
+import { FollowUserButton } from '~/components/Buttons/FollowUser'
 import { CircleDigest } from '~/components/CircleDigest'
 
 import DropdownActions from './DropdownActions'

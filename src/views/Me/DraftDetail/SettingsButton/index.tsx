@@ -10,6 +10,7 @@ import {
 import {
   SetCollectionProps,
   SetCoverProps,
+  SetPublishISCNProps,
   SetTagsProps,
   ToggleAccessProps,
 } from '~/components/Editor'
@@ -21,6 +22,7 @@ import {
   useEditDraftAccess,
   useEditDraftCollection,
   useEditDraftCover,
+  useEditDraftPublishISCN,
   useEditDraftTags,
 } from '../hooks'
 import ConfirmPublishDialogContent from './ConfirmPublishDialogContent'
@@ -70,6 +72,8 @@ const SettingsButton = ({
     refetch,
   } = useEditDraftCover(draft)
   const { edit: editTags, saving: tagsSaving } = useEditDraftTags(draft)
+  const { edit: togglePublishISCN, saving: iscnPublishSaving } =
+    useEditDraftPublishISCN(draft)
   const { edit: editAccess, saving: accessSaving } = useEditDraftAccess(
     draft,
     ownCircles && ownCircles[0]
@@ -107,23 +111,25 @@ const SettingsButton = ({
     accessSaving,
     canToggleCircle: !!hasOwnCircle,
   }
+  const iscnPublishProps: SetPublishISCNProps = {
+    iscnPublish: draft.iscnPublish, // : boolean
+    togglePublishISCN, // : (iscnPublish: boolean) => Promise<any>
+    iscnPublishSaving,
+  }
 
   if (!viewer.shouldSetupLikerID) {
     return (
       <EditorSettingsDialog
         saving={false}
         disabled={collectionSaving || coverSaving || tagsSaving || accessSaving}
-        confirmButtonText={
-          <Translate zh_hant="立即發布" zh_hans="立即发布" en="Publish" />
-        }
-        cancelButtonText={
-          <Translate zh_hant="存至草稿" zh_hans="存至草稿" en="Save as Draft" />
-        }
+        confirmButtonText={<Translate id="publishNow" />}
+        cancelButtonText={<Translate id="publishAbort" />}
         ConfirmStepContent={ConfirmPublishDialogContent}
         {...coverProps}
         {...tagsProps}
         {...collectionProps}
         {...accessProps}
+        {...iscnPublishProps}
       >
         {({ openDialog: openEditorSettingsDialog }) => (
           <ConfirmButton

@@ -50,6 +50,7 @@ export const ARTICLE_DETAIL_PUBLIC = gql`
         id
         mediaHash
         publishState
+        iscnPublish
       }
       ...MetaInfoArticle
       ...ContentArticle

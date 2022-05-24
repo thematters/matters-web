@@ -4,6 +4,7 @@ import { Dialog, Spinner, useDialogSwitch, useStep } from '~/components'
 import {
   SetCollectionProps,
   SetCoverProps,
+  SetPublishISCNProps,
   SetTagsProps,
   ToggleAccessProps,
 } from '~/components/Editor'
@@ -38,6 +39,7 @@ export type EditorSettingsDialogProps = {
   SetCollectionProps &
   SetTagsProps &
   ToggleAccessProps &
+  SetPublishISCNProps &
   SettingsListDialogButtons
 
 const DynamicSearchSelectForm = dynamic(
@@ -72,6 +74,10 @@ const BaseEditorSettingsDialog = ({
   accessType,
   license,
   canToggleCircle,
+
+  iscnPublish, // : draft.iscnPublish, // : boolean
+  togglePublishISCN, // : (iscnPublish: boolean) => Promise<any>
+  iscnPublishSaving,
 
   saving,
   disabled,
@@ -121,6 +127,12 @@ const BaseEditorSettingsDialog = ({
     canToggleCircle,
   }
 
+  const iscnPublishProps: SetPublishISCNProps = {
+    iscnPublish, // : draft.iscnPublish, // : boolean
+    togglePublishISCN, // : (iscnPublish: boolean) => Promise<any>
+    iscnPublishSaving,
+  }
+
   return (
     <>
       {children({ openDialog })}
@@ -139,6 +151,7 @@ const BaseEditorSettingsDialog = ({
             collectionCount={collection.length}
             tagsCount={tags.length}
             {...accessProps}
+            {...iscnPublishProps}
           />
         )}
 
