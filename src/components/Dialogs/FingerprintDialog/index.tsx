@@ -24,6 +24,9 @@ const fragments = {
       access {
         type
       }
+      drafts {
+        iscnPublish
+      }
     }
   `,
 }
@@ -57,6 +60,7 @@ const BaseFingerprintDialog = ({
           <DynamicContent
             dataHash={article.dataHash || ''}
             iscnId={article.iscnId || ''}
+            iscnPublish={!!article.drafts?.[0]?.iscnPublish}
             showSecret={showSecret}
           />
         </Dialog.Content>

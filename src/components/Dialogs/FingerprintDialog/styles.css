@@ -74,12 +74,26 @@
 .hash {
   margin-bottom: var(--spacing-loose);
 
-  & input {
-    padding: var(--spacing-x-tight) var(--spacing-base);
-    font-family: var(--font-mono);
-    font-size: var(--font-size-sm);
+  & .copy {
+    @mixin flex-center-space-between;
+
+    position: relative;
     color: var(--color-matters-gold);
     background: var(--color-green-lighter);
+
+    & input {
+      padding: var(--spacing-x-tight) var(--spacing-base);
+      font-family: var(--font-mono);
+      font-size: var(--font-size-sm);
+      color: var(--color-matters-gold);
+      background: var(--color-green-lighter);
+      border-radius: var(--spacing-base);
+    }
+
+    & button {
+      position: absolute;
+      right: var(--spacing-loose);
+    }
   }
 }
 

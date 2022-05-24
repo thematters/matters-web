@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 
 import {
   Card,
+  CopyButton,
   // Divider,
   IconExternalLink16,
   IconIPFS24,
@@ -78,10 +79,12 @@ const FingerprintDialogContent = ({
   dataHash,
   showSecret,
   iscnId,
+  iscnPublish,
 }: {
   dataHash: string
   showSecret: boolean
   iscnId: string
+  iscnPublish?: boolean
 }) => {
   const { loading, data } = useQuery<Gateways>(GATEWAYS)
 
@@ -162,31 +165,37 @@ const FingerprintDialogContent = ({
             />
           </span>
 
-          <section>
-            {/* <CopyButton text={dataHash} /> */}
+          <section className="copy">
             <input
               type="text"
               value={dataHash}
               readOnly
               onClick={(event) => event.currentTarget.select()}
             />
+            <CopyButton text={dataHash} />
           </section>
         </section>
       </SectionCard>
 
       {/* iscnId */}
-      {iscnId && (
+      {iscnPublish && (
         <SectionCard
           title={
             <TextIcon icon={<IconISCN24 />} size="lg">
               ISCN
             </TextIcon>
           }
-          subTitle={'已在 LikeCoin 鏈上註冊的元數據'}
+          subTitle={
+            iscnId ? '已在 LikeCoin 鏈上註冊的元數據' : 'ISCN 寫入未成功'
+          }
           right={
-            <a href={iscnLinkUrl(iscnId)} target="_blank">
-              <IconExternalLink16 />
-            </a>
+            iscnId ? (
+              <a href={iscnLinkUrl(iscnId)} target="_blank">
+                <IconExternalLink16 />
+              </a>
+            ) : (
+              <button>Retry</button>
+            )
           }
           // href={iscnLinkUrl(iscnId)}
         >
