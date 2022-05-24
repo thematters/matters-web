@@ -10,6 +10,7 @@ const Complete: React.FC = () => {
           <Translate
             zh_hant="你的專屬 Liker ID 已就位！"
             zh_hans="你的专属 Liker ID 已就位！"
+            en="Your Liker ID is ready!"
           />
         </p>
       </Dialog.Message>
@@ -22,7 +23,7 @@ const Complete: React.FC = () => {
             })
           }}
         >
-          <Translate zh_hant="完成" zh_hans="完成" />
+          <Translate id="done" />
         </Dialog.Footer.Button>
       </Dialog.Footer>
     </>
