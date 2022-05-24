@@ -11,7 +11,7 @@ export const EmailLoginButton = ({
         <Translate
           zh_hant="已有帳戶？"
           zh_hans="已有帐户？"
-          en="Already have an account?"
+          en="Have an account?"
         />
       }
       rightText={

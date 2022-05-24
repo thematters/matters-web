@@ -836,7 +836,7 @@ export const TEXT = {
     hide: 'Archived',
     hintAddTag:
       'Adding tags helps readers find your articles. Add or create new tags.',
-    hintAddTag2: '目前尚無標籤，立即添加提高作品曝光度！',
+    hintAddTag2: 'Not using tags yet, add tags now to improve discoverability!',
     hintAddCircleInvitee: 'Invite friends to join your circle',
     hintCircleAddArticles:
       'Add articles to Circle and keep them behind the paywall.',
