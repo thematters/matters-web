@@ -125,7 +125,8 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
   }, [data?.article?.id])
 
   const [iscnPublish, setIscnPublish] = useState<boolean>(
-    article.drafts?.[0].iscnPublish || false
+    // article.drafts?.[0].iscnPublish ||
+    false
   )
 
   /**
