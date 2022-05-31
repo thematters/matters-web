@@ -1,3 +1,5 @@
 .address {
   margin-right: var(--spacing-tight);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-md);
 }
