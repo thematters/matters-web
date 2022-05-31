@@ -2,7 +2,14 @@ import { getAddress } from '@ethersproject/address'
 import { AlchemyProvider } from '@ethersproject/providers'
 import { useEffect, useState } from 'react'
 
-import { Button, IconExternalLink16, TextIcon } from '~/components'
+import {
+  Button,
+  // CopyButton,
+  CopyToClipboard,
+  // IconExternalLink16,
+  IconCopy16,
+  TextIcon,
+} from '~/components'
 
 import { maskAddress } from '~/common/utils'
 
@@ -15,7 +22,7 @@ type WalletAddressProps = {
 const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
 const WalletAddress: React.FC<WalletAddressProps> = ({ address }) => {
-  const etherscanUrl = `https://etherscan.io/address/${address}`
+  // const etherscanUrl = `https://etherscan.io/address/${address}`
 
   const provider = new AlchemyProvider(
     isProd ? 'mainnet' : 'rinkeby',
@@ -38,23 +45,25 @@ const WalletAddress: React.FC<WalletAddressProps> = ({ address }) => {
 
   return (
     <section className="address">
-      <Button
-        htmlHref={etherscanUrl}
-        htmlTarget="_blank"
-        spacing={['xxtight', 'tight']}
-        bgColor="green-lighter"
-      >
-        <TextIcon
-          icon={<IconExternalLink16 size="sm" />}
-          spacing="xxtight"
-          textPlacement="left"
-          color="green"
-          size="md"
+      <CopyToClipboard text={address}>
+        <Button
+          // htmlHref={etherscanUrl}
+          // htmlTarget="_blank"
+          spacing={['xxtight', 'tight']}
+          bgColor="green-lighter"
+          bgActiveColor="grey-lighter"
         >
-          {ensName || maskAddress(getAddress(address))}
-        </TextIcon>
-      </Button>
-
+          <TextIcon
+            icon={<IconCopy16 size="sm" />}
+            spacing="xtight"
+            textPlacement="left"
+            color="green"
+            size="md"
+          >
+            {ensName || maskAddress(getAddress(address))}
+          </TextIcon>
+        </Button>
+      </CopyToClipboard>
       <style jsx>{styles}</style>
     </section>
   )

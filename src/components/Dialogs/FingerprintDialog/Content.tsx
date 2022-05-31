@@ -1,11 +1,11 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { Spinner, Translate } from '~/components'
+import { CopyButton, Spinner, Translate } from '~/components'
 
 import ArticleSecret from './ArticleSecret'
 import ArticleSecretDesc from './ArticleSecretDesc'
-import CopyButton from './CopyButton'
+// import CopyButton from './CopyButton'
 import styles from './styles.css'
 
 import { Gateways } from './__generated__/Gateways'
