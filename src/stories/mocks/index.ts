@@ -101,6 +101,7 @@ export const MOCK_ARTILCE = {
   sticky: false,
   readTime: 1234.5,
   tags: [],
+  drafts: [{ __typename: 'Draft' as any, iscnPublish: true }],
   appreciationsReceivedTotal: 1,
   responseCount: 10,
   transactionsReceivedBy: {

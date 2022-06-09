@@ -20,7 +20,7 @@
     @mixin border-bottom-grey;
     @mixin hide-scrollbar;
 
-    max-height: 11rem;
+    max-height: 12rem;
     padding: var(--spacing-x-tight) var(--spacing-base) 0;
     margin: 0 calc(var(--spacing-base) * -1);
     overflow-y: auto;
@@ -29,6 +29,7 @@
     & li {
       @mixin flex-center-space-between;
 
+      position: relative;
       background-color: var(--color-grey-lighter);
       border-radius: 4px;
 
@@ -40,6 +41,8 @@
         @mixin flex-center-space-between;
         @mixin truncate;
 
+        width: 100%;
+        padding-left: var(--spacing-x-tight);
         margin-right: var(--spacing-x-tight);
         font-size: var(--font-size-md);
         line-height: 2.5rem;
@@ -72,14 +75,25 @@
 }
 
 .hash {
-  margin-bottom: var(--spacing-loose);
+  margin-bottom: var(--spacing-x-tight);
 
-  & input {
-    padding: var(--spacing-x-tight) var(--spacing-base);
-    font-family: var(--font-mono);
-    font-size: var(--font-size-sm);
-    color: var(--color-matters-gold);
-    background: var(--color-green-lighter);
+  & .data-hash {
+    position: relative;
+
+    & input {
+      padding: var(--spacing-x-tight) var(--spacing-x-loose)
+        var(--spacing-x-tight) var(--spacing-x-tight);
+      font-family: var(--font-mono);
+      font-size: var(--font-size-sm);
+      color: var(--color-matters-gold);
+      background: var(--color-green-lighter);
+    }
+
+    & > button {
+      position: absolute;
+      top: var(--spacing-x-tight);
+      right: var(--spacing-xx-tight);
+    }
   }
 }
 

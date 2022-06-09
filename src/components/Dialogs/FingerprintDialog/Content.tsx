@@ -3,10 +3,15 @@ import gql from 'graphql-tag'
 
 import {
   Card,
+  // CopyButton,
+  CopyToClipboard,
   // Divider,
+  IconCopy16,
   IconExternalLink16,
-  IconIPFS24,
+  // IconIPFS24,
+  IconIPFSGreen24,
   IconISCN24,
+  Spacer,
   Spinner,
   TextIcon,
   Translate,
@@ -42,6 +47,15 @@ const SectionCard: React.FC<{
         {title}
         {right || <section className="right">{right}</section>}
       </h3>
+      <style jsx>{`
+        & .title {
+          @mixin flex-center-space-between;
+
+          font-size: var(--font-size-xl);
+          font-weight: var(--font-weight-semibold);
+          line-height: 1;
+        }
+      `}</style>
     </header>
   )
 
@@ -55,19 +69,16 @@ const SectionCard: React.FC<{
         ) : (
           <Header />
         )}
-        <h4 className="subtitle">{subTitle}</h4>
+        <small className="subtitle">{subTitle}</small>
       </section>
 
       {children}
       <style jsx>{`
-        .item {
-          & .title {
-            @mixin flex-center-space-between;
-
-            font-size: var(--font-size-xl);
-            font-weight: var(--font-weight-semibold);
-            line-height: 1;
-          }
+        .subtitle {
+          color: var(--color-grey);
+        }
+        .right {
+          float: right;
         }
       `}</style>
     </Card>
@@ -91,11 +102,17 @@ const FingerprintDialogContent = ({
     <section className="container">
       <SectionCard
         title={
-          <TextIcon icon={<IconIPFS24 />} size="lg">
+          <TextIcon icon={<IconIPFSGreen24 />} size="lg">
             IPFS
           </TextIcon>
         }
-        subTitle={'去中心化內容存儲網絡'}
+        subTitle={
+          <Translate
+            zh_hant="去中心化內容存儲網絡"
+            zh_hans="去中心化內容存儲網絡"
+            en="Decentralized Content Storage Network"
+          />
+        }
       >
         <hr style={{ margin: '0.5rem 0 1rem' }} />
 
@@ -128,13 +145,8 @@ const FingerprintDialogContent = ({
               return (
                 <li key={url}>
                   <a href={gatewayUrl} target="_blank" className="gateway-url">
-                    {/* hostname */}
-                    <TextIcon
-                      icon={<IconExternalLink16 />}
-                      textPlacement="left"
-                    >
-                      {hostname}
-                    </TextIcon>
+                    {hostname}
+                    <IconExternalLink16 />
                   </a>
                 </li>
               )
@@ -162,8 +174,12 @@ const FingerprintDialogContent = ({
             />
           </span>
 
-          <section>
-            {/* <CopyButton text={dataHash} /> */}
+          <section className="data-hash">
+            <CopyToClipboard text={dataHash}>
+              <button>
+                <IconCopy16 color="grey" />
+              </button>
+            </CopyToClipboard>
             <input
               type="text"
               value={dataHash}
@@ -174,6 +190,8 @@ const FingerprintDialogContent = ({
         </section>
       </SectionCard>
 
+      <Spacer size="base" />
+
       {/* iscnId */}
       {iscnId && (
         <SectionCard
@@ -182,7 +200,13 @@ const FingerprintDialogContent = ({
               ISCN
             </TextIcon>
           }
-          subTitle={'已在 LikeCoin 鏈上註冊的元數據'}
+          subTitle={
+            <Translate
+              zh_hant="已在 LikeCoin 鏈上註冊的元數據"
+              zh_hans="已在 LikeCoin 鏈上註冊的元數據"
+              en="the metadata registered on LikeCoin chain"
+            />
+          }
           right={
             <a href={iscnLinkUrl(iscnId)} target="_blank">
               <IconExternalLink16 />
