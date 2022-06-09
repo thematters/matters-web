@@ -4,10 +4,15 @@ import gql from 'graphql-tag'
 import {
   Card,
   CopyButton,
+  // CopyButton,
+  // CopyToClipboard,
   // Divider,
+  // IconCopy16,
   IconExternalLink16,
-  IconIPFS24,
+  // IconIPFS24,
+  IconIPFSGreen24,
   IconISCN24,
+  Spacer,
   Spinner,
   TextIcon,
   Translate,
@@ -43,11 +48,20 @@ const SectionCard: React.FC<{
         {title}
         {right || <section className="right">{right}</section>}
       </h3>
+      <style jsx>{`
+        & .title {
+          @mixin flex-center-space-between;
+
+          font-size: var(--font-size-xl);
+          font-weight: var(--font-weight-semibold);
+          line-height: 1;
+        }
+      `}</style>
     </header>
   )
 
   return (
-    <Card bgColor="white" spacing={['base', 'base']}>
+    <Card bgColor="white" borderRadius="xtight" spacing={['base', 'base']}>
       <section className="item">
         {href ? (
           <a href={href} target="_blank">
@@ -56,19 +70,16 @@ const SectionCard: React.FC<{
         ) : (
           <Header />
         )}
-        <h4 className="subtitle">{subTitle}</h4>
+        <small className="subtitle">{subTitle}</small>
       </section>
 
       {children}
       <style jsx>{`
-        .item {
-          & .title {
-            @mixin flex-center-space-between;
-
-            font-size: var(--font-size-xl);
-            font-weight: var(--font-weight-semibold);
-            line-height: 1;
-          }
+        .subtitle {
+          color: var(--color-grey);
+        }
+        .right {
+          float: right;
         }
       `}</style>
     </Card>
@@ -94,11 +105,17 @@ const FingerprintDialogContent = ({
     <section className="container">
       <SectionCard
         title={
-          <TextIcon icon={<IconIPFS24 />} size="lg">
+          <TextIcon icon={<IconIPFSGreen24 />} size="lg">
             IPFS
           </TextIcon>
         }
-        subTitle={'去中心化內容存儲網絡'}
+        subTitle={
+          <Translate
+            zh_hant="去中心化內容存儲網絡"
+            zh_hans="去中心化內容存儲網絡"
+            en="Decentralized Content Storage Network"
+          />
+        }
       >
         <hr style={{ margin: '0.5rem 0 1rem' }} />
 
@@ -131,13 +148,8 @@ const FingerprintDialogContent = ({
               return (
                 <li key={url}>
                   <a href={gatewayUrl} target="_blank" className="gateway-url">
-                    {/* hostname */}
-                    <TextIcon
-                      icon={<IconExternalLink16 />}
-                      textPlacement="left"
-                    >
-                      {hostname}
-                    </TextIcon>
+                    {hostname}
+                    <IconExternalLink16 />
                   </a>
                 </li>
               )
@@ -177,6 +189,8 @@ const FingerprintDialogContent = ({
         </section>
       </SectionCard>
 
+      <Spacer size="base" />
+
       {/* iscnId */}
       {iscnPublish && (
         <SectionCard
@@ -186,7 +200,19 @@ const FingerprintDialogContent = ({
             </TextIcon>
           }
           subTitle={
-            iscnId ? '已在 LikeCoin 鏈上註冊的元數據' : 'ISCN 寫入未成功'
+            iscnId ? (
+              <Translate
+                zh_hant="已在 LikeCoin 鏈上註冊的元數據"
+                zh_hans="已在 LikeCoin 鏈上註冊的元數據"
+                en="the metadata registered on LikeCoin chain"
+              />
+            ) : (
+              <Translate
+                zh_hant="ISCN 寫入未成功"
+                zh_hans="ISCN 寫入未成功"
+                en="ISCN 寫入未成功"
+              />
+            )
           }
           right={
             iscnId ? (
