@@ -113,16 +113,17 @@ const Select: React.FC<FormProps> = ({
           <li>
             <Translate {...Desc.section1} />
           </li>
-          <li>
+          <li className="emphasize">
             <Translate {...Desc.section2} />
           </li>
           <li>
             <Translate {...Desc.section3} />
           </li>
-          <li>
+          <li className="emphasize">
             <Translate {...Desc.section4} />
           </li>
         </ul>
+        <style jsx>{styles}</style>
       </Dialog.Message>
     )
   }
