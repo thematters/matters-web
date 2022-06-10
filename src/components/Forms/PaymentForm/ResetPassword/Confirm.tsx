@@ -97,7 +97,7 @@ const Confirm: React.FC<FormProps> = ({ codeId, submitCallback }) => {
       } catch (error) {
         setSubmitting(false)
 
-        const [messages, codes] = parseFormSubmitErrors(error, lang)
+        const [messages, codes] = parseFormSubmitErrors(error as any, lang)
         setFieldError('password', messages[codes[0]])
         setFieldValue('comparedPassword', '', false)
       }

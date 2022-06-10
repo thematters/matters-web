@@ -46,7 +46,7 @@ const Request: React.FC<Props> = ({ nextStep, closeDialog }) => {
       window.open(redirectUrl, '_blank')
       nextStep()
     } catch (error) {
-      const [messages, codes] = parseFormSubmitErrors(error, lang)
+      const [messages, codes] = parseFormSubmitErrors(error as any, lang)
       window.dispatchEvent(
         new CustomEvent(ADD_TOAST, {
           detail: {
