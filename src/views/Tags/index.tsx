@@ -24,7 +24,7 @@ const ALL_TAGS = gql`
     viewer @connection(key: "viewerTags") {
       id
       recommendation {
-        tags(input: { first: 20, after: $after }) {
+        tags(input: { first: 30, after: $after }) {
           pageInfo {
             startCursor
             endCursor
