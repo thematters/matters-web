@@ -81,7 +81,7 @@ const Request: React.FC<FormProps> = ({
       } catch (error) {
         setSubmitting(false)
 
-        const [messages, codes] = parseFormSubmitErrors(error, lang)
+        const [messages, codes] = parseFormSubmitErrors(error as any, lang)
         setFieldError('email', messages[codes[0]])
       }
     },

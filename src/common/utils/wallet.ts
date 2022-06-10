@@ -1,37 +1,21 @@
-import {
-  InjectedConnector,
-  NoEthereumProviderError,
-  UserRejectedRequestError as UserRejectedRequestErrorInjected,
-} from '@web3-react/injected-connector'
-import {
-  UserRejectedRequestError as UserRejectedRequestErrorWalletConnect,
-  WalletConnectConnector,
-} from '@web3-react/walletconnect-connector'
+import { providers } from 'ethers'
+import { configureChains, defaultChains } from 'wagmi'
+import { alchemyProvider } from 'wagmi/providers/alchemy'
+import { publicProvider } from 'wagmi/providers/public'
 
-import { WalletConnector, WalletErrorType } from '~/common/enums'
+import { WalletErrorType } from '~/common/enums'
 
-export const chainName: { [id: number]: string } = {
-  1: 'Mainnet',
-  3: 'Ropsten',
-  4: 'Rinkeby',
-  5: 'Goerli',
-  137: 'Polygon',
-  80001: 'Polygon Mumbai',
-  10: 'Optimistic',
-  69: 'Optimistic Kovan',
-  42161: 'Arbitrum One',
-  43114: 'Avalanche Mainnet',
-  250: 'Fantom',
-  56: 'BSC',
-  97: 'BSC Testnet',
-}
+// const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
-export const walletConnectors = {
-  [WalletConnector.MetaMask]: new InjectedConnector({}),
-  [WalletConnector.WalletConnect]: new WalletConnectConnector({
-    // infuraId: env.infuraId,
-  }),
-}
+const alchemyId = process.env.NEXT_PUBLIC_ALCHEMY_KEY || ''
+
+export const { chains } = configureChains(defaultChains, [
+  alchemyProvider({ alchemyId }),
+  publicProvider(),
+])
+
+export const wagmiProvider = ({ chainId }: { chainId?: any }) =>
+  new providers.AlchemyProvider(chainId, alchemyId)
 
 export const maskAddress = (address: string, prefixLen: number = 6) => {
   return `${address.substring(0, prefixLen)}...${address.substring(
@@ -39,7 +23,7 @@ export const maskAddress = (address: string, prefixLen: number = 6) => {
   )}`
 }
 
-const WALLET_ERROR_MESSAGES = {
+export const WALLET_ERROR_MESSAGES = {
   en: {
     // common
     [WalletErrorType.noEthereumProvider]:
@@ -71,32 +55,4 @@ const WALLET_ERROR_MESSAGES = {
     // sign message
     [WalletErrorType.userRejectedSignMessage]: '请签署以完成操作',
   },
-}
-
-export const getWalletErrorMessage = ({
-  error,
-  type,
-  lang,
-}: {
-  error?: Error
-  type?: WalletErrorType
-  lang: Language
-}) => {
-  if (type) {
-    return WALLET_ERROR_MESSAGES[lang][type]
-  }
-
-  if (error instanceof NoEthereumProviderError) {
-    return WALLET_ERROR_MESSAGES[lang][WalletErrorType.noEthereumProvider]
-    // } else if (error instanceof UnsupportedChainIdError) {
-    //   return WALLET_ERROR_MESSAGES[lang][WalletErrorType.unsupportedChainId]
-  } else if (
-    error instanceof UserRejectedRequestErrorInjected ||
-    error instanceof UserRejectedRequestErrorWalletConnect
-  ) {
-    return WALLET_ERROR_MESSAGES[lang][WalletErrorType.userRejectedRequest]
-  } else {
-    console.error(error)
-    return WALLET_ERROR_MESSAGES[lang][WalletErrorType.unknown]
-  }
 }

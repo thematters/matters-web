@@ -127,7 +127,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           fallback: !!isInPage ? 'homepage' : 'current',
         })
       } catch (error) {
-        const [messages, codes] = parseFormSubmitErrors(error, lang)
+        const [messages, codes] = parseFormSubmitErrors(error as any, lang)
         codes.forEach((code) => {
           if (code.includes('USER_EMAIL_')) {
             setFieldError('email', messages[code])

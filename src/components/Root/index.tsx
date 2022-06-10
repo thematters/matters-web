@@ -1,9 +1,10 @@
-import { Web3Provider as EthersWeb3Provider } from '@ethersproject/providers'
-import { Web3ReactProvider } from '@web3-react/core'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
 import dynamic from 'next/dynamic'
 import React, { useEffect, useState } from 'react'
+import { createClient, WagmiConfig } from 'wagmi'
+import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
+import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
 
 import {
   AnalyticsListener,
@@ -21,7 +22,7 @@ import {
 import PageViewTracker from '~/components/Analytics/PageViewTracker'
 import SplashScreen from '~/components/SplashScreen'
 
-import { sleep } from '~/common/utils'
+import { chains, sleep, wagmiProvider } from '~/common/utils'
 
 import { ROOT_QUERY_PRIVATE, ROOT_QUERY_PUBLIC } from './gql'
 
@@ -59,9 +60,20 @@ import('@sentry/browser').then((Sentry) => {
   })
 })
 
-function getLibrary(provider?: any) {
-  return new EthersWeb3Provider(provider)
-}
+// WAGMI
+const wagmiClient = createClient({
+  autoConnect: false,
+  connectors: [
+    new MetaMaskConnector({ chains }),
+    new WalletConnectConnector({
+      options: {
+        // infuraId: process.env.NEXT_PUBLIC_ALCHEMY_KEY || '',
+        qrcode: true,
+      },
+    }),
+  ],
+  provider: wagmiProvider,
+})
 
 const Root = ({
   client,
@@ -141,7 +153,7 @@ const Root = ({
   }
 
   return (
-    <Web3ReactProvider getLibrary={getLibrary}>
+    <WagmiConfig client={wagmiClient}>
       <ViewerProvider
         viewer={(privateViewer || viewer) as ViewerUser}
         privateFetched={privateFetched}
@@ -162,7 +174,7 @@ const Root = ({
           </FeaturesProvider>
         </LanguageProvider>
       </ViewerProvider>
-    </Web3ReactProvider>
+    </WagmiConfig>
   )
 }
 

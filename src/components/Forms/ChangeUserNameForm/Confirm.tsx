@@ -90,7 +90,7 @@ const Confirm: React.FC<FormProps> = ({
       } catch (error) {
         setSubmitting(false)
 
-        const [messages, codes] = parseFormSubmitErrors(error, lang)
+        const [messages, codes] = parseFormSubmitErrors(error as any, lang)
         codes.forEach((code) => {
           if (code === 'NAME_EXISTS') {
             setFieldError(

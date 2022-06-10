@@ -46,7 +46,7 @@ const update = ({
       data,
     })
   } catch (e) {
-    if (e.message.startsWith("Can't find field")) {
+    if ((e as any).message.startsWith("Can't find field")) {
       console.warn(ERROR_CODES.QUERY_FIELD_NOT_FOUND)
     } else {
       console.error(e)

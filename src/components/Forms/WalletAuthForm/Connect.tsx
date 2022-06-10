@@ -1,10 +1,9 @@
 import { useLazyQuery } from '@apollo/react-hooks'
-import { Web3Provider as EthersWeb3Provider } from '@ethersproject/providers'
-import { useWeb3React } from '@web3-react/core'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import Link from 'next/link'
 import { useContext, useEffect } from 'react'
+import { useAccount, useSignMessage } from 'wagmi'
 
 import {
   Dialog,
@@ -19,15 +18,9 @@ import {
 } from '~/components'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 
-import {
-  ADD_TOAST,
-  PATHS,
-  STORAGE_KEY_AUTH_TOKEN,
-  WalletErrorType,
-} from '~/common/enums'
+import { ADD_TOAST, PATHS, STORAGE_KEY_AUTH_TOKEN } from '~/common/enums'
 import {
   analytics,
-  getWalletErrorMessage,
   maskAddress,
   parseFormSubmitErrors,
   redirectToTarget,
@@ -36,6 +29,7 @@ import {
   validateCode,
   validateEmail,
   validateToS,
+  WALLET_ERROR_MESSAGES,
 } from '~/common/utils'
 
 import { ETH_ADDRESS_USER, GENERATE_SIGNING_MESSAGE, WALLET_LOGIN } from './gql'
@@ -102,7 +96,9 @@ const Connect: React.FC<FormProps> = ({
   const [queryEthAddressUser, { data, loading }] =
     useLazyQuery<ETHAddressUser>(ETH_ADDRESS_USER)
 
-  const { account, library } = useWeb3React<EthersWeb3Provider>()
+  const { data: accountData } = useAccount()
+  const account = accountData?.address
+  const { signMessageAsync } = useSignMessage()
 
   // sign up if eth address didn't bind with a user
   const isSignUp = !!(data && account && !data?.user?.id && !viewer.isAuthed)
@@ -146,14 +142,8 @@ const Connect: React.FC<FormProps> = ({
       { setFieldError, setSubmitting }
     ) => {
       try {
-        if (!library || !address) {
-          setFieldError(
-            'address',
-            getWalletErrorMessage({
-              type: WalletErrorType.invalidAddress,
-              lang,
-            })
-          )
+        if (!address) {
+          setFieldError('address', WALLET_ERROR_MESSAGES[lang].invalidAddress)
           setSubmitting(false)
           return
         }
@@ -165,29 +155,21 @@ const Connect: React.FC<FormProps> = ({
 
         const signingMessage = signingMessageData?.generateSigningMessage
         if (!signingMessage) {
-          setFieldError(
-            'address',
-            getWalletErrorMessage({
-              type: WalletErrorType.unknown,
-              lang,
-            })
-          )
+          setFieldError('address', WALLET_ERROR_MESSAGES[lang].unknown)
           setSubmitting(false)
           return
         }
 
         // let user sign the message
-        const signer = library.getSigner()
         let signature = ''
         try {
-          signature = await signer.signMessage(signingMessage.signingMessage)
+          signature = await signMessageAsync({
+            message: signingMessage.signingMessage,
+          })
         } catch (err) {
           setFieldError(
             'address',
-            getWalletErrorMessage({
-              type: WalletErrorType.userRejectedSignMessage,
-              lang,
-            })
+            WALLET_ERROR_MESSAGES[lang].userRejectedSignMessage
           )
           setSubmitting(false)
           return
@@ -239,7 +221,7 @@ const Connect: React.FC<FormProps> = ({
           submitCallback(loginData?.walletLogin.type)
         }
       } catch (error) {
-        const [messages, codes] = parseFormSubmitErrors(error, lang)
+        const [messages, codes] = parseFormSubmitErrors(error as any, lang)
         codes.forEach((c) => {
           if (c.includes('CODE_')) {
             setFieldError('code', messages[c])
