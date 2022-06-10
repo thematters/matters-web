@@ -1,6 +1,5 @@
-import { Web3Provider as EthersWeb3Provider } from '@ethersproject/providers'
-import { useWeb3React } from '@web3-react/core'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
+import { useAccount, useConnect } from 'wagmi'
 
 import {
   Dialog,
@@ -8,7 +7,7 @@ import {
   IconMetaMask24,
   IconSpinner16,
   IconWalletConnect24,
-  LanguageContext,
+  // LanguageContext,
   Layout,
   Spacer,
   TextIcon,
@@ -16,12 +15,11 @@ import {
   ViewerContext,
 } from '~/components'
 
-import { WalletConnector } from '~/common/enums'
 import {
   analytics,
-  getWalletErrorMessage,
-  translate,
-  walletConnectors,
+  injectedConnector,
+  // translate,
+  walletConnectConnector,
 } from '~/common/utils'
 
 import styles from './styles.css'
@@ -75,54 +73,35 @@ const Select: React.FC<FormProps> = ({
   back,
 }) => {
   const viewer = useContext(ViewerContext)
-  const { lang } = useContext(LanguageContext)
+  // const { lang } = useContext(LanguageContext)
 
   const formId = 'wallet-auth-select-form'
   const fieldMsgId = 'wall-auth-select-msg'
   const isInPage = purpose === 'page'
   const isConnect = type === 'connect'
 
-  const { activate, connector, account, error } =
-    useWeb3React<EthersWeb3Provider>()
+  const {
+    // activeConnector,
+    connect,
+    error: connectError,
+    isConnecting,
+    pendingConnector,
+  } = useConnect()
+  const { data: accountData } = useAccount()
 
-  // handle logic to recognize the connector currently being activated
-  const [activatingConnector, setActivatingConnector] = useState<any>()
-  useEffect(() => {
-    if (activatingConnector && activatingConnector === connector) {
-      setActivatingConnector(undefined)
-    }
-  }, [activatingConnector, connector])
-
-  const connectorMetaMask = walletConnectors[WalletConnector.MetaMask]
-  const connectorWalletConnect = walletConnectors[WalletConnector.WalletConnect]
-
-  const isMetaMaskLoading = activatingConnector === connectorMetaMask
-  const isWalletConnectLoading = activatingConnector === connectorWalletConnect
+  const account = accountData?.address
+  const errorMessage = connectError?.message
 
   useEffect(() => {
-    if (!account || !activatingConnector) return
+    if (!account) return
 
     submitCallback()
   }, [account])
 
-  const onClickMetaMask = () => {
-    if (connector === connectorMetaMask && account) {
-      submitCallback()
-    }
-
-    analytics.trackEvent('click_button', { type: 'connectorMetaMask' })
-    setActivatingConnector(connectorMetaMask)
-    activate(connectorMetaMask)
-  }
-  const onClickWalletConnect = () => {
-    if (connector === connectorWalletConnect && account) {
-      submitCallback()
-    }
-
-    analytics.trackEvent('click_button', { type: 'connectorWalletConnect' })
-    setActivatingConnector(connectorWalletConnect)
-    activate(connectorWalletConnect)
-  }
+  const isMetaMaskLoading =
+    isConnecting && pendingConnector?.id === injectedConnector.id
+  const isWalletConnectLoading =
+    isConnecting && pendingConnector?.id === walletConnectConnector.id
 
   const Intro = () => {
     if (!isConnect) return null
@@ -174,7 +153,10 @@ const Select: React.FC<FormProps> = ({
               MetaMask
             </TextIcon>
           }
-          onClick={onClickMetaMask}
+          onClick={() => {
+            analytics.trackEvent('click_button', { type: 'connectorMetaMask' })
+            connect(injectedConnector)
+          }}
           right={isMetaMaskLoading ? <IconSpinner16 color="grey" /> : null}
         />
         <Form.List.Item
@@ -188,27 +170,23 @@ const Select: React.FC<FormProps> = ({
               WalletConnect
             </TextIcon>
           }
-          onClick={onClickWalletConnect}
+          onClick={() => {
+            analytics.trackEvent('click_button', {
+              type: 'connectorWalletConnect',
+            })
+            connect(walletConnectConnector)
+          }}
           right={isWalletConnectLoading ? <IconSpinner16 color="grey" /> : null}
         />
       </Form.List>
 
-      {(error || activatingConnector) && (
+      {errorMessage && (
         <section className="msg">
           <Form.Field>
             <Form.Field.Footer
               fieldMsgId={fieldMsgId}
-              hint={
-                activatingConnector
-                  ? translate({
-                      lang,
-                      zh_hant: '請打開你的錢包完成連接操作',
-                      zh_hans: '请打开你的钱包完成连接操作',
-                      en: 'Please confirm the connection in your wallet.',
-                    })
-                  : undefined
-              }
-              error={error ? getWalletErrorMessage({ error, lang }) : undefined}
+              // hint={}
+              error={errorMessage}
             />
           </Form.Field>
           <style jsx>{styles}</style>

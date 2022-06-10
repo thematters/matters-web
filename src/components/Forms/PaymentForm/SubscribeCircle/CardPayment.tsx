@@ -94,7 +94,7 @@ const BaseCardPayment: React.FC<CardPaymentProps> = ({
       })
       data = subscribeResult.data
     } catch (error) {
-      const [messages, codes] = parseFormSubmitErrors(error, lang)
+      const [messages, codes] = parseFormSubmitErrors(error as any, lang)
       codes.forEach((code) => {
         setCheckoutError(messages[code])
       })
