@@ -78,7 +78,7 @@ const Request: React.FC<FormProps> = ({
       } catch (error) {
         setSubmitting(false)
 
-        const [messages, codes] = parseFormSubmitErrors(error, lang)
+        const [messages, codes] = parseFormSubmitErrors(error as any, lang)
         codes.forEach((c) => {
           if (c.includes('CODE_')) {
             setFieldError('code', messages[c])

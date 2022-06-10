@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
-import { getAddress } from '@ethersproject/address'
+import { ethers } from 'ethers'
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
@@ -62,7 +62,7 @@ const WalletSettings = () => {
   const equalSign = total > 0 ? '≈' : '='
 
   const ethAddress = data?.viewer?.info?.ethAddress
-    ? getAddress(data.viewer.info.ethAddress)
+    ? ethers.utils.getAddress(data.viewer.info.ethAddress)
     : ''
   const shortAddress = ethAddress ? maskAddress(ethAddress) : ''
 
