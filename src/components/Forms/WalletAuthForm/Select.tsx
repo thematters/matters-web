@@ -37,33 +37,31 @@ export interface FormProps {
 const Desc = {
   section1: {
     zh_hant:
-      'Matters 除了持續打造更好的創作環境，也計畫提供更多創作與區塊鏈結合的服務，完成設定後即可在未來第一時間參與。',
+      'Matters 將提供更多創作與區塊鏈結合的服務，接入錢包後即可在未來第一時間體驗新功能。',
     zh_hans:
-      'Matters 除了持续打造更好的创作环境，也计划提供更多创作与区块链结合的服务，完成设置后即可在未来第一时间参与。',
+      'Matters 将提供更多创作与区块链结合的服务，接入钱包后即可在未来第一时间体验新功能。',
     en:
-      'Matters continues to create a better environment for creating and provide services that combine creativity with blockchain ' +
+      'Matters continues to provide services that combine creativity with blockchain ' +
       'technology. You will be the first to experience them after completing connecting wallet.',
   },
   section2: {
-    zh_hant:
-      '曾登記加密錢包參與 Traveloggers 活動的朋友，若想利用加密錢包登入也需完成設定才能啟用。' +
-      '完成後，若設定的地址擁有 Traveloggers，個人頁與頭像將顯示相關徽章與裝飾。',
-    zh_hans:
-      '曾登记加密钱包参与 Traveloggers 活动的朋友，若想利用加密钱包登入也需完成设定才能启用。' +
-      '完成后，若设定的地址拥有 Traveloggers，个人页与头像将显示相关徽章与装饰。',
-    en:
-      'For those who have registered your wallet via Traveloggers, you need to complete this setting to enable it if you want to ' +
-      'log in with your wallet. Once set up, your account page and avatar will display Traveloggers’ relevant badge and decoration if ' +
-      'the address connected has Traveloggers.',
+    zh_hant: '錢包地址將作為身份識別之一在個人頁公開顯示。',
+    zh_hans: '钱包地址将作为身份识别之一在个人页公开显示。',
+    en: 'Wallet address will be part of your digital identity and shown in your profile page.',
   },
   section3: {
     zh_hant:
-      '原有透過電子信箱登入方式將為你保留。為維護你的帳戶安全，加密錢包連接後無法重設。另外，Matters 不會透過任何渠道主動詢問你的錢包私鑰。',
+      '原有透過電子信箱登入方式將為你保留。為維護你的帳戶安全，加密錢包連接後無法重設。',
     zh_hans:
-      '原有透过电子信箱登入方式将为你保留。为维护你的帐户安全，加密钱包连接后无法重设。另外，Matters 不会透过任何渠道主动询问你的钱包私钥。',
+      '原有透过电子信箱登入方式将为你保留。为维护你的帐户安全，加密钱包连接后无法重设。',
     en:
-      'The original login via email will be kept for you. Please note that your wallet cannot be reset once it is connected because of your ' +
-      'account security. In addition, Matters will never ask your wallet key through any channel.',
+      'The original login via email will be kept for you. Please note that your wallet ' +
+      'cannot be reset once it is connected because of your account security.',
+  },
+  section4: {
+    zh_hant: 'Matters 不會透過任何渠道主動詢問你的錢包私鑰。',
+    zh_hans: 'Matters 不会透过任何渠道主动询问你的钱包私钥。',
+    en: 'Matters will never ask your wallet key through any channel.',
   },
 }
 
@@ -138,6 +136,9 @@ const Select: React.FC<FormProps> = ({
           </li>
           <li>
             <Translate {...Desc.section3} />
+          </li>
+          <li>
+            <Translate {...Desc.section4} />
           </li>
         </ul>
       </Dialog.Message>
