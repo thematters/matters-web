@@ -1,6 +1,5 @@
-import { getAddress } from '@ethersproject/address'
-import { AlchemyProvider } from '@ethersproject/providers'
-import { useEffect, useState } from 'react'
+import { ethers } from 'ethers'
+import { useEnsName } from 'wagmi'
 
 import {
   Button,
@@ -19,29 +18,8 @@ type WalletAddressProps = {
   address: string
 }
 
-const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
-
 const WalletAddress: React.FC<WalletAddressProps> = ({ address }) => {
-  // const etherscanUrl = `https://etherscan.io/address/${address}`
-
-  const provider = new AlchemyProvider(
-    isProd ? 'mainnet' : 'rinkeby',
-    process.env.NEXT_PUBLIC_ALCHEMY_KEY
-  )
-
-  const [ensName, setEnsName] = useState('')
-
-  const getENSName = async () => {
-    const name = await provider.lookupAddress(address)
-
-    if (name) {
-      setEnsName(name)
-    }
-  }
-
-  useEffect(() => {
-    getENSName()
-  }, [])
+  const { data: ensName } = useEnsName({ address })
 
   return (
     <section className="address">
@@ -60,7 +38,7 @@ const WalletAddress: React.FC<WalletAddressProps> = ({ address }) => {
             color="green"
             size="md"
           >
-            {ensName || maskAddress(getAddress(address))}
+            {ensName || maskAddress(ethers.utils.getAddress(address))}
           </TextIcon>
         </Button>
       </CopyToClipboard>

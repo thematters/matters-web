@@ -139,7 +139,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
         const txResult = await addCredit({ variables: { input: { amount } } })
         data = txResult.data
       } catch (error) {
-        const [messages, codes] = parseFormSubmitErrors(error, lang)
+        const [messages, codes] = parseFormSubmitErrors(error as any, lang)
         codes.forEach((code) => {
           setFieldError('amount', messages[code])
         })

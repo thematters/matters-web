@@ -132,7 +132,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
       } catch (error) {
         setSubmitting(false)
 
-        const [messages, codes] = parseFormSubmitErrors(error, lang)
+        const [messages, codes] = parseFormSubmitErrors(error as any, lang)
         setFieldError('description', messages[codes[0]])
       }
     },

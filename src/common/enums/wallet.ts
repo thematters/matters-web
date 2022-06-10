@@ -1,8 +1,3 @@
-export enum WalletConnector {
-  MetaMask = 'MetaMask',
-  WalletConnect = 'WalletConnect',
-}
-
 export enum WalletErrorType {
   // common
   noEthereumProvider = 'noEthereumProvider',

@@ -204,7 +204,7 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
       } catch (error) {
         setSubmitting(false)
 
-        const [messages, codes] = parseFormSubmitErrors(error, lang)
+        const [messages, codes] = parseFormSubmitErrors(error as any, lang)
         setFieldError('newContent', messages[codes[0]])
       }
     },
