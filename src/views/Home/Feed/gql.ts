@@ -27,7 +27,7 @@ export const FEED_ARTICLES_PUBLIC = {
       viewer @connection(key: "viewerFeedHottest") {
         id
         recommendation {
-          feed: hottest(input: { first: 10, after: $after }) {
+          feed: hottest(input: { first: 30, after: $after }) {
             ...FeedArticleConnection
           }
         }
@@ -40,7 +40,7 @@ export const FEED_ARTICLES_PUBLIC = {
       viewer @connection(key: "viewerFeedNewest") {
         id
         recommendation {
-          feed: newest(input: { first: 10, after: $after }) {
+          feed: newest(input: { first: 30, after: $after }) {
             ...FeedArticleConnection
           }
         }
@@ -53,7 +53,7 @@ export const FEED_ARTICLES_PUBLIC = {
       viewer @connection(key: "viewerFeedIcymi") {
         id
         recommendation {
-          feed: icymi(input: { first: 10, after: $after }) {
+          feed: icymi(input: { first: 30, after: $after }) {
             ...FeedArticleConnection
           }
         }

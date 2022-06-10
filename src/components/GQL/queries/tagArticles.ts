@@ -7,7 +7,7 @@ export const TAG_ARTICLES_PUBLIC = gql`
     node(input: { id: $id }) {
       ... on Tag {
         id
-        articles(input: { first: 10, after: $after, selected: $selected }) {
+        articles(input: { first: 30, after: $after, selected: $selected }) {
           pageInfo {
             startCursor
             endCursor
