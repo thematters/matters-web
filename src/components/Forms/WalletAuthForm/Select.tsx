@@ -17,9 +17,7 @@ import {
 
 import {
   analytics,
-  injectedConnector,
   // translate,
-  walletConnectConnector,
 } from '~/common/utils'
 
 import styles from './styles.css'
@@ -82,6 +80,7 @@ const Select: React.FC<FormProps> = ({
 
   const {
     // activeConnector,
+    connectors,
     connect,
     error: connectError,
     isConnecting,
@@ -98,10 +97,14 @@ const Select: React.FC<FormProps> = ({
     submitCallback()
   }, [account])
 
+  const injectedConnector = connectors.find((c) => c.id === 'metaMask')
+  const walletConnectConnector = connectors.find(
+    (c) => c.id === 'walletConnect'
+  )
   const isMetaMaskLoading =
-    isConnecting && pendingConnector?.id === injectedConnector.id
+    isConnecting && pendingConnector?.id === injectedConnector?.id
   const isWalletConnectLoading =
-    isConnecting && pendingConnector?.id === walletConnectConnector.id
+    isConnecting && pendingConnector?.id === walletConnectConnector?.id
 
   const Intro = () => {
     if (!isConnect) return null
@@ -142,23 +145,27 @@ const Select: React.FC<FormProps> = ({
           />
         }
       >
-        <Form.List.Item
-          title={
-            <TextIcon
-              color="black"
-              icon={<IconMetaMask24 size="md" />}
-              size="md"
-              spacing="xtight"
-            >
-              MetaMask
-            </TextIcon>
-          }
-          onClick={() => {
-            analytics.trackEvent('click_button', { type: 'connectorMetaMask' })
-            connect(injectedConnector)
-          }}
-          right={isMetaMaskLoading ? <IconSpinner16 color="grey" /> : null}
-        />
+        {injectedConnector?.ready && (
+          <Form.List.Item
+            title={
+              <TextIcon
+                color="black"
+                icon={<IconMetaMask24 size="md" />}
+                size="md"
+                spacing="xtight"
+              >
+                MetaMask
+              </TextIcon>
+            }
+            onClick={() => {
+              analytics.trackEvent('click_button', {
+                type: 'connectorMetaMask',
+              })
+              connect(injectedConnector)
+            }}
+            right={isMetaMaskLoading ? <IconSpinner16 color="grey" /> : null}
+          />
+        )}
         <Form.List.Item
           title={
             <TextIcon

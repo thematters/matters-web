@@ -1,7 +1,5 @@
 import { providers } from 'ethers'
 import { configureChains, defaultChains } from 'wagmi'
-import { InjectedConnector } from 'wagmi/connectors/injected'
-import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
 import { alchemyProvider } from 'wagmi/providers/alchemy'
 import { publicProvider } from 'wagmi/providers/public'
 
@@ -16,23 +14,8 @@ export const { chains } = configureChains(defaultChains, [
   publicProvider(),
 ])
 
-export const injectedConnector = new InjectedConnector({
-  chains,
-  options: { shimDisconnect: true },
-})
-
-export const walletConnectConnector = new WalletConnectConnector({
-  options: {
-    // infuraId: process.env.NEXT_PUBLIC_ALCHEMY_KEY || '',
-    qrcode: true,
-  },
-})
-
 export const wagmiProvider = ({ chainId }: { chainId?: any }) =>
   new providers.AlchemyProvider(chainId, alchemyId)
-
-export const wagmiWebSocketProvider = ({ chainId }: { chainId?: any }) =>
-  new providers.AlchemyWebSocketProvider(chainId, alchemyId)
 
 export const maskAddress = (address: string, prefixLen: number = 6) => {
   return `${address.substring(0, prefixLen)}...${address.substring(
