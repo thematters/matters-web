@@ -42,14 +42,13 @@ const MetaInfo = ({
 
       {canReadFullContent && (
         <>
-          <FingerprintButton article={article} />
-
           {shouldTranslate && (
             <TranslationButton
               translated={translated}
               toggleTranslate={toggleTranslate}
             />
           )}
+          <FingerprintButton article={article} />
         </>
       )}
 
