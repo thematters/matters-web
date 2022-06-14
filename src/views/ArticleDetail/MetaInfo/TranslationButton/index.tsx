@@ -14,17 +14,23 @@ const TranslationButton: FC<{
         toggleTranslate()
         analytics.trackEvent('click_button', { type: 'translation' })
       }}
+      spacing={['xxtight', 'xtight']}
+      bgColor="green-lighter"
     >
       <TextIcon
-        icon={<IconTranslate16 color="grey" />}
+        icon={<IconTranslate16 color="green" />}
         size="xs"
         spacing="xxtight"
-        color="grey"
+        color="green"
       >
         {translated ? (
           <Translate zh_hant="原文（En）" zh_hans="原文（En）" en="Original" />
         ) : (
-          <Translate zh_hant="翻譯（繁中）" zh_hans="翻译（简中）" en="Translation" />
+          <Translate
+            zh_hant="翻譯（繁中）"
+            zh_hans="翻译（简中）"
+            en="Translation"
+          />
         )}
       </TextIcon>
     </Button>
