@@ -1,7 +1,9 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
+import { useContext } from 'react'
 
 import {
+  Button,
   Card,
   CopyButton,
   // CopyButton,
@@ -12,13 +14,16 @@ import {
   // IconIPFS24,
   IconIPFSGreen24,
   IconISCN24,
+  LanguageContext,
   Spacer,
   Spinner,
   TextIcon,
   Translate,
+  // translate,
+  useMutation,
 } from '~/components'
 
-import { iscnLinkUrl } from '~/common/utils'
+import { iscnLinkUrl, translate } from '~/common/utils'
 
 import ArticleSecret from './ArticleSecret'
 // import ArticleSecretDesc from './ArticleSecretDesc'
@@ -27,6 +32,27 @@ import ArticleSecret from './ArticleSecret'
 import styles from './styles.css'
 
 import { Gateways } from './__generated__/Gateways'
+import { RetryEditArticle } from './__generated__/RetryEditArticle'
+
+const EDIT_ARTICLE = gql`
+  mutation RetryEditArticle($id: ID!, $iscnPublish: Boolean) {
+    editArticle(input: { id: $id, iscnPublish: $iscnPublish }) {
+      id
+      cover
+      access {
+        type
+      }
+      license
+      iscnId
+      drafts {
+        id
+        mediaHash
+        publishState
+        iscnPublish
+      }
+    }
+  }
+`
 
 const GATEWAYS = gql`
   query Gateways {
@@ -89,17 +115,25 @@ const SectionCard: React.FC<{
 const FingerprintDialogContent = ({
   dataHash,
   showSecret,
+  showRetry,
   iscnId,
   iscnPublish,
+  articleId,
 }: {
   dataHash: string
   showSecret: boolean
+  showRetry: boolean
   iscnId: string
   iscnPublish?: boolean
+  articleId?: string
 }) => {
+  const { lang } = useContext(LanguageContext)
   const { loading, data } = useQuery<Gateways>(GATEWAYS)
 
   const gateways = data?.official.gatewayUrls || []
+
+  const [editArticle, { loading: retryPublishing }] =
+    useMutation<RetryEditArticle>(EDIT_ARTICLE)
 
   return (
     <section className="container">
@@ -219,8 +253,29 @@ const FingerprintDialogContent = ({
               <a href={iscnLinkUrl(iscnId)} target="_blank">
                 <IconExternalLink16 />
               </a>
+            ) : showRetry ? (
+              <Button
+                spacing={['xtight', 'xtight']}
+                textColor="green"
+                textActiveColor="white"
+                bgActiveColor="green"
+                borderColor="green"
+                aria-label={translate({ id: 'retry', lang })}
+                disabled={retryPublishing}
+                onClick={() => {
+                  editArticle({
+                    variables: {
+                      id: articleId,
+                      iscnPublish: true,
+                    },
+                  })
+                }}
+              >
+                retryPublishing ? <Translate id="retrying" /> :
+                <Translate id="retry" />
+              </Button>
             ) : (
-              <button>Retry</button>
+              <></>
             )
           }
           // href={iscnLinkUrl(iscnId)}

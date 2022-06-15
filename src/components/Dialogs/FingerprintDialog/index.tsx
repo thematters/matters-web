@@ -62,6 +62,8 @@ const BaseFingerprintDialog = ({
             iscnId={article.iscnId || ''}
             iscnPublish={!!article.drafts?.[0]?.iscnPublish}
             showSecret={showSecret}
+            showRetry={viewer.id === article.author.id}
+            articleId={article.id}
           />
         </Dialog.Content>
       </Dialog>

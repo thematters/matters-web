@@ -16,8 +16,6 @@
   margin-bottom: var(--spacing-base);
 
   & ul {
-    @mixin border-top-grey;
-    @mixin border-bottom-grey;
     @mixin hide-scrollbar;
 
     max-height: 12rem;
