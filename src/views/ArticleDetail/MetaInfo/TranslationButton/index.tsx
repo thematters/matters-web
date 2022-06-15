@@ -7,7 +7,20 @@ import { analytics } from '~/common/utils'
 const TranslationButton: FC<{
   translated: boolean
   toggleTranslate: () => void
-}> = ({ translated, toggleTranslate }) => {
+  originalLanguage: string
+}> = ({ translated, toggleTranslate, originalLanguage}) => {
+  const languages = new Map([
+    ['zh_hant', '繁中'],
+    ['zh_hans', '简中'],
+    ['en', 'En'],
+    ['vi', 'Việt'],
+    ['ja', '日本語'],
+    ['ru', 'Русский'],
+  ])
+  const originalLang = languages.get(originalLanguage)
+  const buttonLabelZh = originalLang? `原文（${originalLang}）`: '原文'
+  const buttonLabelEn = originalLang? `Original（${originalLang}）`: 'Original'
+
   return (
     <Button
       onClick={() => {
@@ -24,12 +37,12 @@ const TranslationButton: FC<{
         color="green"
       >
         {translated ? (
-          <Translate zh_hant="原文（En）" zh_hans="原文（En）" en="Original（中）" />
+          <Translate zh_hant={buttonLabelZh} zh_hans={buttonLabelZh} en={buttonLabelEn} />
         ) : (
           <Translate
-            zh_hant="翻譯（繁中）"
-            zh_hans="翻译（简中）"
-            en="Translation（En）"
+            zh_hant="翻譯"
+            zh_hans="翻译"
+            en="Translation"
           />
         )}
       </TextIcon>
