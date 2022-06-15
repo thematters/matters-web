@@ -8,7 +8,7 @@ const TranslationButton: FC<{
   translated: boolean
   toggleTranslate: () => void
   originalLanguage: string
-}> = ({ translated, toggleTranslate, originalLanguage}) => {
+}> = ({ translated, toggleTranslate, originalLanguage }) => {
   const languages = new Map([
     ['zh_hant', '繁中'],
     ['zh_hans', '简中'],
@@ -18,8 +18,8 @@ const TranslationButton: FC<{
     ['ru', 'Русский'],
   ])
   const originalLang = languages.get(originalLanguage)
-  const buttonLabelZh = originalLang? `原文（${originalLang}）`: '原文'
-  const buttonLabelEn = originalLang? `Original（${originalLang}）`: 'Original'
+    ? `（${languages.get(originalLanguage)}）`
+    : ''
 
   return (
     <Button
@@ -37,13 +37,13 @@ const TranslationButton: FC<{
         color="green"
       >
         {translated ? (
-          <Translate zh_hant={buttonLabelZh} zh_hans={buttonLabelZh} en={buttonLabelEn} />
-        ) : (
           <Translate
-            zh_hant="翻譯"
-            zh_hans="翻译"
-            en="Translation"
+            zh_hant={`原文${originalLang}`}
+            zh_hans={`原文${originalLang}`}
+            en={`Original${originalLang}`}
           />
+        ) : (
+          <Translate zh_hant="翻譯" zh_hans="翻译" en="Translation" />
         )}
       </TextIcon>
     </Button>

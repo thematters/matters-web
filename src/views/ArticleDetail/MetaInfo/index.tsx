@@ -22,7 +22,7 @@ const MetaInfo = ({
   toggleTranslate,
   canReadFullContent,
 }: MetaInfoProps) => {
-  const originalLanguage = article?.language ? article.language: ''
+  const originalLanguage = article?.language ? article.language : ''
   return (
     <section className="info">
       <section className="time">
