@@ -231,7 +231,7 @@ const ArticleDetail = () => {
               <Translate
                 zh_hant="正在翻譯為繁體中文"
                 zh_hans="正在翻译为简体中文"
-                en="Translating into traditional Chinese"
+                en="Translating into English"
               />
             ),
           },

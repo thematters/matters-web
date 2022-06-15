@@ -16,12 +16,16 @@ const FingerprintButton = ({ article }: FingerprintButtonProps) => {
   return (
     <FingerprintDialog article={article}>
       {({ openDialog }) => (
-        <Button onClick={openDialog}>
+        <Button
+          onClick={openDialog}
+          spacing={['xxtight', 'xtight']}
+          bgColor="green-lighter"
+        >
           <TextIcon
-            icon={<IconIPFS24 />}
+            icon={<IconIPFS24 color="green" />}
             size="xs"
             spacing="xxtight"
-            color="grey"
+            color="green"
           >
             <Translate id="IPFSEntrance" />
           </TextIcon>
