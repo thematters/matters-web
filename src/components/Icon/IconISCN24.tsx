@@ -1,4 +1,4 @@
-import { ReactComponent as Icon } from '@/public/static/icons/24px/iscn.svg'
+import { ReactComponent as Icon } from '@/public/static/icons/24px/iscn-2.svg'
 
 import { withIcon } from './withIcon'
 

@@ -7,6 +7,7 @@ import {
   useEditDraftAccess,
   useEditDraftCollection,
   useEditDraftCover,
+  useEditDraftPublishISCN,
   useEditDraftTags,
 } from '../hooks'
 import styles from './styles.css'
@@ -71,6 +72,8 @@ const EditDraftCircle = ({ draft, ownCircles }: SidebarProps) => {
     draft,
     ownCircles && ownCircles[0]
   )
+  const { edit: togglePublishISCN, saving: iscnPublishSaving } =
+    useEditDraftPublishISCN(draft)
   const hasOwnCircle = ownCircles && ownCircles.length >= 1
 
   return (
@@ -81,6 +84,9 @@ const EditDraftCircle = ({ draft, ownCircles }: SidebarProps) => {
       editAccess={edit}
       accessSaving={saving}
       canToggleCircle={!!hasOwnCircle}
+      iscnPublish={draft?.iscnPublish}
+      togglePublishISCN={togglePublishISCN}
+      iscnPublishSaving={iscnPublishSaving}
     />
   )
 }
