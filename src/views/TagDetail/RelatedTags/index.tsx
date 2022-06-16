@@ -42,7 +42,7 @@ const RelatedTags = ({ data }: RelatedTagsProps) => {
   const Header = (
     <PageHeader
       title={
-        <Translate zh_hant="相關標籤" zh_hans="相关标签" en="Recommendations" />
+        <Translate zh_hant="相關標籤" zh_hans="相关标签" en="Related Tags" />
       }
       is="h2"
       hasNoBorder
