@@ -2,6 +2,7 @@ import { FC } from 'react'
 
 import { Button, IconTranslate16, TextIcon, Translate } from '~/components'
 
+import { CONTENT_LANG_TEXT_MAP } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 const TranslationButton: FC<{
@@ -9,17 +10,20 @@ const TranslationButton: FC<{
   toggleTranslate: () => void
   originalLanguage: string
 }> = ({ translated, toggleTranslate, originalLanguage }) => {
-  const languages = new Map([
-    ['zh_hant', '繁中'],
-    ['zh_hans', '简中'],
-    ['en', 'En'],
-    ['vi', 'Việt'],
-    ['ja', '日本語'],
-    ['ru', 'Русский'],
-  ])
-  const originalLang = languages.get(originalLanguage)
-    ? `（${languages.get(originalLanguage)}）`
-    : ''
+  const originalLang = {
+    zh_hant: '',
+    zh_hans: '',
+    en: '',
+  }
+  Object.entries(CONTENT_LANG_TEXT_MAP.zh_hant).forEach(([k, v]) => {
+    if (k === originalLanguage) originalLang.zh_hant = `（${v}）`
+  })
+  Object.entries(CONTENT_LANG_TEXT_MAP.zh_hans).forEach(([k, v]) => {
+    if (k === originalLanguage) originalLang.zh_hans = `（${v}）`
+  })
+  Object.entries(CONTENT_LANG_TEXT_MAP.en).forEach(([k, v]) => {
+    if (k === originalLanguage) originalLang.en = `（${v}）`
+  })
 
   return (
     <Button
@@ -38,9 +42,9 @@ const TranslationButton: FC<{
       >
         {translated ? (
           <Translate
-            zh_hant={`原文${originalLang}`}
-            zh_hans={`原文${originalLang}`}
-            en={`Original${originalLang}`}
+            zh_hant={`原文${originalLang.zh_hant}`}
+            zh_hans={`原文${originalLang.zh_hans}`}
+            en={`Original${originalLang.en}`}
           />
         ) : (
           <Translate zh_hant="翻譯" zh_hans="翻译" en="Translation" />
