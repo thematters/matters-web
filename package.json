@@ -9,7 +9,7 @@
   },
   "license": "Apache-2.0",
   "scripts": {
-    "dev": "PORT=\"${PORT:-3000}\"; next -p $PORT",
+    "dev": "NODE_OPTIONS=\"--max_old_space_size=4096\" PORT=\"${PORT:-3000}\"; next -p $PORT",
     "start": "PORT=\"${PORT:-3000}\"; next start -p $PORT",
     "build": "NODE_ENV=production next build",
     "export": "next export",

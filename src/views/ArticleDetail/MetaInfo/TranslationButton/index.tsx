@@ -24,7 +24,11 @@ const TranslationButton: FC<{
         color="green"
       >
         {translated ? (
-          <Translate zh_hant="原文（En）" zh_hans="原文（En）" en="Original（中）" />
+          <Translate
+            zh_hant="原文（En）"
+            zh_hans="原文（En）"
+            en="Original（中）"
+          />
         ) : (
           <Translate
             zh_hant="翻譯（繁中）"
