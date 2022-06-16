@@ -1,9 +1,9 @@
 import { Dialog, Switch, Translate } from '~/components'
 import { SetPublishISCNProps } from '~/components/Editor'
 
+import ListItem from '../../ListItem'
 import { Step } from '../../SettingsDialog'
 import ToggleAccess, { ToggleAccessProps } from '../../ToggleAccess'
-import ListItem from './ListItem'
 import styles from './styles.css'
 
 export type SettingsListDialogButtons = {

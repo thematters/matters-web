@@ -2,12 +2,29 @@ import { FC } from 'react'
 
 import { Button, IconTranslate16, TextIcon, Translate } from '~/components'
 
+import { CONTENT_LANG_TEXT_MAP } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 const TranslationButton: FC<{
   translated: boolean
   toggleTranslate: () => void
-}> = ({ translated, toggleTranslate }) => {
+  originalLanguage: string
+}> = ({ translated, toggleTranslate, originalLanguage }) => {
+  const originalLang = {
+    zh_hant: '',
+    zh_hans: '',
+    en: '',
+  }
+  Object.entries(CONTENT_LANG_TEXT_MAP.zh_hant).forEach(([k, v]) => {
+    if (k === originalLanguage) originalLang.zh_hant = `（${v}）`
+  })
+  Object.entries(CONTENT_LANG_TEXT_MAP.zh_hans).forEach(([k, v]) => {
+    if (k === originalLanguage) originalLang.zh_hans = `（${v}）`
+  })
+  Object.entries(CONTENT_LANG_TEXT_MAP.en).forEach(([k, v]) => {
+    if (k === originalLanguage) originalLang.en = `（${v}）`
+  })
+
   return (
     <Button
       onClick={() => {
@@ -25,16 +42,12 @@ const TranslationButton: FC<{
       >
         {translated ? (
           <Translate
-            zh_hant="原文（En）"
-            zh_hans="原文（En）"
-            en="Original（中）"
+            zh_hant={`原文${originalLang.zh_hant}`}
+            zh_hans={`原文${originalLang.zh_hans}`}
+            en={`Original${originalLang.en}`}
           />
         ) : (
-          <Translate
-            zh_hant="翻譯（繁中）"
-            zh_hans="翻译（简中）"
-            en="Translation（En）"
-          />
+          <Translate zh_hant="翻譯" zh_hans="翻译" en="Translation" />
         )}
       </TextIcon>
     </Button>

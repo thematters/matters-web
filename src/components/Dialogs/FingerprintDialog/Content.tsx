@@ -1,18 +1,29 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
+import { useContext } from 'react'
 
 import {
+  Button,
   Card,
+  CopyButton,
+  // CopyButton,
+  // CopyToClipboard,
   // Divider,
+  // IconCopy16,
   IconExternalLink16,
-  IconIPFS24,
+  // IconIPFS24,
+  IconIPFSGreen24,
   IconISCN24,
+  LanguageContext,
+  Spacer,
   Spinner,
   TextIcon,
   Translate,
+  // translate,
+  useMutation,
 } from '~/components'
 
-import { iscnLinkUrl } from '~/common/utils'
+import { iscnLinkUrl, translate } from '~/common/utils'
 
 import ArticleSecret from './ArticleSecret'
 // import ArticleSecretDesc from './ArticleSecretDesc'
@@ -21,6 +32,27 @@ import ArticleSecret from './ArticleSecret'
 import styles from './styles.css'
 
 import { Gateways } from './__generated__/Gateways'
+import { RetryEditArticle } from './__generated__/RetryEditArticle'
+
+const EDIT_ARTICLE = gql`
+  mutation RetryEditArticle($id: ID!, $iscnPublish: Boolean) {
+    editArticle(input: { id: $id, iscnPublish: $iscnPublish }) {
+      id
+      cover
+      access {
+        type
+      }
+      license
+      iscnId
+      drafts {
+        id
+        mediaHash
+        publishState
+        iscnPublish
+      }
+    }
+  }
+`
 
 const GATEWAYS = gql`
   query Gateways {
@@ -42,11 +74,20 @@ const SectionCard: React.FC<{
         {title}
         {right || <section className="right">{right}</section>}
       </h3>
+      <style jsx>{`
+        & .title {
+          @mixin flex-center-space-between;
+
+          font-size: var(--font-size-xl);
+          font-weight: var(--font-weight-semibold);
+          line-height: 1;
+        }
+      `}</style>
     </header>
   )
 
   return (
-    <Card bgColor="white" spacing={['base', 'base']}>
+    <Card bgColor="white" borderRadius="xtight" spacing={['base', 'base']}>
       <section className="item">
         {href ? (
           <a href={href} target="_blank">
@@ -55,19 +96,16 @@ const SectionCard: React.FC<{
         ) : (
           <Header />
         )}
-        <h4 className="subtitle">{subTitle}</h4>
+        <small className="subtitle">{subTitle}</small>
       </section>
 
       {children}
       <style jsx>{`
-        .item {
-          & .title {
-            @mixin flex-center-space-between;
-
-            font-size: var(--font-size-xl);
-            font-weight: var(--font-weight-semibold);
-            line-height: 1;
-          }
+        .subtitle {
+          color: var(--color-grey);
+        }
+        .right {
+          float: right;
         }
       `}</style>
     </Card>
@@ -77,25 +115,41 @@ const SectionCard: React.FC<{
 const FingerprintDialogContent = ({
   dataHash,
   showSecret,
+  showRetry,
   iscnId,
+  iscnPublish,
+  articleId,
 }: {
   dataHash: string
   showSecret: boolean
+  showRetry: boolean
   iscnId: string
+  iscnPublish?: boolean
+  articleId?: string
 }) => {
+  const { lang } = useContext(LanguageContext)
   const { loading, data } = useQuery<Gateways>(GATEWAYS)
 
   const gateways = data?.official.gatewayUrls || []
+
+  const [editArticle, { loading: retryPublishing }] =
+    useMutation<RetryEditArticle>(EDIT_ARTICLE)
 
   return (
     <section className="container">
       <SectionCard
         title={
-          <TextIcon icon={<IconIPFS24 />} size="lg">
+          <TextIcon icon={<IconIPFSGreen24 />} size="lg">
             IPFS
           </TextIcon>
         }
-        subTitle={'去中心化內容存儲網絡'}
+        subTitle={
+          <Translate
+            zh_hant="去中心化內容存儲網絡"
+            zh_hans="去中心化內容存儲網絡"
+            en="Decentralized Content Storage Network"
+          />
+        }
       >
         <hr style={{ margin: '0.5rem 0 1rem' }} />
 
@@ -128,13 +182,8 @@ const FingerprintDialogContent = ({
               return (
                 <li key={url}>
                   <a href={gatewayUrl} target="_blank" className="gateway-url">
-                    {/* hostname */}
-                    <TextIcon
-                      icon={<IconExternalLink16 />}
-                      textPlacement="left"
-                    >
-                      {hostname}
-                    </TextIcon>
+                    {hostname}
+                    <IconExternalLink16 />
                   </a>
                 </li>
               )
@@ -162,31 +211,72 @@ const FingerprintDialogContent = ({
             />
           </span>
 
-          <section>
-            {/* <CopyButton text={dataHash} /> */}
+          <section className="copy">
             <input
               type="text"
               value={dataHash}
               readOnly
               onClick={(event) => event.currentTarget.select()}
             />
+            <CopyButton text={dataHash} />
           </section>
         </section>
       </SectionCard>
 
+      <Spacer size="base" />
+
       {/* iscnId */}
-      {iscnId && (
+      {iscnPublish && (
         <SectionCard
           title={
             <TextIcon icon={<IconISCN24 />} size="lg">
               ISCN
             </TextIcon>
           }
-          subTitle={'已在 LikeCoin 鏈上註冊的元數據'}
+          subTitle={
+            iscnId ? (
+              <Translate
+                zh_hant="已在 LikeCoin 鏈上註冊的元數據"
+                zh_hans="已在 LikeCoin 鏈上註冊的元數據"
+                en="the metadata registered on LikeCoin chain"
+              />
+            ) : (
+              <Translate
+                zh_hant="ISCN 寫入未成功"
+                zh_hans="ISCN 寫入未成功"
+                en="ISCN 寫入未成功"
+              />
+            )
+          }
           right={
-            <a href={iscnLinkUrl(iscnId)} target="_blank">
-              <IconExternalLink16 />
-            </a>
+            iscnId ? (
+              <a href={iscnLinkUrl(iscnId)} target="_blank">
+                <IconExternalLink16 />
+              </a>
+            ) : showRetry ? (
+              <Button
+                spacing={['xtight', 'xtight']}
+                textColor="green"
+                textActiveColor="white"
+                bgActiveColor="green"
+                borderColor="green"
+                aria-label={translate({ id: 'retry', lang })}
+                disabled={retryPublishing}
+                onClick={() => {
+                  editArticle({
+                    variables: {
+                      id: articleId,
+                      iscnPublish: true,
+                    },
+                  })
+                }}
+              >
+                retryPublishing ? <Translate id="retrying" /> :
+                <Translate id="retry" />
+              </Button>
+            ) : (
+              <></>
+            )
           }
           // href={iscnLinkUrl(iscnId)}
         >
