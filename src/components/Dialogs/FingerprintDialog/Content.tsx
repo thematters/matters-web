@@ -6,12 +6,7 @@ import {
   Button,
   Card,
   CopyButton,
-  // CopyButton,
-  // CopyToClipboard,
-  // Divider,
-  // IconCopy16,
   IconExternalLink16,
-  // IconIPFS24,
   IconIPFSGreen24,
   IconISCN24,
   LanguageContext,
@@ -19,16 +14,12 @@ import {
   Spinner,
   TextIcon,
   Translate,
-  // translate,
   useMutation,
 } from '~/components'
 
 import { iscnLinkUrl, translate } from '~/common/utils'
 
 import ArticleSecret from './ArticleSecret'
-// import ArticleSecretDesc from './ArticleSecretDesc'
-// import CopyButton from './CopyButton'
-// import ListItem from './ListItem'
 import styles from './styles.css'
 
 import { Gateways } from './__generated__/Gateways'
@@ -203,13 +194,13 @@ const FingerprintDialogContent = ({
               <Translate id="articleFingerprint" />
             </h4>
           </header>
-          <span className="subtitle">
+          <div className="subtitle">
             <Translate
               zh_hant="使用 IPFS 生成的作品指紋，通過它可在節點調取內容"
               zh_hans="使用 IPFS 生成的作品指紋，通過它可在節點調取內容"
               en="The Fingerprint from IPFS, you can read it via a gateway"
             />
-          </span>
+          </div>
 
           <section className="copy">
             <input
@@ -271,17 +262,17 @@ const FingerprintDialogContent = ({
                   })
                 }}
               >
-                retryPublishing ? <Translate id="retrying" /> :
-                <Translate id="retry" />
+                {retryPublishing ? (
+                  <Translate id="retrying" />
+                ) : (
+                  <Translate id="retry" />
+                )}
               </Button>
             ) : (
               <></>
             )
           }
-          // href={iscnLinkUrl(iscnId)}
-        >
-          {/* <pre>{iscnId}</pre> */}
-        </SectionCard>
+        />
       )}
 
       <style jsx>{styles}</style>

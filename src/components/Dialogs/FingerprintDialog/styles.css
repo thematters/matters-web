@@ -75,17 +75,8 @@
 .hash {
   margin-bottom: var(--spacing-x-tight);
 
-  & .data-hash {
-    position: relative;
-
-    & input {
-      padding: var(--spacing-x-tight) var(--spacing-x-loose)
-        var(--spacing-x-tight) var(--spacing-x-tight);
-      font-family: var(--font-mono);
-      font-size: var(--font-size-sm);
-      color: var(--color-matters-gold);
-      background: var(--color-green-lighter);
-    }
+  & .subtitle {
+    margin-bottom: var(--spacing-x-tight);
   }
 
   & .copy {

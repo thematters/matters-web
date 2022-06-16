@@ -14,20 +14,22 @@ const SidebarManagement: React.FC<SidebarManagementProps> = (props) => {
       <section className="container">
         <ToggleAccess {...props} inSidebar />
 
-        <ListItem
-          title={<Translate id="publishToISCN" />}
-          subTitle={<Translate id="publishToISCNHint" />}
-          onClick={() => console.log('publishISCN switch')}
-        >
-          <Switch
-            checked={!!props?.iscnPublish}
-            onChange={() => {
-              // console.log('toogle change')
-              props?.togglePublishISCN(!props?.iscnPublish)
-            }}
-            loading={props?.iscnPublishSaving}
-          />
-        </ListItem>
+        {false && (
+          <ListItem
+            title={<Translate id="publishToISCN" />}
+            subTitle={<Translate id="publishToISCNHint" />}
+            onClick={() => console.log('publishISCN switch')}
+          >
+            <Switch
+              checked={!!props?.iscnPublish}
+              onChange={() => {
+                // console.log('toogle change')
+                props?.togglePublishISCN(!props?.iscnPublish)
+              }}
+              loading={props?.iscnPublishSaving}
+            />
+          </ListItem>
+        )}
 
         <style jsx>{styles}</style>
       </section>
