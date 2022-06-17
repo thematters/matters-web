@@ -217,6 +217,7 @@ type UserFeedType =
   | 'newest'
   | 'read_history'
   | 'related_article'
+  | 'related_tags'
   | 'search'
   | 'search_user'
   | 'tag_detail_latest'
