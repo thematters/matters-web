@@ -33,6 +33,19 @@ export const TAG_DETAIL_PUBLIC = gql`
         ...FollowersTag
         ...ArticleCountTag
         ...FollowButtonTagPrivate
+        recommended(input: {}) {
+          edges {
+            cursor
+            node {
+              id
+              content
+              description
+              cover
+              numArticles
+              numAuthors
+            }
+          }
+        }
       }
     }
   }
