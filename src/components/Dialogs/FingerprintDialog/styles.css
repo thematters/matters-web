@@ -92,21 +92,17 @@
     @mixin flex-center-space-between;
 
     position: relative;
-    color: var(--color-matters-gold);
+    padding: 12px 8px;
+    margin: 8px 0 0 0;
+    color: var(--color-matters-green);
     background: var(--color-green-lighter);
+    border-radius: 4px;
 
     & input {
-      padding: var(--spacing-x-tight) var(--spacing-base);
+      padding: 0 8px 0 0;
       font-family: var(--font-mono);
       font-size: var(--font-size-sm);
-      color: var(--color-matters-green);
-      background: var(--color-green-lighter);
-      border-radius: var(--spacing-base);
-    }
-
-    & button {
-      position: absolute;
-      right: var(--spacing-loose);
+      background: transparent;
     }
   }
 }
