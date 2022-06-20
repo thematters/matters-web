@@ -86,8 +86,16 @@ const SettingsList = ({
 
           <section className="iscn d-flex">
             <div className="text">
-              <h3 className="title"><Translate id="publishToISCN" /></h3>
-              <p className="detail"><Translate id="publishToISCNHint_1" /><a href="#" target="_blank">ISCN</a><Translate id="publishToISCNHint_2" /></p>
+              <h3 className="title">
+                <Translate id="publishToISCN" />
+              </h3>
+              <p className="detail">
+                <Translate id="publishToISCNHint_1" />
+                <a href="#" target="_blank">
+                  ISCN
+                </a>
+                <Translate id="publishToISCNHint_2" />
+              </p>
             </div>
             <Switch
               checked={!!iscnPublish}

@@ -965,7 +965,8 @@ export const TEXT = {
     publishing: 'Publishing...',
     publishToISCN: 'Register for ISCN',
     publishToISCNHint_1: 'The cost of ',
-    publishToISCNHint_2: ' registration is about 1 LIKE. During promotion period it is sponsored by Matters.News.',
+    publishToISCNHint_2:
+      ' registration is about 1 LIKE. During promotion period it is sponsored by Matters.News.',
     pushDescription:
       'Turn on notifications to receive latest news and discussions.',
     putComment: 'Comment',

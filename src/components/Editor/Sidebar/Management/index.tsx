@@ -15,7 +15,9 @@ const SidebarManagement: React.FC<SidebarManagementProps> = (props) => {
 
         <section className="iscn">
           <div className="d-flex">
-            <h3 className="title"><Translate id="publishToISCN" /></h3>
+            <h3 className="title">
+              <Translate id="publishToISCN" />
+            </h3>
             <Switch
               checked={!!props?.iscnPublish}
               onChange={() => {
@@ -25,7 +27,13 @@ const SidebarManagement: React.FC<SidebarManagementProps> = (props) => {
               loading={props?.iscnPublishSaving}
             />
           </div>
-          <p className="detail"><Translate id="publishToISCNHint_1" /><a href="#" target="_blank">ISCN</a><Translate id="publishToISCNHint_2" /></p>
+          <p className="detail">
+            <Translate id="publishToISCNHint_1" />
+            <a href="#" target="_blank">
+              ISCN
+            </a>
+            <Translate id="publishToISCNHint_2" />
+          </p>
         </section>
         {/* <section className="inSidebar">
           <section className="widget">
