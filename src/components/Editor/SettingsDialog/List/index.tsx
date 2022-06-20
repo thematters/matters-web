@@ -84,20 +84,27 @@ const SettingsList = ({
             <ToggleAccess {...restProps} />
           </section>
 
-          <ListItem
-            title={<Translate id="publishToISCN" />}
-            subTitle={<Translate id="publishToISCNHint" />}
-            onClick={() => console.log('publishISCN switch')}
-          >
+          <section className="iscn d-flex">
+            <div className="text">
+              <h3 className="title">
+                <Translate id="publishToISCN" />
+              </h3>
+              <p className="detail">
+                <Translate id="publishToISCNHint_1" />
+                <a href="#" target="_blank">
+                  ISCN
+                </a>
+                <Translate id="publishToISCNHint_2" />
+              </p>
+            </div>
             <Switch
               checked={!!iscnPublish}
               onChange={() => {
-                // console.log('toogle change')
                 togglePublishISCN(!iscnPublish)
               }}
               loading={iscnPublishSaving}
             />
-          </ListItem>
+          </section>
 
           {(confirmButtonText || cancelButtonText) && (
             <Dialog.Footer>

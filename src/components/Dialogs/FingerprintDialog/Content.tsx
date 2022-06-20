@@ -5,11 +5,10 @@ import { useContext } from 'react'
 import {
   Button,
   Card,
-  CopyButton,
   // CopyButton,
-  // CopyToClipboard,
+  CopyToClipboard,
   // Divider,
-  // IconCopy16,
+  IconCopy16,
   IconExternalLink16,
   // IconIPFS24,
   IconIPFSGreen24,
@@ -218,7 +217,11 @@ const FingerprintDialogContent = ({
               readOnly
               onClick={(event) => event.currentTarget.select()}
             />
-            <CopyButton text={dataHash} />
+            <CopyToClipboard text={dataHash}>
+              <Button>
+                <IconCopy16 />
+              </Button>
+            </CopyToClipboard>
           </section>
         </section>
       </SectionCard>

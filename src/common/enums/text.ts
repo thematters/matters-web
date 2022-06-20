@@ -236,7 +236,8 @@ export const TEXT = {
     publishAbort: '存至草稿',
     publishing: '正在發布，馬上就好',
     publishToISCN: '註冊 ISCN',
-    publishToISCNHint: '發布時註冊 ISCN，費用 ≈1 LIKE，推廣期由平台補助',
+    publishToISCNHint_1: '發布時註冊 ',
+    publishToISCNHint_2: '，費用 ≈1 LIKE，推廣期由平台補助',
     pushDescription: '別錯過精彩討論和最新消息，快點開啓推送吧！',
     putComment: '發布評論',
     QUERY_FIELD_NOT_FOUND: '要查詢的數據不存在',
@@ -589,7 +590,8 @@ export const TEXT = {
     publishAbort: '存至草稿',
     publishing: '正在发布，马上就好',
     publishToISCN: '註冊 ISCN',
-    publishToISCNHint: '发布时註冊 ISCN，費用 ≈1 LIKE，推廣期由平台補助',
+    publishToISCNHint_1: '发布时註冊 ',
+    publishToISCNHint_2: '，費用 ≈1 LIKE，推廣期由平台補助',
     pushDescription: '别错过精彩讨论和最新消息，快点开启推送吧！',
     putComment: '发布评论',
     QUERY_FIELD_NOT_FOUND: '要查询的数据不存在',
@@ -962,8 +964,9 @@ export const TEXT = {
     publishAbort: 'Save as Draft',
     publishing: 'Publishing...',
     publishToISCN: 'Register for ISCN',
-    publishToISCNHint:
-      'The cost of ISCN registration is about 1 LIKE. During promotion period it is sponsored by Matters.News.',
+    publishToISCNHint_1: 'The cost of ',
+    publishToISCNHint_2:
+      ' registration is about 1 LIKE. During promotion period it is sponsored by Matters.News.',
     pushDescription:
       'Turn on notifications to receive latest news and discussions.',
     putComment: 'Comment',
