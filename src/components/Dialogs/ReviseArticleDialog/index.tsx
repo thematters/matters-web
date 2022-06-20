@@ -17,7 +17,7 @@ export const ReviseArticleDialog = ({ children, revisionCountLeft }: Props) => {
       <Dialog size="sm" isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           title={
-            <Translate zh_hant="修訂須知" zh_hans="修订须知" en="Notice" />
+            <Translate zh_hant="修訂須知" zh_hans="修订须知" en="Edit Notice" />
           }
           closeDialog={closeDialog}
           closeTextId="cancel"
@@ -54,7 +54,7 @@ export const ReviseArticleDialog = ({ children, revisionCountLeft }: Props) => {
 
         <Dialog.Footer>
           <Dialog.Footer.Button onClick={closeDialog}>
-            <Translate zh_hant="開始修訂" zh_hans="开始修订" />
+            <Translate zh_hant="開始修訂" zh_hans="开始修订" en="Edit" />
           </Dialog.Footer.Button>
         </Dialog.Footer>
       </Dialog>
