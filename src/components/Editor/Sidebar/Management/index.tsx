@@ -1,7 +1,6 @@
 import { IconSettings24, Switch, Translate } from '~/components'
 
 import { SetPublishISCNProps } from '../..'
-import ListItem from '../../ListItem'
 import ToggleAccess, { ToggleAccessProps } from '../../ToggleAccess'
 import Box from '../Box'
 import styles from './styles.css'
@@ -14,20 +13,40 @@ const SidebarManagement: React.FC<SidebarManagementProps> = (props) => {
       <section className="container">
         <ToggleAccess {...props} inSidebar />
 
-        <ListItem
-          title={<Translate id="publishToISCN" />}
-          subTitle={<Translate id="publishToISCNHint" />}
-          onClick={() => console.log('publishISCN switch')}
-        >
-          <Switch
-            checked={!!props?.iscnPublish}
-            onChange={() => {
-              // console.log('toogle change')
-              props?.togglePublishISCN(!props?.iscnPublish)
-            }}
-            loading={props?.iscnPublishSaving}
-          />
-        </ListItem>
+        <section className="iscn">
+          <div className="d-flex">
+            <h3 className="title"><Translate id="publishToISCN" /></h3>
+            <Switch
+              checked={!!props?.iscnPublish}
+              onChange={() => {
+                // console.log('toogle change')
+                props?.togglePublishISCN(!props?.iscnPublish)
+              }}
+              loading={props?.iscnPublishSaving}
+            />
+          </div>
+          <p className="detail"><Translate id="publishToISCNHint_1" /><a href="#" target="_blank">ISCN</a><Translate id="publishToISCNHint_2" /></p>
+        </section>
+        {/* <section className="inSidebar">
+          <section className="widget">
+            <section className="iscn">
+              <section className="left">
+                <h3><Translate id="publishToISCN" /></h3>
+                <p className="subtitle"><Translate id="publishToISCNHint_1" /><a href="#" target="_blank">ISCN</a><Translate id="publishToISCNHint_2" /></p>
+              </section>
+              <section className="right">
+                <Switch
+                  checked={!!props?.iscnPublish}
+                  onChange={() => {
+                    // console.log('toogle change')
+                    props?.togglePublishISCN(!props?.iscnPublish)
+                  }}
+                  loading={props?.iscnPublishSaving}
+                />
+              </section>
+            </section>
+          </section>
+        </section> */}
 
         <style jsx>{styles}</style>
       </section>

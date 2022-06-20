@@ -6,3 +6,24 @@ ul {
 .access {
   padding: var(--spacing-base);
 }
+
+.iscn {
+  padding: var(--spacing-base);
+  &.d-flex {
+    @mixin flex-center-space-between;
+  }
+  & .text {
+    margin: 0 1rem 0 0;
+    & h3.title {
+      font-size: 1rem;
+    }
+    & p.detail {
+      font-size: 12px;
+      color: var(--color-grey);
+      & a {
+        color: var(--color-matters-green);
+        text-decoration: underline;
+      }
+    }
+  }
+}

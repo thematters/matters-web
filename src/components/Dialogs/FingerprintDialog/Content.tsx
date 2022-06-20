@@ -281,7 +281,7 @@ const FingerprintDialogContent = ({
               <></>
             )
           }
-        // href={iscnLinkUrl(iscnId)}
+          // href={iscnLinkUrl(iscnId)}
         >
           {/* <pre>{iscnId}</pre> */}
         </SectionCard>
