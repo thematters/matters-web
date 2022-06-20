@@ -17,7 +17,6 @@ import {
   useFeatures,
   usePublicQuery,
   usePullToRefresh,
-  useResponsive,
   useRoute,
   ViewerContext,
 } from '~/components'
@@ -55,7 +54,6 @@ type TagFeedType = 'latest' | 'selected' | 'community'
 const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
   const viewer = useContext(ViewerContext)
   const features = useFeatures()
-  const isLargeUp = useResponsive('lg-up')
 
   // feed type
   const hasSelectedFeed = (tag?.selectedArticles.totalCount || 0) > 0
@@ -93,7 +91,7 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
    * Render
    */
   return (
-    <Layout.Main aside={<RelatedTags data={tag.recommended} />}>
+    <Layout.Main aside={<RelatedTags tagId={tag.id} />}>
       <Layout.Header
         left={<Layout.Header.BackButton mode="black-solid" />}
         right={
@@ -176,7 +174,6 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
           <TagDetailArticles tagId={tag.id} selected={isSelected} />
         )}
         {isCommunity && <DynamicCommunity id={tag.id} isOwner={isOwner} />}
-        {!isLargeUp && <RelatedTags data={tag.recommended} />}
       </PullToRefresh>
       <style jsx>{styles}</style>
     </Layout.Main>
