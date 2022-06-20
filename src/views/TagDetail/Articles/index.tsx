@@ -171,7 +171,6 @@ const TagDetailArticles = ({ tagId, selected }: TagArticlesProps) => {
       <List>
         {(edges || []).map(({ node, cursor }, i) => (
           <>
-            {i === 4 && !isLargeUp && <RelatedTags tagId={tagId} />}
             <List.Item key={cursor}>
               <ArticleDigestFeed
                 article={node}
@@ -199,9 +198,13 @@ const TagDetailArticles = ({ tagId, selected }: TagArticlesProps) => {
                 inTagDetailLatest={!selected}
               />
             </List.Item>
+            {!isLargeUp && edges.length >= 4 && i === 3 && (
+              <RelatedTags tagId={tagId} />
+            )}
           </>
         ))}
       </List>
+      {!isLargeUp && edges.length < 4 && <RelatedTags tagId={tagId} />}
     </InfiniteScroll>
   )
 }
