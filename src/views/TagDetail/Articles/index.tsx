@@ -11,6 +11,7 @@ import {
   useEventListener,
   usePublicQuery,
   usePullToRefresh,
+  useResponsive,
   ViewerContext,
 } from '~/components'
 import {
@@ -20,6 +21,8 @@ import {
 
 import { REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
+
+import RelatedTags from '../RelatedTags'
 
 import { TagArticlesPublic } from '~/components/GQL/queries/__generated__/TagArticlesPublic'
 
@@ -31,6 +34,7 @@ interface TagArticlesProps {
 const TagDetailArticles = ({ tagId, selected }: TagArticlesProps) => {
   const viewer = useContext(ViewerContext)
   const feed = useRef(selected)
+  const isLargeUp = useResponsive('lg-up')
 
   /**
    * Data Fetching
@@ -166,31 +170,41 @@ const TagDetailArticles = ({ tagId, selected }: TagArticlesProps) => {
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
       <List>
         {(edges || []).map(({ node, cursor }, i) => (
-          <List.Item key={cursor}>
-            <ArticleDigestFeed
-              article={node}
-              onClick={() =>
-                analytics.trackEvent('click_feed', {
-                  type: selected ? 'tag_detail_selected' : 'tag_detail_latest',
-                  contentType: 'article',
-                  location: i,
-                  id: node.id,
-                })
-              }
-              onClickAuthor={() => {
-                analytics.trackEvent('click_feed', {
-                  type: selected ? 'tag_detail_selected' : 'tag_detail_latest',
-                  contentType: 'user',
-                  location: i,
-                  id: node.author.id,
-                })
-              }}
-              inTagDetailSelected={selected}
-              inTagDetailLatest={!selected}
-            />
-          </List.Item>
+          <>
+            <List.Item key={cursor}>
+              <ArticleDigestFeed
+                article={node}
+                onClick={() =>
+                  analytics.trackEvent('click_feed', {
+                    type: selected
+                      ? 'tag_detail_selected'
+                      : 'tag_detail_latest',
+                    contentType: 'article',
+                    location: i,
+                    id: node.id,
+                  })
+                }
+                onClickAuthor={() => {
+                  analytics.trackEvent('click_feed', {
+                    type: selected
+                      ? 'tag_detail_selected'
+                      : 'tag_detail_latest',
+                    contentType: 'user',
+                    location: i,
+                    id: node.author.id,
+                  })
+                }}
+                inTagDetailSelected={selected}
+                inTagDetailLatest={!selected}
+              />
+            </List.Item>
+            {!isLargeUp && edges.length >= 4 && i === 3 && (
+              <RelatedTags tagId={tagId} />
+            )}
+          </>
         ))}
       </List>
+      {!isLargeUp && edges.length < 4 && <RelatedTags tagId={tagId} />}
     </InfiniteScroll>
   )
 }

@@ -11,23 +11,30 @@ import {
   PageHeader,
   TextIcon,
   Translate,
+  usePublicQuery,
 } from '~/components'
 
 import { analytics, translate } from '~/common/utils'
 
+import { RELATED_TAGS } from './gql'
 import styles from './styles.css'
 
 import {
-  TagDetailPublic_node_Tag_recommended,
-  TagDetailPublic_node_Tag_recommended_edges,
-} from '../__generated__/TagDetailPublic'
+  TagDetailRecommended,
+  TagDetailRecommended_node_Tag_recommended_edges,
+} from './__generated__/TagDetailRecommended'
 
 interface RelatedTagsProps {
-  data: TagDetailPublic_node_Tag_recommended
+  tagId: string
 }
 
-const RelatedTags = ({ data }: RelatedTagsProps) => {
-  const edges = _chunk(data?.edges, 5)
+const RelatedTags = ({ tagId }: RelatedTagsProps) => {
+  const { data } = usePublicQuery<TagDetailRecommended>(RELATED_TAGS, {
+    variables: { id: tagId },
+  })
+
+  const { edges } =
+    (data?.node?.__typename === 'Tag' && data.node.recommended) || {}
 
   const { lang } = useContext(LanguageContext)
 
@@ -54,11 +61,14 @@ const RelatedTags = ({ data }: RelatedTagsProps) => {
       {Header}
       <div className="outer">
         <div className="inner">
-          {edges.map((list, i) => (
+          {_chunk(edges, 5).map((list, i) => (
             <ul key={i}>
               {list.map(
                 (
-                  { node, cursor }: TagDetailPublic_node_Tag_recommended_edges,
+                  {
+                    node,
+                    cursor,
+                  }: TagDetailRecommended_node_Tag_recommended_edges,
                   j
                 ) => (
                   <li key={cursor}>
