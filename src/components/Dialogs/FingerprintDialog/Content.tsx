@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
+import classNames from 'classnames'
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
@@ -66,24 +67,26 @@ const SectionCard: React.FC<{
   subTitle?: string | React.ReactNode
   right?: string | React.ReactNode
   href?: string
-}> = ({ title, subTitle, right, href, children }) => {
+  warning?: boolean
+}> = ({ title, subTitle, right, href, children, warning }) => {
   const Header = () => (
     <header>
-      <h3 className="title">
-        {title}
+      <div className="title">
+        <h3>{title}</h3>
         {right || <section className="right">{right}</section>}
-      </h3>
+      </div>
       <style jsx>{`
         & .title {
           @mixin flex-center-space-between;
-
-          font-size: var(--font-size-xl);
-          font-weight: var(--font-weight-semibold);
-          line-height: 1;
         }
       `}</style>
     </header>
   )
+
+  const subtitleClasses = classNames({
+    subtitle: true,
+    'error': warning,
+  })
 
   return (
     <Card bgColor="white" borderRadius="xtight" spacing={['base', 'base']}>
@@ -95,7 +98,7 @@ const SectionCard: React.FC<{
         ) : (
           <Header />
         )}
-        <small className="subtitle">{subTitle}</small>
+        <small className={subtitleClasses}>{subTitle}</small>
       </section>
 
       {children}
@@ -103,8 +106,8 @@ const SectionCard: React.FC<{
         .subtitle {
           color: var(--color-grey);
         }
-        .right {
-          float: right;
+        .error {
+          color: var(--color-red);
         }
       `}</style>
     </Card>
@@ -149,6 +152,7 @@ const FingerprintDialogContent = ({
             en="Decentralized Content Storage Network"
           />
         }
+        warning={false}
       >
         <hr style={{ margin: '0.5rem 0 1rem' }} />
 
@@ -251,18 +255,14 @@ const FingerprintDialogContent = ({
               />
             )
           }
+          warning={!iscnId}
           right={
             iscnId ? (
               <a href={iscnLinkUrl(iscnId)} target="_blank">
                 <IconExternalLink16 />
               </a>
             ) : showRetry ? (
-              <Button
-                spacing={['xtight', 'xtight']}
-                textColor="green"
-                textActiveColor="white"
-                bgActiveColor="green"
-                borderColor="green"
+              <button
                 aria-label={translate({ id: 'retry', lang })}
                 disabled={retryPublishing}
                 onClick={() => {
@@ -274,19 +274,32 @@ const FingerprintDialogContent = ({
                   })
                 }}
               >
-                retryPublishing ? <Translate id="retrying" /> :
-                <Translate id="retry" />
-              </Button>
+                {retryPublishing ? (
+                  <Translate id="retrying" />
+                ) : (
+                  <Translate id="retry" />
+                )}
+              </button>
             ) : (
               <></>
             )
           }
-          // href={iscnLinkUrl(iscnId)}
+        // href={iscnLinkUrl(iscnId)}
         >
           {/* <pre>{iscnId}</pre> */}
         </SectionCard>
       )}
-
+      <style jsx>{`
+        button {
+          background-color: var(--color-matters-green);
+          font-size: 13px;
+          font-weight: 400;
+          line-height: 1em;
+          color: var(--color-white);
+          padding: 6px 8px;
+          border-radius: 12px;
+        }
+      `}</style>
       <style jsx>{styles}</style>
     </section>
   )
