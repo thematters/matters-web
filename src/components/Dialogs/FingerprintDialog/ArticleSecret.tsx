@@ -2,14 +2,16 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
 import {
-  CopyButton,
-  IconLocked,
+  Button,
+  CopyToClipboard,
+  IconCopy16,
+  IconLocked24,
   Spinner,
   Translate,
   useRoute,
 } from '~/components'
 
-// import styles from './styles.css'
+import styles from './styles.css'
 
 import { ArticleSecret } from './__generated__/ArticleSecret'
 
@@ -48,58 +50,22 @@ const ArticleSecretSection = () => {
           </header>
 
           <section className="key">
-            <div className="locked">
-              <IconLocked />
-            </div>
+            <IconLocked24 size="md" />
             <input
               type="text"
               value={secret}
               readOnly
               onClick={(event) => event.currentTarget.select()}
             />
-            <CopyButton text={secret} />
+            <CopyToClipboard text={secret}>
+              <Button>
+                <IconCopy16 />
+              </Button>
+            </CopyToClipboard>
           </section>
         </>
       )}
-      <style jsx>{`
-        .secret {
-          @mixin flex-center-space-between;
-
-          color: var(--color-matters-gold);
-
-          & .key {
-            @mixin flex-center-space-between;
-
-            position: relative;
-            background: var(--color-yellow-lighter);
-            border-radius: var(--spacing-base);
-
-            & .locked {
-              @mixin flex-center-space-between;
-
-              position: absolute;
-              left: var(--spacing-x-tight);
-              width: 1rem;
-              height: 2rem;
-            }
-
-            & input {
-              max-width: 8rem;
-              padding: var(--spacing-x-tight) var(--spacing-base)
-                var(--spacing-x-tight) var(--spacing-loose);
-              font-family: var(--font-mono);
-              font-size: var(--font-size-sm);
-              background: var(--color-yellow-lighter);
-              border-radius: var(--spacing-base);
-            }
-
-            & button {
-              position: absolute;
-              right: var(--spacing-loose);
-            }
-          }
-        }
-      `}</style>
+      <style jsx>{styles}</style>
     </section>
   )
 }
