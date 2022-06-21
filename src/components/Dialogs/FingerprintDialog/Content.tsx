@@ -85,7 +85,7 @@ const SectionCard: React.FC<{
 
   const subtitleClasses = classNames({
     subtitle: true,
-    'error': warning,
+    error: warning,
   })
 
   return (
@@ -284,7 +284,7 @@ const FingerprintDialogContent = ({
               <></>
             )
           }
-        // href={iscnLinkUrl(iscnId)}
+          // href={iscnLinkUrl(iscnId)}
         >
           {/* <pre>{iscnId}</pre> */}
         </SectionCard>
