@@ -29,7 +29,7 @@ const SidebarManagement: React.FC<SidebarManagementProps> = (props) => {
           </div>
           <p className="detail">
             <Translate id="publishToISCNHint_1" />
-            <a href="#" target="_blank">
+            <a href="https://iscn.io/" target="_blank">
               ISCN
             </a>
             <Translate id="publishToISCNHint_2" />
