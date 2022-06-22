@@ -28,7 +28,6 @@ import { iscnLinkUrl, translate } from '~/common/utils'
 import ArticleSecret from './ArticleSecret'
 // import ArticleSecretDesc from './ArticleSecretDesc'
 // import CopyButton from './CopyButton'
-// import ListItem from './ListItem'
 import styles from './styles.css'
 
 import { Gateways } from './__generated__/Gateways'
