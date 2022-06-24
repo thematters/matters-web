@@ -49,12 +49,13 @@ const UnfollowUser = ({ user, size }: UnfollowProps) => {
   const sizes: Record<FollowUserButtonSize, [ButtonWidth, ButtonHeight]> = {
     lg: ['6rem', '2rem'],
     md: ['4rem', '1.5rem'],
-    'md-s': ['3.25rem', '1.5rem'],
+    'md-s': ['4rem', '1.5rem'],
   }
 
   return (
     <Button
       size={sizes[size]}
+      // spacing={['xxtight', 'xtight']}
       textColor="white"
       bgColor="green"
       bgActiveColor="red"
