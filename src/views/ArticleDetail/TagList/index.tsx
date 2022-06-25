@@ -1,6 +1,8 @@
 import gql from 'graphql-tag'
 
-import { Tag } from '~/components'
+import { Tag, TagExposureTracker } from '~/components'
+
+import { analytics } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -26,9 +28,20 @@ const TagList = ({ article }: { article: TagListArticle }) => {
   return (
     <section className="tag-list">
       <ul>
-        {article.tags.map((tag) => (
+        {article.tags.map((tag, i) => (
           <li key={tag.id}>
-            <Tag tag={tag} type="inline" active={tag.selected} />
+            <Tag
+              tag={tag}
+              type="inline"
+              active={tag.selected}
+              onClick={() => {
+                analytics.trackEvent('click_button', {
+                  type: 'click_tag',
+                  pageType: 'article_detail',
+                })
+              }}
+            />
+            <TagExposureTracker location={i} id={tag.id} horizontal />
           </li>
         ))}
       </ul>

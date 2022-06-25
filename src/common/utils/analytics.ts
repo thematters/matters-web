@@ -33,6 +33,7 @@ type EventArgs =
   | ['view_donation_dialog', ViewDialogProp]
   | ['view_subscribe_circle_dialog', ViewDialogProp]
   | ['card_exposure', CardExposureProp]
+  | ['tag_exposure', TagExposureProp]
 
 /**
  * Event: Page View
@@ -65,6 +66,7 @@ interface ClickButtonProp {
     | 'create_circle'
     | 'finish_circle_creation'
     | 'remove_tag'
+    | 'click_tag'
   pageType?: PageType
 }
 
@@ -141,6 +143,11 @@ interface CardExposureProp {
   id: string
   feedType: FeedType
   contentType: ContentType | ActivityType
+  location: number | string
+}
+
+interface TagExposureProp {
+  id: string
   location: number | string
 }
 
