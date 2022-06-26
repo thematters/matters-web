@@ -220,7 +220,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
                 <Sidebar.Collection {...collectionProps} />
                 <Sidebar.Management
                   {...accessProps}
-                // {...iscnPublishProps} 
+                  // {...iscnPublishProps}
                 />
                 <style jsx>{styles}</style>
               </section>

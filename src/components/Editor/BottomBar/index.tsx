@@ -98,7 +98,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
     canToggleCircle,
     iscnPublish,
     togglePublishISCN,
-    iscnPublishSaving
+    iscnPublishSaving,
   }
 
   return (

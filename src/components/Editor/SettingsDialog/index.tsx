@@ -127,7 +127,7 @@ const BaseEditorSettingsDialog = ({
     canToggleCircle,
     iscnPublish,
     togglePublishISCN,
-    iscnPublishSaving
+    iscnPublishSaving,
   }
 
   // const iscnPublishProps: SetPublishISCNProps = {
@@ -154,7 +154,7 @@ const BaseEditorSettingsDialog = ({
             collectionCount={collection.length}
             tagsCount={tags.length}
             {...accessProps}
-          // {...iscnPublishProps}
+            // {...iscnPublishProps}
           />
         )}
 

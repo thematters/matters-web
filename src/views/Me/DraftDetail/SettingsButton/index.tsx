@@ -132,7 +132,7 @@ const SettingsButton = ({
         {...tagsProps}
         {...collectionProps}
         {...accessProps}
-      // {...iscnPublishProps}
+        // {...iscnPublishProps}
       >
         {({ openDialog: openEditorSettingsDialog }) => (
           <ConfirmButton
