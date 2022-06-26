@@ -13,6 +13,7 @@ import {
   useEditDraftAccess,
   useEditDraftCollection,
   useEditDraftCover,
+  useEditDraftPublishISCN,
   useEditDraftTags,
 } from './hooks'
 
@@ -33,6 +34,8 @@ const EditDraftBottomBar = ({ draft, ownCircles }: BottomBarProps) => {
     refetch,
   } = useEditDraftCover(draft)
   const { edit: editTags, saving: tagsSaving } = useEditDraftTags(draft)
+  const { edit: togglePublishISCN, saving: iscnPublishSaving } =
+    useEditDraftPublishISCN(draft)
   const { edit: editAccess, saving: accessSaving } = useEditDraftAccess(
     draft,
     ownCircles && ownCircles[0]
@@ -66,6 +69,9 @@ const EditDraftBottomBar = ({ draft, ownCircles }: BottomBarProps) => {
     editAccess,
     accessSaving,
     canToggleCircle: !!hasOwnCircle,
+    iscnPublish: draft.iscnPublish, // : boolean
+    togglePublishISCN, // : (iscnPublish: boolean) => Promise<any>
+    iscnPublishSaving,
   }
 
   return (

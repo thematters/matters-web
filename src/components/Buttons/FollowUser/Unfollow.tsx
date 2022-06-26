@@ -31,13 +31,13 @@ const UnfollowUser = ({ user, size }: UnfollowProps) => {
     optimisticResponse:
       !_isNil(user.id) && !_isNil(user.isFollower)
         ? {
-            toggleFollowUser: {
-              id: user.id,
-              isFollowee: false,
-              isFollower: user.isFollower,
-              __typename: 'User',
-            },
-          }
+          toggleFollowUser: {
+            id: user.id,
+            isFollowee: false,
+            isFollower: user.isFollower,
+            __typename: 'User',
+          },
+        }
         : undefined,
     update: (cache) => {
       const userName = _get(user, 'userName', null)

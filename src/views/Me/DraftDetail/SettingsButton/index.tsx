@@ -10,7 +10,7 @@ import {
 import {
   SetCollectionProps,
   SetCoverProps,
-  SetPublishISCNProps,
+  // SetPublishISCNProps,
   SetTagsProps,
   ToggleAccessProps,
 } from '~/components/Editor'
@@ -110,12 +110,15 @@ const SettingsButton = ({
     editAccess,
     accessSaving,
     canToggleCircle: !!hasOwnCircle,
-  }
-  const iscnPublishProps: SetPublishISCNProps = {
     iscnPublish: draft.iscnPublish, // : boolean
     togglePublishISCN, // : (iscnPublish: boolean) => Promise<any>
     iscnPublishSaving,
   }
+  // const iscnPublishProps: SetPublishISCNProps = {
+  //   iscnPublish: draft.iscnPublish, // : boolean
+  //   togglePublishISCN, // : (iscnPublish: boolean) => Promise<any>
+  //   iscnPublishSaving,
+  // }
 
   if (!viewer.shouldSetupLikerID) {
     return (
@@ -129,7 +132,7 @@ const SettingsButton = ({
         {...tagsProps}
         {...collectionProps}
         {...accessProps}
-        {...iscnPublishProps}
+      // {...iscnPublishProps}
       >
         {({ openDialog: openEditorSettingsDialog }) => (
           <ConfirmButton

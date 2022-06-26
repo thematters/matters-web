@@ -4,23 +4,3 @@
   padding: var(--spacing-base) var(--spacing-base) 0;
   margin-top: var(--spacing-base);
 }
-
-.iscn {
-  margin-top: 20px;
-  & .d-flex {
-    @mixin flex-center-space-between;
-  }
-  & h3.title {
-    margin: 0 1rem 0 0;
-    font-size: 0.875rem;
-  }
-  & p.detail {
-    margin: 4px 0 0 0;
-    font-size: 12px;
-    color: var(--color-grey);
-    & a {
-      color: var(--color-matters-green);
-      text-decoration: underline;
-    }
-  }
-}
