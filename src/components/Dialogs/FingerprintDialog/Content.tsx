@@ -146,7 +146,7 @@ const FingerprintDialogContent = ({
   useEffect(() => {
     if (!articleCreatedAt) return
     let timer: any = null
-    const checkRetryAfter = Date.parse(articleCreatedAt) + 20e3
+    const checkRetryAfter = Date.parse(articleCreatedAt) + 30e3
     if (articleCreatedAt && Date.now() < checkRetryAfter) {
       setTimeCooling(true)
       timer = setTimeout(() => {
