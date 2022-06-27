@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import gql from 'graphql-tag'
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import {
   Button,
@@ -116,17 +116,23 @@ const SectionCard: React.FC<{
 const FingerprintDialogContent = ({
   dataHash,
   showSecret,
-  showRetry,
+  isAuthor,
   iscnId,
   iscnPublish,
   articleId,
+  articleCreatedAt,
+  pending,
+  refetch,
 }: {
   dataHash: string
   showSecret: boolean
-  showRetry: boolean
+  isAuthor: boolean
   iscnId: string
   iscnPublish?: boolean
   articleId?: string
+  articleCreatedAt?: string
+  pending: boolean
+  refetch: () => any
 }) => {
   const { lang } = useContext(LanguageContext)
   const { loading, data } = useQuery<Gateways>(GATEWAYS)
@@ -135,6 +141,25 @@ const FingerprintDialogContent = ({
 
   const [editArticle, { loading: retryPublishing }] =
     useMutation<RetryEditArticle>(EDIT_ARTICLE)
+
+  const [timeCooling, setTimeCooling] = useState(false)
+  useEffect(() => {
+    if (!articleCreatedAt) return
+    let timer: any = null
+    const checkRetryAfter = Date.parse(articleCreatedAt) + 20e3
+    if (articleCreatedAt && Date.now() < checkRetryAfter) {
+      setTimeCooling(true)
+      timer = setTimeout(() => {
+        setTimeCooling(false)
+        refetch()
+      }, checkRetryAfter - Date.now())
+    }
+    return () => {
+      if (timer) {
+        clearTimeout(timer)
+      }
+    }
+  })
 
   return (
     <section className="container">
@@ -232,7 +257,7 @@ const FingerprintDialogContent = ({
       <Spacer size="base" />
 
       {/* iscnId */}
-      {iscnPublish && (
+      {iscnPublish && (isAuthor || iscnId) && (
         <SectionCard
           title={
             <TextIcon icon={<IconISCN24 />} size="lg">
@@ -260,10 +285,10 @@ const FingerprintDialogContent = ({
               <a href={iscnLinkUrl(iscnId)} target="_blank">
                 <IconExternalLink16 />
               </a>
-            ) : showRetry ? (
+            ) : isAuthor ? (
               <button
                 aria-label={translate({ id: 'retry', lang })}
-                disabled={retryPublishing}
+                disabled={!pending && (timeCooling || retryPublishing)}
                 onClick={() => {
                   editArticle({
                     variables: {
@@ -273,7 +298,9 @@ const FingerprintDialogContent = ({
                   })
                 }}
               >
-                {retryPublishing ? (
+                {timeCooling ? (
+                  <Translate id="publishing2" />
+                ) : retryPublishing ? (
                   <Translate id="retrying" />
                 ) : (
                   <Translate id="retry" />

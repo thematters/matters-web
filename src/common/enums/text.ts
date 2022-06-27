@@ -235,6 +235,7 @@ export const TEXT = {
     publishNow: '立即發布',
     publishAbort: '存至草稿',
     publishing: '正在發布，馬上就好',
+    publishing2: '寫入中……',
     publishToISCN: '註冊 ISCN',
     publishToISCNHint_1: '發布時註冊 ',
     publishToISCNHint_2: '，費用 ≈1 LIKE，推廣期由平台補助',
@@ -589,6 +590,7 @@ export const TEXT = {
     publishNow: '立即发布',
     publishAbort: '存至草稿',
     publishing: '正在发布，马上就好',
+    publishing2: '写入中……',
     publishToISCN: '註冊 ISCN',
     publishToISCNHint_1: '发布时註冊 ',
     publishToISCNHint_2: '，費用 ≈1 LIKE，推廣期由平台補助',
@@ -963,6 +965,7 @@ export const TEXT = {
     publishNow: 'Publish Now',
     publishAbort: 'Save as Draft',
     publishing: 'Publishing...',
+    publishing2: 'Publishing...',
     publishToISCN: 'Register for ISCN',
     publishToISCNHint_1: 'The cost of ',
     publishToISCNHint_2:

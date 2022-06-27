@@ -66,6 +66,10 @@ const BottomBar: React.FC<BottomBarProps> = ({
   license,
   canToggleCircle,
 
+  iscnPublish,
+  togglePublishISCN,
+  iscnPublishSaving,
+
   saving,
   disabled,
 }) => {
@@ -92,6 +96,9 @@ const BottomBar: React.FC<BottomBarProps> = ({
     editAccess,
     accessSaving,
     canToggleCircle,
+    iscnPublish,
+    togglePublishISCN,
+    iscnPublishSaving,
   }
 
   return (

@@ -1,4 +1,4 @@
-import { Dialog, Switch, Translate } from '~/components'
+import { Dialog, Translate } from '~/components'
 import { SetPublishISCNProps } from '~/components/Editor'
 
 import ListItem from '../../ListItem'
@@ -41,9 +41,9 @@ const SettingsList = ({
   collectionCount,
   tagsCount,
 
-  iscnPublish, // : draft.iscnPublish, // : boolean
-  togglePublishISCN, // : (iscnPublish: boolean) => Promise<any>
-  iscnPublishSaving,
+  // iscnPublish, // : draft.iscnPublish, // : boolean
+  // togglePublishISCN, // : (iscnPublish: boolean) => Promise<any>
+  // iscnPublishSaving,
 
   ...restProps
 }: SettingsListDialogProps) => {
@@ -84,14 +84,14 @@ const SettingsList = ({
             <ToggleAccess {...restProps} />
           </section>
 
-          <section className="iscn d-flex">
+          {/* <section className="iscn d-flex">
             <div className="text">
               <h3 className="title">
                 <Translate id="publishToISCN" />
               </h3>
               <p className="detail">
                 <Translate id="publishToISCNHint_1" />
-                <a href="#" target="_blank">
+                <a href="https://iscn.io/" target="_blank">
                   ISCN
                 </a>
                 <Translate id="publishToISCNHint_2" />
@@ -104,7 +104,7 @@ const SettingsList = ({
               }}
               loading={iscnPublishSaving}
             />
-          </section>
+          </section> */}
 
           {(confirmButtonText || cancelButtonText) && (
             <Dialog.Footer>

@@ -23,6 +23,10 @@ export type ToggleAccessProps = {
   accessSaving: boolean
   canToggleCircle: boolean
 
+  iscnPublish?: boolean | null
+  togglePublishISCN: (iscnPublish: boolean) => void // Promise<any>
+  iscnPublishSaving: boolean
+
   inSidebar?: boolean
 }
 
@@ -34,6 +38,10 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
   editAccess,
   accessSaving,
   canToggleCircle,
+
+  iscnPublish,
+  togglePublishISCN,
+  iscnPublishSaving,
 
   inSidebar,
 }) => {
@@ -97,6 +105,28 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
             }
           />
         </section>
+      </section>
+
+      <section className="iscn">
+        <div className="d-flex">
+          <h3 className="title">
+            <Translate id="publishToISCN" />
+          </h3>
+          <Switch
+            checked={!!iscnPublish}
+            onChange={() => {
+              togglePublishISCN(!iscnPublish)
+            }}
+            loading={iscnPublishSaving}
+          />
+        </div>
+        <p className="detail">
+          <Translate id="publishToISCNHint_1" />
+          <a href="https://iscn.io/" target="_blank">
+            ISCN
+          </a>
+          <Translate id="publishToISCNHint_2" />
+        </p>
       </section>
 
       <style jsx>{styles}</style>
