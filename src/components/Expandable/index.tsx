@@ -41,7 +41,18 @@ export const Expandable: React.FC<ExpandableProps> = ({
         WebkitLineClamp: expand ? 'unset' : limit,
       }}
     >
-      <div ref={node}>{children}</div>
+      <div
+        ref={node}
+        style={{
+          position: 'absolute',
+          visibility: 'hidden',
+          opacity: 0,
+          pointerEvents: 'none',
+        }}
+      >
+        {children}
+      </div>
+      {children}
 
       {expandable && !expand && (
         <Button
