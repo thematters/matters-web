@@ -38,6 +38,7 @@ export const SEARCH_AGGREGATE_TAGS_PUBLIC = gql`
             ...DigestTag
           }
           ... on TagSearchResult {
+            content
             ...DigestTagSearchResult
           }
         }

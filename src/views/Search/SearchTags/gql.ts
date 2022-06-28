@@ -14,9 +14,11 @@ export const SEARCH_TAGS_PUBLIC = gql`
         cursor
         node {
           ... on Tag {
+            content
             ...DigestTag
           }
           ... on TagSearchResult {
+            content
             ...DigestTagSearchResult
           }
         }

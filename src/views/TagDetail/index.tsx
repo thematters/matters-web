@@ -24,7 +24,12 @@ import { getErrorCodes, QueryError } from '~/components/GQL'
 import ShareButton from '~/components/Layout/Header/ShareButton'
 
 import { ERROR_CODES } from '~/common/enums'
-import { makeTitle, stripPunctPrefixSuffix } from '~/common/utils'
+import {
+  makeTitle,
+  stripPunctPrefixSuffix,
+  toGlobalId,
+  toPath,
+} from '~/common/utils'
 
 import IMAGE_INTRO from '@/public/static/images/intro.jpg'
 
@@ -52,6 +57,7 @@ const DynamicCommunity = dynamic(() => import('./Community'), {
 type TagFeedType = 'latest' | 'selected' | 'community'
 
 const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
+  const { router } = useRoute()
   const viewer = useContext(ViewerContext)
   const features = useFeatures()
 
@@ -60,15 +66,48 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
   const [feed, setFeed] = useState<TagFeedType>(
     hasSelectedFeed ? 'selected' : 'latest'
   )
+
+  // const initialFeed = feed
   const isSelected = feed === 'selected'
   const isLatest = feed === 'latest'
   const isCommunity = feed === 'community'
+
+  useEffect(() => {
+    const onHashChangeStart = (
+      url: string,
+      { shallow }: { shallow: boolean }
+    ) => {
+      console.log(`HashPath changing to "${url}"`, { shallow })
+    }
+
+    router.events.on('hashChangeStart', onHashChangeStart)
+
+    return () => {
+      router.events.off('hashChangeStart', onHashChangeStart)
+    }
+  }, [router.events])
 
   useEffect(() => {
     if (!hasSelectedFeed && isSelected) {
       setFeed('latest')
     }
   })
+
+  useEffect(() => {
+    const newPath = toPath({
+      page: 'tagDetail',
+      id: tag.id, // toGlobalId(tagId),
+      content: tag.content,
+    })
+
+    if (newPath.href !== router.asPath) {
+      router.push(
+        { pathname: newPath.href, hash: feed }, // + `#${feed}`,
+        undefined,
+        { shallow: true }
+      )
+    }
+  }, [feed])
 
   // define permission
   const isOwner = tag?.owner?.id === viewer.id
@@ -183,7 +222,12 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
 const TagDetailContainer = () => {
   const viewer = useContext(ViewerContext)
   const { getQuery } = useRoute()
-  const tagId = getQuery('tagId')
+
+  const parm = getQuery('tagId')
+  // const ma = parm?.match(/^(\d+)/)
+  // const isRawGlobalId: boolean = !ma
+  const numberId = parm?.match(/^(\d+)/)?.[1]
+  const tagId = numberId ? toGlobalId({ type: 'Tag', id: numberId }) : parm
 
   /**
    * Data Fetching

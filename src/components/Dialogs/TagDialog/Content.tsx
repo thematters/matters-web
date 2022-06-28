@@ -191,12 +191,17 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
         )
 
         const returnedTagId = result?.data?.putTag?.id
+        const returnedTagContent = result?.data?.putTag?.content as string
 
         setSubmitting(false)
 
         if (!id) {
           // if created, then redirect to tag detail page
-          const path = toPath({ page: 'tagDetail', id: returnedTagId || '' })
+          const path = toPath({
+            page: 'tagDetail',
+            id: returnedTagId || '',
+            content: returnedTagContent,
+          })
           router.push(path.href)
         } else {
           closeDialog()

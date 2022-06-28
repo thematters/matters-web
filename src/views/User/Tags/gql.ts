@@ -26,6 +26,8 @@ export const USER_TAGS_PUBLIC = gql`
         edges {
           cursor
           node {
+            id
+            content
             ...DigestTag
           }
         }

@@ -5,6 +5,7 @@ import queryString from 'query-string'
 import { PATHS, ROUTES } from '~/common/enums'
 
 import { fromGlobalId } from './globalId'
+import { tagSlugify } from './text'
 import { parseURL } from './url'
 
 interface ArticleArgs {
@@ -53,6 +54,7 @@ type ToPathArgs =
   | {
       page: 'tagDetail'
       id: string
+      content: string
     }
   | {
       page: 'userProfile' | 'userSubscriptons' | 'userComments' | 'userTags'
@@ -145,8 +147,9 @@ export const toPath = (args: ToPathArgs): { href: string } => {
       }
     }
     case 'tagDetail': {
+      const { id: numberId } = fromGlobalId(args.id as string)
       return {
-        href: `/tags/${args.id}`,
+        href: `/tags/${numberId}-${tagSlugify(args.content)}`,
       }
     }
     case 'userProfile': {

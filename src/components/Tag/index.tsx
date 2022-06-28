@@ -83,6 +83,7 @@ export const Tag = ({
   const path = toPath({
     page: 'tagDetail',
     id: tag.id,
+    content: tag.content,
   })
 
   let iconProps: IconProps = {}

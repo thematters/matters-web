@@ -34,6 +34,7 @@ const ALL_TAGS = gql`
             cursor
             node {
               id
+              content
               ...CardTag
             }
           }
@@ -94,6 +95,7 @@ const BaseTags = () => {
               {...toPath({
                 page: 'tagDetail',
                 id: node.id,
+                content: node.content,
               })}
               onClick={() =>
                 analytics.trackEvent('click_feed', {
