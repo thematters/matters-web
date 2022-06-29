@@ -5,7 +5,11 @@ import styles from './styles.css'
 const Intro = () => (
   <section className="intro">
     <h4>
-      <Translate zh_hant="什麼是 Liker ID？" zh_hans="什么是 Liker ID？" />
+      <Translate
+        zh_hant="什麼是 Liker ID？"
+        zh_hans="什么是 Liker ID？"
+        en="What is Liker ID?"
+      />
     </h4>
 
     <p>

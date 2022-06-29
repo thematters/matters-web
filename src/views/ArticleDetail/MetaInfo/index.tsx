@@ -22,6 +22,7 @@ const MetaInfo = ({
   toggleTranslate,
   canReadFullContent,
 }: MetaInfoProps) => {
+  const originalLanguage = article?.language ? article.language : ''
   return (
     <section className="info">
       <section className="time">
@@ -42,14 +43,14 @@ const MetaInfo = ({
 
       {canReadFullContent && (
         <>
-          <FingerprintButton article={article} />
-
           {shouldTranslate && (
             <TranslationButton
               translated={translated}
               toggleTranslate={toggleTranslate}
+              originalLanguage={originalLanguage}
             />
           )}
+          <FingerprintButton article={article} />
         </>
       )}
 

@@ -1,7 +1,15 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { CopyButton, Spinner, Translate, useRoute } from '~/components'
+import {
+  Button,
+  CopyToClipboard,
+  IconCopy16,
+  IconLocked24,
+  Spinner,
+  Translate,
+  useRoute,
+} from '~/components'
 
 import styles from './styles.css'
 
@@ -24,7 +32,7 @@ const ArticleSecretSection = () => {
   const { data, loading, error } = useQuery<ArticleSecret>(QUERY_SECRET, {
     variables: { mediaHash },
   })
-  const secret = data?.article?.access?.secret
+  const secret = data?.article?.access?.secret // || 'default-no-secret'
 
   return (
     <section className="secret">
@@ -32,29 +40,28 @@ const ArticleSecretSection = () => {
       {secret && (
         <>
           <header>
-            <span style={{ display: 'flex' }}>
-              <h4>
-                <Translate id="secret" />
-              </h4>
-              <span className="subtitle">
-                <Translate
-                  zh_hans="（仅你可见，请妥善保管）"
-                  zh_hant="（僅你可見，請妥善保管）"
-                  en="(Only visible to you. Please keep it confidential)"
-                />
-              </span>
-            </span>
-
-            <CopyButton text={secret} />
+            <small>
+              <Translate
+                zh_hant="上鎖內容密鑰，請妥善保管"
+                zh_hans="上鎖內容密鑰，請妥善保管"
+                en="The key for locked content, please save securely"
+              />
+            </small>
           </header>
 
-          <section>
+          <section className="key">
+            <IconLocked24 size="md" />
             <input
               type="text"
               value={secret}
               readOnly
               onClick={(event) => event.currentTarget.select()}
             />
+            <CopyToClipboard text={secret}>
+              <Button>
+                <IconCopy16 />
+              </Button>
+            </CopyToClipboard>
           </section>
         </>
       )}

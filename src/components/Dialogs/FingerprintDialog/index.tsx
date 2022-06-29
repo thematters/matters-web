@@ -2,9 +2,17 @@ import gql from 'graphql-tag'
 import dynamic from 'next/dynamic'
 import { useContext } from 'react'
 
-import { Dialog, Spinner, useDialogSwitch, ViewerContext } from '~/components'
+import {
+  Dialog,
+  Spinner,
+  useDialogSwitch,
+  usePublicLazyQuery,
+  // usePublicQuery,
+  ViewerContext,
+} from '~/components'
 
 import { ArticleAccessType } from '@/__generated__/globalTypes'
+import { ArticleFingerprintPublic } from './__generated__/ArticleFingerprintPublic'
 import { FingerprintArticle } from './__generated__/FingerprintArticle'
 
 interface FingerprintDialogProps {
@@ -16,17 +24,31 @@ const fragments = {
   article: gql`
     fragment FingerprintArticle on Article {
       id
+      mediaHash
       dataHash
       iscnId
+      createdAt
       author {
         id
       }
       access {
         type
       }
+      drafts {
+        iscnPublish
+      }
     }
   `,
 }
+
+const ArticleFingerprintGQL = gql`
+query ArticleFingerprintPublic($mediaHash: String!) {
+  article(input:{mediaHash:$mediaHash}) {
+    id
+    ...FingerprintArticle
+  }
+  ${fragments.article}
+}`
 
 const DynamicContent = dynamic(() => import('./Content'), { loading: Spinner })
 
@@ -36,6 +58,17 @@ const BaseFingerprintDialog = ({
 }: FingerprintDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
   const viewer = useContext(ViewerContext)
+
+  const [
+    _lazyFetch,
+    {
+      data,
+      loading, // error,
+      refetch,
+    },
+  ] = usePublicLazyQuery<ArticleFingerprintPublic>(ArticleFingerprintGQL, {
+    variables: { mediaHash: article.mediaHash },
+  })
 
   // only show secret when viewer is author and access type is paywall
   const showSecret =
@@ -56,8 +89,14 @@ const BaseFingerprintDialog = ({
         <Dialog.Content hasGrow>
           <DynamicContent
             dataHash={article.dataHash || ''}
-            iscnId={article.iscnId || ''}
+            iscnId={article?.iscnId || data?.article?.iscnId || ''}
+            iscnPublish={!!article.drafts?.[0]?.iscnPublish}
             showSecret={showSecret}
+            isAuthor={viewer.id === article.author.id}
+            articleId={article.id}
+            articleCreatedAt={article.createdAt}
+            pending={loading}
+            refetch={refetch}
           />
         </Dialog.Content>
       </Dialog>

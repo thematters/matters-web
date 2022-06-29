@@ -117,6 +117,12 @@ export const MOCK_ARTILCE = {
     type: 'paywall' as any,
     circle: MOCK_CIRCLE,
   },
+  drafts: [
+    {
+      __typename: 'Draft' as any,
+      iscnPublish: false,
+    },
+  ],
 }
 
 export const MOCK_CIRCLE_ARTICLE = {

@@ -1,26 +1,57 @@
 import { useQuery } from '@apollo/react-hooks'
+import classNames from 'classnames'
 import gql from 'graphql-tag'
+import { useContext, useEffect, useState } from 'react'
 
 import {
+  Button,
   Card,
+  // CopyButton,
+  CopyToClipboard,
   // Divider,
+  IconCopy16,
   IconExternalLink16,
-  IconIPFS24,
+  // IconIPFS24,
+  IconIPFSGreen24,
   IconISCN24,
+  LanguageContext,
+  Spacer,
   Spinner,
   TextIcon,
   Translate,
+  // translate,
+  useMutation,
 } from '~/components'
 
-import { iscnLinkUrl } from '~/common/utils'
+import { iscnLinkUrl, translate } from '~/common/utils'
 
 import ArticleSecret from './ArticleSecret'
 // import ArticleSecretDesc from './ArticleSecretDesc'
 // import CopyButton from './CopyButton'
-// import ListItem from './ListItem'
 import styles from './styles.css'
 
 import { Gateways } from './__generated__/Gateways'
+import { RetryEditArticle } from './__generated__/RetryEditArticle'
+
+const EDIT_ARTICLE = gql`
+  mutation RetryEditArticle($id: ID!, $iscnPublish: Boolean) {
+    editArticle(input: { id: $id, iscnPublish: $iscnPublish }) {
+      id
+      cover
+      access {
+        type
+      }
+      license
+      iscnId
+      drafts {
+        id
+        mediaHash
+        publishState
+        iscnPublish
+      }
+    }
+  }
+`
 
 const GATEWAYS = gql`
   query Gateways {
@@ -35,18 +66,29 @@ const SectionCard: React.FC<{
   subTitle?: string | React.ReactNode
   right?: string | React.ReactNode
   href?: string
-}> = ({ title, subTitle, right, href, children }) => {
+  warning?: boolean
+}> = ({ title, subTitle, right, href, children, warning }) => {
   const Header = () => (
     <header>
-      <h3 className="title">
-        {title}
+      <div className="title">
+        <h3>{title}</h3>
         {right || <section className="right">{right}</section>}
-      </h3>
+      </div>
+      <style jsx>{`
+        & .title {
+          @mixin flex-center-space-between;
+        }
+      `}</style>
     </header>
   )
 
+  const subtitleClasses = classNames({
+    subtitle: true,
+    error: warning,
+  })
+
   return (
-    <Card bgColor="white" spacing={['base', 'base']}>
+    <Card bgColor="white" borderRadius="xtight" spacing={['base', 'base']}>
       <section className="item">
         {href ? (
           <a href={href} target="_blank">
@@ -55,19 +97,16 @@ const SectionCard: React.FC<{
         ) : (
           <Header />
         )}
-        <h4 className="subtitle">{subTitle}</h4>
+        <small className={subtitleClasses}>{subTitle}</small>
       </section>
 
       {children}
       <style jsx>{`
-        .item {
-          & .title {
-            @mixin flex-center-space-between;
-
-            font-size: var(--font-size-xl);
-            font-weight: var(--font-weight-semibold);
-            line-height: 1;
-          }
+        .subtitle {
+          color: var(--color-grey);
+        }
+        .error {
+          color: var(--color-red);
         }
       `}</style>
     </Card>
@@ -77,25 +116,67 @@ const SectionCard: React.FC<{
 const FingerprintDialogContent = ({
   dataHash,
   showSecret,
+  isAuthor,
   iscnId,
+  iscnPublish,
+  articleId,
+  articleCreatedAt,
+  pending,
+  refetch,
 }: {
   dataHash: string
   showSecret: boolean
+  isAuthor: boolean
   iscnId: string
+  iscnPublish?: boolean
+  articleId?: string
+  articleCreatedAt?: string
+  pending: boolean
+  refetch: () => any
 }) => {
+  const { lang } = useContext(LanguageContext)
   const { loading, data } = useQuery<Gateways>(GATEWAYS)
 
   const gateways = data?.official.gatewayUrls || []
+
+  const [editArticle, { loading: retryPublishing }] =
+    useMutation<RetryEditArticle>(EDIT_ARTICLE)
+
+  const [timeCooling, setTimeCooling] = useState(false)
+  useEffect(() => {
+    if (!articleCreatedAt) return
+    let timer: any = null
+    const checkRetryAfter = Date.parse(articleCreatedAt) + 30e3
+    if (articleCreatedAt && Date.now() < checkRetryAfter) {
+      setTimeCooling(true)
+      timer = setTimeout(() => {
+        setTimeCooling(false)
+        refetch()
+      }, checkRetryAfter - Date.now())
+    }
+    return () => {
+      if (timer) {
+        clearTimeout(timer)
+      }
+    }
+  })
 
   return (
     <section className="container">
       <SectionCard
         title={
-          <TextIcon icon={<IconIPFS24 />} size="lg">
+          <TextIcon icon={<IconIPFSGreen24 />} size="lg">
             IPFS
           </TextIcon>
         }
-        subTitle={'去中心化內容存儲網絡'}
+        subTitle={
+          <Translate
+            zh_hant="去中心化內容存儲網絡"
+            zh_hans="去中心化內容存儲網絡"
+            en="Decentralized Content Storage Network"
+          />
+        }
+        warning={false}
       >
         <hr style={{ margin: '0.5rem 0 1rem' }} />
 
@@ -128,13 +209,8 @@ const FingerprintDialogContent = ({
               return (
                 <li key={url}>
                   <a href={gatewayUrl} target="_blank" className="gateway-url">
-                    {/* hostname */}
-                    <TextIcon
-                      icon={<IconExternalLink16 />}
-                      textPlacement="left"
-                    >
-                      {hostname}
-                    </TextIcon>
+                    {hostname}
+                    <IconExternalLink16 />
                   </a>
                 </li>
               )
@@ -162,38 +238,94 @@ const FingerprintDialogContent = ({
             />
           </span>
 
-          <section>
-            {/* <CopyButton text={dataHash} /> */}
+          <section className="copy">
             <input
               type="text"
               value={dataHash}
               readOnly
               onClick={(event) => event.currentTarget.select()}
             />
+            <CopyToClipboard text={dataHash}>
+              <Button>
+                <IconCopy16 />
+              </Button>
+            </CopyToClipboard>
           </section>
         </section>
       </SectionCard>
 
+      <Spacer size="base" />
+
       {/* iscnId */}
-      {iscnId && (
+      {iscnPublish && (isAuthor || iscnId) && (
         <SectionCard
           title={
             <TextIcon icon={<IconISCN24 />} size="lg">
               ISCN
             </TextIcon>
           }
-          subTitle={'已在 LikeCoin 鏈上註冊的元數據'}
+          subTitle={
+            iscnId ? (
+              <Translate
+                zh_hant="已在 LikeCoin 鏈上註冊的元數據"
+                zh_hans="已在 LikeCoin 鏈上註冊的元數據"
+                en="the metadata registered on LikeCoin chain"
+              />
+            ) : (
+              <Translate
+                zh_hant="ISCN 寫入未成功"
+                zh_hans="ISCN 寫入未成功"
+                en="ISCN 寫入未成功"
+              />
+            )
+          }
+          warning={!iscnId}
           right={
-            <a href={iscnLinkUrl(iscnId)} target="_blank">
-              <IconExternalLink16 />
-            </a>
+            iscnId ? (
+              <a href={iscnLinkUrl(iscnId)} target="_blank">
+                <IconExternalLink16 />
+              </a>
+            ) : isAuthor ? (
+              <button
+                aria-label={translate({ id: 'retry', lang })}
+                disabled={!pending && (timeCooling || retryPublishing)}
+                onClick={() => {
+                  editArticle({
+                    variables: {
+                      id: articleId,
+                      iscnPublish: true,
+                    },
+                  })
+                }}
+              >
+                {timeCooling ? (
+                  <Translate id="publishing2" />
+                ) : retryPublishing ? (
+                  <Translate id="retrying" />
+                ) : (
+                  <Translate id="retry" />
+                )}
+              </button>
+            ) : (
+              <></>
+            )
           }
           // href={iscnLinkUrl(iscnId)}
         >
           {/* <pre>{iscnId}</pre> */}
         </SectionCard>
       )}
-
+      <style jsx>{`
+        button {
+          background-color: var(--color-matters-green);
+          font-size: 13px;
+          font-weight: 400;
+          line-height: 1em;
+          color: var(--color-white);
+          padding: 6px 8px;
+          border-radius: 12px;
+        }
+      `}</style>
       <style jsx>{styles}</style>
     </section>
   )

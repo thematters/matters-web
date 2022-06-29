@@ -1,11 +1,11 @@
 {
   "name": "matters-web",
-  "version": "4.1.2",
+  "version": "4.3.4",
   "description": "codebase of Matters' website",
   "sideEffects": false,
   "author": "Matters <hi@matters.news>",
   "engines": {
-    "node": ">=14.x"
+    "node": ">=16.x"
   },
   "license": "Apache-2.0",
   "scripts": {
@@ -31,7 +31,8 @@
     "bdd": "cucumber-js bdd/features/*.feature -r cucumber.conf.js -r \"bdd/steps/*.js\" --format node_modules/cucumber-pretty",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "vercel-build": "set -xe; npm run gen:type && if [[ \"$NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF\" =~ release/* ]] ; then cp -va .env.prod .env ; echo 'NEXT_PUBLIC_SITE_DOMAIN=web-next.matters.news' | tee -a .env.local; else cp -va .env.dev .env ; echo 'NEXT_PUBLIC_SITE_DOMAIN=web-dev.matters.news' | tee -a .env.local ; fi && npm run build"
   },
   "dependencies": {
     "@apollo/react-common": "^3.1.3",

@@ -1,9 +1,9 @@
-import { Dialog, Switch, Translate } from '~/components'
+import { Dialog, Translate } from '~/components'
 import { SetPublishISCNProps } from '~/components/Editor'
 
+import ListItem from '../../ListItem'
 import { Step } from '../../SettingsDialog'
 import ToggleAccess, { ToggleAccessProps } from '../../ToggleAccess'
-import ListItem from './ListItem'
 import styles from './styles.css'
 
 export type SettingsListDialogButtons = {
@@ -41,9 +41,9 @@ const SettingsList = ({
   collectionCount,
   tagsCount,
 
-  iscnPublish, // : draft.iscnPublish, // : boolean
-  togglePublishISCN, // : (iscnPublish: boolean) => Promise<any>
-  iscnPublishSaving,
+  // iscnPublish, // : draft.iscnPublish, // : boolean
+  // togglePublishISCN, // : (iscnPublish: boolean) => Promise<any>
+  // iscnPublishSaving,
 
   ...restProps
 }: SettingsListDialogProps) => {
@@ -84,20 +84,27 @@ const SettingsList = ({
             <ToggleAccess {...restProps} />
           </section>
 
-          <ListItem
-            title={<Translate id="publishToISCN" />}
-            subTitle={<Translate id="publishToISCNHint" />}
-            onClick={() => console.log('publishISCN switch')}
-          >
+          {/* <section className="iscn d-flex">
+            <div className="text">
+              <h3 className="title">
+                <Translate id="publishToISCN" />
+              </h3>
+              <p className="detail">
+                <Translate id="publishToISCNHint_1" />
+                <a href="https://iscn.io/" target="_blank">
+                  ISCN
+                </a>
+                <Translate id="publishToISCNHint_2" />
+              </p>
+            </div>
             <Switch
               checked={!!iscnPublish}
               onChange={() => {
-                // console.log('toogle change')
                 togglePublishISCN(!iscnPublish)
               }}
               loading={iscnPublishSaving}
             />
-          </ListItem>
+          </section> */}
 
           {(confirmButtonText || cancelButtonText) && (
             <Dialog.Footer>

@@ -1,3 +1,7 @@
 .msg {
   margin: 0 var(--spacing-base) var(--spacing-loose);
 }
+
+.emphasize {
+  font-weight: var(--font-weight-semibold);
+}

@@ -14,7 +14,7 @@ import {
 import {
   SetCollectionProps,
   SetCoverProps,
-  SetPublishISCNProps,
+  // SetPublishISCNProps,
   SetTagsProps,
   ToggleAccessProps,
 } from '~/components/Editor'
@@ -193,15 +193,20 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
     accessSaving: false,
     editAccess,
     canToggleCircle: !!hasOwnCircle && !isReviseDisabled,
-  }
-
-  const iscnPublishProps: SetPublishISCNProps = {
     iscnPublish, // : false, // : draft.iscnPublish, // : boolean
     togglePublishISCN() {
       setIscnPublish(!iscnPublish)
     }, // : (iscnPublish: boolean) => Promise<any>
     iscnPublishSaving: false,
   }
+
+  // const iscnPublishProps: SetPublishISCNProps = {
+  //   iscnPublish, // : false, // : draft.iscnPublish, // : boolean
+  //   togglePublishISCN() {
+  //     setIscnPublish(!iscnPublish)
+  //   }, // : (iscnPublish: boolean) => Promise<any>
+  //   iscnPublishSaving: false,
+  // }
 
   return (
     <>
@@ -213,7 +218,10 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
                 <Sidebar.Tags {...tagsProps} />
                 <Sidebar.Cover {...coverProps} />
                 <Sidebar.Collection {...collectionProps} />
-                <Sidebar.Management {...accessProps} />
+                <Sidebar.Management
+                  {...accessProps}
+                  // {...iscnPublishProps}
+                />
                 <style jsx>{styles}</style>
               </section>
             }
@@ -234,7 +242,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
                   {...tagsProps}
                   {...collectionProps}
                   {...accessProps}
-                  {...iscnPublishProps}
+                  // {...iscnPublishProps}
                   article={article}
                   editData={editData}
                   coverId={cover?.id}

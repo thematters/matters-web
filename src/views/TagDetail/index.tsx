@@ -36,6 +36,7 @@ import DropdownActions from './DropdownActions'
 import Followers from './Followers'
 import { TAG_DETAIL_PRIVATE, TAG_DETAIL_PUBLIC } from './gql'
 import Owner from './Owner'
+import RelatedTags from './RelatedTags'
 import styles from './styles.css'
 
 import {
@@ -90,7 +91,7 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
    * Render
    */
   return (
-    <Layout.Main>
+    <Layout.Main aside={<RelatedTags tagId={tag.id} />}>
       <Layout.Header
         left={<Layout.Header.BackButton mode="black-solid" />}
         right={
@@ -174,7 +175,6 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
         )}
         {isCommunity && <DynamicCommunity id={tag.id} isOwner={isOwner} />}
       </PullToRefresh>
-
       <style jsx>{styles}</style>
     </Layout.Main>
   )

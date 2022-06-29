@@ -23,7 +23,7 @@ const WalletAddress: React.FC<WalletAddressProps> = ({ address }) => {
 
   return (
     <section className="address">
-      <CopyToClipboard text={address}>
+      <CopyToClipboard text={ensName || address}>
         <Button
           // htmlHref={etherscanUrl}
           // htmlTarget="_blank"
