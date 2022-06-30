@@ -6,8 +6,8 @@ import {
   Dialog,
   Spinner,
   useDialogSwitch,
-  usePublicLazyQuery,
-  // usePublicQuery,
+  // usePublicLazyQuery,
+  usePublicQuery,
   ViewerContext,
 } from '~/components'
 
@@ -43,13 +43,14 @@ const fragments = {
 }
 
 const ArticleFingerprintGQL = gql`
-query ArticleFingerprintPublic($mediaHash: String!) {
-  article(input:{mediaHash:$mediaHash}) {
-    id
-    ...FingerprintArticle
+  query ArticleFingerprintPublic($mediaHash: String!) {
+    article(input: { mediaHash: $mediaHash }) {
+      id
+      ...FingerprintArticle
+    }
   }
   ${fragments.article}
-}`
+`
 
 const DynamicContent = dynamic(() => import('./Content'), { loading: Spinner })
 
@@ -60,15 +61,13 @@ const BaseFingerprintDialog = ({
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
   const viewer = useContext(ViewerContext)
 
-  const [
-    _lazyFetch,
-    {
-      data,
-      loading, // error,
-      refetch,
-    },
-  ] = usePublicLazyQuery<ArticleFingerprintPublic>(ArticleFingerprintGQL, {
+  const {
+    data,
+    loading, // error,
+    refetch,
+  } = usePublicQuery<ArticleFingerprintPublic>(ArticleFingerprintGQL, {
     variables: { mediaHash: article.mediaHash },
+    skip: true, // skip first call
   })
 
   // only show secret when viewer is author and access type is paywall
