@@ -108,10 +108,11 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
       </section>
 
       <section className="iscn">
-        <div className="d-flex">
+        <header>
           <h3 className="title">
             <Translate id="publishToISCN" />
           </h3>
+
           <Switch
             checked={!!iscnPublish}
             onChange={() => {
@@ -119,8 +120,9 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
             }}
             loading={iscnPublishSaving}
           />
-        </div>
-        <p className="detail">
+        </header>
+
+        <p className="hint">
           <Translate id="publishToISCNHint_1" />
           <a href="https://iscn.io/" target="_blank">
             ISCN

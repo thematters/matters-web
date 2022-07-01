@@ -159,6 +159,10 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
           inEditor
           onUpload={(assetId) => setFieldValue('profileCover', assetId)}
         />
+
+        <p className="hint">
+          <Translate id="recommendedCoverSize" />
+        </p>
       </section>
 
       <section className="avatar-field">
