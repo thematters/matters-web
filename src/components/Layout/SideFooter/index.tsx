@@ -64,6 +64,14 @@ const SideFooter = () => {
           <Translate id="openCommunity" />
         </a>
 
+        <a
+          href="https://github.com/thematters/developer-resource/blob/master/SECURITY.md"
+          target="_blank"
+          rel="noopener"
+        >
+          <Translate id="bugBountyProgram" />
+        </a>
+
         <Link {...downloadAppLink}>
           <a>
             <Translate id="downloadApp" />
