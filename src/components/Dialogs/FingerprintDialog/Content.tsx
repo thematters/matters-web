@@ -120,7 +120,7 @@ const FingerprintDialogContent = ({
   iscnId,
   iscnPublish,
   articleId,
-  articleCreatedAt,
+  articleLastModified, // articleCreatedAt,
   pending,
   refetch,
 }: {
@@ -130,7 +130,7 @@ const FingerprintDialogContent = ({
   iscnId: string
   iscnPublish?: boolean
   articleId?: string
-  articleCreatedAt?: string
+  articleLastModified: string
   pending: boolean
   refetch: () => any
 }) => {
@@ -143,20 +143,32 @@ const FingerprintDialogContent = ({
     useMutation<RetryEditArticle>(EDIT_ARTICLE)
 
   const [timeCooling, setTimeCooling] = useState(false)
-  useEffect(() => {
-    if (!articleCreatedAt) return
-    let timer: any = null
-    const checkRetryAfter = Date.parse(articleCreatedAt) + 30e3
-    if (articleCreatedAt && Date.now() < checkRetryAfter) {
+  let timer: any = null
+  const pooling = (startedAt: number) => {
+    if (!startedAt) return
+    const POOLING_PERIOD = 30e3
+    // const coolingBegins = Date.parse(articleLastModified)
+    if (Date.now() - startedAt < POOLING_PERIOD) {
       setTimeCooling(true)
-      timer = setTimeout(() => {
-        setTimeCooling(false)
-        refetch()
-      }, checkRetryAfter - Date.now())
+      timer = setTimeout(function loop() {
+        if (iscnId || Date.now() - startedAt >= POOLING_PERIOD) {
+          setTimeCooling(false)
+          timer = null
+        } else {
+          refetch()
+          timer = setTimeout(loop, 5e3)
+        }
+      }, 5e3)
     }
+  }
+  useEffect(() => {
+    if (iscnId || !articleLastModified) return
+    pooling(Date.parse(articleLastModified))
+
     return () => {
       if (timer) {
         clearTimeout(timer)
+        timer = null
       }
     }
   })
@@ -296,6 +308,8 @@ const FingerprintDialogContent = ({
                       iscnPublish: true,
                     },
                   })
+                  setTimeCooling(true)
+                  pooling(Date.now())
                 }}
               >
                 {timeCooling ? (

@@ -28,6 +28,7 @@ const fragments = {
       dataHash
       iscnId
       createdAt
+      revisedAt
       author {
         id
       }
@@ -94,7 +95,7 @@ const BaseFingerprintDialog = ({
             showSecret={showSecret}
             isAuthor={viewer.id === article.author.id}
             articleId={article.id}
-            articleCreatedAt={article.createdAt}
+            articleLastModified={article.revisedAt || article.createdAt}
             pending={loading}
             refetch={refetch}
           />
