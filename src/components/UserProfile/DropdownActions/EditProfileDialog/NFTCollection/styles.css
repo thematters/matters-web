@@ -1,16 +1,10 @@
 .nftCollection {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  padding: var(--spacing-x-tight);
-  background-color: var(--color-white);
-  border-top: 1px solid var(--color-grey-light);
-  border-bottom: 1px solid var(--color-grey-light);
   border-radius: var(--spacing-xxx-tight);
 
   @media (--sm-up) {
     grid-template-columns: repeat(6, 1fr);
-    background-color: var(--color-grey-lighter);
-    border-top-color: transparent;
   }
 
   & li {
