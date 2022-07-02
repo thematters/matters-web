@@ -15,22 +15,19 @@
   }
 }
 
+.cover-field {
+  position: relative;
+
+  & .hint {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    padding: var(--spacing-loose) var(--spacing-base);
+    font-size: var(--font-size-xs);
+    color: var(--color-grey);
+  }
+}
+
 .avatar-field {
   margin: var(--spacing-loose) var(--spacing-base);
-
-  @mixin flex-start-start;
-
-  & header {
-    order: 1;
-    margin-left: var(--spacing-base);
-    color: var(--color-grey-dark);
-
-    & .label {
-      font-size: var(--font-size-sm);
-    }
-    & .msg {
-      margin-top: var(--spacing-xx-tight);
-      font-size: var(--font-size-xs);
-    }
-  }
 }
