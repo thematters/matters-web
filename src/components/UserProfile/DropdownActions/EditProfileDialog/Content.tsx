@@ -1,14 +1,13 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 
 import {
   AvatarUploader,
   CoverUploader,
   Dialog,
   Form,
-  IconChecked,
   LanguageContext,
   Translate,
   useMutation,
@@ -24,6 +23,7 @@ import {
 
 import IMAGE_COVER from '@/public/static/images/profile-cover.png'
 
+import NFTCollection from './NFTCollection'
 import styles from './styles.css'
 
 import {
@@ -64,35 +64,6 @@ const UPDATE_USER_INFO = gql`
  * To identify `profileCover` is changed since it may be `null`
  */
 const UNCHANGED_FIELD = 'UNCHANGED_FIELD'
-
-const TravlogNFTImage = ({
-  index,
-  selectedIndex,
-  nft: { id, name, description, imagePreviewUrl },
-  onClick,
-}: {
-  index: number
-  selectedIndex: number
-  nft: EditProfileDialogUserPrivate_info_cryptoWallet_nfts
-  onClick: (event?: React.MouseEvent<HTMLElement>) => any
-}) => {
-  return (
-    <span>
-      <img
-        src={imagePreviewUrl as string}
-        alt={name}
-        title={`${name}\n- ${description}`}
-        onClick={onClick}
-      />
-      {index === selectedIndex && (
-        <div className="checked">
-          <IconChecked size="md" color="green" />
-        </div>
-      )}
-      <style jsx>{styles}</style>
-    </span>
-  )
-}
 
 const EditProfileDialogContent: React.FC<FormProps> = ({
   user,
@@ -174,8 +145,6 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
     },
   })
 
-  const [selectedNFTIndex, setSelectedNFTIndex] = useState<number>(-1)
-
   const nfts = user.info.cryptoWallet
     ?.nfts as EditProfileDialogUserPrivate_info_cryptoWallet_nfts[]
 
@@ -190,6 +159,10 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
           inEditor
           onUpload={(assetId) => setFieldValue('profileCover', assetId)}
         />
+
+        <p className="hint">
+          <Translate id="recommendedCoverSize" />
+        </p>
       </section>
 
       <section className="avatar-field">
@@ -200,40 +173,11 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
         />
       </section>
 
-      {Array.isArray(nfts) && nfts.length > 0 && (
-        <section className="nft-collection">
-          <header>
-            <label>
-              {translate({
-                id: 'myNFTCollections',
-                lang,
-              })}
-              &nbsp;({nfts.length})
-            </label>
-          </header>
-          <section>
-            {nfts.map(
-              (
-                nftProps: EditProfileDialogUserPrivate_info_cryptoWallet_nfts,
-                index: number
-              ) => (
-                <TravlogNFTImage
-                  key={nftProps.id}
-                  index={index}
-                  selectedIndex={selectedNFTIndex}
-                  nft={nftProps}
-                  onClick={() => {
-                    setSelectedNFTIndex(index)
-                    setFieldValue('avatar', nftProps.imagePreviewUrl)
-                  }}
-                />
-              )
-              /* <CachedOpenSeaImg {...{id, imagePreviewUrl}} /> */
-            )}
-            {/* <pre>{JSON.stringify(user.info.cryptoWallet?.nfts)}</pre> */}
-          </section>
-          <footer>點擊圖片替換頭像</footer>
-        </section>
+      {nfts.length > 0 && (
+        <NFTCollection
+          nfts={nfts}
+          setField={(url: string) => setFieldValue('avatar', url)}
+        />
       )}
 
       <Form.Input
