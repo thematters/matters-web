@@ -8,11 +8,13 @@ import {
   IconAnnouncementCommunity24,
   IconAnnouncementProduct24,
   IconAnnouncementSeminar24,
-  IconArrowDown16,
+  IconFilter12,
   Menu,
   TextIcon,
   Translate,
 } from '~/components'
+
+import styles from './styles.css'
 
 type ControlsProps = {
   hasCommunity: boolean
@@ -124,22 +126,27 @@ const DropdownActions = ({
       }}
     >
       {({ openDialog, ref }) => (
-        <Button
-          ref={ref}
-          bgColor="half-black"
-          size={['4rem', '1.75rem']}
-          onClick={openDialog}
-        >
-          <TextIcon
-            icon={<IconArrowDown16 size="xs" />}
-            color="white"
-            size="xs"
-            spacing="xxtight"
-            textPlacement="left"
+        <div className="btn">
+          <Button
+            ref={ref}
+            bgColor="half-black"
+            size={[null, '2rem']}
+            spacing={[0, 'tight']}
+            onClick={openDialog}
           >
-            <TypeLabel type={type} />
-          </TextIcon>
-        </Button>
+            <TextIcon
+              icon={<IconFilter12 size="xs" />}
+              color="white"
+              size="sm"
+              spacing="xxtight"
+              textPlacement="right"
+            >
+              <TypeLabel type={type} />
+            </TextIcon>
+          </Button>
+
+          <style jsx>{styles}</style>
+        </div>
       )}
     </DropdownDialog>
   )
