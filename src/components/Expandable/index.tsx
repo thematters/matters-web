@@ -43,9 +43,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
       }}
     >
       <VisuallyHidden>
-        <div ref={node}>
-          {children}
-        </div>
+        <div ref={node}>{children}</div>
       </VisuallyHidden>
       {children}
 
