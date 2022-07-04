@@ -1,3 +1,5 @@
+import classNames from 'classnames'
+
 import { Card, IconAdd16, IconExclaimHint } from '~/components'
 
 import styles from './styles.css'
@@ -5,6 +7,7 @@ import styles from './styles.css'
 type ListItemProps = {
   title: string | React.ReactNode
   subTitle?: string | React.ReactNode
+  hint?: boolean
   onClick?: () => any
 }
 
@@ -39,14 +42,19 @@ const NumberIndicator = ({
 const ListItem: React.FC<ListItemProps> & {
   CoverIndicator: typeof CoverIndicator
   NumberIndicator: typeof NumberIndicator
-} = ({ title, subTitle, onClick, children }) => {
+} = ({ title, subTitle, hint, onClick, children }) => {
+  const subtitleClasses = classNames({
+    subtitle: true,
+    hint: !!hint,
+  })
+
   return (
     <li>
       <Card bgColor="white" spacing={[0, 0]} onClick={onClick}>
         <section className="item">
           <section>
             <h3 className="title">{title}</h3>
-            <h4 className="subtitle">{subTitle}</h4>
+            <p className={subtitleClasses}>{subTitle}</p>
           </section>
 
           {children}

@@ -60,6 +60,8 @@ const SettingsList = ({
         <ul>
           <ListItem
             title={<Translate id="setCover" />}
+            subTitle={<Translate id="recommendedCoverSize" />}
+            hint
             onClick={() => forward('cover')}
           >
             <ListItem.CoverIndicator cover={cover} />
@@ -83,28 +85,6 @@ const SettingsList = ({
           <section className="access">
             <ToggleAccess {...restProps} />
           </section>
-
-          {/* <section className="iscn d-flex">
-            <div className="text">
-              <h3 className="title">
-                <Translate id="publishToISCN" />
-              </h3>
-              <p className="detail">
-                <Translate id="publishToISCNHint_1" />
-                <a href="https://iscn.io/" target="_blank">
-                  ISCN
-                </a>
-                <Translate id="publishToISCNHint_2" />
-              </p>
-            </div>
-            <Switch
-              checked={!!iscnPublish}
-              onChange={() => {
-                togglePublishISCN(!iscnPublish)
-              }}
-              loading={iscnPublishSaving}
-            />
-          </section> */}
 
           {(confirmButtonText || cancelButtonText) && (
             <Dialog.Footer>

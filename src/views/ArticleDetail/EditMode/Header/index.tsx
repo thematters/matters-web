@@ -74,6 +74,7 @@ const EditModeHeader = ({
           license,
           ...(isRevised ? { content } : {}),
           first: null,
+          iscnPublish: restProps.iscnPublish,
         },
       })
 

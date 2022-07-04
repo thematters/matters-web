@@ -151,24 +151,13 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
           entityType={ENTITY_TYPE.user}
           entityId={circle.id}
         />
+
+        <p className="hint">
+          <Translate id="recommendedCoverSize" />
+        </p>
       </section>
 
       <section className="avatar-field">
-        <header>
-          <p className="label">
-            <Translate
-              zh_hant="上傳縮圖頭像和封面照"
-              zh_hans="上传缩图头像和封面照"
-            />
-          </p>
-          <p className="msg">
-            <Translate
-              zh_hant="建議封面尺寸超過 688 x 360 像素"
-              zh_hans="建议封面尺寸超过 688 x 360 像素"
-            />
-          </p>
-        </header>
-
         <AvatarUploader
           type="circle"
           circle={circle}

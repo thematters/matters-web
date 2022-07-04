@@ -45,18 +45,17 @@ h3 {
 }
 
 .iscn {
-  margin-top: 1.5rem;
-  & .d-flex {
+  margin-top: var(--spacing-loose);
+
+  & header {
     @mixin flex-center-space-between;
   }
-  & h3.title {
-    margin: 0 1rem 0 0;
-    font-size: 0.875rem;
-  }
-  & p.detail {
-    margin: 4px 0 0 0;
-    font-size: 12px;
+
+  & .hint {
+    margin-top: var(--spacing-xx-tight);
+    font-size: var(--font-size-xs);
     color: var(--color-grey);
+
     & a {
       color: var(--color-matters-green);
       text-decoration: underline;
