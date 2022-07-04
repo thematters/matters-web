@@ -14,7 +14,10 @@ import {
   VOTE_COMMENT,
 } from '~/components/GQL/mutations/voteComment'
 
-import { numAbbr, translate } from '~/common/utils'
+import {
+  // numAbbr,
+  translate,
+} from '~/common/utils'
 
 import { UnvoteComment } from '~/components/GQL/mutations/__generated__/UnvoteComment'
 import { VoteComment } from '~/components/GQL/mutations/__generated__/VoteComment'
@@ -98,7 +101,7 @@ const DownvoteButton = ({
         })}
       >
         <TextIcon icon={<IconDownVoted16 />} color="green" weight="md">
-          {comment.downvotes > 0 ? numAbbr(comment.downvotes) : undefined}
+          {/* comment.downvotes > 0 ? numAbbr(comment.downvotes) : undefined */}
         </TextIcon>
       </Button>
     )
@@ -120,7 +123,7 @@ const DownvoteButton = ({
       })}
     >
       <TextIcon icon={<IconDownVote16 color="grey" />} color="grey" weight="md">
-        {comment.downvotes > 0 ? numAbbr(comment.downvotes) : undefined}
+        {/* comment.downvotes > 0 ? numAbbr(comment.downvotes) : undefined */}
       </TextIcon>
     </Button>
   )

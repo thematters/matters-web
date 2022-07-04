@@ -31,7 +31,7 @@ const UserPublishArticleActivity = ({
             {node.access.circle ? (
               <Translate zh_hant="發布於" zh_hans="发布于" en="published" />
             ) : (
-              <Translate zh_hant="發布" zh_hans="发布" en="published on" />
+              <Translate zh_hant="發布" zh_hans="发布" en="published" />
             )}
           </span>
           {node.access.circle && (
