@@ -116,7 +116,7 @@ const DropdownActions = ({
     <DropdownDialog
       dropdown={{
         content: <Content setType={setType} isInDropdown {...controlsProps} />,
-        placement: 'bottom-end',
+        placement: 'bottom-start',
       }}
       dialog={{
         content: <Content setType={setType} {...controlsProps} />,
