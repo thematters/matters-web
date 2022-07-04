@@ -28,9 +28,6 @@ const nextConfig = {
     ignoreDevErrors: false,
   },
   crossOrigin: 'anonymous',
-  experimental: {
-    esmExternals: false,
-  },
 
   webpack(config, { defaultLoaders, isServer }) {
     /**
