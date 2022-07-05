@@ -69,7 +69,12 @@ const SettingsList = ({
 
           <ListItem
             title={<Translate id="addTags" />}
-            subTitle={tagsCount === 0 && <Translate id="hintAddTag2" />}
+            subTitle={
+              <Translate
+                id={tagsCount <= 0 ? 'hintAddTagNoTag' : 'hintAddTagShort'}
+              />
+            }
+            hint={tagsCount > 0}
             onClick={() => forward('tag')}
           >
             <ListItem.NumberIndicator num={tagsCount} withHintOverlay />

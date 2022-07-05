@@ -142,9 +142,9 @@ export const TEXT = {
     help: '說明',
     helpCenter: '幫助中心',
     hide: '站內隱藏',
-    hintAddTag:
-      '通過添加標籤幫助讀者更好地找到你的作品。如果沒有合適的標籤，你可以創建新的。',
-    hintAddTag2: '目前尚無標籤，立即添加提高作品曝光度！',
+    hintAddTag: '點選標籤幫助讀者找到你的作品，一篇作品最多添加 8 個標籤',
+    hintAddTagNoTag: '目前尚無標籤，立即添加提高作品曝光度！',
+    hintAddTagShort: '添加適合標籤，幫助讀者找到你的作品',
     hintAddCircleInvitee: '添加站內或站外朋友加入圍爐',
     hintCircleAddArticles: '將公開作品加入圍爐，成為永久收費作品。',
     hintCircleDisplayName: '2-12 個字元',
@@ -499,9 +499,9 @@ export const TEXT = {
     help: '说明',
     helpCenter: '帮助中心',
     hide: '站内隐藏',
-    hintAddTag:
-      '通过添加标签帮助读者更好地找到你的作品。如果没有合适的标签，你可以创建新的。',
-    hintAddTag2: '目前尚无标签，立即添加提高作品曝光度！',
+    hintAddTag: '点选标签帮助读者找到你的作品，一篇作品最多添加 8 个标签',
+    hintAddTagNoTag: '目前尚无标签，立即添加提高作品曝光度！',
+    hintAddTagShort: '添加适合标签，帮助读者找到你的作品',
     hintAddCircleInvitee: '添加站内或站外朋友加入围炉',
     hintCircleAddArticles: '将公开作品加入围炉，成为永久收费作品。',
     hintCircleDisplayName: '2-12 个字符',
@@ -864,8 +864,10 @@ export const TEXT = {
     helpCenter: 'Help Center',
     hide: 'Archived',
     hintAddTag:
-      'Adding tags helps readers find your articles. Add or create new tags.',
-    hintAddTag2: 'Not using tags yet, add tags now to improve discoverability!',
+      'Adding tags helps readers find your articles (maximum 8 tags).',
+    hintAddTagNoTag:
+      'Not using tags yet, add tags now to improve discoverability!',
+    hintAddTagShort: 'Adding tags helps readers find your articles.',
     hintAddCircleInvitee: 'Invite friends to join your circle',
     hintCircleAddArticles:
       'Add articles to Circle and keep them behind the paywall.',
