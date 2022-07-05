@@ -40,6 +40,7 @@ const SidebarTags = ({
         <Box
           icon={<IconHashTag24 size="md" />}
           title="addTag"
+          subtitle="hintAddTagShort"
           onClick={openDialog}
           disabled={disabled}
         >
@@ -53,7 +54,6 @@ const SidebarTags = ({
                     disabled
                     hasClose
                     removeTag={() => {
-                      // console.log('in removeTag:', tag)
                       editTags(tags.filter((t) => t.content !== tag.content))
                       analytics.trackEvent('click_button', {
                         type: 'remove_tag',

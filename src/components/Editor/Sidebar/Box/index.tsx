@@ -17,6 +17,7 @@ import styles from './styles.css'
 interface BoxProps {
   icon: React.ReactNode
   title: TextId
+  subtitle?: TextId
   onClick?: () => any
   disabled?: boolean
 }
@@ -24,6 +25,7 @@ interface BoxProps {
 const Box: React.FC<BoxProps> = ({
   icon,
   title,
+  subtitle,
   onClick,
   disabled,
   children,
@@ -53,6 +55,12 @@ const Box: React.FC<BoxProps> = ({
           </Button>
         )}
       </header>
+
+      {subtitle && (
+        <p className="subtitle">
+          <Translate id={subtitle} />
+        </p>
+      )}
 
       {children}
 
