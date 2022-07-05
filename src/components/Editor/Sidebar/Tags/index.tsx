@@ -8,6 +8,7 @@ import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
 
 import { analytics } from '~/common/utils'
 
+import TagCustomStagingArea from '../../TagCustomStagingArea'
 import Box from '../Box'
 import styles from './styles.css'
 
@@ -35,6 +36,7 @@ const SidebarTags = ({
       nodes={tags}
       saving={saving}
       createTag
+      CustomStagingArea={TagCustomStagingArea}
     >
       {({ openDialog }) => (
         <Box
