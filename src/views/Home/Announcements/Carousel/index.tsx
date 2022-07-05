@@ -108,18 +108,48 @@ const Carousel = ({
   }, [items, carouselApi])
 
   return (
-    <div className="outer">
-      <div className="viewport" ref={carousel} onClickCapture={onCaptureClick}>
+    <section className="carousel">
+      <header>
+        <div className="left">
+          <DropdownActions type={type} setType={setType} {...controlsProps} />
+
+          <section className="dots">
+            {items.map((_, index) => (
+              <Dot
+                key={index}
+                index={index}
+                selected={index === dot}
+                scroll={scroll}
+              />
+            ))}
+          </section>
+        </div>
+
+        <Button
+          spacing={[0, 0]}
+          aria-label={translate({ id: 'close', lang })}
+          onClick={hide}
+        >
+          <IconClose32 size="lg" color="white" />
+        </Button>
+      </header>
+
+      <section
+        className="viewport"
+        ref={carousel}
+        onClickCapture={onCaptureClick}
+      >
         <div className="container">
           {items.map((item) => {
             if (!item.cover) {
               return null
             }
+
             return (
               <div key={item.id} className="slide">
                 <Card htmlHref={item.link || ''} spacing={[0, 0]}>
                   <div
-                    className="slide-inner"
+                    className="content"
                     style={{ backgroundImage: `url(${item.cover})` }}
                   >
                     <h3>{item.title}</h3>
@@ -130,35 +160,10 @@ const Carousel = ({
             )
           })}
         </div>
-      </div>
-
-      <div className="dots">
-        {items.map((_, index) => (
-          <Dot
-            key={index}
-            index={index}
-            selected={index === dot}
-            scroll={scroll}
-          />
-        ))}
-      </div>
-
-      <div className="type">
-        <DropdownActions type={type} setType={setType} {...controlsProps} />
-      </div>
-
-      <div className="close">
-        <Button
-          spacing={[0, 0]}
-          aria-label={translate({ id: 'close', lang })}
-          onClick={hide}
-        >
-          <IconClose32 size="lg" color="white" />
-        </Button>
-      </div>
+      </section>
 
       <style jsx>{styles}</style>
-    </div>
+    </section>
   )
 }
 
