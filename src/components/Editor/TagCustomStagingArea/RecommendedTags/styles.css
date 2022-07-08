@@ -1,0 +1,18 @@
+.recommendedTags {
+  padding: 0 var(--spacing-base);
+  margin: var(--spacing-base) 0;
+}
+
+.hint {
+  font-size: var(--font-size-xs);
+  color: var(--color-gray);
+}
+
+.tagList {
+  margin-top: var(--spacing-base);
+
+  & li {
+    margin-right: var(--spacing-tight);
+    margin-bottom: var(--spacing-base);
+  }
+}
