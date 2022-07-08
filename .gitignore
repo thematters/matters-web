@@ -119,3 +119,5 @@ service-worker.js*
 
 # storybook
 storybook-static
+
+tsconfig.tsbuildinfo

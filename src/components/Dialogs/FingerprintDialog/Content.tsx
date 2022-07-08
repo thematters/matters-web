@@ -143,11 +143,10 @@ const FingerprintDialogContent = ({
     useMutation<RetryEditArticle>(EDIT_ARTICLE)
 
   const [timeCooling, setTimeCooling] = useState(false)
-  const POOLING_PERIOD = 30e3
   let timer: any = null
   const pooling = (startedAt: number) => {
     if (!startedAt) return
-    // const coolingBegins = Date.parse(articleLastModified)
+    const POOLING_PERIOD = 30e3
     if (Date.now() - startedAt < POOLING_PERIOD) {
       setTimeCooling(true)
       timer = setTimeout(function loop() {

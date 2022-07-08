@@ -1,53 +1,17 @@
-.avatar-field {
-  padding-left: var(--spacing-base);
-  margin-top: calc(var(--spacing-xx-loose) * -1);
-}
+.cover-field {
+  position: relative;
 
-.nft-collection {
-  margin: var(--spacing-loose) var(--spacing-base);
-
-  & section {
-    padding: var(--spacing-xx-tight);
-
-    /* font-size: 1rem; */
-    background-color: var(--color-grey-lighter);
-    border-radius: 5px;
-
-    &:focus {
-      background-color: var(--color-green-lighter);
-      border-bottom-color: var(--color-matters-green);
-    }
-
-    & span {
-      position: relative;
-      margin: 0 2px;
-
-      & img {
-        width: 72px;
-
-        &:hover {
-          border: 1px solid grey;
-          border-radius: 5px;
-        }
-      }
-
-      & div.checked {
-        position: absolute;
-        right: 0;
-        bottom: 0;
-      }
-    }
-  }
-
-  & header {
-    margin: var(--spacing-base) 0 var(--spacing-x-tight);
-    font-size: var(--font-size-sm);
-    color: var(--color-grey-dark);
-  }
-
-  & footer {
-    margin-top: var(--spacing-x-tight);
+  & .hint {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    padding: var(--spacing-x-tight) var(--spacing-base);
     font-size: var(--font-size-xs);
     color: var(--color-grey);
   }
+}
+
+.avatar-field {
+  padding-left: var(--spacing-base);
+  margin-top: calc(var(--spacing-xx-loose) * -1);
 }

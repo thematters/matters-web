@@ -1,93 +1,110 @@
 :root {
-  --announcement-height: 7.5rem;
+  --announcement-header-height: 2rem;
+  --announcement-height: 8rem;
 }
 
-.outer {
+.carousel {
   position: relative;
   width: 100%;
-  padding: 1rem 1rem 0;
+  padding: var(--spacing-base) var(--spacing-base) 0;
+}
+
+header {
+  @mixin flex-center-space-between;
+
+  position: absolute;
+  top: var(--spacing-base);
+  right: var(--spacing-base);
+  left: var(--spacing-base);
+  z-index: 1;
+  padding: var(--spacing-base) var(--spacing-base) 0;
+
+  & .left {
+    @mixin flex-center-start;
+  }
+
+  & .dots {
+    @mixin flex-center-start;
+
+    padding-left: var(--spacing-loose);
+  }
 }
 
 .viewport {
   width: 100%;
   overflow: hidden;
 
-  &.is-draggable {
-    cursor: move;
-    cursor: grab;
+  & .container {
+    display: flex;
+    margin-left: calc(var(--spacing-x-tight) * -1);
   }
 
-  &.is-dragging {
-    cursor: grabbing;
-  }
-}
-
-.container {
-  display: flex;
-  margin-left: -8px;
-}
-
-.slide {
-  position: relative;
-  min-width: 100%;
-  padding-left: 8px;
-}
-
-.slide-inner {
-  position: relative;
-  height: var(--announcement-height);
-  padding: var(--spacing-base);
-  overflow: hidden;
-  background-position: bottom right;
-  border-radius: 1rem;
-
-  & h3 {
-    font-size: var(--font-size-lg);
-    font-weight: var(--font-weight-semibold);
-    line-height: 1.5rem;
-    color: var(--color-white);
+  & .slide {
+    position: relative;
+    min-width: 100%;
+    padding-left: var(--spacing-x-tight);
   }
 
-  & p {
-    margin-top: var(--spacing-xx-tight);
-    font-size: var(--font-size-sm-s);
-    line-height: 1.5rem;
-    color: var(--color-white);
+  & .content {
+    position: relative;
+    height: var(--announcement-height);
+    padding: calc(
+        var(--announcement-header-height) + var(--spacing-base) +
+          var(--spacing-x-tight)
+      )
+      var(--spacing-base) var(--spacing-base);
+    overflow: hidden;
+    background-position: bottom right;
+    border-radius: var(--spacing-base);
+
+    & h3 {
+      @mixin line-clamp;
+
+      -webkit-line-clamp: 2;
+      font-size: var(--font-size-md);
+      font-weight: var(--font-weight-semibold);
+      line-height: 1.5rem;
+      color: var(--color-white);
+    }
+
+    & p {
+      display: none;
+    }
+
+    @media (--sm-up) {
+      & h3 {
+        font-size: var(--font-size-xm);
+        -webkit-line-clamp: 1;
+      }
+      & p {
+        @mixin line-clamp;
+
+        -webkit-line-clamp: 1;
+        margin-top: var(--spacing-xx-tight);
+        font-size: var(--font-size-sm-s);
+        line-height: 1.25rem;
+        color: rgba(255, 255, 255, 0.8);
+      }
+    }
   }
-}
-
-.dots {
-  @mixin flex-center-all;
-
-  position: absolute;
-  right: 0;
-  bottom: var(--spacing-x-tight);
-  left: 0;
 }
 
 .dot {
-  width: 8px;
-  height: 8px;
-  margin: 0 0.2rem;
+  @mixin all-transition;
+
+  box-sizing: content-box;
+  box-sizing: border-box;
+  width: 0.25rem;
+  height: 0.25rem;
+  margin-right: var(--spacing-x-tight);
   cursor: pointer;
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.7);
+  border: 2px solid rgba(255, 255, 255, 0);
   border-radius: 100%;
 
   &.selected {
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 1);
+    border-color: var(--color-white);
+    border-width: 4px;
   }
-}
-
-.close {
-  position: absolute;
-  top: var(--spacing-base);
-  right: var(--spacing-base);
-  padding: var(--spacing-x-tight);
-}
-
-.type {
-  position: absolute;
-  top: 1.35rem;
-  right: 3.5rem;
-  padding: var(--spacing-x-tight);
 }

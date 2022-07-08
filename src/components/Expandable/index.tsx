@@ -1,3 +1,4 @@
+import VisuallyHidden from '@reach/visually-hidden'
 import React, { useEffect, useRef, useState } from 'react'
 
 import { Button, IconExpand16, TextIcon, Translate } from '~/components'
@@ -41,7 +42,10 @@ export const Expandable: React.FC<ExpandableProps> = ({
         WebkitLineClamp: expand ? 'unset' : limit,
       }}
     >
-      <div ref={node}>{children}</div>
+      <VisuallyHidden>
+        <div ref={node}>{children}</div>
+      </VisuallyHidden>
+      {children}
 
       {expandable && !expand && (
         <Button

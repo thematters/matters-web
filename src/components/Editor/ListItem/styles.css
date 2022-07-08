@@ -11,10 +11,14 @@ li .item {
   }
 
   & .subtitle {
-    margin-top: 0.5rem;
+    margin-top: var(--spacing-x-tight);
     font-size: var(--font-size-xs);
     line-height: 1rem;
     color: var(--color-matters-gold);
+
+    &.hint {
+      color: var(--color-grey);
+    }
   }
 
   &:hover,
