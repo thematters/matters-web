@@ -17,11 +17,7 @@ const RecommendedTags: React.FC<RecommendedTagsProps> = ({
   return (
     <section className="recommendedTags">
       <p className="hint">
-        <Translate
-          zh_hant="點選標籤幫助讀者找到你的作品，一篇作品最多添加 8 個標籤"
-          zh_hans="點選標籤幫助讀者找到你的作品，一篇作品最多添加 8 個標籤"
-          en=""
-        />
+        <Translate id="hintAddTag" />
       </p>
 
       <ul className="tagList">
