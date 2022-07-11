@@ -1,20 +1,18 @@
 import _chunk from 'lodash/chunk'
 import _get from 'lodash/get'
 import Link from 'next/link'
-import { useContext } from 'react'
 
 import {
   IconArticle16,
   IconHashTag16,
   IconUser16,
-  LanguageContext,
   PageHeader,
   TextIcon,
   Translate,
   usePublicQuery,
 } from '~/components'
 
-import { analytics, translate } from '~/common/utils'
+import { analytics, numAbbr } from '~/common/utils'
 
 import { RELATED_TAGS } from './gql'
 import styles from './styles.css'
@@ -35,8 +33,6 @@ const RelatedTags = ({ tagId }: RelatedTagsProps) => {
 
   const { edges } =
     (data?.node?.__typename === 'Tag' && data.node.recommended) || {}
-
-  const { lang } = useContext(LanguageContext)
 
   const onClick = (i: number, id: string) => () =>
     analytics.trackEvent('click_feed', {
@@ -86,7 +82,7 @@ const RelatedTags = ({ tagId }: RelatedTagsProps) => {
                                 <TextIcon
                                   icon={<IconHashTag16 color="grey-dark" />}
                                 >
-                                  {node?.content}
+                                  <div className="h3">{node?.content}</div>
                                 </TextIcon>
                               </h3>
                             </div>
@@ -96,12 +92,7 @@ const RelatedTags = ({ tagId }: RelatedTagsProps) => {
                                   size="xs"
                                   icon={<IconUser16 color="grey-dark" />}
                                 >
-                                  {translate({
-                                    zh_hant: `作者 ${node?.numAuthors} 位`,
-                                    zh_hans: `作者 ${node?.numAuthors} 位`,
-                                    en: `${node?.numAuthors} authors`,
-                                    lang,
-                                  })}
+                                  {numAbbr(node?.numAuthors)}
                                 </TextIcon>
                               </span>
                               <span className="articles">
@@ -109,12 +100,7 @@ const RelatedTags = ({ tagId }: RelatedTagsProps) => {
                                   size="xs"
                                   icon={<IconArticle16 color="grey-dark" />}
                                 >
-                                  {translate({
-                                    zh_hant: `作品 ${node?.numArticles} 篇`,
-                                    zh_hans: `作品 ${node?.numArticles} 篇`,
-                                    en: `${node?.numArticles} articles`,
-                                    lang,
-                                  })}
+                                  {numAbbr(node?.numArticles)}
                                 </TextIcon>
                               </span>
                             </div>

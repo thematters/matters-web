@@ -71,12 +71,23 @@
           font-weight: var(--font-weight-medium);
           color: var(--color-black);
           transition: color 0.3s ease;
+          & .h3 {
+            display: inline-block;
+            max-width: 220px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
         }
       }
       & .text {
         font-size: var(--font-size-xs);
         font-weight: var(--font-weight-medium);
         color: var(--color-grey-dark);
+        & span {
+          display: inline-block;
+          min-width: 42px;
+        }
         & .authors {
           margin: 0 8px 0 0;
         }
