@@ -72,6 +72,10 @@
   &.active {
     background: var(--color-green-lighter);
 
+    & .name {
+      color: var(--color-matters-green);
+    }
+
     &:not(.disabled) {
       &:hover,
       &:focus {
