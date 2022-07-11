@@ -65,6 +65,10 @@
     }
   }
 
+  &.clickable {
+    cursor: pointer;
+  }
+
   &.active {
     background: var(--color-green-lighter);
 

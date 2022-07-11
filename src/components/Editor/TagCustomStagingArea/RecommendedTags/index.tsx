@@ -1,15 +1,18 @@
 import { Tag, Translate } from '~/components'
+import { SelectTag } from '~/components/SearchSelect/SearchingArea'
 
 import styles from './styles.css'
 
+import { EditorRecommendedTags_user_tags_edges_node as TagType } from '../__generated__/EditorRecommendedTags'
+
 type RecommendedTagsProps = {
-  tags: any[]
-  onClickTag: (tag: any) => void
+  tags: TagType[]
+  onAddTag: (tag: SelectTag) => void
 }
 
 const RecommendedTags: React.FC<RecommendedTagsProps> = ({
   tags,
-  onClickTag,
+  onAddTag,
 }) => {
   return (
     <section className="recommendedTags">
@@ -28,7 +31,8 @@ const RecommendedTags: React.FC<RecommendedTagsProps> = ({
               tag={tag}
               type="inline"
               active
-              onClick={() => onClickTag(tag)}
+              disabled
+              onClick={() => onAddTag(tag)}
             />
           </li>
         ))}

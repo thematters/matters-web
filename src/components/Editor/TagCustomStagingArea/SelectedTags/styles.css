@@ -3,6 +3,7 @@
   margin-top: var(--spacing-base);
 
   & li {
+    display: inline-block;
     margin-right: var(--spacing-tight);
     margin-bottom: var(--spacing-base);
   }

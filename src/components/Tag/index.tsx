@@ -23,7 +23,7 @@ interface TagProps {
   textSize?: 'sm' | 'sm-s'
   iconSize?: 'sm-s'
   active?: boolean
-  disabled?: boolean
+  disabled?: boolean // disable default <a>
   hasCount?: boolean
   hasClose?: boolean
   removeTag?: (tag: DigestTag | DigestTagSearchResult) => void
@@ -77,7 +77,8 @@ export const Tag = ({
     tag: true,
     [type]: type,
     active,
-    disabled,
+    clickable: !!onClick,
+    disabled: !!disabled && !onClick,
   })
 
   const path = toPath({
@@ -120,7 +121,7 @@ export const Tag = ({
         size: 'sm',
         weight: 'md',
         spacing: 0,
-        color: active ? 'green' : 'grey-darker',
+        color: active ? 'white' : 'grey-darker',
       }
       break
     case 'plain':
@@ -172,7 +173,7 @@ export const Tag = ({
 
   if (disabled) {
     return (
-      <span className={tagClasses}>
+      <span className={tagClasses} onClick={onClick}>
         <Inner />
         <style jsx>{styles}</style>
       </span>
