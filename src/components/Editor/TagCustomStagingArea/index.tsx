@@ -1,3 +1,4 @@
+import _uniqBy from 'lodash/uniqBy'
 import { useContext } from 'react'
 
 import { Spinner, usePublicQuery, ViewerContext } from '~/components'
@@ -25,18 +26,25 @@ const TagCustomStagingArea = ({
    * Data Fetching
    */
   // public data
-  const { data } = usePublicQuery<EditorRecommendedTags>(
+  const { data, loading } = usePublicQuery<EditorRecommendedTags>(
     EDITOR_RECOMMENDED_TAGS,
     {
       variables: { userName: viewer.userName },
     }
   )
 
-  const hasTag = tags.length > 0
+  // recommended tags
   const userTagsEdges = data?.user?.tags.edges || []
   const recommendationTagsEdges = data?.user?.recommendation.tags.edges || []
-  const recommendedTags = [...userTagsEdges, ...recommendationTagsEdges]?.map(
+
+  let recommendedTags = [...userTagsEdges, ...recommendationTagsEdges]?.map(
     (edge) => edge.node
+  )
+  // remove duplicated tags
+  recommendedTags = _uniqBy(recommendedTags, (tag) => tag.content)
+  // remove selected tags
+  recommendedTags = recommendedTags.filter(
+    (tag) => !tags.find((t) => t.node.id === tag.id)
   )
 
   const removeTag = (tag: SelectTag) => {
@@ -48,7 +56,7 @@ const TagCustomStagingArea = ({
     setTags([...oldTags, { node: tag, selected: true }])
   }
 
-  if (!recommendedTags || recommendedTags.length <= 0) {
+  if (loading) {
     return (
       <section className="customTagArea">
         <Spinner />
@@ -56,24 +64,22 @@ const TagCustomStagingArea = ({
     )
   }
 
-  if (hasTag) {
-    return (
-      <section className="customTagArea">
+  const hasTag = tags.length > 0
+  const hasRecommendedTags = recommendedTags && recommendedTags.length > 0
+
+  return (
+    <section className="customTagArea">
+      {hasTag && (
         <SelectedTags
           tags={tags.map((t) => t.node as TagType)}
           onRemoveTag={removeTag}
         />
-        <hr />
+      )}
+      {hasRecommendedTags && <hr />}
+      {hasRecommendedTags && (
         <RecommendedTags tags={recommendedTags} onAddTag={addTag} />
+      )}
 
-        <style jsx>{styles}</style>
-      </section>
-    )
-  }
-
-  return (
-    <section className="customTagArea">
-      <RecommendedTags tags={recommendedTags} onAddTag={addTag} />
       <style jsx>{styles}</style>
     </section>
   )
