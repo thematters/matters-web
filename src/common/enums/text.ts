@@ -1092,7 +1092,7 @@ export const TEXT = {
     userDescription: 'Profile',
     useWallet: 'Continue with Wallet',
     verificationCode: 'Verification Code',
-    viewAll: 'Show More',
+    viewAll: 'Show All',
     viewAppreciators: 'Likers',
     viewDonators: 'Donors',
     waitingForPublish: 'Waiting for publish.',
