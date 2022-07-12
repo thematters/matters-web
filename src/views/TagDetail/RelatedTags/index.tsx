@@ -10,8 +10,10 @@ import {
   TextIcon,
   Translate,
   usePublicQuery,
+  ViewAllButton,
 } from '~/components'
 
+import { PATHS } from '~/common/enums'
 import { analytics, numAbbr } from '~/common/utils'
 
 import { RELATED_TAGS } from './gql'
@@ -49,7 +51,19 @@ const RelatedTags = ({ tagId }: RelatedTagsProps) => {
       }
       is="h2"
       hasNoBorder
-    />
+    >
+      <section className="right">
+        {PATHS && (
+          <ViewAllButton
+            href={PATHS.TAGS}
+            bgColor={undefined}
+            bgActiveColor="grey-lighter"
+          />
+        )}
+
+        <style jsx>{styles}</style>
+      </section>
+    </PageHeader>
   )
 
   return (
@@ -82,7 +96,7 @@ const RelatedTags = ({ tagId }: RelatedTagsProps) => {
                                 <TextIcon
                                   icon={<IconHashTag16 color="grey-dark" />}
                                 >
-                                  <div className="h3">{node?.content}</div>
+                                  {node?.content}
                                 </TextIcon>
                               </h3>
                             </div>
