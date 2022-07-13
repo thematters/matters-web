@@ -147,7 +147,6 @@ const FingerprintDialogContent = ({
   const pooling = (startedAt: number) => {
     if (!startedAt) return
     const POOLING_PERIOD = 30e3
-    // const coolingBegins = Date.parse(articleLastModified)
     if (Date.now() - startedAt < POOLING_PERIOD) {
       setTimeCooling(true)
       timer = setTimeout(function loop() {
@@ -269,7 +268,7 @@ const FingerprintDialogContent = ({
       <Spacer size="base" />
 
       {/* iscnId */}
-      {iscnPublish && (isAuthor || iscnId) && (
+      {iscnPublish && (isAuthor || iscnId) && !timeCooling && (
         <SectionCard
           title={
             <TextIcon icon={<IconISCN24 />} size="lg">

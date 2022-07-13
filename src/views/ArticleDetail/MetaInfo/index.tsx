@@ -26,20 +26,14 @@ const MetaInfo = ({
   return (
     <section className="info">
       <section className="time">
-        <span>
-          <Translate zh_hant="發布於" zh_hans="發布於" en="Published at" />
-        </span>
         <DateTime date={article.createdAt} />
-      </section>
-
-      {article.revisedAt && (
-        <section className="time">
+        {article.revisedAt && (
           <span>
-            <Translate zh_hant="修訂於" zh_hans="修訂於" en="Revised at" />
+            &nbsp;
+            <Translate zh_hant="(編輯過)" zh_hans="(编辑过)" en="(edited)" />
           </span>
-          <DateTime date={article.revisedAt} />
-        </section>
-      )}
+        )}
+      </section>
 
       {canReadFullContent && (
         <>

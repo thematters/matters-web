@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 import dynamic from 'next/dynamic'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 
 import {
   Dialog,
@@ -74,6 +74,13 @@ const BaseFingerprintDialog = ({
   const showSecret =
     viewer.id === article.author.id &&
     article?.access.type === ArticleAccessType.paywall
+
+  useEffect(() => {
+    if (show) {
+      // console.log('start refetching...', { data, loading })
+      refetch()
+    }
+  }, [show])
 
   return (
     <>
