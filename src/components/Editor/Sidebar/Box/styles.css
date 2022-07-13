@@ -10,3 +10,11 @@
     padding: 0 var(--spacing-base);
   }
 }
+
+.subtitle {
+  padding: 0 var(--spacing-base);
+  margin-top: var(--spacing-xx-tight);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-normal);
+  color: var(--color-grey);
+}

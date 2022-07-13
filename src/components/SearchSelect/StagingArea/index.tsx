@@ -19,13 +19,23 @@ export interface StagingNode {
   selected: boolean
 }
 
-interface StagingAreaProps {
+interface BaseStagingAreaProps {
   nodes: StagingNode[]
   setNodes: (nodes: StagingNode[]) => void
 
   hint: TextId
   inStagingArea: boolean
   draggable?: boolean
+}
+
+export interface CustomStagingAreaProps {
+  nodes: StagingNode[]
+  setNodes: (nodes: StagingNode[]) => void
+  hint: TextId
+}
+
+type StagingAreaProps = BaseStagingAreaProps & {
+  CustomStagingArea?: (props: CustomStagingAreaProps) => JSX.Element
 }
 
 const DynamicDraggableNodes = dynamic(() => import('./DraggableNodes'), {
@@ -39,6 +49,8 @@ const StagingArea: React.FC<StagingAreaProps> = ({
   hint,
   inStagingArea,
   draggable,
+
+  CustomStagingArea,
 }) => {
   const toggleSelectNode = (node: SelectNode) => {
     const newNodes = nodes.map(({ node: n, selected: s }) => {
@@ -52,6 +64,14 @@ const StagingArea: React.FC<StagingAreaProps> = ({
 
   if (!inStagingArea) {
     return null
+  }
+
+  if (CustomStagingArea) {
+    return (
+      <section className="area">
+        <CustomStagingArea nodes={nodes} setNodes={setNodes} hint={hint} />
+      </section>
+    )
   }
 
   return (
