@@ -30,7 +30,7 @@ const SidebarTags = ({
   return (
     <SearchSelectDialog
       title="addTag"
-      hint="hintAddTag"
+      hint="hintAddRecommendedTag"
       searchType="Tag"
       onSave={(nodes: SearchSelectNode[]) => editTags(nodes as DigestTag[])}
       nodes={tags}

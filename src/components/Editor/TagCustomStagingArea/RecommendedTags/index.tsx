@@ -17,7 +17,7 @@ const RecommendedTags: React.FC<RecommendedTagsProps> = ({
   return (
     <section className="recommendedTags">
       <p className="hint">
-        <Translate id="hintAddTag" />
+        <Translate id="hintAddRecommendedTag" />
       </p>
 
       <ul className="tagList">

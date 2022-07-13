@@ -239,8 +239,6 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
         onChange={(e) => {
           const newContent = stripPunctPrefixSuffix(e.target.value)
           setFieldValue('newContent', newContent)
-          // setFieldValue('content', newContent)
-          // handleChange(e)
         }}
         dropdownAppendTo={formId}
         dropdownAutoSizing

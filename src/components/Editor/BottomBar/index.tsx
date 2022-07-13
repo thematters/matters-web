@@ -126,7 +126,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
             {/* Tags */}
             <SearchSelectDialog
               title="addTag"
-              hint="hintAddTag"
+              hint="hintAddRecommendedTag"
               searchType="Tag"
               onSave={(nodes: SearchSelectNode[]) =>
                 editTags(nodes as DigestTag[])
