@@ -204,6 +204,7 @@ const TagDetailArticles = ({ tagId, selected }: TagArticlesProps) => {
           </>
         ))}
       </List>
+
       {!isLargeUp && edges.length < 4 && <RelatedTags tagId={tagId} />}
     </InfiniteScroll>
   )

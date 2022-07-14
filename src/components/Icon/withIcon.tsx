@@ -18,6 +18,7 @@ export type IconColor =
   | 'white'
   | 'black'
   | 'grey-dark'
+  | 'grey-darker'
   | 'grey'
   | 'grey-light'
   | 'grey-lighter'

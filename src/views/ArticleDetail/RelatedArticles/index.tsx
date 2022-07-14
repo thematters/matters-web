@@ -47,7 +47,7 @@ const RelatedArticles = ({ article, inSidebar }: RelatedArticlesProps) => {
   }
 
   const relatedArticlesClasses = classNames({
-    'related-articles': true,
+    relatedArticles: true,
     inSidebar,
   })
 

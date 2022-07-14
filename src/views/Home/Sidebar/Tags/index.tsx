@@ -127,7 +127,12 @@ const Tags = () => {
                   })
                 }
               >
-                <Tag tag={node} type="inline" textSize="sm" active />
+                <Tag
+                  tag={node}
+                  type="inline"
+                  textIconProps={{ size: 'sm' }}
+                  active
+                />
 
                 {node.description && (
                   <section className="content">

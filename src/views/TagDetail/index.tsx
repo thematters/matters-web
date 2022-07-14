@@ -130,7 +130,7 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
    * Render
    */
   return (
-    <Layout.Main aside={<RelatedTags tagId={tag.id} />}>
+    <Layout.Main aside={<RelatedTags tagId={tag.id} inSidebar />}>
       <Layout.Header
         left={<Layout.Header.BackButton mode="black-solid" />}
         right={
