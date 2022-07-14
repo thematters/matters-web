@@ -20,8 +20,8 @@ import { DigestTagSearchResult } from './__generated__/DigestTagSearchResult'
 interface TagProps {
   tag: DigestTag | DigestTagSearchResult
   type?: 'list' | 'title' | 'inline' | 'plain'
-  textSize?: 'sm' | 'sm-s'
-  iconSize?: 'sm-s'
+  iconProps?: IconProps
+  textIconProps?: TextIconProps
   active?: boolean
   disabled?: boolean
   hasCount?: boolean
@@ -64,8 +64,8 @@ export const toDigestTagPlaceholder = (content: string) =>
 export const Tag = ({
   tag,
   type = 'list',
-  textSize,
-  iconSize,
+  iconProps: customIconProps,
+  textIconProps: customTextIconProps,
   active,
   disabled,
   hasCount = true,
@@ -88,6 +88,7 @@ export const Tag = ({
   let iconProps: IconProps = {}
   let textIconProps: TextIconProps = {}
 
+  // default styles based on type
   switch (type) {
     case 'list':
       iconProps = {
@@ -124,9 +125,6 @@ export const Tag = ({
       }
       break
     case 'plain':
-      iconProps = {
-        size: iconSize || 'sm',
-      }
       textIconProps = {
         size: 'sm-s',
         weight: 'normal',
@@ -137,13 +135,22 @@ export const Tag = ({
   }
 
   // const tagCount = numAbbr(tag.articles.totalCount || 0)
+  // overwrite default styles with custom props
+  iconProps = {
+    ...iconProps,
+    ...customIconProps,
+  }
+  textIconProps = {
+    ...textIconProps,
+    ...customTextIconProps,
+  }
 
   const Inner = () => (
     <>
       <TextIcon
         icon={<IconHashTag16 {...iconProps} />}
         {...textIconProps}
-        size={textSize || textIconProps.size}
+        size={textIconProps.size}
         allowUserSelect
       >
         <span className="name">{tag.content}</span>
