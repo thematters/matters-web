@@ -1,0 +1,5 @@
+.customTagArea {
+  & hr {
+    @mixin shadow-border-bottom-grey;
+  }
+}

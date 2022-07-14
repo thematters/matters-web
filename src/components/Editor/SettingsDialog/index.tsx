@@ -10,6 +10,7 @@ import {
 } from '~/components/Editor'
 import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
 
+import TagCustomStagingArea from '../TagCustomStagingArea'
 import SettingsList, { SettingsListDialogButtons } from './List'
 
 import { SearchExclude } from '@/__generated__/globalTypes'
@@ -184,7 +185,7 @@ const BaseEditorSettingsDialog = ({
         {isTag && (
           <DynamicSearchSelectForm
             title="addTag"
-            hint="hintAddTag"
+            hint="hintAddRecommendedTag"
             headerLeftButton={
               <Dialog.Header.BackButton onClick={() => forward('list')} />
             }
@@ -197,6 +198,7 @@ const BaseEditorSettingsDialog = ({
             saving={tagsSaving}
             createTag
             closeDialog={closeDialog}
+            CustomStagingArea={TagCustomStagingArea}
           />
         )}
 

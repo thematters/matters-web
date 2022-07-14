@@ -238,10 +238,7 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
         onBlur={handleBlur}
         onChange={(e) => {
           const newContent = stripPunctPrefixSuffix(e.target.value)
-          // console.log('set newContent:', { newContent, old: e.target.value })
           setFieldValue('newContent', newContent)
-          // setFieldValue('content', newContent)
-          // handleChange(e)
         }}
         dropdownAppendTo={formId}
         dropdownAutoSizing

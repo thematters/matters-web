@@ -23,6 +23,7 @@ import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
 import { translate } from '~/common/utils'
 
 import SetCover from '../SetCover'
+import TagCustomStagingArea from '../TagCustomStagingArea'
 import AccessDialog from './AccessDialog'
 import styles from './styles.css'
 
@@ -125,7 +126,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
             {/* Tags */}
             <SearchSelectDialog
               title="addTag"
-              hint="hintAddTag"
+              hint="hintAddRecommendedTag"
               searchType="Tag"
               onSave={(nodes: SearchSelectNode[]) =>
                 editTags(nodes as DigestTag[])
@@ -133,6 +134,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
               nodes={tags}
               saving={tagsSaving}
               createTag
+              CustomStagingArea={TagCustomStagingArea}
             >
               {({ openDialog }) => (
                 <button type="button" onClick={openDialog}>

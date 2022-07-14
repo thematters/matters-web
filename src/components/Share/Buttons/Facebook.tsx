@@ -1,4 +1,4 @@
-import queryString from 'query-string'
+// import queryString from 'query-string'
 
 import { TextIcon, withIcon } from '~/components'
 
@@ -19,11 +19,11 @@ const Facebook = ({
   <button
     type="button"
     onClick={() => {
-      const shareUrl =
-        'https://www.facebook.com/sharer/sharer.php?' +
-        queryString.stringify({
+      const shareUrl = `https://www.facebook.com/sharer/sharer.php?${new URLSearchParams(
+        {
           u: link,
-        })
+        }
+      ).toString()}`
       analytics.trackEvent('share', {
         type: 'facebook',
       })

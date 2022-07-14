@@ -1,4 +1,4 @@
-import queryString from 'query-string'
+// import queryString from 'query-string'
 
 import { TextIcon, Translate, withIcon } from '~/components'
 
@@ -21,14 +21,14 @@ const Douban = ({
     onClick={() => {
       const description = dom
         .$('meta[name="description"]')
-        ?.getAttribute('content')
-      const shareUrl =
-        'http://www.douban.com/share/service?' +
-        queryString.stringify({
+        ?.getAttribute('content') as string
+      const shareUrl = `http://www.douban.com/share/service?${new URLSearchParams(
+        {
           href: link,
           name: title,
           text: description,
-        })
+        }
+      ).toString()}`
       analytics.trackEvent('share', {
         type: 'douban',
       })
