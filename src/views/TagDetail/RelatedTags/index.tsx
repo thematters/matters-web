@@ -1,12 +1,15 @@
+import classNames from 'classnames'
 import _chunk from 'lodash/chunk'
 
 import {
   List,
   PageHeader,
+  Slides,
   TagDigest,
   Translate,
   usePublicQuery,
   ViewAllButton,
+  ViewMoreCard,
 } from '~/components'
 
 import { PATHS } from '~/common/enums'
@@ -19,9 +22,10 @@ import { TagDetailRecommended } from './__generated__/TagDetailRecommended'
 
 interface RelatedTagsProps {
   tagId: string
+  inSidebar?: boolean
 }
 
-const RelatedTags = ({ tagId }: RelatedTagsProps) => {
+const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
   const { data } = usePublicQuery<TagDetailRecommended>(RELATED_TAGS, {
     variables: { id: tagId },
   })
@@ -37,23 +41,74 @@ const RelatedTags = ({ tagId }: RelatedTagsProps) => {
       id,
     })
 
-  return (
-    <section className="tags">
-      <PageHeader
-        title={
-          <Translate zh_hant="相關標籤" zh_hans="相关标签" en="Related Tags" />
-        }
-        is="h2"
-        hasNoBorder
-      >
-        <section className="right">
-          <ViewAllButton
+  if (!edges || edges.length <= 0) {
+    return null
+  }
+
+  const relatedTagsClasses = classNames({
+    relatedTags: true,
+    inSidebar,
+  })
+
+  const Header = (
+    <PageHeader
+      title={
+        <Translate zh_hant="相關標籤" zh_hans="相关标签" en="Related Tags" />
+      }
+      is="h2"
+      hasNoBorder
+    >
+      <section className="right">
+        <ViewAllButton
+          href={PATHS.TAGS}
+          bgColor={undefined}
+          bgActiveColor="grey-lighter"
+        />
+      </section>
+    </PageHeader>
+  )
+
+  if (!inSidebar) {
+    return (
+      <section className={relatedTagsClasses}>
+        <Slides header={Header}>
+          {_chunk(edges, 5).map((chunks, edgeIndex) => (
+            <Slides.Item size="md" key={edgeIndex}>
+              <section>
+                {chunks.map(({ node, cursor }, nodeIndex) => (
+                  <TagDigest.Sidebar
+                    key={cursor}
+                    tag={node}
+                    onClick={() =>
+                      onClick((edgeIndex + 1) * (nodeIndex + 1) - 1, node.id)
+                    }
+                  />
+                ))}
+              </section>
+            </Slides.Item>
+          ))}
+        </Slides>
+
+        <section className="backToAll">
+          <ViewMoreCard
+            spacing={['tight', 'tight']}
             href={PATHS.TAGS}
-            bgColor={undefined}
-            bgActiveColor="grey-lighter"
-          />
+            iconProps={{ size: 'sm' }}
+            textIconProps={{ size: 'sm', weight: 'md', spacing: 'xxtight' }}
+            textAlign="center"
+          >
+            <Translate id="backToAll" />
+          </ViewMoreCard>
         </section>
-      </PageHeader>
+
+        <style jsx>{styles}</style>
+      </section>
+    )
+  }
+
+  return (
+    <section className={relatedTagsClasses}>
+      {Header}
 
       <List hasBorder={false}>
         {edges?.map(({ node, cursor }, i) => (

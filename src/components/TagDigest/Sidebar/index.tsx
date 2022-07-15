@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import Link from 'next/link'
 
 import {
   Card,
@@ -53,7 +54,14 @@ const Sidebar = ({ tag, ...cardProps }: Props) => {
     >
       <section className="container">
         <section className="cover">
-          <ResponsiveImage url={tag.cover || IMAGE_TAG_COVER.src} size="360w" />
+          <Link {...path}>
+            <a>
+              <ResponsiveImage
+                url={tag.cover || IMAGE_TAG_COVER.src}
+                size="360w"
+              />
+            </a>
+          </Link>
         </section>
 
         <section className="content">
