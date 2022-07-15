@@ -25,6 +25,26 @@ interface RelatedTagsProps {
   inSidebar?: boolean
 }
 
+const RelatedTagsHeader = ({ hasViewAll }: { hasViewAll?: boolean }) => (
+  <PageHeader
+    title={
+      <Translate zh_hant="相關標籤" zh_hans="相关标签" en="Related Tags" />
+    }
+    is="h2"
+    hasNoBorder
+  >
+    {hasViewAll && (
+      <section className="right">
+        <ViewAllButton
+          href={PATHS.TAGS}
+          bgColor={undefined}
+          bgActiveColor="grey-lighter"
+        />
+      </section>
+    )}
+  </PageHeader>
+)
+
 const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
   const { data } = usePublicQuery<TagDetailRecommended>(RELATED_TAGS, {
     variables: { id: tagId },
@@ -50,28 +70,10 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
     inSidebar,
   })
 
-  const Header = (
-    <PageHeader
-      title={
-        <Translate zh_hant="相關標籤" zh_hans="相关标签" en="Related Tags" />
-      }
-      is="h2"
-      hasNoBorder
-    >
-      <section className="right">
-        <ViewAllButton
-          href={PATHS.TAGS}
-          bgColor={undefined}
-          bgActiveColor="grey-lighter"
-        />
-      </section>
-    </PageHeader>
-  )
-
   if (!inSidebar) {
     return (
       <section className={relatedTagsClasses}>
-        <Slides header={Header}>
+        <Slides header={<RelatedTagsHeader />}>
           {_chunk(edges, 5).map((chunks, edgeIndex) => (
             <Slides.Item size="md" key={edgeIndex}>
               <section>
@@ -108,7 +110,7 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
 
   return (
     <section className={relatedTagsClasses}>
-      {Header}
+      <RelatedTagsHeader hasViewAll />
 
       <List hasBorder={false}>
         {edges?.map(({ node, cursor }, i) => (
