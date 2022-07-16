@@ -173,7 +173,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
         />
       </section>
 
-      {nfts.length > 0 && (
+      {nfts && nfts.length > 0 && (
         <NFTCollection
           nfts={nfts}
           setField={(url: string) => setFieldValue('avatar', url)}
