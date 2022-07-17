@@ -15,9 +15,9 @@ import NoticeHead from '../NoticeHead'
 import NoticeTypeIcon from '../NoticeTypeIcon'
 import styles from '../styles.css'
 
-import { CircleNewBroadcastNotice as NoticeType } from './__generated__/CircleNewBroadcastNotice'
+import { CircleNewDiscussionNotice as NoticeType } from './__generated__/CircleNewDiscussionNotice'
 
-const CircleNewBroadcastNotice = ({ notice }: { notice: NoticeType }) => {
+const CircleNewDiscussionNotice = ({ notice }: { notice: NoticeType }) => {
   if (!notice.actors) {
     return null
   }
@@ -84,9 +84,9 @@ const CircleNewBroadcastNotice = ({ notice }: { notice: NoticeType }) => {
   )
 }
 
-CircleNewBroadcastNotice.fragments = {
+CircleNewDiscussionNotice.fragments = {
   notice: gql`
-    fragment CircleNewBroadcastNotice on CommentNotice {
+    fragment CircleNewDiscussionNotice on CommentNotice {
       id
       commentNoticeType: type
       ...NoticeDate
@@ -111,4 +111,4 @@ CircleNewBroadcastNotice.fragments = {
   `,
 }
 
-export default CircleNewBroadcastNotice
+export default CircleNewDiscussionNotice

@@ -56,12 +56,12 @@ const Article = ({ settings, toggle }: ArticleProps) => (
     /> */}
     <Form.List.Item
       title={<Translate zh_hant="作品被關聯" zh_hans="作品被关联" en="" />}
-      // right={
-      //   <Switch
-      //     checked={settings.}
-      //     onChange={() => toggle('')}
-      //   />
-      // }
+      right={
+        <Switch
+          checked={settings.articleNewCollected}
+          onChange={() => toggle('articleNewCollected')}
+        />
+      }
     />
   </Form.List>
 )

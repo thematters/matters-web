@@ -31,6 +31,7 @@ const VIEWER_NOTIFICATION_GENERAL_SETTINGS = gql`
           articleNewAppreciation
           articleNewSubscription
           articleCommentPinned
+          articleNewCollected
         }
       }
     }
@@ -53,6 +54,7 @@ const UPDATE_VIEWER_NOTIFICATION_GENERAL = gql`
           articleNewAppreciation
           articleNewSubscription
           articleCommentPinned
+          articleNewCollected
         }
       }
     }

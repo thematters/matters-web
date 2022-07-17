@@ -14,6 +14,7 @@ const fragments = {
     fragment NoticeComment on Comment {
       id
       state
+      type
       node {
         ... on Article {
           id
@@ -48,10 +49,10 @@ const NoticeComment = ({ comment }: { comment: NoticeCommentType | null }) => {
   const path =
     comment.state === 'active' && article
       ? toPath({
-          page: 'commentDetail',
-          comment,
-          article,
-        })
+        page: 'commentDetail',
+        comment,
+        article,
+      })
       : {}
 
   return (
