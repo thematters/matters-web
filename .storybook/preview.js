@@ -1,5 +1,5 @@
 import React from 'react'
-import { RouterContext } from 'next/dist/next-server/lib/router-context'
+import { RouterContext } from 'next/dist/shared/lib/router-context'
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
 
 import { GlobalStyles } from '../src/components/GlobalStyles'
@@ -9,6 +9,10 @@ export const parameters = {
   viewport: {
     viewports: INITIAL_VIEWPORTS,
     defaultViewport: 'iphonex',
+  },
+  nextRouter: {
+    Provider: RouterContext.Provider,
+    locale: 'en', // optional
   },
 }
 
