@@ -49,10 +49,10 @@ const NoticeComment = ({ comment }: { comment: NoticeCommentType | null }) => {
   const path =
     comment.state === 'active' && article
       ? toPath({
-        page: 'commentDetail',
-        comment,
-        article,
-      })
+          page: 'commentDetail',
+          comment,
+          article,
+        })
       : {}
 
   return (

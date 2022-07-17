@@ -71,14 +71,14 @@ const CommentNewReplyNotice = ({ notice }: { notice: NoticeType }) => {
           )}
           {replyCommentCircle && (
             <>
-              <Translate
-                zh_hant="在圍爐 "
-                zh_hans="在围炉 "
-                en=""
-              />
+              <Translate zh_hant="在圍爐 " zh_hans="在围炉 " en="" />
               <NoticeCircleName circle={replyCommentCircle} />
               {replyCommentCircleDiscussion && (
-                <Translate zh_hant=" 回覆你的眾聊發言" zh_hans=" 回复你的众聊发言" en="" />
+                <Translate
+                  zh_hant=" 回覆你的眾聊發言"
+                  zh_hans=" 回复你的众聊发言"
+                  en=""
+                />
               )}
               {replyCommentCircleBroadcast && (
                 <Translate zh_hant=" 廣播中留言" zh_hans=" 广播中留言" en="" />
