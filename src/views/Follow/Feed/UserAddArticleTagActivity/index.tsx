@@ -32,7 +32,7 @@ const UserAddArticleTagActivity = ({
               en="selected by"
             />
           </span>
-          <Tag tag={target} type="plain" />
+          <Tag tag={target} type="plain" iconProps={{ size: 'sm' }} />
         </FeedHead>
       }
       hasFollow
