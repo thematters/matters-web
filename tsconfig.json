@@ -3,7 +3,7 @@
     "allowJs": false,
     "allowSyntheticDefaultImports": true,
     "jsx": "preserve",
-    "lib": ["dom", "es2017"],
+    "lib": ["dom", "dom.iterable", "es2019"],
     "module": "esnext",
     "moduleResolution": "node",
     "noEmit": true,

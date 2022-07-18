@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 
 import { LinkWrapper, LinkWrapperProps, Translate } from '~/components'
 
-import { toPath } from '~/common/utils'
+import { toPath, UtmParams } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -29,7 +29,8 @@ type ArticleDigestTitleProps = {
 
   disabled?: boolean
   onClick?: () => void
-} & Pick<LinkWrapperProps, 'onClick'>
+} & Pick<LinkWrapperProps, 'onClick'> &
+  UtmParams
 
 const fragments = {
   article: gql`
@@ -58,12 +59,17 @@ export const ArticleDigestTitle = ({
   disabled,
   onClick,
 
+  utm_source,
+  utm_medium,
+
   ...restProps
 }: ArticleDigestTitleProps) => {
   const { articleState: state } = article
   const path = toPath({
     page: 'articleDetail',
     article,
+    utm_source,
+    utm_medium,
   })
   const isBanned = state === 'banned'
   const title = isBanned ? <Translate id="articleBanned" /> : article.title

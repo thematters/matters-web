@@ -47,13 +47,19 @@ export const ClientUpdater = () => {
    * Update routeHistory
    */
   const routeHistoryRef = useRef<string[]>([])
-  const routeChangeComplete = (url: string) => {
-    if (!client?.writeData) {
+  const routeChangeComplete = (
+    url: string,
+    { shallow }: { shallow: boolean }
+  ) => {
+    if (!client?.writeData || shallow) {
+      // skip shallow route change
       return
     }
 
     const newRouteHistory = [...routeHistoryRef.current, url]
     routeHistoryRef.current = newRouteHistory
+
+    console.log('update routeHistory to:', { url, newRouteHistory })
 
     client.writeData({
       id: 'ClientPreference:local',
