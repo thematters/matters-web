@@ -76,7 +76,7 @@ const Sidebar = ({ tag, ...cardProps }: TagDigestSidebarProps) => {
           <section className="nums">
             <TextIcon
               icon={<IconUser16 color="grey-dark" />}
-              size="sm"
+              size="xs"
               spacing="xxtight"
               color="grey-dark"
             >
@@ -85,7 +85,7 @@ const Sidebar = ({ tag, ...cardProps }: TagDigestSidebarProps) => {
 
             <TextIcon
               icon={<IconArticle16 color="grey-dark" />}
-              size="sm"
+              size="xs"
               spacing="xxtight"
               color="grey-dark"
             >

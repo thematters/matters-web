@@ -1,6 +1,4 @@
 .container {
-  @mixin flex-center-start;
-
   position: relative;
 }
 
@@ -9,12 +7,16 @@ header {
 }
 
 .nums {
+  display: inline-flex;
+
   & :global(> * + *) {
     margin-left: var(--spacing-x-tight);
   }
 }
 
 .content {
+  @mixin flex-center-space-between;
+
   margin-top: var(--spacing-x-tight);
 }
 
