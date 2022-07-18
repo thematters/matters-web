@@ -1,0 +1,11 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 72 72">
+  <g  fill-rule="evenodd">
+    <path d="M0 0h72v72H0z"/>
+    <g transform="translate(9 9)">
+      <circle cx="27" cy="27" r="27" stroke="currentColor" stroke-width="4"/>
+      <circle cx="27" cy="37.565" r="2.348" fill="currentColor" transform="rotate(-180 27 37.565)"/>
+      <path stroke="currentColor" stroke-width="4" d="M27 12.913v16.435"/>
+    </g>
+  </g>
+</svg>
