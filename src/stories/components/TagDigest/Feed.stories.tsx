@@ -1,18 +1,17 @@
 import { MockedProvider } from '@apollo/react-testing'
-import { Meta, Story } from '@storybook/react/types-6-0'
+import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React from 'react'
 
 import { TagDigest } from '~/components'
-import { TagDigestFeedProps } from '~/components/TagDigest/Feed'
 
 import { MOCK_TAG_SEARCH_RESULT } from '../../mocks'
 
 export default {
   title: 'Components/TagDigest/Feed',
   component: TagDigest.Feed,
-} as Meta
+} as ComponentMeta<typeof TagDigest.Feed>
 
-const Template: Story<TagDigestFeedProps> = (args) => (
+const Template: ComponentStory<typeof TagDigest.Feed> = (args) => (
   <MockedProvider>
     <TagDigest.Feed {...args} />
   </MockedProvider>

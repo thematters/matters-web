@@ -1,5 +1,5 @@
 import { MockedProvider } from '@apollo/react-testing'
-import { Meta, Story } from '@storybook/react/types-6-0'
+import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React, { useState } from 'react'
 
 import { Switch } from '~/components'
@@ -7,9 +7,9 @@ import { Switch } from '~/components'
 export default {
   title: 'Components/Switch',
   component: Switch,
-} as Meta
+} as ComponentMeta<typeof Switch>
 
-const Template: Story = () => {
+const Template: ComponentStory<typeof Switch> = () => {
   const [checked, setChecked] = useState(false)
 
   return (
