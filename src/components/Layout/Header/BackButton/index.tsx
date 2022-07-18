@@ -43,6 +43,8 @@ export const BackButton: React.FC<BackButtonProps> = ({
 
     const routeHistory = data?.clientPreference.routeHistory || []
 
+    console.log('onBack:', { routeHistory })
+
     if (routeHistory.length > 0) {
       router.back()
     } else {
