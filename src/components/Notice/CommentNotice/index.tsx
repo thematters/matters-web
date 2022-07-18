@@ -10,8 +10,6 @@ import SubscribedArticleNewCommentNotice from './SubscribedArticleNewCommentNoti
 import { CommentNotice as NoticeType } from './__generated__/CommentNotice'
 
 const CommentNotice = ({ notice }: { notice: NoticeType }) => {
-  console.log('|||||||||||||||||||||||||||')
-  console.log(notice.commentNoticeType)
   switch (notice.commentNoticeType) {
     case 'CommentMentionedYou':
       return <CommentMentionedYouNotice notice={notice} />
