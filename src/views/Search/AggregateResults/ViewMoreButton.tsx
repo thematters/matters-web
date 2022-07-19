@@ -1,4 +1,4 @@
-import { Card, IconArrowRight16, TextIcon, Translate } from '~/components'
+import { Translate, ViewMoreCard } from '~/components'
 
 import { toPath } from '~/common/utils'
 
@@ -30,22 +30,15 @@ const ViewMoreButton = ({ q, type }: ViewMoreButtonProps) => {
     )
 
   return (
-    <Card
-      spacing={['base', 'base']}
+    <ViewMoreCard
       {...toPath({
         page: 'search',
         type,
         q,
       })}
     >
-      <TextIcon
-        icon={<IconArrowRight16 size="xs" />}
-        textPlacement="left"
-        color="green"
-      >
-        {text}
-      </TextIcon>
-    </Card>
+      {text}
+    </ViewMoreCard>
   )
 }
 

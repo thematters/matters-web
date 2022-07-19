@@ -69,6 +69,10 @@
     color: var(--color-grey-dark);
   }
 
+  &.grey-darker {
+    color: var(--color-grey-darker);
+  }
+
   &.grey {
     color: var(--color-grey);
   }

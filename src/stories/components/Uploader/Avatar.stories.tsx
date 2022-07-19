@@ -1,5 +1,5 @@
 import { MockedProvider } from '@apollo/react-testing'
-import { Meta, Story } from '@storybook/react/types-6-0'
+import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React from 'react'
 
 import { AvatarUploader } from '~/components'
@@ -9,9 +9,9 @@ import { MOCK_CIRCLE, MOCK_USER } from '../../mocks'
 export default {
   title: 'Components/Uploader',
   component: AvatarUploader,
-} as Meta
+} as ComponentMeta<typeof AvatarUploader>
 
-const Template: Story = () => (
+const Template: ComponentStory<typeof AvatarUploader> = () => (
   <MockedProvider>
     <ul>
       {/* User */}

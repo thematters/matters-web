@@ -1,18 +1,17 @@
 import { MockedProvider } from '@apollo/react-testing'
-import { Meta, Story } from '@storybook/react/types-6-0'
+import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React from 'react'
 
 import { ArticleDigestCard } from '~/components'
-import { ArticleDigestCardProps } from '~/components/ArticleDigest/Card'
 
 import { MOCK_ARTILCE } from '../../mocks'
 
 export default {
   title: 'Components/ArticleDigest',
   component: ArticleDigestCard,
-} as Meta
+} as ComponentMeta<typeof ArticleDigestCard>
 
-const Template: Story<ArticleDigestCardProps> = (args) => (
+const Template: ComponentStory<typeof ArticleDigestCard> = (args) => (
   <MockedProvider>
     <ArticleDigestCard {...args} />
   </MockedProvider>

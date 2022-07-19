@@ -1,4 +1,4 @@
-import queryString from 'query-string'
+// import queryString from 'query-string'
 
 import { TextIcon, withIcon } from '~/components'
 
@@ -19,11 +19,9 @@ const Whatsapp = ({
   <button
     type="button"
     onClick={() => {
-      const shareUrl =
-        'https://api.whatsapp.com/send?' +
-        queryString.stringify({
-          text: title ? title + ' ' + link : link,
-        })
+      const shareUrl = `https://api.whatsapp.com/send?${new URLSearchParams({
+        text: title ? title + ' ' + link : link,
+      }).toString()}`
 
       analytics.trackEvent('share', {
         type: 'whatsapp',

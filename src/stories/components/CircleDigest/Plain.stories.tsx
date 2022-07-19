@@ -1,18 +1,17 @@
 import { MockedProvider } from '@apollo/react-testing'
-import { Meta, Story } from '@storybook/react/types-6-0'
+import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React from 'react'
 
 import { CircleDigest } from '~/components'
-import { CircleDigestPlainProps } from '~/components/CircleDigest/Plain'
 
 import { MOCK_CIRCLE } from '../../mocks'
 
 export default {
   title: 'Components/CircleDigest',
   component: CircleDigest.Plain,
-} as Meta
+} as ComponentMeta<typeof CircleDigest.Plain>
 
-const Template: Story<CircleDigestPlainProps> = (args) => (
+const Template: ComponentStory<typeof CircleDigest.Plain> = (args) => (
   <MockedProvider>
     <CircleDigest.Plain {...args} />
   </MockedProvider>
