@@ -1,14 +1,16 @@
-import { Meta, Story } from '@storybook/react/types-6-0'
+import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React from 'react'
 
-import { EmbedShare, EmbedShareProps, Translate } from '~/components'
+import { EmbedShare, Translate } from '~/components'
 
 export default {
   title: 'Components/Share',
   component: EmbedShare,
-} as Meta
+} as ComponentMeta<typeof EmbedShare>
 
-const Template: Story<EmbedShareProps> = (args) => <EmbedShare {...args} />
+const Template: ComponentStory<typeof EmbedShare> = (args) => (
+  <EmbedShare {...args} />
+)
 
 const HeaderTitle = (
   <Translate
