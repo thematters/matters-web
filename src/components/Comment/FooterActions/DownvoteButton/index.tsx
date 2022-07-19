@@ -37,7 +37,6 @@ const fragments = {
       fragment DownvoteCommentPublic on Comment {
         id
         upvotes
-        downvotes
       }
     `,
     private: gql`
