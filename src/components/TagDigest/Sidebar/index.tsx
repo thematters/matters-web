@@ -24,6 +24,7 @@ export type TagDigestSidebarProps = {
 } & CardProps
 
 const fragments = {
+  // TODO: switch to `fragment TagDigestSidebarTag on Tag {`
   tag: gql`
     fragment TagDigestSidebarTag on TagSearchResult {
       id
@@ -40,6 +41,7 @@ const Sidebar = ({ tag, ...cardProps }: TagDigestSidebarProps) => {
   const path = toPath({
     page: 'tagDetail',
     id: tag.id,
+    // content: tag.content,
   })
 
   return (
