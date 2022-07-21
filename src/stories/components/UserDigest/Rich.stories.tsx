@@ -1,18 +1,17 @@
 import { MockedProvider } from '@apollo/react-testing'
-import { Meta, Story } from '@storybook/react/types-6-0'
+import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React from 'react'
 
 import { UserDigest } from '~/components'
-import { UserDigestRichProps } from '~/components/UserDigest/Rich'
 
 import { MOCK_USER } from '../../mocks'
 
 export default {
   title: 'Components/UserDigest',
   component: UserDigest.Rich,
-} as Meta
+} as ComponentMeta<typeof UserDigest.Rich>
 
-const Template: Story<UserDigestRichProps> = (args) => (
+const Template: ComponentStory<typeof UserDigest.Rich> = (args) => (
   <MockedProvider>
     <UserDigest.Rich {...args} />
   </MockedProvider>

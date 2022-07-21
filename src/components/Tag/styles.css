@@ -90,6 +90,8 @@
 }
 
 .plain {
+  display: inline-flex;
+
   & :global(svg) {
     opacity: 0.5;
   }

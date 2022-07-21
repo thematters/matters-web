@@ -79,6 +79,7 @@ const TagFeedDigest = ({ tag, ...cardProps }: TagFeedDigestProps) => {
                 textSize="sm"
                 is="h4"
                 textWeight="normal"
+                utm_source={`tag_${tag.id}`}
               />
             </Card>
           </li>

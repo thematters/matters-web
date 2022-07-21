@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import styles from './styles.css'
 
 interface SlidesProps {
-  bgColor: 'yellow-lighter' | 'green-lighter' | 'grey-lighter'
+  bgColor?: 'yellow-lighter' | 'green-lighter' | 'grey-lighter'
   header: React.ReactNode
 }
 

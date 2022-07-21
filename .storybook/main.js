@@ -8,7 +8,12 @@ module.exports = {
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@storybook/addon-a11y',
+    'storybook-addon-next',
   ],
+  framework: '@storybook/react',
+  core: {
+    builder: 'webpack5',
+  },
   /*
     Next.js automatically supports the tsconfig.json "paths" and "baseUrl"
     options but the webpack configuration of Storybook doesn't yet.
@@ -18,6 +23,11 @@ module.exports = {
     config.module.rules = config.module.rules.filter(
       (it) => it.test && it.test.toString() !== '/\\.css$/'
     )
+
+    config.module.rules.push({
+      resolve: { fullySpecified: false },
+    })
+
     const newConfig = mergeWithCustomize({
       customizeArray(a, b, key) {
         if (key === 'module.rules') {
@@ -74,19 +84,21 @@ module.exports = {
         },
       }
     )
+
     return newConfig
   },
   /*
     make the components' PropTypes interface works for argTypes of storybook
   */
   typescript: {
-    reactDocgen: 'react-docgen-typescript',
-    reactDocgenTypescriptOptions: {
-      shouldExtractLiteralValuesFromEnum: true,
-      // @see https://github.com/storybookjs/storybook/issues/11019#issuecomment-656776919
-      shouldRemoveUndefinedFromOptional: true,
-      propFilter: (prop) =>
-        prop.parent ? !/node_modules/.test(prop.parent.fileName) : true,
-    },
+    reactDocgen: false,
+    // reactDocgen: 'react-docgen-typescript',
+    // reactDocgenTypescriptOptions: {
+    //   shouldExtractLiteralValuesFromEnum: true,
+    //   // @see https://github.com/storybookjs/storybook/issues/11019#issuecomment-656776919
+    //   shouldRemoveUndefinedFromOptional: true,
+    //   propFilter: (prop) =>
+    //     prop.parent ? !/node_modules/.test(prop.parent.fileName) : true,
+    // },
   },
 }

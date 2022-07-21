@@ -1,4 +1,4 @@
-import queryString from 'query-string'
+// import queryString from 'query-string'
 
 import { TextIcon, withIcon } from '~/components'
 
@@ -19,12 +19,10 @@ const Telegram = ({
   <button
     type="button"
     onClick={() => {
-      const shareUrl =
-        'https://telegram.me/share?' +
-        queryString.stringify({
-          url: link,
-          text: title,
-        })
+      const shareUrl = `https://telegram.me/share?${new URLSearchParams({
+        url: link,
+        text: title,
+      }).toString()}`
       analytics.trackEvent('share', {
         type: 'telegram',
       })

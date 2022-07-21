@@ -1,9 +1,10 @@
 import Router from 'next/router'
 import { Key, pathToRegexp } from 'path-to-regexp'
-import queryString from 'query-string'
+// import queryString from 'query-string'
 
 import { PATHS, ROUTES } from '~/common/enums'
 
+import { UtmParams } from './analytics'
 import { fromGlobalId } from './globalId'
 import { parseURL } from './url'
 
@@ -28,11 +29,12 @@ interface CommentArgs {
 }
 
 type ToPathArgs =
-  | {
+  | ({
       page: 'articleDetail'
       article: ArticleArgs
       fragment?: string
-    }
+      // [UtmParam]?: string
+    } & UtmParams)
   | {
       page:
         | 'circleDetail'
@@ -70,7 +72,15 @@ type ToPathArgs =
  *
  * (works on SSR & CSR)
  */
-export const toPath = (args: ToPathArgs): { href: string } => {
+export const toPath = (
+  args: ToPathArgs
+): {
+  href: string
+  pathname?: string
+  // search?: string
+  // searchParams?: URLSearchParams | null
+  // hash?: string
+} => {
   switch (args.page) {
     case 'articleDetail': {
       const {
@@ -80,18 +90,37 @@ export const toPath = (args: ToPathArgs): { href: string } => {
         author: { userName },
       } = args.article
 
-      let asUrl = `/@${userName}/${slug}-${mediaHash}`
+      let pathname = `/@${userName}/${slug}-${mediaHash}`
       try {
         if (id) {
           const { id: articleId } = fromGlobalId(id as string)
-          asUrl = `/@${userName}/${articleId}-${slug}-${mediaHash}`
+          pathname = `/@${userName}/${articleId}-${slug}-${mediaHash}`
         }
       } catch (err) {
         console.error(`unable to parse global id:`, { id }, err)
       }
 
+      let search = ''
+      let searchParams: URLSearchParams | null = null
+      const { utm_source, utm_medium } = args
+      if ([utm_source, utm_medium].some(Boolean)) {
+        searchParams = new URLSearchParams(
+          [
+            ['utm_source', utm_source as string],
+            ['utm_medium', utm_medium as string],
+          ].filter(([k, v]) => !!v)
+        )
+        search = '?' + searchParams.toString()
+      }
+
+      const hash = args.fragment ? `#${args.fragment}` : ''
+
       return {
-        href: args.fragment ? `${asUrl}#${args.fragment}` : asUrl,
+        href: `${pathname}${search}${hash}`,
+        pathname,
+        // search,
+        // searchParams,
+        // hash,
       }
     }
     case 'circleDetail': {
@@ -180,9 +209,8 @@ export const toPath = (args: ToPathArgs): { href: string } => {
 }
 
 export const getTarget = (url?: string) => {
-  url = url || window.location.href
-  const qs = queryString.parseUrl(url).query
-  const target = encodeURIComponent((qs.target as string) || '')
+  const qs = new URL(url || window.location.href).searchParams
+  const target = encodeURIComponent((qs.get('target') as string) || '')
 
   return target
 }
@@ -308,7 +336,7 @@ export const captureClicks = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     const result = regexp.exec(url.pathname)
 
     if (result) {
-      const searchQuery = queryString.parse(url.search) || {}
+      const searchQuery = new URLSearchParams(url.search) || {}
       const matchedQuery: { [key: string]: string } = {}
       keys.forEach((k, i) => (matchedQuery[k.name] = result[i + 1]))
 

@@ -200,8 +200,27 @@ const ArticleDetail = () => {
       },
     })
 
-    if (newPath.href !== router.asPath) {
-      router.push(newPath.href, undefined, { shallow: true })
+    // parse current URL: router.asPath
+    const u = new URL(
+      `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}${router.asPath}`
+    )
+    const n = new URL(
+      `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}${
+        newPath.href || newPath.pathname
+      }`
+    )
+    // hide all utm_ tracking code parameters
+    // copy all others
+    const rems = [
+      ...u.searchParams, // uses .entries()
+      ...n.searchParams,
+    ].filter(([k, v]) => !k?.startsWith('utm_'))
+    const nsearch = rems.length > 0 ? `?${new URLSearchParams(rems)}` : ''
+    const nhref = `${n.pathname}${nsearch}${n.hash || u.hash}`
+
+    if (nhref !== router.asPath) {
+      // console.log('replacing url:', {from: router.asPath, to: newPath.href, nhref, isSame: nhref === router.asPath,})
+      router.replace(nhref, undefined, { shallow: true })
     }
   }, [latestHash])
 

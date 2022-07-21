@@ -3,7 +3,7 @@ import React from 'react'
 import { Card, CircleDigest, ResponsiveImage } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 
-import { stripHtml, toPath } from '~/common/utils'
+import { stripHtml, toPath, UtmParams } from '~/common/utils'
 
 import { ArticleDigestTitle } from '../Title'
 import FollowButton from './FollowButton'
@@ -26,7 +26,8 @@ export type ArticleDigestFeedProps = {
     Partial<ArticleDigestFeedArticlePrivate>
   header?: React.ReactNode
 } & ArticleDigestFeedControls &
-  FooterActionsProps
+  FooterActionsProps &
+  UtmParams
 
 const BaseArticleDigestFeed = ({
   article,
@@ -37,6 +38,9 @@ const BaseArticleDigestFeed = ({
   hasCircle = true,
   onClick,
   onClickAuthor,
+
+  utm_source,
+  utm_medium,
 
   ...controls
 }: ArticleDigestFeedProps) => {
@@ -51,6 +55,8 @@ const BaseArticleDigestFeed = ({
   const path = toPath({
     page: 'articleDetail',
     article,
+    utm_source,
+    utm_medium,
   })
 
   return (
