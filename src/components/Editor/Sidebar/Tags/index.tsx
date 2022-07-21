@@ -29,6 +29,7 @@ const SidebarTags = ({
 }: SidebarTagsProps) => {
   return (
     <SearchSelectDialog
+      size="sm"
       title="addTag"
       hint="hintAddRecommendedTag"
       searchType="Tag"
