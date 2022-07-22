@@ -24,13 +24,15 @@ export type TagDigestSidebarProps = {
 } & CardProps
 
 const fragments = {
-  // TODO: switch to `fragment TagDigestSidebarTag on Tag {`
   tag: gql`
     fragment TagDigestSidebarTag on TagSearchResult {
       id
-      content
-      description
-      cover
+      tag {
+        id
+        content
+        description
+        cover
+      }
       numArticles
       numAuthors
     }
@@ -58,7 +60,7 @@ const Sidebar = ({ tag, ...cardProps }: TagDigestSidebarProps) => {
           <Link {...path}>
             <a>
               <ResponsiveImage
-                url={tag.cover || IMAGE_TAG_COVER.src}
+                url={tag.tag.cover || IMAGE_TAG_COVER.src}
                 size="360w"
               />
             </a>
