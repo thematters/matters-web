@@ -27,21 +27,21 @@ const fragments = {
   tag: gql`
     fragment TagDigestFeedTag on TagSearchResult {
       id
-      numArticles
-      numAuthors
       tag {
         id
         content
         cover
-        articles(input: { first: 3 }) {
-          edges {
-            cursor
-            node {
-              id
-              title
-              slug
-              mediaHash
-            }
+      }
+      numArticles
+      numAuthors
+      articles(input: { first: 3 }) {
+        edges {
+          cursor
+          node {
+            id
+            title
+            slug
+            mediaHash
           }
         }
       }
@@ -55,7 +55,7 @@ const Feed = ({ tag, ...cardProps }: TagDigestFeedProps) => {
     id: tag.id,
   })
 
-  const articles = tag.tag.articles.edges
+  const articles = tag.articles.edges
 
   return (
     <Card
