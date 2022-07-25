@@ -222,9 +222,6 @@ type UserFeedType =
   | 'hottest'
   | 'icymi'
   | 'newest'
-  | 'read_history'
-  | 'related_article'
-  | 'related_tags'
   | 'search'
   | 'search_user'
   | 'tag_detail_latest'
@@ -236,6 +233,8 @@ type TagFeedType =
   | 'all_tags' // all tags page
   | 'all_tags_recommended'
   | 'all_tags_hottest'
+  | 'all_tags_sidebar'
+  | 'related_tags'
   // | 'follow-tag'
   | 'search'
   | 'search_tag'

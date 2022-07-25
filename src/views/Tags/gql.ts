@@ -7,7 +7,7 @@ export const ALL_TAGS_RECOMMENDED = gql`
     viewer @connection(key: "viewerAllTagsRecommended") {
       id
       recommendation {
-        tags(input: { first: 2 }) {
+        tags(input: { first: 1 }) {
           edges {
             node {
               id

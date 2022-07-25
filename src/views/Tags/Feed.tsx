@@ -7,11 +7,13 @@ import {
   Spinner,
   TagDigest,
   usePublicQuery,
+  useResponsive,
 } from '~/components'
 
 import { analytics, mergeConnections, toPath } from '~/common/utils'
 
 import { ALL_TAGS_HOTTEST, ALL_TAGS_RECOMMENDED } from './gql'
+import SidebarTags from './Sidebar'
 import styles from './styles.css'
 
 import {
@@ -36,6 +38,8 @@ interface Props {
 }
 
 const Feed = ({ type }: Props) => {
+  const isLargeUp = useResponsive('lg-up')
+
   const isRecommended = type === 'recommended'
 
   const query = isRecommended ? ALL_TAGS_RECOMMENDED : ALL_TAGS_HOTTEST
@@ -101,24 +105,28 @@ const Feed = ({ type }: Props) => {
     >
       <ul>
         {edges.map(({ node }, i) => (
-          <li key={node.id}>
-            <TagDigest.Feed
-              tag={node}
-              spacing={['xtight', 'xtight']}
-              {...toPath({
-                page: 'tagDetail',
-                id: node.id,
-              })}
-              onClick={() =>
-                analytics.trackEvent('click_feed', {
-                  type: trackingType,
-                  contentType: 'tag',
-                  location: i,
+          <>
+            <li key={node.id}>
+              <TagDigest.Feed
+                tag={node}
+                spacing={['xtight', 'xtight']}
+                {...toPath({
+                  page: 'tagDetail',
                   id: node.id,
-                })
-              }
-            />
-          </li>
+                })}
+                onClick={() =>
+                  analytics.trackEvent('click_feed', {
+                    type: trackingType,
+                    contentType: 'tag',
+                    location: i,
+                    id: node.id,
+                  })
+                }
+              />
+            </li>
+
+            {!isLargeUp && edges.length >= 4 && i === 3 && <SidebarTags />}
+          </>
         ))}
       </ul>
 

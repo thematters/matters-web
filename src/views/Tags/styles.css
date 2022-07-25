@@ -3,10 +3,8 @@
 }
 
 ul {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-
-  @media (--sm-up) {
+  @media (--lg-up) {
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
     margin-top: calc(var(--spacing-base) * -1);
   }
@@ -26,7 +24,7 @@ li {
     background: var(--color-line-grey-light);
   }
 
-  @media (--sm-up) {
+  @media (--lg-up) {
     padding: var(--spacing-base) 0;
 
     &:nth-child(2n) {

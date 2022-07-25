@@ -4,6 +4,7 @@ import { Head, Layout, Tabs, Translate } from '~/components'
 
 import { TagsButtons } from './Buttons'
 import Feed, { FeedType } from './Feed'
+import SidebarTags from './Sidebar'
 import styles from './styles.css'
 
 const BaseTags = () => {
@@ -34,7 +35,7 @@ const BaseTags = () => {
 }
 
 const Tags = () => (
-  <Layout.Main>
+  <Layout.Main aside={<SidebarTags inSidebar />}>
     <Head title={{ id: 'allTags' }} />
 
     <Layout.Header
