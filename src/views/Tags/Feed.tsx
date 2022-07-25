@@ -59,7 +59,7 @@ const Feed = ({ type }: Props) => {
   const connectionPath = 'viewer.recommendation.tags.edges.0.node.recommended'
   const tag =
     data?.viewer?.recommendation.tags.edges &&
-    data?.viewer?.recommendation.tags.edges[0]
+    data?.viewer?.recommendation.tags.edges[isRecommended ? 0 : 1]
 
   const edges = _get(
     tag,
