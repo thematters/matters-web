@@ -1,9 +1,14 @@
+.tags {
+  margin-top: 1px; /* FIXME: top header overlay by sticky tabs */
+}
+
 ul {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
 
   @media (--sm-up) {
     grid-template-columns: repeat(2, 1fr);
+    margin-top: calc(var(--spacing-base) * -1);
   }
 }
 

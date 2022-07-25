@@ -234,6 +234,8 @@ type UserFeedType =
 
 type TagFeedType =
   | 'all_tags' // all tags page
+  | 'all_tags_recommended'
+  | 'all_tags_hottest'
   // | 'follow-tag'
   | 'search'
   | 'search_tag'

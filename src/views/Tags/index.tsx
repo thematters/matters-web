@@ -1,126 +1,35 @@
-import gql from 'graphql-tag'
+import { useState } from 'react'
 
-import {
-  EmptyTag,
-  Head,
-  InfiniteScroll,
-  Layout,
-  QueryError,
-  Spinner,
-  TagDigest,
-  usePublicQuery,
-} from '~/components'
-
-import { analytics, mergeConnections, toPath } from '~/common/utils'
+import { Head, Layout, Tabs, Translate } from '~/components'
 
 import { TagsButtons } from './Buttons'
+import Feed, { FeedType } from './Feed'
 import styles from './styles.css'
 
-import { AllTagsPublic } from './__generated__/AllTagsPublic'
-
-const ALL_TAGS = gql`
-  query AllTagsPublic($after: String) {
-    viewer @connection(key: "viewerTags") {
-      id
-      recommendation {
-        tags(input: { first: 1 }) {
-          edges {
-            node {
-              id
-              recommended(input: { first: 20, after: $after }) {
-                pageInfo {
-                  startCursor
-                  endCursor
-                  hasNextPage
-                }
-                edges {
-                  cursor
-                  node {
-                    id
-                    ...TagDigestFeedTag
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-  ${TagDigest.Feed.fragments.tag}
-`
-
 const BaseTags = () => {
-  const { data, loading, error, fetchMore, refetch } =
-    usePublicQuery<AllTagsPublic>(ALL_TAGS)
-
-  if (loading) {
-    return <Spinner />
-  }
-
-  if (error) {
-    return <QueryError error={error} />
-  }
-
-  // TODO: revise query
-  const connectionPath = 'viewer.recommendation.tags.edges.0.node.recommended'
-  const tag =
-    data?.viewer?.recommendation.tags.edges &&
-    data?.viewer?.recommendation.tags.edges[0]
-  const { edges, pageInfo } = tag?.node.recommended || {}
-
-  if (!edges || edges.length <= 0 || !pageInfo) {
-    return <EmptyTag />
-  }
-
-  const loadMore = () => {
-    analytics.trackEvent('load_more', {
-      type: 'all_tags',
-      location: edges.length,
-    })
-    return fetchMore({
-      variables: { after: pageInfo.endCursor },
-      updateQuery: (previousResult, { fetchMoreResult }) =>
-        mergeConnections({
-          oldData: previousResult,
-          newData: fetchMoreResult,
-          path: connectionPath,
-          dedupe: true,
-        }),
-    })
-  }
+  const [feed, setFeed] = useState<FeedType>('recommended')
+  const isRecommended = feed === 'recommended'
+  const isHottest = feed === 'hottest'
 
   return (
-    <InfiniteScroll
-      hasNextPage={pageInfo.hasNextPage}
-      loadMore={loadMore}
-      pullToRefresh={refetch}
-    >
-      <ul>
-        {edges.map(({ node }, i) => (
-          <li key={node.id}>
-            <TagDigest.Feed
-              tag={node}
-              spacing={['xtight', 'xtight']}
-              {...toPath({
-                page: 'tagDetail',
-                id: node.id,
-              })}
-              onClick={() =>
-                analytics.trackEvent('click_feed', {
-                  type: 'all_tags',
-                  contentType: 'tag',
-                  location: i,
-                  id: node.id,
-                })
-              }
-            />
-          </li>
-        ))}
+    <section className="tags">
+      <Tabs sticky>
+        <Tabs.Tab
+          selected={isRecommended}
+          onClick={() => setFeed('recommended')}
+        >
+          <Translate zh_hant="推薦" zh_hans="推荐" en="Recommended" />
+        </Tabs.Tab>
 
-        <style jsx>{styles}</style>
-      </ul>
-    </InfiniteScroll>
+        <Tabs.Tab selected={isHottest} onClick={() => setFeed('hottest')}>
+          <Translate zh_hant="熱門" zh_hans="热门" en="Trending" />
+        </Tabs.Tab>
+      </Tabs>
+
+      <Feed type={feed} />
+
+      <style jsx>{styles}</style>
+    </section>
   )
 }
 
