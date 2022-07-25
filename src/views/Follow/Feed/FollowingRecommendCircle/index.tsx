@@ -25,7 +25,7 @@ import { FollowingFeedRecommendCirclePublic } from './__generated__/FollowingFee
 
 type Props = {
   circle: FollowingFeedRecommendCirclePublic &
-    FollowingFeedRecommendCirclePrivate
+  FollowingFeedRecommendCirclePrivate
 } & CardProps
 
 const RecommendCircle = ({ circle, ...cardProps }: Props) => {
@@ -79,7 +79,7 @@ const RecommendCircle = ({ circle, ...cardProps }: Props) => {
 
             <section className="follow">
               <Button
-                size={['3rem', '1.5rem']}
+                spacing={['xtight', 'tight']}
                 textColor="green"
                 textActiveColor="white"
                 bgActiveColor="green"
