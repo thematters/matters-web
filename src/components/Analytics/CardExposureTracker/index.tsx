@@ -35,6 +35,7 @@ export const CardExposureTracker = ({
               contentType,
               location,
               id,
+              delay_msecs: window?.performance.now() ?? -1,
             })
             setRecorded(true)
           }, 500)
