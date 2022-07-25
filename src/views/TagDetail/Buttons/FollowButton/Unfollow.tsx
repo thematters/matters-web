@@ -26,12 +26,12 @@ const Unfollow = ({ tag }: UnfollowTagProps) => {
     optimisticResponse:
       !_isNil(tag.id) && !_isNil(tag.isFollower)
         ? {
-          toggleFollowTag: {
-            id: tag.id,
-            isFollower: false,
-            __typename: 'Tag',
-          },
-        }
+            toggleFollowTag: {
+              id: tag.id,
+              isFollower: false,
+              __typename: 'Tag',
+            },
+          }
         : undefined,
     update: (cache) => {
       updateTagFollowers({

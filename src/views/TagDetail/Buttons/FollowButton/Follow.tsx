@@ -26,12 +26,12 @@ const Follow = ({ tag }: FollowProps) => {
     optimisticResponse:
       !_isNil(tag.id) && !_isNil(tag.isFollower)
         ? {
-          toggleFollowTag: {
-            id: tag.id,
-            isFollower: true,
-            __typename: 'Tag',
-          },
-        }
+            toggleFollowTag: {
+              id: tag.id,
+              isFollower: true,
+              __typename: 'Tag',
+            },
+          }
         : undefined,
     update: (cache) => {
       updateTagFollowers({
