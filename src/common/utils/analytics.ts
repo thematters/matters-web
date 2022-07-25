@@ -144,11 +144,13 @@ interface CardExposureProp {
   feedType: FeedType
   contentType: ContentType | ActivityType
   location: number | string
+  delay_msecs?: number
 }
 
 interface TagExposureProp {
   id: string
   location: number | string
+  delay_msecs?: number
 }
 
 // content type

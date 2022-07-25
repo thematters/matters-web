@@ -29,6 +29,9 @@ export const TagExposureTracker = ({
             analytics.trackEvent('tag_exposure', {
               location,
               id,
+
+              // performance.now() = Date.now() - performance.timing.navigationStart
+              delay_msecs: window?.performance.now() ?? -1,
             })
             setRecorded(true)
           }, 500)
