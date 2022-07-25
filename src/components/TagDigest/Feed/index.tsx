@@ -11,7 +11,7 @@ import {
   TextIcon,
 } from '~/components'
 
-import { numAbbr, toPath } from '~/common/utils'
+import { captureClicks, numAbbr, toPath } from '~/common/utils'
 
 import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
 
@@ -42,6 +42,10 @@ const fragments = {
             title
             slug
             mediaHash
+            author {
+              id
+              userName
+            }
           }
         }
       }
@@ -100,7 +104,11 @@ const Feed = ({ tag, ...cardProps }: TagDigestFeedProps) => {
           <ul className="articles">
             {articles?.map(({ node, cursor }) => (
               <li key={cursor}>
-                <span className="title">{node.title}</span>
+                <Link {...toPath({ page: 'articleDetail', article: node })}>
+                  <a className="title" onClick={captureClicks}>
+                    {node.title}
+                  </a>
+                </Link>
               </li>
             ))}
           </ul>
