@@ -27,8 +27,11 @@ const fragments = {
   tag: gql`
     fragment TagDigestFeedTag on TagSearchResult {
       id
-      content
-      cover
+      tag {
+        id
+        content
+        cover
+      }
       numArticles
       numAuthors
       articles(input: { first: 3 }) {
@@ -106,7 +109,7 @@ const Feed = ({ tag, ...cardProps }: TagDigestFeedProps) => {
             <Link {...path}>
               <a>
                 <ResponsiveImage
-                  url={tag.cover || IMAGE_TAG_COVER.src}
+                  url={tag.tag.cover || IMAGE_TAG_COVER.src}
                   size="360w"
                 />
               </a>
