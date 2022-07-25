@@ -3,7 +3,7 @@
     "allowJs": false,
     "allowSyntheticDefaultImports": true,
     "jsx": "preserve",
-    "lib": ["dom", "es2017"],
+    "lib": ["dom", "dom.iterable", "es2019"],
     "module": "esnext",
     "moduleResolution": "node",
     "noEmit": true,
@@ -27,6 +27,6 @@
     "incremental": true
   },
   "includes": ["./src/definitions/**/*.d.ts"],
-  "exclude": ["node_modules", "build"],
+  "exclude": ["node_modules", "build", ".next", "storybook-static", "out"],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }

@@ -1,15 +1,15 @@
 import { MockedProvider } from '@apollo/react-testing'
-import { Meta, Story } from '@storybook/react/types-6-0'
+import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React from 'react'
 
-import { ShareButton, ShareDialog, ShareDialogProps } from '~/components'
+import { ShareButton, ShareDialog } from '~/components'
 
 export default {
   title: 'Components/Share',
   component: ShareDialog,
-} as Meta
+} as ComponentMeta<typeof ShareDialog>
 
-const Template: Story<ShareDialogProps> = (args) => (
+const Template: ComponentStory<typeof ShareDialog> = (args) => (
   <MockedProvider>
     <ShareButton iconSize="md-s" inCard={false} {...args} />
   </MockedProvider>

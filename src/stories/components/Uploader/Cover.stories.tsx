@@ -1,5 +1,5 @@
 import { MockedProvider } from '@apollo/react-testing'
-import { Meta, Story } from '@storybook/react/types-6-0'
+import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React from 'react'
 
 import { CoverUploader } from '~/components'
@@ -12,9 +12,9 @@ import IMAGE_COVER from '@/public/static/images/profile-cover.png'
 export default {
   title: 'Components/Uploader',
   component: CoverUploader,
-} as Meta
+} as ComponentMeta<typeof CoverUploader>
 
-const Template: Story = () => (
+const Template: ComponentStory<typeof CoverUploader> = () => (
   <MockedProvider>
     <ul>
       {/* User & Tag */}

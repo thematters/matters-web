@@ -17,32 +17,42 @@ import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
 
 import styles from './styles.css'
 
-import { TagDigestSidebarTag } from './__generated__/TagDigestSidebarTag'
+import { TagDigestFeedTag } from './__generated__/TagDigestFeedTag'
 
-export type TagDigestSidebarProps = {
-  tag: TagDigestSidebarTag
+export type TagDigestFeedProps = {
+  tag: TagDigestFeedTag
 } & CardProps
 
 const fragments = {
-  // TODO: switch to `fragment TagDigestSidebarTag on Tag {`
   tag: gql`
-    fragment TagDigestSidebarTag on TagSearchResult {
+    fragment TagDigestFeedTag on TagSearchResult {
       id
       content
-      description
       cover
       numArticles
       numAuthors
+      articles(input: { first: 3 }) {
+        edges {
+          cursor
+          node {
+            id
+            title
+            slug
+            mediaHash
+          }
+        }
+      }
     }
   `,
 }
 
-const Sidebar = ({ tag, ...cardProps }: TagDigestSidebarProps) => {
+const Feed = ({ tag, ...cardProps }: TagDigestFeedProps) => {
   const path = toPath({
     page: 'tagDetail',
     id: tag.id,
-    // content: tag.content,
   })
+
+  const articles = tag.articles.edges
 
   return (
     <Card
@@ -54,26 +64,13 @@ const Sidebar = ({ tag, ...cardProps }: TagDigestSidebarProps) => {
       {...cardProps}
     >
       <section className="container">
-        <section className="cover">
-          <Link {...path}>
-            <a>
-              <ResponsiveImage
-                url={tag.cover || IMAGE_TAG_COVER.src}
-                size="360w"
-              />
-            </a>
-          </Link>
-        </section>
-
-        <section className="content">
-          <header>
-            <Tag
-              tag={tag}
-              type="plain"
-              iconProps={{ color: 'grey-darker' }}
-              textIconProps={{ color: 'black', weight: 'md', size: 'sm' }}
-            />
-          </header>
+        <header>
+          <Tag
+            tag={tag}
+            type="plain"
+            iconProps={{ color: 'grey-darker' }}
+            textIconProps={{ color: 'black', weight: 'md', size: 'sm' }}
+          />
 
           <section className="nums">
             <TextIcon
@@ -94,6 +91,27 @@ const Sidebar = ({ tag, ...cardProps }: TagDigestSidebarProps) => {
               {numAbbr(tag.numArticles)}
             </TextIcon>
           </section>
+        </header>
+
+        <section className="content">
+          <ul className="articles">
+            {articles?.map(({ node, cursor }) => (
+              <li key={cursor}>
+                <span className="title">{node.title}</span>
+              </li>
+            ))}
+          </ul>
+
+          <section className="cover">
+            <Link {...path}>
+              <a>
+                <ResponsiveImage
+                  url={tag.cover || IMAGE_TAG_COVER.src}
+                  size="360w"
+                />
+              </a>
+            </Link>
+          </section>
         </section>
 
         <style jsx>{styles}</style>
@@ -102,6 +120,6 @@ const Sidebar = ({ tag, ...cardProps }: TagDigestSidebarProps) => {
   )
 }
 
-Sidebar.fragments = fragments
+Feed.fragments = fragments
 
-export default Sidebar
+export default Feed

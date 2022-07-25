@@ -209,6 +209,7 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
             <List.Item key={`${sortBy}:${edge.node.id}`}>
               <ArticleDigestFeed
                 article={edge.node}
+                utm_source={`homepage_${sortBy}`}
                 onClick={() =>
                   analytics.trackEvent('click_feed', {
                     type: sortBy,

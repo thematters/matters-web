@@ -198,6 +198,7 @@ const TagDetailArticles = ({ tagId, selected }: TagArticlesProps) => {
                 inTagDetailLatest={!selected}
               />
             </List.Item>
+
             {!isLargeUp && edges.length >= 4 && i === 3 && (
               <RelatedTags tagId={tagId} />
             )}

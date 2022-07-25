@@ -35,11 +35,8 @@ const TagCustomStagingArea = ({
 
   // recommended tags
   const userTagsEdges = data?.user?.tags.edges || []
-  const recommendationTagsEdges = data?.user?.recommendation.tags.edges || []
 
-  let recommendedTags = [...userTagsEdges, ...recommendationTagsEdges]?.map(
-    (edge) => edge.node
-  )
+  let recommendedTags = [...userTagsEdges]?.map((edge) => edge.node)
   // remove duplicated tags
   recommendedTags = _uniqBy(recommendedTags, (tag) => tag.content)
   // remove selected tags
