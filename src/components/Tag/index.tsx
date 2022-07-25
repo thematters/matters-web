@@ -35,17 +35,16 @@ const fragments = {
     fragment DigestTag on Tag {
       id
       content
-      # articles(input: { first: 0 }) {
-      #   totalCount
-      # }
     }
   `,
   tagSearchResult: gql`
     fragment DigestTagSearchResult on TagSearchResult {
       id
-      content
+      tag {
+        id
+        content
+      }
       numArticles
-      # numAuthors
     }
   `,
 }
@@ -153,7 +152,9 @@ export const Tag = ({
         size={textIconProps.size}
         allowUserSelect
       >
-        <span className="name">{tag.content}</span>
+        <span className="name">
+          {tag.__typename === 'Tag' ? tag.content : tag.tag.content}
+        </span>
       </TextIcon>
 
       {hasClose && (
@@ -167,11 +168,10 @@ export const Tag = ({
         </button>
       )}
 
-      {hasCount && type === 'list' && (
-        <span className="count">
-          {(tag as DigestTagSearchResult).numArticles}
-        </span>
-      )}
+      {hasCount &&
+        type === 'list' &&
+        tag.__typename === 'TagSearchResult' &&
+        tag?.numArticles && <span className="count">{tag.numArticles}</span>}
 
       <style jsx>{styles}</style>
     </>

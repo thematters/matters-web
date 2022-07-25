@@ -200,16 +200,9 @@ export const MOCK_CRYPTO_WALLET = {
 export const MOCK_TAG_SEARCH_RESULT = {
   __typename: 'TagSearchResult' as any,
   id: 'tag-0000',
-  content: '香港',
-  cover: 'https://source.unsplash.com/256x256?tag_cover',
+  tag: {
+    ...MOCK_TAG,
+  },
   numArticles: 100,
   numAuthors: 21,
-  articles: {
-    __typename: 'ArticleConnection' as any,
-    edges: [
-      { node: MOCK_ARTILCE, cursor: 1 },
-      { node: MOCK_ARTILCE, cursor: 2 },
-      { node: MOCK_ARTILCE, cursor: 3 },
-    ],
-  },
 }
