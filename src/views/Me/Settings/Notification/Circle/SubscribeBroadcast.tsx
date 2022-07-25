@@ -17,8 +17,8 @@ const SubscribeBroadcast = ({ settings, toggle }: SubscribeBroadcastProps) => (
       title={<Translate zh_hant="圍爐有新廣播" zh_hans="围炉有新广播" en="" />}
       right={
         <Switch
-          checked={settings.inCircleNewBoradcast}
-          onChange={() => toggle('inCircleNewBoradcast')}
+          checked={settings.inCircleNewBroadcast}
+          onChange={() => toggle('inCircleNewBroadcast')}
         />
       }
     />
@@ -33,8 +33,8 @@ const SubscribeBroadcast = ({ settings, toggle }: SubscribeBroadcastProps) => (
       }
       right={
         <Switch
-          checked={settings.inCircleNewBoradcastReply}
-          onChange={() => toggle('inCircleNewBoradcastReply')}
+          checked={settings.inCircleNewBroadcastReply}
+          onChange={() => toggle('inCircleNewBroadcastReply')}
         />
       }
     />

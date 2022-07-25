@@ -32,12 +32,12 @@ const VIEWER_NOTIFICATION_CIRCLE_SETTINGS = gql`
           circleNewSubscriber
           circleNewFollower
           circleNewUnsubscriber
-          circleMemberBoradcast
+          circleMemberBroadcast
           circleMemberNewDiscussion
           circleMemberNewDiscussionReply
           inCircleNewArticle
-          inCircleNewBoradcast
-          inCircleNewBoradcastReply
+          inCircleNewBroadcast
+          inCircleNewBroadcastReply
           inCircleNewDiscussion
           inCircleNewDiscussionReply
         }
@@ -59,12 +59,12 @@ const UPDATE_VIEWER_NOTIFICATION_CIRCLE = gql`
           circleNewSubscriber
           circleNewFollower
           circleNewUnsubscriber
-          circleMemberBoradcast
+          circleMemberBroadcast
           circleMemberNewDiscussion
           circleMemberNewDiscussionReply
           inCircleNewArticle
-          inCircleNewBoradcast
-          inCircleNewBoradcastReply
+          inCircleNewBroadcast
+          inCircleNewBroadcastReply
           inCircleNewDiscussion
           inCircleNewDiscussionReply
         }
