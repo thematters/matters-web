@@ -25,7 +25,7 @@ import { FollowingFeedRecommendCirclePublic } from './__generated__/FollowingFee
 
 type Props = {
   circle: FollowingFeedRecommendCirclePublic &
-  FollowingFeedRecommendCirclePrivate
+    FollowingFeedRecommendCirclePrivate
 } & CardProps
 
 const RecommendCircle = ({ circle, ...cardProps }: Props) => {
