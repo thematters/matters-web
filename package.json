@@ -84,7 +84,7 @@
     "js-base64": "^3.7.2",
     "jump.js": "^1.0.2",
     "lodash": "^4.17.21",
-    "next": "^12.1.4",
+    "next": "^12.2.3",
     "next-compose-plugins": "^2.2.1",
     "next-offline": "^5.0.5",
     "next-with-apollo": "^5.2.1",
@@ -106,8 +106,7 @@
     "subscriptions-transport-ws": "^0.10.0",
     "use-debounce": "^7.0.1",
     "validator": "^13.7.0",
-    "wagmi": "^0.4.11",
-    "styled-jsx": "^5.0.2"
+    "wagmi": "^0.4.11"
   },
   "devDependencies": {
     "@apollo/react-testing": "^3.1.3",
