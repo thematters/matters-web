@@ -1,20 +1,19 @@
 import gql from 'graphql-tag'
 
 import {
-  Card,
   EmptyTag,
   Head,
   InfiniteScroll,
   Layout,
   QueryError,
   Spinner,
+  TagDigest,
   usePublicQuery,
 } from '~/components'
 
 import { analytics, mergeConnections, toPath } from '~/common/utils'
 
 import { TagsButtons } from './Buttons'
-import CardTag from './Card'
 import styles from './styles.css'
 
 import { AllTagsPublic } from './__generated__/AllTagsPublic'
@@ -24,24 +23,31 @@ const ALL_TAGS = gql`
     viewer @connection(key: "viewerTags") {
       id
       recommendation {
-        tags(input: { first: 30, after: $after }) {
-          pageInfo {
-            startCursor
-            endCursor
-            hasNextPage
-          }
+        tags(input: { first: 1 }) {
           edges {
-            cursor
             node {
               id
-              ...CardTag
+              recommended(input: { first: 20, after: $after }) {
+                pageInfo {
+                  startCursor
+                  endCursor
+                  hasNextPage
+                }
+                edges {
+                  cursor
+                  node {
+                    id
+                    ...TagDigestFeedTag
+                  }
+                }
+              }
             }
           }
         }
       }
     }
   }
-  ${CardTag.fragments.tag}
+  ${TagDigest.Feed.fragments.tag}
 `
 
 const BaseTags = () => {
@@ -56,8 +62,12 @@ const BaseTags = () => {
     return <QueryError error={error} />
   }
 
-  const connectionPath = 'viewer.recommendation.tags'
-  const { edges, pageInfo } = data?.viewer?.recommendation.tags || {}
+  // TODO: revise query
+  const connectionPath = 'viewer.recommendation.tags.edges.0.node.recommended'
+  const tag =
+    data?.viewer?.recommendation.tags.edges &&
+    data?.viewer?.recommendation.tags.edges[0]
+  const { edges, pageInfo } = tag?.node.recommended || {}
 
   if (!edges || edges.length <= 0 || !pageInfo) {
     return <EmptyTag />
@@ -89,8 +99,9 @@ const BaseTags = () => {
       <ul>
         {edges.map(({ node }, i) => (
           <li key={node.id}>
-            <Card
-              spacing={[0, 0]}
+            <TagDigest.Feed
+              tag={node}
+              spacing={['xtight', 'xtight']}
               {...toPath({
                 page: 'tagDetail',
                 id: node.id,
@@ -103,16 +114,9 @@ const BaseTags = () => {
                   id: node.id,
                 })
               }
-            >
-              <CardTag tag={node} />
-            </Card>
+            />
           </li>
         ))}
-
-        {/* for maintain grid alignment */}
-        <li />
-        <li />
-        <li />
 
         <style jsx>{styles}</style>
       </ul>
