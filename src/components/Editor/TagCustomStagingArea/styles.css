@@ -1,5 +1,5 @@
-.customTagArea {
-  & hr {
-    @mixin shadow-border-bottom-grey;
-  }
+.hint {
+  padding: 6.75rem var(--spacing-base);
+  color: var(--color-grey);
+  text-align: center;
 }
