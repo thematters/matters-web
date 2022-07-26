@@ -1,7 +1,7 @@
 import _uniqBy from 'lodash/uniqBy'
 import { useContext } from 'react'
 
-import { Spinner, usePublicQuery, ViewerContext } from '~/components'
+import { Spinner, Translate, usePublicQuery, ViewerContext } from '~/components'
 import { SelectTag } from '~/components/SearchSelect/SearchingArea'
 import { CustomStagingAreaProps } from '~/components/SearchSelect/StagingArea'
 
@@ -64,6 +64,18 @@ const TagCustomStagingArea = ({
   const hasTag = tags.length > 0
   const hasRecommendedTags = recommendedTags && recommendedTags.length > 0
 
+  if (!hasTag && !hasRecommendedTags) {
+    return (
+      <section className="customTagArea">
+        <section className="hint">
+          <Translate id={hint} />
+        </section>
+
+        <style jsx>{styles}</style>
+      </section>
+    )
+  }
+
   return (
     <section className="customTagArea">
       {hasTag && (
@@ -76,8 +88,6 @@ const TagCustomStagingArea = ({
       {hasRecommendedTags && (
         <RecommendedTags tags={recommendedTags} onAddTag={addTag} />
       )}
-
-      <style jsx>{styles}</style>
     </section>
   )
 }
