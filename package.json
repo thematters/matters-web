@@ -5,7 +5,7 @@
   "sideEffects": false,
   "author": "Matters <hi@matters.news>",
   "engines": {
-    "node": ">=16.x"
+    "node": "16.14"
   },
   "license": "Apache-2.0",
   "scripts": {
