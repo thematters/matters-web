@@ -14,6 +14,7 @@ const fragments = {
     fragment NoticeComment on Comment {
       id
       state
+      type
       node {
         ... on Article {
           id

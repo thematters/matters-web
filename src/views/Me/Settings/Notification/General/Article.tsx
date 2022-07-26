@@ -1,11 +1,11 @@
 import { Form, Switch, Translate } from '~/components'
 
-import { ViewerNotificationSettings_viewer_settings_notification } from './__generated__/ViewerNotificationSettings'
+import { ViewerNotificationGeneralSettings_viewer_settings_notification } from './__generated__/ViewerNotificationGeneralSettings'
 
 interface ArticleProps {
-  settings: ViewerNotificationSettings_viewer_settings_notification
+  settings: ViewerNotificationGeneralSettings_viewer_settings_notification
   toggle: (
-    type: keyof ViewerNotificationSettings_viewer_settings_notification
+    type: keyof ViewerNotificationGeneralSettings_viewer_settings_notification
   ) => void
 }
 
@@ -39,7 +39,7 @@ const Article = ({ settings, toggle }: ArticleProps) => (
         />
       }
     />
-    <Form.List.Item
+    {/* <Form.List.Item
       title={
         <Translate
           zh_hant="收藏的作品有新評論"
@@ -51,6 +51,15 @@ const Article = ({ settings, toggle }: ArticleProps) => (
         <Switch
           checked={settings.articleSubscribedNewComment}
           onChange={() => toggle('articleSubscribedNewComment')}
+        />
+      }
+    /> */}
+    <Form.List.Item
+      title={<Translate zh_hant="作品被關聯" zh_hans="作品被关联" en="" />}
+      right={
+        <Switch
+          checked={settings.articleNewCollected}
+          onChange={() => toggle('articleNewCollected')}
         />
       }
     />
