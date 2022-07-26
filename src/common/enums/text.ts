@@ -143,6 +143,8 @@ export const TEXT = {
     help: '說明',
     helpCenter: '幫助中心',
     hide: '站內隱藏',
+    hintAddTag:
+      '通過添加標籤幫助讀者更好地找到你的作品。如果沒有合適的標籤，你可以創建新的。',
     hintAddRecommendedTag: '下方為推薦標籤，點選添加：',
     hintAddTagNoTag: '目前尚無標籤，立即添加提高作品曝光度！',
     hintAddTagShort: '添加合適標籤，讓站內外讀者找到你的作品',
@@ -501,6 +503,8 @@ export const TEXT = {
     help: '说明',
     helpCenter: '帮助中心',
     hide: '站内隐藏',
+    hintAddTag:
+      '通过添加标签帮助读者更好地找到你的作品。如果没有合适的标签，你可以创建新的。',
     hintAddRecommendedTag: '下方为推荐标签，点选添加：',
     hintAddTagNoTag: '目前尚无标签，立即添加提高作品曝光度！',
     hintAddTagShort: '添加适合标签，帮助读者找到你的作品',
@@ -866,6 +870,8 @@ export const TEXT = {
     help: 'Help',
     helpCenter: 'Help Center',
     hide: 'Archived',
+    hintAddTag:
+      'Adding tags helps readers find your articles. Add or create new tags.',
     hintAddRecommendedTag: 'Click to add recommended tags:',
     hintAddTagNoTag:
       'Not using tags yet, add tags now to improve discoverability!',
