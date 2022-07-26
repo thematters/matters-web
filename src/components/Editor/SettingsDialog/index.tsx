@@ -185,7 +185,7 @@ const BaseEditorSettingsDialog = ({
         {isTag && (
           <DynamicSearchSelectForm
             title="addTag"
-            hint="hintAddRecommendedTag"
+            hint="hintAddTag"
             headerLeftButton={
               <Dialog.Header.BackButton onClick={() => forward('list')} />
             }

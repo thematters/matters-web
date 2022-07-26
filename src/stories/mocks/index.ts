@@ -196,3 +196,13 @@ export const MOCK_CRYPTO_WALLET = {
     },
   ],
 }
+
+export const MOCK_TAG_SEARCH_RESULT = {
+  __typename: 'TagSearchResult' as any,
+  id: 'tag-0000',
+  tag: {
+    ...MOCK_TAG,
+  },
+  numArticles: 100,
+  numAuthors: 21,
+}

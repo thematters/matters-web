@@ -1,5 +1,4 @@
 import React from 'react'
-import { RouterContext } from 'next/dist/next-server/lib/router-context'
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
 
 import { GlobalStyles } from '../src/components/GlobalStyles'
@@ -17,15 +16,7 @@ export const decorators = [
     <>
       <GlobalStyles />
 
-      <RouterContext.Provider
-        value={{
-          push: () => Promise.resolve(),
-          replace: () => Promise.resolve(),
-          prefetch: () => Promise.resolve(),
-        }}
-      >
-        <Story />
-      </RouterContext.Provider>
+      <Story />
 
       <style jsx global>
         {`

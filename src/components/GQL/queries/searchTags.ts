@@ -7,7 +7,10 @@ export default gql`
         node {
           ... on TagSearchResult {
             id
-            content
+            tag {
+              id
+              content
+            }
             numArticles
           }
         }

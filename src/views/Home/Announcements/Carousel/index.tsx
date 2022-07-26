@@ -6,6 +6,7 @@ import {
   Card,
   IconClose32,
   LanguageContext,
+  ResponsiveImage,
   useCarousel,
 } from '~/components'
 
@@ -148,10 +149,12 @@ const Carousel = ({
             return (
               <div key={item.id} className="slide">
                 <Card htmlHref={item.link || ''} spacing={[0, 0]}>
-                  <div
-                    className="content"
-                    style={{ backgroundImage: `url(${item.cover})` }}
-                  >
+                  <div className="content">
+                    <ResponsiveImage
+                      url={item.cover}
+                      size="540w"
+                      smUpSize="1080w"
+                    />
                     <h3>{item.title}</h3>
                     <p>{item.content}</p>
                   </div>

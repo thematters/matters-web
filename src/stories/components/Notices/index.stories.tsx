@@ -1,5 +1,5 @@
 import { MockedProvider } from '@apollo/react-testing'
-import { Meta, Story } from '@storybook/react/types-6-0'
+import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React from 'react'
 
 import NoticeList from './NoticeList'
@@ -7,12 +7,12 @@ import NoticeList from './NoticeList'
 export default {
   title: 'Components/Notice',
   component: NoticeList,
-} as Meta
+} as ComponentMeta<typeof NoticeList>
 
-const Template: Story = (args) => (
+const Template: ComponentStory<typeof NoticeList> = (args) => (
   <MockedProvider>
     <div>
-      <NoticeList {...args} />
+      <NoticeList {...(args as any)} />
 
       <style jsx>{`
         div {

@@ -6,16 +6,6 @@ export const EDITOR_RECOMMENDED_TAGS = gql`
   query EditorRecommendedTags($userName: String!) {
     user(input: { userName: $userName }) {
       id
-      recommendation {
-        tags(input: { first: 10 }) {
-          edges {
-            cursor
-            node {
-              ...DigestTag
-            }
-          }
-        }
-      }
       tags(input: { first: 10 }) {
         edges {
           cursor

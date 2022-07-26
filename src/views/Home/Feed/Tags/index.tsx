@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import _random from 'lodash/random'
-import { useContext, useEffect } from 'react'
+// import _random from 'lodash/random'
+import { useContext, useEffect, useState } from 'react'
 
 import {
   QueryError,
@@ -49,23 +49,27 @@ const TagsFeed = () => {
     { variables: { id: 'local' } }
   )
   const lastRandom = lastFetchRandom?.lastFetchRandom.feedTags
+  const randomMaxSize = 50
+  const [initialRandNumber] = useState<number>(
+    Math.floor(randomMaxSize * Math.random() * Math.random()) // default random [0..50) with leaning toward left
+  )
 
   const { data, loading, error, refetch } = usePublicQuery<FeedTagsPublic>(
     FEED_TAGS,
     {
       notifyOnNetworkStatusChange: true,
-      variables: { random: lastRandom || 0 },
+      variables: { random: lastRandom || initialRandNumber },
     },
     { publicQuery: !viewer.isAuthed }
   )
-  const randomMaxSize = 50
   const size = Math.round(
     (data?.viewer?.recommendation.tags.totalCount || randomMaxSize) / 5
   )
   const edges = data?.viewer?.recommendation.tags.edges
 
   const shuffle = () => {
-    const random = _random(0, Math.min(randomMaxSize, size))
+    // const random = _random(0, Math.min(randomMaxSize, size))
+    const random = Math.floor(Math.min(randomMaxSize, size) * Math.random()) // in range [0..50) not including 50
     refetch({ random })
 
     client.writeData({
@@ -75,7 +79,10 @@ const TagsFeed = () => {
   }
 
   useEffect(() => {
-    if (viewer.isAuthed && lastRandom === null) {
+    if (
+      viewer.isAuthed &&
+      lastRandom == null // null or undefined
+    ) {
       shuffle()
     }
   }, [viewer.isAuthed])

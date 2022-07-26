@@ -245,7 +245,7 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
     createTag &&
     !searchNodes.some(
       (node) =>
-        node.__typename === 'TagSearchResult' && node.content === searchKey
+        node.__typename === 'TagSearchResult' && node.tag.content === searchKey
     )
   const canInviteEmail =
     isUser &&

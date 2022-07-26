@@ -1,7 +1,7 @@
 import _uniqBy from 'lodash/uniqBy'
 import { useContext } from 'react'
 
-import { Spinner, usePublicQuery, ViewerContext } from '~/components'
+import { Spinner, Translate, usePublicQuery, ViewerContext } from '~/components'
 import { SelectTag } from '~/components/SearchSelect/SearchingArea'
 import { CustomStagingAreaProps } from '~/components/SearchSelect/StagingArea'
 
@@ -35,11 +35,8 @@ const TagCustomStagingArea = ({
 
   // recommended tags
   const userTagsEdges = data?.user?.tags.edges || []
-  const recommendationTagsEdges = data?.user?.recommendation.tags.edges || []
 
-  let recommendedTags = [...userTagsEdges, ...recommendationTagsEdges]?.map(
-    (edge) => edge.node
-  )
+  let recommendedTags = [...userTagsEdges]?.map((edge) => edge.node)
   // remove duplicated tags
   recommendedTags = _uniqBy(recommendedTags, (tag) => tag.content)
   // remove selected tags
@@ -67,6 +64,18 @@ const TagCustomStagingArea = ({
   const hasTag = tags.length > 0
   const hasRecommendedTags = recommendedTags && recommendedTags.length > 0
 
+  if (!hasTag && !hasRecommendedTags) {
+    return (
+      <section className="customTagArea">
+        <section className="hint">
+          <Translate id={hint} />
+        </section>
+
+        <style jsx>{styles}</style>
+      </section>
+    )
+  }
+
   return (
     <section className="customTagArea">
       {hasTag && (
@@ -79,8 +88,6 @@ const TagCustomStagingArea = ({
       {hasRecommendedTags && (
         <RecommendedTags tags={recommendedTags} onAddTag={addTag} />
       )}
-
-      <style jsx>{styles}</style>
     </section>
   )
 }

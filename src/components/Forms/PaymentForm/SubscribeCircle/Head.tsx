@@ -88,7 +88,7 @@ const Head: React.FC<HeadProps> = ({ circle }) => {
               <ConfirmTable.Col>
                 <Translate zh_hant="免費資格" zh_hans="免费资格" />
                 {` ${invitation?.freePeriod} `}
-                <Translate zh_hant="個月" zh_hans="个月" />
+                <Translate zh_hant="天" zh_hans="天" />
               </ConfirmTable.Col>
 
               <ConfirmTable.Col type="insufficient">
