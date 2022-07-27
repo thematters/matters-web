@@ -25,14 +25,11 @@ export type TagDigestSidebarProps = {
 
 const fragments = {
   tag: gql`
-    fragment TagDigestSidebarTag on TagSearchResult {
+    fragment TagDigestSidebarTag on Tag {
       id
-      tag {
-        id
-        content
-        description
-        cover
-      }
+      content
+      description
+      cover
       numArticles
       numAuthors
     }
@@ -60,7 +57,7 @@ const Sidebar = ({ tag, ...cardProps }: TagDigestSidebarProps) => {
           <Link {...path}>
             <a>
               <ResponsiveImage
-                url={tag.tag.cover || IMAGE_TAG_COVER.src}
+                url={tag.cover || IMAGE_TAG_COVER.src}
                 size="360w"
               />
             </a>
@@ -78,23 +75,27 @@ const Sidebar = ({ tag, ...cardProps }: TagDigestSidebarProps) => {
           </header>
 
           <section className="nums">
-            <TextIcon
-              icon={<IconUser16 color="grey-dark" />}
-              size="xs"
-              spacing="xxtight"
-              color="grey-dark"
-            >
-              {numAbbr(tag.numAuthors)}
-            </TextIcon>
+            {tag?.numAuthors && (
+              <TextIcon
+                icon={<IconUser16 color="grey-dark" />}
+                size="xs"
+                spacing="xxtight"
+                color="grey-dark"
+              >
+                {numAbbr(tag.numAuthors)}
+              </TextIcon>
+            )}
 
-            <TextIcon
-              icon={<IconArticle16 color="grey-dark" />}
-              size="xs"
-              spacing="xxtight"
-              color="grey-dark"
-            >
-              {numAbbr(tag.numArticles)}
-            </TextIcon>
+            {tag?.numArticles && (
+              <TextIcon
+                icon={<IconArticle16 color="grey-dark" />}
+                size="xs"
+                spacing="xxtight"
+                color="grey-dark"
+              >
+                {numAbbr(tag.numArticles)}
+              </TextIcon>
+            )}
           </section>
         </section>
 

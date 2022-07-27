@@ -76,6 +76,11 @@
   padding-bottom: var(--spacing-base);
 }
 
+.spacing-y-loose {
+  padding-top: var(--spacing-loose);
+  padding-bottom: var(--spacing-loose);
+}
+
 .spacing-x-xtight {
   padding-right: var(--spacing-x-tight);
   padding-left: var(--spacing-x-tight);

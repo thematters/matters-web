@@ -4,7 +4,7 @@ import React from 'react'
 
 import { TagDigest } from '~/components'
 
-import { MOCK_TAG_SEARCH_RESULT } from '../../mocks'
+import { MOCK_TAG } from '../../mocks'
 
 export default {
   title: 'Components/TagDigest/Feed',
@@ -19,5 +19,5 @@ const Template: ComponentStory<typeof TagDigest.Feed> = (args) => (
 
 export const Default = Template.bind({})
 Default.args = {
-  tag: MOCK_TAG_SEARCH_RESULT as any,
+  tag: MOCK_TAG as any,
 }
