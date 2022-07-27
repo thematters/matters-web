@@ -12,7 +12,9 @@ export interface LinkWrapperProps {
   onClick?: () => void
 }
 
-export const LinkWrapper: React.FC<LinkWrapperProps> = ({
+export const LinkWrapper: React.FC<
+  React.PropsWithChildren<LinkWrapperProps>
+> = ({
   href,
 
   textActiveColor,

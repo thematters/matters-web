@@ -11,7 +11,7 @@ export interface PageHeaderProps {
   hasNoBorder?: boolean
 }
 
-export const PageHeader: React.FC<PageHeaderProps> = ({
+export const PageHeader: React.FC<React.PropsWithChildren<PageHeaderProps>> = ({
   title,
   is = 'h1',
   hasNoBorder = false,

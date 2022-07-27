@@ -1,6 +1,6 @@
 import styles from './styles.css'
 
-const Content: React.FC = ({ children }) => (
+const Content: React.FC<React.PropsWithChildren> = ({ children }) => (
   <section className="input-container">
     {children}
 

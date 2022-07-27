@@ -8,10 +8,9 @@ interface CopyToClipboardProps {
   text: string
 }
 
-export const CopyToClipboard: React.FC<CopyToClipboardProps> = ({
-  text,
-  children,
-}) => {
+export const CopyToClipboard: React.FC<
+  React.PropsWithChildren<CopyToClipboardProps>
+> = ({ text, children }) => {
   return (
     <C2C
       text={text}

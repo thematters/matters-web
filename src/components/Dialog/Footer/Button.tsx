@@ -8,7 +8,9 @@ type DialogFooterButtonProps = {
   implicit?: boolean
 } & ButtonProps
 
-const DialogFooterButton: React.FC<DialogFooterButtonProps> = forwardRef(
+const DialogFooterButton: React.FC<
+  React.PropsWithChildren<DialogFooterButtonProps>
+> = forwardRef(
   (
     {
       loading,

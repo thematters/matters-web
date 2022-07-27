@@ -21,7 +21,7 @@ interface BoxProps {
   disabled?: boolean
 }
 
-const Box: React.FC<BoxProps> = ({
+const Box: React.FC<React.PropsWithChildren<BoxProps>> = ({
   icon,
   title,
   onClick,
