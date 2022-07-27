@@ -5,12 +5,9 @@ export default gql`
     search(input: { key: $search, type: Tag, first: 5 }) {
       edges {
         node {
-          ... on TagSearchResult {
+          ... on Tag {
             id
-            tag {
-              id
-              content
-            }
+            content
             numArticles
           }
         }
