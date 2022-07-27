@@ -1,12 +1,15 @@
 .tags {
-  margin-top: 1px; /* FIXME: top header overlay by sticky tabs */
+  /* FIXME: top header overlay by sticky tabs */
+
+  /* margin-top: 1px; */
 }
 
 ul {
   @media (--lg-up) {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    margin-top: calc(var(--spacing-base) * -1);
+
+    /* margin-top: calc(var(--spacing-base) * -1); */
   }
 }
 
