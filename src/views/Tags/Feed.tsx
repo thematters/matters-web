@@ -7,42 +7,33 @@ import {
   Spinner,
   TagDigest,
   usePublicQuery,
-  useResponsive,
+  // useResponsive,
 } from '~/components'
 
 import { analytics, mergeConnections, toPath } from '~/common/utils'
 
-import { ALL_TAGS_HOTTEST, ALL_TAGS_RECOMMENDED } from './gql'
-import SidebarTags from './Sidebar'
+import { ALL_TAGS_HOTTEST } from './gql'
+// import SidebarTags from './Sidebar'
 import styles from './styles.css'
 
-import {
-  AllTagsHottest,
-  AllTagsHottest_viewer_recommendation_tags_edges_node_recommended_edges,
-} from './__generated__/AllTagsHottest'
-import {
-  AllTagsRecommended,
-  AllTagsRecommended_viewer_recommendation_tags_edges_node_recommended_edges,
-} from './__generated__/AllTagsRecommended'
+import { AllTagsHottest } from './__generated__/AllTagsHottest'
 
 export type FeedType = 'recommended' | 'hottest'
 
-export type FeedQuery = AllTagsRecommended | AllTagsHottest
-
-export type FeedEdges =
-  | AllTagsHottest_viewer_recommendation_tags_edges_node_recommended_edges
-  | AllTagsRecommended_viewer_recommendation_tags_edges_node_recommended_edges
+// export type FeedQuery = AllTagsRecommended | AllTagsHottest
+export type FeedQuery = AllTagsHottest
 
 interface Props {
   type: FeedType
 }
 
 const Feed = ({ type }: Props) => {
-  const isLargeUp = useResponsive('lg-up')
+  // const isLargeUp = useResponsive('lg-up')
 
   const isRecommended = type === 'recommended'
 
-  const query = isRecommended ? ALL_TAGS_RECOMMENDED : ALL_TAGS_HOTTEST
+  // const query = isRecommended ? ALL_TAGS_RECOMMENDED : ALL_TAGS_HOTTEST
+  const query = ALL_TAGS_HOTTEST
 
   const { data, loading, error, fetchMore, refetch } =
     usePublicQuery<FeedQuery>(query)
@@ -55,31 +46,14 @@ const Feed = ({ type }: Props) => {
     return <QueryError error={error} />
   }
 
-  // TODO: revise queries
-  const connectionPath = 'viewer.recommendation.tags.edges.0.node.recommended'
-  const tag =
-    data?.viewer?.recommendation.tags.edges &&
-    data?.viewer?.recommendation.tags.edges[isRecommended ? 0 : 1]
-
-  const edges = _get(
-    tag,
-    isRecommended ? 'node.recommended.edges' : 'node.recommended.edges',
-    []
-  ) as FeedEdges[]
-
-  const pageInfo = _get(
-    tag,
-    isRecommended ? 'node.recommended.pageInfo' : 'node.recommended.pageInfo',
-    []
-  ) as any
+  const connectionPath = 'viewer.recommendation.tags'
+  const { edges, pageInfo } = data?.viewer?.recommendation.tags || {}
 
   if (!edges || edges.length <= 0 || !pageInfo) {
     return <EmptyTag />
   }
 
-  const trackingType = isRecommended
-    ? 'all_tags_recommended'
-    : 'all_tags_hottest'
+  const trackingType = isRecommended ? 'all_tags_recommended' : 'all_tags'
   const loadMore = () => {
     analytics.trackEvent('load_more', {
       type: trackingType,
@@ -125,7 +99,7 @@ const Feed = ({ type }: Props) => {
               />
             </li>
 
-            {!isLargeUp && edges.length >= 4 && i === 3 && <SidebarTags />}
+            {/* {!isLargeUp && edges.length >= 4 && i === 3 && <SidebarTags />} */}
           </>
         ))}
       </ul>

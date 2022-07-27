@@ -15,10 +15,9 @@ import { toPath } from '~/common/utils'
 import styles from './styles.css'
 
 import { DigestTag } from './__generated__/DigestTag'
-import { DigestTagSearchResult } from './__generated__/DigestTagSearchResult'
 
 interface TagProps {
-  tag: DigestTag | DigestTagSearchResult
+  tag: DigestTag
   type?: 'list' | 'title' | 'inline' | 'plain'
   iconProps?: IconProps
   textIconProps?: TextIconProps
@@ -26,7 +25,7 @@ interface TagProps {
   disabled?: boolean // disable default <a>
   hasCount?: boolean
   hasClose?: boolean
-  removeTag?: (tag: DigestTag | DigestTagSearchResult) => void
+  removeTag?: (tag: DigestTag) => void
   onClick?: () => void
 }
 
@@ -35,16 +34,8 @@ const fragments = {
     fragment DigestTag on Tag {
       id
       content
-    }
-  `,
-  tagSearchResult: gql`
-    fragment DigestTagSearchResult on TagSearchResult {
-      id
-      tag {
-        id
-        content
-      }
       numArticles
+      numAuthors
     }
   `,
 }
@@ -58,6 +49,8 @@ export const toDigestTagPlaceholder = (content: string) =>
       __typename: 'ArticleConnection',
       totalCount: 0,
     },
+    numArticles: null,
+    numAuthors: null,
   } as DigestTag)
 
 export const Tag = ({
@@ -153,7 +146,7 @@ export const Tag = ({
         allowUserSelect
       >
         <span className="name">
-          {tag.__typename === 'Tag' ? tag.content : tag.tag.content}
+          {tag.__typename === 'Tag' ? tag.content : tag.content}
         </span>
       </TextIcon>
 
@@ -168,10 +161,9 @@ export const Tag = ({
         </button>
       )}
 
-      {hasCount &&
-        type === 'list' &&
-        tag.__typename === 'TagSearchResult' &&
-        tag?.numArticles && <span className="count">{tag.numArticles}</span>}
+      {hasCount && type === 'list' && tag?.numArticles && (
+        <span className="count">{tag.numArticles}</span>
+      )}
 
       <style jsx>{styles}</style>
     </>

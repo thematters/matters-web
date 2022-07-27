@@ -25,13 +25,10 @@ export type TagDigestFeedProps = {
 
 const fragments = {
   tag: gql`
-    fragment TagDigestFeedTag on TagSearchResult {
+    fragment TagDigestFeedTag on Tag {
       id
-      tag {
-        id
-        content
-        cover
-      }
+      content
+      cover
       numArticles
       numAuthors
       articles(input: { first: 3 }) {
@@ -80,23 +77,27 @@ const Feed = ({ tag, ...cardProps }: TagDigestFeedProps) => {
           />
 
           <section className="nums">
-            <TextIcon
-              icon={<IconUser16 color="grey-dark" />}
-              size="xs"
-              spacing="xxtight"
-              color="grey-dark"
-            >
-              {numAbbr(tag.numAuthors)}
-            </TextIcon>
+            {tag.numAuthors && (
+              <TextIcon
+                icon={<IconUser16 color="grey-dark" />}
+                size="xs"
+                spacing="xxtight"
+                color="grey-dark"
+              >
+                {numAbbr(tag.numAuthors)}
+              </TextIcon>
+            )}
 
-            <TextIcon
-              icon={<IconArticle16 color="grey-dark" />}
-              size="xs"
-              spacing="xxtight"
-              color="grey-dark"
-            >
-              {numAbbr(tag.numArticles)}
-            </TextIcon>
+            {tag.numArticles && (
+              <TextIcon
+                icon={<IconArticle16 color="grey-dark" />}
+                size="xs"
+                spacing="xxtight"
+                color="grey-dark"
+              >
+                {numAbbr(tag.numArticles)}
+              </TextIcon>
+            )}
           </section>
         </header>
 
@@ -117,7 +118,7 @@ const Feed = ({ tag, ...cardProps }: TagDigestFeedProps) => {
             <Link {...path}>
               <a>
                 <ResponsiveImage
-                  url={tag.tag.cover || IMAGE_TAG_COVER.src}
+                  url={tag.cover || IMAGE_TAG_COVER.src}
                   size="360w"
                 />
               </a>

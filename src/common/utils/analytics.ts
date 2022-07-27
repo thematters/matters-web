@@ -230,9 +230,8 @@ type UserFeedType =
   | 'transaction'
 
 type TagFeedType =
-  | 'all_tags' // all tags page
-  | 'all_tags_recommended'
-  | 'all_tags_hottest'
+  | 'all_tags' // all tags page (hottest)
+  | 'all_tags_recommended' // all tags page (recommended)
   | 'all_tags_sidebar'
   | 'related_tags'
   // | 'follow-tag'

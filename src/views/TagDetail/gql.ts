@@ -14,6 +14,8 @@ export const TAG_DETAIL_PUBLIC = gql`
         content
         cover
         description
+        numArticles
+        numAuthors
         creator {
           id
           ...UserDigestMiniUser
