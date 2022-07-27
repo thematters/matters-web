@@ -39,7 +39,7 @@ const NumberIndicator = ({
   </span>
 )
 
-const ListItem: React.FC<ListItemProps> & {
+const ListItem: React.FC<React.PropsWithChildren<ListItemProps>> & {
   CoverIndicator: typeof CoverIndicator
   NumberIndicator: typeof NumberIndicator
 } = ({ title, subTitle, hint, onClick, children }) => {

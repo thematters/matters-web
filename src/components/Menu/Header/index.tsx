@@ -8,7 +8,7 @@ interface MenuHeaderProps {
   size?: 'md-s' | 'lg'
 }
 
-const MenuHeader: React.FC<MenuHeaderProps> = ({
+const MenuHeader: React.FC<React.PropsWithChildren<MenuHeaderProps>> = ({
   title,
   size = 'md-s',
   children,

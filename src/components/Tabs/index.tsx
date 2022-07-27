@@ -8,7 +8,11 @@ type TabProps = {
   selected?: boolean
 } & ButtonProps
 
-const Tab: React.FC<TabProps> = ({ selected, children, ...buttonProps }) => {
+const Tab: React.FC<React.PropsWithChildren<TabProps>> = ({
+  selected,
+  children,
+  ...buttonProps
+}) => {
   return (
     <li
       role="tab"
@@ -40,7 +44,7 @@ interface TabsProps {
   side?: React.ReactNode
 }
 
-export const Tabs: React.FC<TabsProps> & {
+export const Tabs: React.FC<React.PropsWithChildren<TabsProps>> & {
   Tab: typeof Tab
 } = ({ sticky, side, children }) => {
   const navClasses = classNames({

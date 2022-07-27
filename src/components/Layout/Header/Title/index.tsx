@@ -2,7 +2,7 @@ import jump from 'jump.js'
 
 import { Title, Translate, TranslateProps } from '~/components'
 
-const LayoutHeaderTitle: React.FC<TranslateProps> = ({
+const LayoutHeaderTitle: React.FC<React.PropsWithChildren<TranslateProps>> = ({
   children,
   ...props
 }) => (

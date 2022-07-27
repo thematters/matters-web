@@ -17,7 +17,10 @@ interface State {
   info: any | null
 }
 
-export class ErrorBoundary extends React.Component<Props, State> {
+export class ErrorBoundary extends React.Component<
+  React.PropsWithChildren<Props>,
+  State
+> {
   state: State = {
     error: null,
     info: null,

@@ -20,7 +20,7 @@ import styles from './styles.css'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 
-export const Layout: React.FC & {
+export const Layout: React.FC<React.PropsWithChildren> & {
   Main: typeof Main
   Header: typeof Header
   Spacing: typeof Spacing
@@ -60,7 +60,12 @@ interface MainProps {
   inEditor?: boolean
 }
 
-const Main: React.FC<MainProps> = ({ aside, bgColor, inEditor, children }) => {
+const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
+  aside,
+  bgColor,
+  inEditor,
+  children,
+}) => {
   const { isInPath, isPathStartWith } = useRoute()
   const isInSearch = isInPath('SEARCH')
   const isInArticleDetail = isInPath('ARTICLE_DETAIL')
