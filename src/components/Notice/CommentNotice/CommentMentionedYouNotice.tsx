@@ -24,6 +24,11 @@ const CommentMentionedYouNotice = ({ notice }: { notice: NoticeType }) => {
   const commentCircle =
     notice.comment?.node.__typename === 'Circle' ? notice.comment.node : null
 
+  const commentCircleDiscussion =
+    notice.comment?.type === 'circleDiscussion' ? notice.comment.type : null
+  const commentCircleBroadcast =
+    notice.comment?.type === 'circleBroadcast' ? notice.comment.type : null
+
   return (
     <section className="container">
       <section className="avatar-wrap">
@@ -43,8 +48,8 @@ const CommentMentionedYouNotice = ({ notice }: { notice: NoticeType }) => {
               />
               <NoticeArticleTitle article={commentArticle} />
               <Translate
-                zh_hant=" 的評論中提及了你"
-                zh_hans=" 的评论中提及了你"
+                zh_hant=" 的評論中提及你"
+                zh_hans=" 的评论中提及你"
                 en=""
               />
             </>
@@ -57,11 +62,20 @@ const CommentMentionedYouNotice = ({ notice }: { notice: NoticeType }) => {
                 en=" mentioned you on "
               />
               <NoticeCircleName circle={commentCircle} />
-              <Translate
-                zh_hant={` 中提及了你`}
-                zh_hans={` 中提及了你`}
-                en=""
-              />
+              {commentCircleDiscussion && (
+                <Translate
+                  zh_hant={` 眾聊提及你`}
+                  zh_hans={` 众聊提及你`}
+                  en=""
+                />
+              )}
+              {commentCircleBroadcast && (
+                <Translate
+                  zh_hant={` 廣播提及你`}
+                  zh_hans={` 广播提及你`}
+                  en=""
+                />
+              )}
             </>
           )}
         </NoticeHead>

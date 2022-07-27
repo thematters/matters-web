@@ -45,7 +45,7 @@ const Follow = ({ tag }: FollowProps) => {
 
   return (
     <Button
-      size={['5rem', '2rem']}
+      spacing={['xtight', 'tight']}
       textColor="green"
       textActiveColor="white"
       bgActiveColor="green"

@@ -28,8 +28,8 @@ const ArticleMentionedYouNotice = ({ notice }: { notice: NoticeType }) => {
         <NoticeHead>
           <NoticeActorName user={actor} />
           <Translate
-            zh_hant=" 在作品中提及了你"
-            zh_hans=" 在作品中提及了你"
+            zh_hant=" 在作品中提及你"
+            zh_hans=" 在作品中提及你"
             en=" mentioned you in an article"
           />
         </NoticeHead>

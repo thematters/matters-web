@@ -61,8 +61,8 @@ const CircleNewBroadcastNotice = ({ notice }: { notice: NoticeType }) => {
           />
           {commentCircle && <NoticeCircleName circle={commentCircle} />}
           <Translate
-            zh_hant={` 中發布了新${COMMENT_TYPE_TEXT.zh_hant.circleBroadcast}`}
-            zh_hans={` 中发布了新${COMMENT_TYPE_TEXT.zh_hans.circleBroadcast}`}
+            zh_hant={` 發布了新${COMMENT_TYPE_TEXT.zh_hant.circleBroadcast}`}
+            zh_hans={` 发布了新${COMMENT_TYPE_TEXT.zh_hans.circleBroadcast}`}
           />
         </NoticeHead>
 

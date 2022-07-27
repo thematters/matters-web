@@ -60,7 +60,7 @@ const BaseDropdownActions = ({
     >
       {({ openDialog, ref }) => (
         <Button
-          size={['5rem', '2rem']}
+          spacing={['xtight', 'tight']}
           textColor="gold"
           textActiveColor="white"
           bgActiveColor="gold"

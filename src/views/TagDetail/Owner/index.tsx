@@ -55,7 +55,7 @@ const Owner = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
           <TagAdoptionDialog>
             {({ openDialog }) => (
               <Button
-                size={['3rem', '1.5rem']}
+                spacing={['xtight', 'tight']}
                 textColor="green"
                 textActiveColor="white"
                 bgActiveColor="green"

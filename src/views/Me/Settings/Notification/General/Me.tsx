@@ -1,11 +1,11 @@
 import { Form, Switch, Translate } from '~/components'
 
-import { ViewerNotificationSettings_viewer_settings_notification } from './__generated__/ViewerNotificationSettings'
+import { ViewerNotificationGeneralSettings_viewer_settings_notification } from './__generated__/ViewerNotificationGeneralSettings'
 
 interface MeProps {
-  settings: ViewerNotificationSettings_viewer_settings_notification
+  settings: ViewerNotificationGeneralSettings_viewer_settings_notification
   toggle: (
-    type: keyof ViewerNotificationSettings_viewer_settings_notification
+    type: keyof ViewerNotificationGeneralSettings_viewer_settings_notification
   ) => void
 }
 
@@ -16,7 +16,13 @@ const Me = ({ settings, toggle }: MeProps) => (
     }
   >
     <Form.List.Item
-      title={<Translate zh_hant="提及我" zh_hans="提及我" en="Mentions" />}
+      title={
+        <Translate
+          zh_hant="作品或評論提及我"
+          zh_hans="作品或评论提及我"
+          en="Mentions"
+        />
+      }
       right={
         <Switch checked={settings.mention} onChange={() => toggle('mention')} />
       }
@@ -32,7 +38,7 @@ const Me = ({ settings, toggle }: MeProps) => (
       }
     />
 
-    <Form.List.Item
+    {/* <Form.List.Item
       title={
         <Translate
           zh_hant="追蹤我的圍爐"
@@ -46,7 +52,7 @@ const Me = ({ settings, toggle }: MeProps) => (
           onChange={() => toggle('circleNewFollower')}
         />
       }
-    />
+    /> */}
   </Form.List>
 )
 

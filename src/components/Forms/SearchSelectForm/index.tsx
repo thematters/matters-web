@@ -120,7 +120,7 @@ const SearchSelectForm = ({
         rightButton={
           <Dialog.Header.RightButton
             onClick={onClickSave}
-            disabled={stagingNodes.length <= 0}
+            // disabled={stagingNodes.length <= 0}
             text={headerRightButtonText || <Translate id="save" />}
             loading={saving}
           />
