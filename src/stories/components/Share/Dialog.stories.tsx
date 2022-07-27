@@ -11,6 +11,7 @@ export default {
 
 const Template: Story<ShareDialogProps> = (args) => (
   <MockedProvider>
+    {/* @ts-ignore */}
     <ShareButton iconSize="md-s" inCard={false} {...args} />
   </MockedProvider>
 )

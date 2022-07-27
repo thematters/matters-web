@@ -18,12 +18,9 @@ interface ListProps {
   forceGreyStyle?: boolean
 }
 
-const List: React.FC<ListProps> & { Item: typeof Item } = ({
-  groupName,
-  spacing = 0,
-  forceGreyStyle,
-  children,
-}) => {
+const List: React.FC<React.PropsWithChildren<ListProps>> & {
+  Item: typeof Item
+} = ({ groupName, spacing = 0, forceGreyStyle, children }) => {
   const isSmallUp = useResponsive('sm-up')
   const listClasses = classNames({
     greyStyle: isSmallUp || forceGreyStyle,

@@ -28,10 +28,12 @@ export type DialogProps = {
 } & DialogOverlayProps
 
 const Container: React.FC<
-  {
-    style?: React.CSSProperties
-    setDragGoal: (val: any) => void
-  } & DialogProps
+  React.PropsWithChildren<
+    {
+      style?: React.CSSProperties
+      setDragGoal: (val: any) => void
+    } & DialogProps
+  >
 > = ({ size = 'lg', fixedHeight, onDismiss, children, style, setDragGoal }) => {
   const isSmallUp = useResponsive('sm-up')
   const node: React.RefObject<any> | null = useRef(null)

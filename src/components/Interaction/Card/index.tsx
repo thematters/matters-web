@@ -34,7 +34,7 @@ export interface CardProps {
   ref?: any
 }
 
-export const Card: React.FC<CardProps> = forwardRef(
+export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
   (
     {
       spacing = ['base', 0],

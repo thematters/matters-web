@@ -9,7 +9,11 @@ type SectionHeadProps = {
   title: React.ReactNode
 }
 
-const SectionHead: React.FC<SectionHeadProps> = ({ icon, title, children }) => {
+const SectionHead: React.FC<React.PropsWithChildren<SectionHeadProps>> = ({
+  icon,
+  title,
+  children,
+}) => {
   return (
     <section className="head">
       <h2>
