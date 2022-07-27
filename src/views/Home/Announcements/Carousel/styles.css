@@ -57,6 +57,10 @@ header {
     background-position: bottom right;
     border-radius: var(--spacing-base);
 
+    & :global(img) {
+      @mixin object-fit-cover;
+    }
+
     & h3 {
       @mixin line-clamp;
 

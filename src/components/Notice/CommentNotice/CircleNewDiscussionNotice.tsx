@@ -3,11 +3,11 @@ import { Fragment } from 'react'
 
 import { Translate } from '~/components'
 
+import { COMMENT_TYPE_TEXT } from '~/common/enums'
 import { numAbbr } from '~/common/utils'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorName from '../NoticeActorName'
-import NoticeArticleTitle from '../NoticeArticleTitle'
 import NoticeCircleName from '../NoticeCircleName'
 import NoticeComment from '../NoticeComment'
 import NoticeDate from '../NoticeDate'
@@ -15,23 +15,19 @@ import NoticeHead from '../NoticeHead'
 import NoticeTypeIcon from '../NoticeTypeIcon'
 import styles from '../styles.css'
 
-import { CommentNewReplyNotice as NoticeType } from './__generated__/CommentNewReplyNotice'
+import { CircleNewDiscussionNotice as NoticeType } from './__generated__/CircleNewDiscussionNotice'
 
-const CommentNewReplyNotice = ({ notice }: { notice: NoticeType }) => {
+const CircleNewDiscussionNotice = ({ notice }: { notice: NoticeType }) => {
   if (!notice.actors) {
     return null
   }
 
   const actorsCount = notice.actors.length
   const isMultiActors = actorsCount > 1
-  const replyCommentArticle =
-    notice.reply?.node.__typename === 'Article' ? notice.reply.node : null
-  const replyCommentCircle =
-    notice.reply?.node.__typename === 'Circle' ? notice.reply.node : null
-  const replyCommentCircleDiscussion =
-    notice.reply?.type === 'circleDiscussion' ? notice.reply.type : null
-  const replyCommentCircleBroadcast =
-    notice.reply?.type === 'circleBroadcast' ? notice.reply.type : null
+  const commentCircle =
+    notice.comment?.node.__typename === 'Circle'
+      ? notice.comment.node
+      : undefined
 
   return (
     <section className="container">
@@ -58,45 +54,26 @@ const CommentNewReplyNotice = ({ notice }: { notice: NoticeType }) => {
               en={`etc. ${numAbbr(actorsCount)} users`}
             />
           )}
-          {replyCommentArticle && (
-            <>
-              <Translate
-                zh_hant="回覆了你在作品 "
-                zh_hans="回复了你在作品 "
-                en=" replied to your comment on "
-              />
-              <NoticeArticleTitle article={replyCommentArticle} />
-              <Translate zh_hant=" 的評論" zh_hans=" 的评论" en="" />
-            </>
-          )}
-          {replyCommentCircle && (
-            <>
-              <Translate zh_hant="在圍爐 " zh_hans="在围炉 " en="" />
-              <NoticeCircleName circle={replyCommentCircle} />
-              {replyCommentCircleDiscussion && (
-                <Translate
-                  zh_hant=" 回覆你的眾聊發言"
-                  zh_hans=" 回复你的众聊发言"
-                  en=""
-                />
-              )}
-              {replyCommentCircleBroadcast && (
-                <Translate zh_hant=" 廣播中留言" zh_hans=" 广播中留言" en="" />
-              )}
-            </>
-          )}
+          <Translate
+            zh_hant="在圍爐 "
+            zh_hans="在围炉 "
+            en={` sent a new ${COMMENT_TYPE_TEXT.en.circleBroadcast} on `}
+          />
+          {commentCircle && <NoticeCircleName circle={commentCircle} />}
+          <Translate
+            zh_hant={` 發布了新${COMMENT_TYPE_TEXT.zh_hant.circleBroadcast}`}
+            zh_hans={` 发布了新${COMMENT_TYPE_TEXT.zh_hans.circleBroadcast}`}
+          />
         </NoticeHead>
 
-        <NoticeComment
-          comment={isMultiActors ? notice.comment : notice.reply}
-        />
-
-        {isMultiActors && (
+        {isMultiActors ? (
           <section className="multi-actor-avatars">
             {notice.actors.map((actor, index) => (
               <NoticeActorAvatar key={index} user={actor} size="md" />
             ))}
           </section>
+        ) : (
+          <NoticeComment comment={notice.comment} />
         )}
 
         <NoticeDate notice={notice} />
@@ -106,10 +83,12 @@ const CommentNewReplyNotice = ({ notice }: { notice: NoticeType }) => {
     </section>
   )
 }
-CommentNewReplyNotice.fragments = {
+
+CircleNewDiscussionNotice.fragments = {
   notice: gql`
-    fragment CommentNewReplyNotice on CommentCommentNotice {
+    fragment CircleNewDiscussionNotice on CommentNotice {
       id
+      commentNoticeType: type
       ...NoticeDate
       actors {
         ...NoticeActorAvatarUser
@@ -117,13 +96,7 @@ CommentNewReplyNotice.fragments = {
       }
       comment: target {
         ...NoticeComment
-      }
-      reply: comment {
-        ...NoticeComment
         node {
-          ... on Article {
-            ...NoticeArticleTitle
-          }
           ... on Circle {
             ...NoticeCircleName
           }
@@ -132,11 +105,10 @@ CommentNewReplyNotice.fragments = {
     }
     ${NoticeActorAvatar.fragments.user}
     ${NoticeActorName.fragments.user}
-    ${NoticeArticleTitle.fragments.article}
     ${NoticeCircleName.fragments.circle}
     ${NoticeComment.fragments.comment}
     ${NoticeDate.fragments.notice}
   `,
 }
 
-export default CommentNewReplyNotice
+export default CircleNewDiscussionNotice
