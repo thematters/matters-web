@@ -8,7 +8,7 @@ export interface CoverProps {
   inEditor?: boolean
 }
 
-export const Cover: React.FC<CoverProps> = ({
+export const Cover: React.FC<React.PropsWithChildren<CoverProps>> = ({
   cover,
   fallbackCover,
   inEditor,

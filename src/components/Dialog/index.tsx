@@ -32,7 +32,9 @@ import Message from './Message'
 export type DialogOverlayProps = import('./Dialog').DialogOverlayProps
 export type DialogProps = import('./Dialog').DialogProps
 
-type DynamicDialogProps = React.ComponentType<DialogProps> & {
+type DynamicDialogProps = React.ComponentType<
+  React.PropsWithChildren<DialogProps>
+> & {
   Header: typeof Header
   Content: typeof Content
   Footer: typeof Footer

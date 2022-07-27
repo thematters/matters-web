@@ -17,11 +17,9 @@ type SignUpButtonProps = {
   isPlain?: boolean
 } & Pick<ButtonProps, 'size'>
 
-export const SignUpButton: React.FC<SignUpButtonProps> = ({
-  children,
-  isPlain,
-  size,
-}) => {
+export const SignUpButton: React.FC<
+  React.PropsWithChildren<SignUpButtonProps>
+> = ({ children, isPlain, size }) => {
   const isSmallUp = useResponsive('sm-up')
 
   const clickProps = isSmallUp

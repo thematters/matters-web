@@ -1,3 +1,5 @@
+import React from 'react'
+
 import {
   Button,
   ButtonProps,
@@ -17,11 +19,9 @@ type UniversalAuthButtonProps = {
   isPlain?: boolean
 } & Pick<ButtonProps, 'size'>
 
-export const UniversalAuthButton: React.FC<UniversalAuthButtonProps> = ({
-  children,
-  isPlain,
-  size,
-}) => {
+export const UniversalAuthButton: React.FC<
+  React.PropsWithChildren<UniversalAuthButtonProps>
+> = ({ children, isPlain, size }) => {
   const isSmallUp = useResponsive('sm-up')
 
   const clickProps = isSmallUp

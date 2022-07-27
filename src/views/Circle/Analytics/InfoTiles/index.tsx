@@ -20,10 +20,9 @@ type InfoTilesTileProps = {
   percentageChange?: number
 }
 
-const InfoTilesGroup: React.FC<InfoTilesGroupProps> = ({
-  primary,
-  children,
-}) => {
+const InfoTilesGroup: React.FC<
+  React.PropsWithChildren<InfoTilesGroupProps>
+> = ({ primary, children }) => {
   const groupClasses = classNames({
     group: true,
     primary: !!primary,
@@ -84,7 +83,7 @@ const InfoTilesTile: React.FC<InfoTilesTileProps> = ({
   )
 }
 
-const InfoTiles: React.FC & {
+const InfoTiles: React.FC<React.PropsWithChildren> & {
   Group: typeof InfoTilesGroup
   Tile: typeof InfoTilesTile
 } = ({ children }) => {

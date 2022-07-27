@@ -8,7 +8,7 @@ interface Props {
   titleAlign?: 'left' | 'center'
 }
 
-export const Box: React.FC<Props> = ({
+export const Box: React.FC<React.PropsWithChildren<Props>> = ({
   avatar,
   title,
   titleAlign = 'center',

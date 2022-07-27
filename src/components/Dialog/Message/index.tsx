@@ -25,7 +25,7 @@ interface DialogMessageProps {
  * ```
  *
  */
-const DialogMessage: React.FC<DialogMessageProps> = ({
+const DialogMessage: React.FC<React.PropsWithChildren<DialogMessageProps>> = ({
   align,
   type,
   spacing = 'base',

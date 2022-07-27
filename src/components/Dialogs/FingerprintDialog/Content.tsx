@@ -61,13 +61,15 @@ const GATEWAYS = gql`
   }
 `
 
-const SectionCard: React.FC<{
-  title: string | React.ReactNode
-  subTitle?: string | React.ReactNode
-  right?: string | React.ReactNode
-  href?: string
-  warning?: boolean
-}> = ({ title, subTitle, right, href, children, warning }) => {
+const SectionCard: React.FC<
+  React.PropsWithChildren<{
+    title: string | React.ReactNode
+    subTitle?: string | React.ReactNode
+    right?: string | React.ReactNode
+    href?: string
+    warning?: boolean
+  }>
+> = ({ title, subTitle, right, href, children, warning }) => {
   const Header = () => (
     <header>
       <div className="title">
