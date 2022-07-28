@@ -23,7 +23,9 @@ type ShareButtonBaseProps = {
 type ShareButtonProps = ShareButtonBaseProps &
   Pick<ButtonProps, 'bgColor' | 'size' | 'spacing'>
 
-export const ShareButton: React.FC<ShareButtonProps> = ({
+export const ShareButton: React.FC<
+  React.PropsWithChildren<ShareButtonProps>
+> = ({
   children,
 
   bgColor,

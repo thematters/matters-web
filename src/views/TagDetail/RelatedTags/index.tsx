@@ -1,17 +1,10 @@
 import classNames from 'classnames'
 import _chunk from 'lodash/chunk'
 import _get from 'lodash/get'
-// import { useContext } from 'react'
-// import Link from 'next/link'
 
 import {
-  // IconArticle16,
-  // IconHashTag16,
-  // IconUser16,
-  // LanguageContext,
   List,
   PageHeader,
-  // TextIcon,
   Slides,
   TagDigest,
   Translate,

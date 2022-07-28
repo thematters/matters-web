@@ -9,7 +9,9 @@ import {
 
 import { translate } from '~/common/utils'
 
-export const CopyButton: React.FC<{ text: string }> = ({ text, children }) => {
+export const CopyButton: React.FC<
+  React.PropsWithChildren<{ text: string }>
+> = ({ text, children }) => {
   const { lang } = useContext(LanguageContext)
 
   return (

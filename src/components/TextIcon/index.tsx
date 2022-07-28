@@ -42,7 +42,7 @@ export interface TextIconProps {
  * ```
  */
 
-export const TextIcon: React.FC<TextIconProps> = ({
+export const TextIcon: React.FC<React.PropsWithChildren<TextIconProps>> = ({
   icon,
 
   color,

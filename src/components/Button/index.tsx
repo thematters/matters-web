@@ -146,142 +146,143 @@ export type ButtonProps = {
  *  </Button>
  * ```
  */
-export const Button: React.FC<ButtonProps> = forwardRef(
-  (
-    {
-      spacing = [0, 0],
-      size = [null, null],
+export const Button: React.FC<React.PropsWithChildren<ButtonProps>> =
+  forwardRef(
+    (
+      {
+        spacing = [0, 0],
+        size = [null, null],
 
-      textColor,
-      textActiveColor,
+        textColor,
+        textActiveColor,
 
-      bgColor,
-      bgActiveColor,
+        bgColor,
+        bgActiveColor,
 
-      borderColor,
-      borderWidth = 'md',
-      borderRadius = '5rem',
+        borderColor,
+        borderWidth = 'md',
+        borderRadius = '5rem',
 
-      href,
-      replace,
+        href,
+        replace,
 
-      is,
+        is,
 
-      htmlHref,
-      htmlTarget,
-      type = 'button',
+        htmlHref,
+        htmlTarget,
+        type = 'button',
 
-      children,
-      ...restProps
-    },
-    ref
-  ) => {
-    const fallbackRef = useRef(null)
-    const buttonRef = (ref || fallbackRef) as React.RefObject<any> | null
+        children,
+        ...restProps
+      },
+      ref
+    ) => {
+      const fallbackRef = useRef(null)
+      const buttonRef = (ref || fallbackRef) as React.RefObject<any> | null
 
-    const isClickable = is !== 'span' && !restProps.disabled
-    const isTransparent = !bgColor && !borderColor
-    const [width, height] = size
-    const [spacingY, spacingX] = spacing
+      const isClickable = is !== 'span' && !restProps.disabled
+      const isTransparent = !bgColor && !borderColor
+      const [width, height] = size
+      const [spacingY, spacingX] = spacing
 
-    // container
-    const containerClasses = classNames({
-      container: true,
-      isTransparent,
-      'centering-x': width && isTransparent,
-      'centering-y': height && isTransparent,
-      [`spacing-y-${spacingY}`]: !!spacingY,
-      [`spacing-x-${spacingX}`]: !!spacingX,
-      [`bg-${bgColor}`]: !!bgColor,
-      [`bg-active-${bgActiveColor}`]: !!bgActiveColor && isClickable,
-      [`border-${borderColor}`]: !!borderColor,
-      [`border-${borderWidth}`]: borderWidth && borderColor,
-      [`text-${textColor}`]: !!textColor,
-      [`text-active-${textActiveColor}`]: !!textActiveColor && isClickable,
-    })
+      // container
+      const containerClasses = classNames({
+        container: true,
+        isTransparent,
+        'centering-x': width && isTransparent,
+        'centering-y': height && isTransparent,
+        [`spacing-y-${spacingY}`]: !!spacingY,
+        [`spacing-x-${spacingX}`]: !!spacingX,
+        [`bg-${bgColor}`]: !!bgColor,
+        [`bg-active-${bgActiveColor}`]: !!bgActiveColor && isClickable,
+        [`border-${borderColor}`]: !!borderColor,
+        [`border-${borderWidth}`]: borderWidth && borderColor,
+        [`text-${textColor}`]: !!textColor,
+        [`text-active-${textActiveColor}`]: !!textActiveColor && isClickable,
+      })
 
-    // handle click
-    const onClick = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
-      if (restProps.onClick) {
-        restProps.onClick(event)
+      // handle click
+      const onClick = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+        if (restProps.onClick) {
+          restProps.onClick(event)
+        }
+
+        // blur on click
+        if (buttonRef?.current) {
+          buttonRef.current.blur()
+        }
       }
 
-      // blur on click
-      if (buttonRef?.current) {
-        buttonRef.current.blur()
+      const containerProps = {
+        ...restProps,
+        onClick,
+        ref: buttonRef as React.RefObject<any>,
+        className: containerClasses,
       }
-    }
 
-    const containerProps = {
-      ...restProps,
-      onClick,
-      ref: buttonRef as React.RefObject<any>,
-      className: containerClasses,
-    }
+      // content
+      const contentStyle = {
+        width: (!isTransparent && width) || undefined,
+        height: (!isTransparent && height) || undefined,
+      }
 
-    // content
-    const contentStyle = {
-      width: (!isTransparent && width) || undefined,
-      height: (!isTransparent && height) || undefined,
-    }
+      // hotarea
+      const hotAreaStyle = {
+        width: width || undefined,
+        height: height || undefined,
+        borderRadius,
+      }
 
-    // hotarea
-    const hotAreaStyle = {
-      width: width || undefined,
-      height: height || undefined,
-      borderRadius,
-    }
+      // span
+      if (is === 'span') {
+        return (
+          <span {...containerProps}>
+            <div className="content" style={contentStyle}>
+              <div className="hotarea" style={hotAreaStyle} />
+              {children}
+            </div>
+            <style jsx>{styles}</style>
+          </span>
+        )
+      }
 
-    // span
-    if (is === 'span') {
-      return (
-        <span {...containerProps}>
-          <div className="content" style={contentStyle}>
-            <div className="hotarea" style={hotAreaStyle} />
-            {children}
-          </div>
-          <style jsx>{styles}</style>
-        </span>
-      )
-    }
-
-    // anchor
-    if (htmlHref) {
-      return (
-        <a href={htmlHref} target={htmlTarget} {...containerProps}>
-          <div className="content" style={contentStyle}>
-            <div className="hotarea" style={hotAreaStyle} />
-            {children}
-          </div>
-          <style jsx>{styles}</style>
-        </a>
-      )
-    }
-
-    // link
-    if (href) {
-      return (
-        <Link href={href} replace={replace}>
-          <a {...containerProps}>
+      // anchor
+      if (htmlHref) {
+        return (
+          <a href={htmlHref} target={htmlTarget} {...containerProps}>
             <div className="content" style={contentStyle}>
               <div className="hotarea" style={hotAreaStyle} />
               {children}
             </div>
             <style jsx>{styles}</style>
           </a>
-        </Link>
+        )
+      }
+
+      // link
+      if (href) {
+        return (
+          <Link href={href} replace={replace}>
+            <a {...containerProps}>
+              <div className="content" style={contentStyle}>
+                <div className="hotarea" style={hotAreaStyle} />
+                {children}
+              </div>
+              <style jsx>{styles}</style>
+            </a>
+          </Link>
+        )
+      }
+
+      // button
+      return (
+        <button {...containerProps} type={type}>
+          <div className="content" style={contentStyle}>
+            <div className="hotarea" style={hotAreaStyle} />
+            {children}
+          </div>
+          <style jsx>{styles}</style>
+        </button>
       )
     }
-
-    // button
-    return (
-      <button {...containerProps} type={type}>
-        <div className="content" style={contentStyle}>
-          <div className="hotarea" style={hotAreaStyle} />
-          {children}
-        </div>
-        <style jsx>{styles}</style>
-      </button>
-    )
-  }
-)
+  )

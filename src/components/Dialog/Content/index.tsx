@@ -12,7 +12,7 @@ interface DialogContentProps {
   hasGrow?: boolean
 }
 
-const DialogContent: React.FC<DialogContentProps> = ({
+const DialogContent: React.FC<React.PropsWithChildren<DialogContentProps>> = ({
   spacing = [0, 0],
   hasFixed,
   hasGrow,

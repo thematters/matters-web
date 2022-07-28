@@ -14,7 +14,7 @@ interface SlideItemProps {
   onClick?: () => any
 }
 
-const SlideItem: React.FC<SlideItemProps> = ({
+const SlideItem: React.FC<React.PropsWithChildren<SlideItemProps>> = ({
   size = 'sm',
   children,
   ...rest
@@ -31,11 +31,9 @@ const SlideItem: React.FC<SlideItemProps> = ({
   )
 }
 
-export const Slides: React.FC<SlidesProps> & { Item: typeof SlideItem } = ({
-  bgColor,
-  header,
-  children,
-}) => {
+export const Slides: React.FC<React.PropsWithChildren<SlidesProps>> & {
+  Item: typeof SlideItem
+} = ({ bgColor, header, children }) => {
   const [scrolling, setScrolling] = useState(false)
   const [settled, setSettled] = useState(true)
 

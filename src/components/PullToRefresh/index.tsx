@@ -25,11 +25,9 @@ interface PullToRefreshProps {
  * ```
  *
  */
-export const PullToRefresh: React.FC<PullToRefreshProps> = ({
-  timeout,
-  refresh,
-  children,
-}) => {
+export const PullToRefresh: React.FC<
+  React.PropsWithChildren<PullToRefreshProps>
+> = ({ timeout, refresh, children }) => {
   usePullToRefresh.Register('[data-ptr]', timeout)
   usePullToRefresh.Handler(() => {
     if (refresh) {

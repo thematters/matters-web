@@ -10,7 +10,10 @@ interface ColProps {
   type?: 'insufficient'
 }
 
-const Row: React.FC<RowProps> = ({ type, children }) => {
+const Row: React.FC<React.PropsWithChildren<RowProps>> = ({
+  type,
+  children,
+}) => {
   const rowClasses = classNames({
     row: true,
     [`${type}`]: !!type,
@@ -24,7 +27,10 @@ const Row: React.FC<RowProps> = ({ type, children }) => {
   )
 }
 
-const Col: React.FC<ColProps> = ({ type, children }) => {
+const Col: React.FC<React.PropsWithChildren<ColProps>> = ({
+  type,
+  children,
+}) => {
   const colClasses = classNames({
     col: true,
     [`${type}`]: !!type,
@@ -38,7 +44,7 @@ const Col: React.FC<ColProps> = ({ type, children }) => {
   )
 }
 
-const ConfirmTable: React.FC & {
+const ConfirmTable: React.FC<React.PropsWithChildren> & {
   Row: typeof Row
   Col: typeof Col
 } = ({ children }) => (

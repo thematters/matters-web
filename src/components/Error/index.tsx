@@ -39,7 +39,7 @@ const NotFound = () => (
   />
 )
 
-export const Error: React.FC<ErrorProps> = ({
+export const Error: React.FC<React.PropsWithChildren<ErrorProps>> = ({
   statusCode,
   children,
   error,
