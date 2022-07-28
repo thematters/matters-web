@@ -51,9 +51,8 @@ export const toSizedImageURL = ({ url, size, ext }: ToSizedImageURLProps) => {
     ? `https://${process.env.NEXT_PUBLIC_ASSET_DOMAIN}`
     : ''
   const isOutsideLink = url.indexOf(assetDomain) < 0
-  const isGIF = /gif/i.test(url)
 
-  if (!assetDomain || isOutsideLink || isGIF) {
+  if (!assetDomain || isOutsideLink) {
     return url
   }
 
