@@ -143,9 +143,9 @@ const BaseFooterActions = ({
   return (
     <footer
       aria-label={translate({
-        zh_hant: `${comment.upvotes} 點讚、${comment.downvotes} 點踩`,
-        zh_hans: `${comment.upvotes} 点赞、${comment.downvotes} 点踩`,
-        en: `${comment.upvotes} upvotes, ${comment.downvotes} downvotes`,
+        zh_hant: `${comment.upvotes} 點讚`,
+        zh_hans: `${comment.upvotes} 点赞`,
+        en: `${comment.upvotes} upvotes`,
         lang,
       })}
     >
