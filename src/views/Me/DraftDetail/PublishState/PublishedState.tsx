@@ -21,14 +21,13 @@ const BasePublishedState = ({
 
 const PublishedState = ({ draft }: { draft: PublishStateDraft }) => {
   const router = useRouter()
-
   if (!draft.article) {
     return null
   }
 
   const path = toPath({
     page: 'articleDetail',
-    article: draft.article,
+    article: { ...draft.article, type: draft.__typename },
   })
 
   return (

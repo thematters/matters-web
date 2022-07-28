@@ -15,6 +15,7 @@ interface ArticleArgs {
   author: {
     userName: string | null
   }
+  type?: string
 }
 
 interface CircleArgs {
@@ -30,42 +31,42 @@ interface CommentArgs {
 
 type ToPathArgs =
   | ({
-      page: 'articleDetail'
-      article: ArticleArgs
-      fragment?: string
-      // [UtmParam]?: string
-    } & UtmParams)
+    page: 'articleDetail'
+    article: ArticleArgs
+    fragment?: string
+    // [UtmParam]?: string
+  } & UtmParams)
   | {
-      page:
-        | 'circleDetail'
-        | 'circleDiscussion'
-        | 'circleBroadcast'
-        | 'circleSettings'
-        | 'circleAnalytics'
-        | 'circleEditProfile'
-        | 'circleManageInvitation'
-      circle: CircleArgs
-    }
+    page:
+    | 'circleDetail'
+    | 'circleDiscussion'
+    | 'circleBroadcast'
+    | 'circleSettings'
+    | 'circleAnalytics'
+    | 'circleEditProfile'
+    | 'circleManageInvitation'
+    circle: CircleArgs
+  }
   | {
-      page: 'commentDetail'
-      comment: CommentArgs
-      article: ArticleArgs
-    }
+    page: 'commentDetail'
+    comment: CommentArgs
+    article: ArticleArgs
+  }
   | { page: 'draftDetail'; id: string; slug: string }
   | {
-      page: 'tagDetail'
-      id: string
-    }
+    page: 'tagDetail'
+    id: string
+  }
   | {
-      page: 'userProfile' | 'userSubscriptons' | 'userComments' | 'userTags'
+    page: 'userProfile' | 'userSubscriptons' | 'userComments' | 'userTags'
 
-      userName: string
-    }
+    userName: string
+  }
   | {
-      page: 'search'
-      q?: string
-      type?: 'article' | 'tag' | 'user'
-    }
+    page: 'search'
+    q?: string
+    type?: 'article' | 'tag' | 'user'
+  }
 
 /**
  * Get `href` and `as` for `<Link>` with `args`
@@ -88,13 +89,14 @@ export const toPath = (
         slug,
         mediaHash,
         author: { userName },
+        type
       } = args.article
 
       let pathname = `/@${userName}/${slug}-${mediaHash}`
       try {
-        if (id) {
+        if (id && type !== 'Draft') {
           const { id: articleId } = fromGlobalId(id as string)
-          pathname = `/@${userName}/${articleId}-${slug}-${mediaHash}`
+          pathname = `/@${userName}/${articleId ? articleId + '-' : ''}${slug}-${mediaHash}`
         }
       } catch (err) {
         console.error(`unable to parse global id:`, { id }, err)
