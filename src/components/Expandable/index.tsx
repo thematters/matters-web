@@ -10,7 +10,7 @@ interface ExpandableProps {
   buffer?: number
 }
 
-export const Expandable: React.FC<ExpandableProps> = ({
+export const Expandable: React.FC<React.PropsWithChildren<ExpandableProps>> = ({
   children,
   limit = 3,
   buffer = 0,

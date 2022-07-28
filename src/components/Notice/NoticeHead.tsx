@@ -4,7 +4,10 @@ type NoticeHeadProps = {
   subtitle?: React.ReactNode
 }
 
-const NoticeHead: React.FC<NoticeHeadProps> = ({ subtitle, children }) => {
+const NoticeHead: React.FC<React.PropsWithChildren<NoticeHeadProps>> = ({
+  subtitle,
+  children,
+}) => {
   return (
     <section className="head-wrap">
       <h4>{children}</h4>

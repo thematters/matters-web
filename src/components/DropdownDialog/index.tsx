@@ -91,7 +91,9 @@ const BaseDropdownDialog = ({
     event.stopPropagation()
   }
 
-  const Content: React.FC = ({ children: contentChildren }) => {
+  const Content: React.FC<React.PropsWithChildren> = ({
+    children: contentChildren,
+  }) => {
     return (
       <section
         onKeyDown={(event) => {

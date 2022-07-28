@@ -17,7 +17,9 @@ type ViewMoreCardProps = {
   textAlign?: 'center' | 'left'
 } & CardProps
 
-export const ViewMoreCard: React.FC<ViewMoreCardProps> = ({
+export const ViewMoreCard: React.FC<
+  React.PropsWithChildren<ViewMoreCardProps>
+> = ({
   iconProps,
   textIconProps,
   textAlign = 'left',

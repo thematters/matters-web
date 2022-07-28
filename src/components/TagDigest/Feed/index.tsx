@@ -11,7 +11,7 @@ import {
   TextIcon,
 } from '~/components'
 
-import { numAbbr, toPath } from '~/common/utils'
+import { captureClicks, numAbbr, toPath } from '~/common/utils'
 
 import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
 
@@ -25,13 +25,10 @@ export type TagDigestFeedProps = {
 
 const fragments = {
   tag: gql`
-    fragment TagDigestFeedTag on TagSearchResult {
+    fragment TagDigestFeedTag on Tag {
       id
-      tag {
-        id
-        content
-        cover
-      }
+      content
+      cover
       numArticles
       numAuthors
       articles(input: { first: 3 }) {
@@ -42,6 +39,10 @@ const fragments = {
             title
             slug
             mediaHash
+            author {
+              id
+              userName
+            }
           }
         }
       }
@@ -76,23 +77,27 @@ const Feed = ({ tag, ...cardProps }: TagDigestFeedProps) => {
           />
 
           <section className="nums">
-            <TextIcon
-              icon={<IconUser16 color="grey-dark" />}
-              size="xs"
-              spacing="xxtight"
-              color="grey-dark"
-            >
-              {numAbbr(tag.numAuthors)}
-            </TextIcon>
+            {tag.numAuthors && (
+              <TextIcon
+                icon={<IconUser16 color="grey-dark" />}
+                size="xs"
+                spacing="xxtight"
+                color="grey-dark"
+              >
+                {numAbbr(tag.numAuthors)}
+              </TextIcon>
+            )}
 
-            <TextIcon
-              icon={<IconArticle16 color="grey-dark" />}
-              size="xs"
-              spacing="xxtight"
-              color="grey-dark"
-            >
-              {numAbbr(tag.numArticles)}
-            </TextIcon>
+            {tag.numArticles && (
+              <TextIcon
+                icon={<IconArticle16 color="grey-dark" />}
+                size="xs"
+                spacing="xxtight"
+                color="grey-dark"
+              >
+                {numAbbr(tag.numArticles)}
+              </TextIcon>
+            )}
           </section>
         </header>
 
@@ -100,7 +105,11 @@ const Feed = ({ tag, ...cardProps }: TagDigestFeedProps) => {
           <ul className="articles">
             {articles?.map(({ node, cursor }) => (
               <li key={cursor}>
-                <span className="title">{node.title}</span>
+                <Link {...toPath({ page: 'articleDetail', article: node })}>
+                  <a className="title" onClick={captureClicks}>
+                    {node.title}
+                  </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -109,7 +118,7 @@ const Feed = ({ tag, ...cardProps }: TagDigestFeedProps) => {
             <Link {...path}>
               <a>
                 <ResponsiveImage
-                  url={tag.tag.cover || IMAGE_TAG_COVER.src}
+                  url={tag.cover || IMAGE_TAG_COVER.src}
                   size="360w"
                 />
               </a>

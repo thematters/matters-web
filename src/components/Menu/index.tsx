@@ -10,7 +10,7 @@ interface MenuProps {
   spacingY?: 'xtight' | 0
 }
 
-export const Menu: React.FC<MenuProps> & {
+export const Menu: React.FC<React.PropsWithChildren<MenuProps>> & {
   Item: typeof Item
   Divider: typeof Divider
   Header: typeof Header

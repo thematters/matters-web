@@ -45,7 +45,7 @@ interface Props {
   pullToRefresh?: () => any
 }
 
-export const InfiniteScroll: React.FC<Props> = ({
+export const InfiniteScroll: React.FC<React.PropsWithChildren<Props>> = ({
   hasNextPage,
   loader = <Spinner />,
   loadMore,
