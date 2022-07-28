@@ -34,6 +34,7 @@ const fragments = {
       fragment UpvoteCommentPublic on Comment {
         id
         upvotes
+        downvotes
       }
     `,
     private: gql`
@@ -59,7 +60,7 @@ const UpvoteButton = ({
       unvoteComment: {
         id: comment.id,
         upvotes: comment.upvotes - 1,
-        downvotes: 0,
+        downvotes: comment.downvotes,
         myVote: null,
         __typename: 'Comment',
       },
@@ -71,7 +72,8 @@ const UpvoteButton = ({
       voteComment: {
         id: comment.id,
         upvotes: comment.upvotes + 1,
-        downvotes: 0,
+        downvotes:
+          comment.myVote === 'down' ? comment.downvotes - 1 : comment.downvotes,
         myVote: 'up' as any,
         __typename: 'Comment',
       },
