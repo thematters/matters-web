@@ -96,9 +96,7 @@ export const toPath = (
       try {
         if (id && type !== 'Draft') {
           const { id: articleId } = fromGlobalId(id as string)
-          pathname = `/@${userName}/${
-            articleId ? articleId + '-' : ''
-          }${slug}-${mediaHash}`
+          pathname = `/@${userName}/${articleId}-${slug}-${mediaHash}`
         }
       } catch (err) {
         console.error(`unable to parse global id:`, { id }, err)
