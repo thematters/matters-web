@@ -1,9 +1,11 @@
+import React from 'react'
+
 import Button from './Button'
 import styles from './styles.css'
 
-const Footer: React.FC<React.PropsWithChildren> & { Button: typeof Button } = ({
-  children,
-}) => (
+const Footer: React.FC<React.PropsWithChildren<React.ReactNode>> & {
+  Button: typeof Button
+} = ({ children }) => (
   <footer>
     {children}
 

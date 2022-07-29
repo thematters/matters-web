@@ -1,6 +1,8 @@
 import styles from './styles.css'
 
-const Spacing: React.FC<React.PropsWithChildren> = ({ children }) => (
+const Spacing: React.FC<React.PropsWithChildren<React.ReactNode>> = ({
+  children,
+}) => (
   <section>
     {children}
 
