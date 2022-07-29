@@ -44,10 +44,12 @@ const fragments = {
         ...CreatedAtComment
         ...ReplyComemnt
         ...UpvoteCommentPublic
+        ...DownvoteCommentPublic
       }
       ${CreatedAt.fragments.comment}
       ${ReplyButton.fragments.comment}
       ${UpvoteButton.fragments.comment.public}
+      ${DownvoteButton.fragments.comment.public}
     `,
     private: gql`
       fragment FooterActionsCommentPrivate on Comment {
@@ -69,6 +71,7 @@ const fragments = {
           }
         }
         ...UpvoteCommentPrivate
+        ...DownvoteCommentPrivate
         ...CreatedAtComment
       }
       ${CreatedAt.fragments.comment}
