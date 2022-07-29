@@ -7,7 +7,9 @@ import styles from './styles.css'
  * width same as the middle column, used by <BottomBar>, <NavBar> and <Toast>.
  *
  */
-const FixedMain: React.FC<React.PropsWithChildren> = ({ children }) => {
+const FixedMain: React.FC<React.PropsWithChildren<React.ReactNode>> = ({
+  children,
+}) => {
   const { isInPath } = useRoute()
   const isSingleColumnPage = isInPath('MIGRATION') || isInPath('ABOUT')
 

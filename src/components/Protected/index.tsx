@@ -4,7 +4,9 @@ import { Layout, Spinner, ViewerContext } from '~/components'
 
 import { redirectToLogin } from '~/common/utils'
 
-export const Protected: React.FC<React.PropsWithChildren> = ({ children }) => {
+export const Protected: React.FC<React.PropsWithChildren<React.ReactNode>> = ({
+  children,
+}) => {
   const viewer = useContext(ViewerContext)
 
   useEffect(() => {

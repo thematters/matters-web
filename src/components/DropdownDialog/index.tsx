@@ -91,7 +91,7 @@ const BaseDropdownDialog = ({
     event.stopPropagation()
   }
 
-  const Content: React.FC<React.PropsWithChildren> = ({
+  const Content: React.FC<React.PropsWithChildren<React.ReactNode>> = ({
     children: contentChildren,
   }) => {
     return (
