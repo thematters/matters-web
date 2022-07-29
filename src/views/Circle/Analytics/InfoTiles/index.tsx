@@ -83,7 +83,7 @@ const InfoTilesTile: React.FC<InfoTilesTileProps> = ({
   )
 }
 
-const InfoTiles: React.FC<React.PropsWithChildren> & {
+const InfoTiles: React.FC<React.PropsWithChildren<React.ReactNode>> & {
   Group: typeof InfoTilesGroup
   Tile: typeof InfoTilesTile
 } = ({ children }) => {

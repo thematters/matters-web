@@ -20,7 +20,7 @@ import styles from './styles.css'
 
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 
-export const Layout: React.FC<React.PropsWithChildren> & {
+export const Layout: React.FC<React.PropsWithChildren<React.ReactNode>> & {
   Main: typeof Main
   Header: typeof Header
   Spacing: typeof Spacing

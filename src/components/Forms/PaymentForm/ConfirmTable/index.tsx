@@ -44,7 +44,7 @@ const Col: React.FC<React.PropsWithChildren<ColProps>> = ({
   )
 }
 
-const ConfirmTable: React.FC<React.PropsWithChildren> & {
+const ConfirmTable: React.FC<React.PropsWithChildren<React.ReactNode>> & {
   Row: typeof Row
   Col: typeof Col
 } = ({ children }) => (
