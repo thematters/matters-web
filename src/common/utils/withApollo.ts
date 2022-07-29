@@ -121,6 +121,7 @@ const authLink = setContext((operation, { headers, ...restCtx }) => {
     }
   }
   return {
+    url: isPublicOperation ? process.env.NEXT_PUBLIC_API_URL : process.env.NEXT_PUBLIC_PRIVATE_API_URL,
     credentials: isPublicOperation ? 'omit' : 'include',
     headers: {
       ...headers,
