@@ -49,8 +49,8 @@ export const toDigestTagPlaceholder = (content: string) =>
       __typename: 'ArticleConnection',
       totalCount: 0,
     },
-    numArticles: null,
-    numAuthors: null,
+    numArticles: 0,
+    numAuthors: 0,
   } as DigestTag)
 
 export const Tag = ({
