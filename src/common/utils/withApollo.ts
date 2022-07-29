@@ -47,12 +47,18 @@ const persistedQueryLink = createPersistedQueryLink({
 /**
  * Dynamic API endpoint based on hostname
  */
-const httpLink = ({ host, headers }: { host: string; headers: any }) => {
+const httpLink = ({ host, headers, ...restCtx }: { host: string; headers: any, restCtx: any }) => {
   const isOAuthSite = process.env.NEXT_PUBLIC_OAUTH_SITE_DOMAIN === host
+  
+  // determine where we should send queries
+  const isPublicOperation = restCtx[GQL_CONTEXT_PUBLIC_QUERY_KEY]
+  const defaultApiUrl = isPublicOperation
+    ? process.env.NEXT_PUBLIC_API_URL
+    : process.env.NEXT_PUBLIC_PRIVATE_API_URL
 
   const apiUrl = isOAuthSite
     ? process.env.NEXT_PUBLIC_OAUTH_API_URL
-    : process.env.NEXT_PUBLIC_API_URL
+    : defaultApiUrl
 
   // toggle http for local dev
   const agent =
@@ -121,7 +127,6 @@ const authLink = setContext((operation, { headers, ...restCtx }) => {
     }
   }
   return {
-    url: isPublicOperation ? process.env.NEXT_PUBLIC_API_URL : process.env.NEXT_PUBLIC_PRIVATE_API_URL,
     credentials: isPublicOperation ? 'omit' : 'include',
     headers: {
       ...headers,
