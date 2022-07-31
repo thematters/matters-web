@@ -1,7 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-// import _random from 'lodash/random'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect } from 'react'
 
 import {
   Card,
@@ -55,15 +54,12 @@ const Tags = () => {
   )
   const lastRandom = lastFetchRandom?.lastFetchRandom.sidebarTags // last Random
   const randomMaxSize = 50
-  const [initialRandNumber] = useState<number>(
-    Math.floor(randomMaxSize * Math.random() * Math.random()) // default random [0..50) with leaning toward left
-  )
 
   const { data, loading, error, refetch } = usePublicQuery<SidebarTagsPublic>(
     SIDEBAR_TAGS,
     {
       notifyOnNetworkStatusChange: true,
-      variables: { random: lastRandom || initialRandNumber },
+      variables: { random: lastRandom || 0 },
     },
     { publicQuery: !viewer.isAuthed }
   )
