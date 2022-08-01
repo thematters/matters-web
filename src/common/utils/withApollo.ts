@@ -54,17 +54,22 @@ const httpLink = ({ host, headers }: { host: string; headers: any }) => {
     ? process.env.NEXT_PUBLIC_OAUTH_API_URL
     : process.env.NEXT_PUBLIC_API_URL
 
+  const hostname = new URL(apiUrl as string).hostname
+
   // toggle http for local dev
   const agent =
     (apiUrl || '').split(':')[0] === 'http'
       ? new http.Agent()
       : new https.Agent({
-          rejectUnauthorized: isProd, // allow access to https:...matters.news in localhost
+          rejectUnauthorized: false, // allow access to https:...matters.news in localhost
         })
 
   return createUploadLink({
     uri: apiUrl,
-    headers,
+    headers: {
+      ...headers,
+      host: hostname,
+    },
     fetchOptions: {
       agent,
     },
@@ -86,6 +91,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
       )
     )
   }
+
   if (networkError) {
     console.log(`[Network error]: ${networkError}`)
   }
