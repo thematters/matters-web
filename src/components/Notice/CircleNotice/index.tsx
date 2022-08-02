@@ -17,27 +17,73 @@ const CircleNotice = ({ notice }: { notice: NoticeType }) => {
     case 'CircleInvitation':
       return <CircleInvitationNotice notice={notice} />
     case 'CircleNewDiscussion':
-      return <CircleCommentNotice notice={notice} noticeType="circleNewDiscussion" />
+      return (
+        <CircleCommentNotice notice={notice} noticeType="circleNewDiscussion" />
+      )
     case 'CircleNewBroadcast':
-      return <CircleCommentNotice notice={notice} noticeType="circleNewBroadcast" />
+      return (
+        <CircleCommentNotice notice={notice} noticeType="circleNewBroadcast" />
+      )
     case 'CircleMemberBroadcast':
-      return <CircleCommentNotice notice={notice} noticeType="circleMemberBroadcast" />
+      return (
+        <CircleCommentNotice
+          notice={notice}
+          noticeType="circleMemberBroadcast"
+        />
+      )
     case 'CircleMemberNewDiscussion':
-      return <CircleCommentNotice notice={notice} noticeType="circleMemberNewDiscussion" />
+      return (
+        <CircleCommentNotice
+          notice={notice}
+          noticeType="circleMemberNewDiscussion"
+        />
+      )
     case 'CircleMemberNewDiscussionReply':
-      return <CircleCommentNotice notice={notice} noticeType="circleMemberNewDiscussionReply" />
+      return (
+        <CircleCommentNotice
+          notice={notice}
+          noticeType="circleMemberNewDiscussionReply"
+        />
+      )
     case 'CircleMemberNewBroadcastReply':
-      return <CircleCommentNotice notice={notice} noticeType="circleMemberNewBroadcastReply" />
+      return (
+        <CircleCommentNotice
+          notice={notice}
+          noticeType="circleMemberNewBroadcastReply"
+        />
+      )
     case 'InCircleNewArticle':
-      return <CircleCommentNotice notice={notice} noticeType="inCircleNewArticle" />
+      return (
+        <CircleCommentNotice notice={notice} noticeType="inCircleNewArticle" />
+      )
     case 'InCircleNewBroadcast':
-      return <CircleCommentNotice notice={notice} noticeType="inCircleNewBroadcast" />
+      return (
+        <CircleCommentNotice
+          notice={notice}
+          noticeType="inCircleNewBroadcast"
+        />
+      )
     case 'InCircleNewBroadcastReply':
-      return <CircleCommentNotice notice={notice} noticeType="inCircleNewBroadcastReply" />
+      return (
+        <CircleCommentNotice
+          notice={notice}
+          noticeType="inCircleNewBroadcastReply"
+        />
+      )
     case 'InCircleNewDiscussion':
-      return <CircleCommentNotice notice={notice} noticeType="inCircleNewDiscussion" />
+      return (
+        <CircleCommentNotice
+          notice={notice}
+          noticeType="inCircleNewDiscussion"
+        />
+      )
     case 'InCircleNewDiscussionReply':
-      return <CircleCommentNotice notice={notice} noticeType="inCircleNewDiscussionReply" />
+      return (
+        <CircleCommentNotice
+          notice={notice}
+          noticeType="inCircleNewDiscussionReply"
+        />
+      )
     default:
       return null
   }

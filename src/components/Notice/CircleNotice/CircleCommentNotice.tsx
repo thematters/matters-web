@@ -19,20 +19,23 @@ import { CircleCommentNotice as NoticeType } from './__generated__/CircleComment
 type CircleCommentNoticeType = {
   notice: NoticeType
   noticeType:
-  'circleNewDiscussion' |
-  'circleNewBroadcast' |
-  'circleMemberBroadcast' |
-  'circleMemberNewDiscussion' |
-  'circleMemberNewDiscussionReply' |
-  'circleMemberNewBroadcastReply' |
-  'inCircleNewArticle' |
-  'inCircleNewBroadcast' |
-  'inCircleNewBroadcastReply' |
-  'inCircleNewDiscussion' |
-  'inCircleNewDiscussionReply'
+    | 'circleNewDiscussion'
+    | 'circleNewBroadcast'
+    | 'circleMemberBroadcast'
+    | 'circleMemberNewDiscussion'
+    | 'circleMemberNewDiscussionReply'
+    | 'circleMemberNewBroadcastReply'
+    | 'inCircleNewArticle'
+    | 'inCircleNewBroadcast'
+    | 'inCircleNewBroadcastReply'
+    | 'inCircleNewDiscussion'
+    | 'inCircleNewDiscussionReply'
 }
 
-const CircleCommentNotice = ({ notice, noticeType }: CircleCommentNoticeType) => {
+const CircleCommentNotice = ({
+  notice,
+  noticeType,
+}: CircleCommentNoticeType) => {
   if (!notice.actors) {
     return null
   }
@@ -75,7 +78,6 @@ const CircleCommentNotice = ({ notice, noticeType }: CircleCommentNoticeType) =>
               en={`etc. ${numAbbr(actorsCount)} users`}
             />
           )}
-
           <>
             <Translate zh_hant="在圍爐 " zh_hans="在围炉 " en="" />
             <NoticeCircleName circle={notice.circle} />
@@ -87,21 +89,12 @@ const CircleCommentNotice = ({ notice, noticeType }: CircleCommentNoticeType) =>
               />
             )}
             {discussionReply && (
-              <Translate
-                zh_hant=" 回覆了眾聊"
-                zh_hans=" 回复了众聊"
-                en=""
-              />
+              <Translate zh_hant=" 回覆了眾聊" zh_hans=" 回复了众聊" en="" />
             )}
             {broadcastReply && (
-              <Translate
-                zh_hant=" 廣播中留言"
-                zh_hans=" 广播中留言"
-                en=""
-              />
+              <Translate zh_hant=" 廣播中留言" zh_hans=" 广播中留言" en="" />
             )}
           </>
-
           <NoticeDate notice={notice} />
         </NoticeHead>
       </section>
