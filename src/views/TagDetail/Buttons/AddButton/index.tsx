@@ -23,10 +23,11 @@ import AddMyArticlesButton from './AddMyArticlesButton'
 import CreateDraftMenuItem from './CreateDraftMenuItem'
 
 import { AddArticlesTags } from '~/components/GQL/mutations/__generated__/AddArticlesTags'
-import { TagDetailPublic_node_Tag } from '../../__generated__/TagDetailPublic'
+// import { TagDetailPublic_node_Tag } from '../../__generated__/TagDetailPublic'
+import { TagFragment } from '../../__generated__/TagFragment'
 
 interface DropdownActionsProps {
-  tag: TagDetailPublic_node_Tag
+  tag: TagFragment // TagDetailPublic_node_Tag
 }
 
 interface DialogProps {

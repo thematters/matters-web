@@ -14,9 +14,10 @@ import { ADD_TOAST } from '~/common/enums'
 
 import styles from './styles.css'
 
-import { TagDetailPublic_node_Tag } from '../__generated__/TagDetailPublic'
+// import { TagDetailPublic_node_Tag } from '../__generated__/TagDetailPublic'
+import { TagFragment } from '../__generated__/TagFragment'
 
-const Owner = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
+const Owner = ({ tag }: { tag: TagFragment }) => {
   const viewer = useContext(ViewerContext)
 
   const forbid = () => {
@@ -52,7 +53,7 @@ const Owner = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
           </TextIcon>
         </section>
         <section className="right">
-          <TagAdoptionDialog>
+          <TagAdoptionDialog id={tag.id}>
             {({ openDialog }) => (
               <Button
                 spacing={['xtight', 'tight']}

@@ -18,13 +18,12 @@ import { TagMaintainers } from '~/components/GQL/queries/__generated__/TagMainta
 
 interface Props {
   id: string
-
-  isOwner: boolean
+  isOwner?: boolean
 }
 
-const ManageButton = () => {
+const ManageButton = ({ id }: Props) => {
   return (
-    <TagEditorDialog>
+    <TagEditorDialog id={id}>
       {({ openDialog }) => (
         <Button
           spacing={['xtight', 'xtight']}
@@ -76,7 +75,7 @@ const Maintainers = ({ id, isOwner }: Props) => {
             </section>
             {isOwner && (
               <section>
-                <ManageButton />
+                <ManageButton id={id} />
               </section>
             )}
           </section>
