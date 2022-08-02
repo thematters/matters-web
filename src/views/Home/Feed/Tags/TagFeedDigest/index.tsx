@@ -45,6 +45,7 @@ const TagFeedDigest = ({ tag, ...cardProps }: TagFeedDigestProps) => {
   const path = toPath({
     page: 'tagDetail',
     id: tag.id,
+    content: tag.content,
   })
   const maskClasses = classNames({ mask: !!tag.cover })
 

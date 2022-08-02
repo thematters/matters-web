@@ -110,6 +110,7 @@ const Tags = () => {
                 {...toPath({
                   page: 'tagDetail',
                   id: node.id,
+                  content: node.content,
                 })}
                 spacing={['xtight', 'xtight']}
                 bgColor="none"

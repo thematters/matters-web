@@ -40,7 +40,7 @@ const Sidebar = ({ tag, ...cardProps }: TagDigestSidebarProps) => {
   const path = toPath({
     page: 'tagDetail',
     id: tag.id,
-    // content: tag.content,
+    content: tag.content,
   })
 
   return (

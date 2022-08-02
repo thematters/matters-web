@@ -144,3 +144,14 @@ export const stripNonEnglishUrl = (url: string) =>
   url.match(/^[\x21-\x7e]+[A-Za-z0-9]/)?.[0] ||
   // fallback to full url
   url
+
+const anyNonAlphaNum = new RegExp(nonAlphaNumUni, 'gu')
+
+// to simulate slugify at DB server side
+// https://github.com/thematters/matters-metabase/blob/master/sql/stale-tags-create-table-view.sql#L2-L13
+// might be able to use under more scenarios
+export const tagSlugify = (content: string) =>
+  `${content}`
+    // .toLowerCase()
+    .replace(anyNonAlphaNum, '-') // replace all non alpha-number to `-`, including spaces and punctuations
+    .replace(/(^-+|-+$)/g, '') // strip leading or trailing `-` if there's any

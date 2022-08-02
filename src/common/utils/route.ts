@@ -6,6 +6,7 @@ import { PATHS, ROUTES } from '~/common/enums'
 
 import { UtmParams } from './analytics'
 import { fromGlobalId } from './globalId'
+import { tagSlugify } from './text'
 import { parseURL } from './url'
 
 interface ArticleArgs {
@@ -55,6 +56,8 @@ type ToPathArgs =
   | {
       page: 'tagDetail'
       id: string
+      content: string
+      fragment?: string
     }
   | {
       page: 'userProfile' | 'userSubscriptons' | 'userComments' | 'userTags'
@@ -174,8 +177,12 @@ export const toPath = (
       }
     }
     case 'tagDetail': {
+      const { id: numberId } = fromGlobalId(args.id as string)
+      const pathname = `/tags/${numberId}-${tagSlugify(args.content)}`
+      const hash = args.fragment ? `#${args.fragment}` : ''
       return {
-        href: `/tags/${args.id}`,
+        href: `${pathname}${hash}`,
+        pathname,
       }
     }
     case 'userProfile': {

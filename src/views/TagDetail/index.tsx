@@ -1,5 +1,5 @@
-import _find from 'lodash/find'
-import _some from 'lodash/some'
+// import _find from 'lodash/find'
+// import _some from 'lodash/some'
 import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
 
@@ -24,7 +24,13 @@ import { getErrorCodes, QueryError } from '~/components/GQL'
 import ShareButton from '~/components/Layout/Header/ShareButton'
 
 import { ERROR_CODES } from '~/common/enums'
-import { makeTitle, stripPunctPrefixSuffix } from '~/common/utils'
+import {
+  fromGlobalId,
+  makeTitle,
+  stripPunctPrefixSuffix,
+  toGlobalId,
+  toPath,
+} from '~/common/utils'
 
 import IMAGE_INTRO from '@/public/static/images/intro.jpg'
 
@@ -34,24 +40,32 @@ import { TagDetailButtons } from './Buttons'
 import TagCover from './Cover'
 import DropdownActions from './DropdownActions'
 import Followers from './Followers'
-import { TAG_DETAIL_PRIVATE, TAG_DETAIL_PUBLIC } from './gql'
+import {
+  TAG_DETAIL_BY_SEARCH,
+  TAG_DETAIL_PRIVATE,
+  TAG_DETAIL_PUBLIC,
+} from './gql'
 import Owner from './Owner'
 import RelatedTags from './RelatedTags'
 import styles from './styles.css'
 
 import {
   TagDetailPublic,
-  TagDetailPublic_node_Tag,
+  // TagDetailPublic_node_Tag,
 } from './__generated__/TagDetailPublic'
+import { TagDetailPublicBySearch } from './__generated__/TagDetailPublicBySearch'
+import { TagFragment } from './__generated__/TagFragment'
 
 const DynamicCommunity = dynamic(() => import('./Community'), {
   ssr: false,
   loading: Spinner,
 })
 
-type TagFeedType = 'latest' | 'selected' | 'community'
+const validTagFeedTypes = ['latest', 'selected', 'community'] as const
+type TagFeedType = typeof validTagFeedTypes[number]
 
-const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
+const TagDetail = ({ tag }: { tag: TagFragment }) => {
+  const { router } = useRoute()
   const viewer = useContext(ViewerContext)
   const features = useFeatures()
 
@@ -60,19 +74,58 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
   const [feed, setFeed] = useState<TagFeedType>(
     hasSelectedFeed ? 'selected' : 'latest'
   )
+
   const isSelected = feed === 'selected'
   const isLatest = feed === 'latest'
   const isCommunity = feed === 'community'
 
+  const [tab, setTab] = useState<TagFeedType | undefined>(undefined)
+  const changeTab = (newTab: TagFeedType) => {
+    setFeed(newTab)
+    setTab(newTab)
+  }
+
   useEffect(() => {
     if (!hasSelectedFeed && isSelected) {
-      setFeed('latest')
+      changeTab('latest')
     }
   })
 
+  useEffect(() => {
+    if (process.browser) {
+      const ftype = window.location.hash.split('#')?.[1] as TagFeedType // router.asPath.split('#')?.[1]
+      // console.log('in browser call:', { hash: window.location.hash, ftype })
+      if (validTagFeedTypes.includes(ftype)) {
+        changeTab(ftype) // override if provided
+      }
+    }
+  }, [])
+
+  useEffect(() => {
+    if (process.browser) {
+      const newPath = toPath({
+        page: 'tagDetail',
+        id: tag.id, // toGlobalId(tagId),
+        content: tag.content,
+        fragment: tab,
+      })
+
+      // console.log('in browser call:', { hash: window.location.hash, newPath, asPath: router.asPath })
+
+      if (newPath.href !== router.asPath) {
+        // console.log('replace url:', { from: router.asPath, to: newPath.href })
+        router.replace(
+          newPath.href, // + `#${feed}`,
+          undefined,
+          { shallow: true }
+        )
+      }
+    }
+  }, [tab])
+
   // define permission
   const isOwner = tag?.owner?.id === viewer.id
-  const isEditor = _some(tag?.editors || [], ['id', viewer.id])
+  const isEditor = (tag?.editors || []).some((t) => t.id === viewer.id)
   const isMatty = viewer.info.email === 'hi@matters.news'
   const isMaintainer = isOwner || isEditor || isMatty
   const isOfficial = !!tag?.isOfficial
@@ -156,16 +209,22 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
 
         <Tabs sticky>
           {hasSelectedFeed && (
-            <Tabs.Tab selected={isSelected} onClick={() => setFeed('selected')}>
+            <Tabs.Tab
+              selected={isSelected}
+              onClick={() => changeTab('selected')}
+            >
               <Translate id="featured" />
             </Tabs.Tab>
           )}
 
-          <Tabs.Tab selected={isLatest} onClick={() => setFeed('latest')}>
+          <Tabs.Tab selected={isLatest} onClick={() => changeTab('latest')}>
             <Translate id="latest" />
           </Tabs.Tab>
 
-          <Tabs.Tab selected={isCommunity} onClick={() => setFeed('community')}>
+          <Tabs.Tab
+            selected={isCommunity}
+            onClick={() => changeTab('community')}
+          >
             <Translate zh_hant="社群" zh_hans="社群" en="Community" />
           </Tabs.Tab>
         </Tabs>
@@ -183,44 +242,81 @@ const TagDetail = ({ tag }: { tag: TagDetailPublic_node_Tag }) => {
 const TagDetailContainer = () => {
   const viewer = useContext(ViewerContext)
   const { getQuery } = useRoute()
-  const tagId = getQuery('tagId')
+
+  const param = getQuery('tagId')
+  // const ma = parm?.match(/^(\d+)/)
+  // const isRawGlobalId: boolean = !ma
+  let isRawGlobalId = false
+  try {
+    const { type, id } = fromGlobalId(param)
+    if (type === 'Tag' && id?.match(/^\d+$/)) {
+      isRawGlobalId = true
+    }
+  } catch (err) {
+    // ignore
+  }
+  const numberId = param?.match(/^(\d+)/)?.[1]
+  const searchKey = !(isRawGlobalId || numberId) ? param : ''
+  const tagId = isRawGlobalId
+    ? param
+    : numberId
+    ? toGlobalId({ type: 'Tag', id: numberId })
+    : '' // undefined
 
   /**
    * Data Fetching
    */
   // public data
   const {
-    data,
+    data: dataByTagId,
     loading,
     error,
     refetch: refetchPublic,
     client,
   } = usePublicQuery<TagDetailPublic>(TAG_DETAIL_PUBLIC, {
     variables: { id: tagId },
+    skip: !!searchKey, // !(isRawGlobalId || numberId),
+  })
+
+  const data2 = usePublicQuery<TagDetailPublicBySearch>(TAG_DETAIL_BY_SEARCH, {
+    variables: { key: searchKey },
+    skip: !searchKey,
   })
 
   // private data
-  const loadPrivate = () => {
-    if (!viewer.isAuthed || !tagId) {
+  const loadPrivate = (id: string) => {
+    if (!viewer.isAuthed || !id) {
       return
     }
 
     client.query({
       query: TAG_DETAIL_PRIVATE,
       fetchPolicy: 'network-only',
-      variables: { id: tagId },
+      variables: { id },
     })
   }
 
   // fetch private data for first page
   useEffect(() => {
-    loadPrivate()
-  }, [tagId, viewer.id])
+    const retryTagId =
+      tagId || (data2?.data?.search.edges?.[0].node as TagFragment)?.id
+    if (retryTagId) {
+      loadPrivate(
+        retryTagId
+        // tagId || (data2?.data?.search.edges?.[0].node as TagFragment).id
+      )
+    }
+  }, [tagId, data2?.data, viewer.id])
 
   // refetch & pull to refresh
   const refetch = async () => {
-    await refetchPublic()
-    loadPrivate()
+    const retryTagId =
+      tagId || (data2?.data?.search.edges?.[0].node as TagFragment)?.id
+    await refetchPublic({ id: retryTagId })
+    loadPrivate(
+      retryTagId
+      // tagId || (data2?.data?.search.edges?.[0].node as TagFragment).id
+    )
   }
   usePullToRefresh.Register()
   usePullToRefresh.Handler(refetch)
@@ -228,7 +324,7 @@ const TagDetailContainer = () => {
   /**
    * Render
    */
-  if (loading) {
+  if (loading || data2?.loading) {
     return (
       <EmptyLayout>
         <Spinner />
@@ -236,8 +332,9 @@ const TagDetailContainer = () => {
     )
   }
 
-  if (error) {
-    const errorCodes = getErrorCodes(error)
+  if (error || data2?.error) {
+    const err = (error || data2?.error)!
+    const errorCodes = getErrorCodes(err)
 
     if (errorCodes[0] === ERROR_CODES.ENTITY_NOT_FOUND) {
       return (
@@ -249,12 +346,17 @@ const TagDetailContainer = () => {
 
     return (
       <EmptyLayout>
-        <QueryError error={error} />
+        <QueryError error={err} />
       </EmptyLayout>
     )
   }
 
-  if (data?.node?.__typename !== 'Tag') {
+  if (
+    (!searchKey && dataByTagId?.node?.__typename !== 'Tag') ||
+    (searchKey &&
+      (data2?.data?.search.edges?.[0].node as TagFragment)?.__typename !==
+        'Tag')
+  ) {
     return (
       <EmptyLayout>
         <EmptyTag />
@@ -262,7 +364,14 @@ const TagDetailContainer = () => {
     )
   }
 
-  return <TagDetail tag={data.node} />
+  return (
+    <TagDetail
+      tag={
+        (dataByTagId?.node ||
+          data2?.data?.search.edges?.[0].node) as TagFragment
+      }
+    />
+  )
 }
 
 export default TagDetailContainer

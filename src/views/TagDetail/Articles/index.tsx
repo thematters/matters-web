@@ -1,5 +1,5 @@
 import { NetworkStatus } from 'apollo-client'
-import { useContext, useEffect, useRef } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 
 import {
   ArticleDigestFeed,
@@ -170,8 +170,8 @@ const TagDetailArticles = ({ tagId, selected }: TagArticlesProps) => {
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
       <List>
         {(edges || []).map(({ node, cursor }, i) => (
-          <>
-            <List.Item key={cursor}>
+          <React.Fragment key={cursor}>
+            <List.Item>
               <ArticleDigestFeed
                 article={node}
                 onClick={() =>
@@ -202,7 +202,7 @@ const TagDetailArticles = ({ tagId, selected }: TagArticlesProps) => {
             {!isLargeUp && edges.length >= 4 && i === 3 && (
               <RelatedTags tagId={tagId} />
             )}
-          </>
+          </React.Fragment>
         ))}
       </List>
 

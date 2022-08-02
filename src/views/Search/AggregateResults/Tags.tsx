@@ -56,6 +56,7 @@ const AggregateTagResults = () => {
                   {...toPath({
                     page: 'tagDetail',
                     id: node.id,
+                    content: node.content,
                   })}
                   onClick={() =>
                     analytics.trackEvent('click_feed', {
