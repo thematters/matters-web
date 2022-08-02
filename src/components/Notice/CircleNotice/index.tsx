@@ -7,6 +7,7 @@ import CircleNewUserNotice from './CircleNewUserNotice'
 import { CircleNotice as NoticeType } from './__generated__/CircleNotice'
 
 const CircleNotice = ({ notice }: { notice: NoticeType }) => {
+  console.log(notice.circleNoticeType)
   switch (notice.circleNoticeType) {
     case 'CircleNewSubscriber':
       return <CircleNewUserNotice notice={notice} userType="subscriber" />
