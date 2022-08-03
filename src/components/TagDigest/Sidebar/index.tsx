@@ -19,14 +19,13 @@ import styles from './styles.css'
 
 import { TagDigestSidebarTag } from './__generated__/TagDigestSidebarTag'
 
-type Props = {
+export type TagDigestSidebarProps = {
   tag: TagDigestSidebarTag
 } & CardProps
 
 const fragments = {
-  // TODO: switch to `fragment TagDigestSidebarTag on Tag {`
   tag: gql`
-    fragment TagDigestSidebarTag on TagSearchResult {
+    fragment TagDigestSidebarTag on Tag {
       id
       content
       description
@@ -37,7 +36,7 @@ const fragments = {
   `,
 }
 
-const Sidebar = ({ tag, ...cardProps }: Props) => {
+const Sidebar = ({ tag, ...cardProps }: TagDigestSidebarProps) => {
   const path = toPath({
     page: 'tagDetail',
     id: tag.id,
@@ -76,23 +75,27 @@ const Sidebar = ({ tag, ...cardProps }: Props) => {
           </header>
 
           <section className="nums">
-            <TextIcon
-              icon={<IconUser16 color="grey-dark" />}
-              size="sm"
-              spacing="xxtight"
-              color="grey-dark"
-            >
-              {numAbbr(tag.numAuthors)}
-            </TextIcon>
+            {tag?.numAuthors && (
+              <TextIcon
+                icon={<IconUser16 color="grey-dark" />}
+                size="xs"
+                spacing="xxtight"
+                color="grey-dark"
+              >
+                {numAbbr(tag.numAuthors)}
+              </TextIcon>
+            )}
 
-            <TextIcon
-              icon={<IconArticle16 color="grey-dark" />}
-              size="sm"
-              spacing="xxtight"
-              color="grey-dark"
-            >
-              {numAbbr(tag.numArticles)}
-            </TextIcon>
+            {tag?.numArticles && (
+              <TextIcon
+                icon={<IconArticle16 color="grey-dark" />}
+                size="xs"
+                spacing="xxtight"
+                color="grey-dark"
+              >
+                {numAbbr(tag.numArticles)}
+              </TextIcon>
+            )}
           </section>
         </section>
 

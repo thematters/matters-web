@@ -41,9 +41,6 @@ export const SELECT_SEARCH = gql`
           ... on Tag {
             ...DigestTag
           }
-          ... on TagSearchResult {
-            ...DigestTagSearchResult
-          }
         }
       }
     }
@@ -51,7 +48,6 @@ export const SELECT_SEARCH = gql`
   ${UserDigest.Mini.fragments.user}
   ${ArticleDigestDropdown.fragments.article}
   ${Tag.fragments.tag}
-  ${Tag.fragments.tagSearchResult}
 `
 
 export const LIST_VIEWER_ARTICLES = gql`

@@ -81,6 +81,10 @@ header {
       display: none;
     }
 
+    & :global(picture, img) {
+      z-index: -1;
+    }
+
     @media (--sm-up) {
       & h3 {
         font-size: var(--font-size-xm);

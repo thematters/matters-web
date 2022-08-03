@@ -15,18 +15,17 @@ import { toPath } from '~/common/utils'
 import styles from './styles.css'
 
 import { DigestTag } from './__generated__/DigestTag'
-import { DigestTagSearchResult } from './__generated__/DigestTagSearchResult'
 
 interface TagProps {
-  tag: DigestTag | DigestTagSearchResult
+  tag: DigestTag
   type?: 'list' | 'title' | 'inline' | 'plain'
   iconProps?: IconProps
   textIconProps?: TextIconProps
   active?: boolean
-  disabled?: boolean
+  disabled?: boolean // disable default <a>
   hasCount?: boolean
   hasClose?: boolean
-  removeTag?: (tag: DigestTag | DigestTagSearchResult) => void
+  removeTag?: (tag: DigestTag) => void
   onClick?: () => void
 }
 
@@ -35,17 +34,8 @@ const fragments = {
     fragment DigestTag on Tag {
       id
       content
-      # articles(input: { first: 0 }) {
-      #   totalCount
-      # }
-    }
-  `,
-  tagSearchResult: gql`
-    fragment DigestTagSearchResult on TagSearchResult {
-      id
-      content
       numArticles
-      # numAuthors
+      numAuthors
     }
   `,
 }
@@ -59,6 +49,8 @@ export const toDigestTagPlaceholder = (content: string) =>
       __typename: 'ArticleConnection',
       totalCount: 0,
     },
+    numArticles: 0,
+    numAuthors: 0,
   } as DigestTag)
 
 export const Tag = ({
@@ -77,7 +69,8 @@ export const Tag = ({
     tag: true,
     [type]: type,
     active,
-    disabled,
+    clickable: !!onClick,
+    disabled: !!disabled && !onClick,
   })
 
   const path = toPath({
@@ -121,7 +114,7 @@ export const Tag = ({
         size: 'sm',
         weight: 'md',
         spacing: 0,
-        color: active ? 'green' : 'grey-darker',
+        color: active ? 'white' : 'grey-darker',
       }
       break
     case 'plain':
@@ -134,7 +127,6 @@ export const Tag = ({
       break
   }
 
-  // const tagCount = numAbbr(tag.articles.totalCount || 0)
   // overwrite default styles with custom props
   iconProps = {
     ...iconProps,
@@ -153,7 +145,9 @@ export const Tag = ({
         size={textIconProps.size}
         allowUserSelect
       >
-        <span className="name">{tag.content}</span>
+        <span className="name">
+          {tag.__typename === 'Tag' ? tag.content : tag.content}
+        </span>
       </TextIcon>
 
       {hasClose && (
@@ -167,10 +161,8 @@ export const Tag = ({
         </button>
       )}
 
-      {hasCount && type === 'list' && (
-        <span className="count">
-          {(tag as DigestTagSearchResult).numArticles}
-        </span>
+      {hasCount && type === 'list' && tag?.numArticles && (
+        <span className="count">{tag.numArticles}</span>
       )}
 
       <style jsx>{styles}</style>
@@ -179,7 +171,7 @@ export const Tag = ({
 
   if (disabled) {
     return (
-      <span className={tagClasses}>
+      <span className={tagClasses} onClick={onClick}>
         <Inner />
         <style jsx>{styles}</style>
       </span>

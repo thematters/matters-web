@@ -1,17 +1,10 @@
 import classNames from 'classnames'
 import _chunk from 'lodash/chunk'
 import _get from 'lodash/get'
-// import { useContext } from 'react'
-// import Link from 'next/link'
 
 import {
-  // IconArticle16,
-  // IconHashTag16,
-  // IconUser16,
-  // LanguageContext,
   List,
   PageHeader,
-  // TextIcon,
   Slides,
   TagDigest,
   Translate,
@@ -61,8 +54,6 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
   const { edges } =
     (data?.node?.__typename === 'Tag' && data.node.recommended) || {}
 
-  // const { lang } = useContext(LanguageContext)
-
   const onClick = (i: number, id: string) => () =>
     analytics.trackEvent('click_feed', {
       type: 'related_tags',
@@ -100,6 +91,7 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
             </Slides.Item>
           ))}
         </Slides>
+
         <section className="backToAll">
           <ViewMoreCard
             spacing={['tight', 'tight']}
@@ -111,6 +103,8 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
             <Translate id="backToAll" />
           </ViewMoreCard>
         </section>
+
+        <style jsx>{styles}</style>
       </section>
     )
   }

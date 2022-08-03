@@ -1,4 +1,4 @@
-import queryString from 'query-string'
+// import queryString from 'query-string'
 
 import { TextIcon, Translate, withIcon } from '~/components'
 
@@ -19,14 +19,16 @@ const Weibo = ({
   <button
     type="button"
     onClick={() => {
-      const cover = dom.$('meta[property="og:image"]')?.getAttribute('content')
-      const shareUrl =
-        'http://service.weibo.com/share/share.php?' +
-        queryString.stringify({
+      const cover = dom
+        .$('meta[property="og:image"]')
+        ?.getAttribute('content') as string
+      const shareUrl = `http://service.weibo.com/share/share.php?${new URLSearchParams(
+        {
           url: link,
           title,
           pic: cover,
-        })
+        }
+      ).toString()}`
       return window.open(shareUrl, '分享到微博')
     }}
   >

@@ -172,6 +172,8 @@ export const MOCK_TAG = {
     totalCount: 8,
     edges: [{ node: MOCK_ARTILCE }],
   },
+  numArticles: 100,
+  numAuthors: 21,
 }
 
 // Transaction

@@ -62,7 +62,7 @@ const PushSwitch = () => {
 
 const Preference = ({ settings, toggle }: PreferenceProps) => (
   <Form.List
-    groupName={<Translate zh_hant="偏好" zh_hans="偏好" en="Preference" />}
+    groupName={<Translate zh_hant="郵件通知" zh_hans="邮件通知" en="Email" />}
   >
     <PushSwitch />
 

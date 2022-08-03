@@ -5,7 +5,10 @@ import SearchingArea, {
   SearchType,
   SelectNode,
 } from '~/components/SearchSelect/SearchingArea'
-import StagingArea, { StagingNode } from '~/components/SearchSelect/StagingArea'
+import StagingArea, {
+  CustomStagingAreaProps,
+  StagingNode,
+} from '~/components/SearchSelect/StagingArea'
 
 import { TextId } from '~/common/enums'
 
@@ -49,11 +52,14 @@ export type SearchSelectFormProps = {
 
   createTag?: boolean
   inviteEmail?: boolean
+
+  CustomStagingArea?: (props: CustomStagingAreaProps) => JSX.Element
 }
 
 const SearchSelectForm = ({
   title,
   hint,
+  CustomStagingArea,
   headerLeftButton,
   headerRightButtonText,
   closeDialog,
@@ -114,7 +120,7 @@ const SearchSelectForm = ({
         rightButton={
           <Dialog.Header.RightButton
             onClick={onClickSave}
-            disabled={stagingNodes.length <= 0}
+            // disabled={stagingNodes.length <= 0}
             text={headerRightButtonText || <Translate id="save" />}
             loading={saving}
           />
@@ -139,6 +145,7 @@ const SearchSelectForm = ({
         hint={hint}
         inStagingArea={inStagingArea}
         draggable={draggable}
+        CustomStagingArea={CustomStagingArea}
       />
     </>
   )
