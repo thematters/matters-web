@@ -47,6 +47,7 @@ header {
 
   & .content {
     position: relative;
+    z-index: 0;
     height: var(--announcement-height);
     padding: calc(
         var(--announcement-header-height) + var(--spacing-base) +
@@ -64,11 +65,11 @@ header {
     & h3 {
       @mixin line-clamp;
 
-      -webkit-line-clamp: 2;
       font-size: var(--font-size-md);
       font-weight: var(--font-weight-semibold);
       line-height: 1.5rem;
       color: var(--color-white);
+      -webkit-line-clamp: 2;
     }
 
     & p {
@@ -83,11 +84,11 @@ header {
       & p {
         @mixin line-clamp;
 
-        -webkit-line-clamp: 1;
         margin-top: var(--spacing-xx-tight);
         font-size: var(--font-size-sm-s);
         line-height: 1.25rem;
         color: rgba(255, 255, 255, 0.8);
+        -webkit-line-clamp: 1;
       }
     }
   }
