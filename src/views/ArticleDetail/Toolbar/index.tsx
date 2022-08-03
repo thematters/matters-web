@@ -10,7 +10,7 @@ import DropdownActions, {
   DropdownActionsControls,
 } from '~/components/ArticleDigest/DropdownActions'
 
-import { stripPunctPrefixSuffix, toPath } from '~/common/utils'
+import { stripAllPunct, toPath } from '~/common/utils'
 
 import AppreciationButton from '../AppreciationButton'
 import Appreciators from './Appreciators'
@@ -99,7 +99,7 @@ const Toolbar = ({ article, privateFetched, lock, ...props }: ToolbarProps) => {
               ?.map(({ content }) => content)
               .join(' ')
               .split(/\s+/)
-              .map(stripPunctPrefixSuffix)}
+              .map(stripAllPunct)}
           />
         )}
 

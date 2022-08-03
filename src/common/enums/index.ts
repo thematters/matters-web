@@ -50,3 +50,5 @@ export const COOKIE_USER_GROUP = '__user_group'
 
 export const MAX_ARTICLE_REVISION_COUNT = 4
 export const MAX_ARTICLE_REVISION_DIFF = 50
+
+export const MAX_TAG_CONTENT_LENGTH = 40

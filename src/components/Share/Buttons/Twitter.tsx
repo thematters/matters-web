@@ -21,18 +21,18 @@ const Twitter = ({
   <button
     type="button"
     onClick={() => {
-      const text = `${title}${
-        Array.isArray(tags)
-          ? ` ${tags
-              .join(' ')
-              .trim()
-              .split(/\s+/)
-              .filter(Boolean)
-              .slice(0, 8) // at most 8 keywords be used as hashtags
-              .map((w) => `#${w.trim()}`)
-              .join(' ')}`
-          : ''
-      } via @matterslab`
+      let text = title
+      if (Array.isArray(tags) && tags.length > 0) {
+        text += ` ${tags
+          .join(' ')
+          .trim()
+          .split(/\s+/)
+          .filter(Boolean)
+          .slice(0, 8) // at most 8 keywords be used as hashtags
+          .map((w) => `#${w.trim()}`)
+          .join(' ')}`
+      }
+      text += ' via @matterslab'
 
       // only this way (to omit `via`,`hashtags`) can leave url link at the end, then hidden by default
       // u.searchParams.set('url', stripNonEnglishUrl(link))
