@@ -44,7 +44,7 @@ const ConfirmPublishDialogContent: React.FC<
   return (
     <>
       <Dialog.Header
-        title={<Translate zh_hant="發布須知" zh_hans="發布须知" />}
+        title={<Translate zh_hant="發布須知" zh_hans="發布须知" en="Notice" />}
         leftButton={<Dialog.Header.BackButton onClick={onBack} />}
         rightButton={SubmitButton}
       />
