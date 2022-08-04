@@ -61,7 +61,7 @@ const httpLink = ({ host, headers }: { host: string; headers: any }) => {
     (apiUrl || '').split(':')[0] === 'http'
       ? new http.Agent()
       : new https.Agent({
-          rejectUnauthorized: false, // allow access to https:...matters.news in localhost
+          rejectUnauthorized: isProd, // allow access to https:...matters.news in localhost
         })
 
   return createUploadLink({
