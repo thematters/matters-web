@@ -71,7 +71,9 @@ const fragments = {
 }
 
 const BaseNotice: React.FC<NoticeProps> = ({ notice }) => {
-  console.log(notice.__typename === 'CircleNotice' ? ' ' : notice.__typename)
+  if (notice.__typename !== 'CircleNotice') {
+    console.log(notice.__typename)
+  }
   switch (notice.__typename) {
     case 'UserNotice':
       return <UserNotice notice={notice} />
