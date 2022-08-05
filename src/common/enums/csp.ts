@@ -1,6 +1,9 @@
 const SCRIPT_SRC = [
   "'self'",
 
+  // Next.js Assets
+  process.env.NEXT_PUBLIC_NEXT_ASSET_DOMAIN,
+
   // Google Tag Manager
   "'unsafe-inline'",
   "'unsafe-eval'",
@@ -45,6 +48,9 @@ const IMG_SRC = [
   'data:',
   process.env.NEXT_PUBLIC_ASSET_DOMAIN,
 
+  // Next.js Assets
+  process.env.NEXT_PUBLIC_NEXT_ASSET_DOMAIN,
+
   // 'server-develop.matters.news',
   // NEXT_PUBLIC_API_HOSTNAME as string,
   new URL(process.env.NEXT_PUBLIC_API_URL as string).hostname,
@@ -65,8 +71,6 @@ const CONNECT_SRC = [
   // API
   process.env.NEXT_PUBLIC_API_URL,
   process.env.NEXT_PUBLIC_OAUTH_API_URL,
-
-  // 'server-develop.matters.news',
 
   // Sentry
   'sentry.matters.one',
