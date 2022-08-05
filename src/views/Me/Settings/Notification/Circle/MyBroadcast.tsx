@@ -24,8 +24,8 @@ const MyBroadcast = ({ settings, toggle }: MyBroadcastProps) => (
       }
       right={
         <Switch
-          checked={settings.circleMemberBroadcast}
-          onChange={() => toggle('circleMemberBroadcast')}
+          checked={settings.circleMemberNewBroadcastReply}
+          onChange={() => toggle('circleMemberNewBroadcastReply')}
         />
       }
     />

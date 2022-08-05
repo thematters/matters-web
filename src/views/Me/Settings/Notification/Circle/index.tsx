@@ -32,7 +32,7 @@ const VIEWER_NOTIFICATION_CIRCLE_SETTINGS = gql`
           circleNewSubscriber
           circleNewFollower
           circleNewUnsubscriber
-          circleMemberBroadcast
+          circleMemberNewBroadcastReply
           circleMemberNewDiscussion
           circleMemberNewDiscussionReply
           inCircleNewArticle
@@ -59,7 +59,7 @@ const UPDATE_VIEWER_NOTIFICATION_CIRCLE = gql`
           circleNewSubscriber
           circleNewFollower
           circleNewUnsubscriber
-          circleMemberBroadcast
+          circleMemberNewBroadcastReply
           circleMemberNewDiscussion
           circleMemberNewDiscussionReply
           inCircleNewArticle

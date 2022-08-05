@@ -87,9 +87,9 @@ const CommentNewReplyNotice = ({ notice }: { notice: NoticeType }) => {
           )}
         </NoticeHead>
 
-        <NoticeComment
+        {/* <NoticeComment
           comment={isMultiActors ? notice.comment : notice.reply}
-        />
+        /> */}
 
         {isMultiActors && (
           <section className="multi-actor-avatars">
