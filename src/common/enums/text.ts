@@ -162,6 +162,7 @@ export const TEXT = {
     hintUserName: '4-15 個字元，僅支持英文、數字或下劃線',
     history: '足跡',
     hkd: '港幣',
+    hottest: '熱門',
     hottestArticles: '熱門作品',
     INTERNAL_SERVER_ERROR: '伺服器錯誤，請稍候重試',
     invalidEmail: '電子信箱格式有誤',
@@ -524,6 +525,7 @@ export const TEXT = {
     hintUserName: '4-15 个字符，仅支持英文、数字或下划线',
     history: '足迹',
     hkd: '港币',
+    hottest: '热门',
     hottestArticles: '热门作品',
     INTERNAL_SERVER_ERROR: '服务器错误，请稍候重试',
     invalidEmail: '邮箱格式有误',
@@ -902,6 +904,7 @@ export const TEXT = {
       'Must be between 4-15 characters long. Only English alphabets, numbers and underline are accepted.',
     history: 'History',
     hkd: 'HKD',
+    hottest: 'Trending',
     hottestArticles: 'Trending',
     INTERNAL_SERVER_ERROR:
       'Oops. Something went wrong. Please try again later.',

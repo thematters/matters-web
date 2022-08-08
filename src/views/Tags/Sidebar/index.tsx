@@ -29,11 +29,7 @@ type FeedEdges =
   AllTagsRecommendedSidebar_viewer_recommendation_tags_edges_node_recommended_edges
 
 const TagsSidebarHeader = () => (
-  <PageHeader
-    title={<Translate zh_hant="熱門" zh_hans="热门" en="Trending" />}
-    is="h2"
-    hasNoBorder
-  />
+  <PageHeader title={<Translate id="hottest" />} is="h2" hasNoBorder />
 )
 
 const TagsSidebar: React.FC<TagsSidebarProps> = ({ inSidebar }) => {
