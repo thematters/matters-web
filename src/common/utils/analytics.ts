@@ -195,6 +195,7 @@ type ArticleFeedType =
   | 'search'
   | 'search_article'
   | 'tag_detail_latest'
+  | 'tag_detail_hottest'
   | 'tag_detail_selected'
   | 'tags' // tag feed with articles on home page
   | 'transaction' // transaction history

@@ -61,12 +61,7 @@ const DynamicCommunity = dynamic(() => import('./Community'), {
   loading: Spinner,
 })
 
-const validTagFeedTypes = [
-  'hottest',
-  'latest',
-  'selected',
-  'community',
-] as const
+const validTagFeedTypes = ['hottest', 'latest', 'selected', 'creators'] as const
 type TagFeedType = typeof validTagFeedTypes[number]
 
 const TagDetail = ({ tag }: { tag: TagFragment }) => {
@@ -80,7 +75,7 @@ const TagDetail = ({ tag }: { tag: TagFragment }) => {
   const hasSelectedFeed = (tag?.selectedArticles.totalCount || 0) > 0
 
   const [feedType, setFeedType] = useState<TagFeedType>(
-    hasSelectedFeed && qsType === 'selected' ? 'selected' : qsType || 'latest'
+    hasSelectedFeed && qsType === 'selected' ? 'selected' : qsType || 'hottest'
   )
 
   const changeFeed = (newType: TagFeedType) => {
@@ -91,7 +86,7 @@ const TagDetail = ({ tag }: { tag: TagFragment }) => {
   const isSelected = feedType === 'selected'
   const isHottest = feedType === 'hottest'
   const isLatest = feedType === 'latest'
-  const isCommunity = feedType === 'community'
+  const isCreators = feedType === 'creators'
 
   useEffect(() => {
     // if selected feed is empty, switch to latest feed
@@ -191,12 +186,20 @@ const TagDetail = ({ tag }: { tag: TagFragment }) => {
           )}
 
           <section className="buttons">
-            <TagDetailButtons.FollowButton tag={tag} />
             {canAdd && <TagDetailButtons.AddButton tag={tag} />}
+            <TagDetailButtons.FollowButton tag={tag} />
           </section>
         </section>
 
         <Tabs sticky>
+          <Tabs.Tab selected={isHottest} onClick={() => changeFeed('hottest')}>
+            <Translate id="hottest" />
+          </Tabs.Tab>
+
+          <Tabs.Tab selected={isLatest} onClick={() => changeFeed('latest')}>
+            <Translate id="latest" />
+          </Tabs.Tab>
+
           {hasSelectedFeed && (
             <Tabs.Tab
               selected={isSelected}
@@ -206,27 +209,21 @@ const TagDetail = ({ tag }: { tag: TagFragment }) => {
             </Tabs.Tab>
           )}
 
-          <Tabs.Tab selected={isHottest} onClick={() => changeFeed('hottest')}>
-            <Translate id="hottest" />
-          </Tabs.Tab>
-
-          <Tabs.Tab selected={isLatest} onClick={() => changeFeed('latest')}>
-            <Translate id="latest" />
-          </Tabs.Tab>
-
           <Tabs.Tab
-            selected={isCommunity}
-            onClick={() => changeFeed('community')}
+            selected={isCreators}
+            onClick={() => changeFeed('creators')}
           >
-            <Translate zh_hant="社群" zh_hans="社群" en="Community" />
+            <Translate zh_hant="創作者" zh_hans="创作者" en="Creators" />
           </Tabs.Tab>
         </Tabs>
 
-        {(isSelected || isLatest) && (
-          <TagDetailArticles tagId={tag.id} selected={isSelected} />
+        {(isHottest || isLatest || isSelected) && (
+          <TagDetailArticles tagId={tag.id} feedType={feedType} />
         )}
-        {isCommunity && <DynamicCommunity id={tag.id} isOwner={isOwner} />}
+
+        {isCreators && <DynamicCommunity id={tag.id} isOwner={isOwner} />}
       </PullToRefresh>
+
       <style jsx>{styles}</style>
     </Layout.Main>
   )
