@@ -17,7 +17,7 @@ import {
   analytics,
   isValidEmail,
   mergeConnections,
-  stripPunctPrefixSuffix,
+  normalizeTagInput, // stripAllPunct, // stripPunctPrefixSuffix,
 } from '~/common/utils'
 
 import SearchSelectNode from '../SearchSelectNode'
@@ -94,7 +94,7 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
   const [searchKey, setSearchKey] = useState('')
   const [debouncedSearchKey, setdebouncedSearchKey] = useState('')
   const debouncedSetSearchKey = useDebouncedCallback((sk0) => {
-    const sk = isTag ? stripPunctPrefixSuffix(sk0) : sk0
+    const sk = isTag ? normalizeTagInput(sk0) : sk0
     setdebouncedSearchKey(sk)
     setSearchKey(sk)
   }, INPUT_DEBOUNCE)
@@ -289,7 +289,7 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
                     <li>
                       <CreateTag
                         tag={toDigestTagPlaceholder(
-                          stripPunctPrefixSuffix(searchKey)
+                          normalizeTagInput(searchKey)
                         )}
                         onClick={addNodeToStaging}
                       />
