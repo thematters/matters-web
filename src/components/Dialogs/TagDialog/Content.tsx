@@ -18,9 +18,9 @@ import SEARCH_TAGS from '~/components/GQL/queries/searchTags'
 
 import { ADD_TOAST, ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
 import {
+  normalizeTagInput, // stripAllPunct, // stripPunctPrefixSuffix,
   numAbbr,
   parseFormSubmitErrors,
-  stripPunctPrefixSuffix,
   toPath,
   translate,
   validateTagName,
@@ -242,7 +242,7 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
         error={touched.newContent && errors.newContent}
         onBlur={handleBlur}
         onChange={(e) => {
-          const newContent = stripPunctPrefixSuffix(e.target.value)
+          const newContent = normalizeTagInput(e.target.value)
           setFieldValue('newContent', newContent)
         }}
         dropdownAppendTo={formId}

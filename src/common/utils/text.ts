@@ -1,5 +1,7 @@
 import { distance } from 'fastest-levenshtein'
 
+import { MAX_TAG_CONTENT_LENGTH } from '~/common/enums'
+
 import { toSizedImageURL } from './url'
 
 /**
@@ -11,15 +13,6 @@ export const stripHtml = (html: string | null, replacement = ' ') =>
     .replace(/(<([^>]+)>)/gi, replacement)
     .replace(/&lt;/g, '<')
     .replace(/&gt;/g, '>')
-
-const nonAlphaNumUni = String.raw`[^\p{Letter}\p{Number}]+`
-const prefixOrSuffixNonAlphaNum = new RegExp(
-  `(^${nonAlphaNumUni}|${nonAlphaNumUni}$)`,
-  'gu'
-)
-
-export const stripPunctPrefixSuffix = (content: string) =>
-  `${content}`.replace(prefixOrSuffixNonAlphaNum, '') // strip prefix or suffix punct
 
 export const makeSummary = (html: string, length = 140) => {
   // buffer for search
@@ -139,12 +132,15 @@ export const measureDiffs = (source: string, target: string) =>
   distance(source, target)
 
 // for Twitter and others which do not support non-English in URL
-export const stripNonEnglishUrl = (url: string) =>
-  // get the beginning portion of all printable ascii, and must ends with a '\w'
-  url.match(/^[\x21-\x7e]+[A-Za-z0-9]/)?.[0] ||
-  // fallback to full url
-  url
+export const stripNonEnglishUrl = (url: string) => {
+  // const frag = url.split('#', 2)?.[1] // anything after '#'
+  const hash = url.match(/(#[\x21-\x7e]+)$/)?.[1] ?? ''
+  // get the beginning portion of all printable ascii, and must ends with ASCII '\w'
+  const turl = url.match(/^[\x21-\x7e]+[A-Za-z0-9]/)?.[0]
+  return turl ? `${turl}${hash}` : url // fallback to full url
+}
 
+const nonAlphaNumUni = String.raw`[^\p{Letter}\p{Number}]+`
 const anyNonAlphaNum = new RegExp(nonAlphaNumUni, 'gu')
 
 // to simulate slugify at DB server side
@@ -155,3 +151,12 @@ export const tagSlugify = (content: string) =>
     // .toLowerCase()
     .replace(anyNonAlphaNum, '-') // replace all non alpha-number to `-`, including spaces and punctuations
     .replace(/(^-+|-+$)/g, '') // strip leading or trailing `-` if there's any
+
+export const stripAllPunct = (content: string) =>
+  `${content}`
+    // .replace(prefixOrSuffixNonAlphaNum, '') // strip prefix or suffix punct
+    .replace(anyNonAlphaNum, ' ')
+    .trim()
+
+export const normalizeTagInput = (content: string) =>
+  stripAllPunct(content).substring(0, MAX_TAG_CONTENT_LENGTH)

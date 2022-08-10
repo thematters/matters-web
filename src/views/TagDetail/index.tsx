@@ -27,7 +27,8 @@ import { ERROR_CODES } from '~/common/enums'
 import {
   fromGlobalId,
   makeTitle,
-  stripPunctPrefixSuffix,
+  // stripPunctPrefixSuffix,
+  stripAllPunct,
   toGlobalId,
   toPath,
 } from '~/common/utils'
@@ -118,11 +119,8 @@ const TagDetail = ({ tag }: { tag: TagFragment }) => {
   const title =
     (tag.description ? `${makeTitle(tag.description, 80)} ` : '') +
     '#' +
-    stripPunctPrefixSuffix(tag.content)
-  const keywords = tag.content
-    .split(/\s+/)
-    .filter(Boolean)
-    .map(stripPunctPrefixSuffix)
+    stripAllPunct(tag.content)
+  const keywords = tag.content.split(/\s+/).filter(Boolean).map(stripAllPunct) // title.includes(tag.content) ??
 
   /**
    * Render
@@ -135,7 +133,10 @@ const TagDetail = ({ tag }: { tag: TagFragment }) => {
           <>
             <span />
 
-            <ShareButton title={title} tags={keywords} />
+            <ShareButton
+              title={title}
+              tags={title.endsWith(tag.content) ? undefined : keywords}
+            />
 
             <DropdownActions
               isOwner={isOwner}
@@ -150,7 +151,7 @@ const TagDetail = ({ tag }: { tag: TagFragment }) => {
 
       <Head
         title={title}
-        description={tag.description || stripPunctPrefixSuffix(tag.content)}
+        description={tag.description || stripAllPunct(tag.content)}
         keywords={keywords} // add top10 most using author names?
         image={
           tag.cover ||
@@ -159,7 +160,7 @@ const TagDetail = ({ tag }: { tag: TagFragment }) => {
         jsonLdData={{
           '@context': 'https://schema.org',
           '@type': 'Organization',
-          name: stripPunctPrefixSuffix(tag.content),
+          name: stripAllPunct(tag.content),
           description: tag.description,
           image:
             tag.cover ||
