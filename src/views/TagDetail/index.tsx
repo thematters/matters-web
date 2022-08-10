@@ -62,7 +62,7 @@ const DynamicCommunity = dynamic(() => import('./Community'), {
   loading: Spinner,
 })
 
-const validTagFeedTypes = ['latest', 'selected', 'community'] as const
+const validTagFeedTypes = ['hottest', 'latest', 'selected', 'creators'] as const
 type TagFeedType = typeof validTagFeedTypes[number]
 
 const TagDetail = ({ tag }: { tag: TagFragment }) => {
@@ -71,58 +71,42 @@ const TagDetail = ({ tag }: { tag: TagFragment }) => {
   const features = useFeatures()
 
   // feed type
+  const { getQuery, setQuery } = useRoute()
+  const qsType = getQuery('type') as TagFeedType
   const hasSelectedFeed = (tag?.selectedArticles.totalCount || 0) > 0
-  const [feed, setFeed] = useState<TagFeedType>(
-    hasSelectedFeed ? 'selected' : 'latest'
+
+  const [feedType, setFeedType] = useState<TagFeedType>(
+    hasSelectedFeed && qsType === 'selected' ? 'selected' : qsType || 'hottest'
   )
 
-  const isSelected = feed === 'selected'
-  const isLatest = feed === 'latest'
-  const isCommunity = feed === 'community'
-
-  const [tab, setTab] = useState<TagFeedType | undefined>(undefined)
-  const changeTab = (newTab: TagFeedType) => {
-    setFeed(newTab)
-    setTab(newTab)
+  const changeFeed = (newType: TagFeedType) => {
+    setQuery('type', newType)
+    setFeedType(newType)
   }
 
-  useEffect(() => {
-    if (!hasSelectedFeed && isSelected) {
-      changeTab('latest')
-    }
-  })
+  const isSelected = feedType === 'selected'
+  const isHottest = feedType === 'hottest'
+  const isLatest = feedType === 'latest'
+  const isCreators = feedType === 'creators'
 
   useEffect(() => {
-    if (process.browser) {
-      const ftype = window.location.hash.split('#')?.[1] as TagFeedType // router.asPath.split('#')?.[1]
-      // console.log('in browser call:', { hash: window.location.hash, ftype })
-      if (validTagFeedTypes.includes(ftype)) {
-        changeTab(ftype) // override if provided
-      }
+    // if selected feed is empty, switch to latest feed
+    if (!hasSelectedFeed && isSelected) {
+      changeFeed('latest')
+    }
+
+    // backward compatible with `/tags/:globalId:`
+    const newPath = toPath({
+      page: 'tagDetail',
+      id: tag.id,
+      content: tag.content,
+      feedType: isLatest ? '' : feedType,
+    })
+
+    if (newPath.href !== window.decodeURI(router.asPath)) {
+      router.replace(newPath.href, undefined, { shallow: true })
     }
   }, [])
-
-  useEffect(() => {
-    if (process.browser) {
-      const newPath = toPath({
-        page: 'tagDetail',
-        id: tag.id, // toGlobalId(tagId),
-        content: tag.content,
-        fragment: tab,
-      })
-
-      // console.log('in browser call:', { hash: window.location.hash, newPath, asPath: router.asPath })
-
-      if (newPath.href !== router.asPath) {
-        // console.log('replace url:', { from: router.asPath, to: newPath.href })
-        router.replace(
-          newPath.href, // + `#${feed}`,
-          undefined,
-          { shallow: true }
-        )
-      }
-    }
-  }, [tab])
 
   // define permission
   const isOwner = tag?.owner?.id === viewer.id
@@ -203,38 +187,44 @@ const TagDetail = ({ tag }: { tag: TagFragment }) => {
           )}
 
           <section className="buttons">
-            <TagDetailButtons.FollowButton tag={tag} />
             {canAdd && <TagDetailButtons.AddButton tag={tag} />}
+            <TagDetailButtons.FollowButton tag={tag} />
           </section>
         </section>
 
         <Tabs sticky>
+          <Tabs.Tab selected={isHottest} onClick={() => changeFeed('hottest')}>
+            <Translate id="hottest" />
+          </Tabs.Tab>
+
+          <Tabs.Tab selected={isLatest} onClick={() => changeFeed('latest')}>
+            <Translate id="latest" />
+          </Tabs.Tab>
+
           {hasSelectedFeed && (
             <Tabs.Tab
               selected={isSelected}
-              onClick={() => changeTab('selected')}
+              onClick={() => changeFeed('selected')}
             >
               <Translate id="featured" />
             </Tabs.Tab>
           )}
 
-          <Tabs.Tab selected={isLatest} onClick={() => changeTab('latest')}>
-            <Translate id="latest" />
-          </Tabs.Tab>
-
           <Tabs.Tab
-            selected={isCommunity}
-            onClick={() => changeTab('community')}
+            selected={isCreators}
+            onClick={() => changeFeed('creators')}
           >
-            <Translate zh_hant="社群" zh_hans="社群" en="Community" />
+            <Translate zh_hant="創作者" zh_hans="创作者" en="Creators" />
           </Tabs.Tab>
         </Tabs>
 
-        {(isSelected || isLatest) && (
-          <TagDetailArticles tagId={tag.id} selected={isSelected} />
+        {(isHottest || isLatest || isSelected) && (
+          <TagDetailArticles tagId={tag.id} feedType={feedType} />
         )}
-        {isCommunity && <DynamicCommunity id={tag.id} isOwner={isOwner} />}
+
+        {isCreators && <DynamicCommunity id={tag.id} isOwner={isOwner} />}
       </PullToRefresh>
+
       <style jsx>{styles}</style>
     </Layout.Main>
   )
@@ -244,9 +234,11 @@ const TagDetailContainer = () => {
   const viewer = useContext(ViewerContext)
   const { getQuery } = useRoute()
 
+  // backward compatible with:
+  // - `/tags/:globalId:`
+  // - `/tags/:numberId:-:content:`
+  // - `/tags/:content:`
   const param = getQuery('tagId')
-  // const ma = parm?.match(/^(\d+)/)
-  // const isRawGlobalId: boolean = !ma
   let isRawGlobalId = false
   try {
     const { type, id } = fromGlobalId(param)
@@ -276,13 +268,16 @@ const TagDetailContainer = () => {
     client,
   } = usePublicQuery<TagDetailPublic>(TAG_DETAIL_PUBLIC, {
     variables: { id: tagId },
-    skip: !!searchKey, // !(isRawGlobalId || numberId),
+    skip: !!searchKey,
   })
 
-  const data2 = usePublicQuery<TagDetailPublicBySearch>(TAG_DETAIL_BY_SEARCH, {
-    variables: { key: searchKey },
-    skip: !searchKey,
-  })
+  const resultBySearch = usePublicQuery<TagDetailPublicBySearch>(
+    TAG_DETAIL_BY_SEARCH,
+    {
+      variables: { key: searchKey },
+      skip: !searchKey,
+    }
+  )
 
   // private data
   const loadPrivate = (id: string) => {
@@ -296,28 +291,22 @@ const TagDetailContainer = () => {
       variables: { id },
     })
   }
+  const searchedTag = resultBySearch?.data?.search.edges?.[0]
+    .node as TagFragment
 
   // fetch private data for first page
   useEffect(() => {
-    const retryTagId =
-      tagId || (data2?.data?.search.edges?.[0].node as TagFragment)?.id
+    const retryTagId = tagId || searchedTag?.id
     if (retryTagId) {
-      loadPrivate(
-        retryTagId
-        // tagId || (data2?.data?.search.edges?.[0].node as TagFragment).id
-      )
+      loadPrivate(retryTagId)
     }
-  }, [tagId, data2?.data, viewer.id])
+  }, [tagId, resultBySearch?.data, viewer.id])
 
   // refetch & pull to refresh
   const refetch = async () => {
-    const retryTagId =
-      tagId || (data2?.data?.search.edges?.[0].node as TagFragment)?.id
+    const retryTagId = tagId || searchedTag?.id
     await refetchPublic({ id: retryTagId })
-    loadPrivate(
-      retryTagId
-      // tagId || (data2?.data?.search.edges?.[0].node as TagFragment).id
-    )
+    loadPrivate(retryTagId)
   }
   usePullToRefresh.Register()
   usePullToRefresh.Handler(refetch)
@@ -325,7 +314,7 @@ const TagDetailContainer = () => {
   /**
    * Render
    */
-  if (loading || data2?.loading) {
+  if (loading || resultBySearch?.loading) {
     return (
       <EmptyLayout>
         <Spinner />
@@ -333,8 +322,8 @@ const TagDetailContainer = () => {
     )
   }
 
-  if (error || data2?.error) {
-    const err = (error || data2?.error)!
+  if (error || resultBySearch?.error) {
+    const err = (error || resultBySearch?.error)!
     const errorCodes = getErrorCodes(err)
 
     if (errorCodes[0] === ERROR_CODES.ENTITY_NOT_FOUND) {
@@ -354,9 +343,7 @@ const TagDetailContainer = () => {
 
   if (
     (!searchKey && dataByTagId?.node?.__typename !== 'Tag') ||
-    (searchKey &&
-      (data2?.data?.search.edges?.[0].node as TagFragment)?.__typename !==
-        'Tag')
+    (searchKey && searchedTag?.__typename !== 'Tag')
   ) {
     return (
       <EmptyLayout>
@@ -365,14 +352,7 @@ const TagDetailContainer = () => {
     )
   }
 
-  return (
-    <TagDetail
-      tag={
-        (dataByTagId?.node ||
-          data2?.data?.search.edges?.[0].node) as TagFragment
-      }
-    />
-  )
+  return <TagDetail tag={(dataByTagId?.node as TagFragment) || searchedTag} />
 }
 
 export default TagDetailContainer

@@ -82,7 +82,7 @@ const Participants = ({ id }: Props) => {
     <>
       <section className="category">
         <section>
-          <Translate zh_hant="創作者" zh_hans="创作者" en="creators" />
+          <Translate zh_hant="創作者" zh_hans="创作者" en="Creators" />
           <span className="count">({count})</span>
         </section>
       </section>

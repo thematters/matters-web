@@ -219,7 +219,6 @@ const ArticleDetail = () => {
     const nhref = `${n.pathname}${nsearch}${n.hash || u.hash}`
 
     if (nhref !== router.asPath) {
-      // console.log('replacing url:', {from: router.asPath, to: newPath.href, nhref, isSame: nhref === router.asPath,})
       router.replace(nhref, undefined, { shallow: true })
     }
   }, [latestHash])

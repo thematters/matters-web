@@ -77,7 +77,6 @@ const BaseFingerprintDialog = ({
 
   useEffect(() => {
     if (show) {
-      // console.log('start refetching...', { data, loading })
       refetch()
     }
   }, [show])

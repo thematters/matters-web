@@ -19,7 +19,9 @@
 }
 
 .buttons {
-  @mixin flex-center-space-between;
-
   margin-top: var(--spacing-loose);
+
+  & :global(> * + *) {
+    margin-left: var(--spacing-base);
+  }
 }

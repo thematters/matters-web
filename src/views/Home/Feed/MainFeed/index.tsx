@@ -18,7 +18,7 @@ import { analytics, mergeConnections } from '~/common/utils'
 
 import Authors from '../Authors'
 import { FEED_ARTICLES_PRIVATE, FEED_ARTICLES_PUBLIC } from '../gql'
-import { SortByType } from '../SortBy'
+import { HomeFeedType } from '../SortBy'
 import Tags from '../Tags'
 
 import {
@@ -54,7 +54,7 @@ interface FeedLocation {
 }
 
 interface MainFeedProps {
-  feedSortType: SortByType
+  feedSortType: HomeFeedType
 }
 
 const horizontalFeeds: FeedLocation = {
@@ -107,7 +107,7 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
   }
 
   // fetch private data for first page
-  const fetchedPrviateSortsRef = useRef<SortByType[]>([])
+  const fetchedPrviateSortsRef = useRef<HomeFeedType[]>([])
   useEffect(() => {
     const fetched = fetchedPrviateSortsRef.current.indexOf(sortBy) >= 0
     if (loading || !edges || fetched || !viewer.isAuthed) {

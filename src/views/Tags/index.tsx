@@ -42,7 +42,7 @@ const BaseTags = () => {
         </Tabs.Tab>
 
         <Tabs.Tab selected={isHottest} onClick={() => setFeedType('hottest')}>
-          <Translate zh_hant="熱門" zh_hans="热门" en="Trending" />
+          <Translate id="hottest" />
         </Tabs.Tab>
       </Tabs> */}
 

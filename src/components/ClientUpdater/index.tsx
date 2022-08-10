@@ -59,8 +59,6 @@ export const ClientUpdater = () => {
     const newRouteHistory = [...routeHistoryRef.current, url]
     routeHistoryRef.current = newRouteHistory
 
-    // console.log('update routeHistory to:', { url, newRouteHistory })
-
     client.writeData({
       id: 'ClientPreference:local',
       data: { routeHistory: newRouteHistory },

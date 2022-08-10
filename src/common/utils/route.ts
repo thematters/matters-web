@@ -57,7 +57,7 @@ type ToPathArgs =
       page: 'tagDetail'
       id: string
       content: string
-      fragment?: string
+      feedType?: string
     }
   | {
       page: 'userProfile' | 'userSubscriptons' | 'userComments' | 'userTags'
@@ -179,9 +179,9 @@ export const toPath = (
     case 'tagDetail': {
       const { id: numberId } = fromGlobalId(args.id as string)
       const pathname = `/tags/${numberId}-${tagSlugify(args.content)}`
-      const hash = args.fragment ? `#${args.fragment}` : ''
+      const typeStr = args.feedType ? `?type=${args.feedType}` : ''
       return {
-        href: `${pathname}${hash}`,
+        href: `${pathname}${typeStr}`,
         pathname,
       }
     }

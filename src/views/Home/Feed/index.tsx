@@ -3,23 +3,23 @@ import { useState } from 'react'
 import { useRoute } from '~/components'
 
 import MainFeed from './MainFeed'
-import SortBy, { SortByType } from './SortBy'
+import SortBy, { HomeFeedType } from './SortBy'
 
 const HomeFeed = () => {
   const { getQuery, setQuery } = useRoute()
-  const qsType = getQuery('type') as SortByType
+  const qsType = getQuery('type') as HomeFeedType
 
-  const [type, setType] = useState<SortByType>(qsType || 'hottest')
+  const [feedType, setFeedType] = useState<HomeFeedType>(qsType || 'hottest')
 
-  const setSortBy = (newType: SortByType) => {
+  const changeFeed = (newType: HomeFeedType) => {
     setQuery('type', newType)
-    setType(newType)
+    setFeedType(newType)
   }
 
   return (
     <>
-      <SortBy sortBy={type} setSortBy={setSortBy} />
-      <MainFeed feedSortType={type} />
+      <SortBy feedType={feedType} setFeedType={changeFeed} />
+      <MainFeed feedSortType={feedType} />
     </>
   )
 }

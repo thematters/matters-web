@@ -71,7 +71,7 @@ const Maintainers = ({ id, isOwner }: Props) => {
         <>
           <section className="category">
             <section>
-              <Translate zh_hant="主理人" zh_hans="主理人" en="maintainer" />
+              <Translate zh_hant="主理人" zh_hans="主理人" en="Maintainer" />
             </section>
             {isOwner && (
               <section>
