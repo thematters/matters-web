@@ -7,9 +7,14 @@ import styles from './styles.css'
 interface SidebarHeaderProps {
   type: 'authors' | 'tags'
   rightButton?: React.ReactNode
+  viewAll?: boolean
 }
 
-const FeedHeader = ({ type, rightButton }: SidebarHeaderProps) => {
+const FeedHeader = ({
+  type,
+  rightButton,
+  viewAll = true,
+}: SidebarHeaderProps) => {
   const pathMap = {
     authors: PATHS.AUTHORS,
     tags: PATHS.TAGS,
@@ -25,7 +30,7 @@ const FeedHeader = ({ type, rightButton }: SidebarHeaderProps) => {
       <section className="right">
         {rightButton}
 
-        {path && (
+        {path && viewAll && (
           <ViewAllButton
             href={path}
             bgColor={undefined}
