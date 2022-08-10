@@ -5,6 +5,7 @@ import _get from 'lodash/get'
 import {
   List,
   PageHeader,
+  ShuffleButton,
   Slides,
   TagDigest,
   Translate,
@@ -26,7 +27,15 @@ interface RelatedTagsProps {
   inSidebar?: boolean
 }
 
-const RelatedTagsHeader = ({ hasViewAll }: { hasViewAll?: boolean }) => (
+const RelatedTagsHeader = ({
+  hasViewAll,
+  hasShuffle,
+  onShuffle,
+}: {
+  hasViewAll?: boolean
+  hasShuffle?: boolean
+  onShuffle?: () => void
+}) => (
   <PageHeader
     title={
       <Translate zh_hant="相關標籤" zh_hans="相关标签" en="Related Tags" />
@@ -34,6 +43,9 @@ const RelatedTagsHeader = ({ hasViewAll }: { hasViewAll?: boolean }) => (
     is="h2"
     hasNoBorder
   >
+    <section className="right">
+      {hasShuffle && <ShuffleButton onClick={onShuffle} />}
+    </section>
     {hasViewAll && (
       <section className="right">
         <ViewAllButton
@@ -54,7 +66,7 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
   const { edges } =
     (data?.node?.__typename === 'Tag' && data.node.recommended) || {}
 
-  const onClick = (i: number, id: string) => () =>
+  const trackRelatedTags = (i: number, id: string) =>
     analytics.trackEvent('click_feed', {
       type: 'related_tags',
       contentType: 'tag',
@@ -71,6 +83,8 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
     inSidebar,
   })
 
+  // const onShuffle = () => { console.log('RelatedTagsHeader::onShuffle') }
+
   if (!inSidebar) {
     return (
       <section className={relatedTagsClasses}>
@@ -83,7 +97,10 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
                     key={cursor}
                     tag={node}
                     onClick={() =>
-                      onClick((edgeIndex + 1) * (nodeIndex + 1) - 1, node.id)
+                      trackRelatedTags(
+                        (edgeIndex + 1) * (nodeIndex + 1) - 1,
+                        node.id
+                      )
                     }
                   />
                 ))}
@@ -116,7 +133,10 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
       <List hasBorder={false}>
         {edges?.map(({ node, cursor }, i) => (
           <List.Item key={cursor}>
-            <TagDigest.Sidebar tag={node} onClick={() => onClick(i, node.id)} />
+            <TagDigest.Sidebar
+              tag={node}
+              onClick={() => trackRelatedTags(i, node.id)}
+            />
           </List.Item>
         ))}
       </List>
