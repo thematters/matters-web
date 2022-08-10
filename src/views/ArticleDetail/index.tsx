@@ -30,7 +30,7 @@ import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { UserDigest } from '~/components/UserDigest'
 
 import { ADD_TOAST, URL_QS } from '~/common/enums'
-import { stripPunctPrefixSuffix, toGlobalId, toPath } from '~/common/utils'
+import { stripAllPunct, toGlobalId, toPath } from '~/common/utils'
 
 import Collection from './Collection'
 import Content from './Content'
@@ -371,7 +371,7 @@ const ArticleDetail = () => {
   }
 
   const keywords = (article.tags || []).map(({ content }) =>
-    stripPunctPrefixSuffix(content)
+    stripAllPunct(content)
   )
 
   /**
