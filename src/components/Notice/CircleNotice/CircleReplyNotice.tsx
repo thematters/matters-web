@@ -14,28 +14,23 @@ import NoticeHead from '../NoticeHead'
 import NoticeTypeIcon from '../NoticeTypeIcon'
 import styles from '../styles.css'
 
-import { CircleCommentNotice as NoticeType } from './__generated__/CircleCommentNotice'
+import { CircleReplyNotice as NoticeType } from './__generated__/CircleReplyNotice'
 
-type CircleCommentNoticeType = {
+type CircleReplyNoticeType = {
   notice: NoticeType
   noticeType:
-    | 'circleNewDiscussion'
-    | 'circleNewBroadcast'
-    | 'circleMemberBroadcast'
-    | 'circleMemberNewDiscussion'
-    | 'circleMemberNewDiscussionReply'
-    | 'circleMemberNewBroadcastReply'
-    | 'inCircleNewArticle'
-    | 'inCircleNewBroadcast'
-    | 'inCircleNewBroadcastReply'
-    | 'inCircleNewDiscussion'
-    | 'inCircleNewDiscussionReply'
+  | 'circleMemberNewDiscussion'
+  | 'circleMemberNewDiscussionReply'
+  | 'circleMemberNewBroadcastReply'
+  | 'inCircleNewBroadcastReply'
+  | 'inCircleNewDiscussion'
+  | 'inCircleNewDiscussionReply'
 }
 
-const CircleCommentNotice = ({
+const CircleReplyNotice = ({
   notice,
   noticeType,
-}: CircleCommentNoticeType) => {
+}: CircleReplyNoticeType) => {
   if (!notice.actors) {
     return null
   }
@@ -43,7 +38,6 @@ const CircleCommentNotice = ({
   const actorsCount = notice.actors.length
   const isMultiActors = actorsCount > 1
   const discussion =
-    noticeType === 'circleNewDiscussion' ||
     noticeType === 'circleMemberNewDiscussion' ||
     noticeType === 'inCircleNewDiscussion'
   const discussionReply =
@@ -110,9 +104,9 @@ const CircleCommentNotice = ({
     </section>
   )
 }
-CircleCommentNotice.fragments = {
+CircleReplyNotice.fragments = {
   notice: gql`
-    fragment CircleCommentNotice on CircleNotice {
+    fragment CircleReplyNotice on CircleNotice {
       id
       ...NoticeDate
       actors {
@@ -130,4 +124,4 @@ CircleCommentNotice.fragments = {
   `,
 }
 
-export default CircleCommentNotice
+export default CircleReplyNotice

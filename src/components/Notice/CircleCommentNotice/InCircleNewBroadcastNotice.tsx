@@ -3,31 +3,27 @@ import { Fragment } from 'react'
 
 import { Translate } from '~/components'
 
-import { COMMENT_TYPE_TEXT } from '~/common/enums'
 import { numAbbr } from '~/common/utils'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorName from '../NoticeActorName'
+import NoticeCircleCard from '../NoticeCircleCard'
 import NoticeCircleName from '../NoticeCircleName'
-import NoticeComment from '../NoticeComment'
 import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
 import NoticeTypeIcon from '../NoticeTypeIcon'
 import styles from '../styles.css'
 
-import { CircleNewDiscussionNotice as NoticeType } from './__generated__/CircleNewDiscussionNotice'
+import { InCircleNewBroadcastNotice as NoticeType } from './__generated__/InCircleNewBroadcastNotice'
 
-const CircleNewDiscussionNotice = ({ notice }: { notice: NoticeType }) => {
+const InCircleNewBroadcastNotice = ({ notice }: { notice: NoticeType }) => {
   if (!notice.actors) {
     return null
   }
 
   const actorsCount = notice.actors.length
   const isMultiActors = actorsCount > 1
-  const commentCircle =
-    notice.comment?.node.__typename === 'Circle'
-      ? notice.comment.node
-      : undefined
+  const circle = notice.circle
 
   return (
     <section className="container">
@@ -54,26 +50,21 @@ const CircleNewDiscussionNotice = ({ notice }: { notice: NoticeType }) => {
               en={`etc. ${numAbbr(actorsCount)} users`}
             />
           )}
-          <Translate
-            zh_hant="在圍爐 "
-            zh_hans="在围炉 "
-            en={` sent a new ${COMMENT_TYPE_TEXT.en.circleBroadcast} on `}
-          />
-          {commentCircle && <NoticeCircleName circle={commentCircle} />}
-          <Translate
-            zh_hant={` 發布了新${COMMENT_TYPE_TEXT.zh_hant.circleBroadcast}`}
-            zh_hans={` 发布了新${COMMENT_TYPE_TEXT.zh_hans.circleBroadcast}`}
-          />
+          <Translate zh_hant="在圍爐 " zh_hans="在围炉 " en="" />
+          <NoticeCircleName circle={circle} />
+          <Translate zh_hant=" 廣播中留言" zh_hans=" 广播中留言" en="" />
         </NoticeHead>
 
-        {isMultiActors ? (
+        {/* <NoticeComment
+          comment={isMultiActors ? notice.comment : notice.reply}
+        /> */}
+
+        {isMultiActors && (
           <section className="multi-actor-avatars">
             {notice.actors.map((actor, index) => (
               <NoticeActorAvatar key={index} user={actor} size="md" />
             ))}
           </section>
-        ) : (
-          <NoticeComment comment={notice.comment} />
         )}
 
         <NoticeDate notice={notice} />
@@ -83,32 +74,24 @@ const CircleNewDiscussionNotice = ({ notice }: { notice: NoticeType }) => {
     </section>
   )
 }
-
-CircleNewDiscussionNotice.fragments = {
+InCircleNewBroadcastNotice.fragments = {
   notice: gql`
-    fragment CircleNewDiscussionNotice on CommentNotice {
+    fragment InCircleNewBroadcastNotice on CircleCommentNotice {
       id
-      commentNoticeType: type
       ...NoticeDate
       actors {
         ...NoticeActorAvatarUser
         ...NoticeActorNameUser
       }
-      comment: target {
-        ...NoticeComment
-        node {
-          ... on Circle {
-            ...NoticeCircleName
-          }
-        }
+      circle: target {
+        ...NoticeCircleCard
       }
     }
     ${NoticeActorAvatar.fragments.user}
     ${NoticeActorName.fragments.user}
-    ${NoticeCircleName.fragments.circle}
-    ${NoticeComment.fragments.comment}
+    ${NoticeCircleCard.fragments.circle}
     ${NoticeDate.fragments.notice}
   `,
 }
 
-export default CircleNewDiscussionNotice
+export default InCircleNewBroadcastNotice

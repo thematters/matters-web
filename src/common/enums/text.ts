@@ -347,7 +347,8 @@ export const TEXT = {
     USER_EMAIL_NOT_FOUND: '帳戶不正確',
     USER_NOT_FOUND: '用戶不存在',
     USER_PASSWORD_INVALID: '密碼不正確',
-    USER_PASSWORD_NOT_AVAILABLE: '當初是否透過錢包註冊？若是的話，請直接使用加密錢包登入，信箱僅作為聯繫渠道',
+    USER_PASSWORD_NOT_AVAILABLE:
+      '當初是否透過錢包註冊？若是的話，請直接使用加密錢包登入，信箱僅作為聯繫渠道',
     CRYPTO_WALLET_EXISTS: '錢包地址已存在',
     USER_ETH_ADDRESS_NOT_FOUND: '錢包地址不存在',
     user: '用戶',
@@ -711,7 +712,8 @@ export const TEXT = {
     USER_EMAIL_NOT_FOUND: '帐户不正确',
     USER_NOT_FOUND: '用户不存在',
     USER_PASSWORD_INVALID: '密码不正确',
-    USER_PASSWORD_NOT_AVAILABLE: '当初是否透过钱包注册？若是的话，请直接使用加密钱包登入，信箱仅作为联系渠道',
+    USER_PASSWORD_NOT_AVAILABLE:
+      '当初是否透过钱包注册？若是的话，请直接使用加密钱包登入，信箱仅作为联系渠道',
     CRYPTO_WALLET_EXISTS: '钱包地址已存在',
     USER_ETH_ADDRESS_NOT_FOUND: '钱包地址不存在',
     user: '用户',
@@ -1105,7 +1107,8 @@ export const TEXT = {
     USER_EMAIL_NOT_FOUND: 'Invalid Account',
     USER_NOT_FOUND: 'User not found',
     USER_PASSWORD_INVALID: 'Invalid Password',
-    USER_PASSWORD_NOT_AVAILABLE: 'Please login using your wallet if you registered via wallet login',
+    USER_PASSWORD_NOT_AVAILABLE:
+      'Please login using your wallet if you registered via wallet login',
     USER_USERNAME_EXISTS: 'Matters ID is already used by others.',
     USER_USERNAME_INVALID: 'Invalid Matters ID',
     CRYPTO_WALLET_EXISTS: 'Wallet address already exists',
