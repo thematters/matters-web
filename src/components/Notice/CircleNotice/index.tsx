@@ -48,10 +48,7 @@ const CircleNotice = ({ notice }: { notice: NoticeType }) => {
       )
     case 'InCircleNewDiscussion':
       return (
-        <CircleReplyNotice
-          notice={notice}
-          noticeType="inCircleNewDiscussion"
-        />
+        <CircleReplyNotice notice={notice} noticeType="inCircleNewDiscussion" />
       )
     case 'InCircleNewDiscussionReply':
       return (

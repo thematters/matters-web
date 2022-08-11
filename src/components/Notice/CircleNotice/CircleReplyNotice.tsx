@@ -19,18 +19,15 @@ import { CircleReplyNotice as NoticeType } from './__generated__/CircleReplyNoti
 type CircleReplyNoticeType = {
   notice: NoticeType
   noticeType:
-  | 'circleMemberNewDiscussion'
-  | 'circleMemberNewDiscussionReply'
-  | 'circleMemberNewBroadcastReply'
-  | 'inCircleNewBroadcastReply'
-  | 'inCircleNewDiscussion'
-  | 'inCircleNewDiscussionReply'
+    | 'circleMemberNewDiscussion'
+    | 'circleMemberNewDiscussionReply'
+    | 'circleMemberNewBroadcastReply'
+    | 'inCircleNewBroadcastReply'
+    | 'inCircleNewDiscussion'
+    | 'inCircleNewDiscussionReply'
 }
 
-const CircleReplyNotice = ({
-  notice,
-  noticeType,
-}: CircleReplyNoticeType) => {
+const CircleReplyNotice = ({ notice, noticeType }: CircleReplyNoticeType) => {
   if (!notice.actors) {
     return null
   }
