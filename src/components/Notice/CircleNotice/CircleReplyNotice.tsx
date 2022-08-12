@@ -20,16 +20,15 @@ import { CircleReplyNotice as NoticeType } from './__generated__/CircleReplyNoti
 type CircleReplyNoticeType = {
   notice: NoticeType
   noticeType:
-  | 'circleMemberNewDiscussion'
-  | 'circleMemberNewDiscussionReply'
-  | 'circleMemberNewBroadcastReply'
-  | 'inCircleNewBroadcastReply'
-  | 'inCircleNewDiscussion'
-  | 'inCircleNewDiscussionReply'
+    | 'circleMemberNewDiscussion'
+    | 'circleMemberNewDiscussionReply'
+    | 'circleMemberNewBroadcastReply'
+    | 'inCircleNewBroadcastReply'
+    | 'inCircleNewDiscussion'
+    | 'inCircleNewDiscussionReply'
 }
 
 const CircleReplyNotice = ({ notice, noticeType }: CircleReplyNoticeType) => {
-
   const viewer = useContext(ViewerContext)
   const node = notice.node?.__typename === 'Comment' ? notice.node : null
   const replyMyDiscuddion = viewer.id === node?.replyTo?.author?.id
@@ -85,12 +84,16 @@ const CircleReplyNotice = ({ notice, noticeType }: CircleReplyNoticeType) => {
                 en=""
               />
             )}
-            {discussionReply && (
-              replyMyDiscuddion ?
-                <Translate zh_hant=" 回覆了你的眾聊" zh_hans=" 回复了你的众聊" en="" />
-                :
+            {discussionReply &&
+              (replyMyDiscuddion ? (
+                <Translate
+                  zh_hant=" 回覆了你的眾聊"
+                  zh_hans=" 回复了你的众聊"
+                  en=""
+                />
+              ) : (
                 <Translate zh_hant=" 回覆了眾聊" zh_hans=" 回复了众聊" en="" />
-            )}
+              ))}
             {broadcastReply && (
               <Translate zh_hant=" 廣播中留言" zh_hans=" 广播中留言" en="" />
             )}
