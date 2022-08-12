@@ -30,9 +30,6 @@ export default gql`
     "Login or sign up wall in article detail page"
     wall: Boolean!
 
-    "Whether push notification is supported/enabled"
-    push: Push!
-
     "Log route history for page back button"
     routeHistory: [String!]
 

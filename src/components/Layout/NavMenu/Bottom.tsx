@@ -11,7 +11,7 @@ import {
 import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
 
 import { ADD_TOAST, PATHS, STORAGE_KEY_AUTH_TOKEN } from '~/common/enums'
-import { redirectToTarget, storage, unsubscribePush } from '~/common/utils'
+import { redirectToTarget, storage } from '~/common/utils'
 
 import { UserLogout } from '~/components/GQL/mutations/__generated__/UserLogout'
 
@@ -24,12 +24,6 @@ const NavMenuBottom: React.FC<NavMenuBottomProps> = ({ isInSideDrawerNav }) => {
     showToast: false,
   })
   const onClickLogout = async () => {
-    try {
-      await unsubscribePush()
-    } catch (e) {
-      console.error(e)
-    }
-
     try {
       await logout().then(() => {
         storage.remove(STORAGE_KEY_AUTH_TOKEN)
