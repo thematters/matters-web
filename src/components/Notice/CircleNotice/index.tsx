@@ -1,8 +1,10 @@
 import gql from 'graphql-tag'
 
-import CircleCommentNotice from './CircleCommentNotice'
+import CircleBroadcastMentionedYouNotice from './CircleBroadcastMentionedYouNotice'
+import CircleDiscussionMentionedYouNotice from './CircleDiscussionMentionedYouNotice'
 import CircleInvitationNotice from './CircleInvitationNotice'
 import CircleNewUserNotice from './CircleNewUserNotice'
+import CircleReplyNotice from './CircleReplyNotice'
 
 import { CircleNotice as NoticeType } from './__generated__/CircleNotice'
 
@@ -17,67 +19,50 @@ const CircleNotice = ({ notice }: { notice: NoticeType }) => {
       return <CircleNewUserNotice notice={notice} userType="unsubscriber" />
     case 'CircleInvitation':
       return <CircleInvitationNotice notice={notice} />
-    case 'CircleNewDiscussion':
+
+    case 'CircleMemberNewBroadcastReply':
       return (
-        <CircleCommentNotice notice={notice} noticeType="circleNewDiscussion" />
-      )
-    case 'CircleNewBroadcast':
-      return (
-        <CircleCommentNotice notice={notice} noticeType="circleNewBroadcast" />
+        <CircleReplyNotice
+          notice={notice}
+          noticeType="circleMemberNewBroadcastReply"
+        />
       )
     case 'CircleMemberNewDiscussion':
       return (
-        <CircleCommentNotice
+        <CircleReplyNotice
           notice={notice}
           noticeType="circleMemberNewDiscussion"
         />
       )
     case 'CircleMemberNewDiscussionReply':
       return (
-        <CircleCommentNotice
+        <CircleReplyNotice
           notice={notice}
           noticeType="circleMemberNewDiscussionReply"
         />
       )
-    case 'CircleMemberNewBroadcastReply':
-      return (
-        <CircleCommentNotice
-          notice={notice}
-          noticeType="circleMemberNewBroadcastReply"
-        />
-      )
-    case 'InCircleNewArticle':
-      return (
-        <CircleCommentNotice notice={notice} noticeType="inCircleNewArticle" />
-      )
-    case 'InCircleNewBroadcast':
-      return (
-        <CircleCommentNotice
-          notice={notice}
-          noticeType="inCircleNewBroadcast"
-        />
-      )
     case 'InCircleNewBroadcastReply':
       return (
-        <CircleCommentNotice
+        <CircleReplyNotice
           notice={notice}
           noticeType="inCircleNewBroadcastReply"
         />
       )
     case 'InCircleNewDiscussion':
       return (
-        <CircleCommentNotice
-          notice={notice}
-          noticeType="inCircleNewDiscussion"
-        />
+        <CircleReplyNotice notice={notice} noticeType="inCircleNewDiscussion" />
       )
     case 'InCircleNewDiscussionReply':
       return (
-        <CircleCommentNotice
+        <CircleReplyNotice
           notice={notice}
           noticeType="inCircleNewDiscussionReply"
         />
       )
+    case 'CircleBroadcastMentionedYou':
+      return <CircleBroadcastMentionedYouNotice notice={notice} />
+    case 'CircleDiscussionMentionedYou':
+      return <CircleDiscussionMentionedYouNotice notice={notice} />
     default:
       return null
   }
@@ -92,11 +77,15 @@ CircleNotice.fragments = {
       circleNoticeType: type
       ...CircleNewUserNotice
       ...CircleInvitationNotice
-      ...CircleCommentNotice
+      ...CircleReplyNotice
+      ...CircleBroadcastMentionedYouNotice
+      ...CircleDiscussionMentionedYouNotice
     }
     ${CircleNewUserNotice.fragments.notice}
     ${CircleInvitationNotice.fragments.notice}
-    ${CircleCommentNotice.fragments.notice}
+    ${CircleReplyNotice.fragments.notice}
+    ${CircleBroadcastMentionedYouNotice.fragments.notice}
+    ${CircleDiscussionMentionedYouNotice.fragments.notice}
   `,
 }
 
