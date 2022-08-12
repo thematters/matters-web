@@ -15,7 +15,6 @@ import styles from '../styles.css'
 import { InCircleNewArticleNotice as NoticeType } from './__generated__/InCircleNewArticleNotice'
 
 const InCircleNewArticleNotice = ({ notice }: { notice: NoticeType }) => {
-
   const circle = notice.circle
   const article = notice.collection
   const isMember = notice.circle.isMember
@@ -30,15 +29,17 @@ const InCircleNewArticleNotice = ({ notice }: { notice: NoticeType }) => {
       <section className="content-wrap">
         <NoticeHead
           subtitle={
-            !isMember && !isPublic ?
+            !isMember && !isPublic ? (
               <Translate
                 zh_hant="新作加入圍爐，馬上訂閱即可免費閱讀。"
                 zh_hans="新作加入围炉，马上订阅即可免费阅读。"
-              /> :
+              />
+            ) : (
               <Translate
                 zh_hant="新作加入圍爐，現在就前往閱讀吧！"
                 zh_hans="新作加入围炉，现在就前往阅读吧！"
               />
+            )
           }
         >
           <NoticeCircleName circle={circle} />

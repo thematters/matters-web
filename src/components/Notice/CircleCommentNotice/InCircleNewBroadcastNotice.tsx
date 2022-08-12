@@ -32,12 +32,14 @@ const InCircleNewBroadcastNotice = ({ notice }: { notice: NoticeType }) => {
           <NoticeActorName user={actor} />
           <Translate zh_hant=" 在圍爐 " zh_hans=" 在围炉 " en="" />
           <NoticeCircleName circle={circle} />
-          <Translate zh_hant=" 發布新的廣播：" zh_hans=" 发布新的广播：" en="" />
+          <Translate
+            zh_hant=" 發布新的廣播："
+            zh_hans=" 发布新的广播："
+            en=""
+          />
         </NoticeHead>
 
-        <NoticeComment
-          comment={notice.reply}
-        />
+        <NoticeComment comment={notice.reply} />
 
         <NoticeDate notice={notice} />
       </section>

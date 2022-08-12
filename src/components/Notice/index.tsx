@@ -74,7 +74,7 @@ const fragments = {
     ${TransactionNotice.fragments.notice}
     ${CircleArticleNotice.fragments.notice}
     ${CircleCommentNotice.fragments.notice}
-    ${CircleNotice.fragments.notice}    
+    ${CircleNotice.fragments.notice}
     ${CryptoNotice.fragments.notice}
     ${OfficialAnnouncementNotice.fragments.notice}
   `,
