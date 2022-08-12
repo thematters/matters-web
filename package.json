@@ -32,7 +32,7 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "prepare": "husky install",
-    "vercel-build": "set -xe; if [[ \"$NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF\" =~ release/* ]] ; then npm run gen:type:prod; cp -va .env.prod .env ; echo 'NEXT_PUBLIC_SITE_DOMAIN=web-next.matters.news' | tee -a .env.local; else npm run gen:type; cp -va .env.dev .env ; echo 'NEXT_PUBLIC_SITE_DOMAIN=web-dev.matters.news' | tee -a .env.local ; fi && npm run build"
+    "vercel-build": "set -xe; if [[ \"$NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF\" =~ release/* ]] ; then npm run gen:type:prod; cp -va .env.prod .env ; echo -e 'NEXT_PUBLIC_SITE_DOMAIN=web-next.matters.news\nNEXT_PUBLIC_NEXT_ASSET_DOMAIN=web-next.matters.news' | tee -a .env.local; else npm run gen:type; cp -va .env.dev .env ; echo 'NEXT_PUBLIC_SITE_DOMAIN=web-dev.matters.news' | tee -a .env.local ; fi && npm run build"
   },
   "dependencies": {
     "@apollo/react-common": "^3.1.3",
