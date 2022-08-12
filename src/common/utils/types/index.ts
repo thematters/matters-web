@@ -59,11 +59,6 @@ export default gql`
     feedAuthors: Int
   }
 
-  type Push {
-    enabled: Boolean!
-    supported: Boolean!
-  }
-
   type ViewportSize {
     width: Int
     height: Int

@@ -4,11 +4,6 @@ const clientPreferenceResolver = (_: any) => {
     id: 'local',
     readCivicLikerDialog: false,
     wall: true,
-    push: {
-      enabled: false,
-      supported: false,
-      __typename: 'Push',
-    },
     routeHistory: [],
     onboardingTasks: {
       enabled: false,
