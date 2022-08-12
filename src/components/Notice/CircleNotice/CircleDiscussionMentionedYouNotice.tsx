@@ -4,16 +4,15 @@ import { Translate } from '~/components'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorName from '../NoticeActorName'
-import NoticeArticleTitle from '../NoticeArticleTitle'
+import NoticeCircleCard from '../NoticeCircleCard'
 import NoticeCircleName from '../NoticeCircleName'
-import NoticeComment from '../NoticeComment'
 import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
 import styles from '../styles.css'
 
-import { CircleBroadcastMentionedYouNotice as NoticeType } from './__generated__/CircleBroadcastMentionedYouNotice'
+import { CircleDiscussionMentionedYouNotice as NoticeType } from './__generated__/CircleDiscussionMentionedYouNotice'
 
-const CircleBroadcastMentionedYouNotice = ({
+const CircleDiscussionMentionedYouNotice = ({
   notice,
 }: {
   notice: NoticeType
@@ -23,8 +22,6 @@ const CircleBroadcastMentionedYouNotice = ({
   }
 
   const actor = notice.actors[0]
-  const commentCircle =
-    notice.comment?.node.__typename === 'Circle' ? notice.comment.node : null
 
   return (
     <section className="container">
@@ -40,11 +37,9 @@ const CircleBroadcastMentionedYouNotice = ({
             zh_hans=" 在围炉 "
             en=" mentioned you on "
           />
-          <NoticeCircleName circle={commentCircle} />
-          <Translate zh_hant={` 廣播提及你`} zh_hans={` 广播提及你`} en="" />
+          <NoticeCircleName circle={notice.circle} />
+          <Translate zh_hant={` 眾聊提及你`} zh_hans={` 众聊提及你`} en="" />
         </NoticeHead>
-
-        <NoticeComment comment={notice.comment} />
 
         <NoticeDate notice={notice} />
       </section>
@@ -54,31 +49,24 @@ const CircleBroadcastMentionedYouNotice = ({
   )
 }
 
-CircleBroadcastMentionedYouNotice.fragments = {
+CircleDiscussionMentionedYouNotice.fragments = {
   notice: gql`
-    fragment CircleBroadcastMentionedYouNotice on CommentNotice {
+    fragment CircleDiscussionMentionedYouNotice on CircleNotice {
       id
       ...NoticeDate
       actors {
         ...NoticeActorAvatarUser
         ...NoticeActorNameUser
       }
-      comment: target {
-        ...NoticeComment
-        node {
-          ... on Circle {
-            ...NoticeCircleName
-          }
-        }
+      circle: target {
+        ...NoticeCircleCard
       }
     }
     ${NoticeActorAvatar.fragments.user}
     ${NoticeActorName.fragments.user}
-    ${NoticeArticleTitle.fragments.article}
-    ${NoticeCircleName.fragments.circle}
-    ${NoticeComment.fragments.comment}
+    ${NoticeCircleCard.fragments.circle}
     ${NoticeDate.fragments.notice}
   `,
 }
 
-export default CircleBroadcastMentionedYouNotice
+export default CircleDiscussionMentionedYouNotice
