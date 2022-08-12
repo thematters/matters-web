@@ -1,11 +1,11 @@
 {
   "name": "matters-web",
-  "version": "4.3.7",
+  "version": "4.3.8",
   "description": "codebase of Matters' website",
   "sideEffects": false,
   "author": "Matters <hi@matters.news>",
   "engines": {
-    "node": "16.14"
+    "node": ">=16.14"
   },
   "license": "Apache-2.0",
   "scripts": {
@@ -32,7 +32,7 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "prepare": "husky install",
-    "vercel-build": "set -xe; npm run gen:type && if [[ \"$NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF\" =~ release/* ]] ; then cp -va .env.prod .env.local ; echo 'NEXT_PUBLIC_SITE_DOMAIN=web-next.matters.news' | tee -a .env.local; else cp -va .env.dev .env.local ; echo 'NEXT_PUBLIC_SITE_DOMAIN=web-dev.matters.news' | tee -a .env.local ; fi && echo 'NEXT_PUBLIC_NEXT_ASSET_DOMAIN=' | tee -a .env.local && npm run build"
+    "vercel-build": "set -xe; if [[ \"$NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF\" =~ release/* ]] ; then npm run gen:type:prod; cp -va .env.prod .env ; echo 'NEXT_PUBLIC_SITE_DOMAIN=web-next.matters.news' | tee -a .env.local; else npm run gen:type; cp -va .env.dev .env ; echo 'NEXT_PUBLIC_SITE_DOMAIN=web-dev.matters.news' | tee -a .env.local ; fi && npm run build"
   },
   "dependencies": {
     "@apollo/react-common": "^3.1.3",

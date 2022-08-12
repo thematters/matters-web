@@ -11,7 +11,6 @@ import {
   // LanguageContext,
   List,
   PageHeader,
-  // TextIcon,
   Slides,
   TagDigest,
   Translate,
@@ -61,9 +60,7 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
   const { edges } =
     (data?.node?.__typename === 'Tag' && data.node.recommended) || {}
 
-  // const { lang } = useContext(LanguageContext)
-
-  const onClick = (i: number, id: string) => () =>
+  const trackRelatedTags = (i: number, id: string) =>
     analytics.trackEvent('click_feed', {
       type: 'related_tags',
       contentType: 'tag',
@@ -92,7 +89,10 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
                     key={cursor}
                     tag={node}
                     onClick={() =>
-                      onClick((edgeIndex + 1) * (nodeIndex + 1) - 1, node.id)
+                      trackRelatedTags(
+                        (edgeIndex + 1) * (nodeIndex + 1) - 1,
+                        node.id
+                      )
                     }
                   />
                 ))}
@@ -122,7 +122,10 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
       <List hasBorder={false}>
         {edges?.map(({ node, cursor }, i) => (
           <List.Item key={cursor}>
-            <TagDigest.Sidebar tag={node} onClick={() => onClick(i, node.id)} />
+            <TagDigest.Sidebar
+              tag={node}
+              onClick={() => trackRelatedTags(i, node.id)}
+            />
           </List.Item>
         ))}
       </List>
