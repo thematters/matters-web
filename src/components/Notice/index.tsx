@@ -4,6 +4,8 @@ import React from 'react'
 import ArticleArticleNotice from './ArticleArticleNotice'
 import ArticleNotice from './ArticleNotice'
 import ArticleTagNotice from './ArticleTagNotice'
+import CircleArticleNotice from './CircleArticleNotice'
+import CircleCommentNotice from './CircleCommentNotice'
 import CircleNotice from './CircleNotice'
 import CommentCommentNotice from './CommentCommentNotice'
 import CommentNotice from './CommentNotice'
@@ -46,6 +48,12 @@ const fragments = {
       ... on TransactionNotice {
         ...TransactionNotice
       }
+      ... on CircleArticleNotice {
+        ...CircleArticleNotice
+      }
+      ... on CircleCommentNotice {
+        ...CircleCommentNotice
+      }
       ... on CircleNotice {
         ...CircleNotice
       }
@@ -64,6 +72,8 @@ const fragments = {
     ${CommentNotice.fragments.notice}
     ${TagNotice.fragments.notice}
     ${TransactionNotice.fragments.notice}
+    ${CircleArticleNotice.fragments.notice}
+    ${CircleCommentNotice.fragments.notice}
     ${CircleNotice.fragments.notice}
     ${CryptoNotice.fragments.notice}
     ${OfficialAnnouncementNotice.fragments.notice}
@@ -71,9 +81,6 @@ const fragments = {
 }
 
 const BaseNotice: React.FC<NoticeProps> = ({ notice }) => {
-  if (notice.__typename !== 'CircleNotice') {
-    console.log(notice.__typename)
-  }
   switch (notice.__typename) {
     case 'UserNotice':
       return <UserNotice notice={notice} />
@@ -91,6 +98,10 @@ const BaseNotice: React.FC<NoticeProps> = ({ notice }) => {
       return <TagNotice notice={notice} />
     case 'TransactionNotice':
       return <TransactionNotice notice={notice} />
+    case 'CircleArticleNotice':
+      return <CircleArticleNotice notice={notice} />
+    case 'CircleCommentNotice':
+      return <CircleCommentNotice notice={notice} />
     case 'CircleNotice':
       return <CircleNotice notice={notice} />
     case 'CryptoNotice':

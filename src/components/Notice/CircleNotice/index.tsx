@@ -1,5 +1,7 @@
 import gql from 'graphql-tag'
 
+import CircleBroadcastMentionedYouNotice from './CircleBroadcastMentionedYouNotice'
+import CircleDiscussionMentionedYouNotice from './CircleDiscussionMentionedYouNotice'
 import CircleInvitationNotice from './CircleInvitationNotice'
 import CircleNewUserNotice from './CircleNewUserNotice'
 import CircleReplyNotice from './CircleReplyNotice'
@@ -57,6 +59,10 @@ const CircleNotice = ({ notice }: { notice: NoticeType }) => {
           noticeType="inCircleNewDiscussionReply"
         />
       )
+    case 'CircleBroadcastMentionedYou':
+      return <CircleBroadcastMentionedYouNotice notice={notice} />
+    case 'CircleDiscussionMentionedYou':
+      return <CircleDiscussionMentionedYouNotice notice={notice} />
     default:
       return null
   }
@@ -72,10 +78,14 @@ CircleNotice.fragments = {
       ...CircleNewUserNotice
       ...CircleInvitationNotice
       ...CircleReplyNotice
+      ...CircleBroadcastMentionedYouNotice
+      ...CircleDiscussionMentionedYouNotice
     }
     ${CircleNewUserNotice.fragments.notice}
     ${CircleInvitationNotice.fragments.notice}
     ${CircleReplyNotice.fragments.notice}
+    ${CircleBroadcastMentionedYouNotice.fragments.notice}
+    ${CircleDiscussionMentionedYouNotice.fragments.notice}
   `,
 }
 
