@@ -9,7 +9,6 @@ import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorName from '../NoticeActorName'
 import NoticeCircleCard from '../NoticeCircleCard'
 import NoticeCircleName from '../NoticeCircleName'
-import NoticeComment from '../NoticeComment'
 import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
 import NoticeTypeIcon from '../NoticeTypeIcon'
@@ -20,18 +19,18 @@ import { CircleReplyNotice as NoticeType } from './__generated__/CircleReplyNoti
 type CircleReplyNoticeType = {
   notice: NoticeType
   noticeType:
-    | 'circleMemberNewDiscussion'
-    | 'circleMemberNewDiscussionReply'
-    | 'circleMemberNewBroadcastReply'
-    | 'inCircleNewBroadcastReply'
-    | 'inCircleNewDiscussion'
-    | 'inCircleNewDiscussionReply'
+  | 'circleMemberNewDiscussion'
+  | 'circleMemberNewDiscussionReply'
+  | 'circleMemberNewBroadcastReply'
+  | 'inCircleNewBroadcastReply'
+  | 'inCircleNewDiscussion'
+  | 'inCircleNewDiscussionReply'
 }
 
 const CircleReplyNotice = ({ notice, noticeType }: CircleReplyNoticeType) => {
   const viewer = useContext(ViewerContext)
   const node = notice.node?.__typename === 'Comment' ? notice.node : null
-  const replyMyDiscuddion = viewer.id === node?.replyTo?.author?.id
+  const replyMyDiscussion = viewer.id === node?.replyTo?.author.id
 
   if (!notice.actors) {
     return null
@@ -85,7 +84,7 @@ const CircleReplyNotice = ({ notice, noticeType }: CircleReplyNoticeType) => {
               />
             )}
             {discussionReply &&
-              (replyMyDiscuddion ? (
+              (replyMyDiscussion ? (
                 <Translate
                   zh_hant=" 回覆了你的眾聊"
                   zh_hans=" 回复了你的众聊"
@@ -106,7 +105,6 @@ const CircleReplyNotice = ({ notice, noticeType }: CircleReplyNoticeType) => {
             </section>
           )}
         </NoticeHead>
-        {/* <NoticeComment comment={notice.node} /> */}
         <NoticeDate notice={notice} />
       </section>
 
@@ -128,7 +126,6 @@ CircleReplyNotice.fragments = {
       }
       node {
         ... on Comment {
-          ...NoticeComment
           replyTo {
             author {
               id
@@ -140,7 +137,6 @@ CircleReplyNotice.fragments = {
     ${NoticeActorAvatar.fragments.user}
     ${NoticeActorName.fragments.user}
     ${NoticeCircleCard.fragments.circle}
-    ${NoticeComment.fragments.comment}
     ${NoticeDate.fragments.notice}
   `,
 }
