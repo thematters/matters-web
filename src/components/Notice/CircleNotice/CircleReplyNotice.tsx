@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
-import { Fragment } from 'react'
+import { Fragment, useContext } from 'react'
 
-import { Translate } from '~/components'
+import { Translate, ViewerContext } from '~/components'
 
 import { numAbbr } from '~/common/utils'
 
@@ -28,6 +28,10 @@ type CircleReplyNoticeType = {
 }
 
 const CircleReplyNotice = ({ notice, noticeType }: CircleReplyNoticeType) => {
+  const viewer = useContext(ViewerContext)
+  const node = notice.node?.__typename === 'Comment' ? notice.node : null
+  const replyMyDiscussion = viewer.id === node?.replyTo?.author.id
+
   if (!notice.actors) {
     return null
   }
@@ -79,9 +83,16 @@ const CircleReplyNotice = ({ notice, noticeType }: CircleReplyNoticeType) => {
                 en=""
               />
             )}
-            {discussionReply && (
-              <Translate zh_hant=" 回覆了眾聊" zh_hans=" 回复了众聊" en="" />
-            )}
+            {discussionReply &&
+              (replyMyDiscussion ? (
+                <Translate
+                  zh_hant=" 回覆了你的眾聊"
+                  zh_hans=" 回复了你的众聊"
+                  en=""
+                />
+              ) : (
+                <Translate zh_hant=" 回覆了眾聊" zh_hans=" 回复了众聊" en="" />
+              ))}
             {broadcastReply && (
               <Translate zh_hant=" 廣播中留言" zh_hans=" 广播中留言" en="" />
             )}
@@ -93,8 +104,8 @@ const CircleReplyNotice = ({ notice, noticeType }: CircleReplyNoticeType) => {
               ))}
             </section>
           )}
-          <NoticeDate notice={notice} />
         </NoticeHead>
+        <NoticeDate notice={notice} />
       </section>
 
       <style jsx>{styles}</style>
@@ -112,6 +123,15 @@ CircleReplyNotice.fragments = {
       }
       circle: target {
         ...NoticeCircleCard
+      }
+      node {
+        ... on Comment {
+          replyTo {
+            author {
+              id
+            }
+          }
+        }
       }
     }
     ${NoticeActorAvatar.fragments.user}
