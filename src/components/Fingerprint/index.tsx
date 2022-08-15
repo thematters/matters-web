@@ -6,7 +6,7 @@ import { storage } from '~/common/utils'
 
 const Fingerprint = () => {
   useEffect(() => {
-    if (!process.browser || typeof window === 'undefined') {
+    if (!typeof window || typeof window === 'undefined') {
       return
     }
 
