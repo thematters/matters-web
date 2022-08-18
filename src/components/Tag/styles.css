@@ -5,6 +5,7 @@
 .tag .name {
   @mixin line-clamp;
 
+  max-width: 6.9375rem;
   line-height: inherit;
 }
 
