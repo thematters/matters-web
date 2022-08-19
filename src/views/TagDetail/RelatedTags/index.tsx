@@ -74,7 +74,7 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
   const { data, refetch } = usePublicQuery<TagDetailRecommended>(RELATED_TAGS, {
     variables: { id: tagId, random: lastRandom || 0 },
   })
- 
+
   const { edges } =
     (data?.node?.__typename === 'Tag' && data.node.recommended) || {}
 
@@ -108,9 +108,7 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
   if (!inSidebar) {
     return (
       <section className={relatedTagsClasses}>
-        <Slides
-          header={<RelatedTagsHeader hasShuffle onShuffle={shuffle} />}
-        >
+        <Slides header={<RelatedTagsHeader hasShuffle onShuffle={shuffle} />}>
           {_chunk(edges, 5).map((chunks, edgeIndex) => (
             <Slides.Item size="md" key={edgeIndex}>
               <section>

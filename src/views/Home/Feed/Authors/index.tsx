@@ -105,6 +105,7 @@ const Authors = () => {
                       id: node.id,
                     })
                   }
+                  hasLengthLimit
                 />
               ))}
             </section>
