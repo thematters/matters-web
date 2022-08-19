@@ -99,6 +99,7 @@ const Authors = () => {
                   })
                 }
                 hasState={false}
+                hasLengthLimit
               />
             </List.Item>
           ))}

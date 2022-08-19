@@ -8,6 +8,10 @@
   line-height: inherit;
 }
 
+.limit .name {
+  max-width: 6.9375rem;
+}
+
 .list {
   position: relative;
   display: block;
