@@ -5,6 +5,12 @@ import { ViewerContext } from '~/components'
 
 import { analytics } from '~/common/utils'
 
+// get referrer without query string
+// should be same as window.location.origin + window.location.pathname
+function getPageReferrer(url: string = window.location.href) {
+  return url.split('?')?.[0] || url
+}
+
 const PageViewTracker = () => {
   const router = useRouter()
   const viewer = useContext(ViewerContext)
@@ -22,7 +28,7 @@ const PageViewTracker = () => {
       analytics.trackPage()
     }, 1000)
 
-    referrer.current = window.location.pathname
+    referrer.current = getPageReferrer() // window.location.origin + window.location.pathname
   }, [viewer.privateFetched])
 
   // subsequent changes
@@ -33,7 +39,7 @@ const PageViewTracker = () => {
       }
 
       analytics.trackPage('page_view', { page_referrer: referrer.current })
-      referrer.current = window.location.pathname
+      referrer.current = getPageReferrer() // window.location.origin + window.location.pathname
     }
 
     router.events.on('routeChangeComplete', trackPage)
