@@ -64,7 +64,7 @@ const Rich = ({
     container: true,
     [`size-${size}`]: !!size,
     disabled: isArchived,
-    limit: hasLengthLimit
+    limit: hasLengthLimit,
   })
 
   if (isArchived) {

@@ -42,17 +42,17 @@ const fragments = {
 }
 
 export const toDigestTagPlaceholder = (content: string) =>
-({
-  __typename: 'Tag',
-  id: content,
-  content,
-  articles: {
-    __typename: 'ArticleConnection',
-    totalCount: 0,
-  },
-  numArticles: 0,
-  numAuthors: 0,
-} as DigestTag)
+  ({
+    __typename: 'Tag',
+    id: content,
+    content,
+    articles: {
+      __typename: 'ArticleConnection',
+      totalCount: 0,
+    },
+    numArticles: 0,
+    numAuthors: 0,
+  } as DigestTag)
 
 export const Tag = ({
   tag,
@@ -73,7 +73,7 @@ export const Tag = ({
     active,
     clickable: !!onClick,
     disabled: !!disabled && !onClick,
-    limit: hasLengthLimit
+    limit: hasLengthLimit,
   })
 
   const path = toPath({
