@@ -74,19 +74,19 @@ const CircleNewBroadcastComments = ({
             )}
             <NoticeCircleName circle={notice.circle} />
             {replyCount && !mentionCount && (
-              <Translate zh_hant=" 廣播中留言 " zh_hans=" 廣播中留言 " en="" />
+              <Translate zh_hant=" 廣播中留言 " zh_hans=" 广播中留言 " en="" />
             )}
             {!replyCount && mentionCount && (
               <Translate
-                zh_hant=" 廣播中提及了你 "
-                zh_hans=" 廣播中提及了你 "
+                zh_hant=" 廣播中留言，其中有提及你 "
+                zh_hans=" 广播中留言，其中有提及你 "
                 en=""
               />
             )}
             {replyCount && mentionCount && (
               <Translate
-                zh_hant=" 廣播中留言並提及了你 "
-                zh_hans=" 廣播中留言並提及了你 "
+                zh_hant=" 廣播中留言，其中有提及你 "
+                zh_hans=" 广播中留言，其中有提及你 "
                 en=""
               />
             )}

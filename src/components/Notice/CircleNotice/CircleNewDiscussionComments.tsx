@@ -69,54 +69,58 @@ const CircleNewDiscussionComments = ({
           )}
           <>
             {isCircleOwner ? (
-              <Translate zh_hant="在你的圍爐 " zh_hans="在你的围炉 " en="" />
+              <Translate zh_hant="在你的圍爐 " zh_hans="在你的围炉 " en=" in" />
             ) : (
-              <Translate zh_hant="在圍爐 " zh_hans="在围炉 " en="" />
+              <Translate zh_hant="在圍爐 " zh_hans="在围炉 " en=" in " />
             )}
             <NoticeCircleName circle={notice.circle} />
             {newDiscussionCount && !replyCount && !mentionCount && (
               <Translate
-                zh_hant=" 眾聊發新話題 "
-                zh_hans=" 眾聊發新話題 "
-                en=""
+                zh_hant=" 眾聊中發表話題 "
+                zh_hans=" 众聊中发表话题 "
+                en=" posted new discussions "
               />
             )}
             {!newDiscussionCount && replyCount && !mentionCount && (
-              <Translate zh_hant=" 回覆了眾聊 " zh_hans=" 回覆了眾聊 " en="" />
+              <Translate
+                zh_hant=" 眾聊中回覆話題 "
+                zh_hans=" 众聊中回复话题 "
+                en=" replied discussions "
+              />
             )}
             {!newDiscussionCount && !replyCount && mentionCount && (
               <Translate
                 zh_hant=" 眾聊提及了你 "
-                zh_hans=" 眾聊提及了你 "
-                en=""
+                zh_hans=" 众聊提及了你 "
+                en=" mentioned you "
               />
             )}
             {newDiscussionCount && replyCount && !mentionCount && (
               <Translate
-                zh_hant=" 眾聊發新話題和回覆 "
-                zh_hans=" 眾聊發新話題和回覆 "
-                en=""
+                zh_hant=" 眾聊中發表與回覆話題 "
+                zh_hans=" 众聊中发表与回复话题 "
+                en=" posted and replied discussions "
               />
             )}
             {newDiscussionCount && !replyCount && mentionCount && (
               <Translate
-                zh_hant=" 眾聊發新話題和提及你 "
-                zh_hans=" 眾聊發新話題和提及你 "
-                en=""
+                zh_hant=" 眾聊中發表話題，其中有提及你 "
+                zh_hans=" 众聊中发表话题，其中有提及你 "
+                en=" posted new discussions and mentioned you "
               />
             )}
             {!newDiscussionCount && replyCount && mentionCount && (
               <Translate
-                zh_hant=" 回覆了眾聊並提及你 "
-                zh_hans=" 回覆了眾聊並提及你 "
-                en=""
+                zh_hant=" 眾聊中回覆話題，其中有提到你 "
+                zh_hans=" 众聊中回复话题，其中有提到你 "
+                en=" replied discussions and mentioned you "
               />
             )}
             {newDiscussionCount && replyCount && mentionCount && (
               <Translate
-                zh_hant=" 眾聊發新話題和回覆並提及你 "
-                zh_hans=" 眾聊發新話題和回覆並提及你 "
-                en=""
+                zh_hant=" 眾聊中發表與回覆話題，其中有提到你 "
+                zh_hans=" 众聊中发表与回复话题，其中有提到你 "
+                en=" posted and replied discussions, some mentioned you "
               />
             )}
           </>
