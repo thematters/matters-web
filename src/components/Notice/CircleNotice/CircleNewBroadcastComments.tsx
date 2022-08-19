@@ -68,26 +68,34 @@ const CircleNewBroadcastComments = ({
           )}
           <>
             {isCircleOwner ? (
-              <Translate zh_hant="在你的圍爐 " zh_hans="在你的围炉 " en="" />
+              <Translate
+                zh_hant="在你的圍爐 "
+                zh_hans="在你的围炉 "
+                en=" in "
+              />
             ) : (
-              <Translate zh_hant="在圍爐 " zh_hans="在围炉 " en="" />
+              <Translate zh_hant="在圍爐 " zh_hans="在围炉 " en=" in " />
             )}
             <NoticeCircleName circle={notice.circle} />
             {replyCount && !mentionCount && (
-              <Translate zh_hant=" 廣播中留言 " zh_hans=" 广播中留言 " en="" />
+              <Translate
+                zh_hant=" 廣播中留言 "
+                zh_hans=" 广播中留言 "
+                en=" replied broadcasts "
+              />
             )}
             {!replyCount && mentionCount && (
               <Translate
                 zh_hant=" 廣播中留言，其中有提及你 "
                 zh_hans=" 广播中留言，其中有提及你 "
-                en=""
+                en=" replied broadcasts and mentioned you "
               />
             )}
             {replyCount && mentionCount && (
               <Translate
                 zh_hant=" 廣播中留言，其中有提及你 "
                 zh_hans=" 广播中留言，其中有提及你 "
-                en=""
+                en=" replied broadcasts and mentioned you "
               />
             )}
           </>
