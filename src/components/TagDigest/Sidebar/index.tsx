@@ -71,6 +71,7 @@ const Sidebar = ({ tag, ...cardProps }: TagDigestSidebarProps) => {
               type="plain"
               iconProps={{ color: 'grey-darker' }}
               textIconProps={{ color: 'black', weight: 'md', size: 'sm' }}
+              hasLengthLimit
             />
           </header>
 
