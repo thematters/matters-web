@@ -1,37 +1,24 @@
 import {
   Button,
   ButtonProps,
-  IconArrowDown16,
-  IconArrowRight16,
+  IconArrowRight8,
   TextIcon,
   Translate,
 } from '~/components'
 
-type ViewAllButtonProps = {
-  arrowIconDirection?: 'down' | 'right'
-} & ButtonProps
+type ViewAllButtonProps = ButtonProps
 
-export const ViewAllButton: React.FC<ViewAllButtonProps> = ({
-  arrowIconDirection = 'right',
-  ...props
-}) => {
-  const icon =
-    arrowIconDirection === 'right' ? (
-      <IconArrowRight16 size="xs" />
-    ) : (
-      <IconArrowDown16 size="xs" />
-    )
-
+export const ViewAllButton: React.FC<ViewAllButtonProps> = ({ ...props }) => {
   return (
     <Button
-      size={[null, '1.25rem']}
-      spacing={[0, 'xtight']}
-      bgColor="grey-lighter"
+      size={[null, '1.75rem']}
+      spacing={[0, 'tight']}
+      borderColor="green"
       {...props}
     >
       <TextIcon
-        icon={icon}
-        color="grey"
+        icon={<IconArrowRight8 size="xs" />}
+        color="green"
         size="xs"
         weight="md"
         textPlacement="left"

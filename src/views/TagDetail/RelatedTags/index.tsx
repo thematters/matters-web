@@ -50,13 +50,7 @@ const RelatedTagsHeader = ({
     >
       <section className="right">
         {hasShuffle && <ShuffleButton onClick={onShuffle} />}
-        {hasViewAll && (
-          <ViewAllButton
-            href={PATHS.TAGS}
-            bgColor={undefined}
-            bgActiveColor="grey-lighter"
-          />
-        )}
+        {hasViewAll && <ViewAllButton href={PATHS.TAGS} />}
       </section>
       <style jsx>{styles}</style>
     </PageHeader>
