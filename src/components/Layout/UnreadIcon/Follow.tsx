@@ -22,7 +22,7 @@ const FollowUnreadIcon: React.FC<FollowUnreadIconProps> = ({ active }) => {
   const { data, startPolling } = useQuery<UnreadFollowing>(UNREAD_FOLLOWING, {
     errorPolicy: 'none',
     fetchPolicy: 'network-only',
-    skip: !viewer.isAuthed || !process.browser,
+    skip: !viewer.isAuthed || !typeof window,
   })
 
   // FIXME: https://github.com/apollographql/apollo-client/issues/3775

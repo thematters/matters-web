@@ -24,7 +24,7 @@ const NotificationUnreadIcon: React.FC<UnreadIconProps> = ({ active }) => {
     {
       errorPolicy: 'ignore',
       fetchPolicy: 'network-only',
-      skip: !viewer.isAuthed || !process.browser,
+      skip: !viewer.isAuthed || !typeof window,
     }
   )
 

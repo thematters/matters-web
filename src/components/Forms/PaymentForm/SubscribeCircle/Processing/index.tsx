@@ -20,7 +20,7 @@ const Processing: React.FC<Props> = ({ circleName, nextStep }) => {
     pollInterval: polling ? 1000 : undefined,
     errorPolicy: 'none',
     fetchPolicy: 'network-only',
-    skip: !process.browser,
+    skip: !typeof window,
   })
   const isMember = data?.circle?.isMember
 

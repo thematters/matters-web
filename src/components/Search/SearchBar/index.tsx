@@ -116,7 +116,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
               )
             }
             trigger={undefined}
-            appendTo={process.browser ? document.body : undefined}
+            appendTo={typeof window ? document.body : undefined}
             placement="bottom-start"
             onClickOutside={closeDropdown}
             visible={showDropdown}
