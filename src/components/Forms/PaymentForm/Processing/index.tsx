@@ -45,7 +45,7 @@ const PaymentProcessingForm: React.FC<Props> = ({
     pollInterval: polling ? 1000 : undefined,
     errorPolicy: 'none',
     fetchPolicy: 'network-only',
-    skip: !typeof window,
+    skip: !process.browser,
   })
   const txState = _get(data, 'viewer.wallet.transactions.edges.0.node.state')
 

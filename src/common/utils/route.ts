@@ -269,7 +269,7 @@ export const redirectToLogin = () => {
 export const appendTarget = (href: string, fallbackCurrent?: boolean) => {
   let target = ''
 
-  if (typeof window) {
+  if (process.browser) {
     target = getTarget()
     target = fallbackCurrent ? getEncodedCurrent() : target
   }

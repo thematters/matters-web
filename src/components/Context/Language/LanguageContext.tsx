@@ -48,7 +48,7 @@ export const LanguageProvider = ({
   const viewerLang = viewer?.settings?.language
   let storedLang
 
-  if (typeof window) {
+  if (process.browser) {
     storedLang = storage.get(STORAGE_KEY_LANGUAGE)
   }
 
@@ -57,7 +57,7 @@ export const LanguageProvider = ({
   let lang = (viewer.isAuthed && viewerLang) || localLang
 
   // fallback to browser preference
-  if (typeof window && !lang && navigator?.language) {
+  if (process.browser && !lang && navigator?.language) {
     lang = langConvert.bcp472sys(navigator.language)
   }
 

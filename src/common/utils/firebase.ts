@@ -8,7 +8,7 @@ export const initializeFirebase = async () => {
   const firebase = await import('firebase/app')
 
   // FIXME: https://github.com/zeit/next.js/issues/1999
-  if (firebase.apps.length || !typeof window) {
+  if (firebase.apps.length || !process.browser) {
     return
   }
 

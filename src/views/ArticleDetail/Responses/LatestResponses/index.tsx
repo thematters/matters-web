@@ -64,7 +64,7 @@ const LatestResponses = ({ lock }: { lock: boolean }) => {
   let fragment = ''
   let parentId = ''
   let descendantId = ''
-  if (typeof window) {
+  if (process.browser) {
     fragment = window.location.hash.replace('#', '')
     parentId = fragment.split('-')[0]
     descendantId = fragment.split('-')[1]

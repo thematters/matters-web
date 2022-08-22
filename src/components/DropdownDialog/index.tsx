@@ -127,7 +127,7 @@ const BaseDropdownDialog = ({
         onClickOutside={closeDialog}
         visible={show}
         zIndex={Z_INDEX.OVER_BOTTOM_BAR}
-        appendTo={typeof window ? document.body : undefined}
+        appendTo={process.browser ? document.body : undefined}
         {...dropdown}
         content={
           <FocusLock>

@@ -48,7 +48,7 @@ const WalletSettings = () => {
     VIEWER_LIKE_INFO,
     {
       errorPolicy: 'none',
-      skip: !typeof window,
+      skip: !process.browser,
     }
   )
 

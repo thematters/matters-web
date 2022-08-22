@@ -12,7 +12,7 @@ const PendingState = ({ draft }: { draft: PublishStateDraft }) => {
     pollInterval: 1000 * 2,
     errorPolicy: 'none',
     fetchPolicy: 'network-only',
-    skip: !typeof window,
+    skip: !process.browser,
   })
 
   return (
