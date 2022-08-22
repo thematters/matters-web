@@ -32,10 +32,6 @@ import {
 } from './__generated__/RootQueryPrivate'
 import { RootQueryPublic } from './__generated__/RootQueryPublic'
 
-const DynamicPushInitializer = dynamic(
-  () => import('~/components/PushInitializer'),
-  { ssr: false }
-)
 const DynamicProgressBar = dynamic(() => import('~/components/ProgressBar'), {
   ssr: false,
 })
@@ -169,7 +165,6 @@ const Root = ({
             <AnalyticsListener user={viewer || {}} />
             <DynamicGlobalDialogs />
             <DynamicProgressBar />
-            <DynamicPushInitializer client={client} />
             <DynamicFingerprint />
           </FeaturesProvider>
         </LanguageProvider>

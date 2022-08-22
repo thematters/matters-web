@@ -183,12 +183,6 @@ export const OAUTH_SCOPE_TREE = {
           zh_hans: '封锁用户',
         },
       },
-      toggleSubscribePush: {
-        _t: {
-          zh_hant: '修改推送通知設定',
-          zh_hans: '修改推送通知设定',
-        },
-      },
       migration: {
         _t: {
           zh_hant: '導入作品',

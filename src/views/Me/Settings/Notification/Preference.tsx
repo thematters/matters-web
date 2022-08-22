@@ -1,12 +1,5 @@
-import { useQuery } from '@apollo/react-hooks'
-import { useState } from 'react'
-
 import { Form, Switch, Translate } from '~/components'
-import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
-import { subscribePush, unsubscribePush } from '~/common/utils'
-
-import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import { ViewerNotificationSettings_viewer_settings_notification } from './__generated__/ViewerNotificationSettings'
 
 interface PreferenceProps {
@@ -16,56 +9,10 @@ interface PreferenceProps {
   ) => void
 }
 
-const PushSwitch = () => {
-  const [loading, setLoading] = useState(false)
-  const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
-    variables: { id: 'local' },
-  })
-  const push = data?.clientPreference.push
-
-  if (!push || !push.supported) {
-    return null
-  }
-
-  const onClick = async () => {
-    setLoading(true)
-    if (push.enabled) {
-      await unsubscribePush()
-    } else {
-      await subscribePush()
-    }
-    setLoading(false)
-  }
-
-  return (
-    <Form.List.Item
-      title={
-        <Translate
-          zh_hant="推送通知"
-          zh_hans="推送通知"
-          en="Push Notification"
-        />
-      }
-      subtitle={
-        <Translate
-          zh_hant="實時收到你關心的站內動態"
-          zh_hans="实时收到你关心的站内动态"
-          en="Receive personalized real-time updates"
-        />
-      }
-      right={
-        <Switch checked={push.enabled} loading={loading} onChange={onClick} />
-      }
-    />
-  )
-}
-
 const Preference = ({ settings, toggle }: PreferenceProps) => (
   <Form.List
     groupName={<Translate zh_hant="郵件通知" zh_hans="邮件通知" en="Email" />}
   >
-    <PushSwitch />
-
     <Form.List.Item
       title={
         <Translate

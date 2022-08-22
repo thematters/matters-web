@@ -1,4 +1,3 @@
-import { useQuery } from '@apollo/react-hooks'
 import { useContext } from 'react'
 
 import {
@@ -10,15 +9,13 @@ import {
   useMutation,
   ViewerContext,
 } from '~/components'
-import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
 import { ADD_TOAST } from '~/common/enums'
-import { subscribePush, translate } from '~/common/utils'
+import { translate } from '~/common/utils'
 
 import TOGGLE_SUBSCRIBE_ARTICLE from '../../GQL/mutations/toggleSubscribeArticle'
 
 import { ToggleSubscribeArticle } from '~/components/GQL/mutations/__generated__/ToggleSubscribeArticle'
-import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 
 interface SubscribeProps {
   articleId?: string
@@ -46,10 +43,6 @@ const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
         : undefined,
     }
   )
-  const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
-    variables: { id: 'local' },
-  })
-  const push = data?.clientPreference.push
 
   const onClick = async () => {
     if (viewer.isFrozen) {
@@ -65,27 +58,6 @@ const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
     }
 
     await subscribe()
-
-    // skip
-    if (!push || !push.supported || push.enabled || !viewer.isAuthed) {
-      return
-    }
-
-    // show toast to subscribe push
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'green',
-          content: <Translate id="pushDescription" />,
-          customButton: (
-            <Button onClick={() => subscribePush()}>
-              <Translate id="confirmPush" />
-            </Button>
-          ),
-          buttonPlacement: 'center',
-        },
-      })
-    )
   }
 
   return (
