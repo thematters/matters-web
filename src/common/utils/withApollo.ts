@@ -200,7 +200,8 @@ const customWithApollo = withApollo(({ ctx, headers, initialState }) => {
   const host =
     ctx?.req?.headers.host ||
     (typeof window === 'undefined' ? '' : _get(window, 'location.host'))
-  const cookie = headers?.cookie || (typeof window ? document.cookie : '')
+  const cookie =
+    headers?.cookie || (typeof window !== 'undefined' ? document.cookie : '')
 
   const client = new ApolloClient({
     link: ApolloLink.from([
