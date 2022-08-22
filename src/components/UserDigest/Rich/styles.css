@@ -9,6 +9,10 @@
       text-decoration: underline;
     }
   }
+
+  &.limit .name {
+    max-width: 6.9375rem;
+  }
 }
 
 .avatar {
@@ -37,6 +41,8 @@ header {
 }
 
 .name {
+  @mixin line-clamp;
+
   font-weight: var(--font-weight-medium);
 }
 

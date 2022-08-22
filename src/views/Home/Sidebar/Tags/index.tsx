@@ -27,7 +27,7 @@ const SIDEBAR_TAGS = gql`
     viewer @connection(key: "viewerSidebarTags") {
       id
       recommendation {
-        tags(input: { first: 10, filter: { random: $random } }) {
+        tags(input: { first: 6, filter: { random: $random } }) {
           totalCount
           edges {
             cursor

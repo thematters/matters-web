@@ -30,13 +30,7 @@ const FeedHeader = ({
       <section className="right">
         {rightButton}
 
-        {path && viewAll && (
-          <ViewAllButton
-            href={path}
-            bgColor={undefined}
-            bgActiveColor="grey-lighter"
-          />
-        )}
+        {path && viewAll && <ViewAllButton href={path} />}
 
         <style jsx>{styles}</style>
       </section>

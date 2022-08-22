@@ -25,6 +25,7 @@ interface TagProps {
   disabled?: boolean // disable default <a>
   hasCount?: boolean
   hasClose?: boolean
+  hasLengthLimit?: boolean
   removeTag?: (tag: DigestTag) => void
   onClick?: () => void
 }
@@ -62,6 +63,7 @@ export const Tag = ({
   disabled,
   hasCount = true,
   hasClose,
+  hasLengthLimit = false,
   removeTag,
   onClick,
 }: TagProps) => {
@@ -71,6 +73,7 @@ export const Tag = ({
     active,
     clickable: !!onClick,
     disabled: !!disabled && !onClick,
+    limit: hasLengthLimit,
   })
 
   const path = toPath({

@@ -14,45 +14,38 @@ import NoticeHead from '../NoticeHead'
 import NoticeTypeIcon from '../NoticeTypeIcon'
 import styles from '../styles.css'
 
-import { CircleReplyNotice as NoticeType } from './__generated__/CircleReplyNotice'
+import { CircleNewBroadcastComments as NoticeType } from './__generated__/CircleNewBroadcastComments'
 
-type CircleReplyNoticeType = {
+type CircleNewBroadcastCommentsType = {
   notice: NoticeType
-  noticeType:
-    | 'circleMemberNewDiscussion'
-    | 'circleMemberNewDiscussionReply'
-    | 'circleMemberNewBroadcastReply'
-    | 'inCircleNewBroadcastReply'
-    | 'inCircleNewDiscussion'
-    | 'inCircleNewDiscussionReply'
 }
 
-const CircleReplyNotice = ({ notice, noticeType }: CircleReplyNoticeType) => {
+const CircleNewBroadcastComments = ({
+  notice,
+}: CircleNewBroadcastCommentsType) => {
   const viewer = useContext(ViewerContext)
-  const node = notice.node?.__typename === 'Comment' ? notice.node : null
-  const replyMyDiscussion = viewer.id === node?.replyTo?.author.id
+  const { replies, mentions } = notice
 
   if (!notice.actors) {
     return null
   }
 
+  const isCircleOwner = notice.circle.owner.id === viewer.id
+  const replyCount = replies?.length
+  const mentionCount = mentions?.length
+
+  if (!replyCount && !mentionCount) {
+    return null
+  }
+
   const actorsCount = notice.actors.length
   const isMultiActors = actorsCount > 1
-  const discussion =
-    noticeType === 'circleMemberNewDiscussion' ||
-    noticeType === 'inCircleNewDiscussion'
-  const discussionReply =
-    noticeType === 'circleMemberNewDiscussionReply' ||
-    noticeType === 'inCircleNewDiscussionReply'
-  const broadcastReply =
-    noticeType === 'circleMemberNewBroadcastReply' ||
-    noticeType === 'inCircleNewBroadcastReply'
 
   return (
     <section className="container">
       <section className="avatar-wrap">
         {isMultiActors ? (
-          <NoticeTypeIcon type="comment" />
+          <NoticeTypeIcon type="circle" />
         ) : (
           <NoticeActorAvatar user={notice.actors[0]} />
         )}
@@ -74,27 +67,36 @@ const CircleReplyNotice = ({ notice, noticeType }: CircleReplyNoticeType) => {
             />
           )}
           <>
-            <Translate zh_hant="在圍爐 " zh_hans="在围炉 " en="" />
-            <NoticeCircleName circle={notice.circle} />
-            {discussion && (
+            {isCircleOwner ? (
               <Translate
-                zh_hant=" 眾聊發新話題"
-                zh_hans=" 众聊发新话题"
-                en=""
+                zh_hant="在你的圍爐 "
+                zh_hans="在你的围炉 "
+                en=" in "
+              />
+            ) : (
+              <Translate zh_hant="在圍爐 " zh_hans="在围炉 " en=" in " />
+            )}
+            <NoticeCircleName circle={notice.circle} />
+            {replyCount && !mentionCount && (
+              <Translate
+                zh_hant=" 廣播中留言 "
+                zh_hans=" 广播中留言 "
+                en=" replied broadcasts "
               />
             )}
-            {discussionReply &&
-              (replyMyDiscussion ? (
-                <Translate
-                  zh_hant=" 回覆了你的眾聊"
-                  zh_hans=" 回复了你的众聊"
-                  en=""
-                />
-              ) : (
-                <Translate zh_hant=" 回覆了眾聊" zh_hans=" 回复了众聊" en="" />
-              ))}
-            {broadcastReply && (
-              <Translate zh_hant=" 廣播中留言" zh_hans=" 广播中留言" en="" />
+            {!replyCount && mentionCount && (
+              <Translate
+                zh_hant=" 廣播中留言，其中有提及你 "
+                zh_hans=" 广播中留言，其中有提及你 "
+                en=" replied broadcasts and mentioned you "
+              />
+            )}
+            {replyCount && mentionCount && (
+              <Translate
+                zh_hant=" 廣播中留言，其中有提及你 "
+                zh_hans=" 广播中留言，其中有提及你 "
+                en=" replied broadcasts and mentioned you "
+              />
             )}
           </>
           {isMultiActors && (
@@ -112,9 +114,10 @@ const CircleReplyNotice = ({ notice, noticeType }: CircleReplyNoticeType) => {
     </section>
   )
 }
-CircleReplyNotice.fragments = {
+
+CircleNewBroadcastComments.fragments = {
   notice: gql`
-    fragment CircleReplyNotice on CircleNotice {
+    fragment CircleNewBroadcastComments on CircleNotice {
       id
       ...NoticeDate
       actors {
@@ -124,14 +127,17 @@ CircleReplyNotice.fragments = {
       circle: target {
         ...NoticeCircleCard
       }
-      node {
-        ... on Comment {
-          replyTo {
-            author {
-              id
-            }
-          }
+      comments {
+        id
+      }
+      replies {
+        id
+        author {
+          id
         }
+      }
+      mentions {
+        id
       }
     }
     ${NoticeActorAvatar.fragments.user}
@@ -141,4 +147,4 @@ CircleReplyNotice.fragments = {
   `,
 }
 
-export default CircleReplyNotice
+export default CircleNewBroadcastComments

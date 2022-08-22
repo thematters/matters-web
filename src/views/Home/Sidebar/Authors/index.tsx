@@ -98,6 +98,7 @@ const Authors = () => {
                     id: node.id,
                   })
                 }
+                hasFollow={false}
                 hasState={false}
               />
             </List.Item>

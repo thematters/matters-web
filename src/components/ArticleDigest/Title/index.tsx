@@ -53,7 +53,7 @@ export const ArticleDigestTitle = ({
 
   textSize = 'md',
   textWeight = 'md',
-  lineClamp,
+  lineClamp = true,
   is = 'h2',
 
   disabled,

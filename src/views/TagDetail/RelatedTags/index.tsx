@@ -1,10 +1,13 @@
+import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import _chunk from 'lodash/chunk'
 import _get from 'lodash/get'
+import _random from 'lodash/random'
 
 import {
   List,
   PageHeader,
+  ShuffleButton,
   Slides,
   TagDigest,
   Translate,
@@ -12,6 +15,7 @@ import {
   ViewAllButton,
   ViewMoreCard,
 } from '~/components'
+import FETCH_RECORD from '~/components/GQL/queries/lastFetchRandom'
 
 import { PATHS } from '~/common/enums'
 import { analytics } from '~/common/utils'
@@ -19,6 +23,7 @@ import { analytics } from '~/common/utils'
 import { RELATED_TAGS } from './gql'
 import styles from './styles.css'
 
+import { LastFetchRandom } from '~/components/GQL/queries/__generated__/LastFetchRandom'
 import { TagDetailRecommended } from './__generated__/TagDetailRecommended'
 
 interface RelatedTagsProps {
@@ -26,35 +31,48 @@ interface RelatedTagsProps {
   inSidebar?: boolean
 }
 
-const RelatedTagsHeader = ({ hasViewAll }: { hasViewAll?: boolean }) => (
-  <PageHeader
-    title={
-      <Translate zh_hant="相關標籤" zh_hans="相关标签" en="Related Tags" />
-    }
-    is="h2"
-    hasNoBorder
-  >
-    {hasViewAll && (
+const RelatedTagsHeader = ({
+  hasViewAll,
+  hasShuffle,
+  onShuffle,
+}: {
+  hasViewAll?: boolean
+  hasShuffle?: boolean
+  onShuffle?: () => void
+}) => {
+  return (
+    <PageHeader
+      title={
+        <Translate zh_hant="相關標籤" zh_hans="相关标签" en="Related Tags" />
+      }
+      is="h2"
+      hasNoBorder
+    >
       <section className="right">
-        <ViewAllButton
-          href={PATHS.TAGS}
-          bgColor={undefined}
-          bgActiveColor="grey-lighter"
-        />
+        {hasShuffle && <ShuffleButton onClick={onShuffle} />}
+        {hasViewAll && <ViewAllButton href={PATHS.TAGS} />}
       </section>
-    )}
-  </PageHeader>
-)
+      <style jsx>{styles}</style>
+    </PageHeader>
+  )
+}
 
 const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
-  const { data } = usePublicQuery<TagDetailRecommended>(RELATED_TAGS, {
-    variables: { id: tagId },
+  const { data: lastFetchRandom, client } = useQuery<LastFetchRandom>(
+    FETCH_RECORD,
+    { variables: { id: 'local' } }
+  )
+
+  const lastRandom = lastFetchRandom?.lastFetchRandom.feedTags
+
+  const { data, refetch } = usePublicQuery<TagDetailRecommended>(RELATED_TAGS, {
+    variables: { id: tagId, random: lastRandom || 0 },
   })
 
   const { edges } =
     (data?.node?.__typename === 'Tag' && data.node.recommended) || {}
 
-  const onClick = (i: number, id: string) => () =>
+  const trackRelatedTags = (i: number, id: string) => () =>
     analytics.trackEvent('click_feed', {
       type: 'related_tags',
       contentType: 'tag',
@@ -66,6 +84,16 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
     return null
   }
 
+  const shuffle = () => {
+    const random = _random(0, 49)
+    refetch({ random })
+
+    client.writeData({
+      id: 'LastFetchRandom:local',
+      data: { feedAuthors: random },
+    })
+  }
+
   const relatedTagsClasses = classNames({
     relatedTags: true,
     inSidebar,
@@ -74,7 +102,7 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
   if (!inSidebar) {
     return (
       <section className={relatedTagsClasses}>
-        <Slides header={<RelatedTagsHeader />}>
+        <Slides header={<RelatedTagsHeader hasShuffle onShuffle={shuffle} />}>
           {_chunk(edges, 5).map((chunks, edgeIndex) => (
             <Slides.Item size="md" key={edgeIndex}>
               <section>
@@ -83,7 +111,10 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
                     key={cursor}
                     tag={node}
                     onClick={() =>
-                      onClick((edgeIndex + 1) * (nodeIndex + 1) - 1, node.id)
+                      trackRelatedTags(
+                        (edgeIndex + 1) * (nodeIndex + 1) - 1,
+                        node.id
+                      )
                     }
                   />
                 ))}
@@ -103,7 +134,6 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
             <Translate id="backToAll" />
           </ViewMoreCard>
         </section>
-
         <style jsx>{styles}</style>
       </section>
     )
@@ -111,12 +141,14 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
 
   return (
     <section className={relatedTagsClasses}>
-      <RelatedTagsHeader hasViewAll />
-
+      <RelatedTagsHeader hasViewAll hasShuffle onShuffle={shuffle} />
       <List hasBorder={false}>
         {edges?.map(({ node, cursor }, i) => (
           <List.Item key={cursor}>
-            <TagDigest.Sidebar tag={node} onClick={() => onClick(i, node.id)} />
+            <TagDigest.Sidebar
+              tag={node}
+              onClick={() => trackRelatedTags(i, node.id)}
+            />
           </List.Item>
         ))}
       </List>

@@ -144,7 +144,7 @@ const TagsFeed = () => {
           textIconProps={{ size: 'sm', weight: 'md', spacing: 'xxtight' }}
           textAlign="center"
         >
-          <Translate id="backToAll" />
+          <Translate id="viewAll" />
         </ViewMoreCard>
       </section>
 
