@@ -48,3 +48,11 @@ jobs:
         run: |
           npm run lint \
           && npm run format:check
+      - name: Run Playwright tests
+        run: npx playwright test
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
