@@ -71,12 +71,11 @@ const Sidebar = ({ tag, ...cardProps }: TagDigestSidebarProps) => {
               type="plain"
               iconProps={{ color: 'grey-darker' }}
               textIconProps={{ color: 'black', weight: 'md', size: 'sm' }}
-              hasLengthLimit
             />
           </header>
 
           <section className="nums">
-            {tag?.numAuthors && (
+            {tag && (
               <TextIcon
                 icon={<IconUser16 color="grey-dark" />}
                 size="xs"
@@ -87,7 +86,7 @@ const Sidebar = ({ tag, ...cardProps }: TagDigestSidebarProps) => {
               </TextIcon>
             )}
 
-            {tag?.numArticles && (
+            {tag && (
               <TextIcon
                 icon={<IconArticle16 color="grey-dark" />}
                 size="xs"
