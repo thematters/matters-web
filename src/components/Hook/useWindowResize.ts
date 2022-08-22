@@ -19,7 +19,7 @@ type Height = number | undefined
 type Size = [Width, Height]
 
 const getSize = (): Size => {
-  if (typeof window === undefined) {
+  if ((typeof window !== 'undefined') === undefined) {
     return [undefined, undefined]
   }
 

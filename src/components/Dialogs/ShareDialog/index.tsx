@@ -63,13 +63,14 @@ function tryDecodeUrl(url: string) {
 export const ShareDialog = (props: ShareDialogProps) => {
   const { title, path, tags } = props
   const shareLink = tryDecodeUrl(
-    typeof window
+    typeof window !== 'undefined'
       ? path
         ? `${window.location.origin}${path}`
         : window.location.href
       : ''
   )
-  const shareTitle = title || (typeof window ? window.document.title || '' : '')
+  const shareTitle =
+    title || (typeof window !== 'undefined' ? window.document.title || '' : '')
 
   const onShare = async (fallbackShare: () => void) => {
     const navigator = window.navigator as any
