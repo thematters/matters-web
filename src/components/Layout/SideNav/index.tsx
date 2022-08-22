@@ -116,7 +116,7 @@ const SideNav = () => {
               </FocusLock>
             }
             placement="right-start"
-            appendTo={process.browser ? document.body : undefined}
+            appendTo={typeof window ? document.body : undefined}
             offset={[-24, 24]}
             zIndex={Z_INDEX.OVER_BOTTOM_BAR}
             onShown={hidePopperOnClick}

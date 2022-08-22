@@ -10,7 +10,7 @@ const APP_VERSION_KEY = 'app-version'
 let persistor: any = null
 
 export const clearPersistCache = async () => {
-  if (!persistor || !process.browser) {
+  if (!persistor || !typeof window) {
     return
   }
 
@@ -28,7 +28,7 @@ export const clearPersistCache = async () => {
 }
 
 export const setupPersistCache = async (inMemoryCache: any) => {
-  if (!process.browser) {
+  if (!typeof window) {
     return
   }
 

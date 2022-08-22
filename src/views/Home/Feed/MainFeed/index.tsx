@@ -155,7 +155,7 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
    * Render
    */
   if (loading && (!result || isNewLoading)) {
-    if (process.browser) {
+    if (typeof window) {
       window.scrollTo(0, 0)
       document.body.focus()
     }
