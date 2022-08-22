@@ -7,6 +7,8 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
 
+const withOffline = require('next-offline')
+
 const packageJson = require('./package.json')
 
 const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
@@ -114,7 +116,39 @@ let plugins = [
 ]
 
 if (!isStatic) {
-  plugins = [...plugins]
+  plugins = [
+    ...plugins,
+    // offline
+    [
+      withOffline,
+      {
+        // FIXME: https://github.com/hanford/next-offline/issues/195
+        generateInDevMode: false,
+        workboxOpts: {
+          swDest: '../public/service-worker.js',
+          runtimeCaching: [
+            {
+              urlPattern: '/',
+              handler: 'NetworkFirst',
+              options: {
+                cacheName: 'homepage-cache',
+              },
+            },
+            {
+              urlPattern: new RegExp('/_next/static/'),
+              handler: 'CacheFirst',
+              options: {
+                cacheName: 'static-cache',
+                cacheableResponse: {
+                  statuses: [0, 200],
+                },
+              },
+            },
+          ],
+        },
+      },
+    ],
+  ]
 }
 
 module.exports = withPlugins(plugins, nextConfig)
