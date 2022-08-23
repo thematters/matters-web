@@ -78,27 +78,23 @@ const Feed = ({ tag, ...cardProps }: TagDigestFeedProps) => {
           />
 
           <section className="nums">
-            {tag && (
-              <TextIcon
-                icon={<IconUser16 color="grey-dark" />}
-                size="xs"
-                spacing="xxtight"
-                color="grey-dark"
-              >
-                {numAbbr(tag.numAuthors)}
-              </TextIcon>
-            )}
+            <TextIcon
+              icon={<IconUser16 color="grey-dark" />}
+              size="xs"
+              spacing="xxtight"
+              color="grey-dark"
+            >
+              {numAbbr(tag.numAuthors)}
+            </TextIcon>
 
-            {tag && (
-              <TextIcon
-                icon={<IconArticle16 color="grey-dark" />}
-                size="xs"
-                spacing="xxtight"
-                color="grey-dark"
-              >
-                {numAbbr(tag.numArticles)}
-              </TextIcon>
-            )}
+            <TextIcon
+              icon={<IconArticle16 color="grey-dark" />}
+              size="xs"
+              spacing="xxtight"
+              color="grey-dark"
+            >
+              {numAbbr(tag.numArticles)}
+            </TextIcon>
           </section>
         </header>
 
