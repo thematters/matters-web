@@ -269,12 +269,7 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
         dropdownAutoSizing
         DropdownContent={DropdownContent}
         query={SEARCH_TAGS}
-        hint={
-          <Translate
-            zh_hant="標籤名稱不允許標點符號，字間僅允許一個不連續空白，最大長度50字元"
-            zh_hans="标签名称不允许标点符号，字间仅允许一个不连续空白，最大長度50字元"
-          />
-        }
+        hint={<Translate id="hintAddTagNamingRestriction" />}
         maxLength={MAX_TAG_CONTENT_LENGTH}
         extraButton={
           <HintLengthText
