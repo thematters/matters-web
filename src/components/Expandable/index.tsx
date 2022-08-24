@@ -22,7 +22,7 @@ export const Expandable: React.FC<React.PropsWithChildren<ExpandableProps>> = ({
 
   useEffect(() => {
     if (node?.current) {
-      const height = node.current.clientHeight
+      const height = node.current.firstElementChild?.clientHeight || 0
       const lineHeight = window
         .getComputedStyle(node.current, null)
         .getPropertyValue('line-height')
@@ -43,9 +43,11 @@ export const Expandable: React.FC<React.PropsWithChildren<ExpandableProps>> = ({
       }}
     >
       <VisuallyHidden>
-        <div ref={node}>{children}</div>
+        <div>{children}</div>
       </VisuallyHidden>
-      {children}
+      <div ref={node}>
+        <div>{children}</div>
+      </div>
 
       {expandable && !expand && (
         <Button
