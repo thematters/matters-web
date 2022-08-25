@@ -1,6 +1,7 @@
-import { useLazyQuery } from '@apollo/react-hooks'
-import _differenceBy from 'lodash/differenceBy'
-import _get from 'lodash/get'
+// import { useLazyQuery } from '@apollo/react-hooks'
+import jump from 'jump.js'
+// import _differenceBy from 'lodash/differenceBy'
+// import _get from 'lodash/get'
 import { useContext, useEffect, useState } from 'react'
 
 import {
@@ -20,8 +21,13 @@ import {
   ViewerContext,
 } from '~/components'
 
-import { ADD_TOAST } from '~/common/enums'
-import { filterComments, mergeConnections, translate } from '~/common/utils'
+import { ADD_TOAST, URL_FRAGMENT } from '~/common/enums'
+import {
+  dom,
+  filterComments,
+  mergeConnections,
+  translate,
+} from '~/common/utils'
 
 import CircleDetailTabs from '../CircleDetailTabs'
 import {
@@ -40,22 +46,13 @@ import { DiscussionPublic } from './__generated__/DiscussionPublic'
 
 type Comment = DiscussionComments_circle_discussion_edges_node
 
+const RESPONSES_COUNT = 15
+
 const CricleDiscussion = () => {
   const { getQuery } = useRoute()
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
   const name = getQuery('name')
-
-  /**
-   * Data Fetching
-   */
-  const [
-    fetchDicussion,
-    { data: discussionData, loading: discussionLoading, fetchMore, refetch },
-  ] = useLazyQuery<DiscussionComments>(DISCUSSION_COMMENTS, {
-    fetchPolicy: 'network-only',
-    variables: { name },
-  })
 
   // public data
   const { data, loading, error, client } = usePublicQuery<DiscussionPublic>(
@@ -68,13 +65,6 @@ const CricleDiscussion = () => {
   const isOwner = circle?.owner.id === viewer.id
   const isMember = circle?.circleIsMember
   const hasPermission = isOwner || isMember
-
-  // pagination
-  const connectionPath = 'circle.discussion'
-  const { edges, pageInfo } = discussionData?.circle?.discussion || {}
-  const comments = filterComments<Comment>(
-    (edges || []).map(({ node }) => node)
-  )
 
   // private data
   const [privateFetched, setPrivateFetched] = useState(false)
@@ -105,17 +95,53 @@ const CricleDiscussion = () => {
     }
   }, [circle?.id, viewer.privateFetched])
 
-  // fetch discussion
-  useEffect(() => {
-    if (hasPermission) {
-      fetchDicussion()
-    }
-  }, [hasPermission])
+  /**
+   * Fragment Patterns
+   *
+   * 0. ``
+   * 1. `#comments`
+   * 2. `#parentCommentId`
+   * 3. `#parentComemntId-childCommentId`
+   */
+  let fragment = ''
+  let parentId = ''
+  let descendantId = ''
+  if (process.browser) {
+    fragment = window.location.hash.replace('#', '')
+    ;[parentId, descendantId] = fragment.split('-') // [0] ; = fragment.split('-')[1]
+  }
+
+  /**
+   * Data Fetching
+   */
+  const // fetchDicussion,
+    {
+      data: discussionData,
+      loading: discussionLoading,
+      fetchMore,
+      refetch,
+    } = usePublicQuery<DiscussionComments>(
+      DISCUSSION_COMMENTS,
+      {
+        fetchPolicy: 'network-only',
+        variables: { name },
+        skip: !hasPermission,
+      },
+      { publicQuery: !viewer.isAuthed }
+    )
 
   // load next page
-  const loadMore = () =>
-    fetchMore({
-      variables: { after: pageInfo?.endCursor },
+  const loadMore = async (params?: { before: string }) => {
+    const loadBefore = params?.before || null
+    const noLimit = loadBefore && pageInfo?.endCursor
+
+    return fetchMore({
+      variables: {
+        after: pageInfo?.endCursor,
+        before: loadBefore,
+        first: noLimit ? null : RESPONSES_COUNT,
+        includeBefore: !!loadBefore,
+      },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
           oldData: previousResult,
@@ -123,6 +149,16 @@ const CricleDiscussion = () => {
           path: connectionPath,
         }),
     })
+
+    // loadPrivate(newData)
+  }
+
+  // pagination
+  const connectionPath = 'circle.discussion'
+  const { edges, pageInfo } = discussionData?.circle?.discussion || {}
+  const comments = filterComments<Comment>(
+    (edges || []).map(({ node }) => node)
+  )
 
   // refetch & pull to refresh
   usePullToRefresh.Handler(refetch)
@@ -139,6 +175,45 @@ const CricleDiscussion = () => {
     )
     refetch()
   }
+
+  // fetch discussion
+  useEffect(() => {
+    if (hasPermission) {
+      refetch() // fetchDicussion()
+    }
+  }, [hasPermission])
+
+  // jump to comment area
+  useEffect(() => {
+    if (
+      error ||
+      discussionLoading ||
+      !circle ||
+      !privateFetched ||
+      !hasPermission ||
+      !fragment ||
+      !circle?.id
+    ) {
+      return
+    }
+
+    if (window.location.hash && circle) {
+      jump('#comments', { offset: -10 })
+    }
+
+    const jumpToFragment = () => {
+      jump(`#${fragment}`, {
+        offset: fragment === URL_FRAGMENT.COMMENTS ? -10 : -64,
+      })
+    }
+    const element = dom.$(`#${fragment}`)
+
+    if (!element) {
+      loadMore({ before: parentId }).then(jumpToFragment)
+    } else {
+      jumpToFragment()
+    }
+  }, [error, privateFetched, discussionLoading, hasPermission, circle?.id])
 
   /**
    * Render
@@ -183,7 +258,7 @@ const CricleDiscussion = () => {
     <>
       <CircleDetailTabs />
 
-      <section className="discussion">
+      <section className="discussion" id="comments">
         {!circle.owner.isBlocking && (
           <header>
             <CommentForm
@@ -218,6 +293,8 @@ const CricleDiscussion = () => {
                 <ThreadComment
                   comment={comment}
                   type="circleDiscussion"
+                  defaultExpand={comment.id === parentId && !!descendantId}
+                  hasLink
                   hasUpvote={false}
                   hasDownvote={false}
                   hasPin={false}
