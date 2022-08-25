@@ -3,7 +3,7 @@ import {
   Translate,
   useDialogSwitch,
   useMutation,
-  useRoute,
+  // useRoute,
 } from '~/components'
 import UPDATE_TAG_SETTING from '~/components/GQL/mutations/updateTagSetting'
 
@@ -12,15 +12,16 @@ import { ADD_TOAST } from '~/common/enums'
 import { UpdateTagSetting } from '~/components/GQL/mutations/__generated__/UpdateTagSetting'
 
 interface Props {
-  children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
+  id: string
   isOwner?: boolean
+  children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
-const BaseDialog = ({ children, isOwner }: Props) => {
+const BaseDialog = ({ id, isOwner, children }: Props) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
-  const { getQuery } = useRoute()
-  const id = getQuery('tagId')
+  // const { getQuery } = useRoute()
+  // const id = getQuery('tagId')
   const [update, { loading }] =
     useMutation<UpdateTagSetting>(UPDATE_TAG_SETTING)
 

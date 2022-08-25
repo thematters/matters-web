@@ -64,7 +64,7 @@ const DownvoteButton = ({
       unvoteComment: {
         id: comment.id,
         upvotes: comment.upvotes,
-        downvotes: comment.downvotes - 1,
+        downvotes: 0,
         myVote: null,
         __typename: 'Comment',
       },
@@ -77,7 +77,7 @@ const DownvoteButton = ({
         id: comment.id,
         upvotes:
           comment.myVote === 'up' ? comment.upvotes - 1 : comment.upvotes,
-        downvotes: comment.downvotes + 1,
+        downvotes: 0,
         myVote: 'down' as any,
         __typename: 'Comment',
       },

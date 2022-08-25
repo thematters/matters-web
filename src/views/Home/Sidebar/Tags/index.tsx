@@ -3,19 +3,18 @@ import gql from 'graphql-tag'
 import { useContext, useEffect } from 'react'
 
 import {
-  Card,
   List,
   QueryError,
-  ResponsiveImage,
   ShuffleButton,
   Spinner,
   Tag,
+  TagDigest,
   usePublicQuery,
   ViewerContext,
 } from '~/components'
 import FETCH_RECORD from '~/components/GQL/queries/lastFetchRandom'
 
-import { analytics, toPath } from '~/common/utils'
+import { analytics } from '~/common/utils'
 
 import SectionHeader from '../../SectionHeader'
 import styles from './styles.css'
@@ -28,7 +27,7 @@ const SIDEBAR_TAGS = gql`
     viewer @connection(key: "viewerSidebarTags") {
       id
       recommendation {
-        tags(input: { first: 5, filter: { random: $random } }) {
+        tags(input: { first: 6, filter: { random: $random } }) {
           totalCount
           edges {
             cursor
@@ -106,15 +105,8 @@ const Tags = () => {
         <List hasBorder={false}>
           {edges.map(({ node, cursor }, i) => (
             <List.Item key={cursor}>
-              <Card
-                {...toPath({
-                  page: 'tagDetail',
-                  id: node.id,
-                })}
-                spacing={['xtight', 'xtight']}
-                bgColor="none"
-                bgActiveColor="grey-lighter"
-                borderRadius="xtight"
+              <TagDigest.Sidebar
+                tag={node}
                 onClick={() =>
                   analytics.trackEvent('click_feed', {
                     type: 'tags',
@@ -123,26 +115,7 @@ const Tags = () => {
                     id: node.id,
                   })
                 }
-              >
-                <Tag
-                  tag={node}
-                  type="inline"
-                  textIconProps={{ size: 'sm' }}
-                  active
-                />
-
-                {node.description && (
-                  <section className="content">
-                    <p>{node.description}</p>
-
-                    {node.cover && (
-                      <div className="cover">
-                        <ResponsiveImage url={node.cover} size="144w" />
-                      </div>
-                    )}
-                  </section>
-                )}
-              </Card>
+              />
             </List.Item>
           ))}
         </List>

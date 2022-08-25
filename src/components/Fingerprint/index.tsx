@@ -6,10 +6,6 @@ import { storage } from '~/common/utils'
 
 const Fingerprint = () => {
   useEffect(() => {
-    if (!process.browser || typeof window === 'undefined') {
-      return
-    }
-
     try {
       const stored = storage.get(STORAGE_KEY_AGENT_HASH)
       if (!stored || !stored.startsWith(AGENT_HASH_PREFIX)) {

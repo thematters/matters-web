@@ -59,20 +59,25 @@ const SettingsList = ({
       <Dialog.Content hasGrow>
         <ul>
           <ListItem
+            title={<Translate id="addTags" />}
+            subTitle={
+              <Translate
+                id={tagsCount <= 0 ? 'hintAddTagNoTag' : 'hintAddTagShort'}
+              />
+            }
+            hint={tagsCount > 0}
+            onClick={() => forward('tag')}
+          >
+            <ListItem.NumberIndicator num={tagsCount} withHintOverlay />
+          </ListItem>
+
+          <ListItem
             title={<Translate id="setCover" />}
             subTitle={<Translate id="recommendedCoverSize" />}
             hint
             onClick={() => forward('cover')}
           >
             <ListItem.CoverIndicator cover={cover} />
-          </ListItem>
-
-          <ListItem
-            title={<Translate id="addTags" />}
-            subTitle={tagsCount === 0 && <Translate id="hintAddTag2" />}
-            onClick={() => forward('tag')}
-          >
-            <ListItem.NumberIndicator num={tagsCount} withHintOverlay />
           </ListItem>
 
           <ListItem

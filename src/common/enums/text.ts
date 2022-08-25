@@ -145,7 +145,11 @@ export const TEXT = {
     hide: '站內隱藏',
     hintAddTag:
       '通過添加標籤幫助讀者更好地找到你的作品。如果沒有合適的標籤，你可以創建新的。',
-    hintAddTag2: '目前尚無標籤，立即添加提高作品曝光度！',
+    hintAddRecommendedTag: '下方是你近期使用過標籤，點選添加：',
+    hintAddTagNoTag: '目前尚無標籤，立即添加提高作品曝光度！',
+    hintAddTagShort: '添加合適標籤，讓站內外讀者找到你的作品',
+    hintAddTagNamingRestriction:
+      '標籤名稱不允許標點符號，字間僅允許一個不連續空白，最大長度50字元',
     hintAddCircleInvitee: '添加站內或站外朋友加入圍爐',
     hintCircleAddArticles: '將公開作品加入圍爐，成為永久收費作品。',
     hintCircleDisplayName: '2-12 個字元',
@@ -160,6 +164,7 @@ export const TEXT = {
     hintUserName: '4-15 個字元，僅支持英文、數字或下劃線',
     history: '足跡',
     hkd: '港幣',
+    hottest: '熱門',
     hottestArticles: '熱門作品',
     INTERNAL_SERVER_ERROR: '伺服器錯誤，請稍候重試',
     invalidEmail: '電子信箱格式有誤',
@@ -241,7 +246,6 @@ export const TEXT = {
     publishToISCN: '註冊 ISCN',
     publishToISCNHint_1: '發布時註冊 ',
     publishToISCNHint_2: '，費用 ≈1 LIKE，推廣期由平台補助',
-    pushDescription: '別錯過精彩討論和最新消息，快點開啓推送吧！',
     putComment: '發布評論',
     QUERY_FIELD_NOT_FOUND: '要查詢的數據不存在',
     RATE_LIMIT_EXCEEDED: '操作過於頻繁，請稍候重試',
@@ -276,6 +280,8 @@ export const TEXT = {
     settingsBlock: '封鎖用戶',
     settingsLanguage: '介面語言',
     settingsNotification: '通知設定',
+    settingsNotificationGeneral: '一般通知',
+    settingsNotificationCircle: '圍爐通知',
     settingsUI: '介面設定',
     settingsWallet: '錢包設定',
     setup: '設置',
@@ -342,6 +348,8 @@ export const TEXT = {
     USER_EMAIL_NOT_FOUND: '帳戶不正確',
     USER_NOT_FOUND: '用戶不存在',
     USER_PASSWORD_INVALID: '密碼不正確',
+    USER_PASSWORD_NOT_AVAILABLE:
+      '當初是否透過錢包註冊？若是的話，請直接使用加密錢包登入，信箱僅作為聯繫渠道',
     CRYPTO_WALLET_EXISTS: '錢包地址已存在',
     USER_ETH_ADDRESS_NOT_FOUND: '錢包地址不存在',
     user: '用戶',
@@ -503,7 +511,11 @@ export const TEXT = {
     hide: '站内隐藏',
     hintAddTag:
       '通过添加标签帮助读者更好地找到你的作品。如果没有合适的标签，你可以创建新的。',
-    hintAddTag2: '目前尚无标签，立即添加提高作品曝光度！',
+    hintAddRecommendedTag: '下方是你近期使用过标签，点选添加：',
+    hintAddTagNoTag: '目前尚无标签，立即添加提高作品曝光度！',
+    hintAddTagShort: '添加适合标签，帮助读者找到你的作品',
+    hintAddTagNamingRestriction:
+      '标签名称不允许标点符号，字间仅允许一个不连续空白，最大长度50字元',
     hintAddCircleInvitee: '添加站内或站外朋友加入围炉',
     hintCircleAddArticles: '将公开作品加入围炉，成为永久收费作品。',
     hintCircleDisplayName: '2-12 个字符',
@@ -518,6 +530,7 @@ export const TEXT = {
     hintUserName: '4-15 个字符，仅支持英文、数字或下划线',
     history: '足迹',
     hkd: '港币',
+    hottest: '热门',
     hottestArticles: '热门作品',
     INTERNAL_SERVER_ERROR: '服务器错误，请稍候重试',
     invalidEmail: '邮箱格式有误',
@@ -599,7 +612,6 @@ export const TEXT = {
     publishToISCN: '註冊 ISCN',
     publishToISCNHint_1: '发布时註冊 ',
     publishToISCNHint_2: '，费用 ≈1 LIKE，推广期由平台补助',
-    pushDescription: '别错过精彩讨论和最新消息，快点开启推送吧！',
     putComment: '发布评论',
     QUERY_FIELD_NOT_FOUND: '要查询的数据不存在',
     RATE_LIMIT_EXCEEDED: '操作过于频繁，请稍候重试',
@@ -634,6 +646,8 @@ export const TEXT = {
     settingsBlock: '屏蔽用户',
     settingsLanguage: '界面语言',
     settingsNotification: '通知设定',
+    settingsNotificationGeneral: '一般通知',
+    settingsNotificationCircle: '围炉通知',
     settingsUI: '界面设定',
     settingsWallet: '钱包设定',
     setup: '设置',
@@ -700,6 +714,8 @@ export const TEXT = {
     USER_EMAIL_NOT_FOUND: '帐户不正确',
     USER_NOT_FOUND: '用户不存在',
     USER_PASSWORD_INVALID: '密码不正确',
+    USER_PASSWORD_NOT_AVAILABLE:
+      '当初是否透过钱包注册？若是的话，请直接使用加密钱包登入，信箱仅作为联系渠道',
     CRYPTO_WALLET_EXISTS: '钱包地址已存在',
     USER_ETH_ADDRESS_NOT_FOUND: '钱包地址不存在',
     user: '用户',
@@ -868,7 +884,12 @@ export const TEXT = {
     hide: 'Archived',
     hintAddTag:
       'Adding tags helps readers find your articles. Add or create new tags.',
-    hintAddTag2: 'Not using tags yet, add tags now to improve discoverability!',
+    hintAddRecommendedTag: 'Click to add tags you recently used :',
+    hintAddTagNoTag:
+      'Not using tags yet, add tags now to improve discoverability!',
+    hintAddTagShort: 'Adding tags helps readers find your articles.',
+    hintAddTagNamingRestriction:
+      'Tag name does not allow punctuations, only one space is allowed between words, and the maximum length is 50 characters',
     hintAddCircleInvitee: 'Invite friends to join your circle',
     hintCircleAddArticles:
       'Add articles to Circle and keep them behind the paywall.',
@@ -891,6 +912,7 @@ export const TEXT = {
       'Must be between 4-15 characters long. Only English alphabets, numbers and underline are accepted.',
     history: 'History',
     hkd: 'HKD',
+    hottest: 'Trending',
     hottestArticles: 'Trending',
     INTERNAL_SERVER_ERROR:
       'Oops. Something went wrong. Please try again later.',
@@ -978,8 +1000,6 @@ export const TEXT = {
     publishToISCNHint_1: 'The cost of ',
     publishToISCNHint_2:
       ' registration is about 1 LIKE. During promotion period it is sponsored by Matters.News.',
-    pushDescription:
-      'Turn on notifications to receive latest news and discussions.',
     putComment: 'Comment',
     QUERY_FIELD_NOT_FOUND: 'Query not found',
     RATE_LIMIT_EXCEEDED: 'Operation too frequent, please try again later.',
@@ -1014,6 +1034,8 @@ export const TEXT = {
     settingsBlock: 'Block Users',
     settingsLanguage: 'Language',
     settingsNotification: 'Notification',
+    settingsNotificationGeneral: 'General',
+    settingsNotificationCircle: 'Circle',
     settingsUI: 'Display Preferences',
     settingsWallet: 'Wallet Setting',
     setup: 'Settings',
@@ -1087,6 +1109,8 @@ export const TEXT = {
     USER_EMAIL_NOT_FOUND: 'Invalid Account',
     USER_NOT_FOUND: 'User not found',
     USER_PASSWORD_INVALID: 'Invalid Password',
+    USER_PASSWORD_NOT_AVAILABLE:
+      'Please login using your wallet if you registered via wallet login',
     USER_USERNAME_EXISTS: 'Matters ID is already used by others.',
     USER_USERNAME_INVALID: 'Invalid Matters ID',
     CRYPTO_WALLET_EXISTS: 'Wallet address already exists',
@@ -1095,7 +1119,7 @@ export const TEXT = {
     userDescription: 'Profile',
     useWallet: 'Continue with Wallet',
     verificationCode: 'Verification Code',
-    viewAll: 'Show More',
+    viewAll: 'Show All',
     viewAppreciators: 'Likers',
     viewDonators: 'Donors',
     waitingForPublish: 'Waiting for publish.',

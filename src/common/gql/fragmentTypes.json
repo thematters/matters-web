@@ -18,6 +18,8 @@
           { "name": "ArticleTagNotice" },
           { "name": "TagNotice" },
           { "name": "TransactionNotice" },
+          { "name": "CircleArticleNotice" },
+          { "name": "CircleCommentNotice" },
           { "name": "CircleNotice" },
           { "name": "CryptoNotice" },
           { "name": "OfficialAnnouncementNotice" }

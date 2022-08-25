@@ -6,10 +6,6 @@ export default gql`
       id
       readCivicLikerDialog
       wall
-      push {
-        enabled
-        supported
-      }
       routeHistory
       onboardingTasks {
         enabled

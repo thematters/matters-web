@@ -3,7 +3,7 @@ import {
   Translate,
   useDialogSwitch,
   useMutation,
-  useRoute,
+  // useRoute,
 } from '~/components'
 import UPDATE_TAG_SETTING from '~/components/GQL/mutations/updateTagSetting'
 
@@ -12,6 +12,7 @@ import { ADD_TOAST } from '~/common/enums'
 import { UpdateTagSetting } from '~/components/GQL/mutations/__generated__/UpdateTagSetting'
 
 interface Props {
+  id: string
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
@@ -30,11 +31,11 @@ const textEn =
   ' You can set the cover and description of the tag, and add works to selected feed. ' +
   ' You can use it for writing collection, curation, or subcommunity and group discussions, be creative and discover new usages!'
 
-const BaseDialog = ({ children }: Props) => {
+const BaseDialog = ({ id, children }: Props) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
-  const { getQuery } = useRoute()
-  const id = getQuery('tagId')
+  // const { getQuery } = useRoute()
+  // const id = getQuery('tagId')
   const [update, { loading }] =
     useMutation<UpdateTagSetting>(UPDATE_TAG_SETTING)
 

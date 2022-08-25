@@ -28,7 +28,7 @@ const AUTHOR_PICKER = gql`
         }
       }
       recommendation {
-        authors(input: { first: 5, filter: { random: $random } }) {
+        authors(input: { first: 15, filter: { random: $random } }) {
           edges {
             cursor
             node {

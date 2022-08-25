@@ -36,4 +36,7 @@
 
 .line-clamp {
   @mixin line-clamp;
+
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
 }

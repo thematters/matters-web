@@ -6,6 +6,7 @@ const withPlugins = require('next-compose-plugins')
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
+
 const withOffline = require('next-offline')
 
 const packageJson = require('./package.json')
@@ -13,10 +14,6 @@ const packageJson = require('./package.json')
 const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 const isStatic = process.env.NEXT_PUBLIC_BUILD_TYPE === 'static'
 const nextAssetDomain = process.env.NEXT_PUBLIC_NEXT_ASSET_DOMAIN || ''
-
-const URL_PUSH_SW = isProd
-  ? './firebase-messaging-sw-production.js'
-  : './firebase-messaging-sw-develop.js'
 
 const nextConfig = {
   /**
@@ -128,8 +125,6 @@ if (!isStatic) {
         // FIXME: https://github.com/hanford/next-offline/issues/195
         generateInDevMode: false,
         workboxOpts: {
-          // https://github.com/hanford/next-offline/issues/35
-          importScripts: [URL_PUSH_SW],
           swDest: '../public/service-worker.js',
           runtimeCaching: [
             {

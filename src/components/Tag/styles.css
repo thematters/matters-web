@@ -8,6 +8,10 @@
   line-height: inherit;
 }
 
+.limit .name {
+  max-width: 6.9375rem;
+}
+
 .list {
   position: relative;
   display: block;
@@ -65,8 +69,16 @@
     }
   }
 
+  &.clickable {
+    cursor: pointer;
+  }
+
   &.active {
     background: var(--color-green-lighter);
+
+    & .name {
+      color: var(--color-matters-green);
+    }
 
     &:not(.disabled) {
       &:hover,

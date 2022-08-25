@@ -18,7 +18,6 @@ const SearchSelectNode: React.FC<SearchSelectNodeProps> = ({
     <>
       {node.__typename === 'Article' && <Article article={node} {...props} />}
       {node.__typename === 'Tag' && <Tag tag={node} {...props} />}
-      {node.__typename === 'TagSearchResult' && <Tag tag={node} {...props} />}
       {node.__typename === 'User' && <User user={node} {...props} />}
     </>
   )

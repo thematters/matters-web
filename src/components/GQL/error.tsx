@@ -54,7 +54,7 @@ export const mutationOnError = (
     Sentry.captureException(error)
   })
 
-  if (!process.browser) {
+  if (typeof window === 'undefined') {
     throw error
   }
 

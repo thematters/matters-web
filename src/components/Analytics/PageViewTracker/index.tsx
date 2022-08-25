@@ -28,7 +28,7 @@ const PageViewTracker = () => {
       analytics.trackPage()
     }, 1000)
 
-    referrer.current = getPageReferrer() // window.location.pathname
+    referrer.current = getPageReferrer() // window.location.origin + window.location.pathname
   }, [viewer.privateFetched])
 
   // subsequent changes
@@ -39,7 +39,7 @@ const PageViewTracker = () => {
       }
 
       analytics.trackPage('page_view', { page_referrer: referrer.current })
-      referrer.current = getPageReferrer() // window.location.pathname
+      referrer.current = getPageReferrer() // window.location.origin + window.location.pathname
     }
 
     router.events.on('routeChangeComplete', trackPage)

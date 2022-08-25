@@ -2,18 +2,18 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
 import {
+  Form,
   Head,
   Layout,
   PullToRefresh,
   Spacer,
   Spinner,
+  Translate,
   useMutation,
 } from '~/components'
 
-import ArticleSettings from './Article'
-import CircleSettings from './Circle'
-import CommentSettings from './Comment'
-import MeSettings from './Me'
+import { PATHS } from '~/common/enums'
+
 import PreferenceSettings from './Preference'
 
 import { UpdateViewerNotification } from './__generated__/UpdateViewerNotification'
@@ -28,15 +28,6 @@ const VIEWER_NOTIFICATION_SETTINGS = gql`
         notification {
           enable
           email
-          mention
-          userNewFollower
-          articleNewComment
-          articleNewAppreciation
-          articleNewSubscription
-          articleSubscribedNewComment
-          articleCommentPinned
-          circleNewFollower
-          circleNewDiscussion
         }
       }
     }
@@ -54,15 +45,6 @@ const UPDATE_VIEWER_NOTIFICATION = gql`
         notification {
           enable
           email
-          mention
-          userNewFollower
-          articleNewComment
-          articleNewAppreciation
-          articleNewSubscription
-          articleSubscribedNewComment
-          articleCommentPinned
-          circleNewFollower
-          circleNewDiscussion
         }
       }
     }
@@ -110,10 +92,20 @@ const BaseNotificationSettings = () => {
   return (
     <PullToRefresh refresh={refetch}>
       <PreferenceSettings toggle={toggle} settings={settings} />
-      <MeSettings toggle={toggle} settings={settings} />
-      <ArticleSettings toggle={toggle} settings={settings} />
-      <CommentSettings toggle={toggle} settings={settings} />
-      <CircleSettings toggle={toggle} settings={settings} />
+      <Form.List
+        groupName={
+          <Translate zh_hant="站內通知" zh_hans="站内通知" en="Site" />
+        }
+      >
+        <Form.List.Item
+          title={<Translate id="settingsNotificationGeneral" />}
+          href={PATHS.ME_SETTINGS_NOTIFICATION_GENERAL}
+        />
+        <Form.List.Item
+          title={<Translate id="settingsNotificationCircle" />}
+          href={PATHS.ME_SETTINGS_NOTIFICATION_CIRCLE}
+        />
+      </Form.List>
     </PullToRefresh>
   )
 }

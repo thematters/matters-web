@@ -3,7 +3,6 @@ import dynamic from 'next/dynamic'
 import { useState } from 'react'
 
 import {
-  Button,
   CommentFormType,
   Dialog,
   Spinner,
@@ -11,16 +10,14 @@ import {
   useMutation,
 } from '~/components'
 import PUT_COMMENT from '~/components/GQL/mutations/putComment'
-import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import COMMENT_DRAFT from '~/components/GQL/queries/commentDraft'
 
 import { ADD_TOAST, COMMENT_TYPE_TEXT, TextId } from '~/common/enums'
-import { dom, stripHtml, subscribePush, trimLineBreaks } from '~/common/utils'
+import { dom, stripHtml, trimLineBreaks } from '~/common/utils'
 
 import styles from './styles.css'
 
 import { PutComment } from '~/components/GQL/mutations/__generated__/PutComment'
-import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import { CommentDraft } from '~/components/GQL/queries/__generated__/CommentDraft'
 
 const CommentEditor = dynamic(() => import('~/components/Editor/Comment'), {
@@ -69,10 +66,6 @@ const CommentForm: React.FC<CommentFormProps> = ({
     variables: { id: commentDraftId },
   })
 
-  // retrieve push setting
-  const { data: clientPreferenceData } =
-    useQuery<ClientPreference>(CLIENT_PREFERENCE)
-
   const [putComment] = useMutation<PutComment>(PUT_COMMENT)
   const [isSubmitting, setSubmitting] = useState(false)
   const [content, setContent] = useState(
@@ -95,9 +88,6 @@ const CommentForm: React.FC<CommentFormProps> = ({
       },
     }
 
-    const push = clientPreferenceData?.clientPreference.push
-    const skipPushButton = !push || !push.supported || push.enabled
-
     event.preventDefault()
     setSubmitting(true)
 
@@ -116,18 +106,11 @@ const CommentForm: React.FC<CommentFormProps> = ({
         new CustomEvent(ADD_TOAST, {
           detail: {
             color: 'green',
-            content: skipPushButton ? (
+            content: (
               <Translate
                 zh_hant={`${COMMENT_TYPE_TEXT.zh_hant[type]}已送出`}
                 zh_hans={`${COMMENT_TYPE_TEXT.zh_hans[type]}已送出`}
               />
-            ) : (
-              <Translate id="pushDescription" />
-            ),
-            customButton: !skipPushButton && (
-              <Button onClick={() => subscribePush()}>
-                <Translate id="confirmPush" />
-              </Button>
             ),
             buttonPlacement: 'center',
           },

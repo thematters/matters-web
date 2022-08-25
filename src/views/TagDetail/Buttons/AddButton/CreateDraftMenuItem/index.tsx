@@ -16,10 +16,10 @@ import { ADD_TOAST, OPEN_LIKE_COIN_DIALOG } from '~/common/enums'
 import { analytics, toPath, translate } from '~/common/utils'
 
 import { CreateDraft } from '~/components/GQL/mutations/__generated__/CreateDraft'
-import { TagDetailPublic_node_Tag } from '../../../__generated__/TagDetailPublic'
+import { TagFragment } from '../../../__generated__/TagFragment'
 
 interface CreateDraftButtonProps {
-  tag: TagDetailPublic_node_Tag
+  tag: TagFragment
 }
 
 const BaseCreateDraftButton = ({ onClick }: { onClick: () => any }) => (

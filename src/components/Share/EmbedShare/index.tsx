@@ -25,13 +25,14 @@ export const EmbedShare = ({
   headerTitle,
   wrap,
 }: EmbedShareProps) => {
-  const shareLink = process.browser
-    ? path
-      ? `${window.location.origin}${path}`
-      : window.location.href
-    : ''
+  const shareLink =
+    typeof window !== 'undefined'
+      ? path
+        ? `${window.location.origin}${path}`
+        : window.location.href
+      : ''
   const shareTitle =
-    title || (process.browser ? window.document.title || '' : '')
+    title || (typeof window !== 'undefined' ? window.document.title || '' : '')
 
   const buttonClasses = classNames({
     buttons: true,

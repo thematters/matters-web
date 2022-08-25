@@ -21,6 +21,7 @@ const ViewerFragments = {
         }
         status {
           state
+          unreadNoticeCount
           hasPaymentPassword
         }
         ownCircles {

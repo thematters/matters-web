@@ -1,11 +1,11 @@
 import { Form, Switch, Translate } from '~/components'
 
-import { ViewerNotificationSettings_viewer_settings_notification } from './__generated__/ViewerNotificationSettings'
+import { ViewerNotificationGeneralSettings_viewer_settings_notification } from './__generated__/ViewerNotificationGeneralSettings'
 
 interface CommentProps {
-  settings: ViewerNotificationSettings_viewer_settings_notification
+  settings: ViewerNotificationGeneralSettings_viewer_settings_notification
   toggle: (
-    type: keyof ViewerNotificationSettings_viewer_settings_notification
+    type: keyof ViewerNotificationGeneralSettings_viewer_settings_notification
   ) => void
 }
 
@@ -31,8 +31,8 @@ const Comment = ({ settings, toggle }: CommentProps) => (
     <Form.List.Item
       title={
         <Translate
-          zh_hant="評論被置頂"
-          zh_hans="评论被置顶"
+          zh_hant="評論被作者精選"
+          zh_hans="评论被作者精选"
           en="Pinned Comments"
         />
       }

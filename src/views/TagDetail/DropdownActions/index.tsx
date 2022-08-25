@@ -31,13 +31,15 @@ import { translate } from '~/common/utils'
 import styles from './styles.css'
 
 import { AddArticlesTags } from '~/components/GQL/mutations/__generated__/AddArticlesTags'
-import { TagDetailPublic_node_Tag } from '../__generated__/TagDetailPublic'
+// import { TagDetailPublic_node_Tag } from '../__generated__/TagDetailPublic'
+import { TagFragment } from '../__generated__/TagFragment'
 
 interface DropdownActionsProps {
+  // id: string
   isOwner: boolean
   isEditor: boolean
   isMaintainer: boolean
-  tag: TagDetailPublic_node_Tag
+  tag: TagFragment // TagDetailPublic_node_Tag
 }
 
 interface DialogProps {
@@ -227,9 +229,9 @@ const DropdownActions = (props: DropdownActionsProps) => {
           saving={loading}
         >
           {({ openDialog: openTagAddSelectedArticlesDialog }) => (
-            <TagLeaveDialog {...props}>
+            <TagLeaveDialog {...props} id={tag.id}>
               {({ openDialog: openTagLeaveDialog }) => (
-                <TagEditorDialog {...props}>
+                <TagEditorDialog {...props} id={tag.id}>
                   {({ openDialog: openTagEditorDialog }) => (
                     <BaseDropdownActions
                       {...props}

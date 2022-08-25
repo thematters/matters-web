@@ -1,6 +1,10 @@
 import { useState } from 'react'
 
-import { Dialog, useDialogSwitch, useRoute, useStep } from '~/components'
+import {
+  Dialog,
+  useDialogSwitch, // useRoute,
+  useStep,
+} from '~/components'
 
 import TagEditorList from './List'
 import TagRemoveEditor from './Remove'
@@ -22,10 +26,11 @@ import { TagMaintainers_node_Tag_editors as TagEditor } from '~/components/GQL/q
 type Step = 'list' | 'add' | 'remove'
 
 interface Props {
+  id: string
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
-const BaseDialog = ({ children }: Props) => {
+const BaseDialog = ({ id, children }: Props) => {
   const defaultStep = 'list'
 
   const {
@@ -44,8 +49,8 @@ const BaseDialog = ({ children }: Props) => {
     baseOpenDialog()
   }
 
-  const { getQuery } = useRoute()
-  const id = getQuery('tagId')
+  // const { getQuery } = useRoute()
+  // const id = getQuery('tagId')
 
   const isAdd = currStep === 'add'
   const isList = currStep === 'list'

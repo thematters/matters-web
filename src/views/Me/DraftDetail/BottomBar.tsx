@@ -69,8 +69,8 @@ const EditDraftBottomBar = ({ draft, ownCircles }: BottomBarProps) => {
     editAccess,
     accessSaving,
     canToggleCircle: !!hasOwnCircle,
-    iscnPublish: draft.iscnPublish, // : boolean
-    togglePublishISCN, // : (iscnPublish: boolean) => Promise<any>
+    iscnPublish: draft.iscnPublish,
+    togglePublishISCN,
     iscnPublishSaving,
   }
 

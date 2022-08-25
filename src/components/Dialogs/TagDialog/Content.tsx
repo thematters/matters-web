@@ -16,11 +16,17 @@ import {
 } from '~/components'
 import SEARCH_TAGS from '~/components/GQL/queries/searchTags'
 
-import { ADD_TOAST, ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
 import {
+  ADD_TOAST,
+  ASSET_TYPE,
+  ENTITY_TYPE,
+  MAX_TAG_CONTENT_LENGTH,
+  MAX_TAG_DESCRIPTION_LENGTH,
+} from '~/common/enums'
+import {
+  normalizeTagInput, // stripAllPunct, // stripPunctPrefixSuffix,
   numAbbr,
   parseFormSubmitErrors,
-  stripPunctPrefixSuffix,
   toPath,
   translate,
   validateTagName,
@@ -99,6 +105,19 @@ const DropdownList = ({
     </>
   )
 }
+
+const HintLengthText: React.FC<{
+  curLength: number
+  maxLength: number
+}> = ({ curLength, maxLength }) => (
+  <>
+    <span className="count">
+      <span className={curLength > 0 ? 'highlight' : ''}>{curLength ?? 0}</span>
+      &nbsp;/&nbsp;{maxLength}
+    </span>
+    <style jsx>{styles}</style>
+  </>
+)
 
 const DropdownListWithDefaultItem = (props: DropdownListBaseProps) => {
   return (
@@ -191,12 +210,17 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
         )
 
         const returnedTagId = result?.data?.putTag?.id
+        const returnedTagContent = result?.data?.putTag?.content as string
 
         setSubmitting(false)
 
         if (!id) {
           // if created, then redirect to tag detail page
-          const path = toPath({ page: 'tagDetail', id: returnedTagId || '' })
+          const path = toPath({
+            page: 'tagDetail',
+            id: returnedTagId || '',
+            content: returnedTagContent,
+          })
           router.push(path.href)
         } else {
           closeDialog()
@@ -237,16 +261,22 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
         error={touched.newContent && errors.newContent}
         onBlur={handleBlur}
         onChange={(e) => {
-          const newContent = stripPunctPrefixSuffix(e.target.value)
-          // console.log('set newContent:', { newContent, old: e.target.value })
+          const newContent = normalizeTagInput(e.target.value)
           setFieldValue('newContent', newContent)
-          // setFieldValue('content', newContent)
-          // handleChange(e)
+          return newContent
         }}
         dropdownAppendTo={formId}
         dropdownAutoSizing
         DropdownContent={DropdownContent}
         query={SEARCH_TAGS}
+        hint={<Translate id="hintAddTagNamingRestriction" />}
+        maxLength={MAX_TAG_CONTENT_LENGTH}
+        extraButton={
+          <HintLengthText
+            curLength={values.newContent?.length ?? 0}
+            maxLength={MAX_TAG_CONTENT_LENGTH}
+          />
+        }
       />
 
       <Form.Textarea
@@ -258,6 +288,13 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
         onBlur={handleBlur}
         onChange={handleChange}
         required
+        maxLength={MAX_TAG_DESCRIPTION_LENGTH}
+        extraButton={
+          <HintLengthText
+            curLength={values.newDescription?.length ?? 0}
+            maxLength={MAX_TAG_DESCRIPTION_LENGTH}
+          />
+        }
       />
     </Form>
   )
@@ -281,6 +318,7 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
       />
 
       <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+      <style jsx>{styles}</style>
     </>
   )
 }

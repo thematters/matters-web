@@ -1,5 +1,5 @@
 import { NetworkStatus } from 'apollo-client'
-import { useContext, useEffect, useRef } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 
 import {
   ArticleDigestFeed,
@@ -28,13 +28,17 @@ import { TagArticlesPublic } from '~/components/GQL/queries/__generated__/TagArt
 
 interface TagArticlesProps {
   tagId: string
-  selected?: boolean
+  feedType: string
 }
 
-const TagDetailArticles = ({ tagId, selected }: TagArticlesProps) => {
+const TagDetailArticles = ({ tagId, feedType }: TagArticlesProps) => {
   const viewer = useContext(ViewerContext)
-  const feed = useRef(selected)
+  const feed = useRef(feedType)
   const isLargeUp = useResponsive('lg-up')
+
+  const isSelected = feedType === 'selected'
+  const isHottest = feedType === 'hottest'
+  const isLatest = feedType === 'latest'
 
   /**
    * Data Fetching
@@ -49,17 +53,18 @@ const TagDetailArticles = ({ tagId, selected }: TagArticlesProps) => {
     networkStatus,
     client,
   } = usePublicQuery<TagArticlesPublic>(TAG_ARTICLES_PUBLIC, {
-    variables: { id: tagId, selected },
+    variables: {
+      id: tagId,
+      selected: feedType === 'selected',
+      sortBy: feedType === 'hottest' ? 'byHottestDesc' : 'byCreatedAtDesc',
+    },
     notifyOnNetworkStatusChange: true,
   })
 
   // pagination
   const connectionPath = 'node.articles'
   const { edges, pageInfo } =
-    (data?.node?.__typename === 'Tag' &&
-      data.node.articles &&
-      data.node.articles) ||
-    {}
+    (data?.node?.__typename === 'Tag' && data.node.articles) || {}
   const isNewLoading =
     [NetworkStatus.loading, NetworkStatus.setVariables].indexOf(
       networkStatus
@@ -90,18 +95,23 @@ const TagDetailArticles = ({ tagId, selected }: TagArticlesProps) => {
       return
     }
 
-    if (feed.current !== selected) {
+    if (feed.current !== feedType) {
       refetchPublic()
-      feed.current = selected
+      feed.current = feedType
     }
 
     loadPrivate(data)
-  }, [!!edges, loading, selected, viewer.id])
+  }, [!!edges, loading, feedType, viewer.id])
 
   // load next page
+  const trackingType = isHottest
+    ? 'tag_detail_hottest'
+    : isSelected
+    ? 'tag_detail_selected'
+    : 'tag_detail_latest'
   const loadMore = async () => {
     analytics.trackEvent('load_more', {
-      type: selected ? 'tag_detail_selected' : 'tag_detail_latest',
+      type: trackingType,
       location: edges?.length || 0,
     })
 
@@ -170,15 +180,13 @@ const TagDetailArticles = ({ tagId, selected }: TagArticlesProps) => {
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
       <List>
         {(edges || []).map(({ node, cursor }, i) => (
-          <>
-            <List.Item key={cursor}>
+          <React.Fragment key={cursor}>
+            <List.Item>
               <ArticleDigestFeed
                 article={node}
                 onClick={() =>
                   analytics.trackEvent('click_feed', {
-                    type: selected
-                      ? 'tag_detail_selected'
-                      : 'tag_detail_latest',
+                    type: trackingType,
                     contentType: 'article',
                     location: i,
                     id: node.id,
@@ -186,22 +194,21 @@ const TagDetailArticles = ({ tagId, selected }: TagArticlesProps) => {
                 }
                 onClickAuthor={() => {
                   analytics.trackEvent('click_feed', {
-                    type: selected
-                      ? 'tag_detail_selected'
-                      : 'tag_detail_latest',
+                    type: trackingType,
                     contentType: 'user',
                     location: i,
                     id: node.author.id,
                   })
                 }}
-                inTagDetailSelected={selected}
-                inTagDetailLatest={!selected}
+                inTagDetailSelected={isSelected}
+                inTagDetailLatest={isLatest}
               />
             </List.Item>
+
             {!isLargeUp && edges.length >= 4 && i === 3 && (
               <RelatedTags tagId={tagId} />
             )}
-          </>
+          </React.Fragment>
         ))}
       </List>
 

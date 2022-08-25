@@ -76,7 +76,7 @@ const SearchTag = () => {
       <List>
         {edges.map(
           ({ node, cursor }, i) =>
-            node.__typename === 'TagSearchResult' && (
+            node.__typename === 'Tag' && (
               <Fragment>
                 <List.Item key={cursor}>
                   <Card
@@ -84,6 +84,7 @@ const SearchTag = () => {
                     {...toPath({
                       page: 'tagDetail',
                       id: node.id,
+                      content: node.content,
                     })}
                     onClick={() =>
                       analytics.trackEvent('click_feed', {

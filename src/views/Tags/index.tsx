@@ -1,127 +1,62 @@
-import gql from 'graphql-tag'
+import { useState } from 'react'
 
 import {
-  Card,
-  EmptyTag,
   Head,
-  InfiniteScroll,
   Layout,
-  QueryError,
-  Spinner,
-  usePublicQuery,
+  // Tabs, Translate,
+  useRoute,
 } from '~/components'
 
-import { analytics, mergeConnections, toPath } from '~/common/utils'
-
 import { TagsButtons } from './Buttons'
-import CardTag from './Card'
+import Feed, { FeedType } from './Feed'
+// import SidebarTags from './Sidebar'
 import styles from './styles.css'
 
-import { AllTagsPublic } from './__generated__/AllTagsPublic'
-
-const ALL_TAGS = gql`
-  query AllTagsPublic($after: String) {
-    viewer @connection(key: "viewerTags") {
-      id
-      recommendation {
-        tags(input: { first: 30, after: $after }) {
-          pageInfo {
-            startCursor
-            endCursor
-            hasNextPage
-          }
-          edges {
-            cursor
-            node {
-              id
-              ...CardTag
-            }
-          }
-        }
-      }
-    }
-  }
-  ${CardTag.fragments.tag}
-`
-
 const BaseTags = () => {
-  const { data, loading, error, fetchMore, refetch } =
-    usePublicQuery<AllTagsPublic>(ALL_TAGS)
+  const {
+    getQuery,
+    // , setQuery
+  } = useRoute()
+  const qsType = getQuery('type') as FeedType
 
-  if (loading) {
-    return <Spinner />
-  }
+  const [
+    feed,
+    // , setFeed
+  ] = useState<FeedType>(qsType || 'recommended')
+  // const setFeedType = (newType: FeedType) => {
+  //   setQuery('type', newType)
+  //   setFeed(newType)
+  // }
 
-  if (error) {
-    return <QueryError error={error} />
-  }
-
-  const connectionPath = 'viewer.recommendation.tags'
-  const { edges, pageInfo } = data?.viewer?.recommendation.tags || {}
-
-  if (!edges || edges.length <= 0 || !pageInfo) {
-    return <EmptyTag />
-  }
-
-  const loadMore = () => {
-    analytics.trackEvent('load_more', {
-      type: 'all_tags',
-      location: edges.length,
-    })
-    return fetchMore({
-      variables: { after: pageInfo.endCursor },
-      updateQuery: (previousResult, { fetchMoreResult }) =>
-        mergeConnections({
-          oldData: previousResult,
-          newData: fetchMoreResult,
-          path: connectionPath,
-          dedupe: true,
-        }),
-    })
-  }
+  // const isRecommended = feed === 'recommended'
+  // const isHottest = feed === 'hottest'
 
   return (
-    <InfiniteScroll
-      hasNextPage={pageInfo.hasNextPage}
-      loadMore={loadMore}
-      pullToRefresh={refetch}
-    >
-      <ul>
-        {edges.map(({ node }, i) => (
-          <li key={node.id}>
-            <Card
-              spacing={[0, 0]}
-              {...toPath({
-                page: 'tagDetail',
-                id: node.id,
-              })}
-              onClick={() =>
-                analytics.trackEvent('click_feed', {
-                  type: 'all_tags',
-                  contentType: 'tag',
-                  location: i,
-                  id: node.id,
-                })
-              }
-            >
-              <CardTag tag={node} />
-            </Card>
-          </li>
-        ))}
+    <section className="tags">
+      {/* <Tabs sticky>
+        <Tabs.Tab
+          selected={isRecommended}
+          onClick={() => setFeedType('recommended')}
+        >
+          <Translate zh_hant="推薦" zh_hans="推荐" en="Recommended" />
+        </Tabs.Tab>
 
-        {/* for maintain grid alignment */}
-        <li />
-        <li />
-        <li />
+        <Tabs.Tab selected={isHottest} onClick={() => setFeedType('hottest')}>
+          <Translate id="hottest" />
+        </Tabs.Tab>
+      </Tabs> */}
 
-        <style jsx>{styles}</style>
-      </ul>
-    </InfiniteScroll>
+      <Feed type={feed} />
+
+      <style jsx>{styles}</style>
+    </section>
   )
 }
 
 const Tags = () => (
-  <Layout.Main>
+  <Layout.Main
+  //  aside={<SidebarTags inSidebar />}
+  >
     <Head title={{ id: 'allTags' }} />
 
     <Layout.Header

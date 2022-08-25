@@ -1,11 +1,12 @@
 import Router from 'next/router'
 import { Key, pathToRegexp } from 'path-to-regexp'
-import queryString from 'query-string'
+// import queryString from 'query-string'
 
 import { PATHS, ROUTES } from '~/common/enums'
 
 import { UtmParams } from './analytics'
 import { fromGlobalId } from './globalId'
+import { tagSlugify } from './text'
 import { parseURL } from './url'
 
 interface ArticleArgs {
@@ -55,6 +56,8 @@ type ToPathArgs =
   | {
       page: 'tagDetail'
       id: string
+      content: string
+      feedType?: string
     }
   | {
       page: 'userProfile' | 'userSubscriptons' | 'userComments' | 'userTags'
@@ -174,8 +177,12 @@ export const toPath = (
       }
     }
     case 'tagDetail': {
+      const { id: numberId } = fromGlobalId(args.id as string)
+      const pathname = `/tags/${numberId}-${tagSlugify(args.content)}`
+      const typeStr = args.feedType ? `?type=${args.feedType}` : ''
       return {
-        href: `/tags/${args.id}`,
+        href: `${pathname}${typeStr}`,
+        pathname,
       }
     }
     case 'userProfile': {
@@ -209,9 +216,8 @@ export const toPath = (
 }
 
 export const getTarget = (url?: string) => {
-  url = url || window.location.href
-  const qs = queryString.parseUrl(url).query
-  const target = encodeURIComponent((qs.target as string) || '')
+  const qs = new URL(url || window.location.href).searchParams
+  const target = encodeURIComponent((qs.get('target') as string) || '')
 
   return target
 }
@@ -263,7 +269,7 @@ export const redirectToLogin = () => {
 export const appendTarget = (href: string, fallbackCurrent?: boolean) => {
   let target = ''
 
-  if (process.browser) {
+  if (typeof window !== 'undefined') {
     target = getTarget()
     target = fallbackCurrent ? getEncodedCurrent() : target
   }
@@ -337,7 +343,7 @@ export const captureClicks = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     const result = regexp.exec(url.pathname)
 
     if (result) {
-      const searchQuery = queryString.parse(url.search) || {}
+      const searchQuery = new URLSearchParams(url.search) || {}
       const matchedQuery: { [key: string]: string } = {}
       keys.forEach((k, i) => (matchedQuery[k.name] = result[i + 1]))
 

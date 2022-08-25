@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
+import _chunk from 'lodash/chunk'
 import { useContext, useEffect } from 'react'
 
 import {
@@ -7,15 +8,19 @@ import {
   ShuffleButton,
   Slides,
   Spinner,
+  TagDigest,
+  Translate,
   usePublicQuery,
   ViewerContext,
+  ViewMoreCard,
 } from '~/components'
 import FETCH_RECORD from '~/components/GQL/queries/lastFetchRandom'
 
+import { PATHS } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 import SectionHeader from '../../SectionHeader'
-import TagFeedDigest from './TagFeedDigest'
+import styles from './styles.css'
 
 import { LastFetchRandom } from '~/components/GQL/queries/__generated__/LastFetchRandom'
 import { FeedTagsPublic } from './__generated__/FeedTagsPublic'
@@ -25,19 +30,19 @@ const FEED_TAGS = gql`
     viewer @connection(key: "viewerFeedTags") {
       id
       recommendation {
-        tags(input: { first: 5, filter: { random: $random } }) {
+        tags(input: { first: 10, filter: { random: $random } }) {
           totalCount
           edges {
             cursor
             node {
-              ...TagFeedDigestTag
+              ...TagDigestSidebarTag
             }
           }
         }
       }
     }
   }
-  ${TagFeedDigest.fragments.tag}
+  ${TagDigest.Sidebar.fragments.tag}
 `
 
 const TagsFeed = () => {
@@ -95,34 +100,56 @@ const TagsFeed = () => {
     <SectionHeader
       type="tags"
       rightButton={<ShuffleButton onClick={shuffle} />}
+      viewAll={false}
     />
   )
 
   return (
-    <Slides bgColor="grey-lighter" header={SlideHeader}>
-      {loading && (
-        <Slides.Item>
-          <Spinner />
-        </Slides.Item>
-      )}
-
-      {!loading &&
-        edges.map(({ node, cursor }, i) => (
-          <Slides.Item key={cursor}>
-            <TagFeedDigest
-              tag={node}
-              onClick={() =>
-                analytics.trackEvent('click_feed', {
-                  type: 'tags',
-                  contentType: 'tag',
-                  location: i,
-                  id: node.id,
-                })
-              }
-            />
+    <section className="tags">
+      <Slides header={SlideHeader}>
+        {loading && (
+          <Slides.Item>
+            <Spinner />
           </Slides.Item>
-        ))}
-    </Slides>
+        )}
+
+        {!loading &&
+          _chunk(edges, 5).map((chunks, edgeIndex) => (
+            <Slides.Item size="md" key={edgeIndex}>
+              <section>
+                {chunks.map(({ node, cursor }, nodeIndex) => (
+                  <TagDigest.Sidebar
+                    key={cursor}
+                    tag={node}
+                    onClick={() =>
+                      analytics.trackEvent('click_feed', {
+                        type: 'tags',
+                        contentType: 'tag',
+                        location: (edgeIndex + 1) * (nodeIndex + 1) - 1,
+                        id: node.id,
+                      })
+                    }
+                  />
+                ))}
+              </section>
+            </Slides.Item>
+          ))}
+      </Slides>
+
+      <section className="backToAll">
+        <ViewMoreCard
+          spacing={['tight', 'tight']}
+          href={PATHS.TAGS}
+          iconProps={{ size: 'sm' }}
+          textIconProps={{ size: 'sm', weight: 'md', spacing: 'xxtight' }}
+          textAlign="center"
+        >
+          <Translate id="viewAll" />
+        </ViewMoreCard>
+      </section>
+
+      <style jsx>{styles}</style>
+    </section>
   )
 }
 

@@ -30,7 +30,7 @@ const Onboarding: React.FC<Props> = ({ nextStep }) => {
     pollInterval: polling ? 1000 : undefined,
     errorPolicy: 'none',
     fetchPolicy: 'network-only',
-    skip: !process.browser,
+    skip: typeof window === 'undefined',
   })
   const stripeAccount = data?.viewer?.wallet.stripeAccount?.id
 

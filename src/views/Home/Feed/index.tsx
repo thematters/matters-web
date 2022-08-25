@@ -1,35 +1,25 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import { useRoute } from '~/components'
 
 import MainFeed from './MainFeed'
-import SortBy, { SortByType } from './SortBy'
+import SortBy, { HomeFeedType } from './SortBy'
 
 const HomeFeed = () => {
   const { getQuery, setQuery } = useRoute()
-  const qsType = getQuery('type') as SortByType
+  const qsType = getQuery('type') as HomeFeedType
 
-  const [type, setType] = useState<SortByType>('hottest')
+  const [feedType, setFeedType] = useState<HomeFeedType>(qsType || 'hottest')
 
-  const setSortBy = (newType: SortByType) => {
+  const changeFeed = (newType: HomeFeedType) => {
     setQuery('type', newType)
-    setType(newType)
+    setFeedType(newType)
   }
-
-  // read from query
-  useEffect(() => {
-    const validTypes: SortByType[] = ['hottest', 'newest', 'icymi']
-    const newType = validTypes.indexOf(qsType) >= 0 ? qsType : ''
-
-    if (newType) {
-      setType(newType)
-    }
-  }, [qsType])
 
   return (
     <>
-      <SortBy sortBy={type} setSortBy={setSortBy} />
-      <MainFeed feedSortType={type} />
+      <SortBy feedType={feedType} setFeedType={changeFeed} />
+      <MainFeed feedSortType={feedType} />
     </>
   )
 }

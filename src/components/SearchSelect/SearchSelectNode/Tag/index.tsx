@@ -5,12 +5,11 @@ import { Card, IconChecked, IconUnChecked, Tag } from '~/components'
 import styles from '../styles.css'
 
 import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
-import { DigestTagSearchResult } from '~/components/Tag/__generated__/DigestTagSearchResult'
 
 interface SearchSelectTagProps {
-  tag: DigestTag | DigestTagSearchResult
+  tag: DigestTag
   selected?: boolean
-  onClick: (tag: DigestTag | DigestTagSearchResult) => void
+  onClick: (tag: DigestTag) => void
   inStagingArea?: boolean
 }
 

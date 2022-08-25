@@ -62,11 +62,6 @@ header {
       @mixin object-fit-cover;
     }
 
-    & :global(picture),
-    & :global(img) {
-      z-index: -1;
-    }
-
     & h3 {
       @mixin line-clamp;
 

@@ -14,7 +14,7 @@ import {
 import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
 
 import { ADD_TOAST, STORAGE_KEY_AUTH_TOKEN } from '~/common/enums'
-import { storage, unsubscribePush } from '~/common/utils'
+import { storage } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -57,12 +57,6 @@ const TermContent: React.FC<TermContentProps> = ({ closeDialog }) => {
   })
 
   const onLogout = async () => {
-    try {
-      await unsubscribePush()
-    } catch (e) {
-      console.error(e)
-    }
-
     try {
       await logout().then(() => {
         storage.remove(STORAGE_KEY_AUTH_TOKEN)

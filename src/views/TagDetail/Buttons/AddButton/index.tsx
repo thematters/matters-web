@@ -23,10 +23,10 @@ import AddMyArticlesButton from './AddMyArticlesButton'
 import CreateDraftMenuItem from './CreateDraftMenuItem'
 
 import { AddArticlesTags } from '~/components/GQL/mutations/__generated__/AddArticlesTags'
-import { TagDetailPublic_node_Tag } from '../../__generated__/TagDetailPublic'
+import { TagFragment } from '../../__generated__/TagFragment'
 
 interface DropdownActionsProps {
-  tag: TagDetailPublic_node_Tag
+  tag: TagFragment
 }
 
 interface DialogProps {
@@ -60,7 +60,7 @@ const BaseDropdownActions = ({
     >
       {({ openDialog, ref }) => (
         <Button
-          size={['5rem', '2rem']}
+          spacing={['xtight', 'tight']}
           textColor="gold"
           textActiveColor="white"
           bgActiveColor="gold"

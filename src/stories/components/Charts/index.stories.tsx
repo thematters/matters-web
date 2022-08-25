@@ -1,5 +1,5 @@
 import { MockedProvider } from '@apollo/react-testing'
-import { Meta, Story } from '@storybook/react/types-6-0'
+import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React from 'react'
 
 import { StackedAreaChart } from '~/components'
@@ -9,9 +9,9 @@ import Charts from './Charts'
 export default {
   title: 'Components/Charts',
   component: StackedAreaChart,
-} as Meta
+} as ComponentMeta<typeof StackedAreaChart>
 
-const Template: Story = () => (
+const Template: ComponentStory<typeof StackedAreaChart> = () => (
   <MockedProvider>
     <Charts />
   </MockedProvider>
