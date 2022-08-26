@@ -28,10 +28,6 @@ const CommentNewReplyNotice = ({ notice }: { notice: NoticeType }) => {
     notice.reply?.node.__typename === 'Article' ? notice.reply.node : null
   const replyCommentCircle =
     notice.reply?.node.__typename === 'Circle' ? notice.reply.node : null
-  const replyCommentCircleDiscussion =
-    notice.reply?.type === 'circleDiscussion' ? notice.reply.type : null
-  const replyCommentCircleBroadcast =
-    notice.reply?.type === 'circleBroadcast' ? notice.reply.type : null
 
   return (
     <section className="container">
@@ -71,25 +67,20 @@ const CommentNewReplyNotice = ({ notice }: { notice: NoticeType }) => {
           )}
           {replyCommentCircle && (
             <>
-              <Translate zh_hant="在圍爐 " zh_hans="在围炉 " en="" />
+              <Translate
+                zh_hant="回覆了你在圍爐 "
+                zh_hans="回复了你在围炉 "
+                en=" replied to your response on "
+              />
               <NoticeCircleName circle={replyCommentCircle} />
-              {replyCommentCircleDiscussion && (
-                <Translate
-                  zh_hant=" 回覆你的眾聊發言"
-                  zh_hans=" 回复你的众聊发言"
-                  en=""
-                />
-              )}
-              {replyCommentCircleBroadcast && (
-                <Translate zh_hant=" 廣播中留言" zh_hans=" 广播中留言" en="" />
-              )}
+              <Translate zh_hant=" 中的發言" zh_hans=" 中的发言" en="" />
             </>
           )}
         </NoticeHead>
 
-        {/* <NoticeComment
+        <NoticeComment
           comment={isMultiActors ? notice.comment : notice.reply}
-        /> */}
+        />
 
         {isMultiActors && (
           <section className="multi-actor-avatars">
