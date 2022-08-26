@@ -180,7 +180,7 @@ const TagDetailArticles = ({ tagId, feedType }: TagArticlesProps) => {
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
       <List>
         {(edges || []).map(({ node, cursor }, i) => (
-          <React.Fragment key={cursor}>
+          <React.Fragment key={`${feedType}:${cursor}`}>
             <List.Item>
               <ArticleDigestFeed
                 article={node}
