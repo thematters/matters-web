@@ -15,7 +15,7 @@ const Stats = () => {
                 en="Number of Creators"
               />
             </p>
-            <span className="num">60K +</span>
+            <span className="num">100K+</span>
           </li>
           <li>
             <p className="type">
@@ -25,17 +25,27 @@ const Stats = () => {
                 en="Monthly New Articles"
               />
             </p>
-            <span className="num">9K +</span>
+            <span className="num">15K+</span>
           </li>
           <li>
             <p className="type">
               <Translate
-                zh_hant="單篇文章最多獲得（以 LikeCoin 換算市價）"
-                zh_hans="单篇文章最多获得（以 LikeCoin 换算市价）"
-                en="Highest Rewarded Article"
+                zh_hant="收到讚賞的文章數量"
+                zh_hans="收到赞赏的文章数量"
+                en="Number of Articles Got Rewarded"
               />
             </p>
-            <span className="num">US$ 2K</span>
+            <span className="num">200K+</span>
+          </li>
+          <li>
+            <p className="type">
+              <Translate
+                zh_hant="支持創作者基金（US）"
+                zh_hans="支持创作者基金（US）"
+                en="Funds to support creators"
+              />
+            </p>
+            <span className="num">$100K+</span>
           </li>
         </ul>
       </div>

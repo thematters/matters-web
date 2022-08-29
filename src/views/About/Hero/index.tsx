@@ -106,7 +106,7 @@ const Hero = () => {
               target="_blank"
             >
               <h3>18 Asia Pacific news organizations with big ideas</h3>
-              <cite>Google Blog</cite>
+              <cite>Google News Initiative</cite>
             </a>
           </li>
           <li>
@@ -136,7 +136,7 @@ const Hero = () => {
               target="_blank"
             >
               <h3>Der Staat gegen Nerds</h3>
-              <cite>BILANZ Deutschland</cite>
+              <cite>Bilanz</cite>
             </a>
           </li>
           <li>
@@ -149,6 +149,48 @@ const Hero = () => {
                 speech
               </h3>
               <cite>Columbia Journalism Review</cite>
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://www.protocol.com/nft-indepedent-chinese-language-media"
+              target="_blank"
+            >
+              <h3>Chinese-language indie media has its NFT moment</h3>
+              <cite>Protocol</cite>
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://forkast.news/voice-of-april-nfts-shanghai-amid-harsh-lockdown/"
+              target="_blank"
+            >
+              <h3>
+                ‘Voice of April’ NFTs highlight Shanghai’s struggles amid harsh
+                lockdown
+              </h3>
+              <cite>Forekast</cite>
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://www.dw.com/zh/%E5%8C%BA%E5%9D%97%E9%93%BE%E8%AE%A9%E5%A5%BD%E6%96%B0%E9%97%BB%E6%9B%B4%E5%AE%89%E5%85%A8%E6%9B%B4%E5%80%BC%E9%92%B1/a-44329162?&zhongwen=simp"
+              target="_blank"
+            >
+              <h3>
+                <Translate
+                  zh_hant="區塊鏈：讓好新聞更安全、更“值錢”？"
+                  zh_hans="区块链：让好新闻更安全、更“值钱”？"
+                  en={`Blockchain: Making Good News Safer and More "Valuable"?`}
+                />
+              </h3>
+              <cite>
+                <Translate
+                  zh_hant="德國之聲"
+                  zh_hans="德国之声"
+                  en="Deutsche Welle"
+                />
+              </cite>
             </a>
           </li>
           <li>
@@ -174,22 +216,36 @@ const Hero = () => {
           </li>
           <li>
             <a
-              href="https://www.dw.com/zh/%E5%8C%BA%E5%9D%97%E9%93%BE%E8%AE%A9%E5%A5%BD%E6%96%B0%E9%97%BB%E6%9B%B4%E5%AE%89%E5%85%A8%E6%9B%B4%E5%80%BC%E9%92%B1/a-44329162?&zhongwen=simp"
+              href="https://www.openbook.org.tw/article/p-66088"
               target="_blank"
             >
               <h3>
                 <Translate
-                  zh_hant="區塊鏈：讓好新聞更安全、更“值錢”？"
-                  zh_hans="区块链：让好新闻更安全、更“值钱”？"
-                  en={`Blockchain: Making Good News Safer and More "Valuable"?`}
+                  zh_hant="出版NFT移民．平台》用Web3對抗演算法，打造共同的廣場： 專訪Matters創辦人張潔平"
+                  zh_hans="出版NFT移民．平台》用Web3对抗演算法，打造共同的广场： 专访Matters创办人张洁平"
+                  en='Published NFT immigration. Platform" Using Web3 Against Algorithms to Create a Common Plaza: Interview with Zhang Jieping, Founder of Matters'
                 />
               </h3>
               <cite>
+                <Translate zh_hant="閱讀誌" zh_hans="阅读志" en="Openbook" />
+              </cite>
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://www.inside.com.tw/feature/nft/25869-matters-web3-nft"
+              target="_blank"
+            >
+              <h3>
                 <Translate
-                  zh_hant="德國之聲"
-                  zh_hans="德国之声"
-                  en="Deutsche Welle"
+                  zh_hant="【你買 NFT 了嗎】走在 Web3 媒體路三年，Matters 跟張潔平想用 NFT 邁出下一步
+                  "
+                  zh_hans="【你买 NFT 了吗】走在 Web3 媒体路三年，Matters 跟张洁平想用 NFT 迈出下一步"
+                  en="[Have you bought NFT] After three years on the Web3 media road, Matters and Zhang Jieping want to take the next step with NFT"
                 />
+              </h3>
+              <cite>
+                <Translate zh_hant="INSIDE" zh_hans="INSIDE" en="INSIDE" />
               </cite>
             </a>
           </li>

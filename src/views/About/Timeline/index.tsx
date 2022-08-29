@@ -51,9 +51,7 @@ const Timeline = () => {
                 />
               </p>
             </li>
-          </ul>
 
-          <ul>
             <li>
               <time>Oct, 2019</time>
               <p className="event">
@@ -71,11 +69,13 @@ const Timeline = () => {
                 <Translate
                   zh_hant="網站 2.0 上線"
                   zh_hans="网站 2.0 上线"
-                  en="Website 2.0 is now available"
+                  en="Upgrade to Website 2.0"
                 />
               </p>
             </li>
+          </ul>
 
+          <ul>
             <li>
               <time>May, 2020</time>
               <p className="event">
@@ -94,6 +94,50 @@ const Timeline = () => {
                   zh_hant="圍爐功能上線"
                   zh_hans="围炉功能上线"
                   en="Matters Circle is now available"
+                />
+              </p>
+            </li>
+
+            <li>
+              <time>Dec, 2021</time>
+              <p className="event">
+                <Translate
+                  zh_hant="Matters 接入NFT- Travegloggers "
+                  zh_hans="Matters 接入NFT- Travegloggers "
+                  en="Travegloggers NFT on Matters.News"
+                />
+              </p>
+            </li>
+
+            <li>
+              <time>Jan, 2022</time>
+              <p className="event">
+                <Translate
+                  zh_hant="支持以太坊錢包登入"
+                  zh_hans="支持以太坊钱包登入"
+                  en="Support ETH Wallet Log In"
+                />
+              </p>
+            </li>
+
+            <li>
+              <time>Jul, 2022</time>
+              <p className="event">
+                <Translate
+                  zh_hant="開放內容註冊 ISCN"
+                  zh_hans="开放内容注册 ISCN"
+                  en="Matters.News on ISCN registry, ISCN Integration for all content"
+                />
+              </p>
+            </li>
+
+            <li>
+              <time>Soon, 2022</time>
+              <p className="event">
+                <Translate
+                  zh_hant="多元加密貨幣交易上線"
+                  zh_hans="多元加密货币交易上线"
+                  en="Payment with crypto currency"
                 />
               </p>
             </li>

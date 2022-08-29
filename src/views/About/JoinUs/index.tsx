@@ -28,23 +28,13 @@ const JoinUs = () => {
             <ul>
               <li>
                 <a
-                  href="https://www.cakeresume.com/companies/matters/jobs"
+                  href="https://www.notion.so/matterslab/Matters-Lab-Job-Board-Public-4221b899fdca4c91b46119d64ab23daf"
                   target="_blank"
                 >
                   <Translate
                     zh_hant="加入 Matters 團隊"
                     zh_hans="加入 Matters 团队"
                     en="Join the Matters team"
-                  />
-                  <IconArrow />
-                </a>
-              </li>
-              <li>
-                <a href="https://matters.news/@hi176/%E9%A6%AC%E7%89%B9%E5%B8%82%E4%B8%89%E6%AD%B2%E4%BA%86-%E5%B0%8B%E6%89%BE-%E9%A6%AC%E7%89%B9%E5%B8%82%E5%BB%BA%E7%AF%89%E5%B8%AB-%E9%82%80%E4%BD%A0%E4%BE%86%E6%8F%90%E5%90%8D-bafyreibt7upd2hsvupmd43y46sxubirqevqqnkydgrudq6vziwjrztdz7m">
-                  <Translate
-                    zh_hant="成為馬特市建築師"
-                    zh_hans="成为马特市建筑师"
-                    en="Become a Matters architect"
                   />
                   <IconArrow />
                 </a>
