@@ -5,18 +5,18 @@ import {
   LanguageContext,
   LanguageSwitch,
   TextIcon,
-  Tooltip,
   Translate,
   withIcon,
 } from '~/components'
 
 import { translate } from '~/common/utils'
 
+import { ReactComponent as IconFooterDiscord } from '@/public/static/icons/24px/footer-discord.svg'
 import { ReactComponent as IconFooterFacebook } from '@/public/static/icons/24px/footer-facebook.svg'
 import { ReactComponent as IconFooterInstagram } from '@/public/static/icons/24px/footer-instagram.svg'
-import { ReactComponent as IconFooterTelegram } from '@/public/static/icons/24px/footer-telegram.svg'
+import { ReactComponent as IconFooterLinkedin } from '@/public/static/icons/24px/footer-linkedin.svg'
+import { ReactComponent as IconFooterMedium } from '@/public/static/icons/24px/footer-medium.svg'
 import { ReactComponent as IconFooterTwitter } from '@/public/static/icons/24px/footer-twitter.svg'
-import { ReactComponent as IconFooterWeChat } from '@/public/static/icons/24px/footer-wechat.svg'
 
 import styles from './styles.css'
 
@@ -40,8 +40,8 @@ const Footer = () => {
                 </h2>
                 <p>
                   <Translate
-                    zh_hant="媒體查詢、活動合作、一般查詢，請聯絡"
-                    zh_hans="媒体查询、活动合作、一般查询，请联系"
+                    zh_hant="一般聯繫、媒體詢問、活動合作"
+                    zh_hans="一般联系、媒体询问、活动合作"
                     en="For media and business inquiries, please email"
                   />
                   <br />
@@ -55,8 +55,8 @@ const Footer = () => {
                 </p>
                 <p>
                   <Translate
-                    zh_hant="對我們的產品有任何疑問，請聯絡"
-                    zh_hans="对我们的产品有任何疑问，请联系"
+                    zh_hant="用戶客服"
+                    zh_hans="用户客服"
                     en="Any inquiries about our product, please email"
                   />
                   <br />
@@ -95,46 +95,148 @@ const Footer = () => {
                 </h2>
 
                 <div className="socials">
-                  <a href="https://twitter.com/MattersLab" target="_blank">
-                    {withIcon(IconFooterTwitter)({
-                      size: 'md',
-                      color: 'white',
-                    })}
+                  <ul>
+                    <li>
+                      <a href="https://twitter.com/MattersLab" target="_blank">
+                        <TextIcon
+                          icon={withIcon(IconFooterTwitter)({
+                            size: 'md',
+                            color: 'white',
+                          })}
+                          color="grey"
+                          size="md"
+                          spacing="xtight"
+                        >
+                          Twitter（中文）
+                        </TextIcon>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="https://twitter.com/Mattersw3b" target="_blank">
+                        <TextIcon
+                          icon={withIcon(IconFooterTwitter)({
+                            size: 'md',
+                            color: 'white',
+                          })}
+                          color="grey"
+                          size="md"
+                          spacing="xtight"
+                        >
+                          Twitter（English）
+                        </TextIcon>
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="https://discord.gg/matterslab" target="_blank">
+                        <TextIcon
+                          icon={withIcon(IconFooterDiscord)({
+                            size: 'md',
+                            color: 'white',
+                          })}
+                          color="grey"
+                          size="md"
+                          spacing="xtight"
+                        >
+                          Discord
+                        </TextIcon>
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="https://www.facebook.com/MattersLab2018/"
+                        target="_blank"
+                      >
+                        <TextIcon
+                          icon={withIcon(IconFooterFacebook)({
+                            size: 'md',
+                            color: 'white',
+                          })}
+                          color="grey"
+                          size="md"
+                          spacing="xtight"
+                        >
+                          Facebook
+                        </TextIcon>
+                      </a>
+                    </li>
+                  </ul>
+
+                  <ul>
+                    <li>
+                      <a href="https://matterslab.medium.com/" target="_blank">
+                        <TextIcon
+                          icon={withIcon(IconFooterMedium)({
+                            size: 'md',
+                            color: 'white',
+                          })}
+                          color="grey"
+                          size="md"
+                          spacing="xtight"
+                        >
+                          Medium
+                        </TextIcon>
+                      </a>
+                    </li>
+
+                    {/* TODO: fill linkedin href */}
+                    <li>
+                      <a href="" target="_blank">
+                        <TextIcon
+                          icon={withIcon(IconFooterLinkedin)({
+                            size: 'md',
+                            color: 'white',
+                          })}
+                          color="grey"
+                          size="md"
+                          spacing="xtight"
+                        >
+                          LinkedIn
+                        </TextIcon>
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="https://www.instagram.com/matterslab2018/"
+                        target="_blank"
+                      >
+                        <TextIcon
+                          icon={withIcon(IconFooterInstagram)({
+                            size: 'md',
+                            color: 'white',
+                          })}
+                          color="grey"
+                          size="md"
+                          spacing="xtight"
+                        >
+                          Instagram
+                        </TextIcon>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </section>
+
+              <section className="moreProducts">
+                <h2>
+                  <Translate
+                    zh_hant="更多產品"
+                    zh_hans="更多产品"
+                    en="More Products"
+                  />
+                </h2>
+
+                <div className="products">
+                  <a href="https://traveloggers.matters.news/" target="_blank">
+                    <TextIcon color="grey" size="md">
+                      Traveloggers
+                    </TextIcon>
                   </a>
-                  <a
-                    href="https://www.facebook.com/MattersLab2018/"
-                    target="_blank"
-                  >
-                    {withIcon(IconFooterFacebook)({
-                      size: 'md',
-                      color: 'white',
-                    })}
-                  </a>
-                  <a
-                    href="https://www.instagram.com/matterslab2018/"
-                    target="_blank"
-                  >
-                    {withIcon(IconFooterInstagram)({
-                      size: 'md',
-                      color: 'white',
-                    })}
-                  </a>
-                  <Tooltip content="MattersLab">
-                    <span>
-                      {withIcon(IconFooterWeChat)({
-                        size: 'md',
-                        color: 'white',
-                      })}
-                    </span>
-                  </Tooltip>
-                  <a
-                    href="https://t.me/joinchat/BXzlWUhXaWNZ-TXJZJCzDQ"
-                    target="_blank"
-                  >
-                    {withIcon(IconFooterTelegram)({
-                      size: 'md',
-                      color: 'white',
-                    })}
+
+                  <a href="https://logbook.matters.news/" target="_blank">
+                    <TextIcon color="grey" size="md">
+                      Logbook
+                    </TextIcon>
                   </a>
                 </div>
               </section>

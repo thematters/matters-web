@@ -14,7 +14,7 @@ li {
   }
 
   @media (--md-up) {
-    grid-column: span 3;
+    grid-column: span 2;
 
     & + li {
       margin-top: 0;
@@ -22,7 +22,7 @@ li {
   }
 
   @media (--lg-up) {
-    grid-column: span 4;
+    grid-column: span 3;
   }
 }
 

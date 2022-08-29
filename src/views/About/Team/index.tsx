@@ -2,15 +2,21 @@ import { Translate } from '~/components'
 
 import IMAGE_BERYL from '@/public/static/images/about/team-beryl.svg'
 import IMAGE_CHARLIE from '@/public/static/images/about/team-charlie.svg'
+import IMAGE_DOBBY from '@/public/static/images/about/team-dobby.svg'
+import IMAGE_ELK from '@/public/static/images/about/team-elk.svg'
+import IMAGE_EMILIE from '@/public/static/images/about/team-emilie.svg'
 import IMAGE_GUO from '@/public/static/images/about/team-guo.svg'
+import IMAGE_JAZZY from '@/public/static/images/about/team-jazzy.svg'
 import IMAGE_JIEPING from '@/public/static/images/about/team-jieping.svg'
 import IMAGE_LEE from '@/public/static/images/about/team-lee.svg'
 import IMAGE_ROBERT from '@/public/static/images/about/team-robert.svg'
+import IMAGE_TOMAS from '@/public/static/images/about/team-tomas.svg'
 import IMAGE_XIA from '@/public/static/images/about/team-xia.svg'
+import IMAGE_XINAN from '@/public/static/images/about/team-xinan.svg'
 import IMAGE_XY from '@/public/static/images/about/team-xy.svg'
 import IMAGE_YH from '@/public/static/images/about/team-yh.svg'
 import IMAGE_YS from '@/public/static/images/about/team-ys.svg'
-import IMAGE_YUE from '@/public/static/images/about/team-yue.svg'
+import IMAGE_YX from '@/public/static/images/about/team-yx.svg'
 import IMAGE_ZECK from '@/public/static/images/about/team-zeck.svg'
 
 import styles from './styles.css'
@@ -44,9 +50,9 @@ const CREW = [
     type: 'product',
     people: [
       {
-        avatar: IMAGE_YUE,
+        avatar: IMAGE_ZECK,
         title: 'Product Manager',
-        name: <Translate zh_hant="小月" zh_hans="小月" en="Yue" />,
+        name: 'Zeck Li',
       },
       {
         avatar: IMAGE_YH,
@@ -55,6 +61,51 @@ const CREW = [
       },
     ],
   },
+
+  {
+    group: <Translate zh_hant="數據" zh_hans="数据" en="Data" />,
+    type: 'data',
+    people: [
+      {
+        avatar: IMAGE_XIA,
+        title: 'Data Scientist',
+        name: 'Xia',
+      },
+    ],
+  },
+
+  {
+    group: <Translate zh_hant="開發" zh_hans="开发" en="Development" />,
+    type: 'dev',
+    people: [
+      {
+        avatar: IMAGE_ROBERT,
+        title: 'Tech Lead',
+        name: 'Robert Lu',
+      },
+      {
+        avatar: IMAGE_TOMAS,
+        title: 'Full Stack Engineer',
+        name: 'Tomas Cheng',
+      },
+      {
+        avatar: IMAGE_ELK,
+        title: 'Front-end Engineer',
+        name: 'Elk Leung',
+      },
+      {
+        avatar: IMAGE_JAZZY,
+        title: 'Full Stack Engineer',
+        name: 'Jazzy Liang',
+      },
+      {
+        avatar: IMAGE_CHARLIE,
+        title: 'DevOps',
+        name: 'Charlie',
+      },
+    ],
+  },
+
   {
     group: <Translate zh_hant="運營" zh_hans="运营" en="Content Operation" />,
     type: 'community',
@@ -66,8 +117,24 @@ const CREW = [
       },
       {
         avatar: IMAGE_YS,
-        title: 'Community Facilitator',
+        title: 'Matters.News Community',
         name: <Translate zh_hant="李映昕" zh_hans="李映昕" en="Yingshin Lee" />,
+      },
+      {
+        avatar: IMAGE_DOBBY,
+        title: 'Web3 Community',
+        name: 'Dobby Will',
+      },
+      {
+        avatar: IMAGE_XINAN,
+        title: (
+          <Translate
+            zh_hant="在場獎學金"
+            zh_hans="在场奖学金"
+            en="Frontline Award"
+          />
+        ),
+        name: 'Xinan He',
       },
       {
         avatar: IMAGE_XY,
@@ -78,34 +145,24 @@ const CREW = [
   },
 
   {
-    group: <Translate zh_hant="開發" zh_hans="开发" en="Development" />,
-    type: 'dev',
+    group: (
+      <Translate
+        zh_hant="品牌 & 商務"
+        zh_hans="品牌 & 商务"
+        en="Brand & Business"
+      />
+    ),
+    type: 'brandBusiness',
     people: [
       {
-        avatar: IMAGE_ZECK,
-        title: 'Senior Product Engineer',
-        name: 'Zeck Li',
+        avatar: IMAGE_EMILIE,
+        title: 'Brand',
+        name: 'Emilie Hsu',
       },
       {
-        avatar: IMAGE_ROBERT,
-        title: 'Product Engineer',
-        name: 'Robert Lu',
-      },
-      {
-        avatar: IMAGE_CHARLIE,
-        title: 'Developer',
-        name: 'Charlie',
-      },
-    ],
-  },
-  {
-    group: <Translate zh_hant="數據" zh_hans="数据" en="Data" />,
-    type: 'data',
-    people: [
-      {
-        avatar: IMAGE_XIA,
-        title: 'Data Scientist',
-        name: 'Xia',
+        avatar: IMAGE_YX,
+        title: 'Business Development',
+        name: '育軒',
       },
     ],
   },

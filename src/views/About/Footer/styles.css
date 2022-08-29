@@ -32,12 +32,27 @@ footer {
 
   & .followUs {
     & .socials {
+      display: flex;
       & :global(> *) {
         display: inline-block;
       }
 
       & :global(> * + *) {
-        margin-left: var(--spacing-x-loose);
+        margin-left: var(--spacing-xx-loose);
+      }
+
+      & ul {
+        & :global(> * + *) {
+          margin-top: var(--spacing-base);
+        }
+      }
+    }
+  }
+
+  & .moreProducts {
+    & .products {
+      & :global(> * + *) {
+        margin-left: var(--spacing-xx-loose);
       }
     }
   }
@@ -95,6 +110,11 @@ footer {
     & .followUs {
       grid-column: topRight;
     }
+
+    & .moreProducts {
+      margin-bottom: var(--spacing-xx-loose);
+    }
+
     & .subscribeUs {
       grid-column: bottomRight;
       align-self: end;
@@ -106,7 +126,7 @@ footer {
     grid-template-areas:
       'topLeft topMiddle topRight'
       'bottomLeft bottomMiddle bottomRight';
-    grid-row-gap: var(--spacing-xxx-loose);
+    grid-row-gap: var(--spacing-xx-loose);
 
     & .contactUs {
       grid-area: topLeft;
@@ -116,8 +136,13 @@ footer {
       align-self: initial;
     }
     & .followUs {
-      grid-column: topMiddle;
+      grid-area: topMiddle;
     }
+
+    & .moreProducts {
+      grid-area: bottomMiddle;
+    }
+
     & .subscribeUs {
       grid-column: topRight;
       align-self: initial;
