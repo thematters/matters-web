@@ -11,8 +11,8 @@ import {
   ViewerContext,
 } from '@/src/components'
 
-import Enhance from './Enhance'
 import DisplayPreferences from './DisplayPreferences'
+import Enhance from './Enhance'
 import Learn from './Learn'
 import styles from './styles.css'
 
