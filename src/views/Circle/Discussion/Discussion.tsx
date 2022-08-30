@@ -197,9 +197,7 @@ const CricleDiscussion = () => {
       return
     }
 
-    if (window.location.hash && circle) {
-      jump('#comments', { offset: -10 })
-    }
+    // if (window.location.hash && circle) { jump('#comments', { offset: -10 }) }
 
     const jumpToFragment = () => {
       jump(`#${fragment}`, {
