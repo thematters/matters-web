@@ -68,6 +68,7 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
 }) => {
   const { isInPath, isPathStartWith } = useRoute()
   const isInSearch = isInPath('SEARCH')
+  const isInSettings = isInPath('SETTINGS')
   const isInArticleDetail = isInPath('ARTICLE_DETAIL')
   const isInCircle = isPathStartWith('/~', true)
   const isLargeUp = useResponsive('lg-up')
@@ -117,7 +118,7 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
 
         {aside}
 
-        {!inEditor && (
+        {!inEditor && !isInSettings && (
           <section className="u-lg-down-hide">
             <SideFooter />
           </section>
