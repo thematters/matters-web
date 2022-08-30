@@ -223,6 +223,7 @@ const Hero = () => {
                 <Translate
                   zh_hant="出版NFT移民．平台》用Web3對抗演算法，打造共同的廣場： 專訪Matters創辦人張潔平"
                   zh_hans="出版NFT移民．平台》用Web3对抗演算法，打造共同的广场： 专访Matters创办人张洁平"
+                  // TODO: update english title
                   en='Published NFT immigration. Platform" Using Web3 Against Algorithms to Create a Common Plaza: Interview with Zhang Jieping, Founder of Matters'
                 />
               </h3>
@@ -241,6 +242,7 @@ const Hero = () => {
                   zh_hant="【你買 NFT 了嗎】走在 Web3 媒體路三年，Matters 跟張潔平想用 NFT 邁出下一步
                   "
                   zh_hans="【你买 NFT 了吗】走在 Web3 媒体路三年，Matters 跟张洁平想用 NFT 迈出下一步"
+                  // TODO: update english title
                   en="[Have you bought NFT] After three years on the Web3 media road, Matters and Zhang Jieping want to take the next step with NFT"
                 />
               </h3>
