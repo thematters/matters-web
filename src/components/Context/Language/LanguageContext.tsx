@@ -5,8 +5,8 @@ import { createContext, useContext, useState } from 'react'
 
 import { Translate, useMutation, ViewerContext } from '~/components'
 
-import { ADD_TOAST, COOKIE_LANGUAGE } from '~/common/enums'
-import { getCookie, langConvert } from '~/common/utils'
+import { ADD_TOAST, COOKIE_LANGUAGE, DEFAULT_LOCALE } from '~/common/enums'
+import { getCookie, toUserLanguage } from '~/common/utils'
 
 import { UserLanguage } from '@/__generated__/globalTypes'
 import { UpdateLanguage } from './__generated__/UpdateLanguage'
@@ -32,10 +32,10 @@ export const LanguageContext = createContext(
 export const LanguageConsumer = LanguageContext.Consumer
 
 export const LanguageProvider = ({
-  cookie,
+  headers,
   children,
 }: {
-  cookie: string
+  headers?: any
   children: React.ReactNode
 }) => {
   const [updateLanguage] = useMutation<UpdateLanguage>(UPDATE_VIEWER_LANGUAGE)
@@ -46,10 +46,13 @@ export const LanguageProvider = ({
 
   // read from URL subpath
   const router = useRouter()
-  const routerLang = router.locale ? langConvert.bcp47toSys(router.locale) : ''
+  const routerLang =
+    router.locale && router.locale !== DEFAULT_LOCALE
+      ? toUserLanguage(router.locale)
+      : ''
 
   // read from cookie (both server-side and client-side)
-  let cookieLang = getCookie(cookie, COOKIE_LANGUAGE)
+  let cookieLang = getCookie(headers?.cookie, COOKIE_LANGUAGE)
   if (typeof window !== 'undefined') {
     const cookieLanguage = Cookie.get(COOKIE_LANGUAGE)
     if (cookieLanguage) {
@@ -57,19 +60,23 @@ export const LanguageProvider = ({
     }
   }
 
-  // fallback to browser preference
-  let fallbackLang = ''
-  if (typeof window !== 'undefined' && navigator?.language) {
-    fallbackLang = langConvert.bcp47toSys(navigator.language)
+  // fallback to browser preference (both server-side and client-side)
+  let fallbackLang
+  if (typeof window !== 'undefined') {
+    fallbackLang = toUserLanguage(navigator.language)
+  } else {
+    const acceptLanguage = (headers['accept-language'] || '')
+      .split(',')
+      .map((l: string) => l.trim())[0]
+    fallbackLang = toUserLanguage(acceptLanguage)
   }
+  fallbackLang = fallbackLang || UserLanguage.zh_hant
 
   const initLocalLang = (viewerLang ||
     cookieLang ||
     routerLang ||
     fallbackLang) as UserLanguage
   const [localLang, setLocalLang] = useState(initLocalLang)
-
-  console.log({ localLang, viewerLang, routerLang, cookieLang, fallbackLang })
 
   const setLang = async (language: UserLanguage) => {
     setLocalLang(language)

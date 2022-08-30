@@ -16,14 +16,17 @@ const InnerApp = ({
   Component,
   pageProps,
   apollo,
-  cookie,
-}: AppProps & { apollo: ApolloClient<InMemoryCache>; cookie: string }) => {
+  headers,
+}: AppProps & {
+  apollo: ApolloClient<InMemoryCache>
+  headers?: any
+}) => {
   return (
     <ErrorBoundary>
       <ApolloProvider client={apollo}>
         <GlobalStyles />
 
-        <Root client={apollo} cookie={cookie}>
+        <Root client={apollo} headers={headers}>
           <Component {...pageProps} />
 
           <ClientUpdater />
@@ -33,17 +36,12 @@ const InnerApp = ({
   )
 }
 
-InnerApp.getInitialProps = async ({
-  ctx,
-  ...rest
-}: {
-  ctx: NextPageContext
-}) => {
+InnerApp.getInitialProps = async ({ ctx }: { ctx: NextPageContext }) => {
   if (!ctx) {
-    return { cookie: '' }
+    return { headers: {} }
   }
 
-  return { cookie: ctx?.req?.headers.cookie }
+  return { headers: ctx?.req?.headers }
 }
 
 const MattersApp = withApollo(InnerApp as any, { getDataFromTree })
