@@ -11,7 +11,7 @@ import {
   ViewerContext,
 } from '@/src/components'
 
-import Build from './Build'
+import Enhance from './Enhance'
 import DisplayPreferences from './DisplayPreferences'
 import Learn from './Learn'
 import styles from './styles.css'
@@ -52,7 +52,7 @@ const Settings = () => {
       <PullToRefresh>
         <DisplayPreferences />
         <Learn />
-        <Build />
+        <Enhance />
 
         <section className="copyright">
           <span>
