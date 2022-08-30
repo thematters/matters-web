@@ -2,6 +2,7 @@ import { ApolloProvider } from '@apollo/react-hooks'
 import { getDataFromTree } from '@apollo/react-ssr'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
+import { NextPageContext } from 'next'
 import { AppProps } from 'next/app'
 
 import { ErrorBoundary } from '~/components'
@@ -15,20 +16,36 @@ const InnerApp = ({
   Component,
   pageProps,
   apollo,
-}: AppProps & { apollo: ApolloClient<InMemoryCache> }) => (
-  <ErrorBoundary>
-    <ApolloProvider client={apollo}>
-      <GlobalStyles />
+  cookie,
+}: AppProps & { apollo: ApolloClient<InMemoryCache>; cookie: string }) => {
+  return (
+    <ErrorBoundary>
+      <ApolloProvider client={apollo}>
+        <GlobalStyles />
 
-      <Root client={apollo}>
-        <Component {...pageProps} />
+        <Root client={apollo} cookie={cookie}>
+          <Component {...pageProps} />
 
-        <ClientUpdater />
-      </Root>
-    </ApolloProvider>
-  </ErrorBoundary>
-)
+          <ClientUpdater />
+        </Root>
+      </ApolloProvider>
+    </ErrorBoundary>
+  )
+}
 
-const MattersApp = withApollo(InnerApp, { getDataFromTree })
+InnerApp.getInitialProps = async ({
+  ctx,
+  ...rest
+}: {
+  ctx: NextPageContext
+}) => {
+  if (!ctx) {
+    return { cookie: '' }
+  }
+
+  return { cookie: ctx?.req?.headers.cookie }
+}
+
+const MattersApp = withApollo(InnerApp as any, { getDataFromTree })
 
 export default MattersApp

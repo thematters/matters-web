@@ -73,9 +73,11 @@ const wagmiClient = createClient({
 
 const Root = ({
   client,
+  cookie,
   children,
 }: {
   client: ApolloClient<InMemoryCache>
+  cookie: string
   children: React.ReactNode
 }) => {
   const { isInPath } = useRoute()
@@ -157,7 +159,7 @@ const Root = ({
         <SplashScreen />
         <PageViewTracker />
 
-        <LanguageProvider>
+        <LanguageProvider cookie={cookie}>
           <FeaturesProvider official={official}>
             {shouldApplyLayout ? <Layout>{children}</Layout> : children}
 

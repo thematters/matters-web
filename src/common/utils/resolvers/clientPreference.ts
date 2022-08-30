@@ -11,7 +11,6 @@ const clientPreferenceResolver = (_: any) => {
     },
     circleBanner: true,
     announcement: 0,
-    language: '',
   }
 }
 
