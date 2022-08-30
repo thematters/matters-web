@@ -32,3 +32,5 @@ export const CONTENT_LANG_TEXT_MAP = {
     ru: 'Russian',
   },
 }
+
+export const DEFAULT_LOCALE = '__defaultLocale'
