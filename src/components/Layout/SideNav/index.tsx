@@ -11,6 +11,7 @@ import {
   IconNavHome24,
   IconNavHomeActive24,
   IconNavSearch24,
+  IconNavSettings24,
   LanguageContext,
   Menu,
   Translate,
@@ -44,6 +45,7 @@ const SideNav = () => {
   const isInFollow = isInPath('FOLLOW')
   const isInNotification = isInPath('ME_NOTIFICATIONS')
   const isInSearch = isInPath('SEARCH')
+  const isInSettings = isInPath('SETTINGS')
   const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
   const isInMe =
     (!isInNotification && isPathStartWith('/me')) || userName === viewerUserName
@@ -96,6 +98,17 @@ const SideNav = () => {
             active={isInSearch}
             isMediumUp={isMediumUp}
             href={PATHS.SEARCH}
+          />
+        )}
+
+        {!viewer.isAuthed && (
+          <NavListItem
+            name={<Translate id="settings" />}
+            icon={<IconNavSettings24 size="md" />}
+            activeIcon={<IconNavSettings24 size="md" color="green" />}
+            active={isInSettings}
+            isMediumUp={isMediumUp}
+            href={PATHS.SETTINGS}
           />
         )}
 
