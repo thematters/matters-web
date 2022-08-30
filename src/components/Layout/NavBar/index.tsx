@@ -63,7 +63,8 @@ const NavBar = () => {
           href={PATHS.SEARCH}
         />
 
-        {viewer.isAuthed && (<NavListItem
+        {viewer.isAuthed && (
+          <NavListItem
             name={TEXT.zh_hant.notification}
             icon={<UnreadIcon.Notification />}
             activeIcon={<UnreadIcon.Notification active />}
@@ -72,13 +73,15 @@ const NavBar = () => {
           />
         )}
 
-        {!viewer.isAuthed && (<NavListItem
-          name={TEXT.zh_hant.settings}
-          icon={<IconNavSettings24 size="md" />}
-          activeIcon={<IconNavSettings24 size="md" color="green" />}
-          active={isInSettings}
-          href={PATHS.SETTINGS}
-        />)}
+        {!viewer.isAuthed && (
+          <NavListItem
+            name={TEXT.zh_hant.settings}
+            icon={<IconNavSettings24 size="md" />}
+            activeIcon={<IconNavSettings24 size="md" color="green" />}
+            active={isInSettings}
+            href={PATHS.SETTINGS}
+          />
+        )}
       </ul>
 
       <style jsx>{styles}</style>
