@@ -84,7 +84,11 @@ const nextConfig = {
    * Runtime configs
    *
    */
-  poweredByHeader: false,
+  i18n: {
+    locales: ['zh-Hant', 'zh-Hans', 'en'],
+    defaultLocale: 'zh-Hant',
+    localeDetection: false,
+  },
 
   // custom HTTP headers
   async headers() {

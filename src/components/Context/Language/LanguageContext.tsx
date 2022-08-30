@@ -1,15 +1,14 @@
-import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { createContext, useContext } from 'react'
+import Cookie from 'js-cookie'
+import { useRouter } from 'next/router'
+import { createContext, useContext, useState } from 'react'
 
 import { Translate, useMutation, ViewerContext } from '~/components'
-import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
-import { ADD_TOAST, STORAGE_KEY_LANGUAGE } from '~/common/enums'
-import { langConvert, storage } from '~/common/utils'
+import { ADD_TOAST, COOKIE_LANGUAGE } from '~/common/enums'
+import { getCookie, langConvert } from '~/common/utils'
 
 import { UserLanguage } from '@/__generated__/globalTypes'
-import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import { UpdateLanguage } from './__generated__/UpdateLanguage'
 
 const UPDATE_VIEWER_LANGUAGE = gql`
@@ -26,106 +25,97 @@ const UPDATE_VIEWER_LANGUAGE = gql`
 export const LanguageContext = createContext(
   {} as {
     lang: UserLanguage
-    setLang: (lang: UserLanguage) => void
+    setLang: (lang: UserLanguage) => Promise<void>
   }
 )
 
 export const LanguageConsumer = LanguageContext.Consumer
 
 export const LanguageProvider = ({
+  cookie,
   children,
 }: {
+  cookie: string
   children: React.ReactNode
 }) => {
-  const { data: clientPreferenceData, client } = useQuery<ClientPreference>(
-    CLIENT_PREFERENCE,
-    { variables: { id: 'local' } }
-  )
-
   const [updateLanguage] = useMutation<UpdateLanguage>(UPDATE_VIEWER_LANGUAGE)
+
+  // read from authed viewer object
   const viewer = useContext(ViewerContext)
+  const viewerLang = viewer.isAuthed ? viewer.settings.language : ''
 
-  const viewerLang = viewer?.settings?.language
-  let storedLang
+  // read from URL subpath
+  const router = useRouter()
+  const routerLang = router.locale ? langConvert.bcp47toSys(router.locale) : ''
 
+  // read from cookie (both server-side and client-side)
+  let cookieLang = getCookie(cookie, COOKIE_LANGUAGE)
   if (typeof window !== 'undefined') {
-    storedLang = storage.get(STORAGE_KEY_LANGUAGE)
+    const cookieLanguage = Cookie.get(COOKIE_LANGUAGE)
+    if (cookieLanguage) {
+      cookieLang = cookieLanguage
+    }
   }
-
-  const localLang =
-    clientPreferenceData?.clientPreference?.language || storedLang
-  let lang = (viewer.isAuthed && viewerLang) || localLang
 
   // fallback to browser preference
-  if (typeof window !== 'undefined' && !lang && navigator?.language) {
-    lang = langConvert.bcp472sys(navigator.language)
+  let fallbackLang = ''
+  if (typeof window !== 'undefined' && navigator?.language) {
+    fallbackLang = langConvert.bcp47toSys(navigator.language)
   }
 
-  const setLang = (targetLang: UserLanguage) => {
-    storage.set(STORAGE_KEY_LANGUAGE, targetLang)
+  const initLocalLang = (viewerLang ||
+    cookieLang ||
+    routerLang ||
+    fallbackLang) as UserLanguage
+  const [localLang, setLocalLang] = useState(initLocalLang)
 
-    client.writeData({
-      id: 'ClientPreference:local',
-      data: {
-        language: targetLang,
-      },
-    })
+  console.log({ localLang, viewerLang, routerLang, cookieLang, fallbackLang })
 
-    document.documentElement.setAttribute(
-      'lang',
-      langConvert.sys2html(targetLang)
-    )
+  const setLang = async (language: UserLanguage) => {
+    setLocalLang(language)
+
+    if (!viewer.isAuthed) {
+      Cookie.set(COOKIE_LANGUAGE, language, {
+        domain: window.location.hostname,
+        expires: 90,
+        secure: false,
+        sameSite: 'Lax',
+      })
+      return
+    }
+
+    // logged-in user
+    try {
+      await updateLanguage({
+        variables: { input: { language } },
+        optimisticResponse: {
+          updateUserInfo: {
+            id: viewer.id,
+            settings: {
+              language,
+              __typename: 'UserSettings',
+            },
+            __typename: 'User',
+          },
+        },
+      })
+    } catch (e) {
+      window.dispatchEvent(
+        new CustomEvent(ADD_TOAST, {
+          detail: {
+            color: 'red',
+            content: <Translate id="failureChange" />,
+          },
+        })
+      )
+    }
   }
 
   return (
     <LanguageContext.Provider
       value={{
-        lang,
-        setLang: async (targetLang) => {
-          if (viewer.isAuthed) {
-            try {
-              await updateLanguage({
-                variables: { input: { language: targetLang } },
-                optimisticResponse: {
-                  updateUserInfo: {
-                    id: viewer.id,
-                    settings: {
-                      language: targetLang as any,
-                      __typename: 'UserSettings',
-                    },
-                    __typename: 'User',
-                  },
-                },
-              })
-
-              window.dispatchEvent(
-                new CustomEvent(ADD_TOAST, {
-                  detail: {
-                    color: 'green',
-                    content: (
-                      <Translate
-                        zh_hant="介面語言已修改"
-                        zh_hans="界面语言已修改"
-                        en="Language changed"
-                      />
-                    ),
-                  },
-                })
-              )
-            } catch (e) {
-              window.dispatchEvent(
-                new CustomEvent(ADD_TOAST, {
-                  detail: {
-                    color: 'red',
-                    content: <Translate id="failureChange" />,
-                  },
-                })
-              )
-            }
-          }
-
-          setLang(targetLang)
-        },
+        lang: localLang,
+        setLang,
       }}
     >
       {children}
