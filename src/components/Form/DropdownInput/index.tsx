@@ -130,11 +130,8 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
               }
             }}
             onChange={(e) => {
-              if (inputProps.onChange) {
-                inputProps.onChange(e)
-              }
-
-              const trimedValue = e.target.value.trim()
+              const trimedValue =
+                inputProps?.onChange?.(e) ?? e.target.value.trim()
 
               setSearch(trimedValue)
 

@@ -5,9 +5,20 @@
 }
 
 .search-tag-item {
+  @mixin flex-start-space-between;
+
   & .keyword,
   & .count {
     margin-left: var(--spacing-xx-tight);
     color: var(--color-grey);
+  }
+}
+
+.count {
+  margin-left: var(--spacing-xx-tight);
+  color: var(--color-grey);
+
+  & .highlight {
+    color: var(--color-matters-green);
   }
 }

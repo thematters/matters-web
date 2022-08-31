@@ -152,11 +152,18 @@ export const tagSlugify = (content: string) =>
     .replace(anyNonAlphaNum, '-') // replace all non alpha-number to `-`, including spaces and punctuations
     .replace(/(^-+|-+$)/g, '') // strip leading or trailing `-` if there's any
 
-export const stripAllPunct = (content: string) =>
-  `${content}`
-    // .replace(prefixOrSuffixNonAlphaNum, '') // strip prefix or suffix punct
-    .replace(anyNonAlphaNum, ' ')
-    .trim()
+export const stripAllPunct = (content: string) => {
+  const words = `${content}`.split(anyNonAlphaNum).filter(Boolean)
+  switch (words.length) {
+    case 0:
+      return ''
+    case 1:
+      return words[0]
+    default:
+      const [first, ...rest] = words
+      return `${first} ${rest.join('')}`
+  }
+}
 
 export const normalizeTagInput = (content: string) =>
   stripAllPunct(content).substring(0, MAX_TAG_CONTENT_LENGTH)

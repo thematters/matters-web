@@ -145,9 +145,11 @@ export const TEXT = {
     hide: '站內隱藏',
     hintAddTag:
       '通過添加標籤幫助讀者更好地找到你的作品。如果沒有合適的標籤，你可以創建新的。',
-    hintAddRecommendedTag: '下方為推薦標籤，點選添加：',
+    hintAddRecommendedTag: '下方是你近期使用過標籤，點選添加：',
     hintAddTagNoTag: '目前尚無標籤，立即添加提高作品曝光度！',
     hintAddTagShort: '添加合適標籤，讓站內外讀者找到你的作品',
+    hintAddTagNamingRestriction:
+      '標籤名稱不允許標點符號，字間僅允許一個不連續空白，最大長度50字元',
     hintAddCircleInvitee: '添加站內或站外朋友加入圍爐',
     hintCircleAddArticles: '將公開作品加入圍爐，成為永久收費作品。',
     hintCircleDisplayName: '2-12 個字元',
@@ -509,9 +511,11 @@ export const TEXT = {
     hide: '站内隐藏',
     hintAddTag:
       '通过添加标签帮助读者更好地找到你的作品。如果没有合适的标签，你可以创建新的。',
-    hintAddRecommendedTag: '下方为推荐标签，点选添加：',
+    hintAddRecommendedTag: '下方是你近期使用过标签，点选添加：',
     hintAddTagNoTag: '目前尚无标签，立即添加提高作品曝光度！',
     hintAddTagShort: '添加适合标签，帮助读者找到你的作品',
+    hintAddTagNamingRestriction:
+      '标签名称不允许标点符号，字间仅允许一个不连续空白，最大长度50字元',
     hintAddCircleInvitee: '添加站内或站外朋友加入围炉',
     hintCircleAddArticles: '将公开作品加入围炉，成为永久收费作品。',
     hintCircleDisplayName: '2-12 个字符',
@@ -880,10 +884,12 @@ export const TEXT = {
     hide: 'Archived',
     hintAddTag:
       'Adding tags helps readers find your articles. Add or create new tags.',
-    hintAddRecommendedTag: 'Click to add recommended tags:',
+    hintAddRecommendedTag: 'Click to add tags you recently used :',
     hintAddTagNoTag:
       'Not using tags yet, add tags now to improve discoverability!',
     hintAddTagShort: 'Adding tags helps readers find your articles.',
+    hintAddTagNamingRestriction:
+      'Tag name does not allow punctuations, only one space is allowed between words, and the maximum length is 50 characters',
     hintAddCircleInvitee: 'Invite friends to join your circle',
     hintCircleAddArticles:
       'Add articles to Circle and keep them behind the paywall.',

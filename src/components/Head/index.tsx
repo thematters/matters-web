@@ -11,7 +11,13 @@ import IMAGE_FAVICON_32 from '@/public/static/favicon-32x32.png'
 import IMAGE_FAVICON_64 from '@/public/static/favicon-64x64.png'
 import IMAGE_INTRO from '@/public/static/images/intro.jpg'
 
-const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
+const siteDomain =
+  process.env.NEXT_PUBLIC_SITE_DOMAIN_CANONICAL || // for web-next, set this different as serving domain; suggested canonical domain ('matters.news') to robots
+  process.env.NEXT_PUBLIC_SITE_DOMAIN ||
+  'matters.news'
+const isProdServingCanonical =
+  process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production' &&
+  process.env.NEXT_PUBLIC_SITE_DOMAIN === 'matters.news' // is serving domain same as canonical domain?
 
 interface HeadProps {
   title?: string | TranslateArgs
@@ -41,10 +47,8 @@ export const Head: React.FC<HeadProps> = (props) => {
       ? `${props.keywords.join(',')},matters,matters.news,創作有價`
       : 'matters,matters.news,創作有價',
     url: props.path
-      ? `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}${props.path}`
-      : router.asPath
-      ? `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}${router.asPath}`
-      : 'https://' + process.env.NEXT_PUBLIC_SITE_DOMAIN,
+      ? `https://${siteDomain}${props.path}`
+      : `https://${siteDomain}${router.asPath || '/'}`,
     image: props.image || IMAGE_INTRO.src,
   }
   const canonicalUrl = head.url?.split('#')[0].split('?')[0]
@@ -94,10 +98,10 @@ export const Head: React.FC<HeadProps> = (props) => {
       )}
 
       {/* noindex for non-production enviroment */}
-      {!isProd && (
+      {!isProdServingCanonical && (
         <meta name="robots" content="noindex, nofollow" key="robots" />
       )}
-      {!isProd && (
+      {!isProdServingCanonical && (
         <meta name="googlebot" content="noindex, nofollow" key="googlebot" />
       )}
 

@@ -25,7 +25,7 @@ const SCRIPT_SRC = [
 
   // Stripe
   'js.stripe.com',
-].join(' ')
+] // .join(' ')
 
 const STYLE_SRC = [
   "'self'",
@@ -35,7 +35,7 @@ const STYLE_SRC = [
 
   // Programmable Google Search
   'www.google.com/cse/',
-].join(' ')
+] // .join(' ')
 
 /* const { hostname: NEXT_PUBLIC_API_HOSTNAME } = new URL(
   process.env.NEXT_PUBLIC_API_URL as string
@@ -60,7 +60,7 @@ const IMG_SRC = [
 
   // GA
   'www.google-analytics.com',
-].join(' ')
+] // .join(' ')
 
 const MEDIA_SRC = IMG_SRC
 
@@ -113,7 +113,7 @@ const CONNECT_SRC = [
   'ipfs.stibarc.com/ipfs/',
   'ipfs.best-practice.se/ipfs/',
   'ipfs.2read.net/ipfs/',
-].join(' ')
+] // .join(' ')
 
 const FRAME_SRC = [
   "'self'",
@@ -132,6 +132,33 @@ const FRAME_SRC = [
   // Stripe
   'js.stripe.com',
   'hooks.stripe.com',
-].join(' ')
+] // .join(' ')
 
-export const CSP_POLICY = `default-src 'self'; script-src ${SCRIPT_SRC}; style-src ${STYLE_SRC}; img-src ${IMG_SRC}; media-src ${MEDIA_SRC}; frame-src ${FRAME_SRC}; connect-src ${CONNECT_SRC}`
+const PREFETCH_SRC = [
+  "'self'",
+
+  // Next.js Assets
+  process.env.NEXT_PUBLIC_NEXT_ASSET_DOMAIN,
+] // .join(' ')
+
+export const CSP_POLICY = Object.entries({
+  'script-src': SCRIPT_SRC,
+  'style-src': STYLE_SRC,
+  'img-src': IMG_SRC,
+  'media-src': MEDIA_SRC,
+  'connect-src': CONNECT_SRC,
+  'frame-src': FRAME_SRC,
+  'prefetch-src': PREFETCH_SRC,
+  'default-src': ["'self'"],
+})
+  .map(
+    ([k, v]) =>
+      `${k} ${(Array.isArray(v)
+        ? v
+            .map((s) => s?.trim())
+            .filter(Boolean)
+            .join(' ')
+        : v
+      ).trim()}`
+  )
+  .join('; ')

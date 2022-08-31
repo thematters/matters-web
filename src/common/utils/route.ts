@@ -24,6 +24,7 @@ interface CircleArgs {
 
 interface CommentArgs {
   id: string
+  type: 'article' | 'circleDiscussion' | 'circleBroadcast' // comment type: article/discussion/broadcast
   parentComment: {
     id: string
   } | null
@@ -46,11 +47,13 @@ type ToPathArgs =
         | 'circleEditProfile'
         | 'circleManageInvitation'
       circle: CircleArgs
+      fragment?: string
     }
   | {
       page: 'commentDetail'
       comment: CommentArgs
-      article: ArticleArgs
+      article?: ArticleArgs
+      circle?: CircleArgs
     }
   | { page: 'draftDetail'; id: string; slug: string }
   | {
@@ -132,13 +135,15 @@ export const toPath = (
       }
     }
     case 'circleDiscussion': {
+      const hash = args.fragment ? `#${args.fragment}` : ''
       return {
-        href: `/~${args.circle.name}/discussion`,
+        href: `/~${args.circle.name}/discussion${hash}`,
       }
     }
     case 'circleBroadcast': {
+      const hash = args.fragment ? `#${args.fragment}` : ''
       return {
-        href: `/~${args.circle.name}/broadcast`,
+        href: `/~${args.circle.name}/broadcast${hash}`,
       }
     }
     case 'circleSettings': {
@@ -162,14 +167,24 @@ export const toPath = (
       }
     }
     case 'commentDetail': {
-      const { parentComment, id } = args.comment
+      const { parentComment, id, type } = args.comment
       const fragment = parentComment?.id ? `${parentComment.id}-${id}` : id
 
-      return toPath({
-        page: 'articleDetail',
-        article: args.article,
-        fragment,
-      })
+      switch (type) {
+        case 'article':
+          return toPath({
+            page: 'articleDetail',
+            article: args.article!,
+            fragment,
+          })
+        case 'circleDiscussion':
+        case 'circleBroadcast':
+          return toPath({
+            page: type, // 'circleDiscussion' or 'circleBroadcast'
+            circle: args.circle!, // as { name: string },
+            fragment,
+          })
+      }
     }
     case 'draftDetail': {
       return {

@@ -16,7 +16,13 @@ import {
 } from '~/components'
 import SEARCH_TAGS from '~/components/GQL/queries/searchTags'
 
-import { ADD_TOAST, ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
+import {
+  ADD_TOAST,
+  ASSET_TYPE,
+  ENTITY_TYPE,
+  MAX_TAG_CONTENT_LENGTH,
+  MAX_TAG_DESCRIPTION_LENGTH,
+} from '~/common/enums'
 import {
   normalizeTagInput, // stripAllPunct, // stripPunctPrefixSuffix,
   numAbbr,
@@ -99,6 +105,19 @@ const DropdownList = ({
     </>
   )
 }
+
+const HintLengthText: React.FC<{
+  curLength: number
+  maxLength: number
+}> = ({ curLength, maxLength }) => (
+  <>
+    <span className="count">
+      <span className={curLength > 0 ? 'highlight' : ''}>{curLength ?? 0}</span>
+      &nbsp;/&nbsp;{maxLength}
+    </span>
+    <style jsx>{styles}</style>
+  </>
+)
 
 const DropdownListWithDefaultItem = (props: DropdownListBaseProps) => {
   return (
@@ -244,11 +263,20 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
         onChange={(e) => {
           const newContent = normalizeTagInput(e.target.value)
           setFieldValue('newContent', newContent)
+          return newContent
         }}
         dropdownAppendTo={formId}
         dropdownAutoSizing
         DropdownContent={DropdownContent}
         query={SEARCH_TAGS}
+        hint={<Translate id="hintAddTagNamingRestriction" />}
+        maxLength={MAX_TAG_CONTENT_LENGTH}
+        extraButton={
+          <HintLengthText
+            curLength={values.newContent?.length ?? 0}
+            maxLength={MAX_TAG_CONTENT_LENGTH}
+          />
+        }
       />
 
       <Form.Textarea
@@ -260,6 +288,13 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
         onBlur={handleBlur}
         onChange={handleChange}
         required
+        maxLength={MAX_TAG_DESCRIPTION_LENGTH}
+        extraButton={
+          <HintLengthText
+            curLength={values.newDescription?.length ?? 0}
+            maxLength={MAX_TAG_DESCRIPTION_LENGTH}
+          />
+        }
       />
     </Form>
   )
@@ -283,6 +318,7 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
       />
 
       <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
+      <style jsx>{styles}</style>
     </>
   )
 }

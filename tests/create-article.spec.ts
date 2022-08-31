@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test'
+import { expect, test } from '@playwright/test'
 // import { Base64 } from 'js-base64'
 
 test.beforeEach(async ({page}) => {
@@ -48,7 +48,7 @@ test('login and create, with likeid already exists', async ({ page }) => {
   await page.locator('button:has-text("View article")').click()
   await expect(page).toHaveURL(new RegExp('^https://web-next.matters.news/@username'));
    
-  //Click button:has-text("IPFS")
+  // Click button:has-text("IPFS")
   await page.locator('button:has-text("IPFS")').click();
   await page.locator('text=Content HashThe Fingerprint from IPFS, you can read it via a gateway >> button').click();
   const contenthHash = await (page.$(".copy >> input")).then( (value) => value?.inputValue())

@@ -1,11 +1,11 @@
 {
   "name": "matters-web",
-  "version": "4.3.7",
+  "version": "4.4.0",
   "description": "codebase of Matters' website",
   "sideEffects": false,
   "author": "Matters <hi@matters.news>",
   "engines": {
-    "node": "16.16"
+    "node": ">=16.14"
   },
   "license": "Apache-2.0",
   "scripts": {
