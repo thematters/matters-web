@@ -76,8 +76,8 @@ const BaseEditorSettingsDialog = ({
   license,
   canToggleCircle,
 
-  iscnPublish, // : draft.iscnPublish, // : boolean
-  togglePublishISCN, // : (iscnPublish: boolean) => Promise<any>
+  iscnPublish,
+  togglePublishISCN,
   iscnPublishSaving,
 
   saving,
@@ -131,12 +131,6 @@ const BaseEditorSettingsDialog = ({
     iscnPublishSaving,
   }
 
-  // const iscnPublishProps: SetPublishISCNProps = {
-  //   iscnPublish, // : draft.iscnPublish, // : boolean
-  //   togglePublishISCN, // : (iscnPublish: boolean) => Promise<any>
-  //   iscnPublishSaving,
-  // }
-
   return (
     <>
       {children({ openDialog })}
@@ -155,7 +149,6 @@ const BaseEditorSettingsDialog = ({
             collectionCount={collection.length}
             tagsCount={tags.length}
             {...accessProps}
-            // {...iscnPublishProps}
           />
         )}
 

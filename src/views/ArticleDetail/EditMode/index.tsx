@@ -124,10 +124,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
     editCollection(data.article.collection.edges?.map(({ node }) => node) || [])
   }, [data?.article?.id])
 
-  const [iscnPublish, setIscnPublish] = useState<boolean>(
-    // article.drafts?.[0].iscnPublish ||
-    false
-  )
+  const [iscnPublish, setIscnPublish] = useState<boolean>(false) // always start false
 
   /**
    * Render
@@ -193,20 +190,12 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
     accessSaving: false,
     editAccess,
     canToggleCircle: !!hasOwnCircle && !isReviseDisabled,
-    iscnPublish, // : false, // : draft.iscnPublish, // : boolean
+    iscnPublish,
     togglePublishISCN() {
       setIscnPublish(!iscnPublish)
-    }, // : (iscnPublish: boolean) => Promise<any>
+    },
     iscnPublishSaving: false,
   }
-
-  // const iscnPublishProps: SetPublishISCNProps = {
-  //   iscnPublish, // : false, // : draft.iscnPublish, // : boolean
-  //   togglePublishISCN() {
-  //     setIscnPublish(!iscnPublish)
-  //   }, // : (iscnPublish: boolean) => Promise<any>
-  //   iscnPublishSaving: false,
-  // }
 
   return (
     <>
@@ -220,7 +209,6 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
                 <Sidebar.Collection {...collectionProps} />
                 <Sidebar.Management
                   {...accessProps}
-                  // {...iscnPublishProps}
                 />
                 <style jsx>{styles}</style>
               </section>
@@ -242,7 +230,6 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
                   {...tagsProps}
                   {...collectionProps}
                   {...accessProps}
-                  // {...iscnPublishProps}
                   article={article}
                   editData={editData}
                   coverId={cover?.id}
