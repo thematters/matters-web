@@ -5,7 +5,6 @@ import {
   Head,
   IconLogo,
   Layout,
-  PullToRefresh,
   UniversalAuthButton,
   useResponsive,
   ViewerContext,
@@ -49,19 +48,17 @@ const Settings = () => {
         }
       />
 
-      <PullToRefresh>
-        <DisplayPreferences />
-        <Learn />
-        <Enhance />
+      <DisplayPreferences />
+      <Learn />
+      <Enhance />
 
-        <section className="copyright">
-          <span>
-            {'@ '}
-            <span itemProp="copyrightYear">{year}</span>{' '}
-            <span itemProp="copyrightHolder">Matters</span>
-          </span>
-        </section>
-      </PullToRefresh>
+      <section className="copyright">
+        <span>
+          {'@ '}
+          <span itemProp="copyrightYear">{year}</span>{' '}
+          <span itemProp="copyrightHolder">Matters</span>
+        </span>
+      </section>
       <style jsx>{styles}</style>
     </Layout.Main>
   )
