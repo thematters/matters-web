@@ -51,8 +51,10 @@ test('login and create, with likeid already exists', async ({ page }) => {
   // Click button:has-text("IPFS")
   await page.locator('button:has-text("IPFS")').click();
   await page.locator('text=Content HashThe Fingerprint from IPFS, you can read it via a gateway >> button').click();
-  const contenthHash = await (page.$(".copy >> input")).then( (value) => value?.inputValue())
-  expect(contenthHash).not.toEqual(null)
+  
+  // Check if content hash exists
+  const contentHash = await (page.$(".copy >> input")).then( (value) => value?.inputValue())
+  expect(contentHash).not.toEqual(null)
 
   // Check if there's any available gateway
   const gatewayUrl = await page.locator('.gateway-url').first().innerText()
