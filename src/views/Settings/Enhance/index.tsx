@@ -2,8 +2,11 @@ import { Form, Translate } from '~/components'
 
 const Enhance = () => {
   return (
-    // TODO: update groupName
-    <Form.List groupName={'Build'}>
+    <Form.List groupName={<Translate
+      zh_hant="參與開發"
+      zh_hans="参与开发"
+      en="Build Together"
+    />}>
       <Form.List.Item
         title={<Translate id="openCommunity" />}
         href="https://github.com/thematters/developer-resource"

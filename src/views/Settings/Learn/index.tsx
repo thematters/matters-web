@@ -14,8 +14,11 @@ const downloadAppLink = toPath({
 
 const Learn = () => {
   return (
-    // TODO: update groupName
-    <Form.List groupName={'Learn'}>
+    <Form.List groupName={<Translate
+      zh_hant="暸解更多"
+      zh_hans="了解更多"
+      en="Learn More"
+    />}>
       <Form.List.Item title={<Translate id="about" />} href={PATHS.ABOUT} />
       <Form.List.Item title={<Translate id="guide" />} href={PATHS.GUIDE} />
       <Form.List.Item
