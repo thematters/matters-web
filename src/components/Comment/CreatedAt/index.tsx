@@ -18,6 +18,7 @@ const fragments = {
   comment: gql`
     fragment CreatedAtComment on Comment {
       id
+      type
       parentComment {
         id
       }
@@ -37,19 +38,25 @@ const fragments = {
 }
 
 const CreatedAt = ({ comment, hasLink }: CreatedAtProps) => {
-  const article = comment.node.__typename === 'Article' && comment.node
+  const article =
+    comment.node.__typename === 'Article' ? comment.node : undefined
+  const circle = comment.node.__typename === 'Circle' ? comment.node : undefined
 
-  if (!article) {
-    return <DateTime date={comment.createdAt} />
+  if (article || circle) {
+    const path = toPath({
+      page: 'commentDetail',
+      comment,
+      article,
+      circle: circle! as unknown as { __typename: 'Circle'; name: string },
+    })
+    return (
+      <LinkWrapper {...path} disabled={!hasLink}>
+        <DateTime date={comment.createdAt} />
+      </LinkWrapper>
+    )
   }
 
-  const path = toPath({ page: 'commentDetail', comment, article })
-
-  return (
-    <LinkWrapper {...path} disabled={!hasLink}>
-      <DateTime date={comment.createdAt} />
-    </LinkWrapper>
-  )
+  return <DateTime date={comment.createdAt} />
 }
 
 CreatedAt.fragments = fragments

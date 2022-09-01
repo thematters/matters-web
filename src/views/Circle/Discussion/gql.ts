@@ -33,10 +33,25 @@ export const DISCUSSION_PRIVATE = gql`
 `
 
 export const DISCUSSION_COMMENTS = gql`
-  query DiscussionComments($name: String!, $after: String) {
+  query DiscussionComments(
+    $name: String!
+    $before: String
+    $after: String
+    $first: first_Int_min_0 = 10
+    $includeAfter: Boolean
+    $includeBefore: Boolean
+  ) {
     circle(input: { name: $name }) {
       id
-      discussion(input: { first: 10, after: $after }) {
+      discussion(
+        input: {
+          after: $after
+          before: $before
+          first: $first
+          includeAfter: $includeAfter
+          includeBefore: $includeBefore
+        }
+      ) {
         totalCount
         pageInfo {
           startCursor

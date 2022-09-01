@@ -1,3 +1,4 @@
+import jump from 'jump.js'
 import _differenceBy from 'lodash/differenceBy'
 import _get from 'lodash/get'
 import { useContext, useEffect } from 'react'
@@ -19,8 +20,13 @@ import {
   ViewerContext,
 } from '~/components'
 
-import { ADD_TOAST } from '~/common/enums'
-import { filterComments, mergeConnections, translate } from '~/common/utils'
+import { ADD_TOAST, URL_FRAGMENT } from '~/common/enums'
+import {
+  dom,
+  filterComments,
+  mergeConnections,
+  translate,
+} from '~/common/utils'
 
 import CircleDetailTabs from '../CircleDetailTabs'
 import { BROADCAST_PRIVATE, BROADCAST_PUBLIC } from './gql'
@@ -35,6 +41,8 @@ import {
 type CommentPublic = BroadcastPublic_circle_broadcast_edges_node
 type CommentPrivate = BroadcastPrivate_nodes_Comment
 type Comment = CommentPublic & Partial<Omit<CommentPrivate, '__typename'>>
+
+const RESPONSES_COUNT = 15
 
 const CricleBroadcast = () => {
   const { getQuery } = useRoute()
@@ -96,9 +104,18 @@ const CricleBroadcast = () => {
   }, [circle?.id, viewer.id])
 
   // load next page
-  const loadMore = async () => {
+  const loadMore = async (params?: { before: string }) => {
+    const loadBefore = params?.before || null
+    const noLimit = loadBefore && pageInfo?.endCursor
+
     const { data: newData } = await fetchMore({
-      variables: { after: pageInfo?.endCursor },
+      variables: {
+        after: pageInfo?.endCursor,
+        before: loadBefore,
+        first: noLimit ? null : RESPONSES_COUNT,
+        includeBefore: !!loadBefore,
+        // articleOnly: articleOnlyMode,
+      },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
           oldData: previousResult,
@@ -116,6 +133,46 @@ const CricleBroadcast = () => {
     loadPrivate(newData)
   }
   usePullToRefresh.Handler(refetch)
+
+  /**
+   * Fragment Patterns
+   *
+   * 0. ``
+   * 1. `#comment`
+   * 2. `#parentCommentId`
+   * 3. `#parentComemntId-childCommentId`
+   */
+  let fragment = ''
+  let parentId = ''
+  let descendantId = ''
+  if (process.browser) {
+    fragment = window.location.hash.replace('#', '')
+    ;[parentId, descendantId] = fragment.split('-') // [0] ; = fragment.split('-')[1]
+  }
+
+  // jump to comment area
+  useEffect(() => {
+    if (window.location.hash && circle) {
+      jump('#comments', { offset: -10 })
+    }
+
+    if (!fragment || !circle?.id) {
+      return
+    }
+
+    const jumpToFragment = () => {
+      jump(`#${fragment}`, {
+        offset: fragment === URL_FRAGMENT.COMMENTS ? -10 : -64,
+      })
+    }
+    const element = dom.$(`#${fragment}`)
+
+    if (!element) {
+      loadMore({ before: parentId }).then(jumpToFragment)
+    } else {
+      jumpToFragment()
+    }
+  }, [circle?.id])
 
   /**
    * Render
@@ -167,7 +224,7 @@ const CricleBroadcast = () => {
     <>
       <CircleDetailTabs />
 
-      <section className="broadcast">
+      <section className="broadcast" id="comments">
         {isOwner && (
           <header>
             <CommentForm
@@ -199,6 +256,8 @@ const CricleBroadcast = () => {
                 <ThreadComment
                   comment={comment}
                   type="circleBroadcast"
+                  defaultExpand={comment.id === parentId && !!descendantId}
+                  hasLink
                   hasUpvote={false}
                   hasDownvote={false}
                   disabled={lock}
