@@ -26,7 +26,7 @@ interface HeadProps {
   path?: string
   image?: string | null
   noSuffix?: boolean
-  paymentPointer?: string
+  paymentPointer?: string | null
   jsonLdData?: object | null
 }
 

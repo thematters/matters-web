@@ -10,7 +10,7 @@ import { ArticleDetailPublic_article } from '../__generated__/ArticleDetailPubli
 type MetaInfoProps = {
   article: ArticleDetailPublic_article
   translated: boolean
-  shouldTranslate: boolean
+  canTranslate: boolean
   toggleTranslate: () => any
   canReadFullContent: boolean
 }
@@ -18,7 +18,7 @@ type MetaInfoProps = {
 const MetaInfo = ({
   article,
   translated,
-  shouldTranslate,
+  canTranslate,
   toggleTranslate,
   canReadFullContent,
 }: MetaInfoProps) => {
@@ -37,7 +37,7 @@ const MetaInfo = ({
 
       {canReadFullContent && (
         <>
-          {shouldTranslate && (
+          {canTranslate && (
             <TranslationButton
               translated={translated}
               toggleTranslate={toggleTranslate}
