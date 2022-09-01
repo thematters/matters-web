@@ -11,57 +11,58 @@ import TagList from './TagList'
 import Toolbar from './Toolbar'
 import CircleWall from './Wall/Circle'
 
-export const ARTICLE_DETAIL_PUBLIC = gql`
-  query ArticleDetailPublic(
-    $mediaHash: String!
-    $includeCanSuperLike: Boolean = true
-  ) {
-    article(input: { mediaHash: $mediaHash }) {
+const articlePublicFragment = gql`
+  fragment ArticlePublicArticle on Article {
+    id
+    title
+    slug
+    mediaHash
+    state
+    cover
+    summary
+    summaryCustomized
+    createdAt
+    revisedAt
+    language
+    author {
       id
-      title
-      slug
-      mediaHash
-      state
-      cover
-      summary
-      summaryCustomized
-      createdAt
-      revisedAt
-      language
-      author {
-        id
-        paymentPointer
-        ...UserDigestRichUserPublic
-        ...UserDigestRichUserPrivate
-      }
-      collection(input: { first: 0 }) @connection(key: "articleCollection") {
-        totalCount
-      }
-      access {
-        type
-        circle {
-          id
-          ...CircleWallCirclePublic
-          ...CircleWallCirclePrivate
-        }
-      }
-      license
-      drafts {
-        id
-        mediaHash
-        publishState
-        iscnPublish
-      }
-      ...MetaInfoArticle
-      ...ContentArticle
-      ...TagListArticle
-      ...RelatedArticles
-      ...StateArticle
-      ...ToolbarArticlePublic
-      ...ToolbarArticlePrivate
-      ...SupportWidgetArticlePublic
-      ...SupportWidgetArticlePrivate
+      paymentPointer
+      ...UserDigestRichUserPublic
+      ...UserDigestRichUserPrivate
     }
+    collection(input: { first: 0 }) @connection(key: "articleCollection") {
+      totalCount
+    }
+    access {
+      type
+      circle {
+        id
+        ...CircleWallCirclePublic
+        ...CircleWallCirclePrivate
+      }
+    }
+    license
+    drafts {
+      id
+      mediaHash
+      publishState
+      iscnPublish
+    }
+    translation(input: { language: $language })
+      @include(if: $includeTranslation) {
+      content
+      title
+      summary
+    }
+    ...MetaInfoArticle
+    ...ContentArticle
+    ...TagListArticle
+    ...RelatedArticles
+    ...StateArticle
+    ...ToolbarArticlePublic
+    ...ToolbarArticlePrivate
+    ...SupportWidgetArticlePublic
+    ...SupportWidgetArticlePrivate
   }
   ${MetaInfo.fragments.article}
   ${Content.fragments.article}
@@ -78,72 +79,34 @@ export const ARTICLE_DETAIL_PUBLIC = gql`
   ${CircleWall.fragments.circle.private}
 `
 
+export const ARTICLE_DETAIL_PUBLIC = gql`
+  query ArticleDetailPublic(
+    $mediaHash: String!
+    $language: UserLanguage!
+    $includeTranslation: Boolean = false
+    $includeCanSuperLike: Boolean = true
+  ) {
+    article(input: { mediaHash: $mediaHash }) {
+      ...ArticlePublicArticle
+    }
+  }
+  ${articlePublicFragment}
+`
+
 export const ARTICLE_DETAIL_PUBLIC_BY_NODE_ID = gql`
   query ArticleDetailPublicByNodeId(
     $id: ID!
+    $language: UserLanguage!
+    $includeTranslation: Boolean = false
     $includeCanSuperLike: Boolean = true
   ) {
     article: node(input: { id: $id }) {
       ... on Article {
-        id
-        title
-        slug
-        mediaHash
-        state
-        cover
-        summary
-        summaryCustomized
-        createdAt
-        revisedAt
-        language
-        author {
-          id
-          paymentPointer
-          ...UserDigestRichUserPublic
-          ...UserDigestRichUserPrivate
-        }
-        collection(input: { first: 0 }) @connection(key: "articleCollection") {
-          totalCount
-        }
-        access {
-          type
-          circle {
-            id
-            ...CircleWallCirclePublic
-            ...CircleWallCirclePrivate
-          }
-        }
-        license
-        drafts {
-          id
-          mediaHash
-          publishState
-        }
-        ...MetaInfoArticle
-        ...ContentArticle
-        ### ...TagListArticle
-        ...RelatedArticles
-        ...StateArticle
-        ...ToolbarArticlePublic
-        ...ToolbarArticlePrivate
-        ...SupportWidgetArticlePublic
-        ...SupportWidgetArticlePrivate
+        ...ArticlePublicArticle
       }
     }
   }
-  ${MetaInfo.fragments.article}
-  ${Content.fragments.article}
-  ### $ {TagList.fragments.article}
-  ${RelatedArticles.fragments.article}
-  ${State.fragments.article}
-  ${UserDigest.Rich.fragments.user.public}
-  ${UserDigest.Rich.fragments.user.private}
-  ${Toolbar.fragments.article.public}
-  ${Toolbar.fragments.article.private}
-  ${SupportWidget.fragments.article.public}
-  ${SupportWidget.fragments.article.private}
-  ${CircleWall.fragments.circle.public}
-  ${CircleWall.fragments.circle.private}
+  ${articlePublicFragment}
 `
 
 export const ARTICLE_DETAIL_PRIVATE = gql`
