@@ -343,11 +343,11 @@ const ArticleDetail = () => {
 
   const {
     data,
-    loading,
-    error,
     client,
     refetch: refetchPublic,
   } = resultByHash.data ? resultByHash : resultByNodeId
+  const loading = resultByHash.loading || resultByNodeId.loading
+  const error = resultByHash.error || resultByNodeId.error
 
   const article = data?.article
   const authorId = article?.author?.id
