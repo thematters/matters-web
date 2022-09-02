@@ -79,6 +79,19 @@ const DynamicEditMode = dynamic(() => import('./EditMode'), {
   ),
 })
 
+const isValidMediaHash = (mediaHash: string | null | undefined) => {
+  // is there a better way to detect valid?
+  // a valid mediaHash, should have length 49 or 59 chars
+  // 'zdpuAsCXC87Tm1fFvAbysV7HVt7J8aV6chaTKeJZ5ryLALK3Z'
+  // 'bafyreief6bryqsa4byabnmx222jvo4khlodvpypw27af43frecbumn6ocq'
+
+  return (
+    mediaHash &&
+    ((mediaHash?.length === 49 && mediaHash.startsWith('zdpu')) ||
+      (mediaHash?.length === 59 && mediaHash.startsWith('bafy')))
+  )
+}
+
 const BaseArticleDetail = ({
   article,
   privateFetched,
@@ -304,6 +317,7 @@ const ArticleDetail = () => {
   // - `/:username:/:articleId:-:slug:-:mediaHash`
   // - `/:username:/:articleId:`
   // - `/:username:/:slug:-:mediaHash:`
+  const isQueryByHash = !!(mediaHash && isValidMediaHash(mediaHash))
   const resultByHash = usePublicQuery<ArticleDetailPublic>(
     ARTICLE_DETAIL_PUBLIC,
     {
@@ -312,7 +326,7 @@ const ArticleDetail = () => {
         language: locale ? toUserLanguage(locale) : UserLanguage.zh_hant,
         includeTranslation: !!locale,
       },
-      skip: !!articleId,
+      skip: !isQueryByHash,
     }
   )
   const resultByNodeId = usePublicQuery<ArticleDetailPublic>(
@@ -323,7 +337,7 @@ const ArticleDetail = () => {
         language: locale ? toUserLanguage(locale) : UserLanguage.zh_hant,
         includeTranslation: !!locale,
       },
-      skip: !articleId,
+      skip: isQueryByHash,
     }
   )
 
