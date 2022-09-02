@@ -26,11 +26,11 @@ const READ_ARTICLE = gql`
 
 const Content = ({
   article,
-  translation,
+  content,
   translating,
 }: {
   article: ContentArticle
-  translation?: string | null
+  content: string
   translating?: boolean
 }) => {
   const viewer = useContext(ViewerContext)
@@ -149,7 +149,7 @@ const Content = ({
       <div
         className={classNames({ 'u-content': true, translating })}
         dangerouslySetInnerHTML={{
-          __html: optimizeEmbed(translation || article.content),
+          __html: optimizeEmbed(content),
         }}
         onClick={captureClicks}
         ref={contentContainer}
