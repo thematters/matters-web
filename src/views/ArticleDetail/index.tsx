@@ -55,7 +55,6 @@ import VisitorWall from './Wall/Visitor'
 import { ArticleAccessType } from '@/__generated__/globalTypes'
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import { ArticleDetailPublic } from './__generated__/ArticleDetailPublic'
-// import { ArticleDetailPublicByNodeId } from './__generated__/ArticleDetailPublicByNodeId'
 import { ArticleTranslation } from './__generated__/ArticleTranslation'
 
 const DynamicResponse = dynamic(() => import('./Responses'), {
@@ -105,29 +104,28 @@ const ArticleDetail = () => {
   const { wall } = clientPreferenceData?.clientPreference || { wall: true }
   const shouldShowWall = !viewer.isAuthed && wall
 
-  // public data
-  const data1 = usePublicQuery<ArticleDetailPublic>(ARTICLE_DETAIL_PUBLIC, {
-    variables: { mediaHash },
-  })
-  const data2 = usePublicQuery<ArticleDetailPublic>(
+  /**
+   * fetch public data
+   */
+  // backward compatible with:
+  // - `/:username:/:articleId:-:slug:-:mediaHash`
+  // - `/:username:/:articleId:`
+  // - `/:username:/:slug:-:mediaHash:`
+  const isQueryByHash = !!(mediaHash && isValidMediaHash(mediaHash))
+  const resultByHash = usePublicQuery<ArticleDetailPublic>(
+    ARTICLE_DETAIL_PUBLIC,
+    {
+      variables: { mediaHash },
+      skip: !isQueryByHash,
+    }
+  )
+  const resultByNodeId = usePublicQuery<ArticleDetailPublic>(
     ARTICLE_DETAIL_PUBLIC_BY_NODE_ID,
     {
       variables: { id: toGlobalId({ type: 'Article', id: articleId }) },
-      skip: articleId?.length === 0,
+      skip: isQueryByHash,
     }
   )
-
-  useEffect(() => {
-    if (
-      !isValidMediaHash(mediaHash) &&
-      isValidMediaHash(data2?.data?.article?.mediaHash)
-    ) {
-      // if getByNodeId got something looks like a valid mediaHash, call refetch with it
-      data1.refetch({
-        mediaHash: data2?.data?.article?.mediaHash as string,
-      })
-    }
-  }, [mediaHash, data2])
 
   const {
     data,
@@ -135,15 +133,12 @@ const ArticleDetail = () => {
     error,
     client,
     refetch: refetchPublic,
-  } = isValidMediaHash(mediaHash) ||
-  isValidMediaHash(data1?.data?.article?.mediaHash) || // if something look like a valid mediaHash
-  data2.error
-    ? data1
-    : data2 // data2 from node id is in-use for server-side rendering only
+  } = resultByHash.data ? resultByHash : resultByNodeId
 
   const article = data?.article
   const authorId = article?.author?.id
-  const paymentPointer = article?.author?.paymentPointer || undefined
+  const summary = article?.summary
+  const paymentPointer = article?.author?.paymentPointer
   const collectionCount = article?.collection?.totalCount || 0
   const isAuthor = viewer.id === authorId
   const circle = article?.access.circle
@@ -153,9 +148,10 @@ const ArticleDetail = () => {
     circle.isMember ||
     article?.access.type === ArticleAccessType.public
   )
-  const summary = article?.summary
 
-  // fetch private data
+  /**
+   * fetch private data
+   */
   const [privateFetched, setPrivateFetched] = useState(false)
   const loadPrivate = async () => {
     if (!viewer.isAuthed || !article || !article?.mediaHash) {
@@ -174,19 +170,20 @@ const ArticleDetail = () => {
     setPrivateFetched(true)
   }
 
+  // reset state to private fetchable when URL query is changed
   useEffect(() => {
     setPrivateFetched(false)
   }, [mediaHash])
 
+  // fetch private data when mediaHash of public data is changed
   useEffect(() => {
     loadPrivate()
   }, [article?.mediaHash, viewer.id])
 
   // redirect to latest published article
-  const latestArticle = article?.drafts?.filter(
+  const latestHash = article?.drafts?.filter(
     (d) => d.publishState === 'published'
-  )[0]
-  const latestHash = latestArticle?.mediaHash
+  )[0]?.mediaHash
   useEffect(() => {
     if (!article || !latestHash) {
       return
@@ -194,10 +191,7 @@ const ArticleDetail = () => {
 
     const newPath = toPath({
       page: 'articleDetail',
-      article: {
-        ...article,
-        mediaHash: latestHash,
-      },
+      article: { ...article, mediaHash: latestHash },
     })
 
     // parse current URL: router.asPath
@@ -209,6 +203,7 @@ const ArticleDetail = () => {
         newPath.href || newPath.pathname
       }`
     )
+
     // hide all utm_ tracking code parameters
     // copy all others
     const rems = [
@@ -227,7 +222,7 @@ const ArticleDetail = () => {
   const [translated, setTranslate] = useState(false)
   const language = article?.language
   const { lang: viewerLanguage } = useContext(LanguageContext)
-  const shouldTranslate = !!(language && language !== viewerLanguage)
+  const canTranslate = !!(language && language !== viewerLanguage)
   const [getTranslation, { data: translationData, loading: translating }] =
     useLazyQuery<ArticleTranslation>(ARTICLE_TRANSLATION)
 
@@ -444,7 +439,7 @@ const ArticleDetail = () => {
             <MetaInfo
               article={article}
               translated={translated}
-              shouldTranslate={shouldTranslate}
+              canTranslate={canTranslate}
               toggleTranslate={toggleTranslate}
               canReadFullContent={canReadFullContent}
             />
