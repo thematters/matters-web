@@ -84,7 +84,12 @@ const nextConfig = {
    * Runtime configs
    *
    */
-  poweredByHeader: false,
+  i18n: {
+    locales: ['zh-Hant', 'zh-Hans', 'en', '__defaultLocale'],
+    // FIXME: Disable Next.js auto detection and prefixing since we have a fallback strategy based on user request and browser perference in `<LanguageContext>`
+    defaultLocale: '__defaultLocale',
+    localeDetection: false,
+  },
 
   // custom HTTP headers
   async headers() {
