@@ -71,6 +71,19 @@ const DynamicEditMode = dynamic(() => import('./EditMode'), {
   ),
 })
 
+const isValidMediaHash = (mediaHash: string | null | undefined) => {
+  // is there a better way to detect valid?
+  // a valid mediaHash, should have length 49 or 59 chars
+  // 'zdpuAsCXC87Tm1fFvAbysV7HVt7J8aV6chaTKeJZ5ryLALK3Z'
+  // 'bafyreief6bryqsa4byabnmx222jvo4khlodvpypw27af43frecbumn6ocq'
+
+  return (
+    mediaHash &&
+    ((mediaHash?.length === 49 && mediaHash.startsWith('zdpu')) ||
+      (mediaHash?.length === 59 && mediaHash.startsWith('bafy')))
+  )
+}
+
 const ArticleDetail = () => {
   const { getQuery, router } = useRoute()
   const mediaHash = getQuery('mediaHash')
@@ -98,15 +111,19 @@ const ArticleDetail = () => {
   // - `/:username:/:articleId:-:slug:-:mediaHash`
   // - `/:username:/:articleId:`
   // - `/:username:/:slug:-:mediaHash:`
+  const isQueryByHash = !!(mediaHash && isValidMediaHash(mediaHash))
   const resultByHash = usePublicQuery<ArticleDetailPublic>(
     ARTICLE_DETAIL_PUBLIC,
-    { variables: { mediaHash }, skip: !!articleId }
+    {
+      variables: { mediaHash },
+      skip: !isQueryByHash,
+    }
   )
   const resultByNodeId = usePublicQuery<ArticleDetailPublic>(
     ARTICLE_DETAIL_PUBLIC_BY_NODE_ID,
     {
       variables: { id: toGlobalId({ type: 'Article', id: articleId }) },
-      skip: !articleId,
+      skip: isQueryByHash,
     }
   )
 
