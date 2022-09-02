@@ -79,6 +79,19 @@ const DynamicEditMode = dynamic(() => import('./EditMode'), {
   ),
 })
 
+const isValidMediaHash = (mediaHash: string | null | undefined) => {
+  // is there a better way to detect valid?
+  // a valid mediaHash, should have length 49 or 59 chars
+  // 'zdpuAsCXC87Tm1fFvAbysV7HVt7J8aV6chaTKeJZ5ryLALK3Z'
+  // 'bafyreief6bryqsa4byabnmx222jvo4khlodvpypw27af43frecbumn6ocq'
+
+  return (
+    mediaHash &&
+    ((mediaHash?.length === 49 && mediaHash.startsWith('zdpu')) ||
+      (mediaHash?.length === 59 && mediaHash.startsWith('bafy')))
+  )
+}
+
 const BaseArticleDetail = ({
   article,
   privateFetched,
@@ -115,188 +128,6 @@ const BaseArticleDetail = ({
   const { wall } = clientPreferenceData?.clientPreference || { wall: true }
   const shouldShowWall = !viewer.isAuthed && wall
 
-  // translation
-  const [autoTranslation] = useState(article.translation)
-  const [translated, setTranslate] = useState(!!locale)
-  const originalLang = article.language
-  const { lang: preferredLang } = useContext(LanguageContext)
-  const canTranslate = !!(originalLang && originalLang !== preferredLang)
-  const [getTranslation, { data: translationData, loading: translating }] =
-    useLazyQuery<ArticleTranslation>(ARTICLE_TRANSLATION)
-
-  const translate = () => {
-    getTranslation({ variables: { mediaHash, language: preferredLang } })
-
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'green',
-          content: (
-            <Translate zh_hant="正在翻譯" zh_hans="正在翻译" en="Translating" />
-          ),
-        },
-      })
-    )
-  }
-
-  const toggleTranslate = () => {
-    setTranslate(!translated)
-
-    if (!translated) {
-      translate()
-    }
-  }
-
-  const {
-    title: translatedTitle,
-    summary: translatedSummary,
-    content: translatedContent,
-    language: translatedLanguage,
-  } = translationData?.article?.translation || autoTranslation || {}
-  const title = translated && translatedTitle ? translatedTitle : article.title
-  const summary =
-    translated && translatedSummary ? translatedSummary : article.summary
-  const content =
-    translated && translatedContent ? translatedContent : article.content
-  const keywords = (article.tags || []).map(({ content: c }) =>
-    stripAllPunct(c)
-  )
-
-  return (
-    <Layout.Main aside={<RelatedArticles article={article} inSidebar />}>
-      <Layout.Header
-        left={<Layout.Header.BackButton />}
-        right={
-          <UserDigest.Rich
-            user={article.author}
-            size="sm"
-            spacing={[0, 0]}
-            bgColor="none"
-          />
-        }
-      />
-
-      <Head
-        title={`${article.title} - ${article?.author.displayName} (@${article.author.userName})`}
-        path={toPath({ page: 'articleDetail', article }).href}
-        noSuffix
-        description={article.summary}
-        keywords={keywords}
-        image={article.cover}
-        paymentPointer={paymentPointer}
-        jsonLdData={{
-          '@context': 'https://schema.org',
-          '@type': 'Article',
-          headline: summary,
-          /* wordCount: ... */
-          keywords,
-          datePublished: formatISO(
-            Date.parse(article.createdAt)
-          ) /* "2015-02-05T08:00:00+08:00", */,
-          dateModified: article.revisedAt
-            ? formatISO(Date.parse(article.revisedAt))
-            : undefined /* "2015-02-05T09:20:00+08:00", */,
-          image: article.cover || undefined,
-          author: {
-            '@type': 'Person',
-            name: article.author.displayName,
-            url: `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/@${article.author.userName}`,
-          },
-        }}
-      />
-
-      <PullToRefresh>
-        <State article={article} />
-
-        <section className="content">
-          <TagList article={article} />
-
-          <section className="title">
-            <Title type="article">{title}</Title>
-
-            <Waypoint
-              topOffset={-400}
-              onLeave={() => {
-                if (shouldShowWall) {
-                  setFixedWall(true)
-                }
-              }}
-            />
-
-            <MetaInfo
-              article={article}
-              translated={translated}
-              canTranslate={canTranslate}
-              toggleTranslate={toggleTranslate}
-              canReadFullContent={canReadFullContent}
-            />
-          </section>
-
-          {article?.summaryCustomized && (
-            <CustomizedSummary summary={summary} />
-          )}
-
-          <Content
-            article={article}
-            content={content}
-            translating={translating}
-          />
-          {circle && !canReadFullContent && <CircleWall circle={circle} />}
-
-          {features.payment && canReadFullContent && (
-            <SupportWidget article={article} />
-          )}
-
-          <License license={article.license} />
-
-          {collectionCount > 0 && (
-            <section className="block">
-              <Collection article={article} collectionCount={collectionCount} />
-            </section>
-          )}
-
-          <section className="block">
-            <DynamicResponse lock={!canReadFullContent} />
-          </section>
-
-          {!isLargeUp && <RelatedArticles article={article} />}
-        </section>
-
-        <Toolbar
-          article={article}
-          translated={translated}
-          translatedLanguage={translatedLanguage}
-          privateFetched={privateFetched}
-          hasFingerprint={canReadFullContent}
-          hasExtend={!article.author?.isBlocking}
-          lock={!canReadFullContent}
-        />
-
-        {shouldShowWall && (
-          <>
-            <span id="comments" />
-            <VisitorWall show={fixedWall} />
-          </>
-        )}
-      </PullToRefresh>
-
-      {article.access.circle && (
-        <SubscribeCircleDialog circle={article.access.circle} />
-      )}
-
-      <style jsx>{styles}</style>
-    </Layout.Main>
-  )
-}
-
-const ArticleDetail = () => {
-  const { getQuery, router } = useRoute()
-  const mediaHash = getQuery('mediaHash')
-  const articleId =
-    (router.query.mediaHash as string)?.match(/^(\d+)/)?.[1] || ''
-  const viewer = useContext(ViewerContext)
-  const locale = router.locale !== DEFAULT_LOCALE ? router.locale : ''
-
   /**
    * fetch public data
    */
@@ -304,16 +135,10 @@ const ArticleDetail = () => {
   // - `/:username:/:articleId:-:slug:-:mediaHash`
   // - `/:username:/:articleId:`
   // - `/:username:/:slug:-:mediaHash:`
+  const isQueryByHash = !!(mediaHash && isValidMediaHash(mediaHash))
   const resultByHash = usePublicQuery<ArticleDetailPublic>(
     ARTICLE_DETAIL_PUBLIC,
-    {
-      variables: {
-        mediaHash,
-        language: locale ? toUserLanguage(locale) : UserLanguage.zh_hant,
-        includeTranslation: !!locale,
-      },
-      skip: !!articleId,
-    }
+    { variables: { mediaHash }, skip: !!articleId }
   )
   const resultByNodeId = usePublicQuery<ArticleDetailPublic>(
     ARTICLE_DETAIL_PUBLIC_BY_NODE_ID,
@@ -323,17 +148,17 @@ const ArticleDetail = () => {
         language: locale ? toUserLanguage(locale) : UserLanguage.zh_hant,
         includeTranslation: !!locale,
       },
-      skip: !articleId,
+      skip: isQueryByHash,
     }
   )
 
   const {
     data,
-    loading,
-    error,
     client,
     refetch: refetchPublic,
   } = resultByHash.data ? resultByHash : resultByNodeId
+  const loading = resultByHash.loading || resultByNodeId.loading
+  const error = resultByHash.error || resultByNodeId.error
 
   const article = data?.article
   const authorId = article?.author?.id
