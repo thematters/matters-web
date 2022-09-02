@@ -22,7 +22,7 @@ const TranslationButton: FC<{
     if (k === originalLanguage) originalLang.zh_hans = `（${v}）`
   })
   Object.entries(CONTENT_LANG_TEXT_MAP.en).forEach(([k, v]) => {
-    if (k === originalLanguage) originalLang.en = `（${v}）`
+    if (k === originalLanguage) originalLang.en = ` (${v})`
   })
 
   return (
