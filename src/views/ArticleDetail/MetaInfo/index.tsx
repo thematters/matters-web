@@ -10,7 +10,7 @@ import { ArticleDetailPublic_article } from '../__generated__/ArticleDetailPubli
 type MetaInfoProps = {
   article: ArticleDetailPublic_article
   translated: boolean
-  shouldTranslate: boolean
+  canTranslate: boolean
   toggleTranslate: () => any
   canReadFullContent: boolean
 }
@@ -18,26 +18,30 @@ type MetaInfoProps = {
 const MetaInfo = ({
   article,
   translated,
-  shouldTranslate,
+  canTranslate,
   toggleTranslate,
   canReadFullContent,
 }: MetaInfoProps) => {
   const originalLanguage = article?.language ? article.language : ''
+
   return (
     <section className="info">
       <section className="time">
         <DateTime date={article.createdAt} />
         {article.revisedAt && (
           <span>
-            &nbsp;
-            <Translate zh_hant="(編輯過)" zh_hans="(编辑过)" en="(edited)" />
+            <Translate
+              zh_hant="（編輯過）"
+              zh_hans="（编辑过）"
+              en=" (edited)"
+            />
           </span>
         )}
       </section>
 
       {canReadFullContent && (
         <>
-          {shouldTranslate && (
+          {canTranslate && (
             <TranslationButton
               translated={translated}
               toggleTranslate={toggleTranslate}

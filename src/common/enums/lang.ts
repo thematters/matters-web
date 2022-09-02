@@ -14,6 +14,7 @@ export const CONTENT_LANG_TEXT_MAP = {
     vi: '越南語',
     ja: '日文',
     ru: '俄文',
+    la: '拉丁',
   },
   zh_hans: {
     zh_hant: '繁中',
@@ -22,6 +23,7 @@ export const CONTENT_LANG_TEXT_MAP = {
     vi: '越南语',
     ja: '日文',
     ru: '俄文',
+    la: '拉丁',
   },
   en: {
     zh_hant: 'Traditional Chinese',
@@ -30,6 +32,7 @@ export const CONTENT_LANG_TEXT_MAP = {
     vi: 'Vietnamese',
     ja: 'Japanese',
     ru: 'Russian',
+    la: 'Latin',
   },
 }
 

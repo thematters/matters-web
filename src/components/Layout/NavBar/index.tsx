@@ -4,6 +4,7 @@ import {
   IconNavHome24,
   IconNavHomeActive24,
   IconNavSearch24,
+  IconNavSettings24,
   useRoute,
   ViewerContext,
   WriteButton,
@@ -21,6 +22,7 @@ const NavBar = () => {
   const isInHome = isInPath('HOME')
   const isInFollow = isInPath('FOLLOW')
   const isInNotification = isInPath('ME_NOTIFICATIONS')
+  const isInSettings = isInPath('SETTINGS')
   const isInSearch = isInPath('SEARCH')
   const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
 
@@ -61,13 +63,25 @@ const NavBar = () => {
           href={PATHS.SEARCH}
         />
 
-        <NavListItem
-          name={TEXT.zh_hant.notification}
-          icon={<UnreadIcon.Notification />}
-          activeIcon={<UnreadIcon.Notification active />}
-          active={isInNotification}
-          href={PATHS.ME_NOTIFICATIONS}
-        />
+        {viewer.isAuthed && (
+          <NavListItem
+            name={TEXT.zh_hant.notification}
+            icon={<UnreadIcon.Notification />}
+            activeIcon={<UnreadIcon.Notification active />}
+            active={isInNotification}
+            href={PATHS.ME_NOTIFICATIONS}
+          />
+        )}
+
+        {!viewer.isAuthed && (
+          <NavListItem
+            name={TEXT.zh_hant.settings}
+            icon={<IconNavSettings24 size="md" />}
+            activeIcon={<IconNavSettings24 size="md" color="green" />}
+            active={isInSettings}
+            href={PATHS.SETTINGS}
+          />
+        )}
       </ul>
 
       <style jsx>{styles}</style>

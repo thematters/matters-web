@@ -81,13 +81,14 @@ export const LanguageProvider = ({
   const setLang = async (language: UserLanguage) => {
     setLocalLang(language)
 
+    Cookie.set(COOKIE_LANGUAGE, language, {
+      domain: window.location.hostname,
+      expires: 90,
+      secure: false,
+      sameSite: 'Lax',
+    })
+
     if (!viewer.isAuthed) {
-      Cookie.set(COOKIE_LANGUAGE, language, {
-        domain: window.location.hostname,
-        expires: 90,
-        secure: false,
-        sameSite: 'Lax',
-      })
       return
     }
 
