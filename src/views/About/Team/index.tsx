@@ -100,7 +100,7 @@ const CREW = [
       },
       {
         avatar: IMAGE_CHARLIE,
-        title: 'DevOps',
+        title: 'DevOps (PT)',
         name: 'Charlie',
       },
     ],

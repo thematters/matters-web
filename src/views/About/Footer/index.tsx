@@ -6,6 +6,7 @@ import {
   LanguageSwitch,
   TextIcon,
   Translate,
+  useResponsive,
   withIcon,
 } from '~/components'
 
@@ -22,6 +23,7 @@ import styles from './styles.css'
 
 const Footer = () => {
   const { lang } = useContext(LanguageContext)
+  const isSmallUp = useResponsive('sm-up')
   const year = new Date().getFullYear()
 
   return (
@@ -30,6 +32,11 @@ const Footer = () => {
         <div className="l-row">
           <div className="l-col-full">
             <div className="container">
+              {!isSmallUp && (
+                <section className="languageSwitch">
+                  <LanguageSwitch size="lg" bgColor="grey-darkest" />
+                </section>
+              )}
               <section className="contactUs">
                 <h2>
                   <Translate
@@ -84,7 +91,6 @@ const Footer = () => {
                   </a>
                 </p>
               </section>
-
               <section className="followUs">
                 <h2>
                   <Translate
@@ -216,7 +222,6 @@ const Footer = () => {
                   </ul>
                 </div>
               </section>
-
               <section className="moreProducts">
                 <h2>
                   <Translate
@@ -240,7 +245,6 @@ const Footer = () => {
                   </a>
                 </div>
               </section>
-
               <section className="subscribeUs">
                 <h2>
                   <Translate
@@ -283,12 +287,12 @@ const Footer = () => {
                     </Button>
                   </form>
                 </div>
-
-                <section className="languageSwitch">
-                  <LanguageSwitch size="lg" bgColor="grey-darkest" />
-                </section>
+                {isSmallUp && (
+                  <section className="languageSwitch">
+                    <LanguageSwitch size="lg" bgColor="grey-darkest" />
+                  </section>
+                )}
               </section>
-
               <section className="copyright">
                 © {year} Matters, Inc. All rights reserved.
               </section>

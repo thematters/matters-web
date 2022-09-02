@@ -2,7 +2,7 @@ export type TextId = keyof typeof TEXT.zh_hant
 
 export const TEXT = {
   zh_hant: {
-    about: 'Matters 長什麼樣',
+    about: '關於我們',
     accountArchived: '已註銷用戶',
     accountBanned: '已禁言用戶',
     accountFrozen: '已凍結用戶',
@@ -368,7 +368,7 @@ export const TEXT = {
     yourEmail: '你的電子信箱',
   },
   zh_hans: {
-    about: 'Matters 长什么样',
+    about: '关于我们',
     accountArchived: '已注销用户',
     accountBanned: '已禁言用户',
     accountFrozen: '已冻结用户',
@@ -734,7 +734,7 @@ export const TEXT = {
     yourEmail: '你的邮箱',
   },
   en: {
-    about: 'About',
+    about: 'About Us',
     accountArchived: 'Account Archived',
     accountBanned: 'Account Banned',
     accountFrozen: 'Account Frozen',

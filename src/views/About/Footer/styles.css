@@ -84,13 +84,10 @@ footer {
     }
   }
 
-  & .languageSwitch {
-    margin-top: var(--spacing-xx-loose);
-  }
-
   & .copyright {
     font-size: var(--font-size-sm);
     color: var(--color-grey);
+    text-align: center;
   }
 
   @media (--sm-up) {
@@ -106,6 +103,7 @@ footer {
     & .copyright {
       grid-area: bottomLeft;
       align-self: end;
+      text-align: left;
     }
     & .followUs {
       grid-column: topRight;
@@ -118,6 +116,10 @@ footer {
     & .subscribeUs {
       grid-column: bottomRight;
       align-self: end;
+    }
+
+    & .languageSwitch {
+      margin-top: var(--spacing-loose);
     }
   }
 

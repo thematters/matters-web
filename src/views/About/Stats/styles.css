@@ -7,22 +7,22 @@
 }
 
 li {
-  grid-column: 1 / -1;
+  grid-column: span 2;
 
-  & + li {
+  & + li + li {
     margin-top: var(--spacing-base);
   }
 
-  @media (--md-up) {
-    grid-column: span 2;
-
-    & + li {
-      margin-top: 0;
-    }
+  @media (--sm-up) {
+    grid-column: span 4;
   }
 
   @media (--lg-up) {
     grid-column: span 3;
+
+    & + li + li {
+      margin-top: 0;
+    }
   }
 }
 
@@ -32,11 +32,11 @@ li {
 }
 
 .num {
-  font-size: 3rem;
+  font-size: 2.25rem;
   font-weight: var(--font-weight-semibold);
   color: var(--color-matters-green);
 
-  @media (--md-up) {
+  @media (--sm-up) {
     font-size: 4rem;
   }
 }
