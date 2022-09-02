@@ -48,6 +48,13 @@ const articlePublicFragment = gql`
       publishState
       iscnPublish
     }
+    translation(input: { language: $language })
+      @include(if: $includeTranslation) {
+      content
+      title
+      summary
+      language
+    }
     ...MetaInfoArticle
     ...ContentArticle
     ...TagListArticle
@@ -76,6 +83,8 @@ const articlePublicFragment = gql`
 export const ARTICLE_DETAIL_PUBLIC = gql`
   query ArticleDetailPublic(
     $mediaHash: String!
+    $language: UserLanguage!
+    $includeTranslation: Boolean = false
     $includeCanSuperLike: Boolean = true
   ) {
     article(input: { mediaHash: $mediaHash }) {
@@ -88,6 +97,8 @@ export const ARTICLE_DETAIL_PUBLIC = gql`
 export const ARTICLE_DETAIL_PUBLIC_BY_NODE_ID = gql`
   query ArticleDetailPublicByNodeId(
     $id: ID!
+    $language: UserLanguage!
+    $includeTranslation: Boolean = false
     $includeCanSuperLike: Boolean = true
   ) {
     article: node(input: { id: $id }) {
@@ -135,6 +146,7 @@ export const ARTICLE_TRANSLATION = gql`
         content
         title
         summary
+        language
       }
     }
   }

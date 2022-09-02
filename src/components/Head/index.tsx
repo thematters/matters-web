@@ -3,7 +3,7 @@ import { useContext } from 'react'
 
 import { LanguageContext, useRoute } from '~/components'
 
-import { langConvert, translate, TranslateArgs } from '~/common/utils'
+import { translate, TranslateArgs } from '~/common/utils'
 
 import IMAGE_APPLE_TOUCH_ICON from '@/public/static/apple-touch-icon.png'
 import IMAGE_FAVICON_16 from '@/public/static/favicon-16x16.png'
@@ -116,26 +116,6 @@ export const Head: React.FC<HeadProps> = (props) => {
         property="og:description"
         key="og:description"
         content={head.description}
-      />
-      <meta
-        property="og:locale"
-        key="og:locale"
-        content={langConvert.sys2Og(lang)}
-      />
-      <meta
-        property="og:locale:alternate"
-        key="og:locale:zh_HK"
-        content="zh_HK"
-      />
-      <meta
-        property="og:locale:alternate"
-        key="og:locale:zh_TW"
-        content="zh_TW"
-      />
-      <meta
-        property="og:locale:alternate"
-        key="og:locale:zh_CN"
-        content="zh_CN"
       />
       <meta name="twitter:url" key="twitter:url" content={head.url} />
       <meta
