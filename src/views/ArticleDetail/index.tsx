@@ -132,7 +132,11 @@ const BaseArticleDetail = ({
   const [autoTranslation] = useState(article.translation)
   const [translated, setTranslate] = useState(!!locale)
   const originalLang = article.language
-  const { lang: preferredLang } = useContext(LanguageContext)
+  const {
+    lang: preferredLang,
+    cookieLang,
+    setLang,
+  } = useContext(LanguageContext)
   const canTranslate = !!(originalLang && originalLang !== preferredLang)
   const [getTranslation, { data: translationData, loading: translating }] =
     useLazyQuery<ArticleTranslation>(ARTICLE_TRANSLATION)
@@ -159,6 +163,15 @@ const BaseArticleDetail = ({
       translate()
     }
   }
+
+  // set language cookie for anonymous if it doesn't exist
+  useEffect(() => {
+    if (cookieLang || viewer.isAuthed || !locale) {
+      return
+    }
+
+    setLang(toUserLanguage(locale) as UserLanguage)
+  }, [])
 
   const {
     title: translatedTitle,
@@ -190,10 +203,10 @@ const BaseArticleDetail = ({
       />
 
       <Head
-        title={`${article.title} - ${article?.author.displayName} (@${article.author.userName})`}
+        title={`${title} - ${article?.author.displayName} (@${article.author.userName})`}
         path={toPath({ page: 'articleDetail', article }).href}
         noSuffix
-        description={article.summary}
+        description={summary}
         keywords={keywords}
         image={article.cover}
         paymentPointer={paymentPointer}

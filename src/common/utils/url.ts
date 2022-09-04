@@ -5,6 +5,18 @@ export const extractDomain = (url: string) => {
   return parts[3]
 }
 
+// not yet supports for TLD like .co.jp
+// use https://www.npmjs.com/package/psl if needed
+export const extractRootDomain = (url: string) => {
+  const parts = url.match(/^https?\:\/\/([^\/?#]+)(?:[\/?#]|$)/i)
+
+  if (!parts) {
+    return
+  }
+
+  return parts[1].split('.').slice(-2).join('.')
+}
+
 export const parseURL = (url: string) => {
   const parser = document.createElement('a')
 
