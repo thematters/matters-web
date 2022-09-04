@@ -24,7 +24,7 @@ export type ToggleAccessProps = {
   canToggleCircle: boolean
 
   iscnPublish?: boolean | null
-  togglePublishISCN: (iscnPublish: boolean) => void // Promise<any>
+  togglePublishISCN: (iscnPublish: boolean) => void
   iscnPublishSaving: boolean
 
   inSidebar?: boolean
