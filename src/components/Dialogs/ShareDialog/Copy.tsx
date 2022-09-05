@@ -1,37 +1,49 @@
-import { useContext, useRef } from 'react'
+import { useContext } from 'react'
 
 import {
-  Button,
   CopyToClipboard,
-  IconCopy16,
+  IconLink16,
   LanguageContext,
+  TextIcon,
+  Translate,
 } from '~/components'
 
-import { translate } from '~/common/utils'
+import { toLocale, translate } from '~/common/utils'
 
 import styles from './styles.css'
 
 const Copy = ({ link }: { link: string }) => {
   const { lang } = useContext(LanguageContext)
-
-  const inputRef: React.RefObject<any> | null = useRef(null)
+  const url = new URL(link)
+  const pathnames = url.pathname.split('/')
+  const showTranslation = toLocale(pathnames[1]) !== ''
 
   return (
     <section className="copy">
       <CopyToClipboard text={link}>
-        <Button
-          spacing={['xtight', 'xtight']}
-          bgActiveColor="grey-lighter"
-          aria-label={translate({ id: 'copy', lang })}
-        >
-          <IconCopy16 color="grey" />
-        </Button>
+        <button aria-label={translate({ id: 'copy', lang })}>
+          <TextIcon icon={<IconLink16 color="grey" />} spacing="base">
+            <div className="text">
+              <span>
+                <Translate
+                  zh_hant="複製鏈接"
+                  zh_hans="复制链接"
+                  en="Copy Link"
+                />
+              </span>
+              {showTranslation && (
+                <span className="share-translation">
+                  <Translate
+                    zh_hant="分享這篇文章的翻譯版本"
+                    zh_hans="分享这篇文章的翻译版本"
+                    en="Share this article in translated version"
+                  />
+                </span>
+              )}
+            </div>
+          </TextIcon>
+        </button>
       </CopyToClipboard>
-
-      <CopyToClipboard text={link}>
-        <input ref={inputRef} type="text" value={link} readOnly />
-      </CopyToClipboard>
-
       <style jsx>{styles}</style>
     </section>
   )
