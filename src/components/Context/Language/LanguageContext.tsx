@@ -6,7 +6,7 @@ import { createContext, useContext, useState } from 'react'
 import { Translate, useMutation, ViewerContext } from '~/components'
 
 import { ADD_TOAST, COOKIE_LANGUAGE, DEFAULT_LOCALE } from '~/common/enums'
-import { getCookie, toUserLanguage } from '~/common/utils'
+import { extractRootDomain, getCookie, toUserLanguage } from '~/common/utils'
 
 import { UserLanguage } from '@/__generated__/globalTypes'
 import { UpdateLanguage } from './__generated__/UpdateLanguage'
@@ -25,6 +25,7 @@ const UPDATE_VIEWER_LANGUAGE = gql`
 export const LanguageContext = createContext(
   {} as {
     lang: UserLanguage
+    cookieLang: string
     setLang: (lang: UserLanguage) => Promise<void>
   }
 )
@@ -82,7 +83,7 @@ export const LanguageProvider = ({
     setLocalLang(language)
 
     Cookie.set(COOKIE_LANGUAGE, language, {
-      domain: window.location.hostname,
+      domain: extractRootDomain(window.location.href),
       expires: 90,
       secure: false,
       sameSite: 'Lax',
@@ -123,6 +124,7 @@ export const LanguageProvider = ({
     <LanguageContext.Provider
       value={{
         lang: localLang,
+        cookieLang,
         setLang,
       }}
     >
