@@ -185,9 +185,11 @@ const Footer = () => {
                       </a>
                     </li>
 
-                    {/* TODO: fill linkedin href */}
                     <li>
-                      <a href="" target="_blank">
+                      <a
+                        href="https://www.linkedin.com/company/matters-lab"
+                        target="_blank"
+                      >
                         <TextIcon
                           icon={withIcon(IconFooterLinkedin)({
                             size: 'md',
