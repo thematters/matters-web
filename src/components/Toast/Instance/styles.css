@@ -61,6 +61,11 @@
   background: var(--color-red);
 }
 
+.black {
+  color: var(--color-white);
+  background: var(--color-black);
+}
+
 @keyframes toastFadeIn {
   from {
     visibility: hidden;
