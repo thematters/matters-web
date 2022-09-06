@@ -36,14 +36,15 @@ const SortBy: React.FC<SortByProps> = ({ feedType, setFeedType }) => {
   // const isConnectedWallet = !!viewer.info.ethAddress
 
   return (
-    <Tabs sticky
-    // side={
-    //   viewer.isAuthed && !isConnectedWallet && isSmallUp ? (
-    //     <ConnectWalletButton />
-    //   ) : (
-    //     <Help hasTime />
-    //   )
-    // }
+    <Tabs
+      sticky
+      // side={
+      //   viewer.isAuthed && !isConnectedWallet && isSmallUp ? (
+      //     <ConnectWalletButton />
+      //   ) : (
+      //     <Help hasTime />
+      //   )
+      // }
     >
       <div className="container">
         <section className="filters">
