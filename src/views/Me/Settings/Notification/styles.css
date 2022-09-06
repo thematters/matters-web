@@ -38,8 +38,8 @@
   padding: 0 1rem;
   margin: 2rem 0 1rem 0;
   & h2 {
-    margin: 0 0 8px 0;
-    font-size: 18px;
+    margin: 0 0 0.5rem 0;
+    font-size: var(--font-size-xm);
     color: var(--color-black);
   }
   & p {

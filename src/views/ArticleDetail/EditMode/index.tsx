@@ -207,9 +207,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
                 <Sidebar.Tags {...tagsProps} />
                 <Sidebar.Cover {...coverProps} />
                 <Sidebar.Collection {...collectionProps} />
-                <Sidebar.Management
-                  {...accessProps}
-                />
+                <Sidebar.Management {...accessProps} />
                 <style jsx>{styles}</style>
               </section>
             }

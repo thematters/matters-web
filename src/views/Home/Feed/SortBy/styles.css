@@ -1,0 +1,48 @@
+.dropdown-menu {
+  width: 7.75rem;
+}
+
+.container {
+  @mixin flex-center-space-between;
+}
+
+.filters {
+  margin: 0 1.5rem 0 0;
+  & .button {
+    font-weight: var(--font-weight-semibold);
+    &:hover {
+      color: var(--color-matters-green);
+    }
+  }
+}
+
+.tag-list {
+  position: relative;
+  flex: 1;
+  overflow-x: auto;
+  & ul {
+    display: flex;
+    & li {
+      margin: 0 0 0 1rem;
+      &:first-child {
+        margin: 0;
+      }
+    }
+  }
+  & .button {
+    height: 100%;
+    padding: 0.5rem 1rem;
+    font-size: 0.9375rem;
+    font-weight: var(--font-weight-semibold);
+    background-color: var(--color-grey-lighter);
+    border-radius: 1.25rem;
+    &:hover,
+    &.active {
+      color: var(--color-white);
+      background-color: var(--color-black);
+    }
+    &.setting {
+      padding: 0.5rem;
+    }
+  }
+}
