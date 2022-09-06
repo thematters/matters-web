@@ -121,3 +121,8 @@ service-worker.js*
 storybook-static
 
 tsconfig.tsbuildinfo
+
+# playwright test result
+/test-results/
+/playwright-report/
+/playwright/.cache/
