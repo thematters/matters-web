@@ -63,7 +63,7 @@
 
 .black {
   color: var(--color-white);
-  background: var(--color-black);
+  background: rgba(0, 0, 0, 0.8);
 }
 
 @keyframes toastFadeIn {
