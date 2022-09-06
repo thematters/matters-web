@@ -1,45 +1,43 @@
 import { UserLanguage } from '@/__generated__/globalTypes'
 
-export const langConvert = {
-  og2html: (lang: OGLanguage): HTMLLanguage => {
-    return ({
-      zh_HK: 'zh-Hant',
-      zh_TW: 'zh-Hant',
-      zh_CN: 'zh-Hans',
-      en: 'en',
-    }[lang] || 'zh-Hant') as HTMLLanguage
-  },
-  sys2html: (lang: Language): HTMLLanguage => {
-    return ({
-      zh_hans: 'zh-Hans',
-      zh_hant: 'zh-Hant',
-      en: 'en',
-    }[lang] || 'zh-Hant') as HTMLLanguage
-  },
-  html2sys: (lang: HTMLLanguage): Language => {
-    return ({
-      'zh-Hans': UserLanguage.zh_hans,
-      'zh-Hant': UserLanguage.zh_hant,
-      en: UserLanguage.en,
-    }[lang] || UserLanguage.zh_hant) as Language
-  },
-  sys2Og: (lang: Language): OGLanguage => {
-    return ({
-      zh_hant: 'zh-HK',
-      zh_hans: 'zh-CN',
-      en: 'en',
-    }[lang] || 'zh_HK') as OGLanguage
-  },
-  bcp472sys: (Lang: string): UserLanguage => {
-    const lang = Lang.toLowerCase()
-    if (lang === 'zh' || lang === 'zh-cn') {
-      return UserLanguage.zh_hans
-    }
+export const toUserLanguage = (lang: string) => {
+  lang = lang.toLowerCase()
 
-    if (lang.startsWith('en')) {
-      return UserLanguage.en
-    }
+  // zh_hans
+  if (['zh-cn', 'zh-hans', 'zh_hans'].indexOf(lang) >= 0) {
+    return UserLanguage.zh_hans
+  }
 
+  // zh_hant
+  if (['zh', 'zh-tw', 'zh-hk', 'zh-hant', 'zh_hant'].indexOf(lang) >= 0) {
     return UserLanguage.zh_hant
-  },
+  }
+
+  // en
+  if (['en', 'en-us', 'en-au', 'en-za', 'en-gb'].indexOf(lang) >= 0) {
+    return UserLanguage.en
+  }
+
+  return ''
+}
+
+export const toLocale = (lang: string) => {
+  lang = lang.toLowerCase()
+
+  // zh_hans
+  if (['zh-cn', 'zh-hans', 'zh_hans'].indexOf(lang) >= 0) {
+    return 'zh-Hans'
+  }
+
+  // zh_hant
+  if (['zh', 'zh-tw', 'zh-hk', 'zh-hant', 'zh_hant'].indexOf(lang) >= 0) {
+    return 'zh-Hant'
+  }
+
+  // en
+  if (['en', 'en-us', 'en-au', 'en-za', 'en-gb'].indexOf(lang) >= 0) {
+    return 'en'
+  }
+
+  return ''
 }
