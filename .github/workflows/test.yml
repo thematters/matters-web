@@ -7,6 +7,9 @@ on:
       - main
       - master
       - stage
+env:
+  MATTERS_TESTING_ACCOUNT_EMAIL: ${{ secrets.MATTERS_TESTING_ACCOUNT_EMAIL }}
+  MATTERS_TESTING_ACCOUNT_PASSWORD: ${{ secrets.MATTERS_TESTING_ACCOUNT_PASSWORD }}
 
 jobs:
   build_and_test:
@@ -53,7 +56,7 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run Playwright tests
-        run: npx playwright test
+        run: MATTERS_TESTING_ACCOUNT_EMAIL=${{ secrets.MATTERS_TESTING_ACCOUNT_EMAIL }} MATTERS_TESTING_ACCOUNT_PASSWORD=${{ secrets.MATTERS_TESTING_ACCOUNT_PASSWORD }} npx playwright test 
 
       - name: Output Playwright tests
         uses: actions/upload-artifact@v2
