@@ -176,7 +176,7 @@ const BaseArticleDetail = ({
             detail: {
               color: 'black',
               placement: 'bottom',
-              duration: 5 * 1000,
+              duration: 8 * 1000,
               content: <TranslationToast onClick={toggleTranslate} />,
             },
           })
