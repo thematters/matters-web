@@ -63,7 +63,7 @@ const NoticeComment = ({ comment }: { comment: NoticeCommentType | null }) => {
         spacing={['xtight', 'base']}
         borderRadius="xtight"
       >
-        <Expandable>
+        <Expandable content={comment.content} size="sm">
           <CommentContent comment={comment} type="article" size="sm" />
         </Expandable>
       </Card>

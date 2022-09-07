@@ -53,14 +53,6 @@ header {
 
 .description {
   padding: 0 var(--spacing-base);
-
-  & p {
-    position: relative;
-    margin-top: var(--spacing-base);
-    font-size: var(--font-size-md);
-    color: var(--color-grey-darker);
-    white-space: pre-wrap;
-  }
 }
 
 footer {

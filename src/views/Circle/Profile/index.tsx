@@ -197,7 +197,12 @@ const CircleProfile = () => {
 
         {circle.description && (
           <section className="description">
-            <Expandable>
+            <Expandable
+              content={circle.description}
+              color="grey-darker"
+              spacingTop="base"
+              size="md"
+            >
               <p>{circle.description}</p>
             </Expandable>
           </section>

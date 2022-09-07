@@ -5,13 +5,6 @@
   margin-bottom: var(--spacing-x-tight);
 }
 
-.description {
-  margin-top: var(--spacing-base);
-  font-size: var(--font-size-md-s);
-  color: var(--color-grey-darker);
-  white-space: pre-wrap;
-}
-
 .statistics {
   @mixin flex-center-space-between;
 
