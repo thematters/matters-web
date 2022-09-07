@@ -24,19 +24,30 @@
 }
 
 .copy {
-  @mixin flex-center-space-between;
-  @mixin border-top-grey;
+  & button {
+    display: block;
+    width: 100%;
+    height: 3rem;
+    padding-right: var(--spacing-loose);
+    padding-left: var(--spacing-loose);
+    font-weight: var(--font-weight-medium);
+    text-align: left;
 
-  padding: var(--spacing-base) var(--spacing-loose);
-
-  & :global(.text-icon) {
-    flex-shrink: 0;
+    &:hover,
+    &:focus {
+      background: var(--color-grey-lighter);
+    }
   }
 
-  & input {
-    margin-left: var(--spacing-x-tight);
-    font-size: var(--font-size-sm);
-    color: var(--color-grey);
+  & .text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.5;
+    & .share-translation {
+      font-size: var(--font-size-xs);
+      line-height: 1;
+      color: var(--color-grey);
+    }
   }
 }
 
