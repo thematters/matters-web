@@ -2,9 +2,9 @@
   position: relative;
   white-space: pre-wrap;
 
-  @mixin line-clamp;
+  /* @mixin line-clamp; */
 
-  -webkit-line-clamp: 2;
+  /* -webkit-line-clamp: 2; */
 
   & :global(> button) {
     position: absolute;
