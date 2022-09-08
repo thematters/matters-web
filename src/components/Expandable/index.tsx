@@ -82,25 +82,27 @@ export const Expandable: React.FC<ExpandableProps> = ({
         {(!expandable || (expandable && expand)) && <div>{children}</div>}
       </div>
       {expandable && expand && (
-        <Button
-          spacing={['xxtight', 'xtight']}
-          bgColor="grey-lighter"
-          textColor="grey"
-          onClick={() => {
-            setExpand(!expand)
-          }}
-        >
-          <TextIcon icon={<IconArrowUp16 />}>
-            <Translate zh_hans="收起" zh_hant="收合" en="collapse" />
-          </TextIcon>
-        </Button>
+        <section className="collapseWrapper">
+          <Button
+            spacing={['xxtight', 'xtight']}
+            bgColor="grey-lighter"
+            textColor="grey"
+            onClick={() => {
+              setExpand(!expand)
+            }}
+          >
+            <TextIcon icon={<IconArrowUp16 />}>
+              <Translate zh_hans="收起" zh_hant="收合" en="collapse" />
+            </TextIcon>
+          </Button>
+        </section>
       )}
       {expandable && !expand && (
         <p>
           <TextTruncate
             line={limit}
             element="span"
-            truncateText="..."
+            truncateText=""
             text={collapseContent}
             onTruncated={() => {
               setTruncated(true)
@@ -112,6 +114,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
                 }}
                 className="expandButton"
               >
+                ...
                 <Translate id="expand" />
               </span>
             }

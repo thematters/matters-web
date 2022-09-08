@@ -2,19 +2,13 @@
   position: relative;
   white-space: pre-wrap;
 
-  /* @mixin line-clamp; */
-
-  /* -webkit-line-clamp: 2; */
-
-  & :global(> button) {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-  }
-
   & .expandButton {
     color: var(--color-grey);
     cursor: pointer;
+  }
+
+  & .collapseWrapper {
+    @mixin flex-center-end;
   }
 }
 
