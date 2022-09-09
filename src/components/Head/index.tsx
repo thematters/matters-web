@@ -67,7 +67,7 @@ export const Head: React.FC<HeadProps> = (props) => {
       <meta
         name="viewport"
         key="viewport"
-        content="width=device-width, viewport-fit=cover"
+        content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
       />
       <title>{head.title}</title>
       <meta name="description" key="description" content={head.description} />
