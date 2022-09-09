@@ -85,7 +85,7 @@
     "js-cookie": "^3.0.1",
     "jump.js": "^1.0.2",
     "lodash": "^4.17.21",
-    "next": "^12.1.4",
+    "next": "^12.3.0",
     "next-compose-plugins": "^2.2.1",
     "next-offline": "^5.0.5",
     "next-with-apollo": "^5.3.0",
