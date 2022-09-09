@@ -66,6 +66,7 @@ const MEDIA_SRC = IMG_SRC
 
 const CONNECT_SRC = [
   "'self'",
+  'ws:',
   'wss:',
 
   // API
