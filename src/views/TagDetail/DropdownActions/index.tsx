@@ -83,7 +83,11 @@ const BaseDropdownActions = ({
       {hasAddSelectedArticle && (
         <Menu.Item onClick={openTagAddSelectedArticlesDialog}>
           <TextIcon icon={<IconAdd24 size="md" />} size="md" spacing="base">
-            <Translate id="tagAddSelectedArticle" />
+            <Translate
+              zh_hant="添加精選"
+              zh_hans="添加精选"
+              en="Add Articles into Featured"
+            />
           </TextIcon>
         </Menu.Item>
       )}

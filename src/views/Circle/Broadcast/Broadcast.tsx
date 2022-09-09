@@ -212,7 +212,13 @@ const CricleBroadcast = () => {
       new CustomEvent(ADD_TOAST, {
         detail: {
           color: 'green',
-          content: <Translate zh_hant="廣播已送出" zh_hans="广播已送出" />,
+          content: (
+            <Translate
+              zh_hant="廣播已送出"
+              zh_hans="广播已送出"
+              en="Broadcast sent"
+            />
+          ),
           buttonPlacement: 'center',
         },
       })

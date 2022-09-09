@@ -206,7 +206,7 @@ const TagDetail = ({ tag }: { tag: TagFragment }) => {
               selected={isSelected}
               onClick={() => changeFeed('selected')}
             >
-              <Translate id="featured" />
+              <Translate zh_hant="精選" zh_hans="精选" en="Featured" />
             </Tabs.Tab>
           )}
 

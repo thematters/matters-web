@@ -159,7 +159,9 @@ export const CommentForm: React.FC<CommentFormProps> = ({
             weight="md"
             icon={isSubmitting && <IconSpinner16 size="sm" />}
           >
-            {isSubmitting ? null : <Translate zh_hant="送出" zh_hans="送出" />}
+            {isSubmitting ? null : (
+              <Translate zh_hant="送出" zh_hans="送出" en="Send" />
+            )}
           </TextIcon>
         </Button>
       </footer>
