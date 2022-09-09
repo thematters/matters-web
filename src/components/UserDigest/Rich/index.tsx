@@ -35,7 +35,7 @@ export type UserDigestRichProps = {
   hasState?: boolean
   hasUnblock?: boolean
   hasDescriptionReplacement?: boolean
-  hasLengthLimit?: boolean
+  canClamp?: boolean
 } & CardProps &
   AvatarProps
 
@@ -51,7 +51,7 @@ const Rich = ({
   hasState = true,
   hasUnblock,
   hasDescriptionReplacement = false,
-  hasLengthLimit = false,
+  canClamp = false,
 
   ...cardProps
 }: UserDigestRichProps) => {
@@ -64,7 +64,7 @@ const Rich = ({
     container: true,
     [`size-${size}`]: !!size,
     disabled: isArchived,
-    limit: hasLengthLimit,
+    clamp: canClamp,
   })
 
   if (isArchived) {

@@ -10,7 +10,7 @@
     }
   }
 
-  &.limit .name {
+  &.clamp .name {
     max-width: 6.9375rem;
   }
 }
