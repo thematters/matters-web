@@ -75,7 +75,7 @@ const Toolbar = ({
   const isSmallUp = useResponsive('sm-up')
 
   const path = toPath({ page: 'articleDetail', article })
-  const shareUrl =
+  const sharePath =
     translated && translatedLanguage
       ? `/${toLocale(translatedLanguage)}${path.href}`
       : path.href
@@ -104,7 +104,7 @@ const Toolbar = ({
             iconSize="md-s"
             inCard={false}
             // title={makeTitle(article.title)}
-            path={shareUrl}
+            path={sharePath}
             tags={article.tags
               ?.map(({ content }) => content)
               .join(' ')
@@ -118,6 +118,7 @@ const Toolbar = ({
           size="md-s"
           inCard={false}
           hasShare={!isSmallUp}
+          sharePath={sharePath}
           hasExtend={!lock}
           {...props}
         />

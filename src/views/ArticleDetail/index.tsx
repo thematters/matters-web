@@ -54,6 +54,7 @@ import styles from './styles.css'
 import SupportWidget from './SupportWidget'
 import TagList from './TagList'
 import Toolbar from './Toolbar'
+import TranslationToast from './TranslationToast'
 import CircleWall from './Wall/Circle'
 import VisitorWall from './Wall/Visitor'
 
@@ -149,7 +150,11 @@ const BaseArticleDetail = ({
         detail: {
           color: 'green',
           content: (
-            <Translate zh_hant="正在翻譯" zh_hans="正在翻译" en="Translating" />
+            <Translate
+              zh_hant="Google 正在翻譯"
+              zh_hans="Google 正在翻译"
+              en="Translating by Google..."
+            />
           ),
         },
       })
@@ -163,6 +168,22 @@ const BaseArticleDetail = ({
       translate()
     }
   }
+  useEffect(() => {
+    if (!!autoTranslation) {
+      setTimeout(() => {
+        window.dispatchEvent(
+          new CustomEvent(ADD_TOAST, {
+            detail: {
+              color: 'black',
+              placement: 'bottom',
+              duration: 8 * 1000,
+              content: <TranslationToast onClick={toggleTranslate} />,
+            },
+          })
+        )
+      })
+    }
+  }, [])
 
   // set language cookie for anonymous if it doesn't exist
   useEffect(() => {
