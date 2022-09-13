@@ -39,7 +39,7 @@ const TagList = ({ article }: { article: TagListArticle }) => {
                   pageType: 'article_detail',
                 })
               }}
-              hasLengthLimit
+              canClamp
             />
             <TagExposureTracker location={i} id={tag.id} horizontal />
           </li>
