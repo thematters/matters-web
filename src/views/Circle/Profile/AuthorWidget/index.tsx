@@ -18,7 +18,6 @@ const AuthorWidget = ({ circle }: AuthorWidgetProps) => {
     page: 'userProfile',
     userName: circle.owner.userName || '',
   })
-
   return (
     <section className="author-widget">
       <Card
@@ -41,7 +40,11 @@ const AuthorWidget = ({ circle }: AuthorWidgetProps) => {
               <IconBroadcast24 size="md" />
             </span>
 
-            <Expandable content={pinnedBroadcast.content}>
+            <Expandable
+              content={pinnedBroadcast.content}
+              limit={2}
+              textIndent={true}
+            >
               <CommentContent
                 comment={pinnedBroadcast}
                 type="circleBroadcast"

@@ -25,6 +25,7 @@ interface ExpandableProps {
   color?: CollapseTextColor
   size?: 'sm' | 'md-s' | 'md'
   spacingTop?: 'base'
+  textIndent?: boolean
 }
 
 export const Expandable: React.FC<ExpandableProps> = ({
@@ -35,21 +36,22 @@ export const Expandable: React.FC<ExpandableProps> = ({
   color,
   size,
   spacingTop,
+  textIndent = false,
 }) => {
   const [expandable, setExpandable] = useState(false)
   const [expand, setExpand] = useState(true)
   const [truncated, setTruncated] = useState(false)
   const node: React.RefObject<HTMLParagraphElement> | null = useRef(null)
   const collapseContent = stripHtml(
-    content && content.replace(/\r?\n|\r|\s\s/g, '')
+    content && content.replace(/\r?\n|\r|\s\s/g, ''),
+    ''
   )
-  // const collapseContent = content
-  console.log({ collapseContent })
   const contentClasses = classNames({
     expandable: true,
     [`${color}`]: !!color,
     [`size-${size}`]: !!size,
     [`spacing-top-${spacingTop}`]: !!spacingTop,
+    [`textIndent`]: textIndent,
   })
 
   useEffect(() => {
@@ -58,7 +60,6 @@ export const Expandable: React.FC<ExpandableProps> = ({
     setTruncated(false)
     setTimeout(() => {
       if (node?.current) {
-        console.log('styled', window.getComputedStyle(node.current, null))
         const height = node.current.firstElementChild?.clientHeight || 0
         const lineHeight = window
           .getComputedStyle(node.current, null)
@@ -109,8 +110,9 @@ export const Expandable: React.FC<ExpandableProps> = ({
             }}
             textTruncateChild={
               <span
-                onClick={() => {
+                onClick={(e) => {
                   setExpand(!expand)
+                  e.stopPropagation()
                 }}
                 className="expandButton"
               >
@@ -121,8 +123,9 @@ export const Expandable: React.FC<ExpandableProps> = ({
           />
           {!truncated && (
             <span
-              onClick={() => {
+              onClick={(e) => {
                 setExpand(!expand)
+                e.stopPropagation()
               }}
               className="expandButton"
             >

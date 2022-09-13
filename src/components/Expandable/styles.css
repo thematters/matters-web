@@ -50,3 +50,7 @@
 .spacing-top-base {
   margin-top: var(--spacing-base);
 }
+
+.textIndent {
+  text-indent: 2rem;
+}
