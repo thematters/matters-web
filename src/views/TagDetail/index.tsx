@@ -1,5 +1,3 @@
-// import _find from 'lodash/find'
-// import _some from 'lodash/some'
 import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
 
@@ -33,7 +31,7 @@ import {
   toPath,
 } from '~/common/utils'
 
-import IMAGE_INTRO from '@/public/static/images/intro.jpg'
+import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
 
 import TagDetailArticles from './Articles'
 import ArticlesCount from './ArticlesCount'
@@ -50,10 +48,7 @@ import Owner from './Owner'
 import RelatedTags from './RelatedTags'
 import styles from './styles.css'
 
-import {
-  TagDetailPublic,
-  // TagDetailPublic_node_Tag,
-} from './__generated__/TagDetailPublic'
+import { TagDetailPublic } from './__generated__/TagDetailPublic'
 import { TagDetailPublicBySearch } from './__generated__/TagDetailPublicBySearch'
 import { TagFragment } from './__generated__/TagFragment'
 
@@ -120,7 +115,7 @@ const TagDetail = ({ tag }: { tag: TagFragment }) => {
     (tag.description ? `${makeTitle(tag.description, 80)} ` : '') +
     '#' +
     stripAllPunct(tag.content)
-  const keywords = tag.content.split(/\s+/).filter(Boolean).map(stripAllPunct) // title.includes(tag.content) ??
+  const keywords = tag.content.split(/\s+/).filter(Boolean).map(stripAllPunct)
 
   /**
    * Render
@@ -150,12 +145,12 @@ const TagDetail = ({ tag }: { tag: TagFragment }) => {
       />
 
       <Head
-        title={title}
-        description={tag.description || stripAllPunct(tag.content)}
+        title={`#${stripAllPunct(tag.content)}`}
+        description={tag.description}
         keywords={keywords} // add top10 most using author names?
         image={
           tag.cover ||
-          `//${process.env.NEXT_PUBLIC_SITE_DOMAIN}${IMAGE_INTRO.src}`
+          `//${process.env.NEXT_PUBLIC_SITE_DOMAIN}${IMAGE_TAG_COVER.src}`
         }
         jsonLdData={{
           '@context': 'https://schema.org',
@@ -164,7 +159,7 @@ const TagDetail = ({ tag }: { tag: TagFragment }) => {
           description: tag.description,
           image:
             tag.cover ||
-            `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}${IMAGE_INTRO.src}`,
+            `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}${IMAGE_TAG_COVER.src}`,
           url: `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/tags/${tag.id}`,
         }}
       />
