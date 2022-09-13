@@ -17,7 +17,7 @@ import {
 } from '~/components'
 
 import { URL_QS } from '~/common/enums'
-import { analytics, mergeConnections } from '~/common/utils'
+import { analytics, mergeConnections, stripSpaces } from '~/common/utils'
 
 import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
 import PROFILE_COVER_DEFAULT from '@/public/static/images/profile-cover.png'
@@ -180,6 +180,8 @@ const UserArticles = () => {
   const isShareOnboardingTasks =
     shareSource === URL_QS.SHARE_SOURCE_ONBOARDING_TASKS.value
 
+  const description = stripSpaces(user.info.description)
+
   const CustomHead = () => (
     <Head
       title={{
@@ -195,7 +197,7 @@ const UserArticles = () => {
       }}
       // title={`Matters - ${user.displayName} (@${user.userName})`}
       noSuffix={isShareOnboardingTasks}
-      description={user.info.description}
+      description={description}
       // keywords={...} // show user's top10 most used tags?
       image={
         user.info.profileCover ||
@@ -205,7 +207,7 @@ const UserArticles = () => {
         '@context': 'https://schema.org',
         '@type': 'Person',
         name: user.displayName,
-        description: user.info.description,
+        description,
         image:
           user.avatar ||
           `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}${ICON_AVATAR_DEFAULT.src}`,

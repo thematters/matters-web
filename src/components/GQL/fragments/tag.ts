@@ -24,6 +24,8 @@ export default {
   articleCount: gql`
     fragment ArticleCountTag on Tag {
       id
+      numAuthors
+      numArticles
       articles(input: { first: 0, selected: false }) {
         totalCount
       }

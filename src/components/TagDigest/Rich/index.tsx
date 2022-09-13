@@ -45,8 +45,7 @@ const Rich = ({
 }: Props) => {
   const path = toPath({
     page: 'tagDetail',
-    id: tag.id,
-    content: tag.content,
+    tag,
   })
 
   return (

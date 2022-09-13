@@ -6,7 +6,9 @@ export const USER_TAGS_PUBLIC = gql`
   query UserTagsPublic($userName: String!, $after: String) {
     user(input: { userName: $userName }) {
       id
+      userName
       displayName
+      avatar
       info {
         description
         profileCover

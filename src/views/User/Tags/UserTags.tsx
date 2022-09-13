@@ -13,9 +13,16 @@ import {
   useRoute,
 } from '~/components'
 
-import { analytics, mergeConnections, toPath } from '~/common/utils'
+import {
+  analytics,
+  mergeConnections,
+  stripSpaces,
+  toPath,
+} from '~/common/utils'
 
-import IMAGE_LOGO_192 from '@/public/static/icon-192x192.png'
+// import IMAGE_LOGO_192 from '@/public/static/icon-192x192.png'
+import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
+import PROFILE_COVER_DEFAULT from '@/public/static/images/profile-cover.png'
 
 import UserTabs from '../UserTabs'
 import { USER_TAGS_PUBLIC } from './gql'
@@ -100,14 +107,17 @@ const UserTags = () => {
         <EmptyTag
           description={
             <Translate
-              zh_hant="還沒有主理與協作標籤喔"
-              zh_hans="还没有主理与协作标签喔"
+              id="noTagsUsageYet"
+              // zh_hant="還沒有主理與協作標籤喔"
+              // zh_hans="还没有主理与协作标签喔"
             />
           }
         />
       </>
     )
   }
+
+  const description = stripSpaces(user.info.description)
 
   const CustomHead = () => (
     <Head
@@ -117,8 +127,22 @@ const UserTags = () => {
         en: `Tags ${user.displayName} maintaining or collaborating`,
       }}
       // keywords={...} // show user's top10 most used tags?
-      description={user.info.description}
-      image={user.info.profileCover || IMAGE_LOGO_192.src}
+      description={description}
+      // image={user.info.profileCover || IMAGE_LOGO_192.src}
+      image={
+        user.info.profileCover ||
+        `//${process.env.NEXT_PUBLIC_SITE_DOMAIN}${PROFILE_COVER_DEFAULT.src}`
+      }
+      jsonLdData={{
+        '@context': 'https://schema.org',
+        '@type': 'Person',
+        name: user.displayName,
+        description,
+        image:
+          user.avatar ||
+          `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}${ICON_AVATAR_DEFAULT.src}`,
+        url: `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/@${user.userName}`,
+      }}
     />
   )
 
@@ -130,9 +154,10 @@ const UserTags = () => {
         <EmptyTag
           description={
             <Translate
-              zh_hant="還沒有主理與協作標籤喔"
-              zh_hans="还没有主理与协作标签喔"
-              en="No maintaining or collabrating tags yet"
+              id="noTagsUsageYet"
+              // zh_hant="還沒有主理與協作標籤喔"
+              // zh_hans="还没有主理与协作标签喔"
+              // en="No maintaining or collabrating tags yet"
             />
           }
         />
@@ -149,25 +174,24 @@ const UserTags = () => {
       <section className="container">
         <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
           <List>
-            {edges.map(({ node, cursor }, i) => (
+            {edges.map(({ node: tag, cursor }, i) => (
               <List.Item key={cursor}>
                 <Card
                   spacing={['base', 'base']}
                   {...toPath({
                     page: 'tagDetail',
-                    id: node.id,
-                    content: node.content,
+                    tag,
                   })}
                   onClick={() =>
                     analytics.trackEvent('click_feed', {
                       type: 'user_tag',
                       contentType: 'tag',
                       location: i,
-                      id: node.id,
+                      id: tag.id,
                     })
                   }
                 >
-                  <Tag tag={node} type="list" />
+                  <Tag tag={tag} type="list" />
                 </Card>
               </List.Item>
             ))}
