@@ -22,6 +22,13 @@ interface CircleArgs {
   name: string
 }
 
+interface TagArgs {
+  id: string
+  slug?: string
+  content: string
+  // feedType?: string
+}
+
 interface CommentArgs {
   id: string
   type: 'article' | 'circleDiscussion' | 'circleBroadcast' // comment type: article/discussion/broadcast
@@ -58,8 +65,7 @@ type ToPathArgs =
   | { page: 'draftDetail'; id: string; slug: string }
   | {
       page: 'tagDetail'
-      id: string
-      content: string
+      tag: TagArgs
       feedType?: string
     }
   | {
@@ -192,8 +198,9 @@ export const toPath = (
       }
     }
     case 'tagDetail': {
-      const { id: numberId } = fromGlobalId(args.id as string)
-      const pathname = `/tags/${numberId}-${tagSlugify(args.content)}`
+      const { id, slug, content } = args.tag
+      const { id: numberId } = fromGlobalId(id as string)
+      const pathname = `/tags/${numberId}-${slug || tagSlugify(content)}`
       const typeStr = args.feedType ? `?type=${args.feedType}` : ''
       return {
         href: `${pathname}${typeStr}`,

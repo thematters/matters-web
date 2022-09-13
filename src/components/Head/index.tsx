@@ -33,7 +33,7 @@ interface HeadProps {
   image?: string | null
   noSuffix?: boolean
   paymentPointer?: string | null
-  jsonLdData?: object | null
+  jsonLdData?: Record<string, any> | null
 }
 
 export const Head: React.FC<HeadProps> = (props) => {
@@ -63,7 +63,12 @@ export const Head: React.FC<HeadProps> = (props) => {
   //     ? `https://${siteDomain}/${language}${props.path}`
   //     : `https://${siteDomain}/${language}${router.asPath || '/'}`
   // }
-  const canonicalUrl = head.url?.split('#')[0].split('?')[0]
+
+  if (props.jsonLdData && !props.jsonLdData.description) {
+    props.jsonLdData.description = head.description
+  }
+
+  const canonicalUrl = head.url?.split('?')[0]
 
   return (
     <NextHead>
