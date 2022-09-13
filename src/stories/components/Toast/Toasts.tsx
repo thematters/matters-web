@@ -66,6 +66,7 @@ const Toasts = () => (
                   <Translate
                     zh_hant="你對作品送出了一個 Super Like！"
                     zh_hans="你对作品送出了一个 Super Like！"
+                    en="You sent a Super Like to this article!"
                   />
                 ),
                 customButton: <ViewSuperLikeButton />,

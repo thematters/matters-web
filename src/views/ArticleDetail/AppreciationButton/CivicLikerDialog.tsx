@@ -55,6 +55,7 @@ const CivicLikerDialog = ({
             <Translate
               zh_hant="讚賞公民是一群願意持續回饋創作的網絡公民。成為讚賞公民可享以下福利："
               zh_hans="赞赏公民是一群愿意持续回馈创作的网络公民。成为赞赏公民可享以下福利："
+              en="Civic Liker is a movement to reward good content and encourage openness. Like = reward. Liker ID is your account to become  a civic liker, you have to log into Liker ID in order to turn your “Like” to LikeCoin reward to the creators. Creators also need to register for a Liker ID to get the reward. Learn more "
             />
           </p>
 

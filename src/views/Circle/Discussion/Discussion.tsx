@@ -168,7 +168,13 @@ const CricleDiscussion = () => {
       new CustomEvent(ADD_TOAST, {
         detail: {
           color: 'green',
-          content: <Translate zh_hant="討論已送出" zh_hans="讨论已送出" />,
+          content: (
+            <Translate
+              zh_hant="討論已送出"
+              zh_hans="讨论已送出"
+              en="Discussion sent"
+            />
+          ),
           buttonPlacement: 'center',
         },
       })
