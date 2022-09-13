@@ -151,8 +151,8 @@ const BaseArticleDetail = ({
           color: 'green',
           content: (
             <Translate
-              zh_hant="Google 正在翻譯"
-              zh_hans="Google 正在翻译"
+              zh_hant="正在透過 Google 翻譯..."
+              zh_hans="正在通过 Google 翻译..."
               en="Translating by Google..."
             />
           ),

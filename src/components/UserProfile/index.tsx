@@ -256,7 +256,12 @@ export const UserProfile = () => {
             <WalletAddress address={user.info.ethAddress} />
           )}
 
-          <Expandable>
+          <Expandable
+            content={user.info.description}
+            color="grey-darker"
+            spacingTop="base"
+            size="md"
+          >
             <p className="description">{user.info.description}</p>
           </Expandable>
         </section>
