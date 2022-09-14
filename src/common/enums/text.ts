@@ -927,7 +927,7 @@ export const TEXT = {
     myNFTCollections: 'My NFT Collections',
     login: 'Log in',
     authEntries: 'Enter',
-    authMethod: 'Choose method to enter',
+    authMethod: 'Choose a method to enter',
     successLinkWallet: 'Wallet successfully linked',
     loginPassword: 'Password',
     logout: 'Log Out',
