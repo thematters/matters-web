@@ -26,6 +26,10 @@ const fragments = {
             userName
           }
         }
+        ... on Circle {
+          id
+          name
+        }
       }
       parentComment {
         id
@@ -41,17 +45,20 @@ const fragments = {
 const NoticeComment = ({ comment }: { comment: NoticeCommentType | null }) => {
   const article =
     comment?.node.__typename === 'Article' ? comment.node : undefined
+  const circle =
+    comment?.node.__typename === 'Circle' ? comment.node : undefined
 
   if (!comment) {
     return null
   }
 
   const path =
-    comment.state === 'active' && article
+    comment.state === 'active'
       ? toPath({
           page: 'commentDetail',
           comment,
           article,
+          circle,
         })
       : {}
 

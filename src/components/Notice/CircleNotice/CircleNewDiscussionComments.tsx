@@ -1,16 +1,16 @@
 import gql from 'graphql-tag'
-import { Fragment, useContext } from 'react'
+import { useContext } from 'react'
 
-import { Translate, ViewerContext } from '~/components'
+import { LanguageContext, Translate, ViewerContext } from '~/components'
 
-import { numAbbr } from '~/common/utils'
+import { toPath } from '~/common/utils'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
-import NoticeActorName from '../NoticeActorName'
 import NoticeCircleCard from '../NoticeCircleCard'
 import NoticeCircleName from '../NoticeCircleName'
 import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
+import NoticeHeadActors from '../NoticeHeadActors'
 import NoticeTypeIcon from '../NoticeTypeIcon'
 import styles from '../styles.css'
 
@@ -25,6 +25,8 @@ const CircleNewDiscussionComments = ({
 }: CircleNewDiscussionCommentsType) => {
   const viewer = useContext(ViewerContext)
   const { comments, replies, mentions } = notice
+  const { lang } = useContext(LanguageContext)
+  const isEn = lang === 'en'
 
   if (!notice.actors) {
     return null
@@ -42,6 +44,17 @@ const CircleNewDiscussionComments = ({
   const actorsCount = notice.actors.length
   const isMultiActors = actorsCount > 1
 
+  const latestComment = [
+    ...(comments || []),
+    ...(replies || []),
+    ...(mentions || []),
+  ].filter(Boolean)[0]
+  const circleCommentPath = toPath({
+    page: 'commentDetail',
+    comment: latestComment,
+    circle: notice.circle,
+  })
+
   return (
     <section className="container">
       <section className="avatar-wrap">
@@ -54,38 +67,39 @@ const CircleNewDiscussionComments = ({
 
       <section className="content-wrap">
         <NoticeHead>
-          {notice.actors.slice(0, 2).map((actor, index) => (
-            <Fragment key={index}>
-              <NoticeActorName user={actor} />
-              {isMultiActors && index < 1 && <span>、</span>}
-            </Fragment>
-          ))}{' '}
-          {isMultiActors && (
-            <Translate
-              zh_hant={`等 ${numAbbr(actorsCount)} 人`}
-              zh_hans={`等 ${numAbbr(actorsCount)} 人`}
-              en={`etc. ${numAbbr(actorsCount)} users`}
-            />
-          )}
+          <NoticeHeadActors actors={notice.actors} />
+
           <>
-            {isCircleOwner ? (
-              <Translate zh_hant="在你的圍爐 " zh_hans="在你的围炉 " en=" in" />
-            ) : (
-              <Translate zh_hant="在圍爐 " zh_hans="在围炉 " en=" in " />
-            )}
-            <NoticeCircleName circle={notice.circle} />
+            {!isEn ? (
+              <>
+                {isCircleOwner ? (
+                  <Translate
+                    zh_hant="在你的圍爐 "
+                    zh_hans="在你的围炉 "
+                    en=" in your circle "
+                  />
+                ) : (
+                  <Translate zh_hant="在圍爐 " zh_hans="在围炉 " en=" in " />
+                )}
+                <NoticeCircleName
+                  circle={notice.circle}
+                  path={circleCommentPath}
+                />
+              </>
+            ) : null}
+
             {newDiscussionCount && !replyCount && !mentionCount && (
               <Translate
                 zh_hant=" 眾聊中發表話題 "
                 zh_hans=" 众聊中发表话题 "
-                en=" posted new discussions "
+                en=" started a new topic "
               />
             )}
             {!newDiscussionCount && replyCount && !mentionCount && (
               <Translate
                 zh_hant=" 眾聊中回覆話題 "
                 zh_hans=" 众聊中回复话题 "
-                en=" replied discussions "
+                en=" replied to topics "
               />
             )}
             {!newDiscussionCount && !replyCount && mentionCount && (
@@ -99,30 +113,40 @@ const CircleNewDiscussionComments = ({
               <Translate
                 zh_hant=" 眾聊中發表與回覆話題 "
                 zh_hans=" 众聊中发表与回复话题 "
-                en=" posted and replied discussions "
+                en=" posted and replied to topics "
               />
             )}
             {newDiscussionCount && !replyCount && mentionCount && (
               <Translate
                 zh_hant=" 眾聊中發表話題，其中有提及你 "
                 zh_hans=" 众聊中发表话题，其中有提及你 "
-                en=" posted new discussions and mentioned you "
+                en=" posted a new topic and mentioned you "
               />
             )}
             {!newDiscussionCount && replyCount && mentionCount && (
               <Translate
                 zh_hant=" 眾聊中回覆話題，其中有提到你 "
                 zh_hans=" 众聊中回复话题，其中有提到你 "
-                en=" replied discussions and mentioned you "
+                en=" replied to topics and mentioned you "
               />
             )}
             {newDiscussionCount && replyCount && mentionCount && (
               <Translate
                 zh_hant=" 眾聊中發表與回覆話題，其中有提到你 "
                 zh_hans=" 众聊中发表与回复话题，其中有提到你 "
-                en=" posted and replied discussions, some mentioned you "
+                en=" posted and replied to topics and mentioned you "
               />
             )}
+            {isEn ? (
+              <>
+                {isCircleOwner ? <> in your circle </> : <> in </>}
+                <NoticeCircleName
+                  circle={notice.circle}
+                  path={circleCommentPath}
+                />
+                &nbsp;Discussion
+              </>
+            ) : null}
           </>
           {isMultiActors && (
             <section className="multi-actor-avatars">
@@ -147,16 +171,24 @@ CircleNewDiscussionComments.fragments = {
       ...NoticeDate
       actors {
         ...NoticeActorAvatarUser
-        ...NoticeActorNameUser
+        ...NoticeHeadActorsUser
       }
       circle: target {
         ...NoticeCircleCard
       }
       comments {
         id
+        type
+        parentComment {
+          id
+        }
       }
       replies {
         id
+        type
+        parentComment {
+          id
+        }
         replyTo {
           author {
             id
@@ -165,10 +197,14 @@ CircleNewDiscussionComments.fragments = {
       }
       mentions {
         id
+        type
+        parentComment {
+          id
+        }
       }
     }
     ${NoticeActorAvatar.fragments.user}
-    ${NoticeActorName.fragments.user}
+    ${NoticeHeadActors.fragments.user}
     ${NoticeCircleCard.fragments.circle}
     ${NoticeDate.fragments.notice}
   `,

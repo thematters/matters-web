@@ -52,8 +52,8 @@ type ToPathArgs =
   | {
       page: 'commentDetail'
       comment: CommentArgs
-      article?: ArticleArgs
-      circle?: CircleArgs
+      article?: ArticleArgs | null
+      circle?: CircleArgs | null
     }
   | { page: 'draftDetail'; id: string; slug: string }
   | {

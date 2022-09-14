@@ -30,11 +30,12 @@ const CircleNewArticle = ({ notice }: { notice: NoticeType }) => {
             <Translate
               zh_hant="新作品已經加入圍爐，馬上前往閱讀吧！"
               zh_hans="新作品已经加入围炉，马上前往阅读吧！"
+              en="A new article has been added to the circle, read it now!"
             />
           }
         >
           <NoticeCircleName circle={circle} />
-          <Translate zh_hant=" 又成長了" zh_hans=" 又成长了" />
+          <Translate zh_hant=" 又成長了" zh_hans=" 又成长了" en=" is growing" />
         </NoticeHead>
 
         <NoticeArticleCard article={notice.article} />
