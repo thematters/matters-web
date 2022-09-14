@@ -5,7 +5,7 @@ import TextTruncate from 'react-text-truncate'
 
 import { Button, IconArrowUp16, TextIcon, Translate } from '~/components'
 
-import { stripHtml } from '@/src/common/utils/text'
+import { stripHtml } from '~/common/utils/text'
 
 import styles from './styles.css'
 
