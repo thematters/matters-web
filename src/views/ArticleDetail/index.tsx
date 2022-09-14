@@ -177,7 +177,13 @@ const BaseArticleDetail = ({
               color: 'black',
               placement: 'bottom',
               duration: 8 * 1000,
-              content: <TranslationToast onClick={toggleTranslate} />,
+              clearable: true,
+              content: (
+                <TranslationToast.Content language={autoTranslation.language} />
+              ),
+              switchContent: (
+                <TranslationToast.SwitchContent onClick={toggleTranslate} />
+              ),
             },
           })
         )

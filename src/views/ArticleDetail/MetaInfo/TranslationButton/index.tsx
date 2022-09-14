@@ -47,7 +47,7 @@ const TranslationButton: FC<{
             en={`Original${originalLang.en}`}
           />
         ) : (
-          <Translate zh_hant="翻譯" zh_hans="翻译" en="Translation" />
+          <Translate zh_hant="翻譯" zh_hans="翻译" en="Translate" />
         )}
       </TextIcon>
     </Button>
