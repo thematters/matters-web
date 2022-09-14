@@ -168,9 +168,9 @@ export const Tag = ({
         </button>
       )}
 
-      {hasCount && type === 'list' && tag?.numArticles && (
+      {hasCount && type === 'list' && tag?.numArticles ? (
         <span className="count">{tag.numArticles}</span>
-      )}
+      ) : null}
 
       <style jsx>{styles}</style>
     </>

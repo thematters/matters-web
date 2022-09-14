@@ -8,7 +8,7 @@ import {
   UniversalAuthButton,
   useResponsive,
   ViewerContext,
-} from '@/src/components'
+} from '~/components'
 
 import DisplayPreferences from './DisplayPreferences'
 import Enhance from './Enhance'

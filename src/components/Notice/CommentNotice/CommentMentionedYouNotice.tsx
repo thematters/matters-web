@@ -2,13 +2,16 @@ import gql from 'graphql-tag'
 
 import { Translate } from '~/components'
 
+import { toPath } from '~/common/utils'
+
 import NoticeActorAvatar from '../NoticeActorAvatar'
-import NoticeActorName from '../NoticeActorName'
 import NoticeArticleTitle from '../NoticeArticleTitle'
 import NoticeCircleName from '../NoticeCircleName'
 import NoticeComment from '../NoticeComment'
 import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
+import NoticeHeadActors from '../NoticeHeadActors'
+import NoticeTypeIcon from '../NoticeTypeIcon'
 import styles from '../styles.css'
 
 import { CommentMentionedYouNotice as NoticeType } from './__generated__/CommentMentionedYouNotice'
@@ -18,7 +21,9 @@ const CommentMentionedYouNotice = ({ notice }: { notice: NoticeType }) => {
     return null
   }
 
-  const actor = notice.actors[0]
+  const actorsCount = notice.actors.length
+  const isMultiActors = actorsCount > 1
+
   const commentArticle =
     notice.comment?.node.__typename === 'Article' ? notice.comment.node : null
   const commentCircle =
@@ -29,15 +34,26 @@ const CommentMentionedYouNotice = ({ notice }: { notice: NoticeType }) => {
   const commentCircleBroadcast =
     notice.comment?.type === 'circleBroadcast' ? notice.comment.type : null
 
+  const latestComment = notice.comment
+  const circleCommentPath = toPath({
+    page: 'commentDetail',
+    comment: latestComment,
+    circle: commentCircle,
+  })
+
   return (
     <section className="container">
       <section className="avatar-wrap">
-        <NoticeActorAvatar user={actor} />
+        {isMultiActors ? (
+          <NoticeTypeIcon type="comment" />
+        ) : (
+          <NoticeActorAvatar user={notice.actors[0]} />
+        )}
       </section>
 
       <section className="content-wrap">
         <NoticeHead>
-          <NoticeActorName user={actor} />
+          <NoticeHeadActors actors={notice.actors} />
 
           {commentArticle && (
             <>
@@ -59,21 +75,24 @@ const CommentMentionedYouNotice = ({ notice }: { notice: NoticeType }) => {
               <Translate
                 zh_hant=" 在圍爐 "
                 zh_hans=" 在围炉 "
-                en=" mentioned you on "
+                en=" commented in "
               />
-              <NoticeCircleName circle={commentCircle} />
+              <NoticeCircleName
+                circle={commentCircle}
+                path={circleCommentPath}
+              />
               {commentCircleDiscussion && (
                 <Translate
                   zh_hant={` 眾聊提及你`}
                   zh_hans={` 众聊提及你`}
-                  en=""
+                  en=" Discussion and mentioned you"
                 />
               )}
               {commentCircleBroadcast && (
                 <Translate
                   zh_hant={` 廣播提及你`}
                   zh_hans={` 广播提及你`}
-                  en=""
+                  en=" Broadcast and mentioned you"
                 />
               )}
             </>
@@ -81,6 +100,14 @@ const CommentMentionedYouNotice = ({ notice }: { notice: NoticeType }) => {
         </NoticeHead>
 
         <NoticeComment comment={notice.comment} />
+
+        {isMultiActors && (
+          <section className="multi-actor-avatars">
+            {notice.actors.map((actor, index) => (
+              <NoticeActorAvatar key={index} user={actor} size="md" />
+            ))}
+          </section>
+        )}
 
         <NoticeDate notice={notice} />
       </section>
@@ -97,7 +124,7 @@ CommentMentionedYouNotice.fragments = {
       ...NoticeDate
       actors {
         ...NoticeActorAvatarUser
-        ...NoticeActorNameUser
+        ...NoticeHeadActorsUser
       }
       comment: target {
         ...NoticeComment
@@ -112,7 +139,7 @@ CommentMentionedYouNotice.fragments = {
       }
     }
     ${NoticeActorAvatar.fragments.user}
-    ${NoticeActorName.fragments.user}
+    ${NoticeHeadActors.fragments.user}
     ${NoticeArticleTitle.fragments.article}
     ${NoticeCircleName.fragments.circle}
     ${NoticeComment.fragments.comment}

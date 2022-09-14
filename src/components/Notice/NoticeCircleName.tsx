@@ -7,20 +7,22 @@ import { NoticeCircleName as NoticeCircleNameType } from './__generated__/Notice
 
 const NoticeCircleName = ({
   circle,
+  path,
 }: {
   circle: NoticeCircleNameType | null
+  path?: { href: string; pathname?: string }
 }) => {
   if (!circle) {
     return null
   }
 
-  const path = toPath({
+  const circlePath = toPath({
     page: 'circleDetail',
     circle,
   })
 
   return (
-    <Link {...path}>
+    <Link {...(path || circlePath)}>
       <a>{circle.displayName}</a>
     </Link>
   )

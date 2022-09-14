@@ -31,6 +31,10 @@ const fragments = {
             userName
           }
         }
+        ... on Circle {
+          id
+          name
+        }
       }
       createdAt
     }
@@ -47,7 +51,7 @@ const CreatedAt = ({ comment, hasLink }: CreatedAtProps) => {
       page: 'commentDetail',
       comment,
       article,
-      circle: circle! as unknown as { __typename: 'Circle'; name: string },
+      circle,
     })
     return (
       <LinkWrapper {...path} disabled={!hasLink}>

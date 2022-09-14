@@ -1,6 +1,7 @@
-import { CONTENT_LANG_TEXT_MAP } from '@/src/common/enums'
-import { toLocale } from '@/src/common/utils'
-import { Translate } from '@/src/components'
+import { Translate } from '~/components'
+
+import { CONTENT_LANG_TEXT_MAP } from '~/common/enums'
+import { toLocale } from '~/common/utils'
 
 import styles from './styles.css'
 
