@@ -59,7 +59,7 @@ const CircleNewBroadcastNotice = ({ notice }: { notice: NoticeType }) => {
           <Translate
             zh_hant={` 發布了新廣播`}
             zh_hans={` 发布了新广播`}
-            en=" "
+            en=""
           />
         </NoticeHead>
 

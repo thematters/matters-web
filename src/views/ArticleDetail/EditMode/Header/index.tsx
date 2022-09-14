@@ -114,7 +114,7 @@ const EditModeHeader = ({
       <Translate
         zh_hant="正文及作品管理剩 "
         zh_hans="正文及作品管理剩 "
-        en=" "
+        en=""
       />
       {revisionCountLeft}
       <Translate
