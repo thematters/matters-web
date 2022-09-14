@@ -8,15 +8,12 @@ import {
   Translate,
 } from '~/components'
 
-import { toLocale, translate } from '~/common/utils'
+import { translate } from '~/common/utils'
 
 import styles from './styles.css'
 
 const Copy = ({ link }: { link: string }) => {
   const { lang } = useContext(LanguageContext)
-  const url = new URL(link)
-  const pathnames = url.pathname.split('/')
-  const showTranslation = toLocale(pathnames[1]) !== ''
 
   return (
     <section className="copy">
@@ -31,15 +28,6 @@ const Copy = ({ link }: { link: string }) => {
                   en="Copy Link"
                 />
               </span>
-              {showTranslation && (
-                <span className="share-translation">
-                  <Translate
-                    zh_hant="分享這篇文章的翻譯版本"
-                    zh_hans="分享这篇文章的翻译版本"
-                    en="Share this article in translated version"
-                  />
-                </span>
-              )}
             </div>
           </TextIcon>
         </button>
