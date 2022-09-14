@@ -1,17 +1,15 @@
 import gql from 'graphql-tag'
-import { Fragment } from 'react'
 
 import { Translate } from '~/components'
 
-import { COMMENT_TYPE_TEXT } from '~/common/enums'
-import { numAbbr } from '~/common/utils'
+import { toPath } from '~/common/utils'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
-import NoticeActorName from '../NoticeActorName'
 import NoticeCircleName from '../NoticeCircleName'
 import NoticeComment from '../NoticeComment'
 import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
+import NoticeHeadActors from '../NoticeHeadActors'
 import NoticeTypeIcon from '../NoticeTypeIcon'
 import styles from '../styles.css'
 
@@ -29,6 +27,13 @@ const CircleNewBroadcastNotice = ({ notice }: { notice: NoticeType }) => {
       ? notice.comment.node
       : undefined
 
+  const latestComment = notice.comment
+  const circleCommentPath = toPath({
+    page: 'commentDetail',
+    comment: latestComment,
+    circle: commentCircle,
+  })
+
   return (
     <section className="container">
       <section className="avatar-wrap">
@@ -41,28 +46,20 @@ const CircleNewBroadcastNotice = ({ notice }: { notice: NoticeType }) => {
 
       <section className="content-wrap">
         <NoticeHead>
-          {notice.actors.slice(0, 2).map((actor, index) => (
-            <Fragment key={index}>
-              <NoticeActorName user={actor} />
-              {isMultiActors && index < 1 && <span>、</span>}
-            </Fragment>
-          ))}{' '}
-          {isMultiActors && (
-            <Translate
-              zh_hant={`等 ${numAbbr(actorsCount)} 人`}
-              zh_hans={`等 ${numAbbr(actorsCount)} 人`}
-              en={`etc. ${numAbbr(actorsCount)} users`}
-            />
-          )}
+          <NoticeHeadActors actors={notice.actors} />
+
           <Translate
             zh_hant="在圍爐 "
             zh_hans="在围炉 "
-            en={` sent a new ${COMMENT_TYPE_TEXT.en.circleBroadcast} on `}
+            en={` sent a new broadcast on `}
           />
-          {commentCircle && <NoticeCircleName circle={commentCircle} />}
+          {commentCircle && (
+            <NoticeCircleName circle={commentCircle} path={circleCommentPath} />
+          )}
           <Translate
-            zh_hant={` 發布了新${COMMENT_TYPE_TEXT.zh_hant.circleBroadcast}`}
-            zh_hans={` 发布了新${COMMENT_TYPE_TEXT.zh_hans.circleBroadcast}`}
+            zh_hant={` 發布了新廣播`}
+            zh_hans={` 发布了新广播`}
+            en=""
           />
         </NoticeHead>
 
@@ -92,7 +89,7 @@ CircleNewBroadcastNotice.fragments = {
       ...NoticeDate
       actors {
         ...NoticeActorAvatarUser
-        ...NoticeActorNameUser
+        ...NoticeHeadActorsUser
       }
       comment: target {
         ...NoticeComment
@@ -104,7 +101,7 @@ CircleNewBroadcastNotice.fragments = {
       }
     }
     ${NoticeActorAvatar.fragments.user}
-    ${NoticeActorName.fragments.user}
+    ${NoticeHeadActors.fragments.user}
     ${NoticeCircleName.fragments.circle}
     ${NoticeComment.fragments.comment}
     ${NoticeDate.fragments.notice}

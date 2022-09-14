@@ -68,13 +68,14 @@ const ArchiveArticleDialog = ({
       {children({ openDialog })}
 
       <Dialog isOpen={show} onDismiss={closeDialog} size="sm">
-        <Dialog.Header title="hide" closeDialog={closeDialog} mode="inner" />
+        <Dialog.Header title="archive" closeDialog={closeDialog} mode="inner" />
 
         <Dialog.Message>
           <p>
             <Translate
               zh_hant="確認隱藏，其他用戶將無法從站內訪問該作品。隱藏後無法回退，如需再次呈現作品，你需要重新發布。"
               zh_hans="确认隐藏，其他用户将无法从站内访问该作品。隐藏后无法回退，如需再次呈现作品，你需要重新发布。"
+              en="Are you sure you want to archive the article?"
             />
           </p>
         </Dialog.Message>
@@ -87,7 +88,7 @@ const ArchiveArticleDialog = ({
               closeDialog()
             }}
           >
-            <Translate id="archived" />
+            <Translate id="archive" />
           </Dialog.Footer.Button>
 
           <Dialog.Footer.Button

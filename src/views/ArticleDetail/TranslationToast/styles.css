@@ -1,9 +1,6 @@
-.wrapper {
-  font-size: var(--font-size-md-s);
+.switchButton {
+  font-size: var(--font-size-sm);
   line-height: 1.5rem;
-
-  & .switchButton {
-    text-decoration: underline;
-    cursor: pointer;
-  }
+  text-decoration: underline;
+  cursor: pointer;
 }

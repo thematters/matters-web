@@ -1,14 +1,11 @@
 import gql from 'graphql-tag'
-import { Fragment } from 'react'
 
 import { Translate } from '~/components'
 
-import { numAbbr } from '~/common/utils'
-
 import NoticeActorAvatar from '../NoticeActorAvatar'
-import NoticeActorName from '../NoticeActorName'
 import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
+import NoticeHeadActors from '../NoticeHeadActors'
 import NoticeTypeIcon from '../NoticeTypeIcon'
 import NoticeUserCard from '../NoticeUserCard'
 import styles from '../styles.css'
@@ -39,19 +36,8 @@ const CircleNewUserNotice = ({ notice, userType }: CircleNewUserNotice) => {
 
       <section className="content-wrap">
         <NoticeHead>
-          {notice.actors.slice(0, 2).map((actor, index) => (
-            <Fragment key={index}>
-              <NoticeActorName user={actor} />
-              {isMultiActors && index < 1 && <span>、</span>}
-            </Fragment>
-          ))}{' '}
-          {isMultiActors && (
-            <Translate
-              zh_hant={`等 ${numAbbr(actorsCount)} 人`}
-              zh_hans={`等 ${numAbbr(actorsCount)} 人`}
-              en={`etc. ${numAbbr(actorsCount)} users`}
-            />
-          )}
+          <NoticeHeadActors actors={notice.actors} />
+
           {isNewFollower && (
             <Translate
               zh_hant="追蹤了你的圍爐"
@@ -100,12 +86,12 @@ CircleNewUserNotice.fragments = {
       ...NoticeDate
       actors {
         ...NoticeActorAvatarUser
-        ...NoticeActorNameUser
+        ...NoticeHeadActorsUser
         ...NoticeUserCard
       }
     }
     ${NoticeActorAvatar.fragments.user}
-    ${NoticeActorName.fragments.user}
+    ${NoticeHeadActors.fragments.user}
     ${NoticeUserCard.fragments.follower}
     ${NoticeDate.fragments.notice}
   `,

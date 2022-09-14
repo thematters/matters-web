@@ -2,6 +2,8 @@ import Alert from '@reach/alert'
 import classNames from 'classnames'
 import { useEffect } from 'react'
 
+import { Button, IconClear16 } from '~/components'
+
 import { REMOVE_TOAST, TOAST_DURATION } from '~/common/enums'
 import { sleep } from '~/common/utils'
 
@@ -21,9 +23,11 @@ export interface ToastInstanceProps {
   color: 'green' | 'grey' | 'red' | 'black'
   content?: string | React.ReactNode
   subDescription?: string | React.ReactNode
+  clearable?: boolean
 
-  buttonPlacement?: 'top' | 'bottom' | 'center'
+  buttonPlacement?: 'top' | 'bottom' | 'center' | 'center-all'
   customButton?: React.ReactNode
+  switchContent?: React.ReactNode
   onClick?: (event?: React.MouseEvent<HTMLElement, MouseEvent>) => any
 }
 
@@ -31,8 +35,11 @@ export const ToastInstance = ({
   color,
   content,
   subDescription,
+  clearable = false,
   buttonPlacement = 'top',
   customButton,
+  switchContent,
+  onClick,
   ...restProps
 }: ToastInstanceProps) => {
   const mainClasses = classNames({
@@ -44,19 +51,35 @@ export const ToastInstance = ({
   const alertType = color === 'red' ? 'assertive' : 'polite'
 
   return (
-    <section className={mainClasses} {...restProps}>
-      <section>
-        <Alert type={alertType}>
-          {content && <p className="content">{content}</p>}
-          {subDescription && (
-            <p className="sub-description">{subDescription}</p>
-          )}
-        </Alert>
-      </section>
-
-      {customButton && (
-        <section className="custom-button">{customButton}</section>
+    <section>
+      {clearable && (
+        <div className="clearButton">
+          <Button size={['2rem', '2rem']} onClick={onClick}>
+            <IconClear16 size="lg" />
+          </Button>
+        </div>
       )}
+      <section className={mainClasses} {...restProps}>
+        <section>
+          <Alert type={alertType}>
+            {content && (
+              <p className="content">
+                {content}
+                {switchContent && (
+                  <span onClick={onClick}>{switchContent}</span>
+                )}
+              </p>
+            )}
+            {subDescription && (
+              <p className="sub-description">{subDescription}</p>
+            )}
+          </Alert>
+        </section>
+
+        {customButton && (
+          <section className="custom-button">{customButton}</section>
+        )}
+      </section>
       <style jsx>{styles}</style>
     </section>
   )
