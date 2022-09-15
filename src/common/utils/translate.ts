@@ -52,5 +52,7 @@ export const translate = ({ lang, ...props }: TranslateArgs): string => {
     translations = { zh_hant, zh_hans, en }
   }
 
-  return translations[lang || 'zh_hant'] || translations.zh_hant
+  const translation = translations[lang || 'zh_hant']
+
+  return typeof translation === 'string' ? translation : translations.zh_hant
 }

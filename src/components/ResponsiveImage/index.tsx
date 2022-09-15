@@ -21,7 +21,7 @@ const BaseResponsiveImage = ({
 }: ResponsiveImageProps) => {
   const [error, setError] = useState(false)
 
-  const isGIF = /gif/i.test(url)
+  // const isGIF = /gif/i.test(url)
 
   // Fallback to the raw `url` if manually disable or responsive image is failed to load
   if (disabled || error) {
@@ -30,17 +30,15 @@ const BaseResponsiveImage = ({
 
   return (
     <picture onError={() => setError(true)}>
-      {smUpSize && !isGIF && (
-        <source
-          type="image/webp"
-          media="(min-width: 768px)"
-          srcSet={toSizedImageURL({
-            url,
-            size: smUpSize,
-            ext: 'webp',
-          })}
-        />
-      )}
+      <source
+        type="image/webp"
+        media="(min-width: 768px)"
+        srcSet={toSizedImageURL({
+          url,
+          size: smUpSize,
+          ext: 'webp',
+        })}
+      />
       {smUpSize && (
         <source
           media="(min-width: 768px)"
@@ -48,16 +46,14 @@ const BaseResponsiveImage = ({
         />
       )}
 
-      {!isGIF && (
-        <source
-          type="image/webp"
-          srcSet={toSizedImageURL({
-            url,
-            size,
-            ext: 'webp',
-          })}
-        />
-      )}
+      <source
+        type="image/webp"
+        srcSet={toSizedImageURL({
+          url,
+          size,
+          ext: 'webp',
+        })}
+      />
 
       <img src={url} srcSet={toSizedImageURL({ url, size })} loading="lazy" />
     </picture>

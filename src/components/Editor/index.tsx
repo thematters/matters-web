@@ -18,6 +18,6 @@ export type SetTagsProps = {
 
 export type SetPublishISCNProps = {
   iscnPublish?: boolean | null
-  togglePublishISCN: (iscnPublish: boolean) => void // Promise<any>
+  togglePublishISCN: (iscnPublish: boolean) => void
   iscnPublishSaving: boolean
 }

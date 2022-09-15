@@ -57,6 +57,7 @@ const fragments = {
         node {
           ... on Circle {
             id
+            name
             owner {
               id
               isBlocking

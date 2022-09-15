@@ -1,17 +1,14 @@
 import gql from 'graphql-tag'
-import { Fragment } from 'react'
 
 import { Translate } from '~/components'
 
-import { numAbbr } from '~/common/utils'
-
 import NoticeActorAvatar from '../NoticeActorAvatar'
-import NoticeActorName from '../NoticeActorName'
 import NoticeArticleTitle from '../NoticeArticleTitle'
 import NoticeCircleName from '../NoticeCircleName'
 import NoticeComment from '../NoticeComment'
 import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
+import NoticeHeadActors from '../NoticeHeadActors'
 import NoticeTypeIcon from '../NoticeTypeIcon'
 import styles from '../styles.css'
 
@@ -24,6 +21,7 @@ const CommentNewReplyNotice = ({ notice }: { notice: NoticeType }) => {
 
   const actorsCount = notice.actors.length
   const isMultiActors = actorsCount > 1
+
   const replyCommentArticle =
     notice.reply?.node.__typename === 'Article' ? notice.reply.node : null
   const replyCommentCircle =
@@ -41,19 +39,8 @@ const CommentNewReplyNotice = ({ notice }: { notice: NoticeType }) => {
 
       <section className="content-wrap">
         <NoticeHead>
-          {notice.actors.slice(0, 2).map((actor, index) => (
-            <Fragment key={index}>
-              <NoticeActorName user={actor} />
-              {isMultiActors && index < 1 && <span>、</span>}
-            </Fragment>
-          ))}{' '}
-          {isMultiActors && (
-            <Translate
-              zh_hant={`等 ${numAbbr(actorsCount)} 人`}
-              zh_hans={`等 ${numAbbr(actorsCount)} 人`}
-              en={`etc. ${numAbbr(actorsCount)} users`}
-            />
-          )}
+          <NoticeHeadActors actors={notice.actors} />
+
           {replyCommentArticle && (
             <>
               <Translate
@@ -70,7 +57,7 @@ const CommentNewReplyNotice = ({ notice }: { notice: NoticeType }) => {
               <Translate
                 zh_hant="回覆了你在圍爐 "
                 zh_hans="回复了你在围炉 "
-                en=" replied to your response on "
+                en=" replied to your discussion on "
               />
               <NoticeCircleName circle={replyCommentCircle} />
               <Translate zh_hant=" 中的發言" zh_hans=" 中的发言" en="" />
@@ -104,7 +91,7 @@ CommentNewReplyNotice.fragments = {
       ...NoticeDate
       actors {
         ...NoticeActorAvatarUser
-        ...NoticeActorNameUser
+        ...NoticeHeadActorsUser
       }
       comment: target {
         ...NoticeComment
@@ -122,7 +109,7 @@ CommentNewReplyNotice.fragments = {
       }
     }
     ${NoticeActorAvatar.fragments.user}
-    ${NoticeActorName.fragments.user}
+    ${NoticeHeadActors.fragments.user}
     ${NoticeArticleTitle.fragments.article}
     ${NoticeCircleName.fragments.circle}
     ${NoticeComment.fragments.comment}

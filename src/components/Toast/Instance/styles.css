@@ -1,4 +1,5 @@
 .toast {
+  position: relative;
   padding: var(--spacing-x-tight) var(--spacing-base);
   margin: 0 var(--spacing-base) var(--spacing-base);
   font-size: var(--font-size-sm);
@@ -18,6 +19,10 @@
 
   &.center {
     @mixin flex-center-space-between;
+  }
+
+  &.center-all {
+    @mixin flex-center-all;
   }
 
   &.center-x {
@@ -59,6 +64,18 @@
 .red {
   color: var(--color-white);
   background: var(--color-red);
+}
+
+.black {
+  color: var(--color-white);
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.clearButton {
+  @mixin flex-center-end;
+
+  margin: 0 var(--spacing-base);
+  color: black;
 }
 
 @keyframes toastFadeIn {

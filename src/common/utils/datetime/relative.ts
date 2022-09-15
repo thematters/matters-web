@@ -11,7 +11,7 @@ import absolute from './absolute'
 
 const DIFFS = {
   zh_hant: {
-    justNow: '剛刚',
+    justNow: '剛剛',
     minuteAgo: ' 分钟前',
     minutesAgo: ' 分钟前',
     hourAgo: ' 小时前',

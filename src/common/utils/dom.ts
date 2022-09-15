@@ -33,11 +33,6 @@ const getAttributes = (name: string, str: string): string[] | [] => {
   return matches.filter((m) => !!m)
 }
 
-export const getLangFromRoot = (): HTMLLanguage => {
-  return (document.documentElement.getAttribute('lang') ||
-    'zh-Hant') as HTMLLanguage
-}
-
 export const dom = {
   $,
   $$,
@@ -45,5 +40,4 @@ export const dom = {
   getWindowWidth,
   offset,
   getAttributes,
-  getLangFromRoot,
 }

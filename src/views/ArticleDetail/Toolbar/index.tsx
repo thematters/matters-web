@@ -10,7 +10,7 @@ import DropdownActions, {
   DropdownActionsControls,
 } from '~/components/ArticleDigest/DropdownActions'
 
-import { stripAllPunct, toPath } from '~/common/utils'
+import { stripAllPunct, toLocale, toPath } from '~/common/utils'
 
 import AppreciationButton from '../AppreciationButton'
 import Appreciators from './Appreciators'
@@ -23,6 +23,8 @@ import { ToolbarArticlePublic } from './__generated__/ToolbarArticlePublic'
 
 export type ToolbarProps = {
   article: ToolbarArticlePublic & Partial<ToolbarArticlePrivate>
+  translated: boolean
+  translatedLanguage?: string | null
   privateFetched: boolean
   lock: boolean
 } & DropdownActionsControls
@@ -62,8 +64,21 @@ const fragments = {
   },
 }
 
-const Toolbar = ({ article, privateFetched, lock, ...props }: ToolbarProps) => {
+const Toolbar = ({
+  article,
+  translated,
+  translatedLanguage,
+  privateFetched,
+  lock,
+  ...props
+}: ToolbarProps) => {
   const isSmallUp = useResponsive('sm-up')
+
+  const path = toPath({ page: 'articleDetail', article })
+  const sharePath =
+    translated && translatedLanguage
+      ? `/${toLocale(translatedLanguage)}${path.href}`
+      : path.href
 
   return (
     <section className="toolbar">
@@ -89,12 +104,7 @@ const Toolbar = ({ article, privateFetched, lock, ...props }: ToolbarProps) => {
             iconSize="md-s"
             inCard={false}
             // title={makeTitle(article.title)}
-            path={
-              toPath({
-                page: 'articleDetail',
-                article,
-              }).href
-            }
+            path={sharePath}
             tags={article.tags
               ?.map(({ content }) => content)
               .join(' ')
@@ -108,6 +118,7 @@ const Toolbar = ({ article, privateFetched, lock, ...props }: ToolbarProps) => {
           size="md-s"
           inCard={false}
           hasShare={!isSmallUp}
+          sharePath={sharePath}
           hasExtend={!lock}
           {...props}
         />

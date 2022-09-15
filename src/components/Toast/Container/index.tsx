@@ -44,13 +44,32 @@ const Container = () => {
   useEventListener(ADD_TOAST, add)
   useEventListener(REMOVE_TOAST, remove)
 
+  const topToasts: any[] = []
+  const bottomToasts: any[] = []
+  toasts.forEach((t) => {
+    if (t.placement === 'bottom') {
+      bottomToasts.push(t)
+    } else {
+      topToasts.push(t)
+    }
+  })
   return (
     <section className="toast-container">
-      <Layout.FixedMain>
-        {toasts.map((toast) => (
-          <ToastWithEffect key={toast.id} {...toast} />
-        ))}
-      </Layout.FixedMain>
+      <section className="toast-top">
+        <Layout.FixedMain>
+          {topToasts.map((toast) => (
+            <ToastWithEffect key={toast.id} {...toast} />
+          ))}
+        </Layout.FixedMain>
+      </section>
+
+      <section className="toast-bottom">
+        <Layout.FixedMain>
+          {bottomToasts.map((toast) => (
+            <ToastWithEffect key={toast.id} {...toast} />
+          ))}
+        </Layout.FixedMain>
+      </section>
 
       <style jsx>{styles}</style>
     </section>

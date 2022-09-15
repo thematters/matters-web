@@ -41,10 +41,6 @@ const SettingsList = ({
   collectionCount,
   tagsCount,
 
-  // iscnPublish, // : draft.iscnPublish, // : boolean
-  // togglePublishISCN, // : (iscnPublish: boolean) => Promise<any>
-  // iscnPublishSaving,
-
   ...restProps
 }: SettingsListDialogProps) => {
   return (

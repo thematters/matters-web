@@ -3,7 +3,14 @@ import gql from 'graphql-tag'
 import { ThreadComment } from '~/components'
 
 export const BROADCAST_PUBLIC = gql`
-  query BroadcastPublic($name: String!, $after: String) {
+  query BroadcastPublic(
+    $name: String!
+    $before: String
+    $after: String
+    $first: first_Int_min_0 = 10
+    $includeAfter: Boolean
+    $includeBefore: Boolean
+  ) {
     circle(input: { name: $name }) {
       id
       owner {
@@ -11,7 +18,15 @@ export const BROADCAST_PUBLIC = gql`
       }
       # use alias to prevent overwriting <CircleProfile>'s
       circleIsMember: isMember @connection(key: "circleBroadcastIsMember")
-      broadcast(input: { first: 10, after: $after }) {
+      broadcast(
+        input: {
+          after: $after
+          before: $before
+          first: $first
+          includeAfter: $includeAfter
+          includeBefore: $includeBefore
+        }
+      ) {
         totalCount
         pageInfo {
           startCursor

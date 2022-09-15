@@ -41,6 +41,7 @@ import { DropdownActionsArticle } from './__generated__/DropdownActionsArticle'
 export interface DropdownActionsControls {
   icon?: React.ReactNode
   size?: IconSize
+  sharePath?: string
 
   /**
    * options to control visibility
@@ -257,7 +258,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
   }
 
   return (
-    <ShareDialog>
+    <ShareDialog path={props.sharePath}>
       {({ openDialog: openShareDialog }) => (
         <FingerprintDialog article={article}>
           {({ openDialog: openFingerprintDialog }) => (

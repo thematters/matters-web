@@ -10,6 +10,7 @@ import {
   TextIconProps,
 } from '~/components'
 
+import { TAG_CONTENT_CLAMP_LENGTH } from '~/common/enums'
 import { toPath } from '~/common/utils'
 
 import styles from './styles.css'
@@ -25,7 +26,7 @@ interface TagProps {
   disabled?: boolean // disable default <a>
   hasCount?: boolean
   hasClose?: boolean
-  hasLengthLimit?: boolean
+  canClamp?: boolean
   removeTag?: (tag: DigestTag) => void
   onClick?: () => void
 }
@@ -63,7 +64,7 @@ export const Tag = ({
   disabled,
   hasCount = true,
   hasClose,
-  hasLengthLimit = false,
+  canClamp = false,
   removeTag,
   onClick,
 }: TagProps) => {
@@ -73,8 +74,12 @@ export const Tag = ({
     active,
     clickable: !!onClick,
     disabled: !!disabled && !onClick,
-    limit: hasLengthLimit,
   })
+
+  const tagName =
+    canClamp && tag.content.length > TAG_CONTENT_CLAMP_LENGTH
+      ? `${tag.content.slice(0, TAG_CONTENT_CLAMP_LENGTH)}⋯`
+      : tag.content
 
   const path = toPath({
     page: 'tagDetail',
@@ -149,9 +154,7 @@ export const Tag = ({
         size={textIconProps.size}
         allowUserSelect
       >
-        <span className="name">
-          {tag.__typename === 'Tag' ? tag.content : tag.content}
-        </span>
+        <span className="name">{tagName}</span>
       </TextIcon>
 
       {hasClose && (
@@ -165,9 +168,9 @@ export const Tag = ({
         </button>
       )}
 
-      {hasCount && type === 'list' && tag?.numArticles && (
+      {hasCount && type === 'list' && tag?.numArticles ? (
         <span className="count">{tag.numArticles}</span>
-      )}
+      ) : null}
 
       <style jsx>{styles}</style>
     </>

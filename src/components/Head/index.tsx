@@ -3,13 +3,15 @@ import { useContext } from 'react'
 
 import { LanguageContext, useRoute } from '~/components'
 
-import { langConvert, translate, TranslateArgs } from '~/common/utils'
+import { toLocale, translate, TranslateArgs } from '~/common/utils'
 
 import IMAGE_APPLE_TOUCH_ICON from '@/public/static/apple-touch-icon.png'
 import IMAGE_FAVICON_16 from '@/public/static/favicon-16x16.png'
 import IMAGE_FAVICON_32 from '@/public/static/favicon-32x32.png'
 import IMAGE_FAVICON_64 from '@/public/static/favicon-64x64.png'
 import IMAGE_INTRO from '@/public/static/images/intro.jpg'
+
+import { UserLanguage } from '@/__generated__/globalTypes'
 
 const siteDomain =
   process.env.NEXT_PUBLIC_SITE_DOMAIN_CANONICAL || // for web-next, set this different as serving domain; suggested canonical domain ('matters.news') to robots
@@ -26,7 +28,7 @@ interface HeadProps {
   path?: string
   image?: string | null
   noSuffix?: boolean
-  paymentPointer?: string
+  paymentPointer?: string | null
   jsonLdData?: object | null
 }
 
@@ -51,6 +53,12 @@ export const Head: React.FC<HeadProps> = (props) => {
       : `https://${siteDomain}${router.asPath || '/'}`,
     image: props.image || IMAGE_INTRO.src,
   }
+
+  const i18nUrl = (language: string) => {
+    return props.path
+      ? `https://${siteDomain}/${language}${props.path}`
+      : `https://${siteDomain}/${language}${router.asPath || '/'}`
+  }
   const canonicalUrl = head.url?.split('#')[0].split('?')[0]
 
   return (
@@ -59,7 +67,7 @@ export const Head: React.FC<HeadProps> = (props) => {
       <meta
         name="viewport"
         key="viewport"
-        content="width=device-width, viewport-fit=cover"
+        content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
       />
       <title>{head.title}</title>
       <meta name="description" key="description" content={head.description} />
@@ -117,26 +125,6 @@ export const Head: React.FC<HeadProps> = (props) => {
         key="og:description"
         content={head.description}
       />
-      <meta
-        property="og:locale"
-        key="og:locale"
-        content={langConvert.sys2Og(lang)}
-      />
-      <meta
-        property="og:locale:alternate"
-        key="og:locale:zh_HK"
-        content="zh_HK"
-      />
-      <meta
-        property="og:locale:alternate"
-        key="og:locale:zh_TW"
-        content="zh_TW"
-      />
-      <meta
-        property="og:locale:alternate"
-        key="og:locale:zh_CN"
-        content="zh_CN"
-      />
       <meta name="twitter:url" key="twitter:url" content={head.url} />
       <meta
         name="twitter:card"
@@ -150,6 +138,32 @@ export const Head: React.FC<HeadProps> = (props) => {
         content={head.description}
       />
       <meta name="twitter:image" key="twitter:image" content={head.image} />
+
+      {/* i18n */}
+      <link
+        rel="alternate"
+        hrefLang={toLocale(UserLanguage.en)}
+        href={i18nUrl(toLocale(UserLanguage.en))}
+        key={`alternate:${UserLanguage.en}`}
+      />
+      <link
+        rel="alternate"
+        hrefLang={toLocale(UserLanguage.zh_hans)}
+        href={i18nUrl(toLocale(UserLanguage.zh_hans))}
+        key={`alternate:${UserLanguage.zh_hans}`}
+      />
+      <link
+        rel="alternate"
+        hrefLang={toLocale(UserLanguage.zh_hant)}
+        href={i18nUrl(toLocale(UserLanguage.zh_hant))}
+        key={`alternate:${UserLanguage.zh_hant}`}
+      />
+      <link
+        rel="alternate"
+        hrefLang="x-default"
+        href={head.url}
+        key={`alternate:x-default`}
+      />
 
       {/* PWA */}
       <link

@@ -22,7 +22,7 @@ const TranslationButton: FC<{
     if (k === originalLanguage) originalLang.zh_hans = `（${v}）`
   })
   Object.entries(CONTENT_LANG_TEXT_MAP.en).forEach(([k, v]) => {
-    if (k === originalLanguage) originalLang.en = `（${v}）`
+    if (k === originalLanguage) originalLang.en = ` (${v})`
   })
 
   return (
@@ -47,7 +47,7 @@ const TranslationButton: FC<{
             en={`Original${originalLang.en}`}
           />
         ) : (
-          <Translate zh_hant="翻譯" zh_hans="翻译" en="Translation" />
+          <Translate zh_hant="翻譯" zh_hans="翻译" en="Translate" />
         )}
       </TextIcon>
     </Button>

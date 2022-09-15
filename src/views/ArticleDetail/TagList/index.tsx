@@ -13,7 +13,6 @@ const fragments = {
     fragment TagListArticle on Article {
       tags {
         ...DigestTag
-        selected(input: { mediaHash: $mediaHash })
       }
     }
     ${Tag.fragments.tag}
@@ -33,14 +32,14 @@ const TagList = ({ article }: { article: TagListArticle }) => {
             <Tag
               tag={tag}
               type="inline"
-              active={tag.selected}
+              active
               onClick={() => {
                 analytics.trackEvent('click_button', {
                   type: 'click_tag',
                   pageType: 'article_detail',
                 })
               }}
-              hasLengthLimit
+              canClamp
             />
             <TagExposureTracker location={i} id={tag.id} horizontal />
           </li>

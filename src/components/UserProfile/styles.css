@@ -50,14 +50,6 @@ header {
     line-height: 1;
     color: var(--color-grey-dark);
   }
-
-  & .description {
-    position: relative;
-    margin-top: var(--spacing-base);
-    font-size: var(--font-size-md);
-    color: var(--color-grey-darker);
-    white-space: pre-wrap;
-  }
 }
 
 footer {

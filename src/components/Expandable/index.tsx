@@ -1,66 +1,139 @@
 import VisuallyHidden from '@reach/visually-hidden'
-import React, { useEffect, useRef, useState } from 'react'
+import classNames from 'classnames'
+import React, { ReactElement, useEffect, useRef, useState } from 'react'
+import TextTruncate from 'react-text-truncate'
 
-import { Button, IconExpand16, TextIcon, Translate } from '~/components'
+import { Button, IconArrowUp16, TextIcon, Translate } from '~/components'
+
+import { stripHtml } from '~/common/utils/text'
 
 import styles from './styles.css'
 
+type CollapseTextColor =
+  | 'black'
+  | 'grey'
+  | 'grey-light'
+  | 'grey-darker'
+  | 'grey-dark'
+  | 'white'
+
 interface ExpandableProps {
+  children: ReactElement
+  content: string | null
   limit?: number
   buffer?: number
+  color?: CollapseTextColor
+  size?: 'sm' | 'md-s' | 'md'
+  spacingTop?: 'base'
+  textIndent?: boolean
 }
 
-export const Expandable: React.FC<React.PropsWithChildren<ExpandableProps>> = ({
+export const Expandable: React.FC<ExpandableProps> = ({
   children,
+  content,
   limit = 3,
   buffer = 0,
+  color,
+  size,
+  spacingTop,
+  textIndent = false,
 }) => {
   const [expandable, setExpandable] = useState(false)
   const [expand, setExpand] = useState(true)
-
+  const [truncated, setTruncated] = useState(false)
   const node: React.RefObject<HTMLParagraphElement> | null = useRef(null)
+  const collapseContent = stripHtml(
+    content && content.replace(/\r?\n|\r|\s\s/g, ''),
+    ''
+  )
+  const contentClasses = classNames({
+    expandable: true,
+    [`${color}`]: !!color,
+    [`size-${size}`]: !!size,
+    [`spacing-top-${spacingTop}`]: !!spacingTop,
+    [`textIndent`]: textIndent,
+  })
 
   useEffect(() => {
-    if (node?.current) {
-      const height = node.current.firstElementChild?.clientHeight || 0
-      const lineHeight = window
-        .getComputedStyle(node.current, null)
-        .getPropertyValue('line-height')
-      const lines = Math.max(Math.ceil(height / parseInt(lineHeight, 10)), 0)
+    setExpandable(false)
+    setExpand(true)
+    setTruncated(false)
+    setTimeout(() => {
+      if (node?.current) {
+        const height = node.current.firstElementChild?.clientHeight || 0
+        const lineHeight = window
+          .getComputedStyle(node.current, null)
+          .getPropertyValue('line-height')
+        const lines = Math.max(Math.ceil(height / parseInt(lineHeight, 10)), 0)
 
-      if (lines > limit + buffer) {
-        setExpandable(true)
-        setExpand(false)
+        if (lines > limit + buffer) {
+          setExpandable(true)
+          setExpand(false)
+        }
       }
-    }
-  }, [])
+    })
+  }, [content])
 
   return (
-    <section
-      className="expandable"
-      style={{
-        WebkitLineClamp: expand ? 'unset' : limit,
-      }}
-    >
+    <section className={contentClasses}>
       <VisuallyHidden>
         <div>{children}</div>
       </VisuallyHidden>
       <div ref={node}>
-        <div>{children}</div>
+        {(!expandable || (expandable && expand)) && <div>{children}</div>}
       </div>
-
+      {expandable && expand && (
+        <section className="collapseWrapper">
+          <Button
+            spacing={['xxtight', 'xtight']}
+            bgColor="grey-lighter"
+            textColor="grey"
+            onClick={() => {
+              setExpand(!expand)
+            }}
+          >
+            <TextIcon icon={<IconArrowUp16 />}>
+              <Translate zh_hans="收起" zh_hant="收合" en="collapse" />
+            </TextIcon>
+          </Button>
+        </section>
+      )}
       {expandable && !expand && (
-        <Button
-          spacing={['xxtight', 'xtight']}
-          bgColor="grey-lighter"
-          onClick={() => {
-            setExpand(true)
-          }}
-        >
-          <TextIcon icon={<IconExpand16 size="xs" />} color="grey">
-            <Translate id="expand" />
-          </TextIcon>
-        </Button>
+        <p>
+          <TextTruncate
+            line={limit}
+            element="span"
+            truncateText=""
+            text={collapseContent}
+            onTruncated={() => {
+              setTruncated(true)
+            }}
+            textTruncateChild={
+              <span
+                onClick={(e) => {
+                  setExpand(!expand)
+                  e.stopPropagation()
+                }}
+                className="expandButton"
+              >
+                ...
+                <Translate id="expand" />
+              </span>
+            }
+          />
+          {!truncated && (
+            <span
+              onClick={(e) => {
+                setExpand(!expand)
+                e.stopPropagation()
+              }}
+              className="expandButton"
+            >
+              ...
+              <Translate id="expand" />
+            </span>
+          )}
+        </p>
       )}
       <style jsx>{styles}</style>
     </section>

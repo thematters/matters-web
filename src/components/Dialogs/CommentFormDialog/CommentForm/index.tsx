@@ -110,6 +110,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
               <Translate
                 zh_hant={`${COMMENT_TYPE_TEXT.zh_hant[type]}已送出`}
                 zh_hans={`${COMMENT_TYPE_TEXT.zh_hans[type]}已送出`}
+                en={`${COMMENT_TYPE_TEXT.en[type]} sent`}
               />
             ),
             buttonPlacement: 'center',
@@ -150,7 +151,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
             type="submit"
             form={formId}
             disabled={isSubmitting || !isValid}
-            text={<Translate zh_hant="送出" zh_hans="送出" />}
+            text={<Translate zh_hant="送出" zh_hans="送出" en="Send" />}
             loading={isSubmitting}
           />
         }

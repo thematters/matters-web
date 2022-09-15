@@ -1,13 +1,56 @@
 .expandable {
   position: relative;
+  white-space: pre-wrap;
 
-  @mixin line-clamp;
-
-  -webkit-line-clamp: 2;
-
-  & :global(> button) {
-    position: absolute;
-    right: 0;
-    bottom: 0;
+  & .expandButton {
+    color: var(--color-grey);
+    cursor: pointer;
   }
+
+  & .collapseWrapper {
+    @mixin flex-center-end;
+  }
+}
+
+/* color */
+.black {
+  color: var(--color-black);
+}
+
+.grey {
+  color: var(--color-grey);
+}
+
+.grey-light {
+  color: var(--color-grey-light);
+}
+
+.grey-dark {
+  color: var(--color-grey-dark);
+}
+
+.grey-darker {
+  color: var(--color-grey-darker);
+}
+
+/* size */
+.size-sm {
+  font-size: var(--font-size-sm);
+}
+
+.size-md-s {
+  font-size: var(--font-size-md-s);
+}
+
+.size-md {
+  font-size: var(--font-size-md);
+}
+
+/* space top */
+.spacing-top-base {
+  margin-top: var(--spacing-base);
+}
+
+.textIndent {
+  text-indent: 2rem;
 }

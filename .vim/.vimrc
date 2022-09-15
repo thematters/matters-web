@@ -16,7 +16,6 @@ Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'jparise/vim-graphql'
 Plug 'sbdchd/neoformat'
-Plug 'tpope/vim-cucumber'
 
 call plug#end()
 
