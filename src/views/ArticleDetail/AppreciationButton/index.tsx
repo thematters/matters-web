@@ -259,7 +259,7 @@ const AppreciationButton = ({
                   <Translate
                     zh_hant="12:00 或 00:00 就可以再次送出 Super Like 啦！"
                     zh_hans="12:00 或 00:00 就可以再次送出 Super Like 啦！"
-                    en="you can send another Super Like after 12:00 or 00:00"
+                    en="You can send another Super Like after 12:00 or 00:00"
                   />
                 ),
                 customButton: <ViewSuperLikeButton />,

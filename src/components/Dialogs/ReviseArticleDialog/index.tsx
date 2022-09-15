@@ -55,7 +55,7 @@ export const ReviseArticleDialog = ({ children, revisionCountLeft }: Props) => {
           </p>
           <p>
             <b>
-              <Translate zh_hant="你還可以修訂" zh_hans="你还可以修订" en=" " />
+              <Translate zh_hant="你還可以修訂" zh_hans="你还可以修订" en="" />
               <span className="count"> {revisionCountLeft} </span>
               <Translate
                 zh_hant="版"

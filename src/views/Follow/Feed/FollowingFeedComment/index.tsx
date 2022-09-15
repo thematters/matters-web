@@ -23,7 +23,7 @@ const FollowingFeedComment: React.FC<FollowingFeedCommentProps> & {
       {header}
 
       <section className="content">
-        <Expandable limit={3}>
+        <Expandable content={comment.content} limit={3} size="md-s">
           <Comment.Content
             comment={comment}
             type="circleBroadcast"

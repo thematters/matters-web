@@ -71,7 +71,7 @@ const SideNav = () => {
         />
 
         <NavListItem
-          name={<Translate id="follow" />}
+          name={<Translate zh_hant="追蹤" zh_hans="追踪" en="Following" />}
           icon={<UnreadIcon.Follow />}
           activeIcon={<UnreadIcon.Follow active />}
           active={isInFollow}
@@ -81,7 +81,9 @@ const SideNav = () => {
 
         {viewer.isAuthed && (
           <NavListItem
-            name={<Translate id="notification" />}
+            name={
+              <Translate zh_hant="通知" zh_hans="通知" en="Notifications" />
+            }
             icon={<UnreadIcon.Notification />}
             activeIcon={<UnreadIcon.Notification active />}
             active={isInNotification}
