@@ -1,3 +1,5 @@
+import classNames from 'classnames'
+
 import { Dialog, ShareButtons, Translate } from '~/components'
 
 import { TextId } from '~/common/enums'
@@ -41,15 +43,31 @@ const ShareDialogContent: React.FC<ShareDialogContentProps> = ({
       />
     )
   }
+  const containerClasses = classNames({
+    'socials-container': true,
+    'spacing-bottom': !footerButtons,
+  })
   return (
     <>
-      <Dialog.Header
-        title={headerTitle || 'share'}
-        closeDialog={closeDialog}
-        leftButton={
-          <Dialog.Header.CloseButton closeDialog={closeDialog} textId="close" />
-        }
-      />
+      {headerTitle ? (
+        <Dialog.Header
+          title={headerTitle}
+          closeDialog={closeDialog}
+          closeTextId="close"
+          mode="inner"
+        />
+      ) : (
+        <Dialog.Header
+          title={'share'}
+          closeDialog={closeDialog}
+          leftButton={
+            <Dialog.Header.CloseButton
+              closeDialog={closeDialog}
+              textId="close"
+            />
+          }
+        />
+      )}
 
       <Dialog.Content>
         {description && (
@@ -60,7 +78,7 @@ const ShareDialogContent: React.FC<ShareDialogContentProps> = ({
           </section>
         )}
 
-        <section className="socials-container">
+        <section className={containerClasses}>
           <section className="left">
             <ShareButtons.LINE title={shareTitle} link={shareLink} />
             <ShareButtons.WhatsApp title={shareTitle} link={shareLink} />
@@ -83,6 +101,8 @@ const ShareDialogContent: React.FC<ShareDialogContentProps> = ({
           <style jsx>{styles}</style>
         </section>
       </Dialog.Content>
+
+      {footerButtons && <Dialog.Footer>{footerButtons}</Dialog.Footer>}
     </>
   )
 }
