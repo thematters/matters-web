@@ -364,7 +364,8 @@ const ArticleDetail = () => {
       variables: {
         mediaHash,
         language: locale ? toUserLanguage(locale) : UserLanguage.zh_hant,
-        includeTranslation: !!locale,
+        // includeTranslation: !!locale,
+        includeTranslation: false,
       },
       skip: !isQueryByHash,
     }
@@ -375,7 +376,8 @@ const ArticleDetail = () => {
       variables: {
         id: toGlobalId({ type: 'Article', id: articleId }),
         language: locale ? toUserLanguage(locale) : UserLanguage.zh_hant,
-        includeTranslation: !!locale,
+        // includeTranslation: !!locale,
+        includeTranslation: false,
       },
       skip: isQueryByHash,
     }
