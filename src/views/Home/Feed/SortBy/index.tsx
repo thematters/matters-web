@@ -39,13 +39,13 @@ const SortBy: React.FC<SortByProps> = ({ feedType, setFeedType }) => {
   return (
     <Tabs
       sticky
-    // side={
-    //   viewer.isAuthed && !isConnectedWallet && isSmallUp ? (
-    //     <ConnectWalletButton />
-    //   ) : (
-    //     <Help hasTime />
-    //   )
-    // }
+      // side={
+      //   viewer.isAuthed && !isConnectedWallet && isSmallUp ? (
+      //     <ConnectWalletButton />
+      //   ) : (
+      //     <Help hasTime />
+      //   )
+      // }
     >
       <div className="container">
         <section className="filters">
