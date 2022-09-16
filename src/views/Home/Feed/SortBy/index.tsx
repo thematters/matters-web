@@ -11,6 +11,7 @@ import {
   IconPin16,
   IconSettings32,
   Menu,
+  Slides,
   Tabs,
   TextIcon,
   Translate,
@@ -38,13 +39,13 @@ const SortBy: React.FC<SortByProps> = ({ feedType, setFeedType }) => {
   return (
     <Tabs
       sticky
-      // side={
-      //   viewer.isAuthed && !isConnectedWallet && isSmallUp ? (
-      //     <ConnectWalletButton />
-      //   ) : (
-      //     <Help hasTime />
-      //   )
-      // }
+    // side={
+    //   viewer.isAuthed && !isConnectedWallet && isSmallUp ? (
+    //     <ConnectWalletButton />
+    //   ) : (
+    //     <Help hasTime />
+    //   )
+    // }
     >
       <div className="container">
         <section className="filters">
@@ -94,8 +95,8 @@ const SortBy: React.FC<SortByProps> = ({ feedType, setFeedType }) => {
           </Dropdown>
         </section>
         <section className="tag-list">
-          <ul>
-            <li>
+          <Slides header={null}>
+            <Slides.Item size="auto">
               <button type="button" className="button active">
                 <TextIcon
                   icon={<IconPin16 size="sm" />}
@@ -105,48 +106,48 @@ const SortBy: React.FC<SortByProps> = ({ feedType, setFeedType }) => {
                   全部
                 </TextIcon>
               </button>
-            </li>
-            <li>
+            </Slides.Item>
+            <Slides.Item size="auto">
               <button type="button" className="button">
                 Web3
               </button>
-            </li>
-            <li>
+            </Slides.Item>
+            <Slides.Item size="auto">
               <button type="button" className="button">
                 NFT
               </button>
-            </li>
-            <li>
+            </Slides.Item>
+            <Slides.Item size="auto">
               <button type="button" className="button">
                 公共議題
               </button>
-            </li>
-            <li>
+            </Slides.Item>
+            <Slides.Item size="auto">
               <button type="button" className="button">
                 社區
               </button>
-            </li>
-            <li>
+            </Slides.Item>
+            <Slides.Item size="auto">
               <button type="button" className="button">
                 寫作
               </button>
-            </li>
-            <li>
+            </Slides.Item>
+            <Slides.Item size="auto">
               <button type="button" className="button">
                 繪畫
               </button>
-            </li>
-            <li>
+            </Slides.Item>
+            <Slides.Item size="auto">
               <button type="button" className="button">
                 區塊鏈
               </button>
-            </li>
-            <li>
+            </Slides.Item>
+            <Slides.Item size="auto">
               <button type="button" className="button">
                 生成藝術
               </button>
-            </li>
-            <li>
+            </Slides.Item>
+            <Slides.Item size="auto">
               <button type="button" className="button setting">
                 <TextIcon
                   icon={<IconSettings32 size="md" />}
@@ -154,8 +155,8 @@ const SortBy: React.FC<SortByProps> = ({ feedType, setFeedType }) => {
                   spacing={0}
                 />
               </button>
-            </li>
-          </ul>
+            </Slides.Item>
+          </Slides>
         </section>
       </div>
       <style jsx>{styles}</style>

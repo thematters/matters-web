@@ -37,6 +37,10 @@
   background: var(--color-grey-lighter);
 }
 
+.size-auto {
+  width: auto;
+}
+
 .size-sm {
   width: 18rem;
 }
