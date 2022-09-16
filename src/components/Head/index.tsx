@@ -3,7 +3,11 @@ import { useContext } from 'react'
 
 import { LanguageContext, useRoute } from '~/components'
 
-import { toLocale, translate, TranslateArgs } from '~/common/utils'
+import {
+  // toLocale,
+  translate,
+  TranslateArgs,
+} from '~/common/utils'
 
 import IMAGE_APPLE_TOUCH_ICON from '@/public/static/apple-touch-icon.png'
 import IMAGE_FAVICON_16 from '@/public/static/favicon-16x16.png'
@@ -11,7 +15,7 @@ import IMAGE_FAVICON_32 from '@/public/static/favicon-32x32.png'
 import IMAGE_FAVICON_64 from '@/public/static/favicon-64x64.png'
 import IMAGE_INTRO from '@/public/static/images/intro.jpg'
 
-import { UserLanguage } from '@/__generated__/globalTypes'
+// import { UserLanguage } from '@/__generated__/globalTypes'
 
 const siteDomain =
   process.env.NEXT_PUBLIC_SITE_DOMAIN_CANONICAL || // for web-next, set this different as serving domain; suggested canonical domain ('matters.news') to robots
@@ -54,11 +58,11 @@ export const Head: React.FC<HeadProps> = (props) => {
     image: props.image || IMAGE_INTRO.src,
   }
 
-  const i18nUrl = (language: string) => {
-    return props.path
-      ? `https://${siteDomain}/${language}${props.path}`
-      : `https://${siteDomain}/${language}${router.asPath || '/'}`
-  }
+  // const i18nUrl = (language: string) => {
+  //   return props.path
+  //     ? `https://${siteDomain}/${language}${props.path}`
+  //     : `https://${siteDomain}/${language}${router.asPath || '/'}`
+  // }
   const canonicalUrl = head.url?.split('#')[0].split('?')[0]
 
   return (
@@ -140,7 +144,7 @@ export const Head: React.FC<HeadProps> = (props) => {
       <meta name="twitter:image" key="twitter:image" content={head.image} />
 
       {/* i18n */}
-      <link
+      {/* <link
         rel="alternate"
         hrefLang={toLocale(UserLanguage.en)}
         href={i18nUrl(toLocale(UserLanguage.en))}
@@ -163,7 +167,7 @@ export const Head: React.FC<HeadProps> = (props) => {
         hrefLang="x-default"
         href={head.url}
         key={`alternate:x-default`}
-      />
+      /> */}
 
       {/* PWA */}
       <link
