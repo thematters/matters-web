@@ -167,7 +167,7 @@ export const toPath = (
       }
     }
     case 'commentDetail': {
-      const { parentComment, id, type } = args.comment
+      const { parentComment, id, type } = args.comment || {}
       const fragment = parentComment?.id ? `${parentComment.id}-${id}` : id
 
       switch (type) {
