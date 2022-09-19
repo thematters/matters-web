@@ -49,6 +49,11 @@ const CircleNewDiscussionComments = ({
     ...(replies || []),
     ...(mentions || []),
   ].filter(Boolean)[0]
+
+  if (!latestComment) {
+    return null
+  }
+
   const circleCommentPath = toPath({
     page: 'commentDetail',
     comment: latestComment,
