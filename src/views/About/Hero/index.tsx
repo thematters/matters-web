@@ -86,13 +86,13 @@ const Hero = () => {
                   <Translate
                     zh_hant="去中心化的"
                     zh_hans="去中心化的"
-                    en="The Next Decentralized"
+                    en="The Future of Web3 is"
                   />
                   <br />
                   <Translate
-                    zh_hant="寫作社群與內容生態"
-                    zh_hans="写作社群与内容生态"
-                    en="Content Ecosystem"
+                    zh_hant="創作社群與內容生態"
+                    zh_hans="创作社群与内容生态"
+                    en="at Matters.News"
                   />
                 </h2>
 

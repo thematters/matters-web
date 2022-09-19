@@ -3,15 +3,12 @@ import { Translate } from '~/components'
 import IMAGE_BERYL from '@/public/static/images/about/team-beryl.svg'
 import IMAGE_CHARLIE from '@/public/static/images/about/team-charlie.svg'
 import IMAGE_DOBBY from '@/public/static/images/about/team-dobby.svg'
-import IMAGE_ELK from '@/public/static/images/about/team-elk.svg'
 import IMAGE_EMILIE from '@/public/static/images/about/team-emilie.svg'
 import IMAGE_GUO from '@/public/static/images/about/team-guo.svg'
 import IMAGE_JAZZY from '@/public/static/images/about/team-jazzy.svg'
 import IMAGE_JIEPING from '@/public/static/images/about/team-jieping.svg'
-import IMAGE_LEE from '@/public/static/images/about/team-lee.svg'
 import IMAGE_ROBERT from '@/public/static/images/about/team-robert.svg'
 import IMAGE_TOMAS from '@/public/static/images/about/team-tomas.svg'
-import IMAGE_XIA from '@/public/static/images/about/team-xia.svg'
 import IMAGE_XINAN from '@/public/static/images/about/team-xinan.svg'
 import IMAGE_XY from '@/public/static/images/about/team-xy.svg'
 import IMAGE_YH from '@/public/static/images/about/team-yh.svg'
@@ -61,15 +58,25 @@ const CREW = [
       },
     ],
   },
-
   {
-    group: <Translate zh_hant="數據" zh_hans="数据" en="Data" />,
-    type: 'data',
+    group: (
+      <Translate
+        zh_hant="品牌 & 商務"
+        zh_hans="品牌 & 商务"
+        en="Brand & Business"
+      />
+    ),
+    type: 'brandBusiness',
     people: [
       {
-        avatar: IMAGE_XIA,
-        title: 'Data Scientist',
-        name: 'Xia',
+        avatar: IMAGE_EMILIE,
+        title: 'Brand',
+        name: 'Emilie Hsu',
+      },
+      {
+        avatar: IMAGE_YX,
+        title: 'Business Development',
+        name: '育軒',
       },
     ],
   },
@@ -89,11 +96,6 @@ const CREW = [
         name: 'Tomas Cheng',
       },
       {
-        avatar: IMAGE_ELK,
-        title: 'Front-end Engineer',
-        name: 'Elk Leung',
-      },
-      {
         avatar: IMAGE_JAZZY,
         title: 'Full Stack Engineer',
         name: 'Jazzy Liang',
@@ -110,11 +112,6 @@ const CREW = [
     group: <Translate zh_hant="運營" zh_hans="运营" en="Content Operation" />,
     type: 'community',
     people: [
-      {
-        avatar: IMAGE_LEE,
-        title: 'Community Head',
-        name: 'Lee',
-      },
       {
         avatar: IMAGE_YS,
         title: 'Matters.News Community',
@@ -138,31 +135,14 @@ const CREW = [
       },
       {
         avatar: IMAGE_XY,
-        title: 'Event Facilitator',
+        title: (
+          <Translate
+            zh_hant="在場獎學金"
+            zh_hans="在场奖学金"
+            en="Frontline Award"
+          />
+        ),
         name: 'XY',
-      },
-    ],
-  },
-
-  {
-    group: (
-      <Translate
-        zh_hant="品牌 & 商務"
-        zh_hans="品牌 & 商务"
-        en="Brand & Business"
-      />
-    ),
-    type: 'brandBusiness',
-    people: [
-      {
-        avatar: IMAGE_EMILIE,
-        title: 'Brand',
-        name: 'Emilie Hsu',
-      },
-      {
-        avatar: IMAGE_YX,
-        title: 'Business Development',
-        name: '育軒',
       },
     ],
   },
