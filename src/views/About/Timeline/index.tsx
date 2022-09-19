@@ -31,17 +31,6 @@ const Timeline = () => {
             </li>
 
             <li>
-              <time>Mar, 2019</time>
-              <p className="event">
-                <Translate
-                  zh_hant="網站 Beta 版上線"
-                  zh_hans="网站 Beta 版上线"
-                  en="Beta version is now available"
-                />
-              </p>
-            </li>
-
-            <li>
               <time>Jun, 2019</time>
               <p className="event">
                 <Translate
@@ -62,20 +51,6 @@ const Timeline = () => {
                 />
               </p>
             </li>
-
-            <li>
-              <time>Mar, 2020</time>
-              <p className="event">
-                <Translate
-                  zh_hant="網站 2.0 上線"
-                  zh_hans="网站 2.0 上线"
-                  en="Upgrade to Website 2.0"
-                />
-              </p>
-            </li>
-          </ul>
-
-          <ul>
             <li>
               <time>May, 2020</time>
               <p className="event">
@@ -86,7 +61,9 @@ const Timeline = () => {
                 />
               </p>
             </li>
+          </ul>
 
+          <ul>
             <li>
               <time>Mar, 2021</time>
               <p className="event">
@@ -132,12 +109,12 @@ const Timeline = () => {
             </li>
 
             <li>
-              <time>Soon, 2022</time>
-              <p className="event">
+              <time className="coming-time">Soon, 2022</time>
+              <p className="event coming-event">
                 <Translate
                   zh_hant="多元加密貨幣交易上線"
                   zh_hans="多元加密货币交易上线"
-                  en="Payment with crypto currency"
+                  en="Support with fiat/crypto currencies"
                 />
               </p>
             </li>

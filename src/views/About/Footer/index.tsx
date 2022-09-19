@@ -224,29 +224,6 @@ const Footer = () => {
                   </ul>
                 </div>
               </section>
-              <section className="moreProducts">
-                <h2>
-                  <Translate
-                    zh_hant="更多產品"
-                    zh_hans="更多产品"
-                    en="More Products"
-                  />
-                </h2>
-
-                <div className="products">
-                  <a href="https://traveloggers.matters.news/" target="_blank">
-                    <TextIcon color="grey" size="md">
-                      Traveloggers
-                    </TextIcon>
-                  </a>
-
-                  <a href="https://logbook.matters.news/" target="_blank">
-                    <TextIcon color="grey" size="md">
-                      Logbook
-                    </TextIcon>
-                  </a>
-                </div>
-              </section>
               <section className="subscribeUs">
                 <h2>
                   <Translate
