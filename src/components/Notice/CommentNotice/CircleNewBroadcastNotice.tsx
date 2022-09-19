@@ -28,6 +28,11 @@ const CircleNewBroadcastNotice = ({ notice }: { notice: NoticeType }) => {
       : undefined
 
   const latestComment = notice.comment
+
+  if (!latestComment) {
+    return null
+  }
+
   const circleCommentPath = toPath({
     page: 'commentDetail',
     comment: latestComment,
