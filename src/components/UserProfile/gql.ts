@@ -23,6 +23,7 @@ const fragments = {
           description
           profileCover
           ethAddress
+          ipnsKey
         }
         following {
           users(input: { first: 0 }) {
