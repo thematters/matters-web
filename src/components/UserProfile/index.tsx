@@ -6,10 +6,10 @@ import {
   Cover,
   Error,
   Expandable,
-  FingerprintDialog,
   FollowUserButton,
   IconRss32,
   Layout,
+  RssFeedDialog,
   Spinner,
   Throw404,
   Tooltip,
@@ -40,55 +40,28 @@ import { LogbookDialog } from './LogbookDialog'
 import styles from './styles.css'
 import WalletAddress from './WalletAddress'
 
-import { ArticleAccessType } from '@/__generated__/globalTypes'
-import { FingerprintArticle } from '~/components/Dialogs/FingerprintDialog/__generated__/FingerprintArticle'
+import { AuthorRssFeed } from '~/components/Dialogs/RssFeedDialog/__generated__/AuthorRssFeed'
 import { UserProfileUserPublic } from './__generated__/UserProfileUserPublic'
 
 interface FingerprintButtonProps {
-  article: FingerprintArticle
+  user: AuthorRssFeed
 }
 
-const RssFeedButton = ({ article }: FingerprintButtonProps) => {
+const RssFeedButton = ({ user }: FingerprintButtonProps) => {
   return (
-    <FingerprintDialog article={article}>
+    <RssFeedDialog user={user}>
       {({ openDialog }) => (
         <Button onClick={openDialog} spacing={['xxtight', 'xtight']}>
           <IconRss32 color="green" size="lg" />
         </Button>
       )}
-    </FingerprintDialog>
+    </RssFeedDialog>
   )
 }
 
 export const UserProfile = () => {
   const { getQuery } = useRoute()
   const viewer = useContext(ViewerContext)
-
-  const mockArticle: FingerprintArticle = {
-    id: 'QXJ0aWNsZTo2ODky',
-    mediaHash: 'bafyreif4zywj236h5aav2vn7knbxv5vgi5j5yvawsyuiq2duthhsjhz4iy',
-    createdAt: '2022-09-15T05:18:29.890Z',
-    revisedAt: null,
-    author: {
-      id: 'VXNlcjozNjg3',
-
-      __typename: 'User',
-    },
-    access: {
-      type: ArticleAccessType.public,
-      __typename: 'ArticleAccess',
-    },
-    drafts: [
-      {
-        iscnPublish: null,
-        __typename: 'Draft',
-      },
-    ],
-    dataHash: 'QmSSZVYSw72ReHL3GKVSy8HMRdimzb9Rfy1pMcmYbE2p3A',
-    iscnId: null,
-    __typename: 'Article',
-  }
-  const article = mockArticle
 
   // public data
   const userName = getQuery('name')
@@ -280,7 +253,7 @@ export const UserProfile = () => {
 
           <section className="right">
             {!isMe && <FollowUserButton user={user} size="lg" />}
-            <RssFeedButton article={article} />
+            <RssFeedButton user={user} />
           </section>
         </header>
 
