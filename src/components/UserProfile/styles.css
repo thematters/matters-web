@@ -8,6 +8,17 @@
   }
 }
 
+.right {
+  @mixin flex-center-space-between;
+
+  flex-grow: 0.1;
+  flex-shrink: 1;
+
+  & :global(> *:first-child) {
+    flex-grow: 1;
+  }
+}
+
 header {
   @mixin flex-end-space-between;
 
