@@ -2,10 +2,13 @@ import { useContext, useEffect } from 'react'
 
 import {
   Avatar,
+  Button,
   Cover,
   Error,
   Expandable,
+  FingerprintDialog,
   FollowUserButton,
+  IconRss32,
   Layout,
   Spinner,
   Throw404,
@@ -37,13 +40,55 @@ import { LogbookDialog } from './LogbookDialog'
 import styles from './styles.css'
 import WalletAddress from './WalletAddress'
 
+import { ArticleAccessType } from '@/__generated__/globalTypes'
+import { FingerprintArticle } from '~/components/Dialogs/FingerprintDialog/__generated__/FingerprintArticle'
 import { UserProfileUserPublic } from './__generated__/UserProfileUserPublic'
 
-// import { UserProfileUserPrivate_user_info_cryptoWallet_nfts } from './__generated__/UserProfileUserPrivate'
+interface FingerprintButtonProps {
+  article: FingerprintArticle
+}
+
+const RssFeedButton = ({ article }: FingerprintButtonProps) => {
+  return (
+    <FingerprintDialog article={article}>
+      {({ openDialog }) => (
+        <Button onClick={openDialog} spacing={['xxtight', 'xtight']}>
+          <IconRss32 color="green" size="lg" />
+        </Button>
+      )}
+    </FingerprintDialog>
+  )
+}
 
 export const UserProfile = () => {
   const { getQuery } = useRoute()
   const viewer = useContext(ViewerContext)
+
+  const mockArticle: FingerprintArticle = {
+    id: 'QXJ0aWNsZTo2ODky',
+    mediaHash: 'bafyreif4zywj236h5aav2vn7knbxv5vgi5j5yvawsyuiq2duthhsjhz4iy',
+    createdAt: '2022-09-15T05:18:29.890Z',
+    revisedAt: null,
+    author: {
+      id: 'VXNlcjozNjg3',
+
+      __typename: 'User',
+    },
+    access: {
+      type: ArticleAccessType.public,
+      __typename: 'ArticleAccess',
+    },
+    drafts: [
+      {
+        iscnPublish: null,
+        __typename: 'Draft',
+      },
+    ],
+    dataHash: 'QmSSZVYSw72ReHL3GKVSy8HMRdimzb9Rfy1pMcmYbE2p3A',
+    iscnId: null,
+    __typename: 'Article',
+  }
+  const article = mockArticle
 
   // public data
   const userName = getQuery('name')
@@ -152,7 +197,6 @@ export const UserProfile = () => {
     return (
       <>
         <LayoutHeader />
-
         <section className="user-profile">
           <Cover fallbackCover={IMAGE_COVER.src} />
 
@@ -234,7 +278,10 @@ export const UserProfile = () => {
             )}
           </section>
 
-          {!isMe && <FollowUserButton user={user} size="lg" />}
+          <section className="right">
+            {!isMe && <FollowUserButton user={user} size="lg" />}
+            <RssFeedButton article={article} />
+          </section>
         </header>
 
         <section className="info">
@@ -297,3 +344,5 @@ export const UserProfile = () => {
     </>
   )
 }
+
+export default RssFeedButton
