@@ -1,27 +1,23 @@
-import { useContext } from 'react'
-
 import {
   Button,
-  LanguageContext,
   LanguageSwitch,
   TextIcon,
-  Tooltip,
   Translate,
+  useResponsive,
   withIcon,
 } from '~/components'
 
-import { translate } from '~/common/utils'
-
+import { ReactComponent as IconFooterBlog } from '@/public/static/icons/24px/footer-blog.svg'
+import { ReactComponent as IconFooterDiscord } from '@/public/static/icons/24px/footer-discord.svg'
 import { ReactComponent as IconFooterFacebook } from '@/public/static/icons/24px/footer-facebook.svg'
 import { ReactComponent as IconFooterInstagram } from '@/public/static/icons/24px/footer-instagram.svg'
-import { ReactComponent as IconFooterTelegram } from '@/public/static/icons/24px/footer-telegram.svg'
+import { ReactComponent as IconFooterLinkedin } from '@/public/static/icons/24px/footer-linkedin.svg'
 import { ReactComponent as IconFooterTwitter } from '@/public/static/icons/24px/footer-twitter.svg'
-import { ReactComponent as IconFooterWeChat } from '@/public/static/icons/24px/footer-wechat.svg'
 
 import styles from './styles.css'
 
 const Footer = () => {
-  const { lang } = useContext(LanguageContext)
+  const isSmallUp = useResponsive('sm-up')
   const year = new Date().getFullYear()
 
   return (
@@ -30,6 +26,11 @@ const Footer = () => {
         <div className="l-row">
           <div className="l-col-full">
             <div className="container">
+              {!isSmallUp && (
+                <section className="languageSwitch">
+                  <LanguageSwitch size="lg" bgColor="grey-darkest" />
+                </section>
+              )}
               <section className="contactUs">
                 <h2>
                   <Translate
@@ -40,8 +41,8 @@ const Footer = () => {
                 </h2>
                 <p>
                   <Translate
-                    zh_hant="媒體查詢、活動合作、一般查詢，請聯絡"
-                    zh_hans="媒体查询、活动合作、一般查询，请联系"
+                    zh_hant="一般聯繫、媒體詢問、活動合作"
+                    zh_hans="一般联系、媒体询问、活动合作"
                     en="For media and business inquiries, please email"
                   />
                   <br />
@@ -55,8 +56,8 @@ const Footer = () => {
                 </p>
                 <p>
                   <Translate
-                    zh_hant="對我們的產品有任何疑問，請聯絡"
-                    zh_hans="对我们的产品有任何疑问，请联系"
+                    zh_hant="用戶客服"
+                    zh_hans="用户客服"
                     en="Any inquiries about our product, please email"
                   />
                   <br />
@@ -84,7 +85,6 @@ const Footer = () => {
                   </a>
                 </p>
               </section>
-
               <section className="followUs">
                 <h2>
                   <Translate
@@ -95,50 +95,129 @@ const Footer = () => {
                 </h2>
 
                 <div className="socials">
-                  <a href="https://twitter.com/MattersLab" target="_blank">
-                    {withIcon(IconFooterTwitter)({
-                      size: 'md',
-                      color: 'white',
-                    })}
-                  </a>
-                  <a
-                    href="https://www.facebook.com/MattersLab2018/"
-                    target="_blank"
-                  >
-                    {withIcon(IconFooterFacebook)({
-                      size: 'md',
-                      color: 'white',
-                    })}
-                  </a>
-                  <a
-                    href="https://www.instagram.com/matterslab2018/"
-                    target="_blank"
-                  >
-                    {withIcon(IconFooterInstagram)({
-                      size: 'md',
-                      color: 'white',
-                    })}
-                  </a>
-                  <Tooltip content="MattersLab">
-                    <span>
-                      {withIcon(IconFooterWeChat)({
-                        size: 'md',
-                        color: 'white',
-                      })}
-                    </span>
-                  </Tooltip>
-                  <a
-                    href="https://t.me/joinchat/BXzlWUhXaWNZ-TXJZJCzDQ"
-                    target="_blank"
-                  >
-                    {withIcon(IconFooterTelegram)({
-                      size: 'md',
-                      color: 'white',
-                    })}
-                  </a>
+                  <ul>
+                    <li>
+                      <a href="https://twitter.com/MattersLab" target="_blank">
+                        <TextIcon
+                          icon={withIcon(IconFooterTwitter)({
+                            size: 'md',
+                            color: 'white',
+                          })}
+                          color="grey"
+                          size="md"
+                          spacing="xtight"
+                        >
+                          Twitter（中文）
+                        </TextIcon>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="https://twitter.com/Mattersw3b" target="_blank">
+                        <TextIcon
+                          icon={withIcon(IconFooterTwitter)({
+                            size: 'md',
+                            color: 'white',
+                          })}
+                          color="grey"
+                          size="md"
+                          spacing="xtight"
+                        >
+                          Twitter（English）
+                        </TextIcon>
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="https://discord.gg/matterslab" target="_blank">
+                        <TextIcon
+                          icon={withIcon(IconFooterDiscord)({
+                            size: 'md',
+                            color: 'white',
+                          })}
+                          color="grey"
+                          size="md"
+                          spacing="xtight"
+                        >
+                          Discord
+                        </TextIcon>
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="https://www.facebook.com/MattersLab2018/"
+                        target="_blank"
+                      >
+                        <TextIcon
+                          icon={withIcon(IconFooterFacebook)({
+                            size: 'md',
+                            color: 'white',
+                          })}
+                          color="grey"
+                          size="md"
+                          spacing="xtight"
+                        >
+                          Facebook
+                        </TextIcon>
+                      </a>
+                    </li>
+                  </ul>
+
+                  <ul>
+                    <li>
+                      <a href="https://matters-lab.io/blog" target="_blank">
+                        <TextIcon
+                          icon={withIcon(IconFooterBlog)({
+                            size: 'md',
+                            color: 'white',
+                          })}
+                          color="grey"
+                          size="md"
+                          spacing="xtight"
+                        >
+                          Matters Blog
+                        </TextIcon>
+                      </a>
+                    </li>
+
+                    <li>
+                      <a
+                        href="https://www.linkedin.com/company/matters-lab"
+                        target="_blank"
+                      >
+                        <TextIcon
+                          icon={withIcon(IconFooterLinkedin)({
+                            size: 'md',
+                            color: 'white',
+                          })}
+                          color="grey"
+                          size="md"
+                          spacing="xtight"
+                        >
+                          LinkedIn
+                        </TextIcon>
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="https://www.instagram.com/matterslab2018/"
+                        target="_blank"
+                      >
+                        <TextIcon
+                          icon={withIcon(IconFooterInstagram)({
+                            size: 'md',
+                            color: 'white',
+                          })}
+                          color="grey"
+                          size="md"
+                          spacing="xtight"
+                        >
+                          Instagram
+                        </TextIcon>
+                      </a>
+                    </li>
+                  </ul>
                 </div>
               </section>
-
               <section className="subscribeUs">
                 <h2>
                   <Translate
@@ -147,46 +226,33 @@ const Footer = () => {
                     en="Subscribe to Us"
                   />
                 </h2>
-                <div id="mc_embed_signup">
-                  <form
-                    action="https://news.us12.list-manage.com/subscribe/post?u=d5d5a3cc17a4dfebbee549e7f&amp;id=82f8e18b83"
-                    method="post"
+                <div className="buttons">
+                  <Button
+                    size={['100%', '2.5rem']}
+                    bgActiveColor="grey-lighter"
+                    borderColor="white"
+                    textColor="white"
+                    textActiveColor="black"
+                    borderWidth="sm"
+                    htmlHref="https://matters.news/signup"
+                    htmlTarget="_blank"
+                    rel="noopener"
                   >
-                    <input
-                      type="email"
-                      name="EMAIL"
-                      placeholder={translate({ id: 'yourEmail', lang })}
-                      defaultValue=""
-                    />
-                    <input
-                      style={{ position: 'absolute', left: '-5000px' }}
-                      aria-hidden="true"
-                      type="text"
-                      name="b_d5d5a3cc17a4dfebbee549e7f_82f8e18b83"
-                      defaultValue=""
-                    />
-                    <Button
-                      size={[null, '2.5rem']}
-                      spacing={[0, 'base']}
-                      type="submit"
-                      bgColor="black"
-                    >
-                      <TextIcon color="white" weight="md">
-                        <Translate
-                          zh_hant="訂閱"
-                          zh_hans="订阅"
-                          en="subscribe"
-                        />
-                      </TextIcon>
-                    </Button>
-                  </form>
+                    <TextIcon size="md">
+                      <Translate
+                        zh_hant="註冊並訂閱每週 Newsletter"
+                        zh_hans="注册并订阅每周 Newsletter"
+                        en="Sign up for our weekly newsletter"
+                      />
+                    </TextIcon>
+                  </Button>
                 </div>
-
-                <section className="languageSwitch">
-                  <LanguageSwitch size="lg" bgColor="grey-darkest" />
-                </section>
+                {isSmallUp && (
+                  <section className="languageSwitch">
+                    <LanguageSwitch size="lg" bgColor="grey-darkest" />
+                  </section>
+                )}
               </section>
-
               <section className="copyright">
                 © {year} Matters, Inc. All rights reserved.
               </section>
