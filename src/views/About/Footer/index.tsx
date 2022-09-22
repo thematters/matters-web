@@ -1,8 +1,5 @@
-import { useContext } from 'react'
-
 import {
   Button,
-  LanguageContext,
   LanguageSwitch,
   TextIcon,
   Translate,
@@ -10,19 +7,16 @@ import {
   withIcon,
 } from '~/components'
 
-import { translate } from '~/common/utils'
-
+import { ReactComponent as IconFooterBlog } from '@/public/static/icons/24px/footer-blog.svg'
 import { ReactComponent as IconFooterDiscord } from '@/public/static/icons/24px/footer-discord.svg'
 import { ReactComponent as IconFooterFacebook } from '@/public/static/icons/24px/footer-facebook.svg'
 import { ReactComponent as IconFooterInstagram } from '@/public/static/icons/24px/footer-instagram.svg'
 import { ReactComponent as IconFooterLinkedin } from '@/public/static/icons/24px/footer-linkedin.svg'
-import { ReactComponent as IconFooterMedium } from '@/public/static/icons/24px/footer-medium.svg'
 import { ReactComponent as IconFooterTwitter } from '@/public/static/icons/24px/footer-twitter.svg'
 
 import styles from './styles.css'
 
 const Footer = () => {
-  const { lang } = useContext(LanguageContext)
   const isSmallUp = useResponsive('sm-up')
   const year = new Date().getFullYear()
 
@@ -170,9 +164,9 @@ const Footer = () => {
 
                   <ul>
                     <li>
-                      <a href="https://matterslab.medium.com/" target="_blank">
+                      <a href="https://matters-lab.io/blog" target="_blank">
                         <TextIcon
-                          icon={withIcon(IconFooterMedium)({
+                          icon={withIcon(IconFooterBlog)({
                             size: 'md',
                             color: 'white',
                           })}
@@ -180,7 +174,7 @@ const Footer = () => {
                           size="md"
                           spacing="xtight"
                         >
-                          Medium
+                          Matters Blog
                         </TextIcon>
                       </a>
                     </li>
@@ -232,39 +226,26 @@ const Footer = () => {
                     en="Subscribe to Us"
                   />
                 </h2>
-                <div id="mc_embed_signup">
-                  <form
-                    action="https://news.us12.list-manage.com/subscribe/post?u=d5d5a3cc17a4dfebbee549e7f&amp;id=82f8e18b83"
-                    method="post"
+                <div className="buttons">
+                  <Button
+                    size={['100%', '2.5rem']}
+                    bgActiveColor="grey-lighter"
+                    borderColor="white"
+                    textColor="white"
+                    textActiveColor="black"
+                    borderWidth="sm"
+                    htmlHref="https://matters.news/signup"
+                    htmlTarget="_blank"
+                    rel="noopener"
                   >
-                    <input
-                      type="email"
-                      name="EMAIL"
-                      placeholder={translate({ id: 'yourEmail', lang })}
-                      defaultValue=""
-                    />
-                    <input
-                      style={{ position: 'absolute', left: '-5000px' }}
-                      aria-hidden="true"
-                      type="text"
-                      name="b_d5d5a3cc17a4dfebbee549e7f_82f8e18b83"
-                      defaultValue=""
-                    />
-                    <Button
-                      size={[null, '2.5rem']}
-                      spacing={[0, 'base']}
-                      type="submit"
-                      bgColor="black"
-                    >
-                      <TextIcon color="white" weight="md">
-                        <Translate
-                          zh_hant="訂閱"
-                          zh_hans="订阅"
-                          en="subscribe"
-                        />
-                      </TextIcon>
-                    </Button>
-                  </form>
+                    <TextIcon size="md">
+                      <Translate
+                        zh_hant="註冊並訂閱每週 Newsletter"
+                        zh_hans="注册并订阅每周 Newsletter"
+                        en="Sign up for our weekly newsletter"
+                      />
+                    </TextIcon>
+                  </Button>
                 </div>
                 {isSmallUp && (
                   <section className="languageSwitch">

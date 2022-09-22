@@ -58,28 +58,9 @@ footer {
   }
 
   & .subscribeUs {
-    & form {
-      position: relative;
-
-      & input {
-        display: inline-block;
-        height: calc(2.5rem + 2px);
-        padding: var(--spacing-x-tight) var(--spacing-base);
-        margin-right: var(--spacing-base);
-        color: var(--color-black);
-        background: var(--color-white);
-        border-radius: 1.25rem;
-
-        &::placeholder {
-          color: var(--color-grey-light);
-          opacity: 1; /* Firefox */
-        }
-      }
-
-      & :global(button) {
-        position: absolute;
-        top: 1px;
-        right: 1px;
+    & .buttons {
+      & :global(> a) {
+        width: 100%;
       }
     }
   }
