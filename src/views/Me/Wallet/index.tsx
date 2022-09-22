@@ -8,17 +8,17 @@ import {
   PullToRefresh,
   Spacer,
   Spinner,
-  Translate,
   ViewerContext,
 } from '~/components'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
 
-import { PATHS, PAYMENT_MINIMAL_PAYOUT_AMOUNT } from '~/common/enums'
+import { PAYMENT_MINIMAL_PAYOUT_AMOUNT } from '~/common/enums'
 
-import Balance from './Balance'
+import { FiatCurrency } from './Balance'
 import Buttons from './Buttons'
 import PaymentPassword from './PaymentPassword'
 import PaymentPointer from './PaymentPointer'
+import TotalAssets from './TotalAssets'
 import ViewStripeAccount from './ViewStripeAccount'
 import ViewStripeCustomerPortal from './ViewStripeCustomerPortal'
 
@@ -48,7 +48,7 @@ const Wallet = () => {
   }
 
   return (
-    <Layout.Main>
+    <Layout.Main bgColor="grey-lighter">
       <Layout.Header
         left={<Layout.Header.BackButton />}
         right={<Layout.Header.Title id="myWallet" />}
@@ -59,14 +59,16 @@ const Wallet = () => {
       <PullToRefresh refresh={refetch}>
         <Spacer size="xxloose" />
 
-        <Balance balanceHKD={balanceHKD} canPayout={canPayout} />
+        {/* <Balance balanceHKD={balanceHKD} canPayout={canPayout} /> */}
 
         <Buttons canPayout={canPayout} hasStripeAccount={hasStripeAccount} />
 
         <Form.List>
-          <Form.List.Item
-            title={<Translate id="paymentTransactions" />}
-            href={PATHS.ME_WALLET_TRANSACTIONS}
+          <TotalAssets />
+          <FiatCurrency
+            balanceHKD={balanceHKD}
+            canPayout={canPayout}
+            hasStripeAccount={hasStripeAccount}
           />
           <ViewStripeCustomerPortal />
           {hasPaymentPassword && <PaymentPassword />}
