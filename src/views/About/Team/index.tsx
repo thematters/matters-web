@@ -92,7 +92,7 @@ const CREW = [
       },
       {
         avatar: IMAGE_TOMAS,
-        title: 'Full Stack Engineer',
+        title: 'Sr. Software Engineer',
         name: 'Tomas Cheng',
       },
       {
