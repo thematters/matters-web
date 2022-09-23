@@ -7,6 +7,7 @@ import {
   PullToRefresh,
   Spacer,
   Spinner,
+  Translate,
   useMutation,
 } from '~/components'
 
@@ -114,14 +115,14 @@ const BaseNotificationSettings = () => {
   return (
     <PullToRefresh refresh={refetch}>
       <div className="title">
-        <h2>我的圍爐</h2>
+        <h2> <Translate zh_hans='我的围炉' zh_hant='我的圍爐' en='Circle' /> </h2>
         <p>此處設定將套用至你所開設的圍爐</p>
       </div>
       <MyManageSettings toggle={toggle} settings={settings} />
       <MyBroadcastSettings toggle={toggle} settings={settings} />
       <MyDiscussionSettings toggle={toggle} settings={settings} />
       <div className="title">
-        <h2>訂閱圍爐</h2>
+        <h2><Translate zh_hans='订阅围炉' zh_hant='訂閱圍爐' en='Subscribe to the Circle'/></h2>
         <p>此處設定將套用至你所有參加或追蹤的圍爐</p>
       </div>
       <SubscribeArticleSettings toggle={toggle} settings={settings} />
