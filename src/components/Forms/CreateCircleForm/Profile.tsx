@@ -168,7 +168,13 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
 
       {!isCreate && (
         <Form.Input
-          label={<Translate zh_hant="圍爐名稱" zh_hans="围炉名称" en='Name of the Circle'/>}
+          label={
+            <Translate
+              zh_hant="圍爐名稱"
+              zh_hans="围炉名称"
+              en="Name of the Circle"
+            />
+          }
           type="text"
           name="displayName"
           required
@@ -185,7 +191,13 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
       )}
 
       <Form.Textarea
-        label={<Translate zh_hant="圍爐描述" zh_hans="围炉描述" en='Description of the Circle'/>}
+        label={
+          <Translate
+            zh_hant="圍爐描述"
+            zh_hans="围炉描述"
+            en="Description of the Circle"
+          />
+        }
         name="description"
         required
         placeholder={translate({

@@ -61,7 +61,7 @@ const CivicLikerDialog = ({
 
           <ul>
             <li>
-              <Translate zh_hant="解鎖 " zh_hans="解锁 " en='Unlock '/>
+              <Translate zh_hant="解鎖 " zh_hans="解锁 " en="Unlock " />
               <a
                 className="u-link-green"
                 href={EXTERNAL_LINKS.SUPER_LIKE}
@@ -92,13 +92,21 @@ const CivicLikerDialog = ({
           </ul>
 
           <p>
-            <Translate zh_hant="瞭解更多 " zh_hans="了解更多 " en="Learn more about "/>
+            <Translate
+              zh_hant="瞭解更多 "
+              zh_hans="了解更多 "
+              en="Learn more about "
+            />
             <a
               className="u-link-green"
               href={EXTERNAL_LINKS.CIVIC_LIKER_SUPPORT}
               target="_blank"
             >
-              <Translate zh_hant="讚賞公民福利" zh_hans="赞赏公民福利" en='Civic Liker benefits'/>
+              <Translate
+                zh_hant="讚賞公民福利"
+                zh_hans="赞赏公民福利"
+                en="Civic Liker benefits"
+              />
             </a>
           </p>
         </Dialog.Message>
