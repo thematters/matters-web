@@ -8,12 +8,15 @@ import {
   ShuffleButton,
   Slides,
   Spinner,
+  Translate,
   usePublicQuery,
   UserDigest,
   ViewerContext,
+  ViewMoreCard
 } from '~/components'
 import FETCH_RECORD from '~/components/GQL/queries/lastFetchRandom'
 
+import { PATHS } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 import SectionHeader from '../../SectionHeader'
@@ -76,10 +79,12 @@ const Authors = () => {
     <SectionHeader
       type="authors"
       rightButton={<ShuffleButton onClick={shuffle} />}
+      viewAll={false}
     />
   )
 
   return (
+    <>
     <Slides bgColor="yellow-lighter" header={SlidesHeader}>
       {loading && (
         <Slides.Item size="md">
@@ -112,6 +117,19 @@ const Authors = () => {
           </Slides.Item>
         ))}
     </Slides>
+
+    <section className="backToAll">
+          <ViewMoreCard
+            spacing={['tight', 'tight']}
+            href={PATHS.TAGS}
+            iconProps={{ size: 'sm' }}
+            textIconProps={{ size: 'sm', weight: 'md', spacing: 'xxtight' }}
+            textAlign="center"
+          >
+            <Translate id="viewAll" />
+          </ViewMoreCard>
+    </section>
+    </>
   )
 }
 
