@@ -25,7 +25,7 @@ const Stats = () => {
                 en="Monthly New Articles"
               />
             </p>
-            <span className="num">15K+</span>
+            <span className="num">18K+</span>
           </li>
           <li>
             <p className="type">
