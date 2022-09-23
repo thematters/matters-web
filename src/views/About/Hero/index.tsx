@@ -86,7 +86,7 @@ const Hero = () => {
                   <Translate
                     zh_hant="去中心化的"
                     zh_hans="去中心化的"
-                    en="The Future of Web3 is"
+                    en="The Future of Web3 is&nbsp;"
                   />
                   <br />
                   <Translate
