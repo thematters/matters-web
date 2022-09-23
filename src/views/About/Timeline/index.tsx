@@ -14,7 +14,7 @@ const Timeline = () => {
                 <Translate
                   zh_hant="Prototype 上線"
                   zh_hans="Prototype 上线"
-                  en="Prototype is now available"
+                  en="Launched the First Prototype"
                 />
               </p>
             </li>
