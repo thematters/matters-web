@@ -35,9 +35,15 @@ const CommentMentionedYouNotice = ({ notice }: { notice: NoticeType }) => {
     notice.comment?.type === 'circleBroadcast' ? notice.comment.type : null
 
   const latestComment = notice.comment
+
+  if (!latestComment) {
+    return null
+  }
+
   const circleCommentPath = toPath({
     page: 'commentDetail',
     comment: latestComment,
+    article: commentArticle,
     circle: commentCircle,
   })
 

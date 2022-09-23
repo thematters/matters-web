@@ -4,8 +4,6 @@ on:
   push:
     branches-ignore:
       - develop
-      - main
-      - master
       - stage
 env:
   MATTERS_TESTING_ACCOUNT_EMAIL: ${{ secrets.MATTERS_TESTING_ACCOUNT_EMAIL }}
