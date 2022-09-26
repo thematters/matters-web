@@ -21,7 +21,7 @@ const nextConfig = {
    */
   assetPrefix: nextAssetDomain ? `https://${nextAssetDomain}` : undefined,
   pageExtensions: ['tsx'],
-  swcMinify: false,
+  // swcMinify: false,
   crossOrigin: 'anonymous',
 
   webpack(config, { defaultLoaders, isServer }) {

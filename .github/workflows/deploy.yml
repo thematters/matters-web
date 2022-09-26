@@ -5,7 +5,6 @@ on:
     branches:
       - master
       - develop
-      - stage
     types: [closed]
 
 env:
@@ -45,12 +44,6 @@ jobs:
           npm run gen:clean \
           && npm run gen:type
 
-      - name: Generate Types (stage)
-        if: github.base_ref == 'stage'
-        run: |
-          npm run gen:clean \
-          && npm run gen:type
-
       - name: Generate Types (production)
         if: github.base_ref == 'master'
         run: |
@@ -76,18 +69,13 @@ jobs:
         if: github.base_ref == 'develop'
         run: cp .env.dev .env && npm run build
 
-      # === `stage` branch ===
-      - name: Build (stage)
-        if: github.base_ref == 'stage'
-        run: cp .env.stage .env && npm run build
-
       # === `master` branch ===
       - name: Build (production)
         if: github.base_ref == 'master'
         run: cp .env.prod .env && npm run build
 
       - name: Setup AWS
-        if: github.base_ref == 'develop' || github.base_ref == 'stage' || github.base_ref == 'master'
+        if: github.base_ref == 'develop' || github.base_ref == 'master'
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -95,7 +83,7 @@ jobs:
           aws-region: ap-southeast-1
 
       - name: Generate deployment package
-        if: github.base_ref == 'develop' || github.base_ref == 'stage' || github.base_ref == 'master'
+        if: github.base_ref == 'develop' || github.base_ref == 'master'
         run: |
           rm -rf node_modules \
           && npm install --production --legacy-peer-deps \
@@ -116,27 +104,6 @@ jobs:
           application_name: matters-stage
           environment_name: matters-client-develop
           version_label: matters-web-develop-${{ hashFiles('deploy.zip') }}
-          version_description: ${{ github.SHA }}
-          region: ap-southeast-1
-          deployment_package: deploy.zip
-          use_existing_version_if_available: true
-          wait_for_deployment: true
-
-      # === `stage` branch ===
-      - name: Upload Assets (stage)
-        if: github.base_ref == 'stage'
-        run: |
-          aws s3 sync .next s3://web-stage.matters.news/_next
-
-      - name: Deploy to EB (stage)
-        if: github.base_ref == 'stage'
-        uses: einaregilsson/beanstalk-deploy@v19
-        with:
-          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          application_name: matters-eb-stage
-          environment_name: matters-web-stage
-          version_label: matters-web-stage-${{ hashFiles('deploy.zip') }}
           version_description: ${{ github.SHA }}
           region: ap-southeast-1
           deployment_package: deploy.zip
