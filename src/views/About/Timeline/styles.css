@@ -6,6 +6,7 @@
 ul {
   position: relative;
   grid-column: 1 / -1;
+  font-size: var(--font-size-md);
 
   &::before {
     position: absolute;
@@ -24,6 +25,8 @@ ul {
 
   @media (--sm-up) {
     grid-column: span 4;
+    font-size: var(--font-size-xm);
+    line-height: 2rem;
 
     & + ul {
       padding-top: 0;
@@ -32,6 +35,7 @@ ul {
 
   @media (--md-up) {
     grid-column: span 4;
+    font-size: var(--font-size-xl);
 
     & + ul {
       grid-column: span 4 / -1;
@@ -39,10 +43,10 @@ ul {
   }
 
   @media (--lg-up) {
-    grid-column: span 4;
+    grid-column: span 6;
 
     & + ul {
-      grid-column: span 4 / -1;
+      grid-column: span 6 / -1;
     }
   }
 }
@@ -53,7 +57,7 @@ li {
 
   &::before {
     position: absolute;
-    top: calc(50% - var(--timeline-disc-size) / 2);
+    top: calc((1.5rem - var(--timeline-disc-size)) / 2);
     left: calc(
       (var(--timeline-disc-size) / 2 - var(--timeline-width) / 2) * -1
     );
@@ -62,6 +66,10 @@ li {
     content: '';
     background-color: var(--color-black);
     border-radius: var(--timeline-disc-size);
+
+    @media (--sm-up) {
+      top: calc((2rem - var(--timeline-disc-size)) / 2);
+    }
   }
 
   & + li {
@@ -70,12 +78,31 @@ li {
 }
 
 time {
-  padding-left: var(--spacing-loose);
-  font-size: var(--font-size-xm);
+  box-sizing: content-box;
+  min-width: 5.375rem;
+  padding-left: var(--spacing-base);
   color: var(--color-grey-darker);
+  white-space: nowrap;
+
+  @media (--sm-up) {
+    min-width: 6.0625rem;
+  }
+
+  @media (--md-up) {
+    min-width: 8.0625rem;
+  }
+}
+
+.coming-time {
+  color: var(--color-matters-green);
+  opacity: 0.6;
 }
 
 .event {
   padding-left: var(--spacing-x-tight);
-  font-size: var(--font-size-xm);
+}
+
+.coming-event {
+  font-weight: var(--font-weight-medium);
+  color: var(--color-matters-green);
 }

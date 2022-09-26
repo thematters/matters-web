@@ -2,7 +2,7 @@ export type TextId = keyof typeof TEXT.zh_hant
 
 export const TEXT = {
   zh_hant: {
-    about: 'Matters 長什麼樣',
+    about: '關於我們',
     accountArchived: '已註銷用戶',
     accountBanned: '已禁言用戶',
     accountFrozen: '已凍結用戶',
@@ -366,7 +366,7 @@ export const TEXT = {
     yourEmail: '你的電子信箱',
   },
   zh_hans: {
-    about: 'Matters 长什么样',
+    about: '关于我们',
     accountArchived: '已注销用户',
     accountBanned: '已禁言用户',
     accountFrozen: '已冻结用户',
@@ -730,7 +730,7 @@ export const TEXT = {
     yourEmail: '你的邮箱',
   },
   en: {
-    about: 'About',
+    about: 'About Us',
     accountArchived: 'Account Archived',
     accountBanned: 'Account Banned',
     accountFrozen: 'Account Frozen',
@@ -913,7 +913,7 @@ export const TEXT = {
     invalidEmail: 'Invalid Email',
     invalidUserName: 'Invalid Matters ID',
     IPFSEntrance: 'IPFS',
-    joinCivicLiker: 'Become a Civil Liker and support creators you like! ',
+    joinCivicLiker: 'Become a Civil Liker and support creators! ',
     latest: 'Latest',
     latestArticles: 'Latest Articles',
     latestResponses: 'Latest Responses',
@@ -956,7 +956,7 @@ export const TEXT = {
     NOT_ALLOW_ADD_OFFICIAL_TAG: 'Unable to add official tag',
     NOT_ENOUGH_MAT: 'Insufficient MAT',
     NOTICE_NOT_FOUND: 'Notification not found',
-    notification: 'Notification',
+    notification: 'Notifications',
     OAUTH_TOKEN_INVALID: 'Please log in again.',
     oauthAuthorize: 'OAuth authorize',
     openCommunity: 'Open Source',

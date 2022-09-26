@@ -8,16 +8,20 @@ import {
   ShuffleButton,
   Slides,
   Spinner,
+  Translate,
   usePublicQuery,
   UserDigest,
   ViewerContext,
+  ViewMoreCard,
 } from '~/components'
 import FETCH_RECORD from '~/components/GQL/queries/lastFetchRandom'
 
+import { PATHS } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 import SectionHeader from '../../SectionHeader'
 import { FEED_AUTHORS } from './gql'
+import styles from './styles.css'
 
 import { LastFetchRandom } from '~/components/GQL/queries/__generated__/LastFetchRandom'
 import { FeedAuthors } from './__generated__/FeedAuthors'
@@ -76,42 +80,59 @@ const Authors = () => {
     <SectionHeader
       type="authors"
       rightButton={<ShuffleButton onClick={shuffle} />}
+      viewAll={false}
     />
   )
 
   return (
-    <Slides bgColor="yellow-lighter" header={SlidesHeader}>
-      {loading && (
-        <Slides.Item size="md">
-          <Spinner />
-        </Slides.Item>
-      )}
-
-      {!loading &&
-        _chunk(edges, 3).map((chunks, edgeIndex) => (
-          <Slides.Item size="md" key={edgeIndex}>
-            <section>
-              {chunks.map(({ node, cursor }, nodeIndex) => (
-                <UserDigest.Rich
-                  key={cursor}
-                  user={node}
-                  spacing={['tight', 0]}
-                  bgColor="none"
-                  onClick={() =>
-                    analytics.trackEvent('click_feed', {
-                      type: 'authors',
-                      contentType: 'user',
-                      location: (edgeIndex + 1) * (nodeIndex + 1) - 1,
-                      id: node.id,
-                    })
-                  }
-                  canClamp
-                />
-              ))}
-            </section>
+    <section className="authors">
+      <Slides bgColor="yellow-lighter" header={SlidesHeader}>
+        {loading && (
+          <Slides.Item size="md">
+            <Spinner />
           </Slides.Item>
-        ))}
-    </Slides>
+        )}
+
+        {!loading &&
+          _chunk(edges, 3).map((chunks, edgeIndex) => (
+            <Slides.Item size="md" key={edgeIndex}>
+              <section>
+                {chunks.map(({ node, cursor }, nodeIndex) => (
+                  <UserDigest.Rich
+                    key={cursor}
+                    user={node}
+                    spacing={['tight', 0]}
+                    bgColor="none"
+                    onClick={() =>
+                      analytics.trackEvent('click_feed', {
+                        type: 'authors',
+                        contentType: 'user',
+                        location: (edgeIndex + 1) * (nodeIndex + 1) - 1,
+                        id: node.id,
+                      })
+                    }
+                    canClamp
+                  />
+                ))}
+              </section>
+            </Slides.Item>
+          ))}
+      </Slides>
+
+      <section className="backToAll">
+        <ViewMoreCard
+          spacing={['tight', 'tight']}
+          href={PATHS.TAGS}
+          iconProps={{ size: 'sm' }}
+          textIconProps={{ size: 'sm', weight: 'md', spacing: 'xxtight' }}
+          textAlign="center"
+        >
+          <Translate id="viewAll" />
+        </ViewMoreCard>
+      </section>
+
+      <style jsx>{styles}</style>
+    </section>
   )
 }
 
