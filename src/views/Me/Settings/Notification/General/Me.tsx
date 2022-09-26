@@ -20,7 +20,7 @@ const Me = ({ settings, toggle }: MeProps) => (
         <Translate
           zh_hant="作品或評論提及我"
           zh_hans="作品或评论提及我"
-          en="Mentions"
+          en="Mention me"
         />
       }
       right={
@@ -29,7 +29,7 @@ const Me = ({ settings, toggle }: MeProps) => (
     />
 
     <Form.List.Item
-      title={<Translate zh_hant="追蹤我" zh_hans="追踪我" en="Followers" />}
+      title={<Translate zh_hant="追蹤我" zh_hans="追踪我" en="New followers" />}
       right={
         <Switch
           checked={settings.userNewFollower}
