@@ -49,7 +49,6 @@ const PayoutItem = ({
     <Menu.Item
       onClick={() => {
         openDialog()
-        analytics.trackEvent('click_button', { type: 'top_up' })
       }}
     >
       <TextIcon icon={<IconPayout24 size="md" />} size="xm" spacing="base">

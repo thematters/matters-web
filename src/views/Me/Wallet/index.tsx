@@ -14,8 +14,7 @@ import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
 
 import { PAYMENT_MINIMAL_PAYOUT_AMOUNT } from '~/common/enums'
 
-import { FiatCurrency } from './Balance'
-import Buttons from './Buttons'
+import { FiatCurrency, LikeCoin } from './Balance'
 import PaymentPassword from './PaymentPassword'
 import PaymentPointer from './PaymentPointer'
 import TotalAssets from './TotalAssets'
@@ -59,10 +58,6 @@ const Wallet = () => {
       <PullToRefresh refresh={refetch}>
         <Spacer size="xxloose" />
 
-        {/* <Balance balanceHKD={balanceHKD} canPayout={canPayout} /> */}
-
-        <Buttons canPayout={canPayout} hasStripeAccount={hasStripeAccount} />
-
         <Form.List>
           <TotalAssets />
           <FiatCurrency
@@ -70,8 +65,9 @@ const Wallet = () => {
             canPayout={canPayout}
             hasStripeAccount={hasStripeAccount}
           />
-          <ViewStripeCustomerPortal />
+          <LikeCoin />
           {hasPaymentPassword && <PaymentPassword />}
+          <ViewStripeCustomerPortal />
           {hasStripeAccount && <ViewStripeAccount />}
           <PaymentPointer />
         </Form.List>

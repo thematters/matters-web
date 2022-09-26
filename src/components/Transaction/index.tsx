@@ -16,8 +16,8 @@ import { UserDigest } from '~/components/UserDigest'
 
 import { toPath } from '~/common/utils'
 
-import Action from './Action'
 import Amount from './Amount'
+import Currency from './Currency'
 import Donator from './Donator'
 import State from './State'
 import styles from './styles.css'
@@ -96,13 +96,7 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
     <Card {...path} spacing={['base', 'base']}>
       <section className="container">
         <section className="tx-icon">
-          <Action
-            isSender={!!isViewerSender}
-            isSubscription={isSubscription}
-            isWalletAction={isWalletAction}
-            sender={sender}
-            recipient={recipient}
-          />
+          <Currency currency={currency} />
         </section>
 
         <section className="tx-info">
