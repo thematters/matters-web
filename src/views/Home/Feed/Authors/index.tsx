@@ -21,6 +21,7 @@ import { analytics } from '~/common/utils'
 
 import SectionHeader from '../../SectionHeader'
 import { FEED_AUTHORS } from './gql'
+import styles from './styles.css'
 
 import { LastFetchRandom } from '~/components/GQL/queries/__generated__/LastFetchRandom'
 import { FeedAuthors } from './__generated__/FeedAuthors'
@@ -84,7 +85,7 @@ const Authors = () => {
   )
 
   return (
-    <>
+    <section className="authors">
       <Slides bgColor="yellow-lighter" header={SlidesHeader}>
         {loading && (
           <Slides.Item size="md">
@@ -129,7 +130,9 @@ const Authors = () => {
           <Translate id="viewAll" />
         </ViewMoreCard>
       </section>
-    </>
+
+      <style jsx>{styles}</style>
+    </section>
   )
 }
 
