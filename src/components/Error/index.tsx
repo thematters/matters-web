@@ -31,13 +31,7 @@ const NetworkError = () => (
   />
 )
 
-const NotFound = () => (
-  <Translate
-    zh_hant="你似乎遨遊到了一個未知空間，請返回重試"
-    zh_hans="你似乎遨游到了一个未知空间，请返回重试"
-    en="It seems you've come to an unknown space, please go back and retry"
-  />
-)
+const NotFound = () => <Translate id="unknownAddress" />
 
 export const Error: React.FC<React.PropsWithChildren<ErrorProps>> = ({
   statusCode,

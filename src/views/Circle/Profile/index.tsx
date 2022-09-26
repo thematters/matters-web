@@ -19,7 +19,7 @@ import {
 import ShareButton from '~/components/Layout/Header/ShareButton'
 
 import { REFETCH_CIRCLE_DETAIL } from '~/common/enums'
-import { numAbbr } from '~/common/utils'
+import { numAbbr, stripSpaces } from '~/common/utils'
 
 import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
 import CIRCLE_COVER from '@/public/static/images/circle-cover.svg'
@@ -92,6 +92,8 @@ const CircleProfile = () => {
   usePullToRefresh.Register()
   usePullToRefresh.Handler(refetch)
 
+  const description = circle ? stripSpaces(circle.description) : ''
+
   /**
    * Render
    */
@@ -100,9 +102,7 @@ const CircleProfile = () => {
       {circle && (
         <Head
           title={`${circle.displayName} by ${circle.owner.displayName} (@${circle.owner.userName})`}
-          // title={`Matters - ${user.displayName} (@${user.userName})`}
-          // noSuffix={false}
-          description={circle.description}
+          description={description}
           keywords={
             [
               circle.displayName,
@@ -119,7 +119,7 @@ const CircleProfile = () => {
             '@context': 'https://schema.org',
             '@type': 'Organization',
             name: circle.displayName,
-            description: circle.description,
+            description,
             image:
               circle.avatar ||
               `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}${ICON_AVATAR_DEFAULT.src}`,
