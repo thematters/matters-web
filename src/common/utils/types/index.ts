@@ -10,6 +10,7 @@ export default gql`
 
   extend type Official {
     gatewayUrls: [String!]
+    rssFeedGatewayUrls: [String!]
   }
 
   type CommentDraft {

@@ -3,6 +3,7 @@ import clientPreference from './clientPreference'
 import commentDraft from './commentDraft'
 import gatewayUrls from './gatewayUrls'
 import lastFetchRandom from './lastFetchRandom'
+import rssFeedGatewayUrls from './rssFeedGatewayUrls'
 
 export default {
   Query: {
@@ -13,5 +14,6 @@ export default {
   },
   Official: {
     gatewayUrls,
+    rssFeedGatewayUrls,
   },
 }
