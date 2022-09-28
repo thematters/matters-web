@@ -13,7 +13,7 @@ import {
 import { AuthorRssFeed } from './__generated__/AuthorRssFeed'
 import { AuthorRssFeedPublic } from './__generated__/AuthorRssFeedPublic'
 
-interface FingerprintDialogProps {
+interface RssFeedDialogProps {
   user: AuthorRssFeed
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
@@ -46,7 +46,7 @@ const AuthorRssFeedGQL = gql`
 
 const DynamicContent = dynamic(() => import('./Content'), { loading: Spinner })
 
-const BaseRssFeedDialog = ({ user, children }: FingerprintDialogProps) => {
+const BaseRssFeedDialog = ({ user, children }: RssFeedDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
   const { refetch } = usePublicQuery<AuthorRssFeedPublic>(AuthorRssFeedGQL, {
@@ -82,7 +82,7 @@ const BaseRssFeedDialog = ({ user, children }: FingerprintDialogProps) => {
   )
 }
 
-export const RssFeedDialog = (props: FingerprintDialogProps) => (
+export const RssFeedDialog = (props: RssFeedDialogProps) => (
   <Dialog.Lazy mounted={<BaseRssFeedDialog {...props} />}>
     {({ openDialog }) => <>{props.children({ openDialog })}</>}
   </Dialog.Lazy>
