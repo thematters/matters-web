@@ -158,9 +158,9 @@ const RssFeedDialogContent = ({
           <header>
             <h4 className="title">
               <Translate
-                zh_hans="IPFS Hash"
-                zh_hant="IPFS Hash"
-                en="IPFS Hash"
+                zh_hans="IPNS Hash"
+                zh_hant="IPNS Hash"
+                en="IPNS Hash"
               />
             </h4>
           </header>
