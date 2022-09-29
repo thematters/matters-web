@@ -3,6 +3,7 @@ import { useContext } from 'react'
 
 import {
   Form,
+  getErrorCodes,
   Head,
   Layout,
   PullToRefresh,
@@ -26,13 +27,24 @@ import { WalletBalance } from '~/components/GQL/queries/__generated__/WalletBala
 const Wallet = () => {
   const viewer = useContext(ViewerContext)
 
-  const { data, loading, refetch } = useQuery<WalletBalance>(WALLET_BALANCE, {
-    fetchPolicy: 'network-only',
-  })
+  const { data, loading, refetch, error } = useQuery<WalletBalance>(
+    WALLET_BALANCE,
+    {
+      fetchPolicy: 'network-only',
+      errorPolicy: 'none',
+      skip: typeof window === 'undefined',
+    }
+  )
   const balanceHKD = data?.viewer?.wallet.balance.HKD || 0
   const canPayout = balanceHKD >= PAYMENT_MINIMAL_PAYOUT_AMOUNT.HKD
   const hasStripeAccount = !!data?.viewer?.wallet.stripeAccount?.id
   const hasPaymentPassword = viewer.status?.hasPaymentPassword
+
+  const likerId = viewer.liker.likerId
+  const errorCodes = getErrorCodes(error)
+  const shouldReAuth = errorCodes.some((code) => code === 'OAUTH_TOKEN_INVALID')
+  const liker = data?.viewer?.liker
+  const balanceLike = liker?.total || 0
 
   if (loading) {
     return (
@@ -65,7 +77,7 @@ const Wallet = () => {
             canPayout={canPayout}
             hasStripeAccount={hasStripeAccount}
           />
-          <LikeCoin />
+          {likerId && !shouldReAuth && <LikeCoin balanceLike={balanceLike} />}
           {hasPaymentPassword && <PaymentPassword />}
           <ViewStripeCustomerPortal />
           {hasStripeAccount && <ViewStripeAccount />}
