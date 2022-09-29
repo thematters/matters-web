@@ -7,7 +7,6 @@ import {
   Card,
   CopyToClipboard,
   IconCopy16,
-  IconExternalLink16,
   IconRssDialog24,
   Spacer,
   Spinner,
@@ -138,12 +137,15 @@ const RssFeedDialogContent = ({
                 .replace('/ipfs/', '/ipns/')
                 .concat('/rss.xml')
               const hostname = url.replace(/(https:\/\/|\/ipfs\/|:hash.?)/g, '')
-              console.log(gatewayUrl)
               return (
                 <li key={url}>
-                  <a href={gatewayUrl} target="_blank" className="gateway-url">
+                  <a className="gateway-url">
                     {hostname}
-                    <IconExternalLink16 />
+                    <CopyToClipboard text={gatewayUrl}>
+                      <Button>
+                        <IconCopy16 />
+                      </Button>
+                    </CopyToClipboard>
                   </a>
                 </li>
               )
