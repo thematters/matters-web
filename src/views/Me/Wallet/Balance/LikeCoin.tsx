@@ -25,3 +25,4 @@ export const LikeCoin: React.FC<Props> = ({ balanceLike }) => {
     />
   )
 }
+  
