@@ -22,3 +22,32 @@
     border-radius: 1.5rem;
   }
 }
+
+.payoutItem {
+  @mixin flex-center-space-between;
+
+  color: var(--color-grey);
+
+  & :global(> span) {
+    white-space: nowrap;
+  }
+
+  & :global(> span + span) {
+    margin-left: 2rem;
+    white-space: normal;
+  }
+}
+
+.currencyFormatter {
+  line-height: 1rem;
+  & .currency {
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-medium);
+    color: black;
+  }
+
+  & .subCurrency {
+    font-size: var(--font-size-xs);
+    color: var(--color-grey);
+  }
+}

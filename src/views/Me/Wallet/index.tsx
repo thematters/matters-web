@@ -3,22 +3,22 @@ import { useContext } from 'react'
 
 import {
   Form,
+  getErrorCodes,
   Head,
   Layout,
   PullToRefresh,
   Spacer,
   Spinner,
-  Translate,
   ViewerContext,
 } from '~/components'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
 
-import { PATHS, PAYMENT_MINIMAL_PAYOUT_AMOUNT } from '~/common/enums'
+import { PAYMENT_MINIMAL_PAYOUT_AMOUNT } from '~/common/enums'
 
-import Balance from './Balance'
-import Buttons from './Buttons'
+import { FiatCurrency, LikeCoin } from './Balance'
 import PaymentPassword from './PaymentPassword'
 import PaymentPointer from './PaymentPointer'
+import TotalAssets from './TotalAssets'
 import ViewStripeAccount from './ViewStripeAccount'
 import ViewStripeCustomerPortal from './ViewStripeCustomerPortal'
 
@@ -27,13 +27,24 @@ import { WalletBalance } from '~/components/GQL/queries/__generated__/WalletBala
 const Wallet = () => {
   const viewer = useContext(ViewerContext)
 
-  const { data, loading, refetch } = useQuery<WalletBalance>(WALLET_BALANCE, {
-    fetchPolicy: 'network-only',
-  })
+  const { data, loading, refetch, error } = useQuery<WalletBalance>(
+    WALLET_BALANCE,
+    {
+      fetchPolicy: 'network-only',
+      errorPolicy: 'none',
+      skip: typeof window === 'undefined',
+    }
+  )
   const balanceHKD = data?.viewer?.wallet.balance.HKD || 0
   const canPayout = balanceHKD >= PAYMENT_MINIMAL_PAYOUT_AMOUNT.HKD
   const hasStripeAccount = !!data?.viewer?.wallet.stripeAccount?.id
   const hasPaymentPassword = viewer.status?.hasPaymentPassword
+
+  const likerId = viewer.liker.likerId
+  const errorCodes = getErrorCodes(error)
+  const shouldReAuth = errorCodes.some((code) => code === 'OAUTH_TOKEN_INVALID')
+  const liker = data?.viewer?.liker
+  const balanceLike = liker?.total || 0
 
   if (loading) {
     return (
@@ -48,7 +59,7 @@ const Wallet = () => {
   }
 
   return (
-    <Layout.Main>
+    <Layout.Main bgColor="grey-lighter">
       <Layout.Header
         left={<Layout.Header.BackButton />}
         right={<Layout.Header.Title id="myWallet" />}
@@ -59,17 +70,16 @@ const Wallet = () => {
       <PullToRefresh refresh={refetch}>
         <Spacer size="xxloose" />
 
-        <Balance balanceHKD={balanceHKD} canPayout={canPayout} />
-
-        <Buttons canPayout={canPayout} hasStripeAccount={hasStripeAccount} />
-
         <Form.List>
-          <Form.List.Item
-            title={<Translate id="paymentTransactions" />}
-            href={PATHS.ME_WALLET_TRANSACTIONS}
+          <TotalAssets />
+          <FiatCurrency
+            balanceHKD={balanceHKD}
+            canPayout={canPayout}
+            hasStripeAccount={hasStripeAccount}
           />
-          <ViewStripeCustomerPortal />
+          {likerId && !shouldReAuth && <LikeCoin balanceLike={balanceLike} />}
           {hasPaymentPassword && <PaymentPassword />}
+          <ViewStripeCustomerPortal />
           {hasStripeAccount && <ViewStripeAccount />}
           <PaymentPointer />
         </Form.List>
