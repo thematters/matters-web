@@ -12,7 +12,7 @@ const TotalAssets = () => {
       }
       right={
         <Button
-          size={['7rem', '2rem']}
+          spacing={['xxtight', 'tight']}
           bgColor="green"
           textColor="white"
           href={PATHS.ME_WALLET_TRANSACTIONS}
