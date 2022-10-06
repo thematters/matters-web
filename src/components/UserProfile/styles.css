@@ -18,11 +18,14 @@
   }
 
   & :global(svg) {
+    border: 2px solid var(--color-matters-green);
+    border-radius: 50%;
+    transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+
     &:hover,
     &:focus {
       color: var(--color-white);
       background-color: var(--color-matters-green);
-      border-radius: 50%;
     }
   }
 }
