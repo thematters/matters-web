@@ -16,8 +16,8 @@
   @mixin flex-center-space-between;
 
   position: relative;
-  padding: 12px 8px;
-  margin: 8px 0 32px 0;
+  padding: var(--spacing-tight) var(--spacing-x-tight);
+  margin: var(--spacing-x-tight) 0 var(--spacing-x-loose) 0;
   color: var(--color-matters-gold);
   background: var(--color-yellow-lighter);
   border-radius: 4px;
@@ -32,8 +32,8 @@
   @mixin flex-center-space-between;
 
   position: relative;
-  padding: 12px 8px;
-  margin: 8px 0 16px 0;
+  padding: var(--spacing-x-tight) var(--spacing-x-tight);
+  margin: var(--spacing-x-tight) 0 var(--spacing-base) 0;
   color: var(--color-matters-green);
   background: var(--color-green-lighter);
   border-radius: 4px;

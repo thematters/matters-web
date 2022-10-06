@@ -30,7 +30,7 @@ const fragments = {
         ethAddress
         ipnsKey
       }
-      articles(input: { first: 30 }) {
+      articles(input: { first: 0 }) {
         totalCount
       }
     }
@@ -55,23 +55,6 @@ export type SearchSelectFormProps = {
   closeDialog: () => void
 }
 
-const SearchSelectForm = ({
-  title,
-  headerLeftButton,
-  closeDialog,
-}: SearchSelectFormProps) => {
-  return (
-    <>
-      <Dialog.Header
-        title={title}
-        closeDialog={closeDialog}
-        closeTextId="close"
-        leftButton={headerLeftButton}
-      />
-    </>
-  )
-}
-
 const BaseRssFeedDialog = ({ user, children }: RssFeedDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
@@ -91,14 +74,10 @@ const BaseRssFeedDialog = ({ user, children }: RssFeedDialogProps) => {
       {children({ openDialog })}
 
       <Dialog isOpen={show} onDismiss={closeDialog} fixedHeight>
-        {/* <Dialog.Header
+        <Dialog.Header
           title="ContentFeedEntrance"
           closeDialog={closeDialog}
           closeTextId="close"
-        /> */}
-        <SearchSelectForm
-          title="ContentFeedEntrance"
-          closeDialog={closeDialog}
         />
         <Dialog.Content hasGrow>
           <DynamicContent

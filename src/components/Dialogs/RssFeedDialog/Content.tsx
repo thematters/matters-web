@@ -239,19 +239,7 @@ const RssFeedDialogContent = ({
           <hr style={{ margin: '1rem 0' }} />
         </section>
       </SectionCard>
-
       <Spacer size="base" />
-      <style jsx>{`
-        button {
-          background-color: var(--color-matters-green);
-          font-size: 13px;
-          font-weight: 400;
-          line-height: 1em;
-          color: var(--color-white);
-          padding: 6px 8px;
-          border-radius: 12px;
-        }
-      `}</style>
       <style jsx>{styles}</style>
     </section>
   )
