@@ -1,0 +1,7 @@
+.TotalAssets {
+  @mixin flex-center-space-between;
+
+  padding: var(--spacing-base);
+  background: white;
+  border-bottom: 1px solid var(--color-line-grey-light);
+}

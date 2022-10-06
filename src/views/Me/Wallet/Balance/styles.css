@@ -22,3 +22,35 @@
     border-radius: 1.5rem;
   }
 }
+
+.payoutItem {
+  @mixin flex-center-space-between;
+
+  color: var(--color-grey);
+
+  & :global(> span) {
+    white-space: nowrap;
+  }
+
+  & :global(> span + span) {
+    margin-left: 2rem;
+    white-space: normal;
+  }
+}
+
+.assetsItem {
+  @mixin flex-center-space-between;
+
+  padding: var(--spacing-loose) 0;
+
+  @media (--sm-up) {
+    padding: var(--spacing-loose) var(--spacing-base);
+  }
+
+  &.clickable {
+    cursor: pointer;
+    &:hover {
+      background-color: var(--color-grey-lighter-active);
+    }
+  }
+}

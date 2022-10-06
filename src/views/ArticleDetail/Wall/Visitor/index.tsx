@@ -11,7 +11,7 @@ import {
   Translate,
 } from '~/components'
 
-import { translate } from '~/common/utils'
+import { analytics, translate } from '~/common/utils'
 
 import IMG_AD from '@/public/static/images/ad.svg'
 
@@ -30,12 +30,10 @@ const VisitorWall = ({ show }: VisitorWallProps) => {
   const outerClasses = classNames({ outer: true, show })
 
   const closeDialog = () => {
-    if (client?.writeData) {
-      client.writeData({
-        id: 'ClientPreference:local',
-        data: { wall: false },
-      })
-    }
+    client?.writeData({
+      id: 'ClientPreference:local',
+      data: { wall: false },
+    })
   }
 
   return (
@@ -59,7 +57,15 @@ const VisitorWall = ({ show }: VisitorWallProps) => {
           </p>
 
           <div className="signup">
-            <LoginButton bgColor="green" />
+            <LoginButton
+              bgColor="green"
+              onClick={() => {
+                analytics.trackEvent('click_button', {
+                  type: 'try_login_from_visitor',
+                  pageType: 'article_detail',
+                })
+              }}
+            />
           </div>
 
           <div className="close">

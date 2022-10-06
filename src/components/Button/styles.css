@@ -363,6 +363,12 @@ span.container {
   }
 }
 
+.border-black {
+  & .hotarea {
+    border-color: var(--color-black);
+  }
+}
+
 .border-grey {
   & .hotarea {
     border-color: var(--color-grey);
