@@ -15,4 +15,5 @@ export const EXTERNAL_LINKS = {
       : `https://rinkeby.liker.land/${likerId}/civic?utm_source=Matters`,
   SUPER_LIKE:
     'https://docs.like.co/v/zh/user-guide/likecoin-button/superlike?utm_source=Matters&utm_medium=website&utm_campaign=superlike_funnel',
+  PLANET: 'https://www.planetable.xyz/',
 }

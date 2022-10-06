@@ -25,6 +25,9 @@ const fragments = {
           ethAddress
           ipnsKey
         }
+        articles(input: { first: 30 }) {
+          totalCount
+        }
         following {
           users(input: { first: 0 }) {
             totalCount

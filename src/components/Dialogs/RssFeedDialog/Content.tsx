@@ -7,12 +7,15 @@ import {
   Card,
   CopyToClipboard,
   IconCopy16,
+  IconInfo24,
   IconRssDialog24,
   Spacer,
   Spinner,
   TextIcon,
   Translate,
 } from '~/components'
+
+import { EXTERNAL_LINKS } from '~/common/enums'
 
 import styles from './styles.css'
 
@@ -82,8 +85,10 @@ const SectionCard: React.FC<
 
 const RssFeedDialogContent = ({
   ipnsKey,
+  articlesCount,
 }: {
   ipnsKey: string
+  articlesCount: number
   refetch: () => any
 }) => {
   const { loading, data } = useQuery<RssGateways>(RSS_GATEWAYS)
@@ -95,7 +100,11 @@ const RssFeedDialogContent = ({
       <SectionCard
         title={
           <TextIcon icon={<IconRssDialog24 />} size="lg">
-            RSS
+            <Translate
+              zh_hant="內容訂閱服務"
+              zh_hans="内容订阅服务"
+              en="Content Feed"
+            />
           </TextIcon>
         }
         subTitle={
@@ -109,84 +118,125 @@ const RssFeedDialogContent = ({
       >
         <hr style={{ margin: '0.5rem 0 1rem' }} />
 
-        {/* gateways */}
-        <section className="gateways">
-          <header>
-            <h4 className="title">
-              <Translate
-                zh_hans="公共节点"
-                zh_hant="公共節點"
-                en="Public Gateways"
-              />
-            </h4>
-          </header>
-          <span className="subtitle">
-            <Translate
-              zh_hans="添加任一网址到你的订阅阅读器"
-              zh_hant="添加任一網址到你的訂閱閱讀器"
-              en="add any url to your RSS reader"
-            />
-          </span>
-
-          <ul>
-            {(!data || loading) && <Spinner />}
-
-            {gateways.map((url) => {
-              const gatewayUrl = url
-                .replace(':hash', ipnsKey)
-                .replace('/ipfs/', '/ipns/')
-                .concat('/rss.xml')
-              const hostname = url.replace(/(https:\/\/|\/ipfs\/|:hash.?)/g, '')
-              return (
-                <li key={url}>
-                  <a className="gateway-url">
-                    {hostname}
-                    <CopyToClipboard text={gatewayUrl}>
-                      <Button>
-                        <IconCopy16 />
-                      </Button>
-                    </CopyToClipboard>
-                  </a>
-                </li>
-              )
-            })}
-          </ul>
-        </section>
-
-        <hr style={{ margin: '1rem 0' }} />
+        {articlesCount !== 0 && ipnsKey === '' && (
+          <section className="warning-gold">
+            <TextIcon icon={<IconInfo24 size="md" />} color="gold" size="md-s">
+              <span>
+                <Translate
+                  zh_hans="尝试将内容写入 IPFS 网络中，需要一段时间请耐心等候"
+                  zh_hant="嘗試將內容寫入 IPFS 網絡中，需要一段時間請耐心等候"
+                  en="Adding contents into IPFS network. It takes some time, please wait."
+                />
+              </span>
+            </TextIcon>
+          </section>
+        )}
 
         {/* hash */}
         <section className="hash">
           <header>
             <h4 className="title">
               <Translate
-                zh_hans="IPNS Hash"
-                zh_hant="IPNS Hash"
-                en="IPNS Hash"
+                zh_hans="IPNS 订阅"
+                zh_hant="IPNS 訂閱"
+                en="IPNS Subscription"
               />
             </h4>
           </header>
           <span className="subtitle">
             <Translate
-              zh_hant="使用 IPFS 生成的作品指紋，通過它可在節點調取內容"
-              zh_hans="使用 IPFS 生成的作品指紋，通過它可在節點調取內容"
-              en="The Fingerprint from IPFS, you can read it via a gateway"
+              zh_hant="添加 IPFS 生成的 IPNS 指紋到閱讀器，如："
+              zh_hans="添加 IPFS 生成的 IPNS 指纹到阅读器，如："
+              en="Add hash from IPFS into compatible reader such as "
             />
+            <a
+              className="u-link-green"
+              href={EXTERNAL_LINKS.PLANET}
+              target="_blank"
+            >
+              Planet
+            </a>
           </span>
+          {ipnsKey !== '' && (
+            <section className="copy">
+              <input
+                type="text"
+                value={ipnsKey}
+                readOnly
+                onClick={(event) => event.currentTarget.select()}
+              />
+              <CopyToClipboard text={ipnsKey}>
+                <Button>
+                  <IconCopy16 />
+                </Button>
+              </CopyToClipboard>
+            </section>
+          )}
+          {articlesCount !== 0 && ipnsKey === '' && (
+            <section className="warning-green">
+              <TextIcon
+                icon={<IconInfo24 size="md" />}
+                color="green"
+                size="md-s"
+              >
+                <Translate
+                  zh_hans="等待写入完成..."
+                  zh_hant="等候寫入完成..."
+                  en="Waiting ..."
+                />
+              </TextIcon>
+            </section>
+          )}
 
-          <section className="copy">
-            <input
-              type="text"
-              value={ipnsKey}
-              readOnly
-              onClick={(event) => event.currentTarget.select()}
-            />
-            <CopyToClipboard text={ipnsKey}>
-              <Button>
-                <IconCopy16 />
-              </Button>
-            </CopyToClipboard>
+          <hr style={{ margin: '1rem 0' }} />
+
+          {/* gateways */}
+          <section className="gateways">
+            <header>
+              <h4 className="title">
+                <Translate
+                  zh_hans="RSS 订阅"
+                  zh_hant="RSS 訂閱"
+                  en="RSS Subscription"
+                />
+              </h4>
+            </header>
+            <span className="subtitle">
+              <Translate
+                zh_hans="添加以下任一网址到 RSS 阅读器"
+                zh_hant="添加以下任一網址到 RSS 閱讀器"
+                en="Add any URL in the following list into RSS reader"
+              />
+            </span>
+
+            <ul>
+              {(!data || loading) && <Spinner />}
+
+              {gateways.map((url) => {
+                const gatewayUrl = url
+                  .replace(':hash', ipnsKey)
+                  .replace('/ipfs/', '/ipns/')
+                const hostname = url.replace(
+                  /(https:\/\/|\/ipfs\/|:hash.?)/g,
+                  ''
+                )
+                return (
+                  <li key={url}>
+                    <a className="gateway-url">
+                      {hostname}
+                      <CopyToClipboard text={gatewayUrl}>
+                        <Button>
+                          <IconCopy16 />
+                        </Button>
+                      </CopyToClipboard>
+                    </a>
+                  </li>
+                )
+              })}
+            </ul>
           </section>
+
+          <hr style={{ margin: '1rem 0' }} />
         </section>
       </SectionCard>
 

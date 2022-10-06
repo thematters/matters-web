@@ -9,13 +9,21 @@
 }
 
 .right {
-  @mixin flex-center-space-between;
+  @mixin flex-end-space-between;
 
-  flex-grow: 0.1;
-  flex-shrink: 1;
+  & :global(> *) {
+    &:nth-child(2) {
+      margin-left: var(--spacing-base);
+    }
+  }
 
-  & :global(> *:first-child) {
-    flex-grow: 1;
+  & :global(svg) {
+    &:hover,
+    &:focus {
+      color: var(--color-white);
+      background-color: var(--color-matters-green);
+      border-radius: 50%;
+    }
   }
 }
 

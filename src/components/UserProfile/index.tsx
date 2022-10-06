@@ -63,7 +63,7 @@ export const UserProfile = () => {
   const { getQuery } = useRoute()
   const viewer = useContext(ViewerContext)
 
-  // public data
+  // public user data
   const userName = getQuery('name')
   const isMe = !userName || viewer.userName === userName
   const { data, loading, client } = usePublicQuery<UserProfileUserPublic>(
@@ -87,6 +87,7 @@ export const UserProfile = () => {
     })
   }, [user?.id, viewer.id])
 
+  const totalCount = user?.articles.totalCount || 0
   /**
    * Render
    */
@@ -253,7 +254,10 @@ export const UserProfile = () => {
 
           <section className="right">
             {!isMe && <FollowUserButton user={user} size="lg" />}
-            <RssFeedButton user={user} />
+
+            {totalCount !== 0 && hasTraveloggersBadge && (
+              <RssFeedButton user={user} />
+            )}
           </section>
         </header>
 

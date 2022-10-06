@@ -10,8 +10,7 @@ import {
   TextIconProps,
 } from '~/components'
 
-import { TAG_CONTENT_CLAMP_LENGTH } from '~/common/enums'
-import { toPath } from '~/common/utils'
+import { clampTagLength, toPath } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -76,10 +75,7 @@ export const Tag = ({
     disabled: !!disabled && !onClick,
   })
 
-  const tagName =
-    canClamp && tag.content.length > TAG_CONTENT_CLAMP_LENGTH
-      ? `${tag.content.slice(0, TAG_CONTENT_CLAMP_LENGTH)}⋯`
-      : tag.content
+  const tagName = canClamp ? clampTagLength(tag.content) : tag.content
 
   const path = toPath({
     page: 'tagDetail',

@@ -30,6 +30,9 @@ const fragments = {
         ethAddress
         ipnsKey
       }
+      articles(input: { first: 30 }) {
+        totalCount
+      }
     }
   `,
 }
@@ -45,6 +48,29 @@ const AuthorRssFeedGQL = gql`
 `
 
 const DynamicContent = dynamic(() => import('./Content'), { loading: Spinner })
+
+export type SearchSelectFormProps = {
+  title: string | React.ReactNode
+  headerLeftButton?: React.ReactNode
+  closeDialog: () => void
+}
+
+const SearchSelectForm = ({
+  title,
+  headerLeftButton,
+  closeDialog,
+}: SearchSelectFormProps) => {
+  return (
+    <>
+      <Dialog.Header
+        title={title}
+        closeDialog={closeDialog}
+        closeTextId="close"
+        leftButton={headerLeftButton}
+      />
+    </>
+  )
+}
 
 const BaseRssFeedDialog = ({ user, children }: RssFeedDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
@@ -65,15 +91,19 @@ const BaseRssFeedDialog = ({ user, children }: RssFeedDialogProps) => {
       {children({ openDialog })}
 
       <Dialog isOpen={show} onDismiss={closeDialog} fixedHeight>
-        <Dialog.Header
-          title="RSSEntrance"
+        {/* <Dialog.Header
+          title="ContentFeedEntrance"
           closeDialog={closeDialog}
           closeTextId="close"
+        /> */}
+        <SearchSelectForm
+          title="ContentFeedEntrance"
+          closeDialog={closeDialog}
         />
-
         <Dialog.Content hasGrow>
           <DynamicContent
             ipnsKey={user?.info.ipnsKey || ''}
+            articlesCount={user?.articles.totalCount || 0}
             refetch={refetch}
           />
         </Dialog.Content>
