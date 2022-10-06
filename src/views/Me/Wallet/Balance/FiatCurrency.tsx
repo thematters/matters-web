@@ -1,7 +1,7 @@
 import {
   AddCreditDialog,
   DropdownDialog,
-  Form,
+  IconArrowRight16,
   IconFiatCurrency40,
   IconPayout24,
   IconWallet24,
@@ -13,7 +13,7 @@ import {
 
 import { analytics } from '~/common/utils'
 
-import CurrencyFormatter from './CurrencyFormatter'
+import CurrencyFormatter from './CurrencyFormatter/index'
 import styles from './styles.css'
 
 interface FiatCurrencyProps {
@@ -126,30 +126,34 @@ export const FiatCurrency: React.FC<FiatCurrencyProps> = ({
               }}
             >
               {({ openDialog, ref }) => (
-                <Form.List.Item
-                  title={
-                    <TextIcon
-                      icon={<IconFiatCurrency40 size="xl-m" />}
-                      size="md"
-                      spacing="xtight"
-                    >
-                      <Translate
-                        zh_hant="法幣"
-                        zh_hans="法币"
-                        en="Fiat Currency"
-                      />
-                    </TextIcon>
-                  }
-                  rightText={
+                <section
+                  onClick={openDialog}
+                  ref={ref}
+                  className="assetsItem clickable"
+                >
+                  <TextIcon
+                    icon={<IconFiatCurrency40 size="xl-m" />}
+                    size="md"
+                    spacing="xtight"
+                  >
+                    <Translate
+                      zh_hant="法幣"
+                      zh_hans="法币"
+                      en="Fiat Currency"
+                    />
+                  </TextIcon>
+                  <TextIcon
+                    icon={<IconArrowRight16 />}
+                    spacing="xtight"
+                    textPlacement="left"
+                  >
                     <CurrencyFormatter
                       currency={balanceHKD}
                       currencyCode={'HKD'}
                     />
-                  }
-                  bold
-                  onClick={openDialog}
-                  ref={ref}
-                />
+                  </TextIcon>
+                  <style jsx>{styles}</style>
+                </section>
               )}
             </DropdownDialog>
           )}
@@ -158,7 +162,3 @@ export const FiatCurrency: React.FC<FiatCurrencyProps> = ({
     </PayoutDialog>
   )
 }
-
-// const FiatCurrency = () => {
-
-// }

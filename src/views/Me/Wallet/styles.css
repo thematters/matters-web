@@ -1,0 +1,9 @@
+.assetsContainer {
+  padding: 0 var(--spacing-base);
+  margin-bottom: var(--spacing-base);
+  background: white;
+
+  @media (--sm-up) {
+    margin-bottom: var(--spacing-loose);
+  }
+}
