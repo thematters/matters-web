@@ -8,7 +8,6 @@ import {
   CopyToClipboard,
   IconCopy16,
   IconInfo24,
-  IconRssDialog24,
   Spacer,
   Spinner,
   TextIcon,
@@ -31,7 +30,7 @@ const RSS_GATEWAYS = gql`
 
 const SectionCard: React.FC<
   React.PropsWithChildren<{
-    title: string | React.ReactNode
+    title?: string | React.ReactNode
     subTitle?: string | React.ReactNode
     right?: string | React.ReactNode
     href?: string
@@ -95,40 +94,26 @@ const RssFeedDialogContent = ({
 
   const gateways = data?.official.gatewayUrls || []
 
+  const notPushlishedLately = articlesCount !== 0 && ipnsKey === ''
+  console.log(notPushlishedLately)
+
   return (
     <section className="container">
-      <SectionCard
-        title={
-          <TextIcon icon={<IconRssDialog24 />} size="lg">
-            <Translate
-              zh_hant="內容訂閱服務"
-              zh_hans="内容订阅服务"
-              en="Content Feed"
-            />
-          </TextIcon>
-        }
-        subTitle={
-          <Translate
-            zh_hant="透過 IPFS 網絡建立的去中心化內容訂閱服務"
-            zh_hans="透过 IPFS 网络建立的去中心化内容订阅服务"
-            en="Decentralized Content Feed Based On IPFS"
-          />
-        }
-        warning={false}
-      >
-        <hr style={{ margin: '0.5rem 0 1rem' }} />
-
-        {articlesCount !== 0 && ipnsKey === '' && (
+      <SectionCard>
+        {notPushlishedLately && (
           <section className="warning-gold">
-            <TextIcon icon={<IconInfo24 size="md" />} color="gold" size="md-s">
-              <span>
-                <Translate
-                  zh_hans="尝试将内容写入 IPFS 网络中，需要一段时间请耐心等候"
-                  zh_hant="嘗試將內容寫入 IPFS 網絡中，需要一段時間請耐心等候"
-                  en="Adding contents into IPFS network. It takes some time, please wait."
-                />
-              </span>
-            </TextIcon>
+            <TextIcon
+              icon={<IconInfo24 size="md" />}
+              color="gold"
+              size="md-s"
+            />
+            <span>
+              <Translate
+                zh_hans="尝试将内容写入 IPFS 网络中，需要一段时间请耐心等候。若等候时间过久，可以尝试发布文章加速。"
+                zh_hant="嘗試將內容寫入 IPFS 網絡中，需要一段時間請耐心等候。若等候時間過久，可以嘗試發佈文章加速。"
+                en="Adding contents into IPFS network. It takes some time, please wait."
+              />
+            </span>
           </section>
         )}
 
@@ -172,7 +157,7 @@ const RssFeedDialogContent = ({
               </CopyToClipboard>
             </section>
           )}
-          {articlesCount !== 0 && ipnsKey === '' && (
+          {notPushlishedLately && (
             <section className="warning-green">
               <TextIcon
                 icon={<IconInfo24 size="md" />}
@@ -215,17 +200,24 @@ const RssFeedDialogContent = ({
               {gateways.map((url) => {
                 const gatewayUrl = url
                   .replace(':hash', ipnsKey)
-                  .replace('/ipfs/', '/ipns/').concat('/rss.xml')
+                  .replace('/ipfs/', '/ipns/')
+                  .concat('/rss.xml')
                 const hostname = url.replace(
                   /(https:\/\/|\/ipfs\/|:hash.?)/g,
                   ''
                 )
                 return (
                   <li key={url}>
-                    <a className="gateway-url">
+                    <a
+                      className={
+                        notPushlishedLately
+                          ? 'gateway-url-disabled'
+                          : 'gateway-url'
+                      }
+                    >
                       {hostname}
                       <CopyToClipboard text={gatewayUrl}>
-                        <Button>
+                        <Button disabled={notPushlishedLately}>
                           <IconCopy16 />
                         </Button>
                       </CopyToClipboard>
@@ -235,8 +227,6 @@ const RssFeedDialogContent = ({
               })}
             </ul>
           </section>
-
-          <hr style={{ margin: '1rem 0' }} />
         </section>
       </SectionCard>
       <Spacer size="base" />
