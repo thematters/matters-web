@@ -6,7 +6,7 @@ import styles from './styles.css'
 
 const TotalAssets = () => {
   return (
-    <section className="TotalAssets">
+    <section className="totalAssets">
       <TextIcon
         icon={<IconIncome24 size="md" />}
         spacing="xtight"
@@ -15,8 +15,10 @@ const TotalAssets = () => {
       >
         <Translate zh_hant="資產" zh_hans="资产" en="Assets" />
       </TextIcon>
+
       <Button
-        spacing={['xxtight', 'tight']}
+        spacing={[0, 'tight']}
+        size={[null, '2rem']}
         bgColor="green"
         textColor="white"
         href={PATHS.ME_WALLET_TRANSACTIONS}

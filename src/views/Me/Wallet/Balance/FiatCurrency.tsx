@@ -45,17 +45,17 @@ const PayoutItem = ({
   openDialog,
   canPayout,
 }: ItemProps & { canPayout: boolean }) => {
-  return canPayout ? (
-    <Menu.Item
-      onClick={() => {
-        openDialog()
-      }}
-    >
-      <TextIcon icon={<IconPayout24 size="md" />} size="xm" spacing="base">
-        <Translate id="paymentPayout" />
-      </TextIcon>
-    </Menu.Item>
-  ) : (
+  if (!canPayout) {
+    return (
+      <Menu.Item onClick={openDialog}>
+        <TextIcon icon={<IconPayout24 size="md" />} size="xm" spacing="base">
+          <Translate id="paymentPayout" />
+        </TextIcon>
+      </Menu.Item>
+    )
+  }
+
+  return (
     <Menu.Item>
       <section className="payoutItem">
         <TextIcon
@@ -66,13 +66,15 @@ const PayoutItem = ({
         >
           <Translate id="paymentPayout" />
         </TextIcon>
-        <TextIcon size="sm-s">
+
+        <section className="subtitle">
           <Translate
-            zh_hant="餘額超過 500 HKD 就可提現"
-            zh_hans="余额超过 500 HKD 就可提现"
+            zh_hant="餘額超過 500 HKD 即可提現"
+            zh_hans="余额超过 500 HKD 即可提现"
             en="You can withdraw when your balance is over 500 HKD"
           />
-        </TextIcon>
+        </section>
+
         <style jsx>{styles}</style>
       </section>
     </Menu.Item>

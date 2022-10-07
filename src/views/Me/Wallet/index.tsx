@@ -59,13 +59,14 @@ const Wallet = () => {
 
       <PullToRefresh refresh={refetch}>
         <TotalAssets />
+
         <section className="assetsContainer">
           <FiatCurrency
             balanceHKD={balanceHKD}
             canPayout={canPayout}
             hasStripeAccount={hasStripeAccount}
           />
-          <hr />
+          <hr className="divider" />
           <LikeCoin />
         </section>
 
