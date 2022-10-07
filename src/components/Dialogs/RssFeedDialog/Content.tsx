@@ -215,7 +215,7 @@ const RssFeedDialogContent = ({
               {gateways.map((url) => {
                 const gatewayUrl = url
                   .replace(':hash', ipnsKey)
-                  .replace('/ipfs/', '/ipns/')
+                  .replace('/ipfs/', '/ipns/').concat('/rss.xml')
                 const hostname = url.replace(
                   /(https:\/\/|\/ipfs\/|:hash.?)/g,
                   ''
