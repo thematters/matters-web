@@ -122,7 +122,7 @@ const Authors = () => {
       <section className="backToAll">
         <ViewMoreCard
           spacing={['tight', 'tight']}
-          href={PATHS.TAGS}
+          href={PATHS.AUTHORS}
           iconProps={{ size: 'sm' }}
           textIconProps={{ size: 'sm', weight: 'md', spacing: 'xxtight' }}
           textAlign="center"
