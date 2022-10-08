@@ -45,7 +45,7 @@ const PayoutItem = ({
   openDialog,
   canPayout,
 }: ItemProps & { canPayout: boolean }) => {
-  if (!canPayout) {
+  if (canPayout) {
     return (
       <Menu.Item onClick={openDialog}>
         <TextIcon icon={<IconPayout24 size="md" />} size="xm" spacing="base">
