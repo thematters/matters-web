@@ -109,9 +109,9 @@ const RssFeedDialogContent = ({
             />
             <span>
               <Translate
-                zh_hans="尝试将内容写入 IPFS 网络中，需要一段时间请耐心等候。若等候时间过久，可以尝试发布文章加速。"
-                zh_hant="嘗試將內容寫入 IPFS 網絡中，需要一段時間請耐心等候。若等候時間過久，可以嘗試發佈文章加速。"
-                en="Adding contents into IPFS network. It takes some time, please wait."
+                zh_hans="尝试将内容写入 IPFS 网络中，需要一段时间，请耐心等候。若等候时间过久，可通过发布文章来加速。"
+                zh_hant="嘗試將內容寫入 IPFS 網絡中，需要一段時間，請耐心等候。若等候時間過久，可透過發佈文章來加速。"
+                en="Adding contents into IPFS network, and it usually takes some times, please wait. You can accelerate the process by publishing new article."
               />
             </span>
           </section>

@@ -25,6 +25,7 @@
 
   & span {
     display: inline-flex;
+    font-size: var(--font-size-md-s);
     line-height: 1.5;
   }
 }
