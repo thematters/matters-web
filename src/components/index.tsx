@@ -1,6 +1,7 @@
 /**
  * Atomics
  */
+export * from './CurrencyFormatter'
 export * from './Icon'
 export * from './DateTime'
 export * from './TextIcon'

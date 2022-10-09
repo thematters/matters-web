@@ -19,6 +19,7 @@ import { PayTo_payTo_transaction as PayToTx } from '~/components/GQL/mutations/_
 import { UserDonationRecipient } from './__generated__/UserDonationRecipient'
 
 type Step =
+  | 'currencyChoice'
   | 'setAmount'
   | 'addCredit'
   | 'complete'
@@ -53,6 +54,12 @@ const DynamicPayToFormConfirm = dynamic(
   () => import('~/components/Forms/PaymentForm/PayTo/Confirm'),
   { loading: Spinner }
 )
+
+const DynamicPayToFormCurrencyChoice = dynamic(
+  () => import('~/components/Forms/PaymentForm/PayTo/CurrencyChoice'),
+  { loading: Spinner }
+)
+
 const DynamicPayToFormSetAmount = dynamic(
   () => import('~/components/Forms/PaymentForm/PayTo/SetAmount'),
   { loading: Spinner }
@@ -91,7 +98,7 @@ const fragments = {
 const BaseDonationDialog = ({
   children,
   completeCallback,
-  defaultStep = 'setAmount',
+  defaultStep = 'currencyChoice',
   recipient,
   targetId,
 }: DonationDialogProps) => {
@@ -144,6 +151,8 @@ const BaseDonationDialog = ({
   /**
    * Donation
    */
+
+  const isCurrencyChoice = currStep === 'currencyChoice'
   // complete dialog for donation
   const isComplete = currStep === 'complete'
   // set donation amount
@@ -207,6 +216,21 @@ const BaseDonationDialog = ({
               : 'donation'
           }
         />
+
+        {isCurrencyChoice && (
+          <DynamicPayToFormCurrencyChoice
+            closeDialog={closeDialog}
+            defaultCurrency={currency}
+            openTabCallback={setAmountOpenTabCallback}
+            recipient={recipient}
+            submitCallback={setAmountCallback}
+            switchToSetAmount={(c: CURRENCY) => {
+              setCurrency(c)
+              forward('setAmount')
+            }}
+            targetId={targetId}
+          />
+        )}
 
         {isSetAmount && (
           <DynamicPayToFormSetAmount
