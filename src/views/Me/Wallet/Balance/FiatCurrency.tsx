@@ -1,5 +1,6 @@
 import {
   AddCreditDialog,
+  CurrencyFormatter,
   DropdownDialog,
   IconArrowRight16,
   IconFiatCurrency40,
@@ -13,7 +14,6 @@ import {
 
 import { analytics } from '~/common/utils'
 
-import CurrencyFormatter from './CurrencyFormatter/index'
 import styles from './styles.css'
 
 interface FiatCurrencyProps {

@@ -156,7 +156,7 @@ const SetAmount: React.FC<FormProps> = ({
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit} noBackground>
-      <Form.CurrencyRadioInput
+      {/* <Form.CurrencyRadioInput
         isLike={isLike}
         name="currency"
         disabled={locked}
@@ -172,7 +172,7 @@ const SetAmount: React.FC<FormProps> = ({
             setFieldValue('amount', defaultAmount)
           }
         }}
-      />
+      /> */}
 
       {fixed && canProcess && (
         <Form.AmountRadioInput

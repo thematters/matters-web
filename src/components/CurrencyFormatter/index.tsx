@@ -7,7 +7,7 @@ interface Props {
   subCurrencyCode?: string
 }
 
-const CurrencyFormatter: React.FC<Props> = ({
+export const CurrencyFormatter: React.FC<Props> = ({
   currency,
   currencyCode,
   subCurrency,
@@ -28,4 +28,3 @@ const CurrencyFormatter: React.FC<Props> = ({
   )
 }
 
-export default CurrencyFormatter
