@@ -27,4 +27,3 @@ export const CurrencyFormatter: React.FC<Props> = ({
     </span>
   )
 }
-
