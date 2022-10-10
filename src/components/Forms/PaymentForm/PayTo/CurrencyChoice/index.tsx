@@ -18,9 +18,7 @@ import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import styles from './styles.css'
 
 import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
-import {
-  PayTo_payTo_transaction as PayToTx,
-} from '~/components/GQL/mutations/__generated__/PayTo'
+import { PayTo_payTo_transaction as PayToTx } from '~/components/GQL/mutations/__generated__/PayTo'
 import { WalletBalance } from '~/components/GQL/queries/__generated__/WalletBalance'
 
 interface SetAmountCallbackValues {
@@ -86,7 +84,12 @@ const CurrencyChoice: React.FC<FormProps> = ({
         >
           <Translate zh_hant="法幣" zh_hans="法币" en="Fiat Currency" />
         </TextIcon>
-        <CurrencyFormatter currency={balance} currencyCode={'HKD'} />
+        <CurrencyFormatter
+          currency={balance}
+          currencyCode={'HKD'}
+          subCurrency={123}
+          subCurrencyCode={'TWD'}
+        />
       </section>
       <section
         className="item"
@@ -113,6 +116,16 @@ const CurrencyChoice: React.FC<FormProps> = ({
 
   return (
     <>
+      {/* <Dialog.Header
+          closeDialog={closeDialog}
+          leftButton={<span />}
+          rightButton={
+            <Dialog.Header.CloseButton
+              closeDialog={closeDialog}
+            />
+          }
+          title={'donation'}
+        /> */}
       <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
     </>
   )
