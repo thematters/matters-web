@@ -322,4 +322,4 @@ export const UserProfile = () => {
   )
 }
 
-export default RssFeedButton
+export default UserProfile
