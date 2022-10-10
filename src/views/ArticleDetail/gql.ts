@@ -55,6 +55,7 @@ const articlePublicFragment = gql`
       summary
       language
     }
+    availableTranslations
     ...MetaInfoArticle
     ...ContentArticle
     ...TagListArticle
@@ -78,6 +79,26 @@ const articlePublicFragment = gql`
   ${SupportWidget.fragments.article.private}
   ${CircleWall.fragments.circle.public}
   ${CircleWall.fragments.circle.private}
+`
+
+export const ARTICLE_AVAILABLE_TRANSLATIONS = gql`
+  query ArticleAvailableTranslations($mediaHash: String!) {
+    article(input: { mediaHash: $mediaHash }) {
+      id
+      availableTranslations
+    }
+  }
+`
+
+export const ARTICLE_AVAILABLE_TRANSLATIONS_BY_NODE_ID = gql`
+  query ArticleAvailableTranslationsByNodeId($id: ID!) {
+    article: node(input: { id: $id }) {
+      ... on Article {
+        id
+        availableTranslations
+      }
+    }
+  }
 `
 
 export const ARTICLE_DETAIL_PUBLIC = gql`

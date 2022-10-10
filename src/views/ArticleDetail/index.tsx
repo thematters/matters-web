@@ -41,6 +41,8 @@ import Collection from './Collection'
 import Content from './Content'
 import CustomizedSummary from './CustomizedSummary'
 import {
+  ARTICLE_AVAILABLE_TRANSLATIONS,
+  ARTICLE_AVAILABLE_TRANSLATIONS_BY_NODE_ID,
   ARTICLE_DETAIL_PRIVATE,
   ARTICLE_DETAIL_PUBLIC,
   ARTICLE_DETAIL_PUBLIC_BY_NODE_ID,
@@ -60,6 +62,7 @@ import VisitorWall from './Wall/Visitor'
 
 import { ArticleAccessType, UserLanguage } from '@/__generated__/globalTypes'
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
+import { ArticleAvailableTranslations } from './__generated__/ArticleAvailableTranslations'
 import {
   ArticleDetailPublic,
   ArticleDetailPublic_article,
@@ -130,7 +133,7 @@ const BaseArticleDetail = ({
   const shouldShowWall = !viewer.isAuthed && wall
 
   // translation
-  const [autoTranslation] = useState(article.translation)
+  const [autoTranslation] = useState(article.translation) // cache initial article data since it will be overwrote by newly's if URL is shadow replaced
   const [translated, setTranslate] = useState(!!locale)
   const originalLang = article.language
   const {
@@ -256,6 +259,7 @@ const BaseArticleDetail = ({
             url: `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/@${article.author.userName}`,
           },
         }}
+        availableLanguages={article.availableTranslations || []}
       />
 
       <PullToRefresh>
@@ -342,7 +346,11 @@ const BaseArticleDetail = ({
   )
 }
 
-const ArticleDetail = () => {
+const ArticleDetail = ({
+  includeTranslation,
+}: {
+  includeTranslation: boolean
+}) => {
   const { getQuery, router } = useRoute()
   const mediaHash = getQuery('mediaHash')
   const articleId =
@@ -353,19 +361,19 @@ const ArticleDetail = () => {
   /**
    * fetch public data
    */
+  const isQueryByHash = !!(mediaHash && isValidMediaHash(mediaHash))
+
   // backward compatible with:
   // - `/:username:/:articleId:-:slug:-:mediaHash`
   // - `/:username:/:articleId:`
   // - `/:username:/:slug:-:mediaHash:`
-  const isQueryByHash = !!(mediaHash && isValidMediaHash(mediaHash))
   const resultByHash = usePublicQuery<ArticleDetailPublic>(
     ARTICLE_DETAIL_PUBLIC,
     {
       variables: {
         mediaHash,
         language: locale ? toUserLanguage(locale) : UserLanguage.zh_hant,
-        // includeTranslation: !!locale,
-        includeTranslation: false,
+        includeTranslation,
       },
       skip: !isQueryByHash,
     }
@@ -376,8 +384,7 @@ const ArticleDetail = () => {
       variables: {
         id: toGlobalId({ type: 'Article', id: articleId }),
         language: locale ? toUserLanguage(locale) : UserLanguage.zh_hant,
-        // includeTranslation: !!locale,
-        includeTranslation: false,
+        includeTranslation,
       },
       skip: isQueryByHash,
     }
@@ -584,4 +591,45 @@ const ArticleDetail = () => {
   return <BaseArticleDetail article={article} privateFetched={privateFetched} />
 }
 
-export default ArticleDetail
+const ArticleDetailOuter = () => {
+  const { getQuery, router } = useRoute()
+  const mediaHash = getQuery('mediaHash')
+  const articleId =
+    (router.query.mediaHash as string)?.match(/^(\d+)/)?.[1] || ''
+  const locale = router.locale !== DEFAULT_LOCALE ? router.locale : ''
+
+  const isQueryByHash = !!(mediaHash && isValidMediaHash(mediaHash))
+  const resultByHash = usePublicQuery<ArticleAvailableTranslations>(
+    ARTICLE_AVAILABLE_TRANSLATIONS,
+    { variables: { mediaHash }, skip: !isQueryByHash }
+  )
+  const resultByNodeId = usePublicQuery<ArticleAvailableTranslations>(
+    ARTICLE_AVAILABLE_TRANSLATIONS_BY_NODE_ID,
+    {
+      variables: { id: toGlobalId({ type: 'Article', id: articleId }) },
+      skip: isQueryByHash,
+    }
+  )
+  const { data } = resultByHash.data ? resultByHash : resultByNodeId
+  const loading = resultByHash.loading || resultByNodeId.loading
+  const includeTranslation =
+    !!locale &&
+    (data?.article?.availableTranslations || []).includes(
+      toUserLanguage(locale) as UserLanguage
+    )
+
+  /**
+   * Rendering
+   */
+  if (loading) {
+    return (
+      <EmptyLayout>
+        <Spinner />
+      </EmptyLayout>
+    )
+  }
+
+  return <ArticleDetail includeTranslation={includeTranslation} />
+}
+
+export default ArticleDetailOuter
