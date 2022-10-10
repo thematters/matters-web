@@ -2,11 +2,14 @@ import { useContext, useEffect } from 'react'
 
 import {
   Avatar,
+  Button,
   Cover,
   Error,
   Expandable,
   FollowUserButton,
+  IconRss32,
   Layout,
+  RssFeedDialog,
   Spinner,
   Throw404,
   Tooltip,
@@ -37,15 +40,30 @@ import { LogbookDialog } from './LogbookDialog'
 import styles from './styles.css'
 import WalletAddress from './WalletAddress'
 
+import { AuthorRssFeed } from '~/components/Dialogs/RssFeedDialog/__generated__/AuthorRssFeed'
 import { UserProfileUserPublic } from './__generated__/UserProfileUserPublic'
 
-// import { UserProfileUserPrivate_user_info_cryptoWallet_nfts } from './__generated__/UserProfileUserPrivate'
+interface FingerprintButtonProps {
+  user: AuthorRssFeed
+}
+
+const RssFeedButton = ({ user }: FingerprintButtonProps) => {
+  return (
+    <RssFeedDialog user={user}>
+      {({ openDialog }) => (
+        <Button onClick={openDialog} spacing={['xxtight', 'xtight']}>
+          <IconRss32 color="green" size="lg" />
+        </Button>
+      )}
+    </RssFeedDialog>
+  )
+}
 
 export const UserProfile = () => {
   const { getQuery } = useRoute()
   const viewer = useContext(ViewerContext)
 
-  // public data
+  // public user data
   const userName = getQuery('name')
   const isMe = !userName || viewer.userName === userName
   const { data, loading, client } = usePublicQuery<UserProfileUserPublic>(
@@ -69,6 +87,7 @@ export const UserProfile = () => {
     })
   }, [user?.id, viewer.id])
 
+  const totalCount = user?.articles.totalCount || 0
   /**
    * Render
    */
@@ -152,7 +171,6 @@ export const UserProfile = () => {
     return (
       <>
         <LayoutHeader />
-
         <section className="user-profile">
           <Cover fallbackCover={IMAGE_COVER.src} />
 
@@ -234,7 +252,13 @@ export const UserProfile = () => {
             )}
           </section>
 
-          {!isMe && <FollowUserButton user={user} size="lg" />}
+          <section className="right">
+            {!isMe && <FollowUserButton user={user} size="lg" />}
+
+            {totalCount !== 0 && hasTraveloggersBadge && (
+              <RssFeedButton user={user} />
+            )}
+          </section>
         </header>
 
         <section className="info">
@@ -297,3 +321,5 @@ export const UserProfile = () => {
     </>
   )
 }
+
+export default UserProfile
