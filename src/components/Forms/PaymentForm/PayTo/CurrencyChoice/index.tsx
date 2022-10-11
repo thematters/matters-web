@@ -54,7 +54,8 @@ const CurrencyChoice: React.FC<FormProps> = ({
   const { data, loading } = useQuery<WalletBalance>(WALLET_BALANCE, {
     fetchPolicy: 'network-only',
   })
-  const balance = data?.viewer?.wallet.balance.HKD || 0
+  const balanceHKD = data?.viewer?.wallet.balance.HKD || 0
+  const balanceLike = data?.viewer?.liker.total || 0
 
   // const isHKD = values.currency === CURRENCY.HKD
   // const isLike = values.currency === CURRENCY.LIKE
@@ -67,7 +68,7 @@ const CurrencyChoice: React.FC<FormProps> = ({
         <span>選擇支持</span>
         <span className="userInfo">
           <Avatar user={recipient} size="xs" />
-          <span className="userName">{recipient.userName}</span>
+          <span className="userName">{recipient.displayName}</span>
         </span>
         <span>的方式：</span>
       </section>
@@ -85,7 +86,7 @@ const CurrencyChoice: React.FC<FormProps> = ({
           <Translate zh_hant="法幣" zh_hans="法币" en="Fiat Currency" />
         </TextIcon>
         <CurrencyFormatter
-          currency={balance}
+          currency={balanceHKD}
           currencyCode={'HKD'}
           subCurrency={123}
           subCurrencyCode={'TWD'}
@@ -104,7 +105,7 @@ const CurrencyChoice: React.FC<FormProps> = ({
         >
           <Translate zh_hant="LikeCoin" zh_hans="LikeCoin" en="LikeCoin" />
         </TextIcon>
-        <CurrencyFormatter currency={balance} currencyCode={'LIKE'} />
+        <CurrencyFormatter currency={balanceLike} currencyCode={'LIKE'} />
       </section>
       <style jsx>{styles}</style>
     </section>

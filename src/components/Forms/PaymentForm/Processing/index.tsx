@@ -5,11 +5,22 @@ import { useState } from 'react'
 
 import { Dialog, Spinner, Translate } from '~/components'
 
+import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
+
+import PaymentInfo from '../PaymentInfo'
+import PayToFallback from './PayToFallback'
+import styles from './styles.css'
+
+import { UserDonationRecipient } from '@/src/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
 import { ViewerTxState } from './__generated__/ViewerTxState'
 
 interface Props {
+  amount: number
+  currency: CURRENCY
+  recipient: UserDonationRecipient
   txId: string
   nextStep: () => void
+  closeDialog: () => void
   windowRef?: Window
 }
 
@@ -35,8 +46,12 @@ const VIEWER_TX_STATE = gql`
 `
 
 const PaymentProcessingForm: React.FC<Props> = ({
+  amount,
+  currency,
+  recipient,
   txId,
   nextStep,
+  closeDialog,
   windowRef,
 }) => {
   const [polling, setPolling] = useState(true)
@@ -48,15 +63,16 @@ const PaymentProcessingForm: React.FC<Props> = ({
     skip: typeof window === 'undefined',
   })
   const txState = _get(data, 'viewer.wallet.transactions.edges.0.node.state')
+  console.log('Processing', { error })
 
   if (txState === 'succeeded') {
-    nextStep()
+    // nextStep()
 
     if (windowRef) {
       windowRef.close()
     }
 
-    return null
+    // return null
   }
 
   if (error) {
@@ -64,15 +80,37 @@ const PaymentProcessingForm: React.FC<Props> = ({
   }
 
   return (
-    <Dialog.Message type={error ? 'error' : undefined} spacing="md">
+    <>
       {error ? (
-        <h3>
-          <Translate id="NETWORK_ERROR" />
-        </h3>
+        <PayToFallback closeDialog={closeDialog} />
       ) : (
-        <Spinner />
+        <>
+          <Dialog.Header
+            closeDialog={closeDialog}
+            leftButton={<Dialog.Header.CloseButton closeDialog={closeDialog} />}
+            title={'donation'}
+          />
+          <Dialog.Content>
+            <section>
+              <PaymentInfo
+                amount={amount}
+                currency={currency}
+                recipient={recipient}
+              />
+              <p className="hint">
+                <Translate
+                  zh_hant="交易進行中，請稍候..."
+                  zh_hans="交易进行中，请稍候..."
+                  en="Transaction in progress, please wait..."
+                />
+              </p>
+              <Spinner />
+              <style jsx>{styles}</style>
+            </section>
+          </Dialog.Content>
+        </>
       )}
-    </Dialog.Message>
+    </>
   )
 }
 

@@ -4,10 +4,12 @@ import _pickBy from 'lodash/pickBy'
 import { useContext, useEffect } from 'react'
 
 import {
+  Button,
   Dialog,
   Form,
   LanguageContext,
   Spinner,
+  TextIcon,
   Translate,
   useMutation,
 } from '~/components'
@@ -16,12 +18,11 @@ import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import {
-  formatAmount,
   parseFormSubmitErrors,
   validatePaymentPassword,
 } from '~/common/utils'
 
-import ConfirmTable from '../../ConfirmTable'
+import PaymentInfo from '../../PaymentInfo'
 import styles from './styles.css'
 
 import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
@@ -34,6 +35,7 @@ interface FormProps {
   recipient: UserDonationRecipient
   targetId: string
   submitCallback: () => void
+  switchToSetAmount: () => void
   switchToResetPassword: () => void
 }
 
@@ -47,6 +49,7 @@ const Confirm: React.FC<FormProps> = ({
   recipient,
   targetId,
   submitCallback,
+  switchToSetAmount,
   switchToResetPassword,
 }) => {
   const formId = 'pay-to-confirm-form'
@@ -114,7 +117,6 @@ const Confirm: React.FC<FormProps> = ({
         name="password"
         value={values.password}
         error={touched.password && errors.password}
-        hint={<Translate id="hintPaymentPassword" />}
         onChange={(value) => {
           const shouldValidate = value.length === 6
           setTouched({ password: true }, shouldValidate)
@@ -145,36 +147,36 @@ const Confirm: React.FC<FormProps> = ({
     <>
       <Dialog.Content hasGrow>
         <section>
-          <section className="info">
-            <h4 className="to">
-              <Translate zh_hant="給" zh_hans="给" en="to" />{' '}
-              {recipient.displayName}
-            </h4>
-
-            <p className="amount">
-              <b>
-                {currency} {amount}
-              </b>
+          <PaymentInfo
+            amount={amount}
+            currency={currency}
+            recipient={recipient}
+          >
+            <p>
+              <Button onClick={switchToSetAmount}>
+                <TextIcon
+                  size="xs"
+                  textDecoration="underline"
+                  color="grey-dark"
+                >
+                  <Translate
+                    zh_hant="修改金額"
+                    zh_hans="修改金额"
+                    en="Amend amount"
+                  />
+                </TextIcon>
+              </Button>
             </p>
-          </section>
+          </PaymentInfo>
 
-          <ConfirmTable>
-            <ConfirmTable.Row type="breaker" />
-
-            <ConfirmTable.Row
-              type={isWalletInsufficient ? 'insufficient' : 'balance'}
-            >
-              <ConfirmTable.Col>
-                <Translate id="walletBalance" />
-              </ConfirmTable.Col>
-
-              <ConfirmTable.Col>
-                {currency} {formatAmount(balance)}
-              </ConfirmTable.Col>
-            </ConfirmTable.Row>
-          </ConfirmTable>
-
-          {!isWalletInsufficient && InnerForm}
+          {!isWalletInsufficient && (
+            <>
+              <p className="hint">
+                <Translate id="hintPaymentPassword" />
+              </p>
+              {InnerForm}
+            </>
+          )}
 
           <style jsx>{styles}</style>
         </section>

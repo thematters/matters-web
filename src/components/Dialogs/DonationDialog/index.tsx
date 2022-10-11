@@ -175,7 +175,7 @@ const BaseDonationDialog = ({
   const isResetPassword = currStep === 'resetPassword'
   const isSetPaymentPassword = currStep === 'setPaymentPassword'
 
-  const isHKD = currency === CURRENCY.HKD
+  // const isHKD = currency === CURRENCY.HKD
 
   useEffect(() => {
     analytics.trackEvent('view_donation_dialog', { step: currStep })
@@ -191,33 +191,35 @@ const BaseDonationDialog = ({
         onDismiss={closeDialog}
         fixedHeight
       >
-        <Dialog.Header
-          closeDialog={closeDialog}
-          leftButton={
-            prevStep && !isComplete ? (
-              <Dialog.Header.BackButton onClick={back} />
-            ) : (
-              <span />
-            )
-          }
-          rightButton={
-            <Dialog.Header.CloseButton
-              closeDialog={closeDialog}
-              // textId="close"
-            />
-          }
-          title={
-            isAddCredit
-              ? 'topUp'
-              : isSetPaymentPassword
-              ? 'paymentPassword'
-              : isResetPassword
-              ? 'resetPaymentPassword'
-              : isComplete
-              ? 'successDonation'
-              : 'donation'
-          }
-        />
+        {!isProcessing && (
+          <Dialog.Header
+            closeDialog={closeDialog}
+            leftButton={
+              prevStep && !isComplete ? (
+                <Dialog.Header.BackButton onClick={back} />
+              ) : (
+                <span />
+              )
+            }
+            rightButton={
+              <Dialog.Header.CloseButton
+                closeDialog={closeDialog}
+                // textId="close"
+              />
+            }
+            title={
+              isAddCredit
+                ? 'topUp'
+                : isSetPaymentPassword
+                ? 'paymentPassword'
+                : isResetPassword
+                ? 'resetPaymentPassword'
+                : isComplete
+                ? 'successDonation'
+                : 'donation'
+            }
+          />
+        )}
 
         {isCurrencyChoice && (
           <DynamicPayToFormCurrencyChoice
@@ -259,7 +261,8 @@ const BaseDonationDialog = ({
             amount={amount}
             currency={currency}
             recipient={recipient}
-            submitCallback={() => forward(isHKD ? 'complete' : 'processing')}
+            switchToSetAmount={() => forward('setAmount')}
+            submitCallback={() => forward('processing')}
             switchToResetPassword={() => forward('resetPassword')}
             targetId={targetId}
           />
@@ -267,6 +270,10 @@ const BaseDonationDialog = ({
 
         {isProcessing && (
           <DynamicPaymentProcessingForm
+            amount={amount}
+            currency={currency}
+            recipient={recipient}
+            closeDialog={closeDialog}
             nextStep={() => forward('complete')}
             txId={payToTx?.id || ''}
             windowRef={windowRef}

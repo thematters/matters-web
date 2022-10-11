@@ -19,9 +19,3 @@
   font-size: var(--font-size-xl);
   line-height: 1;
 }
-
-.hint {
-  margin: var(--spacing-base) var(--spacing-base);
-  font-size: var(--font-size-md-s);
-  text-align: center;
-}
