@@ -20,7 +20,7 @@ interface LoginButtonBaseProps {
 }
 
 type LoginButtonProps = LoginButtonBaseProps &
-  Pick<ButtonProps, 'bgColor' | 'size' | 'spacing'>
+  Pick<ButtonProps, 'bgColor' | 'size' | 'spacing' | 'onClick'>
 
 export const LoginButton: React.FC<LoginButtonProps> = ({
   bgColor,
@@ -28,6 +28,7 @@ export const LoginButton: React.FC<LoginButtonProps> = ({
   isPlain,
   size,
   spacing,
+  onClick,
 }) => {
   const isSmallUp = useResponsive('sm-up')
   const clickProps = isSmallUp
@@ -35,6 +36,7 @@ export const LoginButton: React.FC<LoginButtonProps> = ({
         onClick: () => {
           window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
           window.dispatchEvent(new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG))
+          onClick?.()
         },
       }
     : appendTarget(PATHS.LOGIN, true)

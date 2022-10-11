@@ -18,7 +18,7 @@ const Comment = ({ settings, toggle }: CommentProps) => (
         <Translate
           zh_hant="評論和回覆"
           zh_hans="评论和回复"
-          en="Comments and replies"
+          en="New comments and replies"
         />
       }
       right={
@@ -33,7 +33,7 @@ const Comment = ({ settings, toggle }: CommentProps) => (
         <Translate
           zh_hant="評論被作者精選"
           zh_hans="评论被作者精选"
-          en="Pinned Comments"
+          en="Comments has been pinned"
         />
       }
       right={

@@ -11,10 +11,16 @@ interface MyManageProps {
 
 const MyManage = ({ settings, toggle }: MyManageProps) => (
   <Form.List
-    groupName={<Translate zh_hant="管理" zh_hans="管理" en="Manage" />}
+    groupName={<Translate zh_hant="管理" zh_hans="管理" en="Management" />}
   >
     <Form.List.Item
-      title={<Translate zh_hant="有新訂閱者" zh_hans="有新订阅者" en="" />}
+      title={
+        <Translate
+          zh_hant="有新訂閱者"
+          zh_hans="有新订阅者"
+          en="New subscribers"
+        />
+      }
       right={
         <Switch
           checked={settings.circleNewSubscriber}
@@ -23,7 +29,13 @@ const MyManage = ({ settings, toggle }: MyManageProps) => (
       }
     />
     <Form.List.Item
-      title={<Translate zh_hant="有新追蹤者" zh_hans="有新追踪者" en="" />}
+      title={
+        <Translate
+          zh_hant="有新追蹤者"
+          zh_hans="有新追踪者"
+          en="New followers"
+        />
+      }
       right={
         <Switch
           checked={settings.circleNewFollower}
@@ -32,7 +44,13 @@ const MyManage = ({ settings, toggle }: MyManageProps) => (
       }
     />
     <Form.List.Item
-      title={<Translate zh_hant="訂閱者退訂" zh_hans="订阅者退订" en="" />}
+      title={
+        <Translate
+          zh_hant="訂閱者退訂"
+          zh_hans="订阅者退订"
+          en="Subscription cancellations"
+        />
+      }
       right={
         <Switch
           checked={settings.circleNewUnsubscriber}

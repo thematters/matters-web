@@ -1,6 +1,7 @@
 // User
 export * from './LikeCoinDialog'
 export * from './RecommendAuthorDialog'
+export * from './RssFeedDialog'
 
 // Article
 export * from './ReviseArticleDialog'

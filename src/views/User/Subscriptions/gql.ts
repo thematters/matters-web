@@ -6,7 +6,9 @@ export const USER_SUBSCRIPTIONS = gql`
   query UserSubscriptions($userName: String!, $after: String) {
     user(input: { userName: $userName }) {
       id
+      userName
       displayName
+      avatar
       info {
         profileCover
         description

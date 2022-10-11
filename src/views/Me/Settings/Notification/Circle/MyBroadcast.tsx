@@ -14,12 +14,18 @@ const MyBroadcast = ({ settings, toggle }: MyBroadcastProps) => (
     groupName={<Translate zh_hant="廣播" zh_hans="广播" en="Broadcast" />}
   >
     <Form.List.Item
-      title={<Translate zh_hant="廣播留言" zh_hans="广播留言" en="" />}
+      title={
+        <Translate
+          zh_hant="廣播留言"
+          zh_hans="广播留言"
+          en="New replies to broadcast"
+        />
+      }
       subtitle={
         <Translate
           zh_hant="成員於廣播留言時通知"
           zh_hans="成员于广播留言时通知"
-          en=""
+          en="Notify when members reply to broadcasts"
         />
       }
       right={

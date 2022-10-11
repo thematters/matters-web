@@ -1,0 +1,5 @@
+.CurrencySwitch {
+  @mixin flex-center-end;
+
+  padding: var(--spacing-base);
+}

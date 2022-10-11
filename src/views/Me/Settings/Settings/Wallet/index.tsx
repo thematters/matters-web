@@ -7,9 +7,7 @@ import {
   Button,
   CopyToClipboard,
   Form,
-  getErrorCodes,
   IconCopy16,
-  IconSpinner16,
   LanguageContext,
   Translate,
   usePullToRefresh,
@@ -17,7 +15,7 @@ import {
 } from '~/components'
 
 import { OPEN_LIKE_COIN_DIALOG, PATHS } from '~/common/enums'
-import { maskAddress, numRound, translate } from '~/common/utils'
+import { maskAddress, translate } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -44,22 +42,10 @@ const WalletSettings = () => {
   const { lang } = useContext(LanguageContext)
 
   const likerId = viewer.liker.likerId
-  const { data, loading, refetch, error } = useQuery<ViewerLikeInfo>(
-    VIEWER_LIKE_INFO,
-    {
-      errorPolicy: 'none',
-      skip: typeof window === 'undefined',
-    }
-  )
-
-  const errorCodes = getErrorCodes(error)
-  const shouldReAuth = errorCodes.some((code) => code === 'OAUTH_TOKEN_INVALID')
-
-  const liker = data?.viewer?.liker
-  const rateUSD = liker?.rateUSD || 0
-  const total = liker?.total || 0
-  const USDPrice = numRound(rateUSD * total)
-  const equalSign = total > 0 ? '≈' : '='
+  const { data, refetch } = useQuery<ViewerLikeInfo>(VIEWER_LIKE_INFO, {
+    errorPolicy: 'none',
+    skip: typeof window === 'undefined',
+  })
 
   const ethAddress = data?.viewer?.info?.ethAddress
     ? ethers.utils.getAddress(data.viewer.info.ethAddress)
@@ -79,46 +65,6 @@ const WalletSettings = () => {
             : undefined
         }
         rightText={likerId || <Translate id="setup" />}
-      />
-
-      <Form.List.Item
-        title={
-          <Translate
-            zh_hant="我的創作價值"
-            zh_hans="我的创作价值"
-            en="Rewards"
-          />
-        }
-        htmlHref={
-          shouldReAuth
-            ? `${process.env.NEXT_PUBLIC_OAUTH_URL}/likecoin`
-            : 'https://like.co/in/matters/redirect'
-        }
-        htmlTarget="_blank"
-        leftAlign="top"
-        right={
-          loading ? <IconSpinner16 color="grey-light" size="sm" /> : undefined
-        }
-        rightText={
-          shouldReAuth ? (
-            <Translate
-              zh_hant="重新綁定 Liker ID 后即可管理創作收益"
-              zh_hans="重新绑定 Liker ID 后即可管理创作收益"
-              en="Connect Liker ID to manage your rewards"
-            />
-          ) : likerId ? (
-            `${numRound(liker?.total || 0)} LikeCoin`
-          ) : (
-            <Translate
-              zh_hant="完成設置 Liker ID 後即可管理創作收益"
-              zh_hans="完成设置 Liker ID 后即可管理创作收益"
-              en="Set Liker ID to manage your rewards"
-            />
-          )
-        }
-        rightSubText={
-          !shouldReAuth && likerId && `${equalSign} ${USDPrice} USD`
-        }
       />
 
       <Form.List.Item

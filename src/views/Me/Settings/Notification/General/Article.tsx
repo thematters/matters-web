@@ -18,7 +18,7 @@ const Article = ({ settings, toggle }: ArticleProps) => (
         <Translate
           zh_hant="作品被贊賞"
           zh_hans="作品被赞赏"
-          en="Appreciations"
+          en="New appreciations"
         />
       }
       right={
@@ -30,7 +30,11 @@ const Article = ({ settings, toggle }: ArticleProps) => (
     />
     <Form.List.Item
       title={
-        <Translate zh_hant="作品被收藏" zh_hans="作品被收藏" en="Bookmarks" />
+        <Translate
+          zh_hant="作品被收藏"
+          zh_hans="作品被收藏"
+          en="Articles has been bookmarked"
+        />
       }
       right={
         <Switch
@@ -55,7 +59,13 @@ const Article = ({ settings, toggle }: ArticleProps) => (
       }
     /> */}
     <Form.List.Item
-      title={<Translate zh_hant="作品被關聯" zh_hans="作品被关联" en="" />}
+      title={
+        <Translate
+          zh_hant="作品被關聯"
+          zh_hans="作品被关联"
+          en="Articles has been collected"
+        />
+      }
       right={
         <Switch
           checked={settings.articleNewCollected}

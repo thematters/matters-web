@@ -67,6 +67,7 @@ interface ClickButtonProp {
     | 'finish_circle_creation'
     | 'remove_tag'
     | 'click_tag'
+    | 'try_login_from_visitor'
   pageType?: PageType
 }
 

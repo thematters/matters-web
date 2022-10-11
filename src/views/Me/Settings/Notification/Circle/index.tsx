@@ -117,13 +117,17 @@ const BaseNotificationSettings = () => {
       <div className="title">
         <h2>
           {' '}
-          <Translate zh_hans="我的围炉" zh_hant="我的圍爐" en="Circle" />{' '}
+          <Translate
+            zh_hans="我的围炉"
+            zh_hant="我的圍爐"
+            en="My Circle"
+          />{' '}
         </h2>
         <p>
           <Translate
             zh_hans="此处设定将套用至你所开设的围炉"
             zh_hant="此處設定將套用至你所開設的圍爐"
-            en="The following settings apply to the Circles you followed or subscribed to"
+            en="The following settings apply to the Circle you owned"
           />{' '}
         </p>
       </div>
@@ -135,7 +139,7 @@ const BaseNotificationSettings = () => {
           <Translate
             zh_hans="订阅围炉"
             zh_hant="訂閱圍爐"
-            en="Subscribe to the Circle"
+            en="Subscribed or following Circles"
           />
         </h2>
         <p>
@@ -143,7 +147,7 @@ const BaseNotificationSettings = () => {
           <Translate
             zh_hans="此处设定将套用至你所有参加或追踪的围炉"
             zh_hant="此處設定將套用至你所有參加或追蹤的圍爐"
-            en="The following settings apply to the Circle you owned"
+            en="The following settings apply to the Circle you following or subscribed to"
           />
         </p>
       </div>

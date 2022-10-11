@@ -78,30 +78,27 @@ const Feed = ({ type }: Props) => {
       pullToRefresh={refetch}
     >
       <ul>
-        {edges.map(({ node }, i) => (
-          <>
-            <li key={node.id}>
-              <TagDigest.Feed
-                tag={node}
-                spacing={['xtight', 'xtight']}
-                {...toPath({
+        {edges.map(({ node: tag }, i) => (
+          <li key={tag.id}>
+            <TagDigest.Feed
+              tag={tag}
+              spacing={['xtight', 'xtight']}
+              href={
+                toPath({
                   page: 'tagDetail',
-                  id: node.id,
-                  content: node.content,
-                })}
-                onClick={() =>
-                  analytics.trackEvent('click_feed', {
-                    type: trackingType,
-                    contentType: 'tag',
-                    location: i,
-                    id: node.id,
-                  })
-                }
-              />
-            </li>
-
-            {/* {!isLargeUp && edges.length >= 4 && i === 3 && <SidebarTags />} */}
-          </>
+                  tag, // : node,
+                }).href
+              }
+              onClick={() =>
+                analytics.trackEvent('click_feed', {
+                  type: trackingType,
+                  contentType: 'tag',
+                  location: i,
+                  id: tag.id,
+                })
+              }
+            />
+          </li>
         ))}
       </ul>
 

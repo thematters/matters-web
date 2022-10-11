@@ -18,7 +18,7 @@ type ItemProps = {
   leftAlign?: 'top'
   right?: React.ReactNode
   rightText?: string | React.ReactNode
-  rightTextColor?: 'green' | 'grey-darker'
+  rightTextColor?: 'green' | 'grey-darker' | 'black'
   rightSubText?: string | React.ReactNode
   forceGreyStyle?: boolean
   bold?: boolean

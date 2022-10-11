@@ -6,19 +6,18 @@ import {
   Head,
   Layout,
   PullToRefresh,
-  Spacer,
   Spinner,
-  Translate,
   ViewerContext,
 } from '~/components'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
 
-import { PATHS, PAYMENT_MINIMAL_PAYOUT_AMOUNT } from '~/common/enums'
+import { PAYMENT_MINIMAL_PAYOUT_AMOUNT } from '~/common/enums'
 
-import Balance from './Balance'
-import Buttons from './Buttons'
+import { FiatCurrency, LikeCoin } from './Balance'
 import PaymentPassword from './PaymentPassword'
 import PaymentPointer from './PaymentPointer'
+import styles from './styles.css'
+import TotalAssets from './TotalAssets'
 import ViewStripeAccount from './ViewStripeAccount'
 import ViewStripeCustomerPortal from './ViewStripeCustomerPortal'
 
@@ -29,6 +28,8 @@ const Wallet = () => {
 
   const { data, loading, refetch } = useQuery<WalletBalance>(WALLET_BALANCE, {
     fetchPolicy: 'network-only',
+    errorPolicy: 'none',
+    skip: typeof window === 'undefined',
   })
   const balanceHKD = data?.viewer?.wallet.balance.HKD || 0
   const canPayout = balanceHKD >= PAYMENT_MINIMAL_PAYOUT_AMOUNT.HKD
@@ -48,7 +49,7 @@ const Wallet = () => {
   }
 
   return (
-    <Layout.Main>
+    <Layout.Main bgColor="grey-lighter">
       <Layout.Header
         left={<Layout.Header.BackButton />}
         right={<Layout.Header.Title id="myWallet" />}
@@ -57,22 +58,25 @@ const Wallet = () => {
       <Head title={{ id: 'myWallet' }} />
 
       <PullToRefresh refresh={refetch}>
-        <Spacer size="xxloose" />
+        <TotalAssets />
 
-        <Balance balanceHKD={balanceHKD} canPayout={canPayout} />
-
-        <Buttons canPayout={canPayout} hasStripeAccount={hasStripeAccount} />
+        <section className="assetsContainer">
+          <FiatCurrency
+            balanceHKD={balanceHKD}
+            canPayout={canPayout}
+            hasStripeAccount={hasStripeAccount}
+          />
+          <hr className="divider" />
+          <LikeCoin />
+        </section>
 
         <Form.List>
-          <Form.List.Item
-            title={<Translate id="paymentTransactions" />}
-            href={PATHS.ME_WALLET_TRANSACTIONS}
-          />
-          <ViewStripeCustomerPortal />
           {hasPaymentPassword && <PaymentPassword />}
+          <ViewStripeCustomerPortal />
           {hasStripeAccount && <ViewStripeAccount />}
           <PaymentPointer />
         </Form.List>
+        <style jsx>{styles}</style>
       </PullToRefresh>
     </Layout.Main>
   )

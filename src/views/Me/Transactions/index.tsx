@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
+// import { useState } from 'react'
 
 import {
   EmptyTransaction,
@@ -13,6 +14,10 @@ import {
 
 import { analytics, mergeConnections } from '~/common/utils'
 
+// import { Currency, CurrencySwitch } from './CurrencySwitch'
+import styles from './styles.css'
+
+// import { TransactionCurrency } from '@/__generated__/globalTypes'
 import { MeTransactions } from './__generated__/MeTransactions'
 
 const ME_TRANSACTIONS = gql`
@@ -46,6 +51,7 @@ const ME_TRANSACTIONS = gql`
 `
 
 const BaseTransactions = () => {
+  // const [currencyType, setCurrencyType] = useState<Currency>(Currency.ALL)
   const { data, loading, fetchMore, refetch } = useQuery<MeTransactions>(
     ME_TRANSACTIONS,
     {
@@ -84,12 +90,32 @@ const BaseTransactions = () => {
     })
   }
 
+  // let filteredEdges = edges
+  // if (currencyType === Currency.HKD) {
+  //   filteredEdges = edges.filter(
+  //     (e) => e.node.currency === TransactionCurrency.HKD
+  //   )
+  // }
+
+  // if (currencyType === Currency.LIKE) {
+  //   filteredEdges = edges.filter(
+  //     (e) => e.node.currency === TransactionCurrency.LIKE
+  //   )
+  // }
+
   return (
     <InfiniteScroll
       hasNextPage={pageInfo.hasNextPage}
       loadMore={loadMore}
       pullToRefresh={refetch}
     >
+      {/* <section className="CurrencySwitch">
+        <CurrencySwitch
+          currency={currencyType}
+          setCurrency={(c) => setCurrencyType(c)}
+        />
+      </section> */}
+
       <List>
         {edges.map(({ node, cursor }) => (
           <List.Item key={cursor}>
@@ -97,6 +123,7 @@ const BaseTransactions = () => {
           </List.Item>
         ))}
       </List>
+      <style jsx>{styles}</style>
     </InfiniteScroll>
   )
 }

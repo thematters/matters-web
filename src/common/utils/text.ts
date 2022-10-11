@@ -1,6 +1,10 @@
 import { distance } from 'fastest-levenshtein'
 
-import { MAX_TAG_CONTENT_LENGTH } from '~/common/enums'
+import {
+  MAX_TAG_CONTENT_LENGTH,
+  TAG_CONTENT_CLAMP_LATIN_LETTERS_LENGTH,
+  TAG_CONTENT_CLAMP_LENGTH,
+} from '~/common/enums'
 
 import { toSizedImageURL } from './url'
 
@@ -165,5 +169,24 @@ export const stripAllPunct = (content: string) => {
   }
 }
 
+export const stripSpaces = (content: string | null) =>
+  content?.replaceAll(/\s+/g, ' ').trim()
+
 export const normalizeTagInput = (content: string) =>
   stripAllPunct(content).substring(0, MAX_TAG_CONTENT_LENGTH)
+
+const allLatinLetters = new RegExp(String.raw`^[\s -~\p{Script=Latin}]+$`, 'u')
+
+export const clampTagLength = (tagContent: string) => {
+  if (allLatinLetters.test(tagContent)) {
+    if (tagContent.length > TAG_CONTENT_CLAMP_LATIN_LETTERS_LENGTH) {
+      // allow 20 chars for ASCII/latin letters only tag
+      return `${tagContent.slice(0, TAG_CONTENT_CLAMP_LATIN_LETTERS_LENGTH)}…`
+    }
+  } else {
+    if (tagContent.length > TAG_CONTENT_CLAMP_LENGTH) {
+      return `${tagContent.slice(0, TAG_CONTENT_CLAMP_LENGTH)}…`
+    }
+  }
+  return tagContent
+}

@@ -14,7 +14,13 @@ const SubscribeBroadcast = ({ settings, toggle }: SubscribeBroadcastProps) => (
     groupName={<Translate zh_hant="廣播" zh_hans="广播" en="Broadcast" />}
   >
     <Form.List.Item
-      title={<Translate zh_hant="圍爐有新廣播" zh_hans="围炉有新广播" en="" />}
+      title={
+        <Translate
+          zh_hant="圍爐有新廣播"
+          zh_hans="围炉有新广播"
+          en="New broadcasts"
+        />
+      }
       right={
         <Switch
           checked={settings.inCircleNewBroadcast}
@@ -23,12 +29,18 @@ const SubscribeBroadcast = ({ settings, toggle }: SubscribeBroadcastProps) => (
       }
     />
     <Form.List.Item
-      title={<Translate zh_hant="廣播留言" zh_hans="广播留言" en="" />}
+      title={
+        <Translate
+          zh_hant="廣播留言"
+          zh_hans="广播留言"
+          en="New replies to broadcasts"
+        />
+      }
       subtitle={
         <Translate
           zh_hant="成員於廣播留言時通知"
           zh_hans="成员于广播留言时通知"
-          en=""
+          en="Notify when members reply to broadcasts"
         />
       }
       right={

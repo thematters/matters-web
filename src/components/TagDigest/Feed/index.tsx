@@ -53,8 +53,7 @@ const fragments = {
 const Feed = ({ tag, ...cardProps }: TagDigestFeedProps) => {
   const path = toPath({
     page: 'tagDetail',
-    id: tag.id,
-    content: tag.content,
+    tag,
   })
 
   const articles = tag.articles.edges

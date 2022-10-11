@@ -3,11 +3,7 @@ import { useContext } from 'react'
 
 import { LanguageContext, useRoute } from '~/components'
 
-import {
-  // toLocale,
-  translate,
-  TranslateArgs,
-} from '~/common/utils'
+import { toLocale, translate, TranslateArgs } from '~/common/utils'
 
 import IMAGE_APPLE_TOUCH_ICON from '@/public/static/apple-touch-icon.png'
 import IMAGE_FAVICON_16 from '@/public/static/favicon-16x16.png'
@@ -15,7 +11,7 @@ import IMAGE_FAVICON_32 from '@/public/static/favicon-32x32.png'
 import IMAGE_FAVICON_64 from '@/public/static/favicon-64x64.png'
 import IMAGE_INTRO from '@/public/static/images/intro.jpg'
 
-// import { UserLanguage } from '@/__generated__/globalTypes'
+import { UserLanguage } from '@/__generated__/globalTypes'
 
 const siteDomain =
   process.env.NEXT_PUBLIC_SITE_DOMAIN_CANONICAL || // for web-next, set this different as serving domain; suggested canonical domain ('matters.news') to robots
@@ -33,7 +29,8 @@ interface HeadProps {
   image?: string | null
   noSuffix?: boolean
   paymentPointer?: string | null
-  jsonLdData?: object | null
+  jsonLdData?: Record<string, any> | null
+  availableLanguages?: UserLanguage[]
 }
 
 export const Head: React.FC<HeadProps> = (props) => {
@@ -58,12 +55,17 @@ export const Head: React.FC<HeadProps> = (props) => {
     image: props.image || IMAGE_INTRO.src,
   }
 
-  // const i18nUrl = (language: string) => {
-  //   return props.path
-  //     ? `https://${siteDomain}/${language}${props.path}`
-  //     : `https://${siteDomain}/${language}${router.asPath || '/'}`
-  // }
-  const canonicalUrl = head.url?.split('#')[0].split('?')[0]
+  const i18nUrl = (language: string) => {
+    return props.path
+      ? `https://${siteDomain}/${language}${props.path}`
+      : `https://${siteDomain}/${language}${router.asPath || '/'}`
+  }
+
+  if (props.jsonLdData && !props.jsonLdData.description) {
+    props.jsonLdData.description = head.description
+  }
+
+  const canonicalUrl = head.url?.split('?')[0]
 
   return (
     <NextHead>
@@ -144,30 +146,36 @@ export const Head: React.FC<HeadProps> = (props) => {
       <meta name="twitter:image" key="twitter:image" content={head.image} />
 
       {/* i18n */}
-      {/* <link
-        rel="alternate"
-        hrefLang={toLocale(UserLanguage.en)}
-        href={i18nUrl(toLocale(UserLanguage.en))}
-        key={`alternate:${UserLanguage.en}`}
-      />
-      <link
-        rel="alternate"
-        hrefLang={toLocale(UserLanguage.zh_hans)}
-        href={i18nUrl(toLocale(UserLanguage.zh_hans))}
-        key={`alternate:${UserLanguage.zh_hans}`}
-      />
-      <link
-        rel="alternate"
-        hrefLang={toLocale(UserLanguage.zh_hant)}
-        href={i18nUrl(toLocale(UserLanguage.zh_hant))}
-        key={`alternate:${UserLanguage.zh_hant}`}
-      />
+      {props.availableLanguages?.includes(UserLanguage.en) && (
+        <link
+          rel="alternate"
+          hrefLang={toLocale(UserLanguage.en)}
+          href={i18nUrl(toLocale(UserLanguage.en))}
+          key={`alternate:${UserLanguage.en}`}
+        />
+      )}
+      {props.availableLanguages?.includes(UserLanguage.zh_hans) && (
+        <link
+          rel="alternate"
+          hrefLang={toLocale(UserLanguage.zh_hans)}
+          href={i18nUrl(toLocale(UserLanguage.zh_hans))}
+          key={`alternate:${UserLanguage.zh_hans}`}
+        />
+      )}
+      {props.availableLanguages?.includes(UserLanguage.zh_hant) && (
+        <link
+          rel="alternate"
+          hrefLang={toLocale(UserLanguage.zh_hant)}
+          href={i18nUrl(toLocale(UserLanguage.zh_hant))}
+          key={`alternate:${UserLanguage.zh_hant}`}
+        />
+      )}
       <link
         rel="alternate"
         hrefLang="x-default"
         href={head.url}
         key={`alternate:x-default`}
-      /> */}
+      />
 
       {/* PWA */}
       <link

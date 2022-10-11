@@ -24,9 +24,10 @@ import ShareButton from '~/components/Layout/Header/ShareButton'
 import { ERROR_CODES } from '~/common/enums'
 import {
   fromGlobalId,
-  makeTitle,
+  // makeTitle,
   // stripPunctPrefixSuffix,
   stripAllPunct,
+  stripSpaces,
   toGlobalId,
   toPath,
 } from '~/common/utils'
@@ -93,8 +94,7 @@ const TagDetail = ({ tag }: { tag: TagFragment }) => {
     // backward compatible with `/tags/:globalId:`
     const newPath = toPath({
       page: 'tagDetail',
-      id: tag.id,
-      content: tag.content,
+      tag,
       feedType: isLatest ? '' : feedType,
     })
 
@@ -112,10 +112,11 @@ const TagDetail = ({ tag }: { tag: TagFragment }) => {
   const canAdd = !isOfficial || (isOfficial && isMatty)
 
   const title =
-    (tag.description ? `${makeTitle(tag.description, 80)} ` : '') +
-    '#' +
-    stripAllPunct(tag.content)
-  const keywords = tag.content.split(/\s+/).filter(Boolean).map(stripAllPunct)
+    // (tag.description ? `${makeTitle(tag.description, 80)} ` : '') +
+    '#' + stripAllPunct(tag.content)
+  const keywords = tag.content.split(/\s+/).filter(Boolean).map(stripAllPunct) // title.includes(tag.content) ??
+  const description = stripSpaces(tag.description) // || stripAllPunct(tag.content)
+  const path = toPath({ page: 'tagDetail', tag })
 
   /**
    * Render
@@ -145,8 +146,11 @@ const TagDetail = ({ tag }: { tag: TagFragment }) => {
       />
 
       <Head
-        title={`#${stripAllPunct(tag.content)}`}
-        description={tag.description}
+        // title={`#${stripAllPunct(tag.content)}`}
+        // description={tag.description}
+        title={title}
+        path={path.href}
+        description={description}
         keywords={keywords} // add top10 most using author names?
         image={
           tag.cover ||
@@ -154,13 +158,15 @@ const TagDetail = ({ tag }: { tag: TagFragment }) => {
         }
         jsonLdData={{
           '@context': 'https://schema.org',
-          '@type': 'Organization',
-          name: stripAllPunct(tag.content),
-          description: tag.description,
+          '@type': 'ItemList', // should follow with some recent articles under 'itemListElement'
+          name: title, // stripAllPunct(tag.content),
+          description,
+          keywords,
           image:
             tag.cover ||
             `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}${IMAGE_TAG_COVER.src}`,
-          url: `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/tags/${tag.id}`,
+          url: `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/${path.href}`,
+          // itemListElement: [...],
         }}
       />
 
