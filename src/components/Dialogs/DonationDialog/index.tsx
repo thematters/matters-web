@@ -239,6 +239,24 @@ const BaseDonationDialog = ({
           />
         )}
 
+        {isCurrencyChoice && (
+          <DynamicPayToFormCurrencyChoice
+            closeDialog={() => {
+              reset(defaultStep)
+              closeDialog()
+            }}
+            defaultCurrency={currency}
+            openTabCallback={setAmountOpenTabCallback}
+            recipient={recipient}
+            submitCallback={setAmountCallback}
+            switchToSetAmount={(c: CURRENCY) => {
+              setCurrency(c)
+              forward('setAmount')
+            }}
+            targetId={targetId}
+          />
+        )}
+
         {isSetAmount && (
           <DynamicPayToFormSetAmount
             closeDialog={closeDialog}
