@@ -145,7 +145,13 @@ const Carousel = ({
             if (!item.cover) {
               return null
             }
-
+            if (lang == 'en' ) {
+            item.translations?.forEach(translatedItem => {
+              item.title = translatedItem.title
+              item.content = translatedItem.content
+              item.link = translatedItem.link   
+            })
+            }
             return (
               <div key={item.id} className="slide">
                 <Card htmlHref={item.link || ''} spacing={[0, 0]}>

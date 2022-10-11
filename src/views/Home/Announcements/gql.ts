@@ -15,6 +15,13 @@ export const VISIBLE_ANNOUNCEMENTS = gql`
         type
         visible
         createdAt
+        translations {
+          language
+          title
+          cover
+          content
+          link
+        }
       }
     }
   }
