@@ -63,7 +63,6 @@ const PaymentProcessingForm: React.FC<Props> = ({
     skip: typeof window === 'undefined',
   })
   const txState = _get(data, 'viewer.wallet.transactions.edges.0.node.state')
-  console.log('Processing', { error })
 
   if (txState === 'succeeded') {
     nextStep()
