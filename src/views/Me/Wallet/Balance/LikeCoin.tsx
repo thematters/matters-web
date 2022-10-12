@@ -4,6 +4,7 @@ import { useContext } from 'react'
 
 import {
   Button,
+  CurrencyFormatter,
   getErrorCodes,
   IconLikeCoin40,
   IconSpinner16,
@@ -14,7 +15,6 @@ import {
 
 import { PATHS } from '~/common/enums'
 
-import CurrencyFormatter from './CurrencyFormatter/index'
 import styles from './styles.css'
 
 import { ViewerLikeBalance } from './__generated__/ViewerLikeBalance'
