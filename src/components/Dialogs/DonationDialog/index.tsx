@@ -143,8 +143,8 @@ const BaseDonationDialog = ({
   }
 
   const ContinueDonationButton = (
-    <Dialog.Footer.Button onClick={() => forward('confirm')}>
-      <Translate zh_hant="回到交易" zh_hans="回到交易" />
+    <Dialog.Footer.Button onClick={() => forward('setAmount')}>
+      <Translate zh_hant="回到支持" zh_hans="回到支持" />
     </Dialog.Footer.Button>
   )
 

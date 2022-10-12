@@ -26,6 +26,7 @@ import {
 } from '~/common/enums'
 import {
   formatAmount,
+  translate,
   validateCurrency,
   validateDonationAmount,
 } from '~/common/utils'
@@ -64,6 +65,7 @@ interface FormProps {
 
 interface FormValues {
   amount: number
+  customAmount: number
   currency: CURRENCY
 }
 
@@ -106,7 +108,6 @@ const SetAmount: React.FC<FormProps> = ({
   })
   const balanceHKD = data?.viewer?.wallet.balance.HKD || 0
   const balanceLike = data?.viewer?.liker.total || 0
-  // console.log({ balanceLike })
 
   const {
     errors,
@@ -120,19 +121,21 @@ const SetAmount: React.FC<FormProps> = ({
   } = useFormik<FormValues>({
     initialValues: {
       amount: AMOUNT_DEFAULT[defaultCurrency || CURRENCY.HKD],
+      customAmount: 0,
       currency: defaultCurrency || CURRENCY.HKD,
     },
-    validate: ({ amount, currency }) =>
+    validate: ({ amount, customAmount, currency }) =>
       _pickBy({
-        amount: validateDonationAmount(amount, lang),
+        amount: validateDonationAmount(customAmount || amount, lang),
         currency: validateCurrency(currency, lang),
       }),
-    onSubmit: async ({ amount, currency }, { setSubmitting }) => {
+    onSubmit: async ({ amount, customAmount, currency }, { setSubmitting }) => {
+      const submitAmount = customAmount || amount
       try {
         if (currency === CURRENCY.LIKE) {
           const result = await payTo({
             variables: {
-              amount,
+              amount: submitAmount,
               currency,
               purpose: 'donation',
               recipientId: recipient.id,
@@ -149,7 +152,7 @@ const SetAmount: React.FC<FormProps> = ({
           setTx(transaction)
         }
         setSubmitting(false)
-        submitCallback({ amount, currency })
+        submitCallback({ amount: submitAmount, currency })
       } catch (error) {
         setSubmitting(false)
       }
@@ -161,9 +164,9 @@ const SetAmount: React.FC<FormProps> = ({
   const canPayLike = isLike && !!viewer.liker.likerId
   const canReceiveLike = isLike && !!recipient.liker.likerId
   const canProcess = isHKD || (canPayLike && canReceiveLike)
-  // const color = isLike ? 'green' : 'red'
   const maxAmount = isLike ? Infinity : PAYMENT_MAXIMUM_PAYTO_AMOUNT.HKD
-  const isBalanceInsufficient = isHKD && balanceHKD < values.amount
+  const isBalanceInsufficient =
+    (isHKD ? balanceHKD : balanceLike) < (values.customAmount || values.amount)
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit} noBackground>
@@ -175,11 +178,7 @@ const SetAmount: React.FC<FormProps> = ({
             spacing="xtight"
             weight="md"
           >
-            <Translate
-              zh_hant="法幣 HKD"
-              zh_hans="法币 HKD"
-              en="Fiat Currency HKD"
-            />
+            <Translate zh_hant="法幣 HKD" zh_hans="法币 HKD" en="HKD" />
           </TextIcon>
         )}
         {isLike && (
@@ -195,7 +194,11 @@ const SetAmount: React.FC<FormProps> = ({
         <span className="button">
           <Button onClick={switchToCurrencyChoice}>
             <TextIcon size="xs" textDecoration="underline" color="grey-dark">
-              更改支持方式
+              <Translate
+                zh_hant="更改支持方式"
+                zh_hans="更改支持方式"
+                en="Change"
+              />
             </TextIcon>
           </Button>
         </span>
@@ -242,6 +245,8 @@ const SetAmount: React.FC<FormProps> = ({
           onChange={(e) => {
             const value = parseInt(e.target.value, 10) || 0
             setFieldValue('amount', value)
+            setFieldValue('customAmount', 0)
+            e.target.blur()
           }}
         />
       )}
@@ -249,14 +254,22 @@ const SetAmount: React.FC<FormProps> = ({
       {canProcess && (
         <section className="set-amount-custom-amount-input">
           <input
-            required
             disabled={locked}
             type="number"
-            name="amount"
+            name="customAmount"
             min={0}
             max={maxAmount}
-            value={values.amount}
-            // error={touched.amount && errors.amount}
+            placeholder={translate({
+              zh_hant: '輸入自訂金額',
+              zh_hans: '输入自订金额',
+              en: 'Enter a custom amount',
+              lang,
+            })}
+            value={
+              !touched.customAmount && values.customAmount <= 0
+                ? undefined
+                : values.customAmount
+            }
             onBlur={handleBlur}
             onChange={(e) => {
               const value = e.target.valueAsNumber || 0
@@ -268,7 +281,8 @@ const SetAmount: React.FC<FormProps> = ({
               if (inputRef.current) {
                 inputRef.current.value = sanitizedAmount
               }
-              setFieldValue('amount', sanitizedAmount)
+              setFieldValue('customAmount', sanitizedAmount)
+              setFieldValue('amount', 0)
             }}
             ref={inputRef}
             autoComplete="nope"
@@ -317,16 +331,28 @@ const SetAmount: React.FC<FormProps> = ({
               <CivicLikerButton likerId={recipient.liker.likerId} />
             )}
 
-            <Dialog.Footer.Button
-              type="submit"
-              form={formId}
-              disabled={!isValid || isSubmitting || isBalanceInsufficient}
-              bgColor="green"
-              textColor="white"
-              loading={isSubmitting}
-            >
-              <Translate id="nextStep" />
-            </Dialog.Footer.Button>
+            {isBalanceInsufficient && isHKD ? (
+              <Dialog.Footer.Button
+                type="button"
+                onClick={switchToAddCredit}
+                form={formId}
+                bgColor="green"
+                textColor="white"
+              >
+                <Translate id="topUp" />
+              </Dialog.Footer.Button>
+            ) : (
+              <Dialog.Footer.Button
+                type="submit"
+                form={formId}
+                disabled={!isValid || isSubmitting || isBalanceInsufficient}
+                bgColor="green"
+                textColor="white"
+                loading={isSubmitting}
+              >
+                <Translate id="nextStep" />
+              </Dialog.Footer.Button>
+            )}
           </>
         )}
 
