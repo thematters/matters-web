@@ -24,6 +24,7 @@
 
   & .item {
     @mixin flex-center-space-between;
+    @mixin all-transition;
 
     padding: var(--spacing-base);
     margin-bottom: var(--spacing-base);

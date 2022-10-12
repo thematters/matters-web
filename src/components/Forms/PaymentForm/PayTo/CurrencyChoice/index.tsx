@@ -73,6 +73,7 @@ const CurrencyChoice: React.FC<FormProps> = ({
         <span>的方式：</span>
       </section>
       <section
+        role="button"
         className="item"
         onClick={() => {
           switchToSetAmount(CURRENCY.HKD)
@@ -88,6 +89,7 @@ const CurrencyChoice: React.FC<FormProps> = ({
         <CurrencyFormatter currency={balanceHKD} currencyCode={'HKD'} />
       </section>
       <section
+        role="button"
         className="item"
         onClick={() => {
           switchToSetAmount(CURRENCY.LIKE)
