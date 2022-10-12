@@ -31,7 +31,6 @@ const Carousel = ({
   ...controlsProps
 }: CarouselProps) => {
   const { lang } = useContext(LanguageContext)
-
   const [dot, setDot] = useState(0)
   // @ts-ignore
   const [snaps, setSnaps] = useState<any[]>([])
@@ -145,24 +144,31 @@ const Carousel = ({
             if (!item.cover) {
               return null
             }
-            if (lang === 'en') {
-              item.translations?.forEach((translatedItem) => {
-                item.title = translatedItem.title
-                item.content = translatedItem.content
-                item.link = translatedItem.link
-              })
-            }
+
+            const translatedItem = item.translations?.find(
+              (translated) => translated.language === lang
+            )
+            const hasTranslaton = translatedItem != null
             return (
               <div key={item.id} className="slide">
-                <Card htmlHref={item.link || ''} spacing={[0, 0]}>
+                <Card
+                  htmlHref={
+                    hasTranslaton ? translatedItem.link : item.link || ''
+                  }
+                  spacing={[0, 0]}
+                >
                   <div className="content">
                     <ResponsiveImage
                       url={item.cover}
                       size="540w"
                       smUpSize="1080w"
                     />
-                    <h3>{item.title}</h3>
-                    <p>{item.content}</p>
+                    <h3>
+                      {hasTranslaton ? translatedItem.title : item.title}{' '}
+                    </h3>
+                    <p>
+                      {hasTranslaton ? translatedItem.content : item.content}{' '}
+                    </p>
                   </div>
                 </Card>
               </div>
