@@ -109,9 +109,8 @@ const BaseDonationDialog = ({
     openDialog: baseOpenDialog,
     closeDialog: baseCloseDialog,
   } = useDialogSwitch(true)
-  const { currStep, prevStep, forward, back, reset } =
+  const { currStep, forward, back, reset } =
     useStep<Step>(defaultStep)
-  console.log({ prevStep })
   const [windowRef, setWindowRef] = useState<Window | undefined>(undefined)
 
   const [amount, setAmount] = useState<number>(0)
@@ -195,17 +194,11 @@ const BaseDonationDialog = ({
           <Dialog.Header
             closeDialog={closeDialog}
             leftButton={
-              prevStep && !isComplete ? (
+              isAddCredit ? (
                 <Dialog.Header.BackButton onClick={back} />
               ) : (
-                <span />
+                <Dialog.Header.CloseButton closeDialog={closeDialog} />
               )
-            }
-            rightButton={
-              <Dialog.Header.CloseButton
-                closeDialog={closeDialog}
-                // textId="close"
-              />
             }
             title={
               isAddCredit
@@ -218,24 +211,6 @@ const BaseDonationDialog = ({
                 ? 'successDonation'
                 : 'donation'
             }
-          />
-        )}
-
-        {isCurrencyChoice && (
-          <DynamicPayToFormCurrencyChoice
-            closeDialog={() => {
-              reset(defaultStep)
-              closeDialog()
-            }}
-            defaultCurrency={currency}
-            openTabCallback={setAmountOpenTabCallback}
-            recipient={recipient}
-            submitCallback={setAmountCallback}
-            switchToSetAmount={(c: CURRENCY) => {
-              setCurrency(c)
-              forward('setAmount')
-            }}
-            targetId={targetId}
           />
         )}
 

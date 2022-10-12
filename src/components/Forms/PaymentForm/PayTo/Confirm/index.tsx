@@ -17,10 +17,7 @@ import PAY_TO from '~/components/GQL/mutations/payTo'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
-import {
-  parseFormSubmitErrors,
-  validatePaymentPassword,
-} from '~/common/utils'
+import { parseFormSubmitErrors, validatePaymentPassword } from '~/common/utils'
 
 import PaymentInfo from '../../PaymentInfo'
 import styles from './styles.css'

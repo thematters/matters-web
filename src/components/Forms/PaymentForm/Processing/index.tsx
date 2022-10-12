@@ -66,13 +66,13 @@ const PaymentProcessingForm: React.FC<Props> = ({
   console.log('Processing', { error })
 
   if (txState === 'succeeded') {
-    // nextStep()
+    nextStep()
 
     if (windowRef) {
       windowRef.close()
     }
 
-    // return null
+    return null
   }
 
   if (error) {
@@ -97,13 +97,33 @@ const PaymentProcessingForm: React.FC<Props> = ({
                 currency={currency}
                 recipient={recipient}
               />
-              <p className="hint">
-                <Translate
-                  zh_hant="交易進行中，請稍候..."
-                  zh_hans="交易进行中，请稍候..."
-                  en="Transaction in progress, please wait..."
-                />
-              </p>
+              {currency === CURRENCY.HKD && (
+                <p className="hint">
+                  <Translate
+                    zh_hant="交易進行中，請稍候..."
+                    zh_hans="交易进行中，请稍候..."
+                    en="Transaction in progress, please wait..."
+                  />
+                </p>
+              )}
+              {currency === CURRENCY.LIKE && (
+                <p className="hint">
+                  <p>
+                    <Translate
+                      zh_hant="請在 Liker Pay 頁面繼續操作"
+                      zh_hans="请在 Liker Pay 页面继续操作"
+                      en="Please continue on the Liker Pay page"
+                    />
+                  </p>
+                  <p>
+                    <Translate
+                      zh_hant="完成前請勿關閉此畫面"
+                      zh_hans="完成前请勿关闭此画面"
+                      en="Do not close this screen until done"
+                    />
+                  </p>
+                </p>
+              )}
               <Spinner />
               <style jsx>{styles}</style>
             </section>

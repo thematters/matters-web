@@ -16,10 +16,24 @@ const PayToFallback: React.FC<Props> = ({ closeDialog }) => {
         rightButton={<span />}
         title={'failureDonation'}
       />
-      <Dialog.Content has-grow>
+      <Dialog.Content hasGrow>
         <section className="fallback-content">
-          <p>Oops！交易出了點狀況！</p>
-          <p>網路連線異常，請檢查後重新嘗試</p>
+          <p>
+            Oops！
+            <Translate
+              zh_hant="交易出了點狀況"
+              zh_hans="交易出了点状况"
+              en="Something went wrong with the transaction"
+            />
+            ！
+          </p>
+          <p>
+            <Translate
+              zh_hant="網路連線異常，請檢查後重新嘗試"
+              zh_hans="网路连线异常，请检查后重新尝试"
+              en="SThe network connection is abnormal, please check and try again"
+            />
+          </p>
           <img src={IMAGE_PAYMENT_FAILURE.src} />
         </section>
       </Dialog.Content>

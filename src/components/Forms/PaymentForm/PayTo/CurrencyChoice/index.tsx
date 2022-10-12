@@ -85,12 +85,7 @@ const CurrencyChoice: React.FC<FormProps> = ({
         >
           <Translate zh_hant="法幣" zh_hans="法币" en="Fiat Currency" />
         </TextIcon>
-        <CurrencyFormatter
-          currency={balanceHKD}
-          currencyCode={'HKD'}
-          subCurrency={123}
-          subCurrencyCode={'TWD'}
-        />
+        <CurrencyFormatter currency={balanceHKD} currencyCode={'HKD'} />
       </section>
       <section
         className="item"
@@ -117,16 +112,6 @@ const CurrencyChoice: React.FC<FormProps> = ({
 
   return (
     <>
-      {/* <Dialog.Header
-          closeDialog={closeDialog}
-          leftButton={<span />}
-          rightButton={
-            <Dialog.Header.CloseButton
-              closeDialog={closeDialog}
-            />
-          }
-          title={'donation'}
-        /> */}
       <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
     </>
   )

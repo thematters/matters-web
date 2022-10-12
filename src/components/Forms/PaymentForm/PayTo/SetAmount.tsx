@@ -276,33 +276,19 @@ const SetAmount: React.FC<FormProps> = ({
             autoCapitalize="off"
             spellCheck="false"
           />
-          <section className="footer">
-            <TextIcon size="xs" color="grey-dark">
-              付款將由 Stripe 處理，讓你的支持不受地域限制
-            </TextIcon>
-          </section>
+          {isHKD && (
+            <section className="footer">
+              <TextIcon size="xs" color="grey-dark">
+                <Translate
+                  zh_hant="付款將由 Stripe 處理，讓你的支持不受地域限制"
+                  zh_hans="付款将由 Stripe 处理，让你的支持不受地域限制"
+                  en="Payments will be processed by Stripe, so your support is not geo-restricted"
+                />
+              </TextIcon>
+            </section>
+          )}
         </section>
       )}
-
-      {/* {canProcess && (
-        <CustomAmount
-          balance={balanceHKD}
-          fixed={fixed}
-          insufficient={isBalanceInsufficient}
-          showBalance={!isLike}
-          disabled={locked}
-          textColor={color}
-          onClick={() => {
-            // reset default fixed amount
-            if (fixed === false) {
-              setFieldValue('amount', AMOUNT_DEFAULT[values.currency])
-            } else {
-              setFieldValue('amount', 0)
-            }
-            setFixed(!fixed)
-          }}
-        />
-      )} */}
 
       {!canProcess && (
         <section className="set-amount-no-liker-id">
@@ -343,16 +329,6 @@ const SetAmount: React.FC<FormProps> = ({
             </Dialog.Footer.Button>
           </>
         )}
-
-        {/* {canProcess && !isLike && !locked && (
-          <Dialog.Footer.Button
-            bgColor="grey-lighter"
-            textColor="black"
-            onClick={switchToAddCredit}
-          >
-            <Translate zh_hant="先去儲值" zh_hans="先去储值" en="Top Up" />
-          </Dialog.Footer.Button>
-        )} */}
 
         {!canProcess && (
           <NoLikerIdButton
