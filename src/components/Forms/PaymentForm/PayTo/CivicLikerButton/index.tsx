@@ -1,9 +1,4 @@
-import {
-  Button,
-  IconExternalLink16,
-  TextIcon,
-  Translate,
-} from '~/components'
+import { Button, IconExternalLink16, TextIcon, Translate } from '~/components'
 
 import { EXTERNAL_LINKS } from '~/common/enums'
 

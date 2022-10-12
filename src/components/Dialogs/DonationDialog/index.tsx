@@ -109,8 +109,7 @@ const BaseDonationDialog = ({
     openDialog: baseOpenDialog,
     closeDialog: baseCloseDialog,
   } = useDialogSwitch(true)
-  const { currStep, forward, back, reset } =
-    useStep<Step>(defaultStep)
+  const { currStep, forward, back, reset } = useStep<Step>(defaultStep)
   const [windowRef, setWindowRef] = useState<Window | undefined>(undefined)
 
   const [amount, setAmount] = useState<number>(0)
