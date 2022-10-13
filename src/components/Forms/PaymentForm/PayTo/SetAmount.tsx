@@ -4,11 +4,15 @@ import _pickBy from 'lodash/pickBy'
 import { useContext, useRef, useState } from 'react'
 
 import {
+  Button,
   Dialog,
   Form,
   IconExternalLink16,
+  IconFiatCurrency40,
+  IconLikeCoin40,
   LanguageContext,
   Spinner,
+  TextIcon,
   Translate,
   useMutation,
   ViewerContext,
@@ -20,10 +24,14 @@ import {
   PAYMENT_CURRENCY as CURRENCY,
   PAYMENT_MAXIMUM_PAYTO_AMOUNT,
 } from '~/common/enums'
-import { validateCurrency, validateDonationAmount } from '~/common/utils'
+import {
+  formatAmount,
+  translate,
+  validateCurrency,
+  validateDonationAmount,
+} from '~/common/utils'
 
 import CivicLikerButton from './CivicLikerButton'
-import { CustomAmount } from './CustomAmount'
 import { NoLikerIdButton, NoLikerIdMessage } from './NoLiker'
 import styles from './styles.css'
 
@@ -50,12 +58,14 @@ interface FormProps {
   openTabCallback: (values: SetAmountOpenTabCallbackValues) => void
   recipient: UserDonationRecipient
   submitCallback: (values: SetAmountCallbackValues) => void
+  switchToCurrencyChoice: () => void
   switchToAddCredit: () => void
   targetId: string
 }
 
 interface FormValues {
   amount: number
+  customAmount: number
   currency: CURRENCY
 }
 
@@ -66,7 +76,7 @@ const AMOUNT_DEFAULT = {
 
 const AMOUNT_OPTIONS = {
   [CURRENCY.HKD]: [5, 10, 30, 50, 100, 300],
-  [CURRENCY.LIKE]: [166, 666, 1666],
+  [CURRENCY.LIKE]: [50, 100, 150, 500, 1000, 1500],
 }
 
 const SetAmount: React.FC<FormProps> = ({
@@ -75,6 +85,7 @@ const SetAmount: React.FC<FormProps> = ({
   openTabCallback,
   recipient,
   submitCallback,
+  switchToCurrencyChoice,
   switchToAddCredit,
   targetId,
 }) => {
@@ -83,7 +94,7 @@ const SetAmount: React.FC<FormProps> = ({
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
 
-  const [fixed, setFixed] = useState<boolean>(true)
+  const [fixed] = useState<boolean>(true)
   const [locked, setLocked] = useState<boolean>(false)
   const [tabUrl, setTabUrl] = useState('')
   const [tx, setTx] = useState<PayToTx>()
@@ -95,7 +106,8 @@ const SetAmount: React.FC<FormProps> = ({
   const { data, loading } = useQuery<WalletBalance>(WALLET_BALANCE, {
     fetchPolicy: 'network-only',
   })
-  const balance = data?.viewer?.wallet.balance.HKD || 0
+  const balanceHKD = data?.viewer?.wallet.balance.HKD || 0
+  const balanceLike = data?.viewer?.liker.total || 0
 
   const {
     errors,
@@ -109,19 +121,21 @@ const SetAmount: React.FC<FormProps> = ({
   } = useFormik<FormValues>({
     initialValues: {
       amount: AMOUNT_DEFAULT[defaultCurrency || CURRENCY.HKD],
+      customAmount: 0,
       currency: defaultCurrency || CURRENCY.HKD,
     },
-    validate: ({ amount, currency }) =>
+    validate: ({ amount, customAmount, currency }) =>
       _pickBy({
-        amount: validateDonationAmount(amount, lang),
+        amount: validateDonationAmount(customAmount || amount, lang),
         currency: validateCurrency(currency, lang),
       }),
-    onSubmit: async ({ amount, currency }, { setSubmitting }) => {
+    onSubmit: async ({ amount, customAmount, currency }, { setSubmitting }) => {
+      const submitAmount = customAmount || amount
       try {
         if (currency === CURRENCY.LIKE) {
           const result = await payTo({
             variables: {
-              amount,
+              amount: submitAmount,
               currency,
               purpose: 'donation',
               recipientId: recipient.id,
@@ -138,7 +152,7 @@ const SetAmount: React.FC<FormProps> = ({
           setTx(transaction)
         }
         setSubmitting(false)
-        submitCallback({ amount, currency })
+        submitCallback({ amount: submitAmount, currency })
       } catch (error) {
         setSubmitting(false)
       }
@@ -150,34 +164,78 @@ const SetAmount: React.FC<FormProps> = ({
   const canPayLike = isLike && !!viewer.liker.likerId
   const canReceiveLike = isLike && !!recipient.liker.likerId
   const canProcess = isHKD || (canPayLike && canReceiveLike)
-  const color = isLike ? 'green' : 'red'
   const maxAmount = isLike ? Infinity : PAYMENT_MAXIMUM_PAYTO_AMOUNT.HKD
-  const isBalanceInsufficient = isHKD && balance < values.amount
+  const isBalanceInsufficient =
+    (isHKD ? balanceHKD : balanceLike) < (values.customAmount || values.amount)
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit} noBackground>
-      <Form.CurrencyRadioInput
-        isLike={isLike}
-        name="currency"
-        disabled={locked}
-        value={values.currency}
-        error={touched.currency && errors.currency}
-        onBlur={handleBlur}
-        onChange={(e) => {
-          const raw = (e.target.value || '') as keyof typeof CURRENCY
-          const value = CURRENCY[raw]
-          const defaultAmount = fixed ? AMOUNT_DEFAULT[value] : 0
-          if (value) {
-            setFieldValue('currency', value)
-            setFieldValue('amount', defaultAmount)
-          }
-        }}
-      />
+      <section className="set-amount-change-support-way">
+        {isHKD && (
+          <TextIcon
+            icon={<IconFiatCurrency40 size="md" />}
+            size="md"
+            spacing="xtight"
+            weight="md"
+          >
+            <Translate zh_hant="法幣 HKD" zh_hans="法币 HKD" en="HKD" />
+          </TextIcon>
+        )}
+        {isLike && (
+          <TextIcon
+            icon={<IconLikeCoin40 size="md" />}
+            size="md"
+            spacing="xtight"
+            weight="md"
+          >
+            LikeCoin
+          </TextIcon>
+        )}
+        <span className="button">
+          <Button onClick={switchToCurrencyChoice}>
+            <TextIcon size="xs" textDecoration="underline" color="grey-dark">
+              <Translate
+                zh_hant="更改支持方式"
+                zh_hans="更改支持方式"
+                en="Change"
+              />
+            </TextIcon>
+          </Button>
+        </span>
+      </section>
+
+      <section className="set-amount-balance">
+        <span className="left">
+          <Translate zh_hant="餘額" zh_hans="余额" en="Balance" />
+          &nbsp;{isHKD && formatAmount(balanceHKD)}
+          {isLike && formatAmount(balanceLike, 0)}
+        </span>
+        {isHKD && (
+          <Button onClick={switchToAddCredit}>
+            <TextIcon
+              size="xs"
+              textDecoration="underline"
+              color="green"
+              weight="md"
+            >
+              {isBalanceInsufficient ? (
+                <Translate
+                  zh_hant="餘額不足，請儲值"
+                  zh_hans="余额不足，请储值"
+                  en="Insufficient balance, please top up"
+                />
+              ) : (
+                <Translate zh_hant="儲值" zh_hans="储值" en="Top Up" />
+              )}
+            </TextIcon>
+          </Button>
+        )}
+      </section>
 
       {fixed && canProcess && (
         <Form.AmountRadioInput
           currency={values.currency}
-          balance={isHKD ? balance : undefined}
+          balance={isHKD ? balanceHKD : balanceLike}
           amounts={AMOUNT_OPTIONS}
           name="amount"
           disabled={locked}
@@ -187,56 +245,63 @@ const SetAmount: React.FC<FormProps> = ({
           onChange={(e) => {
             const value = parseInt(e.target.value, 10) || 0
             setFieldValue('amount', value)
+            setFieldValue('customAmount', 0)
+            e.target.blur()
           }}
-        />
-      )}
-
-      {!fixed && canProcess && (
-        <Form.AmountInput
-          required
-          className={isHKD ? 'red-style' : undefined}
-          disabled={locked}
-          currency={values.currency}
-          name="amount"
-          min={0}
-          max={maxAmount}
-          value={values.amount}
-          error={touched.amount && errors.amount}
-          onBlur={handleBlur}
-          onChange={(e) => {
-            const value = e.target.valueAsNumber || 0
-            const sanitizedAmount = Math.abs(
-              Math.min(isHKD ? Math.floor(value) : value, maxAmount)
-            )
-
-            // remove extra left pad 0
-            if (inputRef.current) {
-              inputRef.current.value = sanitizedAmount
-            }
-            setFieldValue('amount', sanitizedAmount)
-          }}
-          ref={inputRef}
         />
       )}
 
       {canProcess && (
-        <CustomAmount
-          balance={balance}
-          fixed={fixed}
-          insufficient={isBalanceInsufficient}
-          showBalance={!isLike}
-          disabled={locked}
-          textColor={color}
-          onClick={() => {
-            // reset default fixed amount
-            if (fixed === false) {
-              setFieldValue('amount', AMOUNT_DEFAULT[values.currency])
-            } else {
-              setFieldValue('amount', 0)
+        <section className="set-amount-custom-amount-input">
+          <input
+            disabled={locked}
+            type="number"
+            name="customAmount"
+            min={0}
+            max={maxAmount}
+            placeholder={translate({
+              zh_hant: '輸入自訂金額',
+              zh_hans: '输入自订金额',
+              en: 'Enter a custom amount',
+              lang,
+            })}
+            value={
+              !touched.customAmount && values.customAmount <= 0
+                ? undefined
+                : values.customAmount
             }
-            setFixed(!fixed)
-          }}
-        />
+            onBlur={handleBlur}
+            onChange={(e) => {
+              const value = e.target.valueAsNumber || 0
+              const sanitizedAmount = Math.abs(
+                Math.min(isHKD ? Math.floor(value) : value, maxAmount)
+              )
+
+              // remove extra left pad 0
+              if (inputRef.current) {
+                inputRef.current.value = sanitizedAmount
+              }
+              setFieldValue('customAmount', sanitizedAmount)
+              setFieldValue('amount', 0)
+            }}
+            ref={inputRef}
+            autoComplete="nope"
+            autoCorrect="off"
+            autoCapitalize="off"
+            spellCheck="false"
+          />
+          {isHKD && (
+            <section className="footer">
+              <TextIcon size="xs" color="grey-dark">
+                <Translate
+                  zh_hant="付款將由 Stripe 處理，讓你的支持不受地域限制"
+                  zh_hans="付款将由 Stripe 处理，让你的支持不受地域限制"
+                  en="Payments will be processed by Stripe, so your support is not geo-restricted"
+                />
+              </TextIcon>
+            </section>
+          )}
+        </section>
       )}
 
       {!canProcess && (
@@ -266,27 +331,29 @@ const SetAmount: React.FC<FormProps> = ({
               <CivicLikerButton likerId={recipient.liker.likerId} />
             )}
 
-            <Dialog.Footer.Button
-              type="submit"
-              form={formId}
-              disabled={!isValid || isSubmitting || isBalanceInsufficient}
-              bgColor={color}
-              textColor="white"
-              loading={isSubmitting}
-            >
-              <Translate id="nextStep" />
-            </Dialog.Footer.Button>
+            {isBalanceInsufficient && isHKD ? (
+              <Dialog.Footer.Button
+                type="button"
+                onClick={switchToAddCredit}
+                form={formId}
+                bgColor="green"
+                textColor="white"
+              >
+                <Translate id="topUp" />
+              </Dialog.Footer.Button>
+            ) : (
+              <Dialog.Footer.Button
+                type="submit"
+                form={formId}
+                disabled={!isValid || isSubmitting || isBalanceInsufficient}
+                bgColor="green"
+                textColor="white"
+                loading={isSubmitting}
+              >
+                <Translate id="nextStep" />
+              </Dialog.Footer.Button>
+            )}
           </>
-        )}
-
-        {canProcess && !isLike && !locked && (
-          <Dialog.Footer.Button
-            bgColor="grey-lighter"
-            textColor="black"
-            onClick={switchToAddCredit}
-          >
-            <Translate zh_hant="先去儲值" zh_hans="先去储值" en="Top Up" />
-          </Dialog.Footer.Button>
         )}
 
         {!canProcess && (

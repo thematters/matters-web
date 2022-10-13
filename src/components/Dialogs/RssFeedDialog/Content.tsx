@@ -95,7 +95,6 @@ const RssFeedDialogContent = ({
   const gateways = data?.official.gatewayUrls || []
 
   const notPushlishedLately = articlesCount !== 0 && ipnsKey === ''
-  console.log(notPushlishedLately)
 
   return (
     <section className="container">

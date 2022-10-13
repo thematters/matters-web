@@ -9,9 +9,16 @@
   flex: 0 0 30%;
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-medium);
-  color: var(--color-white);
+  color: var(--color-black);
   background: var(--color-white);
+  border: 2px solid var(--color-line-grey-light);
   border-radius: var(--spacing-xx-tight);
+
+  &.active {
+    color: var(--color-matters-green);
+    background: var(--color-green-lighter);
+    border-color: var(--color-matters-green);
+  }
 
   &:nth-child(n + 4) {
     margin-top: var(--spacing-loose);
@@ -23,25 +30,5 @@
     padding-top: var(--spacing-base);
     padding-bottom: var(--spacing-base);
     text-align: center;
-  }
-}
-
-.hkd {
-  color: var(--color-red);
-  border: 2px solid var(--color-red);
-
-  &.active {
-    color: var(--color-white);
-    background: var(--color-red);
-  }
-}
-
-.like {
-  color: var(--color-matters-green);
-  border: 2px solid var(--color-matters-green);
-
-  &.active {
-    color: var(--color-white);
-    background: var(--color-matters-green);
   }
 }

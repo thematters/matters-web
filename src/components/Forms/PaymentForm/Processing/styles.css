@@ -1,0 +1,13 @@
+.hint {
+  margin-top: var(--spacing-base);
+  text-align: center;
+}
+
+.fallback-content {
+  margin: var(--spacing-base);
+  text-align: center;
+
+  & img {
+    margin-top: var(--spacing-base);
+  }
+}

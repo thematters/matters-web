@@ -19,6 +19,7 @@ import { PayTo_payTo_transaction as PayToTx } from '~/components/GQL/mutations/_
 import { UserDonationRecipient } from './__generated__/UserDonationRecipient'
 
 type Step =
+  | 'currencyChoice'
   | 'setAmount'
   | 'addCredit'
   | 'complete'
@@ -53,6 +54,12 @@ const DynamicPayToFormConfirm = dynamic(
   () => import('~/components/Forms/PaymentForm/PayTo/Confirm'),
   { loading: Spinner }
 )
+
+const DynamicPayToFormCurrencyChoice = dynamic(
+  () => import('~/components/Forms/PaymentForm/PayTo/CurrencyChoice'),
+  { loading: Spinner }
+)
+
 const DynamicPayToFormSetAmount = dynamic(
   () => import('~/components/Forms/PaymentForm/PayTo/SetAmount'),
   { loading: Spinner }
@@ -91,7 +98,7 @@ const fragments = {
 const BaseDonationDialog = ({
   children,
   completeCallback,
-  defaultStep = 'setAmount',
+  defaultStep = 'currencyChoice',
   recipient,
   targetId,
 }: DonationDialogProps) => {
@@ -102,7 +109,7 @@ const BaseDonationDialog = ({
     openDialog: baseOpenDialog,
     closeDialog: baseCloseDialog,
   } = useDialogSwitch(true)
-  const { currStep, prevStep, forward, back } = useStep<Step>(defaultStep)
+  const { currStep, forward, back, reset } = useStep<Step>(defaultStep)
   const [windowRef, setWindowRef] = useState<Window | undefined>(undefined)
 
   const [amount, setAmount] = useState<number>(0)
@@ -136,14 +143,16 @@ const BaseDonationDialog = ({
   }
 
   const ContinueDonationButton = (
-    <Dialog.Footer.Button onClick={() => forward('confirm')}>
-      <Translate zh_hant="回到交易" zh_hans="回到交易" />
+    <Dialog.Footer.Button onClick={() => forward('setAmount')}>
+      <Translate zh_hant="回到支持" zh_hans="回到支持" />
     </Dialog.Footer.Button>
   )
 
   /**
    * Donation
    */
+
+  const isCurrencyChoice = currStep === 'currencyChoice'
   // complete dialog for donation
   const isComplete = currStep === 'complete'
   // set donation amount
@@ -164,7 +173,7 @@ const BaseDonationDialog = ({
   const isResetPassword = currStep === 'resetPassword'
   const isSetPaymentPassword = currStep === 'setPaymentPassword'
 
-  const isHKD = currency === CURRENCY.HKD
+  // const isHKD = currency === CURRENCY.HKD
 
   useEffect(() => {
     analytics.trackEvent('view_donation_dialog', { step: currStep })
@@ -180,33 +189,47 @@ const BaseDonationDialog = ({
         onDismiss={closeDialog}
         fixedHeight
       >
-        <Dialog.Header
-          closeDialog={closeDialog}
-          leftButton={
-            prevStep && !isComplete ? (
-              <Dialog.Header.BackButton onClick={back} />
-            ) : (
-              <span />
-            )
-          }
-          rightButton={
-            <Dialog.Header.CloseButton
-              closeDialog={closeDialog}
-              textId="close"
-            />
-          }
-          title={
-            isAddCredit
-              ? 'topUp'
-              : isSetPaymentPassword
-              ? 'paymentPassword'
-              : isResetPassword
-              ? 'resetPaymentPassword'
-              : isComplete
-              ? 'successDonation'
-              : 'donation'
-          }
-        />
+        {!isProcessing && (
+          <Dialog.Header
+            closeDialog={closeDialog}
+            leftButton={
+              isAddCredit ? (
+                <Dialog.Header.BackButton onClick={back} />
+              ) : (
+                <Dialog.Header.CloseButton closeDialog={closeDialog} />
+              )
+            }
+            title={
+              isAddCredit
+                ? 'topUp'
+                : isSetPaymentPassword
+                ? 'paymentPassword'
+                : isResetPassword
+                ? 'resetPaymentPassword'
+                : isComplete
+                ? 'successDonation'
+                : 'donation'
+            }
+          />
+        )}
+
+        {isCurrencyChoice && (
+          <DynamicPayToFormCurrencyChoice
+            closeDialog={() => {
+              reset(defaultStep)
+              closeDialog()
+            }}
+            defaultCurrency={currency}
+            openTabCallback={setAmountOpenTabCallback}
+            recipient={recipient}
+            submitCallback={setAmountCallback}
+            switchToSetAmount={(c: CURRENCY) => {
+              setCurrency(c)
+              forward('setAmount')
+            }}
+            targetId={targetId}
+          />
+        )}
 
         {isSetAmount && (
           <DynamicPayToFormSetAmount
@@ -215,6 +238,9 @@ const BaseDonationDialog = ({
             openTabCallback={setAmountOpenTabCallback}
             recipient={recipient}
             submitCallback={setAmountCallback}
+            switchToCurrencyChoice={() => {
+              forward('currencyChoice')
+            }}
             switchToAddCredit={() => {
               forward('addCredit')
             }}
@@ -227,7 +253,8 @@ const BaseDonationDialog = ({
             amount={amount}
             currency={currency}
             recipient={recipient}
-            submitCallback={() => forward(isHKD ? 'complete' : 'processing')}
+            switchToSetAmount={() => forward('setAmount')}
+            submitCallback={() => forward('processing')}
             switchToResetPassword={() => forward('resetPassword')}
             targetId={targetId}
           />
@@ -235,6 +262,10 @@ const BaseDonationDialog = ({
 
         {isProcessing && (
           <DynamicPaymentProcessingForm
+            amount={amount}
+            currency={currency}
+            recipient={recipient}
+            closeDialog={closeDialog}
             nextStep={() => forward('complete')}
             txId={payToTx?.id || ''}
             windowRef={windowRef}
