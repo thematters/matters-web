@@ -2,6 +2,7 @@ import VisuallyHidden from '@reach/visually-hidden'
 import classNames from 'classnames'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
+import { formatAmount } from '~/common/utils'
 
 import Field, { FieldProps } from '../Field'
 import styles from './styles.css'
@@ -63,7 +64,6 @@ const AmountOption: React.FC<AmountOptionProps> = ({
 
   const amountClasses = classNames({
     amount: true,
-    [currency === CURRENCY.LIKE ? 'like' : 'hkd']: true,
     active: value === amount,
     'u-area-disable': disabled || isBalanceInsufficient,
   })
@@ -71,7 +71,7 @@ const AmountOption: React.FC<AmountOptionProps> = ({
   return (
     <li className={amountClasses}>
       <label htmlFor={fieldId}>
-        {amount}
+        {formatAmount(amount, 0)}
 
         <VisuallyHidden>
           <input

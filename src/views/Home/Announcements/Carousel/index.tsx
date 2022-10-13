@@ -164,10 +164,10 @@ const Carousel = ({
                       smUpSize="1080w"
                     />
                     <h3>
-                      {hasTranslaton ? translatedItem.title : item.title}{' '}
+                      {hasTranslaton ? translatedItem.title : item.title}
                     </h3>
                     <p>
-                      {hasTranslaton ? translatedItem.content : item.content}{' '}
+                      {hasTranslaton ? translatedItem.content : item.content}
                     </p>
                   </div>
                 </Card>
