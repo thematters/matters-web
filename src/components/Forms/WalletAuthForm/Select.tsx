@@ -77,16 +77,12 @@ const Select: React.FC<FormProps> = ({
   const isConnect = type === 'connect'
 
   const {
-    // activeConnector,
     connectors,
     connect,
     error: connectError,
-    isConnecting,
     pendingConnector,
   } = useConnect()
-  const { data: accountData } = useAccount()
-
-  const account = accountData?.address
+  const { address: account, isConnecting } = useAccount()
   const errorMessage = connectError?.message
 
   useEffect(() => {
@@ -163,7 +159,7 @@ const Select: React.FC<FormProps> = ({
               analytics.trackEvent('click_button', {
                 type: 'connectorMetaMask',
               })
-              connect(injectedConnector)
+              connect({ connector: injectedConnector })
             }}
             right={isMetaMaskLoading ? <IconSpinner16 color="grey" /> : null}
           />
@@ -183,7 +179,7 @@ const Select: React.FC<FormProps> = ({
             analytics.trackEvent('click_button', {
               type: 'connectorWalletConnect',
             })
-            connect(walletConnectConnector)
+            connect({ connector: walletConnectConnector })
           }}
           right={isWalletConnectLoading ? <IconSpinner16 color="grey" /> : null}
         />

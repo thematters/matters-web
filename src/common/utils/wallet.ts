@@ -10,7 +10,7 @@ import { WalletErrorType } from '~/common/enums'
 const alchemyId = process.env.NEXT_PUBLIC_ALCHEMY_KEY || ''
 
 export const { chains } = configureChains(defaultChains, [
-  alchemyProvider({ alchemyId }),
+  alchemyProvider({ apiKey: alchemyId }),
   publicProvider(),
 ])
 
