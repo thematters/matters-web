@@ -19,7 +19,7 @@ type WalletAddressProps = {
 }
 
 const WalletAddress: React.FC<WalletAddressProps> = ({ address }) => {
-  const { data: ensName } = useEnsName({ address })
+  const { data: ensName } = useEnsName({ address: address as `0x${string}` })
 
   return (
     <section className="address">

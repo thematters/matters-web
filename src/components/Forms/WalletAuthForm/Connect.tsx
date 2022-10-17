@@ -108,8 +108,7 @@ const Connect: React.FC<FormProps> = ({
   const [queryEthAddressUser, { data, loading }] =
     useLazyQuery<ETHAddressUser>(ETH_ADDRESS_USER)
 
-  const { data: accountData } = useAccount()
-  const account = accountData?.address
+  const { address: account } = useAccount()
   const { signMessageAsync } = useSignMessage()
 
   // sign up if eth address didn't bind with a user

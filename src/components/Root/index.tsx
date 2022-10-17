@@ -62,8 +62,8 @@ const wagmiClient = createClient({
   connectors: [
     new MetaMaskConnector({ chains }),
     new WalletConnectConnector({
+      chains,
       options: {
-        // infuraId: process.env.NEXT_PUBLIC_ALCHEMY_KEY || '',
         qrcode: true,
       },
     }),
