@@ -11,6 +11,7 @@ import {
   Form,
   IconExternalLink16,
   IconFiatCurrency40,
+  IconInfo24,
   IconLikeCoin40,
   IconUSDTActive40,
   LanguageContext,
@@ -39,6 +40,7 @@ import {
 import CivicLikerButton from './CivicLikerButton'
 import { NoLikerIdButton, NoLikerIdMessage } from './NoLiker'
 import styles from './styles.css'
+import WhyPolygonDialog from './WhyPolygonDialog'
 
 import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
 import {
@@ -224,6 +226,15 @@ const SetAmount: React.FC<FormProps> = ({
               />
             </TextIcon>
           </Button>
+
+          {/* TODO: move to network component */}
+          <WhyPolygonDialog>
+            {({ openDialog }) => (
+              <button type="button" onClick={openDialog}>
+                <TextIcon icon={<IconInfo24 size="md" color="grey" />} />
+              </button>
+            )}
+          </WhyPolygonDialog>
         </span>
       </section>
 
