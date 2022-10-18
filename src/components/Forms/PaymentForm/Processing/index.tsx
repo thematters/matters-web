@@ -25,6 +25,7 @@ interface Props {
   currency: CURRENCY
   recipient: UserDonationRecipient
   article?: ArticleDetailPublic_article
+  targetId: string
   txId: string
   nextStep: () => void
   closeDialog: () => void
@@ -144,6 +145,7 @@ const USDTProcessingForm: React.FC<Props> = ({
   amount,
   currency,
   recipient,
+  targetId,
   article,
   nextStep,
   closeDialog,
@@ -164,10 +166,8 @@ const USDTProcessingForm: React.FC<Props> = ({
     ],
   })
 
-
-
   useEffect(() => {
-   // tslint:disable-next-line: no-unused-expression
+    // tslint:disable-next-line: no-unused-expression
     write && write()
   }, [])
 
@@ -180,16 +180,16 @@ const USDTProcessingForm: React.FC<Props> = ({
           currency,
           purpose: 'donation',
           recipientId: recipient.id,
+          targetId,
           chain: CHAIN.POLYGON,
           txHash: hash,
         },
       })
-      console.log({ result })
-      // const redirectUrl = result?.data?.payTo.redirectUrl
-      // const transaction = result?.data?.payTo.transaction
-      // if (!redirectUrl || !transaction) {
-      //   throw new Error()
-      // }
+      const redirectUrl = result?.data?.payTo.redirectUrl
+      const transaction = result?.data?.payTo.transaction
+      if (!redirectUrl || !transaction) {
+        throw new Error()
+      }
       await data.wait()
       nextStep()
     }
@@ -248,6 +248,7 @@ const PaymentProcessingForm: React.FC<Props> = ({
   currency,
   recipient,
   article,
+  targetId,
   txId,
   nextStep,
   closeDialog,
@@ -262,6 +263,7 @@ const PaymentProcessingForm: React.FC<Props> = ({
           recipient={recipient}
           article={article}
           txId={txId}
+          targetId={targetId}
           nextStep={nextStep}
           closeDialog={closeDialog}
           windowRef={windowRef}
@@ -273,6 +275,7 @@ const PaymentProcessingForm: React.FC<Props> = ({
           currency={currency}
           recipient={recipient}
           txId={txId}
+          targetId={targetId}
           nextStep={nextStep}
           closeDialog={closeDialog}
           windowRef={windowRef}

@@ -306,6 +306,7 @@ const BaseDonationDialog = ({
             txId={payToTx?.id || ''}
             windowRef={windowRef}
             article={article}
+            targetId={targetId}
           />
         )}
 
