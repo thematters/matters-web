@@ -81,7 +81,7 @@ const PayoutItem = ({
   )
 }
 
-export const FiatCurrency: React.FC<FiatCurrencyProps> = ({
+export const FiatCurrencyBalance: React.FC<FiatCurrencyProps> = ({
   balanceHKD,
   canPayout,
   hasStripeAccount,

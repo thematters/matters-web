@@ -12,6 +12,7 @@ import {
   Form,
   IconExternalLink16,
   IconFiatCurrency40,
+  IconInfo24,
   IconLikeCoin40,
   IconSpinner16,
   IconUSDTActive40,
@@ -29,6 +30,7 @@ import PAY_TO from '~/components/GQL/mutations/payTo'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
 
 import {
+  GUIDE_LINKS,
   PAYMENT_CURRENCY as CURRENCY,
   PAYMENT_MAXIMUM_PAYTO_AMOUNT,
 } from '~/common/enums'
@@ -43,6 +45,7 @@ import {
 import CivicLikerButton from './CivicLikerButton'
 import { NoLikerIdButton, NoLikerIdMessage } from './NoLiker'
 import styles from './styles.css'
+import WhyPolygonDialog from './WhyPolygonDialog'
 
 import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
 import {
@@ -138,7 +141,7 @@ const SetAmount: React.FC<FormProps> = ({
   const [approving, setApproving] = useState(false)
   const { data: allowanceData } = useAllowance()
   const { data: approveData, write: approveWrite } = useApprove()
-  const { data: balanceOfData } = useBalanceOf()
+  const { data: balanceOfData } = useBalanceOf({})
 
   const allowanceUSDT = allowanceData || BigNumber.from('0')
   const balanceUSDT = (balanceOfData && formatUnits(balanceOfData)) || 0
@@ -258,13 +261,22 @@ const SetAmount: React.FC<FormProps> = ({
               />
             </TextIcon>
           </Button>
+
+          {/* TODO: move to network component */}
+          <WhyPolygonDialog>
+            {({ openDialog }) => (
+              <button type="button" onClick={openDialog}>
+                <TextIcon icon={<IconInfo24 size="md" color="grey" />} />
+              </button>
+            )}
+          </WhyPolygonDialog>
         </span>
       </section>
 
       <section className="set-amount-balance">
         <span className="left">
           <Translate zh_hant="餘額" zh_hans="余额" en="Balance" />
-          &nbsp;{isUSDT && balanceUSDT}
+          &nbsp;{isUSDT && <span>{balanceUSDT} USDT</span>}
           {isHKD && formatAmount(balanceHKD)}
           {isLike && formatAmount(balanceLike, 0)}
         </span>
@@ -287,6 +299,17 @@ const SetAmount: React.FC<FormProps> = ({
               )}
             </TextIcon>
           </Button>
+        )}
+        {isUSDT && BigNumber.from(balanceUSDT).gte(0) && (
+          <a href={GUIDE_LINKS.payment} target="_blank">
+            <TextIcon size="xs" textDecoration="underline" color="grey-dark">
+              <Translate
+                zh_hant="如何移轉資金到 Polygon？"
+                zh_hans="如何移转资金到 Polygon？"
+                en="How to transfer USDT to Polygon?"
+              />
+            </TextIcon>
+          </a>
         )}
       </section>
 

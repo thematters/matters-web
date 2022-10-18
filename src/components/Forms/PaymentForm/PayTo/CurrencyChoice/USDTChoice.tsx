@@ -33,7 +33,7 @@ const USDTChoice: React.FC<FormProps> = ({
   const viewer = useContext(ViewerContext)
   const { address } = useAccount()
 
-  const { data: balanceOfData } = useBalanceOf()
+  const { data: balanceOfData } = useBalanceOf({})
 
   const balanceUSDT = (balanceOfData && formatUnits(balanceOfData)) || 0
 

@@ -22,14 +22,18 @@ export const useAllowance = () => {
   })
 }
 
-export const useBalanceOf = () => {
+export const useBalanceOf = ({
+  address: addr,
+}: {
+  address?: string | null
+}) => {
   const { address } = useAccount()
 
   return useContractRead({
     address: process.env.NEXT_PUBLIC_ERC20_CONTRACT_ADDRESS || '',
     abi: ERC20ABI,
     functionName: 'balanceOf',
-    args: [`0x${address?.slice(2)}`],
+    args: [`0x${(addr || address)?.slice(2)}`],
   })
 }
 
