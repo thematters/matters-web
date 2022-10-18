@@ -116,7 +116,7 @@ const SetAmount: React.FC<FormProps> = ({
     fetchPolicy: 'network-only',
   })
 
-  const { data: balanceOfData } = useBalanceOf()
+  const { data: balanceOfData } = useBalanceOf({})
 
   const balanceUSDT = (balanceOfData && formatUnits(balanceOfData)) || 0
   const balanceHKD = data?.viewer?.wallet.balance.HKD || 0

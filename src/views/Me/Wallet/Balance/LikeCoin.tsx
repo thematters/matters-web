@@ -43,7 +43,7 @@ const Wrapper: React.FC = ({ children }) => (
   </section>
 )
 
-export const LikeCoin = () => {
+export const LikeCoinBalance = () => {
   const viewer = useContext(ViewerContext)
 
   const likerId = viewer.liker.likerId

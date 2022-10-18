@@ -12,7 +12,7 @@ import styles from './styles.css'
 const Tips = () => {
   const viewer = useContext(ViewerContext)
   const { address } = useAccount()
-  const { data: balanceOfData } = useBalanceOf()
+  const { data: balanceOfData } = useBalanceOf({})
 
   const balanceUSDT = (balanceOfData && formatUnits(balanceOfData)) || 0
   const isZeroBalance = BigNumber.from(balanceUSDT).lte(0)

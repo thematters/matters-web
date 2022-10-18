@@ -40,7 +40,7 @@ const USDTChoice: React.FC<FormProps> = ({
 
   const { data: allowanceData } = useAllowance()
 
-  const { data: balanceOfData } = useBalanceOf()
+  const { data: balanceOfData } = useBalanceOf({})
 
   const { data: approveData, write: approveWrite } = useApprove()
 
