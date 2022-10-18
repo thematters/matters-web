@@ -1,21 +1,18 @@
-import { BigNumber } from 'ethers/lib/ethers'
-import { formatUnits } from 'ethers/lib/utils'
 import { useContext } from 'react'
 import { useAccount } from 'wagmi'
 
-import { Translate, useBalanceOf, ViewerContext } from '~/components'
+import { Translate, useBalanceUSDT, ViewerContext } from '~/components'
 
-import { GUIDE_LINKS } from '@/src/common/enums'
+import { GUIDE_LINKS } from '~/common/enums'
 
 import styles from './styles.css'
 
 const Tips = () => {
   const viewer = useContext(ViewerContext)
   const { address } = useAccount()
-  const { data: balanceOfData } = useBalanceOf({})
+  const { data: balanceUSDTData } = useBalanceUSDT({})
 
-  const balanceUSDT = (balanceOfData && formatUnits(balanceOfData)) || 0
-  const isZeroBalance = BigNumber.from(balanceUSDT).lte(0)
+  const isZeroBalance = balanceUSDTData?.value.lte(0)
   const hasEthAddress = !!viewer.info.ethAddress
 
   if (!hasEthAddress) {

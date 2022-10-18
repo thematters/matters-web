@@ -4,9 +4,9 @@ import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 
 import styles from './styles.css'
 
-import { UserDonationRecipient } from '@/src/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
+import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
 interface PaymentInfoProps {
-  amount: number
+  amount: number | string
   currency: CURRENCY
   recipient: UserDonationRecipient
   children?: React.ReactNode

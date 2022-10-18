@@ -1,7 +1,5 @@
 import { useContext } from 'react'
 
-import { Z_INDEX } from '~/common/enums'
-
 import {
   Button,
   DropdownDialog,
@@ -10,7 +8,9 @@ import {
   Menu,
   TextIcon,
   Translate,
-} from '@/src/components'
+} from '~/components'
+
+import { Z_INDEX } from '~/common/enums'
 
 export enum Currency {
   ALL = 'ALL',

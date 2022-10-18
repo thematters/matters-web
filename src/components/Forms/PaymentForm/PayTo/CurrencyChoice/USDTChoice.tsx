@@ -1,4 +1,3 @@
-import { formatUnits } from 'ethers/lib/utils'
 import { useContext } from 'react'
 import { useAccount } from 'wagmi'
 
@@ -9,7 +8,7 @@ import {
   IconUSDTActive40,
   TextIcon,
   Translate,
-  useBalanceOf,
+  useBalanceUSDT,
   ViewerContext,
 } from '~/components'
 
@@ -33,9 +32,8 @@ const USDTChoice: React.FC<FormProps> = ({
   const viewer = useContext(ViewerContext)
   const { address } = useAccount()
 
-  const { data: balanceOfData } = useBalanceOf({})
-
-  const balanceUSDT = (balanceOfData && formatUnits(balanceOfData)) || 0
+  const { data: balanceUSDTData } = useBalanceUSDT({})
+  const balanceUSDT = balanceUSDTData?.formatted || 0
 
   return (
     <>

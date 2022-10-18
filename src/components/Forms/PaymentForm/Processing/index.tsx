@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
-import { BigNumber, utils } from 'ethers/lib/ethers'
+import { BigNumber } from 'ethers'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useEffect, useState } from 'react'
@@ -9,19 +9,19 @@ import { Dialog, Spinner, Translate, useMutation } from '~/components'
 import PAY_TO from '~/components/GQL/mutations/payTo'
 
 import { CHAIN, PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
-import { curationABI } from '~/common/utils/contract'
+import { curationABI } from '~/common/utils'
 
 import PaymentInfo from '../PaymentInfo'
 import PayToFallback from './PayToFallback'
 import styles from './styles.css'
 
-import { UserDonationRecipient } from '@/src/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
-import { ArticleDetailPublic_article } from '@/src/views/ArticleDetail/__generated__/ArticleDetailPublic'
+import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
 import { PayTo as PayToMutate } from '~/components/GQL/mutations/__generated__/PayTo'
+import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
 import { ViewerTxState } from './__generated__/ViewerTxState'
 
 interface Props {
-  amount: number
+  amount: number | string
   currency: CURRENCY
   recipient: UserDonationRecipient
   article?: ArticleDetailPublic_article
@@ -159,9 +159,9 @@ const USDTProcessingForm: React.FC<Props> = ({
     abi: curationABI,
     functionName: 'curate',
     args: [
-      `0x${recipient.info.ethAddress?.slice(2)}`,
-      `0x${process.env.NEXT_PUBLIC_ERC20_CONTRACT_ADDRESS?.slice(2)}`,
-      utils.parseUnits(BigNumber.from(amount).toString(), '18'),
+      recipient.info.ethAddress as `0x${string}`,
+      process.env.NEXT_PUBLIC_ERC20_CONTRACT_ADDRESS as `0x${string}`,
+      BigNumber.from(amount),
       `ipfs://${article?.dataHash}`,
     ],
   })

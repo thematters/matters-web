@@ -15,8 +15,8 @@ import { UserDigest } from '~/components/UserDigest'
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
-import { ArticleDetailPublic_article } from '@/src/views/ArticleDetail/__generated__/ArticleDetailPublic'
 import { PayTo_payTo_transaction as PayToTx } from '~/components/GQL/mutations/__generated__/PayTo'
+import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
 import { UserDonationRecipient } from './__generated__/UserDonationRecipient'
 
 type Step =

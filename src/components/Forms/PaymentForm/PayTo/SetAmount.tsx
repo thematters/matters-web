@@ -1,10 +1,9 @@
 import { useQuery } from '@apollo/react-hooks'
-import { BigNumber } from 'ethers/lib/ethers'
-import { formatUnits } from 'ethers/lib/utils'
+import { BigNumber } from 'ethers'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useEffect, useRef, useState } from 'react'
-import { useAccount, useNetwork, useSwitchNetwork } from 'wagmi'
+import { useAccount, useDisconnect, useNetwork, useSwitchNetwork } from 'wagmi'
 
 import {
   Button,
@@ -14,7 +13,6 @@ import {
   IconFiatCurrency40,
   IconInfo24,
   IconLikeCoin40,
-  IconSpinner16,
   IconUSDTActive40,
   LanguageContext,
   Spinner,
@@ -22,7 +20,7 @@ import {
   Translate,
   useAllowance,
   useApprove,
-  useBalanceOf,
+  useBalanceUSDT,
   useMutation,
   ViewerContext,
 } from '~/components'
@@ -108,17 +106,13 @@ const SetAmount: React.FC<FormProps> = ({
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
   const { address } = useAccount()
-  useEffect(() => {
-    if (!address && defaultCurrency === CURRENCY.USDT) {
-      switchToCurrencyChoice()
-    }
-  }, [address])
-
+  const { disconnect } = useDisconnect()
   const { chain } = useNetwork()
-  const { switchNetwork } = useSwitchNetwork()
+  const { chains, switchNetwork } = useSwitchNetwork()
+
   const isUnsupportedNetwork = !!chain?.unsupported
-  const targetChainName = process.env.NEXT_PUBLIC_TARGET_CHAIN_NAME
-  const targetChainId = Number(process.env.NEXT_PUBLIC_TARGET_CHAIN_ID)
+  const targetChainName = chains[0]?.name
+  const targetChainId = chains[0]?.id
   const switchToTargetNetwork = async () => {
     if (!switchNetwork) return
 
@@ -141,12 +135,18 @@ const SetAmount: React.FC<FormProps> = ({
   const [approving, setApproving] = useState(false)
   const { data: allowanceData } = useAllowance()
   const { data: approveData, write: approveWrite } = useApprove()
-  const { data: balanceOfData } = useBalanceOf({})
+  const { data: balanceUSDTData } = useBalanceUSDT({})
 
   const allowanceUSDT = allowanceData || BigNumber.from('0')
-  const balanceUSDT = (balanceOfData && formatUnits(balanceOfData)) || 0
+  const balanceUSDT = parseFloat(balanceUSDTData?.formatted || '0')
   const balanceHKD = data?.viewer?.wallet.balance.HKD || 0
   const balanceLike = data?.viewer?.liker.total || 0
+
+  useEffect(() => {
+    if (!address && defaultCurrency === CURRENCY.USDT) {
+      switchToCurrencyChoice()
+    }
+  }, [address])
 
   useEffect(() => {
     ;(async () => {
@@ -217,6 +217,9 @@ const SetAmount: React.FC<FormProps> = ({
   const isBalanceInsufficient =
     (isUSDT ? balanceUSDT : isHKD ? balanceHKD : balanceLike) <
     (values.customAmount || values.amount)
+
+  const isConnectedAddress =
+    viewer.info.ethAddress?.toLowerCase() === address?.toLowerCase()
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit} noBackground>
@@ -300,7 +303,7 @@ const SetAmount: React.FC<FormProps> = ({
             </TextIcon>
           </Button>
         )}
-        {isUSDT && BigNumber.from(balanceUSDT).gte(0) && (
+        {isUSDT && balanceUSDT <= 0 && (
           <a href={GUIDE_LINKS.payment} target="_blank">
             <TextIcon size="xs" textDecoration="underline" color="grey-dark">
               <Translate
@@ -439,20 +442,28 @@ const SetAmount: React.FC<FormProps> = ({
 
         {isUSDT && (
           <>
-            {viewer.info.ethAddress?.toLowerCase() !==
-              address?.toLowerCase() && (
+            {!isConnectedAddress && (
               <>
                 <Dialog.Footer.Button
                   bgColor="green"
                   textColor="white"
                   onClick={() => {
-                    switchToCurrencyChoice()
+                    disconnect()
                   }}
                 >
-                  <Translate zh_hant="重連" zh_hans="重连" en="Reconnection" />
+                  <Translate
+                    zh_hant="重新連接錢包"
+                    zh_hans="重新连接钱包"
+                    en="Reconnect Wallet"
+                  />
                 </Dialog.Footer.Button>
+
                 <p className="set-amount-reconnect-footer">
-                  The address you originally connected:{' '}
+                  <Translate
+                    zh_hant="請連接帳戶的綁定錢包 "
+                    zh_hans="请连接帐户的绑定钱包 "
+                    en="Please connect to your account wallet "
+                  />
                   <span className="address">
                     {maskAddress(viewer.info.ethAddress || '')}
                   </span>
@@ -460,7 +471,8 @@ const SetAmount: React.FC<FormProps> = ({
                 <style jsx>{styles}</style>
               </>
             )}
-            {address && !isUnsupportedNetwork && (
+
+            {isConnectedAddress && isUnsupportedNetwork && (
               <Dialog.Footer.Button
                 bgColor="green"
                 textColor="white"
@@ -472,18 +484,20 @@ const SetAmount: React.FC<FormProps> = ({
                 &nbsp;{targetChainName}
               </Dialog.Footer.Button>
             )}
-            {isUnsupportedNetwork && allowanceUSDT.eq(0) && (
-              <>
-                {approving ? (
-                  <IconSpinner16 color="grey" />
-                ) : (
+
+            {isConnectedAddress &&
+              !isUnsupportedNetwork &&
+              allowanceUSDT.eq(0) && (
+                <>
                   <Dialog.Footer.Button
                     bgColor="green"
                     textColor="white"
+                    loading={approving}
                     onClick={() => {
                       setApproving(true)
-                      // tslint:disable-next-line: no-unused-expression
-                      approveWrite && approveWrite()
+                      if (approveWrite) {
+                        approveWrite()
+                      }
                     }}
                   >
                     <Translate
@@ -492,9 +506,8 @@ const SetAmount: React.FC<FormProps> = ({
                       en="Authorize USDT"
                     />
                   </Dialog.Footer.Button>
-                )}
-              </>
-            )}
+                </>
+              )}
             {viewer.info.ethAddress?.toLowerCase() === address?.toLowerCase() &&
               isUnsupportedNetwork &&
               allowanceUSDT.gt(0) && (

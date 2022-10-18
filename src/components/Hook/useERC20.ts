@@ -1,50 +1,49 @@
-import { BigNumber } from 'ethers/lib/ethers'
+import { ethers } from 'ethers'
 import {
+  erc20ABI,
   useAccount,
+  useBalance,
   useContractRead,
   useContractWrite,
   usePrepareContractWrite,
 } from 'wagmi'
-
-import { ERC20ABI } from '@/src/common/utils/contract'
 
 export const useAllowance = () => {
   const { address } = useAccount()
 
   return useContractRead({
     address: process.env.NEXT_PUBLIC_ERC20_CONTRACT_ADDRESS || '',
-    abi: ERC20ABI,
+    abi: erc20ABI,
     functionName: 'allowance',
     args: [
-      `0x${address?.slice(2)}`,
-      `0x${process.env.NEXT_PUBLIC_CURATION_CONTRACT_ADDRESS?.slice(2)}`,
+      address as `0x${string}`,
+      process.env.NEXT_PUBLIC_CURATION_CONTRACT_ADDRESS as `0x${string}`,
     ],
   })
 }
 
-export const useBalanceOf = ({
+export const useBalanceUSDT = ({
   address: addr,
 }: {
   address?: string | null
 }) => {
   const { address } = useAccount()
 
-  return useContractRead({
-    address: process.env.NEXT_PUBLIC_ERC20_CONTRACT_ADDRESS || '',
-    abi: ERC20ABI,
-    functionName: 'balanceOf',
-    args: [`0x${(addr || address)?.slice(2)}`],
+  return useBalance({
+    addressOrName: (addr || address) as `0x${string}`,
+    token: (process.env.NEXT_PUBLIC_ERC20_CONTRACT_ADDRESS ||
+      '') as `0x${string}`,
   })
 }
 
 export const useApprove = () => {
   const { config } = usePrepareContractWrite({
     address: process.env.NEXT_PUBLIC_ERC20_CONTRACT_ADDRESS || '',
-    abi: ERC20ABI,
+    abi: erc20ABI,
     functionName: 'approve',
     args: [
-      `0x${process.env.NEXT_PUBLIC_CURATION_CONTRACT_ADDRESS?.slice(2)}`,
-      BigNumber.from(2).pow(256).sub(1),
+      process.env.NEXT_PUBLIC_CURATION_CONTRACT_ADDRESS as `0x${string}`,
+      ethers.constants.MaxUint256,
     ],
   })
 

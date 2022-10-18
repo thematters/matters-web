@@ -1,6 +1,6 @@
 import { useContractWrite, usePrepareContractWrite } from 'wagmi'
 
-import { curationABI } from '@/src/common/utils/contract'
+import { curationABI } from '~/common/utils'
 
 export const useCurate = () => {
   const { config } = usePrepareContractWrite({

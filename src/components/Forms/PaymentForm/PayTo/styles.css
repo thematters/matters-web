@@ -65,11 +65,11 @@
 }
 
 .set-amount-reconnect-footer {
-  font-size: 0.75rem;
-  color: var(--color-grey);
+  font-size: var(--font-size-xs);
+  color: var(--color-red);
   text-align: center;
 
   & .address {
-    color: var(--color-red);
+    color: var(--color-black);
   }
 }
