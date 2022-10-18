@@ -308,6 +308,8 @@ const BaseDonationDialog = ({
             windowRef={windowRef}
             article={article}
             targetId={targetId}
+            switchToConfirm={() => forward('confirm')}
+            switchToCurrencyChoice={() => forward('currencyChoice')}
           />
         )}
 

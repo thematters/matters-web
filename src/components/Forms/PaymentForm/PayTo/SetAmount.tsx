@@ -80,9 +80,9 @@ interface FormValues {
 }
 
 const AMOUNT_DEFAULT = {
-  [CURRENCY.USDT]: 5.0,
+  [CURRENCY.USDT]: 3.0,
   [CURRENCY.HKD]: 10,
-  [CURRENCY.LIKE]: 166,
+  [CURRENCY.LIKE]: 100,
 }
 
 const AMOUNT_OPTIONS = {
@@ -132,9 +132,12 @@ const SetAmount: React.FC<FormProps> = ({
     fetchPolicy: 'network-only',
   })
 
-  const [approving, setApproving] = useState(false)
   const { data: allowanceData } = useAllowanceUSDT()
-  const { data: approveData, write: approveWrite } = useApproveUSDT()
+  const {
+    data: approveData,
+    isLoading: approving,
+    write: approveWrite,
+  } = useApproveUSDT()
   const { data: balanceUSDTData } = useBalanceUSDT({})
 
   const allowanceUSDT = allowanceData || BigNumber.from('0')
@@ -152,7 +155,6 @@ const SetAmount: React.FC<FormProps> = ({
     ;(async () => {
       if (approveData) {
         await approveData.wait()
-        setApproving(false)
       }
     })()
   }, [approveData])
@@ -538,7 +540,6 @@ const SetAmount: React.FC<FormProps> = ({
                     textColor="white"
                     loading={approving}
                     onClick={() => {
-                      setApproving(true)
                       if (approveWrite) {
                         approveWrite()
                       }

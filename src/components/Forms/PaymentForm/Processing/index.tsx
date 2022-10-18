@@ -1,11 +1,18 @@
 import { useQuery } from '@apollo/react-hooks'
-import { BigNumber } from 'ethers'
+import { BigNumber, ethers } from 'ethers'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import { useEffect, useState } from 'react'
-import { useContractWrite } from 'wagmi'
+import { useContext, useEffect, useState } from 'react'
+import { useAccount, useContractWrite, useNetwork } from 'wagmi'
 
-import { Dialog, Spinner, Translate, useMutation } from '~/components'
+import {
+  Dialog,
+  Spinner,
+  Translate,
+  useBalanceUSDT,
+  useMutation,
+  ViewerContext,
+} from '~/components'
 import PAY_TO from '~/components/GQL/mutations/payTo'
 
 import { CHAIN, PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
@@ -30,6 +37,8 @@ interface Props {
   nextStep: () => void
   closeDialog: () => void
   windowRef?: Window
+  switchToConfirm: () => void
+  switchToCurrencyChoice: () => void
 }
 
 const VIEWER_TX_STATE = gql`
@@ -95,7 +104,7 @@ const OthersProcessingForm: React.FC<Props> = ({
           <Dialog.Header
             closeDialog={closeDialog}
             leftButton={<Dialog.Header.CloseButton closeDialog={closeDialog} />}
-            title={'donation'}
+            title="donation"
           />
           <Dialog.Content>
             <section>
@@ -149,11 +158,31 @@ const USDTProcessingForm: React.FC<Props> = ({
   article,
   nextStep,
   closeDialog,
+  switchToConfirm,
+  switchToCurrencyChoice,
 }) => {
   const [payTo] = useMutation<PayToMutate>(PAY_TO)
 
-  // const { data, isError, write } = useCurate()
-  const { data, isError, write } = useContractWrite({
+  const viewer = useContext(ViewerContext)
+  const { address } = useAccount()
+  const { data: balanceUSDTData } = useBalanceUSDT({})
+  const { chain } = useNetwork()
+  const isUnsupportedNetwork = !!chain?.unsupported
+  const isConnectedAddress =
+    viewer.info.ethAddress?.toLowerCase() === address?.toLowerCase()
+
+  useEffect(() => {
+    if (!address || isUnsupportedNetwork || !isConnectedAddress) {
+      switchToCurrencyChoice()
+    }
+  }, [address, chain])
+
+  const {
+    data,
+    error,
+    isError,
+    write: curate,
+  } = useContractWrite({
     mode: 'recklesslyUnprepared',
     address: process.env.NEXT_PUBLIC_CURATION_CONTRACT_ADDRESS || '',
     abi: curationABI,
@@ -161,79 +190,94 @@ const USDTProcessingForm: React.FC<Props> = ({
     args: [
       recipient.info.ethAddress as `0x${string}`,
       process.env.NEXT_PUBLIC_USDT_CONTRACT_ADDRESS as `0x${string}`,
-      BigNumber.from(amount),
+      ethers.utils.parseUnits(
+        BigNumber.from(amount).toString(),
+        balanceUSDTData?.decimals
+      ),
       `ipfs://${article?.dataHash}`,
     ],
   })
 
-  useEffect(() => {
-    // tslint:disable-next-line: no-unused-expression
-    write && write()
-  }, [])
-
-  const f = async () => {
-    if (data) {
-      const { hash } = data
-      await payTo({
-        variables: {
-          amount,
-          currency,
-          purpose: 'donation',
-          recipientId: recipient.id,
-          targetId,
-          chain: CHAIN.POLYGON,
-          txHash: hash,
-        },
-      })
-      await data.wait()
-      nextStep()
+  const sendPayTo = async () => {
+    if (!data) {
+      return
     }
+
+    await payTo({
+      variables: {
+        amount,
+        currency,
+        purpose: 'donation',
+        recipientId: recipient.id,
+        targetId,
+        chain: CHAIN.POLYGON,
+        txHash: data.hash,
+      },
+    })
+
+    await data.wait()
+
+    nextStep()
   }
 
+  // trigger transaction
   useEffect(() => {
-    f()
+    if (curate) {
+      curate()
+    }
+  }, [])
+
+  // trigger payTo mutation
+  useEffect(() => {
+    sendPayTo()
   }, [data])
+
+  // error handling
+  useEffect(() => {
+    const code = _get(error, 'code')
+    if (error && code === 'ACTION_REJECTED') {
+      switchToConfirm()
+    }
+  }, [error])
+
+  if (isError) {
+    return <PayToFallback closeDialog={closeDialog} />
+  }
 
   return (
     <>
-      {isError ? (
-        <PayToFallback closeDialog={closeDialog} />
-      ) : (
-        <>
-          <Dialog.Header
-            closeDialog={closeDialog}
-            leftButton={<Dialog.Header.CloseButton closeDialog={closeDialog} />}
-            title={'donation'}
+      <Dialog.Header
+        closeDialog={closeDialog}
+        leftButton={<Dialog.Header.CloseButton closeDialog={closeDialog} />}
+        title="donation"
+      />
+      <Dialog.Content>
+        <section>
+          <PaymentInfo
+            amount={amount}
+            currency={currency}
+            recipient={recipient}
           />
-          <Dialog.Content>
-            <section>
-              <PaymentInfo
-                amount={amount}
-                currency={currency}
-                recipient={recipient}
+          <section className="hint">
+            <p>
+              <Translate
+                zh_hant="請在加密錢包內繼續操作"
+                zh_hans="请在加密钱包内继续操作"
+                en="Please continue within the encrypted wallet"
               />
-              <section className="hint">
-                <p>
-                  <Translate
-                    zh_hant="請在加密錢包內繼續操作"
-                    zh_hans="请在加密钱包内继续操作"
-                    en="Please continue within the encrypted wallet"
-                  />
-                </p>
-                <p>
-                  <Translate
-                    zh_hant="完成前請勿關閉此畫面"
-                    zh_hans="完成前请勿关闭此画面"
-                    en="Do not close this screen until done"
-                  />
-                </p>
-              </section>
-              <Spinner />
-              <style jsx>{styles}</style>
-            </section>
-          </Dialog.Content>
-        </>
-      )}
+            </p>
+            <p>
+              <Translate
+                zh_hant="完成前請勿關閉此畫面"
+                zh_hans="完成前请勿关闭此画面"
+                en="Do not close this screen until done"
+              />
+            </p>
+          </section>
+          <Spinner />
+          <style jsx>{styles}</style>
+        </section>
+      </Dialog.Content>
     </>
   )
 }
@@ -248,6 +292,8 @@ const PaymentProcessingForm: React.FC<Props> = ({
   nextStep,
   closeDialog,
   windowRef,
+  switchToConfirm,
+  switchToCurrencyChoice,
 }) => {
   return (
     <>
@@ -262,6 +308,8 @@ const PaymentProcessingForm: React.FC<Props> = ({
           nextStep={nextStep}
           closeDialog={closeDialog}
           windowRef={windowRef}
+          switchToConfirm={switchToConfirm}
+          switchToCurrencyChoice={switchToCurrencyChoice}
         />
       )}
       {(currency === CURRENCY.LIKE || currency === CURRENCY.HKD) && (
@@ -274,6 +322,8 @@ const PaymentProcessingForm: React.FC<Props> = ({
           nextStep={nextStep}
           closeDialog={closeDialog}
           windowRef={windowRef}
+          switchToConfirm={switchToConfirm}
+          switchToCurrencyChoice={switchToCurrencyChoice}
         />
       )}
     </>

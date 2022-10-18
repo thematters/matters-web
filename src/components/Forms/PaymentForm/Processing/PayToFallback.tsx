@@ -19,13 +19,11 @@ const PayToFallback: React.FC<Props> = ({ closeDialog }) => {
       <Dialog.Content hasGrow>
         <section className="fallback-content">
           <p>
-            Oops！
             <Translate
-              zh_hant="交易出了點狀況"
-              zh_hans="交易出了点状况"
-              en="Something went wrong with the transaction"
+              zh_hant="Oops！交易出了點狀況！"
+              zh_hans="Oops！交易出了点状况！"
+              en="Oops! Something went wrong with the transaction!"
             />
-            ！
           </p>
           <p>
             <Translate
