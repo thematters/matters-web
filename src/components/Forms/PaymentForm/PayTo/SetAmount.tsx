@@ -117,7 +117,7 @@ const SetAmount: React.FC<FormProps> = ({
 
   const { data: balanceOfData } = useBalanceOf()
 
-  const allowanceUSDT =  (allowanceData && formatUnits(allowanceData)) || 0
+  const allowanceUSDT = (allowanceData && formatUnits(allowanceData)) || 0
   const balanceUSDT = (balanceOfData && formatUnits(balanceOfData)) || 0
   const balanceHKD = data?.viewer?.wallet.balance.HKD || 0
   const balanceLike = data?.viewer?.liker.total || 0

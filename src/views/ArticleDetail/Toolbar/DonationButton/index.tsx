@@ -41,7 +41,11 @@ const fragments = {
   `,
 }
 
-const DonationButton = ({ article, disabled, articleDetail }: DonationButtonProps) => {
+const DonationButton = ({
+  article,
+  disabled,
+  articleDetail,
+}: DonationButtonProps) => {
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
 
@@ -82,7 +86,11 @@ const DonationButton = ({ article, disabled, articleDetail }: DonationButtonProp
 
   return (
     <section className="container">
-      <DonationDialog recipient={article.author} targetId={article.id} article={articleDetail}>
+      <DonationDialog
+        recipient={article.author}
+        targetId={article.id}
+        article={articleDetail}
+      >
         {({ openDialog }) => (
           <Button
             spacing={['xtight', 'xtight']}

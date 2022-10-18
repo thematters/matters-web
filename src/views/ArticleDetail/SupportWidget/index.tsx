@@ -25,7 +25,11 @@ const SupportWidget = ({ article }: DonationProps) => {
     <section className={supportWidgetClasses}>
       <section className="donation">
         <section className="donation-button">
-          <DonationButton recipient={article.author} targetId={article.id} article={article}/>
+          <DonationButton
+            recipient={article.author}
+            targetId={article.id}
+            article={article}
+          />
         </section>
 
         <p>

@@ -22,7 +22,11 @@ interface DonationButtonProps {
   article: ArticleDetailPublic_article
 }
 
-const DonationButton = ({ recipient, targetId, article }: DonationButtonProps) => {
+const DonationButton = ({
+  recipient,
+  targetId,
+  article,
+}: DonationButtonProps) => {
   const viewer = useContext(ViewerContext)
 
   const completeCallback = () => {

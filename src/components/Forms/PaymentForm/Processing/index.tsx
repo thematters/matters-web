@@ -157,11 +157,11 @@ const USDTProcessingForm: React.FC<Props> = ({
     abi: curationABI,
     functionName: 'curate',
     args: [
-        `0x${recipient.info.ethAddress?.slice(2)}`,
-        `0x${process.env.NEXT_PUBLIC_ERC20_CONTRACT_ADDRESS?.slice(2)}`,
-        BigNumber.from(amount),
-        `ipfs://${article?.dataHash}`,
-      ],
+      `0x${recipient.info.ethAddress?.slice(2)}`,
+      `0x${process.env.NEXT_PUBLIC_ERC20_CONTRACT_ADDRESS?.slice(2)}`,
+      BigNumber.from(amount),
+      `ipfs://${article?.dataHash}`,
+    ],
   })
 
   // const [payTo] = useMutation<PayToMutate>(PAY_TO)

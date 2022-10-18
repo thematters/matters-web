@@ -19,7 +19,6 @@ import { ArticleDetailPublic_article } from '@/src/views/ArticleDetail/__generat
 import { PayTo_payTo_transaction as PayToTx } from '~/components/GQL/mutations/__generated__/PayTo'
 import { UserDonationRecipient } from './__generated__/UserDonationRecipient'
 
-
 type Step =
   | 'currencyChoice'
   | 'walletSelect'

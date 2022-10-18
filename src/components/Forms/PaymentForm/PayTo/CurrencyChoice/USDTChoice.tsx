@@ -41,18 +41,18 @@ const USDTChoice: React.FC<FormProps> = ({
 
   const { data: balanceOfData } = useBalanceOf()
 
-  const { data: approveData, write: approveWrite,  } = useApprove()
+  const { data: approveData, write: approveWrite } = useApprove()
 
   const allowanceUSDT = (allowanceData && formatUnits(allowanceData)) || 0
   const balanceUSDT = (balanceOfData && formatUnits(balanceOfData)) || 0
 
   useEffect(() => {
-   (async () => {
+    ;(async () => {
       if (approveData) {
         await approveData.wait()
         setApproving(false)
       }
-   })()
+    })()
   }, [approveData])
 
   return (
