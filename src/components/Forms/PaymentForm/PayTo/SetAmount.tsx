@@ -18,8 +18,8 @@ import {
   Spinner,
   TextIcon,
   Translate,
-  useAllowance,
-  useApprove,
+  useAllowanceUSDT,
+  useApproveUSDT,
   useBalanceUSDT,
   useMutation,
   ViewerContext,
@@ -133,8 +133,8 @@ const SetAmount: React.FC<FormProps> = ({
   })
 
   const [approving, setApproving] = useState(false)
-  const { data: allowanceData } = useAllowance()
-  const { data: approveData, write: approveWrite } = useApprove()
+  const { data: allowanceData } = useAllowanceUSDT()
+  const { data: approveData, write: approveWrite } = useApproveUSDT()
   const { data: balanceUSDTData } = useBalanceUSDT({})
 
   const allowanceUSDT = allowanceData || BigNumber.from('0')
@@ -318,10 +318,10 @@ const SetAmount: React.FC<FormProps> = ({
 
       <section className="set-amount-balance">
         <span className="left">
-          <Translate zh_hant="餘額" zh_hans="余额" en="Balance" />
-          &nbsp;{isUSDT && <span>{balanceUSDT} USDT</span>}
-          {isHKD && formatAmount(balanceHKD)}
-          {isLike && formatAmount(balanceLike, 0)}
+          <Translate zh_hant="餘額 " zh_hans="余额 " en="Balance " />
+          {isUSDT && <span>{formatAmount(balanceUSDT)} USDT</span>}
+          {isHKD && <span>{formatAmount(balanceHKD)} HKD</span>}
+          {isLike && <span>{formatAmount(balanceLike, 0)} LikeCoin</span>}
         </span>
         {isHKD && (
           <Button onClick={switchToAddCredit}>
@@ -531,7 +531,7 @@ const SetAmount: React.FC<FormProps> = ({
 
             {isConnectedAddress &&
               !isUnsupportedNetwork &&
-              allowanceUSDT.eq(0) && (
+              allowanceUSDT.lte(0) && (
                 <>
                   <Dialog.Footer.Button
                     bgColor="green"

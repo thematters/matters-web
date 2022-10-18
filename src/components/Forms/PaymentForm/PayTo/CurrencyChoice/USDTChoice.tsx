@@ -13,6 +13,7 @@ import {
 } from '~/components'
 
 import { PATHS, PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
+import { formatAmount } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -33,7 +34,7 @@ const USDTChoice: React.FC<FormProps> = ({
   const { address } = useAccount()
 
   const { data: balanceUSDTData } = useBalanceUSDT({})
-  const balanceUSDT = balanceUSDTData?.formatted || 0
+  const balanceUSDT = parseFloat(balanceUSDTData?.formatted || '0')
 
   return (
     <>
@@ -53,8 +54,8 @@ const USDTChoice: React.FC<FormProps> = ({
             Tether
           </TextIcon>
           <CurrencyFormatter
-            currency={balanceUSDT}
-            currencyCode={CURRENCY.USDT}
+            value={formatAmount(balanceUSDT)}
+            currency={CURRENCY.USDT}
           />
         </section>
       )}

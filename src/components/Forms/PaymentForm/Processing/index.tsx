@@ -160,7 +160,7 @@ const USDTProcessingForm: React.FC<Props> = ({
     functionName: 'curate',
     args: [
       recipient.info.ethAddress as `0x${string}`,
-      process.env.NEXT_PUBLIC_ERC20_CONTRACT_ADDRESS as `0x${string}`,
+      process.env.NEXT_PUBLIC_USDT_CONTRACT_ADDRESS as `0x${string}`,
       BigNumber.from(amount),
       `ipfs://${article?.dataHash}`,
     ],

@@ -10,11 +10,11 @@ import {
 
 import { supportedChains } from '~/common/utils'
 
-export const useAllowance = () => {
+export const useAllowanceUSDT = () => {
   const { address } = useAccount()
 
   return useContractRead({
-    address: process.env.NEXT_PUBLIC_ERC20_CONTRACT_ADDRESS || '',
+    address: process.env.NEXT_PUBLIC_USDT_CONTRACT_ADDRESS || '',
     abi: erc20ABI,
     functionName: 'allowance',
     args: [
@@ -33,15 +33,15 @@ export const useBalanceUSDT = ({
 
   return useBalance({
     addressOrName: (addr || address) as `0x${string}`,
-    token: (process.env.NEXT_PUBLIC_ERC20_CONTRACT_ADDRESS ||
+    token: (process.env.NEXT_PUBLIC_USDT_CONTRACT_ADDRESS ||
       '') as `0x${string}`,
     chainId: supportedChains[0].id,
   })
 }
 
-export const useApprove = () => {
+export const useApproveUSDT = () => {
   const { config } = usePrepareContractWrite({
-    address: process.env.NEXT_PUBLIC_ERC20_CONTRACT_ADDRESS || '',
+    address: process.env.NEXT_PUBLIC_USDT_CONTRACT_ADDRESS || '',
     abi: erc20ABI,
     functionName: 'approve',
     args: [

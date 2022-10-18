@@ -14,6 +14,7 @@ import {
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
+import { formatAmount } from '~/common/utils'
 
 import styles from './styles.css'
 import Tips from './Tips'
@@ -95,7 +96,7 @@ const CurrencyChoice: React.FC<FormProps> = ({
         >
           <Translate zh_hant="法幣" zh_hans="法币" en="Fiat Currency" />
         </TextIcon>
-        <CurrencyFormatter currency={balanceHKD} currencyCode={'HKD'} />
+        <CurrencyFormatter value={formatAmount(balanceHKD)} currency="HKD" />
       </section>
 
       {/* LikeCoin */}
@@ -113,7 +114,10 @@ const CurrencyChoice: React.FC<FormProps> = ({
         >
           <Translate zh_hant="LikeCoin" zh_hans="LikeCoin" en="LikeCoin" />
         </TextIcon>
-        <CurrencyFormatter currency={balanceLike} currencyCode={'LIKE'} />
+        <CurrencyFormatter
+          value={formatAmount(balanceLike, 0)}
+          currency="LIKE"
+        />
       </section>
 
       <Tips />

@@ -14,6 +14,7 @@ import {
 } from '~/components'
 
 import { PATHS } from '~/common/enums'
+import { formatAmount } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -93,7 +94,7 @@ export const LikeCoinBalance = () => {
   if (likerId) {
     return (
       <Wrapper>
-        <CurrencyFormatter currency={total} currencyCode={'LIKE'} />
+        <CurrencyFormatter value={formatAmount(total, 0)} currency="LIKE" />
       </Wrapper>
     )
   }
