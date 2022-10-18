@@ -1,8 +1,10 @@
 import { useQuery } from '@apollo/react-hooks'
+import { BigNumber } from 'ethers/lib/ethers'
 import { formatUnits } from 'ethers/lib/utils'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
-import { useContext, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
+import { useAccount, useNetwork, useSwitchNetwork } from 'wagmi'
 
 import {
   Button,
@@ -11,11 +13,14 @@ import {
   IconExternalLink16,
   IconFiatCurrency40,
   IconLikeCoin40,
+  IconSpinner16,
   IconUSDTActive40,
   LanguageContext,
   Spinner,
   TextIcon,
   Translate,
+  useAllowance,
+  useApprove,
   useBalanceOf,
   useMutation,
   ViewerContext,
@@ -29,6 +34,7 @@ import {
 } from '~/common/enums'
 import {
   formatAmount,
+  maskAddress,
   translate,
   validateCurrency,
   validateDonationAmount,
@@ -98,6 +104,23 @@ const SetAmount: React.FC<FormProps> = ({
 
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
+  const { address } = useAccount()
+  useEffect(() => {
+    if (!address && defaultCurrency === CURRENCY.USDT) {
+      switchToCurrencyChoice()
+    }
+  }, [address])
+
+  const { chain } = useNetwork()
+  const { switchNetwork } = useSwitchNetwork()
+  const isUnsupportedNetwork = !!chain?.unsupported
+  const targetChainName = process.env.NEXT_PUBLIC_TARGET_CHAIN_NAME
+  const targetChainId = Number(process.env.NEXT_PUBLIC_TARGET_CHAIN_ID)
+  const switchToTargetNetwork = async () => {
+    if (!switchNetwork) return
+
+    switchNetwork(targetChainId)
+  }
 
   const [fixed] = useState<boolean>(true)
   const [locked, setLocked] = useState<boolean>(false)
@@ -112,11 +135,24 @@ const SetAmount: React.FC<FormProps> = ({
     fetchPolicy: 'network-only',
   })
 
+  const [approving, setApproving] = useState(false)
+  const { data: allowanceData } = useAllowance()
+  const { data: approveData, write: approveWrite } = useApprove()
   const { data: balanceOfData } = useBalanceOf()
 
+  const allowanceUSDT = allowanceData || BigNumber.from('0')
   const balanceUSDT = (balanceOfData && formatUnits(balanceOfData)) || 0
   const balanceHKD = data?.viewer?.wallet.balance.HKD || 0
   const balanceLike = data?.viewer?.liker.total || 0
+
+  useEffect(() => {
+    ;(async () => {
+      if (approveData) {
+        await approveData.wait()
+        setApproving(false)
+      }
+    })()
+  }, [approveData])
 
   const {
     errors,
@@ -347,7 +383,7 @@ const SetAmount: React.FC<FormProps> = ({
       <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
 
       <Dialog.Footer>
-        {canProcess && !locked && (
+        {canProcess && !isUSDT && !locked && (
           <>
             {isLike && recipient.liker.likerId && (
               <CivicLikerButton likerId={recipient.liker.likerId} />
@@ -375,6 +411,81 @@ const SetAmount: React.FC<FormProps> = ({
                 <Translate id="nextStep" />
               </Dialog.Footer.Button>
             )}
+          </>
+        )}
+
+        {isUSDT && (
+          <>
+            {viewer.info.ethAddress?.toLowerCase() !==
+              address?.toLowerCase() && (
+              <>
+                <Dialog.Footer.Button
+                  bgColor="green"
+                  textColor="white"
+                  onClick={() => {
+                    switchToCurrencyChoice()
+                  }}
+                >
+                  <Translate zh_hant="重連" zh_hans="重连" en="Reconnection" />
+                </Dialog.Footer.Button>
+                <p className="set-amount-reconnect-footer">
+                  The address you originally connected:{' '}
+                  <span className="address">
+                    {maskAddress(viewer.info.ethAddress || '')}
+                  </span>
+                </p>
+                <style jsx>{styles}</style>
+              </>
+            )}
+            {address && !isUnsupportedNetwork && (
+              <Dialog.Footer.Button
+                bgColor="green"
+                textColor="white"
+                onClick={() => {
+                  switchToTargetNetwork()
+                }}
+              >
+                <Translate zh_hant="切換到" zh_hans="切换到" en="Switch to" />
+                &nbsp;{targetChainName}
+              </Dialog.Footer.Button>
+            )}
+            {isUnsupportedNetwork && allowanceUSDT.eq(0) && (
+              <>
+                {approving ? (
+                  <IconSpinner16 color="grey" />
+                ) : (
+                  <Dialog.Footer.Button
+                    bgColor="green"
+                    textColor="white"
+                    onClick={() => {
+                      setApproving(true)
+                      // tslint:disable-next-line: no-unused-expression
+                      approveWrite && approveWrite()
+                    }}
+                  >
+                    <Translate
+                      zh_hant="授權 USDT 支付"
+                      zh_hans="授权 USDT 支付"
+                      en="Authorize USDT"
+                    />
+                  </Dialog.Footer.Button>
+                )}
+              </>
+            )}
+            {viewer.info.ethAddress?.toLowerCase() === address?.toLowerCase() &&
+              isUnsupportedNetwork &&
+              allowanceUSDT.gt(0) && (
+                <Dialog.Footer.Button
+                  type="submit"
+                  form={formId}
+                  disabled={!isValid || isSubmitting || isBalanceInsufficient}
+                  bgColor="green"
+                  textColor="white"
+                  loading={isSubmitting}
+                >
+                  <Translate id="nextStep" />
+                </Dialog.Footer.Button>
+              )}
           </>
         )}
 

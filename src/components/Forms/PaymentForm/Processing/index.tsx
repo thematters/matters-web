@@ -174,7 +174,7 @@ const USDTProcessingForm: React.FC<Props> = ({
   const f = async () => {
     if (data) {
       const { hash } = data
-      const result = await payTo({
+      await payTo({
         variables: {
           amount,
           currency,
@@ -185,11 +185,6 @@ const USDTProcessingForm: React.FC<Props> = ({
           txHash: hash,
         },
       })
-      const redirectUrl = result?.data?.payTo.redirectUrl
-      const transaction = result?.data?.payTo.transaction
-      if (!redirectUrl || !transaction) {
-        throw new Error()
-      }
       await data.wait()
       nextStep()
     }
