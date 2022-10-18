@@ -16,7 +16,6 @@ import {
   Spinner,
   TextIcon,
   Translate,
-  useAllowance,
   useBalanceOf,
   useMutation,
   ViewerContext,
@@ -113,11 +112,8 @@ const SetAmount: React.FC<FormProps> = ({
     fetchPolicy: 'network-only',
   })
 
-  const { data: allowanceData } = useAllowance()
-
   const { data: balanceOfData } = useBalanceOf()
 
-  const allowanceUSDT = (allowanceData && formatUnits(allowanceData)) || 0
   const balanceUSDT = (balanceOfData && formatUnits(balanceOfData)) || 0
   const balanceHKD = data?.viewer?.wallet.balance.HKD || 0
   const balanceLike = data?.viewer?.liker.total || 0
@@ -180,7 +176,7 @@ const SetAmount: React.FC<FormProps> = ({
   const canProcess = isUSDT || isHKD || (canPayLike && canReceiveLike)
   const maxAmount = isLike ? Infinity : PAYMENT_MAXIMUM_PAYTO_AMOUNT.HKD
   const isBalanceInsufficient =
-    (isUSDT ? allowanceUSDT : isHKD ? balanceHKD : balanceLike) <
+    (isUSDT ? balanceUSDT : isHKD ? balanceHKD : balanceLike) <
     (values.customAmount || values.amount)
 
   const InnerForm = (

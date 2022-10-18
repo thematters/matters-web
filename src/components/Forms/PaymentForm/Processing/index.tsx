@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
-import { BigNumber } from 'ethers/lib/ethers'
+import { BigNumber, utils } from 'ethers/lib/ethers'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useEffect, useState } from 'react'
@@ -8,8 +8,7 @@ import { useContractWrite } from 'wagmi'
 import { Dialog, Spinner, Translate } from '~/components'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
-
-import { curationABI } from '@/src/common/utils/contract'
+import { curationABI } from '~/common/utils/contract'
 
 import PaymentInfo from '../PaymentInfo'
 import PayToFallback from './PayToFallback'
@@ -159,7 +158,7 @@ const USDTProcessingForm: React.FC<Props> = ({
     args: [
       `0x${recipient.info.ethAddress?.slice(2)}`,
       `0x${process.env.NEXT_PUBLIC_ERC20_CONTRACT_ADDRESS?.slice(2)}`,
-      BigNumber.from(amount),
+      utils.parseUnits(BigNumber.from(amount).toString(), "18"),
       `ipfs://${article?.dataHash}`,
     ],
   })

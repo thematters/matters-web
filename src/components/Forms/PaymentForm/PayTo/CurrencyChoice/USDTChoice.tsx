@@ -1,3 +1,4 @@
+import { BigNumber } from 'ethers/lib/ethers'
 import { formatUnits } from 'ethers/lib/utils'
 import { useContext, useEffect, useState } from 'react'
 import { useAccount } from 'wagmi'
@@ -43,7 +44,7 @@ const USDTChoice: React.FC<FormProps> = ({
 
   const { data: approveData, write: approveWrite } = useApprove()
 
-  const allowanceUSDT = (allowanceData && formatUnits(allowanceData)) || 0
+  const allowanceUSDT = allowanceData || BigNumber.from("0")
   const balanceUSDT = (balanceOfData && formatUnits(balanceOfData)) || 0
 
   useEffect(() => {
@@ -57,7 +58,7 @@ const USDTChoice: React.FC<FormProps> = ({
 
   return (
     <>
-      {allowanceUSDT > 0 && !!recipient.info.ethAddress && (
+      {allowanceUSDT.gt(0) && !!recipient.info.ethAddress && (
         <section
           role="button"
           className="item clickable"
@@ -79,7 +80,7 @@ const USDTChoice: React.FC<FormProps> = ({
         </section>
       )}
 
-      {allowanceUSDT > 0 && !recipient.info.ethAddress && (
+      {allowanceUSDT.gt(0) && !recipient.info.ethAddress && (
         <section
           role="button"
           className="item"
@@ -105,7 +106,7 @@ const USDTChoice: React.FC<FormProps> = ({
         </section>
       )}
 
-      {allowanceUSDT === 0 && (
+      {allowanceUSDT.eq(0) && (
         <section role="button" className="item">
           <TextIcon
             icon={<IconUSDT40 size="xl-m" color="grey" />}
@@ -180,7 +181,6 @@ const USDTChoice: React.FC<FormProps> = ({
       <style jsx>{styles}</style>
     </>
   )
-  // return <></>
 }
 
 export default USDTChoice
