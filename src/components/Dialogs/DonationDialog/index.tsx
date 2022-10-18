@@ -292,6 +292,7 @@ const BaseDonationDialog = ({
             switchToSetAmount={() => forward('setAmount')}
             submitCallback={() => forward('processing')}
             switchToResetPassword={() => forward('resetPassword')}
+            switchToCurrencyChoice={() => forward('currencyChoice')}
             targetId={targetId}
           />
         )}
@@ -306,6 +307,7 @@ const BaseDonationDialog = ({
             txId={payToTx?.id || ''}
             windowRef={windowRef}
             article={article}
+            targetId={targetId}
           />
         )}
 

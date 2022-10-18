@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useEffect } from 'react'
+import { useAccount, useNetwork } from 'wagmi'
 
 import {
   Button,
@@ -34,6 +35,7 @@ interface FormProps {
   submitCallback: () => void
   switchToSetAmount: () => void
   switchToResetPassword: () => void
+  switchToCurrencyChoice: () => void
 }
 
 interface FormValues {
@@ -48,6 +50,7 @@ const Confirm: React.FC<FormProps> = ({
   submitCallback,
   switchToSetAmount,
   switchToResetPassword,
+  switchToCurrencyChoice,
 }) => {
   const formId = 'pay-to-confirm-form'
 
@@ -59,6 +62,15 @@ const Confirm: React.FC<FormProps> = ({
   const { data, loading } = useQuery<WalletBalance>(WALLET_BALANCE, {
     fetchPolicy: 'network-only',
   })
+
+  const { address } = useAccount()
+  const { chain } = useNetwork()
+  const isUnsupportedNetwork = !!chain?.unsupported
+  useEffect(() => {
+    if ((!address || !isUnsupportedNetwork) && currency === CURRENCY.USDT) {
+      switchToCurrencyChoice()
+    }
+  }, [address, chain])
 
   const {
     errors,

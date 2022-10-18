@@ -5,9 +5,10 @@ import _get from 'lodash/get'
 import { useEffect, useState } from 'react'
 import { useContractWrite } from 'wagmi'
 
-import { Dialog, Spinner, Translate } from '~/components'
+import { Dialog, Spinner, Translate, useMutation } from '~/components'
+import PAY_TO from '~/components/GQL/mutations/payTo'
 
-import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
+import { CHAIN, PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { curationABI } from '~/common/utils/contract'
 
 import PaymentInfo from '../PaymentInfo'
@@ -16,16 +17,15 @@ import styles from './styles.css'
 
 import { UserDonationRecipient } from '@/src/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
 import { ArticleDetailPublic_article } from '@/src/views/ArticleDetail/__generated__/ArticleDetailPublic'
+import { PayTo as PayToMutate } from '~/components/GQL/mutations/__generated__/PayTo'
 import { ViewerTxState } from './__generated__/ViewerTxState'
-// import { PayTo as PayToMutate } from '~/components/GQL/mutations/__generated__/PayTo'
-
-// import PAY_TO from '~/components/GQL/mutations/payTo'
 
 interface Props {
   amount: number
   currency: CURRENCY
   recipient: UserDonationRecipient
   article?: ArticleDetailPublic_article
+  targetId: string
   txId: string
   nextStep: () => void
   closeDialog: () => void
@@ -145,10 +145,13 @@ const USDTProcessingForm: React.FC<Props> = ({
   amount,
   currency,
   recipient,
+  targetId,
   article,
   nextStep,
   closeDialog,
 }) => {
+  const [payTo] = useMutation<PayToMutate>(PAY_TO)
+
   // const { data, isError, write } = useCurate()
   const { data, isError, write } = useContractWrite({
     mode: 'recklesslyUnprepared',
@@ -163,41 +166,25 @@ const USDTProcessingForm: React.FC<Props> = ({
     ],
   })
 
-  // const [payTo] = useMutation<PayToMutate>(PAY_TO)
-
   useEffect(() => {
-    // write({
-    //   recklesslySetUnpreparedArgs: [
-    //     `0x${recipient.info.ethAddress?.slice(2)}`,
-    //     `0x${process.env.NEXT_PUBLIC_ERC20_CONTRACT_ADDRESS?.slice(2)}`,
-    //     BigNumber.from(amount),
-    //     window.location.href,
-    //   ],
-    // })
-
     // tslint:disable-next-line: no-unused-expression
     write && write()
   }, [])
 
   const f = async () => {
     if (data) {
-      // const { hash } = data
-      // const result = await payTo({
-      //   variables: {
-      //     amount,
-      //     currency,
-      //     purpose: 'donation',
-      //     recipientId: recipient.id,
-      //     chain: CHAIN.POLYGON,
-      //     txHash: hash,
-      //   },
-      // })
-      // console.log({ result })
-      // const redirectUrl = result?.data?.payTo.redirectUrl
-      // const transaction = result?.data?.payTo.transaction
-      // if (!redirectUrl || !transaction) {
-      //   throw new Error()
-      // }
+      const { hash } = data
+      await payTo({
+        variables: {
+          amount,
+          currency,
+          purpose: 'donation',
+          recipientId: recipient.id,
+          targetId,
+          chain: CHAIN.POLYGON,
+          txHash: hash,
+        },
+      })
       await data.wait()
       nextStep()
     }
@@ -256,6 +243,7 @@ const PaymentProcessingForm: React.FC<Props> = ({
   currency,
   recipient,
   article,
+  targetId,
   txId,
   nextStep,
   closeDialog,
@@ -270,6 +258,7 @@ const PaymentProcessingForm: React.FC<Props> = ({
           recipient={recipient}
           article={article}
           txId={txId}
+          targetId={targetId}
           nextStep={nextStep}
           closeDialog={closeDialog}
           windowRef={windowRef}
@@ -281,6 +270,7 @@ const PaymentProcessingForm: React.FC<Props> = ({
           currency={currency}
           recipient={recipient}
           txId={txId}
+          targetId={targetId}
           nextStep={nextStep}
           closeDialog={closeDialog}
           windowRef={windowRef}

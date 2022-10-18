@@ -63,3 +63,13 @@
     padding-top: var(--spacing-loose);
   }
 }
+
+.set-amount-reconnect-footer {
+  font-size: 0.75rem;
+  color: var(--color-grey);
+  text-align: center;
+
+  & .address {
+    color: var(--color-red);
+  }
+}

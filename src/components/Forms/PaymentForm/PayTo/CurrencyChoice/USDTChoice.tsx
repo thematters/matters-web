@@ -1,18 +1,14 @@
-import { BigNumber } from 'ethers/lib/ethers'
 import { formatUnits } from 'ethers/lib/utils'
-import { useContext, useEffect, useState } from 'react'
+import { useContext } from 'react'
 import { useAccount } from 'wagmi'
 
 import {
   Button,
   CurrencyFormatter,
-  IconSpinner16,
   IconUSDT40,
   IconUSDTActive40,
   TextIcon,
   Translate,
-  useAllowance,
-  useApprove,
   useBalanceOf,
   ViewerContext,
 } from '~/components'
@@ -36,29 +32,14 @@ const USDTChoice: React.FC<FormProps> = ({
 }) => {
   const viewer = useContext(ViewerContext)
   const { address } = useAccount()
-  const [approving, setApproving] = useState(false)
-
-  const { data: allowanceData } = useAllowance()
 
   const { data: balanceOfData } = useBalanceOf({})
 
-  const { data: approveData, write: approveWrite } = useApprove()
-
-  const allowanceUSDT = allowanceData || BigNumber.from('0')
   const balanceUSDT = (balanceOfData && formatUnits(balanceOfData)) || 0
-
-  useEffect(() => {
-    ;(async () => {
-      if (approveData) {
-        await approveData.wait()
-        setApproving(false)
-      }
-    })()
-  }, [approveData])
 
   return (
     <>
-      {allowanceUSDT.gt(0) && !!recipient.info.ethAddress && (
+      {address && !!viewer.info.ethAddress && !!recipient.info.ethAddress && (
         <section
           role="button"
           className="item clickable"
@@ -80,7 +61,7 @@ const USDTChoice: React.FC<FormProps> = ({
         </section>
       )}
 
-      {allowanceUSDT.gt(0) && !recipient.info.ethAddress && (
+      {address && !recipient.info.ethAddress && (
         <section
           role="button"
           className="item"
@@ -106,7 +87,7 @@ const USDTChoice: React.FC<FormProps> = ({
         </section>
       )}
 
-      {allowanceUSDT.eq(0) && (
+      {!address && (
         <section role="button" className="item">
           <TextIcon
             icon={<IconUSDT40 size="xl-m" color="grey" />}
@@ -132,7 +113,7 @@ const USDTChoice: React.FC<FormProps> = ({
               </TextIcon>
             </Button>
           )}
-          {!!viewer.info.ethAddress && !address && (
+          {!!viewer.info.ethAddress && (
             <Button
               spacing={['xxtight', 'base']}
               borderColor="green"
@@ -149,32 +130,6 @@ const USDTChoice: React.FC<FormProps> = ({
                 />
               </TextIcon>
             </Button>
-          )}
-          {!!viewer.info.ethAddress && !!address && (
-            <>
-              {approving ? (
-                <IconSpinner16 color="grey" />
-              ) : (
-                <Button
-                  spacing={['xxtight', 'base']}
-                  borderColor="green"
-                  borderRadius="5rem"
-                  onClick={() => {
-                    setApproving(true)
-                    // tslint:disable-next-line: no-unused-expression
-                    approveWrite && approveWrite()
-                  }}
-                >
-                  <TextIcon color="green">
-                    <Translate
-                      zh_hant="授權 USDT 支付"
-                      zh_hans="授权 USDT 支付"
-                      en="Authorize USDT"
-                    />
-                  </TextIcon>
-                </Button>
-              )}
-            </>
           )}
         </section>
       )}
