@@ -224,56 +224,96 @@ const SetAmount: React.FC<FormProps> = ({
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit} noBackground>
       <section className="set-amount-change-support-way">
-        {isUSDT && (
-          <TextIcon
-            icon={<IconUSDTActive40 size="md" />}
-            size="md"
-            spacing="xtight"
-            weight="md"
-          >
-            <Translate zh_hant="USDT" zh_hans="USDT" en="USDT" />
-          </TextIcon>
-        )}
-        {isHKD && (
-          <TextIcon
-            icon={<IconFiatCurrency40 size="md" />}
-            size="md"
-            spacing="xtight"
-            weight="md"
-          >
-            <Translate zh_hant="法幣 HKD" zh_hans="法币 HKD" en="HKD" />
-          </TextIcon>
-        )}
-        {isLike && (
-          <TextIcon
-            icon={<IconLikeCoin40 size="md" />}
-            size="md"
-            spacing="xtight"
-            weight="md"
-          >
-            LikeCoin
-          </TextIcon>
-        )}
-        <span className="button">
-          <Button onClick={switchToCurrencyChoice}>
-            <TextIcon size="xs" textDecoration="underline" color="grey-dark">
-              <Translate
-                zh_hant="更改支持方式"
-                zh_hans="更改支持方式"
-                en="Change"
-              />
+        <section className="left">
+          {isUSDT && (
+            <TextIcon
+              icon={<IconUSDTActive40 size="md" />}
+              size="md"
+              spacing="xtight"
+              weight="md"
+            >
+              <Translate zh_hant="USDT" zh_hans="USDT" en="USDT" />
             </TextIcon>
-          </Button>
+          )}
+          {isHKD && (
+            <TextIcon
+              icon={<IconFiatCurrency40 size="md" />}
+              size="md"
+              spacing="xtight"
+              weight="md"
+            >
+              <Translate zh_hant="法幣 HKD" zh_hans="法币 HKD" en="HKD" />
+            </TextIcon>
+          )}
+          {isLike && (
+            <TextIcon
+              icon={<IconLikeCoin40 size="md" />}
+              size="md"
+              spacing="xtight"
+              weight="md"
+            >
+              LikeCoin
+            </TextIcon>
+          )}
+          <span className="button">
+            <Button onClick={switchToCurrencyChoice}>
+              <TextIcon size="xs" textDecoration="underline" color="grey-dark">
+                <Translate
+                  zh_hant="更改支持方式"
+                  zh_hans="更改支持方式"
+                  en="Change"
+                />
+              </TextIcon>
+            </Button>
+          </span>
+        </section>
+        <section className="right">
+          {isUSDT && !isConnectedAddress && (
+            <Button onClick={() => disconnect()}>
+              <TextIcon size="xs" textDecoration="underline" color="grey-dark">
+                <Translate
+                  zh_hant="切換錢包地址"
+                  zh_hans="切换钱包地址"
+                  en="Change Address"
+                />
+              </TextIcon>
+            </Button>
+          )}
+          {isUSDT && isConnectedAddress && (
+            <>
+              <>
+                {isUnsupportedNetwork ? (
+                  <Button onClick={switchToTargetNetwork}>
+                    <TextIcon
+                      size="xs"
+                      textDecoration="underline"
+                      color="grey-dark"
+                    >
+                      <Translate
+                        zh_hant="切換到 "
+                        zh_hans="切换到 "
+                        en="Switch to "
+                      />
+                      {targetChainName}
+                    </TextIcon>
+                  </Button>
+                ) : (
+                  <TextIcon size="xs" color="black">
+                    {targetChainName}
+                  </TextIcon>
+                )}
+              </>
 
-          {/* TODO: move to network component */}
-          <WhyPolygonDialog>
-            {({ openDialog }) => (
-              <button type="button" onClick={openDialog}>
-                <TextIcon icon={<IconInfo24 size="md" color="grey" />} />
-              </button>
-            )}
-          </WhyPolygonDialog>
-        </span>
+              <WhyPolygonDialog>
+                {({ openDialog }) => (
+                  <Button onClick={openDialog}>
+                    <TextIcon icon={<IconInfo24 size="md" color="grey" />} />
+                  </Button>
+                )}
+              </WhyPolygonDialog>
+            </>
+          )}
+        </section>
       </section>
 
       <section className="set-amount-balance">
@@ -480,8 +520,12 @@ const SetAmount: React.FC<FormProps> = ({
                   switchToTargetNetwork()
                 }}
               >
-                <Translate zh_hant="切換到" zh_hans="切换到" en="Switch to" />
-                &nbsp;{targetChainName}
+                <Translate
+                  zh_hant="切換到 "
+                  zh_hans="切换到 "
+                  en="Switch to "
+                />
+                {targetChainName}
               </Dialog.Footer.Button>
             )}
 
@@ -503,13 +547,14 @@ const SetAmount: React.FC<FormProps> = ({
                     <Translate
                       zh_hant="授權 USDT 支付"
                       zh_hans="授权 USDT 支付"
-                      en="Authorize USDT"
+                      en="Approve USDT"
                     />
                   </Dialog.Footer.Button>
                 </>
               )}
-            {viewer.info.ethAddress?.toLowerCase() === address?.toLowerCase() &&
-              isUnsupportedNetwork &&
+
+            {isConnectedAddress &&
+              !isUnsupportedNetwork &&
               allowanceUSDT.gt(0) && (
                 <Dialog.Footer.Button
                   type="submit"

@@ -8,6 +8,8 @@ import {
   usePrepareContractWrite,
 } from 'wagmi'
 
+import { supportedChains } from '~/common/utils'
+
 export const useAllowance = () => {
   const { address } = useAccount()
 
@@ -33,6 +35,7 @@ export const useBalanceUSDT = ({
     addressOrName: (addr || address) as `0x${string}`,
     token: (process.env.NEXT_PUBLIC_ERC20_CONTRACT_ADDRESS ||
       '') as `0x${string}`,
+    chainId: supportedChains[0].id,
   })
 }
 

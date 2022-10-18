@@ -77,8 +77,8 @@ const USDTChoice: React.FC<FormProps> = ({
           </TextIcon>
           <TextIcon size="md" color="grey">
             <Translate
-              zh_hant="作者尚未開通"
-              zh_hans="作者尚未开通"
+              zh_hant="作者尚未啟用"
+              zh_hans="作者尚未启用"
               en="The author has not opened"
             />
           </TextIcon>
