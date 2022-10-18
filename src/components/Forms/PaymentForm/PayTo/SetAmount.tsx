@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
+import { BigNumber } from 'ethers/lib/ethers'
 import { formatUnits } from 'ethers/lib/utils'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
@@ -24,6 +25,7 @@ import PAY_TO from '~/components/GQL/mutations/payTo'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
 
 import {
+  GUIDE_LINKS,
   PAYMENT_CURRENCY as CURRENCY,
   PAYMENT_MAXIMUM_PAYTO_AMOUNT,
 } from '~/common/enums'
@@ -228,7 +230,7 @@ const SetAmount: React.FC<FormProps> = ({
       <section className="set-amount-balance">
         <span className="left">
           <Translate zh_hant="餘額" zh_hans="余额" en="Balance" />
-          &nbsp;{isUSDT && balanceUSDT}
+          &nbsp;{isUSDT && <span>{balanceUSDT} USDT</span>}
           {isHKD && formatAmount(balanceHKD)}
           {isLike && formatAmount(balanceLike, 0)}
         </span>
@@ -251,6 +253,17 @@ const SetAmount: React.FC<FormProps> = ({
               )}
             </TextIcon>
           </Button>
+        )}
+        {isUSDT && BigNumber.from(balanceUSDT).gte(0) && (
+          <a href={GUIDE_LINKS.payment} target="_blank">
+            <TextIcon size="xs" textDecoration="underline" color="grey-dark">
+              <Translate
+                zh_hant="如何移轉資金到 Polygon？"
+                zh_hans="如何移转资金到 Polygon？"
+                en="How to transfer USDT to Polygon?"
+              />
+            </TextIcon>
+          </a>
         )}
       </section>
 
