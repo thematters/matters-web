@@ -44,7 +44,7 @@ const USDTChoice: React.FC<FormProps> = ({
 
   const { data: approveData, write: approveWrite } = useApprove()
 
-  const allowanceUSDT = allowanceData || BigNumber.from("0")
+  const allowanceUSDT = allowanceData || BigNumber.from('0')
   const balanceUSDT = (balanceOfData && formatUnits(balanceOfData)) || 0
 
   useEffect(() => {

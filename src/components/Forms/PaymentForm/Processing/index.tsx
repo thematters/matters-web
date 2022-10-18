@@ -158,7 +158,7 @@ const USDTProcessingForm: React.FC<Props> = ({
     args: [
       `0x${recipient.info.ethAddress?.slice(2)}`,
       `0x${process.env.NEXT_PUBLIC_ERC20_CONTRACT_ADDRESS?.slice(2)}`,
-      utils.parseUnits(BigNumber.from(amount).toString(), "18"),
+      utils.parseUnits(BigNumber.from(amount).toString(), '18'),
       `ipfs://${article?.dataHash}`,
     ],
   })

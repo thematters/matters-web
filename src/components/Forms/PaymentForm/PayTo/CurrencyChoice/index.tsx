@@ -16,6 +16,7 @@ import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 
 import styles from './styles.css'
+import Tips from './Tips'
 import USDTChoice from './USDTChoice'
 
 import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
@@ -71,11 +72,15 @@ const CurrencyChoice: React.FC<FormProps> = ({
         </span>
         <span>的方式：</span>
       </section>
+
+      {/* USDT */}
       <USDTChoice
         recipient={recipient}
         switchToSetAmount={switchToSetAmount}
         switchToWalletSelect={switchToWalletSelect}
       />
+
+      {/* HKD */}
       <section
         role="button"
         className="item clickable"
@@ -92,6 +97,8 @@ const CurrencyChoice: React.FC<FormProps> = ({
         </TextIcon>
         <CurrencyFormatter currency={balanceHKD} currencyCode={'HKD'} />
       </section>
+
+      {/* LikeCoin */}
       <section
         role="button"
         className="item clickable"
@@ -108,6 +115,8 @@ const CurrencyChoice: React.FC<FormProps> = ({
         </TextIcon>
         <CurrencyFormatter currency={balanceLike} currencyCode={'LIKE'} />
       </section>
+
+      <Tips />
 
       <style jsx>{styles}</style>
     </section>
