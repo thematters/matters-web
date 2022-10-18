@@ -166,7 +166,7 @@ const Confirm: React.FC<FormProps> = ({
             </p>
           </PaymentInfo>
 
-          {!isWalletInsufficient && (
+          {currency === CURRENCY.HKD && !isWalletInsufficient && (
             <>
               <p className="hint">
                 <Translate id="hintPaymentPassword" />
@@ -180,13 +180,24 @@ const Confirm: React.FC<FormProps> = ({
       </Dialog.Content>
 
       <Dialog.Footer>
-        <Dialog.Footer.Button
-          bgColor="white"
-          textColor="grey"
-          onClick={switchToResetPassword}
-        >
-          <Translate id="forgetPassword" />？
-        </Dialog.Footer.Button>
+        {currency === CURRENCY.HKD && (
+          <Dialog.Footer.Button
+            bgColor="white"
+            textColor="grey"
+            onClick={switchToResetPassword}
+          >
+            <Translate id="forgetPassword" />？
+          </Dialog.Footer.Button>
+        )}
+        {currency === CURRENCY.USDT && (
+          <Dialog.Footer.Button
+            bgColor="green"
+            textColor="white"
+            onClick={submitCallback}
+          >
+            <Translate zh_hant="確認送出" zh_hans="确认送出" en="Confirm" />
+          </Dialog.Footer.Button>
+        )}
       </Dialog.Footer>
     </>
   )

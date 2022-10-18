@@ -93,6 +93,7 @@ const CONNECT_SRC = [
 
   // Alchemy
   '*.alchemyapi.io',
+  '*.alchemy.com',
 
   // IPFS Gateways
   'ipfs.io/ipfs/',

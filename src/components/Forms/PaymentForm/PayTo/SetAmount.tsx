@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
+import { formatUnits } from 'ethers/lib/utils'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useRef, useState } from 'react'
@@ -10,10 +11,13 @@ import {
   IconExternalLink16,
   IconFiatCurrency40,
   IconLikeCoin40,
+  IconUSDTActive40,
   LanguageContext,
   Spinner,
   TextIcon,
   Translate,
+  useAllowance,
+  useBalanceOf,
   useMutation,
   ViewerContext,
 } from '~/components'
@@ -70,11 +74,13 @@ interface FormValues {
 }
 
 const AMOUNT_DEFAULT = {
+  [CURRENCY.USDT]: 5.0,
   [CURRENCY.HKD]: 10,
   [CURRENCY.LIKE]: 166,
 }
 
 const AMOUNT_OPTIONS = {
+  [CURRENCY.USDT]: [1.0, 3.0, 5.0, 10.0, 20.0, 35.0],
   [CURRENCY.HKD]: [5, 10, 30, 50, 100, 300],
   [CURRENCY.LIKE]: [50, 100, 150, 500, 1000, 1500],
 }
@@ -106,6 +112,13 @@ const SetAmount: React.FC<FormProps> = ({
   const { data, loading } = useQuery<WalletBalance>(WALLET_BALANCE, {
     fetchPolicy: 'network-only',
   })
+
+  const { data: allowanceData } = useAllowance()
+
+  const { data: balanceOfData } = useBalanceOf()
+
+  const allowanceUSDT =  (allowanceData && formatUnits(allowanceData)) || 0
+  const balanceUSDT = (balanceOfData && formatUnits(balanceOfData)) || 0
   const balanceHKD = data?.viewer?.wallet.balance.HKD || 0
   const balanceLike = data?.viewer?.liker.total || 0
 
@@ -159,18 +172,30 @@ const SetAmount: React.FC<FormProps> = ({
     },
   })
 
+  const isUSDT = values.currency === CURRENCY.USDT
   const isHKD = values.currency === CURRENCY.HKD
   const isLike = values.currency === CURRENCY.LIKE
   const canPayLike = isLike && !!viewer.liker.likerId
   const canReceiveLike = isLike && !!recipient.liker.likerId
-  const canProcess = isHKD || (canPayLike && canReceiveLike)
+  const canProcess = isUSDT || isHKD || (canPayLike && canReceiveLike)
   const maxAmount = isLike ? Infinity : PAYMENT_MAXIMUM_PAYTO_AMOUNT.HKD
   const isBalanceInsufficient =
-    (isHKD ? balanceHKD : balanceLike) < (values.customAmount || values.amount)
+    (isUSDT ? allowanceUSDT : isHKD ? balanceHKD : balanceLike) <
+    (values.customAmount || values.amount)
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit} noBackground>
       <section className="set-amount-change-support-way">
+        {isUSDT && (
+          <TextIcon
+            icon={<IconUSDTActive40 size="md" />}
+            size="md"
+            spacing="xtight"
+            weight="md"
+          >
+            <Translate zh_hant="USDT" zh_hans="USDT" en="USDT" />
+          </TextIcon>
+        )}
         {isHKD && (
           <TextIcon
             icon={<IconFiatCurrency40 size="md" />}
@@ -207,7 +232,8 @@ const SetAmount: React.FC<FormProps> = ({
       <section className="set-amount-balance">
         <span className="left">
           <Translate zh_hant="餘額" zh_hans="余额" en="Balance" />
-          &nbsp;{isHKD && formatAmount(balanceHKD)}
+          &nbsp;{isUSDT && balanceUSDT}
+          {isHKD && formatAmount(balanceHKD)}
           {isLike && formatAmount(balanceLike, 0)}
         </span>
         {isHKD && (
@@ -235,7 +261,7 @@ const SetAmount: React.FC<FormProps> = ({
       {fixed && canProcess && (
         <Form.AmountRadioInput
           currency={values.currency}
-          balance={isHKD ? balanceHKD : balanceLike}
+          balance={isUSDT ? balanceUSDT : isHKD ? balanceHKD : balanceLike}
           amounts={AMOUNT_OPTIONS}
           name="amount"
           disabled={locked}

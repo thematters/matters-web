@@ -15,11 +15,13 @@ import {
 import { ADD_TOAST, TEXT } from '~/common/enums'
 import { analytics, numAbbr, translate } from '~/common/utils'
 
+import { ArticleDetailPublic_article } from '../../__generated__/ArticleDetailPublic'
 import { DonationButtonArticle } from './__generated__/DonationButtonArticle'
 
 interface DonationButtonProps {
   article: DonationButtonArticle
   disabled: boolean
+  articleDetail: ArticleDetailPublic_article
 }
 
 const fragments = {
@@ -39,7 +41,7 @@ const fragments = {
   `,
 }
 
-const DonationButton = ({ article, disabled }: DonationButtonProps) => {
+const DonationButton = ({ article, disabled, articleDetail }: DonationButtonProps) => {
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
 
@@ -80,7 +82,7 @@ const DonationButton = ({ article, disabled }: DonationButtonProps) => {
 
   return (
     <section className="container">
-      <DonationDialog recipient={article.author} targetId={article.id}>
+      <DonationDialog recipient={article.author} targetId={article.id} article={articleDetail}>
         {({ openDialog }) => (
           <Button
             spacing={['xtight', 'xtight']}

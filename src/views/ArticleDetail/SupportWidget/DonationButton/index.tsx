@@ -14,13 +14,15 @@ import { ADD_TOAST, REFETCH_DONATORS } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
+import { ArticleDetailPublic_article } from '../../__generated__/ArticleDetailPublic'
 
 interface DonationButtonProps {
   recipient: UserDonationRecipient
   targetId: string
+  article: ArticleDetailPublic_article
 }
 
-const DonationButton = ({ recipient, targetId }: DonationButtonProps) => {
+const DonationButton = ({ recipient, targetId, article }: DonationButtonProps) => {
   const viewer = useContext(ViewerContext)
 
   const completeCallback = () => {
@@ -66,6 +68,7 @@ const DonationButton = ({ recipient, targetId }: DonationButtonProps) => {
       completeCallback={completeCallback}
       recipient={recipient}
       targetId={targetId}
+      article={article}
     >
       {({ openDialog }) => (
         <Button

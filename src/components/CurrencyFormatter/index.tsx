@@ -1,9 +1,9 @@
 import styles from './styles.css'
 
 interface Props {
-  currency: number
+  currency: number | string
   currencyCode: string
-  subCurrency?: number
+  subCurrency?: number | string
   subCurrencyCode?: string
 }
 

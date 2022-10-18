@@ -16,6 +16,7 @@ import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 
 import styles from './styles.css'
+import USDTChoice from './USDTChoice'
 
 import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
 import { PayTo_payTo_transaction as PayToTx } from '~/components/GQL/mutations/__generated__/PayTo'
@@ -38,6 +39,7 @@ interface FormProps {
   recipient: UserDonationRecipient
   submitCallback: (values: SetAmountCallbackValues) => void
   switchToSetAmount: (c: CURRENCY) => void
+  switchToWalletSelect: () => void
   targetId: string
 }
 
@@ -48,19 +50,16 @@ const CurrencyChoice: React.FC<FormProps> = ({
   recipient,
   submitCallback,
   switchToSetAmount,
+  switchToWalletSelect,
   targetId,
 }) => {
   // HKD balance
   const { data, loading } = useQuery<WalletBalance>(WALLET_BALANCE, {
     fetchPolicy: 'network-only',
   })
+
   const balanceHKD = data?.viewer?.wallet.balance.HKD || 0
   const balanceLike = data?.viewer?.liker.total || 0
-
-  // const isHKD = values.currency === CURRENCY.HKD
-  // const isLike = values.currency === CURRENCY.LIKE
-  // const canPayLike = isLike && !!viewer.liker.likerId
-  // const canReceiveLike = isLike && !!recipient.liker.likerId
 
   const InnerForm = (
     <section className="wrapper">
@@ -72,9 +71,14 @@ const CurrencyChoice: React.FC<FormProps> = ({
         </span>
         <span>的方式：</span>
       </section>
+      <USDTChoice
+        recipient={recipient}
+        switchToSetAmount={switchToSetAmount}
+        switchToWalletSelect={switchToWalletSelect}
+      />
       <section
         role="button"
-        className="item"
+        className="item clickable"
         onClick={() => {
           switchToSetAmount(CURRENCY.HKD)
         }}
@@ -90,7 +94,7 @@ const CurrencyChoice: React.FC<FormProps> = ({
       </section>
       <section
         role="button"
-        className="item"
+        className="item clickable"
         onClick={() => {
           switchToSetAmount(CURRENCY.LIKE)
         }}
@@ -104,6 +108,7 @@ const CurrencyChoice: React.FC<FormProps> = ({
         </TextIcon>
         <CurrencyFormatter currency={balanceLike} currencyCode={'LIKE'} />
       </section>
+
       <style jsx>{styles}</style>
     </section>
   )

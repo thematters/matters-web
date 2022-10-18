@@ -9,11 +9,10 @@ import Donators from './Donators'
 import { fragments } from './gql'
 import styles from './styles.css'
 
-import { SupportWidgetArticlePrivate } from './__generated__/SupportWidgetArticlePrivate'
-import { SupportWidgetArticlePublic } from './__generated__/SupportWidgetArticlePublic'
+import { ArticleDetailPublic_article } from '../__generated__/ArticleDetailPublic'
 
 interface DonationProps {
-  article: SupportWidgetArticlePublic & Partial<SupportWidgetArticlePrivate>
+  article: ArticleDetailPublic_article
 }
 
 const SupportWidget = ({ article }: DonationProps) => {
@@ -26,7 +25,7 @@ const SupportWidget = ({ article }: DonationProps) => {
     <section className={supportWidgetClasses}>
       <section className="donation">
         <section className="donation-button">
-          <DonationButton recipient={article.author} targetId={article.id} />
+          <DonationButton recipient={article.author} targetId={article.id} article={article}/>
         </section>
 
         <p>
