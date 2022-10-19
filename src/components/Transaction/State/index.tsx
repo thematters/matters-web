@@ -1,3 +1,5 @@
+import { etherscanBlockExplorers } from 'wagmi'
+
 import {
   Button,
   IconExternalLink16,
@@ -11,6 +13,8 @@ import styles from './styles.css'
 
 import { TransactionState } from '@/__generated__/globalTypes'
 import { DigestTransaction_blockchainTx } from '../__generated__/DigestTransaction'
+
+const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
 /***
  * This is a sub component of Transaction that presents canceled, failed
@@ -32,13 +36,15 @@ const State = ({ state, message, blockchainTx }: StateProps) => {
   if (!state) {
     return null
   }
-
   if (state === TransactionState.succeeded && !!blockchainTx) {
+    const scanUrl = isProd
+      ? etherscanBlockExplorers.polygon.url
+      : etherscanBlockExplorers.polygonMumbai.url
     return (
       <Button
         spacing={['xxtight', 'tight']}
         bgColor="grey-lighter"
-        htmlHref={`${process.env.NEXT_PUBLIC_USDT_SCAN_URL}/tx/${blockchainTx.txHash}`}
+        htmlHref={`${scanUrl}/tx/${blockchainTx.txHash}`}
         htmlTarget="_blank"
         onClick={(event) => event?.stopPropagation()}
       >
