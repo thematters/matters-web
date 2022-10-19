@@ -132,7 +132,12 @@ const SetAmount: React.FC<FormProps> = ({
     fetchPolicy: 'network-only',
   })
 
-  const { data: allowanceData } = useAllowanceUSDT()
+  const [approveConfirming, setApproveConfirming] = useState(false)
+  const {
+    data: allowanceData,
+    refetch: refetchAllowanceData,
+    isLoading: allowanceLoading,
+  } = useAllowanceUSDT()
   const {
     data: approveData,
     isLoading: approving,
@@ -154,7 +159,10 @@ const SetAmount: React.FC<FormProps> = ({
   useEffect(() => {
     ;(async () => {
       if (approveData) {
+        setApproveConfirming(true)
         await approveData.wait()
+        refetchAllowanceData()
+        setApproveConfirming(false)
       }
     })()
   }, [approveData])
@@ -538,7 +546,7 @@ const SetAmount: React.FC<FormProps> = ({
                   <Dialog.Footer.Button
                     bgColor="green"
                     textColor="white"
-                    loading={approving}
+                    loading={approving || approveConfirming || allowanceLoading}
                     onClick={() => {
                       if (approveWrite) {
                         approveWrite()
