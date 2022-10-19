@@ -11,7 +11,7 @@ import {
 } from '~/components'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
-import { formatAmount, maskAddress translate } from '~/common/utils'
+import { formatAmount, maskAddress, translate } from '~/common/utils'
 
 import styles from './styles.css'
 
