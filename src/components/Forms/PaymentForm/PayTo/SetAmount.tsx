@@ -37,6 +37,7 @@ import {
 import {
   formatAmount,
   maskAddress,
+  numRound,
   translate,
   validateCurrency,
   validateDonationAmount,
@@ -225,7 +226,7 @@ const SetAmount: React.FC<FormProps> = ({
   const canPayLike = isLike && !!viewer.liker.likerId
   const canReceiveLike = isLike && !!recipient.liker.likerId
   const canProcess = isUSDT || isHKD || (canPayLike && canReceiveLike)
-  const maxAmount = isLike ? Infinity : PAYMENT_MAXIMUM_PAYTO_AMOUNT.HKD
+  const maxAmount = isHKD ? PAYMENT_MAXIMUM_PAYTO_AMOUNT.HKD : Infinity
   const isBalanceInsufficient =
     (isUSDT ? balanceUSDT : isHKD ? balanceHKD : balanceLike) <
     (values.customAmount || values.amount)
@@ -395,6 +396,7 @@ const SetAmount: React.FC<FormProps> = ({
             name="customAmount"
             min={0}
             max={maxAmount}
+            step={isUSDT ? '0.01' : '1'}
             placeholder={translate({
               zh_hant: '輸入自訂金額',
               zh_hans: '输入自订金额',
@@ -408,10 +410,17 @@ const SetAmount: React.FC<FormProps> = ({
             }
             onBlur={handleBlur}
             onChange={(e) => {
-              const value = e.target.valueAsNumber || 0
-              const sanitizedAmount = Math.abs(
-                Math.min(isHKD ? Math.floor(value) : value, maxAmount)
-              )
+              let value = e.target.valueAsNumber || 0
+
+              if (isHKD) {
+                value = Math.floor(value)
+              }
+
+              if (isUSDT) {
+                value = numRound(value, 2)
+              }
+
+              const sanitizedAmount = Math.abs(Math.min(value, maxAmount))
 
               // remove extra left pad 0
               if (inputRef.current) {

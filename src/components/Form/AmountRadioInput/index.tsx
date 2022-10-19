@@ -68,10 +68,12 @@ const AmountOption: React.FC<AmountOptionProps> = ({
     'u-area-disable': disabled || isBalanceInsufficient,
   })
 
+  const decimals = currency === CURRENCY.USDT ? 2 : 0
+
   return (
     <li className={amountClasses}>
       <label htmlFor={fieldId}>
-        {formatAmount(amount, 0)}
+        {formatAmount(amount, decimals)}
 
         <VisuallyHidden>
           <input
@@ -85,6 +87,7 @@ const AmountOption: React.FC<AmountOptionProps> = ({
           />
         </VisuallyHidden>
       </label>
+
       <style jsx>{styles}</style>
     </li>
   )
