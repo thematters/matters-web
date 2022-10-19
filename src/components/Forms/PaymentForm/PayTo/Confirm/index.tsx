@@ -13,6 +13,7 @@ import {
   TextIcon,
   Translate,
   useMutation,
+  ViewerContext,
 } from '~/components'
 import PAY_TO from '~/components/GQL/mutations/payTo'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
@@ -54,6 +55,7 @@ const Confirm: React.FC<FormProps> = ({
 }) => {
   const formId = 'pay-to-confirm-form'
 
+  const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
   const [payTo] = useMutation<PayToMutate>(PAY_TO, undefined, {
     showToast: false,
@@ -66,8 +68,13 @@ const Confirm: React.FC<FormProps> = ({
   const { address } = useAccount()
   const { chain } = useNetwork()
   const isUnsupportedNetwork = !!chain?.unsupported
+  const isConnectedAddress =
+    viewer.info.ethAddress?.toLowerCase() === address?.toLowerCase()
+
+  const isUSDT = currency === CURRENCY.USDT
+
   useEffect(() => {
-    if ((!address || !isUnsupportedNetwork) && currency === CURRENCY.USDT) {
+    if (isUSDT && (!address || isUnsupportedNetwork || !isConnectedAddress)) {
       switchToCurrencyChoice()
     }
   }, [address, chain])

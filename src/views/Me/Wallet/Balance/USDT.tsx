@@ -1,4 +1,3 @@
-import { formatUnits } from 'ethers/lib/utils'
 import { useContext } from 'react'
 
 import {
@@ -6,18 +5,19 @@ import {
   IconUSDTActive40,
   TextIcon,
   Translate,
-  useBalanceOf,
+  useBalanceUSDT,
   ViewerContext,
 } from '~/components'
+
+import { formatAmount } from '~/common/utils'
 
 import styles from './styles.css'
 
 export const USDTBalance = () => {
   const viewer = useContext(ViewerContext)
   const address = viewer.info.ethAddress
-  const { data: balanceOfData } = useBalanceOf({ address })
-
-  const balanceUSDT = (balanceOfData && formatUnits(balanceOfData)) || 0
+  const { data: balanceUSDTData } = useBalanceUSDT({ address })
+  const balanceUSDT = parseFloat(balanceUSDTData?.formatted || '0')
 
   if (!address) {
     return null
@@ -33,7 +33,7 @@ export const USDTBalance = () => {
         <Translate zh_hant="USDT" zh_hans="USDT" en="USDT" />
       </TextIcon>
 
-      <CurrencyFormatter currency={balanceUSDT} currencyCode={'USDT'} />
+      <CurrencyFormatter value={formatAmount(balanceUSDT)} currency="USDT" />
 
       <style jsx>{styles}</style>
     </section>

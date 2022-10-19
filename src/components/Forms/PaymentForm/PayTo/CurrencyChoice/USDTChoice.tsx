@@ -1,4 +1,3 @@
-import { formatUnits } from 'ethers/lib/utils'
 import { useContext } from 'react'
 import { useAccount } from 'wagmi'
 
@@ -9,11 +8,12 @@ import {
   IconUSDTActive40,
   TextIcon,
   Translate,
-  useBalanceOf,
+  useBalanceUSDT,
   ViewerContext,
 } from '~/components'
 
 import { PATHS, PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
+import { formatAmount } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -33,9 +33,8 @@ const USDTChoice: React.FC<FormProps> = ({
   const viewer = useContext(ViewerContext)
   const { address } = useAccount()
 
-  const { data: balanceOfData } = useBalanceOf({})
-
-  const balanceUSDT = (balanceOfData && formatUnits(balanceOfData)) || 0
+  const { data: balanceUSDTData } = useBalanceUSDT({})
+  const balanceUSDT = parseFloat(balanceUSDTData?.formatted || '0')
 
   return (
     <>
@@ -55,8 +54,8 @@ const USDTChoice: React.FC<FormProps> = ({
             Tether
           </TextIcon>
           <CurrencyFormatter
-            currency={balanceUSDT}
-            currencyCode={CURRENCY.USDT}
+            value={formatAmount(balanceUSDT)}
+            currency={CURRENCY.USDT}
           />
         </section>
       )}
@@ -79,8 +78,8 @@ const USDTChoice: React.FC<FormProps> = ({
           </TextIcon>
           <TextIcon size="md" color="grey">
             <Translate
-              zh_hant="作者尚未開通"
-              zh_hans="作者尚未开通"
+              zh_hant="作者尚未啟用"
+              zh_hans="作者尚未启用"
               en="The author has not opened"
             />
           </TextIcon>

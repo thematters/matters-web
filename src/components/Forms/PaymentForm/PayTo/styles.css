@@ -7,13 +7,15 @@
 }
 
 .set-amount-change-support-way {
+  @mixin flex-center-space-between;
+
   padding: var(--spacing-base) 0;
   margin: 0 var(--spacing-base);
   border-bottom: 0.5px solid var(--color-line-grey);
 
   & .button {
     display: inline-block;
-    padding-left: var(--spacing-x-tight);
+    margin-left: var(--spacing-x-tight);
   }
 }
 
@@ -65,11 +67,11 @@
 }
 
 .set-amount-reconnect-footer {
-  font-size: 0.75rem;
-  color: var(--color-grey);
+  font-size: var(--font-size-xs);
+  color: var(--color-red);
   text-align: center;
 
   & .address {
-    color: var(--color-red);
+    color: var(--color-black);
   }
 }
