@@ -19,3 +19,7 @@
   font-size: var(--font-size-xl);
   line-height: 1;
 }
+
+.address {
+  margin-top: var(--spacing-x-tight);
+}

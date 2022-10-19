@@ -1,7 +1,17 @@
-import { Avatar, Translate } from '~/components'
+import { useContext } from 'react'
+
+import {
+  Avatar,
+  Button,
+  CopyToClipboard,
+  IconCopy16,
+  LanguageContext,
+  TextIcon,
+  Translate,
+} from '~/components'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
-import { formatAmount } from '~/common/utils'
+import { formatAmount, maskAddress, translate } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -11,6 +21,8 @@ interface PaymentInfoProps {
   currency: CURRENCY
   recipient: UserDonationRecipient
   children?: React.ReactNode
+  showLikerID?: boolean
+  showEthAddress?: boolean
 }
 
 const PaymentInfo: React.FC<PaymentInfoProps> = ({
@@ -18,7 +30,11 @@ const PaymentInfo: React.FC<PaymentInfoProps> = ({
   currency,
   recipient,
   children,
+  showLikerID = false,
+  showEthAddress = false,
 }) => {
+  const { lang } = useContext(LanguageContext)
+  const address = recipient.info.ethAddress || ''
   return (
     <section className="info">
       <p className="to">
@@ -30,7 +46,37 @@ const PaymentInfo: React.FC<PaymentInfoProps> = ({
       </p>
       <Avatar user={recipient} size="xxxl" />
       <p className="recipient">{recipient.displayName}</p>
-
+      {showEthAddress && (
+        <div className="address">
+          <CopyToClipboard text={address}>
+            <Button
+              spacing={['xxtight', 'tight']}
+              bgColor="green-lighter"
+              aria-label={translate({ id: 'copy', lang })}
+            >
+              <TextIcon
+                icon={<IconCopy16 color="green" size="sm" />}
+                spacing="xxtight"
+                size="xs"
+                weight="md"
+                color="green"
+                textPlacement="left"
+              >
+                {maskAddress(address)}
+              </TextIcon>
+            </Button>
+          </CopyToClipboard>
+        </div>
+      )}
+      {showLikerID && (
+        <div className="address">
+          <Button spacing={['xxtight', 'tight']} bgColor="green-lighter">
+            <TextIcon size="xs" weight="md" color="green">
+              LikeID: {recipient.liker.likerId}
+            </TextIcon>
+          </Button>
+        </div>
+      )}
       <p className="amount">
         <b>
           {currency} {formatAmount(amount, currency === CURRENCY.USDT ? 2 : 0)}
