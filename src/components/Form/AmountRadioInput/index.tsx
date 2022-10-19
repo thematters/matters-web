@@ -1,5 +1,6 @@
 import VisuallyHidden from '@reach/visually-hidden'
 import classNames from 'classnames'
+import { useEffect, useRef } from 'react'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { formatAmount } from '~/common/utils'
@@ -57,18 +58,28 @@ const AmountOption: React.FC<AmountOptionProps> = ({
   disabled,
   ...inputProps
 }) => {
+  const inputRef: React.RefObject<any> = useRef(null)
+
   const fieldId = `field-${name}-${amount}`
 
   const isBalanceInsufficient =
     typeof balance === 'number' ? balance < amount : false
+  const isActive = value === amount
 
   const amountClasses = classNames({
     amount: true,
-    active: value === amount,
+    active: isActive,
     'u-area-disable': disabled || isBalanceInsufficient,
   })
 
   const decimals = currency === CURRENCY.USDT ? 2 : 0
+
+  useEffect(() => {
+    if (!isActive && inputRef.current) {
+      inputRef.current.blur()
+      inputRef.current.checked = false
+    }
+  }, [isActive])
 
   return (
     <li className={amountClasses}>
@@ -84,6 +95,7 @@ const AmountOption: React.FC<AmountOptionProps> = ({
             name={name}
             value={amount}
             type="radio"
+            ref={inputRef}
           />
         </VisuallyHidden>
       </label>
