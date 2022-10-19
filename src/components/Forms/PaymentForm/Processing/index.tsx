@@ -28,7 +28,7 @@ import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__
 import { ViewerTxState } from './__generated__/ViewerTxState'
 
 interface Props {
-  amount: number | string
+  amount: number
   currency: CURRENCY
   recipient: UserDonationRecipient
   article?: ArticleDetailPublic_article
