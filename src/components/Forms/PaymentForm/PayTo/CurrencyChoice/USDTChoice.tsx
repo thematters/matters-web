@@ -61,13 +61,7 @@ const USDTChoice: React.FC<FormProps> = ({
       )}
 
       {address && !recipient.info.ethAddress && (
-        <section
-          role="button"
-          className="item"
-          onClick={() => {
-            switchToSetAmount(CURRENCY.USDT)
-          }}
-        >
+        <section role="button" className="item">
           <TextIcon
             icon={<IconUSDT40 size="xl-m" />}
             size="md"
