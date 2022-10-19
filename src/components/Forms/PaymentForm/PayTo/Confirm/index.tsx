@@ -167,6 +167,8 @@ const Confirm: React.FC<FormProps> = ({
             amount={amount}
             currency={currency}
             recipient={recipient}
+            showLikerID={currency === CURRENCY.LIKE}
+            showEthAddress={currency === CURRENCY.USDT}
           >
             <p>
               <Button onClick={switchToSetAmount}>

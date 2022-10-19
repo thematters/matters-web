@@ -112,6 +112,7 @@ const OthersProcessingForm: React.FC<Props> = ({
                 amount={amount}
                 currency={currency}
                 recipient={recipient}
+                showLikerID={currency === CURRENCY.LIKE}
               />
               {currency === CURRENCY.HKD && (
                 <p className="hint">
@@ -257,6 +258,7 @@ const USDTProcessingForm: React.FC<Props> = ({
             amount={amount}
             currency={currency}
             recipient={recipient}
+            showEthAddress={true}
           />
           <section className="hint">
             <p>
