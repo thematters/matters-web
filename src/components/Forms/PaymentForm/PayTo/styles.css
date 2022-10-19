@@ -67,11 +67,8 @@
 }
 
 .set-amount-reconnect-footer {
+  margin-top: var(--spacing-base);
   font-size: var(--font-size-xs);
   color: var(--color-red);
   text-align: center;
-
-  & .address {
-    color: var(--color-black);
-  }
 }

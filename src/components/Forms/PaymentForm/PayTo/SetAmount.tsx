@@ -7,8 +7,10 @@ import { useAccount, useDisconnect, useNetwork, useSwitchNetwork } from 'wagmi'
 
 import {
   Button,
+  CopyToClipboard,
   Dialog,
   Form,
+  IconCopy16,
   IconExternalLink16,
   IconFiatCurrency40,
   IconInfo24,
@@ -372,7 +374,7 @@ const SetAmount: React.FC<FormProps> = ({
           balance={isUSDT ? balanceUSDT : isHKD ? balanceHKD : balanceLike}
           amounts={AMOUNT_OPTIONS}
           name="amount"
-          disabled={locked}
+          disabled={locked || !isConnectedAddress}
           value={values.amount}
           error={touched.amount && errors.amount}
           onBlur={handleBlur}
@@ -494,6 +496,28 @@ const SetAmount: React.FC<FormProps> = ({
           <>
             {!isConnectedAddress && (
               <>
+                <p className="set-amount-reconnect-footer">
+                  <Translate
+                    zh_hant="當前錢包地址與帳戶綁定不同，切換或重新連接為："
+                    zh_hans="當前錢包地址與帳戶綁定不同，切換或重新連接為："
+                    en="Please connect to your account wallet: "
+                  />
+                  <CopyToClipboard text={viewer.info.ethAddress || ''}>
+                    <Button
+                      spacing={['xtight', 'xtight']}
+                      aria-label={translate({ id: 'copy', lang })}
+                    >
+                      <TextIcon
+                        icon={<IconCopy16 color="black" size="xs" />}
+                        color="black"
+                        textPlacement="left"
+                      >
+                        {maskAddress(viewer.info.ethAddress || '')}
+                      </TextIcon>
+                    </Button>
+                  </CopyToClipboard>
+                </p>
+
                 <Dialog.Footer.Button
                   bgColor="green"
                   textColor="white"
@@ -508,16 +532,6 @@ const SetAmount: React.FC<FormProps> = ({
                   />
                 </Dialog.Footer.Button>
 
-                <p className="set-amount-reconnect-footer">
-                  <Translate
-                    zh_hant="請連接帳戶的綁定錢包 "
-                    zh_hans="请连接帐户的绑定钱包 "
-                    en="Please connect to your account wallet "
-                  />
-                  <span className="address">
-                    {maskAddress(viewer.info.ethAddress || '')}
-                  </span>
-                </p>
                 <style jsx>{styles}</style>
               </>
             )}
