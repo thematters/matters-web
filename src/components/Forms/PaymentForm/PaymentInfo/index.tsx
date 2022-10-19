@@ -11,13 +11,13 @@ import {
 } from '~/components'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
-import { maskAddress, translate } from '~/common/utils'
+import { formatAmount, maskAddress translate } from '~/common/utils'
 
 import styles from './styles.css'
 
 import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
 interface PaymentInfoProps {
-  amount: number | string
+  amount: number
   currency: CURRENCY
   recipient: UserDonationRecipient
   children?: React.ReactNode
@@ -79,7 +79,7 @@ const PaymentInfo: React.FC<PaymentInfoProps> = ({
       )}
       <p className="amount">
         <b>
-          {currency} {amount}
+          {currency} {formatAmount(amount, currency === CURRENCY.USDT ? 2 : 0)}
         </b>
       </p>
       {children}

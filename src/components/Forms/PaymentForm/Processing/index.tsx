@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
-import { BigNumber, ethers } from 'ethers'
+import { ethers } from 'ethers'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useContext, useEffect, useState } from 'react'
@@ -28,7 +28,7 @@ import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__
 import { ViewerTxState } from './__generated__/ViewerTxState'
 
 interface Props {
-  amount: number | string
+  amount: number
   currency: CURRENCY
   recipient: UserDonationRecipient
   article?: ArticleDetailPublic_article
@@ -191,10 +191,7 @@ const USDTProcessingForm: React.FC<Props> = ({
     args: [
       recipient.info.ethAddress as `0x${string}`,
       process.env.NEXT_PUBLIC_USDT_CONTRACT_ADDRESS as `0x${string}`,
-      ethers.utils.parseUnits(
-        BigNumber.from(amount).toString(),
-        balanceUSDTData?.decimals
-      ),
+      ethers.utils.parseUnits(amount.toString(), balanceUSDTData?.decimals),
       `ipfs://${article?.dataHash}`,
     ],
   })
