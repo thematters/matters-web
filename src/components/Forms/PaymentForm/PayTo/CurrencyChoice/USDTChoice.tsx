@@ -102,12 +102,13 @@ const USDTChoice: React.FC<FormProps> = ({
 
       {!curatorAddress && (
         <Button
-          spacing={['xxtight', 'base']}
+          spacing={[0, 'base']}
+          size={[null, '1.5rem']}
           borderColor="green"
           borderRadius="5rem"
           href={PATHS.ME_SETTINGS_CONNECT_WALLET}
         >
-          <TextIcon color="green">
+          <TextIcon color="green" size="xs">
             <Translate
               zh_hant="前往設定錢包"
               zh_hans="前往设定钱包"
@@ -119,14 +120,15 @@ const USDTChoice: React.FC<FormProps> = ({
 
       {!!curatorAddress && (
         <Button
-          spacing={['xxtight', 'base']}
+          spacing={[0, 'base']}
+          size={[null, '1.5rem']}
           borderColor="green"
           borderRadius="5rem"
           onClick={() => {
             switchToWalletSelect()
           }}
         >
-          <TextIcon color="green">
+          <TextIcon color="green" size="xs">
             <Translate
               zh_hant="連接錢包"
               zh_hans="连接钱包"
