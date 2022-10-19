@@ -66,12 +66,16 @@ const CurrencyChoice: React.FC<FormProps> = ({
   const InnerForm = (
     <section className="wrapper">
       <section className="header">
-        <span>選擇支持</span>
+        <span>
+          <Translate zh_hant="選擇支持" zh_hans="选择支持" en="Support " />
+        </span>
         <span className="userInfo">
           <Avatar user={recipient} size="xs" />
           <span className="userName">{recipient.displayName}</span>
         </span>
-        <span>的方式：</span>
+        <span>
+          <Translate zh_hant="的方式" zh_hans="的方式" en="with: " />
+        </span>
       </section>
 
       {/* USDT */}
