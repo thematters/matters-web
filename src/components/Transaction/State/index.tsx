@@ -1,8 +1,20 @@
-import { IconInfo16, TextIcon, Tooltip, Translate } from '~/components'
+import { etherscanBlockExplorers } from 'wagmi'
+
+import {
+  Button,
+  IconExternalLink16,
+  IconInfo16,
+  TextIcon,
+  Tooltip,
+  Translate,
+} from '~/components'
 
 import styles from './styles.css'
 
 import { TransactionState } from '@/__generated__/globalTypes'
+import { DigestTransaction_blockchainTx } from '../__generated__/DigestTransaction'
+
+const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
 /***
  * This is a sub component of Transaction that presents canceled, failed
@@ -17,11 +29,41 @@ import { TransactionState } from '@/__generated__/globalTypes'
 interface StateProps {
   state: TransactionState
   message: string | null
+  blockchainTx: DigestTransaction_blockchainTx | null
 }
 
-const State = ({ state, message }: StateProps) => {
-  if (!state || state === TransactionState.succeeded) {
+const State = ({ state, message, blockchainTx }: StateProps) => {
+  if (!state) {
     return null
+  }
+  if (state === TransactionState.succeeded && !!blockchainTx) {
+    const scanUrl = isProd
+      ? etherscanBlockExplorers.polygon.url
+      : etherscanBlockExplorers.polygonMumbai.url
+    return (
+      <Button
+        spacing={['xxtight', 'tight']}
+        bgColor="grey-lighter"
+        htmlHref={`${scanUrl}/tx/${blockchainTx.txHash}`}
+        htmlTarget="_blank"
+        onClick={(event) => event?.stopPropagation()}
+      >
+        <TextIcon
+          icon={<IconExternalLink16 color="grey" size="sm" />}
+          spacing="xxtight"
+          size="xs"
+          weight="md"
+          color="grey"
+          textPlacement="left"
+        >
+          <Translate
+            zh_hant="查看鏈上紀錄"
+            zh_hans="查看链上纪录"
+            en="View on-chain records"
+          />
+        </TextIcon>
+      </Button>
+    )
   }
 
   const StateIcon = () => {

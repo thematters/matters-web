@@ -53,6 +53,10 @@ const fragments = {
         }
       }
       message
+      blockchainTx {
+        chain
+        txHash
+      }
     }
     ${UserDigest.Mini.fragments.user}
     ${ArticleDigestTitle.fragments.article}
@@ -72,6 +76,7 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
     target,
     message,
     createdAt,
+    blockchainTx,
   } = tx
 
   const isViewerSender = sender && viewer.id === sender.id
@@ -146,7 +151,11 @@ const BaseTransaction = ({ tx }: TransactionProps) => {
 
           <section className="right">
             <Amount amount={amount} currency={currency} state={state} />
-            <State state={state} message={message} />
+            <State
+              state={state}
+              message={message}
+              blockchainTx={blockchainTx}
+            />
           </section>
         </section>
 
