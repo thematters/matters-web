@@ -1,7 +1,9 @@
 import { useQuery } from '@apollo/react-hooks'
+import { BigNumber } from 'ethers'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
-import { useContext, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
+import { useAccount, useDisconnect, useNetwork, useSwitchNetwork } from 'wagmi'
 
 import {
   Button,
@@ -9,11 +11,16 @@ import {
   Form,
   IconExternalLink16,
   IconFiatCurrency40,
+  IconInfo24,
   IconLikeCoin40,
+  IconUSDTActive40,
   LanguageContext,
   Spinner,
   TextIcon,
   Translate,
+  useAllowanceUSDT,
+  useApproveUSDT,
+  useBalanceUSDT,
   useMutation,
   ViewerContext,
 } from '~/components'
@@ -21,11 +28,13 @@ import PAY_TO from '~/components/GQL/mutations/payTo'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
 
 import {
+  GUIDE_LINKS,
   PAYMENT_CURRENCY as CURRENCY,
   PAYMENT_MAXIMUM_PAYTO_AMOUNT,
 } from '~/common/enums'
 import {
   formatAmount,
+  maskAddress,
   translate,
   validateCurrency,
   validateDonationAmount,
@@ -34,6 +43,7 @@ import {
 import CivicLikerButton from './CivicLikerButton'
 import { NoLikerIdButton, NoLikerIdMessage } from './NoLiker'
 import styles from './styles.css'
+import WhyPolygonDialog from './WhyPolygonDialog'
 
 import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
 import {
@@ -70,11 +80,13 @@ interface FormValues {
 }
 
 const AMOUNT_DEFAULT = {
+  [CURRENCY.USDT]: 3.0,
   [CURRENCY.HKD]: 10,
-  [CURRENCY.LIKE]: 166,
+  [CURRENCY.LIKE]: 100,
 }
 
 const AMOUNT_OPTIONS = {
+  [CURRENCY.USDT]: [1.0, 3.0, 5.0, 10.0, 20.0, 35.0],
   [CURRENCY.HKD]: [5, 10, 30, 50, 100, 300],
   [CURRENCY.LIKE]: [50, 100, 150, 500, 1000, 1500],
 }
@@ -93,6 +105,19 @@ const SetAmount: React.FC<FormProps> = ({
 
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
+  const { address } = useAccount()
+  const { disconnect } = useDisconnect()
+  const { chain } = useNetwork()
+  const { chains, switchNetwork } = useSwitchNetwork()
+
+  const isUnsupportedNetwork = !!chain?.unsupported
+  const targetChainName = chains[0]?.name
+  const targetChainId = chains[0]?.id
+  const switchToTargetNetwork = async () => {
+    if (!switchNetwork) return
+
+    switchNetwork(targetChainId)
+  }
 
   const [fixed] = useState<boolean>(true)
   const [locked, setLocked] = useState<boolean>(false)
@@ -106,8 +131,33 @@ const SetAmount: React.FC<FormProps> = ({
   const { data, loading } = useQuery<WalletBalance>(WALLET_BALANCE, {
     fetchPolicy: 'network-only',
   })
+
+  const { data: allowanceData } = useAllowanceUSDT()
+  const {
+    data: approveData,
+    isLoading: approving,
+    write: approveWrite,
+  } = useApproveUSDT()
+  const { data: balanceUSDTData } = useBalanceUSDT({})
+
+  const allowanceUSDT = allowanceData || BigNumber.from('0')
+  const balanceUSDT = parseFloat(balanceUSDTData?.formatted || '0')
   const balanceHKD = data?.viewer?.wallet.balance.HKD || 0
   const balanceLike = data?.viewer?.liker.total || 0
+
+  useEffect(() => {
+    if (!address && defaultCurrency === CURRENCY.USDT) {
+      switchToCurrencyChoice()
+    }
+  }, [address])
+
+  useEffect(() => {
+    ;(async () => {
+      if (approveData) {
+        await approveData.wait()
+      }
+    })()
+  }, [approveData])
 
   const {
     errors,
@@ -159,56 +209,121 @@ const SetAmount: React.FC<FormProps> = ({
     },
   })
 
+  const isUSDT = values.currency === CURRENCY.USDT
   const isHKD = values.currency === CURRENCY.HKD
   const isLike = values.currency === CURRENCY.LIKE
   const canPayLike = isLike && !!viewer.liker.likerId
   const canReceiveLike = isLike && !!recipient.liker.likerId
-  const canProcess = isHKD || (canPayLike && canReceiveLike)
+  const canProcess = isUSDT || isHKD || (canPayLike && canReceiveLike)
   const maxAmount = isLike ? Infinity : PAYMENT_MAXIMUM_PAYTO_AMOUNT.HKD
   const isBalanceInsufficient =
-    (isHKD ? balanceHKD : balanceLike) < (values.customAmount || values.amount)
+    (isUSDT ? balanceUSDT : isHKD ? balanceHKD : balanceLike) <
+    (values.customAmount || values.amount)
+
+  const isConnectedAddress =
+    viewer.info.ethAddress?.toLowerCase() === address?.toLowerCase()
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit} noBackground>
       <section className="set-amount-change-support-way">
-        {isHKD && (
-          <TextIcon
-            icon={<IconFiatCurrency40 size="md" />}
-            size="md"
-            spacing="xtight"
-            weight="md"
-          >
-            <Translate zh_hant="法幣 HKD" zh_hans="法币 HKD" en="HKD" />
-          </TextIcon>
-        )}
-        {isLike && (
-          <TextIcon
-            icon={<IconLikeCoin40 size="md" />}
-            size="md"
-            spacing="xtight"
-            weight="md"
-          >
-            LikeCoin
-          </TextIcon>
-        )}
-        <span className="button">
-          <Button onClick={switchToCurrencyChoice}>
-            <TextIcon size="xs" textDecoration="underline" color="grey-dark">
-              <Translate
-                zh_hant="更改支持方式"
-                zh_hans="更改支持方式"
-                en="Change"
-              />
+        <section className="left">
+          {isUSDT && (
+            <TextIcon
+              icon={<IconUSDTActive40 size="md" />}
+              size="md"
+              spacing="xtight"
+              weight="md"
+            >
+              <Translate zh_hant="USDT" zh_hans="USDT" en="USDT" />
             </TextIcon>
-          </Button>
-        </span>
+          )}
+          {isHKD && (
+            <TextIcon
+              icon={<IconFiatCurrency40 size="md" />}
+              size="md"
+              spacing="xtight"
+              weight="md"
+            >
+              <Translate zh_hant="法幣 HKD" zh_hans="法币 HKD" en="HKD" />
+            </TextIcon>
+          )}
+          {isLike && (
+            <TextIcon
+              icon={<IconLikeCoin40 size="md" />}
+              size="md"
+              spacing="xtight"
+              weight="md"
+            >
+              LikeCoin
+            </TextIcon>
+          )}
+          <span className="button">
+            <Button onClick={switchToCurrencyChoice}>
+              <TextIcon size="xs" textDecoration="underline" color="grey-dark">
+                <Translate
+                  zh_hant="更改支持方式"
+                  zh_hans="更改支持方式"
+                  en="Change"
+                />
+              </TextIcon>
+            </Button>
+          </span>
+        </section>
+        <section className="right">
+          {isUSDT && !isConnectedAddress && (
+            <Button onClick={() => disconnect()}>
+              <TextIcon size="xs" textDecoration="underline" color="grey-dark">
+                <Translate
+                  zh_hant="切換錢包地址"
+                  zh_hans="切换钱包地址"
+                  en="Change Address"
+                />
+              </TextIcon>
+            </Button>
+          )}
+          {isUSDT && isConnectedAddress && (
+            <>
+              <>
+                {isUnsupportedNetwork ? (
+                  <Button onClick={switchToTargetNetwork}>
+                    <TextIcon
+                      size="xs"
+                      textDecoration="underline"
+                      color="grey-dark"
+                    >
+                      <Translate
+                        zh_hant="切換到 "
+                        zh_hans="切换到 "
+                        en="Switch to "
+                      />
+                      {targetChainName}
+                    </TextIcon>
+                  </Button>
+                ) : (
+                  <TextIcon size="xs" color="black">
+                    {targetChainName}
+                  </TextIcon>
+                )}
+              </>
+
+              <WhyPolygonDialog>
+                {({ openDialog }) => (
+                  <Button onClick={openDialog}>
+                    <TextIcon icon={<IconInfo24 size="md" color="grey" />} />
+                  </Button>
+                )}
+              </WhyPolygonDialog>
+            </>
+          )}
+        </section>
       </section>
 
       <section className="set-amount-balance">
         <span className="left">
-          <Translate zh_hant="餘額" zh_hans="余额" en="Balance" />
-          &nbsp;{isHKD && formatAmount(balanceHKD)}
-          {isLike && formatAmount(balanceLike, 0)}
+          <Translate zh_hant="餘額 " zh_hans="余额 " en="Balance " />
+          {isUSDT && <span>{formatAmount(balanceUSDT)} USDT</span>}
+          {isHKD && <span>{formatAmount(balanceHKD)} HKD</span>}
+          {isLike && <span>{formatAmount(balanceLike, 0)} LikeCoin</span>}
         </span>
         {isHKD && (
           <Button onClick={switchToAddCredit}>
@@ -230,12 +345,23 @@ const SetAmount: React.FC<FormProps> = ({
             </TextIcon>
           </Button>
         )}
+        {isUSDT && balanceUSDT <= 0 && (
+          <a href={GUIDE_LINKS.payment} target="_blank">
+            <TextIcon size="xs" textDecoration="underline" color="grey-dark">
+              <Translate
+                zh_hant="如何移轉資金到 Polygon？"
+                zh_hans="如何移转资金到 Polygon？"
+                en="How to transfer USDT to Polygon?"
+              />
+            </TextIcon>
+          </a>
+        )}
       </section>
 
       {fixed && canProcess && (
         <Form.AmountRadioInput
           currency={values.currency}
-          balance={isHKD ? balanceHKD : balanceLike}
+          balance={isUSDT ? balanceUSDT : isHKD ? balanceHKD : balanceLike}
           amounts={AMOUNT_OPTIONS}
           name="amount"
           disabled={locked}
@@ -325,7 +451,7 @@ const SetAmount: React.FC<FormProps> = ({
       <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
 
       <Dialog.Footer>
-        {canProcess && !locked && (
+        {canProcess && !isUSDT && !locked && (
           <>
             {isLike && recipient.liker.likerId && (
               <CivicLikerButton likerId={recipient.liker.likerId} />
@@ -353,6 +479,95 @@ const SetAmount: React.FC<FormProps> = ({
                 <Translate id="nextStep" />
               </Dialog.Footer.Button>
             )}
+          </>
+        )}
+
+        {isUSDT && (
+          <>
+            {!isConnectedAddress && (
+              <>
+                <Dialog.Footer.Button
+                  bgColor="green"
+                  textColor="white"
+                  onClick={() => {
+                    disconnect()
+                  }}
+                >
+                  <Translate
+                    zh_hant="重新連接錢包"
+                    zh_hans="重新连接钱包"
+                    en="Reconnect Wallet"
+                  />
+                </Dialog.Footer.Button>
+
+                <p className="set-amount-reconnect-footer">
+                  <Translate
+                    zh_hant="請連接帳戶的綁定錢包 "
+                    zh_hans="请连接帐户的绑定钱包 "
+                    en="Please connect to your account wallet "
+                  />
+                  <span className="address">
+                    {maskAddress(viewer.info.ethAddress || '')}
+                  </span>
+                </p>
+                <style jsx>{styles}</style>
+              </>
+            )}
+
+            {isConnectedAddress && isUnsupportedNetwork && (
+              <Dialog.Footer.Button
+                bgColor="green"
+                textColor="white"
+                onClick={() => {
+                  switchToTargetNetwork()
+                }}
+              >
+                <Translate
+                  zh_hant="切換到 "
+                  zh_hans="切换到 "
+                  en="Switch to "
+                />
+                {targetChainName}
+              </Dialog.Footer.Button>
+            )}
+
+            {isConnectedAddress &&
+              !isUnsupportedNetwork &&
+              allowanceUSDT.lte(0) && (
+                <>
+                  <Dialog.Footer.Button
+                    bgColor="green"
+                    textColor="white"
+                    loading={approving}
+                    onClick={() => {
+                      if (approveWrite) {
+                        approveWrite()
+                      }
+                    }}
+                  >
+                    <Translate
+                      zh_hant="授權 USDT 支付"
+                      zh_hans="授权 USDT 支付"
+                      en="Approve USDT"
+                    />
+                  </Dialog.Footer.Button>
+                </>
+              )}
+
+            {isConnectedAddress &&
+              !isUnsupportedNetwork &&
+              allowanceUSDT.gt(0) && (
+                <Dialog.Footer.Button
+                  type="submit"
+                  form={formId}
+                  disabled={!isValid || isSubmitting || isBalanceInsufficient}
+                  bgColor="green"
+                  textColor="white"
+                  loading={isSubmitting}
+                >
+                  <Translate id="nextStep" />
+                </Dialog.Footer.Button>
+              )}
           </>
         )}
 

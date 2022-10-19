@@ -1,6 +1,6 @@
 import { Button, IconIncome24, TextIcon, Translate } from '~/components'
 
-import { PATHS } from '@/src/common/enums'
+import { PATHS } from '~/common/enums'
 
 import styles from './styles.css'
 

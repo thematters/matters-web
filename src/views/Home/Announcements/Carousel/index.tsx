@@ -163,9 +163,7 @@ const Carousel = ({
                       size="540w"
                       smUpSize="1080w"
                     />
-                    <h3>
-                      {hasTranslaton ? translatedItem.title : item.title}
-                    </h3>
+                    <h3>{hasTranslaton ? translatedItem.title : item.title}</h3>
                     <p>
                       {hasTranslaton ? translatedItem.content : item.content}
                     </p>

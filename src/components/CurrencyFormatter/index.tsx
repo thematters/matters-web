@@ -1,26 +1,26 @@
 import styles from './styles.css'
 
 interface Props {
-  currency: number
-  currencyCode: string
-  subCurrency?: number
-  subCurrencyCode?: string
+  value: number | string
+  currency: string
+  subValue?: number | string
+  subCurrency?: string
 }
 
 export const CurrencyFormatter: React.FC<Props> = ({
+  value,
   currency,
-  currencyCode,
+  subValue,
   subCurrency,
-  subCurrencyCode,
 }) => {
   return (
     <span className="currencyFormatter">
       <span className="currency">
-        {currencyCode}&nbsp;{currency}
+        {currency}&nbsp;{value}
       </span>
       {subCurrency && (
         <span className="subCurrency">
-          ≈&nbsp;{subCurrencyCode}&nbsp;{subCurrency}
+          ≈&nbsp;{subCurrency}&nbsp;{subValue}
         </span>
       )}
       <style jsx>{styles}</style>

@@ -58,7 +58,7 @@ import('@sentry/browser').then((Sentry) => {
 
 // WAGMI
 const wagmiClient = createClient({
-  autoConnect: false,
+  autoConnect: true,
   connectors: [
     new MetaMaskConnector({ chains }),
     new WalletConnectConnector({

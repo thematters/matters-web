@@ -23,7 +23,7 @@ import styles from './styles.css'
 
 interface BaseOptionProps {
   currency: CURRENCY
-  balance?: number
+  balance?: number | string
   name: string
 }
 

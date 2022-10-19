@@ -13,7 +13,7 @@ import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
 
 import { PAYMENT_MINIMAL_PAYOUT_AMOUNT } from '~/common/enums'
 
-import { FiatCurrency, LikeCoin } from './Balance'
+import { FiatCurrencyBalance, LikeCoinBalance, USDTBalance } from './Balance'
 import PaymentPassword from './PaymentPassword'
 import PaymentPointer from './PaymentPointer'
 import styles from './styles.css'
@@ -61,13 +61,13 @@ const Wallet = () => {
         <TotalAssets />
 
         <section className="assetsContainer">
-          <FiatCurrency
+          <FiatCurrencyBalance
             balanceHKD={balanceHKD}
             canPayout={canPayout}
             hasStripeAccount={hasStripeAccount}
           />
-          <hr className="divider" />
-          <LikeCoin />
+          <LikeCoinBalance />
+          <USDTBalance />
         </section>
 
         <Form.List>

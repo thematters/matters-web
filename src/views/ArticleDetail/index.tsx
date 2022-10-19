@@ -321,6 +321,7 @@ const BaseArticleDetail = ({
 
         <Toolbar
           article={article}
+          articleDetails={article}
           translated={translated}
           translatedLanguage={translatedLanguage}
           privateFetched={privateFetched}

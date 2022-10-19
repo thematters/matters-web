@@ -8,6 +8,8 @@ export default gql`
     $recipientId: ID!
     $targetId: ID
     $password: String
+    $chain: Chain
+    $txHash: String
   ) {
     payTo(
       input: {
@@ -17,6 +19,8 @@ export default gql`
         recipientId: $recipientId
         targetId: $targetId
         password: $password
+        chain: $chain
+        txHash: $txHash
       }
     ) {
       transaction {
