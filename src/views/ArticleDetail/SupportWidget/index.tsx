@@ -4,6 +4,7 @@ import { CircleDigest, Translate } from '~/components'
 
 import { analytics } from '~/common/utils'
 
+import Animation from './Animation'
 import DonationButton from './DonationButton'
 import Donators from './Donators'
 import { fragments } from './gql'
@@ -31,7 +32,7 @@ const SupportWidget = ({ article }: DonationProps) => {
             article={article}
           />
         </section>
-
+        <Animation />
         <p>
           <Translate
             zh_hant="喜歡我的文章嗎？"
