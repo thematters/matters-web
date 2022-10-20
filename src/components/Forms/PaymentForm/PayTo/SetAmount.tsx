@@ -384,7 +384,7 @@ const SetAmount: React.FC<FormProps> = ({
           balance={isUSDT ? balanceUSDT : isHKD ? balanceHKD : balanceLike}
           amounts={AMOUNT_OPTIONS}
           name="amount"
-          disabled={locked || !isConnectedAddress}
+          disabled={locked || (isUSDT && !isConnectedAddress)}
           value={values.amount}
           error={errors.amount}
           onBlur={handleBlur}
@@ -404,7 +404,7 @@ const SetAmount: React.FC<FormProps> = ({
       {canProcess && (
         <section className="set-amount-custom-amount-input">
           <input
-            disabled={locked || !isConnectedAddress}
+            disabled={locked || (isUSDT && !isConnectedAddress)}
             type="number"
             name="customAmount"
             min={0}
