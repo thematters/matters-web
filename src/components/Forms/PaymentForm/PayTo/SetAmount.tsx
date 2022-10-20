@@ -431,8 +431,10 @@ const SetAmount: React.FC<FormProps> = ({
               await setFieldValue('customAmount', value, false)
               await setFieldValue('amount', 0, true)
 
+              // correct the input value if not equal
               const $el = customInputRef.current
-              if ($el) {
+              const rawValue = parseFloat(e.target.value)
+              if ($el && rawValue !== value) {
                 $el.value = value <= 0 ? '' : value
                 $el.type = 'text'
                 $el.setSelectionRange($el.value.length, $el.value.length)
