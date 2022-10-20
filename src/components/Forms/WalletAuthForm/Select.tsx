@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react'
-import { useAccount, useConnect } from 'wagmi'
+import { useAccount, useConnect, useDisconnect } from 'wagmi'
 
 import {
   Dialog,
@@ -7,7 +7,6 @@ import {
   IconMetaMask24,
   IconSpinner16,
   IconWalletConnect24,
-  // LanguageContext,
   Layout,
   Spacer,
   TextIcon,
@@ -15,10 +14,7 @@ import {
   ViewerContext,
 } from '~/components'
 
-import {
-  analytics,
-  // translate,
-} from '~/common/utils'
+import { analytics } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -69,31 +65,21 @@ const Select: React.FC<FormProps> = ({
   back,
 }) => {
   const viewer = useContext(ViewerContext)
-  // const { lang } = useContext(LanguageContext)
 
   const formId = 'wallet-auth-select-form'
   const fieldMsgId = 'wall-auth-select-msg'
   const isInPage = purpose === 'page'
   const isConnect = type === 'connect'
 
+  const { disconnect } = useDisconnect()
   const {
-    // activeConnector,
     connectors,
     connect,
     error: connectError,
-    isConnecting,
     pendingConnector,
   } = useConnect()
-  const { data: accountData } = useAccount()
-
-  const account = accountData?.address
+  const { address: account, isConnecting } = useAccount()
   const errorMessage = connectError?.message
-
-  useEffect(() => {
-    if (!account) return
-
-    submitCallback()
-  }, [account])
 
   const injectedConnector = connectors.find((c) => c.id === 'metaMask')
   const walletConnectConnector = connectors.find(
@@ -103,6 +89,22 @@ const Select: React.FC<FormProps> = ({
     isConnecting && pendingConnector?.id === injectedConnector?.id
   const isWalletConnectLoading =
     isConnecting && pendingConnector?.id === walletConnectConnector?.id
+
+  // auto switch to next step if account is connected
+  useEffect(() => {
+    if (!account) return
+
+    submitCallback()
+  }, [account])
+
+  // disconnect before go back to previous step
+  const onBack = () => {
+    disconnect()
+
+    if (back) {
+      back()
+    }
+  }
 
   const Intro = () => {
     if (!isConnect) return null
@@ -163,7 +165,7 @@ const Select: React.FC<FormProps> = ({
               analytics.trackEvent('click_button', {
                 type: 'connectorMetaMask',
               })
-              connect(injectedConnector)
+              connect({ connector: injectedConnector })
             }}
             right={isMetaMaskLoading ? <IconSpinner16 color="grey" /> : null}
           />
@@ -183,7 +185,7 @@ const Select: React.FC<FormProps> = ({
             analytics.trackEvent('click_button', {
               type: 'connectorWalletConnect',
             })
-            connect(walletConnectConnector)
+            connect({ connector: walletConnectConnector })
           }}
           right={isWalletConnectLoading ? <IconSpinner16 color="grey" /> : null}
         />
@@ -208,7 +210,7 @@ const Select: React.FC<FormProps> = ({
     return (
       <>
         <Layout.Header
-          left={<Layout.Header.BackButton onClick={back} />}
+          left={<Layout.Header.BackButton onClick={onBack} />}
           right={
             <Layout.Header.Title
               id={isConnect ? 'loginWithWallet' : 'authEntries'}
@@ -227,7 +229,9 @@ const Select: React.FC<FormProps> = ({
     <>
       {closeDialog && (
         <Dialog.Header
-          leftButton={back ? <Dialog.Header.BackButton onClick={back} /> : null}
+          leftButton={
+            back ? <Dialog.Header.BackButton onClick={onBack} /> : null
+          }
           title={
             <Translate id={isConnect ? 'loginWithWallet' : 'authEntries'} />
           }

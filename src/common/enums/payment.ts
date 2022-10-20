@@ -29,6 +29,11 @@ export enum PAYMENT_MAXIMUM_CIRCLE_AMOUNT {
 export enum PAYMENT_CURRENCY {
   HKD = 'HKD',
   LIKE = 'LIKE',
+  USDT = 'USDT',
+}
+
+export enum CHAIN {
+  POLYGON = 'Polygon',
 }
 
 export const PLATFORM_FEE = {

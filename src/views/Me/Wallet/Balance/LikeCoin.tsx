@@ -14,6 +14,7 @@ import {
 } from '~/components'
 
 import { PATHS } from '~/common/enums'
+import { formatAmount } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -43,7 +44,7 @@ const Wrapper: React.FC = ({ children }) => (
   </section>
 )
 
-export const LikeCoin = () => {
+export const LikeCoinBalance = () => {
   const viewer = useContext(ViewerContext)
 
   const likerId = viewer.liker.likerId
@@ -93,7 +94,7 @@ export const LikeCoin = () => {
   if (likerId) {
     return (
       <Wrapper>
-        <CurrencyFormatter currency={total} currencyCode={'LIKE'} />
+        <CurrencyFormatter value={formatAmount(total, 0)} currency="LIKE" />
       </Wrapper>
     )
   }

@@ -14,8 +14,11 @@ import {
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
+import { formatAmount } from '~/common/utils'
 
 import styles from './styles.css'
+import Tips from './Tips'
+import USDTChoice from './USDTChoice'
 
 import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
 import { PayTo_payTo_transaction as PayToTx } from '~/components/GQL/mutations/__generated__/PayTo'
@@ -38,6 +41,7 @@ interface FormProps {
   recipient: UserDonationRecipient
   submitCallback: (values: SetAmountCallbackValues) => void
   switchToSetAmount: (c: CURRENCY) => void
+  switchToWalletSelect: () => void
   targetId: string
 }
 
@@ -48,33 +52,43 @@ const CurrencyChoice: React.FC<FormProps> = ({
   recipient,
   submitCallback,
   switchToSetAmount,
+  switchToWalletSelect,
   targetId,
 }) => {
   // HKD balance
   const { data, loading } = useQuery<WalletBalance>(WALLET_BALANCE, {
     fetchPolicy: 'network-only',
   })
+
   const balanceHKD = data?.viewer?.wallet.balance.HKD || 0
   const balanceLike = data?.viewer?.liker.total || 0
-
-  // const isHKD = values.currency === CURRENCY.HKD
-  // const isLike = values.currency === CURRENCY.LIKE
-  // const canPayLike = isLike && !!viewer.liker.likerId
-  // const canReceiveLike = isLike && !!recipient.liker.likerId
 
   const InnerForm = (
     <section className="wrapper">
       <section className="header">
-        <span>選擇支持</span>
+        <span>
+          <Translate zh_hant="選擇支持" zh_hans="选择支持" en="Support " />
+        </span>
         <span className="userInfo">
           <Avatar user={recipient} size="xs" />
           <span className="userName">{recipient.displayName}</span>
         </span>
-        <span>的方式：</span>
+        <span>
+          <Translate zh_hant="的方式" zh_hans="的方式" en="with: " />
+        </span>
       </section>
+
+      {/* USDT */}
+      <USDTChoice
+        recipient={recipient}
+        switchToSetAmount={switchToSetAmount}
+        switchToWalletSelect={switchToWalletSelect}
+      />
+
+      {/* HKD */}
       <section
         role="button"
-        className="item"
+        className="item clickable"
         onClick={() => {
           switchToSetAmount(CURRENCY.HKD)
         }}
@@ -86,11 +100,13 @@ const CurrencyChoice: React.FC<FormProps> = ({
         >
           <Translate zh_hant="法幣" zh_hans="法币" en="Fiat Currency" />
         </TextIcon>
-        <CurrencyFormatter currency={balanceHKD} currencyCode={'HKD'} />
+        <CurrencyFormatter value={formatAmount(balanceHKD)} currency="HKD" />
       </section>
+
+      {/* LikeCoin */}
       <section
         role="button"
-        className="item"
+        className="item clickable"
         onClick={() => {
           switchToSetAmount(CURRENCY.LIKE)
         }}
@@ -102,8 +118,14 @@ const CurrencyChoice: React.FC<FormProps> = ({
         >
           <Translate zh_hant="LikeCoin" zh_hans="LikeCoin" en="LikeCoin" />
         </TextIcon>
-        <CurrencyFormatter currency={balanceLike} currencyCode={'LIKE'} />
+        <CurrencyFormatter
+          value={formatAmount(balanceLike, 0)}
+          currency="LIKE"
+        />
       </section>
+
+      <Tips />
+
       <style jsx>{styles}</style>
     </section>
   )

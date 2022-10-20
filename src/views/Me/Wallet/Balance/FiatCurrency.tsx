@@ -12,7 +12,7 @@ import {
   Translate,
 } from '~/components'
 
-import { analytics } from '~/common/utils'
+import { analytics, formatAmount } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -81,7 +81,7 @@ const PayoutItem = ({
   )
 }
 
-export const FiatCurrency: React.FC<FiatCurrencyProps> = ({
+export const FiatCurrencyBalance: React.FC<FiatCurrencyProps> = ({
   balanceHKD,
   canPayout,
   hasStripeAccount,
@@ -150,8 +150,8 @@ export const FiatCurrency: React.FC<FiatCurrencyProps> = ({
                     textPlacement="left"
                   >
                     <CurrencyFormatter
-                      currency={balanceHKD}
-                      currencyCode={'HKD'}
+                      value={formatAmount(balanceHKD)}
+                      currency="HKD"
                     />
                   </TextIcon>
                   <style jsx>{styles}</style>

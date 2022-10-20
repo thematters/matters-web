@@ -18,11 +18,13 @@ import CommentBar from './CommentBar'
 import DonationButton from './DonationButton'
 import styles from './styles.css'
 
+import { ArticleDetailPublic_article } from '../__generated__/ArticleDetailPublic'
 import { ToolbarArticlePrivate } from './__generated__/ToolbarArticlePrivate'
 import { ToolbarArticlePublic } from './__generated__/ToolbarArticlePublic'
 
 export type ToolbarProps = {
   article: ToolbarArticlePublic & Partial<ToolbarArticlePrivate>
+  articleDetails: ArticleDetailPublic_article
   translated: boolean
   translatedLanguage?: string | null
   privateFetched: boolean
@@ -66,6 +68,7 @@ const fragments = {
 
 const Toolbar = ({
   article,
+  articleDetails,
   translated,
   translatedLanguage,
   privateFetched,
@@ -91,7 +94,11 @@ const Toolbar = ({
           />
         </ReCaptchaProvider>
 
-        <DonationButton article={article} disabled={lock} />
+        <DonationButton
+          article={article}
+          disabled={lock}
+          articleDetail={articleDetails}
+        />
 
         <section className="comment-bar">
           <CommentBar article={article} disabled={lock} />

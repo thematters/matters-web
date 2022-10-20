@@ -16,10 +16,12 @@ import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 import { PayTo_payTo_transaction as PayToTx } from '~/components/GQL/mutations/__generated__/PayTo'
+import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
 import { UserDonationRecipient } from './__generated__/UserDonationRecipient'
 
 type Step =
   | 'currencyChoice'
+  | 'walletSelect'
   | 'setAmount'
   | 'addCredit'
   | 'complete'
@@ -43,6 +45,7 @@ interface DonationDialogProps {
   completeCallback?: () => void
   defaultStep?: Step
   recipient: UserDonationRecipient
+  article: ArticleDetailPublic_article
   targetId: string
 }
 
@@ -56,8 +59,13 @@ const DynamicPayToFormConfirm = dynamic(
 )
 
 const DynamicPayToFormCurrencyChoice = dynamic(
-  () => import('~/components/Forms/PaymentForm/PayTo/CurrencyChoice'),
+  () => import('~/components/Forms/PaymentForm/PayTo/CurrencyChoice/index'),
   { loading: Spinner }
+)
+
+const DynamicWalletAuthFormSelect = dynamic(
+  () => import('~/components/Forms/WalletAuthForm/Select'),
+  { ssr: false, loading: Spinner }
 )
 
 const DynamicPayToFormSetAmount = dynamic(
@@ -89,6 +97,9 @@ const fragments = {
         likerId
         civicLiker
       }
+      info {
+        ethAddress
+      }
       ...UserDigestMiniUser
     }
     ${UserDigest.Mini.fragments.user}
@@ -101,6 +112,7 @@ const BaseDonationDialog = ({
   defaultStep = 'currencyChoice',
   recipient,
   targetId,
+  article,
 }: DonationDialogProps) => {
   const viewer = useContext(ViewerContext)
 
@@ -133,6 +145,8 @@ const BaseDonationDialog = ({
       forward(
         viewer.status?.hasPaymentPassword ? 'confirm' : 'setPaymentPassword'
       )
+    } else if (values.currency === CURRENCY.USDT) {
+      forward('confirm')
     }
   }
 
@@ -147,6 +161,12 @@ const BaseDonationDialog = ({
       <Translate zh_hant="回到支持" zh_hans="回到支持" />
     </Dialog.Footer.Button>
   )
+
+  /**
+   * Wallet
+   */
+
+  const isWalletSelect = currStep === 'walletSelect'
 
   /**
    * Donation
@@ -189,7 +209,7 @@ const BaseDonationDialog = ({
         onDismiss={closeDialog}
         fixedHeight
       >
-        {!isProcessing && (
+        {!isProcessing && !isWalletSelect && (
           <Dialog.Header
             closeDialog={closeDialog}
             leftButton={
@@ -227,7 +247,23 @@ const BaseDonationDialog = ({
               setCurrency(c)
               forward('setAmount')
             }}
+            switchToWalletSelect={() => {
+              forward('walletSelect')
+            }}
             targetId={targetId}
+          />
+        )}
+
+        {isWalletSelect && (
+          <DynamicWalletAuthFormSelect
+            purpose="dialog"
+            submitCallback={() => {
+              forward('currencyChoice')
+            }}
+            back={() => {
+              forward('currencyChoice')
+            }}
+            closeDialog={closeDialog}
           />
         )}
 
@@ -256,6 +292,7 @@ const BaseDonationDialog = ({
             switchToSetAmount={() => forward('setAmount')}
             submitCallback={() => forward('processing')}
             switchToResetPassword={() => forward('resetPassword')}
+            switchToCurrencyChoice={() => forward('currencyChoice')}
             targetId={targetId}
           />
         )}
@@ -269,6 +306,10 @@ const BaseDonationDialog = ({
             nextStep={() => forward('complete')}
             txId={payToTx?.id || ''}
             windowRef={windowRef}
+            article={article}
+            targetId={targetId}
+            switchToConfirm={() => forward('confirm')}
+            switchToCurrencyChoice={() => forward('currencyChoice')}
           />
         )}
 

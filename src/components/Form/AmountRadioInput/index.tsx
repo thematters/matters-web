@@ -1,5 +1,6 @@
 import VisuallyHidden from '@reach/visually-hidden'
 import classNames from 'classnames'
+import { useEffect, useRef } from 'react'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { formatAmount } from '~/common/utils'
@@ -23,7 +24,7 @@ import styles from './styles.css'
 
 interface BaseOptionProps {
   currency: CURRENCY
-  balance?: number
+  balance?: number | string
   name: string
 }
 
@@ -57,21 +58,33 @@ const AmountOption: React.FC<AmountOptionProps> = ({
   disabled,
   ...inputProps
 }) => {
+  const inputRef: React.RefObject<any> = useRef(null)
+
   const fieldId = `field-${name}-${amount}`
 
   const isBalanceInsufficient =
     typeof balance === 'number' ? balance < amount : false
+  const isActive = value === amount
 
   const amountClasses = classNames({
     amount: true,
-    active: value === amount,
+    active: isActive,
     'u-area-disable': disabled || isBalanceInsufficient,
   })
+
+  const decimals = currency === CURRENCY.USDT ? 2 : 0
+
+  useEffect(() => {
+    if (!isActive && inputRef.current) {
+      inputRef.current.blur()
+      inputRef.current.checked = false
+    }
+  }, [isActive])
 
   return (
     <li className={amountClasses}>
       <label htmlFor={fieldId}>
-        {formatAmount(amount, 0)}
+        {formatAmount(amount, decimals)}
 
         <VisuallyHidden>
           <input
@@ -82,9 +95,11 @@ const AmountOption: React.FC<AmountOptionProps> = ({
             name={name}
             value={amount}
             type="radio"
+            ref={inputRef}
           />
         </VisuallyHidden>
       </label>
+
       <style jsx>{styles}</style>
     </li>
   )

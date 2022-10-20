@@ -3,7 +3,7 @@ import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import Link from 'next/link'
 import { useContext, useEffect } from 'react'
-import { useAccount, useSignMessage } from 'wagmi'
+import { useAccount, useDisconnect, useSignMessage } from 'wagmi'
 
 import {
   Dialog,
@@ -108,8 +108,8 @@ const Connect: React.FC<FormProps> = ({
   const [queryEthAddressUser, { data, loading }] =
     useLazyQuery<ETHAddressUser>(ETH_ADDRESS_USER)
 
-  const { data: accountData } = useAccount()
-  const account = accountData?.address
+  const { disconnect } = useDisconnect()
+  const { address: account } = useAccount()
   const { signMessageAsync } = useSignMessage()
 
   // sign up if eth address didn't bind with a user
@@ -124,6 +124,15 @@ const Connect: React.FC<FormProps> = ({
 
     queryEthAddressUser({ variables: { ethAddress: account } })
   }, [account])
+
+  // disconnect before go back to previous step
+  const onBack = () => {
+    disconnect()
+
+    if (back) {
+      back()
+    }
+  }
 
   const {
     values,
@@ -372,7 +381,7 @@ const Connect: React.FC<FormProps> = ({
     return (
       <>
         <Layout.Header
-          left={<Layout.Header.BackButton onClick={back} />}
+          left={<Layout.Header.BackButton onClick={onBack} />}
           right={
             <>
               <Layout.Header.Title id="authEntries" />
@@ -393,7 +402,9 @@ const Connect: React.FC<FormProps> = ({
       {closeDialog && (
         <Dialog.Header
           title="authEntries"
-          leftButton={back ? <Dialog.Header.BackButton onClick={back} /> : null}
+          leftButton={
+            back ? <Dialog.Header.BackButton onClick={onBack} /> : null
+          }
           closeDialog={closeDialog}
           rightButton={SubmitButton}
         />

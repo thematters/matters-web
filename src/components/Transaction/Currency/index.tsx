@@ -1,4 +1,8 @@
-import { IconFiatCurrency40, IconLikeCoin40 } from '~/components/Icon'
+import {
+  IconFiatCurrency40,
+  IconLikeCoin40,
+  IconUSDTActive40,
+} from '~/components/Icon'
 
 import styles from './styles.css'
 
@@ -12,6 +16,9 @@ const Currency = ({ currency }: Props) => {
   const size = 'md'
   return (
     <section className="Currency">
+      {currency === TransactionCurrency.USDT && (
+        <IconUSDTActive40 size={size} />
+      )}
       {currency === TransactionCurrency.HKD && (
         <IconFiatCurrency40 size={size} />
       )}

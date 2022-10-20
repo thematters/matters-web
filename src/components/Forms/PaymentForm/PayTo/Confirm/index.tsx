@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useEffect } from 'react'
+import { useAccount, useNetwork } from 'wagmi'
 
 import {
   Button,
@@ -12,6 +13,7 @@ import {
   TextIcon,
   Translate,
   useMutation,
+  ViewerContext,
 } from '~/components'
 import PAY_TO from '~/components/GQL/mutations/payTo'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
@@ -34,6 +36,7 @@ interface FormProps {
   submitCallback: () => void
   switchToSetAmount: () => void
   switchToResetPassword: () => void
+  switchToCurrencyChoice: () => void
 }
 
 interface FormValues {
@@ -48,9 +51,11 @@ const Confirm: React.FC<FormProps> = ({
   submitCallback,
   switchToSetAmount,
   switchToResetPassword,
+  switchToCurrencyChoice,
 }) => {
   const formId = 'pay-to-confirm-form'
 
+  const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
   const [payTo] = useMutation<PayToMutate>(PAY_TO, undefined, {
     showToast: false,
@@ -59,6 +64,20 @@ const Confirm: React.FC<FormProps> = ({
   const { data, loading } = useQuery<WalletBalance>(WALLET_BALANCE, {
     fetchPolicy: 'network-only',
   })
+
+  const { address } = useAccount()
+  const { chain } = useNetwork()
+  const isUnsupportedNetwork = !!chain?.unsupported
+  const isConnectedAddress =
+    viewer.info.ethAddress?.toLowerCase() === address?.toLowerCase()
+
+  const isUSDT = currency === CURRENCY.USDT
+
+  useEffect(() => {
+    if (isUSDT && (!address || isUnsupportedNetwork || !isConnectedAddress)) {
+      switchToCurrencyChoice()
+    }
+  }, [address, chain])
 
   const {
     errors,
@@ -148,6 +167,8 @@ const Confirm: React.FC<FormProps> = ({
             amount={amount}
             currency={currency}
             recipient={recipient}
+            showLikerID={currency === CURRENCY.LIKE}
+            showEthAddress={currency === CURRENCY.USDT}
           >
             <p>
               <Button onClick={switchToSetAmount}>
@@ -166,7 +187,7 @@ const Confirm: React.FC<FormProps> = ({
             </p>
           </PaymentInfo>
 
-          {!isWalletInsufficient && (
+          {currency === CURRENCY.HKD && !isWalletInsufficient && (
             <>
               <p className="hint">
                 <Translate id="hintPaymentPassword" />
@@ -180,13 +201,24 @@ const Confirm: React.FC<FormProps> = ({
       </Dialog.Content>
 
       <Dialog.Footer>
-        <Dialog.Footer.Button
-          bgColor="white"
-          textColor="grey"
-          onClick={switchToResetPassword}
-        >
-          <Translate id="forgetPassword" />？
-        </Dialog.Footer.Button>
+        {currency === CURRENCY.HKD && (
+          <Dialog.Footer.Button
+            bgColor="white"
+            textColor="grey"
+            onClick={switchToResetPassword}
+          >
+            <Translate id="forgetPassword" />？
+          </Dialog.Footer.Button>
+        )}
+        {currency === CURRENCY.USDT && (
+          <Dialog.Footer.Button
+            bgColor="green"
+            textColor="white"
+            onClick={submitCallback}
+          >
+            <Translate zh_hant="確認送出" zh_hans="确认送出" en="Confirm" />
+          </Dialog.Footer.Button>
+        )}
       </Dialog.Footer>
     </>
   )
