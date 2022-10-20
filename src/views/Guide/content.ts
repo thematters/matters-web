@@ -2,66 +2,183 @@ import { GUIDE_LINKS } from '~/common/enums'
 
 export default {
   zh_hant: /* html */ `
-<p>知道你初來乍到，需要一些指引，所以我們為作者們準備了一份超詳盡的實用指南。</p>
+<p>歡迎來到 Matters.News 馬特市！</p>
 
-<p>如何融入社區？如何找到我想看的作品？如何提取我在 Matters 獲得的寫作收益？想在 Matters 開心創作、交流，以下這兩篇指南，列出了所有你需要的資訊。</p>
+<h2>給寫作者與讀者</h2>
+<p>如果你初來乍到，還在熟悉網站的基本功能，以下有兩份超詳盡的基礎功能指南，你可以在這兩份指南中，瞭解到如何使用編輯器發文、什麼是 IPFS、如何管理自己的創作收入、如何加入更多寫作社群等。</p>
 
-<p><a className="u-link-green" href="${GUIDE_LINKS.readerToolbox}">Matters 讀者工具箱 | 新手必看</a></p>
+<ul>
+  <li>
+    <a className="u-link-green" href="${GUIDE_LINKS.readerToolbox.zh_hant}">Matters 讀者工具箱 | 新手必看</a>
+  </li>
+  <li>
+    <a className="u-link-green" href="${GUIDE_LINKS.authorToolbox.zh_hant}">Matters 作者工具箱 | 新手必看</a>
+  </li>
+</ul>
 
-<p><a className="u-link-green" href="${GUIDE_LINKS.authorToolbox}">Matters 作者工具箱 | 新手必看</a></p>
+<p>其中，標籤與圍爐是 Matters 的兩項特色功能，標籤可以幫助你的文章獲得更多曝光、並找到志同道合的寫作者；圍爐為你提供一個具有私密感的寫作與讀者互動空間。</p>
 
-<p><a className="u-link-green" href="${GUIDE_LINKS.connectWallet}">Matters 加密錢包綁定指南</a></p>
+<ul>
+  <li>
+    <a className="u-link-green" href="${GUIDE_LINKS.tagUsage.zh_hant}">Matters 標籤功能指南</a>
+  </li>
+  <li>
+    <a className="u-link-green" href="${GUIDE_LINKS.circleUsage.zh_hant}">Matters 圍爐指南</a>
+  </li>
+</ul>
 
-<p><a className="u-link-green" href="${GUIDE_LINKS.payment}">Matters 支付指南</a></p>
+<p>Matters 目前尚未推出 app，如果你想要在手機上使用 Matters.News，非常推薦你使用 PWA，功能跟 app 幾乎完全一樣。</p>
 
-<p><a className="u-link-green" href="${GUIDE_LINKS.withdrawal}">Matters 提現指南</a></p>
+<ul>
+  <li>
+    <a className="u-link-green" href="${GUIDE_LINKS.PWA.zh_hant}">Matters 應用下載（PWA）指南</a>
+  </li>
+</ul>
 
-<p><a className="u-link-green" href="${GUIDE_LINKS.tagUsage}">Matters 標籤功能指南</a></p>
+<h2>在 Matters.News 探索 Web3 的世界</h2>
 
-<p><a className="u-link-green" href="${GUIDE_LINKS.circleUsage}">Matters 圍爐指南</a></p>
+<p>Matters.News 致力於探索 Web3 與創作者經濟，我們提供加密錢包註冊與登入的功能。綁定錢包後，也可以使用支付與提現等功能。</p>
 
-<p>如果你還有其他疑問或建議，請寫信到 <a className="u-link-green" href="mailto:ask@matters.news" target="_blank">ask@matters.news</a>，我們會儘快回覆！</p>
+<ul>
+  <li>
+    <a className="u-link-green" href="${GUIDE_LINKS.connectWallet.zh_hant}">Matters 加密錢包指南</a>
+  </li>
+</ul>
+
+<p>Matters.News 的經濟系統支援法幣（港幣）及 USDT、LikeCoin 等虛擬貨幣，歡迎你使用加密貨幣支持優質作者，也可以將獲得的報酬提領出來。</p>
+
+<ul>
+  <li>
+    <a className="u-link-green" href="${GUIDE_LINKS.payment.zh_hant}">Matters 支付與提現指南</a>
+  </li>
+</ul>
+
+<p>好文章不遺漏，我們也支援 RSS 、JSON 閱讀器或 IPNS 兼容的 Planet 閱讀器來訂閱作者。</p>
+
+<ul>
+  <li>
+    <a className="u-link-green" href="${GUIDE_LINKS.RSS.zh_hant}">Matters 內容訂閱使用指南</a>
+  </li>
+</ul>
 `,
   zh_hans: /* html */ `
-<p>知道你初来乍到，需要一些指引，所以我们为作者们准备了一份超详尽的实用指南。</p>
+<p>欢迎来到 Matters.News 马特市！</p>
 
-<p>如何融入社区？如何找到我想看的作品？如何提取我在 Matters 获得的写作收益？想在 Matters 开心创作、交流，以下这两篇指南，列出了所有你需要的信息。</p>
+<h2>给写作者与读者</h2>
+<p>如果你初来乍到，还在熟悉网站的基本功能，以下有两份超详尽的基础功能指南，你可以在这两份指南中，了解到如何使用编辑器发文、什么是 IPFS、如何管理自己的创作收入、如何加入更多写作社群等。</p>
 
-<p><a className="u-link-green" href="${GUIDE_LINKS.readerToolbox}">Matters 读者工具箱 | 新手必看</a></p>
+<ul>
+  <li>
+    <a className="u-link-green" href="${GUIDE_LINKS.readerToolbox.zh_hans}">Matters 读者工具箱 | 新手必看</a>
+  </li>
+  <li>
+    <a className="u-link-green" href="${GUIDE_LINKS.authorToolbox.zh_hans}">Matters 作者工具箱 | 新手必看</a>
+  </li>
+</ul>
 
-<p><a className="u-link-green" href="${GUIDE_LINKS.authorToolbox}">Matters 作者工具箱 | 新手必看</a></p>
+<p>其中，标签与围炉是 Matters 的两项特色功能，标签可以帮助你的文章获得更多曝光、并找到志同道合的写作者；围炉为你提供一个具有私密感的写作与读者互动空间。</p>
 
-<p><a className="u-link-green" href="${GUIDE_LINKS.connectWallet}">Matters 加密钱包绑定指南</a></p>
+<ul>
+  <li>
+    <a className="u-link-green" href="${GUIDE_LINKS.tagUsage.zh_hans}">Matters 标签功能指南</a>
+  </li>
+  <li>
+    <a className="u-link-green" href="${GUIDE_LINKS.circleUsage.zh_hans}">Matters 围炉指南</a>
+  </li>
+</ul>
 
-<p><a className="u-link-green" href="${GUIDE_LINKS.payment}">Matters 支付指南</a></p>
+<p>Matters 目前尚未推出 app，如果你想要在手机上使用 Matters.News，非常推荐你使用 PWA，功能跟 app 几乎完全一样。</p>
 
-<p><a className="u-link-green" href="${GUIDE_LINKS.withdrawal}">Matters 提现指南</a></p>
+<ul>
+  <li>
+    <a className="u-link-green" href="${GUIDE_LINKS.PWA.zh_hans}">Matters 应用下载（PWA）指南</a>
+  </li>
+</ul>
 
-<p><a className="u-link-green" href="${GUIDE_LINKS.tagUsage}">Matters 标签功能指南</a></p>
+<h2>在 Matters.News 探索 Web3 的世界</h2>
 
-<p><a className="u-link-green" href="${GUIDE_LINKS.circleUsage}">Matters 围炉指南</a></p>
+<p>Matters.News 致力于探索 Web3 与创作者经济，我们提供加密钱包注册与登入的功能。绑定钱包后，也可以使用支付与提现等功能。</p>
 
-<p>如果你还有其他疑问或建议，请写信到 <a className="u-link-green" href="mailto:ask@matters.news" target="_blank">ask@matters.news</a>，我们会尽快回复！</p>
+<ul>
+  <li>
+    <a className="u-link-green" href="${GUIDE_LINKS.connectWallet.zh_hans}">Matters 加密钱包指南</a>
+  </li>
+</ul>
+
+<p>Matters.News 的经济系统支援法币（港币）及 USDT、LikeCoin 等虚拟货币，欢迎你使用加密货币支持优质作者，也可以将获得的报酬提领出来。</p>
+
+<ul>
+  <li>
+    <a className="u-link-green" href="${GUIDE_LINKS.payment.zh_hans}">Matters 支付与提现指南</a>
+  </li>
+</ul>
+
+<p>好文章不遗漏，我们也支援 RSS 、JSON 阅读器或 IPNS 兼容的 Planet 阅读器来订阅作者。</p>
+
+<ul>
+  <li>
+    <a className="u-link-green" href="${GUIDE_LINKS.RSS.zh_hans}">Matters 内容订阅使用指南</a>
+  </li>
+</ul>
   `,
-  en: /* html*/ `
-<p>Knowing that you are new here and need some guidance, we have prepared a super detailed practical guide for authors. </p>
+  en: /* html */ `
+<p>Welcome to Matters!</p>
 
-<p>How to integrate into the community? How to find the work I want to read? How can I withdraw my writing income from Matters? If you want to create and communicate happily at Matters, the following two guides list all the information you need. </p>
+<h2>For Creators and Readers</h2>
+<p>If you have just landed in Matterverse, here are two must-read features guidance to help you sail. How to use Matters.News' editor? What is IPFS? How to check your income and balance? How to discover more writing communities and participate in this self-regulated community?</p>
 
-<p><a className="u-link-green" href="${GUIDE_LINKS.readerToolbox}">Matters Reader Toolbox | A must-see for newbies</a></p>
+<ul>
+  <li>
+    <a className="u-link-green" href="${GUIDE_LINKS.readerToolbox.en}">Toolkit for Matters Readers</a>
+  </li>
+  <li>
+    <a className="u-link-green" href="${GUIDE_LINKS.authorToolbox.en}">Toolkit for Matters Creators</a>
+  </li>
+</ul>
 
-<p><a className="u-link-green" href="${GUIDE_LINKS.authorToolbox}">Matters Author Toolbox | A must-see for newbies</a></p>
+<p>Tags and Circle are two outstanding features in Matters.News. Tags help your article exposure find more kindred spirits. With Circle, you could interact with your backer community more closely.</p>
 
-<p><a className="u-link-green" href="${GUIDE_LINKS.connectWallet}">Matters Connecting Wallet Guide</a></p>
+<ul>
+  <li>
+    <a className="u-link-green" href="${GUIDE_LINKS.tagUsage.en}">Features Guidance for Matters Tags</a>
+  </li>
+  <li>
+    <a className="u-link-green" href="${GUIDE_LINKS.circleUsage.en}">Features Guidance for Matters Circle</a>
+  </li>
+</ul>
 
-<p><a className="u-link-green" href="${GUIDE_LINKS.payment}">Matters Payment Guide</a></p>
+<p>Currently, Matters.News is not yet available as an application, so if you want to use Matters on your cell phone, we highly recommend using PWA, which is almost identical to an app.</p>
 
-<p><a className="u-link-green" href="${GUIDE_LINKS.withdrawal}">Matters Withdrawal Guide</a></p>
+<ul>
+  <li>
+    <a className="u-link-green" href="${GUIDE_LINKS.PWA.en}">Install Matters PWA Step by Step</a>
+  </li>
+</ul>
 
-<p><a className="u-link-green" href="${GUIDE_LINKS.tagUsage}">Matters Tag Usage Guide</a></p>
+<h2>Explore Web3 with us in Matters.News</h2>
 
-<p><a className="u-link-green" href="${GUIDE_LINKS.circleUsage}">Matters Circle Guide</a></p>
+<p>Matters.News is dedicated to exploring Web3 and the creator economy ecosystem. We encourage wallet registration and login for on-chain payment and withdrawal functions.</p>
 
-<p>If you have any other questions or suggestions, please write to <a className="u-link-green" href="mailto:ask@matters.news" target="_blank">ask@matters.news</a>, we will reply as soon as possible! </p>
-  `,
+<ul>
+  <li>
+    <a className="u-link-green" href="${GUIDE_LINKS.connectWallet.en}">Using Crypto Wallet on Matters.News</a>
+  </li>
+</ul>
+
+<p>Currently, Matters.News support donation with fiat currency (HKD), crypto currencies USDT and LikeCoin. You can support the creators and collect your reward with above methods.</p>
+
+<ul>
+  <li>
+    <a className="u-link-green" href="${GUIDE_LINKS.payment.en}">How to Withdraw and Process Payment on Matters.News</a>
+  </li>
+</ul>
+
+<p>Matters.News is a writing community based on decentralized technologies with open-sourced codebase. We encourage you to subscribe to your favorite creators with RSS, JSON reader or IPNS compatible Planet reader.</p>
+
+<ul>
+  <li>
+    <a className="u-link-green" href="${GUIDE_LINKS.RSS.en}">Features Guidance for Content Feed Subscription</a>
+  </li>
+</ul>
+`,
 }

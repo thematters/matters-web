@@ -1,7 +1,12 @@
 import { useContext } from 'react'
 import { useAccount } from 'wagmi'
 
-import { Translate, useBalanceUSDT, ViewerContext } from '~/components'
+import {
+  LanguageContext,
+  Translate,
+  useBalanceUSDT,
+  ViewerContext,
+} from '~/components'
 
 import { GUIDE_LINKS } from '~/common/enums'
 
@@ -9,6 +14,7 @@ import styles from './styles.css'
 
 const Tips = () => {
   const viewer = useContext(ViewerContext)
+  const { lang } = useContext(LanguageContext)
   const { address } = useAccount()
   const { data: balanceUSDTData } = useBalanceUSDT({})
 
@@ -26,11 +32,12 @@ const Tips = () => {
           />
           <a
             className="u-link-green"
-            href={GUIDE_LINKS.connectWallet}
+            href={GUIDE_LINKS.connectWallet[lang]}
             target="_blank"
           >
             <Translate zh_hant="教學指南" zh_hans="教学指南" en="tutorial" />
           </a>
+          <Translate zh_hant="" zh_hans="" en="." />
         </p>
 
         <style jsx>{styles}</style>
@@ -43,15 +50,16 @@ const Tips = () => {
           <Translate
             zh_hant="USDT 餘額不正確？參考 "
             zh_hans="USDT 余额不正确？参考 "
-            en="How to send tokens to Polygon? Check the "
+            en="How to transfer funds to Polygon? Check the "
           />
           <a
             className="u-link-green"
-            href={GUIDE_LINKS.payment}
+            href={GUIDE_LINKS.payment[lang]}
             target="_blank"
           >
             <Translate zh_hant="教學指南" zh_hans="教学指南" en="tutorial" />
           </a>
+          <Translate zh_hant="" zh_hans="" en="." />
         </p>
 
         <style jsx>{styles}</style>
@@ -68,11 +76,12 @@ const Tips = () => {
           />
           <a
             className="u-link-green"
-            href={GUIDE_LINKS.payment}
+            href={GUIDE_LINKS.payment[lang]}
             target="_blank"
           >
             <Translate zh_hant="教學指南" zh_hans="教学指南" en="tutorial" />
           </a>
+          <Translate zh_hant="" zh_hans="" en="." />
         </p>
 
         <style jsx>{styles}</style>

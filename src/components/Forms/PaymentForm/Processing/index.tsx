@@ -260,16 +260,9 @@ const USDTProcessingForm: React.FC<Props> = ({
           <section className="hint">
             <p>
               <Translate
-                zh_hant="請在加密錢包內繼續操作"
-                zh_hans="请在加密钱包内继续操作"
-                en="Continue in the wallet."
-              />
-            </p>
-            <p>
-              <Translate
-                zh_hant="完成前請勿關閉此畫面"
-                zh_hans="完成前请勿关闭此画面"
-                en="Do not close the window."
+                zh_hant="請在加密錢包內繼續操作，完成前請勿關閉此畫面"
+                zh_hans="请在加密钱包内继续操作，完成前请勿关闭此画面"
+                en="Continue in the wallet. Do not close the window."
               />
             </p>
           </section>
