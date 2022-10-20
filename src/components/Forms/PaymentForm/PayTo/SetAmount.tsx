@@ -343,7 +343,7 @@ const SetAmount: React.FC<FormProps> = ({
           <Translate zh_hant="餘額 " zh_hans="余额 " en="Balance " />
           {isUSDT && <span>{formatAmount(balanceUSDT)} USDT</span>}
           {isHKD && <span>{formatAmount(balanceHKD)} HKD</span>}
-          {isLike && <span>{formatAmount(balanceLike, 0)} LikeCoin</span>}
+          {isLike && <span>{formatAmount(balanceLike, 0)} LIKE</span>}
         </span>
         {isHKD && (
           <Button onClick={switchToAddCredit}>
@@ -366,12 +366,12 @@ const SetAmount: React.FC<FormProps> = ({
           </Button>
         )}
         {isUSDT && balanceUSDT <= 0 && (
-          <a href={GUIDE_LINKS.payment} target="_blank">
+          <a href={GUIDE_LINKS.payment[lang]} target="_blank">
             <TextIcon size="xs" textDecoration="underline" color="grey-dark">
               <Translate
                 zh_hant="如何移轉資金到 Polygon？"
                 zh_hans="如何移转资金到 Polygon？"
-                en="How to send tokens to Polygon?"
+                en="How to transfer funds to Polygon?"
               />
             </TextIcon>
           </a>
@@ -453,7 +453,7 @@ const SetAmount: React.FC<FormProps> = ({
                 <Translate
                   zh_hant="付款將由 Stripe 處理，讓你的支持不受地域限制"
                   zh_hans="付款将由 Stripe 处理，让你的支持不受地域限制"
-                  en="Payments will be processed by Stripe, so your support is not geo-restricted"
+                  en="Stripe will process your payment, so you can support the author wherever you are."
                 />
               </TextIcon>
             </section>
@@ -589,9 +589,9 @@ const SetAmount: React.FC<FormProps> = ({
                     }}
                   >
                     <Translate
-                      zh_hant="授權 USDT 支付"
-                      zh_hans="授权 USDT 支付"
-                      en="Approve USDT"
+                      zh_hant="前往確認授權"
+                      zh_hans="前往确认授权"
+                      en="Approve to continue"
                     />
                   </Dialog.Footer.Button>
                 </>

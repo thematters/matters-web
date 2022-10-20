@@ -1,4 +1,11 @@
-import { Dialog, Translate, useDialogSwitch } from '~/components'
+import { useContext } from 'react'
+
+import {
+  Dialog,
+  LanguageContext,
+  Translate,
+  useDialogSwitch,
+} from '~/components'
 
 import { GUIDE_LINKS } from '~/common/enums'
 
@@ -7,6 +14,8 @@ interface WhyPolygonDialogProps {
 }
 
 const WhyPolygonDialog = ({ children }: WhyPolygonDialogProps) => {
+  const { lang } = useContext(LanguageContext)
+
   const {
     show,
     openDialog,
@@ -51,7 +60,7 @@ const WhyPolygonDialog = ({ children }: WhyPolygonDialogProps) => {
               />
               <a
                 className="u-link-green"
-                href={GUIDE_LINKS.payment}
+                href={GUIDE_LINKS.payment[lang]}
                 target="_blank"
               >
                 <Translate
