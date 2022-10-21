@@ -30,3 +30,6 @@ export const OPEN_SUBSCRIBE_CIRCLE_DIALOG = 'openSubscribeCircleDialog'
 
 // Onboarding Tasks
 export const ONBOARDING_TASKS_HIDE = 'onboardingTasksHide'
+
+// Support
+export const SUPPORT_SUCCESS_ANIMATION = 'supportSuccessAnimation'

@@ -12,7 +12,10 @@ import {
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 
-import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
+import {
+  PAYMENT_CURRENCY as CURRENCY,
+  SUPPORT_SUCCESS_ANIMATION,
+} from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 import { PayTo_payTo_transaction as PayToTx } from '~/components/GQL/mutations/__generated__/PayTo'
@@ -300,7 +303,16 @@ const BaseDonationDialog = ({
             currency={currency}
             recipient={recipient}
             closeDialog={closeDialog}
-            nextStep={() => forward('complete')}
+            nextStep={() => {
+              window.dispatchEvent(
+                new CustomEvent(SUPPORT_SUCCESS_ANIMATION, {
+                  detail: {
+                    color: 'green',
+                  },
+                })
+              )
+              closeDialog()
+            }}
             txId={payToTx?.id || ''}
             windowRef={windowRef}
             article={article}

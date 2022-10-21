@@ -1,9 +1,12 @@
 import classNames from 'classnames'
+import { useState } from 'react'
 
-import { CircleDigest, Translate } from '~/components'
+import { CircleDigest, Translate, useEventListener } from '~/components'
 
+import { SUPPORT_SUCCESS_ANIMATION } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
+import Animation from './Animation'
 import DonationButton from './DonationButton'
 import Donators from './Donators'
 import { fragments } from './gql'
@@ -16,9 +19,14 @@ interface DonationProps {
 }
 
 const SupportWidget = ({ article }: DonationProps) => {
+  const [showAnimation, setShowAnimation] = useState(false)
   const supportWidgetClasses = classNames({
     'support-widget': true,
     hasCircle: article.access.circle,
+  })
+
+  useEventListener(SUPPORT_SUCCESS_ANIMATION, () => {
+    setShowAnimation(true)
   })
 
   return (
@@ -32,6 +40,13 @@ const SupportWidget = ({ article }: DonationProps) => {
           />
         </section>
 
+        {showAnimation && (
+          <Animation
+            callback={() => {
+              setShowAnimation(false)
+            }}
+          />
+        )}
         <p>
           <Translate
             zh_hant="喜歡我的文章嗎？"
