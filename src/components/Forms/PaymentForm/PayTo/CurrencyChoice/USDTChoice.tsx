@@ -4,6 +4,7 @@ import { useAccount } from 'wagmi'
 import {
   Button,
   CurrencyFormatter,
+  IconSpinner16,
   IconUSDT40,
   IconUSDTActive40,
   TextIcon,
@@ -21,7 +22,7 @@ import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__gen
 
 interface FormProps {
   recipient: UserDonationRecipient
-  switchToSetAmount: (c: CURRENCY) => void
+  switchToSetAmount: () => void
   switchToWalletSelect: () => void
 }
 
@@ -33,7 +34,8 @@ const USDTChoice: React.FC<FormProps> = ({
   const viewer = useContext(ViewerContext)
   const { address } = useAccount()
 
-  const { data: balanceUSDTData } = useBalanceUSDT({})
+  const { data: balanceUSDTData, isLoading: balanceUSDTLoading } =
+    useBalanceUSDT({})
   const balanceUSDT = parseFloat(balanceUSDTData?.formatted || '0')
 
   const curatorAddress = viewer.info.ethAddress
@@ -68,9 +70,7 @@ const USDTChoice: React.FC<FormProps> = ({
       <section
         role="button"
         className="item clickable"
-        onClick={() => {
-          switchToSetAmount(CURRENCY.USDT)
-        }}
+        onClick={switchToSetAmount}
       >
         <TextIcon
           icon={<IconUSDTActive40 size="xl-m" />}
@@ -79,10 +79,14 @@ const USDTChoice: React.FC<FormProps> = ({
         >
           Tether
         </TextIcon>
-        <CurrencyFormatter
-          value={formatAmount(balanceUSDT)}
-          currency={CURRENCY.USDT}
-        />
+        {balanceUSDTLoading ? (
+          <IconSpinner16 color="grey" size="sm" />
+        ) : (
+          <CurrencyFormatter
+            value={formatAmount(balanceUSDT)}
+            currency={CURRENCY.USDT}
+          />
+        )}
 
         <style jsx>{styles}</style>
       </section>

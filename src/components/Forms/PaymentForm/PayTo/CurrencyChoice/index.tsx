@@ -6,7 +6,6 @@ import {
   CurrencyFormatter,
   Dialog,
   IconFiatCurrency40,
-  IconLikeCoin40,
   Spinner,
   TextIcon,
   Translate,
@@ -16,6 +15,7 @@ import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { formatAmount } from '~/common/utils'
 
+import LikeCoinChoice from './LikeCoinChoice'
 import styles from './styles.css'
 import Tips from './Tips'
 import USDTChoice from './USDTChoice'
@@ -81,7 +81,7 @@ const CurrencyChoice: React.FC<FormProps> = ({
       {/* USDT */}
       <USDTChoice
         recipient={recipient}
-        switchToSetAmount={switchToSetAmount}
+        switchToSetAmount={() => switchToSetAmount(CURRENCY.USDT)}
         switchToWalletSelect={switchToWalletSelect}
       />
 
@@ -104,25 +104,11 @@ const CurrencyChoice: React.FC<FormProps> = ({
       </section>
 
       {/* LikeCoin */}
-      <section
-        role="button"
-        className="item clickable"
-        onClick={() => {
-          switchToSetAmount(CURRENCY.LIKE)
-        }}
-      >
-        <TextIcon
-          icon={<IconLikeCoin40 size="xl-m" />}
-          size="md"
-          spacing="xtight"
-        >
-          <Translate zh_hant="LikeCoin" zh_hans="LikeCoin" en="LikeCoin" />
-        </TextIcon>
-        <CurrencyFormatter
-          value={formatAmount(balanceLike, 0)}
-          currency="LIKE"
-        />
-      </section>
+      <LikeCoinChoice
+        balance={balanceLike}
+        recipient={recipient}
+        switchToSetAmount={() => switchToSetAmount(CURRENCY.USDT)}
+      />
 
       <Tips />
 

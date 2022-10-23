@@ -34,12 +34,13 @@
 
 .set-amount-custom-amount-input {
   padding: 0 var(--spacing-base);
+  margin-bottom: var(--spacing-loose);
 
   /* Chrome, Safari, Edge, Opera */
   & input::-webkit-outer-spin-button,
   & input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
     margin: 0;
+    -webkit-appearance: none;
   }
 
   /* Firefox */

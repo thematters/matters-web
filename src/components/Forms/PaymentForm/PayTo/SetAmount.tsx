@@ -22,6 +22,7 @@ import {
   Translate,
   useAllowanceUSDT,
   useApproveUSDT,
+  useBalanceEther,
   useBalanceUSDT,
   useMutation,
   ViewerContext,
@@ -44,7 +45,6 @@ import {
 } from '~/common/utils'
 
 import CivicLikerButton from './CivicLikerButton'
-import { NoLikerIdButton, NoLikerIdMessage } from './NoLiker'
 import styles from './styles.css'
 import WhyPolygonDialog from './WhyPolygonDialog'
 
@@ -148,11 +148,13 @@ const SetAmount: React.FC<FormProps> = ({
     write: approveWrite,
   } = useApproveUSDT()
   const { data: balanceUSDTData } = useBalanceUSDT({})
+  const { data: balanceEtherData } = useBalanceEther({})
 
   const allowanceUSDT = allowanceData || BigNumber.from('0')
   const balanceUSDT = parseFloat(balanceUSDTData?.formatted || '0')
   const balanceHKD = data?.viewer?.wallet.balance.HKD || 0
   const balanceLike = data?.viewer?.liker.total || 0
+  const balanceEther = parseFloat(balanceEtherData?.formatted || '0')
 
   // forms
   const {
@@ -210,13 +212,13 @@ const SetAmount: React.FC<FormProps> = ({
   const isUSDT = values.currency === CURRENCY.USDT
   const isHKD = values.currency === CURRENCY.HKD
   const isLike = values.currency === CURRENCY.LIKE
-  const canPayLike = isLike && !!viewer.liker.likerId
-  const canReceiveLike = isLike && !!recipient.liker.likerId
-  const canProcess = isUSDT || isHKD || (canPayLike && canReceiveLike)
   const maxAmount = isHKD ? PAYMENT_MAXIMUM_PAYTO_AMOUNT.HKD : Infinity
   const isBalanceInsufficient =
     (isUSDT ? balanceUSDT : isHKD ? balanceHKD : balanceLike) <
     (values.customAmount || values.amount)
+  const isEtherInsufficient = balanceEther <= 0
+
+  console.log({ isEtherInsufficient, balanceEther })
 
   /**
    * useEffect Hooks
@@ -378,97 +380,85 @@ const SetAmount: React.FC<FormProps> = ({
         )}
       </section>
 
-      {canProcess && (
-        <Form.AmountRadioInput
-          currency={values.currency}
-          balance={isUSDT ? balanceUSDT : isHKD ? balanceHKD : balanceLike}
-          amounts={AMOUNT_OPTIONS}
-          name="amount"
+      <Form.AmountRadioInput
+        currency={values.currency}
+        balance={isUSDT ? balanceUSDT : isHKD ? balanceHKD : balanceLike}
+        amounts={AMOUNT_OPTIONS}
+        name="amount"
+        disabled={locked || (isUSDT && !isConnectedAddress)}
+        value={values.amount}
+        error={errors.amount}
+        onBlur={handleBlur}
+        onChange={async (e) => {
+          const value = parseInt(e.target.value, 10) || 0
+          await setFieldValue('amount', value, false)
+          await setFieldValue('customAmount', 0, true)
+          e.target.blur()
+
+          if (customInputRef.current) {
+            customInputRef.current.value = ''
+          }
+        }}
+      />
+
+      <section className="set-amount-custom-amount-input">
+        <input
           disabled={locked || (isUSDT && !isConnectedAddress)}
-          value={values.amount}
-          error={errors.amount}
+          type="number"
+          name="customAmount"
+          min={0}
+          max={maxAmount}
+          step={isUSDT ? '0.01' : undefined}
+          placeholder={translate({
+            zh_hant: '輸入自訂金額',
+            zh_hans: '输入自订金额',
+            en: 'Enter a custom amount',
+            lang,
+          })}
+          value={undefined}
           onBlur={handleBlur}
           onChange={async (e) => {
-            const value = parseInt(e.target.value, 10) || 0
-            await setFieldValue('amount', value, false)
-            await setFieldValue('customAmount', 0, true)
-            e.target.blur()
+            let value = e.target.valueAsNumber || 0
+            if (isHKD) {
+              value = Math.floor(value)
+            }
+            if (isUSDT) {
+              value = numRound(value, 2)
+            }
+            value = Math.abs(Math.min(value, maxAmount))
 
-            if (customInputRef.current) {
-              customInputRef.current.value = ''
+            await setFieldValue('customAmount', value, false)
+            await setFieldValue('amount', 0, true)
+
+            // correct the input value if not equal
+            const $el = customInputRef.current
+            const rawValue = parseFloat(e.target.value)
+            if ($el && rawValue !== value) {
+              $el.value = value <= 0 ? '' : value
+              $el.type = 'text'
+              $el.setSelectionRange($el.value.length, $el.value.length)
+              $el.type = 'number'
             }
           }}
+          ref={customInputRef}
+          autoComplete="nope"
+          autoCorrect="off"
+          autoCapitalize="off"
+          spellCheck="false"
         />
-      )}
+        {isHKD && (
+          <section className="footer">
+            <TextIcon size="xs" color="grey-dark">
+              <Translate
+                zh_hant="付款將由 Stripe 處理，讓你的支持不受地域限制"
+                zh_hans="付款将由 Stripe 处理，让你的支持不受地域限制"
+                en="Stripe will process your payment, so you can support the author wherever you are."
+              />
+            </TextIcon>
+          </section>
+        )}
+      </section>
 
-      {canProcess && (
-        <section className="set-amount-custom-amount-input">
-          <input
-            disabled={locked || (isUSDT && !isConnectedAddress)}
-            type="number"
-            name="customAmount"
-            min={0}
-            max={maxAmount}
-            step={isUSDT ? '0.01' : undefined}
-            placeholder={translate({
-              zh_hant: '輸入自訂金額',
-              zh_hans: '输入自订金额',
-              en: 'Enter a custom amount',
-              lang,
-            })}
-            value={undefined}
-            onBlur={handleBlur}
-            onChange={async (e) => {
-              let value = e.target.valueAsNumber || 0
-              if (isHKD) {
-                value = Math.floor(value)
-              }
-              if (isUSDT) {
-                value = numRound(value, 2)
-              }
-              value = Math.abs(Math.min(value, maxAmount))
-
-              await setFieldValue('customAmount', value, false)
-              await setFieldValue('amount', 0, true)
-
-              // correct the input value if not equal
-              const $el = customInputRef.current
-              const rawValue = parseFloat(e.target.value)
-              if ($el && rawValue !== value) {
-                $el.value = value <= 0 ? '' : value
-                $el.type = 'text'
-                $el.setSelectionRange($el.value.length, $el.value.length)
-                $el.type = 'number'
-              }
-            }}
-            ref={customInputRef}
-            autoComplete="nope"
-            autoCorrect="off"
-            autoCapitalize="off"
-            spellCheck="false"
-          />
-          {isHKD && (
-            <section className="footer">
-              <TextIcon size="xs" color="grey-dark">
-                <Translate
-                  zh_hant="付款將由 Stripe 處理，讓你的支持不受地域限制"
-                  zh_hans="付款将由 Stripe 处理，让你的支持不受地域限制"
-                  en="Stripe will process your payment, so you can support the author wherever you are."
-                />
-              </TextIcon>
-            </section>
-          )}
-        </section>
-      )}
-
-      {!canProcess && (
-        <section className="set-amount-no-liker-id">
-          <NoLikerIdMessage
-            canPayLike={canPayLike}
-            canReceiveLike={canReceiveLike}
-          />
-        </section>
-      )}
       <style jsx>{styles}</style>
     </Form>
   )
@@ -482,7 +472,7 @@ const SetAmount: React.FC<FormProps> = ({
       <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
 
       <Dialog.Footer>
-        {canProcess && !isUSDT && !locked && (
+        {!isUSDT && !locked && (
           <>
             {isLike && recipient.liker.likerId && (
               <CivicLikerButton likerId={recipient.liker.likerId} />
@@ -612,15 +602,6 @@ const SetAmount: React.FC<FormProps> = ({
                 </Dialog.Footer.Button>
               )}
           </>
-        )}
-
-        {!canProcess && (
-          <NoLikerIdButton
-            canPayLike={canPayLike}
-            canReceiveLike={canReceiveLike}
-            closeDialog={closeDialog}
-            setFieldValue={setFieldValue}
-          />
         )}
 
         {locked && (
