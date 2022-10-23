@@ -3,26 +3,17 @@ import { BigNumber } from 'ethers'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useEffect, useRef, useState } from 'react'
-import { useAccount, useDisconnect, useNetwork, useSwitchNetwork } from 'wagmi'
+import { useAccount, useNetwork, useSwitchNetwork } from 'wagmi'
 
 import {
-  Button,
-  CopyToClipboard,
   Dialog,
   Form,
-  IconCopy16,
   IconExternalLink16,
-  IconFiatCurrency40,
-  IconInfo24,
-  IconLikeCoin40,
-  IconUSDTActive40,
   LanguageContext,
   Spinner,
-  TextIcon,
   Translate,
   useAllowanceUSDT,
   useApproveUSDT,
-  useBalanceEther,
   useBalanceUSDT,
   useMutation,
   ViewerContext,
@@ -31,22 +22,19 @@ import PAY_TO from '~/components/GQL/mutations/payTo'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
 
 import {
-  GUIDE_LINKS,
   PAYMENT_CURRENCY as CURRENCY,
   PAYMENT_MAXIMUM_PAYTO_AMOUNT,
 } from '~/common/enums'
 import {
-  formatAmount,
-  maskAddress,
   numRound,
-  translate,
   validateCurrency,
   validateDonationAmount,
 } from '~/common/utils'
 
-import CivicLikerButton from './CivicLikerButton'
-import styles from './styles.css'
-import WhyPolygonDialog from './WhyPolygonDialog'
+import CivicLikerButton from '../CivicLikerButton'
+import ReconnectButton from './ReconnectButton'
+import SetAmountBalance from './SetAmountBalance'
+import SetAmountHeader from './SetAmountHeader'
 
 import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
 import {
@@ -108,7 +96,6 @@ const SetAmount: React.FC<FormProps> = ({
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
   const { address } = useAccount()
-  const { disconnect } = useDisconnect()
   const { chain } = useNetwork()
   const { chains, switchNetwork } = useSwitchNetwork()
 
@@ -148,13 +135,11 @@ const SetAmount: React.FC<FormProps> = ({
     write: approveWrite,
   } = useApproveUSDT()
   const { data: balanceUSDTData } = useBalanceUSDT({})
-  const { data: balanceEtherData } = useBalanceEther({})
 
   const allowanceUSDT = allowanceData || BigNumber.from('0')
   const balanceUSDT = parseFloat(balanceUSDTData?.formatted || '0')
   const balanceHKD = data?.viewer?.wallet.balance.HKD || 0
   const balanceLike = data?.viewer?.liker.total || 0
-  const balanceEther = parseFloat(balanceEtherData?.formatted || '0')
 
   // forms
   const {
@@ -216,9 +201,6 @@ const SetAmount: React.FC<FormProps> = ({
   const isBalanceInsufficient =
     (isUSDT ? balanceUSDT : isHKD ? balanceHKD : balanceLike) <
     (values.customAmount || values.amount)
-  const isEtherInsufficient = balanceEther <= 0
-
-  console.log({ isEtherInsufficient, balanceEther })
 
   /**
    * useEffect Hooks
@@ -247,140 +229,26 @@ const SetAmount: React.FC<FormProps> = ({
    */
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit} noBackground>
-      <section className="set-amount-change-support-way">
-        <section className="left">
-          {isUSDT && (
-            <TextIcon
-              icon={<IconUSDTActive40 size="md" />}
-              size="md"
-              spacing="xtight"
-              weight="md"
-            >
-              <Translate zh_hant="USDT" zh_hans="USDT" en="USDT" />
-            </TextIcon>
-          )}
-          {isHKD && (
-            <TextIcon
-              icon={<IconFiatCurrency40 size="md" />}
-              size="md"
-              spacing="xtight"
-              weight="md"
-            >
-              <Translate zh_hant="法幣 HKD" zh_hans="法币 HKD" en="HKD" />
-            </TextIcon>
-          )}
-          {isLike && (
-            <TextIcon
-              icon={<IconLikeCoin40 size="md" />}
-              size="md"
-              spacing="xtight"
-              weight="md"
-            >
-              LikeCoin
-            </TextIcon>
-          )}
-          <span className="button">
-            <Button onClick={switchToCurrencyChoice}>
-              <TextIcon size="xs" textDecoration="underline" color="grey-dark">
-                <Translate
-                  zh_hant="更改支持方式"
-                  zh_hans="更改支持方式"
-                  en="Change"
-                />
-              </TextIcon>
-            </Button>
-          </span>
-        </section>
-        <section className="right">
-          {isUSDT && !isConnectedAddress && (
-            <Button onClick={() => disconnect()}>
-              <TextIcon size="xs" textDecoration="underline" color="grey-dark">
-                <Translate
-                  zh_hant="切換錢包地址"
-                  zh_hans="切换钱包地址"
-                  en="Change Address"
-                />
-              </TextIcon>
-            </Button>
-          )}
-          {isUSDT && isConnectedAddress && (
-            <>
-              <>
-                {isUnsupportedNetwork ? (
-                  <Button onClick={switchToTargetNetwork}>
-                    <TextIcon
-                      size="xs"
-                      textDecoration="underline"
-                      color="grey-dark"
-                    >
-                      <Translate
-                        zh_hant="切換到 "
-                        zh_hans="切换到 "
-                        en="Switch to "
-                      />
-                      {targetChainName}
-                    </TextIcon>
-                  </Button>
-                ) : (
-                  <TextIcon size="xs" color="black">
-                    {targetChainName}
-                  </TextIcon>
-                )}
-              </>
+      <SetAmountHeader
+        currency={values.currency}
+        isConnectedAddress={isConnectedAddress}
+        isUnsupportedNetwork={isUnsupportedNetwork}
+        targetChainName={targetChainName}
+        switchToCurrencyChoice={switchToCurrencyChoice}
+        switchToTargetNetwork={switchToTargetNetwork}
+      />
 
-              <WhyPolygonDialog>
-                {({ openDialog }) => (
-                  <Button onClick={openDialog}>
-                    <TextIcon icon={<IconInfo24 size="md" color="grey" />} />
-                  </Button>
-                )}
-              </WhyPolygonDialog>
-            </>
-          )}
-        </section>
-      </section>
+      <SetAmountBalance
+        currency={values.currency}
+        balanceUSDT={balanceUSDT}
+        balanceHKD={balanceHKD}
+        balanceLike={balanceLike}
+        isBalanceInsufficient={isBalanceInsufficient}
+        switchToAddCredit={switchToAddCredit}
+      />
 
-      <section className="set-amount-balance">
-        <span className="left">
-          <Translate zh_hant="餘額 " zh_hans="余额 " en="Balance " />
-          {isUSDT && <span>{formatAmount(balanceUSDT)} USDT</span>}
-          {isHKD && <span>{formatAmount(balanceHKD)} HKD</span>}
-          {isLike && <span>{formatAmount(balanceLike, 0)} LIKE</span>}
-        </span>
-        {isHKD && (
-          <Button onClick={switchToAddCredit}>
-            <TextIcon
-              size="xs"
-              textDecoration="underline"
-              color="green"
-              weight="md"
-            >
-              {isBalanceInsufficient ? (
-                <Translate
-                  zh_hant="餘額不足，請儲值"
-                  zh_hans="余额不足，请储值"
-                  en="Insufficient balance, please top up"
-                />
-              ) : (
-                <Translate zh_hant="儲值" zh_hans="储值" en="Top Up" />
-              )}
-            </TextIcon>
-          </Button>
-        )}
-        {isUSDT && balanceUSDT <= 0 && (
-          <a href={GUIDE_LINKS.payment[lang]} target="_blank">
-            <TextIcon size="xs" textDecoration="underline" color="grey-dark">
-              <Translate
-                zh_hant="如何移轉資金到 Polygon？"
-                zh_hans="如何移转资金到 Polygon？"
-                en="How to transfer funds to Polygon?"
-              />
-            </TextIcon>
-          </a>
-        )}
-      </section>
-
-      <Form.AmountRadioInput
+      <Form.ComposedAmountInput
+        // radio inputs
         currency={values.currency}
         balance={isUSDT ? balanceUSDT : isHKD ? balanceHKD : balanceLike}
         amounts={AMOUNT_OPTIONS}
@@ -399,25 +267,15 @@ const SetAmount: React.FC<FormProps> = ({
             customInputRef.current.value = ''
           }
         }}
-      />
-
-      <section className="set-amount-custom-amount-input">
-        <input
-          disabled={locked || (isUSDT && !isConnectedAddress)}
-          type="number"
-          name="customAmount"
-          min={0}
-          max={maxAmount}
-          step={isUSDT ? '0.01' : undefined}
-          placeholder={translate({
-            zh_hant: '輸入自訂金額',
-            zh_hans: '输入自订金额',
-            en: 'Enter a custom amount',
-            lang,
-          })}
-          value={undefined}
-          onBlur={handleBlur}
-          onChange={async (e) => {
+        // custom input
+        lang={lang}
+        customAmount={{
+          disabled: locked || (isUSDT && !isConnectedAddress),
+          min: 0,
+          max: maxAmount,
+          step: isUSDT ? '0.01' : undefined,
+          onBlur: handleBlur,
+          onChange: async (e) => {
             let value = e.target.valueAsNumber || 0
             if (isHKD) {
               value = Math.floor(value)
@@ -439,27 +297,17 @@ const SetAmount: React.FC<FormProps> = ({
               $el.setSelectionRange($el.value.length, $el.value.length)
               $el.type = 'number'
             }
-          }}
-          ref={customInputRef}
-          autoComplete="nope"
-          autoCorrect="off"
-          autoCapitalize="off"
-          spellCheck="false"
-        />
-        {isHKD && (
-          <section className="footer">
-            <TextIcon size="xs" color="grey-dark">
-              <Translate
-                zh_hant="付款將由 Stripe 處理，讓你的支持不受地域限制"
-                zh_hans="付款将由 Stripe 处理，让你的支持不受地域限制"
-                en="Stripe will process your payment, so you can support the author wherever you are."
-              />
-            </TextIcon>
-          </section>
-        )}
-      </section>
-
-      <style jsx>{styles}</style>
+          },
+          hint: isHKD ? (
+            <Translate
+              zh_hant="付款將由 Stripe 處理，讓你的支持不受地域限制"
+              zh_hans="付款将由 Stripe 处理，让你的支持不受地域限制"
+              en="Stripe will process your payment, so you can support the author wherever you are."
+            />
+          ) : null,
+          ref: customInputRef,
+        }}
+      />
     </Form>
   )
 
@@ -505,55 +353,13 @@ const SetAmount: React.FC<FormProps> = ({
 
         {isUSDT && (
           <>
-            {!isConnectedAddress && (
-              <>
-                <p className="set-amount-reconnect-footer">
-                  <Translate
-                    zh_hant="當前錢包地址與帳戶綁定不同，若要變更請直接操作錢包或重新連接為："
-                    zh_hans="当前钱包地址与帐户绑定不同，若要变更请直接操作钱包或重新连接为："
-                    en="The wallet address is not the one you bound to account. Please switch it in the wallet or reconnect as: "
-                  />
-                  <CopyToClipboard text={viewer.info.ethAddress || ''}>
-                    <Button
-                      spacing={['xtight', 'xtight']}
-                      aria-label={translate({ id: 'copy', lang })}
-                    >
-                      <TextIcon
-                        icon={<IconCopy16 color="black" size="xs" />}
-                        color="black"
-                        textPlacement="left"
-                      >
-                        {maskAddress(viewer.info.ethAddress || '')}
-                      </TextIcon>
-                    </Button>
-                  </CopyToClipboard>
-                </p>
-
-                <Dialog.Footer.Button
-                  bgColor="green"
-                  textColor="white"
-                  onClick={() => {
-                    disconnect()
-                  }}
-                >
-                  <Translate
-                    zh_hant="重新連接錢包"
-                    zh_hans="重新连接钱包"
-                    en="Reconnect Wallet"
-                  />
-                </Dialog.Footer.Button>
-
-                <style jsx>{styles}</style>
-              </>
-            )}
+            {!isConnectedAddress && <ReconnectButton />}
 
             {isConnectedAddress && isUnsupportedNetwork && (
               <Dialog.Footer.Button
                 bgColor="green"
                 textColor="white"
-                onClick={() => {
-                  switchToTargetNetwork()
-                }}
+                onClick={switchToTargetNetwork}
               >
                 <Translate
                   zh_hant="切換到 "
