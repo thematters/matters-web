@@ -253,7 +253,7 @@ const SetAmount: React.FC<FormProps> = ({
       <Form.ComposedAmountInput
         // radio inputs
         currency={currency}
-        balance={isUSDT ? balanceUSDT : isHKD ? balanceHKD : balanceLike}
+        balance={balance}
         amounts={AMOUNT_OPTIONS}
         name="amount"
         disabled={canProcessLike || (isUSDT && !isConnectedAddress)}
