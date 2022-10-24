@@ -80,11 +80,11 @@
         border-color: var(--color-red);
       }
     }
+  }
 
-    & .hint {
-      padding-top: var(--spacing-loose);
-      font-size: var(--font-size-xs);
-      color: var(--color-grey-dark);
-    }
+  & .hint {
+    padding-top: var(--spacing-loose);
+    font-size: var(--font-size-xs);
+    color: var(--color-grey-dark);
   }
 }

@@ -29,6 +29,7 @@ import {
   numRound,
   validateCurrency,
   validateDonationAmount,
+  WALLET_ERROR_MESSAGES,
 } from '~/common/utils'
 
 import CivicLikerButton from '../CivicLikerButton'
@@ -122,7 +123,7 @@ const SetAmount: React.FC<FormProps> = ({
   const [payTo] = useMutation<PayToMutate>(PAY_TO)
 
   // HKD balance
-  const { data, loading } = useQuery<WalletBalance>(WALLET_BALANCE, {
+  const { data, loading, error } = useQuery<WalletBalance>(WALLET_BALANCE, {
     fetchPolicy: 'network-only',
   })
 
@@ -132,13 +133,15 @@ const SetAmount: React.FC<FormProps> = ({
     data: allowanceData,
     refetch: refetchAllowanceData,
     isLoading: allowanceLoading,
+    error: allowanceError,
   } = useAllowanceUSDT()
   const {
     data: approveData,
     isLoading: approving,
     write: approveWrite,
+    error: approveError,
   } = useApproveUSDT()
-  const { data: balanceUSDTData } = useBalanceUSDT({})
+  const { data: balanceUSDTData, error: balanceUSDTError } = useBalanceUSDT({})
 
   const allowanceUSDT = allowanceData || BigNumber.from('0')
   const balanceUSDT = parseFloat(balanceUSDTData?.formatted || '0')
@@ -146,6 +149,10 @@ const SetAmount: React.FC<FormProps> = ({
   const balanceLike = data?.viewer?.liker.total || 0
   const balance = isUSDT ? balanceUSDT : isHKD ? balanceHKD : balanceLike
   const maxAmount = isHKD ? PAYMENT_MAXIMUM_PAYTO_AMOUNT.HKD : Infinity
+  const networkEerror =
+    error || allowanceError || balanceUSDTError || approveError
+      ? WALLET_ERROR_MESSAGES[lang].unknown
+      : ''
 
   // forms
   const {
@@ -251,7 +258,7 @@ const SetAmount: React.FC<FormProps> = ({
         name="amount"
         disabled={canProcessLike || (isUSDT && !isConnectedAddress)}
         value={values.amount}
-        error={errors.amount}
+        error={errors.amount || networkEerror}
         onBlur={handleBlur}
         onChange={async (e) => {
           const value = parseInt(e.target.value, 10) || 0

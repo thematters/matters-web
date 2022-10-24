@@ -363,9 +363,9 @@ export const validateDonationAmount = (
 
   if (balance < value) {
     return translate({
-      zh_hant: '餘額不足',
-      zh_hans: '余额不足',
-      en: 'Insufficient balance',
+      zh_hant: '自訂金額大於餘額',
+      zh_hans: '自订金额大于余额',
+      en: 'Custom amount is greater than your balance',
       lang,
     })
   }
