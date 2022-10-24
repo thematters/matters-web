@@ -1,12 +1,48 @@
-import { Head, Layout, useStep, WalletAuthForm } from '~/components'
+import { useContext } from 'react'
+
+import {
+  EmptyWarning,
+  Head,
+  Layout,
+  Translate,
+  useStep,
+  ViewerContext,
+  WalletAuthForm,
+} from '~/components'
 
 import { PATHS } from '~/common/enums'
 
 type Step = 'wallet-select' | 'wallet-connect'
 
 const ConnectWallet = () => {
+  const viewer = useContext(ViewerContext)
+  const viewerEthAddress = viewer.info.ethAddress
+
   const initStep = 'wallet-select'
   const { currStep, forward } = useStep<Step>(initStep)
+
+  if (viewerEthAddress) {
+    return (
+      <Layout.Main bgColor="grey-lighter">
+        <Head title={{ id: 'loginWithWallet' }} />
+
+        <Layout.Header
+          left={<Layout.Header.BackButton />}
+          right={<Layout.Header.Title id="loginWithWallet" />}
+        />
+
+        <EmptyWarning
+          description={
+            <Translate
+              zh_hant="你已綁定錢包"
+              zh_hans="你已绑定钱包"
+              en="You have connected a wallet."
+            />
+          }
+        />
+      </Layout.Main>
+    )
+  }
 
   return (
     <Layout.Main bgColor="grey-lighter">

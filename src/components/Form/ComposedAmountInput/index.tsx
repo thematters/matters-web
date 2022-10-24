@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import { useEffect, useRef } from 'react'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
-import { formatAmount } from '~/common/utils'
+import { formatAmount, translate } from '~/common/utils'
 
 import Field, { FieldProps } from '../Field'
 import styles from './styles.css'
@@ -13,7 +13,7 @@ import styles from './styles.css'
  * Usage:
  *
  * ```jsx
- *   <Form.AmountRadioInput
+ *   <Form.ComposedAmountInput
  *     error="xxx"
  *     hint="xxx"
  *     ...other <input> props...
@@ -28,6 +28,16 @@ interface BaseOptionProps {
   name: string
 }
 
+type CustomAmountProps = {
+  customAmount: {
+    error?: string
+    hint?: React.ReactNode
+  } & React.DetailedHTMLProps<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
+  >
+}
+
 type AmountOptionProps = {
   amount: number
 } & BaseOptionProps &
@@ -37,14 +47,16 @@ type AmountOptionProps = {
     HTMLInputElement
   >
 
-type AmountRadioInputProps = {
+type ComposedAmountInputProps = {
   amounts: { [key in CURRENCY]: number[] }
+  lang: Language
 } & BaseOptionProps &
   Omit<FieldProps, 'fieldMsgId'> &
   React.DetailedHTMLProps<
     React.InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
-  >
+  > &
+  CustomAmountProps
 
 const AmountOption: React.FC<AmountOptionProps> = ({
   amount,
@@ -67,7 +79,7 @@ const AmountOption: React.FC<AmountOptionProps> = ({
   const isActive = value === amount
 
   const amountClasses = classNames({
-    amount: true,
+    ['radio-input-item']: true,
     active: isActive,
     'u-area-disable': disabled || isBalanceInsufficient,
   })
@@ -105,7 +117,7 @@ const AmountOption: React.FC<AmountOptionProps> = ({
   )
 }
 
-const AmountRadioInput: React.FC<AmountRadioInputProps> = ({
+const ComposedAmountInput: React.FC<ComposedAmountInputProps> = ({
   currency,
   balance,
   amounts,
@@ -113,6 +125,9 @@ const AmountRadioInput: React.FC<AmountRadioInputProps> = ({
 
   hint,
   error,
+
+  lang,
+  customAmount,
 
   ...inputProps
 }) => {
@@ -128,19 +143,49 @@ const AmountRadioInput: React.FC<AmountRadioInputProps> = ({
     name,
   }
 
-  return (
-    <Field>
-      <ul className="amount-options">
-        {options.map((option) => (
-          <AmountOption {...baseInputProps} key={option} amount={option} />
-        ))}
-      </ul>
+  const {
+    error: customAmountError,
+    hint: customAmountHint,
+    ...customAmountInputProps
+  } = customAmount
+  const customInputClass = classNames({
+    'custom-input': true,
+    error: !!customAmountError,
+  })
 
-      <Field.Footer fieldMsgId={fieldMsgId} hint={hint} error={error} />
+  return (
+    <section className="amount-input">
+      <Field>
+        <ul className="radio-input-options">
+          {options.map((option) => (
+            <AmountOption {...baseInputProps} key={option} amount={option} />
+          ))}
+        </ul>
+
+        {customAmount && (
+          <section className={customInputClass}>
+            <input
+              type="number"
+              name="customAmount"
+              placeholder={translate({ id: 'enterCustomAmount', lang })}
+              value={undefined}
+              autoComplete="nope"
+              autoCorrect="off"
+              autoCapitalize="off"
+              spellCheck="false"
+              {...customAmountInputProps}
+            />
+
+            {customAmountHint && <p className="hint">{customAmountHint}</p>}
+          </section>
+        )}
+
+        <Field.Footer fieldMsgId={fieldMsgId} hint={hint} error={error} />
+      </Field>
 
       <style jsx>{styles}</style>
-    </Field>
+    </section>
   )
 }
 
-export default AmountRadioInput
+export default ComposedAmountInput

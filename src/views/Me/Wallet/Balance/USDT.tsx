@@ -16,7 +16,7 @@ import styles from './styles.css'
 export const USDTBalance = () => {
   const viewer = useContext(ViewerContext)
   const address = viewer.info.ethAddress
-  const { data: balanceUSDTData } = useBalanceUSDT({ address })
+  const { data: balanceUSDTData } = useBalanceUSDT({})
   const balanceUSDT = parseFloat(balanceUSDTData?.formatted || '0')
 
   if (!address) {
