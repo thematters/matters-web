@@ -294,6 +294,7 @@ const SetAmount: React.FC<FormProps> = ({
               $el.type = 'number'
             }
           },
+          error: errors.amount,
           hint: isHKD ? (
             <Translate
               zh_hant="付款將由 Stripe 處理，讓你的支持不受地域限制"

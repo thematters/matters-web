@@ -29,7 +29,10 @@ interface BaseOptionProps {
 }
 
 type CustomAmountProps = {
-  customAmount: { hint?: React.ReactNode } & React.DetailedHTMLProps<
+  customAmount: {
+    error?: string
+    hint?: React.ReactNode
+  } & React.DetailedHTMLProps<
     React.InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
   >
@@ -140,7 +143,15 @@ const ComposedAmountInput: React.FC<ComposedAmountInputProps> = ({
     name,
   }
 
-  const { hint: customAmountHint, ...customAmountInputProps } = customAmount
+  const {
+    error: customAmountError,
+    hint: customAmountHint,
+    ...customAmountInputProps
+  } = customAmount
+  const customInputClass = classNames({
+    'custom-input': true,
+    error: !!customAmountError,
+  })
 
   return (
     <section className="amount-input">
@@ -152,7 +163,7 @@ const ComposedAmountInput: React.FC<ComposedAmountInputProps> = ({
         </ul>
 
         {customAmount && (
-          <section className="custom-input">
+          <section className={customInputClass}>
             <input
               type="number"
               name="customAmount"

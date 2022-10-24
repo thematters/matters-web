@@ -70,9 +70,21 @@
     }
   }
 
-  & .hint {
-    padding-top: var(--spacing-loose);
-    font-size: var(--font-size-xs);
-    color: var(--color-grey-dark);
+  &.error {
+    & input {
+      border-color: var(--color-red);
+
+      &:focus,
+      &.focus {
+        background-color: transparent;
+        border-color: var(--color-red);
+      }
+    }
+
+    & .hint {
+      padding-top: var(--spacing-loose);
+      font-size: var(--font-size-xs);
+      color: var(--color-grey-dark);
+    }
   }
 }
