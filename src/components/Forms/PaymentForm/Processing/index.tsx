@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
-import { BigNumber, ethers } from 'ethers'
+import { ethers } from 'ethers'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useContext, useEffect, useState } from 'react'
@@ -28,7 +28,7 @@ import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__
 import { ViewerTxState } from './__generated__/ViewerTxState'
 
 interface Props {
-  amount: number | string
+  amount: number
   currency: CURRENCY
   recipient: UserDonationRecipient
   article?: ArticleDetailPublic_article
@@ -112,6 +112,7 @@ const OthersProcessingForm: React.FC<Props> = ({
                 amount={amount}
                 currency={currency}
                 recipient={recipient}
+                showLikerID={currency === CURRENCY.LIKE}
               />
               {currency === CURRENCY.HKD && (
                 <p className="hint">
@@ -190,10 +191,7 @@ const USDTProcessingForm: React.FC<Props> = ({
     args: [
       recipient.info.ethAddress as `0x${string}`,
       process.env.NEXT_PUBLIC_USDT_CONTRACT_ADDRESS as `0x${string}`,
-      ethers.utils.parseUnits(
-        BigNumber.from(amount).toString(),
-        balanceUSDTData?.decimals
-      ),
+      ethers.utils.parseUnits(amount.toString(), balanceUSDTData?.decimals),
       `ipfs://${article?.dataHash}`,
     ],
   })
@@ -257,20 +255,21 @@ const USDTProcessingForm: React.FC<Props> = ({
             amount={amount}
             currency={currency}
             recipient={recipient}
+            showEthAddress={true}
           />
           <section className="hint">
             <p>
               <Translate
-                zh_hant="請在加密錢包內繼續操作"
-                zh_hans="请在加密钱包内继续操作"
-                en="Please continue within the encrypted wallet"
+                zh_hant="請在加密錢包內繼續操作，"
+                zh_hans="请在加密钱包内继续操作，"
+                en="Continue in the wallet."
               />
             </p>
             <p>
               <Translate
                 zh_hant="完成前請勿關閉此畫面"
                 zh_hans="完成前请勿关闭此画面"
-                en="Do not close this screen until done"
+                en="Do not close the window."
               />
             </p>
           </section>

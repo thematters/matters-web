@@ -7,8 +7,10 @@ import { useAccount, useDisconnect, useNetwork, useSwitchNetwork } from 'wagmi'
 
 import {
   Button,
+  CopyToClipboard,
   Dialog,
   Form,
+  IconCopy16,
   IconExternalLink16,
   IconFiatCurrency40,
   IconInfo24,
@@ -35,6 +37,7 @@ import {
 import {
   formatAmount,
   maskAddress,
+  numRound,
   translate,
   validateCurrency,
   validateDonationAmount,
@@ -101,8 +104,7 @@ const SetAmount: React.FC<FormProps> = ({
   switchToAddCredit,
   targetId,
 }) => {
-  const formId = 'pay-to-set-amount-form'
-
+  // contexts
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
   const { address } = useAccount()
@@ -110,6 +112,8 @@ const SetAmount: React.FC<FormProps> = ({
   const { chain } = useNetwork()
   const { chains, switchNetwork } = useSwitchNetwork()
 
+  const isConnectedAddress =
+    viewer.info.ethAddress?.toLowerCase() === address?.toLowerCase()
   const isUnsupportedNetwork = !!chain?.unsupported
   const targetChainName = chains[0]?.name
   const targetChainId = chains[0]?.id
@@ -119,19 +123,19 @@ const SetAmount: React.FC<FormProps> = ({
     switchNetwork(targetChainId)
   }
 
-  const [fixed] = useState<boolean>(true)
+  // states
   const [locked, setLocked] = useState<boolean>(false)
   const [tabUrl, setTabUrl] = useState('')
   const [tx, setTx] = useState<PayToTx>()
 
   const [payTo] = useMutation<PayToMutate>(PAY_TO)
-  const inputRef: React.RefObject<any> | null = useRef(null)
 
   // HKD balance
   const { data, loading } = useQuery<WalletBalance>(WALLET_BALANCE, {
     fetchPolicy: 'network-only',
   })
 
+  // USDT balance & allowance
   const [approveConfirming, setApproveConfirming] = useState(false)
   const {
     data: allowanceData,
@@ -150,23 +154,7 @@ const SetAmount: React.FC<FormProps> = ({
   const balanceHKD = data?.viewer?.wallet.balance.HKD || 0
   const balanceLike = data?.viewer?.liker.total || 0
 
-  useEffect(() => {
-    if (!address && defaultCurrency === CURRENCY.USDT) {
-      switchToCurrencyChoice()
-    }
-  }, [address])
-
-  useEffect(() => {
-    ;(async () => {
-      if (approveData) {
-        setApproveConfirming(true)
-        await approveData.wait()
-        refetchAllowanceData()
-        setApproveConfirming(false)
-      }
-    })()
-  }, [approveData])
-
+  // forms
   const {
     errors,
     handleBlur,
@@ -174,7 +162,6 @@ const SetAmount: React.FC<FormProps> = ({
     isValid,
     isSubmitting,
     setFieldValue,
-    touched,
     values,
   } = useFormik<FormValues>({
     initialValues: {
@@ -217,20 +204,45 @@ const SetAmount: React.FC<FormProps> = ({
     },
   })
 
+  const formId = 'pay-to-set-amount-form'
+  const customInputRef: React.RefObject<any> | null = useRef(null)
+
   const isUSDT = values.currency === CURRENCY.USDT
   const isHKD = values.currency === CURRENCY.HKD
   const isLike = values.currency === CURRENCY.LIKE
   const canPayLike = isLike && !!viewer.liker.likerId
   const canReceiveLike = isLike && !!recipient.liker.likerId
   const canProcess = isUSDT || isHKD || (canPayLike && canReceiveLike)
-  const maxAmount = isLike ? Infinity : PAYMENT_MAXIMUM_PAYTO_AMOUNT.HKD
+  const maxAmount = isHKD ? PAYMENT_MAXIMUM_PAYTO_AMOUNT.HKD : Infinity
   const isBalanceInsufficient =
     (isUSDT ? balanceUSDT : isHKD ? balanceHKD : balanceLike) <
     (values.customAmount || values.amount)
 
-  const isConnectedAddress =
-    viewer.info.ethAddress?.toLowerCase() === address?.toLowerCase()
+  /**
+   * useEffect Hooks
+   */
+  // go back to previous step if wallet is locked
+  useEffect(() => {
+    if (!address && defaultCurrency === CURRENCY.USDT) {
+      switchToCurrencyChoice()
+    }
+  }, [address])
 
+  // USDT approval
+  useEffect(() => {
+    ;(async () => {
+      if (approveData) {
+        setApproveConfirming(true)
+        await approveData.wait()
+        refetchAllowanceData()
+        setApproveConfirming(false)
+      }
+    })()
+  }, [approveData])
+
+  /**
+   * Rendering
+   */
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit} noBackground>
       <section className="set-amount-change-support-way">
@@ -331,7 +343,7 @@ const SetAmount: React.FC<FormProps> = ({
           <Translate zh_hant="餘額 " zh_hans="余额 " en="Balance " />
           {isUSDT && <span>{formatAmount(balanceUSDT)} USDT</span>}
           {isHKD && <span>{formatAmount(balanceHKD)} HKD</span>}
-          {isLike && <span>{formatAmount(balanceLike, 0)} LikeCoin</span>}
+          {isLike && <span>{formatAmount(balanceLike, 0)} LIKE</span>}
         </span>
         {isHKD && (
           <Button onClick={switchToAddCredit}>
@@ -354,33 +366,37 @@ const SetAmount: React.FC<FormProps> = ({
           </Button>
         )}
         {isUSDT && balanceUSDT <= 0 && (
-          <a href={GUIDE_LINKS.payment} target="_blank">
+          <a href={GUIDE_LINKS.payment[lang]} target="_blank">
             <TextIcon size="xs" textDecoration="underline" color="grey-dark">
               <Translate
                 zh_hant="如何移轉資金到 Polygon？"
                 zh_hans="如何移转资金到 Polygon？"
-                en="How to transfer USDT to Polygon?"
+                en="How to transfer funds to Polygon?"
               />
             </TextIcon>
           </a>
         )}
       </section>
 
-      {fixed && canProcess && (
+      {canProcess && (
         <Form.AmountRadioInput
           currency={values.currency}
           balance={isUSDT ? balanceUSDT : isHKD ? balanceHKD : balanceLike}
           amounts={AMOUNT_OPTIONS}
           name="amount"
-          disabled={locked}
+          disabled={locked || (isUSDT && !isConnectedAddress)}
           value={values.amount}
-          error={touched.amount && errors.amount}
+          error={errors.amount}
           onBlur={handleBlur}
-          onChange={(e) => {
+          onChange={async (e) => {
             const value = parseInt(e.target.value, 10) || 0
-            setFieldValue('amount', value)
-            setFieldValue('customAmount', 0)
+            await setFieldValue('amount', value, false)
+            await setFieldValue('customAmount', 0, true)
             e.target.blur()
+
+            if (customInputRef.current) {
+              customInputRef.current.value = ''
+            }
           }}
         />
       )}
@@ -388,37 +404,44 @@ const SetAmount: React.FC<FormProps> = ({
       {canProcess && (
         <section className="set-amount-custom-amount-input">
           <input
-            disabled={locked}
+            disabled={locked || (isUSDT && !isConnectedAddress)}
             type="number"
             name="customAmount"
             min={0}
             max={maxAmount}
+            step={isUSDT ? '0.01' : undefined}
             placeholder={translate({
               zh_hant: '輸入自訂金額',
               zh_hans: '输入自订金额',
               en: 'Enter a custom amount',
               lang,
             })}
-            value={
-              !touched.customAmount && values.customAmount <= 0
-                ? undefined
-                : values.customAmount
-            }
+            value={undefined}
             onBlur={handleBlur}
-            onChange={(e) => {
-              const value = e.target.valueAsNumber || 0
-              const sanitizedAmount = Math.abs(
-                Math.min(isHKD ? Math.floor(value) : value, maxAmount)
-              )
-
-              // remove extra left pad 0
-              if (inputRef.current) {
-                inputRef.current.value = sanitizedAmount
+            onChange={async (e) => {
+              let value = e.target.valueAsNumber || 0
+              if (isHKD) {
+                value = Math.floor(value)
               }
-              setFieldValue('customAmount', sanitizedAmount)
-              setFieldValue('amount', 0)
+              if (isUSDT) {
+                value = numRound(value, 2)
+              }
+              value = Math.abs(Math.min(value, maxAmount))
+
+              await setFieldValue('customAmount', value, false)
+              await setFieldValue('amount', 0, true)
+
+              // correct the input value if not equal
+              const $el = customInputRef.current
+              const rawValue = parseFloat(e.target.value)
+              if ($el && rawValue !== value) {
+                $el.value = value <= 0 ? '' : value
+                $el.type = 'text'
+                $el.setSelectionRange($el.value.length, $el.value.length)
+                $el.type = 'number'
+              }
             }}
-            ref={inputRef}
+            ref={customInputRef}
             autoComplete="nope"
             autoCorrect="off"
             autoCapitalize="off"
@@ -430,7 +453,7 @@ const SetAmount: React.FC<FormProps> = ({
                 <Translate
                   zh_hant="付款將由 Stripe 處理，讓你的支持不受地域限制"
                   zh_hans="付款将由 Stripe 处理，让你的支持不受地域限制"
-                  en="Payments will be processed by Stripe, so your support is not geo-restricted"
+                  en="Stripe will process your payment, so you can support the author wherever you are."
                 />
               </TextIcon>
             </section>
@@ -494,6 +517,28 @@ const SetAmount: React.FC<FormProps> = ({
           <>
             {!isConnectedAddress && (
               <>
+                <p className="set-amount-reconnect-footer">
+                  <Translate
+                    zh_hant="當前錢包地址與帳戶綁定不同，若要變更請直接操作錢包或重新連接為："
+                    zh_hans="当前钱包地址与帐户绑定不同，若要变更请直接操作钱包或重新连接为："
+                    en="The wallet address is not the one you bound to account. Please switch it in the wallet or reconnect as: "
+                  />
+                  <CopyToClipboard text={viewer.info.ethAddress || ''}>
+                    <Button
+                      spacing={['xtight', 'xtight']}
+                      aria-label={translate({ id: 'copy', lang })}
+                    >
+                      <TextIcon
+                        icon={<IconCopy16 color="black" size="xs" />}
+                        color="black"
+                        textPlacement="left"
+                      >
+                        {maskAddress(viewer.info.ethAddress || '')}
+                      </TextIcon>
+                    </Button>
+                  </CopyToClipboard>
+                </p>
+
                 <Dialog.Footer.Button
                   bgColor="green"
                   textColor="white"
@@ -508,16 +553,6 @@ const SetAmount: React.FC<FormProps> = ({
                   />
                 </Dialog.Footer.Button>
 
-                <p className="set-amount-reconnect-footer">
-                  <Translate
-                    zh_hant="請連接帳戶的綁定錢包 "
-                    zh_hans="请连接帐户的绑定钱包 "
-                    en="Please connect to your account wallet "
-                  />
-                  <span className="address">
-                    {maskAddress(viewer.info.ethAddress || '')}
-                  </span>
-                </p>
                 <style jsx>{styles}</style>
               </>
             )}
@@ -554,9 +589,9 @@ const SetAmount: React.FC<FormProps> = ({
                     }}
                   >
                     <Translate
-                      zh_hant="授權 USDT 支付"
-                      zh_hans="授权 USDT 支付"
-                      en="Approve USDT"
+                      zh_hant="前往確認授權"
+                      zh_hans="前往确认授权"
+                      en="Approve to continue"
                     />
                   </Dialog.Footer.Button>
                 </>
