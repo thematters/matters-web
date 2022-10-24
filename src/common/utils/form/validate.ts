@@ -343,7 +343,11 @@ export const validateAmount = (value: number, lang: Language) => {
   }
 }
 
-export const validateDonationAmount = (value: number, lang: Language) => {
+export const validateDonationAmount = (
+  value: number,
+  balance: number,
+  lang: Language
+) => {
   if (typeof value !== 'number') {
     return translate({ id: 'required', lang })
   }
@@ -352,6 +356,16 @@ export const validateDonationAmount = (value: number, lang: Language) => {
     return translate({
       zh_hant: '請選擇或輸入金額',
       zh_hans: '请选择或输入金额',
+      en: 'Please select or enter amount',
+      lang,
+    })
+  }
+
+  if (balance < value) {
+    return translate({
+      zh_hant: '餘額不足',
+      zh_hans: '余额不足',
+      en: 'Insufficient balance',
       lang,
     })
   }

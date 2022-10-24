@@ -8,7 +8,6 @@ import { useAccount, useNetwork, useSwitchNetwork } from 'wagmi'
 import {
   Dialog,
   Form,
-  IconExternalLink16,
   LanguageContext,
   Spinner,
   Translate,
@@ -55,7 +54,7 @@ interface SetAmountOpenTabCallbackValues {
 
 interface FormProps {
   closeDialog: () => void
-  defaultCurrency?: CURRENCY
+  currency: CURRENCY
   openTabCallback: (values: SetAmountOpenTabCallbackValues) => void
   recipient: UserDonationRecipient
   submitCallback: (values: SetAmountCallbackValues) => void
@@ -67,7 +66,6 @@ interface FormProps {
 interface FormValues {
   amount: number
   customAmount: number
-  currency: CURRENCY
 }
 
 const AMOUNT_DEFAULT = {
@@ -84,7 +82,7 @@ const AMOUNT_OPTIONS = {
 
 const SetAmount: React.FC<FormProps> = ({
   closeDialog,
-  defaultCurrency,
+  currency,
   openTabCallback,
   recipient,
   submitCallback,
@@ -92,6 +90,12 @@ const SetAmount: React.FC<FormProps> = ({
   switchToAddCredit,
   targetId,
 }) => {
+  const formId = 'pay-to-set-amount-form'
+  const customInputRef: React.RefObject<any> | null = useRef(null)
+  const isUSDT = currency === CURRENCY.USDT
+  const isHKD = currency === CURRENCY.HKD
+  const isLike = currency === CURRENCY.LIKE
+
   // contexts
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
@@ -111,10 +115,6 @@ const SetAmount: React.FC<FormProps> = ({
   }
 
   // states
-  const [locked, setLocked] = useState<boolean>(false)
-  const [tabUrl, setTabUrl] = useState('')
-  const [tx, setTx] = useState<PayToTx>()
-
   const [payTo] = useMutation<PayToMutate>(PAY_TO)
 
   // HKD balance
@@ -140,6 +140,8 @@ const SetAmount: React.FC<FormProps> = ({
   const balanceUSDT = parseFloat(balanceUSDTData?.formatted || '0')
   const balanceHKD = data?.viewer?.wallet.balance.HKD || 0
   const balanceLike = data?.viewer?.liker.total || 0
+  const balance = isUSDT ? balanceUSDT : isHKD ? balanceHKD : balanceLike
+  const maxAmount = isHKD ? PAYMENT_MAXIMUM_PAYTO_AMOUNT.HKD : Infinity
 
   // forms
   const {
@@ -152,16 +154,15 @@ const SetAmount: React.FC<FormProps> = ({
     values,
   } = useFormik<FormValues>({
     initialValues: {
-      amount: AMOUNT_DEFAULT[defaultCurrency || CURRENCY.HKD],
+      amount: AMOUNT_DEFAULT[currency],
       customAmount: 0,
-      currency: defaultCurrency || CURRENCY.HKD,
     },
-    validate: ({ amount, customAmount, currency }) =>
+    validate: ({ amount, customAmount }) =>
       _pickBy({
-        amount: validateDonationAmount(customAmount || amount, lang),
+        amount: validateDonationAmount(customAmount || amount, balance, lang),
         currency: validateCurrency(currency, lang),
       }),
-    onSubmit: async ({ amount, customAmount, currency }, { setSubmitting }) => {
+    onSubmit: async ({ amount, customAmount }, { setSubmitting }) => {
       const submitAmount = customAmount || amount
       try {
         if (currency === CURRENCY.LIKE) {
@@ -179,9 +180,11 @@ const SetAmount: React.FC<FormProps> = ({
           if (!redirectUrl || !transaction) {
             throw new Error()
           }
-          setLocked(true)
-          setTabUrl(redirectUrl)
-          setTx(transaction)
+
+          const payWindow = window.open(redirectUrl, '_blank')
+          if (payWindow && transaction) {
+            openTabCallback({ window: payWindow, transaction })
+          }
         }
         setSubmitting(false)
         submitCallback({ amount: submitAmount, currency })
@@ -191,23 +194,14 @@ const SetAmount: React.FC<FormProps> = ({
     },
   })
 
-  const formId = 'pay-to-set-amount-form'
-  const customInputRef: React.RefObject<any> | null = useRef(null)
-
-  const isUSDT = values.currency === CURRENCY.USDT
-  const isHKD = values.currency === CURRENCY.HKD
-  const isLike = values.currency === CURRENCY.LIKE
-  const maxAmount = isHKD ? PAYMENT_MAXIMUM_PAYTO_AMOUNT.HKD : Infinity
-  const isBalanceInsufficient =
-    (isUSDT ? balanceUSDT : isHKD ? balanceHKD : balanceLike) <
-    (values.customAmount || values.amount)
+  const isBalanceInsufficient = balance < (values.customAmount || values.amount)
 
   /**
    * useEffect Hooks
    */
   // go back to previous step if wallet is locked
   useEffect(() => {
-    if (!address && defaultCurrency === CURRENCY.USDT) {
+    if (!address && currency === CURRENCY.USDT) {
       switchToCurrencyChoice()
     }
   }, [address])
@@ -230,7 +224,7 @@ const SetAmount: React.FC<FormProps> = ({
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit} noBackground>
       <SetAmountHeader
-        currency={values.currency}
+        currency={currency}
         isConnectedAddress={isConnectedAddress}
         isUnsupportedNetwork={isUnsupportedNetwork}
         targetChainName={targetChainName}
@@ -239,7 +233,7 @@ const SetAmount: React.FC<FormProps> = ({
       />
 
       <SetAmountBalance
-        currency={values.currency}
+        currency={currency}
         balanceUSDT={balanceUSDT}
         balanceHKD={balanceHKD}
         balanceLike={balanceLike}
@@ -249,11 +243,11 @@ const SetAmount: React.FC<FormProps> = ({
 
       <Form.ComposedAmountInput
         // radio inputs
-        currency={values.currency}
+        currency={currency}
         balance={isUSDT ? balanceUSDT : isHKD ? balanceHKD : balanceLike}
         amounts={AMOUNT_OPTIONS}
         name="amount"
-        disabled={locked || (isUSDT && !isConnectedAddress)}
+        disabled={isUSDT && !isConnectedAddress}
         value={values.amount}
         error={errors.amount}
         onBlur={handleBlur}
@@ -270,7 +264,7 @@ const SetAmount: React.FC<FormProps> = ({
         // custom input
         lang={lang}
         customAmount={{
-          disabled: locked || (isUSDT && !isConnectedAddress),
+          disabled: isUSDT && !isConnectedAddress,
           min: 0,
           max: maxAmount,
           step: isUSDT ? '0.01' : undefined,
@@ -320,7 +314,7 @@ const SetAmount: React.FC<FormProps> = ({
       <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
 
       <Dialog.Footer>
-        {!isUSDT && !locked && (
+        {!isUSDT && (
           <>
             {isLike && recipient.liker.likerId && (
               <CivicLikerButton likerId={recipient.liker.likerId} />
@@ -408,24 +402,6 @@ const SetAmount: React.FC<FormProps> = ({
                 </Dialog.Footer.Button>
               )}
           </>
-        )}
-
-        {locked && (
-          <Dialog.Footer.Button
-            onClick={() => {
-              const payWindow = window.open(tabUrl, '_blank')
-              if (payWindow && tx) {
-                openTabCallback({ window: payWindow, transaction: tx })
-              }
-            }}
-            icon={<IconExternalLink16 size="xs" />}
-          >
-            <Translate
-              zh_hant="前往 Liker Land 支付"
-              zh_hans="前往 Liker Land 支付"
-              en="Go to Liker Land for payment"
-            />
-          </Dialog.Footer.Button>
         )}
       </Dialog.Footer>
     </>

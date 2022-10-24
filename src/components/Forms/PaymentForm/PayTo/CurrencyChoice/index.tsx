@@ -21,39 +21,18 @@ import Tips from './Tips'
 import USDTChoice from './USDTChoice'
 
 import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
-import { PayTo_payTo_transaction as PayToTx } from '~/components/GQL/mutations/__generated__/PayTo'
 import { WalletBalance } from '~/components/GQL/queries/__generated__/WalletBalance'
 
-interface SetAmountCallbackValues {
-  amount: number
-  currency: CURRENCY
-}
-
-interface SetAmountOpenTabCallbackValues {
-  window: Window
-  transaction: PayToTx
-}
-
 interface FormProps {
-  closeDialog: () => void
-  defaultCurrency?: CURRENCY
-  openTabCallback: (values: SetAmountOpenTabCallbackValues) => void
   recipient: UserDonationRecipient
-  submitCallback: (values: SetAmountCallbackValues) => void
   switchToSetAmount: (c: CURRENCY) => void
   switchToWalletSelect: () => void
-  targetId: string
 }
 
 const CurrencyChoice: React.FC<FormProps> = ({
-  closeDialog,
-  defaultCurrency,
-  openTabCallback,
   recipient,
-  submitCallback,
   switchToSetAmount,
   switchToWalletSelect,
-  targetId,
 }) => {
   // HKD balance
   const { data, loading } = useQuery<WalletBalance>(WALLET_BALANCE, {
@@ -107,7 +86,7 @@ const CurrencyChoice: React.FC<FormProps> = ({
       <LikeCoinChoice
         balance={balanceLike}
         recipient={recipient}
-        switchToSetAmount={() => switchToSetAmount(CURRENCY.USDT)}
+        switchToSetAmount={() => switchToSetAmount(CURRENCY.LIKE)}
       />
 
       <Tips />
