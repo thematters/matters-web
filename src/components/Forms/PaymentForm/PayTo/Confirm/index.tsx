@@ -226,7 +226,7 @@ const Confirm: React.FC<FormProps> = ({
             textColor="grey"
             onClick={switchToResetPassword}
           >
-            <Translate id="forgetPassword" />？
+            <Translate id="forgetPaymentPassword" />？
           </Dialog.Footer.Button>
         )}
         {currency === CURRENCY.USDT && (
