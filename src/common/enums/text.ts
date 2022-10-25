@@ -911,7 +911,7 @@ export const TEXT = {
       'Adding articles to a collection helps readers find your articles.',
     hintPassword:
       'Minimum 8 characters. Uppercase/lowercase letters, numbers and symbols are allowed',
-    hintPaymentPassword: 'Enter a 6-digit transaction password.',
+    hintPaymentPassword: 'Enter a 6-digit payment password.',
     hintPaymentPointer: 'The wallet address starts with "$".',
     hintTerm:
       'We have amended or modified our Terms and Privacy Policy. Agree and accept all Terms to continue using our Services.',
