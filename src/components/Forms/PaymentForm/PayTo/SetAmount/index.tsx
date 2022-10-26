@@ -15,10 +15,12 @@ import {
   useApproveUSDT,
   useBalanceUSDT,
   useMutation,
+  useRoute,
   ViewerContext,
 } from '~/components'
 import PAY_TO from '~/components/GQL/mutations/payTo'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
+import updateDonation from '~/components/GQL/updates/donation'
 
 import {
   PAYMENT_CURRENCY as CURRENCY,
@@ -98,6 +100,8 @@ const SetAmount: React.FC<FormProps> = ({
   const { address } = useAccount()
   const { chain } = useNetwork()
   const { chains, switchNetwork } = useSwitchNetwork()
+  const { getQuery } = useRoute()
+  const mediaHash = getQuery('mediaHash')
 
   const isConnectedAddress =
     viewer.info.ethAddress?.toLowerCase() === address?.toLowerCase()
@@ -176,6 +180,13 @@ const SetAmount: React.FC<FormProps> = ({
               purpose: 'donation',
               recipientId: recipient.id,
               targetId,
+            },
+            update: (cache) => {
+              updateDonation({
+                cache,
+                mediaHash,
+                viewer,
+              })
             },
           })
           const redirectUrl = result?.data?.payTo.redirectUrl

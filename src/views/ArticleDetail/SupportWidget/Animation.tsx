@@ -1,11 +1,20 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import Lottie, { EventListener } from 'react-lottie'
+
+import { Translate, useStep } from '~/components'
+
+import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 
 import * as coinShip from '@/public/static/json/coin-ship.json'
 import * as openHeart from '@/public/static/json/open-heart.json'
 import * as shipSprinkleHeart from '@/public/static/json/ship-sprinkle-heart.json'
+import * as shipWaiting from '@/public/static/json/ship-waiting.json'
 
-const firstAnimationOptions = {
+import styles from './styles.css'
+
+type Step = 'coinShip' | 'shipWaiting' | 'shipSprinkleHeart' | 'openHeart'
+
+const coinShipOptions = {
   loop: false,
   autoplay: true,
   animationData: coinShip,
@@ -14,7 +23,16 @@ const firstAnimationOptions = {
   },
 }
 
-const secondAnimationOptions = {
+const shipWaitingOptions = {
+  loop: true,
+  autoplay: true,
+  animationData: shipWaiting,
+  rendererSettings: {
+    preserveAspectRatio: 'xMidYMid slice',
+  },
+}
+
+const shipSprinkleHeartOptions = {
   loop: false,
   autoplay: true,
   animationData: shipSprinkleHeart,
@@ -23,7 +41,7 @@ const secondAnimationOptions = {
   },
 }
 
-const thirdAnimationOptions = {
+const openHeartOptions = {
   loop: false,
   autoplay: true,
   animationData: openHeart,
@@ -33,62 +51,101 @@ const thirdAnimationOptions = {
 }
 
 interface Props {
-  callback: () => void
+  playEnd: () => void
+  playShipWaiting: boolean
+  currency: CURRENCY
+  defaultStep?: Step
 }
 
-const Animation: React.FC<Props> = ({ callback }) => {
-  const [firstCompleted, setFirstCompleted] = useState(false)
-  const [secondCompleted, setSecondCompleted] = useState(false)
+const Animation: React.FC<Props> = ({
+  playEnd,
+  currency,
+  playShipWaiting = false,
+  defaultStep = 'coinShip',
+}) => {
+  const { currStep, forward } = useStep<Step>(defaultStep)
 
-  const firstListener: EventListener = {
+  const isCoinShip = currStep === 'coinShip'
+  const isShipWaiting = currStep === 'shipWaiting'
+  const isShipSprinkHeart = currStep === 'shipSprinkleHeart'
+  const isOpenHeart = currStep === 'openHeart'
+
+  useEffect(() => {
+    if (isShipWaiting) {
+      forward('shipSprinkleHeart')
+    }
+  }, [playShipWaiting])
+
+  const coinShipListener: EventListener = {
     eventName: 'complete',
     callback: () => {
-      setFirstCompleted(true)
+      playShipWaiting ? forward('shipWaiting') : forward('shipSprinkleHeart')
     },
   }
 
-  const secondListener: EventListener = {
+  const shiSprinkleHeartListener: EventListener = {
     eventName: 'complete',
     callback: () => {
-      setSecondCompleted(true)
+      forward('openHeart')
     },
   }
 
-  const thirdListener: EventListener = {
+  const openHeartListener: EventListener = {
     eventName: 'complete',
     callback: () => {
-      callback()
+      playEnd()
     },
   }
+
+  const LottieProps = {
+    isClickToPauseDisabled: true,
+    height: 136,
+    width: 166,
+  }
+
   return (
     <section>
-      {!firstCompleted && (
+      <p className="animation-hint">
+        {isShipWaiting && currency === CURRENCY.LIKE && (
+          <Translate
+            zh_hant="支付請求已送出，LikeCoin 網絡確認中⋯"
+            zh_hans="支付请求已送出，LikeCoin 网络确认中⋯"
+            en="The payment request has been sent, and the LikeCoin is confirming…"
+          />
+        )}
+        {isShipWaiting && currency === CURRENCY.USDT && (
+          <Translate
+            zh_hant="支付請求已送出，Polygon 網絡確認中⋯"
+            zh_hans="支付請求已送出，Polygon 网络确认中⋯"
+            en="The payment request has been sent, and the Polygon is confirming…"
+          />
+        )}
+      </p>
+      {isCoinShip && (
         <Lottie
-          isClickToPauseDisabled
-          options={firstAnimationOptions}
-          height={136}
-          width={166}
-          eventListeners={[firstListener]}
+          options={coinShipOptions}
+          eventListeners={[coinShipListener]}
+          {...LottieProps}
         />
       )}
-      {firstCompleted && !secondCompleted && (
+      {isShipWaiting && (
+        <Lottie options={shipWaitingOptions} {...LottieProps} />
+      )}
+      {isShipSprinkHeart && (
         <Lottie
-          isClickToPauseDisabled
-          options={secondAnimationOptions}
-          height={136}
-          width={166}
-          eventListeners={[secondListener]}
+          options={shipSprinkleHeartOptions}
+          eventListeners={[shiSprinkleHeartListener]}
+          {...LottieProps}
         />
       )}
-      {secondCompleted && (
+      {isOpenHeart && (
         <Lottie
-          isClickToPauseDisabled
-          options={thirdAnimationOptions}
-          height={136}
-          width={166}
-          eventListeners={[thirdListener]}
+          options={openHeartOptions}
+          eventListeners={[openHeartListener]}
+          {...LottieProps}
         />
       )}
+      <style jsx>{styles}</style>
     </section>
   )
 }

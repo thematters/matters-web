@@ -14,10 +14,12 @@ import {
   TextIcon,
   Translate,
   useMutation,
+  useRoute,
   ViewerContext,
 } from '~/components'
 import PAY_TO from '~/components/GQL/mutations/payTo'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
+import updateDonation from '~/components/GQL/updates/donation'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { parseFormSubmitErrors, validatePaymentPassword } from '~/common/utils'
@@ -70,6 +72,8 @@ const Confirm: React.FC<FormProps> = ({
 }) => {
   const formId = 'pay-to-confirm-form'
 
+  const { getQuery } = useRoute()
+  const mediaHash = getQuery('mediaHash')
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
   const [payTo] = useMutation<PayToMutate>(PAY_TO, undefined, {
@@ -121,6 +125,16 @@ const Confirm: React.FC<FormProps> = ({
             purpose: 'donation',
             recipientId: recipient.id,
             targetId,
+          },
+          // optimisticResponse: {
+
+          // },
+          update: (cache) => {
+            updateDonation({
+              cache,
+              mediaHash,
+              viewer,
+            })
           },
         })
 
