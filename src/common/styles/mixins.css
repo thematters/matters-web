@@ -167,6 +167,43 @@
   }
 }
 
+@define-mixin form-input-round {
+  @mixin all-transition;
+
+  height: var(--input-height);
+  padding: var(--spacing-base);
+  border: 1px solid var(--color-grey-light);
+  border-radius: var(--spacing-x-tight);
+  caret-color: var(--color-matters-green);
+
+  &:focus,
+  &.focus {
+    background-color: var(--color-green-lighter);
+    border-color: var(--color-matters-green);
+  }
+  &.error {
+    border-color: var(--color-red);
+
+    &:focus,
+    &.focus {
+      background-color: transparent;
+      border-color: var(--color-red);
+    }
+  }
+
+  /* Chrome, Safari, Edge, Opera */
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    margin: 0;
+    -webkit-appearance: none;
+  }
+
+  /* Firefox */
+  &[type='number'] {
+    -moz-appearance: textfield;
+  }
+}
+
 /* Components
    ========================================================================== */
 @define-mixin feed-footer-actions {

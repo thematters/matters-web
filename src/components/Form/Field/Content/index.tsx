@@ -1,13 +1,27 @@
+import classNames from 'classnames'
+
 import styles from './styles.css'
 
-const Content: React.FC<React.PropsWithChildren<React.ReactNode>> = ({
-  children,
-}) => (
-  <section className="input-container">
-    {children}
+type ContentProps = {
+  noMargin?: boolean
+}
 
-    <style jsx>{styles}</style>
-  </section>
-)
+const Content: React.FC<React.PropsWithChildren<ContentProps>> = ({
+  noMargin,
+  children,
+}) => {
+  const contentClass = classNames({
+    'input-container': true,
+    'no-margin': noMargin,
+  })
+
+  return (
+    <section className={contentClass}>
+      {children}
+
+      <style jsx>{styles}</style>
+    </section>
+  )
+}
 
 export default Content

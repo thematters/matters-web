@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import { forwardRef } from 'react'
 
 import { KEYCODES } from '~/common/enums'
@@ -5,6 +6,7 @@ import { KEYCODES } from '~/common/enums'
 import styles from './styles.css'
 
 type ItemProps = {
+  error: boolean
   onChange: (value: string) => void
   onBackspace: () => void
   onPaste: (event: React.ClipboardEvent<HTMLInputElement>) => void
@@ -17,7 +19,10 @@ type ItemProps = {
 >
 
 const Item = forwardRef(
-  ({ onPaste, onChange, onBackspace, ...inputProps }: ItemProps, ref: any) => {
+  (
+    { error, onPaste, onChange, onBackspace, ...inputProps }: ItemProps,
+    ref: any
+  ) => {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       event.preventDefault()
       onChange(event.target.value.slice(-1))
@@ -36,12 +41,16 @@ const Item = forwardRef(
     }
 
     const value = ((inputProps.value as string) || '').slice(-1)
+    const pinItemClasses = classNames({
+      'pin-input-item': true,
+      error: !!error,
+    })
 
     return (
       <>
         <input
           maxLength={1}
-          className="pin-input-item"
+          className={pinItemClasses}
           autoComplete="off"
           pattern="[0-9]*"
           type="password"

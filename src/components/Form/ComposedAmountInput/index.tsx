@@ -148,10 +148,6 @@ const ComposedAmountInput: React.FC<ComposedAmountInputProps> = ({
     hint: customAmountHint,
     ...customAmountInputProps
   } = customAmount
-  const customInputClass = classNames({
-    'custom-input': true,
-    error: !!customAmountError,
-  })
 
   return (
     <section className="amount-input">
@@ -163,8 +159,9 @@ const ComposedAmountInput: React.FC<ComposedAmountInputProps> = ({
         </ul>
 
         {customAmount && (
-          <section className={customInputClass}>
+          <section className="custom-input">
             <input
+              className={customAmountError ? 'error' : ''}
               type="number"
               name="customAmount"
               placeholder={translate({ id: 'enterCustomAmount', lang })}
