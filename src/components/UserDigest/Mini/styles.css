@@ -1,10 +1,6 @@
 .container {
   @mixin flex-center-start;
 
-  &.hasAvatar .name {
-    margin-left: var(--spacing-x-tight);
-  }
-
   &:not(.disabled) {
     &:hover,
     &:focus {
@@ -40,10 +36,14 @@
 }
 
 .displayname {
+  @mixin line-clamp;
+
   line-height: 1.25;
 }
 
 .username {
+  @mixin line-clamp;
+
   margin-left: var(--spacing-xx-tight);
   font-size: var(--font-size-sm);
   line-height: 1.25;
@@ -73,6 +73,9 @@
 .text-weight-md {
   font-weight: var(--font-weight-medium);
 }
+.text-weight-semibold {
+  font-weight: var(--font-weight-semibold);
+}
 
 .name-color-black {
   & .displayname {
@@ -95,5 +98,17 @@
 .name-color-green {
   & .displayname {
     color: var(--color-matters-green);
+  }
+}
+
+.spacing-xtight {
+  &.hasAvatar .name {
+    margin-left: var(--spacing-x-tight);
+  }
+}
+
+.spacing-xxtight {
+  &.hasAvatar .name {
+    margin-left: var(--spacing-xx-tight);
   }
 }

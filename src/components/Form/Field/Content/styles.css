@@ -5,4 +5,8 @@ section {
   @media (--sm-up) {
     margin: 0;
   }
+
+  &.no-margin {
+    margin: 0;
+  }
 }

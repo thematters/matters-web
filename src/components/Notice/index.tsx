@@ -70,7 +70,9 @@ const fragments = {
   `,
 }
 
-const BaseNotice: React.FC<NoticeProps> = ({ notice }) => {
+export const Notice: React.FC<NoticeProps> & {
+  fragments: typeof fragments
+} = ({ notice }) => {
   switch (notice.__typename) {
     case 'UserNotice':
       return <UserNotice notice={notice} />
@@ -98,14 +100,5 @@ const BaseNotice: React.FC<NoticeProps> = ({ notice }) => {
       return null
   }
 }
-
-/**
- * Memoizing
- */
-type MemoizedNotice = React.MemoExoticComponent<React.FC<NoticeProps>> & {
-  fragments: typeof fragments
-}
-
-export const Notice = React.memo(BaseNotice, () => true) as MemoizedNotice
 
 Notice.fragments = fragments
