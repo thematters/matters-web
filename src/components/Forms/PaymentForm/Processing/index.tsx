@@ -267,9 +267,9 @@ const USDTProcessingForm: React.FC<Props> = ({
             </p>
             <p>
               <Translate
-                zh_hant="完成前請勿關閉此畫面"
-                zh_hans="完成前请勿关闭此画面"
-                en="Do not close the window."
+                zh_hant="操作結果以鏈上紀錄為主，稍後將同步至 Matters"
+                zh_hans="操作结果以链上记录为主，稍后将同步至 Matters"
+                en="Transaction will be updated to Matters shortly."
               />
             </p>
           </section>
