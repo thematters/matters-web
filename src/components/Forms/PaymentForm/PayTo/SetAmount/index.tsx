@@ -141,7 +141,8 @@ const SetAmount: React.FC<FormProps> = ({
   const balance = isUSDT ? balanceUSDT : isHKD ? balanceHKD : balanceLike
   const maxAmount = isHKD ? PAYMENT_MAXIMUM_PAYTO_AMOUNT.HKD : Infinity
   const networkEerror =
-    error || allowanceError || balanceUSDTError || approveError
+    error ||
+    (isUSDT ? allowanceError || balanceUSDTError || approveError : undefined)
       ? WALLET_ERROR_MESSAGES[lang].unknown
       : ''
 
