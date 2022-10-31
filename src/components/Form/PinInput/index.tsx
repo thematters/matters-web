@@ -128,6 +128,7 @@ const Input: React.FC<InputProps> = ({
               value={val}
               id={`field-${name}-${index + 1}`}
               ref={itemRefs[index]}
+              error={!!error}
               onChange={(v: string) => onItemChange(v, index)}
               onPaste={(event: React.ClipboardEvent<HTMLInputElement>) =>
                 onItemPaste(event, index)

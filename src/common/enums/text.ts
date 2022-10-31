@@ -140,6 +140,7 @@ export const TEXT = {
     FORBIDDEN_BY_TARGET_STATE: '你無法對此對象進行該操作',
     FORBIDDEN: '你尚無權限進行該操作',
     forgetPassword: '忘記密碼',
+    forgetPaymentPassword: '忘記交易密碼',
     frequentSearch: '熱門搜尋',
     guide: '玩轉 Matters 實用指南',
     help: '說明',
@@ -519,6 +520,7 @@ export const TEXT = {
     FORBIDDEN_BY_TARGET_STATE: '你无法对此对象进行该操作',
     FORBIDDEN: '你尚无权限进行该操作',
     forgetPassword: '忘记密码',
+    forgetPaymentPassword: '忘记交易密码',
     frequentSearch: '热门搜索',
     guide: '玩转 Matters 实用指南',
     help: '说明',
@@ -905,6 +907,7 @@ export const TEXT = {
       'You do not have permissionn to perform this operation',
     FORBIDDEN: 'You do not have permission to perform this operation',
     forgetPassword: 'Forget Password',
+    forgetPaymentPassword: 'Forget Payment Password',
     frequentSearch: 'Search trends',
     guide: 'Explore Matters',
     help: 'Help',
@@ -930,7 +933,7 @@ export const TEXT = {
       'Adding articles to a collection helps readers find your articles.',
     hintPassword:
       'Minimum 8 characters. Uppercase/lowercase letters, numbers and symbols are allowed',
-    hintPaymentPassword: 'Enter a 6-digit transaction password.',
+    hintPaymentPassword: 'Enter a 6-digit payment password.',
     hintPaymentPointer: 'The wallet address starts with "$".',
     hintTerm:
       'We have amended or modified our Terms and Privacy Policy. Agree and accept all Terms to continue using our Services.',

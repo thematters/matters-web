@@ -2,13 +2,13 @@ import { useQuery } from '@apollo/react-hooks'
 import _pickBy from 'lodash/pickBy'
 
 import {
-  Avatar,
   CurrencyFormatter,
   Dialog,
   IconFiatCurrency40,
   Spinner,
   TextIcon,
   Translate,
+  UserDigest,
 } from '~/components'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
 
@@ -49,11 +49,19 @@ const CurrencyChoice: React.FC<FormProps> = ({
           <Translate zh_hant="選擇支持" zh_hans="选择支持" en="Support " />
         </span>
         <span className="userInfo">
-          <Avatar user={recipient} size="xs" />
-          <span className="userName">{recipient.displayName}</span>
+          <UserDigest.Mini
+            user={recipient}
+            avatarSize="xs"
+            textSize="md-s"
+            textWeight="semibold"
+            nameColor="black"
+            spacing="xxtight"
+            hasAvatar
+            hasDisplayName
+          />
         </span>
         <span>
-          <Translate zh_hant="的方式" zh_hans="的方式" en="with: " />
+          <Translate zh_hant="的方式：" zh_hans="的方式：" en="with: " />
         </span>
       </section>
 

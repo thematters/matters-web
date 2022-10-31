@@ -27,9 +27,10 @@ export type UserDigestMiniProps = {
 
   avatarSize?: Extract<AvatarSize, 'xs' | 'sm' | 'md' | 'lg'>
   textSize?: 'xs' | 'sm-s' | 'sm' | 'md-s' | 'md'
-  textWeight?: 'md'
+  textWeight?: 'md' | 'semibold'
   nameColor?: 'black' | 'white' | 'grey-darker' | 'green'
   direction?: 'row' | 'column'
+  spacing?: 'xxtight' | 'xtight'
 
   hasAvatar?: boolean
   hasDisplayName?: boolean
@@ -61,6 +62,7 @@ const Mini = ({
   textWeight,
   nameColor = 'black',
   direction = 'row',
+  spacing = 'xtight',
 
   hasAvatar,
   hasDisplayName,
@@ -79,6 +81,7 @@ const Mini = ({
     [`text-size-${textSize}`]: !!textSize,
     [`text-weight-${textWeight}`]: !!textWeight,
     [`name-color-${nameColor}`]: !!nameColor,
+    [`spacing-${spacing}`]: !!spacing,
     hasAvatar,
     disabled: disabled || isArchived,
   })
