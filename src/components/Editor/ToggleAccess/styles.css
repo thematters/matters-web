@@ -62,3 +62,34 @@ h3 {
     }
   }
 }
+
+.support-setting {
+  & :global(button) {
+    @mixin flex-start-space-between;
+
+    width: 100%;
+  }
+}
+
+.support {
+  @mixin flex-start-space-between;
+
+  width: 100%;
+  margin-top: var(--spacing-loose);
+
+  & .hint {
+    margin-top: var(--spacing-xx-tight);
+    font-size: var(--font-size-xs);
+    color: var(--color-grey);
+  }
+
+  & .left {
+    @mixin flex-start-center;
+
+    flex-direction: column;
+  }
+
+  & .right {
+    @mixin flex-center-end;
+  }
+}

@@ -1,6 +1,15 @@
-import { CircleDigest, Switch, Translate } from '~/components'
+import {
+  Button,
+  CircleDigest,
+  IconArrowRight16,
+  Switch,
+  Translate,
+} from '~/components'
 
 import SelectLicense from './SelectLicense'
+import SupportSettingDialog, {
+  SetSupportSettingProps,
+} from './SetSupportSetting/index'
 import styles from './styles.css'
 
 import {
@@ -45,6 +54,7 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
 
   inSidebar,
 }) => {
+  const supportSettingProps: SetSupportSettingProps = {}
   return (
     <section className={inSidebar ? 'inSidebar' : ''}>
       {canToggleCircle && (
@@ -105,6 +115,36 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
             }
           />
         </section>
+      </section>
+      <section className="support-setting">
+        <SupportSettingDialog {...supportSettingProps}>
+          {({ openDialog }) => (
+            <button type="button" onClick={openDialog}>
+              <section className="support">
+                <section className="left">
+                  <h3>
+                    <Translate
+                      zh_hans="支持设置"
+                      zh_hant="支持設置"
+                      en="Support Setting"
+                    />
+                  </h3>
+                  <p className="hint">
+                    <Translate
+                      zh_hans="可自定求支持文字，以及支持後回覆的內容"
+                      zh_hant="可自定求支持文字，以及支持後回覆的內容"
+                    />
+                  </p>
+                </section>
+                <section className="right">
+                  <Button onClick={openDialog} spacing={['xxtight', 'xtight']}>
+                    <IconArrowRight16 color="grey" />
+                  </Button>
+                </section>
+              </section>
+            </button>
+          )}
+        </SupportSettingDialog>
       </section>
 
       <section className="iscn">

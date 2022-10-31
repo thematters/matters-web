@@ -299,6 +299,18 @@ span.container {
   }
 }
 
+.bg-yellow-lighter {
+  & .hotarea {
+    background: var(--color-yellow-lighter);
+  }
+}
+
+.bg-gold-linear-gradient {
+  & .hotarea {
+    background: linear-gradient(93.62deg, #cda555 2.8%, #b48527 93%);
+  }
+}
+
 /* Background:hover */
 .bg-active-grey-lighter {
   &:hover,
