@@ -50,8 +50,6 @@ const SupportWidget = ({ article }: DonationProps) => {
     hasCircle: article.access.circle,
   })
 
-  console.log({ article })
-
   const [payTo] = useMutation<PayToMutate>(PAY_TO)
 
   useEventListener(
@@ -73,8 +71,7 @@ const SupportWidget = ({ article }: DonationProps) => {
       // USDT
       setPlayShipWaiting(true)
       setShowAnimation(true)
-      const { transactionResult, amount, recipientId, targetId } =
-        payload
+      const { transactionResult, amount, recipientId, targetId } = payload
 
       await payTo({
         variables: {
@@ -144,13 +141,17 @@ const SupportWidget = ({ article }: DonationProps) => {
           </section>
 
           {showTransaction && (
-            <p className="transaction">
+            <section className="transaction">
               <span>
                 <Translate zh_hant="查看" zh_hans="查看" en="See" />
               </span>
               <Button href={PATHS.ME_WALLET_TRANSACTIONS}>
                 <span className="transaction-button">
-                  <TextIcon icon={<IconDollarCircle16 />} color="gold">
+                  <TextIcon
+                    icon={<IconDollarCircle16 />}
+                    color="gold"
+                    size="xs"
+                  >
                     <Translate
                       zh_hant="交易紀錄"
                       zh_hans="交易纪录"
@@ -159,7 +160,7 @@ const SupportWidget = ({ article }: DonationProps) => {
                   </TextIcon>
                 </span>
               </Button>
-            </p>
+            </section>
           )}
         </section>
       )}

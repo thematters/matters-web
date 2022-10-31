@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { useInView } from 'react-intersection-observer'
 import Lottie, { EventListener } from 'react-lottie'
 
 import { Translate, useStep } from '~/components'
@@ -64,11 +65,11 @@ const Animation: React.FC<Props> = ({
   defaultStep = 'coinShip',
 }) => {
   const { currStep, forward } = useStep<Step>(defaultStep)
-
   const isCoinShip = currStep === 'coinShip'
   const isShipWaiting = currStep === 'shipWaiting'
   const isShipSprinkHeart = currStep === 'shipSprinkleHeart'
   const isOpenHeart = currStep === 'openHeart'
+  const [ref, inView] = useInView()
 
   useEffect(() => {
     if (isShipWaiting) {
@@ -101,10 +102,11 @@ const Animation: React.FC<Props> = ({
     isClickToPauseDisabled: true,
     height: 136,
     width: 166,
+    isPaused: !inView,
   }
 
   return (
-    <section>
+    <section ref={ref}>
       <p className="animation-hint">
         {isShipWaiting && currency === CURRENCY.LIKE && (
           <Translate

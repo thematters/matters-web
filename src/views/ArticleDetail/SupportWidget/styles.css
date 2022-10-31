@@ -38,10 +38,11 @@
     @mixin flex-center-all;
 
     margin-top: var(--spacing-loose);
+    font-size: var(--font-size-xs);
 
     & .transaction-button {
       display: inline-block;
-      margin-left: var(--spacing-x-tight);
+      margin-left: var(--spacing-xx-tight);
       border-bottom: 1px solid var(--color-matters-gold);
     }
   }
