@@ -301,13 +301,6 @@ const BaseDonationDialog = ({
             recipient={recipient}
             closeDialog={closeDialog}
             nextStep={() => {
-              // window.dispatchEvent(
-              //   new CustomEvent(SUPPORT_SUCCESS_ANIMATION, {
-              //     detail: {
-              //       color: 'green',
-              //     },
-              //   })
-              // )
               closeDialog()
             }}
             txId={payToTx?.id || ''}
