@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
-import { useInView } from 'react-intersection-observer'
 import Lottie, { EventListener } from 'react-lottie'
+import { Waypoint } from 'react-waypoint'
 
 import { Translate, useStep } from '~/components'
 
@@ -69,7 +69,7 @@ const Animation: React.FC<Props> = ({
   const isShipWaiting = currStep === 'shipWaiting'
   const isShipSprinkHeart = currStep === 'shipSprinkleHeart'
   const isOpenHeart = currStep === 'openHeart'
-  const [ref, inView] = useInView()
+  // const [ref, inView] = useInView()
 
   useEffect(() => {
     if (isShipWaiting) {
@@ -102,53 +102,54 @@ const Animation: React.FC<Props> = ({
     isClickToPauseDisabled: true,
     height: 136,
     width: 166,
-    isPaused: !inView,
   }
 
   return (
-    <section ref={ref}>
-      <p className="animation-hint">
-        {isShipWaiting && currency === CURRENCY.LIKE && (
-          <Translate
-            zh_hant="支付請求已送出，LikeCoin 網絡確認中⋯"
-            zh_hans="支付请求已送出，LikeCoin 网络确认中⋯"
-            en="The payment request has been sent, and the LikeCoin is confirming…"
+    <Waypoint>
+      <section>
+        <p className="animation-hint">
+          {isShipWaiting && currency === CURRENCY.LIKE && (
+            <Translate
+              zh_hant="支付請求已送出，LikeCoin 網絡確認中⋯"
+              zh_hans="支付请求已送出，LikeCoin 网络确认中⋯"
+              en="The payment request has been sent, and the LikeCoin is confirming…"
+            />
+          )}
+          {isShipWaiting && currency === CURRENCY.USDT && (
+            <Translate
+              zh_hant="支付請求已送出，Polygon 網絡確認中⋯"
+              zh_hans="支付請求已送出，Polygon 网络确认中⋯"
+              en="The payment request has been sent, and the Polygon is confirming…"
+            />
+          )}
+        </p>
+        {isCoinShip && (
+          <Lottie
+            options={coinShipOptions}
+            eventListeners={[coinShipListener]}
+            {...LottieProps}
           />
         )}
-        {isShipWaiting && currency === CURRENCY.USDT && (
-          <Translate
-            zh_hant="支付請求已送出，Polygon 網絡確認中⋯"
-            zh_hans="支付請求已送出，Polygon 网络确认中⋯"
-            en="The payment request has been sent, and the Polygon is confirming…"
+        {isShipWaiting && (
+          <Lottie options={shipWaitingOptions} {...LottieProps} />
+        )}
+        {isShipSprinkHeart && (
+          <Lottie
+            options={shipSprinkleHeartOptions}
+            eventListeners={[shiSprinkleHeartListener]}
+            {...LottieProps}
           />
         )}
-      </p>
-      {isCoinShip && (
-        <Lottie
-          options={coinShipOptions}
-          eventListeners={[coinShipListener]}
-          {...LottieProps}
-        />
-      )}
-      {isShipWaiting && (
-        <Lottie options={shipWaitingOptions} {...LottieProps} />
-      )}
-      {isShipSprinkHeart && (
-        <Lottie
-          options={shipSprinkleHeartOptions}
-          eventListeners={[shiSprinkleHeartListener]}
-          {...LottieProps}
-        />
-      )}
-      {isOpenHeart && (
-        <Lottie
-          options={openHeartOptions}
-          eventListeners={[openHeartListener]}
-          {...LottieProps}
-        />
-      )}
-      <style jsx>{styles}</style>
-    </section>
+        {isOpenHeart && (
+          <Lottie
+            options={openHeartOptions}
+            eventListeners={[openHeartListener]}
+            {...LottieProps}
+          />
+        )}
+        <style jsx>{styles}</style>
+      </section>
+    </Waypoint>
   )
 }
 
