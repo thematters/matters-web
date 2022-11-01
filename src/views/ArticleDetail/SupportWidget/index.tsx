@@ -12,7 +12,6 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-import DonationButton from '~/components/Buttons/DonationButton'
 import PAY_TO from '~/components/GQL/mutations/payTo'
 import updateDonation from '~/components/GQL/updates/donation'
 
@@ -28,6 +27,7 @@ import Animation from './Animation'
 import Donators from './Donators'
 import { fragments } from './gql'
 import styles from './styles.css'
+import SupportButton from './SupportButton'
 
 import { PayTo as PayToMutate } from '~/components/GQL/mutations/__generated__/PayTo'
 import { ArticleDetailPublic_article } from '../__generated__/ArticleDetailPublic'
@@ -131,7 +131,7 @@ const SupportWidget = ({ article }: DonationProps) => {
           )}
 
           <section className="donation-button">
-            <DonationButton
+            <SupportButton
               recipient={article.author}
               targetId={article.id}
               article={article}
