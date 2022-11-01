@@ -54,6 +54,8 @@ type ButtonColor =
   | 'gold'
   | 'red'
   | 'likecoin-green'
+  | 'yellow-lighter'
+  | 'gold-linear-gradient'
 
 type ButtonTextColor = Extract<
   ButtonColor,
@@ -72,6 +74,8 @@ export type ButtonBgColor = Extract<
   | 'white'
   | 'half-black'
   | 'black'
+  | 'yellow-lighter'
+  | 'gold-linear-gradient'
 >
 
 type ButtonBgActiveColor = Extract<

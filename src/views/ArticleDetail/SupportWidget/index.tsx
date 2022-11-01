@@ -12,6 +12,7 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
+import DonationButton from '~/components/Buttons/DonationButton'
 import PAY_TO from '~/components/GQL/mutations/payTo'
 import updateDonation from '~/components/GQL/updates/donation'
 
@@ -24,7 +25,6 @@ import {
 import { analytics } from '~/common/utils'
 
 import Animation from './Animation'
-import DonationButton from './DonationButton'
 import Donators from './Donators'
 import { fragments } from './gql'
 import styles from './styles.css'

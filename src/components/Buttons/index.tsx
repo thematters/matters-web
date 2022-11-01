@@ -1,5 +1,6 @@
 export * from './BackToHome'
 export * from './Bookmark'
+export * from './DonationButton'
 export * from './FollowUser'
 export * from './Share'
 export * from './SignUp'

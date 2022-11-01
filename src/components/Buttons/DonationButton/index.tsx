@@ -14,18 +14,22 @@ import { ADD_TOAST, REFETCH_DONATORS } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
-import { ArticleDetailPublic_article } from '../../__generated__/ArticleDetailPublic'
+import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
 
 interface DonationButtonProps {
   recipient: UserDonationRecipient
   targetId: string
   article: ArticleDetailPublic_article
+  supported?: boolean
+  disabled?: boolean
 }
 
 const DonationButton = ({
   recipient,
   targetId,
   article,
+  supported = false,
+  disabled = false,
 }: DonationButtonProps) => {
   const viewer = useContext(ViewerContext)
 
@@ -67,6 +71,31 @@ const DonationButton = ({
     )
   }
 
+  const onClick = (openDialog: () => void) => {
+    if (disabled) {
+      return
+    }
+
+    analytics.trackEvent('click_button', { type: 'donate' })
+
+    if (!viewer.isAuthed) {
+      showLoginToast()
+      return
+    }
+
+    if (viewer.isFrozen) {
+      forbid()
+      return
+    }
+
+    if (recipient.id === viewer.id) {
+      forbid(true)
+      return
+    }
+
+    openDialog()
+  }
+
   return (
     <DonationDialog
       completeCallback={completeCallback}
@@ -75,34 +104,36 @@ const DonationButton = ({
       article={article}
     >
       {({ openDialog }) => (
-        <Button
-          size={['10.5rem', '2.5rem']}
-          bgColor="gold"
-          onClick={() => {
-            analytics.trackEvent('click_button', { type: 'donate' })
-
-            if (!viewer.isAuthed) {
-              showLoginToast()
-              return
-            }
-
-            if (viewer.isFrozen) {
-              forbid()
-              return
-            }
-
-            if (recipient.id === viewer.id) {
-              forbid(true)
-              return
-            }
-
-            openDialog()
-          }}
-        >
-          <TextIcon icon={<IconDonate24 />} weight="md" color="white">
-            <Translate id="donation" />
-          </TextIcon>
-        </Button>
+        <>
+          {supported && (
+            <Button
+              size={['10.5rem', '2.5rem']}
+              bgColor="yellow-lighter"
+              borderColor="gold"
+              borderWidth="sm"
+              onClick={() => {
+                onClick(openDialog)
+              }}
+            >
+              <TextIcon icon={<IconDonate24 />} weight="md" color="gold">
+                <Translate id="donationAgain" />
+              </TextIcon>
+            </Button>
+          )}
+          {!supported && (
+            <Button
+              size={['10.5rem', '2.5rem']}
+              bgColor="gold-linear-gradient"
+              onClick={() => {
+                onClick(openDialog)
+              }}
+            >
+              <TextIcon icon={<IconDonate24 />} weight="md" color="white">
+                <Translate id="donation" />
+              </TextIcon>
+            </Button>
+          )}
+        </>
       )}
     </DonationDialog>
   )
