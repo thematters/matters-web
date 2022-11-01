@@ -18,6 +18,7 @@ export const fragments = {
             ...DigestRichCirclePublic
           }
         }
+        supportRequest
         ...DonatorsArticle
       }
       ${Donators.fragments.article}

@@ -50,6 +50,8 @@ const SupportWidget = ({ article }: DonationProps) => {
     hasCircle: article.access.circle,
   })
 
+  const supportRequest = article.supportRequest
+
   const [payTo] = useMutation<PayToMutate>(PAY_TO)
 
   useEventListener(
@@ -111,19 +113,22 @@ const SupportWidget = ({ article }: DonationProps) => {
       )}
       {!showAnimation && (
         <section className="donation">
-          <p>
-            <Translate
-              zh_hant="喜歡我的文章嗎？"
-              zh_hans="喜欢我的文章吗？"
-              en="Like my work??"
-            />
-            <br />
-            <Translate
-              zh_hant="別忘了給點支持與讚賞，讓我知道創作的路上有你陪伴。"
-              zh_hans="别忘了给点支持与赞赏，让我知道创作的路上有你陪伴。"
-              en="Don't forget to support or like, so I know you are with me.."
-            />
-          </p>
+          {supportRequest && <p>{supportRequest}</p>}
+          {!supportRequest && (
+            <p>
+              <Translate
+                zh_hant="喜歡我的文章嗎？"
+                zh_hans="喜欢我的文章吗？"
+                en="Like my work??"
+              />
+              <br />
+              <Translate
+                zh_hant="別忘了給點支持與讚賞，讓我知道創作的路上有你陪伴。"
+                zh_hans="别忘了给点支持与赞赏，让我知道创作的路上有你陪伴。"
+                en="Don't forget to support or like, so I know you are with me.."
+              />
+            </p>
+          )}
 
           <section className="donation-button">
             <DonationButton
