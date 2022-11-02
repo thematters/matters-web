@@ -44,6 +44,7 @@ export const fragments = {
 export const HAS_DONATED = gql`
   query HasDonated($mediaHash: String!, $senderId: ID) {
     article(input: { mediaHash: $mediaHash }) {
+      id
       donation: transactionsReceivedBy(
         input: { senderId: $senderId, purpose: donation }
       ) {
