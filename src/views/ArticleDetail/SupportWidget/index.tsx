@@ -1,4 +1,4 @@
-import { useLazyQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import { useContext, useEffect, useState } from 'react'
 
@@ -46,23 +46,25 @@ const SupportWidget = ({ article }: DonationProps) => {
   const [showAnimation, setShowAnimation] = useState(false)
   const [showAvatarAnimation, setShowAvatarAnimation] = useState(false)
   const [showTransaction, setShowTransaction] = useState(false)
+  const [supported, setSupported] = useState(false)
   const [currency, setCurrency] = useState<CURRENCY>(CURRENCY.HKD)
   const supportWidgetClasses = classNames({
     'support-widget': true,
     hasCircle: article.access.circle,
   })
-  const [getDonated, { called, loading, data: hasDonatedData }] =
-    useLazyQuery<HasDonated>(HAS_DONATED, {
-      fetchPolicy: 'network-only',
-    })
+
+  const { data: hasDonatedData } = useQuery<HasDonated>(HAS_DONATED, {
+    fetchPolicy: 'network-only',
+    variables: { mediaHash, senderId: viewer.id },
+  })
 
   useEffect(() => {
-    getDonated({
-      variables: { mediaHash, senderId: viewer.id },
-    })
-  }, [viewer])
-
-  console.log({ called, loading, hasDonatedData })
+    if (hasDonatedData) {
+      if (hasDonatedData.article?.donation.totalCount === 1) {
+        setSupported(true)
+      }
+    }
+  }, [hasDonatedData])
 
   const requestForDonation = article.requestForDonation
 
@@ -149,6 +151,7 @@ const SupportWidget = ({ article }: DonationProps) => {
               recipient={article.author}
               targetId={article.id}
               article={article}
+              supported={supported}
             />
           </section>
 
