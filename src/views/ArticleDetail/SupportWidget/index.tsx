@@ -1,5 +1,6 @@
+import { useLazyQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import {
   Button,
@@ -25,12 +26,13 @@ import { analytics } from '~/common/utils'
 
 import Animation from './Animation'
 import Donators from './Donators'
-import { fragments } from './gql'
+import { fragments, HAS_DONATED } from './gql'
 import styles from './styles.css'
 import SupportButton from './SupportButton'
 
 import { PayTo as PayToMutate } from '~/components/GQL/mutations/__generated__/PayTo'
 import { ArticleDetailPublic_article } from '../__generated__/ArticleDetailPublic'
+import { HasDonated } from './__generated__/HasDonated'
 
 interface DonationProps {
   article: ArticleDetailPublic_article
@@ -49,8 +51,20 @@ const SupportWidget = ({ article }: DonationProps) => {
     'support-widget': true,
     hasCircle: article.access.circle,
   })
+  const [getDonated, { called, loading, data: hasDonatedData }] =
+    useLazyQuery<HasDonated>(HAS_DONATED, {
+      fetchPolicy: 'network-only',
+    })
 
-  const supportRequest = article.supportRequest
+  useEffect(() => {
+    getDonated({
+      variables: { mediaHash, senderId: viewer.id },
+    })
+  }, [viewer])
+
+  console.log({ called, loading, hasDonatedData })
+
+  const requestForDonation = article.requestForDonation
 
   const [payTo] = useMutation<PayToMutate>(PAY_TO)
 
@@ -113,8 +127,8 @@ const SupportWidget = ({ article }: DonationProps) => {
       )}
       {!showAnimation && (
         <section className="donation">
-          {supportRequest && <p>{supportRequest}</p>}
-          {!supportRequest && (
+          {requestForDonation && <p>{requestForDonation}</p>}
+          {!requestForDonation && (
             <p>
               <Translate
                 zh_hant="喜歡我的文章嗎？"

@@ -18,7 +18,7 @@ export const fragments = {
             ...DigestRichCirclePublic
           }
         }
-        supportRequest
+        requestForDonation
         ...DonatorsArticle
       }
       ${Donators.fragments.article}
@@ -34,8 +34,21 @@ export const fragments = {
             ...DigestRichCirclePrivate
           }
         }
+        replyToDonator
       }
       ${CircleDigest.Rich.fragments.circle.private}
     `,
   },
 }
+
+export const HAS_DONATED = gql`
+  query HasDonated($mediaHash: String!, $senderId: ID) {
+    article(input: { mediaHash: $mediaHash }) {
+      donation: transactionsReceivedBy(
+        input: { senderId: $senderId, purpose: donation }
+      ) {
+        totalCount
+      }
+    }
+  }
+`
