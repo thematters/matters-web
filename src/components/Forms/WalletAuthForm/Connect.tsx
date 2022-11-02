@@ -8,9 +8,11 @@ import { useAccount, useDisconnect, useSignMessage } from 'wagmi'
 import {
   Dialog,
   Form,
+  IconInfo16,
   LanguageContext,
   Layout,
   Spacer,
+  TextIcon,
   Translate,
   useMutation,
   VerificationSendCodeButton,
@@ -57,29 +59,34 @@ interface FormValues {
   code: string
 }
 
-const Intro = () => {
+const ImportantNotice = () => {
   return (
-    <Dialog.Message align="left">
-      <p>
+    <section className="notice">
+      <h4>
         <Translate
-          zh_hant="提醒：重要訊息將透過郵件通知，請填入信箱完成設定。"
-          zh_hans="提醒：重要讯息将透过邮件通知，請填入邮箱完成设定。"
-          en="Important information will be notified by email. So filling in your email address will be required. "
+          zh_hant="提醒：信箱將不作為登入使用，僅作為聯繫渠道"
+          zh_hans="提醒：信箱将不作为登入使用，仅作为联系渠道"
+          en="As a reminder, the email address will not be used as a login but only as a contact channel."
         />
+      </h4>
+
+      <p>
         <b>
-          <Translate
-            zh_hant="信箱將不作為登入使用，僅作為聯繫渠道。"
-            zh_hans="邮箱将不作为登入使用，仅作为联系渠道。"
-            en="As a reminder, the email address will not be used as a login but only as a contact channel. "
-          />
           <Translate
             zh_hant="Matters 不會透過任何渠道詢問你的錢包私鑰。"
             zh_hans="Matters 不会透过任何渠道询问你的钱包私钥。"
-            en="Also, Matters will never ask for your wallet mnemonic through any channel."
+            en="Matters will never ask for your wallet mnemonic through any channel. "
           />
         </b>
+        <Translate
+          zh_hant="重要訊息將透過郵件通知，請填入信箱完成設定。"
+          zh_hans="重要讯息将透过邮件通知，请填入信箱完成设定。"
+          en="Important information will be notified by email. So filling in your email address will be required."
+        />
       </p>
-    </Dialog.Message>
+
+      <style jsx>{styles}</style>
+    </section>
   )
 }
 
@@ -258,15 +265,7 @@ const Connect: React.FC<FormProps> = ({
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
-      <Form.List
-        groupName={
-          <Translate
-            zh_hans="连接加密钱包"
-            zh_hant="連接加密錢包"
-            en="Connect Wallet"
-          />
-        }
-      >
+      <Form.List groupName={<Translate id="connectWallet" />}>
         <Form.List.Item title={maskAddress(values.address)} />
       </Form.List>
 
@@ -284,9 +283,13 @@ const Connect: React.FC<FormProps> = ({
           }
           error={errors.address}
         />
-
-        <style jsx>{styles}</style>
       </section>
+
+      {isSignUp && (
+        <div className="divider">
+          <hr />
+        </div>
+      )}
 
       {isSignUp && (
         <Form.Input
@@ -298,6 +301,21 @@ const Connect: React.FC<FormProps> = ({
             id: 'enterEmail',
             lang,
           })}
+          extraButton={
+            <TextIcon
+              icon={<IconInfo16 color="gold" />}
+              color="gold"
+              size="sm"
+              weight="md"
+              spacing="xxtight"
+            >
+              <Translate
+                zh_hant="非登入用途"
+                zh_hans="非登入用途"
+                en="Not for login"
+              />
+            </TextIcon>
+          }
           value={values.email}
           error={touched.email && errors.email}
           onBlur={handleBlur}
@@ -364,6 +382,8 @@ const Connect: React.FC<FormProps> = ({
           required
         />
       )}
+
+      <style jsx>{styles}</style>
     </Form>
   )
 
@@ -392,7 +412,7 @@ const Connect: React.FC<FormProps> = ({
 
         {InnerForm}
 
-        {isSignUp && <Intro />}
+        {isSignUp && <ImportantNotice />}
       </>
     )
   }
@@ -413,7 +433,7 @@ const Connect: React.FC<FormProps> = ({
       <Dialog.Content hasGrow>
         {InnerForm}
 
-        {isSignUp && <Intro />}
+        {isSignUp && <ImportantNotice />}
       </Dialog.Content>
     </>
   )
