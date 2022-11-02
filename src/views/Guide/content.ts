@@ -16,18 +16,7 @@ export default {
   </li>
 </ul>
 
-<p>其中，標籤與圍爐是 Matters 的兩項特色功能，標籤可以幫助你的文章獲得更多曝光、並找到志同道合的寫作者；圍爐為你提供一個具有私密感的寫作與讀者互動空間。</p>
-
-<ul>
-  <li>
-    <a className="u-link-green" href="${GUIDE_LINKS.tagUsage.zh_hant}">Matters 標籤功能指南</a>
-  </li>
-  <li>
-    <a className="u-link-green" href="${GUIDE_LINKS.circleUsage.zh_hant}">Matters 圍爐指南</a>
-  </li>
-</ul>
-
-<p>Matters 目前尚未推出 app，如果你想要在手機上使用 Matters.News，非常推薦你使用 PWA，功能跟 app 幾乎完全一樣。</p>
+<p>Matters 目前尚未推出 App，如果你想要在手機上使用 Matters.News，非常推薦你使用 PWA，功能跟 App 幾乎完全一樣。</p>
 
 <ul>
   <li>
@@ -50,6 +39,14 @@ export default {
 <ul>
   <li>
     <a className="u-link-green" href="${GUIDE_LINKS.payment.zh_hant}">Matters 支付與提現指南</a>
+  </li>
+</ul>
+
+<p>如果你想用手機進行登入、綁定錢包及進行 USDT 支付，請參考我們的手機版專屬指南，可以為你解決絕大部分的疑惑。</p>
+
+<ul>
+  <li>
+    <a className="u-link-green" href="${GUIDE_LINKS.mobilePayment.zh_hant}">Matters 錢包與支付指南（手機版）</a>
   </li>
 </ul>
 
@@ -76,18 +73,7 @@ export default {
   </li>
 </ul>
 
-<p>其中，标签与围炉是 Matters 的两项特色功能，标签可以帮助你的文章获得更多曝光、并找到志同道合的写作者；围炉为你提供一个具有私密感的写作与读者互动空间。</p>
-
-<ul>
-  <li>
-    <a className="u-link-green" href="${GUIDE_LINKS.tagUsage.zh_hans}">Matters 标签功能指南</a>
-  </li>
-  <li>
-    <a className="u-link-green" href="${GUIDE_LINKS.circleUsage.zh_hans}">Matters 围炉指南</a>
-  </li>
-</ul>
-
-<p>Matters 目前尚未推出 app，如果你想要在手机上使用 Matters.News，非常推荐你使用 PWA，功能跟 app 几乎完全一样。</p>
+<p>Matters 目前尚未推出 App，如果你想要在手机上使用 Matters.News，非常推荐你使用 PWA，功能跟 App 几乎完全一样。</p>
 
 <ul>
   <li>
@@ -110,6 +96,14 @@ export default {
 <ul>
   <li>
     <a className="u-link-green" href="${GUIDE_LINKS.payment.zh_hans}">Matters 支付与提现指南</a>
+  </li>
+</ul>
+
+<p>如果你想用手机进行登入、绑定钱包及进行 USDT 支付，请参考我们的手机版专属指南，可以为你解决绝大部分的疑惑。</p>
+
+<ul>
+  <li>
+    <a className="u-link-green" href="${GUIDE_LINKS.mobilePayment.zh_hant}">Matters 钱包与支付指南（手机版）</a>
   </li>
 </ul>
 
