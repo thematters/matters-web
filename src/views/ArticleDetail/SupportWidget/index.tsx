@@ -53,7 +53,7 @@ const SupportWidget = ({ article }: DonationProps) => {
     hasCircle: article.access.circle,
   })
 
-  const { data: hasDonatedData } = useQuery<HasDonated>(HAS_DONATED, {
+  const { data: hasDonatedData, refetch: hasDonatedRefetch } = useQuery<HasDonated>(HAS_DONATED, {
     fetchPolicy: 'network-only',
     variables: { mediaHash, senderId: viewer.id },
   })
@@ -83,6 +83,7 @@ const SupportWidget = ({ article }: DonationProps) => {
       // HKD、LikeCoin
       if (payload.currency !== CURRENCY.USDT) {
         setShowAnimation(true)
+        hasDonatedRefetch()
         return
       }
 
@@ -111,6 +112,7 @@ const SupportWidget = ({ article }: DonationProps) => {
       })
       await transactionResult.wait()
       setPlayShipWaiting(false)
+      hasDonatedRefetch()
     }
   )
 
