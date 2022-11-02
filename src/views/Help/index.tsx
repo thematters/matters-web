@@ -1,20 +1,14 @@
-import { Form, Layout, Spacer, Translate } from '~/components'
+import { useContext } from 'react'
 
-import { PATHS } from '~/common/enums'
-import { toPath } from '~/common/utils'
+import { Form, LanguageContext, Layout, Spacer, Translate } from '~/components'
+
+import { GUIDE_LINKS, PATHS } from '~/common/enums'
 
 import styles from './styles.css'
 
 const BaseHelp = () => {
+  const { lang } = useContext(LanguageContext)
   const year = new Date().getFullYear()
-  const downloadAppLink = toPath({
-    page: 'articleDetail',
-    article: {
-      slug: 'guidance-如何让你的matters之旅更便捷',
-      mediaHash: 'bafyreiayiuxi4qc2a7qpgjp3fe42wmaoppqykckcvtq4hiukl5pgs3dn2m',
-      author: { userName: '1ampa55ag3' },
-    },
-  })
 
   return (
     <>
@@ -37,7 +31,7 @@ const BaseHelp = () => {
         />
         <Form.List.Item
           title={<Translate id="downloadApp" />}
-          {...downloadAppLink}
+          href={GUIDE_LINKS.PWA[lang]}
         />
       </Form.List>
 

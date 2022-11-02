@@ -1,18 +1,12 @@
-import { Form, Translate } from '~/components'
+import { useContext } from 'react'
 
-import { PATHS } from '~/common/enums'
-import { toPath } from '~/common/utils'
+import { Form, LanguageContext, Translate } from '~/components'
 
-const downloadAppLink = toPath({
-  page: 'articleDetail',
-  article: {
-    slug: 'guidance-如何让你的matters之旅更便捷',
-    mediaHash: 'bafyreiayiuxi4qc2a7qpgjp3fe42wmaoppqykckcvtq4hiukl5pgs3dn2m',
-    author: { userName: '1ampa55ag3' },
-  },
-})
+import { GUIDE_LINKS, PATHS } from '~/common/enums'
 
 const Learn = () => {
+  const { lang } = useContext(LanguageContext)
+
   return (
     <Form.List
       groupName={
@@ -32,7 +26,7 @@ const Learn = () => {
       <Form.List.Item title={<Translate id="term" />} href={PATHS.TOS} />
       <Form.List.Item
         title={<Translate id="downloadApp" />}
-        {...downloadAppLink}
+        href={GUIDE_LINKS.PWA[lang]}
       />
     </Form.List>
   )

@@ -7,13 +7,16 @@ import {
   IconMetaMask24,
   IconSpinner16,
   IconWalletConnect24,
+  LanguageContext,
   Layout,
   Spacer,
   TextIcon,
   Translate,
+  useResponsive,
   ViewerContext,
 } from '~/components'
 
+import { GUIDE_LINKS } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 import styles from './styles.css'
@@ -57,6 +60,49 @@ const Desc = {
   },
 }
 
+const Hint = () => {
+  const { lang } = useContext(LanguageContext)
+  const isSmallUp = useResponsive('sm-up')
+
+  if (isSmallUp) {
+    return (
+      <p>
+        <Translate
+          zh_hant="剛接觸加密錢包？參考 "
+          zh_hans="刚接触加密钱包？参考 "
+          en="Don't have a wallet yet? Check the "
+        />
+        <a
+          className="u-link-green"
+          href={GUIDE_LINKS.connectWallet[lang]}
+          target="_blank"
+        >
+          <Translate zh_hant="教學指南" zh_hans="教学指南" en="tutorial" />
+        </a>
+        <Translate zh_hant="" zh_hans="" en="." />
+      </p>
+    )
+  }
+
+  return (
+    <p>
+      <Translate
+        zh_hant="在行動裝置上使用問題，參考 "
+        zh_hans="在行动装置上使用问题，参考"
+        en="Have wallet questions on mobile device ? Click the "
+      />
+      <a
+        className="u-link-green"
+        href={GUIDE_LINKS.mobilePayment[lang]}
+        target="_blank"
+      >
+        <Translate zh_hant="教學指南" zh_hans="教学指南" en="tutorial" />
+      </a>
+      <Translate zh_hant="" zh_hans="" en="." />
+    </p>
+  )
+}
+
 const Select: React.FC<FormProps> = ({
   type,
   purpose,
@@ -67,7 +113,6 @@ const Select: React.FC<FormProps> = ({
   const viewer = useContext(ViewerContext)
 
   const formId = 'wallet-auth-select-form'
-  const fieldMsgId = 'wall-auth-select-msg'
   const isInPage = purpose === 'page'
   const isConnect = type === 'connect'
 
@@ -191,15 +236,16 @@ const Select: React.FC<FormProps> = ({
         />
       </Form.List>
 
-      {errorMessage && (
+      {!errorMessage && (
         <section className="msg">
-          <Form.Field>
-            <Form.Field.Footer
-              fieldMsgId={fieldMsgId}
-              // hint={}
-              error={errorMessage}
-            />
-          </Form.Field>
+          <Hint />
+          <style jsx>{styles}</style>
+        </section>
+      )}
+
+      {errorMessage && (
+        <section className="msg error">
+          <p>{errorMessage}</p>
           <style jsx>{styles}</style>
         </section>
       )}
