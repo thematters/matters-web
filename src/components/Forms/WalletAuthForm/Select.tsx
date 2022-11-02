@@ -89,7 +89,7 @@ const Hint = () => {
       <Translate
         zh_hant="在行動裝置上使用問題，參考 "
         zh_hans="在行动装置上使用问题，参考"
-        en="Have wallet problems on mobile device ? Click the "
+        en="Have wallet questions on mobile device ? Click the "
       />
       <a
         className="u-link-green"
