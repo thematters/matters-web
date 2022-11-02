@@ -9,11 +9,10 @@ const SupportPreview = ({
   content: string
   tabType: string
 }) => {
-  // const [content, setContent] = useState('')
   return (
     <section className="donation">
       <section className="preview">
-        <p>
+        <span>
           {!content &&
             (tabType === 'request' ? (
               <Translate
@@ -23,7 +22,7 @@ const SupportPreview = ({
               />
             ) : (
               <section className="preview-response">
-                <p>🎉 感謝支持！</p>
+                <span>🎉 感謝支持！</span>
                 <Translate
                   zh_hant="感謝 Matty 的支持 🥳，創作這條路不容易，有你的支持我將能夠蓄積更多能量創作。"
                   zh_hans="感谢 Matty 的支持 🥳，创作这条路不容易，有你的支持我将能够蓄积更多能量创作。"
@@ -33,7 +32,7 @@ const SupportPreview = ({
             ))}
 
           {<Translate zh_hant={content} zh_hans={content} en={content} />}
-        </p>
+        </span>
         <section className="preview-button">
           {tabType === 'request' && (
             <Button size={['100%', '2.5rem']} bgColor="gold-linear-gradient">
