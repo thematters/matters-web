@@ -380,8 +380,8 @@ const SetAmount: React.FC<FormProps> = ({
                     }}
                   >
                     <Translate
-                      zh_hant="前往確認授權"
-                      zh_hans="前往确认授权"
+                      zh_hant="首次需確認授權後繼續"
+                      zh_hans="首次需确认授权后继续"
                       en="Approve to continue"
                     />
                   </Dialog.Footer.Button>
