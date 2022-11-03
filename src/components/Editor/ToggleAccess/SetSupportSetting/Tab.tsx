@@ -1,6 +1,6 @@
 import { Tabs, Translate } from '~/components'
 
-export type TabType = 'request' | 'response'
+export type TabType = 'request' | 'reply'
 
 interface SortByProps {
   tabType: TabType
@@ -9,7 +9,7 @@ interface SortByProps {
 
 const SortBy: React.FC<SortByProps> = ({ tabType, setTabType }) => {
   const isRequest = tabType === 'request'
-  const isReply = tabType === 'response'
+  const isReply = tabType === 'reply'
 
   return (
     <Tabs sticky>
@@ -17,7 +17,7 @@ const SortBy: React.FC<SortByProps> = ({ tabType, setTabType }) => {
         <Translate id="supportSetting" />
       </Tabs.Tab>
 
-      <Tabs.Tab onClick={() => setTabType('response')} selected={isReply}>
+      <Tabs.Tab onClick={() => setTabType('reply')} selected={isReply}>
         <Translate id="supportFeedback" />
       </Tabs.Tab>
     </Tabs>

@@ -41,7 +41,7 @@ interface FormValues {
 
 const UPDATE_SUPPORT_REQUEST = gql`
   mutation UpdateSupportRequest($id: ID!, $requestForDonation: requestForDonation_String_maxLength_140 , $replyToDonator: replyToDonator_String_maxLength_140) {
-    editArticle(input: { id: $id, requestForDonation: $requestForDonation, replyToDonator: $replyToDonator}) {
+    putDraft(input: { id: $id, requestForDonation: $requestForDonation, replyToDonator: $replyToDonator}) {
       id
       requestForDonation
       replyToDonator
@@ -65,7 +65,7 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
 
     const { getQuery, setQuery } = useRoute()
     const qsType = getQuery('type') as TabType
-    const [tabType, setTanType] = useState<TabType>(qsType || 'request')
+    const [tabType, setTabType] = useState<TabType>(qsType || 'request')
     const [wordCount, setWordCount] = useState(0)
 
     const id = getQuery('draftId')
@@ -82,10 +82,10 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
         handleBlur,
         handleSubmit,
         setFieldValue,
-        isSubmitting = true,
+        isSubmitting,       
+        isValid,
     } = useFormik<FormValues>({
         initialValues: {
-            // TODO: wait for backend to query
             requestForDonation: draft ? draft.requestForDonation : '',
             replyToDonator: draft ? draft.replyToDonator : '',
         },
@@ -99,16 +99,14 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
             { setSubmitting, setFieldError }
         ) => {
             try {
-                const result = await update({
+                await update({
                     variables: {
-                        input: {
                             id: draft?.id!,
                             requestForDonation: values.requestForDonation,
-                            replyToDonator: values.replyToDonator,
-                        },
+                            replyToDonator: values.replyToDonator,   
                     },
                 })
-                console.log('result', result)
+
                 window.dispatchEvent(
                     new CustomEvent(ADD_TOAST, {
                         detail: {
@@ -140,7 +138,7 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
 
     const changeTabType = (newType: TabType) => {
         setQuery('type', newType)
-        setTanType(newType)
+        setTabType(newType)
     }
 
     onBack = async () => {
@@ -151,7 +149,7 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
         if (tabType === 'request') {
             setWordCount(values.requestForDonation!.length)
         }
-        if (tabType === 'response') {
+        if (tabType === 'reply') {
             setWordCount(values.replyToDonator!.length)
         }
     }, [values.requestForDonation, values.replyToDonator])
@@ -179,13 +177,14 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
                         value={values.requestForDonation!}
                         error={touched.requestForDonation && errors.requestForDonation}
                         onBlur={handleBlur}
-                        onChange={(e) =>
+                        onChange={(e) => {
                             setFieldValue('requestForDonation', e.currentTarget.value)
+                          }
                         }
                         style={{ lineHeight: '1.5rem' }}
                     />
                 )}
-                {tab === 'response' && (
+                {tab === 'reply' && (
                     <Form.Textarea
                         label={<Translate id="supportResponseTitle" />}
                         name="description"
@@ -208,7 +207,7 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
                     />
                 )}
 
-                <h4>{wordCount}/140 </h4>
+                <h4>{wordCount} / 140 </h4>
 
                 <style jsx>{styles}</style>
             </Form>
@@ -219,7 +218,7 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
         <Dialog.Header.RightButton
             type="submit"
             form={formId}
-            disabled={false}
+            disabled={ !values }
             text={<Translate id="save" />}
             loading={isSubmitting}
         />

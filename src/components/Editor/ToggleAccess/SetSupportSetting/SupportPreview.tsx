@@ -22,7 +22,7 @@ const SupportPreview = ({
               />
             ) : (
               <section className="preview-response">
-                <span>🎉 感謝支持！</span>
+                <p >🎉 感謝支持！</p>
                 <Translate
                   zh_hant="感謝 Matty 的支持 🥳，創作這條路不容易，有你的支持我將能夠蓄積更多能量創作。"
                   zh_hans="感谢 Matty 的支持 🥳，创作这条路不容易，有你的支持我将能够蓄积更多能量创作。"
