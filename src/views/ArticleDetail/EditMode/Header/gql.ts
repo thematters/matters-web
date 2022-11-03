@@ -23,7 +23,9 @@ export const EDIT_ARTICLE = gql`
     $license: ArticleLicenseType
     $iscnPublish: Boolean
     $after: String
-    $first: first_Int_min_0 = null
+    $first: first_Int_min_0 = null 
+    $requestForDonation: requestForDonation_String_maxLength_140 
+    $replyToDonator: replyToDonator_String_maxLength_140 
   ) {
     editArticle(
       input: {
@@ -36,6 +38,8 @@ export const EDIT_ARTICLE = gql`
         accessType: $accessType
         license: $license
         iscnPublish: $iscnPublish
+        requestForDonation: $requestForDonation
+        replyToDonator: $replyToDonator
       }
     ) {
       id
@@ -48,6 +52,8 @@ export const EDIT_ARTICLE = gql`
         type
       }
       license
+      requestForDonation
+      replyToDonator
       drafts {
         id
         mediaHash
