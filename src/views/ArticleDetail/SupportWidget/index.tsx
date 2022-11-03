@@ -53,14 +53,18 @@ const SupportWidget = ({ article }: DonationProps) => {
     hasCircle: article.access.circle,
   })
 
-  const { data: hasDonatedData, refetch: hasDonatedRefetch } = useQuery<HasDonated>(HAS_DONATED, {
-    fetchPolicy: 'network-only',
-    variables: { mediaHash, senderId: viewer.id },
-  })
+  const { data: hasDonatedData, refetch: hasDonatedRefetch } =
+    useQuery<HasDonated>(HAS_DONATED, {
+      fetchPolicy: 'network-only',
+      variables: { mediaHash, senderId: viewer.id },
+    })
 
   useEffect(() => {
     if (hasDonatedData) {
-      if (hasDonatedData.article?.donation.totalCount === 1) {
+      if (
+        viewer.id !== '' &&
+        hasDonatedData.article?.donation.totalCount === 1
+      ) {
         setSupported(true)
       }
     }
