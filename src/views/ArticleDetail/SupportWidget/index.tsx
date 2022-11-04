@@ -214,12 +214,14 @@ const SupportWidget = ({ article }: DonationProps) => {
             />
           </section>
 
-          <section className="donators">
-            <Donators
-              article={article}
-              showAvatarAnimation={showAvatarAnimation}
-            />
-          </section>
+          {article.donations.totalCount > 0 && (
+            <section className="donators">
+              <Donators
+                article={article}
+                showAvatarAnimation={showAvatarAnimation}
+              />
+            </section>
+          )}
 
           {supported && (
             <section className="transaction">
