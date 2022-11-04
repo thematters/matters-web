@@ -3,9 +3,11 @@ import classNames from 'classnames'
 import { useContext, useEffect, useState } from 'react'
 
 import {
+  Avatar,
   Button,
   CircleDigest,
   IconDollarCircle16,
+  Spacer,
   TextIcon,
   Translate,
   useEventListener,
@@ -45,7 +47,6 @@ const SupportWidget = ({ article }: DonationProps) => {
   const [playShipWaiting, setPlayShipWaiting] = useState(false)
   const [showAnimation, setShowAnimation] = useState(false)
   const [showAvatarAnimation, setShowAvatarAnimation] = useState(false)
-  const [showTransaction, setShowTransaction] = useState(false)
   const [supported, setSupported] = useState(false)
   const [currency, setCurrency] = useState<CURRENCY>(CURRENCY.HKD)
   const supportWidgetClasses = classNames({
@@ -71,6 +72,10 @@ const SupportWidget = ({ article }: DonationProps) => {
   }, [hasDonatedData])
 
   const requestForDonation = article.requestForDonation
+  const replyToDonator = hasDonatedData?.article?.replyToDonator?.replaceAll(
+    '#',
+    ` ${viewer.displayName} `
+  )
 
   const [payTo] = useMutation<PayToMutate>(PAY_TO)
 
@@ -82,7 +87,6 @@ const SupportWidget = ({ article }: DonationProps) => {
       }
       setCurrency(payload.currency)
       setShowAvatarAnimation(true)
-      setShowTransaction(true)
 
       // HKD、LikeCoin
       if (payload.currency !== CURRENCY.USDT) {
@@ -135,21 +139,70 @@ const SupportWidget = ({ article }: DonationProps) => {
       )}
       {!showAnimation && (
         <section className="donation">
-          {requestForDonation && <p>{requestForDonation}</p>}
-          {!requestForDonation && (
-            <p>
-              <Translate
-                zh_hant="喜歡我的文章嗎？"
-                zh_hans="喜欢我的文章吗？"
-                en="Like my work??"
-              />
-              <br />
-              <Translate
-                zh_hant="別忘了給點支持與讚賞，讓我知道創作的路上有你陪伴。"
-                zh_hans="别忘了给点支持与赞赏，让我知道创作的路上有你陪伴。"
-                en="Don't forget to support or like, so I know you are with me.."
-              />
-            </p>
+          {supported && (
+            <>
+              {replyToDonator && (
+                <section>
+                  <Avatar user={viewer} size="xl" />
+                  <p>
+                    <TextIcon weight="md">
+                      {article.author.displayName}
+                    </TextIcon>
+                    <Translate
+                      zh_hant=" 想對你說："
+                      zh_hans=" 想對你說："
+                      en=" reply to you: "
+                    />
+                  </p>
+                  <Spacer size="xtight" />
+                  <p>{replyToDonator}</p>
+                </section>
+              )}
+              {!replyToDonator && (
+                <section>
+                  <p>
+                    <TextIcon weight="bold" size="md">
+                      <Translate
+                        zh_hant="🎉 感謝支持！"
+                        zh_hans="🎉 感謝支持！"
+                        en="🎉 Thank you for support!"
+                      />
+                    </TextIcon>
+                  </p>
+                  <Spacer size="xtight" />
+                  <p>
+                    <Translate zh_hant="感謝 " zh_hans="感謝 " en="Thank " />
+                    <span>{viewer.displayName}</span>
+                    <Translate
+                      zh_hant=" 的支持 🥳，創作這條路不容易，有你的支持我將能夠蓄積更多能量創作。"
+                      zh_hans=" 的支持 🥳，創作這條路不容易，有你的支持我將能夠蓄積更多能量創作。"
+                      en=" for your support 🥳. The road to creation is not easy. With your support, I will be able to accumulate more energy to create."
+                    />
+                  </p>
+                </section>
+              )}
+            </>
+          )}
+
+          {!supported && (
+            <>
+              {requestForDonation && <p>{requestForDonation}</p>}
+              {!requestForDonation && (
+                <p>
+                  <Translate
+                    zh_hant="喜歡我的文章嗎？"
+                    zh_hans="喜欢我的文章吗？"
+                    en="Like my work??"
+                  />
+                  <br />
+                  <Translate
+                    zh_hant="別忘了給點支持與讚賞，讓我知道創作的路上有你陪伴。"
+                    zh_hans="别忘了给点支持与赞赏，让我知道创作的路上有你陪伴。"
+                    en="Don't forget to support or like, so I know you are with me.."
+                  />
+                </p>
+              )}
+            </>
           )}
 
           <section className="donation-button">
@@ -168,7 +221,7 @@ const SupportWidget = ({ article }: DonationProps) => {
             />
           </section>
 
-          {showTransaction && (
+          {supported && (
             <section className="transaction">
               <span>
                 <Translate zh_hant="查看" zh_hans="查看" en="See" />

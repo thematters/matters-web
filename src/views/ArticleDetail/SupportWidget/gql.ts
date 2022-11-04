@@ -34,7 +34,6 @@ export const fragments = {
             ...DigestRichCirclePrivate
           }
         }
-        replyToDonator
       }
       ${CircleDigest.Rich.fragments.circle.private}
     `,
@@ -50,6 +49,7 @@ export const HAS_DONATED = gql`
       ) {
         totalCount
       }
+      replyToDonator
     }
   }
 `
