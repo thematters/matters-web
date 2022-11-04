@@ -7,6 +7,7 @@ import {
   Button,
   CircleDigest,
   IconDollarCircle16,
+  IconSpinner16,
   Spacer,
   TextIcon,
   Translate,
@@ -54,11 +55,14 @@ const SupportWidget = ({ article }: DonationProps) => {
     hasCircle: article.access.circle,
   })
 
-  const { data: hasDonatedData, refetch: hasDonatedRefetch } =
-    useQuery<HasDonated>(HAS_DONATED, {
-      fetchPolicy: 'network-only',
-      variables: { mediaHash, senderId: viewer.id },
-    })
+  const {
+    loading,
+    data: hasDonatedData,
+    refetch: hasDonatedRefetch,
+  } = useQuery<HasDonated>(HAS_DONATED, {
+    fetchPolicy: 'network-only',
+    variables: { mediaHash, senderId: viewer.id },
+  })
 
   useEffect(() => {
     if (hasDonatedData) {
@@ -139,111 +143,122 @@ const SupportWidget = ({ article }: DonationProps) => {
       )}
       {!showAnimation && (
         <section className="donation">
-          {supported && (
+          {loading && <IconSpinner16 color="grey-light" size="lg" />}
+          {hasDonatedData && (
             <>
-              {replyToDonator && (
-                <section>
-                  <Avatar user={viewer} size="xl" />
-                  <p>
-                    <TextIcon weight="md">
-                      {article.author.displayName}
-                    </TextIcon>
-                    <Translate
-                      zh_hant=" 想對你說："
-                      zh_hans=" 想對你說："
-                      en=" reply to you: "
-                    />
-                  </p>
-                  <Spacer size="xtight" />
-                  <p>{replyToDonator}</p>
-                </section>
+              {supported && (
+                <>
+                  {replyToDonator && (
+                    <section>
+                      <Avatar user={article.author} size="xl" />
+                      <p>
+                        <TextIcon weight="md">
+                          {article.author.displayName}
+                        </TextIcon>
+                        <TextIcon color="grey-darker">
+                          <Translate
+                            zh_hant="&nbsp;想對你說："
+                            zh_hans="&nbsp;想對你說："
+                            en="&nbsp;reply to you: "
+                          />
+                        </TextIcon>
+                      </p>
+                      <Spacer size="xtight" />
+                      <p>{replyToDonator}</p>
+                    </section>
+                  )}
+                  {!replyToDonator && (
+                    <section>
+                      <p>
+                        <TextIcon weight="bold" size="md">
+                          <Translate
+                            zh_hant="🎉 感謝支持！"
+                            zh_hans="🎉 感謝支持！"
+                            en="🎉 Thank you for support!"
+                          />
+                        </TextIcon>
+                      </p>
+                      <Spacer size="xtight" />
+                      <p>
+                        <Translate
+                          zh_hant="感謝 "
+                          zh_hans="感謝 "
+                          en="Thank "
+                        />
+                        <span>{viewer.displayName}</span>
+                        <Translate
+                          zh_hant=" 的支持 🥳，創作這條路不容易，有你的支持我將能夠蓄積更多能量創作。"
+                          zh_hans=" 的支持 🥳，創作這條路不容易，有你的支持我將能夠蓄積更多能量創作。"
+                          en=" for your support 🥳. The road to creation is not easy. With your support, I will be able to accumulate more energy to create."
+                        />
+                      </p>
+                    </section>
+                  )}
+                </>
               )}
-              {!replyToDonator && (
-                <section>
-                  <p>
-                    <TextIcon weight="bold" size="md">
+
+              {!supported && (
+                <>
+                  {requestForDonation && <p>{requestForDonation}</p>}
+                  {!requestForDonation && (
+                    <p>
                       <Translate
-                        zh_hant="🎉 感謝支持！"
-                        zh_hans="🎉 感謝支持！"
-                        en="🎉 Thank you for support!"
+                        zh_hant="喜歡我的文章嗎？"
+                        zh_hans="喜欢我的文章吗？"
+                        en="Like my work??"
                       />
-                    </TextIcon>
-                  </p>
-                  <Spacer size="xtight" />
-                  <p>
-                    <Translate zh_hant="感謝 " zh_hans="感謝 " en="Thank " />
-                    <span>{viewer.displayName}</span>
-                    <Translate
-                      zh_hant=" 的支持 🥳，創作這條路不容易，有你的支持我將能夠蓄積更多能量創作。"
-                      zh_hans=" 的支持 🥳，創作這條路不容易，有你的支持我將能夠蓄積更多能量創作。"
-                      en=" for your support 🥳. The road to creation is not easy. With your support, I will be able to accumulate more energy to create."
-                    />
-                  </p>
+                      <br />
+                      <Translate
+                        zh_hant="別忘了給點支持與讚賞，讓我知道創作的路上有你陪伴。"
+                        zh_hans="别忘了给点支持与赞赏，让我知道创作的路上有你陪伴。"
+                        en="Don't forget to support or like, so I know you are with me.."
+                      />
+                    </p>
+                  )}
+                </>
+              )}
+
+              <section className="donation-button">
+                <SupportButton
+                  recipient={article.author}
+                  targetId={article.id}
+                  article={article}
+                  supported={supported}
+                />
+              </section>
+
+              {article.donations.totalCount > 0 && (
+                <section className="donators">
+                  <Donators
+                    article={article}
+                    showAvatarAnimation={showAvatarAnimation}
+                  />
+                </section>
+              )}
+
+              {supported && (
+                <section className="transaction">
+                  <span>
+                    <Translate zh_hant="查看" zh_hans="查看" en="See" />
+                  </span>
+                  <Button href={PATHS.ME_WALLET_TRANSACTIONS}>
+                    <span className="transaction-button">
+                      <TextIcon
+                        icon={<IconDollarCircle16 />}
+                        color="gold"
+                        size="xs"
+                      >
+                        <Translate
+                          zh_hant="交易紀錄"
+                          zh_hans="交易纪录"
+                          en="Transaction"
+                        />
+                      </TextIcon>
+                    </span>
+                  </Button>
                 </section>
               )}
             </>
-          )}
-
-          {!supported && (
-            <>
-              {requestForDonation && <p>{requestForDonation}</p>}
-              {!requestForDonation && (
-                <p>
-                  <Translate
-                    zh_hant="喜歡我的文章嗎？"
-                    zh_hans="喜欢我的文章吗？"
-                    en="Like my work??"
-                  />
-                  <br />
-                  <Translate
-                    zh_hant="別忘了給點支持與讚賞，讓我知道創作的路上有你陪伴。"
-                    zh_hans="别忘了给点支持与赞赏，让我知道创作的路上有你陪伴。"
-                    en="Don't forget to support or like, so I know you are with me.."
-                  />
-                </p>
-              )}
-            </>
-          )}
-
-          <section className="donation-button">
-            <SupportButton
-              recipient={article.author}
-              targetId={article.id}
-              article={article}
-              supported={supported}
-            />
-          </section>
-
-          {article.donations.totalCount > 0 && (
-            <section className="donators">
-              <Donators
-                article={article}
-                showAvatarAnimation={showAvatarAnimation}
-              />
-            </section>
-          )}
-
-          {supported && (
-            <section className="transaction">
-              <span>
-                <Translate zh_hant="查看" zh_hans="查看" en="See" />
-              </span>
-              <Button href={PATHS.ME_WALLET_TRANSACTIONS}>
-                <span className="transaction-button">
-                  <TextIcon
-                    icon={<IconDollarCircle16 />}
-                    color="gold"
-                    size="xs"
-                  >
-                    <Translate
-                      zh_hant="交易紀錄"
-                      zh_hans="交易纪录"
-                      en="Transaction"
-                    />
-                  </TextIcon>
-                </span>
-              </Button>
-            </section>
           )}
         </section>
       )}
