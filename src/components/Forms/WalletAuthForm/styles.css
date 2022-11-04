@@ -8,6 +8,12 @@
   margin: var(--spacing-loose) 0;
 }
 
+.subtitle {
+  margin: var(--spacing-loose) var(--spacing-base)
+    calc(var(--spacing-x-tight) * -1);
+  font-size: var(--font-size-xm);
+}
+
 .notice {
   padding: var(--spacing-base);
   margin: var(--spacing-xx-loose) var(--spacing-base) var(--spacing-loose);

@@ -292,6 +292,16 @@ const Connect: React.FC<FormProps> = ({
       )}
 
       {isSignUp && (
+        <h3 className="subtitle">
+          <Translate
+            zh_hant="聯繫渠道"
+            zh_hans="联系渠道"
+            en="Contact Channel"
+          />
+        </h3>
+      )}
+
+      {isSignUp && (
         <Form.Input
           label={<Translate id="email" />}
           type="email"
@@ -383,6 +393,8 @@ const Connect: React.FC<FormProps> = ({
         />
       )}
 
+      {isSignUp && <ImportantNotice />}
+
       <style jsx>{styles}</style>
     </Form>
   )
@@ -411,8 +423,6 @@ const Connect: React.FC<FormProps> = ({
         />
 
         {InnerForm}
-
-        {isSignUp && <ImportantNotice />}
       </>
     )
   }
@@ -430,11 +440,7 @@ const Connect: React.FC<FormProps> = ({
         />
       )}
 
-      <Dialog.Content hasGrow>
-        {InnerForm}
-
-        {isSignUp && <ImportantNotice />}
-      </Dialog.Content>
+      <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
     </>
   )
 }
