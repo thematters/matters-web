@@ -144,7 +144,7 @@ const SupportWidget = ({ article }: DonationProps) => {
       {!showAnimation && (
         <section className="donation">
           {loading && <IconSpinner16 color="grey-light" size="lg" />}
-          {hasDonatedData && (
+          {!loading && (
             <>
               {supported && (
                 <>
