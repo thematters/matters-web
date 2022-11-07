@@ -69,7 +69,6 @@ const Animation: React.FC<Props> = ({
   const isShipWaiting = currStep === 'shipWaiting'
   const isShipSprinkHeart = currStep === 'shipSprinkleHeart'
   const isOpenHeart = currStep === 'openHeart'
-  // const [ref, inView] = useInView()
 
   useEffect(() => {
     if (isShipWaiting) {
