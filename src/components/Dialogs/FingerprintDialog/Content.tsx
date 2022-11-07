@@ -254,7 +254,7 @@ const FingerprintDialogContent = ({
           <section className="copy">
             <input
               type="text"
-              value={dataHash}
+              value={dataHash || translate({ id: 'waitingForHash', lang })}
               readOnly
               onClick={(event) => event.currentTarget.select()}
             />

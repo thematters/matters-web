@@ -8,7 +8,7 @@ import {
   Translate,
   usePublicQuery,
   usePullToRefresh,
-  useRoute,
+  // useRoute,
   ViewerContext,
   ViewMoreButton,
 } from '~/components'
@@ -21,17 +21,20 @@ import { FEATURED_COMMENTS_PRIVATE, FEATURED_COMMENTS_PUBLIC } from './gql'
 import { FeaturedCommentsPrivate_nodes_Comment } from './__generated__/FeaturedCommentsPrivate'
 import {
   FeaturedCommentsPublic,
-  FeaturedCommentsPublic_article_featuredComments_edges_node,
+  FeaturedCommentsPublic_article_Article,
+  // FeaturedCommentsPublic_article_featuredComments_edges_node,
+  FeaturedCommentsPublic_article_Article_featuredComments_edges_node,
 } from './__generated__/FeaturedCommentsPublic'
 
-type CommentPublic = FeaturedCommentsPublic_article_featuredComments_edges_node
+type CommentPublic =
+  FeaturedCommentsPublic_article_Article_featuredComments_edges_node // FeaturedCommentsPublic_article_featuredComments_edges_node
 type CommentPrivate = FeaturedCommentsPrivate_nodes_Comment
 type Comment = CommentPublic & Partial<CommentPrivate>
 
-const FeaturedComments = ({ lock }: { lock: boolean }) => {
+const FeaturedComments = ({ id, lock }: { id: string; lock: boolean }) => {
   const viewer = useContext(ViewerContext)
-  const { getQuery } = useRoute()
-  const mediaHash = getQuery('mediaHash')
+  // const { getQuery } = useRoute()
+  // const mediaHash = getQuery('mediaHash')
 
   /**
    * Data Fetching
@@ -44,13 +47,13 @@ const FeaturedComments = ({ lock }: { lock: boolean }) => {
     refetch: refetchPublic,
     client,
   } = usePublicQuery<FeaturedCommentsPublic>(FEATURED_COMMENTS_PUBLIC, {
-    variables: { mediaHash },
+    variables: { id },
     notifyOnNetworkStatusChange: true,
   })
 
   // pagination
   const connectionPath = 'article.featuredComments'
-  const article = data?.article
+  const article = data?.article as FeaturedCommentsPublic_article_Article
   const { edges, pageInfo } = article?.featuredComments || {}
   const articleId = article && article.id
   const comments = filterComments<CommentPublic>(
@@ -63,7 +66,9 @@ const FeaturedComments = ({ lock }: { lock: boolean }) => {
       return
     }
 
-    const publiceEdges = publicData?.article?.featuredComments.edges || []
+    const publiceEdges =
+      (publicData?.article as FeaturedCommentsPublic_article_Article)
+        ?.featuredComments.edges || []
     const publicComments = filterComments<Comment>(
       publiceEdges.map(({ node }) => node)
     )
