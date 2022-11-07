@@ -118,7 +118,7 @@ export const TEXT = {
     ENTITY_NOT_FOUND: '實體不存在',
     expand: '展開',
     extend: '關聯',
-    extendArticle: '關聯作品',
+    collectArticle: '關聯作品',
     failureChange: '修改失敗，請稍候重試',
     failureCommentBlocked: '因爲作者設置，你無法參與討論。',
     failureCommentOnboarding:
@@ -489,7 +489,7 @@ export const TEXT = {
     ENTITY_NOT_FOUND: '实体不存在',
     expand: '展开',
     extend: '关联',
-    extendArticle: '关联作品',
+    collectArticle: '关联作品',
     failureChange: '修改失败，请稍候重试',
     failureCommentBlocked: '因为作者设置，你无法参与讨论。',
     failureCommentOnboarding:
@@ -866,7 +866,7 @@ export const TEXT = {
     ENTITY_NOT_FOUND: 'Entity not found',
     expand: 'Expand',
     extend: 'Collect',
-    extendArticle: 'Collect Article',
+    collectArticle: 'Collect Article',
     failureChange: 'Failed to edit, please try again.',
     failureCommentBlocked: 'The author has disabled comments for this article',
     failureCommentOnboarding:

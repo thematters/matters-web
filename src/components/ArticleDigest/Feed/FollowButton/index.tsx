@@ -14,6 +14,11 @@ import TOGGLE_FOLLOW_USER from '~/components/GQL/mutations/toggleFollowUser'
 import updateUserFollowerCount from '~/components/GQL/updates/userFollowerCount'
 import updateViewerFolloweeCount from '~/components/GQL/updates/viewerFolloweeCount'
 
+import {
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  UNIVERSAL_AUTH_SOURCE,
+} from '~/common/enums'
+
 import { ToggleFollowUser } from '~/components/GQL/mutations/__generated__/ToggleFollowUser'
 import { ArticleFeedFollowButtonUserPrivate } from './__generated__/ArticleFeedFollowButtonUserPrivate'
 
@@ -55,6 +60,19 @@ const FollowButton = ({ user }: FollowButtonProps) => {
     },
   })
 
+  const onClick = () => {
+    if (!viewer.isAuthed) {
+      window.dispatchEvent(
+        new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+          detail: { source: UNIVERSAL_AUTH_SOURCE.bookmark },
+        })
+      )
+      return
+    }
+
+    follow()
+  }
+
   if (viewer.isInactive || viewer.id === user.id) {
     return null
   }
@@ -70,7 +88,7 @@ const FollowButton = ({ user }: FollowButtonProps) => {
       size="sm"
       spacing={0}
     >
-      <button type="button" onClick={() => follow()}>
+      <button type="button" onClick={onClick}>
         <Translate id="follow" />
       </button>
     </TextIcon>

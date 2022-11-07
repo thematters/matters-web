@@ -28,5 +28,19 @@ export const OPEN_RECOMMEND_AUTHOR_DIALOG = 'openRecommendAuthorDialog'
 export const OPEN_RECOMMEND_TAG_DIALOG = 'openRecommendTagDialog'
 export const OPEN_SUBSCRIBE_CIRCLE_DIALOG = 'openSubscribeCircleDialog'
 
+export enum UNIVERSAL_AUTH_SOURCE {
+  enter = 'enter',
+  appreciation = 'appreciation',
+  bookmark = 'bookmark',
+  circle = 'circle',
+  collectArticle = 'collectArticle',
+  comment = 'comment',
+  create = 'create',
+  followUser = 'followUser',
+  followTag = 'followTag',
+  followCircle = 'followCircle',
+  support = 'support',
+}
+
 // Onboarding Tasks
 export const ONBOARDING_TASKS_HIDE = 'onboardingTasksHide'

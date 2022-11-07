@@ -4,13 +4,17 @@ import {
   Button,
   DonationDialog,
   IconDonate24,
-  LoginButton,
   TextIcon,
   Translate,
   ViewerContext,
 } from '~/components'
 
-import { ADD_TOAST, REFETCH_DONATORS } from '~/common/enums'
+import {
+  ADD_TOAST,
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  REFETCH_DONATORS,
+  UNIVERSAL_AUTH_SOURCE,
+} from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
@@ -48,25 +52,6 @@ const DonationButton = ({
     )
   }
 
-  const showLoginToast = () => {
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'green',
-          content: (
-            <Translate
-              zh_hant="請登入／註冊支持作者"
-              zh_hans="请登入／注册支持作者"
-              en="Please log in to support author"
-            />
-          ),
-          customButton: <LoginButton isPlain />,
-          buttonPlacement: 'center',
-        },
-      })
-    )
-  }
-
   return (
     <DonationDialog
       completeCallback={completeCallback}
@@ -82,7 +67,12 @@ const DonationButton = ({
             analytics.trackEvent('click_button', { type: 'donate' })
 
             if (!viewer.isAuthed) {
-              showLoginToast()
+              window.dispatchEvent(
+                new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+                  detail: { source: UNIVERSAL_AUTH_SOURCE.support },
+                })
+              )
+
               return
             }
 
