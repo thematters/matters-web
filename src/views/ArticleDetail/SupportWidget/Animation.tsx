@@ -1,55 +1,14 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Lottie, { EventListener } from 'react-lottie'
 import { Waypoint } from 'react-waypoint'
 
-import { Translate, useStep } from '~/components'
+import { IconSpinner16, Translate, useStep } from '~/components'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
-
-import * as coinShip from '@/public/static/json/coin-ship.json'
-import * as openHeart from '@/public/static/json/open-heart.json'
-import * as shipSprinkleHeart from '@/public/static/json/ship-sprinkle-heart.json'
-import * as shipWaiting from '@/public/static/json/ship-waiting.json'
 
 import styles from './styles.css'
 
 type Step = 'coinShip' | 'shipWaiting' | 'shipSprinkleHeart' | 'openHeart'
-
-const coinShipOptions = {
-  loop: false,
-  autoplay: true,
-  animationData: coinShip,
-  rendererSettings: {
-    preserveAspectRatio: 'xMidYMid slice',
-  },
-}
-
-const shipWaitingOptions = {
-  loop: true,
-  autoplay: true,
-  animationData: shipWaiting,
-  rendererSettings: {
-    preserveAspectRatio: 'xMidYMid slice',
-  },
-}
-
-const shipSprinkleHeartOptions = {
-  loop: false,
-  autoplay: true,
-  animationData: shipSprinkleHeart,
-  rendererSettings: {
-    preserveAspectRatio: 'xMidYMid slice',
-  },
-}
-
-const openHeartOptions = {
-  loop: false,
-  autoplay: true,
-  animationData: openHeart,
-  rendererSettings: {
-    preserveAspectRatio: 'xMidYMid slice',
-  },
-}
 
 interface Props {
   playEnd: () => void
@@ -70,11 +29,44 @@ const Animation: React.FC<Props> = ({
   const isShipSprinkHeart = currStep === 'shipSprinkleHeart'
   const isOpenHeart = currStep === 'openHeart'
 
+  const [coinShipData, setCoinShipData] = useState<any>()
+  const [shipWaitingData, setShipWaitingData] = useState<any>()
+  const [shipSprinkHeartData, setShipSprinkHeartData] = useState<any>()
+  const [openHeartData, setOpenHeartData] = useState<any>()
+
+  useEffect(() => {
+    import('@/public/static/json/coin-ship.json').then((res) =>
+      setCoinShipData(res.default)
+    )
+    import('@/public/static/json/ship-waiting.json').then((res) =>
+      setShipWaitingData(res.default)
+    )
+    import('@/public/static/json/ship-sprinkle-heart.json').then((res) =>
+      setShipSprinkHeartData(res.default)
+    )
+    import('@/public/static/json/open-heart.json').then((res) =>
+      setOpenHeartData(res.default)
+    )
+  }, [])
+
   useEffect(() => {
     if (isShipWaiting) {
       forward('shipSprinkleHeart')
     }
   }, [playShipWaiting])
+
+  const defaultOptions = {
+    loop: false,
+    autoplay: true,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice',
+    },
+  }
+
+  const coinShipOptions = {
+    ...defaultOptions,
+    animationData: coinShipData,
+  }
 
   const coinShipListener: EventListener = {
     eventName: 'complete',
@@ -83,11 +75,27 @@ const Animation: React.FC<Props> = ({
     },
   }
 
-  const shiSprinkleHeartListener: EventListener = {
+  const shipWaitingOptions = {
+    ...defaultOptions,
+    loop: true,
+    animationData: shipSprinkHeartData,
+  }
+
+  const shipSprinkleHeartOptions = {
+    ...defaultOptions,
+    animationData: shipSprinkHeartData,
+  }
+
+  const shipSprinkleHeartListener: EventListener = {
     eventName: 'complete',
     callback: () => {
       forward('openHeart')
     },
+  }
+
+  const openHeartOptions = {
+    ...defaultOptions,
+    animationData: openHeartData,
   }
 
   const openHeartListener: EventListener = {
@@ -101,6 +109,15 @@ const Animation: React.FC<Props> = ({
     isClickToPauseDisabled: true,
     height: 136,
     width: 166,
+  }
+
+  if (
+    !coinShipData ||
+    !shipWaitingData ||
+    !shipSprinkHeartData ||
+    !openHeartData
+  ) {
+    return <IconSpinner16 size="lg" color="grey-light" />
   }
 
   return (
@@ -135,7 +152,7 @@ const Animation: React.FC<Props> = ({
         {isShipSprinkHeart && (
           <Lottie
             options={shipSprinkleHeartOptions}
-            eventListeners={[shiSprinkleHeartListener]}
+            eventListeners={[shipSprinkleHeartListener]}
             {...LottieProps}
           />
         )}
