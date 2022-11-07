@@ -16,7 +16,7 @@
   padding: var(--spacing-base);
   text-align: center;
   background: var(--color-yellow-lighter);
-  border-radius: var(--spacing-x-tight);
+  border-radius: 1.25rem;
 
   & p {
     font-size: var(--font-size-sm);
