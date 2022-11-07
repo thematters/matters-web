@@ -10,7 +10,7 @@ footer {
   text-align: center;
 
   & img {
-    max-width: 343px;
+    height: 200px;
   }
 
   & .title {
