@@ -14,6 +14,7 @@ export type ButtonWidth =
   | '7rem'
   | '8rem'
   | '10.5rem'
+  | '19.5rem'
   | '100%'
   | undefined
   | null
@@ -54,6 +55,8 @@ type ButtonColor =
   | 'gold'
   | 'red'
   | 'likecoin-green'
+  | 'yellow-lighter'
+  | 'gold-linear-gradient'
 
 type ButtonTextColor = Extract<
   ButtonColor,
@@ -72,6 +75,8 @@ export type ButtonBgColor = Extract<
   | 'white'
   | 'half-black'
   | 'black'
+  | 'yellow-lighter'
+  | 'gold-linear-gradient'
 >
 
 type ButtonBgActiveColor = Extract<

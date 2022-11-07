@@ -300,7 +300,9 @@ const BaseDonationDialog = ({
             currency={currency}
             recipient={recipient}
             closeDialog={closeDialog}
-            nextStep={() => forward('complete')}
+            nextStep={() => {
+              closeDialog()
+            }}
             txId={payToTx?.id || ''}
             windowRef={windowRef}
             article={article}

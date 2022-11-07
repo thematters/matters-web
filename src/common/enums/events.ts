@@ -44,3 +44,6 @@ export enum UNIVERSAL_AUTH_SOURCE {
 
 // Onboarding Tasks
 export const ONBOARDING_TASKS_HIDE = 'onboardingTasksHide'
+
+// Support
+export const SUPPORT_SUCCESS_ANIMATION = 'supportSuccessAnimation'
