@@ -7,7 +7,7 @@ import {
   LanguageContext,
   TextIcon,
 } from '~/components'
-import { Avatar } from '~/components/Avatar'
+import { Avatar, AvatarProps } from '~/components/Avatar'
 
 import { IMAGE_PIXEL } from '~/common/enums'
 import { translate } from '~/common/utils'
@@ -16,6 +16,18 @@ import { fragments } from './gql'
 import styles from './styles.css'
 
 import { DonatorsArticle } from './__generated__/DonatorsArticle'
+
+type AvatarItemPros = Pick<AvatarProps, 'user'>
+
+const AvatarItem = ({ user }: AvatarItemPros) => {
+  return (
+    <Avatar
+      user={user || undefined}
+      src={user ? undefined : IMAGE_PIXEL}
+      size="sm"
+    />
+  )
+}
 
 interface DonatorsProps {
   article: DonatorsArticle
@@ -32,7 +44,6 @@ const Donators = ({ article, showAvatarAnimation = false }: DonatorsProps) => {
   ).slice(0, 10)
 
   const springStyles = useSpring({
-    // loop: true,
     from: { x: -50 },
     to: { x: 0 },
   })
@@ -64,31 +75,14 @@ const Donators = ({ article, showAvatarAnimation = false }: DonatorsProps) => {
                             }}
                             key={index}
                           >
-                            <Avatar
-                              user={user || undefined}
-                              src={user ? undefined : IMAGE_PIXEL}
-                              size="sm"
-                              key={index}
-                            />
+                            <AvatarItem user={user} key={index} />
                           </animated.div>
                         )}
-                        {index !== 0 && (
-                          <Avatar
-                            user={user || undefined}
-                            src={user ? undefined : IMAGE_PIXEL}
-                            size="sm"
-                            key={index}
-                          />
-                        )}
+                        {index !== 0 && <AvatarItem user={user} key={index} />}
                       </>
                     )}
                     {!showAvatarAnimation && (
-                      <Avatar
-                        user={user || undefined}
-                        src={user ? undefined : IMAGE_PIXEL}
-                        size="sm"
-                        key={index}
-                      />
+                      <AvatarItem user={user} key={index} />
                     )}
                   </>
                 )
