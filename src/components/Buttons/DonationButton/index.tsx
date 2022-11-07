@@ -9,7 +9,7 @@ const DonationButton = ({ supported, onClick }: DonationButtonProps) => {
   if (supported) {
     return (
       <Button
-        size={['10.5rem', '2.5rem']}
+        size={['19.5rem', '3rem']}
         bgColor="yellow-lighter"
         borderColor="gold"
         borderWidth="sm"
@@ -19,7 +19,7 @@ const DonationButton = ({ supported, onClick }: DonationButtonProps) => {
           }
         }}
       >
-        <TextIcon icon={<IconDonate24 />} weight="md" color="gold">
+        <TextIcon icon={<IconDonate24 />} weight="md" color="gold" size="md">
           <Translate id="donationAgain" />
         </TextIcon>
       </Button>
@@ -27,7 +27,7 @@ const DonationButton = ({ supported, onClick }: DonationButtonProps) => {
   }
   return (
     <Button
-      size={['10.5rem', '2.5rem']}
+      size={['19.5rem', '3rem']}
       bgColor="gold-linear-gradient"
       onClick={() => {
         if (onClick) {
@@ -35,7 +35,7 @@ const DonationButton = ({ supported, onClick }: DonationButtonProps) => {
         }
       }}
     >
-      <TextIcon icon={<IconDonate24 />} weight="md" color="white">
+      <TextIcon icon={<IconDonate24 />} weight="md" color="white" size="md">
         <Translate id="donation" />
       </TextIcon>
     </Button>
