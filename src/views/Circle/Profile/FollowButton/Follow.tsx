@@ -12,6 +12,11 @@ import TOGGLE_FOLLOW_CIRCLE from '~/components/GQL/mutations/toggleFollowCircle'
 import updateCircleFollowerCount from '~/components/GQL/updates/circleFollowerCount'
 import updateCircleFollowers from '~/components/GQL/updates/circleFollowers'
 
+import {
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  UNIVERSAL_AUTH_SOURCE,
+} from '~/common/enums'
+
 import { ToggleFollowCircle } from '~/components/GQL/mutations/__generated__/ToggleFollowCircle'
 import { FollowButtonCirclePrivate } from './__generated__/FollowButtonCirclePrivate'
 
@@ -48,6 +53,19 @@ const Follow = ({ circle }: FollowProps) => {
     },
   })
 
+  const onClick = () => {
+    if (!viewer.isAuthed) {
+      window.dispatchEvent(
+        new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+          detail: { source: UNIVERSAL_AUTH_SOURCE.followCircle },
+        })
+      )
+      return
+    }
+
+    follow()
+  }
+
   return (
     <Button
       size={['5rem', '2rem']}
@@ -55,7 +73,7 @@ const Follow = ({ circle }: FollowProps) => {
       textActiveColor="white"
       bgActiveColor="green"
       borderColor="green"
-      onClick={() => follow()}
+      onClick={onClick}
     >
       <TextIcon weight="md" size="md-s">
         <Translate id="follow" />

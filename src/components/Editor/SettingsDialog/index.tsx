@@ -158,7 +158,7 @@ const BaseEditorSettingsDialog = ({
 
         {isCollection && (
           <DynamicSearchSelectForm
-            title="extendArticle"
+            title="collectArticle"
             hint="hintEditCollection"
             headerLeftButton={
               <Dialog.Header.BackButton onClick={() => forward('list')} />
