@@ -24,7 +24,7 @@ const AvatarItem = ({ user }: AvatarItemPros) => {
     <Avatar
       user={user || undefined}
       src={user ? undefined : IMAGE_PIXEL}
-      size="sm"
+      size="lg"
     />
   )
 }
@@ -71,8 +71,8 @@ const Donators = ({ article, showAvatarAnimation = false }: DonatorsProps) => {
                         {index === 0 && (
                           <animated.div
                             style={{
-                              width: '1.25rem',
-                              height: '1.25rem',
+                              width: '2rem',
+                              height: '2rem',
                               borderRadius: '50%',
                               ...springStyles,
                             }}

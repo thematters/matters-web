@@ -45,9 +45,9 @@
   & .count {
     @mixin inline-flex-center-all;
 
-    width: 1.25rem;
-    height: 1.25rem;
-    font-size: var(--font-size-xs-s);
+    width: 2rem;
+    height: 2rem;
+    font-size: var(--font-size-sm);
     font-weight: var(--font-weight-semibold);
     line-height: 1.25rem;
     color: var(--color-white);
