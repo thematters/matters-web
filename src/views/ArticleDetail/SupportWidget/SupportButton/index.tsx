@@ -1,14 +1,12 @@
 import { useContext } from 'react'
 
 import {
-  Button,
   DonationDialog,
-  IconDonate24,
   LoginButton,
-  TextIcon,
   Translate,
   ViewerContext,
 } from '~/components'
+import DonationButton from '~/components/Buttons/DonationButton'
 
 import { ADD_TOAST, REFETCH_DONATORS } from '~/common/enums'
 import { analytics } from '~/common/utils'
@@ -16,17 +14,19 @@ import { analytics } from '~/common/utils'
 import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
 import { ArticleDetailPublic_article } from '../../__generated__/ArticleDetailPublic'
 
-interface DonationButtonProps {
+interface SupportButtonProps {
   recipient: UserDonationRecipient
   targetId: string
   article: ArticleDetailPublic_article
+  supported?: boolean
 }
 
-const DonationButton = ({
+const SupportButton = ({
   recipient,
   targetId,
   article,
-}: DonationButtonProps) => {
+  supported = false,
+}: SupportButtonProps) => {
   const viewer = useContext(ViewerContext)
 
   const completeCallback = () => {
@@ -75,37 +75,34 @@ const DonationButton = ({
       article={article}
     >
       {({ openDialog }) => (
-        <Button
-          size={['10.5rem', '2.5rem']}
-          bgColor="gold"
-          onClick={() => {
-            analytics.trackEvent('click_button', { type: 'donate' })
+        <>
+          <DonationButton
+            supported={supported}
+            onClick={() => {
+              analytics.trackEvent('click_button', { type: 'donate' })
 
-            if (!viewer.isAuthed) {
-              showLoginToast()
-              return
-            }
+              if (!viewer.isAuthed) {
+                showLoginToast()
+                return
+              }
 
-            if (viewer.isFrozen) {
-              forbid()
-              return
-            }
+              if (viewer.isFrozen) {
+                forbid()
+                return
+              }
 
-            if (recipient.id === viewer.id) {
-              forbid(true)
-              return
-            }
+              if (recipient.id === viewer.id) {
+                forbid(true)
+                return
+              }
 
-            openDialog()
-          }}
-        >
-          <TextIcon icon={<IconDonate24 />} weight="md" color="white">
-            <Translate id="donation" />
-          </TextIcon>
-        </Button>
+              openDialog()
+            }}
+          />
+        </>
       )}
     </DonationDialog>
   )
 }
 
-export default DonationButton
+export default SupportButton
