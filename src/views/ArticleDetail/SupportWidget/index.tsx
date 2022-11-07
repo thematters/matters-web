@@ -238,7 +238,7 @@ const SupportWidget = ({ article }: DonationProps) => {
 
               {supported && (
                 <section className="transaction">
-                  <span>
+                  <span className="transaction-left">
                     <Translate zh_hant="查看" zh_hans="查看" en="See" />
                   </span>
                   <Button href={PATHS.ME_WALLET_TRANSACTIONS}>

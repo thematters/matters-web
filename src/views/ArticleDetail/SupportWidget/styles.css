@@ -39,8 +39,13 @@
     margin-top: var(--spacing-loose);
     font-size: var(--font-size-xs);
 
-    & .transaction-button {
+    & .transaction-left {
       display: inline-block;
+      border-bottom: 1px solid transparent;
+    }
+
+    & .transaction-button {
+      display: inline-flex;
       margin-left: var(--spacing-xx-tight);
       border-bottom: 1px solid var(--color-matters-gold);
     }
