@@ -15,10 +15,12 @@ import {
   useApproveUSDT,
   useBalanceUSDT,
   useMutation,
+  useRoute,
   ViewerContext,
 } from '~/components'
 import PAY_TO from '~/components/GQL/mutations/payTo'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
+import updateDonation from '~/components/GQL/updates/donation'
 
 import {
   PAYMENT_CURRENCY as CURRENCY,
@@ -98,6 +100,8 @@ const SetAmount: React.FC<FormProps> = ({
   const { address } = useAccount()
   const { chain } = useNetwork()
   const { chains, switchNetwork } = useSwitchNetwork()
+  const { getQuery } = useRoute()
+  const mediaHash = getQuery('mediaHash')
 
   const isConnectedAddress =
     viewer.info.ethAddress?.toLowerCase() === address?.toLowerCase()
@@ -176,6 +180,13 @@ const SetAmount: React.FC<FormProps> = ({
               purpose: 'donation',
               recipientId: recipient.id,
               targetId,
+            },
+            update: (cache) => {
+              updateDonation({
+                cache,
+                mediaHash,
+                viewer,
+              })
             },
           })
           const redirectUrl = result?.data?.payTo.redirectUrl
@@ -380,8 +391,8 @@ const SetAmount: React.FC<FormProps> = ({
                     }}
                   >
                     <Translate
-                      zh_hant="前往確認授權"
-                      zh_hans="前往确认授权"
+                      zh_hant="首次需確認授權後繼續"
+                      zh_hans="首次需确认授权后继续"
                       en="Approve to continue"
                     />
                   </Dialog.Footer.Button>

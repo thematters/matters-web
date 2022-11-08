@@ -6,13 +6,17 @@ import {
   DonationDialog,
   IconDonate24,
   LanguageContext,
-  LoginButton,
   TextIcon,
   Translate,
   ViewerContext,
 } from '~/components'
 
-import { ADD_TOAST, TEXT } from '~/common/enums'
+import {
+  ADD_TOAST,
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  TEXT,
+  UNIVERSAL_AUTH_SOURCE,
+} from '~/common/enums'
 import { analytics, numAbbr, translate } from '~/common/utils'
 
 import { ArticleDetailPublic_article } from '../../__generated__/ArticleDetailPublic'
@@ -60,25 +64,6 @@ const DonationButton = ({
     )
   }
 
-  const showLoginToast = () => {
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'green',
-          content: (
-            <Translate
-              zh_hant="請登入／註冊支持作者"
-              zh_hans="请登入／注册支持作者"
-              en="Please log in to support the author"
-            />
-          ),
-          customButton: <LoginButton isPlain />,
-          buttonPlacement: 'center',
-        },
-      })
-    )
-  }
-
   const donationCount =
     article.donationsToolbar.totalCount > 0
       ? article.donationsToolbar.totalCount
@@ -105,7 +90,11 @@ const DonationButton = ({
             onClick={() => {
               analytics.trackEvent('click_button', { type: 'donate' })
               if (!viewer.isAuthed) {
-                showLoginToast()
+                window.dispatchEvent(
+                  new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+                    detail: { source: UNIVERSAL_AUTH_SOURCE.support },
+                  })
+                )
                 return
               }
               if (viewer.isFrozen) {

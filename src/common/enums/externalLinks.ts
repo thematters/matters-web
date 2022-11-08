@@ -75,4 +75,11 @@ export const GUIDE_LINKS = {
       'https://matters.news/zh-Hans/@hi176/338013-%E5%8A%9F%E8%83%BD%E6%8C%87%E5%8D%97-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-%E5%85%A7%E5%AE%B9%E8%A8%82%E9%96%B1-%E4%BE%86%E8%BF%BD%E8%B9%A4%E4%BD%A0%E5%96%9C%E6%84%9B%E7%9A%84-matters-%E4%BD%9C%E8%80%85-bafyreidb42pruxqy75tybjarp6kebmf7quyn3etd6mtv7fopwve6a7mjaa',
     en: 'https://matters.news/en/@hi176/338013-%E5%8A%9F%E8%83%BD%E6%8C%87%E5%8D%97-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-%E5%85%A7%E5%AE%B9%E8%A8%82%E9%96%B1-%E4%BE%86%E8%BF%BD%E8%B9%A4%E4%BD%A0%E5%96%9C%E6%84%9B%E7%9A%84-matters-%E4%BD%9C%E8%80%85-bafyreidb42pruxqy75tybjarp6kebmf7quyn3etd6mtv7fopwve6a7mjaa',
   },
+  mobilePayment: {
+    zh_hant:
+      'https://matters.news/@hi176/343938-%E6%8C%87%E5%8D%97-%E5%A6%82%E4%BD%95%E5%9C%A8%E6%89%8B%E6%A9%9F%E4%B8%8A%E9%80%A3%E6%8E%A5%E9%8C%A2%E5%8C%85%E4%B8%A6%E4%BD%BF%E7%94%A8-usdt-%E6%94%AF%E6%8C%81%E5%8A%9F%E8%83%BD-bafyreifil6hcprdl5g4vtui5sy3gvimbkphib5xcziddixptmy4dckmtiu',
+    zh_hans:
+      'https://matters.news/zh_Hans/@hi176/343938-%E6%8C%87%E5%8D%97-%E5%A6%82%E4%BD%95%E5%9C%A8%E6%89%8B%E6%A9%9F%E4%B8%8A%E9%80%A3%E6%8E%A5%E9%8C%A2%E5%8C%85%E4%B8%A6%E4%BD%BF%E7%94%A8-usdt-%E6%94%AF%E6%8C%81%E5%8A%9F%E8%83%BD-bafyreifil6hcprdl5g4vtui5sy3gvimbkphib5xcziddixptmy4dckmtiu',
+    en: 'https://matters.news/en/@hi176/343938-%E6%8C%87%E5%8D%97-%E5%A6%82%E4%BD%95%E5%9C%A8%E6%89%8B%E6%A9%9F%E4%B8%8A%E9%80%A3%E6%8E%A5%E9%8C%A2%E5%8C%85%E4%B8%A6%E4%BD%BF%E7%94%A8-usdt-%E6%94%AF%E6%8C%81%E5%8A%9F%E8%83%BD-bafyreifil6hcprdl5g4vtui5sy3gvimbkphib5xcziddixptmy4dckmtiu',
+  },
 }

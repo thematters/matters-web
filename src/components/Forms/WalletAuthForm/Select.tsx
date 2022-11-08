@@ -7,13 +7,16 @@ import {
   IconMetaMask24,
   IconSpinner16,
   IconWalletConnect24,
+  LanguageContext,
   Layout,
   Spacer,
   TextIcon,
   Translate,
+  useResponsive,
   ViewerContext,
 } from '~/components'
 
+import { GUIDE_LINKS } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 import styles from './styles.css'
@@ -55,6 +58,49 @@ const Desc = {
     zh_hans: 'Matters 不会透过任何渠道主动询问你的钱包私钥。',
     en: 'Matters will never ask your wallet key through any channel.',
   },
+}
+
+const Hint = () => {
+  const { lang } = useContext(LanguageContext)
+  const isSmallUp = useResponsive('sm-up')
+
+  if (isSmallUp) {
+    return (
+      <p>
+        <Translate
+          zh_hant="剛接觸加密錢包？參考 "
+          zh_hans="刚接触加密钱包？参考 "
+          en="Don't have a wallet yet? Check the "
+        />
+        <a
+          className="u-link-green"
+          href={GUIDE_LINKS.connectWallet[lang]}
+          target="_blank"
+        >
+          <Translate zh_hant="教學指南" zh_hans="教学指南" en="tutorial" />
+        </a>
+        <Translate zh_hant="" zh_hans="" en="." />
+      </p>
+    )
+  }
+
+  return (
+    <p>
+      <Translate
+        zh_hant="在行動裝置上使用問題，參考 "
+        zh_hans="在行动装置上使用问题，参考"
+        en="Have wallet questions on mobile device ? Click the "
+      />
+      <a
+        className="u-link-green"
+        href={GUIDE_LINKS.mobilePayment[lang]}
+        target="_blank"
+      >
+        <Translate zh_hant="教學指南" zh_hans="教学指南" en="tutorial" />
+      </a>
+      <Translate zh_hant="" zh_hans="" en="." />
+    </p>
+  )
 }
 
 const Select: React.FC<FormProps> = ({
@@ -115,17 +161,20 @@ const Select: React.FC<FormProps> = ({
           <li>
             <Translate {...Desc.section1} />
           </li>
-          <li className="emphasize">
-            <Translate {...Desc.section2} />
+          <li>
+            <strong>
+              <Translate {...Desc.section2} />
+            </strong>
           </li>
           <li>
             <Translate {...Desc.section3} />
           </li>
-          <li className="emphasize">
-            <Translate {...Desc.section4} />
+          <li>
+            <strong>
+              <Translate {...Desc.section4} />
+            </strong>
           </li>
         </ul>
-        <style jsx>{styles}</style>
       </Dialog.Message>
     )
   }
@@ -140,15 +189,7 @@ const Select: React.FC<FormProps> = ({
         </Form.List>
       )}
 
-      <Form.List
-        groupName={
-          <Translate
-            zh_hans="连接加密钱包"
-            zh_hant="連接加密錢包"
-            en="Connect Wallet"
-          />
-        }
-      >
+      <Form.List groupName={<Translate id="connectWallet" />}>
         {injectedConnector?.ready && (
           <Form.List.Item
             title={
@@ -191,18 +232,15 @@ const Select: React.FC<FormProps> = ({
         />
       </Form.List>
 
-      {errorMessage && (
-        <section className="msg">
-          <Form.Field>
-            <Form.Field.Footer
-              fieldMsgId={fieldMsgId}
-              // hint={}
-              error={errorMessage}
-            />
-          </Form.Field>
-          <style jsx>{styles}</style>
-        </section>
-      )}
+      <section className="msg">
+        <Form.Field.Footer
+          fieldMsgId={fieldMsgId}
+          hint={errorMessage ? undefined : <Hint />}
+          error={errorMessage}
+        />
+
+        <style jsx>{styles}</style>
+      </section>
     </Form>
   )
 

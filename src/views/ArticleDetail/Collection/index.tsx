@@ -81,7 +81,7 @@ const Collection: React.FC<{
     <section className="collection">
       <header>
         <Title type="nav" is="h2">
-          <Translate id="extendArticle" />
+          <Translate id="collectArticle" />
 
           <span
             className="count"

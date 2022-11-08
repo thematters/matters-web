@@ -168,7 +168,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
 
             {/* Collection */}
             <SearchSelectDialog
-              title="extendArticle"
+              title="collectArticle"
               hint="hintEditCollection"
               searchType="Article"
               searchExclude={SearchExclude.blocked}
