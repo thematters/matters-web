@@ -20,7 +20,7 @@ const DonationButton = ({ supported, onClick }: DonationButtonProps) => {
         }}
       >
         <TextIcon icon={<IconDonate24 />} weight="md" color="gold" size="md">
-          <Translate id="donateAgain" />
+          <Translate id="donationAgain" />
         </TextIcon>
       </Button>
     )
