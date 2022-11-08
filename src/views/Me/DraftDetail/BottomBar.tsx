@@ -6,7 +6,7 @@ import {
   ToggleAccessProps,
 } from '~/components/Editor'
 import BottomBar from '~/components/Editor/BottomBar'
-import SupportSettingDialog from '~/components/Editor/ToggleAccess/SetSupportSetting'
+import SupportSettingDialog from '~/components/Editor/ToggleAccess/SupportSettingDialog'
 
 import { ENTITY_TYPE } from '~/common/enums'
 
@@ -20,21 +20,16 @@ import {
 } from './hooks'
 
 import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
+import { DraftDetailQuery_viewer } from '~/views/Me/DraftDetail/__generated__/DraftDetailQuery'
 import { EditMetaDraft } from './__generated__/EditMetaDraft'
 
 interface BottomBarProps {
   draft: EditMetaDraft
   ownCircles?: DigestRichCirclePublic[]
-  displayName: string
-  avatar: string
+  viewer: DraftDetailQuery_viewer | null | undefined
 }
 
-const EditDraftBottomBar = ({
-  draft,
-  ownCircles,
-  displayName,
-  avatar,
-}: BottomBarProps) => {
+const EditDraftBottomBar = ({ draft, ownCircles, viewer }: BottomBarProps) => {
   const { edit: editCollection, saving: collectionSaving } =
     useEditDraftCollection(draft)
   const {
@@ -50,7 +45,6 @@ const EditDraftBottomBar = ({
     ownCircles && ownCircles[0]
   )
 
-  // TODO: support feedback mutation
   const { edit: editSupport, saving: supportSaving } =
     useEditSupportSetting(draft)
 
@@ -84,12 +78,10 @@ const EditDraftBottomBar = ({
     accessSaving,
     canToggleCircle: !!hasOwnCircle,
     iscnPublish: draft.iscnPublish,
-    // TODO: support feedback getters & setters
     draft,
     editSupportSetting: editSupport,
     supportSettingSaving: supportSaving,
-    displayName,
-    avatar,
+    viewer,
     togglePublishISCN,
     iscnPublishSaving,
     onOpenSupportSetting: () => undefined,
@@ -100,8 +92,7 @@ const EditDraftBottomBar = ({
       draft={draft}
       editSupportSetting={editSupport}
       supportSettingSaving={supportSaving}
-      displayName={displayName}
-      avatar={avatar}
+      viewer={viewer}
     >
       {({ openDialog }) => (
         <BottomBar
@@ -109,7 +100,6 @@ const EditDraftBottomBar = ({
           disabled={
             collectionSaving || coverSaving || tagsSaving || accessSaving
           }
-          // TODO: confirm if ISCN & support feedback
           {...coverProps}
           {...tagsProps}
           {...collectionProps}

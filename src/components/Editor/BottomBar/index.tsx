@@ -69,11 +69,10 @@ const BottomBar: React.FC<BottomBarProps> = ({
 
   article,
   draft,
+  viewer,
   editSupportSetting,
   supportSettingSaving,
   onOpenSupportSetting,
-  displayName,
-  avatar,
 
   iscnPublish,
   togglePublishISCN,
@@ -108,11 +107,11 @@ const BottomBar: React.FC<BottomBarProps> = ({
 
     article,
     draft,
+    viewer,
     editSupportSetting,
     supportSettingSaving,
     onOpenSupportSetting,
-    displayName,
-    avatar,
+
     iscnPublish,
     togglePublishISCN,
     iscnPublishSaving,

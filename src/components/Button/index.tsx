@@ -74,6 +74,7 @@ export type ButtonBgColor = Extract<
   | 'red'
   | 'white'
   | 'half-black'
+  | 'black'
   | 'yellow-lighter'
   | 'gold-linear-gradient'
 >

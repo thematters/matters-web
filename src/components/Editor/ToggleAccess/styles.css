@@ -80,6 +80,8 @@ h3 {
     margin-top: var(--spacing-xx-tight);
     font-size: var(--font-size-xs);
     color: var(--color-grey);
+    text-align: left;
+    white-space: break-spaces;
   }
 
   & .left {

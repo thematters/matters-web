@@ -28,14 +28,14 @@ import {
 import ConfirmPublishDialogContent from './ConfirmPublishDialogContent'
 
 import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
+import { DraftDetailQuery_viewer } from '~/views/Me/DraftDetail/__generated__/DraftDetailQuery'
 import { EditMetaDraft } from '../__generated__/EditMetaDraft'
 
 interface SettingsButtonProps {
   draft: EditMetaDraft
   ownCircles?: DigestRichCirclePublic[]
   publishable?: boolean
-  displayName: string
-  avatar: string
+  viewer: DraftDetailQuery_viewer | null | undefined
 }
 
 const ConfirmButton = ({
@@ -63,10 +63,9 @@ const SettingsButton = ({
   draft,
   ownCircles,
   publishable,
-  displayName,
-  avatar,
+  viewer,
 }: SettingsButtonProps) => {
-  const viewer = useContext(ViewerContext)
+  const viewerContext = useContext(ViewerContext)
 
   const { edit: editCollection, saving: collectionSaving } =
     useEditDraftCollection(draft)
@@ -124,14 +123,13 @@ const SettingsButton = ({
     onOpenSupportSetting: () => {
       console.log('')
     },
-    displayName,
-    avatar,
+    viewer,
     iscnPublish: draft.iscnPublish,
     togglePublishISCN,
     iscnPublishSaving,
   }
 
-  if (!viewer.shouldSetupLikerID) {
+  if (!viewerContext.shouldSetupLikerID) {
     return (
       <EditorSettingsDialog
         saving={false}

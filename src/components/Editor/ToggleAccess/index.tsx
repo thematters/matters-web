@@ -15,6 +15,7 @@ import {
 } from '@/__generated__/globalTypes'
 import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
 import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
+import { DraftDetailQuery_viewer } from '~/views/Me/DraftDetail/__generated__/DraftDetailQuery'
 import { EditMetaDraft } from '~/views/Me/DraftDetail/__generated__/EditMetaDraft'
 
 export type ToggleAccessProps = {
@@ -39,8 +40,7 @@ export type ToggleAccessProps = {
   ) => any
   supportSettingSaving: boolean
   onOpenSupportSetting: () => void
-  displayName: string
-  avatar: string
+  viewer?: DraftDetailQuery_viewer | null | undefined
 
   iscnPublish?: boolean | null
   togglePublishISCN: (iscnPublish: boolean) => void
@@ -130,7 +130,6 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
         </section>
       </section>
 
-      {/* TODO: support feedback */}
       <section className="support-setting">
         <button type="button" onClick={onOpenSupportSetting}>
           <section className="support">
@@ -149,15 +148,13 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
                 <IconArrowRight16 />
               )}
             </section>
-            <section className="right">
-              <p className="hint">
-                <Translate
-                  zh_hans="可自定求支持文字，以及支持後回覆的內容"
-                  zh_hant="可自定求支持文字，以及支持回复的內容"
-                  en="Customize your call-to-support prompt to audience, or thank-you card for those who supported you."
-                />
-              </p>
-            </section>
+            <p className="hint">
+              <Translate
+                zh_hans="可自定求支持文字，以及支持後回覆的內容"
+                zh_hant="可自定求支持文字，以及支持回复的內容"
+                en="Customize your call-to-support prompt to audience, or thank-you card for those who supported you."
+              />
+            </p>
           </section>
         </button>
       </section>

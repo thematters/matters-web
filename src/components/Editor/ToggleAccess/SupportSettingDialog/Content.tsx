@@ -6,22 +6,20 @@ import {
   Dialog,
   Form,
   LanguageContext,
+  TextIcon,
   Translate,
   useRoute,
 } from '~/components'
 
 import { ADD_TOAST } from '~/common/enums'
-import {
-  parseFormSubmitErrors,
-  translate,
-  validateSupportWords,
-} from '~/common/utils'
+import { translate, validateSupportWords } from '~/common/utils'
 
 import styles from './styles.css'
 import SupportPreview from './SupportPreview'
 import Tab, { TabType } from './Tab'
 
 import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
+import { DraftDetailQuery_viewer } from '~/views/Me/DraftDetail/__generated__/DraftDetailQuery'
 import { EditMetaDraft } from '~/views/Me/DraftDetail/__generated__/EditMetaDraft'
 
 interface FormProps {
@@ -34,8 +32,7 @@ interface FormProps {
     replyToDonator: string | null
   ) => any
   supportSettingSaving: boolean
-  displayName: string
-  avatar: string
+  viewer: DraftDetailQuery_viewer | null | undefined
 }
 
 interface FormValues {
@@ -50,13 +47,12 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
   article,
   editSupportSetting,
   supportSettingSaving,
-  displayName,
-  avatar,
+  viewer,
 }) => {
   const { lang } = useContext(LanguageContext)
-  const formId = 'edit-profile-form'
+  const formId = 'support-setting-form'
 
-  const { getQuery, setQuery } = useRoute()
+  const { getQuery } = useRoute()
   const qsType = getQuery('type') as TabType
   const [tabType, setTabType] = useState<TabType>(qsType || 'request')
   const content = draft ? draft : article
@@ -78,41 +74,24 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
         requestForDonation: validateSupportWords(requestForDonation!, lang),
         replyToDonator: validateSupportWords(replyToDonator!, lang),
       }),
-    onSubmit: async ({}, { setSubmitting, setFieldError }) => {
-      try {
-        editSupportSetting(values.requestForDonation, values.replyToDonator)
-        window.dispatchEvent(
-          new CustomEvent(ADD_TOAST, {
-            detail: {
-              color: 'green',
-              content: <Translate id="successSetSupportSetting" />,
-            },
-          })
-        )
-
-        supportSettingSaving = false
-        setSubmitting(false)
-        closeDialog()
-      } catch (error) {
-        setSubmitting(false)
-
-        const [messages, codes] = parseFormSubmitErrors(error as any, lang)
-        codes.forEach((code) => {
-          if (code === 'DISPLAYNAME_INVALID') {
-            setFieldError(
-              'displayName',
-              translate({ id: 'hintDisplayName', lang })
-            )
-          } else {
-            setFieldError('requestForDonation', messages[code])
-          }
+    onSubmit: async ({}, { setSubmitting }) => {
+      editSupportSetting(values.requestForDonation, values.replyToDonator)
+      window.dispatchEvent(
+        new CustomEvent(ADD_TOAST, {
+          detail: {
+            color: 'green',
+            content: <Translate id="successSetSupportSetting" />,
+          },
         })
-      }
+      )
+
+      setSubmitting(false)
+      closeDialog()
     },
   })
 
   const changeTabType = (newType: TabType) => {
-    setQuery('type', newType)
+    // setQuery('type', newType)
     setTabType(newType)
   }
 
@@ -122,7 +101,7 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
         {tab === 'request' && (
           <Form.Textarea
             label=""
-            name="description"
+            name="requestForDonation"
             required
             placeholder={translate({
               id: 'supportRequestDescription',
@@ -139,8 +118,8 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
         )}
         {tab === 'reply' && (
           <Form.Textarea
-            label={<Translate id="supportResponseTitle" />}
-            name="description"
+            label=""
+            name="replyToDonator"
             required
             placeholder={translate({
               id: 'supportResponseDescription',
@@ -155,7 +134,6 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
             style={{ lineHeight: '1.5rem' }}
           />
         )}
-        <style jsx>{styles}</style>
       </Form>
     )
   }
@@ -180,31 +158,28 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
         }
         rightButton={SubmitButton}
       />
-
       <Tab tabType={tabType} setTabType={changeTabType} />
-
-      <Dialog.Content hasGrow>
-        <section className="content">
-          <section className="content-input">{InnerForm(tabType)}</section>
-          <section className="preview">
-            <span className="preview-title">
+      <Dialog.Content hasGrow spacing={['base', 'base']}>
+        <section className="content-input">{InnerForm(tabType)}</section>
+        <section className="preview">
+          <h3>
+            <TextIcon size="md" weight="md">
               <Translate
                 zh_hans="效果预览"
                 zh_hant="效果預覽"
                 en="Support Setting Preview"
               />
-            </span>
-            <SupportPreview
-              content={
-                tabType === 'request'
-                  ? values.requestForDonation!
-                  : values.replyToDonator!
-              }
-              tabType={tabType}
-              displayName={displayName}
-              avatar={avatar}
-            />
-          </section>
+            </TextIcon>
+          </h3>
+          <SupportPreview
+            content={
+              tabType === 'request'
+                ? values.requestForDonation!
+                : values.replyToDonator!
+            }
+            tabType={tabType}
+            viewer={viewer}
+          />
         </section>
 
         <style jsx>{styles}</style>

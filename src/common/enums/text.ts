@@ -320,7 +320,7 @@ export const TEXT = {
     supportRequestDescription:
       '喜歡我的創作嗎？創作並不容易，別忘了給予支持與讚賞，讓我知道在創作的路上有你陪伴。',
     supportResponseDescription:
-      '感謝 # 的支持 🥳，創作這條路不容易，有你的支持我將能夠蓄積更多能量創作。',
+      '感謝支持，創作這條路不容易，有你的支持我將能夠蓄積更多能量創作。',
     supportResponseTitle: '試試輸入「#」以代稱支持者名稱',
     TAG_EDITORS_REACH_LIMIT: '一個標籤最多僅可有 4 名協作者共同管理',
     TAG_NOT_FOUND: '標籤不存在',
@@ -466,6 +466,7 @@ export const TEXT = {
     DISPLAYNAME_INVALID: '名称不正确',
     displayName: '姓名',
     donation: '支持作者',
+    donationAgain: '再次支持',
     done: '完成',
     downloadApp: '下载应用',
     DRAFT_NOT_FOUND: '草稿不存在',
@@ -698,9 +699,9 @@ export const TEXT = {
     successUnblock: '已取消屏蔽。该用户现在可以评论你的作品和围炉。',
     successUploadImage: '图片上传成功',
     supportRequestDescription:
-      '喜歡我的創作嗎？創作並不容易，別忘了給予支持與讚賞，讓我知道在創作的路上有你陪伴。',
+      '喜欢我的创作吗？创作并不容易，别忘了给予支持与赞赏，让我知道在创作的路上有你陪伴。',
     supportResponseDescription:
-      '感謝 # 的支持 🥳，創作這條路不容易，有你的支持我將能夠蓄積更多能量創作。',
+      '感謝支持，創作這條路不容易，有你的支持我將能夠蓄積更多能量創作。',
     supportResponseTitle: '试试输入「#」以代称支持者名称',
     TAG_EDITORS_REACH_LIMIT: '一个标签最多仅可有 4 名协作者共同管理',
     TAG_NOT_FOUND: '标签不存在',
@@ -852,6 +853,7 @@ export const TEXT = {
     DISPLAYNAME_INVALID: 'Invalid display name',
     displayName: 'Display Name',
     donation: 'Support Author',
+    donationAgain: 'Support Again',
     done: 'Done',
     downloadApp: 'Download App',
     DRAFT_NOT_FOUND: 'Draft not found',

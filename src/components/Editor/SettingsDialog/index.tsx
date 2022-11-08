@@ -54,7 +54,7 @@ const DynamicSetCover = dynamic(() => import('../SetCover'), {
 })
 
 const DynamicSetSupportFeedback = dynamic(
-  () => import('~/components/Editor/ToggleAccess/SetSupportSetting/Content'),
+  () => import('~/components/Editor/ToggleAccess/SupportSettingDialog/Content'),
   { loading: Spinner }
 )
 
@@ -86,8 +86,7 @@ const BaseEditorSettingsDialog = ({
   article,
   editSupportSetting,
   supportSettingSaving,
-  displayName,
-  avatar,
+  viewer,
 
   iscnPublish,
   togglePublishISCN,
@@ -142,13 +141,11 @@ const BaseEditorSettingsDialog = ({
     iscnPublish,
     togglePublishISCN,
     iscnPublishSaving,
-    // TODO: support feedback
     draft,
     article,
     editSupportSetting,
     supportSettingSaving,
-    displayName,
-    avatar,
+    viewer,
     onOpenSupportSetting: () => {
       forward('support')
     },
@@ -223,8 +220,7 @@ const BaseEditorSettingsDialog = ({
             onBack={() => forward('list')}
             article={article}
             draft={draft}
-            displayName={displayName}
-            avatar={avatar}
+            viewer={viewer}
             editSupportSetting={editSupportSetting}
             supportSettingSaving={supportSettingSaving}
             closeDialog={closeDialog}

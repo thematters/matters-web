@@ -20,7 +20,7 @@ import {
 } from '~/components/Editor'
 import BottomBar from '~/components/Editor/BottomBar'
 import Sidebar from '~/components/Editor/Sidebar'
-import SupportSettingDialog from '~/components/Editor/ToggleAccess/SetSupportSetting'
+import SupportSettingDialog from '~/components/Editor/ToggleAccess/SupportSettingDialog'
 import { QueryError, useImperativeQuery, useMutation } from '~/components/GQL'
 
 import { ENTITY_TYPE, MAX_ARTICLE_REVISION_COUNT } from '~/common/enums'
@@ -92,9 +92,6 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
       fetchPolicy: 'network-only',
     }
   )
-
-  const displayName = data?.article?.author.displayName
-  const avatar = data?.article?.author.avatar
 
   // cover
   const assets = data?.article?.assets || []
@@ -231,8 +228,6 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
     editSupportSetting: editSupport,
     supportSettingSaving: false,
     onOpenSupportSetting: () => undefined,
-    displayName: displayName!,
-    avatar: avatar!,
 
     togglePublishISCN() {
       setIscnPublish(!iscnPublish)
@@ -255,8 +250,6 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
                   article={article}
                   editSupportSetting={editSupport}
                   supportSettingSaving={supportSaving}
-                  displayName={displayName!}
-                  avatar={avatar!}
                 >
                   {({ openDialog }) => (
                     <Sidebar.Management
@@ -320,8 +313,6 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
                 article={article}
                 editSupportSetting={editSupport}
                 supportSettingSaving={supportSaving}
-                displayName={article.author.displayName!}
-                avatar={article.author.avatar!}
               >
                 {({ openDialog }) => (
                   <BottomBar
