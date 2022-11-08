@@ -71,7 +71,7 @@ const Animation: React.FC<Props> = ({
   const coinShipListener: EventListener = {
     eventName: 'complete',
     callback: () => {
-      playShipWaiting ? forward('shipWaiting') : forward('shipSprinkleHeart')
+      playShipWaiting ? forward('shipWaiting') : forward('openHeart')
     },
   }
 
