@@ -71,14 +71,14 @@ const Animation: React.FC<Props> = ({
   const coinShipListener: EventListener = {
     eventName: 'complete',
     callback: () => {
-      playShipWaiting ? forward('shipWaiting') : forward('shipSprinkleHeart')
+      playShipWaiting ? forward('shipWaiting') : forward('openHeart')
     },
   }
 
   const shipWaitingOptions = {
     ...defaultOptions,
     loop: true,
-    animationData: shipSprinkHeartData,
+    animationData: shipWaitingData,
   }
 
   const shipSprinkleHeartOptions = {
@@ -128,14 +128,14 @@ const Animation: React.FC<Props> = ({
             <Translate
               zh_hant="支付請求已送出，LikeCoin 網絡確認中⋯"
               zh_hans="支付请求已送出，LikeCoin 网络确认中⋯"
-              en="The payment request has been sent, and the LikeCoin is confirming…"
+              en="Payment request on LikeCoin network will be confirmed and synced to Matters in a bit"
             />
           )}
           {isShipWaiting && currency === CURRENCY.USDT && (
             <Translate
               zh_hant="支付請求已送出，Polygon 網絡確認中⋯"
               zh_hans="支付請求已送出，Polygon 网络确认中⋯"
-              en="The payment request has been sent, and the Polygon is confirming…"
+              en="Payment request on Polygon network will be confirmed and synced to Matters in a bit"
             />
           )}
         </p>

@@ -81,7 +81,7 @@ const OthersProcessingForm: React.FC<Props> = ({
   })
   const txState = _get(data, 'viewer.wallet.transactions.edges.0.node.state')
 
-  if (txState === 'succeeded') {
+  const succeededFn = () => {
     nextStep()
     window.dispatchEvent(
       new CustomEvent(SUPPORT_SUCCESS_ANIMATION, {
@@ -94,8 +94,16 @@ const OthersProcessingForm: React.FC<Props> = ({
     if (windowRef) {
       windowRef.close()
     }
+  }
 
-    return null
+  if (txState === 'succeeded') {
+    if (currency === CURRENCY.HKD) {
+      setTimeout(() => {
+        succeededFn()
+      }, 3 * 1000)
+    } else {
+      succeededFn()
+    }
   }
 
   if (error) {

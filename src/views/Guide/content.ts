@@ -130,17 +130,6 @@ export default {
   </li>
 </ul>
 
-<p>Tags and Circle are two outstanding features in Matters.News. Tags help your article exposure find more kindred spirits. With Circle, you could interact with your backer community more closely.</p>
-
-<ul>
-  <li>
-    <a className="u-link-green" href="${GUIDE_LINKS.tagUsage.en}">Features Guidance for Matters Tags</a>
-  </li>
-  <li>
-    <a className="u-link-green" href="${GUIDE_LINKS.circleUsage.en}">Features Guidance for Matters Circle</a>
-  </li>
-</ul>
-
 <p>Currently, Matters.News is not yet available as an application, so if you want to use Matters on your cell phone, we highly recommend using PWA, which is almost identical to an app.</p>
 
 <ul>
@@ -164,6 +153,14 @@ export default {
 <ul>
   <li>
     <a className="u-link-green" href="${GUIDE_LINKS.payment.en}">How to Withdraw and Process Payment on Matters.News</a>
+  </li>
+</ul>
+
+<p>If you want to log in, bind wallets, or process USDT payments on phone, please refer to our guide for cell phones, which will answer most of your questions.</p>
+
+<ul>
+  <li>
+    <a className="u-link-green" href="${GUIDE_LINKS.mobilePayment.en}">Mobile Guide for Crypto Wallet and Payment</a>
   </li>
 </ul>
 
