@@ -159,7 +159,7 @@ const SupportWidget = ({ article }: DonationProps) => {
                           <Translate
                             zh_hant="&nbsp;想對你說："
                             zh_hans="&nbsp;想對你說："
-                            en="&nbsp;reply to you: "
+                            en="&nbsp;says: "
                           />
                         </TextIcon>
                       </p>
@@ -187,9 +187,9 @@ const SupportWidget = ({ article }: DonationProps) => {
                         />
                         <span>{viewer.displayName}</span>
                         <Translate
-                          zh_hant=" 的支持 🥳，創作這條路不容易，有你的支持我將能夠蓄積更多能量創作。"
-                          zh_hans=" 的支持 🥳，創作這條路不容易，有你的支持我將能夠蓄積更多能量創作。"
-                          en=" for your support 🥳. The road to creation is not easy. With your support, I will be able to accumulate more energy to create."
+                          zh_hant=" 的支持，創作這條路不容易，有你的支持我將能夠蓄積更多能量創作。"
+                          zh_hans=" 的支持，創作這條路不容易，有你的支持我將能夠蓄積更多能量創作。"
+                          en=" for your support. The way isn’t always easy being a creator. With your generous support, I can accumulate more energy to go on."
                         />
                       </p>
                     </section>
@@ -239,7 +239,7 @@ const SupportWidget = ({ article }: DonationProps) => {
               {supported && (
                 <section className="transaction">
                   <span className="transaction-left">
-                    <Translate zh_hant="查看" zh_hans="查看" en="See" />
+                    <Translate zh_hant="查看" zh_hans="查看" en="View" />
                   </span>
                   <Button href={PATHS.ME_WALLET_TRANSACTIONS}>
                     <span className="transaction-button">
@@ -251,7 +251,7 @@ const SupportWidget = ({ article }: DonationProps) => {
                         <Translate
                           zh_hant="交易紀錄"
                           zh_hans="交易纪录"
-                          en="Transaction"
+                          en="transaction history"
                         />
                       </TextIcon>
                     </span>

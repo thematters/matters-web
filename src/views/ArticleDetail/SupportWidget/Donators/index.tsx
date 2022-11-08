@@ -6,6 +6,7 @@ import {
   IconArrowRight16,
   LanguageContext,
   TextIcon,
+  Translate,
 } from '~/components'
 import { Avatar, AvatarProps } from '~/components/Avatar'
 
@@ -117,7 +118,11 @@ const Donators = ({ article, showAvatarAnimation = false }: DonatorsProps) => {
                 icon={<IconArrowRight16 size="xs" />}
                 textPlacement="left"
               >
-                個人支持過・看全部
+                <Translate
+                  zh_hant="個人支持過・看全部"
+                  zh_hans="个人支持过・看全部"
+                  en="others have supported the article. All supporters"
+                />
               </TextIcon>
             </button>
           </section>
