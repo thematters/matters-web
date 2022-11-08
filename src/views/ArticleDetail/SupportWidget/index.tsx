@@ -107,7 +107,7 @@ const SupportWidget = ({ article }: DonationProps) => {
       await payTo({
         variables: {
           amount,
-          currency,
+          currency: payload.currency,
           purpose: 'donation',
           recipientId,
           targetId,
