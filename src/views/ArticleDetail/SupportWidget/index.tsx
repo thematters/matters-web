@@ -25,7 +25,7 @@ import {
   PAYMENT_CURRENCY as CURRENCY,
   SUPPORT_SUCCESS_ANIMATION,
 } from '~/common/enums'
-import { analytics } from '~/common/utils'
+import { analytics, sleep } from '~/common/utils'
 
 import Animation from './Animation'
 import Donators from './Donators'
@@ -91,10 +91,19 @@ const SupportWidget = ({ article }: DonationProps) => {
       }
       setCurrency(payload.currency)
       setShowAvatarAnimation(true)
-
-      // HKD、LikeCoin
-      if (payload.currency !== CURRENCY.USDT) {
+      // HKD
+      if (payload.currency === CURRENCY.HKD) {
         setShowAnimation(true)
+        hasDonatedRefetch()
+        return
+      }
+
+      // LIKE
+      if (payload.currency === CURRENCY.LIKE) {
+        setPlayShipWaiting(true)
+        setShowAnimation(true)
+        await sleep(5 * 1000)
+        setPlayShipWaiting(false)
         hasDonatedRefetch()
         return
       }
