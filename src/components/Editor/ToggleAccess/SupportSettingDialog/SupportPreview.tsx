@@ -1,19 +1,24 @@
-import { Avatar, Spacer, TextIcon, Translate } from '~/components'
+import { useContext } from 'react'
+
+import {
+  Avatar,
+  Spacer,
+  TextIcon,
+  Translate,
+  ViewerContext,
+} from '~/components'
 import DonationButton from '~/components/Buttons/DonationButton'
 
 import styles from './styles.css'
 
-import { DraftDetailQuery_viewer } from '~/views/Me/DraftDetail/__generated__/DraftDetailQuery'
-
 const SupportPreview = ({
   content,
   tabType,
-  viewer,
 }: {
   content: string
   tabType: string
-  viewer: DraftDetailQuery_viewer | null | undefined
 }) => {
+  const viewer = useContext(ViewerContext)
   return (
     <section className="donation">
       <span>

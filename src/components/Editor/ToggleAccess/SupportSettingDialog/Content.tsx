@@ -91,7 +91,6 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
   })
 
   const changeTabType = (newType: TabType) => {
-    // setQuery('type', newType)
     setTabType(newType)
   }
 
@@ -178,7 +177,6 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
                 : values.replyToDonator!
             }
             tabType={tabType}
-            viewer={viewer}
           />
         </section>
 
