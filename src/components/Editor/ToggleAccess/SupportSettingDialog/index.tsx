@@ -3,11 +3,11 @@ import dynamic from 'next/dynamic'
 
 import { Dialog, Spinner, useDialogSwitch } from '~/components'
 
-import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
+import { ArticleDetailPublic_article_Article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
 import { EditMetaDraft } from '~/views/Me/DraftDetail/__generated__/EditMetaDraft'
 
 interface SupportSettingDialogProps {
-  article?: ArticleDetailPublic_article
+  article?: ArticleDetailPublic_article_Article
   draft?: EditMetaDraft
   editSupportSetting: (
     requestForDonation: string | null,

@@ -5,11 +5,15 @@ import { ARTICLE_DETAIL_PUBLIC } from '~/views/ArticleDetail/gql'
 
 import { ERROR_CODES } from '~/common/enums'
 
-import { ArticleDetailPublic } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
+import {
+  ArticleDetailPublic,
+  ArticleDetailPublic_article_Article,
+} from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
 
 const update = ({
   cache,
   left,
+  id,
   mediaHash,
   total,
   viewer,
@@ -17,18 +21,19 @@ const update = ({
 }: {
   cache: DataProxy
   left: number
+  id: string
   mediaHash: string
   total: number
   viewer: any
   canSuperLike?: boolean
 }) => {
   try {
-    if (!mediaHash) {
+    if (!id && !mediaHash) {
       return
     }
 
     // read from local cache
-    const variables = { mediaHash }
+    const variables = { id, mediaHash }
     const cacheData = _cloneDeep(
       cache.readQuery<ArticleDetailPublic>({
         query: ARTICLE_DETAIL_PUBLIC,
@@ -36,28 +41,29 @@ const update = ({
       })
     )
 
-    if (!cacheData || !cacheData.article) {
+    if (!cacheData?.article) {
       return
     }
 
     // update counts
-    cacheData.article.appreciateLeft = left
-    cacheData.article.appreciationsReceivedTotal = total
-    cacheData.article.hasAppreciate = true
+    const article = cacheData.article as ArticleDetailPublic_article_Article
+    article.appreciateLeft = left
+    article.appreciationsReceivedTotal = total
+    article.hasAppreciate = true
 
     // update SuperLike
     if (typeof canSuperLike === 'boolean') {
-      cacheData.article.canSuperLike = canSuperLike
+      article.canSuperLike = canSuperLike
     }
 
     // inject viewer into appreciators
-    const appreciators = cacheData.article?.received?.edges || []
-    const appreciatorsCount = cacheData.article?.received?.totalCount || 0
+    const appreciators = article?.received?.edges || []
+    const appreciatorsCount = article?.received?.totalCount || 0
     const hasApprecaitor = _some(appreciators, {
       node: { sender: { id: viewer.id } },
     })
     if (!hasApprecaitor) {
-      cacheData.article.received.totalCount = appreciatorsCount + 1
+      article.received.totalCount = appreciatorsCount + 1
 
       appreciators.push({
         cursor: window.btoa(`arrayconnection:${appreciators.length}`) || '',
@@ -80,7 +86,7 @@ const update = ({
         __typename: 'AppreciationEdge',
       })
 
-      cacheData.article.received.edges = appreciators
+      article.received.edges = appreciators
     }
 
     // write to local cache

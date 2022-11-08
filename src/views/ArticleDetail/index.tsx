@@ -65,7 +65,7 @@ import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientP
 import { ArticleAvailableTranslations } from './__generated__/ArticleAvailableTranslations'
 import {
   ArticleDetailPublic,
-  ArticleDetailPublic_article,
+  ArticleDetailPublic_article_Article,
 } from './__generated__/ArticleDetailPublic'
 import { ArticleTranslation } from './__generated__/ArticleTranslation'
 
@@ -100,7 +100,7 @@ const BaseArticleDetail = ({
   article,
   privateFetched,
 }: {
-  article: ArticleDetailPublic_article
+  article: ArticleDetailPublic_article_Article
   privateFetched: boolean
 }) => {
   const { getQuery, router } = useRoute()
@@ -399,7 +399,7 @@ const ArticleDetail = ({
   const loading = resultByHash.loading || resultByNodeId.loading
   const error = resultByHash.error || resultByNodeId.error
 
-  const article = data?.article
+  const article = data?.article as ArticleDetailPublic_article_Article
   const authorId = article?.author?.id
   const isAuthor = viewer.id === authorId
 

@@ -18,13 +18,13 @@ import CommentBar from './CommentBar'
 import DonationButton from './DonationButton'
 import styles from './styles.css'
 
-import { ArticleDetailPublic_article } from '../__generated__/ArticleDetailPublic'
+import { ArticleDetailPublic_article_Article } from '../__generated__/ArticleDetailPublic'
 import { ToolbarArticlePrivate } from './__generated__/ToolbarArticlePrivate'
 import { ToolbarArticlePublic } from './__generated__/ToolbarArticlePublic'
 
 export type ToolbarProps = {
   article: ToolbarArticlePublic & Partial<ToolbarArticlePrivate>
-  articleDetails: ArticleDetailPublic_article
+  articleDetails: ArticleDetailPublic_article_Article
   translated: boolean
   translatedLanguage?: string | null
   privateFetched: boolean

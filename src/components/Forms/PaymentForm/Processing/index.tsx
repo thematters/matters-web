@@ -29,14 +29,14 @@ import styles from './styles.css'
 
 import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
 import { PayTo as PayToMutate } from '~/components/GQL/mutations/__generated__/PayTo'
-import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
+import { ArticleDetailPublic_article_Article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
 import { ViewerTxState } from './__generated__/ViewerTxState'
 
 interface Props {
   amount: number
   currency: CURRENCY
   recipient: UserDonationRecipient
-  article: ArticleDetailPublic_article
+  article: ArticleDetailPublic_article_Article
   targetId: string
   txId: string
   nextStep: () => void

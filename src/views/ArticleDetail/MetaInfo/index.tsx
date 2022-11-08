@@ -5,10 +5,10 @@ import { fragments } from './gql'
 import styles from './styles.css'
 import TranslationButton from './TranslationButton'
 
-import { ArticleDetailPublic_article } from '../__generated__/ArticleDetailPublic'
+import { ArticleDetailPublic_article_Article } from '../__generated__/ArticleDetailPublic'
 
 type MetaInfoProps = {
-  article: ArticleDetailPublic_article
+  article: ArticleDetailPublic_article_Article
   translated: boolean
   canTranslate: boolean
   toggleTranslate: () => any

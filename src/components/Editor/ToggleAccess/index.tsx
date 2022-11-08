@@ -14,7 +14,7 @@ import {
   ArticleLicenseType,
 } from '@/__generated__/globalTypes'
 import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
-import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
+import { ArticleDetailPublic_article_Article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
 import { EditMetaDraft } from '~/views/Me/DraftDetail/__generated__/EditMetaDraft'
 
 export type ToggleAccessProps = {
@@ -32,7 +32,7 @@ export type ToggleAccessProps = {
   canToggleCircle: boolean
 
   draft?: EditMetaDraft
-  article?: ArticleDetailPublic_article
+  article?: ArticleDetailPublic_article_Article
   editSupportSetting: (
     requestForDonation: string | null,
     replyToDonator: string | null

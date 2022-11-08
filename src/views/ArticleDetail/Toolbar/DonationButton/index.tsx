@@ -19,13 +19,13 @@ import {
 } from '~/common/enums'
 import { analytics, numAbbr, translate } from '~/common/utils'
 
-import { ArticleDetailPublic_article } from '../../__generated__/ArticleDetailPublic'
+import { ArticleDetailPublic_article_Article } from '../../__generated__/ArticleDetailPublic'
 import { DonationButtonArticle } from './__generated__/DonationButtonArticle'
 
 interface DonationButtonProps {
   article: DonationButtonArticle
   disabled: boolean
-  articleDetail: ArticleDetailPublic_article
+  articleDetail: ArticleDetailPublic_article_Article
 }
 
 const fragments = {
