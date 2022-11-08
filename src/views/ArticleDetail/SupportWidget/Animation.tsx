@@ -78,7 +78,7 @@ const Animation: React.FC<Props> = ({
   const shipWaitingOptions = {
     ...defaultOptions,
     loop: true,
-    animationData: shipSprinkHeartData,
+    animationData: shipWaitingData,
   }
 
   const shipSprinkleHeartOptions = {
