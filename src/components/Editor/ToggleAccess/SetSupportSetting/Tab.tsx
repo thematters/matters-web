@@ -14,11 +14,11 @@ const SortBy: React.FC<SortByProps> = ({ tabType, setTabType }) => {
   return (
     <Tabs sticky>
       <Tabs.Tab onClick={() => setTabType('request')} selected={isRequest}>
-        <Translate id="supportSetting" />
+        <Translate id="requestForDonation" />
       </Tabs.Tab>
 
       <Tabs.Tab onClick={() => setTabType('reply')} selected={isReply}>
-        <Translate id="supportFeedback" />
+        <Translate id="replyToDonator" />
       </Tabs.Tab>
     </Tabs>
   )

@@ -202,14 +202,16 @@ export const validateDescription = (value: string, lang: Language) => {
 }
 
 export const validateSupportWords = (value: string, lang: Language) => {
-  if (!value) {
-    return translate({ id: 'required', lang })
-  } else if (value.length > 140) {
-    return translate({
-      zh_hant: `已超過 140 字，目前 ${value.length} 字`,
-      zh_hans: `已超过 140 字，目前 ${value.length} 字`,
-      lang,
-    })
+  if (value) {
+    if (value.length > 140) {
+      {
+        return translate({
+          zh_hant: `已超過 140 字，目前 ${value.length} 字`,
+          zh_hans: `已超过 140 字，目前 ${value.length} 字`,
+          lang,
+        })
+      }
+    }
   }
 }
 

@@ -1,15 +1,12 @@
 import {
-  Button,
   CircleDigest,
   IconArrowRight16,
+  IconChecked32,
   Switch,
   Translate,
 } from '~/components'
 
 import SelectLicense from './SelectLicense'
-import SupportSettingDialog, {
-  SetSupportSettingProps,
-} from './SetSupportSetting/index'
 import styles from './styles.css'
 
 import {
@@ -17,6 +14,8 @@ import {
   ArticleLicenseType,
 } from '@/__generated__/globalTypes'
 import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
+import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
+import { EditMetaDraft } from '~/views/Me/DraftDetail/__generated__/EditMetaDraft'
 
 export type ToggleAccessProps = {
   circle?: DigestRichCirclePublic | null
@@ -32,6 +31,17 @@ export type ToggleAccessProps = {
   accessSaving: boolean
   canToggleCircle: boolean
 
+  draft?: EditMetaDraft
+  article?: ArticleDetailPublic_article
+  editSupportSetting: (
+    requestForDonation: string | null,
+    replyToDonator: string | null
+  ) => any
+  supportSettingSaving: boolean
+  onOpenSupportSetting: () => void
+  displayName: string
+  avatar: string
+
   iscnPublish?: boolean | null
   togglePublishISCN: (iscnPublish: boolean) => void
   iscnPublishSaving: boolean
@@ -41,12 +51,15 @@ export type ToggleAccessProps = {
 
 const ToggleAccess: React.FC<ToggleAccessProps> = ({
   circle,
-  accessType,
   license,
 
   editAccess,
   accessSaving,
   canToggleCircle,
+
+  draft,
+  article,
+  onOpenSupportSetting,
 
   iscnPublish,
   togglePublishISCN,
@@ -54,7 +67,7 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
 
   inSidebar,
 }) => {
-  const supportSettingProps: SetSupportSettingProps = {}
+  const content = draft ? draft : article
   return (
     <section className={inSidebar ? 'inSidebar' : ''}>
       {canToggleCircle && (
@@ -116,35 +129,37 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
           />
         </section>
       </section>
+
+      {/* TODO: support feedback */}
       <section className="support-setting">
-        <SupportSettingDialog {...supportSettingProps}>
-          {({ openDialog }) => (
-            <button type="button" onClick={openDialog}>
-              <section className="support">
-                <section className="left">
-                  <h3>
-                    <Translate
-                      zh_hans="支持设置"
-                      zh_hant="支持設置"
-                      en="Support Setting"
-                    />
-                  </h3>
-                  <p className="hint">
-                    <Translate
-                      zh_hans="可自定求支持文字，以及支持後回覆的內容"
-                      zh_hant="可自定求支持文字，以及支持後回覆的內容"
-                    />
-                  </p>
-                </section>
-                <section className="right">
-                  <Button onClick={openDialog} spacing={['xxtight', 'xtight']}>
-                    <IconArrowRight16 color="grey" />
-                  </Button>
-                </section>
-              </section>
-            </button>
-          )}
-        </SupportSettingDialog>
+        <button type="button" onClick={onOpenSupportSetting}>
+          <section className="support">
+            <section className="left">
+              <h3>
+                <Translate
+                  zh_hans="设定支持"
+                  zh_hant="設定支持"
+                  en="Support Setting"
+                />
+              </h3>
+              {content &&
+              (content.replyToDonator || content.requestForDonation) ? (
+                <IconChecked32 size="md" />
+              ) : (
+                <IconArrowRight16 />
+              )}
+            </section>
+            <section className="right">
+              <p className="hint">
+                <Translate
+                  zh_hans="可自定求支持文字，以及支持後回覆的內容"
+                  zh_hant="可自定求支持文字，以及支持回复的內容"
+                  en="Customize your call-to-support prompt to audience, or thank-you card for those who supported you."
+                />
+              </p>
+            </section>
+          </section>
+        </button>
       </section>
 
       <section className="iscn">

@@ -74,6 +74,7 @@ const EditModeHeader = ({
           license,
           ...(isRevised ? { content } : {}),
           first: null,
+          // TODO: support feedback
           iscnPublish: restProps.iscnPublish,
         },
       })
@@ -148,6 +149,7 @@ const EditModeHeader = ({
 
       <EditorSettingsDialog
         {...restProps}
+        article={article}
         saving={loading}
         disabled={loading}
         confirmButtonText={

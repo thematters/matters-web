@@ -23,9 +23,9 @@ export const EDIT_ARTICLE = gql`
     $license: ArticleLicenseType
     $iscnPublish: Boolean
     $after: String
-    $first: first_Int_min_0 = null 
-    $requestForDonation: requestForDonation_String_maxLength_140 
-    $replyToDonator: replyToDonator_String_maxLength_140 
+    $first: first_Int_min_0 = null
+    $requestForDonation: requestForDonation_String_maxLength_140
+    $replyToDonator: replyToDonator_String_maxLength_140
   ) {
     editArticle(
       input: {

@@ -64,16 +64,15 @@ h3 {
 }
 
 .support-setting {
-  & :global(button) {
-    @mixin flex-start-space-between;
-
+  & button {
     width: 100%;
   }
 }
 
 .support {
-  @mixin flex-start-space-between;
+  @mixin flex-start-center;
 
+  flex-direction: column;
   width: 100%;
   margin-top: var(--spacing-loose);
 
@@ -84,12 +83,13 @@ h3 {
   }
 
   & .left {
-    @mixin flex-start-center;
+    @mixin flex-start-space-between;
 
-    flex-direction: column;
-  }
+    width: 100%;
+    & .left-btn {
+      @mixin flex-center-end;
 
-  & .right {
-    @mixin flex-center-end;
+      width: 100%;
+    }
   }
 }

@@ -1,13 +1,18 @@
-import { Button, IconDonate24, TextIcon, Translate } from '~/components'
+import { Avatar, Spacer, TextIcon, Translate } from '~/components'
+import DonationButton from '~/components/Buttons/DonationButton'
 
 import styles from './styles.css'
 
 const SupportPreview = ({
   content,
   tabType,
+  displayName,
+  avatar,
 }: {
   content: string
   tabType: string
+  displayName: string
+  avatar: string
 }) => {
   return (
     <section className="donation">
@@ -22,36 +27,41 @@ const SupportPreview = ({
               />
             ) : (
               <section className="preview-response">
-                <p >🎉 感謝支持！</p>
+                <p>
+                  <Translate
+                    zh_hans="🎉感谢支持"
+                    zh_hant="🎉 感謝支持！"
+                    en="🎉Thanks for your support!"
+                  />
+                </p>
                 <Translate
                   zh_hant="感謝 Matty 的支持 🥳，創作這條路不容易，有你的支持我將能夠蓄積更多能量創作。"
                   zh_hans="感谢 Matty 的支持 🥳，创作这条路不容易，有你的支持我将能够蓄积更多能量创作。"
-                  en="感谢 Matty 的支持 🥳，创作这条路不容易，有你的支持我将能够蓄积更多能量创作。"
+                  en="Thanks to x for your support. The way isn’t always easy being a creator. With your generous support, I can accumulate more energy to go on."
                 />{' '}
               </section>
             ))}
-
+          {content && tabType === 'reply' && (
+            <section>
+              <Avatar src={avatar} size="xl" />
+              <p>
+                <TextIcon weight="md">{displayName}</TextIcon>
+                <TextIcon color="grey-darker">
+                  <Translate
+                    zh_hant="&nbsp;想對你說："
+                    zh_hans="&nbsp;想对你說："
+                    en="&nbsp;wants to tell you: "
+                  />
+                </TextIcon>
+              </p>
+              <Spacer size="xtight" />
+            </section>
+          )}
           {<Translate zh_hant={content} zh_hans={content} en={content} />}
         </span>
         <section className="preview-button">
-          {tabType === 'request' && (
-            <Button size={['100%', '2.5rem']} bgColor="gold-linear-gradient">
-              <TextIcon icon={<IconDonate24 />} weight="md" color="white">
-                <Translate id="donation" />
-              </TextIcon>
-            </Button>
-          )}
-          {tabType === 'response' && (
-            <Button
-              size={['100%', '2.5rem']}
-              bgColor="yellow-lighter"
-              borderColor="gold"
-            >
-              <TextIcon icon={<IconDonate24 />} weight="md" color="gold">
-                <Translate id="donateAgain" />
-              </TextIcon>
-            </Button>
-          )}
+          {tabType === 'request' && <DonationButton supported={false} />}
+          {tabType === 'reply' && <DonationButton supported={true} />}
         </section>
       </section>
 

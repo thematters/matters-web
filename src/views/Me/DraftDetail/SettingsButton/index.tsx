@@ -23,6 +23,7 @@ import {
   useEditDraftCover,
   useEditDraftPublishISCN,
   useEditDraftTags,
+  useEditSupportSetting,
 } from '../hooks'
 import ConfirmPublishDialogContent from './ConfirmPublishDialogContent'
 
@@ -33,6 +34,8 @@ interface SettingsButtonProps {
   draft: EditMetaDraft
   ownCircles?: DigestRichCirclePublic[]
   publishable?: boolean
+  displayName: string
+  avatar: string
 }
 
 const ConfirmButton = ({
@@ -60,6 +63,8 @@ const SettingsButton = ({
   draft,
   ownCircles,
   publishable,
+  displayName,
+  avatar,
 }: SettingsButtonProps) => {
   const viewer = useContext(ViewerContext)
 
@@ -77,6 +82,10 @@ const SettingsButton = ({
     draft,
     ownCircles && ownCircles[0]
   )
+
+  const { edit: editSupport, saving: supportSaving } =
+    useEditSupportSetting(draft)
+
   const hasOwnCircle = ownCircles && ownCircles.length >= 1
   const tags = (draft.tags || []).map(toDigestTagPlaceholder)
   const isPending = draft.publishState === 'pending'
@@ -109,6 +118,14 @@ const SettingsButton = ({
     editAccess,
     accessSaving,
     canToggleCircle: !!hasOwnCircle,
+    draft,
+    editSupportSetting: editSupport,
+    supportSettingSaving: supportSaving,
+    onOpenSupportSetting: () => {
+      console.log('')
+    },
+    displayName,
+    avatar,
     iscnPublish: draft.iscnPublish,
     togglePublishISCN,
     iscnPublishSaving,

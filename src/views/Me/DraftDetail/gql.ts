@@ -7,7 +7,7 @@ import assetFragment from '~/components/GQL/fragments/asset'
 import PublishState from './PublishState'
 
 /**
- * Fragment for data contain draft cover, tags & collection
+ * Fragment for data contain draft cover, tags, collection & support feedback
  */
 export const editMetaFragment = gql`
   fragment EditMetaDraft on Draft {
@@ -51,6 +51,8 @@ export const DRAFT_DETAIL = gql`
       ownCircles {
         ...DigestRichCirclePublic
       }
+      displayName
+      avatar
     }
     node(input: { id: $id }) {
       id
@@ -141,6 +143,26 @@ export const SET_TAGS = gql`
     }
   }
   ${editMetaFragment}
+`
+
+export const SET_SUPPORT_REQUEST_REPLY = gql`
+  mutation SetSupportRequestReply(
+    $id: ID!
+    $requestForDonation: requestForDonation_String_maxLength_140
+    $replyToDonator: replyToDonator_String_maxLength_140
+  ) {
+    putDraft(
+      input: {
+        id: $id
+        requestForDonation: $requestForDonation
+        replyToDonator: $replyToDonator
+      }
+    ) {
+      id
+      requestForDonation
+      replyToDonator
+    }
+  }
 `
 
 export const SET_PUBLISH_ISCN = gql`
