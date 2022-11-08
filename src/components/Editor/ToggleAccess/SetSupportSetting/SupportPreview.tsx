@@ -23,7 +23,7 @@ const SupportPreview = ({
               <Translate
                 zh_hant="喜歡我的創作嗎？創作並不容易，別忘了給予支持與讚賞，讓我知道在創作的路上有你陪伴。"
                 zh_hans="喜欢我的创作吗？创作并不容易，别忘了给予支持与赞赏，让我知道在创作的路上有你陪伴。"
-                en="Don't forget to support or like, so I know you are with me.."
+                en="Don't forget to support or like, so I know you are with me."
               />
             ) : (
               <section className="preview-response">

@@ -187,7 +187,7 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
         <section className="content">
           <section className="content-input">{InnerForm(tabType)}</section>
           <section className="preview">
-            <span className="preview-title">效果预览</span>
+            <span className="preview-title"><Translate zh_hans='效果预览' zh_hant='效果預覽' en='Support Setting Preview'/></span>
             <SupportPreview
               content={
                 tabType === 'request'

@@ -1104,10 +1104,10 @@ export const TEXT = {
     successUnblock: 'User unblocked. User can now comment on your articles.',
     successUploadImage: 'Image uploaded',
     supportRequestDescription:
-      '喜歡我的創作嗎？創作並不容易，別忘了給予支持與讚賞，讓我知道在創作的路上有你陪伴。',
+      'Don’t forget to support or like, so I know you are with me.',
     supportResponseDescription:
-      '感謝 # 的支持 🥳，創作這條路不容易，有你的支持我將能夠蓄積更多能量創作。',
-    supportResponseTitle: '試試輸入「#」以代稱支持者名稱',
+      'Thanks for your support. The way isn’t always easy being a creator. With your generous support, I can accumulate more energy to go on.',
+    supportResponseTitle: 'Try entering # to substitute the supporter.',
     TAG_EDITORS_REACH_LIMIT: 'Maximum 4 editors allowed for each tag',
     TAG_NOT_FOUND: 'Tag not found',
     TOO_MANY_TAGS_FOR_ARTICLE: 'Add up to 10 tags',
