@@ -102,7 +102,7 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
               id: 'supportRequestDescription',
               lang,
             })}
-            hint={<Translate id="hintDescription" />}
+            hint={<Translate id="supportSettingHint" />}
             value={values.requestForDonation! || ''}
             error={errors.requestForDonation}
             onBlur={handleBlur}
@@ -120,7 +120,7 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
               id: 'supportResponseDescription',
               lang,
             })}
-            hint={<Translate id="hintDescription" />}
+            hint={<Translate id="supportSettingHint" />}
             value={values.replyToDonator! || ''}
             error={errors.replyToDonator}
             onBlur={handleBlur}
