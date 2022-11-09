@@ -22,7 +22,7 @@
   border-radius: 1.25rem;
 
   & p {
-    width: 25rem;
+    max-width: 25rem;
     font-size: var(--font-size-sm);
     line-height: 1.25rem;
   }
