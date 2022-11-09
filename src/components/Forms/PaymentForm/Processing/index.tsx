@@ -11,7 +11,6 @@ import {
   Translate,
   useBalanceUSDT,
   useMutation,
-  useRoute,
   ViewerContext,
 } from '~/components'
 import PAY_TO from '~/components/GQL/mutations/payTo'
@@ -37,7 +36,7 @@ interface Props {
   amount: number
   currency: CURRENCY
   recipient: UserDonationRecipient
-  article?: ArticleDetailPublic_article
+  article: ArticleDetailPublic_article
   targetId: string
   txId: string
   nextStep: () => void
@@ -184,8 +183,6 @@ const USDTProcessingForm: React.FC<Props> = ({
   switchToCurrencyChoice,
 }) => {
   const [payTo] = useMutation<PayToMutate>(PAY_TO)
-  const { getQuery } = useRoute()
-  const mediaHash = getQuery('mediaHash')
   const viewer = useContext(ViewerContext)
   const { address } = useAccount()
   const { data: balanceUSDTData } = useBalanceUSDT({})
@@ -236,7 +233,7 @@ const USDTProcessingForm: React.FC<Props> = ({
       update: (cache) => {
         updateDonation({
           cache,
-          mediaHash,
+          id: article.id,
           viewer,
         })
       },
@@ -357,6 +354,7 @@ const PaymentProcessingForm: React.FC<Props> = ({
           amount={amount}
           currency={currency}
           recipient={recipient}
+          article={article}
           txId={txId}
           targetId={targetId}
           nextStep={nextStep}
