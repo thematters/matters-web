@@ -119,8 +119,8 @@ const Donators = ({ article, showAvatarAnimation = false }: DonatorsProps) => {
                 textPlacement="left"
               >
                 <Translate
-                  zh_hant="個人支持過・看全部"
-                  zh_hans="个人支持过・看全部"
+                  zh_hant="個人支持過本文・看全部"
+                  zh_hans="个人支持过本文・看全部"
                   en="others have supported the article. All supporters"
                 />
               </TextIcon>
