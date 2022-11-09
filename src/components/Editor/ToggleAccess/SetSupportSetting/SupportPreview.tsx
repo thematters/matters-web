@@ -9,11 +9,10 @@ const SupportPreview = ({
   content: string
   tabType: string
 }) => {
-  // const [content, setContent] = useState('')
   return (
     <section className="donation">
       <section className="preview">
-        <p>
+        <span>
           {!content &&
             (tabType === 'request' ? (
               <Translate
@@ -33,7 +32,7 @@ const SupportPreview = ({
             ))}
 
           {<Translate zh_hant={content} zh_hans={content} en={content} />}
-        </p>
+        </span>
         <section className="preview-button">
           {tabType === 'request' && (
             <Button size={['100%', '2.5rem']} bgColor="gold-linear-gradient">

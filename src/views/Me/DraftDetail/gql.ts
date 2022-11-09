@@ -32,6 +32,8 @@ export const editMetaFragment = gql`
       }
     }
     license
+    requestForDonation
+    replyToDonator
     iscnPublish
   }
   ${ArticleDigestDropdown.fragments.article}

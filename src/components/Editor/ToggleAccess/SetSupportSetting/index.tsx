@@ -2,10 +2,6 @@ import _pickBy from 'lodash/pickBy'
 import dynamic from 'next/dynamic'
 
 import { Dialog, Spinner, useDialogSwitch } from '~/components'
-// import { ADD_TOAST } from '~/common/enums'
-
-// import Tab, { TabType } from './Tab'
-// import styles from './styles.css'
 
 export type SetSupportSettingProps = {
   onBack?: () => any

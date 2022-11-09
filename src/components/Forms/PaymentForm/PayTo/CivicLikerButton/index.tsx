@@ -20,7 +20,6 @@ const CivicLikerButton: React.FC<CivicLikerButtonProps> = ({ likerId }) => {
         <TextIcon
           color="likecoin-green"
           size="md"
-          weight="md"
           textPlacement="left"
           icon={<IconExternalLink16 />}
         >

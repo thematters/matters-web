@@ -2,21 +2,32 @@
 
 .StripeElement {
   @mixin all-transition;
-  @mixin border-top-grey;
-  @mixin border-bottom-grey;
 
+  height: var(--input-height);
   padding: 0 0 0 var(--spacing-base);
-  background-color: var(--color-white);
+  border: 1px solid var(--color-grey-light);
+  border-radius: var(--spacing-x-tight);
+  caret-color: var(--color-matters-green);
 
-  @media (--sm-up) {
-    background-color: var(--color-grey-lighter);
-    border-top: none;
-    border-bottom: 1px solid var(--color-grey-light);
-    border-radius: var(--spacing-xxx-tight);
+  &.StripeElement--focus {
+    background-color: var(--color-green-lighter);
+    border-color: var(--color-matters-green);
+  }
 
-    &.StripeElement--focus {
-      background-color: var(--color-green-lighter);
-      border-bottom-color: var(--color-matters-green);
-    }
+  &.StripeElement--invalid {
+    background-color: transparent;
+    border-color: var(--color-red);
+  }
+
+  /* Chrome, Safari, Edge, Opera */
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    margin: 0;
+    -webkit-appearance: none;
+  }
+
+  /* Firefox */
+  &[type='number'] {
+    -moz-appearance: textfield;
   }
 }

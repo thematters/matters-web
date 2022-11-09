@@ -9,6 +9,8 @@ export const fragments = {
       content
       summary
       summaryCustomized
+      requestForDonation
+      replyToDonator
     }
   `,
 }
