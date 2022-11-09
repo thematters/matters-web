@@ -28,6 +28,8 @@ export const EDIT_MODE_ARTICLE = gql`
         ownCircles {
           ...DigestRichCirclePublic
         }
+        displayName
+        avatar
       }
       access {
         type
@@ -37,6 +39,8 @@ export const EDIT_MODE_ARTICLE = gql`
         }
       }
       license
+      requestForDonation
+      replyToDonator
       revisionCount
       drafts {
         id
@@ -64,4 +68,24 @@ export const EDIT_MODE_ARTICLE_ASSETS = gql`
     }
   }
   ${assetFragment}
+`
+
+export const EDIT_ARTICLE_SUPPORT_SETTING = gql`
+  mutation EditArticleSupportSetting(
+    $id: ID!
+    $requestForDonation: requestForDonation_String_maxLength_140
+    $replyToDonator: replyToDonator_String_maxLength_140
+  ) {
+    editArticle(
+      input: {
+        id: $id
+        requestForDonation: $requestForDonation
+        replyToDonator: $replyToDonator
+      }
+    ) {
+      id
+      requestForDonation
+      replyToDonator
+    }
+  }
 `

@@ -8,6 +8,7 @@ import {
   SET_COLLECTION,
   SET_COVER,
   SET_PUBLISH_ISCN,
+  SET_SUPPORT_REQUEST_REPLY,
   SET_TAGS,
 } from './gql'
 
@@ -25,7 +26,7 @@ import { SetDraftCollection } from './__generated__/SetDraftCollection'
 import { SetDraftCover } from './__generated__/SetDraftCover'
 import { SetDraftPublishISCN } from './__generated__/SetDraftPublishISCN'
 import { SetDraftTags } from './__generated__/SetDraftTags'
-
+import { SetSupportRequestReply } from './__generated__/SetSupportRequestReply'
 /**
  * Hooks for editing draft cover, tags and collection
  */
@@ -54,22 +55,6 @@ export const useEditDraftTags = (draft: EditMetaDraft) => {
       variables: {
         id: draftId,
         tags: _uniq(newTags.map(({ content }) => content)),
-      },
-    })
-
-  return { edit, saving }
-}
-
-export const useEditDraftPublishISCN = (draft: EditMetaDraft) => {
-  const draftId = draft.id
-  const [update, { loading: saving }] =
-    useMutation<SetDraftPublishISCN>(SET_PUBLISH_ISCN)
-
-  const edit = (iscnPublish: boolean) =>
-    update({
-      variables: {
-        id: draftId,
-        iscnPublish,
       },
     })
 
@@ -113,6 +98,42 @@ export const useEditDraftAccess = (
         accessType: paywalled
           ? ArticleAccessType.paywall
           : ArticleAccessType.public,
+      },
+    })
+
+  return { edit, saving }
+}
+
+export const useEditSupportSetting = (draft?: EditMetaDraft) => {
+  const draftId = draft?.id
+  const [update, { loading: saving }] = useMutation<SetSupportRequestReply>(
+    SET_SUPPORT_REQUEST_REPLY
+  )
+
+  const edit = (
+    requestForDonation: string | null,
+    replyToDonator: string | null
+  ) =>
+    update({
+      variables: {
+        id: draftId,
+        requestForDonation,
+        replyToDonator,
+      },
+    })
+  return { edit, saving }
+}
+
+export const useEditDraftPublishISCN = (draft: EditMetaDraft) => {
+  const draftId = draft.id
+  const [update, { loading: saving }] =
+    useMutation<SetDraftPublishISCN>(SET_PUBLISH_ISCN)
+
+  const edit = (iscnPublish: boolean) =>
+    update({
+      variables: {
+        id: draftId,
+        iscnPublish,
       },
     })
 

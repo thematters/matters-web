@@ -67,6 +67,12 @@ const BottomBar: React.FC<BottomBarProps> = ({
   license,
   canToggleCircle,
 
+  article,
+  draft,
+  editSupportSetting,
+  supportSettingSaving,
+  onOpenSupportSetting,
+
   iscnPublish,
   togglePublishISCN,
   iscnPublishSaving,
@@ -97,6 +103,13 @@ const BottomBar: React.FC<BottomBarProps> = ({
     editAccess,
     accessSaving,
     canToggleCircle,
+
+    article,
+    draft,
+    editSupportSetting,
+    supportSettingSaving,
+    onOpenSupportSetting,
+
     iscnPublish,
     togglePublishISCN,
     iscnPublishSaving,
@@ -176,7 +189,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
               )}
             </SearchSelectDialog>
 
-            {/* Circle & License */}
+            {/* Circle & License & Support Feedback & ISCN */}
             <AccessDialog {...accessProps}>
               {({ openDialog }) => (
                 <button
