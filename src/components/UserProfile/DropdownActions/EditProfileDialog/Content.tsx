@@ -189,7 +189,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
           id: 'enterDisplayName',
           lang,
         })}
-        hint={<Translate id="hintDisplayName" />}
+        hint={<Translate id="supportSettingHint" />}
         value={values.displayName}
         error={touched.displayName && errors.displayName}
         onBlur={handleBlur}
@@ -204,7 +204,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
           id: 'enterUserDescription',
           lang,
         })}
-        hint={<Translate id="hintDescription" />}
+        hint={<Translate id="supportSettingHint" />}
         value={values.description}
         error={touched.description && errors.description}
         onBlur={handleBlur}

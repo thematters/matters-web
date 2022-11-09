@@ -34,7 +34,7 @@
   @mixin flex-center-start;
 
   flex-direction: column;
-  margin-top: calc(var(--spacing-loose) * -1);
+  margin: calc(var(--spacing-loose) * -1) calc(var(--spacing-base) * -1) 0;
 }
 
 .preview-response {
@@ -45,7 +45,7 @@
 }
 
 .preview-button {
-  margin: var(--spacing-base) 0;
+  margin: var(--spacing-base) 0 0;
 
   & :global(button) {
     width: 100%;
