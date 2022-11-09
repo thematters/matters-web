@@ -4,24 +4,26 @@ import { ThreadComment } from '~/components'
 
 export const FEATURED_COMMENTS_PUBLIC = gql`
   query FeaturedCommentsPublic(
-    $mediaHash: String!
+    $id: ID!
     $after: String
     $first: first_Int_min_0 = 10
   ) {
-    article(input: { mediaHash: $mediaHash }) {
-      id
-      mediaHash
-      featuredComments(input: { first: $first, after: $after }) {
-        totalCount
-        pageInfo {
-          startCursor
-          endCursor
-          hasNextPage
-        }
-        edges {
-          node {
-            ...ThreadCommentCommentPublic
-            ...ThreadCommentCommentPrivate
+    article: node(input: { id: $id }) {
+      ... on Article {
+        id
+        mediaHash
+        featuredComments(input: { first: $first, after: $after }) {
+          totalCount
+          pageInfo {
+            startCursor
+            endCursor
+            hasNextPage
+          }
+          edges {
+            node {
+              ...ThreadCommentCommentPublic
+              ...ThreadCommentCommentPrivate
+            }
           }
         }
       }

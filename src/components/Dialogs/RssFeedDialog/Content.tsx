@@ -163,11 +163,7 @@ const RssFeedDialogContent = ({
                 color="green"
                 size="md-s"
               >
-                <Translate
-                  zh_hans="等待写入完成..."
-                  zh_hant="等候寫入完成..."
-                  en="Waiting ..."
-                />
+                <Translate id="waitingForHash" />
               </TextIcon>
             </section>
           )}

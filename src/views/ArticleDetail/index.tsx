@@ -83,7 +83,7 @@ const DynamicEditMode = dynamic(() => import('./EditMode'), {
   ),
 })
 
-const isValidMediaHash = (mediaHash: string | null | undefined) => {
+const isMediaHashPossiblyValid = (mediaHash?: string | null) => {
   // is there a better way to detect valid?
   // a valid mediaHash, should have length 49 or 59 chars
   // 'zdpuAsCXC87Tm1fFvAbysV7HVt7J8aV6chaTKeJZ5ryLALK3Z'
@@ -313,7 +313,7 @@ const BaseArticleDetail = ({
           )}
 
           <section className="block">
-            <DynamicResponse lock={!canReadFullContent} />
+            <DynamicResponse id={article.id} lock={!canReadFullContent} />
           </section>
 
           {!isLargeUp && <RelatedArticles article={article} />}
@@ -362,7 +362,7 @@ const ArticleDetail = ({
   /**
    * fetch public data
    */
-  const isQueryByHash = !!(mediaHash && isValidMediaHash(mediaHash))
+  const isQueryByHash = !!(mediaHash && isMediaHashPossiblyValid(mediaHash))
 
   // backward compatible with:
   // - `/:username:/:articleId:-:slug:-:mediaHash`
@@ -599,7 +599,7 @@ const ArticleDetailOuter = () => {
     (router.query.mediaHash as string)?.match(/^(\d+)/)?.[1] || ''
   const locale = router.locale !== DEFAULT_LOCALE ? router.locale : ''
 
-  const isQueryByHash = !!(mediaHash && isValidMediaHash(mediaHash))
+  const isQueryByHash = !!(mediaHash && isMediaHashPossiblyValid(mediaHash))
   const resultByHash = usePublicQuery<ArticleAvailableTranslations>(
     ARTICLE_AVAILABLE_TRANSLATIONS,
     { variables: { mediaHash }, skip: !isQueryByHash }
