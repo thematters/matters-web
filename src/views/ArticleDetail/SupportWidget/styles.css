@@ -12,13 +12,17 @@
 }
 
 .donation {
+  @mixin flex-center-all;
+
   position: relative;
+  flex-direction: column;
   padding: var(--spacing-base);
   text-align: center;
   background: var(--color-yellow-lighter);
   border-radius: 1.25rem;
 
   & p {
+    width: 25rem;
     font-size: var(--font-size-sm);
     line-height: 1.25rem;
   }
