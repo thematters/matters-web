@@ -71,10 +71,7 @@ const SupportWidget = ({ article }: DonationProps) => {
   }, [hasDonatedData])
 
   const requestForDonation = article.requestForDonation
-  const replyToDonator = hasDonatedArticle?.replyToDonator?.replaceAll(
-    '#',
-    ` ${viewer.displayName} `
-  )
+  const replyToDonator = hasDonatedArticle?.replyToDonator
 
   useEventListener(
     SUPPORT_SUCCESS_ANIMATION,
@@ -146,7 +143,7 @@ const SupportWidget = ({ article }: DonationProps) => {
                         <TextIcon weight="bold" size="md">
                           <Translate
                             zh_hant="🎉 感謝支持！"
-                            zh_hans="🎉 感謝支持！"
+                            zh_hans="🎉 感谢支持！"
                             en="🎉 Thank you for support!"
                           />
                         </TextIcon>
@@ -154,15 +151,9 @@ const SupportWidget = ({ article }: DonationProps) => {
                       <Spacer size="xtight" />
                       <p>
                         <Translate
-                          zh_hant="感謝 "
-                          zh_hans="感謝 "
-                          en="Thank "
-                        />
-                        <span>{viewer.displayName}</span>
-                        <Translate
-                          zh_hant=" 的支持，創作這條路不容易，有你的支持我將能夠蓄積更多能量創作。"
-                          zh_hans=" 的支持，創作這條路不容易，有你的支持我將能夠蓄積更多能量創作。"
-                          en=" for your support. The way isn’t always easy being a creator. With your generous support, I can accumulate more energy to go on."
+                          zh_hant="感謝支持，創作這條路不容易，有你的支持我將能夠蓄積更多能量創作。"
+                          zh_hans="感谢支持，创作这条路不容易，有你的支持我将能够蓄积更多能量创作。"
+                          en="Thank for your support. The way isn’t always easy being a creator. With your generous support, I can accumulate more energy to go on."
                         />
                       </p>
                     </section>
