@@ -126,16 +126,16 @@ const Animation: React.FC<Props> = ({
         <p className="animation-hint">
           {isShipWaiting && currency === CURRENCY.LIKE && (
             <Translate
-              zh_hant="支付請求已送出，LikeCoin 網絡確認中⋯"
-              zh_hans="支付请求已送出，LikeCoin 网络确认中⋯"
-              en="Payment request on LikeCoin network will be confirmed and synced to Matters in a bit"
+              zh_hant="持續與 LikeCoin 網絡同步，稍後更新至 Matters"
+              zh_hans="持续与 LikeCoin 网络同步，稍后更新至 Matters"
+              en="Request on LikeCoin network will be confirmed and synced to Matters in a bit"
             />
           )}
           {isShipWaiting && currency === CURRENCY.USDT && (
             <Translate
-              zh_hant="支付請求已送出，Polygon 網絡確認中⋯"
-              zh_hans="支付請求已送出，Polygon 网络确认中⋯"
-              en="Payment request on Polygon network will be confirmed and synced to Matters in a bit"
+              zh_hant="持續與 Polygon 網絡同步，稍後更新至 Matters"
+              zh_hans="持续与 Polygon 网络同步，稍后更新至 Matters"
+              en="Request on Polygon network will be confirmed and synced to Matters in a bit"
             />
           )}
         </p>
