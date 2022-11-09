@@ -297,8 +297,8 @@ const USDTProcessingForm: React.FC<Props> = ({
             </p>
             <p>
               <Translate
-                zh_hant="操作結果以鏈上紀錄為主，稍後將同步至 Matters"
-                zh_hans="操作结果以链上记录为主，稍后将同步至 Matters"
+                zh_hant="結果以鏈上紀錄為主，稍後同步至 Matters"
+                zh_hans="结果以链上记录为主，稍后同步至 Matters"
                 en="Transaction will be updated to Matters shortly."
               />
             </p>
