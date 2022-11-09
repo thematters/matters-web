@@ -12,7 +12,6 @@ import {
   TextIcon,
   Translate,
   useEventListener,
-  useRoute,
   ViewerContext,
 } from '~/components'
 
@@ -30,15 +29,16 @@ import styles from './styles.css'
 import SupportButton from './SupportButton'
 
 import { ArticleDetailPublic_article } from '../__generated__/ArticleDetailPublic'
-import { HasDonated } from './__generated__/HasDonated'
+import {
+  HasDonated,
+  HasDonated_article_Article,
+} from './__generated__/HasDonated'
 
 interface DonationProps {
   article: ArticleDetailPublic_article
 }
 
 const SupportWidget = ({ article }: DonationProps) => {
-  const { getQuery } = useRoute()
-  const mediaHash = getQuery('mediaHash')
   const viewer = useContext(ViewerContext)
   const [playShipWaiting, setPlayShipWaiting] = useState(false)
   const [showAnimation, setShowAnimation] = useState(false)
@@ -56,22 +56,22 @@ const SupportWidget = ({ article }: DonationProps) => {
     refetch: hasDonatedRefetch,
   } = useQuery<HasDonated>(HAS_DONATED, {
     fetchPolicy: 'network-only',
-    variables: { mediaHash, senderId: viewer.id },
+    variables: { id: article.id, senderId: viewer.id },
   })
+
+  const hasDonatedArticle =
+    hasDonatedData?.article as HasDonated_article_Article
 
   useEffect(() => {
     if (hasDonatedData) {
-      if (
-        viewer.id !== '' &&
-        hasDonatedData.article?.donation.totalCount === 1
-      ) {
+      if (viewer.id !== '' && hasDonatedArticle?.donation.totalCount === 1) {
         setSupported(true)
       }
     }
   }, [hasDonatedData])
 
   const requestForDonation = article.requestForDonation
-  const replyToDonator = hasDonatedData?.article?.replyToDonator?.replaceAll(
+  const replyToDonator = hasDonatedArticle?.replyToDonator?.replaceAll(
     '#',
     ` ${viewer.displayName} `
   )
