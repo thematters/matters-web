@@ -12,15 +12,11 @@ import {
   TextIcon,
   Translate,
   useEventListener,
-  useMutation,
   useRoute,
   ViewerContext,
 } from '~/components'
-import PAY_TO from '~/components/GQL/mutations/payTo'
-import updateDonation from '~/components/GQL/updates/donation'
 
 import {
-  CHAIN,
   PATHS,
   PAYMENT_CURRENCY as CURRENCY,
   SUPPORT_SUCCESS_ANIMATION,
@@ -33,7 +29,6 @@ import { fragments, HAS_DONATED } from './gql'
 import styles from './styles.css'
 import SupportButton from './SupportButton'
 
-import { PayTo as PayToMutate } from '~/components/GQL/mutations/__generated__/PayTo'
 import { ArticleDetailPublic_article } from '../__generated__/ArticleDetailPublic'
 import { HasDonated } from './__generated__/HasDonated'
 
@@ -81,8 +76,6 @@ const SupportWidget = ({ article }: DonationProps) => {
     ` ${viewer.displayName} `
   )
 
-  const [payTo] = useMutation<PayToMutate>(PAY_TO)
-
   useEventListener(
     SUPPORT_SUCCESS_ANIMATION,
     async (payload: { [key: string]: any }) => {
@@ -98,42 +91,13 @@ const SupportWidget = ({ article }: DonationProps) => {
         return
       }
 
-      // LIKE
-      if (payload.currency === CURRENCY.LIKE) {
-        setPlayShipWaiting(true)
-        setShowAnimation(true)
-        await sleep(5 * 1000)
-        setPlayShipWaiting(false)
-        hasDonatedRefetch()
-        return
-      }
-
-      // USDT
+      // LIKE、USDT
       setPlayShipWaiting(true)
       setShowAnimation(true)
-      const { transactionResult, amount, recipientId, targetId } = payload
-
-      await payTo({
-        variables: {
-          amount,
-          currency: payload.currency,
-          purpose: 'donation',
-          recipientId,
-          targetId,
-          chain: CHAIN.POLYGON,
-          txHash: transactionResult.hash,
-        },
-        update: (cache) => {
-          updateDonation({
-            cache,
-            mediaHash,
-            viewer,
-          })
-        },
-      })
-      await transactionResult.wait()
+      await sleep(5 * 1000)
       setPlayShipWaiting(false)
       hasDonatedRefetch()
+      return
     }
   )
 

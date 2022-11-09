@@ -10,10 +10,13 @@ import {
   Spinner,
   Translate,
   useBalanceUSDT,
+  useMutation,
   ViewerContext,
 } from '~/components'
+import PAY_TO from '~/components/GQL/mutations/payTo'
 
 import {
+  CHAIN,
   PAYMENT_CURRENCY as CURRENCY,
   SUPPORT_SUCCESS_ANIMATION,
 } from '~/common/enums'
@@ -24,6 +27,7 @@ import PayToFallback from './PayToFallback'
 import styles from './styles.css'
 
 import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
+import { PayTo as PayToMutate } from '~/components/GQL/mutations/__generated__/PayTo'
 import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
 import { ViewerTxState } from './__generated__/ViewerTxState'
 
@@ -177,6 +181,7 @@ const USDTProcessingForm: React.FC<Props> = ({
   switchToConfirm,
   switchToCurrencyChoice,
 }) => {
+  const [payTo] = useMutation<PayToMutate>(PAY_TO)
   const viewer = useContext(ViewerContext)
   const { address } = useAccount()
   const { data: balanceUSDTData } = useBalanceUSDT({})
@@ -209,10 +214,24 @@ const USDTProcessingForm: React.FC<Props> = ({
     ],
   })
 
-  const sendPayTo = () => {
+  const sendPayTo = async () => {
     if (!data) {
       return
     }
+
+    await payTo({
+      variables: {
+        amount,
+        currency,
+        purpose: 'donation',
+        recipientId: recipient.id,
+        targetId,
+        chain: CHAIN.POLYGON,
+        txHash: data.hash,
+      },
+    })
+
+    await data.wait()
 
     window.dispatchEvent(
       new CustomEvent(SUPPORT_SUCCESS_ANIMATION, {
