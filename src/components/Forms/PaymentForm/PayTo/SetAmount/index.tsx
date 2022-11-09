@@ -15,7 +15,6 @@ import {
   useApproveUSDT,
   useBalanceUSDT,
   useMutation,
-  useRoute,
   ViewerContext,
 } from '~/components'
 import PAY_TO from '~/components/GQL/mutations/payTo'
@@ -44,6 +43,7 @@ import {
   PayTo_payTo_transaction as PayToTx,
 } from '~/components/GQL/mutations/__generated__/PayTo'
 import { WalletBalance } from '~/components/GQL/queries/__generated__/WalletBalance'
+import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
 
 interface SetAmountCallbackValues {
   amount: number
@@ -53,6 +53,7 @@ interface SetAmountCallbackValues {
 interface FormProps {
   currency: CURRENCY
   recipient: UserDonationRecipient
+  article: ArticleDetailPublic_article
   submitCallback: (values: SetAmountCallbackValues) => void
   switchToCurrencyChoice: () => void
   switchToAddCredit: () => void
@@ -81,6 +82,7 @@ const AMOUNT_OPTIONS = {
 const SetAmount: React.FC<FormProps> = ({
   currency,
   recipient,
+  article,
   submitCallback,
   switchToCurrencyChoice,
   switchToAddCredit,
@@ -100,8 +102,6 @@ const SetAmount: React.FC<FormProps> = ({
   const { address } = useAccount()
   const { chain } = useNetwork()
   const { chains, switchNetwork } = useSwitchNetwork()
-  const { getQuery } = useRoute()
-  const mediaHash = getQuery('mediaHash')
 
   const isConnectedAddress =
     viewer.info.ethAddress?.toLowerCase() === address?.toLowerCase()
@@ -184,7 +184,7 @@ const SetAmount: React.FC<FormProps> = ({
             update: (cache) => {
               updateDonation({
                 cache,
-                mediaHash,
+                id: article.id,
                 viewer,
               })
             },
