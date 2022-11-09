@@ -28,14 +28,12 @@ import {
 import ConfirmPublishDialogContent from './ConfirmPublishDialogContent'
 
 import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
-import { DraftDetailQuery_viewer } from '~/views/Me/DraftDetail/__generated__/DraftDetailQuery'
 import { EditMetaDraft } from '../__generated__/EditMetaDraft'
 
 interface SettingsButtonProps {
   draft: EditMetaDraft
   ownCircles?: DigestRichCirclePublic[]
   publishable?: boolean
-  viewer: DraftDetailQuery_viewer | null | undefined
 }
 
 const ConfirmButton = ({
@@ -63,7 +61,6 @@ const SettingsButton = ({
   draft,
   ownCircles,
   publishable,
-  viewer,
 }: SettingsButtonProps) => {
   const viewerContext = useContext(ViewerContext)
 
@@ -123,7 +120,6 @@ const SettingsButton = ({
     onOpenSupportSetting: () => {
       console.log('')
     },
-    viewer,
     iscnPublish: draft.iscnPublish,
     togglePublishISCN,
     iscnPublishSaving,

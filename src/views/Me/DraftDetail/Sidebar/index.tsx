@@ -15,13 +15,11 @@ import {
 import styles from './styles.css'
 
 import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
-import { DraftDetailQuery_viewer } from '~/views/Me/DraftDetail/__generated__/DraftDetailQuery'
 import { EditMetaDraft } from '../__generated__/EditMetaDraft'
 
 interface BaseSidebarProps {
   draft: EditMetaDraft
   ownCircles?: DigestRichCirclePublic[]
-  viewer: DraftDetailQuery_viewer | null | undefined
 }
 
 type SidebarProps = BaseSidebarProps & { disabled: boolean }
@@ -71,7 +69,7 @@ const EditDraftTags = ({ draft, disabled }: SidebarProps) => {
   )
 }
 
-const EditDraftCircle = ({ draft, ownCircles, viewer }: SidebarProps) => {
+const EditDraftCircle = ({ draft, ownCircles }: SidebarProps) => {
   const { edit, saving } = useEditDraftAccess(
     draft,
     ownCircles && ownCircles[0]
@@ -89,7 +87,6 @@ const EditDraftCircle = ({ draft, ownCircles, viewer }: SidebarProps) => {
       draft={draft}
       editSupportSetting={editSupport}
       supportSettingSaving={supportSaving}
-      viewer={viewer}
     >
       {({ openDialog }) => (
         <Sidebar.Management
@@ -106,7 +103,6 @@ const EditDraftCircle = ({ draft, ownCircles, viewer }: SidebarProps) => {
           editSupportSetting={editSupport}
           supportSettingSaving={supportSaving}
           onOpenSupportSetting={openDialog}
-          viewer={viewer}
         />
       )}
     </SupportSettingDialog>

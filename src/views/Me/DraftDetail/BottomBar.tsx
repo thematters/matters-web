@@ -20,16 +20,14 @@ import {
 } from './hooks'
 
 import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
-import { DraftDetailQuery_viewer } from '~/views/Me/DraftDetail/__generated__/DraftDetailQuery'
 import { EditMetaDraft } from './__generated__/EditMetaDraft'
 
 interface BottomBarProps {
   draft: EditMetaDraft
   ownCircles?: DigestRichCirclePublic[]
-  viewer: DraftDetailQuery_viewer | null | undefined
 }
 
-const EditDraftBottomBar = ({ draft, ownCircles, viewer }: BottomBarProps) => {
+const EditDraftBottomBar = ({ draft, ownCircles }: BottomBarProps) => {
   const { edit: editCollection, saving: collectionSaving } =
     useEditDraftCollection(draft)
   const {
@@ -81,7 +79,6 @@ const EditDraftBottomBar = ({ draft, ownCircles, viewer }: BottomBarProps) => {
     draft,
     editSupportSetting: editSupport,
     supportSettingSaving: supportSaving,
-    viewer,
     togglePublishISCN,
     iscnPublishSaving,
     onOpenSupportSetting: () => undefined,
@@ -92,7 +89,6 @@ const EditDraftBottomBar = ({ draft, ownCircles, viewer }: BottomBarProps) => {
       draft={draft}
       editSupportSetting={editSupport}
       supportSettingSaving={supportSaving}
-      viewer={viewer}
     >
       {({ openDialog }) => (
         <BottomBar

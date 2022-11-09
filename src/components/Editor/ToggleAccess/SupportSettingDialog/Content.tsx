@@ -19,7 +19,6 @@ import SupportPreview from './SupportPreview'
 import Tab, { TabType } from './Tab'
 
 import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
-import { DraftDetailQuery_viewer } from '~/views/Me/DraftDetail/__generated__/DraftDetailQuery'
 import { EditMetaDraft } from '~/views/Me/DraftDetail/__generated__/EditMetaDraft'
 
 interface FormProps {
@@ -32,7 +31,6 @@ interface FormProps {
     replyToDonator: string | null
   ) => any
   supportSettingSaving: boolean
-  viewer: DraftDetailQuery_viewer | null | undefined
 }
 
 interface FormValues {
@@ -47,7 +45,6 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
   article,
   editSupportSetting,
   supportSettingSaving,
-  viewer,
 }) => {
   const { lang } = useContext(LanguageContext)
   const formId = 'support-setting-form'

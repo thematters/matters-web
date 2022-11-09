@@ -4,7 +4,6 @@ import dynamic from 'next/dynamic'
 import { Dialog, Spinner, useDialogSwitch } from '~/components'
 
 import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
-import { DraftDetailQuery_viewer } from '~/views/Me/DraftDetail/__generated__/DraftDetailQuery'
 import { EditMetaDraft } from '~/views/Me/DraftDetail/__generated__/EditMetaDraft'
 
 interface SupportSettingDialogProps {
@@ -15,7 +14,6 @@ interface SupportSettingDialogProps {
     replyToDonator: string | null
   ) => any
   supportSettingSaving: boolean
-  viewer?: DraftDetailQuery_viewer | null | undefined
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
@@ -27,7 +25,6 @@ const BaseSupportSettingDialog = ({
   article,
   editSupportSetting,
   supportSettingSaving,
-  viewer,
 }: SupportSettingDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
@@ -41,7 +38,6 @@ const BaseSupportSettingDialog = ({
           article={article}
           editSupportSetting={editSupportSetting}
           supportSettingSaving={supportSettingSaving}
-          viewer={viewer}
         />
       </Dialog>
     </>

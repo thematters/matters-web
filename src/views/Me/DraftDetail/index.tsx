@@ -51,7 +51,6 @@ const DraftDetail = () => {
   })
   const draft = (data?.node?.__typename === 'Draft' && data.node) || undefined
   const ownCircles = data?.viewer?.ownCircles || undefined
-  const viewer = data?.viewer
 
   if (loading) {
     return (
@@ -146,7 +145,7 @@ const DraftDetail = () => {
 
   return (
     <Layout.Main
-      aside={<Sidebar draft={draft} ownCircles={ownCircles} viewer={viewer} />}
+      aside={<Sidebar draft={draft} ownCircles={ownCircles} />}
       inEditor
     >
       <Layout.Header
@@ -159,7 +158,6 @@ const DraftDetail = () => {
                 draft={draft}
                 ownCircles={ownCircles}
                 publishable={!!publishable}
-                viewer={viewer}
               />
             )}
           </>
@@ -180,9 +178,7 @@ const DraftDetail = () => {
         <Editor draft={draft} update={update} upload={upload} />
       </Layout.Spacing>
 
-      {!isLargeUp && (
-        <BottomBar draft={draft} ownCircles={ownCircles} viewer={viewer} />
-      )}
+      {!isLargeUp && <BottomBar draft={draft} ownCircles={ownCircles} />}
     </Layout.Main>
   )
 }

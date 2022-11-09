@@ -15,7 +15,6 @@ import {
 } from '@/__generated__/globalTypes'
 import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
 import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
-import { DraftDetailQuery_viewer } from '~/views/Me/DraftDetail/__generated__/DraftDetailQuery'
 import { EditMetaDraft } from '~/views/Me/DraftDetail/__generated__/EditMetaDraft'
 
 export type ToggleAccessProps = {
@@ -40,7 +39,6 @@ export type ToggleAccessProps = {
   ) => any
   supportSettingSaving: boolean
   onOpenSupportSetting: () => void
-  viewer?: DraftDetailQuery_viewer | null | undefined
 
   iscnPublish?: boolean | null
   togglePublishISCN: (iscnPublish: boolean) => void

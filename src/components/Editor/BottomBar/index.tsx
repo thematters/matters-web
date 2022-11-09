@@ -69,7 +69,6 @@ const BottomBar: React.FC<BottomBarProps> = ({
 
   article,
   draft,
-  viewer,
   editSupportSetting,
   supportSettingSaving,
   onOpenSupportSetting,
@@ -107,7 +106,6 @@ const BottomBar: React.FC<BottomBarProps> = ({
 
     article,
     draft,
-    viewer,
     editSupportSetting,
     supportSettingSaving,
     onOpenSupportSetting,

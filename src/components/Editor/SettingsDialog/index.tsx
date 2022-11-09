@@ -86,7 +86,6 @@ const BaseEditorSettingsDialog = ({
   article,
   editSupportSetting,
   supportSettingSaving,
-  viewer,
 
   iscnPublish,
   togglePublishISCN,
@@ -145,7 +144,6 @@ const BaseEditorSettingsDialog = ({
     article,
     editSupportSetting,
     supportSettingSaving,
-    viewer,
     onOpenSupportSetting: () => {
       forward('support')
     },
@@ -220,7 +218,6 @@ const BaseEditorSettingsDialog = ({
             onBack={() => forward('list')}
             article={article}
             draft={draft}
-            viewer={viewer}
             editSupportSetting={editSupportSetting}
             supportSettingSaving={supportSettingSaving}
             closeDialog={closeDialog}
