@@ -98,12 +98,12 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
           <Form.Textarea
             label=""
             name="requestForDonation"
-            required
             placeholder={translate({
               id: 'supportRequestDescription',
               lang,
             })}
-            value={values.requestForDonation!}
+            hint={<Translate id="supportSettingHint" />}
+            value={values.requestForDonation! || ''}
             error={errors.requestForDonation}
             onBlur={handleBlur}
             onChange={(e) => {
@@ -116,12 +116,12 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
           <Form.Textarea
             label=""
             name="replyToDonator"
-            required
             placeholder={translate({
               id: 'supportResponseDescription',
               lang,
             })}
-            value={values.replyToDonator!}
+            hint={<Translate id="supportSettingHint" />}
+            value={values.replyToDonator! || ''}
             error={errors.replyToDonator}
             onBlur={handleBlur}
             onChange={(e) =>
