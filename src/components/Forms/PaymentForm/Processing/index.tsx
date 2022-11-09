@@ -11,9 +11,11 @@ import {
   Translate,
   useBalanceUSDT,
   useMutation,
+  useRoute,
   ViewerContext,
 } from '~/components'
 import PAY_TO from '~/components/GQL/mutations/payTo'
+import updateDonation from '~/components/GQL/updates/donation'
 
 import {
   CHAIN,
@@ -182,6 +184,8 @@ const USDTProcessingForm: React.FC<Props> = ({
   switchToCurrencyChoice,
 }) => {
   const [payTo] = useMutation<PayToMutate>(PAY_TO)
+  const { getQuery } = useRoute()
+  const mediaHash = getQuery('mediaHash')
   const viewer = useContext(ViewerContext)
   const { address } = useAccount()
   const { data: balanceUSDTData } = useBalanceUSDT({})
@@ -228,6 +232,13 @@ const USDTProcessingForm: React.FC<Props> = ({
         targetId,
         chain: CHAIN.POLYGON,
         txHash: data.hash,
+      },
+      update: (cache) => {
+        updateDonation({
+          cache,
+          mediaHash,
+          viewer,
+        })
       },
     })
 
