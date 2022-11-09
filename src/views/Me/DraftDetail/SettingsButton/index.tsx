@@ -62,7 +62,7 @@ const SettingsButton = ({
   ownCircles,
   publishable,
 }: SettingsButtonProps) => {
-  const viewerContext = useContext(ViewerContext)
+  const viewer = useContext(ViewerContext)
 
   const { edit: editCollection, saving: collectionSaving } =
     useEditDraftCollection(draft)
@@ -117,15 +117,13 @@ const SettingsButton = ({
     draft,
     editSupportSetting: editSupport,
     supportSettingSaving: supportSaving,
-    onOpenSupportSetting: () => {
-      console.log('')
-    },
+    onOpenSupportSetting: () => undefined,
     iscnPublish: draft.iscnPublish,
     togglePublishISCN,
     iscnPublishSaving,
   }
 
-  if (!viewerContext.shouldSetupLikerID) {
+  if (!viewer.shouldSetupLikerID) {
     return (
       <EditorSettingsDialog
         saving={false}
