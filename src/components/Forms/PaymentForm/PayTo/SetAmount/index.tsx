@@ -8,7 +8,6 @@ import { useAccount, useNetwork, useSwitchNetwork } from 'wagmi'
 import {
   Dialog,
   Form,
-  IconExternalLink16,
   LanguageContext,
   Spinner,
   Translate,
@@ -16,10 +15,12 @@ import {
   useApproveUSDT,
   useBalanceUSDT,
   useMutation,
+  useRoute,
   ViewerContext,
 } from '~/components'
 import PAY_TO from '~/components/GQL/mutations/payTo'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
+import updateDonation from '~/components/GQL/updates/donation'
 
 import {
   PAYMENT_CURRENCY as CURRENCY,
@@ -49,19 +50,14 @@ interface SetAmountCallbackValues {
   currency: CURRENCY
 }
 
-interface SetAmountOpenTabCallbackValues {
-  window: Window
-  transaction: PayToTx
-}
-
 interface FormProps {
-  closeDialog: () => void
   currency: CURRENCY
-  openTabCallback: (values: SetAmountOpenTabCallbackValues) => void
   recipient: UserDonationRecipient
   submitCallback: (values: SetAmountCallbackValues) => void
   switchToCurrencyChoice: () => void
   switchToAddCredit: () => void
+  setTabUrl: (url: string) => void
+  setTx: (tx: PayToTx) => void
   targetId: string
 }
 
@@ -83,13 +79,13 @@ const AMOUNT_OPTIONS = {
 }
 
 const SetAmount: React.FC<FormProps> = ({
-  closeDialog,
   currency,
-  openTabCallback,
   recipient,
   submitCallback,
   switchToCurrencyChoice,
   switchToAddCredit,
+  setTabUrl,
+  setTx,
   targetId,
 }) => {
   const formId = 'pay-to-set-amount-form'
@@ -104,6 +100,8 @@ const SetAmount: React.FC<FormProps> = ({
   const { address } = useAccount()
   const { chain } = useNetwork()
   const { chains, switchNetwork } = useSwitchNetwork()
+  const { getQuery } = useRoute()
+  const mediaHash = getQuery('mediaHash')
 
   const isConnectedAddress =
     viewer.info.ethAddress?.toLowerCase() === address?.toLowerCase()
@@ -117,9 +115,6 @@ const SetAmount: React.FC<FormProps> = ({
   }
 
   // states
-  const [canProcessLike, setProcessCanLike] = useState<boolean>(false)
-  const [tabUrl, setTabUrl] = useState('')
-  const [tx, setTx] = useState<PayToTx>()
   const [payTo] = useMutation<PayToMutate>(PAY_TO)
 
   // HKD balance
@@ -150,7 +145,8 @@ const SetAmount: React.FC<FormProps> = ({
   const balance = isUSDT ? balanceUSDT : isHKD ? balanceHKD : balanceLike
   const maxAmount = isHKD ? PAYMENT_MAXIMUM_PAYTO_AMOUNT.HKD : Infinity
   const networkEerror =
-    error || allowanceError || balanceUSDTError || approveError
+    error ||
+    (isUSDT ? allowanceError || balanceUSDTError || approveError : undefined)
       ? WALLET_ERROR_MESSAGES[lang].unknown
       : ''
 
@@ -185,13 +181,19 @@ const SetAmount: React.FC<FormProps> = ({
               recipientId: recipient.id,
               targetId,
             },
+            update: (cache) => {
+              updateDonation({
+                cache,
+                mediaHash,
+                viewer,
+              })
+            },
           })
           const redirectUrl = result?.data?.payTo.redirectUrl
           const transaction = result?.data?.payTo.transaction
           if (!redirectUrl || !transaction) {
             throw new Error()
           }
-          setProcessCanLike(true)
           setTabUrl(redirectUrl)
           setTx(transaction)
         }
@@ -256,7 +258,7 @@ const SetAmount: React.FC<FormProps> = ({
         balance={balance}
         amounts={AMOUNT_OPTIONS}
         name="amount"
-        disabled={canProcessLike || (isUSDT && !isConnectedAddress)}
+        disabled={isUSDT && !isConnectedAddress}
         value={values.amount}
         error={errors.amount || networkEerror}
         onBlur={handleBlur}
@@ -273,7 +275,7 @@ const SetAmount: React.FC<FormProps> = ({
         // custom input
         lang={lang}
         customAmount={{
-          disabled: canProcessLike || (isUSDT && !isConnectedAddress),
+          disabled: isUSDT && !isConnectedAddress,
           min: 0,
           max: maxAmount,
           step: isUSDT ? '0.01' : undefined,
@@ -324,7 +326,7 @@ const SetAmount: React.FC<FormProps> = ({
       <Dialog.Content hasGrow>{InnerForm}</Dialog.Content>
 
       <Dialog.Footer>
-        {!isUSDT && !canProcessLike && (
+        {!isUSDT && (
           <>
             {isLike && recipient.liker.likerId && (
               <CivicLikerButton likerId={recipient.liker.likerId} />
@@ -389,8 +391,8 @@ const SetAmount: React.FC<FormProps> = ({
                     }}
                   >
                     <Translate
-                      zh_hant="前往確認授權"
-                      zh_hans="前往确认授权"
+                      zh_hant="首次需確認授權後繼續"
+                      zh_hans="首次需确认授权后继续"
                       en="Approve to continue"
                     />
                   </Dialog.Footer.Button>
@@ -412,24 +414,6 @@ const SetAmount: React.FC<FormProps> = ({
                 </Dialog.Footer.Button>
               )}
           </>
-        )}
-
-        {canProcessLike && (
-          <Dialog.Footer.Button
-            onClick={() => {
-              const payWindow = window.open(tabUrl, '_blank')
-              if (payWindow && tx) {
-                openTabCallback({ window: payWindow, transaction: tx })
-              }
-            }}
-            icon={<IconExternalLink16 size="xs" />}
-          >
-            <Translate
-              zh_hant="前往 Liker Land 支付"
-              zh_hans="前往 Liker Land 支付"
-              en="Go to Liker Land for payment"
-            />
-          </Dialog.Footer.Button>
         )}
       </Dialog.Footer>
     </>

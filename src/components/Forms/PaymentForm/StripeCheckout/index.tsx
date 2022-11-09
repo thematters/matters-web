@@ -59,7 +59,7 @@ const StripeCheckout: React.FC<StripeCheckoutProps> = ({ error, onChange }) => {
           }
         />
 
-        <Form.Field.Content>
+        <Form.Field.Content noMargin>
           <section className="checkout-input">
             <CardElement id={fieldId} options={options} onChange={onChange} />
           </section>

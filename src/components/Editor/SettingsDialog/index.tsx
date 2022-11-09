@@ -24,6 +24,7 @@ export type Step =
   | 'collection'
   | 'circle'
   | 'confirm'
+  | 'support'
 
 export type ConfirmStepContentProps = {
   onBack: () => void
@@ -52,6 +53,11 @@ const DynamicSetCover = dynamic(() => import('../SetCover'), {
   loading: Spinner,
 })
 
+const DynamicSetSupportFeedback = dynamic(
+  () => import('~/components/Editor/ToggleAccess/SupportSettingDialog/Content'),
+  { loading: Spinner }
+)
+
 const BaseEditorSettingsDialog = ({
   cover,
   editCover,
@@ -75,6 +81,12 @@ const BaseEditorSettingsDialog = ({
   accessType,
   license,
   canToggleCircle,
+
+  draft,
+  article,
+  editSupportSetting,
+  supportSettingSaving,
+  viewer,
 
   iscnPublish,
   togglePublishISCN,
@@ -109,7 +121,7 @@ const BaseEditorSettingsDialog = ({
   const isCollection = currStep === 'collection'
   // const isCircle = currStep === 'circle'
   const isConfirm = currStep === 'confirm'
-
+  const isSupportSetting = currStep === 'support'
   const coverProps: SetCoverProps = {
     cover,
     editCover,
@@ -129,6 +141,14 @@ const BaseEditorSettingsDialog = ({
     iscnPublish,
     togglePublishISCN,
     iscnPublishSaving,
+    draft,
+    article,
+    editSupportSetting,
+    supportSettingSaving,
+    viewer,
+    onOpenSupportSetting: () => {
+      forward('support')
+    },
   }
 
   return (
@@ -158,7 +178,7 @@ const BaseEditorSettingsDialog = ({
 
         {isCollection && (
           <DynamicSearchSelectForm
-            title="extendArticle"
+            title="collectArticle"
             hint="hintEditCollection"
             headerLeftButton={
               <Dialog.Header.BackButton onClick={() => forward('list')} />
@@ -192,6 +212,18 @@ const BaseEditorSettingsDialog = ({
             createTag
             closeDialog={closeDialog}
             CustomStagingArea={TagCustomStagingArea}
+          />
+        )}
+
+        {isSupportSetting && (
+          <DynamicSetSupportFeedback
+            onBack={() => forward('list')}
+            article={article}
+            draft={draft}
+            viewer={viewer}
+            editSupportSetting={editSupportSetting}
+            supportSettingSaving={supportSettingSaving}
+            closeDialog={closeDialog}
           />
         )}
 

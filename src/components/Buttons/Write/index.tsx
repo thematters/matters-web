@@ -12,7 +12,12 @@ import {
 } from '~/components'
 import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
 
-import { ADD_TOAST, OPEN_LIKE_COIN_DIALOG } from '~/common/enums'
+import {
+  ADD_TOAST,
+  OPEN_LIKE_COIN_DIALOG,
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  UNIVERSAL_AUTH_SOURCE,
+} from '~/common/enums'
 import { analytics, toPath, translate } from '~/common/utils'
 
 import { CreateDraft } from '~/components/GQL/mutations/__generated__/CreateDraft'
@@ -81,17 +86,8 @@ export const WriteButton = ({ allowed, authed, isLarge, forbidden }: Props) => {
       onClick={async () => {
         if (!authed) {
           window.dispatchEvent(
-            new CustomEvent(ADD_TOAST, {
-              detail: {
-                color: 'green',
-                content: (
-                  <Translate
-                    zh_hant="請登入／註冊開始創作"
-                    zh_hans="请登入／注册开始创作"
-                    en="Log in to start writing"
-                  />
-                ),
-              },
+            new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+              detail: { source: UNIVERSAL_AUTH_SOURCE.create },
             })
           )
           return

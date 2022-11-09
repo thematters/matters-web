@@ -148,6 +148,7 @@ const EditModeHeader = ({
 
       <EditorSettingsDialog
         {...restProps}
+        article={article}
         saving={loading}
         disabled={loading}
         confirmButtonText={

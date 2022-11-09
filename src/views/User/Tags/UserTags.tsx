@@ -50,8 +50,8 @@ const UserTags = () => {
 
   // pagination
   const user = data?.user
-  const connectionPath = 'user.tags'
-  const { edges, pageInfo } = user?.tags || {}
+  const connectionPath = 'user.maintainedTags'
+  const { edges, pageInfo } = user?.maintainedTags || {}
   const hasSubscriptions = (user?.subscribedCircles.totalCount || 0) > 0
 
   // load next page

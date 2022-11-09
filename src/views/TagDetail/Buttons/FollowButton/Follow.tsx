@@ -12,6 +12,11 @@ import {
 import TOGGLE_FOLLOW_TAG from '~/components/GQL/mutations/toggleFollowTag'
 import updateTagFollowers from '~/components/GQL/updates/tagFollowers'
 
+import {
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  UNIVERSAL_AUTH_SOURCE,
+} from '~/common/enums'
+
 import { ToggleFollowTag } from '~/components/GQL/mutations/__generated__/ToggleFollowTag'
 import { FollowButtonTagPrivate } from './__generated__/FollowButtonTagPrivate'
 
@@ -43,6 +48,19 @@ const Follow = ({ tag }: FollowProps) => {
     },
   })
 
+  const onClick = () => {
+    if (!viewer.isAuthed) {
+      window.dispatchEvent(
+        new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+          detail: { source: UNIVERSAL_AUTH_SOURCE.followTag },
+        })
+      )
+      return
+    }
+
+    follow()
+  }
+
   return (
     <Button
       spacing={['xtight', 'tight']}
@@ -50,7 +68,7 @@ const Follow = ({ tag }: FollowProps) => {
       textActiveColor="white"
       bgActiveColor="green"
       borderColor="green"
-      onClick={() => follow()}
+      onClick={onClick}
     >
       <TextIcon icon={<IconAdd16 />} weight="md" size="md-s">
         <Translate id="follow" />

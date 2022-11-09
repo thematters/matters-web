@@ -20,12 +20,17 @@ import {
 } from '~/components/Editor'
 import BottomBar from '~/components/Editor/BottomBar'
 import Sidebar from '~/components/Editor/Sidebar'
-import { QueryError, useImperativeQuery } from '~/components/GQL'
+import SupportSettingDialog from '~/components/Editor/ToggleAccess/SupportSettingDialog'
+import { QueryError, useImperativeQuery, useMutation } from '~/components/GQL'
 
 import { ENTITY_TYPE, MAX_ARTICLE_REVISION_COUNT } from '~/common/enums'
 
 import ConfirmExitDialog from './ConfirmExitDialog'
-import { EDIT_MODE_ARTICLE, EDIT_MODE_ARTICLE_ASSETS } from './gql'
+import {
+  EDIT_ARTICLE_SUPPORT_SETTING,
+  EDIT_MODE_ARTICLE,
+  EDIT_MODE_ARTICLE_ASSETS,
+} from './gql'
 import EditModeHeader from './Header'
 import PublishState from './PublishState'
 import styles from './styles.css'
@@ -39,6 +44,7 @@ import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generat
 import { Asset } from '~/components/GQL/fragments/__generated__/Asset'
 import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
 import { ArticleDetailPublic_article } from '../__generated__/ArticleDetailPublic'
+import { EditArticleSupportSetting } from './__generated__/EditArticleSupportSetting'
 import { EditModeArticle } from './__generated__/EditModeArticle'
 import { EditModeArticleAssets } from './__generated__/EditModeArticleAssets'
 
@@ -46,6 +52,28 @@ interface EditModeProps {
   article: ArticleDetailPublic_article
   onCancel: () => void
   onSaved: () => void
+}
+
+export const useEditArticleDetailSupportSetting = (
+  article?: ArticleDetailPublic_article
+) => {
+  const articleId = article?.id
+  const [update, { loading: saving }] = useMutation<EditArticleSupportSetting>(
+    EDIT_ARTICLE_SUPPORT_SETTING
+  )
+
+  const edit = (
+    requestForDonation: string | null,
+    replyToDonator: string | null
+  ) =>
+    update({
+      variables: {
+        id: articleId,
+        requestForDonation,
+        replyToDonator,
+      },
+    })
+  return { edit, saving }
 }
 
 const Editor = dynamic(() => import('~/components/Editor/Article'), {
@@ -90,6 +118,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
     article.access.type
   )
   const [license, editLicense] = useState<ArticleLicenseType>(article.license)
+
   const ownCircles = data?.article?.author.ownCircles
   const hasOwnCircle = ownCircles && ownCircles.length >= 1
   const editAccess = (
@@ -123,6 +152,9 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
     // collection
     editCollection(data.article.collection.edges?.map(({ node }) => node) || [])
   }, [data?.article?.id])
+
+  const { edit: editSupport, saving: supportSaving } =
+    useEditArticleDetailSupportSetting(article)
 
   const [iscnPublish, setIscnPublish] = useState<boolean>(false) // always start false
 
@@ -191,6 +223,12 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
     editAccess,
     canToggleCircle: !!hasOwnCircle && !isReviseDisabled,
     iscnPublish,
+
+    article,
+    editSupportSetting: editSupport,
+    supportSettingSaving: false,
+    onOpenSupportSetting: () => undefined,
+
     togglePublishISCN() {
       setIscnPublish(!iscnPublish)
     },
@@ -207,7 +245,19 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
                 <Sidebar.Tags {...tagsProps} />
                 <Sidebar.Cover {...coverProps} />
                 <Sidebar.Collection {...collectionProps} />
-                <Sidebar.Management {...accessProps} />
+
+                <SupportSettingDialog
+                  article={article}
+                  editSupportSetting={editSupport}
+                  supportSettingSaving={supportSaving}
+                >
+                  {({ openDialog }) => (
+                    <Sidebar.Management
+                      {...accessProps}
+                      onOpenSupportSetting={openDialog}
+                    />
+                  )}
+                </SupportSettingDialog>
                 <style jsx>{styles}</style>
               </section>
             }
@@ -259,14 +309,23 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
             </Layout.Spacing>
 
             {!isLargeUp && (
-              <BottomBar
-                saving={loading}
-                disabled={loading}
-                {...coverProps}
-                {...tagsProps}
-                {...collectionProps}
-                {...accessProps}
-              />
+              <SupportSettingDialog
+                article={article}
+                editSupportSetting={editSupport}
+                supportSettingSaving={supportSaving}
+              >
+                {({ openDialog }) => (
+                  <BottomBar
+                    saving={loading}
+                    disabled={loading}
+                    {...coverProps}
+                    {...tagsProps}
+                    {...collectionProps}
+                    {...accessProps}
+                    onOpenSupportSetting={openDialog}
+                  />
+                )}
+              </SupportSettingDialog>
             )}
           </Layout.Main>
         )}

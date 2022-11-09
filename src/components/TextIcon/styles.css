@@ -103,6 +103,10 @@
   color: var(--color-likecoin-green);
 }
 
+.yellow-lighter {
+  color: var(--color-yellow-lighter);
+}
+
 /* spacing */
 .spacing-xxxtight.hasIcon {
   &.text-right > .text {

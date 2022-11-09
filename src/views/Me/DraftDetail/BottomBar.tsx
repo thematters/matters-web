@@ -6,6 +6,7 @@ import {
   ToggleAccessProps,
 } from '~/components/Editor'
 import BottomBar from '~/components/Editor/BottomBar'
+import SupportSettingDialog from '~/components/Editor/ToggleAccess/SupportSettingDialog'
 
 import { ENTITY_TYPE } from '~/common/enums'
 
@@ -15,17 +16,20 @@ import {
   useEditDraftCover,
   useEditDraftPublishISCN,
   useEditDraftTags,
+  useEditSupportSetting,
 } from './hooks'
 
 import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
+import { DraftDetailQuery_viewer } from '~/views/Me/DraftDetail/__generated__/DraftDetailQuery'
 import { EditMetaDraft } from './__generated__/EditMetaDraft'
 
 interface BottomBarProps {
   draft: EditMetaDraft
   ownCircles?: DigestRichCirclePublic[]
+  viewer: DraftDetailQuery_viewer | null | undefined
 }
 
-const EditDraftBottomBar = ({ draft, ownCircles }: BottomBarProps) => {
+const EditDraftBottomBar = ({ draft, ownCircles, viewer }: BottomBarProps) => {
   const { edit: editCollection, saving: collectionSaving } =
     useEditDraftCollection(draft)
   const {
@@ -40,6 +44,10 @@ const EditDraftBottomBar = ({ draft, ownCircles }: BottomBarProps) => {
     draft,
     ownCircles && ownCircles[0]
   )
+
+  const { edit: editSupport, saving: supportSaving } =
+    useEditSupportSetting(draft)
+
   const hasOwnCircle = ownCircles && ownCircles.length >= 1
   const tags = (draft.tags || []).map(toDigestTagPlaceholder)
 
@@ -70,19 +78,36 @@ const EditDraftBottomBar = ({ draft, ownCircles }: BottomBarProps) => {
     accessSaving,
     canToggleCircle: !!hasOwnCircle,
     iscnPublish: draft.iscnPublish,
+    draft,
+    editSupportSetting: editSupport,
+    supportSettingSaving: supportSaving,
+    viewer,
     togglePublishISCN,
     iscnPublishSaving,
+    onOpenSupportSetting: () => undefined,
   }
 
   return (
-    <BottomBar
-      saving={false}
-      disabled={collectionSaving || coverSaving || tagsSaving || accessSaving}
-      {...coverProps}
-      {...tagsProps}
-      {...collectionProps}
-      {...accessProps}
-    />
+    <SupportSettingDialog
+      draft={draft}
+      editSupportSetting={editSupport}
+      supportSettingSaving={supportSaving}
+      viewer={viewer}
+    >
+      {({ openDialog }) => (
+        <BottomBar
+          saving={false}
+          disabled={
+            collectionSaving || coverSaving || tagsSaving || accessSaving
+          }
+          {...coverProps}
+          {...tagsProps}
+          {...collectionProps}
+          {...accessProps}
+          onOpenSupportSetting={openDialog}
+        />
+      )}
+    </SupportSettingDialog>
   )
 }
 
