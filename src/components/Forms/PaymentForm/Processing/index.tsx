@@ -10,10 +10,13 @@ import {
   Spinner,
   Translate,
   useBalanceUSDT,
+  useMutation,
   ViewerContext,
 } from '~/components'
+import PAY_TO from '~/components/GQL/mutations/payTo'
 
 import {
+  CHAIN,
   PAYMENT_CURRENCY as CURRENCY,
   SUPPORT_SUCCESS_ANIMATION,
 } from '~/common/enums'
@@ -24,6 +27,7 @@ import PayToFallback from './PayToFallback'
 import styles from './styles.css'
 
 import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
+import { PayTo as PayToMutate } from '~/components/GQL/mutations/__generated__/PayTo'
 import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
 import { ViewerTxState } from './__generated__/ViewerTxState'
 
@@ -177,6 +181,7 @@ const USDTProcessingForm: React.FC<Props> = ({
   switchToConfirm,
   switchToCurrencyChoice,
 }) => {
+  const [payTo] = useMutation<PayToMutate>(PAY_TO)
   const viewer = useContext(ViewerContext)
   const { address } = useAccount()
   const { data: balanceUSDTData } = useBalanceUSDT({})
@@ -209,10 +214,24 @@ const USDTProcessingForm: React.FC<Props> = ({
     ],
   })
 
-  const sendPayTo = () => {
+  const sendPayTo = async () => {
     if (!data) {
       return
     }
+
+    await payTo({
+      variables: {
+        amount,
+        currency,
+        purpose: 'donation',
+        recipientId: recipient.id,
+        targetId,
+        chain: CHAIN.POLYGON,
+        txHash: data.hash,
+      },
+    })
+
+    await data.wait()
 
     window.dispatchEvent(
       new CustomEvent(SUPPORT_SUCCESS_ANIMATION, {
@@ -278,8 +297,8 @@ const USDTProcessingForm: React.FC<Props> = ({
             </p>
             <p>
               <Translate
-                zh_hant="操作結果以鏈上紀錄為主，稍後將同步至 Matters"
-                zh_hans="操作结果以链上记录为主，稍后将同步至 Matters"
+                zh_hant="結果以鏈上紀錄為主，稍後同步至 Matters"
+                zh_hans="结果以链上记录为主，稍后同步至 Matters"
                 en="Transaction will be updated to Matters shortly."
               />
             </p>
