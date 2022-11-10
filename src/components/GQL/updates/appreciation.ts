@@ -1,63 +1,67 @@
 import { DataProxy } from 'apollo-cache'
 import _cloneDeep from 'lodash/cloneDeep'
 import _some from 'lodash/some'
-import { ARTICLE_DETAIL_PUBLIC } from '~/views/ArticleDetail/gql'
+import { ARTICLE_DETAIL_PUBLIC_BY_NODE_ID } from '~/views/ArticleDetail/gql'
 
 import { ERROR_CODES } from '~/common/enums'
 
-import { ArticleDetailPublic } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
+import {
+  ArticleDetailPublicByNodeId,
+  ArticleDetailPublicByNodeId_article_Article,
+} from '~/views/ArticleDetail/__generated__/ArticleDetailPublicByNodeId'
 
 const update = ({
   cache,
   left,
-  mediaHash,
+  id,
   total,
   viewer,
   canSuperLike,
 }: {
   cache: DataProxy
   left: number
-  mediaHash: string
+  id: string
   total: number
   viewer: any
   canSuperLike?: boolean
 }) => {
   try {
-    if (!mediaHash) {
+    if (!id) {
       return
     }
 
     // read from local cache
-    const variables = { mediaHash }
     const cacheData = _cloneDeep(
-      cache.readQuery<ArticleDetailPublic>({
-        query: ARTICLE_DETAIL_PUBLIC,
-        variables,
+      cache.readQuery<ArticleDetailPublicByNodeId>({
+        query: ARTICLE_DETAIL_PUBLIC_BY_NODE_ID,
+        variables: { id },
       })
     )
 
-    if (!cacheData || !cacheData.article) {
+    if (!cacheData?.article) {
       return
     }
 
     // update counts
-    cacheData.article.appreciateLeft = left
-    cacheData.article.appreciationsReceivedTotal = total
-    cacheData.article.hasAppreciate = true
+    const article =
+      cacheData.article as ArticleDetailPublicByNodeId_article_Article
+    article.appreciateLeft = left
+    article.appreciationsReceivedTotal = total
+    article.hasAppreciate = true
 
     // update SuperLike
     if (typeof canSuperLike === 'boolean') {
-      cacheData.article.canSuperLike = canSuperLike
+      article.canSuperLike = canSuperLike
     }
 
     // inject viewer into appreciators
-    const appreciators = cacheData.article?.received?.edges || []
-    const appreciatorsCount = cacheData.article?.received?.totalCount || 0
+    const appreciators = article?.received?.edges || []
+    const appreciatorsCount = article?.received?.totalCount || 0
     const hasApprecaitor = _some(appreciators, {
       node: { sender: { id: viewer.id } },
     })
     if (!hasApprecaitor) {
-      cacheData.article.received.totalCount = appreciatorsCount + 1
+      article.received.totalCount = appreciatorsCount + 1
 
       appreciators.push({
         cursor: window.btoa(`arrayconnection:${appreciators.length}`) || '',
@@ -80,14 +84,14 @@ const update = ({
         __typename: 'AppreciationEdge',
       })
 
-      cacheData.article.received.edges = appreciators
+      article.received.edges = appreciators
     }
 
     // write to local cache
     cache.writeQuery({
-      query: ARTICLE_DETAIL_PUBLIC,
+      query: ARTICLE_DETAIL_PUBLIC_BY_NODE_ID,
       data: cacheData,
-      variables,
+      variables: { id },
     })
   } catch (e) {
     if ((e as any).message.startsWith("Can't find field")) {

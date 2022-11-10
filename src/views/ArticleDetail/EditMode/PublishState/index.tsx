@@ -2,10 +2,11 @@ import PendingState from './PendingState'
 import PublishedState from './PublishedState'
 import styles from './styles.css'
 
-import { EditModeArticle_article_drafts as EditModeDraft } from '../__generated__/EditModeArticle'
+import { EditModeArticle_article_Article_drafts as EditModeDraft } from '../__generated__/EditModeArticle'
 
 interface Props {
   article: {
+    id: string
     title: string
     slug: string
     mediaHash: string
@@ -39,7 +40,7 @@ const PublishState = ({
   return (
     <section className="container">
       {(isPending || isPublished) && !isValidHash && (
-        <PendingState draft={draft} mediaHash={article.mediaHash} />
+        <PendingState draft={draft} id={article.id} />
       )}
       {isPublished && !isSameHash && isValidHash && (
         <PublishedState article={article} draft={draft} cancel={cancel} />

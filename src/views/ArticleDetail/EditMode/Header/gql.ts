@@ -13,7 +13,6 @@ import articleFragments from '~/components/GQL/fragments/article'
 export const EDIT_ARTICLE = gql`
   mutation EditArticle(
     $id: ID!
-    $mediaHash: String!
     $content: String
     $cover: ID
     $tags: [String!]
@@ -46,7 +45,6 @@ export const EDIT_ARTICLE = gql`
       cover
       tags {
         ...DigestTag
-        selected(input: { mediaHash: $mediaHash })
       }
       access {
         type

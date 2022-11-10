@@ -18,34 +18,37 @@ import styles from './styles.css'
 
 import {
   ArticleAppreciators,
-  ArticleAppreciators_article_appreciationsReceived_edges,
+  ArticleAppreciators_article_Article,
+  ArticleAppreciators_article_Article_appreciationsReceived_edges,
 } from './__generated__/ArticleAppreciators'
 
 interface AppreciatorsDialogContentProps {
-  mediaHash: string
+  id: string
   closeDialog: () => void
 }
 
 const ARTICLE_APPRECIATORS = gql`
-  query ArticleAppreciators($mediaHash: String!, $after: String) {
-    article(input: { mediaHash: $mediaHash }) {
-      id
-      appreciationsReceived(input: { first: 10, after: $after }) {
-        totalCount
-        pageInfo {
-          startCursor
-          endCursor
-          hasNextPage
-        }
-        edges {
-          cursor
-          node {
-            ... on Appreciation {
-              amount
-              sender {
-                id
-                ...UserDigestRichUserPublic
-                ...UserDigestRichUserPrivate
+  query ArticleAppreciators($id: ID!, $after: String) {
+    article: node(input: { id: $id }) {
+      ... on Article {
+        id
+        appreciationsReceived(input: { first: 10, after: $after }) {
+          totalCount
+          pageInfo {
+            startCursor
+            endCursor
+            hasNextPage
+          }
+          edges {
+            cursor
+            node {
+              ... on Appreciation {
+                amount
+                sender {
+                  id
+                  ...UserDigestRichUserPublic
+                  ...UserDigestRichUserPrivate
+                }
               }
             }
           }
@@ -58,18 +61,18 @@ const ARTICLE_APPRECIATORS = gql`
 `
 
 const AppreciatorsDialogContent = ({
-  mediaHash,
+  id,
   closeDialog,
 }: AppreciatorsDialogContentProps) => {
   const isSmallUp = useResponsive('sm-up')
   const { data, loading, error, fetchMore } = useQuery<ArticleAppreciators>(
     ARTICLE_APPRECIATORS,
-    { variables: { mediaHash } }
+    { variables: { id } }
   )
 
-  const article = data?.article
+  const article = data?.article as ArticleAppreciators_article_Article
   const connectionPath = 'article.appreciationsReceived'
-  const { edges, pageInfo } = data?.article?.appreciationsReceived || {}
+  const { edges, pageInfo } = article?.appreciationsReceived || {}
 
   if (loading) {
     return <Spinner />
@@ -86,7 +89,7 @@ const AppreciatorsDialogContent = ({
   const ListRow = ({
     index,
     datum,
-  }: RowRendererProps<ArticleAppreciators_article_appreciationsReceived_edges>) => {
+  }: RowRendererProps<ArticleAppreciators_article_Article_appreciationsReceived_edges>) => {
     const { node, cursor } = datum
 
     return (
@@ -130,7 +133,7 @@ const AppreciatorsDialogContent = ({
     })
   }
 
-  const totalCount = data?.article?.appreciationsReceived.totalCount || 0
+  const totalCount = article?.appreciationsReceived.totalCount || 0
 
   // estimate a safe default height
   const calcContentMaxHeight = () => {

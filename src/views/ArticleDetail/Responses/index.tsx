@@ -29,9 +29,6 @@ const ARTICLE_RESPONSE = gql`
 `
 
 const Responses = ({ id, lock }: { id: string; lock: boolean }) => {
-  // const { getQuery } = useRoute()
-  // const mediaHash = getQuery('mediaHash')
-
   const { data, loading } = useQuery<ArticleResponse>(ARTICLE_RESPONSE, {
     variables: { id },
   })

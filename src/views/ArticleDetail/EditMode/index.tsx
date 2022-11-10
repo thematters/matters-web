@@ -45,7 +45,10 @@ import { Asset } from '~/components/GQL/fragments/__generated__/Asset'
 import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
 import { ArticleDetailPublic_article } from '../__generated__/ArticleDetailPublic'
 import { EditArticleSupportSetting } from './__generated__/EditArticleSupportSetting'
-import { EditModeArticle } from './__generated__/EditModeArticle'
+import {
+  EditModeArticle,
+  EditModeArticle_article_Article,
+} from './__generated__/EditModeArticle'
 import { EditModeArticleAssets } from './__generated__/EditModeArticleAssets'
 
 interface EditModeProps {
@@ -88,18 +91,19 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
   const { data, loading, error } = useQuery<EditModeArticle>(
     EDIT_MODE_ARTICLE,
     {
-      variables: { mediaHash: article.mediaHash },
+      variables: { id: article.id },
       fetchPolicy: 'network-only',
     }
   )
+  const editModeArticle = data?.article as EditModeArticle_article_Article
 
   // cover
-  const assets = data?.article?.assets || []
+  const assets = editModeArticle?.assets || []
   const [cover, editCover] = useState<Asset>()
   const refetchAssets = useImperativeQuery<EditModeArticleAssets>(
     EDIT_MODE_ARTICLE_ASSETS,
     {
-      variables: { mediaHash: article.mediaHash },
+      variables: { id: article.id },
       fetchPolicy: 'network-only',
     }
   )
@@ -119,7 +123,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
   )
   const [license, editLicense] = useState<ArticleLicenseType>(article.license)
 
-  const ownCircles = data?.article?.author.ownCircles
+  const ownCircles = editModeArticle?.author.ownCircles
   const hasOwnCircle = ownCircles && ownCircles.length >= 1
   const editAccess = (
     addToCircle: boolean,
@@ -139,19 +143,23 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
 
   // update cover & collection from retrieved data
   useEffect(() => {
-    if (!data?.article) {
+    if (!editModeArticle) {
       return
     }
 
     // cover, find from `article.assets` since `article.cover` isn't a `Asset`
-    const currCover = assets.find((asset) => asset.path === data.article?.cover)
+    const currCover = assets.find(
+      (asset) => asset.path === editModeArticle?.cover
+    )
     if (currCover) {
       editCover(currCover)
     }
 
     // collection
-    editCollection(data.article.collection.edges?.map(({ node }) => node) || [])
-  }, [data?.article?.id])
+    editCollection(
+      editModeArticle?.collection.edges?.map(({ node }) => node) || []
+    )
+  }, [editModeArticle?.id])
 
   const { edit: editSupport, saving: supportSaving } =
     useEditArticleDetailSupportSetting(article)
@@ -177,10 +185,10 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
     )
   }
 
-  const drafts = data?.article?.drafts
+  const drafts = editModeArticle?.drafts
   const draft = drafts?.[0]
   const revisionCountLeft =
-    MAX_ARTICLE_REVISION_COUNT - (data?.article?.revisionCount || 0)
+    MAX_ARTICLE_REVISION_COUNT - (editModeArticle?.revisionCount || 0)
   const isOverRevisionLimit = revisionCountLeft <= 0
   const isSameHash = draft?.mediaHash === article.mediaHash
   const isPending = draft?.publishState === 'pending'
