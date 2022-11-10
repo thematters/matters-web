@@ -50,8 +50,6 @@ type Response = ResponsePublic & Partial<Omit<ResponsePrivate, '__typename'>>
 const LatestResponses = ({ id, lock }: { id: string; lock: boolean }) => {
   const viewer = useContext(ViewerContext)
   const isMediumUp = useResponsive('md-up')
-  // const { getQuery } = useRoute()
-  // const mediaHash = getQuery('mediaHash')
   const [articleOnlyMode, setArticleOnlyMode] = useState<boolean>(false)
   const storedCursorRef = useRef<string | null>(null)
 
@@ -85,7 +83,7 @@ const LatestResponses = ({ id, lock }: { id: string; lock: boolean }) => {
     client,
   } = usePublicQuery<LatestResponsesPublic>(LATEST_RESPONSES_PUBLIC, {
     variables: {
-      id, // mediaHash,
+      id,
       first: RESPONSES_COUNT,
       articleOnly: articleOnlyMode,
     },

@@ -33,8 +33,6 @@ type Comment = CommentPublic & Partial<CommentPrivate>
 
 const FeaturedComments = ({ id, lock }: { id: string; lock: boolean }) => {
   const viewer = useContext(ViewerContext)
-  // const { getQuery } = useRoute()
-  // const mediaHash = getQuery('mediaHash')
 
   /**
    * Data Fetching

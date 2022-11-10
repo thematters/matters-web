@@ -1,30 +1,36 @@
 import { useApolloClient } from '@apollo/react-hooks'
 import { useEffect, useState } from 'react'
 
-import { Translate, useRoute } from '~/components'
+import { Translate } from '~/components'
 
 import { QUERY_SECRET } from './ArticleSecret'
 import styles from './styles.css'
 
-import { ArticleSecret } from './__generated__/ArticleSecret'
+import {
+  ArticleSecret,
+  ArticleSecret_article_Article,
+} from './__generated__/ArticleSecret'
 
-const ArticleSecretDesc = () => {
+type ArticleSecretDescProps = {
+  id: string
+}
+
+const ArticleSecretDesc: React.FC<ArticleSecretDescProps> = ({ id }) => {
   const client = useApolloClient()
-  const { getQuery } = useRoute()
-  const mediaHash = getQuery('mediaHash')
 
   const [secret, setSecret] = useState<string | null>()
 
   useEffect(() => {
     const watcher = client.watchQuery<ArticleSecret>({
       query: QUERY_SECRET,
-      variables: { mediaHash },
+      variables: { id },
       fetchPolicy: 'network-only',
     })
 
     watcher.subscribe({
       next: (result) => {
-        const key = result?.data?.article?.access.secret
+        const key = (result?.data?.article as ArticleSecret_article_Article)
+          ?.access.secret
         setSecret(key)
       },
       error: (e) => {
