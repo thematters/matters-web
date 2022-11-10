@@ -22,14 +22,17 @@ import USDTChoice from './USDTChoice'
 
 import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
 import { WalletBalance } from '~/components/GQL/queries/__generated__/WalletBalance'
+import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
 
 interface FormProps {
+  article: ArticleDetailPublic_article
   recipient: UserDonationRecipient
   switchToSetAmount: (c: CURRENCY) => void
   switchToWalletSelect: () => void
 }
 
 const CurrencyChoice: React.FC<FormProps> = ({
+  article,
   recipient,
   switchToSetAmount,
   switchToWalletSelect,
@@ -67,6 +70,7 @@ const CurrencyChoice: React.FC<FormProps> = ({
 
       {/* USDT */}
       <USDTChoice
+        article={article}
         recipient={recipient}
         switchToSetAmount={() => switchToSetAmount(CURRENCY.USDT)}
         switchToWalletSelect={switchToWalletSelect}
