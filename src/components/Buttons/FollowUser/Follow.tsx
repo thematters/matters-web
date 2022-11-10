@@ -1,5 +1,6 @@
 import _get from 'lodash/get'
 import _isNil from 'lodash/isNil'
+import { useContext } from 'react'
 
 import {
   Button,
@@ -8,10 +9,16 @@ import {
   TextIcon,
   Translate,
   useMutation,
+  ViewerContext,
 } from '~/components'
 import TOGGLE_FOLLOW_USER from '~/components/GQL/mutations/toggleFollowUser'
 import updateUserFollowerCount from '~/components/GQL/updates/userFollowerCount'
 import updateViewerFolloweeCount from '~/components/GQL/updates/viewerFolloweeCount'
+
+import {
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  UNIVERSAL_AUTH_SOURCE,
+} from '~/common/enums'
 
 import { FollowUserButtonSize } from './index'
 
@@ -24,6 +31,8 @@ interface FollowUserProps {
 }
 
 const FollowUser = ({ user, size }: FollowUserProps) => {
+  const viewer = useContext(ViewerContext)
+
   const [follow] = useMutation<ToggleFollowUser>(TOGGLE_FOLLOW_USER, {
     variables: { id: user.id, enabled: true },
     optimisticResponse:
@@ -50,6 +59,19 @@ const FollowUser = ({ user, size }: FollowUserProps) => {
     'md-s': ['3rem', '1.5rem'],
   }
 
+  const onClick = () => {
+    if (!viewer.isAuthed) {
+      window.dispatchEvent(
+        new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+          detail: { source: UNIVERSAL_AUTH_SOURCE.followUser },
+        })
+      )
+      return
+    }
+
+    follow()
+  }
+
   return (
     <Button
       size={sizes[size]}
@@ -57,7 +79,7 @@ const FollowUser = ({ user, size }: FollowUserProps) => {
       textActiveColor="white"
       bgActiveColor="green"
       borderColor="green"
-      onClick={() => follow()}
+      onClick={onClick}
     >
       <TextIcon weight="md" size={size === 'lg' ? 'sm' : 'xs'}>
         <Translate id="follow" />

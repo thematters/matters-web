@@ -113,6 +113,7 @@ const Select: React.FC<FormProps> = ({
   const viewer = useContext(ViewerContext)
 
   const formId = 'wallet-auth-select-form'
+  const fieldMsgId = 'wall-auth-select-msg'
   const isInPage = purpose === 'page'
   const isConnect = type === 'connect'
 
@@ -160,17 +161,20 @@ const Select: React.FC<FormProps> = ({
           <li>
             <Translate {...Desc.section1} />
           </li>
-          <li className="emphasize">
-            <Translate {...Desc.section2} />
+          <li>
+            <strong>
+              <Translate {...Desc.section2} />
+            </strong>
           </li>
           <li>
             <Translate {...Desc.section3} />
           </li>
-          <li className="emphasize">
-            <Translate {...Desc.section4} />
+          <li>
+            <strong>
+              <Translate {...Desc.section4} />
+            </strong>
           </li>
         </ul>
-        <style jsx>{styles}</style>
       </Dialog.Message>
     )
   }
@@ -185,15 +189,7 @@ const Select: React.FC<FormProps> = ({
         </Form.List>
       )}
 
-      <Form.List
-        groupName={
-          <Translate
-            zh_hans="连接加密钱包"
-            zh_hant="連接加密錢包"
-            en="Connect Wallet"
-          />
-        }
-      >
+      <Form.List groupName={<Translate id="connectWallet" />}>
         {injectedConnector?.ready && (
           <Form.List.Item
             title={
@@ -236,19 +232,15 @@ const Select: React.FC<FormProps> = ({
         />
       </Form.List>
 
-      {!errorMessage && (
-        <section className="msg">
-          <Hint />
-          <style jsx>{styles}</style>
-        </section>
-      )}
+      <section className="msg">
+        <Form.Field.Footer
+          fieldMsgId={fieldMsgId}
+          hint={errorMessage ? undefined : <Hint />}
+          error={errorMessage}
+        />
 
-      {errorMessage && (
-        <section className="msg error">
-          <p>{errorMessage}</p>
-          <style jsx>{styles}</style>
-        </section>
-      )}
+        <style jsx>{styles}</style>
+      </section>
     </Form>
   )
 

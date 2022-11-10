@@ -18,6 +18,7 @@ export const fragments = {
             ...DigestRichCirclePublic
           }
         }
+        requestForDonation
         ...DonatorsArticle
       }
       ${Donators.fragments.article}
@@ -38,3 +39,19 @@ export const fragments = {
     `,
   },
 }
+
+export const HAS_DONATED = gql`
+  query HasDonated($id: ID!, $senderId: ID!) {
+    article: node(input: { id: $id }) {
+      ... on Article {
+        id
+        donation: transactionsReceivedBy(
+          input: { senderId: $senderId, purpose: donation }
+        ) {
+          totalCount
+        }
+        replyToDonator
+      }
+    }
+  }
+`

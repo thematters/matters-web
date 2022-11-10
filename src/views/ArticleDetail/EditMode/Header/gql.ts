@@ -13,7 +13,6 @@ import articleFragments from '~/components/GQL/fragments/article'
 export const EDIT_ARTICLE = gql`
   mutation EditArticle(
     $id: ID!
-    $mediaHash: String!
     $content: String
     $cover: ID
     $tags: [String!]
@@ -24,6 +23,8 @@ export const EDIT_ARTICLE = gql`
     $iscnPublish: Boolean
     $after: String
     $first: first_Int_min_0 = null
+    $requestForDonation: requestForDonation_String_maxLength_140
+    $replyToDonator: replyToDonator_String_maxLength_140
   ) {
     editArticle(
       input: {
@@ -36,18 +37,21 @@ export const EDIT_ARTICLE = gql`
         accessType: $accessType
         license: $license
         iscnPublish: $iscnPublish
+        requestForDonation: $requestForDonation
+        replyToDonator: $replyToDonator
       }
     ) {
       id
       cover
       tags {
         ...DigestTag
-        selected(input: { mediaHash: $mediaHash })
       }
       access {
         type
       }
       license
+      requestForDonation
+      replyToDonator
       drafts {
         id
         mediaHash

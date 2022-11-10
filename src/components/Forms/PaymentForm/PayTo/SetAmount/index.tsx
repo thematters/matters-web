@@ -19,6 +19,7 @@ import {
 } from '~/components'
 import PAY_TO from '~/components/GQL/mutations/payTo'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
+import updateDonation from '~/components/GQL/updates/donation'
 
 import {
   PAYMENT_CURRENCY as CURRENCY,
@@ -42,6 +43,7 @@ import {
   PayTo_payTo_transaction as PayToTx,
 } from '~/components/GQL/mutations/__generated__/PayTo'
 import { WalletBalance } from '~/components/GQL/queries/__generated__/WalletBalance'
+import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
 
 interface SetAmountCallbackValues {
   amount: number
@@ -51,6 +53,7 @@ interface SetAmountCallbackValues {
 interface FormProps {
   currency: CURRENCY
   recipient: UserDonationRecipient
+  article: ArticleDetailPublic_article
   submitCallback: (values: SetAmountCallbackValues) => void
   switchToCurrencyChoice: () => void
   switchToAddCredit: () => void
@@ -79,6 +82,7 @@ const AMOUNT_OPTIONS = {
 const SetAmount: React.FC<FormProps> = ({
   currency,
   recipient,
+  article,
   submitCallback,
   switchToCurrencyChoice,
   switchToAddCredit,
@@ -176,6 +180,13 @@ const SetAmount: React.FC<FormProps> = ({
               purpose: 'donation',
               recipientId: recipient.id,
               targetId,
+            },
+            update: (cache) => {
+              updateDonation({
+                cache,
+                id: article.id,
+                viewer,
+              })
             },
           })
           const redirectUrl = result?.data?.payTo.redirectUrl

@@ -4,7 +4,6 @@ import { useContext } from 'react'
 import {
   Dialog,
   LanguageContext,
-  LoginButton,
   Translate,
   useMutation,
   ViewerContext,
@@ -14,6 +13,7 @@ import MIGRATION from '~/components/GQL/mutations/migration'
 import {
   ACCEPTED_UPLOAD_MIGRATION_TYPES,
   ADD_TOAST,
+  OPEN_UNIVERSAL_AUTH_DIALOG,
   UPLOAD_FILE_COUNT_LIMIT,
   UPLOAD_MIGRATION_SIZE_LIMIT,
 } from '~/common/enums'
@@ -62,16 +62,7 @@ const MigrationDialogUpload = ({ nextStep }: MigrationDialogUploadProps) => {
     event.stopPropagation()
 
     if (!viewer.isAuthed) {
-      window.dispatchEvent(
-        new CustomEvent(ADD_TOAST, {
-          detail: {
-            color: 'red',
-            content: <Translate id="UNAUTHENTICATED" />,
-            customButton: <LoginButton isPlain />,
-            buttonPlacement: 'center',
-          },
-        })
-      )
+      window.dispatchEvent(new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG))
       return
     }
 

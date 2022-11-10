@@ -4,18 +4,12 @@ import { Toast, Translate } from '~/components'
 
 import EDIT_MODE_ARTICLE_DRAFTS from './gql'
 
-import { EditModeArticle_article_drafts as EditModeDraft } from '../__generated__/EditModeArticle'
+import { EditModeArticle_article_Article_drafts as EditModeDraft } from '../__generated__/EditModeArticle'
 import { EditModeArticleDrafts } from './__generated__/EditModeArticleDrafts'
 
-const PendingState = ({
-  draft,
-  mediaHash,
-}: {
-  draft: EditModeDraft
-  mediaHash: string
-}) => {
+const PendingState = ({ draft, id }: { draft: EditModeDraft; id: string }) => {
   useQuery<EditModeArticleDrafts>(EDIT_MODE_ARTICLE_DRAFTS, {
-    variables: { mediaHash },
+    variables: { id },
     pollInterval: 1000 * 2,
     errorPolicy: 'none',
     fetchPolicy: 'network-only',

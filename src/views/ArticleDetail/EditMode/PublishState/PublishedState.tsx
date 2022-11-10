@@ -5,10 +5,11 @@ import { Dialog, ShareDialog, Translate } from '~/components'
 
 import { toPath } from '~/common/utils'
 
-import { EditModeArticle_article_drafts as EditModeDraft } from '../__generated__/EditModeArticle'
+import { EditModeArticle_article_Article_drafts as EditModeDraft } from '../__generated__/EditModeArticle'
 
 interface Props {
   article: {
+    id: string
     title: string
     slug: string
     author: {

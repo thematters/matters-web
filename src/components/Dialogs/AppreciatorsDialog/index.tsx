@@ -14,7 +14,7 @@ const fragments = {
   article: gql`
     fragment AppreciatorsDialogArticle on Article {
       id
-      mediaHash
+      id
       appreciationsReceived(input: { first: 0 }) {
         totalCount
       }
@@ -35,10 +35,7 @@ const BaseAppreciatorsDialog = ({
       {children({ openDialog })}
 
       <Dialog isOpen={show} onDismiss={closeDialog} fixedHeight>
-        <DynamicContent
-          mediaHash={article.mediaHash}
-          closeDialog={closeDialog}
-        />
+        <DynamicContent id={article.id} closeDialog={closeDialog} />
       </Dialog>
     </>
   )

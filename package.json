@@ -1,6 +1,6 @@
 {
   "name": "matters-web",
-  "version": "4.8.1",
+  "version": "4.9.0",
   "description": "codebase of Matters' website",
   "sideEffects": false,
   "author": "Matters <hi@matters.news>",
@@ -99,6 +99,7 @@
     "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^17.0.2",
     "react-focus-lock": "^2.7.1",
+    "react-lottie": "^1.2.3",
     "react-remove-scroll": "^2.4.3",
     "react-spring": "^9.5.4",
     "react-text-truncate": "^0.19.0",
@@ -138,6 +139,7 @@
     "@types/react-beautiful-dnd": "^13.1.2",
     "@types/react-copy-to-clipboard": "^5.0.4",
     "@types/react-dom": "^17.0.11",
+    "@types/react-lottie": "^1.2.6",
     "@types/react-responsive": "^8.0.5",
     "@types/react-text-truncate": "^0.14.1",
     "@types/react-virtualized": "^9.21.21",

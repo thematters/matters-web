@@ -10,7 +10,11 @@ import {
   ViewerContext,
 } from '~/components'
 
-import { ADD_TOAST } from '~/common/enums'
+import {
+  ADD_TOAST,
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  UNIVERSAL_AUTH_SOURCE,
+} from '~/common/enums'
 import { translate } from '~/common/utils'
 
 import TOGGLE_SUBSCRIBE_ARTICLE from '../../GQL/mutations/toggleSubscribeArticle'
@@ -45,6 +49,15 @@ const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
   )
 
   const onClick = async () => {
+    if (!viewer.isAuthed) {
+      window.dispatchEvent(
+        new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+          detail: { source: UNIVERSAL_AUTH_SOURCE.bookmark },
+        })
+      )
+      return
+    }
+
     if (viewer.isFrozen) {
       window.dispatchEvent(
         new CustomEvent(ADD_TOAST, {
