@@ -80,6 +80,10 @@
 }
 
 .animation-hint {
-  height: 1.5rem;
+  height: 2.5rem;
   margin: 0 auto;
+
+  @media (--sm-up) {
+    height: 1.5rem;
+  }
 }
