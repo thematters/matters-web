@@ -12,11 +12,11 @@ import ConfirmRevisedPublishDialogContent from './ConfirmRevisedPublishDialogCon
 import { EDIT_ARTICLE } from './gql'
 import styles from './styles.css'
 
-import { ArticleDetailPublic_article_Article } from '../../__generated__/ArticleDetailPublic'
+import { ArticleDetailPublic_article } from '../../__generated__/ArticleDetailPublic'
 import { EditArticle } from './__generated__/EditArticle'
 
 type EditModeHeaderProps = {
-  article: ArticleDetailPublic_article_Article
+  article: ArticleDetailPublic_article
   editData: Record<string, any>
   coverId?: string
 

@@ -6,10 +6,7 @@ import { ARTICLE_DETAIL_PUBLIC_BY_NODE_ID } from '~/views/ArticleDetail/gql'
 
 import { ERROR_CODES } from '~/common/enums'
 
-import {
-  ArticleDetailPublic,
-  ArticleDetailPublic_article_Article,
-} from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
+import { ArticleDetailPublic } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
 
 const update = ({
   cache,
@@ -34,13 +31,12 @@ const update = ({
       })
     )
 
-    if (!cacheData?.article) {
+    if (!cacheData || !cacheData.article) {
       return
     }
 
     // unshift viewer into donations
-    const article = cacheData.article as ArticleDetailPublic_article_Article
-    const donators = article?.donations?.edges || []
+    const donators = cacheData.article?.donations?.edges || []
     let existed = false
     _remove(donators, (d) => {
       if (d.node.id !== viewer.id) {
@@ -49,9 +45,11 @@ const update = ({
       existed = true
       return true
     })
-    const donatorsCount = article?.donations?.totalCount || 0
+    const donatorsCount = cacheData.article?.donations?.totalCount || 0
 
-    article.donations.totalCount = existed ? donatorsCount : donatorsCount + 1
+    cacheData.article.donations.totalCount = existed
+      ? donatorsCount
+      : donatorsCount + 1
 
     donators.unshift({
       cursor: window.btoa(`arrayconnection:${donators.length}`) || '',
@@ -71,7 +69,7 @@ const update = ({
       __typename: 'UserEdge',
     })
 
-    article.donations.edges = donators
+    cacheData.article.donations.edges = donators
 
     // write to local cache
     cache.writeQuery({

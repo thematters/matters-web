@@ -96,7 +96,6 @@ const AppreciationButton = ({
           updateAppreciation({
             cache,
             left,
-            id: article.id,
             mediaHash,
             total,
             viewer,

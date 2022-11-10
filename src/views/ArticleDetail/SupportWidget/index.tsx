@@ -28,14 +28,14 @@ import { fragments, HAS_DONATED } from './gql'
 import styles from './styles.css'
 import SupportButton from './SupportButton'
 
-import { ArticleDetailPublic_article_Article } from '../__generated__/ArticleDetailPublic'
+import { ArticleDetailPublic_article } from '../__generated__/ArticleDetailPublic'
 import {
   HasDonated,
   HasDonated_article_Article,
 } from './__generated__/HasDonated'
 
 interface DonationProps {
-  article: ArticleDetailPublic_article_Article
+  article: ArticleDetailPublic_article
 }
 
 const SupportWidget = ({ article }: DonationProps) => {

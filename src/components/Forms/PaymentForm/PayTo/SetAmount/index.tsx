@@ -43,7 +43,7 @@ import {
   PayTo_payTo_transaction as PayToTx,
 } from '~/components/GQL/mutations/__generated__/PayTo'
 import { WalletBalance } from '~/components/GQL/queries/__generated__/WalletBalance'
-import { ArticleDetailPublic_article_Article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
+import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
 
 interface SetAmountCallbackValues {
   amount: number
@@ -53,7 +53,7 @@ interface SetAmountCallbackValues {
 interface FormProps {
   currency: CURRENCY
   recipient: UserDonationRecipient
-  article: ArticleDetailPublic_article_Article
+  article: ArticleDetailPublic_article
   submitCallback: (values: SetAmountCallbackValues) => void
   switchToCurrencyChoice: () => void
   switchToAddCredit: () => void

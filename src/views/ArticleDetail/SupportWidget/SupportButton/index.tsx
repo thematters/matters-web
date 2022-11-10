@@ -12,12 +12,12 @@ import {
 import { analytics } from '~/common/utils'
 
 import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
-import { ArticleDetailPublic_article_Article } from '../../__generated__/ArticleDetailPublic'
+import { ArticleDetailPublic_article } from '../../__generated__/ArticleDetailPublic'
 
 interface SupportButtonProps {
   recipient: UserDonationRecipient
   targetId: string
-  article: ArticleDetailPublic_article_Article
+  article: ArticleDetailPublic_article
   supported?: boolean
 }
 

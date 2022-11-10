@@ -105,15 +105,13 @@ export const ARTICLE_AVAILABLE_TRANSLATIONS_BY_NODE_ID = gql`
 
 export const ARTICLE_DETAIL_PUBLIC = gql`
   query ArticleDetailPublic(
-    $id: ID!
+    $mediaHash: String!
     $language: UserLanguage!
     $includeTranslation: Boolean = false
     $includeCanSuperLike: Boolean = true
   ) {
-    article: node(input: { id: $id }) {
-      ... on Article {
-        ...ArticlePublicArticle
-      }
+    article(input: { mediaHash: $mediaHash }) {
+      ...ArticlePublicArticle
     }
   }
   ${articlePublicFragment}

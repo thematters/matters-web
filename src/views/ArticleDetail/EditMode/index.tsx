@@ -43,19 +43,19 @@ import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdow
 import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
 import { Asset } from '~/components/GQL/fragments/__generated__/Asset'
 import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
-import { ArticleDetailPublic_article_Article } from '../__generated__/ArticleDetailPublic'
+import { ArticleDetailPublic_article } from '../__generated__/ArticleDetailPublic'
 import { EditArticleSupportSetting } from './__generated__/EditArticleSupportSetting'
 import { EditModeArticle } from './__generated__/EditModeArticle'
 import { EditModeArticleAssets } from './__generated__/EditModeArticleAssets'
 
 interface EditModeProps {
-  article: ArticleDetailPublic_article_Article
+  article: ArticleDetailPublic_article
   onCancel: () => void
   onSaved: () => void
 }
 
 export const useEditArticleDetailSupportSetting = (
-  article?: ArticleDetailPublic_article_Article
+  article?: ArticleDetailPublic_article
 ) => {
   const articleId = article?.id
   const [update, { loading: saving }] = useMutation<EditArticleSupportSetting>(

@@ -18,14 +18,14 @@ import styles from './styles.css'
 import SupportPreview from './SupportPreview'
 import Tab, { TabType } from './Tab'
 
-import { ArticleDetailPublic_article_Article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
+import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
 import { EditMetaDraft } from '~/views/Me/DraftDetail/__generated__/EditMetaDraft'
 
 interface FormProps {
   closeDialog: () => void
   onBack?: () => any
   draft?: EditMetaDraft
-  article?: ArticleDetailPublic_article_Article
+  article?: ArticleDetailPublic_article
   editSupportSetting: (
     requestForDonation: string | null,
     replyToDonator: string | null

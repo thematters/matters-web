@@ -20,26 +20,25 @@ import { analytics, mergeConnections, translate } from '~/common/utils'
 
 import styles from './styles.css'
 
-import { ArticleDetailPublic_article_Article } from '../__generated__/ArticleDetailPublic'
-import {
-  CollectionList as CollectionListTypes,
-  CollectionList_article_Article,
-} from './__generated__/CollectionList'
+import { ArticleDetailPublic_article } from '../__generated__/ArticleDetailPublic'
+import { CollectionList as CollectionListTypes } from './__generated__/CollectionList'
 
 const COLLECTION_LIST = gql`
-  query CollectionList($id: ID!, $after: String, $first: first_Int_min_0) {
-    article: node(input: { id: $id }) {
-      ... on Article {
-        id
-        ...ArticleCollection
-      }
+  query CollectionList(
+    $mediaHash: String!
+    $after: String
+    $first: first_Int_min_0
+  ) {
+    article(input: { mediaHash: $mediaHash }) {
+      id
+      ...ArticleCollection
     }
   }
   ${articleFragments.articleCollection}
 `
 
 const Collection: React.FC<{
-  article: ArticleDetailPublic_article_Article
+  article: ArticleDetailPublic_article
   collectionCount?: number
 }> = ({ article, collectionCount }) => {
   const { lang } = useContext(LanguageContext)
@@ -47,11 +46,10 @@ const Collection: React.FC<{
   const isMediumUp = useResponsive('md-up')
   const { data, loading, error, fetchMore } = useQuery<CollectionListTypes>(
     COLLECTION_LIST,
-    { variables: { id: article.id, first: 3 } }
+    { variables: { mediaHash: article.mediaHash, first: 3 } }
   )
   const connectionPath = 'article.collection'
-  const { edges, pageInfo } =
-    (data?.article as CollectionList_article_Article)?.collection || {}
+  const { edges, pageInfo } = data?.article?.collection || {}
   const loadAll = () =>
     fetchMore({
       variables: {
