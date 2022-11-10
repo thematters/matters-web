@@ -18,9 +18,7 @@ import styles from './styles.css'
 
 import {
   ArticleDonators,
-  ArticleDonators_article_Article,
-  // ArticleDonators_article_donations_edges,
-  ArticleDonators_article_Article_donations_edges,
+  ArticleDonators_article_donations_edges,
 } from './__generated__/ArticleDonators'
 import { DonatorDialogArticle } from './__generated__/DonatorDialogArticle'
 
@@ -36,12 +34,11 @@ const DonatorsDialogContent = ({
   const isSmallUp = useResponsive('sm-up')
   const { data, loading, error, fetchMore } = useQuery<ArticleDonators>(
     ARTICLE_DONATORS,
-    { variables: { id: article.id } }
+    { variables: { mediaHash: article.mediaHash } }
   )
 
   const connectionPath = 'article.donations'
-  const { edges, pageInfo } =
-    (data?.article as ArticleDonators_article_Article)?.donations || {}
+  const { edges, pageInfo } = data?.article?.donations || {}
 
   if (loading) {
     return <Spinner />
@@ -58,7 +55,7 @@ const DonatorsDialogContent = ({
   const ListRow = ({
     index,
     datum,
-  }: RowRendererProps<ArticleDonators_article_Article_donations_edges>) => {
+  }: RowRendererProps<ArticleDonators_article_donations_edges>) => {
     const { node, cursor } = datum
 
     return (
@@ -99,9 +96,7 @@ const DonatorsDialogContent = ({
     })
   }
 
-  const totalCount =
-    (data?.article as ArticleDonators_article_Article)?.donations.totalCount ||
-    0
+  const totalCount = data?.article?.donations.totalCount || 0
 
   // estimate a safe default height
   const calcContentMaxHeight = () => {
