@@ -148,8 +148,8 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
             </section>
             <p className="hint">
               <Translate
-                zh_hans="可自定求支持文字，以及支持後回覆的內容"
-                zh_hant="可自定求支持文字，以及支持回复的內容"
+                zh_hans="可自订号召支持的内容，以及收到支持后的感谢文字"
+                zh_hant="可自訂號召支持的內容，以及收到支持後的感謝文字"
                 en="Customize your call-to-support prompt to audience, or thank-you card for those who supported you."
               />
             </p>
