@@ -81,8 +81,9 @@ test('send comment and check comment notice', async ({ page }) => {
   await page.locator('[placeholder="Email"]').fill('developer+1@matters.news');
   // Click [placeholder="Password"]
   await page.locator('[placeholder="Password"]').click();
-  // Fill [placeholder="Password"]
-  await page.locator('[placeholder="Password"]').fill('AAfSTzS7Y8gdwNGj');
+  // Fill [placeholder="Password"]log
+  
+  await page.locator('[placeholder="Password"]').fill(bobEmail);
   // Click button:has-text("Confirm")
   await page.locator('button:has-text("Confirm")').click();
   await expect(page).toHaveURL('https://web-dev.matters.news/');

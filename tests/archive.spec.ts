@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-test('test', async ({ page }) => {
+test('test archive', async ({ page }) => {
 
   const testEmail = process.env.MATTERS_TESTING_ACCOUNT_EMAIL ?? '';
   const testPassword = process.env.MATTERS_TESTING_ACCOUNT_PASSWORD ?? '';
