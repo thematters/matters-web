@@ -1,12 +1,12 @@
 import { expect, test }from '@playwright/test';
 
 // developer@matters.news account 
-const aliceEmail = 'developer@matters.news' ?? '';
-const alicePassword = 'hSl6pTnd31*451pq' ?? '';
+const aliceEmail = process.env.MATTERS_TESTING_ACCOUNT_EMAIL ?? '';
+const alicePassword = process.env.MATTERS_TESTING_ACCOUNT_PASSWORD ?? '';
 
 // developer+1@matters.news account
-const bobEmail = 'developer+1@matters.news' ?? '';
-const bobPassword = 'AAfSTzS7Y8gdwNGj' ?? '';
+const bobEmail = process.env.MATTERS_TESTING_ACCOUNT1_EMAIL ?? '';
+const bobPassword = process.env.MATTERS_TESTING_ACCOUNT1_PASSWORD ?? '';
 
 test('send comment and check comment notice', async ({ page }) => {
 
@@ -31,11 +31,11 @@ test('send comment and check comment notice', async ({ page }) => {
   await page.locator('[placeholder="Email"]').click();
 
   // Fill [placeholder="Email"]
-  await page.locator('[placeholder="Email"]').fill('developer@matters.news');
+  await page.locator('[placeholder="Email"]').fill(aliceEmail);
   // Click [placeholder="Password"]
   await page.locator('[placeholder="Password"]').click();
   // Fill [placeholder="Password"]
-  await page.locator('[placeholder="Password"]').fill('hSl6pTnd31*451pq');
+  await page.locator('[placeholder="Password"]').fill(alicePassword);
   // Click button:has-text("Confirm")
   await page.locator('button:has-text("Confirm")').click();
   await expect(page).toHaveURL('https://web-dev.matters.news/');
@@ -78,12 +78,11 @@ test('send comment and check comment notice', async ({ page }) => {
   await page.locator('[placeholder="Email"]').click();
 
   // Fill [placeholder="Email"]
-  await page.locator('[placeholder="Email"]').fill('developer+1@matters.news');
+  await page.locator('[placeholder="Email"]').fill(bobEmail);
   // Click [placeholder="Password"]
   await page.locator('[placeholder="Password"]').click();
-  // Fill [placeholder="Password"]log
-  
-  await page.locator('[placeholder="Password"]').fill(bobEmail);
+  // Fill [placeholder="Password"]
+  await page.locator('[placeholder="Password"]').fill(bobPassword);
   // Click button:has-text("Confirm")
   await page.locator('button:has-text("Confirm")').click();
   await expect(page).toHaveURL('https://web-dev.matters.news/');
@@ -179,4 +178,3 @@ test('comment reply and check reply notice', async ({ page }) => {
   // Click text=reply0
   await page.locator('text=reply0').click();
 });
-
