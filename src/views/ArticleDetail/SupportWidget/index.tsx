@@ -71,13 +71,12 @@ const SupportWidget = ({ article }: DonationProps) => {
   const hasDonatedArticle =
     hasDonatedData?.article as HasDonated_article_Article
 
+  const isViewerDonated = hasDonatedArticle?.donation?.totalCount === 1
   useEffect(() => {
-    if (hasDonatedData) {
-      if (hasDonatedArticle?.donation.totalCount === 1) {
-        setSupported(true)
-      }
+    if (isViewerDonated) {
+      setSupported(true)
     }
-  }, [hasDonatedData])
+  }, [isViewerDonated])
 
   const requestForDonation = article.requestForDonation
   const replyToDonator = hasDonatedArticle?.replyToDonator
