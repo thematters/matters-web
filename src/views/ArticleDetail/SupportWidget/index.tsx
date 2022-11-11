@@ -58,15 +58,17 @@ const SupportWidget = ({ article }: DonationProps) => {
   })
 
   useEffect(() => {
-    if (viewer.id !== '') {
-      getHasDonated({
-        variables: {
-          id: article.id,
-          senderId: viewer.id,
-        },
-      })
+    if (viewer.id === '') {
+      return
     }
-  }, [viewer])
+
+    getHasDonated({
+      variables: {
+        id: article.id,
+        senderId: viewer.id,
+      },
+    })
+  }, [viewer.id])
 
   const hasDonatedArticle =
     hasDonatedData?.article as HasDonated_article_Article
