@@ -1,12 +1,12 @@
 import { expect, test }from '@playwright/test';
 
 // developer@matters.news account 
-const aliceEmail = process.env.MATTERS_TESTING_ACCOUNT_EMAIL ?? '';
-const alicePassword = process.env.MATTERS_TESTING_ACCOUNT_PASSWORD ?? '';
+const aliceEmail = 'developer@matters.news' ?? '';
+const alicePassword = 'hSl6pTnd31*451pq' ?? '';
 
 // developer+1@matters.news account
-const bobEmail = process.env.MATTERS_TESTING_ACCOUNT1_EMAIL ?? '';
-const bobPassword = process.env.MATTERS_TESTING_ACCOUNT1_PASSWORD ?? '';
+const bobEmail = 'developer+1@matters.news' ?? '';
+const bobPassword = 'AAfSTzS7Y8gdwNGj' ?? '';
 
 test('send comment and check comment notice', async ({ page }) => {
 
@@ -31,17 +31,17 @@ test('send comment and check comment notice', async ({ page }) => {
   await page.locator('[placeholder="Email"]').click();
 
   // Fill [placeholder="Email"]
-  await page.locator('[placeholder="Email"]').fill(aliceEmail);
+  await page.locator('[placeholder="Email"]').fill('developer@matters.news');
   // Click [placeholder="Password"]
   await page.locator('[placeholder="Password"]').click();
   // Fill [placeholder="Password"]
-  await page.locator('[placeholder="Password"]').fill(alicePassword);
+  await page.locator('[placeholder="Password"]').fill('hSl6pTnd31*451pq');
   // Click button:has-text("Confirm")
   await page.locator('button:has-text("Confirm")').click();
   await expect(page).toHaveURL('https://web-dev.matters.news/');
 
-  await page.waitForTimeout(2000)
-  await page.goto('https://web-dev.matters.news/@developer1/7577-%E6%B5%8B%E8%AF%95%E8%AF%84%E8%AE%BA-bafyreihuecm3jmu4pqhlyqenfxhe3qk6oof5mjb7jiqmmv7pi63bxzu7pi');
+  await page.waitForTimeout(5000)
+  await page.goto('https://web-dev.matters.news/@developer1/7624-test-comment-reply-article-bafyreigl3h5wmormhjpl5mcrimpqkc3efjixrkcw7d7dzxmhfxda3kmsqy');
    // Click text=Comment…
   await page.locator('text=Comment…').click();
 
@@ -78,11 +78,11 @@ test('send comment and check comment notice', async ({ page }) => {
   await page.locator('[placeholder="Email"]').click();
 
   // Fill [placeholder="Email"]
-  await page.locator('[placeholder="Email"]').fill(bobEmail);
+  await page.locator('[placeholder="Email"]').fill('developer+1@matters.news');
   // Click [placeholder="Password"]
   await page.locator('[placeholder="Password"]').click();
   // Fill [placeholder="Password"]
-  await page.locator('[placeholder="Password"]').fill(bobPassword);
+  await page.locator('[placeholder="Password"]').fill('AAfSTzS7Y8gdwNGj');
   // Click button:has-text("Confirm")
   await page.locator('button:has-text("Confirm")').click();
   await expect(page).toHaveURL('https://web-dev.matters.news/');
@@ -91,7 +91,7 @@ test('send comment and check comment notice', async ({ page }) => {
   await expect(page).toHaveURL('https://web-dev.matters.news/me/notifications');
   // Click text=randomComment >> nth=1
   await page.locator(`text='${randomComment}'`).nth(1).click();
-  await expect(page).toHaveURL(new RegExp('^https://web-dev.matters.news/@developer1/7577-%E6%B5%8B%E8%AF%95%E8%AF%84%E8%AE%BA-bafyreihuecm3jmu4pqhlyqenfxhe3qk6oof5mjb7jiqmmv7pi63bxzu7pi'));
+  await expect(page).toHaveURL(new RegExp('^https://web-dev.matters.news/@developer1/7624-test-comment-reply-article-bafyreigl3h5wmormhjpl5mcrimpqkc3efjixrkcw7d7dzxmhfxda3kmsqy'));
 });
 
 
