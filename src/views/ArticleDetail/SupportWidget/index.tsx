@@ -58,9 +58,7 @@ const SupportWidget = ({ article }: DonationProps) => {
   })
 
   useEffect(() => {
-    if (viewer.id === '') {
-      return
-    }
+    if (!viewer.id) return
 
     getHasDonated({
       variables: {
