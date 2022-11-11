@@ -232,7 +232,7 @@ const FingerprintDialogContent = ({
         </section>
 
         {/* secret */}
-        {showSecret && <ArticleSecret />}
+        {showSecret && articleId && <ArticleSecret id={articleId} />}
 
         <hr style={{ margin: '1rem 0' }} />
 
@@ -254,7 +254,7 @@ const FingerprintDialogContent = ({
           <section className="copy">
             <input
               type="text"
-              value={dataHash}
+              value={dataHash || translate({ id: 'waitingForHash', lang })}
               readOnly
               onClick={(event) => event.currentTarget.select()}
             />

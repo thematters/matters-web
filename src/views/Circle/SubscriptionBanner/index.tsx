@@ -3,13 +3,16 @@ import { useContext } from 'react'
 import {
   Card,
   IconCircle16,
-  LoginButton,
   TextIcon,
   Translate,
   ViewerContext,
 } from '~/components'
 
-import { ADD_TOAST, OPEN_SUBSCRIBE_CIRCLE_DIALOG } from '~/common/enums'
+import {
+  OPEN_SUBSCRIBE_CIRCLE_DIALOG,
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  UNIVERSAL_AUTH_SOURCE,
+} from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 import { fragments } from './gql'
@@ -34,24 +37,6 @@ const SubscriptionBanner = ({ circle }: SubscriptionBannerProps) => {
     return null
   }
 
-  const showLoginToast = () => {
-    window.dispatchEvent(
-      new CustomEvent(ADD_TOAST, {
-        detail: {
-          color: 'green',
-          content: (
-            <Translate
-              zh_hant="請登入／註冊訂閱圍爐"
-              zh_hans="请登入／注册订阅围炉"
-            />
-          ),
-          customButton: <LoginButton isPlain />,
-          buttonPlacement: 'center',
-        },
-      })
-    )
-  }
-
   const openSubscribeCircleDialog = () =>
     window.dispatchEvent(new CustomEvent(OPEN_SUBSCRIBE_CIRCLE_DIALOG, {}))
 
@@ -66,7 +51,11 @@ const SubscriptionBanner = ({ circle }: SubscriptionBannerProps) => {
         })
 
         if (!viewer.isAuthed) {
-          showLoginToast()
+          window.dispatchEvent(
+            new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+              detail: { source: UNIVERSAL_AUTH_SOURCE.circle },
+            })
+          )
           return
         }
 

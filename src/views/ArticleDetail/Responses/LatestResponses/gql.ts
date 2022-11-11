@@ -6,7 +6,7 @@ import ResponseArticle from '../ResponseArticle'
 
 export const LATEST_RESPONSES_PUBLIC = gql`
   query LatestResponsesPublic(
-    $mediaHash: String!
+    $id: ID!
     $before: String
     $after: String
     $first: first_Int_min_0 = 8
@@ -14,35 +14,37 @@ export const LATEST_RESPONSES_PUBLIC = gql`
     $includeBefore: Boolean
     $articleOnly: Boolean
   ) {
-    article(input: { mediaHash: $mediaHash }) {
-      id
-      mediaHash
-      id
-      responseCount
-      responses(
-        input: {
-          after: $after
-          before: $before
-          first: $first
-          includeAfter: $includeAfter
-          includeBefore: $includeBefore
-          articleOnly: $articleOnly
-        }
-      ) {
-        totalCount
-        pageInfo {
-          startCursor
-          endCursor
-          hasNextPage
-        }
-        edges {
-          node {
-            ... on Article {
-              ...ResponseArticleArticle
-            }
-            ... on Comment {
-              ...ThreadCommentCommentPublic
-              ...ThreadCommentCommentPrivate
+    article: node(input: { id: $id }) {
+      ... on Article {
+        id
+        mediaHash
+        id
+        responseCount
+        responses(
+          input: {
+            after: $after
+            before: $before
+            first: $first
+            includeAfter: $includeAfter
+            includeBefore: $includeBefore
+            articleOnly: $articleOnly
+          }
+        ) {
+          totalCount
+          pageInfo {
+            startCursor
+            endCursor
+            hasNextPage
+          }
+          edges {
+            node {
+              ... on Article {
+                ...ResponseArticleArticle
+              }
+              ... on Comment {
+                ...ThreadCommentCommentPublic
+                ...ThreadCommentCommentPrivate
+              }
             }
           }
         }

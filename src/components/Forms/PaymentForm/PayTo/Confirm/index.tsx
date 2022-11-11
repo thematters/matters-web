@@ -18,6 +18,7 @@ import {
 } from '~/components'
 import PAY_TO from '~/components/GQL/mutations/payTo'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
+import updateDonation from '~/components/GQL/updates/donation'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { parseFormSubmitErrors, validatePaymentPassword } from '~/common/utils'
@@ -31,6 +32,7 @@ import {
   PayTo_payTo_transaction as PayToTx,
 } from '~/components/GQL/mutations/__generated__/PayTo'
 import { WalletBalance } from '~/components/GQL/queries/__generated__/WalletBalance'
+import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
 
 interface SetAmountOpenTabCallbackValues {
   window: Window
@@ -39,6 +41,7 @@ interface SetAmountOpenTabCallbackValues {
 
 interface FormProps {
   amount: number
+  article: ArticleDetailPublic_article
   currency: CURRENCY
   recipient: UserDonationRecipient
   targetId: string
@@ -57,6 +60,7 @@ interface FormValues {
 
 const Confirm: React.FC<FormProps> = ({
   amount,
+  article,
   currency,
   recipient,
   targetId,
@@ -121,6 +125,16 @@ const Confirm: React.FC<FormProps> = ({
             purpose: 'donation',
             recipientId: recipient.id,
             targetId,
+          },
+          // optimisticResponse: {
+
+          // },
+          update: (cache) => {
+            updateDonation({
+              cache,
+              id: article.id,
+              viewer,
+            })
           },
         })
 

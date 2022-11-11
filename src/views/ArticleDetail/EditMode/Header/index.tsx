@@ -65,7 +65,6 @@ const EditModeHeader = ({
       await editArticle({
         variables: {
           id: article.id,
-          mediaHash: article.mediaHash,
           cover: coverId || null,
           tags: tags.map((tag) => tag.content),
           collection: collection.map(({ id: articleId }) => articleId),
@@ -148,6 +147,7 @@ const EditModeHeader = ({
 
       <EditorSettingsDialog
         {...restProps}
+        article={article}
         saving={loading}
         disabled={loading}
         confirmButtonText={

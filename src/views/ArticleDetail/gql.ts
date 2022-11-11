@@ -42,6 +42,8 @@ const articlePublicFragment = gql`
       }
     }
     license
+    requestForDonation
+    replyToDonator
     drafts {
       id
       mediaHash

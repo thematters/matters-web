@@ -7,7 +7,6 @@ import {
   Tooltip,
   Translate,
   useMutation,
-  useRoute,
   ViewerContext,
 } from '~/components'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
@@ -41,8 +40,6 @@ const AppreciationButton = ({
   privateFetched,
   disabled,
 }: AppreciationButtonProps) => {
-  const { getQuery } = useRoute()
-  const mediaHash = getQuery('mediaHash')
   const viewer = useContext(ViewerContext)
   const { token, refreshToken } = useContext(ReCaptchaContext)
   const { data, client } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
@@ -96,7 +93,7 @@ const AppreciationButton = ({
           updateAppreciation({
             cache,
             left,
-            mediaHash,
+            id: article.id,
             total,
             viewer,
             canSuperLike: false,

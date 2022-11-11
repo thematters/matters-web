@@ -108,11 +108,7 @@ export const LikeCoinBalance = () => {
         href={PATHS.ME_SETTINGS}
       >
         <TextIcon color="black" size="xs">
-          <Translate
-            zh_hant="設置 Liker ID"
-            zh_hans="设置 Liker ID"
-            en="Set Liker ID"
-          />
+          <Translate zh_hant="前往設置" zh_hans="前往设置" en="Setup" />
         </TextIcon>
       </Button>
     </Wrapper>

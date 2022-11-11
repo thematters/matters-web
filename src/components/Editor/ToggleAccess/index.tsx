@@ -1,4 +1,10 @@
-import { CircleDigest, Switch, Translate } from '~/components'
+import {
+  CircleDigest,
+  IconArrowRight16,
+  IconChecked32,
+  Switch,
+  Translate,
+} from '~/components'
 
 import SelectLicense from './SelectLicense'
 import styles from './styles.css'
@@ -8,6 +14,8 @@ import {
   ArticleLicenseType,
 } from '@/__generated__/globalTypes'
 import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
+import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
+import { EditMetaDraft } from '~/views/Me/DraftDetail/__generated__/EditMetaDraft'
 
 export type ToggleAccessProps = {
   circle?: DigestRichCirclePublic | null
@@ -23,6 +31,15 @@ export type ToggleAccessProps = {
   accessSaving: boolean
   canToggleCircle: boolean
 
+  draft?: EditMetaDraft
+  article?: ArticleDetailPublic_article
+  editSupportSetting: (
+    requestForDonation: string | null,
+    replyToDonator: string | null
+  ) => any
+  supportSettingSaving: boolean
+  onOpenSupportSetting: () => void
+
   iscnPublish?: boolean | null
   togglePublishISCN: (iscnPublish: boolean) => void
   iscnPublishSaving: boolean
@@ -32,12 +49,15 @@ export type ToggleAccessProps = {
 
 const ToggleAccess: React.FC<ToggleAccessProps> = ({
   circle,
-  accessType,
   license,
 
   editAccess,
   accessSaving,
   canToggleCircle,
+
+  draft,
+  article,
+  onOpenSupportSetting,
 
   iscnPublish,
   togglePublishISCN,
@@ -45,6 +65,7 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
 
   inSidebar,
 }) => {
+  const content = draft ? draft : article
   return (
     <section className={inSidebar ? 'inSidebar' : ''}>
       {canToggleCircle && (
@@ -105,6 +126,35 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
             }
           />
         </section>
+      </section>
+
+      <section className="support-setting">
+        <button type="button" onClick={onOpenSupportSetting}>
+          <section className="support">
+            <section className="left">
+              <h3>
+                <Translate
+                  zh_hans="设定支持"
+                  zh_hant="設定支持"
+                  en="Support Setting"
+                />
+              </h3>
+              {content &&
+              (content.replyToDonator || content.requestForDonation) ? (
+                <IconChecked32 size="md" />
+              ) : (
+                <IconArrowRight16 />
+              )}
+            </section>
+            <p className="hint">
+              <Translate
+                zh_hans="可自订号召支持的内容，以及收到支持后的感谢文字"
+                zh_hant="可自訂號召支持的內容，以及收到支持後的感謝文字"
+                en="Customize your call-to-support prompt to audience, or thank-you card for those who supported you."
+              />
+            </p>
+          </section>
+        </button>
       </section>
 
       <section className="iscn">
