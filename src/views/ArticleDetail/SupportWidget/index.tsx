@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useLazyQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import { useContext, useEffect, useState } from 'react'
 
@@ -50,21 +50,30 @@ const SupportWidget = ({ article }: DonationProps) => {
     hasCircle: article.access.circle,
   })
 
-  const {
-    loading,
-    data: hasDonatedData,
-    refetch: hasDonatedRefetch,
-  } = useQuery<HasDonated>(HAS_DONATED, {
+  const [
+    getHasDonated,
+    { data: hasDonatedData, loading, refetch: hasDonatedRefetch },
+  ] = useLazyQuery<HasDonated>(HAS_DONATED, {
     fetchPolicy: 'network-only',
-    variables: { id: article.id, senderId: viewer.id },
   })
+
+  useEffect(() => {
+    if (!viewer.id) return
+
+    getHasDonated({
+      variables: {
+        id: article.id,
+        senderId: viewer.id,
+      },
+    })
+  }, [viewer.id])
 
   const hasDonatedArticle =
     hasDonatedData?.article as HasDonated_article_Article
 
   useEffect(() => {
     if (hasDonatedData) {
-      if (viewer.id !== '' && hasDonatedArticle?.donation.totalCount === 1) {
+      if (hasDonatedArticle?.donation.totalCount === 1) {
         setSupported(true)
       }
     }
