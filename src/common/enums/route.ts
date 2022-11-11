@@ -39,6 +39,7 @@ type ROUTE_KEY =
   | 'ME_APPRECIATIONS_SENT'
   | 'ME_APPRECIATIONS_RECEIVED'
   | 'ME_NOTIFICATIONS'
+  | 'ME_ANALYTICS'
   | 'ME_WALLET'
   | 'ME_WALLET_TRANSACTIONS'
   | 'ME_SETTINGS'
@@ -140,6 +141,7 @@ export const ROUTES: {
   { key: 'ME_NOTIFICATIONS', pathname: '/me/notifications' },
   { key: 'ME_WALLET', pathname: '/me/wallet' },
   { key: 'ME_WALLET_TRANSACTIONS', pathname: '/me/wallet/transactions' },
+  { key: 'ME_ANALYTICS', pathname: '/me/analytics' },
 
   // Settings
   { key: 'ME_SETTINGS', pathname: '/me/settings' },
