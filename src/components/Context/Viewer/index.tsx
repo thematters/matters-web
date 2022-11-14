@@ -69,6 +69,9 @@ const ViewerFragments = {
         articles(input: { first: 0 }) {
           totalCount
         }
+        settings {
+          currency
+        }
       }
     `,
   },
