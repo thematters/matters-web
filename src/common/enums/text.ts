@@ -998,7 +998,7 @@ export const TEXT = {
     myFollowees: 'Following',
     myProfile: 'Profile',
     myWallet: 'Wallet',
-    myAnalytics: 'Anlytics',
+    myAnalytics: 'Analytics',
     NAME_EXISTS: 'This name is already taken.',
     NAME_INVALID: 'Invalid name',
     NETWORK_ERROR: 'Please refresh the page and try again.',

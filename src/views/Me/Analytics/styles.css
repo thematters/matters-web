@@ -1,33 +1,18 @@
 .container {
+  @media (--lg-up) {
+    margin: 0;
+  }
+
   margin: var(--spacing-loose) var(--spacing-base);
 }
 
-.content {
-  @mixin flex-center-start;
-
-  flex-direction: column;
-  width: 100%;
-  padding-top: 1rem;
-  background: white;
-
-  & p {
-    color: var(--color-grey-darker);
-  }
-}
-
 .title {
-  @mixin: flex-start-start;
+  @mixin: flex-center-space-between;
+
+  display: flex;
+  justify-content: space-between;
 }
 
-.rocket {
-  width: 101px;
-  height: 89px;
-  margin: var(--spacing-loose) 0;
-}
-
-.tips {
-  margin: var(--spacing-loose) 0;
-  font-size: var(--font-size-xs);
-  line-height: 1rem;
-  color: var(--color-grey);
+.filter {
+  display: inline-block;
 }

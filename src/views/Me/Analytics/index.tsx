@@ -1,24 +1,74 @@
-import { useContext } from 'react'
+import { useQuery } from '@apollo/react-hooks'
+import gql from 'graphql-tag'
+import { useState } from 'react'
 
 import {
-  Button,
   Card,
   Head,
   IconDonateBg24,
-  LanguageContext,
   Layout,
+  List,
+  QueryError,
+  Spinner,
   TextIcon,
   Translate,
 } from '~/components'
 
-import { GUIDE_LINKS, PATHS } from '~/common/enums'
-
-import { ReactComponent as SupporterListRocket } from '@/public/static/images/supporter-list-rocket.svg'
-
+import EmptyAnalytics from './EmptyAnalytics'
+import SelectPeriod from './SelectPeriod'
 import styles from './styles.css'
+import SupporterDigestFeed from './SupporterDigestFeed/index'
 
+import { MeAnalytics } from './__generated__/MeAnalytics'
+
+const ME_ANALYTICS = gql`
+  query MeAnalytics($after: String, $filter: TopDonatorFilter) {
+    viewer {
+      id
+      articles(input: { first: 0, after: $after }) {
+        totalCount
+      }
+      analytics {
+        topDonators(input: { first: 10, after: $after, filter: $filter }) {
+          pageInfo {
+            startCursor
+            endCursor
+            hasNextPage
+          }
+          edges {
+            cursor
+            node {
+              displayName
+              avatar
+              userName
+            }
+            donationCount
+          }
+        }
+      }
+    }
+  }
+`
 const BaseAnalytics = () => {
-  const { lang } = useContext(LanguageContext)
+  const { data, loading, error } = useQuery<MeAnalytics>(ME_ANALYTICS)
+  const [period, setPeriod] = useState<number>(7)
+
+  if (loading) {
+    return <Spinner />
+  }
+
+  if (error) {
+    return <QueryError error={error} />
+  }
+
+  const edges = data?.viewer?.analytics.topDonators.edges
+  const pageInfo = data?.viewer?.analytics.topDonators.pageInfo
+
+  const articlerCount = data?.viewer?.articles.totalCount
+
+  if (!edges || edges.length <= 0 || !pageInfo || articlerCount === 0) {
+    return <EmptyAnalytics />
+  }
 
   return (
     <section className="container">
@@ -32,51 +82,23 @@ const BaseAnalytics = () => {
           >
             <Translate id="supporterRankingList" />
           </TextIcon>
-        </section>
-        <section className="content">
-          <p>
-            <Translate id="analyticsNoArticle" />
-          </p>
-          <section className="rocket">
-            <SupporterListRocket />
+          <section className="filter">
+            <SelectPeriod period={period} onChange={setPeriod} />
           </section>
-            <Button
-              size={['19.5rem', '2.25rem']}
-              spacing={[0, 0]}
-              bgColor="green"
-              href={PATHS.HOME}
-            >
-              <TextIcon color="white" weight="md">
-                <Translate
-                  zh_hant="開始創作"
-                  zh_hans="开始创作"
-                  en="Start Creating"
-                />
-              </TextIcon>
-            </Button>
-          <section className="tips">
-            <p>
-              <Translate
-                zh_hant="想了解更多？詳見 "
-                zh_hans="想了解更多？详见 "
-                en="Want to know more? Check the "
+        </section>
+
+        <List>
+          {edges.map(({ node, cursor, donationCount }, i) => (
+            <List.Item key={cursor}>
+              <SupporterDigestFeed
+                user={node}
+                index={i}
+                donationCount={donationCount}
               />
-              <a
-                className="u-link-green"
-                href={GUIDE_LINKS.authorToolbox[lang]}
-                target="_blank"
-              >
-                <Translate
-                  zh_hant="教學指南"
-                  zh_hans="教学指南"
-                  en="tutorial"
-                />
-              </a>
-              <Translate zh_hant="" zh_hans="" en="." />
-            </p>
-          </section>
-        </section>
-      </Card>{' '}
+            </List.Item>
+          ))}
+        </List>
+      </Card>
       <style jsx>{styles}</style>
     </section>
   )
