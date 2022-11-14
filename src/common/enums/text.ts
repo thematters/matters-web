@@ -324,6 +324,9 @@ export const TEXT = {
     supportResponseDescription:
       '感謝支持，創作這條路不容易，有你的支持我將能夠蓄積更多能量創作。',
     supportResponseTitle: '試試輸入「#」以代稱支持者名稱',
+    supporterRankingList: '支持排行榜',
+    analyticsNoArticle:
+      '由於你尚未發布任何作品，這裡還沒有任何數據能與你分享哦！發布第一篇作品來介紹你自己，以此開啟你的創作之旅吧！',
     TAG_EDITORS_REACH_LIMIT: '一個標籤最多僅可有 4 名協作者共同管理',
     TAG_NOT_FOUND: '標籤不存在',
     TOO_MANY_TAGS_FOR_ARTICLE: '標籤添加最多至 10 個',
@@ -708,6 +711,9 @@ export const TEXT = {
     supportResponseDescription:
       '感謝支持，創作這條路不容易，有你的支持我將能夠蓄積更多能量創作。',
     supportResponseTitle: '试试输入「#」以代称支持者名称',
+    supporterRankingList: '支持排行榜',
+    analyticsNoArticle:
+      '由于你尚未发布任何作品，这裡还没有任何数据能与你分享哦！发布第一篇作品来介绍你自己，以此开启你的创作之旅吧！',
     TAG_EDITORS_REACH_LIMIT: '一个标签最多仅可有 4 名协作者共同管理',
     TAG_NOT_FOUND: '标签不存在',
     TOO_MANY_TAGS_FOR_ARTICLE: '标签添加最多至 10 个',
@@ -1116,6 +1122,9 @@ export const TEXT = {
     supportResponseDescription:
       'Thanks for your support. The way isn’t always easy being a creator. With your generous support, I can accumulate more energy to go on.',
     supportResponseTitle: 'Try entering # to substitute the supporter.',
+    supporterRankingList: 'Supporter Ranking List',
+    analyticsNoArticle:
+      'Since you haven‘t posted anything yet, there’s no data to share with you yet! Introduce yourself by posting your first entry and start your creative journey!',
     TAG_EDITORS_REACH_LIMIT: 'Maximum 4 editors allowed for each tag',
     TAG_NOT_FOUND: 'Tag not found',
     TOO_MANY_TAGS_FOR_ARTICLE: 'Add up to 10 tags',

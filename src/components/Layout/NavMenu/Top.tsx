@@ -96,7 +96,6 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
           <Translate id="myAnalytics" />
         </TextIcon>
       </Menu.Item>
-      x
       <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_BOOKMARKS}>
         <TextIcon
           icon={<IconBookmark24 size="md" />}
