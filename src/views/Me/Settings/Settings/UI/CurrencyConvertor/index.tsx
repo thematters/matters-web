@@ -107,25 +107,15 @@ const CurrencyConvertor = () => {
       }}
       dialog={{
         content: <Content />,
-        // TODO: comfirm title with PM
         title: (
-          <Translate
-            zh_hant="修改幣種"
-            zh_hans="修改币种"
-            en="Modify currency"
-          />
+          <Translate zh_hant="修改幣種" zh_hans="修改币种" en="Currency" />
         ),
       }}
     >
       {({ openDialog, ref }) => (
         <Form.List.Item
-          // TODO: comfirm title with PM
           title={
-            <Translate
-              zh_hant="匯率轉換"
-              zh_hans="汇率转换"
-              en="exchange rate conversion"
-            />
+            <Translate zh_hant="匯率幣別" zh_hans="汇率币别" en="Currency" />
           }
           onClick={openDialog}
           rightText={currency}
