@@ -87,7 +87,6 @@ export const UserProfile = () => {
     })
   }, [user?.id, viewer.id])
 
-  const totalCount = user?.articles.totalCount || 0
   /**
    * Render
    */
@@ -255,7 +254,9 @@ export const UserProfile = () => {
           <section className="right">
             {!isMe && <FollowUserButton user={user} size="lg" />}
 
-            {totalCount > 0 && <RssFeedButton user={user} />}
+            {user?.articles.totalCount > 0 && user?.info.ipnsKey && (
+              <RssFeedButton user={user} />
+            )}
           </section>
         </header>
 
