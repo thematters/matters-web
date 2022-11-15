@@ -1,9 +1,10 @@
 .container {
-  @media (--lg-up) {
-    margin: 0;
-  }
+  padding: var(--spacing-loose) var(--spacing-base);
 
-  margin: var(--spacing-loose) var(--spacing-base);
+  & p {
+    margin-top: var(--spacing-loose);
+    color: var(--color-grey-darker);
+  }
 }
 
 .title {
@@ -15,4 +16,21 @@
 
 .filter {
   display: inline-block;
+}
+
+.no-supporter {
+  @mixin flex-center-start;
+
+  flex-direction: column;
+  width: 100%;
+  margin: var(--spacing-loose) 0;
+
+  @media (--sm-up) {
+    margin: var(--spacing-xx-loose) 0;
+  }
+}
+
+.no-supporter-img {
+  width: 85px;
+  height: 95px;
 }

@@ -3,7 +3,6 @@ import gql from 'graphql-tag'
 import { useState } from 'react'
 
 import {
-  Card,
   Head,
   IconDonateBg24,
   Layout,
@@ -13,6 +12,8 @@ import {
   TextIcon,
   Translate,
 } from '~/components'
+
+import { ReactComponent as AnalyticsNoSupporter } from '@/public/static/images/analytics-no-supporter.svg'
 
 import EmptyAnalytics from './EmptyAnalytics'
 import SelectPeriod from './SelectPeriod'
@@ -50,8 +51,24 @@ const ME_ANALYTICS = gql`
   }
 `
 const BaseAnalytics = () => {
-  const { data, loading, error } = useQuery<MeAnalytics>(ME_ANALYTICS)
-  const [period, setPeriod] = useState<number>(7)
+  const [period, setPeriod] = useState<number>(0)
+
+  const [now] = useState(Date.now())
+
+  const rangeStart =
+    period === 0
+      ? null
+      : new Date(now - period * 24 * 60 * 60 * 100).toISOString()
+  const rangeEnd = rangeStart === null ? null : new Date(now).toISOString()
+
+  const { data, loading, error } = useQuery<MeAnalytics>(ME_ANALYTICS, {
+    variables: {
+      filter: {
+        inRangeStart: rangeStart,
+        inRangeEnd: rangeEnd,
+      },
+    },
+  })
 
   if (loading) {
     return <Spinner />
@@ -62,50 +79,57 @@ const BaseAnalytics = () => {
   }
 
   const edges = data?.viewer?.analytics.topDonators.edges
-  const pageInfo = data?.viewer?.analytics.topDonators.pageInfo
+  const articleCount = data?.viewer?.articles.totalCount || 0
 
-  const articlerCount = data?.viewer?.articles.totalCount
-
-  if (!edges || edges.length <= 0 || !pageInfo || articlerCount === 0) {
+  if (articleCount === 0) {
     return <EmptyAnalytics />
   }
 
   return (
     <section className="container">
-      <Card spacing={['loose', 'base']} bgColor="white" borderRadius="base">
-        <section className="title">
-          <TextIcon
-            icon={<IconDonateBg24 size="md" />}
-            weight="md"
-            color="black"
-            size="md"
-          >
-            <Translate id="supporterRankingList" />
-          </TextIcon>
-          <section className="filter">
-            <SelectPeriod period={period} onChange={setPeriod} />
-          </section>
+      <section className="title">
+        <TextIcon
+          icon={<IconDonateBg24 size="md" />}
+          weight="md"
+          color="black"
+          size="md"
+        >
+          <Translate id="supporterRankingList" />
+        </TextIcon>
+        <section className="filter">
+          <SelectPeriod period={period} onChange={setPeriod} />
         </section>
-
-        <List>
-          {edges.map(({ node, cursor, donationCount }, i) => (
-            <List.Item key={cursor}>
-              <SupporterDigestFeed
-                user={node}
-                index={i}
-                donationCount={donationCount}
-              />
-            </List.Item>
-          ))}
-        </List>
-      </Card>
+      </section>
+      {edges?.length === 0 && (
+        <>
+          <p>
+            <Translate id="analyticsNoSupporter" />
+          </p>
+          <section className="no-supporter">
+            <section className="no-supporter-img">
+              <AnalyticsNoSupporter />
+            </section>
+          </section>
+        </>
+      )}
+      <List>
+        {edges?.map(({ node, cursor, donationCount }, i) => (
+          <List.Item key={cursor}>
+            <SupporterDigestFeed
+              user={node}
+              index={i}
+              donationCount={donationCount}
+            />
+          </List.Item>
+        ))}
+      </List>
       <style jsx>{styles}</style>
     </section>
   )
 }
 
 const MyAnalytics = () => (
-  <Layout.Main bgColor="grey-lighter">
+  <Layout.Main>
     <Layout.Header
       left={<Layout.Header.BackButton />}
       right={<Layout.Header.Title id="myAnalytics" />}

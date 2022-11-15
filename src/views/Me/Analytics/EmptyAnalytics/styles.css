@@ -1,5 +1,5 @@
 .container {
-  margin: var(--spacing-loose) var(--spacing-base);
+  padding: var(--spacing-loose) var(--spacing-base);
 }
 
 .content {
@@ -7,8 +7,7 @@
 
   flex-direction: column;
   width: 100%;
-  padding-top: 1rem;
-  background: white;
+  padding-top: var(--spacing-loose);
 
   & p {
     color: var(--color-grey-darker);
@@ -25,10 +24,14 @@
   width: 101px;
   height: 89px;
   margin: var(--spacing-loose) 0;
+
+  @media (--sm-up) {
+    margin: var(--spacing-xx-loose) 0;
+  }
 }
 
 .tips {
-  margin: var(--spacing-loose) 0;
+  margin: var(--spacing-loose) 0 0;
   font-size: var(--font-size-xs);
   line-height: 1rem;
   color: var(--color-grey);

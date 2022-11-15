@@ -5,6 +5,7 @@ import { toPath } from '~/common/utils'
 import styles from './styles.css'
 
 import { MeAnalytics_viewer_analytics_topDonators_edges_node } from '../__generated__/MeAnalytics'
+
 interface SupporterDigestFeedProps {
   user: MeAnalytics_viewer_analytics_topDonators_edges_node
   index: number
@@ -21,7 +22,6 @@ const SupporterDigestFeed = ({
     page: 'userProfile',
     userName,
   })
-
   return (
     <Card {...path} spacing={[0, 0]}>
       <section className="container">
@@ -29,10 +29,9 @@ const SupporterDigestFeed = ({
         <section className="supporter">
           <LinkWrapper {...path} textActiveColor="green">
             <section className="content">
-              {' '}
               <Avatar src={user.avatar} size={'md'} />
               <h4 className="username">{user.displayName}</h4>
-            </section>{' '}
+            </section>
           </LinkWrapper>
           <section className="count">
             <TextIcon icon={<IconDonate24 />} size="xs" color="grey-dark">
