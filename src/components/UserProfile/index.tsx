@@ -255,9 +255,7 @@ export const UserProfile = () => {
           <section className="right">
             {!isMe && <FollowUserButton user={user} size="lg" />}
 
-            {totalCount !== 0 && hasTraveloggersBadge && (
-              <RssFeedButton user={user} />
-            )}
+            {totalCount > 0 && <RssFeedButton user={user} />}
           </section>
         </header>
 
