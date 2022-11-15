@@ -1,5 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
-import _pickBy from 'lodash/pickBy'
+import _find from 'lodash/find'
+import _matchesProperty from 'lodash/matchesProperty'
+import { useContext } from 'react'
 
 import {
   CurrencyFormatter,
@@ -9,7 +11,9 @@ import {
   TextIcon,
   Translate,
   UserDigest,
+  ViewerContext,
 } from '~/components'
+import EXCHANGE_RATES from '~/components/GQL/queries/exchangeRates'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
@@ -21,6 +25,7 @@ import Tips from './Tips'
 import USDTChoice from './USDTChoice'
 
 import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
+import { ExchangeRates } from '~/components/GQL/queries/__generated__/ExchangeRates'
 import { WalletBalance } from '~/components/GQL/queries/__generated__/WalletBalance'
 import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
 
@@ -37,10 +42,35 @@ const CurrencyChoice: React.FC<FormProps> = ({
   switchToSetAmount,
   switchToWalletSelect,
 }) => {
-  // HKD balance
+  const viewer = useContext(ViewerContext)
+  const currency = viewer.settings.currency
+
+  const { data: exchangeRateDate, loading: exchangeRateLoading } =
+    useQuery<ExchangeRates>(EXCHANGE_RATES, {
+      variables: {
+        to: currency,
+      },
+    })
+
+  // HKD、Like balance
   const { data, loading } = useQuery<WalletBalance>(WALLET_BALANCE, {
     fetchPolicy: 'network-only',
   })
+
+  const exchangeRateUSDT = _find(
+    exchangeRateDate?.exchangeRates,
+    _matchesProperty('from', CURRENCY.USDT)
+  )
+
+  const exchangeRateHKD = _find(
+    exchangeRateDate?.exchangeRates,
+    _matchesProperty('from', CURRENCY.HKD)
+  )
+
+  const exchangeRateLIKE = _find(
+    exchangeRateDate?.exchangeRates,
+    _matchesProperty('from', CURRENCY.LIKE)
+  )
 
   const balanceHKD = data?.viewer?.wallet.balance.HKD || 0
   const balanceLike = data?.viewer?.liker.total || 0
@@ -72,6 +102,8 @@ const CurrencyChoice: React.FC<FormProps> = ({
       <USDTChoice
         article={article}
         recipient={recipient}
+        currency={currency}
+        exchangeRate={exchangeRateUSDT?.rate || 0}
         switchToSetAmount={() => switchToSetAmount(CURRENCY.USDT)}
         switchToWalletSelect={switchToWalletSelect}
       />
@@ -91,13 +123,20 @@ const CurrencyChoice: React.FC<FormProps> = ({
         >
           <Translate zh_hant="法幣" zh_hans="法币" en="Fiat Currency" />
         </TextIcon>
-        <CurrencyFormatter value={formatAmount(balanceHKD)} currency="HKD" />
+        <CurrencyFormatter
+          value={formatAmount(balanceHKD)}
+          currency={CURRENCY.HKD}
+          subCurrency={currency}
+          subValue={formatAmount(balanceHKD * (exchangeRateHKD?.rate || 0), 4)}
+        />
       </section>
 
       {/* LikeCoin */}
       <LikeCoinChoice
         balance={balanceLike}
         recipient={recipient}
+        currency={currency}
+        exchangeRate={exchangeRateLIKE?.rate || 0}
         switchToSetAmount={() => switchToSetAmount(CURRENCY.LIKE)}
       />
 
@@ -107,7 +146,7 @@ const CurrencyChoice: React.FC<FormProps> = ({
     </section>
   )
 
-  if (loading) {
+  if (exchangeRateLoading || loading) {
     return <Spinner />
   }
 

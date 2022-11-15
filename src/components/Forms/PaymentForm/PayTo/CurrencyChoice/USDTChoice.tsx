@@ -18,12 +18,15 @@ import { formatAmount } from '~/common/utils'
 
 import styles from './styles.css'
 
+import { QuoteCurrency } from '@/__generated__/globalTypes'
 import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
 import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
 
 interface FormProps {
   article: ArticleDetailPublic_article
   recipient: UserDonationRecipient
+  currency: QuoteCurrency
+  exchangeRate: number
   switchToSetAmount: () => void
   switchToWalletSelect: () => void
 }
@@ -31,6 +34,8 @@ interface FormProps {
 const USDTChoice: React.FC<FormProps> = ({
   article,
   recipient,
+  currency,
+  exchangeRate,
   switchToSetAmount,
   switchToWalletSelect,
 }) => {
@@ -111,8 +116,10 @@ const USDTChoice: React.FC<FormProps> = ({
           <IconSpinner16 color="grey" size="sm" />
         ) : (
           <CurrencyFormatter
-            value={formatAmount(balanceUSDT)}
             currency={CURRENCY.USDT}
+            value={formatAmount(balanceUSDT)}
+            subCurrency={currency}
+            subValue={formatAmount(balanceUSDT * exchangeRate, 4)}
           />
         )}
 

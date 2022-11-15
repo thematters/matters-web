@@ -14,11 +14,14 @@ import { formatAmount } from '~/common/utils'
 
 import styles from './styles.css'
 
+import { QuoteCurrency } from '@/__generated__/globalTypes'
 import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
 
 type LikeCoinChoiceProps = {
   balance: number
   recipient: UserDonationRecipient
+  currency: QuoteCurrency
+  exchangeRate: number
   switchToSetAmount: () => void
 }
 
@@ -36,6 +39,8 @@ const IconLikeDisabled = () => (
 const LikeCoinChoice: React.FC<LikeCoinChoiceProps> = ({
   balance,
   recipient,
+  currency,
+  exchangeRate,
   switchToSetAmount,
 }) => {
   const viewer = useContext(ViewerContext)
@@ -100,7 +105,12 @@ const LikeCoinChoice: React.FC<LikeCoinChoiceProps> = ({
         LikeCoin
       </TextIcon>
 
-      <CurrencyFormatter value={formatAmount(balance, 0)} currency="LIKE" />
+      <CurrencyFormatter
+        value={formatAmount(balance, 0)}
+        currency="LIKE"
+        subValue={formatAmount(balance * exchangeRate, 4)}
+        subCurrency={currency}
+      />
 
       <style jsx>{styles}</style>
     </section>
