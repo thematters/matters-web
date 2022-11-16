@@ -1,4 +1,4 @@
-import { Avatar, Card, IconDonate24, LinkWrapper, TextIcon } from '~/components'
+import { Card, IconDonate24, TextIcon, UserDigest } from '~/components'
 
 import { toPath } from '~/common/utils'
 
@@ -27,12 +27,15 @@ const SupporterDigestFeed = ({
       <section className="container">
         <span className="number">{index + 1}</span>
         <section className="supporter">
-          <LinkWrapper {...path} textActiveColor="green">
-            <section className="content">
-              <Avatar src={user.avatar} size={'md'} />
-              <h4 className="username">{user.displayName}</h4>
-            </section>
-          </LinkWrapper>
+          <UserDigest.Mini
+            user={user}
+            hasAvatar
+            avatarSize="md"
+            hasDisplayName
+            textSize="md-s"
+            textWeight="md"
+          />
+
           <section className="count">
             <TextIcon icon={<IconDonate24 />} size="xs" color="grey-dark">
               {donationCount}

@@ -12,6 +12,7 @@ import {
   TextIcon,
   Translate,
 } from '~/components'
+import { UserDigest } from '~/components/UserDigest'
 
 import { ReactComponent as AnalyticsNoSupporter } from '@/public/static/images/analytics-no-supporter.svg'
 
@@ -39,9 +40,7 @@ const ME_ANALYTICS = gql`
           edges {
             cursor
             node {
-              displayName
-              avatar
-              userName
+              ...UserDigestMiniUser
             }
             donationCount
           }
@@ -49,6 +48,7 @@ const ME_ANALYTICS = gql`
       }
     }
   }
+  ${UserDigest.Mini.fragments.user}
 `
 const BaseAnalytics = () => {
   const [period, setPeriod] = useState<number>(7)
@@ -58,7 +58,7 @@ const BaseAnalytics = () => {
   const rangeStart =
     period === 0
       ? null
-      : new Date(now - period * 24 * 60 * 60 * 100).toISOString()
+      : new Date(now - period * 24 * 60 * 60 * 1000).toISOString()
   const rangeEnd = rangeStart === null ? null : new Date(now).toISOString()
 
   const { data, loading, error } = useQuery<MeAnalytics>(ME_ANALYTICS, {
