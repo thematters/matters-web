@@ -2,6 +2,7 @@ import { useContext } from 'react'
 
 import {
   CardSpacing,
+  IconAnalytics24,
   IconBookmark24,
   IconCircle24,
   IconClap24,
@@ -55,7 +56,6 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
           <Translate id="myProfile" />
         </TextIcon>
       </Menu.Item>
-
       {circlePath && (
         <Menu.Item spacing={menuItemSpacing} href={circlePath.href}>
           <TextIcon
@@ -67,7 +67,6 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
           </TextIcon>
         </Menu.Item>
       )}
-
       <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_DRAFTS}>
         <TextIcon
           icon={<IconDraft24 size="md" />}
@@ -77,7 +76,6 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
           <Translate id="myDrafts" />
         </TextIcon>
       </Menu.Item>
-
       {(features.add_credit || features.payout) && (
         <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_WALLET}>
           <TextIcon
@@ -89,7 +87,15 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
           </TextIcon>
         </Menu.Item>
       )}
-
+      <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_ANALYTICS}>
+        <TextIcon
+          icon={<IconAnalytics24 size="md" />}
+          spacing="base"
+          size={menuItemSize}
+        >
+          <Translate id="myAnalytics" />
+        </TextIcon>
+      </Menu.Item>
       <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_BOOKMARKS}>
         <TextIcon
           icon={<IconBookmark24 size="md" />}
@@ -99,7 +105,6 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
           <Translate id="myBookmarks" />
         </TextIcon>
       </Menu.Item>
-
       <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_APPRECIATIONS_SENT}>
         <TextIcon
           icon={<IconClap24 size="md" />}
@@ -109,7 +114,6 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
           <Translate id="myAppreciations" />
         </TextIcon>
       </Menu.Item>
-
       <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_HISTORY}>
         <TextIcon
           icon={<IconHistory24 size="md" />}
