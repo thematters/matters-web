@@ -28,10 +28,10 @@ export const GUIDE_LINKS = {
   },
   authorToolbox: {
     zh_hant:
-      'https://matters.news/@hi176/255830-matters-%E4%BD%9C%E8%80%85%E5%B7%A5%E5%85%B7%E7%AE%B1-%E6%96%B0%E6%89%8B%E5%BF%85%E7%9C%8B-2022-03-%E6%9B%B4%E6%96%B0-bafyreierks3n7n7aohc7to26wn7vgohspcxprxlakvdjt4g4ex74qqxuci',
+      'https://matters.news/@hi176/346490-matters-%E4%BD%9C%E8%80%85%E5%B7%A5%E5%85%B7%E7%AE%B1-%E6%96%B0%E6%89%8B%E5%BF%85%E7%9C%8B-2022-11-%E6%9B%B4%E6%96%B0-bafyreifhtkoweov2l7ltjwitklidmb23qqnflny2hw7ahc6rcttklvtxai',
     zh_hans:
-      'https://matters.news/zh-Hans/@hi176/255830-matters-%E4%BD%9C%E8%80%85%E5%B7%A5%E5%85%B7%E7%AE%B1-%E6%96%B0%E6%89%8B%E5%BF%85%E7%9C%8B-2022-03-%E6%9B%B4%E6%96%B0-bafyreierks3n7n7aohc7to26wn7vgohspcxprxlakvdjt4g4ex74qqxuci',
-    en: 'https://matters.news/en/@hi176/255830-matters-%E4%BD%9C%E8%80%85%E5%B7%A5%E5%85%B7%E7%AE%B1-%E6%96%B0%E6%89%8B%E5%BF%85%E7%9C%8B-2022-03-%E6%9B%B4%E6%96%B0-bafyreierks3n7n7aohc7to26wn7vgohspcxprxlakvdjt4g4ex74qqxuci',
+      'https://matters.news/zh-Hans/@hi176/346490-matters-%E4%BD%9C%E8%80%85%E5%B7%A5%E5%85%B7%E7%AE%B1-%E6%96%B0%E6%89%8B%E5%BF%85%E7%9C%8B-2022-11-%E6%9B%B4%E6%96%B0-bafyreifhtkoweov2l7ltjwitklidmb23qqnflny2hw7ahc6rcttklvtxai',
+    en: 'https://matters.news/en/@hi176/346490-matters-%E4%BD%9C%E8%80%85%E5%B7%A5%E5%85%B7%E7%AE%B1-%E6%96%B0%E6%89%8B%E5%BF%85%E7%9C%8B-2022-11-%E6%9B%B4%E6%96%B0-bafyreifhtkoweov2l7ltjwitklidmb23qqnflny2hw7ahc6rcttklvtxai',
   },
   connectWallet: {
     zh_hant:
