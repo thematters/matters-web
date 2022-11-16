@@ -51,7 +51,7 @@ const ME_ANALYTICS = gql`
   }
 `
 const BaseAnalytics = () => {
-  const [period, setPeriod] = useState<number>(0)
+  const [period, setPeriod] = useState<number>(7)
 
   const [now] = useState(Date.now())
 
@@ -100,18 +100,18 @@ const BaseAnalytics = () => {
           <SelectPeriod period={period} onChange={setPeriod} />
         </section>
       </section>
+
       {edges?.length === 0 && (
-        <>
+        <section className="no-supporter">
+          <section className="no-supporter-img">
+            <AnalyticsNoSupporter />
+          </section>
           <p>
             <Translate id="analyticsNoSupporter" />
           </p>
-          <section className="no-supporter">
-            <section className="no-supporter-img">
-              <AnalyticsNoSupporter />
-            </section>
-          </section>
-        </>
+        </section>
       )}
+
       <List>
         {edges?.map(({ node, cursor, donationCount }, i) => (
           <List.Item key={cursor}>

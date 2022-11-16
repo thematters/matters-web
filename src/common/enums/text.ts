@@ -1132,7 +1132,7 @@ export const TEXT = {
     supportResponseTitle: 'Try entering # to substitute the supporter.',
     supporterRankingList: 'Supporter Ranking List',
     analyticsNoArticle:
-      'Since you haven‘t posted anything yet, there’s no data to share with you yet! Introduce yourself by posting your first entry and start your creative journey!',
+      'You haven‘t published any articles yet, so there is no data available. Create one now to introduce yourself!',
     analyticsNoSupporter: 'No supporter data yet.',
     TAG_EDITORS_REACH_LIMIT: 'Maximum 4 editors allowed for each tag',
     TAG_NOT_FOUND: 'Tag not found',

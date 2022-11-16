@@ -1,21 +1,12 @@
 .container {
-  padding: var(--spacing-loose) var(--spacing-base);
-
-  & p {
-    margin-top: var(--spacing-loose);
-    color: var(--color-grey-darker);
-  }
+  padding: var(--spacing-loose) 0;
 }
 
 .title {
-  @mixin: flex-center-space-between;
-
   display: flex;
   justify-content: space-between;
-}
-
-.filter {
-  display: inline-block;
+  padding: 0 var(--spacing-base) 0;
+  margin-bottom: var(--spacing-tight);
 }
 
 .no-supporter {
@@ -24,6 +15,11 @@
   flex-direction: column;
   width: 100%;
   margin: var(--spacing-loose) 0;
+
+  & p {
+    margin-top: var(--spacing-x-tight);
+    color: var(--color-grey-darker);
+  }
 
   @media (--sm-up) {
     margin: var(--spacing-xx-loose) 0;
