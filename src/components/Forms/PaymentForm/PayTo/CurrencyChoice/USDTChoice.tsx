@@ -119,7 +119,7 @@ const USDTChoice: React.FC<FormProps> = ({
             currency={CURRENCY.USDT}
             value={formatAmount(balanceUSDT)}
             subCurrency={currency}
-            subValue={formatAmount(balanceUSDT * exchangeRate, 4)}
+            subValue={formatAmount(balanceUSDT * exchangeRate, 2)}
           />
         )}
 

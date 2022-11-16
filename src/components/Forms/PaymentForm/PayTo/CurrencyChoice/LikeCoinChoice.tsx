@@ -108,7 +108,7 @@ const LikeCoinChoice: React.FC<LikeCoinChoiceProps> = ({
       <CurrencyFormatter
         value={formatAmount(balance, 0)}
         currency="LIKE"
-        subValue={formatAmount(balance * exchangeRate, 4)}
+        subValue={formatAmount(balance * exchangeRate, 2)}
         subCurrency={currency}
       />
 

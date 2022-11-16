@@ -127,7 +127,7 @@ const CurrencyChoice: React.FC<FormProps> = ({
           value={formatAmount(balanceHKD)}
           currency={CURRENCY.HKD}
           subCurrency={currency}
-          subValue={formatAmount(balanceHKD * (exchangeRateHKD?.rate || 0), 4)}
+          subValue={formatAmount(balanceHKD * (exchangeRateHKD?.rate || 0), 2)}
         />
       </section>
 
