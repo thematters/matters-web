@@ -27,7 +27,7 @@ const login = async (email: string, password: string, page: Page) => {
   }
 
 test('Model login', async ({ page }) => {
-
+  test.setTimeout(30000)
   // Click button:has-text("Enter")
   await page.locator('button:has-text("Enter")').click();
 
@@ -36,7 +36,7 @@ test('Model login', async ({ page }) => {
 });
 
 test('Page login', async ({ page }) => {
-
+  test.setTimeout(30000)
   await page.goto('https://web-develop.matters.news/signup?target=https%3A%2F%2Fweb-develop.matters.news%2F')
 
   await login(testEmail, testPassword, page)

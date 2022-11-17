@@ -9,6 +9,7 @@ const bobEmail = process.env.MATTERS_TESTING_ACCOUNT1_EMAIL ?? '';
 const bobPassword = process.env.MATTERS_TESTING_ACCOUNT1_PASSWORD ?? '';
 
 test('send comment and check comment notice', async ({ page }) => {
+  test.setTimeout(30000)
 
   const randomComment = Math.random().toString(36).slice(2, 7);
 
@@ -99,7 +100,7 @@ test('send comment and check comment notice', async ({ page }) => {
 
 
 test('comment reply and check reply notice', async ({ page }) => {
-
+  test.setTimeout(30000)
   const randomReply = Math.random().toString(36).slice(2, 9);
 
   // Go to https://web-dev.matters.news/

@@ -5,7 +5,7 @@ test.beforeEach(async ({ page }) => {
       })    
 
 test('login, publish article and check article publishing notice, with likeid already exists', async ({ page }) => {
-
+  test.setTimeout(30000)
   const testEmail = process.env.MATTERS_TESTING_ACCOUNT_EMAIL ?? '';
   const testPassword = process.env.MATTERS_TESTING_ACCOUNT_PASSWORD ?? '';
   const randomTitle = Math.random().toString(36).slice(2, 9);
