@@ -15,7 +15,14 @@ import { formatAmount } from '~/common/utils'
 
 import styles from './styles.css'
 
-export const USDTBalance = () => {
+import { QuoteCurrency } from '@/__generated__/globalTypes'
+
+interface USDTBalanceProps {
+  currency: QuoteCurrency
+  exchangeRate: number
+}
+
+export const USDTBalance = ({ currency, exchangeRate }: USDTBalanceProps) => {
   const viewer = useContext(ViewerContext)
   const address = viewer.info.ethAddress
   const { data: balanceUSDTData } = useBalanceUSDT({})
@@ -58,7 +65,12 @@ export const USDTBalance = () => {
         <Translate zh_hant="USDT" zh_hans="USDT" en="USDT" />
       </TextIcon>
 
-      <CurrencyFormatter value={formatAmount(balanceUSDT)} currency="USDT" />
+      <CurrencyFormatter
+        value={formatAmount(balanceUSDT)}
+        currency="USDT"
+        subCurrency={currency}
+        subValue={formatAmount(balanceUSDT * exchangeRate, 2)}
+      />
 
       <style jsx>{styles}</style>
     </section>

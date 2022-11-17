@@ -41,12 +41,12 @@ import ReconnectButton from './ReconnectButton'
 import SetAmountBalance from './SetAmountBalance'
 import SetAmountHeader from './SetAmountHeader'
 
-import { ExchangeRates } from '@/src/components/GQL/queries/__generated__/ExchangeRates'
 import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
 import {
   PayTo as PayToMutate,
   PayTo_payTo_transaction as PayToTx,
 } from '~/components/GQL/mutations/__generated__/PayTo'
+import { ExchangeRates } from '~/components/GQL/queries/__generated__/ExchangeRates'
 import { WalletBalance } from '~/components/GQL/queries/__generated__/WalletBalance'
 import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
 
