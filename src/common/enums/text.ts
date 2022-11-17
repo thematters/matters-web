@@ -1130,7 +1130,7 @@ export const TEXT = {
     supportResponseDescription:
       'Thanks for your support. The way isn’t always easy being a creator. With your generous support, I can accumulate more energy to go on.',
     supportResponseTitle: 'Try entering # to substitute the supporter.',
-    supporterRankingList: 'Supporter Ranking',
+    supporterRankingList: 'Top Supporters',
     analyticsNoArticle:
       'You haven‘t published any articles yet, so there is no data available. Create one now to introduce yourself!',
     analyticsNoSupporter: 'No data yet.',
