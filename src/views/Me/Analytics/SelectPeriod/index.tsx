@@ -65,7 +65,7 @@ const SelectPeriod: React.FC<SelectProps> = ({ period, onChange }) => {
         <Menu.Item onClick={() => onChange(options[0].value)}>
           <TextIcon
             spacing="base"
-            size="md"
+            size="sm"
             weight={isSevenDaysActive ? 'bold' : 'normal'}
           >
             {options[0].label}
@@ -74,7 +74,7 @@ const SelectPeriod: React.FC<SelectProps> = ({ period, onChange }) => {
         <Menu.Item onClick={() => onChange(options[1].value)}>
           <TextIcon
             spacing="base"
-            size="md"
+            size="sm"
             weight={isOneMonthActive ? 'bold' : 'normal'}
           >
             {options[1].label}
@@ -83,7 +83,7 @@ const SelectPeriod: React.FC<SelectProps> = ({ period, onChange }) => {
         <Menu.Item onClick={() => onChange(options[2].value)}>
           <TextIcon
             spacing="base"
-            size="md"
+            size="sm"
             weight={isThreeMonthsActive ? 'bold' : 'normal'}
           >
             {options[2].label}
@@ -92,7 +92,7 @@ const SelectPeriod: React.FC<SelectProps> = ({ period, onChange }) => {
         <Menu.Item onClick={() => onChange(options[3].value)}>
           <TextIcon
             spacing="base"
-            size="md"
+            size="sm"
             weight={isAllActive ? 'bold' : 'normal'}
           >
             {options[3].label}
@@ -123,8 +123,8 @@ const SelectPeriod: React.FC<SelectProps> = ({ period, onChange }) => {
           ref={ref}
         >
           <TextIcon
-            icon={withIcon(IconArrowDown)({ size: 'xxs' })}
-            size={'md'}
+            icon={withIcon(IconArrowDown)({ size: 'xs' })}
+            size={'sm'}
             color={'grey'}
             spacing="xxtight"
             textPlacement="left"
