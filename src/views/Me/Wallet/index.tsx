@@ -1,4 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
+import _find from 'lodash/find'
+import _matchesProperty from 'lodash/matchesProperty'
 import { useContext } from 'react'
 
 import {
@@ -9,9 +11,13 @@ import {
   Spinner,
   ViewerContext,
 } from '~/components'
+import EXCHANGE_RATES from '~/components/GQL/queries/exchangeRates'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
 
-import { PAYMENT_MINIMAL_PAYOUT_AMOUNT } from '~/common/enums'
+import {
+  PAYMENT_CURRENCY as CURRENCY,
+  PAYMENT_MINIMAL_PAYOUT_AMOUNT,
+} from '~/common/enums'
 
 import { FiatCurrencyBalance, LikeCoinBalance, USDTBalance } from './Balance'
 import PaymentPassword from './PaymentPassword'
@@ -21,10 +27,35 @@ import TotalAssets from './TotalAssets'
 import ViewStripeAccount from './ViewStripeAccount'
 import ViewStripeCustomerPortal from './ViewStripeCustomerPortal'
 
+import { ExchangeRates } from '~/components/GQL/queries/__generated__/ExchangeRates'
 import { WalletBalance } from '~/components/GQL/queries/__generated__/WalletBalance'
 
 const Wallet = () => {
   const viewer = useContext(ViewerContext)
+
+  const currency = viewer.settings.currency
+
+  const { data: exchangeRateDate, loading: exchangeRateLoading } =
+    useQuery<ExchangeRates>(EXCHANGE_RATES, {
+      variables: {
+        to: currency,
+      },
+    })
+
+  const exchangeRateUSDT = _find(
+    exchangeRateDate?.exchangeRates,
+    _matchesProperty('from', CURRENCY.USDT)
+  )
+
+  const exchangeRateHKD = _find(
+    exchangeRateDate?.exchangeRates,
+    _matchesProperty('from', CURRENCY.HKD)
+  )
+
+  const exchangeRateLIKE = _find(
+    exchangeRateDate?.exchangeRates,
+    _matchesProperty('from', CURRENCY.LIKE)
+  )
 
   const { data, loading, refetch } = useQuery<WalletBalance>(WALLET_BALANCE, {
     fetchPolicy: 'network-only',
@@ -36,7 +67,7 @@ const Wallet = () => {
   const hasStripeAccount = !!data?.viewer?.wallet.stripeAccount?.id
   const hasPaymentPassword = viewer.status?.hasPaymentPassword
 
-  if (loading) {
+  if (exchangeRateLoading || loading) {
     return (
       <Layout.Main>
         <Layout.Header
@@ -65,9 +96,17 @@ const Wallet = () => {
             balanceHKD={balanceHKD}
             canPayout={canPayout}
             hasStripeAccount={hasStripeAccount}
+            currency={currency}
+            exchangeRate={exchangeRateHKD?.rate || 0}
           />
-          <LikeCoinBalance />
-          <USDTBalance />
+          <LikeCoinBalance
+            currency={currency}
+            exchangeRate={exchangeRateLIKE?.rate || 0}
+          />
+          <USDTBalance
+            currency={currency}
+            exchangeRate={exchangeRateUSDT?.rate || 0}
+          />
         </section>
 
         <Form.List>
