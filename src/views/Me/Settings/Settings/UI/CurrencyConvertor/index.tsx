@@ -99,6 +99,10 @@ const CurrencyConvertor = () => {
     </Menu>
   )
 
+  const Title = () => {
+    return <Translate zh_hant="匯率幣別" zh_hans="汇率币别" en="Currency" />
+  }
+
   return (
     <DropdownDialog
       dropdown={{
@@ -107,16 +111,12 @@ const CurrencyConvertor = () => {
       }}
       dialog={{
         content: <Content />,
-        title: (
-          <Translate zh_hant="修改幣種" zh_hans="修改币种" en="Currency" />
-        ),
+        title: <Title />,
       }}
     >
       {({ openDialog, ref }) => (
         <Form.List.Item
-          title={
-            <Translate zh_hant="匯率幣別" zh_hans="汇率币别" en="Currency" />
-          }
+          title={<Title />}
           onClick={openDialog}
           rightText={currency}
           ref={ref}
