@@ -83,7 +83,7 @@ export const ROUTES: {
   { key: 'FOLLOW', pathname: '/follow' },
   { key: 'AUTHORS', pathname: '/authors' },
   { key: 'SEARCH', pathname: '/search' },
-  { key: 'SETTINGS', pathname: '/settings' },
+  { key: 'SETTINGS', pathname: '/me/settings' },
 
   // experient page for recommendation engine testing
   { key: 'RECOMMENDATION', pathname: '/recommendation' },
