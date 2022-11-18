@@ -245,7 +245,7 @@ const SetAmount: React.FC<FormProps> = ({
     return (
       <section>
         <p>
-          ≈&nbsp;{quoteCurrency}&nbsp;$&nbsp;{convertedTotal}
+          ≈&nbsp;{quoteCurrency}&nbsp;{convertedTotal}
         </p>
         {hkdHint}
       </section>
