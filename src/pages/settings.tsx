@@ -1,3 +1,5 @@
-import Settings from '~/views/Settings'
+// import Settings from '~/views/Me/Settings/ViewerSettings'
 
-export default Settings
+import MeSettings from '~/views/Me/Settings/Settings'
+
+export default MeSettings
