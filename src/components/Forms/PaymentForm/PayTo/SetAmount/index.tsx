@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import { BigNumber } from 'ethers'
 import { useFormik } from 'formik'
+import _get from 'lodash/get'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { useAccount, useNetwork, useSwitchNetwork } from 'wagmi'
@@ -9,6 +10,7 @@ import {
   Dialog,
   Form,
   LanguageContext,
+  Spacer,
   Spinner,
   Translate,
   useAllowanceUSDT,
@@ -18,6 +20,7 @@ import {
   ViewerContext,
 } from '~/components'
 import PAY_TO from '~/components/GQL/mutations/payTo'
+import EXCHANGE_RATES from '~/components/GQL/queries/exchangeRates'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
 import updateDonation from '~/components/GQL/updates/donation'
 
@@ -26,6 +29,7 @@ import {
   PAYMENT_MAXIMUM_PAYTO_AMOUNT,
 } from '~/common/enums'
 import {
+  formatAmount,
   numRound,
   validateCurrency,
   validateDonationAmount,
@@ -42,6 +46,7 @@ import {
   PayTo as PayToMutate,
   PayTo_payTo_transaction as PayToTx,
 } from '~/components/GQL/mutations/__generated__/PayTo'
+import { ExchangeRates } from '~/components/GQL/queries/__generated__/ExchangeRates'
 import { WalletBalance } from '~/components/GQL/queries/__generated__/WalletBalance'
 import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
 
@@ -98,6 +103,7 @@ const SetAmount: React.FC<FormProps> = ({
 
   // contexts
   const viewer = useContext(ViewerContext)
+  const quoteCurrency = viewer.settings.currency
   const { lang } = useContext(LanguageContext)
   const { address } = useAccount()
   const { chain } = useNetwork()
@@ -116,6 +122,14 @@ const SetAmount: React.FC<FormProps> = ({
 
   // states
   const [payTo] = useMutation<PayToMutate>(PAY_TO)
+
+  const { data: exchangeRateDate, loading: exchangeRateLoading } =
+    useQuery<ExchangeRates>(EXCHANGE_RATES, {
+      variables: {
+        from: currency,
+        to: quoteCurrency,
+      },
+    })
 
   // HKD balance
   const { data, loading, error } = useQuery<WalletBalance>(WALLET_BALANCE, {
@@ -206,6 +220,37 @@ const SetAmount: React.FC<FormProps> = ({
   })
 
   const isBalanceInsufficient = balance < (values.customAmount || values.amount)
+
+  const ComposedAmountInputHint = () => {
+    const hkdHint = isHKD ? (
+      <section>
+        <Spacer />
+        <Translate
+          zh_hant="付款將由 Stripe 處理，讓你的支持不受地域限制"
+          zh_hans="付款将由 Stripe 处理，让你的支持不受地域限制"
+          en="Stripe will process your payment, so you can support the author wherever you are."
+        />
+      </section>
+    ) : null
+
+    const value = values.customAmount || values.amount
+
+    if (value === 0) {
+      return hkdHint
+    }
+
+    const rate = _get(exchangeRateDate, 'exchangeRates.0.rate', 0)
+    const convertedTotal = formatAmount(value * rate, 2)
+
+    return (
+      <section>
+        <p>
+          ≈&nbsp;{quoteCurrency}&nbsp;{convertedTotal}
+        </p>
+        {hkdHint}
+      </section>
+    )
+  }
 
   /**
    * useEffect Hooks
@@ -304,20 +349,14 @@ const SetAmount: React.FC<FormProps> = ({
             }
           },
           error: errors.amount,
-          hint: isHKD ? (
-            <Translate
-              zh_hant="付款將由 Stripe 處理，讓你的支持不受地域限制"
-              zh_hans="付款将由 Stripe 处理，让你的支持不受地域限制"
-              en="Stripe will process your payment, so you can support the author wherever you are."
-            />
-          ) : null,
+          hint: <ComposedAmountInputHint />,
           ref: customInputRef,
         }}
       />
     </Form>
   )
 
-  if (loading) {
+  if (exchangeRateLoading || loading) {
     return <Spinner />
   }
 
