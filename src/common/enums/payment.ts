@@ -32,6 +32,12 @@ export enum PAYMENT_CURRENCY {
   USDT = 'USDT',
 }
 
+export enum QUOTE_CURRENCY {
+  TWD = 'TWD',
+  HKD = 'HKD',
+  USD = 'USD',
+}
+
 export enum CHAIN {
   POLYGON = 'Polygon',
 }
