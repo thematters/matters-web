@@ -225,7 +225,7 @@ const TagDetail = ({ tag }: { tag: TagFragment }) => {
         </Tabs>
 
         {(isHottest || isLatest || isSelected) && (
-          <TagDetailArticles tagId={tag.id} feedType={feedType} />
+          <TagDetailArticles tag={tag} feedType={feedType} />
         )}
 
         {isCreators && <DynamicCommunity id={tag.id} isOwner={isOwner} />}

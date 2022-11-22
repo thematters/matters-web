@@ -1,13 +1,6 @@
 import gql from 'graphql-tag'
 
-import {
-  IconAdd24,
-  Menu,
-  TextIcon,
-  Translate,
-  useMutation,
-  useRoute,
-} from '~/components'
+import { IconAdd24, Menu, TextIcon, Translate, useMutation } from '~/components'
 
 import { ADD_TOAST } from '~/common/enums'
 
@@ -46,11 +39,11 @@ const fragments = {
 
 const SetTagSelectedButton = ({
   article,
+  tagId,
 }: {
   article: SetTagSelectedButtonArticle
+  tagId: string
 }) => {
-  const { getQuery } = useRoute()
-  const tagId = getQuery('tagId')
   const [update] = useMutation<SetTagSelected>(SET_TAG_SELECTED, {
     variables: { id: tagId, articles: [article.id] },
   })

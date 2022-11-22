@@ -7,7 +7,6 @@ import {
   TextIcon,
   Translate,
   useMutation,
-  useRoute,
 } from '~/components'
 import updateTagArticlesCount from '~/components/GQL/updates/tagArticlesCount'
 
@@ -44,16 +43,19 @@ const fragments = {
   `,
 }
 
-const RemoveTagButton = ({ article }: { article: RemoveTagButtonArticle }) => {
-  const { getQuery } = useRoute()
-  const id = getQuery('tagId')
-
+const RemoveTagButton = ({
+  article,
+  tagId,
+}: {
+  article: RemoveTagButtonArticle
+  tagId: string
+}) => {
   const [deleteArticlesTags] = useMutation<DeleteArticlesTags>(
     DELETE_ARTICLES_TAGS,
     {
-      variables: { id, articles: [article.id] },
+      variables: { id: tagId, articles: [article.id] },
       update: (cache) => {
-        updateTagArticlesCount({ cache, type: 'decrement', id })
+        updateTagArticlesCount({ cache, type: 'decrement', id: tagId })
       },
     }
   )
