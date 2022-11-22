@@ -62,6 +62,7 @@ export const ERROR_CODES = {
 
   // Verification Code
   CODE_INVALID: 'CODE_INVALID',
+  CODE_INACTIVE: 'CODE_INACTIVE',
   CODE_EXPIRED: 'CODE_EXPIRED',
 
   // GQL
