@@ -1,10 +1,4 @@
-import {
-  Dialog,
-  Translate,
-  useDialogSwitch,
-  useMutation,
-  // useRoute,
-} from '~/components'
+import { Dialog, Translate, useDialogSwitch, useMutation } from '~/components'
 import UPDATE_TAG_SETTING from '~/components/GQL/mutations/updateTagSetting'
 
 import { ADD_TOAST } from '~/common/enums'
@@ -20,8 +14,6 @@ interface Props {
 const BaseDialog = ({ id, isOwner, children }: Props) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
-  // const { getQuery } = useRoute()
-  // const id = getQuery('tagId')
   const [update, { loading }] =
     useMutation<UpdateTagSetting>(UPDATE_TAG_SETTING)
 
