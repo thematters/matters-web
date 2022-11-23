@@ -16,10 +16,14 @@ import { analytics, formatAmount } from '~/common/utils'
 
 import styles from './styles.css'
 
+import { QuoteCurrency } from '@/__generated__/globalTypes'
+
 interface FiatCurrencyProps {
   balanceHKD: number
   canPayout: boolean
   hasStripeAccount: boolean
+  currency: QuoteCurrency
+  exchangeRate: number
 }
 
 interface ItemProps {
@@ -85,6 +89,8 @@ export const FiatCurrencyBalance: React.FC<FiatCurrencyProps> = ({
   balanceHKD,
   canPayout,
   hasStripeAccount,
+  currency,
+  exchangeRate,
 }) => {
   const Content = ({
     isInDropdown,
@@ -152,6 +158,8 @@ export const FiatCurrencyBalance: React.FC<FiatCurrencyProps> = ({
                     <CurrencyFormatter
                       value={formatAmount(balanceHKD)}
                       currency="HKD"
+                      subCurrency={currency}
+                      subValue={formatAmount(balanceHKD * exchangeRate, 2)}
                     />
                   </TextIcon>
                   <style jsx>{styles}</style>

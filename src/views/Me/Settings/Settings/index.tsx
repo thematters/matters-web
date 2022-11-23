@@ -1,10 +1,27 @@
-import { Head, Layout, PullToRefresh, Spacer } from '~/components'
+import React, { useContext } from 'react'
 
+import {
+  Head,
+  Layout,
+  PullToRefresh,
+  Spacer,
+  ViewerContext,
+} from '~/components'
+
+// import { redirectToLogin } from '~/common/utils'
+
+import AnonymousSettings from '../AnonymousSettings'
 import AccountSettings from './Account'
 import UISettings from './UI'
 import WalletSettings from './Wallet'
 
 const Settings = () => {
+  const viewer = useContext(ViewerContext)
+
+  if (viewer.privateFetched && !viewer.isAuthed) {
+    return <AnonymousSettings />
+  }
+
   return (
     <Layout.Main bgColor="grey-lighter">
       <Layout.Header

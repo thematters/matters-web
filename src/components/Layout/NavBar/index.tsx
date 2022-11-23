@@ -79,7 +79,7 @@ const NavBar = () => {
             icon={<IconNavSettings24 size="md" />}
             activeIcon={<IconNavSettings24 size="md" color="green" />}
             active={isInSettings}
-            href={PATHS.SETTINGS}
+            href={PATHS.ME_SETTINGS}
           />
         )}
       </ul>

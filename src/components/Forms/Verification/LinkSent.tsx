@@ -41,9 +41,9 @@ export const VerificationLinkSent = ({
           />
           <br />
           <Translate
-            zh_hant="快去你的電子信箱看看吧！"
-            zh_hans="快去你的邮箱看看吧！"
-            en="Let's check your inbox!"
+            zh_hant="連結有效期 20 分鐘，快去電子信箱看看吧！"
+            zh_hans="连结有效期 20 分钟，快去邮箱看看吧！"
+            en="Link is valid for 20 minutes. Let's check your inbox!"
           />
         </p>
       </Dialog.Message>

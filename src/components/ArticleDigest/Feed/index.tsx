@@ -115,12 +115,15 @@ type MemoizedArticleDigestFeed = React.MemoExoticComponent<
 
 export const ArticleDigestFeed = React.memo(
   BaseArticleDigestFeed,
-  ({ article: prevArticle }, { article }) => {
+  ({ article: prevArticle, ...prevProps }, { article, ...props }) => {
     return (
       prevArticle.subscribed === article.subscribed &&
       prevArticle.articleState === article.articleState &&
       prevArticle.sticky === article.sticky &&
-      prevArticle.author.isFollowee === article.author.isFollowee
+      prevArticle.author.isFollowee === article.author.isFollowee &&
+      prevProps.hasSetTagSelected === props.hasSetTagSelected &&
+      prevProps.hasSetTagUnselected === props.hasSetTagUnselected &&
+      prevProps.hasRemoveTag === props.hasRemoveTag
     )
   }
 ) as MemoizedArticleDigestFeed

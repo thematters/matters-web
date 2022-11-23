@@ -110,7 +110,7 @@ const SideNav = () => {
             activeIcon={<IconNavSettings24 size="md" color="green" />}
             active={isInSettings}
             isMediumUp={isMediumUp}
-            href={PATHS.SETTINGS}
+            href={PATHS.ME_SETTINGS}
           />
         )}
 
