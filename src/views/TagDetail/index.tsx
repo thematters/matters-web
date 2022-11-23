@@ -80,6 +80,14 @@ const TagDetail = ({ tag }: { tag: TagFragment }) => {
     setFeedType(newType)
   }
 
+  useEffect(() => {
+    setFeedType(
+      hasSelectedFeed && qsType === 'selected'
+        ? 'selected'
+        : qsType || 'hottest'
+    )
+  }, [qsType])
+
   const isSelected = feedType === 'selected'
   const isHottest = feedType === 'hottest'
   const isLatest = feedType === 'latest'
