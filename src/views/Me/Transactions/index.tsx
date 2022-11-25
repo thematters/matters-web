@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-// import { useState } from 'react'
+import { useState } from 'react'
 
 import {
   EmptyTransaction,
@@ -9,7 +9,9 @@ import {
   Layout,
   List,
   Spinner,
+  Tabs,
   Transaction,
+  Translate,
 } from '~/components'
 
 import { analytics, mergeConnections } from '~/common/utils'
@@ -17,7 +19,6 @@ import { analytics, mergeConnections } from '~/common/utils'
 // import { Currency, CurrencySwitch } from './CurrencySwitch'
 import styles from './styles.css'
 
-// import { TransactionCurrency } from '@/__generated__/globalTypes'
 import { MeTransactions } from './__generated__/MeTransactions'
 
 const ME_TRANSACTIONS = gql`
@@ -50,8 +51,20 @@ const ME_TRANSACTIONS = gql`
   ${Transaction.fragments.transaction}
 `
 
+export enum Purpose {
+  ALL = 'all',
+  DONATION = 'donation',
+  SUBSCRIPTION = 'subscriptionSplit',
+}
+
 const BaseTransactions = () => {
   // const [currencyType, setCurrencyType] = useState<Currency>(Currency.ALL)
+  const [purpose, setPurpose] = useState<Purpose>(Purpose.ALL)
+
+  const isALL = purpose === Purpose.ALL
+  const isDonaion = purpose === Purpose.DONATION
+  const isSubscription = purpose === Purpose.SUBSCRIPTION
+
   const { data, loading, fetchMore, refetch } = useQuery<MeTransactions>(
     ME_TRANSACTIONS,
     {
@@ -109,12 +122,25 @@ const BaseTransactions = () => {
       loadMore={loadMore}
       pullToRefresh={refetch}
     >
-      {/* <section className="CurrencySwitch">
-        <CurrencySwitch
-          currency={currencyType}
-          setCurrency={(c) => setCurrencyType(c)}
-        />
-      </section> */}
+      <Tabs sticky>
+        <Tabs.Tab selected={isALL} onClick={() => setPurpose(Purpose.ALL)}>
+          <Translate zh_hans="全部" zh_hant="全部" en="All" />
+        </Tabs.Tab>
+
+        <Tabs.Tab
+          selected={isDonaion}
+          onClick={() => setPurpose(Purpose.DONATION)}
+        >
+          <Translate zh_hans="支持" zh_hant="支持" en="Support" />
+        </Tabs.Tab>
+
+        <Tabs.Tab
+          selected={isSubscription}
+          onClick={() => setPurpose(Purpose.SUBSCRIPTION)}
+        >
+          <Translate id="subscriptions" />
+        </Tabs.Tab>
+      </Tabs>
 
       <List>
         {edges.map(({ node, cursor }) => (
