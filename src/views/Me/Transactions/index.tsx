@@ -65,20 +65,18 @@ export enum Purpose {
   SUBSCRIPTION = 'subscriptionSplit',
 }
 
-const BaseTransactions = () => {
-  const [currencyType, setCurrencyType] = useState<Currency>(Currency.ALL)
-  const [purpose, setPurpose] = useState<Purpose>(Purpose.ALL)
+interface BaseTransactionsProps {
+  currency: Currency
+  purpose: Purpose
+}
 
-  const isALL = purpose === Purpose.ALL
-  const isDonaion = purpose === Purpose.DONATION
-  const isSubscription = purpose === Purpose.SUBSCRIPTION
-
+const BaseTransactions = ({ currency, purpose }: BaseTransactionsProps) => {
   const { data, loading, fetchMore, refetch } = useQuery<MeTransactions>(
     ME_TRANSACTIONS,
     {
       variables: {
-        currency: currencyType === Currency.ALL ? undefined : currencyType,
-        purpose: isALL ? undefined : purpose,
+        currency: currency === Currency.ALL ? undefined : currency,
+        purpose: purpose === Purpose.ALL ? undefined : purpose,
       },
       fetchPolicy: 'network-only',
     }
@@ -123,13 +121,43 @@ const BaseTransactions = () => {
       loadMore={loadMore}
       pullToRefresh={refetch}
     >
+      <List>
+        {edges.map(({ node, cursor }) => (
+          <List.Item key={cursor}>
+            <Transaction tx={node} />
+          </List.Item>
+        ))}
+      </List>
+      <style jsx>{styles}</style>
+    </InfiniteScroll>
+  )
+}
+
+const Transactions = () => {
+  const [currency, setCurrency] = useState<Currency>(Currency.ALL)
+  const [purpose, setPurpose] = useState<Purpose>(Purpose.ALL)
+
+  const isALL = purpose === Purpose.ALL
+  const isDonaion = purpose === Purpose.DONATION
+  const isSubscription = purpose === Purpose.SUBSCRIPTION
+
+  return (
+    <Layout.Main>
+      <Layout.Header
+        left={<Layout.Header.BackButton />}
+        right={<Layout.Header.Title id="paymentTransactions" />}
+      />
+
+      <Head title={{ id: 'paymentTransactions' }} />
+
       <Tabs
         sticky
         side={
+          // TODO: hide when purpose is subscription?
           <section className="CurrencySwitch">
             <CurrencySwitch
-              currency={currencyType}
-              setCurrency={(c) => setCurrencyType(c)}
+              currency={currency}
+              setCurrency={(c) => setCurrency(c)}
             />
           </section>
         }
@@ -152,30 +180,9 @@ const BaseTransactions = () => {
           <Translate id="subscriptions" />
         </Tabs.Tab>
       </Tabs>
-
-      <List>
-        {edges.map(({ node, cursor }) => (
-          <List.Item key={cursor}>
-            <Transaction tx={node} />
-          </List.Item>
-        ))}
-      </List>
-      <style jsx>{styles}</style>
-    </InfiniteScroll>
+      <BaseTransactions currency={currency} purpose={purpose} />
+    </Layout.Main>
   )
 }
-
-const Transactions = () => (
-  <Layout.Main>
-    <Layout.Header
-      left={<Layout.Header.BackButton />}
-      right={<Layout.Header.Title id="paymentTransactions" />}
-    />
-
-    <Head title={{ id: 'paymentTransactions' }} />
-
-    <BaseTransactions />
-  </Layout.Main>
-)
 
 export default Transactions
