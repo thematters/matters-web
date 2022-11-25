@@ -16,7 +16,7 @@ import {
 
 import { analytics, mergeConnections } from '~/common/utils'
 
-// import { Currency, CurrencySwitch } from './CurrencySwitch'
+import { Currency, CurrencySwitch } from './CurrencySwitch'
 import styles from './styles.css'
 
 import { MeTransactions } from './__generated__/MeTransactions'
@@ -58,7 +58,7 @@ export enum Purpose {
 }
 
 const BaseTransactions = () => {
-  // const [currencyType, setCurrencyType] = useState<Currency>(Currency.ALL)
+  const [currencyType, setCurrencyType] = useState<Currency>(Currency.ALL)
   const [purpose, setPurpose] = useState<Purpose>(Purpose.ALL)
 
   const isALL = purpose === Purpose.ALL
@@ -103,26 +103,23 @@ const BaseTransactions = () => {
     })
   }
 
-  // let filteredEdges = edges
-  // if (currencyType === Currency.HKD) {
-  //   filteredEdges = edges.filter(
-  //     (e) => e.node.currency === TransactionCurrency.HKD
-  //   )
-  // }
-
-  // if (currencyType === Currency.LIKE) {
-  //   filteredEdges = edges.filter(
-  //     (e) => e.node.currency === TransactionCurrency.LIKE
-  //   )
-  // }
-
   return (
     <InfiniteScroll
       hasNextPage={pageInfo.hasNextPage}
       loadMore={loadMore}
       pullToRefresh={refetch}
     >
-      <Tabs sticky>
+      <Tabs
+        sticky
+        side={
+          <section className="CurrencySwitch">
+            <CurrencySwitch
+              currency={currencyType}
+              setCurrency={(c) => setCurrencyType(c)}
+            />
+          </section>
+        }
+      >
         <Tabs.Tab selected={isALL} onClick={() => setPurpose(Purpose.ALL)}>
           <Translate zh_hans="全部" zh_hant="全部" en="All" />
         </Tabs.Tab>
