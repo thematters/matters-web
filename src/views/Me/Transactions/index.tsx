@@ -22,7 +22,11 @@ import styles from './styles.css'
 import { MeTransactions } from './__generated__/MeTransactions'
 
 const ME_TRANSACTIONS = gql`
-  query MeTransactions($after: String) {
+  query MeTransactions(
+    $after: String
+    $purpose: TransactionPurpose
+    $currency: TransactionCurrency
+  ) {
     viewer {
       id
       wallet {
@@ -30,7 +34,11 @@ const ME_TRANSACTIONS = gql`
           input: {
             first: 20
             after: $after
-            states: [canceled, failed, pending, succeeded]
+            filter: {
+              states: [canceled, failed, pending, succeeded]
+              purpose: $purpose
+              currency: $currency
+            }
           }
         ) {
           pageInfo {
@@ -68,6 +76,10 @@ const BaseTransactions = () => {
   const { data, loading, fetchMore, refetch } = useQuery<MeTransactions>(
     ME_TRANSACTIONS,
     {
+      variables: {
+        currency: currencyType === Currency.ALL ? undefined : currencyType,
+        purpose: isALL ? undefined : purpose,
+      },
       fetchPolicy: 'network-only',
     }
   )
@@ -93,7 +105,9 @@ const BaseTransactions = () => {
       location: edges.length,
     })
     return fetchMore({
-      variables: { after: pageInfo.endCursor },
+      variables: {
+        after: pageInfo.endCursor,
+      },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
           oldData: previousResult,
