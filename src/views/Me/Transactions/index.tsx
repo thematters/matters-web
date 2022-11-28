@@ -4,6 +4,9 @@ import { useState } from 'react'
 
 import {
   EmptyTransaction,
+  EmptyTransactionCurrency,
+  EmptyTransactionSubscription,
+  EmptyTransactionSupport,
   Head,
   InfiniteScroll,
   Layout,
@@ -94,6 +97,18 @@ const BaseTransactions = ({ currency, purpose }: BaseTransactionsProps) => {
   const { edges, pageInfo } = data.viewer.wallet.transactions
 
   if (!edges || edges.length <= 0 || !pageInfo) {
+    if (currency !== Currency.ALL) {
+      return <EmptyTransactionCurrency />
+    }
+
+    if (purpose === Purpose.DONATION) {
+      return <EmptyTransactionSupport />
+    }
+
+    if (purpose === Purpose.SUBSCRIPTION) {
+      return <EmptyTransactionSubscription />
+    }
+
     return <EmptyTransaction />
   }
 
