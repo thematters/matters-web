@@ -10,8 +10,9 @@
   "license": "Apache-2.0",
   "scripts": {
     "dev": "PORT=\"${PORT:-3000}\"; next -p $PORT",
-    "test:prepare": "playwright install --with-deps",
     "test": "playwright test",
+    "test:prepare": "playwright install --with-deps",
+    "test:debug": "playwright test --debug",
     "start": "PORT=\"${PORT:-3000}\"; next start -p $PORT",
     "build": "NODE_ENV=production next build",
     "export": "next export",

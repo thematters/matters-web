@@ -1,16 +1,13 @@
-name: Test
+name: Test Build
 
 on:
   push:
     branches-ignore:
       - develop
       - stage
-env:
-  MATTERS_TESTING_ACCOUNT_EMAIL: ${{ secrets.MATTERS_TESTING_ACCOUNT_EMAIL }}
-  MATTERS_TESTING_ACCOUNT_PASSWORD: ${{ secrets.MATTERS_TESTING_ACCOUNT_PASSWORD }}
 
 jobs:
-  build_and_test:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
@@ -52,17 +49,3 @@ jobs:
 
       - name: Build
         run: cp .env.dev .env && npm run build
-
-      - name: Install Playwright Browsers
-        run: npm run test:prepare
-
-      - name: Run Playwright tests
-        run: npm run test
-
-      - name: Output Playwright tests
-        uses: actions/upload-artifact@v2
-        if: always()
-        with:
-          name: playwright-report
-          path: playwright-report/
-          retention-days: 30
