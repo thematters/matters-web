@@ -54,10 +54,10 @@ jobs:
         run: cp .env.dev .env && npm run build
 
       - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+        run: npm run test:prepare
 
       - name: Run Playwright tests
-        run: MATTERS_TESTING_ACCOUNT_EMAIL=${{ secrets.MATTERS_TESTING_ACCOUNT_EMAIL }} MATTERS_TESTING_ACCOUNT_PASSWORD=${{ secrets.MATTERS_TESTING_ACCOUNT_PASSWORD }} npx playwright test
+        run: npm run test
 
       - name: Output Playwright tests
         uses: actions/upload-artifact@v2
