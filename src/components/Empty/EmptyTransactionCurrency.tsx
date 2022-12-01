@@ -1,8 +1,8 @@
-import { Empty, IconPrice12, Translate } from '~/components'
+import { Empty, IconPrice64, Translate } from '~/components'
 
 export const EmptyTransactionCurrency = () => (
   <Empty
-    icon={<IconPrice12 size="xxl" />}
+    icon={<IconPrice64 size="xxl" />}
     description={
       <Translate
         zh_hant="還沒有此幣種記錄"
