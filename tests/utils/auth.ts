@@ -1,6 +1,6 @@
 import { expect, Page } from '@playwright/test'
 
-export const loginWithDialog = async ({
+export const login = async ({
   email = process.env.PLAYWRIGHT_AUTH_EMAIL as string,
   password = process.env.PLAYWRIGHT_AUTH_PWD as string,
   targetUrl = '/' as string,
