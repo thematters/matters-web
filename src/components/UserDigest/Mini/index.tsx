@@ -95,7 +95,7 @@ const Mini = ({
     return (
       <span
         className={containerClasses}
-        data-test-id={TEST_ID.USER_DIGEST_MINI}
+        data-test-id={TEST_ID.DIGEST_USER_MINI}
       >
         {hasAvatar && <Avatar size={avatarSize} />}
 
@@ -117,7 +117,7 @@ const Mini = ({
       {...path}
       disabled={disabled}
       onClick={onClick}
-      testId={TEST_ID.USER_DIGEST_MINI}
+      testId={TEST_ID.DIGEST_USER_MINI}
     >
       <section className={containerClasses}>
         {hasAvatar && <Avatar size={avatarSize} user={user} />}

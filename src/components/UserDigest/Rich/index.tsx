@@ -73,7 +73,7 @@ const Rich = ({
       <Card
         spacing={['tight', 'tight']}
         {...cardProps}
-        testId={TEST_ID.USER_DIGEST_RICH}
+        testId={TEST_ID.DIGEST_USER_RICH}
       >
         <section className={containerClasses}>
           <span className="avatar">
@@ -103,7 +103,7 @@ const Rich = ({
       {...path}
       spacing={['tight', 'tight']}
       {...cardProps}
-      testId={TEST_ID.USER_DIGEST_RICH}
+      testId={TEST_ID.DIGEST_USER_RICH}
     >
       <section className={containerClasses}>
         <Link {...path}>

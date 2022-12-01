@@ -53,7 +53,7 @@ export const ArticleDigestCard = ({
       bgActiveColor={cover ? undefined : 'grey-lighter'}
       borderRadius="xtight"
       onClick={onClick}
-      testId={TEST_ID.ARTICLE_DIGEST_CARD}
+      testId={TEST_ID.DIGEST_ARTICLE_CARD}
     >
       <section
         className={containerClasses}

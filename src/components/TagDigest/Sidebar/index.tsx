@@ -51,7 +51,7 @@ const Sidebar = ({ tag, ...cardProps }: TagDigestSidebarProps) => {
       bgActiveColor="grey-lighter"
       borderRadius="xtight"
       {...cardProps}
-      testId={TEST_ID.TAG_DIGEST_SIDEBAR}
+      testId={TEST_ID.DIGEST_TAG_SIDEBAR}
     >
       <section className="container">
         <section className="cover">

@@ -1,14 +1,16 @@
 export enum TEST_ID {
-  // components
-  ARTICLE_DIGEST_CARD = 'ARTICLE_DIGEST_CARD',
-  ARTICLE_DIGEST_FEED = 'ARTICLE_DIGEST_FEED',
-  ARTICLE_DIGEST_SIDEBAR = 'ARTICLE_DIGEST_SIDEBAR',
-  ARTICLE_DIGEST_TITLE = 'ARTICLE_DIGEST_TITLE',
-  USER_DIGEST_MINI = 'USER_DIGEST_MINI',
-  USER_DIGEST_PLAIN = 'USER_DIGEST_PLAIN',
-  USER_DIGEST_RICH = 'USER_DIGEST_RICH',
-  USER_DIGEST_VERBOSE = 'USER_DIGEST_VERBOSE',
-  TAG_DIGEST_FEED = 'TAG_DIGEST_FEED',
-  TAG_DIGEST_RICH = 'TAG_DIGEST_RICH',
-  TAG_DIGEST_SIDEBAR = 'TAG_DIGEST_SIDEBAR',
+  // digests
+  DIGEST_ARTICLE_CARD = 'digest/article/card',
+  DIGEST_ARTICLE_FEED = 'digest/article/feed',
+  DIGEST_ARTICLE_SIDEBAR = 'digest/article/sidebar',
+  DIGEST_ARTICLE_TITLE = 'digest/article/title',
+  DIGEST_USER_MINI = 'digest/user/mini',
+  DIGEST_USER_PLAIN = 'digest/user/plain',
+  DIGEST_USER_RICH = 'digest/user/rich',
+  DIGEST_USER_VERBOSE = 'digest/user/verbose',
+  DIGEST_TAG_FEED = 'digest/tag/feed',
+  DIGEST_TAG_RICH = 'digest/tag/rich',
+  DIGEST_TAG_SIDEBAR = 'digest/tag/sidebar',
+  // dialogs
+  DIALOG_AUTH = 'dialog/auth',
 }

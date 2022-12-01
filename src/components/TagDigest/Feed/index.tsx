@@ -66,7 +66,7 @@ const Feed = ({ tag, ...cardProps }: TagDigestFeedProps) => {
       bgColor="none"
       bgActiveColor="grey-lighter"
       borderRadius="xtight"
-      testId={TEST_ID.TAG_DIGEST_FEED}
+      testId={TEST_ID.DIGEST_TAG_FEED}
       {...cardProps}
     >
       <section className="container">

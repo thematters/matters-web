@@ -74,7 +74,7 @@ const Verbose = ({
       <Card
         spacing={['tight', 'tight']}
         {...cardProps}
-        testId={TEST_ID.USER_DIGEST_VERBOSE}
+        testId={TEST_ID.DIGEST_USER_VERBOSE}
       >
         <section className={containerClasses}>
           <span className="avatar">
@@ -104,7 +104,7 @@ const Verbose = ({
       {...path}
       spacing={['tight', 'tight']}
       {...cardProps}
-      testId={TEST_ID.USER_DIGEST_VERBOSE}
+      testId={TEST_ID.DIGEST_USER_VERBOSE}
     >
       <section className={containerClasses}>
         <Link {...path}>

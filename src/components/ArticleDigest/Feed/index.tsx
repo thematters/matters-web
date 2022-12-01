@@ -65,7 +65,7 @@ const BaseArticleDigestFeed = ({
       {...path}
       spacing={['base', 'base']}
       onClick={onClick}
-      testId={TEST_ID.ARTICLE_DIGEST_FEED}
+      testId={TEST_ID.DIGEST_ARTICLE_FEED}
     >
       {header ||
         (hasCircle && circle && (

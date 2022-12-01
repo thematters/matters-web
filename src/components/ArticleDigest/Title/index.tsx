@@ -88,7 +88,7 @@ export const ArticleDigestTitle = ({
       textActiveColor={isClickable ? 'green' : undefined}
       disabled={!isClickable}
       onClick={onClick}
-      testId={TEST_ID.ARTICLE_DIGEST_TITLE}
+      testId={TEST_ID.DIGEST_ARTICLE_TITLE}
       {...restProps}
     >
       <>

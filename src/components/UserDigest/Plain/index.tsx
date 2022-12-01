@@ -33,7 +33,7 @@ const Plain = ({ user, disabled, onClick }: UserDigestPlainProps) => {
       {...path}
       disabled={disabled}
       onClick={onClick}
-      testId={TEST_ID.USER_DIGEST_MINI}
+      testId={TEST_ID.DIGEST_USER_MINI}
     >
       <section className={containerClasses}>
         <span className="name">{user.displayName}</span>

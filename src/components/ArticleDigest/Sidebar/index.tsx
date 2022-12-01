@@ -74,7 +74,7 @@ export const ArticleDigestSidebar = ({
       borderRadius="xtight"
       bgColor={hasBackground ? 'grey-lighter' : 'none'}
       onClick={onClick}
-      testId={TEST_ID.ARTICLE_DIGEST_SIDEBAR}
+      testId={TEST_ID.DIGEST_ARTICLE_SIDEBAR}
       {...cardProps}
     >
       <section className={containerClasses}>
