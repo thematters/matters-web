@@ -1,10 +1,12 @@
 import { devices, type PlaywrightTestConfig } from '@playwright/test'
+import dotenv from 'dotenv'
+import path from 'path'
 
-/**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-// require('dotenv').config();
+dotenv.config({ path: path.resolve(__dirname, './', '.env.local') })
+
+const LOCALE = 'en-US'
+const isCI = process.env.PLAYWRIGHT_RUNTIME_ENV === 'ci'
+const isLocal = process.env.PLAYWRIGHT_RUNTIME_ENV === 'local'
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -23,15 +25,16 @@ const config: PlaywrightTestConfig = {
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
-  forbidOnly: !!process.env.CI,
+  forbidOnly: !!isCI,
   /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
+  retries: isCI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
+  workers: isCI ? 2 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
+    testIdAttribute: 'data-test-id',
     /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
     actionTimeout: 0,
     /* Base URL to use in actions like `await page.goto('/')`. */
@@ -46,22 +49,29 @@ const config: PlaywrightTestConfig = {
       name: 'chromium',
       use: {
         ...devices['Desktop Chrome'],
+        locale: LOCALE,
       },
     },
 
-    {
-      name: 'firefox',
-      use: {
-        ...devices['Desktop Firefox'],
-      },
-    },
+    ...(isLocal
+      ? []
+      : [
+          {
+            name: 'firefox',
+            use: {
+              ...devices['Desktop Firefox'],
+              locale: LOCALE,
+            },
+          },
 
-    {
-      name: 'webkit',
-      use: {
-        ...devices['Desktop Safari'],
-      },
-    },
+          {
+            name: 'webkit',
+            use: {
+              ...devices['Desktop Safari'],
+              locale: LOCALE,
+            },
+          },
+        ]),
 
     /* Test against mobile viewports. */
     // {

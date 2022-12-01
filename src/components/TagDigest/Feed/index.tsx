@@ -11,6 +11,7 @@ import {
   TextIcon,
 } from '~/components'
 
+import { TEST_ID } from '~/common/enums'
 import { captureClicks, numAbbr, toPath } from '~/common/utils'
 
 import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
@@ -65,6 +66,7 @@ const Feed = ({ tag, ...cardProps }: TagDigestFeedProps) => {
       bgColor="none"
       bgActiveColor="grey-lighter"
       borderRadius="xtight"
+      testId={TEST_ID.TAG_DIGEST_FEED}
       {...cardProps}
     >
       <section className="container">

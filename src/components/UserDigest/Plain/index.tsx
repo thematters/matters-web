@@ -2,6 +2,7 @@ import classNames from 'classnames'
 
 import { LinkWrapper } from '~/components'
 
+import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 
 import { fragments } from './gql'
@@ -28,7 +29,12 @@ const Plain = ({ user, disabled, onClick }: UserDigestPlainProps) => {
   })
 
   return (
-    <LinkWrapper {...path} disabled={disabled} onClick={onClick}>
+    <LinkWrapper
+      {...path}
+      disabled={disabled}
+      onClick={onClick}
+      testId={TEST_ID.USER_DIGEST_MINI}
+    >
       <section className={containerClasses}>
         <span className="name">{user.displayName}</span>
 

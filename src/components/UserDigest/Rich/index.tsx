@@ -7,6 +7,7 @@ import { Avatar, AvatarProps } from '~/components/Avatar'
 import { FollowUserButton } from '~/components/Buttons/FollowUser'
 import { UnblockUserButton } from '~/components/Buttons/UnblockUser'
 
+import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 
 import { fragments } from './gql'
@@ -69,7 +70,11 @@ const Rich = ({
 
   if (isArchived) {
     return (
-      <Card spacing={['tight', 'tight']} {...cardProps}>
+      <Card
+        spacing={['tight', 'tight']}
+        {...cardProps}
+        testId={TEST_ID.USER_DIGEST_RICH}
+      >
         <section className={containerClasses}>
           <span className="avatar">
             <Avatar size={size === 'sm' ? 'lg' : 'xl'} />
@@ -94,7 +99,12 @@ const Rich = ({
   }
 
   return (
-    <Card {...path} spacing={['tight', 'tight']} {...cardProps}>
+    <Card
+      {...path}
+      spacing={['tight', 'tight']}
+      {...cardProps}
+      testId={TEST_ID.USER_DIGEST_RICH}
+    >
       <section className={containerClasses}>
         <Link {...path}>
           <a className="avatar">

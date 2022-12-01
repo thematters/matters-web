@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 
 import { LinkWrapper, LinkWrapperProps, Translate } from '~/components'
 
+import { TEST_ID } from '~/common/enums'
 import { toPath, UtmParams } from '~/common/utils'
 
 import styles from './styles.css'
@@ -87,6 +88,7 @@ export const ArticleDigestTitle = ({
       textActiveColor={isClickable ? 'green' : undefined}
       disabled={!isClickable}
       onClick={onClick}
+      testId={TEST_ID.ARTICLE_DIGEST_TITLE}
       {...restProps}
     >
       <>

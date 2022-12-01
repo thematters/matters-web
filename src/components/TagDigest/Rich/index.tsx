@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 
 import { Card, CardProps, IconHashTag16, TextIcon } from '~/components'
 
+import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 
 import { TagDigestButtons } from '../Buttons'
@@ -49,7 +50,7 @@ const Rich = ({
   })
 
   return (
-    <Card {...path} {...cardProps}>
+    <Card {...path} {...cardProps} testId={TEST_ID.TAG_DIGEST_RICH}>
       <section className="content">
         <TextIcon
           icon={<IconHashTag16 color="grey" />}

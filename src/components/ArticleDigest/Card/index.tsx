@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import { Card } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 
+import { TEST_ID } from '~/common/enums'
 import {
   countWordsLength,
   makeSummary,
@@ -52,6 +53,7 @@ export const ArticleDigestCard = ({
       bgActiveColor={cover ? undefined : 'grey-lighter'}
       borderRadius="xtight"
       onClick={onClick}
+      testId={TEST_ID.ARTICLE_DIGEST_CARD}
     >
       <section
         className={containerClasses}

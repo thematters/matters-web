@@ -11,6 +11,7 @@ import {
   TextIcon,
 } from '~/components'
 
+import { TEST_ID } from '~/common/enums'
 import { numAbbr, toPath } from '~/common/utils'
 
 import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
@@ -50,6 +51,7 @@ const Sidebar = ({ tag, ...cardProps }: TagDigestSidebarProps) => {
       bgActiveColor="grey-lighter"
       borderRadius="xtight"
       {...cardProps}
+      testId={TEST_ID.TAG_DIGEST_SIDEBAR}
     >
       <section className="container">
         <section className="cover">

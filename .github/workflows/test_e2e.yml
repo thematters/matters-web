@@ -6,8 +6,10 @@ on:
       - develop
       - stage
 env:
-  MATTERS_TESTING_ACCOUNT_EMAIL: ${{ secrets.MATTERS_TESTING_ACCOUNT_EMAIL }}
-  MATTERS_TESTING_ACCOUNT_PASSWORD: ${{ secrets.MATTERS_TESTING_ACCOUNT_PASSWORD }}
+  PLAYWRIGHT_TEST_BASE_URL: 'https://web-develop.matters.news'
+  PLAYWRIGHT_RUNTIME_ENV: 'ci'
+  PLAYWRIGHT_AUTH_EMAIL: ${{ secrets.PLAYWRIGHT_AUTH_EMAIL }}
+  PLAYWRIGHT_AUTH_PWD: ${{ secrets.PLAYWRIGHT_AUTH_PWD }}
 
 jobs:
   e2e:

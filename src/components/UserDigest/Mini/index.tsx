@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import { LinkWrapper, Translate } from '~/components'
 import { Avatar, AvatarProps, AvatarSize } from '~/components/Avatar'
 
+import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 
 import { fragments } from './gql'
@@ -92,7 +93,10 @@ const Mini = ({
 
   if (isArchived) {
     return (
-      <span className={containerClasses}>
+      <span
+        className={containerClasses}
+        data-test-id={TEST_ID.USER_DIGEST_MINI}
+      >
         {hasAvatar && <Avatar size={avatarSize} />}
 
         <span className={nameClasses}>
@@ -109,7 +113,12 @@ const Mini = ({
   }
 
   return (
-    <LinkWrapper {...path} disabled={disabled} onClick={onClick}>
+    <LinkWrapper
+      {...path}
+      disabled={disabled}
+      onClick={onClick}
+      testId={TEST_ID.USER_DIGEST_MINI}
+    >
       <section className={containerClasses}>
         {hasAvatar && <Avatar size={avatarSize} user={user} />}
 

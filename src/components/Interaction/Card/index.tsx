@@ -4,7 +4,7 @@ import { forwardRef, useContext, useRef } from 'react'
 
 import { LanguageContext } from '~/components'
 
-import { KEYCODES } from '~/common/enums'
+import { KEYCODES, TEST_ID } from '~/common/enums'
 import { translate } from '~/common/utils'
 
 import styles from './styles.css'
@@ -32,6 +32,8 @@ export interface CardProps {
   onClick?: () => any
 
   ref?: any
+
+  testId?: TEST_ID
 }
 
 export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
@@ -51,6 +53,8 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
       htmlTarget,
 
       onClick,
+
+      testId,
 
       children,
     },
@@ -152,6 +156,7 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
         onClick={(event) => {
           openLink({ newTab: event.metaKey, event })
         }}
+        {...(testId ? { ['data-test-id']: testId } : {})}
       >
         {children}
 
