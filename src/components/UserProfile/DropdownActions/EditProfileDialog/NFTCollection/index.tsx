@@ -37,7 +37,10 @@ const NFTCollectionItem = ({
       onClick={onClick}
       title={`${name}\n- ${description}`}
     >
-      <Avatar size="xxxl" src={imagePreviewUrl} />
+      <Avatar
+        size="xxxl"
+        src={`https://server-develop.matters.news/img-cache/${imagePreviewUrl}`}
+      />
 
       {index === selectedIndex && (
         <span className="checked">
@@ -73,7 +76,10 @@ const NFTCollection: React.FC<NFTCollectionProps> = ({ nfts, setField }) => {
                 nft={nft}
                 onClick={() => {
                   setSelectedNFTIndex(index)
-                  setField(nft.imagePreviewUrl || '')
+                  setField(
+                    `https://server-develop.matters.news/img-cache/${nft.imagePreviewUrl}` ||
+                      ''
+                  )
                 }}
               />
             </li>
