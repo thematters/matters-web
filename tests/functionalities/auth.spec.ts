@@ -16,24 +16,19 @@ test('can login in homepage dialog', async ({ page }) => {
   const authDialog = page.getByTestId(TEST_ID.DIALOG_AUTH)
   await expect(authDialog.first()).toBeVisible()
 
-  await login({
-    targetUrl: '/', // homepage
-    page,
-  })
+  await login({ page, fillMode: true })
+  await page.waitForNavigation()
+  await expect(page).toHaveURL('/')
 
-  // Expect logged-in user's homepage has "Notification" button on the left side
+  // Expect homepage has "Notification" button on the left side
   await expect(page.getByRole('link', { name: 'Notifications' })).toBeVisible()
 })
 
 test('can login in login page', async ({ page }) => {
-  await page.goto('/login')
+  await login({ page, fillMode: true })
+  await page.waitForNavigation()
+  await expect(page).toHaveURL('/')
 
-  // Login with dialog
-  await login({
-    targetUrl: '/', // homepage
-    page,
-  })
-
-  // Expect logged-in user's homepage has "Notification" button on the left side
+  // Expect homepage has "Notification" button on the left side
   await expect(page.getByRole('link', { name: 'Notifications' })).toBeVisible()
 })
