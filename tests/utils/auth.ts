@@ -25,3 +25,11 @@ export const login = async ({
   // Submit
   await page.getByRole('button', { name: 'Confirm' }).click()
 }
+
+export const logout = async ({ page }: { page: Page }) => {
+  // Click "My Page" button
+  await page.getByRole('button', { name: 'My Page' }).click()
+
+  // Click "Log Out" button
+  await page.getByRole('listitem', { name: 'Log Out' }).click()
+}

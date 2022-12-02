@@ -2,7 +2,8 @@ import { expect, test } from '@playwright/test'
 
 import { TEST_ID } from '~/common/enums'
 
-import { login } from '../utils'
+import { authedTest } from '../fixtures'
+import { login, logout } from '../utils'
 
 test('can login in homepage dialog', async ({ page }) => {
   await page.goto('/')
@@ -32,3 +33,24 @@ test('can login in login page', async ({ page }) => {
   // Expect homepage has "Notification" button on the left side
   await expect(page.getByRole('link', { name: 'Notifications' })).toBeVisible()
 })
+
+authedTest(
+  'can login and logout with worker-scoped fixtures',
+  async ({ page }) => {
+    await page.goto('/')
+
+    // [Logged-in] Expect homepage has "Notification" button on the left side
+    await expect(
+      page.getByRole('link', { name: 'Notifications' })
+    ).toBeVisible()
+
+    // Logout
+    await logout({ page })
+    await page.waitForNavigation()
+    await expect(page).toHaveURL('/')
+
+    // [Logged-out] Expect homepage has "Enter" button
+    const enterButton = page.getByRole('button', { name: 'Enter' })
+    await expect(enterButton).toBeVisible()
+  }
+)
