@@ -7,8 +7,7 @@ import {
   Dropdown,
   IconSearch16,
   LanguageContext,
-  SearchAutoComplete,
-  SearchOverview,
+  SearchQuickResult,
   useRoute,
 } from '~/components'
 
@@ -46,12 +45,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   const [search, setSearch] = useState('')
   const [debouncedSearch] = useDebounce(search, INPUT_DEBOUNCE)
   const textAriaLabel = translate({ id: 'search', lang })
-  const textPlaceholder = translate({
-    zh_hant: '搜尋作品、標籤、作者',
-    zh_hans: '搜索作品、标签、作者',
-    en: 'Search articles, tags and authors',
-    lang,
-  })
+  const textPlaceholder = translate({ id: 'search', lang })
 
   // dropdown
   const [showDropdown, setShowDropdown] = useState(false)
@@ -110,10 +104,8 @@ export const SearchBar: React.FC<SearchBarProps> = ({
           <Dropdown
             content={
               debouncedSearch ? (
-                <SearchAutoComplete searchKey={debouncedSearch} />
-              ) : (
-                <SearchOverview />
-              )
+                <SearchQuickResult searchKey={debouncedSearch} />
+              ) : null
             }
             trigger={undefined}
             appendTo={typeof window !== 'undefined' ? document.body : undefined}
