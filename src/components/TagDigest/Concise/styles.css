@@ -1,5 +1,5 @@
 .content {
-  @mixin flex-center-start;
-
-  gap: 0.625rem;
+  & :global(span + span) {
+    margin-left: 0.625rem;
+  }
 }
