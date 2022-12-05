@@ -26,7 +26,7 @@ test('can login in homepage dialog', async ({ page }) => {
 })
 
 test('can login in login page', async ({ page }) => {
-  await login({ page, fillMode: true })
+  await login({ page })
   await page.waitForNavigation()
   await expect(page).toHaveURL('/')
 
@@ -46,8 +46,6 @@ authedTest(
 
     // Logout
     await logout({ page })
-    await page.waitForNavigation()
-    await expect(page).toHaveURL('/')
 
     // [Logged-out] Expect homepage has "Enter" button
     const enterButton = page.getByRole('button', { name: 'Enter' })

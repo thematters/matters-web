@@ -17,7 +17,7 @@ const users = [
 ]
 
 export const authedTest = baseTest.extend({
-  storageState: async ({ browser }, use, testInfo) => {
+  storageState: async ({ browser, baseURL }, use, testInfo) => {
     // Override storage state, use worker index to look up logged-in info and generate it lazily.
     const fileName = path.join(
       testInfo.project.outputDir,
@@ -25,7 +25,7 @@ export const authedTest = baseTest.extend({
     )
     if (!fs.existsSync(fileName)) {
       // Make sure we are not using any other storage state.
-      const page = await browser.newPage({ storageState: undefined })
+      const page = await browser.newPage({ storageState: undefined, baseURL })
 
       // Login
       await login({

@@ -1,8 +1,9 @@
-import { Page } from '@playwright/test'
+import { expect, Page, Response } from '@playwright/test'
+import _get from 'lodash/get'
 
 export const login = async ({
-  email = process.env.PLAYWRIGHT_AUTH_EMAIL as string,
-  password = process.env.PLAYWRIGHT_AUTH_PWD as string,
+  email = process.env.PLAYWRIGHT_AUTH_EMAIL_1 as string,
+  password = process.env.PLAYWRIGHT_AUTH_PWD_1 as string,
   page,
   fillMode = false,
 }: {
@@ -11,7 +12,7 @@ export const login = async ({
   page: Page
   fillMode?: boolean
 }) => {
-  if (fillMode) {
+  if (!fillMode) {
     await page.goto('/login')
   }
 
@@ -24,6 +25,23 @@ export const login = async ({
 
   // Submit
   await page.getByRole('button', { name: 'Confirm' }).click()
+
+  // Wait for API response from login request
+  await page.waitForResponse(async (res: Response) => {
+    const body = (await res.body()).toString()
+
+    try {
+      const parsedBody = JSON.parse(body)
+      const isLoggedIn = !!_get(parsedBody, 'data.userLogin.token')
+      if (isLoggedIn) {
+        return true
+      }
+    } catch (error) {
+      // console.error(error)
+    }
+
+    return false
+  })
 }
 
 export const logout = async ({ page }: { page: Page }) => {
@@ -31,5 +49,8 @@ export const logout = async ({ page }: { page: Page }) => {
   await page.getByRole('button', { name: 'My Page' }).click()
 
   // Click "Log Out" button
-  await page.getByRole('listitem', { name: 'Log Out' }).click()
+  await page.getByRole('menuitem', { name: 'Log Out' }).click()
+  await page.screenshot({ path: '12rf.png' })
+  await page.waitForNavigation()
+  await expect(page).toHaveURL('/')
 }
