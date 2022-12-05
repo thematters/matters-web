@@ -53,7 +53,7 @@ const SettingsList = ({
       />
 
       <Dialog.Content hasGrow>
-        <ul>
+        <ul role="list">
           <ListItem
             title={<Translate id="addTags" />}
             subTitle={

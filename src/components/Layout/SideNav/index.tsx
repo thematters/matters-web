@@ -60,7 +60,7 @@ const SideNav = () => {
         </Link>
       </section>
 
-      <ul>
+      <ul role="menu">
         <NavListItem
           name={<Translate id="discover" />}
           icon={<IconNavHome24 size="md" />}
@@ -149,7 +149,7 @@ const SideNav = () => {
         )}
 
         {!isInDraftDetail && (
-          <li>
+          <li role="menuitem">
             <WriteButton
               allowed={!viewer.shouldSetupLikerID}
               authed={viewer.isAuthed}

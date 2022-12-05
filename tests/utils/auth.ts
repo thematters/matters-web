@@ -44,9 +44,8 @@ export const login = async ({
 
   // Wait for API response from login request
   await page.waitForResponse(async (res: Response) => {
-    const body = (await res.body()).toString()
-
     try {
+      const body = (await res.body()).toString()
       const parsedBody = JSON.parse(body)
       const isLoggedIn = !!_get(parsedBody, 'data.userLogin.token')
       if (isLoggedIn) {

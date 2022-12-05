@@ -46,7 +46,7 @@ const NavBar = () => {
         />
 
         {!isInDraftDetail && (
-          <li>
+          <li role="menuitem">
             <WriteButton
               allowed={!viewer.shouldSetupLikerID}
               authed={viewer.isAuthed}
