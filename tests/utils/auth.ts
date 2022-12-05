@@ -1,9 +1,25 @@
-import { expect, Page, Response } from '@playwright/test'
+import { Page, Response } from '@playwright/test'
 import _get from 'lodash/get'
 
+export type User = {
+  email: string
+  password: string
+}
+
+export const users = {
+  alice: {
+    email: process.env.PLAYWRIGHT_AUTH_EMAIL_ALICE as string,
+    password: process.env.PLAYWRIGHT_AUTH_PWD_ALICE as string,
+  } as User,
+  bob: {
+    email: process.env.PLAYWRIGHT_AUTH_EMAIL_BOB as string,
+    password: process.env.PLAYWRIGHT_AUTH_PWD_BOB as string,
+  } as User,
+}
+
 export const login = async ({
-  email = process.env.PLAYWRIGHT_AUTH_EMAIL_1 as string,
-  password = process.env.PLAYWRIGHT_AUTH_PWD_1 as string,
+  email = users.alice.email,
+  password = users.alice.password,
   page,
   fillMode = false,
 }: {
@@ -50,7 +66,5 @@ export const logout = async ({ page }: { page: Page }) => {
 
   // Click "Log Out" button
   await page.getByRole('menuitem', { name: 'Log Out' }).click()
-  await page.screenshot({ path: '12rf.png' })
   await page.waitForNavigation()
-  await expect(page).toHaveURL('/')
 }

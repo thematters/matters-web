@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test'
 
 import { TEST_ID } from '~/common/enums'
 
-import { authedTest } from '../fixtures'
+import { test as authedTest } from '../fixtures/auth'
 import { login, logout } from '../utils'
 
 test('can login in homepage dialog', async ({ page }) => {
@@ -36,7 +36,7 @@ test('can login in login page', async ({ page }) => {
 
 authedTest(
   'can login and logout with worker-scoped fixtures',
-  async ({ page }) => {
+  async ({ alicePage: page }) => {
     await page.goto('/')
 
     // [Logged-in] Expect homepage has "Notification" button on the left side

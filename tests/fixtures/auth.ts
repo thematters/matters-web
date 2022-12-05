@@ -1,42 +1,25 @@
-import { test as baseTest } from '@playwright/test'
-import fs from 'fs'
-import path from 'path'
+import { Browser, Page, test as baseTest } from '@playwright/test'
 
-import { login } from '../utils'
-export { expect } from '@playwright/test'
+import { User, users } from '../utils'
 
-const users = [
-  {
-    email: process.env.PLAYWRIGHT_AUTH_EMAIL_1 as string,
-    password: process.env.PLAYWRIGHT_AUTH_PWD_1 as string,
+type AuthFixtures = {
+  alicePage: Page
+  bobPage: Page
+}
+
+const loadUserStorageState = async (user: User, browser: Browser) => {
+  const context = await browser.newContext({
+    storageState: `test-results/storageState-${user.email}.json`,
+  })
+  const page = await context.newPage()
+  return page
+}
+
+export const test = baseTest.extend<AuthFixtures>({
+  alicePage: async ({ browser }, use) => {
+    await use(await loadUserStorageState(users.alice, browser))
   },
-  {
-    email: process.env.PLAYWRIGHT_AUTH_EMAIL_2 as string,
-    password: process.env.PLAYWRIGHT_AUTH_PWD_2 as string,
-  },
-]
-
-export const authedTest = baseTest.extend({
-  storageState: async ({ browser, baseURL }, use, testInfo) => {
-    // Override storage state, use worker index to look up logged-in info and generate it lazily.
-    const fileName = path.join(
-      testInfo.project.outputDir,
-      'storage-' + testInfo.workerIndex
-    )
-    if (!fs.existsSync(fileName)) {
-      // Make sure we are not using any other storage state.
-      const page = await browser.newPage({ storageState: undefined, baseURL })
-
-      // Login
-      await login({
-        email: users[testInfo.workerIndex].email,
-        password: users[testInfo.workerIndex].password,
-        page,
-      })
-
-      await page.context().storageState({ path: fileName })
-      await page.close()
-    }
-    await use(fileName)
+  bobPage: async ({ browser }, use) => {
+    await use(await loadUserStorageState(users.bob, browser))
   },
 })
