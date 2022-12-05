@@ -1,8 +1,10 @@
-import { useContext, useEffect, useState } from 'react'
-import {
-  useAccount,
-  useEnsName
-} from "wagmi";
+import contentHash from '@ensdomains/content-hash'
+import { namehash } from 'ethers/lib/utils'
+import { useContext, useEffect } from 'react'
+import { useAccount, useContract, useEnsName, useSigner } from 'wagmi'
+
+// @ts-ignore
+
 import {
   Avatar,
   Button,
@@ -23,7 +25,9 @@ import {
 } from '~/components'
 import ShareButton from '~/components/Layout/Header/ShareButton'
 
-import { numAbbr } from '~/common/utils'
+import { ADD_TOAST } from '~/common/enums'
+
+import { numAbbr, PublicResolverABI } from '~/common/utils'
 
 import IMAGE_COVER from '@/public/static/images/profile-cover.png'
 
@@ -62,23 +66,24 @@ const RssFeedButton = ({ user }: FingerprintButtonProps) => {
   )
 }
 
-
 export const UserProfile = () => {
   const { getQuery } = useRoute()
   const viewer = useContext(ViewerContext)
-  const { address } = useAccount();
-  const {
-     data: ensName,
-     isError: ensIsError,
-     isLoading: ensIsLoading,
-status
-   } = useEnsName({
-     address: '0xaa25a5ec3970e9b14b4dee47886599c3d2901f29',
-     onSuccess(data) {
-      console.log('Success', data)
-    },
-   })
-  console.log('ens', ensName)
+  const { address } = useAccount()
+  const { data: ensName } = useEnsName({
+    address,
+  })
+
+  const { data: signer } = useSigner()
+
+  // ENS related hooks
+  const eip1577 = useContract({
+    // address: '0xD3ddcCDD3b25A8a7423B5bEe360a42146eb4Baf3', // mainnet  https://etherscan.io/address/0xd3ddccdd3b25a8a7423b5bee360a42146eb4baf3#code
+    address: '0xE264d5bb84bA3b8061ADC38D3D76e6674aB91852', // goerli https://goerli.etherscan.io/address/0xE264d5bb84bA3b8061ADC38D3D76e6674aB91852#code
+    abi: PublicResolverABI,
+    signerOrProvider: signer,
+  })
+
   // public user data
   const userName = getQuery('name')
   const isMe = !userName || viewer.userName === userName
@@ -102,13 +107,30 @@ status
     })
   }, [user?.id, viewer.id])
 
-
-
-  const bindEnsIpns  = () => {    
+  const bindEnsIpns = async () => {
+    if (!eip1577 || !ensName) {
+      return
+    }
+    const ipnsHash = user?.info.ipnsKey
+    const ensNameHash = namehash(ensName as string)
+    const encoded = '0x' + contentHash.encode('ipns-ns', ipnsHash)
+    try {
+      const tx = await eip1577?.setContenthash(ensNameHash, encoded)
+      await tx.wait()
+    } catch (e) {
+      window.dispatchEvent(
+        new CustomEvent(ADD_TOAST, {
+          detail: {
+            color: 'red',
+            content: <Translate zh_hans="设置失败" zh_hant="設置失敗" />,
+          },
+        })
+      )
+    }
   }
   /**
- * Render
- */
+   * Render
+   */
   const LayoutHeader = () => (
     <Layout.Header
       left={<Layout.Header.BackButton mode="black-solid" />}
@@ -279,10 +301,10 @@ status
             <Button
               size={[null, '1.25rem']}
               spacing={[0, 'xtight']}
-             borderColor={'green'}
-             onClick={bindEnsIpns}
+              borderColor={'green'}
+              onClick={bindEnsIpns}
             >
-             ENS 綁定 IPNS {ensName}
+              ENS: {ensName}, 点击綁定 IPNS 吧！
             </Button>
           </section>
         </header>

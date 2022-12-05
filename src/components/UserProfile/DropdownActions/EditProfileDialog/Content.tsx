@@ -29,7 +29,7 @@ import styles from './styles.css'
 import {
   EditProfileDialogUserPrivate,
   EditProfileDialogUserPrivate_info_cryptoWallet_nfts,
-} from './__generatedFRSS__/EditProfileDialogUserPrivate'
+} from './__generated__/EditProfileDialogUserPrivate'
 import { EditProfileDialogUserPublic } from './__generated__/EditProfileDialogUserPublic'
 import { UpdateUserInfoProfile } from './__generated__/UpdateUserInfoProfile'
 
