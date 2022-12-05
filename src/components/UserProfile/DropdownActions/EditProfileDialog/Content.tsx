@@ -29,7 +29,7 @@ import styles from './styles.css'
 import {
   EditProfileDialogUserPrivate,
   EditProfileDialogUserPrivate_info_cryptoWallet_nfts,
-} from './__generated__/EditProfileDialogUserPrivate'
+} from './__generatedFRSS__/EditProfileDialogUserPrivate'
 import { EditProfileDialogUserPublic } from './__generated__/EditProfileDialogUserPublic'
 import { UpdateUserInfoProfile } from './__generated__/UpdateUserInfoProfile'
 
@@ -147,7 +147,6 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
 
   const nfts = user.info.cryptoWallet
     ?.nfts as EditProfileDialogUserPrivate_info_cryptoWallet_nfts[]
-
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       <section className="cover-field">

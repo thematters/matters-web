@@ -1,5 +1,8 @@
-import { useContext, useEffect } from 'react'
-
+import { useContext, useEffect, useState } from 'react'
+import {
+  useAccount,
+  useEnsName
+} from "wagmi";
 import {
   Avatar,
   Button,
@@ -59,10 +62,23 @@ const RssFeedButton = ({ user }: FingerprintButtonProps) => {
   )
 }
 
+
 export const UserProfile = () => {
   const { getQuery } = useRoute()
   const viewer = useContext(ViewerContext)
-
+  const { address } = useAccount();
+  const {
+     data: ensName,
+     isError: ensIsError,
+     isLoading: ensIsLoading,
+status
+   } = useEnsName({
+     address: '0xaa25a5ec3970e9b14b4dee47886599c3d2901f29',
+     onSuccess(data) {
+      console.log('Success', data)
+    },
+   })
+  console.log('ens', ensName)
   // public user data
   const userName = getQuery('name')
   const isMe = !userName || viewer.userName === userName
@@ -73,7 +89,6 @@ export const UserProfile = () => {
     }
   )
   const user = data?.user
-
   // fetch private data
   useEffect(() => {
     if (!viewer.isAuthed || !user) {
@@ -87,9 +102,13 @@ export const UserProfile = () => {
     })
   }, [user?.id, viewer.id])
 
+
+
+  const bindEnsIpns  = () => {    
+  }
   /**
-   * Render
-   */
+ * Render
+ */
   const LayoutHeader = () => (
     <Layout.Header
       left={<Layout.Header.BackButton mode="black-solid" />}
@@ -257,6 +276,14 @@ export const UserProfile = () => {
             {user?.articles.totalCount > 0 && user?.info.ipnsKey && (
               <RssFeedButton user={user} />
             )}
+            <Button
+              size={[null, '1.25rem']}
+              spacing={[0, 'xtight']}
+             borderColor={'green'}
+             onClick={bindEnsIpns}
+            >
+             ENS 綁定 IPNS {ensName}
+            </Button>
           </section>
         </header>
 
