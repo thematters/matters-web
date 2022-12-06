@@ -27,7 +27,7 @@ const config: PlaywrightTestConfig = {
   use: {
     testIdAttribute: 'data-test-id',
     actionTimeout: 0,
-    baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL || 'http://localhost:3000',
+    baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL,
     trace: 'on-first-retry',
   },
   projects: [

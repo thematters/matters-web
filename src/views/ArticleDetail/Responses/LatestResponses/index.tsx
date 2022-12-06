@@ -252,6 +252,8 @@ const LatestResponses = ({ id, lock }: { id: string; lock: boolean }) => {
 
         <div className="latest-responses-switch">
           <Switch
+            name="latest-responses"
+            label={<Translate id="latestResponses" />}
             onChange={() => setArticleOnlyMode(!articleOnlyMode)}
             checked={articleOnlyMode}
             loading={loading}

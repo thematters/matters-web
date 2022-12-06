@@ -1,6 +1,6 @@
 import { Browser, Page, test as baseTest } from '@playwright/test'
 
-import { User, users } from '../utils'
+import { User, users } from '../auth'
 
 type AuthFixtures = {
   alicePage: Page
@@ -15,7 +15,7 @@ const loadUserStorageState = async (user: User, browser: Browser) => {
   return page
 }
 
-export const test = baseTest.extend<AuthFixtures>({
+export const authedTest = baseTest.extend<AuthFixtures>({
   alicePage: async ({ browser }, use) => {
     await use(await loadUserStorageState(users.alice, browser))
   },

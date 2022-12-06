@@ -77,6 +77,8 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
               </h3>
 
               <Switch
+                name="circle"
+                label={<Translate id="addToCircle" />}
                 checked={!!circle}
                 onChange={() =>
                   editAccess(
@@ -164,6 +166,8 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
           </h3>
 
           <Switch
+            name="iscn"
+            label={<Translate id="publishToISCN" />}
             checked={!!iscnPublish}
             onChange={() => {
               togglePublishISCN(!iscnPublish)

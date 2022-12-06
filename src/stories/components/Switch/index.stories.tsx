@@ -14,7 +14,12 @@ const Template: ComponentStory<typeof Switch> = () => {
 
   return (
     <MockedProvider>
-      <Switch checked={checked} onChange={() => setChecked(!checked)} />
+      <Switch
+        name="any"
+        label="any"
+        checked={checked}
+        onChange={() => setChecked(!checked)}
+      />
     </MockedProvider>
   )
 }

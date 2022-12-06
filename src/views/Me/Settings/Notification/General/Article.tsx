@@ -9,65 +9,58 @@ interface ArticleProps {
   ) => void
 }
 
+const NewAppreciationText = () => (
+  <Translate zh_hant="作品被贊賞" zh_hans="作品被赞赏" en="New appreciations" />
+)
+
+const NewBookmarkedText = () => (
+  <Translate
+    zh_hant="作品被收藏"
+    zh_hans="作品被收藏"
+    en="Articles has been bookmarked"
+  />
+)
+
+const NewCollectedText = () => (
+  <Translate
+    zh_hant="作品被關聯"
+    zh_hans="作品被关联"
+    en="Articles has been collected"
+  />
+)
+
 const Article = ({ settings, toggle }: ArticleProps) => (
   <Form.List
     groupName={<Translate zh_hant="作品" zh_hans="作品" en="Article" />}
   >
     <Form.List.Item
-      title={
-        <Translate
-          zh_hant="作品被贊賞"
-          zh_hans="作品被赞赏"
-          en="New appreciations"
-        />
-      }
+      title={<NewAppreciationText />}
       right={
         <Switch
+          name="nofitication-appreciation"
+          label={<NewAppreciationText />}
           checked={settings.articleNewAppreciation}
           onChange={() => toggle('articleNewAppreciation')}
         />
       }
     />
     <Form.List.Item
-      title={
-        <Translate
-          zh_hant="作品被收藏"
-          zh_hans="作品被收藏"
-          en="Articles has been bookmarked"
-        />
-      }
+      title={<NewBookmarkedText />}
       right={
         <Switch
+          name="nofitication-bookmarked"
+          label={NewBookmarkedText}
           checked={settings.articleNewSubscription}
           onChange={() => toggle('articleNewSubscription')}
         />
       }
     />
-    {/* <Form.List.Item
-      title={
-        <Translate
-          zh_hant="收藏的作品有新評論"
-          zh_hans="收藏的作品有新评论"
-          en="Comments on bookmarked articles"
-        />
-      }
-      right={
-        <Switch
-          checked={settings.articleSubscribedNewComment}
-          onChange={() => toggle('articleSubscribedNewComment')}
-        />
-      }
-    /> */}
     <Form.List.Item
-      title={
-        <Translate
-          zh_hant="作品被關聯"
-          zh_hans="作品被关联"
-          en="Articles has been collected"
-        />
-      }
+      title={<NewCollectedText />}
       right={
         <Switch
+          name="nofitication-article-collected"
+          label={<NewCollectedText />}
           checked={settings.articleNewCollected}
           onChange={() => toggle('articleNewCollected')}
         />

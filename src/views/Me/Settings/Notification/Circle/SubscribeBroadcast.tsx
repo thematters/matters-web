@@ -9,33 +9,39 @@ interface SubscribeBroadcastProps {
   ) => void
 }
 
+const NewBroadcastText = () => (
+  <Translate
+    zh_hant="圍爐有新廣播"
+    zh_hans="围炉有新广播"
+    en="New broadcasts"
+  />
+)
+
+const NewBroadcastReplyText = () => (
+  <Translate
+    zh_hant="廣播留言"
+    zh_hans="广播留言"
+    en="New replies to broadcasts"
+  />
+)
+
 const SubscribeBroadcast = ({ settings, toggle }: SubscribeBroadcastProps) => (
   <Form.List
     groupName={<Translate zh_hant="廣播" zh_hans="广播" en="Broadcast" />}
   >
     <Form.List.Item
-      title={
-        <Translate
-          zh_hant="圍爐有新廣播"
-          zh_hans="围炉有新广播"
-          en="New broadcasts"
-        />
-      }
+      title={<NewBroadcastText />}
       right={
         <Switch
+          name="nofitication-broadcast"
+          label={<NewBroadcastText />}
           checked={settings.inCircleNewBroadcast}
           onChange={() => toggle('inCircleNewBroadcast')}
         />
       }
     />
     <Form.List.Item
-      title={
-        <Translate
-          zh_hant="廣播留言"
-          zh_hans="广播留言"
-          en="New replies to broadcasts"
-        />
-      }
+      title={<NewBroadcastReplyText />}
       subtitle={
         <Translate
           zh_hant="成員於廣播留言時通知"
@@ -45,6 +51,8 @@ const SubscribeBroadcast = ({ settings, toggle }: SubscribeBroadcastProps) => (
       }
       right={
         <Switch
+          name="nofitication-broadcast-reply"
+          label={<NewBroadcastReplyText />}
           checked={settings.inCircleNewBroadcastReply}
           onChange={() => toggle('inCircleNewBroadcastReply')}
         />

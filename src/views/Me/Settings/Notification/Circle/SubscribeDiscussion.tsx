@@ -9,6 +9,22 @@ interface SubscribeDiscussionProps {
   ) => void
 }
 
+const NewDiscussionText = () => (
+  <Translate
+    zh_hant="眾聊有新話題"
+    zh_hans="众聊有新话题"
+    en="New discussions"
+  />
+)
+
+const NewDiscussionReplyText = () => (
+  <Translate
+    zh_hant="話題回覆"
+    zh_hans="话题回复"
+    en="New replies to discussions"
+  />
+)
+
 const SubscribeDiscussion = ({
   settings,
   toggle,
@@ -17,13 +33,7 @@ const SubscribeDiscussion = ({
     groupName={<Translate zh_hant="眾聊" zh_hans="众聊" en="Discussion" />}
   >
     <Form.List.Item
-      title={
-        <Translate
-          zh_hant="眾聊有新話題"
-          zh_hans="众聊有新话题"
-          en="New discussions"
-        />
-      }
+      title={<NewDiscussionText />}
       subtitle={
         <Translate
           zh_hant="成員添加新話題時通知"
@@ -33,19 +43,15 @@ const SubscribeDiscussion = ({
       }
       right={
         <Switch
+          name="notification-discussion"
+          label={<NewDiscussionText />}
           checked={settings.inCircleNewDiscussion}
           onChange={() => toggle('inCircleNewDiscussion')}
         />
       }
     />
     <Form.List.Item
-      title={
-        <Translate
-          zh_hant="話題回覆"
-          zh_hans="话题回复"
-          en="New replies to discussions"
-        />
-      }
+      title={<NewDiscussionReplyText />}
       subtitle={
         <Translate
           zh_hant="成員回覆話題時通知"
@@ -55,6 +61,8 @@ const SubscribeDiscussion = ({
       }
       right={
         <Switch
+          name="notification-discussion-reply"
+          label={<NewDiscussionReplyText />}
           checked={settings.inCircleNewDiscussionReply}
           onChange={() => toggle('inCircleNewDiscussionReply')}
         />

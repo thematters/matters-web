@@ -1,54 +1,68 @@
 import { expect, test } from '@playwright/test'
 
-import { TEST_ID } from '~/common/enums'
+import { HomePage } from '../utils'
 
-test('homepage has article feed and scrollable', async ({ page }) => {
-  await page.goto('/')
+test.describe('Homepage', () => {
+  test('has paginated article feed', async ({ page }) => {
+    const home = new HomePage(page)
+    await home.goto()
 
-  // Expect title to be "Matters"
-  await expect(page).toHaveTitle(/Matters/)
+    // Expect title to be "Matters"
+    await expect(page).toHaveTitle(/Matters/)
 
-  // Expect home feed has articles
-  const articles = page.getByTestId(TEST_ID.DIGEST_ARTICLE_FEED)
-  const articleCount = await articles.count()
-  expect(articleCount).toBeGreaterThan(0)
-  await expect(articles.first()).toBeVisible()
+    // Expect home feed has articles
+    const articleCount = await home.feedArticles.count()
+    expect(articleCount).toBeGreaterThan(0)
+    await expect(home.feedArticles.first()).toBeVisible()
 
-  // Scroll to bottom and expect loading more articles
-  await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight))
-  await page.waitForLoadState('networkidle')
-  const newArticles = page.getByTestId(TEST_ID.DIGEST_ARTICLE_FEED)
-  const newArticleCount = await newArticles.count()
-  expect(newArticleCount).toBeGreaterThan(articleCount)
-})
+    // Scroll to bottom and expect loading more articles
+    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight))
+    await page.waitForLoadState('networkidle')
+    await home.getFeedArticles()
+    const newArticleCount = await home.feedArticles.count()
+    expect(newArticleCount).toBeGreaterThan(articleCount)
+  })
 
-test('homepage has article feed and can switch to latest feed', async ({
-  page,
-}) => {
-  await page.goto('/')
+  test('has article feed and can switch to latest feed', async ({ page }) => {
+    const home = new HomePage(page)
+    await home.goto()
 
-  // Expect home feed is a "Trending" feed
-  const trendingTab = page.getByRole('tab').filter({ hasText: 'Trending' })
-  expect(await trendingTab.getAttribute('aria-selected')).toBe('true')
+    // Expect home feed is a "Trending" feed
+    expect(await home.tabTrending.getAttribute('aria-selected')).toBe('true')
 
-  // Switch to "Latest" feed
-  const latestTab = page.getByRole('tab').filter({ hasText: 'Latest' })
-  await latestTab.click()
+    // Switch to "Latest" feed
+    await home.tabLatest.click()
 
-  // Expect home feed is a "Latest" feed and has articles
-  expect(await latestTab.getAttribute('aria-selected')).toBe('true')
-  const latestArticles = page.getByTestId(TEST_ID.DIGEST_ARTICLE_FEED)
-  await expect(latestArticles.first()).toBeVisible()
-})
+    // Expect home feed is a "Latest" feed and has articles
+    expect(await home.tabLatest.getAttribute('aria-selected')).toBe('true')
+    await home.getFeedArticles()
+    await expect(home.feedArticles.first()).toBeVisible()
+  })
 
-test('homepage sidebar has recommended tags and users', async ({ page }) => {
-  await page.goto('/')
+  test('sidebar tags and users can be shuffled', async ({ page }) => {
+    const home = new HomePage(page)
+    await home.goto()
 
-  // Expect the sidebar has recommended tags
-  const tags = page.getByTestId(TEST_ID.DIGEST_TAG_SIDEBAR)
-  await expect(tags.first()).toBeVisible()
+    // Expect the sidebar has recommended tags
+    const firstTag = home.sidebarTags.first()
+    const firstTagText = await firstTag.innerText()
+    await expect(firstTag).toBeVisible()
 
-  // Expect the sidebar has recommended users
-  const users = page.getByTestId(TEST_ID.DIGEST_TAG_SIDEBAR)
-  await expect(users.first()).toBeVisible()
+    // Can shuffle recommended tags
+    await home.shuffleSidebarTags()
+    const newFirstTag = home.sidebarTags.first()
+    const newFirstTagText = await newFirstTag.innerText()
+    expect(firstTagText).not.toEqual(newFirstTagText)
+
+    // Expect the sidebar has recommended users
+    const firstUser = home.sidebarUsers.first()
+    const firstUserText = await firstUser.innerText()
+    await expect(firstUser).toBeVisible()
+
+    // Can shuffle recommended users
+    await home.shuffleSidebarUsers()
+    const newFirstUser = home.sidebarUsers.first()
+    const newFirstUserText = await newFirstUser.innerText()
+    expect(firstUserText).not.toEqual(newFirstUserText)
+  })
 })

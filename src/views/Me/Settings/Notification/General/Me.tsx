@@ -9,6 +9,18 @@ interface MeProps {
   ) => void
 }
 
+const NewMentionText = () => (
+  <Translate
+    zh_hant="作品或評論提及我"
+    zh_hans="作品或评论提及我"
+    en="Mention me"
+  />
+)
+
+const NewFollowerText = () => (
+  <Translate zh_hant="追蹤我" zh_hans="追踪我" en="New followers" />
+)
+
 const Me = ({ settings, toggle }: MeProps) => (
   <Form.List
     groupName={
@@ -16,43 +28,28 @@ const Me = ({ settings, toggle }: MeProps) => (
     }
   >
     <Form.List.Item
-      title={
-        <Translate
-          zh_hant="作品或評論提及我"
-          zh_hans="作品或评论提及我"
-          en="Mention me"
-        />
-      }
+      title={<NewMentionText />}
       right={
-        <Switch checked={settings.mention} onChange={() => toggle('mention')} />
+        <Switch
+          name="nofitication-mention"
+          label={<NewMentionText />}
+          checked={settings.mention}
+          onChange={() => toggle('mention')}
+        />
       }
     />
 
     <Form.List.Item
-      title={<Translate zh_hant="追蹤我" zh_hans="追踪我" en="New followers" />}
+      title={<NewFollowerText />}
       right={
         <Switch
+          name="nofitication-follower"
+          label={<NewFollowerText />}
           checked={settings.userNewFollower}
           onChange={() => toggle('userNewFollower')}
         />
       }
     />
-
-    {/* <Form.List.Item
-      title={
-        <Translate
-          zh_hant="追蹤我的圍爐"
-          zh_hans="追踪我的围炉"
-          en="Circle followers"
-        />
-      }
-      right={
-        <Switch
-          checked={settings.circleNewFollower}
-          onChange={() => toggle('circleNewFollower')}
-        />
-      }
-    /> */}
   </Form.List>
 )
 

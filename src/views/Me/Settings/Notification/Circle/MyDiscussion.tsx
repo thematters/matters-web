@@ -9,18 +9,28 @@ interface MyDiscussionProps {
   ) => void
 }
 
+const DiscussionSubtitleText = () => (
+  <Translate
+    zh_hant="眾聊有新話題"
+    zh_hans="众聊有新话题"
+    en="New discussions"
+  />
+)
+
+const DiscussionReplySubtitleText = () => (
+  <Translate
+    zh_hant="話題回覆"
+    zh_hans="话题回复"
+    en="New replies to discussions"
+  />
+)
+
 const MyDiscussion = ({ settings, toggle }: MyDiscussionProps) => (
   <Form.List
     groupName={<Translate zh_hant="眾聊" zh_hans="众聊" en="Discussion" />}
   >
     <Form.List.Item
-      title={
-        <Translate
-          zh_hant="眾聊有新話題"
-          zh_hans="众聊有新话题"
-          en="New discussions"
-        />
-      }
+      title={<DiscussionSubtitleText />}
       subtitle={
         <Translate
           zh_hant="成員添加新話題時通知"
@@ -30,19 +40,15 @@ const MyDiscussion = ({ settings, toggle }: MyDiscussionProps) => (
       }
       right={
         <Switch
+          name="nofitication-member-discussion"
+          label={<DiscussionSubtitleText />}
           checked={settings.circleMemberNewDiscussion}
           onChange={() => toggle('circleMemberNewDiscussion')}
         />
       }
     />
     <Form.List.Item
-      title={
-        <Translate
-          zh_hant="話題回覆"
-          zh_hans="话题回复"
-          en="New replies to discussions"
-        />
-      }
+      title={<DiscussionReplySubtitleText />}
       subtitle={
         <Translate
           zh_hant="成員回覆話題時通知"
@@ -52,6 +58,8 @@ const MyDiscussion = ({ settings, toggle }: MyDiscussionProps) => (
       }
       right={
         <Switch
+          name="nofitication-member-discussion-reply"
+          label={<DiscussionReplySubtitleText />}
           checked={settings.circleMemberNewDiscussionReply}
           onChange={() => toggle('circleMemberNewDiscussionReply')}
         />

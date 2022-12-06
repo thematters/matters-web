@@ -22,14 +22,19 @@ export const login = async ({
   password = users.alice.password,
   page,
   fillMode = false,
+  target = '/',
 }: {
   email?: string
   password?: string
   page: Page
   fillMode?: boolean
+  target?: string
 }) => {
   if (!fillMode) {
-    await page.goto('/login')
+    target = encodeURIComponent(
+      `${process.env.PLAYWRIGHT_TEST_BASE_URL}${target}`
+    )
+    await page.goto(`/login?target=${target}`)
   }
 
   // Login with email & password

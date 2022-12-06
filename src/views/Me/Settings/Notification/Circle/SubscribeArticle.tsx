@@ -9,20 +9,20 @@ interface SubscribeArticleProps {
   ) => void
 }
 
+const NewCircleArticleText = () => (
+  <Translate zh_hant="圍爐有新作品" zh_hans="围炉有新作品" en="New articles" />
+)
+
 const SubscribeArticle = ({ settings, toggle }: SubscribeArticleProps) => (
   <Form.List
     groupName={<Translate zh_hant="作品" zh_hans="作品" en="Article" />}
   >
     <Form.List.Item
-      title={
-        <Translate
-          zh_hant="圍爐有新作品"
-          zh_hans="围炉有新作品"
-          en="New articles"
-        />
-      }
+      title={<NewCircleArticleText />}
       right={
         <Switch
+          name="nofitication-circle-article"
+          label={<NewCircleArticleText />}
           checked={settings.inCircleNewArticle}
           onChange={() => toggle('inCircleNewArticle')}
         />

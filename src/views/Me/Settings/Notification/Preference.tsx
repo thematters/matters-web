@@ -9,18 +9,20 @@ interface PreferenceProps {
   ) => void
 }
 
+const SubtitleText = () => (
+  <Translate
+    zh_hant="電子信箱通知"
+    zh_hans="邮箱通知"
+    en="Email Notification"
+  />
+)
+
 const Preference = ({ settings, toggle }: PreferenceProps) => (
   <Form.List
     groupName={<Translate zh_hant="郵件通知" zh_hans="邮件通知" en="Email" />}
   >
     <Form.List.Item
-      title={
-        <Translate
-          zh_hant="電子信箱通知"
-          zh_hans="邮箱通知"
-          en="Email Notification"
-        />
-      }
+      title={<SubtitleText />}
       subtitle={
         <Translate
           zh_hant="精選過去 24 小時與你有關的消息"
@@ -29,7 +31,12 @@ const Preference = ({ settings, toggle }: PreferenceProps) => (
         />
       }
       right={
-        <Switch checked={settings.email} onChange={() => toggle('email')} />
+        <Switch
+          name="notification-email"
+          label={<SubtitleText />}
+          checked={settings.email}
+          onChange={() => toggle('email')}
+        />
       }
     />
   </Form.List>
