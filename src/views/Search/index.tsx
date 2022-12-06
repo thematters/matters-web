@@ -1,4 +1,6 @@
-import { useEffect, useState } from 'react'
+import _uniq from 'lodash/uniq'
+import _without from 'lodash/without'
+import { useContext, useEffect, useState } from 'react'
 
 import {
   Head,
@@ -10,9 +12,11 @@ import {
   SearchQuickResult,
   useResponsive,
   useRoute,
+  ViewerContext,
 } from '~/components'
 
-import { toPath } from '~/common/utils'
+import { STORAGE_KEY_SEARCH_HISTORY } from '~/common/enums'
+import { storage, toPath } from '~/common/utils'
 
 import AggregateResults from './AggregateResults'
 // import EmptySearch from './EmptySearch'
@@ -21,6 +25,29 @@ import SearchTags from './SearchTags'
 import SearchUsers from './SearchUsers'
 
 const Search = () => {
+  const viewer = useContext(ViewerContext)
+  const storageKey = STORAGE_KEY_SEARCH_HISTORY + '_' + viewer.id
+
+  const [searchHistory, setSearchHistory] = useState<string[]>([])
+
+  const updateSearchHistory = (value: string[]) => {
+    storage.set(storageKey, value)
+    setSearchHistory(value)
+  }
+
+  const addSearchHistory = (searchKey: string) => {
+    const nsh = _uniq([searchKey, ...(storage.get(storageKey) || [])]).slice(
+      0,
+      20
+    )
+    updateSearchHistory(nsh)
+  }
+
+  // const removeSearchHistory = (searchKey: string) => {
+  //   const nsh = _without(searchHistory, searchKey)
+  //   updateSearchHistory(nsh)
+  // }
+
   const { getQuery, router } = useRoute()
   const type = getQuery('type')
   const q = getQuery('q')
@@ -49,9 +76,23 @@ const Search = () => {
   const showCancelButton = !isOverview
 
   useEffect(() => {
+    if (!isOverview) return
+
+    setSearchHistory(storage.get(storageKey))
+  }, [])
+
+  useEffect(() => {
+    if (!isAggregate) return
+
+    addSearchHistory(q)
+  }, [isAggregate, q, viewer])
+
+  useEffect(() => {
     router.events.on('routeChangeStart', resetAutoComplete)
     return () => router.events.off('routeChangeStart', resetAutoComplete)
   }, [])
+
+  console.log({ searchHistory })
 
   return (
     <Layout.Main bgColor={isAggregate ? 'grey-lighter' : undefined}>
