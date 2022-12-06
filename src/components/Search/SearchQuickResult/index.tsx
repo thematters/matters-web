@@ -35,6 +35,15 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
   const { edges: tagEdges } = data?.tag || {}
 
   useEffect(() => {
+    if (searchKey.length < 2) return
+
+    if (
+      '@#＠＃'.includes(searchKey[0]) &&
+      (searchKey.length < 3 || searchKey.length > 10)
+    ) {
+      return
+    }
+
     getQuickResult()
   }, [searchKey])
 
