@@ -67,4 +67,12 @@
     font-weight: var(--font-weight-bold);
     color: var(--color-black);
   }
+
+  & .donator-name {
+    margin-right: var(--spacing-xx-tight);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-black);
+    text-decoration-line: underline;
+  }
 }

@@ -11,7 +11,7 @@ import {
 import { Avatar, AvatarProps } from '~/components/Avatar'
 
 import { IMAGE_PIXEL } from '~/common/enums'
-import { translate } from '~/common/utils'
+import { makeTitle, translate } from '~/common/utils'
 
 import { fragments } from './gql'
 import styles from './styles.css'
@@ -107,24 +107,39 @@ const Donators = ({ article, showAvatarAnimation = false }: DonatorsProps) => {
             </section>
           </button>
           <section className="avatar-list-footer">
-            <button
-              type="button"
-              onClick={openDialog}
-              aria-label={translate({ id: 'viewDonators', lang })}
-              aria-haspopup="true"
-            >
-              <span className="count">{donatorsCount}</span>
-              <TextIcon
-                icon={<IconArrowRight16 size="xs" />}
-                textPlacement="left"
-              >
+            {donatorsCount === 1 && (
+              <span>
+                <span className="donator-name">
+                  {makeTitle(donators[0].displayName!, 7)}
+                </span>
                 <Translate
-                  zh_hant="個人支持過本文・看全部"
-                  zh_hans="个人支持过本文・看全部"
-                  en="others have supported the article. All supporters"
+                  zh_hant="第一個支持了這篇作品"
+                  zh_hans="第一个支持了这篇作品"
+                  en="was the first to support this article"
                 />
-              </TextIcon>
-            </button>
+              </span>
+            )}
+
+            {donatorsCount !== 1 && (
+              <button
+                type="button"
+                onClick={openDialog}
+                aria-label={translate({ id: 'viewDonators', lang })}
+                aria-haspopup="true"
+              >
+                <span className="count">{donatorsCount}</span>
+                <TextIcon
+                  icon={<IconArrowRight16 size="xs" />}
+                  textPlacement="left"
+                >
+                  <Translate
+                    zh_hant="個人支持過本文・看全部"
+                    zh_hans="个人支持过本文・看全部"
+                    en="others have supported the article. All supporters"
+                  />
+                </TextIcon>
+              </button>
+            )}
           </section>
 
           <style jsx>{styles}</style>

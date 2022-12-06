@@ -120,8 +120,8 @@ const DonatorsDialogContent = ({
       <Dialog.Header
         title={
           <Translate
-            zh_hant={`${totalCount} 人支持了作品`}
-            zh_hans={`${totalCount} 人支持了作品`}
+            zh_hant={`${totalCount} 人支持過作品`}
+            zh_hans={`${totalCount} 人支持过作品`}
           />
         }
         closeDialog={closeDialog}
