@@ -5,9 +5,10 @@ import {
   Head,
   Layout,
   PullToRefresh,
-  SearchAutoComplete,
+  // SearchAutoComplete,
   SearchBar,
   SearchOverview,
+  SearchQuickResult,
   useResponsive,
   useRoute,
 } from '~/components'
@@ -23,6 +24,7 @@ const Search = () => {
   const type = getQuery('type')
   const q = getQuery('q')
   const isSmallUp = useResponsive('sm-up')
+  console.log({ isSmallUp })
   const [typingKey, setTypingKey] = useState('')
   const resetAutoComplete = () => setTypingKey('')
   const onCancel = () => {
@@ -41,8 +43,8 @@ const Search = () => {
     !isTagOnly &&
     !isUserOnly &&
     !isArticleOnly
-  const showBackButton = isSmallUp && isOverview
-  const showMeButton = !isSmallUp && isOverview
+  // const showBackButton = isSmallUp && isOverview
+  // const showMeButton = !isSmallUp && isOverview
   const showCancelButton = !isOverview
 
   useEffect(() => {
@@ -53,13 +55,13 @@ const Search = () => {
   return (
     <Layout.Main smBgColor={isAggregate ? 'grey-lighter' : undefined}>
       <Layout.Header
-        left={
-          showBackButton ? (
-            <Layout.Header.BackButton />
-          ) : showMeButton ? (
-            <Layout.Header.MeButton />
-          ) : null
-        }
+        // left={
+        //   showBackButton ? (
+        //     <Layout.Header.BackButton />
+        //   ) : showMeButton ? (
+        //     <Layout.Header.MeButton />
+        //   ) : null
+        // }
         right={
           <>
             <SearchBar hasDropdown={false} onChange={setTypingKey} />
@@ -76,8 +78,8 @@ const Search = () => {
       <Head title={{ id: 'search' }} />
 
       <PullToRefresh>
-        {isOverview && <SearchOverview inPage />}
-        {isAutoComplete && <SearchAutoComplete searchKey={typingKey} inPage />}
+        {isOverview && <SearchOverview />}
+        {isAutoComplete && <SearchQuickResult searchKey={typingKey} inPage />}
 
         {isTagOnly && <SearchTags />}
         {isUserOnly && <SearchUsers />}
