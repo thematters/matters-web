@@ -1,9 +1,14 @@
+// @ts-ignore
 import contentHash from '@ensdomains/content-hash'
 import { namehash } from 'ethers/lib/utils'
 import { useContext, useEffect } from 'react'
-import { useAccount, useContract, useEnsName, useSigner } from 'wagmi'
-
-// @ts-ignore
+import {
+  useAccount,
+  useContract,
+  useEnsName,
+  useEnsResolver,
+  useSigner,
+} from 'wagmi'
 
 import {
   Avatar,
@@ -26,7 +31,6 @@ import {
 import ShareButton from '~/components/Layout/Header/ShareButton'
 
 import { ADD_TOAST } from '~/common/enums'
-
 import { numAbbr, PublicResolverABI } from '~/common/utils'
 
 import IMAGE_COVER from '@/public/static/images/profile-cover.png'
@@ -69,19 +73,20 @@ const RssFeedButton = ({ user }: FingerprintButtonProps) => {
 export const UserProfile = () => {
   const { getQuery } = useRoute()
   const viewer = useContext(ViewerContext)
+
   const { address } = useAccount()
   const { data: ensName } = useEnsName({
     address,
   })
-
   const { data: signer } = useSigner()
-
+  const { data: resolverData } = useEnsResolver({
+    name: ensName as string,
+  })
   // ENS related hooks
   const eip1577 = useContract({
-    // address: '0xD3ddcCDD3b25A8a7423B5bEe360a42146eb4Baf3', // mainnet  https://etherscan.io/address/0xd3ddccdd3b25a8a7423b5bee360a42146eb4baf3#code
-    address: '0xE264d5bb84bA3b8061ADC38D3D76e6674aB91852', // goerli https://goerli.etherscan.io/address/0xE264d5bb84bA3b8061ADC38D3D76e6674aB91852#code
-    abi: PublicResolverABI,
+    address: resolverData?.address,
     signerOrProvider: signer,
+    abi: PublicResolverABI,
   })
 
   // public user data
