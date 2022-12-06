@@ -65,12 +65,7 @@ const AggregateUserResults = () => {
                     })
                   }
                 >
-                  <UserDigest.Mini
-                    user={node}
-                    hasAvatar
-                    hasUserName
-                    hasDisplayName
-                  />
+                  <UserDigest.Concise user={node} avatarSize="xl" />
                 </Card>
               </List.Item>
             )

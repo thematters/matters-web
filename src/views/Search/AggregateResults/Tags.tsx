@@ -3,7 +3,7 @@ import {
   Card,
   List,
   Spinner,
-  Tag,
+  TagDigest,
   usePublicQuery,
   usePullToRefresh,
   useRoute,
@@ -65,7 +65,7 @@ const AggregateTagResults = () => {
                     })
                   }
                 >
-                  <Tag tag={node} type="list" />
+                  <TagDigest.Concise tag={node} showArticlesNum />
                 </Card>
               </List.Item>
             )
