@@ -66,7 +66,6 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
   children,
 }) => {
   const { isInPath, isPathStartWith } = useRoute()
-  const isInSearch = isInPath('SEARCH')
   const isInSettings = isInPath('SETTINGS')
   const isInArticleDetail = isInPath('ARTICLE_DETAIL')
   const isInCircle = isPathStartWith('/~', true)
@@ -103,7 +102,7 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
       </article>
 
       <aside className={asideClasses}>
-        {!isInSearch && !inEditor && (
+        {!inEditor && (
           <section className="u-lg-down-hide">
             <SearchBar />
           </section>
