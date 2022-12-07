@@ -8,7 +8,8 @@ import {
   PullToRefresh,
   // SearchAutoComplete,
   SearchBar,
-  SearchOverview,
+  SearchHistory,
+  // SearchOverview,
   SearchQuickResult,
   useResponsive,
   useRoute,
@@ -43,10 +44,10 @@ const Search = () => {
     updateSearchHistory(nsh)
   }
 
-  // const removeSearchHistory = (searchKey: string) => {
-  //   const nsh = _without(searchHistory, searchKey)
-  //   updateSearchHistory(nsh)
-  // }
+  const removeSearchHistory = (searchKey: string) => {
+    const nsh = _without(searchHistory, searchKey)
+    updateSearchHistory(nsh)
+  }
 
   const { getQuery, router } = useRoute()
   const type = getQuery('type')
@@ -120,7 +121,12 @@ const Search = () => {
       <Head title={{ id: 'search' }} />
 
       <PullToRefresh>
-        {isOverview && <SearchOverview />}
+        {isOverview && (
+          <SearchHistory
+            data={searchHistory.slice(0, 10)}
+            removeSearchHistoryItem={removeSearchHistory}
+          />
+        )}
         {isAutoComplete && <SearchQuickResult searchKey={typingKey} inPage />}
 
         {isTagOnly && <SearchTags />}
