@@ -6,12 +6,17 @@ interface SearchHistoryProps {
   data: string[]
   removeSearchHistoryItem: (value: string) => void
 }
+import EmptySearchHistory from './EmptySearchHistory'
 import styles from './styles.css'
 
 export const SearchHistory = ({
   data,
   removeSearchHistoryItem,
 }: SearchHistoryProps) => {
+  if (data.length <= 0) {
+    return <EmptySearchHistory />
+  }
+
   return (
     <section>
       <section className="title">
