@@ -155,6 +155,7 @@
     "file-loader": "^6.2.0",
     "geckodriver": "^2.0.2",
     "identity-obj-proxy": "^3.0.0",
+    "lorem-ipsum": "^2.0.8",
     "postcss-calc": "^7.0.5",
     "postcss-color-function": "^4.1.0",
     "postcss-mixins": "^6.2.3",

@@ -74,6 +74,7 @@ const Content = ({
       bgColor="grey-lighter"
       spacing={[0, 0]}
       borderRadius="base"
+      role="button"
       {...(props as CardProps)}
     >
       <p>
@@ -86,7 +87,7 @@ const Content = ({
     <Button
       spacing={['xtight', 'xtight']}
       bgActiveColor="grey-lighter"
-      aria-label={translate({ id: 'reply', lang })}
+      aria-label={translate({ id: 'putComment', lang })}
       {...(props as ButtonProps)}
     >
       <TextIcon

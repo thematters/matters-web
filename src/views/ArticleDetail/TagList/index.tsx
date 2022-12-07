@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 
 import { Tag, TagExposureTracker } from '~/components'
 
+import { TEST_ID } from '~/common/enums'
 import { analytics } from '~/common/utils'
 
 import styles from './styles.css'
@@ -25,7 +26,7 @@ const TagList = ({ article }: { article: TagListArticle }) => {
   }
 
   return (
-    <section className="tag-list">
+    <section className="tag-list" data-test-id={TEST_ID.ARTICLE_SUMMARY}>
       <ul>
         {article.tags.map((tag, i) => (
           <li key={tag.id}>

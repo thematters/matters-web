@@ -13,4 +13,10 @@ export enum TEST_ID {
   DIGEST_TAG_SIDEBAR = 'digest/tag/sidebar',
   // dialogs
   DIALOG_AUTH = 'dialog/auth',
+  // article
+  ARTICLE_SUMMARY = 'article/summary',
+  ARTICLE_CONTENT = 'article/content',
+  ARTICLE_COLLECTION = 'article/collection',
+  ARTICLE_TAGS = 'article/tags',
+  ARTICLE_LICENSE = 'article/license',
 }

@@ -51,9 +51,6 @@ export class HomePage {
 
       return false
     })
-
-    // relocale the sidebar tags
-    this.sidebarTags = this.page.getByTestId(TEST_ID.DIGEST_TAG_SIDEBAR)
   }
 
   async shuffleSidebarUsers() {
@@ -75,8 +72,5 @@ export class HomePage {
 
       return false
     })
-
-    // relocale the sidebar tags
-    this.sidebarUsers = this.page.getByTestId(TEST_ID.DIGEST_USER_RICH)
   }
 }

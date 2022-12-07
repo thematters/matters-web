@@ -8,7 +8,7 @@ const DonatorsButton = ({ openDialog }: DonatorsButtonProps) => {
   return (
     <Menu.Item onClick={openDialog}>
       <TextIcon icon={<IconDonate24 size="md" />} size="md" spacing="base">
-        <Translate id="viewDonators" />
+        <Translate id="viewSupporters" />
       </TextIcon>
     </Menu.Item>
   )

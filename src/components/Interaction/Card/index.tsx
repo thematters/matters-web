@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import { useRouter } from 'next/router'
-import { forwardRef, useContext, useRef } from 'react'
+import { AriaRole, forwardRef, useContext, useRef } from 'react'
 
 import { LanguageContext } from '~/components'
 
@@ -33,6 +33,7 @@ export interface CardProps {
 
   ref?: any
 
+  role?: AriaRole
   testId?: TEST_ID
 }
 
@@ -54,6 +55,7 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
 
       onClick,
 
+      role,
       testId,
 
       children,
@@ -156,6 +158,7 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
         onClick={(event) => {
           openLink({ newTab: event.metaKey, event })
         }}
+        role={role}
         {...(testId ? { ['data-test-id']: testId } : {})}
       >
         {children}

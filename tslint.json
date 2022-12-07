@@ -15,7 +15,8 @@
         "dotenv",
         "apollo-cache",
         "@apollo/react-testing",
-        "@playwright/test"
+        "@playwright/test",
+        "lorem-ipsum"
       ]
     ],
     "no-bitwise": false,
