@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test'
 
 import { TEST_ID } from '~/common/enums'
 
-import { authedTest, login, logout } from '../utils'
+import { authedTest, login, logout } from './helpers'
 
 test.describe('Authentication', () => {
   test('can login in homepage dialog', async ({ page }) => {

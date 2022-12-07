@@ -1,7 +1,7 @@
 // global-setup.ts
 import { chromium, FullConfig } from '@playwright/test'
 
-import { login, User, users } from './utils'
+import { login, User, users } from './helpers'
 
 const prepareUserStorageState = async (baseURL: string, user: User) => {
   const browser = await chromium.launch()

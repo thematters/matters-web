@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 
-import { HomePage } from '../utils'
+import { HomePage } from './helpers'
 
 test.describe('Homepage', () => {
   test('has paginated article feed', async ({ page }) => {

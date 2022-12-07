@@ -7,7 +7,7 @@ import {
   generateContent,
   generateSummary,
   generateTitle,
-} from '../utils'
+} from './helpers'
 
 test.describe('Publish draft', () => {
   authedTest('can create and publish draft', async ({ alicePage: page }) => {
