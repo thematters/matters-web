@@ -34,6 +34,9 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
   const { edges: userEdges } = data?.user || {}
   const { edges: tagEdges } = data?.tag || {}
 
+  const hasUsers = userEdges && userEdges.length > 0
+  const hasTags = tagEdges && tagEdges.length > 0
+
   useEffect(() => {
     if (searchKey.length < 2) return
 
@@ -55,10 +58,7 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
     )
   }
 
-  if (
-    (!userEdges || userEdges.length <= 0) &&
-    (!tagEdges || tagEdges.length <= 0)
-  ) {
+  if (!hasUsers && !hasTags) {
     return null
   }
 
@@ -70,8 +70,7 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
           <Menu.Divider />
         </>
       )}
-      {userEdges &&
-        userEdges.length > 0 &&
+      {hasUsers &&
         userEdges.map(
           ({ node, cursor }, i) =>
             node.__typename === 'User' && (
@@ -92,11 +91,8 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
               </Fragment>
             )
         )}
-      {userEdges && userEdges.length > 0 && tagEdges && tagEdges.length > 0 && (
-        <Menu.Divider />
-      )}
-      {tagEdges &&
-        tagEdges.length > 0 &&
+      {hasUsers && hasTags && <Menu.Divider />}
+      {hasTags &&
         tagEdges.map(
           ({ node, cursor }, i) =>
             node.__typename === 'Tag' && (
