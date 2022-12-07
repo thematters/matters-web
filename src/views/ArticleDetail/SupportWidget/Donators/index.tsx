@@ -7,11 +7,12 @@ import {
   LanguageContext,
   TextIcon,
   Translate,
+  UserDigest,
 } from '~/components'
 import { Avatar, AvatarProps } from '~/components/Avatar'
 
 import { IMAGE_PIXEL } from '~/common/enums'
-import { makeTitle, translate } from '~/common/utils'
+import { translate } from '~/common/utils'
 
 import { fragments } from './gql'
 import styles from './styles.css'
@@ -108,19 +109,26 @@ const Donators = ({ article, showAvatarAnimation = false }: DonatorsProps) => {
           </button>
           <section className="avatar-list-footer">
             {donatorsCount === 1 && (
-              <span>
+              <section className="footer">
                 <span className="donator-name">
-                  {makeTitle(donators[0].displayName!, 7)}
+                  <UserDigest.Plain
+                    user={donators[0]}
+                    hasUnderline={true}
+                    subStringDisplayNameIndex={7}
+                  />
                 </span>
-                <Translate
-                  zh_hant="第一個支持了這篇作品"
-                  zh_hans="第一个支持了这篇作品"
-                  en="was the first to support this article"
-                />
-              </span>
+
+                <span>
+                  <Translate
+                    zh_hant="第一個支持了這篇作品"
+                    zh_hans="第一个支持了这篇作品"
+                    en="was the first to support this article"
+                  />
+                </span>
+              </section>
             )}
 
-            {donatorsCount !== 1 && (
+            {donatorsCount > 1 && (
               <button
                 type="button"
                 onClick={openDialog}

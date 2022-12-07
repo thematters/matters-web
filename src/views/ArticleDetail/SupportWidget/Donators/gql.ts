@@ -18,6 +18,7 @@ export const fragments = {
               id
               ...AvatarUser
               displayName
+              userName
             }
           }
         }

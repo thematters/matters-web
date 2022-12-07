@@ -2,7 +2,7 @@ import classNames from 'classnames'
 
 import { LinkWrapper } from '~/components'
 
-import { toPath } from '~/common/utils'
+import { makeTitle, toPath } from '~/common/utils'
 
 import { fragments } from './gql'
 import styles from './styles.css'
@@ -13,10 +13,18 @@ export type UserDigestPlainProps = {
   user: UserDigestPlainUser
 
   disabled?: boolean
+  hasUnderline?: boolean
+  subStringDisplayNameIndex?: number
   onClick?: () => void
 }
 
-const Plain = ({ user, disabled, onClick }: UserDigestPlainProps) => {
+const Plain = ({
+  user,
+  disabled,
+  onClick,
+  hasUnderline,
+  subStringDisplayNameIndex,
+}: UserDigestPlainProps) => {
   const path = toPath({
     page: 'userProfile',
     userName: user.userName || '',
@@ -27,11 +35,19 @@ const Plain = ({ user, disabled, onClick }: UserDigestPlainProps) => {
     disabled,
   })
 
+  const displayNameClasses = classNames({
+    name: true,
+    hasUnderline,
+  })
+
   return (
     <LinkWrapper {...path} disabled={disabled} onClick={onClick}>
       <section className={containerClasses}>
-        <span className="name">{user.displayName}</span>
-
+        <span className={displayNameClasses}>
+          {subStringDisplayNameIndex &&
+            makeTitle(user.displayName!, subStringDisplayNameIndex)}
+          {!subStringDisplayNameIndex && user.displayName}
+        </span>
         <style jsx>{styles}</style>
       </section>
     </LinkWrapper>

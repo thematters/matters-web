@@ -57,6 +57,7 @@ const update = ({
         avatar: viewer.avatar,
         id: viewer.id,
         displayName: viewer.displayName,
+        userName: viewer.userName,
         liker: {
           civicLiker: viewer.liker.civicLiker,
           __typename: 'Liker',

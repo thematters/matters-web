@@ -145,6 +145,7 @@ export const TEXT = {
     forgetPaymentPassword: '忘記交易密碼',
     frequentSearch: '熱門搜尋',
     guide: '玩轉 Matters 實用指南',
+    hasSupportedArticle: '人支持過作品',
     help: '說明',
     helpCenter: '幫助中心',
     hintAddTag:
@@ -537,6 +538,7 @@ export const TEXT = {
     forgetPaymentPassword: '忘记交易密码',
     frequentSearch: '热门搜索',
     guide: '玩转 Matters 实用指南',
+    hasSupportedArticle: '人支持过作品',
     help: '说明',
     helpCenter: '帮助中心',
     hintAddTag:
@@ -938,6 +940,7 @@ export const TEXT = {
     forgetPaymentPassword: 'Forget Payment Password',
     frequentSearch: 'Search trends',
     guide: 'Explore Matters',
+    hasSupportedArticle: 'supported this article',
     help: 'Help',
     helpCenter: 'Help Center',
     hintAddTag:

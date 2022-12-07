@@ -294,7 +294,7 @@ const BaseArticleDetail = ({
             article={article}
             content={content}
             translating={translating}
-          />{' '}
+          />
           <License license={article.license} />
           {circle && !canReadFullContent && <CircleWall circle={circle} />}
           {features.payment && canReadFullContent && (
