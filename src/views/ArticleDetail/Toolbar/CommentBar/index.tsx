@@ -74,7 +74,7 @@ const Content = ({
       bgColor="grey-lighter"
       spacing={[0, 0]}
       borderRadius="base"
-      ariaRole="button"
+      role="button"
       ariaHasPopup="dialog"
       {...(props as CardProps)}
     >

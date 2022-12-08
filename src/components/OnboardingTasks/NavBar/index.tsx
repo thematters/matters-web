@@ -33,7 +33,7 @@ const NavBar = () => {
               spacing={[0, 0]}
               onClick={openOnboardingTasksDialog}
               aria-haspopup="dialog"
-              ariaRole="button"
+              role="button"
             >
               <section className="content">
                 <section className="inner">

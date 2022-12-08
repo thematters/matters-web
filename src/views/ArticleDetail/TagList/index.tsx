@@ -26,7 +26,7 @@ const TagList = ({ article }: { article: TagListArticle }) => {
   }
 
   return (
-    <section className="tag-list" data-test-id={TEST_ID.ARTICLE_SUMMARY}>
+    <section className="tag-list" data-test-id={TEST_ID.ARTICLE_TAGS}>
       <ul>
         {article.tags.map((tag, i) => (
           <li key={tag.id}>

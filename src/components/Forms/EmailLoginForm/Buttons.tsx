@@ -44,7 +44,7 @@ export const EmailSignUpDialogButton = ({
       rightText={<Translate id="register" />}
       rightTextColor="green"
       onClick={gotoEmailSignUp}
-      ariaRole="button"
+      role="button"
     />
   </Form.List>
 )

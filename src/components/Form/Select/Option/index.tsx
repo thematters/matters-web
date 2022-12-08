@@ -15,7 +15,7 @@ type OptionProps = {
 
   size?: 'md' | 'sm'
 
-  ariaRole?: 'button' | 'option'
+  role?: 'button' | 'option'
 
   ref?: any
 } & CardProps
@@ -32,7 +32,7 @@ const Option: React.FC<OptionProps> = forwardRef(
 
       size = 'md',
 
-      ariaRole = 'option',
+      role = 'option',
 
       ...cardProps
     },
@@ -46,12 +46,13 @@ const Option: React.FC<OptionProps> = forwardRef(
     return (
       <li
         {...(id ? { id } : {})}
-        {...(ariaRole === 'option'
-          ? { ariaRole: 'option', 'aria-selected': !!selected }
-          : { ariaRole: 'button' })}
+        {...(role === 'option'
+          ? { role: 'option', 'aria-selected': !!selected }
+          : {})}
       >
         <Card
           bgColor={expanded ? undefined : 'grey-lighter'}
+          {...(role === 'option' ? {} : { role: 'button' })}
           {...cardProps}
           spacing={cardProps.spacing || [0, 0]}
           ref={ref}

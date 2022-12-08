@@ -23,7 +23,7 @@ export const EmailLoginButton = ({
       }
       rightTextColor="green"
       onClick={gotoEmailLogin}
-      ariaRole="button"
+      role="button"
     />
   </Form.List>
 )

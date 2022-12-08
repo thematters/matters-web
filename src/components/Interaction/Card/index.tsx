@@ -36,7 +36,7 @@ export interface CardProps {
 
   is?: 'link' | 'anchor' | 'section'
 
-  ariaRole?: AriaRole
+  role?: AriaRole
   ariaHasPopup?: AriaAttributes['aria-haspopup']
   testId?: TEST_ID
 }
@@ -61,7 +61,7 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
 
       is = 'section',
 
-      ariaRole,
+      role,
       ariaHasPopup,
       testId,
 
@@ -195,7 +195,7 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
           openLink({ newTab: event.metaKey, event })
         }}
         {...(ariaLabel ? { ['aria-label']: ariaLabel } : {})}
-        {...(ariaRole ? { ['aria-role']: ariaRole } : {})}
+        {...(role ? { ['role']: role } : {})}
         {...(ariaHasPopup ? { ['aria-haspopup']: ariaHasPopup } : {})}
         {...(testId ? { ['data-test-id']: testId } : {})}
       >

@@ -29,7 +29,7 @@ const Select: React.FC<SelectProps> = ({ startGenerate, startBind }) => {
               en="I Agree to have Matters generate a new Liker ID for me"
             />
           }
-          ariaRole="button"
+          role="button"
           onClick={startGenerate}
         />
         <Form.List.Item
@@ -55,7 +55,7 @@ const Select: React.FC<SelectProps> = ({ startGenerate, startBind }) => {
               startBind(windowRef)
             }
           }}
-          ariaRole="button"
+          role="button"
         />
       </Form.List>
 

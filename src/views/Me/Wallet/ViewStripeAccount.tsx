@@ -47,7 +47,7 @@ const ViewStripeAccount = () => {
           <TextIcon icon={<IconExternalLink16 color="grey" size="sm" />} />
         )
       }
-      ariaRole="link"
+      role="link"
     />
   )
 }

@@ -49,7 +49,7 @@ const LikeCoinChoice: React.FC<LikeCoinChoiceProps> = ({
 
   if (!hasLikerId) {
     return (
-      <section aria-role="button" className="item">
+      <section role="button" className="item">
         <IconLikeDisabled />
 
         <Button
@@ -93,7 +93,7 @@ const LikeCoinChoice: React.FC<LikeCoinChoiceProps> = ({
 
   return (
     <section
-      aria-role="button"
+      role="button"
       className="item clickable"
       onClick={switchToSetAmount}
     >

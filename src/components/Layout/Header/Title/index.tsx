@@ -6,12 +6,7 @@ const LayoutHeaderTitle: React.FC<React.PropsWithChildren<TranslateProps>> = ({
   children,
   ...props
 }) => (
-  <Title
-    type="nav"
-    is="h1"
-    onClick={() => jump(document.body)}
-    aria-role="button"
-  >
+  <Title type="nav" is="h1" onClick={() => jump(document.body)} role="button">
     {children ? children : <Translate {...props} />}
   </Title>
 )

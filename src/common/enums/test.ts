@@ -21,4 +21,6 @@ export enum TEST_ID {
   ARTICLE_COLLECTION = 'article/collection',
   ARTICLE_TAGS = 'article/tags',
   ARTICLE_LICENSE = 'article/license',
+  ARTICLE_SUPPORT_REQUEST = 'article/support/request',
+  ARTICLE_SUPPORT_REPLY = 'article/support/reply',
 }

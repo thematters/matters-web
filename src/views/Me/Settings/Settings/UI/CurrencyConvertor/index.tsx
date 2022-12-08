@@ -120,7 +120,7 @@ const CurrencyConvertor = () => {
           onClick={openDialog}
           rightText={currency}
           ariaHasPopup={type}
-          ariaRole="button"
+          role="button"
           ref={ref}
         />
       )}

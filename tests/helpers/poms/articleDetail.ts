@@ -15,7 +15,10 @@ export class ArticleDetailPage {
   readonly content: Locator
   readonly tagList: Locator
   readonly collection: Locator
+  readonly license: Locator
   readonly supportButton: Locator
+  readonly supportRequest: Locator
+  readonly supportReply: Locator
   readonly viewSupportersButton: Locator
 
   // comment
@@ -49,9 +52,12 @@ export class ArticleDetailPage {
     this.content = this.page.getByTestId(TEST_ID.ARTICLE_CONTENT)
     this.tagList = this.page.getByTestId(TEST_ID.ARTICLE_TAGS)
     this.collection = this.page.getByTestId(TEST_ID.ARTICLE_COLLECTION)
+    this.license = this.page.getByTestId(TEST_ID.ARTICLE_LICENSE)
     this.supportButton = this.page.getByRole('button', {
       name: 'Support Author',
     })
+    this.supportRequest = this.page.getByTestId(TEST_ID.ARTICLE_SUPPORT_REQUEST)
+    this.supportReply = this.page.getByTestId(TEST_ID.ARTICLE_SUPPORT_REPLY)
     this.viewSupportersButton = this.page.getByRole('button', {
       name: 'All supporters',
     })
@@ -93,5 +99,44 @@ export class ArticleDetailPage {
 
   async goto() {
     await this.page.goto('https://playwright.dev')
+  }
+
+  async getSummary() {
+    if (!(await this.summary.isVisible())) {
+      return ''
+    }
+    return this.summary.innerText()
+  }
+
+  async getTags() {
+    if (!(await this.tagList.isVisible())) {
+      return []
+    }
+    return (await this.tagList.innerText()).split(/\s/).map((t) => t.trim())
+  }
+
+  async getFirstCollectedArticle() {
+    if (!(await this.collection.isVisible())) {
+      return []
+    }
+
+    return this.collection
+      .getByRole('listitem')
+      .getByRole('heading')
+      .innerText()
+  }
+
+  async getSupportRequest() {
+    if (!(await this.supportRequest.isVisible())) {
+      return []
+    }
+    return this.supportRequest.innerText()
+  }
+
+  async getLicense() {
+    if (!(await this.license.isVisible())) {
+      return []
+    }
+    return this.license.innerText()
   }
 }

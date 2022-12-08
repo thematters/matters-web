@@ -61,7 +61,7 @@ const Select: React.FC<SelectProps> = ({
       <ul
         tabIndex={0}
         className={optionsClasses}
-        aria-role="listbox"
+        role="listbox"
         aria-labelledby={fieldId}
         aria-activedescendant={selectedOptionId}
       >
@@ -97,11 +97,10 @@ const Select: React.FC<SelectProps> = ({
       }}
     >
       {({ openDialog, type, ref }) => (
-        <ul>
+        <ul aria-labelledby={fieldId}>
           <Option
-            ariaRole="button"
-            aria-labelledby={fieldId}
-            aria-haspopup={type}
+            role="button"
+            ariaHasPopup={type}
             name={selectedOption.name}
             subtitle={selectedOption.subtitle}
             selected

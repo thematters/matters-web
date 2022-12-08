@@ -36,7 +36,7 @@ const SwitchLanguage = () => {
           onClick={openDialog}
           rightText={LANG_TEXT_MAP[lang]}
           aria-haspopup={type}
-          ariaRole="button"
+          role="button"
           ref={ref}
         />
       )}

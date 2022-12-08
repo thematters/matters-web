@@ -55,7 +55,7 @@ export class DraftDetailPage {
     })
     this.sidebarToggleAddToCircle = this.page.getByLabel('Add to Circle')
     this.sidebarToggleISCN = this.page.getByLabel('Register for ISCN')
-    this.sidebarSetLicense = this.page.getByRole('option', {
+    this.sidebarSetLicense = this.page.getByRole('button', {
       name: 'CC BY-NC-ND 2.0 License',
     })
     this.sidebarSupportSetting = this.page.getByRole('button', {
@@ -133,10 +133,23 @@ export class DraftDetailPage {
 
     await this.page
       .getByLabel('Upload Cover')
-      .setInputFiles('../assets/320x180.jpg')
-    await expect(
-      this.page.getByRole('button', { name: 'Set as cover' })
-    ).toBeVisible()
+      .setInputFiles('./tests/helpers/assets/320x180.jpg')
+
+    // wait for the API response
+    await this.page.waitForResponse(async (res: Response) => {
+      try {
+        const body = (await res.body()).toString()
+        const parsedBody = JSON.parse(body)
+        const assets = !!_get(parsedBody, 'data.node.assets')
+        if (assets) {
+          return true
+        }
+      } catch (error) {
+        // console.error(error)
+      }
+
+      return false
+    })
 
     await this.dialogSaveButton.click()
 
@@ -242,7 +255,7 @@ export class DraftDetailPage {
       license ||
       _sample(['CC BY-NC-ND 2.0 License', 'CC0 License', 'All Rights Reserved'])
     await this.sidebarSetLicense.click()
-    await this.page.getByRole('option', { name: license }).last().click()
+    await this.page.getByRole('option', { name: license }).click()
     return license
   }
 

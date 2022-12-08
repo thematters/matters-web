@@ -46,7 +46,7 @@ const BasePaymentPassword: React.FC<PaymentPasswordProps> = ({
             />
           }
           onClick={openDialog}
-          ariaRole="button"
+          role="button"
           ariaHasPopup={type}
           ref={ref}
         />

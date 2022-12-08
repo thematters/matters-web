@@ -101,7 +101,7 @@ const USDTChoice: React.FC<FormProps> = ({
   if (address && !!curatorAddress && !!creatorAddress) {
     return (
       <section
-        aria-role="button"
+        role="button"
         className="item clickable"
         onClick={switchToSetAmount}
       >

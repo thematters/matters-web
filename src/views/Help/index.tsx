@@ -14,38 +14,38 @@ const BaseHelp = () => {
     <>
       <Form.List>
         <Form.List.Item
-          ariaRole="link"
+          role="link"
           title={<Translate id="about" />}
           href={PATHS.ABOUT}
         />
         <Form.List.Item
-          ariaRole="link"
+          role="link"
           title={<Translate id="guide" />}
           href={PATHS.GUIDE}
         />
         <Form.List.Item
-          ariaRole="link"
+          role="link"
           title={<Translate id="community" />}
           href={PATHS.COMMUNITY}
         />
         <Form.List.Item
-          ariaRole="link"
+          role="link"
           title={<Translate id="migrationSideBar" />}
           href={PATHS.MIGRATION}
         />
         <Form.List.Item
-          ariaRole="link"
+          role="link"
           title={<Translate id="term" />}
           href={PATHS.TOS}
         />
         <Form.List.Item
-          ariaRole="link"
+          role="link"
           title={<Translate id="openCommunity" />}
           htmlHref="https://github.com/thematters/developer-resource"
           htmlTarget="_blank"
         />
         <Form.List.Item
-          ariaRole="link"
+          role="link"
           title={<Translate id="downloadApp" />}
           href={GUIDE_LINKS.PWA[lang]}
         />

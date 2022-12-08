@@ -51,7 +51,7 @@ const CircleWidget: React.FC<CircleWidgetProps> = ({ circles, isMe }) => {
             onClick={() => {
               analytics.trackEvent('click_button', { type: 'create_circle' })
             }}
-            ariaRole="button"
+            role="button"
           />
         </Form.List>
 

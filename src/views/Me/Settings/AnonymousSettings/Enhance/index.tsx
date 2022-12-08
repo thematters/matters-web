@@ -8,12 +8,12 @@ const Enhance = () => {
       }
     >
       <Form.List.Item
-        ariaRole="link"
+        role="link"
         title={<Translate id="openCommunity" />}
         href="https://github.com/thematters/developer-resource"
       />
       <Form.List.Item
-        ariaRole="link"
+        role="link"
         title={<Translate id="bugBountyProgram" />}
         href="https://github.com/thematters/developer-resource/blob/master/SECURITY.md"
       />
