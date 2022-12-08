@@ -53,7 +53,7 @@ const Search = () => {
   const type = getQuery('type')
   const q = getQuery('q')
   const isSmallUp = useResponsive('sm-up')
-  console.log({ isSmallUp })
+
   const [typingKey, setTypingKey] = useState('')
   const resetAutoComplete = () => setTypingKey('')
   const onCancel = () => {
@@ -80,7 +80,7 @@ const Search = () => {
     if (!isOverview) return
 
     setSearchHistory(storage.get(storageKey))
-  }, [])
+  }, [storageKey])
 
   useEffect(() => {
     if (!isAggregate) return
@@ -92,8 +92,6 @@ const Search = () => {
     router.events.on('routeChangeStart', resetAutoComplete)
     return () => router.events.off('routeChangeStart', resetAutoComplete)
   }, [])
-
-  console.log({ searchHistory })
 
   return (
     <Layout.Main smBgColor={isAggregate ? 'grey-lighter' : undefined}>
@@ -121,7 +119,7 @@ const Search = () => {
       <Head title={{ id: 'search' }} />
 
       <PullToRefresh>
-        {isOverview && (
+        {isOverview && !isSmallUp && (
           <SearchHistory
             data={searchHistory.slice(0, 10)}
             removeSearchHistoryItem={removeSearchHistory}
