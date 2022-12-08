@@ -5,6 +5,7 @@ import { useContext, useEffect, useRef, useState } from 'react'
 
 import {
   EmptyResponse,
+  LanguageContext,
   List,
   QueryError,
   Spinner,
@@ -26,6 +27,7 @@ import {
   dom,
   filterResponses,
   mergeConnections,
+  translate,
   unshiftConnections,
 } from '~/common/utils'
 
@@ -49,6 +51,7 @@ type Response = ResponsePublic & Partial<Omit<ResponsePrivate, '__typename'>>
 
 const LatestResponses = ({ id, lock }: { id: string; lock: boolean }) => {
   const viewer = useContext(ViewerContext)
+  const { lang } = useContext(LanguageContext)
   const isMediumUp = useResponsive('md-up')
   const [articleOnlyMode, setArticleOnlyMode] = useState<boolean>(false)
   const storedCursorRef = useRef<string | null>(null)
@@ -253,7 +256,7 @@ const LatestResponses = ({ id, lock }: { id: string; lock: boolean }) => {
         <div className="latest-responses-switch">
           <Switch
             name="article-only"
-            label={<Translate id="collectedOnly" />}
+            label={translate({ id: 'collectedOnly', lang })}
             onChange={() => setArticleOnlyMode(!articleOnlyMode)}
             checked={articleOnlyMode}
             loading={loading}

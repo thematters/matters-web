@@ -1,4 +1,17 @@
 import { expect, Locator, Page } from '@playwright/test'
+import _sample from 'lodash/sample'
+
+import { TEST_ID } from '~/common/enums'
+
+import {
+  generateContent,
+  generateSummary,
+  generateSupportSetting,
+  generateTags,
+  generateTitle,
+} from '../text'
+
+type License = 'CC BY-NC-ND 2.0 License' | 'CC0 License' | 'All Rights Reserved'
 
 export class DraftDetailPage {
   readonly page: Page
@@ -25,6 +38,7 @@ export class DraftDetailPage {
   readonly dialogPublishNowButton: Locator
   readonly dialogPublishButton: Locator
   readonly dialogViewArticleButton: Locator
+  readonly dialogSaveButton: Locator
 
   constructor(page: Page) {
     this.page = page
@@ -63,6 +77,9 @@ export class DraftDetailPage {
     this.dialogViewArticleButton = this.dialog.getByRole('button', {
       name: 'View Article',
     })
+    this.dialogSaveButton = this.dialog.getByRole('button', {
+      name: 'Save',
+    })
   }
 
   async createDraft() {
@@ -76,6 +93,138 @@ export class DraftDetailPage {
     await this.page.goto('/me/drafts')
     await this.page.getByRole('listitem').first().click()
     await this.page.waitForNavigation()
+  }
+
+  async fillTitle() {
+    const title = generateTitle()
+    await this.titleInput.fill(title)
+    return title
+  }
+
+  async fillSummary() {
+    const summary = generateSummary()
+    await this.summaryInput.fill(summary)
+    return summary
+  }
+
+  async fillContent() {
+    const content = generateContent({})
+    await this.contentInput.fill(content)
+    return content
+  }
+
+  async setTags() {
+    await this.sidebarAddTag.click()
+
+    const tags = generateTags({ count: 3 })
+    for (const tag of tags) {
+      await this.page.getByLabel('Search').fill(tag)
+      await this.page.getByTestId(TEST_ID.SEARCH_RESULTS_ITEM).first().click()
+    }
+
+    await this.dialogSaveButton.click()
+
+    return tags
+  }
+
+  async setCover() {
+    await this.sidebarSetCover.click()
+
+    await this.page
+      .getByLabel('Upload Cover')
+      .setInputFiles('../assets/320x180.jpg')
+    await expect(
+      this.page.getByRole('button', { name: 'Set as cover' })
+    ).toBeVisible()
+
+    await this.dialogSaveButton.click()
+
+    return true
+  }
+
+  async setSupportSetting({
+    replyToDonator,
+    requestForDonation,
+  }: {
+    replyToDonator?: boolean
+    requestForDonation?: boolean
+  }) {
+    await this.sidebarSupportSetting.click()
+
+    replyToDonator =
+      typeof replyToDonator === 'boolean'
+        ? replyToDonator
+        : _sample([true, false])
+    requestForDonation =
+      typeof requestForDonation === 'boolean'
+        ? requestForDonation
+        : _sample([true, false])
+
+    let replyToDonatorText = ''
+    let requestForDonationText = ''
+
+    if (replyToDonator) {
+      replyToDonatorText = generateSupportSetting()
+      await this.page.getByRole('button', { name: 'Call-to-Support' }).click()
+      await this.page.getByLabel('Call-to-Support').fill(replyToDonatorText)
+    }
+
+    if (requestForDonation) {
+      requestForDonationText = generateSupportSetting()
+      await this.page.getByRole('button', { name: 'Thank-you card' }).click()
+      await this.page.getByLabel('Thank-you card').fill(requestForDonationText)
+    }
+
+    await this.dialogSaveButton.click()
+
+    return { replyToDonatorText, requestForDonationText }
+  }
+
+  async setCollection() {
+    await this.sidebarCollectArticle.click()
+
+    const searchKey = 'test'
+    await this.page.getByLabel('Search').fill(searchKey)
+
+    const collectedArticles: string[] = []
+
+    const searchResults = this.page.getByTestId(TEST_ID.SEARCH_RESULTS_ITEM)
+    if ((await searchResults.count()) >= 1) {
+      const title = await searchResults.first().getByRole('heading').innerText()
+      await searchResults.first().click()
+      collectedArticles.push(title)
+    }
+
+    await this.dialogSaveButton.click()
+
+    return collectedArticles
+  }
+
+  async toggleAddToCicle({ check }: { check?: boolean }) {
+    const hasAddToCircle = await this.sidebarToggleAddToCircle.isVisible()
+
+    if (!hasAddToCircle) {
+      return
+    }
+
+    check = typeof check === 'boolean' ? check : _sample([true, false])
+    await this.sidebarToggleAddToCircle[check ? 'check' : 'uncheck']()
+    return check
+  }
+
+  async toggleISCN({ check }: { check?: boolean }) {
+    check = typeof check === 'boolean' ? check : _sample([true, false])
+    await this.sidebarToggleISCN[check ? 'check' : 'uncheck']()
+    return check
+  }
+
+  async setLicense({ license }: { license?: License }) {
+    license =
+      license ||
+      _sample(['CC BY-NC-ND 2.0 License', 'CC0 License', 'All Rights Reserved'])
+    await this.sidebarSetLicense.click()
+    await this.page.getByRole('option', { name: license }).click()
+    return license
   }
 
   async publish() {

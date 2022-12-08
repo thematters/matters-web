@@ -1,3 +1,4 @@
+import VisuallyHidden from '@reach/visually-hidden'
 import { useContext } from 'react'
 
 import { IconClear16, IconSearch16, LanguageContext } from '~/components'
@@ -25,6 +26,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
   onFocus,
   onBlur,
 }) => {
+  const fieldId = `search-input-${type}`
   const { lang } = useContext(LanguageContext)
   const textAriaLabel = translate({ id: 'search', lang })
   const textPlaceholder = {
@@ -63,6 +65,10 @@ const SearchInput: React.FC<SearchInputProps> = ({
         }}
         autoComplete="off"
       >
+        <VisuallyHidden>
+          <label htmlFor={fieldId}>{textAriaLabel}</label>
+        </VisuallyHidden>
+
         <input
           type="search"
           name="q"

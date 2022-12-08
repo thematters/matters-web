@@ -8,7 +8,7 @@ import {
   Translate,
 } from '~/components'
 
-import { ADD_TOAST } from '~/common/enums'
+import { ADD_TOAST, TEST_ID } from '~/common/enums'
 import { validateTagName } from '~/common/utils'
 
 import styles from './styles.css'
@@ -41,7 +41,11 @@ const CreateTag: React.FC<CreateTagProps> = ({ tag, onClick }) => {
   }
 
   return (
-    <Card spacing={['base', 'base']} onClick={create}>
+    <Card
+      spacing={['base', 'base']}
+      onClick={create}
+      testId={TEST_ID.SEARCH_RESULTS_ITEM}
+    >
       <section className="add-tag">
         <TextIcon icon={<IconAdd16 />} color="green" size="md">
           <Translate id="create" />

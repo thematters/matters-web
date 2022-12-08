@@ -4,9 +4,7 @@ import {
   ArticleDetailPage,
   authedTest,
   DraftDetailPage,
-  generateContent,
-  generateSummary,
-  generateTitle,
+  fuzzingRun,
 } from './helpers'
 
 test.describe('Publish draft', () => {
@@ -14,14 +12,43 @@ test.describe('Publish draft', () => {
     const draftDetail = new DraftDetailPage(page)
     await draftDetail.createDraft()
 
-    // Fill title, summary and content
-    const title = generateTitle()
-    const summary = generateSummary()
-    const content = generateContent({})
-    console.log({ title, summary, content })
-    await draftDetail.titleInput.fill(title)
-    await draftDetail.summaryInput.fill(summary)
-    await draftDetail.contentInput.fill(content)
+    // Required: Fill title and content
+    const title = await draftDetail.fillTitle()
+    const content = await draftDetail.fillContent()
+
+    // Optional
+    const [
+      summary,
+      tags,
+      cover,
+      collectedArticles,
+      supportSetting,
+      license,
+      isAddedToCircle,
+      isISCN,
+    ] = await fuzzingRun({
+      funcs: [
+        draftDetail.fillSummary,
+        draftDetail.setTags,
+        draftDetail.setCover,
+        draftDetail.setCollection,
+        () => draftDetail.setSupportSetting({}),
+        () => draftDetail.setLicense({}),
+        () => draftDetail.toggleAddToCicle({}),
+        () => draftDetail.toggleISCN({}),
+      ],
+    })
+
+    console.log({
+      summary,
+      tags,
+      cover,
+      collectedArticles,
+      supportSetting,
+      license,
+      isAddedToCircle,
+      isISCN,
+    })
 
     // Publish
     await draftDetail.publish()
@@ -36,7 +63,6 @@ test.describe('Publish draft', () => {
       await articleDetail.summary.innerText(),
       await articleDetail.content.innerText(),
     ])
-    console.log({ articleTitle, articleSummary, articleContent })
     expect(articleTitle).toBe(title)
     expect(articleSummary).toBe(summary)
     expect(articleContent).toBe(content)

@@ -41,6 +41,7 @@ const Select: React.FC<SelectProps> = ({
   name,
   title,
   label,
+  visHideLabel,
 
   options,
   onChange,
@@ -123,7 +124,7 @@ const Select: React.FC<SelectProps> = ({
 
   return (
     <Field>
-      <Field.Header label={label} />
+      <Field.Header label={label} visHideLabel={visHideLabel} />
 
       {Content}
 

@@ -7,7 +7,7 @@ import styles from './styles.css'
 
 type SwitchProps = {
   name: string
-  label: string | React.ReactNode
+  label: string
   onChange: () => void
   checked: boolean
   loading?: boolean
@@ -30,10 +30,8 @@ export const Switch: React.FC<SwitchProps> = ({
   })
 
   return (
-    <span className={switchClasses}>
-      <VisuallyHidden>
-        <label htmlFor={fieldId}>{label}</label>
-      </VisuallyHidden>
+    <label htmlFor={fieldId} className={switchClasses}>
+      <VisuallyHidden>{label}</VisuallyHidden>
 
       <input
         type="checkbox"
@@ -52,6 +50,6 @@ export const Switch: React.FC<SwitchProps> = ({
       )}
 
       <style jsx>{styles}</style>
-    </span>
+    </label>
   )
 }

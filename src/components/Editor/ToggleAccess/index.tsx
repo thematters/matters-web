@@ -1,10 +1,15 @@
+import { useContext } from 'react'
+
 import {
   CircleDigest,
   IconArrowRight16,
   IconChecked32,
+  LanguageContext,
   Switch,
   Translate,
 } from '~/components'
+
+import { translate } from '~/common/utils'
 
 import SelectLicense from './SelectLicense'
 import styles from './styles.css'
@@ -65,7 +70,9 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
 
   inSidebar,
 }) => {
+  const { lang } = useContext(LanguageContext)
   const content = draft ? draft : article
+
   return (
     <section className={inSidebar ? 'inSidebar' : ''}>
       {canToggleCircle && (
@@ -78,7 +85,7 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
 
               <Switch
                 name="circle"
-                label={<Translate id="addToCircle" />}
+                label={translate({ id: 'addToCircle', lang })}
                 checked={!!circle}
                 onChange={() =>
                   editAccess(
@@ -167,7 +174,7 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
 
           <Switch
             name="iscn"
-            label={<Translate id="publishToISCN" />}
+            label={translate({ id: 'publishToISCN', lang })}
             checked={!!iscnPublish}
             onChange={() => {
               togglePublishISCN(!iscnPublish)

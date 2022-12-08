@@ -2,6 +2,8 @@ import classNames from 'classnames'
 
 import { Card, IconChecked, IconUnChecked, UserDigest } from '~/components'
 
+import { TEST_ID } from '~/common/enums'
+
 import styles from '../styles.css'
 
 import { UserDigestMiniUser } from '~/components/UserDigest/Mini/__generated__/UserDigestMiniUser'
@@ -25,7 +27,11 @@ const SearchSelectUser: React.FC<SearchSelectUserProps> = ({
   })
 
   return (
-    <Card spacing={['xtight', 'base']} onClick={() => onClick(user)}>
+    <Card
+      spacing={['xtight', 'base']}
+      onClick={() => onClick(user)}
+      testId={TEST_ID.SEARCH_RESULTS_ITEM}
+    >
       <section className={nodeClass}>
         <UserDigest.Mini
           user={user}

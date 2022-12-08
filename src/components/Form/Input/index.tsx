@@ -32,6 +32,7 @@ const Input: React.FC<InputProps> = ({
   name,
   label,
   extraButton,
+  visHideLabel,
 
   hint,
   error,
@@ -43,7 +44,12 @@ const Input: React.FC<InputProps> = ({
 
   return (
     <Field>
-      <Field.Header htmlFor={fieldId} label={label} extraButton={extraButton} />
+      <Field.Header
+        htmlFor={fieldId}
+        label={label}
+        extraButton={extraButton}
+        visHideLabel={visHideLabel}
+      />
 
       <Field.Content>
         <input
