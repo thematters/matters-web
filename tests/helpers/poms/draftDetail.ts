@@ -1,4 +1,5 @@
-import { expect, Locator, Page } from '@playwright/test'
+import { expect, Locator, Page, Response } from '@playwright/test'
+import _get from 'lodash/get'
 import _sample from 'lodash/sample'
 
 import { TEST_ID } from '~/common/enums'
@@ -183,11 +184,28 @@ export class DraftDetailPage {
   async setCollection() {
     await this.sidebarCollectArticle.click()
 
+    // type and search
     const searchKey = 'test'
     await this.page.getByLabel('Search').fill(searchKey)
 
-    const collectedArticles: string[] = []
+    // wait for the API response
+    await this.page.waitForResponse(async (res: Response) => {
+      try {
+        const body = (await res.body()).toString()
+        const parsedBody = JSON.parse(body)
+        const articles = !!_get(parsedBody, 'data.search.edges')
+        if (articles) {
+          return true
+        }
+      } catch (error) {
+        // console.error(error)
+      }
 
+      return false
+    })
+
+    // select first search result
+    const collectedArticles: string[] = []
     const searchResults = this.page.getByTestId(TEST_ID.SEARCH_RESULTS_ITEM)
     if ((await searchResults.count()) >= 1) {
       const title = await searchResults.first().getByRole('heading').innerText()
@@ -195,6 +213,7 @@ export class DraftDetailPage {
       collectedArticles.push(title)
     }
 
+    // save
     await this.dialogSaveButton.click()
 
     return collectedArticles
@@ -223,7 +242,7 @@ export class DraftDetailPage {
       license ||
       _sample(['CC BY-NC-ND 2.0 License', 'CC0 License', 'All Rights Reserved'])
     await this.sidebarSetLicense.click()
-    await this.page.getByRole('option', { name: license }).click()
+    await this.page.getByRole('option', { name: license }).last().click()
     return license
   }
 

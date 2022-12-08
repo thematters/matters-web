@@ -53,7 +53,7 @@ const Item: React.FC<ItemProps> = forwardRef(
     })
 
     return (
-      <li role="listitem">
+      <li aria-role="listitem">
         <Card
           bgColor={isSmallUp || forceGreyStyle ? 'grey-lighter' : 'white'}
           {...cardProps}

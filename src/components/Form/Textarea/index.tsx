@@ -31,7 +31,7 @@ const Textarea: React.FC<TextareaProps> = ({
   name,
   label,
   extraButton,
-  visHideLabel,
+  labelVisHidden,
 
   hint,
   error,
@@ -54,7 +54,7 @@ const Textarea: React.FC<TextareaProps> = ({
         label={label}
         htmlFor={fieldId}
         extraButton={extraButton}
-        visHideLabel={visHideLabel}
+        labelVisHidden={labelVisHidden}
       />
 
       <Field.Content>

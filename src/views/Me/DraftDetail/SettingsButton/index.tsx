@@ -49,7 +49,7 @@ const ConfirmButton = ({
     bgColor="green"
     onClick={openDialog}
     disabled={disabled}
-    aria-haspopup="true"
+    aria-haspopup="dialog"
   >
     <TextIcon color="white" size="md" weight="md">
       <Translate id="publish" />

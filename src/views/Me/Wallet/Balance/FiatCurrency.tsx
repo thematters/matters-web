@@ -133,11 +133,12 @@ export const FiatCurrencyBalance: React.FC<FiatCurrencyProps> = ({
                 title: 'moreActions',
               }}
             >
-              {({ openDialog, ref }) => (
+              {({ openDialog, type, ref }) => (
                 <section
-                  onClick={openDialog}
-                  ref={ref}
                   className="assetsItem clickable"
+                  onClick={openDialog}
+                  aria-haspopup={type}
+                  ref={ref}
                 >
                   <TextIcon
                     icon={<IconFiatCurrency40 size="xl-m" />}

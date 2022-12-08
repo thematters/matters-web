@@ -143,7 +143,7 @@ const SideNav = () => {
               active={isInMe}
               isMediumUp={isMediumUp}
               canScrollTop={false}
-              aira-haspopup="true"
+              aira-haspopup="menu"
             />
           </Dropdown>
         )}

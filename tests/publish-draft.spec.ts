@@ -28,10 +28,10 @@ test.describe('Publish draft', () => {
       isISCN,
     ] = await fuzzingRun({
       funcs: [
-        draftDetail.fillSummary,
-        draftDetail.setTags,
-        draftDetail.setCover,
-        draftDetail.setCollection,
+        () => draftDetail.fillSummary(),
+        () => draftDetail.setTags(),
+        () => draftDetail.setCover(),
+        () => draftDetail.setCollection(),
         () => draftDetail.setSupportSetting({}),
         () => draftDetail.setLicense({}),
         () => draftDetail.toggleAddToCicle({}),

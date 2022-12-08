@@ -8,6 +8,7 @@ import {
   Expandable,
   FollowUserButton,
   IconRss32,
+  LanguageContext,
   Layout,
   RssFeedDialog,
   Spinner,
@@ -20,7 +21,7 @@ import {
 } from '~/components'
 import ShareButton from '~/components/Layout/Header/ShareButton'
 
-import { numAbbr } from '~/common/utils'
+import { numAbbr, translate } from '~/common/utils'
 
 import IMAGE_COVER from '@/public/static/images/profile-cover.png'
 
@@ -48,10 +49,17 @@ interface FingerprintButtonProps {
 }
 
 const RssFeedButton = ({ user }: FingerprintButtonProps) => {
+  const { lang } = useContext(LanguageContext)
+
   return (
     <RssFeedDialog user={user}>
       {({ openDialog }) => (
-        <Button onClick={openDialog} spacing={['xxtight', 'xtight']}>
+        <Button
+          onClick={openDialog}
+          spacing={['xxtight', 'xtight']}
+          aria-label={translate({ id: 'contentFeedEntrance', lang })}
+          aria-haspopup="dialog"
+        >
           <IconRss32 color="green" size="lg" />
         </Button>
       )}
@@ -240,7 +248,11 @@ export const UserProfile = () => {
                   address={user.info.cryptoWallet?.address as string}
                 >
                   {({ openDialog }) => (
-                    <button type="button" onClick={openDialog}>
+                    <button
+                      type="button"
+                      onClick={openDialog}
+                      aria-haspopup="dialog"
+                    >
                       <Avatar size="xxxl" user={user} inProfile />
                     </button>
                   )}

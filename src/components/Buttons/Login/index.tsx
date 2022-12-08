@@ -43,7 +43,7 @@ export const LoginButton: React.FC<LoginButtonProps> = ({
 
   if (isPlain) {
     return (
-      <Button aria-haspopup="true" {...clickProps}>
+      <Button aria-haspopup="dialog" {...clickProps}>
         <Translate id="login" />
       </Button>
     )
@@ -62,7 +62,7 @@ export const LoginButton: React.FC<LoginButtonProps> = ({
       size={buttonSize}
       spacing={buttonSpacing}
       bgActiveColor={buttonBgActiveColor}
-      aria-haspopup="true"
+      aria-haspopup="dialog"
       {...clickProps}
     >
       <TextIcon color={textIconColor} size={textIconSize} weight="md">

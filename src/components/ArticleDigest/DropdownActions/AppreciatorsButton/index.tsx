@@ -6,7 +6,7 @@ interface AppreciatorsButtonProps {
 
 const AppreciatorsButton = ({ openDialog }: AppreciatorsButtonProps) => {
   return (
-    <Menu.Item onClick={openDialog}>
+    <Menu.Item onClick={openDialog} ariaHasPopup="dialog">
       <TextIcon icon={<IconClap16 size="md" />} size="md" spacing="base">
         <Translate id="viewAppreciators" />
       </TextIcon>

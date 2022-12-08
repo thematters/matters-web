@@ -6,14 +6,16 @@ export interface HeaderProps {
   label?: string | React.ReactNode
   htmlFor?: string
   extraButton?: React.ReactNode
-  visHideLabel?: boolean
+  labelId?: string
+  labelVisHidden?: boolean
 }
 
 const Header: React.FC<HeaderProps> = ({
   label,
   htmlFor,
   extraButton,
-  visHideLabel,
+  labelId,
+  labelVisHidden,
 }) => {
   if (!label && !extraButton) {
     return null
@@ -21,7 +23,9 @@ const Header: React.FC<HeaderProps> = ({
 
   const Inner = () => (
     <header>
-      <label htmlFor={htmlFor}>{label}</label>
+      <label htmlFor={htmlFor} {...(labelId ? { id: labelId } : {})}>
+        {label}
+      </label>
 
       {extraButton}
 
@@ -29,7 +33,7 @@ const Header: React.FC<HeaderProps> = ({
     </header>
   )
 
-  if (visHideLabel) {
+  if (labelVisHidden) {
     return (
       <VisuallyHidden>
         <Inner />

@@ -1,5 +1,5 @@
 import VisuallyHidden from '@reach/visually-hidden'
-import { forwardRef, useContext } from 'react'
+import { AriaAttributes, forwardRef, useContext } from 'react'
 import FocusLock from 'react-focus-lock'
 
 import {
@@ -45,9 +45,11 @@ import { translate } from '~/common/utils'
 
 type DropdownDialogNode = ({
   openDialog,
+  type,
   ref,
 }: {
   openDialog: () => void
+  type: AriaAttributes['aria-haspopup']
   ref?: React.Ref<any>
 }) => React.ReactChild | React.ReactChild[]
 
@@ -65,11 +67,12 @@ type DropdownDialogProps = {
 
 type ForwardChildrenProps = {
   openDialog: () => void
+  type: AriaAttributes['aria-haspopup']
 } & DropdownDialogChildren
 
 const ForwardChildren = forwardRef(
-  ({ openDialog, children }: ForwardChildrenProps, ref) => (
-    <>{children({ openDialog, ref })}</>
+  ({ openDialog, type, children }: ForwardChildrenProps, ref) => (
+    <>{children({ openDialog, type, ref })}</>
   )
 )
 
@@ -81,6 +84,8 @@ const BaseDropdownDialog = ({
   const { lang } = useContext(LanguageContext)
 
   const isSmallUp = useResponsive('sm-up')
+  const type = isSmallUp ? 'dialog' : 'listbox'
+
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
   const toggle = () => (show ? closeDialog() : openDialog())
   const closeOnClick = (event: React.MouseEvent | React.KeyboardEvent) => {
@@ -135,7 +140,7 @@ const BaseDropdownDialog = ({
           </FocusLock>
         }
       >
-        <ForwardChildren openDialog={toggle} children={children} />
+        <ForwardChildren openDialog={toggle} type={type} children={children} />
       </Dropdown>
     )
   }
@@ -145,7 +150,7 @@ const BaseDropdownDialog = ({
    */
   return (
     <>
-      {children({ openDialog: toggle })}
+      {children({ openDialog: toggle, type })}
 
       <Dialog isOpen={show} onDismiss={closeDialog} {...dialog} slideIn>
         <Dialog.Header
@@ -171,8 +176,13 @@ const BaseDropdownDialog = ({
   )
 }
 
-export const DropdownDialog: React.FC<DropdownDialogProps> = (props) => (
-  <Dialog.Lazy mounted={<BaseDropdownDialog {...props} />}>
-    {({ openDialog }) => <>{props.children({ openDialog })}</>}
-  </Dialog.Lazy>
-)
+export const DropdownDialog: React.FC<DropdownDialogProps> = (props) => {
+  const isSmallUp = useResponsive('sm-up')
+  const type = isSmallUp ? 'listbox' : 'dialog'
+
+  return (
+    <Dialog.Lazy mounted={<BaseDropdownDialog {...props} />}>
+      {({ openDialog }) => <>{props.children({ openDialog, type })}</>}
+    </Dialog.Lazy>
+  )
+}

@@ -10,7 +10,7 @@ export const PasswordResetDialogButton = ({
 }) => (
   <Button
     spacing={['xtight', 0]}
-    aria-haspopup="true"
+    aria-haspopup="dialog"
     onClick={gotoResetPassword}
   >
     <TextIcon color="green" weight="md">
@@ -44,6 +44,7 @@ export const EmailSignUpDialogButton = ({
       rightText={<Translate id="register" />}
       rightTextColor="green"
       onClick={gotoEmailSignUp}
+      ariaRole="button"
     />
   </Form.List>
 )

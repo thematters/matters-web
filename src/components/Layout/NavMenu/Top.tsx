@@ -47,7 +47,7 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
 
   return (
     <Menu spacingY={isInSideDrawerNav ? 0 : undefined}>
-      <Menu.Item spacing={menuItemSpacing} {...viewerPath}>
+      <Menu.Item spacing={menuItemSpacing} {...viewerPath} is="link">
         <TextIcon
           icon={<IconProfile24 size="md" />}
           spacing="base"
@@ -57,7 +57,7 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
         </TextIcon>
       </Menu.Item>
       {circlePath && (
-        <Menu.Item spacing={menuItemSpacing} href={circlePath.href}>
+        <Menu.Item spacing={menuItemSpacing} href={circlePath.href} is="link">
           <TextIcon
             icon={<IconCircle24 size="md" />}
             spacing="base"
@@ -67,7 +67,7 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
           </TextIcon>
         </Menu.Item>
       )}
-      <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_DRAFTS}>
+      <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_DRAFTS} is="link">
         <TextIcon
           icon={<IconDraft24 size="md" />}
           spacing="base"
@@ -77,7 +77,7 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
         </TextIcon>
       </Menu.Item>
       {(features.add_credit || features.payout) && (
-        <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_WALLET}>
+        <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_WALLET} is="link">
           <TextIcon
             icon={<IconWallet24 size="md" />}
             spacing="base"
@@ -87,7 +87,7 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
           </TextIcon>
         </Menu.Item>
       )}
-      <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_ANALYTICS}>
+      <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_ANALYTICS} is="link">
         <TextIcon
           icon={<IconAnalytics24 size="md" />}
           spacing="base"
@@ -96,7 +96,7 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
           <Translate id="myAnalytics" />
         </TextIcon>
       </Menu.Item>
-      <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_BOOKMARKS}>
+      <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_BOOKMARKS} is="link">
         <TextIcon
           icon={<IconBookmark24 size="md" />}
           spacing="base"
@@ -105,7 +105,11 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
           <Translate id="myBookmarks" />
         </TextIcon>
       </Menu.Item>
-      <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_APPRECIATIONS_SENT}>
+      <Menu.Item
+        spacing={menuItemSpacing}
+        href={PATHS.ME_APPRECIATIONS_SENT}
+        is="link"
+      >
         <TextIcon
           icon={<IconClap24 size="md" />}
           spacing="base"
@@ -114,7 +118,7 @@ const NavMenuTop: React.FC<NavMenuTopProps> = ({ isInSideDrawerNav }) => {
           <Translate id="myAppreciations" />
         </TextIcon>
       </Menu.Item>
-      <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_HISTORY}>
+      <Menu.Item spacing={menuItemSpacing} href={PATHS.ME_HISTORY} is="link">
         <TextIcon
           icon={<IconHistory24 size="md" />}
           spacing="base"

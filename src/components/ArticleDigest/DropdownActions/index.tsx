@@ -176,12 +176,12 @@ const BaseDropdownActions = ({
         title: 'moreActions',
       }}
     >
-      {({ openDialog, ref }) => (
+      {({ openDialog, type, ref }) => (
         <Button
           spacing={['xtight', 'xtight']}
           bgActiveColor={inCard ? 'grey-lighter-active' : 'grey-lighter'}
           aria-label={translate({ id: 'moreActions', lang })}
-          aria-haspopup="true"
+          aria-haspopup={type}
           onClick={openDialog}
           ref={ref}
         >

@@ -19,6 +19,7 @@ const Settings = () => {
         <Form.List.Item
           title={<Translate id="basicProfile" />}
           {...toPath({ page: 'circleEditProfile', circle: { name } })}
+          ariaRole="link"
         />
       </Form.List>
 
@@ -30,6 +31,7 @@ const Settings = () => {
         <Form.List.Item
           title={<Translate id="manageCircleInvitation" />}
           {...toPath({ page: 'circleManageInvitation', circle: { name } })}
+          ariaRole="link"
         />
       </Form.List>
 

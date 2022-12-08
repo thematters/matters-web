@@ -74,7 +74,8 @@ const Content = ({
       bgColor="grey-lighter"
       spacing={[0, 0]}
       borderRadius="base"
-      role="button"
+      ariaRole="button"
+      ariaHasPopup="dialog"
       {...(props as CardProps)}
     >
       <p>
@@ -88,6 +89,7 @@ const Content = ({
       spacing={['xtight', 'xtight']}
       bgActiveColor="grey-lighter"
       aria-label={translate({ id: 'putComment', lang })}
+      aria-haspopup="dialog"
       {...(props as ButtonProps)}
     >
       <TextIcon
@@ -123,7 +125,7 @@ const CommentBar = ({ article, disabled }: CommentBarProps) => {
     return (
       <Content
         {...props}
-        aria-haspopup="true"
+        aria-haspopup="dialog"
         onClick={() =>
           window.dispatchEvent(new CustomEvent(OPEN_LIKE_COIN_DIALOG, {}))
         }
@@ -209,7 +211,7 @@ const CommentBar = ({ article, disabled }: CommentBarProps) => {
       submitCallback={refetchResponses}
     >
       {({ openDialog }) => (
-        <Content {...props} aria-haspopup="true" onClick={openDialog} />
+        <Content {...props} aria-haspopup="dialog" onClick={openDialog} />
       )}
     </CommentFormDialog>
   )

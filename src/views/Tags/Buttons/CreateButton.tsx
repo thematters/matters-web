@@ -23,6 +23,7 @@ const CreateButton = () => {
         <Button
           size={['6rem', '2rem']}
           bgActiveColor="grey-lighter"
+          aria-haspopup="dialog"
           onClick={() => {
             if (viewer.isFrozen) {
               window.dispatchEvent(

@@ -98,12 +98,13 @@ export const LanguageSwitch: React.FC<LanguageSwitchProps> = ({
         ),
       }}
     >
-      {({ openDialog, ref }) => (
+      {({ openDialog, type, ref }) => (
         <Button
           size={[null, size === 'sm' ? '1.25rem' : '1.75rem']}
           spacing={[0, 'xtight']}
           bgColor={bgColor}
           onClick={openDialog}
+          aria-haspopup={type}
           ref={ref}
         >
           <TextIcon icon={<IconWorld16 />} size={textSize} color={iconColor}>

@@ -43,7 +43,7 @@ export const SignUpButton: React.FC<
 
   if (isPlain) {
     return (
-      <Button aria-haspopup="true" {...clickProps}>
+      <Button aria-haspopup="dialog" {...clickProps}>
         {children}
       </Button>
     )
@@ -54,7 +54,7 @@ export const SignUpButton: React.FC<
       bgColor="green"
       size={size || [null, '2.25rem']}
       spacing={[0, 'loose']}
-      aria-haspopup="true"
+      aria-haspopup="dialog"
       {...clickProps}
     >
       <TextIcon color="white" weight="md">

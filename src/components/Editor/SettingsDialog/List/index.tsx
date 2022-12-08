@@ -53,7 +53,7 @@ const SettingsList = ({
       />
 
       <Dialog.Content hasGrow>
-        <ul role="list">
+        <ul aria-role="list">
           <ListItem
             title={<Translate id="addTags" />}
             subTitle={

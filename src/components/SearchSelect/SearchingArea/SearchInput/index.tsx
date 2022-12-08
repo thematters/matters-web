@@ -26,7 +26,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
   onFocus,
   onBlur,
 }) => {
-  const fieldId = `search-input-${type}`
+  const fieldId = `search-input-${type}`.toLocaleLowerCase()
   const { lang } = useContext(LanguageContext)
   const textAriaLabel = translate({ id: 'search', lang })
   const textPlaceholder = {
@@ -70,6 +70,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
         </VisuallyHidden>
 
         <input
+          id={fieldId}
           type="search"
           name="q"
           value={value}

@@ -64,6 +64,7 @@ const WalletSettings = () => {
                 window.dispatchEvent(new CustomEvent(OPEN_LIKE_COIN_DIALOG, {}))
             : undefined
         }
+        ariaRole="button"
         rightText={likerId || <Translate id="setup" />}
       />
 
@@ -75,6 +76,7 @@ const WalletSettings = () => {
             <Translate id="loginWithWallet" />
           )
         }
+        ariaRole={ethAddress ? undefined : 'link'}
         href={ethAddress ? undefined : PATHS.ME_SETTINGS_CONNECT_WALLET}
         rightText={
           ethAddress ? (

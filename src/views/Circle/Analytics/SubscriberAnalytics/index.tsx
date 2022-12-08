@@ -190,6 +190,7 @@ const SubscriberAnalytics = () => {
               borderWidth="sm"
               spacing={['xxtight', 'xtight']}
               onClick={openMembersDialog}
+              aria-haspopup="dialog"
             >
               <TextIcon color="grey-darker" size="xs">
                 <Translate

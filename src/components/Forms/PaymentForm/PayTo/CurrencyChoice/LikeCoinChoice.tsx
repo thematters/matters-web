@@ -49,7 +49,7 @@ const LikeCoinChoice: React.FC<LikeCoinChoiceProps> = ({
 
   if (!hasLikerId) {
     return (
-      <section role="button" className="item">
+      <section aria-role="button" className="item">
         <IconLikeDisabled />
 
         <Button
@@ -75,7 +75,7 @@ const LikeCoinChoice: React.FC<LikeCoinChoiceProps> = ({
 
   if (!canReceiveLike) {
     return (
-      <section role="button" className="item">
+      <section className="item">
         <IconLikeDisabled />
 
         <TextIcon size="md" color="grey">
@@ -93,7 +93,7 @@ const LikeCoinChoice: React.FC<LikeCoinChoiceProps> = ({
 
   return (
     <section
-      role="button"
+      aria-role="button"
       className="item clickable"
       onClick={switchToSetAmount}
     >

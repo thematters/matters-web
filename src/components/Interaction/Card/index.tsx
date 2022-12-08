@@ -1,6 +1,7 @@
 import classNames from 'classnames'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { AriaRole, forwardRef, useContext, useRef } from 'react'
+import { AriaAttributes, AriaRole, forwardRef, useContext, useRef } from 'react'
 
 import { LanguageContext } from '~/components'
 
@@ -33,7 +34,10 @@ export interface CardProps {
 
   ref?: any
 
-  role?: AriaRole
+  is?: 'link' | 'anchor' | 'section'
+
+  ariaRole?: AriaRole
+  ariaHasPopup?: AriaAttributes['aria-haspopup']
   testId?: TEST_ID
 }
 
@@ -55,7 +59,10 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
 
       onClick,
 
-      role,
+      is = 'section',
+
+      ariaRole,
+      ariaHasPopup,
       testId,
 
       children,
@@ -139,11 +146,40 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
       }
     }
 
+    if (is === 'link' && href) {
+      return (
+        <Link href={href}>
+          <a
+            className={cardClasses}
+            ref={cardRef}
+            {...(testId ? { ['data-test-id']: testId } : {})}
+          >
+            {children}
+            <style jsx>{styles}</style>
+          </a>
+        </Link>
+      )
+    }
+
+    if (is === 'anchor' && htmlHref) {
+      return (
+        <a
+          className={cardClasses}
+          href={htmlHref}
+          target={htmlTarget}
+          ref={cardRef}
+          {...(testId ? { ['data-test-id']: testId } : {})}
+        >
+          {children}
+          <style jsx>{styles}</style>
+        </a>
+      )
+    }
+
     return (
       <section
         className={cardClasses}
-        tabIndex={disabled ? undefined : 0}
-        aria-label={ariaLabel}
+        tabIndex={disabled ? -1 : 0}
         ref={cardRef}
         data-clickable
         onKeyDown={(event) => {
@@ -158,7 +194,9 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
         onClick={(event) => {
           openLink({ newTab: event.metaKey, event })
         }}
-        role={role}
+        {...(ariaLabel ? { ['aria-label']: ariaLabel } : {})}
+        {...(ariaRole ? { ['aria-role']: ariaRole } : {})}
+        {...(ariaHasPopup ? { ['aria-haspopup']: ariaHasPopup } : {})}
         {...(testId ? { ['data-test-id']: testId } : {})}
       >
         {children}

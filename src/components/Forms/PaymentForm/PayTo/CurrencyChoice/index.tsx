@@ -110,7 +110,7 @@ const CurrencyChoice: React.FC<FormProps> = ({
 
       {/* HKD */}
       <section
-        role="button"
+        aria-role="button"
         className="item clickable"
         onClick={() => {
           switchToSetAmount(CURRENCY.HKD)

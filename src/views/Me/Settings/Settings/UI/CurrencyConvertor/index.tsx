@@ -114,11 +114,13 @@ const CurrencyConvertor = () => {
         title: <Title />,
       }}
     >
-      {({ openDialog, ref }) => (
+      {({ openDialog, type, ref }) => (
         <Form.List.Item
           title={<Title />}
           onClick={openDialog}
           rightText={currency}
+          ariaHasPopup={type}
+          ariaRole="button"
           ref={ref}
         />
       )}

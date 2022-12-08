@@ -22,6 +22,7 @@ const Buttons: React.FC<ButtonsProps> = ({ canPayout, hasStripeAccount }) => {
                 openDialog()
                 analytics.trackEvent('click_button', { type: 'top_up' })
               }}
+              aria-haspopup="dialog"
             >
               <Translate id="topUp" />
             </Dialog.Footer.Button>

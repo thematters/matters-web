@@ -18,7 +18,7 @@ const AddArticlesButton = ({ circle }: AddArticlesButtonProps) => {
           borderColor="gold"
           borderWidth="md"
           onClick={openAddCircleArticlesDialog}
-          aria-haspopup="true"
+          aria-haspopup="dialog"
         >
           <TextIcon icon={<IconPen16 />} weight="md" size="md-s">
             <Translate

@@ -49,6 +49,7 @@ const Box: React.FC<React.PropsWithChildren<BoxProps>> = ({
             onClick={onClick}
             bgActiveColor="grey-lighter"
             spacing={['xtight', 'xtight']}
+            aria-haspopup="dialog"
             aria-label={translate({ id: title, lang })}
           >
             <IconEdit16 color="grey" />

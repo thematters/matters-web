@@ -97,7 +97,7 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
         {tab === 'request' && (
           <Form.Textarea
             label={<Translate id="requestForDonation" />}
-            visHideLabel
+            labelVisHidden
             name="requestForDonation"
             placeholder={translate({
               id: 'supportRequestDescription',
@@ -115,7 +115,7 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
         {tab === 'reply' && (
           <Form.Textarea
             label={<Translate id="replyToDonator" />}
-            visHideLabel
+            labelVisHidden
             name="replyToDonator"
             placeholder={translate({
               id: 'supportResponseDescription',

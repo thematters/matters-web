@@ -12,7 +12,11 @@ const Dot = ({ index, scroll, selected }: Props) => {
   const dotClasses = classnames({ dot: true, selected })
   return (
     <>
-      <div className={dotClasses} role="button" onClick={() => scroll(index)} />
+      <div
+        className={dotClasses}
+        aria-role="button"
+        onClick={() => scroll(index)}
+      />
       <style jsx>{styles}</style>
     </>
   )

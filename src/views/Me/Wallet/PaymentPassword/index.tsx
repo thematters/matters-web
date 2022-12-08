@@ -17,7 +17,7 @@ const BasePaymentPassword: React.FC<PaymentPasswordProps> = ({
 }) => {
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
     <Menu width={isInDropdown ? 'sm' : undefined}>
-      <Menu.Item onClick={openResetPaymentPasswordDialog}>
+      <Menu.Item onClick={openResetPaymentPasswordDialog} ariaHasPopup="dialog">
         <TextIcon icon={<IconUnlock24 size="md" />} size="md" spacing="base">
           <Translate id="resetPaymentPassword" />
         </TextIcon>
@@ -36,7 +36,7 @@ const BasePaymentPassword: React.FC<PaymentPasswordProps> = ({
         title: 'moreActions',
       }}
     >
-      {({ openDialog, ref }) => (
+      {({ openDialog, type, ref }) => (
         <Form.List.Item
           title={
             <Translate
@@ -46,6 +46,8 @@ const BasePaymentPassword: React.FC<PaymentPasswordProps> = ({
             />
           }
           onClick={openDialog}
+          ariaRole="button"
+          ariaHasPopup={type}
           ref={ref}
         />
       )}

@@ -102,8 +102,8 @@ export const CurrencySwitch: React.FC<CurrencySwitchProps> = ({
         title: <Translate zh_hant="幣種" zh_hans="币种" en="Currency" />,
       }}
     >
-      {({ openDialog, ref }) => (
-        <Button onClick={openDialog} ref={ref}>
+      {({ openDialog, type, ref }) => (
+        <Button onClick={openDialog} aria-haspopup={type} ref={ref}>
           <TextIcon
             icon={<IconArrowDown16 />}
             textPlacement="left"

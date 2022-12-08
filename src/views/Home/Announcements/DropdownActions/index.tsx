@@ -125,14 +125,15 @@ const DropdownActions = ({
         ),
       }}
     >
-      {({ openDialog, ref }) => (
+      {({ openDialog, type: popupType, ref }) => (
         <div className="btn">
           <Button
-            ref={ref}
             bgColor="half-black"
             size={[null, '2rem']}
             spacing={[0, 'tight']}
             onClick={openDialog}
+            aria-haspopup={popupType}
+            ref={ref}
           >
             <TextIcon
               icon={<IconFilter12 size="xs" />}
