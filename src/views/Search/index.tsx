@@ -86,7 +86,7 @@ const Search = () => {
     if (!isAggregate) return
 
     addSearchHistory(q)
-  }, [isAggregate, q, viewer])
+  }, [isAggregate, q, storageKey])
 
   useEffect(() => {
     router.events.on('routeChangeStart', resetAutoComplete)
