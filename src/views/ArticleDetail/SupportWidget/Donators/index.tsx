@@ -113,17 +113,13 @@ const Donators = ({ article, showAvatarAnimation = false }: DonatorsProps) => {
                 <span className="donator-name">
                   <UserDigest.Plain
                     user={donators[0]}
-                    hasUnderline={true}
-                    subStringDisplayNameIndex={7}
+                    hasUnderline
+                    displayNameLimit={7}
                   />
                 </span>
 
                 <span>
-                  <Translate
-                    zh_hant="第一個支持了這篇作品"
-                    zh_hans="第一个支持了这篇作品"
-                    en="was the first to support this article"
-                  />
+                  <Translate id="theFirstSupporter" />
                 </span>
               </section>
             )}

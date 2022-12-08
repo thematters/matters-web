@@ -6,7 +6,7 @@ import { UserDigest } from '~/components/UserDigest'
 import {
   countWordsLength,
   makeSummary,
-  makeTitle,
+  subString,
   toPath,
 } from '~/common/utils'
 
@@ -31,7 +31,7 @@ export const ArticleDigestCard = ({
   const { summary, state } = article
   const isBanned = state === 'banned'
   const cover = !isBanned ? article.cover : null
-  const title = makeTitle(article.title, 70)
+  const title = subString(article.title, 70)
   const cleanedSummary = isBanned
     ? ''
     : makeSummary(summary, countWordsLength(article.title) > 40 ? 50 : 70)

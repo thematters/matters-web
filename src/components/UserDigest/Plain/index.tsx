@@ -2,7 +2,7 @@ import classNames from 'classnames'
 
 import { LinkWrapper } from '~/components'
 
-import { makeTitle, toPath } from '~/common/utils'
+import { subString, toPath } from '~/common/utils'
 
 import { fragments } from './gql'
 import styles from './styles.css'
@@ -14,7 +14,7 @@ export type UserDigestPlainProps = {
 
   disabled?: boolean
   hasUnderline?: boolean
-  subStringDisplayNameIndex?: number
+  displayNameLimit?: number
   onClick?: () => void
 }
 
@@ -23,7 +23,7 @@ const Plain = ({
   disabled,
   onClick,
   hasUnderline,
-  subStringDisplayNameIndex,
+  displayNameLimit,
 }: UserDigestPlainProps) => {
   const path = toPath({
     page: 'userProfile',
@@ -44,9 +44,8 @@ const Plain = ({
     <LinkWrapper {...path} disabled={disabled} onClick={onClick}>
       <section className={containerClasses}>
         <span className={displayNameClasses}>
-          {subStringDisplayNameIndex &&
-            makeTitle(user.displayName!, subStringDisplayNameIndex)}
-          {!subStringDisplayNameIndex && user.displayName}
+          {displayNameLimit && subString(user.displayName!, displayNameLimit)}
+          {!displayNameLimit && user.displayName}
         </span>
         <style jsx>{styles}</style>
       </section>

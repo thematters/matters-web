@@ -145,7 +145,7 @@ export const TEXT = {
     forgetPaymentPassword: '忘記交易密碼',
     frequentSearch: '熱門搜尋',
     guide: '玩轉 Matters 實用指南',
-    hasSupportedArticle: '人支持過作品',
+    hasSupportedArticle: '個人支持過作品',
     help: '說明',
     helpCenter: '幫助中心',
     hintAddTag:
@@ -348,6 +348,7 @@ export const TEXT = {
     term: '用戶協議',
     termAndPrivacy: '用戶協議與隱私政策',
     termHint: '我們的用戶協議和隱私政策發生了更改，請閱讀並同意後繼續使用。',
+    theFirstSupporter: '第一個支持了這篇作品',
     thinkAboutIt: '考慮一下',
     TOKEN_INVALID: '登入信息已失效，請重新登入',
     topic: '話題',
@@ -538,7 +539,7 @@ export const TEXT = {
     forgetPaymentPassword: '忘记交易密码',
     frequentSearch: '热门搜索',
     guide: '玩转 Matters 实用指南',
-    hasSupportedArticle: '人支持过作品',
+    hasSupportedArticle: '个人支持过作品',
     help: '说明',
     helpCenter: '帮助中心',
     hintAddTag:
@@ -741,6 +742,7 @@ export const TEXT = {
     term: '用户协议',
     termAndPrivacy: '用户协议与隐私政策',
     termHint: '我们的用户协议和隐私政策发生了更改，请阅读并同意后继续使用。',
+    theFirstSupporter: '第一个支持了這篇作品',
     thinkAboutIt: '考虑一下',
     TOKEN_INVALID: '登录信息已失效，请重新登录',
     topic: '话题',
@@ -1161,6 +1163,7 @@ export const TEXT = {
     termAndPrivacy: 'Terms and Privacy Policy',
     termHint:
       'We have updated our Terms and Privacy Policy. To continue, you must agree to the Terms.',
+    theFirstSupporter: 'was the first to support this article',
     thinkAboutIt: 'Maybe later',
     TOKEN_INVALID: 'Please log in again',
     topic: 'Topic',
