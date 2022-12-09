@@ -97,46 +97,32 @@ export class ArticleDetailPage {
     this.dialog = this.page.getByRole('dialog')
   }
 
-  async goto() {
-    await this.page.goto('https://playwright.dev')
-  }
-
   async getSummary() {
-    if (!(await this.summary.isVisible())) {
-      return ''
-    }
+    await this.summary.waitFor({ state: 'visible' })
     return this.summary.innerText()
   }
 
   async getTags() {
-    if (!(await this.tagList.isVisible())) {
-      return []
-    }
+    await this.tagList.waitFor({ state: 'visible' })
     return (await this.tagList.innerText()).split(/\s/).map((t) => t.trim())
   }
 
-  async getFirstCollectedArticle() {
-    if (!(await this.collection.isVisible())) {
-      return []
-    }
-
+  async getFirstCollectionArticleTitle() {
+    await this.collection.waitFor({ state: 'visible' })
     return this.collection
       .getByRole('listitem')
       .getByRole('heading')
+      .first()
       .innerText()
   }
 
   async getSupportRequest() {
-    if (!(await this.supportRequest.isVisible())) {
-      return []
-    }
+    await this.supportRequest.waitFor({ state: 'visible' })
     return this.supportRequest.innerText()
   }
 
   async getLicense() {
-    if (!(await this.license.isVisible())) {
-      return []
-    }
+    await this.license.waitFor({ state: 'visible' })
     return this.license.innerText()
   }
 }

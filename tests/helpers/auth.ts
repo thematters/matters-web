@@ -1,5 +1,6 @@
-import { Page, Response } from '@playwright/test'
-import _get from 'lodash/get'
+import { Page } from '@playwright/test'
+
+import { waitForAPIResponse } from './api'
 
 export type User = {
   email: string
@@ -47,20 +48,9 @@ export const login = async ({
   // Submit
   await page.getByRole('button', { name: 'Confirm' }).click()
 
-  // Wait for API response from login request
-  await page.waitForResponse(async (res: Response) => {
-    try {
-      const body = (await res.body()).toString()
-      const parsedBody = JSON.parse(body)
-      const isLoggedIn = !!_get(parsedBody, 'data.userLogin.token')
-      if (isLoggedIn) {
-        return true
-      }
-    } catch (error) {
-      // console.error(error)
-    }
-
-    return false
+  await waitForAPIResponse({
+    page,
+    path: 'data.userLogin.token',
   })
 }
 

@@ -15,21 +15,43 @@ test.describe('Publish draft', () => {
     // Required: Fill title and content
     const title = await draftDetail.fillTitle()
     const content = await draftDetail.fillContent()
-
     // Optional
-    const [summary, tags, , collectedArticles, supportSetting, license, , ,] =
-      await fuzzingRun({
-        funcs: [
-          () => draftDetail.fillSummary(),
-          () => draftDetail.setTags(),
-          () => draftDetail.setCover(),
-          () => draftDetail.setCollection(),
-          () => draftDetail.setSupportSetting({}),
-          () => draftDetail.setLicense({}),
-          () => draftDetail.toggleAddToCicle({}),
-          () => draftDetail.toggleISCN({}),
-        ],
-      })
+    const [
+      summary,
+      tags,
+      ,
+      collectedArticleTitle,
+      supportSetting,
+      license,
+      ,
+      ,
+    ] = (await fuzzingRun({
+      funcs: [
+        () => draftDetail.fillSummary(),
+        () => draftDetail.setTags(),
+        () => draftDetail.setCover(),
+        () => draftDetail.setCollection(),
+        () => draftDetail.setSupportSetting({}),
+        () => draftDetail.setLicense({}),
+        () => draftDetail.checkAddToCicle(),
+        () => draftDetail.checkISCN(),
+      ],
+    })) as [
+      string | undefined,
+      string[] | undefined,
+      boolean | undefined,
+      string[] | undefined,
+      (
+        | {
+            replyToDonatorText?: boolean
+            requestForDonationText?: boolean
+          }
+        | undefined
+      ),
+      string | undefined,
+      boolean | undefined,
+      boolean | undefined
+    ]
 
     // Publish
     await draftDetail.publish()
@@ -47,29 +69,29 @@ test.describe('Publish draft', () => {
     const articleContent = await articleDetail.content.innerText()
     expect(articleContent).toBe(content)
 
-    const articleSummary = await articleDetail.getSummary()
     if (summary) {
+      const articleSummary = await articleDetail.getSummary()
       expect(articleSummary).toBe(summary)
     }
 
-    const articleTags = await articleDetail.getTags()
     if (tags && tags.length > 0) {
+      const articleTags = await articleDetail.getTags()
       expect(articleTags.sort().join(',')).toBe(tags.sort().join(','))
     }
 
-    const articleFirstCollectedArticle =
-      await articleDetail.getFirstCollectedArticle()
-    if (collectedArticles && collectedArticles.length > 0) {
-      expect(articleFirstCollectedArticle).toBe(collectedArticles[0])
+    if (collectedArticleTitle) {
+      const firstCollectionArticleTitle =
+        await articleDetail.getFirstCollectionArticleTitle()
+      expect(firstCollectionArticleTitle).toBe(collectedArticleTitle)
     }
 
-    const articleSupportRequest = await articleDetail.getSupportRequest()
     if (supportSetting?.requestForDonationText) {
+      const articleSupportRequest = await articleDetail.getSupportRequest()
       expect(articleSupportRequest).toBe(supportSetting.requestForDonationText)
     }
 
-    const articleLicense = await articleDetail.getLicense()
     if (license) {
+      const articleLicense = await articleDetail.getLicense()
       expect(articleLicense).toBe(license)
     }
   })

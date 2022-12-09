@@ -1,9 +1,9 @@
-import { expect, Locator, Page, Response } from '@playwright/test'
-import _get from 'lodash/get'
+import { expect, Locator, Page } from '@playwright/test'
 import _sample from 'lodash/sample'
 
 import { TEST_ID } from '~/common/enums'
 
+import { waitForAPIResponse } from '../api'
 import {
   generateContent,
   generateSummary,
@@ -135,20 +135,9 @@ export class DraftDetailPage {
       .getByLabel('Upload Cover')
       .setInputFiles('./tests/helpers/assets/320x180.jpg')
 
-    // wait for the API response
-    await this.page.waitForResponse(async (res: Response) => {
-      try {
-        const body = (await res.body()).toString()
-        const parsedBody = JSON.parse(body)
-        const assets = !!_get(parsedBody, 'data.node.assets')
-        if (assets) {
-          return true
-        }
-      } catch (error) {
-        // console.error(error)
-      }
-
-      return false
+    await waitForAPIResponse({
+      page: this.page,
+      path: 'data.node.assets',
     })
 
     await this.dialogSaveButton.click()
@@ -179,14 +168,14 @@ export class DraftDetailPage {
 
     if (replyToDonator) {
       replyToDonatorText = generateSupportSetting()
-      await this.page.getByRole('button', { name: 'Call-to-Support' }).click()
-      await this.page.getByLabel('Call-to-Support').fill(replyToDonatorText)
+      await this.page.getByRole('button', { name: 'Thank-you card' }).click()
+      await this.page.getByLabel('Thank-you card').fill(replyToDonatorText)
     }
 
     if (requestForDonation) {
       requestForDonationText = generateSupportSetting()
-      await this.page.getByRole('button', { name: 'Thank-you card' }).click()
-      await this.page.getByLabel('Thank-you card').fill(requestForDonationText)
+      await this.page.getByRole('button', { name: 'Call-to-Support' }).click()
+      await this.page.getByLabel('Call-to-Support').fill(requestForDonationText)
     }
 
     await this.dialogSaveButton.click()
@@ -201,53 +190,55 @@ export class DraftDetailPage {
     const searchKey = 'test'
     await this.page.getByLabel('Search').fill(searchKey)
 
-    // wait for the API response
-    await this.page.waitForResponse(async (res: Response) => {
-      try {
-        const body = (await res.body()).toString()
-        const parsedBody = JSON.parse(body)
-        const articles = !!_get(parsedBody, 'data.search.edges')
-        if (articles) {
-          return true
-        }
-      } catch (error) {
-        // console.error(error)
-      }
-
-      return false
+    await waitForAPIResponse({
+      page: this.page,
+      path: 'data.search.edges',
     })
 
     // select first search result
-    const collectedArticles: string[] = []
+    let articleTitle = ''
     const searchResults = this.page.getByTestId(TEST_ID.SEARCH_RESULTS_ITEM)
     if ((await searchResults.count()) >= 1) {
       const title = await searchResults.first().getByRole('heading').innerText()
       await searchResults.first().click()
-      collectedArticles.push(title)
+      articleTitle = title
     }
 
     // save
     await this.dialogSaveButton.click()
 
-    return collectedArticles
+    return articleTitle
   }
 
-  async toggleAddToCicle({ check }: { check?: boolean }) {
+  async checkAddToCicle() {
     const hasAddToCircle = await this.sidebarToggleAddToCircle.isVisible()
-
     if (!hasAddToCircle) {
       return
     }
 
-    check = typeof check === 'boolean' ? check : _sample([true, false])
-    await this.sidebarToggleAddToCircle[check ? 'check' : 'uncheck']()
-    return check
+    await waitForAPIResponse({
+      page: this.page,
+      path: 'data.putDraft.access.circle',
+    })
+
+    // FIXME: error will be throw if using .check()
+    // https://github.com/microsoft/playwright/issues/13470
+    await this.sidebarToggleAddToCircle.click()
+
+    return true
   }
 
-  async toggleISCN({ check }: { check?: boolean }) {
-    check = typeof check === 'boolean' ? check : _sample([true, false])
-    await this.sidebarToggleISCN[check ? 'check' : 'uncheck']()
-    return check
+  async checkISCN() {
+    // FIXME: error will be throw if using .check()
+    // https://github.com/microsoft/playwright/issues/13470
+    await this.sidebarToggleISCN.click()
+
+    await waitForAPIResponse({
+      page: this.page,
+      path: 'data.putDraft.iscnPublish',
+    })
+
+    return true
   }
 
   async setLicense({ license }: { license?: License }) {

@@ -23,7 +23,7 @@ const config: PlaywrightTestConfig = {
   retries: isCI ? 2 : 0,
   workers: isCI ? 2 : undefined,
   reporter: 'html',
-  globalSetup: require.resolve('./tests/global-setup'),
+  globalSetup: require.resolve('./tests/globalSetup'),
   use: {
     testIdAttribute: 'data-test-id',
     actionTimeout: 0,

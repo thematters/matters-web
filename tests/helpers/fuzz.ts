@@ -13,6 +13,8 @@ export const fuzzingRun = async ({ funcs }: FuzzingRunProps) => {
     const shouldRun = runs[index]
     if (shouldRun) {
       result.push(await func())
+    } else {
+      result.push(undefined)
     }
   }
 

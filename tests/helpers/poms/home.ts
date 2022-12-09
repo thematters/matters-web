@@ -1,7 +1,8 @@
-import { Locator, Page, Response } from '@playwright/test'
-import _get from 'lodash/get'
+import { Locator, Page } from '@playwright/test'
 
 import { TEST_ID } from '~/common/enums'
+
+import { waitForAPIResponse } from '../api'
 
 export class HomePage {
   readonly page: Page
@@ -33,44 +34,20 @@ export class HomePage {
   }
 
   async shuffleSidebarTags() {
-    // click shuffle button
     await this.page.getByRole('button', { name: 'Shuffle' }).first().click()
 
-    // wait for the API response
-    await this.page.waitForResponse(async (res: Response) => {
-      try {
-        const body = (await res.body()).toString()
-        const parsedBody = JSON.parse(body)
-        const tags = !!_get(parsedBody, 'data.viewer.recommendation.tags')
-        if (tags) {
-          return true
-        }
-      } catch (error) {
-        // console.error(error)
-      }
-
-      return false
+    await waitForAPIResponse({
+      page: this.page,
+      path: 'data.viewer.recommendation.tags',
     })
   }
 
   async shuffleSidebarUsers() {
-    // click shuffle button
     await this.page.getByRole('button', { name: 'Shuffle' }).last().click()
 
-    // wait for the API response
-    await this.page.waitForResponse(async (res: Response) => {
-      try {
-        const body = (await res.body()).toString()
-        const parsedBody = JSON.parse(body)
-        const users = !!_get(parsedBody, 'data.viewer.recommendation.authors')
-        if (users) {
-          return true
-        }
-      } catch (error) {
-        // console.error(error)
-      }
-
-      return false
+    await waitForAPIResponse({
+      page: this.page,
+      path: 'data.viewer.recommendation.authors',
     })
   }
 }

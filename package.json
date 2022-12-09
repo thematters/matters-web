@@ -13,6 +13,7 @@
     "test": "playwright test",
     "test:prepare": "playwright install --with-deps",
     "test:debug": "playwright test --debug",
+    "test:codegen": "playwright codegen",
     "start": "PORT=\"${PORT:-3000}\"; next start -p $PORT",
     "build": "NODE_ENV=production next build",
     "export": "next export",
