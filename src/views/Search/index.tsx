@@ -86,23 +86,21 @@ const Search = () => {
   return (
     <Layout.Main>
       <Layout.Header
-        // left={
-        //   showBackButton ? (
-        //     <Layout.Header.BackButton />
-        //   ) : showMeButton ? (
-        //     <Layout.Header.MeButton />
-        //   ) : null
-        // }
+        left={isSmallUp && <Layout.Header.BackButton />}
         right={
-          <>
-            <SearchBar hasDropdown={false} onChange={setTypingKey} />
+          isSmallUp ? (
+            <Layout.Header.Title id="search" />
+          ) : (
+            <>
+              <SearchBar hasDropdown={false} onChange={setTypingKey} />
 
-            {showCancelButton && (
-              <span style={{ marginLeft: '1rem' }}>
-                <Layout.Header.CancelButton onClick={onCancel} />
-              </span>
-            )}
-          </>
+              {showCancelButton && (
+                <span style={{ marginLeft: '1rem' }}>
+                  <Layout.Header.CancelButton onClick={onCancel} />
+                </span>
+              )}
+            </>
+          )
         }
       />
 
