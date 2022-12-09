@@ -1,18 +1,19 @@
-import { analytics, toPath } from '~/common/utils'
+import { useQuery } from '@apollo/react-hooks'
+
 import {
-  ArticleDigestTitle,
+  ArticleDigestConcise,
   Card,
+  InfiniteScroll,
   List,
   Spinner,
-  usePublicQuery,
-  usePullToRefresh,
   useRoute,
 } from '~/components'
 import { SearchAggregateArticlesPublicQuery } from '~/gql/graphql'
 
+import { analytics, mergeConnections, toPath } from '~/common/utils'
+
 import { SEARCH_AGGREGATE_ARTICLES_PUBLIC } from './gql'
 import styles from './styles.css'
-import ViewMoreButton from './ViewMoreButton'
 
 const AggregateArticleResults = () => {
   const { getQuery } = useRoute()
@@ -22,19 +23,19 @@ const AggregateArticleResults = () => {
    * Data Fetching
    */
   // public data
-  const { data, loading, refetch } =
-    usePublicQuery<SearchAggregateArticlesPublicQuery>(
+  const { data, loading, fetchMore, refetch } =
+    useQuery<SearchAggregateArticlesPublicQuery>(
       SEARCH_AGGREGATE_ARTICLES_PUBLIC,
-      { variables: { key: q } }
+      {
+        variables: { key: q },
+        fetchPolicy: 'network-only',
+      }
     )
 
+  // pagination
+  const connectionPath = 'search'
   const { edges, pageInfo } = data?.search || {}
 
-  usePullToRefresh.Handler(refetch)
-
-  /**
-   * Render
-   */
   if (loading) {
     return <Spinner />
   }
@@ -43,42 +44,58 @@ const AggregateArticleResults = () => {
     return null
   }
 
+  // load next page
+  const loadMore = () => {
+    analytics.trackEvent('load_more', {
+      type: 'search_article',
+      location: edges?.length || 0,
+    })
+
+    return fetchMore({
+      variables: { after: pageInfo?.endCursor },
+      updateQuery: (previousResult, { fetchMoreResult }) =>
+        mergeConnections({
+          oldData: previousResult,
+          newData: fetchMoreResult,
+          path: connectionPath,
+        }),
+    })
+  }
+
   return (
     <section className="aggregate-section">
-      <List>
-        {edges.map(
-          ({ node, cursor }, i) =>
-            node.__typename === 'Article' && (
-              <List.Item key={cursor}>
-                <Card
-                  spacing={['base', 'base']}
-                  {...toPath({
-                    page: 'articleDetail',
-                    article: node,
-                  })}
-                  onClick={() =>
-                    analytics.trackEvent('click_feed', {
-                      type: 'search',
-                      contentType: 'article',
-                      location: i,
-                      id: node.id,
-                    })
-                  }
-                >
-                  <ArticleDigestTitle
-                    article={node}
-                    is="h3"
-                    textWeight="normal"
-                    textSize="md"
-                  />
-                </Card>
-              </List.Item>
-            )
-        )}
-      </List>
-
-      <ViewMoreButton q={q} type="article" />
-
+      <InfiniteScroll
+        hasNextPage={pageInfo.hasNextPage}
+        loadMore={loadMore}
+        pullToRefresh={refetch}
+      >
+        <List>
+          {edges.map(
+            ({ node, cursor }, i) =>
+              node.__typename === 'Article' && (
+                <List.Item key={cursor}>
+                  <Card
+                    spacing={['base', 'base']}
+                    {...toPath({
+                      page: 'articleDetail',
+                      article: node,
+                    })}
+                    onClick={() =>
+                      analytics.trackEvent('click_feed', {
+                        type: 'search',
+                        contentType: 'article',
+                        location: i,
+                        id: node.id,
+                      })
+                    }
+                  >
+                    <ArticleDigestConcise article={node} />
+                  </Card>
+                </List.Item>
+              )
+          )}
+        </List>
+      </InfiniteScroll>
       <style jsx>{styles}</style>
     </section>
   )
