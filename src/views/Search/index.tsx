@@ -21,9 +21,6 @@ import { storage, toPath } from '~/common/utils'
 
 import AggregateResults from './AggregateResults'
 // import EmptySearch from './EmptySearch'
-import SearchArticles from './SearchArticles'
-import SearchTags from './SearchTags'
-import SearchUsers from './SearchUsers'
 
 const Search = () => {
   const viewer = useContext(ViewerContext)
@@ -50,7 +47,6 @@ const Search = () => {
   }
 
   const { getQuery, router } = useRoute()
-  const type = getQuery('type')
   const q = getQuery('q')
   const isSmallUp = useResponsive('sm-up')
 
@@ -63,17 +59,11 @@ const Search = () => {
 
   const isOverview = !q && !typingKey
   const isAutoComplete = typingKey
-  const isTagOnly = !isAutoComplete && type === 'tag'
-  const isUserOnly = !isAutoComplete && type === 'user'
-  const isArticleOnly = !isAutoComplete && type === 'article'
-  const isAggregate =
-    !isOverview &&
-    !isAutoComplete &&
-    !isTagOnly &&
-    !isUserOnly &&
-    !isArticleOnly
+  const isAggregate = !isOverview && !isAutoComplete
+
   // const showBackButton = isSmallUp && isOverview
   // const showMeButton = !isSmallUp && isOverview
+
   const showCancelButton = !isOverview
 
   useEffect(() => {
@@ -94,7 +84,7 @@ const Search = () => {
   }, [])
 
   return (
-    <Layout.Main bgColor={isAggregate ? 'grey-lighter' : undefined}>
+    <Layout.Main>
       <Layout.Header
         // left={
         //   showBackButton ? (
@@ -127,9 +117,6 @@ const Search = () => {
         )}
         {isAutoComplete && <SearchQuickResult searchKey={typingKey} inPage />}
 
-        {isTagOnly && <SearchTags />}
-        {isUserOnly && <SearchUsers />}
-        {isArticleOnly && <SearchArticles />}
         {isAggregate && <AggregateResults />}
       </PullToRefresh>
     </Layout.Main>
