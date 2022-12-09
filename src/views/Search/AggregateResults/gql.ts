@@ -1,10 +1,11 @@
 import gql from 'graphql-tag'
 
-import { ArticleDigestTitle, Tag, UserDigest } from '~/components'
+import { ArticleDigestConcise, TagDigest, UserDigest } from '~/components'
 
 export const SEARCH_AGGREGATE_ARTICLES_PUBLIC = gql`
-  query SearchAggregateArticlesPublic($key: String!) {
-    search(input: { key: $key, type: Article, first: 4, record: true }) {
+  query SearchAggregateArticlesPublic($key: String!, $after: String) {
+    search(input: { key: $key, type: Article, first: 10, after: $after }) {
+      totalCount
       pageInfo {
         startCursor
         endCursor
@@ -14,18 +15,18 @@ export const SEARCH_AGGREGATE_ARTICLES_PUBLIC = gql`
         cursor
         node {
           ... on Article {
-            ...ArticleDigestTitleArticle
+            ...ArticleDigestConciseArticle
           }
         }
       }
     }
   }
-  ${ArticleDigestTitle.fragments.article}
+  ${ArticleDigestConcise.fragments.article}
 `
 
 export const SEARCH_AGGREGATE_TAGS_PUBLIC = gql`
-  query SearchAggregateTagsPublic($key: String!) {
-    search(input: { key: $key, type: Tag, first: 3, record: true }) {
+  query SearchAggregateTagsPublic($key: String!, $after: String) {
+    search(input: { key: $key, type: Tag, first: 10, after: $after }) {
       pageInfo {
         startCursor
         endCursor
@@ -35,18 +36,18 @@ export const SEARCH_AGGREGATE_TAGS_PUBLIC = gql`
         cursor
         node {
           ... on Tag {
-            ...DigestTag
+            ...TagDigestConciseTag
           }
         }
       }
     }
   }
-  ${Tag.fragments.tag}
+  ${TagDigest.Concise.fragments.tag}
 `
 
 export const SEARCH_AGGREGATE_USERS_PUBLIC = gql`
-  query SearchAggregateUsersPublic($key: String!) {
-    search(input: { key: $key, type: User, first: 3, record: true }) {
+  query SearchAggregateUsersPublic($key: String!, $after: String) {
+    search(input: { key: $key, type: User, first: 10, after: $after }) {
       pageInfo {
         startCursor
         endCursor
@@ -56,11 +57,11 @@ export const SEARCH_AGGREGATE_USERS_PUBLIC = gql`
         cursor
         node {
           ... on User {
-            ...UserDigestMiniUser
+            ...UserDigestConciseUser
           }
         }
       }
     }
   }
-  ${UserDigest.Mini.fragments.user}
+  ${UserDigest.Concise.fragments.user}
 `
