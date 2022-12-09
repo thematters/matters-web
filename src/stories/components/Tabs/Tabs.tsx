@@ -12,14 +12,14 @@ const AllTabs = () => {
           onClick={() => setCurr('article')}
           selected={curr === 'article'}
         >
-          <Translate id="article" />
+          <Translate id="articles" />
         </Tabs.Tab>
 
         <Tabs.Tab
           onClick={() => setCurr('comment')}
           selected={curr === 'comment'}
         >
-          <Translate id="comment" />
+          <Translate id="responses" />
         </Tabs.Tab>
 
         <Tabs.Tab onClick={() => setCurr('tag')} selected={curr === 'tag'}>

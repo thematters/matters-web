@@ -48,3 +48,16 @@ export const generateSupportSetting = () =>
     sentenceUpperBound: 10,
     units: 'sentences',
   })
+
+export const generateComment = ({
+  format = 'plain',
+}: {
+  format?: 'html' | 'plain'
+}) =>
+  loremIpsum({
+    count: 1,
+    format,
+    paragraphLowerBound: 1,
+    paragraphUpperBound: 1,
+    units: 'paragraphs',
+  })

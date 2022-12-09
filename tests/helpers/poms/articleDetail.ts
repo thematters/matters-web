@@ -2,6 +2,9 @@ import { Locator, Page } from '@playwright/test'
 
 import { TEST_ID } from '~/common/enums'
 
+import { waitForAPIResponse } from '../api'
+import { generateComment } from '../text'
+
 export class ArticleDetailPage {
   readonly page: Page
 
@@ -38,6 +41,7 @@ export class ArticleDetailPage {
 
   // dialog
   readonly dialog: Locator
+  readonly dialogCommentInput: Locator
 
   constructor(page: Page) {
     this.page = page
@@ -73,7 +77,7 @@ export class ArticleDetailPage {
       name: 'support author',
     })
     this.toolbarCommentButton = this.page.getByRole('button', {
-      name: 'Comment',
+      name: 'Comment…',
     })
     this.toolbarBookmarkButton = this.page.getByRole('button', {
       name: 'Bookmark',
@@ -95,6 +99,7 @@ export class ArticleDetailPage {
 
     // dialog
     this.dialog = this.page.getByRole('dialog')
+    this.dialogCommentInput = this.dialog.locator('.ql-editor')
   }
 
   async getSummary() {
@@ -124,5 +129,23 @@ export class ArticleDetailPage {
   async getLicense() {
     await this.license.waitFor({ state: 'visible' })
     return this.license.innerText()
+  }
+
+  async sendComment() {
+    // Open comment editor
+    await this.toolbarCommentButton.click()
+
+    // Fill with content
+    const content = generateComment({})
+    await this.dialogCommentInput.fill(content)
+
+    // Send
+    await this.dialog.getByRole('button', { name: 'Send' }).click()
+    await waitForAPIResponse({
+      page: this.page,
+      path: 'data.putComment.id',
+    })
+
+    return content
   }
 }
