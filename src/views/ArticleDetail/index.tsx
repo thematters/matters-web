@@ -267,7 +267,6 @@ const BaseArticleDetail = ({
 
         <section className="content">
           <TagList article={article} />
-
           <section className="title">
             <Title type="article">{title}</Title>
 
@@ -288,34 +287,27 @@ const BaseArticleDetail = ({
               canReadFullContent={canReadFullContent}
             />
           </section>
-
           {article?.summaryCustomized && (
             <CustomizedSummary summary={summary} />
           )}
-
           <Content
             article={article}
             content={content}
             translating={translating}
           />
+          <License license={article.license} />
           {circle && !canReadFullContent && <CircleWall circle={circle} />}
-
           {features.payment && canReadFullContent && (
             <SupportWidget article={article} />
           )}
-
-          <License license={article.license} />
-
           {collectionCount > 0 && (
             <section className="block">
               <Collection article={article} collectionCount={collectionCount} />
             </section>
           )}
-
           <section className="block">
             <DynamicResponse id={article.id} lock={!canReadFullContent} />
           </section>
-
           {!isLargeUp && <RelatedArticles article={article} />}
         </section>
 

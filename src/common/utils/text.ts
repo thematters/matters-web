@@ -66,7 +66,7 @@ export const countWordsLength = (text: string) => {
 /**
  * Simple substring title by words' length counting.
  */
-export const makeTitle = (text: string, limit: number) => {
+export const subString = (text: string, limit: number) => {
   const buffer = 3
   const length = countWordsLength(text)
   if (text && length > limit) {

@@ -67,4 +67,15 @@
     font-weight: var(--font-weight-bold);
     color: var(--color-black);
   }
+
+  & .footer {
+    @mixin flex-center-start;
+  }
+
+  & .donator-name {
+    margin-right: var(--spacing-xx-tight);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-black);
+  }
 }
