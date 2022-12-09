@@ -1,9 +1,11 @@
 import { useQuery } from '@apollo/react-hooks'
 
 import {
+  EmptySearch,
   InfiniteScroll,
   Menu,
   Spinner,
+  Translate,
   UserDigest,
   useRoute,
 } from '~/components'
@@ -41,9 +43,18 @@ const AggregateUserResults = () => {
     return <Spinner />
   }
 
-  // TODO: Empty Result
   if (!edges || edges.length <= 0 || !pageInfo) {
-    return null
+    return (
+      <EmptySearch
+        description={
+          <Translate
+            zh_hant="沒有找到相關用戶，換個關鍵詞試試？"
+            zh_hans="没有找到相关用户，换个关键词试试？"
+            en="No users found. Try a different keyword?"
+          />
+        }
+      />
+    )
   }
 
   // load next page

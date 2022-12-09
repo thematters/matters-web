@@ -3,9 +3,11 @@ import { useQuery } from '@apollo/react-hooks'
 import {
   ArticleDigestConcise,
   Card,
+  EmptySearch,
   InfiniteScroll,
   List,
   Spinner,
+  Translate,
   useRoute,
 } from '~/components'
 
@@ -39,9 +41,18 @@ const AggregateArticleResults = () => {
     return <Spinner />
   }
 
-  // TODO: Empty Result
   if (!edges || edges.length <= 0 || !pageInfo) {
-    return null
+    return (
+      <EmptySearch
+        description={
+          <Translate
+            zh_hant="沒有找到相關文章，換個關鍵詞試試？"
+            zh_hans="没有找到相关文章，换个关键词试试？"
+            en="No articles found. Try a different keyword?"
+          />
+        }
+      />
+    )
   }
 
   // load next page
