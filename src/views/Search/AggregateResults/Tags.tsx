@@ -2,10 +2,12 @@ import { useQuery } from '@apollo/react-hooks'
 import { Fragment } from 'react'
 
 import {
+  EmptySearch,
   InfiniteScroll,
   Menu,
   Spinner,
   TagDigest,
+  Translate,
   useRoute,
 } from '~/components'
 import { SearchAggregateTagsPublicQuery } from '~/gql/graphql'
@@ -38,9 +40,18 @@ const AggregateTagResults = () => {
     return <Spinner />
   }
 
-  // TODO: Empty Result
   if (!edges || edges.length <= 0 || !pageInfo) {
-    return null
+    return (
+      <EmptySearch
+        description={
+          <Translate
+            zh_hant="沒有找到相關標籤，換個關鍵詞試試？"
+            zh_hans="没有找到相关标签，换个关键词试试？"
+            en="No tags found. Try a different keyword?"
+          />
+        }
+      />
+    )
   }
 
   // load next page
