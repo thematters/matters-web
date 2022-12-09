@@ -1,4 +1,6 @@
-import { useEffect, useState } from 'react'
+import _uniq from 'lodash/uniq'
+import _without from 'lodash/without'
+import { useContext, useEffect, useState } from 'react'
 
 import {
   Head,
@@ -6,13 +8,16 @@ import {
   PullToRefresh,
   // SearchAutoComplete,
   SearchBar,
-  SearchOverview,
+  SearchHistory,
+  // SearchOverview,
   SearchQuickResult,
   useResponsive,
   useRoute,
+  ViewerContext,
 } from '~/components'
 
-import { toPath } from '~/common/utils'
+import { STORAGE_KEY_SEARCH_HISTORY } from '~/common/enums'
+import { storage, toPath } from '~/common/utils'
 
 import AggregateResults from './AggregateResults'
 // import EmptySearch from './EmptySearch'
@@ -21,11 +26,34 @@ import SearchTags from './SearchTags'
 import SearchUsers from './SearchUsers'
 
 const Search = () => {
+  const viewer = useContext(ViewerContext)
+  const storageKey = STORAGE_KEY_SEARCH_HISTORY + '_' + viewer.id
+
+  const [searchHistory, setSearchHistory] = useState<string[]>([])
+
+  const updateSearchHistory = (value: string[]) => {
+    storage.set(storageKey, value)
+    setSearchHistory(value)
+  }
+
+  const addSearchHistory = (searchKey: string) => {
+    const nsh = _uniq([searchKey, ...(storage.get(storageKey) || [])]).slice(
+      0,
+      20
+    )
+    updateSearchHistory(nsh)
+  }
+
+  const removeSearchHistory = (searchKey: string) => {
+    const nsh = _without(searchHistory, searchKey)
+    updateSearchHistory(nsh)
+  }
+
   const { getQuery, router } = useRoute()
   const type = getQuery('type')
   const q = getQuery('q')
   const isSmallUp = useResponsive('sm-up')
-  console.log({ isSmallUp })
+
   const [typingKey, setTypingKey] = useState('')
   const resetAutoComplete = () => setTypingKey('')
   const onCancel = () => {
@@ -47,6 +75,18 @@ const Search = () => {
   // const showBackButton = isSmallUp && isOverview
   // const showMeButton = !isSmallUp && isOverview
   const showCancelButton = !isOverview
+
+  useEffect(() => {
+    if (!isOverview) return
+
+    setSearchHistory(storage.get(storageKey))
+  }, [storageKey])
+
+  useEffect(() => {
+    if (!isAggregate) return
+
+    addSearchHistory(q)
+  }, [isAggregate, q, storageKey])
 
   useEffect(() => {
     router.events.on('routeChangeStart', resetAutoComplete)
@@ -79,7 +119,12 @@ const Search = () => {
       <Head title={{ id: 'search' }} />
 
       <PullToRefresh>
-        {isOverview && <SearchOverview />}
+        {isOverview && !isSmallUp && (
+          <SearchHistory
+            data={searchHistory.slice(0, 10)}
+            removeSearchHistoryItem={removeSearchHistory}
+          />
+        )}
         {isAutoComplete && <SearchQuickResult searchKey={typingKey} inPage />}
 
         {isTagOnly && <SearchTags />}
