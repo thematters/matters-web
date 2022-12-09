@@ -1,5 +1,25 @@
 .title {
+  @mixin flex-center-start;
+
   padding: var(--spacing-loose) var(--spacing-base);
+  font-size: var(--font-size-xm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-grey);
+
+  & .titleLeft {
+    white-space: nowrap;
+  }
+
+  & .titleMiddle {
+    @mixin line-clamp;
+
+    color: var(--color-black);
+    word-break: break-all;
+  }
+
+  & .titleRight {
+    white-space: nowrap;
+  }
 }
 
 .aggregate-section {
