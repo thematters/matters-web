@@ -65,7 +65,7 @@ const NavBar = () => {
 
         {viewer.isAuthed && (
           <NavListItem
-            name={TEXT.zh_hant.notification}
+            name={TEXT.zh_hant.notifications}
             icon={<UnreadIcon.Notification />}
             activeIcon={<UnreadIcon.Notification active />}
             active={isInNotification}

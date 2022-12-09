@@ -2,6 +2,8 @@ import gql from 'graphql-tag'
 
 import { Translate } from '~/components'
 
+import { TEST_ID } from '~/common/enums'
+
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorName from '../NoticeActorName'
 import NoticeArticleCard from '../NoticeArticleCard'
@@ -19,7 +21,10 @@ const ArticleMentionedYouNotice = ({ notice }: { notice: NoticeType }) => {
   const actor = notice.actors[0]
 
   return (
-    <section className="container">
+    <section
+      className="container"
+      data-test-id={TEST_ID.NOTICE_ARTICLE_MENTIONED_YOU}
+    >
       <section className="avatar-wrap">
         <NoticeActorAvatar user={actor} />
       </section>

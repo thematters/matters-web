@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import { Card, Expandable } from '~/components'
 import CommentContent from '~/components/Comment/Content'
 
+import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 
 import styles from './styles.css'
@@ -69,6 +70,7 @@ const NoticeComment = ({ comment }: { comment: NoticeCommentType | null }) => {
         bgColor="grey-lighter"
         spacing={['xtight', 'base']}
         borderRadius="xtight"
+        testId={TEST_ID.DIGEST_COMMENT_NOTICE}
       >
         <Expandable content={comment.content} size="sm">
           <CommentContent comment={comment} type="article" size="sm" />

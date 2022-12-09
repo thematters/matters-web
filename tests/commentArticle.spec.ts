@@ -1,9 +1,11 @@
 import { expect, test } from '@playwright/test'
 
+import { TEST_ID } from '~/common/enums'
+
 import {
   ArticleDetailPage,
   authedTest,
-  // NotificationsPage,
+  NotificationsPage,
   UserProfilePage,
 } from './helpers'
 
@@ -34,8 +36,17 @@ test.describe('Comment to article', () => {
       await expect(bobPage.getByText(commentContent)).toBeVisible()
 
       // [Alice] Go to notifications page
-      // const aliceNotifications = new NotificationsPage(alicePage)
-      // await aliceNotifications.goto()
+      const aliceNotifications = new NotificationsPage(alicePage)
+      await aliceNotifications.goto()
+
+      // [Alice] Expect it has "article new comment" notice
+      const noticeArticleNewCommentContent = await alicePage
+        .getByTestId(TEST_ID.ARTICLE_NEW_COMMENT)
+        .first()
+        .getByTestId(TEST_ID.COMMENT_CONETNT)
+        .first()
+        .innerText()
+      expect(noticeArticleNewCommentContent).toBe(commentContent)
     }
   )
 })

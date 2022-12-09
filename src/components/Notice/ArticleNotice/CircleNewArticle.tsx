@@ -2,6 +2,8 @@ import gql from 'graphql-tag'
 
 import { Translate } from '~/components'
 
+import { TEST_ID } from '~/common/enums'
+
 import NoticeArticleCard from '../NoticeArticleCard'
 import NoticeCircleName from '../NoticeCircleName'
 import NoticeDate from '../NoticeDate'
@@ -19,7 +21,7 @@ const CircleNewArticle = ({ notice }: { notice: NoticeType }) => {
   }
 
   return (
-    <section className="container">
+    <section className="container" data-test-id={TEST_ID.CIRCLE_NEW_ARTICLE}>
       <section className="avatar-wrap">
         <NoticeTypeIcon type="circle" />
       </section>

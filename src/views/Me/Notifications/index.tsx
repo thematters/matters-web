@@ -115,10 +115,10 @@ const Notifications = () => {
         left={
           isSmallUp ? <Layout.Header.BackButton /> : <Layout.Header.MeButton />
         }
-        right={<Layout.Header.Title id="notification" />}
+        right={<Layout.Header.Title id="notifications" />}
       />
 
-      <Head title={{ id: 'notification' }} />
+      <Head title={{ id: 'notifications' }} />
 
       <PullToRefresh>
         <Spacer />
