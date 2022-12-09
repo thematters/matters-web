@@ -1,12 +1,6 @@
 import { useState } from 'react'
 
-import {
-  Tabs,
-  TextIcon,
-  Translate,
-  usePullToRefresh,
-  useRoute,
-} from '~/components'
+import { Tabs, Translate, usePullToRefresh, useRoute } from '~/components'
 
 import Articles from './Articles'
 import styles from './styles.css'
@@ -37,11 +31,16 @@ const AggregateResults = () => {
   return (
     <>
       <section className="title">
-        <TextIcon size="xm" color="grey" weight="md">
+        <span className="titleLeft">
           <Translate zh_hans="有关" zh_hant="有關" en="All results for" />
-          <TextIcon color="black">&nbsp;{q}&nbsp;</TextIcon>
+        </span>
+        <span>
+          <span className="titleMiddle">&nbsp;{q}</span>
+        </span>
+        <span className="titleRight">
+          &nbsp;
           <Translate zh_hans="的搜索結果" zh_hant="的檢索結果" en="" />
-        </TextIcon>
+        </span>
       </section>
       <Tabs>
         <Tabs.Tab selected={isArticle} onClick={() => updateType(Type.ARTICLE)}>
