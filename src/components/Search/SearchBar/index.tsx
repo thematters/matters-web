@@ -7,6 +7,7 @@ import { toPath, translate } from '~/common/utils'
 import {
   Button,
   Dropdown,
+  IconClear16,
   IconSearch16,
   LanguageContext,
   SearchQuickResult,
@@ -30,6 +31,25 @@ const SearchButton = () => {
       aria-label={translate({ id: 'search', lang })}
     >
       <IconSearch16 color="grey-dark" />
+    </Button>
+  )
+}
+
+interface ClearButtonProps {
+  onClick: () => void
+}
+
+const ClearButton = ({ onClick }: ClearButtonProps) => {
+  const { lang } = useContext(LanguageContext)
+
+  return (
+    <Button
+      size={['2rem', '2rem']}
+      type="button"
+      aria-label={translate({ id: 'clear', lang })}
+      onClick={onClick}
+    >
+      <IconClear16 color="grey-dark" />
     </Button>
   )
 }
@@ -93,6 +113,14 @@ export const SearchBar: React.FC<SearchBarProps> = ({
               />
 
               <SearchButton />
+              {search.length > 0 && (
+                <ClearButton
+                  onClick={() => {
+                    setSearch('')
+                    values.q = ''
+                  }}
+                />
+              )}
 
               <style jsx>{styles}</style>
             </form>
