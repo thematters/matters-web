@@ -1,18 +1,18 @@
-import { analytics, toPath } from '~/common/utils'
+import { useQuery } from '@apollo/react-hooks'
+
 import {
-  Card,
-  List,
+  InfiniteScroll,
+  Menu,
   Spinner,
-  usePublicQuery,
-  usePullToRefresh,
   UserDigest,
   useRoute,
 } from '~/components'
 import { SearchAggregateUsersPublicQuery } from '~/gql/graphql'
 
+import { analytics, mergeConnections, toPath } from '~/common/utils'
+
 import { SEARCH_AGGREGATE_USERS_PUBLIC } from './gql'
 import styles from './styles.css'
-import ViewMoreButton from './ViewMoreButton'
 
 const AggregateUserResults = () => {
   const { getQuery } = useRoute()
@@ -22,15 +22,15 @@ const AggregateUserResults = () => {
    * Data Fetching
    */
   // public data
-  const { data, loading, refetch } =
-    usePublicQuery<SearchAggregateUsersPublicQuery>(
-      SEARCH_AGGREGATE_USERS_PUBLIC,
-      { variables: { key: q } }
-    )
+  const { data, loading, fetchMore, refetch } =
+    useQuery<SearchAggregateUsersPublicQuery>(SEARCH_AGGREGATE_USERS_PUBLIC, {
+      variables: { key: q },
+      fetchPolicy: 'network-only',
+    })
 
+  // pagination
+  const connectionPath = 'search'
   const { edges, pageInfo } = data?.search || {}
-
-  usePullToRefresh.Handler(refetch)
 
   /**
    * Render
@@ -43,15 +43,38 @@ const AggregateUserResults = () => {
     return null
   }
 
+  // load next page
+  const loadMore = () => {
+    analytics.trackEvent('load_more', {
+      type: 'search_article',
+      location: edges.length || 0,
+    })
+
+    return fetchMore({
+      variables: { after: pageInfo.endCursor },
+      updateQuery: (previousResult, { fetchMoreResult }) =>
+        mergeConnections({
+          oldData: previousResult,
+          newData: fetchMoreResult,
+          path: connectionPath,
+        }),
+    })
+  }
+
   return (
     <section className="aggregate-section">
-      <List>
-        {edges.map(
-          ({ node, cursor }, i) =>
-            node.__typename === 'User' && (
-              <List.Item key={cursor}>
-                <Card
-                  spacing={['xtight', 'base']}
+      <InfiniteScroll
+        hasNextPage={pageInfo.hasNextPage}
+        loadMore={loadMore}
+        pullToRefresh={refetch}
+      >
+        <Menu>
+          {edges.map(
+            ({ node, cursor }, i) =>
+              node.__typename === 'User' && (
+                <Menu.Item
+                  key={cursor}
+                  spacing={['base', 'base']}
                   {...toPath({
                     page: 'userProfile',
                     userName: node.userName || '',
@@ -66,13 +89,11 @@ const AggregateUserResults = () => {
                   }
                 >
                   <UserDigest.Concise user={node} avatarSize="xl" />
-                </Card>
-              </List.Item>
-            )
-        )}
-      </List>
-
-      <ViewMoreButton q={q} type="user" />
+                </Menu.Item>
+              )
+          )}
+        </Menu>
+      </InfiniteScroll>
 
       <style jsx>{styles}</style>
     </section>

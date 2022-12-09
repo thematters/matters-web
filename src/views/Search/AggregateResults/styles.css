@@ -1,6 +1,11 @@
+.title {
+  padding: var(--spacing-loose) var(--spacing-base);
+}
+
 .aggregate-section {
-  padding-bottom: var(--spacing-x-tight);
-  background: var(--color-grey-lighter);
+  /* padding-bottom: var(--spacing-x-tight); */
+
+  /* background: var(--color-grey-lighter); */
 }
 
 .result-item {
