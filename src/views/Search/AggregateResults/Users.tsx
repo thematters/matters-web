@@ -10,6 +10,7 @@ import {
 
 import { analytics, mergeConnections, toPath } from '~/common/utils'
 
+import EndOfResults from './EndOfResults'
 import { SEARCH_AGGREGATE_USERS_PUBLIC } from './gql'
 import styles from './styles.css'
 
@@ -40,6 +41,7 @@ const AggregateUserResults = () => {
     return <Spinner />
   }
 
+  // TODO: Empty Result
   if (!edges || edges.length <= 0 || !pageInfo) {
     return null
   }
@@ -95,7 +97,7 @@ const AggregateUserResults = () => {
           )}
         </Menu>
       </InfiniteScroll>
-
+      {!pageInfo.hasNextPage && <EndOfResults />}
       <style jsx>{styles}</style>
     </section>
   )

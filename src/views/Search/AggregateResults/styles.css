@@ -11,3 +11,9 @@
 .result-item {
   padding: var(--spacing-base);
 }
+
+.endOfResults {
+  @mixin flex-center-all;
+
+  padding-top: var(--spacing-base);
+}

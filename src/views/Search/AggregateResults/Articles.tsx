@@ -11,6 +11,7 @@ import {
 
 import { analytics, mergeConnections, toPath } from '~/common/utils'
 
+import EndOfResults from './EndOfResults'
 import { SEARCH_AGGREGATE_ARTICLES_PUBLIC } from './gql'
 import styles from './styles.css'
 
@@ -38,6 +39,7 @@ const AggregateArticleResults = () => {
     return <Spinner />
   }
 
+  // TODO: Empty Result
   if (!edges || edges.length <= 0 || !pageInfo) {
     return null
   }
@@ -94,6 +96,7 @@ const AggregateArticleResults = () => {
           )}
         </List>
       </InfiniteScroll>
+      {!pageInfo.hasNextPage && <EndOfResults />}
       <style jsx>{styles}</style>
     </section>
   )
