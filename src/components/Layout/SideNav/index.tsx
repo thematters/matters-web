@@ -81,9 +81,7 @@ const SideNav = () => {
 
         {viewer.isAuthed && (
           <NavListItem
-            name={
-              <Translate zh_hant="通知" zh_hans="通知" en="Notifications" />
-            }
+            name={<Translate id="notifications" />}
             icon={<UnreadIcon.Notification />}
             activeIcon={<UnreadIcon.Notification active />}
             active={isInNotification}

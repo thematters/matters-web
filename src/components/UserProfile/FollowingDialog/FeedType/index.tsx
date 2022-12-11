@@ -15,15 +15,15 @@ const FeedType = ({ type, setFeedType }: FeedTypeProps) => {
   return (
     <Tabs sticky>
       <Tabs.Tab onClick={() => setFeedType('user')} selected={isUser}>
-        <Translate zh_hant="作者" zh_hans="作者" en="Author" />
+        <Translate zh_hant="作者" zh_hans="作者" en="Authors" />
       </Tabs.Tab>
 
       <Tabs.Tab onClick={() => setFeedType('circle')} selected={isCircle}>
-        <Translate zh_hant="圍爐" zh_hans="围炉" en="Circle" />
+        <Translate zh_hant="圍爐" zh_hans="围炉" en="Circles" />
       </Tabs.Tab>
 
       <Tabs.Tab onClick={() => setFeedType('tag')} selected={isTag}>
-        <Translate zh_hant="標籤" zh_hans="标签" en="Tag" />
+        <Translate id="tags" />
       </Tabs.Tab>
     </Tabs>
   )

@@ -3,6 +3,7 @@ import { Fragment } from 'react'
 
 import { Translate } from '~/components'
 
+import { TEST_ID } from '~/common/enums'
 import { numAbbr } from '~/common/utils'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
@@ -24,7 +25,10 @@ const ArticleNewSubscriberNotice = ({ notice }: { notice: NoticeType }) => {
   const isMultiActors = actorsCount > 1
 
   return (
-    <section className="container">
+    <section
+      className="container"
+      data-test-id={TEST_ID.ARTICLE_NEW_SUBSCRIBER}
+    >
       <section className="avatar-wrap">
         {isMultiActors ? (
           <NoticeTypeIcon type="bookmark" />

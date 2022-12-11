@@ -2,6 +2,8 @@ import gql from 'graphql-tag'
 
 import { Translate } from '~/components'
 
+import { TEST_ID } from '~/common/enums'
+
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
@@ -21,7 +23,10 @@ const UserNewFollowerNotice = ({ notice }: { notice: NoticeType }) => {
   const isMultiActors = actorsCount > 1
 
   return (
-    <section className="container">
+    <section
+      className="container"
+      data-test-id={TEST_ID.NOTICE_USER_NEW_FOLLOWER}
+    >
       <section className="avatar-wrap">
         <NoticeTypeIcon type="user" />
       </section>
