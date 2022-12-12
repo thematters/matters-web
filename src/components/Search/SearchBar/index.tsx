@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from 'react'
 import { useDebounce } from 'use-debounce'
 
 import { INPUT_DEBOUNCE, Z_INDEX } from '~/common/enums'
-import { toPath, translate } from '~/common/utils'
+import { getSearchType, toPath, translate } from '~/common/utils'
 import {
   Button,
   Dropdown,
@@ -61,6 +61,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   const { getQuery, router, isInPath } = useRoute()
   const isSearch = isInPath('SEARCH')
   const q = getQuery('q')
+  const type = getSearchType(getQuery('type'))
   const { lang } = useContext(LanguageContext)
   const [search, setSearch] = useState('')
   const [debouncedSearch] = useDebounce(search, INPUT_DEBOUNCE)
@@ -86,6 +87,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         const path = toPath({
           page: 'search',
           q: values.q.slice(0, 100),
+          type,
         })
 
         if (isSearch) {
