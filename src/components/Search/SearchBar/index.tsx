@@ -107,6 +107,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
               aria-label={textPlaceholder}
               role="search"
               autoComplete="off"
+              action=""
             >
               <input
                 type="search"
@@ -150,7 +151,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
             visible={showDropdown}
             zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
           >
-            <form onSubmit={handleSubmit} autoComplete="off">
+            <form onSubmit={handleSubmit} autoComplete="off" action="">
               <input
                 type="search"
                 name="q"
