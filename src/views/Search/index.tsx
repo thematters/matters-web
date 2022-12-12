@@ -57,17 +57,17 @@ const Search = () => {
     router.push(path.href)
   }
 
-  const isOverview = !q && !typingKey
-  const isAutoComplete = typingKey
-  const isAggregate = !isOverview && !isAutoComplete
+  const isHistory = !q && !typingKey
+  const isQuickResult = typingKey
+  const isAggregate = !isHistory && !isQuickResult
 
   // const showBackButton = isSmallUp && isOverview
   // const showMeButton = !isSmallUp && isOverview
 
-  const showCancelButton = !isOverview
+  const showCancelButton = !isHistory
 
   useEffect(() => {
-    if (!isOverview) return
+    if (!isHistory) return
 
     setSearchHistory(storage.get(storageKey))
   }, [storageKey])
@@ -107,13 +107,13 @@ const Search = () => {
       <Head title={{ id: 'search' }} />
 
       <PullToRefresh>
-        {isOverview && !isSmallUp && (
+        {isHistory && !isSmallUp && (
           <SearchHistory
             data={searchHistory.slice(0, 10)}
             removeSearchHistoryItem={removeSearchHistory}
           />
         )}
-        {isAutoComplete && <SearchQuickResult searchKey={typingKey} inPage />}
+        {isQuickResult && <SearchQuickResult searchKey={typingKey} inPage />}
 
         {isAggregate && <AggregateResults />}
       </PullToRefresh>
