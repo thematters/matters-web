@@ -59,7 +59,8 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   onChange,
   hasDropdown = true,
 }) => {
-  const { getQuery, router } = useRoute()
+  const { getQuery, router, isInPath } = useRoute()
+  const isSearch = isInPath('SEARCH')
   const q = getQuery('q')
   const { lang } = useContext(LanguageContext)
   const [search, setSearch] = useState('')
@@ -87,7 +88,13 @@ export const SearchBar: React.FC<SearchBarProps> = ({
           page: 'search',
           q: values.q.slice(0, 100),
         })
-        router.push(path.href)
+
+        if (isSearch) {
+          router.replace(path.href)
+        } else {
+          router.push(path.href)
+        }
+
         closeDropdown()
       }}
     >
