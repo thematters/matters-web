@@ -2,6 +2,8 @@ import { useState } from 'react'
 
 import { Tabs, Translate, usePullToRefresh, useRoute } from '~/components'
 
+import { getSearchType } from '~/common/utils'
+
 import Articles from './Articles'
 import styles from './styles.css'
 import Tags from './Tags'
@@ -16,7 +18,9 @@ enum Type {
 const AggregateResults = () => {
   usePullToRefresh.Register()
   const { getQuery, setQuery } = useRoute()
-  const [type, setType] = useState(getQuery('type') || Type.ARTICLE)
+  const [type, setType] = useState(
+    getSearchType(getQuery('type')) || Type.ARTICLE
+  )
   const q = getQuery('q')
 
   const isArticle = type === Type.ARTICLE
@@ -25,6 +29,7 @@ const AggregateResults = () => {
 
   const updateType = (t: Type) => {
     setType(t)
+    // TODO: Just replace url, don't add history of router
     setQuery('type', t)
   }
 
