@@ -58,7 +58,7 @@ const Search = () => {
   }
 
   const isHistory = !q && !typingKey
-  const isQuickResult = typingKey
+  const isQuickResult = !q && typingKey
   const isAggregate = !isHistory && !isQuickResult
 
   // const showBackButton = isSmallUp && isOverview
