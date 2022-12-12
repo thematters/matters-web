@@ -4,6 +4,7 @@ import gql from 'graphql-tag'
 import { Card, CardProps, ResponsiveImage } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 
+import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 
 import { ArticleDigestTitle, ArticleDigestTitleTextSize } from '../Title'
@@ -73,6 +74,7 @@ export const ArticleDigestSidebar = ({
       borderRadius="xtight"
       bgColor={hasBackground ? 'grey-lighter' : 'none'}
       onClick={onClick}
+      testId={TEST_ID.DIGEST_ARTICLE_SIDEBAR}
       {...cardProps}
     >
       <section className={containerClasses}>

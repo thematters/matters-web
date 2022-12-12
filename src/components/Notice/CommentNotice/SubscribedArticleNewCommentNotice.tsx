@@ -2,6 +2,8 @@ import gql from 'graphql-tag'
 
 import { Translate } from '~/components'
 
+import { TEST_ID } from '~/common/enums'
+
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeArticleTitle from '../NoticeArticleTitle'
 import NoticeComment from '../NoticeComment'
@@ -30,7 +32,10 @@ const SubscribedArticleNewCommentNotice = ({
       : undefined
 
   return (
-    <section className="container">
+    <section
+      className="container"
+      data-test-id={TEST_ID.SUBSCRIBED_ARTICLE_NEW_COMMENT}
+    >
       <section className="avatar-wrap">
         {isMultiActors ? (
           <NoticeTypeIcon type="comment" />

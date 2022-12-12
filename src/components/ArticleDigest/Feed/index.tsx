@@ -3,6 +3,7 @@ import React from 'react'
 import { Card, CircleDigest, ResponsiveImage } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 
+import { TEST_ID } from '~/common/enums'
 import { stripHtml, toPath, UtmParams } from '~/common/utils'
 
 import { ArticleDigestTitle } from '../Title'
@@ -60,7 +61,12 @@ const BaseArticleDigestFeed = ({
   })
 
   return (
-    <Card {...path} spacing={['base', 'base']} onClick={onClick}>
+    <Card
+      {...path}
+      spacing={['base', 'base']}
+      onClick={onClick}
+      testId={TEST_ID.DIGEST_ARTICLE_FEED}
+    >
       {header ||
         (hasCircle && circle && (
           <header>

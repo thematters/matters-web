@@ -2,6 +2,8 @@ import gql from 'graphql-tag'
 
 import { Translate } from '~/components'
 
+import { TEST_ID } from '~/common/enums'
+
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeArticleCard from '../NoticeArticleCard'
 import NoticeDate from '../NoticeDate'
@@ -21,7 +23,10 @@ const ArticleNewAppreciationNotice = ({ notice }: { notice: NoticeType }) => {
   const isMultiActors = actorsCount > 1
 
   return (
-    <section className="container">
+    <section
+      className="container"
+      data-test-id={TEST_ID.ARTICLE_NEW_APPRECIATION}
+    >
       <section className="avatar-wrap">
         {isMultiActors ? (
           <NoticeTypeIcon type="appreciate" />

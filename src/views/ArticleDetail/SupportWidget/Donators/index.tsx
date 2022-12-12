@@ -61,8 +61,8 @@ const Donators = ({ article, showAvatarAnimation = false }: DonatorsProps) => {
             type="button"
             onClick={openDialog}
             disabled={donatorsCount <= 0}
-            aria-label={translate({ id: 'viewDonators', lang })}
-            aria-haspopup="true"
+            aria-label={translate({ id: 'viewSupporters', lang })}
+            aria-haspopup="dialog"
           >
             <section className="avatar-list">
               {frontDonators.map((user, index) => {
@@ -128,8 +128,8 @@ const Donators = ({ article, showAvatarAnimation = false }: DonatorsProps) => {
               <button
                 type="button"
                 onClick={openDialog}
-                aria-label={translate({ id: 'viewDonators', lang })}
-                aria-haspopup="true"
+                aria-label={translate({ id: 'viewSupporters', lang })}
+                aria-haspopup="dialog"
               >
                 <span className="count">{donatorsCount}</span>
                 <TextIcon

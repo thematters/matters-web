@@ -43,7 +43,7 @@ const Responses = ({ id, lock }: { id: string; lock: boolean }) => {
     <section className="responses" id="comments">
       <header>
         <Title type="nav" is="h2">
-          <Translate id="response" />
+          <Translate id="responses" />
           <ResponseCount article={article as ResponseCountArticle} />
         </Title>
       </header>

@@ -171,7 +171,7 @@ const EditModeHeader = ({
             spacing={[0, 'base']}
             bgColor="green"
             onClick={openEditorSettingsDialog}
-            aria-haspopup="true"
+            aria-haspopup="dialog"
             disabled={isEditDisabled || isOverDiffLimit}
           >
             <TextIcon color="white" size="md" weight="md">

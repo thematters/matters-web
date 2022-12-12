@@ -37,6 +37,7 @@ const Input: React.FC<InputProps> = ({
   value,
   label,
   extraButton,
+  labelVisHidden,
 
   hint,
   error,
@@ -118,6 +119,7 @@ const Input: React.FC<InputProps> = ({
         htmlFor={`field-${name}-1`}
         label={label}
         extraButton={extraButton}
+        labelVisHidden={labelVisHidden}
       />
 
       <Field.Content>

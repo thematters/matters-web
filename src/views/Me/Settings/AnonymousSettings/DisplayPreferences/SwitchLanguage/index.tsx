@@ -30,11 +30,13 @@ const SwitchLanguage = () => {
         ),
       }}
     >
-      {({ openDialog, ref }) => (
+      {({ openDialog, type, ref }) => (
         <Form.List.Item
           title={<Translate id="settingsLanguage" />}
           onClick={openDialog}
           rightText={LANG_TEXT_MAP[lang]}
+          ariaHasPopup={type}
+          role="button"
           ref={ref}
         />
       )}

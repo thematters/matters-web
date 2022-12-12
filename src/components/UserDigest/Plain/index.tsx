@@ -2,6 +2,7 @@ import classNames from 'classnames'
 
 import { LinkWrapper } from '~/components'
 
+import { TEST_ID } from '~/common/enums'
 import { subString, toPath } from '~/common/utils'
 
 import { fragments } from './gql'
@@ -41,7 +42,12 @@ const Plain = ({
   })
 
   return (
-    <LinkWrapper {...path} disabled={disabled} onClick={onClick}>
+    <LinkWrapper
+      {...path}
+      disabled={disabled}
+      onClick={onClick}
+      testId={TEST_ID.DIGEST_USER_MINI}
+    >
       <section className={containerClasses}>
         <span className={displayNameClasses}>
           {displayNameLimit && subString(user.displayName!, displayNameLimit)}

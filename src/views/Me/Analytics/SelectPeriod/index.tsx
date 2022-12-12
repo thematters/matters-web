@@ -114,12 +114,13 @@ const SelectPeriod: React.FC<SelectProps> = ({ period, onChange }) => {
         title: '',
       }}
     >
-      {({ openDialog, ref }) => (
+      {({ openDialog, type, ref }) => (
         <Button
           size={[null, '1.25rem']}
           spacing={[0, 'xtight']}
           bgColor={'white'}
           onClick={openDialog}
+          aria-haspopup={type}
           ref={ref}
         >
           <TextIcon

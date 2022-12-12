@@ -1,4 +1,3 @@
-import classNames from 'classnames'
 import React from 'react'
 
 import { Card, CardProps } from '~/components'
@@ -10,12 +9,8 @@ const MenuItem: React.FC<React.PropsWithChildren<MenuItemProps>> = ({
   spacing = ['tight', 'base'],
   ...restProps
 }) => {
-  const menuItemClasses = classNames({
-    'menu-item': true,
-  })
-
   return (
-    <li className={menuItemClasses} role="menuitem">
+    <li role="menuitem">
       <Card spacing={spacing} {...restProps}>
         {children}
       </Card>

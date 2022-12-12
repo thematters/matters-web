@@ -48,7 +48,7 @@ const Selector: React.FC<SelectorProps> = ({
               onClick={() =>
                 setSelected(asset.id === selected?.id ? undefined : asset)
               }
-              aria-labelledby={translate({
+              aria-label={translate({
                 zh_hant: `設置第 ${index + 1} 張圖片為封面`,
                 zh_hans: `设置第 ${index + 1} 张图片为封面`,
                 en: `Set as cover`,

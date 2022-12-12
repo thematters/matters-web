@@ -19,6 +19,7 @@ const CircleInvitationAddButton = () => {
           size={['6rem', '2rem']}
           bgActiveColor="grey-lighter"
           onClick={openDialog}
+          aria-haspopup="dialog"
         >
           <TextIcon color="green" size="md" weight="md">
             <Translate id="addCircleInvitation" />

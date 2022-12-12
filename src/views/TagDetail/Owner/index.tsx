@@ -62,6 +62,7 @@ const Owner = ({ tag }: { tag: TagFragment }) => {
                 bgActiveColor="green"
                 borderColor="green"
                 onClick={viewer.isFrozen ? forbid : openDialog}
+                aria-haspopup="dialog"
               >
                 <TextIcon weight="md" size="xs">
                   <Translate zh_hant="認領" zh_hans="认领" en="maintain" />

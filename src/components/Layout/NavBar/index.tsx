@@ -46,7 +46,7 @@ const NavBar = () => {
         />
 
         {!isInDraftDetail && (
-          <li>
+          <li role="menuitem">
             <WriteButton
               allowed={!viewer.shouldSetupLikerID}
               authed={viewer.isAuthed}
@@ -65,7 +65,7 @@ const NavBar = () => {
 
         {viewer.isAuthed && (
           <NavListItem
-            name={TEXT.zh_hant.notification}
+            name={TEXT.zh_hant.notifications}
             icon={<UnreadIcon.Notification />}
             activeIcon={<UnreadIcon.Notification active />}
             active={isInNotification}

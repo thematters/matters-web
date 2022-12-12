@@ -208,6 +208,7 @@ const Select: React.FC<FormProps> = ({
               })
               connect({ connector: injectedConnector })
             }}
+            role="button"
             right={isMetaMaskLoading ? <IconSpinner16 color="grey" /> : null}
           />
         )}
@@ -228,6 +229,7 @@ const Select: React.FC<FormProps> = ({
             })
             connect({ connector: walletConnectConnector })
           }}
+          role="button"
           right={isWalletConnectLoading ? <IconSpinner16 color="grey" /> : null}
         />
       </Form.List>

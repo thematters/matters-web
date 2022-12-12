@@ -16,6 +16,7 @@ import {
 } from '~/components'
 import articleFragments from '~/components/GQL/fragments/article'
 
+import { TEST_ID } from '~/common/enums'
 import { analytics, mergeConnections, translate } from '~/common/utils'
 
 import styles from './styles.css'
@@ -80,7 +81,7 @@ const Collection: React.FC<{
   }
 
   return (
-    <section className="collection">
+    <section className="collection" data-test-id={TEST_ID.ARTICLE_COLLECTION}>
       <header>
         <Title type="nav" is="h2">
           <Translate id="collectArticle" />

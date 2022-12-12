@@ -6,9 +6,9 @@ interface DonatorsButtonProps {
 
 const DonatorsButton = ({ openDialog }: DonatorsButtonProps) => {
   return (
-    <Menu.Item onClick={openDialog}>
+    <Menu.Item onClick={openDialog} ariaHasPopup="dialog">
       <TextIcon icon={<IconDonate24 size="md" />} size="md" spacing="base">
-        <Translate id="viewDonators" />
+        <Translate id="viewSupporters" />
       </TextIcon>
     </Menu.Item>
   )

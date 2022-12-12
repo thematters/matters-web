@@ -6,6 +6,8 @@ const PaymentPointer = () => (
       <Form.List.Item
         title={<Translate id="paymentPointer" />}
         onClick={openDialog}
+        role="button"
+        ariaHasPopup="dialog"
       />
     )}
   </PaymentPointerDialog>

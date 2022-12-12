@@ -142,6 +142,7 @@ const ReplyButton = ({
           onClick={openCommentFormDialog}
           inCard={inCard}
           disabled={disabled}
+          aria-haspopup="dialog"
         />
       )}
     </CommentFormDialog>

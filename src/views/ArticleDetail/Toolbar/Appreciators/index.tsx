@@ -60,7 +60,7 @@ const Appreciators = ({ article }: { article: AppreciatorsArticle }) => {
           onClick={openDialog}
           disabled={totalReceivedCount <= 0}
           aria-label={translate({ id: 'viewAppreciators', lang })}
-          aria-haspopup="true"
+          aria-haspopup="dialog"
         >
           {totalReceivedCount > 0 ? (
             <p className="received-count highlight">

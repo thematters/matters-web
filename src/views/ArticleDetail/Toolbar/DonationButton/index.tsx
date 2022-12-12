@@ -86,6 +86,7 @@ const DonationButton = ({
               en: `${TEXT.en.donation} (current ${donationCount} supports)`,
               lang,
             })}
+            aria-haspopup="dialog"
             disabled={disabled || article.author.id === viewer.id}
             onClick={() => {
               analytics.trackEvent('click_button', { type: 'donate' })

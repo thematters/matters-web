@@ -2,6 +2,8 @@ import gql from 'graphql-tag'
 
 import { Translate } from '~/components'
 
+import { TEST_ID } from '~/common/enums'
+
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
@@ -29,7 +31,16 @@ const CircleNewUserNotice = ({ notice, userType }: CircleNewUserNotice) => {
   const isMultiActors = actorsCount > 1
 
   return (
-    <section className="container">
+    <section
+      className="container"
+      data-test-id={
+        isNewFollower
+          ? TEST_ID.CIRCLE_NEW_FOLLOWER
+          : isNewSubscriber
+          ? TEST_ID.CIRCLE_NEW_SUBSCRIBER
+          : TEST_ID.CIRCLE_NEW_UNSUBSCRIBER
+      }
+    >
       <section className="avatar-wrap">
         <NoticeTypeIcon type="circle" />
       </section>
