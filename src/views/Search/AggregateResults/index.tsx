@@ -17,7 +17,7 @@ enum Type {
 
 const AggregateResults = () => {
   usePullToRefresh.Register()
-  const { getQuery, setQuery } = useRoute()
+  const { getQuery, replaceQuery } = useRoute()
   const [type, setType] = useState(
     getSearchType(getQuery('type')) || Type.ARTICLE
   )
@@ -29,8 +29,7 @@ const AggregateResults = () => {
 
   const updateType = (t: Type) => {
     setType(t)
-    // TODO: Just replace url, don't add history of router
-    setQuery('type', t)
+    replaceQuery('type', t)
   }
 
   return (
