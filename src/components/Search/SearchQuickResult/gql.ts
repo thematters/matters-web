@@ -8,7 +8,9 @@ import { UserDigest } from '~/components/UserDigest'
 
 export const QUICK_RESULT = gql`
   query QuickResult($key: String!) {
-    user: search(input: { key: $key, type: User, first: 5 }) {
+    user: search(
+      input: { type: User, version: v20221212, first: 5, key: $key }
+    ) {
       edges {
         cursor
         node {
@@ -18,7 +20,7 @@ export const QUICK_RESULT = gql`
         }
       }
     }
-    tag: search(input: { key: $key, type: Tag, first: 5 }) {
+    tag: search(input: { type: Tag, version: v20221212, first: 5, key: $key }) {
       edges {
         cursor
         node {
