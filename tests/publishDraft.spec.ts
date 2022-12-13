@@ -57,8 +57,10 @@ test.describe('Publish draft', () => {
     await draftDetail.publish()
 
     // Goto published article page
-    await draftDetail.dialogViewArticleButton.click()
-    await page.waitForNavigation()
+    await Promise.all([
+      draftDetail.dialogViewArticleButton.click(),
+      page.waitForNavigation(),
+    ])
 
     // Expect article data are same as previous draft inputs
     const articleDetail = new ArticleDetailPage(page)
