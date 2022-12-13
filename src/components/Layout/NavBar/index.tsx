@@ -11,6 +11,7 @@ import {
 } from '~/components'
 
 import { PATHS, TEXT } from '~/common/enums'
+import { toPath } from '~/common/utils'
 
 import UnreadIcon from '../UnreadIcon'
 import NavListItem from './NavListItem'
@@ -18,7 +19,7 @@ import styles from './styles.css'
 
 const NavBar = () => {
   const viewer = useContext(ViewerContext)
-  const { isInPath } = useRoute()
+  const { router, isInPath } = useRoute()
   const isInHome = isInPath('HOME')
   const isInFollow = isInPath('FOLLOW')
   const isInNotification = isInPath('ME_NOTIFICATIONS')
@@ -60,7 +61,17 @@ const NavBar = () => {
           icon={<IconNavSearch24 size="md" />}
           activeIcon={<IconNavSearch24 size="md" color="green" />}
           active={isInSearch}
-          href={PATHS.SEARCH}
+          onClick={() => {
+            const path = toPath({
+              page: 'search',
+            })
+
+            if (isInSearch) {
+              router.replace(path.href)
+            } else {
+              router.push(path.href)
+            }
+          }}
         />
 
         {viewer.isAuthed && (
