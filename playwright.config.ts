@@ -16,7 +16,7 @@ const config: PlaywrightTestConfig = {
   outputDir: 'test-results/',
   timeout: 30 * 1000,
   expect: {
-    timeout: 3000,
+    timeout: 10000,
   },
   fullyParallel: true,
   forbidOnly: !!isCI,
@@ -49,13 +49,13 @@ const config: PlaywrightTestConfig = {
             },
           },
 
-          {
-            name: 'webkit',
-            use: {
-              ...devices['Desktop Safari'],
-              locale: LOCALE,
-            },
-          },
+          // {
+          //   name: 'webkit',
+          //   use: {
+          //     ...devices['Desktop Safari'],
+          //     locale: LOCALE,
+          //   },
+          // },
         ]),
 
     /* Test against mobile viewports. */
