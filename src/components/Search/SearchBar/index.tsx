@@ -1,5 +1,5 @@
 import { Formik } from 'formik'
-import { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useDebounce } from 'use-debounce'
 
 import {
@@ -13,7 +13,7 @@ import {
 } from '~/components'
 
 import { INPUT_DEBOUNCE, Z_INDEX } from '~/common/enums'
-import { getSearchType, toPath, translate } from '~/common/utils'
+import { dom, getSearchType, toPath, translate } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -64,15 +64,21 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   const q = getQuery('q')
   const type = getSearchType(getQuery('type'))
   const { lang } = useContext(LanguageContext)
-  const [search, setSearch] = useState('')
+  const [search, setSearch] = useState(q)
   const [debouncedSearch] = useDebounce(search, INPUT_DEBOUNCE)
   const textAriaLabel = translate({ id: 'search', lang })
   const textPlaceholder = translate({ id: 'search', lang })
+
+  const searchTextInput = useRef<HTMLInputElement>(null)
 
   // dropdown
   const [showDropdown, setShowDropdown] = useState(false)
   const closeDropdown = () => setShowDropdown(false)
   const openDropdown = () => setShowDropdown(true)
+
+  useEffect(() => {
+    setSearch(q)
+  }, [q])
 
   useEffect(() => {
     if (onChange) {
@@ -113,6 +119,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
               <input
                 type="search"
                 name="q"
+                ref={searchTextInput}
                 aria-label={textAriaLabel}
                 placeholder={textPlaceholder}
                 autoCorrect="off"
@@ -127,8 +134,12 @@ export const SearchBar: React.FC<SearchBarProps> = ({
               {search.length > 0 && (
                 <ClearButton
                   onClick={() => {
-                    setSearch('')
-                    values.q = ''
+                    if (searchTextInput.current) {
+                      const el = searchTextInput.current
+                      dom.setNativeValue(el, '')
+                      el.dispatchEvent(new Event('input', { bubbles: true }))
+                      el.focus()
+                    }
                   }}
                 />
               )}
