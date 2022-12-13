@@ -59,6 +59,8 @@ export const logout = async ({ page }: { page: Page }) => {
   await page.getByRole('button', { name: 'My Page' }).click()
 
   // Click "Log Out" button
-  await page.getByRole('menuitem', { name: 'Log Out' }).click()
-  await page.waitForNavigation()
+  await Promise.all([
+    page.getByRole('menuitem', { name: 'Log Out' }).click(),
+    page.waitForNavigation(),
+  ])
 }

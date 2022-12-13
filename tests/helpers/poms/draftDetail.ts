@@ -85,15 +85,19 @@ export class DraftDetailPage {
 
   async createDraft() {
     await this.page.goto('/')
-    await this.page.getByRole('button', { name: 'Create' }).click()
-    await this.page.waitForNavigation()
+    await Promise.all([
+      this.page.getByRole('button', { name: 'Create' }).click(),
+      this.page.waitForNavigation(),
+    ])
     await expect(this.page).toHaveURL(/\/me\/drafts\/.*-.*/)
   }
 
   async gotoLatestDraft() {
     await this.page.goto('/me/drafts')
-    await this.page.getByRole('listitem').first().click()
-    await this.page.waitForNavigation()
+    await Promise.all([
+      this.page.getByRole('listitem').first().click(),
+      this.page.waitForNavigation(),
+    ])
   }
 
   async fillTitle() {
