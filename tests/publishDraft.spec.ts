@@ -1,5 +1,7 @@
 import { expect, test } from '@playwright/test'
 
+import { stripSpaces } from '~/common/utils'
+
 import {
   ArticleDetailPage,
   authedTest,
@@ -40,11 +42,11 @@ test.describe('Publish draft', () => {
       string | undefined,
       string[] | undefined,
       boolean | undefined,
-      string[] | undefined,
+      string | undefined,
       (
         | {
-            replyToDonatorText?: boolean
-            requestForDonationText?: boolean
+            replyToDonatorText?: string
+            requestForDonationText?: string
           }
         | undefined
       ),
@@ -66,14 +68,14 @@ test.describe('Publish draft', () => {
     const articleDetail = new ArticleDetailPage(page)
 
     const articleTitle = await articleDetail.title.innerText()
-    expect(articleTitle).toBe(title)
+    expect(stripSpaces(articleTitle)).toBe(stripSpaces(title))
 
     const articleContent = await articleDetail.content.innerText()
-    expect(articleContent).toBe(content)
+    expect(stripSpaces(articleContent)).toBe(stripSpaces(content))
 
     if (summary) {
       const articleSummary = await articleDetail.getSummary()
-      expect(articleSummary).toBe(summary)
+      expect(stripSpaces(articleSummary)).toBe(stripSpaces(summary))
     }
 
     if (tags && tags.length > 0) {
@@ -84,17 +86,21 @@ test.describe('Publish draft', () => {
     if (collectedArticleTitle) {
       const firstCollectionArticleTitle =
         await articleDetail.getFirstCollectionArticleTitle()
-      expect(firstCollectionArticleTitle).toBe(collectedArticleTitle)
+      expect(stripSpaces(firstCollectionArticleTitle)).toBe(
+        stripSpaces(collectedArticleTitle)
+      )
     }
 
     if (supportSetting?.requestForDonationText) {
       const articleSupportRequest = await articleDetail.getSupportRequest()
-      expect(articleSupportRequest).toBe(supportSetting.requestForDonationText)
+      expect(stripSpaces(articleSupportRequest)).toBe(
+        stripSpaces(supportSetting.requestForDonationText)
+      )
     }
 
     if (license) {
       const articleLicense = await articleDetail.getLicense()
-      expect(articleLicense).toBe(license)
+      expect(stripSpaces(articleLicense)).toBe(stripSpaces(license))
     }
   })
 })

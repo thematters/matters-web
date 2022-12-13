@@ -1,6 +1,7 @@
 import { Locator, Page } from '@playwright/test'
 
 import { TEST_ID } from '~/common/enums'
+import { stripSpaces } from '~/common/utils'
 
 import { waitForAPIResponse } from '../api'
 import { generateComment } from '../text'
@@ -109,7 +110,10 @@ export class ArticleDetailPage {
 
   async getTags() {
     await this.tagList.waitFor({ state: 'visible' })
-    return (await this.tagList.innerText()).split(/\s/).map((t) => t.trim())
+    return (await this.tagList.innerText())
+      .split(/\s/)
+      .map((t) => t.trim())
+      .filter((t) => !!t)
   }
 
   async getFirstCollectionArticleTitle() {
@@ -128,7 +132,15 @@ export class ArticleDetailPage {
 
   async getLicense() {
     await this.license.waitFor({ state: 'visible' })
-    return this.license.innerText()
+    const licenseText = stripSpaces(await this.license.innerText()) as string
+
+    return (
+      {
+        'NO RIGHTS RESERVED': 'CC0 License',
+        'CC BY-NC-ND 2.0': 'CC BY-NC-ND 2.0 License',
+        'ALL RIGHTS RESERVED': 'All Rights Reserved',
+      }[licenseText] || ''
+    )
   }
 
   async sendComment() {
