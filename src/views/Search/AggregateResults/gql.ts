@@ -4,7 +4,7 @@ import { ArticleDigestConcise, TagDigest, UserDigest } from '~/components'
 
 export const SEARCH_AGGREGATE_ARTICLES_PUBLIC = gql`
   query SearchAggregateArticlesPublic($key: String!, $after: String) {
-    search(input: { key: $key, type: Article, first: 10, after: $after }) {
+    search(input: { type: Article, first: 30, key: $key, after: $after }) {
       totalCount
       pageInfo {
         startCursor
@@ -26,7 +26,15 @@ export const SEARCH_AGGREGATE_ARTICLES_PUBLIC = gql`
 
 export const SEARCH_AGGREGATE_TAGS_PUBLIC = gql`
   query SearchAggregateTagsPublic($key: String!, $after: String) {
-    search(input: { key: $key, type: Tag, first: 10, after: $after }) {
+    search(
+      input: {
+        type: Tag
+        version: v20221212
+        first: 30
+        key: $key
+        after: $after
+      }
+    ) {
       pageInfo {
         startCursor
         endCursor
@@ -47,7 +55,15 @@ export const SEARCH_AGGREGATE_TAGS_PUBLIC = gql`
 
 export const SEARCH_AGGREGATE_USERS_PUBLIC = gql`
   query SearchAggregateUsersPublic($key: String!, $after: String) {
-    search(input: { key: $key, type: User, first: 10, after: $after }) {
+    search(
+      input: {
+        type: User
+        version: v20221212
+        first: 30
+        key: $key
+        after: $after
+      }
+    ) {
       pageInfo {
         startCursor
         endCursor
