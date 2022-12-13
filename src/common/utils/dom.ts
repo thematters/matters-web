@@ -33,6 +33,22 @@ const getAttributes = (name: string, str: string): string[] | [] => {
   return matches.filter((m) => !!m)
 }
 
+// https://github.com/facebook/react/issues/10135#issuecomment-314441175
+const setNativeValue = (element: HTMLInputElement, value: string) => {
+  const valueSetter = Object.getOwnPropertyDescriptor(element, 'value')?.set
+  const prototype = Object.getPrototypeOf(element)
+  const prototypeValueSetter = Object.getOwnPropertyDescriptor(
+    prototype,
+    'value'
+  )?.set
+
+  if (valueSetter && valueSetter !== prototypeValueSetter) {
+    prototypeValueSetter?.call(element, value)
+  } else {
+    valueSetter?.call(element, value)
+  }
+}
+
 export const dom = {
   $,
   $$,
@@ -40,4 +56,5 @@ export const dom = {
   getWindowWidth,
   offset,
   getAttributes,
+  setNativeValue,
 }
