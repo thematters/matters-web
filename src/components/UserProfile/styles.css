@@ -100,3 +100,7 @@ footer {
     color: var(--color-black);
   }
 }
+
+.ens-name {
+  @mixin flex-center-start;
+}

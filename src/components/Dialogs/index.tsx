@@ -1,4 +1,5 @@
 // User
+export * from './ENSDialog'
 export * from './LikeCoinDialog'
 export * from './RecommendAuthorDialog'
 export * from './RssFeedDialog'

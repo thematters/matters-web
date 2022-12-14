@@ -4,6 +4,7 @@ import {
   Avatar,
   Button,
   Cover,
+  ENSDialog,
   Error,
   Expandable,
   FollowUserButton,
@@ -81,6 +82,11 @@ export const UserProfile = () => {
     }
   )
   const user = data?.user
+
+  // TODO
+  // const { data: ensName } = useEnsName({
+  //   address: user?.info?.ethAddress as `0x${string}`,
+  // })
 
   // fetch private data
   useEffect(() => {
@@ -286,10 +292,27 @@ export const UserProfile = () => {
             <span className="name">@{user.userName}</span>
             {!isMe && <FollowUserButton.State user={user} />}
           </section>
-
-          {user.info.ethAddress && (
-            <WalletAddress address={user.info.ethAddress} />
-          )}
+          <section className="ens-name">
+            {user.info.ethAddress && (
+              <WalletAddress address={user.info.ethAddress} />
+            )}
+            <ENSDialog>
+              {({ openDialog }) => (
+                <>
+                  <Button
+                    size={[null, '1.75rem']}
+                    spacing={[0, 'tight']}
+                    borderColor="green"
+                    onClick={() => {
+                      openDialog()
+                    }}
+                  >
+                    關聯 ENS
+                  </Button>
+                </>
+              )}
+            </ENSDialog>
+          </section>
 
           <Expandable
             content={user.info.description}

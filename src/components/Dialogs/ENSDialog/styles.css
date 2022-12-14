@@ -1,0 +1,42 @@
+.container {
+  padding: var(--spacing-base) var(--spacing-base) var(--spacing-xx-loose);
+}
+
+.ens-name {
+  margin-top: var(--spacing-loose);
+}
+
+.btn {
+  margin: var(--spacing-xx-loose) 0;
+}
+
+.connect-wallet {
+  @mixin flex-center-all;
+
+  flex-direction: column;
+  width: 100%;
+}
+
+.description {
+  line-height: var(--line-height-base);
+  color: var(--color-grey-dark);
+
+  & :global(ul) {
+    margin-left: var(--spacing-tight);
+    list-style-type: disc;
+  }
+
+  & .list {
+    font-size: var(--font-size-sm-s);
+    line-height: var(--line-height-base);
+  }
+
+  & .reference {
+    margin-top: var(--spacing-base);
+    font-size: var(--font-size-xs-s);
+
+    & a {
+      text-decoration: underline;
+    }
+  }
+}
