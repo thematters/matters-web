@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 
-import { HomePage } from './helpers'
+import { HomePage, waitForAPIResponse } from './helpers'
 
 test.describe('Homepage', () => {
   test('has paginated article feed', async ({ page }) => {
@@ -16,8 +16,13 @@ test.describe('Homepage', () => {
     await expect(home.feedArticles.first()).toBeVisible()
 
     // Scroll to bottom and expect loading more articles
-    await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight))
-    await page.waitForLoadState('networkidle')
+    await Promise.all([
+      page.evaluate(() => window.scrollTo(0, document.body.scrollHeight)),
+      waitForAPIResponse({
+        page,
+        path: 'data.viewer.recommendation.feed.edges',
+      }),
+    ])
     await home.getFeedArticles()
     const newArticleCount = await home.feedArticles.count()
     expect(newArticleCount).toBeGreaterThan(articleCount)
