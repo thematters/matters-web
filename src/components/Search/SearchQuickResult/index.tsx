@@ -1,5 +1,5 @@
-import { useLazyQuery } from '@apollo/react-hooks'
-import { Fragment, useEffect } from 'react'
+import { useApolloClient } from '@apollo/react-hooks'
+import { Fragment, useEffect, useState } from 'react'
 
 import {
   Menu,
@@ -24,12 +24,9 @@ interface QuickSearchProps {
 export const SearchQuickResult = (props: QuickSearchProps) => {
   const { searchKey, inPage } = props
   const isSmallUp = useResponsive('sm-up')
-  const [getQuickResult, { data, loading }] = useLazyQuery<QuickResult>(
-    QUICK_RESULT,
-    {
-      variables: { key: searchKey },
-    }
-  )
+  const client = useApolloClient()
+  const [data, setData] = useState<QuickResult>()
+  const [loading, setLoading] = useState(false)
 
   const { edges: userEdges } = data?.user || {}
   const { edges: tagEdges } = data?.tag || {}
@@ -38,16 +35,29 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
   const hasTags = tagEdges && tagEdges.length > 0
 
   useEffect(() => {
-    if (searchKey.length < 2) return
+    ;(async () => {
+      if (
+        '@#＠＃'.includes(searchKey[0]) &&
+        (searchKey.length < 3 || searchKey.length > 11)
+      ) {
+        return
+      }
 
-    if (
-      '@#＠＃'.includes(searchKey[0]) &&
-      (searchKey.length < 3 || searchKey.length > 10)
-    ) {
-      return
-    }
+      if (searchKey.length < 2 || searchKey.length > 10) return
 
-    getQuickResult()
+      setLoading(true)
+      // Why not useLazyQuery 👇🔗
+      // https://github.com/apollographql/apollo-client/issues/5912
+      const response = await client.query({
+        query: QUICK_RESULT,
+        variables: {
+          key: searchKey,
+        },
+        fetchPolicy: 'no-cache',
+      })
+      setData(response.data)
+      setLoading(response.loading)
+    })()
   }, [searchKey])
 
   if (loading) {
