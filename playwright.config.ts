@@ -14,9 +14,9 @@ const isLocal = process.env.PLAYWRIGHT_RUNTIME_ENV === 'local'
 const config: PlaywrightTestConfig = {
   testDir: './tests',
   outputDir: 'test-results/',
-  timeout: 30 * 1000,
+  timeout: 60e3,
   expect: {
-    timeout: 10000,
+    timeout: 10e3,
   },
   fullyParallel: true,
   forbidOnly: !!isCI,
@@ -29,7 +29,7 @@ const config: PlaywrightTestConfig = {
     testIdAttribute: 'data-test-id',
     actionTimeout: 0,
     baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL,
-    trace: 'retain-on-failure',
+    trace: 'on-first-retry',
   },
   projects: [
     {

@@ -85,15 +85,19 @@ export class DraftDetailPage {
 
   async createDraft() {
     await this.page.goto('/')
+
+    // Promise.all prevents a race condition between clicking and waiting.
     await Promise.all([
-      this.page.getByRole('button', { name: 'Create' }).click(),
       this.page.waitForNavigation(),
+      this.page.getByRole('button', { name: 'Create' }).click(),
     ])
     await expect(this.page).toHaveURL(/\/me\/drafts\/.*-.*/)
   }
 
   async gotoLatestDraft() {
     await this.page.goto('/me/drafts')
+
+    // Promise.all prevents a race condition between clicking and waiting.
     await Promise.all([
       this.page.getByRole('listitem').first().click(),
       this.page.waitForNavigation(),

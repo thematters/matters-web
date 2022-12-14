@@ -46,7 +46,10 @@ test.describe('Comment to article', () => {
         .first()
         .getByTestId(TEST_ID.COMMENT_CONETNT)
         .first()
-        .innerText()
+        .innerText({
+          // FIXME: notifications page is slow to fetch data since it's no-cache
+          timeout: 15e3,
+        })
       expect(stripSpaces(noticeArticleNewCommentContent)).toBe(
         stripSpaces(commentContent)
       )

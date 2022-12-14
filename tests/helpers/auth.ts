@@ -64,8 +64,9 @@ export const logout = async ({ page }: { page: Page }) => {
   await page.getByRole('button', { name: 'My Page' }).click()
 
   // Click "Log Out" button
+  // Promise.all prevents a race condition between clicking and waiting.
   await Promise.all([
-    page.getByRole('menuitem', { name: 'Log Out' }).click(),
     page.waitForNavigation(),
+    page.getByRole('menuitem', { name: 'Log Out' }).click(),
   ])
 }

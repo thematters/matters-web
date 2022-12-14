@@ -59,6 +59,7 @@ test.describe('Publish draft', () => {
     await draftDetail.publish()
 
     // Goto published article page
+    // Promise.all prevents a race condition between clicking and waiting.
     await Promise.all([
       draftDetail.dialogViewArticleButton.click(),
       page.waitForNavigation(),

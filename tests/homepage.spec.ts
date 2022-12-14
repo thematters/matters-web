@@ -19,12 +19,13 @@ test.describe('Homepage', () => {
     await expect(home.feedArticles.first()).toBeVisible()
 
     // Scroll to bottom and expect loading more articles
+    // Promise.all prevents a race condition between scrolling and waiting.
     await Promise.all([
-      page.evaluate(() => window.scrollTo(0, document.body.scrollHeight)),
       waitForAPIResponse({
         page,
         path: 'data.viewer.recommendation.feed.edges',
       }),
+      page.evaluate(() => window.scrollTo(0, document.body.scrollHeight)),
     ])
     await page.getByTestId(TEST_ID.SPINNER).waitFor({ state: 'hidden' })
     const newArticleCount = await home.feedArticles.count()
