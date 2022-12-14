@@ -22,13 +22,14 @@ const config: PlaywrightTestConfig = {
   forbidOnly: !!isCI,
   retries: isCI ? 2 : 0,
   workers: isCI ? 2 : undefined,
+  // maxFailures: process.env.CI ? 2 : 0,
   reporter: 'html',
   globalSetup: require.resolve('./tests/globalSetup'),
   use: {
     testIdAttribute: 'data-test-id',
     actionTimeout: 0,
     baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL,
-    trace: 'on-first-retry',
+    trace: 'retain-on-failure',
   },
   projects: [
     {
@@ -48,7 +49,6 @@ const config: PlaywrightTestConfig = {
               locale: LOCALE,
             },
           },
-
           // {
           //   name: 'webkit',
           //   use: {

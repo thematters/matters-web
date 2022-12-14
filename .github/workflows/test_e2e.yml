@@ -1,10 +1,7 @@
 name: Test E2E
 
-on:
-  push:
-    branches-ignore:
-      - develop
-      - stage
+on: push
+
 env:
   PLAYWRIGHT_TEST_BASE_URL: 'https://web-develop.matters.news'
   PLAYWRIGHT_RUNTIME_ENV: 'ci'

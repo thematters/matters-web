@@ -1,5 +1,8 @@
 import { expect, test } from '@playwright/test'
 
+import { TEST_ID } from '~/common/enums'
+import { stripSpaces } from '~/common/utils'
+
 import { HomePage, waitForAPIResponse } from './helpers'
 
 test.describe('Homepage', () => {
@@ -23,7 +26,7 @@ test.describe('Homepage', () => {
         path: 'data.viewer.recommendation.feed.edges',
       }),
     ])
-    await home.getFeedArticles()
+    await page.getByTestId(TEST_ID.SPINNER).waitFor({ state: 'hidden' })
     const newArticleCount = await home.feedArticles.count()
     expect(newArticleCount).toBeGreaterThan(articleCount)
   })
@@ -40,7 +43,6 @@ test.describe('Homepage', () => {
 
     // Expect home feed is a "Latest" feed and has articles
     expect(await home.tabLatest.getAttribute('aria-selected')).toBe('true')
-    await home.getFeedArticles()
     await expect(home.feedArticles.first()).toBeVisible()
   })
 
@@ -57,7 +59,7 @@ test.describe('Homepage', () => {
     await home.shuffleSidebarTags()
     const newFirstTag = home.sidebarTags.first()
     const newFirstTagText = await newFirstTag.innerText()
-    expect(firstTagText).not.toEqual(newFirstTagText)
+    expect(stripSpaces(firstTagText)).not.toEqual(stripSpaces(newFirstTagText))
 
     // Expect the sidebar has recommended users
     const firstUser = home.sidebarUsers.first()
@@ -68,6 +70,8 @@ test.describe('Homepage', () => {
     await home.shuffleSidebarUsers()
     const newFirstUser = home.sidebarUsers.first()
     const newFirstUserText = await newFirstUser.innerText()
-    expect(firstUserText).not.toEqual(newFirstUserText)
+    expect(stripSpaces(firstUserText)).not.toEqual(
+      stripSpaces(newFirstUserText)
+    )
   })
 })

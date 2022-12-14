@@ -1,10 +1,6 @@
 name: Test Build
 
-on:
-  push:
-    branches-ignore:
-      - develop
-      - stage
+on: push
 
 jobs:
   build:

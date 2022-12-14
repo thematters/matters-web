@@ -17,10 +17,7 @@ test.describe('Authentication', () => {
     const authDialog = page.getByTestId(TEST_ID.DIALOG_AUTH)
     await expect(authDialog.first()).toBeVisible()
 
-    await Promise.all([
-      login({ page, fillMode: true }),
-      page.waitForNavigation(),
-    ])
+    await login({ page, fillMode: true, waitForNavigation: true })
     await expect(page).toHaveURL('/')
 
     // Expect homepage has "Notification" button on the left side
@@ -30,8 +27,8 @@ test.describe('Authentication', () => {
   })
 
   test('can login in login page', async ({ page }) => {
-    await login({ page })
-    await Promise.all([page.waitForNavigation(), expect(page).toHaveURL('/')])
+    await login({ page, waitForNavigation: true })
+    await expect(page).toHaveURL('/')
 
     // Expect homepage has "Notification" button on the left side
     await expect(

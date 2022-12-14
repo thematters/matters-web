@@ -22,14 +22,16 @@ export const login = async ({
   email = users.alice.email,
   password = users.alice.password,
   page,
-  fillMode = false,
   target = '/',
+  fillMode = false,
+  waitForNavigation = false,
 }: {
   email?: string
   password?: string
   page: Page
-  fillMode?: boolean
   target?: string
+  fillMode?: boolean
+  waitForNavigation?: boolean
 }) => {
   if (!fillMode) {
     target = encodeURIComponent(
@@ -48,10 +50,13 @@ export const login = async ({
   // Submit
   await page.getByRole('button', { name: 'Confirm' }).click()
 
-  await waitForAPIResponse({
-    page,
-    path: 'data.userLogin.token',
-  })
+  await Promise.all([
+    waitForAPIResponse({
+      page,
+      path: 'data.userLogin.token',
+    }),
+    waitForNavigation ? page.waitForNavigation() : undefined,
+  ])
 }
 
 export const logout = async ({ page }: { page: Page }) => {

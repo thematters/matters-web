@@ -29,10 +29,6 @@ export class HomePage {
     await this.page.goto('/')
   }
 
-  async getFeedArticles() {
-    this.feedArticles = this.page.getByTestId(TEST_ID.DIGEST_ARTICLE_FEED)
-  }
-
   async shuffleSidebarTags() {
     await this.page.getByRole('button', { name: 'Shuffle' }).first().click()
 
