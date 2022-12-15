@@ -1,6 +1,6 @@
 # matters-web
 
-![Deployment Status](https://github.com/thematters/matters-web/workflows/Deployment/badge.svg) ![Test Status](https://github.com/thematters/matters-web/workflows/Test/badge.svg) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+![Deployment Status](https://github.com/thematters/matters-web/workflows/Deployment/badge.svg) ![Build Status](https://github.com/thematters/matters-web/workflows/Test%20Build/badge.svg) ![Test Status](https://github.com/thematters/matters-web/workflows/Test%20E2E/badge.svg) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 ## Getting Started
 
@@ -43,6 +43,10 @@
 - Pull:
   - `docker pull 903380195283.dkr.ecr.ap-southeast-1.amazonaws.com/matters-web:latest`
   - `docker tag 903380195283.dkr.ecr.ap-southeast-1.amazonaws.com/matters-web:latest matters-web:latest`
+
+## Testing
+
+See [Playwright Testing Guide](https://www.notion.so/matterslab/Playwright-Testing-Guide-60caa248d5ce4d70938b7b2f2c7e9139).
 
 ## Static File
 
