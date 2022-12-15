@@ -1,16 +1,18 @@
-name: Test
+name: Test E2E
 
-on:
-  push:
-    branches-ignore:
-      - develop
-      - stage
+on: push
+
 env:
-  MATTERS_TESTING_ACCOUNT_EMAIL: ${{ secrets.MATTERS_TESTING_ACCOUNT_EMAIL }}
-  MATTERS_TESTING_ACCOUNT_PASSWORD: ${{ secrets.MATTERS_TESTING_ACCOUNT_PASSWORD }}
+  PLAYWRIGHT_TEST_BASE_URL: 'https://web-develop.matters.news'
+  PLAYWRIGHT_RUNTIME_ENV: 'ci'
+  PLAYWRIGHT_AUTH_EMAIL_ALICE: ${{ secrets.PLAYWRIGHT_AUTH_EMAIL_ALICE }}
+  PLAYWRIGHT_AUTH_PWD_ALICE: ${{ secrets.PLAYWRIGHT_AUTH_PWD_ALICE }}
+  PLAYWRIGHT_AUTH_EMAIL_BOB: ${{ secrets.PLAYWRIGHT_AUTH_EMAIL_BOB }}
+  PLAYWRIGHT_AUTH_PWD_BOB: ${{ secrets.PLAYWRIGHT_AUTH_PWD_BOB }}
 
 jobs:
-  build_and_test:
+  e2e:
+    timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
@@ -33,6 +35,22 @@ jobs:
         if: steps.node_modules_cache.outputs.cache-hit != 'true'
         run: npm ci --legacy-peer-deps
 
+      - name: Get installed Playwright version
+        id: playwright-version
+        run: echo "PLAYWRIGHT_VERSION=$(node -e "console.log(require('./package-lock.json').dependencies['@playwright/test'].version)")" >> $GITHUB_ENV
+
+      - name: Cache playwright binaries
+        uses: actions/cache@v3
+        id: playwright_cache
+        with:
+          path: |
+            ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
+
+      - name: Install Playwright Browsers
+        run: npm run test:prepare
+        if: steps.playwright_cache.outputs.cache-hit != 'true'
+
       - name: Generate Types (Develop)
         if: github.base_ref != 'master'
         run: |
@@ -45,19 +63,8 @@ jobs:
           npm run gen:clean \
           && npm run gen:type:prod
 
-      - name: Lint
-        run: |
-          npm run lint \
-          && npm run format:check
-
-      - name: Build
-        run: cp .env.dev .env && npm run build
-
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
-
       - name: Run Playwright tests
-        run: MATTERS_TESTING_ACCOUNT_EMAIL=${{ secrets.MATTERS_TESTING_ACCOUNT_EMAIL }} MATTERS_TESTING_ACCOUNT_PASSWORD=${{ secrets.MATTERS_TESTING_ACCOUNT_PASSWORD }} npx playwright test
+        run: npm run test
 
       - name: Output Playwright tests
         uses: actions/upload-artifact@v2
