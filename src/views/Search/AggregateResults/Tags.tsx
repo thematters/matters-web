@@ -58,7 +58,7 @@ const AggregateTagResults = () => {
   // load next page
   const loadMore = () => {
     analytics.trackEvent('load_more', {
-      type: 'search_article',
+      type: 'search_tag',
       location: edges.length || 0,
     })
 
