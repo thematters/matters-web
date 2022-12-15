@@ -1,8 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 
 import {
-  ArticleDigestConcise,
-  Card,
+  ArticleDigestFeed,
   EmptySearch,
   InfiniteScroll,
   List,
@@ -12,7 +11,7 @@ import {
 } from '~/components'
 import { SearchAggregateArticlesPublicQuery } from '~/gql/graphql'
 
-import { analytics, mergeConnections, toPath } from '~/common/utils'
+import { analytics, mergeConnections } from '~/common/utils'
 
 import EndOfResults from './EndOfResults'
 import { SEARCH_AGGREGATE_ARTICLES_PUBLIC } from './gql'
@@ -87,23 +86,12 @@ const AggregateArticleResults = () => {
             ({ node, cursor }, i) =>
               node.__typename === 'Article' && (
                 <List.Item key={cursor}>
-                  <Card
-                    spacing={['base', 'base']}
-                    {...toPath({
-                      page: 'articleDetail',
-                      article: node,
-                    })}
-                    onClick={() =>
-                      analytics.trackEvent('click_feed', {
-                        type: 'search',
-                        contentType: 'article',
-                        location: i,
-                        id: node.id,
-                      })
-                    }
-                  >
-                    <ArticleDigestConcise article={node} />
-                  </Card>
+                  <ArticleDigestFeed
+                    article={node}
+                    isConciseFooter={true}
+                    hasCircle={false}
+                    hasFollow={false}
+                  />
                 </List.Item>
               )
           )}

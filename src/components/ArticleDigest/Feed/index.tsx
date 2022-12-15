@@ -2,7 +2,7 @@ import React from 'react'
 
 import { TEST_ID } from '~/common/enums'
 import { stripHtml, toPath, UtmParams } from '~/common/utils'
-import { Card, CircleDigest, ResponsiveImage } from '~/components'
+import { Card, CircleDigest, DateTime, ResponsiveImage } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 import {
   ArticleDigestFeedArticlePrivateFragment,
@@ -18,6 +18,7 @@ import styles from './styles.css'
 export type ArticleDigestFeedControls = {
   onClick?: () => any
   onClickAuthor?: () => void
+  isConciseFooter?: boolean
   hasFollow?: boolean
   hasCircle?: boolean
 }
@@ -35,6 +36,7 @@ const BaseArticleDigestFeed = ({
   header,
   date,
 
+  isConciseFooter = false,
   hasFollow,
   hasCircle = true,
   onClick,
@@ -103,7 +105,14 @@ const BaseArticleDigestFeed = ({
         )}
       </section>
 
-      <FooterActions article={article} inCard date={date} {...controls} />
+      {isConciseFooter && (
+        <section>
+          <DateTime date={article.createdAt} />
+        </section>
+      )}
+      {!isConciseFooter && (
+        <FooterActions article={article} inCard date={date} {...controls} />
+      )}
 
       <style jsx>{styles}</style>
     </Card>
