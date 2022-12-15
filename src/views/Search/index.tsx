@@ -49,7 +49,7 @@ const Search = () => {
 
   const { getQuery, router } = useRoute()
   const q = getQuery('q')
-  // TODO: Just test for product team, will remove when release
+  // TODO: Just test for product team, will be removed when release
   const cancelable = getQuery('cancelable')
 
   const isLargeUp = useResponsive('lg-up')
