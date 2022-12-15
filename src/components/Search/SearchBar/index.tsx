@@ -13,7 +13,7 @@ import {
 } from '~/components'
 
 import { INPUT_DEBOUNCE, Z_INDEX } from '~/common/enums'
-import { dom, getSearchType, toPath, translate } from '~/common/utils'
+import { getSearchType, toPath, translate } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -106,7 +106,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         closeDropdown()
       }}
     >
-      {({ values, handleSubmit, handleChange }) => {
+      {({ values, setValues, handleSubmit, handleChange }) => {
         if (!hasDropdown) {
           return (
             <form
@@ -134,12 +134,8 @@ export const SearchBar: React.FC<SearchBarProps> = ({
               {search.length > 0 && (
                 <ClearButton
                   onClick={() => {
-                    if (searchTextInput.current) {
-                      const el = searchTextInput.current
-                      dom.setNativeValue(el, '')
-                      el.dispatchEvent(new Event('input', { bubbles: true }))
-                      el.focus()
-                    }
+                    setValues({ q: '' })
+                    setSearch('')
                   }}
                 />
               )}
