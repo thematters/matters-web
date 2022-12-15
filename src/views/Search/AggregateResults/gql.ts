@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { ArticleDigestConcise, TagDigest, UserDigest } from '~/components'
+import { ArticleDigestFeed, TagDigest, UserDigest } from '~/components'
 
 export const SEARCH_AGGREGATE_ARTICLES_PUBLIC = gql`
   query SearchAggregateArticlesPublic($key: String!, $after: String) {
@@ -15,13 +15,15 @@ export const SEARCH_AGGREGATE_ARTICLES_PUBLIC = gql`
         cursor
         node {
           ... on Article {
-            ...ArticleDigestConciseArticle
+            ...ArticleDigestFeedArticlePublic
+            ...ArticleDigestFeedArticlePrivate
           }
         }
       }
     }
   }
-  ${ArticleDigestConcise.fragments.article}
+  ${ArticleDigestFeed.fragments.article.public}
+  ${ArticleDigestFeed.fragments.article.private}
 `
 
 export const SEARCH_AGGREGATE_TAGS_PUBLIC = gql`
