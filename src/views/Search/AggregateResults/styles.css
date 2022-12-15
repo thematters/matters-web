@@ -1,7 +1,7 @@
 .title {
   @mixin flex-center-start;
 
-  padding: var(--spacing-loose) var(--spacing-base);
+  padding: var(--spacing-loose) var(--spacing-base) var(--spacing-base);
   font-size: var(--font-size-xm);
   font-weight: var(--font-weight-medium);
   color: var(--color-grey);
@@ -19,6 +19,10 @@
 
   & .titleRight {
     white-space: nowrap;
+  }
+
+  @media (--sm-up) {
+    padding-bottom: var(--spacing-x-tight);
   }
 }
 
