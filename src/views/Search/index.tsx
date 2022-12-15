@@ -20,10 +20,8 @@ import { STORAGE_KEY_SEARCH_HISTORY } from '~/common/enums'
 import { storage, toPath } from '~/common/utils'
 
 import AggregateResults from './AggregateResults'
+import styles from './styles.css'
 // import EmptySearch from './EmptySearch'
-import SearchArticles from './SearchArticles'
-import SearchTags from './SearchTags'
-import SearchUsers from './SearchUsers'
 
 const Search = () => {
   const viewer = useContext(ViewerContext)
@@ -50,34 +48,30 @@ const Search = () => {
   }
 
   const { getQuery, router } = useRoute()
-  const type = getQuery('type')
   const q = getQuery('q')
-  const isSmallUp = useResponsive('sm-up')
+  // TODO: Just test for product team, will be removed when release
+  const cancelable = getQuery('cancelable')
+
+  const isLargeUp = useResponsive('lg-up')
 
   const [typingKey, setTypingKey] = useState('')
   const resetAutoComplete = () => setTypingKey('')
   const onCancel = () => {
     const path = toPath({ page: 'search' })
-    router.push(path.href)
+    router.replace(path.href)
   }
 
-  const isOverview = !q && !typingKey
-  const isAutoComplete = typingKey
-  const isTagOnly = !isAutoComplete && type === 'tag'
-  const isUserOnly = !isAutoComplete && type === 'user'
-  const isArticleOnly = !isAutoComplete && type === 'article'
-  const isAggregate =
-    !isOverview &&
-    !isAutoComplete &&
-    !isTagOnly &&
-    !isUserOnly &&
-    !isArticleOnly
+  const isHistory = !q && !typingKey
+  const isQuickResult = !q && typingKey
+  const isAggregate = !isHistory && !isQuickResult
+
   // const showBackButton = isSmallUp && isOverview
   // const showMeButton = !isSmallUp && isOverview
-  const showCancelButton = !isOverview
+
+  const showCancelButton = !isHistory && cancelable
 
   useEffect(() => {
-    if (!isOverview) return
+    if (!isHistory) return
 
     setSearchHistory(storage.get(storageKey))
   }, [storageKey])
@@ -94,44 +88,41 @@ const Search = () => {
   }, [])
 
   return (
-    <Layout.Main bgColor={isAggregate ? 'grey-lighter' : undefined}>
+    <Layout.Main>
       <Layout.Header
-        // left={
-        //   showBackButton ? (
-        //     <Layout.Header.BackButton />
-        //   ) : showMeButton ? (
-        //     <Layout.Header.MeButton />
-        //   ) : null
-        // }
+        left={isLargeUp && <Layout.Header.BackButton />}
         right={
-          <>
-            <SearchBar hasDropdown={false} onChange={setTypingKey} />
+          isLargeUp ? (
+            <Layout.Header.Title id="search" />
+          ) : (
+            <>
+              <SearchBar hasDropdown={false} onChange={setTypingKey} />
 
-            {showCancelButton && (
-              <span style={{ marginLeft: '1rem' }}>
-                <Layout.Header.CancelButton onClick={onCancel} />
-              </span>
-            )}
-          </>
+              {showCancelButton && (
+                <span style={{ marginLeft: '1rem' }}>
+                  <Layout.Header.CancelButton onClick={onCancel} />
+                </span>
+              )}
+            </>
+          )
         }
+        className="layoutHeader"
       />
 
       <Head title={{ id: 'search' }} />
 
       <PullToRefresh>
-        {isOverview && !isSmallUp && (
+        {isHistory && !isLargeUp && (
           <SearchHistory
             data={searchHistory.slice(0, 10)}
             removeSearchHistoryItem={removeSearchHistory}
           />
         )}
-        {isAutoComplete && <SearchQuickResult searchKey={typingKey} inPage />}
+        {isQuickResult && <SearchQuickResult searchKey={typingKey} inPage />}
 
-        {isTagOnly && <SearchTags />}
-        {isUserOnly && <SearchUsers />}
-        {isArticleOnly && <SearchArticles />}
         {isAggregate && <AggregateResults />}
       </PullToRefresh>
+      <style jsx>{styles}</style>
     </Layout.Main>
   )
 }
