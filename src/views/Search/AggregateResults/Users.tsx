@@ -59,7 +59,7 @@ const AggregateUserResults = () => {
   // load next page
   const loadMore = () => {
     analytics.trackEvent('load_more', {
-      type: 'search_article',
+      type: 'search_user',
       location: edges.length || 0,
     })
 
