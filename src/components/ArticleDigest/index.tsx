@@ -1,5 +1,4 @@
 export * from './Card'
-export * from './Concise'
 export * from './Dropdown'
 export * from './Feed'
 export * from './Sidebar'
