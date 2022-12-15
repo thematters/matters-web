@@ -48,13 +48,16 @@ const Search = () => {
 
   const { getQuery, router } = useRoute()
   const q = getQuery('q')
+  // TODO: Just test for product team, will remove when release
+  const cancelable = getQuery('cancelable')
+
   const isSmallUp = useResponsive('sm-up')
 
   const [typingKey, setTypingKey] = useState('')
   const resetAutoComplete = () => setTypingKey('')
   const onCancel = () => {
     const path = toPath({ page: 'search' })
-    router.push(path.href)
+    router.replace(path.href)
   }
 
   const isHistory = !q && !typingKey
@@ -64,7 +67,7 @@ const Search = () => {
   // const showBackButton = isSmallUp && isOverview
   // const showMeButton = !isSmallUp && isOverview
 
-  const showCancelButton = !isHistory
+  const showCancelButton = !isHistory && cancelable
 
   useEffect(() => {
     if (!isHistory) return
