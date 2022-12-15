@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useDebounce } from 'use-debounce'
 
 import { INPUT_DEBOUNCE, Z_INDEX } from '~/common/enums'
-import { dom, getSearchType, toPath, translate } from '~/common/utils'
+import { getSearchType, toPath, translate } from '~/common/utils'
 import {
   Button,
   Dropdown,
@@ -105,7 +105,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         closeDropdown()
       }}
     >
-      {({ values, handleSubmit, handleChange }) => {
+      {({ values, setValues, handleSubmit, handleChange }) => {
         if (!hasDropdown) {
           return (
             <form
@@ -133,12 +133,8 @@ export const SearchBar: React.FC<SearchBarProps> = ({
               {search.length > 0 && (
                 <ClearButton
                   onClick={() => {
-                    if (searchTextInput.current) {
-                      const el = searchTextInput.current
-                      dom.setNativeValue(el, '')
-                      el.dispatchEvent(new Event('input', { bubbles: true }))
-                      el.focus()
-                    }
+                    setValues({ q: '' })
+                    setSearch('')
                   }}
                 />
               )}
