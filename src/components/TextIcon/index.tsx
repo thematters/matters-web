@@ -14,6 +14,7 @@ type TextIconColor =
   | 'red'
   | 'likecoin-green'
   | 'yellow-lighter'
+  | 'blue-green-linear'
 
 export interface TextIconProps {
   icon?: React.ReactNode

@@ -103,4 +103,6 @@ footer {
 
 .ens-name {
   @mixin flex-center-start;
+
+  gap: var(--spacing-x-tight);
 }

@@ -1,4 +1,8 @@
+// @ts-ignore
+import contentHash from '@ensdomains/content-hash'
+import { namehash } from 'ethers/lib/utils'
 import { useContext, useEffect } from 'react'
+import { useAccount, useContractRead, useEnsName, useEnsResolver } from 'wagmi'
 
 import {
   Avatar,
@@ -8,11 +12,13 @@ import {
   Error,
   Expandable,
   FollowUserButton,
+  IconInfo16,
   IconRss32,
   LanguageContext,
   Layout,
   RssFeedDialog,
   Spinner,
+  TextIcon,
   Throw404,
   Tooltip,
   Translate,
@@ -22,7 +28,7 @@ import {
 } from '~/components'
 import ShareButton from '~/components/Layout/Header/ShareButton'
 
-import { numAbbr, translate } from '~/common/utils'
+import { numAbbr, PublicResolverABI, translate } from '~/common/utils'
 
 import IMAGE_COVER from '@/public/static/images/profile-cover.png'
 
@@ -83,11 +89,6 @@ export const UserProfile = () => {
   )
   const user = data?.user
 
-  // TODO
-  // const { data: ensName } = useEnsName({
-  //   address: user?.info?.ethAddress as `0x${string}`,
-  // })
-
   // fetch private data
   useEffect(() => {
     if (!viewer.isAuthed || !user) {
@@ -100,6 +101,27 @@ export const UserProfile = () => {
       variables: { userName },
     })
   }, [user?.id, viewer.id])
+
+  const { address } = useAccount()
+
+  const { data: ensName } = useEnsName({
+    address: address as `0x${string}`,
+  })
+  const { data: resolverData } = useEnsResolver({
+    name: ensName as string,
+  })
+  const { data: readData } = useContractRead({
+    address: resolverData?.address,
+    abi: PublicResolverABI,
+    functionName: 'contenthash',
+    args: [namehash(ensName || ('' as string))],
+  })
+
+  const ipnsHash = user?.info.ipnsKey
+  const ipnsEncoded = '0x' + contentHash.encode('ipns-ns', ipnsHash)
+
+  const hasLinkedIPNS = ipnsEncoded === readData
+  const hasLinkEnsButton = !hasLinkedIPNS && ensName
 
   /**
    * Render
@@ -296,22 +318,36 @@ export const UserProfile = () => {
             {user.info.ethAddress && (
               <WalletAddress address={user.info.ethAddress} />
             )}
-            <ENSDialog>
-              {({ openDialog }) => (
-                <>
-                  <Button
-                    size={[null, '1.75rem']}
-                    spacing={[0, 'tight']}
-                    borderColor="green"
-                    onClick={() => {
-                      openDialog()
-                    }}
-                  >
-                    關聯 ENS
-                  </Button>
-                </>
-              )}
-            </ENSDialog>
+            {ipnsHash && hasLinkEnsButton && (
+              <ENSDialog user={user}>
+                {({ openDialog }) => (
+                  <>
+                    <Button
+                      size={[null, '1.75rem']}
+                      spacing={[0, 'tight']}
+                      borderColor="blue-green-linear"
+                      onClick={() => {
+                        openDialog()
+                      }}
+                    >
+                      <TextIcon color="blue-green-linear">
+                        <Translate id="bindIPNStoENS" />
+                      </TextIcon>
+                    </Button>
+                  </>
+                )}
+              </ENSDialog>
+            )}
+            {
+              // TODO: hover info
+              hasLinkedIPNS && (
+                <TextIcon
+                  icon={<IconInfo16 size="sm" />}
+                  color="grey"
+                  size="sm"
+                />
+              )
+            }
           </section>
 
           <Expandable

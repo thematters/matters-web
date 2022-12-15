@@ -429,6 +429,15 @@ span.container {
   }
 }
 
+.border-blue-green-linear {
+  & .hotarea {
+    background: linear-gradient(white, white) padding-box,
+      linear-gradient(90deg, #1cb0ab 6.76%, #33a5c9 94.59%) border-box;
+    border: 4px solid transparent;
+    border-radius: 50em;
+  }
+}
+
 .border-md {
   & .hotarea {
     border-style: solid;

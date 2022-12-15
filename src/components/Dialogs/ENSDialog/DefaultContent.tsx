@@ -1,4 +1,4 @@
-// import { useEnsName, useEnsResolver, } from 'wagmi'
+import { useAccount, useEnsName } from 'wagmi'
 
 import { Button, Dialog, TextIcon, Translate } from '~/components'
 
@@ -10,17 +10,21 @@ interface DefaultContentProps {
   switchToWalletSelect: () => void
 }
 const DefaultContent = ({ switchToWalletSelect }: DefaultContentProps) => {
+  const { address } = useAccount()
+
+  const { data: ensName } = useEnsName({
+    address: address as `0x${string}`,
+  })
+
   return (
     <>
       <Dialog.Content>
         <section className="container">
           <section className="connect-wallet">
-            <span className="ens-name">
-              <Translate
-                zh_hans="关聊 robertu.eth 到你的 IPNS 页面"
-                zh_hant="關聯 robertu.eth 到你的 IPNS 頁面"
-                en="關聯 robertu.eth 到你的 IPNS 頁面"
-              />
+            <span className="info">
+              <Translate zh_hans={`关聊`} zh_hant={`關聯`} en={`Link`} />
+              <span className="ens">&nbsp;{ensName}&nbsp;</span>
+              <Translate id="toYourIPNSPage" />
             </span>
             <span className="btn">
               <Button
@@ -46,30 +50,22 @@ const DefaultContent = ({ switchToWalletSelect }: DefaultContentProps) => {
           <section className="description">
             <section className="list">
               <p>
-                <Translate
-                  zh_hans="关聊 ENS 名后，可以："
-                  zh_hant="關聯 ENS 名後，可以："
-                  en="關聯 ENS 名後，可以："
-                />
+                <Translate id="linkEns" />
               </p>
               <ul>
-                <li>獲得個性化 IPNS 頁連結，如：ipfs.io/ipns/matty.eth</li>
-                <li>直接使用 ENS 名在閱讀器（如 Planet）中訂閱文章</li>
+                <li>
+                  <Translate id="linkEnsBenefit1" />{' '}
+                </li>
+                <li>
+                  <Translate id="linkEnsBenefit2" />
+                </li>
               </ul>
             </section>
             <p className="reference">
-              <Translate
-                zh_hans="更多 ENS 资讯请参考"
-                zh_hant="更多 ENS 資訊請參考"
-                en={`更多 ENS 資訊請參考`}
-              />
+              <Translate id="moreEnsInfo" />
               &nbsp;
               <a href={EXTERNAL_LINKS.ENS_DOCS} target="_blank">
-                <Translate
-                  zh_hans="官方文档"
-                  zh_hant="官方文檔"
-                  en="Offcial Docs"
-                />
+                <Translate zh_hans="官方文档" zh_hant="官方文檔" en="docs" />
               </a>
             </p>
           </section>

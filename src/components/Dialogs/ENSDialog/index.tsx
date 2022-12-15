@@ -2,9 +2,12 @@ import dynamic from 'next/dynamic'
 
 import { Dialog, Spinner, useDialogSwitch, useStep } from '~/components'
 
-type Step = 'confirmAddress' | 'walletSelect'
+import { UserProfileUserPublic_user } from '~/components/UserProfile/__generated__/UserProfileUserPublic'
+
+type Step = 'confirmAddress' | 'walletSelect' | 'bindIPNS'
 
 interface ENSDialogProps {
+  user: UserProfileUserPublic_user
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
   completeCallback?: () => void
   defaultStep?: Step
@@ -17,8 +20,11 @@ const DynamicWalletAuthFormSelect = dynamic(
   { ssr: false, loading: Spinner }
 )
 
+const DynamicLinkENS = dynamic(() => import('./LinkENSContent'))
+
 const BaseENSDilaog = ({
   children,
+  user,
   defaultStep = 'confirmAddress',
 }: ENSDialogProps) => {
   const {
@@ -26,6 +32,7 @@ const BaseENSDilaog = ({
     openDialog: baseOpenDialog,
     closeDialog: baseCloseDialog,
   } = useDialogSwitch(true)
+
   const { currStep, forward } = useStep<Step>(defaultStep)
 
   const openDialog = () => {
@@ -39,6 +46,7 @@ const BaseENSDilaog = ({
 
   const isConfirmAddress = currStep === 'confirmAddress'
   const isWalletSelect = currStep === 'walletSelect'
+  const isBindIPNS = currStep === 'bindIPNS'
 
   return (
     <>
@@ -63,11 +71,13 @@ const BaseENSDilaog = ({
           <DynamicWalletAuthFormSelect
             purpose="dialog"
             submitCallback={() => {
-              forward('confirmAddress')
+              forward('bindIPNS')
             }}
             closeDialog={closeDialog}
           />
         )}
+
+        {isBindIPNS && <DynamicLinkENS user={user} />}
       </Dialog>
     </>
   )

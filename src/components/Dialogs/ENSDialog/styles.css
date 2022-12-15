@@ -1,9 +1,45 @@
 .container {
-  padding: var(--spacing-base) var(--spacing-base) var(--spacing-xx-loose);
+  padding: var(--spacing-base) var(--spacing-base) 0;
 }
 
-.ens-name {
+.link-ens-container {
+  @mixin flex-center-all;
+
+  flex-direction: column;
+  padding: var(--spacing-base) var(--spacing-base) 0;
+}
+
+.info {
   margin-top: var(--spacing-loose);
+  font-size: var(--font-size-md-s);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-base);
+  color: var(--color-grey-darker);
+  text-align: center;
+
+  & a {
+    color: var(--color-matters-green);
+    text-decoration: underline;
+  }
+
+  & .ens {
+    color: var(--color-matters-green);
+  }
+}
+
+.error {
+  margin-top: var(--spacing-loose);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-normal);
+  color: var(--color-red);
+  text-align: center;
+}
+
+.reconnect-hint {
+  margin-top: var(--spacing-base);
+  font-size: var(--font-size-xs);
+  color: var(--color-red);
+  text-align: center;
 }
 
 .btn {
@@ -32,7 +68,7 @@
   }
 
   & .reference {
-    margin-top: var(--spacing-base);
+    margin: var(--spacing-base) 0 var(--spacing-xx-loose);
     font-size: var(--font-size-xs-s);
 
     & a {

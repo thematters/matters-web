@@ -107,6 +107,12 @@
   color: var(--color-yellow-lighter);
 }
 
+.blue-green-linear {
+  background-image: linear-gradient(90deg, #1cb0ab 6.76%, #33a5c9 94.59%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 /* spacing */
 .spacing-xxxtight.hasIcon {
   &.text-right > .text {
