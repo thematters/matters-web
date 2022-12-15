@@ -20,6 +20,7 @@ import { STORAGE_KEY_SEARCH_HISTORY } from '~/common/enums'
 import { storage, toPath } from '~/common/utils'
 
 import AggregateResults from './AggregateResults'
+import styles from './styles.css'
 // import EmptySearch from './EmptySearch'
 
 const Search = () => {
@@ -51,7 +52,7 @@ const Search = () => {
   // TODO: Just test for product team, will remove when release
   const cancelable = getQuery('cancelable')
 
-  const isSmallUp = useResponsive('sm-up')
+  const isLargeUp = useResponsive('lg-up')
 
   const [typingKey, setTypingKey] = useState('')
   const resetAutoComplete = () => setTypingKey('')
@@ -89,9 +90,9 @@ const Search = () => {
   return (
     <Layout.Main>
       <Layout.Header
-        left={isSmallUp && <Layout.Header.BackButton />}
+        left={isLargeUp && <Layout.Header.BackButton />}
         right={
-          isSmallUp ? (
+          isLargeUp ? (
             <Layout.Header.Title id="search" />
           ) : (
             <>
@@ -105,12 +106,13 @@ const Search = () => {
             </>
           )
         }
+        className="layoutHeader"
       />
 
       <Head title={{ id: 'search' }} />
 
       <PullToRefresh>
-        {isHistory && !isSmallUp && (
+        {isHistory && !isLargeUp && (
           <SearchHistory
             data={searchHistory.slice(0, 10)}
             removeSearchHistoryItem={removeSearchHistory}
@@ -120,6 +122,7 @@ const Search = () => {
 
         {isAggregate && <AggregateResults />}
       </PullToRefresh>
+      <style jsx>{styles}</style>
     </Layout.Main>
   )
 }
