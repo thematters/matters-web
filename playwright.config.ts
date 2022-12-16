@@ -14,7 +14,7 @@ const isLocal = process.env.PLAYWRIGHT_RUNTIME_ENV === 'local'
 const config: PlaywrightTestConfig = {
   testDir: './tests',
   outputDir: 'test-results/',
-  timeout: 60e3,
+  timeout: 90e3,
   expect: {
     timeout: 10e3,
   },

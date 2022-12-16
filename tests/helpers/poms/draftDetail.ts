@@ -1,5 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test'
 import _sample from 'lodash/sample'
+import _uniq from 'lodash/uniq'
 
 import { TEST_ID } from '~/common/enums'
 
@@ -125,7 +126,7 @@ export class DraftDetailPage {
   async setTags() {
     await this.sidebarAddTag.click()
 
-    const tags = generateTags({ count: 3 })
+    const tags = _uniq(generateTags({ count: 3 }))
     for (const tag of tags) {
       await this.page.getByLabel('Search').fill(tag)
       await this.page.getByTestId(TEST_ID.SEARCH_RESULTS_ITEM).first().click()
