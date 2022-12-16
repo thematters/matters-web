@@ -7,6 +7,7 @@ import {
   TagDigest,
   UserDigest,
   useResponsive,
+  useRoute,
 } from '~/components'
 
 import { toPath } from '~/common/utils'
@@ -24,6 +25,10 @@ interface QuickSearchProps {
 }
 
 export const SearchQuickResult = (props: QuickSearchProps) => {
+  // TODO: Just test for team, will be removed when release
+  const { getQuery } = useRoute()
+  const version = getQuery('version')
+
   const { searchKey, inPage, activeItem, onUpdateData } = props
   const isSmallUp = useResponsive('sm-up')
   const client = useApolloClient()
@@ -62,6 +67,7 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
         query: QUICK_RESULT,
         variables: {
           key: searchKey,
+          version: version === '' ? undefined : version,
         },
         fetchPolicy: 'no-cache',
       })
