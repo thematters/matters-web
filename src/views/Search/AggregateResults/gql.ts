@@ -3,8 +3,20 @@ import gql from 'graphql-tag'
 import { ArticleDigestFeed, TagDigest, UserDigest } from '~/components'
 
 export const SEARCH_AGGREGATE_ARTICLES_PUBLIC = gql`
-  query SearchAggregateArticlesPublic($key: String!, $after: String) {
-    search(input: { type: Article, first: 30, key: $key, after: $after }) {
+  query SearchAggregateArticlesPublic(
+    $key: String!
+    $after: String
+    $version: SearchAPIVersion = v20221212
+  ) {
+    search(
+      input: {
+        type: Article
+        first: 30
+        version: $version
+        key: $key
+        after: $after
+      }
+    ) {
       totalCount
       pageInfo {
         startCursor
@@ -27,11 +39,15 @@ export const SEARCH_AGGREGATE_ARTICLES_PUBLIC = gql`
 `
 
 export const SEARCH_AGGREGATE_TAGS_PUBLIC = gql`
-  query SearchAggregateTagsPublic($key: String!, $after: String) {
+  query SearchAggregateTagsPublic(
+    $key: String!
+    $after: String
+    $version: SearchAPIVersion = v20221212
+  ) {
     search(
       input: {
         type: Tag
-        version: v20221212
+        version: $version
         first: 30
         key: $key
         after: $after
@@ -56,11 +72,15 @@ export const SEARCH_AGGREGATE_TAGS_PUBLIC = gql`
 `
 
 export const SEARCH_AGGREGATE_USERS_PUBLIC = gql`
-  query SearchAggregateUsersPublic($key: String!, $after: String) {
+  query SearchAggregateUsersPublic(
+    $key: String!
+    $after: String
+    $version: SearchAPIVersion = v20221212
+  ) {
     search(
       input: {
         type: User
-        version: v20221212
+        version: $version
         first: 30
         key: $key
         after: $after
