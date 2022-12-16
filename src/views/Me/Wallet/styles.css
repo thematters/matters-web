@@ -6,7 +6,7 @@
     margin-bottom: var(--spacing-loose);
   }
 
-  & :global(* + *) {
+  & :global(.assetsItem + .assetsItem) {
     position: relative;
 
     &::before {

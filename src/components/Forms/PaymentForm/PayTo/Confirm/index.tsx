@@ -14,7 +14,6 @@ import {
   TextIcon,
   Translate,
   useMutation,
-  useRoute,
   ViewerContext,
 } from '~/components'
 import PAY_TO from '~/components/GQL/mutations/payTo'
@@ -33,6 +32,7 @@ import {
   PayTo_payTo_transaction as PayToTx,
 } from '~/components/GQL/mutations/__generated__/PayTo'
 import { WalletBalance } from '~/components/GQL/queries/__generated__/WalletBalance'
+import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
 
 interface SetAmountOpenTabCallbackValues {
   window: Window
@@ -41,6 +41,7 @@ interface SetAmountOpenTabCallbackValues {
 
 interface FormProps {
   amount: number
+  article: ArticleDetailPublic_article
   currency: CURRENCY
   recipient: UserDonationRecipient
   targetId: string
@@ -59,6 +60,7 @@ interface FormValues {
 
 const Confirm: React.FC<FormProps> = ({
   amount,
+  article,
   currency,
   recipient,
   targetId,
@@ -72,8 +74,6 @@ const Confirm: React.FC<FormProps> = ({
 }) => {
   const formId = 'pay-to-confirm-form'
 
-  const { getQuery } = useRoute()
-  const mediaHash = getQuery('mediaHash')
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
   const [payTo] = useMutation<PayToMutate>(PAY_TO, undefined, {
@@ -132,7 +132,7 @@ const Confirm: React.FC<FormProps> = ({
           update: (cache) => {
             updateDonation({
               cache,
-              mediaHash,
+              id: article.id,
               viewer,
             })
           },

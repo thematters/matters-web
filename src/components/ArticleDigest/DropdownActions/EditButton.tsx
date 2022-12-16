@@ -31,6 +31,7 @@ const EditArticleButton = ({
   return (
     <Menu.Item
       href={`${href}?${URL_QS.MODE_EDIT.key}=${URL_QS.MODE_EDIT.value}`}
+      is="link"
     >
       <TextIcon icon={<IconEdit16 size="md" />} size="md" spacing="base">
         <Translate id="editArticle" />

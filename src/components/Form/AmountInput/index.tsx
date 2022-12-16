@@ -33,6 +33,7 @@ const AmountInput = forwardRef(
       name,
       label,
       extraButton,
+      labelVisHidden,
 
       hint,
       error,
@@ -52,6 +53,7 @@ const AmountInput = forwardRef(
           htmlFor={fieldId}
           label={label}
           extraButton={extraButton}
+          labelVisHidden={labelVisHidden}
         />
 
         <Field.Content noMargin>

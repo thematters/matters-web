@@ -40,7 +40,7 @@ const NavListItem = forwardRef(
     }
 
     return (
-      <li>
+      <li role="menuitem">
         <Button
           bgActiveColor="grey-lighter"
           spacing={isMediumUp ? ['xtight', 'base'] : undefined}

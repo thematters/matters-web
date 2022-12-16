@@ -75,7 +75,7 @@ const BaseRssFeedDialog = ({ user, children }: RssFeedDialogProps) => {
 
       <Dialog isOpen={show} onDismiss={closeDialog} fixedHeight>
         <Dialog.Header
-          title="ContentFeedEntrance"
+          title="contentFeedEntrance"
           closeDialog={closeDialog}
           closeTextId="close"
         />

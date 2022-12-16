@@ -39,15 +39,15 @@ const UserTabs: React.FC<UserTabsProps> = ({ hasSubscriptions }) => {
       )}
 
       <Tabs.Tab {...userArticlesPath} selected={isInPath('USER_ARTICLES')}>
-        <Translate id="article" />
+        <Translate id="articles" />
       </Tabs.Tab>
 
       <Tabs.Tab {...userCommentsPath} selected={isInPath('USER_COMMENTS')}>
-        <Translate id="comment" />
+        <Translate id="responses" />
       </Tabs.Tab>
 
       <Tabs.Tab {...userTagsPath} selected={isInPath('USER_TAGS')}>
-        <Translate id="tag" />
+        <Translate id="tags" />
       </Tabs.Tab>
     </Tabs>
   )

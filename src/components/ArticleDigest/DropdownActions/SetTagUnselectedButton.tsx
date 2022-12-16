@@ -8,7 +8,6 @@ import {
   TextIcon,
   Translate,
   useMutation,
-  useRoute,
 } from '~/components'
 
 import { ADD_TOAST } from '~/common/enums'
@@ -52,11 +51,11 @@ const fragments = {
 
 const SetTagUnselectedButton = ({
   article,
+  tagId,
 }: {
   article: SetTagUnselectedButtonArticle
+  tagId: string
 }) => {
-  const { getQuery } = useRoute()
-  const tagId = getQuery('tagId')
   const [update] = useMutation<SetTagUnselected>(SET_TAG_UNSELECTED, {
     variables: { id: tagId, articles: [article.id] },
     update: (cache) => {
@@ -65,7 +64,11 @@ const SetTagUnselectedButton = ({
         const {
           TAG_ARTICLES_PUBLIC: query,
         } = require('~/components/GQL/queries/tagArticles')
-        const variables = { id: tagId, selected: true }
+        const variables = {
+          id: tagId,
+          selected: true,
+          sortBy: 'byCreatedAtDesc',
+        }
         const data = cache.readQuery<TagArticlesPublic>({ query, variables })
         const node = _get(data, 'node', {}) as TagArticlesPublic_node_Tag
         if (

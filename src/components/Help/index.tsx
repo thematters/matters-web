@@ -5,7 +5,7 @@ export const Help = (props: HelpDetailProps) => {
   return (
     <HelpDialog {...props}>
       {({ openDialog }) => (
-        <button type="button" onClick={openDialog}>
+        <button type="button" onClick={openDialog} aria-haspopup="dialog">
           <TextIcon icon={<IconHelp16 />} color="grey">
             <Translate id="help" />
           </TextIcon>

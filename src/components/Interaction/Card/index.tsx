@@ -1,10 +1,11 @@
 import classNames from 'classnames'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { forwardRef, useContext, useRef } from 'react'
+import { AriaAttributes, AriaRole, forwardRef, useContext, useRef } from 'react'
 
 import { LanguageContext } from '~/components'
 
-import { KEYCODES } from '~/common/enums'
+import { KEYCODES, TEST_ID } from '~/common/enums'
 import { translate } from '~/common/utils'
 
 import styles from './styles.css'
@@ -32,6 +33,12 @@ export interface CardProps {
   onClick?: () => any
 
   ref?: any
+
+  is?: 'link' | 'anchor' | 'section'
+
+  role?: AriaRole
+  ariaHasPopup?: AriaAttributes['aria-haspopup']
+  testId?: TEST_ID
 }
 
 export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
@@ -51,6 +58,12 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
       htmlTarget,
 
       onClick,
+
+      is = 'section',
+
+      role,
+      ariaHasPopup,
+      testId,
 
       children,
     },
@@ -92,10 +105,6 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
       newTab: boolean
       event: React.MouseEvent | React.KeyboardEvent
     }) => {
-      if (window.getSelection()?.toString().length) {
-        return
-      }
-
       const target = event.target as HTMLElement
 
       if (disabled) {
@@ -137,11 +146,40 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
       }
     }
 
+    if (is === 'link' && href) {
+      return (
+        <Link href={href}>
+          <a
+            className={cardClasses}
+            ref={cardRef}
+            {...(testId ? { ['data-test-id']: testId } : {})}
+          >
+            {children}
+            <style jsx>{styles}</style>
+          </a>
+        </Link>
+      )
+    }
+
+    if (is === 'anchor' && htmlHref) {
+      return (
+        <a
+          className={cardClasses}
+          href={htmlHref}
+          target={htmlTarget}
+          ref={cardRef}
+          {...(testId ? { ['data-test-id']: testId } : {})}
+        >
+          {children}
+          <style jsx>{styles}</style>
+        </a>
+      )
+    }
+
     return (
       <section
         className={cardClasses}
-        tabIndex={disabled ? undefined : 0}
-        aria-label={ariaLabel}
+        tabIndex={disabled ? -1 : 0}
         ref={cardRef}
         data-clickable
         onKeyDown={(event) => {
@@ -156,6 +194,10 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
         onClick={(event) => {
           openLink({ newTab: event.metaKey, event })
         }}
+        {...(ariaLabel ? { ['aria-label']: ariaLabel } : {})}
+        {...(role ? { ['role']: role } : {})}
+        {...(ariaHasPopup ? { ['aria-haspopup']: ariaHasPopup } : {})}
+        {...(testId ? { ['data-test-id']: testId } : {})}
       >
         {children}
 

@@ -6,6 +6,7 @@ import { Card, CardProps, IconArrowDown16, TextIcon } from '~/components'
 import styles from './styles.css'
 
 type OptionProps = {
+  id?: string
   name: string | React.ReactNode
   subtitle?: string | React.ReactNode
 
@@ -14,12 +15,15 @@ type OptionProps = {
 
   size?: 'md' | 'sm'
 
+  role?: 'button' | 'option'
+
   ref?: any
 } & CardProps
 
 const Option: React.FC<OptionProps> = forwardRef(
   (
     {
+      id,
       name,
       subtitle,
 
@@ -27,6 +31,8 @@ const Option: React.FC<OptionProps> = forwardRef(
       expanded,
 
       size = 'md',
+
+      role = 'option',
 
       ...cardProps
     },
@@ -38,9 +44,15 @@ const Option: React.FC<OptionProps> = forwardRef(
     })
 
     return (
-      <li role="option" aria-selected={!!selected}>
+      <li
+        {...(id ? { id } : {})}
+        {...(role === 'option'
+          ? { role: 'option', 'aria-selected': !!selected }
+          : {})}
+      >
         <Card
           bgColor={expanded ? undefined : 'grey-lighter'}
+          {...(role === 'option' ? {} : { role: 'button' })}
           {...cardProps}
           spacing={cardProps.spacing || [0, 0]}
           ref={ref}

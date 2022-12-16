@@ -14,8 +14,9 @@
         "tippy.js",
         "dotenv",
         "apollo-cache",
-        "@testing-library",
-        "@apollo/react-testing"
+        "@apollo/react-testing",
+        "@playwright/test",
+        "lorem-ipsum"
       ]
     ],
     "no-bitwise": false,

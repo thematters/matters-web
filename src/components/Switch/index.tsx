@@ -1,12 +1,13 @@
+import VisuallyHidden from '@reach/visually-hidden'
 import classNames from 'classnames'
 
 import { IconSpinner16 } from '~/components'
 
-// import { randomString } from '~/common/utils'
-
 import styles from './styles.css'
 
 type SwitchProps = {
+  name: string
+  label: string
   onChange: () => void
   checked: boolean
   loading?: boolean
@@ -14,26 +15,27 @@ type SwitchProps = {
 }
 
 export const Switch: React.FC<SwitchProps> = ({
+  name,
+  label,
   onChange,
   checked,
   loading,
   disabled,
 }) => {
-  // const fieldId = randomString()
+  const fieldId = `switch-${name}`
 
-  const labelClasses = classNames({
+  const switchClasses = classNames({
     switch: true,
     'u-area-disable': disabled,
   })
 
   return (
-    <label
-      className={labelClasses}
-      // htmlFor={fieldId}
-    >
+    <label htmlFor={fieldId} className={switchClasses}>
+      <VisuallyHidden>{label}</VisuallyHidden>
+
       <input
         type="checkbox"
-        // id={fieldId}
+        id={fieldId}
         onChange={onChange}
         checked={checked}
         disabled={disabled}

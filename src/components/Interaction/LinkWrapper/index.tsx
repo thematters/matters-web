@@ -1,6 +1,8 @@
 import classNames from 'classnames'
 import Link from 'next/link'
 
+import { TEST_ID } from '~/common/enums'
+
 import styles from './styles.css'
 
 export interface LinkWrapperProps {
@@ -10,6 +12,8 @@ export interface LinkWrapperProps {
 
   disabled?: boolean
   onClick?: () => void
+
+  testId?: TEST_ID
 }
 
 export const LinkWrapper: React.FC<

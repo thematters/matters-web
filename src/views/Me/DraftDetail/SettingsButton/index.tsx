@@ -23,6 +23,7 @@ import {
   useEditDraftCover,
   useEditDraftPublishISCN,
   useEditDraftTags,
+  useEditSupportSetting,
 } from '../hooks'
 import ConfirmPublishDialogContent from './ConfirmPublishDialogContent'
 
@@ -48,7 +49,7 @@ const ConfirmButton = ({
     bgColor="green"
     onClick={openDialog}
     disabled={disabled}
-    aria-haspopup="true"
+    aria-haspopup="dialog"
   >
     <TextIcon color="white" size="md" weight="md">
       <Translate id="publish" />
@@ -77,6 +78,10 @@ const SettingsButton = ({
     draft,
     ownCircles && ownCircles[0]
   )
+
+  const { edit: editSupport, saving: supportSaving } =
+    useEditSupportSetting(draft)
+
   const hasOwnCircle = ownCircles && ownCircles.length >= 1
   const tags = (draft.tags || []).map(toDigestTagPlaceholder)
   const isPending = draft.publishState === 'pending'
@@ -109,6 +114,10 @@ const SettingsButton = ({
     editAccess,
     accessSaving,
     canToggleCircle: !!hasOwnCircle,
+    draft,
+    editSupportSetting: editSupport,
+    supportSettingSaving: supportSaving,
+    onOpenSupportSetting: () => undefined,
     iscnPublish: draft.iscnPublish,
     togglePublishISCN,
     iscnPublishSaving,

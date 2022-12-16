@@ -1,38 +1,50 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
+import { useContext } from 'react'
 
 import {
   Button,
   CopyToClipboard,
   IconCopy16,
   IconLocked24,
+  LanguageContext,
   Spinner,
   Translate,
-  useRoute,
 } from '~/components'
+
+import { translate } from '~/common/utils'
 
 import styles from './styles.css'
 
-import { ArticleSecret } from './__generated__/ArticleSecret'
+import {
+  ArticleSecret,
+  ArticleSecret_article_Article,
+} from './__generated__/ArticleSecret'
+
+type ArticleSecretSectionProps = {
+  id: string
+}
 
 export const QUERY_SECRET = gql`
-  query ArticleSecret($mediaHash: String!) {
-    article(input: { mediaHash: $mediaHash }) {
-      id
-      access {
-        secret
+  query ArticleSecret($id: ID!) {
+    article: node(input: { id: $id }) {
+      ... on Article {
+        id
+        access {
+          secret
+        }
       }
     }
   }
 `
 
-const ArticleSecretSection = () => {
-  const { getQuery } = useRoute()
-  const mediaHash = getQuery('mediaHash')
+const ArticleSecretSection: React.FC<ArticleSecretSectionProps> = ({ id }) => {
+  const { lang } = useContext(LanguageContext)
   const { data, loading, error } = useQuery<ArticleSecret>(QUERY_SECRET, {
-    variables: { mediaHash },
+    variables: { id },
   })
-  const secret = data?.article?.access?.secret // || 'default-no-secret'
+  const article = data?.article as ArticleSecret_article_Article
+  const secret = article?.access?.secret // || 'default-no-secret'
 
   return (
     <section className="secret">
@@ -58,7 +70,7 @@ const ArticleSecretSection = () => {
               onClick={(event) => event.currentTarget.select()}
             />
             <CopyToClipboard text={secret}>
-              <Button>
+              <Button aria-label={translate({ id: 'copy', lang })}>
                 <IconCopy16 />
               </Button>
             </CopyToClipboard>

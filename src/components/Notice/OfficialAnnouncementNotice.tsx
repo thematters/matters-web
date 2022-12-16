@@ -1,5 +1,7 @@
 import gql from 'graphql-tag'
 
+import { TEST_ID } from '~/common/enums'
+
 import NoticeDate from './NoticeDate'
 import NoticeTypeIcon from './NoticeTypeIcon'
 import styles from './styles.css'
@@ -10,7 +12,7 @@ const OfficialAnnouncementNotice = ({ notice }: { notice: NoticeType }) => {
   const Message = () => <p>{notice.message}</p>
 
   return (
-    <section className="container">
+    <section className="container" data-test-id={TEST_ID.OFFICIAL_ANNOUNCEMENT}>
       <section className="avatar-wrap">
         <NoticeTypeIcon type="volume" />
       </section>

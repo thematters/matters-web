@@ -51,39 +51,39 @@ const ExtendButton = ({ article }: { article: ExtendButtonArticle }) => {
     },
   })
 
+  const onClick = async () => {
+    if (!viewer.isAuthed) {
+      window.dispatchEvent(
+        new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+          detail: { source: UNIVERSAL_AUTH_SOURCE.collectArticle },
+        })
+      )
+      return
+    }
+
+    if (viewer.isInactive) {
+      window.dispatchEvent(
+        new CustomEvent(ADD_TOAST, {
+          detail: {
+            color: 'red',
+            content: <Translate id="FORBIDDEN" />,
+          },
+        })
+      )
+      return
+    }
+
+    const { data } = await collectArticle()
+    const { slug, id } = data?.putDraft || {}
+
+    if (slug && id) {
+      const path = toPath({ page: 'draftDetail', slug, id })
+      router.push(path.href)
+    }
+  }
+
   return (
-    <Menu.Item
-      onClick={async () => {
-        if (!viewer.isAuthed) {
-          window.dispatchEvent(
-            new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
-              detail: { source: UNIVERSAL_AUTH_SOURCE.collectArticle },
-            })
-          )
-          return
-        }
-
-        if (viewer.isInactive) {
-          window.dispatchEvent(
-            new CustomEvent(ADD_TOAST, {
-              detail: {
-                color: 'red',
-                content: <Translate id="FORBIDDEN" />,
-              },
-            })
-          )
-          return
-        }
-
-        const { data } = await collectArticle()
-        const { slug, id } = data?.putDraft || {}
-
-        if (slug && id) {
-          const path = toPath({ page: 'draftDetail', slug, id })
-          router.push(path.href)
-        }
-      }}
-    >
+    <Menu.Item onClick={onClick}>
       <TextIcon icon={<IconCollection24 size="md" />} size="md" spacing="base">
         <Translate id="collectArticle" />
       </TextIcon>

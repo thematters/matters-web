@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import gql from 'graphql-tag'
+import { useContext } from 'react'
 
 import {
   Button,
@@ -8,6 +9,7 @@ import {
   CopyToClipboard,
   IconCopy16,
   IconInfo24,
+  LanguageContext,
   Spacer,
   Spinner,
   TextIcon,
@@ -15,6 +17,7 @@ import {
 } from '~/components'
 
 import { EXTERNAL_LINKS } from '~/common/enums'
+import { translate } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -90,6 +93,7 @@ const RssFeedDialogContent = ({
   articlesCount: number
   refetch: () => any
 }) => {
+  const { lang } = useContext(LanguageContext)
   const { loading, data } = useQuery<RssGateways>(RSS_GATEWAYS)
 
   const gateways = data?.official.gatewayUrls || []
@@ -150,7 +154,7 @@ const RssFeedDialogContent = ({
                 onClick={(event) => event.currentTarget.select()}
               />
               <CopyToClipboard text={ipnsKey}>
-                <Button>
+                <Button aria-label={translate({ id: 'copy', lang })}>
                   <IconCopy16 />
                 </Button>
               </CopyToClipboard>
@@ -163,11 +167,7 @@ const RssFeedDialogContent = ({
                 color="green"
                 size="md-s"
               >
-                <Translate
-                  zh_hans="等待写入完成..."
-                  zh_hant="等候寫入完成..."
-                  en="Waiting ..."
-                />
+                <Translate id="waitingForHash" />
               </TextIcon>
             </section>
           )}
@@ -216,7 +216,10 @@ const RssFeedDialogContent = ({
                     >
                       {hostname}
                       <CopyToClipboard text={gatewayUrl}>
-                        <Button disabled={notPushlishedLately}>
+                        <Button
+                          disabled={notPushlishedLately}
+                          aria-label={translate({ id: 'copy', lang })}
+                        >
                           <IconCopy16 />
                         </Button>
                       </CopyToClipboard>

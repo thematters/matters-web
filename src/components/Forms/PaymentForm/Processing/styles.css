@@ -1,4 +1,5 @@
 .hint {
+  padding: 0 var(--spacing-base);
   margin-top: var(--spacing-base);
   text-align: center;
 }

@@ -94,7 +94,7 @@ const BaseDropdownActions = ({
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
     <Menu width={isInDropdown ? 'sm' : undefined}>
       {hasEditProfile && (
-        <Menu.Item onClick={openEditProfileDialog}>
+        <Menu.Item onClick={openEditProfileDialog} ariaHasPopup="dialog">
           <TextIcon icon={<IconEdit16 size="md" />} size="md" spacing="base">
             <Translate id="editUserProfile" />
           </TextIcon>
@@ -103,7 +103,7 @@ const BaseDropdownActions = ({
 
       {hasLogbook && (
         <>
-          <Menu.Item htmlHref={logbook2Url} htmlTarget="_blank">
+          <Menu.Item htmlHref={logbook2Url} htmlTarget="_blank" is="anchor">
             <TextIcon
               icon={<IconLogbook2 size="md" />}
               size="md"
@@ -116,7 +116,7 @@ const BaseDropdownActions = ({
               />
             </TextIcon>
           </Menu.Item>
-          <Menu.Item htmlHref={logbook1Url} htmlTarget="_blank">
+          <Menu.Item htmlHref={logbook1Url} htmlTarget="_blank" is="anchor">
             <TextIcon
               icon={<IconLogbook1 size="md" />}
               size="md"
@@ -149,11 +149,11 @@ const BaseDropdownActions = ({
         title: 'moreActions',
       }}
     >
-      {({ openDialog, ref }) => (
+      {({ openDialog, type, ref }) => (
         <Button
           bgColor="half-black"
           aria-label={translate({ id: 'moreActions', lang })}
-          aria-haspopup="true"
+          aria-haspopup={type}
           onClick={openDialog}
           ref={ref}
         >

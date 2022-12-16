@@ -8,7 +8,7 @@ export const ConnectWalletButton = () => {
       bgColor="green"
       size={[null, '2rem']}
       spacing={[0, 'base']}
-      aria-haspopup="true"
+      aria-haspopup="dialog"
       href={PATHS.ME_SETTINGS_CONNECT_WALLET}
     >
       <TextIcon color="white" weight="md">

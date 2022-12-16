@@ -80,24 +80,31 @@ const TagDetail = ({ tag }: { tag: TagFragment }) => {
     setFeedType(newType)
   }
 
+  useEffect(() => {
+    setFeedType(
+      hasSelectedFeed && qsType === 'selected'
+        ? 'selected'
+        : qsType || 'hottest'
+    )
+  }, [qsType])
+
   const isSelected = feedType === 'selected'
   const isHottest = feedType === 'hottest'
   const isLatest = feedType === 'latest'
   const isCreators = feedType === 'creators'
 
   useEffect(() => {
-    // if selected feed is empty, switch to latest feed
+    // if selected feed is empty, switch to hottest feed
     if (!hasSelectedFeed && isSelected) {
-      changeFeed('latest')
+      changeFeed('hottest')
     }
 
     // backward compatible with `/tags/:globalId:`
     const newPath = toPath({
       page: 'tagDetail',
       tag,
-      feedType: isLatest ? '' : feedType,
+      feedType: isHottest ? '' : feedType,
     })
-
     if (newPath.href !== window.decodeURI(router.asPath)) {
       router.replace(newPath.href, undefined, { shallow: true })
     }
@@ -225,7 +232,7 @@ const TagDetail = ({ tag }: { tag: TagFragment }) => {
         </Tabs>
 
         {(isHottest || isLatest || isSelected) && (
-          <TagDetailArticles tagId={tag.id} feedType={feedType} />
+          <TagDetailArticles tag={tag} feedType={feedType} />
         )}
 
         {isCreators && <DynamicCommunity id={tag.id} isOwner={isOwner} />}

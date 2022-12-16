@@ -4,6 +4,8 @@ import { useContext } from 'react'
 
 import { Translate, ViewerContext } from '~/components'
 
+import { TEST_ID } from '~/common/enums'
+
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorName from '../NoticeActorName'
 import NoticeArticleTitle from '../NoticeArticleTitle'
@@ -25,7 +27,7 @@ const ArticleTagAddedNotice = ({ notice }: { notice: NoticeType }) => {
   const isAuthor = notice.target.author?.id === viewer.id
 
   return (
-    <section className="container">
+    <section className="container" data-test-id={TEST_ID.ARTICLE_TAG_ADDED}>
       <section className="avatar-wrap">
         <NoticeActorAvatar user={actor} />
       </section>

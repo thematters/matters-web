@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useLazyQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import { useContext, useEffect, useState } from 'react'
 
@@ -12,18 +12,14 @@ import {
   TextIcon,
   Translate,
   useEventListener,
-  useMutation,
-  useRoute,
   ViewerContext,
 } from '~/components'
-import PAY_TO from '~/components/GQL/mutations/payTo'
-import updateDonation from '~/components/GQL/updates/donation'
 
 import {
-  CHAIN,
   PATHS,
   PAYMENT_CURRENCY as CURRENCY,
   SUPPORT_SUCCESS_ANIMATION,
+  TEST_ID,
 } from '~/common/enums'
 import { analytics, sleep } from '~/common/utils'
 
@@ -33,17 +29,17 @@ import { fragments, HAS_DONATED } from './gql'
 import styles from './styles.css'
 import SupportButton from './SupportButton'
 
-import { PayTo as PayToMutate } from '~/components/GQL/mutations/__generated__/PayTo'
 import { ArticleDetailPublic_article } from '../__generated__/ArticleDetailPublic'
-import { HasDonated } from './__generated__/HasDonated'
+import {
+  HasDonated,
+  HasDonated_article_Article,
+} from './__generated__/HasDonated'
 
 interface DonationProps {
   article: ArticleDetailPublic_article
 }
 
 const SupportWidget = ({ article }: DonationProps) => {
-  const { getQuery } = useRoute()
-  const mediaHash = getQuery('mediaHash')
   const viewer = useContext(ViewerContext)
   const [playShipWaiting, setPlayShipWaiting] = useState(false)
   const [showAnimation, setShowAnimation] = useState(false)
@@ -55,33 +51,36 @@ const SupportWidget = ({ article }: DonationProps) => {
     hasCircle: article.access.circle,
   })
 
-  const {
-    loading,
-    data: hasDonatedData,
-    refetch: hasDonatedRefetch,
-  } = useQuery<HasDonated>(HAS_DONATED, {
+  const [
+    getHasDonated,
+    { data: hasDonatedData, loading, refetch: hasDonatedRefetch },
+  ] = useLazyQuery<HasDonated>(HAS_DONATED, {
     fetchPolicy: 'network-only',
-    variables: { mediaHash, senderId: viewer.id },
   })
 
   useEffect(() => {
-    if (hasDonatedData) {
-      if (
-        viewer.id !== '' &&
-        hasDonatedData.article?.donation.totalCount === 1
-      ) {
-        setSupported(true)
-      }
+    if (!viewer.id) return
+
+    getHasDonated({
+      variables: {
+        id: article.id,
+        senderId: viewer.id,
+      },
+    })
+  }, [viewer.id])
+
+  const hasDonatedArticle =
+    hasDonatedData?.article as HasDonated_article_Article
+
+  const isViewerDonated = hasDonatedArticle?.donation?.totalCount === 1
+  useEffect(() => {
+    if (isViewerDonated) {
+      setSupported(true)
     }
-  }, [hasDonatedData])
+  }, [isViewerDonated])
 
   const requestForDonation = article.requestForDonation
-  const replyToDonator = hasDonatedData?.article?.replyToDonator?.replaceAll(
-    '#',
-    ` ${viewer.displayName} `
-  )
-
-  const [payTo] = useMutation<PayToMutate>(PAY_TO)
+  const replyToDonator = hasDonatedArticle?.replyToDonator
 
   useEventListener(
     SUPPORT_SUCCESS_ANIMATION,
@@ -98,42 +97,13 @@ const SupportWidget = ({ article }: DonationProps) => {
         return
       }
 
-      // LIKE
-      if (payload.currency === CURRENCY.LIKE) {
-        setPlayShipWaiting(true)
-        setShowAnimation(true)
-        await sleep(5 * 1000)
-        setPlayShipWaiting(false)
-        hasDonatedRefetch()
-        return
-      }
-
-      // USDT
+      // LIKE、USDT
       setPlayShipWaiting(true)
       setShowAnimation(true)
-      const { transactionResult, amount, recipientId, targetId } = payload
-
-      await payTo({
-        variables: {
-          amount,
-          currency: payload.currency,
-          purpose: 'donation',
-          recipientId,
-          targetId,
-          chain: CHAIN.POLYGON,
-          txHash: transactionResult.hash,
-        },
-        update: (cache) => {
-          updateDonation({
-            cache,
-            mediaHash,
-            viewer,
-          })
-        },
-      })
-      await transactionResult.wait()
+      await sleep(5 * 1000)
       setPlayShipWaiting(false)
       hasDonatedRefetch()
+      return
     }
   )
 
@@ -151,7 +121,7 @@ const SupportWidget = ({ article }: DonationProps) => {
         </section>
       )}
       {!showAnimation && (
-        <section className="donation">
+        <section className="donation note">
           {loading && <IconSpinner16 color="grey-light" size="lg" />}
           {!loading && (
             <>
@@ -173,7 +143,9 @@ const SupportWidget = ({ article }: DonationProps) => {
                         </TextIcon>
                       </p>
                       <Spacer size="xtight" />
-                      <p>{replyToDonator}</p>
+                      <p data-test-id={TEST_ID.ARTICLE_SUPPORT_REPLY}>
+                        {replyToDonator}
+                      </p>
                     </section>
                   )}
                   {!replyToDonator && (
@@ -182,23 +154,17 @@ const SupportWidget = ({ article }: DonationProps) => {
                         <TextIcon weight="bold" size="md">
                           <Translate
                             zh_hant="🎉 感謝支持！"
-                            zh_hans="🎉 感謝支持！"
+                            zh_hans="🎉 感谢支持！"
                             en="🎉 Thank you for support!"
                           />
                         </TextIcon>
                       </p>
                       <Spacer size="xtight" />
-                      <p>
+                      <p data-test-id={TEST_ID.ARTICLE_SUPPORT_REPLY}>
                         <Translate
-                          zh_hant="感謝 "
-                          zh_hans="感謝 "
-                          en="Thank "
-                        />
-                        <span>{viewer.displayName}</span>
-                        <Translate
-                          zh_hant=" 的支持，創作這條路不容易，有你的支持我將能夠蓄積更多能量創作。"
-                          zh_hans=" 的支持，創作這條路不容易，有你的支持我將能夠蓄積更多能量創作。"
-                          en=" for your support. The way isn’t always easy being a creator. With your generous support, I can accumulate more energy to go on."
+                          zh_hant="感謝支持，創作這條路不容易，有你的支持我將能夠蓄積更多能量創作。"
+                          zh_hans="感谢支持，创作这条路不容易，有你的支持我将能够蓄积更多能量创作。"
+                          en="Thank for your support. The way isn’t always easy being a creator. With your generous support, I can accumulate more energy to go on."
                         />
                       </p>
                     </section>
@@ -208,9 +174,13 @@ const SupportWidget = ({ article }: DonationProps) => {
 
               {!supported && (
                 <>
-                  {requestForDonation && <p>{requestForDonation}</p>}
+                  {requestForDonation && (
+                    <p data-test-id={TEST_ID.ARTICLE_SUPPORT_REQUEST}>
+                      {requestForDonation}
+                    </p>
+                  )}
                   {!requestForDonation && (
-                    <p>
+                    <p data-test-id={TEST_ID.ARTICLE_SUPPORT_REQUEST}>
                       <Translate
                         zh_hant="喜歡我的文章嗎？"
                         zh_hans="喜欢我的文章吗？"

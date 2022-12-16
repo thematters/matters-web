@@ -1,6 +1,6 @@
 # matters-web
 
-![Deployment Status](https://github.com/thematters/matters-web/workflows/Deployment/badge.svg) ![Test Status](https://github.com/thematters/matters-web/workflows/Test/badge.svg) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+![Deployment Status](https://github.com/thematters/matters-web/workflows/Deployment/badge.svg) ![Build Status](https://github.com/thematters/matters-web/workflows/Test%20Build/badge.svg) ![Test Status](https://github.com/thematters/matters-web/workflows/Test%20E2E/badge.svg) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 ## Getting Started
 
@@ -44,7 +44,15 @@
   - `docker pull 903380195283.dkr.ecr.ap-southeast-1.amazonaws.com/matters-web:latest`
   - `docker tag 903380195283.dkr.ecr.ap-southeast-1.amazonaws.com/matters-web:latest matters-web:latest`
 
-## Static File
+## Testing
+
+See [Playwright Testing Guide](https://www.notion.so/matterslab/Playwright-Testing-Guide-60caa248d5ce4d70938b7b2f2c7e9139).
+
+## Conventions
+
+See [Conventions](https://www.notion.so/matterslab/Conventions-acbed6763f6746319396978c19340d78).
+
+## Static Files
 
 ```bash
 ./public/static/
@@ -55,18 +63,6 @@
 │   ├── 12px
 │   │   ├── ...
 │   │   └── draft-edit.svg
-│   ├── 16px
-│   │   ├── ...
-│   │   └── world.svg
-│   ├── 24px
-│   │   ├── ...
-│   │   └── wallet.svg
-│   ├── 32px
-│   │   ├── ...
-│   │   └── warning.svg
-│   ├── 40px
-│   │   ├── ...
-│   │   └── share-whatsapp-circle.svg
 │   ├── 72px
 │   │   ├── ...
 │   │   └── empty-warning.svg
@@ -86,31 +82,6 @@ We use [SVGR](https://react-svgr.com/) to transform SVGs into React components. 
   - Replace the values of `fill` and `stroke` attributes with `currentColor`, and
   - Add `fill="none"` to `<svg>`.
 - If the icon is resuable, create a component file under `components/Icon` and export it from `components/Icon/index.tsx`.
-
-## Conventions
-
-[Matters Design System](https://paper.dropbox.com/doc/Matters-Design-System--AXX9x2tuPldQFCWTN0Mt~_itAQ-klFuV5yv3ZlqpqHL0w0kU)
-
-[Matters 3.0: Design System](https://paper.dropbox.com/doc/Matters-3.0-Design-System--AqXF9GXfYqC18yjAQzN5l02BAg-Sp6ANp5EXAdnzSK3adqNS)
-
-### Naming
-
-#### React Component/Page
-
-foldername: `PascalCase`
-
-filename: `camelCase`
-
-```tree
-├── pages
-│   └── ArticleDetail
-│       ├── styles.css
-│       └── index.tsx
-└── components
-    └── Layout
-        ├── styles.css
-        └── index.tsx
-```
 
 ## Tools
 

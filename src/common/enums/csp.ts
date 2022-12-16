@@ -53,7 +53,9 @@ const IMG_SRC = [
 
   // 'server-develop.matters.news',
   // NEXT_PUBLIC_API_HOSTNAME as string,
-  new URL(process.env.NEXT_PUBLIC_API_URL as string).hostname,
+  process.env.NEXT_PUBLIC_API_URL
+    ? new URL(process.env.NEXT_PUBLIC_API_URL).hostname
+    : undefined,
 
   // for some old articles were using this s3 urls directly
   'matters-server-production.s3-ap-southeast-1.amazonaws.com',

@@ -46,7 +46,7 @@ const NavBar = () => {
         />
 
         {!isInDraftDetail && (
-          <li>
+          <li role="menuitem">
             <WriteButton
               allowed={!viewer.shouldSetupLikerID}
               authed={viewer.isAuthed}
@@ -65,7 +65,7 @@ const NavBar = () => {
 
         {viewer.isAuthed && (
           <NavListItem
-            name={TEXT.zh_hant.notification}
+            name={TEXT.zh_hant.notifications}
             icon={<UnreadIcon.Notification />}
             activeIcon={<UnreadIcon.Notification active />}
             active={isInNotification}
@@ -79,7 +79,7 @@ const NavBar = () => {
             icon={<IconNavSettings24 size="md" />}
             activeIcon={<IconNavSettings24 size="md" color="green" />}
             active={isInSettings}
-            href={PATHS.SETTINGS}
+            href={PATHS.ME_SETTINGS}
           />
         )}
       </ul>

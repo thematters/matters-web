@@ -18,20 +18,29 @@ import { formatAmount } from '~/common/utils'
 
 import styles from './styles.css'
 
+import { QuoteCurrency } from '@/__generated__/globalTypes'
 import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
+import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
 
 interface FormProps {
+  article: ArticleDetailPublic_article
   recipient: UserDonationRecipient
+  currency: QuoteCurrency
+  exchangeRate: number
   switchToSetAmount: () => void
   switchToWalletSelect: () => void
 }
 
 const USDTChoice: React.FC<FormProps> = ({
+  article,
   recipient,
+  currency,
+  exchangeRate,
   switchToSetAmount,
   switchToWalletSelect,
 }) => {
   const viewer = useContext(ViewerContext)
+  const mediaHash = article.mediaHash
   const { address } = useAccount()
 
   const { data: balanceUSDTData, isLoading: balanceUSDTLoading } =
@@ -41,9 +50,33 @@ const USDTChoice: React.FC<FormProps> = ({
   const curatorAddress = viewer.info.ethAddress
   const creatorAddress = recipient.info.ethAddress
 
+  if (mediaHash === '') {
+    return (
+      <section className="item">
+        <TextIcon
+          icon={<IconUSDT40 size="xl-m" />}
+          size="md"
+          spacing="xtight"
+          color="grey"
+        >
+          Tether
+        </TextIcon>
+        <TextIcon size="md" color="grey">
+          <Translate
+            zh_hant="暫時無法使用"
+            zh_hans="暂时无法使用"
+            en="Not available temporarily"
+          />
+        </TextIcon>
+
+        <style jsx>{styles}</style>
+      </section>
+    )
+  }
+
   if (!creatorAddress) {
     return (
-      <section role="button" className="item">
+      <section className="item">
         <TextIcon
           icon={<IconUSDT40 size="xl-m" />}
           size="md"
@@ -83,8 +116,10 @@ const USDTChoice: React.FC<FormProps> = ({
           <IconSpinner16 color="grey" size="sm" />
         ) : (
           <CurrencyFormatter
-            value={formatAmount(balanceUSDT)}
             currency={CURRENCY.USDT}
+            value={formatAmount(balanceUSDT)}
+            subCurrency={currency}
+            subValue={formatAmount(balanceUSDT * exchangeRate, 2)}
           />
         )}
 
@@ -94,7 +129,7 @@ const USDTChoice: React.FC<FormProps> = ({
   }
 
   return (
-    <section role="button" className="item">
+    <section className="item">
       <TextIcon
         icon={<IconUSDT40 size="xl-m" color="grey" />}
         size="md"

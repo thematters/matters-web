@@ -1,5 +1,6 @@
 import { toDigestTagPlaceholder } from '~/components'
 import Sidebar from '~/components/Editor/Sidebar'
+import SupportSettingDialog from '~/components/Editor/ToggleAccess/SupportSettingDialog'
 
 import { ENTITY_TYPE } from '~/common/enums'
 
@@ -9,6 +10,7 @@ import {
   useEditDraftCover,
   useEditDraftPublishISCN,
   useEditDraftTags,
+  useEditSupportSetting,
 } from '../hooks'
 import styles from './styles.css'
 
@@ -72,22 +74,38 @@ const EditDraftCircle = ({ draft, ownCircles }: SidebarProps) => {
     draft,
     ownCircles && ownCircles[0]
   )
+
+  const { edit: editSupport, saving: supportSaving } =
+    useEditSupportSetting(draft)
+
   const { edit: togglePublishISCN, saving: iscnPublishSaving } =
     useEditDraftPublishISCN(draft)
   const hasOwnCircle = ownCircles && ownCircles.length >= 1
 
   return (
-    <Sidebar.Management
-      circle={draft?.access.circle}
-      accessType={draft.access.type}
-      license={draft.license}
-      editAccess={edit}
-      accessSaving={saving}
-      canToggleCircle={!!hasOwnCircle}
-      iscnPublish={draft?.iscnPublish}
-      togglePublishISCN={togglePublishISCN}
-      iscnPublishSaving={iscnPublishSaving}
-    />
+    <SupportSettingDialog
+      draft={draft}
+      editSupportSetting={editSupport}
+      supportSettingSaving={supportSaving}
+    >
+      {({ openDialog }) => (
+        <Sidebar.Management
+          circle={draft?.access.circle}
+          accessType={draft.access.type}
+          license={draft.license}
+          editAccess={edit}
+          accessSaving={saving}
+          canToggleCircle={!!hasOwnCircle}
+          iscnPublish={draft?.iscnPublish}
+          togglePublishISCN={togglePublishISCN}
+          iscnPublishSaving={iscnPublishSaving}
+          draft={draft}
+          editSupportSetting={editSupport}
+          supportSettingSaving={supportSaving}
+          onOpenSupportSetting={openDialog}
+        />
+      )}
+    </SupportSettingDialog>
   )
 }
 

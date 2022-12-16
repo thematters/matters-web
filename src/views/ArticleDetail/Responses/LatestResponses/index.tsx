@@ -5,6 +5,7 @@ import { useContext, useEffect, useRef, useState } from 'react'
 
 import {
   EmptyResponse,
+  LanguageContext,
   List,
   QueryError,
   Spinner,
@@ -16,7 +17,7 @@ import {
   usePublicQuery,
   usePullToRefresh,
   useResponsive,
-  useRoute,
+  // useRoute,
   ViewerContext,
   ViewMoreButton,
 } from '~/components'
@@ -26,6 +27,7 @@ import {
   dom,
   filterResponses,
   mergeConnections,
+  translate,
   unshiftConnections,
 } from '~/common/utils'
 
@@ -36,20 +38,21 @@ import { LATEST_RESPONSES_PRIVATE, LATEST_RESPONSES_PUBLIC } from './gql'
 import { LatestResponsesPrivate_nodes_Comment } from './__generated__/LatestResponsesPrivate'
 import {
   LatestResponsesPublic,
-  LatestResponsesPublic_article_responses_edges_node,
+  LatestResponsesPublic_article_Article,
+  LatestResponsesPublic_article_Article_responses_edges_node,
+  // LatestResponsesPublic_article_responses_edges_node,
 } from './__generated__/LatestResponsesPublic'
 
 const RESPONSES_COUNT = 15
 
-type ResponsePublic = LatestResponsesPublic_article_responses_edges_node
+type ResponsePublic = LatestResponsesPublic_article_Article_responses_edges_node // LatestResponsesPublic_article_responses_edges_node
 type ResponsePrivate = LatestResponsesPrivate_nodes_Comment
 type Response = ResponsePublic & Partial<Omit<ResponsePrivate, '__typename'>>
 
-const LatestResponses = ({ lock }: { lock: boolean }) => {
+const LatestResponses = ({ id, lock }: { id: string; lock: boolean }) => {
   const viewer = useContext(ViewerContext)
+  const { lang } = useContext(LanguageContext)
   const isMediumUp = useResponsive('md-up')
-  const { getQuery } = useRoute()
-  const mediaHash = getQuery('mediaHash')
   const [articleOnlyMode, setArticleOnlyMode] = useState<boolean>(false)
   const storedCursorRef = useRef<string | null>(null)
 
@@ -83,7 +86,7 @@ const LatestResponses = ({ lock }: { lock: boolean }) => {
     client,
   } = usePublicQuery<LatestResponsesPublic>(LATEST_RESPONSES_PUBLIC, {
     variables: {
-      mediaHash,
+      id,
       first: RESPONSES_COUNT,
       articleOnly: articleOnlyMode,
     },
@@ -92,7 +95,7 @@ const LatestResponses = ({ lock }: { lock: boolean }) => {
 
   // pagination
   const connectionPath = 'article.responses'
-  const article = data?.article
+  const article = data?.article as LatestResponsesPublic_article_Article
   const { edges, pageInfo } = article?.responses || {}
   const articleId = article?.id
   const responses = filterResponses<ResponsePublic>(
@@ -105,7 +108,9 @@ const LatestResponses = ({ lock }: { lock: boolean }) => {
       return
     }
 
-    const publiceEdges = publicData.article?.responses.edges || []
+    const publiceEdges =
+      (publicData.article as LatestResponsesPublic_article_Article)?.responses
+        .edges || []
     const publicResponses = filterResponses<Response>(
       publiceEdges.map(({ node }) => node)
     )
@@ -250,6 +255,8 @@ const LatestResponses = ({ lock }: { lock: boolean }) => {
 
         <div className="latest-responses-switch">
           <Switch
+            name="article-only"
+            label={translate({ id: 'collectedOnly', lang })}
             onChange={() => setArticleOnlyMode(!articleOnlyMode)}
             checked={articleOnlyMode}
             loading={loading}

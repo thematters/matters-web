@@ -2,7 +2,7 @@ import { DataProxy } from 'apollo-cache'
 import _cloneDeep from 'lodash/cloneDeep'
 import _remove from 'lodash/remove'
 import _some from 'lodash/some'
-import { ARTICLE_DETAIL_PUBLIC } from '~/views/ArticleDetail/gql'
+import { ARTICLE_DETAIL_PUBLIC_BY_NODE_ID } from '~/views/ArticleDetail/gql'
 
 import { ERROR_CODES } from '~/common/enums'
 
@@ -10,23 +10,23 @@ import { ArticleDetailPublic } from '~/views/ArticleDetail/__generated__/Article
 
 const update = ({
   cache,
-  mediaHash,
+  id,
   viewer,
 }: {
   cache: DataProxy
-  mediaHash: string
+  id: string
   viewer: any
 }) => {
   try {
-    if (!mediaHash) {
+    if (!id) {
       return
     }
 
     // read from local cache
-    const variables = { mediaHash }
+    const variables = { id }
     const cacheData = _cloneDeep(
       cache.readQuery<ArticleDetailPublic>({
-        query: ARTICLE_DETAIL_PUBLIC,
+        query: ARTICLE_DETAIL_PUBLIC_BY_NODE_ID,
         variables,
       })
     )
@@ -56,6 +56,8 @@ const update = ({
       node: {
         avatar: viewer.avatar,
         id: viewer.id,
+        displayName: viewer.displayName,
+        userName: viewer.userName,
         liker: {
           civicLiker: viewer.liker.civicLiker,
           __typename: 'Liker',
@@ -73,7 +75,7 @@ const update = ({
 
     // write to local cache
     cache.writeQuery({
-      query: ARTICLE_DETAIL_PUBLIC,
+      query: ARTICLE_DETAIL_PUBLIC_BY_NODE_ID,
       data: cacheData,
       variables,
     })

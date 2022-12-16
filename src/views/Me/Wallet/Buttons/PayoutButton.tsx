@@ -15,7 +15,7 @@ const PayoutButton: React.FC<PayoutButtonProps> = ({
           {...buttonProps}
           bgColor="grey-lighter"
           textColor="black"
-          aria-haspopup="true"
+          aria-haspopup="dialog"
           onClick={openPayoutDialog}
         >
           <Translate id="paymentPayout" />

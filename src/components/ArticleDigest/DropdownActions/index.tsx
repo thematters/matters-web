@@ -1,7 +1,5 @@
-import _find from 'lodash/find'
 import _isEmpty from 'lodash/isEmpty'
 import _pickBy from 'lodash/pickBy'
-import _some from 'lodash/some'
 import { useContext } from 'react'
 
 import {
@@ -16,7 +14,6 @@ import {
   Menu,
   ShareDialog,
   Translate,
-  useRoute,
   ViewerContext,
 } from '~/components'
 
@@ -54,8 +51,12 @@ export interface DropdownActionsControls {
   // based on type
   inCard?: boolean
   inUserArticles?: boolean
-  inTagDetailLatest?: boolean
-  inTagDetailSelected?: boolean
+
+  // tag
+  tagDetailId?: string
+  hasSetTagSelected?: boolean
+  hasSetTagUnselected?: boolean
+  hasRemoveTag?: boolean
 
   morePublicActions?: React.ReactNode
 }
@@ -73,7 +74,7 @@ interface Controls {
   hasSticky: boolean
   hasArchive: boolean
   hasSetTagSelected: boolean
-  hasSetTagUnSelected: boolean
+  hasSetTagUnselected: boolean
   hasRemoveTag: boolean
   hasEdit: boolean
 }
@@ -90,6 +91,7 @@ type BaseDropdownActionsProps = DropdownActionsProps & Controls & DialogProps
 
 const BaseDropdownActions = ({
   article,
+  tagDetailId,
 
   icon,
   size,
@@ -105,7 +107,7 @@ const BaseDropdownActions = ({
   hasSticky,
   hasArchive,
   hasSetTagSelected,
-  hasSetTagUnSelected,
+  hasSetTagUnselected,
   hasRemoveTag,
   hasEdit,
 
@@ -128,7 +130,7 @@ const BaseDropdownActions = ({
     hasSticky ||
     hasArchive ||
     hasSetTagSelected ||
-    hasSetTagUnSelected ||
+    hasSetTagUnselected ||
     hasRemoveTag
 
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
@@ -150,9 +152,15 @@ const BaseDropdownActions = ({
       {hasSticky && <StickyButton article={article} />}
 
       {hasArchive && <ArchiveArticle.Button openDialog={openArchiveDialog} />}
-      {hasSetTagSelected && <SetTagSelectedButton article={article} />}
-      {hasSetTagUnSelected && <SetTagUnselectedButton article={article} />}
-      {hasRemoveTag && <RemoveTagButton article={article} />}
+      {hasSetTagSelected && tagDetailId && (
+        <SetTagSelectedButton article={article} tagId={tagDetailId} />
+      )}
+      {hasSetTagUnselected && tagDetailId && (
+        <SetTagUnselectedButton article={article} tagId={tagDetailId} />
+      )}
+      {hasRemoveTag && tagDetailId && (
+        <RemoveTagButton article={article} tagId={tagDetailId} />
+      )}
       {hasEdit && <EditButton article={article} />}
     </Menu>
   )
@@ -168,12 +176,12 @@ const BaseDropdownActions = ({
         title: 'moreActions',
       }}
     >
-      {({ openDialog, ref }) => (
+      {({ openDialog, type, ref }) => (
         <Button
           spacing={['xtight', 'xtight']}
           bgActiveColor={inCard ? 'grey-lighter-active' : 'grey-lighter'}
           aria-label={translate({ id: 'moreActions', lang })}
-          aria-haspopup="true"
+          aria-haspopup={type}
           onClick={openDialog}
           ref={ref}
         >
@@ -195,29 +203,15 @@ const DropdownActions = (props: DropdownActionsProps) => {
 
     inCard,
     inUserArticles,
-    inTagDetailLatest,
-    inTagDetailSelected,
+
+    hasSetTagSelected,
+    hasSetTagUnselected,
+    hasRemoveTag,
   } = props
-  const { getQuery } = useRoute()
   const viewer = useContext(ViewerContext)
 
   const isArticleAuthor = viewer.id === article.author.id
   const isActive = article.articleState === 'active'
-  const isInTagDetail = inTagDetailLatest || inTagDetailSelected
-
-  // check permission if in tag detail
-  let canEditTag = false
-  if (isInTagDetail) {
-    const tagId = getQuery('tagId')
-    const tag = _find(article.tags || [], (item) => item.id === tagId)
-    const isEditor = _some(
-      tag?.editors || [],
-      (editor) => editor.id === viewer.id
-    )
-    const isCreator = tag?.creator?.id === viewer.id
-    canEditTag =
-      isEditor || isCreator || viewer.info.email === 'hi@matters.news'
-  }
 
   const forbid = () => {
     window.dispatchEvent(
@@ -247,9 +241,9 @@ const DropdownActions = (props: DropdownActionsProps) => {
       !viewer.isInactive
     ),
     hasArchive: isArticleAuthor && isActive && !viewer.isArchived,
-    hasSetTagSelected: !!(inTagDetailLatest && canEditTag),
-    hasSetTagUnSelected: !!(inTagDetailSelected && canEditTag),
-    hasRemoveTag: !!(isInTagDetail && canEditTag),
+    hasSetTagSelected: !!hasSetTagSelected,
+    hasSetTagUnselected: !!hasSetTagUnselected,
+    hasRemoveTag: !!hasRemoveTag,
     hasEdit: isActive && isArticleAuthor,
   }
 

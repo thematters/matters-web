@@ -20,6 +20,7 @@ const FingerprintButton = ({ article }: FingerprintButtonProps) => {
           onClick={openDialog}
           spacing={['xxtight', 'xtight']}
           bgColor="green-lighter"
+          aria-haspopup="dialog"
         >
           <TextIcon
             icon={<IconIPFS24 color="green" />}

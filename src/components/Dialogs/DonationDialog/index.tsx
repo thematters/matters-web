@@ -238,6 +238,7 @@ const BaseDonationDialog = ({
         {isCurrencyChoice && (
           <DynamicPayToFormCurrencyChoice
             recipient={recipient}
+            article={article}
             switchToSetAmount={(c: CURRENCY) => {
               setCurrency(c)
               forward('setAmount')
@@ -265,6 +266,7 @@ const BaseDonationDialog = ({
           <DynamicPayToFormSetAmount
             currency={currency}
             recipient={recipient}
+            article={article}
             submitCallback={setAmountCallback}
             switchToCurrencyChoice={() => {
               forward('currencyChoice')
@@ -280,6 +282,7 @@ const BaseDonationDialog = ({
 
         {isConfirm && (
           <DynamicPayToFormConfirm
+            article={article}
             amount={amount}
             currency={currency}
             recipient={recipient}

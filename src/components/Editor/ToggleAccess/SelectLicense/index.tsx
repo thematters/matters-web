@@ -97,7 +97,9 @@ const SelectLicense = ({ isInCircle, license, onChange }: Props) => {
   return (
     <Form.Select
       name="select-license"
-      title={<Translate zh_hant="版權聲明" zh_hans="版权声明" en="License" />}
+      label={<Translate id="license" />}
+      labelVisHidden
+      title={<Translate id="license" />}
       onChange={(option) => onChange(option.value)}
       options={options.map((value) => ({
         name: LICENSE_TEXT[isInCircle ? 1 : 0][value].title[lang],

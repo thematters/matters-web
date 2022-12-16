@@ -1,4 +1,6 @@
 import { NetworkStatus } from 'apollo-client'
+import _find from 'lodash/find'
+import _some from 'lodash/some'
 import React, { useContext, useEffect, useRef } from 'react'
 
 import {
@@ -25,20 +27,20 @@ import { analytics, mergeConnections } from '~/common/utils'
 import RelatedTags from '../RelatedTags'
 
 import { TagArticlesPublic } from '~/components/GQL/queries/__generated__/TagArticlesPublic'
+import { TagFragment } from '../__generated__/TagFragment'
 
 interface TagArticlesProps {
-  tagId: string
+  tag: TagFragment
   feedType: string
 }
 
-const TagDetailArticles = ({ tagId, feedType }: TagArticlesProps) => {
+const TagDetailArticles = ({ tag, feedType }: TagArticlesProps) => {
   const viewer = useContext(ViewerContext)
   const feed = useRef(feedType)
   const isLargeUp = useResponsive('lg-up')
 
   const isSelected = feedType === 'selected'
   const isHottest = feedType === 'hottest'
-  const isLatest = feedType === 'latest'
 
   /**
    * Data Fetching
@@ -54,7 +56,7 @@ const TagDetailArticles = ({ tagId, feedType }: TagArticlesProps) => {
     client,
   } = usePublicQuery<TagArticlesPublic>(TAG_ARTICLES_PUBLIC, {
     variables: {
-      id: tagId,
+      id: tag.id,
       selected: feedType === 'selected',
       sortBy: feedType === 'hottest' ? 'byHottestDesc' : 'byCreatedAtDesc',
     },
@@ -145,13 +147,13 @@ const TagDetailArticles = ({ tagId, feedType }: TagArticlesProps) => {
     switch (event) {
       case 'add':
         const { data: addData } = await refetchPublic({
-          variables: { id: tagId, first: count + differences },
+          variables: { id: tag.id, first: count + differences },
         })
         loadPrivate(addData)
         break
       case 'delete':
         const { data: deleteData } = await refetchPublic({
-          variables: { id: tagId, first: Math.max(count - 1, 0) },
+          variables: { id: tag.id, first: Math.max(count - 1, 0) },
         })
         loadPrivate(deleteData)
         break
@@ -175,6 +177,14 @@ const TagDetailArticles = ({ tagId, feedType }: TagArticlesProps) => {
   if (!edges || edges.length <= 0 || !pageInfo) {
     return <EmptyTagArticles />
   }
+
+  const isEditor = _some(
+    tag?.editors || [],
+    (editor) => editor.id === viewer.id
+  )
+  const isCreator = tag?.creator?.id === viewer.id
+  const canEditTag =
+    isEditor || isCreator || viewer.info.email === 'hi@matters.news'
 
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
@@ -200,19 +210,21 @@ const TagDetailArticles = ({ tagId, feedType }: TagArticlesProps) => {
                     id: node.author.id,
                   })
                 }}
-                inTagDetailSelected={isSelected}
-                inTagDetailLatest={isLatest}
+                tagDetailId={tag.id}
+                hasSetTagSelected={canEditTag && !isSelected}
+                hasSetTagUnselected={canEditTag && isSelected}
+                hasRemoveTag={canEditTag && !isHottest}
               />
             </List.Item>
 
             {!isLargeUp && edges.length >= 4 && i === 3 && (
-              <RelatedTags tagId={tagId} />
+              <RelatedTags tagId={tag.id} />
             )}
           </React.Fragment>
         ))}
       </List>
 
-      {!isLargeUp && edges.length < 4 && <RelatedTags tagId={tagId} />}
+      {!isLargeUp && edges.length < 4 && <RelatedTags tagId={tag.id} />}
     </InfiniteScroll>
   )
 }

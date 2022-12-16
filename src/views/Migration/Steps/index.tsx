@@ -203,7 +203,7 @@ const Steps = () => {
             <MigrationDialog>
               {({ openDialog }) => (
                 <Button
-                  aria-haspopup="true"
+                  aria-haspopup="dialog"
                   bgColor="green"
                   size={['7rem', '2.5rem']}
                   spacing={[0, 0]}

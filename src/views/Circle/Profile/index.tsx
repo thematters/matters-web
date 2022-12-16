@@ -214,7 +214,11 @@ const CircleProfile = () => {
           <section className="counts">
             <MembersDialog>
               {({ openDialog: openMembersDialog }) => (
-                <button type="button" onClick={openMembersDialog}>
+                <button
+                  type="button"
+                  onClick={openMembersDialog}
+                  aria-haspopup="dialog"
+                >
                   <span className="count">
                     {numAbbr(circle.members.totalCount)}
                   </span>
@@ -225,7 +229,11 @@ const CircleProfile = () => {
 
             <FollowersDialog circle={circle}>
               {({ openDialog: openFollowersDialog }) => (
-                <button type="button" onClick={openFollowersDialog}>
+                <button
+                  type="button"
+                  onClick={openFollowersDialog}
+                  aria-haspopup="dialog"
+                >
                   <span className="count">
                     {numAbbr(circle.followers.totalCount)}
                   </span>

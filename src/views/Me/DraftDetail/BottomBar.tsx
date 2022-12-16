@@ -6,6 +6,7 @@ import {
   ToggleAccessProps,
 } from '~/components/Editor'
 import BottomBar from '~/components/Editor/BottomBar'
+import SupportSettingDialog from '~/components/Editor/ToggleAccess/SupportSettingDialog'
 
 import { ENTITY_TYPE } from '~/common/enums'
 
@@ -15,6 +16,7 @@ import {
   useEditDraftCover,
   useEditDraftPublishISCN,
   useEditDraftTags,
+  useEditSupportSetting,
 } from './hooks'
 
 import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
@@ -40,6 +42,10 @@ const EditDraftBottomBar = ({ draft, ownCircles }: BottomBarProps) => {
     draft,
     ownCircles && ownCircles[0]
   )
+
+  const { edit: editSupport, saving: supportSaving } =
+    useEditSupportSetting(draft)
+
   const hasOwnCircle = ownCircles && ownCircles.length >= 1
   const tags = (draft.tags || []).map(toDigestTagPlaceholder)
 
@@ -70,19 +76,34 @@ const EditDraftBottomBar = ({ draft, ownCircles }: BottomBarProps) => {
     accessSaving,
     canToggleCircle: !!hasOwnCircle,
     iscnPublish: draft.iscnPublish,
+    draft,
+    editSupportSetting: editSupport,
+    supportSettingSaving: supportSaving,
     togglePublishISCN,
     iscnPublishSaving,
+    onOpenSupportSetting: () => undefined,
   }
 
   return (
-    <BottomBar
-      saving={false}
-      disabled={collectionSaving || coverSaving || tagsSaving || accessSaving}
-      {...coverProps}
-      {...tagsProps}
-      {...collectionProps}
-      {...accessProps}
-    />
+    <SupportSettingDialog
+      draft={draft}
+      editSupportSetting={editSupport}
+      supportSettingSaving={supportSaving}
+    >
+      {({ openDialog }) => (
+        <BottomBar
+          saving={false}
+          disabled={
+            collectionSaving || coverSaving || tagsSaving || accessSaving
+          }
+          {...coverProps}
+          {...tagsProps}
+          {...collectionProps}
+          {...accessProps}
+          onOpenSupportSetting={openDialog}
+        />
+      )}
+    </SupportSettingDialog>
   )
 }
 
