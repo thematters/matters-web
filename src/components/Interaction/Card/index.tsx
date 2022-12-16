@@ -1,7 +1,14 @@
 import classNames from 'classnames'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { AriaAttributes, AriaRole, forwardRef, useContext, useRef } from 'react'
+import {
+  AriaAttributes,
+  AriaRole,
+  forwardRef,
+  useContext,
+  useEffect,
+  useRef,
+} from 'react'
 
 import { LanguageContext } from '~/components'
 
@@ -24,6 +31,8 @@ export interface CardProps {
 
   borderColor?: CardBorderColor
   borderRadius?: CardBorderRadius
+
+  isActive?: boolean
 
   href?: string
 
@@ -51,6 +60,8 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
 
       borderColor,
       borderRadius,
+
+      isActive,
 
       href,
 
@@ -145,6 +156,12 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
         cardRef.current.blur()
       }
     }
+
+    useEffect(() => {
+      if (cardRef && isActive) {
+        cardRef.current.focus()
+      }
+    }, [cardRef, isActive])
 
     if (is === 'link' && href) {
       return (
