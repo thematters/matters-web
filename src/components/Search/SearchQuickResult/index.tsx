@@ -41,7 +41,7 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
     if (onUpdateData) {
       onUpdateData(data)
     }
-  }, [data])
+  }, [JSON.stringify(data)])
 
   useEffect(() => {
     ;(async () => {
