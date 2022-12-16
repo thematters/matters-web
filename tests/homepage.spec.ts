@@ -28,7 +28,7 @@ test.describe('Homepage', () => {
     ])
 
     // Expect new article is loaded
-    expect(home.feedArticles.nth(articleCount)).toBeVisible()
+    await expect(home.feedArticles.nth(articleCount)).toBeVisible()
   })
 
   test('has article feed and can switch to latest feed', async ({ page }) => {
