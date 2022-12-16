@@ -9,6 +9,7 @@ import {
   IconSearch16,
   LanguageContext,
   SearchQuickResult,
+  useNativeEventListener,
   useRoute,
 } from '~/components'
 
@@ -16,6 +17,8 @@ import { INPUT_DEBOUNCE, Z_INDEX } from '~/common/enums'
 import { getSearchType, toPath, translate } from '~/common/utils'
 
 import styles from './styles.css'
+
+import { QuickResult } from '../SearchQuickResult/__generated__/QuickResult'
 
 interface SearchBarProps {
   onChange?: (key: string) => void
@@ -75,6 +78,69 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   const [showDropdown, setShowDropdown] = useState(false)
   const closeDropdown = () => setShowDropdown(false)
   const openDropdown = () => setShowDropdown(true)
+
+  // quick result hotkeys
+  const [data, setData] = useState<QuickResult>()
+  const [activeItem, setActiveItem] = useState('input')
+  const items = ['input']
+  const { edges: userEdges } = data?.user || {}
+  const { edges: tagEdges } = data?.tag || {}
+  const hasUsers = userEdges && userEdges.length > 0
+  const hasTags = tagEdges && tagEdges.length > 0
+
+  if (hasUsers) {
+    userEdges.map(({ cursor }, i) => {
+      items.push(`user${cursor}`)
+    })
+  }
+  if (hasTags) {
+    tagEdges.map(({ cursor }, i) => {
+      items.push(`tag${cursor}`)
+    })
+  }
+
+  useNativeEventListener(
+    'keydown',
+    (e: { code: string; preventDefault: () => void }) => {
+      if (e.code === 'ArrowUp') {
+        if (!showDropdown) return
+
+        e.preventDefault()
+        const activeIndex = items.indexOf(activeItem)
+        if (activeIndex === 0) return
+
+        setActiveItem(items[activeIndex - 1])
+      }
+
+      if (e.code === 'ArrowDown') {
+        if (!showDropdown) return
+
+        e.preventDefault()
+        const activeIndex = items.indexOf(activeItem)
+        if (activeIndex === items.length - 1) return
+
+        setActiveItem(items[activeIndex + 1])
+      }
+
+      if (e.code === 'Escape') {
+        if (!showDropdown) return
+
+        setShowDropdown(false)
+      }
+    },
+    true
+  )
+
+  useEffect(() => {
+    if (
+      hasDropdown &&
+      showDropdown &&
+      searchTextInput.current &&
+      activeItem === 'input'
+    ) {
+      searchTextInput.current.focus()
+    }
+  }, [activeItem])
 
   useEffect(() => {
     setSearch(q)
@@ -148,9 +214,15 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         return (
           <Dropdown
             content={
-              debouncedSearch ? (
-                <SearchQuickResult searchKey={debouncedSearch} />
-              ) : null
+              debouncedSearch && (
+                <SearchQuickResult
+                  searchKey={debouncedSearch}
+                  onUpdateData={(newData: QuickResult | undefined) => {
+                    setData(newData)
+                  }}
+                  activeItem={activeItem}
+                />
+              )
             }
             trigger={undefined}
             appendTo={typeof window !== 'undefined' ? document.body : undefined}
@@ -163,6 +235,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
               <input
                 type="search"
                 name="q"
+                ref={searchTextInput}
                 aria-label={textAriaLabel}
                 placeholder={textPlaceholder}
                 value={values.q}

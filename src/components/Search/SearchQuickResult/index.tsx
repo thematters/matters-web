@@ -18,14 +18,17 @@ import { QuickResult } from './__generated__/QuickResult'
 
 interface QuickSearchProps {
   searchKey: string
+  activeItem?: string
+  onUpdateData?: (data: QuickResult | undefined) => void
   inPage?: boolean
 }
 
 export const SearchQuickResult = (props: QuickSearchProps) => {
-  const { searchKey, inPage } = props
+  const { searchKey, inPage, activeItem, onUpdateData } = props
   const isSmallUp = useResponsive('sm-up')
   const client = useApolloClient()
   const [data, setData] = useState<QuickResult>()
+  const clearData = () => setData(undefined)
   const [loading, setLoading] = useState(false)
 
   const { edges: userEdges } = data?.user || {}
@@ -35,7 +38,14 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
   const hasTags = tagEdges && tagEdges.length > 0
 
   useEffect(() => {
+    if (onUpdateData) {
+      onUpdateData(data)
+    }
+  }, [JSON.stringify(data)])
+
+  useEffect(() => {
     ;(async () => {
+      clearData()
       if (
         '@#＠＃'.includes(searchKey[0]) &&
         (searchKey.length < 3 || searchKey.length > 11)
@@ -87,6 +97,7 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
               <Fragment key={cursor}>
                 <Menu.Item
                   bgActiveColor="grey-lighter"
+                  isActive={`user${cursor}` === activeItem}
                   {...toPath({
                     page: 'userProfile',
                     userName: node.userName || '',
@@ -110,6 +121,7 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
                 <Menu.Item
                   spacing={['base', 'base']}
                   bgActiveColor="grey-lighter"
+                  isActive={`tag${cursor}` === activeItem}
                   {...toPath({
                     page: 'tagDetail',
                     tag: node,
