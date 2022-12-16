@@ -20,6 +20,8 @@ import styles from './styles.css'
 const AggregateUserResults = () => {
   const { getQuery } = useRoute()
   const q = getQuery('q')
+  // TODO: Just test for team, will be removed when release
+  const version = getQuery('version')
 
   /**
    * Data Fetching
@@ -27,7 +29,7 @@ const AggregateUserResults = () => {
   // public data
   const { data, loading, fetchMore, refetch } =
     useQuery<SearchAggregateUsersPublicQuery>(SEARCH_AGGREGATE_USERS_PUBLIC, {
-      variables: { key: q },
+      variables: { key: q, version: version === '' ? undefined : version },
       fetchPolicy: 'network-only',
     })
 

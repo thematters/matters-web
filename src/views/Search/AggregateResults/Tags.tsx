@@ -21,6 +21,8 @@ import styles from './styles.css'
 const AggregateTagResults = () => {
   const { getQuery } = useRoute()
   const q = getQuery('q')
+  // TODO: Just test for team, will be removed when release
+  const version = getQuery('version')
 
   /**
    * Data Fetching
@@ -28,7 +30,7 @@ const AggregateTagResults = () => {
   // public data
   const { data, loading, fetchMore, refetch } =
     useQuery<SearchAggregateTagsPublicQuery>(SEARCH_AGGREGATE_TAGS_PUBLIC, {
-      variables: { key: q },
+      variables: { key: q, version: version === '' ? undefined : version },
       fetchPolicy: 'network-only',
     })
 
