@@ -1,6 +1,5 @@
 import { expect, test } from '@playwright/test'
 
-import { TEST_ID } from '~/common/enums'
 import { stripSpaces } from '~/common/utils'
 
 import { HomePage, waitForAPIResponse } from './helpers'
@@ -27,9 +26,9 @@ test.describe('Homepage', () => {
       }),
       page.evaluate(() => window.scrollTo(0, document.body.scrollHeight)),
     ])
-    await page.getByTestId(TEST_ID.SPINNER).waitFor({ state: 'hidden' })
-    const newArticleCount = await home.feedArticles.count()
-    expect(newArticleCount).toBeGreaterThan(articleCount)
+
+    // Expect new article is loaded
+    await expect(home.feedArticles.nth(articleCount)).toBeVisible()
   })
 
   test('has article feed and can switch to latest feed', async ({ page }) => {
