@@ -22,7 +22,7 @@ import {
 } from '~/components'
 
 import { PATHS, Z_INDEX } from '~/common/enums'
-import { translate } from '~/common/utils'
+import { toPath, translate } from '~/common/utils'
 
 import MeAvatar from '../MeAvatar'
 import NavMenu from '../NavMenu'
@@ -33,7 +33,7 @@ import styles from './styles.css'
 const SideNav = () => {
   const { lang } = useContext(LanguageContext)
 
-  const { isInPath, isPathStartWith, getQuery } = useRoute()
+  const { router, isInPath, isPathStartWith, getQuery } = useRoute()
   const isMediumUp = useResponsive('md-up')
   const isLargeUp = useResponsive('lg-up')
   const viewer = useContext(ViewerContext)
@@ -97,7 +97,17 @@ const SideNav = () => {
             activeIcon={<IconNavSearch24 size="md" color="green" />}
             active={isInSearch}
             isMediumUp={isMediumUp}
-            href={PATHS.SEARCH}
+            onClick={() => {
+              const path = toPath({
+                page: 'search',
+              })
+
+              if (isInSearch) {
+                router.replace(path.href)
+              } else {
+                router.push(path.href)
+              }
+            }}
           />
         )}
 
