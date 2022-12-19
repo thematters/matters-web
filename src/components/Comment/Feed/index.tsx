@@ -111,6 +111,7 @@ const CommentFeed = React.memo(
       prevComment.upvotes === comment.upvotes &&
       prevComment.state === comment.state &&
       prevComment.pinned === comment.pinned &&
+      prevComment.fromDonator === comment.fromDonator &&
       prevComment.author.isBlocked === comment.author.isBlocked &&
       prevDisabled === disabled
     )
