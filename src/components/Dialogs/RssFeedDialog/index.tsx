@@ -81,7 +81,7 @@ const BaseRssFeedDialog = ({ user, children }: RssFeedDialogProps) => {
         />
         <Dialog.Content hasGrow>
           <DynamicContent
-            ipnsKey={user?.info.ipnsKey || ''}
+            user={user}
             articlesCount={user?.articles.totalCount || 0}
             refetch={refetch}
           />

@@ -1,6 +1,6 @@
 import { ethers } from 'ethers'
 import { useContext } from 'react'
-import { useEnsName } from 'wagmi'
+import { chain, useEnsName } from 'wagmi'
 
 import {
   Button,
@@ -22,7 +22,12 @@ type WalletAddressProps = {
 
 const WalletAddress: React.FC<WalletAddressProps> = ({ address }) => {
   const { lang } = useContext(LanguageContext)
-  const { data: ensName } = useEnsName({ address: address as `0x${string}` })
+  const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
+
+  const { data: ensName } = useEnsName({
+    address: address as `0x${string}`,
+    chainId: isProd ? chain.mainnet.id : chain.goerli.id,
+  })
 
   return (
     <section className="address">

@@ -1,6 +1,6 @@
 import { useAccount, useEnsName } from 'wagmi'
 
-import { Button, Dialog, TextIcon, Translate } from '~/components'
+import { Dialog, TextIcon, Translate } from '~/components'
 
 import { EXTERNAL_LINKS } from '~/common/enums'
 
@@ -22,16 +22,14 @@ const DefaultContent = ({ switchToWalletSelect }: DefaultContentProps) => {
         <section className="container">
           <section className="connect-wallet">
             <span className="info">
-              <Translate zh_hans={`关聊`} zh_hant={`關聯`} en={`Link`} />
+              <Translate zh_hans={`关联`} zh_hant={`關聯`} en={`Link`} />
               <span className="ens">&nbsp;{ensName}&nbsp;</span>
               <Translate id="toYourIPNSPage" />
             </span>
             <span className="btn">
-              <Button
+              <Dialog.Footer.Button
                 size={['19.5rem', '3rem']}
                 bgColor="green"
-                borderWidth="sm"
-                aria-haspopup="dialog"
                 onClick={() => {
                   switchToWalletSelect()
                 }}
@@ -43,7 +41,7 @@ const DefaultContent = ({ switchToWalletSelect }: DefaultContentProps) => {
                     en="Connect Wallet"
                   />
                 </TextIcon>
-              </Button>
+              </Dialog.Footer.Button>
             </span>
           </section>
           <hr style={{ margin: '1rem 0' }} />

@@ -18,7 +18,6 @@ import {
   Dialog,
   IconCopy16,
   LanguageContext,
-  Spinner,
   TextIcon,
   Translate,
   ViewerContext,
@@ -32,8 +31,9 @@ import { UserProfileUserPublic_user } from '~/components/UserProfile/__generated
 
 interface LinkENSContentProps {
   user: UserProfileUserPublic_user
+  closeDialog: () => void
 }
-const LinkENSContent = ({ user }: LinkENSContentProps) => {
+const LinkENSContent = ({ user, closeDialog }: LinkENSContentProps) => {
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
 
@@ -74,9 +74,10 @@ const LinkENSContent = ({ user }: LinkENSContentProps) => {
     functionName: 'setContenthash',
     args: [
       namehash(ensName || ('' as string)),
-      '0x' + contentHash.encode('ipns-ns', ipnsHash),
+      '0x' + contentHash.encode('ipns-ns', !!ipnsHash),
     ],
   })
+
   const linkIPNStoENS = async () => {
     if (!ensName) return
 
@@ -96,7 +97,7 @@ const LinkENSContent = ({ user }: LinkENSContentProps) => {
           <span className="info">
             {!isSuccess && (
               <>
-                <Translate zh_hans={`关聊`} zh_hant={`關聯`} en={`Link`} />
+                <Translate zh_hans={`关联`} zh_hant={`關聯`} en={`Link`} />
                 <span className="ens">&nbsp;{ensName}&nbsp;</span>
                 <Translate id="toYourIPNSPage" />
               </>
@@ -104,7 +105,7 @@ const LinkENSContent = ({ user }: LinkENSContentProps) => {
             {isSuccess && (
               <>
                 <Translate
-                  zh_hans="已成功关聊，稍后完成同步在&nbsp;"
+                  zh_hans="已成功关联，稍后完成同步在&nbsp;"
                   zh_hant="已成功關聯，稍後完成同步在&nbsp;"
                   en="Successfully linked. It would take couple hours to resolve. View transation on&nbsp;"
                 />
@@ -149,7 +150,7 @@ const LinkENSContent = ({ user }: LinkENSContentProps) => {
           )}
           <section className="btn">
             {!isConnectedAddress && !isLoading && isUnsupportedNetwork ? (
-              <Button
+              <Dialog.Footer.Button
                 size={['19.5rem', '3rem']}
                 bgColor="green"
                 onClick={switchToTargetNetwork}
@@ -162,16 +163,14 @@ const LinkENSContent = ({ user }: LinkENSContentProps) => {
                   />
                   {targetChainName}
                 </TextIcon>
-              </Button>
+              </Dialog.Footer.Button>
             ) : (
               isConnectedAddress &&
               !isLoading &&
               !isSuccess && (
-                <Button
+                <Dialog.Footer.Button
                   size={['19.5rem', '3rem']}
                   bgColor="green"
-                  borderWidth="sm"
-                  aria-haspopup="dialog"
                   onClick={() => {
                     linkIPNStoENS()
                   }}
@@ -179,28 +178,21 @@ const LinkENSContent = ({ user }: LinkENSContentProps) => {
                   <TextIcon size="md" weight="semibold" color="white">
                     <Translate id="bindIPNStoENS" />
                   </TextIcon>
-                </Button>
+                </Dialog.Footer.Button>
               )
             )}
             {isLoading && (
-              <Button
+              <Dialog.Footer.Button
+                loading={isLoading}
                 size={['19.5rem', '3rem']}
                 bgColor="green"
-                borderWidth="sm"
-                aria-haspopup="dialog"
-              >
-                <Spinner />
-              </Button>
+              />
             )}
             {isSuccess && (
-              <Button
+              <Dialog.Footer.Button
                 size={['19.5rem', '3rem']}
                 bgColor="grey-lighter"
-                borderWidth="sm"
-                aria-haspopup="dialog"
-                onClick={() => {
-                  /* TODO: back to profile page */
-                }}
+                onClick={() => closeDialog()}
               >
                 <TextIcon size="md" weight="semibold" color="black">
                   <Translate
@@ -209,7 +201,7 @@ const LinkENSContent = ({ user }: LinkENSContentProps) => {
                     en="Back to Profile"
                   />
                 </TextIcon>
-              </Button>
+              </Dialog.Footer.Button>
             )}
           </section>
         </section>

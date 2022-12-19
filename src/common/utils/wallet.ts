@@ -8,8 +8,6 @@ import { WalletErrorType } from '~/common/enums'
 const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
 export const supportedChains = [
-  chain.goerli,
-  chain.polygonMumbai,
   ...(isProd
     ? [chain.mainnet, chain.polygon]
     : [chain.goerli, chain.polygonMumbai]),

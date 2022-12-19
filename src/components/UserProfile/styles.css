@@ -105,4 +105,8 @@ footer {
   @mixin flex-center-start;
 
   gap: var(--spacing-x-tight);
+
+  & .info-icon {
+    @mixin flex-center-all;
+  }
 }

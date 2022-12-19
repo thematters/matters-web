@@ -51,7 +51,7 @@ const BaseENSDilaog = ({
   return (
     <>
       {children({ openDialog })}
-      <Dialog isOpen={show} onDismiss={closeDialog}>
+      <Dialog isOpen={show} onDismiss={closeDialog} size="sm">
         {!isWalletSelect && (
           <Dialog.Header
             closeDialog={closeDialog}
@@ -77,7 +77,7 @@ const BaseENSDilaog = ({
           />
         )}
 
-        {isBindIPNS && <DynamicLinkENS user={user} />}
+        {isBindIPNS && <DynamicLinkENS user={user} closeDialog={closeDialog} />}
       </Dialog>
     </>
   )

@@ -2,7 +2,7 @@
 import contentHash from '@ensdomains/content-hash'
 import { namehash } from 'ethers/lib/utils'
 import { useContext, useEffect } from 'react'
-import { useAccount, useContractRead, useEnsName, useEnsResolver } from 'wagmi'
+import { chain, useContractRead, useEnsName, useEnsResolver } from 'wagmi'
 
 import {
   Avatar,
@@ -102,11 +102,13 @@ export const UserProfile = () => {
     })
   }, [user?.id, viewer.id])
 
-  const { address } = useAccount()
-
+  const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
+  const address = user?.info.ethAddress
   const { data: ensName } = useEnsName({
     address: address as `0x${string}`,
+    chainId: isProd ? chain.mainnet.id : chain.goerli.id,
   })
+
   const { data: resolverData } = useEnsResolver({
     name: ensName as string,
   })
@@ -115,13 +117,12 @@ export const UserProfile = () => {
     abi: PublicResolverABI,
     functionName: 'contenthash',
     args: [namehash(ensName || ('' as string))],
+    chainId: isProd ? chain.mainnet.id : chain.goerli.id,
   })
-
   const ipnsHash = user?.info.ipnsKey
-  const ipnsEncoded = '0x' + contentHash.encode('ipns-ns', ipnsHash)
-
-  const hasLinkedIPNS = ipnsEncoded === readData
-  const hasLinkEnsButton = !hasLinkedIPNS && ensName
+  const hasLinkedIPNS =
+    !!ipnsHash && '0x' + contentHash.encode('ipns-ns', ipnsHash) === readData
+  const hasLinkEnsButton = ensName && !hasLinkedIPNS && isMe
 
   /**
    * Render
@@ -318,19 +319,19 @@ export const UserProfile = () => {
             {user.info.ethAddress && (
               <WalletAddress address={user.info.ethAddress} />
             )}
-            {ipnsHash && hasLinkEnsButton && (
+            {hasLinkEnsButton && (
               <ENSDialog user={user}>
                 {({ openDialog }) => (
                   <>
                     <Button
-                      size={[null, '1.75rem']}
+                      size={[null, '1.5rem']}
                       spacing={[0, 'tight']}
-                      borderColor="blue-green-linear"
+                      borderColor="green"
                       onClick={() => {
                         openDialog()
                       }}
                     >
-                      <TextIcon color="blue-green-linear">
+                      <TextIcon color="green">
                         <Translate id="bindIPNStoENS" />
                       </TextIcon>
                     </Button>
@@ -338,22 +339,25 @@ export const UserProfile = () => {
                 )}
               </ENSDialog>
             )}
-            {
-              // TODO: hover info
-              hasLinkedIPNS && (
-                <TextIcon
-                  icon={<IconInfo16 size="sm" />}
-                  color="grey"
-                  size="sm"
-                />
-              )
-            }
+            {hasLinkedIPNS && !isMe && (
+              <Tooltip
+                content={
+                  <Translate
+                    zh_hans={`${user.displayName} 已将他的 ENS 指向到个人 IPNS 页面`}
+                    zh_hant={`${user.displayName} 已將他的 ENS 指向到個人 IPNS 頁面`}
+                    en={`${user.displayName} has linked primary ENS name to his IPNS page. `}
+                  />
+                }
+              >
+                <span className="info-icon">
+                  <IconInfo16 size="sm" color="grey" />
+                </span>
+              </Tooltip>
+            )}
           </section>
-
           <Expandable
             content={user.info.description}
             color="grey-darker"
-            spacingTop="base"
             size="md"
           >
             <p className="description">{user.info.description}</p>
