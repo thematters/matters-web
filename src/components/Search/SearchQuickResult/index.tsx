@@ -30,7 +30,7 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
   const version = getQuery('version')
 
   const { searchKey, inPage, activeItem, onUpdateData } = props
-  const isSmallUp = useResponsive('sm-up')
+  const isLargeUp = useResponsive('lg-up')
   const client = useApolloClient()
   const [data, setData] = useState<QuickResult>()
   const clearData = () => setData(undefined)
@@ -90,7 +90,7 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
 
   return (
     <Menu width={inPage ? undefined : 'md'}>
-      {!isSmallUp && (
+      {!isLargeUp && (
         <>
           <TriggerFullSearchItem searchKey={searchKey} />
           <Menu.Divider />
