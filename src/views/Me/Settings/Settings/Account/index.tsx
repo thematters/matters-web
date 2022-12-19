@@ -42,27 +42,33 @@ const AccountSettings = () => {
           <Form.List.Item
             title="Matters ID"
             onClick={userNameEditable ? openDialog : undefined}
+            role="button"
+            ariaHasPopup="dialog"
             rightText={viewer.userName}
           />
         )}
       </ChangeUserNameAsk>
 
       <Form.List.Item
+        role="link"
         title={<Translate id="email" />}
         href={PATHS.ME_SETTINGS_CHANGE_EMAIL}
         rightText={viewer.info.email}
       />
       {userPasswordEditable && (
         <Form.List.Item
+          role="link"
           title={<Translate id="loginPassword" />}
           href={PATHS.ME_SETTINGS_CHANGE_PASSWORD}
         />
       )}
       <Form.List.Item
+        role="link"
         title={<Translate id="settingsNotification" />}
         href={PATHS.ME_SETTINGS_NOTIFICATION}
       />
       <Form.List.Item
+        role="link"
         title={<Translate id="settingsBlock" />}
         href={PATHS.ME_SETTINGS_BLOCKED}
         rightText={totalBlockCount}

@@ -96,7 +96,8 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
       <Form id={formId} onSubmit={handleSubmit} noBackground={true}>
         {tab === 'request' && (
           <Form.Textarea
-            label=""
+            label={<Translate id="requestForDonation" />}
+            labelVisHidden
             name="requestForDonation"
             placeholder={translate({
               id: 'supportRequestDescription',
@@ -109,12 +110,12 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
             onChange={(e) => {
               setFieldValue('requestForDonation', e.currentTarget.value)
             }}
-            style={{ lineHeight: '1.5rem' }}
           />
         )}
         {tab === 'reply' && (
           <Form.Textarea
-            label=""
+            label={<Translate id="replyToDonator" />}
+            labelVisHidden
             name="replyToDonator"
             placeholder={translate({
               id: 'supportResponseDescription',
@@ -127,7 +128,6 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
             onChange={(e) =>
               setFieldValue('replyToDonator', e.currentTarget.value)
             }
-            style={{ lineHeight: '1.5rem' }}
           />
         )}
       </Form>

@@ -5,6 +5,7 @@ import { useContext, useEffect, useRef, useState } from 'react'
 
 import { useMutation, ViewerContext } from '~/components'
 
+import { TEST_ID } from '~/common/enums'
 import styles from '~/common/styles/utils/content.article.css'
 import {
   captureClicks,
@@ -153,6 +154,7 @@ const Content = ({
         }}
         onClick={captureClicks}
         ref={contentContainer}
+        data-test-id={TEST_ID.ARTICLE_CONTENT}
       />
 
       <style jsx>{styles}</style>

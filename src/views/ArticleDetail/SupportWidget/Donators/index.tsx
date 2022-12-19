@@ -7,6 +7,7 @@ import {
   LanguageContext,
   TextIcon,
   Translate,
+  UserDigest,
 } from '~/components'
 import { Avatar, AvatarProps } from '~/components/Avatar'
 
@@ -60,8 +61,8 @@ const Donators = ({ article, showAvatarAnimation = false }: DonatorsProps) => {
             type="button"
             onClick={openDialog}
             disabled={donatorsCount <= 0}
-            aria-label={translate({ id: 'viewDonators', lang })}
-            aria-haspopup="true"
+            aria-label={translate({ id: 'viewSupporters', lang })}
+            aria-haspopup="dialog"
           >
             <section className="avatar-list">
               {frontDonators.map((user, index) => {
@@ -107,24 +108,42 @@ const Donators = ({ article, showAvatarAnimation = false }: DonatorsProps) => {
             </section>
           </button>
           <section className="avatar-list-footer">
-            <button
-              type="button"
-              onClick={openDialog}
-              aria-label={translate({ id: 'viewDonators', lang })}
-              aria-haspopup="true"
-            >
-              <span className="count">{donatorsCount}</span>
-              <TextIcon
-                icon={<IconArrowRight16 size="xs" />}
-                textPlacement="left"
+            {donatorsCount === 1 && (
+              <section className="footer">
+                <span className="donator-name">
+                  <UserDigest.Plain
+                    user={donators[0]}
+                    hasUnderline
+                    displayNameLimit={7}
+                  />
+                </span>
+
+                <span>
+                  <Translate id="theFirstSupporter" />
+                </span>
+              </section>
+            )}
+
+            {donatorsCount > 1 && (
+              <button
+                type="button"
+                onClick={openDialog}
+                aria-label={translate({ id: 'viewSupporters', lang })}
+                aria-haspopup="dialog"
               >
-                <Translate
-                  zh_hant="個人支持過本文・看全部"
-                  zh_hans="个人支持过本文・看全部"
-                  en="others have supported the article. All supporters"
-                />
-              </TextIcon>
-            </button>
+                <span className="count">{donatorsCount}</span>
+                <TextIcon
+                  icon={<IconArrowRight16 size="xs" />}
+                  textPlacement="left"
+                >
+                  <Translate
+                    zh_hant="個人支持過本文・看全部"
+                    zh_hans="个人支持过本文・看全部"
+                    en="others have supported the article. All supporters"
+                  />
+                </TextIcon>
+              </button>
+            )}
           </section>
 
           <style jsx>{styles}</style>

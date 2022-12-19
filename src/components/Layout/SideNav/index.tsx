@@ -60,7 +60,7 @@ const SideNav = () => {
         </Link>
       </section>
 
-      <ul>
+      <ul role="menu">
         <NavListItem
           name={<Translate id="discover" />}
           icon={<IconNavHome24 size="md" />}
@@ -81,9 +81,7 @@ const SideNav = () => {
 
         {viewer.isAuthed && (
           <NavListItem
-            name={
-              <Translate zh_hant="通知" zh_hans="通知" en="Notifications" />
-            }
+            name={<Translate id="notifications" />}
             icon={<UnreadIcon.Notification />}
             activeIcon={<UnreadIcon.Notification active />}
             active={isInNotification}
@@ -143,13 +141,13 @@ const SideNav = () => {
               active={isInMe}
               isMediumUp={isMediumUp}
               canScrollTop={false}
-              aira-haspopup="true"
+              aira-haspopup="menu"
             />
           </Dropdown>
         )}
 
         {!isInDraftDetail && (
-          <li>
+          <li role="menuitem">
             <WriteButton
               allowed={!viewer.shouldSetupLikerID}
               authed={viewer.isAuthed}

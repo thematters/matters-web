@@ -2,6 +2,8 @@ import gql from 'graphql-tag'
 
 import { Translate } from '~/components'
 
+import { TEST_ID } from '~/common/enums'
+
 import NoticeDate from '../NoticeDate'
 import NoticeTypeIcon from '../NoticeTypeIcon'
 import styles from '../styles.css'
@@ -12,7 +14,7 @@ const PaymentPayoutNotice = ({ notice }: { notice: NoticeType }) => {
   const tx = notice.tx
 
   return (
-    <section className="container">
+    <section className="container" data-test-id={TEST_ID.PAYMENT_PAYOUT}>
       <section className="avatar-wrap">
         <NoticeTypeIcon type="volume" />
       </section>

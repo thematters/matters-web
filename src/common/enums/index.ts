@@ -18,6 +18,7 @@ export * from './csp'
 export * from './chart'
 export * from './wallet'
 export * from './cookie'
+export * from './test'
 
 export const Z_INDEX = {
   GLOBAL_HEADER: 100,

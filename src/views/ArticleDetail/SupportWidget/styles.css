@@ -4,11 +4,8 @@
 }
 
 .support-widget {
-  margin: calc(
-      var(--spacing-x-loose) + var(--spacing-base) +
-        var(--donation-area-button-height) / 2
-    )
-    0 calc(var(--spacing-loose) + var(--donation-area-avatar-height) / 2);
+  margin: calc(var(--spacing-base) + var(--donation-area-button-height) / 2) 0
+    calc(var(--spacing-loose) + var(--donation-area-avatar-height) / 2);
 }
 
 .donation {

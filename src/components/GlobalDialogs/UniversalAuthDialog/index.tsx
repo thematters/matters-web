@@ -14,6 +14,7 @@ import {
 import {
   CLOSE_ACTIVE_DIALOG,
   OPEN_UNIVERSAL_AUTH_DIALOG,
+  TEST_ID,
   UNIVERSAL_AUTH_SOURCE,
 } from '~/common/enums'
 
@@ -97,7 +98,12 @@ const BaseUniversalAuthDialog = ({
   )
 
   return (
-    <Dialog size="sm" isOpen={show} onDismiss={closeDialog}>
+    <Dialog
+      size="sm"
+      isOpen={show}
+      onDismiss={closeDialog}
+      testId={TEST_ID.DIALOG_AUTH}
+    >
       {currStep === 'select-login-method' && (
         <DynamicSelectAuthMethodForm
           purpose="dialog"

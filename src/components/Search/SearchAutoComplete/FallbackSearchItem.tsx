@@ -23,6 +23,7 @@ const FallbackSearchItem = ({ searchKey, inPage }: FallbackSearchItemProps) => {
         page: 'search',
         q: searchKey,
       })}
+      is="link"
     >
       <span className={itemClasses}>
         <Translate id="search" />

@@ -75,7 +75,7 @@ const LikeCoinChoice: React.FC<LikeCoinChoiceProps> = ({
 
   if (!canReceiveLike) {
     return (
-      <section role="button" className="item">
+      <section className="item">
         <IconLikeDisabled />
 
         <TextIcon size="md" color="grey">

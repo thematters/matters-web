@@ -31,7 +31,9 @@ const List: React.FC<React.PropsWithChildren<ListProps>> & {
     <section className="group">
       {groupName && <h4 className="name">{groupName}</h4>}
 
-      <ul className={listClasses}>{children}</ul>
+      <ul className={listClasses} role="list">
+        {children}
+      </ul>
 
       <style jsx>{styles}</style>
     </section>

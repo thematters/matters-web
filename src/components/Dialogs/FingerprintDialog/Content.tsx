@@ -259,7 +259,7 @@ const FingerprintDialogContent = ({
               onClick={(event) => event.currentTarget.select()}
             />
             <CopyToClipboard text={dataHash}>
-              <Button>
+              <Button aria-label={translate({ id: 'copy', lang })}>
                 <IconCopy16 />
               </Button>
             </CopyToClipboard>

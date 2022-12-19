@@ -2,6 +2,8 @@ import gql from 'graphql-tag'
 
 import { Translate } from '~/components'
 
+import { TEST_ID } from '~/common/enums'
+
 import NoticeArticleCard from '../NoticeArticleCard'
 import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
@@ -16,7 +18,10 @@ const RevisedArticleNotPublishedNotice = ({
   notice: NoticeType
 }) => {
   return (
-    <section className="container">
+    <section
+      className="container"
+      data-test-id={TEST_ID.REVISED_ARTICLE_NOT_PUBLISHED}
+    >
       <section className="avatar-wrap">
         <NoticeTypeIcon type="logo" />
       </section>

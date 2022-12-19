@@ -2,6 +2,7 @@ import { useContext } from 'react'
 
 import { IconSpinner16, LanguageContext } from '~/components'
 
+import { TEST_ID } from '~/common/enums'
 import { translate } from '~/common/utils'
 
 import styles from './styles.css'
@@ -12,6 +13,7 @@ export const Spinner = () => {
   return (
     <div
       className="spinner"
+      data-test-id={TEST_ID.SPINNER}
       aria-label={translate({
         zh_hant: '載入中…',
         zh_hans: '加载中…',

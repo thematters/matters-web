@@ -16,8 +16,6 @@ import styles from './styles.css'
  * ```jsx
  *   <Form.Select
  *     options={}
- *     error="xxx"
- *     hint="xxx"
  *   />
  * ```
  *
@@ -41,17 +39,15 @@ const Select: React.FC<SelectProps> = ({
   name,
   title,
   label,
+  labelVisHidden,
 
   options,
   onChange,
 
   size,
-
-  hint,
-  error,
 }) => {
   const fieldId = `field-${name}`
-  const fieldMsgId = `field-msg-${name}`
+  const selectedOptionId = `${fieldId}-selected`
 
   const selectedOption = options.find((o) => o.selected) || options[0]
 
@@ -62,9 +58,16 @@ const Select: React.FC<SelectProps> = ({
     })
 
     return (
-      <ul className={optionsClasses} id={fieldId}>
-        {options.map((option) => (
+      <ul
+        tabIndex={0}
+        className={optionsClasses}
+        role="listbox"
+        aria-labelledby={fieldId}
+        aria-activedescendant={selectedOptionId}
+      >
+        {options.map((option, index) => (
           <Option
+            id={option.selected ? selectedOptionId : `${fieldId}-${index}`}
             name={option.name}
             subtitle={option.subtitle}
             onClick={() => onChange(option)}
@@ -93,21 +96,16 @@ const Select: React.FC<SelectProps> = ({
         title: title || label,
       }}
     >
-      {({ openDialog, ref }) => (
-        <ul
-          id={fieldId}
-          role="listbox"
-          tabIndex={-1}
-          aria-labelledby={fieldId}
-          aria-describedby={fieldMsgId}
-        >
+      {({ openDialog, type, ref }) => (
+        <ul aria-labelledby={fieldId}>
           <Option
+            role="button"
+            ariaHasPopup={type}
             name={selectedOption.name}
             subtitle={selectedOption.subtitle}
             selected
             size={size}
             onClick={openDialog}
-            aria-haspopup="listbox"
             ref={ref}
           />
 
@@ -117,17 +115,15 @@ const Select: React.FC<SelectProps> = ({
     </DropdownDialog>
   )
 
-  if (!label) {
-    return Content
-  }
-
   return (
     <Field>
-      <Field.Header label={label} />
+      <Field.Header
+        label={label}
+        labelId={fieldId}
+        labelVisHidden={labelVisHidden}
+      />
 
       {Content}
-
-      <Field.Footer fieldMsgId={fieldMsgId} hint={hint} error={error} />
     </Field>
   )
 }

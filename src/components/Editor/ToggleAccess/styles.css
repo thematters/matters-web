@@ -24,8 +24,8 @@ h3 {
 
 .widget {
   & .license {
-    margin-top: var(--spacing-base);
-    background: var(--color-grey-lighter);
+    margin: calc((var(--spacing-loose) - var(--spacing-base)) * -1)
+      calc(var(--spacing-base) * -1) calc(var(--spacing-loose) * -1);
     border-radius: var(--spacing-x-tight);
   }
 }

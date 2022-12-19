@@ -7,6 +7,8 @@ import {
   IconUnChecked,
 } from '~/components'
 
+import { TEST_ID } from '~/common/enums'
+
 import styles from '../styles.css'
 
 import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
@@ -30,7 +32,11 @@ const SearchSelectArticle: React.FC<SearchSelectArticleProps> = ({
   })
 
   return (
-    <Card spacing={['tight', 'base']} onClick={() => onClick(article)}>
+    <Card
+      spacing={['tight', 'base']}
+      onClick={() => onClick(article)}
+      testId={TEST_ID.SEARCH_RESULTS_ITEM}
+    >
       <section className={nodeClass}>
         <ArticleDigestDropdown
           article={article}

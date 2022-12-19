@@ -58,7 +58,7 @@ export const ShareButton: React.FC<
           spacing={buttonSpacing}
           bgActiveColor={buttonBgActiveColor}
           aria-label={translate({ id: 'share', lang })}
-          aria-haspopup="true"
+          aria-haspopup="dialog"
           onClick={openDialog}
         >
           {hasIcon && <IconShare16 size={iconSize} color={iconColor} />}

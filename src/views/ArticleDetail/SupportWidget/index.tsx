@@ -19,6 +19,7 @@ import {
   PATHS,
   PAYMENT_CURRENCY as CURRENCY,
   SUPPORT_SUCCESS_ANIMATION,
+  TEST_ID,
 } from '~/common/enums'
 import { analytics, sleep } from '~/common/utils'
 
@@ -142,7 +143,9 @@ const SupportWidget = ({ article }: DonationProps) => {
                         </TextIcon>
                       </p>
                       <Spacer size="xtight" />
-                      <p>{replyToDonator}</p>
+                      <p data-test-id={TEST_ID.ARTICLE_SUPPORT_REPLY}>
+                        {replyToDonator}
+                      </p>
                     </section>
                   )}
                   {!replyToDonator && (
@@ -157,7 +160,7 @@ const SupportWidget = ({ article }: DonationProps) => {
                         </TextIcon>
                       </p>
                       <Spacer size="xtight" />
-                      <p>
+                      <p data-test-id={TEST_ID.ARTICLE_SUPPORT_REPLY}>
                         <Translate
                           zh_hant="感謝支持，創作這條路不容易，有你的支持我將能夠蓄積更多能量創作。"
                           zh_hans="感谢支持，创作这条路不容易，有你的支持我将能够蓄积更多能量创作。"
@@ -171,9 +174,13 @@ const SupportWidget = ({ article }: DonationProps) => {
 
               {!supported && (
                 <>
-                  {requestForDonation && <p>{requestForDonation}</p>}
+                  {requestForDonation && (
+                    <p data-test-id={TEST_ID.ARTICLE_SUPPORT_REQUEST}>
+                      {requestForDonation}
+                    </p>
+                  )}
                   {!requestForDonation && (
-                    <p>
+                    <p data-test-id={TEST_ID.ARTICLE_SUPPORT_REQUEST}>
                       <Translate
                         zh_hant="喜歡我的文章嗎？"
                         zh_hans="喜欢我的文章吗？"

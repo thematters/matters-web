@@ -13,6 +13,7 @@ const DonationButton = ({ supported, onClick }: DonationButtonProps) => {
         bgColor="yellow-lighter"
         borderColor="gold"
         borderWidth="sm"
+        aria-haspopup="dialog"
         onClick={() => {
           if (onClick) {
             onClick()
@@ -25,10 +26,12 @@ const DonationButton = ({ supported, onClick }: DonationButtonProps) => {
       </Button>
     )
   }
+
   return (
     <Button
       size={['19.5rem', '3rem']}
       bgColor="gold-linear-gradient"
+      aria-haspopup="dialog"
       onClick={() => {
         if (onClick) {
           onClick()

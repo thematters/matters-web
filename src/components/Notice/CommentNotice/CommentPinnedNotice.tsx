@@ -2,6 +2,8 @@ import gql from 'graphql-tag'
 
 import { Translate } from '~/components'
 
+import { TEST_ID } from '~/common/enums'
+
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorName from '../NoticeActorName'
 import NoticeArticleTitle from '../NoticeArticleTitle'
@@ -24,7 +26,7 @@ const CommentPinnedNotice = ({ notice }: { notice: NoticeType }) => {
       : undefined
 
   return (
-    <section className="container">
+    <section className="container" data-test-id={TEST_ID.COMMENT_PINNED}>
       <section className="avatar-wrap">
         <NoticeActorAvatar user={actor} />
       </section>

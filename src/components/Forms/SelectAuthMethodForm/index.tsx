@@ -53,6 +53,7 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
           />
         }
         onClick={gotoWalletAuth}
+        role="button"
       />
       <Form.List.Item
         title={
@@ -73,6 +74,7 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
           />
         }
         onClick={gotoEmailLogin}
+        role="button"
       />
     </Form.List>
   )

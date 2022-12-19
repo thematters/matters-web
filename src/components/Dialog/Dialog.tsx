@@ -25,6 +25,8 @@ export type DialogProps = {
   size?: 'sm' | 'lg'
   fixedHeight?: boolean
   slideIn?: boolean
+
+  testId?: string
 } & DialogOverlayProps
 
 const Container: React.FC<
@@ -34,7 +36,15 @@ const Container: React.FC<
       setDragGoal: (val: any) => void
     } & DialogProps
   >
-> = ({ size = 'lg', fixedHeight, onDismiss, children, style, setDragGoal }) => {
+> = ({
+  size = 'lg',
+  fixedHeight,
+  testId,
+  onDismiss,
+  children,
+  style,
+  setDragGoal,
+}) => {
   const isSmallUp = useResponsive('sm-up')
   const node: React.RefObject<any> | null = useRef(null)
 
@@ -70,7 +80,7 @@ const Container: React.FC<
   useOutsideClick(node, closeTopDialog)
 
   return (
-    <div className="l-row">
+    <div className="l-row" {...(testId ? { 'data-test-id': testId } : {})}>
       <div
         ref={node}
         className={containerClasses}
