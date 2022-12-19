@@ -14,8 +14,13 @@ import {
   ViewerContext,
 } from '~/components'
 import PAY_TO from '~/components/GQL/mutations/payTo'
+import updateDonation from '~/components/GQL/updates/donation'
 
-import { CHAIN, PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
+import {
+  CHAIN,
+  PAYMENT_CURRENCY as CURRENCY,
+  SUPPORT_SUCCESS_ANIMATION,
+} from '~/common/enums'
 import { curationABI } from '~/common/utils'
 
 import PaymentInfo from '../PaymentInfo'
@@ -31,7 +36,7 @@ interface Props {
   amount: number
   currency: CURRENCY
   recipient: UserDonationRecipient
-  article?: ArticleDetailPublic_article
+  article: ArticleDetailPublic_article
   targetId: string
   txId: string
   nextStep: () => void
@@ -81,14 +86,29 @@ const OthersProcessingForm: React.FC<Props> = ({
   })
   const txState = _get(data, 'viewer.wallet.transactions.edges.0.node.state')
 
-  if (txState === 'succeeded') {
+  const succeededFn = () => {
     nextStep()
+    window.dispatchEvent(
+      new CustomEvent(SUPPORT_SUCCESS_ANIMATION, {
+        detail: {
+          currency,
+        },
+      })
+    )
 
     if (windowRef) {
       windowRef.close()
     }
+  }
 
-    return null
+  if (txState === 'succeeded') {
+    if (currency === CURRENCY.HKD) {
+      setTimeout(() => {
+        succeededFn()
+      }, 3 * 1000)
+    } else {
+      succeededFn()
+    }
   }
 
   if (error) {
@@ -163,7 +183,6 @@ const USDTProcessingForm: React.FC<Props> = ({
   switchToCurrencyChoice,
 }) => {
   const [payTo] = useMutation<PayToMutate>(PAY_TO)
-
   const viewer = useContext(ViewerContext)
   const { address } = useAccount()
   const { data: balanceUSDTData } = useBalanceUSDT({})
@@ -211,9 +230,28 @@ const USDTProcessingForm: React.FC<Props> = ({
         chain: CHAIN.POLYGON,
         txHash: data.hash,
       },
+      update: (cache) => {
+        updateDonation({
+          cache,
+          id: article.id,
+          viewer,
+        })
+      },
     })
 
     await data.wait()
+
+    window.dispatchEvent(
+      new CustomEvent(SUPPORT_SUCCESS_ANIMATION, {
+        detail: {
+          transactionResult: data,
+          amount,
+          currency,
+          recipientId: recipient.id,
+          targetId,
+        },
+      })
+    )
 
     nextStep()
   }
@@ -260,9 +298,16 @@ const USDTProcessingForm: React.FC<Props> = ({
           <section className="hint">
             <p>
               <Translate
-                zh_hant="請在加密錢包內繼續操作，完成前請勿關閉此畫面"
-                zh_hans="请在加密钱包内继续操作，完成前请勿关闭此画面"
-                en="Continue in the wallet. Do not close the window."
+                zh_hant="請在加密錢包內繼續操作，"
+                zh_hans="请在加密钱包内继续操作，"
+                en="Continue in the wallet."
+              />
+            </p>
+            <p>
+              <Translate
+                zh_hant="結果以鏈上紀錄為主，稍後同步至 Matters"
+                zh_hans="结果以链上记录为主，稍后同步至 Matters"
+                en="Transaction will be updated to Matters shortly."
               />
             </p>
           </section>
@@ -309,6 +354,7 @@ const PaymentProcessingForm: React.FC<Props> = ({
           amount={amount}
           currency={currency}
           recipient={recipient}
+          article={article}
           txId={txId}
           targetId={targetId}
           nextStep={nextStep}

@@ -38,6 +38,7 @@ export const Dropdown: React.FC<PopperProps> = (props) => (
     animation="shift-away"
     theme="dropdown"
     zIndex={Z_INDEX.UNDER_GLOBAL_HEADER}
+    aria={{ content: 'describedby', expanded: true }}
     {...props}
   />
 )
@@ -51,6 +52,7 @@ export const Tooltip: React.FC<PopperProps> = (props) => (
     animation="shift-away"
     theme="tooltip"
     zIndex={Z_INDEX.UNDER_GLOBAL_HEADER}
+    aria={{ content: 'describedby', expanded: true }}
     {...props}
   />
 )

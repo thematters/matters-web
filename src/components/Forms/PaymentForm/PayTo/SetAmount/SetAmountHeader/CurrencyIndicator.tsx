@@ -1,0 +1,77 @@
+import {
+  Button,
+  IconFiatCurrency40,
+  IconLikeCoin40,
+  IconUSDTActive40,
+  TextIcon,
+  Translate,
+} from '~/components'
+
+import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
+
+import styles from './styles.css'
+
+type CurrencyIndicatorProps = {
+  currency: CURRENCY
+  switchToCurrencyChoice: () => void
+}
+
+const CurrencyIndicator: React.FC<CurrencyIndicatorProps> = ({
+  currency,
+  switchToCurrencyChoice,
+}) => {
+  const isUSDT = currency === CURRENCY.USDT
+  const isHKD = currency === CURRENCY.HKD
+  const isLike = currency === CURRENCY.LIKE
+
+  return (
+    <section>
+      {isUSDT && (
+        <TextIcon
+          icon={<IconUSDTActive40 size="md" />}
+          size="md"
+          spacing="xtight"
+          weight="md"
+        >
+          USDT
+        </TextIcon>
+      )}
+      {isHKD && (
+        <TextIcon
+          icon={<IconFiatCurrency40 size="md" />}
+          size="md"
+          spacing="xtight"
+          weight="md"
+        >
+          <Translate zh_hant="法幣 HKD" zh_hans="法币 HKD" en="HKD" />
+        </TextIcon>
+      )}
+      {isLike && (
+        <TextIcon
+          icon={<IconLikeCoin40 size="md" />}
+          size="md"
+          spacing="xtight"
+          weight="md"
+        >
+          LikeCoin
+        </TextIcon>
+      )}
+
+      <span className="change-button">
+        <Button onClick={switchToCurrencyChoice}>
+          <TextIcon size="xs" textDecoration="underline" color="grey-dark">
+            <Translate
+              zh_hant="更改支持方式"
+              zh_hans="更改支持方式"
+              en="Change"
+            />
+          </TextIcon>
+        </Button>
+      </span>
+
+      <style jsx>{styles}</style>
+    </section>
+  )
+}
+
+export default CurrencyIndicator

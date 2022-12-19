@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 
 import { Translate } from '~/components'
 
+import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
@@ -40,7 +41,7 @@ const CircleNewBroadcastNotice = ({ notice }: { notice: NoticeType }) => {
   })
 
   return (
-    <section className="container">
+    <section className="container" data-test-id={TEST_ID.CIRCLE_NEW_BROADCAST}>
       <section className="avatar-wrap">
         {isMultiActors ? (
           <NoticeTypeIcon type="comment" />

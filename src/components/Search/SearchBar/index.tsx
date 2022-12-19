@@ -1,21 +1,24 @@
 import { Formik } from 'formik'
-import { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useDebounce } from 'use-debounce'
 
 import {
   Button,
   Dropdown,
+  IconClear16,
   IconSearch16,
   LanguageContext,
-  SearchAutoComplete,
-  SearchOverview,
+  SearchQuickResult,
+  useNativeEventListener,
   useRoute,
 } from '~/components'
 
 import { INPUT_DEBOUNCE, Z_INDEX } from '~/common/enums'
-import { toPath, translate } from '~/common/utils'
+import { getSearchType, toPath, translate } from '~/common/utils'
 
 import styles from './styles.css'
+
+import { QuickResult } from '../SearchQuickResult/__generated__/QuickResult'
 
 interface SearchBarProps {
   onChange?: (key: string) => void
@@ -36,27 +39,112 @@ const SearchButton = () => {
   )
 }
 
+interface ClearButtonProps {
+  onClick: () => void
+}
+
+const ClearButton = ({ onClick }: ClearButtonProps) => {
+  const { lang } = useContext(LanguageContext)
+
+  return (
+    <Button
+      size={['2rem', '2rem']}
+      type="button"
+      aria-label={translate({ id: 'clear', lang })}
+      onClick={onClick}
+    >
+      <IconClear16 color="grey-dark" />
+    </Button>
+  )
+}
+
 export const SearchBar: React.FC<SearchBarProps> = ({
   onChange,
   hasDropdown = true,
 }) => {
-  const { getQuery, router } = useRoute()
+  const { getQuery, router, isInPath } = useRoute()
+  const isSearch = isInPath('SEARCH')
   const q = getQuery('q')
+  const type = getSearchType(getQuery('type'))
   const { lang } = useContext(LanguageContext)
-  const [search, setSearch] = useState('')
+  const [search, setSearch] = useState(q)
   const [debouncedSearch] = useDebounce(search, INPUT_DEBOUNCE)
   const textAriaLabel = translate({ id: 'search', lang })
-  const textPlaceholder = translate({
-    zh_hant: '搜尋作品、標籤、作者',
-    zh_hans: '搜索作品、标签、作者',
-    en: 'Search articles, tags and authors',
-    lang,
-  })
+  const textPlaceholder = translate({ id: 'search', lang })
+
+  const searchTextInput = useRef<HTMLInputElement>(null)
 
   // dropdown
   const [showDropdown, setShowDropdown] = useState(false)
   const closeDropdown = () => setShowDropdown(false)
   const openDropdown = () => setShowDropdown(true)
+
+  // quick result hotkeys
+  const [data, setData] = useState<QuickResult>()
+  const [activeItem, setActiveItem] = useState('input')
+  const items = ['input']
+  const { edges: userEdges } = data?.user || {}
+  const { edges: tagEdges } = data?.tag || {}
+  const hasUsers = userEdges && userEdges.length > 0
+  const hasTags = tagEdges && tagEdges.length > 0
+
+  if (hasUsers) {
+    userEdges.map(({ cursor }, i) => {
+      items.push(`user${cursor}`)
+    })
+  }
+  if (hasTags) {
+    tagEdges.map(({ cursor }, i) => {
+      items.push(`tag${cursor}`)
+    })
+  }
+
+  useNativeEventListener(
+    'keydown',
+    (e: { code: string; preventDefault: () => void }) => {
+      if (e.code === 'ArrowUp') {
+        if (!showDropdown) return
+
+        e.preventDefault()
+        const activeIndex = items.indexOf(activeItem)
+        if (activeIndex === 0) return
+
+        setActiveItem(items[activeIndex - 1])
+      }
+
+      if (e.code === 'ArrowDown') {
+        if (!showDropdown) return
+
+        e.preventDefault()
+        const activeIndex = items.indexOf(activeItem)
+        if (activeIndex === items.length - 1) return
+
+        setActiveItem(items[activeIndex + 1])
+      }
+
+      if (e.code === 'Escape') {
+        if (!showDropdown) return
+
+        setShowDropdown(false)
+      }
+    },
+    true
+  )
+
+  useEffect(() => {
+    if (
+      hasDropdown &&
+      showDropdown &&
+      searchTextInput.current &&
+      activeItem === 'input'
+    ) {
+      searchTextInput.current.focus()
+    }
+  }, [activeItem])
+
+  useEffect(() => {
+    setSearch(q)
+  }, [q])
 
   useEffect(() => {
     if (onChange) {
@@ -72,12 +160,19 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         const path = toPath({
           page: 'search',
           q: values.q.slice(0, 100),
+          type,
         })
-        router.push(path.href)
+
+        if (isSearch) {
+          router.replace(path.href)
+        } else {
+          router.push(path.href)
+        }
+
         closeDropdown()
       }}
     >
-      {({ values, handleSubmit, handleChange }) => {
+      {({ values, setValues, handleSubmit, handleChange }) => {
         if (!hasDropdown) {
           return (
             <form
@@ -85,10 +180,12 @@ export const SearchBar: React.FC<SearchBarProps> = ({
               aria-label={textPlaceholder}
               role="search"
               autoComplete="off"
+              action=""
             >
               <input
                 type="search"
                 name="q"
+                ref={searchTextInput}
                 aria-label={textAriaLabel}
                 placeholder={textPlaceholder}
                 autoCorrect="off"
@@ -100,6 +197,14 @@ export const SearchBar: React.FC<SearchBarProps> = ({
               />
 
               <SearchButton />
+              {search.length > 0 && (
+                <ClearButton
+                  onClick={() => {
+                    setValues({ q: '' })
+                    setSearch('')
+                  }}
+                />
+              )}
 
               <style jsx>{styles}</style>
             </form>
@@ -109,10 +214,14 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         return (
           <Dropdown
             content={
-              debouncedSearch ? (
-                <SearchAutoComplete searchKey={debouncedSearch} />
-              ) : (
-                <SearchOverview />
+              debouncedSearch && (
+                <SearchQuickResult
+                  searchKey={debouncedSearch}
+                  onUpdateData={(newData: QuickResult | undefined) => {
+                    setData(newData)
+                  }}
+                  activeItem={activeItem}
+                />
               )
             }
             trigger={undefined}
@@ -122,10 +231,11 @@ export const SearchBar: React.FC<SearchBarProps> = ({
             visible={showDropdown}
             zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
           >
-            <form onSubmit={handleSubmit} autoComplete="off">
+            <form onSubmit={handleSubmit} autoComplete="off" action="">
               <input
                 type="search"
                 name="q"
+                ref={searchTextInput}
                 aria-label={textAriaLabel}
                 placeholder={textPlaceholder}
                 value={values.q}

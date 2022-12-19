@@ -10,10 +10,14 @@ import {
   Translate,
 } from '~/components'
 
+import { UNIVERSAL_AUTH_SOURCE } from '~/common/enums'
+
+import SourceHeader from './SourceHeader'
 import styles from './styles.css'
 
 interface FormProps {
   purpose: 'dialog' | 'page'
+  source: UNIVERSAL_AUTH_SOURCE
   gotoWalletAuth: () => void
   gotoEmailLogin: () => void
   closeDialog?: () => void
@@ -21,6 +25,7 @@ interface FormProps {
 
 export const SelectAuthMethodForm: React.FC<FormProps> = ({
   purpose,
+  source,
   gotoWalletAuth,
   gotoEmailLogin,
   closeDialog,
@@ -28,7 +33,7 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
   const isInPage = purpose === 'page'
 
   const InnerForm = (
-    <Form.List groupName={<Translate id="authMethod" />}>
+    <Form.List groupName={isInPage ? <Translate id="authMethod" /> : null}>
       <Form.List.Item
         title={
           <TextIcon
@@ -48,6 +53,7 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
           />
         }
         onClick={gotoWalletAuth}
+        role="button"
       />
       <Form.List.Item
         title={
@@ -68,6 +74,7 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
           />
         }
         onClick={gotoEmailLogin}
+        role="button"
       />
     </Form.List>
   )
@@ -97,6 +104,8 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
       )}
 
       <Dialog.Content hasGrow>
+        <SourceHeader source={source} />
+
         {InnerForm}
 
         <Spacer size="xloose" />

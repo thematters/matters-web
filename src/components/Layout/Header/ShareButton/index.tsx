@@ -19,7 +19,8 @@ export const ShareButton: React.FC<Omit<ShareDialogProps, 'children'>> = (
     <ShareDialog {...props}>
       {({ openDialog: openShareDialog }) => (
         <Button
-          aria-label={translate({ id: 'back', lang })}
+          aria-label={translate({ id: 'share', lang })}
+          aria-haspopup="dialog"
           bgColor="half-black"
           onClick={openShareDialog}
         >

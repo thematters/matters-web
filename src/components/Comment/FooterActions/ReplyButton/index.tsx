@@ -16,6 +16,7 @@ import {
   CLOSE_ACTIVE_DIALOG,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   PATHS,
+  UNIVERSAL_AUTH_SOURCE,
 } from '~/common/enums'
 import { appendTarget, translate } from '~/common/utils'
 
@@ -107,7 +108,11 @@ const ReplyButton = ({
       ? {
           onClick: () => {
             window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
-            window.dispatchEvent(new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG))
+            window.dispatchEvent(
+              new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+                detail: { source: UNIVERSAL_AUTH_SOURCE.comment },
+              })
+            )
           },
         }
       : appendTarget(PATHS.LOGIN, true)
@@ -137,6 +142,7 @@ const ReplyButton = ({
           onClick={openCommentFormDialog}
           inCard={inCard}
           disabled={disabled}
+          aria-haspopup="dialog"
         />
       )}
     </CommentFormDialog>

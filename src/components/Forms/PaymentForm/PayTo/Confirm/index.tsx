@@ -8,6 +8,7 @@ import {
   Button,
   Dialog,
   Form,
+  IconExternalLink16,
   LanguageContext,
   Spinner,
   TextIcon,
@@ -17,6 +18,7 @@ import {
 } from '~/components'
 import PAY_TO from '~/components/GQL/mutations/payTo'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
+import updateDonation from '~/components/GQL/updates/donation'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { parseFormSubmitErrors, validatePaymentPassword } from '~/common/utils'
@@ -25,11 +27,21 @@ import PaymentInfo from '../../PaymentInfo'
 import styles from './styles.css'
 
 import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
-import { PayTo as PayToMutate } from '~/components/GQL/mutations/__generated__/PayTo'
+import {
+  PayTo as PayToMutate,
+  PayTo_payTo_transaction as PayToTx,
+} from '~/components/GQL/mutations/__generated__/PayTo'
 import { WalletBalance } from '~/components/GQL/queries/__generated__/WalletBalance'
+import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
+
+interface SetAmountOpenTabCallbackValues {
+  window: Window
+  transaction: PayToTx
+}
 
 interface FormProps {
   amount: number
+  article: ArticleDetailPublic_article
   currency: CURRENCY
   recipient: UserDonationRecipient
   targetId: string
@@ -37,6 +49,9 @@ interface FormProps {
   switchToSetAmount: () => void
   switchToResetPassword: () => void
   switchToCurrencyChoice: () => void
+  openTabCallback: (values: SetAmountOpenTabCallbackValues) => void
+  tabUrl?: string
+  tx?: PayToTx
 }
 
 interface FormValues {
@@ -45,6 +60,7 @@ interface FormValues {
 
 const Confirm: React.FC<FormProps> = ({
   amount,
+  article,
   currency,
   recipient,
   targetId,
@@ -52,6 +68,9 @@ const Confirm: React.FC<FormProps> = ({
   switchToSetAmount,
   switchToResetPassword,
   switchToCurrencyChoice,
+  openTabCallback,
+  tabUrl,
+  tx,
 }) => {
   const formId = 'pay-to-confirm-form'
 
@@ -106,6 +125,16 @@ const Confirm: React.FC<FormProps> = ({
             purpose: 'donation',
             recipientId: recipient.id,
             targetId,
+          },
+          // optimisticResponse: {
+
+          // },
+          update: (cache) => {
+            updateDonation({
+              cache,
+              id: article.id,
+              viewer,
+            })
           },
         })
 
@@ -190,7 +219,11 @@ const Confirm: React.FC<FormProps> = ({
           {currency === CURRENCY.HKD && !isWalletInsufficient && (
             <>
               <p className="hint">
-                <Translate id="hintPaymentPassword" />
+                <Translate
+                  zh_hant="數入六位數字交易密碼即可完成："
+                  zh_hans="数入六位数字交易密码即可完成："
+                  en="Please Enter a 6-digit payment password"
+                />
               </p>
               {InnerForm}
             </>
@@ -207,7 +240,7 @@ const Confirm: React.FC<FormProps> = ({
             textColor="grey"
             onClick={switchToResetPassword}
           >
-            <Translate id="forgetPassword" />？
+            <Translate id="forgetPaymentPassword" />？
           </Dialog.Footer.Button>
         )}
         {currency === CURRENCY.USDT && (
@@ -217,6 +250,23 @@ const Confirm: React.FC<FormProps> = ({
             onClick={submitCallback}
           >
             <Translate zh_hant="確認送出" zh_hans="确认送出" en="Confirm" />
+          </Dialog.Footer.Button>
+        )}
+        {currency === CURRENCY.LIKE && (
+          <Dialog.Footer.Button
+            onClick={() => {
+              const payWindow = window.open(tabUrl, '_blank')
+              if (payWindow && tx) {
+                openTabCallback({ window: payWindow, transaction: tx })
+              }
+            }}
+            icon={<IconExternalLink16 size="xs" />}
+          >
+            <Translate
+              zh_hant="前往 Liker Land 支付"
+              zh_hans="前往 Liker Land 支付"
+              en="Go to Liker Land for payment"
+            />
           </Dialog.Footer.Button>
         )}
       </Dialog.Footer>

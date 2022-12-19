@@ -21,7 +21,7 @@ const SidebarCollection = ({
 }: SidebarCollectionProps) => {
   return (
     <SearchSelectDialog
-      title="extendArticle"
+      title="collectArticle"
       hint="hintEditCollection"
       searchType="Article"
       searchExclude={SearchExclude.blocked}
@@ -34,7 +34,7 @@ const SidebarCollection = ({
       {({ openDialog }) => (
         <Box
           icon={<IconCollection24 size="md" />}
-          title="extendArticle"
+          title="collectArticle"
           onClick={openDialog}
           disabled={disabled}
         >

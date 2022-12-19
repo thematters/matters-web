@@ -1,4 +1,5 @@
 import { ethers } from 'ethers'
+import { useContext } from 'react'
 import {
   erc20ABI,
   useAccount,
@@ -7,6 +8,8 @@ import {
   useContractWrite,
   usePrepareContractWrite,
 } from 'wagmi'
+
+import { ViewerContext } from '~/components'
 
 import { supportedChains } from '~/common/utils'
 
@@ -29,13 +32,30 @@ export const useBalanceUSDT = ({
 }: {
   address?: string | null
 }) => {
-  const { address } = useAccount()
+  const viewer = useContext(ViewerContext)
+  const viewerEthAddress = viewer.info.ethAddress
 
   return useBalance({
-    addressOrName: (addr || address) as `0x${string}`,
+    addressOrName: (addr || viewerEthAddress) as `0x${string}`,
     token: (process.env.NEXT_PUBLIC_USDT_CONTRACT_ADDRESS ||
       '') as `0x${string}`,
     chainId: supportedChains[0].id,
+    cacheTime: 5_000,
+  })
+}
+
+export const useBalanceEther = ({
+  address: addr,
+}: {
+  address?: string | null
+}) => {
+  const viewer = useContext(ViewerContext)
+  const viewerEthAddress = viewer.info.ethAddress
+
+  return useBalance({
+    addressOrName: (addr || viewerEthAddress) as `0x${string}`,
+    chainId: supportedChains[0].id,
+    cacheTime: 5_000,
   })
 }
 

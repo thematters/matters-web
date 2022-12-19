@@ -41,7 +41,7 @@ const PaymentInfo: React.FC<PaymentInfoProps> = ({
         <Translate
           zh_hant="你將遞出支持資金給"
           zh_hans="你将递出支持资金给"
-          en="You will hand over support funds to"
+          en="You will support"
         />
       </p>
       <Avatar user={recipient} size="xxxl" />
@@ -57,8 +57,7 @@ const PaymentInfo: React.FC<PaymentInfoProps> = ({
               <TextIcon
                 icon={<IconCopy16 color="green" size="sm" />}
                 spacing="xxtight"
-                size="xs"
-                weight="md"
+                size="md"
                 color="green"
                 textPlacement="left"
               >
@@ -77,12 +76,15 @@ const PaymentInfo: React.FC<PaymentInfoProps> = ({
           </Button>
         </div>
       )}
+
       <p className="amount">
         <b>
           {currency} {formatAmount(amount, currency === CURRENCY.USDT ? 2 : 0)}
         </b>
       </p>
+
       {children}
+
       <style jsx>{styles}</style>
     </section>
   )

@@ -58,7 +58,7 @@ const BaseDropdownActions = ({
         title: 'moreActions',
       }}
     >
-      {({ openDialog, ref }) => (
+      {({ openDialog, type, ref }) => (
         <Button
           spacing={['xtight', 'tight']}
           textColor="gold"
@@ -66,7 +66,7 @@ const BaseDropdownActions = ({
           bgActiveColor="gold"
           borderColor="gold"
           onClick={openDialog}
-          aria-haspopup="true"
+          aria-haspopup={type}
           ref={ref}
         >
           <TextIcon icon={<IconPen16 />} weight="md" size="md-s">

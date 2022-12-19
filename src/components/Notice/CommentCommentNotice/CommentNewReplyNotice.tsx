@@ -2,6 +2,8 @@ import gql from 'graphql-tag'
 
 import { Translate } from '~/components'
 
+import { TEST_ID } from '~/common/enums'
+
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeArticleTitle from '../NoticeArticleTitle'
 import NoticeCircleName from '../NoticeCircleName'
@@ -28,7 +30,7 @@ const CommentNewReplyNotice = ({ notice }: { notice: NoticeType }) => {
     notice.reply?.node.__typename === 'Circle' ? notice.reply.node : null
 
   return (
-    <section className="container">
+    <section className="container" data-test-id={TEST_ID.COMMENT_NEW_REPLY}>
       <section className="avatar-wrap">
         {isMultiActors ? (
           <NoticeTypeIcon type="comment" />

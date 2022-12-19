@@ -1,27 +1,35 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-// import { useState } from 'react'
+import { useState } from 'react'
 
 import {
   EmptyTransaction,
+  EmptyTransactionCurrency,
+  EmptyTransactionSubscription,
+  EmptyTransactionSupport,
   Head,
   InfiniteScroll,
   Layout,
   List,
   Spinner,
+  Tabs,
   Transaction,
+  Translate,
 } from '~/components'
 
 import { analytics, mergeConnections } from '~/common/utils'
 
-// import { Currency, CurrencySwitch } from './CurrencySwitch'
+import { Currency, CurrencySwitch } from './CurrencySwitch'
 import styles from './styles.css'
 
-// import { TransactionCurrency } from '@/__generated__/globalTypes'
 import { MeTransactions } from './__generated__/MeTransactions'
 
 const ME_TRANSACTIONS = gql`
-  query MeTransactions($after: String) {
+  query MeTransactions(
+    $after: String
+    $purpose: TransactionPurpose
+    $currency: TransactionCurrency
+  ) {
     viewer {
       id
       wallet {
@@ -29,7 +37,11 @@ const ME_TRANSACTIONS = gql`
           input: {
             first: 20
             after: $after
-            states: [canceled, failed, pending, succeeded]
+            filter: {
+              states: [canceled, failed, pending, succeeded]
+              purpose: $purpose
+              currency: $currency
+            }
           }
         ) {
           pageInfo {
@@ -50,11 +62,25 @@ const ME_TRANSACTIONS = gql`
   ${Transaction.fragments.transaction}
 `
 
-const BaseTransactions = () => {
-  // const [currencyType, setCurrencyType] = useState<Currency>(Currency.ALL)
+export enum Purpose {
+  ALL = 'all',
+  DONATION = 'donation',
+  SUBSCRIPTION = 'subscriptionSplit',
+}
+
+interface BaseTransactionsProps {
+  currency: Currency
+  purpose: Purpose
+}
+
+const BaseTransactions = ({ currency, purpose }: BaseTransactionsProps) => {
   const { data, loading, fetchMore, refetch } = useQuery<MeTransactions>(
     ME_TRANSACTIONS,
     {
+      variables: {
+        currency: currency === Currency.ALL ? undefined : currency,
+        purpose: purpose === Purpose.ALL ? undefined : purpose,
+      },
       fetchPolicy: 'network-only',
     }
   )
@@ -71,6 +97,18 @@ const BaseTransactions = () => {
   const { edges, pageInfo } = data.viewer.wallet.transactions
 
   if (!edges || edges.length <= 0 || !pageInfo) {
+    if (currency !== Currency.ALL) {
+      return <EmptyTransactionCurrency />
+    }
+
+    if (purpose === Purpose.DONATION) {
+      return <EmptyTransactionSupport />
+    }
+
+    if (purpose === Purpose.SUBSCRIPTION) {
+      return <EmptyTransactionSubscription />
+    }
+
     return <EmptyTransaction />
   }
 
@@ -80,7 +118,9 @@ const BaseTransactions = () => {
       location: edges.length,
     })
     return fetchMore({
-      variables: { after: pageInfo.endCursor },
+      variables: {
+        after: pageInfo.endCursor,
+      },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
           oldData: previousResult,
@@ -90,32 +130,12 @@ const BaseTransactions = () => {
     })
   }
 
-  // let filteredEdges = edges
-  // if (currencyType === Currency.HKD) {
-  //   filteredEdges = edges.filter(
-  //     (e) => e.node.currency === TransactionCurrency.HKD
-  //   )
-  // }
-
-  // if (currencyType === Currency.LIKE) {
-  //   filteredEdges = edges.filter(
-  //     (e) => e.node.currency === TransactionCurrency.LIKE
-  //   )
-  // }
-
   return (
     <InfiniteScroll
       hasNextPage={pageInfo.hasNextPage}
       loadMore={loadMore}
       pullToRefresh={refetch}
     >
-      {/* <section className="CurrencySwitch">
-        <CurrencySwitch
-          currency={currencyType}
-          setCurrency={(c) => setCurrencyType(c)}
-        />
-      </section> */}
-
       <List>
         {edges.map(({ node, cursor }) => (
           <List.Item key={cursor}>
@@ -128,17 +148,56 @@ const BaseTransactions = () => {
   )
 }
 
-const Transactions = () => (
-  <Layout.Main>
-    <Layout.Header
-      left={<Layout.Header.BackButton />}
-      right={<Layout.Header.Title id="paymentTransactions" />}
-    />
+const Transactions = () => {
+  const [currency, setCurrency] = useState<Currency>(Currency.ALL)
+  const [purpose, setPurpose] = useState<Purpose>(Purpose.ALL)
 
-    <Head title={{ id: 'paymentTransactions' }} />
+  const isALL = purpose === Purpose.ALL
+  const isDonaion = purpose === Purpose.DONATION
+  const isSubscription = purpose === Purpose.SUBSCRIPTION
 
-    <BaseTransactions />
-  </Layout.Main>
-)
+  return (
+    <Layout.Main>
+      <Layout.Header
+        left={<Layout.Header.BackButton />}
+        right={<Layout.Header.Title id="paymentTransactions" />}
+      />
+
+      <Head title={{ id: 'paymentTransactions' }} />
+
+      <Tabs
+        sticky
+        side={
+          // TODO: hide when purpose is subscription?
+          <section className="CurrencySwitch">
+            <CurrencySwitch
+              currency={currency}
+              setCurrency={(c) => setCurrency(c)}
+            />
+          </section>
+        }
+      >
+        <Tabs.Tab selected={isALL} onClick={() => setPurpose(Purpose.ALL)}>
+          <Translate zh_hans="全部" zh_hant="全部" en="All" />
+        </Tabs.Tab>
+
+        <Tabs.Tab
+          selected={isDonaion}
+          onClick={() => setPurpose(Purpose.DONATION)}
+        >
+          <Translate zh_hans="支持" zh_hant="支持" en="Support" />
+        </Tabs.Tab>
+
+        <Tabs.Tab
+          selected={isSubscription}
+          onClick={() => setPurpose(Purpose.SUBSCRIPTION)}
+        >
+          <Translate id="subscriptions" />
+        </Tabs.Tab>
+      </Tabs>
+      <BaseTransactions currency={currency} purpose={purpose} />
+    </Layout.Main>
+  )
+}
 
 export default Transactions

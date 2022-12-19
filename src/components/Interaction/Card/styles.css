@@ -2,6 +2,7 @@
   @mixin all-transition;
 
   position: relative;
+  display: block;
   outline: none;
 
   &:not(.disabled) {

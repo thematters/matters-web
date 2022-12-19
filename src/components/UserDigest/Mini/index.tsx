@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import { LinkWrapper, Translate } from '~/components'
 import { Avatar, AvatarProps, AvatarSize } from '~/components/Avatar'
 
+import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 
 import { fragments } from './gql'
@@ -27,9 +28,10 @@ export type UserDigestMiniProps = {
 
   avatarSize?: Extract<AvatarSize, 'xs' | 'sm' | 'md' | 'lg'>
   textSize?: 'xs' | 'sm-s' | 'sm' | 'md-s' | 'md'
-  textWeight?: 'md'
+  textWeight?: 'md' | 'semibold'
   nameColor?: 'black' | 'white' | 'grey-darker' | 'green'
   direction?: 'row' | 'column'
+  spacing?: 'xxtight' | 'xtight'
 
   hasAvatar?: boolean
   hasDisplayName?: boolean
@@ -61,6 +63,7 @@ const Mini = ({
   textWeight,
   nameColor = 'black',
   direction = 'row',
+  spacing = 'xtight',
 
   hasAvatar,
   hasDisplayName,
@@ -79,6 +82,7 @@ const Mini = ({
     [`text-size-${textSize}`]: !!textSize,
     [`text-weight-${textWeight}`]: !!textWeight,
     [`name-color-${nameColor}`]: !!nameColor,
+    [`spacing-${spacing}`]: !!spacing,
     hasAvatar,
     disabled: disabled || isArchived,
   })
@@ -89,7 +93,10 @@ const Mini = ({
 
   if (isArchived) {
     return (
-      <span className={containerClasses}>
+      <span
+        className={containerClasses}
+        data-test-id={TEST_ID.DIGEST_USER_MINI}
+      >
         {hasAvatar && <Avatar size={avatarSize} />}
 
         <span className={nameClasses}>
@@ -106,7 +113,12 @@ const Mini = ({
   }
 
   return (
-    <LinkWrapper {...path} disabled={disabled} onClick={onClick}>
+    <LinkWrapper
+      {...path}
+      disabled={disabled}
+      onClick={onClick}
+      testId={TEST_ID.DIGEST_USER_MINI}
+    >
       <section className={containerClasses}>
         {hasAvatar && <Avatar size={avatarSize} user={user} />}
 

@@ -2,6 +2,8 @@ import classNames from 'classnames'
 
 import { Card, IconChecked, IconUnChecked, Tag } from '~/components'
 
+import { TEST_ID } from '~/common/enums'
+
 import styles from '../styles.css'
 
 import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
@@ -25,7 +27,11 @@ const SearchSelectTag: React.FC<SearchSelectTagProps> = ({
   })
 
   return (
-    <Card spacing={['base', 'base']} onClick={() => onClick(tag)}>
+    <Card
+      spacing={['base', 'base']}
+      onClick={() => onClick(tag)}
+      testId={TEST_ID.SEARCH_RESULTS_ITEM}
+    >
       <section className={nodeClass}>
         <Tag tag={tag} type="list" hasCount disabled />
 

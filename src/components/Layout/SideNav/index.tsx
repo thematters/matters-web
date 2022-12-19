@@ -22,7 +22,7 @@ import {
 } from '~/components'
 
 import { PATHS, Z_INDEX } from '~/common/enums'
-import { translate } from '~/common/utils'
+import { toPath, translate } from '~/common/utils'
 
 import MeAvatar from '../MeAvatar'
 import NavMenu from '../NavMenu'
@@ -33,7 +33,7 @@ import styles from './styles.css'
 const SideNav = () => {
   const { lang } = useContext(LanguageContext)
 
-  const { isInPath, isPathStartWith, getQuery } = useRoute()
+  const { router, isInPath, isPathStartWith, getQuery } = useRoute()
   const isMediumUp = useResponsive('md-up')
   const isLargeUp = useResponsive('lg-up')
   const viewer = useContext(ViewerContext)
@@ -60,7 +60,7 @@ const SideNav = () => {
         </Link>
       </section>
 
-      <ul>
+      <ul role="menu">
         <NavListItem
           name={<Translate id="discover" />}
           icon={<IconNavHome24 size="md" />}
@@ -81,9 +81,7 @@ const SideNav = () => {
 
         {viewer.isAuthed && (
           <NavListItem
-            name={
-              <Translate zh_hant="通知" zh_hans="通知" en="Notifications" />
-            }
+            name={<Translate id="notifications" />}
             icon={<UnreadIcon.Notification />}
             activeIcon={<UnreadIcon.Notification active />}
             active={isInNotification}
@@ -99,7 +97,17 @@ const SideNav = () => {
             activeIcon={<IconNavSearch24 size="md" color="green" />}
             active={isInSearch}
             isMediumUp={isMediumUp}
-            href={PATHS.SEARCH}
+            onClick={() => {
+              const path = toPath({
+                page: 'search',
+              })
+
+              if (isInSearch) {
+                router.replace(path.href)
+              } else {
+                router.push(path.href)
+              }
+            }}
           />
         )}
 
@@ -110,7 +118,7 @@ const SideNav = () => {
             activeIcon={<IconNavSettings24 size="md" color="green" />}
             active={isInSettings}
             isMediumUp={isMediumUp}
-            href={PATHS.SETTINGS}
+            href={PATHS.ME_SETTINGS}
           />
         )}
 
@@ -143,13 +151,13 @@ const SideNav = () => {
               active={isInMe}
               isMediumUp={isMediumUp}
               canScrollTop={false}
-              aira-haspopup="true"
+              aira-haspopup="menu"
             />
           </Dropdown>
         )}
 
         {!isInDraftDetail && (
-          <li>
+          <li role="menuitem">
             <WriteButton
               allowed={!viewer.shouldSetupLikerID}
               authed={viewer.isAuthed}

@@ -69,6 +69,7 @@ export const SearchAutoComplete = (props: SearchAutoCompleteProps) => {
               page: 'search',
               q: key,
             })}
+            is="link"
           >
             <span className={itemClasses}>{key}</span>
           </Menu.Item>

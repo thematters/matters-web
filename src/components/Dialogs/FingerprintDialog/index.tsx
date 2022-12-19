@@ -12,7 +12,10 @@ import {
 } from '~/components'
 
 import { ArticleAccessType } from '@/__generated__/globalTypes'
-import { ArticleFingerprintPublic } from './__generated__/ArticleFingerprintPublic'
+import {
+  ArticleFingerprintPublic,
+  ArticleFingerprintPublic_article_Article,
+} from './__generated__/ArticleFingerprintPublic'
 import { FingerprintArticle } from './__generated__/FingerprintArticle'
 
 interface FingerprintDialogProps {
@@ -43,10 +46,12 @@ const fragments = {
 }
 
 const ArticleFingerprintGQL = gql`
-  query ArticleFingerprintPublic($mediaHash: String!) {
-    article(input: { mediaHash: $mediaHash }) {
-      id
-      ...FingerprintArticle
+  query ArticleFingerprintPublic($id: ID!) {
+    article: node(input: { id: $id }) {
+      ... on Article {
+        id
+        ...FingerprintArticle
+      }
     }
   }
   ${fragments.article}
@@ -66,7 +71,7 @@ const BaseFingerprintDialog = ({
     loading, // error,
     refetch,
   } = usePublicQuery<ArticleFingerprintPublic>(ArticleFingerprintGQL, {
-    variables: { mediaHash: article.mediaHash },
+    variables: { id: article.id },
     skip: true, // skip first call
   })
 
@@ -95,7 +100,12 @@ const BaseFingerprintDialog = ({
         <Dialog.Content hasGrow>
           <DynamicContent
             dataHash={article.dataHash || ''}
-            iscnId={article?.iscnId || data?.article?.iscnId || ''}
+            iscnId={
+              article?.iscnId ||
+              (data?.article as ArticleFingerprintPublic_article_Article)
+                ?.iscnId ||
+              ''
+            }
             iscnPublish={!!article.drafts?.[0]?.iscnPublish}
             showSecret={showSecret}
             isAuthor={viewer.id === article.author.id}

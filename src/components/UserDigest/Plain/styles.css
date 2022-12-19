@@ -6,5 +6,8 @@
         text-decoration: underline;
       }
     }
+    & .hasUnderline {
+      text-decoration: underline;
+    }
   }
 }

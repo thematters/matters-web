@@ -7,18 +7,16 @@
     @mixin flex-center-start;
 
     margin: var(--spacing-base) 0;
-    font-size: 1rem;
+    font-size: var(--font-size-md-s);
     line-height: 1.5rem;
 
+    & :global(> *) {
+      flex-shrink: 0;
+    }
+
     & .userInfo {
-      @mixin inline-flex-center-start;
-
-      gap: var(--spacing-xx-tight);
+      flex-shrink: 1;
       margin: 0 var(--spacing-x-tight);
-
-      & .userName {
-        font-weight: var(--font-weight-semibold);
-      }
     }
   }
 

@@ -49,9 +49,6 @@ const BaseDialog = ({ id, children }: Props) => {
     baseOpenDialog()
   }
 
-  // const { getQuery } = useRoute()
-  // const id = getQuery('tagId')
-
   const isAdd = currStep === 'add'
   const isList = currStep === 'list'
   const isRemove = currStep === 'remove'

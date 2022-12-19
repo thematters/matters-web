@@ -54,7 +54,7 @@ const BaseDropdownActions = ({
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
     <Menu width={isInDropdown ? 'sm' : undefined}>
       {isCircleOwner && (
-        <Menu.Item {...toPath({ page: 'circleSettings', circle })}>
+        <Menu.Item {...toPath({ page: 'circleSettings', circle })} is="link">
           <TextIcon icon={<IconEdit16 size="md" />} size="md" spacing="base">
             <Translate id="manageCircle" />
           </TextIcon>
@@ -62,7 +62,7 @@ const BaseDropdownActions = ({
       )}
 
       {isCircleOwner && (
-        <Menu.Item {...toPath({ page: 'circleAnalytics', circle })}>
+        <Menu.Item {...toPath({ page: 'circleAnalytics', circle })} is="link">
           <TextIcon
             icon={<IconAnalytics24 size="md" />}
             size="md"
@@ -74,7 +74,7 @@ const BaseDropdownActions = ({
       )}
 
       {hasUnsubscribeCircle && (
-        <Menu.Item onClick={openUnsubscribeCircleDialog}>
+        <Menu.Item onClick={openUnsubscribeCircleDialog} aria-haspopup="dialog">
           <TextIcon icon={<IconLogout24 size="md" />} size="md" spacing="base">
             <Translate id="unsubscribeCircle" />
           </TextIcon>
@@ -94,11 +94,11 @@ const BaseDropdownActions = ({
         title: 'moreActions',
       }}
     >
-      {({ openDialog, ref }) => (
+      {({ openDialog, type, ref }) => (
         <Button
           bgColor="half-black"
           aria-label={translate({ id: 'moreActions', lang })}
-          aria-haspopup="true"
+          aria-haspopup={type}
           onClick={openDialog}
           ref={ref}
         >

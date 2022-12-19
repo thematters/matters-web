@@ -49,7 +49,7 @@ const ListItem: React.FC<React.PropsWithChildren<ListItemProps>> & {
   })
 
   return (
-    <li>
+    <li role="listitem">
       <Card bgColor="white" spacing={[0, 0]} onClick={onClick}>
         <section className="item">
           <section>

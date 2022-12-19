@@ -11,6 +11,7 @@ import {
 } from '~/components'
 
 import { PATHS, TEXT } from '~/common/enums'
+import { toPath } from '~/common/utils'
 
 import UnreadIcon from '../UnreadIcon'
 import NavListItem from './NavListItem'
@@ -18,7 +19,7 @@ import styles from './styles.css'
 
 const NavBar = () => {
   const viewer = useContext(ViewerContext)
-  const { isInPath } = useRoute()
+  const { router, isInPath } = useRoute()
   const isInHome = isInPath('HOME')
   const isInFollow = isInPath('FOLLOW')
   const isInNotification = isInPath('ME_NOTIFICATIONS')
@@ -46,7 +47,7 @@ const NavBar = () => {
         />
 
         {!isInDraftDetail && (
-          <li>
+          <li role="menuitem">
             <WriteButton
               allowed={!viewer.shouldSetupLikerID}
               authed={viewer.isAuthed}
@@ -60,12 +61,22 @@ const NavBar = () => {
           icon={<IconNavSearch24 size="md" />}
           activeIcon={<IconNavSearch24 size="md" color="green" />}
           active={isInSearch}
-          href={PATHS.SEARCH}
+          onClick={() => {
+            const path = toPath({
+              page: 'search',
+            })
+
+            if (isInSearch) {
+              router.replace(path.href)
+            } else {
+              router.push(path.href)
+            }
+          }}
         />
 
         {viewer.isAuthed && (
           <NavListItem
-            name={TEXT.zh_hant.notification}
+            name={TEXT.zh_hant.notifications}
             icon={<UnreadIcon.Notification />}
             activeIcon={<UnreadIcon.Notification active />}
             active={isInNotification}
@@ -79,7 +90,7 @@ const NavBar = () => {
             icon={<IconNavSettings24 size="md" />}
             activeIcon={<IconNavSettings24 size="md" color="green" />}
             active={isInSettings}
-            href={PATHS.SETTINGS}
+            href={PATHS.ME_SETTINGS}
           />
         )}
       </ul>

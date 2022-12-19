@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic'
+import { useState } from 'react'
 
 import {
   Dialog,
@@ -10,7 +11,12 @@ import {
   VerificationLinkSent,
 } from '~/components'
 
-import { CLOSE_ACTIVE_DIALOG, OPEN_UNIVERSAL_AUTH_DIALOG } from '~/common/enums'
+import {
+  CLOSE_ACTIVE_DIALOG,
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  TEST_ID,
+  UNIVERSAL_AUTH_SOURCE,
+} from '~/common/enums'
 
 import { AuthResultType } from '@/__generated__/globalTypes'
 
@@ -62,7 +68,14 @@ type Step =
   // misc
   | 'complete'
 
-const BaseUniversalAuthDialog = () => {
+const BaseUniversalAuthDialog = ({
+  initSource,
+}: {
+  initSource?: UNIVERSAL_AUTH_SOURCE
+}) => {
+  const [source, setSource] = useState<UNIVERSAL_AUTH_SOURCE>(
+    initSource || UNIVERSAL_AUTH_SOURCE.enter
+  )
   const { currStep, forward } = useStep<Step>('select-login-method')
 
   const {
@@ -76,13 +89,25 @@ const BaseUniversalAuthDialog = () => {
   }
 
   useEventListener(CLOSE_ACTIVE_DIALOG, closeDialog)
-  useEventListener(OPEN_UNIVERSAL_AUTH_DIALOG, openDialog)
+  useEventListener(
+    OPEN_UNIVERSAL_AUTH_DIALOG,
+    (payload: { [key: string]: any }) => {
+      setSource(payload?.source || UNIVERSAL_AUTH_SOURCE.enter)
+      openDialog()
+    }
+  )
 
   return (
-    <Dialog size="sm" isOpen={show} onDismiss={closeDialog}>
+    <Dialog
+      size="sm"
+      isOpen={show}
+      onDismiss={closeDialog}
+      testId={TEST_ID.DIALOG_AUTH}
+    >
       {currStep === 'select-login-method' && (
         <DynamicSelectAuthMethodForm
           purpose="dialog"
+          source={source}
           gotoWalletAuth={() => forward('wallet-select')}
           gotoEmailLogin={() => forward('email-login')}
           closeDialog={closeDialog}
@@ -158,13 +183,21 @@ const BaseUniversalAuthDialog = () => {
 }
 
 const UniversalAuthDialog = () => {
+  const [source, setSource] = useState<UNIVERSAL_AUTH_SOURCE>()
+
   const Children = ({ openDialog }: { openDialog: () => void }) => {
-    useEventListener(OPEN_UNIVERSAL_AUTH_DIALOG, openDialog)
+    useEventListener(
+      OPEN_UNIVERSAL_AUTH_DIALOG,
+      (payload: { [key: string]: any }) => {
+        setSource(payload?.source || '')
+        openDialog()
+      }
+    )
     return null
   }
 
   return (
-    <Dialog.Lazy mounted={<BaseUniversalAuthDialog />}>
+    <Dialog.Lazy mounted={<BaseUniversalAuthDialog initSource={source} />}>
       {({ openDialog }) => <Children openDialog={openDialog} />}
     </Dialog.Lazy>
   )

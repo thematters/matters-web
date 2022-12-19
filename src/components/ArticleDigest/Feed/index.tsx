@@ -1,8 +1,9 @@
 import React from 'react'
 
-import { Card, CircleDigest, ResponsiveImage } from '~/components'
+import { Card, CircleDigest, DateTime, ResponsiveImage } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 
+import { TEST_ID } from '~/common/enums'
 import { stripHtml, toPath, UtmParams } from '~/common/utils'
 
 import { ArticleDigestTitle } from '../Title'
@@ -17,6 +18,7 @@ import { ArticleDigestFeedArticlePublic } from './__generated__/ArticleDigestFee
 export type ArticleDigestFeedControls = {
   onClick?: () => any
   onClickAuthor?: () => void
+  isConciseFooter?: boolean
   hasFollow?: boolean
   hasCircle?: boolean
 }
@@ -34,6 +36,7 @@ const BaseArticleDigestFeed = ({
   header,
   date,
 
+  isConciseFooter = false,
   hasFollow,
   hasCircle = true,
   onClick,
@@ -60,7 +63,12 @@ const BaseArticleDigestFeed = ({
   })
 
   return (
-    <Card {...path} spacing={['base', 'base']} onClick={onClick}>
+    <Card
+      {...path}
+      spacing={['base', 'base']}
+      onClick={onClick}
+      testId={TEST_ID.DIGEST_ARTICLE_FEED}
+    >
       {header ||
         (hasCircle && circle && (
           <header>
@@ -97,7 +105,14 @@ const BaseArticleDigestFeed = ({
         )}
       </section>
 
-      <FooterActions article={article} inCard date={date} {...controls} />
+      {isConciseFooter && (
+        <section>
+          <DateTime date={article.createdAt} />
+        </section>
+      )}
+      {!isConciseFooter && (
+        <FooterActions article={article} inCard date={date} {...controls} />
+      )}
 
       <style jsx>{styles}</style>
     </Card>
@@ -115,12 +130,15 @@ type MemoizedArticleDigestFeed = React.MemoExoticComponent<
 
 export const ArticleDigestFeed = React.memo(
   BaseArticleDigestFeed,
-  ({ article: prevArticle }, { article }) => {
+  ({ article: prevArticle, ...prevProps }, { article, ...props }) => {
     return (
       prevArticle.subscribed === article.subscribed &&
       prevArticle.articleState === article.articleState &&
       prevArticle.sticky === article.sticky &&
-      prevArticle.author.isFollowee === article.author.isFollowee
+      prevArticle.author.isFollowee === article.author.isFollowee &&
+      prevProps.hasSetTagSelected === props.hasSetTagSelected &&
+      prevProps.hasSetTagUnselected === props.hasSetTagUnselected &&
+      prevProps.hasRemoveTag === props.hasRemoveTag
     )
   }
 ) as MemoizedArticleDigestFeed

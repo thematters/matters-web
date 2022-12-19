@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import { Button, IconExpand16, TextIcon, Translate } from '~/components'
 
+import { TEST_ID } from '~/common/enums'
 import contentCommentStyles from '~/common/styles/utils/content.comment.css'
 import { captureClicks } from '~/common/utils'
 
@@ -29,6 +30,7 @@ const Collapsed = ({
             __html: content || '',
           }}
           onClick={captureClicks}
+          data-test-id={TEST_ID.COMMENT_CONETNT}
         />
 
         <style jsx>{styles}</style>

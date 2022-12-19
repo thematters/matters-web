@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 
 import { CommentFormType, Translate } from '~/components'
 
-import { COMMENT_TYPE_TEXT } from '~/common/enums'
+import { COMMENT_TYPE_TEXT, TEST_ID } from '~/common/enums'
 import contentCommentStyles from '~/common/styles/utils/content.comment.css'
 import { captureClicks } from '~/common/utils'
 
@@ -77,6 +77,7 @@ const Content = ({ comment, type, size }: ContentProps) => {
             __html: content || '',
           }}
           onClick={captureClicks}
+          data-test-id={TEST_ID.COMMENT_CONETNT}
         />
 
         <style jsx>{styles}</style>
@@ -87,7 +88,10 @@ const Content = ({ comment, type, size }: ContentProps) => {
 
   if (state === 'banned') {
     return (
-      <p className={`${contentClasses} inactive`}>
+      <p
+        className={`${contentClasses} inactive`}
+        data-test-id={TEST_ID.COMMENT_CONETNT}
+      >
         <Translate
           zh_hant={`此${COMMENT_TYPE_TEXT.zh_hant[type]}因違反用戶協定而被隱藏`}
           zh_hans={`此${COMMENT_TYPE_TEXT.zh_hans[type]}因违反用户协定而被隐藏`}

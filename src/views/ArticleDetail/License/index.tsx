@@ -1,5 +1,7 @@
 import { TextIcon, Translate, withIcon } from '~/components'
 
+import { TEST_ID } from '~/common/enums'
+
 import { ReactComponent as IconLicenseARR } from '@/public/static/icons/24px/license-arr.svg'
 import { ReactComponent as IconLicenseBY } from '@/public/static/icons/24px/license-by.svg'
 import { ReactComponent as IconLicenseCC0 } from '@/public/static/icons/24px/license-cc-0.svg'
@@ -21,7 +23,7 @@ const License: React.FC<LicenseProps> = ({ license }) => {
   const isCCBYNCND2 = license === ArticleLicenseType.cc_by_nc_nd_2
 
   return (
-    <section className="license">
+    <section className="license" data-test-id={TEST_ID.ARTICLE_LICENSE}>
       {isCC0 && (
         <TextIcon
           icon={

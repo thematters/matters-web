@@ -1,64 +1,76 @@
 import { useQuery } from '@apollo/react-hooks'
-import _pickBy from 'lodash/pickBy'
+import _find from 'lodash/find'
+import _matchesProperty from 'lodash/matchesProperty'
+import { useContext } from 'react'
 
 import {
-  Avatar,
   CurrencyFormatter,
   Dialog,
   IconFiatCurrency40,
-  IconLikeCoin40,
   Spinner,
   TextIcon,
   Translate,
+  UserDigest,
+  ViewerContext,
 } from '~/components'
+import EXCHANGE_RATES from '~/components/GQL/queries/exchangeRates'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { formatAmount } from '~/common/utils'
 
+import LikeCoinChoice from './LikeCoinChoice'
 import styles from './styles.css'
 import Tips from './Tips'
 import USDTChoice from './USDTChoice'
 
 import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
-import { PayTo_payTo_transaction as PayToTx } from '~/components/GQL/mutations/__generated__/PayTo'
+import { ExchangeRates } from '~/components/GQL/queries/__generated__/ExchangeRates'
 import { WalletBalance } from '~/components/GQL/queries/__generated__/WalletBalance'
-
-interface SetAmountCallbackValues {
-  amount: number
-  currency: CURRENCY
-}
-
-interface SetAmountOpenTabCallbackValues {
-  window: Window
-  transaction: PayToTx
-}
+import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
 
 interface FormProps {
-  closeDialog: () => void
-  defaultCurrency?: CURRENCY
-  openTabCallback: (values: SetAmountOpenTabCallbackValues) => void
+  article: ArticleDetailPublic_article
   recipient: UserDonationRecipient
-  submitCallback: (values: SetAmountCallbackValues) => void
   switchToSetAmount: (c: CURRENCY) => void
   switchToWalletSelect: () => void
-  targetId: string
 }
 
 const CurrencyChoice: React.FC<FormProps> = ({
-  closeDialog,
-  defaultCurrency,
-  openTabCallback,
+  article,
   recipient,
-  submitCallback,
   switchToSetAmount,
   switchToWalletSelect,
-  targetId,
 }) => {
-  // HKD balance
+  const viewer = useContext(ViewerContext)
+  const currency = viewer.settings.currency
+
+  const { data: exchangeRateDate, loading: exchangeRateLoading } =
+    useQuery<ExchangeRates>(EXCHANGE_RATES, {
+      variables: {
+        to: currency,
+      },
+    })
+
+  // HKD、Like balance
   const { data, loading } = useQuery<WalletBalance>(WALLET_BALANCE, {
     fetchPolicy: 'network-only',
   })
+
+  const exchangeRateUSDT = _find(
+    exchangeRateDate?.exchangeRates,
+    _matchesProperty('from', CURRENCY.USDT)
+  )
+
+  const exchangeRateHKD = _find(
+    exchangeRateDate?.exchangeRates,
+    _matchesProperty('from', CURRENCY.HKD)
+  )
+
+  const exchangeRateLIKE = _find(
+    exchangeRateDate?.exchangeRates,
+    _matchesProperty('from', CURRENCY.LIKE)
+  )
 
   const balanceHKD = data?.viewer?.wallet.balance.HKD || 0
   const balanceLike = data?.viewer?.liker.total || 0
@@ -70,18 +82,29 @@ const CurrencyChoice: React.FC<FormProps> = ({
           <Translate zh_hant="選擇支持" zh_hans="选择支持" en="Support " />
         </span>
         <span className="userInfo">
-          <Avatar user={recipient} size="xs" />
-          <span className="userName">{recipient.displayName}</span>
+          <UserDigest.Mini
+            user={recipient}
+            avatarSize="xs"
+            textSize="md-s"
+            textWeight="semibold"
+            nameColor="black"
+            spacing="xxtight"
+            hasAvatar
+            hasDisplayName
+          />
         </span>
         <span>
-          <Translate zh_hant="的方式" zh_hans="的方式" en="with: " />
+          <Translate zh_hant="的方式：" zh_hans="的方式：" en="with: " />
         </span>
       </section>
 
       {/* USDT */}
       <USDTChoice
+        article={article}
         recipient={recipient}
-        switchToSetAmount={switchToSetAmount}
+        currency={currency}
+        exchangeRate={exchangeRateUSDT?.rate || 0}
+        switchToSetAmount={() => switchToSetAmount(CURRENCY.USDT)}
         switchToWalletSelect={switchToWalletSelect}
       />
 
@@ -100,29 +123,22 @@ const CurrencyChoice: React.FC<FormProps> = ({
         >
           <Translate zh_hant="法幣" zh_hans="法币" en="Fiat Currency" />
         </TextIcon>
-        <CurrencyFormatter value={formatAmount(balanceHKD)} currency="HKD" />
+        <CurrencyFormatter
+          value={formatAmount(balanceHKD)}
+          currency={CURRENCY.HKD}
+          subCurrency={currency}
+          subValue={formatAmount(balanceHKD * (exchangeRateHKD?.rate || 0), 2)}
+        />
       </section>
 
       {/* LikeCoin */}
-      <section
-        role="button"
-        className="item clickable"
-        onClick={() => {
-          switchToSetAmount(CURRENCY.LIKE)
-        }}
-      >
-        <TextIcon
-          icon={<IconLikeCoin40 size="xl-m" />}
-          size="md"
-          spacing="xtight"
-        >
-          <Translate zh_hant="LikeCoin" zh_hans="LikeCoin" en="LikeCoin" />
-        </TextIcon>
-        <CurrencyFormatter
-          value={formatAmount(balanceLike, 0)}
-          currency="LIKE"
-        />
-      </section>
+      <LikeCoinChoice
+        balance={balanceLike}
+        recipient={recipient}
+        currency={currency}
+        exchangeRate={exchangeRateLIKE?.rate || 0}
+        switchToSetAmount={() => switchToSetAmount(CURRENCY.LIKE)}
+      />
 
       <Tips />
 
@@ -130,7 +146,7 @@ const CurrencyChoice: React.FC<FormProps> = ({
     </section>
   )
 
-  if (loading) {
+  if (exchangeRateLoading || loading) {
     return <Spinner />
   }
 

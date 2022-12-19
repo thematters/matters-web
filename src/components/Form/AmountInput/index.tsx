@@ -33,6 +33,7 @@ const AmountInput = forwardRef(
       name,
       label,
       extraButton,
+      labelVisHidden,
 
       hint,
       error,
@@ -52,13 +53,15 @@ const AmountInput = forwardRef(
           htmlFor={fieldId}
           label={label}
           extraButton={extraButton}
+          labelVisHidden={labelVisHidden}
         />
 
-        <Field.Content>
+        <Field.Content noMargin>
           <span className="currency">{currency}</span>
 
           <input
             {...inputProps}
+            className={error ? 'error' : ''}
             id={fieldId}
             ref={ref}
             name={name}

@@ -3,7 +3,7 @@
   "rules": {
     "no-implicit-dependencies": [
       true,
-      ["@storybook", "~", "@", "@apollo/react-testing"]
+      ["@storybook", "~", "@", "@apollo/react-testing", "@playwright/test"]
     ]
   }
 }

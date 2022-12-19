@@ -7,6 +7,7 @@ import { Avatar, AvatarProps } from '~/components/Avatar'
 import { FollowUserButton } from '~/components/Buttons/FollowUser'
 import { UnblockUserButton } from '~/components/Buttons/UnblockUser'
 
+import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 
 import { fragments } from './gql'
@@ -70,7 +71,11 @@ const Verbose = ({
 
   if (isArchived) {
     return (
-      <Card spacing={['tight', 'tight']} {...cardProps}>
+      <Card
+        spacing={['tight', 'tight']}
+        {...cardProps}
+        testId={TEST_ID.DIGEST_USER_VERBOSE}
+      >
         <section className={containerClasses}>
           <span className="avatar">
             <Avatar size={avatarSize} />
@@ -95,7 +100,12 @@ const Verbose = ({
   }
 
   return (
-    <Card {...path} spacing={['tight', 'tight']} {...cardProps}>
+    <Card
+      {...path}
+      spacing={['tight', 'tight']}
+      {...cardProps}
+      testId={TEST_ID.DIGEST_USER_VERBOSE}
+    >
       <section className={containerClasses}>
         <Link {...path}>
           <a className="avatar">

@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { DonatorsDialog } from '~/components'
+import { DonatorsDialog, UserDigest } from '~/components'
 import { Avatar } from '~/components/Avatar'
 
 export const fragments = {
@@ -8,7 +8,7 @@ export const fragments = {
     fragment DonatorsArticle on Article {
       id
       donations: transactionsReceivedBy(
-        input: { first: 3, purpose: donation }
+        input: { first: 9, purpose: donation }
       ) {
         totalCount
         edges {
@@ -17,6 +17,7 @@ export const fragments = {
             ... on User {
               id
               ...AvatarUser
+              ...UserDigestPlainUser
             }
           }
         }
@@ -24,6 +25,7 @@ export const fragments = {
       ...DonatorDialogArticle
     }
     ${Avatar.fragments.user}
+    ${UserDigest.Plain.fragments.user}
     ${DonatorsDialog.fragments.article}
   `,
 }

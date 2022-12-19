@@ -1,43 +1,53 @@
-import { Form, Layout, Spacer, Translate } from '~/components'
+import { useContext } from 'react'
 
-import { PATHS } from '~/common/enums'
-import { toPath } from '~/common/utils'
+import { Form, LanguageContext, Layout, Spacer, Translate } from '~/components'
+
+import { GUIDE_LINKS, PATHS } from '~/common/enums'
 
 import styles from './styles.css'
 
 const BaseHelp = () => {
+  const { lang } = useContext(LanguageContext)
   const year = new Date().getFullYear()
-  const downloadAppLink = toPath({
-    page: 'articleDetail',
-    article: {
-      slug: 'guidance-如何让你的matters之旅更便捷',
-      mediaHash: 'bafyreiayiuxi4qc2a7qpgjp3fe42wmaoppqykckcvtq4hiukl5pgs3dn2m',
-      author: { userName: '1ampa55ag3' },
-    },
-  })
 
   return (
     <>
       <Form.List>
-        <Form.List.Item title={<Translate id="about" />} href={PATHS.ABOUT} />
-        <Form.List.Item title={<Translate id="guide" />} href={PATHS.GUIDE} />
         <Form.List.Item
+          role="link"
+          title={<Translate id="about" />}
+          href={PATHS.ABOUT}
+        />
+        <Form.List.Item
+          role="link"
+          title={<Translate id="guide" />}
+          href={PATHS.GUIDE}
+        />
+        <Form.List.Item
+          role="link"
           title={<Translate id="community" />}
           href={PATHS.COMMUNITY}
         />
         <Form.List.Item
+          role="link"
           title={<Translate id="migrationSideBar" />}
           href={PATHS.MIGRATION}
         />
-        <Form.List.Item title={<Translate id="term" />} href={PATHS.TOS} />
         <Form.List.Item
+          role="link"
+          title={<Translate id="term" />}
+          href={PATHS.TOS}
+        />
+        <Form.List.Item
+          role="link"
           title={<Translate id="openCommunity" />}
           htmlHref="https://github.com/thematters/developer-resource"
           htmlTarget="_blank"
         />
         <Form.List.Item
+          role="link"
           title={<Translate id="downloadApp" />}
-          {...downloadAppLink}
+          href={GUIDE_LINKS.PWA[lang]}
         />
       </Form.List>
 

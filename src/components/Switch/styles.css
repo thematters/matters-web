@@ -15,11 +15,6 @@
 }
 
 .switch input {
-  position: absolute;
-  opacity: 0;
-}
-
-.switch input + span {
   @mixin all-transition;
 
   position: relative;
@@ -27,11 +22,12 @@
   width: var(--switch-width);
   height: var(--switch-height);
   line-height: 1;
+  cursor: pointer;
   background: var(--switch-background);
   border-radius: var(--switch-border-radius);
 }
 
-.switch input + span::after {
+.switch input::after {
   display: block;
   content: '';
   background: var(--color-white);
@@ -39,7 +35,7 @@
   box-shadow: 0 2px 4px var(--color-line-grey);
 }
 
-.switch input + span::after,
+.switch input::after,
 .switch .loading {
   @mixin all-transition;
 
@@ -58,12 +54,10 @@
 }
 
 .switch input:checked {
-  & + span {
-    box-shadow: inset 0 0 0 var(--switch-height) var(--color-matters-green);
-  }
+  box-shadow: inset 0 0 0 var(--switch-height) var(--color-matters-green);
 }
 
-.switch input:checked + span::after,
+.switch input:checked::after,
 .switch input:checked + span + .loading {
   transform: translateX(
     calc(
@@ -72,9 +66,7 @@
   );
 }
 
-.switch:hover,
-.switch:focus {
-  & input + span::after {
-    box-shadow: 0 2px 4px var(--color-line-grey-dark);
-  }
+.switch:hover::after,
+.switch:focus::after {
+  box-shadow: 0 2px 4px var(--color-line-grey-dark);
 }

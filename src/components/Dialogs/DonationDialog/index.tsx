@@ -121,12 +121,14 @@ const BaseDonationDialog = ({
     openDialog: baseOpenDialog,
     closeDialog: baseCloseDialog,
   } = useDialogSwitch(true)
-  const { currStep, forward, back, reset } = useStep<Step>(defaultStep)
+  const { currStep, forward, back } = useStep<Step>(defaultStep)
   const [windowRef, setWindowRef] = useState<Window | undefined>(undefined)
 
   const [amount, setAmount] = useState<number>(0)
   const [currency, setCurrency] = useState<CURRENCY>(CURRENCY.HKD)
   const [payToTx, setPayToTx] = useState<Omit<PayToTx, '__typename'>>()
+  const [tabUrl, setTabUrl] = useState('')
+  const [tx, setTx] = useState<PayToTx>()
 
   const openDialog = () => {
     forward(defaultStep)
@@ -145,7 +147,7 @@ const BaseDonationDialog = ({
       forward(
         viewer.status?.hasPaymentPassword ? 'confirm' : 'setPaymentPassword'
       )
-    } else if (values.currency === CURRENCY.USDT) {
+    } else {
       forward('confirm')
     }
   }
@@ -235,14 +237,8 @@ const BaseDonationDialog = ({
 
         {isCurrencyChoice && (
           <DynamicPayToFormCurrencyChoice
-            closeDialog={() => {
-              reset(defaultStep)
-              closeDialog()
-            }}
-            defaultCurrency={currency}
-            openTabCallback={setAmountOpenTabCallback}
             recipient={recipient}
-            submitCallback={setAmountCallback}
+            article={article}
             switchToSetAmount={(c: CURRENCY) => {
               setCurrency(c)
               forward('setAmount')
@@ -250,7 +246,6 @@ const BaseDonationDialog = ({
             switchToWalletSelect={() => {
               forward('walletSelect')
             }}
-            targetId={targetId}
           />
         )}
 
@@ -269,10 +264,9 @@ const BaseDonationDialog = ({
 
         {isSetAmount && (
           <DynamicPayToFormSetAmount
-            closeDialog={closeDialog}
-            defaultCurrency={currency}
-            openTabCallback={setAmountOpenTabCallback}
+            currency={currency}
             recipient={recipient}
+            article={article}
             submitCallback={setAmountCallback}
             switchToCurrencyChoice={() => {
               forward('currencyChoice')
@@ -280,12 +274,15 @@ const BaseDonationDialog = ({
             switchToAddCredit={() => {
               forward('addCredit')
             }}
+            setTabUrl={setTabUrl}
+            setTx={setTx}
             targetId={targetId}
           />
         )}
 
         {isConfirm && (
           <DynamicPayToFormConfirm
+            article={article}
             amount={amount}
             currency={currency}
             recipient={recipient}
@@ -294,6 +291,9 @@ const BaseDonationDialog = ({
             switchToResetPassword={() => forward('resetPassword')}
             switchToCurrencyChoice={() => forward('currencyChoice')}
             targetId={targetId}
+            openTabCallback={setAmountOpenTabCallback}
+            tabUrl={tabUrl}
+            tx={tx}
           />
         )}
 
@@ -303,7 +303,9 @@ const BaseDonationDialog = ({
             currency={currency}
             recipient={recipient}
             closeDialog={closeDialog}
-            nextStep={() => forward('complete')}
+            nextStep={() => {
+              closeDialog()
+            }}
             txId={payToTx?.id || ''}
             windowRef={windowRef}
             article={article}

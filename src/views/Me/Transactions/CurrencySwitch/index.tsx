@@ -1,10 +1,7 @@
-import { useContext } from 'react'
-
 import {
   Button,
   DropdownDialog,
   IconArrowDown16,
-  LanguageContext,
   Menu,
   TextIcon,
   Translate,
@@ -14,26 +11,9 @@ import { Z_INDEX } from '~/common/enums'
 
 export enum Currency {
   ALL = 'ALL',
+  USDT = 'USDT',
   HKD = 'HKD',
   LIKE = 'LIKE',
-}
-
-const CURRENT_TEXT_MAP = {
-  zh_hant: {
-    ALL: '全部',
-    HKD: '港幣',
-    LIKE: 'LIKE',
-  },
-  zh_hans: {
-    ALL: '全部',
-    HKD: '港币',
-    LIKE: 'LIKE',
-  },
-  en: {
-    ALL: 'ALL',
-    HKD: 'HKD',
-    LIKE: 'LIKE',
-  },
 }
 
 interface CurrencySwitchProps {
@@ -50,7 +30,6 @@ const CurrencySwitchContent: React.FC<CurrencySwitchContentProps> = ({
   setCurrency,
   isInDropdown,
 }) => {
-  const { lang } = useContext(LanguageContext)
   return (
     <Menu width={isInDropdown ? 'sm' : undefined}>
       <Menu.Item onClick={() => setCurrency(Currency.ALL)}>
@@ -59,7 +38,17 @@ const CurrencySwitchContent: React.FC<CurrencySwitchContentProps> = ({
           size="md"
           weight={currency === Currency.ALL ? 'bold' : 'normal'}
         >
-          {CURRENT_TEXT_MAP[lang][Currency.ALL]}
+          <Translate zh_hans="全部" zh_hant="全部" en="All" />
+        </TextIcon>
+      </Menu.Item>
+
+      <Menu.Item onClick={() => setCurrency(Currency.USDT)}>
+        <TextIcon
+          spacing="base"
+          size="md"
+          weight={currency === Currency.USDT ? 'bold' : 'normal'}
+        >
+          {Currency.USDT}
         </TextIcon>
       </Menu.Item>
 
@@ -69,7 +58,7 @@ const CurrencySwitchContent: React.FC<CurrencySwitchContentProps> = ({
           size="md"
           weight={currency === Currency.HKD ? 'bold' : 'normal'}
         >
-          {CURRENT_TEXT_MAP[lang][Currency.HKD]}
+          {Currency.HKD}
         </TextIcon>
       </Menu.Item>
 
@@ -79,7 +68,7 @@ const CurrencySwitchContent: React.FC<CurrencySwitchContentProps> = ({
           size="md"
           weight={currency === Currency.LIKE ? 'bold' : 'normal'}
         >
-          LIKE
+          {Currency.LIKE}
         </TextIcon>
       </Menu.Item>
     </Menu>
@@ -90,7 +79,6 @@ export const CurrencySwitch: React.FC<CurrencySwitchProps> = ({
   currency,
   setCurrency,
 }) => {
-  const { lang } = useContext(LanguageContext)
   return (
     <DropdownDialog
       dropdown={{
@@ -114,15 +102,18 @@ export const CurrencySwitch: React.FC<CurrencySwitchProps> = ({
         title: <Translate zh_hant="幣種" zh_hans="币种" en="Currency" />,
       }}
     >
-      {({ openDialog, ref }) => (
-        <Button onClick={openDialog} ref={ref}>
+      {({ openDialog, type, ref }) => (
+        <Button onClick={openDialog} aria-haspopup={type} ref={ref}>
           <TextIcon
             icon={<IconArrowDown16 />}
             textPlacement="left"
             color="grey"
           >
-            <Translate zh_hant="幣種：" zh_hans="币种：" en="Currency:&nbsp;" />
-            {CURRENT_TEXT_MAP[lang][currency]}
+            {currency === Currency.ALL ? (
+              <Translate zh_hans="全部" zh_hant="全部" en="All" />
+            ) : (
+              currency
+            )}
           </TextIcon>
         </Button>
       )}

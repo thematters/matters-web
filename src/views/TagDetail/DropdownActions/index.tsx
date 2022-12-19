@@ -74,14 +74,17 @@ const BaseDropdownActions = ({
   const Content = ({ isInDropdown }: { isInDropdown?: boolean }) => (
     <Menu width={isInDropdown ? 'sm' : undefined}>
       {hasEditTag && (
-        <Menu.Item onClick={openTagDialog}>
+        <Menu.Item onClick={openTagDialog} ariaHasPopup="dialog">
           <TextIcon icon={<IconEdit16 size="md" />} size="md" spacing="base">
             <Translate id="editTag" />
           </TextIcon>
         </Menu.Item>
       )}
       {hasAddSelectedArticle && (
-        <Menu.Item onClick={openTagAddSelectedArticlesDialog}>
+        <Menu.Item
+          onClick={openTagAddSelectedArticlesDialog}
+          ariaHasPopup="dialog"
+        >
           <TextIcon icon={<IconAdd24 size="md" />} size="md" spacing="base">
             <Translate
               zh_hant="添加精選"
@@ -92,7 +95,7 @@ const BaseDropdownActions = ({
         </Menu.Item>
       )}
       {hasManageCommunity && (
-        <Menu.Item onClick={openTagEditorDialog}>
+        <Menu.Item onClick={openTagEditorDialog} ariaHasPopup="dialog">
           <TextIcon icon={<IconProfile24 size="md" />} size="md" spacing="base">
             <Translate
               zh_hant="管理社群"
@@ -103,7 +106,7 @@ const BaseDropdownActions = ({
         </Menu.Item>
       )}
       {hasTagLeave && (
-        <Menu.Item onClick={openTagLeaveDialog}>
+        <Menu.Item onClick={openTagLeaveDialog} ariaHasPopup="dialog">
           <TextIcon
             icon={<IconRemove24 size="md" />}
             color="red"
@@ -132,13 +135,13 @@ const BaseDropdownActions = ({
         title: 'moreActions',
       }}
     >
-      {({ openDialog, ref }) => (
+      {({ openDialog, type, ref }) => (
         <section className="container">
           <Button
             bgColor="half-black"
             aria-label={translate({ id: 'moreActions', lang })}
-            aria-haspopup="true"
             onClick={openDialog}
+            aria-haspopup={type}
             ref={ref}
           >
             <IconSettings32 size="lg" color="white" />

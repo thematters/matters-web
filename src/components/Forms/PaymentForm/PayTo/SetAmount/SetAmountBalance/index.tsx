@@ -1,0 +1,79 @@
+import { useContext } from 'react'
+
+import { Button, LanguageContext, TextIcon, Translate } from '~/components'
+
+import { GUIDE_LINKS, PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
+import { formatAmount } from '~/common/utils'
+
+import styles from './styles.css'
+
+type SetAmountBalanceProps = {
+  currency: CURRENCY
+  balanceUSDT: number
+  balanceHKD: number
+  balanceLike: number
+  isBalanceInsufficient: boolean
+  switchToAddCredit: () => void
+}
+
+const SetAmountBalance: React.FC<SetAmountBalanceProps> = ({
+  currency,
+  balanceUSDT,
+  balanceHKD,
+  balanceLike,
+  isBalanceInsufficient,
+  switchToAddCredit,
+}) => {
+  const { lang } = useContext(LanguageContext)
+
+  const isUSDT = currency === CURRENCY.USDT
+  const isHKD = currency === CURRENCY.HKD
+  const isLike = currency === CURRENCY.LIKE
+
+  return (
+    <section className="set-amount-balance">
+      <span className="left">
+        <Translate zh_hant="餘額 " zh_hans="余额 " en="Balance " />
+        {isUSDT && <span>{formatAmount(balanceUSDT)} USDT</span>}
+        {isHKD && <span>{formatAmount(balanceHKD)} HKD</span>}
+        {isLike && <span>{formatAmount(balanceLike, 0)} LIKE</span>}
+      </span>
+
+      {isHKD && (
+        <Button onClick={switchToAddCredit}>
+          <TextIcon
+            size="xs"
+            textDecoration="underline"
+            color="green"
+            weight="md"
+          >
+            {isBalanceInsufficient ? (
+              <Translate
+                zh_hant="餘額不足，請儲值"
+                zh_hans="余额不足，请储值"
+                en="Insufficient balance, please top up"
+              />
+            ) : (
+              <Translate zh_hant="儲值" zh_hans="储值" en="Top Up" />
+            )}
+          </TextIcon>
+        </Button>
+      )}
+      {isUSDT && balanceUSDT <= 0 && (
+        <a href={GUIDE_LINKS.payment[lang]} target="_blank">
+          <TextIcon size="xs" textDecoration="underline" color="grey-dark">
+            <Translate
+              zh_hant="如何移轉資金到 Polygon？"
+              zh_hans="如何移转资金到 Polygon？"
+              en="How to transfer funds to Polygon?"
+            />
+          </TextIcon>
+        </a>
+      )}
+
+      <style jsx>{styles}</style>
+    </section>
+  )
+}
+
+export default SetAmountBalance

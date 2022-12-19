@@ -18,7 +18,13 @@ import { formatAmount } from '~/common/utils'
 
 import styles from './styles.css'
 
+import { QuoteCurrency } from '@/__generated__/globalTypes'
 import { ViewerLikeBalance } from './__generated__/ViewerLikeBalance'
+
+interface LikeCoinBalanceProps {
+  currency: QuoteCurrency
+  exchangeRate: number
+}
 
 const VIEWER_LIKE_BALANCE = gql`
   query ViewerLikeBalance {
@@ -44,7 +50,10 @@ const Wrapper: React.FC = ({ children }) => (
   </section>
 )
 
-export const LikeCoinBalance = () => {
+export const LikeCoinBalance = ({
+  currency,
+  exchangeRate,
+}: LikeCoinBalanceProps) => {
   const viewer = useContext(ViewerContext)
 
   const likerId = viewer.liker.likerId
@@ -94,7 +103,12 @@ export const LikeCoinBalance = () => {
   if (likerId) {
     return (
       <Wrapper>
-        <CurrencyFormatter value={formatAmount(total, 0)} currency="LIKE" />
+        <CurrencyFormatter
+          value={formatAmount(total, 0)}
+          currency="LIKE"
+          subValue={formatAmount(total * exchangeRate, 2)}
+          subCurrency={currency}
+        />
       </Wrapper>
     )
   }
@@ -108,11 +122,7 @@ export const LikeCoinBalance = () => {
         href={PATHS.ME_SETTINGS}
       >
         <TextIcon color="black" size="xs">
-          <Translate
-            zh_hant="設置 Liker ID"
-            zh_hans="设置 Liker ID"
-            en="Set Liker ID"
-          />
+          <Translate zh_hant="前往設置" zh_hans="前往设置" en="Setup" />
         </TextIcon>
       </Button>
     </Wrapper>
