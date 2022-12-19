@@ -25,7 +25,6 @@ export const fragments = {
             ...ReplyToUser
           }
         }
-        ...DonatorLabelComment
         ...PinnedLabelComment
         ...FooterActionsCommentPublic
         ...DropdownActionsCommentPublic
@@ -33,7 +32,6 @@ export const fragments = {
       }
       ${UserDigest.Mini.fragments.user}
       ${ReplyTo.fragments.user}
-      ${DonatorLabel.fragments.comment}
       ${PinnedLabel.fragments.comment}
       ${FooterActions.fragments.comment.public}
       ${DropdownActions.fragments.comment.public}
@@ -42,10 +40,12 @@ export const fragments = {
     private: gql`
       fragment FeedCommentPrivate on Comment {
         id
+        ...DonatorLabelCommentPrivate
         ...FooterActionsCommentPrivate
         ...DropdownActionsCommentPrivate
         ...ContentCommentPrivate
       }
+      ${DonatorLabel.fragments.comment.private}
       ${FooterActions.fragments.comment.private}
       ${DropdownActions.fragments.comment.private}
       ${Content.fragments.comment.private}

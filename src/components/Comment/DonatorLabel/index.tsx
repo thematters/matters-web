@@ -4,18 +4,24 @@ import { Translate } from '~/components'
 
 import styles from './styles.css'
 
-import { DonatorLabelComment } from './__generated__/DonatorLabelComment'
+import { DonatorLabelCommentPrivate } from './__generated__/DonatorLabelCommentPrivate'
 
 const fragments = {
-  comment: gql`
-    fragment DonatorLabelComment on Comment {
-      id
-      fromDonator
-    }
-  `,
+  comment: {
+    private: gql`
+      fragment DonatorLabelCommentPrivate on Comment {
+        id
+        fromDonator
+      }
+    `,
+  },
 }
 
-const DonatorLabel = ({ comment }: { comment: DonatorLabelComment }) => {
+const DonatorLabel = ({
+  comment,
+}: {
+  comment: Partial<DonatorLabelCommentPrivate>
+}) => {
   if (!comment.fromDonator) {
     return null
   }
