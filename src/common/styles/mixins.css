@@ -119,7 +119,6 @@
 /* Form
    ========================================================================== */
 @define-mixin form-input {
-  @mixin all-transition;
   @mixin border-top-grey;
   @mixin border-bottom-grey;
 
@@ -142,7 +141,7 @@
 }
 
 @define-mixin form-input-grey {
-  @mixin all-transition;
+  @mixin transition;
 
   padding: var(--spacing-base);
   font-size: var(--font-size-md);
@@ -150,6 +149,7 @@
   border-top: none;
   border-bottom: 1px solid var(--color-grey-light);
   border-radius: var(--spacing-xxx-tight);
+  transition-property: border-color, background-color;
 
   &:focus,
   &.focus {
@@ -168,13 +168,14 @@
 }
 
 @define-mixin form-input-round {
-  @mixin all-transition;
+  @mixin transition;
 
   height: var(--input-height);
   padding: var(--spacing-base);
   border: 1px solid var(--color-grey-light);
   border-radius: var(--spacing-x-tight);
   caret-color: var(--color-matters-green);
+  transition-property: border-color, background-color;
 
   &:focus,
   &.focus {
@@ -264,8 +265,9 @@
   object-fit: cover;
 }
 
-@define-mixin all-transition {
-  transition: all 0.2s ease-in-out;
+@define-mixin transition {
+  transition-timing-function: ease-in-out;
+  transition-duration: 0.2s;
 }
 
 @define-mixin truncate {

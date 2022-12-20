@@ -1,6 +1,6 @@
 .subscription-banner {
   @mixin flex-center-all;
-  @mixin all-transition;
+  @mixin transition;
 
   height: 3rem;
   margin: var(--spacing-base) var(--spacing-base) var(--spacing-loose);
@@ -8,6 +8,7 @@
   color: var(--color-white);
   background: var(--color-matters-gold);
   border-radius: var(--spacing-x-tight);
+  transition-property: background-color;
 
   &:hover,
   &:focus {
