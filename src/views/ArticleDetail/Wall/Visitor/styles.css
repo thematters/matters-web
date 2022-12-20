@@ -2,11 +2,12 @@
   margin: 0;
 
   & :global(.fixed-main) {
-    @mixin all-transition;
+    @mixin transition;
 
     bottom: 0;
     z-index: var(--z-index-over-bottom-bar);
     opacity: 0;
+    transition-property: transform;
     transform: translateY(100%);
   }
 

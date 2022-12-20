@@ -140,8 +140,6 @@
           background-color: transparent;
 
           & > span {
-            @mixin all-transition;
-
             display: block;
             width: 0;
             height: 4px;
@@ -402,7 +400,7 @@
 }
 
 .toolbar-container {
-  @mixin all-transition;
+  @mixin transition;
 
   position: absolute;
   top: 0;
@@ -410,6 +408,7 @@
   display: flex;
   align-items: center;
   opacity: 0;
+  transition-property: opacity, transform;
   transform: translateY(calc(var(--spacing-x-tight) * -1));
 
   &.toolbar-visible {
@@ -430,11 +429,12 @@
 }
 
 .toolbar-items {
-  @mixin all-transition;
+  @mixin transition;
 
   display: none;
   margin-left: var(--spacing-base);
   opacity: 0;
+  transition-property: opacity, transform;
 
   & :global(> * + *) {
     margin-left: var(--spacing-base);
@@ -464,10 +464,11 @@
 }
 
 .toolbar-toggle-button {
-  @mixin all-transition;
+  @mixin transition;
 
   background: transparent;
   stroke: var(--color-black);
+  transition-property: opacity, transform;
 }
 
 .toolbar-upload-container {
