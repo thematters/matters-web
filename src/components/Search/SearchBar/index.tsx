@@ -163,6 +163,8 @@ export const SearchBar: React.FC<SearchBarProps> = ({
           type,
         })
 
+        if (values.q.length <= 0) return
+
         if (isSearch) {
           router.replace(path.href)
         } else {
