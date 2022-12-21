@@ -1,4 +1,5 @@
 import { ethers } from 'ethers'
+import Link from 'next/link'
 import { useContext } from 'react'
 import { chain, useEnsName } from 'wagmi'
 
@@ -32,9 +33,35 @@ const WalletAddress: React.FC<WalletAddressProps> = ({
     address: address as `0x${string}`,
     chainId: isProd ? chain.mainnet.id : chain.goerli.id,
   })
+
+  if (hasLinkedIPNS) {
+    return (
+      <section className="address">
+        <Link href={`${EXTERNAL_LINKS.CLOUDFLARE_GATEWAY_LINK}${ensName}`}>
+          <a target="_blank">
+            <Button
+              spacing={['xxtight', 'tight']}
+              bgColor="green-lighter"
+              bgActiveColor="grey-lighter"
+            >
+              <TextIcon
+                icon={<IconExternalLink16 />}
+                color="green"
+                spacing="xtight"
+                textPlacement="left"
+              >
+                {ensName}
+              </TextIcon>
+            </Button>
+          </a>
+        </Link>
+        <style jsx>{styles}</style>
+      </section>
+    )
+  }
   return (
     <section className="address">
-      {!hasLinkedIPNS && (
+      {
         <CopyToClipboard text={ensName || address}>
           <Button
             spacing={['xxtight', 'tight']}
@@ -42,57 +69,18 @@ const WalletAddress: React.FC<WalletAddressProps> = ({
             bgActiveColor="grey-lighter"
             aria-label={translate({ id: 'copy', lang })}
           >
-            {!hasLinkedIPNS && (
-              <TextIcon
-                icon={<IconCopy16 size="sm" />}
-                spacing="xtight"
-                textPlacement="left"
-                color="green"
-                size="md"
-              >
-                {ensName || maskAddress(ethers.utils.getAddress(address))}
-              </TextIcon>
-            )}
-            {hasLinkedIPNS && (
-              <TextIcon
-                icon={<IconExternalLink16 />}
-                color="green"
-                spacing="xtight"
-                textPlacement="left"
-              >
-                <a
-                  href={`${EXTERNAL_LINKS.CLOUDFLARE_GATEWAY_LINK}${ensName}`}
-                  target="_blank"
-                  className="gateway-url"
-                >
-                  {ensName}
-                </a>
-              </TextIcon>
-            )}
+            <TextIcon
+              icon={<IconCopy16 size="sm" />}
+              spacing="xtight"
+              textPlacement="left"
+              color="green"
+              size="md"
+            >
+              {ensName || maskAddress(ethers.utils.getAddress(address))}
+            </TextIcon>
           </Button>
         </CopyToClipboard>
-      )}
-      {hasLinkedIPNS && (
-        <Button
-          spacing={['xxtight', 'tight']}
-          bgColor="green-lighter"
-          bgActiveColor="grey-lighter"
-        >
-          <TextIcon
-            icon={<IconExternalLink16 />}
-            color="green"
-            spacing="xtight"
-            textPlacement="left"
-          >
-            <a
-              href={`${EXTERNAL_LINKS.CLOUDFLARE_GATEWAY_LINK}${ensName}`}
-              target="_blank"
-            >
-              {ensName}
-            </a>
-          </TextIcon>
-        </Button>
-      )}
+      }
       <style jsx>{styles}</style>
     </section>
   )

@@ -1,3 +1,4 @@
 .address {
   margin-top: var(--spacing-base);
+  font-size: var(--font-size-xs);
 }

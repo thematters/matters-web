@@ -44,7 +44,11 @@
 
 .btn {
   width: 100%;
-  margin: var(--spacing-xx-loose) 0;
+  margin: var(--spacing-xx-base) 0;
+
+  @media (--sm-up) {
+    margin: var(--spacing-base) 0;
+  }
 
   & :global(button) {
     width: 100%;

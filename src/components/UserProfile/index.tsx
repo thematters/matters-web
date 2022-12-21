@@ -102,6 +102,7 @@ export const UserProfile = () => {
   }, [user?.id, viewer.id])
 
   const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
+
   const address = user?.info.ethAddress
   const { data: ensName } = useEnsName({
     address: address as `0x${string}`,
@@ -110,6 +111,7 @@ export const UserProfile = () => {
   const { data: resolverData } = useEnsResolver({
     name: ensName as string,
   })
+
   const { data: readData } = useContractRead({
     address: resolverData?.address,
     abi: PublicResolverABI,
@@ -121,7 +123,6 @@ export const UserProfile = () => {
   const hasLinkedIPNS =
     !!ipnsHash && '0x' + contentHash.encode('ipns-ns', ipnsHash) === readData
   const hasLinkEnsButton = ensName && !hasLinkedIPNS && isMe && ipnsHash
-
   /**
    * Render
    */

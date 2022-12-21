@@ -1,7 +1,8 @@
 // @ts-ignore
 import contentHash from '@ensdomains/content-hash'
 import { namehash } from 'ethers/lib/utils'
-import { useContext } from 'react'
+import { useRouter } from 'next/router'
+import { useContext, useEffect, useState } from 'react'
 import {
   chain,
   etherscanBlockExplorers,
@@ -25,7 +26,12 @@ import {
   ViewerContext,
 } from '~/components'
 
-import { maskAddress, PublicResolverABI, translate } from '~/common/utils'
+import {
+  maskAddress,
+  PublicResolverABI,
+  toPath,
+  translate,
+} from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -43,17 +49,20 @@ const LinkENSContent = ({
 }: LinkENSContentProps) => {
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
+  const router = useRouter()
+
+  const [txConfirming, setTxConfirming] = useState<boolean>(false)
   const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
   const { address } = useAccount()
   const { chain: currentChain } = useNetwork()
-  const { chains, switchNetwork } = useSwitchNetwork()
+  const { switchNetwork } = useSwitchNetwork()
   const isConnectedAddress =
     viewer.info.ethAddress?.toLowerCase() === address?.toLowerCase()
-
-  const isUnsupportedNetwork = currentChain?.id !== (isProd ? chain.mainnet.id : chain.goerli.id)
-  const targetChainName = chains[0]?.name
-  const targetChainId = chains[0]?.id
+  const isUnsupportedNetwork =
+    currentChain?.id !== (isProd ? chain.mainnet.id : chain.goerli.id)
+  const targetChainName = isProd ? chain.mainnet.name : chain.goerli.name
+  const targetChainId = isProd ? chain.mainnet.id : chain.goerli.id
   const switchToTargetNetwork = async () => {
     if (!switchNetwork) return
 
@@ -70,7 +79,6 @@ const LinkENSContent = ({
   const { disconnect } = useDisconnect()
 
   const ipnsHash = user?.info.ipnsKey
-
   const {
     data: blockchainTx,
     isError,
@@ -93,8 +101,20 @@ const LinkENSContent = ({
 
     if (setContenthash) {
       setContenthash()
+
+      setTxConfirming(true)
     }
   }
+
+  useEffect(() => {
+    ;(async () => {
+      if (blockchainTx) {
+        setTxConfirming(true)
+        await blockchainTx?.wait()
+        setTxConfirming(false)
+      }
+    })()
+  }, [blockchainTx])
 
   const scanUrl = isProd
     ? etherscanBlockExplorers.mainnet.url
@@ -105,14 +125,14 @@ const LinkENSContent = ({
       <Dialog.Content>
         <section className="link-ens-container">
           <span className="info">
-            {!isSuccess && (
+            {(!isSuccess || txConfirming) && (
               <>
                 <Translate zh_hans={`关联`} zh_hant={`關聯`} en={`Link`} />
                 <span className="ens">&nbsp;{ensName}&nbsp;</span>
                 <Translate id="toYourIPNSPage" />
               </>
             )}
-            {isSuccess && (
+            {isSuccess && !txConfirming && (
               <>
                 <Translate
                   zh_hans="已成功关联，稍后完成同步在&nbsp;"
@@ -200,11 +220,26 @@ const LinkENSContent = ({
                 </Dialog.Footer.Button>
               )}
 
-            {isLoading && <Dialog.Footer.Button loading={isLoading} />}
-            {isSuccess && (
+            {(isLoading || txConfirming) && !isError && (
+              <Dialog.Footer.Button loading={isLoading || txConfirming} />
+            )}
+            {!txConfirming && isSuccess && (
               <Dialog.Footer.Button
                 bgColor="grey-lighter"
-                onClick={() => closeDialog()}
+                onClick={() => {
+                  const path = toPath({
+                    page: 'userProfile',
+                    userName: viewer?.userName || '',
+                  })
+                  const protocal =
+                    process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local'
+                      ? 'http'
+                      : 'https'
+                  router.push(
+                    `${protocal}://${process.env.NEXT_PUBLIC_SITE_DOMAIN}${path.href}`
+                  )
+                  closeDialog()
+                }}
               >
                 <TextIcon size="md" weight="semibold" color="black">
                   <Translate
