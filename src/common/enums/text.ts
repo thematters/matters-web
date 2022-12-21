@@ -1194,7 +1194,7 @@ export const TEXT = {
     TOKEN_INVALID: 'Please log in again',
     topic: 'Topic',
     topUp: 'Top Up',
-    toYourIPNSPage: 'with your IPNS page',
+    toYourIPNSPage: 'to your IPNS page',
     UNABLE_TO_UPLOAD_FROM_URL:
       'File upload failed, please verify the file link is valid, or manually download and upload again.',
     UNAUTHENTICATED: 'Please log in.',

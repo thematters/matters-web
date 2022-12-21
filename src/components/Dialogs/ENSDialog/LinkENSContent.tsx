@@ -43,6 +43,7 @@ const LinkENSContent = ({
 }: LinkENSContentProps) => {
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
+  const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
   const { address } = useAccount()
   const { chain: currentChain } = useNetwork()
@@ -50,7 +51,7 @@ const LinkENSContent = ({
   const isConnectedAddress =
     viewer.info.ethAddress?.toLowerCase() === address?.toLowerCase()
 
-  const isUnsupportedNetwork = !!currentChain?.unsupported
+  const isUnsupportedNetwork = currentChain?.id !== (isProd ? chain.mainnet.id : chain.goerli.id)
   const targetChainName = chains[0]?.name
   const targetChainId = chains[0]?.id
   const switchToTargetNetwork = async () => {
@@ -58,7 +59,6 @@ const LinkENSContent = ({
 
     switchNetwork(targetChainId)
   }
-  const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
   const { data: ensName } = useEnsName({
     address: viewer.info.ethAddress as `0x${string}`,

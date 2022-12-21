@@ -106,6 +106,9 @@ footer {
 
   gap: var(--spacing-x-tight);
 
+  & .ens-bnt {
+    margin-top: var(--spacing-base);
+  }
   & .info-icon {
     @mixin flex-center-all;
   }
