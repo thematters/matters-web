@@ -18,7 +18,6 @@ import {
   Layout,
   RssFeedDialog,
   Spinner,
-  TextIcon,
   Throw404,
   Tooltip,
   Translate,
@@ -108,7 +107,6 @@ export const UserProfile = () => {
     address: address as `0x${string}`,
     chainId: isProd ? chain.mainnet.id : chain.goerli.id,
   })
-
   const { data: resolverData } = useEnsResolver({
     name: ensName as string,
   })
@@ -122,7 +120,7 @@ export const UserProfile = () => {
   const ipnsHash = user?.info.ipnsKey
   const hasLinkedIPNS =
     !!ipnsHash && '0x' + contentHash.encode('ipns-ns', ipnsHash) === readData
-  const hasLinkEnsButton = ensName && !hasLinkedIPNS && isMe
+  const hasLinkEnsButton = ensName && !hasLinkedIPNS && isMe && ipnsHash
 
   /**
    * Render
@@ -317,28 +315,32 @@ export const UserProfile = () => {
           </section>
           <section className="ens-name">
             {user.info.ethAddress && (
-              <WalletAddress address={user.info.ethAddress} />
+              <WalletAddress
+                address={user.info.ethAddress}
+                hasLinkedIPNS={hasLinkedIPNS}
+              />
             )}
-            {hasLinkEnsButton && (
-              <ENSDialog user={user}>
-                {({ openDialog }) => (
-                  <>
-                    <Button
-                      size={[null, '1.5rem']}
-                      spacing={[0, 'tight']}
-                      borderColor="green"
-                      onClick={() => {
-                        openDialog()
-                      }}
-                    >
-                      <TextIcon color="green">
+            {
+              <section className="ens-bnt">
+                {hasLinkEnsButton && (
+                  <ENSDialog user={user}>
+                    {({ openDialog }) => (
+                      <Button
+                        size={[null, '1.5rem']}
+                        spacing={[0, 'tight']}
+                        borderColor="green"
+                        onClick={() => {
+                          openDialog()
+                        }}
+                        textColor="green"
+                      >
                         <Translate id="bindIPNStoENS" />
-                      </TextIcon>
-                    </Button>
-                  </>
+                      </Button>
+                    )}
+                  </ENSDialog>
                 )}
-              </ENSDialog>
-            )}
+              </section>
+            }
             {hasLinkedIPNS && !isMe && (
               <Tooltip
                 content={
@@ -359,6 +361,7 @@ export const UserProfile = () => {
             content={user.info.description}
             color="grey-darker"
             size="md"
+            spacingTop="base"
           >
             <p className="description">{user.info.description}</p>
           </Expandable>

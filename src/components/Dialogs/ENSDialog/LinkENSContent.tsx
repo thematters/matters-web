@@ -3,9 +3,11 @@ import contentHash from '@ensdomains/content-hash'
 import { namehash } from 'ethers/lib/utils'
 import { useContext } from 'react'
 import {
+  chain,
   etherscanBlockExplorers,
   useAccount,
   useContractWrite,
+  useDisconnect,
   useEnsName,
   useEnsResolver,
   useNetwork,
@@ -31,33 +33,41 @@ import { UserProfileUserPublic_user } from '~/components/UserProfile/__generated
 
 interface LinkENSContentProps {
   user: UserProfileUserPublic_user
+  switchToWalletSelect: () => void
   closeDialog: () => void
 }
-const LinkENSContent = ({ user, closeDialog }: LinkENSContentProps) => {
+const LinkENSContent = ({
+  user,
+  closeDialog,
+  switchToWalletSelect,
+}: LinkENSContentProps) => {
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
 
   const { address } = useAccount()
-  const { chain } = useNetwork()
+  const { chain: currentChain } = useNetwork()
   const { chains, switchNetwork } = useSwitchNetwork()
   const isConnectedAddress =
     viewer.info.ethAddress?.toLowerCase() === address?.toLowerCase()
-  const isUnsupportedNetwork = !!chain?.unsupported
-  const targetChainName = chains[0]?.name
 
+  const isUnsupportedNetwork = !!currentChain?.unsupported
+  const targetChainName = chains[0]?.name
   const targetChainId = chains[0]?.id
   const switchToTargetNetwork = async () => {
     if (!switchNetwork) return
 
     switchNetwork(targetChainId)
   }
+  const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
   const { data: ensName } = useEnsName({
-    address,
+    address: viewer.info.ethAddress as `0x${string}`,
+    chainId: isProd ? chain.mainnet.id : chain.goerli.id,
   })
   const { data: resolverData } = useEnsResolver({
     name: ensName as string,
   })
+  const { disconnect } = useDisconnect()
 
   const ipnsHash = user?.info.ipnsKey
 
@@ -74,7 +84,7 @@ const LinkENSContent = ({ user, closeDialog }: LinkENSContentProps) => {
     functionName: 'setContenthash',
     args: [
       namehash(ensName || ('' as string)),
-      '0x' + contentHash.encode('ipns-ns', !!ipnsHash),
+      !!ipnsHash && '0x' + contentHash.encode('ipns-ns', ipnsHash),
     ],
   })
 
@@ -85,11 +95,11 @@ const LinkENSContent = ({ user, closeDialog }: LinkENSContentProps) => {
       setContenthash()
     }
   }
-  const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
   const scanUrl = isProd
     ? etherscanBlockExplorers.mainnet.url
     : etherscanBlockExplorers.goerli.url
+
   return (
     <>
       <Dialog.Content>
@@ -130,67 +140,69 @@ const LinkENSContent = ({ user, closeDialog }: LinkENSContentProps) => {
             </p>
           )}
           {!isConnectedAddress && (
-            <p className="reconnect-hint">
-              <Translate id="reconnectHint" />
-              <CopyToClipboard text={viewer.info.ethAddress || ''}>
-                <Button
-                  spacing={['xtight', 'xtight']}
-                  aria-label={translate({ id: 'copy', lang })}
-                >
-                  <TextIcon
-                    icon={<IconCopy16 color="black" size="xs" />}
-                    color="grey"
-                    textPlacement="left"
+            <>
+              <p className="reconnect-hint">
+                <Translate id="reconnectHint" />
+                <CopyToClipboard text={viewer.info.ethAddress || ''}>
+                  <Button
+                    spacing={['xtight', 'xtight']}
+                    aria-label={translate({ id: 'copy', lang })}
                   >
-                    {maskAddress(viewer.info.ethAddress || '')}
-                  </TextIcon>
-                </Button>
-              </CopyToClipboard>
-            </p>
+                    <TextIcon
+                      icon={<IconCopy16 color="black" size="xs" />}
+                      color="grey"
+                      textPlacement="left"
+                    >
+                      {maskAddress(viewer.info.ethAddress || '')}
+                    </TextIcon>
+                  </Button>
+                </CopyToClipboard>
+              </p>
+            </>
           )}
           <section className="btn">
-            {!isConnectedAddress && !isLoading && isUnsupportedNetwork ? (
+            {!isConnectedAddress && (
               <Dialog.Footer.Button
-                size={['19.5rem', '3rem']}
                 bgColor="green"
-                onClick={switchToTargetNetwork}
+                textColor="white"
+                onClick={() => {
+                  disconnect()
+                  switchToWalletSelect()
+                }}
               >
-                <TextIcon size="md" weight="semibold" color="white">
-                  <Translate
-                    zh_hant="切換到 "
-                    zh_hans="切换到 "
-                    en="Switch to "
-                  />
-                  {targetChainName}
-                </TextIcon>
+                <Translate
+                  zh_hant="重新連接錢包"
+                  zh_hans="重新连接钱包"
+                  en="Reconnect Wallet"
+                />
               </Dialog.Footer.Button>
-            ) : (
-              isConnectedAddress &&
+            )}
+            {isConnectedAddress && !isLoading && isUnsupportedNetwork && (
+              <Dialog.Footer.Button onClick={switchToTargetNetwork}>
+                <Translate
+                  zh_hant="切換到 "
+                  zh_hans="切换到 "
+                  en="Switch to "
+                />
+                {targetChainName}
+              </Dialog.Footer.Button>
+            )}
+            {isConnectedAddress &&
+              !isUnsupportedNetwork &&
               !isLoading &&
               !isSuccess && (
                 <Dialog.Footer.Button
-                  size={['19.5rem', '3rem']}
-                  bgColor="green"
                   onClick={() => {
                     linkIPNStoENS()
                   }}
                 >
-                  <TextIcon size="md" weight="semibold" color="white">
-                    <Translate id="bindIPNStoENS" />
-                  </TextIcon>
+                  <Translate id="bindIPNStoENS" />
                 </Dialog.Footer.Button>
-              )
-            )}
-            {isLoading && (
-              <Dialog.Footer.Button
-                loading={isLoading}
-                size={['19.5rem', '3rem']}
-                bgColor="green"
-              />
-            )}
+              )}
+
+            {isLoading && <Dialog.Footer.Button loading={isLoading} />}
             {isSuccess && (
               <Dialog.Footer.Button
-                size={['19.5rem', '3rem']}
                 bgColor="grey-lighter"
                 onClick={() => closeDialog()}
               >

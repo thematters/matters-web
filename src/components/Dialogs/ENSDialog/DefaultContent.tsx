@@ -1,6 +1,7 @@
-import { useAccount, useEnsName } from 'wagmi'
+import { useContext } from 'react'
+import { chain, useAccount, useEnsName } from 'wagmi'
 
-import { Dialog, TextIcon, Translate } from '~/components'
+import { Dialog, Translate, ViewerContext } from '~/components'
 
 import { EXTERNAL_LINKS } from '~/common/enums'
 
@@ -8,13 +9,26 @@ import styles from './styles.css'
 
 interface DefaultContentProps {
   switchToWalletSelect: () => void
+  switchToLinkENS: () => void
 }
-const DefaultContent = ({ switchToWalletSelect }: DefaultContentProps) => {
-  const { address } = useAccount()
+const DefaultContent = ({
+  switchToWalletSelect,
+  switchToLinkENS,
+}: DefaultContentProps) => {
+  const viewer = useContext(ViewerContext)
+
+  const { address: connectedAddress } = useAccount()
+  const address = viewer.info.ethAddress
+
+  const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
   const { data: ensName } = useEnsName({
     address: address as `0x${string}`,
+    chainId: isProd ? chain.mainnet.id : chain.goerli.id,
   })
+  if (connectedAddress) {
+    switchToLinkENS()
+  }
 
   return (
     <>
@@ -26,25 +40,23 @@ const DefaultContent = ({ switchToWalletSelect }: DefaultContentProps) => {
               <span className="ens">&nbsp;{ensName}&nbsp;</span>
               <Translate id="toYourIPNSPage" />
             </span>
-            <span className="btn">
-              <Dialog.Footer.Button
-                size={['19.5rem', '3rem']}
-                bgColor="green"
-                onClick={() => {
-                  switchToWalletSelect()
-                }}
-              >
-                <TextIcon size="md" weight="semibold" color="white">
+            {!connectedAddress && (
+              <span className="btn">
+                <Dialog.Footer.Button
+                  onClick={() => {
+                    switchToWalletSelect()
+                  }}
+                >
                   <Translate
                     zh_hans="连接钱包"
                     zh_hant="連接錢包"
                     en="Connect Wallet"
                   />
-                </TextIcon>
-              </Dialog.Footer.Button>
-            </span>
+                </Dialog.Footer.Button>
+              </span>
+            )}
           </section>
-          <hr style={{ margin: '1rem 0' }} />
+          <hr style={{ marginBottom: '1rem' }} />
           <section className="description">
             <section className="list">
               <p>
