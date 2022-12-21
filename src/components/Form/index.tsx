@@ -2,7 +2,6 @@ import AmountInput from './AmountInput'
 import CheckBox from './CheckBox'
 import ComposedAmountInput from './ComposedAmountInput'
 import CurrencyRadioInput from './CurrencyRadioInput'
-import DropdownInput from './DropdownInput'
 import Field from './Field'
 import Input from './Input'
 import List from './List'
@@ -23,7 +22,6 @@ export const Form: React.FC<FormProps> & {
   Textarea: typeof Textarea
   CheckBox: typeof CheckBox
   PinInput: typeof PinInput
-  DropdownInput: typeof DropdownInput
   AmountInput: typeof AmountInput
   List: typeof List
   Field: typeof Field
@@ -47,7 +45,6 @@ Form.Input = Input
 Form.Textarea = Textarea
 Form.CheckBox = CheckBox
 Form.PinInput = PinInput
-Form.DropdownInput = DropdownInput
 Form.AmountInput = AmountInput
 Form.List = List
 Form.Field = Field
