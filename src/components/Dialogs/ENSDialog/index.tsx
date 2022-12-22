@@ -83,7 +83,6 @@ const BaseENSDilaog = ({
         {isBindIPNS && (
           <DynamicLinkENS
             user={user}
-            closeDialog={closeDialog}
             switchToWalletSelect={() => {
               forward('walletSelect')
             }}

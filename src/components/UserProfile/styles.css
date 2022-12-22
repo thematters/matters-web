@@ -114,6 +114,6 @@ footer {
   & .info-icon {
     @mixin flex-center-all;
 
-    margin-top: var(--spacing-base);
+    margin: var(--spacing-base) 0 0 calc(var(--spacing-x-tight) * -1);
   }
 }

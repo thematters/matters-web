@@ -1,7 +1,6 @@
 // @ts-ignore
 import contentHash from '@ensdomains/content-hash'
 import { namehash } from 'ethers/lib/utils'
-import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
 import {
   chain,
@@ -26,12 +25,7 @@ import {
   ViewerContext,
 } from '~/components'
 
-import {
-  maskAddress,
-  PublicResolverABI,
-  toPath,
-  translate,
-} from '~/common/utils'
+import { maskAddress, PublicResolverABI, translate } from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -40,16 +34,13 @@ import { UserProfileUserPublic_user } from '~/components/UserProfile/__generated
 interface LinkENSContentProps {
   user: UserProfileUserPublic_user
   switchToWalletSelect: () => void
-  closeDialog: () => void
 }
 const LinkENSContent = ({
   user,
-  closeDialog,
   switchToWalletSelect,
 }: LinkENSContentProps) => {
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
-  const router = useRouter()
 
   const [txConfirming, setTxConfirming] = useState<boolean>(false)
   const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
@@ -227,18 +218,7 @@ const LinkENSContent = ({
               <Dialog.Footer.Button
                 bgColor="grey-lighter"
                 onClick={() => {
-                  const path = toPath({
-                    page: 'userProfile',
-                    userName: viewer?.userName || '',
-                  })
-                  const protocal =
-                    process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local'
-                      ? 'http'
-                      : 'https'
-                  router.push(
-                    `${protocal}://${process.env.NEXT_PUBLIC_SITE_DOMAIN}${path.href}`
-                  )
-                  closeDialog()
+                  window.location.reload()
                 }}
               >
                 <TextIcon size="md" weight="semibold" color="black">

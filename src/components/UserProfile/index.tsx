@@ -12,7 +12,7 @@ import {
   Error,
   Expandable,
   FollowUserButton,
-  IconInfo16,
+  IconHelp16,
   IconRss32,
   LanguageContext,
   Layout,
@@ -321,27 +321,25 @@ export const UserProfile = () => {
                 hasLinkedIPNS={hasLinkedIPNS}
               />
             )}
-            {
-              <section className="ens-bnt">
-                {hasLinkEnsButton && (
-                  <ENSDialog user={user}>
-                    {({ openDialog }) => (
-                      <Button
-                        size={[null, '1.5rem']}
-                        spacing={[0, 'tight']}
-                        borderColor="green"
-                        onClick={() => {
-                          openDialog()
-                        }}
-                        textColor="green"
-                      >
-                        <Translate id="bindIPNStoENS" />
-                      </Button>
-                    )}
-                  </ENSDialog>
-                )}
-              </section>
-            }
+            <section className="ens-bnt">
+              {hasLinkEnsButton && (
+                <ENSDialog user={user}>
+                  {({ openDialog }) => (
+                    <Button
+                      size={[null, '1.5rem']}
+                      spacing={[0, 'tight']}
+                      borderColor="green"
+                      onClick={() => {
+                        openDialog()
+                      }}
+                      textColor="green"
+                    >
+                      <Translate id="bindIPNStoENS" />
+                    </Button>
+                  )}
+                </ENSDialog>
+              )}
+            </section>
             {hasLinkedIPNS && !isMe && (
               <Tooltip
                 content={
@@ -353,7 +351,7 @@ export const UserProfile = () => {
                 }
               >
                 <span className="info-icon">
-                  <IconInfo16 size="sm" color="grey" />
+                  <IconHelp16 color="grey" />
                 </span>
               </Tooltip>
             )}

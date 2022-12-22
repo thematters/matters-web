@@ -49,6 +49,7 @@ const WalletAddress: React.FC<WalletAddressProps> = ({
                 color="green"
                 spacing="xtight"
                 textPlacement="left"
+                size="md"
               >
                 {ensName}
               </TextIcon>
@@ -61,26 +62,24 @@ const WalletAddress: React.FC<WalletAddressProps> = ({
   }
   return (
     <section className="address">
-      {
-        <CopyToClipboard text={ensName || address}>
-          <Button
-            spacing={['xxtight', 'tight']}
-            bgColor="green-lighter"
-            bgActiveColor="grey-lighter"
-            aria-label={translate({ id: 'copy', lang })}
+      <CopyToClipboard text={ensName || address}>
+        <Button
+          spacing={['xxtight', 'tight']}
+          bgColor="green-lighter"
+          bgActiveColor="grey-lighter"
+          aria-label={translate({ id: 'copy', lang })}
+        >
+          <TextIcon
+            icon={<IconCopy16 size="sm" />}
+            spacing="xtight"
+            textPlacement="left"
+            color="green"
+            size="md"
           >
-            <TextIcon
-              icon={<IconCopy16 size="sm" />}
-              spacing="xtight"
-              textPlacement="left"
-              color="green"
-              size="md"
-            >
-              {ensName || maskAddress(ethers.utils.getAddress(address))}
-            </TextIcon>
-          </Button>
-        </CopyToClipboard>
-      }
+            {ensName || maskAddress(ethers.utils.getAddress(address))}
+          </TextIcon>
+        </Button>
+      </CopyToClipboard>
       <style jsx>{styles}</style>
     </section>
   )
