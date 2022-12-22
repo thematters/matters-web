@@ -110,8 +110,8 @@ export const UserProfile = () => {
   })
   const { data: resolverData } = useEnsResolver({
     name: ensName as string,
+    chainId: isProd ? chain.mainnet.id : chain.goerli.id,
   })
-
   const { data: readData } = useContractRead({
     address: resolverData?.address,
     abi: PublicResolverABI,
