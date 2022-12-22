@@ -1,12 +1,18 @@
+// @ts-ignore
+import contentHash from '@ensdomains/content-hash'
+import { namehash } from 'ethers/lib/utils'
 import { useContext, useEffect } from 'react'
+import { chain, useContractRead, useEnsName, useEnsResolver } from 'wagmi'
 
 import {
   Avatar,
   Button,
   Cover,
+  ENSDialog,
   Error,
   Expandable,
   FollowUserButton,
+  IconHelp16,
   IconRss32,
   LanguageContext,
   Layout,
@@ -21,7 +27,7 @@ import {
 } from '~/components'
 import ShareButton from '~/components/Layout/Header/ShareButton'
 
-import { numAbbr, translate } from '~/common/utils'
+import { numAbbr, PublicResolverABI, translate } from '~/common/utils'
 
 import IMAGE_COVER from '@/public/static/images/profile-cover.png'
 
@@ -95,6 +101,28 @@ export const UserProfile = () => {
     })
   }, [user?.id, viewer.id])
 
+  const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
+
+  const address = user?.info.ethAddress
+  const { data: ensName } = useEnsName({
+    address: address as `0x${string}`,
+    chainId: isProd ? chain.mainnet.id : chain.goerli.id,
+  })
+  const { data: resolverData } = useEnsResolver({
+    name: ensName as string,
+  })
+
+  const { data: readData } = useContractRead({
+    address: resolverData?.address,
+    abi: PublicResolverABI,
+    functionName: 'contenthash',
+    args: [namehash(ensName || ('' as string))],
+    chainId: isProd ? chain.mainnet.id : chain.goerli.id,
+  })
+  const ipnsHash = user?.info.ipnsKey
+  const hasLinkedIPNS =
+    !!ipnsHash && '0x' + contentHash.encode('ipns-ns', ipnsHash) === readData
+  const hasLinkEnsButton = ensName && !hasLinkedIPNS && isMe && ipnsHash
   /**
    * Render
    */
@@ -286,16 +314,53 @@ export const UserProfile = () => {
             <span className="name">@{user.userName}</span>
             {!isMe && <FollowUserButton.State user={user} />}
           </section>
-
-          {user.info.ethAddress && (
-            <WalletAddress address={user.info.ethAddress} />
-          )}
-
+          <section className="ens-name">
+            {user.info.ethAddress && (
+              <WalletAddress
+                address={user.info.ethAddress}
+                hasLinkedIPNS={hasLinkedIPNS}
+              />
+            )}
+            <section className="ens-bnt">
+              {hasLinkEnsButton && (
+                <ENSDialog user={user}>
+                  {({ openDialog }) => (
+                    <Button
+                      size={[null, '1.5rem']}
+                      spacing={[0, 'tight']}
+                      borderColor="green"
+                      onClick={() => {
+                        openDialog()
+                      }}
+                      textColor="green"
+                    >
+                      <Translate id="bindIPNStoENS" />
+                    </Button>
+                  )}
+                </ENSDialog>
+              )}
+            </section>
+            {hasLinkedIPNS && !isMe && (
+              <Tooltip
+                content={
+                  <Translate
+                    zh_hans={`${user.displayName} 已将他的 ENS 指向到个人 IPNS 页面`}
+                    zh_hant={`${user.displayName} 已將他的 ENS 指向到個人 IPNS 頁面`}
+                    en={`${user.displayName} has linked primary ENS name to his IPNS page. `}
+                  />
+                }
+              >
+                <span className="info-icon">
+                  <IconHelp16 color="grey" />
+                </span>
+              </Tooltip>
+            )}
+          </section>
           <Expandable
             content={user.info.description}
             color="grey-darker"
-            spacingTop="base"
             size="md"
+            spacingTop="base"
           >
             <p className="description">{user.info.description}</p>
           </Expandable>

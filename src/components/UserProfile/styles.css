@@ -100,3 +100,20 @@ footer {
     color: var(--color-black);
   }
 }
+
+.ens-name {
+  @mixin flex-center-start;
+
+  gap: var(--spacing-x-tight);
+
+  & .ens-bnt {
+    margin-top: var(--spacing-base);
+    font-size: var(--font-size-xs);
+  }
+
+  & .info-icon {
+    @mixin flex-center-all;
+
+    margin: var(--spacing-base) 0 0 calc(var(--spacing-x-tight) * -1);
+  }
+}

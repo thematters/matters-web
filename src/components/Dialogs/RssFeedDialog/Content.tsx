@@ -1,7 +1,11 @@
 import { useQuery } from '@apollo/react-hooks'
+// @ts-ignore
+import contentHash from '@ensdomains/content-hash'
 import classNames from 'classnames'
+import { namehash } from 'ethers/lib/utils'
 import gql from 'graphql-tag'
 import { useContext } from 'react'
+import { useContractRead, useEnsName, useEnsResolver } from 'wagmi'
 
 import {
   Button,
@@ -17,10 +21,11 @@ import {
 } from '~/components'
 
 import { EXTERNAL_LINKS } from '~/common/enums'
-import { translate } from '~/common/utils'
+import { PublicResolverABI, translate } from '~/common/utils'
 
 import styles from './styles.css'
 
+import { AuthorRssFeed } from './__generated__/AuthorRssFeed'
 import { RssGateways } from './__generated__/RssGateways'
 
 const RSS_GATEWAYS = gql`
@@ -86,10 +91,10 @@ const SectionCard: React.FC<
 }
 
 const RssFeedDialogContent = ({
-  ipnsKey,
+  user,
   articlesCount,
 }: {
-  ipnsKey: string
+  user: AuthorRssFeed
   articlesCount: number
   refetch: () => any
 }) => {
@@ -98,7 +103,26 @@ const RssFeedDialogContent = ({
 
   const gateways = data?.official.gatewayUrls || []
 
+  const ipnsKey = user.info.ipnsKey
   const notPushlishedLately = articlesCount !== 0 && ipnsKey === ''
+
+  const address = user?.info.ethAddress
+  const { data: ensName } = useEnsName({
+    address: address as `0x${string}`,
+  })
+
+  const { data: resolverData } = useEnsResolver({
+    name: ensName as string,
+  })
+  const { data: readData } = useContractRead({
+    address: resolverData?.address,
+    abi: PublicResolverABI,
+    functionName: 'contenthash',
+    args: [namehash(ensName || ('' as string))],
+  })
+  const hasLinkedIPNS =
+    !!ipnsKey && '0x' + contentHash.encode('ipns-ns', ipnsKey) === readData
+  const displayIPNS = hasLinkedIPNS ? ensName : user.info.ipnsKey
 
   return (
     <section className="container">
@@ -149,11 +173,11 @@ const RssFeedDialogContent = ({
             <section className="copy">
               <input
                 type="text"
-                value={ipnsKey}
+                value={displayIPNS!}
                 readOnly
                 onClick={(event) => event.currentTarget.select()}
               />
-              <CopyToClipboard text={ipnsKey}>
+              <CopyToClipboard text={displayIPNS!}>
                 <Button aria-label={translate({ id: 'copy', lang })}>
                   <IconCopy16 />
                 </Button>
@@ -198,7 +222,7 @@ const RssFeedDialogContent = ({
 
               {gateways.map((url) => {
                 const gatewayUrl = url
-                  .replace(':hash', ipnsKey)
+                  .replace(':hash', displayIPNS!)
                   .replace('/ipfs/', '/ipns/')
                   .concat('/rss.xml')
                 const hostname = url.replace(

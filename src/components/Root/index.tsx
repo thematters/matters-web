@@ -60,7 +60,14 @@ import('@sentry/browser').then((Sentry) => {
 const wagmiClient = createClient({
   autoConnect: true,
   connectors: [
-    new MetaMaskConnector({ chains }),
+    new MetaMaskConnector({
+      chains,
+      options: {
+        // For disconnecting from metamask
+        shimDisconnect: true,
+        UNSTABLE_shimOnConnectSelectAccount: true,
+      },
+    }),
     new WalletConnectConnector({
       chains,
       options: {

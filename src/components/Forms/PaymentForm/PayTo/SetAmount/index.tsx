@@ -4,7 +4,7 @@ import { useFormik } from 'formik'
 import _get from 'lodash/get'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useEffect, useRef, useState } from 'react'
-import { useAccount, useNetwork, useSwitchNetwork } from 'wagmi'
+import { chain, useAccount, useNetwork, useSwitchNetwork } from 'wagmi'
 
 import {
   Dialog,
@@ -106,14 +106,16 @@ const SetAmount: React.FC<FormProps> = ({
   const quoteCurrency = viewer.settings.currency
   const { lang } = useContext(LanguageContext)
   const { address } = useAccount()
-  const { chain } = useNetwork()
-  const { chains, switchNetwork } = useSwitchNetwork()
+  const { chain: currentChain } = useNetwork()
+  const { switchNetwork } = useSwitchNetwork()
 
+  const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
   const isConnectedAddress =
     viewer.info.ethAddress?.toLowerCase() === address?.toLowerCase()
-  const isUnsupportedNetwork = !!chain?.unsupported
-  const targetChainName = chains[0]?.name
-  const targetChainId = chains[0]?.id
+  const isUnsupportedNetwork =
+    currentChain?.id !== (isProd ? chain.polygon.id : chain.polygonMumbai.id)
+  const targetChainName = isProd ? chain.polygon.name : chain.polygonMumbai.name
+  const targetChainId = isProd ? chain.polygon.id : chain.polygonMumbai.id
   const switchToTargetNetwork = async () => {
     if (!switchNetwork) return
 
