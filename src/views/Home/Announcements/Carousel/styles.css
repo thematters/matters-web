@@ -100,7 +100,7 @@ header {
 }
 
 .dot {
-  @mixin all-transition;
+  @mixin transition;
 
   box-sizing: content-box;
   box-sizing: border-box;
@@ -111,6 +111,7 @@ header {
   background: rgba(255, 255, 255, 0.7);
   border: 2px solid rgba(255, 255, 255, 0);
   border-radius: 100%;
+  transition-property: border-color, border-width, background-color;
 
   &.selected {
     background: rgba(255, 255, 255, 1);

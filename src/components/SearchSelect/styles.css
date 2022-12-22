@@ -17,7 +17,6 @@
 
     & .drag-handler {
       @mixin flex-center-all;
-      @mixin all-transition;
 
       position: absolute;
       top: 0;

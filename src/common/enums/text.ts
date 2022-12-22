@@ -759,7 +759,7 @@ export const TEXT = {
     term: '用户协议',
     termAndPrivacy: '用户协议与隐私政策',
     termHint: '我们的用户协议和隐私政策发生了更改，请阅读并同意后继续使用。',
-    theFirstSupporter: '第一个支持了這篇作品',
+    theFirstSupporter: '第一个支持了这篇作品',
     thinkAboutIt: '考虑一下',
     TOKEN_INVALID: '登录信息已失效，请重新登录',
     topic: '话题',

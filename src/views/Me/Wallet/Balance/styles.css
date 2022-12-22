@@ -18,9 +18,10 @@
   }
 
   &.clickable {
-    @mixin all-transition;
+    @mixin transition;
 
     cursor: pointer;
+    transition-property: background-color;
 
     &:hover {
       background-color: var(--color-grey-lighter-active);

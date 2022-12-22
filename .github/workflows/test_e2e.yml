@@ -1,0 +1,75 @@
+name: Test E2E
+
+on: push
+
+env:
+  PLAYWRIGHT_TEST_BASE_URL: 'https://web-develop.matters.news'
+  PLAYWRIGHT_RUNTIME_ENV: 'ci'
+  PLAYWRIGHT_AUTH_EMAIL_ALICE: ${{ secrets.PLAYWRIGHT_AUTH_EMAIL_ALICE }}
+  PLAYWRIGHT_AUTH_PWD_ALICE: ${{ secrets.PLAYWRIGHT_AUTH_PWD_ALICE }}
+  PLAYWRIGHT_AUTH_EMAIL_BOB: ${{ secrets.PLAYWRIGHT_AUTH_EMAIL_BOB }}
+  PLAYWRIGHT_AUTH_PWD_BOB: ${{ secrets.PLAYWRIGHT_AUTH_PWD_BOB }}
+
+jobs:
+  e2e:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@master
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.14'
+          cache: 'npm'
+
+      - name: Cache NPM dependencies
+        uses: actions/cache@v3
+        id: node_modules_cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-npm-v3-${{ hashFiles('package-lock.json') }}
+
+      - name: Install Dependencies
+        if: steps.node_modules_cache.outputs.cache-hit != 'true'
+        run: npm ci --legacy-peer-deps
+
+      - name: Get installed Playwright version
+        id: playwright-version
+        run: echo "PLAYWRIGHT_VERSION=$(node -e "console.log(require('./package-lock.json').dependencies['@playwright/test'].version)")" >> $GITHUB_ENV
+
+      - name: Cache playwright binaries
+        uses: actions/cache@v3
+        id: playwright_cache
+        with:
+          path: |
+            ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
+
+      - name: Install Playwright Browsers
+        run: npm run test:prepare
+        if: steps.playwright_cache.outputs.cache-hit != 'true'
+
+      - name: Generate Types (Develop)
+        if: github.base_ref != 'master'
+        run: |
+          npm run gen:clean \
+          && npm run gen:type
+
+      - name: Generate Types (production)
+        if: github.base_ref == 'master'
+        run: |
+          npm run gen:clean \
+          && npm run gen:type:prod
+
+      - name: Run Playwright tests
+        run: npm run test
+
+      - name: Output Playwright tests
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30

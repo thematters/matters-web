@@ -60,4 +60,6 @@ export enum TEST_ID {
   CRYPTO_WALLET_AIRDROP = 'notice/crypto-wallet-airdrop',
   CRYPTO_WALLET_CONNECTED = 'notice/crypto-wallet-connected',
   OFFICIAL_ANNOUNCEMENT = 'notice/official-announcement',
+  // misc
+  SPINNER = 'spinner',
 }
