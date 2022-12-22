@@ -27,6 +27,7 @@ import {
 
 import { maskAddress, PublicResolverABI, translate } from '~/common/utils'
 
+import { ENSDescription } from './DefaultContent'
 import styles from './styles.css'
 
 import { UserProfileUserPublic_user } from '~/components/UserProfile/__generated__/UserProfileUserPublic'
@@ -46,8 +47,9 @@ const LinkENSContent = ({
   const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
   const { address } = useAccount()
+
   const { chain: currentChain } = useNetwork()
-  const { switchNetwork } = useSwitchNetwork()
+  const { switchNetwork, isLoading: isSwitchingNetwork } = useSwitchNetwork()
   const isConnectedAddress =
     viewer.info.ethAddress?.toLowerCase() === address?.toLowerCase()
   const isUnsupportedNetwork =
@@ -107,6 +109,9 @@ const LinkENSContent = ({
     })()
   }, [blockchainTx])
 
+  const switchNetworkState =
+    !isLoading && isUnsupportedNetwork && !isSwitchingNetwork
+  const reConnectWallet = !isConnectedAddress
   const scanUrl = isProd
     ? etherscanBlockExplorers.mainnet.url
     : etherscanBlockExplorers.goerli.url
@@ -116,7 +121,7 @@ const LinkENSContent = ({
       <Dialog.Content>
         <section className="link-ens-container">
           <span className="info">
-            {(!isSuccess || txConfirming) && (
+            {(!isSuccess || txConfirming) && !isSwitchingNetwork && (
               <>
                 <Translate zh_hans={`关联`} zh_hant={`關聯`} en={`Link`} />
                 <span className="ens">&nbsp;{ensName}&nbsp;</span>
@@ -126,8 +131,8 @@ const LinkENSContent = ({
             {isSuccess && !txConfirming && (
               <>
                 <Translate
-                  zh_hans="已成功关联，稍后完成同步在&nbsp;"
-                  zh_hant="已成功關聯，稍後完成同步在&nbsp;"
+                  zh_hans="已成功关联，稍后完成。在&nbsp;"
+                  zh_hant="已成功關聯，稍後完成。在&nbsp;"
                   en="Successfully linked. It would take couple hours to resolve. View transation on&nbsp;"
                 />
                 <a href={`${scanUrl}/tx/${blockchainTx?.hash}`} target="_blank">
@@ -140,8 +145,15 @@ const LinkENSContent = ({
                 />
               </>
             )}
+            {isSwitchingNetwork && (
+              <Translate
+                zh_hans="切换网络中⋯"
+                zh_hant="切換網絡中⋯"
+                en="Switching the network..."
+              />
+            )}
           </span>
-          {isError && (
+          {isError && !switchNetworkState && !isSwitchingNetwork && (
             <p className="error">
               <Translate
                 zh_hans="未知错误，请确认你的钱包并重新尝试"
@@ -150,7 +162,7 @@ const LinkENSContent = ({
               />
             </p>
           )}
-          {!isConnectedAddress && (
+          {reConnectWallet && (
             <>
               <p className="reconnect-hint">
                 <Translate id="reconnectHint" />
@@ -188,15 +200,17 @@ const LinkENSContent = ({
                 />
               </Dialog.Footer.Button>
             )}
-            {isConnectedAddress && !isLoading && isUnsupportedNetwork && (
-              <Dialog.Footer.Button onClick={switchToTargetNetwork}>
-                <Translate
-                  zh_hant="切換到 "
-                  zh_hans="切换到 "
-                  en="Switch to "
-                />
-                {targetChainName}
-              </Dialog.Footer.Button>
+            {switchNetworkState && (
+              <>
+                <Dialog.Footer.Button onClick={switchToTargetNetwork}>
+                  <Translate
+                    zh_hant="切換到 "
+                    zh_hans="切换到 "
+                    en="Switch to "
+                  />
+                  {targetChainName}
+                </Dialog.Footer.Button>
+              </>
             )}
             {isConnectedAddress &&
               !isUnsupportedNetwork &&
@@ -211,8 +225,10 @@ const LinkENSContent = ({
                 </Dialog.Footer.Button>
               )}
 
-            {(isLoading || txConfirming) && !isError && (
-              <Dialog.Footer.Button loading={isLoading || txConfirming} />
+            {(isLoading || txConfirming || isSwitchingNetwork) && !isError && (
+              <Dialog.Footer.Button
+                loading={isLoading || txConfirming || isSwitchingNetwork}
+              />
             )}
             {!txConfirming && isSuccess && (
               <Dialog.Footer.Button
@@ -231,6 +247,7 @@ const LinkENSContent = ({
               </Dialog.Footer.Button>
             )}
           </section>
+          {(!isConnectedAddress || switchNetworkState) && <ENSDescription />}
         </section>
         <style jsx>{styles}</style>
       </Dialog.Content>

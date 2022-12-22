@@ -11,6 +11,36 @@ interface DefaultContentProps {
   switchToWalletSelect: () => void
   switchToLinkENS: () => void
 }
+
+export const ENSDescription = () => {
+  return (
+    <section className="description">
+      <hr style={{ marginBottom: '1rem', marginTop: '22px' }} />
+      <section className="list">
+        <p>
+          <Translate id="linkEns" />
+        </p>
+        <ul>
+          <li>
+            <Translate id="linkEnsBenefit1" />{' '}
+          </li>
+          <li>
+            <Translate id="linkEnsBenefit2" />
+          </li>
+        </ul>
+      </section>
+      <p className="reference">
+        <Translate id="moreEnsInfo" />
+        &nbsp;
+        <a href={EXTERNAL_LINKS.ENS_DOCS} target="_blank">
+          <Translate zh_hans="官方文档" zh_hant="官方文檔" en="docs" />
+        </a>
+        <Translate en="." zh_hans="" zh_hant="" />
+      </p>
+      <style jsx>{styles}</style>
+    </section>
+  )
+}
 const DefaultContent = ({
   switchToWalletSelect,
   switchToLinkENS,
@@ -36,7 +66,7 @@ const DefaultContent = ({
         <section className="container">
           <section className="connect-wallet">
             <span className="info">
-              <Translate zh_hans={`关联`} zh_hant={`關聯`} en={`Link`} />
+              <Translate zh_hans={`将`} zh_hant={`將`} en={`Link`} />
               <span className="ens">&nbsp;{ensName}&nbsp;</span>
               <Translate id="toYourIPNSPage" />
             </span>
@@ -56,29 +86,7 @@ const DefaultContent = ({
               </span>
             )}
           </section>
-          <hr style={{ marginBottom: '1rem' }} />
-          <section className="description">
-            <section className="list">
-              <p>
-                <Translate id="linkEns" />
-              </p>
-              <ul>
-                <li>
-                  <Translate id="linkEnsBenefit1" />{' '}
-                </li>
-                <li>
-                  <Translate id="linkEnsBenefit2" />
-                </li>
-              </ul>
-            </section>
-            <p className="reference">
-              <Translate id="moreEnsInfo" />
-              &nbsp;
-              <a href={EXTERNAL_LINKS.ENS_DOCS} target="_blank">
-                <Translate zh_hans="官方文档" zh_hant="官方文檔" en="docs" />
-              </a>
-            </p>
-          </section>
+          <ENSDescription />
           <style jsx>{styles}</style>
         </section>
       </Dialog.Content>

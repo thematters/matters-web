@@ -361,7 +361,7 @@ export const TEXT = {
     TOKEN_INVALID: '登入信息已失效，請重新登入',
     topic: '話題',
     topUp: '儲值',
-    toYourIPNSPage: '到你的 IPNS 頁面',
+    toYourIPNSPage: '指向到你的 IPNS 頁面',
     UNABLE_TO_UPLOAD_FROM_URL:
       '檔案上傳失敗，請確認檔案連結是否有效，或手動下載後再上傳',
     UNAUTHENTICATED: '請先登入再進行操作',
@@ -764,7 +764,7 @@ export const TEXT = {
     TOKEN_INVALID: '登录信息已失效，请重新登录',
     topic: '话题',
     topUp: '储值',
-    toYourIPNSPage: '到你的 IPNS 页面',
+    toYourIPNSPage: '指向到你的 IPNS 页面',
     UNABLE_TO_UPLOAD_FROM_URL:
       '文件上传失败，请确认文件链接是否有效，或手动下载后再上传',
     UNAUTHENTICATED: '请先登录再进行操作',
