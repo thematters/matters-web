@@ -112,6 +112,7 @@ const LinkENSContent = ({
   const switchNetworkState =
     !isLoading && isUnsupportedNetwork && !isSwitchingNetwork
   const reConnectWallet = !isConnectedAddress
+
   const scanUrl = isProd
     ? etherscanBlockExplorers.mainnet.url
     : etherscanBlockExplorers.goerli.url
@@ -123,7 +124,7 @@ const LinkENSContent = ({
           <span className="info">
             {(!isSuccess || txConfirming) && !isSwitchingNetwork && (
               <>
-                <Translate zh_hans={`关联`} zh_hant={`關聯`} en={`Link`} />
+                <Translate zh_hans={`将`} zh_hant={`將`} en={`Link`} />
                 <span className="ens">&nbsp;{ensName}&nbsp;</span>
                 <Translate id="toYourIPNSPage" />
               </>
@@ -200,7 +201,7 @@ const LinkENSContent = ({
                 />
               </Dialog.Footer.Button>
             )}
-            {switchNetworkState && (
+            {switchNetworkState && !reConnectWallet && (
               <>
                 <Dialog.Footer.Button onClick={switchToTargetNetwork}>
                   <Translate
