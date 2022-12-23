@@ -56,10 +56,11 @@ const DefaultContent = ({
     address: address as `0x${string}`,
     chainId: isProd ? chain.mainnet.id : chain.goerli.id,
   })
+
   if (connectedAddress) {
     switchToLinkENS()
   }
-
+  
   return (
     <>
       <Dialog.Content>
@@ -70,8 +71,8 @@ const DefaultContent = ({
               <span className="ens">&nbsp;{ensName}&nbsp;</span>
               <Translate id="toYourIPNSPage" />
             </span>
-            {!connectedAddress && (
-              <span className="btn">
+            <span className="btn">
+              {!connectedAddress && (
                 <Dialog.Footer.Button
                   onClick={() => {
                     switchToWalletSelect()
@@ -83,8 +84,8 @@ const DefaultContent = ({
                     en="Connect Wallet"
                   />
                 </Dialog.Footer.Button>
-              </span>
-            )}
+              )}
+            </span>
           </section>
           <ENSDescription />
           <style jsx>{styles}</style>
