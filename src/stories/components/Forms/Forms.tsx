@@ -41,7 +41,7 @@ const Forms = () => (
         </Form>
       </li>
 
-      {/* Form.DropdownInput & Form.Textarea */}
+      {/* Form.Textarea */}
       <li>
         <Form>
           <Form.Textarea

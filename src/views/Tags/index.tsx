@@ -7,7 +7,6 @@ import {
   useRoute,
 } from '~/components'
 
-import { TagsButtons } from './Buttons'
 import Feed, { FeedType } from './Feed'
 // import SidebarTags from './Sidebar'
 import styles from './styles.css'
@@ -64,7 +63,6 @@ const Tags = () => (
       right={
         <>
           <Layout.Header.Title id="allTags" />
-          <TagsButtons.CreateButton />
         </>
       }
     />
