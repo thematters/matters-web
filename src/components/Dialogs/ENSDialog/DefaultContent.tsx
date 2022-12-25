@@ -60,7 +60,7 @@ const DefaultContent = ({
   if (connectedAddress) {
     switchToLinkENS()
   }
-  
+
   return (
     <>
       <Dialog.Content>
