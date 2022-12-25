@@ -111,6 +111,18 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
         return
       }
 
+      // skip if there is text selection
+      const selection = window.getSelection()
+      const selectedText = selection?.toString() || ''
+      const selectedNode = selection?.anchorNode?.parentNode
+      if (
+        selectedText?.length > 0 &&
+        selectedNode &&
+        target.contains(selectedNode)
+      ) {
+        return
+      }
+
       // We have some trackers rely on `onClick`,
       // allow <a> and skip if it's from <button>
       if (!target.closest('button') && onClick) {
