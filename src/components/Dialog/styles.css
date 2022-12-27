@@ -12,7 +12,7 @@
   flex-direction: column;
   max-height: 80vh;
   max-height: calc(var(--vh) * 90);
-  background: var(--color-white);
+  overflow: hidden;
   border-radius: var(--spacing-x-tight) var(--spacing-x-tight) 0 0;
   will-change: transform, top;
 
@@ -24,6 +24,13 @@
     height: 300vh;
     content: '';
     background: var(--color-white);
+  }
+
+  &.white {
+    background: var(--color-white);
+  }
+  &.grey-lighter {
+    background: var(--color-grey-lighter);
   }
 
   &.fixed-height {

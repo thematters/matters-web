@@ -99,24 +99,13 @@ const CONNECT_SRC = [
 
   // IPFS Gateways
   'ipfs.io/ipfs/',
-  'gateway.ipfs.io/ipfs/',
   'ipfs.infura.io/ipfs/',
-  'ninetailed.ninja/ipfs/',
-  '10.via0.com/ipfs/',
-  'ipfs.eternum.io/ipfs/',
-  'hardbin.com/ipfs/',
+  'dweb.link/ipfs/',
+  'crustwebsites.net/ipfs/',
   'cloudflare-ipfs.com/ipfs/',
-  'ipns.co/',
+  'ipfs.fleek.co/ipfs/',
   'gateway.pinata.cloud/ipfs/',
-  'ipfs.sloppyta.co/ipfs/',
-  'jorropo.ovh/ipfs/',
-  'gateway.temporal.cloud/ipfs/',
-  'ipfs.privacytools.io/ipfs/',
-  'ipfs.jeroendeneef.com/ipfs/',
-  'permaweb.io/ipfs/',
-  'ipfs.stibarc.com/ipfs/',
-  'ipfs.best-practice.se/ipfs/',
-  'ipfs.2read.net/ipfs/',
+  'meson.network/ipfs/',
 ] // .join(' ')
 
 const FRAME_SRC = [

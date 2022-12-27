@@ -105,41 +105,6 @@
   }
 }
 
-.hash {
-  margin-bottom: var(--spacing-x-tight);
-
-  & .data-hash {
-    position: relative;
-
-    & input {
-      padding: var(--spacing-x-tight) var(--spacing-x-loose)
-        var(--spacing-x-tight) var(--spacing-x-tight);
-      font-family: var(--font-mono);
-      font-size: var(--font-size-sm);
-      color: var(--color-matters-gold);
-      background: var(--color-green-lighter);
-    }
-  }
-
-  & .copy {
-    @mixin flex-center-space-between;
-
-    position: relative;
-    padding: 12px 8px;
-    margin: 8px 0 0 0;
-    color: var(--color-matters-green);
-    background: var(--color-green-lighter);
-    border-radius: 4px;
-
-    & input {
-      padding: 0 8px 0 0;
-      font-family: var(--font-mono);
-      font-size: var(--font-size-sm);
-      background: transparent;
-    }
-  }
-}
-
 .item {
   & .title {
     @mixin flex-center-space-between;

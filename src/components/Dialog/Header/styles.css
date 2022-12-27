@@ -5,6 +5,7 @@ header {
   position: relative;
   flex-shrink: 0;
   padding: var(--spacing-x-loose) var(--spacing-base) var(--spacing-tight);
+  background: var(--color-white);
 
   & h1 {
     @mixin flex-center-all;

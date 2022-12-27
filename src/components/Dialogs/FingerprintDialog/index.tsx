@@ -6,7 +6,6 @@ import {
   Dialog,
   Spinner,
   useDialogSwitch,
-  // usePublicLazyQuery,
   usePublicQuery,
   ViewerContext,
 } from '~/components'
@@ -66,14 +65,13 @@ const BaseFingerprintDialog = ({
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
   const viewer = useContext(ViewerContext)
 
-  const {
-    data,
-    loading, // error,
-    refetch,
-  } = usePublicQuery<ArticleFingerprintPublic>(ArticleFingerprintGQL, {
-    variables: { id: article.id },
-    skip: true, // skip first call
-  })
+  const { data, loading, refetch } = usePublicQuery<ArticleFingerprintPublic>(
+    ArticleFingerprintGQL,
+    {
+      variables: { id: article.id },
+      skip: true, // skip first call
+    }
+  )
 
   // only show secret when viewer is author and access type is paywall
   const showSecret =
@@ -90,7 +88,12 @@ const BaseFingerprintDialog = ({
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog} fixedHeight>
+      <Dialog
+        isOpen={show}
+        onDismiss={closeDialog}
+        fixedHeight
+        bgColor="grey-lighter"
+      >
         <Dialog.Header
           title="IPFSEntrance"
           closeDialog={closeDialog}

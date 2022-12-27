@@ -19,7 +19,7 @@ export interface TextIconProps {
   icon?: React.ReactNode
 
   color?: TextIconColor
-  size?: 'xs' | 'sm' | 'sm-s' | 'md-s' | 'md' | 'xm' | 'lg'
+  size?: 'xs' | 'sm' | 'sm-s' | 'md-s' | 'md' | 'xm' | 'lg' | 'xl'
   spacing?: 0 | 'xxxtight' | 'xxtight' | 'xtight' | 'tight' | 'base'
   weight?: 'light' | 'normal' | 'md' | 'semibold' | 'bold'
   allowUserSelect?: boolean
