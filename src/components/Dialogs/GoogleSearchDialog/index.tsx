@@ -104,7 +104,7 @@ const BaseGoogleSearchDialog = ({ children }: GoogleSearchDialogProps) => {
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog} fixedHeight>
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           closeDialog={closeDialog}
           title={<Translate zh_hant="Google 搜尋" zh_hans="Google 搜索" />}

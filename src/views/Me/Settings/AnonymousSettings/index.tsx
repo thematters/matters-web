@@ -24,7 +24,7 @@ const Settings = () => {
   const showConnect = viewer.isAuthed && !viewer.info.ethAddress
 
   return (
-    <Layout.Main bgColor="grey-lighter">
+    <Layout.Main smBgColor="grey-lighter">
       <Head title={{ id: 'settings' }} />
 
       <Layout.Header

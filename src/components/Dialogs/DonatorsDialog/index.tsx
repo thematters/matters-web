@@ -33,7 +33,7 @@ const BaseDonatorsDialog = ({ article, children }: DonatorsDialogProps) => {
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog} fixedHeight>
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         <DynamicContent article={article} closeDialog={closeDialog} />
       </Dialog>
     </>

@@ -18,7 +18,7 @@ const BaseMembersDialog = ({ children }: MembersDialogProps) => {
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog} fixedHeight>
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           title={<Translate zh_hant="成員" zh_hans="成員" en="Members" />}
           closeDialog={closeDialog}

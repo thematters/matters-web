@@ -23,7 +23,8 @@ export interface DialogOverlayProps {
 
 export type DialogProps = {
   size?: 'sm' | 'lg'
-  bgColor?: 'white' | 'grey-lighter'
+  smBgColor?: 'grey-lighter'
+  smUpBgColor?: 'grey-lighter'
   fixedHeight?: boolean
   slideIn?: boolean
 
@@ -39,7 +40,8 @@ const Container: React.FC<
   >
 > = ({
   size = 'lg',
-  bgColor = 'white',
+  smBgColor,
+  smUpBgColor,
   fixedHeight,
   testId,
   onDismiss,
@@ -54,7 +56,8 @@ const Container: React.FC<
     container: true,
     'fixed-height': !!fixedHeight,
     [size]: true,
-    [bgColor]: true,
+    [`bg-${smBgColor}`]: !!smBgColor,
+    [`bg-${smUpBgColor}-sm-up`]: !!smUpBgColor,
   })
 
   const closeTopDialog = () => {

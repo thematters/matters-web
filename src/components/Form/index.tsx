@@ -10,9 +10,7 @@ import Select from './Select'
 import styles from './styles.css'
 import Textarea from './Textarea'
 
-type FormProps = {
-  noBackground?: boolean
-} & React.DetailedHTMLProps<
+type FormProps = React.DetailedHTMLProps<
   React.FormHTMLAttributes<HTMLFormElement>,
   HTMLFormElement
 >
@@ -28,13 +26,8 @@ export const Form: React.FC<FormProps> & {
   Select: typeof Select
   ComposedAmountInput: typeof ComposedAmountInput
   CurrencyRadioInput: typeof CurrencyRadioInput
-} = ({ noBackground, children, ...formProps }) => (
-  <form
-    method="POST"
-    className={noBackground ? 'no-background' : ''}
-    autoComplete="off"
-    {...formProps}
-  >
+} = ({ children, ...formProps }) => (
+  <form method="POST" autoComplete="off" {...formProps}>
     {children}
 
     <style jsx>{styles}</style>

@@ -109,7 +109,7 @@ const BaseNotificationSettings = () => {
 }
 
 const NotificationGeneralSettings = () => (
-  <Layout.Main bgColor="grey-lighter">
+  <Layout.Main smBgColor="grey-lighter">
     <Layout.Header
       left={<Layout.Header.BackButton />}
       right={<Layout.Header.Title id="settingsNotificationGeneral" />}

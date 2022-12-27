@@ -47,7 +47,7 @@ const EditProfile = () => {
   }
 
   return (
-    <Layout.Main bgColor="grey-lighter">
+    <Layout.Main smBgColor="grey-lighter">
       <Head title={{ id: 'basicProfile' }} />
 
       <CreateCircleForm.Profile circle={circle} type="edit" purpose="page" />

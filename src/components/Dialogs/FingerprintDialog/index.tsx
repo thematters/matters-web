@@ -91,8 +91,8 @@ const BaseFingerprintDialog = ({
       <Dialog
         isOpen={show}
         onDismiss={closeDialog}
-        fixedHeight
-        bgColor="grey-lighter"
+        smBgColor="grey-lighter"
+        smUpBgColor="grey-lighter"
       >
         <Dialog.Header
           title="IPFSEntrance"
