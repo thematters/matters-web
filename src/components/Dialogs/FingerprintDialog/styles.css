@@ -8,8 +8,6 @@
 }
 
 .gateways {
-  margin-bottom: var(--spacing-base);
-
   & ul {
     @mixin hide-scrollbar;
 
@@ -37,6 +35,10 @@
         font-size: var(--font-size-md);
         line-height: 2.5rem;
         color: var(--color-grey-darker);
+
+        &.disabled {
+          opacity: 0.5;
+        }
       }
     }
 
@@ -49,27 +51,19 @@
 .secret {
   @mixin flex-center-space-between;
 
-  margin: var(--spacing-base) 0;
+  margin-top: var(--spacing-base);
   color: var(--color-matters-gold);
 
   & .key {
     @mixin flex-center-space-between;
   }
 
-  & .subtitle {
+  & .description {
     color: var(--color-matters-gold);
   }
 }
 
-.gateways,
-.hash {
-  @mixin border-top-grey;
-
-  padding-top: var(--spacing-base);
-  margin-top: var(--spacing-x-tight);
-}
-
-.subtitle {
+.description {
   font-size: var(--font-size-sm-s);
   font-weight: var(--font-weight-normal);
   color: var(--color-grey);
@@ -95,5 +89,30 @@
       font-size: var(--font-size-sm);
       background: transparent;
     }
+  }
+}
+
+.warning-card {
+  color: var(--color-matters-gold);
+  background: var(--color-yellow-lighter);
+  border-radius: 0.5rem;
+}
+
+.warning-input {
+  color: var(--color-matters-green);
+  background: var(--color-green-lighter);
+  border-radius: 0.25rem;
+}
+
+.warning-card,
+.warning-input {
+  @mixin flex-start-start;
+
+  padding: var(--spacing-x-tight) var(--spacing-base);
+  font-size: var(--font-size-md-s);
+  line-height: 1.5rem;
+
+  & :global(svg) {
+    margin-right: var(--spacing-xx-tight);
   }
 }

@@ -7,7 +7,7 @@
     @mixin flex-center-space-between;
   }
 
-  & .subtitle {
+  & .description {
     margin-top: var(--spacing-xx-tight);
   }
 }

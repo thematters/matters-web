@@ -52,7 +52,7 @@ const ArticleSecretSection: React.FC<ArticleSecretSectionProps> = ({ id }) => {
 
   return (
     <section className="secret">
-      <p className="subtitle">
+      <p className="description">
         <Translate
           zh_hant="上鎖內容密鑰，請妥善保管"
           zh_hans="上鎖內容密鑰，請妥善保管"

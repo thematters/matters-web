@@ -5,25 +5,27 @@ import styles from './styles.css'
 
 const SectionCard: React.FC<
   React.PropsWithChildren<{
-    title: string | React.ReactNode
-    subTitle: string | React.ReactNode
+    title?: string | React.ReactNode
+    description?: string | React.ReactNode
     right?: string | React.ReactNode
     warning?: boolean
   }>
-> = ({ title, subTitle, right, children, warning }) => {
-  const subtitleClasses = classNames({
-    subtitle: true,
+> = ({ title, description, right, children, warning }) => {
+  const descriptionClasses = classNames({
+    description: true,
     error: warning,
   })
 
   return (
     <section className="card">
-      <header>
-        <h3>{title}</h3>
-        {right || <section className="right">{right}</section>}
-      </header>
+      {title && (
+        <header>
+          <h3>{title}</h3>
+          {right || <section className="right">{right}</section>}
+        </header>
+      )}
 
-      <p className={subtitleClasses}>{subTitle}</p>
+      {description && <p className={descriptionClasses}>{description}</p>}
 
       {children}
 

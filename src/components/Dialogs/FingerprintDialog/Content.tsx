@@ -10,6 +10,7 @@ import {
   IconIPFSGreen24,
   IconISCN24,
   LanguageContext,
+  Spacer,
   Spinner,
   TextIcon,
   Translate,
@@ -125,7 +126,7 @@ const FingerprintDialogContent = ({
             IPFS
           </TextIcon>
         }
-        subTitle={
+        description={
           <Translate
             zh_hant="去中心化內容存儲網絡"
             zh_hans="去中心化內容存儲網絡"
@@ -133,6 +134,10 @@ const FingerprintDialogContent = ({
           />
         }
       >
+        <Spacer size="xtight" />
+        <hr />
+        <Spacer size="base" />
+
         {/* gateways */}
         <section className="gateways">
           <h4 className="title">
@@ -143,7 +148,7 @@ const FingerprintDialogContent = ({
             />
           </h4>
 
-          <p className="subtitle">
+          <p className="description">
             <Translate
               zh_hans="內容分佈節點，可以複製以下地址對作品進行傳播"
               zh_hant="內容分佈節點，可以複製以下地址對作品進行傳播"
@@ -173,13 +178,17 @@ const FingerprintDialogContent = ({
         {/* secret */}
         {showSecret && articleId && <ArticleSecret id={articleId} />}
 
+        <Spacer size="base" />
+        <hr />
+        <Spacer size="base" />
+
         {/* hash */}
         <section className="hash">
           <h4 className="title">
             <Translate id="articleFingerprint" />
           </h4>
 
-          <p className="subtitle">
+          <p className="description">
             <Translate
               zh_hant="使用 IPFS 生成的作品指紋，通過它可在節點調取內容"
               zh_hans="使用 IPFS 生成的作品指紋，通過它可在節點調取內容"
@@ -215,7 +224,7 @@ const FingerprintDialogContent = ({
               ISCN
             </TextIcon>
           }
-          subTitle={
+          description={
             iscnId ? (
               <Translate
                 zh_hant="已在 LikeCoin 鏈上註冊的元數據"
