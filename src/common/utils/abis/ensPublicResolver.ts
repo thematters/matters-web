@@ -36,4 +36,4 @@ export const PublicResolverABI = [
     name: 'ContenthashChanged',
     type: 'event',
   },
-]
+] as const

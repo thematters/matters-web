@@ -1,5 +1,4 @@
 import { useQuery } from '@apollo/react-hooks'
-// @ts-ignore
 import contentHash from '@ensdomains/content-hash'
 import classNames from 'classnames'
 import { namehash } from 'ethers/lib/utils'
@@ -21,7 +20,11 @@ import {
 } from '~/components'
 
 import { EXTERNAL_LINKS } from '~/common/enums'
-import { PublicResolverABI, translate } from '~/common/utils'
+import {
+  featureSupportedChains,
+  PublicResolverABI,
+  translate,
+} from '~/common/utils'
 
 import styles from './styles.css'
 
@@ -106,19 +109,23 @@ const RssFeedDialogContent = ({
   const ipnsKey = user.info.ipnsKey
   const notPushlishedLately = articlesCount !== 0 && ipnsKey === ''
 
+  const targetNetork = featureSupportedChains.ens[0]
+
   const address = user?.info.ethAddress
   const { data: ensName } = useEnsName({
     address: address as `0x${string}`,
+    chainId: targetNetork.id,
   })
-
   const { data: resolverData } = useEnsResolver({
     name: ensName as string,
+    chainId: targetNetork.id,
   })
   const { data: readData } = useContractRead({
     address: resolverData?.address,
     abi: PublicResolverABI,
     functionName: 'contenthash',
-    args: [namehash(ensName || ('' as string))],
+    args: ensName ? [namehash(ensName) as `0x${string}`] : undefined,
+    chainId: targetNetork.id,
   })
   const hasLinkedIPNS =
     !!ipnsKey && '0x' + contentHash.encode('ipns-ns', ipnsKey) === readData

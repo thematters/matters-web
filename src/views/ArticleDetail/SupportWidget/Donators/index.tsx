@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { Fragment, useContext } from 'react'
 import { animated, useSpring } from 'react-spring'
 
 import {
@@ -65,33 +65,28 @@ const Donators = ({ article, showAvatarAnimation = false }: DonatorsProps) => {
             aria-haspopup="dialog"
           >
             <section className="avatar-list">
-              {frontDonators.map((user, index) => {
-                return (
-                  <>
-                    {showAvatarAnimation && (
-                      <>
-                        {index === 0 && (
-                          <animated.div
-                            style={{
-                              width: '2rem',
-                              height: '2rem',
-                              borderRadius: '50%',
-                              ...springStyles,
-                            }}
-                            key={index}
-                          >
-                            <AvatarItem user={user} key={index} />
-                          </animated.div>
-                        )}
-                        {index !== 0 && <AvatarItem user={user} key={index} />}
-                      </>
-                    )}
-                    {!showAvatarAnimation && (
-                      <AvatarItem user={user} key={index} />
-                    )}
-                  </>
-                )
-              })}
+              {frontDonators.map((user, index) => (
+                <Fragment key={index}>
+                  {showAvatarAnimation && (
+                    <>
+                      {index === 0 && (
+                        <animated.div
+                          style={{
+                            width: '2rem',
+                            height: '2rem',
+                            borderRadius: '50%',
+                            ...springStyles,
+                          }}
+                        >
+                          <AvatarItem user={user} />
+                        </animated.div>
+                      )}
+                      {index !== 0 && <AvatarItem user={user} />}
+                    </>
+                  )}
+                  {!showAvatarAnimation && <AvatarItem user={user} />}
+                </Fragment>
+              ))}
 
               {donatorsCount === maxAvatarNum && (
                 <AvatarItem
