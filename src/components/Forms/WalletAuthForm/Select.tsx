@@ -9,6 +9,7 @@ import {
   IconWalletConnect24,
   LanguageContext,
   Layout,
+  Spacer,
   TextIcon,
   Translate,
   useResponsive,
@@ -242,6 +243,7 @@ const Select: React.FC<FormProps> = ({
 
         <style jsx>{styles}</style>
       </section>
+      <Spacer size="xloose" />
     </Form>
   )
 

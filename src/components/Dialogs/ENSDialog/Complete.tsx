@@ -10,7 +10,7 @@ type CompleteProps = {
 
 const Complete: React.FC<CompleteProps> = ({ txHash }) => {
   const targetNetwork = featureSupportedChains.ens[0]
-  const { name: explorerName, url: exlorerUrl } =
+  const { name: explorerName, url: explorerUrl } =
     targetNetwork.blockExplorers?.default!
 
   return (
@@ -23,7 +23,7 @@ const Complete: React.FC<CompleteProps> = ({ txHash }) => {
               zh_hant="已成功關聯，稍後完成。在&nbsp;"
               en="Successfully linked. It would take couple hours to resolve. View transation on&nbsp;"
             />
-            <a href={`${exlorerUrl}/tx/${txHash}`} target="_blank">
+            <a href={`${explorerUrl}/tx/${txHash}`} target="_blank">
               {explorerName}
             </a>
             <Translate
