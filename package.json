@@ -110,7 +110,7 @@
     "subscriptions-transport-ws": "^0.10.0",
     "use-debounce": "^7.0.1",
     "validator": "^13.7.0",
-    "wagmi": "^0.9.5"
+    "wagmi": "^0.10.0"
   },
   "devDependencies": {
     "@apollo/react-testing": "^3.1.3",
