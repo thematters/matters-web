@@ -2,7 +2,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
 import dynamic from 'next/dynamic'
 import React, { useEffect, useState } from 'react'
-import { createClient, WagmiConfig } from 'wagmi'
+import { createClient, createStorage, WagmiConfig } from 'wagmi'
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
 
@@ -76,6 +76,13 @@ const wagmiClient = createClient({
     }),
   ],
   provider: wagmiProvider,
+  storage: createStorage({
+    storage: {
+      getItem: () => null,
+      setItem: () => null,
+      removeItem: () => null,
+    },
+  }),
 })
 
 const Root = ({
