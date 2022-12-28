@@ -88,7 +88,7 @@ const Confirm: React.FC<FormProps> = ({
   })
 
   const InnerForm = (
-    <Form id={formId} onSubmit={handleSubmit} noBackground>
+    <Form id={formId} onSubmit={handleSubmit}>
       <Form.PinInput
         length={6}
         name="password"

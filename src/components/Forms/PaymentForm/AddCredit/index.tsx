@@ -195,7 +195,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
   })
 
   const InnerForm = (
-    <Form id={formId} onSubmit={handleSubmit} noBackground>
+    <Form id={formId} onSubmit={handleSubmit}>
       <Form.AmountInput
         currency={currency}
         label={

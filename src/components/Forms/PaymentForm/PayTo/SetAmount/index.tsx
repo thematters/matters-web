@@ -275,7 +275,7 @@ const SetAmount: React.FC<FormProps> = ({
    * Rendering
    */
   const InnerForm = (
-    <Form id={formId} onSubmit={handleSubmit} noBackground>
+    <Form id={formId} onSubmit={handleSubmit}>
       <SetAmountHeader
         currency={currency}
         isConnectedAddress={isConnectedAddress}

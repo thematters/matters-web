@@ -18,7 +18,7 @@ const BaseFollowingDialog = ({ user, children }: FollowingDialogProps) => {
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog} fixedHeight>
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           title={
             <Translate zh_hant="追蹤內容" zh_hans="追踪内容" en={`Following`} />

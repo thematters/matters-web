@@ -30,7 +30,7 @@ const Forms = () => (
 
       {/* Form.PinInput */}
       <li>
-        <Form noBackground>
+        <Form>
           <Form.PinInput
             length={6}
             value=""
