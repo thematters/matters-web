@@ -48,7 +48,7 @@ const Owner = ({ tag }: { tag: TagFragment }) => {
             <Translate
               zh_hant="此標籤目前無人主理"
               zh_hans="此标签目前無人主理"
-              en="this tag has no manager currently"
+              en="This tag has no manager currently"
             />
           </TextIcon>
         </section>
@@ -65,7 +65,7 @@ const Owner = ({ tag }: { tag: TagFragment }) => {
                 aria-haspopup="dialog"
               >
                 <TextIcon weight="md" size="xs">
-                  <Translate zh_hant="認領" zh_hans="认领" en="maintain" />
+                  <Translate zh_hant="認領" zh_hans="认领" en="Maintain" />
                 </TextIcon>
               </Button>
             )}

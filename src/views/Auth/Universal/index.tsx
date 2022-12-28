@@ -73,7 +73,7 @@ const UniversalAuth = () => {
   const { currStep, forward } = useStep<Step>(initStep)
 
   return (
-    <Layout.Main bgColor="grey-lighter">
+    <Layout.Main smBgColor="grey-lighter">
       <Head title={{ id: 'authEntries' }} />
 
       {currStep === 'select-login-method' && (

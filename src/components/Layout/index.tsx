@@ -56,13 +56,13 @@ export const Layout: React.FC<React.PropsWithChildren<React.ReactNode>> & {
 
 interface MainProps {
   aside?: React.ReactNode
-  bgColor?: 'grey-lighter'
+  smBgColor?: 'grey-lighter'
   inEditor?: boolean
 }
 
 const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
   aside,
-  bgColor,
+  smBgColor,
   inEditor,
   children,
 }) => {
@@ -82,7 +82,7 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
 
   const articleClasses = classNames({
     'l-col-three-mid': true,
-    [`bg-${bgColor}`]: !!bgColor,
+    [`bg-${smBgColor}`]: !!smBgColor,
     hasNavBar: !isInArticleDetail,
     hasOnboardingTasks: showOnboardingTasks,
   })

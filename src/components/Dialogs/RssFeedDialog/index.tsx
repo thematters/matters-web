@@ -73,18 +73,19 @@ const BaseRssFeedDialog = ({ user, children }: RssFeedDialogProps) => {
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog} fixedHeight>
+      <Dialog
+        isOpen={show}
+        onDismiss={closeDialog}
+        smBgColor="grey-lighter"
+        smUpBgColor="grey-lighter"
+      >
         <Dialog.Header
           title="contentFeedEntrance"
           closeDialog={closeDialog}
           closeTextId="close"
         />
         <Dialog.Content hasGrow>
-          <DynamicContent
-            user={user}
-            articlesCount={user?.articles.totalCount || 0}
-            refetch={refetch}
-          />
+          <DynamicContent user={user} refetch={refetch} />
         </Dialog.Content>
       </Dialog>
     </>

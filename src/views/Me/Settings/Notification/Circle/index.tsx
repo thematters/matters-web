@@ -160,7 +160,7 @@ const BaseNotificationSettings = () => {
 }
 
 const NotificationCircleSettings = () => (
-  <Layout.Main bgColor="grey-lighter">
+  <Layout.Main smBgColor="grey-lighter">
     <Layout.Header
       left={<Layout.Header.BackButton />}
       right={<Layout.Header.Title id="settingsNotificationCircle" />}

@@ -6,6 +6,7 @@ import {
   Dialog,
   Form,
   LanguageContext,
+  Spacer,
   TextIcon,
   Translate,
   useRoute,
@@ -93,7 +94,7 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
 
   const InnerForm = (tab: string) => {
     return (
-      <Form id={formId} onSubmit={handleSubmit} noBackground={true}>
+      <Form id={formId} onSubmit={handleSubmit}>
         {tab === 'request' && (
           <Form.Textarea
             label={<Translate id="requestForDonation" />}
@@ -154,9 +155,16 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
         }
         rightButton={SubmitButton}
       />
-      <Tab tabType={tabType} setTabType={changeTabType} />
-      <Dialog.Content hasGrow spacing={['base', 'base']}>
+
+      <Dialog.Content>
+        <div className="u-sm-up-hide">
+          <Spacer size="base" />
+        </div>
+
+        <Tab tabType={tabType} setTabType={changeTabType} />
+
         <section className="content-input">{InnerForm(tabType)}</section>
+
         <section className="preview">
           <h3>
             <TextIcon size="md" weight="md">
@@ -167,6 +175,7 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
               />
             </TextIcon>
           </h3>
+
           <SupportPreview
             content={
               tabType === 'request'

@@ -20,7 +20,12 @@ const BasePaymentPointerDialog: React.FC<PaymentPointerProps> = ({
     <>
       {children({ openDialog })}
 
-      <Dialog size="sm" isOpen={show} onDismiss={closeDialog} fixedHeight>
+      <Dialog
+        size="sm"
+        isOpen={show}
+        onDismiss={closeDialog}
+        smBgColor="grey-lighter"
+      >
         <Dialog.Header
           title="paymentPointer"
           closeDialog={closeDialog}

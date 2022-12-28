@@ -11,7 +11,7 @@ const CreateCircle = () => {
   const [circle, setCircle] = useState<PutCircle_putCircle>()
 
   return (
-    <Layout.Main bgColor="grey-lighter">
+    <Layout.Main smBgColor="grey-lighter">
       <Head title={{ id: 'circleCreation' }} />
 
       {currStep === 'init' && (

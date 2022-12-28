@@ -36,7 +36,7 @@ const ConfirmContent: React.FC<ContentProps> = ({
         }
       />
 
-      <Dialog.Content spacing={['base', 'base']} hasFixed>
+      <Dialog.Content hasFixed>
         <SelectLicense
           isInCircle
           license={license}

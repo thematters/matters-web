@@ -34,7 +34,7 @@ const BaseAppreciatorsDialog = ({
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog} fixedHeight>
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         <DynamicContent id={article.id} closeDialog={closeDialog} />
       </Dialog>
     </>

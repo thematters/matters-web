@@ -6,7 +6,7 @@ const ChangePassword = () => {
   const { currStep, forward } = useStep<Step>('confirm')
 
   return (
-    <Layout.Main bgColor="grey-lighter">
+    <Layout.Main smBgColor="grey-lighter">
       <Head title={{ id: 'changeUserName' }} />
 
       {currStep === 'confirm' && (

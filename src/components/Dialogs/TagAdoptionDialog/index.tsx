@@ -38,7 +38,7 @@ const BaseDialog = ({ id, children }: Props) => {
       <Dialog size="sm" isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           title={
-            <Translate zh_hant="認領標籤" zh_hans="认领标签" en="Adopt tag" />
+            <Translate zh_hant="認領標籤" zh_hans="认领标签" en="Adopt Tag" />
           }
           closeDialog={closeDialog}
           closeTextId="cancel"
