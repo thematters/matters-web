@@ -28,7 +28,7 @@ const BaseCreateDraftButton = ({ onClick }: { onClick: () => any }) => (
       <Translate
         zh_hant="創作新的作品"
         zh_hans="创作新的作品"
-        en="create new work"
+        en="New Article"
       />
     </TextIcon>
   </Menu.Item>

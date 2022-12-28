@@ -11,7 +11,6 @@ import {
   IconInfo16,
   LanguageContext,
   Layout,
-  Spacer,
   TextIcon,
   Translate,
   useMutation,
@@ -361,8 +360,6 @@ const Connect: React.FC<FormProps> = ({
           }
         />
       )}
-
-      {!isSignUp && <Spacer size="loose" />}
 
       {isSignUp && (
         <Form.CheckBox
