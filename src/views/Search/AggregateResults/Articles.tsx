@@ -89,6 +89,7 @@ const AggregateArticleResults = () => {
                 <List.Item key={cursor}>
                   <ArticleDigestFeed
                     article={node}
+                    is="link"
                     isConciseFooter={true}
                     hasCircle={false}
                     hasFollow={false}
