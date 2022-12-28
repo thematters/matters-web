@@ -220,6 +220,13 @@ export const SearchBar: React.FC<SearchBarProps> = ({
                   onUpdateData={(newData: QuickResultQuery | undefined) => {
                     setData(newData)
                   }}
+                  closeDropdown={() => {
+                    closeDropdown()
+
+                    // clear input
+                    setValues({ q: '' })
+                    setSearch('')
+                  }}
                   activeItem={activeItem}
                 />
               )

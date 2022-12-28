@@ -18,6 +18,7 @@ interface QuickSearchProps {
   searchKey: string
   activeItem?: string
   onUpdateData?: (data: QuickResultQuery | undefined) => void
+  closeDropdown: () => void
   inPage?: boolean
 }
 
@@ -26,7 +27,7 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
   const { getQuery } = useRoute()
   const version = getQuery('version')
 
-  const { searchKey, inPage, activeItem, onUpdateData } = props
+  const { searchKey, inPage, activeItem, onUpdateData, closeDropdown } = props
   const isLargeUp = useResponsive('lg-up')
   const client = useApolloClient()
   const [data, setData] = useState<QuickResultQuery>()
@@ -101,6 +102,7 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
                     page: 'userProfile',
                     userName: node.userName || '',
                   })}
+                  onClick={closeDropdown}
                 >
                   <UserDigest.Concise
                     user={node}
@@ -125,6 +127,7 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
                     page: 'tagDetail',
                     tag: node,
                   })}
+                  onClick={closeDropdown}
                 >
                   <TagDigest.Concise tag={node} textSize="sm" />
                 </Menu.Item>
