@@ -238,13 +238,7 @@ const UserArticles = () => {
 
       <ArticleSummaryInfo user={user} />
 
-      <InfiniteScroll
-        hasNextPage={pageInfo.hasNextPage}
-        loadMore={async () => {
-          console.log('///loadmore')
-          loadMore()
-        }}
-      >
+      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
         <List>
           {articleEdges.map(({ node, cursor }, i) => (
             <List.Item key={cursor}>
