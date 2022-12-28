@@ -4,7 +4,6 @@ import { Fragment, useEffect, useState } from 'react'
 import { toPath } from '~/common/utils'
 import {
   Menu,
-  Spinner,
   TagDigest,
   UserDigest,
   useResponsive,
@@ -75,11 +74,7 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
   }, [searchKey])
 
   if (loading) {
-    return (
-      <Menu width={inPage ? undefined : 'md'}>
-        <Spinner />
-      </Menu>
-    )
+    return null
   }
 
   if (!hasUsers && !hasTags) {
