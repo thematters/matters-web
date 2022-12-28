@@ -1,28 +1,19 @@
-.container {
-  padding: var(--spacing-base) var(--spacing-base) 0;
-}
-
-.link-ens-container {
-  @mixin flex-center-all;
-
-  flex-direction: column;
-  padding: var(--spacing-base) var(--spacing-base) 0;
-}
-
-.info {
-  margin-top: var(--spacing-x-tight);
+.content {
+  padding: var(--spacing-loose) var(--spacing-base);
   font-size: var(--font-size-md-s);
-  font-weight: var(--font-weight-normal);
-  line-height: var(--line-height-base);
   color: var(--color-grey-darker);
   text-align: center;
+
+  & :global(> * + *) {
+    margin-top: var(--spacing-loose);
+  }
 
   & a {
     color: var(--color-matters-green);
     text-decoration: underline;
   }
 
-  & .ens {
+  & .highlight {
     color: var(--color-matters-green);
   }
 }
@@ -30,58 +21,5 @@
 .error {
   margin-top: var(--spacing-loose);
   font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-normal);
   color: var(--color-red);
-  text-align: center;
-}
-
-.reconnect-hint {
-  margin-top: var(--spacing-base);
-  font-size: var(--font-size-xs);
-  color: var(--color-red);
-  text-align: center;
-}
-
-.btn {
-  width: 100%;
-  margin: var(--spacing-xx-base) 0;
-
-  @media (--sm-up) {
-    margin: var(--spacing-base) 0;
-  }
-
-  & :global(button) {
-    width: 100%;
-  }
-}
-
-.connect-wallet {
-  @mixin flex-center-all;
-
-  flex-direction: column;
-  width: 100%;
-}
-
-.description {
-  line-height: var(--line-height-base);
-  color: var(--color-grey-dark);
-
-  & :global(ul) {
-    margin-left: var(--spacing-tight);
-    list-style-type: disc;
-  }
-
-  & .list {
-    font-size: var(--font-size-sm-s);
-    line-height: var(--line-height-base);
-  }
-
-  & .reference {
-    margin: var(--spacing-base) 0 var(--spacing-xx-loose);
-    font-size: var(--font-size-xs-s);
-
-    & a {
-      text-decoration: underline;
-    }
-  }
 }

@@ -1,25 +1,18 @@
-// @ts-ignore
-import contentHash from '@ensdomains/content-hash'
-import { namehash } from 'ethers/lib/utils'
 import { useContext, useEffect } from 'react'
-import { chain, useContractRead, useEnsName, useEnsResolver } from 'wagmi'
 
 import {
   Avatar,
   Button,
   Cover,
-  ENSDialog,
   Error,
   Expandable,
   FollowUserButton,
-  IconHelp16,
   IconRss32,
   LanguageContext,
   Layout,
   RssFeedDialog,
   Spinner,
   Throw404,
-  Tooltip,
   Translate,
   usePublicQuery,
   useRoute,
@@ -27,7 +20,7 @@ import {
 } from '~/components'
 import ShareButton from '~/components/Layout/Header/ShareButton'
 
-import { numAbbr, PublicResolverABI, translate } from '~/common/utils'
+import { numAbbr, translate } from '~/common/utils'
 
 import IMAGE_COVER from '@/public/static/images/profile-cover.png'
 
@@ -43,9 +36,9 @@ import DropdownActions from './DropdownActions'
 import { FollowersDialog } from './FollowersDialog'
 import { FollowingDialog } from './FollowingDialog'
 import { USER_PROFILE_PRIVATE, USER_PROFILE_PUBLIC } from './gql'
-import { LogbookDialog } from './LogbookDialog'
 import styles from './styles.css'
-import WalletAddress from './WalletAddress'
+import TraveloggersAvatar from './TraveloggersAvatar'
+import WalletLabel from './WalletLabel'
 
 import { AuthorRssFeed } from '~/components/Dialogs/RssFeedDialog/__generated__/AuthorRssFeed'
 import { UserProfileUserPublic } from './__generated__/UserProfileUserPublic'
@@ -101,28 +94,6 @@ export const UserProfile = () => {
     })
   }, [user?.id, viewer.id])
 
-  const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
-
-  const address = user?.info.ethAddress
-  const { data: ensName } = useEnsName({
-    address: address as `0x${string}`,
-    chainId: isProd ? chain.mainnet.id : chain.goerli.id,
-  })
-  const { data: resolverData } = useEnsResolver({
-    name: ensName as string,
-    chainId: isProd ? chain.mainnet.id : chain.goerli.id,
-  })
-  const { data: readData } = useContractRead({
-    address: resolverData?.address,
-    abi: PublicResolverABI,
-    functionName: 'contenthash',
-    args: [namehash(ensName || ('' as string))],
-    chainId: isProd ? chain.mainnet.id : chain.goerli.id,
-  })
-  const ipnsHash = user?.info.ipnsKey
-  const hasLinkedIPNS =
-    !!ipnsHash && '0x' + contentHash.encode('ipns-ns', ipnsHash) === readData
-  const hasLinkEnsButton = ensName && !hasLinkedIPNS && isMe && ipnsHash
   /**
    * Render
    */
@@ -230,9 +201,6 @@ export const UserProfile = () => {
     )
   }
 
-  const isOwner =
-    user.info.cryptoWallet?.address === viewer.info.cryptoWallet?.address
-
   /**
    * Active or Onboarding User
    */
@@ -246,46 +214,7 @@ export const UserProfile = () => {
         <header>
           <section className="avatar">
             {hasTraveloggersBadge ? (
-              <Tooltip
-                content={
-                  <Translate
-                    zh_hant={`查看 ${user.displayName} 的航行日誌`}
-                    zh_hans={`查看 ${user.displayName} 的航行日志`}
-                    en={`View Logbooks owned by ${user.displayName}`}
-                  />
-                }
-              >
-                <LogbookDialog
-                  title={
-                    <Translate
-                      en={
-                        isOwner ? 'My Logbook' : `${user.displayName}'s Logbook`
-                      }
-                      zh_hant={
-                        isOwner
-                          ? '我的 Logbook'
-                          : `${user.displayName} 的航行日誌`
-                      }
-                      zh_hans={
-                        isOwner
-                          ? '我的 Logbook'
-                          : `${user.displayName} 的航行日志`
-                      }
-                    />
-                  }
-                  address={user.info.cryptoWallet?.address as string}
-                >
-                  {({ openDialog }) => (
-                    <button
-                      type="button"
-                      onClick={openDialog}
-                      aria-haspopup="dialog"
-                    >
-                      <Avatar size="xxxl" user={user} inProfile />
-                    </button>
-                  )}
-                </LogbookDialog>
-              </Tooltip>
+              <TraveloggersAvatar user={user} isMe={isMe} />
             ) : (
               <Avatar size="xxxl" user={user} inProfile />
             )}
@@ -314,48 +243,9 @@ export const UserProfile = () => {
             <span className="name">@{user.userName}</span>
             {!isMe && <FollowUserButton.State user={user} />}
           </section>
-          <section className="ens-name">
-            {user.info.ethAddress && (
-              <WalletAddress
-                address={user.info.ethAddress}
-                hasLinkedIPNS={hasLinkedIPNS}
-              />
-            )}
-            <section className="ens-bnt">
-              {hasLinkEnsButton && (
-                <ENSDialog user={user}>
-                  {({ openDialog }) => (
-                    <Button
-                      size={[null, '1.5rem']}
-                      spacing={[0, 'tight']}
-                      borderColor="green"
-                      onClick={() => {
-                        openDialog()
-                      }}
-                      textColor="green"
-                    >
-                      <Translate id="bindIPNStoENS" />
-                    </Button>
-                  )}
-                </ENSDialog>
-              )}
-            </section>
-            {hasLinkedIPNS && !isMe && (
-              <Tooltip
-                content={
-                  <Translate
-                    zh_hans={`${user.displayName} 已将他的 ENS 指向到个人 IPNS 页面`}
-                    zh_hant={`${user.displayName} 已將他的 ENS 指向到個人 IPNS 頁面`}
-                    en={`${user.displayName} has linked primary ENS name to his IPNS page. `}
-                  />
-                }
-              >
-                <span className="info-icon">
-                  <IconHelp16 color="grey" />
-                </span>
-              </Tooltip>
-            )}
-          </section>
+
+          {user?.info.ethAddress && <WalletLabel user={user} isMe={isMe} />}
+
           <Expandable
             content={user.info.description}
             color="grey-darker"

@@ -1,0 +1,46 @@
+import { Avatar, Tooltip, Translate } from '~/components'
+
+import LogbookDialog from './LogbookDialog'
+
+import { UserProfileUserPublic_user } from '../__generated__/UserProfileUserPublic'
+
+type TraveloggersAvatarProps = {
+  user: UserProfileUserPublic_user
+  isMe: boolean
+}
+
+const TraveloggersAvatar: React.FC<TraveloggersAvatarProps> = ({
+  user,
+  isMe,
+}) => {
+  return (
+    <Tooltip
+      content={
+        <Translate
+          zh_hant={`查看 ${user.displayName} 的航行日誌`}
+          zh_hans={`查看 ${user.displayName} 的航行日志`}
+          en={`View Logbooks owned by ${user.displayName}`}
+        />
+      }
+    >
+      <LogbookDialog
+        title={
+          <Translate
+            en={isMe ? 'My Logbook' : `${user.displayName}'s Logbook`}
+            zh_hant={isMe ? '我的 Logbook' : `${user.displayName} 的航行日誌`}
+            zh_hans={isMe ? '我的 Logbook' : `${user.displayName} 的航行日志`}
+          />
+        }
+        address={user.info.cryptoWallet?.address as string}
+      >
+        {({ openDialog }) => (
+          <button type="button" onClick={openDialog} aria-haspopup="dialog">
+            <Avatar size="xxxl" user={user} inProfile />
+          </button>
+        )}
+      </LogbookDialog>
+    </Tooltip>
+  )
+}
+
+export default TraveloggersAvatar

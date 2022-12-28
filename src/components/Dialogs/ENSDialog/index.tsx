@@ -1,10 +1,11 @@
 import dynamic from 'next/dynamic'
+import { useState } from 'react'
 
 import { Dialog, Spinner, useDialogSwitch, useStep } from '~/components'
 
 import { UserProfileUserPublic_user } from '~/components/UserProfile/__generated__/UserProfileUserPublic'
 
-type Step = 'confirmAddress' | 'walletSelect' | 'bindIPNS'
+type Step = 'connectWallet' | 'walletSelect' | 'linkENS' | 'complete'
 
 interface ENSDialogProps {
   user: UserProfileUserPublic_user
@@ -13,19 +14,30 @@ interface ENSDialogProps {
   defaultStep?: Step
 }
 
-const DynamicConfirmAddress = dynamic(() => import('./DefaultContent'))
+const DynamicConnectWallet = dynamic(() => import('./ConnectWallet'), {
+  ssr: false,
+  loading: Spinner,
+})
 
 const DynamicWalletAuthFormSelect = dynamic(
   () => import('~/components/Forms/WalletAuthForm/Select'),
   { ssr: false, loading: Spinner }
 )
 
-const DynamicLinkENS = dynamic(() => import('./LinkENSContent'))
+const DynamicLinkENS = dynamic(() => import('./LinkENS'), {
+  ssr: false,
+  loading: Spinner,
+})
+
+const DynamicComplete = dynamic(() => import('./Complete'), {
+  ssr: false,
+  loading: Spinner,
+})
 
 const BaseENSDilaog = ({
   children,
   user,
-  defaultStep = 'confirmAddress',
+  defaultStep = 'connectWallet',
 }: ENSDialogProps) => {
   const {
     show,
@@ -44,28 +56,29 @@ const BaseENSDilaog = ({
     baseCloseDialog()
   }
 
-  const isConfirmAddress = currStep === 'confirmAddress'
+  const isConfirmAddress = currStep === 'connectWallet'
   const isWalletSelect = currStep === 'walletSelect'
-  const isBindIPNS = currStep === 'bindIPNS'
+  const isLinkENS = currStep === 'linkENS'
+  const isComplete = currStep === 'complete'
+
+  const [txHash, setTxHash] = useState('')
 
   return (
     <>
       {children({ openDialog })}
+
       <Dialog isOpen={show} onDismiss={closeDialog} size="sm">
         {!isWalletSelect && (
-          <Dialog.Header
-            closeDialog={closeDialog}
-            leftButton={<Dialog.Header.CloseButton closeDialog={closeDialog} />}
-            title={'bindIPNStoENS'}
-          />
+          <Dialog.Header closeDialog={closeDialog} title="bindIPNStoENS" />
         )}
+
         {isConfirmAddress && (
-          <DynamicConfirmAddress
+          <DynamicConnectWallet
             switchToWalletSelect={() => {
               forward('walletSelect')
             }}
             switchToLinkENS={() => {
-              forward('bindIPNS')
+              forward('linkENS')
             }}
           />
         )}
@@ -74,20 +87,26 @@ const BaseENSDilaog = ({
           <DynamicWalletAuthFormSelect
             purpose="dialog"
             submitCallback={() => {
-              forward('bindIPNS')
+              forward('linkENS')
             }}
             closeDialog={closeDialog}
           />
         )}
 
-        {isBindIPNS && (
+        {isLinkENS && (
           <DynamicLinkENS
             user={user}
             switchToWalletSelect={() => {
               forward('walletSelect')
             }}
+            switchToComplete={(hash: string) => {
+              setTxHash(hash)
+              forward('complete')
+            }}
           />
         )}
+
+        {isComplete && txHash && <DynamicComplete txHash={txHash} />}
       </Dialog>
     </>
   )
