@@ -4,7 +4,7 @@ import { useFormik } from 'formik'
 import _get from 'lodash/get'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useEffect, useRef, useState } from 'react'
-import { chain, useAccount, useNetwork, useSwitchNetwork } from 'wagmi'
+import { useAccount } from 'wagmi'
 
 import {
   Dialog,
@@ -17,6 +17,7 @@ import {
   useApproveUSDT,
   useBalanceUSDT,
   useMutation,
+  useTargetNetwork,
   ViewerContext,
 } from '~/components'
 import PAY_TO from '~/components/GQL/mutations/payTo'
@@ -29,6 +30,7 @@ import {
   PAYMENT_MAXIMUM_PAYTO_AMOUNT,
 } from '~/common/enums'
 import {
+  featureSupportedChains,
   formatAmount,
   numRound,
   validateCurrency,
@@ -105,22 +107,15 @@ const SetAmount: React.FC<FormProps> = ({
   const viewer = useContext(ViewerContext)
   const quoteCurrency = viewer.settings.currency
   const { lang } = useContext(LanguageContext)
-  const { address } = useAccount()
-  const { chain: currentChain } = useNetwork()
-  const { switchNetwork } = useSwitchNetwork()
 
-  const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
+  const { address } = useAccount()
   const isConnectedAddress =
     viewer.info.ethAddress?.toLowerCase() === address?.toLowerCase()
-  const isUnsupportedNetwork =
-    currentChain?.id !== (isProd ? chain.polygon.id : chain.polygonMumbai.id)
-  const targetChainName = isProd ? chain.polygon.name : chain.polygonMumbai.name
-  const targetChainId = isProd ? chain.polygon.id : chain.polygonMumbai.id
-  const switchToTargetNetwork = async () => {
-    if (!switchNetwork) return
 
-    switchNetwork(targetChainId)
-  }
+  // TODO: support multiple networks
+  const targetNetork = featureSupportedChains.curation[0]
+  const { isUnsupportedNetwork, switchToTargetNetwork } =
+    useTargetNetwork(targetNetork)
 
   // states
   const [payTo] = useMutation<PayToMutate>(PAY_TO)
@@ -285,7 +280,7 @@ const SetAmount: React.FC<FormProps> = ({
         currency={currency}
         isConnectedAddress={isConnectedAddress}
         isUnsupportedNetwork={isUnsupportedNetwork}
-        targetChainName={targetChainName}
+        targetChainName={targetNetork.name}
         switchToCurrencyChoice={switchToCurrencyChoice}
         switchToTargetNetwork={switchToTargetNetwork}
       />
@@ -413,7 +408,7 @@ const SetAmount: React.FC<FormProps> = ({
                   zh_hans="切换到 "
                   en="Switch to "
                 />
-                {targetChainName}
+                {targetNetork.name}
               </Dialog.Footer.Button>
             )}
 

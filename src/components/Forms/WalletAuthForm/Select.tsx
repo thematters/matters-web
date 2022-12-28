@@ -243,6 +243,7 @@ const Select: React.FC<FormProps> = ({
 
         <style jsx>{styles}</style>
       </section>
+      <Spacer size="xloose" />
     </Form>
   )
 
@@ -283,8 +284,6 @@ const Select: React.FC<FormProps> = ({
         <Intro />
 
         {InnerForm}
-
-        <Spacer size="xloose" />
       </Dialog.Content>
     </>
   )

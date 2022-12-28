@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext } from 'react'
 
 import {
   Dialog,
@@ -13,15 +13,12 @@ import {
 } from '~/components'
 
 interface LogbookDialogProps {
-  // user: UserProfileUserPublic_user
   title: string | React.ReactNode
   address: string
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
-// const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
-
-export const LogbookDialog: React.FC<LogbookDialogProps> = ({
+const LogbookDialog: React.FC<LogbookDialogProps> = ({
   title,
   address,
   children,
@@ -29,25 +26,10 @@ export const LogbookDialog: React.FC<LogbookDialogProps> = ({
   const { lang } = useContext(LanguageContext)
   const { show, openDialog, closeDialog } = useDialogSwitch(false)
 
-  // const address = user.info.cryptoWallet?.address
   const logbook1Url = `${process.env.NEXT_PUBLIC_TRAVELOGGERS_URL}${
     lang === 'en' ? '/' : '/zh/'
   }owner/${address}`
   const logbook2Url = `${process.env.NEXT_PUBLIC_LOGBOOKS_URL}/bookcase/?address=${address}`
-  const [
-    hasClaimedLogbook2,
-    // setClaimed
-  ] = useState(false)
-
-  /* const provider = new AlchemyProvider(
-    isProd ? 'mainnet' : 'rinkeby',
-    process.env.NEXT_PUBLIC_ALCHEMY_KEY
-  ) */
-
-  useEffect(() => {
-    // TODO: check if the address has claimed Logbook 2.0
-    // setTimeout(() => setClaimed(true), 15e3)
-  }, [address])
 
   return (
     <>
@@ -59,20 +41,19 @@ export const LogbookDialog: React.FC<LogbookDialogProps> = ({
           closeTextId="close"
         />
         <Dialog.Content spacing={['xloose', 'base']}>
-          {!hasClaimedLogbook2 && (
-            <p>
-              <Translate id="logbook2LaunchText" />
-              &nbsp;
-              <a
-                className="u-link-green"
-                href={process.env.NEXT_PUBLIC_LOGBOOKS_URL}
-                target="_blank"
-              >
-                <Translate en="link" zh_hant="鏈接" zh_hans="链接" />
-              </a>
-              .
-            </p>
-          )}
+          <p>
+            <Translate id="logbook2LaunchText" />
+            &nbsp;
+            <a
+              className="u-link-green"
+              href={process.env.NEXT_PUBLIC_LOGBOOKS_URL}
+              target="_blank"
+            >
+              <Translate en="link" zh_hant="鏈接" zh_hans="链接" />
+            </a>
+            .
+          </p>
+
           <style jsx>{`
             p {
               margin-bottom: var(--spacing-loose);
@@ -80,6 +61,7 @@ export const LogbookDialog: React.FC<LogbookDialogProps> = ({
               color: var(--color-grey-darker);
             }
           `}</style>
+
           <Form.List>
             <Form.List.Item
               role="link"
@@ -101,7 +83,9 @@ export const LogbookDialog: React.FC<LogbookDialogProps> = ({
               }
             />
           </Form.List>
+
           <Spacer />
+
           <Form.List>
             <Form.List.Item
               role="link"
@@ -128,3 +112,5 @@ export const LogbookDialog: React.FC<LogbookDialogProps> = ({
     </>
   )
 }
+
+export default LogbookDialog

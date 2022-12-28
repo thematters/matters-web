@@ -21,7 +21,7 @@ import {
   PAYMENT_CURRENCY as CURRENCY,
   SUPPORT_SUCCESS_ANIMATION,
 } from '~/common/enums'
-import { curationABI } from '~/common/utils'
+import { CurationABI } from '~/common/utils'
 
 import PaymentInfo from '../PaymentInfo'
 import PayToFallback from './PayToFallback'
@@ -205,7 +205,7 @@ const USDTProcessingForm: React.FC<Props> = ({
   } = useContractWrite({
     mode: 'recklesslyUnprepared',
     address: process.env.NEXT_PUBLIC_CURATION_CONTRACT_ADDRESS || '',
-    abi: curationABI,
+    abi: CurationABI,
     functionName: 'curate',
     args: [
       recipient.info.ethAddress as `0x${string}`,
