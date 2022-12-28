@@ -170,7 +170,8 @@ const RssFeedDialogContent = ({
           <ul>
             {(!data || loading) && <Spinner />}
 
-            {gateways.map((url) => {
+            {/* FIXME: remove filebase.io and meson.network */}
+            {gateways.slice(2, 6).map((url) => {
               const gatewayUrl = url
                 .replace(':hash', displayIPNS!)
                 .replace('/ipfs/', '/ipns/')

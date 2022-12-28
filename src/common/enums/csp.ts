@@ -106,6 +106,7 @@ const CONNECT_SRC = [
   'ipfs.fleek.co/ipfs/',
   'gateway.pinata.cloud/ipfs/',
   'meson.network/ipfs/',
+  'ipfs.filebase.io/ipfs/',
 ] // .join(' ')
 
 const FRAME_SRC = [

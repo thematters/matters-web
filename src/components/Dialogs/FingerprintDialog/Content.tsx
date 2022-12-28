@@ -159,7 +159,7 @@ const FingerprintDialogContent = ({
           <ul>
             {(!data || loading) && <Spinner />}
 
-            {gateways.map((url) => {
+            {gateways.slice(0, 4).map((url) => {
               const gatewayUrl = url.replace(':hash', dataHash)
               const hostname = url.replace(/(https:\/\/|\/ipfs\/|:hash.?)/g, '')
 

@@ -49,9 +49,12 @@ const gatewayUrlsResolver = async () => {
   const gatwayUrls = checkers.filter(({ alive }) => alive).map(({ url }) => url)
 
   // meson network use 302 redirect, so we have to push it in mannually
-  gatwayUrls.unshift('https://pz-matters.meson.network/ipfs/:hash')
+  gatwayUrls.unshift(
+    'https://ipfs.filebase.io/ipfs/:hash',
+    'https://pz-matters.meson.network/ipfs/:hash'
+  )
 
-  return gatwayUrls.slice(0, 4) // limits to 4
+  return gatwayUrls
 }
 
 export default gatewayUrlsResolver
