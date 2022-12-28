@@ -94,10 +94,13 @@ jobs:
         if: github.base_ref == 'develop'
         uses: wei/rclone@v1
         env:
-          RCLONE_CONF: ${{ secrets.RCLONE_CONF }}
-          R2_ASSETS_ENDPOINT_DEV: ${{ secrets.R2_ASSETS_ENDPOINT_DEV }}
+          RCLONE_CONFIG_R2_TYPE: s3
+          RCLONE_CONFIG_R2_PROVIDER: Cloudflare
+          RCLONE_CONFIG_R2_ACCESS_KEY_ID: ${{ secrets.RCLONE_CONFIG_R2_ACCESS_KEY_ID }}
+          RCLONE_CONFIG_R2_SECRET_ACCESS_KEY: ${{ secrets.RCLONE_CONFIG_R2_SECRET_ACCESS_KEY }}
+          RCLONE_CONFIG_R2_ENDPOINT: ${{ secrets.RCLONE_CONFIG_R2_ENDPOINT }}
         with:
-          args: sync .next r2:$R2_ASSETS_ENDPOINT_DEV/.next -P
+          args: sync .next r2:matters-assets-next-develop/.next -P
 
       - name: Deploy to EB (develop)
         if: github.base_ref == 'develop'
