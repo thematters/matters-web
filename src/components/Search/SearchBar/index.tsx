@@ -61,7 +61,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   hasDropdown = true,
 }) => {
   const { getQuery, router, isInPath } = useRoute()
-  const isSearch = isInPath('SEARCH')
+  const isInSearch = isInPath('SEARCH')
   const q = getQuery('q')
   const type = getSearchType(getQuery('type'))
   const { lang } = useContext(LanguageContext)
@@ -163,7 +163,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
 
         if (values.q.length <= 0) return
 
-        if (isSearch) {
+        if (isInSearch) {
           router.replace(path.href)
         } else {
           router.push(path.href)
@@ -214,6 +214,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         return (
           <Dropdown
             content={
+              !isInSearch &&
               debouncedSearch && (
                 <SearchQuickResult
                   searchKey={debouncedSearch}
