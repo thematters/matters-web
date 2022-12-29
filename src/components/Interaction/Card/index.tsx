@@ -32,6 +32,7 @@ export interface CardProps {
   borderRadius?: CardBorderRadius
 
   isActive?: boolean
+  activeOutline?: 'auto'
 
   href?: string
 
@@ -61,6 +62,7 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
       borderRadius,
 
       isActive,
+      activeOutline,
 
       href,
 
@@ -94,6 +96,7 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
       [`bg-active-${bgActiveColor}`]: !!bgActiveColor,
       [`border-${borderColor}`]: !!borderColor,
       [`border-radius-${borderRadius}`]: !!borderRadius,
+      ['active-outline-auto']: !!activeOutline,
 
       hasBorder: !!borderColor || !!borderRadius,
       disabled,
