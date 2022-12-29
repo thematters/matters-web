@@ -21,7 +21,7 @@ const Complete: React.FC<CompleteProps> = ({ txHash }) => {
             <Translate
               zh_hans="已成功关联，稍后完成。在&nbsp;"
               zh_hant="已成功關聯，稍後完成。在&nbsp;"
-              en="Successfully linked. It would take couple hours to resolve. View transation on&nbsp;"
+              en="Successfully linked. It would take couple hours to resolve. View transaction on&nbsp;"
             />
             <a href={`${explorerUrl}/tx/${txHash}`} target="_blank">
               {explorerName}
