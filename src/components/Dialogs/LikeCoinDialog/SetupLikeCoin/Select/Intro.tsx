@@ -22,7 +22,6 @@ const Intro = () => (
         help.like.co
       </a>
     </p>
-    <br />
 
     <style jsx>{styles}</style>
   </section>
