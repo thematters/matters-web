@@ -27,7 +27,7 @@ jobs:
         run: npm ci --legacy-peer-deps
 
       - name: Install Apollo
-        run: npm i apollo graphql -D --legacy-peer-deps
+        run: npm i apollo graphql -g --legacy-peer-deps
 
       - name: Generate Types (Develop)
         if: github.base_ref != 'master'
