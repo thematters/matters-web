@@ -7,7 +7,6 @@ import { storage, toPath } from '~/common/utils'
 import {
   Head,
   Layout,
-  PullToRefresh,
   SearchBar,
   SearchHistory,
   useResponsive,
@@ -98,15 +97,13 @@ const Search = () => {
 
       <Head title={{ id: 'search' }} />
 
-      <PullToRefresh>
-        {isHistory && !isLargeUp && (
-          <SearchHistory
-            data={searchHistory.slice(0, 10)}
-            removeSearchHistoryItem={removeSearchHistory}
-          />
-        )}
-        {isAggregate && <AggregateResults />}
-      </PullToRefresh>
+      {isHistory && !isLargeUp && (
+        <SearchHistory
+          data={searchHistory.slice(0, 10)}
+          removeSearchHistoryItem={removeSearchHistory}
+        />
+      )}
+      {isAggregate && <AggregateResults />}
     </Layout.Main>
   )
 }

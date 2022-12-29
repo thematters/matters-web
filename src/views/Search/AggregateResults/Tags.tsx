@@ -27,11 +27,13 @@ const AggregateTagResults = () => {
    * Data Fetching
    */
   // public data
-  const { data, loading, fetchMore, refetch } =
-    useQuery<SearchAggregateTagsPublicQuery>(SEARCH_AGGREGATE_TAGS_PUBLIC, {
+  const { data, loading, fetchMore } = useQuery<SearchAggregateTagsPublicQuery>(
+    SEARCH_AGGREGATE_TAGS_PUBLIC,
+    {
       variables: { key: q, version: version === '' ? undefined : version },
       fetchPolicy: 'network-only',
-    })
+    }
+  )
 
   // pagination
   const connectionPath = 'search'
@@ -75,11 +77,7 @@ const AggregateTagResults = () => {
 
   return (
     <section className="aggregate-section">
-      <InfiniteScroll
-        hasNextPage={pageInfo.hasNextPage}
-        loadMore={loadMore}
-        pullToRefresh={refetch}
-      >
+      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
         <Menu>
           {edges.map(
             ({ node, cursor }, i) =>

@@ -26,7 +26,7 @@ const AggregateUserResults = () => {
    * Data Fetching
    */
   // public data
-  const { data, loading, fetchMore, refetch } =
+  const { data, loading, fetchMore } =
     useQuery<SearchAggregateUsersPublicQuery>(SEARCH_AGGREGATE_USERS_PUBLIC, {
       variables: { key: q, version: version === '' ? undefined : version },
       fetchPolicy: 'network-only',
@@ -77,11 +77,7 @@ const AggregateUserResults = () => {
 
   return (
     <section className="aggregate-section">
-      <InfiniteScroll
-        hasNextPage={pageInfo.hasNextPage}
-        loadMore={loadMore}
-        pullToRefresh={refetch}
-      >
+      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
         <Menu>
           {edges.map(
             ({ node, cursor }, i) =>

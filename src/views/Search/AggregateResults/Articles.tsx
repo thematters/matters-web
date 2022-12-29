@@ -26,7 +26,7 @@ const AggregateArticleResults = () => {
    * Data Fetching
    */
   // public data
-  const { data, loading, fetchMore, refetch } =
+  const { data, loading, fetchMore } =
     useQuery<SearchAggregateArticlesPublicQuery>(
       SEARCH_AGGREGATE_ARTICLES_PUBLIC,
       {
@@ -77,11 +77,7 @@ const AggregateArticleResults = () => {
 
   return (
     <section className="aggregate-section">
-      <InfiniteScroll
-        hasNextPage={pageInfo.hasNextPage}
-        loadMore={loadMore}
-        pullToRefresh={refetch}
-      >
+      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
         <List>
           {edges.map(
             ({ node, cursor }, i) =>
