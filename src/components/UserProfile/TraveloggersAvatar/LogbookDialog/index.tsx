@@ -34,13 +34,14 @@ const LogbookDialog: React.FC<LogbookDialogProps> = ({
   return (
     <>
       {children({ openDialog })}
-      <Dialog isOpen={show} onDismiss={closeDialog}>
+      <Dialog isOpen={show} onDismiss={closeDialog} size="sm">
         <Dialog.Header
           title={title}
           closeDialog={closeDialog}
           closeTextId="close"
         />
-        <Dialog.Content spacing={['xloose', 'base']}>
+
+        <Dialog.Message>
           <p>
             <Translate id="logbook2LaunchText" />
             &nbsp;
@@ -53,61 +54,51 @@ const LogbookDialog: React.FC<LogbookDialogProps> = ({
             </a>
             .
           </p>
+        </Dialog.Message>
 
-          <style jsx>{`
-            p {
-              margin-bottom: var(--spacing-loose);
-              text-align: center;
-              color: var(--color-grey-darker);
+        <Form.List>
+          <Form.List.Item
+            role="link"
+            htmlHref={logbook2Url}
+            htmlTarget="_blank"
+            title={
+              <TextIcon
+                color="black"
+                icon={<IconLogbook2 size="md" />}
+                size="md"
+                spacing="xtight"
+              >
+                <Translate
+                  zh_hant="Logbook 2.0 Bookcase"
+                  zh_hans="Logbook 2.0 Bookcase"
+                  en="Logbook 2.0 Bookcase"
+                />
+              </TextIcon>
             }
-          `}</style>
+          />
 
-          <Form.List>
-            <Form.List.Item
-              role="link"
-              htmlHref={logbook2Url}
-              htmlTarget="_blank"
-              title={
-                <TextIcon
-                  color="black"
-                  icon={<IconLogbook2 size="md" />}
-                  size="md"
-                  spacing="xtight"
-                >
-                  <Translate
-                    zh_hant="Logbook 2.0 Bookcase"
-                    zh_hans="Logbook 2.0 Bookcase"
-                    en="Logbook 2.0 Bookcase"
-                  />
-                </TextIcon>
-              }
-            />
-          </Form.List>
+          <Form.List.Item
+            role="link"
+            htmlHref={logbook1Url}
+            htmlTarget="_blank"
+            title={
+              <TextIcon
+                color="black"
+                icon={<IconLogbook1 size="md" />}
+                size="md"
+                spacing="xtight"
+              >
+                <Translate
+                  zh_hant="Logbook 1.0 Bookcase"
+                  zh_hans="Logbook 1.0 Bookcase"
+                  en="Logbook 1.0 Bookcase"
+                />
+              </TextIcon>
+            }
+          />
+        </Form.List>
 
-          <Spacer />
-
-          <Form.List>
-            <Form.List.Item
-              role="link"
-              htmlHref={logbook1Url}
-              htmlTarget="_blank"
-              title={
-                <TextIcon
-                  color="black"
-                  icon={<IconLogbook1 size="md" />}
-                  size="md"
-                  spacing="xtight"
-                >
-                  <Translate
-                    zh_hant="Logbook 1.0 Bookcase"
-                    zh_hans="Logbook 1.0 Bookcase"
-                    en="Logbook 1.0 Bookcase"
-                  />
-                </TextIcon>
-              }
-            />
-          </Form.List>
-        </Dialog.Content>
+        <Spacer />
       </Dialog>
     </>
   )

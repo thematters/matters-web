@@ -30,20 +30,22 @@ const BaseResponsiveImage = ({
 
   return (
     <picture onError={() => setError(true)}>
-      <source
-        type="image/webp"
-        media="(min-width: 768px)"
-        srcSet={toSizedImageURL({
-          url,
-          size: smUpSize,
-          ext: 'webp',
-        })}
-      />
       {smUpSize && (
-        <source
-          media="(min-width: 768px)"
-          srcSet={toSizedImageURL({ url, size: smUpSize })}
-        />
+        <>
+          <source
+            type="image/webp"
+            media="(min-width: 768px)"
+            srcSet={toSizedImageURL({
+              url,
+              size: smUpSize,
+              ext: 'webp',
+            })}
+          />
+          <source
+            media="(min-width: 768px)"
+            srcSet={toSizedImageURL({ url, size: smUpSize })}
+          />
+        </>
       )}
 
       <source
