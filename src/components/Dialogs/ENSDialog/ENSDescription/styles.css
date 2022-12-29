@@ -3,7 +3,7 @@ hr {
 }
 
 .description {
-  padding: var(--spacing-loose) var(--spacing-base) var(--spacing-xx-loose)
+  padding: var(--spacing-loose) var(--spacing-base) var(--spacing-base)
     var(--spacing-base);
   font-size: var(--font-size-sm-s);
   line-height: 1.5rem;
