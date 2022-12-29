@@ -39,7 +39,7 @@ jobs:
         run: npm ci --legacy-peer-deps
 
       - name: Install Apollo
-        run: npm i apollo -D --legacy-peer-deps
+        run: npm i apollo graphql -D --legacy-peer-deps
 
       - name: Generate Types (develop)
         if: github.base_ref == 'develop'
