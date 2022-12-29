@@ -114,7 +114,7 @@ const SetAmount: React.FC<FormProps> = ({
 
   // TODO: support multiple networks
   const targetNetork = featureSupportedChains.curation[0]
-  const { isUnsupportedNetwork, switchToTargetNetwork } =
+  const { isUnsupportedNetwork, switchToTargetNetwork, isSwitchingNetwork } =
     useTargetNetwork(targetNetork)
 
   // states
@@ -155,9 +155,11 @@ const SetAmount: React.FC<FormProps> = ({
   const balanceLike = data?.viewer?.liker.total || 0
   const balance = isUSDT ? balanceUSDT : isHKD ? balanceHKD : balanceLike
   const maxAmount = isHKD ? PAYMENT_MAXIMUM_PAYTO_AMOUNT.HKD : Infinity
-  const networkEerror =
+  const networkError =
     error ||
-    (isUSDT ? allowanceError || balanceUSDTError || approveError : undefined)
+    (isUSDT && !isUnsupportedNetwork
+      ? allowanceError || balanceUSDTError || approveError
+      : undefined)
       ? WALLET_ERROR_MESSAGES[lang].unknown
       : ''
 
@@ -254,7 +256,7 @@ const SetAmount: React.FC<FormProps> = ({
    */
   // go back to previous step if wallet is locked
   useEffect(() => {
-    if (!address && currency === CURRENCY.USDT) {
+    if (currency === CURRENCY.USDT && !address) {
       switchToCurrencyChoice()
     }
   }, [address])
@@ -302,7 +304,7 @@ const SetAmount: React.FC<FormProps> = ({
         name="amount"
         disabled={isUSDT && !isConnectedAddress}
         value={values.amount}
-        error={errors.amount || networkEerror}
+        error={errors.amount || networkError}
         onBlur={handleBlur}
         onChange={async (e) => {
           const value = parseInt(e.target.value, 10) || 0
@@ -402,6 +404,7 @@ const SetAmount: React.FC<FormProps> = ({
                 bgColor="green"
                 textColor="white"
                 onClick={switchToTargetNetwork}
+                loading={isSwitchingNetwork}
               >
                 <Translate
                   zh_hant="切換到 "
