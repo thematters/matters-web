@@ -36,7 +36,7 @@ const WalletLabel: React.FC<WalletLabelProps> = ({ user, isMe }) => {
     name: ensName as string,
     chainId: targetNetork.id,
   })
-  const { data: contenthashData } = useContractRead({
+  const { data: contenthashData, isSuccess} = useContractRead({
     address: resolverData?.address,
     abi: PublicResolverABI,
     functionName: 'contenthash',
@@ -46,7 +46,8 @@ const WalletLabel: React.FC<WalletLabelProps> = ({ user, isMe }) => {
   const hasLinkedIPNS =
     !!ipnsHash &&
     '0x' + contentHash.encode('ipns-ns', ipnsHash) === contenthashData
-  const hasLinkEnsButton = ensName && ipnsHash && isMe && !hasLinkedIPNS
+  const hasLinkEnsButton =
+    ensName && ipnsHash && isMe && !hasLinkedIPNS && isSuccess
 
   if (!address) {
     return null
