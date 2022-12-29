@@ -92,7 +92,7 @@ jobs:
           RCLONE_CONFIG_R2_SECRET_ACCESS_KEY: ${{ secrets.RCLONE_CONFIG_R2_SECRET_ACCESS_KEY }}
           RCLONE_CONFIG_R2_ENDPOINT: ${{ secrets.RCLONE_CONFIG_R2_ENDPOINT }}
         with:
-          args: sync .next r2:matters-assets-next-develop/.next -P
+          args: sync .next r2:matters-assets-next-develop/_next -P
 
       - name: Deploy to EB (develop)
         if: github.base_ref == 'develop'
