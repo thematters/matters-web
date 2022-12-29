@@ -84,6 +84,11 @@ jobs:
       # === `develop` branch ===
       - name: Upload Assets (develop)
         if: github.base_ref == 'develop'
+        run: |
+          aws s3 sync .next s3://web-develop.matters.news/_next
+
+      - name: Upload Assets (develop - R2)
+        if: github.base_ref == 'develop'
         uses: wei/rclone@v1
         env:
           RCLONE_CONFIG_R2_TYPE: s3
