@@ -22,11 +22,11 @@ const ConnectWallet = ({
 
   const { address: connectedAddress } = useAccount()
   const address = viewer.info.ethAddress
-  const targetNetork = featureSupportedChains.ens[0]
+  const targetNetwork = featureSupportedChains.ens[0]
 
   const { data: ensName } = useEnsName({
     address: address as `0x${string}`,
-    chainId: targetNetork.id,
+    chainId: targetNetwork.id,
   })
 
   useEffect(() => {
