@@ -1,6 +1,6 @@
 import { useLazyQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 
 import {
   Avatar,
@@ -40,6 +40,8 @@ interface DonationProps {
 }
 
 const SupportWidget = ({ article }: DonationProps) => {
+  const animationRef = useRef<null | HTMLElement>(null)
+
   const viewer = useContext(ViewerContext)
   const [playShipWaiting, setPlayShipWaiting] = useState(false)
   const [showAnimation, setShowAnimation] = useState(false)
@@ -79,6 +81,12 @@ const SupportWidget = ({ article }: DonationProps) => {
     }
   }, [isViewerDonated])
 
+  useEffect(() => {
+    if (showAnimation && animationRef?.current) {
+      animationRef?.current.scrollIntoView({ behavior: 'smooth' })
+    }
+  }, [showAnimation])
+
   const requestForDonation = article.requestForDonation
   const replyToDonator = hasDonatedArticle?.replyToDonator
 
@@ -110,7 +118,7 @@ const SupportWidget = ({ article }: DonationProps) => {
   return (
     <section className={supportWidgetClasses}>
       {showAnimation && (
-        <section className="donation">
+        <section className="donation" ref={animationRef}>
           <Animation
             playShipWaiting={playShipWaiting}
             playEnd={() => {
