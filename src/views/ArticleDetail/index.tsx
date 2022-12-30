@@ -5,7 +5,6 @@ import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
 import { Waypoint } from 'react-waypoint'
 
-import { ArticleAccessType, UserLanguage } from '@/__generated__/globalTypes'
 import { ADD_TOAST, DEFAULT_LOCALE, URL_QS } from '~/common/enums'
 import {
   stripAllPunct,
@@ -34,16 +33,17 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { UserDigest } from '~/components/UserDigest'
-
-import { ArticleAvailableTranslations } from './__generated__/ArticleAvailableTranslations'
 import {
-  ArticleDetailPublic,
-  ArticleDetailPublic_article,
-} from './__generated__/ArticleDetailPublic'
-import { ArticleTranslation } from './__generated__/ArticleTranslation'
+  ArticleAccessType,
+  ArticleAvailableTranslationsQuery,
+  ArticleDetailPublicQuery,
+  ArticleTranslationQuery,
+  ClientPreferenceQuery,
+  UserLanguage,
+} from '~/gql/graphql'
+
 import Collection from './Collection'
 import Content from './Content'
 import CustomizedSummary from './CustomizedSummary'
@@ -98,7 +98,7 @@ const BaseArticleDetail = ({
   article,
   privateFetched,
 }: {
-  article: ArticleDetailPublic_article
+  article: NonNullable<ArticleDetailPublicQuery['article']>
   privateFetched: boolean
 }) => {
   const { getQuery, router } = useRoute()
@@ -119,11 +119,11 @@ const BaseArticleDetail = ({
     isAuthor ||
     !circle ||
     circle.isMember ||
-    article.access.type === ArticleAccessType.public
+    article.access.type === ArticleAccessType.Public
   )
 
   // wall
-  const { data: clientPreferenceData } = useQuery<ClientPreference>(
+  const { data: clientPreferenceData } = useQuery<ClientPreferenceQuery>(
     CLIENT_PREFERENCE,
     { variables: { id: 'local' } }
   )
@@ -141,7 +141,7 @@ const BaseArticleDetail = ({
   } = useContext(LanguageContext)
   const canTranslate = !!(originalLang && originalLang !== preferredLang)
   const [getTranslation, { data: translationData, loading: translating }] =
-    useLazyQuery<ArticleTranslation>(ARTICLE_TRANSLATION)
+    useLazyQuery<ArticleTranslationQuery>(ARTICLE_TRANSLATION)
 
   const translate = () => {
     getTranslation({ variables: { mediaHash, language: preferredLang } })
@@ -358,23 +358,23 @@ const ArticleDetail = ({
   // - `/:username:/:articleId:-:slug:-:mediaHash`
   // - `/:username:/:articleId:`
   // - `/:username:/:slug:-:mediaHash:`
-  const resultByHash = usePublicQuery<ArticleDetailPublic>(
+  const resultByHash = usePublicQuery<ArticleDetailPublicQuery>(
     ARTICLE_DETAIL_PUBLIC,
     {
       variables: {
         mediaHash,
-        language: locale ? toUserLanguage(locale) : UserLanguage.zh_hant,
+        language: locale ? toUserLanguage(locale) : UserLanguage.ZhHant,
         includeTranslation,
       },
       skip: !isQueryByHash,
     }
   )
-  const resultByNodeId = usePublicQuery<ArticleDetailPublic>(
+  const resultByNodeId = usePublicQuery<ArticleDetailPublicQuery>(
     ARTICLE_DETAIL_PUBLIC_BY_NODE_ID,
     {
       variables: {
         id: toGlobalId({ type: 'Article', id: articleId }),
-        language: locale ? toUserLanguage(locale) : UserLanguage.zh_hant,
+        language: locale ? toUserLanguage(locale) : UserLanguage.ZhHant,
         includeTranslation,
       },
       skip: isQueryByHash,
@@ -590,11 +590,11 @@ const ArticleDetailOuter = () => {
   const locale = router.locale !== DEFAULT_LOCALE ? router.locale : ''
 
   const isQueryByHash = !!(mediaHash && isMediaHashPossiblyValid(mediaHash))
-  const resultByHash = usePublicQuery<ArticleAvailableTranslations>(
+  const resultByHash = usePublicQuery<ArticleAvailableTranslationsQuery>(
     ARTICLE_AVAILABLE_TRANSLATIONS,
     { variables: { mediaHash }, skip: !isQueryByHash }
   )
-  const resultByNodeId = usePublicQuery<ArticleAvailableTranslations>(
+  const resultByNodeId = usePublicQuery<ArticleAvailableTranslationsQuery>(
     ARTICLE_AVAILABLE_TRANSLATIONS_BY_NODE_ID,
     {
       variables: { id: toGlobalId({ type: 'Article', id: articleId }) },

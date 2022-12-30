@@ -2,7 +2,6 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
-import { QuoteCurrency } from '@/__generated__/globalTypes'
 import { PATHS } from '~/common/enums'
 import { formatAmount } from '~/common/utils'
 import {
@@ -15,8 +14,8 @@ import {
   Translate,
   ViewerContext,
 } from '~/components'
+import { QuoteCurrency, ViewerLikeBalanceQuery } from '~/gql/graphql'
 
-import { ViewerLikeBalance } from './__generated__/ViewerLikeBalance'
 import styles from './styles.css'
 
 interface LikeCoinBalanceProps {
@@ -55,7 +54,7 @@ export const LikeCoinBalance = ({
   const viewer = useContext(ViewerContext)
 
   const likerId = viewer.liker.likerId
-  const { data, loading, error } = useQuery<ViewerLikeBalance>(
+  const { data, loading, error } = useQuery<ViewerLikeBalanceQuery>(
     VIEWER_LIKE_BALANCE,
     {
       errorPolicy: 'none',

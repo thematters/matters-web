@@ -18,10 +18,9 @@ import {
   Translate,
   useMutation,
 } from '~/components'
-import { Asset } from '~/components/GQL/fragments/__generated__/Asset'
-import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 import updateDraftAssets from '~/components/GQL/updates/draftAssets'
+import { AssetFragment, SingleFileUploadMutation } from '~/gql/graphql'
 
 import styles from './styles.css'
 
@@ -31,7 +30,7 @@ export interface UploadEntity {
 }
 
 type UploaderProps = {
-  setSelected: (asset: Asset) => any
+  setSelected: (asset: AssetFragment) => any
   refetchAssets: () => any
 } & UploadEntity
 
@@ -43,7 +42,7 @@ const Uploader: React.FC<UploaderProps> = ({
 }) => {
   const { lang } = useContext(LanguageContext)
 
-  const [upload, { loading }] = useMutation<SingleFileUpload>(
+  const [upload, { loading }] = useMutation<SingleFileUploadMutation>(
     UPLOAD_FILE,
     {
       update: (cache, { data }) => {

@@ -16,9 +16,9 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
+import { OAuthClientInfoQuery } from '~/gql/graphql'
 
 import { Box } from '../Box'
-import { OAuthClientInfo } from './__generated__/OAuthClientInfo'
 import styles from './styles.css'
 
 const OAUTH_AUTHORIZE_ENDPOINT = `${process.env.NEXT_PUBLIC_OAUTH_URL}/authorize`
@@ -45,7 +45,7 @@ const BaseOAuthAuthorize = () => {
   const requestScopes = getQuery('scope')
   const redirectUri = getQuery('redirect_uri')
 
-  const { data, loading } = useQuery<OAuthClientInfo>(OAUTH_CLIENT_INFO, {
+  const { data, loading } = useQuery<OAuthClientInfoQuery>(OAUTH_CLIENT_INFO, {
     variables: { id: clientId },
   })
 

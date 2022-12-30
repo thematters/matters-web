@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 
-import { ArticleLicenseType } from '@/__generated__/globalTypes'
 import { Form, LanguageContext, Translate } from '~/components'
+import { ArticleLicenseType } from '~/gql/graphql'
 
 interface Props {
   isInCircle: boolean

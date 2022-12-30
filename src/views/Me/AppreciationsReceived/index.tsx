@@ -11,9 +11,9 @@ import {
   List,
   Spinner,
 } from '~/components'
+import { MeAppreciationsReceivedQuery } from '~/gql/graphql'
 
 import AppreciationTabs from '../AppreciationTabs'
-import { MeAppreciationsReceived } from './__generated__/MeAppreciationsReceived'
 
 const ME_APPRECIATED_RECEIVED = gql`
   query MeAppreciationsReceived($after: String) {
@@ -43,7 +43,7 @@ const ME_APPRECIATED_RECEIVED = gql`
 
 const BaseAppreciationsReceived = () => {
   const { data, loading, fetchMore, refetch } =
-    useQuery<MeAppreciationsReceived>(ME_APPRECIATED_RECEIVED)
+    useQuery<MeAppreciationsReceivedQuery>(ME_APPRECIATED_RECEIVED)
 
   if (loading) {
     return <Spinner />

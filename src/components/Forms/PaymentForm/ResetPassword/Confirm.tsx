@@ -17,8 +17,7 @@ import {
   useMutation,
   useStep,
 } from '~/components'
-
-import { ResetPaymentPassword } from './__generated__/ResetPaymentPassword'
+import { ResetPaymentPasswordMutation } from '~/gql/graphql'
 
 interface FormProps {
   codeId: string
@@ -37,7 +36,7 @@ export const RESET_PAYMENT_PASSWORD = gql`
 `
 
 const Confirm: React.FC<FormProps> = ({ codeId, submitCallback }) => {
-  const [reset] = useMutation<ResetPaymentPassword>(
+  const [reset] = useMutation<ResetPaymentPasswordMutation>(
     RESET_PAYMENT_PASSWORD,
     undefined,
     { showToast: false }

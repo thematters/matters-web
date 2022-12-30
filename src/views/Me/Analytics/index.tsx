@@ -14,8 +14,8 @@ import {
   Translate,
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
+import { MeAnalyticsQuery } from '~/gql/graphql'
 
-import { MeAnalytics } from './__generated__/MeAnalytics'
 import EmptyAnalytics from './EmptyAnalytics'
 import SelectPeriod from './SelectPeriod'
 import styles from './styles.css'
@@ -59,7 +59,7 @@ const BaseAnalytics = () => {
       : new Date(now - period * 24 * 60 * 60 * 1000).toISOString()
   const rangeEnd = rangeStart === null ? null : new Date(now).toISOString()
 
-  const { data, loading, error } = useQuery<MeAnalytics>(ME_ANALYTICS, {
+  const { data, loading, error } = useQuery<MeAnalyticsQuery>(ME_ANALYTICS, {
     variables: {
       filter: {
         inRangeStart: rangeStart,

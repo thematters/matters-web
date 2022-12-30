@@ -3,13 +3,13 @@ import classNames from 'classnames'
 import { TEST_ID } from '~/common/enums'
 import { subString, toPath } from '~/common/utils'
 import { LinkWrapper } from '~/components'
+import { UserDigestPlainUserFragment } from '~/gql/graphql'
 
-import { UserDigestPlainUser } from './__generated__/UserDigestPlainUser'
 import { fragments } from './gql'
 import styles from './styles.css'
 
 export type UserDigestPlainProps = {
-  user: UserDigestPlainUser
+  user: UserDigestPlainUserFragment
 
   disabled?: boolean
   hasUnderline?: boolean

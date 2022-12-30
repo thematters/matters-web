@@ -12,10 +12,12 @@ import {
   useMutation,
   ViewerContext,
 } from '~/components'
-import { UserLogout } from '~/components/GQL/mutations/__generated__/UserLogout'
 import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
+import {
+  UpdateUserInfoAgreeOnMutation,
+  UserLogoutMutation,
+} from '~/gql/graphql'
 
-import { UpdateUserInfoAgreeOn } from './__generated__/UpdateUserInfoAgreeOn'
 import styles from './styles.css'
 
 interface TermContentProps {
@@ -35,10 +37,10 @@ const UPDATE_AGREE_ON = gql`
 
 const TermContent: React.FC<TermContentProps> = ({ closeDialog }) => {
   const router = useRouter()
-  const [logout] = useMutation<UserLogout>(USER_LOGOUT, undefined, {
+  const [logout] = useMutation<UserLogoutMutation>(USER_LOGOUT, undefined, {
     showToast: false,
   })
-  const [update] = useMutation<UpdateUserInfoAgreeOn>(UPDATE_AGREE_ON)
+  const [update] = useMutation<UpdateUserInfoAgreeOnMutation>(UPDATE_AGREE_ON)
 
   const { handleSubmit, isSubmitting } = useFormik({
     initialValues: {},

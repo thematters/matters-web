@@ -4,8 +4,8 @@ import gql from 'graphql-tag'
 import { TEST_ID } from '~/common/enums'
 import { toPath, UtmParams } from '~/common/utils'
 import { LinkWrapper, LinkWrapperProps, Translate } from '~/components'
+import { ArticleDigestTitleArticleFragment } from '~/gql/graphql'
 
-import { ArticleDigestTitleArticle } from './__generated__/ArticleDigestTitleArticle'
 import styles from './styles.css'
 
 export type ArticleDigestTitleTextSize =
@@ -19,7 +19,7 @@ export type ArticleDigestTitleTextWeight = 'normal' | 'md' | 'semibold'
 export type ArticleDigestTitleIs = 'h2' | 'h3' | 'h4' | 'h5'
 
 type ArticleDigestTitleProps = {
-  article: ArticleDigestTitleArticle
+  article: ArticleDigestTitleArticleFragment
 
   textSize?: ArticleDigestTitleTextSize
   textWeight?: ArticleDigestTitleTextWeight

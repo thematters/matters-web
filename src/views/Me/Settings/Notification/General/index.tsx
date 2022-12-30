@@ -9,9 +9,11 @@ import {
   Spinner,
   useMutation,
 } from '~/components'
+import {
+  UpdateViewerNotificationGeneralMutation,
+  ViewerNotificationGeneralSettingsQuery,
+} from '~/gql/graphql'
 
-import { UpdateViewerNotificationGeneral } from './__generated__/UpdateViewerNotificationGeneral'
-import { ViewerNotificationGeneralSettings } from './__generated__/ViewerNotificationGeneralSettings'
 import ArticleSettings from './Article'
 import CommentSettings from './Comment'
 import MeSettings from './Me'
@@ -61,11 +63,11 @@ const UPDATE_VIEWER_NOTIFICATION_GENERAL = gql`
 `
 
 const BaseNotificationSettings = () => {
-  const [update] = useMutation<UpdateViewerNotificationGeneral>(
+  const [update] = useMutation<UpdateViewerNotificationGeneralMutation>(
     UPDATE_VIEWER_NOTIFICATION_GENERAL
   )
   const { data, loading, refetch } =
-    useQuery<ViewerNotificationGeneralSettings>(
+    useQuery<ViewerNotificationGeneralSettingsQuery>(
       VIEWER_NOTIFICATION_GENERAL_SETTINGS
     )
   const settings = data?.viewer?.settings.notification

@@ -5,12 +5,12 @@ import Link from 'next/link'
 import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
 import { toPath } from '~/common/utils'
 import { ResponsiveImage } from '~/components'
+import { CardTagFragment } from '~/gql/graphql'
 
-import { CardTag } from './__generated__/CardTag'
 import styles from './styles.css'
 
 interface CardProps {
-  tag: CardTag
+  tag: CardTagFragment
 }
 
 const Card = ({ tag }: CardProps) => {

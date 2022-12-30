@@ -8,9 +8,11 @@ import { Card, CardProps, Translate } from '~/components'
 import { Avatar, AvatarProps } from '~/components/Avatar'
 import { FollowUserButton } from '~/components/Buttons/FollowUser'
 import { UnblockUserButton } from '~/components/Buttons/UnblockUser'
+import {
+  UserDigestRichUserPrivateFragment,
+  UserDigestRichUserPublicFragment,
+} from '~/gql/graphql'
 
-import { UserDigestRichUserPrivate } from './__generated__/UserDigestRichUserPrivate'
-import { UserDigestRichUserPublic } from './__generated__/UserDigestRichUserPublic'
 import { fragments } from './gql'
 import styles from './styles.css'
 
@@ -23,7 +25,8 @@ import styles from './styles.css'
  *   <UserDigest.Rich user={user} />
  */
 export type UserDigestRichProps = {
-  user: UserDigestRichUserPublic & Partial<UserDigestRichUserPrivate>
+  user: UserDigestRichUserPublicFragment &
+    Partial<UserDigestRichUserPrivateFragment>
 
   size?: 'sm' | 'lg'
   avatarBadge?: React.ReactNode

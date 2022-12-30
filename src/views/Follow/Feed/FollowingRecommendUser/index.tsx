@@ -5,15 +5,17 @@ import { toPath } from '~/common/utils'
 import { Card, CardProps } from '~/components'
 import { Avatar, AvatarProps } from '~/components/Avatar'
 import { FollowUserButton } from '~/components/Buttons/FollowUser'
+import {
+  FollowingFeedRecommendUserPrivateFragment,
+  FollowingFeedRecommendUserPublicFragment,
+} from '~/gql/graphql'
 
-import { FollowingFeedRecommendUserPrivate } from './__generated__/FollowingFeedRecommendUserPrivate'
-import { FollowingFeedRecommendUserPublic } from './__generated__/FollowingFeedRecommendUserPublic'
 import { fragments } from './gql'
 import styles from './styles.css'
 
 type Props = {
-  user: FollowingFeedRecommendUserPublic &
-    Partial<FollowingFeedRecommendUserPrivate>
+  user: FollowingFeedRecommendUserPublicFragment &
+    Partial<FollowingFeedRecommendUserPrivateFragment>
 } & CardProps &
   AvatarProps
 

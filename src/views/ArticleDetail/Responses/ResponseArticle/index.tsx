@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 
 import { ArticleDigestSidebar, Translate, UserDigest } from '~/components'
+import { ResponseArticleArticleFragment } from '~/gql/graphql'
 
-import { ResponseArticleArticle } from './__generated__/ResponseArticleArticle'
 import styles from './styles.css'
 
 interface ResponseArticleControls {
@@ -10,7 +10,7 @@ interface ResponseArticleControls {
 }
 
 type ResponseArticleProps = {
-  article: ResponseArticleArticle
+  article: ResponseArticleArticleFragment
 } & ResponseArticleControls
 
 const fragments = {

@@ -2,7 +2,6 @@ import { useLazyQuery } from '@apollo/react-hooks'
 import { useContext, useEffect, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 
-import { SearchExclude, SearchFilter } from '@/__generated__/globalTypes'
 import { INPUT_DEBOUNCE } from '~/common/enums'
 import {
   analytics,
@@ -19,17 +18,15 @@ import {
   ViewerContext,
 } from '~/components'
 import { toUserDigestMiniPlaceholder } from '~/components/UserDigest/Mini'
+import {
+  ListViewerArticlesQuery,
+  SearchExclude,
+  SearchFilter,
+  SelectSearchQuery,
+} from '~/gql/graphql'
 
 import SearchSelectNode from '../SearchSelectNode'
 import styles from '../styles.css'
-import { ListViewerArticles } from './__generated__/ListViewerArticles'
-import {
-  SelectSearch,
-  SelectSearch_search_edges_node,
-  SelectSearch_search_edges_node_Article,
-  SelectSearch_search_edges_node_Tag,
-  SelectSearch_search_edges_node_User,
-} from './__generated__/SelectSearch'
 import CreateTag from './CreateTag'
 import { LIST_VIEWER_ARTICLES, SELECT_SEARCH } from './gql'
 import InviteEmail from './InviteEmail'
@@ -99,7 +96,7 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
 
   // Data Fetching
   const [lazySearch, { data, loading, fetchMore }] =
-    usePublicLazyQuery<SelectSearch>(
+    usePublicLazyQuery<SelectSearchQuery>(
       SELECT_SEARCH,
       {},
       { publicQuery: !viewer.isAuthed }
@@ -107,7 +104,7 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
   const [
     loadList,
     { data: listData, loading: listLoading, fetchMore: fetchMoreList },
-  ] = useLazyQuery<ListViewerArticles>(LIST_VIEWER_ARTICLES)
+  ] = useLazyQuery<ListViewerArticlesQuery>(LIST_VIEWER_ARTICLES)
 
   // pagination
   const { edges: searchEdges, pageInfo: searchPageInfo } = data?.search || {}

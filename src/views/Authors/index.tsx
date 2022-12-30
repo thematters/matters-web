@@ -14,8 +14,8 @@ import {
   UserDigest,
   ViewerContext,
 } from '~/components'
+import { AllAuthorsPublicQuery } from '~/gql/graphql'
 
-import { AllAuthorsPublic } from './__generated__/AllAuthorsPublic'
 import { ALL_AUTHORS_PRIVATE, ALL_AUTHORS_PUBLIC } from './gql'
 
 const BaseAuthors = () => {
@@ -32,7 +32,7 @@ const BaseAuthors = () => {
     fetchMore,
     refetch: refetchPublic,
     client,
-  } = usePublicQuery<AllAuthorsPublic>(ALL_AUTHORS_PUBLIC)
+  } = usePublicQuery<AllAuthorsPublicQuery>(ALL_AUTHORS_PUBLIC)
 
   // pagination
   const connectionPath = 'viewer.recommendation.authors'

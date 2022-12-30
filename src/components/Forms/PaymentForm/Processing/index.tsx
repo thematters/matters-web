@@ -19,22 +19,24 @@ import {
   useMutation,
   ViewerContext,
 } from '~/components'
-import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
-import { PayTo as PayToMutate } from '~/components/GQL/mutations/__generated__/PayTo'
 import PAY_TO from '~/components/GQL/mutations/payTo'
 import updateDonation from '~/components/GQL/updates/donation'
-import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
+import {
+  ArticleDetailPublicQuery,
+  PayToMutation,
+  UserDonationRecipientFragment,
+  ViewerTxStateQuery,
+} from '~/gql/graphql'
 
 import PaymentInfo from '../PaymentInfo'
-import { ViewerTxState } from './__generated__/ViewerTxState'
 import PayToFallback from './PayToFallback'
 import styles from './styles.css'
 
 interface Props {
   amount: number
   currency: CURRENCY
-  recipient: UserDonationRecipient
-  article: ArticleDetailPublic_article
+  recipient: UserDonationRecipientFragment
+  article: Pick<ArticleDetailPublicQuery, 'article'>
   targetId: string
   txId: string
   nextStep: () => void
@@ -75,7 +77,7 @@ const OthersProcessingForm: React.FC<Props> = ({
   windowRef,
 }) => {
   const [polling, setPolling] = useState(true)
-  const { data, error } = useQuery<ViewerTxState>(VIEWER_TX_STATE, {
+  const { data, error } = useQuery<ViewerTxStateQuery>(VIEWER_TX_STATE, {
     variables: { id: txId },
     pollInterval: polling ? 1000 : undefined,
     errorPolicy: 'none',
@@ -180,7 +182,7 @@ const USDTProcessingForm: React.FC<Props> = ({
   switchToConfirm,
   switchToCurrencyChoice,
 }) => {
-  const [payTo] = useMutation<PayToMutate>(PAY_TO)
+  const [payTo] = useMutation<PayToMutation>(PAY_TO)
   const viewer = useContext(ViewerContext)
   const { address } = useAccount()
   const { data: balanceUSDTData } = useBalanceUSDT({})

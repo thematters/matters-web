@@ -1,13 +1,17 @@
 import gql from 'graphql-tag'
 
 import { TEST_ID } from '~/common/enums'
+import { OfficialAnnouncementNoticeFragment } from '~/gql/graphql'
 
-import { OfficialAnnouncementNotice as NoticeType } from './__generated__/OfficialAnnouncementNotice'
 import NoticeDate from './NoticeDate'
 import NoticeTypeIcon from './NoticeTypeIcon'
 import styles from './styles.css'
 
-const OfficialAnnouncementNotice = ({ notice }: { notice: NoticeType }) => {
+const OfficialAnnouncementNotice = ({
+  notice,
+}: {
+  notice: OfficialAnnouncementNoticeFragment
+}) => {
   const Message = () => <p>{notice.message}</p>
 
   return (

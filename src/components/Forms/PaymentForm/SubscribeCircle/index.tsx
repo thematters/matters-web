@@ -4,22 +4,24 @@ import _pickBy from 'lodash/pickBy'
 import { useEffect, useState } from 'react'
 
 import { Dialog, Spinner } from '~/components'
-import { DigestRichCirclePrivate } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePrivate'
-import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
+import {
+  DigestRichCirclePrivateFragment,
+  DigestRichCirclePublicFragment,
+  WalletPaymentMethodQuery,
+} from '~/gql/graphql'
 
-import { WalletPaymentMethod } from './__generated__/WalletPaymentMethod'
 import CardPayment from './CardPayment'
 import { WALLET_PAYMENT_METHOD } from './gql'
 import PasswordPayment from './PasswordPayment'
 
 interface FormProps {
-  circle: DigestRichCirclePublic & DigestRichCirclePrivate
+  circle: DigestRichCirclePublicFragment & DigestRichCirclePrivateFragment
   submitCallback: () => void
   switchToResetPassword: () => void
 }
 
 const SubscribeCircleForm: React.FC<FormProps> = (props) => {
-  const { data: walletData, loading } = useQuery<WalletPaymentMethod>(
+  const { data: walletData, loading } = useQuery<WalletPaymentMethodQuery>(
     WALLET_PAYMENT_METHOD
   )
   const cardLast4 = walletData?.viewer?.wallet.cardLast4 || ''

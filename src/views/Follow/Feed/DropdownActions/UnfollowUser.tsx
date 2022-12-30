@@ -8,15 +8,16 @@ import {
   Translate,
   useMutation,
 } from '~/components'
-import { ToggleFollowUser } from '~/components/GQL/mutations/__generated__/ToggleFollowUser'
 import TOGGLE_FOLLOW_USER from '~/components/GQL/mutations/toggleFollowUser'
 import updateUserFollowerCount from '~/components/GQL/updates/userFollowerCount'
 import updateViewerFolloweeCount from '~/components/GQL/updates/viewerFolloweeCount'
-
-import { UnfollowActionButtonUserPrivate } from './__generated__/UnfollowActionButtonUserPrivate'
+import {
+  ToggleFollowUserMutation,
+  UnfollowActionButtonUserPrivateFragment,
+} from '~/gql/graphql'
 
 type UnfollowUserActionButtonProps = {
-  user: UnfollowActionButtonUserPrivate
+  user: UnfollowActionButtonUserPrivateFragment
 }
 
 const fragments = {
@@ -34,7 +35,7 @@ const fragments = {
 }
 
 const UnfollowUserActionButton = ({ user }: UnfollowUserActionButtonProps) => {
-  const [unfollow] = useMutation<ToggleFollowUser>(TOGGLE_FOLLOW_USER, {
+  const [unfollow] = useMutation<ToggleFollowUserMutation>(TOGGLE_FOLLOW_USER, {
     variables: { id: user.id, enabled: false },
     optimisticResponse: {
       toggleFollowUser: {

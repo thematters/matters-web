@@ -8,7 +8,7 @@ import { Button, IconExpand16, TextIcon, Translate } from '~/components'
 import styles from './styles.css'
 
 interface CollapsedProps {
-  content: string | null
+  content?: string | null
   collapsedContent: React.ReactNode | string
   className: string
 }

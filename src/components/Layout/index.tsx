@@ -8,8 +8,8 @@ import {
   useResponsive,
   useRoute,
 } from '~/components'
-import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
+import { ClientPreferenceQuery } from '~/gql/graphql'
 
 import FixedMain from './FixedMain'
 import Header from './Header'
@@ -72,7 +72,7 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> = ({
   const isInCircle = isPathStartWith('/~', true)
   const isLargeUp = useResponsive('lg-up')
 
-  const { data } = useQuery<ClientPreference>(CLIENT_PREFERENCE, {
+  const { data } = useQuery<ClientPreferenceQuery>(CLIENT_PREFERENCE, {
     variables: { id: 'local' },
   })
   const onboardingTasks = data?.clientPreference.onboardingTasks

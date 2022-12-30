@@ -2,11 +2,10 @@ import gql from 'graphql-tag'
 
 import { PATHS } from '~/common/enums'
 import { Spacer, Tabs, Translate, useRoute } from '~/components'
-
-import { AppreciationTabsUserActivity } from './__generated__/AppreciationTabsUserActivity'
+import { AppreciationTabsUserActivityFragment } from '~/gql/graphql'
 
 interface AppreciationTabsProps {
-  activity: AppreciationTabsUserActivity
+  activity: AppreciationTabsUserActivityFragment
 }
 
 const fragments = {

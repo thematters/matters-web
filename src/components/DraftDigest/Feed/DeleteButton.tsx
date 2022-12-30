@@ -11,13 +11,12 @@ import {
   useDialogSwitch,
   useMutation,
 } from '~/components'
+import { DeleteButtonDraftFragment, DeleteDraftMutation } from '~/gql/graphql'
 
 import { DraftsContext } from '../../../views/Me/Drafts/context'
-import { DeleteButtonDraft } from './__generated__/DeleteButtonDraft'
-import { DeleteDraft } from './__generated__/DeleteDraft'
 
 interface DeleteButtonProps {
-  draft: DeleteButtonDraft
+  draft: DeleteButtonDraftFragment
 }
 
 const DELETE_DRAFT = gql`
@@ -37,7 +36,7 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(false)
   const [edges, setEdges] = useContext(DraftsContext)
 
-  const [deleteDraft] = useMutation<DeleteDraft>(DELETE_DRAFT, {
+  const [deleteDraft] = useMutation<DeleteDraftMutation>(DELETE_DRAFT, {
     variables: { id: draft.id },
     update: () => {
       const filteredEdges = (edges ?? []).filter(

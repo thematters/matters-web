@@ -15,8 +15,8 @@ import {
   ViewerContext,
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
+import { CircleFollowersPublicQuery } from '~/gql/graphql'
 
-import { CircleFollowersPublic } from './__generated__/CircleFollowersPublic'
 import { CIRCLE_FOLLOWERS_PRIVATE, CIRCLE_FOLLOWERS_PUBLIC } from './gql'
 
 const FollowersDialogContent = () => {
@@ -34,7 +34,7 @@ const FollowersDialogContent = () => {
     fetchMore,
     refetch: refetchPublic,
     client,
-  } = usePublicQuery<CircleFollowersPublic>(CIRCLE_FOLLOWERS_PUBLIC, {
+  } = usePublicQuery<CircleFollowersPublicQuery>(CIRCLE_FOLLOWERS_PUBLIC, {
     variables: { name },
   })
 
@@ -45,7 +45,7 @@ const FollowersDialogContent = () => {
   /**
    * Private data fetching
    */
-  const loadPrivate = (publicData?: CircleFollowersPublic) => {
+  const loadPrivate = (publicData?: CircleFollowersPublicQuery) => {
     if (!viewer.isAuthed || !publicData || !circle) {
       return
     }

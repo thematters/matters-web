@@ -8,12 +8,13 @@ import {
 } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import { Button, TextIcon, Translate, ViewerContext } from '~/components'
-
-import { PriceCirclePrivate } from './__generated__/PriceCirclePrivate'
-import { PriceCirclePublic } from './__generated__/PriceCirclePublic'
+import {
+  PriceCirclePrivateFragment,
+  PriceCirclePublicFragment,
+} from '~/gql/graphql'
 
 type PriceProps = {
-  circle: PriceCirclePublic & Partial<PriceCirclePrivate>
+  circle: PriceCirclePublicFragment & Partial<PriceCirclePrivateFragment>
 
   onClick?: () => void
 }

@@ -11,13 +11,13 @@ import {
   TextIcon,
   Translate,
 } from '~/components'
-import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
+import { UserDonationRecipientFragment } from '~/gql/graphql'
 
 import styles from './styles.css'
 interface PaymentInfoProps {
   amount: number
   currency: CURRENCY
-  recipient: UserDonationRecipient
+  recipient: UserDonationRecipientFragment
   children?: React.ReactNode
   showLikerID?: boolean
   showEthAddress?: boolean

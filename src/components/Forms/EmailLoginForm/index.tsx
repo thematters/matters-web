@@ -22,8 +22,8 @@ import {
   Translate,
   useMutation,
 } from '~/components'
+import { UserLoginMutation } from '~/gql/graphql'
 
-import { UserLogin } from './__generated__/UserLogin'
 import {
   EmailSignUpDialogButton,
   PasswordResetDialogButton,
@@ -62,7 +62,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
   closeDialog,
   back,
 }) => {
-  const [login] = useMutation<UserLogin>(USER_LOGIN, undefined, {
+  const [login] = useMutation<UserLoginMutation>(USER_LOGIN, undefined, {
     showToast: false,
   })
   const { lang } = useContext(LanguageContext)

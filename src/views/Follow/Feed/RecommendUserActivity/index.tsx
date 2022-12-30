@@ -1,14 +1,14 @@
 import { analytics } from '~/common/utils'
 import { Slides } from '~/components'
+import { RecommendUserActivityFragment } from '~/gql/graphql'
 
 import FollowingRecommendHead from '../FollowingRecommendHead'
 import FollowingRecommendUser from '../FollowingRecommendUser'
-import { RecommendUserActivity_recommendUsers } from './__generated__/RecommendUserActivity'
 import { fragments } from './gql'
 import styles from './styles.css'
 
 interface Props {
-  users: RecommendUserActivity_recommendUsers[] | null
+  users: RecommendUserActivityFragment['recommendUsers'] | null
 }
 
 const RecommendUserActivity = ({ users }: Props) => {

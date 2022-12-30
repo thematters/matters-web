@@ -10,9 +10,10 @@ import {
   useMutation,
 } from '~/components'
 import updateTagArticlesCount from '~/components/GQL/updates/tagArticlesCount'
-
-import { DeleteArticlesTags } from './__generated__/DeleteArticlesTags'
-import { RemoveTagButtonArticle } from './__generated__/RemoveTagButtonArticle'
+import {
+  DeleteArticlesTagsMutation,
+  RemoveTagButtonArticleFragment,
+} from '~/gql/graphql'
 
 const DELETE_ARTICLES_TAGS = gql`
   mutation DeleteArticlesTags($id: ID!, $articles: [ID!]) {
@@ -46,10 +47,10 @@ const RemoveTagButton = ({
   article,
   tagId,
 }: {
-  article: RemoveTagButtonArticle
+  article: RemoveTagButtonArticleFragment
   tagId: string
 }) => {
-  const [deleteArticlesTags] = useMutation<DeleteArticlesTags>(
+  const [deleteArticlesTags] = useMutation<DeleteArticlesTagsMutation>(
     DELETE_ARTICLES_TAGS,
     {
       variables: { id: tagId, articles: [article.id] },

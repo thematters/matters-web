@@ -14,8 +14,10 @@ import {
   ViewerContext,
 } from '~/components'
 import { CircleDigest } from '~/components/CircleDigest'
-import { DigestRichCirclePrivate } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePrivate'
-import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
+import {
+  DigestRichCirclePrivateFragment,
+  DigestRichCirclePublicFragment,
+} from '~/gql/graphql'
 
 import Complete from './Complete'
 
@@ -26,7 +28,7 @@ type Step =
   | 'complete'
 
 interface SubscribeCircleDialogProps {
-  circle: DigestRichCirclePublic & DigestRichCirclePrivate
+  circle: DigestRichCirclePublicFragment & DigestRichCirclePrivateFragment
   children?: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 

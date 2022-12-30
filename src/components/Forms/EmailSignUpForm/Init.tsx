@@ -21,8 +21,8 @@ import {
   Translate,
   useMutation,
 } from '~/components'
-import { SendVerificationCode } from '~/components/GQL/mutations/__generated__/SendVerificationCode'
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
+import { SendVerificationCodeMutation } from '~/gql/graphql'
 
 import { EmailLoginButton } from './Buttons'
 import styles from './styles.css'
@@ -53,9 +53,13 @@ const Init: React.FC<FormProps> = ({
   const formId = 'email-sign-up-init-form'
 
   const { token, refreshToken } = useContext(ReCaptchaContext)
-  const [sendCode] = useMutation<SendVerificationCode>(SEND_CODE, undefined, {
-    showToast: false,
-  })
+  const [sendCode] = useMutation<SendVerificationCodeMutation>(
+    SEND_CODE,
+    undefined,
+    {
+      showToast: false,
+    }
+  )
 
   const {
     values,

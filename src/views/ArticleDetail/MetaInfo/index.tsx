@@ -1,13 +1,13 @@
 import { DateTime, IconPaywall16, Translate } from '~/components'
+import { ArticleDetailPublicQuery } from '~/gql/graphql'
 
-import { ArticleDetailPublic_article } from '../__generated__/ArticleDetailPublic'
 import FingerprintButton from './FingerprintButton'
 import { fragments } from './gql'
 import styles from './styles.css'
 import TranslationButton from './TranslationButton'
 
 type MetaInfoProps = {
-  article: ArticleDetailPublic_article
+  article: NonNullable<ArticleDetailPublicQuery['article']>
   translated: boolean
   canTranslate: boolean
   toggleTranslate: () => any

@@ -2,14 +2,14 @@ import React from 'react'
 
 import { toPath } from '~/common/utils'
 import { Card, CircleAvatar, DateTime, LinkWrapper } from '~/components'
+import { FollowingFeedCircleFragment } from '~/gql/graphql'
 
 import DropdownActions, { DropdownActionsControls } from '../DropdownActions'
-import { FollowingFeedCircle } from './__generated__/FollowingFeedCircle'
 import { fragments } from './gql'
 import styles from './styles.css'
 
 export type CircleDigestFeedProps = {
-  circle: FollowingFeedCircle
+  circle: FollowingFeedCircleFragment
   header?: React.ReactNode
   date: Date | string | number
   onClick?: () => any

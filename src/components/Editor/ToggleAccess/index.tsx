@@ -1,9 +1,5 @@
 import { useContext } from 'react'
 
-import {
-  ArticleAccessType,
-  ArticleLicenseType,
-} from '@/__generated__/globalTypes'
 import { translate } from '~/common/utils'
 import {
   CircleDigest,
@@ -13,15 +9,19 @@ import {
   Switch,
   Translate,
 } from '~/components'
-import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
-import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
-import { EditMetaDraft } from '~/views/Me/DraftDetail/__generated__/EditMetaDraft'
+import {
+  ArticleAccessType,
+  ArticleDetailPublicQuery,
+  ArticleLicenseType,
+  DigestRichCirclePublicFragment,
+  EditMetaDraftFragment,
+} from '~/gql/graphql'
 
 import SelectLicense from './SelectLicense'
 import styles from './styles.css'
 
 export type ToggleAccessProps = {
-  circle?: DigestRichCirclePublic | null
+  circle?: DigestRichCirclePublicFragment | null
   accessType: ArticleAccessType
   license: ArticleLicenseType
 
@@ -34,8 +34,8 @@ export type ToggleAccessProps = {
   accessSaving: boolean
   canToggleCircle: boolean
 
-  draft?: EditMetaDraft
-  article?: ArticleDetailPublic_article
+  draft?: EditMetaDraftFragment
+  article?: ArticleDetailPublicQuery['article']
   editSupportSetting: (
     requestForDonation: string | null,
     replyToDonator: string | null
@@ -89,8 +89,8 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
                   editAccess(
                     !circle,
                     false,
-                    circle && license === ArticleLicenseType.arr
-                      ? ArticleLicenseType.cc_by_nc_nd_2
+                    circle && license === ArticleLicenseType.Arr
+                      ? ArticleLicenseType.CcByNcNd_2
                       : license
                   )
                 }
@@ -127,7 +127,7 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
             onChange={(newLicense) =>
               editAccess(
                 !!circle,
-                !!circle && newLicense === ArticleLicenseType.arr,
+                !!circle && newLicense === ArticleLicenseType.Arr,
                 newLicense
               )
             }

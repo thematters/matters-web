@@ -11,13 +11,13 @@ import {
   Tooltip,
   Translate,
 } from '~/components'
+import { UserProfileUserPublicQuery } from '~/gql/graphql'
 
-import { UserProfileUserPublic_user } from '../__generated__/UserProfileUserPublic'
 import styles from './styles.css'
 import WalletAddress from './WalletAddress'
 
 type WalletLabelProps = {
-  user: UserProfileUserPublic_user
+  user: NonNullable<UserProfileUserPublicQuery['user']>
   isMe: boolean
 }
 

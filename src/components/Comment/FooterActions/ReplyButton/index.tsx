@@ -18,12 +18,12 @@ import {
   useResponsive,
   ViewerContext,
 } from '~/components'
+import { ReplyComemntFragment } from '~/gql/graphql'
 
 import ReplyTo from '../../ReplyTo'
-import { ReplyComemnt } from './__generated__/ReplyComemnt'
 
 export interface ReplyButtonProps {
-  comment: ReplyComemnt
+  comment: ReplyComemntFragment
   type: CommentFormType
   replySubmitCallback?: () => void
   onClick?: () => void

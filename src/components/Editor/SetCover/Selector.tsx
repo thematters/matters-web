@@ -3,14 +3,14 @@ import { useContext } from 'react'
 import { ASSET_TYPE } from '~/common/enums'
 import { translate } from '~/common/utils'
 import { IconChecked, LanguageContext, Translate } from '~/components'
-import { Asset } from '~/components/GQL/fragments/__generated__/Asset'
+import { AssetFragment } from '~/gql/graphql'
 
 import styles from './styles.css'
 
 interface SelectorProps {
-  assets: Asset[]
-  selected?: Asset
-  setSelected: (asset?: Asset) => any
+  assets: AssetFragment[]
+  selected?: AssetFragment
+  setSelected: (asset?: AssetFragment) => any
 }
 
 const Selector: React.FC<SelectorProps> = ({

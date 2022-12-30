@@ -17,16 +17,18 @@ import {
   Translate,
   ViewerContext,
 } from '~/components'
+import {
+  FollowingFeedRecommendCirclePrivateFragment,
+  FollowingFeedRecommendCirclePublicFragment,
+} from '~/gql/graphql'
 
-import { FollowingFeedRecommendCirclePrivate } from './__generated__/FollowingFeedRecommendCirclePrivate'
-import { FollowingFeedRecommendCirclePublic } from './__generated__/FollowingFeedRecommendCirclePublic'
 import Footer from './Footer'
 import { fragments } from './gql'
 import styles from './styles.css'
 
 type Props = {
-  circle: FollowingFeedRecommendCirclePublic &
-    FollowingFeedRecommendCirclePrivate
+  circle: FollowingFeedRecommendCirclePublicFragment &
+    FollowingFeedRecommendCirclePrivateFragment
 } & CardProps
 
 const RecommendCircle = ({ circle, ...cardProps }: Props) => {

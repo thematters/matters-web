@@ -11,9 +11,9 @@ import {
   usePullToRefresh,
   UserDigest,
 } from '~/components'
+import { TagParticipantsQuery } from '~/gql/graphql'
 
 import styles from '../styles.css'
-import { TagParticipants } from './__generated__/TagParticipants'
 import TAG_PARTICIPANTS from './gql'
 
 interface Props {
@@ -22,7 +22,7 @@ interface Props {
 
 const Participants = ({ id }: Props) => {
   const { data, loading, error, fetchMore, refetch, networkStatus } =
-    usePublicQuery<TagParticipants>(TAG_PARTICIPANTS, {
+    usePublicQuery<TagParticipantsQuery>(TAG_PARTICIPANTS, {
       variables: { id },
       notifyOnNetworkStatusChange: true,
     })

@@ -1,14 +1,14 @@
 import { analytics } from '~/common/utils'
 import { Slides } from '~/components'
+import { RecommendCircleActivityFragment } from '~/gql/graphql'
 
 import FollowingRecommendCircle from '../FollowingRecommendCircle'
 import FollowingRecommendHead from '../FollowingRecommendHead'
-import { RecommendCircleActivity_recommendCircles } from './__generated__/RecommendCircleActivity'
 import { fragments } from './gql'
 import styles from './styles.css'
 
 interface Props {
-  circles: RecommendCircleActivity_recommendCircles[] | null
+  circles: RecommendCircleActivityFragment['recommendCircles'] | null
   location: number
 }
 

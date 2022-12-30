@@ -2,10 +2,12 @@ import { useState } from 'react'
 
 import { filterComments } from '~/common/utils'
 import { CommentFormType } from '~/components'
+import {
+  ThreadCommentCommentPrivateFragment,
+  ThreadCommentCommentPublicFragment,
+} from '~/gql/graphql'
 
 import Feed from '../Feed'
-import { ThreadCommentCommentPrivate } from './__generated__/ThreadCommentCommentPrivate'
-import { ThreadCommentCommentPublic } from './__generated__/ThreadCommentCommentPublic'
 import ExpandButton from './ExpandButton'
 import { fragments } from './gql'
 import styles from './styles.css'
@@ -23,7 +25,8 @@ interface ThreadCommentControls {
   disabled?: boolean
 }
 
-type Comment = ThreadCommentCommentPublic & Partial<ThreadCommentCommentPrivate>
+type Comment = ThreadCommentCommentPublicFragment &
+  Partial<ThreadCommentCommentPrivateFragment>
 
 type ThreadCommentProps = {
   comment: Comment

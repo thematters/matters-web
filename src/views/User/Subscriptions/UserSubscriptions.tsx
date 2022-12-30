@@ -16,9 +16,9 @@ import {
   usePullToRefresh,
   useRoute,
 } from '~/components'
+import { UserSubscriptionsQuery } from '~/gql/graphql'
 
 import UserTabs from '../UserTabs'
-import { UserSubscriptions } from './__generated__/UserSubscriptions'
 import { USER_SUBSCRIPTIONS } from './gql'
 import styles from './styles.css'
 
@@ -31,7 +31,7 @@ const Subscriptions = () => {
    */
   // public data
   const { data, loading, error, refetch, fetchMore } =
-    usePublicQuery<UserSubscriptions>(USER_SUBSCRIPTIONS, {
+    usePublicQuery<UserSubscriptionsQuery>(USER_SUBSCRIPTIONS, {
       variables: { userName },
     })
 

@@ -8,9 +8,10 @@ import {
   useDialogSwitch,
   useMutation,
 } from '~/components'
-
-import { DropdownActionsCommentPublic } from '../__generated__/DropdownActionsCommentPublic'
-import { CollapseComment } from './__generated__/CollapseComment'
+import {
+  CollapseCommentMutation,
+  DropdownActionsCommentPublicFragment,
+} from '~/gql/graphql'
 
 const COLLAPSE_COMMENT = gql`
   mutation CollapseComment($id: ID!, $state: CommentState!) {
@@ -22,7 +23,7 @@ const COLLAPSE_COMMENT = gql`
 `
 
 interface CollapseCommentDialogProps {
-  comment: DropdownActionsCommentPublic
+  comment: DropdownActionsCommentPublicFragment
   type: CommentFormType
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
@@ -35,18 +36,21 @@ const CollapseCommentDialog = ({
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
   const commentId = comment.id
 
-  const [collapseComment] = useMutation<CollapseComment>(COLLAPSE_COMMENT, {
-    variables: { id: commentId, state: 'collapsed' },
-    optimisticResponse: {
-      updateCommentsState: [
-        {
-          id: commentId,
-          state: 'collapsed' as any,
-          __typename: 'Comment',
-        },
-      ],
-    },
-  })
+  const [collapseComment] = useMutation<CollapseCommentMutation>(
+    COLLAPSE_COMMENT,
+    {
+      variables: { id: commentId, state: 'collapsed' },
+      optimisticResponse: {
+        updateCommentsState: [
+          {
+            id: commentId,
+            state: 'collapsed' as any,
+            __typename: 'Comment',
+          },
+        ],
+      },
+    }
+  )
 
   const onCollapse = async () => {
     await collapseComment()

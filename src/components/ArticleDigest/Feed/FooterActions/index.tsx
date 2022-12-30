@@ -6,9 +6,9 @@ import {
   IconPaywall16,
   IconPin24,
 } from '~/components'
+import { FooterActionsArticlePublicFragment } from '~/gql/graphql'
 
 import DropdownActions, { DropdownActionsControls } from '../../DropdownActions'
-import { FooterActionsArticlePublic } from './__generated__/FooterActionsArticlePublic'
 import DonationCount from './DonationCount'
 import { fragments } from './gql'
 import ReadTime from './ReadTime'
@@ -17,7 +17,7 @@ import styles from './styles.css'
 export type FooterActionsControls = DropdownActionsControls
 
 export type FooterActionsProps = {
-  article: FooterActionsArticlePublic
+  article: FooterActionsArticlePublicFragment
   date?: Date | string | number | boolean
 } & FooterActionsControls
 

@@ -9,14 +9,14 @@ import {
 } from '~/common/utils'
 import { Card } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
+import { ArticleDigestCardArticleFragment } from '~/gql/graphql'
 
 import { ArticleDigestTitle } from '../Title'
-import { ArticleDigestCardArticle } from './__generated__/ArticleDigestCardArticle'
 import { fragments } from './gql'
 import styles from './styles.css'
 
 export interface ArticleDigestCardProps {
-  article: ArticleDigestCardArticle
+  article: ArticleDigestCardArticleFragment
 
   onClick?: () => any
   onClickAuthor?: () => void

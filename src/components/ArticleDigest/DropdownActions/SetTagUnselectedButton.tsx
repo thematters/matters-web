@@ -11,12 +11,10 @@ import {
   useMutation,
 } from '~/components'
 import {
-  TagArticlesPublic,
-  TagArticlesPublic_node_Tag,
-} from '~/components/GQL/queries/__generated__/TagArticlesPublic'
-
-import { SetTagUnselected } from './__generated__/SetTagUnselected'
-import { SetTagUnselectedButtonArticle } from './__generated__/SetTagUnselectedButtonArticle'
+  SetTagUnselectedButtonArticleFragment,
+  SetTagUnselectedMutation,
+  TagArticlesPublicQuery,
+} from '~/gql/graphql'
 
 const SET_TAG_UNSELECTED = gql`
   mutation SetTagUnselected($id: ID!, $articles: [ID!]) {
@@ -52,10 +50,10 @@ const SetTagUnselectedButton = ({
   article,
   tagId,
 }: {
-  article: SetTagUnselectedButtonArticle
+  article: SetTagUnselectedButtonArticleFragment
   tagId: string
 }) => {
-  const [update] = useMutation<SetTagUnselected>(SET_TAG_UNSELECTED, {
+  const [update] = useMutation<SetTagUnselectedMutation>(SET_TAG_UNSELECTED, {
     variables: { id: tagId, articles: [article.id] },
     update: (cache) => {
       try {
@@ -68,16 +66,18 @@ const SetTagUnselectedButton = ({
           selected: true,
           sortBy: 'byCreatedAtDesc',
         }
-        const data = cache.readQuery<TagArticlesPublic>({ query, variables })
-        const node = _get(data, 'node', {}) as TagArticlesPublic_node_Tag
-        if (
-          !node.articles ||
-          !node.articles.edges ||
-          node.articles.edges.length === 0
-        ) {
+        const data = cache.readQuery<TagArticlesPublicQuery>({
+          query,
+          variables,
+        })
+        const node = _get(data, 'node')
+        const articles = node?.__typename === 'Tag' ? node?.articles : null
+
+        if (!articles || !articles?.edges || articles?.edges?.length === 0) {
           return
         }
-        const newEdges = node.articles.edges.filter(
+
+        const newEdges = articles.edges.filter(
           (item) => item.node.id !== article.id
         )
         cache.writeQuery({
@@ -87,7 +87,7 @@ const SetTagUnselectedButton = ({
             node: {
               ...node,
               articles: {
-                ...node.articles,
+                ...articles,
                 edges: newEdges,
               },
             },

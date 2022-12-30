@@ -2,13 +2,17 @@ import gql from 'graphql-tag'
 
 import { TEST_ID } from '~/common/enums'
 import { Translate } from '~/components'
+import { CryptoWalletAirdropNoticeFragment } from '~/gql/graphql'
 
 import NoticeDate from '../NoticeDate'
 import NoticeTypeIcon from '../NoticeTypeIcon'
 import styles from '../styles.css'
-import { CryptoWalletAirdropNotice as NoticeType } from './__generated__/CryptoWalletAirdropNotice'
 
-const CryptoWalletAirdropNotice = ({ notice }: { notice: NoticeType }) => {
+const CryptoWalletAirdropNotice = ({
+  notice,
+}: {
+  notice: CryptoWalletAirdropNoticeFragment
+}) => {
   return (
     <section className="container" data-test-id={TEST_ID.CRYPTO_WALLET_AIRDROP}>
       <section className="avatar-wrap">

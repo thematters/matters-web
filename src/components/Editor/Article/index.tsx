@@ -6,18 +6,14 @@ import { ADD_TOAST, ASSET_TYPE } from '~/common/enums'
 import editorStyles from '~/common/styles/utils/content.article.css'
 import themeStyles from '~/common/styles/vendors/quill.bubble.css'
 import { LanguageContext } from '~/components'
-import {
-  SearchUsers,
-  SearchUsers_search_edges_node_User,
-} from '~/components/GQL/queries/__generated__/SearchUsers'
 import SEARCH_USERS from '~/components/GQL/queries/searchUsers'
+import { EditorDraftFragment, SearchUsersQuery } from '~/gql/graphql'
 
-import { EditorDraft } from '../__generated__/EditorDraft'
 import MentionUserList from '../MentionUserList'
 import styles from './styles.css'
 
 interface Props {
-  draft: EditorDraft
+  draft: EditorDraftFragment
 
   isReviseMode?: boolean
   isSummaryReadOnly?: boolean
@@ -49,7 +45,7 @@ const ArticleEditor: FC<Props> = ({
   update,
   upload,
 }) => {
-  const [search, searchResult] = useLazyQuery<SearchUsers>(SEARCH_USERS)
+  const [search, searchResult] = useLazyQuery<SearchUsersQuery>(SEARCH_USERS)
   const { lang } = useContext(LanguageContext)
 
   const { id, content, publishState, summary, summaryCustomized, title } = draft

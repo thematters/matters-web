@@ -1,14 +1,14 @@
 import gql from 'graphql-tag'
 
 import { ArticleDigestSidebar } from '~/components/ArticleDigest'
+import { NoticeArticleCardFragment } from '~/gql/graphql'
 
-import { NoticeArticleCard as NoticeArticleCardType } from './__generated__/NoticeArticleCard'
 import styles from './styles.css'
 
 const NoticeArticleCard = ({
   article,
 }: {
-  article: NoticeArticleCardType | null
+  article: NoticeArticleCardFragment | null
 }) => {
   if (!article) {
     return null

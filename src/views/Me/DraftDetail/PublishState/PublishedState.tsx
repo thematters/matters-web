@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 
 import { toPath } from '~/common/utils'
 import { Dialog, ShareDialog, Translate } from '~/components'
-import { PublishStateDraft } from '~/components/GQL/fragments/__generated__/PublishStateDraft'
+import { PublishStateDraftFragment } from '~/gql/graphql'
 
 const BasePublishedState = ({
   openShareDialog,
@@ -17,7 +17,7 @@ const BasePublishedState = ({
   return null
 }
 
-const PublishedState = ({ draft }: { draft: PublishStateDraft }) => {
+const PublishedState = ({ draft }: { draft: PublishStateDraftFragment }) => {
   const router = useRouter()
 
   if (!draft.article) {

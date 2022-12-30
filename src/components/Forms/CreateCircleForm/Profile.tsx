@@ -22,17 +22,14 @@ import {
   Translate,
   useMutation,
 } from '~/components'
-import {
-  PutCircle,
-  PutCircle_putCircle,
-} from '~/components/GQL/mutations/__generated__/PutCircle'
 import PUT_CIRCLE from '~/components/GQL/mutations/putCircle'
+import { PutCircleMutation } from '~/gql/graphql'
 
 import styles from './styles.css'
 
 interface FormProps {
   circle: Pick<
-    PutCircle_putCircle,
+    PutCircleMutation['putCircle'],
     'id' | 'avatar' | 'cover' | 'displayName' | 'description' | '__typename'
   >
   type: 'edit' | 'create'
@@ -54,7 +51,7 @@ const UNCHANGED_FIELD = 'UNCHANGED_FIELD'
 
 const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
   const router = useRouter()
-  const [update] = useMutation<PutCircle>(PUT_CIRCLE, undefined, {
+  const [update] = useMutation<PutCircleMutation>(PUT_CIRCLE, undefined, {
     showToast: false,
   })
   const { lang } = useContext(LanguageContext)

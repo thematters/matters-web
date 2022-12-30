@@ -6,9 +6,8 @@ import {
   EditorSettingsDialog,
   EditorSettingsDialogProps,
 } from '~/components/Editor/SettingsDialog'
+import { EditArticleMutation } from '~/gql/graphql'
 
-import { ArticleDetailPublic_article } from '../../__generated__/ArticleDetailPublic'
-import { EditArticle } from './__generated__/EditArticle'
 import ConfirmRevisedPublishDialogContent from './ConfirmRevisedPublishDialogContent'
 import { EDIT_ARTICLE } from './gql'
 import styles from './styles.css'
@@ -57,7 +56,8 @@ const EditModeHeader = ({
 
   // save or republish
   const { tags, collection, circle, accessType, license } = restProps
-  const [editArticle, { loading }] = useMutation<EditArticle>(EDIT_ARTICLE)
+  const [editArticle, { loading }] =
+    useMutation<EditArticleMutation>(EDIT_ARTICLE)
   const onSave = async () => {
     try {
       await editArticle({

@@ -12,13 +12,11 @@ import {
   useMutation,
   ViewerContext,
 } from '~/components'
-import { CreateDraft } from '~/components/GQL/mutations/__generated__/CreateDraft'
 import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
-
-import { TagFragment } from '../../../__generated__/TagFragment'
+import { CreateDraftMutation, TagFragmentFragment } from '~/gql/graphql'
 
 interface CreateDraftButtonProps {
-  tag: TagFragment
+  tag: TagFragmentFragment
 }
 
 const BaseCreateDraftButton = ({ onClick }: { onClick: () => any }) => (
@@ -38,7 +36,7 @@ const CreateDraftButton: React.FC<CreateDraftButtonProps> = ({ tag }) => {
   const { lang } = useContext(LanguageContext)
   const viewer = useContext(ViewerContext)
 
-  const [putDraft] = useMutation<CreateDraft>(CREATE_DRAFT, {
+  const [putDraft] = useMutation<CreateDraftMutation>(CREATE_DRAFT, {
     variables: {
       title: translate({ id: 'untitle', lang }),
       tags: [tag.content],

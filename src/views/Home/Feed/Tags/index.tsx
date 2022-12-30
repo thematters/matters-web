@@ -16,11 +16,10 @@ import {
   ViewerContext,
   ViewMoreCard,
 } from '~/components'
-import { LastFetchRandom } from '~/components/GQL/queries/__generated__/LastFetchRandom'
 import FETCH_RECORD from '~/components/GQL/queries/lastFetchRandom'
+import { FeedTagsPublicQuery, LastFetchRandomQuery } from '~/gql/graphql'
 
 import SectionHeader from '../../SectionHeader'
-import { FeedTagsPublic } from './__generated__/FeedTagsPublic'
 import styles from './styles.css'
 
 const FEED_TAGS = gql`
@@ -46,14 +45,14 @@ const FEED_TAGS = gql`
 const TagsFeed = () => {
   const viewer = useContext(ViewerContext)
 
-  const { data: lastFetchRandom, client } = useQuery<LastFetchRandom>(
+  const { data: lastFetchRandom, client } = useQuery<LastFetchRandomQuery>(
     FETCH_RECORD,
     { variables: { id: 'local' } }
   )
   const lastRandom = lastFetchRandom?.lastFetchRandom.feedTags
   const randomMaxSize = 50
 
-  const { data, loading, error, refetch } = usePublicQuery<FeedTagsPublic>(
+  const { data, loading, error, refetch } = usePublicQuery<FeedTagsPublicQuery>(
     FEED_TAGS,
     {
       notifyOnNetworkStatusChange: true,

@@ -20,10 +20,12 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-import { AuthorRssFeed } from '~/components/Dialogs/RssFeedDialog/__generated__/AuthorRssFeed'
 import ShareButton from '~/components/Layout/Header/ShareButton'
+import {
+  AuthorRssFeedFragment,
+  UserProfileUserPublicQuery,
+} from '~/gql/graphql'
 
-import { UserProfileUserPublic } from './__generated__/UserProfileUserPublic'
 import {
   ArchitectBadge,
   CivicLikerBadge,
@@ -41,7 +43,7 @@ import TraveloggersAvatar from './TraveloggersAvatar'
 import WalletLabel from './WalletLabel'
 
 interface FingerprintButtonProps {
-  user: AuthorRssFeed
+  user: AuthorRssFeedFragment
 }
 
 const RssFeedButton = ({ user }: FingerprintButtonProps) => {
@@ -70,7 +72,7 @@ export const UserProfile = () => {
   // public user data
   const userName = getQuery('name')
   const isMe = !userName || viewer.userName === userName
-  const { data, loading, client } = usePublicQuery<UserProfileUserPublic>(
+  const { data, loading, client } = usePublicQuery<UserProfileUserPublicQuery>(
     USER_PROFILE_PUBLIC,
     {
       variables: { userName },

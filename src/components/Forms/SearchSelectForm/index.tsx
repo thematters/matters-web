@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 
-import { SearchExclude, SearchFilter } from '@/__generated__/globalTypes'
 import { TextId } from '~/common/enums'
 import { Dialog, Translate } from '~/components'
 import SearchingArea, {
@@ -11,6 +10,7 @@ import StagingArea, {
   CustomStagingAreaProps,
   StagingNode,
 } from '~/components/SearchSelect/StagingArea'
+import { SearchExclude, SearchFilter } from '~/gql/graphql'
 
 /**
  * <SearchSelectForm> is a dialog content for

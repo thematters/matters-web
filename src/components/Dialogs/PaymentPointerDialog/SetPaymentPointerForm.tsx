@@ -17,8 +17,8 @@ import {
   ViewerContext,
 } from '~/components'
 import { useMutation } from '~/components/GQL'
+import { UpdatePaymentPointerMutation } from '~/gql/graphql'
 
-import { UpdatePaymentPointer } from './__generated__/UpdatePaymentPointer'
 import Explainer from './Explainer'
 
 interface FormProps {
@@ -46,7 +46,7 @@ const SetPaymentPointerForm: React.FC<FormProps> = ({
   closeDialog,
   formId = `set-payment-pointer-form`,
 }) => {
-  const [submitPaymentPointer] = useMutation<UpdatePaymentPointer>(
+  const [submitPaymentPointer] = useMutation<UpdatePaymentPointerMutation>(
     UPDATE_PAYMENT_POINTER
   )
   const { lang } = useContext(LanguageContext)

@@ -15,8 +15,8 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-import { CircleAcceptedInvites } from '~/components/GQL/queries/__generated__/CircleAcceptedInvites'
 import CIRCLE_ACCEPTED_INVITES from '~/components/GQL/queries/circleAcceptedInvites'
+import { CircleAcceptedInvitesQuery } from '~/gql/graphql'
 
 import styles from './styles.css'
 
@@ -38,7 +38,7 @@ const AcceptedInvites = () => {
    * Data Fetching
    */
   const { data, loading, error, fetchMore, refetch } =
-    useQuery<CircleAcceptedInvites>(CIRCLE_ACCEPTED_INVITES, {
+    useQuery<CircleAcceptedInvitesQuery>(CIRCLE_ACCEPTED_INVITES, {
       variables: { name },
     })
 

@@ -12,20 +12,21 @@ import {
   useMutation,
   ViewerContext,
 } from '~/components'
-import { ToggleFollowTag } from '~/components/GQL/mutations/__generated__/ToggleFollowTag'
 import TOGGLE_FOLLOW_TAG from '~/components/GQL/mutations/toggleFollowTag'
 import updateViewerFollowingTagCount from '~/components/GQL/updates/viewerFollowingTagCount'
-
-import { TagDigestFollowButtonPrivate } from './__generated__/TagDigestFollowButtonPrivate'
+import {
+  TagDigestFollowButtonPrivateFragment,
+  ToggleFollowTagMutation,
+} from '~/gql/graphql'
 
 interface Props {
-  tag: Partial<TagDigestFollowButtonPrivate>
+  tag: Partial<TagDigestFollowButtonPrivateFragment>
 }
 
 const Follow = ({ tag }: Props) => {
   const viewer = useContext(ViewerContext)
 
-  const [follow] = useMutation<ToggleFollowTag>(TOGGLE_FOLLOW_TAG, {
+  const [follow] = useMutation<ToggleFollowTagMutation>(TOGGLE_FOLLOW_TAG, {
     variables: { id: tag.id, enabled: true },
     optimisticResponse:
       !_isNil(tag.id) && !_isNil(tag.isFollower)

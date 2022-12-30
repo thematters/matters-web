@@ -13,8 +13,8 @@ import {
   Translate,
   UserDigest,
 } from '~/components'
+import { AuthorPickerQuery } from '~/gql/graphql'
 
-import { AuthorPicker as AuthorPickerType } from './__generated__/AuthorPicker'
 import styles from './styles.css'
 
 const AUTHOR_PICKER = gql`
@@ -44,7 +44,7 @@ const AUTHOR_PICKER = gql`
 `
 
 export const AuthorPicker = ({ title }: { title: React.ReactNode }) => {
-  const { loading, data, error, refetch } = useQuery<AuthorPickerType>(
+  const { loading, data, error, refetch } = useQuery<AuthorPickerQuery>(
     AUTHOR_PICKER,
     {
       notifyOnNetworkStatusChange: true,

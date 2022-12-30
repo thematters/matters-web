@@ -14,11 +14,10 @@ import {
   UserDigest,
   useRoute,
 } from '~/components'
-import { InviteCircle } from '~/components/GQL/mutations/__generated__/InviteCircle'
 import INVITE_CIRCLE from '~/components/GQL/mutations/invite'
 import { StagingNode } from '~/components/SearchSelect/StagingArea'
+import { InvitationsCircleQuery, InviteCircleMutation } from '~/gql/graphql'
 
-import { InvitationsCircle } from './__generated__/InvitationsCircle'
 import { INVITATIONS_CIRCLE } from './gql'
 import SelectPeriod from './SelectPeriod'
 
@@ -43,12 +42,12 @@ const BaseInviteePreSend = ({ closeDialog, confirm, invitees }: Props) => {
 
   const [period, setPeriod] = useState<number>(30)
   const [invite, { loading: inviteLoading }] =
-    useMutation<InviteCircle>(INVITE_CIRCLE)
+    useMutation<InviteCircleMutation>(INVITE_CIRCLE)
 
   /**
    * Data Fetching
    */
-  const { data, loading, error } = useQuery<InvitationsCircle>(
+  const { data, loading, error } = useQuery<InvitationsCircleQuery>(
     INVITATIONS_CIRCLE,
     {
       variables: { name },

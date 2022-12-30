@@ -17,8 +17,7 @@ import {
   Translate,
   useMutation,
 } from '~/components'
-
-import { UpdateUserInfoUserName } from './__generated__/UpdateUserInfoUserName'
+import { UpdateUserInfoUserNameMutation } from '~/gql/graphql'
 
 interface FormProps {
   purpose: 'dialog' | 'page'
@@ -45,7 +44,7 @@ const Confirm: React.FC<FormProps> = ({
   submitCallback,
   closeDialog,
 }) => {
-  const [update] = useMutation<UpdateUserInfoUserName>(
+  const [update] = useMutation<UpdateUserInfoUserNameMutation>(
     UPDATE_USER_INFO,
     undefined,
     { showToast: false }

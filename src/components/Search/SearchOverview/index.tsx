@@ -5,8 +5,8 @@ import { Fragment, useContext, useEffect } from 'react'
 import { toPath } from '~/common/utils'
 import { Menu, Translate, usePublicQuery, ViewerContext } from '~/components'
 import { Spinner } from '~/components/Spinner'
+import { SearchOverviewPublicQuery } from '~/gql/graphql'
 
-import { SearchOverviewPublic } from './__generated__/SearchOverviewPublic'
 import ClearHistoryButton from './ClearHistoryButton'
 import { SEARCH_AUTOCOMPLETE_PRIVATE, SEARCH_AUTOCOMPLETE_PUBLIC } from './gql'
 import styles from './styles.css'
@@ -22,7 +22,7 @@ export const SearchOverview = ({ inPage }: SearchOverviewProps) => {
    * Data Fetching
    */
   // public data
-  const { data, loading, client } = usePublicQuery<SearchOverviewPublic>(
+  const { data, loading, client } = usePublicQuery<SearchOverviewPublicQuery>(
     SEARCH_AUTOCOMPLETE_PUBLIC
   )
 

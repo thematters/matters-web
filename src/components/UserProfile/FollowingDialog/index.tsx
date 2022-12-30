@@ -1,11 +1,10 @@
 import dynamic from 'next/dynamic'
 
 import { Dialog, Spinner, Translate, useDialogSwitch } from '~/components'
-
-import { UserProfileUserPublic_user } from '../__generated__/UserProfileUserPublic'
+import { UserProfileUserPublicQuery } from '~/gql/graphql'
 
 interface FollowingDialogProps {
-  user: UserProfileUserPublic_user
+  user: NonNullable<UserProfileUserPublicQuery['user']>
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 

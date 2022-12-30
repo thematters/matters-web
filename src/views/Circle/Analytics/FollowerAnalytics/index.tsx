@@ -11,10 +11,10 @@ import {
   Translate,
   useRoute,
 } from '~/components'
+import { CircleFollowerAnalyticsQuery } from '~/gql/graphql'
 
 import InfoTiles from '../InfoTiles'
 import SectionHead from '../SectionHead'
-import { CircleFollowerAnalytics } from './__generated__/CircleFollowerAnalytics'
 import { CIRCLE_FOLLOWER_ANALYTICS } from './gql'
 import styles from './styles.css'
 
@@ -22,7 +22,7 @@ const Content = () => {
   const { getQuery } = useRoute()
   const name = getQuery('name')
 
-  const { data, error, loading } = useQuery<CircleFollowerAnalytics>(
+  const { data, error, loading } = useQuery<CircleFollowerAnalyticsQuery>(
     CIRCLE_FOLLOWER_ANALYTICS,
     {
       variables: { name },

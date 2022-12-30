@@ -11,9 +11,9 @@ import {
   usePublicQuery,
   useRoute,
 } from '~/components'
+import { SearchTagsPublicQuery } from '~/gql/graphql'
 
 import GoogleSearchButton from '../GoogleSearchButton'
-import { SearchTagsPublic } from './__generated__/SearchTagsPublic'
 import { SEARCH_TAGS_PUBLIC } from './gql'
 
 const SearchTag = () => {
@@ -25,7 +25,7 @@ const SearchTag = () => {
    */
   // public data
   const { data, loading, fetchMore, refetch } =
-    usePublicQuery<SearchTagsPublic>(SEARCH_TAGS_PUBLIC, {
+    usePublicQuery<SearchTagsPublicQuery>(SEARCH_TAGS_PUBLIC, {
       variables: { key: q },
     })
 

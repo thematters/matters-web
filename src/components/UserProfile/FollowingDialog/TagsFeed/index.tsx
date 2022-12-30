@@ -14,8 +14,8 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
+import { UserFollowingTagsPublicQuery } from '~/gql/graphql'
 
-import { UserFollowingTagsPublic } from './__generated__/UserFollowingTagsPublic'
 import { USER_FOLLOWING_TAGS_PRIVATE, USER_FOLLOWING_TAGS_PUBLIC } from './gql'
 
 const TagsFeed = () => {
@@ -34,7 +34,7 @@ const TagsFeed = () => {
     fetchMore,
     refetch: refetchPublic,
     client,
-  } = usePublicQuery<UserFollowingTagsPublic>(USER_FOLLOWING_TAGS_PUBLIC, {
+  } = usePublicQuery<UserFollowingTagsPublicQuery>(USER_FOLLOWING_TAGS_PUBLIC, {
     variables: { userName },
   })
 
@@ -44,7 +44,7 @@ const TagsFeed = () => {
   const { edges, pageInfo } = user?.following?.tags || {}
 
   // private data
-  const loadPrivate = (publicData?: UserFollowingTagsPublic) => {
+  const loadPrivate = (publicData?: UserFollowingTagsPublicQuery) => {
     if (!viewer.isAuthed || !publicData || !user) {
       return
     }

@@ -16,8 +16,8 @@ import {
   useMutation,
   VerificationSendCodeButton,
 } from '~/components'
-import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
+import { ConfirmVerificationCodeMutation } from '~/gql/graphql'
 
 interface FormProps {
   defaultEmail: string
@@ -33,7 +33,7 @@ const Request: React.FC<FormProps> = ({
   defaultEmail = '',
   submitCallback,
 }) => {
-  const [confirmCode] = useMutation<ConfirmVerificationCode>(
+  const [confirmCode] = useMutation<ConfirmVerificationCodeMutation>(
     CONFIRM_CODE,
     undefined,
     { showToast: false }

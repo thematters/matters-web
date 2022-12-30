@@ -10,8 +10,8 @@ import {
   Translate,
   UserDigest,
 } from '~/components'
-import { TagMaintainers } from '~/components/GQL/queries/__generated__/TagMaintainers'
 import TAG_MAINTAINERS from '~/components/GQL/queries/tagMaintainers'
+import { TagMaintainersQuery } from '~/gql/graphql'
 
 import styles from '../styles.css'
 
@@ -43,10 +43,13 @@ const ManageButton = ({ id }: Props) => {
 }
 
 const Maintainers = ({ id, isOwner }: Props) => {
-  const { data, loading, error } = useQuery<TagMaintainers>(TAG_MAINTAINERS, {
-    variables: { id },
-    notifyOnNetworkStatusChange: true,
-  })
+  const { data, loading, error } = useQuery<TagMaintainersQuery>(
+    TAG_MAINTAINERS,
+    {
+      variables: { id },
+      notifyOnNetworkStatusChange: true,
+    }
+  )
 
   if (loading) {
     return <Spinner />

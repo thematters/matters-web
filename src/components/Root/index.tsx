@@ -22,12 +22,8 @@ import {
 } from '~/components'
 import PageViewTracker from '~/components/Analytics/PageViewTracker'
 import SplashScreen from '~/components/SplashScreen'
+import { RootQueryPrivateQuery, RootQueryPublicQuery } from '~/gql/graphql'
 
-import {
-  RootQueryPrivate,
-  RootQueryPrivate_viewer,
-} from './__generated__/RootQueryPrivate'
-import { RootQueryPublic } from './__generated__/RootQueryPublic'
 import { ROOT_QUERY_PRIVATE, ROOT_QUERY_PUBLIC } from './gql'
 
 const DynamicProgressBar = dynamic(() => import('~/components/ProgressBar'), {
@@ -102,17 +98,18 @@ const Root = ({
 
   // anonymous
   const { loading, data, error } =
-    usePublicQuery<RootQueryPublic>(ROOT_QUERY_PUBLIC)
+    usePublicQuery<RootQueryPublicQuery>(ROOT_QUERY_PUBLIC)
   const viewer = data?.viewer
   const official = data?.official
 
   // viewer
-  const [privateViewer, setPrivateViewer] = useState<RootQueryPrivate_viewer>()
+  const [privateViewer, setPrivateViewer] =
+    useState<Pick<RootQueryPrivateQuery, 'viewer'>>()
   const [privateFetched, setPrivateFetched] = useState(false)
 
   const fetchPrivateViewer = async () => {
     try {
-      const privateWatcher = client.watchQuery<RootQueryPrivate>({
+      const privateWatcher = client.watchQuery<RootQueryPrivateQuery>({
         query: ROOT_QUERY_PRIVATE,
         fetchPolicy: 'network-only',
       })

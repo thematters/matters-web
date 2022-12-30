@@ -15,8 +15,8 @@ import {
   usePullToRefresh,
   ViewerContext,
 } from '~/components'
+import { ViewerLikeInfoQuery } from '~/gql/graphql'
 
-import { ViewerLikeInfo } from './__generated__/ViewerLikeInfo'
 import styles from './styles.css'
 
 const VIEWER_LIKE_INFO = gql`
@@ -40,7 +40,7 @@ const WalletSettings = () => {
   const { lang } = useContext(LanguageContext)
 
   const likerId = viewer.liker.likerId
-  const { data, refetch } = useQuery<ViewerLikeInfo>(VIEWER_LIKE_INFO, {
+  const { data, refetch } = useQuery<ViewerLikeInfoQuery>(VIEWER_LIKE_INFO, {
     errorPolicy: 'none',
     skip: typeof window === 'undefined',
   })

@@ -12,8 +12,8 @@ import {
   UserDigest,
 } from '~/components'
 import { Avatar, AvatarProps } from '~/components/Avatar'
+import { DonatorsArticleFragment } from '~/gql/graphql'
 
-import { DonatorsArticle } from './__generated__/DonatorsArticle'
 import { fragments } from './gql'
 import styles from './styles.css'
 
@@ -30,7 +30,7 @@ const AvatarItem = ({ user }: AvatarItemPros) => {
 }
 
 interface DonatorsProps {
-  article: DonatorsArticle
+  article: DonatorsArticleFragment
   showAvatarAnimation?: boolean
 }
 

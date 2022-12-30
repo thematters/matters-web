@@ -17,8 +17,8 @@ import {
   useMutation,
   VerificationSendCodeButton,
 } from '~/components'
-import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
+import { ConfirmVerificationCodeMutation } from '~/gql/graphql'
 
 interface FormProps {
   defaultEmail: string
@@ -38,7 +38,8 @@ const Request: React.FC<FormProps> = ({
   submitCallback,
   closeDialog,
 }) => {
-  const [confirmCode] = useMutation<ConfirmVerificationCode>(CONFIRM_CODE)
+  const [confirmCode] =
+    useMutation<ConfirmVerificationCodeMutation>(CONFIRM_CODE)
   const { lang } = useContext(LanguageContext)
   const isInPage = purpose === 'page'
   const formId = 'change-email-request-form'

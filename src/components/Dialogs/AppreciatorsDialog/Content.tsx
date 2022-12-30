@@ -12,12 +12,8 @@ import {
   useResponsive,
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
+import { ArticleAppreciatorsQuery } from '~/gql/graphql'
 
-import {
-  ArticleAppreciators,
-  ArticleAppreciators_article_Article,
-  ArticleAppreciators_article_Article_appreciationsReceived_edges,
-} from './__generated__/ArticleAppreciators'
 import styles from './styles.css'
 
 interface AppreciatorsDialogContentProps {
@@ -63,12 +59,12 @@ const AppreciatorsDialogContent = ({
   closeDialog,
 }: AppreciatorsDialogContentProps) => {
   const isSmallUp = useResponsive('sm-up')
-  const { data, loading, error, fetchMore } = useQuery<ArticleAppreciators>(
-    ARTICLE_APPRECIATORS,
-    { variables: { id } }
-  )
+  const { data, loading, error, fetchMore } =
+    useQuery<ArticleAppreciatorsQuery>(ARTICLE_APPRECIATORS, {
+      variables: { id },
+    })
 
-  const article = data?.article as ArticleAppreciators_article_Article
+  const article = data?.article
   const connectionPath = 'article.appreciationsReceived'
   const { edges, pageInfo } = article?.appreciationsReceived || {}
 
@@ -84,10 +80,7 @@ const AppreciatorsDialogContent = ({
     return null
   }
 
-  const ListRow = ({
-    index,
-    datum,
-  }: RowRendererProps<ArticleAppreciators_article_Article_appreciationsReceived_edges>) => {
+  const ListRow = ({ index, datum }: RowRendererProps) => {
     const { node, cursor } = datum
 
     return (

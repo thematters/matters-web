@@ -5,8 +5,8 @@ import { IMAGE_PIXEL } from '~/common/enums'
 import { numAbbr, translate } from '~/common/utils'
 import { AppreciatorsDialog, LanguageContext, Translate } from '~/components'
 import { Avatar } from '~/components/Avatar'
+import { AppreciatorsArticleFragment } from '~/gql/graphql'
 
-import { AppreciatorsArticle } from './__generated__/AppreciatorsArticle'
 import styles from './styles.css'
 
 const fragments = {
@@ -35,7 +35,11 @@ const fragments = {
   `,
 }
 
-const Appreciators = ({ article }: { article: AppreciatorsArticle }) => {
+const Appreciators = ({
+  article,
+}: {
+  article: AppreciatorsArticleFragment
+}) => {
   const { lang } = useContext(LanguageContext)
 
   const edges = article.received.edges

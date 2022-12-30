@@ -23,11 +23,10 @@ import {
   TextIcon,
   Translate,
 } from '~/components'
+import { AuthorRssFeedFragment, RssGatewaysQuery } from '~/gql/graphql'
 
 import SectionCard from '../FingerprintDialog/SectionCard'
 import styles from '../FingerprintDialog/styles.css'
-import { AuthorRssFeed } from './__generated__/AuthorRssFeed'
-import { RssGateways } from './__generated__/RssGateways'
 
 const RSS_GATEWAYS = gql`
   query RssGateways {
@@ -40,11 +39,11 @@ const RSS_GATEWAYS = gql`
 const RssFeedDialogContent = ({
   user,
 }: {
-  user: AuthorRssFeed
+  user: AuthorRssFeedFragment
   refetch: () => any
 }) => {
   const { lang } = useContext(LanguageContext)
-  const { loading, data } = useQuery<RssGateways>(RSS_GATEWAYS)
+  const { loading, data } = useQuery<RssGatewaysQuery>(RSS_GATEWAYS)
 
   const gateways = data?.official.gatewayUrls || []
   const ipnsKey = user.info.ipnsKey

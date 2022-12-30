@@ -5,8 +5,8 @@ import { Fragment, useEffect } from 'react'
 
 import { toPath } from '~/common/utils'
 import { Menu, Spinner } from '~/components'
+import { SearchAutoCompleteQuery } from '~/gql/graphql'
 
-import { SearchAutoComplete as SearchAutoCompleteType } from './__generated__/SearchAutoComplete'
 import FallbackSearchItem from './FallbackSearchItem'
 import styles from './styles.css'
 
@@ -24,7 +24,7 @@ const SEARCH_AUTOCOMPLETE = gql`
 export const SearchAutoComplete = (props: SearchAutoCompleteProps) => {
   const { searchKey, inPage } = props
   const [getAutoComplete, { data, loading }] =
-    useLazyQuery<SearchAutoCompleteType>(SEARCH_AUTOCOMPLETE, {
+    useLazyQuery<SearchAutoCompleteQuery>(SEARCH_AUTOCOMPLETE, {
       variables: { searchKey },
     })
   const frequentSearch = data?.frequentSearch || []

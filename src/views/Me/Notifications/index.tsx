@@ -18,9 +18,10 @@ import {
   useResponsive,
 } from '~/components'
 import updateViewerUnreadNoticeCount from '~/components/GQL/updates/viewerUnreadNoticeCount'
-
-import { MarkAllNoticesAsRead } from './__generated__/MarkAllNoticesAsRead'
-import { MeNotifications } from './__generated__/MeNotifications'
+import {
+  MarkAllNoticesAsReadMutation,
+  MeNotificationsQuery,
+} from '~/gql/graphql'
 
 const ME_NOTIFICATIONS = gql`
   query MeNotifications($after: String) {
@@ -51,14 +52,14 @@ const MARK_ALL_NOTICES_AS_READ = gql`
 `
 
 const BaseNotifications = () => {
-  const [markAllNoticesAsRead] = useMutation<MarkAllNoticesAsRead>(
+  const [markAllNoticesAsRead] = useMutation<MarkAllNoticesAsReadMutation>(
     MARK_ALL_NOTICES_AS_READ,
     {
       update: updateViewerUnreadNoticeCount,
     }
   )
   const { data, loading, fetchMore, refetch } = useQuery<
-    MeNotifications,
+    MeNotificationsQuery,
     { first: number; after?: number }
   >(ME_NOTIFICATIONS, {
     fetchPolicy: 'network-only',

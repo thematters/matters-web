@@ -13,18 +13,20 @@ import {
   TextIcon,
   useMutation,
 } from '~/components'
-import { UnvoteComment } from '~/components/GQL/mutations/__generated__/UnvoteComment'
-import { VoteComment } from '~/components/GQL/mutations/__generated__/VoteComment'
 import {
   UNVOTE_COMMENT,
   VOTE_COMMENT,
 } from '~/components/GQL/mutations/voteComment'
-
-import { DownvoteCommentPrivate } from './__generated__/DownvoteCommentPrivate'
-import { DownvoteCommentPublic } from './__generated__/DownvoteCommentPublic'
+import {
+  DownvoteCommentPrivateFragment,
+  DownvoteCommentPublicFragment,
+  UnvoteCommentMutation,
+  VoteCommentMutation,
+} from '~/gql/graphql'
 
 interface DownvoteButtonProps {
-  comment: DownvoteCommentPublic & Partial<DownvoteCommentPrivate>
+  comment: DownvoteCommentPublicFragment &
+    Partial<DownvoteCommentPrivateFragment>
   onClick?: () => void
   disabled?: boolean
   inCard: boolean
@@ -57,7 +59,7 @@ const DownvoteButton = ({
 }: DownvoteButtonProps) => {
   const { lang } = useContext(LanguageContext)
 
-  const [unvote] = useMutation<UnvoteComment>(UNVOTE_COMMENT, {
+  const [unvote] = useMutation<UnvoteCommentMutation>(UNVOTE_COMMENT, {
     variables: { id: comment.id },
     optimisticResponse: {
       unvoteComment: {
@@ -69,7 +71,7 @@ const DownvoteButton = ({
       },
     },
   })
-  const [downvote] = useMutation<VoteComment>(VOTE_COMMENT, {
+  const [downvote] = useMutation<VoteCommentMutation>(VOTE_COMMENT, {
     variables: { id: comment.id, vote: 'down' },
     optimisticResponse: {
       voteComment: {

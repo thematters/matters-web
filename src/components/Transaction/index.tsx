@@ -14,8 +14,8 @@ import {
 import { ArticleDigestTitle } from '~/components/ArticleDigest'
 import { CircleDigest } from '~/components/CircleDigest'
 import { UserDigest } from '~/components/UserDigest'
+import { DigestTransactionFragment } from '~/gql/graphql'
 
-import { DigestTransaction } from './__generated__/DigestTransaction'
 import Amount from './Amount'
 import Currency from './Currency'
 import Donator from './Donator'
@@ -23,7 +23,7 @@ import State from './State'
 import styles from './styles.css'
 
 interface TransactionProps {
-  tx: DigestTransaction
+  tx: DigestTransactionFragment
 }
 
 const fragments = {

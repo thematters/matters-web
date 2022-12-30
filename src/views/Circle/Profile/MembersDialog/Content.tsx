@@ -15,8 +15,8 @@ import {
   ViewerContext,
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
+import { CircleMembersPublicQuery } from '~/gql/graphql'
 
-import { CircleMembersPublic } from './__generated__/CircleMembersPublic'
 import { CIRCLE_MEMBERS_PRIVATE, CIRCLE_MEMBERS_PUBLIC } from './gql'
 
 const MembersDialogContent = () => {
@@ -34,7 +34,7 @@ const MembersDialogContent = () => {
     fetchMore,
     refetch: refetchPublic,
     client,
-  } = usePublicQuery<CircleMembersPublic>(CIRCLE_MEMBERS_PUBLIC, {
+  } = usePublicQuery<CircleMembersPublicQuery>(CIRCLE_MEMBERS_PUBLIC, {
     variables: { name },
   })
 
@@ -45,7 +45,7 @@ const MembersDialogContent = () => {
   /**
    * Private data fetching
    */
-  const loadPrivate = (publicData?: CircleMembersPublic) => {
+  const loadPrivate = (publicData?: CircleMembersPublicQuery) => {
     if (!viewer.isAuthed || !publicData || !circle) {
       return
     }

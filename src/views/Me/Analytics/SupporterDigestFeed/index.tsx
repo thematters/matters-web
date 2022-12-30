@@ -1,7 +1,6 @@
 import { toPath } from '~/common/utils'
 import { Card, IconDonate24, TextIcon, UserDigest } from '~/components'
 
-import { MeAnalytics_viewer_analytics_topDonators_edges_node } from '../__generated__/MeAnalytics'
 import styles from './styles.css'
 
 interface SupporterDigestFeedProps {

@@ -19,12 +19,9 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
+import { UserArticlesPublicQuery } from '~/gql/graphql'
 
 import UserTabs from '../UserTabs'
-import {
-  UserArticlesPublic,
-  UserArticlesPublic_user,
-} from './__generated__/UserArticlesPublic'
 import {
   USER_ARTICLES_PRIVATE,
   USER_ARTICLES_PUBLIC,
@@ -32,7 +29,11 @@ import {
 } from './gql'
 import styles from './styles.css'
 
-const ArticleSummaryInfo = ({ user }: { user: UserArticlesPublic_user }) => {
+const ArticleSummaryInfo = ({
+  user,
+}: {
+  user: NonNullable<UserArticlesPublicQuery['user']>
+}) => {
   const { articleCount: articles, totalWordCount: words } = user.status || {
     articleCount: 0,
     totalWordCount: 0,
@@ -79,7 +80,7 @@ const UserArticles = () => {
     fetchMore,
     refetch: refetchPublic,
     client,
-  } = usePublicQuery<UserArticlesPublic>(
+  } = usePublicQuery<UserArticlesPublicQuery>(
     query,
     {
       variables: { userName },
@@ -94,7 +95,7 @@ const UserArticles = () => {
   const hasSubscriptions = (user?.subscribedCircles.totalCount || 0) > 0
 
   // private data
-  const loadPrivate = (publicData?: UserArticlesPublic) => {
+  const loadPrivate = (publicData?: UserArticlesPublicQuery) => {
     if (!viewer.isAuthed || isViewer || !publicData || !user) {
       return
     }

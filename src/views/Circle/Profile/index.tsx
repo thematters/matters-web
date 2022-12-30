@@ -21,9 +21,9 @@ import {
   ViewerContext,
 } from '~/components'
 import ShareButton from '~/components/Layout/Header/ShareButton'
+import { CircleProfileCirclePublicQuery } from '~/gql/graphql'
 
 import SubscriptionBanner from '../SubscriptionBanner'
-import { CircleProfileCirclePublic } from './__generated__/CircleProfileCirclePublic'
 import { AddCircleArticle } from './AddCircleArticle'
 import AuthorWidget from './AuthorWidget'
 import DropdownActions from './DropdownActions'
@@ -44,7 +44,7 @@ const CircleProfile = () => {
     loading,
     client,
     refetch: refetchPublic,
-  } = usePublicQuery<CircleProfileCirclePublic>(CIRCLE_PROFILE_PUBLIC, {
+  } = usePublicQuery<CircleProfileCirclePublicQuery>(CIRCLE_PROFILE_PUBLIC, {
     variables: { name },
   })
   const circle = data?.circle

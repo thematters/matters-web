@@ -1,7 +1,7 @@
 import { ADD_TOAST } from '~/common/enums'
 import { Dialog, Translate, useDialogSwitch, useMutation } from '~/components'
-import { UpdateTagSetting } from '~/components/GQL/mutations/__generated__/UpdateTagSetting'
 import UPDATE_TAG_SETTING from '~/components/GQL/mutations/updateTagSetting'
+import { UpdateTagSettingMutation } from '~/gql/graphql'
 
 interface Props {
   id: string
@@ -13,7 +13,7 @@ const BaseDialog = ({ id, isOwner, children }: Props) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
   const [update, { loading }] =
-    useMutation<UpdateTagSetting>(UPDATE_TAG_SETTING)
+    useMutation<UpdateTagSettingMutation>(UPDATE_TAG_SETTING)
 
   return (
     <>

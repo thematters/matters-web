@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { useContext, useEffect } from 'react'
 import { useAccount, useDisconnect, useSignMessage } from 'wagmi'
 
-import { AuthResultType } from '@/__generated__/globalTypes'
 import { ADD_TOAST, PATHS } from '~/common/enums'
 import {
   analytics,
@@ -30,12 +29,15 @@ import {
   VerificationSendCodeButton,
   ViewerContext,
 } from '~/components'
-import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
+import {
+  AuthResultType,
+  ConfirmVerificationCodeMutation,
+  EthAddressUserQuery,
+  GenerateSigningMessageMutation,
+  WalletLoginMutation,
+} from '~/gql/graphql'
 
-import { ETHAddressUser } from './__generated__/ETHAddressUser'
-import { GenerateSigningMessage } from './__generated__/GenerateSigningMessage'
-import { WalletLogin } from './__generated__/WalletLogin'
 import { ETH_ADDRESS_USER, GENERATE_SIGNING_MESSAGE, WALLET_LOGIN } from './gql'
 import styles from './styles.css'
 
@@ -96,18 +98,23 @@ const Connect: React.FC<FormProps> = ({
   const formId = 'wallet-auth-connect-form'
   const fieldMsgId = 'wallet-auth-connect-msg'
 
-  const [generateSigningMessage] = useMutation<GenerateSigningMessage>(
+  const [generateSigningMessage] = useMutation<GenerateSigningMessageMutation>(
     GENERATE_SIGNING_MESSAGE,
     undefined,
     { showToast: false }
   )
-  const [walletLogin] = useMutation<WalletLogin>(WALLET_LOGIN, undefined, {
-    showToast: false,
-  })
-  const [confirmCode] = useMutation<ConfirmVerificationCode>(CONFIRM_CODE)
+  const [walletLogin] = useMutation<WalletLoginMutation>(
+    WALLET_LOGIN,
+    undefined,
+    {
+      showToast: false,
+    }
+  )
+  const [confirmCode] =
+    useMutation<ConfirmVerificationCodeMutation>(CONFIRM_CODE)
 
   const [queryEthAddressUser, { data, loading }] =
-    useLazyQuery<ETHAddressUser>(ETH_ADDRESS_USER)
+    useLazyQuery<EthAddressUserQuery>(ETH_ADDRESS_USER)
 
   const { disconnect } = useDisconnect()
   const { address: account } = useAccount()

@@ -19,13 +19,16 @@ import {
   Translate,
 } from '~/components'
 import { BlockUser } from '~/components/BlockUser'
+import {
+  DropdownActionsUserPrivateFragment,
+  DropdownActionsUserPublicFragment,
+} from '~/gql/graphql'
 
-import { DropdownActionsUserPrivate } from './__generated__/DropdownActionsUserPrivate'
-import { DropdownActionsUserPublic } from './__generated__/DropdownActionsUserPublic'
 import { EditProfileDialog } from './EditProfileDialog'
 
 interface DropdownActionsProps {
-  user: DropdownActionsUserPublic & Partial<DropdownActionsUserPrivate>
+  user: DropdownActionsUserPublicFragment &
+    Partial<DropdownActionsUserPrivateFragment>
   isMe: boolean
 }
 

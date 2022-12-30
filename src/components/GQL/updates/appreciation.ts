@@ -3,10 +3,7 @@ import _cloneDeep from 'lodash/cloneDeep'
 import _some from 'lodash/some'
 
 import { ERROR_CODES } from '~/common/enums'
-import {
-  ArticleDetailPublicByNodeId,
-  ArticleDetailPublicByNodeId_article_Article,
-} from '~/views/ArticleDetail/__generated__/ArticleDetailPublicByNodeId'
+import { ArticleDetailPublicByNodeIdQuery } from '~/gql/graphql'
 import { ARTICLE_DETAIL_PUBLIC_BY_NODE_ID } from '~/views/ArticleDetail/gql'
 
 const update = ({
@@ -31,7 +28,7 @@ const update = ({
 
     // read from local cache
     const cacheData = _cloneDeep(
-      cache.readQuery<ArticleDetailPublicByNodeId>({
+      cache.readQuery<ArticleDetailPublicByNodeIdQuery>({
         query: ARTICLE_DETAIL_PUBLIC_BY_NODE_ID,
         variables: { id },
       })

@@ -4,8 +4,8 @@ import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import { Card, Expandable } from '~/components'
 import CommentContent from '~/components/Comment/Content'
+import { NoticeCommentFragment } from '~/gql/graphql'
 
-import { NoticeComment as NoticeCommentType } from './__generated__/NoticeComment'
 import styles from './styles.css'
 
 const fragments = {
@@ -41,7 +41,11 @@ const fragments = {
   `,
 }
 
-const NoticeComment = ({ comment }: { comment: NoticeCommentType | null }) => {
+const NoticeComment = ({
+  comment,
+}: {
+  comment: NoticeCommentFragment | null
+}) => {
   const article =
     comment?.node.__typename === 'Article' ? comment.node : undefined
   const circle =

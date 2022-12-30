@@ -4,12 +4,12 @@ import CIRCLE_DISCUSSION_WALL from '@/public/static/images/circle-discussion-wal
 import CIRCLE_DISCUSSION_WALL_SM from '@/public/static/images/circle-discussion-wall-sm.svg'
 import { translate } from '~/common/utils'
 import { LanguageContext, Translate } from '~/components'
+import { DiscussionPublicQuery } from '~/gql/graphql'
 
-import { DiscussionPublic_circle } from './__generated__/DiscussionPublic'
 import styles from './styles.css'
 
 type WallProps = {
-  circle: DiscussionPublic_circle
+  circle: NonNullable<DiscussionPublicQuery['circle']>
 }
 
 const Wall = ({ circle }: WallProps) => {

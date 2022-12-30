@@ -7,14 +7,14 @@ import {
   IconChecked,
   IconUnChecked,
 } from '~/components'
-import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
+import { ArticleDigestDropdownArticleFragment } from '~/gql/graphql'
 
 import styles from '../styles.css'
 
 interface SearchSelectArticleProps {
-  article: ArticleDigestDropdownArticle
+  article: ArticleDigestDropdownArticleFragment
   selected?: boolean
-  onClick: (article: ArticleDigestDropdownArticle) => void
+  onClick: (article: ArticleDigestDropdownArticleFragment) => void
   inStagingArea?: boolean
 }
 

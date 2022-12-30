@@ -5,13 +5,16 @@ import IMAGE_WALL_BACKGROUND_SM from '@/public/static/images/circle-wall-backgro
 import { analytics } from '~/common/utils'
 import { Translate } from '~/components'
 import { CircleDigest } from '~/components/CircleDigest'
+import {
+  CircleWallCirclePrivateFragment,
+  CircleWallCirclePublicFragment,
+} from '~/gql/graphql'
 
-import { CircleWallCirclePrivate } from './__generated__/CircleWallCirclePrivate'
-import { CircleWallCirclePublic } from './__generated__/CircleWallCirclePublic'
 import styles from './styles.css'
 
 interface CircleWallProps {
-  circle: CircleWallCirclePublic & Partial<CircleWallCirclePrivate>
+  circle: CircleWallCirclePublicFragment &
+    Partial<CircleWallCirclePrivateFragment>
 }
 
 const CircleWall = ({ circle }: CircleWallProps) => {

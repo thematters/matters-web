@@ -23,17 +23,14 @@ import {
   Translate,
   useMutation,
 } from '~/components'
-import {
-  PutCircle,
-  PutCircle_putCircle,
-} from '~/components/GQL/mutations/__generated__/PutCircle'
 import PUT_CIRCLE from '~/components/GQL/mutations/putCircle'
+import { PutCircleMutation } from '~/gql/graphql'
 
 import styles from './styles.css'
 
 interface FormProps {
   purpose: 'dialog' | 'page'
-  submitCallback: (circle: PutCircle_putCircle) => void
+  submitCallback: (circle: PutCircleMutation['putCircle']) => void
   closeDialog?: () => void
 }
 
@@ -48,7 +45,7 @@ const Init: React.FC<FormProps> = ({
   submitCallback,
   closeDialog,
 }) => {
-  const [create] = useMutation<PutCircle>(PUT_CIRCLE, undefined, {
+  const [create] = useMutation<PutCircleMutation>(PUT_CIRCLE, undefined, {
     showToast: false,
   })
   const { lang } = useContext(LanguageContext)

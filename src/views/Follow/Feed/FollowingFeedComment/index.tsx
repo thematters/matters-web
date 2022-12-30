@@ -1,15 +1,18 @@
 import React from 'react'
 
 import { Comment, DateTime, Expandable } from '~/components'
+import {
+  FollowingFeedCommentPrivateFragment,
+  FollowingFeedCommentPublicFragment,
+} from '~/gql/graphql'
 
 import DropdownActions, { DropdownActionsControls } from '../DropdownActions'
-import { FollowingFeedCommentPrivate } from './__generated__/FollowingFeedCommentPrivate'
-import { FollowingFeedCommentPublic } from './__generated__/FollowingFeedCommentPublic'
 import { fragments } from './gql'
 import styles from './styles.css'
 
 type FollowingFeedCommentProps = {
-  comment: FollowingFeedCommentPublic & Partial<FollowingFeedCommentPrivate>
+  comment: FollowingFeedCommentPublicFragment &
+    Partial<FollowingFeedCommentPrivateFragment>
   header?: React.ReactNode
   date: Date | string | number
 } & DropdownActionsControls

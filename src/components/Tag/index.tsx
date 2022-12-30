@@ -10,12 +10,12 @@ import {
   TextIcon,
   TextIconProps,
 } from '~/components'
+import { DigestTagFragment } from '~/gql/graphql'
 
-import { DigestTag } from './__generated__/DigestTag'
 import styles from './styles.css'
 
 interface TagProps {
-  tag: DigestTag
+  tag: DigestTagFragment
   type?: 'list' | 'title' | 'inline' | 'plain'
   iconProps?: IconProps
   textIconProps?: TextIconProps
@@ -24,7 +24,7 @@ interface TagProps {
   hasCount?: boolean
   hasClose?: boolean
   canClamp?: boolean
-  removeTag?: (tag: DigestTag) => void
+  removeTag?: (tag: DigestTagFragment) => void
   onClick?: () => void
 }
 
@@ -50,7 +50,7 @@ export const toDigestTagPlaceholder = (content: string) =>
     },
     numArticles: 0,
     numAuthors: 0,
-  } as DigestTag)
+  } as DigestTagFragment)
 
 export const Tag = ({
   tag,

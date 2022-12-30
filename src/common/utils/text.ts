@@ -169,7 +169,7 @@ export const stripAllPunct = (content: string) => {
   }
 }
 
-export const stripSpaces = (content: string | null) =>
+export const stripSpaces = (content: string | undefined | null) =>
   content?.replaceAll(/\s+/g, ' ').trim()
 
 export const normalizeTagInput = (content: string) =>

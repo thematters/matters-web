@@ -2,11 +2,8 @@ import { DataProxy } from 'apollo-cache'
 import _omit from 'lodash/omit'
 
 import { ERROR_CODES } from '~/common/enums'
-import {
-  TagMaintainers,
-  TagMaintainers_node_Tag_editors,
-} from '~/components/GQL/queries/__generated__/TagMaintainers'
 import TAG_MAINTAINERS from '~/components/GQL/queries/tagMaintainers'
+import { TagMaintainersQuery } from '~/gql/graphql'
 
 const update = ({
   cache,
@@ -25,7 +22,7 @@ const update = ({
     }
 
     const variables = { id }
-    const cacheData = cache.readQuery<TagMaintainers>({
+    const cacheData = cache.readQuery<TagMaintainersQuery>({
       query: TAG_MAINTAINERS,
       variables,
     })

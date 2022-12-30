@@ -6,15 +6,15 @@ import {
   Tag,
 } from '~/components'
 import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
-import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
+import { DigestTagFragment } from '~/gql/graphql'
 
 import TagCustomStagingArea from '../../TagCustomStagingArea'
 import Box from '../Box'
 import styles from './styles.css'
 
 export interface SidebarTagsProps {
-  tags: DigestTag[]
-  editTags: (tag: DigestTag[]) => any
+  tags: DigestTagFragment[]
+  editTags: (tag: DigestTagFragment[]) => any
   saving?: boolean
   disabled?: boolean
 }

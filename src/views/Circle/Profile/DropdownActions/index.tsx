@@ -18,13 +18,16 @@ import {
   UnsubscribeCircleDialog,
   ViewerContext,
 } from '~/components'
+import {
+  DropdownActionsCirclePrivateFragment,
+  DropdownActionsCirclePublicFragment,
+} from '~/gql/graphql'
 
-import { DropdownActionsCirclePrivate } from './__generated__/DropdownActionsCirclePrivate'
-import { DropdownActionsCirclePublic } from './__generated__/DropdownActionsCirclePublic'
 import { fragments } from './gql'
 
 interface DialogProps {
-  circle: DropdownActionsCirclePublic & Partial<DropdownActionsCirclePrivate>
+  circle: DropdownActionsCirclePublicFragment &
+    Partial<DropdownActionsCirclePrivateFragment>
   openUnsubscribeCircleDialog: () => void
 }
 

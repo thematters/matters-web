@@ -13,13 +13,13 @@ import {
 } from '~/components'
 import { ArticleDigestTitle } from '~/components/ArticleDigest'
 import { UserDigest } from '~/components/UserDigest'
+import { DigestAppreciationFragment } from '~/gql/graphql'
 
-import { DigestAppreciation } from './__generated__/DigestAppreciation'
 import styles from './styles.css'
 
 interface AppreciationProps {
   type: 'received' | 'sent'
-  appreciation: DigestAppreciation
+  appreciation: DigestAppreciationFragment
 }
 
 const fragments = {

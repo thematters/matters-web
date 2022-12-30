@@ -3,14 +3,13 @@ import Link from 'next/link'
 
 import { toPath } from '~/common/utils'
 import { Avatar } from '~/components/Avatar'
-
-import { NoticeActorAvatarUser } from './__generated__/NoticeActorAvatarUser'
+import { NoticeActorAvatarUserFragment } from '~/gql/graphql'
 
 const NoticeActorAvatar = ({
   user,
   size = 'lg',
 }: {
-  user: NoticeActorAvatarUser | null
+  user: NoticeActorAvatarUserFragment | null
   size?: 'md' | 'lg'
 }) => {
   if (!user) {

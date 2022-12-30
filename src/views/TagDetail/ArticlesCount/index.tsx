@@ -1,12 +1,12 @@
 import { numAbbr } from '~/common/utils'
 import { Translate } from '~/components'
-import { ArticleCountTag } from '~/components/GQL/fragments/__generated__/ArticleCountTag'
 import tagFragments from '~/components/GQL/fragments/tag'
+import { ArticleCountTagFragment } from '~/gql/graphql'
 
 import styles from './styles.css'
 
 interface ArticlesCountProps {
-  tag: ArticleCountTag
+  tag: ArticleCountTagFragment
 }
 
 const ArticlesCount = ({ tag }: ArticlesCountProps) => {

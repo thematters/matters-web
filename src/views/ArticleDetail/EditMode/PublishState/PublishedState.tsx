@@ -4,8 +4,6 @@ import { useEffect } from 'react'
 import { toPath } from '~/common/utils'
 import { Dialog, ShareDialog, Translate } from '~/components'
 
-import { EditModeArticle_article_Article_drafts as EditModeDraft } from '../__generated__/EditModeArticle'
-
 interface Props {
   article: {
     id: string
@@ -15,7 +13,7 @@ interface Props {
       userName: string | null
     }
   }
-  draft: EditModeDraft
+  draft: EditModeArticle_article_Article_drafts
 
   cancel: () => void
 }

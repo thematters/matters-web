@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 
 import { TEST_ID } from '~/common/enums'
 import { Translate } from '~/components'
+import { CircleInvitationNoticeFragment } from '~/gql/graphql'
 
 import NoticeActorName from '../NoticeActorName'
 import NoticeCircleCard from '../NoticeCircleCard'
@@ -9,12 +10,11 @@ import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
 import NoticeTypeIcon from '../NoticeTypeIcon'
 import styles from '../styles.css'
-import { CircleInvitationNotice as CircleInvitationNoticeType } from './__generated__/CircleInvitationNotice'
 
 const CircleInvitationNotice = ({
   notice,
 }: {
-  notice: CircleInvitationNoticeType
+  notice: CircleInvitationNoticeFragment
 }) => {
   if (!notice.actors || !notice.circle) {
     return null

@@ -8,12 +8,12 @@ import {
   LanguageContext,
   TextIcon,
 } from '~/components'
+import { CountsCircleFragment } from '~/gql/graphql'
 
-import { CountsCircle } from './__generated__/CountsCircle'
 import styles from './styles.css'
 
 export type CountsProps = {
-  circle: CountsCircle
+  circle: CountsCircleFragment
 }
 
 const fragments = {

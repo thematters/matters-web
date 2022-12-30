@@ -1,9 +1,6 @@
 import { DataProxy } from 'apollo-cache'
 
-import {
-  UserArticlesPublic,
-  UserArticlesPublic_user_articles_edges,
-} from '~/views/User/Articles/__generated__/UserArticlesPublic'
+import { UserArticlesPublicQuery } from '~/gql/graphql'
 
 const sortEdgesByCreatedAtDesc = (
   edges: UserArticlesPublic_user_articles_edges[]
@@ -22,7 +19,7 @@ const update = ({
 }: {
   cache: DataProxy
   articleId: string
-  userName: string | null
+  userName?: string | null
   type: 'sticky' | 'unsticky' | 'archive'
 }) => {
   // FIXME: circular dependencies
@@ -33,7 +30,7 @@ const update = ({
   }
 
   try {
-    const data = cache.readQuery<UserArticlesPublic>({
+    const data = cache.readQuery<UserArticlesPublicQuery>({
       query: USER_ARTICLES_PUBLIC,
       variables: { userName },
     })

@@ -2,11 +2,8 @@ import { useApolloClient } from '@apollo/react-hooks'
 import { useEffect, useState } from 'react'
 
 import { Translate } from '~/components'
+import { ArticleSecretQuery } from '~/gql/graphql'
 
-import {
-  ArticleSecret,
-  ArticleSecret_article_Article,
-} from './__generated__/ArticleSecret'
 import { QUERY_SECRET } from './ArticleSecret'
 import styles from './styles.css'
 
@@ -20,7 +17,7 @@ const ArticleSecretDesc: React.FC<ArticleSecretDescProps> = ({ id }) => {
   const [secret, setSecret] = useState<string | null>()
 
   useEffect(() => {
-    const watcher = client.watchQuery<ArticleSecret>({
+    const watcher = client.watchQuery<ArticleSecretQuery>({
       query: QUERY_SECRET,
       variables: { id },
       fetchPolicy: 'network-only',
@@ -28,8 +25,7 @@ const ArticleSecretDesc: React.FC<ArticleSecretDescProps> = ({ id }) => {
 
     watcher.subscribe({
       next: (result) => {
-        const key = (result?.data?.article as ArticleSecret_article_Article)
-          ?.access.secret
+        const key = result?.data?.article?.access.secret
         setSecret(key)
       },
       error: (e) => {

@@ -1,4 +1,3 @@
-import { EditModeArticle_article_Article_drafts as EditModeDraft } from '../__generated__/EditModeArticle'
 import PendingState from './PendingState'
 import PublishedState from './PublishedState'
 import styles from './styles.css'
@@ -13,7 +12,7 @@ interface Props {
       userName: string | null
     }
   }
-  draft: EditModeDraft
+  draft: EditModeArticle_article_Article_drafts
 
   isSameHash: boolean
 

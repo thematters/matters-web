@@ -11,10 +11,10 @@ import {
   Translate,
   useRoute,
 } from '~/components'
+import { CircleIncomeAnalyticsQuery } from '~/gql/graphql'
 
 import InfoTiles from '../InfoTiles'
 import SectionHead from '../SectionHead'
-import { CircleIncomeAnalytics } from './__generated__/CircleIncomeAnalytics'
 import { CIRCLE_INCOME_ANALYTICS } from './gql'
 import styles from './styles.css'
 
@@ -22,7 +22,7 @@ const Content = () => {
   const { getQuery } = useRoute()
   const name = getQuery('name')
 
-  const { data, error, loading } = useQuery<CircleIncomeAnalytics>(
+  const { data, error, loading } = useQuery<CircleIncomeAnalyticsQuery>(
     CIRCLE_INCOME_ANALYTICS,
     {
       variables: { name },

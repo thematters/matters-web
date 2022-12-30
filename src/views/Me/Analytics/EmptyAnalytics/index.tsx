@@ -12,8 +12,8 @@ import {
   Translate,
   useMutation,
 } from '~/components'
-import { CreateDraft } from '~/components/GQL/mutations/__generated__/CreateDraft'
 import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
+import { CreateDraftMutation } from '~/gql/graphql'
 
 import styles from './styles.css'
 
@@ -21,7 +21,7 @@ const EmptyAnalytics = () => {
   const router = useRouter()
   const { lang } = useContext(LanguageContext)
 
-  const [putDraft] = useMutation<CreateDraft>(CREATE_DRAFT, {
+  const [putDraft] = useMutation<CreateDraftMutation>(CREATE_DRAFT, {
     variables: { title: translate({ id: 'untitle', lang }) },
   })
 

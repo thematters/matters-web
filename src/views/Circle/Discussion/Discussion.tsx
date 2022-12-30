@@ -27,13 +27,9 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
+import { DiscussionPublicQuery } from '~/gql/graphql'
 
 import CircleDetailTabs from '../CircleDetailTabs'
-import {
-  DiscussionComments,
-  DiscussionComments_circle_discussion_edges_node,
-} from './__generated__/DiscussionComments'
-import { DiscussionPublic } from './__generated__/DiscussionPublic'
 import {
   DISCUSSION_COMMENTS,
   DISCUSSION_PRIVATE,
@@ -53,12 +49,10 @@ const CricleDiscussion = () => {
   const name = getQuery('name')
 
   // public data
-  const { data, loading, error, client } = usePublicQuery<DiscussionPublic>(
-    DISCUSSION_PUBLIC,
-    {
+  const { data, loading, error, client } =
+    usePublicQuery<DiscussionPublicQuery>(DISCUSSION_PUBLIC, {
       variables: { name },
-    }
-  )
+    })
   const circle = data?.circle
   const isOwner = circle?.owner.id === viewer.id
   const isMember = circle?.circleIsMember

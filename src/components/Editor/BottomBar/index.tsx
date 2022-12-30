@@ -1,7 +1,6 @@
 import classNames from 'classnames'
 import { useContext } from 'react'
 
-import { SearchExclude } from '@/__generated__/globalTypes'
 import { translate } from '~/common/utils'
 import {
   IconCollection24,
@@ -13,7 +12,6 @@ import {
   TextIcon,
   Translate,
 } from '~/components'
-import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
 import { SearchSelectDialog } from '~/components/Dialogs/SearchSelectDialog'
 import {
   SetCollectionProps,
@@ -22,7 +20,11 @@ import {
   ToggleAccessProps,
 } from '~/components/Editor'
 import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
-import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
+import {
+  ArticleDigestDropdownArticleFragment,
+  DigestTagFragment,
+  SearchExclude,
+} from '~/gql/graphql'
 
 import SetCover from '../SetCover'
 import TagCustomStagingArea from '../TagCustomStagingArea'
@@ -144,7 +146,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
               hint="hintAddTag"
               searchType="Tag"
               onSave={(nodes: SearchSelectNode[]) =>
-                editTags(nodes as DigestTag[])
+                editTags(nodes as DigestTagFragment[])
               }
               nodes={tags}
               saving={tagsSaving}
@@ -174,9 +176,9 @@ const BottomBar: React.FC<BottomBarProps> = ({
               title="collectArticle"
               hint="hintEditCollection"
               searchType="Article"
-              searchExclude={SearchExclude.blocked}
+              searchExclude={SearchExclude.Blocked}
               onSave={(nodes: SearchSelectNode[]) =>
-                editCollection(nodes as ArticleDigestDropdownArticle[])
+                editCollection(nodes as ArticleDigestDropdownArticleFragment[])
               }
               nodes={collection}
               saving={collectionSaving}

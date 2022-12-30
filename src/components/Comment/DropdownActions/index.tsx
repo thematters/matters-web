@@ -17,9 +17,11 @@ import {
   ViewerContext,
 } from '~/components'
 import { BlockUser } from '~/components/BlockUser'
+import {
+  DropdownActionsCommentPrivateFragment,
+  DropdownActionsCommentPublicFragment,
+} from '~/gql/graphql'
 
-import { DropdownActionsCommentPrivate } from './__generated__/DropdownActionsCommentPrivate'
-import { DropdownActionsCommentPublic } from './__generated__/DropdownActionsCommentPublic'
 import CollapseComment from './CollapseComment'
 import DeleteComment from './DeleteComment'
 import EditButton from './EditButton'
@@ -38,7 +40,8 @@ export type DropdownActionsControls = {
 }
 
 type DropdownActionsProps = {
-  comment: DropdownActionsCommentPublic & Partial<DropdownActionsCommentPrivate>
+  comment: DropdownActionsCommentPublicFragment &
+    Partial<DropdownActionsCommentPrivateFragment>
   type: CommentFormType
 } & DropdownActionsControls
 

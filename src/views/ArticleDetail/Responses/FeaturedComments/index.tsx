@@ -13,15 +13,9 @@ import {
   ViewerContext,
   ViewMoreButton,
 } from '~/components'
+import { FeaturedCommentsPublicQuery } from '~/gql/graphql'
 
 import styles from '../styles.css'
-import { FeaturedCommentsPrivate_nodes_Comment } from './__generated__/FeaturedCommentsPrivate'
-import {
-  FeaturedCommentsPublic,
-  FeaturedCommentsPublic_article_Article,
-  // FeaturedCommentsPublic_article_featuredComments_edges_node,
-  FeaturedCommentsPublic_article_Article_featuredComments_edges_node,
-} from './__generated__/FeaturedCommentsPublic'
 import { FEATURED_COMMENTS_PRIVATE, FEATURED_COMMENTS_PUBLIC } from './gql'
 
 type CommentPublic =
@@ -42,7 +36,7 @@ const FeaturedComments = ({ id, lock }: { id: string; lock: boolean }) => {
     fetchMore,
     refetch: refetchPublic,
     client,
-  } = usePublicQuery<FeaturedCommentsPublic>(FEATURED_COMMENTS_PUBLIC, {
+  } = usePublicQuery<FeaturedCommentsPublicQuery>(FEATURED_COMMENTS_PUBLIC, {
     variables: { id },
     notifyOnNetworkStatusChange: true,
   })

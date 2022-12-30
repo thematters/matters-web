@@ -1,21 +1,23 @@
 import { ADD_TOAST } from '~/common/enums'
 import { Dialog, Translate, useDialogSwitch, useMutation } from '~/components'
-import { ToggleBlockUser } from '~/components/GQL/mutations/__generated__/ToggleBlockUser'
 import TOGGLE_BLOCK_USER from '~/components/GQL/mutations/toggleBlockUser'
+import {
+  BlockUserPrivateFragment,
+  BlockUserPublicFragment,
+  ToggleBlockUserMutation,
+} from '~/gql/graphql'
 
-import { BlockUserPrivate } from '../__generated__/BlockUserPrivate'
-import { BlockUserPublic } from '../__generated__/BlockUserPublic'
 import ViewBlocksButton from './ViewBlocksButton'
 
 interface BlockUserDialogProps {
-  user: BlockUserPublic & Partial<BlockUserPrivate>
+  user: BlockUserPublicFragment & Partial<BlockUserPrivateFragment>
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
 const BlockUserDialog = ({ user, children }: BlockUserDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
-  const [blockUser] = useMutation<ToggleBlockUser>(TOGGLE_BLOCK_USER, {
+  const [blockUser] = useMutation<ToggleBlockUserMutation>(TOGGLE_BLOCK_USER, {
     variables: { id: user.id, enabled: true },
     optimisticResponse: {
       toggleBlockUser: {

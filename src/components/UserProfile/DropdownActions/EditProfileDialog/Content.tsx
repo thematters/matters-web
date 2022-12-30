@@ -20,18 +20,18 @@ import {
   Translate,
   useMutation,
 } from '~/components'
-
 import {
-  EditProfileDialogUserPrivate,
-  EditProfileDialogUserPrivate_info_cryptoWallet_nfts,
-} from './__generated__/EditProfileDialogUserPrivate'
-import { EditProfileDialogUserPublic } from './__generated__/EditProfileDialogUserPublic'
-import { UpdateUserInfoProfile } from './__generated__/UpdateUserInfoProfile'
+  EditProfileDialogUserPrivateFragment,
+  EditProfileDialogUserPublicFragment,
+  UpdateUserInfoProfileMutation,
+} from '~/gql/graphql'
+
 import NFTCollection from './NFTCollection'
 import styles from './styles.css'
 
 interface FormProps {
-  user: EditProfileDialogUserPublic & Partial<EditProfileDialogUserPrivate>
+  user: EditProfileDialogUserPublicFragment &
+    Partial<EditProfileDialogUserPrivateFragment>
   // user: DropdownActionsUserPublic & Partial<DropdownActionsUserPrivate>
   closeDialog: () => void
 }
@@ -66,7 +66,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
   user,
   closeDialog,
 }) => {
-  const [update] = useMutation<UpdateUserInfoProfile>(
+  const [update] = useMutation<UpdateUserInfoProfileMutation>(
     UPDATE_USER_INFO,
     undefined,
     { showToast: false }

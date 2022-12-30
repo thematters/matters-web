@@ -17,10 +17,9 @@ import {
   ViewAllButton,
   ViewMoreCard,
 } from '~/components'
-import { LastFetchRandom } from '~/components/GQL/queries/__generated__/LastFetchRandom'
 import FETCH_RECORD from '~/components/GQL/queries/lastFetchRandom'
+import { LastFetchRandomQuery, TagDetailRecommendedQuery } from '~/gql/graphql'
 
-import { TagDetailRecommended } from './__generated__/TagDetailRecommended'
 import { RELATED_TAGS } from './gql'
 import styles from './styles.css'
 
@@ -56,16 +55,19 @@ const RelatedTagsHeader = ({
 }
 
 const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
-  const { data: lastFetchRandom, client } = useQuery<LastFetchRandom>(
+  const { data: lastFetchRandom, client } = useQuery<LastFetchRandomQuery>(
     FETCH_RECORD,
     { variables: { id: 'local' } }
   )
 
   const lastRandom = lastFetchRandom?.lastFetchRandom.feedTags
 
-  const { data, refetch } = usePublicQuery<TagDetailRecommended>(RELATED_TAGS, {
-    variables: { id: tagId, random: lastRandom || 0 },
-  })
+  const { data, refetch } = usePublicQuery<TagDetailRecommendedQuery>(
+    RELATED_TAGS,
+    {
+      variables: { id: tagId, random: lastRandom || 0 },
+    }
+  )
 
   const { edges } =
     (data?.node?.__typename === 'Tag' && data.node.recommended) || {}

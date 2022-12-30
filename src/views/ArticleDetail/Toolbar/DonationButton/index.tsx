@@ -17,14 +17,15 @@ import {
   Translate,
   ViewerContext,
 } from '~/components'
-
-import { ArticleDetailPublic_article } from '../../__generated__/ArticleDetailPublic'
-import { DonationButtonArticle } from './__generated__/DonationButtonArticle'
+import {
+  ArticleDetailPublicQuery,
+  DonationButtonArticleFragment,
+} from '~/gql/graphql'
 
 interface DonationButtonProps {
-  article: DonationButtonArticle
+  article: DonationButtonArticleFragment
   disabled: boolean
-  articleDetail: ArticleDetailPublic_article
+  articleDetail: ArticleDetailPublicQuery['article']
 }
 
 const fragments = {

@@ -27,10 +27,9 @@ import {
   Translate,
   useMutation,
 } from '~/components'
-import { Payout as PayoutMutate } from '~/components/GQL/mutations/__generated__/Payout'
 import PAYOUT from '~/components/GQL/mutations/payout'
-import { WalletBalance } from '~/components/GQL/queries/__generated__/WalletBalance'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
+import { PayoutMutation, WalletBalanceQuery } from '~/gql/graphql'
 
 import ConfirmTable from '../ConfirmTable'
 
@@ -56,7 +55,7 @@ const BaseConfirm: React.FC<FormProps> = ({
 
   const { lang } = useContext(LanguageContext)
   const inputRef: React.RefObject<any> | null = useRef(null)
-  const [payout] = useMutation<PayoutMutate>(PAYOUT, undefined, {
+  const [payout] = useMutation<PayoutMutation>(PAYOUT, undefined, {
     showToast: false,
   })
 
@@ -256,7 +255,7 @@ const BaseConfirm: React.FC<FormProps> = ({
 }
 
 const Confirm = (props: Omit<FormProps, 'balance'>) => {
-  const { data, loading } = useQuery<WalletBalance>(WALLET_BALANCE, {
+  const { data, loading } = useQuery<WalletBalanceQuery>(WALLET_BALANCE, {
     fetchPolicy: 'network-only',
   })
   const balance = data?.viewer?.wallet.balance.HKD || 0

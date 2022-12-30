@@ -17,8 +17,8 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-import { CirclePendingInvites } from '~/components/GQL/queries/__generated__/CirclePendingInvites'
 import CIRCLE_PENDING_INVITES from '~/components/GQL/queries/circlePendingInvites'
+import { CirclePendingInvitesQuery } from '~/gql/graphql'
 
 import styles from './styles.css'
 
@@ -40,7 +40,7 @@ const PendingInvites = () => {
    * Data Fetching
    */
   const { data, loading, error, fetchMore, refetch } =
-    useQuery<CirclePendingInvites>(CIRCLE_PENDING_INVITES, {
+    useQuery<CirclePendingInvitesQuery>(CIRCLE_PENDING_INVITES, {
       variables: { name },
     })
 

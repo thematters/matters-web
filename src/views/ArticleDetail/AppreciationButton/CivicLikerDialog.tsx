@@ -2,11 +2,10 @@ import gql from 'graphql-tag'
 
 import { EXTERNAL_LINKS } from '~/common/enums'
 import { Dialog, Translate, useDialogSwitch } from '~/components'
-
-import { CivicLikerAppreciateButtonUser } from './__generated__/CivicLikerAppreciateButtonUser'
+import { CivicLikerAppreciateButtonUserFragment } from '~/gql/graphql'
 
 interface CivicLikerDialogProps {
-  user: CivicLikerAppreciateButtonUser
+  user: CivicLikerAppreciateButtonUserFragment
   onClose: () => void
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }

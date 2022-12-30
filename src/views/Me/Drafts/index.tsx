@@ -14,11 +14,8 @@ import {
   Spinner,
   useCache,
 } from '~/components'
+import { MeDraftFeedQuery } from '~/gql/graphql'
 
-import {
-  MeDraftFeed,
-  MeDraftFeed_viewer_drafts_edges,
-} from './__generated__/MeDraftFeed'
 import { DraftsContext } from './context'
 
 const ME_DRAFTS_FEED = gql`
@@ -44,13 +41,18 @@ const ME_DRAFTS_FEED = gql`
   ${DraftDigest.Feed.fragments.draft}
 `
 
+type Edge = NonNullable<
+  NonNullable<MeDraftFeedQuery['viewer']>['drafts']['edges']
+>
+
 export const BaseMeDrafts = () => {
-  const [edges, setEdges, DraftsContextProvider] = useCache<
-    MeDraftFeed_viewer_drafts_edges[]
-  >([], DraftsContext)
+  const [edges, setEdges, DraftsContextProvider] = useCache<Edge>(
+    [],
+    DraftsContext
+  )
 
   const { data, loading, error, fetchMore, refetch } =
-    useQuery<MeDraftFeed>(ME_DRAFTS_FEED)
+    useQuery<MeDraftFeedQuery>(ME_DRAFTS_FEED)
 
   useEffect(() => {
     setEdges(data?.viewer?.drafts.edges ?? [])

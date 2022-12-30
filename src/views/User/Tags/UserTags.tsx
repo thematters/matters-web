@@ -21,9 +21,9 @@ import {
   usePullToRefresh,
   useRoute,
 } from '~/components'
+import { UserTagsPublicQuery } from '~/gql/graphql'
 
 import UserTabs from '../UserTabs'
-import { UserTagsPublic } from './__generated__/UserTagsPublic'
 import { USER_TAGS_PUBLIC } from './gql'
 import styles from './styles.css'
 
@@ -41,7 +41,7 @@ const UserTags = () => {
     error,
     fetchMore,
     refetch: refetchPublic,
-  } = usePublicQuery<UserTagsPublic>(USER_TAGS_PUBLIC, {
+  } = usePublicQuery<UserTagsPublicQuery>(USER_TAGS_PUBLIC, {
     variables: { userName },
   })
 

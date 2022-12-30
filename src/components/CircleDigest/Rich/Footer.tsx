@@ -1,9 +1,12 @@
 import gql from 'graphql-tag'
 
+import {
+  FooterCirclePrivateFragment,
+  FooterCirclePublicFragment,
+} from '~/gql/graphql'
+
 import Counts from '../Counts'
 import Price from '../Price'
-import { FooterCirclePrivate } from './__generated__/FooterCirclePrivate'
-import { FooterCirclePublic } from './__generated__/FooterCirclePublic'
 import styles from './styles.css'
 
 export type FooterControls = {
@@ -13,7 +16,7 @@ export type FooterControls = {
 }
 
 export type FooterProps = {
-  circle: FooterCirclePublic & Partial<FooterCirclePrivate>
+  circle: FooterCirclePublicFragment & Partial<FooterCirclePrivateFragment>
 } & FooterControls
 
 const fragments = {

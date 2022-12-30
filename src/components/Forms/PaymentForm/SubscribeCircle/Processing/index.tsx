@@ -3,8 +3,8 @@ import _get from 'lodash/get'
 import { useState } from 'react'
 
 import { Dialog, Spinner, Translate } from '~/components'
+import { ViewerCircleStateQuery } from '~/gql/graphql'
 
-import { ViewerCircleState } from './__generated__/ViewerCircleState'
 import { VIEWER_CIRLCE_STATE } from './gql'
 
 interface Props {
@@ -14,13 +14,16 @@ interface Props {
 
 const Processing: React.FC<Props> = ({ circleName, nextStep }) => {
   const [polling, setPolling] = useState(true)
-  const { data, error } = useQuery<ViewerCircleState>(VIEWER_CIRLCE_STATE, {
-    variables: { name: circleName },
-    pollInterval: polling ? 1000 : undefined,
-    errorPolicy: 'none',
-    fetchPolicy: 'network-only',
-    skip: typeof window === 'undefined',
-  })
+  const { data, error } = useQuery<ViewerCircleStateQuery>(
+    VIEWER_CIRLCE_STATE,
+    {
+      variables: { name: circleName },
+      pollInterval: polling ? 1000 : undefined,
+      errorPolicy: 'none',
+      fetchPolicy: 'network-only',
+      skip: typeof window === 'undefined',
+    }
+  )
   const isMember = data?.circle?.isMember
 
   if (isMember) {

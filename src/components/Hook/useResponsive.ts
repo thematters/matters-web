@@ -1,13 +1,13 @@
 import { useQuery } from '@apollo/react-hooks'
 
 import { BREAKPOINTS } from '~/common/enums'
-import { ClientInfo } from '~/components/GQL/queries/__generated__/ClientInfo'
 import CLIENT_INFO from '~/components/GQL/queries/clientInfo'
+import { ClientInfoQuery } from '~/gql/graphql'
 
 type Type = 'sm-down' | 'sm-up' | 'md-up' | 'lg-up' | 'sm' | 'xs' | 'md' | 'lg'
 
 export const useResponsive = (type: Type) => {
-  const { data } = useQuery<ClientInfo>(CLIENT_INFO, {
+  const { data } = useQuery<ClientInfoQuery>(CLIENT_INFO, {
     variables: { id: 'local' },
   })
   const width = data?.clientInfo.viewportSize.width

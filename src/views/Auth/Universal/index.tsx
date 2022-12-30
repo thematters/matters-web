@@ -1,6 +1,5 @@
 import dynamic from 'next/dynamic'
 
-import { AuthResultType } from '@/__generated__/globalTypes'
 import {
   Head,
   Layout,
@@ -10,6 +9,7 @@ import {
   useStep,
   VerificationLinkSent,
 } from '~/components'
+import { AuthResultType } from '~/gql/graphql'
 
 const DynamicSelectAuthMethodForm = dynamic<any>(
   () =>

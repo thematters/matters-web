@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 
 import { TEST_ID } from '~/common/enums'
 import { Translate } from '~/components'
+import { TagAddEditorNoticeFragment } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorName from '../NoticeActorName'
@@ -9,9 +10,12 @@ import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
 import NoticeTag from '../NoticeTag'
 import styles from '../styles.css'
-import { TagAddEditorNotice as NoticeType } from './__generated__/TagAddEditorNotice'
 
-const TagAddEditorNotice = ({ notice }: { notice: NoticeType }) => {
+const TagAddEditorNotice = ({
+  notice,
+}: {
+  notice: TagAddEditorNoticeFragment
+}) => {
   if (!notice.actors) {
     return null
   }

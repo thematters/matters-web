@@ -17,8 +17,8 @@ import {
   Translate,
   useMutation,
 } from '~/components'
-import { CreateDraft } from '~/components/GQL/mutations/__generated__/CreateDraft'
 import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
+import { CreateDraftMutation } from '~/gql/graphql'
 
 interface Props {
   allowed: boolean
@@ -63,9 +63,12 @@ const BaseWriteButton = ({
 export const WriteButton = ({ allowed, authed, isLarge, forbidden }: Props) => {
   const router = useRouter()
   const { lang } = useContext(LanguageContext)
-  const [putDraft, { loading }] = useMutation<CreateDraft>(CREATE_DRAFT, {
-    variables: { title: translate({ id: 'untitle', lang }) },
-  })
+  const [putDraft, { loading }] = useMutation<CreateDraftMutation>(
+    CREATE_DRAFT,
+    {
+      variables: { title: translate({ id: 'untitle', lang }) },
+    }
+  )
 
   if (!allowed) {
     return (

@@ -1,4 +1,3 @@
-import { QuoteCurrency } from '@/__generated__/globalTypes'
 import { analytics, formatAmount } from '~/common/utils'
 import {
   AddCreditDialog,
@@ -13,6 +12,7 @@ import {
   TextIcon,
   Translate,
 } from '~/components'
+import { QuoteCurrency } from '~/gql/graphql'
 
 import styles from './styles.css'
 

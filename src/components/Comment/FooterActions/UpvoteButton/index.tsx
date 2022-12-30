@@ -10,18 +10,19 @@ import {
   TextIcon,
   useMutation,
 } from '~/components'
-import { UnvoteComment } from '~/components/GQL/mutations/__generated__/UnvoteComment'
-import { VoteComment } from '~/components/GQL/mutations/__generated__/VoteComment'
 import {
   UNVOTE_COMMENT,
   VOTE_COMMENT,
 } from '~/components/GQL/mutations/voteComment'
-
-import { UpvoteCommentPrivate } from './__generated__/UpvoteCommentPrivate'
-import { UpvoteCommentPublic } from './__generated__/UpvoteCommentPublic'
+import {
+  UnvoteCommentMutation,
+  UpvoteCommentPrivateFragment,
+  UpvoteCommentPublicFragment,
+  VoteCommentMutation,
+} from '~/gql/graphql'
 
 interface UpvoteButtonProps {
-  comment: UpvoteCommentPublic & Partial<UpvoteCommentPrivate>
+  comment: UpvoteCommentPublicFragment & Partial<UpvoteCommentPrivateFragment>
   onClick?: () => void
   disabled?: boolean
   inCard: boolean
@@ -53,7 +54,7 @@ const UpvoteButton = ({
 }: UpvoteButtonProps) => {
   const { lang } = useContext(LanguageContext)
 
-  const [unvote] = useMutation<UnvoteComment>(UNVOTE_COMMENT, {
+  const [unvote] = useMutation<UnvoteCommentMutation>(UNVOTE_COMMENT, {
     variables: { id: comment.id },
     optimisticResponse: {
       unvoteComment: {
@@ -65,7 +66,7 @@ const UpvoteButton = ({
       },
     },
   })
-  const [upvote] = useMutation<VoteComment>(VOTE_COMMENT, {
+  const [upvote] = useMutation<VoteCommentMutation>(VOTE_COMMENT, {
     variables: { id: comment.id, vote: 'up' },
     optimisticResponse: {
       voteComment: {

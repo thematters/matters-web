@@ -1,8 +1,6 @@
 import dynamic from 'next/dynamic'
 
-import { SearchExclude } from '@/__generated__/globalTypes'
 import { Dialog, Spinner, useDialogSwitch, useStep } from '~/components'
-import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
 import {
   SetCollectionProps,
   SetCoverProps,
@@ -11,7 +9,11 @@ import {
   ToggleAccessProps,
 } from '~/components/Editor'
 import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
-import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
+import {
+  ArticleDigestDropdownArticleFragment,
+  DigestTagFragment,
+  SearchExclude,
+} from '~/gql/graphql'
 
 import TagCustomStagingArea from '../TagCustomStagingArea'
 import SettingsList, { SettingsListDialogButtons } from './List'
@@ -181,9 +183,11 @@ const BaseEditorSettingsDialog = ({
               <Dialog.Header.BackButton onClick={() => forward('list')} />
             }
             searchType="Article"
-            searchExclude={SearchExclude.blocked}
+            searchExclude={SearchExclude.Blocked}
             onSave={async (nodes: SearchSelectNode[]) => {
-              await editCollection(nodes as ArticleDigestDropdownArticle[])
+              await editCollection(
+                nodes as ArticleDigestDropdownArticleFragment[]
+              )
               forward('list')
             }}
             nodes={collection}
@@ -201,7 +205,7 @@ const BaseEditorSettingsDialog = ({
             }
             searchType="Tag"
             onSave={async (nodes: SearchSelectNode[]) => {
-              await editTags(nodes as DigestTag[])
+              await editTags(nodes as DigestTagFragment[])
               forward('list')
             }}
             nodes={tags}

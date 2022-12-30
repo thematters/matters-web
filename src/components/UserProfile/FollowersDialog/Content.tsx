@@ -15,8 +15,8 @@ import {
   ViewerContext,
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
+import { UserFollowerPublicQuery } from '~/gql/graphql'
 
-import { UserFollowerPublic } from './__generated__/UserFollowerPublic'
 import { USER_FOLLOWERS_PRIVATE, USER_FOLLOWERS_PUBLIC } from './gql'
 
 const FollowersDialogContent = () => {
@@ -35,7 +35,7 @@ const FollowersDialogContent = () => {
     fetchMore,
     refetch: refetchPublic,
     client,
-  } = usePublicQuery<UserFollowerPublic>(USER_FOLLOWERS_PUBLIC, {
+  } = usePublicQuery<UserFollowerPublicQuery>(USER_FOLLOWERS_PUBLIC, {
     variables: { userName },
   })
 

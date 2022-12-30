@@ -3,8 +3,7 @@ import gql from 'graphql-tag'
 import { URL_QS } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import { IconEdit16, Menu, TextIcon, Translate } from '~/components'
-
-import { EditArticleButtonArticle } from './__generated__/EditArticleButtonArticle'
+import { EditArticleButtonArticleFragment } from '~/gql/graphql'
 
 const fragments = {
   article: gql`
@@ -23,7 +22,7 @@ const fragments = {
 const EditArticleButton = ({
   article,
 }: {
-  article: EditArticleButtonArticle
+  article: EditArticleButtonArticleFragment
 }) => {
   const { href } = toPath({ page: 'articleDetail', article })
 

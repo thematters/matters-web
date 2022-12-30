@@ -9,10 +9,12 @@ import {
   Translate,
   ViewerContext,
 } from '~/components'
+import {
+  FooterActionsCommentPrivateFragment,
+  FooterActionsCommentPublicFragment,
+} from '~/gql/graphql'
 
 import CreatedAt, { CreatedAtControls } from '../CreatedAt'
-import { FooterActionsCommentPrivate } from './__generated__/FooterActionsCommentPrivate'
-import { FooterActionsCommentPublic } from './__generated__/FooterActionsCommentPublic'
 import DownvoteButton from './DownvoteButton'
 import ReplyButton, { ReplyButtonProps } from './ReplyButton'
 import styles from './styles.css'
@@ -29,7 +31,8 @@ export type FooterActionsControls = {
   Pick<ReplyButtonProps, 'replySubmitCallback'>
 
 export type FooterActionsProps = {
-  comment: FooterActionsCommentPublic & Partial<FooterActionsCommentPrivate>
+  comment: FooterActionsCommentPublicFragment &
+    Partial<FooterActionsCommentPrivateFragment>
   type: CommentFormType
 } & FooterActionsControls
 

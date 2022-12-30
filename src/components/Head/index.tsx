@@ -1,7 +1,6 @@
 import NextHead from 'next/head'
 import { useContext } from 'react'
 
-import { UserLanguage } from '@/__generated__/globalTypes'
 import IMAGE_APPLE_TOUCH_ICON from '@/public/static/apple-touch-icon.png'
 import IMAGE_FAVICON_16 from '@/public/static/favicon-16x16.png'
 import IMAGE_FAVICON_32 from '@/public/static/favicon-32x32.png'
@@ -9,6 +8,7 @@ import IMAGE_FAVICON_64 from '@/public/static/favicon-64x64.png'
 import IMAGE_INTRO from '@/public/static/images/intro.jpg'
 import { toLocale, translate, TranslateArgs } from '~/common/utils'
 import { LanguageContext, useRoute } from '~/components'
+import { UserLanguage } from '~/gql/graphql'
 
 const siteDomain =
   process.env.NEXT_PUBLIC_SITE_DOMAIN_CANONICAL || // for web-next, set this different as serving domain; suggested canonical domain ('matters.news') to robots

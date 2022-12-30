@@ -27,14 +27,14 @@ import {
   useTargetNetwork,
   ViewerContext,
 } from '~/components'
-import { UserProfileUserPublic_user } from '~/components/UserProfile/__generated__/UserProfileUserPublic'
+import { UserProfileUserPublicQuery } from '~/gql/graphql'
 
 import ENSDescription from './ENSDescription'
 import LinkENSIntro from './LinkENSIntro'
 import styles from './styles.css'
 
 interface LinkENSProps {
-  user: UserProfileUserPublic_user
+  user: UserProfileUserPublicQuery['user']
   switchToWalletSelect: () => void
   switchToComplete: (txHash: string) => void
 }

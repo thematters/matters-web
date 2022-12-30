@@ -14,8 +14,8 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
+import { UserFollowingUsersPublicQuery } from '~/gql/graphql'
 
-import { UserFollowingUsersPublic } from './__generated__/UserFollowingUsersPublic'
 import {
   USER_FOLLOWING_USERS_PRIVATE,
   USER_FOLLOWING_USERS_PUBLIC,
@@ -37,9 +37,12 @@ const UsersFeed = () => {
     fetchMore,
     refetch: refetchPublic,
     client,
-  } = usePublicQuery<UserFollowingUsersPublic>(USER_FOLLOWING_USERS_PUBLIC, {
-    variables: { userName },
-  })
+  } = usePublicQuery<UserFollowingUsersPublicQuery>(
+    USER_FOLLOWING_USERS_PUBLIC,
+    {
+      variables: { userName },
+    }
+  )
 
   // pagination
   const user = data?.user
@@ -47,7 +50,7 @@ const UsersFeed = () => {
   const { edges, pageInfo } = user?.following?.users || {}
 
   // private data
-  const loadPrivate = (publicData?: UserFollowingUsersPublic) => {
+  const loadPrivate = (publicData?: UserFollowingUsersPublicQuery) => {
     if (!viewer.isAuthed || !publicData || !user) {
       return
     }

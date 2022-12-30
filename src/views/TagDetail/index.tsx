@@ -31,10 +31,12 @@ import {
 } from '~/components'
 import { getErrorCodes, QueryError } from '~/components/GQL'
 import ShareButton from '~/components/Layout/Header/ShareButton'
+import {
+  TagDetailPublicBySearchQuery,
+  TagDetailPublicQuery,
+  TagFragmentFragment,
+} from '~/gql/graphql'
 
-import { TagDetailPublic } from './__generated__/TagDetailPublic'
-import { TagDetailPublicBySearch } from './__generated__/TagDetailPublicBySearch'
-import { TagFragment } from './__generated__/TagFragment'
 import TagDetailArticles from './Articles'
 import ArticlesCount from './ArticlesCount'
 import { TagDetailButtons } from './Buttons'
@@ -58,7 +60,7 @@ const DynamicCommunity = dynamic(() => import('./Community'), {
 const validTagFeedTypes = ['hottest', 'latest', 'selected', 'creators'] as const
 type TagFeedType = typeof validTagFeedTypes[number]
 
-const TagDetail = ({ tag }: { tag: TagFragment }) => {
+const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
   const { router } = useRoute()
   const viewer = useContext(ViewerContext)
   const features = useFeatures()
@@ -276,12 +278,12 @@ const TagDetailContainer = () => {
     error,
     refetch: refetchPublic,
     client,
-  } = usePublicQuery<TagDetailPublic>(TAG_DETAIL_PUBLIC, {
+  } = usePublicQuery<TagDetailPublicQuery>(TAG_DETAIL_PUBLIC, {
     variables: { id: tagId },
     skip: !!searchKey,
   })
 
-  const resultBySearch = usePublicQuery<TagDetailPublicBySearch>(
+  const resultBySearch = usePublicQuery<TagDetailPublicBySearchQuery>(
     TAG_DETAIL_BY_SEARCH,
     {
       variables: { key: searchKey },
@@ -302,7 +304,7 @@ const TagDetailContainer = () => {
     })
   }
   const searchedTag = resultBySearch?.data?.search.edges?.[0]
-    .node as TagFragment
+    .node as TagFragmentFragment
 
   // fetch private data for first page
   useEffect(() => {
@@ -362,7 +364,11 @@ const TagDetailContainer = () => {
     )
   }
 
-  return <TagDetail tag={(dataByTagId?.node as TagFragment) || searchedTag} />
+  return (
+    <TagDetail
+      tag={(dataByTagId?.node as TagFragmentFragment) || searchedTag}
+    />
+  )
 }
 
 export default TagDetailContainer

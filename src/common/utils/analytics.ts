@@ -1,4 +1,4 @@
-import { ANALYTIC_TYPES,ANALYTICS } from '~/common/enums'
+import { ANALYTIC_TYPES, ANALYTICS } from '~/common/enums'
 
 const trackAs =
   (type: string) =>

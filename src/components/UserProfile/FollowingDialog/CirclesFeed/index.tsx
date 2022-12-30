@@ -11,8 +11,8 @@ import {
   usePullToRefresh,
   useRoute,
 } from '~/components'
+import { UserFollowingCirclesPublicQuery } from '~/gql/graphql'
 
-import { UserFollowingCirclesPublic } from './__generated__/UserFollowingCirclesPublic'
 import { USER_FOLLOWING_CIRCLES_PUBLIC } from './gql'
 
 const CirclesFeed = () => {
@@ -24,9 +24,12 @@ const CirclesFeed = () => {
    */
   // public data
   const { data, loading, error, fetchMore, refetch } =
-    usePublicQuery<UserFollowingCirclesPublic>(USER_FOLLOWING_CIRCLES_PUBLIC, {
-      variables: { userName },
-    })
+    usePublicQuery<UserFollowingCirclesPublicQuery>(
+      USER_FOLLOWING_CIRCLES_PUBLIC,
+      {
+        variables: { userName },
+      }
+    )
 
   // pagination
   const user = data?.user

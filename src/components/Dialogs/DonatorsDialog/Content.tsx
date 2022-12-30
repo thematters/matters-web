@@ -11,18 +11,16 @@ import {
   useResponsive,
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
-
 import {
-  ArticleDonators,
-  ArticleDonators_article_Article,
-  ArticleDonators_article_Article_donations_edges,
-} from './__generated__/ArticleDonators'
-import { DonatorDialogArticle } from './__generated__/DonatorDialogArticle'
+  ArticleDonatorsQuery,
+  DonatorDialogArticleFragment,
+} from '~/gql/graphql'
+
 import { ARTICLE_DONATORS } from './gql'
 import styles from './styles.css'
 
 interface DonatorsDialogContentProps {
-  article: DonatorDialogArticle
+  article: DonatorDialogArticleFragment
   closeDialog: () => void
 }
 
@@ -31,14 +29,13 @@ const DonatorsDialogContent = ({
   closeDialog,
 }: DonatorsDialogContentProps) => {
   const isSmallUp = useResponsive('sm-up')
-  const { data, loading, error, fetchMore } = useQuery<ArticleDonators>(
+  const { data, loading, error, fetchMore } = useQuery<ArticleDonatorsQuery>(
     ARTICLE_DONATORS,
     { variables: { id: article.id } }
   )
 
   const connectionPath = 'article.donations'
-  const { edges, pageInfo } =
-    (data?.article as ArticleDonators_article_Article)?.donations || {}
+  const { edges, pageInfo } = data?.article?.donations || {}
 
   if (loading) {
     return <Spinner />

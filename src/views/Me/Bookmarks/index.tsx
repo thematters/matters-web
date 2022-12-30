@@ -12,8 +12,7 @@ import {
   QueryError,
   Spinner,
 } from '~/components'
-
-import { MeBookmarkFeed } from './__generated__/MeBookmarkFeed'
+import { MeBookmarkFeedQuery } from '~/gql/graphql'
 
 const ME_BOOKMARK_FEED = gql`
   query MeBookmarkFeed($after: String) {
@@ -41,7 +40,7 @@ const ME_BOOKMARK_FEED = gql`
 
 const BaseMeBookmarks = () => {
   const { data, loading, error, fetchMore, refetch } =
-    useQuery<MeBookmarkFeed>(ME_BOOKMARK_FEED)
+    useQuery<MeBookmarkFeedQuery>(ME_BOOKMARK_FEED)
 
   if (loading) {
     return <Spinner />

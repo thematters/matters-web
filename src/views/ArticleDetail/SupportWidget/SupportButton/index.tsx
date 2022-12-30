@@ -9,14 +9,15 @@ import {
 import { analytics } from '~/common/utils'
 import { DonationDialog, Translate, ViewerContext } from '~/components'
 import DonationButton from '~/components/Buttons/DonationButton'
-import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
-
-import { ArticleDetailPublic_article } from '../../__generated__/ArticleDetailPublic'
+import {
+  ArticleDetailPublicQuery,
+  UserDonationRecipientFragment,
+} from '~/gql/graphql'
 
 interface SupportButtonProps {
-  recipient: UserDonationRecipient
+  recipient: UserDonationRecipientFragment
   targetId: string
-  article: ArticleDetailPublic_article
+  article: ArticleDetailPublicQuery['article']
   supported?: boolean
 }
 

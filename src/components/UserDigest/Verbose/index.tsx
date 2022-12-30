@@ -8,9 +8,11 @@ import { Card, CardProps, Translate } from '~/components'
 import { Avatar, AvatarProps } from '~/components/Avatar'
 import { FollowUserButton } from '~/components/Buttons/FollowUser'
 import { UnblockUserButton } from '~/components/Buttons/UnblockUser'
+import {
+  UserDigestVerboseUserPrivateFragment,
+  UserDigestVerboseUserPublicFragment,
+} from '~/gql/graphql'
 
-import { UserDigestVerboseUserPrivate } from './__generated__/UserDigestVerboseUserPrivate'
-import { UserDigestVerboseUserPublic } from './__generated__/UserDigestVerboseUserPublic'
 import { fragments } from './gql'
 import styles from './styles.css'
 
@@ -23,7 +25,8 @@ import styles from './styles.css'
  *   <UserDigest.Verbose user={user} />
  */
 export type UserDigestVerboseProps = {
-  user: UserDigestVerboseUserPublic & Partial<UserDigestVerboseUserPrivate>
+  user: UserDigestVerboseUserPublicFragment &
+    Partial<UserDigestVerboseUserPrivateFragment>
 
   avatarSize?: 'md'
   nameTextSize?: 'md-s'

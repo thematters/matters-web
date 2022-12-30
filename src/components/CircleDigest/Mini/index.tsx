@@ -4,14 +4,14 @@ import React from 'react'
 
 import { toPath } from '~/common/utils'
 import { Card, CardProps, CircleAvatar } from '~/components'
+import { DigestMiniCircleFragment } from '~/gql/graphql'
 
 import Counts from '../Counts'
-import { DigestMiniCircle } from './__generated__/DigestMiniCircle'
 import { fragments } from './gql'
 import styles from './styles.css'
 
 export type CircleDigestMiniProps = {
-  circle: DigestMiniCircle
+  circle: DigestMiniCircleFragment
 } & CardProps
 
 const Mini = ({ circle, ...cardProps }: CircleDigestMiniProps) => {

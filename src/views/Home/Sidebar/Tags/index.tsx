@@ -13,11 +13,10 @@ import {
   usePublicQuery,
   ViewerContext,
 } from '~/components'
-import { LastFetchRandom } from '~/components/GQL/queries/__generated__/LastFetchRandom'
 import FETCH_RECORD from '~/components/GQL/queries/lastFetchRandom'
+import { LastFetchRandomQuery, SidebarTagsPublicQuery } from '~/gql/graphql'
 
 import SectionHeader from '../../SectionHeader'
-import { SidebarTagsPublic } from './__generated__/SidebarTagsPublic'
 import styles from './styles.css'
 
 const SIDEBAR_TAGS = gql`
@@ -45,21 +44,22 @@ const SIDEBAR_TAGS = gql`
 const Tags = () => {
   const viewer = useContext(ViewerContext)
 
-  const { data: lastFetchRandom, client } = useQuery<LastFetchRandom>(
+  const { data: lastFetchRandom, client } = useQuery<LastFetchRandomQuery>(
     FETCH_RECORD,
     { variables: { id: 'local' } }
   )
   const lastRandom = lastFetchRandom?.lastFetchRandom.sidebarTags // last Random
   const randomMaxSize = 50
 
-  const { data, loading, error, refetch } = usePublicQuery<SidebarTagsPublic>(
-    SIDEBAR_TAGS,
-    {
-      notifyOnNetworkStatusChange: true,
-      variables: { random: lastRandom || 0 },
-    },
-    { publicQuery: !viewer.isAuthed }
-  )
+  const { data, loading, error, refetch } =
+    usePublicQuery<SidebarTagsPublicQuery>(
+      SIDEBAR_TAGS,
+      {
+        notifyOnNetworkStatusChange: true,
+        variables: { random: lastRandom || 0 },
+      },
+      { publicQuery: !viewer.isAuthed }
+    )
 
   const size = Math.round(
     (data?.viewer?.recommendation.tags.totalCount || randomMaxSize) / 5

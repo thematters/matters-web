@@ -20,8 +20,8 @@ import {
   Translate,
   useMutation,
 } from '~/components'
-import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
+import { SingleFileUploadMutation } from '~/gql/graphql'
 
 import styles from './styles.css'
 
@@ -67,7 +67,7 @@ export const CoverUploader = ({
   const { lang } = useContext(LanguageContext)
 
   const [cover, setCover] = useState<string | undefined | null>(initCover)
-  const [upload, { loading }] = useMutation<SingleFileUpload>(
+  const [upload, { loading }] = useMutation<SingleFileUploadMutation>(
     UPLOAD_FILE,
     undefined,
     { showToast: false }

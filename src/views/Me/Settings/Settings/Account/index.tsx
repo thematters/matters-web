@@ -4,8 +4,8 @@ import { useContext } from 'react'
 
 import { PATHS } from '~/common/enums'
 import { Form, Translate, usePullToRefresh, ViewerContext } from '~/components'
+import { ViewerTotalBlockCountQuery } from '~/gql/graphql'
 
-import { ViewerTotalBlockCount } from './__generated__/ViewerTotalBlockCount'
 import ChangeUserNameAsk from './ChangeUserNameAsk'
 
 const VIEWER_TOTAL_BLOCK_COUNT = gql`
@@ -21,7 +21,7 @@ const VIEWER_TOTAL_BLOCK_COUNT = gql`
 
 const AccountSettings = () => {
   const viewer = useContext(ViewerContext)
-  const { data, refetch } = useQuery<ViewerTotalBlockCount>(
+  const { data, refetch } = useQuery<ViewerTotalBlockCountQuery>(
     VIEWER_TOTAL_BLOCK_COUNT,
     {
       errorPolicy: 'none',

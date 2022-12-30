@@ -2,12 +2,14 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
 import { Title, Translate } from '~/components'
+import {
+  ArticleResponseQuery,
+  ResponseCountArticleFragment,
+} from '~/gql/graphql'
 
-import { ArticleResponse } from './__generated__/ArticleResponse'
 import FeatureComments from './FeaturedComments'
 import LatestResponses from './LatestResponses'
 import ResponseCount from './ResponseCount'
-import { ResponseCountArticle } from './ResponseCount/__generated__/ResponseCountArticle'
 
 const ARTICLE_RESPONSE = gql`
   query ArticleResponse(
@@ -28,7 +30,7 @@ const ARTICLE_RESPONSE = gql`
 `
 
 const Responses = ({ id, lock }: { id: string; lock: boolean }) => {
-  const { data, loading } = useQuery<ArticleResponse>(ARTICLE_RESPONSE, {
+  const { data, loading } = useQuery<ArticleResponseQuery>(ARTICLE_RESPONSE, {
     variables: { id },
   })
 
@@ -43,12 +45,18 @@ const Responses = ({ id, lock }: { id: string; lock: boolean }) => {
       <header>
         <Title type="nav" is="h2">
           <Translate id="responses" />
-          <ResponseCount article={article as ResponseCountArticle} />
+          <ResponseCount article={article as ResponseCountArticleFragment} />
         </Title>
       </header>
 
-      <FeatureComments id={(article as ResponseCountArticle).id} lock={lock} />
-      <LatestResponses id={(article as ResponseCountArticle).id} lock={lock} />
+      <FeatureComments
+        id={(article as ResponseCountArticleFragment).id}
+        lock={lock}
+      />
+      <LatestResponses
+        id={(article as ResponseCountArticleFragment).id}
+        lock={lock}
+      />
     </section>
   )
 }

@@ -16,18 +16,17 @@ import {
   ViewerContext,
   ViewMoreCard,
 } from '~/components'
-import { LastFetchRandom } from '~/components/GQL/queries/__generated__/LastFetchRandom'
 import FETCH_RECORD from '~/components/GQL/queries/lastFetchRandom'
+import { FeedAuthorsQuery, LastFetchRandomQuery } from '~/gql/graphql'
 
 import SectionHeader from '../../SectionHeader'
-import { FeedAuthors } from './__generated__/FeedAuthors'
 import { FEED_AUTHORS } from './gql'
 import styles from './styles.css'
 
 const Authors = () => {
   const viewer = useContext(ViewerContext)
 
-  const { data: lastFetchRandom, client } = useQuery<LastFetchRandom>(
+  const { data: lastFetchRandom, client } = useQuery<LastFetchRandomQuery>(
     FETCH_RECORD,
     { variables: { id: 'local' } }
   )
@@ -36,7 +35,7 @@ const Authors = () => {
   /**
    * Data Fetching
    */
-  const { data, loading, error, refetch } = usePublicQuery<FeedAuthors>(
+  const { data, loading, error, refetch } = usePublicQuery<FeedAuthorsQuery>(
     FEED_AUTHORS,
     {
       notifyOnNetworkStatusChange: true,

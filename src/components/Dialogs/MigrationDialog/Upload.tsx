@@ -16,8 +16,8 @@ import {
   useMutation,
   ViewerContext,
 } from '~/components'
-import { Migration } from '~/components/GQL/mutations/__generated__/Migration'
 import MIGRATION from '~/components/GQL/mutations/migration'
+import { MigrationMutation } from '~/gql/graphql'
 
 import styles from './styles.css'
 
@@ -54,7 +54,7 @@ const MigrationDialogUpload = ({ nextStep }: MigrationDialogUploadProps) => {
   const acceptTypes = ACCEPTED_UPLOAD_MIGRATION_TYPES.join(',')
 
   const viewer = useContext(ViewerContext)
-  const [migration, { loading }] = useMutation<Migration>(MIGRATION)
+  const [migration, { loading }] = useMutation<MigrationMutation>(MIGRATION)
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     event.stopPropagation()

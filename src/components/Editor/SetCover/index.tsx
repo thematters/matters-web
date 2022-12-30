@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import { Dialog, Translate } from '~/components'
-import { Asset } from '~/components/GQL/fragments/__generated__/Asset'
+import { AssetFragment } from '~/gql/graphql'
 
 import SetCoverDialog from './Dialog'
 import Selector from './Selector'
@@ -13,9 +13,9 @@ export type SetCoverProps = {
   onClose?: () => any
 
   cover?: string | null
-  assets: Asset[]
+  assets: AssetFragment[]
 
-  editCover: (asset?: Asset) => any
+  editCover: (asset?: AssetFragment) => any
   refetchAssets: () => any
   coverSaving?: boolean
 } & UploadEntity
@@ -33,7 +33,7 @@ const SetCover: React.FC<SetCoverProps> & { Dialog: typeof SetCoverDialog } = ({
   ...uploadEntity
 }) => {
   // cover
-  const filter = (ast: Asset) => ast.path === cover
+  const filter = (ast: AssetFragment) => ast.path === cover
   const [selected, setSelected] = useState(assets.find(filter))
   const onSave = async () => {
     const result = await editCover(selected)

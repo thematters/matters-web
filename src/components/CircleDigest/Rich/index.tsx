@@ -10,9 +10,11 @@ import {
   LinkWrapper,
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
+import {
+  DigestRichCirclePrivateFragment,
+  DigestRichCirclePublicFragment,
+} from '~/gql/graphql'
 
-import { DigestRichCirclePrivate } from './__generated__/DigestRichCirclePrivate'
-import { DigestRichCirclePublic } from './__generated__/DigestRichCirclePublic'
 import Footer, { FooterControls } from './Footer'
 import { fragments } from './gql'
 import styles from './styles.css'
@@ -26,7 +28,8 @@ export type CircleDigestRichControls = {
 } & FooterControls
 
 export type CircleDigestRichProps = {
-  circle: DigestRichCirclePublic & Partial<DigestRichCirclePrivate>
+  circle: DigestRichCirclePublicFragment &
+    Partial<DigestRichCirclePrivateFragment>
   avatarSize?: CircleAvatarSize
   textSize?: 'md-s' | 'xm'
 } & CircleDigestRichControls &

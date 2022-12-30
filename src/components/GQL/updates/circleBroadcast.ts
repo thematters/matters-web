@@ -1,9 +1,6 @@
 import { DataProxy } from 'apollo-cache'
 
-import {
-  BroadcastPublic,
-  BroadcastPublic_circle_broadcast_edges,
-} from '~/views/Circle/Broadcast/__generated__/BroadcastPublic'
+import { BroadcastPublicQuery } from '~/gql/graphql'
 
 const sortEdgesByCreatedAtDesc = (
   edges: BroadcastPublic_circle_broadcast_edges[]
@@ -33,7 +30,7 @@ const update = ({
   }
 
   try {
-    const data = cache.readQuery<BroadcastPublic>({
+    const data = cache.readQuery<BroadcastPublicQuery>({
       query: BROADCAST_PUBLIC,
       variables: { name },
     })

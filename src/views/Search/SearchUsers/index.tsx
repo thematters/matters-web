@@ -11,9 +11,9 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
+import { SearchUsersPublicQuery } from '~/gql/graphql'
 
 import GoogleSearchButton from '../GoogleSearchButton'
-import { SearchUsersPublic } from './__generated__/SearchUsersPublic'
 import { SEARCH_USERS_PRIVATE, SEARCH_USERS_PUBLIC } from './gql'
 
 const SearchUser = () => {
@@ -31,7 +31,7 @@ const SearchUser = () => {
     fetchMore,
     refetch: refetchPublic,
     client,
-  } = usePublicQuery<SearchUsersPublic>(SEARCH_USERS_PUBLIC, {
+  } = usePublicQuery<SearchUsersPublicQuery>(SEARCH_USERS_PUBLIC, {
     variables: { key: q },
   })
 
@@ -40,7 +40,7 @@ const SearchUser = () => {
   const { edges, pageInfo } = data?.search || {}
 
   // private data
-  const loadPrivate = (publicData?: SearchUsersPublic) => {
+  const loadPrivate = (publicData?: SearchUsersPublicQuery) => {
     if (!viewer.isAuthed || !publicData) {
       return
     }

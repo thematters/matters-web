@@ -3,14 +3,14 @@ import React from 'react'
 
 import { toPath } from '~/common/utils'
 import { Card, DateTime, LinkWrapper, Title, Translate } from '~/components'
+import { DraftDigestFeedDraftFragment } from '~/gql/graphql'
 
-import { DraftDigestFeedDraft } from './__generated__/DraftDigestFeedDraft'
 import DeleteButton from './DeleteButton'
 import EditButton from './EditButton'
 import styles from './styles.css'
 
 interface DraftDigestFeedProps {
-  draft: DraftDigestFeedDraft
+  draft: DraftDigestFeedDraftFragment
 }
 
 const fragments = {

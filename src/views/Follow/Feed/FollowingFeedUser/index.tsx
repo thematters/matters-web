@@ -2,14 +2,17 @@ import React from 'react'
 
 import { DateTime, UserDigest } from '~/components'
 import { fragments } from '~/components/UserDigest/Rich/gql'
+import {
+  FollowingFeedUserPrivateFragment,
+  FollowingFeedUserPublicFragment,
+} from '~/gql/graphql'
 
 import DropdownActions, { DropdownActionsControls } from '../DropdownActions'
-import { FollowingFeedUserPrivate } from './__generated__/FollowingFeedUserPrivate'
-import { FollowingFeedUserPublic } from './__generated__/FollowingFeedUserPublic'
 import styles from './styles.css'
 
 export type FeedUserProps = {
-  user: FollowingFeedUserPublic & Partial<FollowingFeedUserPrivate>
+  user: FollowingFeedUserPublicFragment &
+    Partial<FollowingFeedUserPrivateFragment>
   header?: React.ReactNode
   date: Date | string | number
 } & DropdownActionsControls

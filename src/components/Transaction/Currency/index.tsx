@@ -3,8 +3,8 @@ import {
   IconLikeCoin40,
   IconUSDTActive40,
 } from '~/components/Icon'
+import { TransactionCurrency } from '~/gql/graphql'
 
-import { TransactionCurrency } from './../../../../__generated__/globalTypes'
 import styles from './styles.css'
 
 interface Props {
@@ -15,13 +15,13 @@ const Currency = ({ currency }: Props) => {
   const size = 'md'
   return (
     <section className="Currency">
-      {currency === TransactionCurrency.USDT && (
+      {currency === TransactionCurrency.Usdt && (
         <IconUSDTActive40 size={size} />
       )}
-      {currency === TransactionCurrency.HKD && (
+      {currency === TransactionCurrency.Hkd && (
         <IconFiatCurrency40 size={size} />
       )}
-      {currency === TransactionCurrency.LIKE && <IconLikeCoin40 size={size} />}
+      {currency === TransactionCurrency.Like && <IconLikeCoin40 size={size} />}
       <style jsx>{styles}</style>
     </section>
   )

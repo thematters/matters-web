@@ -17,8 +17,8 @@ import {
   useMutation,
   useStep,
 } from '~/components'
+import { SetPaymentPasswordMutation } from '~/gql/graphql'
 
-import { SetPaymentPassword } from './__generated__/SetPaymentPassword'
 import styles from './styles.css'
 
 interface FormProps {
@@ -42,7 +42,7 @@ const SET_PAYMENT_PASSWORD = gql`
 `
 
 const PaymentSetPasswordForm: React.FC<FormProps> = ({ submitCallback }) => {
-  const [setPassword] = useMutation<SetPaymentPassword>(
+  const [setPassword] = useMutation<SetPaymentPasswordMutation>(
     SET_PAYMENT_PASSWORD,
     undefined,
     { showToast: false }

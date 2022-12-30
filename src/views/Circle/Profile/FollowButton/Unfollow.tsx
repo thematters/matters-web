@@ -8,46 +8,50 @@ import {
   useMutation,
   ViewerContext,
 } from '~/components'
-import { ToggleFollowCircle } from '~/components/GQL/mutations/__generated__/ToggleFollowCircle'
 import TOGGLE_FOLLOW_CIRCLE from '~/components/GQL/mutations/toggleFollowCircle'
 import updateCircleFollowerCount from '~/components/GQL/updates/circleFollowerCount'
 import updateCircleFollowers from '~/components/GQL/updates/circleFollowers'
-
-import { FollowButtonCirclePrivate } from './__generated__/FollowButtonCirclePrivate'
+import {
+  FollowButtonCirclePrivateFragment,
+  ToggleFollowCircleMutation,
+} from '~/gql/graphql'
 
 interface UnfollowCircleProps {
-  circle: Partial<FollowButtonCirclePrivate>
+  circle: Partial<FollowButtonCirclePrivateFragment>
 }
 
 const Unfollow = ({ circle }: UnfollowCircleProps) => {
   const viewer = useContext(ViewerContext)
   const [hover, setHover] = useState(false)
-  const [unfollow] = useMutation<ToggleFollowCircle>(TOGGLE_FOLLOW_CIRCLE, {
-    variables: { id: circle.id, enabled: false },
-    optimisticResponse:
-      !_isNil(circle.id) && !_isNil(circle.isFollower)
-        ? {
-            toggleFollowCircle: {
-              id: circle.id,
-              isFollower: false,
-              __typename: 'Circle',
-            },
-          }
-        : undefined,
-    update: (cache) => {
-      updateCircleFollowerCount({
-        cache,
-        type: 'decrement',
-        name: circle.name || '',
-      })
-      updateCircleFollowers({
-        cache,
-        type: 'unfollow',
-        name: circle.name || '',
-        viewer,
-      })
-    },
-  })
+  const [unfollow] = useMutation<ToggleFollowCircleMutation>(
+    TOGGLE_FOLLOW_CIRCLE,
+    {
+      variables: { id: circle.id, enabled: false },
+      optimisticResponse:
+        !_isNil(circle.id) && !_isNil(circle.isFollower)
+          ? {
+              toggleFollowCircle: {
+                id: circle.id,
+                isFollower: false,
+                __typename: 'Circle',
+              },
+            }
+          : undefined,
+      update: (cache) => {
+        updateCircleFollowerCount({
+          cache,
+          type: 'decrement',
+          name: circle.name || '',
+        })
+        updateCircleFollowers({
+          cache,
+          type: 'unfollow',
+          name: circle.name || '',
+          viewer,
+        })
+      },
+    }
+  )
 
   return (
     <Button

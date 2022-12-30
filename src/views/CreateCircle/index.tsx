@@ -1,13 +1,13 @@
 import { useState } from 'react'
 
 import { CreateCircleForm, Head, Layout, useStep } from '~/components'
-import { PutCircle_putCircle } from '~/components/GQL/mutations/__generated__/PutCircle'
+import { PutCircleMutation } from '~/gql/graphql'
 
 type Step = 'init' | 'profile'
 
 const CreateCircle = () => {
   const { currStep, forward } = useStep<Step>('init')
-  const [circle, setCircle] = useState<PutCircle_putCircle>()
+  const [circle, setCircle] = useState<PutCircleMutation['putCircle']>()
 
   return (
     <Layout.Main smBgColor="grey-lighter">

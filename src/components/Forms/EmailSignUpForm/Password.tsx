@@ -18,10 +18,11 @@ import {
   Translate,
   useMutation,
 } from '~/components'
-import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
-
-import { UserRegister } from './__generated__/UserRegister'
+import {
+  ConfirmVerificationCodeMutation,
+  UserRegisterMutation,
+} from '~/gql/graphql'
 
 interface FormProps {
   email: string
@@ -53,14 +54,18 @@ const Password: React.FC<FormProps> = ({
   submitCallback,
   closeDialog,
 }) => {
-  const [confirm] = useMutation<ConfirmVerificationCode>(
+  const [confirm] = useMutation<ConfirmVerificationCodeMutation>(
     CONFIRM_CODE,
     undefined,
     { showToast: false }
   )
-  const [register] = useMutation<UserRegister>(USER_REGISTER, undefined, {
-    showToast: false,
-  })
+  const [register] = useMutation<UserRegisterMutation>(
+    USER_REGISTER,
+    undefined,
+    {
+      showToast: false,
+    }
+  )
   const { lang } = useContext(LanguageContext)
   const isInPage = purpose === 'page'
   const formId = 'email-sign-up-password-form'

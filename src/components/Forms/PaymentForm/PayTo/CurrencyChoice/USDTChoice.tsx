@@ -1,7 +1,6 @@
 import { useContext } from 'react'
 import { useAccount } from 'wagmi'
 
-import { QuoteCurrency } from '@/__generated__/globalTypes'
 import { PATHS, PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { formatAmount } from '~/common/utils'
 import {
@@ -15,14 +14,17 @@ import {
   useBalanceUSDT,
   ViewerContext,
 } from '~/components'
-import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
-import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
+import {
+  ArticleDetailPublicQuery,
+  QuoteCurrency,
+  UserDonationRecipientFragment,
+} from '~/gql/graphql'
 
 import styles from './styles.css'
 
 interface FormProps {
-  article: ArticleDetailPublic_article
-  recipient: UserDonationRecipient
+  article: ArticleDetailPublicQuery['article']
+  recipient: UserDonationRecipientFragment
   currency: QuoteCurrency
   exchangeRate: number
   switchToSetAmount: () => void

@@ -5,11 +5,10 @@ import { useContext } from 'react'
 import { URL_FRAGMENT } from '~/common/enums'
 import { numAbbr, toPath, translate } from '~/common/utils'
 import { Button, IconComment16, LanguageContext, TextIcon } from '~/components'
-
-import { ActionsResponseCountArticle } from './__generated__/ActionsResponseCountArticle'
+import { ActionsResponseCountArticleFragment } from '~/gql/graphql'
 
 interface ResponseCountProps {
-  article: ActionsResponseCountArticle
+  article: ActionsResponseCountArticleFragment
 }
 
 const fragments = {

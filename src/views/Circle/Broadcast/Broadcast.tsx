@@ -26,13 +26,9 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
+import { BroadcastPublicQuery } from '~/gql/graphql'
 
 import CircleDetailTabs from '../CircleDetailTabs'
-import { BroadcastPrivate_nodes_Comment } from './__generated__/BroadcastPrivate'
-import {
-  BroadcastPublic,
-  BroadcastPublic_circle_broadcast_edges_node,
-} from './__generated__/BroadcastPublic'
 import { BROADCAST_PRIVATE, BROADCAST_PUBLIC } from './gql'
 import styles from './styles.css'
 
@@ -59,7 +55,7 @@ const CricleBroadcast = () => {
     fetchMore,
     refetch: refetchPublic,
     client,
-  } = usePublicQuery<BroadcastPublic>(BROADCAST_PUBLIC, {
+  } = usePublicQuery<BroadcastPublicQuery>(BROADCAST_PUBLIC, {
     variables: { name },
   })
 
@@ -72,7 +68,7 @@ const CricleBroadcast = () => {
   )
 
   // private data
-  const loadPrivate = async (publicData?: BroadcastPublic) => {
+  const loadPrivate = async (publicData?: BroadcastPublicQuery) => {
     if (!viewer.isAuthed || !publicData) {
       return
     }

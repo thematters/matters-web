@@ -18,17 +18,16 @@ import {
   useResponsive,
   ViewerContext,
 } from '~/components'
-import { TagArticlesPublic } from '~/components/GQL/queries/__generated__/TagArticlesPublic'
 import {
   TAG_ARTICLES_PRIVATE,
   TAG_ARTICLES_PUBLIC,
 } from '~/components/GQL/queries/tagArticles'
+import { TagArticlesPublicQuery, TagFragmentFragment } from '~/gql/graphql'
 
-import { TagFragment } from '../__generated__/TagFragment'
 import RelatedTags from '../RelatedTags'
 
 interface TagArticlesProps {
-  tag: TagFragment
+  tag: TagFragmentFragment
   feedType: string
 }
 
@@ -52,7 +51,7 @@ const TagDetailArticles = ({ tag, feedType }: TagArticlesProps) => {
     refetch: refetchPublic,
     networkStatus,
     client,
-  } = usePublicQuery<TagArticlesPublic>(TAG_ARTICLES_PUBLIC, {
+  } = usePublicQuery<TagArticlesPublicQuery>(TAG_ARTICLES_PUBLIC, {
     variables: {
       id: tag.id,
       selected: feedType === 'selected',
@@ -71,7 +70,7 @@ const TagDetailArticles = ({ tag, feedType }: TagArticlesProps) => {
     ) >= 0
 
   // private data
-  const loadPrivate = (publicData?: TagArticlesPublic) => {
+  const loadPrivate = (publicData?: TagArticlesPublicQuery) => {
     if (!viewer.isAuthed || !publicData) {
       return
     }

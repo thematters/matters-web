@@ -12,9 +12,11 @@ import {
   Translate,
   useMutation,
 } from '~/components'
+import {
+  UpdateViewerNotificationMutation,
+  ViewerNotificationSettingsQuery,
+} from '~/gql/graphql'
 
-import { UpdateViewerNotification } from './__generated__/UpdateViewerNotification'
-import { ViewerNotificationSettings } from './__generated__/ViewerNotificationSettings'
 import PreferenceSettings from './Preference'
 
 const VIEWER_NOTIFICATION_SETTINGS = gql`
@@ -50,10 +52,10 @@ const UPDATE_VIEWER_NOTIFICATION = gql`
 `
 
 const BaseNotificationSettings = () => {
-  const [update] = useMutation<UpdateViewerNotification>(
+  const [update] = useMutation<UpdateViewerNotificationMutation>(
     UPDATE_VIEWER_NOTIFICATION
   )
-  const { data, loading, refetch } = useQuery<ViewerNotificationSettings>(
+  const { data, loading, refetch } = useQuery<ViewerNotificationSettingsQuery>(
     VIEWER_NOTIFICATION_SETTINGS
   )
   const settings = data?.viewer?.settings.notification

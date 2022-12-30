@@ -2,12 +2,12 @@ import gql from 'graphql-tag'
 
 import { Translate } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
+import { ReplyToUserFragment } from '~/gql/graphql'
 
-import { ReplyToUser } from './__generated__/ReplyToUser'
 import styles from './styles.css'
 
 export interface ReplyToProps {
-  user: ReplyToUser
+  user: ReplyToUserFragment
 }
 
 const fragments = {

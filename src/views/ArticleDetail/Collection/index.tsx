@@ -17,12 +17,8 @@ import {
   ViewMoreButton,
 } from '~/components'
 import articleFragments from '~/components/GQL/fragments/article'
+import { ArticleDetailPublicQuery, CollectionListQuery } from '~/gql/graphql'
 
-import { ArticleDetailPublic_article } from '../__generated__/ArticleDetailPublic'
-import {
-  CollectionList as CollectionListTypes,
-  CollectionList_article_Article,
-} from './__generated__/CollectionList'
 import styles from './styles.css'
 
 const COLLECTION_LIST = gql`
@@ -38,13 +34,13 @@ const COLLECTION_LIST = gql`
 `
 
 const Collection: React.FC<{
-  article: ArticleDetailPublic_article
+  article: Pick<ArticleDetailPublicQuery, 'article'>
   collectionCount?: number
 }> = ({ article, collectionCount }) => {
   const { lang } = useContext(LanguageContext)
 
   const isMediumUp = useResponsive('md-up')
-  const { data, loading, error, fetchMore } = useQuery<CollectionListTypes>(
+  const { data, loading, error, fetchMore } = useQuery<CollectionListQuery>(
     COLLECTION_LIST,
     { variables: { id: article.id, first: 3 } }
   )

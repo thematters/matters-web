@@ -2,14 +2,17 @@ import { useContext } from 'react'
 
 import { translate } from '~/common/utils'
 import { Form, LanguageContext, Switch, Translate } from '~/components'
+import { ViewerNotificationCircleSettingsQuery } from '~/gql/graphql'
 
-import { ViewerNotificationCircleSettings_viewer_settings_notification } from './__generated__/ViewerNotificationCircleSettings'
+type NotificationType = NonNullable<
+  NonNullable<
+    ViewerNotificationCircleSettingsQuery['viewer']
+  >['settings']['notification']
+>
 
 interface SubscribeBroadcastProps {
-  settings: ViewerNotificationCircleSettings_viewer_settings_notification
-  toggle: (
-    type: keyof ViewerNotificationCircleSettings_viewer_settings_notification
-  ) => void
+  settings: NotificationType
+  toggle: (type: keyof NotificationType) => void
 }
 
 const SubscribeBroadcast = ({ settings, toggle }: SubscribeBroadcastProps) => {

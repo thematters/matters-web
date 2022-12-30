@@ -5,12 +5,12 @@ import {
   TextIcon,
   Translate,
 } from '~/components'
+import { ActionsReadTimeArticleFragment } from '~/gql/graphql'
 
-import { ActionsReadTimeArticle } from './__generated__/ActionsReadTimeArticle'
 import { fragments } from './gql'
 
 interface ResponseCountProps {
-  article: ActionsReadTimeArticle
+  article: ActionsReadTimeArticleFragment
   hasDivider: boolean
 }
 

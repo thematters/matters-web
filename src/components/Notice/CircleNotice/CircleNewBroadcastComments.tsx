@@ -4,6 +4,7 @@ import { useContext } from 'react'
 import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import { Translate, ViewerContext } from '~/components'
+import { CircleNewBroadcastCommentsFragment } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeCircleCard from '../NoticeCircleCard'
@@ -13,10 +14,9 @@ import NoticeHead from '../NoticeHead'
 import NoticeHeadActors from '../NoticeHeadActors'
 import NoticeTypeIcon from '../NoticeTypeIcon'
 import styles from '../styles.css'
-import { CircleNewBroadcastComments as NoticeType } from './__generated__/CircleNewBroadcastComments'
 
 type CircleNewBroadcastCommentsType = {
-  notice: NoticeType
+  notice: CircleNewBroadcastCommentsFragment
 }
 
 const CircleNewBroadcastComments = ({

@@ -12,9 +12,7 @@ import {
   optimizeEmbed,
 } from '~/common/utils'
 import { useMutation, ViewerContext } from '~/components'
-
-import { ContentArticle } from './__generated__/ContentArticle'
-import { ReadArticle } from './__generated__/ReadArticle'
+import { ContentArticleFragment, ReadArticleMutation } from '~/gql/graphql'
 
 const READ_ARTICLE = gql`
   mutation ReadArticle($id: ID!) {
@@ -29,12 +27,12 @@ const Content = ({
   content,
   translating,
 }: {
-  article: ContentArticle
+  article: ContentArticleFragment
   content: string
   translating?: boolean
 }) => {
   const viewer = useContext(ViewerContext)
-  const [read] = useMutation<ReadArticle>(READ_ARTICLE, undefined, {
+  const [read] = useMutation<ReadArticleMutation>(READ_ARTICLE, undefined, {
     showToast: false,
   })
 

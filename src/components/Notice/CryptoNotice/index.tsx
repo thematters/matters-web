@@ -1,10 +1,11 @@
 import gql from 'graphql-tag'
 
-import { CryptoNotice as NoticeType } from './__generated__/CryptoNotice'
+import { CryptoNoticeFragment } from '~/gql/graphql'
+
 import CryptoWalletAirdropNotice from './CryptoWalletAirdropNotice'
 import CryptoWalletConnectedNotice from './CryptoWalletConnectedNotice'
 
-const CryptoNotice = ({ notice }: { notice: NoticeType }) => {
+const CryptoNotice = ({ notice }: { notice: CryptoNoticeFragment }) => {
   switch (notice.type) {
     case 'CryptoWalletAirdrop':
       return <CryptoWalletAirdropNotice notice={notice} />

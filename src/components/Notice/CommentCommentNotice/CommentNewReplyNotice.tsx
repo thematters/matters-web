@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 
 import { TEST_ID } from '~/common/enums'
 import { Translate } from '~/components'
+import { CommentNewReplyNoticeFragment } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeArticleTitle from '../NoticeArticleTitle'
@@ -12,9 +13,12 @@ import NoticeHead from '../NoticeHead'
 import NoticeHeadActors from '../NoticeHeadActors'
 import NoticeTypeIcon from '../NoticeTypeIcon'
 import styles from '../styles.css'
-import { CommentNewReplyNotice as NoticeType } from './__generated__/CommentNewReplyNotice'
 
-const CommentNewReplyNotice = ({ notice }: { notice: NoticeType }) => {
+const CommentNewReplyNotice = ({
+  notice,
+}: {
+  notice: CommentNewReplyNoticeFragment
+}) => {
   if (!notice.actors) {
     return null
   }

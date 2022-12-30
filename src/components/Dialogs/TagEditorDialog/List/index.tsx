@@ -9,11 +9,8 @@ import {
   Translate,
   UserDigest,
 } from '~/components'
-import {
-  TagMaintainers,
-  TagMaintainers_node_Tag_editors as TagEditor,
-} from '~/components/GQL/queries/__generated__/TagMaintainers'
 import TAG_MAINTAINERS from '~/components/GQL/queries/tagMaintainers'
+import { TagMaintainersQuery } from '~/gql/graphql'
 
 import styles from './styles.css'
 
@@ -37,7 +34,7 @@ interface Props {
 
   closeDialog: () => void
   toAddStep: () => void
-  toRemoveStep: (editor: TagEditor) => void
+  toRemoveStep: (editor: TagMaintainers_node_Tag_editors) => void
 }
 
 const RemoveButton = ({ remove }: { remove: () => void }) => (
@@ -57,9 +54,12 @@ const RemoveButton = ({ remove }: { remove: () => void }) => (
 )
 
 const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
-  const { data, loading, error } = useQuery<TagMaintainers>(TAG_MAINTAINERS, {
-    variables: { id },
-  })
+  const { data, loading, error } = useQuery<TagMaintainersQuery>(
+    TAG_MAINTAINERS,
+    {
+      variables: { id },
+    }
+  )
 
   if (loading) {
     return <Spinner />

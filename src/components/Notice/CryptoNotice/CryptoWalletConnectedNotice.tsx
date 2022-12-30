@@ -2,13 +2,17 @@ import gql from 'graphql-tag'
 
 import { TEST_ID } from '~/common/enums'
 import { Translate } from '~/components'
+import { CryptoWalletConnectedNoticeFragment } from '~/gql/graphql'
 
 import NoticeDate from '../NoticeDate'
 import NoticeTypeIcon from '../NoticeTypeIcon'
 import styles from '../styles.css'
-import { CryptoWalletConnectedNotice as NoticeType } from './__generated__/CryptoWalletConnectedNotice'
 
-const CryptoWalletConnectedNotice = ({ notice }: { notice: NoticeType }) => {
+const CryptoWalletConnectedNotice = ({
+  notice,
+}: {
+  notice: CryptoWalletConnectedNoticeFragment
+}) => {
   return (
     <section
       className="container"

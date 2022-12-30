@@ -2,13 +2,13 @@ import { IMAGE_PIXEL } from '~/common/enums'
 import { numAbbr } from '~/common/utils'
 import { Translate } from '~/components'
 import { Avatar } from '~/components/Avatar'
-import { FollowersTag } from '~/components/GQL/fragments/__generated__/FollowersTag'
 import tagFragments from '~/components/GQL/fragments/tag'
+import { FollowersTagFragment } from '~/gql/graphql'
 
 import styles from './styles.css'
 
 interface FollowersProps {
-  tag: FollowersTag
+  tag: FollowersTagFragment
 }
 
 const Followers = ({ tag }: FollowersProps) => {

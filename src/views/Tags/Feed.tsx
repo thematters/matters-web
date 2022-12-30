@@ -10,8 +10,8 @@ import {
   usePublicQuery,
   // useResponsive,
 } from '~/components'
+import { AllTagsHottestQuery } from '~/gql/graphql'
 
-import { AllTagsHottest } from './__generated__/AllTagsHottest'
 import { ALL_TAGS_HOTTEST } from './gql'
 // import SidebarTags from './Sidebar'
 import styles from './styles.css'
@@ -19,7 +19,7 @@ import styles from './styles.css'
 export type FeedType = 'recommended' | 'hottest'
 
 // export type FeedQuery = AllTagsRecommended | AllTagsHottest
-export type FeedQuery = AllTagsHottest
+export type FeedQuery = AllTagsHottestQuery
 
 interface Props {
   type: FeedType

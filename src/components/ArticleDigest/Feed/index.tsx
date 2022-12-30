@@ -4,10 +4,12 @@ import { TEST_ID } from '~/common/enums'
 import { stripHtml, toPath, UtmParams } from '~/common/utils'
 import { Card, CircleDigest, ResponsiveImage } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
+import {
+  ArticleDigestFeedArticlePrivateFragment,
+  ArticleDigestFeedArticlePublicFragment,
+} from '~/gql/graphql'
 
 import { ArticleDigestTitle } from '../Title'
-import { ArticleDigestFeedArticlePrivate } from './__generated__/ArticleDigestFeedArticlePrivate'
-import { ArticleDigestFeedArticlePublic } from './__generated__/ArticleDigestFeedArticlePublic'
 import FollowButton from './FollowButton'
 import FooterActions, { FooterActionsProps } from './FooterActions'
 import { fragments } from './gql'
@@ -21,8 +23,8 @@ export type ArticleDigestFeedControls = {
 }
 
 export type ArticleDigestFeedProps = {
-  article: ArticleDigestFeedArticlePublic &
-    Partial<ArticleDigestFeedArticlePrivate>
+  article: ArticleDigestFeedArticlePublicFragment &
+    Partial<ArticleDigestFeedArticlePrivateFragment>
   header?: React.ReactNode
 } & ArticleDigestFeedControls &
   FooterActionsProps &

@@ -15,10 +15,9 @@ import {
   Spinner,
   ViewerContext,
 } from '~/components'
-import { ExchangeRates } from '~/components/GQL/queries/__generated__/ExchangeRates'
-import { WalletBalance } from '~/components/GQL/queries/__generated__/WalletBalance'
 import EXCHANGE_RATES from '~/components/GQL/queries/exchangeRates'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
+import { ExchangeRatesQuery, WalletBalanceQuery } from '~/gql/graphql'
 
 import { FiatCurrencyBalance, LikeCoinBalance, USDTBalance } from './Balance'
 import PaymentPassword from './PaymentPassword'
@@ -34,7 +33,7 @@ const Wallet = () => {
   const currency = viewer.settings.currency
 
   const { data: exchangeRateDate, loading: exchangeRateLoading } =
-    useQuery<ExchangeRates>(EXCHANGE_RATES, {
+    useQuery<ExchangeRatesQuery>(EXCHANGE_RATES, {
       variables: {
         to: currency,
       },
@@ -55,11 +54,14 @@ const Wallet = () => {
     _matchesProperty('from', CURRENCY.LIKE)
   )
 
-  const { data, loading, refetch } = useQuery<WalletBalance>(WALLET_BALANCE, {
-    fetchPolicy: 'network-only',
-    errorPolicy: 'none',
-    skip: typeof window === 'undefined',
-  })
+  const { data, loading, refetch } = useQuery<WalletBalanceQuery>(
+    WALLET_BALANCE,
+    {
+      fetchPolicy: 'network-only',
+      errorPolicy: 'none',
+      skip: typeof window === 'undefined',
+    }
+  )
   const balanceHKD = data?.viewer?.wallet.balance.HKD || 0
   const canPayout = balanceHKD >= PAYMENT_MINIMAL_PAYOUT_AMOUNT.HKD
   const hasStripeAccount = !!data?.viewer?.wallet.stripeAccount?.id

@@ -10,8 +10,8 @@ import {
   Translate,
   useMutation,
 } from '~/components'
+import { ConnectStripeAccountMutation } from '~/gql/graphql'
 
-import { ConnectStripeAccount } from './__generated__/ConnectStripeAccount'
 import SelectCountry from './SelectCountry'
 
 interface Props {
@@ -32,9 +32,8 @@ const Request: React.FC<Props> = ({ nextStep, closeDialog }) => {
   const [country, setCountry] = useState<PAYOUT_COUNTRY>(
     PAYOUT_COUNTRY.HongKong
   )
-  const [connectStripeAccount, { loading }] = useMutation<ConnectStripeAccount>(
-    CONNECT_STRIPE_ACCOUNT
-  )
+  const [connectStripeAccount, { loading }] =
+    useMutation<ConnectStripeAccountMutation>(CONNECT_STRIPE_ACCOUNT)
 
   const request = async () => {
     try {

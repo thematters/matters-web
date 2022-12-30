@@ -24,12 +24,10 @@ import {
 } from '~/components'
 import { SearchSelectDialog } from '~/components/Dialogs/SearchSelectDialog'
 import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
-import { AddArticlesTags } from '~/components/GQL/mutations/__generated__/AddArticlesTags'
 import ADD_ARTICLES_TAGS from '~/components/GQL/mutations/addArticlesTags'
 import updateTagArticlesCount from '~/components/GQL/updates/tagArticlesCount'
+import { AddArticlesTagsMutation, TagFragmentFragment } from '~/gql/graphql'
 
-// import { TagDetailPublic_node_Tag } from '../__generated__/TagDetailPublic'
-import { TagFragment } from '../__generated__/TagFragment'
 import styles from './styles.css'
 
 interface DropdownActionsProps {
@@ -37,7 +35,7 @@ interface DropdownActionsProps {
   isOwner: boolean
   isEditor: boolean
   isMaintainer: boolean
-  tag: TagFragment // TagDetailPublic_node_Tag
+  tag: TagFragmentFragment
 }
 
 interface DialogProps {
@@ -159,7 +157,8 @@ const DropdownActions = (props: DropdownActionsProps) => {
   /**
    * Data
    */
-  const [add, { loading }] = useMutation<AddArticlesTags>(ADD_ARTICLES_TAGS)
+  const [add, { loading }] =
+    useMutation<AddArticlesTagsMutation>(ADD_ARTICLES_TAGS)
   const addArticlesToTag =
     (selected: boolean) => async (articles: SearchSelectNode[]) => {
       const articleIds = articles.map((article) => article.id)

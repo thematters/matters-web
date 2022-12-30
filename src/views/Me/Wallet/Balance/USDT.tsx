@@ -1,6 +1,5 @@
 import { useContext } from 'react'
 
-import { QuoteCurrency } from '@/__generated__/globalTypes'
 import { PATHS } from '~/common/enums'
 import { formatAmount } from '~/common/utils'
 import {
@@ -12,6 +11,7 @@ import {
   useBalanceUSDT,
   ViewerContext,
 } from '~/components'
+import { QuoteCurrency } from '~/gql/graphql'
 
 import styles from './styles.css'
 

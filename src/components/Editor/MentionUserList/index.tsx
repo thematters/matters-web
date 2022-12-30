@@ -1,5 +1,5 @@
 import { DropdownUserList } from '~/components'
-import { UserDigestMiniUser } from '~/components/UserDigest/Mini/__generated__/UserDigestMiniUser'
+import { UserDigestMiniUserFragment } from '~/gql/graphql'
 
 const MentionUserList = ({
   mentionLoading,
@@ -7,8 +7,8 @@ const MentionUserList = ({
   mentionUsers,
 }: {
   mentionLoading?: boolean
-  mentionSelection: (user: UserDigestMiniUser) => void
-  mentionUsers: UserDigestMiniUser[]
+  mentionSelection: (user: UserDigestMiniUserFragment) => void
+  mentionUsers: UserDigestMiniUserFragment[]
 }) => (
   <DropdownUserList
     loading={mentionLoading}

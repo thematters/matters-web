@@ -1,10 +1,7 @@
 import { DataProxy } from 'apollo-cache'
 
 import { ERROR_CODES } from '~/common/enums'
-import {
-  DraftAssets,
-  DraftAssets_node_Draft_assets as Asset,
-} from '~/views/Me/DraftDetail/__generated__/DraftAssets'
+import { DraftAssetsQuery } from '~/gql/graphql'
 import { DRAFT_ASSETS } from '~/views/Me/DraftDetail/gql'
 
 const update = ({
@@ -14,7 +11,7 @@ const update = ({
 }: {
   cache: DataProxy
   id: string
-  asset: Asset
+  asset: DraftAssets_node_Draft_assets
 }) => {
   try {
     if (!id) {
@@ -22,7 +19,7 @@ const update = ({
     }
 
     const variables = { id }
-    const cacheData = cache.readQuery<DraftAssets>({
+    const cacheData = cache.readQuery<DraftAssetsQuery>({
       query: DRAFT_ASSETS,
       variables,
     })

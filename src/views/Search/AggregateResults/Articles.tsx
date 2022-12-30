@@ -8,8 +8,8 @@ import {
   usePullToRefresh,
   useRoute,
 } from '~/components'
+import { SearchAggregateArticlesPublicQuery } from '~/gql/graphql'
 
-import { SearchAggregateArticlesPublic } from './__generated__/SearchAggregateArticlesPublic'
 import { SEARCH_AGGREGATE_ARTICLES_PUBLIC } from './gql'
 import styles from './styles.css'
 import ViewMoreButton from './ViewMoreButton'
@@ -23,7 +23,7 @@ const AggregateArticleResults = () => {
    */
   // public data
   const { data, loading, refetch } =
-    usePublicQuery<SearchAggregateArticlesPublic>(
+    usePublicQuery<SearchAggregateArticlesPublicQuery>(
       SEARCH_AGGREGATE_ARTICLES_PUBLIC,
       { variables: { key: q } }
     )

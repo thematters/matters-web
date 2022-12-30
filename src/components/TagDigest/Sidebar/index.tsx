@@ -13,12 +13,12 @@ import {
   Tag,
   TextIcon,
 } from '~/components'
+import { TagDigestSidebarTagFragment } from '~/gql/graphql'
 
-import { TagDigestSidebarTag } from './__generated__/TagDigestSidebarTag'
 import styles from './styles.css'
 
 export type TagDigestSidebarProps = {
-  tag: TagDigestSidebarTag
+  tag: TagDigestSidebarTagFragment
 } & CardProps
 
 const fragments = {

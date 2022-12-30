@@ -29,16 +29,10 @@ import {
   ViewerContext,
   ViewMoreButton,
 } from '~/components'
+import { LatestResponsesPublicQuery } from '~/gql/graphql'
 
 import ResponseArticle from '../ResponseArticle'
 import styles from '../styles.css'
-import { LatestResponsesPrivate_nodes_Comment } from './__generated__/LatestResponsesPrivate'
-import {
-  LatestResponsesPublic,
-  LatestResponsesPublic_article_Article,
-  LatestResponsesPublic_article_Article_responses_edges_node,
-  // LatestResponsesPublic_article_responses_edges_node,
-} from './__generated__/LatestResponsesPublic'
 import { LATEST_RESPONSES_PRIVATE, LATEST_RESPONSES_PUBLIC } from './gql'
 
 const RESPONSES_COUNT = 15
@@ -82,7 +76,7 @@ const LatestResponses = ({ id, lock }: { id: string; lock: boolean }) => {
     fetchMore,
     refetch: refetchPublic,
     client,
-  } = usePublicQuery<LatestResponsesPublic>(LATEST_RESPONSES_PUBLIC, {
+  } = usePublicQuery<LatestResponsesPublicQuery>(LATEST_RESPONSES_PUBLIC, {
     variables: {
       id,
       first: RESPONSES_COUNT,

@@ -18,8 +18,8 @@ import {
   Translate,
   ViewerContext,
 } from '~/components'
+import { DropdownActionsArticleFragment } from '~/gql/graphql'
 
-import { DropdownActionsArticle } from './__generated__/DropdownActionsArticle'
 import AppreciatorsButton from './AppreciatorsButton'
 import ArchiveArticle from './ArchiveArticle'
 import DonatorsButton from './DonatorsButton'
@@ -60,7 +60,7 @@ export interface DropdownActionsControls {
 }
 
 type DropdownActionsProps = {
-  article: DropdownActionsArticle
+  article: DropdownActionsArticleFragment
 } & DropdownActionsControls
 
 interface Controls {

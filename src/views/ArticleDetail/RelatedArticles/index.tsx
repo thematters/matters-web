@@ -9,12 +9,12 @@ import {
   Slides,
   Translate,
 } from '~/components'
+import { RelatedArticlesFragment } from '~/gql/graphql'
 
-import { RelatedArticles as RelatedArticlesType } from './__generated__/RelatedArticles'
 import styles from './styles.css'
 
 interface RelatedArticlesProps {
-  article: RelatedArticlesType
+  article: RelatedArticlesFragment
   inSidebar?: boolean
 }
 

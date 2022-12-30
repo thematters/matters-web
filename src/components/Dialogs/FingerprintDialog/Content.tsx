@@ -17,9 +17,8 @@ import {
   Translate,
   useMutation,
 } from '~/components'
+import { GatewaysQuery, RetryEditArticleMutation } from '~/gql/graphql'
 
-import { Gateways } from './__generated__/Gateways'
-import { RetryEditArticle } from './__generated__/RetryEditArticle'
 import ArticleSecret from './ArticleSecret'
 import SectionCard from './SectionCard'
 import styles from './styles.css'
@@ -74,12 +73,12 @@ const FingerprintDialogContent = ({
   refetch: () => any
 }) => {
   const { lang } = useContext(LanguageContext)
-  const { loading, data } = useQuery<Gateways>(GATEWAYS)
+  const { loading, data } = useQuery<GatewaysQuery>(GATEWAYS)
 
   const gateways = data?.official.gatewayUrls || []
 
   const [editArticle, { loading: retryPublishing }] =
-    useMutation<RetryEditArticle>(EDIT_ARTICLE)
+    useMutation<RetryEditArticleMutation>(EDIT_ARTICLE)
 
   const [timeCooling, setTimeCooling] = useState(false)
   let timer: any = null

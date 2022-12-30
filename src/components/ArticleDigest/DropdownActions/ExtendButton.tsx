@@ -17,9 +17,10 @@ import {
   useMutation,
   ViewerContext,
 } from '~/components'
-
-import { ExtendArticle } from './__generated__/ExtendArticle'
-import { ExtendButtonArticle } from './__generated__/ExtendButtonArticle'
+import {
+  ExtendArticleMutation,
+  ExtendButtonArticleFragment,
+} from '~/gql/graphql'
 
 const EXTEND_ARTICLE = gql`
   mutation ExtendArticle($title: String!, $collection: [ID]) {
@@ -39,11 +40,15 @@ const fragments = {
   `,
 }
 
-const ExtendButton = ({ article }: { article: ExtendButtonArticle }) => {
+const ExtendButton = ({
+  article,
+}: {
+  article: ExtendButtonArticleFragment
+}) => {
   const router = useRouter()
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
-  const [collectArticle] = useMutation<ExtendArticle>(EXTEND_ARTICLE, {
+  const [collectArticle] = useMutation<ExtendArticleMutation>(EXTEND_ARTICLE, {
     variables: {
       title: translate({ id: 'untitle', lang }),
       collection: [article.id],

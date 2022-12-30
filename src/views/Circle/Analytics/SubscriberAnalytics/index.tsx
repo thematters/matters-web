@@ -14,11 +14,11 @@ import {
   Translate,
   useRoute,
 } from '~/components'
+import { CircleSubscriberAnalyticsQuery } from '~/gql/graphql'
 import { MembersDialog } from '~/views/Circle/Profile/MembersDialog'
 
 import InfoTiles from '../InfoTiles'
 import SectionHead from '../SectionHead'
-import { CircleSubscriberAnalytics } from './__generated__/CircleSubscriberAnalytics'
 import { CIRCLE_SUBSCRIBER_ANALYTICS } from './gql'
 import styles from './styles.css'
 import globalStyles from './styles.global.css'
@@ -32,7 +32,7 @@ const Content = () => {
   const { getQuery } = useRoute()
   const name = getQuery('name')
 
-  const { data, error, loading } = useQuery<CircleSubscriberAnalytics>(
+  const { data, error, loading } = useQuery<CircleSubscriberAnalyticsQuery>(
     CIRCLE_SUBSCRIBER_ANALYTICS,
     {
       variables: { name },

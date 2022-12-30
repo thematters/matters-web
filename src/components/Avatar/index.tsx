@@ -6,17 +6,16 @@ import IMAGE_MATTERS_ARCHITECT_RING from '@/public/static/icons/architect-ring.s
 import IMAGE_CIVIC_LIKER_RING from '@/public/static/icons/civic-liker-ring.svg'
 import LOGBOOK from '@/public/static/images/logbook.gif'
 import { IconLogbookBadge16, ResponsiveImage } from '~/components'
+import { AvatarUserFragment, AvatarUserLogbookFragment } from '~/gql/graphql'
 
-import { AvatarUser } from './__generated__/AvatarUser'
-import { AvatarUserLogbook } from './__generated__/AvatarUserLogbook'
 import styles from './styles.css'
 
 export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxxl'
 
-export type AvatarLogbook = PartialDeep<AvatarUserLogbook>
+export type AvatarLogbook = PartialDeep<AvatarUserLogbookFragment>
 
 export interface AvatarProps {
-  user?: AvatarUser & AvatarLogbook
+  user?: AvatarUserFragment & AvatarLogbook
   size?: AvatarSize
   src?: string | null
   inEditor?: boolean

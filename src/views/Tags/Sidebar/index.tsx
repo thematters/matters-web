@@ -11,11 +11,8 @@ import {
   Translate,
   usePublicQuery,
 } from '~/components'
+import { AllTagsRecommendedSidebarQuery } from '~/gql/graphql'
 
-import {
-  AllTagsRecommendedSidebar,
-  AllTagsRecommendedSidebar_viewer_recommendation_tags_edges_node_recommended_edges,
-} from './__generated__/AllTagsRecommendedSidebar'
 import { ALL_TAGS_RECOMMENDED_SIDEBAR } from './gql'
 import styles from './styles.css'
 
@@ -23,22 +20,27 @@ interface TagsSidebarProps {
   inSidebar?: boolean
 }
 
-type FeedEdges =
-  AllTagsRecommendedSidebar_viewer_recommendation_tags_edges_node_recommended_edges
+type FeedEdges = NonNullable<
+  NonNullable<
+    NonNullable<
+      AllTagsRecommendedSidebarQuery['viewer']
+    >['recommendation']['tags']['edges']
+  >
+>[0]['node']['recommended']['edges']
 
 const TagsSidebarHeader = () => (
   <PageHeader title={<Translate id="hottest" />} is="h2" hasNoBorder />
 )
 
 const TagsSidebar: React.FC<TagsSidebarProps> = ({ inSidebar }) => {
-  const { data } = usePublicQuery<AllTagsRecommendedSidebar>(
+  const { data } = usePublicQuery<AllTagsRecommendedSidebarQuery>(
     ALL_TAGS_RECOMMENDED_SIDEBAR
   )
 
   const tag =
     data?.viewer?.recommendation.tags.edges &&
     data?.viewer?.recommendation.tags.edges[0]
-  const edges = _get(tag, 'node.recommended.edges', []) as FeedEdges[]
+  const edges = _get(tag, 'node.recommended.edges', []) as FeedEdges
 
   const onClick = (i: number, id: string) => () =>
     analytics.trackEvent('click_feed', {

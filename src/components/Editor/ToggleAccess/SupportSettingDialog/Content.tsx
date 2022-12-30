@@ -13,8 +13,7 @@ import {
   Translate,
   useRoute,
 } from '~/components'
-import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
-import { EditMetaDraft } from '~/views/Me/DraftDetail/__generated__/EditMetaDraft'
+import { ArticleDetailPublicQuery, EditMetaDraftFragment } from '~/gql/graphql'
 
 import styles from './styles.css'
 import SupportPreview from './SupportPreview'
@@ -23,8 +22,8 @@ import Tab, { TabType } from './Tab'
 interface FormProps {
   closeDialog: () => void
   onBack?: () => any
-  draft?: EditMetaDraft
-  article?: ArticleDetailPublic_article
+  draft?: EditMetaDraftFragment
+  article?: ArticleDetailPublicQuery['article']
   editSupportSetting: (
     requestForDonation: string | null,
     replyToDonator: string | null

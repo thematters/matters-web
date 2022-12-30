@@ -2,14 +2,17 @@ import { useContext } from 'react'
 
 import { translate } from '~/common/utils'
 import { Form, LanguageContext, Switch, Translate } from '~/components'
+import { ViewerNotificationGeneralSettingsQuery } from '~/gql/graphql'
 
-import { ViewerNotificationGeneralSettings_viewer_settings_notification } from './__generated__/ViewerNotificationGeneralSettings'
+type NotificationType = NonNullable<
+  NonNullable<
+    ViewerNotificationGeneralSettingsQuery['viewer']
+  >['settings']['notification']
+>
 
 interface CommentProps {
-  settings: ViewerNotificationGeneralSettings_viewer_settings_notification
-  toggle: (
-    type: keyof ViewerNotificationGeneralSettings_viewer_settings_notification
-  ) => void
+  settings: NotificationType
+  toggle: (type: keyof NotificationType) => void
 }
 
 const Comment = ({ settings, toggle }: CommentProps) => {

@@ -1,11 +1,10 @@
 import { Tag, Translate } from '~/components'
 import { SelectTag } from '~/components/SearchSelect/SearchingArea'
 
-import { EditorRecommendedTags_user_tags_edges_node as TagType } from '../__generated__/EditorRecommendedTags'
 import styles from './styles.css'
 
 type RecommendedTagsProps = {
-  tags: TagType[]
+  tags: EditorRecommendedTags_user_tags_edges_node[]
   onAddTag: (tag: SelectTag) => void
 }
 

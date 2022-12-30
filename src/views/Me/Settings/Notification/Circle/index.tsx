@@ -10,10 +10,12 @@ import {
   Translate,
   useMutation,
 } from '~/components'
+import {
+  UpdateViewerNotificationCircleMutation,
+  ViewerNotificationCircleSettingsQuery,
+} from '~/gql/graphql'
 
 import styles from '../styles.css'
-import { UpdateViewerNotificationCircle } from './__generated__/UpdateViewerNotificationCircle'
-import { ViewerNotificationCircleSettings } from './__generated__/ViewerNotificationCircleSettings'
 import MyBroadcastSettings from './MyBroadcast'
 import MyDiscussionSettings from './MyDiscussion'
 import MyManageSettings from './MyManage'
@@ -74,12 +76,13 @@ const UPDATE_VIEWER_NOTIFICATION_CIRCLE = gql`
 `
 
 const BaseNotificationSettings = () => {
-  const [update] = useMutation<UpdateViewerNotificationCircle>(
+  const [update] = useMutation<UpdateViewerNotificationCircleMutation>(
     UPDATE_VIEWER_NOTIFICATION_CIRCLE
   )
-  const { data, loading, refetch } = useQuery<ViewerNotificationCircleSettings>(
-    VIEWER_NOTIFICATION_CIRCLE_SETTINGS
-  )
+  const { data, loading, refetch } =
+    useQuery<ViewerNotificationCircleSettingsQuery>(
+      VIEWER_NOTIFICATION_CIRCLE_SETTINGS
+    )
   const settings = data?.viewer?.settings.notification
   const id = data?.viewer?.id
 

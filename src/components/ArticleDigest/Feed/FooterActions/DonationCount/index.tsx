@@ -1,11 +1,11 @@
 import { numAbbr } from '~/common/utils'
 import { IconDonate24, IconDotDivider, TextIcon } from '~/components'
+import { ActionsDonationCountArticleFragment } from '~/gql/graphql'
 
-import { ActionsDonationCountArticle } from './__generated__/ActionsDonationCountArticle'
 import { fragments } from './gql'
 
 interface DonationCountProps {
-  article: ActionsDonationCountArticle
+  article: ActionsDonationCountArticleFragment
   hasDivider: boolean
 }
 

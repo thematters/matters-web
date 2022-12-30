@@ -8,7 +8,6 @@ import {
   Translate,
   ViewerContext,
 } from '~/components'
-import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
 import {
   SetCollectionProps,
   SetCoverProps,
@@ -16,8 +15,11 @@ import {
   ToggleAccessProps,
 } from '~/components/Editor'
 import { EditorSettingsDialog } from '~/components/Editor/SettingsDialog'
+import {
+  DigestRichCirclePublicFragment,
+  EditMetaDraftFragment,
+} from '~/gql/graphql'
 
-import { EditMetaDraft } from '../__generated__/EditMetaDraft'
 import {
   useEditDraftAccess,
   useEditDraftCollection,
@@ -29,8 +31,8 @@ import {
 import ConfirmPublishDialogContent from './ConfirmPublishDialogContent'
 
 interface SettingsButtonProps {
-  draft: EditMetaDraft
-  ownCircles?: DigestRichCirclePublic[]
+  draft: EditMetaDraftFragment
+  ownCircles?: DigestRichCirclePublicFragment[]
   publishable?: boolean
 }
 

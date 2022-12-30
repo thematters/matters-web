@@ -1,9 +1,8 @@
 import { ADD_TOAST } from '~/common/enums'
 import { Dialog, Translate, useMutation } from '~/components'
-import { UpdateTagSetting } from '~/components/GQL/mutations/__generated__/UpdateTagSetting'
 import UPDATE_TAG_SETTING from '~/components/GQL/mutations/updateTagSetting'
-import { TagMaintainers_node_Tag_editors as TagEditor } from '~/components/GQL/queries/__generated__/TagMaintainers'
 import updateTagMaintainers from '~/components/GQL/updates/tagMaintainers'
+import { UpdateTagSettingMutation } from '~/gql/graphql'
 
 import styles from './styles.css'
 
@@ -23,14 +22,14 @@ import styles from './styles.css'
  */
 interface Props {
   id: string
-  editor: TagEditor
+  editor: TagMaintainers_node_Tag_editors
 
   closeDialog: () => void
 }
 
 const TagRemoveEditor = ({ id, editor, closeDialog }: Props) => {
   const [update, { loading }] =
-    useMutation<UpdateTagSetting>(UPDATE_TAG_SETTING)
+    useMutation<UpdateTagSettingMutation>(UPDATE_TAG_SETTING)
 
   return (
     <>

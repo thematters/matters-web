@@ -10,13 +10,13 @@ import {
   Tooltip,
   Translate,
 } from '~/components'
+import { CircleContentAnalyticsArticleFragment } from '~/gql/graphql'
 
-import { CircleContentAnalyticsArticle } from './__generated__/CircleContentAnalyticsArticle'
 import { fragments } from './gql'
 import styles from './styles.css'
 
 interface CircleAnalyticsContentProps {
-  article: CircleContentAnalyticsArticle
+  article: CircleContentAnalyticsArticleFragment
   count: number
   index: number
 }

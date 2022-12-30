@@ -10,14 +10,16 @@ import {
   TextIcon,
   Translate,
 } from '~/components'
+import {
+  FollowingFeedRecommendCircleFooterPrivateFragment,
+  FollowingFeedRecommendCircleFooterPublicFragment,
+} from '~/gql/graphql'
 
-import { FollowingFeedRecommendCircleFooterPrivate } from './__generated__/FollowingFeedRecommendCircleFooterPrivate'
-import { FollowingFeedRecommendCircleFooterPublic } from './__generated__/FollowingFeedRecommendCircleFooterPublic'
 import styles from './styles.css'
 
 type Props = {
-  circle: FollowingFeedRecommendCircleFooterPublic &
-    Partial<FollowingFeedRecommendCircleFooterPrivate>
+  circle: FollowingFeedRecommendCircleFooterPublicFragment &
+    Partial<FollowingFeedRecommendCircleFooterPrivateFragment>
 }
 
 const fragments = {

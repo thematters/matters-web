@@ -7,13 +7,17 @@ import {
   useFeatures,
 } from '~/components'
 import { CircleDigest } from '~/components/CircleDigest'
+import {
+  UserProfileUserPrivateQuery,
+  UserProfileUserPublicQuery,
+} from '~/gql/graphql'
 
-import { UserProfileUserPrivate_user_ownCircles } from '../__generated__/UserProfileUserPrivate'
-import { UserProfileUserPublic_user_ownCircles } from '../__generated__/UserProfileUserPublic'
 import styles from './styles.css'
 
-type CircleWidgetCircle = UserProfileUserPublic_user_ownCircles &
-  Partial<UserProfileUserPrivate_user_ownCircles>
+type CircleWidgetCircle = NonNullable<
+  UserProfileUserPublicQuery['user']
+>['ownCircles'] &
+  Partial<NonNullable<UserProfileUserPrivateQuery['user']>['ownCircles']>
 
 type CircleWidgetProps = {
   circles: CircleWidgetCircle[]

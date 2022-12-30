@@ -4,7 +4,7 @@ import _remove from 'lodash/remove'
 import _some from 'lodash/some'
 
 import { ERROR_CODES } from '~/common/enums'
-import { ArticleDetailPublic } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
+import { ArticleDetailPublicQuery } from '~/gql/graphql'
 import { ARTICLE_DETAIL_PUBLIC_BY_NODE_ID } from '~/views/ArticleDetail/gql'
 
 const update = ({
@@ -24,7 +24,7 @@ const update = ({
     // read from local cache
     const variables = { id }
     const cacheData = _cloneDeep(
-      cache.readQuery<ArticleDetailPublic>({
+      cache.readQuery<ArticleDetailPublicQuery>({
         query: ARTICLE_DETAIL_PUBLIC_BY_NODE_ID,
         variables,
       })

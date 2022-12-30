@@ -9,7 +9,6 @@ import {
   Translate,
 } from '~/components'
 
-import { EditProfileDialogUserPrivate_info_cryptoWallet_nfts } from '../__generated__/EditProfileDialogUserPrivate'
 import styles from './styles.css'
 
 type NFTCollectionProps = {

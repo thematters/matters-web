@@ -12,11 +12,12 @@ import {
   useStep,
   ViewerContext,
 } from '~/components'
-import { PayTo_payTo_transaction as PayToTx } from '~/components/GQL/mutations/__generated__/PayTo'
 import { UserDigest } from '~/components/UserDigest'
-import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
-
-import { UserDonationRecipient } from './__generated__/UserDonationRecipient'
+import {
+  ArticleDetailPublicQuery,
+  PayToMutation,
+  UserDonationRecipientFragment,
+} from '~/gql/graphql'
 
 type Step =
   | 'currencyChoice'
@@ -36,15 +37,15 @@ interface SetAmountCallbackValues {
 
 interface SetAmountOpenTabCallbackValues {
   window: Window
-  transaction: PayToTx
+  transaction: PayToMutation['payTo']['transaction']
 }
 
 interface DonationDialogProps {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
   completeCallback?: () => void
   defaultStep?: Step
-  recipient: UserDonationRecipient
-  article: ArticleDetailPublic_article
+  recipient: UserDonationRecipientFragment
+  article: ArticleDetailPublicQuery['article']
   targetId: string
 }
 
@@ -125,9 +126,10 @@ const BaseDonationDialog = ({
 
   const [amount, setAmount] = useState<number>(0)
   const [currency, setCurrency] = useState<CURRENCY>(CURRENCY.HKD)
-  const [payToTx, setPayToTx] = useState<Omit<PayToTx, '__typename'>>()
+  const [payToTx, setPayToTx] =
+    useState<Omit<PayToMutation['payTo']['transaction'], '__typename'>>()
   const [tabUrl, setTabUrl] = useState('')
-  const [tx, setTx] = useState<PayToTx>()
+  const [tx, setTx] = useState<PayToMutation['payTo']['transaction']>()
 
   const openDialog = () => {
     forward(defaultStep)

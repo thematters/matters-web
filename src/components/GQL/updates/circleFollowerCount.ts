@@ -1,8 +1,8 @@
 import { DataProxy } from 'apollo-cache'
 
 import { ERROR_CODES } from '~/common/enums'
-import { CircleFollowerCount } from '~/components/GQL/queries/__generated__/CircleFollowerCount'
 import CIRCLE_FOLLOWER_COUNT from '~/components/GQL/queries/circleFollowerCount'
+import { CircleFollowerCountQuery } from '~/gql/graphql'
 
 const update = ({
   cache,
@@ -19,7 +19,7 @@ const update = ({
     }
 
     const variables = { name }
-    const cacheData = cache.readQuery<CircleFollowerCount>({
+    const cacheData = cache.readQuery<CircleFollowerCountQuery>({
       query: CIRCLE_FOLLOWER_COUNT,
       variables,
     })

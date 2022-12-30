@@ -1,13 +1,14 @@
 import gql from 'graphql-tag'
 
-import { CommentNotice as NoticeType } from './__generated__/CommentNotice'
+import { CommentNoticeFragment } from '~/gql/graphql'
+
 import ArticleNewCommentNotice from './ArticleNewCommentNotice'
 import CircleNewBroadcastNotice from './CircleNewBroadcastNotice'
 import CommentMentionedYouNotice from './CommentMentionedYouNotice'
 import CommentPinnedNotice from './CommentPinnedNotice'
 import SubscribedArticleNewCommentNotice from './SubscribedArticleNewCommentNotice'
 
-const CommentNotice = ({ notice }: { notice: NoticeType }) => {
+const CommentNotice = ({ notice }: { notice: CommentNoticeFragment }) => {
   switch (notice.commentNoticeType) {
     case 'CommentMentionedYou':
       return <CommentMentionedYouNotice notice={notice} />

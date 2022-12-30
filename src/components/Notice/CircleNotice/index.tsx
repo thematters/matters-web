@@ -1,12 +1,13 @@
 import gql from 'graphql-tag'
 
-import { CircleNotice as NoticeType } from './__generated__/CircleNotice'
+import { CircleNoticeFragment } from '~/gql/graphql'
+
 import CircleInvitationNotice from './CircleInvitationNotice'
 import CircleNewBroadcastComments from './CircleNewBroadcastComments'
 import CircleNewDiscussionComments from './CircleNewDiscussionComments'
 import CircleNewUserNotice from './CircleNewUserNotice'
 
-const CircleNotice = ({ notice }: { notice: NoticeType }) => {
+const CircleNotice = ({ notice }: { notice: CircleNoticeFragment }) => {
   switch (notice.circleNoticeType) {
     case 'CircleNewSubscriber':
       return <CircleNewUserNotice notice={notice} userType="subscriber" />

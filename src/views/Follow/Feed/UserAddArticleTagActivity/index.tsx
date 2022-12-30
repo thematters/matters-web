@@ -6,10 +6,10 @@ import {
   Tag,
   Translate,
 } from '~/components'
+import { UserAddArticleTagActivityFragment } from '~/gql/graphql'
 
 import UnfollowTagActionButton from '../DropdownActions/UnfollowTag'
 import FeedHead from '../FollowingFeedHead'
-import { UserAddArticleTagActivity as Activity } from './__generated__/UserAddArticleTagActivity'
 import { fragments } from './gql'
 
 const UserAddArticleTagActivity = ({
@@ -18,7 +18,7 @@ const UserAddArticleTagActivity = ({
   createdAt,
   location,
   __typename,
-}: Activity & { location: number }) => (
+}: UserAddArticleTagActivityFragment & { location: number }) => (
   <>
     <ArticleDigestFeed
       header={
@@ -43,7 +43,7 @@ const UserAddArticleTagActivity = ({
       onClick={() => {
         analytics.trackEvent('click_feed', {
           type: 'following',
-          contentType: __typename,
+          contentType: __typename!,
           location,
           id: node.id,
         })
@@ -52,7 +52,7 @@ const UserAddArticleTagActivity = ({
     <CardExposureTracker
       location={location}
       feedType="following"
-      contentType={__typename}
+      contentType={__typename!}
       id={node.id}
     />
   </>

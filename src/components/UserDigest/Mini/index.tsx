@@ -4,8 +4,8 @@ import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import { LinkWrapper, Translate } from '~/components'
 import { Avatar, AvatarProps, AvatarSize } from '~/components/Avatar'
+import { UserDigestMiniUserFragment } from '~/gql/graphql'
 
-import { UserDigestMiniUser } from './__generated__/UserDigestMiniUser'
 import { fragments } from './gql'
 import styles from './styles.css'
 
@@ -22,7 +22,7 @@ import styles from './styles.css'
  */
 
 export type UserDigestMiniProps = {
-  user: UserDigestMiniUser
+  user: UserDigestMiniUserFragment
 
   avatarSize?: Extract<AvatarSize, 'xs' | 'sm' | 'md' | 'lg'>
   textSize?: 'xs' | 'sm-s' | 'sm' | 'md-s' | 'md'

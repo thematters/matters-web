@@ -18,16 +18,18 @@ import {
   useResponsive,
   ViewerContext,
 } from '~/components'
-import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
 import { TextIcon } from '~/components/TextIcon'
+import {
+  RelatedDonationsQuery,
+  UserDonationRecipientFragment,
+} from '~/gql/graphql'
 
-import { RelatedDonations } from './__generated__/RelatedDonations'
 import { RELATED_DONATIONS } from './gql'
 import styles from './styles.css'
 
 interface Props {
   callback?: () => void
-  recipient: UserDonationRecipient
+  recipient: UserDonationRecipientFragment
   targetId: string
 }
 
@@ -41,9 +43,8 @@ const Complete: React.FC<Props> = ({ callback, recipient, targetId }) => {
   /**
    * Data Fetching
    */
-  const { data, refetch, networkStatus } = usePublicQuery<RelatedDonations>(
-    RELATED_DONATIONS,
-    {
+  const { data, refetch, networkStatus } =
+    usePublicQuery<RelatedDonationsQuery>(RELATED_DONATIONS, {
       notifyOnNetworkStatusChange: true,
       variables: {
         senderUserName: viewer.userName,
@@ -52,8 +53,7 @@ const Complete: React.FC<Props> = ({ callback, recipient, targetId }) => {
         first: PAGE_COUNT,
         random: DEFAULT_RANDOM,
       },
-    }
-  )
+    })
   const isLoading = networkStatus === NetworkStatus.loading
   const isRefetching = networkStatus === NetworkStatus.setVariables
 

@@ -2,7 +2,6 @@ import gql from 'graphql-tag'
 import dynamic from 'next/dynamic'
 import { useContext, useEffect } from 'react'
 
-import { ArticleAccessType } from '@/__generated__/globalTypes'
 import {
   Dialog,
   Spinner,
@@ -10,15 +9,14 @@ import {
   usePublicQuery,
   ViewerContext,
 } from '~/components'
-
 import {
-  ArticleFingerprintPublic,
-  ArticleFingerprintPublic_article_Article,
-} from './__generated__/ArticleFingerprintPublic'
-import { FingerprintArticle } from './__generated__/FingerprintArticle'
+  ArticleAccessType,
+  ArticleFingerprintPublicQuery,
+  FingerprintArticleFragment,
+} from '~/gql/graphql'
 
 interface FingerprintDialogProps {
-  article: FingerprintArticle
+  article: FingerprintArticleFragment
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
@@ -65,18 +63,16 @@ const BaseFingerprintDialog = ({
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
   const viewer = useContext(ViewerContext)
 
-  const { data, loading, refetch } = usePublicQuery<ArticleFingerprintPublic>(
-    ArticleFingerprintGQL,
-    {
+  const { data, loading, refetch } =
+    usePublicQuery<ArticleFingerprintPublicQuery>(ArticleFingerprintGQL, {
       variables: { id: article.id },
       skip: true, // skip first call
-    }
-  )
+    })
 
   // only show secret when viewer is author and access type is paywall
   const showSecret =
     viewer.id === article.author.id &&
-    article?.access.type === ArticleAccessType.paywall
+    article?.access.type === ArticleAccessType.Paywall
 
   useEffect(() => {
     if (show) {

@@ -2,14 +2,13 @@ import gql from 'graphql-tag'
 import Link from 'next/link'
 
 import { toPath } from '~/common/utils'
-
-import { NoticeCircleName as NoticeCircleNameType } from './__generated__/NoticeCircleName'
+import { NoticeCircleNameFragment } from '~/gql/graphql'
 
 const NoticeCircleName = ({
   circle,
   path,
 }: {
-  circle: NoticeCircleNameType | null
+  circle: NoticeCircleNameFragment | null
   path?: { href: string; pathname?: string }
 }) => {
   if (!circle) {

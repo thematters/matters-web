@@ -1,6 +1,6 @@
-import { TransactionState } from '@/__generated__/globalTypes'
 import { formatAmount } from '~/common/utils'
 import { TextIcon } from '~/components'
+import { TransactionState } from '~/gql/graphql'
 
 import styles from './styles.css'
 

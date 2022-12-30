@@ -24,13 +24,15 @@ import {
   useResponsive,
   ViewerContext,
 } from '~/components'
+import {
+  CommentBarArticlePrivateFragment,
+  CommentBarArticlePublicFragment,
+} from '~/gql/graphql'
 
-import { CommentBarArticlePrivate } from './__generated__/CommentBarArticlePrivate'
-import { CommentBarArticlePublic } from './__generated__/CommentBarArticlePublic'
 import styles from './styles.css'
 
-type CommentBarArticle = CommentBarArticlePublic &
-  Partial<CommentBarArticlePrivate>
+type CommentBarArticle = CommentBarArticlePublicFragment &
+  Partial<CommentBarArticlePrivateFragment>
 
 interface CommentBarProps {
   article: CommentBarArticle

@@ -1,9 +1,6 @@
 import { UserDigest } from '~/components'
+import { DigestTransactionFragment } from '~/gql/graphql'
 
-import {
-  DigestTransaction_recipient as Recipient,
-  DigestTransaction_sender as Sender,
-} from '../__generated__/DigestTransaction'
 import styles from './styles.css'
 
 /***
@@ -17,7 +14,10 @@ import styles from './styles.css'
  * ```
  */
 interface DonatorProps {
-  user: Sender | Recipient | null
+  user:
+    | DigestTransactionFragment['recipient']
+    | DigestTransactionFragment['sender']
+    | null
 }
 
 const Donator = ({ user }: DonatorProps) => {

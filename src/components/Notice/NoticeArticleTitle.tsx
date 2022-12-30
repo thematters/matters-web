@@ -3,14 +3,13 @@ import Link from 'next/link'
 
 import { toPath } from '~/common/utils'
 import { ArticleDigestTitle } from '~/components/ArticleDigest'
-
-import { NoticeArticleTitle as NoticeArticleTitleType } from './__generated__/NoticeArticleTitle'
+import { NoticeArticleTitleFragment } from '~/gql/graphql'
 
 const NoticeArticleTitle = ({
   article,
   isBlock = false,
 }: {
-  article: NoticeArticleTitleType | null
+  article: NoticeArticleTitleFragment | null
   isBlock?: boolean
 }) => {
   if (!article) {

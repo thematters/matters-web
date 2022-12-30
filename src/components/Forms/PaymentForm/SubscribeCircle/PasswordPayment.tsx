@@ -14,17 +14,19 @@ import {
   useMutation,
   withIcon,
 } from '~/components'
-import { DigestRichCirclePrivate } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePrivate'
-import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
+import {
+  DigestRichCirclePrivateFragment,
+  DigestRichCirclePublicFragment,
+  SubscribeCircleMutation,
+} from '~/gql/graphql'
 
-import { SubscribeCircle as SubscribeCircleType } from './__generated__/SubscribeCircle'
 import { SUBSCRIBE_CIRCLE } from './gql'
 import Head from './Head'
 import Hint from './Hint'
 import styles from './styles.css'
 
 interface FormProps {
-  circle: DigestRichCirclePublic & DigestRichCirclePrivate
+  circle: DigestRichCirclePublicFragment & DigestRichCirclePrivateFragment
   cardLast4: string
   submitCallback: () => void
   switchToCardPayment: () => void
@@ -45,7 +47,7 @@ const Confirm: React.FC<FormProps> = ({
   const formId = 'subscirbe-circle-form'
 
   const { lang } = useContext(LanguageContext)
-  const [subscribeCircle] = useMutation<SubscribeCircleType>(
+  const [subscribeCircle] = useMutation<SubscribeCircleMutation>(
     SUBSCRIBE_CIRCLE,
     undefined,
     { showToast: false }

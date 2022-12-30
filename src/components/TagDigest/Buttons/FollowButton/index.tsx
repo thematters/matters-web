@@ -1,11 +1,12 @@
 import gql from 'graphql-tag'
 
-import { TagDigestFollowButtonPrivate } from './__generated__/TagDigestFollowButtonPrivate'
+import { TagDigestFollowButtonPrivateFragment } from '~/gql/graphql'
+
 import Follow from './Follow'
 import Unfollow from './Unfollow'
 
 interface Props {
-  tag: Partial<TagDigestFollowButtonPrivate>
+  tag: Partial<TagDigestFollowButtonPrivateFragment>
 }
 
 const fragments = {

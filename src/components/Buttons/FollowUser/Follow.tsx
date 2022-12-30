@@ -15,23 +15,25 @@ import {
   useMutation,
   ViewerContext,
 } from '~/components'
-import { ToggleFollowUser } from '~/components/GQL/mutations/__generated__/ToggleFollowUser'
 import TOGGLE_FOLLOW_USER from '~/components/GQL/mutations/toggleFollowUser'
 import updateUserFollowerCount from '~/components/GQL/updates/userFollowerCount'
 import updateViewerFolloweeCount from '~/components/GQL/updates/viewerFolloweeCount'
+import {
+  FollowButtonUserPrivateFragment,
+  ToggleFollowUserMutation,
+} from '~/gql/graphql'
 
-import { FollowButtonUserPrivate } from './__generated__/FollowButtonUserPrivate'
 import { FollowUserButtonSize } from './index'
 
 interface FollowUserProps {
-  user: Partial<FollowButtonUserPrivate>
+  user: Partial<FollowButtonUserPrivateFragment>
   size: FollowUserButtonSize
 }
 
 const FollowUser = ({ user, size }: FollowUserProps) => {
   const viewer = useContext(ViewerContext)
 
-  const [follow] = useMutation<ToggleFollowUser>(TOGGLE_FOLLOW_USER, {
+  const [follow] = useMutation<ToggleFollowUserMutation>(TOGGLE_FOLLOW_USER, {
     variables: { id: user.id, enabled: true },
     optimisticResponse:
       !_isNil(user.id) && !_isNil(user.isFollower)

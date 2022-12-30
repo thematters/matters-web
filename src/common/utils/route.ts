@@ -14,7 +14,7 @@ interface ArticleArgs {
   slug: string
   mediaHash: string | null
   author: {
-    userName: string | null
+    userName?: string | null
   }
 }
 

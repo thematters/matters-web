@@ -2,8 +2,8 @@ import gql from 'graphql-tag'
 
 import PUBLISH_IMAGE from '@/public/static/images/publish-1.svg'
 import { Dialog, Translate, useMutation, useRoute } from '~/components'
+import { PublishArticleMutation } from '~/gql/graphql'
 
-import { PublishArticle } from './__generated__/PublishArticle'
 import styles from './styles.css'
 
 interface ConfirmPublishDialogContentProps {
@@ -25,7 +25,7 @@ const ConfirmPublishDialogContent: React.FC<
 > = ({ onBack, closeDialog }) => {
   const { getQuery } = useRoute()
   const id = getQuery('draftId')
-  const [publish] = useMutation<PublishArticle>(PUBLISH_ARTICLE)
+  const [publish] = useMutation<PublishArticleMutation>(PUBLISH_ARTICLE)
 
   const onPublish = async () => {
     publish({ variables: { id } })

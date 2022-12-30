@@ -1,10 +1,15 @@
 import gql from 'graphql-tag'
 
-import { TransactionNotice as NoticeType } from './__generated__/TransactionNotice'
+import { TransactionNoticeFragment } from '~/gql/graphql'
+
 import PaymentPayoutNotice from './PaymentPayoutNotice'
 import PaymentReceivedDonationNotice from './PaymentReceivedDonationNotice'
 
-const TransactionNotice = ({ notice }: { notice: NoticeType }) => {
+const TransactionNotice = ({
+  notice,
+}: {
+  notice: TransactionNoticeFragment
+}) => {
   switch (notice.txNoticeType) {
     case 'PaymentPayout':
       return <PaymentPayoutNotice notice={notice} />

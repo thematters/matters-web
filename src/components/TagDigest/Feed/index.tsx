@@ -13,12 +13,12 @@ import {
   Tag,
   TextIcon,
 } from '~/components'
+import { TagDigestFeedTagFragment } from '~/gql/graphql'
 
-import { TagDigestFeedTag } from './__generated__/TagDigestFeedTag'
 import styles from './styles.css'
 
 export type TagDigestFeedProps = {
-  tag: TagDigestFeedTag
+  tag: TagDigestFeedTagFragment
 } & CardProps
 
 const fragments = {

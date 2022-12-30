@@ -11,16 +11,12 @@ import {
   Translate,
   useRoute,
 } from '~/components'
+import {
+  CircleContentAnalyticsPaywallQuery,
+  CircleContentAnalyticsPublicQuery,
+} from '~/gql/graphql'
 
 import SectionHead from '../SectionHead'
-import {
-  CircleContentAnalyticsPaywall,
-  CircleContentAnalyticsPaywall_circle_analytics_content_paywall,
-} from './__generated__/CircleContentAnalyticsPaywall'
-import {
-  CircleContentAnalyticsPublic,
-  CircleContentAnalyticsPublic_circle_analytics_content_public,
-} from './__generated__/CircleContentAnalyticsPublic'
 import ContentDigest from './ContentDigest'
 import CircleContentAnalyticsTabs, {
   CircleContentAnalyticsType,
@@ -28,7 +24,9 @@ import CircleContentAnalyticsTabs, {
 import { CIRCLE_CONTENT_ANALYTICS } from './gql'
 import styles from './styles.css'
 
-type FeedType = CircleContentAnalyticsPaywall | CircleContentAnalyticsPublic
+type FeedType =
+  | CircleContentAnalyticsPaywallQuery
+  | CircleContentAnalyticsPublicQuery
 
 type FeedContent =
   | CircleContentAnalyticsPaywall_circle_analytics_content_paywall

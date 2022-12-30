@@ -17,8 +17,8 @@ import {
   Transaction,
   Translate,
 } from '~/components'
+import { MeTransactionsQuery } from '~/gql/graphql'
 
-import { MeTransactions } from './__generated__/MeTransactions'
 import { Currency, CurrencySwitch } from './CurrencySwitch'
 import styles from './styles.css'
 
@@ -72,7 +72,7 @@ interface BaseTransactionsProps {
 }
 
 const BaseTransactions = ({ currency, purpose }: BaseTransactionsProps) => {
-  const { data, loading, fetchMore, refetch } = useQuery<MeTransactions>(
+  const { data, loading, fetchMore, refetch } = useQuery<MeTransactionsQuery>(
     ME_TRANSACTIONS,
     {
       variables: {

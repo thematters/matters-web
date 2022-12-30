@@ -7,8 +7,8 @@ import {
   IconNavFollowingActive24,
   ViewerContext,
 } from '~/components'
-import { UnreadFollowing } from '~/components/GQL/queries/__generated__/UnreadFollowing'
 import UNREAD_FOLLOWING from '~/components/GQL/queries/unreadFollowing'
+import { UnreadFollowingQuery } from '~/gql/graphql'
 
 import styles from './styles.css'
 
@@ -18,11 +18,14 @@ interface FollowUnreadIconProps {
 
 const FollowUnreadIcon: React.FC<FollowUnreadIconProps> = ({ active }) => {
   const viewer = useContext(ViewerContext)
-  const { data, startPolling } = useQuery<UnreadFollowing>(UNREAD_FOLLOWING, {
-    errorPolicy: 'none',
-    fetchPolicy: 'network-only',
-    skip: !viewer.isAuthed || typeof window === 'undefined',
-  })
+  const { data, startPolling } = useQuery<UnreadFollowingQuery>(
+    UNREAD_FOLLOWING,
+    {
+      errorPolicy: 'none',
+      fetchPolicy: 'network-only',
+      skip: !viewer.isAuthed || typeof window === 'undefined',
+    }
+  )
 
   // FIXME: https://github.com/apollographql/apollo-client/issues/3775
   useEffect(() => {

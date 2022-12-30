@@ -1,8 +1,8 @@
 import { DataProxy } from 'apollo-cache'
 
 import { ERROR_CODES } from '~/common/enums'
-import { TagFollowers } from '~/components/GQL/queries/__generated__/TagFollowers'
 import TAG_FOLLOWERS from '~/components/GQL/queries/tagFollowers'
+import { TagFollowersQuery } from '~/gql/graphql'
 
 const update = ({
   cache,
@@ -21,7 +21,7 @@ const update = ({
     }
 
     const variables = { id }
-    const cacheData = cache.readQuery<TagFollowers>({
+    const cacheData = cache.readQuery<TagFollowersQuery>({
       query: TAG_FOLLOWERS,
       variables,
     })

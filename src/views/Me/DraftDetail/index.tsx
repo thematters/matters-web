@@ -14,11 +14,13 @@ import {
   useRoute,
 } from '~/components'
 import { QueryError, useMutation } from '~/components/GQL'
-import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
+import {
+  DraftDetailQueryQuery,
+  SetDraftContentMutation,
+  SingleFileUploadMutation,
+} from '~/gql/graphql'
 
-import { DraftDetailQuery } from './__generated__/DraftDetailQuery'
-import { SetDraftContent } from './__generated__/SetDraftContent'
 import BottomBar from './BottomBar'
 import { DRAFT_DETAIL, SET_CONTENT } from './gql'
 import PublishState from './PublishState'
@@ -36,17 +38,20 @@ const DraftDetail = () => {
   const { getQuery } = useRoute()
   const id = getQuery('draftId')
 
-  const [setContent] = useMutation<SetDraftContent>(SET_CONTENT)
-  const [singleFileUpload] = useMutation<SingleFileUpload>(UPLOAD_FILE)
+  const [setContent] = useMutation<SetDraftContentMutation>(SET_CONTENT)
+  const [singleFileUpload] = useMutation<SingleFileUploadMutation>(UPLOAD_FILE)
   const [saveStatus, setSaveStatus] = useState<
     'saved' | 'saving' | 'saveFailed'
   >()
   const [hasValidSummary, setHasValidSummary] = useState<boolean>(true)
 
-  const { data, loading, error } = useQuery<DraftDetailQuery>(DRAFT_DETAIL, {
-    variables: { id },
-    fetchPolicy: 'network-only',
-  })
+  const { data, loading, error } = useQuery<DraftDetailQueryQuery>(
+    DRAFT_DETAIL,
+    {
+      variables: { id },
+      fetchPolicy: 'network-only',
+    }
+  )
   const draft = (data?.node?.__typename === 'Draft' && data.node) || undefined
   const ownCircles = data?.viewer?.ownCircles || undefined
 

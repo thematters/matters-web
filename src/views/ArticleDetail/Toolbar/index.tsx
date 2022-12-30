@@ -10,19 +10,21 @@ import {
 import DropdownActions, {
   DropdownActionsControls,
 } from '~/components/ArticleDigest/DropdownActions'
+import {
+  ArticleDetailPublicQuery,
+  ToolbarArticlePrivateFragment,
+  ToolbarArticlePublicFragment,
+} from '~/gql/graphql'
 
-import { ArticleDetailPublic_article } from '../__generated__/ArticleDetailPublic'
 import AppreciationButton from '../AppreciationButton'
-import { ToolbarArticlePrivate } from './__generated__/ToolbarArticlePrivate'
-import { ToolbarArticlePublic } from './__generated__/ToolbarArticlePublic'
 import Appreciators from './Appreciators'
 import CommentBar from './CommentBar'
 import DonationButton from './DonationButton'
 import styles from './styles.css'
 
 export type ToolbarProps = {
-  article: ToolbarArticlePublic & Partial<ToolbarArticlePrivate>
-  articleDetails: ArticleDetailPublic_article
+  article: ToolbarArticlePublicFragment & Partial<ToolbarArticlePrivateFragment>
+  articleDetails: ArticleDetailPublicQuery['article']
   translated: boolean
   translatedLanguage?: string | null
   privateFetched: boolean

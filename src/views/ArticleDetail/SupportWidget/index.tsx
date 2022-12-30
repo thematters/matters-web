@@ -21,12 +21,8 @@ import {
   useEventListener,
   ViewerContext,
 } from '~/components'
+import { ArticleDetailPublicQuery, HasDonatedQuery } from '~/gql/graphql'
 
-import { ArticleDetailPublic_article } from '../__generated__/ArticleDetailPublic'
-import {
-  HasDonated,
-  HasDonated_article_Article,
-} from './__generated__/HasDonated'
 import Animation from './Animation'
 import Donators from './Donators'
 import { fragments, HAS_DONATED } from './gql'
@@ -34,7 +30,7 @@ import styles from './styles.css'
 import SupportButton from './SupportButton'
 
 interface DonationProps {
-  article: ArticleDetailPublic_article
+  article: ArticleDetailPublicQuery['article']
 }
 
 const SupportWidget = ({ article }: DonationProps) => {
@@ -52,7 +48,7 @@ const SupportWidget = ({ article }: DonationProps) => {
   const [
     getHasDonated,
     { data: hasDonatedData, loading, refetch: hasDonatedRefetch },
-  ] = useLazyQuery<HasDonated>(HAS_DONATED, {
+  ] = useLazyQuery<HasDonatedQuery>(HAS_DONATED, {
     fetchPolicy: 'network-only',
   })
 

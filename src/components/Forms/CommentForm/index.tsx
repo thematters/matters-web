@@ -12,10 +12,9 @@ import {
   Translate,
   useMutation,
 } from '~/components'
-import { PutComment } from '~/components/GQL/mutations/__generated__/PutComment'
 import PUT_COMMENT from '~/components/GQL/mutations/putComment'
-import { CommentDraft } from '~/components/GQL/queries/__generated__/CommentDraft'
 import COMMENT_DRAFT from '~/components/GQL/queries/commentDraft'
+import { CommentDraftQuery, PutCommentMutation } from '~/gql/graphql'
 
 import styles from './styles.css'
 
@@ -61,11 +60,11 @@ export const CommentForm: React.FC<CommentFormProps> = ({
   }-${replyToId || 0}`
   const formId = `comment-form-${commentDraftId}`
 
-  const { data, client } = useQuery<CommentDraft>(COMMENT_DRAFT, {
+  const { data, client } = useQuery<CommentDraftQuery>(COMMENT_DRAFT, {
     variables: { id: commentDraftId },
   })
 
-  const [putComment] = useMutation<PutComment>(PUT_COMMENT)
+  const [putComment] = useMutation<PutCommentMutation>(PUT_COMMENT)
   const [isSubmitting, setSubmitting] = useState(false)
   const [content, setContent] = useState(
     data?.commentDraft.content || defaultContent || ''

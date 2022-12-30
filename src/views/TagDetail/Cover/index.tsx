@@ -3,12 +3,12 @@ import gql from 'graphql-tag'
 
 import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
 import { Cover, Tag } from '~/components'
+import { CoverTagFragment } from '~/gql/graphql'
 
-import { CoverTag } from './__generated__/CoverTag'
 import styles from './styles.css'
 
 interface TagCoverProps {
-  tag: CoverTag
+  tag: CoverTagFragment
 }
 
 const TagCover = ({ tag }: TagCoverProps) => {

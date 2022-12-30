@@ -10,15 +10,15 @@ import {
   Translate,
   useMutation,
 } from '~/components'
-import { UserLogout } from '~/components/GQL/mutations/__generated__/UserLogout'
 import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
+import { UserLogoutMutation } from '~/gql/graphql'
 
 interface NavMenuBottomProps {
   isInSideDrawerNav?: boolean
 }
 
 const NavMenuBottom: React.FC<NavMenuBottomProps> = ({ isInSideDrawerNav }) => {
-  const [logout] = useMutation<UserLogout>(USER_LOGOUT, undefined, {
+  const [logout] = useMutation<UserLogoutMutation>(USER_LOGOUT, undefined, {
     showToast: false,
   })
   const onClickLogout = async () => {

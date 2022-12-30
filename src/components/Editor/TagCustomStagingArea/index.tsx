@@ -4,11 +4,8 @@ import { useContext } from 'react'
 import { Spinner, Translate, usePublicQuery, ViewerContext } from '~/components'
 import { SelectTag } from '~/components/SearchSelect/SearchingArea'
 import { CustomStagingAreaProps } from '~/components/SearchSelect/StagingArea'
+import { EditorRecommendedTagsQuery } from '~/gql/graphql'
 
-import {
-  EditorRecommendedTags,
-  EditorRecommendedTags_user_tags_edges_node as TagType,
-} from './__generated__/EditorRecommendedTags'
 import { EDITOR_RECOMMENDED_TAGS } from './gql'
 import RecommendedTags from './RecommendedTags'
 import SelectedTags from './SelectedTags'
@@ -25,7 +22,7 @@ const TagCustomStagingArea = ({
    * Data Fetching
    */
   // public data
-  const { data, loading } = usePublicQuery<EditorRecommendedTags>(
+  const { data, loading } = usePublicQuery<EditorRecommendedTagsQuery>(
     EDITOR_RECOMMENDED_TAGS,
     {
       variables: { userName: viewer.userName },
@@ -79,7 +76,9 @@ const TagCustomStagingArea = ({
     <section className="customTagArea">
       {hasTag && (
         <SelectedTags
-          tags={tags.map((t) => t.node as TagType)}
+          tags={tags.map(
+            (t) => t.node as EditorRecommendedTags_user_tags_edges_node
+          )}
           onRemoveTag={removeTag}
         />
       )}

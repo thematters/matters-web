@@ -6,11 +6,8 @@ import { ADD_TOAST } from '~/common/enums'
 import editorStyles from '~/common/styles/utils/content.comment.css'
 import themeStyles from '~/common/styles/vendors/quill.bubble.css'
 import { LanguageContext } from '~/components'
-import {
-  SearchUsers,
-  SearchUsers_search_edges_node_User,
-} from '~/components/GQL/queries/__generated__/SearchUsers'
 import SEARCH_USERS from '~/components/GQL/queries/searchUsers'
+import { SearchUsersQuery } from '~/gql/graphql'
 
 import MentionUserList from '../MentionUserList'
 
@@ -21,7 +18,8 @@ interface Props {
 }
 
 const CommentEditor: React.FC<Props> = ({ content, update, placeholder }) => {
-  const [search, { data, loading }] = useLazyQuery<SearchUsers>(SEARCH_USERS)
+  const [search, { data, loading }] =
+    useLazyQuery<SearchUsersQuery>(SEARCH_USERS)
   const { lang } = useContext(LanguageContext)
 
   const mentionUsers = (data?.search.edges || []).map(

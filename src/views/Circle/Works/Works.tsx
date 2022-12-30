@@ -16,9 +16,9 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
+import { CircleWorksPublicQuery } from '~/gql/graphql'
 
 import CircleDetailTabs from '../CircleDetailTabs'
-import { CircleWorksPublic } from './__generated__/CircleWorksPublic'
 import { CIRCLE_WORKS_PRIVATE, CIRCLE_WORKS_PUBLIC } from './gql'
 
 const CircleDetailWorks = () => {
@@ -37,7 +37,7 @@ const CircleDetailWorks = () => {
     fetchMore,
     refetch: refetchPublic,
     client,
-  } = usePublicQuery<CircleWorksPublic>(CIRCLE_WORKS_PUBLIC, {
+  } = usePublicQuery<CircleWorksPublicQuery>(CIRCLE_WORKS_PUBLIC, {
     variables: { name },
   })
 
@@ -47,7 +47,7 @@ const CircleDetailWorks = () => {
   const { edges, pageInfo } = circle?.articles || {}
 
   // private data
-  const loadPrivate = (publicData?: CircleWorksPublic) => {
+  const loadPrivate = (publicData?: CircleWorksPublicQuery) => {
     if (!viewer.isAuthed || !publicData) {
       return
     }

@@ -5,7 +5,6 @@ import {
   useDialogSwitch, // useRoute,
   useStep,
 } from '~/components'
-import { TagMaintainers_node_Tag_editors as TagEditor } from '~/components/GQL/queries/__generated__/TagMaintainers'
 
 import TagEditorList from './List'
 import TagRemoveEditor from './Remove'
@@ -37,7 +36,8 @@ const BaseDialog = ({ id, children }: Props) => {
     openDialog: baseOpenDialog,
     closeDialog,
   } = useDialogSwitch(true)
-  const [removeEditor, setRemoveEditor] = useState<TagEditor>()
+  const [removeEditor, setRemoveEditor] =
+    useState<TagMaintainers_node_Tag_editors>()
   const { currStep, forward, reset } = useStep<Step>(defaultStep)
 
   const openDialog = () => {

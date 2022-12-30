@@ -5,13 +5,13 @@ import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import { Card, CardProps, ResponsiveImage } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
+import { ArticleDigestSidebarArticleFragment } from '~/gql/graphql'
 
 import { ArticleDigestTitle, ArticleDigestTitleTextSize } from '../Title'
-import { ArticleDigestSidebarArticle } from './__generated__/ArticleDigestSidebarArticle'
 import styles from './styles.css'
 
 export type ArticleDigestSidebarProps = {
-  article: ArticleDigestSidebarArticle
+  article: ArticleDigestSidebarArticleFragment
 
   titleTextSize?: ArticleDigestTitleTextSize
   hasBackground?: boolean

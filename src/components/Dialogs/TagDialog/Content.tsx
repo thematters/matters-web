@@ -27,8 +27,8 @@ import {
   Translate,
   useMutation,
 } from '~/components'
+import { PutTagMutation } from '~/gql/graphql'
 
-import { PutTag } from './__generated__/PutTag'
 import styles from './styles.css'
 
 const PUT_TAG = gql`
@@ -82,7 +82,7 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
   closeDialog,
 }) => {
   const router = useRouter()
-  const [update] = useMutation<PutTag>(PUT_TAG, undefined, {
+  const [update] = useMutation<PutTagMutation>(PUT_TAG, undefined, {
     showToast: false,
   })
   const { lang } = useContext(LanguageContext)

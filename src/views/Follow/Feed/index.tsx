@@ -14,8 +14,8 @@ import {
   Spinner,
   Translate,
 } from '~/components'
+import { FollowingFeedQuery } from '~/gql/graphql'
 
-import { FollowingFeed as FollowingFeedType } from './__generated__/FollowingFeed'
 import { FOLLOWING_FEED } from './gql'
 import RecommendArticleActivity from './RecommendArticleActivity'
 import RecommendCircleActivity from './RecommendCircleActivity'
@@ -28,7 +28,7 @@ import UserPublishArticleActivity from './UserPublishArticleActivity'
 
 const FollowingFeed = () => {
   const { data, loading, error, fetchMore, refetch } =
-    useQuery<FollowingFeedType>(FOLLOWING_FEED)
+    useQuery<FollowingFeedQuery>(FOLLOWING_FEED)
 
   if (loading) {
     return <Spinner />

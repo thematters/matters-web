@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 
 import { Translate } from '~/components'
+import { DonatorLabelCommentFragment } from '~/gql/graphql'
 
-import { DonatorLabelComment } from './__generated__/DonatorLabelComment'
 import styles from './styles.css'
 
 const fragments = {
@@ -14,7 +14,11 @@ const fragments = {
   `,
 }
 
-const DonatorLabel = ({ comment }: { comment: DonatorLabelComment }) => {
+const DonatorLabel = ({
+  comment,
+}: {
+  comment: DonatorLabelCommentFragment
+}) => {
   if (!comment.fromDonator) {
     return null
   }

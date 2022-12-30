@@ -1,22 +1,22 @@
 import _uniq from 'lodash/uniq'
 
+import { useImperativeQuery, useMutation } from '~/components/GQL'
 import {
   ArticleAccessType,
+  ArticleDigestDropdownArticleFragment,
   ArticleLicenseType,
-} from '@/__generated__/globalTypes'
-import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
-import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
-import { useImperativeQuery, useMutation } from '~/components/GQL'
-import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
+  DigestRichCirclePublicFragment,
+  DigestTagFragment,
+  DraftAssetsQuery,
+  EditMetaDraftFragment,
+  SetDraftAccessMutation,
+  SetDraftCollectionMutation,
+  SetDraftCoverMutation,
+  SetDraftPublishIscnMutation,
+  SetDraftTagsMutation,
+  SetSupportRequestReplyMutation,
+} from '~/gql/graphql'
 
-import { DraftAssets } from './__generated__/DraftAssets'
-import { EditMetaDraft } from './__generated__/EditMetaDraft'
-import { SetDraftAccess } from './__generated__/SetDraftAccess'
-import { SetDraftCollection } from './__generated__/SetDraftCollection'
-import { SetDraftCover } from './__generated__/SetDraftCover'
-import { SetDraftPublishISCN } from './__generated__/SetDraftPublishISCN'
-import { SetDraftTags } from './__generated__/SetDraftTags'
-import { SetSupportRequestReply } from './__generated__/SetSupportRequestReply'
 import {
   DRAFT_ASSETS,
   SET_ACCESS,
@@ -29,13 +29,14 @@ import {
 /**
  * Hooks for editing draft cover, tags and collection
  */
-export const useEditDraftCover = (draft: EditMetaDraft) => {
+export const useEditDraftCover = (draft: EditMetaDraftFragment) => {
   const draftId = draft.id
-  const refetch = useImperativeQuery<DraftAssets>(DRAFT_ASSETS, {
+  const refetch = useImperativeQuery<DraftAssetsQuery>(DRAFT_ASSETS, {
     variables: { id: draft.id },
     fetchPolicy: 'network-only',
   })
-  const [update, { loading: saving }] = useMutation<SetDraftCover>(SET_COVER)
+  const [update, { loading: saving }] =
+    useMutation<SetDraftCoverMutation>(SET_COVER)
 
   const edit = (asset?: any) =>
     update({
@@ -45,11 +46,12 @@ export const useEditDraftCover = (draft: EditMetaDraft) => {
   return { edit, saving, refetch }
 }
 
-export const useEditDraftTags = (draft: EditMetaDraft) => {
+export const useEditDraftTags = (draft: EditMetaDraftFragment) => {
   const draftId = draft.id
-  const [updateTags, { loading: saving }] = useMutation<SetDraftTags>(SET_TAGS)
+  const [updateTags, { loading: saving }] =
+    useMutation<SetDraftTagsMutation>(SET_TAGS)
 
-  const edit = (newTags: DigestTag[]) =>
+  const edit = (newTags: DigestTagFragment[]) =>
     updateTags({
       variables: {
         id: draftId,
@@ -60,12 +62,12 @@ export const useEditDraftTags = (draft: EditMetaDraft) => {
   return { edit, saving }
 }
 
-export const useEditDraftCollection = (draft: EditMetaDraft) => {
+export const useEditDraftCollection = (draft: EditMetaDraftFragment) => {
   const draftId = draft.id
   const [setCollection, { loading: saving }] =
-    useMutation<SetDraftCollection>(SET_COLLECTION)
+    useMutation<SetDraftCollectionMutation>(SET_COLLECTION)
 
-  const edit = (newArticles: ArticleDigestDropdownArticle[]) =>
+  const edit = (newArticles: ArticleDigestDropdownArticleFragment[]) =>
     setCollection({
       variables: {
         id: draftId,
@@ -77,12 +79,12 @@ export const useEditDraftCollection = (draft: EditMetaDraft) => {
 }
 
 export const useEditDraftAccess = (
-  draft: EditMetaDraft,
-  circle?: DigestRichCirclePublic
+  draft: EditMetaDraftFragment,
+  circle?: DigestRichCirclePublicFragment
 ) => {
   const draftId = draft.id
   const [setAccess, { loading: saving }] =
-    useMutation<SetDraftAccess>(SET_ACCESS)
+    useMutation<SetDraftAccessMutation>(SET_ACCESS)
 
   const edit = async (
     addToCircle: boolean,
@@ -95,19 +97,18 @@ export const useEditDraftAccess = (
         circle: (addToCircle && circle?.id) || null,
         license,
         accessType: paywalled
-          ? ArticleAccessType.paywall
-          : ArticleAccessType.public,
+          ? ArticleAccessType.Paywall
+          : ArticleAccessType.Public,
       },
     })
 
   return { edit, saving }
 }
 
-export const useEditSupportSetting = (draft?: EditMetaDraft) => {
+export const useEditSupportSetting = (draft?: EditMetaDraftFragment) => {
   const draftId = draft?.id
-  const [update, { loading: saving }] = useMutation<SetSupportRequestReply>(
-    SET_SUPPORT_REQUEST_REPLY
-  )
+  const [update, { loading: saving }] =
+    useMutation<SetSupportRequestReplyMutation>(SET_SUPPORT_REQUEST_REPLY)
 
   const edit = (
     requestForDonation: string | null,
@@ -123,10 +124,10 @@ export const useEditSupportSetting = (draft?: EditMetaDraft) => {
   return { edit, saving }
 }
 
-export const useEditDraftPublishISCN = (draft: EditMetaDraft) => {
+export const useEditDraftPublishISCN = (draft: EditMetaDraftFragment) => {
   const draftId = draft.id
   const [update, { loading: saving }] =
-    useMutation<SetDraftPublishISCN>(SET_PUBLISH_ISCN)
+    useMutation<SetDraftPublishIscnMutation>(SET_PUBLISH_ISCN)
 
   const edit = (iscnPublish: boolean) =>
     update({

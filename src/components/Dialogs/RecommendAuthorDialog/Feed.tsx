@@ -12,8 +12,8 @@ import {
   UserDigest,
   ViewerContext,
 } from '~/components'
+import { RecommendAuthorsQuery } from '~/gql/graphql'
 
-import { RecommendAuthors } from './__generated__/RecommendAuthors'
 import { RECOMMEND_AUTHORS } from './gql'
 import styles from './styles.css'
 
@@ -26,14 +26,15 @@ interface Props {
 const Feed = ({ type }: Props) => {
   const viewer = useContext(ViewerContext)
 
-  const { data, loading, error, refetch } = usePublicQuery<RecommendAuthors>(
-    RECOMMEND_AUTHORS,
-    {
-      notifyOnNetworkStatusChange: true,
-      variables: { random: 0, type },
-    },
-    { publicQuery: !viewer.isAuthed }
-  )
+  const { data, loading, error, refetch } =
+    usePublicQuery<RecommendAuthorsQuery>(
+      RECOMMEND_AUTHORS,
+      {
+        notifyOnNetworkStatusChange: true,
+        variables: { random: 0, type },
+      },
+      { publicQuery: !viewer.isAuthed }
+    )
   const edges = data?.viewer?.recommendation.authors.edges
 
   const shuffle = () => refetch({ random: _random(0, 12), type })

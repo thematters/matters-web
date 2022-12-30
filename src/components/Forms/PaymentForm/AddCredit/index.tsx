@@ -33,12 +33,11 @@ import {
   Translate,
   useMutation,
 } from '~/components'
-import { WalletBalance } from '~/components/GQL/queries/__generated__/WalletBalance'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
+import { AddCreditMutation, WalletBalanceQuery } from '~/gql/graphql'
 
 import ConfirmTable from '../ConfirmTable'
 import StripeCheckout from '../StripeCheckout'
-import { AddCredit as AddCreditType } from './__generated__/AddCredit'
 
 interface FormProps {
   defaultAmount?: number
@@ -76,11 +75,11 @@ const BaseAddCredit: React.FC<FormProps> = ({
   const stripe = useStripe()
   const elements = useElements()
   const { lang } = useContext(LanguageContext)
-  const [addCredit] = useMutation<AddCreditType>(ADD_CREDIT, undefined, {
+  const [addCredit] = useMutation<AddCreditMutation>(ADD_CREDIT, undefined, {
     showToast: false,
   })
 
-  const { data: balanceData } = useQuery<WalletBalance>(WALLET_BALANCE, {
+  const { data: balanceData } = useQuery<WalletBalanceQuery>(WALLET_BALANCE, {
     fetchPolicy: 'network-only',
   })
   const balance = balanceData?.viewer?.wallet.balance.HKD || 0
@@ -131,7 +130,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
       /**
        * Create Transaction
        */
-      let data: AddCreditType | undefined
+      let data: AddCreditMutation | undefined
 
       try {
         const txResult = await addCredit({ variables: { input: { amount } } })

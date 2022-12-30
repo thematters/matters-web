@@ -3,9 +3,10 @@ import gql from 'graphql-tag'
 import { ADD_TOAST } from '~/common/enums'
 import { Dialog, Translate, useDialogSwitch, useMutation } from '~/components'
 import updateUserArticles from '~/components/GQL/updates/userArticles'
-
-import { ArchiveArticle } from './__generated__/ArchiveArticle'
-import { ArchiveArticleArticle } from './__generated__/ArchiveArticleArticle'
+import {
+  ArchiveArticleArticleFragment,
+  ArchiveArticleMutation,
+} from '~/gql/graphql'
 
 const ARCHIVE_ARTICLE = gql`
   mutation ArchiveArticle($id: ID!) {
@@ -18,7 +19,7 @@ const ARCHIVE_ARTICLE = gql`
 `
 
 interface ArchiveArticleDialogProps {
-  article: ArchiveArticleArticle
+  article: ArchiveArticleArticleFragment
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
@@ -28,25 +29,28 @@ const ArchiveArticleDialog = ({
 }: ArchiveArticleDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
-  const [archiveArticle] = useMutation<ArchiveArticle>(ARCHIVE_ARTICLE, {
-    variables: { id: article.id },
-    optimisticResponse: {
-      editArticle: {
-        id: article.id,
-        articleState: 'archived' as any,
-        sticky: false,
-        __typename: 'Article',
+  const [archiveArticle] = useMutation<ArchiveArticleMutation>(
+    ARCHIVE_ARTICLE,
+    {
+      variables: { id: article.id },
+      optimisticResponse: {
+        editArticle: {
+          id: article.id,
+          articleState: 'archived' as any,
+          sticky: false,
+          __typename: 'Article',
+        },
       },
-    },
-    update: (cache) => {
-      updateUserArticles({
-        cache,
-        articleId: article.id,
-        userName: article.author.userName,
-        type: 'archive',
-      })
-    },
-  })
+      update: (cache) => {
+        updateUserArticles({
+          cache,
+          articleId: article.id,
+          userName: article.author.userName,
+          type: 'archive',
+        })
+      },
+    }
+  )
 
   const onArchive = async () => {
     await archiveArticle()

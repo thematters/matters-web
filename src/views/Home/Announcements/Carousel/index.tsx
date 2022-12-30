@@ -10,14 +10,14 @@ import {
   ResponsiveImage,
   useCarousel,
 } from '~/components'
+import { VisibleAnnouncementsQuery } from '~/gql/graphql'
 
-import { VisibleAnnouncements_official_announcements as VisibleAnnouncementsType } from '../__generated__/VisibleAnnouncements'
 import DropdownActions, { DropdownActionsProps } from '../DropdownActions'
 import Dot from './Dot'
 import styles from './styles.css'
 
 type CarouselProps = {
-  items: VisibleAnnouncementsType[]
+  items: VisibleAnnouncementsQuery['official']['announcements']
   hide: () => void
 } & DropdownActionsProps
 
@@ -112,7 +112,7 @@ const Carousel = ({
           <DropdownActions type={type} setType={setType} {...controlsProps} />
 
           <section className="dots">
-            {items.map((_, index) => (
+            {items?.map((_, index) => (
               <Dot
                 key={index}
                 index={index}
@@ -138,7 +138,7 @@ const Carousel = ({
         onClickCapture={onCaptureClick}
       >
         <div className="container">
-          {items.map((item) => {
+          {items?.map((item) => {
             if (!item.cover) {
               return null
             }

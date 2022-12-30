@@ -9,13 +9,13 @@ import {
   TextIcon,
   Translate,
 } from '~/components'
-import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
+import { DigestTagFragment } from '~/gql/graphql'
 
 import styles from './styles.css'
 
 interface CreateTagProps {
-  tag: DigestTag
-  onClick: (tag: DigestTag) => void
+  tag: DigestTagFragment
+  onClick: (tag: DigestTagFragment) => void
 }
 
 const CreateTag: React.FC<CreateTagProps> = ({ tag, onClick }) => {

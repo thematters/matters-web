@@ -11,8 +11,8 @@ import {
   Translate,
   useMutation,
 } from '~/components'
-import { SendVerificationCode } from '~/components/GQL/mutations/__generated__/SendVerificationCode'
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
+import { SendVerificationCodeMutation } from '~/gql/graphql'
 
 interface FormProps {
   defaultEmail?: string
@@ -43,9 +43,13 @@ const Request: React.FC<FormProps> = ({
   const titleId = isForget ? 'resetPassword' : 'changePassword'
   const redirectPath = isForget ? '/forget' : '/me/settings/change-password'
 
-  const [sendCode] = useMutation<SendVerificationCode>(SEND_CODE, undefined, {
-    showToast: false,
-  })
+  const [sendCode] = useMutation<SendVerificationCodeMutation>(
+    SEND_CODE,
+    undefined,
+    {
+      showToast: false,
+    }
+  )
 
   const {
     values,

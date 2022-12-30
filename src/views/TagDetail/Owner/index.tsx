@@ -10,12 +10,11 @@ import {
   UserDigest,
   ViewerContext,
 } from '~/components'
+import { TagFragmentFragment } from '~/gql/graphql'
 
-// import { TagDetailPublic_node_Tag } from '../__generated__/TagDetailPublic'
-import { TagFragment } from '../__generated__/TagFragment'
 import styles from './styles.css'
 
-const Owner = ({ tag }: { tag: TagFragment }) => {
+const Owner = ({ tag }: { tag: TagFragmentFragment }) => {
   const viewer = useContext(ViewerContext)
 
   const forbid = () => {

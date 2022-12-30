@@ -24,14 +24,9 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
+import { UserCommentsPublicQuery, UserIdUserQuery } from '~/gql/graphql'
 
 import UserTabs from '../UserTabs'
-import {
-  UserCommentsPublic,
-  UserCommentsPublic_node_User_commentedArticles_edges_node_comments_edges_node,
-  UserCommentsPublic_node_User_commentedArticles_edges_node_comments_edges_node_node_Article,
-} from './__generated__/UserCommentsPublic'
-import { UserIdUser } from './__generated__/UserIdUser'
 import { USER_COMMENTS_PRIVATE, USER_COMMENTS_PUBLIC, USER_ID } from './gql'
 
 type CommentedArticleComment =
@@ -43,7 +38,7 @@ const UserComments = () => {
   const { getQuery } = useRoute()
   const userName = getQuery('name')
 
-  const { data, loading, error } = useQuery<UserIdUser>(USER_ID, {
+  const { data, loading, error } = useQuery<UserIdUserQuery>(USER_ID, {
     variables: { userName },
   })
   const user = data?.user
@@ -94,7 +89,7 @@ const UserComments = () => {
   )
 }
 
-const BaseUserComments = ({ user }: UserIdUser) => {
+const BaseUserComments = ({ user }: UserIdUserQuery) => {
   const viewer = useContext(ViewerContext)
 
   /**
@@ -108,7 +103,7 @@ const BaseUserComments = ({ user }: UserIdUser) => {
     fetchMore,
     refetch: refetchPublic,
     client,
-  } = usePublicQuery<UserCommentsPublic>(USER_COMMENTS_PUBLIC, {
+  } = usePublicQuery<UserCommentsPublicQuery>(USER_COMMENTS_PUBLIC, {
     variables: { id: user?.id },
   })
 
@@ -121,7 +116,7 @@ const BaseUserComments = ({ user }: UserIdUser) => {
     {}
 
   // private data
-  const loadPrivate = (publicData?: UserCommentsPublic) => {
+  const loadPrivate = (publicData?: UserCommentsPublicQuery) => {
     if (!viewer.isAuthed || !publicData || !user) {
       return
     }
