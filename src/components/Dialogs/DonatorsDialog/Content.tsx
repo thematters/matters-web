@@ -2,12 +2,12 @@ import { useQuery } from '@apollo/react-hooks'
 
 import {
   Dialog,
-  InfiniteList,
+  InfiniteScroll,
+  List,
   QueryError,
   RowRendererProps,
   Spinner,
   Translate,
-  useResponsive,
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 
@@ -22,6 +22,7 @@ import {
   ArticleDonators_article_Article_donations_edges,
 } from './__generated__/ArticleDonators'
 import { DonatorDialogArticle } from './__generated__/DonatorDialogArticle'
+// import { List } from 'react-virtualized'
 
 interface DonatorsDialogContentProps {
   article: DonatorDialogArticle
@@ -32,7 +33,6 @@ const DonatorsDialogContent = ({
   article,
   closeDialog,
 }: DonatorsDialogContentProps) => {
-  const isSmallUp = useResponsive('sm-up')
   const { data, loading, error, fetchMore } = useQuery<ArticleDonators>(
     ARTICLE_DONATORS,
     { variables: { id: article.id } }
@@ -80,7 +80,7 @@ const DonatorsDialogContent = ({
     )
   }
 
-  const loadMore = (callback: () => void) => {
+  const loadMore = () => {
     analytics.trackEvent('load_more', {
       type: 'donators',
       location: edges.length,
@@ -88,7 +88,6 @@ const DonatorsDialogContent = ({
     return fetchMore({
       variables: { after: pageInfo.endCursor },
       updateQuery: (previousResult, { fetchMoreResult }) => {
-        callback()
         return mergeConnections({
           oldData: previousResult,
           newData: fetchMoreResult,
@@ -101,19 +100,6 @@ const DonatorsDialogContent = ({
   const totalCount =
     (data?.article as ArticleDonators_article_Article)?.donations.totalCount ||
     0
-
-  // estimate a safe default height
-  const calcContentMaxHeight = () => {
-    if (window) {
-      const dialogMaxHeight = window.innerHeight * 0.01 * 90
-      const head = 1.5 + (isSmallUp ? 2 + 0.5 : 0.75 * 2)
-      const spacing = 0.75 * 2
-      return dialogMaxHeight - (head + spacing + 1) * 16
-    }
-    return
-  }
-
-  const defaultListMaxHeight = calcContentMaxHeight()
 
   return (
     <>
@@ -129,17 +115,24 @@ const DonatorsDialogContent = ({
       />
 
       <Dialog.Content>
-        <div className="dialog-donator-list">
-          <InfiniteList
-            data={edges}
-            defaultListMaxHeight={defaultListMaxHeight}
-            defaultRowHeight={70}
-            loader={<Spinner />}
-            loadMore={loadMore}
-            renderer={ListRow}
-            totalCount={totalCount}
-          />
-        </div>
+        <InfiniteScroll
+          loader={<Spinner />}
+          loadMore={loadMore}
+          hasNextPage={pageInfo.hasNextPage}
+        >
+          {edges.map(({ node, cursor }, i) => (
+            <List.Item key={cursor}>
+              <div className="dialog-donator-list">
+                <ListRow
+                  index={i}
+                  key={i}
+                  datum={{ node, cursor, __typename: 'UserEdge' }}
+                />
+              </div>
+            </List.Item>
+          ))}
+        </InfiniteScroll>
+
         <style jsx>{styles}</style>
       </Dialog.Content>
     </>
