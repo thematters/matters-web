@@ -51,7 +51,7 @@ const SideFooter = () => {
         <a
           href="https://github.com/thematters/developer-resource"
           target="_blank"
-          rel="noopener"
+          rel="noreferrer"
         >
           <Translate id="openCommunity" />
         </a>
@@ -59,7 +59,7 @@ const SideFooter = () => {
         <a
           href="https://github.com/thematters/developer-resource/blob/master/SECURITY.md"
           target="_blank"
-          rel="noopener"
+          rel="noreferrer"
         >
           <Translate id="bugBountyProgram" />
         </a>

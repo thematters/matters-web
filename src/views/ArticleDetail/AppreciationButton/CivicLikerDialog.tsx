@@ -66,6 +66,7 @@ const CivicLikerDialog = ({
                 className="u-link-green"
                 href={EXTERNAL_LINKS.SUPER_LIKE}
                 target="_blank"
+                rel="noreferrer"
               >
                 Super Like
               </a>
@@ -101,6 +102,7 @@ const CivicLikerDialog = ({
               className="u-link-green"
               href={EXTERNAL_LINKS.CIVIC_LIKER_SUPPORT}
               target="_blank"
+              rel="noreferrer"
             >
               <Translate
                 zh_hant="讚賞公民福利"

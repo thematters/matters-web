@@ -77,7 +77,7 @@ const SearchTag = () => {
         {edges.map(
           ({ node, cursor }, i) =>
             node.__typename === 'Tag' && (
-              <Fragment>
+              <Fragment key={i}>
                 <List.Item key={cursor}>
                   <Card
                     spacing={['base', 'base']}

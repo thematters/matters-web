@@ -75,6 +75,7 @@ const ForwardChildren = forwardRef(
     <>{children({ openDialog, type, ref })}</>
   )
 )
+ForwardChildren.displayName = 'ForwardChildren'
 
 const BaseDropdownDialog = ({
   dropdown,
@@ -140,7 +141,9 @@ const BaseDropdownDialog = ({
           </FocusLock>
         }
       >
-        <ForwardChildren openDialog={toggle} type={type} children={children} />
+        <ForwardChildren openDialog={toggle} type={type}>
+          {children}
+        </ForwardChildren>
       </Dropdown>
     )
   }

@@ -133,7 +133,12 @@ const Features = () => {
                 />
               </p>
               <p>
-                <a className="u-link-green" href={likeCoinLink} target="_blank">
+                <a
+                  className="u-link-green"
+                  href={likeCoinLink}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   <Translate
                     zh_hant={zh_hant.likecoin}
                     zh_hans={zh_hans.likecoin}
@@ -169,6 +174,7 @@ const Features = () => {
                   className="u-link-green"
                   href={communityLink}
                   target="_blank"
+                  rel="noreferrer"
                 >
                   <Translate
                     zh_hant={zh_hant.examples}

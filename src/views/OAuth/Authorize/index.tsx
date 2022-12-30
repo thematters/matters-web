@@ -81,6 +81,7 @@ const BaseOAuthAuthorize = () => {
             className="u-link-green"
             href={website || undefined}
             target="_blank"
+            rel="noreferrer"
           >
             {name}
           </a>

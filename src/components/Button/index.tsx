@@ -291,3 +291,5 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> =
       )
     }
   )
+
+Button.displayName = 'Button'

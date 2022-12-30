@@ -62,6 +62,7 @@ const BaseHelp = () => {
             className="u-link-green"
             href="mailto:ask@matters.news"
             target="_blank"
+            rel="noreferrer"
           >
             ask@matters.news
           </a>

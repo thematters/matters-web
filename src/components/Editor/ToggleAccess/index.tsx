@@ -185,7 +185,7 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
 
         <p className="hint">
           <Translate id="publishToISCNHint_1" />
-          <a href="https://iscn.io/" target="_blank">
+          <a href="https://iscn.io/" target="_blank" rel="noreferrer">
             ISCN
           </a>
           <Translate id="publishToISCNHint_2" />

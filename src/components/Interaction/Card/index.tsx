@@ -218,3 +218,5 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
     )
   }
 )
+
+Card.displayName = 'Card'

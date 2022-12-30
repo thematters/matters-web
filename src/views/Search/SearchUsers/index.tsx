@@ -114,7 +114,7 @@ const SearchUser = () => {
         {edges.map(
           ({ node, cursor }, i) =>
             node.__typename === 'User' && (
-              <Fragment>
+              <Fragment key={i}>
                 <List.Item key={cursor}>
                   <UserDigest.Rich
                     user={node}

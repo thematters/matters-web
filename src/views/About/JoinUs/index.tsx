@@ -30,6 +30,7 @@ const JoinUs = () => {
                 <a
                   href="https://matterslab.notion.site/Matters-Lab-Job-Board-Public-4221b899fdca4c91b46119d64ab23daf"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   <Translate
                     zh_hant="加入 Matters 團隊"

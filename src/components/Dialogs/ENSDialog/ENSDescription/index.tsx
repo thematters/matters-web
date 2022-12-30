@@ -26,7 +26,7 @@ const ENSDescription = () => {
         <p className="reference">
           <Translate id="moreEnsInfo" />
           &nbsp;
-          <a href={EXTERNAL_LINKS.ENS_DOCS} target="_blank">
+          <a href={EXTERNAL_LINKS.ENS_DOCS} target="_blank" rel="noreferrer">
             <Translate zh_hans="官方文档" zh_hant="官方文檔" en="docs" />
           </a>
           <Translate en="." zh_hans="" zh_hant="" />

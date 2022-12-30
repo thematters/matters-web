@@ -111,6 +111,7 @@ const RssFeedDialogContent = ({
               className="u-link-green"
               href={EXTERNAL_LINKS.PLANET}
               target="_blank"
+              rel="noreferrer"
             >
               Planet
             </a>

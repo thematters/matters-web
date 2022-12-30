@@ -165,7 +165,12 @@ const FingerprintDialogContent = ({
 
               return (
                 <li key={url}>
-                  <a href={gatewayUrl} target="_blank" className="gateway-url">
+                  <a
+                    href={gatewayUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="gateway-url"
+                  >
                     {hostname}
                     <IconExternalLink16 />
                   </a>
@@ -242,7 +247,7 @@ const FingerprintDialogContent = ({
           warning={!iscnId}
           right={
             iscnId ? (
-              <a href={iscnLinkUrl(iscnId)} target="_blank">
+              <a href={iscnLinkUrl(iscnId)} target="_blank" rel="noreferrer">
                 <IconExternalLink16 color="grey-darker" />
               </a>
             ) : isAuthor ? (

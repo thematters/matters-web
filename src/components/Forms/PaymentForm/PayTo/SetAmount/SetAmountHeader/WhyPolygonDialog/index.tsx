@@ -62,6 +62,7 @@ const WhyPolygonDialog = ({ children }: WhyPolygonDialogProps) => {
                 className="u-link-green"
                 href={GUIDE_LINKS.payment[lang]}
                 target="_blank"
+                rel="noreferrer"
               >
                 <Translate
                   zh_hant="教學指南"
