@@ -267,7 +267,7 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> =
       // link
       if (href) {
         return (
-          <Link href={href} replace={replace}>
+          <Link href={href} replace={replace} legacyBehavior>
             <a {...containerProps}>
               <div className="content" style={contentStyle}>
                 <div className="hotarea" style={hotAreaStyle} />
@@ -276,7 +276,7 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> =
               <style jsx>{styles}</style>
             </a>
           </Link>
-        )
+        );
       }
 
       // button

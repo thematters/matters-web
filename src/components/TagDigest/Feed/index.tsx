@@ -103,7 +103,7 @@ const Feed = ({ tag, ...cardProps }: TagDigestFeedProps) => {
           <ul className="articles">
             {articles?.map(({ node, cursor }) => (
               <li key={cursor}>
-                <Link {...toPath({ page: 'articleDetail', article: node })}>
+                <Link {...toPath({ page: 'articleDetail', article: node })} legacyBehavior>
                   <a className="title" onClick={captureClicks}>
                     {node.title}
                   </a>
@@ -113,7 +113,7 @@ const Feed = ({ tag, ...cardProps }: TagDigestFeedProps) => {
           </ul>
 
           <section className="cover">
-            <Link {...path}>
+            <Link {...path} legacyBehavior>
               <a>
                 <ResponsiveImage
                   url={tag.cover || IMAGE_TAG_COVER.src}
@@ -127,7 +127,7 @@ const Feed = ({ tag, ...cardProps }: TagDigestFeedProps) => {
         <style jsx>{styles}</style>
       </section>
     </Card>
-  )
+  );
 }
 
 Feed.fragments = fragments

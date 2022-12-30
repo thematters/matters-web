@@ -145,7 +145,7 @@ const BaseOAuthAuthorize = () => {
               <Translate zh_hant="不是你？" zh_hans="不是你？" en="Not you?" />
             </span>
 
-            <Link {...appendTarget(PATHS.LOGIN, true)}>
+            <Link {...appendTarget(PATHS.LOGIN, true)} legacyBehavior>
               <a className="u-link-green">
                 <Translate
                   zh_hant="切換帳戶"
@@ -176,7 +176,7 @@ const BaseOAuthAuthorize = () => {
 
       <style jsx>{styles}</style>
     </Box>
-  )
+  );
 }
 
 const OAuthAuthorize = () => (

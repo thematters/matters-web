@@ -30,7 +30,7 @@ export const isValidPassword = (password: string): boolean => {
   if (!password || password.length < 8) {
     return false
   }
-  return /^[\x00-\x7F]*$/.test(password)
+  return /^[\x00-\x7F]*$/.test(password);
 }
 
 /**
@@ -41,7 +41,7 @@ export const isValidPaymentPassword = (password: string): boolean => {
     return false
   }
 
-  return /^[\d]*$/.test(password)
+  return /^[\d]*$/.test(password);
 }
 
 /**

@@ -126,7 +126,7 @@ export const optimizeEmbed = (content: string) => {
       </picture>
     `
       }
-    )
+    );
 }
 
 /**

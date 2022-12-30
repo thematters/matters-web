@@ -181,13 +181,13 @@ export const Tag = ({
   }
 
   return (
-    <Link {...path}>
+    <Link {...path} legacyBehavior>
       <a className={tagClasses} onClick={onClick}>
         <Inner />
         <style jsx>{styles}</style>
       </a>
     </Link>
-  )
+  );
 }
 
 Tag.fragments = fragments

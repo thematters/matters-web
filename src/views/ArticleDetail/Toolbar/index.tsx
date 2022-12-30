@@ -133,7 +133,7 @@ const Toolbar = ({
 
       <style jsx>{styles}</style>
     </section>
-  )
+  );
 }
 
 Toolbar.fragments = fragments

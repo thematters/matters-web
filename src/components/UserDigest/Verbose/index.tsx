@@ -107,7 +107,7 @@ const Verbose = ({
       testId={TEST_ID.DIGEST_USER_VERBOSE}
     >
       <section className={containerClasses}>
-        <Link {...path}>
+        <Link {...path} legacyBehavior>
           <a className="avatar">
             <Avatar size={avatarSize} user={user} />
           </a>
@@ -115,7 +115,7 @@ const Verbose = ({
 
         <section className="content">
           <header>
-            <Link {...path}>
+            <Link {...path} legacyBehavior>
               <a className={nameClasses}>{user.displayName}</a>
             </Link>
           </header>
@@ -135,7 +135,7 @@ const Verbose = ({
 
       <style jsx>{styles}</style>
     </Card>
-  )
+  );
 }
 
 /**

@@ -17,7 +17,7 @@ const MeDigest = () => {
 
   return (
     <section className="me-digest">
-      <Link {...viewerPath}>
+      <Link {...viewerPath} legacyBehavior>
         <a className="header">
           <Avatar user={viewer} size="xl" />
 
@@ -30,7 +30,7 @@ const MeDigest = () => {
 
       <style jsx>{styles}</style>
     </section>
-  )
+  );
 }
 
 export default MeDigest

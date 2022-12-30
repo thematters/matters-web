@@ -17,9 +17,9 @@ const NoticeActorName = ({ user }: { user: NoticeActorNameUser | null }) => {
 
   return (
     <Link {...path}>
-      <a>{user.displayName}</a>
+      {user.displayName}
     </Link>
-  )
+  );
 }
 
 NoticeActorName.fragments = {

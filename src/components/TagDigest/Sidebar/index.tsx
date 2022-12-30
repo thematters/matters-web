@@ -55,7 +55,7 @@ const Sidebar = ({ tag, ...cardProps }: TagDigestSidebarProps) => {
     >
       <section className="container">
         <section className="cover">
-          <Link {...path}>
+          <Link {...path} legacyBehavior>
             <a>
               <ResponsiveImage
                 url={tag.cover || IMAGE_TAG_COVER.src}
@@ -99,7 +99,7 @@ const Sidebar = ({ tag, ...cardProps }: TagDigestSidebarProps) => {
         <style jsx>{styles}</style>
       </section>
     </Card>
-  )
+  );
 }
 
 Sidebar.fragments = fragments

@@ -106,7 +106,7 @@ const Rich = ({
       testId={TEST_ID.DIGEST_USER_RICH}
     >
       <section className={containerClasses}>
-        <Link {...path}>
+        <Link {...path} legacyBehavior>
           <a className="avatar">
             <Avatar size={size === 'sm' ? 'lg' : 'xl'} user={user} />
             {avatarBadge && <span className="badge">{avatarBadge}</span>}
@@ -115,7 +115,7 @@ const Rich = ({
 
         <section className="content">
           <header>
-            <Link {...path}>
+            <Link {...path} legacyBehavior>
               <a className="name">{user.displayName}</a>
             </Link>
             {hasState && <FollowUserButton.State user={user} />}
@@ -138,7 +138,7 @@ const Rich = ({
         <style jsx>{styles}</style>
       </section>
     </Card>
-  )
+  );
 }
 
 /**

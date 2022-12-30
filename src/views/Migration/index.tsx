@@ -36,7 +36,7 @@ const Migration = () => {
       <header className="l-container">
         <div className="l-row">
           <div className="l-col-full">
-            <Link href={PATHS.HOME}>
+            <Link href={PATHS.HOME} legacyBehavior>
               <a
                 className="logo"
                 aira-label={translate({ id: 'discover', lang })}
@@ -56,7 +56,7 @@ const Migration = () => {
 
       <style jsx>{styles}</style>
     </main>
-  )
+  );
 }
 
 export default Migration

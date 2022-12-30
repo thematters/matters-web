@@ -30,7 +30,7 @@ const Mini = ({ circle, ...cardProps }: CircleDigestMiniProps) => {
   return (
     <Card {...path} spacing={[0, 0]} {...cardProps}>
       <section className={containerClasses}>
-        <Link {...path}>
+        <Link {...path} legacyBehavior>
           <a className="avatar">
             <CircleAvatar circle={circle} size="xl" />
           </a>
@@ -38,7 +38,7 @@ const Mini = ({ circle, ...cardProps }: CircleDigestMiniProps) => {
 
         <section className="content">
           <header>
-            <Link {...path}>
+            <Link {...path} legacyBehavior>
               <a className="name">{displayName}</a>
             </Link>
 
@@ -53,7 +53,7 @@ const Mini = ({ circle, ...cardProps }: CircleDigestMiniProps) => {
         <style jsx>{styles}</style>
       </section>
     </Card>
-  )
+  );
 }
 
 /**

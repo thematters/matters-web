@@ -18,31 +18,31 @@ const SideFooter = () => {
       </section>
 
       <section className="links">
-        <Link href={PATHS.ABOUT}>
+        <Link href={PATHS.ABOUT} legacyBehavior>
           <a>
             <Translate id="about" />
           </a>
         </Link>
 
-        <Link href={PATHS.GUIDE}>
+        <Link href={PATHS.GUIDE} legacyBehavior>
           <a>
             <Translate id="guide" />
           </a>
         </Link>
 
-        <Link href={PATHS.COMMUNITY}>
+        <Link href={PATHS.COMMUNITY} legacyBehavior>
           <a>
             <Translate id="community" />
           </a>
         </Link>
 
-        <Link href={PATHS.MIGRATION}>
+        <Link href={PATHS.MIGRATION} legacyBehavior>
           <a>
             <Translate id="migrationSideBar" />
           </a>
         </Link>
 
-        <Link href={PATHS.TOS}>
+        <Link href={PATHS.TOS} legacyBehavior>
           <a>
             <Translate id="term" />
           </a>
@@ -64,7 +64,7 @@ const SideFooter = () => {
           <Translate id="bugBountyProgram" />
         </a>
 
-        <Link href={GUIDE_LINKS.PWA[lang]}>
+        <Link href={GUIDE_LINKS.PWA[lang]} legacyBehavior>
           <a>
             <Translate id="downloadApp" />
           </a>
@@ -79,7 +79,7 @@ const SideFooter = () => {
 
       <style jsx>{styles}</style>
     </footer>
-  )
+  );
 }
 
 export default SideFooter

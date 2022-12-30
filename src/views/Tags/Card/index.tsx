@@ -22,7 +22,7 @@ const Card = ({ tag }: CardProps) => {
   const nameClasses = classNames({ name: true, mask: !!tag.cover })
 
   return (
-    <Link {...path}>
+    <Link {...path} legacyBehavior>
       <a>
         <section className="card">
           <ResponsiveImage url={url} size="360w" />
@@ -35,7 +35,7 @@ const Card = ({ tag }: CardProps) => {
         <style jsx>{styles}</style>
       </a>
     </Link>
-  )
+  );
 }
 
 Card.fragments = {

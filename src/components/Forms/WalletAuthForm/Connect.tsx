@@ -375,7 +375,7 @@ const Connect: React.FC<FormProps> = ({
                 en="I have read and agree to"
               />
 
-              <Link href={PATHS.TOS}>
+              <Link href={PATHS.TOS} legacyBehavior>
                 <a className="u-link-green" target="_blank">
                   &nbsp;
                   <Translate

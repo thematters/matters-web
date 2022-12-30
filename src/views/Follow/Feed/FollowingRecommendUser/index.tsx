@@ -37,14 +37,14 @@ const RecommendUser = ({ user, ...cardProps }: Props) => {
     >
       <section className="container">
         <section className="head">
-          <Link {...path}>
+          <Link {...path} legacyBehavior>
             <a className="avatar">
               <Avatar size="xxl" user={user} />
             </a>
           </Link>
 
           <section className="wrap">
-            <Link {...path}>
+            <Link {...path} legacyBehavior>
               <a className="name">{displayName}</a>
             </Link>
 
@@ -63,7 +63,7 @@ const RecommendUser = ({ user, ...cardProps }: Props) => {
 
       <style jsx>{styles}</style>
     </Card>
-  )
+  );
 }
 
 type MemoizedRecommendUserType = React.MemoExoticComponent<React.FC<Props>> & {

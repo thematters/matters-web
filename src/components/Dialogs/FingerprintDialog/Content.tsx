@@ -283,7 +283,7 @@ const FingerprintDialogContent = ({
 
       <style jsx>{styles}</style>
     </section>
-  )
+  );
 }
 
 export default FingerprintDialogContent

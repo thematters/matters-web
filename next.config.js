@@ -9,10 +9,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 
 const withOffline = require('next-offline')
 
-const packageJson = require('./package.json')
-
 const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
-const isStatic = process.env.NEXT_PUBLIC_BUILD_TYPE === 'static'
 const nextAssetDomain = process.env.NEXT_PUBLIC_NEXT_ASSET_DOMAIN || ''
 
 const nextConfig = {
@@ -21,8 +18,6 @@ const nextConfig = {
    */
   assetPrefix: nextAssetDomain ? `https://${nextAssetDomain}` : undefined,
   pageExtensions: ['tsx'],
-  // swcMinify: false,
-  crossOrigin: 'anonymous',
 
   webpack(config, { defaultLoaders, isServer }) {
     /**
@@ -115,42 +110,37 @@ const nextConfig = {
 let plugins = [
   // bundle analyzer
   [withBundleAnalyzer],
-]
 
-if (!isStatic) {
-  plugins = [
-    ...plugins,
-    // offline
-    [
-      withOffline,
-      {
-        // FIXME: https://github.com/hanford/next-offline/issues/195
-        generateInDevMode: false,
-        workboxOpts: {
-          swDest: '../public/service-worker.js',
-          runtimeCaching: [
-            {
-              urlPattern: '/',
-              handler: 'NetworkFirst',
-              options: {
-                cacheName: 'homepage-cache',
+  // offline
+  [
+    withOffline,
+    {
+      // FIXME: https://github.com/hanford/next-offline/issues/195
+      generateInDevMode: false,
+      workboxOpts: {
+        swDest: '../public/service-worker.js',
+        runtimeCaching: [
+          {
+            urlPattern: '/',
+            handler: 'NetworkFirst',
+            options: {
+              cacheName: 'homepage-cache',
+            },
+          },
+          {
+            urlPattern: new RegExp('/_next/static/'),
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'static-cache',
+              cacheableResponse: {
+                statuses: [0, 200],
               },
             },
-            {
-              urlPattern: new RegExp('/_next/static/'),
-              handler: 'CacheFirst',
-              options: {
-                cacheName: 'static-cache',
-                cacheableResponse: {
-                  statuses: [0, 200],
-                },
-              },
-            },
-          ],
-        },
+          },
+        ],
       },
-    ],
-  ]
-}
+    },
+  ],
+]
 
 module.exports = withPlugins(plugins, nextConfig)

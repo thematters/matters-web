@@ -240,5 +240,5 @@ function sanitize(str: string): string {
   return str.replace(
     /[<>\u2028\u2029]/g,
     (unsafeChar) => ESCAPED_CHARS[unsafeChar] || ''
-  )
+  );
 }

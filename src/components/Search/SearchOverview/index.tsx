@@ -92,7 +92,7 @@ export const SearchOverview = ({ inPage }: SearchOverviewProps) => {
                     page: 'search',
                     q: key,
                   })}
-                >
+                  legacyBehavior>
                   <a className="key">{key}</a>
                 </Link>
               </li>
@@ -129,5 +129,5 @@ export const SearchOverview = ({ inPage }: SearchOverviewProps) => {
         </section>
       )}
     </Menu>
-  )
+  );
 }

@@ -53,7 +53,7 @@ const SideNav = () => {
   return (
     <section className="side-nav">
       <section className="logo">
-        <Link href={PATHS.HOME}>
+        <Link href={PATHS.HOME} legacyBehavior>
           <a aria-label={translate({ id: 'discover', lang })}>
             {isMediumUp ? <IconLogo /> : <IconLogoGraph />}
           </a>
@@ -160,7 +160,7 @@ const SideNav = () => {
 
       <style jsx>{styles}</style>
     </section>
-  )
+  );
 }
 
 export default SideNav

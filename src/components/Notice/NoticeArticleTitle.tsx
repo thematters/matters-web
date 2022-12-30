@@ -26,9 +26,9 @@ const NoticeArticleTitle = ({
   if (!isBlock) {
     return (
       <Link {...path}>
-        <a>{article.title}</a>
+        {article.title}
       </Link>
-    )
+    );
   }
 
   return <ArticleDigestTitle article={article} textSize="md-s" />

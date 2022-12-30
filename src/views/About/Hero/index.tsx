@@ -67,7 +67,7 @@ const Hero = () => {
         <div className="l-container">
           <div className="l-row">
             <div className="l-col-full">
-              <Link href={PATHS.HOME}>
+              <Link href={PATHS.HOME} legacyBehavior>
                 <a aria-label={translate({ id: 'discover', lang })}>
                   <IconLogo />
                 </a>
@@ -320,7 +320,7 @@ const Hero = () => {
         }
       `}</style>
     </section>
-  )
+  );
 }
 
 export default Hero

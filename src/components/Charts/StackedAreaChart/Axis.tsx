@@ -44,7 +44,7 @@ const Axis: React.FC<AxisProps> = ({
             if (lang === 'en') {
               return d3TimeFormat('%b')(t)
             } else {
-              return `${d3TimeFormat('%m')(t).replace(/^0/, '')} 月`
+              return `${d3TimeFormat('%m')(t).replace(/^0/, '')} 月`;
             }
           })
       )

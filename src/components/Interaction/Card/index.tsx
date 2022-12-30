@@ -160,7 +160,7 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
 
     if (is === 'link' && href) {
       return (
-        <Link href={href}>
+        <Link href={href} legacyBehavior>
           <a
             className={cardClasses}
             ref={cardRef}
@@ -170,7 +170,7 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
             <style jsx>{styles}</style>
           </a>
         </Link>
-      )
+      );
     }
 
     if (is === 'anchor' && htmlHref) {
