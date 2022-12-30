@@ -9,7 +9,6 @@ import {
   IconWalletConnect24,
   LanguageContext,
   Layout,
-  Spacer,
   TextIcon,
   Translate,
   useResponsive,
@@ -283,8 +282,6 @@ const Select: React.FC<FormProps> = ({
         <Intro />
 
         {InnerForm}
-
-        <Spacer size="xloose" />
       </Dialog.Content>
     </>
   )

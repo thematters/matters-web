@@ -62,6 +62,12 @@
   }
 }
 
+.size-xl {
+  & .text {
+    font-size: var(--font-size-xl);
+  }
+}
+
 /* color */
 .black {
   color: var(--color-black);

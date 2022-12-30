@@ -2,7 +2,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
 import dynamic from 'next/dynamic'
 import React, { useEffect, useState } from 'react'
-import { createClient, WagmiConfig } from 'wagmi'
+import { createClient, createStorage, WagmiConfig } from 'wagmi'
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
 
@@ -60,7 +60,14 @@ import('@sentry/browser').then((Sentry) => {
 const wagmiClient = createClient({
   autoConnect: true,
   connectors: [
-    new MetaMaskConnector({ chains }),
+    new MetaMaskConnector({
+      chains,
+      options: {
+        // For disconnecting from metamask
+        shimDisconnect: true,
+        UNSTABLE_shimOnConnectSelectAccount: true,
+      },
+    }),
     new WalletConnectConnector({
       chains,
       options: {
@@ -69,6 +76,16 @@ const wagmiClient = createClient({
     }),
   ],
   provider: wagmiProvider,
+  /*
+  FIXME: need to find a way of clearing ens name cache instead of clearing the global cache
+  */
+  storage: createStorage({
+    storage: {
+      getItem: () => null,
+      setItem: () => null,
+      removeItem: () => null,
+    },
+  }),
 })
 
 const Root = ({

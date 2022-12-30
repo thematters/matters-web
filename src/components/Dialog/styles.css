@@ -12,6 +12,7 @@
   flex-direction: column;
   max-height: 80vh;
   max-height: calc(var(--vh) * 90);
+  padding-bottom: var(--spacing-xx-loose);
   background: var(--color-white);
   border-radius: var(--spacing-x-tight) var(--spacing-x-tight) 0 0;
   will-change: transform, top;
@@ -26,12 +27,28 @@
     background: var(--color-white);
   }
 
+  &.bg-grey-lighter {
+    background: var(--color-grey-lighter);
+
+    @media (--sm-up) {
+      background: var(--color-white);
+    }
+  }
+
+  &.bg-grey-lighter-sm-up {
+    @media (--sm-up) {
+      background: var(--color-grey-lighter);
+    }
+  }
+
   &.fixed-height {
     height: 80vh;
     height: calc(var(--vh) * 90);
+    padding-bottom: var(--spacing-x-tight);
   }
 
   @media (--sm-up) {
+    padding-bottom: var(--spacing-x-tight);
     border-radius: var(--spacing-x-tight);
     will-change: opacity;
 

@@ -109,7 +109,7 @@ const PaymentSetPasswordForm: React.FC<FormProps> = ({ submitCallback }) => {
   })
 
   const InnerForm = (
-    <Form onSubmit={handleSubmit} noBackground>
+    <Form onSubmit={handleSubmit}>
       {isInPassword && (
         <Form.PinInput
           length={6}

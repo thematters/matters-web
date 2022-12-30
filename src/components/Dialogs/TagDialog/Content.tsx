@@ -9,12 +9,9 @@ import {
   Dialog,
   Form,
   LanguageContext,
-  Menu,
-  Spinner,
   Translate,
   useMutation,
 } from '~/components'
-import SEARCH_TAGS from '~/components/GQL/queries/searchTags'
 
 import {
   ADD_TOAST,
@@ -25,7 +22,6 @@ import {
 } from '~/common/enums'
 import {
   normalizeTagInput, // stripAllPunct, // stripPunctPrefixSuffix,
-  numAbbr,
   parseFormSubmitErrors,
   toPath,
   translate,
@@ -49,63 +45,6 @@ const PUT_TAG = gql`
   }
 `
 
-const DropdownDefaultItem = ({ search }: { search: string }) => {
-  return (
-    <Menu.Item>
-      <span className="search-tag-item">
-        <Translate zh_hant="創建" zh_hans="创建" en="Create" />
-        <span className="keyword">{search}</span>
-        <style jsx>{styles}</style>
-      </span>
-    </Menu.Item>
-  )
-}
-
-interface DropdownListBaseProps {
-  items: any[]
-  loading: boolean
-  search: string
-}
-
-const DropdownList = ({
-  items,
-  loading,
-  search,
-  children,
-}: DropdownListBaseProps & { children?: any }) => {
-  if (loading) {
-    return (
-      <Menu width="sm">
-        <Menu.Item>
-          <Spinner />
-        </Menu.Item>
-      </Menu>
-    )
-  }
-
-  if ((!items || items.length === 0) && !children) {
-    return null
-  }
-
-  return (
-    <>
-      <Menu width="sm">
-        {items.map((item) => (
-          <Menu.Item key={item.content}>
-            <span className="search-tag-item">
-              <span>{item.content}</span>
-              <span className="count">{numAbbr(item.numArticles)}</span>
-            </span>
-          </Menu.Item>
-        ))}
-        {items && items.length > 0 && children && <Menu.Divider />}
-        {children}
-      </Menu>
-      <style jsx>{styles}</style>
-    </>
-  )
-}
-
 const HintLengthText: React.FC<{
   curLength: number
   maxLength: number
@@ -118,14 +57,6 @@ const HintLengthText: React.FC<{
     <style jsx>{styles}</style>
   </>
 )
-
-const DropdownListWithDefaultItem = (props: DropdownListBaseProps) => {
-  return (
-    <DropdownList {...props}>
-      <DropdownDefaultItem search={props.search} />
-    </DropdownList>
-  )
-}
 
 export interface TagDialogContentProps {
   id?: string
@@ -236,8 +167,6 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
     },
   })
 
-  const DropdownContent = id ? DropdownList : DropdownListWithDefaultItem
-
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       {isEditing && (
@@ -254,7 +183,7 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
         </section>
       )}
 
-      <Form.DropdownInput
+      <Form.Input
         label={<Translate id="tagName" />}
         type="text"
         name="newContent"
@@ -267,10 +196,6 @@ const TagDialogContent: React.FC<BaseTagDialogContentProps> = ({
           setFieldValue('newContent', newContent)
           return newContent
         }}
-        dropdownAppendTo={formId}
-        dropdownAutoSizing
-        DropdownContent={DropdownContent}
-        query={SEARCH_TAGS}
         hint={<Translate id="hintAddTagNamingRestriction" />}
         maxLength={MAX_TAG_CONTENT_LENGTH}
         extraButton={

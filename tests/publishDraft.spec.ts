@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 
-import { stripSpaces } from '~/common/utils'
+import { stripSpaces } from '~/common/utils/text'
 
 import {
   ArticleDetailPage,

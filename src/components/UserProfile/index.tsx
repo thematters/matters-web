@@ -13,7 +13,6 @@ import {
   RssFeedDialog,
   Spinner,
   Throw404,
-  Tooltip,
   Translate,
   usePublicQuery,
   useRoute,
@@ -37,9 +36,9 @@ import DropdownActions from './DropdownActions'
 import { FollowersDialog } from './FollowersDialog'
 import { FollowingDialog } from './FollowingDialog'
 import { USER_PROFILE_PRIVATE, USER_PROFILE_PUBLIC } from './gql'
-import { LogbookDialog } from './LogbookDialog'
 import styles from './styles.css'
-import WalletAddress from './WalletAddress'
+import TraveloggersAvatar from './TraveloggersAvatar'
+import WalletLabel from './WalletLabel'
 
 import { AuthorRssFeed } from '~/components/Dialogs/RssFeedDialog/__generated__/AuthorRssFeed'
 import { UserProfileUserPublic } from './__generated__/UserProfileUserPublic'
@@ -202,9 +201,6 @@ export const UserProfile = () => {
     )
   }
 
-  const isOwner =
-    user.info.cryptoWallet?.address === viewer.info.cryptoWallet?.address
-
   /**
    * Active or Onboarding User
    */
@@ -218,46 +214,7 @@ export const UserProfile = () => {
         <header>
           <section className="avatar">
             {hasTraveloggersBadge ? (
-              <Tooltip
-                content={
-                  <Translate
-                    zh_hant={`查看 ${user.displayName} 的航行日誌`}
-                    zh_hans={`查看 ${user.displayName} 的航行日志`}
-                    en={`View Logbooks owned by ${user.displayName}`}
-                  />
-                }
-              >
-                <LogbookDialog
-                  title={
-                    <Translate
-                      en={
-                        isOwner ? 'My Logbook' : `${user.displayName}'s Logbook`
-                      }
-                      zh_hant={
-                        isOwner
-                          ? '我的 Logbook'
-                          : `${user.displayName} 的航行日誌`
-                      }
-                      zh_hans={
-                        isOwner
-                          ? '我的 Logbook'
-                          : `${user.displayName} 的航行日志`
-                      }
-                    />
-                  }
-                  address={user.info.cryptoWallet?.address as string}
-                >
-                  {({ openDialog }) => (
-                    <button
-                      type="button"
-                      onClick={openDialog}
-                      aria-haspopup="dialog"
-                    >
-                      <Avatar size="xxxl" user={user} inProfile />
-                    </button>
-                  )}
-                </LogbookDialog>
-              </Tooltip>
+              <TraveloggersAvatar user={user} isMe={isMe} />
             ) : (
               <Avatar size="xxxl" user={user} inProfile />
             )}
@@ -287,15 +244,13 @@ export const UserProfile = () => {
             {!isMe && <FollowUserButton.State user={user} />}
           </section>
 
-          {user.info.ethAddress && (
-            <WalletAddress address={user.info.ethAddress} />
-          )}
+          {user?.info.ethAddress && <WalletLabel user={user} isMe={isMe} />}
 
           <Expandable
             content={user.info.description}
             color="grey-darker"
-            spacingTop="base"
             size="md"
+            spacingTop="base"
           >
             <p className="description">{user.info.description}</p>
           </Expandable>

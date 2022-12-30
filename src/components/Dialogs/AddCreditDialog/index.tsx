@@ -56,7 +56,12 @@ const BaseAddCreditDialog = ({ children }: AddCreditDialogProps) => {
     <>
       {children({ openDialog })}
 
-      <Dialog size="sm" isOpen={show} onDismiss={closeDialog} fixedHeight>
+      <Dialog
+        size="sm"
+        isOpen={show}
+        onDismiss={closeDialog}
+        smBgColor="grey-lighter"
+      >
         <Dialog.Header
           title={isSetPaymentPassword ? 'paymentPassword' : 'topUp'}
           closeDialog={closeDialog}

@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test'
 
 import { TEST_ID } from '~/common/enums'
-import { stripSpaces } from '~/common/utils'
+import { stripSpaces } from '~/common/utils/text'
 
 import {
   ArticleDetailPage,

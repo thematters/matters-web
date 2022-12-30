@@ -5,7 +5,7 @@ import Discussion from './Discussion'
 import styles from './styles.css'
 
 const CircleDiscussion = () => (
-  <Layout.Main bgColor="grey-lighter">
+  <Layout.Main smBgColor="grey-lighter">
     <Profile />
 
     <section className="container">

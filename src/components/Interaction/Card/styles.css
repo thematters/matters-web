@@ -1,9 +1,10 @@
 .card {
-  @mixin all-transition;
+  @mixin transition;
 
   position: relative;
   display: block;
   outline: none;
+  transition-property: background-color;
 
   &:not(.disabled) {
     cursor: pointer;

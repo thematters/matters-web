@@ -108,7 +108,7 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
 
         {InnerForm}
 
-        <Spacer size="xloose" />
+        <Spacer />
       </Dialog.Content>
     </>
   )

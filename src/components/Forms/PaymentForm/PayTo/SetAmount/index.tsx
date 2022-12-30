@@ -4,7 +4,7 @@ import { useFormik } from 'formik'
 import _get from 'lodash/get'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useEffect, useRef, useState } from 'react'
-import { useAccount, useNetwork, useSwitchNetwork } from 'wagmi'
+import { useAccount } from 'wagmi'
 
 import {
   Dialog,
@@ -17,6 +17,7 @@ import {
   useApproveUSDT,
   useBalanceUSDT,
   useMutation,
+  useTargetNetwork,
   ViewerContext,
 } from '~/components'
 import PAY_TO from '~/components/GQL/mutations/payTo'
@@ -29,6 +30,7 @@ import {
   PAYMENT_MAXIMUM_PAYTO_AMOUNT,
 } from '~/common/enums'
 import {
+  featureSupportedChains,
   formatAmount,
   numRound,
   validateCurrency,
@@ -105,20 +107,15 @@ const SetAmount: React.FC<FormProps> = ({
   const viewer = useContext(ViewerContext)
   const quoteCurrency = viewer.settings.currency
   const { lang } = useContext(LanguageContext)
-  const { address } = useAccount()
-  const { chain } = useNetwork()
-  const { chains, switchNetwork } = useSwitchNetwork()
 
+  const { address } = useAccount()
   const isConnectedAddress =
     viewer.info.ethAddress?.toLowerCase() === address?.toLowerCase()
-  const isUnsupportedNetwork = !!chain?.unsupported
-  const targetChainName = chains[0]?.name
-  const targetChainId = chains[0]?.id
-  const switchToTargetNetwork = async () => {
-    if (!switchNetwork) return
 
-    switchNetwork(targetChainId)
-  }
+  // TODO: support multiple networks
+  const targetNetork = featureSupportedChains.curation[0]
+  const { isUnsupportedNetwork, switchToTargetNetwork, isSwitchingNetwork } =
+    useTargetNetwork(targetNetork)
 
   // states
   const [payTo] = useMutation<PayToMutate>(PAY_TO)
@@ -158,9 +155,11 @@ const SetAmount: React.FC<FormProps> = ({
   const balanceLike = data?.viewer?.liker.total || 0
   const balance = isUSDT ? balanceUSDT : isHKD ? balanceHKD : balanceLike
   const maxAmount = isHKD ? PAYMENT_MAXIMUM_PAYTO_AMOUNT.HKD : Infinity
-  const networkEerror =
+  const networkError =
     error ||
-    (isUSDT ? allowanceError || balanceUSDTError || approveError : undefined)
+    (isUSDT && !isUnsupportedNetwork
+      ? allowanceError || balanceUSDTError || approveError
+      : undefined)
       ? WALLET_ERROR_MESSAGES[lang].unknown
       : ''
 
@@ -257,7 +256,7 @@ const SetAmount: React.FC<FormProps> = ({
    */
   // go back to previous step if wallet is locked
   useEffect(() => {
-    if (!address && currency === CURRENCY.USDT) {
+    if (currency === CURRENCY.USDT && !address) {
       switchToCurrencyChoice()
     }
   }, [address])
@@ -278,12 +277,12 @@ const SetAmount: React.FC<FormProps> = ({
    * Rendering
    */
   const InnerForm = (
-    <Form id={formId} onSubmit={handleSubmit} noBackground>
+    <Form id={formId} onSubmit={handleSubmit}>
       <SetAmountHeader
         currency={currency}
         isConnectedAddress={isConnectedAddress}
         isUnsupportedNetwork={isUnsupportedNetwork}
-        targetChainName={targetChainName}
+        targetChainName={targetNetork.name}
         switchToCurrencyChoice={switchToCurrencyChoice}
         switchToTargetNetwork={switchToTargetNetwork}
       />
@@ -305,7 +304,7 @@ const SetAmount: React.FC<FormProps> = ({
         name="amount"
         disabled={isUSDT && !isConnectedAddress}
         value={values.amount}
-        error={errors.amount || networkEerror}
+        error={errors.amount || networkError}
         onBlur={handleBlur}
         onChange={async (e) => {
           const value = parseInt(e.target.value, 10) || 0
@@ -405,13 +404,14 @@ const SetAmount: React.FC<FormProps> = ({
                 bgColor="green"
                 textColor="white"
                 onClick={switchToTargetNetwork}
+                loading={isSwitchingNetwork}
               >
                 <Translate
                   zh_hant="切換到 "
                   zh_hans="切换到 "
                   en="Switch to "
                 />
-                {targetChainName}
+                {targetNetork.name}
               </Dialog.Footer.Button>
             )}
 

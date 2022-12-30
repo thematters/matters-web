@@ -45,7 +45,6 @@ const ShareDialogContent: React.FC<ShareDialogContentProps> = ({
   }
   const containerClasses = classNames({
     'socials-container': true,
-    'spacing-bottom': !footerButtons,
   })
   return (
     <>

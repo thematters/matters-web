@@ -11,7 +11,8 @@ const AddArticlesButton = ({ circle }: AddArticlesButtonProps) => {
     <AddCircleArticleDialog circle={circle}>
       {({ openDialog: openAddCircleArticlesDialog }) => (
         <Button
-          size={['7rem', '2rem']}
+          size={[null, '2rem']}
+          spacing={[0, 'tight']}
           textColor="gold"
           textActiveColor="white"
           bgActiveColor="gold"

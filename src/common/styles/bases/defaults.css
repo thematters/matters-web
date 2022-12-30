@@ -30,7 +30,9 @@ body {
 
 a,
 button {
-  @mixin all-transition;
+  @mixin transition;
+
+  transition-property: opacity;
 
   &:disabled,
   &[aria-disabled='true'] {

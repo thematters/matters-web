@@ -12,7 +12,7 @@ const SortBy: React.FC<SortByProps> = ({ tabType, setTabType }) => {
   const isReply = tabType === 'reply'
 
   return (
-    <Tabs sticky>
+    <Tabs>
       <Tabs.Tab onClick={() => setTabType('request')} selected={isRequest}>
         <Translate id="requestForDonation" />
       </Tabs.Tab>

@@ -1,17 +1,22 @@
 import { providers } from 'ethers'
-import { chain, configureChains } from 'wagmi'
+import { configureChains } from 'wagmi'
+import { goerli, mainnet, polygon, polygonMumbai } from 'wagmi/chains'
 import { alchemyProvider } from 'wagmi/providers/alchemy'
 import { publicProvider } from 'wagmi/providers/public'
 
 import { WalletErrorType } from '~/common/enums'
 
 const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
+const alchemyId = process.env.NEXT_PUBLIC_ALCHEMY_KEY!
 
-export const supportedChains = isProd ? [chain.polygon] : [chain.polygonMumbai]
+export const featureSupportedChains = {
+  curation: isProd ? [polygon] : [polygonMumbai],
+  ens: isProd ? [mainnet] : [goerli],
+}
 
-const alchemyId = process.env.NEXT_PUBLIC_ALCHEMY_KEY || ''
+const defaultChains = isProd ? [mainnet, polygon] : [goerli, polygonMumbai]
 
-export const { chains } = configureChains(supportedChains, [
+export const { chains } = configureChains(defaultChains, [
   alchemyProvider({ apiKey: alchemyId }),
   publicProvider(),
 ])

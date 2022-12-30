@@ -27,15 +27,7 @@ jobs:
           node-version: '16.14'
           cache: 'npm'
 
-      - name: Cache NPM dependencies
-        uses: actions/cache@v3
-        id: node_modules_cache
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-npm-v3-${{ hashFiles('package-lock.json') }}
-
       - name: Install Dependencies
-        if: steps.node_modules_cache.outputs.cache-hit != 'true'
         run: npm ci --legacy-peer-deps
 
       - name: Generate Types (develop)
@@ -94,6 +86,18 @@ jobs:
         if: github.base_ref == 'develop'
         run: |
           aws s3 sync .next s3://web-develop.matters.news/_next
+
+      - name: Upload Assets (develop - R2)
+        if: github.base_ref == 'develop'
+        uses: wei/rclone@v1
+        env:
+          RCLONE_CONFIG_R2_TYPE: s3
+          RCLONE_CONFIG_R2_PROVIDER: Cloudflare
+          RCLONE_CONFIG_R2_ACCESS_KEY_ID: ${{ secrets.RCLONE_CONFIG_R2_ACCESS_KEY_ID }}
+          RCLONE_CONFIG_R2_SECRET_ACCESS_KEY: ${{ secrets.RCLONE_CONFIG_R2_SECRET_ACCESS_KEY }}
+          RCLONE_CONFIG_R2_ENDPOINT: ${{ secrets.RCLONE_CONFIG_R2_ENDPOINT }}
+        with:
+          args: sync .next r2:matters-assets-next-develop/_next -P
 
       - name: Deploy to EB (develop)
         if: github.base_ref == 'develop'

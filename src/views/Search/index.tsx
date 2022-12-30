@@ -52,7 +52,7 @@ const Search = () => {
   }, [])
 
   return (
-    <Layout.Main bgColor={isAggregate ? 'grey-lighter' : undefined}>
+    <Layout.Main smBgColor={isAggregate ? 'grey-lighter' : undefined}>
       <Layout.Header
         left={
           showBackButton ? (

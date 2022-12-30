@@ -11,7 +11,9 @@ import {
 
 import { ViewerContext } from '~/components'
 
-import { supportedChains } from '~/common/utils'
+import { featureSupportedChains } from '~/common/utils'
+
+const targetNetwork = featureSupportedChains.curation[0]
 
 export const useAllowanceUSDT = () => {
   const { address } = useAccount()
@@ -36,10 +38,10 @@ export const useBalanceUSDT = ({
   const viewerEthAddress = viewer.info.ethAddress
 
   return useBalance({
-    addressOrName: (addr || viewerEthAddress) as `0x${string}`,
+    address: (addr || viewerEthAddress) as `0x${string}`,
     token: (process.env.NEXT_PUBLIC_USDT_CONTRACT_ADDRESS ||
       '') as `0x${string}`,
-    chainId: supportedChains[0].id,
+    chainId: targetNetwork.id,
     cacheTime: 5_000,
   })
 }
@@ -53,8 +55,8 @@ export const useBalanceEther = ({
   const viewerEthAddress = viewer.info.ethAddress
 
   return useBalance({
-    addressOrName: (addr || viewerEthAddress) as `0x${string}`,
-    chainId: supportedChains[0].id,
+    address: (addr || viewerEthAddress) as `0x${string}`,
+    chainId: targetNetwork.id,
     cacheTime: 5_000,
   })
 }

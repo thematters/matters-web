@@ -23,7 +23,7 @@ const ConnectWallet = () => {
 
   if (viewerEthAddress) {
     return (
-      <Layout.Main bgColor="grey-lighter">
+      <Layout.Main smBgColor="grey-lighter">
         <Head title={{ id: 'loginWithWallet' }} />
 
         <Layout.Header
@@ -45,7 +45,7 @@ const ConnectWallet = () => {
   }
 
   return (
-    <Layout.Main bgColor="grey-lighter">
+    <Layout.Main smBgColor="grey-lighter">
       <Head title={{ id: 'loginWithWallet' }} />
 
       {currStep === 'wallet-select' && (

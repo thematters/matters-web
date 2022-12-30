@@ -69,10 +69,11 @@ span.container {
    ========================================================================== */
 .hotarea {
   @mixin expand-to-container;
-  @mixin all-transition;
+  @mixin transition;
 
   z-index: 0;
   background: transparent;
+  transition-property: color, background;
 
   & :global(+ *) {
     z-index: 1;

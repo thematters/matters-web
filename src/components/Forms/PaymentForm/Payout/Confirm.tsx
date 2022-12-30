@@ -115,7 +115,7 @@ const BaseConfirm: React.FC<FormProps> = ({
   return (
     <>
       <Dialog.Content hasGrow>
-        <Form id={formId} onSubmit={handleSubmit} noBackground>
+        <Form id={formId} onSubmit={handleSubmit}>
           <ConfirmTable>
             <ConfirmTable.Row type="balance">
               <ConfirmTable.Col>

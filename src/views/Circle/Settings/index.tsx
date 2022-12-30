@@ -7,7 +7,7 @@ const Settings = () => {
   const name = getQuery('name')
 
   return (
-    <Layout.Main bgColor="grey-lighter">
+    <Layout.Main smBgColor="grey-lighter">
       <Layout.Header
         left={<Layout.Header.BackButton />}
         right={<Layout.Header.Title id="manageCircle" />}
