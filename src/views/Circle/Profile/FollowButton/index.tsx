@@ -2,10 +2,9 @@ import gql from 'graphql-tag'
 
 import { useFeatures } from '~/components'
 
+import { FollowButtonCirclePrivate } from './__generated__/FollowButtonCirclePrivate'
 import Follow from './Follow'
 import Unfollow from './Unfollow'
-
-import { FollowButtonCirclePrivate } from './__generated__/FollowButtonCirclePrivate'
 
 interface FollowButtonProps {
   circle: Partial<FollowButtonCirclePrivate>

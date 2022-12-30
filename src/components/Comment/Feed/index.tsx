@@ -9,12 +9,11 @@ import DropdownActions, { DropdownActionsControls } from '../DropdownActions'
 import FooterActions, { FooterActionsControls } from '../FooterActions'
 import PinnedLabel from '../PinnedLabel'
 import ReplyTo from '../ReplyTo'
-import { fragments, REFETCH_COMMENT } from './gql'
-import styles from './styles.css'
-
 import { FeedCommentPrivate } from './__generated__/FeedCommentPrivate'
 import { FeedCommentPublic } from './__generated__/FeedCommentPublic'
 import { RefetchComment } from './__generated__/RefetchComment'
+import { fragments, REFETCH_COMMENT } from './gql'
+import styles from './styles.css'
 
 export type CommentControls = {
   avatarSize?: Extract<AvatarSize, 'md' | 'lg'>

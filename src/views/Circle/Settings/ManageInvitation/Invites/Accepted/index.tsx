@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import { useContext } from 'react'
 
+import { mergeConnections } from '~/common/utils'
 import {
   CircleInvitation,
   EmptyWarning,
@@ -14,13 +15,10 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
+import { CircleAcceptedInvites } from '~/components/GQL/queries/__generated__/CircleAcceptedInvites'
 import CIRCLE_ACCEPTED_INVITES from '~/components/GQL/queries/circleAcceptedInvites'
 
-import { mergeConnections } from '~/common/utils'
-
 import styles from './styles.css'
-
-import { CircleAcceptedInvites } from '~/components/GQL/queries/__generated__/CircleAcceptedInvites'
 
 /**
  * This component is for listing circle accepted invitations.

@@ -4,9 +4,8 @@ import parseISO from 'date-fns/parseISO'
 
 import { Translate } from '~/components'
 
-import styles from './styles.css'
-
 import { CircleInvitation } from './__generated__/CircleInvitation'
+import styles from './styles.css'
 
 type PeriodProps = Pick<CircleInvitation, 'freePeriod' | 'acceptedAt' | 'state'>
 

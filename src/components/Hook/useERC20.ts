@@ -9,9 +9,8 @@ import {
   usePrepareContractWrite,
 } from 'wagmi'
 
-import { ViewerContext } from '~/components'
-
 import { featureSupportedChains } from '~/common/utils'
+import { ViewerContext } from '~/components'
 
 const targetNetwork = featureSupportedChains.curation[0]
 

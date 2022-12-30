@@ -6,6 +6,12 @@ import { useContext, useEffect, useState } from 'react'
 import { useAccount, useContractWrite, useNetwork } from 'wagmi'
 
 import {
+  CHAIN,
+  PAYMENT_CURRENCY as CURRENCY,
+  SUPPORT_SUCCESS_ANIMATION,
+} from '~/common/enums'
+import { CurationABI } from '~/common/utils'
+import {
   Dialog,
   Spinner,
   Translate,
@@ -13,24 +19,16 @@ import {
   useMutation,
   ViewerContext,
 } from '~/components'
-import PAY_TO from '~/components/GQL/mutations/payTo'
-import updateDonation from '~/components/GQL/updates/donation'
-
-import {
-  CHAIN,
-  PAYMENT_CURRENCY as CURRENCY,
-  SUPPORT_SUCCESS_ANIMATION,
-} from '~/common/enums'
-import { CurationABI } from '~/common/utils'
-
-import PaymentInfo from '../PaymentInfo'
-import PayToFallback from './PayToFallback'
-import styles from './styles.css'
-
 import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
 import { PayTo as PayToMutate } from '~/components/GQL/mutations/__generated__/PayTo'
+import PAY_TO from '~/components/GQL/mutations/payTo'
+import updateDonation from '~/components/GQL/updates/donation'
 import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
+
+import PaymentInfo from '../PaymentInfo'
 import { ViewerTxState } from './__generated__/ViewerTxState'
+import PayToFallback from './PayToFallback'
+import styles from './styles.css'
 
 interface Props {
   amount: number

@@ -1,11 +1,10 @@
 import { UserDigest } from '~/components'
 
-import styles from './styles.css'
-
 import {
   DigestTransaction_recipient as Recipient,
   DigestTransaction_sender as Sender,
 } from '../__generated__/DigestTransaction'
+import styles from './styles.css'
 
 /***
  * This is a sub component of Transaction which displays

@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import React from 'react'
 
+import { toPath } from '~/common/utils'
 import {
   Card,
   CardProps,
@@ -10,14 +11,11 @@ import {
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 
-import { toPath } from '~/common/utils'
-
+import { DigestRichCirclePrivate } from './__generated__/DigestRichCirclePrivate'
+import { DigestRichCirclePublic } from './__generated__/DigestRichCirclePublic'
 import Footer, { FooterControls } from './Footer'
 import { fragments } from './gql'
 import styles from './styles.css'
-
-import { DigestRichCirclePrivate } from './__generated__/DigestRichCirclePrivate'
-import { DigestRichCirclePublic } from './__generated__/DigestRichCirclePublic'
 
 export type CircleDigestRichControls = {
   hasOwner?: boolean

@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
+import { numAbbr, translate } from '~/common/utils'
 import {
   IconArticle16,
   IconUser16,
@@ -8,11 +9,8 @@ import {
   TextIcon,
 } from '~/components'
 
-import { numAbbr, translate } from '~/common/utils'
-
-import styles from './styles.css'
-
 import { CountsCircle } from './__generated__/CountsCircle'
+import styles from './styles.css'
 
 export type CountsProps = {
   circle: CountsCircle

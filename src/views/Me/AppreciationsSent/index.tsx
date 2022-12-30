@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
+import { analytics, mergeConnections } from '~/common/utils'
 import {
   Appreciation,
   EmptyAppreciation,
@@ -11,10 +12,7 @@ import {
   Spinner,
 } from '~/components'
 
-import { analytics, mergeConnections } from '~/common/utils'
-
 import AppreciationTabs from '../AppreciationTabs'
-
 import { MeAppreciationsSent } from './__generated__/MeAppreciationsSent'
 
 const ME_APPRECIATIONS_SENT = gql`

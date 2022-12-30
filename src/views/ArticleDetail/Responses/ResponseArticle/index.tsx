@@ -2,9 +2,8 @@ import gql from 'graphql-tag'
 
 import { ArticleDigestSidebar, Translate, UserDigest } from '~/components'
 
-import styles from './styles.css'
-
 import { ResponseArticleArticle } from './__generated__/ResponseArticleArticle'
+import styles from './styles.css'
 
 interface ResponseArticleControls {
   hasCover?: boolean

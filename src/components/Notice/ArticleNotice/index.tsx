@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 
+import { ArticleNotice as NoticeType } from './__generated__/ArticleNotice'
 import ArticleMentionedYouNotice from './ArticleMentionedYouNotice'
 import ArticleNewAppreciationNotice from './ArticleNewAppreciationNotice'
 import ArticleNewSubscriberNotice from './ArticleNewSubscriberNotice'
@@ -7,8 +8,6 @@ import ArticlePublishedNotice from './ArticlePublishedNotice'
 import CircleNewArticle from './CircleNewArticle'
 import RevisedArticleNotPublishedNotice from './RevisedArticleNotPublishedNotice'
 import RevisedArticlePublishedNotice from './RevisedArticlePublishedNotice'
-
-import { ArticleNotice as NoticeType } from './__generated__/ArticleNotice'
 
 const ArticleNotice = ({ notice }: { notice: NoticeType }) => {
   switch (notice.articleNoticeType) {

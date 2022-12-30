@@ -1,14 +1,12 @@
 import classNames from 'classnames'
 
-import { LinkWrapper } from '~/components'
-
 import { TEST_ID } from '~/common/enums'
 import { subString, toPath } from '~/common/utils'
-
-import { fragments } from './gql'
-import styles from './styles.css'
+import { LinkWrapper } from '~/components'
 
 import { UserDigestPlainUser } from './__generated__/UserDigestPlainUser'
+import { fragments } from './gql'
+import styles from './styles.css'
 
 export type UserDigestPlainProps = {
   user: UserDigestPlainUser

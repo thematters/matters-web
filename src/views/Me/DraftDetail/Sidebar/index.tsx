@@ -1,9 +1,10 @@
+import { ENTITY_TYPE } from '~/common/enums'
 import { toDigestTagPlaceholder } from '~/components'
+import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
 import Sidebar from '~/components/Editor/Sidebar'
 import SupportSettingDialog from '~/components/Editor/ToggleAccess/SupportSettingDialog'
 
-import { ENTITY_TYPE } from '~/common/enums'
-
+import { EditMetaDraft } from '../__generated__/EditMetaDraft'
 import {
   useEditDraftAccess,
   useEditDraftCollection,
@@ -13,9 +14,6 @@ import {
   useEditSupportSetting,
 } from '../hooks'
 import styles from './styles.css'
-
-import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
-import { EditMetaDraft } from '../__generated__/EditMetaDraft'
 
 interface BaseSidebarProps {
   draft: EditMetaDraft

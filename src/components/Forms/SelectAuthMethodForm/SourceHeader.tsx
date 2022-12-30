@@ -1,7 +1,3 @@
-import { TextIcon, Translate } from '~/components'
-
-import { UNIVERSAL_AUTH_SOURCE } from '~/common/enums'
-
 import IMAGE_AUTH_SOURCE_APPRECIATION from '@/public/static/images/auth-source/appreciation.png'
 import IMAGE_AUTH_SOURCE_BOOKMARK from '@/public/static/images/auth-source/bookmark.png'
 import IMAGE_AUTH_SOURCE_CIRCLE from '@/public/static/images/auth-source/circle.png'
@@ -11,6 +7,8 @@ import IMAGE_AUTH_SOURCE_CREATE from '@/public/static/images/auth-source/create.
 import IMAGE_AUTH_SOURCE_ENTER from '@/public/static/images/auth-source/enter.png'
 import IMAGE_AUTH_SOURCE_FOLLOW from '@/public/static/images/auth-source/follow.png'
 import IMAGE_AUTH_SOURCE_SUPPORT from '@/public/static/images/auth-source/support.png'
+import { UNIVERSAL_AUTH_SOURCE } from '~/common/enums'
+import { TextIcon, Translate } from '~/components'
 
 import styles from './styles.css'
 

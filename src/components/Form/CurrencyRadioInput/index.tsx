@@ -1,9 +1,8 @@
 import VisuallyHidden from '@reach/visually-hidden'
 import classNames from 'classnames'
 
-import { Translate } from '~/components'
-
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
+import { Translate } from '~/components'
 
 import Field, { FieldProps } from '../Field'
 import styles from './styles.css'

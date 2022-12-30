@@ -1,8 +1,7 @@
+import { EditModeArticle_article_Article_drafts as EditModeDraft } from '../__generated__/EditModeArticle'
 import PendingState from './PendingState'
 import PublishedState from './PublishedState'
 import styles from './styles.css'
-
-import { EditModeArticle_article_Article_drafts as EditModeDraft } from '../__generated__/EditModeArticle'
 
 interface Props {
   article: {

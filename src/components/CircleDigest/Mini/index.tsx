@@ -2,15 +2,13 @@ import classNames from 'classnames'
 import Link from 'next/link'
 import React from 'react'
 
+import { toPath } from '~/common/utils'
 import { Card, CardProps, CircleAvatar } from '~/components'
 
-import { toPath } from '~/common/utils'
-
 import Counts from '../Counts'
+import { DigestMiniCircle } from './__generated__/DigestMiniCircle'
 import { fragments } from './gql'
 import styles from './styles.css'
-
-import { DigestMiniCircle } from './__generated__/DigestMiniCircle'
 
 export type CircleDigestMiniProps = {
   circle: DigestMiniCircle

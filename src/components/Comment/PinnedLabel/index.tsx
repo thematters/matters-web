@@ -2,9 +2,8 @@ import gql from 'graphql-tag'
 
 import { IconPin24, TextIcon, Translate } from '~/components'
 
-import styles from './styles.css'
-
 import { PinnedLabelComment } from './__generated__/PinnedLabelComment'
+import styles from './styles.css'
 
 const fragments = {
   comment: gql`

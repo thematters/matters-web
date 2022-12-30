@@ -1,5 +1,6 @@
 import { NetworkStatus } from 'apollo-client'
 
+import { analytics, mergeConnections } from '~/common/utils'
 import {
   InfiniteScroll,
   List,
@@ -11,12 +12,9 @@ import {
   UserDigest,
 } from '~/components'
 
-import { analytics, mergeConnections } from '~/common/utils'
-
 import styles from '../styles.css'
-import TAG_PARTICIPANTS from './gql'
-
 import { TagParticipants } from './__generated__/TagParticipants'
+import TAG_PARTICIPANTS from './gql'
 
 interface Props {
   id: string

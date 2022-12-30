@@ -2,6 +2,8 @@ import VisuallyHidden from '@reach/visually-hidden'
 import { AriaAttributes, forwardRef, useContext } from 'react'
 import FocusLock from 'react-focus-lock'
 
+import { KEYCODES, TextId, Z_INDEX } from '~/common/enums'
+import { translate } from '~/common/utils'
 import {
   Button,
   Dialog,
@@ -14,9 +16,6 @@ import {
   useDialogSwitch,
   useResponsive,
 } from '~/components'
-
-import { KEYCODES, TextId, Z_INDEX } from '~/common/enums'
-import { translate } from '~/common/utils'
 
 /**
  * This is a responsive component which will show

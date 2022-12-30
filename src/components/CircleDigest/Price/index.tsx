@@ -1,14 +1,13 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
-import { Button, TextIcon, Translate, ViewerContext } from '~/components'
-
 import {
   OPEN_SUBSCRIBE_CIRCLE_DIALOG,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   UNIVERSAL_AUTH_SOURCE,
 } from '~/common/enums'
 import { toPath } from '~/common/utils'
+import { Button, TextIcon, Translate, ViewerContext } from '~/components'
 
 import { PriceCirclePrivate } from './__generated__/PriceCirclePrivate'
 import { PriceCirclePublic } from './__generated__/PriceCirclePublic'

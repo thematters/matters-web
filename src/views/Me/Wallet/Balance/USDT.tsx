@@ -1,5 +1,8 @@
 import { useContext } from 'react'
 
+import { QuoteCurrency } from '@/__generated__/globalTypes'
+import { PATHS } from '~/common/enums'
+import { formatAmount } from '~/common/utils'
 import {
   Button,
   CurrencyFormatter,
@@ -10,12 +13,7 @@ import {
   ViewerContext,
 } from '~/components'
 
-import { PATHS } from '~/common/enums'
-import { formatAmount } from '~/common/utils'
-
 import styles from './styles.css'
-
-import { QuoteCurrency } from '@/__generated__/globalTypes'
 
 interface USDTBalanceProps {
   currency: QuoteCurrency

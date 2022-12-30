@@ -1,9 +1,8 @@
 import { useContext } from 'react'
 
-import { Button, LanguageContext, TextIcon, Translate } from '~/components'
-
 import { GUIDE_LINKS, PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { formatAmount } from '~/common/utils'
+import { Button, LanguageContext, TextIcon, Translate } from '~/components'
 
 import styles from './styles.css'
 

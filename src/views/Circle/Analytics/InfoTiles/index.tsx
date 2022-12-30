@@ -1,10 +1,8 @@
 import classNames from 'classnames'
 
-import { TextIcon, withIcon } from '~/components'
-
-import { numRound } from '~/common/utils'
-
 import { ReactComponent as IconAnalyticsChangeArrow12 } from '@/public/static/icons/12px/analytics-change-arrow.svg'
+import { numRound } from '~/common/utils'
+import { TextIcon, withIcon } from '~/components'
 
 import styles from './styles.css'
 

@@ -1,11 +1,10 @@
 import gql from 'graphql-tag'
 
+import { TagNotice as NoticeType } from './__generated__/TagNotice'
 import TagAddEditorNotice from './TagAddEditorNotice'
 import TagAdoptionNotice from './TagAdoptionNotice'
 import TagLeaveEditorNotice from './TagLeaveEditorNotice'
 import TagLeaveNotice from './TagLeaveNotice'
-
-import { TagNotice as NoticeType } from './__generated__/TagNotice'
 
 const TagNotice = ({ notice }: { notice: NoticeType }) => {
   switch (notice.tagNoticeType) {

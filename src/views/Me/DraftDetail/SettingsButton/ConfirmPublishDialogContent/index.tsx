@@ -1,12 +1,10 @@
 import gql from 'graphql-tag'
 
+import PUBLISH_IMAGE from '@/public/static/images/publish-1.svg'
 import { Dialog, Translate, useMutation, useRoute } from '~/components'
 
-import PUBLISH_IMAGE from '@/public/static/images/publish-1.svg'
-
-import styles from './styles.css'
-
 import { PublishArticle } from './__generated__/PublishArticle'
+import styles from './styles.css'
 
 interface ConfirmPublishDialogContentProps {
   onBack: () => void

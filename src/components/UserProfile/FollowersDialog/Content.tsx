@@ -1,5 +1,6 @@
 import { useContext, useEffect } from 'react'
 
+import { analytics, mergeConnections } from '~/common/utils'
 import {
   Dialog,
   EmptyWarning,
@@ -15,11 +16,8 @@ import {
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 
-import { analytics, mergeConnections } from '~/common/utils'
-
-import { USER_FOLLOWERS_PRIVATE, USER_FOLLOWERS_PUBLIC } from './gql'
-
 import { UserFollowerPublic } from './__generated__/UserFollowerPublic'
+import { USER_FOLLOWERS_PRIVATE, USER_FOLLOWERS_PUBLIC } from './gql'
 
 const FollowersDialogContent = () => {
   const viewer = useContext(ViewerContext)

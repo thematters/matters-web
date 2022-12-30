@@ -1,12 +1,10 @@
 import { useState } from 'react'
 
-import { Button, TextIcon, Translate, useMutation } from '~/components'
-import INVITE_CIRCLE from '~/components/GQL/mutations/invite'
-
-import { ADD_TOAST } from '~/common/enums'
-
 import { InviteCircleInvitee } from '@/__generated__/globalTypes'
+import { ADD_TOAST } from '~/common/enums'
+import { Button, TextIcon, Translate, useMutation } from '~/components'
 import { InviteCircle } from '~/components/GQL/mutations/__generated__/InviteCircle'
+import INVITE_CIRCLE from '~/components/GQL/mutations/invite'
 
 interface CircleInvitationResendProps {
   circleId: string

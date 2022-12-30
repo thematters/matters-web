@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react'
 
+import { SEND_CODE_COUNTDOWN, VERIFICATION_CODE_TYPES } from '~/common/enums'
 import {
   Button,
   ReCaptchaContext,
@@ -8,13 +9,10 @@ import {
   useCountdown,
   useMutation,
 } from '~/components'
+import { SendVerificationCode } from '~/components/GQL/mutations/__generated__/SendVerificationCode'
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
 
-import { SEND_CODE_COUNTDOWN, VERIFICATION_CODE_TYPES } from '~/common/enums'
-
 import styles from './styles.css'
-
-import { SendVerificationCode } from '~/components/GQL/mutations/__generated__/SendVerificationCode'
 
 /**
  * This component is for sending verification code to user with built-in mutation.

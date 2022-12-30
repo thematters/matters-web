@@ -1,5 +1,7 @@
 import { useContext, useEffect } from 'react'
 
+import { REFETCH_CIRCLE_DETAIL_ARTICLES } from '~/common/enums'
+import { analytics, mergeConnections } from '~/common/utils'
 import {
   ArticleDigestFeed,
   EmptyArticle,
@@ -15,13 +17,9 @@ import {
   ViewerContext,
 } from '~/components'
 
-import { REFETCH_CIRCLE_DETAIL_ARTICLES } from '~/common/enums'
-import { analytics, mergeConnections } from '~/common/utils'
-
 import CircleDetailTabs from '../CircleDetailTabs'
-import { CIRCLE_WORKS_PRIVATE, CIRCLE_WORKS_PUBLIC } from './gql'
-
 import { CircleWorksPublic } from './__generated__/CircleWorksPublic'
+import { CIRCLE_WORKS_PRIVATE, CIRCLE_WORKS_PUBLIC } from './gql'
 
 const CircleDetailWorks = () => {
   const { getQuery } = useRoute()

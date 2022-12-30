@@ -1,8 +1,7 @@
 import gql from 'graphql-tag'
 
-import { Translate } from '~/components'
-
 import { TEST_ID } from '~/common/enums'
+import { Translate } from '~/components'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorName from '../NoticeActorName'
@@ -10,7 +9,6 @@ import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
 import NoticeTag from '../NoticeTag'
 import styles from '../styles.css'
-
 import { TagAdoptionNotice as NoticeType } from './__generated__/TagAdoptionNotice'
 
 const TagAdoptionNotice = ({ notice }: { notice: NoticeType }) => {

@@ -1,4 +1,10 @@
 import {
+  CLOSE_ACTIVE_DIALOG,
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  PATHS,
+} from '~/common/enums'
+import { appendTarget } from '~/common/utils'
+import {
   Button,
   ButtonProps,
   IconSize,
@@ -6,13 +12,6 @@ import {
   Translate,
   useResponsive,
 } from '~/components'
-
-import {
-  CLOSE_ACTIVE_DIALOG,
-  OPEN_UNIVERSAL_AUTH_DIALOG,
-  PATHS,
-} from '~/common/enums'
-import { appendTarget } from '~/common/utils'
 
 interface LoginButtonBaseProps {
   iconSize?: Extract<IconSize, 'md'>

@@ -14,9 +14,8 @@ import {
   UserDigest,
 } from '~/components'
 
-import styles from './styles.css'
-
 import { AuthorPicker as AuthorPickerType } from './__generated__/AuthorPicker'
+import styles from './styles.css'
 
 const AUTHOR_PICKER = gql`
   query AuthorPicker($random: random_Int_min_0_max_49) {

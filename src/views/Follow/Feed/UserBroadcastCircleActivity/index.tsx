@@ -3,9 +3,8 @@ import { CircleDigest, Translate, UserDigest } from '~/components'
 import UnfollowCircleActionButton from '../DropdownActions/UnfollowCircle'
 import FeedComment from '../FollowingFeedComment'
 import FeedHead from '../FollowingFeedHead'
-import { fragments } from './gql'
-
 import { UserBroadcastCircleActivity as Activity } from './__generated__/UserBroadcastCircleActivity'
+import { fragments } from './gql'
 
 const UserBroadcastCircleActivity = ({
   actor,

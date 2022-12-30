@@ -10,14 +10,13 @@ import {
   Translate,
   useMutation,
 } from '~/components'
+import { ToggleFollowUser } from '~/components/GQL/mutations/__generated__/ToggleFollowUser'
 import TOGGLE_FOLLOW_USER from '~/components/GQL/mutations/toggleFollowUser'
 import updateUserFollowerCount from '~/components/GQL/updates/userFollowerCount'
 import updateViewerFolloweeCount from '~/components/GQL/updates/viewerFolloweeCount'
 
-import { FollowUserButtonSize } from './index'
-
-import { ToggleFollowUser } from '~/components/GQL/mutations/__generated__/ToggleFollowUser'
 import { FollowButtonUserPrivate } from './__generated__/FollowButtonUserPrivate'
+import { FollowUserButtonSize } from './index'
 
 interface UnfollowProps {
   user: Partial<FollowButtonUserPrivate>

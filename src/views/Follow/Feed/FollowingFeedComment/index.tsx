@@ -3,11 +3,10 @@ import React from 'react'
 import { Comment, DateTime, Expandable } from '~/components'
 
 import DropdownActions, { DropdownActionsControls } from '../DropdownActions'
-import { fragments } from './gql'
-import styles from './styles.css'
-
 import { FollowingFeedCommentPrivate } from './__generated__/FollowingFeedCommentPrivate'
 import { FollowingFeedCommentPublic } from './__generated__/FollowingFeedCommentPublic'
+import { fragments } from './gql'
+import styles from './styles.css'
 
 type FollowingFeedCommentProps = {
   comment: FollowingFeedCommentPublic & Partial<FollowingFeedCommentPrivate>

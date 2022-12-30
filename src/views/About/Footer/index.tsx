@@ -1,3 +1,9 @@
+import { ReactComponent as IconFooterBlog } from '@/public/static/icons/24px/footer-blog.svg'
+import { ReactComponent as IconFooterDiscord } from '@/public/static/icons/24px/footer-discord.svg'
+import { ReactComponent as IconFooterFacebook } from '@/public/static/icons/24px/footer-facebook.svg'
+import { ReactComponent as IconFooterInstagram } from '@/public/static/icons/24px/footer-instagram.svg'
+import { ReactComponent as IconFooterLinkedin } from '@/public/static/icons/24px/footer-linkedin.svg'
+import { ReactComponent as IconFooterTwitter } from '@/public/static/icons/24px/footer-twitter.svg'
 import {
   Button,
   LanguageSwitch,
@@ -6,13 +12,6 @@ import {
   useResponsive,
   withIcon,
 } from '~/components'
-
-import { ReactComponent as IconFooterBlog } from '@/public/static/icons/24px/footer-blog.svg'
-import { ReactComponent as IconFooterDiscord } from '@/public/static/icons/24px/footer-discord.svg'
-import { ReactComponent as IconFooterFacebook } from '@/public/static/icons/24px/footer-facebook.svg'
-import { ReactComponent as IconFooterInstagram } from '@/public/static/icons/24px/footer-instagram.svg'
-import { ReactComponent as IconFooterLinkedin } from '@/public/static/icons/24px/footer-linkedin.svg'
-import { ReactComponent as IconFooterTwitter } from '@/public/static/icons/24px/footer-twitter.svg'
 
 import styles from './styles.css'
 

@@ -2,19 +2,17 @@ import classNames from 'classnames'
 import Link from 'next/link'
 import React from 'react'
 
+import { TEST_ID } from '~/common/enums'
+import { toPath } from '~/common/utils'
 import { Card, CardProps, Translate } from '~/components'
 import { Avatar, AvatarProps } from '~/components/Avatar'
 import { FollowUserButton } from '~/components/Buttons/FollowUser'
 import { UnblockUserButton } from '~/components/Buttons/UnblockUser'
 
-import { TEST_ID } from '~/common/enums'
-import { toPath } from '~/common/utils'
-
-import { fragments } from './gql'
-import styles from './styles.css'
-
 import { UserDigestRichUserPrivate } from './__generated__/UserDigestRichUserPrivate'
 import { UserDigestRichUserPublic } from './__generated__/UserDigestRichUserPublic'
+import { fragments } from './gql'
+import styles from './styles.css'
 
 /**
  * UeserDigest.Rich is a component for presenting user's avatar, display

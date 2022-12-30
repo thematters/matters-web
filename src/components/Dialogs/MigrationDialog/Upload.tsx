@@ -2,15 +2,6 @@ import VisuallyHidden from '@reach/visually-hidden'
 import { useContext } from 'react'
 
 import {
-  Dialog,
-  LanguageContext,
-  Translate,
-  useMutation,
-  ViewerContext,
-} from '~/components'
-import MIGRATION from '~/components/GQL/mutations/migration'
-
-import {
   ACCEPTED_UPLOAD_MIGRATION_TYPES,
   ADD_TOAST,
   OPEN_UNIVERSAL_AUTH_DIALOG,
@@ -18,10 +9,17 @@ import {
   UPLOAD_MIGRATION_SIZE_LIMIT,
 } from '~/common/enums'
 import { translate } from '~/common/utils'
+import {
+  Dialog,
+  LanguageContext,
+  Translate,
+  useMutation,
+  ViewerContext,
+} from '~/components'
+import { Migration } from '~/components/GQL/mutations/__generated__/Migration'
+import MIGRATION from '~/components/GQL/mutations/migration'
 
 import styles from './styles.css'
-
-import { Migration } from '~/components/GQL/mutations/__generated__/Migration'
 
 const texts: {
   zh_hant: Record<string, string>

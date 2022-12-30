@@ -1,8 +1,7 @@
 import { useDisconnect } from 'wagmi'
 
-import { Button, IconInfo24, TextIcon, Translate } from '~/components'
-
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
+import { Button, IconInfo24, TextIcon, Translate } from '~/components'
 
 import CurrencyIndicator from './CurrencyIndicator'
 import styles from './styles.css'

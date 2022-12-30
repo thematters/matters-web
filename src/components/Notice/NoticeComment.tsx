@@ -1,14 +1,12 @@
 import gql from 'graphql-tag'
 
+import { TEST_ID } from '~/common/enums'
+import { toPath } from '~/common/utils'
 import { Card, Expandable } from '~/components'
 import CommentContent from '~/components/Comment/Content'
 
-import { TEST_ID } from '~/common/enums'
-import { toPath } from '~/common/utils'
-
-import styles from './styles.css'
-
 import { NoticeComment as NoticeCommentType } from './__generated__/NoticeComment'
+import styles from './styles.css'
 
 const fragments = {
   comment: gql`

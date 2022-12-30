@@ -2,6 +2,7 @@ import contentHash from '@ensdomains/content-hash'
 import { namehash } from 'ethers/lib/utils'
 import { useContractRead, useEnsName, useEnsResolver } from 'wagmi'
 
+import { featureSupportedChains, PublicResolverABI } from '~/common/utils'
 import {
   Button,
   ENSDialog,
@@ -11,12 +12,9 @@ import {
   Translate,
 } from '~/components'
 
-import { featureSupportedChains, PublicResolverABI } from '~/common/utils'
-
+import { UserProfileUserPublic_user } from '../__generated__/UserProfileUserPublic'
 import styles from './styles.css'
 import WalletAddress from './WalletAddress'
-
-import { UserProfileUserPublic_user } from '../__generated__/UserProfileUserPublic'
 
 type WalletLabelProps = {
   user: UserProfileUserPublic_user

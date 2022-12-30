@@ -1,5 +1,6 @@
 import { useContext, useEffect } from 'react'
 
+import { analytics, mergeConnections } from '~/common/utils'
 import {
   EmptyWarning,
   Head,
@@ -14,11 +15,8 @@ import {
   ViewerContext,
 } from '~/components'
 
-import { analytics, mergeConnections } from '~/common/utils'
-
-import { ALL_AUTHORS_PRIVATE, ALL_AUTHORS_PUBLIC } from './gql'
-
 import { AllAuthorsPublic } from './__generated__/AllAuthorsPublic'
+import { ALL_AUTHORS_PRIVATE, ALL_AUTHORS_PUBLIC } from './gql'
 
 const BaseAuthors = () => {
   const viewer = useContext(ViewerContext)

@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 import React from 'react'
 
+import { DigestNotice } from './__generated__/DigestNotice'
 import ArticleArticleNotice from './ArticleArticleNotice'
 import ArticleNotice from './ArticleNotice'
 import ArticleTagNotice from './ArticleTagNotice'
@@ -12,8 +13,6 @@ import OfficialAnnouncementNotice from './OfficialAnnouncementNotice'
 import TagNotice from './TagNotice'
 import TransactionNotice from './TransactionNotice'
 import UserNotice from './UserNotice'
-
-import { DigestNotice } from './__generated__/DigestNotice'
 
 interface NoticeProps {
   notice: DigestNotice

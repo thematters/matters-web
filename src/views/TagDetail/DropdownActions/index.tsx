@@ -2,6 +2,8 @@ import _isEmpty from 'lodash/isEmpty'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 
+import { ADD_TOAST, REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
+import { translate } from '~/common/utils'
 import {
   Button,
   DropdownDialog,
@@ -22,17 +24,13 @@ import {
 } from '~/components'
 import { SearchSelectDialog } from '~/components/Dialogs/SearchSelectDialog'
 import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
+import { AddArticlesTags } from '~/components/GQL/mutations/__generated__/AddArticlesTags'
 import ADD_ARTICLES_TAGS from '~/components/GQL/mutations/addArticlesTags'
 import updateTagArticlesCount from '~/components/GQL/updates/tagArticlesCount'
 
-import { ADD_TOAST, REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
-import { translate } from '~/common/utils'
-
-import styles from './styles.css'
-
-import { AddArticlesTags } from '~/components/GQL/mutations/__generated__/AddArticlesTags'
 // import { TagDetailPublic_node_Tag } from '../__generated__/TagDetailPublic'
 import { TagFragment } from '../__generated__/TagFragment'
+import styles from './styles.css'
 
 interface DropdownActionsProps {
   // id: string

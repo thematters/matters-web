@@ -1,5 +1,6 @@
 import { useContext, useEffect } from 'react'
 
+import { analytics, mergeConnections } from '~/common/utils'
 import {
   Dialog,
   EmptyWarning,
@@ -15,11 +16,8 @@ import {
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 
-import { analytics, mergeConnections } from '~/common/utils'
-
-import { CIRCLE_MEMBERS_PRIVATE, CIRCLE_MEMBERS_PUBLIC } from './gql'
-
 import { CircleMembersPublic } from './__generated__/CircleMembersPublic'
+import { CIRCLE_MEMBERS_PRIVATE, CIRCLE_MEMBERS_PUBLIC } from './gql'
 
 const MembersDialogContent = () => {
   const viewer = useContext(ViewerContext)

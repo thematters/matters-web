@@ -6,9 +6,8 @@ import {
   DropResult,
 } from 'react-beautiful-dnd'
 
-import { IconSort16, LanguageContext } from '~/components'
-
 import { translate } from '~/common/utils'
+import { IconSort16, LanguageContext } from '~/components'
 
 import { SelectNode } from '../SearchingArea'
 import SearchSelectNode from '../SearchSelectNode'

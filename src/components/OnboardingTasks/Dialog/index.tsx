@@ -1,9 +1,8 @@
 import { useState } from 'react'
 
+import { CLOSE_ONBOARDING_TASKS_DIALOG } from '~/common/enums'
 import { Dialog, Translate, useDialogSwitch } from '~/components'
 import { useEventListener } from '~/components/Hook'
-
-import { CLOSE_ONBOARDING_TASKS_DIALOG } from '~/common/enums'
 
 import Galaxy from '../Galaxy'
 import Tasks from '../Tasks'

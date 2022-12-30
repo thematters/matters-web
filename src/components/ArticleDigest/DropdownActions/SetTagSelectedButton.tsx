@@ -1,8 +1,7 @@
 import gql from 'graphql-tag'
 
-import { IconAdd24, Menu, TextIcon, Translate, useMutation } from '~/components'
-
 import { ADD_TOAST } from '~/common/enums'
+import { IconAdd24, Menu, TextIcon, Translate, useMutation } from '~/components'
 
 import { SetTagSelected } from './__generated__/SetTagSelected'
 import { SetTagSelectedButtonArticle } from './__generated__/SetTagSelectedButtonArticle'

@@ -3,6 +3,8 @@ import { ethers } from 'ethers'
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
+import { OPEN_LIKE_COIN_DIALOG, PATHS } from '~/common/enums'
+import { maskAddress, translate } from '~/common/utils'
 import {
   Button,
   CopyToClipboard,
@@ -14,12 +16,8 @@ import {
   ViewerContext,
 } from '~/components'
 
-import { OPEN_LIKE_COIN_DIALOG, PATHS } from '~/common/enums'
-import { maskAddress, translate } from '~/common/utils'
-
-import styles from './styles.css'
-
 import { ViewerLikeInfo } from './__generated__/ViewerLikeInfo'
+import styles from './styles.css'
 
 const VIEWER_LIKE_INFO = gql`
   query ViewerLikeInfo {

@@ -1,13 +1,11 @@
 import gql from 'graphql-tag'
 
-import { Tag, TagExposureTracker } from '~/components'
-
 import { TEST_ID } from '~/common/enums'
 import { analytics } from '~/common/utils'
-
-import styles from './styles.css'
+import { Tag, TagExposureTracker } from '~/components'
 
 import { TagListArticle } from './__generated__/TagListArticle'
+import styles from './styles.css'
 
 const fragments = {
   article: gql`

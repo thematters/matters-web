@@ -1,13 +1,11 @@
 import { useContext } from 'react'
 
-import { IconChecked, LanguageContext, Translate } from '~/components'
-
 import { ASSET_TYPE } from '~/common/enums'
 import { translate } from '~/common/utils'
+import { IconChecked, LanguageContext, Translate } from '~/components'
+import { Asset } from '~/components/GQL/fragments/__generated__/Asset'
 
 import styles from './styles.css'
-
-import { Asset } from '~/components/GQL/fragments/__generated__/Asset'
 
 interface SelectorProps {
   assets: Asset[]

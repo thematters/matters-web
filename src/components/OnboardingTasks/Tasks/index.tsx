@@ -2,17 +2,6 @@ import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
 import {
-  Dialog,
-  EmbedShare,
-  LanguageContext,
-  Translate,
-  useMutation,
-  useResponsive,
-  ViewerContext,
-} from '~/components'
-import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
-
-import {
   CLOSE_ONBOARDING_TASKS_DIALOG,
   ONBOARDING_TASKS_HIDE,
   OPEN_LIKE_COIN_DIALOG,
@@ -21,11 +10,20 @@ import {
   URL_QS,
 } from '~/common/enums'
 import { analytics, toPath, translate } from '~/common/utils'
+import {
+  Dialog,
+  EmbedShare,
+  LanguageContext,
+  Translate,
+  useMutation,
+  useResponsive,
+  ViewerContext,
+} from '~/components'
+import { CreateDraft } from '~/components/GQL/mutations/__generated__/CreateDraft'
+import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
 
 import styles from './styles.css'
 import TaskItem from './TaskItem'
-
-import { CreateDraft } from '~/components/GQL/mutations/__generated__/CreateDraft'
 
 interface Props {
   task: number

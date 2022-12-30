@@ -1,5 +1,8 @@
 import { useContext } from 'react'
 
+import { QuoteCurrency } from '@/__generated__/globalTypes'
+import { PATHS } from '~/common/enums'
+import { formatAmount } from '~/common/utils'
 import {
   Button,
   CurrencyFormatter,
@@ -8,14 +11,9 @@ import {
   Translate,
   ViewerContext,
 } from '~/components'
-
-import { PATHS } from '~/common/enums'
-import { formatAmount } from '~/common/utils'
+import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
 
 import styles from './styles.css'
-
-import { QuoteCurrency } from '@/__generated__/globalTypes'
-import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
 
 type LikeCoinChoiceProps = {
   balance: number

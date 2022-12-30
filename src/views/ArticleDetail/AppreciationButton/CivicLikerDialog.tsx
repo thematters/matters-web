@@ -1,8 +1,7 @@
 import gql from 'graphql-tag'
 
-import { Dialog, Translate, useDialogSwitch } from '~/components'
-
 import { EXTERNAL_LINKS } from '~/common/enums'
+import { Dialog, Translate, useDialogSwitch } from '~/components'
 
 import { CivicLikerAppreciateButtonUser } from './__generated__/CivicLikerAppreciateButtonUser'
 

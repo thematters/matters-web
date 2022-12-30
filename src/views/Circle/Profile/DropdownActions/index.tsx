@@ -2,6 +2,7 @@ import _isEmpty from 'lodash/isEmpty'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 
+import { toPath, translate } from '~/common/utils'
 import {
   Button,
   DropdownDialog,
@@ -18,12 +19,9 @@ import {
   ViewerContext,
 } from '~/components'
 
-import { toPath, translate } from '~/common/utils'
-
-import { fragments } from './gql'
-
 import { DropdownActionsCirclePrivate } from './__generated__/DropdownActionsCirclePrivate'
 import { DropdownActionsCirclePublic } from './__generated__/DropdownActionsCirclePublic'
+import { fragments } from './gql'
 
 interface DialogProps {
   circle: DropdownActionsCirclePublic & Partial<DropdownActionsCirclePrivate>

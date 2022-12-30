@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 
+import { ADD_TOAST } from '~/common/enums'
 import {
   Button,
   IconAvatarEmpty24,
@@ -10,12 +11,9 @@ import {
   ViewerContext,
 } from '~/components'
 
-import { ADD_TOAST } from '~/common/enums'
-
-import styles from './styles.css'
-
 // import { TagDetailPublic_node_Tag } from '../__generated__/TagDetailPublic'
 import { TagFragment } from '../__generated__/TagFragment'
+import styles from './styles.css'
 
 const Owner = ({ tag }: { tag: TagFragment }) => {
   const viewer = useContext(ViewerContext)

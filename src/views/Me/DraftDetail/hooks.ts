@@ -1,7 +1,22 @@
 import _uniq from 'lodash/uniq'
 
+import {
+  ArticleAccessType,
+  ArticleLicenseType,
+} from '@/__generated__/globalTypes'
+import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
+import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
 import { useImperativeQuery, useMutation } from '~/components/GQL'
+import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
 
+import { DraftAssets } from './__generated__/DraftAssets'
+import { EditMetaDraft } from './__generated__/EditMetaDraft'
+import { SetDraftAccess } from './__generated__/SetDraftAccess'
+import { SetDraftCollection } from './__generated__/SetDraftCollection'
+import { SetDraftCover } from './__generated__/SetDraftCover'
+import { SetDraftPublishISCN } from './__generated__/SetDraftPublishISCN'
+import { SetDraftTags } from './__generated__/SetDraftTags'
+import { SetSupportRequestReply } from './__generated__/SetSupportRequestReply'
 import {
   DRAFT_ASSETS,
   SET_ACCESS,
@@ -11,22 +26,6 @@ import {
   SET_SUPPORT_REQUEST_REPLY,
   SET_TAGS,
 } from './gql'
-
-import {
-  ArticleAccessType,
-  ArticleLicenseType,
-} from '@/__generated__/globalTypes'
-import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
-import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
-import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
-import { DraftAssets } from './__generated__/DraftAssets'
-import { EditMetaDraft } from './__generated__/EditMetaDraft'
-import { SetDraftAccess } from './__generated__/SetDraftAccess'
-import { SetDraftCollection } from './__generated__/SetDraftCollection'
-import { SetDraftCover } from './__generated__/SetDraftCover'
-import { SetDraftPublishISCN } from './__generated__/SetDraftPublishISCN'
-import { SetDraftTags } from './__generated__/SetDraftTags'
-import { SetSupportRequestReply } from './__generated__/SetSupportRequestReply'
 /**
  * Hooks for editing draft cover, tags and collection
  */

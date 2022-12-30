@@ -1,3 +1,4 @@
+import { analytics, toPath } from '~/common/utils'
 import {
   Card,
   List,
@@ -8,13 +9,10 @@ import {
   useRoute,
 } from '~/components'
 
-import { analytics, toPath } from '~/common/utils'
-
+import { SearchAggregateTagsPublic } from './__generated__/SearchAggregateTagsPublic'
 import { SEARCH_AGGREGATE_TAGS_PUBLIC } from './gql'
 import styles from './styles.css'
 import ViewMoreButton from './ViewMoreButton'
-
-import { SearchAggregateTagsPublic } from './__generated__/SearchAggregateTagsPublic'
 
 const AggregateTagResults = () => {
   const { getQuery } = useRoute()

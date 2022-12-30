@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 
+import { translate } from '~/common/utils'
 import {
   Button,
   ButtonProps,
@@ -10,8 +11,6 @@ import {
   ShareDialog,
   ShareDialogProps,
 } from '~/components'
-
-import { translate } from '~/common/utils'
 
 type ShareButtonBaseProps = {
   hasIcon?: boolean

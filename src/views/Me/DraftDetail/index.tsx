@@ -2,6 +2,8 @@ import { useQuery } from '@apollo/react-hooks'
 import dynamic from 'next/dynamic'
 import { useState } from 'react'
 
+import { ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
+import { stripHtml } from '~/common/utils'
 import {
   EmptyLayout,
   Head,
@@ -12,21 +14,17 @@ import {
   useRoute,
 } from '~/components'
 import { QueryError, useMutation } from '~/components/GQL'
+import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 
-import { ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
-import { stripHtml } from '~/common/utils'
-
+import { DraftDetailQuery } from './__generated__/DraftDetailQuery'
+import { SetDraftContent } from './__generated__/SetDraftContent'
 import BottomBar from './BottomBar'
 import { DRAFT_DETAIL, SET_CONTENT } from './gql'
 import PublishState from './PublishState'
 import SaveStatus from './SaveStatus'
 import SettingsButton from './SettingsButton'
 import Sidebar from './Sidebar'
-
-import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
-import { DraftDetailQuery } from './__generated__/DraftDetailQuery'
-import { SetDraftContent } from './__generated__/SetDraftContent'
 
 const Editor = dynamic(() => import('~/components/Editor/Article'), {
   ssr: false,

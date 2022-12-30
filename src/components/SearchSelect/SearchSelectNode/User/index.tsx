@@ -1,12 +1,10 @@
 import classNames from 'classnames'
 
-import { Card, IconChecked, IconUnChecked, UserDigest } from '~/components'
-
 import { TEST_ID } from '~/common/enums'
+import { Card, IconChecked, IconUnChecked, UserDigest } from '~/components'
+import { UserDigestMiniUser } from '~/components/UserDigest/Mini/__generated__/UserDigestMiniUser'
 
 import styles from '../styles.css'
-
-import { UserDigestMiniUser } from '~/components/UserDigest/Mini/__generated__/UserDigestMiniUser'
 
 interface SearchSelectUserProps {
   user: UserDigestMiniUser

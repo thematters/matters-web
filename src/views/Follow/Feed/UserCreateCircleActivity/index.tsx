@@ -1,13 +1,11 @@
-import { Translate, UserDigest } from '~/components'
-
 import { analytics } from '~/common/utils'
+import { Translate, UserDigest } from '~/components'
 
 import UnfollowUserActionButton from '../DropdownActions/UnfollowUser'
 import FeedCircle from '../FollowingFeedCircle'
 import FeedHead from '../FollowingFeedHead'
-import { fragments } from './gql'
-
 import { UserCreateCircleActivity as Activity } from './__generated__/UserCreateCircleActivity'
+import { fragments } from './gql'
 
 const UserCreateCircleActivity = ({
   actor,

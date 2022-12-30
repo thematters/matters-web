@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
+import { translate } from '~/common/utils'
 import {
   Button,
   CopyToClipboard,
@@ -12,14 +13,11 @@ import {
   Translate,
 } from '~/components'
 
-import { translate } from '~/common/utils'
-
-import styles from './styles.css'
-
 import {
   ArticleSecret,
   ArticleSecret_article_Article,
 } from './__generated__/ArticleSecret'
+import styles from './styles.css'
 
 type ArticleSecretSectionProps = {
   id: string

@@ -3,6 +3,13 @@ import classNames from 'classnames'
 import { useContext, useEffect, useState } from 'react'
 
 import {
+  PATHS,
+  PAYMENT_CURRENCY as CURRENCY,
+  SUPPORT_SUCCESS_ANIMATION,
+  TEST_ID,
+} from '~/common/enums'
+import { analytics, sleep } from '~/common/utils'
+import {
   Avatar,
   Button,
   CircleDigest,
@@ -15,25 +22,16 @@ import {
   ViewerContext,
 } from '~/components'
 
-import {
-  PATHS,
-  PAYMENT_CURRENCY as CURRENCY,
-  SUPPORT_SUCCESS_ANIMATION,
-  TEST_ID,
-} from '~/common/enums'
-import { analytics, sleep } from '~/common/utils'
-
-import Animation from './Animation'
-import Donators from './Donators'
-import { fragments, HAS_DONATED } from './gql'
-import styles from './styles.css'
-import SupportButton from './SupportButton'
-
 import { ArticleDetailPublic_article } from '../__generated__/ArticleDetailPublic'
 import {
   HasDonated,
   HasDonated_article_Article,
 } from './__generated__/HasDonated'
+import Animation from './Animation'
+import Donators from './Donators'
+import { fragments, HAS_DONATED } from './gql'
+import styles from './styles.css'
+import SupportButton from './SupportButton'
 
 interface DonationProps {
   article: ArticleDetailPublic_article

@@ -9,6 +9,8 @@ import _get from 'lodash/get'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useState } from 'react'
 
+import { STRIPE_ERROR_MESSAGES } from '~/common/enums'
+import { analytics, parseFormSubmitErrors, translate } from '~/common/utils'
 import {
   Dialog,
   LanguageContext,
@@ -16,20 +18,16 @@ import {
   useMutation,
   useStep,
 } from '~/components'
-
-import { STRIPE_ERROR_MESSAGES } from '~/common/enums'
-import { analytics, parseFormSubmitErrors, translate } from '~/common/utils'
+import { DigestRichCirclePrivate } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePrivate'
+import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
 
 import StripeCheckout from '../StripeCheckout'
+import { SubscribeCircle as SubscribeCircleType } from './__generated__/SubscribeCircle'
 import { SUBSCRIBE_CIRCLE } from './gql'
 import Head from './Head'
 import Hint from './Hint'
 import Processing from './Processing'
 import styles from './styles.css'
-
-import { DigestRichCirclePrivate } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePrivate'
-import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
-import { SubscribeCircle as SubscribeCircleType } from './__generated__/SubscribeCircle'
 
 interface CardPaymentProps {
   circle: DigestRichCirclePublic & DigestRichCirclePrivate

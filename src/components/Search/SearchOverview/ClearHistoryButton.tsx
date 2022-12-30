@@ -1,8 +1,7 @@
 import gql from 'graphql-tag'
 
-import { Button, TextIcon, Translate, useMutation } from '~/components'
-
 import { ADD_TOAST } from '~/common/enums'
+import { Button, TextIcon, Translate, useMutation } from '~/components'
 
 import { ClearHistory } from './__generated__/ClearHistory'
 import { ViewerRecentSearches } from './__generated__/ViewerRecentSearches'

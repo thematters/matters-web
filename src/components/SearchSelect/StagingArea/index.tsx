@@ -1,8 +1,7 @@
 import dynamic from 'next/dynamic'
 
-import { Spinner, Translate } from '~/components'
-
 import { TextId } from '~/common/enums'
+import { Spinner, Translate } from '~/components'
 
 import { SelectNode } from '../SearchingArea'
 import SearchSelectNode from '../SearchSelectNode'

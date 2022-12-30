@@ -1,7 +1,6 @@
+import { CivicLikerAppreciateButtonUser } from './__generated__/CivicLikerAppreciateButtonUser'
 import AppreciateButton from './AppreciateButton'
 import CivicLikerDialog from './CivicLikerDialog'
-
-import { CivicLikerAppreciateButtonUser } from './__generated__/CivicLikerAppreciateButtonUser'
 
 const CivicLikerButton = ({
   user,

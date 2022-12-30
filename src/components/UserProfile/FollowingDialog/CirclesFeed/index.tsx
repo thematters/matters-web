@@ -1,3 +1,4 @@
+import { analytics, mergeConnections } from '~/common/utils'
 import {
   CircleDigest,
   EmptyWarning,
@@ -11,11 +12,8 @@ import {
   useRoute,
 } from '~/components'
 
-import { analytics, mergeConnections } from '~/common/utils'
-
-import { USER_FOLLOWING_CIRCLES_PUBLIC } from './gql'
-
 import { UserFollowingCirclesPublic } from './__generated__/UserFollowingCirclesPublic'
+import { USER_FOLLOWING_CIRCLES_PUBLIC } from './gql'
 
 const CirclesFeed = () => {
   const { getQuery } = useRoute()

@@ -1,15 +1,13 @@
 import classNames from 'classnames'
 
+import { TEST_ID } from '~/common/enums'
+import { toPath } from '~/common/utils'
 import { LinkWrapper, Translate } from '~/components'
 import { Avatar, AvatarProps, AvatarSize } from '~/components/Avatar'
 
-import { TEST_ID } from '~/common/enums'
-import { toPath } from '~/common/utils'
-
+import { UserDigestMiniUser } from './__generated__/UserDigestMiniUser'
 import { fragments } from './gql'
 import styles from './styles.css'
-
-import { UserDigestMiniUser } from './__generated__/UserDigestMiniUser'
 
 /**
  * UserDigest.Mini is a component for presenting user's:

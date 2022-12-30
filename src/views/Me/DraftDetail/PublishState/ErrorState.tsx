@@ -1,8 +1,7 @@
 import { Toast, Translate } from '~/components'
+import { PublishStateDraft } from '~/components/GQL/fragments/__generated__/PublishStateDraft'
 
 import RetryButton from './RetryButton'
-
-import { PublishStateDraft } from '~/components/GQL/fragments/__generated__/PublishStateDraft'
 
 const ErrorState = ({ draft }: { draft: PublishStateDraft }) => (
   <Toast.Instance

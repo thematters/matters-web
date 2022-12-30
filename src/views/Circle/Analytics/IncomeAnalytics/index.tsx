@@ -1,6 +1,9 @@
 import { useQuery } from '@apollo/react-hooks'
 import _get from 'lodash/get'
 
+import { ReactComponent as IconAnalyticsIncome24 } from '@/public/static/icons/24px/analytics-income.svg'
+import { CHART_COLOR } from '~/common/enums'
+import { formatAmount } from '~/common/utils'
 import {
   QueryError,
   Spinner,
@@ -9,17 +12,11 @@ import {
   useRoute,
 } from '~/components'
 
-import { CHART_COLOR } from '~/common/enums'
-import { formatAmount } from '~/common/utils'
-
-import { ReactComponent as IconAnalyticsIncome24 } from '@/public/static/icons/24px/analytics-income.svg'
-
 import InfoTiles from '../InfoTiles'
 import SectionHead from '../SectionHead'
+import { CircleIncomeAnalytics } from './__generated__/CircleIncomeAnalytics'
 import { CIRCLE_INCOME_ANALYTICS } from './gql'
 import styles from './styles.css'
-
-import { CircleIncomeAnalytics } from './__generated__/CircleIncomeAnalytics'
 
 const Content = () => {
   const { getQuery } = useRoute()

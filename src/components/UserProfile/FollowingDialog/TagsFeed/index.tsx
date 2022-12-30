@@ -1,5 +1,6 @@
 import { useContext, useEffect } from 'react'
 
+import { analytics, mergeConnections } from '~/common/utils'
 import {
   EmptyWarning,
   InfiniteScroll,
@@ -14,11 +15,8 @@ import {
   ViewerContext,
 } from '~/components'
 
-import { analytics, mergeConnections } from '~/common/utils'
-
-import { USER_FOLLOWING_TAGS_PRIVATE, USER_FOLLOWING_TAGS_PUBLIC } from './gql'
-
 import { UserFollowingTagsPublic } from './__generated__/UserFollowingTagsPublic'
+import { USER_FOLLOWING_TAGS_PRIVATE, USER_FOLLOWING_TAGS_PUBLIC } from './gql'
 
 const TagsFeed = () => {
   const viewer = useContext(ViewerContext)

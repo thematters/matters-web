@@ -2,6 +2,9 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
+import { QuoteCurrency } from '@/__generated__/globalTypes'
+import { PATHS } from '~/common/enums'
+import { formatAmount } from '~/common/utils'
 import {
   Button,
   CurrencyFormatter,
@@ -13,13 +16,8 @@ import {
   ViewerContext,
 } from '~/components'
 
-import { PATHS } from '~/common/enums'
-import { formatAmount } from '~/common/utils'
-
-import styles from './styles.css'
-
-import { QuoteCurrency } from '@/__generated__/globalTypes'
 import { ViewerLikeBalance } from './__generated__/ViewerLikeBalance'
+import styles from './styles.css'
 
 interface LikeCoinBalanceProps {
   currency: QuoteCurrency

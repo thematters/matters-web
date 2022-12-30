@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { stripHtml, toPath } from '~/common/utils'
 import {
   Card,
   CardProps,
@@ -9,13 +10,10 @@ import {
 } from '~/components'
 import FollowButton from '~/components/ArticleDigest/Feed/FollowButton'
 
-import { stripHtml, toPath } from '~/common/utils'
-
-import { fragments } from './gql'
-import styles from './styles.css'
-
 import { FollowingFeedRecommendArticlePrivate } from './__generated__/FollowingFeedRecommendArticlePrivate'
 import { FollowingFeedRecommendArticlePublic } from './__generated__/FollowingFeedRecommendArticlePublic'
+import { fragments } from './gql'
+import styles from './styles.css'
 
 type Props = {
   article: FollowingFeedRecommendArticlePublic &

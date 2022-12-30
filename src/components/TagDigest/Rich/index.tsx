@@ -1,15 +1,13 @@
 import gql from 'graphql-tag'
 
-import { Card, CardProps, IconHashTag16, TextIcon } from '~/components'
-
 import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
+import { Card, CardProps, IconHashTag16, TextIcon } from '~/components'
 
 import { TagDigestButtons } from '../Buttons'
-import styles from './styles.css'
-
 import { TagDigestRichTagPrivate } from './__generated__/TagDigestRichTagPrivate'
 import { TagDigestRichTagPublic } from './__generated__/TagDigestRichTagPublic'
+import styles from './styles.css'
 
 type Props = {
   tag: TagDigestRichTagPublic & Partial<TagDigestRichTagPrivate>

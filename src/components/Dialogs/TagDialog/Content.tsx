@@ -4,15 +4,7 @@ import _pickBy from 'lodash/pickBy'
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
-import {
-  CoverUploader,
-  Dialog,
-  Form,
-  LanguageContext,
-  Translate,
-  useMutation,
-} from '~/components'
-
+import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
 import {
   ADD_TOAST,
   ASSET_TYPE,
@@ -27,12 +19,17 @@ import {
   translate,
   validateTagName,
 } from '~/common/utils'
-
-import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
-
-import styles from './styles.css'
+import {
+  CoverUploader,
+  Dialog,
+  Form,
+  LanguageContext,
+  Translate,
+  useMutation,
+} from '~/components'
 
 import { PutTag } from './__generated__/PutTag'
+import styles from './styles.css'
 
 const PUT_TAG = gql`
   mutation PutTag($input: PutTagInput!) {

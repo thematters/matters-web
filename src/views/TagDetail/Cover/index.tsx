@@ -1,13 +1,11 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 
+import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
 import { Cover, Tag } from '~/components'
 
-import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
-
-import styles from './styles.css'
-
 import { CoverTag } from './__generated__/CoverTag'
+import styles from './styles.css'
 
 interface TagCoverProps {
   tag: CoverTag

@@ -1,6 +1,7 @@
 import { NetworkStatus } from 'apollo-client'
 import { useContext, useEffect, useRef } from 'react'
 
+import { analytics, mergeConnections } from '~/common/utils'
 import {
   ArticleDigestFeed,
   CardExposureTracker,
@@ -14,13 +15,6 @@ import {
   ViewerContext,
 } from '~/components'
 
-import { analytics, mergeConnections } from '~/common/utils'
-
-import Authors from '../Authors'
-import { FEED_ARTICLES_PRIVATE, FEED_ARTICLES_PUBLIC } from '../gql'
-import { HomeFeedType } from '../SortBy'
-import Tags from '../Tags'
-
 import {
   HottestFeedPublic,
   HottestFeedPublic_viewer_recommendation_feed_edges,
@@ -33,6 +27,10 @@ import {
   NewestFeedPublic,
   NewestFeedPublic_viewer_recommendation_feed_edges,
 } from '../__generated__/NewestFeedPublic'
+import Authors from '../Authors'
+import { FEED_ARTICLES_PRIVATE, FEED_ARTICLES_PUBLIC } from '../gql'
+import { HomeFeedType } from '../SortBy'
+import Tags from '../Tags'
 
 type FeedArticlesPublic = HottestFeedPublic | NewestFeedPublic | IcymiFeedPublic
 

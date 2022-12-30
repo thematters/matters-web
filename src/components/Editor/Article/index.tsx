@@ -2,21 +2,19 @@ import { useLazyQuery } from '@apollo/react-hooks'
 import { MattersArticleEditor } from '@matters/matters-editor'
 import { FC, useContext } from 'react'
 
-import { LanguageContext } from '~/components'
-import SEARCH_USERS from '~/components/GQL/queries/searchUsers'
-
 import { ADD_TOAST, ASSET_TYPE } from '~/common/enums'
 import editorStyles from '~/common/styles/utils/content.article.css'
 import themeStyles from '~/common/styles/vendors/quill.bubble.css'
-
-import MentionUserList from '../MentionUserList'
-import styles from './styles.css'
-
+import { LanguageContext } from '~/components'
 import {
   SearchUsers,
   SearchUsers_search_edges_node_User,
 } from '~/components/GQL/queries/__generated__/SearchUsers'
+import SEARCH_USERS from '~/components/GQL/queries/searchUsers'
+
 import { EditorDraft } from '../__generated__/EditorDraft'
+import MentionUserList from '../MentionUserList'
+import styles from './styles.css'
 
 interface Props {
   draft: EditorDraft

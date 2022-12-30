@@ -1,9 +1,8 @@
 import Link from 'next/link'
 import { useContext } from 'react'
 
-import { Avatar, ViewerContext } from '~/components'
-
 import { toPath } from '~/common/utils'
+import { Avatar, ViewerContext } from '~/components'
 
 import styles from './styles.css'
 

@@ -1,5 +1,7 @@
 import { useContext } from 'react'
 
+import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
+import { formatAmount, maskAddress, translate } from '~/common/utils'
 import {
   Avatar,
   Button,
@@ -9,13 +11,9 @@ import {
   TextIcon,
   Translate,
 } from '~/components'
-
-import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
-import { formatAmount, maskAddress, translate } from '~/common/utils'
+import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
 
 import styles from './styles.css'
-
-import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
 interface PaymentInfoProps {
   amount: number
   currency: CURRENCY

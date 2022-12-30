@@ -27,7 +27,6 @@
     "GitHub.vscode-pull-request-github",
 
     // linting & formatting
-    "ms-vscode.vscode-typescript-tslint-plugin",
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
     "stylelint.vscode-stylelint",

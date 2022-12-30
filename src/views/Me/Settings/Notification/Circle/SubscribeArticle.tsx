@@ -1,8 +1,7 @@
 import { useContext } from 'react'
 
-import { Form, LanguageContext, Switch, Translate } from '~/components'
-
 import { translate } from '~/common/utils'
+import { Form, LanguageContext, Switch, Translate } from '~/components'
 
 import { ViewerNotificationCircleSettings_viewer_settings_notification } from './__generated__/ViewerNotificationCircleSettings'
 

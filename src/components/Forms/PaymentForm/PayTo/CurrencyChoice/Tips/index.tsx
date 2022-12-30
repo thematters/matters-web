@@ -1,14 +1,13 @@
 import { useContext } from 'react'
 import { useAccount } from 'wagmi'
 
+import { GUIDE_LINKS } from '~/common/enums'
 import {
   LanguageContext,
   Translate,
   useBalanceUSDT,
   ViewerContext,
 } from '~/components'
-
-import { GUIDE_LINKS } from '~/common/enums'
 
 import styles from './styles.css'
 

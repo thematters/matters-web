@@ -1,6 +1,7 @@
 import { useEmblaCarousel } from 'embla-carousel/react'
 import { useCallback, useContext, useEffect, useRef, useState } from 'react'
 
+import { translate } from '~/common/utils'
 import {
   Button,
   Card,
@@ -10,13 +11,10 @@ import {
   useCarousel,
 } from '~/components'
 
-import { translate } from '~/common/utils'
-
+import { VisibleAnnouncements_official_announcements as VisibleAnnouncementsType } from '../__generated__/VisibleAnnouncements'
 import DropdownActions, { DropdownActionsProps } from '../DropdownActions'
 import Dot from './Dot'
 import styles from './styles.css'
-
-import { VisibleAnnouncements_official_announcements as VisibleAnnouncementsType } from '../__generated__/VisibleAnnouncements'
 
 type CarouselProps = {
   items: VisibleAnnouncementsType[]

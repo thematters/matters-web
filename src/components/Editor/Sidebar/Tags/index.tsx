@@ -1,3 +1,4 @@
+import { analytics } from '~/common/utils'
 import {
   IconHashTag24,
   SearchSelectDialog,
@@ -5,14 +6,11 @@ import {
   Tag,
 } from '~/components'
 import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
-
-import { analytics } from '~/common/utils'
+import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
 
 import TagCustomStagingArea from '../../TagCustomStagingArea'
 import Box from '../Box'
 import styles from './styles.css'
-
-import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
 
 export interface SidebarTagsProps {
   tags: DigestTag[]

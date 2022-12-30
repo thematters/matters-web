@@ -3,11 +3,10 @@ import { useContext } from 'react'
 
 import { ViewerContext } from '~/components'
 
+import { FollowButtonUserPrivate } from './__generated__/FollowButtonUserPrivate'
 import Follow from './Follow'
 import FollowState from './FollowState'
 import Unfollow from './Unfollow'
-
-import { FollowButtonUserPrivate } from './__generated__/FollowButtonUserPrivate'
 
 interface FollowUserButtonProps {
   user: Partial<FollowButtonUserPrivate>

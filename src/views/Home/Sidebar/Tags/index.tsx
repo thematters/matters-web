@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useContext, useEffect } from 'react'
 
+import { analytics } from '~/common/utils'
 import {
   List,
   QueryError,
@@ -12,15 +13,12 @@ import {
   usePublicQuery,
   ViewerContext,
 } from '~/components'
+import { LastFetchRandom } from '~/components/GQL/queries/__generated__/LastFetchRandom'
 import FETCH_RECORD from '~/components/GQL/queries/lastFetchRandom'
 
-import { analytics } from '~/common/utils'
-
 import SectionHeader from '../../SectionHeader'
-import styles from './styles.css'
-
-import { LastFetchRandom } from '~/components/GQL/queries/__generated__/LastFetchRandom'
 import { SidebarTagsPublic } from './__generated__/SidebarTagsPublic'
+import styles from './styles.css'
 
 const SIDEBAR_TAGS = gql`
   query SidebarTagsPublic($random: random_Int_min_0_max_49) {

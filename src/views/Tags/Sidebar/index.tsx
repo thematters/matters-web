@@ -2,6 +2,7 @@ import classNames from 'classnames'
 import _chunk from 'lodash/chunk'
 import _get from 'lodash/get'
 
+import { analytics } from '~/common/utils'
 import {
   List,
   PageHeader,
@@ -11,15 +12,12 @@ import {
   usePublicQuery,
 } from '~/components'
 
-import { analytics } from '~/common/utils'
-
-import { ALL_TAGS_RECOMMENDED_SIDEBAR } from './gql'
-import styles from './styles.css'
-
 import {
   AllTagsRecommendedSidebar,
   AllTagsRecommendedSidebar_viewer_recommendation_tags_edges_node_recommended_edges,
 } from './__generated__/AllTagsRecommendedSidebar'
+import { ALL_TAGS_RECOMMENDED_SIDEBAR } from './gql'
+import styles from './styles.css'
 
 interface TagsSidebarProps {
   inSidebar?: boolean

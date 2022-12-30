@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react'
 
+import { translate } from '~/common/utils'
 import {
   Avatar,
   Form,
@@ -8,11 +9,8 @@ import {
   Translate,
 } from '~/components'
 
-import { translate } from '~/common/utils'
-
-import styles from './styles.css'
-
 import { EditProfileDialogUserPrivate_info_cryptoWallet_nfts } from '../__generated__/EditProfileDialogUserPrivate'
+import styles from './styles.css'
 
 type NFTCollectionProps = {
   nfts: EditProfileDialogUserPrivate_info_cryptoWallet_nfts[]

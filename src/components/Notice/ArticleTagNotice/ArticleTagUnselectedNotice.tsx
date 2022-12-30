@@ -2,9 +2,8 @@ import gql from 'graphql-tag'
 import _some from 'lodash/some'
 import { useContext } from 'react'
 
-import { Translate, ViewerContext } from '~/components'
-
 import { TEST_ID } from '~/common/enums'
+import { Translate, ViewerContext } from '~/components'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorName from '../NoticeActorName'
@@ -13,7 +12,6 @@ import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
 import NoticeTag from '../NoticeTag'
 import styles from '../styles.css'
-
 import { ArticleTagUnselectedNotice as NoticeType } from './__generated__/ArticleTagUnselectedNotice'
 
 const ArticleTagUnselectedNotice = ({ notice }: { notice: NoticeType }) => {

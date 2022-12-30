@@ -2,19 +2,17 @@ import { useLazyQuery } from '@apollo/react-hooks'
 import { MattersCommentEditor } from '@matters/matters-editor'
 import { useContext } from 'react'
 
-import { LanguageContext } from '~/components'
-import SEARCH_USERS from '~/components/GQL/queries/searchUsers'
-
 import { ADD_TOAST } from '~/common/enums'
 import editorStyles from '~/common/styles/utils/content.comment.css'
 import themeStyles from '~/common/styles/vendors/quill.bubble.css'
-
-import MentionUserList from '../MentionUserList'
-
+import { LanguageContext } from '~/components'
 import {
   SearchUsers,
   SearchUsers_search_edges_node_User,
 } from '~/components/GQL/queries/__generated__/SearchUsers'
+import SEARCH_USERS from '~/components/GQL/queries/searchUsers'
+
+import MentionUserList from '../MentionUserList'
 
 interface Props {
   content: string

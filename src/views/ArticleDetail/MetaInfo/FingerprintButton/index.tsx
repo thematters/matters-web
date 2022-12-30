@@ -5,7 +5,6 @@ import {
   TextIcon,
   Translate,
 } from '~/components'
-
 import { FingerprintArticle } from '~/components/Dialogs/FingerprintDialog/__generated__/FingerprintArticle'
 
 interface FingerprintButtonProps {

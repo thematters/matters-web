@@ -4,6 +4,13 @@ import jump from 'jump.js'
 // import _get from 'lodash/get'
 import { useContext, useEffect, useState } from 'react'
 
+import { ADD_TOAST, URL_FRAGMENT } from '~/common/enums'
+import {
+  dom,
+  filterComments,
+  mergeConnections,
+  translate,
+} from '~/common/utils'
 import {
   CommentForm,
   EmptyComment,
@@ -21,15 +28,12 @@ import {
   ViewerContext,
 } from '~/components'
 
-import { ADD_TOAST, URL_FRAGMENT } from '~/common/enums'
-import {
-  dom,
-  filterComments,
-  mergeConnections,
-  translate,
-} from '~/common/utils'
-
 import CircleDetailTabs from '../CircleDetailTabs'
+import {
+  DiscussionComments,
+  DiscussionComments_circle_discussion_edges_node,
+} from './__generated__/DiscussionComments'
+import { DiscussionPublic } from './__generated__/DiscussionPublic'
 import {
   DISCUSSION_COMMENTS,
   DISCUSSION_PRIVATE,
@@ -37,12 +41,6 @@ import {
 } from './gql'
 import styles from './styles.css'
 import Wall from './Wall'
-
-import {
-  DiscussionComments,
-  DiscussionComments_circle_discussion_edges_node,
-} from './__generated__/DiscussionComments'
-import { DiscussionPublic } from './__generated__/DiscussionPublic'
 
 type Comment = DiscussionComments_circle_discussion_edges_node
 

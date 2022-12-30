@@ -3,12 +3,11 @@ import gql from 'graphql-tag'
 
 import { Title, Translate } from '~/components'
 
+import { ArticleResponse } from './__generated__/ArticleResponse'
 import FeatureComments from './FeaturedComments'
 import LatestResponses from './LatestResponses'
 import ResponseCount from './ResponseCount'
-
 import { ResponseCountArticle } from './ResponseCount/__generated__/ResponseCountArticle'
-import { ArticleResponse } from './__generated__/ArticleResponse'
 
 const ARTICLE_RESPONSE = gql`
   query ArticleResponse(

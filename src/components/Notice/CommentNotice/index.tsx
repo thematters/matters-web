@@ -1,12 +1,11 @@
 import gql from 'graphql-tag'
 
+import { CommentNotice as NoticeType } from './__generated__/CommentNotice'
 import ArticleNewCommentNotice from './ArticleNewCommentNotice'
 import CircleNewBroadcastNotice from './CircleNewBroadcastNotice'
 import CommentMentionedYouNotice from './CommentMentionedYouNotice'
 import CommentPinnedNotice from './CommentPinnedNotice'
 import SubscribedArticleNewCommentNotice from './SubscribedArticleNewCommentNotice'
-
-import { CommentNotice as NoticeType } from './__generated__/CommentNotice'
 
 const CommentNotice = ({ notice }: { notice: NoticeType }) => {
   switch (notice.commentNoticeType) {

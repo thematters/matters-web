@@ -1,6 +1,8 @@
 import { Fragment, useContext } from 'react'
 import { animated, useSpring } from 'react-spring'
 
+import { IMAGE_PIXEL } from '~/common/enums'
+import { translate } from '~/common/utils'
 import {
   DonatorsDialog,
   IconArrowRight16,
@@ -11,13 +13,9 @@ import {
 } from '~/components'
 import { Avatar, AvatarProps } from '~/components/Avatar'
 
-import { IMAGE_PIXEL } from '~/common/enums'
-import { translate } from '~/common/utils'
-
+import { DonatorsArticle } from './__generated__/DonatorsArticle'
 import { fragments } from './gql'
 import styles from './styles.css'
-
-import { DonatorsArticle } from './__generated__/DonatorsArticle'
 
 type AvatarItemPros = Pick<AvatarProps, 'user'>
 

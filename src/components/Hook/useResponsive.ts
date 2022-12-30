@@ -1,10 +1,8 @@
 import { useQuery } from '@apollo/react-hooks'
 
-import CLIENT_INFO from '~/components/GQL/queries/clientInfo'
-
 import { BREAKPOINTS } from '~/common/enums'
-
 import { ClientInfo } from '~/components/GQL/queries/__generated__/ClientInfo'
+import CLIENT_INFO from '~/components/GQL/queries/clientInfo'
 
 type Type = 'sm-down' | 'sm-up' | 'md-up' | 'lg-up' | 'sm' | 'xs' | 'md' | 'lg'
 

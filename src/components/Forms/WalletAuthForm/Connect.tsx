@@ -5,20 +5,7 @@ import Link from 'next/link'
 import { useContext, useEffect } from 'react'
 import { useAccount, useDisconnect, useSignMessage } from 'wagmi'
 
-import {
-  Dialog,
-  Form,
-  IconInfo16,
-  LanguageContext,
-  Layout,
-  TextIcon,
-  Translate,
-  useMutation,
-  VerificationSendCodeButton,
-  ViewerContext,
-} from '~/components'
-import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
-
+import { AuthResultType } from '@/__generated__/globalTypes'
 import { ADD_TOAST, PATHS } from '~/common/enums'
 import {
   analytics,
@@ -31,15 +18,26 @@ import {
   validateToS,
   WALLET_ERROR_MESSAGES,
 } from '~/common/utils'
-
-import { ETH_ADDRESS_USER, GENERATE_SIGNING_MESSAGE, WALLET_LOGIN } from './gql'
-import styles from './styles.css'
-
-import { AuthResultType } from '@/__generated__/globalTypes'
+import {
+  Dialog,
+  Form,
+  IconInfo16,
+  LanguageContext,
+  Layout,
+  TextIcon,
+  Translate,
+  useMutation,
+  VerificationSendCodeButton,
+  ViewerContext,
+} from '~/components'
 import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
+import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
+
 import { ETHAddressUser } from './__generated__/ETHAddressUser'
 import { GenerateSigningMessage } from './__generated__/GenerateSigningMessage'
 import { WalletLogin } from './__generated__/WalletLogin'
+import { ETH_ADDRESS_USER, GENERATE_SIGNING_MESSAGE, WALLET_LOGIN } from './gql'
+import styles from './styles.css'
 
 interface FormProps {
   purpose: 'dialog' | 'page'

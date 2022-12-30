@@ -1,8 +1,7 @@
 import { Avatar, Tooltip, Translate } from '~/components'
 
-import LogbookDialog from './LogbookDialog'
-
 import { UserProfileUserPublic_user } from '../__generated__/UserProfileUserPublic'
+import LogbookDialog from './LogbookDialog'
 
 type TraveloggersAvatarProps = {
   user: UserProfileUserPublic_user

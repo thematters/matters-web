@@ -7,11 +7,10 @@ import {
   IconNavNotificationActive24,
   ViewerContext,
 } from '~/components'
+import { UnreadNoticeCount } from '~/components/GQL/queries/__generated__/UnreadNoticeCount'
 import { UNREAD_NOTICE_COUNT } from '~/components/GQL/queries/notice'
 
 import styles from './styles.css'
-
-import { UnreadNoticeCount } from '~/components/GQL/queries/__generated__/UnreadNoticeCount'
 
 interface UnreadIconProps {
   active?: boolean

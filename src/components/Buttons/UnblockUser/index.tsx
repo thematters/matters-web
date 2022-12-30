@@ -1,12 +1,11 @@
 import gql from 'graphql-tag'
 import _isNil from 'lodash/isNil'
 
+import { ADD_TOAST } from '~/common/enums'
 import { Button, TextIcon, Translate, useMutation } from '~/components'
+import { ToggleBlockUser } from '~/components/GQL/mutations/__generated__/ToggleBlockUser'
 import TOGGLE_BLOCK_USER from '~/components/GQL/mutations/toggleBlockUser'
 
-import { ADD_TOAST } from '~/common/enums'
-
-import { ToggleBlockUser } from '~/components/GQL/mutations/__generated__/ToggleBlockUser'
 import { UnblockUserButtonUserPrivate } from './__generated__/UnblockUserButtonUserPrivate'
 
 interface UnblockUserButtonProps {

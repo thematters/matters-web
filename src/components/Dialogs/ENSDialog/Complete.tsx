@@ -1,6 +1,5 @@
-import { Dialog, Translate } from '~/components'
-
 import { featureSupportedChains } from '~/common/utils'
+import { Dialog, Translate } from '~/components'
 
 import styles from './styles.css'
 

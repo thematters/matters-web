@@ -8,12 +8,11 @@ import {
 } from '~/components'
 
 import DropdownActions, { DropdownActionsControls } from '../../DropdownActions'
+import { FooterActionsArticlePublic } from './__generated__/FooterActionsArticlePublic'
 import DonationCount from './DonationCount'
 import { fragments } from './gql'
 import ReadTime from './ReadTime'
 import styles from './styles.css'
-
-import { FooterActionsArticlePublic } from './__generated__/FooterActionsArticlePublic'
 
 export type FooterActionsControls = DropdownActionsControls
 

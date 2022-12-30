@@ -1,7 +1,6 @@
 import { useState } from 'react'
 
 import { CreateCircleForm, Head, Layout, useStep } from '~/components'
-
 import { PutCircle_putCircle } from '~/components/GQL/mutations/__generated__/PutCircle'
 
 type Step = 'init' | 'profile'

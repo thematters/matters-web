@@ -1,3 +1,4 @@
+import { analytics } from '~/common/utils'
 import {
   ArticleDigestFeed,
   CardExposureTracker,
@@ -6,13 +7,10 @@ import {
   Translate,
 } from '~/components'
 
-import { analytics } from '~/common/utils'
-
 import UnfollowTagActionButton from '../DropdownActions/UnfollowTag'
 import FeedHead from '../FollowingFeedHead'
-import { fragments } from './gql'
-
 import { UserAddArticleTagActivity as Activity } from './__generated__/UserAddArticleTagActivity'
+import { fragments } from './gql'
 
 const UserAddArticleTagActivity = ({
   nodeArticle: node,

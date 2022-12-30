@@ -4,6 +4,11 @@ import _pickBy from 'lodash/pickBy'
 import { useContext, useEffect } from 'react'
 
 import {
+  parseFormSubmitErrors,
+  validateComparedPassword,
+  validatePaymentPassword,
+} from '~/common/utils'
+import {
   Dialog,
   Form,
   LanguageContext,
@@ -12,12 +17,6 @@ import {
   useMutation,
   useStep,
 } from '~/components'
-
-import {
-  parseFormSubmitErrors,
-  validateComparedPassword,
-  validatePaymentPassword,
-} from '~/common/utils'
 
 import { ResetPaymentPassword } from './__generated__/ResetPaymentPassword'
 

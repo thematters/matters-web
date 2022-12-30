@@ -1,5 +1,6 @@
 import { Fragment, useContext, useEffect } from 'react'
 
+import { analytics, mergeConnections } from '~/common/utils'
 import {
   EmptySearch,
   InfiniteScroll,
@@ -11,12 +12,9 @@ import {
   ViewerContext,
 } from '~/components'
 
-import { analytics, mergeConnections } from '~/common/utils'
-
 import GoogleSearchButton from '../GoogleSearchButton'
-import { SEARCH_USERS_PRIVATE, SEARCH_USERS_PUBLIC } from './gql'
-
 import { SearchUsersPublic } from './__generated__/SearchUsersPublic'
+import { SEARCH_USERS_PRIVATE, SEARCH_USERS_PUBLIC } from './gql'
 
 const SearchUser = () => {
   const viewer = useContext(ViewerContext)

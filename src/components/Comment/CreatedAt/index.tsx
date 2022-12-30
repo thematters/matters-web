@@ -1,8 +1,7 @@
 import gql from 'graphql-tag'
 
-import { DateTime, LinkWrapper } from '~/components'
-
 import { toPath } from '~/common/utils'
+import { DateTime, LinkWrapper } from '~/components'
 
 import { CreatedAtComment } from './__generated__/CreatedAtComment'
 

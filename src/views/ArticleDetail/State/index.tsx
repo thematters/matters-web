@@ -2,9 +2,8 @@ import gql from 'graphql-tag'
 
 import { Toast, Translate } from '~/components'
 
-import styles from './styles.css'
-
 import { StateArticle } from './__generated__/StateArticle'
+import styles from './styles.css'
 
 const fragments = {
   article: gql`

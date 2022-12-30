@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 
+import { ENTITY_TYPE, OPEN_LIKE_COIN_DIALOG } from '~/common/enums'
 import {
   Button,
   TextIcon,
@@ -7,6 +8,7 @@ import {
   Translate,
   ViewerContext,
 } from '~/components'
+import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
 import {
   SetCollectionProps,
   SetCoverProps,
@@ -15,8 +17,7 @@ import {
 } from '~/components/Editor'
 import { EditorSettingsDialog } from '~/components/Editor/SettingsDialog'
 
-import { ENTITY_TYPE, OPEN_LIKE_COIN_DIALOG } from '~/common/enums'
-
+import { EditMetaDraft } from '../__generated__/EditMetaDraft'
 import {
   useEditDraftAccess,
   useEditDraftCollection,
@@ -26,9 +27,6 @@ import {
   useEditSupportSetting,
 } from '../hooks'
 import ConfirmPublishDialogContent from './ConfirmPublishDialogContent'
-
-import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
-import { EditMetaDraft } from '../__generated__/EditMetaDraft'
 
 interface SettingsButtonProps {
   draft: EditMetaDraft

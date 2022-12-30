@@ -1,9 +1,8 @@
 import gql from 'graphql-tag'
 
+import { TransactionNotice as NoticeType } from './__generated__/TransactionNotice'
 import PaymentPayoutNotice from './PaymentPayoutNotice'
 import PaymentReceivedDonationNotice from './PaymentReceivedDonationNotice'
-
-import { TransactionNotice as NoticeType } from './__generated__/TransactionNotice'
 
 const TransactionNotice = ({ notice }: { notice: NoticeType }) => {
   switch (notice.txNoticeType) {

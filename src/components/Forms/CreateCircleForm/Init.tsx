@@ -3,16 +3,6 @@ import _pickBy from 'lodash/pickBy'
 import { useContext, useRef } from 'react'
 
 import {
-  Dialog,
-  Form,
-  LanguageContext,
-  Layout,
-  Translate,
-  useMutation,
-} from '~/components'
-import PUT_CIRCLE from '~/components/GQL/mutations/putCircle'
-
-import {
   PAYMENT_CURRENCY,
   PAYMENT_MAXIMUM_CIRCLE_AMOUNT,
   PAYMENT_MINIMAL_CIRCLE_AMOUNT,
@@ -25,13 +15,21 @@ import {
   validateCircleDisplayName,
   validateCircleName,
 } from '~/common/utils'
-
-import styles from './styles.css'
-
+import {
+  Dialog,
+  Form,
+  LanguageContext,
+  Layout,
+  Translate,
+  useMutation,
+} from '~/components'
 import {
   PutCircle,
   PutCircle_putCircle,
 } from '~/components/GQL/mutations/__generated__/PutCircle'
+import PUT_CIRCLE from '~/components/GQL/mutations/putCircle'
+
+import styles from './styles.css'
 
 interface FormProps {
   purpose: 'dialog' | 'page'

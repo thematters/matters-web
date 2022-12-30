@@ -7,6 +7,18 @@ import { useContext, useEffect, useRef, useState } from 'react'
 import { useAccount } from 'wagmi'
 
 import {
+  PAYMENT_CURRENCY as CURRENCY,
+  PAYMENT_MAXIMUM_PAYTO_AMOUNT,
+} from '~/common/enums'
+import {
+  featureSupportedChains,
+  formatAmount,
+  numRound,
+  validateCurrency,
+  validateDonationAmount,
+  WALLET_ERROR_MESSAGES,
+} from '~/common/utils'
+import {
   Dialog,
   Form,
   LanguageContext,
@@ -20,37 +32,23 @@ import {
   useTargetNetwork,
   ViewerContext,
 } from '~/components'
-import PAY_TO from '~/components/GQL/mutations/payTo'
-import EXCHANGE_RATES from '~/components/GQL/queries/exchangeRates'
-import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
-import updateDonation from '~/components/GQL/updates/donation'
-
-import {
-  PAYMENT_CURRENCY as CURRENCY,
-  PAYMENT_MAXIMUM_PAYTO_AMOUNT,
-} from '~/common/enums'
-import {
-  featureSupportedChains,
-  formatAmount,
-  numRound,
-  validateCurrency,
-  validateDonationAmount,
-  WALLET_ERROR_MESSAGES,
-} from '~/common/utils'
-
-import CivicLikerButton from '../CivicLikerButton'
-import ReconnectButton from './ReconnectButton'
-import SetAmountBalance from './SetAmountBalance'
-import SetAmountHeader from './SetAmountHeader'
-
 import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
 import {
   PayTo as PayToMutate,
   PayTo_payTo_transaction as PayToTx,
 } from '~/components/GQL/mutations/__generated__/PayTo'
+import PAY_TO from '~/components/GQL/mutations/payTo'
 import { ExchangeRates } from '~/components/GQL/queries/__generated__/ExchangeRates'
 import { WalletBalance } from '~/components/GQL/queries/__generated__/WalletBalance'
+import EXCHANGE_RATES from '~/components/GQL/queries/exchangeRates'
+import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
+import updateDonation from '~/components/GQL/updates/donation'
 import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
+
+import CivicLikerButton from '../CivicLikerButton'
+import ReconnectButton from './ReconnectButton'
+import SetAmountBalance from './SetAmountBalance'
+import SetAmountHeader from './SetAmountHeader'
 
 interface SetAmountCallbackValues {
   amount: number

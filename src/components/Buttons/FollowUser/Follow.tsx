@@ -3,6 +3,10 @@ import _isNil from 'lodash/isNil'
 import { useContext } from 'react'
 
 import {
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  UNIVERSAL_AUTH_SOURCE,
+} from '~/common/enums'
+import {
   Button,
   ButtonHeight,
   ButtonWidth,
@@ -11,19 +15,13 @@ import {
   useMutation,
   ViewerContext,
 } from '~/components'
+import { ToggleFollowUser } from '~/components/GQL/mutations/__generated__/ToggleFollowUser'
 import TOGGLE_FOLLOW_USER from '~/components/GQL/mutations/toggleFollowUser'
 import updateUserFollowerCount from '~/components/GQL/updates/userFollowerCount'
 import updateViewerFolloweeCount from '~/components/GQL/updates/viewerFolloweeCount'
 
-import {
-  OPEN_UNIVERSAL_AUTH_DIALOG,
-  UNIVERSAL_AUTH_SOURCE,
-} from '~/common/enums'
-
-import { FollowUserButtonSize } from './index'
-
-import { ToggleFollowUser } from '~/components/GQL/mutations/__generated__/ToggleFollowUser'
 import { FollowButtonUserPrivate } from './__generated__/FollowButtonUserPrivate'
+import { FollowUserButtonSize } from './index'
 
 interface FollowUserProps {
   user: Partial<FollowButtonUserPrivate>

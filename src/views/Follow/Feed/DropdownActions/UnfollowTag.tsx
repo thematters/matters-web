@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 import _isNil from 'lodash/isNil'
 import { useContext } from 'react'
 
+import { ADD_TOAST } from '~/common/enums'
 import {
   IconRemove24,
   Menu,
@@ -10,12 +11,10 @@ import {
   useMutation,
   ViewerContext,
 } from '~/components'
+import { ToggleFollowTag } from '~/components/GQL/mutations/__generated__/ToggleFollowTag'
 import TOGGLE_FOLLOW_TAG from '~/components/GQL/mutations/toggleFollowTag'
 import updateTagFollowers from '~/components/GQL/updates/tagFollowers'
 
-import { ADD_TOAST } from '~/common/enums'
-
-import { ToggleFollowTag } from '~/components/GQL/mutations/__generated__/ToggleFollowTag'
 import { UnfollowActionButtonTagPrivate } from './__generated__/UnfollowActionButtonTagPrivate'
 
 type UnfollowTagActionButtonProps = {

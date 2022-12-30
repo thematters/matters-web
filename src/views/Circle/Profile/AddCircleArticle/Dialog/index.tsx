@@ -2,6 +2,12 @@ import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
 
 import {
+  ArticleAccessType,
+  ArticleLicenseType,
+} from '@/__generated__/globalTypes'
+import { ADD_TOAST, REFETCH_CIRCLE_DETAIL_ARTICLES } from '~/common/enums'
+import { translate } from '~/common/utils'
+import {
   Dialog,
   LanguageContext,
   Spinner,
@@ -12,16 +18,8 @@ import {
   ViewerContext,
 } from '~/components'
 import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
-import PUT_CIRCLE_ARTICLES from '~/components/GQL/mutations/putCircleArticles'
-
-import { ADD_TOAST, REFETCH_CIRCLE_DETAIL_ARTICLES } from '~/common/enums'
-import { translate } from '~/common/utils'
-
-import {
-  ArticleAccessType,
-  ArticleLicenseType,
-} from '@/__generated__/globalTypes'
 import { PutCircleArticles } from '~/components/GQL/mutations/__generated__/PutCircleArticles'
+import PUT_CIRCLE_ARTICLES from '~/components/GQL/mutations/putCircleArticles'
 
 export type Step = 'select' | 'confirm'
 

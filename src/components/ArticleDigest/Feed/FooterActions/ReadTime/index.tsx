@@ -1,3 +1,4 @@
+import { numAbbr, numRound } from '~/common/utils'
 import {
   IconDotDivider,
   IconReadTimeTotal16,
@@ -5,11 +6,8 @@ import {
   Translate,
 } from '~/components'
 
-import { numAbbr, numRound } from '~/common/utils'
-
-import { fragments } from './gql'
-
 import { ActionsReadTimeArticle } from './__generated__/ActionsReadTimeArticle'
+import { fragments } from './gql'
 
 interface ResponseCountProps {
   article: ActionsReadTimeArticle

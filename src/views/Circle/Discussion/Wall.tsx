@@ -1,15 +1,12 @@
 import { useContext } from 'react'
 
+import CIRCLE_DISCUSSION_WALL from '@/public/static/images/circle-discussion-wall.svg'
+import CIRCLE_DISCUSSION_WALL_SM from '@/public/static/images/circle-discussion-wall-sm.svg'
+import { translate } from '~/common/utils'
 import { LanguageContext, Translate } from '~/components'
 
-import { translate } from '~/common/utils'
-
-import CIRCLE_DISCUSSION_WALL_SM from '@/public/static/images/circle-discussion-wall-sm.svg'
-import CIRCLE_DISCUSSION_WALL from '@/public/static/images/circle-discussion-wall.svg'
-
-import styles from './styles.css'
-
 import { DiscussionPublic_circle } from './__generated__/DiscussionPublic'
+import styles from './styles.css'
 
 type WallProps = {
   circle: DiscussionPublic_circle

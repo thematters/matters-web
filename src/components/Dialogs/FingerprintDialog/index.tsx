@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 import dynamic from 'next/dynamic'
 import { useContext, useEffect } from 'react'
 
+import { ArticleAccessType } from '@/__generated__/globalTypes'
 import {
   Dialog,
   Spinner,
@@ -10,7 +11,6 @@ import {
   ViewerContext,
 } from '~/components'
 
-import { ArticleAccessType } from '@/__generated__/globalTypes'
 import {
   ArticleFingerprintPublic,
   ArticleFingerprintPublic_article_Article,

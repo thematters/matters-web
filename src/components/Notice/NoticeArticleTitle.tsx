@@ -1,9 +1,8 @@
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import { ArticleDigestTitle } from '~/components/ArticleDigest'
-
 import { toPath } from '~/common/utils'
+import { ArticleDigestTitle } from '~/components/ArticleDigest'
 
 import { NoticeArticleTitle as NoticeArticleTitleType } from './__generated__/NoticeArticleTitle'
 

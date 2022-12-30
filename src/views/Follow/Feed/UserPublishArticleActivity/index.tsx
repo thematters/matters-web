@@ -1,3 +1,4 @@
+import { analytics } from '~/common/utils'
 import {
   ArticleDigestFeed,
   CardExposureTracker,
@@ -7,13 +8,10 @@ import {
   UserDigest,
 } from '~/components'
 
-import { analytics } from '~/common/utils'
-
 import UnfollowUserActionButton from '../DropdownActions/UnfollowUser'
 import FeedHead from '../FollowingFeedHead'
-import { fragments } from './gql'
-
 import { UserPublishArticleActivity as Activity } from './__generated__/UserPublishArticleActivity'
+import { fragments } from './gql'
 
 const UserPublishArticleActivity = ({
   actor,

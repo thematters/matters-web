@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import _get from 'lodash/get'
 import { useState } from 'react'
 
+import { ReactComponent as IconAnalyticsContent24 } from '@/public/static/icons/24px/analytics-content.svg'
 import {
   EmptyAnalytics,
   List,
@@ -11,16 +12,7 @@ import {
   useRoute,
 } from '~/components'
 
-import { ReactComponent as IconAnalyticsContent24 } from '@/public/static/icons/24px/analytics-content.svg'
-
 import SectionHead from '../SectionHead'
-import ContentDigest from './ContentDigest'
-import CircleContentAnalyticsTabs, {
-  CircleContentAnalyticsType,
-} from './ContentTabs'
-import { CIRCLE_CONTENT_ANALYTICS } from './gql'
-import styles from './styles.css'
-
 import {
   CircleContentAnalyticsPaywall,
   CircleContentAnalyticsPaywall_circle_analytics_content_paywall,
@@ -29,6 +21,12 @@ import {
   CircleContentAnalyticsPublic,
   CircleContentAnalyticsPublic_circle_analytics_content_public,
 } from './__generated__/CircleContentAnalyticsPublic'
+import ContentDigest from './ContentDigest'
+import CircleContentAnalyticsTabs, {
+  CircleContentAnalyticsType,
+} from './ContentTabs'
+import { CIRCLE_CONTENT_ANALYTICS } from './gql'
+import styles from './styles.css'
 
 type FeedType = CircleContentAnalyticsPaywall | CircleContentAnalyticsPublic
 

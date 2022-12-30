@@ -1,9 +1,8 @@
 import gql from 'graphql-tag'
 
+import { ADD_TOAST } from '~/common/enums'
 import { Dialog, Translate, useDialogSwitch, useMutation } from '~/components'
 import updateUserArticles from '~/components/GQL/updates/userArticles'
-
-import { ADD_TOAST } from '~/common/enums'
 
 import { ArchiveArticle } from './__generated__/ArchiveArticle'
 import { ArchiveArticleArticle } from './__generated__/ArchiveArticleArticle'

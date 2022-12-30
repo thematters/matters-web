@@ -9,14 +9,13 @@ import {
   Translate,
   UserDigest,
 } from '~/components'
-import TAG_MAINTAINERS from '~/components/GQL/queries/tagMaintainers'
-
-import styles from './styles.css'
-
 import {
   TagMaintainers,
   TagMaintainers_node_Tag_editors as TagEditor,
 } from '~/components/GQL/queries/__generated__/TagMaintainers'
+import TAG_MAINTAINERS from '~/components/GQL/queries/tagMaintainers'
+
+import styles from './styles.css'
 
 /**
  * This a sub-component of <TagEditorDialog>. It shows editors of a tag, and

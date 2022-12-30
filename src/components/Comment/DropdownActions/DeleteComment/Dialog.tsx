@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 
+import { ADD_TOAST, COMMENT_TYPE_TEXT } from '~/common/enums'
 import {
   CommentFormType,
   Dialog,
@@ -7,8 +8,6 @@ import {
   useDialogSwitch,
   useMutation,
 } from '~/components'
-
-import { ADD_TOAST, COMMENT_TYPE_TEXT } from '~/common/enums'
 
 import { DropdownActionsCommentPublic } from '../__generated__/DropdownActionsCommentPublic'
 import { DeleteComment } from './__generated__/DeleteComment'

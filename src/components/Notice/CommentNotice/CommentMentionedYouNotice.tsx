@@ -1,9 +1,8 @@
 import gql from 'graphql-tag'
 
-import { Translate } from '~/components'
-
 import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
+import { Translate } from '~/components'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeArticleTitle from '../NoticeArticleTitle'
@@ -14,7 +13,6 @@ import NoticeHead from '../NoticeHead'
 import NoticeHeadActors from '../NoticeHeadActors'
 import NoticeTypeIcon from '../NoticeTypeIcon'
 import styles from '../styles.css'
-
 import { CommentMentionedYouNotice as NoticeType } from './__generated__/CommentMentionedYouNotice'
 
 const CommentMentionedYouNotice = ({ notice }: { notice: NoticeType }) => {

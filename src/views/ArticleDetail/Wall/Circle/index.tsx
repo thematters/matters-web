@@ -1,17 +1,14 @@
 import gql from 'graphql-tag'
 
+import IMAGE_WALL_BACKGROUND_MD from '@/public/static/images/circle-wall-background-md.jpg'
+import IMAGE_WALL_BACKGROUND_SM from '@/public/static/images/circle-wall-background-sm.jpg'
+import { analytics } from '~/common/utils'
 import { Translate } from '~/components'
 import { CircleDigest } from '~/components/CircleDigest'
 
-import { analytics } from '~/common/utils'
-
-import IMAGE_WALL_BACKGROUND_MD from '@/public/static/images/circle-wall-background-md.jpg'
-import IMAGE_WALL_BACKGROUND_SM from '@/public/static/images/circle-wall-background-sm.jpg'
-
-import styles from './styles.css'
-
 import { CircleWallCirclePrivate } from './__generated__/CircleWallCirclePrivate'
 import { CircleWallCirclePublic } from './__generated__/CircleWallCirclePublic'
+import styles from './styles.css'
 
 interface CircleWallProps {
   circle: CircleWallCirclePublic & Partial<CircleWallCirclePrivate>

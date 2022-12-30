@@ -2,9 +2,8 @@ import { DialogContent, DialogOverlay } from '@reach/dialog'
 import { useContext, useRef } from 'react'
 import { animated, useTransition } from 'react-spring'
 
-import { LanguageContext } from '~/components'
-
 import { translate } from '~/common/utils'
+import { LanguageContext } from '~/components'
 
 import DrawerContent from './DrawerContent'
 import Overlay from './Overlay'

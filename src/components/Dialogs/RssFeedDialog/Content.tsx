@@ -6,6 +6,12 @@ import gql from 'graphql-tag'
 import { useContext } from 'react'
 import { useContractRead, useEnsName, useEnsResolver } from 'wagmi'
 
+import { EXTERNAL_LINKS } from '~/common/enums'
+import {
+  featureSupportedChains,
+  PublicResolverABI,
+  translate,
+} from '~/common/utils'
 import {
   Button,
   CopyToClipboard,
@@ -18,16 +24,8 @@ import {
   Translate,
 } from '~/components'
 
-import { EXTERNAL_LINKS } from '~/common/enums'
-import {
-  featureSupportedChains,
-  PublicResolverABI,
-  translate,
-} from '~/common/utils'
-
 import SectionCard from '../FingerprintDialog/SectionCard'
 import styles from '../FingerprintDialog/styles.css'
-
 import { AuthorRssFeed } from './__generated__/AuthorRssFeed'
 import { RssGateways } from './__generated__/RssGateways'
 

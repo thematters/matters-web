@@ -4,22 +4,21 @@ import _isNil from 'lodash/isNil'
 import { useContext } from 'react'
 
 import {
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  UNIVERSAL_AUTH_SOURCE,
+} from '~/common/enums'
+import {
   IconDotDivider,
   TextIcon,
   Translate,
   useMutation,
   ViewerContext,
 } from '~/components'
+import { ToggleFollowUser } from '~/components/GQL/mutations/__generated__/ToggleFollowUser'
 import TOGGLE_FOLLOW_USER from '~/components/GQL/mutations/toggleFollowUser'
 import updateUserFollowerCount from '~/components/GQL/updates/userFollowerCount'
 import updateViewerFolloweeCount from '~/components/GQL/updates/viewerFolloweeCount'
 
-import {
-  OPEN_UNIVERSAL_AUTH_DIALOG,
-  UNIVERSAL_AUTH_SOURCE,
-} from '~/common/enums'
-
-import { ToggleFollowUser } from '~/components/GQL/mutations/__generated__/ToggleFollowUser'
 import { ArticleFeedFollowButtonUserPrivate } from './__generated__/ArticleFeedFollowButtonUserPrivate'
 
 interface FollowButtonProps {

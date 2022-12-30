@@ -4,9 +4,8 @@ import {
   IconUSDTActive40,
 } from '~/components/Icon'
 
-import styles from './styles.css'
-
 import { TransactionCurrency } from './../../../../__generated__/globalTypes'
+import styles from './styles.css'
 
 interface Props {
   currency: TransactionCurrency

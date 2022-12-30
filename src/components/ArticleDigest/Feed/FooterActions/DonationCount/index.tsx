@@ -1,10 +1,8 @@
+import { numAbbr } from '~/common/utils'
 import { IconDonate24, IconDotDivider, TextIcon } from '~/components'
 
-import { numAbbr } from '~/common/utils'
-
-import { fragments } from './gql'
-
 import { ActionsDonationCountArticle } from './__generated__/ActionsDonationCountArticle'
+import { fragments } from './gql'
 
 interface DonationCountProps {
   article: ActionsDonationCountArticle

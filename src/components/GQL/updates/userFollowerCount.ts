@@ -1,10 +1,8 @@
 import { DataProxy } from 'apollo-cache'
 
-import USER_FOLLOWER_COUNT from '~/components/GQL/queries/userFollowerCount'
-
 import { ERROR_CODES } from '~/common/enums'
-
 import { UserFollowerCount } from '~/components/GQL/queries/__generated__/UserFollowerCount'
+import USER_FOLLOWER_COUNT from '~/components/GQL/queries/userFollowerCount'
 
 const update = ({
   cache,

@@ -3,13 +3,12 @@ import { useEffect, useState } from 'react'
 
 import { Translate } from '~/components'
 
-import { QUERY_SECRET } from './ArticleSecret'
-import styles from './styles.css'
-
 import {
   ArticleSecret,
   ArticleSecret_article_Article,
 } from './__generated__/ArticleSecret'
+import { QUERY_SECRET } from './ArticleSecret'
+import styles from './styles.css'
 
 type ArticleSecretDescProps = {
   id: string

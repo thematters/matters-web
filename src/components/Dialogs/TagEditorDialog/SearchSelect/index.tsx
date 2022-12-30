@@ -1,17 +1,15 @@
 import _get from 'lodash/get'
 import { useState } from 'react'
 
+import { ADD_TOAST } from '~/common/enums'
 import { Dialog, Translate, useMutation } from '~/components'
+import { UpdateTagSetting } from '~/components/GQL/mutations/__generated__/UpdateTagSetting'
 import UPDATE_TAG_SETTING from '~/components/GQL/mutations/updateTagSetting'
 import updateTagMaintainers from '~/components/GQL/updates/tagMaintainers'
 import SearchingArea, {
   SelectNode,
 } from '~/components/SearchSelect/SearchingArea'
 import StagingArea, { StagingNode } from '~/components/SearchSelect/StagingArea'
-
-import { ADD_TOAST } from '~/common/enums'
-
-import { UpdateTagSetting } from '~/components/GQL/mutations/__generated__/UpdateTagSetting'
 
 interface Props {
   id: string

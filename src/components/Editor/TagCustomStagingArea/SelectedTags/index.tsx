@@ -1,9 +1,8 @@
 import { Tag } from '~/components'
 import { SelectTag } from '~/components/SearchSelect/SearchingArea'
 
-import styles from './styles.css'
-
 import { EditorRecommendedTags_user_tags_edges_node as TagType } from '../__generated__/EditorRecommendedTags'
+import styles from './styles.css'
 
 type SelectedTagsProps = {
   tags: TagType[]

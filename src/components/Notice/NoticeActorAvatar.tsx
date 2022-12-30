@@ -1,9 +1,8 @@
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import { Avatar } from '~/components/Avatar'
-
 import { toPath } from '~/common/utils'
+import { Avatar } from '~/components/Avatar'
 
 import { NoticeActorAvatarUser } from './__generated__/NoticeActorAvatarUser'
 

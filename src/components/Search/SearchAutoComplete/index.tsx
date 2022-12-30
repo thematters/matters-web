@@ -3,14 +3,12 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import { Fragment, useEffect } from 'react'
 
+import { toPath } from '~/common/utils'
 import { Menu, Spinner } from '~/components'
 
-import { toPath } from '~/common/utils'
-
+import { SearchAutoComplete as SearchAutoCompleteType } from './__generated__/SearchAutoComplete'
 import FallbackSearchItem from './FallbackSearchItem'
 import styles from './styles.css'
-
-import { SearchAutoComplete as SearchAutoCompleteType } from './__generated__/SearchAutoComplete'
 
 interface SearchAutoCompleteProps {
   searchKey: string

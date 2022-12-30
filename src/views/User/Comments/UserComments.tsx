@@ -2,6 +2,13 @@ import { useQuery } from '@apollo/react-hooks'
 import _flatten from 'lodash/flatten'
 import { useContext, useEffect } from 'react'
 
+import IMAGE_LOGO_192 from '@/public/static/icon-192x192.png'
+import {
+  analytics,
+  filterComments,
+  mergeConnections,
+  toPath,
+} from '~/common/utils'
 import {
   ArticleDigestTitle,
   Card,
@@ -18,24 +25,14 @@ import {
   ViewerContext,
 } from '~/components'
 
-import {
-  analytics,
-  filterComments,
-  mergeConnections,
-  toPath,
-} from '~/common/utils'
-
-import IMAGE_LOGO_192 from '@/public/static/icon-192x192.png'
-
 import UserTabs from '../UserTabs'
-import { USER_COMMENTS_PRIVATE, USER_COMMENTS_PUBLIC, USER_ID } from './gql'
-
 import {
   UserCommentsPublic,
   UserCommentsPublic_node_User_commentedArticles_edges_node_comments_edges_node,
   UserCommentsPublic_node_User_commentedArticles_edges_node_comments_edges_node_node_Article,
 } from './__generated__/UserCommentsPublic'
 import { UserIdUser } from './__generated__/UserIdUser'
+import { USER_COMMENTS_PRIVATE, USER_COMMENTS_PUBLIC, USER_ID } from './gql'
 
 type CommentedArticleComment =
   UserCommentsPublic_node_User_commentedArticles_edges_node_comments_edges_node

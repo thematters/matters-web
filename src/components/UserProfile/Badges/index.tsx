@@ -1,12 +1,10 @@
-import { Button, Tooltip, Translate, withIcon } from '~/components'
-
-import { EXTERNAL_LINKS } from '~/common/enums'
-
 import { ReactComponent as IconArchitectBadge } from '@/public/static/icons/16px/badge-architect.svg'
 import { ReactComponent as IconGoldenMotorBadge } from '@/public/static/icons/16px/badge-golden-motor.svg'
 import { ReactComponent as IconSeedBadge } from '@/public/static/icons/16px/badge-seed.svg'
 import { ReactComponent as IconTraveloggersBadge } from '@/public/static/icons/16px/traveloggers.svg'
 import { ReactComponent as IconCivicLikerBadge } from '@/public/static/icons/badge-civic-liker.svg'
+import { EXTERNAL_LINKS } from '~/common/enums'
+import { Button, Tooltip, Translate, withIcon } from '~/components'
 
 import styles from './styles.css'
 

@@ -2,6 +2,8 @@ import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useEffect } from 'react'
 
+import { ReactComponent as IconStripeCard } from '@/public/static/icons/stripe-card.svg'
+import { parseFormSubmitErrors, validatePaymentPassword } from '~/common/utils'
 import {
   Dialog,
   Form,
@@ -12,19 +14,14 @@ import {
   useMutation,
   withIcon,
 } from '~/components'
+import { DigestRichCirclePrivate } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePrivate'
+import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
 
-import { parseFormSubmitErrors, validatePaymentPassword } from '~/common/utils'
-
-import { ReactComponent as IconStripeCard } from '@/public/static/icons/stripe-card.svg'
-
+import { SubscribeCircle as SubscribeCircleType } from './__generated__/SubscribeCircle'
 import { SUBSCRIBE_CIRCLE } from './gql'
 import Head from './Head'
 import Hint from './Hint'
 import styles from './styles.css'
-
-import { DigestRichCirclePrivate } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePrivate'
-import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
-import { SubscribeCircle as SubscribeCircleType } from './__generated__/SubscribeCircle'
 
 interface FormProps {
   circle: DigestRichCirclePublic & DigestRichCirclePrivate

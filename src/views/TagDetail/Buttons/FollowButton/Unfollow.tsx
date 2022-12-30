@@ -8,10 +8,10 @@ import {
   useMutation,
   ViewerContext,
 } from '~/components'
+import { ToggleFollowTag } from '~/components/GQL/mutations/__generated__/ToggleFollowTag'
 import TOGGLE_FOLLOW_TAG from '~/components/GQL/mutations/toggleFollowTag'
 import updateTagFollowers from '~/components/GQL/updates/tagFollowers'
 
-import { ToggleFollowTag } from '~/components/GQL/mutations/__generated__/ToggleFollowTag'
 import { FollowButtonTagPrivate } from './__generated__/FollowButtonTagPrivate'
 
 interface UnfollowTagProps {

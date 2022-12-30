@@ -3,6 +3,13 @@ import _differenceBy from 'lodash/differenceBy'
 import _get from 'lodash/get'
 import { useContext, useEffect } from 'react'
 
+import { ADD_TOAST, URL_FRAGMENT } from '~/common/enums'
+import {
+  dom,
+  filterComments,
+  mergeConnections,
+  translate,
+} from '~/common/utils'
 import {
   CommentForm,
   EmptyComment,
@@ -20,23 +27,14 @@ import {
   ViewerContext,
 } from '~/components'
 
-import { ADD_TOAST, URL_FRAGMENT } from '~/common/enums'
-import {
-  dom,
-  filterComments,
-  mergeConnections,
-  translate,
-} from '~/common/utils'
-
 import CircleDetailTabs from '../CircleDetailTabs'
-import { BROADCAST_PRIVATE, BROADCAST_PUBLIC } from './gql'
-import styles from './styles.css'
-
 import { BroadcastPrivate_nodes_Comment } from './__generated__/BroadcastPrivate'
 import {
   BroadcastPublic,
   BroadcastPublic_circle_broadcast_edges_node,
 } from './__generated__/BroadcastPublic'
+import { BROADCAST_PRIVATE, BROADCAST_PUBLIC } from './gql'
+import styles from './styles.css'
 
 type CommentPublic = BroadcastPublic_circle_broadcast_edges_node
 type CommentPrivate = BroadcastPrivate_nodes_Comment

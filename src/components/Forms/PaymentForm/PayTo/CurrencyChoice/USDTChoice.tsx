@@ -1,6 +1,9 @@
 import { useContext } from 'react'
 import { useAccount } from 'wagmi'
 
+import { QuoteCurrency } from '@/__generated__/globalTypes'
+import { PATHS, PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
+import { formatAmount } from '~/common/utils'
 import {
   Button,
   CurrencyFormatter,
@@ -12,15 +15,10 @@ import {
   useBalanceUSDT,
   ViewerContext,
 } from '~/components'
-
-import { PATHS, PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
-import { formatAmount } from '~/common/utils'
-
-import styles from './styles.css'
-
-import { QuoteCurrency } from '@/__generated__/globalTypes'
 import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
 import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
+
+import styles from './styles.css'
 
 interface FormProps {
   article: ArticleDetailPublic_article

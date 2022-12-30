@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 
+import { analytics } from '~/common/utils'
 import {
   ArticleDigestCard,
   ArticleDigestSidebar,
@@ -9,11 +10,8 @@ import {
   Translate,
 } from '~/components'
 
-import { analytics } from '~/common/utils'
-
-import styles from './styles.css'
-
 import { RelatedArticles as RelatedArticlesType } from './__generated__/RelatedArticles'
+import styles from './styles.css'
 
 interface RelatedArticlesProps {
   article: RelatedArticlesType

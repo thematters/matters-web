@@ -3,10 +3,9 @@ import { useContext } from 'react'
 
 import { IconSize, ViewerContext } from '~/components'
 
+import { BookmarkArticlePrivate } from './__generated__/BookmarkArticlePrivate'
 import Subscribe from './Subscribe'
 import Unsubscribe from './Unsubscribe'
-
-import { BookmarkArticlePrivate } from './__generated__/BookmarkArticlePrivate'
 
 interface BookmarkButtonProps {
   article: Partial<BookmarkArticlePrivate>

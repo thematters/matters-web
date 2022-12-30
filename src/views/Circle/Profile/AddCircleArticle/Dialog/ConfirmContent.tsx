@@ -1,9 +1,8 @@
 import { useState } from 'react'
 
+import { ArticleLicenseType } from '@/__generated__/globalTypes'
 import { Dialog, Translate } from '~/components'
 import SelectLicense from '~/components/Editor/ToggleAccess/SelectLicense'
-
-import { ArticleLicenseType } from '@/__generated__/globalTypes'
 
 interface ContentProps {
   loading: boolean

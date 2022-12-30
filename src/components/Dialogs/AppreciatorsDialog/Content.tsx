@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
+import { analytics, mergeConnections } from '~/common/utils'
 import {
   Dialog,
   InfiniteList,
@@ -12,15 +13,12 @@ import {
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 
-import { analytics, mergeConnections } from '~/common/utils'
-
-import styles from './styles.css'
-
 import {
   ArticleAppreciators,
   ArticleAppreciators_article_Article,
   ArticleAppreciators_article_Article_appreciationsReceived_edges,
 } from './__generated__/ArticleAppreciators'
+import styles from './styles.css'
 
 interface AppreciatorsDialogContentProps {
   id: string

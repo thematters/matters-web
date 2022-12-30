@@ -3,6 +3,8 @@ import gql from 'graphql-tag'
 import _uniq from 'lodash/uniq'
 import { useContext } from 'react'
 
+import { TEST_ID } from '~/common/enums'
+import { analytics, mergeConnections, translate } from '~/common/utils'
 import {
   ArticleDigestSidebar,
   LanguageContext,
@@ -16,16 +18,12 @@ import {
 } from '~/components'
 import articleFragments from '~/components/GQL/fragments/article'
 
-import { TEST_ID } from '~/common/enums'
-import { analytics, mergeConnections, translate } from '~/common/utils'
-
-import styles from './styles.css'
-
 import { ArticleDetailPublic_article } from '../__generated__/ArticleDetailPublic'
 import {
   CollectionList as CollectionListTypes,
   CollectionList_article_Article,
 } from './__generated__/CollectionList'
+import styles from './styles.css'
 
 const COLLECTION_LIST = gql`
   query CollectionList($id: ID!, $after: String, $first: first_Int_min_0) {

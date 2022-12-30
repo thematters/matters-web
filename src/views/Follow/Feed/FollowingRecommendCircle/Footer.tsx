@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
+import { numAbbr, translate } from '~/common/utils'
 import {
   IconArticle16,
   IconPrice12,
@@ -10,12 +11,9 @@ import {
   Translate,
 } from '~/components'
 
-import { numAbbr, translate } from '~/common/utils'
-
-import styles from './styles.css'
-
 import { FollowingFeedRecommendCircleFooterPrivate } from './__generated__/FollowingFeedRecommendCircleFooterPrivate'
 import { FollowingFeedRecommendCircleFooterPublic } from './__generated__/FollowingFeedRecommendCircleFooterPublic'
+import styles from './styles.css'
 
 type Props = {
   circle: FollowingFeedRecommendCircleFooterPublic &

@@ -1,5 +1,9 @@
 import { useContext, useEffect } from 'react'
 
+import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
+import PROFILE_COVER_DEFAULT from '@/public/static/images/profile-cover.png'
+import { URL_QS } from '~/common/enums'
+import { analytics, mergeConnections, stripSpaces } from '~/common/utils'
 import {
   ArticleDigestFeed,
   EmptyArticle,
@@ -16,24 +20,17 @@ import {
   ViewerContext,
 } from '~/components'
 
-import { URL_QS } from '~/common/enums'
-import { analytics, mergeConnections, stripSpaces } from '~/common/utils'
-
-import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
-import PROFILE_COVER_DEFAULT from '@/public/static/images/profile-cover.png'
-
 import UserTabs from '../UserTabs'
+import {
+  UserArticlesPublic,
+  UserArticlesPublic_user,
+} from './__generated__/UserArticlesPublic'
 import {
   USER_ARTICLES_PRIVATE,
   USER_ARTICLES_PUBLIC,
   VIEWER_ARTICLES,
 } from './gql'
 import styles from './styles.css'
-
-import {
-  UserArticlesPublic,
-  UserArticlesPublic_user,
-} from './__generated__/UserArticlesPublic'
 
 const ArticleSummaryInfo = ({ user }: { user: UserArticlesPublic_user }) => {
   const { articleCount: articles, totalWordCount: words } = user.status || {

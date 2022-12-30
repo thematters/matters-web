@@ -2,9 +2,8 @@ import gql from 'graphql-tag'
 
 import { Translate } from '~/components'
 
-import styles from './styles.css'
-
 import { DonatorLabelComment } from './__generated__/DonatorLabelComment'
+import styles from './styles.css'
 
 const fragments = {
   comment: gql`

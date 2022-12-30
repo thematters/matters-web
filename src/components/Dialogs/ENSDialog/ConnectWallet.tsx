@@ -1,9 +1,8 @@
 import { useContext, useEffect } from 'react'
 import { useAccount, useEnsName } from 'wagmi'
 
-import { Dialog, Translate, ViewerContext } from '~/components'
-
 import { featureSupportedChains } from '@/src/common/utils'
+import { Dialog, Translate, ViewerContext } from '~/components'
 
 import ENSDescription from './ENSDescription'
 import LinkENSIntro from './LinkENSIntro'

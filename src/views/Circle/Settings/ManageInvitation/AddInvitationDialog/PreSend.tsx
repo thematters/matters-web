@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import { useState } from 'react'
 
+import { REFETCH_CIRCLE_PENDING_INVITES } from '~/common/enums'
 import {
   Card,
   Dialog,
@@ -13,16 +14,13 @@ import {
   UserDigest,
   useRoute,
 } from '~/components'
+import { InviteCircle } from '~/components/GQL/mutations/__generated__/InviteCircle'
 import INVITE_CIRCLE from '~/components/GQL/mutations/invite'
 import { StagingNode } from '~/components/SearchSelect/StagingArea'
 
-import { REFETCH_CIRCLE_PENDING_INVITES } from '~/common/enums'
-
+import { InvitationsCircle } from './__generated__/InvitationsCircle'
 import { INVITATIONS_CIRCLE } from './gql'
 import SelectPeriod from './SelectPeriod'
-
-import { InviteCircle } from '~/components/GQL/mutations/__generated__/InviteCircle'
-import { InvitationsCircle } from './__generated__/InvitationsCircle'
 
 interface Props {
   closeDialog: () => void

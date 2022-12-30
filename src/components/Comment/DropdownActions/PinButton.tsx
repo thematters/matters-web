@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 
+import { REFETCH_CIRCLE_DETAIL } from '~/common/enums'
 import {
   CommentFormType,
   IconPin24,
@@ -9,12 +10,10 @@ import {
   Translate,
   useMutation,
 } from '~/components'
+import { TogglePinComment } from '~/components/GQL/mutations/__generated__/TogglePinComment'
 import TOGGLE_PIN_COMMENT from '~/components/GQL/mutations/togglePinComment'
 import updateCircleBroadcast from '~/components/GQL/updates/circleBroadcast'
 
-import { REFETCH_CIRCLE_DETAIL } from '~/common/enums'
-
-import { TogglePinComment } from '~/components/GQL/mutations/__generated__/TogglePinComment'
 import { PinButtonComment } from './__generated__/PinButtonComment'
 
 const fragments = {

@@ -3,6 +3,8 @@ import _isEmpty from 'lodash/isEmpty'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 
+import { ADD_TOAST } from '~/common/enums'
+import { translate } from '~/common/utils'
 import {
   Button,
   CommentFormDialog,
@@ -16,17 +18,13 @@ import {
 } from '~/components'
 import { BlockUser } from '~/components/BlockUser'
 
-import { ADD_TOAST } from '~/common/enums'
-import { translate } from '~/common/utils'
-
+import { DropdownActionsCommentPrivate } from './__generated__/DropdownActionsCommentPrivate'
+import { DropdownActionsCommentPublic } from './__generated__/DropdownActionsCommentPublic'
 import CollapseComment from './CollapseComment'
 import DeleteComment from './DeleteComment'
 import EditButton from './EditButton'
 import PinButton from './PinButton'
 import UncollapseButton from './UncollapseButton'
-
-import { DropdownActionsCommentPrivate } from './__generated__/DropdownActionsCommentPrivate'
-import { DropdownActionsCommentPublic } from './__generated__/DropdownActionsCommentPublic'
 
 export type DropdownActionsControls = {
   /**

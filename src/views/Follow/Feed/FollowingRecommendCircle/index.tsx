@@ -1,6 +1,12 @@
 import React, { useContext } from 'react'
 
 import {
+  OPEN_SUBSCRIBE_CIRCLE_DIALOG,
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  UNIVERSAL_AUTH_SOURCE,
+} from '~/common/enums'
+import { toPath } from '~/common/utils'
+import {
   Button,
   Card,
   CardProps,
@@ -12,19 +18,11 @@ import {
   ViewerContext,
 } from '~/components'
 
-import {
-  OPEN_SUBSCRIBE_CIRCLE_DIALOG,
-  OPEN_UNIVERSAL_AUTH_DIALOG,
-  UNIVERSAL_AUTH_SOURCE,
-} from '~/common/enums'
-import { toPath } from '~/common/utils'
-
+import { FollowingFeedRecommendCirclePrivate } from './__generated__/FollowingFeedRecommendCirclePrivate'
+import { FollowingFeedRecommendCirclePublic } from './__generated__/FollowingFeedRecommendCirclePublic'
 import Footer from './Footer'
 import { fragments } from './gql'
 import styles from './styles.css'
-
-import { FollowingFeedRecommendCirclePrivate } from './__generated__/FollowingFeedRecommendCirclePrivate'
-import { FollowingFeedRecommendCirclePublic } from './__generated__/FollowingFeedRecommendCirclePublic'
 
 type Props = {
   circle: FollowingFeedRecommendCirclePublic &

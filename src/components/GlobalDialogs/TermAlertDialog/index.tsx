@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
+import { ADD_TOAST } from '~/common/enums'
 import {
   Dialog,
   Term,
@@ -11,14 +12,11 @@ import {
   useMutation,
   ViewerContext,
 } from '~/components'
+import { UserLogout } from '~/components/GQL/mutations/__generated__/UserLogout'
 import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
 
-import { ADD_TOAST } from '~/common/enums'
-
-import styles from './styles.css'
-
-import { UserLogout } from '~/components/GQL/mutations/__generated__/UserLogout'
 import { UpdateUserInfoAgreeOn } from './__generated__/UpdateUserInfoAgreeOn'
+import styles from './styles.css'
 
 interface TermContentProps {
   closeDialog: () => void

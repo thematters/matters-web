@@ -1,10 +1,9 @@
 import gql from 'graphql-tag'
 import { Fragment } from 'react'
 
-import { Translate } from '~/components'
-
 import { TEST_ID } from '~/common/enums'
 import { numAbbr } from '~/common/utils'
+import { Translate } from '~/components'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorName from '../NoticeActorName'
@@ -13,7 +12,6 @@ import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
 import NoticeTypeIcon from '../NoticeTypeIcon'
 import styles from '../styles.css'
-
 import { ArticleNewSubscriberNotice as NoticeType } from './__generated__/ArticleNewSubscriberNotice'
 
 const ArticleNewSubscriberNotice = ({ notice }: { notice: NoticeType }) => {

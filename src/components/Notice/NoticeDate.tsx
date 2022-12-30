@@ -2,9 +2,8 @@ import gql from 'graphql-tag'
 
 import { DateTime } from '~/components'
 
-import styles from './styles.css'
-
 import { NoticeDate as NoticeDateType } from './__generated__/NoticeDate'
+import styles from './styles.css'
 
 const NoticeDate = ({ notice }: { notice: NoticeDateType }) => (
   <section className="date">

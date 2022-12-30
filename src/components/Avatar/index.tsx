@@ -1,17 +1,15 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 
-import { IconLogbookBadge16, ResponsiveImage } from '~/components'
-
 import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
 import IMAGE_MATTERS_ARCHITECT_RING from '@/public/static/icons/architect-ring.svg'
 import IMAGE_CIVIC_LIKER_RING from '@/public/static/icons/civic-liker-ring.svg'
 import LOGBOOK from '@/public/static/images/logbook.gif'
-
-import styles from './styles.css'
+import { IconLogbookBadge16, ResponsiveImage } from '~/components'
 
 import { AvatarUser } from './__generated__/AvatarUser'
 import { AvatarUserLogbook } from './__generated__/AvatarUserLogbook'
+import styles from './styles.css'
 
 export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxxl'
 

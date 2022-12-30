@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 
+import { PATHS } from '~/common/enums'
 import {
   EmptyWarning,
   Head,
@@ -9,8 +10,6 @@ import {
   ViewerContext,
   WalletAuthForm,
 } from '~/components'
-
-import { PATHS } from '~/common/enums'
 
 type Step = 'wallet-select' | 'wallet-connect'
 

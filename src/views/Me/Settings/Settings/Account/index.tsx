@@ -2,13 +2,11 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
+import { PATHS } from '~/common/enums'
 import { Form, Translate, usePullToRefresh, ViewerContext } from '~/components'
 
-import { PATHS } from '~/common/enums'
-
-import ChangeUserNameAsk from './ChangeUserNameAsk'
-
 import { ViewerTotalBlockCount } from './__generated__/ViewerTotalBlockCount'
+import ChangeUserNameAsk from './ChangeUserNameAsk'
 
 const VIEWER_TOTAL_BLOCK_COUNT = gql`
   query ViewerTotalBlockCount {

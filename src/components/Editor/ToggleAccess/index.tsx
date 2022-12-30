@@ -1,6 +1,11 @@
 import { useContext } from 'react'
 
 import {
+  ArticleAccessType,
+  ArticleLicenseType,
+} from '@/__generated__/globalTypes'
+import { translate } from '~/common/utils'
+import {
   CircleDigest,
   IconArrowRight16,
   IconChecked32,
@@ -8,19 +13,12 @@ import {
   Switch,
   Translate,
 } from '~/components'
-
-import { translate } from '~/common/utils'
-
-import SelectLicense from './SelectLicense'
-import styles from './styles.css'
-
-import {
-  ArticleAccessType,
-  ArticleLicenseType,
-} from '@/__generated__/globalTypes'
 import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
 import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
 import { EditMetaDraft } from '~/views/Me/DraftDetail/__generated__/EditMetaDraft'
+
+import SelectLicense from './SelectLicense'
+import styles from './styles.css'
 
 export type ToggleAccessProps = {
   circle?: DigestRichCirclePublic | null

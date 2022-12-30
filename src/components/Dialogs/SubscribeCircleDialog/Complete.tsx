@@ -1,7 +1,5 @@
-import { Dialog, Translate } from '~/components'
-
 import { toPath } from '~/common/utils'
-
+import { Dialog, Translate } from '~/components'
 import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
 
 interface CompleteProps {

@@ -2,9 +2,8 @@ import gql from 'graphql-tag'
 
 import { CircleDigest } from '~/components/CircleDigest'
 
-import styles from './styles.css'
-
 import { NoticeCircleCard as NoticeCircleCardType } from './__generated__/NoticeCircleCard'
+import styles from './styles.css'
 
 const NoticeCircleCard = ({
   circle,

@@ -2,6 +2,8 @@ import { useQuery } from '@apollo/react-hooks'
 import dynamic from 'next/dynamic'
 import { useState } from 'react'
 
+import { ADD_TOAST, COMMENT_TYPE_TEXT, TextId } from '~/common/enums'
+import { dom, stripHtml, trimLineBreaks } from '~/common/utils'
 import {
   CommentFormType,
   Dialog,
@@ -9,16 +11,12 @@ import {
   Translate,
   useMutation,
 } from '~/components'
+import { PutComment } from '~/components/GQL/mutations/__generated__/PutComment'
 import PUT_COMMENT from '~/components/GQL/mutations/putComment'
+import { CommentDraft } from '~/components/GQL/queries/__generated__/CommentDraft'
 import COMMENT_DRAFT from '~/components/GQL/queries/commentDraft'
 
-import { ADD_TOAST, COMMENT_TYPE_TEXT, TextId } from '~/common/enums'
-import { dom, stripHtml, trimLineBreaks } from '~/common/utils'
-
 import styles from './styles.css'
-
-import { PutComment } from '~/components/GQL/mutations/__generated__/PutComment'
-import { CommentDraft } from '~/components/GQL/queries/__generated__/CommentDraft'
 
 const CommentEditor = dynamic(() => import('~/components/Editor/Comment'), {
   ssr: false,

@@ -2,6 +2,14 @@ import VisuallyHidden from '@reach/visually-hidden'
 import { useContext, useState } from 'react'
 
 import {
+  ACCEPTED_UPLOAD_IMAGE_TYPES,
+  ADD_TOAST,
+  ASSET_TYPE,
+  ENTITY_TYPE,
+  UPLOAD_IMAGE_SIZE_LIMIT,
+} from '~/common/enums'
+import { translate } from '~/common/utils'
+import {
   Button,
   Cover,
   CoverProps,
@@ -12,20 +20,10 @@ import {
   Translate,
   useMutation,
 } from '~/components'
+import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
 import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
 
-import {
-  ACCEPTED_UPLOAD_IMAGE_TYPES,
-  ADD_TOAST,
-  ASSET_TYPE,
-  ENTITY_TYPE,
-  UPLOAD_IMAGE_SIZE_LIMIT,
-} from '~/common/enums'
-import { translate } from '~/common/utils'
-
 import styles from './styles.css'
-
-import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
 
 /**
  * This shared component is for uploading cover.

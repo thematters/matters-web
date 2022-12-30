@@ -1,13 +1,11 @@
+import { ADD_TOAST } from '~/common/enums'
 import { Dialog, Translate, useMutation } from '~/components'
+import { UpdateTagSetting } from '~/components/GQL/mutations/__generated__/UpdateTagSetting'
 import UPDATE_TAG_SETTING from '~/components/GQL/mutations/updateTagSetting'
+import { TagMaintainers_node_Tag_editors as TagEditor } from '~/components/GQL/queries/__generated__/TagMaintainers'
 import updateTagMaintainers from '~/components/GQL/updates/tagMaintainers'
 
-import { ADD_TOAST } from '~/common/enums'
-
 import styles from './styles.css'
-
-import { UpdateTagSetting } from '~/components/GQL/mutations/__generated__/UpdateTagSetting'
-import { TagMaintainers_node_Tag_editors as TagEditor } from '~/components/GQL/queries/__generated__/TagMaintainers'
 
 /**
  * This a sub-component of <TagEditorDialog>. It ask user to confirm

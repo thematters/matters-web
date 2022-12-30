@@ -12,9 +12,8 @@ import {
   ViewerContext,
 } from '~/components'
 
-import { CIRCLE_BASIC_PROFILE } from './gql'
-
 import { CircleBasicProfile } from './__generated__/CircleBasicProfile'
+import { CIRCLE_BASIC_PROFILE } from './gql'
 
 const EditProfile = () => {
   const viewer = useContext(ViewerContext)

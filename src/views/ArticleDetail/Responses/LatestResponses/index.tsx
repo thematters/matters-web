@@ -3,6 +3,14 @@ import _differenceBy from 'lodash/differenceBy'
 import _get from 'lodash/get'
 import { useContext, useEffect, useRef, useState } from 'react'
 
+import { REFETCH_RESPONSES, URL_FRAGMENT } from '~/common/enums'
+import {
+  dom,
+  filterResponses,
+  mergeConnections,
+  translate,
+  unshiftConnections,
+} from '~/common/utils'
 import {
   EmptyResponse,
   LanguageContext,
@@ -22,19 +30,8 @@ import {
   ViewMoreButton,
 } from '~/components'
 
-import { REFETCH_RESPONSES, URL_FRAGMENT } from '~/common/enums'
-import {
-  dom,
-  filterResponses,
-  mergeConnections,
-  translate,
-  unshiftConnections,
-} from '~/common/utils'
-
 import ResponseArticle from '../ResponseArticle'
 import styles from '../styles.css'
-import { LATEST_RESPONSES_PRIVATE, LATEST_RESPONSES_PUBLIC } from './gql'
-
 import { LatestResponsesPrivate_nodes_Comment } from './__generated__/LatestResponsesPrivate'
 import {
   LatestResponsesPublic,
@@ -42,6 +39,7 @@ import {
   LatestResponsesPublic_article_Article_responses_edges_node,
   // LatestResponsesPublic_article_responses_edges_node,
 } from './__generated__/LatestResponsesPublic'
+import { LATEST_RESPONSES_PRIVATE, LATEST_RESPONSES_PUBLIC } from './gql'
 
 const RESPONSES_COUNT = 15
 

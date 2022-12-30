@@ -1,10 +1,9 @@
 import Link from 'next/link'
 import { useContext } from 'react'
 
-import { Head, IconLogo, LanguageContext } from '~/components'
-
 import { PATHS } from '~/common/enums'
 import { translate } from '~/common/utils'
+import { Head, IconLogo, LanguageContext } from '~/components'
 
 import Footer from '../About/Footer'
 import Banner from './Banner'

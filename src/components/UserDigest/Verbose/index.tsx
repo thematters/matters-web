@@ -2,19 +2,17 @@ import classNames from 'classnames'
 import Link from 'next/link'
 import React from 'react'
 
+import { TEST_ID } from '~/common/enums'
+import { toPath } from '~/common/utils'
 import { Card, CardProps, Translate } from '~/components'
 import { Avatar, AvatarProps } from '~/components/Avatar'
 import { FollowUserButton } from '~/components/Buttons/FollowUser'
 import { UnblockUserButton } from '~/components/Buttons/UnblockUser'
 
-import { TEST_ID } from '~/common/enums'
-import { toPath } from '~/common/utils'
-
-import { fragments } from './gql'
-import styles from './styles.css'
-
 import { UserDigestVerboseUserPrivate } from './__generated__/UserDigestVerboseUserPrivate'
 import { UserDigestVerboseUserPublic } from './__generated__/UserDigestVerboseUserPublic'
+import { fragments } from './gql'
+import styles from './styles.css'
 
 /**
  * UeserDigest.Verbose is a component for presenting user's avatar, display

@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 
+import { analytics, mergeConnections } from '~/common/utils'
 import {
   Dialog,
   InfiniteList,
@@ -11,17 +12,14 @@ import {
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 
-import { analytics, mergeConnections } from '~/common/utils'
-
-import { ARTICLE_DONATORS } from './gql'
-import styles from './styles.css'
-
 import {
   ArticleDonators,
   ArticleDonators_article_Article,
   ArticleDonators_article_Article_donations_edges,
 } from './__generated__/ArticleDonators'
 import { DonatorDialogArticle } from './__generated__/DonatorDialogArticle'
+import { ARTICLE_DONATORS } from './gql'
+import styles from './styles.css'
 
 interface DonatorsDialogContentProps {
   article: DonatorDialogArticle

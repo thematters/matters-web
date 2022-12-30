@@ -1,9 +1,8 @@
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
-import { Dialog, ShareDialog, Translate } from '~/components'
-
 import { toPath } from '~/common/utils'
+import { Dialog, ShareDialog, Translate } from '~/components'
 
 import { EditModeArticle_article_Article_drafts as EditModeDraft } from '../__generated__/EditModeArticle'
 

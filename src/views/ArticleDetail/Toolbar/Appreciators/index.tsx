@@ -1,15 +1,13 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
+import { IMAGE_PIXEL } from '~/common/enums'
+import { numAbbr, translate } from '~/common/utils'
 import { AppreciatorsDialog, LanguageContext, Translate } from '~/components'
 import { Avatar } from '~/components/Avatar'
 
-import { IMAGE_PIXEL } from '~/common/enums'
-import { numAbbr, translate } from '~/common/utils'
-
-import styles from './styles.css'
-
 import { AppreciatorsArticle } from './__generated__/AppreciatorsArticle'
+import styles from './styles.css'
 
 const fragments = {
   article: gql`

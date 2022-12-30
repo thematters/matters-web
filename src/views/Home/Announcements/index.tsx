@@ -4,20 +4,18 @@ import _get from 'lodash/get'
 import _some from 'lodash/some'
 import { useState } from 'react'
 
-import { QueryError, Spinner, Translate } from '~/components'
-import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
-
 import { ADD_TOAST, STORAGE_KEY_ANNOUNCEMENT } from '~/common/enums'
 import { storage } from '~/common/utils'
-
-import Carousel from './Carousel'
-import { VISIBLE_ANNOUNCEMENTS } from './gql'
-
+import { QueryError, Spinner, Translate } from '~/components'
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
+import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
+
 import {
   VisibleAnnouncements,
   VisibleAnnouncements_official_announcements as VisibleAnnouncementsType,
 } from './__generated__/VisibleAnnouncements'
+import Carousel from './Carousel'
+import { VISIBLE_ANNOUNCEMENTS } from './gql'
 
 type BaseAnnouncementsProps = {
   hide: () => void

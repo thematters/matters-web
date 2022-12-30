@@ -2,10 +2,9 @@ import gql from 'graphql-tag'
 
 import Counts from '../Counts'
 import Price from '../Price'
-import styles from './styles.css'
-
 import { FooterCirclePrivate } from './__generated__/FooterCirclePrivate'
 import { FooterCirclePublic } from './__generated__/FooterCirclePublic'
+import styles from './styles.css'
 
 export type FooterControls = {
   hasPrice?: boolean

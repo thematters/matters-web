@@ -2,11 +2,10 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useEffect, useRef } from 'react'
 
-import { ANALYTICS, ANALYTIC_TYPES } from '~/common/enums'
+import { ANALYTIC_TYPES,ANALYTICS } from '~/common/enums'
 import { deferTry, initializeFirebase } from '~/common/utils'
 
 import { useEventListener } from '../Hook'
-
 import { AnalyticsUser } from './__generated__/AnalyticsUser'
 
 declare global {

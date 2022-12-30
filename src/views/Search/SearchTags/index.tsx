@@ -1,5 +1,6 @@
 import { Fragment } from 'react'
 
+import { analytics, mergeConnections, toPath } from '~/common/utils'
 import {
   Card,
   EmptySearch,
@@ -11,12 +12,9 @@ import {
   useRoute,
 } from '~/components'
 
-import { analytics, mergeConnections, toPath } from '~/common/utils'
-
 import GoogleSearchButton from '../GoogleSearchButton'
-import { SEARCH_TAGS_PUBLIC } from './gql'
-
 import { SearchTagsPublic } from './__generated__/SearchTagsPublic'
+import { SEARCH_TAGS_PUBLIC } from './gql'
 
 const SearchTag = () => {
   const { getQuery } = useRoute()

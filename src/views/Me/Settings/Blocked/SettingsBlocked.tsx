@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
+import { mergeConnections } from '~/common/utils'
 import {
   EmptyWarning,
   InfiniteScroll,
@@ -10,8 +11,6 @@ import {
   Translate,
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
-
-import { mergeConnections } from '~/common/utils'
 
 import { ViewerBlockList } from './__generated__/ViewerBlockList'
 

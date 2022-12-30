@@ -5,6 +5,14 @@ import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
 import { Waypoint } from 'react-waypoint'
 
+import { ArticleAccessType, UserLanguage } from '@/__generated__/globalTypes'
+import { ADD_TOAST, DEFAULT_LOCALE, URL_QS } from '~/common/enums'
+import {
+  stripAllPunct,
+  toGlobalId,
+  toPath,
+  toUserLanguage,
+} from '~/common/utils'
 import {
   BackToHomeButton,
   EmptyLayout,
@@ -26,17 +34,16 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
+import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import { UserDigest } from '~/components/UserDigest'
 
-import { ADD_TOAST, DEFAULT_LOCALE, URL_QS } from '~/common/enums'
+import { ArticleAvailableTranslations } from './__generated__/ArticleAvailableTranslations'
 import {
-  stripAllPunct,
-  toGlobalId,
-  toPath,
-  toUserLanguage,
-} from '~/common/utils'
-
+  ArticleDetailPublic,
+  ArticleDetailPublic_article,
+} from './__generated__/ArticleDetailPublic'
+import { ArticleTranslation } from './__generated__/ArticleTranslation'
 import Collection from './Collection'
 import Content from './Content'
 import CustomizedSummary from './CustomizedSummary'
@@ -59,15 +66,6 @@ import Toolbar from './Toolbar'
 import TranslationToast from './TranslationToast'
 import CircleWall from './Wall/Circle'
 import VisitorWall from './Wall/Visitor'
-
-import { ArticleAccessType, UserLanguage } from '@/__generated__/globalTypes'
-import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
-import { ArticleAvailableTranslations } from './__generated__/ArticleAvailableTranslations'
-import {
-  ArticleDetailPublic,
-  ArticleDetailPublic_article,
-} from './__generated__/ArticleDetailPublic'
-import { ArticleTranslation } from './__generated__/ArticleTranslation'
 
 const DynamicResponse = dynamic(() => import('./Responses'), {
   ssr: false,

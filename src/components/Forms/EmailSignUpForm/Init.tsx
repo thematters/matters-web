@@ -3,6 +3,14 @@ import _pickBy from 'lodash/pickBy'
 import Link from 'next/link'
 import { useContext } from 'react'
 
+import { PATHS } from '~/common/enums'
+import {
+  parseFormSubmitErrors,
+  translate,
+  validateDisplayName,
+  validateEmail,
+  validateToS,
+} from '~/common/utils'
 import {
   Dialog,
   Form,
@@ -13,21 +21,11 @@ import {
   Translate,
   useMutation,
 } from '~/components'
+import { SendVerificationCode } from '~/components/GQL/mutations/__generated__/SendVerificationCode'
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
-
-import { PATHS } from '~/common/enums'
-import {
-  parseFormSubmitErrors,
-  translate,
-  validateDisplayName,
-  validateEmail,
-  validateToS,
-} from '~/common/utils'
 
 import { EmailLoginButton } from './Buttons'
 import styles from './styles.css'
-
-import { SendVerificationCode } from '~/components/GQL/mutations/__generated__/SendVerificationCode'
 
 interface FormProps {
   purpose: 'dialog' | 'page'

@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react'
 import Lottie, { EventListener } from 'react-lottie'
 import { Waypoint } from 'react-waypoint'
 
-import { IconSpinner16, Translate, useStep } from '~/components'
-
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
+import { IconSpinner16, Translate, useStep } from '~/components'
 
 import styles from './styles.css'
 

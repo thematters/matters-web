@@ -1,6 +1,5 @@
-import { Translate } from '~/components'
-
 import { EXTERNAL_LINKS } from '~/common/enums'
+import { Translate } from '~/components'
 
 import styles from './styles.css'
 

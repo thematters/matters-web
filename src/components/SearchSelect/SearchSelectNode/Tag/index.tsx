@@ -1,12 +1,10 @@
 import classNames from 'classnames'
 
-import { Card, IconChecked, IconUnChecked, Tag } from '~/components'
-
 import { TEST_ID } from '~/common/enums'
+import { Card, IconChecked, IconUnChecked, Tag } from '~/components'
+import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
 
 import styles from '../styles.css'
-
-import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
 
 interface SearchSelectTagProps {
   tag: DigestTag

@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useState } from 'react'
 
+import { ReactComponent as AnalyticsNoSupporter } from '@/public/static/images/analytics-no-supporter.svg'
 import {
   Head,
   IconDonateBg24,
@@ -14,14 +15,11 @@ import {
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 
-import { ReactComponent as AnalyticsNoSupporter } from '@/public/static/images/analytics-no-supporter.svg'
-
+import { MeAnalytics } from './__generated__/MeAnalytics'
 import EmptyAnalytics from './EmptyAnalytics'
 import SelectPeriod from './SelectPeriod'
 import styles from './styles.css'
 import SupporterDigestFeed from './SupporterDigestFeed/index'
-
-import { MeAnalytics } from './__generated__/MeAnalytics'
 
 const ME_ANALYTICS = gql`
   query MeAnalytics($after: String, $filter: TopDonatorFilter) {

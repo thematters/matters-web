@@ -1,16 +1,14 @@
 import { useState } from 'react'
 
+import { filterComments } from '~/common/utils'
 import { CommentFormType } from '~/components'
 
-import { filterComments } from '~/common/utils'
-
 import Feed from '../Feed'
+import { ThreadCommentCommentPrivate } from './__generated__/ThreadCommentCommentPrivate'
+import { ThreadCommentCommentPublic } from './__generated__/ThreadCommentCommentPublic'
 import ExpandButton from './ExpandButton'
 import { fragments } from './gql'
 import styles from './styles.css'
-
-import { ThreadCommentCommentPrivate } from './__generated__/ThreadCommentCommentPrivate'
-import { ThreadCommentCommentPublic } from './__generated__/ThreadCommentCommentPublic'
 
 const COLLAPSE_COUNT = 2
 

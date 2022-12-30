@@ -1,3 +1,4 @@
+import { ADD_TOAST } from '~/common/enums'
 import {
   IconMute24,
   IconUnMute24,
@@ -6,11 +7,9 @@ import {
   Translate,
   useMutation,
 } from '~/components'
+import { ToggleBlockUser } from '~/components/GQL/mutations/__generated__/ToggleBlockUser'
 import TOGGLE_BLOCK_USER from '~/components/GQL/mutations/toggleBlockUser'
 
-import { ADD_TOAST } from '~/common/enums'
-
-import { ToggleBlockUser } from '~/components/GQL/mutations/__generated__/ToggleBlockUser'
 import { BlockUserPrivate } from '../__generated__/BlockUserPrivate'
 import { BlockUserPublic } from '../__generated__/BlockUserPublic'
 

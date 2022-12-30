@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import { useContext, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 
+import { ADD_TOAST, APPRECIATE_DEBOUNCE, Z_INDEX } from '~/common/enums'
 import {
   ReCaptchaContext,
   Tooltip,
@@ -9,11 +10,13 @@ import {
   useMutation,
   ViewerContext,
 } from '~/components'
+import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import updateAppreciation from '~/components/GQL/updates/appreciation'
 
-import { ADD_TOAST, APPRECIATE_DEBOUNCE, Z_INDEX } from '~/common/enums'
-
+import { AppreciateArticle } from './__generated__/AppreciateArticle'
+import { AppreciationButtonArticlePrivate } from './__generated__/AppreciationButtonArticlePrivate'
+import { AppreciationButtonArticlePublic } from './__generated__/AppreciationButtonArticlePublic'
 import AnonymousButton from './AnonymousButton'
 import AppreciateButton from './AppreciateButton'
 import BlockedButton from './BlockedButton'
@@ -22,11 +25,6 @@ import ForbiddenButton from './ForbiddenButton'
 import { APPRECIATE_ARTICLE, fragments } from './gql'
 import SetupLikerIdAppreciateButton from './SetupLikerIdAppreciateButton'
 import ViewSuperLikeButton from './ViewSuperLikeButton'
-
-import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
-import { AppreciateArticle } from './__generated__/AppreciateArticle'
-import { AppreciationButtonArticlePrivate } from './__generated__/AppreciationButtonArticlePrivate'
-import { AppreciationButtonArticlePublic } from './__generated__/AppreciationButtonArticlePublic'
 
 interface AppreciationButtonProps {
   article: AppreciationButtonArticlePublic &

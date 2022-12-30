@@ -1,6 +1,9 @@
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
+import { ReactComponent as SupporterListRocket } from '@/public/static/images/supporter-list-rocket.svg'
+import { GUIDE_LINKS } from '~/common/enums'
+import { toPath, translate } from '~/common/utils'
 import {
   Button,
   IconDonateBg24,
@@ -9,16 +12,10 @@ import {
   Translate,
   useMutation,
 } from '~/components'
+import { CreateDraft } from '~/components/GQL/mutations/__generated__/CreateDraft'
 import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
 
-import { GUIDE_LINKS } from '~/common/enums'
-import { toPath, translate } from '~/common/utils'
-
-import { ReactComponent as SupporterListRocket } from '@/public/static/images/supporter-list-rocket.svg'
-
 import styles from './styles.css'
-
-import { CreateDraft } from '~/components/GQL/mutations/__generated__/CreateDraft'
 
 const EmptyAnalytics = () => {
   const router = useRouter()

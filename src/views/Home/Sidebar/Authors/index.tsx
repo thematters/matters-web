@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import _random from 'lodash/random'
 import { useContext, useEffect } from 'react'
 
+import { analytics } from '~/common/utils'
 import {
   List,
   QueryError,
@@ -11,16 +12,13 @@ import {
   UserDigest,
   ViewerContext,
 } from '~/components'
+import { LastFetchRandom } from '~/components/GQL/queries/__generated__/LastFetchRandom'
 import FETCH_RECORD from '~/components/GQL/queries/lastFetchRandom'
 
-import { analytics } from '~/common/utils'
-
 import SectionHeader from '../../SectionHeader'
+import { SidebarAuthors } from './__generated__/SidebarAuthors'
 import { SIDEBAR_AUTHORS } from './gql'
 import styles from './styles.css'
-
-import { LastFetchRandom } from '~/components/GQL/queries/__generated__/LastFetchRandom'
-import { SidebarAuthors } from './__generated__/SidebarAuthors'
 
 const Authors = () => {
   const viewer = useContext(ViewerContext)

@@ -2,6 +2,13 @@ import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
 import {
+  ADD_TOAST,
+  OPEN_LIKE_COIN_DIALOG,
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  UNIVERSAL_AUTH_SOURCE,
+} from '~/common/enums'
+import { analytics, toPath, translate } from '~/common/utils'
+import {
   Button,
   IconPen16,
   IconSpinner16,
@@ -10,17 +17,8 @@ import {
   Translate,
   useMutation,
 } from '~/components'
-import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
-
-import {
-  ADD_TOAST,
-  OPEN_LIKE_COIN_DIALOG,
-  OPEN_UNIVERSAL_AUTH_DIALOG,
-  UNIVERSAL_AUTH_SOURCE,
-} from '~/common/enums'
-import { analytics, toPath, translate } from '~/common/utils'
-
 import { CreateDraft } from '~/components/GQL/mutations/__generated__/CreateDraft'
+import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
 
 interface Props {
   allowed: boolean

@@ -1,8 +1,7 @@
 import { useContext } from 'react'
 
-import { Form, LanguageContext, Translate } from '~/components'
-
 import { ArticleLicenseType } from '@/__generated__/globalTypes'
+import { Form, LanguageContext, Translate } from '~/components'
 
 interface Props {
   isInCircle: boolean

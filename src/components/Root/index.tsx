@@ -6,6 +6,7 @@ import { createClient, createStorage, WagmiConfig } from 'wagmi'
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
 
+import { chains, sleep, wagmiProvider } from '~/common/utils'
 import {
   AnalyticsListener,
   Error,
@@ -22,15 +23,12 @@ import {
 import PageViewTracker from '~/components/Analytics/PageViewTracker'
 import SplashScreen from '~/components/SplashScreen'
 
-import { chains, sleep, wagmiProvider } from '~/common/utils'
-
-import { ROOT_QUERY_PRIVATE, ROOT_QUERY_PUBLIC } from './gql'
-
 import {
   RootQueryPrivate,
   RootQueryPrivate_viewer,
 } from './__generated__/RootQueryPrivate'
 import { RootQueryPublic } from './__generated__/RootQueryPublic'
+import { ROOT_QUERY_PRIVATE, ROOT_QUERY_PUBLIC } from './gql'
 
 const DynamicProgressBar = dynamic(() => import('~/components/ProgressBar'), {
   ssr: false,

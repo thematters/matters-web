@@ -3,6 +3,8 @@ import _find from 'lodash/find'
 import _matchesProperty from 'lodash/matchesProperty'
 import { useContext } from 'react'
 
+import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
+import { formatAmount } from '~/common/utils'
 import {
   CurrencyFormatter,
   Dialog,
@@ -13,21 +15,17 @@ import {
   UserDigest,
   ViewerContext,
 } from '~/components'
+import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
+import { ExchangeRates } from '~/components/GQL/queries/__generated__/ExchangeRates'
+import { WalletBalance } from '~/components/GQL/queries/__generated__/WalletBalance'
 import EXCHANGE_RATES from '~/components/GQL/queries/exchangeRates'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
-
-import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
-import { formatAmount } from '~/common/utils'
+import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
 
 import LikeCoinChoice from './LikeCoinChoice'
 import styles from './styles.css'
 import Tips from './Tips'
 import USDTChoice from './USDTChoice'
-
-import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
-import { ExchangeRates } from '~/components/GQL/queries/__generated__/ExchangeRates'
-import { WalletBalance } from '~/components/GQL/queries/__generated__/WalletBalance'
-import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
 
 interface FormProps {
   article: ArticleDetailPublic_article

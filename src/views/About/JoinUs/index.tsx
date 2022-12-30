@@ -1,9 +1,7 @@
-import { Translate, withIcon } from '~/components'
-
-import { captureClicks } from '~/common/utils'
-
 import { ReactComponent as IconArrowRight } from '@/public/static/images/about/arrow-right.svg'
 import IMAGE_WAVE from '@/public/static/images/about/wave-join-us.svg'
+import { captureClicks } from '~/common/utils'
+import { Translate, withIcon } from '~/components'
 
 import styles from './styles.css'
 

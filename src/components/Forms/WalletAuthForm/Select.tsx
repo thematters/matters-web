@@ -1,6 +1,8 @@
 import React, { useContext, useEffect } from 'react'
 import { useAccount, useConnect, useDisconnect } from 'wagmi'
 
+import { GUIDE_LINKS } from '~/common/enums'
+import { analytics } from '~/common/utils'
 import {
   Dialog,
   Form,
@@ -14,9 +16,6 @@ import {
   useResponsive,
   ViewerContext,
 } from '~/components'
-
-import { GUIDE_LINKS } from '~/common/enums'
-import { analytics } from '~/common/utils'
 
 import styles from './styles.css'
 

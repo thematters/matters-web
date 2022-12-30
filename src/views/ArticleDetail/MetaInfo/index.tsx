@@ -1,11 +1,10 @@
 import { DateTime, IconPaywall16, Translate } from '~/components'
 
+import { ArticleDetailPublic_article } from '../__generated__/ArticleDetailPublic'
 import FingerprintButton from './FingerprintButton'
 import { fragments } from './gql'
 import styles from './styles.css'
 import TranslationButton from './TranslationButton'
-
-import { ArticleDetailPublic_article } from '../__generated__/ArticleDetailPublic'
 
 type MetaInfoProps = {
   article: ArticleDetailPublic_article

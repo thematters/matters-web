@@ -1,6 +1,9 @@
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
+import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
+import { TEST_ID } from '~/common/enums'
+import { numAbbr, toPath } from '~/common/utils'
 import {
   Card,
   CardProps,
@@ -11,14 +14,8 @@ import {
   TextIcon,
 } from '~/components'
 
-import { TEST_ID } from '~/common/enums'
-import { numAbbr, toPath } from '~/common/utils'
-
-import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
-
-import styles from './styles.css'
-
 import { TagDigestSidebarTag } from './__generated__/TagDigestSidebarTag'
+import styles from './styles.css'
 
 export type TagDigestSidebarProps = {
   tag: TagDigestSidebarTag

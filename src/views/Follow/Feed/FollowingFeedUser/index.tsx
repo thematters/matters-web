@@ -4,10 +4,9 @@ import { DateTime, UserDigest } from '~/components'
 import { fragments } from '~/components/UserDigest/Rich/gql'
 
 import DropdownActions, { DropdownActionsControls } from '../DropdownActions'
-import styles from './styles.css'
-
 import { FollowingFeedUserPrivate } from './__generated__/FollowingFeedUserPrivate'
 import { FollowingFeedUserPublic } from './__generated__/FollowingFeedUserPublic'
+import styles from './styles.css'
 
 export type FeedUserProps = {
   user: FollowingFeedUserPublic & Partial<FollowingFeedUserPrivate>

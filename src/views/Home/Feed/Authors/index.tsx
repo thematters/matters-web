@@ -3,6 +3,8 @@ import _chunk from 'lodash/chunk'
 import _random from 'lodash/random'
 import { useContext, useEffect } from 'react'
 
+import { PATHS } from '~/common/enums'
+import { analytics } from '~/common/utils'
 import {
   QueryError,
   ShuffleButton,
@@ -14,17 +16,13 @@ import {
   ViewerContext,
   ViewMoreCard,
 } from '~/components'
+import { LastFetchRandom } from '~/components/GQL/queries/__generated__/LastFetchRandom'
 import FETCH_RECORD from '~/components/GQL/queries/lastFetchRandom'
 
-import { PATHS } from '~/common/enums'
-import { analytics } from '~/common/utils'
-
 import SectionHeader from '../../SectionHeader'
+import { FeedAuthors } from './__generated__/FeedAuthors'
 import { FEED_AUTHORS } from './gql'
 import styles from './styles.css'
-
-import { LastFetchRandom } from '~/components/GQL/queries/__generated__/LastFetchRandom'
-import { FeedAuthors } from './__generated__/FeedAuthors'
 
 const Authors = () => {
   const viewer = useContext(ViewerContext)

@@ -10,7 +10,6 @@
         "graphql.vscode-graphql",
         "wix.vscode-import-cost",
         "oderwat.indent-rainbow",
-        "ms-vscode.vscode-typescript-tslint-plugin",
         "stylelint.vscode-stylelint",
         "github.github-vscode-theme",
         "ricard.postcss",

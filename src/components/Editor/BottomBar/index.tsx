@@ -1,6 +1,8 @@
 import classNames from 'classnames'
 import { useContext } from 'react'
 
+import { SearchExclude } from '@/__generated__/globalTypes'
+import { translate } from '~/common/utils'
 import {
   IconCollection24,
   IconHashTag24,
@@ -11,6 +13,7 @@ import {
   TextIcon,
   Translate,
 } from '~/components'
+import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
 import { SearchSelectDialog } from '~/components/Dialogs/SearchSelectDialog'
 import {
   SetCollectionProps,
@@ -19,17 +22,12 @@ import {
   ToggleAccessProps,
 } from '~/components/Editor'
 import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
-
-import { translate } from '~/common/utils'
+import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
 
 import SetCover from '../SetCover'
 import TagCustomStagingArea from '../TagCustomStagingArea'
 import AccessDialog from './AccessDialog'
 import styles from './styles.css'
-
-import { SearchExclude } from '@/__generated__/globalTypes'
-import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
-import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
 
 export type BottomBarProps = {
   saving: boolean

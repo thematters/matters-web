@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useEffect } from 'react'
 
+import { mergeConnections } from '~/common/utils'
 import {
   DraftDigest,
   EmptyDraft,
@@ -14,14 +15,11 @@ import {
   useCache,
 } from '~/components'
 
-import { mergeConnections } from '~/common/utils'
-
-import { DraftsContext } from './context'
-
 import {
   MeDraftFeed,
   MeDraftFeed_viewer_drafts_edges,
 } from './__generated__/MeDraftFeed'
+import { DraftsContext } from './context'
 
 const ME_DRAFTS_FEED = gql`
   query MeDraftFeed($after: String) {

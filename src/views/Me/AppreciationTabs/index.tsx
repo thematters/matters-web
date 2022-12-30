@@ -1,8 +1,7 @@
 import gql from 'graphql-tag'
 
-import { Spacer, Tabs, Translate, useRoute } from '~/components'
-
 import { PATHS } from '~/common/enums'
+import { Spacer, Tabs, Translate, useRoute } from '~/components'
 
 import { AppreciationTabsUserActivity } from './__generated__/AppreciationTabsUserActivity'
 

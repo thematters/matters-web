@@ -1,17 +1,15 @@
 import Link from 'next/link'
 import React from 'react'
 
+import { toPath } from '~/common/utils'
 import { Card, CardProps } from '~/components'
 import { Avatar, AvatarProps } from '~/components/Avatar'
 import { FollowUserButton } from '~/components/Buttons/FollowUser'
 
-import { toPath } from '~/common/utils'
-
-import { fragments } from './gql'
-import styles from './styles.css'
-
 import { FollowingFeedRecommendUserPrivate } from './__generated__/FollowingFeedRecommendUserPrivate'
 import { FollowingFeedRecommendUserPublic } from './__generated__/FollowingFeedRecommendUserPublic'
+import { fragments } from './gql'
+import styles from './styles.css'
 
 type Props = {
   user: FollowingFeedRecommendUserPublic &

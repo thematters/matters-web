@@ -1,5 +1,6 @@
 import { useContext, useEffect } from 'react'
 
+import { filterComments, mergeConnections } from '~/common/utils'
 import {
   List,
   Spinner,
@@ -13,11 +14,7 @@ import {
   ViewMoreButton,
 } from '~/components'
 
-import { filterComments, mergeConnections } from '~/common/utils'
-
 import styles from '../styles.css'
-import { FEATURED_COMMENTS_PRIVATE, FEATURED_COMMENTS_PUBLIC } from './gql'
-
 import { FeaturedCommentsPrivate_nodes_Comment } from './__generated__/FeaturedCommentsPrivate'
 import {
   FeaturedCommentsPublic,
@@ -25,6 +22,7 @@ import {
   // FeaturedCommentsPublic_article_featuredComments_edges_node,
   FeaturedCommentsPublic_article_Article_featuredComments_edges_node,
 } from './__generated__/FeaturedCommentsPublic'
+import { FEATURED_COMMENTS_PRIVATE, FEATURED_COMMENTS_PUBLIC } from './gql'
 
 type CommentPublic =
   FeaturedCommentsPublic_article_Article_featuredComments_edges_node // FeaturedCommentsPublic_article_featuredComments_edges_node

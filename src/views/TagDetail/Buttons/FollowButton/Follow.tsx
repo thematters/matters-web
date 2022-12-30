@@ -2,6 +2,10 @@ import _isNil from 'lodash/isNil'
 import { useContext } from 'react'
 
 import {
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  UNIVERSAL_AUTH_SOURCE,
+} from '~/common/enums'
+import {
   Button,
   IconAdd16,
   TextIcon,
@@ -9,15 +13,10 @@ import {
   useMutation,
   ViewerContext,
 } from '~/components'
+import { ToggleFollowTag } from '~/components/GQL/mutations/__generated__/ToggleFollowTag'
 import TOGGLE_FOLLOW_TAG from '~/components/GQL/mutations/toggleFollowTag'
 import updateTagFollowers from '~/components/GQL/updates/tagFollowers'
 
-import {
-  OPEN_UNIVERSAL_AUTH_DIALOG,
-  UNIVERSAL_AUTH_SOURCE,
-} from '~/common/enums'
-
-import { ToggleFollowTag } from '~/components/GQL/mutations/__generated__/ToggleFollowTag'
 import { FollowButtonTagPrivate } from './__generated__/FollowButtonTagPrivate'
 
 interface FollowProps {

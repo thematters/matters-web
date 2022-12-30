@@ -1,5 +1,7 @@
 import { useContext } from 'react'
 
+import { ADD_TOAST, TEST_ID } from '~/common/enums'
+import { validateTagName } from '~/common/utils'
 import {
   Card,
   IconAdd16,
@@ -7,13 +9,9 @@ import {
   TextIcon,
   Translate,
 } from '~/components'
-
-import { ADD_TOAST, TEST_ID } from '~/common/enums'
-import { validateTagName } from '~/common/utils'
+import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
 
 import styles from './styles.css'
-
-import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
 
 interface CreateTagProps {
   tag: DigestTag

@@ -1,5 +1,7 @@
 import { useContext } from 'react'
 
+import { ADD_TOAST, REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
+import { translate } from '~/common/utils'
 import {
   Button,
   DropdownDialog,
@@ -13,17 +15,13 @@ import {
 } from '~/components'
 import { SearchSelectDialog } from '~/components/Dialogs/SearchSelectDialog'
 import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
+import { AddArticlesTags } from '~/components/GQL/mutations/__generated__/AddArticlesTags'
 import ADD_ARTICLES_TAGS from '~/components/GQL/mutations/addArticlesTags'
 import updateTagArticlesCount from '~/components/GQL/updates/tagArticlesCount'
 
-import { ADD_TOAST, REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
-import { translate } from '~/common/utils'
-
+import { TagFragment } from '../../__generated__/TagFragment'
 import AddMyArticlesButton from './AddMyArticlesButton'
 import CreateDraftMenuItem from './CreateDraftMenuItem'
-
-import { AddArticlesTags } from '~/components/GQL/mutations/__generated__/AddArticlesTags'
-import { TagFragment } from '../../__generated__/TagFragment'
 
 interface DropdownActionsProps {
   tag: TagFragment

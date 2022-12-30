@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useEffect } from 'react'
 
+import { mergeConnections } from '~/common/utils'
 import {
   EmptyNotice,
   Head,
@@ -17,8 +18,6 @@ import {
   useResponsive,
 } from '~/components'
 import updateViewerUnreadNoticeCount from '~/components/GQL/updates/viewerUnreadNoticeCount'
-
-import { mergeConnections } from '~/common/utils'
 
 import { MarkAllNoticesAsRead } from './__generated__/MarkAllNoticesAsRead'
 import { MeNotifications } from './__generated__/MeNotifications'

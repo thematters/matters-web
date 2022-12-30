@@ -2,7 +2,6 @@ import _pickBy from 'lodash/pickBy'
 import dynamic from 'next/dynamic'
 
 import { Dialog, Spinner, useDialogSwitch } from '~/components'
-
 import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
 import { EditMetaDraft } from '~/views/Me/DraftDetail/__generated__/EditMetaDraft'
 

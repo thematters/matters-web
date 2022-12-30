@@ -4,9 +4,8 @@ import { useState } from 'react'
 
 import { Dialog, Spinner, Translate } from '~/components'
 
-import { VIEWER_CIRLCE_STATE } from './gql'
-
 import { ViewerCircleState } from './__generated__/ViewerCircleState'
+import { VIEWER_CIRLCE_STATE } from './gql'
 
 interface Props {
   circleName: string

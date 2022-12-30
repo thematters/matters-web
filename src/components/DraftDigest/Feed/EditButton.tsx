@@ -1,8 +1,7 @@
 import gql from 'graphql-tag'
 
-import { Button, IconDraftEdit12, TextIcon, Translate } from '~/components'
-
 import { toPath } from '~/common/utils'
+import { Button, IconDraftEdit12, TextIcon, Translate } from '~/components'
 
 import { EditButtonDraft } from './__generated__/EditButtonDraft'
 

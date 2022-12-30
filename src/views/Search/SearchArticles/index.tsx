@@ -1,6 +1,7 @@
 import { NetworkStatus } from 'apollo-client'
 import { Fragment, useContext, useEffect } from 'react'
 
+import { analytics, mergeConnections } from '~/common/utils'
 import {
   ArticleDigestFeed,
   EmptySearch,
@@ -12,12 +13,9 @@ import {
   ViewerContext,
 } from '~/components'
 
-import { analytics, mergeConnections } from '~/common/utils'
-
 import GoogleSearchButton from '../GoogleSearchButton'
-import { SEARCH_ARTICLES_PRIVATE, SEARCH_ARTICLES_PUBLIC } from './gql'
-
 import { SearchArticlesPublic } from './__generated__/SearchArticlesPublic'
+import { SEARCH_ARTICLES_PRIVATE, SEARCH_ARTICLES_PUBLIC } from './gql'
 
 const SearchArticles = () => {
   const viewer = useContext(ViewerContext)

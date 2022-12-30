@@ -1,12 +1,11 @@
 import { DataProxy } from 'apollo-cache'
-import { DRAFT_ASSETS } from '~/views/Me/DraftDetail/gql'
 
 import { ERROR_CODES } from '~/common/enums'
-
 import {
   DraftAssets,
   DraftAssets_node_Draft_assets as Asset,
 } from '~/views/Me/DraftDetail/__generated__/DraftAssets'
+import { DRAFT_ASSETS } from '~/views/Me/DraftDetail/gql'
 
 const update = ({
   cache,

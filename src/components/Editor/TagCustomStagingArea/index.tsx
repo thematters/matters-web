@@ -5,15 +5,14 @@ import { Spinner, Translate, usePublicQuery, ViewerContext } from '~/components'
 import { SelectTag } from '~/components/SearchSelect/SearchingArea'
 import { CustomStagingAreaProps } from '~/components/SearchSelect/StagingArea'
 
-import { EDITOR_RECOMMENDED_TAGS } from './gql'
-import RecommendedTags from './RecommendedTags'
-import SelectedTags from './SelectedTags'
-import styles from './styles.css'
-
 import {
   EditorRecommendedTags,
   EditorRecommendedTags_user_tags_edges_node as TagType,
 } from './__generated__/EditorRecommendedTags'
+import { EDITOR_RECOMMENDED_TAGS } from './gql'
+import RecommendedTags from './RecommendedTags'
+import SelectedTags from './SelectedTags'
+import styles from './styles.css'
 
 const TagCustomStagingArea = ({
   nodes: tags,

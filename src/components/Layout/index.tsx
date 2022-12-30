@@ -8,6 +8,7 @@ import {
   useResponsive,
   useRoute,
 } from '~/components'
+import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
 import FixedMain from './FixedMain'
@@ -17,8 +18,6 @@ import SideFooter from './SideFooter'
 import SideNav from './SideNav'
 import Spacing from './Spacing'
 import styles from './styles.css'
-
-import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
 
 export const Layout: React.FC<React.PropsWithChildren<React.ReactNode>> & {
   Main: typeof Main

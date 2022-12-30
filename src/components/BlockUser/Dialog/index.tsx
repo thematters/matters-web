@@ -1,13 +1,11 @@
+import { ADD_TOAST } from '~/common/enums'
 import { Dialog, Translate, useDialogSwitch, useMutation } from '~/components'
+import { ToggleBlockUser } from '~/components/GQL/mutations/__generated__/ToggleBlockUser'
 import TOGGLE_BLOCK_USER from '~/components/GQL/mutations/toggleBlockUser'
 
-import { ADD_TOAST } from '~/common/enums'
-
-import ViewBlocksButton from './ViewBlocksButton'
-
-import { ToggleBlockUser } from '~/components/GQL/mutations/__generated__/ToggleBlockUser'
 import { BlockUserPrivate } from '../__generated__/BlockUserPrivate'
 import { BlockUserPublic } from '../__generated__/BlockUserPublic'
+import ViewBlocksButton from './ViewBlocksButton'
 
 interface BlockUserDialogProps {
   user: BlockUserPublic & Partial<BlockUserPrivate>

@@ -11,6 +11,12 @@ import {
 } from 'wagmi'
 
 import {
+  featureSupportedChains,
+  maskAddress,
+  PublicResolverABI,
+  translate,
+} from '~/common/utils'
+import {
   Button,
   CopyToClipboard,
   Dialog,
@@ -21,19 +27,11 @@ import {
   useTargetNetwork,
   ViewerContext,
 } from '~/components'
-
-import {
-  featureSupportedChains,
-  maskAddress,
-  PublicResolverABI,
-  translate,
-} from '~/common/utils'
+import { UserProfileUserPublic_user } from '~/components/UserProfile/__generated__/UserProfileUserPublic'
 
 import ENSDescription from './ENSDescription'
 import LinkENSIntro from './LinkENSIntro'
 import styles from './styles.css'
-
-import { UserProfileUserPublic_user } from '~/components/UserProfile/__generated__/UserProfileUserPublic'
 
 interface LinkENSProps {
   user: UserProfileUserPublic_user

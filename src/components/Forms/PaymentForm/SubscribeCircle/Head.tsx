@@ -1,17 +1,14 @@
-import { CircleDigest, TextIcon, Translate, withIcon } from '~/components'
-
-import { formatAmount } from '~/common/utils'
-
+import { InvitationState } from '@/__generated__/globalTypes'
 import { ReactComponent as IconCircleFeatureConnection } from '@/public/static/icons/circle-feature-connection.svg'
 import { ReactComponent as IconCircleFeatureDiscussion } from '@/public/static/icons/circle-feature-discussion.svg'
 import { ReactComponent as IconCircleFeatureReading } from '@/public/static/icons/circle-feature-reading.svg'
+import { formatAmount } from '~/common/utils'
+import { CircleDigest, TextIcon, Translate, withIcon } from '~/components'
+import { DigestRichCirclePrivate } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePrivate'
+import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
 
 import ConfirmTable from '../ConfirmTable'
 import styles from './styles.css'
-
-import { InvitationState } from '@/__generated__/globalTypes'
-import { DigestRichCirclePrivate } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePrivate'
-import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
 
 type HeadProps = {
   circle: DigestRichCirclePublic & DigestRichCirclePrivate

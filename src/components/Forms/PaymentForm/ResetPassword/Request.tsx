@@ -3,6 +3,12 @@ import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 
 import {
+  parseFormSubmitErrors,
+  translate,
+  validateCode,
+  validateEmail,
+} from '~/common/utils'
+import {
   Dialog,
   Form,
   LanguageContext,
@@ -10,16 +16,8 @@ import {
   useMutation,
   VerificationSendCodeButton,
 } from '~/components'
-import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
-
-import {
-  parseFormSubmitErrors,
-  translate,
-  validateCode,
-  validateEmail,
-} from '~/common/utils'
-
 import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
+import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 
 interface FormProps {
   defaultEmail: string

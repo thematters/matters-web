@@ -1,3 +1,5 @@
+import { TransactionState } from '@/__generated__/globalTypes'
+import { featureSupportedChains } from '~/common/utils'
 import {
   Button,
   IconExternalLink16,
@@ -7,12 +9,8 @@ import {
   Translate,
 } from '~/components'
 
-import { featureSupportedChains } from '~/common/utils'
-
-import styles from './styles.css'
-
-import { TransactionState } from '@/__generated__/globalTypes'
 import { DigestTransaction_blockchainTx } from '../__generated__/DigestTransaction'
+import styles from './styles.css'
 
 /***
  * This is a sub component of Transaction that presents canceled, failed

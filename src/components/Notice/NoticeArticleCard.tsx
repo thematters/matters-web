@@ -2,9 +2,8 @@ import gql from 'graphql-tag'
 
 import { ArticleDigestSidebar } from '~/components/ArticleDigest'
 
-import styles from './styles.css'
-
 import { NoticeArticleCard as NoticeArticleCardType } from './__generated__/NoticeArticleCard'
+import styles from './styles.css'
 
 const NoticeArticleCard = ({
   article,

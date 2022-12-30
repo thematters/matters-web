@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
+import { ADD_TOAST } from '~/common/enums'
 import {
   Button,
   Dialog,
@@ -11,10 +12,7 @@ import {
   useMutation,
 } from '~/components'
 
-import { ADD_TOAST } from '~/common/enums'
-
 import { DraftsContext } from '../../../views/Me/Drafts/context'
-
 import { DeleteButtonDraft } from './__generated__/DeleteButtonDraft'
 import { DeleteDraft } from './__generated__/DeleteDraft'
 

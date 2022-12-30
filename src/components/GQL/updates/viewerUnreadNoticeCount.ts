@@ -1,8 +1,7 @@
 import { DataProxy } from 'apollo-cache'
 
-import { UNREAD_NOTICE_COUNT } from '~/components/GQL/queries/notice'
-
 import { UnreadNoticeCount } from '~/components/GQL/queries/__generated__/UnreadNoticeCount'
+import { UNREAD_NOTICE_COUNT } from '~/components/GQL/queries/notice'
 
 const update = (cache: DataProxy) => {
   try {

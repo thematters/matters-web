@@ -1,10 +1,9 @@
 import { useQuery } from '@apollo/react-hooks'
 
 import { Toast, Translate } from '~/components'
-import DRAFT_PUBLISH_STATE from '~/components/GQL/queries/draftPublishState'
-
 import { PublishStateDraft } from '~/components/GQL/fragments/__generated__/PublishStateDraft'
 import { DraftPublishState } from '~/components/GQL/queries/__generated__/DraftPublishState'
+import DRAFT_PUBLISH_STATE from '~/components/GQL/queries/draftPublishState'
 
 const PendingState = ({ draft }: { draft: PublishStateDraft }) => {
   useQuery<DraftPublishState>(DRAFT_PUBLISH_STATE, {

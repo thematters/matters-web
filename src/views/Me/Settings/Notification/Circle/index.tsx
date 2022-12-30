@@ -12,15 +12,14 @@ import {
 } from '~/components'
 
 import styles from '../styles.css'
+import { UpdateViewerNotificationCircle } from './__generated__/UpdateViewerNotificationCircle'
+import { ViewerNotificationCircleSettings } from './__generated__/ViewerNotificationCircleSettings'
 import MyBroadcastSettings from './MyBroadcast'
 import MyDiscussionSettings from './MyDiscussion'
 import MyManageSettings from './MyManage'
 import SubscribeArticleSettings from './SubscribeArticle'
 import SubscribeBroadcastSettings from './SubscribeBroadcast'
 import SubscribeDiscussionSettings from './SubscribeDiscussion'
-
-import { UpdateViewerNotificationCircle } from './__generated__/UpdateViewerNotificationCircle'
-import { ViewerNotificationCircleSettings } from './__generated__/ViewerNotificationCircleSettings'
 
 const VIEWER_NOTIFICATION_CIRCLE_SETTINGS = gql`
   query ViewerNotificationCircleSettings {

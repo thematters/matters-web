@@ -3,6 +3,7 @@ import _chunk from 'lodash/chunk'
 import _flatten from 'lodash/flatten'
 import _get from 'lodash/get'
 
+import { analytics, mergeConnections } from '~/common/utils'
 import {
   EmptyWarning,
   Head,
@@ -14,8 +15,7 @@ import {
   Translate,
 } from '~/components'
 
-import { analytics, mergeConnections } from '~/common/utils'
-
+import { FollowingFeed as FollowingFeedType } from './__generated__/FollowingFeed'
 import { FOLLOWING_FEED } from './gql'
 import RecommendArticleActivity from './RecommendArticleActivity'
 import RecommendCircleActivity from './RecommendCircleActivity'
@@ -25,8 +25,6 @@ import UserAddArticleTagActivity from './UserAddArticleTagActivity'
 import UserBroadcastCircleActivity from './UserBroadcastCircleActivity'
 import UserCreateCircleActivity from './UserCreateCircleActivity'
 import UserPublishArticleActivity from './UserPublishArticleActivity'
-
-import { FollowingFeed as FollowingFeedType } from './__generated__/FollowingFeed'
 
 const FollowingFeed = () => {
   const { data, loading, error, fetchMore, refetch } =

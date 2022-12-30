@@ -4,6 +4,11 @@ import _pickBy from 'lodash/pickBy'
 import React, { useContext, useEffect } from 'react'
 
 import {
+  parseFormSubmitErrors,
+  validateComparedPassword,
+  validatePaymentPassword,
+} from '~/common/utils'
+import {
   Dialog,
   Form,
   LanguageContext,
@@ -13,15 +18,8 @@ import {
   useStep,
 } from '~/components'
 
-import {
-  parseFormSubmitErrors,
-  validateComparedPassword,
-  validatePaymentPassword,
-} from '~/common/utils'
-
-import styles from './styles.css'
-
 import { SetPaymentPassword } from './__generated__/SetPaymentPassword'
+import styles from './styles.css'
 
 interface FormProps {
   submitCallback: () => void

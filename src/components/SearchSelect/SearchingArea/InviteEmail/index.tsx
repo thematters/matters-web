@@ -1,8 +1,7 @@
 import { Card, IconAdd16, TextIcon, Translate } from '~/components'
+import { UserDigestMiniUser } from '~/components/UserDigest/Mini/__generated__/UserDigestMiniUser'
 
 import styles from './styles.css'
-
-import { UserDigestMiniUser } from '~/components/UserDigest/Mini/__generated__/UserDigestMiniUser'
 
 interface InviteEmailProps {
   user: UserDigestMiniUser

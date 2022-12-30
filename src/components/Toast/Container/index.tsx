@@ -1,8 +1,7 @@
 import { useState } from 'react'
 
-import { Layout, useEventListener } from '~/components'
-
 import { ADD_TOAST, REMOVE_TOAST } from '~/common/enums'
+import { Layout, useEventListener } from '~/components'
 
 import { ToastWithEffect } from '../Instance'
 import styles from './styles.css'

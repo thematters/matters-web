@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 import _filter from 'lodash/filter'
 import _get from 'lodash/get'
 
+import { ADD_TOAST } from '~/common/enums'
 import {
   IconUnPin24,
   Menu,
@@ -9,13 +10,11 @@ import {
   Translate,
   useMutation,
 } from '~/components'
-
-import { ADD_TOAST } from '~/common/enums'
-
 import {
   TagArticlesPublic,
   TagArticlesPublic_node_Tag,
 } from '~/components/GQL/queries/__generated__/TagArticlesPublic'
+
 import { SetTagUnselected } from './__generated__/SetTagUnselected'
 import { SetTagUnselectedButtonArticle } from './__generated__/SetTagUnselectedButtonArticle'
 

@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useContext, useEffect, useState } from 'react'
 
+import { iscnLinkUrl, translate } from '~/common/utils'
 import {
   Button,
   CopyToClipboard,
@@ -17,14 +18,11 @@ import {
   useMutation,
 } from '~/components'
 
-import { iscnLinkUrl, translate } from '~/common/utils'
-
+import { Gateways } from './__generated__/Gateways'
+import { RetryEditArticle } from './__generated__/RetryEditArticle'
 import ArticleSecret from './ArticleSecret'
 import SectionCard from './SectionCard'
 import styles from './styles.css'
-
-import { Gateways } from './__generated__/Gateways'
-import { RetryEditArticle } from './__generated__/RetryEditArticle'
 
 const EDIT_ARTICLE = gql`
   mutation RetryEditArticle($id: ID!, $iscnPublish: Boolean) {

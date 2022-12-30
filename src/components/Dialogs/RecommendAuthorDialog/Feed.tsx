@@ -13,10 +13,9 @@ import {
   ViewerContext,
 } from '~/components'
 
+import { RecommendAuthors } from './__generated__/RecommendAuthors'
 import { RECOMMEND_AUTHORS } from './gql'
 import styles from './styles.css'
-
-import { RecommendAuthors } from './__generated__/RecommendAuthors'
 
 export type FeedType = 'trendy' | 'appreciated' | 'active'
 

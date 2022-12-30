@@ -1,9 +1,8 @@
 import gql from 'graphql-tag'
 
-import { IconEdit16, Menu, TextIcon, Translate } from '~/components'
-
 import { URL_QS } from '~/common/enums'
 import { toPath } from '~/common/utils'
+import { IconEdit16, Menu, TextIcon, Translate } from '~/components'
 
 import { EditArticleButtonArticle } from './__generated__/EditArticleButtonArticle'
 

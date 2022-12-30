@@ -3,6 +3,7 @@ import _isEmpty from 'lodash/isEmpty'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 
+import { translate } from '~/common/utils'
 import {
   Button,
   DropdownDialog,
@@ -19,12 +20,9 @@ import {
 } from '~/components'
 import { BlockUser } from '~/components/BlockUser'
 
-import { translate } from '~/common/utils'
-
-import { EditProfileDialog } from './EditProfileDialog'
-
 import { DropdownActionsUserPrivate } from './__generated__/DropdownActionsUserPrivate'
 import { DropdownActionsUserPublic } from './__generated__/DropdownActionsUserPublic'
+import { EditProfileDialog } from './EditProfileDialog'
 
 interface DropdownActionsProps {
   user: DropdownActionsUserPublic & Partial<DropdownActionsUserPrivate>

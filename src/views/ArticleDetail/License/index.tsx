@@ -1,17 +1,14 @@
-import { TextIcon, Translate, withIcon } from '~/components'
-
-import { TEST_ID } from '~/common/enums'
-
+import { ArticleLicenseType } from '@/__generated__/globalTypes'
 import { ReactComponent as IconLicenseARR } from '@/public/static/icons/24px/license-arr.svg'
 import { ReactComponent as IconLicenseBY } from '@/public/static/icons/24px/license-by.svg'
-import { ReactComponent as IconLicenseCC0 } from '@/public/static/icons/24px/license-cc-0.svg'
 import { ReactComponent as IconLicenseCC } from '@/public/static/icons/24px/license-cc.svg'
+import { ReactComponent as IconLicenseCC0 } from '@/public/static/icons/24px/license-cc-0.svg'
 import { ReactComponent as IconLicenseNC } from '@/public/static/icons/24px/license-nc.svg'
 import { ReactComponent as IconLicenseND } from '@/public/static/icons/24px/license-nd.svg'
+import { TEST_ID } from '~/common/enums'
+import { TextIcon, Translate, withIcon } from '~/components'
 
 import styles from './styles.css'
-
-import { ArticleLicenseType } from '@/__generated__/globalTypes'
 
 type LicenseProps = {
   license: ArticleLicenseType

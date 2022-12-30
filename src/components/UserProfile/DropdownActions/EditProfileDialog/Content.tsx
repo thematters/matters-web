@@ -3,6 +3,14 @@ import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import React, { useContext } from 'react'
 
+import IMAGE_COVER from '@/public/static/images/profile-cover.png'
+import { ADD_TOAST, ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
+import {
+  parseFormSubmitErrors,
+  translate,
+  validateDescription,
+  validateDisplayName,
+} from '~/common/utils'
 import {
   AvatarUploader,
   CoverUploader,
@@ -13,25 +21,14 @@ import {
   useMutation,
 } from '~/components'
 
-import { ADD_TOAST, ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
-import {
-  parseFormSubmitErrors,
-  translate,
-  validateDescription,
-  validateDisplayName,
-} from '~/common/utils'
-
-import IMAGE_COVER from '@/public/static/images/profile-cover.png'
-
-import NFTCollection from './NFTCollection'
-import styles from './styles.css'
-
 import {
   EditProfileDialogUserPrivate,
   EditProfileDialogUserPrivate_info_cryptoWallet_nfts,
 } from './__generated__/EditProfileDialogUserPrivate'
 import { EditProfileDialogUserPublic } from './__generated__/EditProfileDialogUserPublic'
 import { UpdateUserInfoProfile } from './__generated__/UpdateUserInfoProfile'
+import NFTCollection from './NFTCollection'
+import styles from './styles.css'
 
 interface FormProps {
   user: EditProfileDialogUserPublic & Partial<EditProfileDialogUserPrivate>

@@ -1,6 +1,8 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
+import { QuoteCurrency } from '@/__generated__/globalTypes'
+import { ADD_TOAST } from '~/common/enums'
 import {
   DropdownDialog,
   Form,
@@ -11,9 +13,6 @@ import {
   ViewerContext,
 } from '~/components'
 
-import { ADD_TOAST } from '~/common/enums'
-
-import { QuoteCurrency } from '@/__generated__/globalTypes'
 import { SetCurrency } from './__generated__/SetCurrency'
 
 const SET_CURRENCY = gql`

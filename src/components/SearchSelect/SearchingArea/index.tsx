@@ -2,6 +2,14 @@ import { useLazyQuery } from '@apollo/react-hooks'
 import { useContext, useEffect, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 
+import { SearchExclude, SearchFilter } from '@/__generated__/globalTypes'
+import { INPUT_DEBOUNCE } from '~/common/enums'
+import {
+  analytics,
+  isValidEmail,
+  mergeConnections,
+  normalizeTagInput, // stripAllPunct, // stripPunctPrefixSuffix,
+} from '~/common/utils'
 import {
   EmptySearch,
   InfiniteScroll,
@@ -12,22 +20,8 @@ import {
 } from '~/components'
 import { toUserDigestMiniPlaceholder } from '~/components/UserDigest/Mini'
 
-import { INPUT_DEBOUNCE } from '~/common/enums'
-import {
-  analytics,
-  isValidEmail,
-  mergeConnections,
-  normalizeTagInput, // stripAllPunct, // stripPunctPrefixSuffix,
-} from '~/common/utils'
-
 import SearchSelectNode from '../SearchSelectNode'
 import styles from '../styles.css'
-import CreateTag from './CreateTag'
-import { LIST_VIEWER_ARTICLES, SELECT_SEARCH } from './gql'
-import InviteEmail from './InviteEmail'
-import SearchInput, { SearchType as SearchInputType } from './SearchInput'
-
-import { SearchExclude, SearchFilter } from '@/__generated__/globalTypes'
 import { ListViewerArticles } from './__generated__/ListViewerArticles'
 import {
   SelectSearch,
@@ -36,6 +30,10 @@ import {
   SelectSearch_search_edges_node_Tag,
   SelectSearch_search_edges_node_User,
 } from './__generated__/SelectSearch'
+import CreateTag from './CreateTag'
+import { LIST_VIEWER_ARTICLES, SELECT_SEARCH } from './gql'
+import InviteEmail from './InviteEmail'
+import SearchInput, { SearchType as SearchInputType } from './SearchInput'
 
 /**
  * This is a sub-component of search-and-select, and it will show

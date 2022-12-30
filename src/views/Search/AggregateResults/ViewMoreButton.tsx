@@ -1,6 +1,5 @@
-import { Translate, ViewMoreCard } from '~/components'
-
 import { toPath } from '~/common/utils'
+import { Translate, ViewMoreCard } from '~/components'
 
 interface ViewMoreButtonProps {
   q: string

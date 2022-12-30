@@ -1,5 +1,4 @@
 import { Menu, Spinner, UserDigest } from '~/components'
-
 import { UserDigestMiniUser } from '~/components/UserDigest/Mini/__generated__/UserDigestMiniUser'
 
 export const DropdownUserList = ({

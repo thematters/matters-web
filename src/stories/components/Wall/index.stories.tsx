@@ -1,6 +1,7 @@
 import { MockedProvider } from '@apollo/react-testing'
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React from 'react'
+
 import Wall from '~/views/ArticleDetail/Wall/Visitor'
 
 export default {

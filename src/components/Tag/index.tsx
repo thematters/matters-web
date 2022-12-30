@@ -2,6 +2,7 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
+import { clampTagLength, toPath } from '~/common/utils'
 import {
   IconClear16,
   IconHashTag16,
@@ -10,11 +11,8 @@ import {
   TextIconProps,
 } from '~/components'
 
-import { clampTagLength, toPath } from '~/common/utils'
-
-import styles from './styles.css'
-
 import { DigestTag } from './__generated__/DigestTag'
+import styles from './styles.css'
 
 interface TagProps {
   tag: DigestTag

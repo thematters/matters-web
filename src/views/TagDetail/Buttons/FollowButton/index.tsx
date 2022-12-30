@@ -1,9 +1,8 @@
 import gql from 'graphql-tag'
 
+import { FollowButtonTagPrivate } from './__generated__/FollowButtonTagPrivate'
 import Follow from './Follow'
 import Unfollow from './Unfollow'
-
-import { FollowButtonTagPrivate } from './__generated__/FollowButtonTagPrivate'
 
 interface FollowButtonProps {
   tag: FollowButtonTagPrivate

@@ -2,6 +2,8 @@ import _isEmpty from 'lodash/isEmpty'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 
+import { ADD_TOAST } from '~/common/enums'
+import { translate } from '~/common/utils'
 import {
   AppreciatorsDialog,
   Button,
@@ -17,9 +19,7 @@ import {
   ViewerContext,
 } from '~/components'
 
-import { ADD_TOAST } from '~/common/enums'
-import { translate } from '~/common/utils'
-
+import { DropdownActionsArticle } from './__generated__/DropdownActionsArticle'
 import AppreciatorsButton from './AppreciatorsButton'
 import ArchiveArticle from './ArchiveArticle'
 import DonatorsButton from './DonatorsButton'
@@ -32,8 +32,6 @@ import SetTagSelectedButton from './SetTagSelectedButton'
 import SetTagUnselectedButton from './SetTagUnselectedButton'
 import ShareButton from './ShareButton'
 import StickyButton from './StickyButton'
-
-import { DropdownActionsArticle } from './__generated__/DropdownActionsArticle'
 
 export interface DropdownActionsControls {
   icon?: React.ReactNode

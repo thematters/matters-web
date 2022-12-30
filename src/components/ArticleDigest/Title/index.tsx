@@ -1,14 +1,12 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 
-import { LinkWrapper, LinkWrapperProps, Translate } from '~/components'
-
 import { TEST_ID } from '~/common/enums'
 import { toPath, UtmParams } from '~/common/utils'
-
-import styles from './styles.css'
+import { LinkWrapper, LinkWrapperProps, Translate } from '~/components'
 
 import { ArticleDigestTitleArticle } from './__generated__/ArticleDigestTitleArticle'
+import styles from './styles.css'
 
 export type ArticleDigestTitleTextSize =
   | 'sm-s'

@@ -4,6 +4,8 @@ import _pickBy from 'lodash/pickBy'
 import { useContext, useEffect } from 'react'
 import { useAccount, useNetwork } from 'wagmi'
 
+import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
+import { parseFormSubmitErrors, validatePaymentPassword } from '~/common/utils'
 import {
   Button,
   Dialog,
@@ -16,23 +18,19 @@ import {
   useMutation,
   ViewerContext,
 } from '~/components'
-import PAY_TO from '~/components/GQL/mutations/payTo'
-import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
-import updateDonation from '~/components/GQL/updates/donation'
-
-import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
-import { parseFormSubmitErrors, validatePaymentPassword } from '~/common/utils'
-
-import PaymentInfo from '../../PaymentInfo'
-import styles from './styles.css'
-
 import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
 import {
   PayTo as PayToMutate,
   PayTo_payTo_transaction as PayToTx,
 } from '~/components/GQL/mutations/__generated__/PayTo'
+import PAY_TO from '~/components/GQL/mutations/payTo'
 import { WalletBalance } from '~/components/GQL/queries/__generated__/WalletBalance'
+import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
+import updateDonation from '~/components/GQL/updates/donation'
 import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
+
+import PaymentInfo from '../../PaymentInfo'
+import styles from './styles.css'
 
 interface SetAmountOpenTabCallbackValues {
   window: Window

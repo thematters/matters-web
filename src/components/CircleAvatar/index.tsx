@@ -1,13 +1,11 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 
+import ICON_CIRCLE_AVATAR_DEFAULT from '@/public/static/icons/72px/circle-avatar-default.svg'
 import { ResponsiveImage } from '~/components'
 
-import ICON_CIRCLE_AVATAR_DEFAULT from '@/public/static/icons/72px/circle-avatar-default.svg'
-
-import styles from './styles.css'
-
 import { AvatarCircle } from './__generated__/AvatarCircle'
+import styles from './styles.css'
 
 export type CircleAvatarSize = 'xl' | 'xxl' | 'xxxl'
 

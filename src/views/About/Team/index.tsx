@@ -1,5 +1,3 @@
-import { Translate } from '~/components'
-
 import IMAGE_BERYL from '@/public/static/images/about/team-beryl.svg'
 import IMAGE_CHARLIE from '@/public/static/images/about/team-charlie.svg'
 import IMAGE_DOBBY from '@/public/static/images/about/team-dobby.svg'
@@ -15,6 +13,7 @@ import IMAGE_YH from '@/public/static/images/about/team-yh.svg'
 import IMAGE_YS from '@/public/static/images/about/team-ys.svg'
 import IMAGE_YX from '@/public/static/images/about/team-yx.svg'
 import IMAGE_ZECK from '@/public/static/images/about/team-zeck.svg'
+import { Translate } from '~/components'
 
 import styles from './styles.css'
 

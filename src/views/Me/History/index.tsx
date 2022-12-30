@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
+import { analytics, mergeConnections } from '~/common/utils'
 import {
   ArticleDigestFeed,
   EmptyHistory,
@@ -11,8 +12,6 @@ import {
   QueryError,
   Spinner,
 } from '~/components'
-
-import { analytics, mergeConnections } from '~/common/utils'
 
 import { MeHistoryFeed } from './__generated__/MeHistoryFeed'
 

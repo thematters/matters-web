@@ -1,8 +1,7 @@
 import dynamic from 'next/dynamic'
 
-import { Dialog, Spinner, useDialogSwitch } from '~/components'
-
 import { analytics, isMobile } from '~/common/utils'
+import { Dialog, Spinner, useDialogSwitch } from '~/components'
 
 import { ShareDialogContentProps } from './Content'
 

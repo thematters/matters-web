@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useState } from 'react'
 
+import { analytics, mergeConnections } from '~/common/utils'
 import {
   EmptyTransaction,
   EmptyTransactionCurrency,
@@ -17,12 +18,9 @@ import {
   Translate,
 } from '~/components'
 
-import { analytics, mergeConnections } from '~/common/utils'
-
+import { MeTransactions } from './__generated__/MeTransactions'
 import { Currency, CurrencySwitch } from './CurrencySwitch'
 import styles from './styles.css'
-
-import { MeTransactions } from './__generated__/MeTransactions'
 
 const ME_TRANSACTIONS = gql`
   query MeTransactions(

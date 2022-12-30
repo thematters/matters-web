@@ -4,6 +4,11 @@ import dynamic from 'next/dynamic'
 import { useEffect, useState } from 'react'
 
 import {
+  ArticleAccessType,
+  ArticleLicenseType,
+} from '@/__generated__/globalTypes'
+import { ENTITY_TYPE, MAX_ARTICLE_REVISION_COUNT } from '~/common/enums'
+import {
   EmptyLayout,
   Layout,
   ReviseArticleDialog,
@@ -11,6 +16,8 @@ import {
   Throw404,
   useResponsive,
 } from '~/components'
+import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
+import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
 import {
   SetCollectionProps,
   SetCoverProps,
@@ -22,9 +29,16 @@ import BottomBar from '~/components/Editor/BottomBar'
 import Sidebar from '~/components/Editor/Sidebar'
 import SupportSettingDialog from '~/components/Editor/ToggleAccess/SupportSettingDialog'
 import { QueryError, useImperativeQuery, useMutation } from '~/components/GQL'
+import { Asset } from '~/components/GQL/fragments/__generated__/Asset'
+import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
 
-import { ENTITY_TYPE, MAX_ARTICLE_REVISION_COUNT } from '~/common/enums'
-
+import { ArticleDetailPublic_article } from '../__generated__/ArticleDetailPublic'
+import { EditArticleSupportSetting } from './__generated__/EditArticleSupportSetting'
+import {
+  EditModeArticle,
+  EditModeArticle_article_Article,
+} from './__generated__/EditModeArticle'
+import { EditModeArticleAssets } from './__generated__/EditModeArticleAssets'
 import ConfirmExitDialog from './ConfirmExitDialog'
 import {
   EDIT_ARTICLE_SUPPORT_SETTING,
@@ -34,22 +48,6 @@ import {
 import EditModeHeader from './Header'
 import PublishState from './PublishState'
 import styles from './styles.css'
-
-import {
-  ArticleAccessType,
-  ArticleLicenseType,
-} from '@/__generated__/globalTypes'
-import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
-import { DigestRichCirclePublic } from '~/components/CircleDigest/Rich/__generated__/DigestRichCirclePublic'
-import { Asset } from '~/components/GQL/fragments/__generated__/Asset'
-import { DigestTag } from '~/components/Tag/__generated__/DigestTag'
-import { ArticleDetailPublic_article } from '../__generated__/ArticleDetailPublic'
-import { EditArticleSupportSetting } from './__generated__/EditArticleSupportSetting'
-import {
-  EditModeArticle,
-  EditModeArticle_article_Article,
-} from './__generated__/EditModeArticle'
-import { EditModeArticleAssets } from './__generated__/EditModeArticleAssets'
 
 interface EditModeProps {
   article: ArticleDetailPublic_article

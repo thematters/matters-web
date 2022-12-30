@@ -2,16 +2,14 @@ import classNames from 'classnames'
 import Link from 'next/link'
 import { Fragment, useContext, useEffect } from 'react'
 
+import { toPath } from '~/common/utils'
 import { Menu, Translate, usePublicQuery, ViewerContext } from '~/components'
 import { Spinner } from '~/components/Spinner'
 
-import { toPath } from '~/common/utils'
-
+import { SearchOverviewPublic } from './__generated__/SearchOverviewPublic'
 import ClearHistoryButton from './ClearHistoryButton'
 import { SEARCH_AUTOCOMPLETE_PRIVATE, SEARCH_AUTOCOMPLETE_PUBLIC } from './gql'
 import styles from './styles.css'
-
-import { SearchOverviewPublic } from './__generated__/SearchOverviewPublic'
 
 interface SearchOverviewProps {
   inPage?: boolean

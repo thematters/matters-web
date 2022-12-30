@@ -1,3 +1,5 @@
+import { PATHS } from '~/common/enums'
+import { analytics } from '~/common/utils'
 import {
   Form,
   SubscribeCircleDialog,
@@ -6,13 +8,9 @@ import {
 } from '~/components'
 import { CircleDigest } from '~/components/CircleDigest'
 
-import { PATHS } from '~/common/enums'
-import { analytics } from '~/common/utils'
-
-import styles from './styles.css'
-
 import { UserProfileUserPrivate_user_ownCircles } from '../__generated__/UserProfileUserPrivate'
 import { UserProfileUserPublic_user_ownCircles } from '../__generated__/UserProfileUserPublic'
+import styles from './styles.css'
 
 type CircleWidgetCircle = UserProfileUserPublic_user_ownCircles &
   Partial<UserProfileUserPrivate_user_ownCircles>

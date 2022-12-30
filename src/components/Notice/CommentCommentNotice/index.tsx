@@ -1,8 +1,7 @@
 import gql from 'graphql-tag'
 
-import CommentNewReplyNotice from './CommentNewReplyNotice'
-
 import { CommentCommentNotice as NoticeType } from './__generated__/CommentCommentNotice'
+import CommentNewReplyNotice from './CommentNewReplyNotice'
 
 const CommentCommentNotice = ({ notice }: { notice: NoticeType }) => {
   switch (notice.commentCommentNoticeType) {

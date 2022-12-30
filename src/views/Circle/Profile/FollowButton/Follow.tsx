@@ -2,22 +2,21 @@ import _isNil from 'lodash/isNil'
 import { useContext } from 'react'
 
 import {
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  UNIVERSAL_AUTH_SOURCE,
+} from '~/common/enums'
+import {
   Button,
   TextIcon,
   Translate,
   useMutation,
   ViewerContext,
 } from '~/components'
+import { ToggleFollowCircle } from '~/components/GQL/mutations/__generated__/ToggleFollowCircle'
 import TOGGLE_FOLLOW_CIRCLE from '~/components/GQL/mutations/toggleFollowCircle'
 import updateCircleFollowerCount from '~/components/GQL/updates/circleFollowerCount'
 import updateCircleFollowers from '~/components/GQL/updates/circleFollowers'
 
-import {
-  OPEN_UNIVERSAL_AUTH_DIALOG,
-  UNIVERSAL_AUTH_SOURCE,
-} from '~/common/enums'
-
-import { ToggleFollowCircle } from '~/components/GQL/mutations/__generated__/ToggleFollowCircle'
 import { FollowButtonCirclePrivate } from './__generated__/FollowButtonCirclePrivate'
 
 interface FollowProps {

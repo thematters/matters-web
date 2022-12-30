@@ -11,11 +11,10 @@ import {
 } from '~/components'
 import viewerUnreadFollowing from '~/components/GQL/updates/viewerUnreadFollowing'
 
-import Feed from './Feed'
-import PickAuthors from './PickAuthors'
-
 import { MeFollow } from './__generated__/MeFollow'
 import { ReadFollowingFeed } from './__generated__/ReadFollowingFeed'
+import Feed from './Feed'
+import PickAuthors from './PickAuthors'
 
 const READ_FOLLOWING = gql`
   mutation ReadFollowingFeed {

@@ -1,3 +1,5 @@
+import { QuoteCurrency } from '@/__generated__/globalTypes'
+import { analytics, formatAmount } from '~/common/utils'
 import {
   AddCreditDialog,
   CurrencyFormatter,
@@ -12,11 +14,7 @@ import {
   Translate,
 } from '~/components'
 
-import { analytics, formatAmount } from '~/common/utils'
-
 import styles from './styles.css'
-
-import { QuoteCurrency } from '@/__generated__/globalTypes'
 
 interface FiatCurrencyProps {
   balanceHKD: number

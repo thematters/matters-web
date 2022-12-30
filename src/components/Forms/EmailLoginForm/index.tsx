@@ -3,16 +3,6 @@ import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 
-import {
-  Dialog,
-  Form,
-  LanguageContext,
-  LanguageSwitch,
-  Layout,
-  Translate,
-  useMutation,
-} from '~/components'
-
 import { ADD_TOAST } from '~/common/enums'
 import {
   analytics,
@@ -23,15 +13,23 @@ import {
   validateEmail,
   validatePassword,
 } from '~/common/utils'
+import {
+  Dialog,
+  Form,
+  LanguageContext,
+  LanguageSwitch,
+  Layout,
+  Translate,
+  useMutation,
+} from '~/components'
 
+import { UserLogin } from './__generated__/UserLogin'
 import {
   EmailSignUpDialogButton,
   PasswordResetDialogButton,
   PasswordResetRedirectButton,
 } from './Buttons'
 import styles from './styles.css'
-
-import { UserLogin } from './__generated__/UserLogin'
 
 interface FormProps {
   purpose: 'dialog' | 'page'

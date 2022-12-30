@@ -1,8 +1,7 @@
 import gql from 'graphql-tag'
 
-import { Translate } from '~/components'
-
 import { TEST_ID } from '~/common/enums'
+import { Translate } from '~/components'
 
 import NoticeArticleCard from '../NoticeArticleCard'
 import NoticeCircleName from '../NoticeCircleName'
@@ -10,7 +9,6 @@ import NoticeDate from '../NoticeDate'
 import NoticeHead from '../NoticeHead'
 import NoticeTypeIcon from '../NoticeTypeIcon'
 import styles from '../styles.css'
-
 import { CircleNewArticleNotice as NoticeType } from './__generated__/CircleNewArticleNotice'
 
 const CircleNewArticle = ({ notice }: { notice: NoticeType }) => {

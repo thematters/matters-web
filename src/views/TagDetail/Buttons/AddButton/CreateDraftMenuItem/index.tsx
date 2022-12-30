@@ -1,6 +1,8 @@
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
+import { ADD_TOAST, OPEN_LIKE_COIN_DIALOG } from '~/common/enums'
+import { analytics, toPath, translate } from '~/common/utils'
 import {
   IconAdd24,
   LanguageContext,
@@ -10,12 +12,9 @@ import {
   useMutation,
   ViewerContext,
 } from '~/components'
+import { CreateDraft } from '~/components/GQL/mutations/__generated__/CreateDraft'
 import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
 
-import { ADD_TOAST, OPEN_LIKE_COIN_DIALOG } from '~/common/enums'
-import { analytics, toPath, translate } from '~/common/utils'
-
-import { CreateDraft } from '~/components/GQL/mutations/__generated__/CreateDraft'
 import { TagFragment } from '../../../__generated__/TagFragment'
 
 interface CreateDraftButtonProps {

@@ -3,6 +3,15 @@ import _pickBy from 'lodash/pickBy'
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
+import CIRCLE_COVER from '@/public/static/images/circle-cover.svg'
+import { ADD_TOAST, ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
+import {
+  parseFormSubmitErrors,
+  toPath,
+  translate,
+  validateCircleDisplayName,
+  validateDescription,
+} from '~/common/utils'
 import {
   AvatarUploader,
   CoverUploader,
@@ -13,25 +22,13 @@ import {
   Translate,
   useMutation,
 } from '~/components'
-import PUT_CIRCLE from '~/components/GQL/mutations/putCircle'
-
-import { ADD_TOAST, ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
-import {
-  parseFormSubmitErrors,
-  toPath,
-  translate,
-  validateCircleDisplayName,
-  validateDescription,
-} from '~/common/utils'
-
-import CIRCLE_COVER from '@/public/static/images/circle-cover.svg'
-
-import styles from './styles.css'
-
 import {
   PutCircle,
   PutCircle_putCircle,
 } from '~/components/GQL/mutations/__generated__/PutCircle'
+import PUT_CIRCLE from '~/components/GQL/mutations/putCircle'
+
+import styles from './styles.css'
 
 interface FormProps {
   circle: Pick<

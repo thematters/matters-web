@@ -1,6 +1,17 @@
 import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
 
+import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
+import { ERROR_CODES } from '~/common/enums'
+import {
+  fromGlobalId,
+  // makeTitle,
+  // stripPunctPrefixSuffix,
+  stripAllPunct,
+  stripSpaces,
+  toGlobalId,
+  toPath,
+} from '~/common/utils'
 import {
   EmptyLayout,
   EmptyTag,
@@ -21,19 +32,9 @@ import {
 import { getErrorCodes, QueryError } from '~/components/GQL'
 import ShareButton from '~/components/Layout/Header/ShareButton'
 
-import { ERROR_CODES } from '~/common/enums'
-import {
-  fromGlobalId,
-  // makeTitle,
-  // stripPunctPrefixSuffix,
-  stripAllPunct,
-  stripSpaces,
-  toGlobalId,
-  toPath,
-} from '~/common/utils'
-
-import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
-
+import { TagDetailPublic } from './__generated__/TagDetailPublic'
+import { TagDetailPublicBySearch } from './__generated__/TagDetailPublicBySearch'
+import { TagFragment } from './__generated__/TagFragment'
 import TagDetailArticles from './Articles'
 import ArticlesCount from './ArticlesCount'
 import { TagDetailButtons } from './Buttons'
@@ -48,10 +49,6 @@ import {
 import Owner from './Owner'
 import RelatedTags from './RelatedTags'
 import styles from './styles.css'
-
-import { TagDetailPublic } from './__generated__/TagDetailPublic'
-import { TagDetailPublicBySearch } from './__generated__/TagDetailPublicBySearch'
-import { TagFragment } from './__generated__/TagFragment'
 
 const DynamicCommunity = dynamic(() => import('./Community'), {
   ssr: false,

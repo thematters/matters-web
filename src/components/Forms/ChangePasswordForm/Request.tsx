@@ -2,6 +2,7 @@ import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 
+import { parseFormSubmitErrors, translate, validateEmail } from '~/common/utils'
 import {
   Dialog,
   Form,
@@ -10,11 +11,8 @@ import {
   Translate,
   useMutation,
 } from '~/components'
-import SEND_CODE from '~/components/GQL/mutations/sendCode'
-
-import { parseFormSubmitErrors, translate, validateEmail } from '~/common/utils'
-
 import { SendVerificationCode } from '~/components/GQL/mutations/__generated__/SendVerificationCode'
+import SEND_CODE from '~/components/GQL/mutations/sendCode'
 
 interface FormProps {
   defaultEmail?: string

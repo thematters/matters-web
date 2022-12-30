@@ -2,6 +2,8 @@ import { Formik } from 'formik'
 import { useContext, useEffect, useState } from 'react'
 import { useDebounce } from 'use-debounce'
 
+import { INPUT_DEBOUNCE, Z_INDEX } from '~/common/enums'
+import { toPath, translate } from '~/common/utils'
 import {
   Button,
   Dropdown,
@@ -11,9 +13,6 @@ import {
   SearchOverview,
   useRoute,
 } from '~/components'
-
-import { INPUT_DEBOUNCE, Z_INDEX } from '~/common/enums'
-import { toPath, translate } from '~/common/utils'
 
 import styles from './styles.css'
 

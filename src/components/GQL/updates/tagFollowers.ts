@@ -1,10 +1,8 @@
 import { DataProxy } from 'apollo-cache'
 
-import TAG_FOLLOWERS from '~/components/GQL/queries/tagFollowers'
-
 import { ERROR_CODES } from '~/common/enums'
-
 import { TagFollowers } from '~/components/GQL/queries/__generated__/TagFollowers'
+import TAG_FOLLOWERS from '~/components/GQL/queries/tagFollowers'
 
 const update = ({
   cache,

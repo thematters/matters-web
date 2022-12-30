@@ -1,3 +1,5 @@
+import { ADD_TOAST, PATHS } from '~/common/enums'
+import { redirectToTarget } from '~/common/utils'
 import {
   CardSpacing,
   IconHelp24,
@@ -8,12 +10,8 @@ import {
   Translate,
   useMutation,
 } from '~/components'
-import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
-
-import { ADD_TOAST, PATHS } from '~/common/enums'
-import { redirectToTarget } from '~/common/utils'
-
 import { UserLogout } from '~/components/GQL/mutations/__generated__/UserLogout'
+import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
 
 interface NavMenuBottomProps {
   isInSideDrawerNav?: boolean

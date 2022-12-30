@@ -2,6 +2,10 @@ import gql from 'graphql-tag'
 import { useContext } from 'react'
 
 import {
+  // numAbbr,
+  translate,
+} from '~/common/utils'
+import {
   Button,
   IconDownVote16,
   IconDownVoted16,
@@ -9,18 +13,13 @@ import {
   TextIcon,
   useMutation,
 } from '~/components'
+import { UnvoteComment } from '~/components/GQL/mutations/__generated__/UnvoteComment'
+import { VoteComment } from '~/components/GQL/mutations/__generated__/VoteComment'
 import {
   UNVOTE_COMMENT,
   VOTE_COMMENT,
 } from '~/components/GQL/mutations/voteComment'
 
-import {
-  // numAbbr,
-  translate,
-} from '~/common/utils'
-
-import { UnvoteComment } from '~/components/GQL/mutations/__generated__/UnvoteComment'
-import { VoteComment } from '~/components/GQL/mutations/__generated__/VoteComment'
 import { DownvoteCommentPrivate } from './__generated__/DownvoteCommentPrivate'
 import { DownvoteCommentPublic } from './__generated__/DownvoteCommentPublic'
 

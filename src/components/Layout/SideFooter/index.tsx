@@ -1,9 +1,8 @@
 import Link from 'next/link'
 import { useContext } from 'react'
 
-import { LanguageContext, LanguageSwitch, Translate } from '~/components'
-
 import { GUIDE_LINKS, PATHS } from '~/common/enums'
+import { LanguageContext, LanguageSwitch, Translate } from '~/components'
 
 import styles from './styles.css'
 

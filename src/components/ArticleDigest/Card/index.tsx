@@ -1,8 +1,5 @@
 import classNames from 'classnames'
 
-import { Card } from '~/components'
-import { UserDigest } from '~/components/UserDigest'
-
 import { TEST_ID } from '~/common/enums'
 import {
   countWordsLength,
@@ -10,12 +7,13 @@ import {
   subString,
   toPath,
 } from '~/common/utils'
+import { Card } from '~/components'
+import { UserDigest } from '~/components/UserDigest'
 
 import { ArticleDigestTitle } from '../Title'
+import { ArticleDigestCardArticle } from './__generated__/ArticleDigestCardArticle'
 import { fragments } from './gql'
 import styles from './styles.css'
-
-import { ArticleDigestCardArticle } from './__generated__/ArticleDigestCardArticle'
 
 export interface ArticleDigestCardProps {
   article: ArticleDigestCardArticle

@@ -3,12 +3,11 @@ import Cookie from 'js-cookie'
 import { useRouter } from 'next/router'
 import { createContext, useContext, useState } from 'react'
 
-import { Translate, useMutation, ViewerContext } from '~/components'
-
+import { UserLanguage } from '@/__generated__/globalTypes'
 import { ADD_TOAST, COOKIE_LANGUAGE, DEFAULT_LOCALE } from '~/common/enums'
 import { extractRootDomain, getCookie, toUserLanguage } from '~/common/utils'
+import { Translate, useMutation, ViewerContext } from '~/components'
 
-import { UserLanguage } from '@/__generated__/globalTypes'
 import { UpdateLanguage } from './__generated__/UpdateLanguage'
 
 const UPDATE_VIEWER_LANGUAGE = gql`

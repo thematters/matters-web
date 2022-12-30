@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 import React, { useContext } from 'react'
 
+import { toPath } from '~/common/utils'
 import {
   // ArticleDigestTitle,
   Card,
@@ -14,15 +15,12 @@ import { ArticleDigestTitle } from '~/components/ArticleDigest'
 import { CircleDigest } from '~/components/CircleDigest'
 import { UserDigest } from '~/components/UserDigest'
 
-import { toPath } from '~/common/utils'
-
+import { DigestTransaction } from './__generated__/DigestTransaction'
 import Amount from './Amount'
 import Currency from './Currency'
 import Donator from './Donator'
 import State from './State'
 import styles from './styles.css'
-
-import { DigestTransaction } from './__generated__/DigestTransaction'
 
 interface TransactionProps {
   tx: DigestTransaction

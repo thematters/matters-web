@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 
+import { stripAllPunct, toLocale, toPath } from '~/common/utils'
 import {
   BookmarkButton,
   ReCaptchaProvider,
@@ -10,17 +11,14 @@ import DropdownActions, {
   DropdownActionsControls,
 } from '~/components/ArticleDigest/DropdownActions'
 
-import { stripAllPunct, toLocale, toPath } from '~/common/utils'
-
+import { ArticleDetailPublic_article } from '../__generated__/ArticleDetailPublic'
 import AppreciationButton from '../AppreciationButton'
+import { ToolbarArticlePrivate } from './__generated__/ToolbarArticlePrivate'
+import { ToolbarArticlePublic } from './__generated__/ToolbarArticlePublic'
 import Appreciators from './Appreciators'
 import CommentBar from './CommentBar'
 import DonationButton from './DonationButton'
 import styles from './styles.css'
-
-import { ArticleDetailPublic_article } from '../__generated__/ArticleDetailPublic'
-import { ToolbarArticlePrivate } from './__generated__/ToolbarArticlePrivate'
-import { ToolbarArticlePublic } from './__generated__/ToolbarArticlePublic'
 
 export type ToolbarProps = {
   article: ToolbarArticlePublic & Partial<ToolbarArticlePrivate>

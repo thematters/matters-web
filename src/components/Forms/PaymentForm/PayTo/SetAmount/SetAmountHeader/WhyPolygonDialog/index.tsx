@@ -1,13 +1,12 @@
 import { useContext } from 'react'
 
+import { GUIDE_LINKS } from '~/common/enums'
 import {
   Dialog,
   LanguageContext,
   Translate,
   useDialogSwitch,
 } from '~/components'
-
-import { GUIDE_LINKS } from '~/common/enums'
 
 interface WhyPolygonDialogProps {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode

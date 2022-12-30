@@ -1,8 +1,7 @@
 import { Dialog, Translate, useDialogSwitch, useMutation } from '~/components'
 
-import { UNSUBSCRIBE_CIRCLE } from './gql'
-
 import { UnsubscribeCircle } from './__generated__/UnsubscribeCircle'
+import { UNSUBSCRIBE_CIRCLE } from './gql'
 
 interface BaseUnsubscribeCircleDialogProps {
   id: string

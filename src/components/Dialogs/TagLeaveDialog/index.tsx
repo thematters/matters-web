@@ -1,9 +1,7 @@
-import { Dialog, Translate, useDialogSwitch, useMutation } from '~/components'
-import UPDATE_TAG_SETTING from '~/components/GQL/mutations/updateTagSetting'
-
 import { ADD_TOAST } from '~/common/enums'
-
+import { Dialog, Translate, useDialogSwitch, useMutation } from '~/components'
 import { UpdateTagSetting } from '~/components/GQL/mutations/__generated__/UpdateTagSetting'
+import UPDATE_TAG_SETTING from '~/components/GQL/mutations/updateTagSetting'
 
 interface Props {
   id: string

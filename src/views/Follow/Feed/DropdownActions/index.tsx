@@ -2,6 +2,7 @@ import _isEmpty from 'lodash/isEmpty'
 import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 
+import { translate } from '~/common/utils'
 import {
   Button,
   DropdownDialog,
@@ -9,8 +10,6 @@ import {
   LanguageContext,
   Menu,
 } from '~/components'
-
-import { translate } from '~/common/utils'
 
 export interface DropdownActionsControls {
   actions?: React.ReactNode

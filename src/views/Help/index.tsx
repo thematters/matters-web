@@ -1,8 +1,7 @@
 import { useContext } from 'react'
 
-import { Form, LanguageContext, Layout, Spacer, Translate } from '~/components'
-
 import { GUIDE_LINKS, PATHS } from '~/common/enums'
+import { Form, LanguageContext, Layout, Spacer, Translate } from '~/components'
 
 import styles from './styles.css'
 

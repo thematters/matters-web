@@ -1,16 +1,14 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 
+import { TEST_ID } from '~/common/enums'
+import { toPath } from '~/common/utils'
 import { Card, CardProps, ResponsiveImage } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 
-import { TEST_ID } from '~/common/enums'
-import { toPath } from '~/common/utils'
-
 import { ArticleDigestTitle, ArticleDigestTitleTextSize } from '../Title'
-import styles from './styles.css'
-
 import { ArticleDigestSidebarArticle } from './__generated__/ArticleDigestSidebarArticle'
+import styles from './styles.css'
 
 export type ArticleDigestSidebarProps = {
   article: ArticleDigestSidebarArticle

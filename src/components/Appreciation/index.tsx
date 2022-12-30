@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 import React, { useContext } from 'react'
 
+import { toPath, translate } from '~/common/utils'
 import {
   // ArticleDigestTitle,
   Card,
@@ -13,11 +14,8 @@ import {
 import { ArticleDigestTitle } from '~/components/ArticleDigest'
 import { UserDigest } from '~/components/UserDigest'
 
-import { toPath, translate } from '~/common/utils'
-
-import styles from './styles.css'
-
 import { DigestAppreciation } from './__generated__/DigestAppreciation'
+import styles from './styles.css'
 
 interface AppreciationProps {
   type: 'received' | 'sent'

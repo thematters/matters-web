@@ -1,10 +1,8 @@
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
-import { Dialog, ShareDialog, Translate } from '~/components'
-
 import { toPath } from '~/common/utils'
-
+import { Dialog, ShareDialog, Translate } from '~/components'
 import { PublishStateDraft } from '~/components/GQL/fragments/__generated__/PublishStateDraft'
 
 const BasePublishedState = ({

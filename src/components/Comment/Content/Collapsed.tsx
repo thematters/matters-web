@@ -1,10 +1,9 @@
 import { useState } from 'react'
 
-import { Button, IconExpand16, TextIcon, Translate } from '~/components'
-
 import { TEST_ID } from '~/common/enums'
 import contentCommentStyles from '~/common/styles/utils/content.comment.css'
 import { captureClicks } from '~/common/utils'
+import { Button, IconExpand16, TextIcon, Translate } from '~/components'
 
 import styles from './styles.css'
 

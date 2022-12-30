@@ -13,16 +13,6 @@ import _pickBy from 'lodash/pickBy'
 import { useContext, useRef, useState } from 'react'
 
 import {
-  CurrencyAmount,
-  Dialog,
-  Form,
-  LanguageContext,
-  Translate,
-  useMutation,
-} from '~/components'
-import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
-
-import {
   PAYMENT_CURRENCY,
   PAYMENT_DEFAULT_ADD_CREDIT_AMOUNT,
   PAYMENT_MAXIMUM_ADD_CREDIT_AMOUNT,
@@ -35,11 +25,19 @@ import {
   translate,
   validateAmount,
 } from '~/common/utils'
+import {
+  CurrencyAmount,
+  Dialog,
+  Form,
+  LanguageContext,
+  Translate,
+  useMutation,
+} from '~/components'
+import { WalletBalance } from '~/components/GQL/queries/__generated__/WalletBalance'
+import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
 
 import ConfirmTable from '../ConfirmTable'
 import StripeCheckout from '../StripeCheckout'
-
-import { WalletBalance } from '~/components/GQL/queries/__generated__/WalletBalance'
 import { AddCredit as AddCreditType } from './__generated__/AddCredit'
 
 interface FormProps {

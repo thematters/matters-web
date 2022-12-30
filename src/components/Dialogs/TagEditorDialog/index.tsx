@@ -5,12 +5,11 @@ import {
   useDialogSwitch, // useRoute,
   useStep,
 } from '~/components'
+import { TagMaintainers_node_Tag_editors as TagEditor } from '~/components/GQL/queries/__generated__/TagMaintainers'
 
 import TagEditorList from './List'
 import TagRemoveEditor from './Remove'
 import TagSearchSelectEditor from './SearchSelect'
-
-import { TagMaintainers_node_Tag_editors as TagEditor } from '~/components/GQL/queries/__generated__/TagMaintainers'
 
 /**
  * TagEditorDialog is composed of three steps: list, add and remove.

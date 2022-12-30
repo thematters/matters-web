@@ -10,12 +10,11 @@ import {
   useMutation,
 } from '~/components'
 
+import { UpdateViewerNotificationGeneral } from './__generated__/UpdateViewerNotificationGeneral'
+import { ViewerNotificationGeneralSettings } from './__generated__/ViewerNotificationGeneralSettings'
 import ArticleSettings from './Article'
 import CommentSettings from './Comment'
 import MeSettings from './Me'
-
-import { UpdateViewerNotificationGeneral } from './__generated__/UpdateViewerNotificationGeneral'
-import { ViewerNotificationGeneralSettings } from './__generated__/ViewerNotificationGeneralSettings'
 
 const VIEWER_NOTIFICATION_GENERAL_SETTINGS = gql`
   query ViewerNotificationGeneralSettings {

@@ -2,6 +2,8 @@ import gql from 'graphql-tag'
 import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
 
+import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
+import { analytics } from '~/common/utils'
 import {
   Dialog,
   Spinner,
@@ -10,13 +12,10 @@ import {
   useStep,
   ViewerContext,
 } from '~/components'
-import { UserDigest } from '~/components/UserDigest'
-
-import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
-import { analytics } from '~/common/utils'
-
 import { PayTo_payTo_transaction as PayToTx } from '~/components/GQL/mutations/__generated__/PayTo'
+import { UserDigest } from '~/components/UserDigest'
 import { ArticleDetailPublic_article } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
+
 import { UserDonationRecipient } from './__generated__/UserDonationRecipient'
 
 type Step =

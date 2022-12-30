@@ -1,3 +1,5 @@
+import { ADD_TOAST, MAX_ARTICLE_REVISION_DIFF } from '~/common/enums'
+import { measureDiffs } from '~/common/utils'
 import { Button, TextIcon, Translate, useMutation } from '~/components'
 import {
   ConfirmStepContentProps,
@@ -5,15 +7,11 @@ import {
   EditorSettingsDialogProps,
 } from '~/components/Editor/SettingsDialog'
 
-import { ADD_TOAST, MAX_ARTICLE_REVISION_DIFF } from '~/common/enums'
-import { measureDiffs } from '~/common/utils'
-
+import { ArticleDetailPublic_article } from '../../__generated__/ArticleDetailPublic'
+import { EditArticle } from './__generated__/EditArticle'
 import ConfirmRevisedPublishDialogContent from './ConfirmRevisedPublishDialogContent'
 import { EDIT_ARTICLE } from './gql'
 import styles from './styles.css'
-
-import { ArticleDetailPublic_article } from '../../__generated__/ArticleDetailPublic'
-import { EditArticle } from './__generated__/EditArticle'
 
 type EditModeHeaderProps = {
   article: ArticleDetailPublic_article

@@ -1,17 +1,15 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 
-import { CommentFormType, Translate } from '~/components'
-
 import { COMMENT_TYPE_TEXT, TEST_ID } from '~/common/enums'
 import contentCommentStyles from '~/common/styles/utils/content.comment.css'
 import { captureClicks } from '~/common/utils'
-
-import Collapsed from './Collapsed'
-import styles from './styles.css'
+import { CommentFormType, Translate } from '~/components'
 
 import { ContentCommentPrivate } from './__generated__/ContentCommentPrivate'
 import { ContentCommentPublic } from './__generated__/ContentCommentPublic'
+import Collapsed from './Collapsed'
+import styles from './styles.css'
 
 interface ContentProps {
   comment: ContentCommentPublic & Partial<ContentCommentPrivate>

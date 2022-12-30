@@ -2,6 +2,8 @@ import { useQuery } from '@apollo/react-hooks'
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
 
+import { PATHS } from '~/common/enums'
+import { translate } from '~/common/utils'
 import {
   Button,
   ButtonProps,
@@ -10,12 +12,8 @@ import {
   LanguageContext,
   useResponsive,
 } from '~/components'
-import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
-
-import { PATHS } from '~/common/enums'
-import { translate } from '~/common/utils'
-
 import { ClientPreference } from '~/components/GQL/queries/__generated__/ClientPreference'
+import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 
 type BackButtonProps = {
   mode?: 'black-solid'

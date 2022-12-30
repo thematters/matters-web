@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react'
 
 import { Dialog, Translate } from '~/components'
+import { Asset } from '~/components/GQL/fragments/__generated__/Asset'
 
 import SetCoverDialog from './Dialog'
 import Selector from './Selector'
 import styles from './styles.css'
 import Uploader, { UploadEntity } from './Uploader'
-
-import { Asset } from '~/components/GQL/fragments/__generated__/Asset'
 
 export type SetCoverProps = {
   onBack?: () => any

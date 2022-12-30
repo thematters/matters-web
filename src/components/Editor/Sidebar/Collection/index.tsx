@@ -1,13 +1,12 @@
+import { SearchExclude } from '@/__generated__/globalTypes'
 import { ArticleDigestDropdown, IconCollection24 } from '~/components'
+import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
 import { SearchSelectDialog } from '~/components/Dialogs/SearchSelectDialog'
 import { SetCollectionProps } from '~/components/Editor'
 import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
 
 import Box from '../Box'
 import styles from './styles.css'
-
-import { SearchExclude } from '@/__generated__/globalTypes'
-import { ArticleDigestDropdownArticle } from '~/components/ArticleDigest/Dropdown/__generated__/ArticleDigestDropdownArticle'
 
 export type SidebarCollectionProps = {
   disabled?: boolean

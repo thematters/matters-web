@@ -1,13 +1,11 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
+import { translate } from '~/common/utils'
 import { LanguageContext } from '~/components'
 
-import { translate } from '~/common/utils'
-
-import styles from './styles.css'
-
 import { ResponseCountArticle } from './__generated__/ResponseCountArticle'
+import styles from './styles.css'
 
 const fragments = {
   article: gql`

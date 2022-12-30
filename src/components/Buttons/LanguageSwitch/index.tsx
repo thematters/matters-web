@@ -1,5 +1,8 @@
 import { useContext } from 'react'
 
+import { UserLanguage } from '@/__generated__/globalTypes'
+import { ReactComponent as IconArrowDown } from '@/public/static/icons/8px/arrow-down.svg'
+import { LANG_TEXT_MAP, Z_INDEX } from '~/common/enums'
 import {
   Button,
   DropdownDialog,
@@ -11,12 +14,6 @@ import {
   Translate,
   withIcon,
 } from '~/components'
-
-import { LANG_TEXT_MAP, Z_INDEX } from '~/common/enums'
-
-import { ReactComponent as IconArrowDown } from '@/public/static/icons/8px/arrow-down.svg'
-
-import { UserLanguage } from '@/__generated__/globalTypes'
 
 export const LanguageSwitchContent = ({
   isInDropdown,

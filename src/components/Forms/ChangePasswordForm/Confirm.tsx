@@ -4,6 +4,12 @@ import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 
 import {
+  parseFormSubmitErrors,
+  translate,
+  validateComparedPassword,
+  validatePassword,
+} from '~/common/utils'
+import {
   Dialog,
   Form,
   LanguageContext,
@@ -11,16 +17,9 @@ import {
   Translate,
   useMutation,
 } from '~/components'
+import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 
-import {
-  parseFormSubmitErrors,
-  translate,
-  validateComparedPassword,
-  validatePassword,
-} from '~/common/utils'
-
-import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated__/ConfirmVerificationCode'
 import { ResetPassword } from './__generated__/ResetPassword'
 
 interface FormProps {

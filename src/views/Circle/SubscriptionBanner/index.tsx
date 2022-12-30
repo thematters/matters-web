@@ -1,5 +1,12 @@
 import { useContext } from 'react'
 
+import { InvitationState } from '@/__generated__/globalTypes'
+import {
+  OPEN_SUBSCRIBE_CIRCLE_DIALOG,
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  UNIVERSAL_AUTH_SOURCE,
+} from '~/common/enums'
+import { analytics } from '~/common/utils'
 import {
   Card,
   IconCircle16,
@@ -8,19 +15,10 @@ import {
   ViewerContext,
 } from '~/components'
 
-import {
-  OPEN_SUBSCRIBE_CIRCLE_DIALOG,
-  OPEN_UNIVERSAL_AUTH_DIALOG,
-  UNIVERSAL_AUTH_SOURCE,
-} from '~/common/enums'
-import { analytics } from '~/common/utils'
-
-import { fragments } from './gql'
-import styles from './styles.css'
-
-import { InvitationState } from '@/__generated__/globalTypes'
 import { SubscriptionBannerCirclePrivate } from './__generated__/SubscriptionBannerCirclePrivate'
 import { SubscriptionBannerCirclePublic } from './__generated__/SubscriptionBannerCirclePublic'
+import { fragments } from './gql'
+import styles from './styles.css'
 
 type SubscriptionBannerProps = {
   circle: SubscriptionBannerCirclePublic &

@@ -3,17 +3,6 @@ import classNames from 'classnames'
 import { useContext } from 'react'
 
 import {
-  IconCamera16,
-  IconSpinner16,
-  LanguageContext,
-  TextIcon,
-  Translate,
-  useMutation,
-} from '~/components'
-import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
-import updateDraftAssets from '~/components/GQL/updates/draftAssets'
-
-import {
   ACCEPTED_UPLOAD_IMAGE_TYPES,
   ADD_TOAST,
   ASSET_TYPE,
@@ -21,11 +10,20 @@ import {
   UPLOAD_IMAGE_SIZE_LIMIT,
 } from '~/common/enums'
 import { translate } from '~/common/utils'
-
-import styles from './styles.css'
-
+import {
+  IconCamera16,
+  IconSpinner16,
+  LanguageContext,
+  TextIcon,
+  Translate,
+  useMutation,
+} from '~/components'
 import { Asset } from '~/components/GQL/fragments/__generated__/Asset'
 import { SingleFileUpload } from '~/components/GQL/mutations/__generated__/SingleFileUpload'
+import UPLOAD_FILE from '~/components/GQL/mutations/uploadFile'
+import updateDraftAssets from '~/components/GQL/updates/draftAssets'
+
+import styles from './styles.css'
 
 export interface UploadEntity {
   entityId: string

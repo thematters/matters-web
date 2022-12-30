@@ -1,9 +1,8 @@
 import classNames from 'classnames'
 
-import { Dialog, ShareButtons, Translate } from '~/components'
-
 import { TextId } from '~/common/enums'
 import { toLocale } from '~/common/utils'
+import { Dialog, ShareButtons, Translate } from '~/components'
 
 import Copy from './Copy'
 import styles from './styles.css'

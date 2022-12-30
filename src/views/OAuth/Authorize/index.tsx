@@ -3,6 +3,8 @@ import gql from 'graphql-tag'
 import Link from 'next/link'
 import { useContext } from 'react'
 
+import { PATHS } from '~/common/enums'
+import { appendTarget, toReadableScope } from '~/common/utils'
 import {
   Dialog,
   LanguageContext,
@@ -15,13 +17,9 @@ import {
   ViewerContext,
 } from '~/components'
 
-import { PATHS } from '~/common/enums'
-import { appendTarget, toReadableScope } from '~/common/utils'
-
 import { Box } from '../Box'
-import styles from './styles.css'
-
 import { OAuthClientInfo } from './__generated__/OAuthClientInfo'
+import styles from './styles.css'
 
 const OAUTH_AUTHORIZE_ENDPOINT = `${process.env.NEXT_PUBLIC_OAUTH_URL}/authorize`
 

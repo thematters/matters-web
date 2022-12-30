@@ -14,9 +14,6 @@ import {
   ViewerContext,
 } from '~/components'
 
-import { HOTTEST_TAGS, SELECTED_TAGS } from './gql'
-import styles from './styles.css'
-
 import {
   HottestTags,
   HottestTags_viewer_recommendation_hottestTags_edges,
@@ -25,6 +22,8 @@ import {
   SelectedTags,
   SelectedTags_viewer_recommendation_selectedTags_edges,
 } from './__generated__/SelectedTags'
+import { HOTTEST_TAGS, SELECTED_TAGS } from './gql'
+import styles from './styles.css'
 
 export type FeedType = 'hottest' | 'selected'
 

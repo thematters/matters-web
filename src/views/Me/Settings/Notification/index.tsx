@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
+import { PATHS } from '~/common/enums'
 import {
   Form,
   Head,
@@ -12,12 +13,9 @@ import {
   useMutation,
 } from '~/components'
 
-import { PATHS } from '~/common/enums'
-
-import PreferenceSettings from './Preference'
-
 import { UpdateViewerNotification } from './__generated__/UpdateViewerNotification'
 import { ViewerNotificationSettings } from './__generated__/ViewerNotificationSettings'
+import PreferenceSettings from './Preference'
 
 const VIEWER_NOTIFICATION_SETTINGS = gql`
   query ViewerNotificationSettings {

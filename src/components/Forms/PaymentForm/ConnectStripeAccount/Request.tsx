@@ -1,6 +1,8 @@
 import gql from 'graphql-tag'
 import { useContext, useState } from 'react'
 
+import { ADD_TOAST, PAYOUT_COUNTRY } from '~/common/enums'
+import { parseFormSubmitErrors, sleep } from '~/common/utils'
 import {
   Dialog,
   LanguageContext,
@@ -9,12 +11,8 @@ import {
   useMutation,
 } from '~/components'
 
-import { ADD_TOAST, PAYOUT_COUNTRY } from '~/common/enums'
-import { parseFormSubmitErrors, sleep } from '~/common/utils'
-
-import SelectCountry from './SelectCountry'
-
 import { ConnectStripeAccount } from './__generated__/ConnectStripeAccount'
+import SelectCountry from './SelectCountry'
 
 interface Props {
   nextStep: () => void

@@ -3,6 +3,12 @@ import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useState } from 'react'
 
+import { ADD_TOAST } from '~/common/enums'
+import {
+  parseFormSubmitErrors,
+  translate,
+  validatePaymentPointer,
+} from '~/common/utils'
 import {
   Dialog,
   Form,
@@ -12,16 +18,8 @@ import {
 } from '~/components'
 import { useMutation } from '~/components/GQL'
 
-import { ADD_TOAST } from '~/common/enums'
-import {
-  parseFormSubmitErrors,
-  translate,
-  validatePaymentPointer,
-} from '~/common/utils'
-
-import Explainer from './Explainer'
-
 import { UpdatePaymentPointer } from './__generated__/UpdatePaymentPointer'
+import Explainer from './Explainer'
 
 interface FormProps {
   setIsSubmitting: (submitting: boolean) => void

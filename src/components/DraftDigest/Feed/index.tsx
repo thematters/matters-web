@@ -1,15 +1,13 @@
 import gql from 'graphql-tag'
 import React from 'react'
 
+import { toPath } from '~/common/utils'
 import { Card, DateTime, LinkWrapper, Title, Translate } from '~/components'
 
-import { toPath } from '~/common/utils'
-
+import { DraftDigestFeedDraft } from './__generated__/DraftDigestFeedDraft'
 import DeleteButton from './DeleteButton'
 import EditButton from './EditButton'
 import styles from './styles.css'
-
-import { DraftDigestFeedDraft } from './__generated__/DraftDigestFeedDraft'
 
 interface DraftDigestFeedProps {
   draft: DraftDigestFeedDraft

@@ -2,10 +2,10 @@ import _isNil from 'lodash/isNil'
 import { useState } from 'react'
 
 import { Button, TextIcon, Translate, useMutation } from '~/components'
+import { ToggleFollowTag } from '~/components/GQL/mutations/__generated__/ToggleFollowTag'
 import TOGGLE_FOLLOW_TAG from '~/components/GQL/mutations/toggleFollowTag'
 import updateViewerFollowingTagCount from '~/components/GQL/updates/viewerFollowingTagCount'
 
-import { ToggleFollowTag } from '~/components/GQL/mutations/__generated__/ToggleFollowTag'
 import { TagDigestFollowButtonPrivate } from './__generated__/TagDigestFollowButtonPrivate'
 
 interface UnfollowTagProps {

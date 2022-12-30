@@ -1,11 +1,9 @@
+import { numAbbr } from '~/common/utils'
 import { Translate } from '~/components'
+import { ArticleCountTag } from '~/components/GQL/fragments/__generated__/ArticleCountTag'
 import tagFragments from '~/components/GQL/fragments/tag'
 
-import { numAbbr } from '~/common/utils'
-
 import styles from './styles.css'
-
-import { ArticleCountTag } from '~/components/GQL/fragments/__generated__/ArticleCountTag'
 
 interface ArticlesCountProps {
   tag: ArticleCountTag

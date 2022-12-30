@@ -1,8 +1,5 @@
 import { useContext } from 'react'
 
-import { DonationDialog, Translate, ViewerContext } from '~/components'
-import DonationButton from '~/components/Buttons/DonationButton'
-
 import {
   ADD_TOAST,
   OPEN_UNIVERSAL_AUTH_DIALOG,
@@ -10,8 +7,10 @@ import {
   UNIVERSAL_AUTH_SOURCE,
 } from '~/common/enums'
 import { analytics } from '~/common/utils'
-
+import { DonationDialog, Translate, ViewerContext } from '~/components'
+import DonationButton from '~/components/Buttons/DonationButton'
 import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
+
 import { ArticleDetailPublic_article } from '../../__generated__/ArticleDetailPublic'
 
 interface SupportButtonProps {

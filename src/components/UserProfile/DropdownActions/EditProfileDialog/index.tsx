@@ -2,10 +2,9 @@ import dynamic from 'next/dynamic'
 
 import { Dialog, Spinner, useDialogSwitch } from '~/components'
 
-import { fragments } from './gql'
-
 import { EditProfileDialogUserPrivate } from './__generated__/EditProfileDialogUserPrivate'
 import { EditProfileDialogUserPublic } from './__generated__/EditProfileDialogUserPublic'
+import { fragments } from './gql'
 
 interface EditProfileDialogProps {
   user: EditProfileDialogUserPublic & Partial<EditProfileDialogUserPrivate>

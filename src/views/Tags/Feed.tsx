@@ -1,5 +1,6 @@
 import _get from 'lodash/get'
 
+import { analytics, mergeConnections, toPath } from '~/common/utils'
 import {
   EmptyTag,
   InfiniteScroll,
@@ -10,13 +11,10 @@ import {
   // useResponsive,
 } from '~/components'
 
-import { analytics, mergeConnections, toPath } from '~/common/utils'
-
+import { AllTagsHottest } from './__generated__/AllTagsHottest'
 import { ALL_TAGS_HOTTEST } from './gql'
 // import SidebarTags from './Sidebar'
 import styles from './styles.css'
-
-import { AllTagsHottest } from './__generated__/AllTagsHottest'
 
 export type FeedType = 'recommended' | 'hottest'
 

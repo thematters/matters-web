@@ -4,6 +4,8 @@ import _chunk from 'lodash/chunk'
 import _get from 'lodash/get'
 import _random from 'lodash/random'
 
+import { PATHS } from '~/common/enums'
+import { analytics } from '~/common/utils'
 import {
   List,
   PageHeader,
@@ -15,16 +17,12 @@ import {
   ViewAllButton,
   ViewMoreCard,
 } from '~/components'
+import { LastFetchRandom } from '~/components/GQL/queries/__generated__/LastFetchRandom'
 import FETCH_RECORD from '~/components/GQL/queries/lastFetchRandom'
 
-import { PATHS } from '~/common/enums'
-import { analytics } from '~/common/utils'
-
+import { TagDetailRecommended } from './__generated__/TagDetailRecommended'
 import { RELATED_TAGS } from './gql'
 import styles from './styles.css'
-
-import { LastFetchRandom } from '~/components/GQL/queries/__generated__/LastFetchRandom'
-import { TagDetailRecommended } from './__generated__/TagDetailRecommended'
 
 interface RelatedTagsProps {
   tagId: string

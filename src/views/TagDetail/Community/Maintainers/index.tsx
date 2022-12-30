@@ -10,11 +10,10 @@ import {
   Translate,
   UserDigest,
 } from '~/components'
+import { TagMaintainers } from '~/components/GQL/queries/__generated__/TagMaintainers'
 import TAG_MAINTAINERS from '~/components/GQL/queries/tagMaintainers'
 
 import styles from '../styles.css'
-
-import { TagMaintainers } from '~/components/GQL/queries/__generated__/TagMaintainers'
 
 interface Props {
   id: string

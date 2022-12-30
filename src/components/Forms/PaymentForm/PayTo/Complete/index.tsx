@@ -3,6 +3,7 @@ import _random from 'lodash/random'
 import _range from 'lodash/range'
 import { useContext, useEffect, useRef } from 'react'
 
+import { analytics } from '~/common/utils'
 import {
   ArticleDigestSidebar,
   Avatar,
@@ -17,15 +18,12 @@ import {
   useResponsive,
   ViewerContext,
 } from '~/components'
+import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
 import { TextIcon } from '~/components/TextIcon'
 
-import { analytics } from '~/common/utils'
-
+import { RelatedDonations } from './__generated__/RelatedDonations'
 import { RELATED_DONATIONS } from './gql'
 import styles from './styles.css'
-
-import { UserDonationRecipient } from '~/components/Dialogs/DonationDialog/__generated__/UserDonationRecipient'
-import { RelatedDonations } from './__generated__/RelatedDonations'
 
 interface Props {
   callback?: () => void

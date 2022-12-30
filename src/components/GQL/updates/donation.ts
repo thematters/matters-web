@@ -2,11 +2,10 @@ import { DataProxy } from 'apollo-cache'
 import _cloneDeep from 'lodash/cloneDeep'
 import _remove from 'lodash/remove'
 import _some from 'lodash/some'
-import { ARTICLE_DETAIL_PUBLIC_BY_NODE_ID } from '~/views/ArticleDetail/gql'
 
 import { ERROR_CODES } from '~/common/enums'
-
 import { ArticleDetailPublic } from '~/views/ArticleDetail/__generated__/ArticleDetailPublic'
+import { ARTICLE_DETAIL_PUBLIC_BY_NODE_ID } from '~/views/ArticleDetail/gql'
 
 const update = ({
   cache,

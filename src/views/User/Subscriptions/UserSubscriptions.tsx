@@ -1,3 +1,7 @@
+// import IMAGE_LOGO_192 from '@/public/static/icon-192x192.png'
+import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
+import PROFILE_COVER_DEFAULT from '@/public/static/images/profile-cover.png'
+import { analytics, mergeConnections, stripSpaces } from '~/common/utils'
 import {
   CircleDigest,
   EmptyWarning,
@@ -13,17 +17,10 @@ import {
   useRoute,
 } from '~/components'
 
-import { analytics, mergeConnections, stripSpaces } from '~/common/utils'
-
-// import IMAGE_LOGO_192 from '@/public/static/icon-192x192.png'
-import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
-import PROFILE_COVER_DEFAULT from '@/public/static/images/profile-cover.png'
-
 import UserTabs from '../UserTabs'
+import { UserSubscriptions } from './__generated__/UserSubscriptions'
 import { USER_SUBSCRIPTIONS } from './gql'
 import styles from './styles.css'
-
-import { UserSubscriptions } from './__generated__/UserSubscriptions'
 
 const Subscriptions = () => {
   const { getQuery } = useRoute()

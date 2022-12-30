@@ -4,6 +4,12 @@ import _pickBy from 'lodash/pickBy'
 import React, { useContext } from 'react'
 
 import {
+  parseFormSubmitErrors,
+  translate,
+  validateComparedUserName,
+  validateUserName,
+} from '~/common/utils'
+import {
   Dialog,
   Form,
   LanguageContext,
@@ -11,13 +17,6 @@ import {
   Translate,
   useMutation,
 } from '~/components'
-
-import {
-  parseFormSubmitErrors,
-  translate,
-  validateComparedUserName,
-  validateUserName,
-} from '~/common/utils'
 
 import { UpdateUserInfoUserName } from './__generated__/UpdateUserInfoUserName'
 

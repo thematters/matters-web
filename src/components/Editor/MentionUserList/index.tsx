@@ -1,5 +1,4 @@
 import { DropdownUserList } from '~/components'
-
 import { UserDigestMiniUser } from '~/components/UserDigest/Mini/__generated__/UserDigestMiniUser'
 
 const MentionUserList = ({

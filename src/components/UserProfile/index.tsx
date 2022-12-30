@@ -1,5 +1,7 @@
 import { useContext, useEffect } from 'react'
 
+import IMAGE_COVER from '@/public/static/images/profile-cover.png'
+import { numAbbr, translate } from '~/common/utils'
 import {
   Avatar,
   Button,
@@ -18,12 +20,10 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
+import { AuthorRssFeed } from '~/components/Dialogs/RssFeedDialog/__generated__/AuthorRssFeed'
 import ShareButton from '~/components/Layout/Header/ShareButton'
 
-import { numAbbr, translate } from '~/common/utils'
-
-import IMAGE_COVER from '@/public/static/images/profile-cover.png'
-
+import { UserProfileUserPublic } from './__generated__/UserProfileUserPublic'
 import {
   ArchitectBadge,
   CivicLikerBadge,
@@ -39,9 +39,6 @@ import { USER_PROFILE_PRIVATE, USER_PROFILE_PUBLIC } from './gql'
 import styles from './styles.css'
 import TraveloggersAvatar from './TraveloggersAvatar'
 import WalletLabel from './WalletLabel'
-
-import { AuthorRssFeed } from '~/components/Dialogs/RssFeedDialog/__generated__/AuthorRssFeed'
-import { UserProfileUserPublic } from './__generated__/UserProfileUserPublic'
 
 interface FingerprintButtonProps {
   user: AuthorRssFeed

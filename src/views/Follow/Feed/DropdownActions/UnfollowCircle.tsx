@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 import _isNil from 'lodash/isNil'
 import { useContext } from 'react'
 
+import { ADD_TOAST } from '~/common/enums'
 import {
   IconRemove24,
   Menu,
@@ -10,12 +11,10 @@ import {
   useMutation,
   ViewerContext,
 } from '~/components'
+import { ToggleFollowCircle } from '~/components/GQL/mutations/__generated__/ToggleFollowCircle'
 import TOGGLE_FOLLOW_CIRCLE from '~/components/GQL/mutations/toggleFollowCircle'
 import updateCircleFollowers from '~/components/GQL/updates/circleFollowers'
 
-import { ADD_TOAST } from '~/common/enums'
-
-import { ToggleFollowCircle } from '~/components/GQL/mutations/__generated__/ToggleFollowCircle'
 import { UnfollowActionButtonCirclePrivate } from './__generated__/UnfollowActionButtonCirclePrivate'
 
 type UnfollowCircleActionButtonProps = {

@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { toPath } from '~/common/utils'
 import {
   Card,
   DateTime,
@@ -10,12 +11,9 @@ import {
   Translate,
 } from '~/components'
 
-import { toPath } from '~/common/utils'
-
+import { CircleContentAnalyticsArticle } from './__generated__/CircleContentAnalyticsArticle'
 import { fragments } from './gql'
 import styles from './styles.css'
-
-import { CircleContentAnalyticsArticle } from './__generated__/CircleContentAnalyticsArticle'
 
 interface CircleAnalyticsContentProps {
   article: CircleContentAnalyticsArticle

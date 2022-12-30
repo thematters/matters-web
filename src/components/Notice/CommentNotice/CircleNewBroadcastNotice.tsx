@@ -1,9 +1,8 @@
 import gql from 'graphql-tag'
 
-import { Translate } from '~/components'
-
 import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
+import { Translate } from '~/components'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeCircleName from '../NoticeCircleName'
@@ -13,7 +12,6 @@ import NoticeHead from '../NoticeHead'
 import NoticeHeadActors from '../NoticeHeadActors'
 import NoticeTypeIcon from '../NoticeTypeIcon'
 import styles from '../styles.css'
-
 import { CircleNewBroadcastNotice as NoticeType } from './__generated__/CircleNewBroadcastNotice'
 
 const CircleNewBroadcastNotice = ({ notice }: { notice: NoticeType }) => {

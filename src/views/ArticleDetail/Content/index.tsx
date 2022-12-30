@@ -3,8 +3,6 @@ import gql from 'graphql-tag'
 import throttle from 'lodash/throttle'
 import { useContext, useEffect, useRef, useState } from 'react'
 
-import { useMutation, ViewerContext } from '~/components'
-
 import { TEST_ID } from '~/common/enums'
 import styles from '~/common/styles/utils/content.article.css'
 import {
@@ -13,6 +11,7 @@ import {
   initAudioPlayers,
   optimizeEmbed,
 } from '~/common/utils'
+import { useMutation, ViewerContext } from '~/components'
 
 import { ContentArticle } from './__generated__/ContentArticle'
 import { ReadArticle } from './__generated__/ReadArticle'

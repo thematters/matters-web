@@ -1,6 +1,8 @@
 import { useQuery } from '@apollo/react-hooks'
 import { useContext } from 'react'
 
+import { REFETCH_CIRCLE_PENDING_INVITES } from '~/common/enums'
+import { mergeConnections } from '~/common/utils'
 import {
   CircleInvitation,
   EmptyWarning,
@@ -15,14 +17,10 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
+import { CirclePendingInvites } from '~/components/GQL/queries/__generated__/CirclePendingInvites'
 import CIRCLE_PENDING_INVITES from '~/components/GQL/queries/circlePendingInvites'
 
-import { REFETCH_CIRCLE_PENDING_INVITES } from '~/common/enums'
-import { mergeConnections } from '~/common/utils'
-
 import styles from './styles.css'
-
-import { CirclePendingInvites } from '~/components/GQL/queries/__generated__/CirclePendingInvites'
 
 /**
  * This component is for listing circle pending invitations.

@@ -2,7 +2,6 @@ import dynamic from 'next/dynamic'
 import { useState } from 'react'
 
 import { Dialog, Spinner, useDialogSwitch, useStep } from '~/components'
-
 import { UserProfileUserPublic_user } from '~/components/UserProfile/__generated__/UserProfileUserPublic'
 
 type Step = 'connectWallet' | 'walletSelect' | 'linkENS' | 'complete'

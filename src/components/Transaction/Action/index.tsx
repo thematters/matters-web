@@ -1,11 +1,10 @@
 import { Avatar, IconCircle24, IconSupport, IconWallet24 } from '~/components'
 
-import styles from './styles.css'
-
 import {
   DigestTransaction_recipient as Recipient,
   DigestTransaction_sender as Sender,
 } from '../__generated__/DigestTransaction'
+import styles from './styles.css'
 
 /**
  * This a sub component of Transaction that depicts a donation

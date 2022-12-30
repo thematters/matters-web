@@ -7,11 +7,10 @@ import {
   IconNavFollowingActive24,
   ViewerContext,
 } from '~/components'
+import { UnreadFollowing } from '~/components/GQL/queries/__generated__/UnreadFollowing'
 import UNREAD_FOLLOWING from '~/components/GQL/queries/unreadFollowing'
 
 import styles from './styles.css'
-
-import { UnreadFollowing } from '~/components/GQL/queries/__generated__/UnreadFollowing'
 
 interface FollowUnreadIconProps {
   active?: boolean

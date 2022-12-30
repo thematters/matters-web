@@ -3,9 +3,8 @@ import gql from 'graphql-tag'
 import { Translate } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 
-import styles from './styles.css'
-
 import { ReplyToUser } from './__generated__/ReplyToUser'
+import styles from './styles.css'
 
 export interface ReplyToProps {
   user: ReplyToUser

@@ -4,20 +4,6 @@ import _pickBy from 'lodash/pickBy'
 import { useContext, useRef } from 'react'
 
 import {
-  Dialog,
-  Form,
-  IconHelp24,
-  LanguageContext,
-  Spinner,
-  TextIcon,
-  Tooltip,
-  Translate,
-  useMutation,
-} from '~/components'
-import PAYOUT from '~/components/GQL/mutations/payout'
-import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
-
-import {
   PAYMENT_CURRENCY as CURRENCY,
   PAYMENT_MINIMAL_PAYOUT_AMOUNT,
   Z_INDEX,
@@ -30,11 +16,23 @@ import {
   validatePaymentPassword,
   validatePayoutAmount,
 } from '~/common/utils'
+import {
+  Dialog,
+  Form,
+  IconHelp24,
+  LanguageContext,
+  Spinner,
+  TextIcon,
+  Tooltip,
+  Translate,
+  useMutation,
+} from '~/components'
+import { Payout as PayoutMutate } from '~/components/GQL/mutations/__generated__/Payout'
+import PAYOUT from '~/components/GQL/mutations/payout'
+import { WalletBalance } from '~/components/GQL/queries/__generated__/WalletBalance'
+import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
 
 import ConfirmTable from '../ConfirmTable'
-
-import { Payout as PayoutMutate } from '~/components/GQL/mutations/__generated__/Payout'
-import { WalletBalance } from '~/components/GQL/queries/__generated__/WalletBalance'
 
 interface FormProps {
   balance: number

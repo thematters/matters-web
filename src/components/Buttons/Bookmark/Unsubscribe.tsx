@@ -1,5 +1,7 @@
 import { useContext } from 'react'
 
+import { ADD_TOAST } from '~/common/enums'
+import { translate } from '~/common/utils'
 import {
   Button,
   IconBookmarked16,
@@ -9,13 +11,9 @@ import {
   useMutation,
   ViewerContext,
 } from '~/components'
-
-import { ADD_TOAST } from '~/common/enums'
-import { translate } from '~/common/utils'
+import { ToggleSubscribeArticle } from '~/components/GQL/mutations/__generated__/ToggleSubscribeArticle'
 
 import TOGGLE_SUBSCRIBE_ARTICLE from '../../GQL/mutations/toggleSubscribeArticle'
-
-import { ToggleSubscribeArticle } from '~/components/GQL/mutations/__generated__/ToggleSubscribeArticle'
 
 interface UnsubscribeProps {
   articleId?: string
