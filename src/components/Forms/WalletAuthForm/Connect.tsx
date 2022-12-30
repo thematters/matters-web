@@ -19,13 +19,12 @@ import {
 } from '~/components'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
 
-import { ADD_TOAST, PATHS, STORAGE_KEY_AUTH_TOKEN } from '~/common/enums'
+import { ADD_TOAST, PATHS } from '~/common/enums'
 import {
   analytics,
   maskAddress,
   parseFormSubmitErrors,
   redirectToTarget,
-  storage,
   translate,
   validateCode,
   validateEmail,
@@ -41,8 +40,6 @@ import { ConfirmVerificationCode } from '~/components/GQL/mutations/__generated_
 import { ETHAddressUser } from './__generated__/ETHAddressUser'
 import { GenerateSigningMessage } from './__generated__/GenerateSigningMessage'
 import { WalletLogin } from './__generated__/WalletLogin'
-
-const isStaticBuild = process.env.NEXT_PUBLIC_BUILD_TYPE === 'static'
 
 interface FormProps {
   purpose: 'dialog' | 'page'
@@ -226,11 +223,6 @@ const Connect: React.FC<FormProps> = ({
         })
 
         analytics.identifyUser()
-
-        const token = loginData?.walletLogin.token
-        if (isStaticBuild && token) {
-          storage.set(STORAGE_KEY_AUTH_TOKEN, token)
-        }
 
         if (loginData?.walletLogin.type === AuthResultType.Login) {
           window.dispatchEvent(

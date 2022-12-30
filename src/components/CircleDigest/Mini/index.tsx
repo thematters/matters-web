@@ -53,7 +53,7 @@ const Mini = ({ circle, ...cardProps }: CircleDigestMiniProps) => {
         <style jsx>{styles}</style>
       </section>
     </Card>
-  );
+  )
 }
 
 /**

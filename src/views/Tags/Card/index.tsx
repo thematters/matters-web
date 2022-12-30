@@ -35,7 +35,7 @@ const Card = ({ tag }: CardProps) => {
         <style jsx>{styles}</style>
       </a>
     </Link>
-  );
+  )
 }
 
 Card.fragments = {

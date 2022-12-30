@@ -135,7 +135,7 @@ const Verbose = ({
 
       <style jsx>{styles}</style>
     </Card>
-  );
+  )
 }
 
 /**

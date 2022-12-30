@@ -15,11 +15,7 @@ const NoticeActorName = ({ user }: { user: NoticeActorNameUser | null }) => {
     userName: user.userName || '',
   })
 
-  return (
-    <Link {...path}>
-      {user.displayName}
-    </Link>
-  );
+  return <Link {...path}>{user.displayName}</Link>
 }
 
 NoticeActorName.fragments = {

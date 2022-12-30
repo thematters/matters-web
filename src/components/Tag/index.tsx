@@ -187,7 +187,7 @@ export const Tag = ({
         <style jsx>{styles}</style>
       </a>
     </Link>
-  );
+  )
 }
 
 Tag.fragments = fragments

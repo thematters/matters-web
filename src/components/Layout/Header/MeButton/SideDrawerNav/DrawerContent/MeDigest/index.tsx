@@ -30,7 +30,7 @@ const MeDigest = () => {
 
       <style jsx>{styles}</style>
     </section>
-  );
+  )
 }
 
 export default MeDigest

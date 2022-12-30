@@ -56,7 +56,7 @@ const Migration = () => {
 
       <style jsx>{styles}</style>
     </main>
-  );
+  )
 }
 
 export default Migration

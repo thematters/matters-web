@@ -160,7 +160,7 @@ const SideNav = () => {
 
       <style jsx>{styles}</style>
     </section>
-  );
+  )
 }
 
 export default SideNav

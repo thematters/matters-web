@@ -99,7 +99,7 @@ const Sidebar = ({ tag, ...cardProps }: TagDigestSidebarProps) => {
         <style jsx>{styles}</style>
       </section>
     </Card>
-  );
+  )
 }
 
 Sidebar.fragments = fragments

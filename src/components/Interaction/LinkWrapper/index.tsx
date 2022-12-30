@@ -52,5 +52,5 @@ export const LinkWrapper: React.FC<
         <style jsx>{styles}</style>
       </a>
     </Link>
-  );
+  )
 }

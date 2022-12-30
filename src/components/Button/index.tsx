@@ -276,7 +276,7 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> =
               <style jsx>{styles}</style>
             </a>
           </Link>
-        );
+        )
       }
 
       // button

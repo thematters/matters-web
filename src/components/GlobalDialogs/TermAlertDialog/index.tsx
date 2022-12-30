@@ -13,8 +13,7 @@ import {
 } from '~/components'
 import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
 
-import { ADD_TOAST, STORAGE_KEY_AUTH_TOKEN } from '~/common/enums'
-import { storage } from '~/common/utils'
+import { ADD_TOAST } from '~/common/enums'
 
 import styles from './styles.css'
 
@@ -58,9 +57,7 @@ const TermContent: React.FC<TermContentProps> = ({ closeDialog }) => {
 
   const onLogout = async () => {
     try {
-      await logout().then(() => {
-        storage.remove(STORAGE_KEY_AUTH_TOKEN)
-      })
+      await logout()
 
       // await clearPersistCache()
 

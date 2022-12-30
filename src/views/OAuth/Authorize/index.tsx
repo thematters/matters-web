@@ -176,7 +176,7 @@ const BaseOAuthAuthorize = () => {
 
       <style jsx>{styles}</style>
     </Box>
-  );
+  )
 }
 
 const OAuthAuthorize = () => (

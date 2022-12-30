@@ -52,7 +52,7 @@ export const changeExt = ({ key, ext }: { key: string; ext?: 'webp' }) => {
   const newExt = ext || list.slice(-1)[0] || ''
 
   if (hasExt) {
-    return key.replace(/\.[^.]+$/, `.${newExt}`);
+    return key.replace(/\.[^.]+$/, `.${newExt}`)
   }
 
   return `${key}${ext ? '.' + ext : ''}`

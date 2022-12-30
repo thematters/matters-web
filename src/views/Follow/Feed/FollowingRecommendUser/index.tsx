@@ -63,7 +63,7 @@ const RecommendUser = ({ user, ...cardProps }: Props) => {
 
       <style jsx>{styles}</style>
     </Card>
-  );
+  )
 }
 
 type MemoizedRecommendUserType = React.MemoExoticComponent<React.FC<Props>> & {

@@ -138,7 +138,7 @@ const Rich = ({
         <style jsx>{styles}</style>
       </section>
     </Card>
-  );
+  )
 }
 
 /**

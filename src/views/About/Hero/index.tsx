@@ -320,7 +320,7 @@ const Hero = () => {
         }
       `}</style>
     </section>
-  );
+  )
 }
 
 export default Hero

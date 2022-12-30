@@ -170,7 +170,7 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
             <style jsx>{styles}</style>
           </a>
         </Link>
-      );
+      )
     }
 
     if (is === 'anchor' && htmlHref) {

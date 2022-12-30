@@ -206,7 +206,7 @@ const RssFeedDialogContent = ({
 
       <style jsx>{styles}</style>
     </section>
-  );
+  )
 }
 
 export default RssFeedDialogContent

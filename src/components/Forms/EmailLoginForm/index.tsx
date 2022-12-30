@@ -13,13 +13,12 @@ import {
   useMutation,
 } from '~/components'
 
-import { ADD_TOAST, STORAGE_KEY_AUTH_TOKEN } from '~/common/enums'
+import { ADD_TOAST } from '~/common/enums'
 import {
   analytics,
   // clearPersistCache,
   parseFormSubmitErrors,
   redirectToTarget,
-  storage,
   translate,
   validateEmail,
   validatePassword,
@@ -47,8 +46,6 @@ interface FormValues {
   email: string
   password: ''
 }
-
-const isStaticBuild = process.env.NEXT_PUBLIC_BUILD_TYPE === 'static'
 
 export const USER_LOGIN = gql`
   mutation UserLogin($input: UserLoginInput!) {
@@ -97,7 +94,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
       }),
     onSubmit: async ({ email, password }, { setFieldError, setSubmitting }) => {
       try {
-        const result = await login({
+        await login({
           variables: { input: { email, password } },
         })
 
@@ -114,13 +111,6 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           })
         )
         analytics.identifyUser()
-
-        const token = result.data?.userLogin.token
-
-        // security discussion see: https://github.com/apollographql/apollo-feature-requests/issues/149
-        if (isStaticBuild && token) {
-          storage.set(STORAGE_KEY_AUTH_TOKEN, token)
-        }
 
         setSubmitting(false)
         redirectToTarget({

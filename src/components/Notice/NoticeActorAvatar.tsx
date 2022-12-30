@@ -24,12 +24,10 @@ const NoticeActorAvatar = ({
   })
 
   return (
-    (<Link {...path}>
-
+    <Link {...path}>
       <Avatar user={user} size={size} />
-
-    </Link>)
-  );
+    </Link>
+  )
 }
 
 NoticeActorAvatar.fragments = {

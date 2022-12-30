@@ -79,7 +79,7 @@ const SideFooter = () => {
 
       <style jsx>{styles}</style>
     </footer>
-  );
+  )
 }
 
 export default SideFooter
