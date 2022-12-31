@@ -2,7 +2,7 @@ import type { CodegenConfig } from '@graphql-codegen/cli'
 
 const config: CodegenConfig = {
   schema: [
-    'https://server-develop.matters.news/graphql',
+    process.env.GRAPHQL_SCHEMA_URL as string,
     './src/common/utils/types/index.ts',
   ],
   documents: ['src/**/*.{ts,tsx}'],
@@ -11,7 +11,6 @@ const config: CodegenConfig = {
       plugins: ['typescript', 'typescript-operations'],
     },
   },
-  hooks: { afterOneFileWrite: ['eslint --fix'] },
 }
 
 export default config
