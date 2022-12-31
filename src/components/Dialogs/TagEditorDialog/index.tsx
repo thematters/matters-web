@@ -5,6 +5,7 @@ import {
   useDialogSwitch, // useRoute,
   useStep,
 } from '~/components'
+import { TagMaintainersQuery } from '~/gql/graphql'
 
 import TagEditorList from './List'
 import TagRemoveEditor from './Remove'
@@ -23,6 +24,10 @@ import TagSearchSelectEditor from './SearchSelect'
  */
 type Step = 'list' | 'add' | 'remove'
 
+type TagMaintainersNodeTagEditor = NonNullable<
+  NonNullable<TagMaintainersQuery['node'] & { __typename: 'Tag' }>['editors']
+>[0]
+
 interface Props {
   id: string
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
@@ -37,7 +42,7 @@ const BaseDialog = ({ id, children }: Props) => {
     closeDialog,
   } = useDialogSwitch(true)
   const [removeEditor, setRemoveEditor] =
-    useState<TagMaintainers_node_Tag_editors>()
+    useState<TagMaintainersNodeTagEditor>()
   const { currStep, forward, reset } = useStep<Step>(defaultStep)
 
   const openDialog = () => {
@@ -62,7 +67,7 @@ const BaseDialog = ({ id, children }: Props) => {
             id={id}
             closeDialog={closeDialog}
             toAddStep={() => forward('add')}
-            toRemoveStep={(editor: TagEditor) => {
+            toRemoveStep={(editor: TagMaintainersNodeTagEditor) => {
               setRemoveEditor(editor)
               forward('remove')
             }}

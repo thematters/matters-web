@@ -39,7 +39,7 @@ const BaseAuthors = () => {
   const { edges, pageInfo } = data?.viewer?.recommendation.authors || {}
 
   // private data
-  const loadPrivate = (publicData?: AllAuthorsPublic) => {
+  const loadPrivate = (publicData?: AllAuthorsPublicQuery) => {
     if (!viewer.isAuthed || !publicData) {
       return
     }

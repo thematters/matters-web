@@ -24,6 +24,16 @@ interface DonatorsDialogContentProps {
   closeDialog: () => void
 }
 
+type Edges = NonNullable<
+  NonNullable<
+    NonNullable<
+      ArticleDonatorsQuery['article'] & {
+        __typename: 'Article'
+      }
+    >['donations']
+  >['edges']
+>[0]
+
 const DonatorsDialogContent = ({
   article,
   closeDialog,
@@ -35,7 +45,12 @@ const DonatorsDialogContent = ({
   )
 
   const connectionPath = 'article.donations'
-  const { edges, pageInfo } = data?.article?.donations || {}
+  const { edges, pageInfo } =
+    (data?.article?.__typename === 'Article' && data?.article?.donations) || {}
+  const totalCount =
+    (data?.article?.__typename === 'Article' &&
+      data?.article?.donations.totalCount) ||
+    0
 
   if (loading) {
     return <Spinner />
@@ -49,10 +64,7 @@ const DonatorsDialogContent = ({
     return null
   }
 
-  const ListRow = ({
-    index,
-    datum,
-  }: RowRendererProps<ArticleDonators_article_Article_donations_edges>) => {
+  const ListRow = ({ index, datum }: RowRendererProps<Edges>) => {
     const { node, cursor } = datum
 
     return (
@@ -92,10 +104,6 @@ const DonatorsDialogContent = ({
       },
     })
   }
-
-  const totalCount =
-    (data?.article as ArticleDonators_article_Article)?.donations.totalCount ||
-    0
 
   // estimate a safe default height
   const calcContentMaxHeight = () => {

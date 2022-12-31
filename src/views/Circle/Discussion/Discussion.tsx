@@ -27,7 +27,7 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-import { DiscussionPublicQuery } from '~/gql/graphql'
+import { DiscussionCommentsQuery, DiscussionPublicQuery } from '~/gql/graphql'
 
 import CircleDetailTabs from '../CircleDetailTabs'
 import {
@@ -38,7 +38,9 @@ import {
 import styles from './styles.css'
 import Wall from './Wall'
 
-type Comment = DiscussionComments_circle_discussion_edges_node
+type Comment = NonNullable<
+  NonNullable<DiscussionCommentsQuery['circle']>['discussion']['edges']
+>[0]['node']
 
 const RESPONSES_COUNT = 15
 
@@ -60,7 +62,7 @@ const CricleDiscussion = () => {
 
   // private data
   const [privateFetched, setPrivateFetched] = useState(false)
-  const loadPrivate = async (publicData?: DiscussionPublic) => {
+  const loadPrivate = async (publicData?: DiscussionPublicQuery) => {
     if (!viewer.isAuthed || !publicData) {
       return
     }
@@ -112,7 +114,7 @@ const CricleDiscussion = () => {
       loading: discussionLoading,
       fetchMore,
       refetch,
-    } = usePublicQuery<DiscussionComments>(
+    } = usePublicQuery<DiscussionCommentsQuery>(
       DISCUSSION_COMMENTS,
       {
         fetchPolicy: 'network-only',

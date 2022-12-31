@@ -11,6 +11,12 @@ import RecommendedTags from './RecommendedTags'
 import SelectedTags from './SelectedTags'
 import styles from './styles.css'
 
+type EditorRecommendedTagsUserTagsEdgesNode = Required<
+  NonNullable<
+    NonNullable<EditorRecommendedTagsQuery['user']>['tags']['edges']
+  >[0]['node']
+>
+
 const TagCustomStagingArea = ({
   nodes: tags,
   setNodes: setTags,
@@ -77,14 +83,17 @@ const TagCustomStagingArea = ({
       {hasTag && (
         <SelectedTags
           tags={tags.map(
-            (t) => t.node as EditorRecommendedTags_user_tags_edges_node
+            (t) => t.node as EditorRecommendedTagsUserTagsEdgesNode
           )}
           onRemoveTag={removeTag}
         />
       )}
       {hasRecommendedTags && <hr />}
       {hasRecommendedTags && (
-        <RecommendedTags tags={recommendedTags} onAddTag={addTag} />
+        <RecommendedTags
+          tags={recommendedTags as EditorRecommendedTagsUserTagsEdgesNode[]}
+          onAddTag={addTag}
+        />
       )}
     </section>
   )

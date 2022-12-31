@@ -29,7 +29,10 @@ import {
   ViewerContext,
   ViewMoreButton,
 } from '~/components'
-import { LatestResponsesPublicQuery } from '~/gql/graphql'
+import {
+  LatestResponsesPrivateQuery,
+  LatestResponsesPublicQuery,
+} from '~/gql/graphql'
 
 import ResponseArticle from '../ResponseArticle'
 import styles from '../styles.css'
@@ -37,9 +40,21 @@ import { LATEST_RESPONSES_PRIVATE, LATEST_RESPONSES_PUBLIC } from './gql'
 
 const RESPONSES_COUNT = 15
 
-type ResponsePublic = LatestResponsesPublic_article_Article_responses_edges_node // LatestResponsesPublic_article_responses_edges_node
-type ResponsePrivate = LatestResponsesPrivate_nodes_Comment
+type ResponsePublic = NonNullable<
+  NonNullable<
+    LatestResponsesPublicQuery['article'] & { __typename: 'Article' }
+  >['responses']['edges']
+>[0]['node']
+type ResponsePrivate = NonNullable<
+  NonNullable<LatestResponsesPrivateQuery['nodes']>[0] & {
+    __typename: 'Comment'
+  }
+>
 type Response = ResponsePublic & Partial<Omit<ResponsePrivate, '__typename'>>
+
+type ResponseArticle = NonNullable<
+  LatestResponsesPublicQuery['article'] & { __typename: 'Article' }
+>
 
 const LatestResponses = ({ id, lock }: { id: string; lock: boolean }) => {
   const viewer = useContext(ViewerContext)
@@ -87,7 +102,7 @@ const LatestResponses = ({ id, lock }: { id: string; lock: boolean }) => {
 
   // pagination
   const connectionPath = 'article.responses'
-  const article = data?.article as LatestResponsesPublic_article_Article
+  const article = data?.article as ResponseArticle
   const { edges, pageInfo } = article?.responses || {}
   const articleId = article?.id
   const responses = filterResponses<ResponsePublic>(
@@ -95,14 +110,13 @@ const LatestResponses = ({ id, lock }: { id: string; lock: boolean }) => {
   )
 
   // private data
-  const loadPrivate = (publicData?: LatestResponsesPublic) => {
+  const loadPrivate = (publicData?: LatestResponsesPublicQuery) => {
     if (!viewer.isAuthed || !publicData || !articleId) {
       return
     }
 
     const publiceEdges =
-      (publicData.article as LatestResponsesPublic_article_Article)?.responses
-        .edges || []
+      (publicData.article as ResponseArticle)?.responses.edges || []
     const publicResponses = filterResponses<Response>(
       publiceEdges.map(({ node }) => node)
     )
@@ -269,7 +283,7 @@ const LatestResponses = ({ id, lock }: { id: string; lock: boolean }) => {
           <List.Item key={response.id}>
             {response.__typename === 'Article' ? (
               <ResponseArticle article={response} hasCover={isMediumUp} />
-            ) : (
+            ) : response.__typename === 'Comment' ? (
               <ThreadComment
                 comment={response}
                 type="article"
@@ -278,7 +292,7 @@ const LatestResponses = ({ id, lock }: { id: string; lock: boolean }) => {
                 disabled={lock}
                 replySubmitCallback={replySubmitCallback}
               />
-            )}
+            ) : null}
           </List.Item>
         ))}
       </List>

@@ -32,7 +32,8 @@ interface DialogProps {
 }
 
 type DropdownActionsProps = {
-  circle: DropdownActionsCirclePublic & Partial<DropdownActionsCirclePrivate>
+  circle: DropdownActionsCirclePublicFragment &
+    Partial<DropdownActionsCirclePrivateFragment>
 }
 
 interface Controls {

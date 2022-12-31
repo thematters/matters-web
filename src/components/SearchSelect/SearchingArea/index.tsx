@@ -39,10 +39,18 @@ import SearchInput, { SearchType as SearchInputType } from './SearchInput'
  *
  */
 export type SearchType = SearchInputType
-export type SelectNode = SelectSearch_search_edges_node
-export type SelectArticle = SelectSearch_search_edges_node_Article
-export type SelectTag = SelectSearch_search_edges_node_Tag
-export type SelectUser = SelectSearch_search_edges_node_User
+export type SelectNode = NonNullable<
+  SelectSearchQuery['search']['edges']
+>[0]['node']
+export type SelectArticle = NonNullable<
+  SelectSearchQuery['search']['edges']
+>[0]['node'] & { __typename: 'Article' }
+export type SelectTag = NonNullable<
+  SelectSearchQuery['search']['edges']
+>[0]['node'] & { __typename: 'Tag' }
+export type SelectUser = NonNullable<
+  SelectSearchQuery['search']['edges']
+>[0]['node'] & { __typename: 'User' }
 
 interface SearchingAreaProps {
   searchType: SearchType

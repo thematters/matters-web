@@ -24,7 +24,7 @@ import styles from './styles.css'
 
 export type ToolbarProps = {
   article: ToolbarArticlePublicFragment & Partial<ToolbarArticlePrivateFragment>
-  articleDetails: ArticleDetailPublicQuery['article']
+  articleDetails: NonNullable<ArticleDetailPublicQuery['article']>
   translated: boolean
   translatedLanguage?: string | null
   privateFetched: boolean

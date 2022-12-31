@@ -89,7 +89,11 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
       fetchPolicy: 'network-only',
     }
   )
-  const editModeArticle = data?.article as EditModeArticle_article_Article
+  const editModeArticle = data?.article as NonNullable<
+    EditModeArticleQuery['article'] & {
+      __typename: 'Article'
+    }
+  >
 
   // cover
   const assets = editModeArticle?.assets || []
@@ -109,9 +113,9 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
   >([])
 
   // access
-  const [circle, editCircle] = useState<DigestRichCirclePublicFragment | null>(
-    article.access.circle
-  )
+  const [circle, editCircle] = useState<
+    DigestRichCirclePublicFragment | null | undefined
+  >(article.access.circle)
   const [accessType, editAccessType] = useState<ArticleAccessType>(
     article.access.type
   )

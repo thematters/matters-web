@@ -29,10 +29,20 @@ import { UserCommentsPublicQuery, UserIdUserQuery } from '~/gql/graphql'
 import UserTabs from '../UserTabs'
 import { USER_COMMENTS_PRIVATE, USER_COMMENTS_PUBLIC, USER_ID } from './gql'
 
-type CommentedArticleComment =
-  UserCommentsPublic_node_User_commentedArticles_edges_node_comments_edges_node
-type CommentArticle =
-  UserCommentsPublic_node_User_commentedArticles_edges_node_comments_edges_node_node_Article
+type CommentedArticleComment = NonNullable<
+  NonNullable<
+    NonNullable<
+      UserCommentsPublicQuery['node'] & { __typename: 'User' }
+    >['commentedArticles']['edges']
+  >[0]['node']['comments']['edges']
+>[0]['node']
+type CommentArticle = NonNullable<
+  NonNullable<
+    NonNullable<
+      UserCommentsPublicQuery['node'] & { __typename: 'User' }
+    >['commentedArticles']['edges']
+  >[0]['node']['comments']['edges']
+>[0]['node'] & { __typename: 'Article' }
 
 const UserComments = () => {
   const { getQuery } = useRoute()

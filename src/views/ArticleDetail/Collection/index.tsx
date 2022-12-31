@@ -21,6 +21,10 @@ import { ArticleDetailPublicQuery, CollectionListQuery } from '~/gql/graphql'
 
 import styles from './styles.css'
 
+type CollectionListArticle = NonNullable<
+  CollectionListQuery['article'] & { __typename: 'Article' }
+>
+
 const COLLECTION_LIST = gql`
   query CollectionList($id: ID!, $after: String, $first: first_Int_min_0) {
     article: node(input: { id: $id }) {
@@ -34,7 +38,7 @@ const COLLECTION_LIST = gql`
 `
 
 const Collection: React.FC<{
-  article: Pick<ArticleDetailPublicQuery, 'article'>
+  article: NonNullable<ArticleDetailPublicQuery['article']>
   collectionCount?: number
 }> = ({ article, collectionCount }) => {
   const { lang } = useContext(LanguageContext)
@@ -46,7 +50,7 @@ const Collection: React.FC<{
   )
   const connectionPath = 'article.collection'
   const { edges, pageInfo } =
-    (data?.article as CollectionList_article_Article)?.collection || {}
+    (data?.article as CollectionListArticle)?.collection || {}
   const loadAll = () =>
     fetchMore({
       variables: {

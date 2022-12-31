@@ -61,8 +61,10 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
     isValid,
   } = useFormik<FormValues>({
     initialValues: {
-      requestForDonation: content ? content.requestForDonation : '',
-      replyToDonator: content ? content.replyToDonator : '',
+      requestForDonation: content?.requestForDonation
+        ? content.requestForDonation
+        : '',
+      replyToDonator: content?.replyToDonator ? content.replyToDonator : '',
     },
     validate: ({ requestForDonation, replyToDonator }) =>
       _pickBy({

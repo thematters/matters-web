@@ -11,7 +11,7 @@ import { toSizedImageURL } from './url'
 /**
  * Remove html tag and merge multiple spaces into one.
  */
-export const stripHtml = (html: string | null, replacement = ' ') =>
+export const stripHtml = (html: string | null | undefined, replacement = ' ') =>
   (html || '')
     .replace(/(<\/p><p>|&nbsp;)/g, ' ') // replace line break and space first
     .replace(/(<([^>]+)>)/gi, replacement)

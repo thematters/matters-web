@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 
 import { toPath } from '~/common/utils'
 import { Dialog, ShareDialog, Translate } from '~/components'
+import { EditModeArticleQuery } from '~/gql/graphql'
 
 interface Props {
   article: {
@@ -10,10 +11,14 @@ interface Props {
     title: string
     slug: string
     author: {
-      userName: string | null
+      userName?: string | null
     }
   }
-  draft: EditModeArticle_article_Article_drafts
+  draft: NonNullable<
+    NonNullable<
+      EditModeArticleQuery['article'] & { __typename: 'Article' }
+    >['drafts']
+  >[0]
 
   cancel: () => void
 }

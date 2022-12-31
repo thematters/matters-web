@@ -31,7 +31,9 @@ const SidebarTags = ({
       title="addTag"
       hint="hintAddTag"
       searchType="Tag"
-      onSave={(nodes: SearchSelectNode[]) => editTags(nodes as DigestTag[])}
+      onSave={(nodes: SearchSelectNode[]) =>
+        editTags(nodes as DigestTagFragment[])
+      }
       nodes={tags}
       saving={saving}
       createTag

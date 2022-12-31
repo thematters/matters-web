@@ -13,15 +13,29 @@ import {
   ViewerContext,
   ViewMoreButton,
 } from '~/components'
-import { FeaturedCommentsPublicQuery } from '~/gql/graphql'
+import {
+  FeaturedCommentsPrivateQuery,
+  FeaturedCommentsPublicQuery,
+} from '~/gql/graphql'
 
 import styles from '../styles.css'
 import { FEATURED_COMMENTS_PRIVATE, FEATURED_COMMENTS_PUBLIC } from './gql'
 
-type CommentPublic =
-  FeaturedCommentsPublic_article_Article_featuredComments_edges_node // FeaturedCommentsPublic_article_featuredComments_edges_node
-type CommentPrivate = FeaturedCommentsPrivate_nodes_Comment
+type CommentPublic = NonNullable<
+  NonNullable<
+    FeaturedCommentsPublicQuery['article'] & { __typename: 'Article' }
+  >['featuredComments']['edges']
+>[0]['node']
+
+type CommentPrivate = NonNullable<
+  NonNullable<FeaturedCommentsPrivateQuery['nodes']>[0] & {
+    __typename: 'Comment'
+  }
+>
 type Comment = CommentPublic & Partial<CommentPrivate>
+type CommentArticle = NonNullable<
+  FeaturedCommentsPublicQuery['article'] & { __typename: 'Article' }
+>
 
 const FeaturedComments = ({ id, lock }: { id: string; lock: boolean }) => {
   const viewer = useContext(ViewerContext)
@@ -43,7 +57,7 @@ const FeaturedComments = ({ id, lock }: { id: string; lock: boolean }) => {
 
   // pagination
   const connectionPath = 'article.featuredComments'
-  const article = data?.article as FeaturedCommentsPublic_article_Article
+  const article = data?.article as CommentArticle
   const { edges, pageInfo } = article?.featuredComments || {}
   const articleId = article && article.id
   const comments = filterComments<CommentPublic>(
@@ -51,14 +65,13 @@ const FeaturedComments = ({ id, lock }: { id: string; lock: boolean }) => {
   )
 
   // private data
-  const loadPrivate = (publicData?: FeaturedCommentsPublic) => {
+  const loadPrivate = (publicData?: FeaturedCommentsPublicQuery) => {
     if (!viewer.isAuthed || !publicData || !articleId) {
       return
     }
 
     const publiceEdges =
-      (publicData?.article as FeaturedCommentsPublic_article_Article)
-        ?.featuredComments.edges || []
+      (publicData?.article as CommentArticle)?.featuredComments.edges || []
     const publicComments = filterComments<Comment>(
       publiceEdges.map(({ node }) => node)
     )

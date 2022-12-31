@@ -11,7 +11,9 @@ const update = ({
 }: {
   cache: DataProxy
   id: string
-  asset: DraftAssets_node_Draft_assets
+  asset: NonNullable<
+    DraftAssetsQuery['node'] & { __typename: 'Draft' }
+  >['assets'][0]
 }) => {
   try {
     if (!id) {

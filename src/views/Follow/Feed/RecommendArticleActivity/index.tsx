@@ -15,7 +15,7 @@ import styles from './styles.css'
 
 interface Props {
   articles: RecommendArticleActivityFragment['recommendArticles'] | null
-  source: ArticleRecommendationActivitySource | null
+  source?: ArticleRecommendationActivitySource | null
   location: number
 }
 

@@ -45,7 +45,7 @@ const FollowersDialogContent = () => {
   const { edges, pageInfo } = user?.followers || {}
 
   // private data
-  const loadPrivate = (publicData?: UserFollowerPublic) => {
+  const loadPrivate = (publicData?: UserFollowerPublicQuery) => {
     if (!viewer.isAuthed || !publicData || !user) {
       return
     }

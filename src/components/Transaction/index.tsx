@@ -2,15 +2,7 @@ import gql from 'graphql-tag'
 import React, { useContext } from 'react'
 
 import { toPath } from '~/common/utils'
-import {
-  // ArticleDigestTitle,
-  Card,
-  // CircleDigest,
-  DateTime,
-  Translate,
-  // UserDigest,
-  ViewerContext,
-} from '~/components'
+import { Card, DateTime, Translate, ViewerContext } from '~/components'
 import { ArticleDigestTitle } from '~/components/ArticleDigest'
 import { CircleDigest } from '~/components/CircleDigest'
 import { UserDigest } from '~/components/UserDigest'

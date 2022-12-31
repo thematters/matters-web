@@ -23,7 +23,7 @@ import styles from './styles.css'
  */
 interface StateProps {
   state: TransactionState
-  message: string | null
+  message?: string | null
   blockchainTx: DigestTransactionFragment['blockchainTx'] | null
 }
 

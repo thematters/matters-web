@@ -36,7 +36,7 @@ interface Props {
   amount: number
   currency: CURRENCY
   recipient: UserDonationRecipientFragment
-  article: Pick<ArticleDetailPublicQuery, 'article'>
+  article: NonNullable<ArticleDetailPublicQuery['article']>
   targetId: string
   txId: string
   nextStep: () => void

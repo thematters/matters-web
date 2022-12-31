@@ -35,6 +35,12 @@ interface Props {
   }>
 }
 
+type SearchUsersSearchEdgesNodeUser = NonNullable<
+  NonNullable<SearchUsersQuery['search']['edges']>[0]['node'] & {
+    __typename: 'User'
+  }
+>
+
 const ArticleEditor: FC<Props> = ({
   draft,
 
@@ -56,7 +62,7 @@ const ArticleEditor: FC<Props> = ({
 
   const mentionUsers = (data?.search.edges || []).map(
     ({ node }: any) => node
-  ) as SearchUsers_search_edges_node_User[]
+  ) as SearchUsersSearchEdgesNodeUser[]
 
   const mentionKeywordChange = (keyword: string) => {
     search({ variables: { search: keyword, exclude: 'blocked' } })

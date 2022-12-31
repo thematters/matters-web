@@ -30,7 +30,7 @@ import Tips from './Tips'
 import USDTChoice from './USDTChoice'
 
 interface FormProps {
-  article: ArticleDetailPublicQuery['article']
+  article: NonNullable<ArticleDetailPublicQuery['article']>
   recipient: UserDonationRecipientFragment
   switchToSetAmount: (c: CURRENCY) => void
   switchToWalletSelect: () => void

@@ -15,9 +15,13 @@ import {
 import styles from './styles.css'
 
 type CircleWidgetCircle = NonNullable<
-  UserProfileUserPublicQuery['user']
->['ownCircles'] &
-  Partial<NonNullable<UserProfileUserPrivateQuery['user']>['ownCircles']>
+  NonNullable<UserProfileUserPublicQuery['user']>['ownCircles']
+>[0] &
+  Partial<
+    NonNullable<
+      NonNullable<UserProfileUserPrivateQuery['user']>['ownCircles']
+    >[0]
+  >
 
 type CircleWidgetProps = {
   circles: CircleWidgetCircle[]

@@ -39,8 +39,9 @@ const update = ({
     }
 
     // update counts
-    const article =
-      cacheData.article as ArticleDetailPublicByNodeId_article_Article
+    const article = cacheData.article as NonNullable<
+      ArticleDetailPublicByNodeIdQuery['article']
+    > & { __typename: 'Article' }
     article.appreciateLeft = left
     article.appreciationsReceivedTotal = total
     article.hasAppreciate = true

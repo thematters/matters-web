@@ -143,28 +143,28 @@ export const Head: React.FC<HeadProps> = (props) => {
       <meta name="twitter:image" key="twitter:image" content={head.image} />
 
       {/* i18n */}
-      {props.availableLanguages?.includes(UserLanguage.en) && (
+      {props.availableLanguages?.includes(UserLanguage.En) && (
         <link
           rel="alternate"
-          hrefLang={toLocale(UserLanguage.en)}
-          href={i18nUrl(toLocale(UserLanguage.en))}
-          key={`alternate:${UserLanguage.en}`}
+          hrefLang={toLocale(UserLanguage.En)}
+          href={i18nUrl(toLocale(UserLanguage.En))}
+          key={`alternate:${UserLanguage.En}`}
         />
       )}
-      {props.availableLanguages?.includes(UserLanguage.zh_hans) && (
+      {props.availableLanguages?.includes(UserLanguage.ZhHans) && (
         <link
           rel="alternate"
-          hrefLang={toLocale(UserLanguage.zh_hans)}
-          href={i18nUrl(toLocale(UserLanguage.zh_hans))}
-          key={`alternate:${UserLanguage.zh_hans}`}
+          hrefLang={toLocale(UserLanguage.ZhHans)}
+          href={i18nUrl(toLocale(UserLanguage.ZhHans))}
+          key={`alternate:${UserLanguage.ZhHans}`}
         />
       )}
-      {props.availableLanguages?.includes(UserLanguage.zh_hant) && (
+      {props.availableLanguages?.includes(UserLanguage.ZhHant) && (
         <link
           rel="alternate"
-          hrefLang={toLocale(UserLanguage.zh_hant)}
-          href={i18nUrl(toLocale(UserLanguage.zh_hant))}
-          key={`alternate:${UserLanguage.zh_hant}`}
+          hrefLang={toLocale(UserLanguage.ZhHant)}
+          href={i18nUrl(toLocale(UserLanguage.ZhHant))}
+          key={`alternate:${UserLanguage.ZhHant}`}
         />
       )}
       <link

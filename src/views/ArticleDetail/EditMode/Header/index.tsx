@@ -6,14 +6,14 @@ import {
   EditorSettingsDialog,
   EditorSettingsDialogProps,
 } from '~/components/Editor/SettingsDialog'
-import { EditArticleMutation } from '~/gql/graphql'
+import { ArticleDetailPublicQuery, EditArticleMutation } from '~/gql/graphql'
 
 import ConfirmRevisedPublishDialogContent from './ConfirmRevisedPublishDialogContent'
 import { EDIT_ARTICLE } from './gql'
 import styles from './styles.css'
 
 type EditModeHeaderProps = {
-  article: ArticleDetailPublic_article
+  article: NonNullable<ArticleDetailPublicQuery['article']>
   editData: Record<string, any>
   coverId?: string
 

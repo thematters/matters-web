@@ -23,7 +23,7 @@ import {
 import styles from './styles.css'
 
 interface FormProps {
-  article: ArticleDetailPublicQuery['article']
+  article: NonNullable<ArticleDetailPublicQuery['article']>
   recipient: UserDonationRecipientFragment
   currency: QuoteCurrency
   exchangeRate: number

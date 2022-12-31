@@ -21,6 +21,16 @@ interface AppreciatorsDialogContentProps {
   closeDialog: () => void
 }
 
+type Edges = NonNullable<
+  NonNullable<
+    NonNullable<
+      ArticleAppreciatorsQuery['article'] & {
+        __typename: 'Article'
+      }
+    >['appreciationsReceived']
+  >['edges']
+>[0]
+
 const ARTICLE_APPRECIATORS = gql`
   query ArticleAppreciators($id: ID!, $after: String) {
     article: node(input: { id: $id }) {
@@ -66,7 +76,12 @@ const AppreciatorsDialogContent = ({
 
   const article = data?.article
   const connectionPath = 'article.appreciationsReceived'
-  const { edges, pageInfo } = article?.appreciationsReceived || {}
+  const { edges, pageInfo } =
+    (article?.__typename === 'Article' && article?.appreciationsReceived) || {}
+  const totalCount =
+    (article?.__typename === 'Article' &&
+      article?.appreciationsReceived.totalCount) ||
+    0
 
   if (loading) {
     return <Spinner />
@@ -80,7 +95,7 @@ const AppreciatorsDialogContent = ({
     return null
   }
 
-  const ListRow = ({ index, datum }: RowRendererProps) => {
+  const ListRow = ({ index, datum }: RowRendererProps<Edges>) => {
     const { node, cursor } = datum
 
     return (
@@ -123,8 +138,6 @@ const AppreciatorsDialogContent = ({
       },
     })
   }
-
-  const totalCount = article?.appreciationsReceived.totalCount || 0
 
   // estimate a safe default height
   const calcContentMaxHeight = () => {

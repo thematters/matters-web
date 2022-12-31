@@ -25,7 +25,10 @@ const ArticleSecretDesc: React.FC<ArticleSecretDescProps> = ({ id }) => {
 
     watcher.subscribe({
       next: (result) => {
-        const key = result?.data?.article?.access.secret
+        const key =
+          result?.data?.article?.__typename === 'Article'
+            ? result?.data?.article?.access.secret
+            : undefined
         setSecret(key)
       },
       error: (e) => {

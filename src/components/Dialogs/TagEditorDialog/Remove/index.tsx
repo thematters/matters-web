@@ -2,7 +2,7 @@ import { ADD_TOAST } from '~/common/enums'
 import { Dialog, Translate, useMutation } from '~/components'
 import UPDATE_TAG_SETTING from '~/components/GQL/mutations/updateTagSetting'
 import updateTagMaintainers from '~/components/GQL/updates/tagMaintainers'
-import { UpdateTagSettingMutation } from '~/gql/graphql'
+import { TagMaintainersQuery, UpdateTagSettingMutation } from '~/gql/graphql'
 
 import styles from './styles.css'
 
@@ -20,9 +20,14 @@ import styles from './styles.css'
  *   />
  * ```
  */
+
+type TagMaintainersNodeTagEditor = NonNullable<
+  NonNullable<TagMaintainersQuery['node'] & { __typename: 'Tag' }>['editors']
+>[0]
+
 interface Props {
   id: string
-  editor: TagMaintainers_node_Tag_editors
+  editor: TagMaintainersNodeTagEditor
 
   closeDialog: () => void
 }

@@ -26,14 +26,18 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-import { BroadcastPublicQuery } from '~/gql/graphql'
+import { BroadcastPrivateQuery, BroadcastPublicQuery } from '~/gql/graphql'
 
 import CircleDetailTabs from '../CircleDetailTabs'
 import { BROADCAST_PRIVATE, BROADCAST_PUBLIC } from './gql'
 import styles from './styles.css'
 
-type CommentPublic = BroadcastPublic_circle_broadcast_edges_node
-type CommentPrivate = BroadcastPrivate_nodes_Comment
+type CommentPublic = NonNullable<
+  NonNullable<BroadcastPublicQuery['circle']>['broadcast']['edges']
+>[0]['node']
+type CommentPrivate = NonNullable<BroadcastPrivateQuery['nodes']>[0] & {
+  __typename: 'Comment'
+}
 type Comment = CommentPublic & Partial<Omit<CommentPrivate, '__typename'>>
 
 const RESPONSES_COUNT = 15

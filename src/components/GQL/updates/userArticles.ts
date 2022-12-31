@@ -2,8 +2,12 @@ import { DataProxy } from 'apollo-cache'
 
 import { UserArticlesPublicQuery } from '~/gql/graphql'
 
+type UserArticlesPublicUserArticlesEdges = NonNullable<
+  NonNullable<UserArticlesPublicQuery['user']>['articles']['edges']
+>
+
 const sortEdgesByCreatedAtDesc = (
-  edges: UserArticlesPublic_user_articles_edges[]
+  edges: UserArticlesPublicUserArticlesEdges
 ) => {
   return edges.sort(
     ({ node: n1 }, { node: n2 }) =>

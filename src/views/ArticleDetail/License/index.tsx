@@ -15,9 +15,9 @@ type LicenseProps = {
 }
 
 const License: React.FC<LicenseProps> = ({ license }) => {
-  const isCC0 = license === ArticleLicenseType.cc_0
-  const isARR = license === ArticleLicenseType.arr
-  const isCCBYNCND2 = license === ArticleLicenseType.cc_by_nc_nd_2
+  const isCC0 = license === ArticleLicenseType.Cc_0
+  const isARR = license === ArticleLicenseType.Arr
+  const isCCBYNCND2 = license === ArticleLicenseType.CcByNcNd_2
 
   return (
     <section className="license" data-test-id={TEST_ID.ARTICLE_LICENSE}>

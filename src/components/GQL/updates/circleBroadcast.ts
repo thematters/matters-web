@@ -3,7 +3,9 @@ import { DataProxy } from 'apollo-cache'
 import { BroadcastPublicQuery } from '~/gql/graphql'
 
 const sortEdgesByCreatedAtDesc = (
-  edges: BroadcastPublic_circle_broadcast_edges[]
+  edges: NonNullable<
+    NonNullable<BroadcastPublicQuery['circle']>['broadcast']['edges']
+  >
 ) => {
   return edges.sort(
     ({ node: n1 }, { node: n2 }) =>

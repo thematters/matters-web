@@ -45,7 +45,7 @@ interface DonationDialogProps {
   completeCallback?: () => void
   defaultStep?: Step
   recipient: UserDonationRecipientFragment
-  article: ArticleDetailPublicQuery['article']
+  article: NonNullable<ArticleDetailPublicQuery['article']>
   targetId: string
 }
 

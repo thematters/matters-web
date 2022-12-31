@@ -51,7 +51,7 @@ export const toUserDigestMiniPlaceholder = (displayName: string) =>
       __typename: 'Liker',
       civicLiker: false,
     },
-  } as UserDigestMiniUser)
+  } as UserDigestMiniUserFragment)
 
 const Mini = ({
   user,

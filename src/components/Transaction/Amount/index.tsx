@@ -27,7 +27,7 @@ interface AmountProps {
 
 const Amount = ({ amount, currency, state }: AmountProps) => {
   const color =
-    state !== TransactionState.succeeded
+    state !== TransactionState.Succeeded
       ? 'grey'
       : amount > 0
       ? 'gold'

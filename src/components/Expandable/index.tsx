@@ -18,7 +18,7 @@ type CollapseTextColor =
 
 interface ExpandableProps {
   children: ReactElement
-  content: string | null
+  content?: string | null
   limit?: number
   buffer?: number
   color?: CollapseTextColor

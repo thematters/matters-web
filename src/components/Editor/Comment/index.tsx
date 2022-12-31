@@ -17,14 +17,18 @@ interface Props {
   placeholder?: string
 }
 
+type SearchUsersSearchEdgesNodeUser = NonNullable<
+  NonNullable<SearchUsersQuery['search']['edges']>[0]
+>['node']
+
 const CommentEditor: React.FC<Props> = ({ content, update, placeholder }) => {
   const [search, { data, loading }] =
     useLazyQuery<SearchUsersQuery>(SEARCH_USERS)
   const { lang } = useContext(LanguageContext)
 
   const mentionUsers = (data?.search.edges || []).map(
-    ({ node }: any) => node
-  ) as SearchUsers_search_edges_node_User[]
+    ({ node }) => node
+  ) as SearchUsersSearchEdgesNodeUser[]
 
   const mentionKeywordChange = (keyword: string) => {
     search({ variables: { search: keyword, exclude: 'blocked' } })

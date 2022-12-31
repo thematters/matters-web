@@ -43,6 +43,12 @@ interface FormValues {
   description: string
 }
 
+type EditProfileDialogUserPrivateInfoCryptoWalletNft = NonNullable<
+  NonNullable<
+    EditProfileDialogUserPrivateFragment['info']['cryptoWallet']
+  >['nfts']
+>[0]
+
 const UPDATE_USER_INFO = gql`
   mutation UpdateUserInfoProfile($input: UpdateUserInfoInput!) {
     updateUserInfo(input: $input) {
@@ -143,7 +149,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
   })
 
   const nfts = user.info.cryptoWallet
-    ?.nfts as EditProfileDialogUserPrivate_info_cryptoWallet_nfts[]
+    ?.nfts as EditProfileDialogUserPrivateInfoCryptoWalletNft[]
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>

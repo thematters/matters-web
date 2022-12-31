@@ -57,7 +57,7 @@ interface SetAmountCallbackValues {
 interface FormProps {
   currency: CURRENCY
   recipient: UserDonationRecipientFragment
-  article: ArticleDetailPublicQuery['article']
+  article: NonNullable<ArticleDetailPublicQuery['article']>
   submitCallback: (values: SetAmountCallbackValues) => void
   switchToCurrencyChoice: () => void
   switchToAddCredit: () => void

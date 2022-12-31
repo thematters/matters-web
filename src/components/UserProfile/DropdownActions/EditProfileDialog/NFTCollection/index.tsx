@@ -8,11 +8,18 @@ import {
   LanguageContext,
   Translate,
 } from '~/components'
+import { EditProfileDialogUserPrivateFragment } from '~/gql/graphql'
 
 import styles from './styles.css'
 
+type EditProfileDialogUserPrivateInfoCryptoWalletNft = NonNullable<
+  NonNullable<
+    EditProfileDialogUserPrivateFragment['info']['cryptoWallet']
+  >['nfts']
+>[0]
+
 type NFTCollectionProps = {
-  nfts: EditProfileDialogUserPrivate_info_cryptoWallet_nfts[]
+  nfts: EditProfileDialogUserPrivateInfoCryptoWalletNft[]
   setField: (url: string) => void
 }
 
@@ -24,7 +31,7 @@ const NFTCollectionItem = ({
 }: {
   index: number
   selectedIndex: number
-  nft: EditProfileDialogUserPrivate_info_cryptoWallet_nfts
+  nft: EditProfileDialogUserPrivateInfoCryptoWalletNft
   onClick: (event?: React.MouseEvent<HTMLElement>) => any
 }) => {
   return (

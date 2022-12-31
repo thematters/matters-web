@@ -17,7 +17,7 @@ import {
 interface SupportButtonProps {
   recipient: UserDonationRecipientFragment
   targetId: string
-  article: ArticleDetailPublicQuery['article']
+  article: NonNullable<ArticleDetailPublicQuery['article']>
   supported?: boolean
 }
 

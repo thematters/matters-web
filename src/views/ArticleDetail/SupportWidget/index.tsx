@@ -30,8 +30,12 @@ import styles from './styles.css'
 import SupportButton from './SupportButton'
 
 interface DonationProps {
-  article: ArticleDetailPublicQuery['article']
+  article: NonNullable<ArticleDetailPublicQuery['article']>
 }
+
+type HasDonatedArticle = NonNullable<
+  HasDonatedQuery['article'] & { __typename: 'Article' }
+>
 
 const SupportWidget = ({ article }: DonationProps) => {
   const viewer = useContext(ViewerContext)
@@ -42,7 +46,7 @@ const SupportWidget = ({ article }: DonationProps) => {
   const [currency, setCurrency] = useState<CURRENCY>(CURRENCY.HKD)
   const supportWidgetClasses = classNames({
     'support-widget': true,
-    hasCircle: article.access.circle,
+    hasCircle: article?.access.circle,
   })
 
   const [
@@ -63,8 +67,7 @@ const SupportWidget = ({ article }: DonationProps) => {
     })
   }, [viewer.id])
 
-  const hasDonatedArticle =
-    hasDonatedData?.article as HasDonated_article_Article
+  const hasDonatedArticle = hasDonatedData?.article as HasDonatedArticle
 
   const isViewerDonated = hasDonatedArticle?.donation?.totalCount === 1
   useEffect(() => {
@@ -73,7 +76,7 @@ const SupportWidget = ({ article }: DonationProps) => {
     }
   }, [isViewerDonated])
 
-  const requestForDonation = article.requestForDonation
+  const requestForDonation = article?.requestForDonation
   const replyToDonator = hasDonatedArticle?.replyToDonator
 
   useEventListener(
@@ -123,10 +126,10 @@ const SupportWidget = ({ article }: DonationProps) => {
                 <>
                   {replyToDonator && (
                     <section>
-                      <Avatar user={article.author} size="xl" />
+                      <Avatar user={article?.author} size="xl" />
                       <p>
                         <TextIcon weight="md">
-                          {article.author.displayName}
+                          {article?.author.displayName}
                         </TextIcon>
                         <TextIcon color="grey-darker">
                           <Translate

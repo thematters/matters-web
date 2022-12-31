@@ -25,7 +25,7 @@ import {
 interface DonationButtonProps {
   article: DonationButtonArticleFragment
   disabled: boolean
-  articleDetail: ArticleDetailPublicQuery['article']
+  articleDetail: NonNullable<ArticleDetailPublicQuery['article']>
 }
 
 const fragments = {

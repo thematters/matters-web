@@ -39,9 +39,21 @@ interface HorizontalFeedEdge {
 
 type FeedEdge =
   | HorizontalFeedEdge
-  | HottestFeedPublicQuery['viewer']['recommendation']['feed']['edges']
-  | IcymiFeedPublicQuery['viewer']['recommendation']['feed']['edges']
-  | NewestFeedPublicQuery['viewer']['recommendation']['feed']['edges']
+  | NonNullable<
+      NonNullable<
+        HottestFeedPublicQuery['viewer']
+      >['recommendation']['feed']['edges']
+    >[0]
+  | NonNullable<
+      NonNullable<
+        IcymiFeedPublicQuery['viewer']
+      >['recommendation']['feed']['edges']
+    >[0]
+  | NonNullable<
+      NonNullable<
+        NewestFeedPublicQuery['viewer']
+      >['recommendation']['feed']['edges']
+    >[0]
 
 interface FeedLocation {
   [key: number]: HorizontalFeed
@@ -194,7 +206,7 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
     >
       <List>
         {mixFeed.map((edge, i) => {
-          if (edge.__typename === 'HorizontalFeed') {
+          if (edge?.__typename === 'HorizontalFeed') {
             const { Feed } = edge
             return <Feed key={edge.__typename + i} />
           }

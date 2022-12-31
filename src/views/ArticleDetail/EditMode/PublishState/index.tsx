@@ -1,3 +1,5 @@
+import { EditModeArticleQuery } from '~/gql/graphql'
+
 import PendingState from './PendingState'
 import PublishedState from './PublishedState'
 import styles from './styles.css'
@@ -9,10 +11,14 @@ interface Props {
     slug: string
     mediaHash: string
     author: {
-      userName: string | null
+      userName?: string | null
     }
   }
-  draft: EditModeArticle_article_Article_drafts
+  draft: NonNullable<
+    NonNullable<
+      EditModeArticleQuery['article'] & { __typename: 'Article' }
+    >['drafts']
+  >[0]
 
   isSameHash: boolean
 

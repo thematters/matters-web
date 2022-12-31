@@ -5,6 +5,10 @@ import { ERROR_CODES } from '~/common/enums'
 import TAG_MAINTAINERS from '~/components/GQL/queries/tagMaintainers'
 import { TagMaintainersQuery } from '~/gql/graphql'
 
+type TagMaintainersNodeTagEditor = NonNullable<
+  NonNullable<TagMaintainersQuery['node'] & { __typename: 'Tag' }>['editors']
+>[0]
+
 const update = ({
   cache,
   id,
@@ -36,8 +40,7 @@ const update = ({
     switch (type) {
       case 'add': {
         const newEditors = editors.map(
-          ({ node }) =>
-            _omit(node, ['selected']) as TagMaintainers_node_Tag_editors
+          ({ node }) => _omit(node, ['selected']) as TagMaintainersNodeTagEditor
         )
         cacheData.node.editors = [...currEditors, ...newEditors]
         break

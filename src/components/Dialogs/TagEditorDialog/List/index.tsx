@@ -29,12 +29,16 @@ import styles from './styles.css'
  *   />
  * ```
  */
+type TagMaintainersNodeTagEditor = NonNullable<
+  NonNullable<TagMaintainersQuery['node'] & { __typename: 'Tag' }>['editors']
+>[0]
+
 interface Props {
   id: string
 
   closeDialog: () => void
   toAddStep: () => void
-  toRemoveStep: (editor: TagMaintainers_node_Tag_editors) => void
+  toRemoveStep: (editor: TagMaintainersNodeTagEditor) => void
 }
 
 const RemoveButton = ({ remove }: { remove: () => void }) => (

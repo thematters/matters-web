@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 
 import { Toast, Translate } from '~/components'
-import { EditModeArticleDraftsQuery } from '~/gql/graphql'
+import { EditModeArticleDraftsQuery, EditModeArticleQuery } from '~/gql/graphql'
 
 import EDIT_MODE_ARTICLE_DRAFTS from './gql'
 
@@ -9,7 +9,11 @@ const PendingState = ({
   draft,
   id,
 }: {
-  draft: EditModeArticle_article_Article_drafts
+  draft: NonNullable<
+    NonNullable<
+      EditModeArticleQuery['article'] & { __typename: 'Article' }
+    >['drafts']
+  >[0]
   id: string
 }) => {
   useQuery<EditModeArticleDraftsQuery>(EDIT_MODE_ARTICLE_DRAFTS, {

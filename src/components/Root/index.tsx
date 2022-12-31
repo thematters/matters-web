@@ -104,7 +104,7 @@ const Root = ({
 
   // viewer
   const [privateViewer, setPrivateViewer] =
-    useState<Pick<RootQueryPrivateQuery, 'viewer'>>()
+    useState<RootQueryPrivateQuery['viewer']>()
   const [privateFetched, setPrivateFetched] = useState(false)
 
   const fetchPrivateViewer = async () => {

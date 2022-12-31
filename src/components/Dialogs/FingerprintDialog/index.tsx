@@ -20,6 +20,10 @@ interface FingerprintDialogProps {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
+type ArticleFingerprintPublicArticle = NonNullable<
+  ArticleFingerprintPublicQuery['article'] & { __typename: 'Article' }
+>
+
 const fragments = {
   article: gql`
     fragment FingerprintArticle on Article {
@@ -101,8 +105,7 @@ const BaseFingerprintDialog = ({
             dataHash={article.dataHash || ''}
             iscnId={
               article?.iscnId ||
-              (data?.article as ArticleFingerprintPublic_article_Article)
-                ?.iscnId ||
+              (data?.article as ArticleFingerprintPublicArticle)?.iscnId ||
               ''
             }
             iscnPublish={!!article.drafts?.[0]?.iscnPublish}

@@ -38,7 +38,7 @@ interface SetAmountOpenTabCallbackValues {
 
 interface FormProps {
   amount: number
-  article: ArticleDetailPublicQuery['article']
+  article: NonNullable<ArticleDetailPublicQuery['article']>
   currency: CURRENCY
   recipient: UserDonationRecipientFragment
   targetId: string

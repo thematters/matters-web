@@ -29,8 +29,16 @@ type FeedType =
   | CircleContentAnalyticsPublicQuery
 
 type FeedContent =
-  | CircleContentAnalyticsPaywall_circle_analytics_content_paywall
-  | CircleContentAnalyticsPublic_circle_analytics_content_public
+  | NonNullable<
+      NonNullable<
+        CircleContentAnalyticsPaywallQuery['circle']
+      >['analytics']['content']['paywall']
+    >[0]
+  | NonNullable<
+      NonNullable<
+        CircleContentAnalyticsPublicQuery['circle']
+      >['analytics']['content']['public']
+    >[0]
 
 interface FeedProps {
   type: CircleContentAnalyticsType

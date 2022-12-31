@@ -24,11 +24,15 @@ export type FeedQuery = HottestTagsQuery | SelectedTagsQuery
 
 export type FeedEdges =
   | NonNullable<
-      HottestTagsQuery['viewer']
-    >['recommendation']['hottestTags']['edges']
+      NonNullable<
+        HottestTagsQuery['viewer']
+      >['recommendation']['hottestTags']['edges']
+    >[0]
   | NonNullable<
-      SelectedTagsQuery['viewer']
-    >['recommendation']['selectedTags']['edges']
+      NonNullable<
+        SelectedTagsQuery['viewer']
+      >['recommendation']['selectedTags']['edges']
+    >[0]
 
 interface Props {
   type: FeedType

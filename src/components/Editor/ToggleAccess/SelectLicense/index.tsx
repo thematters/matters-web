@@ -11,7 +11,7 @@ interface Props {
 
 const LICENSE_TEXT = {
   1: {
-    [ArticleLicenseType.cc_by_nc_nd_2]: {
+    [ArticleLicenseType.CcByNcNd_2]: {
       title: {
         zh_hant: '不上鎖，CC BY-NC-ND 2.0 聲明',
         zh_hans: '不上锁，CC BY-NC-ND 2.0 声明',
@@ -23,7 +23,7 @@ const LICENSE_TEXT = {
         en: 'Free to Share, Attribution, Non-Commercial, No Derivatives',
       },
     },
-    [ArticleLicenseType.cc_0]: {
+    [ArticleLicenseType.Cc_0]: {
       title: {
         zh_hant: '不上鎖，CC0 公眾領域貢獻宣告',
         zh_hans: '不上锁，CC0 公众领域贡献宣告',
@@ -35,7 +35,7 @@ const LICENSE_TEXT = {
         en: 'No Copyright',
       },
     },
-    [ArticleLicenseType.arr]: {
+    [ArticleLicenseType.Arr]: {
       title: {
         zh_hant: '上鎖，作者保留所有權利',
         zh_hans: '上锁，作者保留所有权利',
@@ -49,7 +49,7 @@ const LICENSE_TEXT = {
     },
   },
   0: {
-    [ArticleLicenseType.cc_by_nc_nd_2]: {
+    [ArticleLicenseType.CcByNcNd_2]: {
       title: {
         zh_hant: 'CC BY-NC-ND 2.0 聲明',
         zh_hans: 'CC BY-NC-ND 2.0 声明',
@@ -61,7 +61,7 @@ const LICENSE_TEXT = {
         en: 'Free to Share, Attribution, Non-Commercial, No Derivatives',
       },
     },
-    [ArticleLicenseType.cc_0]: {
+    [ArticleLicenseType.Cc_0]: {
       title: {
         zh_hant: 'CC0 公眾領域貢獻宣告',
         zh_hans: 'CC0 公众领域贡献宣告',
@@ -73,7 +73,7 @@ const LICENSE_TEXT = {
         en: 'No Copyright',
       },
     },
-    [ArticleLicenseType.arr]: {
+    [ArticleLicenseType.Arr]: {
       title: {
         zh_hant: '作者保留所有權利',
         zh_hans: '作者保留所有权利',
@@ -88,9 +88,9 @@ const SelectLicense = ({ isInCircle, license, onChange }: Props) => {
   const { lang } = useContext(LanguageContext)
 
   const options = [
-    ArticleLicenseType.cc_by_nc_nd_2,
-    ArticleLicenseType.cc_0,
-    ArticleLicenseType.arr,
+    ArticleLicenseType.CcByNcNd_2,
+    ArticleLicenseType.Cc_0,
+    ArticleLicenseType.Arr,
   ]
 
   return (
