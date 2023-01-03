@@ -3,9 +3,7 @@ import { useQuery } from '@apollo/react-hooks'
 import {
   Dialog,
   InfiniteScroll,
-  List,
   QueryError,
-  RowRendererProps,
   Spinner,
   Translate,
 } from '~/components'
@@ -19,10 +17,8 @@ import styles from './styles.css'
 import {
   ArticleDonators,
   ArticleDonators_article_Article,
-  ArticleDonators_article_Article_donations_edges,
 } from './__generated__/ArticleDonators'
 import { DonatorDialogArticle } from './__generated__/DonatorDialogArticle'
-// import { List } from 'react-virtualized'
 
 interface DonatorsDialogContentProps {
   article: DonatorDialogArticle
@@ -52,32 +48,6 @@ const DonatorsDialogContent = ({
 
   if (!edges || edges.length <= 0 || !pageInfo) {
     return null
-  }
-
-  const ListRow = ({
-    index,
-    datum,
-  }: RowRendererProps<ArticleDonators_article_Article_donations_edges>) => {
-    const { node, cursor } = datum
-
-    return (
-      <div className="donator-item" key={cursor}>
-        {node && (
-          <UserDigest.Rich
-            user={node}
-            onClick={() => {
-              analytics.trackEvent('click_feed', {
-                type: 'donators',
-                contentType: 'user',
-                location: index,
-                id: node.id,
-              })
-            }}
-          />
-        )}
-        <style jsx>{styles}</style>
-      </div>
-    )
   }
 
   const loadMore = () => {
@@ -121,15 +91,21 @@ const DonatorsDialogContent = ({
           hasNextPage={pageInfo.hasNextPage}
         >
           {edges.map(({ node, cursor }, i) => (
-            <List.Item key={cursor}>
-              <div className="dialog-donator-list">
-                <ListRow
-                  index={i}
-                  key={i}
-                  datum={{ node, cursor, __typename: 'UserEdge' }}
+            <div className="dialog-donator-list" key={cursor}>
+              {node && (
+                <UserDigest.Rich
+                  user={node}
+                  onClick={() => {
+                    analytics.trackEvent('click_feed', {
+                      type: 'donators',
+                      contentType: 'user',
+                      location: i,
+                      id: node.id,
+                    })
+                  }}
                 />
-              </div>
-            </List.Item>
+              )}
+            </div>
           ))}
         </InfiniteScroll>
 
