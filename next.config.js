@@ -5,6 +5,7 @@
 const withPlugins = require('next-compose-plugins')
 
 const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
+const isLocal = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local'
 const nextAssetDomain = process.env.NEXT_PUBLIC_NEXT_ASSET_DOMAIN || ''
 
 const nextConfig = {
@@ -111,7 +112,7 @@ let plugins = [
   [
     require('next-pwa')({
       dest: 'public',
-      disable: !isProd,
+      disable: !isLocal,
       register: true,
       sw: 'service-worker.js',
       publicExcludes: ['!static/**/*'],
