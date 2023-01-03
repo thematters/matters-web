@@ -14,10 +14,9 @@ import {
   useNativeEventListener,
   useRoute,
 } from '~/components'
+import { QuickResultQuery } from '~/gql/graphql'
 
 import styles from './styles.css'
-
-import { QuickResult } from '../SearchQuickResult/__generated__/QuickResult'
 
 interface SearchBarProps {
   onChange?: (key: string) => void
@@ -79,7 +78,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   const openDropdown = () => setShowDropdown(true)
 
   // quick result hotkeys
-  const [data, setData] = useState<QuickResult>()
+  const [data, setData] = useState<QuickResultQuery>()
   const [activeItem, setActiveItem] = useState('input')
   const items = ['input']
   const { edges: userEdges } = data?.user || {}
@@ -218,7 +217,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
               debouncedSearch && (
                 <SearchQuickResult
                   searchKey={debouncedSearch}
-                  onUpdateData={(newData: QuickResult | undefined) => {
+                  onUpdateData={(newData: QuickResultQuery | undefined) => {
                     setData(newData)
                   }}
                   activeItem={activeItem}

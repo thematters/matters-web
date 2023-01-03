@@ -1,8 +1,7 @@
 import { useState } from 'react'
 
-import { Tabs, Translate, usePullToRefresh, useRoute } from '~/components'
-
 import { getSearchType } from '~/common/utils'
+import { Tabs, Translate, usePullToRefresh, useRoute } from '~/components'
 
 import Articles from './Articles'
 import styles from './styles.css'

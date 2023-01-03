@@ -1,6 +1,5 @@
-import { Button, IconClose32, Menu, TextIcon, Translate } from '~/components'
-
 import { toPath } from '~/common/utils'
+import { Button, IconClose32, Menu, TextIcon, Translate } from '~/components'
 
 interface SearchHistoryProps {
   data: string[]

@@ -2,7 +2,6 @@ import gql from 'graphql-tag'
 
 // TODO: Why this line don't work
 // import { TagDigest, UserDigest } from '~/components'
-
 import { TagDigest } from '~/components/TagDigest'
 import { UserDigest } from '~/components/UserDigest'
 

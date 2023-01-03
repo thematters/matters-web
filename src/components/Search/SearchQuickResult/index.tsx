@@ -1,6 +1,7 @@
 import { useApolloClient } from '@apollo/react-hooks'
 import { Fragment, useEffect, useState } from 'react'
 
+import { toPath } from '~/common/utils'
 import {
   Menu,
   Spinner,
@@ -9,18 +10,15 @@ import {
   useResponsive,
   useRoute,
 } from '~/components'
-
-import { toPath } from '~/common/utils'
+import { QuickResultQuery } from '~/gql/graphql'
 
 import { QUICK_RESULT } from './gql'
 import TriggerFullSearchItem from './TriggerFullSearchItem'
 
-import { QuickResult } from './__generated__/QuickResult'
-
 interface QuickSearchProps {
   searchKey: string
   activeItem?: string
-  onUpdateData?: (data: QuickResult | undefined) => void
+  onUpdateData?: (data: QuickResultQuery | undefined) => void
   inPage?: boolean
 }
 
@@ -32,7 +30,7 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
   const { searchKey, inPage, activeItem, onUpdateData } = props
   const isLargeUp = useResponsive('lg-up')
   const client = useApolloClient()
-  const [data, setData] = useState<QuickResult>()
+  const [data, setData] = useState<QuickResultQuery>()
   const clearData = () => setData(undefined)
   const [loading, setLoading] = useState(false)
 
