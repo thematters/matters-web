@@ -1,6 +1,7 @@
 import { useLazyQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
-import { useContext, useEffect, useRef, useState } from 'react'
+import jump from 'jump.js'
+import { useContext, useEffect, useState } from 'react'
 
 import {
   Avatar,
@@ -40,8 +41,6 @@ interface DonationProps {
 }
 
 const SupportWidget = ({ article }: DonationProps) => {
-  const animationRef = useRef<null | HTMLElement>(null)
-
   const viewer = useContext(ViewerContext)
   const [playShipWaiting, setPlayShipWaiting] = useState(false)
   const [showAnimation, setShowAnimation] = useState(false)
@@ -81,12 +80,6 @@ const SupportWidget = ({ article }: DonationProps) => {
     }
   }, [isViewerDonated])
 
-  useEffect(() => {
-    if (showAnimation && animationRef?.current) {
-      animationRef?.current.scrollIntoView({ behavior: 'smooth' })
-    }
-  }, [showAnimation])
-
   const requestForDonation = article.requestForDonation
   const replyToDonator = hasDonatedArticle?.replyToDonator
 
@@ -98,6 +91,10 @@ const SupportWidget = ({ article }: DonationProps) => {
       }
       setCurrency(payload.currency)
       setShowAvatarAnimation(true)
+      if (showAnimation) {
+        jump('#animation')
+      }
+
       // HKD
       if (payload.currency === CURRENCY.HKD) {
         setShowAnimation(true)
@@ -118,7 +115,7 @@ const SupportWidget = ({ article }: DonationProps) => {
   return (
     <section className={supportWidgetClasses}>
       {showAnimation && (
-        <section className="donation" ref={animationRef}>
+        <section className="donation" id="animation">
           <Animation
             playShipWaiting={playShipWaiting}
             playEnd={() => {
